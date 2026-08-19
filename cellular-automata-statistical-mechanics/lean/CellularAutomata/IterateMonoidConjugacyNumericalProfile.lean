@@ -8,6 +8,7 @@ structured-latex/content/iterate-monoid-conjugacy-numerical-profile.ts。
 非共役性を証明する。有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidConjugacyInvariance
+import CellularAutomata.NecSuf.IterateMonoidConjugacyNumericalProfile
 
 namespace CellularAutomata.IterateMonoidConjugacyNumericalProfile
 
@@ -182,5 +183,60 @@ def conjugacyDecidable {X Y : Type} [Fintype X] [DecidableEq X]
     [Fintype Y] [DecidableEq Y] (F : X → X) (G : Y → Y) :
     Decidable (∃ h : X → Y, Function.Bijective h ∧ ∀ y, h (F y) = G (h y)) := by
   infer_instance
+
+/-! ### 必要十分版からの導出 -/
+
+/-- この章の反復は必要十分版の反復写像に一致する。 -/
+theorem iterate_eq_iterateMap {X : Type} (H : X → X) (n : ℕ) (x : X) :
+    iterate H n x = NecSuf.IterateMonoid.iterateMap H n x := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+      show H (iterate H n x) = H (NecSuf.GlobalMapIteration.iterate H n x)
+      exact congrArg H ih
+
+/-- 反復の移送（`conjugate_iterate`）は必要十分版の特殊化として得られる。 -/
+theorem conjugate_iterate_from_necessary_sufficient {X Y : Type}
+    (F : X → X) (G : Y → Y) (h : X → Y)
+    (hconj : ∀ y, h (F y) = G (h y)) (n : ℕ) (y : X) :
+    h (iterate F n y) = iterate G n (h y) := by
+  rw [iterate_eq_iterateMap, iterate_eq_iterateMap]
+  exact NecSuf.IterateMonoidConjugacyInvariance.conjugate_iterateMap F G h hconj n y
+
+/-- 非共役性の証明が使う根の不動性の移送は、必要十分版の不動点移送の特殊化である。 -/
+theorem counterexample_root_fixed_from_necessary_sufficient
+    (h : Configuration → Configuration)
+    (hconj : ∀ y, h (counterexampleF y) = counterexampleG (h y)) :
+    counterexampleG (h 0) = h 0 ∧ counterexampleG (h 7) = h 7 :=
+  ⟨NecSuf.IterateMonoidConjugacyNumericalProfile.conjugate_fixedPoint
+      counterexampleF counterexampleG h hconj (by decide),
+   NecSuf.IterateMonoidConjugacyNumericalProfile.conjugate_fixedPoint
+      counterexampleF counterexampleG h hconj (by decide)⟩
+
+/-- この章の子孫有限表は、必要十分版の有限表の反復上限 8 での特殊化に一致する。 -/
+theorem descendantTable_eq_necessary_sufficient
+    (H : Configuration → Configuration) (z : Configuration) :
+    descendantTable H z =
+      NecSuf.IterateMonoidConjugacyNumericalProfile.descendantTable H 8 z := by
+  ext y
+  simp [descendantTable, NecSuf.IterateMonoidConjugacyNumericalProfile.descendantTable,
+    iterate_eq_iterateMap]
+
+/-- 非共役性の証明が使う子孫個数の不等式は、必要十分版の特殊化として得られる。 -/
+theorem counterexample_descendant_card_le_from_necessary_sufficient
+    (h : Configuration ≃ Configuration)
+    (hconj : ∀ y, h (counterexampleF y) = counterexampleG (h y)) (z : Configuration) :
+    (descendantTable counterexampleF z).card ≤
+      (descendantTable counterexampleG (h z)).card := by
+  rw [descendantTable_eq_necessary_sufficient, descendantTable_eq_necessary_sufficient]
+  exact NecSuf.IterateMonoidConjugacyNumericalProfile.descendantTable_card_le
+    counterexampleF counterexampleG h hconj h.injective 8 z
+
+/-- この章の共役の有限決定は必要十分版の特殊化である。 -/
+def conjugacyDecidable_from_necessary_sufficient :
+    Decidable (∃ h : Configuration → Configuration,
+      Function.Bijective h ∧ ∀ y, h (counterexampleF y) = counterexampleG (h y)) :=
+  NecSuf.IterateMonoidConjugacyNumericalProfile.conjugacyDecidable
+    counterexampleF counterexampleG
 
 end CellularAutomata.IterateMonoidConjugacyNumericalProfile
