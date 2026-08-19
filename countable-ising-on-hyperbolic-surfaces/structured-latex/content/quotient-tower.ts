@@ -3285,4 +3285,92 @@ P_{\mathrm{coarse}}(x)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_two_stage_fisher_zero_multiplicity_difference_finite_support",
+    kind: "theorem",
+    title: { text: "商の塔に沿う二段 Fisher 零点重複度差の有限台" },
+    labels: ["theorem_quotient_tower_two_stage_fisher_zero_multiplicity_difference_finite_support"],
+    habitat: "finite",
+    verification: ["sagemath/check/two-stage-quotient-tower-fisher-zero-multiplicity-difference-finite-support"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_map"),
+        " の二段 Fisher 零点重複度差が非零となる零点の集合を",
+      ]),
+      displayMath(String.raw`\operatorname{Supp}_{\Delta\mu_{\mathcal T}}
+:=
+\left\{
+  \alpha\in\mathcal Z_{\mathcal T}
+  \,\middle|\,
+  \Delta\mu_{\mathcal T}(\alpha)\ne0
+\right\}`),
+      paragraph([
+        "で定める。このとき ",
+        math(String.raw`\operatorname{Supp}_{\Delta\mu_{\mathcal T}}`),
+        " は二段 Fisher 零点台 ",
+        math(String.raw`\mathcal Z_{\mathcal T}\subset\overline{\mathbb Q}`),
+        " の有限部分集合である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_pair_map"),
+        " の二つの Ising 分配多項式について、両段の全てのスピンを同じ形式的ラベルにした配位と、全てをもう一方の形式的ラベルにした配位は、ともに破れ辺数 ",
+        math("0"),
+        " をもつ。したがって各 ",
+        math(String.raw`s\in\{\mathrm{fine},\mathrm{coarse}\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\widehat\Omega_s(0)
+&\ge 2
+\quad\bigl(\because\ \text{二つの定数スピン配位は相異なる}\bigr),\\
+P_s(x)
+&\ne 0
+\quad\bigl(\because\ \text{定数項 }\widehat\Omega_s(0)\text{ が正である}\bigr).
+\end{aligned}`),
+      paragraph([
+        "非零な一変数多項式の零点集合は、その次数以下の濃度をもつ有限集合である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathcal Z_{\mathcal T}
+&=
+\left\{
+  \alpha\in\overline{\mathbb Q}
+  \,\middle|\,
+  \overline P_{\mathrm{fine}}(\alpha)=0
+\right\}
+\cup
+\left\{
+  \alpha\in\overline{\mathbb Q}
+  \,\middle|\,
+  \overline P_{\mathrm{coarse}}(\alpha)=0
+\right\}
+\quad\bigl(\because\ \text{二段 Fisher 零点台の定義}\bigr),\\
+\left|\mathcal Z_{\mathcal T}\right|
+&\le
+\deg P_{\mathrm{fine}}+\deg P_{\mathrm{coarse}}
+\quad\bigl(\because\ \text{有限集合の和集合の濃度評価}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_map"),
+        " と有限台の定義より",
+      ]),
+      displayMath(String.raw`\operatorname{Supp}_{\Delta\mu_{\mathcal T}}
+\subseteq
+\mathcal Z_{\mathcal T}
+\quad\bigl(\because\ \text{集合の内包的定義}\bigr).`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\operatorname{Supp}_{\Delta\mu_{\mathcal T}}`),
+        " は有限集合 ",
+        math(String.raw`\mathcal Z_{\mathcal T}`),
+        " の部分集合なので有限である。零点と多項式係数は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        "、重複度差は ",
+        math(String.raw`\mathbb Z`),
+        " に属し、複素平面への埋め込み、数値近似、距離、偏角、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);

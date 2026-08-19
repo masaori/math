@@ -111,6 +111,7 @@ export const ALL_LABELS = [
   "theorem_quotient_tower_oriented_edge_endpoint_map_preservation",
   "theorem_quotient_tower_oriented_face_boundary_word_preservation",
   "theorem_quotient_tower_second_boundary_pushforward_commutativity_over_f2",
+  "theorem_quotient_tower_two_stage_fisher_zero_multiplicity_difference_finite_support",
   "theorem_quotient_tower_two_stage_ising_coefficient_ratio_logarithmic_value_compatibility",
   "theorem_quotient_tower_two_stage_ising_coefficient_valuation_difference_finite_support",
 ] as const
