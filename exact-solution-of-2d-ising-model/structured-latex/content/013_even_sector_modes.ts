@@ -1570,7 +1570,17 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         math(String.raw`[\alpha X,\beta W]_+ = \alpha\beta[X,W]_+`),
         "）なので、",
         ref("def_half_integer_modes"),
-        " を代入して",
+        "、",
+        ref("anticommutator_of_Z_and_Y"),
+        "、",
+        ref("theorem_exp_product"),
+        "、",
+        ref("exp_sum"),
+        "、",
+        ref("def_delta_M"),
+        "、",
+        ref("def_check_index_set"),
+        " (5) を順に使うと、第 1 式は主張の左辺から一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1579,88 +1589,85 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
    \quad (\because \text{def\_half\_integer\_modes}) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ik\tilde\theta_\nu}
    \left[Z_j, Z_k\right]_+
-   \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性})
-\end{aligned}`,
-      ),
-      paragraph([
-        ref("anticommutator_of_Z_and_Y"),
-        " より ",
-        math(String.raw`[Z_j,Z_k]_+ = 2I\,\delta^M_{(j,k)}`),
-        " であり、",
-        math(String.raw`1 \leq j,k \leq M`),
-        " の範囲では ",
-        math(String.raw`\delta^M_{(j,k)} = 1 \iff j = k`),
-        " なので、二重和のうち ",
-        math(String.raw`j = k`),
-        " の項だけが残って",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
+   \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性}) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ik\tilde\theta_\nu}\cdot 2I\,\delta^M_{(j,k)}
    \quad (\because \text{anticommutator\_of\_Z\_and\_Y}) \\
 &= 2I\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ij\tilde\theta_\nu}
    \quad (\because 1 \leq j,k \leq M \text{ では } \delta^M_{(j,k)} = 1 \iff j = k) \\
 &= 2I\sum_{j=1}^{M} e^{-ij\left(\tilde\theta_\mu + \tilde\theta_\nu\right)}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1))
-\end{aligned}`,
-      ),
-      paragraph([
-        "（指数の合成には ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " すなわち ",
-        math(String.raw`\mathbb{C}`),
-        " に適用した。）ここで ",
-        math(String.raw`\tilde\theta_\mu + \tilde\theta_\nu = \dfrac{2\pi\left(\mu+\nu-1\right)}{M}`),
-        " なので、",
-        ref("exp_sum"),
-        " を ",
-        math(String.raw`k = -(\mu+\nu-1)`),
-        " として適用すると",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sum_{j=1}^{M} e^{-ij\left(\tilde\theta_\mu+\tilde\theta_\nu\right)}
-&= \sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j\left(-(\mu+\nu-1)\right)}{M}\right)
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&= 2I\sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j\left(-(\mu+\nu-1)\right)}{M}\right)
    \quad \left(\because \tilde\theta_\mu + \tilde\theta_\nu = \tfrac{2\pi(\mu+\nu-1)}{M}\right) \\
-&= M\,\delta^M_{(-(\mu+\nu-1),\,0)}
+&= 2M I\,\delta^M_{(-(\mu+\nu-1),\,0)}
    \quad (\because \text{exp\_sum}) \\
-&= M\,\delta^M_{(\mu+\nu,\,1)}
+&= 2M I\,\delta^M_{(\mu+\nu,\,1)}
    \quad (\because \text{def\_delta\_M}) \\
-&= M\,\delta_{\nu,\,M+1-\mu}
+&= 2M\,\delta_{\nu,\,M+1-\mu}\,I
    \quad (\because \text{def\_check\_index\_set (5)}\ (\mu,\nu \in \check{\mathcal{M}}))
 \end{aligned}`,
       ),
       paragraph([
-        "（3 番目の等号は ",
-        ref("def_delta_M"),
-        " より ",
-        math(String.raw`-(\mu+\nu-1) \equiv 0 \iff \mu+\nu \equiv 1 \pmod M`),
-        "。最後の等号は ",
-        ref("def_check_index_set"),
-        " (5) により、",
-        math(String.raw`\mu,\nu \in \check{\mathcal{M}}`),
-        " ではこの合同式が ",
-        math(String.raw`\nu = M+1-\mu`),
-        " と同値だからである。）よって第 1 式を得る。",
-      ]),
-      paragraph([
+        "第 2 式は、",
+        ref("def_half_integer_modes"),
+        " と ",
         ref("anticommutator_of_Z_and_Y"),
         " の ",
-        math(String.raw`[Z_j, Y_k]_+ = 0`),
-        " より、同じ展開で第 2 式 ",
-        math(String.raw`[\check{Z}_\mu, \check{Y}_\nu]_+ = 0`),
-        " が従う（二重和のすべての項が ",
-        math(String.raw`0`),
-        "）。",
+        math(String.raw`[Z_j,Y_k]_+=0`),
+        " を使うと、一続きに",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[\check{Z}_\mu,\check{Y}_\nu\right]_+
+&= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Z_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
+   \quad (\because \text{def\_half\_integer\_modes}) \\
+&= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Z_j,Y_k]_+
+   \quad (\because \text{反交換子の }\mathbb{C}\text{ 双線型性}) \\
+&= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 0
+   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}) \\
+&= 0
+   \quad (\because \mathbb{C}\text{ の四則})
+\end{aligned}`,
+      ),
       paragraph([
-        "第 3 式は ",
+        "第 3 式も、",
+        ref("def_half_integer_modes"),
+        "、",
+        ref("anticommutator_of_Z_and_Y"),
+        " の ",
         math(String.raw`[Y_j,Y_k]_+ = 2I\,\delta^M_{(j,k)}`),
-        " を使って第 1 式とまったく同じ計算になる。",
+        " と、第 1 式で使った ",
+        ref("theorem_exp_product"),
+        "、",
+        ref("exp_sum"),
+        "、",
+        ref("def_delta_M"),
+        "、",
+        ref("def_check_index_set"),
+        " (5) を順に使うと、一続きに",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[\check{Y}_\mu,\check{Y}_\nu\right]_+
+&= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Y_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
+   \quad (\because \text{def\_half\_integer\_modes}) \\
+&= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Y_j,Y_k]_+
+   \quad (\because \text{反交換子の }\mathbb{C}\text{ 双線型性}) \\
+&= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 2I\,\delta^M_{(j,k)}
+   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}) \\
+&= 2I\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ij\tilde\theta_\nu}
+   \quad (\because 1\le j,k\le M\text{ では }\delta^M_{(j,k)}=1\iff j=k) \\
+&= 2I\sum_{j=1}^{M}e^{-ij(\tilde\theta_\mu+\tilde\theta_\nu)}
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&= 2I\sum_{j=1}^{M}\exp\!\left(\frac{2\pi i j\left(-(\mu+\nu-1)\right)}{M}\right)
+   \quad \left(\because \tilde\theta_\mu+\tilde\theta_\nu=\tfrac{2\pi(\mu+\nu-1)}{M}\right) \\
+&= 2M I\,\delta^M_{(-(\mu+\nu-1),\,0)}
+   \quad (\because \text{exp\_sum}) \\
+&= 2M I\,\delta^M_{(\mu+\nu,\,1)}
+   \quad (\because \text{def\_delta\_M}) \\
+&= 2M\,\delta_{\nu,\,M+1-\mu}\,I
+   \quad (\because \text{def\_check\_index\_set (5)}\ (\mu,\nu\in\check{\mathcal M}))
+\end{aligned}`,
+      ),
     ],
     conversion: { status: "added" },
   },
