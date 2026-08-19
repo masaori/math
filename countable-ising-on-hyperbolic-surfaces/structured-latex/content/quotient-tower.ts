@@ -2958,4 +2958,87 @@ p\nmid a\ \text{かつ}\ p\nmid b
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_positive_rational_logarithmic_value_map",
+    kind: "definition",
+    title: { text: "正有理数の素指数データを対数順序群へ送る写像" },
+    labels: ["def_quotient_tower_positive_rational_logarithmic_value_map"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/positive-rational-logarithmic-value-map"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_difference_logarithmic_value"),
+        " の素数集合 ",
+        math(String.raw`\mathcal P`),
+        "、形式的生成元 ",
+        math(String.raw`\ell_p`),
+        "、対数順序群 ",
+        math(String.raw`\Lambda`),
+        " を用いる。各 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " に対し、互いに素な ",
+        math(String.raw`a_q,b_q\in\mathbb N_{>0}`),
+        " で ",
+        math(String.raw`q=a_q/b_q`),
+        " を満たすものを一意に選ぶ。各素数 ",
+        math(String.raw`p\in\mathcal P`),
+        " における素指数を",
+      ]),
+      displayMath(String.raw`v_p(q)
+:=
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  \exists r\in\mathbb N_{>0},\quad a_q=p^k r
+\right\}
+-
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  \exists s\in\mathbb N_{>0},\quad b_q=p^k s
+\right\}
+\in\mathbb Z`),
+      paragraph([
+        "で定め、非零素指数の台を",
+      ]),
+      displayMath(String.raw`\operatorname{Supp}_v(q)
+:=
+\left\{
+  p\in\mathcal P
+  \,\middle|\,
+  v_p(q)\ne 0
+\right\}`),
+      paragraph([
+        "と定める。",
+        math(String.raw`v_p(q)\ne0`),
+        " ならば ",
+        math(String.raw`p\mid a_qb_q`),
+        " であり、正整数 ",
+        math(String.raw`a_qb_q`),
+        " の素数約数は有限個なので、",
+        math(String.raw`\operatorname{Supp}_v(q)`),
+        " は有限集合である。正有理数の素指数データを対数順序群へ送る写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log_{\Lambda}:\mathbb Q_{>0}
+&\longrightarrow
+\Lambda,\\
+q
+&\longmapsto
+\sum_{p\in\operatorname{Supp}_v(q)}
+v_p(q)\,\ell_p
+\end{aligned}`),
+      paragraph([
+        "で定める。各係数は整数であり、和の添字集合は有限なので、右辺は ",
+        math(String.raw`\Lambda`),
+        " の元を一意に定める。",
+        math(String.raw`q=1`),
+        " のときは ",
+        math(String.raw`a_q=b_q=1`),
+        " かつ台が空であり、像を ",
+        math(String.raw`\Lambda`),
+        " の零元とする。この定義は正有理数の既約分数表示と指定素数での反復除算だけを用い、実対数、完全因数分解、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);

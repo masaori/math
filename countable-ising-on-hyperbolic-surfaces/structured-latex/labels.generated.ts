@@ -70,6 +70,7 @@ export const ALL_LABELS = [
   "def_quotient_tower_induced_coset_cell_maps",
   "def_quotient_tower_induced_face_position_map",
   "def_quotient_tower_oriented_edge_representative_selector_compatibility",
+  "def_quotient_tower_positive_rational_logarithmic_value_map",
   "def_quotient_tower_role_generator_compatibility",
   "def_quotient_tower_two_stage_ising_coefficient_pair_map",
   "def_quotient_tower_two_stage_ising_coefficient_valuation_difference_logarithmic_value",
