@@ -4141,6 +4141,64 @@ a'_L(1)
   },
 
   {
+    id: "soundness_bridge_claim_cross_power_equality_implies_root_equality",
+    kind: "claim",
+    title: { text: "有限箱値の交差べき等式は正の乗根の一致を決める" },
+    labels: ["claim_cross_power_equality_implies_root_equality"],
+    habitat: "R",
+    realEscape:
+      "正の実数乗根は def_limit_quantity_from_finite_box_sequence で既に定義した各有限箱量である。この主張は箱の大きさの極限を取らず、その定義済みの乗根の一意性だけを使う。可算側の証拠は正有理数の有限回の積の等式である。",
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`A,B\in\mathbb Q_{>0}`),
+        " と正の自然数 ",
+        math(String.raw`N,M\in\mathbb N_{\ge1}`),
+        " が",
+      ]),
+      displayMath(String.raw`A^M=B^N`),
+      paragraph([
+        "を満たすとする。この等式は正有理数の有限回の積だけからなるので、有限整数算術で判定できる。このとき、",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        " で各有限箱量を作るのと同じ正の実数乗根について",
+      ]),
+      displayMath(String.raw`A^{1/N}=B^{1/M}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x=A^{1/N}\in\mathbb R_{>0}`),
+        "、",
+        math(String.raw`y=B^{1/M}\in\mathbb R_{>0}`),
+        " と置く。正の実数乗根の定義から ",
+        math(String.raw`x^N=A`),
+        " および ",
+        math(String.raw`y^M=B`),
+        " である。したがって、一行ごとに有限回の積を計算すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+x^{NM}&=(x^N)^M &&(\because\ \text{自然数べきの積})\\
+&=A^M &&(\because\ x^N=A)\\
+&=B^N &&(\because\ \text{仮定 }A^M=B^N)\\
+&=(y^M)^N &&(\because\ y^M=B)\\
+&=y^{MN} &&(\because\ \text{自然数べきの積})\\
+&=y^{NM} &&(\because\ MN=NM)
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。",
+        math(String.raw`NM\in\mathbb N_{\ge1}`),
+        " であり、正の実数上で正の自然数乗は単射なので ",
+        math(String.raw`x=y`),
+        " である。ゆえに ",
+        math(String.raw`A^{1/N}=B^{1/M}`),
+        " が従う。",
+      ]),
+    ],
+  },
+
+  {
     id: "prediction_stream_definition_two_dimensional_boundary_response_polynomial",
     kind: "definition",
     title: { text: "2 次元の箱と境界応答多項式" },
