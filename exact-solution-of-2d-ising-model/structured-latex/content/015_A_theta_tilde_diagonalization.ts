@@ -759,8 +759,10 @@ s_1c_2
    \quad (\because \text{分配則}) \\
 &= \lambda^2 - 2g_1\lambda + (g_1+r)(g_1-r)
    \quad (\because \text{同類項の統合}) \\
+&= \lambda^2 - 2g_1\lambda + \left(g_1^2-g_1r+rg_1-r^2\right)
+   \quad (\because \text{分配則}) \\
 &= \lambda^2 - 2g_1\lambda + \left(g_1^2 - r^2\right)
-   \quad (\because \text{分配則と同類項の統合}\ ((g_1+r)(g_1-r) = g_1^2 - r^2))
+   \quad (\because \mathbb{C}\text{ の乗法の可換則と加法逆元})
 \end{aligned}`,
       ),
       paragraph(["そこで"]),
@@ -773,8 +775,14 @@ s_1c_2
    \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
 &= (g_1-\lambda)(g_1-\lambda) + ab
    \quad (\because \mathbb{C} \text{ の四則}\ (-a\cdot(-b) = ab)) \\
+&= g_1^2-g_1\lambda-\lambda g_1+\lambda^2+ab
+   \quad (\because \text{分配則}) \\
+&= g_1^2-g_1\lambda-g_1\lambda+\lambda^2+ab
+   \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
+&= g_1^2-2g_1\lambda+\lambda^2+ab
+   \quad (\because \text{同類項の統合}) \\
 &= \lambda^2 - 2g_1\lambda + \left(g_1^2 + ab\right)
-   \quad (\because \text{分配則と同類項の統合}) \\
+   \quad (\because \mathbb{C}\text{ の加法の交換則と結合則}) \\
 &= \lambda^2 - 2g_1\lambda + \left(g_1^2 - r^2\right)
    \quad (\because \text{準備の略記}\ ab = -r^2) \\
 &= (\lambda - (g_1+r))(\lambda - (g_1-r))
@@ -902,7 +910,7 @@ s_1c_2
           "固有ベクトルは代入して確かめるだけで済む。得られる形は 008 章と同一である。",
         "数値検証: sagemath/check/048_claim_A_theta_tilde/check_03（特性方程式・固有ベクトル・Sage の固有値集合との一致、残差 ≤ 2e-12）。",
         "2026-08-19 の式変形統一で、Step 1 の「右辺を展開すれば左辺に一致する」と散文に畳まれていた因数分解を、" +
-          "準備の恒等式の三段と行列式の鎖の六段へ開き、固有ベクトル成分の二本の鎖の根拠なしの行に行末根拠を補った。内容・参照は変えていない。",
+          "準備の恒等式と行列式の一続きの鎖へ開き、固有ベクトル成分の二本の鎖の根拠なしの行に行末根拠を補った。内容・参照は変えていない。",
       ],
     },
   },
