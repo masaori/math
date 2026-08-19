@@ -1705,10 +1705,43 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
     ],
     proof: [
       paragraph([
+        "準備として、",
+        math(String.raw`j, k \in \{1,\dots,M\}`),
+        " のとき ",
+        math(String.raw`|j-k| \leq M-1 < M`),
+        " なので、",
+        ref("antiperiodic_exp_sum"),
+        " を指数の整数 ",
+        math(String.raw`j-k`),
+        " に適用すると（",
+        math(String.raw`j = k`),
+        " のときは ",
+        math(String.raw`j-k = 0 = 0 \cdot M`),
+        " で ",
+        math(String.raw`(-1)^0 = 1`),
+        "、",
+        math(String.raw`j \neq k`),
+        " のときは ",
+        math(String.raw`|j-k| < M`),
+        " かつ ",
+        math(String.raw`j-k \neq 0`),
+        " なので ",
+        math(String.raw`j-k \not\equiv 0 \pmod M`),
+        "）",
+      ]),
+      displayMath(
+        String.raw`\sum_{\mu=1}^{M} e^{i(j-k)\tilde\theta_\mu}
+= \begin{cases}
+M & (j = k) \\
+0 & (j \neq k)
+\end{cases}`,
+      ),
+      paragraph([
+        "である。第 1 式は、",
         ref("def_half_integer_modes"),
-        " の ",
-        math(String.raw`\check{Z}_\mu`),
-        " の定義を代入し、有限和の順序を交換すると",
+        " と ",
+        ref("theorem_exp_product"),
+        " と準備の等式を順に使うと、一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1720,52 +1753,37 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,e^{i(j-k)\tilde\theta_\mu}
    \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= \frac{1}{M}\sum_{k=1}^{M} Z_k \sum_{\mu=1}^{M} e^{i(j-k)\tilde\theta_\mu}
-   \quad (\because \text{有限和の順序交換})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（指数法則は ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " に適用したものである。）",
-      ]),
-      paragraph([
-        math(String.raw`1 \leq j,k \leq M`),
-        " より ",
-        math(String.raw`|j-k| \leq M-1 < M`),
-        " なので、",
-        ref("antiperiodic_exp_sum"),
-        " より内側の和は ",
-        math(String.raw`j = k`),
-        " のとき ",
-        math(String.raw`M`),
-        "、そうでないとき ",
-        math(String.raw`0`),
-        " である（",
-        math(String.raw`|j-k| < M`),
-        " なので ",
-        math(String.raw`j-k \equiv 0 \pmod M`),
-        " は ",
-        math(String.raw`j = k`),
-        " と同値で、そのとき ",
-        math(String.raw`l = 0`),
-        " すなわち ",
-        math(String.raw`(-1)^l = 1`),
-        "）。よって ",
-        math(String.raw`k = j`),
-        " の項だけが残り",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{ij\tilde\theta_\mu}
+   \quad (\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\cdot Z_j\cdot M
-   \quad (\because \text{antiperiodic\_exp\_sum}) \\
+   \quad (\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
 &= Z_j
    \quad (\because M\ne 0\text{ なのでスカラー }\tfrac{1}{M}\text{ と }M\text{ が相殺する})
 \end{aligned}`,
       ),
-      paragraph([math(String.raw`Y_j`), " についても同じ計算である。"]),
+      paragraph([
+        "第 2 式も、",
+        ref("def_half_integer_modes"),
+        " の ",
+        math(String.raw`\check{Y}_\mu`),
+        " の定義から同じ根拠の並びで、一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{ij\tilde\theta_\mu}
+&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\right)e^{ij\tilde\theta_\mu}
+   \quad (\because \text{def\_half\_integer\_modes}) \\
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\,e^{ij\tilde\theta_\mu}
+   \quad (\because \text{有限和への分配}) \\
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{i(j-k)\tilde\theta_\mu}
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&= \frac{1}{M}\sum_{k=1}^{M} Y_k \sum_{\mu=1}^{M} e^{i(j-k)\tilde\theta_\mu}
+   \quad (\because \text{有限和の順序交換}) \\
+&= \frac{1}{M}\cdot Y_j\cdot M
+   \quad (\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
+&= Y_j
+   \quad (\because M\ne 0\text{ なのでスカラー }\tfrac{1}{M}\text{ と }M\text{ が相殺する})
+\end{aligned}`,
+      ),
       paragraph([
         "生成性については、",
         ref("Z_Y_generate_algebra"),
@@ -1788,6 +1806,7 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
       status: "added",
       notes: [
         "2026-08-15 の式変形統一で、復元式の鎖の最終行へスカラー 1/M と M の相殺という行末根拠を補った。内容は変えていない。",
+        "2026-08-19 の式変形統一で、二つの displayMath と間の散文に分かれていた復元式の導出を、準備の指数和等式と一続き六段の鎖へまとめ、「Y_j についても同じ計算」と畳まれていた第 2 式を同じ形の鎖へ開いた。内容・参照は変えていない。",
       ],
     },
   },
