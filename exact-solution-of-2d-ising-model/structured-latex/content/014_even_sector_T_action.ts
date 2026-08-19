@@ -1992,25 +1992,49 @@ P_{21}
 \end{aligned}`,
       ),
       paragraph([
-        "括弧内は Step 4 の括弧内で ",
-        math(String.raw`\theta`),
-        " を ",
-        math(String.raw`-\theta`),
-        " に置き換えたものである。Step 4 とまったく同じ計算（",
-        math(String.raw`\cos(-\theta) = \cos\theta`),
-        "、",
-        math(String.raw`\sin(-\theta) = -\sin\theta`),
-        " を用いる）により",
+        "準備として、Step 4 の補助的な等式と同形の等式",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-S\left(a^2 + b^2 e^{-2i\theta}\right) - 2C ab\, e^{-i\theta}
-&= e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
-   \quad (\because \text{Step 4 と同じ計算を } \theta \to -\theta \text{ として行う}) \\
-\therefore\quad
+a^2 + b^2 e^{-2i\theta}
+&= e^{-i\theta}\left(a^2 e^{i\theta} + b^2 e^{-i\theta}\right)
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&= e^{-i\theta}\left(a^2(\cos\theta + i\sin\theta) + b^2(\cos\theta - i\sin\theta)\right)
+   \quad (\because \text{euler\_formula\_cos\_sin を 2 箇所へ同時適用}) \\
+&= e^{-i\theta}\left(\left(a^2 + b^2\right)\cos\theta + i\left(a^2 - b^2\right)\sin\theta\right) \\
+&= e^{-i\theta}\left(c_1\cos\theta + i\left(a^2-b^2\right)\sin\theta\right)
+   \quad (\because \text{倍角公式 } a^2+b^2 = c_1) \\
+&= e^{-i\theta}\left(c_1\cos\theta + i\sin\theta\right)
+   \quad (\because a^2-b^2 = 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "を置く（",
+        ref("theorem_exp_product"),
+        "、",
+        ref("euler_formula_cos_sin"),
+        "）。また ",
+        math(String.raw`c_2^* = s_2^* c_2`),
+        " は ",
+        ref("duality_c2_star_eq_s2_star_c2"),
+        " による。これらを用いて、直前の ",
+        math(String.raw`P_{21}`),
+        " の表示から一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
 P_{21}
+&= -i\left[S\left(a^2 + b^2 e^{-2i\theta}\right) - 2C ab\, e^{-i\theta}\right]
+   \quad (\because \text{直前の } P_{21} \text{ の表示}) \\
+&= -i\left[S\, e^{-i\theta}\left(c_1\cos\theta + i\sin\theta\right) - 2C ab\, e^{-i\theta}\right]
+   \quad (\because \text{準備の補助的な等式}) \\
+&= -i\left[S\, e^{-i\theta}\left(c_1\cos\theta + i\sin\theta\right) - C s_1 e^{-i\theta}\right]
+   \quad (\because \text{倍角公式 } 2ab = s_1) \\
+&= -i e^{-i\theta}\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - c_2^*\, s_1\right]
+   \quad (\because C := c_2^*,\ S := s_2^*) \\
+&= -i e^{-i\theta}\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - s_2^* c_2\, s_1\right]
+   \quad (\because \text{duality\_c2\_star\_eq\_s2\_star\_c2}:\ c_2^* = s_2^* c_2) \\
 &= -i e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
-   \quad (\because \text{直前の } P_{21} \text{ の表示に代入})
 \end{aligned}`,
       ),
       paragraph([
@@ -2041,6 +2065,7 @@ P_{21}
       notes: [
         "008 章の factorization_of_A_theta は μ ∈ calM で量化された主張であり、そのままでは θ~_μ に適用できない。証明の実体（T_V_hatZ_hatY の proof の Step 1〜6）は θ ∈ R について何も μ に固有のことを使っていないので、ここでは θ ∈ R 一般の主張として立て直し、同じ行列計算を書き下した。",
         "θ を [0, 2π) 上で 60 点走査し、5 組の (K1,K2) について残差 1e-14 以下であることを数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_04_T_V_plus_and_factorization.sage の (1)）。",
+        "2026-08-19 の式変形統一で、Step 5 の「Step 4 とまったく同じ計算（θ → -θ）」に畳まれていた補助的な等式の導出と P_21 の整理を、Step 4 と同形の一続きの鎖（補助等式 5 段と P_21 の 6 段）へ開いた。内容・参照は変えていない。",
       ],
     },
   },
