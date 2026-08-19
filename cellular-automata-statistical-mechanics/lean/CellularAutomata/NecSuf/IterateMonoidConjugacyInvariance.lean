@@ -1,5 +1,5 @@
 /-
-章「有限大域写像の共役による安定ファイバー根付き木族の不変性」の必要十分版（前半）。
+章「有限大域写像の共役による安定ファイバー根付き木族の不変性」の必要十分版。
 
 具体版と同じ手順（反復の帰納法、反復等号の両側同値、三つの最小指数の両側不等式、
 指数の一致による冪等元・一周期写像の移送、安定像・安定ファイバーの所属の両方向）を保ち、
@@ -19,11 +19,14 @@
   E : X → X, E' : Y → Y について成り立つ。E の冪等性・反復写像であることは要らない。
   所属の保存には共役条件だけ、反映には h の全射性（安定像）・単射性（ファイバー）が要る。
 
-根付き辺・深さ・分岐個数の移送と有限表（後半）は未収録である。
+根付き辺の移送にはファイバー所属の両側同値、根の移送、h の単射性だけが要る。
+深さの移送にはそれに加え、両側の根到達と反復の移送が要る。
+有限辺表と分岐個数にだけ両型の有限性と等号判定を加える。
 二値状態、セル、近傍、局所規則、R / C は使わない。
 -/
 import CellularAutomata.NecSuf.IterateMonoidCycleIdempotent
 import CellularAutomata.NecSuf.IterateMonoidStablePartition
+import CellularAutomata.NecSuf.IterateMonoidStableFiberRootedTree
 
 namespace CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance
 
@@ -222,3 +225,122 @@ theorem mem_stableFiber_iff_transport (hb : Function.Bijective h)
     mem_stableFiber_of_image_mem E E' h hconj hb.1 q x q' hq⟩
 
 end CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.StableFiberTransport
+
+/-! ## 根付き木の移送
+
+自己写像 R, R' と一つのファイバー B, B' 、根 r, r' だけに抽象化する。 -/
+
+namespace CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.RootedTreeTransport
+
+open CellularAutomata.NecSuf.GlobalMapIteration
+open CellularAutomata.NecSuf.IterateMonoidStableFiberRootedTree
+
+variable {X Y : Type}
+variable (R : X → X) (R' : Y → Y) (h : X → Y)
+variable (B : Set X) (B' : Set Y) (r : X) (r' : Y)
+variable (hconj : ∀ x, h (R x) = R' (h x))
+variable (hfiber : ∀ x, x ∈ B ↔ h x ∈ B') (hroot : h r = r')
+
+include hconj hfiber hroot
+
+/-- 根の自己ループを除いた根付き辺は、単射な共役写像で保存・反映される。 -/
+theorem edge_iff (hi : Function.Injective h) (x z : X) :
+    (x ∈ B ∧ x ≠ r ∧ z = R x) ↔
+      (h x ∈ B' ∧ h x ≠ r' ∧ h z = R' (h x)) := by
+  rw [← hfiber x, ← hroot, hi.ne_iff]
+  constructor
+  · rintro ⟨hx, hne, rfl⟩
+    exact ⟨hx, hne, hconj x⟩
+  · rintro ⟨hx, hne, heq⟩
+    exact ⟨hx, hne, hi (heq.trans (hconj x).symm)⟩
+
+/-- 根への最小到達回数は、単射な共役写像で保存される。 -/
+theorem rootDepth_eq (hi : Function.Injective h)
+    (hreach : ∀ x, x ∈ B → ∃ d, iterate R d x = r)
+    (hreach' : ∀ y, y ∈ B' → ∃ d, iterate R' d y = r')
+    (x : X) (hx : x ∈ B) :
+    rootDepth R (fun _ : Unit => B) (fun _ => r)
+        (fun _ x hx => hreach x hx) () x hx =
+      rootDepth R' (fun _ : Unit => B') (fun _ => r')
+        (fun _ y hy => hreach' y hy) () (h x) ((hfiber x).mp hx) := by
+  apply Nat.le_antisymm
+  · apply rootDepth_le
+    apply hi
+    calc
+      h (iterate R
+          (rootDepth R' (fun _ : Unit => B') (fun _ => r')
+            (fun _ y hy => hreach' y hy) () (h x) ((hfiber x).mp hx)) x) =
+          iterate R'
+            (rootDepth R' (fun _ : Unit => B') (fun _ => r')
+              (fun _ y hy => hreach' y hy) () (h x) ((hfiber x).mp hx)) (h x) :=
+        CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.conjugate_iterateMap
+          R R' h hconj _ x
+      _ = r' := rootDepth_spec R' (fun _ : Unit => B') (fun _ => r')
+        (fun _ y hy => hreach' y hy) () (h x) ((hfiber x).mp hx)
+      _ = h r := hroot.symm
+  · apply rootDepth_le
+    calc
+      iterate R'
+          (rootDepth R (fun _ : Unit => B) (fun _ => r)
+            (fun _ x hx => hreach x hx) () x hx) (h x) =
+          h (iterate R
+            (rootDepth R (fun _ : Unit => B) (fun _ => r)
+              (fun _ x hx => hreach x hx) () x hx) x) :=
+        (CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.conjugate_iterateMap
+          R R' h hconj _ x).symm
+      _ = h r := congrArg h <| rootDepth_spec R (fun _ : Unit => B) (fun _ => r)
+        (fun _ x hx => hreach x hx) () x hx
+      _ = r' := hroot
+
+section FiniteScan
+
+variable [Fintype X] [DecidableEq X] [Fintype Y] [DecidableEq Y]
+
+/-- 有限根付き辺表の所属は共役写像で保存・反映される。 -/
+theorem mem_edgeTable_iff (hi : Function.Injective h) (x z : X) :
+    (x, z) ∈ edgeTable R (fun _ : Unit => B) (fun _ => r) () ↔
+      (h x, h z) ∈ edgeTable R' (fun _ : Unit => B') (fun _ => r') () := by
+  simp only [edgeTable, Finset.mem_image, Finset.mem_filter, Finset.mem_univ, true_and,
+    Prod.mk.injEq]
+  constructor
+  · rintro ⟨a, ⟨haB, hane⟩, rfl, rfl⟩
+    exact ⟨h a, ⟨(hfiber a).mp haB, fun har => hane (hi (har.trans hroot.symm))⟩,
+      rfl, (hconj a).symm⟩
+  · rintro ⟨a, ⟨haB, hane⟩, hax, haz⟩
+    refine ⟨x, ⟨(hfiber x).mpr ?_, ?_⟩, rfl, ?_⟩
+    · simpa [hax] using haB
+    · intro hxr
+      apply hane
+      exact hax.trans ((congrArg h hxr).trans hroot)
+    · apply hi
+      exact (hconj x).trans ((congrArg R' hax.symm).trans haz)
+
+/-- 各頂点へ入る根付き辺の個数は全単射な共役写像で保存される。 -/
+theorem branchCount_eq (hb : Function.Bijective h) (x : X) :
+    branchCount R (fun _ : Unit => B) (fun _ => r) () x =
+      branchCount R' (fun _ : Unit => B') (fun _ => r') () (h x) := by
+  classical
+  unfold branchCount
+  apply Finset.card_bij (fun e _ => (h e.1, h e.2))
+  · intro e he
+    simp only [Finset.mem_filter] at he ⊢
+    exact ⟨(mem_edgeTable_iff R R' h B B' r r' hconj hfiber hroot hb.1 e.1 e.2).mp he.1,
+      congrArg h he.2⟩
+  · intro a _ b _ hab
+    apply Prod.ext <;> apply hb.1
+    · exact congrArg Prod.fst hab
+    · exact congrArg Prod.snd hab
+  · intro b hbmem
+    simp only [Finset.mem_filter] at hbmem
+    obtain ⟨a1, ha1⟩ := hb.2 b.1
+    obtain ⟨a2, ha2⟩ := hb.2 b.2
+    refine ⟨(a1, a2), Finset.mem_filter.mpr ⟨?_, ?_⟩, ?_⟩
+    · apply (mem_edgeTable_iff R R' h B B' r r' hconj hfiber hroot hb.1 a1 a2).mpr
+      simpa [ha1, ha2] using hbmem.1
+    · apply hb.1
+      simpa [ha2] using hbmem.2
+    · ext <;> assumption
+
+end FiniteScan
+
+end CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.RootedTreeTransport

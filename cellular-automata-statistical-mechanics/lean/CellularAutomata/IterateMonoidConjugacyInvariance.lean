@@ -258,12 +258,13 @@ noncomputable def invariantData :
   (minCollisionStart NV fV, minPositivePeriod NV fV,
     stableImageTable NV fV, invariantRootedTreeFamily NV fV)
 
-/-! ## 必要十分版からの導出（前半）
+/-! ## 必要十分版からの導出
 
 具体版は必要十分版を X := V → State、Y := W → State、F := globalMap NV fV、
 G := globalMap NW fW、h := 共役全単射へ特殊化したものである。
 反復の移送には h が単なる写像で足り、等号の保存は全射性・反映は単射性だけを使う。
-根付き辺・深さ・分岐個数の移送の導出（後半）は未収録である。 -/
+根付き辺・深さ・分岐個数は、一周期写像・ファイバー・根だけの
+必要十分版へ特殊化する。 -/
 
 omit [Fintype V] [DecidableEq V] [Fintype W] [DecidableEq W] in
 /-- 反復の移送は必要十分版の特殊化として得られる。 -/
@@ -359,5 +360,69 @@ theorem conjugate_onePeriodMap_from_necessary_sufficient (y : V → State) :
     minPositivePeriod_eq_necessary_sufficient NW fW]
   exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.conjugate_onePeriodMap
     (globalMap NV fV) (globalMap NW fW) ⇑h hconj h.bijective (necSufHex NV fV) y
+
+/-- 根付き辺の保存・反映は、一周期写像の共役とファイバー所属の
+    両側同値だけを使う必要十分版の特殊化である。 -/
+theorem mem_fiberTreeEdgeTable_iff_from_necessary_sufficient
+    (q : stableImage NV fV) (y z : V → State) :
+    (y, z) ∈ fiberTreeEdgeTable NV fV q ↔
+      (h y, h z) ∈ fiberTreeEdgeTable NW fW
+        ⟨h q.1, (mem_stableImage_iff NV fV NW fW h hconj q.1).mp q.2⟩ := by
+  rw [CellularAutomata.IterateMonoidStableFiberRootedTree.mem_fiberTreeEdgeTable_iff,
+    CellularAutomata.IterateMonoidStableFiberRootedTree.mem_fiberTreeEdgeTable_iff]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.RootedTreeTransport.edge_iff
+    (onePeriodMap NV fV) (onePeriodMap NW fW) ⇑h
+    (stableFiber NV fV q)
+    (stableFiber NW fW
+      ⟨h q.1, (mem_stableImage_iff NV fV NW fW h hconj q.1).mp q.2⟩)
+    q.1 (h q.1) (conjugate_onePeriodMap NV fV NW fW h hconj)
+    (mem_stableFiber_iff NV fV NW fW h hconj q) rfl h.injective y z
+
+/-- 一周期写像の全反復の移送は、任意の自己写像の反復移送の特殊化である。 -/
+theorem conjugate_onePeriod_iterate_from_necessary_sufficient (n : ℕ) (y : V → State) :
+    h (CellularAutomata.NecSuf.GlobalMapIteration.iterate (onePeriodMap NV fV) n y) =
+      CellularAutomata.NecSuf.GlobalMapIteration.iterate (onePeriodMap NW fW) n (h y) :=
+  CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.conjugate_iterateMap
+    (onePeriodMap NV fV) (onePeriodMap NW fW) ⇑h
+    (conjugate_onePeriodMap NV fV NW fW h hconj) n y
+
+/-- 根への深さの保存は、最小根到達回数の共役不変性の特殊化である。 -/
+theorem fiberTreeDepth_eq_from_necessary_sufficient (y : V → State) :
+    fiberTreeDepth NV fV y = fiberTreeDepth NW fW (h y) := by
+  let q := stableRepresentative NV fV y
+  let q' : stableImage NW fW :=
+    ⟨h q.1, (mem_stableImage_iff NV fV NW fW h hconj q.1).mp q.2⟩
+  have hy : y ∈ stableFiber NV fV q := rfl
+  have hhy : h y ∈ stableFiber NW fW q' :=
+    (mem_stableFiber_iff NV fV NW fW h hconj q y).mp hy
+  rw [NecessarySufficientDerivation.fiberTreeDepth_eq_rootDepth NV fV q hy,
+    NecessarySufficientDerivation.fiberTreeDepth_eq_rootDepth NW fW q' hhy]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.RootedTreeTransport.rootDepth_eq
+    (onePeriodMap NV fV) (onePeriodMap NW fW) ⇑h
+    (stableFiber NV fV q) (stableFiber NW fW q') q.1 q'.1
+    (conjugate_onePeriodMap NV fV NW fW h hconj)
+    (mem_stableFiber_iff NV fV NW fW h hconj q) rfl h.injective
+    (fun x hx => NecessarySufficientDerivation.onePeriodMap_reaches_root_necessary_sufficient
+      NV fV q hx)
+    (fun x hx => NecessarySufficientDerivation.onePeriodMap_reaches_root_necessary_sufficient
+      NW fW q' hx) y hy
+
+/-- 各頂点へ入る辺数の保存は、有限辺表の全単射移送の特殊化である。 -/
+theorem fiberTreeBranchCount_eq_from_necessary_sufficient
+    (q : stableImage NV fV) (y : V → State) :
+    fiberTreeBranchCount NV fV q y =
+      fiberTreeBranchCount NW fW
+        ⟨h q.1, (mem_stableImage_iff NV fV NW fW h hconj q.1).mp q.2⟩ (h y) := by
+  unfold fiberTreeBranchCount
+  rw [← NecessarySufficientDerivation.edgeTable_eq_fiberTreeEdgeTable NV fV q,
+    ← NecessarySufficientDerivation.edgeTable_eq_fiberTreeEdgeTable NW fW
+      ⟨h q.1, (mem_stableImage_iff NV fV NW fW h hconj q.1).mp q.2⟩]
+  exact CellularAutomata.NecSuf.IterateMonoidConjugacyInvariance.RootedTreeTransport.branchCount_eq
+    (onePeriodMap NV fV) (onePeriodMap NW fW) ⇑h
+    (stableFiber NV fV q)
+    (stableFiber NW fW
+      ⟨h q.1, (mem_stableImage_iff NV fV NW fW h hconj q.1).mp q.2⟩)
+    q.1 (h q.1) (conjugate_onePeriodMap NV fV NW fW h hconj)
+    (mem_stableFiber_iff NV fV NW fW h hconj q) rfl h.bijective y
 
 end CellularAutomata.IterateMonoidConjugacyInvariance
