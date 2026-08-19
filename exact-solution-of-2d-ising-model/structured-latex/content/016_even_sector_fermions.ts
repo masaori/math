@@ -777,34 +777,85 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
       ]),
       paragraph([
         "Step 3（第 3 式）。",
-        math(String.raw`\check\psi_\mu, \check\psi_\nu`),
-        " では ",
-        math(String.raw`\check{Z}`),
-        " の係数の符号がともに ",
-        math(String.raw`+`),
-        " になるだけで、積 ",
-        math(String.raw`(+r_\mu)(+r_\nu) = r_\mu r_\nu`),
-        " は Step 2 の ",
-        math(String.raw`(-r_\mu)(-r_\nu)`),
-        " と同じである。よってまったく同じ計算により ",
+        "第 1 式と同じ定義・双線型性・反交換関係を各行で適用すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[\check\psi_\mu, \check\psi_\nu\right]_+
+&= \left[c_\mu\left(r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
+   c_\nu\left(r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
+   \quad (\because \check\psi_\mu, \check\psi_\nu \text{ の定義}) \\
+&= c_\mu c_\nu\Bigl(
+r_\mu r_\nu\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
++ r_\mu b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
+&\qquad\qquad
++ b_\mu r_\nu\left[\check{Y}_\mu, \check{Z}_\nu\right]_+
++ b_\mu b_\nu\left[\check{Y}_\mu, \check{Y}_\nu\right]_+
+\Bigr)
+   \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性}) \\
+&= c_\mu c_\nu\Bigl(
+r_\mu r_\nu\cdot 2M\,\delta\,I
++ r_\mu b_\nu\cdot 0
++ b_\mu r_\nu\cdot 0
++ b_\mu b_\nu\cdot 2M\,\delta\,I
+\Bigr)
+   \quad (\because \check{Z}, \check{Y} \text{ の反交換関係を 4 箇所へ同時適用}) \\
+&= c_\mu c_\nu\left(
+r_\mu r_\nu\cdot 2M\,\delta\,I
++ b_\mu b_\nu\cdot 2M\,\delta\,I
+\right)
+   \quad (\because 0 \text{ 行列の項の消去（2 箇所へ同時適用）}) \\
+&= c_\mu c_\nu\left(r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I
+   \quad (\because \text{分配則による } 2M\,\delta\,I \text{ の括り出し})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\delta = 0`),
+        " なら全体が ",
+        math(String.raw`0`),
+        "。",
+        math(String.raw`\delta \neq 0`),
+        " なら Step 1 より括弧が ",
+        math(String.raw`r^2-r^2=0`),
+        "。したがって ",
         math(String.raw`\left[\check\psi_\mu, \check\psi_\nu\right]_+ = 0`),
         "。",
       ]),
       paragraph([
-        "Step 4（第 2 式）。Step 2 とまったく同じ展開（",
-        ref("def_check_fermi"),
-        " の代入 → 反交換子の双線型性 → ",
-        ref("anticommutator_of_check_Z_Y"),
-        " の適用）を行う。違いは ",
-        math(String.raw`\check{Z}`),
-        " の係数の積が ",
-        math(String.raw`(-r_\mu)(+r_\nu) = -r_\mu r_\nu`),
-        " になる点だけなので",
+        "Step 4（第 2 式）。定義・双線型性・反交換関係を各行で適用すると",
       ]),
       displayMath(
-        String.raw`\left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+
-= c_\mu c_\nu\left(-r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I
-\quad (\because \text{Step 2 と同じ展開})`,
+        String.raw`\begin{aligned}
+\left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+
+&= \left[c_\mu\left(-r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
+   c_\nu\left(r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
+   \quad (\because \check\psi_\mu^\dagger, \check\psi_\nu \text{ の定義}) \\
+&= c_\mu c_\nu\Bigl(
+\left(-r_\mu\right)r_\nu\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
++ \left(-r_\mu\right)b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
+&\qquad\qquad
++ b_\mu r_\nu\left[\check{Y}_\mu, \check{Z}_\nu\right]_+
++ b_\mu b_\nu\left[\check{Y}_\mu, \check{Y}_\nu\right]_+
+\Bigr)
+   \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性}) \\
+&= c_\mu c_\nu\Bigl(
+\left(-r_\mu\right)r_\nu\cdot 2M\,\delta\,I
++ \left(-r_\mu\right)b_\nu\cdot 0
++ b_\mu r_\nu\cdot 0
++ b_\mu b_\nu\cdot 2M\,\delta\,I
+\Bigr)
+   \quad (\because \check{Z}, \check{Y} \text{ の反交換関係を 4 箇所へ同時適用}) \\
+&= c_\mu c_\nu\left(
+\left(-r_\mu\right)r_\nu\cdot 2M\,\delta\,I
++ b_\mu b_\nu\cdot 2M\,\delta\,I
+\right)
+   \quad (\because 0 \text{ 行列の項の消去（2 箇所へ同時適用）}) \\
+&= c_\mu c_\nu\left(-r_\mu r_\nu\cdot 2M\,\delta\,I
++ b_\mu b_\nu\cdot 2M\,\delta\,I\right)
+   \quad (\because \left(-x\right)y=-xy\ (\mathbb{R}\text{ の四則})) \\
+&= c_\mu c_\nu\left(-r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M\,\delta\,I
+   \quad (\because \text{分配則による } 2M\,\delta\,I \text{ の括り出し})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\delta = 0`),
