@@ -194,6 +194,7 @@ targets=(
   Ising3DCut.LimitQuantity.posRoot_pow
   Ising3DCut.LimitQuantity.eq_posRoot_of_pow_eq
   Ising3DCut.LimitQuantity.posRoot_congr
+  Ising3DCut.LimitQuantity.cross_power_equality_implies_posRoot_equality
   Ising3DCut.LimitQuantity.rootSeq_eq_of_pointwise_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_pointwise_eq
   Ising3DCut.LimitQuantity.limitQuantity_eq_of_pointwise_eq
