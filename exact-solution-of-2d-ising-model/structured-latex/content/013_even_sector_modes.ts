@@ -1242,8 +1242,22 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 \left[-Y_MZ_1,\ Z_1\right]
 &= -\left[Y_MZ_1,\ Z_1\right]
    \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
+&= -\left(\left(Y_MZ_1\right)Z_1 - Z_1\left(Y_MZ_1\right)\right)
+   \quad (\because \text{交換子の定義}) \\
+&= -\left(Y_M\left(Z_1Z_1\right) - \left(Z_1Y_M\right)Z_1\right)
+   \quad (\because \text{行列の積の結合法則}) \\
+&= -\left(Y_M\,I - \left(Z_1Y_M\right)Z_1\right)
+   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_1Z_1 = I)) \\
+&= -\left(Y_M - \left(-Y_MZ_1\right)Z_1\right)
+   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_1Y_M = -Y_MZ_1)) \\
+&= -\left(Y_M + Y_M\left(Z_1Z_1\right)\right)
+   \quad (\because \text{結合法則とスカラー倍}) \\
+&= -\left(Y_M + Y_M\,I\right)
+   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_1Z_1 = I)) \\
+&= -\left(Y_M + Y_M\right)
+   \quad (\because \text{単位行列の性質 } Y_M\,I = Y_M) \\
 &= -2Y_M
-   \quad (\because \text{直前の displayMath と同じ計算}\ (Y_m, Z_{m+1}) \to (Y_M, Z_1)) \\
+   \quad (\because \text{同類項をまとめる}) \\
 &= 2\left(-Y_M\right)
    \quad (\because \text{スカラー倍の符号の整理 } -2Y_M = 2(-Y_M)) \\
 &= 2\,Y_0^{\flat}
@@ -1297,8 +1311,18 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 \left[-Y_MZ_1,\ Y_M\right]
 &= -\left[Y_MZ_1,\ Y_M\right]
    \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
+&= -\left(\left(Y_MZ_1\right)Y_M - Y_M\left(Y_MZ_1\right)\right)
+   \quad (\because \text{交換子の定義}) \\
+&= -\left(Y_M\left(Z_1Y_M\right) - \left(Y_MY_M\right)Z_1\right)
+   \quad (\because \text{行列の積の結合法則}) \\
+&= -\left(Y_M\left(-Y_MZ_1\right) - \left(Y_MY_M\right)Z_1\right)
+   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_1Y_M = -Y_MZ_1)) \\
+&= -\left(-\left(Y_MY_M\right)Z_1 - \left(Y_MY_M\right)Z_1\right)
+   \quad (\because \text{結合法則とスカラー倍}) \\
+&= -\left(-I\,Z_1 - I\,Z_1\right)
+   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_MY_M = I)) \\
 &= -\left(-2Z_1\right)
-   \quad (\because \text{直前の displayMath と同じ計算}\ (Y_m, Z_{m+1}) \to (Y_M, Z_1)) \\
+   \quad (\because \text{単位行列の性質 } I\,Z_1 = Z_1\text{ と同類項をまとめる}) \\
 &= 2Z_1
    \quad (\because \text{スカラー倍の符号の整理 } -(-2Z_1) = 2Z_1) \\
 &= -2\left(-Z_1\right)
@@ -1501,6 +1525,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         "(A)(B) が成り立つ仕組みは反周期性 e^{-iM θ~_μ} = -1 である。整数運動量では e^{-iM θ_μ} = +1 なので、同じ計算をすると境界項の符号が合わず H_1^{(-)} 側でしか閉じない。ここが (+) と (-) を分ける唯一の点である。",
         "M=2,3,4,5 の全 μ について数値で確認済み（sagemath/check/046_claim_even_sector_modes/check_02_commutators.sage）。",
         "2026-08-15 の式変形統一で、三つの鎖の最終行（= 2Z_j・= 2Y_m・= 2(−Y_M)）に欠けていた行末根拠を補い、単位行列の消去と同類項の統合の圧縮を開いた。内容は変えていない。",
+        "2026-08-19 の式変形統一で、境界項二本の鎖にあった「直前の displayMath と同じ計算」の一行を、(Y_M, Z_1) に対する交換子の定義・結合法則・anticommutator_of_Z_and_Y・単位行列・同類項の一操作ずつの行へ開いた。内容・参照は変えていない。",
       ],
     },
   },
