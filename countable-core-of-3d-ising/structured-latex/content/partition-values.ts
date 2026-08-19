@@ -4247,6 +4247,46 @@ x^{NM}&=(x^N)^M &&(\because\ \text{自然数べきの積})\\
   },
 
   {
+    id: "soundness_bridge_claim_pointwise_root_sequence_equality_implies_tail_agreement",
+    kind: "claim",
+    title: { text: "乗根列の項別一致はずらし無しの尾部一致を与える" },
+    labels: ["claim_pointwise_root_sequence_equality_implies_tail_agreement"],
+    habitat: "R",
+    realEscape:
+      "正の実数乗根からなる二列について等式を述べるが、箱の大きさの極限は取らない。使うのは各添字で既に得た等式と自然数の順序だけである。",
+    statement: [
+      paragraph([
+        ref("claim_pointwise_cross_power_equality_implies_root_sequence_equality"),
+        " の仮定のもとで、正の実数乗根の二列は一致開始添字 ",
+        math(String.raw`1\in\mathbb N_{\ge1}`),
+        " で尾部一致する。すなわち、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " について ",
+        math(String.raw`L\ge1`),
+        " ならば",
+      ]),
+      displayMath(String.raw`A(L)^{1/N(L)}=B(L)^{1/M(L)}`),
+      paragraph([
+        "が成り立つ。この尾部一致は、",
+        ref("def_tail_equivalence_of_finite_box_sequences"),
+        " で用いた『ある一致開始添字以降の各項が等しい』という条件を、ここでは正の実数乗根の二列へ適用したものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_pointwise_cross_power_equality_implies_root_sequence_equality"),
+        " により、すべての ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " で二つの乗根は等しい。したがって一致開始添字を ",
+        math(String.raw`1`),
+        " と取れば、すべての ",
+        math(String.raw`L\ge1`),
+        " で要求された等式が成り立つ。",
+      ]),
+    ],
+  },
+
+  {
     id: "prediction_stream_definition_two_dimensional_boundary_response_polynomial",
     kind: "definition",
     title: { text: "2 次元の箱と境界応答多項式" },
