@@ -64,4 +64,3 @@ ok_all &= report("(b) Z_m, Y_m 上での一致", w_site, TOL)
 ok_all &= report("(c) 行列単位 e_{ij} すべての上での一致（= 全体での一致）", w_all, TOL)
 
 print("check_05:", "PASS" if ok_all else "FAIL")
-

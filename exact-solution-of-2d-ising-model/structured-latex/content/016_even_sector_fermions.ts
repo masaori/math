@@ -1782,16 +1782,21 @@ T_{(V^{(+)})}\!\left(\check{Y}_\mu\right) = T_{(\check{V}')}\!\left(\check{Y}_\m
    \left(\check{P}_\mu\check{P}_\mu^{-1}\right)
    \quad (\because \check{P}_\mu\check{P}_\mu^{-1} = I_{\mathrm{Mat}(2,\mathbb{C})}) \\
 &= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\check{P}_\mu^{-1}
-   \quad (\because \text{commutation\_V\_plus\_check\_psi の proof で確かめた結合律}) \\
+   \quad (\because \text{行ベクトルと }2\times2\text{ 行列の積の結合法則}) \\
 &= \begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{P}_\mu^{-1}
-   \quad (\because \text{def\_check\_fermi})
+   \quad (\because \check\psi_\mu^\dagger,\check\psi_\mu\text{ の定義})
 \end{aligned}`,
       ),
       paragraph(["すなわち"]),
       displayMath(
-        String.raw`\check{Z}_\mu = q_{11}\,\check\psi_\mu^\dagger + q_{21}\,\check\psi_\mu,
-\qquad
-\check{Y}_\mu = q_{12}\,\check\psi_\mu^\dagger + q_{22}\,\check\psi_\mu`,
+        String.raw`\begin{aligned}
+\check{Z}_\mu
+&= q_{11}\,\check\psi_\mu^\dagger + q_{21}\,\check\psi_\mu
+   \quad (\because \text{行ベクトルと }2\times2\text{ 行列の積の定義}), \\
+\check{Y}_\mu
+&= q_{12}\,\check\psi_\mu^\dagger + q_{22}\,\check\psi_\mu
+   \quad (\because \text{行ベクトルと }2\times2\text{ 行列の積の定義})
+\end{aligned}`,
       ),
       paragraph([
         "Step 2（フェルミオン上での一致）。",
@@ -1803,15 +1808,25 @@ T_{(V^{(+)})}\!\left(\check{Y}_\mu\right) = T_{(\check{V}')}\!\left(\check{Y}_\m
         " 倍であるから",
       ]),
       displayMath(
-        String.raw`T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) = T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right),
-\qquad
-T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = T_{(\check{V}')}\!\left(\check\psi_\mu\right)`,
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right)
+&= e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger
+   \quad (\because V^{(+)}\text{ と }\check\psi\text{ の交換関係}) \\
+&= T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
+   \quad (\because T_{(\check V')}\text{ の }\check\psi\text{ への作用}), \\
+T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
+&= e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu
+   \quad (\because V^{(+)}\text{ と }\check\psi\text{ の交換関係}) \\
+&= T_{(\check{V}')}\!\left(\check\psi_\mu\right)
+   \quad (\because T_{(\check V')}\text{ の }\check\psi\text{ への作用})
+\end{aligned}`,
       ),
       paragraph(["Step 3（線型性で移す）。Step 1・Step 2 と線型性より"]),
       displayMath(
         String.raw`\begin{aligned}
 T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
-&= T_{(V^{(+)})}\!\left(q_{11}\check\psi_\mu^\dagger + q_{21}\check\psi_\mu\right) \\
+&= T_{(V^{(+)})}\!\left(q_{11}\check\psi_\mu^\dagger + q_{21}\check\psi_\mu\right)
+   \quad (\because \text{Step 1}) \\
 &= q_{11}T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) + q_{21}T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
    \quad (\because T_{(V^{(+)})} \text{ の線型性}) \\
 &= q_{11}T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right) + q_{21}T_{(\check{V}')}\!\left(\check\psi_\mu\right)
@@ -1819,14 +1834,25 @@ T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
 &= T_{(\check{V}')}\!\left(q_{11}\check\psi_\mu^\dagger + q_{21}\check\psi_\mu\right)
    \quad (\because T_{(\check{V}')} \text{ の線型性}) \\
 &= T_{(\check{V}')}\!\left(\check{Z}_\mu\right)
+   \quad (\because \text{Step 1})
 \end{aligned}`,
       ),
-      paragraph([
-        math(String.raw`\check{Y}_\mu`),
-        " についても ",
-        math(String.raw`q_{12}, q_{22}`),
-        " を使って同じ計算である。",
-      ]),
+      paragraph([math(String.raw`\check{Y}_\mu`), " については"]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}\!\left(\check{Y}_\mu\right)
+&= T_{(V^{(+)})}\!\left(q_{12}\check\psi_\mu^\dagger + q_{22}\check\psi_\mu\right)
+   \quad (\because \text{Step 1}) \\
+&= q_{12}T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) + q_{22}T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
+   \quad (\because T_{(V^{(+)})} \text{ の線型性}) \\
+&= q_{12}T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right) + q_{22}T_{(\check{V}')}\!\left(\check\psi_\mu\right)
+   \quad (\because \text{Step 2}) \\
+&= T_{(\check{V}')}\!\left(q_{12}\check\psi_\mu^\dagger + q_{22}\check\psi_\mu\right)
+   \quad (\because T_{(\check{V}')} \text{ の線型性}) \\
+&= T_{(\check{V}')}\!\left(\check{Y}_\mu\right)
+   \quad (\because \text{Step 1})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
@@ -1835,6 +1861,9 @@ T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
           "「場合 2」（A(θ_μ) = I と T_Vprime_fixes_hatZ_hatY_when_gamma2_zero を経由）を必要としたが、" +
           "gamma_2_theta_tilde_nonzero によりその場合は起こらないので、008 章の「場合 1」に相当する議論だけで尽きる。",
         "数値検証: sagemath/check/049_claim_even_sector_fermions/check_05。",
+        "2026-08-19 の式変形統一で、Step 1 の行末根拠を人間可読な名前へ直し、成分表示に根拠を補い、" +
+          "Step 2 の二つの一致を各作用の固有値表示を介する鎖へ開き、Step 3 の鎖の両端に根拠を補って、" +
+          "Y 成分の「同じ計算」を Z 成分と同形の鎖へ開いた。内容と参照は変えていない。",
       ],
     },
   },
