@@ -2636,4 +2636,72 @@ A_h
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_two_stage_ising_coefficient_pair_map",
+    kind: "definition",
+    title: { text: "商の塔に沿う二段 Ising 係数対写像" },
+    labels: ["def_quotient_tower_two_stage_ising_coefficient_pair_map"],
+    habitat: "N",
+    verification: ["sagemath/check/two-stage-quotient-tower-ising-coefficient-pair-map"],
+    statement: [
+      paragraph([
+        ref("def_two_stage_finite_quotient_tower_input"),
+        " と ",
+        ref("def_quotient_tower_induced_coset_cell_maps"),
+        " を固定し、両段のセルデータが ",
+        ref("def_oriented_closed_surface_cellulation"),
+        " の有限述語を満たすと仮定する。細段と粗段の一次骨格を、それぞれ有限グラフ ",
+        math(String.raw`G_{\mathrm{fine}}=(V_{\mathrm{fine}},E_{\mathrm{fine}},\partial_{G_{\mathrm{fine}}})`),
+        " と ",
+        math(String.raw`G_{\mathrm{coarse}}=(V_{\mathrm{coarse}},E_{\mathrm{coarse}},\partial_{G_{\mathrm{coarse}}})`),
+        " と書く。端点写像の段間整合性には ",
+        ref("theorem_quotient_tower_oriented_edge_endpoint_map_preservation"),
+        " の条件を用いる。両段で ",
+        ref("def_spin_label_set"),
+        " の同じ形式的スピンラベル集合と ",
+        ref("def_broken_edge_set"),
+        " の同じ破れ辺規則を用いる。",
+      ]),
+      paragraph([
+        ref("def_broken_edge_multiplicity"),
+        " の多重度を次数外で零へ延長し、二段の係数を同じ自然数で比較する一つの写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\widehat\Omega_{\mathcal T}:\mathbb N
+&\longrightarrow
+\mathbb N\times\mathbb N,\\
+m
+&\longmapsto
+\left(
+  \widehat\Omega_{\mathrm{fine}}(m),
+  \widehat\Omega_{\mathrm{coarse}}(m)
+\right),\\
+\widehat\Omega_{\mathrm{fine}}(m)
+&:=
+\begin{cases}
+  \Omega_{G_{\mathrm{fine}}}(m)
+  &\left(0\le m\le |E_{\mathrm{fine}}|\right),\\
+  0
+  &\left(m>|E_{\mathrm{fine}}|\right),
+\end{cases}\\
+\widehat\Omega_{\mathrm{coarse}}(m)
+&:=
+\begin{cases}
+  \Omega_{G_{\mathrm{coarse}}}(m)
+  &\left(0\le m\le |E_{\mathrm{coarse}}|\right),\\
+  0
+  &\left(m>|E_{\mathrm{coarse}}|\right)
+\end{cases}
+\end{aligned}`),
+      paragraph([
+        "で定める。ここで ",
+        math(String.raw`m,|E_{\mathrm{fine}}|,|E_{\mathrm{coarse}}|\in\mathbb N`),
+        " であり、各成分は自然数に属する。両段の Ising 分配多項式には ",
+        ref("def_ising_partition_polynomial"),
+        " の同じ不定元 ",
+        math(String.raw`x`),
+        " を用いる。各段は閉曲面セルデータの一次骨格全体なので外部境界条件を追加しない。係数は頂点数、辺数、被覆次数で割らない生の配位数であり、この写像は段間の係数等式、単調性、比例関係を主張しない。全ての集合と計数は有限であり、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
