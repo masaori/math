@@ -72,4 +72,3 @@ ok_all &= report("(d) psi^dagger, psi の M 周期性", w_per2, TOL)
 ok_all &= report("(e) 共役添字 M+1-mu の関係", w_per3, TOL)
 
 print("check_01:", "PASS" if ok_all else "FAIL")
-

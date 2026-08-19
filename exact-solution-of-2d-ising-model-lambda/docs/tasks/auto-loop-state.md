@@ -6,6 +6,8 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-19 の tick 459 は、todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、姉妹側の $\gamma_1,\gamma_2$ の周期性と共役添字の証明で、「同じ計算」に省略していた二本の導出を一続きの鎖へ開いた。**
+  前進前レビューでは tick 458 のコミット `17a03b59` を差分で突き合わせ、$\gamma_2(\tilde\theta_\mu)\neq0$ の等価変形が一行一操作・行末根拠つきで、元の内容と参照を失っていないことを確認した（本文の修正なし）。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・定義域・非零性または後続の反復利用を担うため削除対象は無かった。本文末尾と todo 表（空）も一致している。式変形統一では姉妹側 `016_even_sector_fermions.ts` の「$\gamma_1,\gamma_2$ の周期性と共役添字 $M+1-\mu$」（`periodicity_of_check_fermi`）で、機械識別子の根拠を人間可読な名前とラベル参照へ直し、分配則の行に根拠を補い、共役添字の二本の省略計算を左辺から始まる鎖へ開いた（内容・参照は不変）。姉妹側 SageMath 対象検算（check\_01 PASS）・check 300 ブロック・PDF 333 ページ、Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件・PDF 280 ページ通過。
 - **2026-08-19 の tick 458 は、todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、姉妹側の $\gamma_2(\tilde\theta_\mu)\neq0$（例外なし）の証明で、鎖の行末根拠に残っていたラベル識別子の生文字列と二操作一行を一操作ずつの形へ直した。**
   前進前レビューでは tick 457 のコミット `193a0981`・`1f05046f` を差分で突き合わせ、固有ベクトルの第二成分の約分の二段の鎖、行列式の同類項の統合の四段の鎖、対角化の右乗の四段の鎖が、いずれも一行一操作・行末根拠つきで、元の内容と `eigenvector_of_A_theta_tilde`・`gamma_2_theta_tilde_nonzero`・`relation_of_gamma_2_theta_tilde`・`complex_numbers_form_a_field` の参照を失っていないことを確認した（本文の修正なし）。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの一項目のみ）と todo 表（空）も一致している。式変形統一では、姉妹側 `015_A_theta_tilde_diagonalization.ts` の「$\gamma_2(\tilde\theta_\mu)\neq0$（例外なし）」（`gamma_2_theta_tilde_nonzero`）で、Step 1・Step 2 の鎖の行末根拠をラベル識別子の生文字列（def\_gamma1\_gamma2\_of\_theta 等）から人間可読な名前へ直し、Step 2 の「両辺を π で割って M 倍する」を一操作ずつの二行に分け、最終行 $2(\mu-\frac12)=2\mu-1$ に行末根拠を補って鎖の後の重複した散文根拠を外した（内容・参照は不変）。姉妹側 SageMath 対象検算（check_01 PASS）・check 300 ブロック・PDF 333 ページ、Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件通過。
 - **2026-08-19 の tick 457 は、todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、前回の因数分解に残った一ステップ一定理違反を修正してから、姉妹側の $A(\tilde\theta_\mu)$ の対角化証明を一続きの鎖へ統一した。**
@@ -14,8 +16,6 @@
   前進前レビューでは tick 455 のコミット `e55a53ce` を差分で突き合わせ、$\gamma_1(\tilde\theta_\mu)>1$ の三つの鎖（Step 1 の正値性・Step 2 の平方評価・Step 3 の背理法）が元の内容と `def_gamma1_gamma2_of_theta`・`det_A_theta_tilde`・`gamma_2_theta_tilde_nonzero` の参照を失っていないことを確認した（本文の修正なし）。ただし台帳の保守で、保管庫の最新が tick 434 分で止まり、tick 435〜450 の「現在地」「前進の記録」「式変形統一」「レビュー記録」が保管されないまま台帳から落とされていたことを見つけ、git 履歴の六つの版から復元して保管庫へ追記した（tick 441 は備考訂正のみの回で独立項目が元々無く、レビュー記録だけを復元）。「何も言っていない主張」の独立ブロックの削除対象は無く、本文末尾と todo 表も一致している。式変形統一では、姉妹側 `015_A_theta_tilde_diagonalization.ts` の「$A(\tilde\theta_\mu)$ の固有値と固有ベクトル」（`eigenvector_of_A_theta_tilde`）で、Step 1 の「右辺を展開すれば左辺に一致する」と散文に畳まれていた特性多項式の因数分解を、準備の恒等式の三段と行列式の鎖の六段へ開き、固有ベクトル成分の二本の鎖の根拠なしの行（分配則による括り出し）に行末根拠を補った（内容・参照は不変）。姉妹側 SageMath 対象検算（check_03 PASS）・check 300 ブロック・PDF 332 ページ、Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件・PDF 280 ページ通過。
 - **2026-08-19 の tick 455 は、todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、前回の根拠参照を修正してから、姉妹側の $\gamma_1(\tilde\theta_\mu)>1$ の証明を三つの一続きの鎖へ統一した。**
   前進前レビューでは tick 454 のコミット `26e0132c` を差分で突き合わせ、$\det A(\tilde\theta_\mu)=1$ の証明末尾の三段の鎖が元の内容を失っていないことを確認したが、最初の根拠が既存主張を機械的な参照ではなく識別子の生文字列で指していたため、直前に引いた「$\gamma_2(-\tilde\theta_\mu)=-\overline{\gamma_2(\tilde\theta_\mu)}$ とその帰結 (2)」を人間可読な名前で指す形へ直し、コミット `28d59e80` を前進前に push した。「何も言っていない主張」の独立ブロックの削除対象は無く、本文末尾と todo 表も一致している。式変形統一では、姉妹側 `015_A_theta_tilde_diagonalization.ts` の「$\gamma_1(\tilde\theta_\mu)>1$」（`gamma1_gt_1_theta_tilde`）で、Step 1 の正値性を一操作ずつの鎖へ分け、Step 2 の平方評価と Step 3 の背理法を主張の左辺から始まる鎖へ開いた（内容・参照は不変）。姉妹側 SageMath 対象検算（check_04 PASS）・check 300 ブロック・PDF 332 ページ、Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件・PDF 280 ページ通過。
-- **2026-08-19 の tick 454 は、todo が空で七点の観察から本文へ昇格できる命題候補も無いため前進せず、姉妹側の $\det A(\tilde\theta_\mu)=1$ と固有値の積の証明で散文に畳まれていた $\gamma_1(\theta)^2=1+r^2$ の導出を主張の左辺から始まる三段の鎖へ開いた。**
-  前進前レビューでは tick 453 のコミット `ee5cf891` を差分で突き合わせ、$\gamma_2(-\tilde\theta_\mu)=-\overline{\gamma_2(\tilde\theta_\mu)}$ の一段の鎖と補助計算・(5) の終端の行末根拠が、元の内容と `euler_formula_cos_sin`・`relation_of_gamma_2` の参照を失っていないことを確認した。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、いずれも行末根拠内の記述で独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの 1 項目のみ）とセクション表（todo 空）も一致している。修正なし。式変形統一では、姉妹側 `015_A_theta_tilde_diagonalization.ts` の「$\det A(\tilde\theta_\mu)=1$ と固有値の積」（`det_A_theta_tilde`）で、Step 3 の展開 2 式と Step 4 の鎖の先頭行に行末根拠を補い、末尾で散文に畳まれていた $\gamma_1(\theta)^2=1+r^2$ の導出を `relation_of_gamma_2_theta_tilde` (2) と Step 5 を行末根拠で引く三段の鎖へ開いた（内容・参照は不変）。Lambda 側 check 516 ブロック・linkage 296 件・Lean 9520 jobs・sorry 非依存 1459 件・PDF 280 ページ、姉妹側 SageMath 対象検算（check_04）・check 300 ブロック・PDF 332 ページ通過。
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
 - 検算（終結式による $d_1(3)$ の定義多項式の直接構成）: 1 セクション
@@ -35,15 +35,17 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-19（tick 459）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、runbook の別枠である式変形統一だけを 1 件進めた。
 - 2026-08-19（tick 458）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、runbook の別枠である式変形統一だけを 1 件進めた。
 - 2026-08-19（tick 457）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、レビュー修正一件と runbook の別枠である式変形統一一件を進めた。
 - 2026-08-19（tick 456）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、保管庫の記録復元（レビューの一部）と、runbook の別枠である式変形統一 1 件を進めた。
 - 2026-08-19（tick 455）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、runbook の別枠である式変形統一だけを 1 件進めた。
-- 2026-08-19（tick 454）: todo 表が空であり、$L=2,\dots,8$ の七点の観察から本文へ昇格できる命題候補も立っていないため、未登録のセクションや追加の数値観察には着手しなかった。前進なしの状態を維持し、runbook の別枠である式変形統一だけを 1 件進めた。
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
+
+- 2026-08-19（tick 459）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$\gamma_1,\gamma_2$ の周期性と共役添字 $M+1-\mu$」（`periodicity_of_check_fermi`）で、Euler の公式・運動量・共役添字の根拠を機械識別子の生文字列から人間可読な名前とラベル参照へ直し、運動量の導出で根拠の無かった分配則の行を補った。また、「同じ計算」に省略していた $\gamma_2(-\tilde\theta_{M+1-\mu})=\gamma_2(\tilde\theta_\mu)$ と $\gamma_1(\tilde\theta_{M+1-\mu})=\gamma_1(\tilde\theta_\mu)$ の導出を、各結論の左辺から始まる鎖へ開いた。元の内容と `euler_formula_cos_sin`・`antiperiodic_exp_sum`・`conjugate_index_of_check_Z_Y`・`def_gamma1_gamma2_of_theta` の参照は不変。姉妹側 SageMath 対象検算（check\_01 PASS）。
 
 - 2026-08-19（tick 458）: 姉妹側の半整数運動量における $A(\tilde\theta)$ の対角化章（`015_A_theta_tilde_diagonalization.ts`）の「$\gamma_2(\tilde\theta_\mu)\neq0$（例外なし）」（`gamma_2_theta_tilde_nonzero`）で、Step 1・Step 2 の同値変形の鎖の行末根拠をラベル識別子の生文字列（def\_gamma1\_gamma2\_of\_theta・def\_half\_integer\_modes・definition\_of\_cc・complex\_numbers\_form\_a\_field）から人間可読な名前へ直し、Step 2 の「両辺を $\pi$ で割って $M$ 倍する」を「両辺を $\pi>0$ で割る」「両辺を $M\neq0$ 倍する」の二行に分け、最終行 $2(\mu-\frac12)=2\mu-1$ に行末根拠（分配則）を補って、鎖の直後で同じ根拠を繰り返していた散文を外した。元の内容と `def_gamma1_gamma2_of_theta`・`abs_basic_properties`・`euler_formula_cos_sin`・`complex_numbers_form_a_field`・`definition_of_cc`・`def_half_integer_modes`・`gamma_2_theta_is_0` の参照は不変。姉妹側 SageMath 対象検算（check_01 PASS）・check 300 ブロック・PDF 333 ページ通過。
 
@@ -53,7 +55,6 @@
 
 - 2026-08-19（tick 455）: 姉妹側の半整数運動量における $A(\tilde\theta)$ の対角化章（`015_A_theta_tilde_diagonalization.ts`）の「$\gamma_1(\tilde\theta_\mu)>1$」（`gamma1_gt_1_theta_tilde`）で、Step 1 の正値性を定義・余弦の上界・積の狭義不等式・実数の四則による一操作ずつの鎖へ分け、散文に畳まれていた Step 2 の $\gamma_1^2>1$ を主張の左辺から始まる三段の鎖へ、Step 3 の $t\le1$ からの背理法を平方の定義と正数倍の順序保存による四段の鎖へ開いた。元の内容と `def_gamma1_gamma2_of_theta`・`det_A_theta_tilde`・`gamma_2_theta_tilde_nonzero` の参照は不変。姉妹側 SageMath 対象検算（check_04 PASS）・check 300 ブロック・PDF 332 ページ通過。
 
-- 2026-08-19（tick 454）: 姉妹側の半整数運動量における $A(\tilde\theta)$ の対角化章（`015_A_theta_tilde_diagonalization.ts`）の「$\det A(\tilde\theta_\mu)=1$ と固有値の積」（`det_A_theta_tilde`）で、Step 3 の展開 2 式（$\gamma_1(\theta)^2$ の二項展開と $\gamma_2(\theta)\gamma_2(-\theta)$ の分配）と Step 4 の二本の鎖の先頭行（積の結合律と可換律による並べ替え）に行末根拠を補い、証明末尾で「Step 5 と $\gamma_2(\theta)\gamma_2(-\theta)=-r^2$ から得る」と散文に畳まれていた $\gamma_1(\theta)^2=1+r^2$ の導出を、主張の左辺から始まり `relation_of_gamma_2_theta_tilde` (2)・$\mathbb C$ の加法の結合律・Step 5 を行末根拠で引く三段の鎖へ開いた。元の内容と参照は不変。姉妹側 SageMath 対象検算（check_04 PASS）・check 300 ブロック・PDF 332 ページ通過。
 
 ### 本プロジェクト（`exact-solution-of-2d-ising-model-lambda`）
 
@@ -66,11 +67,11 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-19（tick 459）: tick 458 のコミット `17a03b59` を差分で突き合わせ、$\gamma_2(\tilde\theta_\mu)\neq0$ の等価変形は一行一操作・行末根拠つきで、元の内容と `def_gamma1_gamma2_of_theta`・`abs_basic_properties`・`euler_formula_cos_sin`・`complex_numbers_form_a_field`・`definition_of_cc`・`def_half_integer_modes`・`gamma_2_theta_is_0` の参照を失っていなかった（本文の修正なし）。「何も言っていない主張」の候補を本文・ノート・SageMath・Lean の四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・定義域・非零性または後続の反復利用を担うため削除対象は無かった。本文末尾と todo 表も一致している。
 - 2026-08-19（tick 458）: tick 457 のコミット `193a0981`・`1f05046f` を差分で突き合わせ、固有ベクトルの第二成分の約分の二段の鎖・行列式の同類項の統合の四段の鎖・対角化の右乗の四段の鎖が、いずれも一行一操作・行末根拠つきで、元の内容と `eigenvector_of_A_theta_tilde`・`gamma_2_theta_tilde_nonzero`・`relation_of_gamma_2_theta_tilde`・`complex_numbers_form_a_field` の参照を失っていないことを確認した（本文の修正なし）。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの一項目のみ）とセクション表（todo 空）も一致している。
 - 2026-08-19（tick 457）: tick 456 のコミット `1784a3bf` を差分で突き合わせ、固有値と固有ベクトルの因数分解に分配則と同類項の統合を同時適用した行が二箇所残っていることを見つけた。分配・可換則・同類項の統合・並べ替えを一操作ずつの中間行へ分け、コミット `193a0981` を前進前に push した。元の内容と参照は不変。「何も言っていない主張」の候補を本文・ノート・SageMath・Lean の四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・非零性・定義域または後続の反復利用を担うため削除対象は無かった。本文末尾と todo 表も一致している。
 - 2026-08-19（tick 456）: tick 455 のコミット `e55a53ce` を差分で突き合わせ、$\gamma_1(\tilde\theta_\mu)>1$ の三つの鎖が一行一操作・行末根拠つきで、元の内容と `det_A_theta_tilde`・`gamma_2_theta_tilde_nonzero` の参照を失っていないことを確認した（本文の修正なし）。また保管庫の最新が tick 434 分で止まり、tick 435〜450 の台帳記録が保管されないまま落とされていたのを見つけ、git 履歴の六つの版（tick 439・442・444・449・450・454 時点）から復元して保管庫へ追記した。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・非零性・共通分母の存在または後続の反復利用を担うため削除対象は無かった。本文末尾（命題候補待ちの 1 項目のみ）とセクション表（todo 空）も一致している。
 - 2026-08-19（tick 455）: tick 454 のコミット `26e0132c` を差分で突き合わせ、$\det A(\tilde\theta_\mu)=1$ の証明末尾に追加された三段の鎖が元の等式と `relation_of_gamma_2_theta_tilde` (2)・Step 5 の内容を失っていないことを確認した。ただし最初の根拠が既存主張を機械的な参照ではなく識別子の生文字列で指していたため、直前に引いた「$\gamma_2(-\tilde\theta_\mu)=-\overline{\gamma_2(\tilde\theta_\mu)}$ とその帰結 (2)」を人間可読な名前で指す形へ直した。「何も言っていない主張」の候補を本文・ノート・SageMath・Lean の四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・定義域・共通分母の存在または後続の反復利用を担うため削除対象は無かった。本文末尾と todo 表も一致している。
-- 2026-08-19（tick 454）: tick 453 のコミット `ee5cf891` を差分で突き合わせた。$\gamma_2(-\tilde\theta_\mu)=-\overline{\gamma_2(\tilde\theta_\mu)}$ の一段の鎖と補助計算・(5) の終端の行末根拠は、元の内容と `euler_formula_cos_sin`・`relation_of_gamma_2` の参照を失っていなかった。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、いずれも行末根拠内の記述で独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの 1 項目のみ）とセクション表（todo 空）も一致している。修正なし。
 ## 判断待ち（人間に問うべき論点）
 
 - **content のファイルを分けるときの文書順の決め方。** システムは `content/` のファイル名昇順を
