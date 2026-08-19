@@ -3246,4 +3246,43 @@ P_{\mathrm{coarse}}(x)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_two_stage_fisher_zero_multiplicity_difference_map",
+    kind: "definition",
+    title: { text: "商の塔に沿う二段 Fisher 零点重複度差写像" },
+    labels: ["def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_map"],
+    habitat: "Z",
+    verification: ["sagemath/check/two-stage-quotient-tower-fisher-zero-multiplicity-difference-map"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_pair_map"),
+        " の二段 Fisher 零点重複度対写像について、自然数の標準単射 ",
+        math(String.raw`\iota_{\mathbb N,\mathbb Z}:\mathbb N\hookrightarrow\mathbb Z`),
+        " を用いる。二段 Fisher 零点重複度差写像を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Delta\mu_{\mathcal T}:\mathcal Z_{\mathcal T}
+&\longrightarrow
+\mathbb Z,\\
+\alpha
+&\longmapsto
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{fine}}(\alpha)
+\right)
+-
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{coarse}}(\alpha)
+\right)
+\end{aligned}`),
+      paragraph([
+        "で定める。共通零点では二つの重複度の整数差を記録し、細段だけの零点では正の自然数、粗段だけの零点では負の整数を返す。値域を ",
+        math(String.raw`\mathbb Z`),
+        " 全体に置き、差の符号、零点台の包含、段間単調性を仮定しない。この写像は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " 上の有限多項式整除と整数の減法だけで定まり、複素平面への埋め込み、数値近似、距離、偏角、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
