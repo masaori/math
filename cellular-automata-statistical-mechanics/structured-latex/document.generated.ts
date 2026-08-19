@@ -48,6 +48,7 @@ import blocks_iterate_monoid from './content/iterate-monoid.ts'
 import blocks_local_rule_representation from './content/local-rule-representation.ts'
 import blocks_minimal_preperiod_period from './content/minimal-preperiod-period.ts'
 import blocks_periodic_point_count from './content/periodic-point-count.ts'
+import blocks_recursive_preimage_tree_code from './content/recursive-preimage-tree-code.ts'
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_reversibility_finite_decidability from './content/reversibility-finite-decidability.ts'
 import blocks_time_expansion_dependency from './content/time-expansion-dependency.ts'
@@ -87,6 +88,7 @@ export type AllBlocks = [
   ...typeof blocks_local_rule_representation,
   ...typeof blocks_minimal_preperiod_period,
   ...typeof blocks_periodic_point_count,
+  ...typeof blocks_recursive_preimage_tree_code,
   ...typeof blocks_redundant_neighbor,
   ...typeof blocks_reversibility_finite_decidability,
   ...typeof blocks_time_expansion_dependency,
