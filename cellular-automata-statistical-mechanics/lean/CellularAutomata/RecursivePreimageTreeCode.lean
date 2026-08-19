@@ -158,6 +158,102 @@ theorem image_nonperiodicChildren (y : V → State) :
     exact Finset.mem_image.mpr ⟨z,
       (mem_nonperiodicChildren_iff_transport N f NW fW h hconj y z).1 hu, rfl⟩
 
+/-- 共役全単射は周期性の組を点ごとに両方向へ移す。 -/
+theorem isPeriodicityPair_iff_transport (y : V → State) (i p : ℕ) :
+    IsPeriodicityPair NW fW (h y) i p ↔ IsPeriodicityPair N f y i p := by
+  rw [isPeriodicityPair_iff_collision, isPeriodicityPair_iff_collision]
+  constructor
+  · rintro ⟨hp, hcol⟩
+    refine ⟨hp, h.injective ?_⟩
+    rw [IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj,
+      IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj, hcol]
+  · rintro ⟨hp, hcol⟩
+    refine ⟨hp, ?_⟩
+    rw [← IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj,
+      ← IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj, hcol]
+
+/-- 共役全単射は各配位の最小前周期を保存する。 -/
+theorem minPreperiod_transport (y : V → State) :
+    minPreperiod NW fW (h y) = minPreperiod N f y := by
+  apply le_antisymm
+  · apply minPreperiod_le
+    obtain ⟨p, hp⟩ := minPreperiod_spec N f y
+    exact ⟨p, (isPeriodicityPair_iff_transport N f NW fW h hconj y _ p).2 hp⟩
+  · apply minPreperiod_le
+    obtain ⟨p, hp⟩ := minPreperiod_spec NW fW (h y)
+    exact ⟨p, (isPeriodicityPair_iff_transport N f NW fW h hconj y _ p).1 hp⟩
+
+/-- 共役全単射は各配位の最小周期を保存する。 -/
+theorem minPeriod_transport (y : V → State) :
+    minPeriod NW fW (h y) = minPeriod N f y := by
+  have hμ := minPreperiod_transport N f NW fW h hconj y
+  apply le_antisymm
+  · apply minPeriod_le
+    have hpair := (isPeriodicityPair_iff_transport N f NW fW h hconj y
+      (minPreperiod N f y) (minPeriod N f y)).2 (minPeriod_spec N f y)
+    rwa [← hμ] at hpair
+  · apply minPeriod_le
+    have hpair := (isPeriodicityPair_iff_transport N f NW fW h hconj y
+      (minPreperiod NW fW (h y)) (minPeriod NW fW (h y))).1 (minPeriod_spec NW fW (h y))
+    rwa [hμ] at hpair
+
+omit hconj in
+/-- 共役全単射が存在すれば二つの舞台のセル数は等しい
+    （配位集合の個数 `2^|V|` が全単射で保存されることによる）。 -/
+theorem card_cells_eq : Fintype.card V = Fintype.card W := by
+  have hcard : (2 : ℕ) ^ Fintype.card V = 2 ^ Fintype.card W := by
+    rw [← card_config (V := V), ← card_config (V := W)]
+    exact Fintype.card_congr h
+  exact Nat.pow_right_injective (le_refl 2) hcard
+
+/-- 共役全単射は打ち切り深さごとの符号を保存する（深さの帰納法）。 -/
+theorem codeAtDepth_transport (depth : ℕ) (y : V → State) :
+    codeAtDepth NW fW depth (h y) = codeAtDepth N f depth y := by
+  induction depth generalizing y with
+  | zero => rfl
+  | succ depth ih =>
+      rw [codeAtDepth_succ, codeAtDepth_succ]
+      congr 1
+      have hval : (nonperiodicChildren NW fW (h y)).val
+          = (nonperiodicChildren N f y).val.map h := by
+        rw [← image_nonperiodicChildren N f NW fW h hconj y]
+        exact Finset.image_val_of_injOn h.injective.injOn
+      rw [hval, Multiset.map_map]
+      congr 1
+      exact Multiset.map_congr rfl fun z _ => ih z
+
+/-- 共役全単射は再帰的前像木符号を点ごとに保存する。 -/
+theorem recursiveCode_transport (y : V → State) :
+    recursiveCode NW fW (h y) = recursiveCode N f y := by
+  have hcard := card_cells_eq h
+  simp only [recursiveCode, minPreperiod_transport N f NW fW h hconj y, ← hcard]
+  exact codeAtDepth_transport N f NW fW h hconj _ y
+
+/-- 共役全単射は周期点の基点語を保存する。 -/
+theorem baseWord_transport (q : V → State) :
+    baseWord NW fW (h q) = baseWord N f q := by
+  simp only [baseWord, minPeriod_transport N f NW fW h hconj q]
+  congr 1
+  funext n
+  simp only [Fin.val_cast]
+  rw [← IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj (n : ℕ) q,
+    recursiveCode_transport N f NW fW h hconj]
+
+/-- 共役全単射は周期軌道の有限表を全単射に移す。 -/
+theorem image_periodicOrbit (q : V → State) :
+    (periodicOrbit N f q).image h = periodicOrbit NW fW (h q) := by
+  simp only [periodicOrbit, minPeriod_transport N f NW fW h hconj q,
+    Finset.image_image]
+  exact Finset.image_congr fun n _ =>
+    IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj n q
+
+/-- 共役全単射は周期軌道の成分符号を保存する。 -/
+theorem componentCode_transport (q : V → State) :
+    componentCode NW fW (h q) = componentCode N f q := by
+  simp only [componentCode]
+  rw [← image_periodicOrbit N f NW fW h hconj q, Finset.image_image]
+  exact Finset.image_congr fun r _ => baseWord_transport N f NW fW h hconj r
+
 end ConjugacyTransport
 
 end CellularAutomata.RecursivePreimageTreeCode
