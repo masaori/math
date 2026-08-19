@@ -93,6 +93,7 @@ import Ising3DCut.LimitQuantity.SiteCountIndependentOfQ
 import Ising3DCut.LimitQuantity.RealLimitOfEqualSequences
 import Ising3DCut.LimitQuantity.TailShiftLimitAbstract
 import Ising3DCut.LimitQuantity.TailShiftLimit
+import Ising3DCut.LimitQuantity.TailAgreementSufficientAbstract
 import Ising3DCut.LimitQuantity.TailAgreementLimit
 import Ising3DCut.LimitQuantity.TailAgreementSufficient
 import Ising3DCut.LimitQuantity.PartitionValueInvariantDiffersAtTwo

@@ -199,6 +199,8 @@ targets=(
   Ising3DCut.LimitQuantity.shiftedFreeFiniteBoxQuantitySeq_eq_tail
   Ising3DCut.LimitQuantity.shiftedFreeFiniteBoxQuantitySeq_tendsto
   Ising3DCut.LimitQuantity.shiftedFreeFiniteBoxQuantitySeq_limit_eq
+  Ising3DCut.LimitQuantity.tailAgreement_tendsto_abstract
+  Ising3DCut.LimitQuantity.tailAgreement_limit_eq_abstract
   Ising3DCut.LimitQuantity.tailAgreement_tendsto
   Ising3DCut.LimitQuantity.rootSeq_tailAgreement_of_tailAgreement
   Ising3DCut.LimitQuantity.tailAgreement_limitQuantity_tendsto
