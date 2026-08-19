@@ -299,7 +299,16 @@ h(Q_F)
       paragraph(["である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`z\in A^W`), " を任意に取る。", math(String.raw`h`), " の全射性により、", math(String.raw`z=h(y)`), " を満たす ", math(String.raw`y\in A^V`), " を取る。"]),
+      paragraph([
+        "まず ", math(String.raw`q\in Q_F`), " と ",
+        ref("claim_iterate_monoid_conjugacy_transports_stable_image"), " より ",
+        math(String.raw`h(q)\in h(Q_F)=Q_G`), " なので、",
+        ref("def_iterate_monoid_stable_fiber"), " により ",
+        math(String.raw`B_G(h(q))`), " が定まる。次に ",
+        math(String.raw`z\in A^W`), " を任意に取る。", math(String.raw`h`),
+        " の全射性により、", math(String.raw`z=h(y)`), " を満たす ",
+        math(String.raw`y\in A^V`), " を取る。",
+      ]),
       displayMath(String.raw`\begin{aligned}
 z\in h(B_F(q))
 &\Longleftrightarrow y\in B_F(q)
@@ -349,6 +358,13 @@ h\circ R_F
       paragraph(["である。"]),
     ],
     proof: [
+      paragraph([
+        math(String.raw`q\in Q_F`), " と ",
+        ref("claim_iterate_monoid_conjugacy_transports_stable_image"), " より ",
+        math(String.raw`h(q)\in Q_G`), " なので、",
+        ref("def_iterate_monoid_fiber_tree_edges"), " により ",
+        math(String.raw`T_G(h(q))`), " が定まる。",
+      ]),
       displayMath(String.raw`\begin{aligned}
 (y,z)\in T_F(q)
 &\Longleftrightarrow y\ne q\ \text{かつ}\ z=R_F(y)
@@ -397,6 +413,38 @@ h\circ R_F^{n+1}
     ],
   },
   {
+    id: "iterate_monoid_conjugacy_claim_one_period_iterate_power",
+    kind: "claim",
+    title: { text: "一周期写像の反復は最小正周期の倍数乗に一致する" },
+    labels: ["claim_iterate_monoid_conjugacy_one_period_iterate_power"],
+    habitat: "finite",
+    statement: [
+      paragraph(["すべての ", math(String.raw`n\in\mathbb N`), " について、写像 ", math(String.raw`A^V\to A^V`), " として"]),
+      displayMath(String.raw`R_F^n=F^{n\lambda_F}`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`n`), " についての帰納法で示す。基底 ", math(String.raw`n=0`), " では"]),
+      displayMath(String.raw`\begin{aligned}
+R_F^0
+&=F^0
+  \quad(\because\ \text{どちらも恒等写像}.\ \blkref{def_global_map_iterate})\\
+&=F^{0\cdot\lambda_F}
+  \quad(\because\ 0\cdot\lambda_F=0).
+\end{aligned}`),
+      paragraph([math(String.raw`R_F^n=F^{n\lambda_F}`), " を仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+R_F^{n+1}
+&=R_F\circ R_F^n
+  \quad(\because\ \blkref{def_global_map_iterate})\\
+&=R_F\circ F^{n\lambda_F}
+  \quad(\because\ \text{帰納法の仮定})\\
+&=F^{(n+1)\lambda_F}
+  \quad(\because\ \blkref{claim_iterate_monoid_one_period_step_composition}).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "iterate_monoid_conjugacy_claim_preserves_tree_depth",
     kind: "claim",
     title: { text: "共役全単射は根への深さを保存する" },
@@ -408,19 +456,44 @@ h\circ R_F^{n+1}
       paragraph(["である。"]),
     ],
     proof: [
-      paragraph(["各 ", math(String.raw`n\in\mathbb N`), " について"]),
+      paragraph([
+        "まず ", math(String.raw`y\in B_F(q)`), " より ",
+        math(String.raw`E_F(y)=q`), " である（",
+        ref("def_iterate_monoid_stable_fiber"), "）。",
+      ]),
       displayMath(String.raw`\begin{aligned}
-R_F^n(y)=q
-&\Longleftrightarrow h(R_F^n(y))=h(q)
-  \quad(\because\ h\ \text{の単射性})\\
-&\Longleftrightarrow R_G^n(h(y))=h(q)
-  \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_one_period_iterates}).
+E_G(h(y))
+&=h(E_F(y))
+  \quad(\because\ h\circ E_F=E_G\circ h\ \text{を}\ y\ \text{で評価する。}\ \blkref{claim_iterate_monoid_conjugacy_transports_cycle_idempotent})\\
+&=h(q)
+  \quad(\because\ E_F(y)=q).
 \end{aligned}`),
       paragraph([
-        "よって ", math(String.raw`\{n\in\mathbb N\mid R_F^n(y)=q\}`), " と ",
-        math(String.raw`\{n\in\mathbb N\mid R_G^n(h(y))=h(q)\}`),
-        " は等しい。この等しい空でない自然数集合の最小元は等しいので、",
-        ref("def_iterate_monoid_fiber_tree_depth"), " により結論を得る。",
+        "よって ", ref("claim_iterate_monoid_stable_fiber_unique_representative"),
+        " により ", math(String.raw`h(y)`), " の属する安定ファイバーの添字は ",
+        math(String.raw`h(q)`), " であり、", ref("def_iterate_monoid_fiber_tree_depth"),
+        " により ", math(String.raw`d_G(h(y))=\min\{\,d\in\mathbb N\mid G^{d\lambda_G}(h(y))=h(q)\,\}`),
+        " である。次に、各 ", math(String.raw`d\in\mathbb N`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+F^{d\lambda_F}(y)=q
+&\Longleftrightarrow R_F^d(y)=q
+  \quad(\because\ R_F^d=F^{d\lambda_F}\ \text{を}\ y\ \text{で評価する。}\ \blkref{claim_iterate_monoid_conjugacy_one_period_iterate_power})\\
+&\Longleftrightarrow h(R_F^d(y))=h(q)
+  \quad(\because\ h\ \text{の単射性})\\
+&\Longleftrightarrow R_G^d(h(y))=h(q)
+  \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_one_period_iterates}\ \text{を}\ y\ \text{で評価する})\\
+&\Longleftrightarrow G^{d\lambda_G}(h(y))=h(q)
+  \quad(\because\ R_G^d=G^{d\lambda_G}\ \text{を}\ h(y)\ \text{で評価する。}\ \blkref{claim_iterate_monoid_conjugacy_one_period_iterate_power}).
+\end{aligned}`),
+      paragraph([
+        "よって ", math(String.raw`\{d\in\mathbb N\mid F^{d\lambda_F}(y)=q\}`), " と ",
+        math(String.raw`\{d\in\mathbb N\mid G^{d\lambda_G}(h(y))=h(q)\}`),
+        " は等しい。前者は ", ref("def_iterate_monoid_fiber_tree_depth"),
+        " が示すとおり空でない（", ref("claim_iterate_monoid_one_period_map_reaches_root"),
+        "）。等しい空でない自然数集合の最小元は等しいので、",
+        ref("def_iterate_monoid_fiber_tree_depth"), " の最小元として ",
+        math(String.raw`d_G(h(y))=d_F(y)`), " である。",
       ]),
     ],
   },

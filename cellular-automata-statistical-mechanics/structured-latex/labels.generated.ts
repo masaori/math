@@ -36,6 +36,7 @@ export const ALL_LABELS = [
   "claim_iterate_monoid_before_rounded_preperiod_not_root",
   "claim_iterate_monoid_conjugacy_invariant_family_finite_decidability",
   "claim_iterate_monoid_conjugacy_iterate_equality_equivalence",
+  "claim_iterate_monoid_conjugacy_one_period_iterate_power",
   "claim_iterate_monoid_conjugacy_preserves_collision_start",
   "claim_iterate_monoid_conjugacy_preserves_minimal_period",
   "claim_iterate_monoid_conjugacy_preserves_tree_branching",
