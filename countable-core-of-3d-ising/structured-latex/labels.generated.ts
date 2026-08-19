@@ -56,6 +56,7 @@ export const ALL_LABELS = [
   "claim_tail_agreement_is_equivalence_relation",
   "claim_tail_agreement_is_sufficient_for_limit_quantity",
   "claim_two_dimensional_boundary_response_even_subgraph_sum",
+  "claim_two_dimensional_boundary_response_pfaffian_prediction",
   "def_bipartite_successor_system",
   "def_boundary_response_polynomial",
   "def_box",

@@ -4193,4 +4193,80 @@ a'_L(1)
       ]),
     ],
   },
+  {
+    id: "prediction_stream_claim_two_dimensional_boundary_response_pfaffian_prediction",
+    kind: "claim",
+    title: { text: "2 次元の境界応答多項式は分母を消去した Pfaffian で書ける" },
+    labels: ["claim_two_dimensional_boundary_response_pfaffian_prediction"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([
+        "整数 ",
+        math(String.raw`L\ge2`),
+        " と内箱 ",
+        math(String.raw`V^{(2)}_{L'}\subset V^{(2)}_L`),
+        " を固定し、",
+        math(String.raw`A:=A^{(2)}_{L,L'}`),
+        " と書く。有限平面グラフ ",
+        math(String.raw`(V^{(2)}_L,A)`),
+        " の Fisher terminal graph を ",
+        math(String.raw`\Gamma_{L,L'}`),
+        " とする。このグラフには Kasteleyn 向き付け ",
+        math(String.raw`K`),
+        " と符号 ",
+        math(String.raw`\epsilon_{L,L'}\in\{-1,1\}`),
+        " が存在する。terminal graph の内部辺へ重み ",
+        math(String.raw`1`),
+        "、元の辺 ",
+        math(String.raw`e\in A`),
+        " に対応する外部辺へ重み ",
+        math(String.raw`(1+X_e)/(1-X_e)`),
+        " を置いて得る歪隣接行列を ",
+        math(String.raw`M^K_{L,L'}`),
+        " と書くと、有理関数体上の等式",
+      ]),
+      displayMath(
+        String.raw`2^{\#A}R^{(2)}_{L,L'}
+=\epsilon_{L,L'}\,2^{\#V^{(2)}_L}
+\left(\prod_{e\in A}(1-X_e)\right)\operatorname{Pf}(M^K_{L,L'})`,
+      ),
+      paragraph([
+        "が成り立つ。右辺では分母がすべて消え、",
+        math(String.raw`\mathbb Z[(X_e)_{e\in A}]`),
+        " の多項式になる。これは測定前の予言であり、2 次元の境界応答多項式は、有限な歪行列の Pfaffian と明示的な一次因子の積から復元できる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Fisher terminal graph の構成では、",
+        math(String.raw`(V^{(2)}_L,A)`),
+        " の偶部分グラフ ",
+        math(String.raw`F\subseteq A`),
+        " と ",
+        math(String.raw`\Gamma_{L,L'}`),
+        " の完全マッチングが有限全単射で対応する。この対応で、選ばれていない辺 ",
+        math(String.raw`e\in A\setminus F`),
+        " に対応する外部辺だけが完全マッチングへ入り、内部辺の重みはすべて ",
+        math(String.raw`1`),
+        " である。したがって完全マッチングの重みの有限和を ",
+        math(String.raw`D_{L,L'}`),
+        " と書けば、分配法則だけで",
+      ]),
+      displayMath(
+        String.raw`\left(\prod_{e\in A}(1-X_e)\right)D_{L,L'}
+=\sum_{\substack{F\subseteq A\\F\text{ は偶}}}
+\left(\prod_{e\in F}(1-X_e)\right)
+\left(\prod_{e\in A\setminus F}(1+X_e)\right)`,
+      ),
+      paragraph([
+        "を得る。terminal graph は平面なので Kasteleyn 向き付けが存在し、その向き付けでは Pfaffian 展開に現れる全完全マッチングの符号が一つの符号 ",
+        math(String.raw`\epsilon_{L,L'}`),
+        " に一致する。Pfaffian は行列成分の有限和・有限積で定義されるため、この符号の一致を有理関数の重みへそのまま適用でき、",
+        math(String.raw`D_{L,L'}=\epsilon_{L,L'}\operatorname{Pf}(M^K_{L,L'})`),
+        " である。これと上の有限恒等式、および ",
+        ref("claim_two_dimensional_boundary_response_even_subgraph_sum"),
+        " を順に代入して主張の等式を得る。等式の左辺が整数係数多項式なので、右辺の分母も消えている。実数への代入、絶対値、極限は使っていない。",
+      ]),
+    ],
+  },
 ]);
