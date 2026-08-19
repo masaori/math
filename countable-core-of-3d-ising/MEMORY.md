@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-19 17:05: 締切内に割った先頭も閉じた。交差べき主張の Lean 必要十分版の抽象版 `cross_power_equality_implies_root_equality_abstract` を、モノイドのべき乗則と `N*M` 乗写像の単射性だけで形式化（正値性・順序・実数・可換性を落とした。build・sorry 検査 249 件通過）。次 tick は具体版を特殊化として導出し status を `Lean 必要十分版まで` へ。
 - 2026-08-19 17:03: 開始が締切 8 分前。レビュー（`npm run check` 再実行、111 ブロック・210 参照）修正なし。本文未変更、PDF 再生成。本流「有限箱値の交差べき等式は極限量に対して十分である」先頭主張の Lean 必要十分版を二つへ割った：先頭は「べき乗が単射になる順序構造だけを仮定に残す抽象版 `cross_power_equality_implies_root_equality_abstract` を置けるか判断して形式化（既存の必要十分版の再利用可否も判断）」、次に「具体版の特殊化としての導出と status 更新」。次 tick は割った先頭から。並行は締切のため見送り。
 - 2026-08-19 16:32: 本流「有限箱値の交差べき等式は極限量に対して十分である」の先頭主張の Lean 具体版を閉じ status `Lean 具体版まで`。`cross_power_equality_implies_posRoot_equality` で、正の乗根の $NM$ 乗を本文と同じ六段で一致させ、正の自然数乗の単射性から結論した。レビューは本文・SageMath・既存乗根補題の照合で修正なし。次 tick は Lean 必要十分版、並行は terminal graph への特殊化と分母消去。
 - 2026-08-19 16:03: 本流「有限箱値の交差べき等式は極限量に対して十分である」の先頭主張の SageMath 検証を通し status `記述と SageMath まで`。check `cross-power-equality-implies-root-equality/` で乗根が正有理数の三例の証明各行・単射性の有限標本・負例検出を `QQ` で厳密確認（linkage 43 件）。レビュー（`npm run check` 再実行、111 ブロック・210 参照）修正なし。次 tick の本流は Lean 具体版、並行は terminal graph への特殊化と分母消去（締切のため見送り）。
