@@ -2911,4 +2911,51 @@ p\nmid a\ \text{かつ}\ p\nmid b
       ]),
     ],
   },
+  {
+    id: "quotient_tower_definition_two_stage_ising_coefficient_valuation_difference_logarithmic_value",
+    kind: "definition",
+    title: { text: "固定次数における二段 Ising 係数付値差の対数順序群値" },
+    labels: ["def_quotient_tower_two_stage_ising_coefficient_valuation_difference_logarithmic_value"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/two-stage-quotient-tower-ising-coefficient-valuation-difference-logarithmic-value"],
+    statement: [
+      paragraph([
+        "素数全体の集合を ",
+        math(String.raw`\mathcal P`),
+        " とし、各 ",
+        math(String.raw`p\in\mathcal P`),
+        " に形式的生成元 ",
+        math(String.raw`\ell_p`),
+        " を割り当てる。有限台をもつ整数係数写像全体からなる対数順序群を",
+      ]),
+      displayMath(String.raw`\Lambda
+:=
+\bigoplus_{p\in\mathcal P}\mathbb Z\,\ell_p`),
+      paragraph([
+        "と書く。",
+        ref("theorem_quotient_tower_two_stage_ising_coefficient_valuation_difference_finite_support"),
+        " の次数 ",
+        math(String.raw`m\in\mathbb N`),
+        " を固定する。この次数における二段 Ising 係数付値差の対数順序群値を",
+      ]),
+      displayMath(String.raw`\Delta\mathcal L_{\mathcal T}(m)
+:=
+\sum_{p\in\operatorname{Supp}_{\Delta\nu_{\mathcal T}}(m)}
+\Delta\nu_{\mathcal T}(m,p)\,\ell_p
+\in\Lambda`),
+      paragraph([
+        "で定める。",
+        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_difference_map"),
+        " より各係数 ",
+        math(String.raw`\Delta\nu_{\mathcal T}(m,p)`),
+        " は整数であり、",
+        ref("theorem_quotient_tower_two_stage_ising_coefficient_valuation_difference_finite_support"),
+        " より和の添字集合は有限である。したがって右辺は有限台をもつ整数係数写像を一意に定め、表示した ",
+        math(String.raw`\Lambda`),
+        " に属する。台が空のときは ",
+        math(String.raw`\Lambda`),
+        " の零元とする。この定義は対数順序群の順序、実対数、完全因数分解、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
