@@ -927,6 +927,17 @@ targets=(
   CellularAutomata.RecursivePreimageTreeCode.baseWord_transport
   CellularAutomata.RecursivePreimageTreeCode.image_periodicOrbit
   CellularAutomata.RecursivePreimageTreeCode.componentCode_transport
+  CellularAutomata.RecursivePreimageTreeCode.iterate_add
+  CellularAutomata.RecursivePreimageTreeCode.iterate_minPeriod_eq_self
+  CellularAutomata.RecursivePreimageTreeCode.iterate_mul_minPeriod_eq_self
+  CellularAutomata.RecursivePreimageTreeCode.mem_periodicOrbit_iff_exists
+  CellularAutomata.RecursivePreimageTreeCode.mem_periodicOrbit_self
+  CellularAutomata.RecursivePreimageTreeCode.isPeriodicPoint_of_mem_periodicOrbit
+  CellularAutomata.RecursivePreimageTreeCode.periodicOrbit_eq_of_mem
+  CellularAutomata.RecursivePreimageTreeCode.componentCode_eq_of_mem
+  CellularAutomata.RecursivePreimageTreeCode.mem_periodicOrbitTable_iff
+  CellularAutomata.RecursivePreimageTreeCode.image_periodicOrbitTable
+  CellularAutomata.RecursivePreimageTreeCode.mapCode_transport
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"

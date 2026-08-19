@@ -4,8 +4,9 @@
 structured-latex/content/recursive-preimage-tree-code.ts。
 
 このファイルでは、人手証明の定義順に、非周期一段前像、最小前周期の増分と
-有限上界、有限深さの入れ子多重集合符号、周期軌道と写像符号を形式化する。
-共役不変性・符号一致からの再帰構成・完全性は後半で形式化する。
+有限上界、有限深さの入れ子多重集合符号、周期軌道と写像符号を形式化し、
+共役不変性（写像符号の保存まで）を証明する。
+符号一致からの再帰構成・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -100,6 +101,100 @@ noncomputable def periodicOrbitTable : Finset (Finset (V → State)) :=
 noncomputable def mapCode : Multiset (Finset (List ℕ)) :=
   (periodicOrbitTable N f).val.map fun orbit =>
     if h : orbit.Nonempty then componentCode N f h.choose else ∅
+
+/-- 反復の加法則 `F^{m+n} = F^m ∘ F^n`（`m` の帰納法）。 -/
+theorem iterate_add (m n : ℕ) (y : V → State) :
+    iterate N f (m + n) y = iterate N f m (iterate N f n y) := by
+  induction m with
+  | zero => rw [Nat.zero_add, iterate_zero]
+  | succ m ih => rw [Nat.succ_add, iterate_succ, ih, iterate_succ]
+
+/-- 周期点は最小周期回の反復で自分自身へ戻る
+    （最小前周期が零であることと周期性の組の定義による）。 -/
+theorem iterate_minPeriod_eq_self (q : V → State) (hq : IsPeriodicPoint N f q) :
+    iterate N f (minPeriod N f q) q = q := by
+  have hμ : minPreperiod N f q = 0 := (isPeriodicPoint_iff_minPreperiod_zero N f q).1 hq
+  have hpair := minPeriod_spec N f q
+  rw [isPeriodicityPair_iff_collision] at hpair
+  have hcol := hpair.2
+  rw [hμ, Nat.zero_add, iterate_zero] at hcol
+  exact hcol
+
+/-- 周期点は最小周期の倍数回の反復で自分自身へ戻る（倍数の帰納法）。 -/
+theorem iterate_mul_minPeriod_eq_self (q : V → State)
+    (hq : IsPeriodicPoint N f q) (k : ℕ) :
+    iterate N f (k * minPeriod N f q) q = q := by
+  induction k with
+  | zero => rw [Nat.zero_mul, iterate_zero]
+  | succ k ih =>
+      rw [Nat.succ_mul, iterate_add, iterate_minPeriod_eq_self N f q hq]
+      exact ih
+
+/-- 周期点の周期軌道の所属は、反復回数の存在量化と同値である
+    （反復回数を最小周期で割った剰余に取り替える）。 -/
+theorem mem_periodicOrbit_iff_exists (q z : V → State) (hq : IsPeriodicPoint N f q) :
+    z ∈ periodicOrbit N f q ↔ ∃ n : ℕ, iterate N f n q = z := by
+  constructor
+  · intro hz
+    obtain ⟨n, _, hn⟩ := Finset.mem_image.mp hz
+    exact ⟨n, hn⟩
+  · rintro ⟨n, rfl⟩
+    have hlam : 0 < minPeriod N f q := one_le_minPeriod N f q
+    refine Finset.mem_image.mpr
+      ⟨n % minPeriod N f q, Finset.mem_range.mpr (Nat.mod_lt n hlam), ?_⟩
+    conv_rhs => rw [← Nat.mod_add_div' n (minPeriod N f q)]
+    rw [iterate_add, iterate_mul_minPeriod_eq_self N f q hq]
+
+/-- 周期点はその周期軌道に属する。 -/
+theorem mem_periodicOrbit_self (q : V → State) (hq : IsPeriodicPoint N f q) :
+    q ∈ periodicOrbit N f q :=
+  (mem_periodicOrbit_iff_exists N f q q hq).2 ⟨0, rfl⟩
+
+/-- 周期軌道の元は周期点である（基点の最小周期が周期の証人になる）。 -/
+theorem isPeriodicPoint_of_mem_periodicOrbit (q z : V → State)
+    (hq : IsPeriodicPoint N f q) (hz : z ∈ periodicOrbit N f q) :
+    IsPeriodicPoint N f z := by
+  obtain ⟨n, rfl⟩ := (mem_periodicOrbit_iff_exists N f q z hq).1 hz
+  refine ⟨minPeriod N f q, one_le_minPeriod N f q, ?_⟩
+  rw [← iterate_add, Nat.add_comm, iterate_add, iterate_minPeriod_eq_self N f q hq]
+
+/-- 周期軌道はその任意の元を基点にしても変わらない
+    （基点から届く元は取り替えた基点からも届き、逆向きは周期で一周して戻る）。 -/
+theorem periodicOrbit_eq_of_mem (q z : V → State)
+    (hq : IsPeriodicPoint N f q) (hz : z ∈ periodicOrbit N f q) :
+    periodicOrbit N f z = periodicOrbit N f q := by
+  obtain ⟨n, hn⟩ := (mem_periodicOrbit_iff_exists N f q z hq).1 hz
+  have hzper := isPeriodicPoint_of_mem_periodicOrbit N f q z hq hz
+  have hlam : 1 ≤ minPeriod N f q := one_le_minPeriod N f q
+  have hle : n ≤ n * minPeriod N f q := by
+    calc n = n * 1 := (Nat.mul_one n).symm
+    _ ≤ n * minPeriod N f q := Nat.mul_le_mul_left n hlam
+  have hreach : iterate N f (n * minPeriod N f q - n) z = q := by
+    rw [← hn, ← iterate_add]
+    have hsum : n * minPeriod N f q - n + n = n * minPeriod N f q := by omega
+    rw [hsum, iterate_mul_minPeriod_eq_self N f q hq]
+  ext u
+  rw [mem_periodicOrbit_iff_exists N f z u hzper,
+    mem_periodicOrbit_iff_exists N f q u hq]
+  constructor
+  · rintro ⟨m, rfl⟩
+    exact ⟨m + n, by rw [iterate_add, hn]⟩
+  · rintro ⟨k, rfl⟩
+    exact ⟨k + (n * minPeriod N f q - n), by rw [iterate_add, hreach]⟩
+
+/-- 成分符号は周期軌道の基点の取り方に依存しない
+    （`def_recursive_preimage_tree_code_component_code` の基点非依存性）。 -/
+theorem componentCode_eq_of_mem (q z : V → State)
+    (hq : IsPeriodicPoint N f q) (hz : z ∈ periodicOrbit N f q) :
+    componentCode N f z = componentCode N f q := by
+  unfold componentCode
+  rw [periodicOrbit_eq_of_mem N f q z hq hz]
+
+/-- 周期軌道の有限表の所属の言い換え。 -/
+theorem mem_periodicOrbitTable_iff (O : Finset (V → State)) :
+    O ∈ periodicOrbitTable N f ↔
+      ∃ q, IsPeriodicPoint N f q ∧ periodicOrbit N f q = O := by
+  simp [periodicOrbitTable]
 
 section ConjugacyTransport
 
@@ -253,6 +348,43 @@ theorem componentCode_transport (q : V → State) :
   simp only [componentCode]
   rw [← image_periodicOrbit N f NW fW h hconj q, Finset.image_image]
   exact Finset.image_congr fun r _ => baseWord_transport N f NW fW h hconj r
+
+/-- 共役全単射は周期軌道の有限表全体を全単射に移す。 -/
+theorem image_periodicOrbitTable :
+    (periodicOrbitTable N f).image (Finset.image h) = periodicOrbitTable NW fW := by
+  ext O
+  rw [mem_periodicOrbitTable_iff]
+  constructor
+  · intro hO
+    obtain ⟨P, hP, rfl⟩ := Finset.mem_image.mp hO
+    obtain ⟨q, hq, rfl⟩ := (mem_periodicOrbitTable_iff N f P).1 hP
+    exact ⟨h q, (isPeriodicPoint_iff N f NW fW h hconj q).1 hq,
+      (image_periodicOrbit N f NW fW h hconj q).symm⟩
+  · rintro ⟨q', hq', rfl⟩
+    obtain ⟨z, rfl⟩ := h.surjective q'
+    have hz : IsPeriodicPoint N f z := (isPeriodicPoint_iff N f NW fW h hconj z).2 hq'
+    exact Finset.mem_image.mpr ⟨periodicOrbit N f z,
+      (mem_periodicOrbitTable_iff N f _).2 ⟨z, hz, rfl⟩,
+      image_periodicOrbit N f NW fW h hconj z⟩
+
+/-- 共役全単射は写像全体の符号を保存する
+    （`claim_recursive_preimage_tree_code_conjugacy_invariance` の結論）。 -/
+theorem mapCode_transport : mapCode NW fW = mapCode N f := by
+  unfold mapCode
+  rw [← image_periodicOrbitTable N f NW fW h hconj,
+    Finset.image_val_of_injOn (Finset.image_injective h.injective).injOn,
+    Multiset.map_map]
+  refine Multiset.map_congr rfl fun O hO => ?_
+  have hOmem : O ∈ periodicOrbitTable N f := hO
+  obtain ⟨q, hq, rfl⟩ := (mem_periodicOrbitTable_iff N f O).1 hOmem
+  have hne : (periodicOrbit N f q).Nonempty := ⟨q, mem_periodicOrbit_self N f q hq⟩
+  have hneW : ((periodicOrbit N f q).image h).Nonempty := hne.image h
+  simp only [Function.comp_apply]
+  rw [dif_pos hneW, dif_pos hne]
+  obtain ⟨z, hzmem, hzeq⟩ := Finset.mem_image.mp hneW.choose_spec
+  rw [← hzeq, componentCode_transport N f NW fW h hconj z,
+    componentCode_eq_of_mem N f q z hq hzmem,
+    componentCode_eq_of_mem N f q hne.choose hq hne.choose_spec]
 
 end ConjugacyTransport
 
