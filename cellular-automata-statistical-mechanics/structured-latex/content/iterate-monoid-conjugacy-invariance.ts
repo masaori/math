@@ -1,11 +1,9 @@
 /**
  * 章「有限大域写像の共役による安定ファイバー根付き木族の不変性」。
  * 二つの有限舞台上の 2 値 CA の大域写像を結ぶ共役全単射が、
- * 最小衝突開始位置・最小正周期・巡回冪等元を保存することを、
+ * 最小衝突開始位置・最小正周期・巡回冪等元・安定像・安定ファイバーと、
+ * 一周期写像が定める根付き木の辺・深さ・分岐個数を保存することを、
  * 有限集合、自然数、写像の合成と等号だけから導く。R / C は使わない。
- *
- * この章の現在の範囲は共役の定義と衝突・周期・冪等元の保存までである。
- * 安定像・安定ファイバー・根付き木の対応は次の層で同じ章へ追記する。
  */
 
 import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
@@ -51,6 +49,13 @@ export default defineBlocks([
         math(String.raw`e_G`), "（", ref("def_iterate_monoid_minimal_stable_period_multiple"),
         "）、巡回部の冪等元 ", math(String.raw`E_G:=G^{e_G}`), "（",
         ref("def_iterate_monoid_cycle_idempotent_candidate"),
+        "）、安定像 ", math(String.raw`Q_G`), "（", ref("def_iterate_monoid_stable_image"),
+        "）、安定ファイバー ", math(String.raw`B_G(r)`), "（",
+        ref("def_iterate_monoid_stable_fiber"), "）、一周期写像 ",
+        math(String.raw`R_G:=G^{\lambda_G}`), "（", ref("def_iterate_monoid_one_period_map"),
+        "）、根付き辺集合 ", math(String.raw`T_G(r)`), "（",
+        ref("def_iterate_monoid_fiber_tree_edges"), "）と深さ ",
+        math(String.raw`d_G(z)`), "（", ref("def_iterate_monoid_fiber_tree_depth"),
         "）は、各定義の ", math(String.raw`F`), " を ", math(String.raw`G`),
         " に置き換えて同じ文で定める。",
       ]),
@@ -252,6 +257,217 @@ n\in D_F
         math(String.raw`y`), " は任意なので ",
         math(String.raw`h\circ E_F=E_G\circ h`), " である。",
       ]),
+    ],
+  },
+  {
+    id: "iterate_monoid_conjugacy_claim_transports_stable_image",
+    kind: "claim",
+    title: { text: "共役全単射は安定像を全単射に移す" },
+    labels: ["claim_iterate_monoid_conjugacy_transports_stable_image"],
+    habitat: "finite",
+    statement: [
+      displayMath(String.raw`h(Q_F)=Q_G`),
+      paragraph(["である。したがって ", math(String.raw`h|_{Q_F}:Q_F\to Q_G`), " は全単射である。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+h(Q_F)
+&=\{h(E_F(y))\mid y\in A^V\}
+  \quad(\because\ \blkref{def_iterate_monoid_stable_image})\\
+&=\{E_G(h(y))\mid y\in A^V\}
+  \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_cycle_idempotent})\\
+&=\{E_G(z)\mid z\in A^W\}
+  \quad(\because\ h:A^V\to A^W\ \text{は全射}.\ \blkref{def_iterate_monoid_conjugacy_bijection})\\
+&=Q_G
+  \quad(\because\ \blkref{def_iterate_monoid_stable_image}).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`h`), " は全単射なので、その ", math(String.raw`Q_F`),
+        " への制限は像 ", math(String.raw`h(Q_F)=Q_G`), " への全単射である。",
+      ]),
+    ],
+  },
+  {
+    id: "iterate_monoid_conjugacy_claim_transports_stable_fibers",
+    kind: "claim",
+    title: { text: "共役全単射は安定ファイバーを全単射に移す" },
+    labels: ["claim_iterate_monoid_conjugacy_transports_stable_fibers"],
+    habitat: "finite",
+    statement: [
+      paragraph(["すべての ", math(String.raw`q\in Q_F`), " について"]),
+      displayMath(String.raw`h(B_F(q))=B_G(h(q))`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`z\in A^W`), " を任意に取る。", math(String.raw`h`), " の全射性により、", math(String.raw`z=h(y)`), " を満たす ", math(String.raw`y\in A^V`), " を取る。"]),
+      displayMath(String.raw`\begin{aligned}
+z\in h(B_F(q))
+&\Longleftrightarrow y\in B_F(q)
+  \quad(\because\ z=h(y)\ \text{と}\ h\ \text{の単射性})\\
+&\Longleftrightarrow E_F(y)=q
+  \quad(\because\ \blkref{def_iterate_monoid_stable_fiber})\\
+&\Longleftrightarrow h(E_F(y))=h(q)
+  \quad(\because\ h\ \text{の単射性})\\
+&\Longleftrightarrow E_G(h(y))=h(q)
+  \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_cycle_idempotent})\\
+&\Longleftrightarrow z\in B_G(h(q))
+  \quad(\because\ z=h(y)\ \text{と}\ \blkref{def_iterate_monoid_stable_fiber}).
+\end{aligned}`),
+      paragraph([math(String.raw`z`), " は任意なので二つの集合は等しい。"]),
+    ],
+  },
+  {
+    id: "iterate_monoid_conjugacy_claim_transports_one_period_map",
+    kind: "claim",
+    title: { text: "共役全単射は一周期写像を移送する" },
+    labels: ["claim_iterate_monoid_conjugacy_transports_one_period_map"],
+    habitat: "finite",
+    statement: [displayMath(String.raw`h\circ R_F=R_G\circ h`)],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+h\circ R_F
+&=h\circ F^{\lambda_F}
+  \quad(\because\ \blkref{def_iterate_monoid_one_period_map})\\
+&=G^{\lambda_F}\circ h
+  \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_iterates})\\
+&=G^{\lambda_G}\circ h
+  \quad(\because\ \lambda_F=\lambda_G.\ \blkref{claim_iterate_monoid_conjugacy_preserves_minimal_period})\\
+&=R_G\circ h
+  \quad(\because\ \blkref{def_iterate_monoid_one_period_map}).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "iterate_monoid_conjugacy_claim_transports_tree_edges",
+    kind: "claim",
+    title: { text: "共役全単射は根付き辺を保存し反映する" },
+    labels: ["claim_iterate_monoid_conjugacy_transports_tree_edges"],
+    habitat: "finite",
+    statement: [
+      paragraph(["すべての ", math(String.raw`q\in Q_F`), " と ", math(String.raw`y,z\in B_F(q)`), " について"]),
+      displayMath(String.raw`(y,z)\in T_F(q)\ \Longleftrightarrow\ (h(y),h(z))\in T_G(h(q))`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(y,z)\in T_F(q)
+&\Longleftrightarrow y\ne q\ \text{かつ}\ z=R_F(y)
+  \quad(\because\ \blkref{def_iterate_monoid_fiber_tree_edges})\\
+&\Longleftrightarrow h(y)\ne h(q)\ \text{かつ}\ h(z)=h(R_F(y))
+  \quad(\because\ h\ \text{の単射性})\\
+&\Longleftrightarrow h(y)\ne h(q)\ \text{かつ}\ h(z)=R_G(h(y))
+  \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_one_period_map})\\
+&\Longleftrightarrow (h(y),h(z))\in T_G(h(q))
+  \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_stable_fibers}\ \text{と}\ \blkref{def_iterate_monoid_fiber_tree_edges}).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "iterate_monoid_conjugacy_claim_transports_one_period_iterates",
+    kind: "claim",
+    title: { text: "共役全単射は一周期写像の全反復を移送する" },
+    labels: ["claim_iterate_monoid_conjugacy_transports_one_period_iterates"],
+    habitat: "finite",
+    statement: [
+      paragraph(["すべての ", math(String.raw`n\in\mathbb N`), " について"]),
+      displayMath(String.raw`h\circ R_F^n=R_G^n\circ h`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`n`), " についての帰納法で示す。基底 ", math(String.raw`n=0`), " では"]),
+      displayMath(String.raw`\begin{aligned}
+h\circ R_F^0
+&=h
+  \quad(\because\ R_F^0\ \text{は恒等写像}.\ \blkref{def_global_map_iterate})\\
+&=R_G^0\circ h
+  \quad(\because\ R_G^0\ \text{は恒等写像}.\ \blkref{def_global_map_iterate}).
+\end{aligned}`),
+      paragraph([math(String.raw`h\circ R_F^n=R_G^n\circ h`), " を仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+h\circ R_F^{n+1}
+&=h\circ R_F\circ R_F^n
+  \quad(\because\ \blkref{def_global_map_iterate})\\
+&=R_G\circ h\circ R_F^n
+  \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_one_period_map})\\
+&=R_G\circ R_G^n\circ h
+  \quad(\because\ \text{帰納法の仮定})\\
+&=R_G^{n+1}\circ h
+  \quad(\because\ \blkref{def_global_map_iterate}).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "iterate_monoid_conjugacy_claim_preserves_tree_depth",
+    kind: "claim",
+    title: { text: "共役全単射は根への深さを保存する" },
+    labels: ["claim_iterate_monoid_conjugacy_preserves_tree_depth"],
+    habitat: "N",
+    statement: [
+      paragraph(["すべての ", math(String.raw`q\in Q_F`), " と ", math(String.raw`y\in B_F(q)`), " について"]),
+      displayMath(String.raw`d_G(h(y))=d_F(y)`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph(["各 ", math(String.raw`n\in\mathbb N`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+R_F^n(y)=q
+&\Longleftrightarrow h(R_F^n(y))=h(q)
+  \quad(\because\ h\ \text{の単射性})\\
+&\Longleftrightarrow R_G^n(h(y))=h(q)
+  \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_one_period_iterates}).
+\end{aligned}`),
+      paragraph([
+        "よって ", math(String.raw`\{n\in\mathbb N\mid R_F^n(y)=q\}`), " と ",
+        math(String.raw`\{n\in\mathbb N\mid R_G^n(h(y))=h(q)\}`),
+        " は等しい。この等しい空でない自然数集合の最小元は等しいので、",
+        ref("def_iterate_monoid_fiber_tree_depth"), " により結論を得る。",
+      ]),
+    ],
+  },
+  {
+    id: "iterate_monoid_conjugacy_claim_preserves_tree_branching",
+    kind: "claim",
+    title: { text: "共役全単射は根付き木の分岐個数を保存する" },
+    labels: ["claim_iterate_monoid_conjugacy_preserves_tree_branching"],
+    habitat: "N",
+    statement: [
+      paragraph(["すべての ", math(String.raw`q\in Q_F`), " と ", math(String.raw`z\in B_F(q)`), " について"]),
+      displayMath(String.raw`|\{y\in B_F(q)\mid (y,z)\in T_F(q)\}|=|\{w\in B_G(h(q))\mid (w,h(z))\in T_G(h(q))\}|`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_iterate_monoid_conjugacy_transports_stable_fibers"), " により ",
+        math(String.raw`y\mapsto h(y)`), " は ", math(String.raw`B_F(q)`), " から ",
+        math(String.raw`B_G(h(q))`), " への全単射である。さらに ",
+        ref("claim_iterate_monoid_conjugacy_transports_tree_edges"), " により",
+      ]),
+      displayMath(String.raw`(y,z)\in T_F(q)\ \Longleftrightarrow\ (h(y),h(z))\in T_G(h(q))`),
+      paragraph(["である。したがってこの制限は等式の両辺で数えている二つの有限集合の間の全単射であり、有限集合の個数は等しい。"]),
+    ],
+  },
+  {
+    id: "iterate_monoid_conjugacy_claim_invariant_family_finite_decidability",
+    kind: "claim",
+    title: { text: "共役不変な根付き木族は有限決定できる" },
+    labels: ["claim_iterate_monoid_conjugacy_invariant_family_finite_decidability"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "有限舞台上の局所真理値表から、", math(String.raw`\mu_F,\lambda_F,E_F`),
+        "、安定像、全安定ファイバー、および各ファイバーの根付き辺・深さ・分岐個数を有限回の二値状態の等号検査で決定できる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_iterate_monoid_tail_finite_decidability"), " により ", math(String.raw`\mu_F`),
+        " を、", ref("claim_iterate_monoid_minimal_period_finite_decidability"), " により ", math(String.raw`\lambda_F`),
+        " を、", ref("claim_iterate_monoid_cycle_idempotent_finite_decidability"), " により ", math(String.raw`E_F`),
+        " を有限決定できる。", ref("claim_iterate_monoid_stable_fibers_finite_decidability"),
+        " により安定像と全ファイバーを有限決定でき、", ref("claim_iterate_monoid_fiber_tree_finite_decidability"),
+        " により各根付き木の辺・深さ・分岐個数を有限決定できる。全て有限集合上の有限走査である。",
+      ]),
+      paragraph(["この検査は有限集合と自然数だけで閉じる。実数、複素数、極限、完備化は使わない。"]),
     ],
   },
 ]);
