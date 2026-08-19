@@ -3041,4 +3041,130 @@ v_p(q)\,\ell_p
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_two_stage_ising_coefficient_ratio_logarithmic_value_compatibility",
+    kind: "theorem",
+    title: { text: "二段 Ising 係数比と付値差の対数順序群値の一致" },
+    labels: ["theorem_quotient_tower_two_stage_ising_coefficient_ratio_logarithmic_value_compatibility"],
+    habitat: "Lambda",
+    verification: ["sagemath/check/two-stage-quotient-tower-ising-coefficient-ratio-logarithmic-value-compatibility"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_ising_coefficient_pair_map"),
+        " の二段 Ising 係数対写像について、次数 ",
+        math(String.raw`m\in\mathbb N`),
+        " が ",
+        math(String.raw`\widehat\Omega_{\mathrm{fine}}(m)>0`),
+        " かつ ",
+        math(String.raw`\widehat\Omega_{\mathrm{coarse}}(m)>0`),
+        " を満たすと仮定する。このとき正有理係数比の対数順序群値は、同じ次数の付値差の対数順序群値に一致する。",
+      ]),
+      displayMath(String.raw`\log_{\Lambda}
+\left(
+  \frac{
+    \widehat\Omega_{\mathrm{fine}}(m)
+  }{
+    \widehat\Omega_{\mathrm{coarse}}(m)
+  }
+\right)
+=
+\Delta\mathcal L_{\mathcal T}(m)
+\in\Lambda.`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a:=\widehat\Omega_{\mathrm{fine}}(m)\in\mathbb N_{>0}`),
+        "、",
+        math(String.raw`b:=\widehat\Omega_{\mathrm{coarse}}(m)\in\mathbb N_{>0}`),
+        "、",
+        math(String.raw`g:=\gcd(a,b)\in\mathbb N_{>0}`),
+        " と置く。すると ",
+        math(String.raw`a/g,b/g\in\mathbb N_{>0}`),
+        " は互いに素であり、",
+        math(String.raw`a/b=(a/g)/(b/g)\in\mathbb Q_{>0}`),
+        " は既約分数表示である。",
+      ]),
+      paragraph([
+        ref("def_quotient_tower_positive_rational_logarithmic_value_map"),
+        " の素指数と ",
+        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_pair_map"),
+        " の二段付値対、および ",
+        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_difference_map"),
+        " の付値差より、各素数 ",
+        math(String.raw`p\in\mathcal P`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+v_p
+\left(
+  \frac{a}{b}
+\right)
+&=
+\left(
+  \nu_{\mathrm{fine},p}(m)-v_p(g)
+\right)
+-
+\left(
+  \nu_{\mathrm{coarse},p}(m)-v_p(g)
+\right)
+\quad\bigl(\because\ \text{既約分数の分子と分母は }a/g\text{ と }b/g\bigr),\\
+&=
+\nu_{\mathrm{fine},p}(m)
+-
+\nu_{\mathrm{coarse},p}(m)
+\quad\bigl(\because\ \text{整数の加法における相殺}\bigr),\\
+&=
+\Delta\nu_{\mathcal T}(m,p)
+\quad\bigl(\because\ \text{二段 Ising 係数付値差の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "したがって、",
+        math(String.raw`v_p(a/b)\ne0`),
+        " と ",
+        math(String.raw`\Delta\nu_{\mathcal T}(m,p)\ne0`),
+        " は同値であり、二つの有限台は同じ素数集合である。",
+      ]),
+      paragraph([
+        ref("def_quotient_tower_positive_rational_logarithmic_value_map"),
+        " より",
+      ]),
+      displayMath(String.raw`\log_{\Lambda}
+\left(
+  \frac{a}{b}
+\right)
+=
+\sum_{p\in\operatorname{Supp}_v(a/b)}
+v_p
+\left(
+  \frac{a}{b}
+\right)\ell_p
+\quad\bigl(\because\ \text{正有理数の対数順序群値写像の定義}\bigr).`),
+      displayMath(String.raw`\sum_{p\in\operatorname{Supp}_v(a/b)}
+v_p
+\left(
+  \frac{a}{b}
+\right)\ell_p
+=
+\sum_{p\in\operatorname{Supp}_{\Delta\nu_{\mathcal T}}(m)}
+\Delta\nu_{\mathcal T}(m,p)\ell_p
+\quad\bigl(\because\ \text{上で示した係数ごとの等式と台の一致}\bigr).`),
+      paragraph([
+        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_difference_logarithmic_value"),
+        " より",
+      ]),
+      displayMath(String.raw`\sum_{p\in\operatorname{Supp}_{\Delta\nu_{\mathcal T}}(m)}
+\Delta\nu_{\mathcal T}(m,p)\ell_p
+=
+\Delta\mathcal L_{\mathcal T}(m)
+\quad\bigl(\because\ \text{付値差の対数順序群値の定義}\bigr).`),
+      paragraph([
+        math(String.raw`a=\widehat\Omega_{\mathrm{fine}}(m)`),
+        " と ",
+        math(String.raw`b=\widehat\Omega_{\mathrm{coarse}}(m)`),
+        " を戻すと主張を得る。全ての係数は正整数、比は正有理数、素指数と付値差は整数、二つの台は有限集合、両辺は ",
+        math(String.raw`\Lambda`),
+        " に属する。実対数、完全因数分解、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
