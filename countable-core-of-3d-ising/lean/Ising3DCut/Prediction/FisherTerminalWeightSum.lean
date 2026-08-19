@@ -64,4 +64,37 @@ theorem fisherExternalEdgeWeights_cleared
       intro edge hedge
       exact fisherExternalEdgeWeight_cleared (x edge) (hDenominator edge hedge)
 
+/-- 一つの完全マッチングの外部辺集合が全外部辺集合に含まれるとき、
+全外部辺の共通分母 `∏ (1 - x)` を掛けた分母消去後の重みは、
+マッチング辺の因子 `1 + x` と非マッチング辺の因子 `1 - x` の積になる。
+これは `terminalMatching_clearedWeightSum_eq_evenSubgraph_weightSum` の
+仮定 `hClearedWeight` を Fisher の外部辺重みで満たすための接続段である。 -/
+theorem fisherMatchingWeight_cleared
+    {Edge K : Type*} [Field K] [DecidableEq Edge]
+    (allEdges matchEdges : Finset Edge) (hSubset : matchEdges ⊆ allEdges)
+    (x : Edge → K)
+    (hDenominator : ∀ edge ∈ allEdges, 1 - x edge ≠ 0) :
+    (∏ edge ∈ allEdges, (1 - x edge)) *
+        (∏ edge ∈ matchEdges, ((1 + x edge) / (1 - x edge))) =
+      (∏ edge ∈ matchEdges, (1 + x edge)) *
+        ∏ edge ∈ allEdges \ matchEdges, (1 - x edge) := by
+  calc
+    (∏ edge ∈ allEdges, (1 - x edge)) *
+        (∏ edge ∈ matchEdges, ((1 + x edge) / (1 - x edge))) =
+      ((∏ edge ∈ allEdges \ matchEdges, (1 - x edge)) *
+          ∏ edge ∈ matchEdges, (1 - x edge)) *
+        (∏ edge ∈ matchEdges, ((1 + x edge) / (1 - x edge))) := by
+      rw [Finset.prod_sdiff hSubset]
+    _ = (∏ edge ∈ allEdges \ matchEdges, (1 - x edge)) *
+        ((∏ edge ∈ matchEdges, (1 - x edge)) *
+          ∏ edge ∈ matchEdges, ((1 + x edge) / (1 - x edge))) := by
+      rw [mul_assoc]
+    _ = (∏ edge ∈ allEdges \ matchEdges, (1 - x edge)) *
+        ∏ edge ∈ matchEdges, (1 + x edge) := by
+      rw [fisherExternalEdgeWeights_cleared matchEdges x
+        (fun edge hedge ↦ hDenominator edge (hSubset hedge))]
+    _ = (∏ edge ∈ matchEdges, (1 + x edge)) *
+        ∏ edge ∈ allEdges \ matchEdges, (1 - x edge) := by
+      rw [mul_comm]
+
 end Ising3DCut.Prediction

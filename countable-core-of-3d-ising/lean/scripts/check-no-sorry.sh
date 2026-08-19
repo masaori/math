@@ -215,6 +215,11 @@ targets=(
   Ising3DCut.LimitQuantity.tailAgreement_limitQuantity_tendsto
   Ising3DCut.LimitQuantity.tailAgreement_limitQuantity_eq
   Ising3DCut.Prediction.terminalMatching_weightSum_eq_evenSubgraph_weightSum
+  Ising3DCut.Prediction.terminalMatching_clearedWeightSum_eq_evenSubgraph_weightSum
+  Ising3DCut.Prediction.fisherExternalEdgeWeight_cleared
+  Ising3DCut.Prediction.fisherExternalEdgeWeights_cleared
+  Ising3DCut.Prediction.fisherMatchingWeight_cleared
+  Ising3DCut.Prediction.constantSign_finiteExpansion
   Ising3DCut.LimitQuantity.tendsto_congr_of_pointwise_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_data_eq
   Ising3DCut.LimitQuantity.limitQuantity_eq_of_data_eq
