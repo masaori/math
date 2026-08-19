@@ -956,8 +956,11 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
         " について",
       ]),
       displayMath(
-        String.raw`\left(\begin{pmatrix}A_0, & B_0\end{pmatrix}G\right)H
-= \begin{pmatrix}A_0, & B_0\end{pmatrix}\left(GH\right)`,
+        String.raw`\begin{aligned}
+\left(\begin{pmatrix}A_0, & B_0\end{pmatrix}G\right)H
+&= \begin{pmatrix}A_0, & B_0\end{pmatrix}\left(GH\right)
+   \quad (\because \text{行列の積の結合法則})
+\end{aligned}`,
       ),
       paragraph([
         "が成り立つ（結合律）。実際 ",
@@ -996,9 +999,17 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
         " について",
       ]),
       displayMath(
-        String.raw`T_{(V^{(+)})}\!\left(\begin{pmatrix}A_0, & B_0\end{pmatrix}G\right)
-:= \left(T_{(V^{(+)})}\!\left(g_{11}A_0 + g_{21}B_0\right),\ T_{(V^{(+)})}\!\left(g_{12}A_0 + g_{22}B_0\right)\right)
-= \begin{pmatrix}T_{(V^{(+)})}(A_0), & T_{(V^{(+)})}(B_0)\end{pmatrix}G`,
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}\!\left(\begin{pmatrix}A_0, & B_0\end{pmatrix}G\right)
+&:= \left(T_{(V^{(+)})}\!\left(g_{11}A_0 + g_{21}B_0\right),\
+T_{(V^{(+)})}\!\left(g_{12}A_0 + g_{22}B_0\right)\right)
+   \quad (\because \text{行ベクトルへの作用の定め方}) \\
+&= \left(g_{11}T_{(V^{(+)})}(A_0)+g_{21}T_{(V^{(+)})}(B_0),\
+g_{12}T_{(V^{(+)})}(A_0)+g_{22}T_{(V^{(+)})}(B_0)\right)
+   \quad (\because T_{(V^{(+)})}\text{ の線型性を 2 列へ同時適用}) \\
+&= \begin{pmatrix}T_{(V^{(+)})}(A_0), & T_{(V^{(+)})}(B_0)\end{pmatrix}G
+   \quad (\because \text{行ベクトルと }2\times2\text{ 行列の積の定義})
+\end{aligned}`,
       ),
       paragraph([
         "が成り立つ（各列に線型性を使った。",
@@ -1020,33 +1031,45 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
         String.raw`\begin{aligned}
 \begin{pmatrix}T_{(V^{(+)})}(\check\psi_\mu^\dagger), & T_{(V^{(+)})}(\check\psi_\mu)\end{pmatrix}
 &= T_{(V^{(+)})}\!\left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)
-   \quad (\because \text{def\_check\_fermi}) \\
+   \quad (\because \check\psi_\mu,\check\psi_\mu^\dagger\text{ の定義}) \\
 &= \begin{pmatrix}T_{(V^{(+)})}(\check{Z}_\mu), & T_{(V^{(+)})}(\check{Y}_\mu)\end{pmatrix}\check{P}_\mu
    \quad (\because \text{Step 1}) \\
 &= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}A(\tilde\theta_\mu)\right)\check{P}_\mu
-   \quad (\because \text{T\_V\_plus\_check\_Z\_Y}) \\
+   \quad (\because T_{(V^{(+)})}\text{ の }\check Z,\check Y\text{ への作用}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(A(\tilde\theta_\mu)\check{P}_\mu\right)
-   \quad (\because \text{結合律}) \\
+   \quad (\because \text{行ベクトルと行列の積の結合法則}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    \left(\check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}\check{P}_\mu\right)
    \quad (\because A(\tilde\theta_\mu) = \check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(\check{P}_\mu\check{D}_\mu\right)
    \quad (\because \check{P}_\mu^{-1}\check{P}_\mu = I_{\mathrm{Mat}(2,\mathbb{C})}) \\
 &= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\check{D}_\mu
-   \quad (\because \text{結合律}) \\
+   \quad (\because \text{行ベクトルと行列の積の結合法則}) \\
 &= \begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{D}_\mu
-= \begin{pmatrix}\lambda_{+,\mu}\,\check\psi_\mu^\dagger, & \lambda_{-,\mu}\,\check\psi_\mu\end{pmatrix}
+   \quad (\because \check\psi_\mu,\check\psi_\mu^\dagger\text{ の定義}) \\
+&= \begin{pmatrix}\lambda_{+,\mu}\,\check\psi_\mu^\dagger, & \lambda_{-,\mu}\,\check\psi_\mu\end{pmatrix}
+   \quad (\because \check D_\mu\text{ は対角成分 }\lambda_{+,\mu},\lambda_{-,\mu}\text{ の対角行列})
 \end{aligned}`,
       ),
       paragraph([
-        "最後の等号は ",
-        math(String.raw`\check{D}_\mu = \begin{pmatrix}\lambda_{+,\mu} & 0 \\ 0 & \lambda_{-,\mu}\end{pmatrix}`),
-        " が対角行列であることによる。両辺の第 1 列・第 2 列を比べ、",
+        "両辺の第 1 列・第 2 列を比べ、",
         ref("lambda_eq_exp_gamma_theta_tilde"),
-        " の ",
-        math(String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\tilde\theta_\mu)}`),
-        " を代入して statement を得る。",
+        " を各列へ代入すると",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right)
+&= \lambda_{+,\mu}\check\psi_\mu^\dagger
+   \quad (\because \text{上の行ベクトルの等式の第 1 列}) \\
+&= e^{+\gamma(\tilde\theta_\mu)}\check\psi_\mu^\dagger
+   \quad (\because \lambda_{+,\mu}=e^{+\gamma(\tilde\theta_\mu)}),\\[4pt]
+T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
+&= \lambda_{-,\mu}\check\psi_\mu
+   \quad (\because \text{上の行ベクトルの等式の第 2 列}) \\
+&= e^{-\gamma(\tilde\theta_\mu)}\check\psi_\mu
+   \quad (\because \lambda_{-,\mu}=e^{-\gamma(\tilde\theta_\mu)})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
@@ -1054,6 +1077,8 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
         "008 章の commutation_V_psi の半整数運動量版。008 章は行ベクトル×行列の結合律を暗黙に使っていたが、" +
           "本章では行ベクトル×行列の積を calc_of_TxT_check_Z_Y の定義で入れているので、結合律を proof の冒頭で明示的に確かめた。",
         "数値検証: sagemath/check/049_claim_even_sector_fermions/check_03（V^{(+)} を行列指数関数から直接構成して共役を計算）。",
+        "2026-08-19 の式変形統一で、行ベクトルへの線型作用の一行二等号を定義と線型性の三段へ分け、" +
+          "転送行列作用の鎖の機械識別子を人間可読な根拠へ直し、末尾の二等号と固有値の指数表示への代入を各列の一続きの鎖へ開いた。内容と参照は変えていない。",
       ],
     },
   },
