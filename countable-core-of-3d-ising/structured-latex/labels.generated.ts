@@ -51,6 +51,7 @@ export const ALL_LABELS = [
   "claim_rational_values_determine_partition_polynomial",
   "claim_roots_leading_coefficient_multiplicities_determine_polynomial",
   "claim_same_partition_different_pair_data",
+  "claim_shifted_free_family_cross_power_equality_fails_at_two",
   "claim_shifted_free_family_discriminant_does_not_determine_limit_quantity",
   "claim_shifted_free_family_factorization_type_does_not_determine_limit_quantity",
   "claim_shifted_free_family_galois_group_does_not_determine_limit_quantity",

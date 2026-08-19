@@ -4454,6 +4454,118 @@ x^{NM}&=(x^N)^M &&(\because\ \text{自然数べきの積})\\
   },
 
   {
+    id: "soundness_bridge_claim_shifted_free_family_cross_power_equality_fails_at_two",
+    kind: "claim",
+    title: { text: "ずらした自由族は評価点 2 の箱 L=2 で交差べき等式が破れる" },
+    labels: ["claim_shifted_free_family_cross_power_equality_fails_at_two"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "自由境界の分配多項式の族 ",
+        math(String.raw`(Z_L)_{L\ge1}`),
+        "（",
+        ref("def_partition_polynomial"),
+        "）と、ずらした自由族 ",
+        math(String.raw`Z'_L(X):=Z_{L+1}(X)`),
+        " を取る。",
+        ref("claim_pointwise_cross_power_equality_implies_root_sequence_equality"),
+        " の記号にならい、評価点 ",
+        math(String.raw`2\in\mathbb Q_{>0}`),
+        " での値の列を ",
+        math(String.raw`A(L)=Z_L(2)`),
+        "、",
+        math(String.raw`B(L)=Z'_L(2)`),
+        "、箱の点の個数の列（",
+        ref("def_box"),
+        "）を ",
+        math(String.raw`N(L)=\#V_L=L^3`),
+        "、",
+        math(String.raw`M(L)=\#V_{L+1}=(L+1)^3`),
+        " と定める。このとき箱 ",
+        math(String.raw`L=2`),
+        " で交差べき等式は破れる。すなわち",
+      ]),
+      displayMath(String.raw`A(2)^{M(2)}=Z_2(2)^{27}\ne Z_3(2)^{8}=B(2)^{N(2)}`),
+      paragraph([
+        "である。両辺は自然数の有限回の積なので、この不一致は有限整数算術で決定可能である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "二つの値は、",
+        ref("def_partition_polynomial"),
+        " の有限和へ ",
+        math(String.raw`X=2`),
+        " を代入した自然数の有限計算で決定する。その結果は",
+      ]),
+      displayMath(
+        String.raw`Z_2(2)=36450,\qquad Z_3(2)=942223653336523266`,
+      ),
+      paragraph([
+        "である。両辺の自然数を素因数 ",
+        math(String.raw`2`),
+        " の指数で比べる。まず",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_2(2)
+&=36450
+&&(\because\ \text{上の有限計算})\\
+&=2\cdot3^6\cdot5^2
+&&(\because\ \text{自然数の素因数分解}),
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので ",
+        math(String.raw`Z_2(2)`),
+        " の素因数分解に現れる ",
+        math(String.raw`2`),
+        " の指数は ",
+        math(String.raw`1`),
+        " である。次に",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_3(2)
+&=942223653336523266
+&&(\because\ \text{上の有限計算})\\
+&=2\cdot471111826668261633
+&&(\because\ \text{整数の割り算}),
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`471111826668261633`),
+        " は一の位が ",
+        math(String.raw`3`),
+        " なので奇数である。よって ",
+        math(String.raw`Z_3(2)`),
+        " の素因数分解に現れる ",
+        math(String.raw`2`),
+        " の指数も ",
+        math(String.raw`1`),
+        " である。自然数のべきの素因数分解は各素因数の指数をべきの指数倍するので、",
+        math(String.raw`Z_2(2)^{27}`),
+        " に現れる ",
+        math(String.raw`2`),
+        " の指数は ",
+        math(String.raw`27\cdot1=27`),
+        "、",
+        math(String.raw`Z_3(2)^{8}`),
+        " に現れる ",
+        math(String.raw`2`),
+        " の指数は ",
+        math(String.raw`8\cdot1=8`),
+        " である。",
+        math(String.raw`27\ne8`),
+        " であり、算術の基本定理により等しい自然数は素因数ごとの指数がすべて一致するので、",
+        math(String.raw`Z_2(2)^{27}\ne Z_3(2)^{8}`),
+        " が従う。",
+      ]),
+    ],
+  },
+
+  {
     id: "prediction_stream_definition_two_dimensional_boundary_response_polynomial",
     kind: "definition",
     title: { text: "2 次元の箱と境界応答多項式" },
