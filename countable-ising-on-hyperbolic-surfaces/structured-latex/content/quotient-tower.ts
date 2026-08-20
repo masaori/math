@@ -3524,4 +3524,89 @@ P_s(x)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_two_stage_fisher_zero_formal_divisor_coefficient_sum",
+    kind: "theorem",
+    title: { text: "二段 Fisher 零点形式的因子の係数総和" },
+    labels: ["theorem_quotient_tower_two_stage_fisher_zero_formal_divisor_coefficient_sum"],
+    habitat: "Z",
+    verification: ["sagemath/check/two-stage-quotient-tower-fisher-zero-formal-divisor-coefficient-sum"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_formal_divisor"),
+        " の形式的因子について、係数の総和は二段の Ising 分配多項式の次数差に等しい。すなわち",
+      ]),
+      displayMath(String.raw`\sum_{\alpha\in\operatorname{Supp}_{\Delta\mu_{\mathcal T}}}
+\Delta\mu_{\mathcal T}(\alpha)
+=
+\deg P_{\mathrm{fine}}-\deg P_{\mathrm{coarse}}
+\in\mathbb Z.`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_map"),
+        " の零延長された整数値重複度差を用いると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\alpha\in\operatorname{Supp}_{\Delta\mu_{\mathcal T}}}
+\Delta\mu_{\mathcal T}(\alpha)
+&=
+\sum_{\alpha\in\mathcal Z_{\mathcal T}}
+\Delta\mu_{\mathcal T}(\alpha)
+\quad\bigl(\because\ \text{台の外では重複度差が零である}\bigr),\\
+&=
+\sum_{\alpha\in\mathcal Z_{\mathcal T}}
+\left(
+  \iota_{\mathbb N,\mathbb Z}
+  \left(
+    \mu_{\mathrm{fine}}(\alpha)
+  \right)
+  -
+  \iota_{\mathbb N,\mathbb Z}
+  \left(
+    \mu_{\mathrm{coarse}}(\alpha)
+  \right)
+\right)
+\quad\bigl(\because\ \text{二段重複度差写像の定義}\bigr),\\
+&=
+\sum_{\alpha\in\mathcal Z_{\mathcal T}}
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{fine}}(\alpha)
+\right)
+-
+\sum_{\alpha\in\mathcal Z_{\mathcal T}}
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{coarse}}(\alpha)
+\right)
+\quad\bigl(\because\ \text{整数の有限和に対する分配律}\bigr),\\
+&=
+\sum_{\substack{
+  \alpha\in\overline{\mathbb Q}\\
+  \overline P_{\mathrm{fine}}(\alpha)=0
+}}
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{fine}}(\alpha)
+\right)
+-
+\sum_{\substack{
+  \alpha\in\overline{\mathbb Q}\\
+  \overline P_{\mathrm{coarse}}(\alpha)=0
+}}
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{coarse}}(\alpha)
+\right)
+\quad\bigl(\because\ \text{各段の零点台外では対応する重複度が零である}\bigr),\\
+&=
+\deg P_{\mathrm{fine}}-\deg P_{\mathrm{coarse}}
+\quad\bigl(\because\ \text{代数閉体上で零点重複度の総和は非零多項式の次数に等しい}\bigr).
+\end{aligned}`),
+      paragraph([
+        "二つの多項式は正の定数項をもつ非零な整係数多項式である。各次数は自然数、その差と各重複度差は整数であり、全ての和は有限である。複素平面への埋め込み、数値近似、距離、偏角、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
