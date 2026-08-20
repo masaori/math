@@ -30,6 +30,12 @@ def subtract_divisors(fine_divisor, coarse_divisor):
 
 
 def verify_stage_difference(zero_support, multiplicity_pair_function):
+    for alpha in zero_support:
+        fine_multiplicity, coarse_multiplicity = multiplicity_pair_function(alpha)
+        assert multiplicity_difference(alpha, multiplicity_pair_function) == (
+            ZZ(fine_multiplicity) - ZZ(coarse_multiplicity)
+        )
+
     fine_divisor = stage_divisor(
         zero_support,
         lambda alpha: multiplicity_pair_function(alpha)[0],

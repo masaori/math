@@ -3488,9 +3488,15 @@ P_s(x)
       ]),
       displayMath(String.raw`\sum_{\alpha\in\mathcal Z_{\mathcal T}}
 \left(
-  \mu_{\mathrm{fine}}(\alpha)
+  \iota_{\mathbb N,\mathbb Z}
+  \left(
+    \mu_{\mathrm{fine}}(\alpha)
+  \right)
   -
-  \mu_{\mathrm{coarse}}(\alpha)
+  \iota_{\mathbb N,\mathbb Z}
+  \left(
+    \mu_{\mathrm{coarse}}(\alpha)
+  \right)
 \right)[\alpha]
 =
 \sum_{\substack{
