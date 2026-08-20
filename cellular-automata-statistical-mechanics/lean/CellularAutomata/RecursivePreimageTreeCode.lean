@@ -1,5 +1,5 @@
 /-
-章「周期成分に付随する再帰的前像木符号の完全性」の具体版（前半）。
+章「周期成分に付随する再帰的前像木符号の完全性」の具体版（構成途中）。
 人手証明の正本は
 structured-latex/content/recursive-preimage-tree-code.ts。
 
@@ -8,7 +8,9 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 共役不変性（写像符号の保存まで）を証明する。さらに、符号一致からの
 再帰構成の最初の段として、等しい子符号多重集合から重複度を保つ子の
 出現の全単射を構成し、その対応が子符号と親への一段写像を同時に保存する
-ことを証明する。全配位上の再帰構成・完全性・有限決定は後続 tick で形式化する。
+ことを証明する。さらに、対応する周期成分の符号が等しいとき、等しい基点語を
+持つ周期点を選び、その最小周期と周期上の各位置の再帰符号が一致することを示す。
+全配位上の全単射への接着・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -97,6 +99,11 @@ theorem exists_occurrence_equiv_of_map_eq
   have happly := Multiset.mapEquiv_apply t b
     ((t.mapEquiv b).symm ((Multiset.cast hmap) (s.mapEquiv a x)))
   simpa [e] using happly.symm
+
+/-- 多重集合の出現型の元が表す値は、元の多重集合に属する。 -/
+theorem occurrence_mem {X : Type} [DecidableEq X]
+    (s : Multiset X) (x : s) : (x : X) ∈ s := by
+  exact Multiset.coe_mem
 
 section ChildCodeMatching
 
@@ -265,11 +272,136 @@ theorem componentCode_eq_of_mem (q z : V → State)
   unfold componentCode
   rw [periodicOrbit_eq_of_mem N f q z hq hz]
 
+section ComponentCodeMatching
+
+variable {W : Type} [Fintype W] [DecidableEq W]
+variable (NW : W → Finset W)
+variable (fW : (w : W) → (↥(NW w) → State) → State)
+
+/-- 対応する周期成分の符号が等しければ、両周期軌道から等しい基点語を
+    持つ周期点を選べる。成分符号を有限集合として定義した段をそのまま戻す。 -/
+theorem exists_baseWord_eq_of_componentCode_eq
+    (q : V → State) (qW : W → State)
+    (hq : IsPeriodicPoint N f q)
+    (hcode : componentCode NW fW qW = componentCode N f q) :
+    ∃ r : V → State, ∃ rW : W → State,
+      r ∈ periodicOrbit N f q ∧ rW ∈ periodicOrbit NW fW qW ∧
+        baseWord NW fW rW = baseWord N f r := by
+  have hqmem : q ∈ periodicOrbit N f q := mem_periodicOrbit_self N f q hq
+  have hword : baseWord N f q ∈ componentCode N f q := by
+    exact Finset.mem_image.mpr ⟨q, hqmem, rfl⟩
+  rw [← hcode] at hword
+  obtain ⟨rW, hrW, hbase⟩ := Finset.mem_image.mp hword
+  exact ⟨q, rW, hqmem, hrW, hbase⟩
+
+/-- 等しい基点語の長さは等しいので、二つの基点の最小周期は等しい。 -/
+theorem minPeriod_eq_of_baseWord_eq
+    (r : V → State) (rW : W → State)
+    (hbase : baseWord NW fW rW = baseWord N f r) :
+    minPeriod NW fW rW = minPeriod N f r := by
+  have hlength := congrArg List.length hbase
+  simpa [baseWord] using hlength
+
+/-- 等しい基点語を持つ周期点では、一周期の対応する各位置に付く
+    再帰的前像木符号が一致する。これは周期辺を接着する際の頂点ごとの条件である。 -/
+theorem recursiveCode_iterate_eq_of_baseWord_eq
+    (r : V → State) (rW : W → State)
+    (hbase : baseWord NW fW rW = baseWord N f r)
+    (n : ℕ) (hn : n < minPeriod N f r) :
+    recursiveCode NW fW (iterate NW fW n rW) =
+      recursiveCode N f (iterate N f n r) := by
+  have hperiod := minPeriod_eq_of_baseWord_eq N f NW fW r rW hbase
+  have hnW : n < minPeriod NW fW rW := by simpa [hperiod] using hn
+  have hentry := congrArg (fun xs : List ℕ => xs[n]?) hbase
+  simpa [baseWord, hn, hnW] using hentry
+
+end ComponentCodeMatching
+
 /-- 周期軌道の有限表の所属の言い換え。 -/
 theorem mem_periodicOrbitTable_iff (O : Finset (V → State)) :
     O ∈ periodicOrbitTable N f ↔
       ∃ q, IsPeriodicPoint N f q ∧ periodicOrbit N f q = O := by
   simp [periodicOrbitTable]
+
+/-- 周期軌道表の各元は空でない。写像符号で用いる代表元の選択が、
+    周期点自身を証人として常に可能であることを明示する。 -/
+theorem periodicOrbitTable_member_nonempty
+    (O : Finset (V → State)) (hO : O ∈ periodicOrbitTable N f) : O.Nonempty := by
+  obtain ⟨q, hq, rfl⟩ := (mem_periodicOrbitTable_iff N f O).1 hO
+  exact ⟨q, mem_periodicOrbit_self N f q hq⟩
+
+/-- 周期軌道表の元に属する配位は周期点である。 -/
+theorem isPeriodicPoint_of_mem_periodicOrbitTable
+    (O : Finset (V → State)) (hO : O ∈ periodicOrbitTable N f)
+    (q : V → State) (hq : q ∈ O) : IsPeriodicPoint N f q := by
+  obtain ⟨r, hr, rfl⟩ := (mem_periodicOrbitTable_iff N f O).1 hO
+  exact isPeriodicPoint_of_mem_periodicOrbit N f r q hr hq
+
+section OrbitOccurrenceMatching
+
+variable {W : Type} [Fintype W] [DecidableEq W]
+variable (NW : W → Finset W)
+variable (fW : (w : W) → (↥(NW w) → State) → State)
+
+/-- 写像符号の多重集合が等しければ、周期軌道の出現を重複度つきで
+    全単射に対応させられ、対応する軌道では選択した代表元の成分符号が等しい。 -/
+theorem exists_periodicOrbit_occurrence_equiv_of_mapCode_eq
+    (hcode : mapCode NW fW = mapCode N f) :
+    ∃ e : (periodicOrbitTable N f).val ≃ (periodicOrbitTable NW fW).val,
+      ∀ O : (periodicOrbitTable N f).val,
+        (if hO : (e O : Finset (W → State)).Nonempty then
+            componentCode NW fW hO.choose else ∅) =
+          (if hO : (O : Finset (V → State)).Nonempty then
+            componentCode N f hO.choose else ∅) := by
+  apply exists_occurrence_equiv_of_map_eq
+    (periodicOrbitTable N f).val (periodicOrbitTable NW fW).val
+    (fun orbit => if hO : orbit.Nonempty then componentCode N f hO.choose else ∅)
+    (fun orbit => if hO : orbit.Nonempty then componentCode NW fW hO.choose else ∅)
+  simpa only [mapCode] using hcode.symm
+
+/-- 写像符号が等しいとき、周期軌道の各出現を対応させたうえで、
+    対応する各軌道から等しい基点語を持つ周期点の組を選べる。 -/
+theorem exists_orbit_equiv_with_equal_baseWords
+    (hcode : mapCode NW fW = mapCode N f) :
+    ∃ e : (periodicOrbitTable N f).val ≃ (periodicOrbitTable NW fW).val,
+      ∀ O : (periodicOrbitTable N f).val,
+        ∃ r : V → State, ∃ rW : W → State,
+          r ∈ (O : Finset (V → State)) ∧
+            rW ∈ (e O : Finset (W → State)) ∧
+              baseWord NW fW rW = baseWord N f r := by
+  obtain ⟨e, he⟩ := exists_periodicOrbit_occurrence_equiv_of_mapCode_eq
+    N f NW fW hcode
+  refine ⟨e, fun O => ?_⟩
+  have hOmem : (O : Finset (V → State)) ∈ periodicOrbitTable N f :=
+    occurrence_mem (periodicOrbitTable N f).val O
+  have heOmem : (e O : Finset (W → State)) ∈ periodicOrbitTable NW fW :=
+    occurrence_mem (periodicOrbitTable NW fW).val (e O)
+  have hON : (O : Finset (V → State)).Nonempty :=
+    periodicOrbitTable_member_nonempty N f O hOmem
+  have hOW : (e O : Finset (W → State)).Nonempty :=
+    periodicOrbitTable_member_nonempty NW fW (e O) heOmem
+  have hcomponent := he O
+  rw [dif_pos hOW, dif_pos hON] at hcomponent
+  have hperiodic : IsPeriodicPoint N f hON.choose :=
+    isPeriodicPoint_of_mem_periodicOrbitTable N f O hOmem hON.choose hON.choose_spec
+  obtain ⟨r, rW, hr, hrW, hbase⟩ := exists_baseWord_eq_of_componentCode_eq
+    N f NW fW hON.choose hOW.choose hperiodic hcomponent
+  have hOrbitW : periodicOrbit NW fW hOW.choose = (e O : Finset (W → State)) := by
+    obtain ⟨qW, hqW, hqWO⟩ :=
+      (mem_periodicOrbitTable_iff NW fW (e O)).1 heOmem
+    rw [periodicOrbit_eq_of_mem NW fW qW hOW.choose hqW]
+    · exact hqWO
+    · rw [hqWO]
+      exact hOW.choose_spec
+  have hOrbitNSet : periodicOrbit N f hON.choose = (O : Finset (V → State)) := by
+    obtain ⟨q, hq, hqO⟩ := (mem_periodicOrbitTable_iff N f O).1 hOmem
+    rw [periodicOrbit_eq_of_mem N f q hON.choose hq]
+    · exact hqO
+    · rw [hqO]
+      exact hON.choose_spec
+  exact ⟨r, rW, by rwa [← hOrbitNSet], by rwa [← hOrbitW], hbase⟩
+
+end OrbitOccurrenceMatching
 
 section ConjugacyTransport
 
