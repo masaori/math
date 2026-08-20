@@ -403,6 +403,75 @@ theorem exists_orbit_equiv_with_equal_baseWords
 
 end OrbitOccurrenceMatching
 
+section OrbitTreeMatching
+
+variable {W : Type} [Fintype W] [DecidableEq W]
+variable (NW : W → Finset W)
+variable (fW : (w : W) → (↥(NW w) → State) → State)
+
+/-- 等しい基点語を持つ周期点の対応に、周期上の各位置へ
+    非周期前像木の全深さ対応を接着する。共通の打ち切り深さを
+    作るときにだけ、両舞台のセル数一致を使う。 -/
+theorem hasTreeMatching_iterate_of_baseWord_eq
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r)
+    (hcard : Fintype.card W = Fintype.card V)
+    (n : ℕ) (hn : n < minPeriod N f r) :
+    HasTreeMatching N f NW fW (2 ^ Fintype.card V - 1)
+      (iterate N f n r) (iterate NW fW n rW) := by
+  have hrnMem : iterate N f n r ∈ periodicOrbit N f r :=
+    (mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨n, rfl⟩
+  have hrWnMem : iterate NW fW n rW ∈ periodicOrbit NW fW rW :=
+    (mem_periodicOrbit_iff_exists NW fW rW _ hrW).2 ⟨n, rfl⟩
+  have hrn : IsPeriodicPoint N f (iterate N f n r) :=
+    isPeriodicPoint_of_mem_periodicOrbit N f r _ hr hrnMem
+  have hrWn : IsPeriodicPoint NW fW (iterate NW fW n rW) :=
+    isPeriodicPoint_of_mem_periodicOrbit NW fW rW _ hrW hrWnMem
+  have hmu : minPreperiod N f (iterate N f n r) = 0 :=
+    (isPeriodicPoint_iff_minPreperiod_zero N f _).1 hrn
+  have hmuW : minPreperiod NW fW (iterate NW fW n rW) = 0 :=
+    (isPeriodicPoint_iff_minPreperiod_zero NW fW _).1 hrWn
+  have hrecursive := recursiveCode_iterate_eq_of_baseWord_eq
+    N f NW fW r rW hbase n hn
+  have hdepth :
+      codeAtDepth NW fW (2 ^ Fintype.card V - 1) (iterate NW fW n rW) =
+        codeAtDepth N f (2 ^ Fintype.card V - 1) (iterate N f n r) := by
+    simpa [recursiveCode, hcard, hmu, hmuW] using hrecursive
+  exact hasTreeMatching_of_codeAtDepth_eq N f NW fW _ _ _ hdepth
+
+/-- 写像符号が等しくセル数も等しいとき、周期軌道の出現の
+    重複度付き対応と、対応する周期上の全ての位置に接着した
+    前像木対応を同時に選べる。 -/
+theorem exists_orbit_equiv_with_tree_matchings
+    (hcode : mapCode NW fW = mapCode N f)
+    (hcard : Fintype.card W = Fintype.card V) :
+    ∃ e : (periodicOrbitTable N f).val ≃ (periodicOrbitTable NW fW).val,
+      ∀ O : (periodicOrbitTable N f).val,
+        ∃ r : V → State, ∃ rW : W → State,
+          r ∈ (O : Finset (V → State)) ∧
+            rW ∈ (e O : Finset (W → State)) ∧
+              baseWord NW fW rW = baseWord N f r ∧
+                ∀ n : ℕ, (hn : n < minPeriod N f r) →
+                  HasTreeMatching N f NW fW (2 ^ Fintype.card V - 1)
+                    (iterate N f n r) (iterate NW fW n rW) := by
+  obtain ⟨e, he⟩ := exists_orbit_equiv_with_equal_baseWords N f NW fW hcode
+  refine ⟨e, fun O => ?_⟩
+  obtain ⟨r, rW, hrO, hrWO, hbase⟩ := he O
+  have hOmem : (O : Finset (V → State)) ∈ periodicOrbitTable N f :=
+    occurrence_mem (periodicOrbitTable N f).val O
+  have heOmem : (e O : Finset (W → State)) ∈ periodicOrbitTable NW fW :=
+    occurrence_mem (periodicOrbitTable NW fW).val (e O)
+  have hr : IsPeriodicPoint N f r :=
+    isPeriodicPoint_of_mem_periodicOrbitTable N f O hOmem r hrO
+  have hrW : IsPeriodicPoint NW fW rW :=
+    isPeriodicPoint_of_mem_periodicOrbitTable NW fW (e O) heOmem rW hrWO
+  exact ⟨r, rW, hrO, hrWO, hbase, fun n hn =>
+    hasTreeMatching_iterate_of_baseWord_eq
+      N f NW fW r rW hr hrW hbase hcard n hn⟩
+
+end OrbitTreeMatching
+
 section ConjugacyTransport
 
 variable {W : Type} [Fintype W] [DecidableEq W]
