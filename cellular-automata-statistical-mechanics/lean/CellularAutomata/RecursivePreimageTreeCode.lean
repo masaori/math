@@ -5,13 +5,15 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 
 このファイルでは、人手証明の定義順に、非周期一段前像、最小前周期の増分と
 有限上界、有限深さの入れ子多重集合符号、周期軌道と写像符号を形式化し、
-共役不変性（写像符号の保存まで）を証明する。
-符号一致からの再帰構成・完全性・有限決定は後続 tick で形式化する。
+共役不変性（写像符号の保存まで）を証明する。さらに、符号一致からの
+再帰構成の最初の段として、等しい子符号多重集合から重複度を保つ子の
+出現の全単射を構成する。全配位上の再帰構成・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
 import CellularAutomata.IterateMonoidConjugacyInvariance
 import CellularAutomata.PeriodicPointCount
+import Mathlib.Data.Multiset.Fintype
 import Mathlib.Data.Multiset.Sort
 
 namespace CellularAutomata.RecursivePreimageTreeCode
@@ -80,6 +82,40 @@ theorem codeAtDepth_succ (depth : ℕ) (y : V → State) :
     codeAtDepth N f (depth + 1) y =
       Encodable.encode
         (((nonperiodicChildren N f y).val.map (codeAtDepth N f depth)).sort (· ≤ ·)) := rfl
+
+/-- 二つの多重集合を写した結果が等しければ、各値を保つ出現の全単射を取れる。
+    多重集合の出現型を使うので、同じ値を持つ相異なる子の重複度を失わない。 -/
+theorem exists_occurrence_equiv_of_map_eq
+    {X Y C : Type} (s : Multiset X) (t : Multiset Y)
+    (a : X → C) (b : Y → C) (hmap : s.map a = t.map b) :
+    ∃ e : s ≃ t, ∀ x : s, b (e x) = a x := by
+  let e : s ≃ t :=
+    (s.mapEquiv a).trans (Multiset.cast hmap) |>.trans (t.mapEquiv b).symm
+  refine ⟨e, fun x => ?_⟩
+  have happly := Multiset.mapEquiv_apply t b
+    ((t.mapEquiv b).symm ((Multiset.cast hmap) (s.mapEquiv a x)))
+  simpa [e] using happly.symm
+
+section ChildCodeMatching
+
+variable {W : Type} [Fintype W] [DecidableEq W]
+variable (NW : W → Finset W)
+variable (fW : (w : W) → (↥(NW w) → State) → State)
+
+/-- 後続深さの符号が等しい二頂点では、非周期一段前像の一つ前の深さの
+    符号多重集合が等しい。上の出現対応定理と合わせると、完全性証明の
+    「等しい子符号の有限多重集合を対応させる」段になる。 -/
+theorem child_code_multisets_eq_of_codeAtDepth_succ_eq
+    (depth : ℕ) (y : V → State) (yW : W → State)
+    (hcode : codeAtDepth NW fW (depth + 1) yW = codeAtDepth N f (depth + 1) y) :
+    (nonperiodicChildren N f y).val.map (codeAtDepth N f depth) =
+      (nonperiodicChildren NW fW yW).val.map (codeAtDepth NW fW depth) := by
+  rw [codeAtDepth_succ, codeAtDepth_succ] at hcode
+  have hsorted := Encodable.encode_injective hcode
+  have hcoerced := congrArg (fun xs : List ℕ => (xs : Multiset ℕ)) hsorted.symm
+  simpa only [Multiset.sort_eq] using hcoerced
+
+end ChildCodeMatching
 
 /-- 周期点 `q` を基点とする一周期の有限表。 -/
 noncomputable def periodicOrbit (q : V → State) : Finset (V → State) :=
