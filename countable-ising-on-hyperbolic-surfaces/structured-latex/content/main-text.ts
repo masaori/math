@@ -375,6 +375,134 @@ Z_G(x)
     ],
   },
   {
+    id: "finite_graph_theorem_partition_polynomial_degree_maximum_cut_size",
+    kind: "theorem",
+    title: { text: "Ising 分配多項式の次数と最大カット辺数" },
+    labels: ["theorem_partition_polynomial_degree_maximum_cut_size"],
+    habitat: "N",
+    verification: ["sagemath/check/partition-polynomial-degree-maximum-cut-size"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフに対し、Ising 分配多項式の次数は、頂点部分集合とその補集合を横切る辺数の最大値に等しい。すなわち",
+      ]),
+      displayMath(String.raw`\deg Z_G(x)
+=
+\max_{A\subseteq V}
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \begin{array}{l}
+      \partial_G(e,\mathsf{source})\in A,\;
+      \partial_G(e,\mathsf{target})\notin A,\\
+      \text{または }\partial_G(e,\mathsf{source})\notin A,\;
+      \partial_G(e,\mathsf{target})\in A
+    \end{array}
+  \right\}
+\right|
+\in\mathbb N.`),
+    ],
+    proof: [
+      paragraph([
+        "各配位 ",
+        math(String.raw`\sigma\in\mathcal S_G`),
+        " と各頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " に対し、証明中だけ用いる記号を",
+      ]),
+      displayMath(String.raw`A_\sigma:=\{v\in V\mid \sigma(v)=\mathsf{up}\},\qquad
+\sigma_A(v):=
+\begin{cases}
+  \mathsf{up} & (v\in A),\\
+  \mathsf{down} & (v\notin A)
+\end{cases}
+\quad(v\in V)`),
+      paragraph([
+        "と置く。",
+        ref("def_spin_label_set"),
+        " の二つのスピンラベルは相異なるので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A_{\sigma_A}
+&=A
+&&\bigl(\because\ \text{二つの定義の展開}\bigr),\\
+\sigma_{A_\sigma}(v)
+&=\sigma(v)
+&&\bigl(\because\ \sigma(v)=\mathsf{up}\text{ と }\sigma(v)=\mathsf{down}\text{ の二場合}\bigr).
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\sigma\mapsto A_\sigma`),
+        " と ",
+        math(String.raw`A\mapsto\sigma_A`),
+        " は有限集合 ",
+        math(String.raw`\mathcal S_G`),
+        " と ",
+        math(String.raw`\{A\mid A\subseteq V\}`),
+        " の間の互いに逆な全単射である。さらに ",
+        ref("def_broken_edge_set"),
+        " より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b_G(\sigma)
+&=
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \sigma\!\left(\partial_G(e,\mathsf{source})\right)
+    \ne
+    \sigma\!\left(\partial_G(e,\mathsf{target})\right)
+  \right\}
+\right|
+&&\bigl(\because\ \text{破れ辺数の定義}\bigr)\\
+&=
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \begin{array}{l}
+      \partial_G(e,\mathsf{source})\in A_\sigma,\;
+      \partial_G(e,\mathsf{target})\notin A_\sigma,\\
+      \text{または }\partial_G(e,\mathsf{source})\notin A_\sigma,\;
+      \partial_G(e,\mathsf{target})\in A_\sigma
+    \end{array}
+  \right\}
+\right|
+&&\bigl(\because\ A_\sigma\text{ の定義と二つのスピンラベルの相異性}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
+        " と上の全単射および辺数の一致より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\deg Z_G(x)
+&=
+\max_{\sigma\in\mathcal S_G}b_G(\sigma)
+&&\bigl(\because\ \text{Ising 分配多項式の次数と最大破れ辺数}\bigr)\\
+&=
+\max_{A\subseteq V}
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \begin{array}{l}
+      \partial_G(e,\mathsf{source})\in A,\;
+      \partial_G(e,\mathsf{target})\notin A,\\
+      \text{または }\partial_G(e,\mathsf{source})\notin A,\;
+      \partial_G(e,\mathsf{target})\in A
+    \end{array}
+  \right\}
+\right|
+&&\bigl(\because\ \sigma\mapsto A_\sigma\text{ は全単射で各辺数を保存する}\bigr).
+\end{aligned}`),
+      paragraph([
+        "全ての集合は有限であり、次数と辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },

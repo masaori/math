@@ -100,6 +100,7 @@ export const ALL_LABELS = [
   "theorem_generated_quotient_cellulation_is_hyperbolic_regular",
   "theorem_homology_class_polynomials_recombine",
   "theorem_partition_polynomial_degree_maximum_broken_edge_count",
+  "theorem_partition_polynomial_degree_maximum_cut_size",
   "theorem_primal_coboundary_transport_is_dual_boundary",
   "theorem_primal_cocycle_transport_is_dual_cycle",
   "theorem_primal_cohomology_dual_homology_transport_is_bijective",
