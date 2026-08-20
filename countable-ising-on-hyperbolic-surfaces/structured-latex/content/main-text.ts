@@ -314,6 +314,67 @@ Z_G(x)
     ],
   },
   {
+    id: "finite_graph_theorem_partition_polynomial_degree_maximum_broken_edge_count",
+    kind: "theorem",
+    title: { text: "Ising 分配多項式の次数と最大破れ辺数" },
+    labels: ["theorem_partition_polynomial_degree_maximum_broken_edge_count"],
+    habitat: "N",
+    verification: ["sagemath/check/partition-polynomial-degree-maximum-broken-edge-count"],
+    statement: [
+      paragraph([
+        ref("def_spin_configuration_set"),
+        " の有限で空でないスピン配位集合に対し、",
+        ref("def_broken_edge_set"),
+        " の破れ辺数が取る最大値を用いると、",
+      ]),
+      displayMath(String.raw`\deg Z_G(x)
+=
+\max_{\sigma\in\mathcal S_G} b_G(\sigma)
+\in\mathbb N.`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathcal S_G`),
+        " は有限で空でなく、任意の ",
+        math(String.raw`\sigma\in\mathcal S_G`),
+        " に対して ",
+        math(String.raw`b_G(\sigma)\in\{0,1,\ldots,|E|\}`),
+        " である。したがって破れ辺数の像は有限で空でなく、その最大値は自然数として存在する。また、任意の配位を一つ取れば、その破れ辺数における多重度は正なので ",
+        math(String.raw`Z_G(x)\ne0`),
+        " である。",
+      ]),
+      paragraph([
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " の係数表示と ",
+        ref("def_broken_edge_multiplicity"),
+        " の多重度の定義より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\deg Z_G(x)
+&=
+\max\left\{
+  m\in\{0,1,\ldots,|E|\}
+  \ \middle|\;
+  \Omega_G(m)\ne0
+\right\}
+&&\bigl(\because\ \text{非零多項式の次数の定義}\bigr)\\
+&=
+\max\left\{
+  m\in\{0,1,\ldots,|E|\}
+  \ \middle|\;
+  \exists\sigma\in\mathcal S_G,\ b_G(\sigma)=m
+\right\}
+&&\bigl(\because\ \text{多重度が正である条件}\bigr)\\
+&=
+\max_{\sigma\in\mathcal S_G} b_G(\sigma)
+&&\bigl(\because\ \text{有限像集合の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "全ての集合は有限であり、次数、破れ辺数、多重度は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },
