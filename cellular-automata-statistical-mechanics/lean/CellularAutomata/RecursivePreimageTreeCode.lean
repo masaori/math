@@ -64,10 +64,11 @@ theorem minPreperiod_le_configuration_card_sub_one (y : V → State) :
   omega
 
 /-- 深さを有限値で打ち切った再帰的前像木符号の自然数表示。
-    空多重集合を `1`、子符号の多重集合を対応する素数の積で表す。
-    素因数分解の一意性により順序を捨て、重複度を保つ。 -/
+    各段で子符号を整列した有限列にして符号化する。深さ零は、
+    後続段で子がない場合と同じ空の有限列の符号にする。
+    符号化の単射性により順序を捨て、重複度を保つ。 -/
 noncomputable def codeAtDepth : ℕ → (V → State) → ℕ
-  | 0, _ => 1
+  | 0, _ => Encodable.encode ([] : List ℕ)
   | depth + 1, y =>
       Encodable.encode
         (((nonperiodicChildren N f y).val.map (codeAtDepth depth)).sort (· ≤ ·))
@@ -78,13 +79,22 @@ noncomputable def recursiveCode (y : V → State) : ℕ :=
 
 /-- 深さ 0 では符号は空多重集合である。 -/
 theorem codeAtDepth_zero (y : V → State) :
-    codeAtDepth N f 0 y = 1 := rfl
+    codeAtDepth N f 0 y = Encodable.encode ([] : List ℕ) := rfl
 
 /-- 後続深さでは子の符号を重複込みで集める。 -/
 theorem codeAtDepth_succ (depth : ℕ) (y : V → State) :
     codeAtDepth N f (depth + 1) y =
       Encodable.encode
         (((nonperiodicChildren N f y).val.map (codeAtDepth N f depth)).sort (· ≤ ·)) := rfl
+
+/-- 非周期一段前像が空なら、深さ零と任意の正の深さは同じ空多重集合を符号化する。 -/
+theorem codeAtDepth_succ_eq_zero_of_children_empty
+    (depth : ℕ) (y : V → State)
+    (hchildren : nonperiodicChildren N f y = ∅) :
+    codeAtDepth N f (depth + 1) y = codeAtDepth N f 0 y := by
+  rw [codeAtDepth_succ, codeAtDepth_zero, hchildren]
+  congr 1
+  simp
 
 /-- 二つの多重集合を写した結果が等しければ、各値を保つ出現の全単射を取れる。
     多重集合の出現型を使うので、同じ値を持つ相異なる子の重複度を失わない。 -/

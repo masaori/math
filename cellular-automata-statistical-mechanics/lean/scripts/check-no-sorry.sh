@@ -915,6 +915,7 @@ targets=(
   CellularAutomata.RecursivePreimageTreeCode.minPreperiod_le_configuration_card_sub_one
   CellularAutomata.RecursivePreimageTreeCode.codeAtDepth_zero
   CellularAutomata.RecursivePreimageTreeCode.codeAtDepth_succ
+  CellularAutomata.RecursivePreimageTreeCode.codeAtDepth_succ_eq_zero_of_children_empty
   CellularAutomata.RecursivePreimageTreeCode.exists_occurrence_equiv_of_map_eq
   CellularAutomata.RecursivePreimageTreeCode.occurrence_mem
   CellularAutomata.RecursivePreimageTreeCode.child_code_multisets_eq_of_codeAtDepth_succ_eq
