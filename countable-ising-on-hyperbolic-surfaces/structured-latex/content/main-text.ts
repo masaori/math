@@ -435,6 +435,92 @@ b_G(\mathfrak F_G(\sigma))
     ],
   },
   {
+    id: "finite_graph_theorem_odd_incident_edge_count_root_minus_one",
+    kind: "theorem",
+    title: { text: "奇数本の辺が接続する頂点と零点 -1" },
+    labels: ["theorem_odd_incident_edge_count_root_minus_one"],
+    habitat: "Z",
+    verification: ["sagemath/check/odd-incident-edge-count-root-minus-one"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフに、接続する辺の本数が奇数である頂点 ",
+        math(String.raw`w\in V`),
+        " が存在すると仮定する。すなわち",
+      ]),
+      displayMath(String.raw`I_w:=\left\{e\in E\ \middle|\ \partial_G(e,\mathsf{source})=w\ \text{または}\ \partial_G(e,\mathsf{target})=w\right\},\qquad |I_w|\in\{2n+1\mid n\in\mathbb N\}.`),
+      paragraph(["このとき"]),
+      displayMath(String.raw`Z_G(-1)=0\in\mathbb Z.`),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\sigma\in\mathcal S_G`),
+        " に対し、",
+        math(String.raw`r_w(\sigma):=|B_G(\sigma)\cap I_w|\in\mathbb N`),
+        " と置く。",
+        ref("def_finite_graph_input"),
+        " は自己ループを許さないので、",
+        math(String.raw`I_w`),
+        " の各辺では二端点のうち一方だけが ",
+        math(String.raw`w`),
+        " である。したがって ",
+        ref("def_single_vertex_spin_flip"),
+        " の ",
+        math(String.raw`T_w`),
+        " は ",
+        math(String.raw`I_w`),
+        " に属する辺の破れ・非破れを交換し、それ以外の辺の状態を保存する。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b_G(T_w(\sigma))
+&=|I_w\setminus B_G(\sigma)|+|B_G(\sigma)\setminus I_w|
+&&\bigl(\because\ T_w\text{ は }I_w\text{ 上だけ破れ・非破れを交換する}\bigr)\\
+&=\bigl(|I_w|-r_w(\sigma)\bigr)+\bigl(b_G(\sigma)-r_w(\sigma)\bigr)
+&&\bigl(\because\ r_w(\sigma)=|B_G(\sigma)\cap I_w|\bigr)\\
+&=b_G(\sigma)+|I_w|-2r_w(\sigma)
+&&\bigl(\because\ \mathbb Z\text{ 上の加法の整理}\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`|I_w|`),
+        " は奇数であり、",
+        math(String.raw`2r_w(\sigma)`),
+        " は偶数なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-1)^{b_G(T_w(\sigma))}
+&=(-1)^{b_G(\sigma)+|I_w|-2r_w(\sigma)}
+&&\bigl(\because\ \text{直前の破れ辺数の等式}\bigr)\\
+&=-(-1)^{b_G(\sigma)}
+&&\bigl(\because\ |I_w|\text{ は奇数かつ }2r_w(\sigma)\text{ は偶数}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("claim_single_vertex_spin_flip_involution"),
+        " より、",
+        math(String.raw`T_w`),
+        " は有限集合 ",
+        math(String.raw`\mathcal S_G`),
+        " を二元部分集合 ",
+        math(String.raw`\{\sigma,T_w(\sigma)\}`),
+        " へ分割する。各二元部分集合からの二項は直前の等式により相殺する。",
+        ref("def_ising_partition_polynomial"),
+        " に整数 ",
+        math(String.raw`-1`),
+        " を評価すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_G(-1)
+&=\sum_{\sigma\in\mathcal S_G}(-1)^{b_G(\sigma)}
+&&\bigl(\because\ \text{Ising 分配多項式の定義}\bigr)\\
+&=0
+&&\bigl(\because\ T_w\text{ の各二元軌道内で二項が相殺する}\bigr).
+\end{aligned}`),
+      paragraph([
+        "全ての集合は有限であり、破れ辺数と元数は自然数、評価値は整数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_partition_polynomial_degree_maximum_broken_edge_count",
     kind: "theorem",
     title: { text: "Ising 分配多項式の次数と最大破れ辺数" },
