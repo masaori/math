@@ -314,6 +314,127 @@ Z_G(x)
     ],
   },
   {
+    id: "finite_graph_theorem_partition_polynomial_coefficient_evenness",
+    kind: "theorem",
+    title: { text: "Ising 分配多項式の全係数の偶数性" },
+    labels: ["theorem_partition_polynomial_coefficient_evenness"],
+    habitat: "N",
+    verification: ["sagemath/check/partition-polynomial-coefficient-evenness"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の空でない頂点集合をもつ任意の有限グラフに対し、全ての ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\Omega_G(m)\in\{2n\mid n\in\mathbb N\}.`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_spin_configuration_set"),
+        " の配位集合上に、大域スピン反転写像 ",
+        math(String.raw`\mathfrak F_G:\mathcal S_G\to\mathcal S_G`),
+        " を",
+      ]),
+      displayMath(String.raw`\mathfrak F_G(\sigma)(v):=\nu(\sigma(v))
+\qquad(\sigma\in\mathcal S_G,\ v\in V)`),
+      paragraph([
+        "で定める。",
+        ref("def_spin_label_reversal"),
+        " の二つの定義値より、任意の ",
+        math(String.raw`a\in\mathsf{Spin}`),
+        " に対して ",
+        math(String.raw`\nu(\nu(a))=a`),
+        " および ",
+        math(String.raw`\nu(a)\ne a`),
+        " が成り立つ。したがって任意の ",
+        math(String.raw`\sigma\in\mathcal S_G`),
+        " と ",
+        math(String.raw`v\in V`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathfrak F_G(\mathfrak F_G(\sigma))(v)
+&=\nu(\mathfrak F_G(\sigma)(v))
+&&\bigl(\because\ \mathfrak F_G\text{ の定義}\bigr)\\
+&=\nu(\nu(\sigma(v)))
+&&\bigl(\because\ \mathfrak F_G\text{ の定義}\bigr)\\
+&=\sigma(v)
+&&\bigl(\because\ \nu(\nu(a))=a\bigr).
+\end{aligned}`),
+      paragraph([
+        "ゆえに ",
+        math(String.raw`\mathfrak F_G(\mathfrak F_G(\sigma))=\sigma`),
+        " である。また ",
+        ref("def_finite_graph_input"),
+        " より ",
+        math(String.raw`V`),
+        " は空でないので、",
+        math(String.raw`w\in V`),
+        " を一つ選べる。このとき",
+      ]),
+      displayMath(String.raw`\mathfrak F_G(\sigma)(w)
+=\nu(\sigma(w))
+\ne\sigma(w)
+\quad\bigl(\because\ \nu(a)\ne a\bigr).`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\mathfrak F_G`),
+        " は不動点を持たない対合である。任意の ",
+        math(String.raw`e\in E`),
+        " に対して、",
+        ref("def_broken_edge_set"),
+        " より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e\in B_G(\mathfrak F_G(\sigma))
+&\iff
+\nu\!\left(\sigma\!\left(\partial_G(e,\mathsf{source})\right)\right)
+\ne
+\nu\!\left(\sigma\!\left(\partial_G(e,\mathsf{target})\right)\right)
+&&\bigl(\because\ B_G\text{ と }\mathfrak F_G\text{ の定義}\bigr)\\
+&\iff
+\sigma\!\left(\partial_G(e,\mathsf{source})\right)
+\ne
+\sigma\!\left(\partial_G(e,\mathsf{target})\right)
+&&\bigl(\because\ \nu\text{ は全単射}\bigr)\\
+&\iff e\in B_G(\sigma)
+&&\bigl(\because\ B_G\text{ の定義}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+B_G(\mathfrak F_G(\sigma))
+&=B_G(\sigma)
+&&\bigl(\because\ E\text{ の全ての元について所属が同値}\bigr)\\
+b_G(\mathfrak F_G(\sigma))
+&=b_G(\sigma)
+&&\bigl(\because\ \text{等しい有限集合の元数は等しい}\bigr).
+\end{aligned}`),
+      paragraph([
+        "各 ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " に対し、有限集合を",
+      ]),
+      displayMath(String.raw`\mathcal A_m:=\{\sigma\in\mathcal S_G\mid b_G(\sigma)=m\}`),
+      paragraph([
+        "と置く。直前の等式より ",
+        math(String.raw`\mathfrak F_G`),
+        " は ",
+        math(String.raw`\mathcal A_m`),
+        " を保つ。不動点を持たない対合は有限集合を二元部分集合へ分割するので、ある ",
+        math(String.raw`n_m\in\mathbb N`),
+        " が存在して",
+      ]),
+      paragraph([ref("def_broken_edge_multiplicity"), " より"]),
+      displayMath(String.raw`\Omega_G(m)
+=|\mathcal A_m|
+=2n_m
+\in\{2n\mid n\in\mathbb N\}.`),
+      paragraph([
+        "全ての集合は有限であり、多重度は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_partition_polynomial_degree_maximum_broken_edge_count",
     kind: "theorem",
     title: { text: "Ising 分配多項式の次数と最大破れ辺数" },
