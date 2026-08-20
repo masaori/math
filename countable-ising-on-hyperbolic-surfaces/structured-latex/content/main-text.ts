@@ -521,6 +521,83 @@ Z_G(-1)
     ],
   },
   {
+    id: "finite_graph_theorem_even_incident_edge_counts_evaluation_minus_one",
+    kind: "theorem",
+    title: { text: "全頂点の接続辺数が偶数の場合の -1 評価" },
+    labels: ["theorem_even_incident_edge_counts_evaluation_minus_one"],
+    habitat: "Z",
+    verification: ["sagemath/check/even-incident-edge-counts-evaluation-minus-one"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、全ての頂点 ",
+        math(String.raw`v\in V`),
+        " に接続する辺の本数が偶数であると仮定する。すなわち",
+      ]),
+      displayMath(String.raw`I_v:=\left\{e\in E\ \middle|\ \partial_G(e,\mathsf{source})=v\ \text{または}\ \partial_G(e,\mathsf{target})=v\right\},\qquad |I_v|\in\{2n\mid n\in\mathbb N\}\quad(v\in V).`),
+      paragraph(["このとき"]),
+      displayMath(String.raw`Z_G(-1)=2^{|V|}\in\mathbb Z.`),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`\sigma\in\mathcal S_G`),
+        " に対し、上向きスピンをもつ頂点集合と、その内部だけを結ぶ辺集合を",
+      ]),
+      displayMath(String.raw`U_\sigma:=\{v\in V\mid \sigma(v)=\mathsf{up}\},\qquad
+E_\sigma^{\mathrm{in}}:=\left\{e\in E\ \middle|\ \partial_G(e,\mathsf{source})\in U_\sigma,\ \partial_G(e,\mathsf{target})\in U_\sigma\right\}`),
+      paragraph([
+        "と置く。",
+        ref("def_finite_graph_input"),
+        " は自己ループを許さない。したがって、",
+        math(String.raw`U_\sigma`),
+        " に接続する辺端を数えると、",
+        math(String.raw`E_\sigma^{\mathrm{in}}`),
+        " の各辺は二回、",
+        ref("def_broken_edge_set"),
+        " の各辺は一回だけ数えられるので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{v\in U_\sigma}|I_v|
+&=2|E_\sigma^{\mathrm{in}}|+|B_G(\sigma)|
+&&\bigl(\because\ \text{有限集合 }U_\sigma\text{ に接続する辺端の二通りの数え上げ}\bigr)\\
+&=2|E_\sigma^{\mathrm{in}}|+b_G(\sigma)
+&&\bigl(\because\ b_G(\sigma)=|B_G(\sigma)|\bigr).
+\end{aligned}`),
+      paragraph([
+        "各 ",
+        math(String.raw`|I_v|`),
+        " は偶数なので左辺は偶数であり、",
+        math(String.raw`2|E_\sigma^{\mathrm{in}}|`),
+        " も偶数である。整数加法の消去律より、",
+        math(String.raw`b_G(\sigma)`),
+        " は偶数である。ゆえに",
+      ]),
+      displayMath(String.raw`(-1)^{b_G(\sigma)}=1
+\quad\bigl(\because\ b_G(\sigma)\text{ は偶数}\bigr).`),
+      paragraph([
+        ref("def_ising_partition_polynomial"),
+        " に整数 ",
+        math(String.raw`-1`),
+        " を評価すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_G(-1)
+&=\sum_{\sigma\in\mathcal S_G}(-1)^{b_G(\sigma)}
+&&\bigl(\because\ \text{Ising 分配多項式の定義}\bigr)\\
+&=\sum_{\sigma\in\mathcal S_G}1
+&&\bigl(\because\ \text{全ての }b_G(\sigma)\text{ は偶数}\bigr)\\
+&=|\mathcal S_G|
+&&\bigl(\because\ \text{有限集合上の定数 }1\text{ の和}\bigr).
+\end{aligned}`),
+      paragraph([ref("def_spin_configuration_set"), " より"]),
+      displayMath(String.raw`|\mathcal S_G|=2^{|V|}.`),
+      paragraph([
+        "全ての集合は有限であり、接続辺数、破れ辺数、元数は自然数、評価値は整数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_partition_polynomial_degree_maximum_broken_edge_count",
     kind: "theorem",
     title: { text: "Ising 分配多項式の次数と最大破れ辺数" },

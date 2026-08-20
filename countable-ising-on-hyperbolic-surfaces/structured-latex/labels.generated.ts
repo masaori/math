@@ -88,6 +88,7 @@ export const ALL_LABELS = [
   "def_spin_label_set",
   "def_two_stage_finite_quotient_tower_input",
   "theorem_boundary_of_boundary_is_zero_over_f2",
+  "theorem_even_incident_edge_counts_evaluation_minus_one",
   "theorem_finite_character_orthogonality",
   "theorem_finite_fourier_inverse_transform",
   "theorem_fixed_quotient_coefficient_support",
