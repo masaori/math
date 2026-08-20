@@ -7,7 +7,8 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 有限上界、有限深さの入れ子多重集合符号、周期軌道と写像符号を形式化し、
 共役不変性（写像符号の保存まで）を証明する。さらに、符号一致からの
 再帰構成の最初の段として、等しい子符号多重集合から重複度を保つ子の
-出現の全単射を構成する。全配位上の再帰構成・完全性・有限決定は後続 tick で形式化する。
+出現の全単射を構成し、その対応が子符号と親への一段写像を同時に保存する
+ことを証明する。全配位上の再帰構成・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -86,7 +87,8 @@ theorem codeAtDepth_succ (depth : ℕ) (y : V → State) :
 /-- 二つの多重集合を写した結果が等しければ、各値を保つ出現の全単射を取れる。
     多重集合の出現型を使うので、同じ値を持つ相異なる子の重複度を失わない。 -/
 theorem exists_occurrence_equiv_of_map_eq
-    {X Y C : Type} (s : Multiset X) (t : Multiset Y)
+    {X Y C : Type} [DecidableEq X] [DecidableEq Y]
+    (s : Multiset X) (t : Multiset Y)
     (a : X → C) (b : Y → C) (hmap : s.map a = t.map b) :
     ∃ e : s ≃ t, ∀ x : s, b (e x) = a x := by
   let e : s ≃ t :=
@@ -114,6 +116,43 @@ theorem child_code_multisets_eq_of_codeAtDepth_succ_eq
   have hsorted := Encodable.encode_injective hcode
   have hcoerced := congrArg (fun xs : List ℕ => (xs : Multiset ℕ)) hsorted.symm
   simpa only [Multiset.sort_eq] using hcoerced
+
+/-- 後続深さの符号が等しい二頂点の子の出現には、重複度を保ち、
+    一つ前の深さの符号を保存する全単射がある。出現型の両側はそれぞれ
+    親の非周期一段前像多重集合なので、この対応は前像木の一段を接着する。 -/
+theorem exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
+    (depth : ℕ) (y : V → State) (yW : W → State)
+    (hcode : codeAtDepth NW fW (depth + 1) yW = codeAtDepth N f (depth + 1) y) :
+    ∃ e : (nonperiodicChildren N f y).val ≃ (nonperiodicChildren NW fW yW).val,
+      ∀ z : (nonperiodicChildren N f y).val,
+        codeAtDepth NW fW depth (e z) = codeAtDepth N f depth z := by
+  have hchildren := child_code_multisets_eq_of_codeAtDepth_succ_eq
+    N f NW fW depth y yW hcode
+  obtain ⟨e, hcode_preserved⟩ := exists_occurrence_equiv_of_map_eq
+    (nonperiodicChildren N f y).val (nonperiodicChildren NW fW yW).val
+    (codeAtDepth N f depth) (codeAtDepth NW fW depth) hchildren
+  exact ⟨e, hcode_preserved⟩
+
+/-- 深さ `depth` までの前像木の再帰的対応。後続段では、子の出現を
+    重複度つきで全単射に対応させ、対応する各子で一つ浅い対応を要求する。 -/
+def HasTreeMatching : (depth : ℕ) → (V → State) → (W → State) → Prop
+  | 0, _, _ => True
+  | depth + 1, y, yW =>
+      ∃ e : (nonperiodicChildren N f y).val ≃ (nonperiodicChildren NW fW yW).val,
+        ∀ z : (nonperiodicChildren N f y).val, HasTreeMatching depth z (e z)
+
+/-- 等しい打ち切り符号から、その深さ全体にわたる前像木の対応を
+    深さ帰納法で構成できる。各帰納段は直前の子出現対応だけを使う。 -/
+theorem hasTreeMatching_of_codeAtDepth_eq
+    (depth : ℕ) (y : V → State) (yW : W → State)
+    (hcode : codeAtDepth NW fW depth yW = codeAtDepth N f depth y) :
+    HasTreeMatching N f NW fW depth y yW := by
+  induction depth generalizing y yW with
+  | zero => trivial
+  | succ depth ih =>
+      obtain ⟨e, he⟩ := exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
+        N f NW fW depth y yW hcode
+      exact ⟨e, fun z => ih z (e z) (he z)⟩
 
 end ChildCodeMatching
 
