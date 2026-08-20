@@ -3673,6 +3673,31 @@ a_s
 \text{ for every }\alpha\in\mathcal Z_{\mathcal T}
 \quad\bigl(\because\ \text{形式的生成元の一次独立性}\bigr),\\
 &\Longleftrightarrow
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{fine}}(\alpha)
+\right)
+-
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{coarse}}(\alpha)
+\right)
+=0
+\text{ for every }\alpha\in\mathcal Z_{\mathcal T}
+\quad\bigl(\because\ \text{二段重複度差写像の定義}\bigr),\\
+&\Longleftrightarrow
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{fine}}(\alpha)
+\right)
+=
+\iota_{\mathbb N,\mathbb Z}
+\left(
+  \mu_{\mathrm{coarse}}(\alpha)
+\right)
+\text{ for every }\alpha\in\mathcal Z_{\mathcal T}
+\quad\bigl(\because\ \text{整数加法の消去律}\bigr),\\
+&\Longleftrightarrow
 \mu_{\mathrm{fine}}(\alpha)=\mu_{\mathrm{coarse}}(\alpha)
 \text{ for every }\alpha\in\mathcal Z_{\mathcal T}
 \quad\bigl(\because\ \iota_{\mathbb N,\mathbb Z}\text{ の単射性}\bigr),\\

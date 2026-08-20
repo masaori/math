@@ -24,6 +24,12 @@ def vanishing_data(fine_polynomial, coarse_polynomial):
         zero_support,
         lambda alpha: multiplicity_difference(alpha, pair),
     )
+    integer_differences_are_zero = all(
+        ZZ(pair(alpha)[0]) - ZZ(pair(alpha)[1]) == 0 for alpha in zero_support
+    )
+    embedded_multiplicities_agree = all(
+        ZZ(pair(alpha)[0]) == ZZ(pair(alpha)[1]) for alpha in zero_support
+    )
     multiplicities_agree = all(pair(alpha)[0] == pair(alpha)[1] for alpha in zero_support)
     monic_products_agree = (
         fine_polynomial / fine_polynomial.leading_coefficient()
@@ -35,6 +41,8 @@ def vanishing_data(fine_polynomial, coarse_polynomial):
     )
     return {
         "divisor_is_zero": divisor == {},
+        "integer_differences_are_zero": integer_differences_are_zero,
+        "embedded_multiplicities_agree": embedded_multiplicities_agree,
         "multiplicities_agree": multiplicities_agree,
         "monic_products_agree": monic_products_agree,
         "cross_products_agree": cross_products_agree,

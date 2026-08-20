@@ -13,7 +13,7 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
-| `check_formal_divisor_coefficients.sage` | 形式的因子の零性と全零点での重複度一致 | PASS | 三つの有限例で同値性が成立した |
+| `check_formal_divisor_coefficients.sage` | 形式的因子の零性、整数差の零性、整数へ移した重複度の一致、自然数重複度の一致 | PASS | 重複度差の定義、整数加法の消去、標準単射の単射性を分けた三つの同値性が三例で成立した |
 | `check_unique_monic_factorization.sage` | 重複度一致とモニック一次因子積の一致 | PASS | 三つの有限例で同値性が成立した |
 | `check_leading_coefficient_cross_product.sage` | モニック化の一致と最高次係数の交差乗算による多項式等式 | PASS | 三つの有限例で同値性が成立した |
 

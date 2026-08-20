@@ -7,10 +7,12 @@ import os
 load(os.path.join(os.path.dirname(os.path.abspath(__file__)), "_prelude.sage"))
 
 for values in (ordinary_values, shared_values, associate_values):
-    assert values["divisor_is_zero"] == values["multiplicities_agree"]
+    assert values["divisor_is_zero"] == values["integer_differences_are_zero"]
+    assert values["integer_differences_are_zero"] == values["embedded_multiplicities_agree"]
+    assert values["embedded_multiplicities_agree"] == values["multiplicities_agree"]
 
 assert not ordinary_values["divisor_is_zero"]
 assert not shared_values["divisor_is_zero"]
 assert associate_values["divisor_is_zero"]
 
-print("RESULT: PASS — the exact formal divisor vanishes exactly when all multiplicities agree")
+print("RESULT: PASS — difference definition, integer cancellation, and injectivity are checked separately")
