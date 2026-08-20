@@ -114,6 +114,7 @@ export const ALL_LABELS = [
   "theorem_quotient_tower_second_boundary_pushforward_commutativity_over_f2",
   "theorem_quotient_tower_two_stage_fisher_zero_formal_divisor_coefficient_sum",
   "theorem_quotient_tower_two_stage_fisher_zero_formal_divisor_stage_difference",
+  "theorem_quotient_tower_two_stage_fisher_zero_formal_divisor_vanishing_criterion",
   "theorem_quotient_tower_two_stage_fisher_zero_multiplicity_difference_finite_support",
   "theorem_quotient_tower_two_stage_ising_coefficient_ratio_logarithmic_value_compatibility",
   "theorem_quotient_tower_two_stage_ising_coefficient_valuation_difference_finite_support",

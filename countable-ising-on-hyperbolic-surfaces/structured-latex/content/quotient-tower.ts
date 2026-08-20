@@ -3609,4 +3609,97 @@ P_s(x)
       ]),
     ],
   },
+  {
+    id: "quotient_tower_theorem_two_stage_fisher_zero_formal_divisor_vanishing_criterion",
+    kind: "theorem",
+    title: { text: "二段 Fisher 零点形式的因子の消滅条件" },
+    labels: ["theorem_quotient_tower_two_stage_fisher_zero_formal_divisor_vanishing_criterion"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/two-stage-quotient-tower-fisher-zero-formal-divisor-vanishing-criterion"],
+    statement: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_formal_divisor"),
+        " の形式的因子について、",
+        math(String.raw`a_{\mathrm{fine}},a_{\mathrm{coarse}}\in\overline{\mathbb Q}^{\times}`),
+        " をそれぞれ ",
+        math(String.raw`\overline P_{\mathrm{fine}},\overline P_{\mathrm{coarse}}\in\overline{\mathbb Q}[x]`),
+        " の最高次係数とすると、",
+      ]),
+      displayMath(String.raw`\operatorname{Div}_{\Delta\mu}(\mathcal T)=0
+\quad\Longleftrightarrow\quad
+a_{\mathrm{coarse}}\overline P_{\mathrm{fine}}(x)
+=
+a_{\mathrm{fine}}\overline P_{\mathrm{coarse}}(x)
+\quad\text{in }\overline{\mathbb Q}[x].`),
+      paragraph([
+        "したがって形式的因子が零であることは、細段と粗段の分配多項式が非零定数倍だけ異なることと同値である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_pair_map"),
+        " で示した正の定数項により二つの多項式は非零である。代数閉体 ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " 上の一次因子分解から、各 ",
+        math(String.raw`s\in\{\mathrm{fine},\mathrm{coarse}\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline P_s(x)
+&=
+a_s
+\prod_{\substack{
+  \alpha\in\overline{\mathbb Q}\\
+  \overline P_s(\alpha)=0
+}}
+(x-\alpha)^{\mu_s(\alpha)}
+\quad\bigl(\because\ \overline{\mathbb Q}[x]\text{ における一次因子分解}\bigr),\\
+&=
+a_s
+\prod_{\alpha\in\mathcal Z_{\mathcal T}}
+(x-\alpha)^{\mu_s(\alpha)}
+\quad\bigl(\because\ \text{各段の零点台外では対応する重複度が零である}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_map"),
+        " と ",
+        ref("def_quotient_tower_two_stage_fisher_zero_multiplicity_difference_formal_divisor"),
+        " を用いると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{Div}_{\Delta\mu}(\mathcal T)=0
+&\Longleftrightarrow
+\Delta\mu_{\mathcal T}(\alpha)=0
+\text{ for every }\alpha\in\mathcal Z_{\mathcal T}
+\quad\bigl(\because\ \text{形式的生成元の一次独立性}\bigr),\\
+&\Longleftrightarrow
+\mu_{\mathrm{fine}}(\alpha)=\mu_{\mathrm{coarse}}(\alpha)
+\text{ for every }\alpha\in\mathcal Z_{\mathcal T}
+\quad\bigl(\because\ \iota_{\mathbb N,\mathbb Z}\text{ の単射性}\bigr),\\
+&\Longleftrightarrow
+\prod_{\alpha\in\mathcal Z_{\mathcal T}}
+(x-\alpha)^{\mu_{\mathrm{fine}}(\alpha)}
+=
+\prod_{\alpha\in\mathcal Z_{\mathcal T}}
+(x-\alpha)^{\mu_{\mathrm{coarse}}(\alpha)}
+\quad\bigl(\because\ \overline{\mathbb Q}[x]\text{ におけるモニック多項式の一意な一次因子分解}\bigr),\\
+&\Longleftrightarrow
+a_{\mathrm{coarse}}\overline P_{\mathrm{fine}}(x)
+=
+a_{\mathrm{fine}}\overline P_{\mathrm{coarse}}(x)
+\quad\bigl(\because\ \text{上の二つの一次因子分解}\bigr).
+\end{aligned}`),
+      paragraph([
+        "二つの最高次係数は ",
+        math(String.raw`\overline{\mathbb Q}^{\times}`),
+        "、零点は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        "、重複度は ",
+        math(String.raw`\mathbb N`),
+        "、重複度差は ",
+        math(String.raw`\mathbb Z`),
+        " に属する。全ての積と和は有限であり、複素平面への埋め込み、数値近似、距離、偏角、極限、積分を用いない。",
+      ]),
+    ],
+  },
 ]);
