@@ -1719,6 +1719,53 @@ Z_G(q_1)
     ],
   },
   {
+    id: "finite_graph_theorem_positive_rational_evaluation_at_most_configuration_count",
+    kind: "theorem",
+    title: { text: "正の有理評価が全配位数以下となる評価点の特徴付け" },
+    labels: ["theorem_partition_polynomial_positive_rational_evaluation_at_most_configuration_count"],
+    habitat: "Q",
+    verification: ["sagemath/check/positive-rational-evaluation-at-most-configuration-count"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフで ",
+        math(String.raw`E\ne\varnothing`),
+        " とする。任意の正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " について、自然数 ",
+        math(String.raw`2^{|V|}`),
+        " を有理数へ標準単射で移すと",
+      ]),
+      displayMath(String.raw`Z_G(q)\le 2^{|V|}\quad\Longleftrightarrow\quad q\le1\quad\text{in }\mathbb Q.`),
+    ],
+    proof: [
+      paragraph([ref("claim_partition_polynomial_value_at_one"), " より"]),
+      displayMath(String.raw`Z_G(1)=2^{|V|}
+\quad\bigl(\because\ \text{係数総和}\bigr).`),
+      displayMath(String.raw`Z_G(q)\le2^{|V|}
+\quad\Longleftrightarrow\quad
+Z_G(q)\le Z_G(1)
+\quad\bigl(\because\ Z_G(1)=2^{|V|}\text{ の代入}\bigr).`),
+      paragraph([
+        ref("theorem_partition_polynomial_positive_rational_evaluation_weak_order_reflection"),
+        " を正の有理評価点 ",
+        math(String.raw`q,1\in\mathbb Q_{>0}`),
+        " へ適用すると",
+      ]),
+      displayMath(String.raw`Z_G(q)\le Z_G(1)
+\quad\Longleftrightarrow\quad
+q\le1
+\quad\bigl(\because\ \text{正の有理評価における弱順序の反映}\bigr).`),
+      displayMath(String.raw`Z_G(q)\le2^{|V|}
+\quad\Longleftrightarrow\quad
+q\le1
+\quad\bigl(\because\ \text{直前の二つの同値関係の推移性}\bigr).`),
+      paragraph([
+        "評価点と評価値は有理数、頂点数と全配位数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_no_linear_factor_x_minus_one",
     kind: "theorem",
     title: { text: "一次多項式 x-1 は Ising 分配多項式を割り切らない" },

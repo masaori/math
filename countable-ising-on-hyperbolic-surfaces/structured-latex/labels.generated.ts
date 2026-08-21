@@ -110,6 +110,7 @@ export const ALL_LABELS = [
   "theorem_partition_polynomial_coefficient_evenness",
   "theorem_partition_polynomial_degree_maximum_broken_edge_count",
   "theorem_partition_polynomial_degree_maximum_cut_size",
+  "theorem_partition_polynomial_positive_rational_evaluation_at_most_configuration_count",
   "theorem_partition_polynomial_positive_rational_evaluation_injectivity",
   "theorem_partition_polynomial_positive_rational_evaluation_monotonicity",
   "theorem_partition_polynomial_positive_rational_evaluation_order_reflection",
