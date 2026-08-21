@@ -1639,6 +1639,141 @@ R_\alpha(\alpha^{-1})
     ],
   },
   {
+    id: "finite_graph_theorem_full_cut_fisher_zero_minus_one_multiplicity_parity",
+    kind: "theorem",
+    title: { text: "全辺二分割をもつ有限グラフの零点 -1 の重複度の偶奇" },
+    labels: ["theorem_full_cut_fisher_zero_minus_one_multiplicity_parity"],
+    habitat: "N",
+    verification: ["sagemath/check/full-cut-fisher-zero-minus-one-multiplicity-parity"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属すると仮定する。",
+        ref("theorem_full_cut_fisher_zero_reciprocal_multiplicity"),
+        " の零点重複度 ",
+        math(String.raw`\mu_G:\overline{\mathbb Q}\to\mathbb N`),
+        " について、零点 ",
+        math(String.raw`-1\in\overline{\mathbb Q}`),
+        " の重複度と辺数の偶奇は一致する。すなわち",
+      ]),
+      displayMath(String.raw`\mu_G(-1)\equiv |E|\pmod 2.`),
+    ],
+    proof: [
+      paragraph([
+        "全頂点下向き配位は破れ辺数零をもつので、",
+        ref("def_broken_edge_multiplicity"),
+        " より",
+      ]),
+      displayMath(String.raw`\Omega_G(0)\geq1.`),
+      paragraph([
+        ref("theorem_full_cut_coefficient_symmetry"),
+        " を ",
+        math(String.raw`m=0`),
+        " に適用すると",
+      ]),
+      displayMath(String.raw`\Omega_G(|E|)=\Omega_G(0)\geq1.`),
+      paragraph([ref("claim_partition_polynomial_coefficient_expansion"), " より"]),
+      displayMath(String.raw`\deg\overline P_G=|E|,
+\qquad
+\overline P_G(0)=\Omega_G(0)\ne0.`),
+      paragraph(["したがって零点台を"]),
+      displayMath(String.raw`\mathcal Z_G:=
+\left\{
+  \alpha\in\overline{\mathbb Q}^{\times}
+  \;\middle|\;
+  \mu_G(\alpha)>0
+\right\}`),
+      paragraph([
+        "と書ける。これは ",
+        math(String.raw`\overline P_G`),
+        " の有限な零点集合である。さらに、",
+        ref("theorem_full_cut_fisher_zero_reciprocal_multiplicity"),
+        " より逆数写像 ",
+        math(String.raw`\alpha\mapsto\alpha^{-1}`),
+        " は ",
+        math(String.raw`\mathcal Z_G`),
+        " を保ち、各零点の重複度を保つ。",
+      ]),
+      displayMath(String.raw`\mu_G(\alpha^{-1})=\mu_G(\alpha)
+\quad\text{for every }\alpha\in\mathcal Z_G.`),
+      paragraph([
+        math(String.raw`\alpha\in\mathcal Z_G`),
+        " が逆数写像の固定点ならば、代数的数の体で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha
+&=\alpha^{-1}
+&&\bigl(\because\ \text{逆数写像の固定点である}\bigr)\\
+\alpha^2
+&=1
+&&\bigl(\because\ \alpha\ne0\text{ なので両辺へ }\alpha\text{ を掛ける}\bigr)\\
+\alpha^2-1
+&=0
+&&\bigl(\because\ \text{両辺から }1\text{ を引く}\bigr)\\
+(\alpha-1)(\alpha+1)
+&=0
+&&\bigl(\because\ \alpha^2-1=(\alpha-1)(\alpha+1)\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\overline{\mathbb Q}`),
+        " は体なので、固定点は ",
+        math(String.raw`\alpha\in\{-1,1\}`),
+        " に限られる。ゆえに ",
+        math(String.raw`\mathcal Z_G\setminus\{-1,1\}`),
+        " は逆数写像の二元軌道へ分割され、各軌道 ",
+        math(String.raw`\{\alpha,\alpha^{-1}\}`),
+        " の重複度総和は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mu_G(\alpha)+\mu_G(\alpha^{-1})
+&=\mu_G(\alpha)+\mu_G(\alpha)
+&&\bigl(\because\ \text{逆数による重複度保存}\bigr)\\
+&=2\mu_G(\alpha)
+&&\bigl(\because\ \mathbb N\text{ の加法}\bigr).
+\end{aligned}`),
+      paragraph(["したがって"]),
+      displayMath(String.raw`\sum_{\alpha\in\mathcal Z_G\setminus\{-1,1\}}\mu_G(\alpha)
+\equiv0\pmod2.`),
+      paragraph([ref("claim_partition_polynomial_value_at_one"), " を標準単射で移すと"]),
+      displayMath(String.raw`\begin{aligned}
+\overline P_G(1)
+&=2^{|V|}
+&&\bigl(\because\ Z_G(1)=2^{|V|}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}>0\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\mu_G(1)=0
+\quad\bigl(\because\ \overline P_G(1)\ne0\bigr).`),
+      paragraph([
+        "代数的閉体上の一次因子分解における重複度総和は多項式の次数に等しく、",
+        "上で得た ",
+        math(String.raw`\deg\overline P_G=|E|`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|E|
+&=\sum_{\alpha\in\mathcal Z_G}\mu_G(\alpha)
+&&\bigl(\because\ \text{一次因子分解における重複度総和}\bigr)\\
+&=\mu_G(-1)+\mu_G(1)
+  +\sum_{\alpha\in\mathcal Z_G\setminus\{-1,1\}}\mu_G(\alpha)
+&&\bigl(\because\ \mu_G\text{ は零点台の外で零、有限零点台を三部分へ分割}\bigr)\\
+&\equiv\mu_G(-1)+\mu_G(1)\pmod2
+&&\bigl(\because\ \text{非固定軌道の重複度総和は偶数}\bigr)\\
+&=\mu_G(-1)\pmod2
+&&\bigl(\because\ \mu_G(1)=0\bigr).
+\end{aligned}`),
+      paragraph([
+        "零点は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        "、重複度と辺数は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },
