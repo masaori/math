@@ -215,6 +215,17 @@ noncomputable def treeNodeCount : ℕ → (V → State) → ℕ
   | depth + 1, y =>
       1 + ∑ z : (nonperiodicChildren N f y).val, treeNodeCount depth z
 
+/-- 有限集合の基礎多重集合の出現型に沿う和は、有限集合上の和に等しい。 -/
+theorem sum_occurrences_eq_finset_sum {X : Type} [Fintype X] [DecidableEq X]
+    (s : Finset X) (g : X → ℕ) :
+    (∑ z : s.val, g z) = ∑ z ∈ s, g z := by
+  calc
+    (∑ z : s.val, g z) = ∑ u : s.val.map g, (u : ℕ) := by
+      rw [← Equiv.sum_comp (s.val.mapEquiv g) (fun u : (s.val.map g) ↦ (u : ℕ))]
+      exact Fintype.sum_congr _ _ fun z => (Multiset.mapEquiv_apply s.val g z).symm
+    _ = (s.val.map g).sum := (Multiset.sum_eq_sum_coe _).symm
+    _ = ∑ z ∈ s, g z := rfl
+
 /-- `k` が最小前周期を越えない範囲では、`k` 回反復した配位の
     最小前周期はちょうど `k` だけ減る。人手証明の
     `claim_recursive_preimage_tree_code_child_preperiod_increment` を
@@ -309,6 +320,28 @@ theorem relativePreimageTreeLayer_card_succ
         · omega
         · rw [iterate_succ, hxiterate]
           exact (mem_nonperiodicChildren_iff N f y z).1 hzchild |>.1
+
+/-- 打ち切り前像木の再帰的な節点数は、根からの相対深さが
+    打ち切り深さ以下である層の個数の和に等しい。一つ深い層の
+    一段再帰分解を、深さに関する帰納法で足し上げる。 -/
+theorem treeNodeCount_eq_sum_relativePreimageTreeLayer_card
+    (y : V → State) (depth : ℕ) :
+    treeNodeCount N f depth y =
+      ∑ k ∈ Finset.range (depth + 1),
+        (relativePreimageTreeLayer N f y k).card := by
+  induction depth generalizing y with
+  | zero =>
+      simp [treeNodeCount, relativePreimageTreeLayer_zero]
+  | succ depth ih =>
+      rw [treeNodeCount]
+      rw [sum_occurrences_eq_finset_sum]
+      simp_rw [ih]
+      rw [Finset.sum_comm]
+      simp_rw [← relativePreimageTreeLayer_card_succ N f]
+      rw [Nat.add_comm]
+      simpa [relativePreimageTreeLayer_zero, Nat.add_assoc] using
+        (Finset.sum_range_succ'
+          (fun k => (relativePreimageTreeLayer N f y k).card) (depth + 1)).symm
 
 /-- 前像木対応は、同じ打ち切り深さまでの節点数を保存する。 -/
 theorem treeNodeCount_eq_of_hasTreeMatching
