@@ -98,6 +98,7 @@ export const ALL_LABELS = [
   "theorem_fixed_quotient_partition_polynomial_has_square_factor",
   "theorem_fixed_quotient_partition_polynomial_irreducible_factorization",
   "theorem_formal_high_temperature_expansion",
+  "theorem_full_cut_coefficient_symmetry",
   "theorem_generated_quotient_cellulation_is_hyperbolic_regular",
   "theorem_homology_class_polynomials_recombine",
   "theorem_odd_incident_edge_count_root_minus_one",

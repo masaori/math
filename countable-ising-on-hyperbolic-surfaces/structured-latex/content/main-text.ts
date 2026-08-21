@@ -787,6 +787,125 @@ b_G(\sigma)
     ],
   },
   {
+    id: "finite_graph_theorem_full_cut_coefficient_symmetry",
+    kind: "theorem",
+    title: { text: "全ての辺を横切る頂点二分割と係数対称性" },
+    labels: ["theorem_full_cut_coefficient_symmetry"],
+    habitat: "N",
+    verification: ["sagemath/check/full-cut-coefficient-symmetry"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属すると仮定する。すなわち、全ての ",
+        math(String.raw`e\in E`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\partial_G(e,\mathsf{source})\in A,\;
+\partial_G(e,\mathsf{target})\notin A,\\
+&\text{または }\partial_G(e,\mathsf{source})\notin A,\;
+\partial_G(e,\mathsf{target})\in A
+\end{aligned}`),
+      paragraph(["が成り立つ。このとき、全ての ", math(String.raw`m\in\{0,1,\ldots,|E|\}`), " について"]),
+      displayMath(String.raw`\Omega_G(m)=\Omega_G(|E|-m)\in\mathbb N.`),
+    ],
+    proof: [
+      paragraph([
+        "配位 ",
+        math(String.raw`\sigma\in\mathcal S_G`),
+        " に対し、頂点部分集合 ",
+        math(String.raw`A`),
+        " 上だけスピンを反転する写像 ",
+        math(String.raw`T_A:\mathcal S_G\to\mathcal S_G`),
+        " を",
+      ]),
+      displayMath(String.raw`T_A(\sigma)(v):=
+\begin{cases}
+  \nu(\sigma(v)) & (v\in A),\\
+  \sigma(v) & (v\notin A)
+\end{cases}
+\qquad(v\in V)`),
+      paragraph([
+        "で定める。",
+        ref("def_spin_label_reversal"),
+        " より任意の ",
+        math(String.raw`a\in\mathsf{Spin}`),
+        " に対して ",
+        math(String.raw`\nu(\nu(a))=a`),
+        " なので、任意の ",
+        math(String.raw`v\in V`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_A(T_A(\sigma))(v)
+&=\nu(T_A(\sigma)(v))
+&&\bigl(\because\ v\in A\text{ と }T_A\text{ の定義}\bigr)\\
+&=\nu(\nu(\sigma(v)))
+&&\bigl(\because\ v\in A\text{ と }T_A\text{ の定義}\bigr)\\
+&=\sigma(v)
+&&\bigl(\because\ \nu(\nu(a))=a\bigr)
+\qquad(v\in A),\\[4pt]
+T_A(T_A(\sigma))(v)
+&=T_A(\sigma)(v)
+&&\bigl(\because\ v\notin A\text{ と }T_A\text{ の定義}\bigr)\\
+&=\sigma(v)
+&&\bigl(\because\ v\notin A\text{ と }T_A\text{ の定義}\bigr)
+\qquad(v\notin A).
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`T_A`),
+        " は有限集合 ",
+        math(String.raw`\mathcal S_G`),
+        " 上の対合であり、全単射である。仮定より任意の ",
+        math(String.raw`e\in E`),
+        " の二端点のうちちょうど一方だけでスピンが反転する。",
+        ref("def_broken_edge_set"),
+        " とスピンラベルが二元であることより、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e\in B_G(T_A(\sigma))
+&\iff e\notin B_G(\sigma)
+&&\bigl(\because\ e\text{ の二端点のうちちょうど一方だけでスピンを反転する}\bigr),\\
+B_G(T_A(\sigma))
+&=E\setminus B_G(\sigma)
+&&\bigl(\because\ E\text{ の全ての元について所属が同値}\bigr),\\
+b_G(T_A(\sigma))
+&=|E|-b_G(\sigma)
+&&\bigl(\because\ \text{有限集合の補集合の元数}\bigr).
+\end{aligned}`),
+      paragraph([
+        "各 ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " に対し、",
+        math(String.raw`T_A`),
+        " は有限集合 ",
+        math(String.raw`\{\sigma\in\mathcal S_G\mid b_G(\sigma)=m\}`),
+        " から有限集合 ",
+        math(String.raw`\{\sigma\in\mathcal S_G\mid b_G(\sigma)=|E|-m\}`),
+        " への全単射を与える。",
+        ref("def_broken_edge_multiplicity"),
+        " より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_G(m)
+&=\left|\{\sigma\in\mathcal S_G\mid b_G(\sigma)=m\}\right|
+&&\bigl(\because\ \text{破れ辺数の多重度の定義}\bigr)\\
+&=\left|\{\sigma\in\mathcal S_G\mid b_G(\sigma)=|E|-m\}\right|
+&&\bigl(\because\ T_A\text{ が二つの有限集合の間の全単射}\bigr)\\
+&=\Omega_G(|E|-m)
+&&\bigl(\because\ \text{破れ辺数の多重度の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "全ての集合は有限であり、多重度と辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },
