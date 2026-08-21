@@ -10,7 +10,8 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 出現の全単射を構成し、その対応が子符号と親への一段写像を同時に保存する
 ことを証明する。さらに、対応する周期成分の符号が等しいとき、等しい基点語を
 持つ周期点を選び、その最小周期と周期上の各位置の再帰符号が一致することを示す。
-共通深さの前像木対応から、各周期位置に付く前像木の節点数一致も導く。
+共通深さの前像木対応から、各周期位置に付く前像木の節点数一致と、
+その一周期にわたる有限和の一致も導く。
 全配位上の全単射への接着・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
@@ -544,6 +545,31 @@ theorem treeNodeCount_iterate_eq_of_baseWord_eq_commonDepth
   exact hasTreeMatching_iterate_of_baseWord_eq_commonDepth
     N f NW fW r rW hr hrW hbase n hn
 
+/-- 周期軌道の各位置に付く前像木の節点数を、一周期にわたって足した有限和。 -/
+noncomputable def periodicOrbitTreeNodeCount
+    (depth : ℕ) (q : V → State) : ℕ :=
+  (Finset.range (minPeriod N f q)).sum fun n =>
+    treeNodeCount N f depth (iterate N f n q)
+
+/-- 等しい基点語を持つ周期成分では、共通深さまでの前像木節点数の
+    一周期にわたる有限和が等しい。各位置の等式を有限和へ持ち上げるだけであり、
+    前像木が全配位を尽くすことはまだ使わない。 -/
+theorem periodicOrbitTreeNodeCount_eq_of_baseWord_eq_commonDepth
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r) :
+    periodicOrbitTreeNodeCount NW fW
+        (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)) rW =
+      periodicOrbitTreeNodeCount N f
+        (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)) r := by
+  have hperiod := minPeriod_eq_of_baseWord_eq N f NW fW r rW hbase
+  unfold periodicOrbitTreeNodeCount
+  rw [hperiod]
+  apply Finset.sum_congr rfl
+  intro n hn
+  exact treeNodeCount_iterate_eq_of_baseWord_eq_commonDepth
+    N f NW fW r rW hr hrW hbase n (Finset.mem_range.mp hn)
+
 /-- 写像符号が等しいとき、周期軌道を重複度つきで対応させ、
     対応する基点と周期上の全位置で共通深さの前像木節点数が一致する。 -/
 theorem exists_orbit_equiv_with_treeNodeCounts
@@ -575,6 +601,34 @@ theorem exists_orbit_equiv_with_treeNodeCounts
   exact ⟨r, rW, hrO, hrWO, hbase, fun n hn =>
     treeNodeCount_iterate_eq_of_baseWord_eq_commonDepth
       N f NW fW r rW hr hrW hbase n hn⟩
+
+/-- 写像符号が等しいとき、対応する各周期成分について、周期上の全位置に
+    付く前像木節点数の有限和が等しい。周期成分間の重複度も保つ。 -/
+theorem exists_orbit_equiv_with_periodicOrbitTreeNodeCounts
+    (hcode : mapCode NW fW = mapCode N f) :
+    ∃ e : (periodicOrbitTable N f).val ≃ (periodicOrbitTable NW fW).val,
+      ∀ O : (periodicOrbitTable N f).val,
+        ∃ r : V → State, ∃ rW : W → State,
+          r ∈ (O : Finset (V → State)) ∧
+            rW ∈ (e O : Finset (W → State)) ∧
+              periodicOrbitTreeNodeCount NW fW
+                  (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)) rW =
+                periodicOrbitTreeNodeCount N f
+                  (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)) r := by
+  obtain ⟨e, he⟩ := exists_orbit_equiv_with_equal_baseWords N f NW fW hcode
+  refine ⟨e, fun O => ?_⟩
+  obtain ⟨r, rW, hrO, hrWO, hbase⟩ := he O
+  have hOmem : (O : Finset (V → State)) ∈ periodicOrbitTable N f :=
+    occurrence_mem (periodicOrbitTable N f).val O
+  have heOmem : (e O : Finset (W → State)) ∈ periodicOrbitTable NW fW :=
+    occurrence_mem (periodicOrbitTable NW fW).val (e O)
+  have hr : IsPeriodicPoint N f r :=
+    isPeriodicPoint_of_mem_periodicOrbitTable N f O hOmem r hrO
+  have hrW : IsPeriodicPoint NW fW rW :=
+    isPeriodicPoint_of_mem_periodicOrbitTable NW fW (e O) heOmem rW hrWO
+  exact ⟨r, rW, hrO, hrWO,
+    periodicOrbitTreeNodeCount_eq_of_baseWord_eq_commonDepth
+      N f NW fW r rW hr hrW hbase⟩
 
 /-- 等しい基点語を持つ周期点の対応に、周期上の各位置へ
     非周期前像木の全深さ対応を接着する。共通の打ち切り深さを
