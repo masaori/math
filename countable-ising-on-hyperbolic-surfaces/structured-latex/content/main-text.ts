@@ -906,6 +906,140 @@ b_G(T_A(\sigma))
     ],
   },
   {
+    id: "finite_graph_theorem_coefficient_symmetry_characterizes_full_cut",
+    kind: "theorem",
+    title: { text: "係数対称性による全辺二分割の特徴付け" },
+    labels: ["theorem_coefficient_symmetry_characterizes_full_cut"],
+    habitat: "finite",
+    verification: ["sagemath/check/coefficient-symmetry-full-cut-characterization"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、次の二条件は同値である。",
+      ]),
+      paragraph([
+        "ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての ",
+        math(String.raw`e\in E`),
+        " について二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属する。",
+      ]),
+      paragraph([
+        "全ての ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\Omega_G(m)=\Omega_G(|E|-m)\in\mathbb N.`),
+    ],
+    proof: [
+      paragraph([
+        "全ての辺の二端点のうちちょうど一方だけを含む頂点部分集合が存在すると仮定する。",
+        ref("theorem_full_cut_coefficient_symmetry"),
+        " より、全ての ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " について係数対称性が成り立つ。",
+      ]),
+      paragraph([
+        "逆に、全ての ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " について係数対称性が成り立つと仮定する。配位 ",
+        math(String.raw`\sigma_{\mathsf{down}}:V\to\mathsf{Spin}`),
+        " を",
+      ]),
+      displayMath(String.raw`\sigma_{\mathsf{down}}(v):=\mathsf{down}
+\qquad(v\in V)`),
+      paragraph([
+        "で定める。",
+        ref("def_spin_configuration_set"),
+        " より ",
+        math(String.raw`\sigma_{\mathsf{down}}\in\mathcal S_G`),
+        " である。",
+        ref("def_broken_edge_set"),
+        " より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B_G(\sigma_{\mathsf{down}})
+&=\varnothing
+&&\bigl(\because\ \text{全頂点のスピンラベルが }\mathsf{down}\text{ で等しい}\bigr)\\
+b_G(\sigma_{\mathsf{down}})
+&=0
+&&\bigl(\because\ |\varnothing|=0\bigr).
+\end{aligned}`),
+      paragraph([ref("def_broken_edge_multiplicity"), " より"]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_G(0)
+&=\left|\left\{\sigma\in\mathcal S_G\ \middle|\ b_G(\sigma)=0\right\}\right|
+&&\bigl(\because\ \text{破れ辺数の多重度の定義}\bigr)\\
+&\ge 1
+&&\bigl(\because\ \sigma_{\mathsf{down}}\text{ がこの有限集合に属する}\bigr).
+\end{aligned}`),
+      paragraph(["仮定した係数対称性へ ", math(String.raw`m=0`), " を適用すると"]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_G(|E|)
+&=\Omega_G(0)
+&&\bigl(\because\ \text{係数対称性の仮定を }m=0\text{ に適用}\bigr)\\
+&\ge 1
+&&\bigl(\because\ \Omega_G(0)\ge 1\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_broken_edge_multiplicity"),
+        " より、ある配位 ",
+        math(String.raw`\sigma_*\in\mathcal S_G`),
+        " が存在して ",
+        math(String.raw`b_G(\sigma_*)=|E|`),
+        " である。",
+        ref("def_broken_edge_set"),
+        " より ",
+        math(String.raw`B_G(\sigma_*)\subseteq E`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|B_G(\sigma_*)|
+&=|E|
+&&\bigl(\because\ b_G(\sigma_*)=|E|\text{ と破れ辺数の定義}\bigr)\\
+B_G(\sigma_*)
+&=E
+&&\bigl(\because\ B_G(\sigma_*)\subseteq E\text{ かつ二つの有限集合の元数が等しい}\bigr).
+\end{aligned}`),
+      paragraph([
+        "頂点部分集合 ",
+        math(String.raw`A_*\subseteq V`),
+        " を",
+      ]),
+      displayMath(String.raw`A_*:=\{v\in V\mid \sigma_*(v)=\mathsf{up}\}`),
+      paragraph([
+        "で定める。任意の ",
+        math(String.raw`e\in E`),
+        " に対し、直前の集合等式と ",
+        ref("def_broken_edge_set"),
+        " より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e
+&\in B_G(\sigma_*)
+&&\bigl(\because\ B_G(\sigma_*)=E\bigr)\\
+\sigma_*\!\left(\partial_G(e,\mathsf{source})\right)
+&\ne
+\sigma_*\!\left(\partial_G(e,\mathsf{target})\right)
+&&\bigl(\because\ \text{破れ辺集合の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("def_spin_label_set"),
+        " の元は相異なる二つのラベル ",
+        math(String.raw`\mathsf{up},\mathsf{down}`),
+        " だけなので、各辺の二端点のうちちょうど一方の ",
+        math(String.raw`\sigma_*`),
+        " 値が ",
+        math(String.raw`\mathsf{up}`),
+        " である。したがって各辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A_*`),
+        " に属する。全ての集合は有限であり、多重度と辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },
