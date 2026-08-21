@@ -1302,6 +1302,76 @@ Z_G(1)
     ],
   },
   {
+    id: "finite_graph_theorem_no_positive_rational_root",
+    kind: "theorem",
+    title: { text: "Ising 分配多項式は正の有理数を零点に持たない" },
+    labels: ["theorem_no_positive_rational_root"],
+    habitat: "Q",
+    verification: ["sagemath/check/no-positive-rational-root"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の任意の有限グラフと任意の正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " について",
+      ]),
+      displayMath(String.raw`Z_G(q)>0\quad\text{in }\mathbb Q.`),
+      paragraph([
+        "したがって正の有理数は Ising 分配多項式の零点ではない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " の整数係数を自然数から有理数への標準単射で移し、",
+        math(String.raw`x=q`),
+        " を代入すると",
+      ]),
+      displayMath(String.raw`Z_G(q)
+=\sum_{m=0}^{|E|}\Omega_G(m)q^m
+\quad\bigl(\because\ \text{多重度による係数表示}\bigr).`),
+      paragraph([
+        "配位 ",
+        math(String.raw`\sigma_{\mathsf{down}}:V\to\mathsf{Spin}`),
+        " を全ての ",
+        math(String.raw`v\in V`),
+        " について ",
+        math(String.raw`\sigma_{\mathsf{down}}(v):=\mathsf{down}`),
+        " と定める。",
+        ref("def_spin_configuration_set"),
+        " より ",
+        math(String.raw`\sigma_{\mathsf{down}}\in\mathcal S_G`),
+        " であり、",
+        ref("def_broken_edge_set"),
+        " より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B_G(\sigma_{\mathsf{down}})
+&=\varnothing
+&&\bigl(\because\ \text{全頂点のスピンラベルが }\mathsf{down}\text{ で等しい}\bigr)\\
+b_G(\sigma_{\mathsf{down}})
+&=0
+&&\bigl(\because\ |\varnothing|=0\bigr).
+\end{aligned}`),
+      paragraph([ref("def_broken_edge_multiplicity"), " より"]),
+      displayMath(String.raw`\Omega_G(0)
+\ge 1
+\quad\bigl(\because\ \sigma_{\mathsf{down}}\text{ が破れ辺数 }0\text{ のファイバーに属する}\bigr).`),
+      displayMath(String.raw`\begin{aligned}
+Z_G(q)
+&\ge \Omega_G(0)q^0
+&&\bigl(\because\ \Omega_G(m)\in\mathbb N\text{ かつ }q^m>0\text{ for every }m\in\mathbb N\bigr)\\
+&=\Omega_G(0)
+&&\bigl(\because\ q^0=1\bigr)\\
+&>0
+&&\bigl(\because\ \Omega_G(0)\ge1\bigr).
+\end{aligned}`),
+      paragraph([
+        "評価点と評価値は有理数、多重度と辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_no_linear_factor_x_minus_one",
     kind: "theorem",
     title: { text: "一次多項式 x-1 は Ising 分配多項式を割り切らない" },

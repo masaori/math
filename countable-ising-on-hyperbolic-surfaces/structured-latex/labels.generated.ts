@@ -105,6 +105,7 @@ export const ALL_LABELS = [
   "theorem_homology_class_polynomials_recombine",
   "theorem_linear_factor_characterizes_odd_incident_edge_count",
   "theorem_no_linear_factor_x_minus_one",
+  "theorem_no_positive_rational_root",
   "theorem_odd_incident_edge_count_root_minus_one",
   "theorem_partition_polynomial_coefficient_evenness",
   "theorem_partition_polynomial_degree_maximum_broken_edge_count",
