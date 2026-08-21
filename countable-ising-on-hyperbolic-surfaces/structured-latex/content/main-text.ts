@@ -654,6 +654,75 @@ Z_G(-1)
     ],
   },
   {
+    id: "finite_graph_theorem_linear_factor_characterizes_odd_incident_edge_count",
+    kind: "theorem",
+    title: { text: "一次因子 x+1 による奇接続辺数頂点の特徴付け" },
+    labels: ["theorem_linear_factor_characterizes_odd_incident_edge_count"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/linear-factor-odd-incident-edge-characterization"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、整数係数多項式 ",
+        math(String.raw`x+1`),
+        " が Ising 分配多項式を割り切ることと、接続する辺の本数が奇数である頂点が存在することは同値である。すなわち",
+      ]),
+      displayMath(String.raw`(x+1)\mid Z_G(x)\ \text{ in }\mathbb Z[x]
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \partial_G(e,\mathsf{source})=w
+    \quad\text{または}\quad
+    \partial_G(e,\mathsf{target})=w
+  \right\}
+\right|
+\in\{2n+1\mid n\in\mathbb N\}.`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_ising_partition_polynomial"),
+        " より ",
+        math(String.raw`Z_G(x)\in\mathbb Z[x]`),
+        " である。モニック一次多項式による整数係数多項式の除法より、ある ",
+        math(String.raw`Q_G(x)\in\mathbb Z[x]`),
+        " と ",
+        math(String.raw`r_G\in\mathbb Z`),
+        " が一意に存在して",
+      ]),
+      displayMath(String.raw`Z_G(x)=(x+1)Q_G(x)+r_G.`),
+      displayMath(String.raw`\begin{aligned}
+r_G
+&=Z_G(-1)
+&&\bigl(\because\ x=-1\text{ を直前の除法等式へ代入}\bigr),\\
+(x+1)\mid Z_G(x)\ \text{ in }\mathbb Z[x]
+&\Longleftrightarrow r_G=0
+&&\bigl(\because\ \text{多項式の整除と除法の余りの定義}\bigr),\\
+&\Longleftrightarrow Z_G(-1)=0
+&&\bigl(\because\ r_G=Z_G(-1)\bigr).
+\end{aligned}`),
+      paragraph([ref("theorem_root_minus_one_characterizes_odd_incident_edge_count"), " より"]),
+      displayMath(String.raw`Z_G(-1)=0
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \partial_G(e,\mathsf{source})=w
+    \quad\text{または}\quad
+    \partial_G(e,\mathsf{target})=w
+  \right\}
+\right|
+\in\{2n+1\mid n\in\mathbb N\}.`),
+      paragraph([
+        "以上の二つの同値性を接続して結論を得る。除法の商は整数係数多項式、余りと評価値は整数、接続辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_partition_polynomial_degree_maximum_broken_edge_count",
     kind: "theorem",
     title: { text: "Ising 分配多項式の次数と最大破れ辺数" },
