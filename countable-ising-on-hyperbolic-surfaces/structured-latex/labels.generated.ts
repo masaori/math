@@ -117,6 +117,7 @@ export const ALL_LABELS = [
   "theorem_partition_polynomial_positive_rational_evaluation_monotonicity",
   "theorem_partition_polynomial_positive_rational_evaluation_order_reflection",
   "theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity",
+  "theorem_partition_polynomial_positive_rational_evaluation_strictly_below_configuration_count",
   "theorem_partition_polynomial_positive_rational_evaluation_weak_order_reflection",
   "theorem_primal_coboundary_transport_is_dual_boundary",
   "theorem_primal_cocycle_transport_is_dual_cycle",
