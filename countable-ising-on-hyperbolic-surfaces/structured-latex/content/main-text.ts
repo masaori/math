@@ -1611,6 +1611,60 @@ Z_G(q_1)
     ],
   },
   {
+    id: "finite_graph_theorem_positive_rational_evaluation_order_reflection",
+    kind: "theorem",
+    title: { text: "辺をもつ有限グラフの正の有理評価における狭義順序の反映" },
+    labels: ["theorem_partition_polynomial_positive_rational_evaluation_order_reflection"],
+    habitat: "Q",
+    verification: ["sagemath/check/positive-rational-evaluation-order-reflection"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフで ",
+        math(String.raw`E\ne\varnothing`),
+        " とする。任意の正の有理数 ",
+        math(String.raw`q_1,q_2\in\mathbb Q_{>0}`),
+        " について",
+      ]),
+      displayMath(String.raw`Z_G(q_1)<Z_G(q_2)\quad\Longleftrightarrow\quad q_1<q_2\quad\text{in }\mathbb Q.`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`q_1<q_2`),
+        " とする。",
+        ref("theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity"),
+        " より",
+      ]),
+      displayMath(String.raw`Z_G(q_1)<Z_G(q_2)
+\quad\bigl(\because\ 0<q_1<q_2\bigr).`),
+      paragraph([
+        "逆に ",
+        math(String.raw`Z_G(q_1)<Z_G(q_2)`),
+        " とする。",
+        math(String.raw`q_1<q_2`),
+        " でないと仮定すると、有理数の全順序性より",
+      ]),
+      displayMath(String.raw`q_2\le q_1
+\quad\bigl(\because\ q_1<q_2\text{ でないことと }\mathbb Q\text{ の全順序性}\bigr).`),
+      paragraph([
+        ref("theorem_partition_polynomial_positive_rational_evaluation_monotonicity"),
+        " を ",
+        math(String.raw`q_2\le q_1`),
+        " へ適用すると",
+      ]),
+      displayMath(String.raw`Z_G(q_2)\le Z_G(q_1)
+\quad\bigl(\because\ 0<q_2\le q_1\bigr),`),
+      paragraph([
+        "となり、",
+        math(String.raw`Z_G(q_1)<Z_G(q_2)`),
+        " に反する。したがって",
+      ]),
+      displayMath(String.raw`q_1<q_2
+\quad\bigl(\because\ q_1<q_2\text{ でないという仮定から矛盾を得た}\bigr).`),
+      paragraph(["評価点と評価値は有理数に属する。実数、複素数、極限、積分を用いない。"]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_no_linear_factor_x_minus_one",
     kind: "theorem",
     title: { text: "一次多項式 x-1 は Ising 分配多項式を割り切らない" },

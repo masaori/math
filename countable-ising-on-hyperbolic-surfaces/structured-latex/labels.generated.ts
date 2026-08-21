@@ -112,6 +112,7 @@ export const ALL_LABELS = [
   "theorem_partition_polynomial_degree_maximum_cut_size",
   "theorem_partition_polynomial_positive_rational_evaluation_injectivity",
   "theorem_partition_polynomial_positive_rational_evaluation_monotonicity",
+  "theorem_partition_polynomial_positive_rational_evaluation_order_reflection",
   "theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity",
   "theorem_primal_coboundary_transport_is_dual_boundary",
   "theorem_primal_cocycle_transport_is_dual_cycle",
