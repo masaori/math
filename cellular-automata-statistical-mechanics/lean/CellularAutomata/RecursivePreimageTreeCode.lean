@@ -13,7 +13,8 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 共通深さの前像木対応から、各周期位置に付く前像木の節点数一致と、
 その一周期にわたる有限和の一致も導く。各配位を最小前周期だけ進めて
 到達する周期点の有限ファイバーが、全配位を重複なく被覆することも示す。
-再帰的節点数とこの有限ファイバーの個数の一致、全配位上の全単射への
+最小前周期差で切った相対深さ層と、その非周期一段前像ごとの再帰分解も示す。
+再帰的節点数と有限ファイバーの個数の一致、全配位上の全単射への
 接着・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
@@ -213,6 +214,101 @@ noncomputable def treeNodeCount : ℕ → (V → State) → ℕ
   | 0, _ => 1
   | depth + 1, y =>
       1 + ∑ z : (nonperiodicChildren N f y).val, treeNodeCount depth z
+
+/-- `k` が最小前周期を越えない範囲では、`k` 回反復した配位の
+    最小前周期はちょうど `k` だけ減る。人手証明の
+    `claim_recursive_preimage_tree_code_child_preperiod_increment` を
+    経路に沿って繰り返す段に対応する。 -/
+theorem minPreperiod_iterate_eq_sub
+    (x : V → State) (k : ℕ) (hk : k ≤ minPreperiod N f x) :
+    minPreperiod N f (iterate N f k x) = minPreperiod N f x - k := by
+  induction k with
+  | zero => simp [iterate_zero]
+  | succ k ih =>
+      have hk' : k ≤ minPreperiod N f x := by omega
+      have hpos : 0 < minPreperiod N f (iterate N f k x) := by
+        rw [ih hk']
+        omega
+      rw [iterate_succ, minPreperiod_globalMap_eq_sub_one N f _ hpos, ih hk']
+      omega
+
+/-- 根 `y` から逆向きにちょうど `k` 段にある節点の有限表。
+    最小前周期差と `k` 回反復の二条件を同時に記録するため、
+    周期辺を除いた前像木の層だけを数える。 -/
+noncomputable def relativePreimageTreeLayer
+    (y : V → State) (k : ℕ) : Finset (V → State) :=
+  Finset.univ.filter fun x =>
+    minPreperiod N f x = minPreperiod N f y + k ∧ iterate N f k x = y
+
+theorem mem_relativePreimageTreeLayer_iff
+    (y x : V → State) (k : ℕ) :
+    x ∈ relativePreimageTreeLayer N f y k ↔
+      minPreperiod N f x = minPreperiod N f y + k ∧ iterate N f k x = y := by
+  simp [relativePreimageTreeLayer]
+
+/-- 相対深さ零の層は根だけからなる。 -/
+theorem relativePreimageTreeLayer_zero (y : V → State) :
+    relativePreimageTreeLayer N f y 0 = {y} := by
+  ext x
+  simp only [mem_relativePreimageTreeLayer_iff, Nat.add_zero, iterate_zero,
+    Finset.mem_singleton]
+  constructor
+  · exact fun h => h.2
+  · intro hxy
+    subst x
+    exact ⟨rfl, rfl⟩
+
+/-- 一つ深い相対層は、非周期一段前像を根とする相対層へ重複なく分かれる。
+    `card_eq_sum_card_fiberwise` の分類写像は、深さ `k+1` の節点を
+    `k` 回進めて得る `y` の非周期一段前像である。 -/
+theorem relativePreimageTreeLayer_card_succ
+    (y : V → State) (k : ℕ) :
+    (relativePreimageTreeLayer N f y (k + 1)).card =
+      ∑ z ∈ nonperiodicChildren N f y,
+        (relativePreimageTreeLayer N f z k).card := by
+  let source := relativePreimageTreeLayer N f y (k + 1)
+  let target := nonperiodicChildren N f y
+  let parent : (V → State) → (V → State) := fun x => iterate N f k x
+  have hmaps : ∀ x ∈ source, parent x ∈ target := by
+    intro x hx
+    have hxdata := (mem_relativePreimageTreeLayer_iff N f y x (k + 1)).1 hx
+    have hkmu : k ≤ minPreperiod N f x := by omega
+    have hmuParent := minPreperiod_iterate_eq_sub N f x k hkmu
+    have hparentNonperiodic : ¬ IsPeriodicPoint N f (parent x) := by
+      intro hperiodic
+      have hzero := (isPeriodicPoint_iff_minPreperiod_zero N f (parent x)).1 hperiodic
+      rw [hmuParent] at hzero
+      omega
+    apply (mem_nonperiodicChildren_iff N f y (parent x)).2
+    refine ⟨?_, hparentNonperiodic⟩
+    change globalMap N f (iterate N f k x) = y
+    rw [← iterate_succ]
+    exact hxdata.2
+  rw [Finset.card_eq_sum_card_fiberwise hmaps]
+  calc
+    ∑ z ∈ target, (source.filter fun x => parent x = z).card =
+        ∑ z ∈ target, (relativePreimageTreeLayer N f z k).card := by
+      apply Finset.sum_congr rfl
+      intro z hz
+      apply congrArg Finset.card
+      ext x
+      have hzchild : z ∈ nonperiodicChildren N f y := hz
+      have hzmu := child_minPreperiod_eq_add_one N f y z hzchild
+      simp only [Finset.mem_filter]
+      dsimp only [source, parent]
+      change
+        (x ∈ relativePreimageTreeLayer N f y (k + 1) ∧ iterate N f k x = z) ↔
+          x ∈ relativePreimageTreeLayer N f z k
+      rw [mem_relativePreimageTreeLayer_iff, mem_relativePreimageTreeLayer_iff]
+      constructor
+      · rintro ⟨hxlayer, hparent⟩
+        refine ⟨?_, hparent⟩
+        omega
+      · rintro ⟨hxmu, hxiterate⟩
+        refine ⟨⟨?_, ?_⟩, hxiterate⟩
+        · omega
+        · rw [iterate_succ, hxiterate]
+          exact (mem_nonperiodicChildren_iff N f y z).1 hzchild |>.1
 
 /-- 前像木対応は、同じ打ち切り深さまでの節点数を保存する。 -/
 theorem treeNodeCount_eq_of_hasTreeMatching
