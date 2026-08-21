@@ -598,6 +598,62 @@ Z_G(-1)
     ],
   },
   {
+    id: "finite_graph_theorem_root_minus_one_characterizes_odd_incident_edge_count",
+    kind: "theorem",
+    title: { text: "零点 -1 による奇接続辺数頂点の特徴付け" },
+    labels: ["theorem_root_minus_one_characterizes_odd_incident_edge_count"],
+    habitat: "Z",
+    verification: ["sagemath/check/root-minus-one-odd-incident-edge-characterization"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、整数 ",
+        math(String.raw`-1`),
+        " が Ising 分配多項式の零点であることと、接続する辺の本数が奇数である頂点が存在することは同値である。すなわち",
+      ]),
+      displayMath(String.raw`Z_G(-1)=0
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \partial_G(e,\mathsf{source})=w
+    \quad\text{または}\quad
+    \partial_G(e,\mathsf{target})=w
+  \right\}
+\right|
+\in\{2n+1\mid n\in\mathbb N\}.`),
+    ],
+    proof: [
+      paragraph([
+        "まず、接続する辺の本数が奇数である頂点が存在すると仮定する。",
+        ref("theorem_odd_incident_edge_count_root_minus_one"),
+        " より",
+      ]),
+      displayMath(String.raw`Z_G(-1)=0.`),
+      paragraph([
+        "逆に、",
+        math(String.raw`Z_G(-1)=0`),
+        " と仮定する。接続する辺の本数が奇数である頂点が存在しないと仮定すると、各接続辺数は自然数なので、全ての頂点の接続辺数は偶数である。",
+        ref("theorem_even_incident_edge_counts_evaluation_minus_one"),
+        " より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_G(-1)
+&=2^{|V|}
+&&\bigl(\because\ \text{全頂点の接続辺数が偶数である}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}\text{ は正の整数である}\bigr).
+\end{aligned}`),
+      paragraph([
+        "これは仮定 ",
+        math(String.raw`Z_G(-1)=0`),
+        " に反する。したがって、接続する辺の本数が奇数である頂点が存在する。全ての集合は有限であり、接続辺数は自然数、評価値は整数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_partition_polynomial_degree_maximum_broken_edge_count",
     kind: "theorem",
     title: { text: "Ising 分配多項式の次数と最大破れ辺数" },

@@ -125,6 +125,7 @@ export const ALL_LABELS = [
   "theorem_quotient_tower_two_stage_fisher_zero_multiplicity_difference_finite_support",
   "theorem_quotient_tower_two_stage_ising_coefficient_ratio_logarithmic_value_compatibility",
   "theorem_quotient_tower_two_stage_ising_coefficient_valuation_difference_finite_support",
+  "theorem_root_minus_one_characterizes_odd_incident_edge_count",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
