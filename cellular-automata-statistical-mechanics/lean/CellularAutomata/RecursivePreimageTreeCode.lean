@@ -17,7 +17,8 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 十分な深さでの再帰的節点数と有限ファイバーの個数の一致も示す。
 対応周期成分の節点数を全成分にわたって足し、写像符号の等号から
 全配位数とセル数の一致も導く。
-全配位上の全単射への接着・完全性・有限決定は後続 tick で形式化する。
+写像符号から得た配位数一致を使い、全配位集合の全単射も定義する。
+この全単射が時間発展と可換すること・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -1077,6 +1078,22 @@ theorem configuration_card_and_cell_card_eq_of_mapCode_eq
       _ = 2 ^ Fintype.card V :=
           sum_periodicComponentNodeTable_card_eq_configurations N f
   exact ⟨hconfig, Nat.pow_right_injective (le_refl 2) hconfig⟩
+
+/-- 写像符号の等号から得られる全配位集合の全単射。
+    この段では有限集合の個数一致だけを使って全単射を固定する。
+    時間発展との可換性はまだ主張しない。 -/
+noncomputable def configurationEquivOfMapCode
+    (hcode : mapCode NW fW = mapCode N f) :
+    (V → State) ≃ (W → State) :=
+  Fintype.equivOfCardEq (by
+    rw [card_config, card_config]
+    exact (configuration_card_and_cell_card_eq_of_mapCode_eq N f NW fW hcode).1.symm)
+
+/-- 上で固定した全配位対応写像は全単射である。 -/
+theorem configurationEquivOfMapCode_bijective
+    (hcode : mapCode NW fW = mapCode N f) :
+    Function.Bijective (configurationEquivOfMapCode N f NW fW hcode) :=
+  (configurationEquivOfMapCode N f NW fW hcode).bijective
 
 /-- 等しい基点語を持つ周期点の対応に、周期上の各位置へ
     非周期前像木の全深さ対応を接着する。共通の打ち切り深さを
