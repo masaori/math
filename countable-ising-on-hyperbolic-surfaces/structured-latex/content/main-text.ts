@@ -1419,6 +1419,137 @@ x^{|E|}Z_G(x^{-1})
     ],
   },
   {
+    id: "finite_graph_theorem_full_cut_fisher_zero_reciprocal_multiplicity",
+    kind: "theorem",
+    title: { text: "全辺二分割をもつ有限グラフの Fisher 零点重複度の逆数対称性" },
+    labels: ["theorem_full_cut_fisher_zero_reciprocal_multiplicity"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/full-cut-fisher-zero-reciprocal-multiplicity"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属すると仮定する。",
+        ref("def_ising_partition_polynomial"),
+        " の係数を標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式を",
+      ]),
+      displayMath(String.raw`\overline P_G(x):=\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}\!\left(Z_G(x)\right)
+\in\overline{\mathbb Q}[x]`),
+      paragraph(["と置く。各 ", math(String.raw`\alpha\in\overline{\mathbb Q}`), " の零点重複度を"]),
+      displayMath(String.raw`\mu_G(\alpha):=
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  (x-\alpha)^k\mid\overline P_G(x)
+  \text{ in }\overline{\mathbb Q}[x]
+\right\}
+\in\mathbb N`),
+      paragraph(["で定める。このとき任意の ", math(String.raw`\alpha\in\overline{\mathbb Q}^{\times}`), " について"]),
+      displayMath(String.raw`\mu_G(\alpha^{-1})=\mu_G(\alpha).`),
+      paragraph([
+        "特に、非零 Fisher 零点は逆数を取る写像で重複度ごとに保たれる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "全頂点下向き配位 ",
+        math(String.raw`\sigma_{\mathsf{down}}\in\mathcal S_G`),
+        " は破れ辺数零をもつので、",
+        ref("def_broken_edge_multiplicity"),
+        " より",
+      ]),
+      displayMath(String.raw`\Omega_G(0)\geq1.`),
+      paragraph([
+        ref("theorem_full_cut_coefficient_symmetry"),
+        " を ",
+        math(String.raw`m=0`),
+        " に適用すると",
+      ]),
+      displayMath(String.raw`\Omega_G(|E|)=\Omega_G(0)\geq1.`),
+      paragraph([ref("claim_partition_polynomial_coefficient_expansion"), " より"]),
+      displayMath(String.raw`\deg\overline P_G=|E|,
+\qquad
+\overline P_G(0)=\Omega_G(0)\ne0.`),
+      paragraph([
+        "したがって ",
+        math(String.raw`\overline P_G`),
+        " は非零多項式であり、零点重複度を定める集合は ",
+        math(String.raw`k=0`),
+        " を含み、",
+        math(String.raw`|E|`),
+        " 以下なので、",
+        math(String.raw`\mu_G(\alpha)`),
+        " は全ての ",
+        math(String.raw`\alpha\in\overline{\mathbb Q}`),
+        " で一意に定まる。",
+      ]),
+      paragraph([
+        math(String.raw`\alpha\in\overline{\mathbb Q}^{\times}`),
+        " を固定し、",
+        math(String.raw`r:=\mu_G(\alpha)\in\mathbb N`),
+        " と置く。重複度の定義より、ある ",
+        math(String.raw`Q_\alpha(x)\in\overline{\mathbb Q}[x]`),
+        " が一意に存在して",
+      ]),
+      displayMath(String.raw`\overline P_G(x)=(x-\alpha)^rQ_\alpha(x),
+\qquad
+Q_\alpha(\alpha)\ne0,
+\qquad
+\deg Q_\alpha=|E|-r.`),
+      paragraph([
+        ref("theorem_partition_polynomial_reciprocity_characterizes_full_cut"),
+        " の順方向を標準単射で ",
+        math(String.raw`\overline{\mathbb Q}[x,x^{-1}]`),
+        " へ移し、直前の因子分解を代入すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline P_G(x)
+&=x^{|E|}\overline P_G(x^{-1})
+&&\bigl(\because\ \text{全辺二分割による多項式逆数対称性}\bigr)\\
+&=x^{|E|}(x^{-1}-\alpha)^rQ_\alpha(x^{-1})
+&&\bigl(\because\ \overline P_G(x^{-1})=(x^{-1}-\alpha)^rQ_\alpha(x^{-1})\bigr)\\
+&=x^{|E|-r}(1-\alpha x)^rQ_\alpha(x^{-1})
+&&\bigl(\because\ x^{-1}-\alpha=x^{-1}(1-\alpha x)\bigr)\\
+&=(-\alpha)^r(x-\alpha^{-1})^r x^{|E|-r}Q_\alpha(x^{-1})
+&&\bigl(\because\ 1-\alpha x=-\alpha(x-\alpha^{-1})\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\deg Q_\alpha=|E|-r`),
+        " なので、逆順多項式",
+      ]),
+      displayMath(String.raw`R_\alpha(x):=x^{|E|-r}Q_\alpha(x^{-1})
+\in\overline{\mathbb Q}[x]`),
+      paragraph(["は次を満たす。"]),
+      displayMath(String.raw`\begin{aligned}
+R_\alpha(\alpha^{-1})
+&=(\alpha^{-1})^{|E|-r}Q_\alpha(\alpha)
+&&\bigl(\because\ R_\alpha\text{ の定義へ }x=\alpha^{-1}\text{ を代入}\bigr)\\
+&\ne0
+&&\bigl(\because\ \alpha\ne0\text{ かつ }Q_\alpha(\alpha)\ne0\bigr).
+\end{aligned}`),
+      paragraph([
+        "また ",
+        math(String.raw`(-\alpha)^r\ne0`),
+        " である。したがって直前の因子分解における ",
+        math(String.raw`x-\alpha^{-1}`),
+        " の指数はちょうど ",
+        math(String.raw`r`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\mu_G(\alpha^{-1})=r=\mu_G(\alpha).`),
+      paragraph([
+        "多項式と係数は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        "、重複度と辺数は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },

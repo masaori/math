@@ -101,6 +101,7 @@ export const ALL_LABELS = [
   "theorem_fixed_quotient_partition_polynomial_irreducible_factorization",
   "theorem_formal_high_temperature_expansion",
   "theorem_full_cut_coefficient_symmetry",
+  "theorem_full_cut_fisher_zero_reciprocal_multiplicity",
   "theorem_full_cut_positive_rational_evaluation_reciprocity",
   "theorem_generated_quotient_cellulation_is_hyperbolic_regular",
   "theorem_homology_class_polynomials_recombine",
