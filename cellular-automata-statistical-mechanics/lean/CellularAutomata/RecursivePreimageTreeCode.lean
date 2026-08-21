@@ -19,6 +19,7 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 全配位数とセル数の一致も導く。
 写像符号から得た配位数一致を使い、全配位集合の全単射も定義する。
 再帰的な子対応が両側の一段発展を親へ移す局所可換性も証明する。
+周期成分表が全配位を重複なく被覆し、各配位の成分添字が一意であることも示す。
 この局所対応を全周期成分で接着した全単射・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
@@ -910,6 +911,52 @@ theorem sum_preimageTreeNodeTable_card_eq_configurations :
 noncomputable def periodicComponentNodeTable
     (O : Finset (V → State)) : Finset (V → State) :=
   Finset.univ.filter fun y => periodicOrbit N f (eventualPeriodicRoot N f y) = O
+
+/-- 周期成分表への所属は、最終周期根の軌道が添字の周期軌道に等しいことと同値である。 -/
+theorem mem_periodicComponentNodeTable_iff
+    (O : Finset (V → State)) (y : V → State) :
+    y ∈ periodicComponentNodeTable N f O ↔
+      periodicOrbit N f (eventualPeriodicRoot N f y) = O := by
+  simp [periodicComponentNodeTable]
+
+/-- 相異なる周期軌道に流入する周期成分表は交わらない。 -/
+theorem periodicComponentNodeTable_disjoint
+    (O P : Finset (V → State)) (hOP : O ≠ P) :
+    Disjoint (periodicComponentNodeTable N f O)
+      (periodicComponentNodeTable N f P) := by
+  rw [Finset.disjoint_left]
+  intro y hyO hyP
+  apply hOP
+  exact ((mem_periodicComponentNodeTable_iff N f O y).1 hyO).symm.trans
+    ((mem_periodicComponentNodeTable_iff N f P y).1 hyP)
+
+/-- 周期軌道表で添字付けた周期成分表は全配位を被覆する。 -/
+theorem periodicComponentNodeTables_cover :
+    (periodicOrbitTable N f).biUnion (periodicComponentNodeTable N f) =
+      Finset.univ := by
+  ext y
+  simp only [Finset.mem_biUnion, Finset.mem_univ, iff_true]
+  let O := periodicOrbit N f (eventualPeriodicRoot N f y)
+  have hO : O ∈ periodicOrbitTable N f := by
+    apply (mem_periodicOrbitTable_iff N f O).2
+    exact ⟨eventualPeriodicRoot N f y,
+      eventualPeriodicRoot_isPeriodicPoint N f y, rfl⟩
+  exact ⟨O, hO, (mem_periodicComponentNodeTable_iff N f O y).2 rfl⟩
+
+/-- 各配位が属する周期成分表の添字は、周期軌道表の中でただ一つである。
+    全成分の対応を一つの全配位対応へ接着するときの一意な成分選択に使う。 -/
+theorem exists_unique_periodicComponent (y : V → State) :
+    ∃! O : (periodicOrbitTable N f),
+      y ∈ periodicComponentNodeTable N f O := by
+  let O := periodicOrbit N f (eventualPeriodicRoot N f y)
+  have hO : O ∈ periodicOrbitTable N f := by
+    apply (mem_periodicOrbitTable_iff N f O).2
+    exact ⟨eventualPeriodicRoot N f y,
+      eventualPeriodicRoot_isPeriodicPoint N f y, rfl⟩
+  refine ⟨⟨O, hO⟩, (mem_periodicComponentNodeTable_iff N f O y).2 rfl, ?_⟩
+  intro P hyP
+  apply Subtype.ext
+  exact ((mem_periodicComponentNodeTable_iff N f P y).1 hyP).symm
 
 /-- 周期点を基点とする一周期の前像木節点数は、十分な深さでは
     その周期成分へ流入する全配位の個数に一致する。 -/
