@@ -121,6 +121,7 @@ export const ALL_LABELS = [
   "theorem_partition_polynomial_positive_rational_evaluation_strictly_above_configuration_count",
   "theorem_partition_polynomial_positive_rational_evaluation_strictly_below_configuration_count",
   "theorem_partition_polynomial_positive_rational_evaluation_weak_order_reflection",
+  "theorem_partition_polynomial_reciprocity_characterizes_full_cut",
   "theorem_primal_coboundary_transport_is_dual_boundary",
   "theorem_primal_cocycle_transport_is_dual_cycle",
   "theorem_primal_cohomology_dual_homology_transport_is_bijective",

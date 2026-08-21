@@ -1331,6 +1331,94 @@ Z_G(q)
     ],
   },
   {
+    id: "finite_graph_theorem_polynomial_reciprocity_characterizes_full_cut",
+    kind: "theorem",
+    title: { text: "多項式逆数対称性による全辺二分割の特徴付け" },
+    labels: ["theorem_partition_polynomial_reciprocity_characterizes_full_cut"],
+    habitat: "Z",
+    verification: ["sagemath/check/polynomial-reciprocity-full-cut-characterization"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、次の二条件は同値である。",
+      ]),
+      paragraph([
+        "ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属する。",
+      ]),
+      paragraph([
+        "不定元 ",
+        math(String.raw`x`),
+        " の整数係数 Laurent 多項式環 ",
+        math(String.raw`\mathbb Z[x,x^{-1}]`),
+        " において",
+      ]),
+      displayMath(String.raw`Z_G(x)=x^{|E|}Z_G(x^{-1}).`),
+    ],
+    proof: [
+      paragraph([
+        "全ての辺の二端点のうちちょうど一方だけを含む頂点部分集合が存在すると仮定する。",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " と ",
+        ref("theorem_full_cut_coefficient_symmetry"),
+        " より、整数係数 Laurent 多項式環で",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x^{|E|}Z_G(x^{-1})
+&=x^{|E|}\sum_{m=0}^{|E|}\Omega_G(m)x^{-m}
+&&\bigl(\because\ \text{多重度による係数表示へ }x^{-1}\text{ を代入}\bigr)\\
+&=\sum_{m=0}^{|E|}x^{|E|}\Omega_G(m)x^{-m}
+&&\bigl(\because\ \text{有限和に対する分配律}\bigr)\\
+&=\sum_{m=0}^{|E|}\Omega_G(m)x^{|E|}x^{-m}
+&&\bigl(\because\ \text{Laurent 多項式環の乗法の可換律}\bigr)\\
+&=\sum_{m=0}^{|E|}\Omega_G(m)x^{|E|-m}
+&&\bigl(\because\ \text{整数指数の加法則}\bigr)\\
+&=\sum_{n=0}^{|E|}\Omega_G(|E|-n)x^n
+&&\bigl(\because\ n=|E|-m\text{ による有限和の添字付け替え}\bigr)\\
+&=\sum_{n=0}^{|E|}\Omega_G(n)x^n
+&&\bigl(\because\ \text{全辺二分割による係数対称性}\bigr)\\
+&=Z_G(x)
+&&\bigl(\because\ \text{多重度による係数表示}\bigr).
+\end{aligned}`),
+      paragraph([
+        "逆に、整数係数 Laurent 多項式環で ",
+        math(String.raw`Z_G(x)=x^{|E|}Z_G(x^{-1})`),
+        " と仮定する。Laurent 多項式 ",
+        math(String.raw`P`),
+        " と整数 ",
+        math(String.raw`k\in\mathbb Z`),
+        " に対し、",
+        math(String.raw`[x^k]P\in\mathbb Z`),
+        " を ",
+        math(String.raw`x^k`),
+        " の係数と書く。任意の ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_G(m)
+&=[x^m]Z_G(x)
+&&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
+&=[x^m]\!\left(x^{|E|}Z_G(x^{-1})\right)
+&&\bigl(\because\ \text{仮定した Laurent 多項式の等式}\bigr)\\
+&=[x^m]\!\left(x^{|E|}\sum_{n=0}^{|E|}\Omega_G(n)x^{-n}\right)
+&&\bigl(\because\ \text{多重度による係数表示へ }x^{-1}\text{ を代入}\bigr)\\
+&=\Omega_G(|E|-m)
+&&\bigl(\because\ \text{Laurent 多項式の係数の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "したがって全ての ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " について係数対称性が成り立つ。",
+        ref("theorem_coefficient_symmetry_characterizes_full_cut"),
+        " より、全ての辺の二端点のうちちょうど一方だけを含む頂点部分集合が存在する。多重度と辺数は自然数、Laurent 多項式の係数は整数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },
