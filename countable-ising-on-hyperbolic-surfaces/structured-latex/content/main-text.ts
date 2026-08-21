@@ -1421,18 +1421,39 @@ Z_G(q)
     proof: [
       paragraph([
         ref("claim_partition_polynomial_coefficient_expansion"),
-        " の整数係数を自然数から有理数への標準単射で移し、各 ",
+        " の整数係数を自然数から有理数への標準単射で移す。各 ",
         math(String.raw`m\in\{0,1,\ldots,|E|\}`),
-        " について ",
-        math(String.raw`q_1^m\le q_2^m`),
-        " を用いると",
+        " について、正の有理数の冪の順序保存より",
+      ]),
+      displayMath(String.raw`q_1^m\le q_2^m
+\quad\bigl(\because\ 0<q_1\le q_2\text{ かつ }m\in\mathbb N\bigr).`),
+      paragraph([
+        ref("def_broken_edge_multiplicity"),
+        " より ",
+        math(String.raw`\Omega_G(m)\in\mathbb N`),
+        " なので、有理数の順序と非負数の乗法の両立性より",
+      ]),
+      displayMath(String.raw`\Omega_G(m)q_1^m\le\Omega_G(m)q_2^m
+\quad\bigl(\because\ q_1^m\le q_2^m\text{ かつ }\Omega_G(m)\ge0\bigr).`),
+      paragraph([
+        "直前の項別不等式を有限集合 ",
+        math(String.raw`\{0,1,\ldots,|E|\}`),
+        " 上で加えると",
+      ]),
+      displayMath(String.raw`\sum_{m=0}^{|E|}\Omega_G(m)q_1^m
+\le
+\sum_{m=0}^{|E|}\Omega_G(m)q_2^m
+\quad\bigl(\because\ \text{有理数の有限和は項別順序を保存する}\bigr).`),
+      paragraph([
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " の係数表示へ二つの評価点をそれぞれ代入すると",
       ]),
       displayMath(String.raw`\begin{aligned}
 Z_G(q_1)
 &=\sum_{m=0}^{|E|}\Omega_G(m)q_1^m
 &&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
 &\le\sum_{m=0}^{|E|}\Omega_G(m)q_2^m
-&&\bigl(\because\ \Omega_G(m)\in\mathbb N\text{ かつ }0<q_1\le q_2\text{ より }q_1^m\le q_2^m\bigr)\\
+&&\bigl(\because\ \text{直前に得た有限和の不等式}\bigr)\\
 &=Z_G(q_2)
 &&\bigl(\because\ \text{多重度による係数表示}\bigr).
 \end{aligned}`),
