@@ -1280,6 +1280,57 @@ e
     ],
   },
   {
+    id: "finite_graph_theorem_full_cut_positive_rational_reciprocity",
+    kind: "theorem",
+    title: { text: "全辺二分割をもつ有限グラフの正の有理評価における逆数対称性" },
+    labels: ["theorem_full_cut_positive_rational_evaluation_reciprocity"],
+    habitat: "Q",
+    verification: ["sagemath/check/full-cut-positive-rational-evaluation-reciprocity"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属すると仮定する。このとき、任意の正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " について",
+      ]),
+      displayMath(String.raw`Z_G(q)=q^{|E|}Z_G(q^{-1})\quad\text{in }\mathbb Q.`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_ising_partition_polynomial"),
+        " と ",
+        ref("def_broken_edge_multiplicity"),
+        " より、正の有理数 ",
+        math(String.raw`q`),
+        " における評価は多重度の有限和である。さらに ",
+        ref("theorem_full_cut_coefficient_symmetry"),
+        " より係数は辺数を中心に対称である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_G(q)
+&=\sum_{m=0}^{|E|}\Omega_G(m)q^m
+&&\bigl(\because\ \text{Ising 分配多項式の定義を }q\text{ で評価}\bigr)\\
+&=\sum_{m=0}^{|E|}\Omega_G(|E|-m)q^m
+&&\bigl(\because\ \text{全辺二分割による係数対称性}\bigr)\\
+&=\sum_{n=0}^{|E|}\Omega_G(n)q^{|E|-n}
+&&\bigl(\because\ n=|E|-m\text{ による有限和の添字付け替え}\bigr)\\
+&=\sum_{n=0}^{|E|}\Omega_G(n)q^{|E|}q^{-n}
+&&\bigl(\because\ q^{|E|-n}=q^{|E|}q^{-n}\bigr)\\
+&=q^{|E|}\sum_{n=0}^{|E|}\Omega_G(n)q^{-n}
+&&\bigl(\because\ \text{有限和の分配律}\bigr)\\
+&=q^{|E|}Z_G(q^{-1})
+&&\bigl(\because\ q^{-1}\in\mathbb Q_{>0}\text{ と Ising 分配多項式の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "評価点と評価値は有理数、多重度と辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },
