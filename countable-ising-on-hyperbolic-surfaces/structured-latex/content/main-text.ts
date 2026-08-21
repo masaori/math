@@ -1401,6 +1401,47 @@ Z_G(q)
     ],
   },
   {
+    id: "finite_graph_theorem_positive_rational_evaluation_monotonicity",
+    kind: "theorem",
+    title: { text: "Ising 分配多項式の正の有理評価の単調性" },
+    labels: ["theorem_partition_polynomial_positive_rational_evaluation_monotonicity"],
+    habitat: "Q",
+    verification: ["sagemath/check/positive-rational-evaluation-monotonicity"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の任意の有限グラフと、",
+        math(String.raw`0<q_1\le q_2`),
+        " を満たす任意の正の有理数 ",
+        math(String.raw`q_1,q_2\in\mathbb Q_{>0}`),
+        " について",
+      ]),
+      displayMath(String.raw`Z_G(q_1)\le Z_G(q_2)\quad\text{in }\mathbb Q.`),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " の整数係数を自然数から有理数への標準単射で移し、各 ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " について ",
+        math(String.raw`q_1^m\le q_2^m`),
+        " を用いると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_G(q_1)
+&=\sum_{m=0}^{|E|}\Omega_G(m)q_1^m
+&&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
+&\le\sum_{m=0}^{|E|}\Omega_G(m)q_2^m
+&&\bigl(\because\ \Omega_G(m)\in\mathbb N\text{ かつ }0<q_1\le q_2\text{ より }q_1^m\le q_2^m\bigr)\\
+&=Z_G(q_2)
+&&\bigl(\because\ \text{多重度による係数表示}\bigr).
+\end{aligned}`),
+      paragraph([
+        "評価点と評価値は有理数、多重度、指数、辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_no_linear_factor_x_minus_one",
     kind: "theorem",
     title: { text: "一次多項式 x-1 は Ising 分配多項式を割り切らない" },
