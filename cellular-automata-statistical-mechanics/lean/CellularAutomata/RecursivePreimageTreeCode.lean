@@ -11,8 +11,10 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 ことを証明する。さらに、対応する周期成分の符号が等しいとき、等しい基点語を
 持つ周期点を選び、その最小周期と周期上の各位置の再帰符号が一致することを示す。
 共通深さの前像木対応から、各周期位置に付く前像木の節点数一致と、
-その一周期にわたる有限和の一致も導く。
-全配位上の全単射への接着・完全性・有限決定は後続 tick で形式化する。
+その一周期にわたる有限和の一致も導く。各配位を最小前周期だけ進めて
+到達する周期点の有限ファイバーが、全配位を重複なく被覆することも示す。
+再帰的節点数とこの有限ファイバーの個数の一致、全配位上の全単射への
+接着・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -550,6 +552,68 @@ noncomputable def periodicOrbitTreeNodeCount
     (depth : ℕ) (q : V → State) : ℕ :=
   (Finset.range (minPeriod N f q)).sum fun n =>
     treeNodeCount N f depth (iterate N f n q)
+
+/-- 各配位を、その最小前周期だけ進めて到達する周期点へ送る写像。 -/
+noncomputable def eventualPeriodicRoot (y : V → State) : V → State :=
+  iterate N f (minPreperiod N f y) y
+
+/-- 最小前周期だけ進めた先は周期点である。 -/
+theorem eventualPeriodicRoot_isPeriodicPoint (y : V → State) :
+    IsPeriodicPoint N f (eventualPeriodicRoot N f y) := by
+  refine ⟨minPeriod N f y, one_le_minPeriod N f y, ?_⟩
+  have hcollision :=
+    ((isPeriodicityPair_iff_collision N f y _ _).1 (minPeriod_spec N f y)).2
+  rw [eventualPeriodicRoot, ← iterate_add, Nat.add_comm]
+  exact hcollision
+
+/-- 周期点 `q` に流入する前像木の全節点を、有限配位表のファイバーとして列挙する。 -/
+noncomputable def preimageTreeNodeTable (q : V → State) : Finset (V → State) :=
+  Finset.univ.filter fun y => eventualPeriodicRoot N f y = q
+
+theorem mem_preimageTreeNodeTable_iff (q y : V → State) :
+    y ∈ preimageTreeNodeTable N f q ↔ eventualPeriodicRoot N f y = q := by
+  simp [preimageTreeNodeTable]
+
+/-- 相異なる周期点に流入する二つの前像木節点表は交わらない。 -/
+theorem preimageTreeNodeTable_disjoint
+    (q r : V → State) (hqr : q ≠ r) :
+    Disjoint (preimageTreeNodeTable N f q) (preimageTreeNodeTable N f r) := by
+  rw [Finset.disjoint_left]
+  intro y hyq hyr
+  apply hqr
+  exact ((mem_preimageTreeNodeTable_iff N f q y).1 hyq).symm.trans
+    ((mem_preimageTreeNodeTable_iff N f r y).1 hyr)
+
+/-- 周期点を添字とする前像木節点表は、全配位を重複なく被覆する。 -/
+theorem preimageTreeNodeTables_cover :
+    (Finset.univ.filter fun q => IsPeriodicPoint N f q).biUnion
+        (preimageTreeNodeTable N f) = Finset.univ := by
+  ext y
+  simp only [Finset.mem_biUnion, Finset.mem_filter, Finset.mem_univ, true_and]
+  constructor
+  · rintro ⟨q, _hq, hy⟩
+    trivial
+  · intro _hy
+    refine ⟨eventualPeriodicRoot N f y,
+      eventualPeriodicRoot_isPeriodicPoint N f y, ?_⟩
+    exact (mem_preimageTreeNodeTable_iff N f _ y).2 rfl
+
+/-- 全周期点に付く前像木の節点数の和は、全配位数に等しい。
+    `card_eq_sum_card_fiberwise` は一意な周期根による有限ファイバー分割を数える。 -/
+theorem sum_preimageTreeNodeTable_card_eq_configurations :
+    ∑ q ∈ (Finset.univ.filter fun q => IsPeriodicPoint N f q),
+        (preimageTreeNodeTable N f q).card = 2 ^ Fintype.card V := by
+  have hmaps : ∀ y ∈ (Finset.univ : Finset (V → State)),
+      eventualPeriodicRoot N f y ∈
+        (Finset.univ.filter fun q => IsPeriodicPoint N f q) := by
+    intro y _hy
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+    exact eventualPeriodicRoot_isPeriodicPoint N f y
+  change ∑ q ∈ (Finset.univ.filter fun q => IsPeriodicPoint N f q),
+      (Finset.univ.filter fun y => eventualPeriodicRoot N f y = q).card =
+        2 ^ Fintype.card V
+  rw [← Finset.card_eq_sum_card_fiberwise hmaps]
+  exact card_config
 
 /-- 等しい基点語を持つ周期成分では、共通深さまでの前像木節点数の
     一周期にわたる有限和が等しい。各位置の等式を有限和へ持ち上げるだけであり、
