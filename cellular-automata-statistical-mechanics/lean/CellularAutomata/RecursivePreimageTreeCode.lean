@@ -578,6 +578,29 @@ theorem recursiveCode_iterate_eq_of_baseWord_eq
   have hentry := congrArg (fun xs : List ℕ => xs[n]?) hbase
   simpa [baseWord, hn, hnW] using hentry
 
+/-- 等しい基点語を持つ周期点では、同じ有限添字で並べた周期点対応が
+    周期辺を保存する。最後の添字から基点へ戻る場合も、両側の最小周期が
+    等しいことと最小周期回の帰還だけを使う。 -/
+theorem periodic_index_matching_preserves_edges
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r)
+    (n : ℕ) (hn : n < minPeriod N f r) :
+    globalMap N f (iterate N f n r) =
+        (if n + 1 < minPeriod N f r then iterate N f (n + 1) r else r) ∧
+      globalMap NW fW (iterate NW fW n rW) =
+        (if n + 1 < minPeriod N f r then iterate NW fW (n + 1) rW else rW) := by
+  have hperiod := minPeriod_eq_of_baseWord_eq N f NW fW r rW hbase
+  by_cases hnext : n + 1 < minPeriod N f r
+  · simp only [hnext, if_true]
+    exact ⟨iterate_succ N f n r, iterate_succ NW fW n rW⟩
+  · simp only [hnext, if_false]
+    have hnlast : n + 1 = minPeriod N f r := by omega
+    constructor
+    · rw [← iterate_succ, hnlast, iterate_minPeriod_eq_self N f r hr]
+    · rw [← iterate_succ, hnlast, ← hperiod,
+        iterate_minPeriod_eq_self NW fW rW hrW]
+
 end ComponentCodeMatching
 
 /-- 周期軌道の有限表の所属の言い換え。 -/
@@ -1173,6 +1196,45 @@ theorem exists_orbit_equiv_with_tree_matchings
   exact ⟨r, rW, hrO, hrWO, hbase, fun n hn =>
     hasTreeMatching_iterate_of_baseWord_eq
       N f NW fW r rW hr hrW hbase hcard n hn⟩
+
+/-- 写像符号が等しいとき、各対応周期成分を同じ有限周期添字で並べ、
+    各位置の前像木対応と周期辺の可換性を同時に選べる。
+    これは局所的な子対応を一つの周期成分へ接着した有限対応であり、
+    相異なる周期成分どうしの全配位対応への接着はまだ行わない。 -/
+theorem exists_orbit_equiv_with_component_matchings
+    (hcode : mapCode NW fW = mapCode N f) :
+    ∃ e : (periodicOrbitTable N f).val ≃ (periodicOrbitTable NW fW).val,
+      ∀ O : (periodicOrbitTable N f).val,
+        ∃ r : V → State, ∃ rW : W → State,
+          r ∈ (O : Finset (V → State)) ∧
+            rW ∈ (e O : Finset (W → State)) ∧
+              baseWord NW fW rW = baseWord N f r ∧
+                ∀ n : ℕ, (hn : n < minPeriod N f r) →
+                  HasTreeMatching N f NW fW (2 ^ Fintype.card V - 1)
+                      (iterate N f n r) (iterate NW fW n rW) ∧
+                    globalMap N f (iterate N f n r) =
+                        (if n + 1 < minPeriod N f r then
+                          iterate N f (n + 1) r else r) ∧
+                    globalMap NW fW (iterate NW fW n rW) =
+                        (if n + 1 < minPeriod N f r then
+                          iterate NW fW (n + 1) rW else rW) := by
+  have hcard :=
+    (configuration_card_and_cell_card_eq_of_mapCode_eq N f NW fW hcode).2
+  obtain ⟨e, he⟩ := exists_orbit_equiv_with_tree_matchings
+    N f NW fW hcode hcard
+  refine ⟨e, fun O => ?_⟩
+  obtain ⟨r, rW, hrO, hrWO, hbase, htrees⟩ := he O
+  have hOmem : (O : Finset (V → State)) ∈ periodicOrbitTable N f :=
+    occurrence_mem (periodicOrbitTable N f).val O
+  have heOmem : (e O : Finset (W → State)) ∈ periodicOrbitTable NW fW :=
+    occurrence_mem (periodicOrbitTable NW fW).val (e O)
+  have hr : IsPeriodicPoint N f r :=
+    isPeriodicPoint_of_mem_periodicOrbitTable N f O hOmem r hrO
+  have hrW : IsPeriodicPoint NW fW rW :=
+    isPeriodicPoint_of_mem_periodicOrbitTable NW fW (e O) heOmem rW hrWO
+  refine ⟨r, rW, hrO, hrWO, hbase, fun n hn => ⟨htrees n hn, ?_⟩⟩
+  exact periodic_index_matching_preserves_edges
+    N f NW fW r rW hr hrW hbase n hn
 
 end OrbitTreeMatching
 
