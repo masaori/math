@@ -723,6 +723,121 @@ r_G
     ],
   },
   {
+    id: "finite_graph_theorem_even_linear_factor_characterizes_odd_incident_edge_count",
+    kind: "theorem",
+    title: { text: "因子 2(x+1) による奇接続辺数頂点の特徴付け" },
+    labels: ["theorem_even_linear_factor_characterizes_odd_incident_edge_count"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/even-linear-factor-odd-incident-edge-characterization"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、整数係数多項式 ",
+        math(String.raw`2(x+1)`),
+        " が Ising 分配多項式を割り切ることと、接続する辺の本数が奇数である頂点が存在することは同値である。すなわち",
+      ]),
+      displayMath(String.raw`2(x+1)\mid Z_G(x)\ \text{ in }\mathbb Z[x]
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \partial_G(e,\mathsf{source})=w
+    \quad\text{または}\quad
+    \partial_G(e,\mathsf{target})=w
+  \right\}
+\right|
+\in\{2n+1\mid n\in\mathbb N\}.`),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_partition_polynomial_coefficient_evenness"),
+        " より、各 ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " に対してある ",
+        math(String.raw`n_m\in\mathbb N`),
+        " が存在して ",
+        math(String.raw`\Omega_G(m)=2n_m`),
+        " である。整数係数多項式を",
+      ]),
+      displayMath(String.raw`P_G(x):=\sum_{m=0}^{|E|}n_mx^m\in\mathbb Z[x]`),
+      paragraph(["と置く。", ref("claim_partition_polynomial_coefficient_expansion"), " より"]),
+      displayMath(String.raw`\begin{aligned}
+Z_G(x)
+&=\sum_{m=0}^{|E|}\Omega_G(m)x^m
+&&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
+&=\sum_{m=0}^{|E|}2n_mx^m
+&&\bigl(\because\ \Omega_G(m)=2n_m\bigr)\\
+&=2P_G(x)
+&&\bigl(\because\ P_G(x)\text{ の定義}\bigr).
+\end{aligned}`),
+      paragraph([
+        "まず、接続する辺の本数が奇数である頂点が存在すると仮定する。",
+        ref("theorem_root_minus_one_characterizes_odd_incident_edge_count"),
+        " より ",
+        math(String.raw`Z_G(-1)=0`),
+        " である。直前の多項式等式へ ",
+        math(String.raw`x=-1`),
+        " を代入すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0
+&=2P_G(-1)
+&&\bigl(\because\ Z_G(-1)=0\text{ かつ }Z_G(x)=2P_G(x)\bigr),\\
+P_G(-1)
+&=0
+&&\bigl(\because\ \mathbb Z\text{ は整域であり }2\ne0\bigr).
+\end{aligned}`),
+      paragraph([
+        "モニック一次多項式による整数係数多項式の除法より、ある ",
+        math(String.raw`R_G(x)\in\mathbb Z[x]`),
+        " と ",
+        math(String.raw`s_G\in\mathbb Z`),
+        " が存在して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_G(x)
+&=(x+1)R_G(x)+s_G
+&&\bigl(\because\ x+1\text{ による除法}\bigr),\\
+s_G
+&=P_G(-1)
+&&\bigl(\because\ x=-1\text{ を除法等式へ代入}\bigr),\\
+&=0
+&&\bigl(\because\ P_G(-1)=0\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+Z_G(x)
+&=2P_G(x)
+&&\bigl(\because\ \text{直前の係数表示}\bigr)\\
+&=2(x+1)R_G(x)
+&&\bigl(\because\ P_G(x)=(x+1)R_G(x)\bigr).
+\end{aligned}`),
+      paragraph(["したがって ", math(String.raw`2(x+1)\mid Z_G(x)`), " が成り立つ。"]),
+      paragraph([
+        "逆に、",
+        math(String.raw`2(x+1)\mid Z_G(x)`),
+        " と仮定する。ある ",
+        math(String.raw`S_G(x)\in\mathbb Z[x]`),
+        " が存在して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_G(x)
+&=2(x+1)S_G(x)
+&&\bigl(\because\ \text{整除の定義}\bigr)\\
+&=(x+1)\bigl(2S_G(x)\bigr)
+&&\bigl(\because\ \mathbb Z[x]\text{ 上の結合律}\bigr).
+\end{aligned}`),
+      paragraph([
+        "ゆえに ",
+        math(String.raw`(x+1)\mid Z_G(x)`),
+        " である。",
+        ref("theorem_linear_factor_characterizes_odd_incident_edge_count"),
+        " より、接続する辺の本数が奇数である頂点が存在する。全ての係数と評価値は整数、接続辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_partition_polynomial_degree_maximum_broken_edge_count",
     kind: "theorem",
     title: { text: "Ising 分配多項式の次数と最大破れ辺数" },

@@ -90,6 +90,7 @@ export const ALL_LABELS = [
   "theorem_boundary_of_boundary_is_zero_over_f2",
   "theorem_coefficient_symmetry_characterizes_full_cut",
   "theorem_even_incident_edge_counts_evaluation_minus_one",
+  "theorem_even_linear_factor_characterizes_odd_incident_edge_count",
   "theorem_finite_character_orthogonality",
   "theorem_finite_fourier_inverse_transform",
   "theorem_fixed_quotient_coefficient_support",
