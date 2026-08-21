@@ -1304,7 +1304,7 @@ Z_G(1)
   {
     id: "finite_graph_theorem_no_positive_rational_root",
     kind: "theorem",
-    title: { text: "Ising 分配多項式は正の有理数を零点に持たない" },
+    title: { text: "Ising 分配多項式の正の有理評価の二配位下界" },
     labels: ["theorem_no_positive_rational_root"],
     habitat: "Q",
     verification: ["sagemath/check/no-positive-rational-root"],
@@ -1315,9 +1315,9 @@ Z_G(1)
         math(String.raw`q\in\mathbb Q_{>0}`),
         " について",
       ]),
-      displayMath(String.raw`Z_G(q)>0\quad\text{in }\mathbb Q.`),
+      displayMath(String.raw`Z_G(q)\ge 2\quad\text{in }\mathbb Q.`),
       paragraph([
-        "したがって正の有理数は Ising 分配多項式の零点ではない。",
+        "特に、正の有理数は Ising 分配多項式の零点ではない。",
       ]),
     ],
     proof: [
@@ -1331,21 +1331,50 @@ Z_G(1)
 =\sum_{m=0}^{|E|}\Omega_G(m)q^m
 \quad\bigl(\because\ \text{多重度による係数表示}\bigr).`),
       paragraph([
-        "配位 ",
-        math(String.raw`\sigma_{\mathsf{down}}:V\to\mathsf{Spin}`),
+        "二つの配位 ",
+        math(String.raw`\sigma_{\mathsf{up}},\sigma_{\mathsf{down}}:V\to\mathsf{Spin}`),
         " を全ての ",
         math(String.raw`v\in V`),
         " について ",
+        math(String.raw`\sigma_{\mathsf{up}}(v):=\mathsf{up}`),
+        " および ",
         math(String.raw`\sigma_{\mathsf{down}}(v):=\mathsf{down}`),
         " と定める。",
         ref("def_spin_configuration_set"),
+        " より",
+      ]),
+      displayMath(String.raw`\sigma_{\mathsf{up}},\sigma_{\mathsf{down}}\in\mathcal S_G
+\quad\bigl(\because\ \text{いずれも }V\text{ から }\mathsf{Spin}\text{ への写像である}\bigr).`),
+      paragraph([
+        ref("def_finite_graph_input"),
         " より ",
-        math(String.raw`\sigma_{\mathsf{down}}\in\mathcal S_G`),
-        " であり、",
+        math(String.raw`V`),
+        " は空でないので、ある ",
+        math(String.raw`v_*\in V`),
+        " を選ぶ。すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sigma_{\mathsf{up}}(v_*)
+&=\mathsf{up}
+&&\bigl(\because\ \sigma_{\mathsf{up}}\text{ の定義}\bigr)\\
+&\ne\mathsf{down}
+&&\bigl(\because\ \mathsf{up}\ne\mathsf{down}\bigr)\\
+&=\sigma_{\mathsf{down}}(v_*)
+&&\bigl(\because\ \sigma_{\mathsf{down}}\text{ の定義}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\sigma_{\mathsf{up}}\ne\sigma_{\mathsf{down}}
+\quad\bigl(\because\ v_*\text{ における二つの写像の値が異なる}\bigr).`),
+      paragraph([
         ref("def_broken_edge_set"),
         " より",
       ]),
       displayMath(String.raw`\begin{aligned}
+B_G(\sigma_{\mathsf{up}})
+&=\varnothing
+&&\bigl(\because\ \text{全頂点のスピンラベルが }\mathsf{up}\text{ で等しい}\bigr)\\
+b_G(\sigma_{\mathsf{up}})
+&=0
+&&\bigl(\because\ |\varnothing|=0\bigr),\\[4pt]
 B_G(\sigma_{\mathsf{down}})
 &=\varnothing
 &&\bigl(\because\ \text{全頂点のスピンラベルが }\mathsf{down}\text{ で等しい}\bigr)\\
@@ -1355,16 +1384,16 @@ b_G(\sigma_{\mathsf{down}})
 \end{aligned}`),
       paragraph([ref("def_broken_edge_multiplicity"), " より"]),
       displayMath(String.raw`\Omega_G(0)
-\ge 1
-\quad\bigl(\because\ \sigma_{\mathsf{down}}\text{ が破れ辺数 }0\text{ のファイバーに属する}\bigr).`),
+\ge 2
+\quad\bigl(\because\ \sigma_{\mathsf{up}},\sigma_{\mathsf{down}}\text{ は破れ辺数 }0\text{ のファイバーに属する相異なる二元である}\bigr).`),
       displayMath(String.raw`\begin{aligned}
 Z_G(q)
 &\ge \Omega_G(0)q^0
 &&\bigl(\because\ \Omega_G(m)\in\mathbb N\text{ かつ }q^m>0\text{ for every }m\in\mathbb N\bigr)\\
 &=\Omega_G(0)
 &&\bigl(\because\ q^0=1\bigr)\\
-&>0
-&&\bigl(\because\ \Omega_G(0)\ge1\bigr).
+&\ge2
+&&\bigl(\because\ \Omega_G(0)\ge2\bigr).
 \end{aligned}`),
       paragraph([
         "評価点と評価値は有理数、多重度と辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
