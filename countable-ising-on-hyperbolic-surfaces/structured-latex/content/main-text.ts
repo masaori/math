@@ -1302,6 +1302,47 @@ Z_G(1)
     ],
   },
   {
+    id: "finite_graph_theorem_no_linear_factor_x_minus_one",
+    kind: "theorem",
+    title: { text: "一次多項式 x-1 は Ising 分配多項式を割り切らない" },
+    labels: ["theorem_no_linear_factor_x_minus_one"],
+    habitat: "ZPolynomial",
+    verification: ["sagemath/check/no-linear-factor-x-minus-one"],
+    statement: [
+      paragraph([ref("def_finite_graph_input"), " の任意の有限グラフについて、整数係数多項式 ", math(String.raw`x-1`), " は Ising 分配多項式を割り切らない。すなわち"]),
+      displayMath(String.raw`(x-1)\nmid Z_G(x)\quad\text{in }\mathbb Z[x].`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_ising_partition_polynomial"),
+        " より ",
+        math(String.raw`Z_G(x)\in\mathbb Z[x]`),
+        " である。モニック一次多項式による整数係数多項式の除法より、ある ",
+        math(String.raw`Q_G(x)\in\mathbb Z[x]`),
+        " と ",
+        math(String.raw`r_G\in\mathbb Z`),
+        " が一意に存在して",
+      ]),
+      displayMath(String.raw`Z_G(x)=(x-1)Q_G(x)+r_G.`),
+      displayMath(String.raw`r_G
+=Z_G(1)
+\quad\bigl(\because\ x=1\text{ を直前の除法等式へ代入}\bigr).`),
+      paragraph([ref("claim_partition_polynomial_value_at_one"), " より"]),
+      displayMath(String.raw`\begin{aligned}
+r_G
+&=2^{|V|}
+&&\bigl(\because\ Z_G(1)=2^{|V|}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}\text{ は正の整数である}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`(x-1)\nmid Z_G(x)
+\quad\bigl(\because\ x-1\text{ による除法の余り }r_G\text{ が零でない}\bigr).`),
+      paragraph([
+        "除法の商は整数係数多項式、余りと評価値は整数、頂点数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "formal_high_temperature_heading",
     kind: "heading",
     level: 1,
