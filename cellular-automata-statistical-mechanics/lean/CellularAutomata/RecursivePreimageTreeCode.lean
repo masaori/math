@@ -96,6 +96,51 @@ theorem codeAtDepth_succ_eq_zero_of_children_empty
   congr 1
   simp
 
+/-- 人手証明の残り深さを越えて打ち切りを延ばしても、再帰符号は変わらない。
+    子では最小前周期が一つ増えるので残り深さが一つ減り、残り深さが零なら
+    非周期一段前像は空であることだけを使う。 -/
+theorem codeAtDepth_eq_recursiveCode_of_remaining_le
+    (y : V → State) (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 - minPreperiod N f y ≤ depth) :
+    codeAtDepth N f depth y = recursiveCode N f y := by
+  generalize hremaining : 2 ^ Fintype.card V - 1 - minPreperiod N f y = remaining at hdepth ⊢
+  induction remaining using Nat.strong_induction_on generalizing y depth with
+  | h remaining ih =>
+      by_cases hzero : remaining = 0
+      · have hchildren : nonperiodicChildren N f y = ∅ := by
+          rw [Finset.eq_empty_iff_forall_notMem]
+          intro z hz
+          have hzmu := child_minPreperiod_eq_add_one N f y z hz
+          have hzbound := minPreperiod_le_configuration_card_sub_one N f z
+          omega
+        cases depth with
+        | zero => simp [recursiveCode, hremaining, hzero]
+        | succ depth =>
+            rw [codeAtDepth_succ_eq_zero_of_children_empty N f depth y hchildren]
+            simp [recursiveCode, hremaining, hzero]
+      · obtain ⟨remaining', hremainingSucc⟩ := Nat.exists_eq_succ_of_ne_zero hzero
+        rw [hremainingSucc] at hdepth
+        obtain ⟨depth', hdepthEq⟩ := Nat.exists_eq_add_of_le hdepth
+        subst depth
+        rw [Nat.succ_add]
+        rw [codeAtDepth_succ, recursiveCode]
+        rw [hremaining, hremainingSucc]
+        congr 1
+        congr 1
+        apply Multiset.map_congr rfl
+        intro z hz
+        have hzfin : z ∈ nonperiodicChildren N f y := hz
+        have hzmu := child_minPreperiod_eq_add_one N f y z hzfin
+        have hzremaining :
+            2 ^ Fintype.card V - 1 - minPreperiod N f z = remaining' := by
+          omega
+        calc
+          codeAtDepth N f (remaining' + depth') z = recursiveCode N f z :=
+            ih remaining' (by omega) z (remaining' + depth')
+              hzremaining (Nat.le_add_right remaining' depth')
+          _ = codeAtDepth N f remaining' z := by
+            rw [recursiveCode, hzremaining]
+
 /-- 二つの多重集合を写した結果が等しければ、各値を保つ出現の全単射を取れる。
     多重集合の出現型を使うので、同じ値を持つ相異なる子の重複度を失わない。 -/
 theorem exists_occurrence_equiv_of_map_eq
@@ -418,6 +463,47 @@ section OrbitTreeMatching
 variable {W : Type} [Fintype W] [DecidableEq W]
 variable (NW : W → Finset W)
 variable (fW : (w : W) → (↥(NW w) → State) → State)
+
+/-- 等しい基点語を持つ周期点の対応に、両舞台のセル数一致を仮定せず、
+    二つの有限上界の最大値まで前像木対応を接着する。葉の空多重集合符号が
+    追加の深さで変わらないことにより、異なる打ち切り深さを共通化できる。 -/
+theorem hasTreeMatching_iterate_of_baseWord_eq_commonDepth
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r)
+    (n : ℕ) (hn : n < minPeriod N f r) :
+    HasTreeMatching N f NW fW
+      (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+      (iterate N f n r) (iterate NW fW n rW) := by
+  have hrnMem : iterate N f n r ∈ periodicOrbit N f r :=
+    (mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨n, rfl⟩
+  have hrWnMem : iterate NW fW n rW ∈ periodicOrbit NW fW rW :=
+    (mem_periodicOrbit_iff_exists NW fW rW _ hrW).2 ⟨n, rfl⟩
+  have hrn : IsPeriodicPoint N f (iterate N f n r) :=
+    isPeriodicPoint_of_mem_periodicOrbit N f r _ hr hrnMem
+  have hrWn : IsPeriodicPoint NW fW (iterate NW fW n rW) :=
+    isPeriodicPoint_of_mem_periodicOrbit NW fW rW _ hrW hrWnMem
+  have hmu : minPreperiod N f (iterate N f n r) = 0 :=
+    (isPeriodicPoint_iff_minPreperiod_zero N f _).1 hrn
+  have hmuW : minPreperiod NW fW (iterate NW fW n rW) = 0 :=
+    (isPeriodicPoint_iff_minPreperiod_zero NW fW _).1 hrWn
+  let commonDepth := max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)
+  have hstableV :
+      codeAtDepth N f commonDepth (iterate N f n r) =
+        recursiveCode N f (iterate N f n r) := by
+    apply codeAtDepth_eq_recursiveCode_of_remaining_le
+    simpa [commonDepth, hmu] using
+      (Nat.le_max_left (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+  have hstableW :
+      codeAtDepth NW fW commonDepth (iterate NW fW n rW) =
+        recursiveCode NW fW (iterate NW fW n rW) := by
+    apply codeAtDepth_eq_recursiveCode_of_remaining_le
+    simpa [commonDepth, hmuW] using
+      (Nat.le_max_right (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+  have hrecursive := recursiveCode_iterate_eq_of_baseWord_eq
+    N f NW fW r rW hbase n hn
+  apply hasTreeMatching_of_codeAtDepth_eq N f NW fW
+  exact hstableW.trans (hrecursive.trans hstableV.symm)
 
 /-- 等しい基点語を持つ周期点の対応に、周期上の各位置へ
     非周期前像木の全深さ対応を接着する。共通の打ち切り深さを
