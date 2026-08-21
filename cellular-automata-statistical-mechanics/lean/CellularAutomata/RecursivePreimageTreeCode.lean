@@ -10,6 +10,7 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 出現の全単射を構成し、その対応が子符号と親への一段写像を同時に保存する
 ことを証明する。さらに、対応する周期成分の符号が等しいとき、等しい基点語を
 持つ周期点を選び、その最小周期と周期上の各位置の再帰符号が一致することを示す。
+共通深さの前像木対応から、各周期位置に付く前像木の節点数一致も導く。
 全配位上の全単射への接着・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
@@ -202,6 +203,27 @@ def HasTreeMatching : (depth : ℕ) → (V → State) → (W → State) → Prop
   | depth + 1, y, yW =>
       ∃ e : (nonperiodicChildren N f y).val ≃ (nonperiodicChildren NW fW yW).val,
         ∀ z : (nonperiodicChildren N f y).val, HasTreeMatching depth z (e z)
+
+/-- 打ち切り前像木の節点数。深さ零では根だけを数え、後続段では
+    根と各非周期子を根とする一つ浅い木を数える。 -/
+noncomputable def treeNodeCount : ℕ → (V → State) → ℕ
+  | 0, _ => 1
+  | depth + 1, y =>
+      1 + ∑ z : (nonperiodicChildren N f y).val, treeNodeCount depth z
+
+/-- 前像木対応は、同じ打ち切り深さまでの節点数を保存する。 -/
+theorem treeNodeCount_eq_of_hasTreeMatching
+    (depth : ℕ) (y : V → State) (yW : W → State)
+    (hmatch : HasTreeMatching N f NW fW depth y yW) :
+    treeNodeCount NW fW depth yW = treeNodeCount N f depth y := by
+  induction depth generalizing y yW with
+  | zero => rfl
+  | succ depth ih =>
+      obtain ⟨e, he⟩ := hmatch
+      simp only [treeNodeCount]
+      congr 1
+      rw [← e.sum_comp]
+      exact Fintype.sum_congr _ _ fun z => ih z (e z) (he z)
 
 /-- 等しい打ち切り符号から、その深さ全体にわたる前像木の対応を
     深さ帰納法で構成できる。各帰納段は直前の子出現対応だけを使う。 -/
@@ -504,6 +526,55 @@ theorem hasTreeMatching_iterate_of_baseWord_eq_commonDepth
     N f NW fW r rW hbase n hn
   apply hasTreeMatching_of_codeAtDepth_eq N f NW fW
   exact hstableW.trans (hrecursive.trans hstableV.symm)
+
+/-- 等しい基点語を持つ周期点の対応では、共通深さまでに流入する
+    非周期前像木の節点数が周期上の各位置で一致する。 -/
+theorem treeNodeCount_iterate_eq_of_baseWord_eq_commonDepth
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r)
+    (n : ℕ) (hn : n < minPeriod N f r) :
+    treeNodeCount NW fW
+        (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+        (iterate NW fW n rW) =
+      treeNodeCount N f
+        (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+        (iterate N f n r) := by
+  apply treeNodeCount_eq_of_hasTreeMatching N f NW fW
+  exact hasTreeMatching_iterate_of_baseWord_eq_commonDepth
+    N f NW fW r rW hr hrW hbase n hn
+
+/-- 写像符号が等しいとき、周期軌道を重複度つきで対応させ、
+    対応する基点と周期上の全位置で共通深さの前像木節点数が一致する。 -/
+theorem exists_orbit_equiv_with_treeNodeCounts
+    (hcode : mapCode NW fW = mapCode N f) :
+    ∃ e : (periodicOrbitTable N f).val ≃ (periodicOrbitTable NW fW).val,
+      ∀ O : (periodicOrbitTable N f).val,
+        ∃ r : V → State, ∃ rW : W → State,
+          r ∈ (O : Finset (V → State)) ∧
+            rW ∈ (e O : Finset (W → State)) ∧
+              baseWord NW fW rW = baseWord N f r ∧
+                ∀ n : ℕ, (hn : n < minPeriod N f r) →
+                  treeNodeCount NW fW
+                      (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+                      (iterate NW fW n rW) =
+                    treeNodeCount N f
+                      (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+                      (iterate N f n r) := by
+  obtain ⟨e, he⟩ := exists_orbit_equiv_with_equal_baseWords N f NW fW hcode
+  refine ⟨e, fun O => ?_⟩
+  obtain ⟨r, rW, hrO, hrWO, hbase⟩ := he O
+  have hOmem : (O : Finset (V → State)) ∈ periodicOrbitTable N f :=
+    occurrence_mem (periodicOrbitTable N f).val O
+  have heOmem : (e O : Finset (W → State)) ∈ periodicOrbitTable NW fW :=
+    occurrence_mem (periodicOrbitTable NW fW).val (e O)
+  have hr : IsPeriodicPoint N f r :=
+    isPeriodicPoint_of_mem_periodicOrbitTable N f O hOmem r hrO
+  have hrW : IsPeriodicPoint NW fW rW :=
+    isPeriodicPoint_of_mem_periodicOrbitTable NW fW (e O) heOmem rW hrWO
+  exact ⟨r, rW, hrO, hrWO, hbase, fun n hn =>
+    treeNodeCount_iterate_eq_of_baseWord_eq_commonDepth
+      N f NW fW r rW hr hrW hbase n hn⟩
 
 /-- 等しい基点語を持つ周期点の対応に、周期上の各位置へ
     非周期前像木の全深さ対応を接着する。共通の打ち切り深さを
