@@ -14,8 +14,8 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 その一周期にわたる有限和の一致も導く。各配位を最小前周期だけ進めて
 到達する周期点の有限ファイバーが、全配位を重複なく被覆することも示す。
 最小前周期差で切った相対深さ層と、その非周期一段前像ごとの再帰分解も示す。
-再帰的節点数と有限ファイバーの個数の一致、全配位上の全単射への
-接着・完全性・有限決定は後続 tick で形式化する。
+十分な深さでの再帰的節点数と有限ファイバーの個数の一致も示す。
+全配位上の全単射への接着・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -702,6 +702,55 @@ noncomputable def preimageTreeNodeTable (q : V → State) : Finset (V → State)
 theorem mem_preimageTreeNodeTable_iff (q y : V → State) :
     y ∈ preimageTreeNodeTable N f q ↔ eventualPeriodicRoot N f y = q := by
   simp [preimageTreeNodeTable]
+
+/-- 周期点 `q` へ流入する有限表は、根からの相対深さが
+    `2^|V|-1` 以下である層へ重複なく分かれる。分類写像は各節点の
+    最小前周期であり、その値は有限配位数から得た上界内にある。 -/
+theorem sum_relativePreimageTreeLayer_card_eq_preimageTreeNodeTable_card
+    (q : V → State) (hq : IsPeriodicPoint N f q) :
+    ∑ k ∈ Finset.range (2 ^ Fintype.card V - 1 + 1),
+        (relativePreimageTreeLayer N f q k).card =
+      (preimageTreeNodeTable N f q).card := by
+  let source := preimageTreeNodeTable N f q
+  let target := Finset.range (2 ^ Fintype.card V - 1 + 1)
+  let relativeDepth : (V → State) → ℕ := fun x => minPreperiod N f x
+  have hmaps : ∀ x ∈ source, relativeDepth x ∈ target := by
+    intro x _hx
+    apply Finset.mem_range.mpr
+    dsimp only [relativeDepth, target]
+    have hbound := minPreperiod_le_configuration_card_sub_one N f x
+    omega
+  rw [Finset.card_eq_sum_card_fiberwise hmaps]
+  apply Finset.sum_congr rfl
+  intro k hk
+  apply congrArg Finset.card
+  ext x
+  have hqmu : minPreperiod N f q = 0 :=
+    (isPeriodicPoint_iff_minPreperiod_zero N f q).1 hq
+  simp only [Finset.mem_filter]
+  dsimp only [source, relativeDepth]
+  rw [mem_relativePreimageTreeLayer_iff]
+  constructor
+  · rintro ⟨hxmu, hxiterate⟩
+    have hxmu' : minPreperiod N f x = k := by omega
+    refine ⟨(mem_preimageTreeNodeTable_iff N f q x).2 ?_, hxmu'⟩
+    unfold eventualPeriodicRoot
+    simpa [hxmu'] using hxiterate
+  · rintro ⟨hxtable, hxmu⟩
+    have hxroot := (mem_preimageTreeNodeTable_iff N f q x).1 hxtable
+    unfold eventualPeriodicRoot at hxroot
+    refine ⟨?_, ?_⟩
+    · omega
+    · simpa [hxmu] using hxroot
+
+/-- 有限配位数から得た十分な打ち切り深さでは、再帰的前像木の
+    節点数は、周期点 `q` へ流入する有限表の個数に一致する。 -/
+theorem treeNodeCount_card_bound_eq_preimageTreeNodeTable_card
+    (q : V → State) (hq : IsPeriodicPoint N f q) :
+    treeNodeCount N f (2 ^ Fintype.card V - 1) q =
+      (preimageTreeNodeTable N f q).card := by
+  rw [treeNodeCount_eq_sum_relativePreimageTreeLayer_card]
+  exact sum_relativePreimageTreeLayer_card_eq_preimageTreeNodeTable_card N f q hq
 
 /-- 相異なる周期点に流入する二つの前像木節点表は交わらない。 -/
 theorem preimageTreeNodeTable_disjoint
