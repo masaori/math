@@ -15,6 +15,8 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 到達する周期点の有限ファイバーが、全配位を重複なく被覆することも示す。
 最小前周期差で切った相対深さ層と、その非周期一段前像ごとの再帰分解も示す。
 十分な深さでの再帰的節点数と有限ファイバーの個数の一致も示す。
+対応周期成分の節点数を全成分にわたって足し、写像符号の等号から
+全配位数とセル数の一致も導く。
 全配位上の全単射への接着・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
@@ -441,6 +443,39 @@ theorem mem_periodicOrbit_self (q : V → State) (hq : IsPeriodicPoint N f q) :
     q ∈ periodicOrbit N f q :=
   (mem_periodicOrbit_iff_exists N f q q hq).2 ⟨0, rfl⟩
 
+/-- 最小周期より前の反復値は相異なる。周期軌道の有限表を、
+    反復回数の有限区間から重複なく添字付けするために使う。 -/
+theorem iterate_injective_before_minPeriod (q : V → State)
+    (hq : IsPeriodicPoint N f q) :
+    Set.InjOn (fun n => iterate N f n q) (Finset.range (minPeriod N f q)) := by
+  intro a ha b hb hab
+  simp only [Finset.mem_coe, Finset.mem_range] at ha hb
+  by_contra hne
+  have impossible {a b : ℕ} (ha : a < minPeriod N f q)
+      (hb : b < minPeriod N f q) (hablt : a < b)
+      (hab : iterate N f a q = iterate N f b q) : False := by
+    have hreturn : iterate N f (b - a) q = q := by
+      apply_fun (iterate N f (minPeriod N f q - a)) at hab
+      rw [← iterate_add, ← iterate_add] at hab
+      have hleft : minPeriod N f q - a + a = minPeriod N f q := by omega
+      have hright : minPeriod N f q - a + b = minPeriod N f q + (b - a) := by omega
+      rw [hleft, hright, iterate_minPeriod_eq_self N f q hq] at hab
+      rw [Nat.add_comm (minPeriod N f q) (b - a), iterate_add,
+        iterate_minPeriod_eq_self N f q hq] at hab
+      exact hab.symm
+    have hpair : IsPeriodicityPair N f q 0 (b - a) := by
+      rw [isPeriodicityPair_iff_collision]
+      exact ⟨by omega, by simpa [iterate_zero] using hreturn⟩
+    have hmu : minPreperiod N f q = 0 :=
+      (isPeriodicPoint_iff_minPreperiod_zero N f q).1 hq
+    have hle : minPeriod N f q ≤ b - a := by
+      apply minPeriod_le N f q
+      simpa [hmu] using hpair
+    omega
+  rcases lt_or_gt_of_ne hne with hablt | hbalt
+  · exact impossible ha hb hablt hab
+  · exact impossible hb ha hbalt hab.symm
+
 /-- 周期軌道の元は周期点である（基点の最小周期が周期の証人になる）。 -/
 theorem isPeriodicPoint_of_mem_periodicOrbit (q z : V → State)
     (hq : IsPeriodicPoint N f q) (hz : z ∈ periodicOrbit N f q) :
@@ -752,6 +787,42 @@ theorem treeNodeCount_card_bound_eq_preimageTreeNodeTable_card
   rw [treeNodeCount_eq_sum_relativePreimageTreeLayer_card]
   exact sum_relativePreimageTreeLayer_card_eq_preimageTreeNodeTable_card N f q hq
 
+/-- 配位数から得た上界より深い相対層は空である。 -/
+theorem relativePreimageTreeLayer_eq_empty_of_card_bound_lt
+    (q : V → State) (hq : IsPeriodicPoint N f q) (k : ℕ)
+    (hk : 2 ^ Fintype.card V - 1 < k) :
+    relativePreimageTreeLayer N f q k = ∅ := by
+  rw [Finset.eq_empty_iff_forall_notMem]
+  intro x hx
+  have hxdata := (mem_relativePreimageTreeLayer_iff N f q x k).1 hx
+  have hqmu : minPreperiod N f q = 0 :=
+    (isPeriodicPoint_iff_minPreperiod_zero N f q).1 hq
+  have hxbound := minPreperiod_le_configuration_card_sub_one N f x
+  omega
+
+/-- 配位数から得た上界以上まで打ち切れば、前像木節点数は
+    周期点へ流入する有限表の個数に一致する。 -/
+theorem treeNodeCount_eq_preimageTreeNodeTable_card_of_card_bound_le
+    (q : V → State) (hq : IsPeriodicPoint N f q) (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth) :
+    treeNodeCount N f depth q = (preimageTreeNodeTable N f q).card := by
+  rw [treeNodeCount_eq_sum_relativePreimageTreeLayer_card]
+  calc
+    (∑ k ∈ Finset.range (depth + 1),
+        (relativePreimageTreeLayer N f q k).card) =
+        ∑ k ∈ Finset.range (2 ^ Fintype.card V - 1 + 1),
+          (relativePreimageTreeLayer N f q k).card := by
+      symm
+      apply Finset.sum_subset (Finset.range_mono (Nat.succ_le_succ hdepth))
+      intro k hkdepth hkbound
+      have hk : 2 ^ Fintype.card V - 1 < k := by
+        simp only [Finset.mem_range, Nat.not_lt] at hkbound
+        omega
+      rw [relativePreimageTreeLayer_eq_empty_of_card_bound_lt N f q hq k hk]
+      rfl
+    _ = (preimageTreeNodeTable N f q).card :=
+      sum_relativePreimageTreeLayer_card_eq_preimageTreeNodeTable_card N f q hq
+
 /-- 相異なる周期点に流入する二つの前像木節点表は交わらない。 -/
 theorem preimageTreeNodeTable_disjoint
     (q r : V → State) (hqr : q ≠ r) :
@@ -790,6 +861,69 @@ theorem sum_preimageTreeNodeTable_card_eq_configurations :
   change ∑ q ∈ (Finset.univ.filter fun q => IsPeriodicPoint N f q),
       (Finset.univ.filter fun y => eventualPeriodicRoot N f y = q).card =
         2 ^ Fintype.card V
+  rw [← Finset.card_eq_sum_card_fiberwise hmaps]
+  exact card_config
+
+/-- 周期軌道 `O` へ最終的に流入する全配位の有限表。 -/
+noncomputable def periodicComponentNodeTable
+    (O : Finset (V → State)) : Finset (V → State) :=
+  Finset.univ.filter fun y => periodicOrbit N f (eventualPeriodicRoot N f y) = O
+
+/-- 周期点を基点とする一周期の前像木節点数は、十分な深さでは
+    その周期成分へ流入する全配位の個数に一致する。 -/
+theorem periodicOrbitTreeNodeCount_eq_periodicComponentNodeTable_card
+    (q : V → State) (hq : IsPeriodicPoint N f q) (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth) :
+    periodicOrbitTreeNodeCount N f depth q =
+      (periodicComponentNodeTable N f (periodicOrbit N f q)).card := by
+  have hinj := iterate_injective_before_minPeriod N f q hq
+  unfold periodicOrbitTreeNodeCount periodicComponentNodeTable periodicOrbit
+  rw [← Finset.sum_image hinj]
+  let source := Finset.univ.filter fun y =>
+    periodicOrbit N f (eventualPeriodicRoot N f y) = periodicOrbit N f q
+  let target := (Finset.range (minPeriod N f q)).image fun n => iterate N f n q
+  let root : (V → State) → (V → State) := eventualPeriodicRoot N f
+  have hmaps : ∀ y ∈ source, root y ∈ target := by
+    intro y hy
+    have hyorbit : periodicOrbit N f (root y) = periodicOrbit N f q := by
+      simpa only [source, Finset.mem_filter, Finset.mem_univ, true_and] using hy
+    have hyroot := eventualPeriodicRoot_isPeriodicPoint N f y
+    have hyself := mem_periodicOrbit_self N f (root y) hyroot
+    rw [hyorbit] at hyself
+    exact hyself
+  change (∑ r ∈ target, treeNodeCount N f depth r) = source.card
+  rw [Finset.card_eq_sum_card_fiberwise hmaps]
+  apply Finset.sum_congr rfl
+  intro r hr
+  have hrper := isPeriodicPoint_of_mem_periodicOrbit N f q r hq hr
+  rw [treeNodeCount_eq_preimageTreeNodeTable_card_of_card_bound_le N f r hrper depth hdepth]
+  apply congrArg Finset.card
+  ext y
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+  have hrorbit := periodicOrbit_eq_of_mem N f q r hq hr
+  rw [mem_preimageTreeNodeTable_iff]
+  constructor
+  · intro hyroot
+    refine ⟨?_, hyroot⟩
+    dsimp only [source]
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+    rw [hyroot, hrorbit]
+  · rintro ⟨_hycomponent, hyroot⟩
+    exact hyroot
+
+/-- 周期成分ごとの有限表は全配位を一意に分類するので、その個数和は全配位数である。 -/
+theorem sum_periodicComponentNodeTable_card_eq_configurations :
+    ∑ O ∈ periodicOrbitTable N f,
+        (periodicComponentNodeTable N f O).card = 2 ^ Fintype.card V := by
+  let source := (Finset.univ : Finset (V → State))
+  let target := periodicOrbitTable N f
+  let component : (V → State) → Finset (V → State) := fun y =>
+    periodicOrbit N f (eventualPeriodicRoot N f y)
+  have hmaps : ∀ y ∈ source, component y ∈ target := by
+    intro y _hy
+    apply (mem_periodicOrbitTable_iff N f _).2
+    exact ⟨eventualPeriodicRoot N f y, eventualPeriodicRoot_isPeriodicPoint N f y, rfl⟩
+  change ∑ O ∈ target, (source.filter fun y => component y = O).card = 2 ^ Fintype.card V
   rw [← Finset.card_eq_sum_card_fiberwise hmaps]
   exact card_config
 
@@ -871,6 +1005,78 @@ theorem exists_orbit_equiv_with_periodicOrbitTreeNodeCounts
   exact ⟨r, rW, hrO, hrWO,
     periodicOrbitTreeNodeCount_eq_of_baseWord_eq_commonDepth
       N f NW fW r rW hr hrW hbase⟩
+
+/-- 写像符号が等しいとき、対応する周期成分へ流入する全配位の個数は等しい。 -/
+theorem exists_orbit_equiv_with_periodicComponentNodeTable_cards
+    (hcode : mapCode NW fW = mapCode N f) :
+    ∃ e : (periodicOrbitTable N f).val ≃ (periodicOrbitTable NW fW).val,
+      ∀ O : (periodicOrbitTable N f).val,
+        (periodicComponentNodeTable NW fW (e O)).card =
+          (periodicComponentNodeTable N f O).card := by
+  obtain ⟨e, he⟩ := exists_orbit_equiv_with_periodicOrbitTreeNodeCounts
+    N f NW fW hcode
+  refine ⟨e, fun O => ?_⟩
+  obtain ⟨r, rW, hrO, hrWO, hcount⟩ := he O
+  have hOmem : (O : Finset (V → State)) ∈ periodicOrbitTable N f :=
+    occurrence_mem (periodicOrbitTable N f).val O
+  have heOmem : (e O : Finset (W → State)) ∈ periodicOrbitTable NW fW :=
+    occurrence_mem (periodicOrbitTable NW fW).val (e O)
+  have hr : IsPeriodicPoint N f r :=
+    isPeriodicPoint_of_mem_periodicOrbitTable N f O hOmem r hrO
+  have hrW : IsPeriodicPoint NW fW rW :=
+    isPeriodicPoint_of_mem_periodicOrbitTable NW fW (e O) heOmem rW hrWO
+  have hOrbitN : periodicOrbit N f r = (O : Finset (V → State)) := by
+    obtain ⟨q, hq, hqO⟩ := (mem_periodicOrbitTable_iff N f O).1 hOmem
+    rw [periodicOrbit_eq_of_mem N f q r hq]
+    · exact hqO
+    · rwa [hqO]
+  have hOrbitW : periodicOrbit NW fW rW = (e O : Finset (W → State)) := by
+    obtain ⟨q, hq, hqO⟩ := (mem_periodicOrbitTable_iff NW fW (e O)).1 heOmem
+    rw [periodicOrbit_eq_of_mem NW fW q rW hq]
+    · exact hqO
+    · rwa [hqO]
+  let commonDepth := max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)
+  have hdepthV : 2 ^ Fintype.card V - 1 ≤ commonDepth := Nat.le_max_left _ _
+  have hdepthW : 2 ^ Fintype.card W - 1 ≤ commonDepth := Nat.le_max_right _ _
+  rw [← hOrbitW, ← hOrbitN]
+  rw [← periodicOrbitTreeNodeCount_eq_periodicComponentNodeTable_card
+        NW fW rW hrW commonDepth hdepthW,
+      ← periodicOrbitTreeNodeCount_eq_periodicComponentNodeTable_card
+        N f r hr commonDepth hdepthV]
+  exact hcount
+
+/-- 等しい写像符号は全配位数を一致させ、したがって 2 値舞台のセル数も一致させる。 -/
+theorem configuration_card_and_cell_card_eq_of_mapCode_eq
+    (hcode : mapCode NW fW = mapCode N f) :
+    (2 ^ Fintype.card W = 2 ^ Fintype.card V) ∧
+      Fintype.card W = Fintype.card V := by
+  obtain ⟨e, he⟩ := exists_orbit_equiv_with_periodicComponentNodeTable_cards
+    N f NW fW hcode
+  have hsum :
+      (∑ OW : (periodicOrbitTable NW fW).val,
+          (periodicComponentNodeTable NW fW OW).card) =
+        ∑ O : (periodicOrbitTable N f).val,
+          (periodicComponentNodeTable N f O).card := by
+    rw [← e.sum_comp]
+    exact Fintype.sum_congr _ _ fun O => he O
+  have hconfig : 2 ^ Fintype.card W = 2 ^ Fintype.card V := by
+    calc
+      2 ^ Fintype.card W = ∑ OW ∈ periodicOrbitTable NW fW,
+          (periodicComponentNodeTable NW fW OW).card :=
+            (sum_periodicComponentNodeTable_card_eq_configurations NW fW).symm
+      _ = ∑ OW : (periodicOrbitTable NW fW).val,
+            (periodicComponentNodeTable NW fW OW).card :=
+          (sum_occurrences_eq_finset_sum (periodicOrbitTable NW fW)
+            (fun OW => (periodicComponentNodeTable NW fW OW).card)).symm
+      _ = ∑ O : (periodicOrbitTable N f).val,
+            (periodicComponentNodeTable N f O).card := hsum
+      _ = ∑ O ∈ periodicOrbitTable N f,
+            (periodicComponentNodeTable N f O).card :=
+          sum_occurrences_eq_finset_sum (periodicOrbitTable N f)
+            (fun O => (periodicComponentNodeTable N f O).card)
+      _ = 2 ^ Fintype.card V :=
+          sum_periodicComponentNodeTable_card_eq_configurations N f
+  exact ⟨hconfig, Nat.pow_right_injective (le_refl 2) hconfig⟩
 
 /-- 等しい基点語を持つ周期点の対応に、周期上の各位置へ
     非周期前像木の全深さ対応を接着する。共通の打ち切り深さを
