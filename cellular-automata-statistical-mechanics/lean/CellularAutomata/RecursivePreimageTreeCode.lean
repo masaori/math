@@ -18,7 +18,8 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 対応周期成分の節点数を全成分にわたって足し、写像符号の等号から
 全配位数とセル数の一致も導く。
 写像符号から得た配位数一致を使い、全配位集合の全単射も定義する。
-この全単射が時間発展と可換すること・完全性・有限決定は後続 tick で形式化する。
+再帰的な子対応が両側の一段発展を親へ移す局所可換性も証明する。
+この局所対応を全周期成分で接着した全単射・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -210,6 +211,23 @@ def HasTreeMatching : (depth : ℕ) → (V → State) → (W → State) → Prop
   | depth + 1, y, yW =>
       ∃ e : (nonperiodicChildren N f y).val ≃ (nonperiodicChildren NW fW yW).val,
         ∀ z : (nonperiodicChildren N f y).val, HasTreeMatching depth z (e z)
+
+/-- 正の深さの前像木対応から選ぶ子の全単射は、対応する各子を
+    それぞれの親へ送る一段発展を両側で保存する。これは完全性証明の
+    非周期辺上の共役条件そのものであり、全配位への接着はまだ行わない。 -/
+theorem exists_child_equiv_preserving_parent_edges
+    (depth : ℕ) (y : V → State) (yW : W → State)
+    (hmatch : HasTreeMatching N f NW fW (depth + 1) y yW) :
+    ∃ e : (nonperiodicChildren N f y).val ≃ (nonperiodicChildren NW fW yW).val,
+      ∀ z : (nonperiodicChildren N f y).val,
+        HasTreeMatching N f NW fW depth z (e z) ∧
+          globalMap N f z = y ∧ globalMap NW fW (e z) = yW := by
+  obtain ⟨e, he⟩ := hmatch
+  refine ⟨e, fun z => ⟨he z, ?_, ?_⟩⟩
+  · exact (mem_nonperiodicChildren_iff N f y z).1
+      (occurrence_mem (nonperiodicChildren N f y).val z) |>.1
+  · exact (mem_nonperiodicChildren_iff NW fW yW (e z)).1
+      (occurrence_mem (nonperiodicChildren NW fW yW).val (e z)) |>.1
 
 /-- 打ち切り前像木の節点数。深さ零では根だけを数え、後続段では
     根と各非周期子を根とする一つ浅い木を数える。 -/
