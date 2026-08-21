@@ -111,6 +111,7 @@ export const ALL_LABELS = [
   "theorem_partition_polynomial_degree_maximum_broken_edge_count",
   "theorem_partition_polynomial_degree_maximum_cut_size",
   "theorem_partition_polynomial_positive_rational_evaluation_monotonicity",
+  "theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity",
   "theorem_primal_coboundary_transport_is_dual_boundary",
   "theorem_primal_cocycle_transport_is_dual_cycle",
   "theorem_primal_cohomology_dual_homology_transport_is_bijective",

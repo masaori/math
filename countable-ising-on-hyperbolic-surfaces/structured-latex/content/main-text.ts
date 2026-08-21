@@ -1463,6 +1463,100 @@ Z_G(q_1)
     ],
   },
   {
+    id: "finite_graph_theorem_positive_rational_evaluation_strict_monotonicity",
+    kind: "theorem",
+    title: { text: "辺をもつ有限グラフの正の有理評価の厳密単調性" },
+    labels: ["theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity"],
+    habitat: "Q",
+    verification: ["sagemath/check/positive-rational-evaluation-strict-monotonicity"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフで ",
+        math(String.raw`E\ne\varnothing`),
+        " とする。",
+        math(String.raw`0<q_1<q_2`),
+        " を満たす任意の正の有理数 ",
+        math(String.raw`q_1,q_2\in\mathbb Q_{>0}`),
+        " について",
+      ]),
+      displayMath(String.raw`Z_G(q_1)<Z_G(q_2)\quad\text{in }\mathbb Q.`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`E\ne\varnothing`),
+        " より辺 ",
+        math(String.raw`e_*\in E`),
+        " を一つ選ぶ。配位 ",
+        math(String.raw`\sigma_*:V\to\mathsf{Spin}`),
+        " を",
+      ]),
+      displayMath(String.raw`\sigma_*(v):=
+\begin{cases}
+\mathsf{up} & \bigl(v=\partial_G(e_*,\mathsf{source})\bigr),\\
+\mathsf{down} & \bigl(v\ne\partial_G(e_*,\mathsf{source})\bigr)
+\end{cases}
+\qquad(v\in V)`),
+      paragraph([ref("def_spin_configuration_set"), " より ", math(String.raw`\sigma_*\in\mathcal S_G`), " である。", ref("def_finite_graph_input"), " の端点相異性より"]),
+      displayMath(String.raw`\begin{aligned}
+\sigma_*\!\left(\partial_G(e_*,\mathsf{source})\right)
+&=\mathsf{up}
+&&\bigl(\because\ \sigma_*\text{ の定義}\bigr)\\
+&\ne\mathsf{down}
+&&\bigl(\because\ \mathsf{up}\ne\mathsf{down}\bigr)\\
+&=\sigma_*\!\left(\partial_G(e_*,\mathsf{target})\right)
+&&\bigl(\because\ \partial_G(e_*,\mathsf{source})\ne\partial_G(e_*,\mathsf{target})\text{ と }\sigma_*\text{ の定義}\bigr).
+\end{aligned}`),
+      paragraph([ref("def_broken_edge_set"), " より"]),
+      displayMath(String.raw`\begin{aligned}
+e_*
+&\in B_G(\sigma_*)
+&&\bigl(\because\ \text{破れ辺集合の定義}\bigr)\\
+b_G(\sigma_*)
+&\ge1
+&&\bigl(\because\ e_*\in B_G(\sigma_*)\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m_*:=b_G(\sigma_*)\in\{1,\ldots,|E|\}`),
+        " と置く。",
+        ref("def_broken_edge_multiplicity"),
+        " より",
+      ]),
+      displayMath(String.raw`\Omega_G(m_*)\ge1
+\quad\bigl(\because\ \sigma_*\text{ は破れ辺数 }m_*\text{ のファイバーに属する}\bigr).`),
+      displayMath(String.raw`q_1^{m_*}<q_2^{m_*}
+\quad\bigl(\because\ 0<q_1<q_2\text{ かつ }m_*\ge1\bigr).`),
+      displayMath(String.raw`\Omega_G(m_*)q_1^{m_*}<\Omega_G(m_*)q_2^{m_*}
+\quad\bigl(\because\ \Omega_G(m_*)\ge1\bigr).`),
+      paragraph([
+        "また各 ",
+        math(String.raw`m\in\{0,1,\ldots,|E|\}`),
+        " について、",
+        ref("theorem_partition_polynomial_positive_rational_evaluation_monotonicity"),
+        " の項別計算と同じく",
+      ]),
+      displayMath(String.raw`\Omega_G(m)q_1^m\le\Omega_G(m)q_2^m
+\quad\bigl(\because\ 0<q_1<q_2\text{ かつ }\Omega_G(m)\ge0\bigr).`),
+      displayMath(String.raw`\sum_{m=0}^{|E|}\Omega_G(m)q_1^m
+<
+\sum_{m=0}^{|E|}\Omega_G(m)q_2^m
+\quad\bigl(\because\ m=m_*\text{ の項は狭義不等式であり、他の項は弱不等式である}\bigr).`),
+      paragraph([ref("claim_partition_polynomial_coefficient_expansion"), " の係数表示へ二つの評価点を代入すると"]),
+      displayMath(String.raw`\begin{aligned}
+Z_G(q_1)
+&=\sum_{m=0}^{|E|}\Omega_G(m)q_1^m
+&&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
+&<\sum_{m=0}^{|E|}\Omega_G(m)q_2^m
+&&\bigl(\because\ \text{直前に得た有限和の狭義不等式}\bigr)\\
+&=Z_G(q_2)
+&&\bigl(\because\ \text{多重度による係数表示}\bigr).
+\end{aligned}`),
+      paragraph([
+        "評価点と評価値は有理数、多重度、指数、頂点数、辺数は自然数に属する。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_no_linear_factor_x_minus_one",
     kind: "theorem",
     title: { text: "一次多項式 x-1 は Ising 分配多項式を割り切らない" },
