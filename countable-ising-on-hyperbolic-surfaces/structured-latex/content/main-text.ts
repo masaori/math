@@ -1550,6 +1550,95 @@ R_\alpha(\alpha^{-1})
     ],
   },
   {
+    id: "finite_graph_theorem_full_cut_fisher_zero_product",
+    kind: "theorem",
+    title: { text: "全辺二分割をもつ有限グラフの Fisher 零点積" },
+    labels: ["theorem_full_cut_fisher_zero_product"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/full-cut-fisher-zero-product"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属すると仮定する。",
+        ref("def_ising_partition_polynomial"),
+        " の係数を標準単射で ",
+        math(String.raw`\overline{\mathbb Q}[x]`),
+        " へ移した多項式を ",
+        math(String.raw`\overline P_G(x)`),
+        " と書く。重複度を込めた全ての零点を ",
+        math(String.raw`\alpha_1,\ldots,\alpha_{|E|}\in\overline{\mathbb Q}`),
+        " と書くとき、",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{|E|}\alpha_j=(-1)^{|E|}\quad\text{in }\overline{\mathbb Q}.`),
+      paragraph([
+        math(String.raw`E=\varnothing`),
+        " の場合、左辺は空積 ",
+        math(String.raw`1\in\overline{\mathbb Q}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "全頂点下向き配位は破れ辺数零をもつので、",
+        ref("def_broken_edge_multiplicity"),
+        " より",
+      ]),
+      displayMath(String.raw`\Omega_G(0)\geq1.`),
+      paragraph([
+        ref("theorem_full_cut_coefficient_symmetry"),
+        " を ",
+        math(String.raw`m=0`),
+        " に適用すると",
+      ]),
+      displayMath(String.raw`\Omega_G(|E|)=\Omega_G(0)\geq1.`),
+      paragraph([
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " より ",
+        math(String.raw`\deg\overline P_G=|E|`),
+        " かつ ",
+        math(String.raw`\overline P_G(0)=\Omega_G(0)\ne0`),
+        " である。代数的閉体 ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " 上の一次因子分解により、重複度を込めた零点 ",
+        math(String.raw`\alpha_1,\ldots,\alpha_{|E|}`),
+        " を選んで",
+      ]),
+      displayMath(String.raw`\overline P_G(x)
+=\Omega_G(|E|)\prod_{j=1}^{|E|}(x-\alpha_j)`),
+      paragraph(["と書ける。したがって、"]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_G(0)
+&=\overline P_G(0)
+&&\bigl(\because\ \text{定数項の定義}\bigr)\\
+&=\Omega_G(|E|)\prod_{j=1}^{|E|}(0-\alpha_j)
+&&\bigl(\because\ \text{一次因子分解へ }x=0\text{ を代入}\bigr)\\
+&=\Omega_G(|E|)(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j
+&&\bigl(\because\ \text{有限積の各因子から }-1\text{ を取り出す}\bigr).
+\end{aligned}`),
+      paragraph([ref("theorem_full_cut_coefficient_symmetry"), " を再び ", math(String.raw`m=0`), " に適用すると"]),
+      displayMath(String.raw`\Omega_G(|E|)(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j
+=\Omega_G(0)(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j.`),
+      paragraph(["直前の二つの等式より"]),
+      displayMath(String.raw`\Omega_G(0)=\Omega_G(0)(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j.`),
+      paragraph([
+        math(String.raw`\Omega_G(0)\ne0`),
+        " なので、代数的数の体の消去律より",
+      ]),
+      displayMath(String.raw`1=(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j.`),
+      paragraph([math(String.raw`(-1)^{2|E|}=1`), " なので、"]),
+      displayMath(String.raw`\prod_{j=1}^{|E|}\alpha_j=(-1)^{|E|}.`),
+      paragraph([
+        "零点と積は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        "、多重度と辺数は自然数、係数は整数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },
