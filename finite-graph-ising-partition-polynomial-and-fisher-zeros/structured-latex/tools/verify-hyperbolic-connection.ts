@@ -2,6 +2,7 @@
 import { ALL_LABELS } from "../labels.generated.ts";
 import {
   finiteGraphTheory,
+  hyperbolicFiniteGraphConnection,
   selectFiniteGraphBlocksByLabel,
 } from "../content/main-text.ts";
 import type { Node } from "../schema.ts";
@@ -22,6 +23,9 @@ const required = [
 ] as const;
 
 const selected = selectFiniteGraphBlocksByLabel(required);
+if ("heading" in hyperbolicFiniteGraphConnection) {
+  throw new Error("双曲曲面接続層が一般有限グラフ理論の見出しを取り込んでいる");
+}
 const selectedLabels = new Set<string>(selected.flatMap((block) => [...block.labels]));
 const generatedLabels = new Set<string>(ALL_LABELS);
 const referenced = new Set<string>();

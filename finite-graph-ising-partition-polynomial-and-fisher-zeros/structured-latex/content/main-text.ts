@@ -3131,7 +3131,6 @@ type FiniteGraphBlock = (typeof finiteGraphTheory)[number];
 type FiniteGraphLabel = FiniteGraphBlock["labels"][number];
 type BlockWithLabel<L extends FiniteGraphLabel> = Extract<FiniteGraphBlock, { labels: readonly L[] }>;
 type BlockWithId<I extends string> = Extract<FiniteGraphBlock, { id: I }>;
-type HeadingWithId<I extends string> = Extract<FiniteGraphBlock, { kind: "heading"; id: I }>;
 
 export function selectFiniteGraphBlocksByLabel<const L extends readonly FiniteGraphLabel[]>(
   labels: L,
@@ -3161,14 +3160,7 @@ export function selectFiniteGraphBlockByLabelAndId<
   return matches[0] as BlockWithId<I>;
 }
 
-export function selectFiniteGraphHeadingById<const I extends string>(id: I): HeadingWithId<I> {
-  const matches = finiteGraphTheory.filter((block) => block.kind === "heading" && block.id === id);
-  if (matches.length !== 1) throw new Error(`有限グラフ理論見出し ${id} の対応ブロック数が ${matches.length}`);
-  return matches[0] as HeadingWithId<I>;
-}
-
 export const hyperbolicFiniteGraphConnection = {
-  heading: selectFiniteGraphHeadingById("finite_graph_heading"),
   edgeEndpointLabels: selectFiniteGraphBlockByLabelAndId("def_edge_endpoint_label_set", "finite_graph_definition_endpoint_labels"),
   finiteGraphInput: selectFiniteGraphBlockByLabelAndId("def_finite_graph_input", "finite_graph_definition_input"),
   spinLabels: selectFiniteGraphBlockByLabelAndId("def_spin_label_set", "finite_graph_definition_spin_labels"),

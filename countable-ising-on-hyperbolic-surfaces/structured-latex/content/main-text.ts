@@ -3,7 +3,13 @@ import { hyperbolicFiniteGraphConnection } from "../../../finite-graph-ising-par
 // 双曲曲面固有本文の 21 個の参照出現が要求する内容名ラベルと、その推移的依存閉包。
 // 一般有限グラフ理論の正本でブロックを追加・並べ替えても、この集合の意味は変わらない。
 export default [
-  hyperbolicFiniteGraphConnection.heading,
+  {
+    id: "hyperbolic_finite_graph_input_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "双曲曲面の格子に用いる有限グラフ入力" },
+    labels: [],
+  },
   hyperbolicFiniteGraphConnection.edgeEndpointLabels,
   hyperbolicFiniteGraphConnection.finiteGraphInput,
   hyperbolicFiniteGraphConnection.spinLabels,
