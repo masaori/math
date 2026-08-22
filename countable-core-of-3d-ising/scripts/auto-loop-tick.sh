@@ -364,6 +364,13 @@ if [ "$agent" = "claude" ] && [ "$status" -ne 0 ]; then
                       log "    claude が週次の上限に達した。1 日後まで codex だけで回す" ;;
     *"session limit"*) date -v+3H +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 10800 )) > "$BLOCKED_MARK"
                       log "    claude がセッションの上限に達した。3 時間後まで codex だけで回す" ;;
+    # モデル単位の上限は別の文言で来る（実測: "You've reached your Fable 5 limit.
+    # Switch to another model to continue."）。上の 2 つに当たらないため上限として
+    # 記録されず、2026-08-22 は codex も上限中だったので、tick が毎回 2 秒で失敗する
+    # だけの空回りを続けた。モデルを変えるのはこのループの判断ではないので、上限と
+    # 記録して codex 側の復帰を待つ。
+    *"reached your"*"limit"*) date -v+3H +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 10800 )) > "$BLOCKED_MARK"
+                      log "    claude がモデル単位の上限に達した。3 時間後まで codex だけで回す" ;;
   esac
 fi
 
