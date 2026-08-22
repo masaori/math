@@ -257,6 +257,121 @@ theorem iterate_truncatedTreeNodeConfiguration_eq_root :
           (occurrence_mem (nonperiodicChildren N f y).val p.1) |>.1
       rw [truncatedTreeNodeLevel, truncatedTreeNodeConfiguration, iterate_succ, ih, hp]
 
+/-- 抽象節点が表す配位の最小前周期は、基点の最小前周期に
+    節点の深さを足した値である。各子で最小前周期が一つ増えることを
+    再帰的に適用する。 -/
+theorem minPreperiod_truncatedTreeNodeConfiguration_eq_add_level :
+    (depth : ℕ) → (y : V → State) → (u : TruncatedTreeNode N f depth y) →
+      minPreperiod N f (truncatedTreeNodeConfiguration N f depth y u) =
+        minPreperiod N f y + truncatedTreeNodeLevel N f depth y u
+  | 0, _, _ => by simp [truncatedTreeNodeConfiguration, truncatedTreeNodeLevel]
+  | _ + 1, _, Sum.inl _ => by
+      simp [truncatedTreeNodeConfiguration, truncatedTreeNodeLevel]
+  | depth + 1, y, Sum.inr p => by
+      have ih := minPreperiod_truncatedTreeNodeConfiguration_eq_add_level
+        depth p.1 p.2
+      have hp : minPreperiod N f p.1 = minPreperiod N f y + 1 :=
+        child_minPreperiod_eq_add_one N f y p.1
+          (occurrence_mem (nonperiodicChildren N f y).val p.1)
+      rw [truncatedTreeNodeConfiguration, truncatedTreeNodeLevel, ih, hp]
+      omega
+
+/-- 抽象節点から実配位への再帰写像は単射である。根と非根は
+    最小前周期で区別し、二つの非根は同じ深さだけ進めて直下の子を
+    回復した後、子部分木で帰納法を適用する。 -/
+theorem truncatedTreeNodeConfiguration_injective :
+    (depth : ℕ) → (y : V → State) →
+      Function.Injective (truncatedTreeNodeConfiguration N f depth y)
+  | 0, _ => by
+      intro u v _
+      cases u
+      cases v
+      rfl
+  | depth + 1, y => by
+      intro u v huv
+      cases u with
+      | inl uRoot =>
+          cases v with
+          | inl vRoot =>
+              exact congrArg Sum.inl (Subsingleton.elim uRoot vRoot)
+          | inr vChild =>
+              exfalso
+              have huMu := minPreperiod_truncatedTreeNodeConfiguration_eq_add_level
+                N f (depth + 1) y (Sum.inl uRoot)
+              have hvMu := minPreperiod_truncatedTreeNodeConfiguration_eq_add_level
+                N f (depth + 1) y (Sum.inr vChild)
+              rw [huv] at huMu
+              simp only [truncatedTreeNodeLevel] at huMu hvMu
+              omega
+      | inr uChild =>
+          cases v with
+          | inl vRoot =>
+              exfalso
+              have huMu := minPreperiod_truncatedTreeNodeConfiguration_eq_add_level
+                N f (depth + 1) y (Sum.inr uChild)
+              have hvMu := minPreperiod_truncatedTreeNodeConfiguration_eq_add_level
+                N f (depth + 1) y (Sum.inl vRoot)
+              rw [huv] at huMu
+              simp only [truncatedTreeNodeLevel] at huMu hvMu
+              omega
+          | inr vChild =>
+              have huMu := minPreperiod_truncatedTreeNodeConfiguration_eq_add_level
+                N f (depth + 1) y (Sum.inr uChild)
+              have hvMu := minPreperiod_truncatedTreeNodeConfiguration_eq_add_level
+                N f (depth + 1) y (Sum.inr vChild)
+              rw [huv] at huMu
+              have hlevel :
+                  truncatedTreeNodeLevel N f depth uChild.1 uChild.2 =
+                    truncatedTreeNodeLevel N f depth vChild.1 vChild.2 := by
+                simp only [truncatedTreeNodeLevel] at huMu hvMu
+                omega
+              have huRoot := iterate_truncatedTreeNodeConfiguration_eq_root
+                N f depth uChild.1 uChild.2
+              have hvRoot := iterate_truncatedTreeNodeConfiguration_eq_root
+                N f depth vChild.1 vChild.2
+              have hchildValue : (uChild.1 : V → State) = vChild.1 := by
+                calc
+                  (uChild.1 : V → State) =
+                      iterate N f (truncatedTreeNodeLevel N f depth uChild.1 uChild.2)
+                        (truncatedTreeNodeConfiguration N f depth uChild.1 uChild.2) :=
+                    huRoot.symm
+                  _ = iterate N f (truncatedTreeNodeLevel N f depth vChild.1 vChild.2)
+                        (truncatedTreeNodeConfiguration N f depth vChild.1 vChild.2) := by
+                    rw [hlevel]
+                    exact congrArg (iterate N f _ ) huv
+                  _ = (vChild.1 : V → State) := hvRoot
+              have hchild : uChild.1 = vChild.1 := by
+                cases hU : uChild.1 with
+                | mk uValue uOccurrence =>
+                    cases hV : vChild.1 with
+                    | mk vValue vOccurrence =>
+                        rw [hU, hV] at hchildValue
+                        dsimp only at hchildValue
+                        subst vValue
+                        have hcount :
+                            Multiset.count uValue (nonperiodicChildren N f y).val = 1 :=
+                          Multiset.count_eq_one_of_mem
+                            (nonperiodicChildren N f y).nodup
+                            (occurrence_mem (nonperiodicChildren N f y).val
+                              ⟨uValue, uOccurrence⟩)
+                        have hOccurrence : uOccurrence = vOccurrence := by
+                          apply Fin.ext
+                          omega
+                        exact congrArg
+                          (fun occurrence =>
+                            (nonperiodicChildren N f y).val.mkToType uValue occurrence)
+                          hOccurrence
+              cases uChild with
+              | mk uIndex uNode =>
+                  cases vChild with
+                  | mk vIndex vNode =>
+                      simp only at hchild
+                      subst vIndex
+                      have hnode : uNode = vNode :=
+                        truncatedTreeNodeConfiguration_injective depth uIndex huv
+                      subst vNode
+                      rfl
+
 /-- 打ち切り前像木の節点型は有限である。後続深さでは根一つと、
     有限個の非周期子に付く一つ浅い有限節点型の従属和に分ける。 -/
 @[reducible] noncomputable def truncatedTreeNodeFintype :
@@ -977,6 +1092,22 @@ theorem treeNodeCount_eq_preimageTreeNodeTable_card_of_card_bound_le
     _ = (preimageTreeNodeTable N f q).card :=
       sum_relativePreimageTreeLayer_card_eq_preimageTreeNodeTable_card N f q hq
 
+/-- 周期点を根とする抽象節点が表す配位は、その周期点へ流入する
+    有限配位表に属する。最小前周期が節点深さに一致し、その回数の
+    反復で根へ戻ることを使う。 -/
+theorem truncatedTreeNodeConfiguration_mem_preimageTreeNodeTable
+    (q : V → State) (hq : IsPeriodicPoint N f q) (depth : ℕ)
+    (u : TruncatedTreeNode N f depth q) :
+    truncatedTreeNodeConfiguration N f depth q u ∈ preimageTreeNodeTable N f q := by
+  rw [mem_preimageTreeNodeTable_iff]
+  unfold eventualPeriodicRoot
+  have hmu := minPreperiod_truncatedTreeNodeConfiguration_eq_add_level
+    N f depth q u
+  have hqmu : minPreperiod N f q = 0 :=
+    (isPeriodicPoint_iff_minPreperiod_zero N f q).1 hq
+  rw [hmu, hqmu, Nat.zero_add]
+  exact iterate_truncatedTreeNodeConfiguration_eq_root N f depth q u
+
 /-- 配位数から得た上界以上の深さでは、打ち切り前像木の有限節点型と、
     周期点 `q` へ流入する配位の有限表の間に全単射がある。
     節点型の再帰的分解と既証明の重複なしの層別個数一致を合成する。 -/
@@ -985,11 +1116,34 @@ noncomputable def truncatedTreeNodeEquivPreimageTreeNodeTable
     (hdepth : 2 ^ Fintype.card V - 1 ≤ depth) :
     TruncatedTreeNode N f depth q ≃ ↑(preimageTreeNodeTable N f q) := by
   letI := truncatedTreeNodeFintype N f depth q
-  apply Fintype.equivOfCardEq
-  rw [card_truncatedTreeNode_eq_treeNodeCount N f]
-  rw [treeNodeCount_eq_preimageTreeNodeTable_card_of_card_bound_le
-    N f q hq depth hdepth]
-  exact (Fintype.card_coe _).symm
+  let configurationMap : TruncatedTreeNode N f depth q →
+      ↑(preimageTreeNodeTable N f q) := fun u =>
+    ⟨truncatedTreeNodeConfiguration N f depth q u,
+      truncatedTreeNodeConfiguration_mem_preimageTreeNodeTable N f q hq depth u⟩
+  have hinjective : Function.Injective configurationMap := by
+    intro u v huv
+    apply truncatedTreeNodeConfiguration_injective N f depth q
+    exact congrArg Subtype.val huv
+  have hcard :
+      Fintype.card (TruncatedTreeNode N f depth q) =
+        Fintype.card ↑(preimageTreeNodeTable N f q) := by
+    rw [card_truncatedTreeNode_eq_treeNodeCount N f]
+    rw [treeNodeCount_eq_preimageTreeNodeTable_card_of_card_bound_le
+      N f q hq depth hdepth]
+    exact (Fintype.card_coe _).symm
+  exact Equiv.ofBijective configurationMap
+    ((Fintype.bijective_iff_injective_and_card configurationMap).2
+      ⟨hinjective, hcard⟩)
+
+/-- 十分深い節点型と有限配位表の全単射は、抽象節点が表す
+    実配位そのものを返す。個数一致から任意に選ぶ全単射ではない。 -/
+theorem truncatedTreeNodeEquivPreimageTreeNodeTable_apply
+    (q : V → State) (hq : IsPeriodicPoint N f q) (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth)
+    (u : TruncatedTreeNode N f depth q) :
+    (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth u : V → State) =
+      truncatedTreeNodeConfiguration N f depth q u := by
+  rfl
 
 theorem truncatedTreeNodeEquivPreimageTreeNodeTable_bijective
     (q : V → State) (hq : IsPeriodicPoint N f q) (depth : ℕ)
