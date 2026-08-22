@@ -222,6 +222,18 @@ def TruncatedTreeNode : (depth : ℕ) → (V → State) → Type
       PUnit ⊕ (Σ z : (nonperiodicChildren N f y).val,
         TruncatedTreeNode depth z)
 
+/-- 打ち切り前像木の節点型は有限である。後続深さでは根一つと、
+    有限個の非周期子に付く一つ浅い有限節点型の従属和に分ける。 -/
+@[reducible] noncomputable def truncatedTreeNodeFintype :
+    (depth : ℕ) → (y : V → State) → Fintype (TruncatedTreeNode N f depth y)
+  | 0, _ => inferInstanceAs (Fintype PUnit)
+  | depth + 1, y => by
+      letI (z : (nonperiodicChildren N f y).val) :=
+        truncatedTreeNodeFintype depth z
+      exact inferInstanceAs (Fintype
+        (PUnit ⊕ (Σ z : (nonperiodicChildren N f y).val,
+          TruncatedTreeNode N f depth z)))
+
 /-- 再帰的前像木対応から、打ち切り節点型の実際の全単射を構成する。
     後続深さでは根を根へ固定し、子出現の全単射を適用してから、
     対応する各子部分木の内部で独立に再帰する。 -/
@@ -280,6 +292,26 @@ noncomputable def treeNodeCount : ℕ → (V → State) → ℕ
   | 0, _ => 1
   | depth + 1, y =>
       1 + ∑ z : (nonperiodicChildren N f y).val, treeNodeCount depth z
+
+/-- 打ち切り節点型の元数は、根一つと各子部分木の元数を再帰的に足す
+    `treeNodeCount` に一致する。 -/
+theorem card_truncatedTreeNode_eq_treeNodeCount
+    (depth : ℕ) (y : V → State) :
+    @Fintype.card (TruncatedTreeNode N f depth y)
+        (truncatedTreeNodeFintype N f depth y) = treeNodeCount N f depth y := by
+  letI := truncatedTreeNodeFintype N f depth y
+  rw [← Nat.card_eq_fintype_card]
+  induction depth generalizing y with
+  | zero => simp [TruncatedTreeNode, treeNodeCount]
+  | succ depth ih =>
+      letI (z : (nonperiodicChildren N f y).val) :=
+        truncatedTreeNodeFintype N f depth z
+      simp only [TruncatedTreeNode, treeNodeCount, Nat.card_eq_fintype_card,
+        Fintype.card_sum, Fintype.card_punit, Fintype.card_sigma]
+      congr 1
+      apply Fintype.sum_congr
+      intro z
+      simpa only [Nat.card_eq_fintype_card] using ih z
 
 /-- 有限集合の基礎多重集合の出現型に沿う和は、有限集合上の和に等しい。 -/
 theorem sum_occurrences_eq_finset_sum {X : Type} [Fintype X] [DecidableEq X]
@@ -909,6 +941,60 @@ theorem treeNodeCount_eq_preimageTreeNodeTable_card_of_card_bound_le
       rfl
     _ = (preimageTreeNodeTable N f q).card :=
       sum_relativePreimageTreeLayer_card_eq_preimageTreeNodeTable_card N f q hq
+
+/-- 配位数から得た上界以上の深さでは、打ち切り前像木の有限節点型と、
+    周期点 `q` へ流入する配位の有限表の間に全単射がある。
+    節点型の再帰的分解と既証明の重複なしの層別個数一致を合成する。 -/
+noncomputable def truncatedTreeNodeEquivPreimageTreeNodeTable
+    (q : V → State) (hq : IsPeriodicPoint N f q) (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth) :
+    TruncatedTreeNode N f depth q ≃ ↑(preimageTreeNodeTable N f q) := by
+  letI := truncatedTreeNodeFintype N f depth q
+  apply Fintype.equivOfCardEq
+  rw [card_truncatedTreeNode_eq_treeNodeCount N f]
+  rw [treeNodeCount_eq_preimageTreeNodeTable_card_of_card_bound_le
+    N f q hq depth hdepth]
+  exact (Fintype.card_coe _).symm
+
+theorem truncatedTreeNodeEquivPreimageTreeNodeTable_bijective
+    (q : V → State) (hq : IsPeriodicPoint N f q) (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth) :
+    Function.Bijective
+      (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth) :=
+  (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth).bijective
+
+/-- 対応する二つの十分深い前像木では、再帰的な子対応から構成した
+    節点全単射を、周期点へ流入する二つの有限配位表の全単射へ移せる。 -/
+noncomputable def preimageTreeNodeTableEquivOfMatching
+    {W : Type} [Fintype W] [DecidableEq W]
+    (NW : W → Finset W)
+    (fW : (w : W) → (↥(NW w) → State) → State)
+    (q : V → State) (qW : W → State)
+    (hq : IsPeriodicPoint N f q) (hqW : IsPeriodicPoint NW fW qW)
+    (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth)
+    (hdepthW : 2 ^ Fintype.card W - 1 ≤ depth)
+    (hmatch : HasTreeMatching N f NW fW depth q qW) :
+    ↑(preimageTreeNodeTable N f q) ≃ ↑(preimageTreeNodeTable NW fW qW) :=
+  (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth).symm |>.trans
+    (treeNodeEquivOfMatching N f NW fW depth q qW hmatch) |>.trans
+      (truncatedTreeNodeEquivPreimageTreeNodeTable NW fW qW hqW depth hdepthW)
+
+theorem preimageTreeNodeTableEquivOfMatching_bijective
+    {W : Type} [Fintype W] [DecidableEq W]
+    (NW : W → Finset W)
+    (fW : (w : W) → (↥(NW w) → State) → State)
+    (q : V → State) (qW : W → State)
+    (hq : IsPeriodicPoint N f q) (hqW : IsPeriodicPoint NW fW qW)
+    (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth)
+    (hdepthW : 2 ^ Fintype.card W - 1 ≤ depth)
+    (hmatch : HasTreeMatching N f NW fW depth q qW) :
+    Function.Bijective
+      (preimageTreeNodeTableEquivOfMatching N f NW fW q qW hq hqW depth
+        hdepth hdepthW hmatch) :=
+  (preimageTreeNodeTableEquivOfMatching N f NW fW q qW hq hqW depth
+    hdepth hdepthW hmatch).bijective
 
 /-- 相異なる周期点に流入する二つの前像木節点表は交わらない。 -/
 theorem preimageTreeNodeTable_disjoint
