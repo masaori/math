@@ -1827,6 +1827,117 @@ d
     ],
   },
   {
+    id: "finite_graph_theorem_reciprocal_fisher_zero_square_sum_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点逆数の二乗和と係数比" },
+    labels: ["theorem_reciprocal_fisher_zero_square_sum_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/reciprocal-fisher-zero-square-sum-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置き、",
+        math(String.raw`d\ge2`),
+        " と仮定する。係数を標準単射",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。このとき、",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\alpha_j^{-2}
+=
+\frac{
+  \Omega_G(1)^2-2\Omega_G(0)\Omega_G(2)
+}{
+  \Omega_G(0)^2
+}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.`),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fisher_zeros_nonzero"),
+        " より、全ての",
+        math(String.raw`j\in\{1,\ldots,d\}`),
+        " について",
+        math(String.raw`\alpha_j\ne0`),
+        " であり、逆数",
+        math(String.raw`\alpha_j^{-1}\in\overline{\mathbb Q}`),
+        " が定まる。有限和の分配律より、",
+      ]),
+      displayMath(String.raw`\left(\sum_{j=1}^{d}\alpha_j^{-1}\right)^2
+=
+\sum_{j=1}^{d}\alpha_j^{-2}
++
+2\sum_{1\le i<j\le d}\alpha_i^{-1}\alpha_j^{-1}.`),
+      paragraph([
+        ref("theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio"),
+        " を",
+        math(String.raw`k=1`),
+        " と",
+        math(String.raw`k=2`),
+        " に適用すると、",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\alpha_j^{-1}
+=
+-\frac{\Omega_G(1)}{\Omega_G(0)},
+\qquad
+\sum_{1\le i<j\le d}\alpha_i^{-1}\alpha_j^{-1}
+=
+\frac{\Omega_G(2)}{\Omega_G(0)}.`),
+      paragraph([
+        "全頂点下向き配位は",
+        ref("def_spin_configuration_set"),
+        " に属し、",
+        ref("def_broken_edge_set"),
+        " の破れ辺数零をもつので、",
+        ref("def_broken_edge_multiplicity"),
+        " より",
+        math(String.raw`\Omega_G(0)\in\mathbb N_{>0}`),
+        " である。したがって代数的数の体で、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{d}\alpha_j^{-2}
+&=
+\left(\sum_{j=1}^{d}\alpha_j^{-1}\right)^2
+-
+2\sum_{1\le i<j\le d}\alpha_i^{-1}\alpha_j^{-1}
+&&\bigl(\because\ \text{最初の有限和恒等式を移項する}\bigr)\\
+&=
+\left(-\frac{\Omega_G(1)}{\Omega_G(0)}\right)^2
+-
+2\frac{\Omega_G(2)}{\Omega_G(0)}
+&&\bigl(\because\ \text{直前の二つの逆数族基本対称式を代入する}\bigr)\\
+&=
+\frac{\Omega_G(1)^2}{\Omega_G(0)^2}
+-
+2\frac{\Omega_G(2)}{\Omega_G(0)}
+&&\bigl(\because\ \text{商の平方と }(-1)^2=1\bigr)\\
+&=
+\frac{\Omega_G(1)^2}{\Omega_G(0)^2}
+-
+\frac{2\Omega_G(0)\Omega_G(2)}{\Omega_G(0)^2}
+&&\bigl(\because\ \Omega_G(0)/\Omega_G(0)=1\bigr)\\
+&=
+\frac{
+  \Omega_G(1)^2-2\Omega_G(0)\Omega_G(2)
+}{
+  \Omega_G(0)^2
+}
+&&\bigl(\because\ \text{同じ分母をもつ二つの分数を引く}\bigr).
+\end{aligned}`),
+      paragraph([
+        "右辺は有理数なので、Fisher 零点逆数の二乗和は",
+        math(String.raw`\mathbb Q\subset\overline{\mathbb Q}`),
+        " に属する。零点、その逆数と二乗および有限和は代数的数、次数と多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_full_cut_coefficient_symmetry",
     kind: "theorem",
     title: { text: "全ての辺を横切る頂点二分割と係数対称性" },
