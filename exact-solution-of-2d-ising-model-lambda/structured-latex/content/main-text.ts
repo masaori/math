@@ -35696,6 +35696,132 @@ a\cdot a
                     },
                 },
                 {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "fisher_zero_claim_sector_value_duality_at_algebraic_point",
+                      kind: "claim",
+                      title: { text: "代数的数の点における高温側と低温側のセクター双対関係" },
+                      labels: ["claim_sector_value_duality_at_algebraic_point"],
+                      habitat: "Qbar",
+                      verification: ["sagemath/check/sector-value-duality-at-self-dual-point"],
+                      lean: ["Ising2DLambda.FisherZero.sectorValueDualityAtAlgebraicPoint"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`L\ge1`), "、", math(String.raw`a,b\in\{0,1\}`), "、",
+                          math(String.raw`\xi\in\overline{\mathbb{Q}}`), " とし、",
+                          math(String.raw`1+\xi\ne0`), " とする。このとき ",
+                          math(String.raw`\overline{\mathbb{Q}}`), " の中で",
+                        ]),
+                        displayMath(
+                          String.raw`H^{a,b}_L(\xi)=(1+\xi)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(\xi))`,
+                        ),
+                        paragraph([
+                          "が成り立つ。左辺は高温展開のセクター多項式、右辺の ",
+                          math(String.raw`G^{a,b}_L`), " は低温展開で使う偶部分グラフのセクター生成多項式である。",
+                          "したがってこの等式が、高温側の点 ", math(String.raw`\xi`), " と低温側の点 ",
+                          math(String.raw`\mathrm{KW}(\xi)`), " を対応させる双対恒等式である。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          ref("def_kw_dual_transform"), " と仮定 ", math(String.raw`1+\xi\ne0`), " により",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(1+\xi)\cdot\mathrm{KW}(\xi)
+&=(1+\xi)\cdot\bigl((1-\xi)\cdot(1+\xi)^{-1}\bigr)
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
+&=(1-\xi)\cdot\bigl((1+\xi)\cdot(1+\xi)^{-1}\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の積の可換則と結合則}\bigr)\\
+&=(1-\xi)\cdot1
+&&\bigl(\because\ 1+\xi\ne0\text{ と積の逆元の定義}\bigr)\\
+&=1-\xi
+&&\bigl(\because\ 1\text{ は積の単位元}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "任意の ", math(String.raw`A\in\mathcal{E}^{a,b}_L`), " について ",
+                          math(String.raw`A\subseteq E_L`), " かつ ", math(String.raw`|E_L|=2L^2`), " なので（",
+                          ref("def_torus_homology_sector"), "）、", math(String.raw`|A|\le2L^2`), " である。よって",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+H^{a,b}_L(\xi)
+&=\sum_{A\in\mathcal{E}^{a,b}_L}(1+\xi)^{2L^2-|A|}\cdot(1-\xi)^{|A|}
+&&\bigl(\because\ \blkref{def_high_temperature_sector_polynomial}\text{ と代入が和と積を保つこと}\bigr)\\
+&=\sum_{A\in\mathcal{E}^{a,b}_L}(1+\xi)^{2L^2-|A|}\cdot\bigl((1+\xi)\cdot\mathrm{KW}(\xi)\bigr)^{|A|}
+&&\bigl(\because\ 1-\xi=(1+\xi)\cdot\mathrm{KW}(\xi)\bigr)\\
+&=\sum_{A\in\mathcal{E}^{a,b}_L}(1+\xi)^{2L^2-|A|}\cdot(1+\xi)^{|A|}\cdot\mathrm{KW}(\xi)^{|A|}
+&&\bigl(\because\ \text{積の冪は冪の積}\bigr)\\
+&=\sum_{A\in\mathcal{E}^{a,b}_L}(1+\xi)^{2L^2}\cdot\mathrm{KW}(\xi)^{|A|}
+&&\bigl(\because\ (2L^2-|A|)+|A|=2L^2\text{ と冪の指数法則}\bigr)\\
+&=(1+\xi)^{2L^2}\cdot\sum_{A\in\mathcal{E}^{a,b}_L}\mathrm{KW}(\xi)^{|A|}
+&&\bigl(\because\ \text{有限和の分配則}\bigr)\\
+&=(1+\xi)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(\xi))
+&&\bigl(\because\ \blkref{def_sector_generating_polynomial}\bigr)
+\end{aligned}`),
+                        paragraph(["全過程は代数的数の四則・逆元・自然数冪・有限和だけで閉じ、実数体も複素数体も現れない。"]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "fisher_zero_claim_self_dual_point_low_high_sector_correspondence",
+                      kind: "claim",
+                      standing: "mainTheorem",
+                      title: { text: "自己双対点では高温側と低温側のセクター変数が一致する" },
+                      labels: ["claim_self_dual_point_low_high_sector_correspondence"],
+                      habitat: "Qbar",
+                      verification: ["sagemath/check/sector-value-duality-at-self-dual-point"],
+                      lean: ["Ising2DLambda.FisherZero.selfDualPointLowHighSectorCorrespondence"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`L\ge1`), "、", math(String.raw`a,b\in\{0,1\}`), " とする。",
+                          math(String.raw`s\in\overline{\mathbb{Q}}`), " は ", math(String.raw`s^2=2`),
+                          " を満たす固定済みの元とし、自己双対点を ", math(String.raw`x_{\mathrm{sd}}:=-1+s`), " と置く。このとき",
+                        ]),
+                        displayMath(
+                          String.raw`H^{a,b}_L(x_{\mathrm{sd}})=(1+x_{\mathrm{sd}})^{2L^2}\cdot G^{a,b}_L(x_{\mathrm{sd}})`,
+                        ),
+                        paragraph([
+                          "が成り立つ。すなわち、高温側のセクター多項式と低温側のセクター生成多項式を結ぶ ",
+                          ref("claim_sector_value_duality_at_algebraic_point"), " の二つの変数 ",
+                          math(String.raw`\xi`), " と ", math(String.raw`\mathrm{KW}(\xi)`), " は、自己双対点では同じ元になる。",
+                          "この有限系の恒等式だけでは相転移の存在は従わず、自己双対点を熱力学的な臨界点と同定するには、",
+                          "後続の Onsager 閉形式で極限後の非解析性を別に示す必要がある。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          math(String.raw`s^2=2`), " なので ", math(String.raw`s\ne0`), " である。したがって",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+1+x_{\mathrm{sd}}
+&=1+(-1+s)
+&&\bigl(\because\ x_{\mathrm{sd}}=-1+s\bigr)\\
+&=s
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の加法}\bigr)\\
+&\ne0
+&&\bigl(\because\ s^2=2\ne0\bigr)
+\end{aligned}`),
+                        paragraph([
+                          ref("def_critical_point"), " で示した自己双対性により ",
+                          math(String.raw`\mathrm{KW}(x_{\mathrm{sd}})=x_{\mathrm{sd}}`), " である。よって ",
+                          ref("claim_sector_value_duality_at_algebraic_point"), " を ",
+                          math(String.raw`\xi=x_{\mathrm{sd}}`), " へ適用すると",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+H^{a,b}_L(x_{\mathrm{sd}})
+&=(1+x_{\mathrm{sd}})^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(x_{\mathrm{sd}}))
+&&\bigl(\because\ \blkref{claim_sector_value_duality_at_algebraic_point}\bigr)\\
+&=(1+x_{\mathrm{sd}})^{2L^2}\cdot G^{a,b}_L(x_{\mathrm{sd}})
+&&\bigl(\because\ \mathrm{KW}(x_{\mathrm{sd}})=x_{\mathrm{sd}}\bigr)
+\end{aligned}`),
+                        paragraph(["を得る。全過程は代数的数と有限和の中で閉じ、実数体も複素数体も現れない。"]),
+                      ],
+                    },
+                },
+                {
                   role: "prerequisiteDefinition",
                   element:
                     {

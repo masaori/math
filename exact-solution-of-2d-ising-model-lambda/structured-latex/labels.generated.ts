@@ -317,6 +317,8 @@ export const ALL_LABELS = [
   "claim_scaled_embedding_order_transfer",
   "claim_second_evaluation_prod",
   "claim_sector_value_duality",
+  "claim_sector_value_duality_at_algebraic_point",
+  "claim_self_dual_point_low_high_sector_correspondence",
   "claim_self_dual_positive_root_unique",
   "claim_self_dual_quadratic_roots",
   "claim_self_dual_root_minus_mem",

@@ -1056,6 +1056,8 @@ targets=(
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval
   Ising2DLambda.NecSuf.FisherZero.kw_dual_preserves_unit_interval_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval_from_necSuf
+  Ising2DLambda.FisherZero.sectorValueDualityAtAlgebraicPoint
+  Ising2DLambda.FisherZero.selfDualPointLowHighSectorCorrespondence
   Ising2DLambda.FisherZero.sectorValueDuality
   Ising2DLambda.NecSuf.FisherZero.sector_value_duality_necSuf
   Ising2DLambda.FisherZero.sectorValueDuality_from_necSuf
