@@ -31,6 +31,7 @@ export const ALL_LABELS = [
   "theorem_fisher_zero_elementary_symmetric_coefficient_ratio",
   "theorem_fisher_zero_product_coefficient_ratio",
   "theorem_fisher_zero_reciprocal_sum_coefficient_ratio",
+  "theorem_fisher_zero_square_sum_coefficient_ratio",
   "theorem_fisher_zero_sum_coefficient_ratio",
   "theorem_fisher_zeros_nonzero",
   "theorem_formal_high_temperature_expansion",
