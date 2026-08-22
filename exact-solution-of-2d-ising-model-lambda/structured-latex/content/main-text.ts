@@ -19260,33 +19260,31 @@ z^{n}
                   verification: ["sagemath/check/qbar-action-product"],
                   statement: [
                     paragraph([
-                      ref("def_matrix_over_row_configs"),
-                      " と同じ添字集合を使い、成分だけを ",
+                      "空でない有限集合 ",
+                      math(String.raw`\mathcal{J}`),
+                      " を 1 つ固定する。ここから",
                       math(String.raw`\overline{\mathbb{Q}}`),
-                      " に取り替えた行列を扱う（",
+                      " を成分とする線型代数を作るが、行配位であることも格子の形も使わないので、",
+                      "添字集合は有限であることだけを仮定する",
+                      "（この論文でこの節の結果を使うときは、行配位の全体を添字集合に取る）。",
+                    ]),
+                    paragraph([
+                      "写像 ",
+                      math(String.raw`A:\mathcal{J}\times \mathcal{J}\to\overline{\mathbb{Q}}`),
+                      "（",
                       math(String.raw`\overline{\mathbb{Q}}`),
                       " は ",
                       ref("def_algebraic_numbers"),
-                      "）。写像 ",
-                      math(String.raw`A:R_L\times R_L\to\overline{\mathbb{Q}}`),
-                      " のことを代数的数を成分とする行列と呼び、その全体の集合を ",
-                      math(String.raw`\mathrm{Mat}_{R_L}\bigl(\overline{\mathbb{Q}}\bigr)`),
-                      " と書く（",
-                      math(String.raw`R_L`),
-                      " は ",
-                      ref("def_row_configuration"),
-                      "）。値 ",
-                      math(String.raw`A(\tau,\tau')`),
+                      "）のことを代数的数を成分とする行列と呼び、その全体の集合を ",
+                      math(String.raw`\mathrm{Mat}_{\mathcal{J}}\bigl(\overline{\mathbb{Q}}\bigr)`),
+                      " と書く。値 ",
+                      math(String.raw`A(u,u')`),
                       " を成分と呼び ",
-                      math(String.raw`A_{\tau,\tau'}`),
+                      math(String.raw`A_{u,u'}`),
                       " と書く。",
                     ]),
                     paragraph([
-                      "成分の型が違うので、これは ",
-                      ref("def_matrix_over_row_configs"),
-                      " の ",
-                      math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
-                      " とは別の対象である。",
+                      "添字集合も成分の型も違うので、これは整係数多項式を成分とする行列とは別の対象である。",
                       "実数体も複素数体も現れない（",
                       math(String.raw`\overline{\mathbb{Q}}`),
                       " は可算集合である）。",
@@ -19314,19 +19312,19 @@ z^{n}
                       verification: ["sagemath/check/qbar-action-product"],
                       statement: [
                         paragraph([
-                          math(String.raw`A,B\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）に対し積 ",
-                          math(String.raw`AB\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`AB\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           " を",
                         ]),
                         displayMath(
-                          String.raw`(AB)_{\tau,\tau''}:=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\qquad(\tau,\tau''\in R_L)`,
+                          String.raw`(AB)_{u,u''}:=\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\qquad(u,u''\in \mathcal{J})`,
                         ),
                         paragraph([
                           "で定める（",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " は有限集合なので右辺は ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の有限個の元の和であり、",
@@ -19334,11 +19332,7 @@ z^{n}
                           " の元として確定する）。",
                         ]),
                         paragraph([
-                          "成分の型が違うので、これは ",
-                          ref("def_matrix_over_row_configs"),
-                          " の ",
-                          math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
-                          " とその積とは別の対象である。同じ記号 ",
+                          "成分の型が違うので、これは整係数多項式を成分とする行列とその積とは別の対象である。同じ記号 ",
                           math(String.raw`AB`),
                           " を使うが、どちらの積かは行列の成分がどちらの集合の元かで決まる。",
                           "実数体も複素数体も現れない（",
@@ -19361,11 +19355,11 @@ z^{n}
                   statement: [
                     paragraph([
                       "写像 ",
-                      math(String.raw`v:R_L\to\overline{\mathbb{Q}}`),
+                      math(String.raw`v:\mathcal{J}\to\overline{\mathbb{Q}}`),
                       " のことを列ベクトルと呼び、その全体の集合を ",
-                      math(String.raw`V_L:=\bigl\{\,v\mid v:R_L\to\overline{\mathbb{Q}}\,\bigr\}`),
+                      math(String.raw`V_{\mathcal{J}}:=\bigl\{\,v\mid v:\mathcal{J}\to\overline{\mathbb{Q}}\,\bigr\}`),
                       " と書く。値 ",
-                      math(String.raw`v(\tau)`),
+                      math(String.raw`v(u)`),
                       " を成分と呼ぶ（行列の成分と違い、添字は 1 つである）。",
                       "実数体も複素数体も現れない。",
                     ]),
@@ -19392,21 +19386,21 @@ z^{n}
                       verification: ["sagemath/check/qbar-action-product"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）と ",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           " に対し、",
                           math(String.raw`A`),
                           " の ",
                           math(String.raw`v`),
                           " への作用 ",
-                          math(String.raw`A\cdot v\in V_L`),
+                          math(String.raw`A\cdot v\in V_{\mathcal{J}}`),
                           " を",
                         ]),
                         displayMath(
-                          String.raw`(A\cdot v)(\tau):=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,v(\tau')\qquad(\tau\in R_L)`,
+                          String.raw`(A\cdot v)(u):=\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')\qquad(u\in \mathcal{J})`,
                         ),
                         paragraph([
                           "で定める（右辺は ",
@@ -19439,11 +19433,11 @@ z^{n}
                       verification: ["sagemath/check/qbar-action-product"],
                       statement: [
                         paragraph([
-                          math(String.raw`A,B\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）と ",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）を任意に取る。このとき",
@@ -19462,36 +19456,36 @@ z^{n}
                       proof: [
                         paragraph([
                           "両辺は ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " の元、すなわち ",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " 上の写像なので、",
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " を任意に取り、その ",
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " における値が等しいことを示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl((AB)\cdot v\bigr)(\tau)
-&=\sum_{\tau''\in R_L}(AB)_{\tau,\tau''}\,v(\tau'')
+\bigl((AB)\cdot v\bigr)(u)
+&=\sum_{u''\in \mathcal{J}}(AB)_{u,u''}\,v(u'')
 &&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\sum_{\tau''\in R_L}\Bigl(\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\Bigr)v(\tau'')
+&=\sum_{u''\in \mathcal{J}}\Bigl(\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\Bigr)v(u'')
 &&(\because\ \blkref{def_qbar_matrix_product})\\
-&=\sum_{\tau''\in R_L}\ \sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,B_{\tau',\tau''}\bigr)v(\tau'')
+&=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,B_{u',u''}\bigr)v(u'')
 &&(\because\ \text{有限和と元の積についての分配則})\\
-&=\sum_{\tau''\in R_L}\ \sum_{\tau'\in R_L}A_{\tau,\tau'}\bigl(B_{\tau',\tau''}\,v(\tau'')\bigr)
+&=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,v(u'')\bigr)
 &&(\because\ \text{積の結合則})\\
-&=\sum_{\tau'\in R_L}\ \sum_{\tau''\in R_L}A_{\tau,\tau'}\bigl(B_{\tau',\tau''}\,v(\tau'')\bigr)
+&=\sum_{u'\in \mathcal{J}}\ \sum_{u''\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,v(u'')\bigr)
 &&(\because\ \text{有限和の順序の入れ替え})\\
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\sum_{\tau''\in R_L}B_{\tau',\tau''}\,v(\tau'')
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\sum_{u''\in \mathcal{J}}B_{u',u''}\,v(u'')
 &&(\because\ \text{元と有限和の積についての分配則})\\
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,(B\cdot v)(\tau')
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(B\cdot v)(u')
 &&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\bigl(A\cdot(B\cdot v)\bigr)(\tau)
+&=\bigl(A\cdot(B\cdot v)\bigr)(u)
 &&(\because\ \blkref{def_qbar_matrix_action})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " は任意だったので、2 つの写像は等しい。",
                         ]),
                         paragraph([
@@ -19500,7 +19494,7 @@ z^{n}
                           " について使っているのは、積の結合則と、有限和と元の積についての分配則",
                           "（両側）だけである。加法の逆元も、零元でない元の逆元も、体であることも使っていない。",
                           "有限和の順序の入れ替えが使えるのは ",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " が有限集合で、加法が可換かつ結合的だからである。",
                           "現れるのは ",
                           math(String.raw`\overline{\mathbb{Q}}`),
@@ -19522,14 +19516,14 @@ z^{n}
                       verification: ["sagemath/check/qbar-action-linear"],
                       statement: [
                         paragraph([
-                          math(String.raw`v,w\in V_L`),
+                          math(String.raw`v,w\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）に対し、和 ",
-                          math(String.raw`v\oplus w\in V_L`),
+                          math(String.raw`v\oplus w\in V_{\mathcal{J}}`),
                           " を",
                         ]),
-                        displayMath(String.raw`(v\oplus w)(\tau):=v(\tau)+w(\tau)\qquad(\tau\in R_L)`),
+                        displayMath(String.raw`(v\oplus w)(u):=v(u)+w(u)\qquad(u\in \mathcal{J})`),
                         paragraph([
                           "で定める。右辺の ",
                           math(String.raw`+`),
@@ -19561,7 +19555,7 @@ z^{n}
                       verification: ["sagemath/check/qbar-action-linear"],
                       statement: [
                         paragraph([
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）と ",
@@ -19569,10 +19563,10 @@ z^{n}
                           "（",
                           ref("def_algebraic_numbers"),
                           "）に対し、スカラー倍 ",
-                          math(String.raw`z\odot v\in V_L`),
+                          math(String.raw`z\odot v\in V_{\mathcal{J}}`),
                           " を",
                         ]),
-                        displayMath(String.raw`(z\odot v)(\tau):=z\,v(\tau)\qquad(\tau\in R_L)`),
+                        displayMath(String.raw`(z\odot v)(u):=z\,v(u)\qquad(u\in \mathcal{J})`),
                         paragraph([
                           "で定める。右辺の積は ",
                           math(String.raw`\overline{\mathbb{Q}}`),
@@ -19604,11 +19598,11 @@ z^{n}
                       verification: ["sagemath/check/qbar-action-linear"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）と ",
-                          math(String.raw`v,w\in V_L`),
+                          math(String.raw`v,w\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）を任意に取る。このとき",
@@ -19627,32 +19621,32 @@ z^{n}
                       proof: [
                         paragraph([
                           "両辺は ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " の元、すなわち ",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " 上の写像なので、",
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " を任意に取り、その ",
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " における値が等しいことを示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(A\cdot(v\oplus w)\bigr)(\tau)
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,(v\oplus w)(\tau')
+\bigl(A\cdot(v\oplus w)\bigr)(u)
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(v\oplus w)(u')
 &&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\bigl(v(\tau')+w(\tau')\bigr)
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(v(u')+w(u')\bigr)
 &&(\because\ \blkref{def_qbar_vector_add})\\
-&=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,v(\tau')+A_{\tau,\tau'}\,w(\tau')\bigr)
+&=\sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,v(u')+A_{u,u'}\,w(u')\bigr)
 &&(\because\ \text{元と 2 元の和の積についての分配則})\\
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,v(\tau')+\sum_{\tau'\in R_L}A_{\tau,\tau'}\,w(\tau')
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')+\sum_{u'\in \mathcal{J}}A_{u,u'}\,w(u')
 &&(\because\ \text{有限和の項ごとの分割})\\
-&=(A\cdot v)(\tau)+(A\cdot w)(\tau)
+&=(A\cdot v)(u)+(A\cdot w)(u)
 &&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(\tau)
+&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_add})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " は任意だったので、2 つの写像は等しい。",
                         ]),
                         paragraph([
@@ -19685,11 +19679,11 @@ z^{n}
                       verification: ["sagemath/check/qbar-action-linear"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）と ",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）と ",
@@ -19710,36 +19704,36 @@ z^{n}
                       proof: [
                         paragraph([
                           "両辺は ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " の元、すなわち ",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " 上の写像なので、",
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " を任意に取り、その ",
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " における値が等しいことを示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(A\cdot(z\odot v)\bigr)(\tau)
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,(z\odot v)(\tau')
+\bigl(A\cdot(z\odot v)\bigr)(u)
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(z\odot v)(u')
 &&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\bigl(z\,v(\tau')\bigr)
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(z\,v(u')\bigr)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,z\bigr)v(\tau')
+&=\sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,z\bigr)v(u')
 &&(\because\ \text{積の結合則})\\
-&=\sum_{\tau'\in R_L}\bigl(z\,A_{\tau,\tau'}\bigr)v(\tau')
+&=\sum_{u'\in \mathcal{J}}\bigl(z\,A_{u,u'}\bigr)v(u')
 &&(\because\ \text{積の可換性})\\
-&=\sum_{\tau'\in R_L}z\bigl(A_{\tau,\tau'}\,v(\tau')\bigr)
+&=\sum_{u'\in \mathcal{J}}z\bigl(A_{u,u'}\,v(u')\bigr)
 &&(\because\ \text{積の結合則})\\
-&=z\sum_{\tau'\in R_L}A_{\tau,\tau'}\,v(\tau')
+&=z\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')
 &&(\because\ \text{元と有限和の積についての分配則})\\
-&=z\,(A\cdot v)(\tau)
+&=z\,(A\cdot v)(u)
 &&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\bigl(z\odot(A\cdot v)\bigr)(\tau)
+&=\bigl(z\odot(A\cdot v)\bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " は任意だったので、2 つの写像は等しい。",
                         ]),
                         paragraph([
@@ -19769,12 +19763,12 @@ z^{n}
                   statement: [
                     paragraph([
                       "零ベクトル ",
-                      math(String.raw`o_L\in V_L`),
+                      math(String.raw`o_{\mathcal{J}}\in V_{\mathcal{J}}`),
                       "（",
                       ref("def_qbar_vector"),
                       "）を",
                     ]),
-                    displayMath(String.raw`o_L(\tau):=0\qquad(\tau\in R_L)`),
+                    displayMath(String.raw`o_{\mathcal{J}}(u):=0\qquad(u\in \mathcal{J})`),
                     paragraph([
                       "で定める。右辺の ",
                       math(String.raw`0`),
@@ -19819,16 +19813,16 @@ z^{n}
                       verification: ["sagemath/check/qbar-eigenspace"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）と ",
                           math(String.raw`z\in\overline{\mathbb{Q}}`),
                           " と ",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           " について、",
                         ]),
-                        displayMath(String.raw`A\cdot v=z\odot v\quad\text{かつ}\quad v\ne o_L`),
+                        displayMath(String.raw`A\cdot v=z\odot v\quad\text{かつ}\quad v\ne o_{\mathcal{J}}`),
                         paragraph([
                           "が成り立つとき、",
                           math(String.raw`v`),
@@ -19843,14 +19837,14 @@ z^{n}
                           " は ",
                           ref("def_qbar_vector_smul"),
                           "、",
-                          math(String.raw`o_L`),
+                          math(String.raw`o_{\mathcal{J}}`),
                           " は ",
                           ref("def_qbar_zero_vector"),
                           "）。",
                           "零ベクトルを除くのは、除かないと任意の ",
                           math(String.raw`z`),
                           " について ",
-                          math(String.raw`o_L`),
+                          math(String.raw`o_{\mathcal{J}}`),
                           " が条件を満たしてしまい、",
                           math(String.raw`z`),
                           " が ",
@@ -19873,7 +19867,7 @@ z^{n}
                       verification: ["sagemath/check/qbar-eigenspace"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           " と ",
                           math(String.raw`z\in\overline{\mathbb{Q}}`),
                           " について、",
@@ -19890,7 +19884,7 @@ z^{n}
                         ]),
                         paragraph([
                           "固有ベクトルは ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " の元、固有値は ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の元であり、別の集合の対象である。",
@@ -19911,33 +19905,33 @@ z^{n}
                   verification: ["sagemath/check/qbar-eigenspace"],
                   statement: [
                     paragraph([
-                      math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                       " と ",
                       math(String.raw`z\in\overline{\mathbb{Q}}`),
                       " に対し、",
                     ]),
                     displayMath(
-                      String.raw`E_{A}(z):=\{\,v\in V_L\mid A\cdot v=z\odot v\,\}\subset V_L`,
+                      String.raw`E_{A}(z):=\{\,v\in V_{\mathcal{J}}\mid A\cdot v=z\odot v\,\}\subset V_{\mathcal{J}}`,
                     ),
                     paragraph([
                       "と定める。",
                       "固有ベクトルの定義（",
                       ref("def_qbar_eigenvector"),
                       "）と違い、条件から ",
-                      math(String.raw`v\ne o_L`),
+                      math(String.raw`v\ne o_{\mathcal{J}}`),
                       " を外してある。",
                       "外すのは、外さないと和とスカラー倍で閉じなくなるためである",
                       "（",
                       math(String.raw`v`),
                       " が条件を満たすとき ",
-                      math(String.raw`0\odot v=o_L`),
+                      math(String.raw`0\odot v=o_{\mathcal{J}}`),
                       " も満たすので、零ベクトルを除いた集合はスカラー倍で閉じない。",
                       "ここで ",
-                      math(String.raw`0\odot v=o_L`),
+                      math(String.raw`0\odot v=o_{\mathcal{J}}`),
                       " は、各 ",
-                      math(String.raw`\tau\in R_L`),
+                      math(String.raw`u\in \mathcal{J}`),
                       " について ",
-                      math(String.raw`(0\odot v)(\tau)=0\,v(\tau)=0=o_L(\tau)`),
+                      math(String.raw`(0\odot v)(u)=0\,v(u)=0=o_{\mathcal{J}}(u)`),
                       " であることによる。第 1 の等号はスカラー倍の定義（",
                       ref("def_qbar_vector_smul"),
                       "）、第 2 の等号は ",
@@ -19948,7 +19942,7 @@ z^{n}
                       "したがって ",
                       math(String.raw`E_A(z)`),
                       " の元は固有ベクトルとは限らず、",
-                      math(String.raw`o_L`),
+                      math(String.raw`o_{\mathcal{J}}`),
                       " 以外の元がちょうど ",
                       math(String.raw`z`),
                       " に属する固有ベクトルである。",
@@ -19980,7 +19974,7 @@ z^{n}
                       verification: ["sagemath/check/qbar-eigenspace"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           " と ",
                           math(String.raw`z\in\overline{\mathbb{Q}}`),
                           " を任意に取る。",
@@ -19999,34 +19993,34 @@ z^{n}
                           "示すべきは ",
                           math(String.raw`A\cdot(v\oplus w)=z\odot(v\oplus w)`),
                           " である。両辺は ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " の元、すなわち ",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " 上の写像なので、",
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " を任意に取り、その ",
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " における値が等しいことを示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(A\cdot(v\oplus w)\bigr)(\tau)
-&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(\tau)
+\bigl(A\cdot(v\oplus w)\bigr)(u)
+&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(u)
 &&(\because\ \blkref{claim_qbar_action_add})\\
-&=(A\cdot v)(\tau)+(A\cdot w)(\tau)
+&=(A\cdot v)(u)+(A\cdot w)(u)
 &&(\because\ \blkref{def_qbar_vector_add})\\
-&=(z\odot v)(\tau)+(z\odot w)(\tau)
+&=(z\odot v)(u)+(z\odot w)(u)
 &&(\because\ v,w\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
-&=z\,v(\tau)+z\,w(\tau)
+&=z\,v(u)+z\,w(u)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=z\bigl(v(\tau)+w(\tau)\bigr)
+&=z\bigl(v(u)+w(u)\bigr)
 &&(\because\ \text{元と 2 元の和の積についての分配則})\\
-&=z\,(v\oplus w)(\tau)
+&=z\,(v\oplus w)(u)
 &&(\because\ \blkref{def_qbar_vector_add})\\
-&=\bigl(z\odot(v\oplus w)\bigr)(\tau)
+&=\bigl(z\odot(v\oplus w)\bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " は任意だったので 2 つの写像は等しく、",
                           math(String.raw`v\oplus w\in E_{A}(z)`),
                           " である。",
@@ -20061,7 +20055,7 @@ z^{n}
                       verification: ["sagemath/check/qbar-eigenspace"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           " と ",
                           math(String.raw`z,c\in\overline{\mathbb{Q}}`),
                           " を任意に取る。",
@@ -20078,36 +20072,36 @@ z^{n}
                           "示すべきは ",
                           math(String.raw`A\cdot(c\odot v)=z\odot(c\odot v)`),
                           " である。両辺は ",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " 上の写像なので、",
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " を任意に取り、その ",
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " における値が等しいことを示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(A\cdot(c\odot v)\bigr)(\tau)
-&=\bigl(c\odot(A\cdot v)\bigr)(\tau)
+\bigl(A\cdot(c\odot v)\bigr)(u)
+&=\bigl(c\odot(A\cdot v)\bigr)(u)
 &&(\because\ \blkref{claim_qbar_action_smul})\\
-&=c\,(A\cdot v)(\tau)
+&=c\,(A\cdot v)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=c\,(z\odot v)(\tau)
+&=c\,(z\odot v)(u)
 &&(\because\ v\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
-&=c\bigl(z\,v(\tau)\bigr)
+&=c\bigl(z\,v(u)\bigr)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=(c\,z)\,v(\tau)
+&=(c\,z)\,v(u)
 &&(\because\ \text{積の結合則})\\
-&=(z\,c)\,v(\tau)
+&=(z\,c)\,v(u)
 &&(\because\ \text{積の可換性})\\
-&=z\bigl(c\,v(\tau)\bigr)
+&=z\bigl(c\,v(u)\bigr)
 &&(\because\ \text{積の結合則})\\
-&=z\,(c\odot v)(\tau)
+&=z\,(c\odot v)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=\bigl(z\odot(c\odot v)\bigr)(\tau)
+&=\bigl(z\odot(c\odot v)\bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " は任意だったので 2 つの写像は等しく、",
                           math(String.raw`c\odot v\in E_{A}(z)`),
                           " である。",
@@ -20141,12 +20135,12 @@ z^{n}
                       statement: [
                         paragraph([
                           "単位行列 ",
-                          math(String.raw`I^{\overline{\mathbb{Q}}}_L\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）を",
                         ]),
-                        displayMath(String.raw`\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}:=\begin{cases}1&(\tau'=\tau)\\0&(\tau'\ne\tau)\end{cases}\qquad(\tau,\tau'\in R_L)`),
+                        displayMath(String.raw`\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}:=\begin{cases}1&(u'=u)\\0&(u'\ne u)\end{cases}\qquad(u,u'\in \mathcal{J})`),
                         paragraph([
                           "で定める。右辺の ",
                           math(String.raw`1`),
@@ -20158,17 +20152,12 @@ z^{n}
                           ref("def_algebraic_numbers"),
                           "）の単位元と零元である。",
                           "場合分けが意味をもつのは、",
-                          math(String.raw`R_L`),
-                          " の 2 元が等しいか否かが判定できるからである（行配位は有限集合 ",
-                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-                          " の上の写像なので、値を突き合わせれば決まる）。",
+                          math(String.raw`\mathcal{J}`),
+                          " の 2 元が等しいか否かが判定できるからである",
+                          "（有限集合の相等は決定できる）。",
                         ]),
                         paragraph([
-                          "成分の型が違うので、これは ",
-                          ref("def_identity_matrix"),
-                          " で置いた ",
-                          math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
-                          " の単位行列 ",
+                          "添字集合も成分の型も違うので、これは整係数多項式を成分とする行列の単位行列 ",
                           math(String.raw`I`),
                           " とは別の対象である。上付きの ",
                           math(String.raw`\overline{\mathbb{Q}}`),
@@ -20195,12 +20184,12 @@ z^{n}
                       verification: ["sagemath/check/qbar-identity-action"],
                       statement: [
                         paragraph([
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）を任意に取る。このとき",
                         ]),
-                        displayMath(String.raw`I^{\overline{\mathbb{Q}}}_L\cdot v=v`),
+                        displayMath(String.raw`I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v=v`),
                         paragraph([
                           "が成り立つ（左辺の単位行列は ",
                           ref("def_qbar_identity_matrix"),
@@ -20212,35 +20201,35 @@ z^{n}
                       proof: [
                         paragraph([
                           "両辺は ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " の元、すなわち ",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " 上の写像なので、",
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " を任意に取り、その ",
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " における値が等しいことを示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(I^{\overline{\mathbb{Q}}}_L\cdot v\bigr)(\tau)
-&=\sum_{\tau'\in R_L}\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}\,v(\tau')
+\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v\bigr)(u)
+&=\sum_{u'\in \mathcal{J}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,v(u')
 &&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau}\,v(\tau)
-+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}\,v(\tau')
-&&(\because\ \text{有限和から }\tau'=\tau\text{ の 1 項を分ける})\\
-&=1\cdot v(\tau)+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0\cdot v(\tau')
+&=\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u}\,v(u)
++\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,v(u')
+&&(\because\ \text{有限和から }u'=u\text{ の 1 項を分ける})\\
+&=1\cdot v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot v(u')
 &&(\because\ \blkref{def_qbar_identity_matrix})\\
-&=v(\tau)+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0\cdot v(\tau')
+&=v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot v(u')
 &&(\because\ \text{単位元との積})\\
-&=v(\tau)+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0
+&=v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0
 &&(\because\ \text{零元との積})\\
-&=v(\tau)+0
+&=v(u)+0
 &&(\because\ \text{零元だけの有限和は零元である})\\
-&=v(\tau)
+&=v(u)
 &&(\because\ \text{零元を足しても変わらない})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " は任意だったので、2 つの写像は等しい。",
                         ]),
                         paragraph([
@@ -20248,7 +20237,7 @@ z^{n}
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " について使っているのは、単位元との積・零元との積・零元との和の 3 つだけである",
                           "（加法の逆元も、零元でない元の逆元も、積の可換性も、体であることも使っていない）。",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " について使っているのは、有限集合であることと 2 元の相等が判定できることの 2 つだけである",
                           "（1 項を分ける段と、場合分けの段でそれぞれ効く）。",
                           "実数体も複素数体も現れない。",
@@ -20268,18 +20257,18 @@ z^{n}
                   verification: ["sagemath/check/qbar-action-pow"],
                   statement: [
                     paragraph([
-                      math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                       "（",
                       ref("def_qbar_matrix"),
                       "）と ",
                       math(String.raw`k\in\mathbb{N}`),
                       " に対し、冪 ",
-                      math(String.raw`A^{k}\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                      math(String.raw`A^{k}\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                       " を ",
                       math(String.raw`k`),
                       " についての帰納法で",
                     ]),
-                    displayMath(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_L,\qquad A^{k+1}:=A\,A^{k}\qquad(k\in\mathbb{N})`),
+                    displayMath(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_{\mathcal{J}},\qquad A^{k+1}:=A\,A^{k}\qquad(k\in\mathbb{N})`),
                     paragraph([
                       "と定める（右辺の単位行列は ",
                       ref("def_qbar_identity_matrix"),
@@ -20288,11 +20277,7 @@ z^{n}
                       "）。",
                     ]),
                     paragraph([
-                      "2 点、",
-                      ref("def_matrix_over_row_configs"),
-                      " で置いた ",
-                      math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
-                      " の冪との違いを書いておく。第一に、成分の型が違うので別の対象である",
+                      "2 点、整係数多項式を成分とする行列の冪との違いを書いておく。第一に、成分の型が違うので別の対象である",
                       "（同じ記号 ",
                       math(String.raw`A^{k}`),
                       " を使うが、どちらの冪かは行列の成分がどちらの集合の元かで決まる）。",
@@ -20303,7 +20288,7 @@ z^{n}
                       " から始めて ",
                       math(String.raw`A^{k+1}:=A^{k}A`),
                       " と右から掛けるが、ここでは ",
-                      math(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_L`),
+                      math(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}`),
                       " から始めて左から掛ける。左から掛けるのは、次の主張の帰納法の一歩で ",
                       math(String.raw`A^{k+1}`),
                       " から左の因子 ",
@@ -20341,11 +20326,11 @@ z^{n}
                       verification: ["sagemath/check/qbar-action-pow"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）と ",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）と ",
@@ -20355,19 +20340,15 @@ z^{n}
                           "）を ",
                           math(String.raw`k`),
                           " 回反復した列ベクトル ",
-                          math(String.raw`\mathrm{it}^{[k]}_{A}(v)\in V_L`),
+                          math(String.raw`\mathrm{it}^{[k]}_{A}(v)\in V_{\mathcal{J}}`),
                           " を ",
                           math(String.raw`k`),
                           " についての帰納法で",
                         ]),
                         displayMath(String.raw`\mathrm{it}^{[0]}_{A}(v):=v,\qquad \mathrm{it}^{[k+1]}_{A}(v):=A\cdot\bigl(\mathrm{it}^{[k]}_{A}(v)\bigr)\qquad(k\in\mathbb{N})`),
                         paragraph([
-                          "と定める。上付きの角括弧は、これが積の反復ではなく作用の反復であることを記号に残すための",
-                          "ものである（",
-                          ref("def_row_config_shift_iterate"),
-                          " の ",
-                          math(String.raw`S^{[k]}`),
-                          " と同じ約束である）。",
+                          "と定める。上付きの角括弧は、これが積の反復ではなく作用の反復であることを",
+                          "記号に残すためのものである。",
                           "実数体も複素数体も現れない。",
                         ]),
                       ],
@@ -20390,11 +20371,11 @@ z^{n}
                       verification: ["sagemath/check/qbar-action-pow"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）と ",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）を任意に取る。このとき任意の ",
@@ -20427,7 +20408,7 @@ z^{n}
                         ]),
                         displayMath(String.raw`\begin{aligned}
 A^{0}\cdot v
-&=I^{\overline{\mathbb{Q}}}_L\cdot v
+&=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v
 &&(\because\ \blkref{def_qbar_matrix_power})\\
 &=v
 &&(\because\ \blkref{claim_qbar_identity_action})\\
@@ -20485,11 +20466,11 @@ A^{k+1}\cdot v
                   verification: ["sagemath/check/qbar-eigenvector-pow"],
                   statement: [
                     paragraph([
-                      math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                       "（",
                       ref("def_qbar_matrix"),
                       "）と ",
-                      math(String.raw`v\in V_L`),
+                      math(String.raw`v\in V_{\mathcal{J}}`),
                       "（",
                       ref("def_qbar_vector"),
                       "）と ",
@@ -20528,7 +20509,7 @@ A^{k+1}\cdot v
                       "仮定は ",
                       ref("def_qbar_eigenvector"),
                       " の 2 条件のうち等式の側だけである。",
-                      math(String.raw`v\ne o_L`),
+                      math(String.raw`v\ne o_{\mathcal{J}}`),
                       " は使わないので、",
                       math(String.raw`z`),
                       " に属する固有ベクトルにはこの主張がそのまま当たる。",
@@ -20538,45 +20519,45 @@ A^{k+1}\cdot v
                     paragraph([
                       "準備として、スカラー倍についての 2 つの等式を作る。",
                       "第一に、任意の ",
-                      math(String.raw`w\in V_L`),
+                      math(String.raw`w\in V_{\mathcal{J}}`),
                       " と任意の ",
-                      math(String.raw`\tau\in R_L`),
+                      math(String.raw`u\in \mathcal{J}`),
                       " について",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-(1\odot w)(\tau)
-&=1\,w(\tau)
+(1\odot w)(u)
+&=1\,w(u)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=w(\tau)
+&=w(u)
 &&(\because\ \overline{\mathbb{Q}}\ \text{の単位元との積})
 \end{aligned}`),
                     paragraph([
                       "であり、",
-                      math(String.raw`\tau`),
+                      math(String.raw`u`),
                       " は任意なので ",
                       math(String.raw`1\odot w=w`),
                       " である。第二に、任意の ",
                       math(String.raw`y,z\in\overline{\mathbb{Q}}`),
                       " と任意の ",
-                      math(String.raw`w\in V_L`),
+                      math(String.raw`w\in V_{\mathcal{J}}`),
                       " と任意の ",
-                      math(String.raw`\tau\in R_L`),
+                      math(String.raw`u\in \mathcal{J}`),
                       " について",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-\bigl((y\,z)\odot w\bigr)(\tau)
-&=(y\,z)\,w(\tau)
+\bigl((y\,z)\odot w\bigr)(u)
+&=(y\,z)\,w(u)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=y\,\bigl(z\,w(\tau)\bigr)
+&=y\,\bigl(z\,w(u)\bigr)
 &&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=y\,\bigl((z\odot w)(\tau)\bigr)
+&=y\,\bigl((z\odot w)(u)\bigr)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=\bigl(y\odot(z\odot w)\bigr)(\tau)
+&=\bigl(y\odot(z\odot w)\bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})
 \end{aligned}`),
                     paragraph([
                       "であり、",
-                      math(String.raw`\tau`),
+                      math(String.raw`u`),
                       " は任意なので ",
                       math(String.raw`(y\,z)\odot w=y\odot(z\odot w)`),
                       " である。",
@@ -20597,7 +20578,7 @@ A^{k+1}\cdot v
                     ]),
                     displayMath(String.raw`\begin{aligned}
 A^{0}\cdot v
-&=I^{\overline{\mathbb{Q}}}_L\cdot v
+&=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v
 &&(\because\ \blkref{def_qbar_matrix_power})\\
 &=v
 &&(\because\ \blkref{claim_qbar_identity_action})\\
@@ -20674,6 +20655,21 @@ A^{k+1}\cdot v
                   lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarMatrixEval"],
                   verification: ["sagemath/check/qbar-matrix-eval"],
                   statement: [
+                    paragraph([
+                      "ここで、前の節で固定した添字集合 ",
+                      math(String.raw`\mathcal{J}`),
+                      "（",
+                      ref("def_qbar_matrix"),
+                      "）を、行配位の全体 ",
+                      math(String.raw`R_L`),
+                      "（",
+                      ref("def_row_configuration"),
+                      "）に取る。以下、",
+                      math(String.raw`\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                      " と ",
+                      math(String.raw`V_{R_L}`),
+                      " は、その代入で得られる集合である。",
+                    ]),
                     paragraph([
                       math(String.raw`\xi\in\overline{\mathbb{Q}}`),
                       " を任意に取る（",
@@ -20937,7 +20933,7 @@ A^{k+1}\cdot v
                       verification: ["sagemath/check/qbar-matrix-product-assoc"],
                       statement: [
                         paragraph([
-                          math(String.raw`A,B,C\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A,B,C\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）を任意に取る。このとき",
@@ -20953,36 +20949,36 @@ A^{k+1}\cdot v
                         paragraph([
                           ref("def_qbar_matrix"),
                           " の行列は ",
-                          math(String.raw`R_L\times R_L`),
+                          math(String.raw`\mathcal{J}\times \mathcal{J}`),
                           " から ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " への写像なので、2 つの行列が等しいこととすべての成分が等しいことは同じである。",
-                          math(String.raw`\tau,\tau'''\in R_L`),
+                          math(String.raw`u,u'''\in \mathcal{J}`),
                           " を任意に取る。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl((AB)C\bigr)_{\tau,\tau'''}
-&=\sum_{\tau''\in R_L}(AB)_{\tau,\tau''}\,C_{\tau'',\tau'''}
+\bigl((AB)C\bigr)_{u,u'''}
+&=\sum_{u''\in \mathcal{J}}(AB)_{u,u''}\,C_{u'',u'''}
 &&(\because\ \blkref{def_qbar_matrix_product})\\
-&=\sum_{\tau''\in R_L}\Bigl(\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\Bigr)C_{\tau'',\tau'''}
+&=\sum_{u''\in \mathcal{J}}\Bigl(\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\Bigr)C_{u'',u'''}
 &&(\because\ \blkref{def_qbar_matrix_product})\\
-&=\sum_{\tau''\in R_L}\ \sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,B_{\tau',\tau''}\bigr)C_{\tau'',\tau'''}
+&=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,B_{u',u''}\bigr)C_{u'',u'''}
 &&(\because\ \text{有限和と元の積についての分配則})\\
-&=\sum_{\tau''\in R_L}\ \sum_{\tau'\in R_L}A_{\tau,\tau'}\bigl(B_{\tau',\tau''}\,C_{\tau'',\tau'''}\bigr)
+&=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,C_{u'',u'''}\bigr)
 &&(\because\ \text{積の結合則})\\
-&=\sum_{\tau'\in R_L}\ \sum_{\tau''\in R_L}A_{\tau,\tau'}\bigl(B_{\tau',\tau''}\,C_{\tau'',\tau'''}\bigr)
+&=\sum_{u'\in \mathcal{J}}\ \sum_{u''\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,C_{u'',u'''}\bigr)
 &&(\because\ \text{有限和の順序の入れ替え})\\
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\sum_{\tau''\in R_L}B_{\tau',\tau''}\,C_{\tau'',\tau'''}
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\sum_{u''\in \mathcal{J}}B_{u',u''}\,C_{u'',u'''}
 &&(\because\ \text{元と有限和の積についての分配則})\\
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,(BC)_{\tau',\tau'''}
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(BC)_{u',u'''}
 &&(\because\ \blkref{def_qbar_matrix_product})\\
-&=\bigl(A(BC)\bigr)_{\tau,\tau'''}
+&=\bigl(A(BC)\bigr)_{u,u'''}
 &&(\because\ \blkref{def_qbar_matrix_product})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " と ",
-                          math(String.raw`\tau'''`),
+                          math(String.raw`u'''`),
                           " は任意なので、2 つの行列のすべての成分が等しく、主張が成り立つ。",
                         ]),
                         paragraph([
@@ -20990,11 +20986,11 @@ A^{k+1}\cdot v
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " について使っているのは、積の結合則と、有限和と元の積についての分配則（両側）だけである",
                           "（積の可換性も、単位元も、加法の逆元も、零元でない元の逆元も、体であることも使っていない）。",
-                          "有限和の順序の入れ替えが使えるのは ",
-                          ref("def_row_configuration"),
-                          " の ",
-                          math(String.raw`R_L`),
-                          " が有限集合で、加法が可換かつ結合的だからである。",
+                          "有限和の順序の入れ替えが使えるのは、固定した添字集合 ",
+                          math(String.raw`\mathcal{J}`),
+                          " が有限集合であり（",
+                          ref("def_qbar_matrix"),
+                          "）、加法が可換かつ結合的だからである。",
                           "現れるのは ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の元と有限和・有限積だけであり、実数体も複素数体も現れない。",
@@ -21010,7 +21006,7 @@ A^{k+1}\cdot v
                           " の証明で列ベクトルを ",
                           math(String.raw`C`),
                           " の第 ",
-                          math(String.raw`\tau'''`),
+                          math(String.raw`u'''`),
                           " 列と取ったものに等しい（Lean では、この 2 つの主張が同じ必要十分版の 2 つの特殊化として",
                           "得られることを導出で見せている）。",
                         ]),
@@ -21036,12 +21032,12 @@ A^{k+1}\cdot v
                       verification: ["sagemath/check/qbar-identity-matrix-unit"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）を任意に取る。このとき",
                         ]),
-                        displayMath(String.raw`I^{\overline{\mathbb{Q}}}_L\,A=A\qquad\text{かつ}\qquad A\,I^{\overline{\mathbb{Q}}}_L=A`),
+                        displayMath(String.raw`I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\,A=A\qquad\text{かつ}\qquad A\,I^{\overline{\mathbb{Q}}}_{\mathcal{J}}=A`),
                         paragraph([
                           "が成り立つ（単位行列は ",
                           ref("def_qbar_identity_matrix"),
@@ -21061,65 +21057,65 @@ A^{k+1}\cdot v
                         paragraph([
                           ref("def_qbar_matrix"),
                           " の行列は ",
-                          math(String.raw`R_L\times R_L`),
+                          math(String.raw`\mathcal{J}\times \mathcal{J}`),
                           " から ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " への写像なので、2 つの行列が等しいこととすべての成分が等しいことは同じである。",
-                          math(String.raw`\tau,\tau''\in R_L`),
+                          math(String.raw`u,u''\in \mathcal{J}`),
                           " を任意に取る。",
                         ]),
                         paragraph(["左から掛ける側。"]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(I^{\overline{\mathbb{Q}}}_L\,A\bigr)_{\tau,\tau''}
-&=\sum_{\tau'\in R_L}\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}\,A_{\tau',\tau''}
+\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\,A\bigr)_{u,u''}
+&=\sum_{u'\in \mathcal{J}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,A_{u',u''}
 &&(\because\ \blkref{def_qbar_matrix_product})\\
-&=\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau}\,A_{\tau,\tau''}
-+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau'}\,A_{\tau',\tau''}
-&&(\because\ \text{有限和から }\tau'=\tau\text{ の 1 項を分ける})\\
-&=1\cdot A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0\cdot A_{\tau',\tau''}
+&=\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u}\,A_{u,u''}
++\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,A_{u',u''}
+&&(\because\ \text{有限和から }u'=u\text{ の 1 項を分ける})\\
+&=1\cdot A_{u,u''}+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot A_{u',u''}
 &&(\because\ \blkref{def_qbar_identity_matrix})\\
-&=A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0\cdot A_{\tau',\tau''}
+&=A_{u,u''}+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot A_{u',u''}
 &&(\because\ \text{単位元との積})\\
-&=A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau}}0
+&=A_{u,u''}+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0
 &&(\because\ \text{零元との積})\\
-&=A_{\tau,\tau''}+0
+&=A_{u,u''}+0
 &&(\because\ \text{零元だけの有限和は零元である})\\
-&=A_{\tau,\tau''}
+&=A_{u,u''}
 &&(\because\ \text{零元を足しても変わらない})
 \end{aligned}`),
                         paragraph([
                           "右から掛ける側。分けるのは ",
-                          math(String.raw`\tau'=\tau''`),
+                          math(String.raw`u'=u''`),
                           " の項であり、単位行列の成分は第 2 添字が第 1 添字に等しいときに ",
                           math(String.raw`1`),
                           " なので、残る項では第 2 添字 ",
-                          math(String.raw`\tau''`),
+                          math(String.raw`u''`),
                           " が第 1 添字 ",
-                          math(String.raw`\tau'`),
+                          math(String.raw`u'`),
                           " と異なる。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(A\,I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau,\tau''}
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau',\tau''}
+\bigl(A\,I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u''}
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u',u''}
 &&(\because\ \blkref{def_qbar_matrix_product})\\
-&=A_{\tau,\tau''}\,\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau'',\tau''}
-+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau''}}A_{\tau,\tau'}\,\bigl(I^{\overline{\mathbb{Q}}}_L\bigr)_{\tau',\tau''}
-&&(\because\ \text{有限和から }\tau'=\tau''\text{ の 1 項を分ける})\\
-&=A_{\tau,\tau''}\cdot1+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau''}}A_{\tau,\tau'}\cdot0
+&=A_{u,u''}\,\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u'',u''}
++\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u''}}A_{u,u'}\,\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u',u''}
+&&(\because\ \text{有限和から }u'=u''\text{ の 1 項を分ける})\\
+&=A_{u,u''}\cdot1+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u''}}A_{u,u'}\cdot0
 &&(\because\ \blkref{def_qbar_identity_matrix})\\
-&=A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau''}}A_{\tau,\tau'}\cdot0
+&=A_{u,u''}+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u''}}A_{u,u'}\cdot0
 &&(\because\ \text{単位元との積})\\
-&=A_{\tau,\tau''}+\sum_{\substack{\tau'\in R_L\\ \tau'\ne\tau''}}0
+&=A_{u,u''}+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u''}}0
 &&(\because\ \text{零元との積})\\
-&=A_{\tau,\tau''}+0
+&=A_{u,u''}+0
 &&(\because\ \text{零元だけの有限和は零元である})\\
-&=A_{\tau,\tau''}
+&=A_{u,u''}
 &&(\because\ \text{零元を足しても変わらない})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " と ",
-                          math(String.raw`\tau''`),
+                          math(String.raw`u''`),
                           " は任意なので、2 つの等式のいずれも全成分で成り立ち、主張が成り立つ。",
                         ]),
                         paragraph([
@@ -21137,7 +21133,7 @@ A^{k+1}\cdot v
                           " と ",
                           math(String.raw`a\cdot0=0`),
                           " であり、積の可換性を使わない以上この 2 組は別々に要る。",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " について使っているのは、有限集合であることと 2 元の相等が判定できることの 2 つだけである。",
                           "実数体も複素数体も現れない。",
                         ]),
@@ -21161,7 +21157,7 @@ A^{k+1}\cdot v
                       verification: ["sagemath/check/qbar-matrix-pow-succ-right"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）と ",
@@ -21181,13 +21177,10 @@ A^{k+1}\cdot v
                           " の冪は ",
                           math(String.raw`A^{k+1}:=A\,A^{k}`),
                           " と左から掛けて定めてあるので、右から掛けた形は定義ではなく主張である。",
-                          "これが要るのは、",
-                          ref("def_matrix_over_row_configs"),
-                          " の冪が右から掛ける形で定めてあり、",
-                          ref("def_qbar_matrix_eval"),
-                          " が冪を保つことを ",
+                          "これが要るのは、成分ごとの評価が冪を保つことを ",
                           math(String.raw`k`),
-                          " についての帰納法で示すときに、一歩の向きを揃える必要があるためである。",
+                          " についての帰納法で示すときに、右から掛ける形と一歩の向きを揃える必要があるためである",
+                          "（評価そのものは、この節の外で整係数多項式を成分とする行列に対して定める）。",
                         ]),
                       ],
                       proof: [
@@ -21205,11 +21198,11 @@ A^{k+1}\cdot v
 A^{0+1}
 &=A\,A^{0}
 &&(\because\ \blkref{def_qbar_matrix_power})\\
-&=A\,I^{\overline{\mathbb{Q}}}_L
+&=A\,I^{\overline{\mathbb{Q}}}_{\mathcal{J}}
 &&(\because\ \blkref{def_qbar_matrix_power})\\
 &=A
 &&(\because\ \blkref{claim_qbar_identity_matrix_unit})\\
-&=I^{\overline{\mathbb{Q}}}_L\,A
+&=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\,A
 &&(\because\ \blkref{claim_qbar_identity_matrix_unit})\\
 &=A^{0}A
 &&(\because\ \blkref{def_qbar_matrix_power})
@@ -21413,17 +21406,17 @@ A^{(k+1)+1}
                       "（",
                       ref("def_algebraic_numbers"),
                       "）と ",
-                      math(String.raw`v\in V_L`),
+                      math(String.raw`v\in V_{\mathcal{J}}`),
                       "（",
                       ref("def_qbar_vector"),
                       "）を任意に取る。",
-                      math(String.raw`z\odot v=o_L`),
+                      math(String.raw`z\odot v=o_{\mathcal{J}}`),
                       "（",
                       ref("def_qbar_vector_smul"),
                       "、",
                       ref("def_qbar_zero_vector"),
                       "）かつ ",
-                      math(String.raw`v\ne o_L`),
+                      math(String.raw`v\ne o_{\mathcal{J}}`),
                       " ならば ",
                       math(String.raw`z=0`),
                       " である（",
@@ -21433,79 +21426,79 @@ A^{(k+1)+1}
                       " の零元）。",
                     ]),
                     paragraph([
-                      math(String.raw`v\ne o_L`),
+                      math(String.raw`v\ne o_{\mathcal{J}}`),
                       " という仮定は落とせない。",
-                      math(String.raw`v=o_L`),
+                      math(String.raw`v=o_{\mathcal{J}}`),
                       " のときは任意の ",
                       math(String.raw`z`),
                       " について ",
-                      math(String.raw`z\odot v=o_L`),
+                      math(String.raw`z\odot v=o_{\mathcal{J}}`),
                       " が成り立つからである。",
                     ]),
                   ],
                   proof: [
                     paragraph([
-                      math(String.raw`V_L`),
+                      math(String.raw`V_{\mathcal{J}}`),
                       " の元は ",
-                      math(String.raw`R_L`),
+                      math(String.raw`\mathcal{J}`),
                       " から ",
                       math(String.raw`\overline{\mathbb{Q}}`),
                       " への写像であり（",
                       ref("def_qbar_vector"),
                       "）、2 つの写像が等しいことは各点で値が等しいことである。",
                       "したがって ",
-                      math(String.raw`v\ne o_L`),
+                      math(String.raw`v\ne o_{\mathcal{J}}`),
                       " から、",
-                      math(String.raw`v(\tau_1)\ne o_L(\tau_1)`),
+                      math(String.raw`v(u_1)\ne o_{\mathcal{J}}(u_1)`),
                       " を満たす ",
-                      math(String.raw`\tau_1\in R_L`),
+                      math(String.raw`u_1\in \mathcal{J}`),
                       " が存在する（",
-                      ref("def_row_configuration"),
+                      ref("def_qbar_matrix"),
                       "）。この ",
-                      math(String.raw`\tau_1`),
+                      math(String.raw`u_1`),
                       " を 1 つ固定する。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-v(\tau_1)&\ne o_L(\tau_1)
-&&(\because\ \tau_1\ \text{の取り方})\\
+v(u_1)&\ne o_{\mathcal{J}}(u_1)
+&&(\because\ u_1\ \text{の取り方})\\
 &=0
 &&(\because\ \blkref{def_qbar_zero_vector})
 \end{aligned}`),
                     paragraph([
                       "すなわち ",
-                      math(String.raw`v(\tau_1)\ne0`),
+                      math(String.raw`v(u_1)\ne0`),
                       " である。次に、この点での値を計算する。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-z\,v(\tau_1)
-&=(z\odot v)(\tau_1)
+z\,v(u_1)
+&=(z\odot v)(u_1)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=o_L(\tau_1)
-&&(\because\ \text{仮定}\ z\odot v=o_L)\\
+&=o_{\mathcal{J}}(u_1)
+&&(\because\ \text{仮定}\ z\odot v=o_{\mathcal{J}})\\
 &=0
 &&(\because\ \blkref{def_qbar_zero_vector})
 \end{aligned}`),
                     paragraph([
                       math(String.raw`\overline{\mathbb{Q}}`),
                       " は体なので ",
-                      math(String.raw`v(\tau_1)`),
+                      math(String.raw`v(u_1)`),
                       " は積についての逆元 ",
-                      math(String.raw`v(\tau_1)^{-1}\in\overline{\mathbb{Q}}`),
+                      math(String.raw`v(u_1)^{-1}\in\overline{\mathbb{Q}}`),
                       " を持つ（",
                       ref("def_algebraic_numbers"),
                       "。",
-                      math(String.raw`v(\tau_1)\ne0`),
+                      math(String.raw`v(u_1)\ne0`),
                       " は上で示した）。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
 z&=z\cdot1
 &&(\because\ 1\ \text{は積の単位元})\\
-&=z\cdot\bigl(v(\tau_1)\,v(\tau_1)^{-1}\bigr)
-&&(\because\ v(\tau_1)^{-1}\ \text{は}\ v(\tau_1)\ \text{の積についての逆元})\\
-&=\bigl(z\,v(\tau_1)\bigr)\,v(\tau_1)^{-1}
+&=z\cdot\bigl(v(u_1)\,v(u_1)^{-1}\bigr)
+&&(\because\ v(u_1)^{-1}\ \text{は}\ v(u_1)\ \text{の積についての逆元})\\
+&=\bigl(z\,v(u_1)\bigr)\,v(u_1)^{-1}
 &&(\because\ \text{積の結合則})\\
-&=0\cdot v(\tau_1)^{-1}
-&&(\because\ \text{上の鎖で得た}\ z\,v(\tau_1)=0)\\
+&=0\cdot v(u_1)^{-1}
+&&(\because\ \text{上の鎖で得た}\ z\,v(u_1)=0)\\
 &=0
 &&(\because\ \text{零元との積は零元である})
 \end{aligned}`),
@@ -21611,9 +21604,9 @@ z&=z\cdot1
                           " より、",
                           math(String.raw`\mathrm{Ev}_{\xi}(U)\cdot v=z\odot v`),
                           " かつ ",
-                          math(String.raw`v\ne o_L`),
+                          math(String.raw`v\ne o_{R_L}`),
                           " を満たす ",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{R_L}`),
                           " が存在する（",
                           ref("def_qbar_eigenvector"),
                           "、",
@@ -21646,7 +21639,7 @@ z^{L}\odot v
 \end{aligned}`),
                         paragraph([
                           "次に、",
-                          math(String.raw`\bigl(z^{L}+(-1)\bigr)\odot v=o_L`),
+                          math(String.raw`\bigl(z^{L}+(-1)\bigr)\odot v=o_{R_L}`),
                           " を示す（",
                           math(String.raw`-1`),
                           " は ",
@@ -21654,7 +21647,7 @@ z^{L}\odot v
                           " の単位元 ",
                           math(String.raw`1`),
                           " の加法についての逆元である）。",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{R_L}`),
                           " の元は ",
                           math(String.raw`R_L`),
                           " から ",
@@ -21683,15 +21676,15 @@ z^{L}\odot v
 &&(\because\ -1\ \text{は}\ 1\ \text{の加法についての逆元})\\
 &=0
 &&(\because\ \text{零元との積は零元である})\\
-&=o_L(\tau)
+&=o_{R_L}(\tau)
 &&(\because\ \blkref{def_qbar_zero_vector})
 \end{aligned}`),
                         paragraph([
                           math(String.raw`\tau\in R_L`),
                           " は任意だったので ",
-                          math(String.raw`\bigl(z^{L}+(-1)\bigr)\odot v=o_L`),
+                          math(String.raw`\bigl(z^{L}+(-1)\bigr)\odot v=o_{R_L}`),
                           " である。",
-                          math(String.raw`v\ne o_L`),
+                          math(String.raw`v\ne o_{R_L}`),
                           " と合わせて ",
                           ref("claim_qbar_smul_eq_zero"),
                           " を ",
@@ -21767,7 +21760,7 @@ z^{L}
                       verification: ["sagemath/check/qbar-commuting-eigenspace"],
                       statement: [
                         paragraph([
-                          math(String.raw`A,B\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）と ",
@@ -21781,7 +21774,7 @@ z^{L}
                           "（",
                           ref("def_qbar_eigenspace"),
                           "）を満たす任意の ",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）について",
@@ -21838,19 +21831,10 @@ A\cdot(B\cdot v)
                           "実数体も複素数体も現れない。",
                         ]),
                         paragraph([
-                          "これはシフト行列 ",
-                          math(String.raw`U`),
-                          " と転送行列 ",
-                          math(String.raw`T`),
-                          " の可換性（",
-                          ref("theorem_shift_matrix_commutes"),
-                          "）を、固有空間の言葉へ翻訳するための段である。",
-                          math(String.raw`\mathrm{Ev}_{\xi}`),
-                          " で ",
+                          "可換な 2 つの行列があるとき、一方の固有空間がもう一方で保たれることを言う段である。",
+                          "この論文では、シフト行列と転送行列を ",
                           math(String.raw`\overline{\mathbb{Q}}`),
-                          " へ運んだ 2 つの行列が可換であること（",
-                          ref("claim_qbar_matrix_eval_product"),
-                          " による）と合わせると、転送行列がシフト行列の各固有空間をそれ自身へ写すことになる。",
+                          " へ運んだ 2 つの行列に対して使う。",
                         ]),
                       ],
                     },
@@ -21975,7 +21959,7 @@ A\cdot(B\cdot v)
                           "（",
                           ref("def_qbar_eigenspace"),
                           "）を満たす任意の ",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{R_L}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）について",
@@ -22019,7 +22003,7 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                           " が零ベクトルでないことは仮定していない（",
                           ref("def_qbar_eigenspace"),
                           " が零ベクトルを含むため、この主張は ",
-                          math(String.raw`v=o_L`),
+                          math(String.raw`v=o_{R_L}`),
                           " のときも中身のある形で成り立つ）。",
                           "実数体も複素数体も現れない。",
                         ]),
@@ -22047,15 +22031,15 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                       "（",
                       math(String.raw`I`),
                       " から ",
-                      math(String.raw`V_L`),
+                      math(String.raw`V_{\mathcal{J}}`),
                       " への写像。",
                       ref("def_qbar_vector"),
                       "）に対し、有限和 ",
-                      math(String.raw`\bigoplus_{i\in s}v_i\in V_L`),
+                      math(String.raw`\bigoplus_{i\in s}v_i\in V_{\mathcal{J}}`),
                       " を",
                     ]),
                     displayMath(
-                      String.raw`\Bigl(\bigoplus_{i\in s}v_i\Bigr)(\tau):=\sum_{i\in s}v_i(\tau)\qquad(\tau\in R_L)`,
+                      String.raw`\Bigl(\bigoplus_{i\in s}v_i\Bigr)(u):=\sum_{i\in s}v_i(u)\qquad(u\in \mathcal{J})`,
                     ),
                     paragraph([
                       "で定める。右辺は ",
@@ -22080,7 +22064,7 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                       "とくに ",
                       math(String.raw`s=\emptyset`),
                       " のとき ",
-                      math(String.raw`\bigoplus_{i\in s}v_i=o_L`),
+                      math(String.raw`\bigoplus_{i\in s}v_i=o_{\mathcal{J}}`),
                       "（",
                       ref("def_qbar_zero_vector"),
                       "）である。",
@@ -22113,7 +22097,7 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                       verification: ["sagemath/check/qbar-action-sum"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）、集合 ",
@@ -22125,7 +22109,7 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                           "（",
                           math(String.raw`I`),
                           " から ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " への写像）を任意に取る。このとき",
                         ]),
                         displayMath(
@@ -22144,32 +22128,32 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                       proof: [
                         paragraph([
                           "両辺は ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " の元、すなわち ",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " 上の写像なので、",
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " を任意に取り、その ",
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " における値が等しいことを示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\Bigl(A\cdot\Bigl(\bigoplus_{i\in s}v_i\Bigr)\Bigr)(\tau)
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\Bigl(\bigoplus_{i\in s}v_i\Bigr)(\tau')
+\Bigl(A\cdot\Bigl(\bigoplus_{i\in s}v_i\Bigr)\Bigr)(u)
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\Bigl(\bigoplus_{i\in s}v_i\Bigr)(u')
 &&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\sum_{\tau'\in R_L}A_{\tau,\tau'}\Bigl(\sum_{i\in s}v_i(\tau')\Bigr)
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\Bigl(\sum_{i\in s}v_i(u')\Bigr)
 &&(\because\ \blkref{def_qbar_vector_sum})\\
-&=\sum_{\tau'\in R_L}\ \sum_{i\in s}A_{\tau,\tau'}\,v_i(\tau')
+&=\sum_{u'\in \mathcal{J}}\ \sum_{i\in s}A_{u,u'}\,v_i(u')
 &&(\because\ \text{元と有限和の積についての分配則})\\
-&=\sum_{i\in s}\ \sum_{\tau'\in R_L}A_{\tau,\tau'}\,v_i(\tau')
+&=\sum_{i\in s}\ \sum_{u'\in \mathcal{J}}A_{u,u'}\,v_i(u')
 &&(\because\ \text{有限和の順序の入れ替え})\\
-&=\sum_{i\in s}\bigl(A\cdot v_i\bigr)(\tau)
+&=\sum_{i\in s}\bigl(A\cdot v_i\bigr)(u)
 &&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\Bigl(\bigoplus_{i\in s}\bigl(A\cdot v_i\bigr)\Bigr)(\tau)
+&=\Bigl(\bigoplus_{i\in s}\bigl(A\cdot v_i\bigr)\Bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_sum})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " は任意だったので、2 つの写像は等しい。",
                         ]),
                         paragraph([
@@ -22179,7 +22163,7 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                           "加法が可換モノイドであること（有限和の順序を入れ替えるのに要る）だけである。",
                           "積の結合則も可換性も、加法の逆元も、体であることも使っていない。",
                           "有限和の順序の入れ替えが使えるのは、",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " も ",
                           math(String.raw`s`),
                           " も有限集合だからである。",
@@ -22231,7 +22215,7 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                           "（",
                           math(String.raw`I`),
                           " から ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " への写像。",
                           ref("def_qbar_vector"),
                           "）を任意に取る。このとき",
@@ -22254,30 +22238,30 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                       proof: [
                         paragraph([
                           "両辺は ",
-                          math(String.raw`V_L`),
+                          math(String.raw`V_{\mathcal{J}}`),
                           " の元、すなわち ",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " 上の写像なので、",
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " を任意に取り、その ",
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " における値が等しいことを示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\Bigl(z\odot\Bigl(\bigoplus_{i\in s}v_i\Bigr)\Bigr)(\tau)
-&=z\,\Bigl(\bigoplus_{i\in s}v_i\Bigr)(\tau)
+\Bigl(z\odot\Bigl(\bigoplus_{i\in s}v_i\Bigr)\Bigr)(u)
+&=z\,\Bigl(\bigoplus_{i\in s}v_i\Bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=z\,\Bigl(\sum_{i\in s}v_i(\tau)\Bigr)
+&=z\,\Bigl(\sum_{i\in s}v_i(u)\Bigr)
 &&(\because\ \blkref{def_qbar_vector_sum})\\
-&=\sum_{i\in s}z\,v_i(\tau)
+&=\sum_{i\in s}z\,v_i(u)
 &&(\because\ \text{元と有限和の積についての分配則})\\
-&=\sum_{i\in s}\bigl(z\odot v_i\bigr)(\tau)
+&=\sum_{i\in s}\bigl(z\odot v_i\bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
-&=\Bigl(\bigoplus_{i\in s}\bigl(z\odot v_i\bigr)\Bigr)(\tau)
+&=\Bigl(\bigoplus_{i\in s}\bigl(z\odot v_i\bigr)\Bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_sum})
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`\tau\in R_L`),
+                          math(String.raw`u\in \mathcal{J}`),
                           " は任意だったので、2 つの写像は等しい。",
                         ]),
                         paragraph([
@@ -22292,9 +22276,9 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                           "また ",
                           math(String.raw`s`),
                           " が有限であることは分配則を有限個の項へ当てるために要るが、",
-                          math(String.raw`R_L`),
+                          math(String.raw`\mathcal{J}`),
                           " の有限性はこの段では使っていない（各 ",
-                          math(String.raw`\tau`),
+                          math(String.raw`u`),
                           " ごとに独立な等式だからである）。",
                           "実数体も複素数体も現れない。",
                         ]),
@@ -22324,7 +22308,7 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                   verification: ["sagemath/check/qbar-projector-action"],
                   statement: [
                     paragraph([
-                      math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                       "（",
                       ref("def_qbar_matrix"),
                       "）と ",
@@ -22332,13 +22316,13 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                       "（",
                       ref("def_algebraic_numbers"),
                       "）を任意に取る。写像 ",
-                      math(String.raw`P_{A,z}\colon V_L\to V_L`),
+                      math(String.raw`P_{A,z}\colon V_{\mathcal{J}}\to V_{\mathcal{J}}`),
                       "（",
                       ref("def_qbar_vector"),
                       "）を",
                     ]),
                     displayMath(
-                      String.raw`P_{A,z}(v):=\bigoplus_{k=0}^{L-1}z^{\,L-k}\odot\bigl(A^{k}\cdot v\bigr)\qquad(v\in V_L)`,
+                      String.raw`P_{A,z}(v):=\bigoplus_{k=0}^{L-1}z^{\,L-k}\odot\bigl(A^{k}\cdot v\bigr)\qquad(v\in V_{\mathcal{J}})`,
                     ),
                     paragraph([
                       "で定める。ここで ",
@@ -22388,7 +22372,7 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                     ]),
                     paragraph([
                       "この定義は ",
-                      math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_L`),
+                      math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}`),
                       " も ",
                       math(String.raw`z^{L}=1`),
                       " も仮定しない（",
@@ -22425,13 +22409,13 @@ A=\mathrm{Ev}_{\xi}(U),\ B=\mathrm{Ev}_{\xi}(T)\ \text{に当てた}\\
                       verification: ["sagemath/check/qbar-projector-action"],
                       statement: [
                         paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                           "（",
                           ref("def_qbar_matrix"),
                           "）、",
                           math(String.raw`z\in\overline{\mathbb{Q}}`),
                           "、",
-                          math(String.raw`v\in V_L`),
+                          math(String.raw`v\in V_{\mathcal{J}}`),
                           "（",
                           ref("def_qbar_vector"),
                           "）を任意に取る。このとき",
@@ -22491,7 +22475,7 @@ A\cdot P_{A,z}(v)
                           " に勝手な ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の元を割り当てても同じ鎖が通る）。",
-                          math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_L`),
+                          math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}`),
                           " も ",
                           math(String.raw`z^{L}=1`),
                           " も使っていない。",
@@ -22510,7 +22494,7 @@ A\cdot P_{A,z}(v)
                           " の項を ",
                           math(String.raw`k=0`),
                           " の項へ巻き戻すことであり、そこで ",
-                          math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_L`),
+                          math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}`),
                           " と ",
                           math(String.raw`z^{L}=1`),
                           " を使う。",
@@ -22534,17 +22518,17 @@ A\cdot P_{A,z}(v)
                   verification: ["sagemath/check/qbar-projector-image-eigenspace"],
                   statement: [
                     paragraph([
-                      math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
                       "（",
                       ref("def_qbar_matrix"),
                       "）、",
                       math(String.raw`z\in\overline{\mathbb{Q}}`),
                       "、",
-                      math(String.raw`v\in V_L`),
+                      math(String.raw`v\in V_{\mathcal{J}}`),
                       "（",
                       ref("def_qbar_vector"),
                       "）を任意に取る。",
-                      math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_L`),
+                      math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}`),
                       "（",
                       ref("def_qbar_matrix_power"),
                       "、",
@@ -22574,37 +22558,37 @@ A\cdot P_{A,z}(v)
                     ]),
                     paragraph([
                       "準備 1。",
-                      math(String.raw`\tau\in R_L`),
+                      math(String.raw`u\in \mathcal{J}`),
                       " を任意に取り、",
                       math(String.raw`k\in\mathbb{N}`),
                       " に対し ",
-                      math(String.raw`a_k:=\bigl(A^{k}\cdot v\bigr)(\tau)\in\overline{\mathbb{Q}}`),
+                      math(String.raw`a_k:=\bigl(A^{k}\cdot v\bigr)(u)\in\overline{\mathbb{Q}}`),
                       " と置く（点は ",
                       ref("def_qbar_matrix_action"),
                       "）。",
                       math(String.raw`a_k`),
                       " は ",
-                      math(String.raw`\tau`),
+                      math(String.raw`u`),
                       " にも依るが、以下の議論では ",
-                      math(String.raw`\tau`),
+                      math(String.raw`u`),
                       " を固定したままなので添字に書かない。",
                     ]),
                     paragraph([
                       "準備 2。",
-                      math(String.raw`a_L=a_0`),
+                      math(String.raw`a_{\mathcal{J}}=a_0`),
                       " である。実際",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-a_L&=\bigl(A^{L}\cdot v\bigr)(\tau)
+a_{\mathcal{J}}&=\bigl(A^{L}\cdot v\bigr)(u)
 &&(\because\ \text{準備 1})\\
-&=\bigl(I^{\overline{\mathbb{Q}}}_L\cdot v\bigr)(\tau)
-&&(\because\ \text{仮定}\ A^{L}=I^{\overline{\mathbb{Q}}}_L)\\
-&=v(\tau)
+&=\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v\bigr)(u)
+&&(\because\ \text{仮定}\ A^{L}=I^{\overline{\mathbb{Q}}}_{\mathcal{J}})\\
+&=v(u)
 &&(\because\ \blkref{claim_qbar_identity_action})\\
-&=\bigl(I^{\overline{\mathbb{Q}}}_L\cdot v\bigr)(\tau)
+&=\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v\bigr)(u)
 &&(\because\ \blkref{claim_qbar_identity_action})\\
-&=\bigl(A^{0}\cdot v\bigr)(\tau)
-&&(\because\ \blkref{def_qbar_matrix_power}\ \text{の}\ A^{0}:=I^{\overline{\mathbb{Q}}}_L)\\
+&=\bigl(A^{0}\cdot v\bigr)(u)
+&&(\because\ \blkref{def_qbar_matrix_power}\ \text{の}\ A^{0}:=I^{\overline{\mathbb{Q}}}_{\mathcal{J}})\\
 &=a_0
 &&(\because\ \text{準備 1})
 \end{aligned}`),
@@ -22625,20 +22609,20 @@ z^{\,L+1}&=z^{L}\,z
                       " により示すべきことは ",
                       math(String.raw`A\cdot P_{A,z}(v)=z\odot P_{A,z}(v)`),
                       " である。両辺は ",
-                      math(String.raw`V_L`),
+                      math(String.raw`V_{\mathcal{J}}`),
                       " の元、すなわち ",
-                      math(String.raw`R_L`),
+                      math(String.raw`\mathcal{J}`),
                       " 上の写像なので、準備 1 で取った ",
-                      math(String.raw`\tau`),
+                      math(String.raw`u`),
                       " における値が等しいことを示す。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-\bigl(A\cdot P_{A,z}(v)\bigr)(\tau)
-&=\Bigl(\bigoplus_{k=0}^{L-1}z^{\,L-k}\odot\bigl(A^{k+1}\cdot v\bigr)\Bigr)(\tau)
+\bigl(A\cdot P_{A,z}(v)\bigr)(u)
+&=\Bigl(\bigoplus_{k=0}^{L-1}z^{\,L-k}\odot\bigl(A^{k+1}\cdot v\bigr)\Bigr)(u)
 &&(\because\ \blkref{claim_qbar_projector_action})\\
-&=\sum_{k=0}^{L-1}\bigl(z^{\,L-k}\odot\bigl(A^{k+1}\cdot v\bigr)\bigr)(\tau)
+&=\sum_{k=0}^{L-1}\bigl(z^{\,L-k}\odot\bigl(A^{k+1}\cdot v\bigr)\bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_sum})\\
-&=\sum_{k=0}^{L-1}z^{\,L-k}\,\bigl(A^{k+1}\cdot v\bigr)(\tau)
+&=\sum_{k=0}^{L-1}z^{\,L-k}\,\bigl(A^{k+1}\cdot v\bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})\\
 &=\sum_{k=0}^{L-1}z^{\,L-k}\,a_{k+1}
 &&(\because\ \text{準備 1})\\
@@ -22656,17 +22640,17 @@ z^{\,L+1}&=z^{L}\,z
 &&(\because\ z^{\,L-k+1}=z^{\,L-k}z\ \text{と積の可換則})\\
 &=z\,\sum_{k=0}^{L-1}z^{\,L-k}\,a_{k}
 &&(\because\ \text{元と有限和の積についての分配則})\\
-&=z\,\sum_{k=0}^{L-1}\bigl(z^{\,L-k}\odot\bigl(A^{k}\cdot v\bigr)\bigr)(\tau)
+&=z\,\sum_{k=0}^{L-1}\bigl(z^{\,L-k}\odot\bigl(A^{k}\cdot v\bigr)\bigr)(u)
 &&(\because\ \text{準備 1 と}\ \blkref{def_qbar_vector_smul})\\
-&=z\,\Bigl(\bigoplus_{k=0}^{L-1}z^{\,L-k}\odot\bigl(A^{k}\cdot v\bigr)\Bigr)(\tau)
+&=z\,\Bigl(\bigoplus_{k=0}^{L-1}z^{\,L-k}\odot\bigl(A^{k}\cdot v\bigr)\Bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_sum})\\
-&=z\,\bigl(P_{A,z}(v)\bigr)(\tau)
+&=z\,\bigl(P_{A,z}(v)\bigr)(u)
 &&(\because\ \blkref{def_qbar_projector})\\
-&=\bigl(z\odot P_{A,z}(v)\bigr)(\tau)
+&=\bigl(z\odot P_{A,z}(v)\bigr)(u)
 &&(\because\ \blkref{def_qbar_vector_smul})
 \end{aligned}`),
                     paragraph([
-                      math(String.raw`\tau\in R_L`),
+                      math(String.raw`u\in \mathcal{J}`),
                       " は任意だったので ",
                       math(String.raw`A\cdot P_{A,z}(v)=z\odot P_{A,z}(v)`),
                       " であり、",
@@ -22693,7 +22677,7 @@ z^{\,L+1}&=z^{L}\,z
                       math(String.raw`L\ge1`),
                       " なのでこれは満たされている。",
                       "第二に、2 つの仮定 ",
-                      math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_L`),
+                      math(String.raw`A^{L}=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}`),
                       "（準備 2 で使う）と ",
                       math(String.raw`z^{L}=1`),
                       "（準備 3 で使う）を使うのは、この主張が初めてである。",
@@ -28022,7 +28006,7 @@ n
                         paragraph([
                           math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
                           "（", ref("def_qbar_matrix"), "）と ",
-                          math(String.raw`v\in V_L`), "（", ref("def_qbar_vector"),
+                          math(String.raw`v\in V_{R_L}`), "（", ref("def_qbar_vector"),
                           "）を任意に取る。このとき",
                         ]),
                         displayMath(String.raw`\bigoplus_{z\in\mu_L}\frac{1}{L}\odot P_{A,z}(v)=v`),
@@ -28092,7 +28076,7 @@ n
                       math(String.raw`A\in\mathrm{Mat}_{R_L}(\overline{\mathbb{Q}})`),
                       "（", ref("def_qbar_matrix"), "）が ",
                       math(String.raw`A^L=I_L^{\overline{\mathbb{Q}}}`), " を満たし、",
-                      math(String.raw`v\in V_L`), "（", ref("def_qbar_vector"),
+                      math(String.raw`v\in V_{R_L}`), "（", ref("def_qbar_vector"),
                       "）であるとする。このとき、各 ", math(String.raw`z\in\mu_L`), " に対して ",
                       math(String.raw`u_z\in E_A(z)`), " を満たす列ベクトルの族 ",
                       math(String.raw`(u_z)_{z\in\mu_L}`), " が存在して、",
@@ -28100,7 +28084,7 @@ n
                     displayMath(String.raw`\bigoplus_{z\in\mu_L}u_z=v`),
                     paragraph([
                       "が成り立つ。したがって、1 の ", math(String.raw`L`),
-                      " 乗根に対応する固有空間たちは ", math(String.raw`V_L`), " の全体を張る。",
+                      " 乗根に対応する固有空間たちは ", math(String.raw`V_{R_L}`), " の全体を張る。",
                     ]),
                   ],
                   proof: [

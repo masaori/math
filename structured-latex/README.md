@@ -283,5 +283,6 @@ export default {
 | [docs/type-coverage.md](docs/type-coverage.md) | 型で落とすもの／実行時に残すものの切り分けと根拠 |
 | [docs/domain-model.md](docs/domain-model.md#532-ローカライズ) | 原文・翻訳・構造 SSOT・不変条件 |
 | [docs/milestones.md](docs/milestones.md) | マイルストーン |
+| [docs/authoring-notes.md](docs/authoring-notes.md) | 書き方の注意。利用側が踏んだ落とし穴と回避手順 |
 | [docs/design-notes/](docs/design-notes/) | 個別の設計判断の詳細な根拠 |
 | [MEMORY.md](MEMORY.md) | 引き継ぎメモ |
