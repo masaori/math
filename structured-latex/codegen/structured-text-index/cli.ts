@@ -71,7 +71,8 @@ if (contentFiles.length === 0) {
 type LabelOrigin = { label: string; blockId: string; file: string }
 
 const origins: LabelOrigin[] = []
-for (const { file, blocks } of await loadContentFiles(projectDir)) {
+const loadedSourceContent = await loadContentFiles(projectDir)
+for (const { file, blocks } of loadedSourceContent) {
   for (const block of blocks) {
     for (const label of block.labels) origins.push({ label, blockId: block.id, file })
   }
@@ -108,7 +109,7 @@ if (labels.length === 0) {
  * ロケール別の構造・翻訳元・欠落はここで必ず拒否する。
  */
 const localizationConfig = await loadProjectLocalizationConfig(projectDir)
-const sourceSegments = (await loadContentFiles(projectDir)).map(({ file, blocks }) => ({
+const sourceSegments = loadedSourceContent.map(({ file, blocks }) => ({
   key: file,
   blocks,
   notes: [] as readonly Note[],
@@ -223,6 +224,14 @@ const outputs = [
     rendered: renderDocument({
       domainModelSpecifier,
       contentFiles,
+      structuredContent: Object.fromEntries(
+        loadedSourceContent
+          .filter(({ sourceKind }) => sourceKind !== 'blocks')
+          .map(({ file, sourceKind }) => [
+            file,
+            sourceKind as 'sections' | 'documentStructure',
+          ]),
+      ),
       noteFiles,
       translations: translationRenders,
     }),

@@ -13,9 +13,21 @@ import { existsSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-import type { Block, Note } from '../../domain-model/index.ts'
+import {
+  compileDocumentStructure,
+  createRuntimeSchema,
+  type Block,
+  type DocumentStructure,
+  type Note,
+  type Section,
+} from '../../domain-model/index.ts'
 
-export type LoadedBlockFile = { file: string; blocks: readonly Block[] }
+export type ContentSourceKind = 'blocks' | 'sections' | 'documentStructure'
+export type LoadedBlockFile = {
+  file: string
+  blocks: readonly Block[]
+  sourceKind: ContentSourceKind
+}
 export type LoadedNoteFile = { file: string; notes: readonly Note[] }
 
 const isSourceFile = (fileName: string): boolean =>
@@ -44,11 +56,31 @@ export const loadContentFiles = async (projectDir: string): Promise<LoadedBlockF
 export const loadBlockFiles = async (dir: string): Promise<LoadedBlockFile[]> => {
   const loaded: LoadedBlockFile[] = []
   for (const file of listSourceFiles(dir)) {
-    const blocks = await loadDefaultExport(dir, file)
-    if (!Array.isArray(blocks)) {
-      throw new TypeError(`${file} の default export は配列でなければならない`)
+    const source = await loadDefaultExport(dir, file)
+    if (Array.isArray(source) && (source.length === 0 || !source.every((value) =>
+      typeof value === 'object' && value !== null && (value as { kind?: unknown }).kind === 'section'
+    ))) {
+      loaded.push({ file, blocks: source as readonly Block[], sourceKind: 'blocks' })
+      continue
     }
-    loaded.push({ file, blocks: blocks as readonly Block[] })
+    const document: DocumentStructure = Array.isArray(source)
+      ? { kind: 'documentStructure', sections: source as readonly Section[] }
+      : source as DocumentStructure
+    const sourceKind: ContentSourceKind = Array.isArray(source)
+      ? 'sections'
+      : 'documentStructure'
+    const schema = createRuntimeSchema({ unknownBlockMeta: 'passthrough' })
+    const validated = schema.validateDocumentStructure(document, file)
+    if (!validated.success) {
+      throw new TypeError(`${file} の文書構造が不正:
+${JSON.stringify(validated.error, null, 2)}`)
+    }
+    const compiled = compileDocumentStructure(validated.data)
+    if (!compiled.success) {
+      throw new TypeError(`${file} の文書構造を正規化できない:
+${JSON.stringify(compiled.error, null, 2)}`)
+    }
+    loaded.push({ file, blocks: compiled.data.blocks, sourceKind })
   }
   return loaded
 }

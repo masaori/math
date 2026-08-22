@@ -91,6 +91,9 @@
 節・要素グループの再帰構造では、同じブロックの複数所属、構造 ID の重複、節の深さが6段を
 超えないことを `compileDocumentStructure` が文書全体で検査する。いずれも単一要素の型だけでは
 判定できない。型を経由しない入力の形は `validateDocumentStructure` が検査する。
+著者入力の ID・ラベルのリテラル型は、章ごとの `defineSection` と、生成物が用いる
+`BlocksOfSections` / `BlocksOfDocumentStructure` により平坦なタプルへ保存される。したがって構造を
+正本にしても、ファイルを跨ぐ重複と生成済みラベルの整合検査は従来どおり型エラーになる。
 
 ### 2.3 数式が LaTeX と KaTeX の共通部分集合であること（D-1）
 

@@ -2,6 +2,8 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 
 import { compileDocumentStructure, type DocumentStructure, type Section } from './document-structure.ts'
+import { createStructuredTextSchema } from './schema-factory.ts'
+import type { BlocksOfSection } from './document-structure.ts'
 
 const definition = (id: string) => ({ id, kind: 'definition' as const, labels: [], statement: [] })
 const theorem = (id: string) => ({ id, kind: 'theorem' as const, labels: [], statement: [] })
@@ -87,4 +89,19 @@ test('節の深さが見出しの表現上限を超えると拒否する', () =>
   assert.equal(result.success, false)
   if (result.success) return
   assert.deepEqual(result.error, [{ code: 'section_depth_exceeded', sectionId: 'depth-7', depth: 7 }])
+})
+
+test('defineSectionは章単位で文脈型を与え、型レベル平坦化はidのタプル情報を保つ', () => {
+  const { defineSection } = createStructuredTextSchema<string>()
+  const section = defineSection({
+    kind: 'section', id: 'section', labels: [], title: { text: '節' }, children: [{
+      role: 'primary', element: {
+        kind: 'elementGroup', id: 'definition-group',
+        focus: { kind: 'definition', id: 'definition', labels: [], statement: [] },
+      },
+    }],
+  })
+  type Flattened = BlocksOfSection<typeof section>
+  const ids: [Flattened[0]['id'], Flattened[1]['id']] = ['section', 'definition']
+  assert.deepEqual(ids, ['section', 'definition'])
 })

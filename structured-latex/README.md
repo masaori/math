@@ -100,6 +100,11 @@ const structure = defineDocumentStructure({
 const compiled = compileDocumentStructure(structure)
 ```
 
+大きな文書では、各章を `defineSection(...)` で個別に型検査し、その章の配列を
+`content/*.ts` の default export にする。生成器は構造を直接読み、実行時には平坦なブロック列へ
+正規化し、型検査では `BlocksOfSections` により同じ順序のタプルへ平坦化する。これにより、文書全体を
+一つの巨大なリテラルとして比較する TypeScript の型計算上限を避けながら、大域的な ID・ラベル検査を保つ。
+
 - `section` の再帰が章・節・項の親子関係そのものであり、`level` は木の深さから生成される。
 - `elementGroup.focus` はそのまとまりの中心で、定理・主張・定義を置ける。
 - 節に `role: 'primary'` で属するグループの中心が、主定理・主な主張・主な定義になる。
@@ -121,7 +126,7 @@ HTML は `renderers/html/primary-elements.ts` を使う。`primaryElementEntries
 // 1. 生成された Label（実在するラベルのユニオン型）を受け取り、
 // 2. プロジェクト固有メタデータを宣言し（不要なら省略）、
 // 3. ファクトリを具体化する
-const { defineBlocks, defineNotes, defineDocumentStructure, ref } = createStructuredTextSchema<Label, Meta>()
+const { defineBlocks, defineNotes, defineDocumentStructure, defineSection, ref } = createStructuredTextSchema<Label, Meta>()
 ```
 
 あとは `content/*.ts` にブロック列を書くだけで、次が**書いた瞬間に型で落ちる**。

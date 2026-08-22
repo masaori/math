@@ -79,6 +79,10 @@ export {
 export {
   compileDocumentStructure,
   type AssertionBlock,
+  type BlocksOfDocumentStructure,
+  type BlocksOfElementGroup,
+  type BlocksOfSection,
+  type BlocksOfSections,
   type CompiledDocumentStructure,
   type CompiledElementGroup,
   type CompiledSection,

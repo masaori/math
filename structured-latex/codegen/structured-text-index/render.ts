@@ -65,9 +65,20 @@ export const renderDocument = (options: {
   /** このファイルから見た domain-model の import 指定子（例: `../../domain-model/index.ts`）。 */
   domainModelSpecifier: string
   contentFiles: readonly string[]
+  /** 木を正本にするファイル。未指定のファイルは従来のブロックタプル。 */
+  structuredContent?: Readonly<Record<string, 'sections' | 'documentStructure'>>
   noteFiles: readonly string[]
   translations?: readonly TranslationRender[]
 }): string => {
+  const structuredTypeImports = [
+    Object.values(options.structuredContent ?? {}).includes('documentStructure')
+      ? '  BlocksOfDocumentStructure,'
+      : undefined,
+    Object.values(options.structuredContent ?? {}).includes('sections')
+      ? '  BlocksOfSections,'
+      : undefined,
+  ].filter((line): line is string => line !== undefined).join('\n')
+  const renderedStructuredTypeImports = structuredTypeImports === '' ? '' : `${structuredTypeImports}\n`
   const contentImports = options.contentFiles
     .map((file) => `import ${identifierFor('blocks', file)} from './content/${file}'`)
     .join('\n')
@@ -75,7 +86,13 @@ export const renderDocument = (options: {
     .map((file) => `import ${identifierFor('notes', file)} from './notes/${file}'`)
     .join('\n')
   const contentSpread = options.contentFiles
-    .map((file) => `  ...typeof ${identifierFor('blocks', file)},`)
+    .map((file) => {
+      const identifier = identifierFor('blocks', file)
+      const kind = options.structuredContent?.[file]
+      if (kind === 'sections') return `  ...BlocksOfSections<typeof ${identifier}>,`
+      if (kind === 'documentStructure') return `  ...BlocksOfDocumentStructure<typeof ${identifier}>,`
+      return `  ...typeof ${identifier},`
+    })
     .join('\n')
   const noteSpread = options.noteFiles
     .map((file) => `  ...typeof ${identifierFor('notes', file)},`)
@@ -146,7 +163,7 @@ import type {
   AssertNoDuplicate,
   Block,
   BlockIdsOf,
-  FindDuplicate,
+${renderedStructuredTypeImports}  FindDuplicate,
   LabelsOf,
   Note,
   NoteIdsOf,

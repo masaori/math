@@ -37,3 +37,15 @@ test('ノートが 1 件も無くても集約モジュールは成立する', ()
   })
   assert.match(rendered, /export type AllNotes = \[\]/)
 })
+
+test('構造正本のファイルは型レベル平坦化でブロックタプルへ連結する', () => {
+  const rendered = renderDocument({
+    domainModelSpecifier: '../../domain-model/index.ts',
+    contentFiles: ['main.ts'],
+    structuredContent: { 'main.ts': 'sections' },
+    noteFiles: [],
+  })
+  assert.match(rendered, /BlocksOfSections<typeof blocks_main>/)
+  assert.match(rendered, /BlocksOfSections,/)
+  assert.doesNotMatch(rendered, /BlocksOfDocumentStructure,/)
+})
