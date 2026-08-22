@@ -101,6 +101,7 @@ export const ALL_LABELS = [
   "theorem_fixed_quotient_partition_polynomial_irreducible_factorization",
   "theorem_formal_high_temperature_expansion",
   "theorem_full_cut_coefficient_symmetry",
+  "theorem_full_cut_distinct_fisher_zero_product",
   "theorem_full_cut_fisher_zero_minus_one_multiplicity_parity",
   "theorem_full_cut_fisher_zero_product",
   "theorem_full_cut_fisher_zero_product_away_from_minus_one",
