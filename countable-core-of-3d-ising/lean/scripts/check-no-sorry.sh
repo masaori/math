@@ -219,6 +219,7 @@ targets=(
   Ising3DCut.Prediction.fisherExternalEdgeWeight_cleared
   Ising3DCut.Prediction.fisherExternalEdgeWeights_cleared
   Ising3DCut.Prediction.fisherMatchingWeight_cleared
+  Ising3DCut.Prediction.fisherBoundaryResponse_clearedWeightSum_eq_evenSubgraphSum
   Ising3DCut.Prediction.constantSign_finiteExpansion
   Ising3DCut.LimitQuantity.tendsto_congr_of_pointwise_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_data_eq
@@ -319,6 +320,7 @@ targets=(
   Ising3DCut.LimitQuantity.shiftedFreeBoxTwoValueAtTwoOddPart_odd
   Ising3DCut.LimitQuantity.crossPowerEquality_fails_at_two
   Ising3DCut.LimitQuantity.cross_power_equality_is_not_necessary_for_limit_quantity
+  Ising3DCut.LimitQuantity.cross_power_equality_is_not_necessary_for_limit_quantity_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

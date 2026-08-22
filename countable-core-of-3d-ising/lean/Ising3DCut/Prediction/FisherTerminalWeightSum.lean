@@ -97,4 +97,31 @@ theorem fisherMatchingWeight_cleared
         ∏ edge ∈ allEdges \ matchEdges, (1 - x edge) := by
       rw [mul_comm]
 
+/-- 全辺集合 `A` の完全マッチング辺集合をその部分集合 `S ⊆ A` として動かすとき、
+共通分母 `∏_{e∈A}(1-x e)` を掛けた完全マッチング重み和は、
+選ばれていない辺の集合 `F := A \ S` を添字にした偶部分グラフ重み和に一致する。
+これが本文 `claim_two_dimensional_boundary_response_pfaffian_prediction` の証明前半にある
+有限恒等式（分配法則だけで得る中間等式）の Lean 版である。 -/
+theorem fisherBoundaryResponse_clearedWeightSum_eq_evenSubgraphSum
+    {Edge K : Type*} [Field K] [DecidableEq Edge]
+    (A : Finset Edge) (x : Edge → K)
+    (hDenominator : ∀ edge ∈ A, 1 - x edge ≠ 0) :
+    (∏ edge ∈ A, (1 - x edge)) *
+        (∑ S ∈ A.powerset, ∏ edge ∈ S, ((1 + x edge) / (1 - x edge))) =
+      ∑ F ∈ A.powerset, (∏ edge ∈ F, (1 - x edge)) * ∏ edge ∈ A \ F, (1 + x edge) := by
+  rw [Finset.mul_sum,
+    Finset.sum_congr rfl
+      (fun S hS ↦ fisherMatchingWeight_cleared A S (Finset.mem_powerset.mp hS) x hDenominator)]
+  refine Finset.sum_nbij' (fun S ↦ A \ S) (fun F ↦ A \ F) ?_ ?_ ?_ ?_ ?_
+  · intro S _
+    exact Finset.mem_powerset.mpr Finset.sdiff_subset
+  · intro F _
+    exact Finset.mem_powerset.mpr Finset.sdiff_subset
+  · intro S hS
+    exact Finset.sdiff_sdiff_eq_self (Finset.mem_powerset.mp hS)
+  · intro F hF
+    exact Finset.sdiff_sdiff_eq_self (Finset.mem_powerset.mp hF)
+  · intro S hS
+    rw [Finset.sdiff_sdiff_eq_self (Finset.mem_powerset.mp hS), mul_comm]
+
 end Ising3DCut.Prediction
