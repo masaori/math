@@ -347,6 +347,8 @@ targets=(
   Ising3DCut.LimitQuantity.realOfExponents_zero
   Ising3DCut.LimitQuantity.realOfExponents_single
   Ising3DCut.LimitQuantity.finitely_many_primes_are_not_sufficient_for_limit_quantity_fromNecSuf
+  Ising3DCut.NecSuf.truncated_coordinate_data_not_sufficient
+  Ising3DCut.LimitQuantity.magnitude_truncated_prime_exponents_are_not_sufficient_for_limit_quantity_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
