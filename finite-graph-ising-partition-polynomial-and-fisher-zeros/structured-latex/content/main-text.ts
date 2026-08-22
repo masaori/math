@@ -1117,6 +1117,125 @@ b_G(\sigma)
     ],
   },
   {
+    id: "finite_graph_theorem_fisher_zeros_nonzero",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点の非零性" },
+    labels: ["theorem_fisher_zeros_nonzero"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zeros-nonzero"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を ",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置く。係数を標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を ",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。このとき、全ての ",
+        math(String.raw`j\in\{1,\ldots,d\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\alpha_j\ne0\quad\text{in }\overline{\mathbb Q}.`),
+      paragraph([
+        math(String.raw`d=0`),
+        " の場合、添字集合 ",
+        math(String.raw`\{1,\ldots,d\}`),
+        " は空集合であり、主張は空虚に真である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fisher_zero_product_coefficient_ratio"),
+        " より、重複度込み Fisher 零点の積は",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{d}\alpha_j
+=
+(-1)^d\frac{\Omega_G(0)}{\Omega_G(d)}
+\quad\text{in }\overline{\mathbb Q}.`),
+      paragraph([
+        "全頂点下向き配位 ",
+        math(String.raw`\sigma_{\mathsf{down}}:V\to\mathsf{Spin}`),
+        " を全ての ",
+        math(String.raw`v\in V`),
+        " について ",
+        math(String.raw`\sigma_{\mathsf{down}}(v):=\mathsf{down}`),
+        " と定める。",
+        ref("def_spin_configuration_set"),
+        " と ",
+        ref("def_broken_edge_set"),
+        " より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sigma_{\mathsf{down}}
+&\in\mathcal S_G
+&&\bigl(\because\ V\text{ から }\mathsf{Spin}\text{ への写像である}\bigr)\\
+B_G(\sigma_{\mathsf{down}})
+&=\varnothing
+&&\bigl(\because\ \text{全頂点のスピンラベルが }\mathsf{down}\text{ で等しい}\bigr)\\
+b_G(\sigma_{\mathsf{down}})
+&=0
+&&\bigl(\because\ |\varnothing|=0\bigr).
+\end{aligned}`),
+      paragraph([ref("def_broken_edge_multiplicity"), " より、"]),
+      displayMath(String.raw`\Omega_G(0)>0
+\quad\bigl(\because\ \sigma_{\mathsf{down}}\text{ は破れ辺数 }0\text{ のファイバーに属する}\bigr).`),
+      paragraph([
+        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
+        " と ",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " より、",
+      ]),
+      displayMath(String.raw`\Omega_G(d)>0
+\quad\bigl(\because\ \Omega_G(d)\text{ は }Z_G(x)\text{ の非零な最高次係数である}\bigr).`),
+      paragraph(["自然数から代数的数への標準単射より、"]),
+      displayMath(String.raw`\begin{aligned}
+(-1)^d
+&\ne0
+&&\bigl(\because\ (-1)^d\in\{-1,1\}\bigr)\\
+\frac{\Omega_G(0)}{\Omega_G(d)}
+&\ne0
+&&\bigl(\because\ \Omega_G(0)>0\text{ かつ }\Omega_G(d)>0\bigr)\\
+(-1)^d\frac{\Omega_G(0)}{\Omega_G(d)}
+&\ne0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ は体であり、二つの非零元の積は非零}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_fisher_zero_product_coefficient_ratio"),
+        " と直前の非零性より、",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{d}\alpha_j\ne0
+\quad\text{in }\overline{\mathbb Q}.`),
+      paragraph([
+        "任意の ",
+        math(String.raw`k\in\{1,\ldots,d\}`),
+        " を取る。もし ",
+        math(String.raw`\alpha_k=0`),
+        " なら、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{d}\alpha_j
+&=
+\alpha_k\prod_{\substack{1\le j\le d\\j\ne k}}\alpha_j
+&&\bigl(\because\ \text{有限積の交換律と結合律}\bigr)\\
+&=
+0
+&&\bigl(\because\ \alpha_k=0\bigr),
+\end{aligned}`),
+      paragraph([
+        "となり、直前に得た積の非零性に反する。したがって ",
+        math(String.raw`\alpha_k\ne0`),
+        " である。",
+        math(String.raw`k`),
+        " は任意だったので結論を得る。零点と有限積は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        "、次数と多重度は自然数、両端係数は正の自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_full_cut_coefficient_symmetry",
     kind: "theorem",
     title: { text: "全ての辺を横切る頂点二分割と係数対称性" },
