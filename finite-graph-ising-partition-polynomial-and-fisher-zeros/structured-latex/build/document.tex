@@ -1395,6 +1395,209 @@ $\mathbb Q\subset\overline{\mathbb Q}$
 
 \end{proof}
 
+\begin{theorem}[一般有限グラフの Fisher 零点冪和の Newton 漸化式と係数比]\label{lab:theorem_fisher_zero_power_sum_newton_recurrence}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、
+\cref{lab:def_ising_partition_polynomial}
+ の次数を 
+$d:=\deg Z_G(x)\in\mathbb N$
+ と置く。係数を標準単射 
+$\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]$
+ で移した多項式の重複度込み Fisher 零点を 
+$\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
+ と書く。各 
+$s\in\{1,\ldots,d\}$
+ について 
+$p_s:=\sum_{j=1}^{d}\alpha_j^s\in\overline{\mathbb Q}$
+ と定める。このとき、任意の 
+$k\in\{1,\ldots,d\}$
+ について、
+
+\[p_k
+=
+-\frac{
+  \displaystyle
+  \sum_{r=1}^{k-1}\Omega_G(d-r)p_{k-r}
+  +k\Omega_G(d-k)
+}{
+  \Omega_G(d)
+}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.\]
+$k=1$
+ のとき、右辺の和は空和 
+$0\in\overline{\mathbb Q}$
+ とする。
+
+\end{theorem}
+\begin{proof}
+任意の 
+$k\in\{1,\ldots,d\}$
+ を取る。まず 
+$k=1$
+ の場合、
+\cref{lab:theorem_fisher_zero_elementary_symmetric_coefficient_ratio}
+ を一次へ適用すると、
+
+\[\begin{aligned}
+p_1
+&=e_1
+&&\bigl(\because\ p_1\text{ と一次基本対称式の定義}\bigr)\\
+&=-\frac{\Omega_G(d-1)}{\Omega_G(d)}
+&&\bigl(\because\ \text{Fisher 零点の一次基本対称式と係数比}\bigr).
+\end{aligned}\]
+これは空和を用いた主張の式に等しい。以下では 
+$k\ge2$
+ とする。各 
+$r\in\{1,\ldots,k\}$
+ について代数的数 
+$e_r,h_r\in\overline{\mathbb Q}$
+ を
+
+\[e_r
+:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\prod_{i\in I}\alpha_i,
+\qquad
+h_r
+:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\alpha_i
+\right)
+\left(
+  \sum_{j\in I}\alpha_j^{k-r}
+\right)\]
+と定める。各 
+$r\in\{1,\ldots,k-1\}$
+ について有限和の分配律により、
+
+\[\begin{aligned}
+e_rp_{k-r}
+&=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\alpha_i
+\right)
+\left(
+  \sum_{j=1}^{d}\alpha_j^{k-r}
+\right)
+&&\bigl(\because\ \text{定義を代入する}\bigr)\\
+&=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\alpha_i
+\right)
+\left(
+  \sum_{j\in I}\alpha_j^{k-r}
+\right)
++
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\alpha_i
+\right)
+\left(
+  \sum_{\substack{1\le j\le d\\j\notin I}}\alpha_j^{k-r}
+\right)
+&&\bigl(\because\ \{1,\ldots,d\}=I\sqcup(\{1,\ldots,d\}\setminus I)\bigr)\\
+&=h_r+h_{r+1}
+&&\bigl(\because\ J=I\cup\{j\}\text{ と置いて第二項を }|J|=r+1\text{ の和へ移す}\bigr).
+\end{aligned}\]
+直前の等式へ 
+$(-1)^{r-1}$
+ を掛けて 
+$r=1,\ldots,k-1$
+ を足すと、
+
+\[\begin{aligned}
+\sum_{r=1}^{k-1}(-1)^{r-1}e_rp_{k-r}
+&=
+\sum_{r=1}^{k-1}(-1)^{r-1}(h_r+h_{r+1})
+&&\bigl(\because\ e_rp_{k-r}=h_r+h_{r+1}\bigr)\\
+&=h_1+(-1)^{k-2}h_k
+&&\bigl(\because\ h_2,\ldots,h_{k-1}\text{ の係数が }(-1)^{r-1}+(-1)^r=0\bigr).
+\end{aligned}\]
+定義から、
+
+\[\begin{aligned}
+h_1
+&=\sum_{j=1}^{d}\alpha_j\alpha_j^{k-1}
+&&\bigl(\because\ |I|=1\bigr)\\
+&=p_k
+&&\bigl(\because\ \alpha_j\alpha_j^{k-1}=\alpha_j^k\bigr),\\
+h_k
+&=\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\left(
+  \prod_{i\in I}\alpha_i
+\right)
+\sum_{j\in I}1
+&&\bigl(\because\ \alpha_j^{k-k}=1\bigr)\\
+&=ke_k
+&&\bigl(\because\ |I|=k\bigr).
+\end{aligned}\]
+したがって代数的数の体で、
+
+\[\begin{aligned}
+\sum_{r=1}^{k-1}(-1)^{r-1}e_rp_{k-r}
+&=p_k+(-1)^{k-2}ke_k
+&&\bigl(\because\ h_1=p_k\text{ および }h_k=ke_k\bigr)\\
+p_k
+&=
+\sum_{r=1}^{k-1}(-1)^{r-1}e_rp_{k-r}
++(-1)^{k-1}ke_k
+&&\bigl(\because\ \text{移項する}\bigr).
+\end{aligned}\]
+\cref{lab:theorem_fisher_zero_elementary_symmetric_coefficient_ratio}
+ を 
+$r=1,\ldots,k$
+ に適用すると、
+
+\[e_r=(-1)^r\frac{\Omega_G(d-r)}{\Omega_G(d)}
+\qquad(r\in\{1,\ldots,k\}).\]
+\cref{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
+ と 
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ より、
+$\Omega_G(d)\in\mathbb N_{>0}$
+ である。直前の係数比を Newton 漸化式へ代入すると、
+
+\[\begin{aligned}
+p_k
+&=
+\sum_{r=1}^{k-1}
+(-1)^{r-1}
+(-1)^r
+\frac{\Omega_G(d-r)}{\Omega_G(d)}p_{k-r}
++
+(-1)^{k-1}k(-1)^k
+\frac{\Omega_G(d-k)}{\Omega_G(d)}
+&&\bigl(\because\ \text{基本対称式の係数比を代入する}\bigr)\\
+&=
+-\sum_{r=1}^{k-1}
+\frac{\Omega_G(d-r)}{\Omega_G(d)}p_{k-r}
+-
+k\frac{\Omega_G(d-k)}{\Omega_G(d)}
+&&\bigl(\because\ (-1)^{2r-1}=(-1)^{2k-1}=-1\bigr)\\
+&=
+-\frac{
+  \displaystyle
+  \sum_{r=1}^{k-1}\Omega_G(d-r)p_{k-r}
+  +k\Omega_G(d-k)
+}{
+  \Omega_G(d)
+}
+&&\bigl(\because\ \Omega_G(d)\ne0\text{ なので共通分母へ移す}\bigr).
+\end{aligned}\]
+この等式を 
+$k=1$
+ から順に用いると、空和から始まり、自然数と有理数の四則演算だけで全ての 
+$p_k$
+ が有理数として定まる。したがって 
+$p_k\in\mathbb Q\subset\overline{\mathbb Q}$
+ である。零点、その冪、有限積および有限和は代数的数、次数、冪指数、添字部分集合の元数、多重度は自然数、係数比と冪和は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
 \begin{theorem}[一般有限グラフの Fisher 零点の二乗和と係数比]\label{lab:theorem_fisher_zero_square_sum_coefficient_ratio}
 \cref{lab:def_finite_graph_input}
  の有限グラフについて、
