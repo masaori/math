@@ -314,6 +314,11 @@ targets=(
   Ising3DCut.LimitQuantity.partitionValue_invariant_differs_at_two
   Ising3DCut.LimitQuantity.partition_value_does_not_determine_limit_quantity
   Ising3DCut.LimitQuantity.partition_value_does_not_determine_limit_quantity_fromNecSuf
+  Ising3DCut.LimitQuantity.freeBoxTwoValueAtTwo_eq_two_mul
+  Ising3DCut.LimitQuantity.shiftedFreeBoxTwoValueAtTwo_eq_two_mul
+  Ising3DCut.LimitQuantity.shiftedFreeBoxTwoValueAtTwoOddPart_odd
+  Ising3DCut.LimitQuantity.crossPowerEquality_fails_at_two
+  Ising3DCut.LimitQuantity.cross_power_equality_is_not_necessary_for_limit_quantity
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
