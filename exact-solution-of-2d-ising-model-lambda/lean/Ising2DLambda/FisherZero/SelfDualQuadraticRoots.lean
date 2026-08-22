@@ -47,25 +47,5 @@ theorem selfDualQuadratic_roots {s xi : Qbar} (hs : s * s = 2) :
     · have hSecond : (xi + 1) + s = 0 := by linear_combination hMinus
       rw [hSecond, mul_zero]
 
-/-- `claim_self_dual_quadratic_roots_distinct` の具体版。 -/
-theorem selfDualQuadratic_roots_distinct {s : Qbar} (hs : s * s = 2) :
-    -1 + s ≠ -1 - s := by
-  intro hEqual
-  have hsNeg : s = -s := by linear_combination hEqual
-  have hTwoMul : (2 : Qbar) * s = 0 := by
-    calc
-      (2 : Qbar) * s = (1 + 1) * s := by norm_num
-      _ = 1 * s + 1 * s := by rw [add_mul]
-      _ = s + s := by rw [one_mul]
-      _ = (-s) + s := congrArg (fun z => z + s) hsNeg
-      _ = 0 := by rw [neg_add_cancel]
-  have hTwo : (2 : Qbar) ≠ 0 := by norm_num
-  have hsZero : s = 0 := AlgebraicEigenvalue.qbarNoZeroDivisors hTwo hTwoMul
-  have : (2 : Qbar) = 0 := by
-    calc
-      (2 : Qbar) = s * s := hs.symm
-      _ = 0 * 0 := by rw [hsZero]
-      _ = 0 := zero_mul 0
-  exact hTwo this
 
 end Ising2DLambda.FisherZero

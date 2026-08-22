@@ -41,28 +41,5 @@ theorem selfDualQuadratic_roots_from_necSuf {s xi : Qbar} (hs : s * s = 2) :
   · intro h; rw [h, mul_zero]
   · intro h; exact hFactorEq.symm.trans h
 
-theorem selfDualQuadratic_roots_distinct_from_necSuf {s : Qbar} (hs : s * s = 2) :
-    -1 + s ≠ -1 - s := by
-  apply Ising2DLambda.NecSuf.FisherZero.self_dual_quadratic_roots_distinct_necSuf
-      (sEqualsNeg := s = -s)
-      (productZero := (2 : Qbar) * s = 0)
-      (sZero := s = 0)
-      (twoZero := (2 : Qbar) = 0)
-  · norm_num
-  · intro h; linear_combination h
-  · intro h
-    calc
-      (2 : Qbar) * s = (1 + 1) * s := by norm_num
-      _ = 1 * s + 1 * s := by rw [add_mul]
-      _ = s + s := by rw [one_mul]
-      _ = (-s) + s := congrArg (fun z => z + s) h
-      _ = 0 := by rw [neg_add_cancel]
-  · intro h
-    exact AlgebraicEigenvalue.qbarNoZeroDivisors (by norm_num) h
-  · intro h
-    calc
-      (2 : Qbar) = s * s := hs.symm
-      _ = 0 * 0 := by rw [h]
-      _ = 0 := zero_mul 0
 
 end Ising2DLambda.FisherZero

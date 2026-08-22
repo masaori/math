@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_even_subgraph_spin_sum`
 
-- 併せて検証: `def_edge_subset_incidence_count`、`def_even_edge_subset`、`def_even_subgraph_polynomial`、`def_edge_subset_spin_sum`
+- 併せて検証: `def_edge_subset_incidence_count`、`def_even_edge_subset`、`def_edge_subset_spin_sum`
 - 範囲: 辺の部分集合の各頂点における端点の偶奇と、全配位にわたるスピン単項式の和
 
 ## チェック一覧
@@ -24,3 +24,8 @@ sage sagemath/check/even-subgraph-spin-sum/check.sage
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+### 記録
+
+- 2026-08-22: 本文から「偶部分グラフ生成多項式 $P_L(y)$」を削除した（どこからも引かれておらず、
+  高温展開の多項式 $H_L$ は $P_L$ を経由せず直接定義されている）。この検証の該当部分も外した。

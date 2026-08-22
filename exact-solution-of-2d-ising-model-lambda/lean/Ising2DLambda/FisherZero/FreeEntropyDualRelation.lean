@@ -32,7 +32,7 @@ theorem partitionValueDualFactorization (L : ℕ) [NeZero L]
       (1 + q) ^ (2 * L ^ 2) * dualSectorValueSum L q := by
   have hLow := congrArg (intPolynomialEval q)
     (partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial L)
-  have hMixed := congrArg (intPolynomialEval q) (mixedBoundaryDualityIdentity L)
+  have hMixed := congrArg (intPolynomialEval q) (highTemperatureSectorSum_eq_twoPow_mul_trivialSector L)
   simp only [intPolynomialEval_add, intPolynomialEval_mul, intPolynomialEval_pow] at hLow hMixed
   have hLow' : Polynomial.aeval q (partitionPolynomial L) =
       2 * intPolynomialEval q (sectorGeneratingPolynomial L (0, 0)) := by

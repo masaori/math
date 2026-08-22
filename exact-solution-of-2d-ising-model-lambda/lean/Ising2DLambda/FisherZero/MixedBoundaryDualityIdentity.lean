@@ -1,8 +1,12 @@
 /-
-「四境界条件の混合の双対恒等式」の具体版。
-人手証明と同じく、高温展開の四セクター分解、高温展開の多項式恒等式、
-低温展開の自明セクター表示、冪の指数法則を一段ずつ当てる。
-住処は有限集合と Z[x] であり、R / C は現れない。
+自由エントロピーの双対関係の証明が二度使う補助段。
+
+$\sum_{a,b} H^{a,b}_L = 2^{L^2+1} G^{0,0}_L$ は、低温展開の自明セクター表示・高温展開の
+多項式恒等式・セクター分解の三つを等式の推移でつないだだけのものであり、それ自体は
+**双対性を含まない**（両辺とも同じ不定元での値である。本当の Kramers--Wannier 双対は、
+点 $q$ と双対な点 $\mathrm{KW}(q)$ を結ぶ「セクター多項式の値の双対関係」の側にある）。
+人手証明ではこの中間主張を置かず、三つを直接つないでいる。ここに残してあるのは、
+Lean 側で同じ鎖を二度書かないための補助段としてである。
 -/
 import Ising2DLambda.FisherZero.HighTemperatureSectorDecomposition
 import Ising2DLambda.FisherZero.HighTemperaturePolynomial
@@ -13,7 +17,7 @@ namespace Ising2DLambda.FisherZero
 open Ising2DLambda.PartitionPolynomial
 
 /-- `claim_mixed_boundary_duality_identity` の具体版。 -/
-theorem mixedBoundaryDualityIdentity (L : ℕ) [NeZero L] :
+theorem highTemperatureSectorSum_eq_twoPow_mul_trivialSector (L : ℕ) [NeZero L] :
     highTemperatureSectorPolynomial L (0, 0) +
           highTemperatureSectorPolynomial L (0, 1) +
           highTemperatureSectorPolynomial L (1, 0) +

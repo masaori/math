@@ -25,15 +25,5 @@ theorem self_dual_quadratic_roots_necSuf
     · exact hFirstFactor (hPlusFirst hPlus)
     · exact hSecondFactor (hMinusSecond hMinus)
 
-theorem self_dual_quadratic_roots_distinct_necSuf
-    (rootEqual sEqualsNeg productZero sZero twoZero : Prop)
-    (hTwoNonzero : ¬ twoZero)
-    (hEqualImpliesNeg : rootEqual → sEqualsNeg)
-    (hNegImpliesProduct : sEqualsNeg → productZero)
-    (hCancel : productZero → sZero)
-    (hSquareContradiction : sZero → twoZero) :
-    ¬ rootEqual := by
-  intro hEqual
-  exact hTwoNonzero (hSquareContradiction (hCancel (hNegImpliesProduct (hEqualImpliesNeg hEqual))))
 
 end Ising2DLambda.NecSuf.FisherZero

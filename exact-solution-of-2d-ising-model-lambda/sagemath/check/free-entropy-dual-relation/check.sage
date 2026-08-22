@@ -94,7 +94,7 @@ for L in (1, 2, 3):
         # 3 行目: (2^{L^2}·2)·G^{0,0}_L(q) = 2^{L^2+1}·G^{0,0}_L(q)
         assert left == 2 ** (L * L + 1) * sector_generating_polynomials[(0, 0)](q)
         # 4 行目: = H^{0,0}_L(q)+H^{0,1}_L(q)+H^{1,0}_L(q)+H^{1,1}_L(q)
-        #（claim_mixed_boundary_duality_identity の代入。H^{a,b}_L を独立に数え上げる）
+        #（低温展開の自明セクター表示・高温展開の多項式恒等式・セクター分解の代入。H^{a,b}_L を独立に数え上げる）
         sector_high_values = {(a, b): QQ(0) for a in (0, 1) for b in (0, 1)}
         for subset in edge_subsets(L):
             if not is_even_subgraph(L, subset):

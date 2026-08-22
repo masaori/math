@@ -28676,26 +28676,6 @@ Z_L
                   role: "prerequisiteDefinition",
                   element:
                     {
-                      id: "fisher_zero_definition_even_subgraph_polynomial",
-                      kind: "definition",
-                      title: { text: "偶部分グラフ生成多項式" },
-                      labels: ["def_even_subgraph_polynomial"],
-                      habitat: "Z",
-                      verification: ["sagemath/check/even-subgraph-spin-sum"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`L\ge1`), " とする。", ref("def_even_edge_subset"),
-                          " を満たす辺の部分集合の生成多項式を",
-                        ]),
-                        displayMath(String.raw`P_L(y):=\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}y^{\,|A|}\ \in\ \mathbb{Z}[y]`),
-                        paragraph(["で定める。辺の集合は有限なので、この和は有限である。"]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
                       id: "fisher_zero_definition_edge_subset_spin_sum",
                       kind: "definition",
                       title: { text: "辺の部分集合に対応するスピン単項式の和" },
@@ -29489,48 +29469,46 @@ B
             role: "primary",
             element: {
               kind: "elementGroup",
-              id: "group_of_fisher_zero_definition_high_temperature_sector_polynomial",
-              beforeFocus: [
+              id: "group_of_fisher_zero_claim_low_temperature_trivial_sector_expression",
+              focus:
                 {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "fisher_zero_claim_low_temperature_trivial_sector_expression",
-                      kind: "claim",
-                      title: { text: "低温展開の自明セクター表示" },
-                      labels: ["claim_low_temperature_trivial_sector_expression"],
-                      habitat: "Z",
-                      verification: ["sagemath/check/sector-generating-polynomial"],
-                      lean: [
-                        "Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial",
-                        "Ising2DLambda.NecSuf.FisherZero.weighted_sum_eq_of_inverse_necSuf",
-                        "Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial_from_necSuf",
-                      ],
-                      statement: [
-                        paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
-                        displayMath(String.raw`Z_L=2G^{0,0}_L`),
-                        paragraph([
-                          "が成り立つ。分配多項式は自明セクターの生成多項式の二倍であり、",
-                          "温度や指数関数を導入せず、二つの有限な数え上げ多項式の等式として述べている。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "準備として、", ref("def_attainable_broken_edge_sets"), " の各 ",
-                          math(String.raw`B\in\mathfrak{B}_L`), " をその ", ref("def_dual_edge_map"),
-                          " による像 ", math(String.raw`\delta_L(B)`), " へ送る写像を ",
-                          math(String.raw`\Delta_L:\mathfrak{B}_L\to\mathcal{E}^{0,0}_L,\ \Delta_L(B):=\delta_L(B)`),
-                          " と書く。この写像の終域が正しいこと、すなわち任意の ",
-                          math(String.raw`B\in\mathfrak{B}_L`), " について ",
-                          math(String.raw`\delta_L(B)\in\mathcal{E}^{0,0}_L`), " であることと、",
-                          math(String.raw`\Delta_L`), " の像が ", math(String.raw`\mathcal{E}^{0,0}_L`),
-                          " の全体であること（全射性）は、",
-                          ref("claim_attainable_dual_image_trivial_sector"),
-                          " の集合の等号がそのまま与える。次に ", math(String.raw`\Delta_L`),
-                          " の単射性を示す。", math(String.raw`B,B'\in\mathfrak{B}_L`), " が ",
-                          math(String.raw`\delta_L(B)=\delta_L(B')`), " を満たすとする。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
+                  id: "fisher_zero_claim_low_temperature_trivial_sector_expression",
+                  kind: "claim",
+                  standing: "mainTheorem",
+                  title: { text: "低温展開の自明セクター表示" },
+                  labels: ["claim_low_temperature_trivial_sector_expression"],
+                  habitat: "Z",
+                  verification: ["sagemath/check/sector-generating-polynomial"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial",
+                    "Ising2DLambda.NecSuf.FisherZero.weighted_sum_eq_of_inverse_necSuf",
+                    "Ising2DLambda.FisherZero.partitionPolynomial_eq_two_mul_trivialSectorGeneratingPolynomial_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
+                    displayMath(String.raw`Z_L=2G^{0,0}_L`),
+                    paragraph([
+                      "が成り立つ。分配多項式は自明セクターの生成多項式の二倍であり、",
+                      "温度や指数関数を導入せず、二つの有限な数え上げ多項式の等式として述べている。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、", ref("def_attainable_broken_edge_sets"), " の各 ",
+                      math(String.raw`B\in\mathfrak{B}_L`), " をその ", ref("def_dual_edge_map"),
+                      " による像 ", math(String.raw`\delta_L(B)`), " へ送る写像を ",
+                      math(String.raw`\Delta_L:\mathfrak{B}_L\to\mathcal{E}^{0,0}_L,\ \Delta_L(B):=\delta_L(B)`),
+                      " と書く。この写像の終域が正しいこと、すなわち任意の ",
+                      math(String.raw`B\in\mathfrak{B}_L`), " について ",
+                      math(String.raw`\delta_L(B)\in\mathcal{E}^{0,0}_L`), " であることと、",
+                      math(String.raw`\Delta_L`), " の像が ", math(String.raw`\mathcal{E}^{0,0}_L`),
+                      " の全体であること（全射性）は、",
+                      ref("claim_attainable_dual_image_trivial_sector"),
+                      " の集合の等号がそのまま与える。次に ", math(String.raw`\Delta_L`),
+                      " の単射性を示す。", math(String.raw`B,B'\in\mathfrak{B}_L`), " が ",
+                      math(String.raw`\delta_L(B)=\delta_L(B')`), " を満たすとする。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
 B
 &=\delta_L^{-1}\bigl(\delta_L(B)\bigr)
 &&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{の往復（部分集合の像にも及ぶ）}\bigr)\\
@@ -29539,15 +29517,15 @@ B
 &=B'
 &&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{の往復（部分集合の像にも及ぶ）}\bigr).
 \end{aligned}`),
-                        paragraph([
-                          "したがって ", math(String.raw`\Delta_L`), " は全単射である。また ",
-                          ref("claim_dual_edge_map_bijective"), " より ", math(String.raw`\delta_L`),
-                          " は単射なので、有限集合 ", math(String.raw`B`), " の像の元の個数は",
-                        ]),
-                        displayMath(String.raw`|\delta_L(B)|=|B|
+                    paragraph([
+                      "したがって ", math(String.raw`\Delta_L`), " は全単射である。また ",
+                      ref("claim_dual_edge_map_bijective"), " より ", math(String.raw`\delta_L`),
+                      " は単射なので、有限集合 ", math(String.raw`B`), " の像の元の個数は",
+                    ]),
+                    displayMath(String.raw`|\delta_L(B)|=|B|
 \quad\bigl(\because\ \text{単射写像は有限集合の元の個数を保つ}\bigr)`),
-                        paragraph(["である。以上を組み合わせると"]),
-                        displayMath(String.raw`\begin{aligned}
+                    paragraph(["である。以上を組み合わせると"]),
+                    displayMath(String.raw`\begin{aligned}
 Z_L
 &=2D_L
 &&\bigl(\because\ \blkref{claim_low_temperature_polynomial_identity}\bigr)\\
@@ -29560,11 +29538,16 @@ Z_L
 &=2G^{0,0}_L
 &&\bigl(\because\ \blkref{def_sector_generating_polynomial}\bigr)
 \end{aligned}`),
-                        paragraph(["である。全過程は有限集合と整数係数多項式の中で閉じ、実数体も複素数体も現れない。"]),
-                      ],
-                    },
+                    paragraph(["である。全過程は有限集合と整数係数多項式の中で閉じ、実数体も複素数体も現れない。"]),
+                  ],
                 },
-              ],
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_fisher_zero_definition_high_temperature_sector_polynomial",
               focus:
                 {
                   id: "fisher_zero_definition_high_temperature_sector_polynomial",
@@ -29594,50 +29577,47 @@ Z_L
             },
           },
           {
-            role: "primary",
+            role: "supporting",
             element: {
               kind: "elementGroup",
-              id: "group_of_fisher_zero_claim_mixed_boundary_duality_identity",
-              beforeFocus: [
+              id: "group_of_fisher_zero_claim_high_temperature_sector_decomposition",
+              focus:
                 {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "fisher_zero_claim_high_temperature_sector_decomposition",
-                      kind: "claim",
-                      title: { text: "高温展開の多項式は四つのセクター多項式の和である" },
-                      labels: ["claim_high_temperature_sector_decomposition"],
-                      habitat: "Z",
-                      verification: ["sagemath/check/high-temperature-sector-decomposition"],
-                      lean: [
-                        "Ising2DLambda.FisherZero.highTemperatureSectorDecomposition",
-                        "Ising2DLambda.NecSuf.FisherZero.sum_eq_sum_label_fibers_necSuf",
-                        "Ising2DLambda.FisherZero.highTemperatureSectorDecomposition_from_necSuf",
-                      ],
-                      statement: [
-                        paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
-                        displayMath(String.raw`H_L=H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L`),
-                        paragraph([
-                          "が成り立つ。高温展開の整数多項式は、偶部分グラフの四つの巻き付きセクターに対応する",
-                          "四つの多項式の和へ分解する。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "準備として、和の添字の集合を確かめる。",
-                          ref("def_torus_homology_sector"), " より、任意の ",
-                          math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`), " と任意の ",
-                          math(String.raw`A\in\mathcal{E}^{a,b}_L`), " について ",
-                          math(String.raw`\operatorname{Even}_L(A)`), " が成り立つ。逆に ",
-                          ref("claim_torus_homology_sector_partition"), " より、",
-                          math(String.raw`\operatorname{Even}_L(A)`), " を満たす任意の ",
-                          math(String.raw`A\subseteq E_L`), " に対し、", math(String.raw`A\in\mathcal{E}^{a,b}_L`),
-                          " を満たす組 ", math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`),
-                          " がただ一つ存在する。したがって偶部分グラフの全体は、四つの有限集合 ",
-                          math(String.raw`\mathcal{E}^{0,0}_L,\mathcal{E}^{0,1}_L,\mathcal{E}^{1,0}_L,\mathcal{E}^{1,1}_L`),
-                          " の重なりのない合併である。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
+                  id: "fisher_zero_claim_high_temperature_sector_decomposition",
+                  kind: "claim",
+                  title: { text: "高温展開の多項式は四つのセクター多項式の和である" },
+                  labels: ["claim_high_temperature_sector_decomposition"],
+                  habitat: "Z",
+                  verification: ["sagemath/check/high-temperature-sector-decomposition"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.highTemperatureSectorDecomposition",
+                    "Ising2DLambda.NecSuf.FisherZero.sum_eq_sum_label_fibers_necSuf",
+                    "Ising2DLambda.FisherZero.highTemperatureSectorDecomposition_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
+                    displayMath(String.raw`H_L=H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L`),
+                    paragraph([
+                      "が成り立つ。高温展開の整数多項式は、偶部分グラフの四つの巻き付きセクターに対応する",
+                      "四つの多項式の和へ分解する。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、和の添字の集合を確かめる。",
+                      ref("def_torus_homology_sector"), " より、任意の ",
+                      math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`), " と任意の ",
+                      math(String.raw`A\in\mathcal{E}^{a,b}_L`), " について ",
+                      math(String.raw`\operatorname{Even}_L(A)`), " が成り立つ。逆に ",
+                      ref("claim_torus_homology_sector_partition"), " より、",
+                      math(String.raw`\operatorname{Even}_L(A)`), " を満たす任意の ",
+                      math(String.raw`A\subseteq E_L`), " に対し、", math(String.raw`A\in\mathcal{E}^{a,b}_L`),
+                      " を満たす組 ", math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`),
+                      " がただ一つ存在する。したがって偶部分グラフの全体は、四つの有限集合 ",
+                      math(String.raw`\mathcal{E}^{0,0}_L,\mathcal{E}^{0,1}_L,\mathcal{E}^{1,0}_L,\mathcal{E}^{1,1}_L`),
+                      " の重なりのない合併である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
 H_L
 &=\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
 (1+x)^{2L^2-|A|}(1-x)^{|A|}
@@ -29649,51 +29629,6 @@ H_L
 &&\bigl(\because\ \blkref{def_high_temperature_sector_polynomial}\bigr)\\
 &=H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
 &&\bigl(\because\ \{0,1\}\times\{0,1\}\ \text{の四つの元を書き並べる}\bigr)
-\end{aligned}`),
-                        paragraph(["である。全過程は有限集合と整数係数多項式の中で閉じ、実数体も複素数体も現れない。"]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "fisher_zero_claim_mixed_boundary_duality_identity",
-                  kind: "claim",
-                  standing: "mainTheorem",
-                  title: { text: "四境界条件の混合の双対恒等式" },
-                  labels: ["claim_mixed_boundary_duality_identity"],
-                  habitat: "Z",
-                  verification: ["sagemath/check/mixed-boundary-duality-identity"],
-                  lean: [
-                    "Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity",
-                    "Ising2DLambda.NecSuf.FisherZero.four_step_equality_chain_necSuf",
-                    "Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity_from_necSuf",
-                  ],
-                  statement: [
-                    paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の中で"]),
-                    displayMath(String.raw`H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L=2^{\,L^2+1}\,G^{0,0}_L`),
-                    paragraph([
-                      "が成り立つ。左辺は高温展開の四つの巻き付きセクター多項式（",
-                      ref("def_high_temperature_sector_polynomial"),
-                      "）の和、右辺は低温展開が与える自明セクターの生成多項式（",
-                      ref("def_sector_generating_polynomial"),
-                      "）の ", math(String.raw`2^{L^2+1}`), " 倍である。周期正方格子は平面グラフではないため、",
-                      "一つのセクター多項式どうしの等式にはならず、四つの境界条件（巻き付きセクター）の混合が",
-                      "自明セクターと結ばれる形で双対恒等式が成り立つ。",
-                      "有限集合と整数係数多項式だけの等式であり、実数体、複素数体、指数関数は現れない。",
-                    ]),
-                  ],
-                  proof: [
-                    displayMath(String.raw`\begin{aligned}
-H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
-&=H_L
-&&\bigl(\because\ \blkref{claim_high_temperature_sector_decomposition}\bigr)\\
-&=2^{L^2}Z_L
-&&\bigl(\because\ \blkref{claim_high_temperature_polynomial_identity}\bigr)\\
-&=2^{L^2}\bigl(2G^{0,0}_L\bigr)
-&&\bigl(\because\ \blkref{claim_low_temperature_trivial_sector_expression}\bigr)\\
-&=2^{\,L^2+1}\,G^{0,0}_L
-&&\bigl(\because\ \text{冪の指数法則 }2^{L^2}\cdot2=2^{L^2+1}\bigr)
 \end{aligned}`),
                     paragraph(["である。全過程は有限集合と整数係数多項式の中で閉じ、実数体も複素数体も現れない。"]),
                   ],
@@ -30566,119 +30501,6 @@ s\cdot s
                           " または ",
                           math(String.raw`\xi=-1-s`),
                           " が成り立つ。二方向が示されたので、二つの条件は同値である。全過程は体 ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の加法・積・加法の逆元の中で閉じ、実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "fisher_zero_claim_self_dual_quadratic_roots_distinct",
-                      kind: "claim",
-                      title: { text: "自己双対方程式の二根は相異なる" },
-                      labels: ["claim_self_dual_quadratic_roots_distinct"],
-                      habitat: "Qbar",
-                      verification: ["sagemath/check/self-dual-quadratic-roots-distinct"],
-                      lean: [
-                        "Ising2DLambda.FisherZero.selfDualQuadratic_roots_distinct",
-                        "Ising2DLambda.NecSuf.FisherZero.self_dual_quadratic_roots_distinct_necSuf",
-                        "Ising2DLambda.FisherZero.selfDualQuadratic_roots_distinct_from_necSuf",
-                      ],
-                      statement: [
-                        paragraph([
-                          math(String.raw`s\in\overline{\mathbb{Q}}`),
-                          "（", ref("def_algebraic_numbers"), "）が ",
-                          math(String.raw`s\cdot s=2`),
-                          " を満たすとする（",
-                          math(String.raw`2:=1+1`),
-                          "。そのような ",
-                          math(String.raw`s`),
-                          " の存在は ",
-                          ref("claim_sqrt_two_exists"),
-                          "）。このとき",
-                        ]),
-                        displayMath(String.raw`-1+s\ \ne\ -1-s`),
-                        paragraph([
-                          "が成り立つ。したがって ",
-                          ref("claim_self_dual_quadratic_roots"),
-                          " とあわせて、",
-                          math(String.raw`\xi^2+2\xi-1=0`),
-                          " を満たす ",
-                          math(String.raw`\xi\in\overline{\mathbb{Q}}`),
-                          " はちょうど二つである。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "準備。",
-                          math(String.raw`\mathbb{Q}`),
-                          " の中で ",
-                          math(String.raw`2\ne0`),
-                          " であり、",
-                          math(String.raw`\mathbb{Q}`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の部分体である（",
-                          ref("def_algebraic_numbers"),
-                          "）から、",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の中でも ",
-                          math(String.raw`2\ne0`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "背理法による。",
-                          math(String.raw`-1+s=-1-s`),
-                          " と仮定する。両辺へ ",
-                          math(String.raw`1`),
-                          " を加えて（移項）",
-                          math(String.raw`s=-s`),
-                          " を得る。これを使って",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-2\cdot s
-&=(1+1)\cdot s
-&&\bigl(\because\ 2\ \text{の定義}\bigr)\\
-&=1\cdot s+1\cdot s
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
-&=s+s
-&&\bigl(\because\ \text{単位元との積}\bigr)\\
-&=(-s)+s
-&&\bigl(\because\ \text{上で導いた}\ s=-s\bigr)\\
-&=0
-&&\bigl(\because\ \text{加法の逆元}\bigr)
-\end{aligned}`),
-                        paragraph([
-                          "準備より ",
-                          math(String.raw`2\ne0`),
-                          " であるから、",
-                          ref("claim_qbar_no_zero_divisors"),
-                          " を ",
-                          math(String.raw`a=2`),
-                          "、",
-                          math(String.raw`b=s`),
-                          " へ適用して ",
-                          math(String.raw`s=0`),
-                          " を得る。すると",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-2
-&=s\cdot s
-&&\bigl(\because\ \text{仮定}\ s\cdot s=2\bigr)\\
-&=0\cdot0
-&&\bigl(\because\ \text{上で得た}\ s=0\bigr)\\
-&=0
-&&\bigl(\because\ \text{零元との積}\bigr)
-\end{aligned}`),
-                        paragraph([
-                          "となり、準備の ",
-                          math(String.raw`2\ne0`),
-                          " と矛盾する。ゆえに ",
-                          math(String.raw`-1+s\ne-1-s`),
-                          " である。全過程は体 ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の加法・積・加法の逆元の中で閉じ、実数体も複素数体も現れない。",
                         ]),
@@ -35756,6 +35578,37 @@ a\cdot a
                       " のとおりで、",
                       math(String.raw`x_c`),
                       " の指定は同じ形で保たれる。実数の平方根記号を使う流儀ではこの元は ",
+                    ]),
+                    paragraph([
+                      "この元を臨界点と呼ぶ理由は、それが双対変換の不動点だからである。",
+                      ref("claim_kw_self_dual_quadratic_equivalence"),
+                      " により、",
+                      math(String.raw`1+\xi\ne0`),
+                      " を満たす ",
+                      math(String.raw`\xi\in\overline{\mathbb{Q}}`),
+                      " について ",
+                      math(String.raw`\mathrm{KW}(\xi)=\xi`),
+                      " と ",
+                      math(String.raw`\xi^2+2\xi-1=0`),
+                      " は同値なので、上で自己双対方程式の根として指定した ",
+                      math(String.raw`x_c`),
+                      " は ",
+                      math(String.raw`\mathrm{KW}`),
+                      " の不動点である（",
+                      math(String.raw`1+x_c=s\ne0`),
+                      " は ",
+                      math(String.raw`s\cdot s=2\ne0`),
+                      " から従う）。さらに ",
+                      ref("claim_kw_dual_transform_involution"),
+                      " により ",
+                      math(String.raw`\mathrm{KW}`),
+                      " は対合であり、点 ",
+                      math(String.raw`\xi`),
+                      " と ",
+                      math(String.raw`\mathrm{KW}(\xi)`),
+                      " は対等に対応する。不動点はその対応で自分自身に写る点であり、この意味で ",
+                      math(String.raw`x_c`),
+                      " は自己双対な点である。",
                       math(String.raw`\sqrt2-1`),
                       " と書かれるが、本文ではその記号を使わず、",
                       math(String.raw`s`),
@@ -35780,7 +35633,7 @@ a\cdot a
             role: "primary",
             element: {
               kind: "elementGroup",
-              id: "group_of_fisher_zero_claim_free_entropy_dual_relation",
+              id: "group_of_fisher_zero_claim_sector_value_duality",
               beforeFocus: [
                 {
                   role: "prerequisiteDefinition",
@@ -36027,89 +35880,89 @@ a\cdot a
                       ],
                     },
                 },
+              ],
+              focus:
                 {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "fisher_zero_claim_sector_value_duality",
-                      kind: "claim",
-                      title: { text: "セクター多項式の値の双対関係" },
-                      labels: ["claim_sector_value_duality"],
-                      habitat: "Q",
-                      verification: ["sagemath/check/sector-value-duality"],
-                      lean: [
-                        "Ising2DLambda.FisherZero.sectorValueDuality",
-                        "Ising2DLambda.NecSuf.FisherZero.sector_value_duality_necSuf",
-                        "Ising2DLambda.FisherZero.sectorValueDuality_from_necSuf",
-                      ],
-                      statement: [
-                        paragraph([
-                          math(String.raw`L\ge1`),
-                          "、",
-                          math(String.raw`a,b\in\{0,1\}`),
-                          "、",
-                          math(String.raw`q\in\mathbb{Q}_{(0,1)}`),
-                          "（",
-                          ref("def_unit_interval_rationals"),
-                          "）とする。",
-                          ref("claim_kw_dual_preserves_unit_interval"),
-                          " により ",
-                          math(String.raw`\mathrm{KW}(q)\in\mathbb{Q}_{(0,1)}`),
-                          " であるから、",
-                          math(String.raw`\mathbb{Q}`),
-                          " の元 ",
-                          math(String.raw`\mathrm{KW}(q)`),
-                          " を整数係数多項式へ代入できる。このとき ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の中で",
-                        ]),
-                        displayMath(
-                          String.raw`H^{a,b}_L(q)=(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))`,
-                        ),
-                        paragraph([
-                          "が成り立つ（",
-                          math(String.raw`H^{a,b}_L`),
-                          " は ",
-                          ref("def_high_temperature_sector_polynomial"),
-                          "、",
-                          math(String.raw`G^{a,b}_L`),
-                          " は ",
-                          ref("def_sector_generating_polynomial"),
-                          "。丸括弧は多項式への代入である）。高温展開のセクター多項式の ",
-                          math(String.raw`q`),
-                          " での値は、双対な点 ",
-                          math(String.raw`\mathrm{KW}(q)`),
-                          " でのセクター生成多項式の値の ",
-                          math(String.raw`(1+q)^{2L^2}`),
-                          " 倍である。次のセクションでこの等式を四つのセクターについて束ね、",
-                          "双対な点どうしの自由エントロピーの関係を導く。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "準備。",
-                          ref("def_unit_interval_rationals"),
-                          " より ",
-                          math(String.raw`0<q`),
-                          " かつ ",
-                          math(String.raw`q<1`),
-                          " であり、",
-                          ref("claim_kw_dual_preserves_unit_interval"),
-                          " の準備のとおり ",
-                          math(String.raw`1+q\ne0`),
-                          " であって ",
-                          math(String.raw`\mathrm{KW}(q)`),
-                          " が定義され、その値は ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の元である。まず等式 ",
-                          math(String.raw`(1+q)\cdot\mathrm{KW}(q)=1-q`),
-                          " を、体 ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          "（",
-                          ref("def_algebraic_numbers"),
-                          "）の中の式変形で確かめる。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
+                  id: "fisher_zero_claim_sector_value_duality",
+                  kind: "claim",
+                  standing: "mainTheorem",
+                  title: { text: "セクター多項式の値の双対関係" },
+                  labels: ["claim_sector_value_duality"],
+                  habitat: "Q",
+                  verification: ["sagemath/check/sector-value-duality"],
+                  lean: [
+                    "Ising2DLambda.FisherZero.sectorValueDuality",
+                    "Ising2DLambda.NecSuf.FisherZero.sector_value_duality_necSuf",
+                    "Ising2DLambda.FisherZero.sectorValueDuality_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph([
+                      math(String.raw`L\ge1`),
+                      "、",
+                      math(String.raw`a,b\in\{0,1\}`),
+                      "、",
+                      math(String.raw`q\in\mathbb{Q}_{(0,1)}`),
+                      "（",
+                      ref("def_unit_interval_rationals"),
+                      "）とする。",
+                      ref("claim_kw_dual_preserves_unit_interval"),
+                      " により ",
+                      math(String.raw`\mathrm{KW}(q)\in\mathbb{Q}_{(0,1)}`),
+                      " であるから、",
+                      math(String.raw`\mathbb{Q}`),
+                      " の元 ",
+                      math(String.raw`\mathrm{KW}(q)`),
+                      " を整数係数多項式へ代入できる。このとき ",
+                      math(String.raw`\mathbb{Q}`),
+                      " の中で",
+                    ]),
+                    displayMath(
+                      String.raw`H^{a,b}_L(q)=(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))`,
+                    ),
+                    paragraph([
+                      "が成り立つ（",
+                      math(String.raw`H^{a,b}_L`),
+                      " は ",
+                      ref("def_high_temperature_sector_polynomial"),
+                      "、",
+                      math(String.raw`G^{a,b}_L`),
+                      " は ",
+                      ref("def_sector_generating_polynomial"),
+                      "。丸括弧は多項式への代入である）。高温展開のセクター多項式の ",
+                      math(String.raw`q`),
+                      " での値は、双対な点 ",
+                      math(String.raw`\mathrm{KW}(q)`),
+                      " でのセクター生成多項式の値の ",
+                      math(String.raw`(1+q)^{2L^2}`),
+                      " 倍である。次のセクションでこの等式を四つのセクターについて束ね、",
+                      "双対な点どうしの自由エントロピーの関係を導く。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備。",
+                      ref("def_unit_interval_rationals"),
+                      " より ",
+                      math(String.raw`0<q`),
+                      " かつ ",
+                      math(String.raw`q<1`),
+                      " であり、",
+                      ref("claim_kw_dual_preserves_unit_interval"),
+                      " の準備のとおり ",
+                      math(String.raw`1+q\ne0`),
+                      " であって ",
+                      math(String.raw`\mathrm{KW}(q)`),
+                      " が定義され、その値は ",
+                      math(String.raw`\mathbb{Q}`),
+                      " の元である。まず等式 ",
+                      math(String.raw`(1+q)\cdot\mathrm{KW}(q)=1-q`),
+                      " を、体 ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の中の式変形で確かめる。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
 (1+q)\cdot\mathrm{KW}(q)
 &=(1+q)\cdot\bigl((1-q)\cdot(1+q)^{-1}\bigr)
 &&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
@@ -36120,32 +35973,32 @@ a\cdot a
 &=1-q
 &&\bigl(\because\ 1\ \text{は積の単位元}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "両辺はいずれも ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の元であり、",
-                          math(String.raw`\mathbb{Q}`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の部分体である（",
-                          ref("def_algebraic_numbers"),
-                          "）から、この等式は ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の等式でもある。また任意の ",
-                          math(String.raw`A\in\mathcal{E}^{a,b}_L`),
-                          " について ",
-                          math(String.raw`A\subseteq E_L`),
-                          " かつ ",
-                          math(String.raw`|E_L|=2L^2`),
-                          " なので（",
-                          ref("def_torus_homology_sector"),
-                          "）、指数 ",
-                          math(String.raw`2L^2-|A|`),
-                          " と ",
-                          math(String.raw`|A|`),
-                          " はいずれも自然数である。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
+                    paragraph([
+                      "両辺はいずれも ",
+                      math(String.raw`\mathbb{Q}`),
+                      " の元であり、",
+                      math(String.raw`\mathbb{Q}`),
+                      " は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分体である（",
+                      ref("def_algebraic_numbers"),
+                      "）から、この等式は ",
+                      math(String.raw`\mathbb{Q}`),
+                      " の等式でもある。また任意の ",
+                      math(String.raw`A\in\mathcal{E}^{a,b}_L`),
+                      " について ",
+                      math(String.raw`A\subseteq E_L`),
+                      " かつ ",
+                      math(String.raw`|E_L|=2L^2`),
+                      " なので（",
+                      ref("def_torus_homology_sector"),
+                      "）、指数 ",
+                      math(String.raw`2L^2-|A|`),
+                      " と ",
+                      math(String.raw`|A|`),
+                      " はいずれも自然数である。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
 H^{a,b}_L(q)
 &=\sum_{A\in\mathcal{E}^{a,b}_L}(1+q)^{2L^2-|A|}\cdot(1-q)^{|A|}
 &&\bigl(\because\ \blkref{def_high_temperature_sector_polynomial}\ \text{と、代入は環準同型なので和と積を保つ}\bigr)\\
@@ -36160,15 +36013,22 @@ H^{a,b}_L(q)
 &=(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))
 &&\bigl(\because\ \blkref{def_sector_generating_polynomial}\ \text{と、代入は環準同型なので和と積を保つ}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "である。全過程は有理数の四則と有限和の中で閉じ",
-                          "（準備の等式の確認だけが部分体を経由した ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の等式）、実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
+                    paragraph([
+                      "である。全過程は有理数の四則と有限和の中で閉じ",
+                      "（準備の等式の確認だけが部分体を経由した ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の等式）、実数体も複素数体も現れない。",
+                    ]),
+                  ],
                 },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_fisher_zero_claim_free_entropy_dual_relation",
+              beforeFocus: [
                 {
                   role: "supportingClaim",
                   element:
@@ -36217,9 +36077,8 @@ H^{a,b}_L(q)
                           " での値は、双対な点 ",
                           math(String.raw`\mathrm{KW}(q)`),
                           " での四つのセクター生成多項式の値の和で書ける。",
-                          "周期正方格子では単一セクターどうしの等式にはならず（",
-                          ref("claim_mixed_boundary_duality_identity"),
-                          "）、四つの巻き付きセクターの和が現れる。",
+                          "周期正方格子は平面グラフではないので、単一のセクターどうしの等式にはならず、",
+                          "四つの巻き付きセクターの和が現れる。",
                         ]),
                       ],
                       proof: [
@@ -36246,8 +36105,12 @@ H^{a,b}_L(q)
 &&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=2^{\,L^2+1}\cdot G^{0,0}_L(q)
 &&\bigl(\because\ \text{冪の指数法則}\ 2^{L^2}\cdot2=2^{L^2+1}\bigr)\\
+&=2^{L^2}\cdot Z_L(q)
+&&\bigl(\because\ \blkref{claim_low_temperature_trivial_sector_expression}\ \text{を右辺から左辺へ}\bigr)\\
+&=H_L(q)
+&&\bigl(\because\ \blkref{claim_high_temperature_polynomial_identity}\ \text{と、代入は環準同型}\bigr)\\
 &=H^{0,0}_L(q)+H^{0,1}_L(q)+H^{1,0}_L(q)+H^{1,1}_L(q)
-&&\bigl(\because\ \blkref{claim_mixed_boundary_duality_identity}\ \text{と、代入は環準同型なので和と積を保つ}\bigr)\\
+&&\bigl(\because\ \blkref{claim_high_temperature_sector_decomposition}\ \text{と、代入は環準同型なので和を保つ}\bigr)\\
 &=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))
 &&\bigl(\because\ \blkref{claim_sector_value_duality}\ \text{を四つの組}\ (a,b)\ \text{へ同時に適用}\bigr)\\
 &=(1+q)^{2L^2}\cdot\sum_{(a,b)\in\{0,1\}\times\{0,1\}}G^{a,b}_L(\mathrm{KW}(q))
