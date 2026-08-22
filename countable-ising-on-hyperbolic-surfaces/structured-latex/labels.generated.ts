@@ -89,6 +89,7 @@ export const ALL_LABELS = [
   "theorem_fixed_quotient_fisher_splitting_field_degree_modular_cycle_constraint",
   "theorem_fixed_quotient_fisher_splitting_field_degree_prime_103_modular_cycle_constraint",
   "theorem_fixed_quotient_fisher_splitting_field_degree_prime_131_modular_cycle_constraint",
+  "theorem_fixed_quotient_fisher_splitting_field_degree_prime_149_modular_cycle_constraint",
   "theorem_fixed_quotient_fisher_splitting_field_degree_two_modular_cycle_constraints",
   "theorem_fixed_quotient_fisher_splitting_field_factorial_degree_bound",
   "theorem_fixed_quotient_fisher_splitting_field_finite_degree",
