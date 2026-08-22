@@ -2125,6 +2125,160 @@ $\mathbb Q\subset\overline{\mathbb Q}$
 
 \end{proof}
 
+\begin{theorem}[一般有限グラフの Fisher 零点逆数の四乗和と係数比]\label{lab:theorem_reciprocal_fisher_zero_fourth_power_sum_coefficient_ratio}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、
+\cref{lab:def_ising_partition_polynomial}
+ の次数を
+$d:=\deg Z_G(x)\in\mathbb N$
+ と置き、
+$d\ge4$
+ と仮定する。係数を標準単射
+$\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]$
+ で移した多項式の重複度込み Fisher 零点を
+$\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
+ と書く。このとき、
+
+\[\sum_{j=1}^{d}\alpha_j^{-4}
+=
+\frac{
+  \Omega_G(1)^4
+  -4\Omega_G(0)\Omega_G(1)^2\Omega_G(2)
+  +2\Omega_G(0)^2\Omega_G(2)^2
+  +4\Omega_G(0)^2\Omega_G(1)\Omega_G(3)
+  -4\Omega_G(0)^3\Omega_G(4)
+}{
+  \Omega_G(0)^4
+}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:theorem_fisher_zeros_nonzero}
+ より、全ての
+$j\in\{1,\ldots,d\}$
+ について
+$\beta_j:=\alpha_j^{-1}\in\overline{\mathbb Q}$
+ が定まる。各
+$r\in\{1,2,3,4\}$
+について代数的数
+$\widehat p_r:=\sum_{j=1}^{d}\beta_j^r$
+と定める。また代数的数
+$\widehat e_1,\widehat e_2,\widehat e_3,\widehat e_4,\widehat s_{3,1},\widehat s_{2,1,1}\in\overline{\mathbb Q}$
+を
+
+\[\begin{aligned}
+\widehat e_r
+&:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\prod_{j\in I}\beta_j
+&&\bigl(r\in\{1,2,3,4\}\bigr),\\
+\widehat s_{3,1}
+&:=
+\sum_{1\le i<j\le d}
+\left(\beta_i^3\beta_j+\beta_i\beta_j^3\right),\\
+\widehat s_{2,1,1}
+&:=
+\sum_{1\le i<j<k\le d}
+\beta_i\beta_j\beta_k
+\left(\beta_i+\beta_j+\beta_k\right)
+\end{aligned}\]
+と定める。有限和の分配律により、
+
+\[\begin{aligned}
+\widehat e_1\widehat p_3
+&=\widehat p_4+\widehat s_{3,1}
+&&\bigl(\because\ \text{二つの添字が同じ場合と異なる場合へ分ける}\bigr),\\
+\widehat e_2\widehat p_2
+&=\widehat s_{3,1}+\widehat s_{2,1,1}
+&&\bigl(\because\ \text{平方を取る添字が選択対に属する場合と属さない場合へ分ける}\bigr),\\
+\widehat e_3\widehat p_1
+&=\widehat s_{2,1,1}+4\widehat e_4
+&&\bigl(\because\ \text{一つの添字が選択三つ組に属する場合と属さない場合へ分ける}\bigr).
+\end{aligned}\]
+したがって代数的数の体で、
+
+\[\begin{aligned}
+\widehat p_4
+&=\widehat e_1\widehat p_3-\widehat s_{3,1}
+&&\bigl(\because\ \text{最初の有限和恒等式を移項する}\bigr)\\
+&=\widehat e_1\widehat p_3-\left(\widehat e_2\widehat p_2-\widehat s_{2,1,1}\right)
+&&\bigl(\because\ \text{二番目の有限和恒等式を }\widehat s_{3,1}\text{ について解いて代入する}\bigr)\\
+&=\widehat e_1\widehat p_3-\widehat e_2\widehat p_2+\widehat s_{2,1,1}
+&&\bigl(\because\ \text{分配律}\bigr)\\
+&=\widehat e_1\widehat p_3-\widehat e_2\widehat p_2+\left(\widehat e_3\widehat p_1-4\widehat e_4\right)
+&&\bigl(\because\ \text{三番目の有限和恒等式を }\widehat s_{2,1,1}\text{ について解いて代入する}\bigr)\\
+&=\widehat e_1\widehat p_3-\widehat e_2\widehat p_2+\widehat e_3\widehat p_1-4\widehat e_4
+&&\bigl(\because\ \text{括弧を外す}\bigr).
+\end{aligned}\]
+\cref{lab:theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio}
+ を
+$r=1,2,3,4$
+ に適用し、
+\cref{lab:theorem_reciprocal_fisher_zero_square_sum_coefficient_ratio}
+ と
+\cref{lab:theorem_reciprocal_fisher_zero_cube_sum_coefficient_ratio}
+ を用いる。さらに
+$B:=\Omega_G(0)$
+ および各
+$r\in\{1,2,3,4\}$
+について
+$A_r:=\Omega_G(r)$
+と置くと、
+
+\[\begin{aligned}
+\widehat e_r&=(-1)^r\frac{A_r}{B}&&\bigl(r\in\{1,2,3,4\}\bigr),\\
+\widehat p_1&=-\frac{A_1}{B},\\
+\widehat p_2&=\frac{A_1^2-2BA_2}{B^2},\\
+\widehat p_3&=\frac{-A_1^3+3BA_1A_2-3B^2A_3}{B^3}.
+\end{aligned}\]
+全頂点下向き配位は
+\cref{lab:def_spin_configuration_set}
+ に属し、
+\cref{lab:def_broken_edge_set}
+ の破れ辺数零をもつので、
+\cref{lab:def_broken_edge_multiplicity}
+ より
+$B\in\mathbb N_{>0}$
+ である。直前の係数比を四次 Newton 恒等式へ代入すると、
+
+\[\begin{aligned}
+\widehat p_4
+&=
+\left(-\frac{A_1}{B}\right)
+\frac{-A_1^3+3BA_1A_2-3B^2A_3}{B^3}
+-\frac{A_2}{B}\frac{A_1^2-2BA_2}{B^2}
++\left(-\frac{A_3}{B}\right)\left(-\frac{A_1}{B}\right)
+-4\frac{A_4}{B}
+&&\bigl(\because\ \text{直前の係数比を代入する}\bigr)\\
+&=
+\frac{A_1^4-3BA_1^2A_2+3B^2A_1A_3}{B^4}
++\frac{-A_1^2A_2+2BA_2^2}{B^3}
++\frac{A_1A_3}{B^2}
+-\frac{4A_4}{B}
+&&\bigl(\because\ \text{各積を展開する}\bigr)\\
+&=
+\frac{A_1^4-3BA_1^2A_2+3B^2A_1A_3}{B^4}
++\frac{-BA_1^2A_2+2B^2A_2^2}{B^4}
++\frac{B^2A_1A_3}{B^4}
+-\frac{4B^3A_4}{B^4}
+&&\bigl(\because\ B\ne0\text{ なので共通分母へ移す}\bigr)\\
+&=
+\frac{
+  A_1^4
+  -4BA_1^2A_2
+  +2B^2A_2^2
+  +4B^2A_1A_3
+  -4B^3A_4
+}{B^4}
+&&\bigl(\because\ \text{同じ分母をもつ項を加えて同類項をまとめる}\bigr).
+\end{aligned}\]
+右辺は有理数なので、Fisher 零点逆数の四乗和は
+$\mathbb Q\subset\overline{\mathbb Q}$
+ に属する。零点、その逆数と四乗、有限積および有限和は代数的数、次数と多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
 \begin{theorem}[全ての辺を横切る頂点二分割と係数対称性]\label{lab:theorem_full_cut_coefficient_symmetry}
 \cref{lab:def_finite_graph_input}
  の有限グラフについて、ある頂点部分集合 
