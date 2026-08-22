@@ -1038,9 +1038,9 @@ b_G(\sigma)
         ref("def_finite_graph_input"),
         " の有限グラフについて、",
         ref("def_ising_partition_polynomial"),
-        " の次数を ",
+        " の次数を",
         math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
-        " と置く。係数を標準単射 ",
+        " と置く。係数を標準単射",
         math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
         " で移した多項式の重複度込み零点を ",
         math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
@@ -1132,7 +1132,7 @@ b_G(\sigma)
         math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
         " と置く。係数を標準単射 ",
         math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
-        " で移した多項式の重複度込み Fisher 零点を ",
+        " で移した多項式の重複度込み Fisher 零点を",
         math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
         " と書く。このとき、全ての ",
         math(String.raw`j\in\{1,\ldots,d\}`),
@@ -1232,6 +1232,137 @@ b_G(\sigma_{\mathsf{down}})
         " は任意だったので結論を得る。零点と有限積は ",
         math(String.raw`\overline{\mathbb Q}`),
         "、次数と多重度は自然数、両端係数は正の自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_graph_theorem_fisher_zero_reciprocal_sum_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点の逆数和と低次係数比" },
+    labels: ["theorem_fisher_zero_reciprocal_sum_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-reciprocal-sum-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        math(String.raw`E\ne\varnothing`),
+        " と仮定し、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を ",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N_{>0}`),
+        " と置く。係数を標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を ",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。このとき、",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\frac{1}{\alpha_j}
+=
+-\frac{\Omega_G(1)}{\Omega_G(0)}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`e_0\in E`),
+        " を一つ選ぶ。配位",
+      ]),
+      displayMath(String.raw`\sigma_0(v):=
+\begin{cases}
+  \mathsf{down} & \bigl(v=\partial_G(e_0,\mathsf{target})\bigr),\\
+  \mathsf{up} & \bigl(v\ne\partial_G(e_0,\mathsf{target})\bigr)
+\end{cases}
+\qquad(v\in V)`),
+      paragraph(["を定める。", ref("def_finite_graph_input"), " の二端点の相異性と ", ref("def_broken_edge_set"), " より、"]),
+      displayMath(String.raw`\begin{aligned}
+e_0
+&\in B_G(\sigma_0)
+&&\bigl(\because\ \sigma_0(\partial_G(e_0,\mathsf{source}))=\mathsf{up}\ne\mathsf{down}=\sigma_0(\partial_G(e_0,\mathsf{target}))\bigr)\\
+b_G(\sigma_0)
+&\ge1
+&&\bigl(\because\ e_0\in B_G(\sigma_0)\bigr).
+\end{aligned}`),
+      paragraph([ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"), " より、"]),
+      displayMath(String.raw`\begin{aligned}
+d
+&=\max_{\sigma\in\mathcal S_G}b_G(\sigma)
+&&\bigl(\because\ \text{Ising 分配多項式の次数と最大破れ辺数}\bigr)\\
+&\ge b_G(\sigma_0)
+&&\bigl(\because\ \sigma_0\in\mathcal S_G\bigr)\\
+&\ge1
+&&\bigl(\because\ b_G(\sigma_0)\ge1\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_fisher_zeros_nonzero"),
+        " より、全ての",
+        math(String.raw`j\in\{1,\ldots,d\}`),
+        " について",
+        math(String.raw`\alpha_j\ne0`),
+        " であり、逆数",
+        math(String.raw`\alpha_j^{-1}\in\overline{\mathbb Q}`),
+        " が定まる。",
+      ]),
+      paragraph([
+        "係数を移した多項式を",
+        math(String.raw`\overline P_G(x)\in\overline{\mathbb Q}[x]`),
+        " と書く。代数的閉体上の一次因子分解と",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " の係数表示より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_G(1)
+&=
+\Omega_G(d)
+\sum_{k=1}^{d}
+\prod_{\substack{1\le j\le d\\j\ne k}}
+(-\alpha_j)
+&&\bigl(\because\ \overline P_G(x)=\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j)\text{ の }x\text{ の係数}\bigr)\\
+&=
+\Omega_G(d)(-1)^{d-1}
+\sum_{k=1}^{d}
+\prod_{\substack{1\le j\le d\\j\ne k}}
+\alpha_j
+&&\bigl(\because\ \text{各積の }d-1\text{ 個の因子から }-1\text{ を取り出す}\bigr)\\
+&=
+\Omega_G(d)(-1)^{d-1}
+\left(\prod_{j=1}^{d}\alpha_j\right)
+\sum_{k=1}^{d}\frac{1}{\alpha_k}
+&&\bigl(\because\ \alpha_k\ne0\text{ なので }\prod_{j\ne k}\alpha_j=(\prod_j\alpha_j)/\alpha_k\bigr).
+\end{aligned}`),
+      paragraph([ref("theorem_fisher_zero_product_coefficient_ratio"), " より、"]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_G(1)
+&=
+\Omega_G(d)(-1)^{d-1}
+\left(
+  (-1)^d\frac{\Omega_G(0)}{\Omega_G(d)}
+\right)
+\sum_{k=1}^{d}\frac{1}{\alpha_k}
+&&\bigl(\because\ \text{Fisher 零点積と両端係数比}\bigr)\\
+&=
+(-1)^{2d-1}\Omega_G(0)
+\sum_{k=1}^{d}\frac{1}{\alpha_k}
+&&\bigl(\because\ \Omega_G(d)\ne0\text{ なので約分する}\bigr)\\
+&=
+-\Omega_G(0)
+\sum_{k=1}^{d}\frac{1}{\alpha_k}
+&&\bigl(\because\ (-1)^{2d-1}=-1\bigr).
+\end{aligned}`),
+      paragraph([
+        "全頂点下向き配位は破れ辺数零をもつので",
+        math(String.raw`\Omega_G(0)>0`),
+        " である。したがって代数的数の体で",
+        math(String.raw`-\Omega_G(0)`),
+        " を消去すると、",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\frac{1}{\alpha_j}
+=
+-\frac{\Omega_G(1)}{\Omega_G(0)}.`),
+      paragraph([
+        "右辺は有理数なので、逆数和は",
+        math(String.raw`\mathbb Q\subset\overline{\mathbb Q}`),
+        " に属する。零点と逆数は代数的数、次数と多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
       ]),
     ],
   },

@@ -29,6 +29,7 @@ export const ALL_LABELS = [
   "theorem_even_incident_edge_counts_evaluation_minus_one",
   "theorem_even_linear_factor_characterizes_odd_incident_edge_count",
   "theorem_fisher_zero_product_coefficient_ratio",
+  "theorem_fisher_zero_reciprocal_sum_coefficient_ratio",
   "theorem_fisher_zeros_nonzero",
   "theorem_formal_high_temperature_expansion",
   "theorem_full_cut_coefficient_symmetry",
