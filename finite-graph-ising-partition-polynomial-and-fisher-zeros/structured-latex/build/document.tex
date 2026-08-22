@@ -1,0 +1,2801 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=25mm]{geometry}
+\usepackage{xeCJK}
+\setCJKmainfont{Hiragino Mincho ProN}
+\setCJKsansfont{Hiragino Sans}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\renewcommand{\proofname}{証明}
+\newtheorem{definition}{定義}[section]
+\newtheorem{claim}[definition]{主張}
+\newtheorem{theorem}[definition]{定理}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{注意}
+\newtheorem{structurednote}[definition]{ノート}
+\crefname{definition}{定義}{定義}
+\crefname{claim}{主張}{主張}
+\crefname{theorem}{定理}{定理}
+\title{有限双曲曲面上の Ising 模型の可算構造}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\part{有限グラフ上の Ising 多項式}
+
+\begin{definition}[辺端ラベル集合]\label{lab:def_edge_endpoint_label_set}
+二つの形式的ラベルからなる有限集合を
+
+\[\mathsf{End}:=\{\mathsf{source},\mathsf{target}\}\]
+と定める。
+$\mathsf{source}$
+ と 
+$\mathsf{target}$
+ は辺の二つの端を区別するラベルであり、整数 
+$0,1\in\mathbb Z$
+ ではない。この集合には加法、減法、乗法、大小関係を入れない。
+
+\end{definition}
+
+\begin{definition}[有限グラフの入力]\label{lab:def_finite_graph_input}
+有限グラフの入力を、空でない有限集合 
+$V$
+、有限集合 
+$E$
+、
+\cref{lab:def_edge_endpoint_label_set}
+ の辺端ラベルを入力に取る写像 
+$\partial_G:E\times\mathsf{End}\to V$
+ の組 
+$G=(V,E,\partial_G)$
+ と定める。任意の 
+$e\in E$
+ について 
+$\partial_G(e,\mathsf{source})\ne\partial_G(e,\mathsf{target})$
+ を仮定する。異なる辺が同じ二頂点を結ぶことは許す。
+
+\end{definition}
+
+\begin{definition}[スピンラベル集合]\label{lab:def_spin_label_set}
+二つの形式的ラベルからなる有限集合を
+
+\[\mathsf{Spin}:=\{\mathsf{up},\mathsf{down}\}\]
+と定める。
+$\mathsf{up}$
+ と 
+$\mathsf{down}$
+ はスピン状態を区別するラベルであり、それ自体には整数の演算を入れない。
+
+\end{definition}
+
+\begin{definition}[スピンラベルの整数実現]\label{lab:def_spin_integer_realization}
+\cref{lab:def_spin_label_set}
+ のスピンラベルを整数係数の式で使うための写像を
+
+\[\kappa:\mathsf{Spin}\to\{-1,+1\}\subset\mathbb Z,\qquad
+\kappa(\mathsf{up})=+1,\qquad \kappa(\mathsf{down})=-1\]
+と定める。右辺の 
+$-1,+1$
+ は整数である。以後、スピンラベルを整数として演算するときは必ず 
+$\kappa$
+ を明記する。
+
+\end{definition}
+
+\begin{definition}[スピンラベルの反転写像]\label{lab:def_spin_label_reversal}
+スピンラベルを反転する写像を
+
+\[\nu:\mathsf{Spin}\to\mathsf{Spin},\qquad
+\nu(\mathsf{up})=\mathsf{down},\qquad
+\nu(\mathsf{down})=\mathsf{up}\]
+と定める。これは形式的ラベル上の写像であり、整数の加法逆元ではない。
+
+\end{definition}
+
+\begin{claim}[スピン反転と整数実現の整合性]\label{lab:claim_spin_reversal_integer_realization}
+\[\kappa(\nu(a))=-\kappa(a)\in\mathbb Z\qquad(a\in\mathsf{Spin}).\]
+\end{claim}
+\begin{proof}
+\[\begin{aligned}
+\kappa(\nu(\mathsf{up}))
+&=\kappa(\mathsf{down})
+&&\bigl(\because\ \text{スピンラベルの反転写像の定義}\bigr)\\
+&=-1
+&&\bigl(\because\ \text{スピンラベルの整数実現の定義}\bigr)\\
+&=-\kappa(\mathsf{up})
+&&\bigl(\because\ \kappa(\mathsf{up})=+1\bigr),\\[4pt]
+\kappa(\nu(\mathsf{down}))
+&=\kappa(\mathsf{up})
+&&\bigl(\because\ \text{スピンラベルの反転写像の定義}\bigr)\\
+&=+1
+&&\bigl(\because\ \text{スピンラベルの整数実現の定義}\bigr)\\
+&=-\kappa(\mathsf{down})
+&&\bigl(\because\ \kappa(\mathsf{down})=-1\bigr).
+\end{aligned}\]
+二つの場合が 
+\cref{lab:def_spin_label_set}
+ の全ての元を尽くすので結論を得る。用いた写像は 
+\cref{lab:def_spin_label_reversal}
+ と 
+\cref{lab:def_spin_integer_realization}
+ で定めた。
+
+\end{proof}
+
+\begin{definition}[スピン配位集合]\label{lab:def_spin_configuration_set}
+有限グラフ 
+$G$
+ のスピン配位集合を
+
+\[\mathcal S_G:=\{\sigma\mid \sigma:V\to\mathsf{Spin}\ \text{は写像}\}\]
+と定める。
+$\mathcal S_G$
+ は有限集合であり、
+$|\mathcal S_G|=2^{|V|}$
+ である。ここで 
+$|X|\in\mathbb N$
+ は有限集合 
+$X$
+ の元の個数を表す。
+
+\end{definition}
+
+\begin{definition}[一頂点での配位反転写像]\label{lab:def_single_vertex_spin_flip}
+配位 
+$\sigma\in\mathcal S_G$
+ と頂点 
+$w\in V$
+ に対し、配位 
+$T_w(\sigma)\in\mathcal S_G$
+ を
+
+\[T_w(\sigma)(v):=
+\begin{cases}
+\nu(\sigma(v)) & (v=w),\\
+\sigma(v) & (v\ne w)
+\end{cases}
+\qquad(v\in V)\]
+と定める。スピンラベルの反転には 
+\cref{lab:def_spin_label_reversal}
+ の写像 
+$\nu$
+ を用いる。
+
+\end{definition}
+
+\begin{claim}[一頂点での配位反転は不動点を持たない対合である]\label{lab:claim_single_vertex_spin_flip_involution}
+\[T_w(T_w(\sigma))=\sigma,\qquad T_w(\sigma)\ne\sigma
+\qquad(\sigma\in\mathcal S_G,\ w\in V).\]
+\end{claim}
+\begin{proof}
+\cref{lab:def_spin_label_reversal}
+ の二つの定義値から、任意の 
+$a\in\mathsf{Spin}$
+ に対して 
+$\nu(\nu(a))=a$
+ および 
+$\nu(a)\ne a$
+ が成り立つ。
+
+\[\begin{aligned}
+T_w(T_w(\sigma))(w)
+&=\nu(T_w(\sigma)(w))
+&&\bigl(\because\ \text{一頂点での配位反転写像の定義}\bigr)\\
+&=\nu(\nu(\sigma(w)))
+&&\bigl(\because\ \text{一頂点での配位反転写像の定義}\bigr)\\
+&=\sigma(w)
+&&\bigl(\because\ \nu(\nu(a))=a\bigr),\\[4pt]
+T_w(T_w(\sigma))(v)
+&=T_w(\sigma)(v)
+&&\bigl(\because\ v\ne w\text{ と一頂点での配位反転写像の定義}\bigr)\\
+&=\sigma(v)
+&&\bigl(\because\ v\ne w\text{ と一頂点での配位反転写像の定義}\bigr).
+\end{aligned}\]
+第二の計算は任意の 
+$v\in V\setminus\{w\}$
+ に対して成り立つので、二つの配位は全頂点で等しく、
+$T_w(T_w(\sigma))=\sigma$
+ である。また 
+$T_w(\sigma)(w)=\nu(\sigma(w))\ne\sigma(w)$
+ なので 
+$T_w(\sigma)\ne\sigma$
+ である。
+
+\end{proof}
+
+\begin{definition}[破れ辺集合と破れ辺数]\label{lab:def_broken_edge_set}
+配位 
+$\sigma\in\mathcal S_G$
+ の破れ辺集合と破れ辺数を
+
+\[B_G(\sigma):=\left\{e\in E\ \middle|\ \sigma\!\left(\partial_G(e,\mathsf{source})\right)\ne\sigma\!\left(\partial_G(e,\mathsf{target})\right)\right\},\qquad b_G(\sigma):=|B_G(\sigma)|\in\mathbb N\]
+と定める。端点写像と配位は 
+\cref{lab:def_finite_graph_input}
+ と 
+\cref{lab:def_spin_configuration_set}
+ で定めた。
+
+\end{definition}
+
+\begin{definition}[破れ辺数の多重度]\label{lab:def_broken_edge_multiplicity}
+各 
+$m\in\{0,1,\ldots,|E|\}$
+ に対し多重度を
+
+\[\Omega_G(m):=|\{\sigma\in\mathcal S_G\mid b_G(\sigma)=m\}|\in\mathbb N\]
+と定める。破れ辺数は 
+\cref{lab:def_broken_edge_set}
+ で定めた。
+
+\end{definition}
+
+\begin{definition}[Ising 分配多項式]\label{lab:def_ising_partition_polynomial}
+不定元 
+$x$
+ に対し Ising 分配多項式を
+
+\[Z_G(x):=\sum_{\sigma\in\mathcal S_G}x^{b_G(\sigma)}\in\mathbb Z[x]\]
+と定める。これは多項式そのものであり、数を代入した値とは区別する。
+
+\end{definition}
+
+\begin{claim}[多重度による係数表示]\label{lab:claim_partition_polynomial_coefficient_expansion}
+\[Z_G(x)=\sum_{m=0}^{|E|}\Omega_G(m)x^m\in\mathbb Z[x].\]
+\end{claim}
+\begin{proof}
+\[\begin{aligned}
+Z_G(x)
+&=\sum_{\sigma\in\mathcal S_G}x^{b_G(\sigma)}
+&&\bigl(\because\ \text{Ising 分配多項式の定義}\bigr)\\
+&=\sum_{m=0}^{|E|}\ \sum_{\substack{\sigma\in\mathcal S_G\\ b_G(\sigma)=m}}x^m
+&&\bigl(\because\ \mathcal S_G\text{ を }b_G\text{ の値ごとのファイバーへ分割}\bigr)\\
+&=\sum_{m=0}^{|E|}\Omega_G(m)x^m
+&&\bigl(\because\ \text{多重度の定義}\bigr).
+\end{aligned}\]
+最初の等号は 
+\cref{lab:def_ising_partition_polynomial}
+、最後の等号は 
+\cref{lab:def_broken_edge_multiplicity}
+ を用いた。
+
+\end{proof}
+
+\begin{theorem}[Ising 分配多項式の全係数の偶数性]\label{lab:theorem_partition_polynomial_coefficient_evenness}
+\cref{lab:def_finite_graph_input}
+ の空でない頂点集合をもつ任意の有限グラフに対し、全ての 
+$m\in\{0,1,\ldots,|E|\}$
+ について
+
+\[\Omega_G(m)\in\{2n\mid n\in\mathbb N\}.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:def_spin_configuration_set}
+ の配位集合上に、大域スピン反転写像 
+$\mathfrak F_G:\mathcal S_G\to\mathcal S_G$
+ を
+
+\[\mathfrak F_G(\sigma)(v):=\nu(\sigma(v))
+\qquad(\sigma\in\mathcal S_G,\ v\in V)\]
+で定める。
+\cref{lab:def_spin_label_reversal}
+ の二つの定義値より、任意の 
+$a\in\mathsf{Spin}$
+ に対して 
+$\nu(\nu(a))=a$
+ および 
+$\nu(a)\ne a$
+ が成り立つ。したがって任意の 
+$\sigma\in\mathcal S_G$
+ と 
+$v\in V$
+ に対して
+
+\[\begin{aligned}
+\mathfrak F_G(\mathfrak F_G(\sigma))(v)
+&=\nu(\mathfrak F_G(\sigma)(v))
+&&\bigl(\because\ \mathfrak F_G\text{ の定義}\bigr)\\
+&=\nu(\nu(\sigma(v)))
+&&\bigl(\because\ \mathfrak F_G\text{ の定義}\bigr)\\
+&=\sigma(v)
+&&\bigl(\because\ \nu(\nu(a))=a\bigr).
+\end{aligned}\]
+ゆえに 
+$\mathfrak F_G(\mathfrak F_G(\sigma))=\sigma$
+ である。また 
+\cref{lab:def_finite_graph_input}
+ より 
+$V$
+ は空でないので、
+$w\in V$
+ を一つ選べる。このとき
+
+\[\mathfrak F_G(\sigma)(w)
+=\nu(\sigma(w))
+\ne\sigma(w)
+\quad\bigl(\because\ \nu(a)\ne a\bigr).\]
+したがって 
+$\mathfrak F_G$
+ は不動点を持たない対合である。任意の 
+$e\in E$
+ に対して、
+\cref{lab:def_broken_edge_set}
+ より
+
+\[\begin{aligned}
+e\in B_G(\mathfrak F_G(\sigma))
+&\iff
+\nu\!\left(\sigma\!\left(\partial_G(e,\mathsf{source})\right)\right)
+\ne
+\nu\!\left(\sigma\!\left(\partial_G(e,\mathsf{target})\right)\right)
+&&\bigl(\because\ B_G\text{ と }\mathfrak F_G\text{ の定義}\bigr)\\
+&\iff
+\sigma\!\left(\partial_G(e,\mathsf{source})\right)
+\ne
+\sigma\!\left(\partial_G(e,\mathsf{target})\right)
+&&\bigl(\because\ \nu\text{ は全単射}\bigr)\\
+&\iff e\in B_G(\sigma)
+&&\bigl(\because\ B_G\text{ の定義}\bigr).
+\end{aligned}\]
+\[\begin{aligned}
+B_G(\mathfrak F_G(\sigma))
+&=B_G(\sigma)
+&&\bigl(\because\ E\text{ の全ての元について所属が同値}\bigr)\\
+b_G(\mathfrak F_G(\sigma))
+&=b_G(\sigma)
+&&\bigl(\because\ \text{等しい有限集合の元数は等しい}\bigr).
+\end{aligned}\]
+各 
+$m\in\{0,1,\ldots,|E|\}$
+ に対し、有限集合を
+
+\[\mathcal A_m:=\{\sigma\in\mathcal S_G\mid b_G(\sigma)=m\}\]
+と置く。直前の等式より 
+$\mathfrak F_G$
+ は 
+$\mathcal A_m$
+ を保つ。不動点を持たない対合は有限集合を二元部分集合へ分割するので、ある 
+$n_m\in\mathbb N$
+ が存在して
+
+\cref{lab:def_broken_edge_multiplicity}
+ より
+
+\[\Omega_G(m)
+=|\mathcal A_m|
+=2n_m
+\in\{2n\mid n\in\mathbb N\}.\]
+全ての集合は有限であり、多重度は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[奇数本の辺が接続する頂点と零点 -1]\label{lab:theorem_odd_incident_edge_count_root_minus_one}
+\cref{lab:def_finite_graph_input}
+ の有限グラフに、接続する辺の本数が奇数である頂点 
+$w\in V$
+ が存在すると仮定する。すなわち
+
+\[I_w:=\left\{e\in E\ \middle|\ \partial_G(e,\mathsf{source})=w\ \text{または}\ \partial_G(e,\mathsf{target})=w\right\},\qquad |I_w|\in\{2n+1\mid n\in\mathbb N\}.\]
+このとき
+
+\[Z_G(-1)=0\in\mathbb Z.\]
+\end{theorem}
+\begin{proof}
+任意の 
+$\sigma\in\mathcal S_G$
+ に対し、
+$r_w(\sigma):=|B_G(\sigma)\cap I_w|\in\mathbb N$
+ と置く。
+\cref{lab:def_finite_graph_input}
+ は自己ループを許さないので、
+$I_w$
+ の各辺では二端点のうち一方だけが 
+$w$
+ である。したがって 
+\cref{lab:def_single_vertex_spin_flip}
+ の 
+$T_w$
+ は 
+$I_w$
+ に属する辺の破れ・非破れを交換し、それ以外の辺の状態を保存する。よって
+
+\[\begin{aligned}
+b_G(T_w(\sigma))
+&=|I_w\setminus B_G(\sigma)|+|B_G(\sigma)\setminus I_w|
+&&\bigl(\because\ T_w\text{ は }I_w\text{ 上だけ破れ・非破れを交換する}\bigr)\\
+&=\bigl(|I_w|-r_w(\sigma)\bigr)+\bigl(b_G(\sigma)-r_w(\sigma)\bigr)
+&&\bigl(\because\ r_w(\sigma)=|B_G(\sigma)\cap I_w|\bigr)\\
+&=b_G(\sigma)+|I_w|-2r_w(\sigma)
+&&\bigl(\because\ \mathbb Z\text{ 上の加法の整理}\bigr).
+\end{aligned}\]
+$|I_w|$
+ は奇数であり、
+$2r_w(\sigma)$
+ は偶数なので
+
+\[\begin{aligned}
+(-1)^{b_G(T_w(\sigma))}
+&=(-1)^{b_G(\sigma)+|I_w|-2r_w(\sigma)}
+&&\bigl(\because\ \text{直前の破れ辺数の等式}\bigr)\\
+&=-(-1)^{b_G(\sigma)}
+&&\bigl(\because\ |I_w|\text{ は奇数かつ }2r_w(\sigma)\text{ は偶数}\bigr).
+\end{aligned}\]
+\cref{lab:claim_single_vertex_spin_flip_involution}
+ より、
+$T_w$
+ は有限集合 
+$\mathcal S_G$
+ を二元部分集合 
+$\{\sigma,T_w(\sigma)\}$
+ へ分割する。各二元部分集合からの二項は直前の等式により相殺する。
+\cref{lab:def_ising_partition_polynomial}
+ に整数 
+$-1$
+ を評価すると
+
+\[\begin{aligned}
+Z_G(-1)
+&=\sum_{\sigma\in\mathcal S_G}(-1)^{b_G(\sigma)}
+&&\bigl(\because\ \text{Ising 分配多項式の定義}\bigr)\\
+&=0
+&&\bigl(\because\ T_w\text{ の各二元軌道内で二項が相殺する}\bigr).
+\end{aligned}\]
+全ての集合は有限であり、破れ辺数と元数は自然数、評価値は整数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全頂点の接続辺数が偶数の場合の -1 評価]\label{lab:theorem_even_incident_edge_counts_evaluation_minus_one}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、全ての頂点 
+$v\in V$
+ に接続する辺の本数が偶数であると仮定する。すなわち
+
+\[I_v:=\left\{e\in E\ \middle|\ \partial_G(e,\mathsf{source})=v\ \text{または}\ \partial_G(e,\mathsf{target})=v\right\},\qquad |I_v|\in\{2n\mid n\in\mathbb N\}\quad(v\in V).\]
+このとき
+
+\[Z_G(-1)=2^{|V|}\in\mathbb Z.\]
+\end{theorem}
+\begin{proof}
+任意の 
+$\sigma\in\mathcal S_G$
+ に対し、上向きスピンをもつ頂点集合と、その内部だけを結ぶ辺集合を
+
+\[U_\sigma:=\{v\in V\mid \sigma(v)=\mathsf{up}\},\qquad
+E_\sigma^{\mathrm{in}}:=\left\{e\in E\ \middle|\ \partial_G(e,\mathsf{source})\in U_\sigma,\ \partial_G(e,\mathsf{target})\in U_\sigma\right\}\]
+と置く。
+\cref{lab:def_finite_graph_input}
+ は自己ループを許さない。したがって、
+$U_\sigma$
+ に接続する辺端を数えると、
+$E_\sigma^{\mathrm{in}}$
+ の各辺は二回、
+\cref{lab:def_broken_edge_set}
+ の各辺は一回だけ数えられるので
+
+\[\begin{aligned}
+\sum_{v\in U_\sigma}|I_v|
+&=2|E_\sigma^{\mathrm{in}}|+|B_G(\sigma)|
+&&\bigl(\because\ \text{有限集合 }U_\sigma\text{ に接続する辺端の二通りの数え上げ}\bigr)\\
+&=2|E_\sigma^{\mathrm{in}}|+b_G(\sigma)
+&&\bigl(\because\ b_G(\sigma)=|B_G(\sigma)|\bigr).
+\end{aligned}\]
+各 
+$|I_v|$
+ は偶数なので左辺は偶数であり、
+$2|E_\sigma^{\mathrm{in}}|$
+ も偶数である。整数加法の消去律より、
+$b_G(\sigma)$
+ は偶数である。ゆえに
+
+\[(-1)^{b_G(\sigma)}=1
+\quad\bigl(\because\ b_G(\sigma)\text{ は偶数}\bigr).\]
+\cref{lab:def_ising_partition_polynomial}
+ に整数 
+$-1$
+ を評価すると
+
+\[\begin{aligned}
+Z_G(-1)
+&=\sum_{\sigma\in\mathcal S_G}(-1)^{b_G(\sigma)}
+&&\bigl(\because\ \text{Ising 分配多項式の定義}\bigr)\\
+&=\sum_{\sigma\in\mathcal S_G}1
+&&\bigl(\because\ \text{全ての }b_G(\sigma)\text{ は偶数}\bigr)\\
+&=|\mathcal S_G|
+&&\bigl(\because\ \text{有限集合上の定数 }1\text{ の和}\bigr).
+\end{aligned}\]
+\cref{lab:def_spin_configuration_set}
+ より
+
+\[|\mathcal S_G|=2^{|V|}.\]
+全ての集合は有限であり、接続辺数、破れ辺数、元数は自然数、評価値は整数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[零点 -1 による奇接続辺数頂点の特徴付け]\label{lab:theorem_root_minus_one_characterizes_odd_incident_edge_count}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、整数 
+$-1$
+ が Ising 分配多項式の零点であることと、接続する辺の本数が奇数である頂点が存在することは同値である。すなわち
+
+\[Z_G(-1)=0
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \partial_G(e,\mathsf{source})=w
+    \quad\text{または}\quad
+    \partial_G(e,\mathsf{target})=w
+  \right\}
+\right|
+\in\{2n+1\mid n\in\mathbb N\}.\]
+\end{theorem}
+\begin{proof}
+まず、接続する辺の本数が奇数である頂点が存在すると仮定する。
+\cref{lab:theorem_odd_incident_edge_count_root_minus_one}
+ より
+
+\[Z_G(-1)=0.\]
+逆に、
+$Z_G(-1)=0$
+ と仮定する。接続する辺の本数が奇数である頂点が存在しないと仮定すると、各接続辺数は自然数なので、全ての頂点の接続辺数は偶数である。
+\cref{lab:theorem_even_incident_edge_counts_evaluation_minus_one}
+ より
+
+\[\begin{aligned}
+Z_G(-1)
+&=2^{|V|}
+&&\bigl(\because\ \text{全頂点の接続辺数が偶数である}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}\text{ は正の整数である}\bigr).
+\end{aligned}\]
+これは仮定 
+$Z_G(-1)=0$
+ に反する。したがって、接続する辺の本数が奇数である頂点が存在する。全ての集合は有限であり、接続辺数は自然数、評価値は整数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[一次因子 x+1 による奇接続辺数頂点の特徴付け]\label{lab:theorem_linear_factor_characterizes_odd_incident_edge_count}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、整数係数多項式 
+$x+1$
+ が Ising 分配多項式を割り切ることと、接続する辺の本数が奇数である頂点が存在することは同値である。すなわち
+
+\[(x+1)\mid Z_G(x)\ \text{ in }\mathbb Z[x]
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \partial_G(e,\mathsf{source})=w
+    \quad\text{または}\quad
+    \partial_G(e,\mathsf{target})=w
+  \right\}
+\right|
+\in\{2n+1\mid n\in\mathbb N\}.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:def_ising_partition_polynomial}
+ より 
+$Z_G(x)\in\mathbb Z[x]$
+ である。モニック一次多項式による整数係数多項式の除法より、ある 
+$Q_G(x)\in\mathbb Z[x]$
+ と 
+$r_G\in\mathbb Z$
+ が一意に存在して
+
+\[Z_G(x)=(x+1)Q_G(x)+r_G.\]
+\[\begin{aligned}
+r_G
+&=Z_G(-1)
+&&\bigl(\because\ x=-1\text{ を直前の除法等式へ代入}\bigr),\\
+(x+1)\mid Z_G(x)\ \text{ in }\mathbb Z[x]
+&\Longleftrightarrow r_G=0
+&&\bigl(\because\ \text{多項式の整除と除法の余りの定義}\bigr),\\
+&\Longleftrightarrow Z_G(-1)=0
+&&\bigl(\because\ r_G=Z_G(-1)\bigr).
+\end{aligned}\]
+\cref{lab:theorem_root_minus_one_characterizes_odd_incident_edge_count}
+ より
+
+\[Z_G(-1)=0
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \partial_G(e,\mathsf{source})=w
+    \quad\text{または}\quad
+    \partial_G(e,\mathsf{target})=w
+  \right\}
+\right|
+\in\{2n+1\mid n\in\mathbb N\}.\]
+以上の二つの同値性を接続して結論を得る。除法の商は整数係数多項式、余りと評価値は整数、接続辺数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[因子 2(x+1) による奇接続辺数頂点の特徴付け]\label{lab:theorem_even_linear_factor_characterizes_odd_incident_edge_count}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、整数係数多項式 
+$2(x+1)$
+ が Ising 分配多項式を割り切ることと、接続する辺の本数が奇数である頂点が存在することは同値である。すなわち
+
+\[2(x+1)\mid Z_G(x)\ \text{ in }\mathbb Z[x]
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \partial_G(e,\mathsf{source})=w
+    \quad\text{または}\quad
+    \partial_G(e,\mathsf{target})=w
+  \right\}
+\right|
+\in\{2n+1\mid n\in\mathbb N\}.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:theorem_partition_polynomial_coefficient_evenness}
+ より、各 
+$m\in\{0,1,\ldots,|E|\}$
+ に対してある 
+$n_m\in\mathbb N$
+ が存在して 
+$\Omega_G(m)=2n_m$
+ である。整数係数多項式を
+
+\[P_G(x):=\sum_{m=0}^{|E|}n_mx^m\in\mathbb Z[x]\]
+と置く。
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ より
+
+\[\begin{aligned}
+Z_G(x)
+&=\sum_{m=0}^{|E|}\Omega_G(m)x^m
+&&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
+&=\sum_{m=0}^{|E|}2n_mx^m
+&&\bigl(\because\ \Omega_G(m)=2n_m\bigr)\\
+&=2P_G(x)
+&&\bigl(\because\ P_G(x)\text{ の定義}\bigr).
+\end{aligned}\]
+まず、接続する辺の本数が奇数である頂点が存在すると仮定する。
+\cref{lab:theorem_root_minus_one_characterizes_odd_incident_edge_count}
+ より 
+$Z_G(-1)=0$
+ である。直前の多項式等式へ 
+$x=-1$
+ を代入すると
+
+\[\begin{aligned}
+0
+&=2P_G(-1)
+&&\bigl(\because\ Z_G(-1)=0\text{ かつ }Z_G(x)=2P_G(x)\bigr),\\
+P_G(-1)
+&=0
+&&\bigl(\because\ \mathbb Z\text{ は整域であり }2\ne0\bigr).
+\end{aligned}\]
+モニック一次多項式による整数係数多項式の除法より、ある 
+$R_G(x)\in\mathbb Z[x]$
+ と 
+$s_G\in\mathbb Z$
+ が存在して
+
+\[\begin{aligned}
+P_G(x)
+&=(x+1)R_G(x)+s_G
+&&\bigl(\because\ x+1\text{ による除法}\bigr),\\
+s_G
+&=P_G(-1)
+&&\bigl(\because\ x=-1\text{ を除法等式へ代入}\bigr),\\
+&=0
+&&\bigl(\because\ P_G(-1)=0\bigr).
+\end{aligned}\]
+\[\begin{aligned}
+Z_G(x)
+&=2P_G(x)
+&&\bigl(\because\ \text{直前の係数表示}\bigr)\\
+&=2(x+1)R_G(x)
+&&\bigl(\because\ P_G(x)=(x+1)R_G(x)\bigr).
+\end{aligned}\]
+したがって 
+$2(x+1)\mid Z_G(x)$
+ が成り立つ。
+
+逆に、
+$2(x+1)\mid Z_G(x)$
+ と仮定する。ある 
+$S_G(x)\in\mathbb Z[x]$
+ が存在して
+
+\[\begin{aligned}
+Z_G(x)
+&=2(x+1)S_G(x)
+&&\bigl(\because\ \text{整除の定義}\bigr)\\
+&=(x+1)\bigl(2S_G(x)\bigr)
+&&\bigl(\because\ \mathbb Z[x]\text{ 上の結合律}\bigr).
+\end{aligned}\]
+ゆえに 
+$(x+1)\mid Z_G(x)$
+ である。
+\cref{lab:theorem_linear_factor_characterizes_odd_incident_edge_count}
+ より、接続する辺の本数が奇数である頂点が存在する。全ての係数と評価値は整数、接続辺数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[Ising 分配多項式の次数と最大破れ辺数]\label{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
+\cref{lab:def_spin_configuration_set}
+ の有限で空でないスピン配位集合に対し、
+\cref{lab:def_broken_edge_set}
+ の破れ辺数が取る最大値を用いると、
+
+\[\deg Z_G(x)
+=
+\max_{\sigma\in\mathcal S_G} b_G(\sigma)
+\in\mathbb N.\]
+\end{theorem}
+\begin{proof}
+$\mathcal S_G$
+ は有限で空でなく、任意の 
+$\sigma\in\mathcal S_G$
+ に対して 
+$b_G(\sigma)\in\{0,1,\ldots,|E|\}$
+ である。したがって破れ辺数の像は有限で空でなく、その最大値は自然数として存在する。また、任意の配位を一つ取れば、その破れ辺数における多重度は正なので 
+$Z_G(x)\ne0$
+ である。
+
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ の係数表示と 
+\cref{lab:def_broken_edge_multiplicity}
+ の多重度の定義より、
+
+\[\begin{aligned}
+\deg Z_G(x)
+&=
+\max\left\{
+  m\in\{0,1,\ldots,|E|\}
+  \ \middle|\;
+  \Omega_G(m)\ne0
+\right\}
+&&\bigl(\because\ \text{非零多項式の次数の定義}\bigr)\\
+&=
+\max\left\{
+  m\in\{0,1,\ldots,|E|\}
+  \ \middle|\;
+  \exists\sigma\in\mathcal S_G,\ b_G(\sigma)=m
+\right\}
+&&\bigl(\because\ \text{多重度が正である条件}\bigr)\\
+&=
+\max_{\sigma\in\mathcal S_G} b_G(\sigma)
+&&\bigl(\because\ \text{有限像集合の定義}\bigr).
+\end{aligned}\]
+全ての集合は有限であり、次数、破れ辺数、多重度は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[Ising 分配多項式の次数と最大カット辺数]\label{lab:theorem_partition_polynomial_degree_maximum_cut_size}
+\cref{lab:def_finite_graph_input}
+ の有限グラフに対し、Ising 分配多項式の次数は、頂点部分集合とその補集合を横切る辺数の最大値に等しい。すなわち
+
+\[\deg Z_G(x)
+=
+\max_{A\subseteq V}
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \begin{array}{l}
+      \partial_G(e,\mathsf{source})\in A,\;
+      \partial_G(e,\mathsf{target})\notin A,\\
+      \text{または }\partial_G(e,\mathsf{source})\notin A,\;
+      \partial_G(e,\mathsf{target})\in A
+    \end{array}
+  \right\}
+\right|
+\in\mathbb N.\]
+\end{theorem}
+\begin{proof}
+各配位 
+$\sigma\in\mathcal S_G$
+ と各頂点部分集合 
+$A\subseteq V$
+ に対し、証明中だけ用いる記号を
+
+\[A_\sigma:=\{v\in V\mid \sigma(v)=\mathsf{up}\},\qquad
+\sigma_A(v):=
+\begin{cases}
+  \mathsf{up} & (v\in A),\\
+  \mathsf{down} & (v\notin A)
+\end{cases}
+\quad(v\in V)\]
+と置く。
+\cref{lab:def_spin_label_set}
+ の二つのスピンラベルは相異なるので、
+
+\[\begin{aligned}
+A_{\sigma_A}
+&=A
+&&\bigl(\because\ \text{二つの定義の展開}\bigr),\\
+\sigma_{A_\sigma}(v)
+&=\sigma(v)
+&&\bigl(\because\ \sigma(v)=\mathsf{up}\text{ と }\sigma(v)=\mathsf{down}\text{ の二場合}\bigr).
+\end{aligned}\]
+したがって 
+$\sigma\mapsto A_\sigma$
+ と 
+$A\mapsto\sigma_A$
+ は有限集合 
+$\mathcal S_G$
+ と 
+$\{A\mid A\subseteq V\}$
+ の間の互いに逆な全単射である。さらに 
+\cref{lab:def_broken_edge_set}
+ より、
+
+\[\begin{aligned}
+b_G(\sigma)
+&=
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \sigma\!\left(\partial_G(e,\mathsf{source})\right)
+    \ne
+    \sigma\!\left(\partial_G(e,\mathsf{target})\right)
+  \right\}
+\right|
+&&\bigl(\because\ \text{破れ辺数の定義}\bigr)\\
+&=
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \begin{array}{l}
+      \partial_G(e,\mathsf{source})\in A_\sigma,\;
+      \partial_G(e,\mathsf{target})\notin A_\sigma,\\
+      \text{または }\partial_G(e,\mathsf{source})\notin A_\sigma,\;
+      \partial_G(e,\mathsf{target})\in A_\sigma
+    \end{array}
+  \right\}
+\right|
+&&\bigl(\because\ A_\sigma\text{ の定義と二つのスピンラベルの相異性}\bigr).
+\end{aligned}\]
+\cref{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
+ と上の全単射および辺数の一致より、
+
+\[\begin{aligned}
+\deg Z_G(x)
+&=
+\max_{\sigma\in\mathcal S_G}b_G(\sigma)
+&&\bigl(\because\ \text{Ising 分配多項式の次数と最大破れ辺数}\bigr)\\
+&=
+\max_{A\subseteq V}
+\left|
+  \left\{
+    e\in E
+    \ \middle|\;
+    \begin{array}{l}
+      \partial_G(e,\mathsf{source})\in A,\;
+      \partial_G(e,\mathsf{target})\notin A,\\
+      \text{または }\partial_G(e,\mathsf{source})\notin A,\;
+      \partial_G(e,\mathsf{target})\in A
+    \end{array}
+  \right\}
+\right|
+&&\bigl(\because\ \sigma\mapsto A_\sigma\text{ は全単射で各辺数を保存する}\bigr).
+\end{aligned}\]
+全ての集合は有限であり、次数と辺数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全ての辺を横切る頂点二分割と係数対称性]\label{lab:theorem_full_cut_coefficient_symmetry}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属すると仮定する。すなわち、全ての 
+$e\in E$
+ について
+
+\[\begin{aligned}
+&\partial_G(e,\mathsf{source})\in A,\;
+\partial_G(e,\mathsf{target})\notin A,\\
+&\text{または }\partial_G(e,\mathsf{source})\notin A,\;
+\partial_G(e,\mathsf{target})\in A
+\end{aligned}\]
+が成り立つ。このとき、全ての 
+$m\in\{0,1,\ldots,|E|\}$
+ について
+
+\[\Omega_G(m)=\Omega_G(|E|-m)\in\mathbb N.\]
+\end{theorem}
+\begin{proof}
+配位 
+$\sigma\in\mathcal S_G$
+ に対し、頂点部分集合 
+$A$
+ 上だけスピンを反転する写像 
+$T_A:\mathcal S_G\to\mathcal S_G$
+ を
+
+\[T_A(\sigma)(v):=
+\begin{cases}
+  \nu(\sigma(v)) & (v\in A),\\
+  \sigma(v) & (v\notin A)
+\end{cases}
+\qquad(v\in V)\]
+で定める。
+\cref{lab:def_spin_label_reversal}
+ より任意の 
+$a\in\mathsf{Spin}$
+ に対して 
+$\nu(\nu(a))=a$
+ なので、任意の 
+$v\in V$
+ について
+
+\[\begin{aligned}
+T_A(T_A(\sigma))(v)
+&=\nu(T_A(\sigma)(v))
+&&\bigl(\because\ v\in A\text{ と }T_A\text{ の定義}\bigr)\\
+&=\nu(\nu(\sigma(v)))
+&&\bigl(\because\ v\in A\text{ と }T_A\text{ の定義}\bigr)\\
+&=\sigma(v)
+&&\bigl(\because\ \nu(\nu(a))=a\bigr)
+\qquad(v\in A),\\[4pt]
+T_A(T_A(\sigma))(v)
+&=T_A(\sigma)(v)
+&&\bigl(\because\ v\notin A\text{ と }T_A\text{ の定義}\bigr)\\
+&=\sigma(v)
+&&\bigl(\because\ v\notin A\text{ と }T_A\text{ の定義}\bigr)
+\qquad(v\notin A).
+\end{aligned}\]
+したがって 
+$T_A$
+ は有限集合 
+$\mathcal S_G$
+ 上の対合であり、全単射である。仮定より任意の 
+$e\in E$
+ の二端点のうちちょうど一方だけでスピンが反転する。
+\cref{lab:def_broken_edge_set}
+ とスピンラベルが二元であることより、
+
+\[\begin{aligned}
+e\in B_G(T_A(\sigma))
+&\iff e\notin B_G(\sigma)
+&&\bigl(\because\ e\text{ の二端点のうちちょうど一方だけでスピンを反転する}\bigr),\\
+B_G(T_A(\sigma))
+&=E\setminus B_G(\sigma)
+&&\bigl(\because\ E\text{ の全ての元について所属が同値}\bigr),\\
+b_G(T_A(\sigma))
+&=|E|-b_G(\sigma)
+&&\bigl(\because\ \text{有限集合の補集合の元数}\bigr).
+\end{aligned}\]
+各 
+$m\in\{0,1,\ldots,|E|\}$
+ に対し、
+$T_A$
+ は有限集合 
+$\{\sigma\in\mathcal S_G\mid b_G(\sigma)=m\}$
+ から有限集合 
+$\{\sigma\in\mathcal S_G\mid b_G(\sigma)=|E|-m\}$
+ への全単射を与える。
+\cref{lab:def_broken_edge_multiplicity}
+ より
+
+\[\begin{aligned}
+\Omega_G(m)
+&=\left|\{\sigma\in\mathcal S_G\mid b_G(\sigma)=m\}\right|
+&&\bigl(\because\ \text{破れ辺数の多重度の定義}\bigr)\\
+&=\left|\{\sigma\in\mathcal S_G\mid b_G(\sigma)=|E|-m\}\right|
+&&\bigl(\because\ T_A\text{ が二つの有限集合の間の全単射}\bigr)\\
+&=\Omega_G(|E|-m)
+&&\bigl(\because\ \text{破れ辺数の多重度の定義}\bigr).
+\end{aligned}\]
+全ての集合は有限であり、多重度と辺数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[係数対称性による全辺二分割の特徴付け]\label{lab:theorem_coefficient_symmetry_characterizes_full_cut}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、次の二条件は同値である。
+
+ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての 
+$e\in E$
+ について二端点のうちちょうど一方だけが 
+$A$
+ に属する。
+
+全ての 
+$m\in\{0,1,\ldots,|E|\}$
+ について
+
+\[\Omega_G(m)=\Omega_G(|E|-m)\in\mathbb N.\]
+\end{theorem}
+\begin{proof}
+全ての辺の二端点のうちちょうど一方だけを含む頂点部分集合が存在すると仮定する。
+\cref{lab:theorem_full_cut_coefficient_symmetry}
+ より、全ての 
+$m\in\{0,1,\ldots,|E|\}$
+ について係数対称性が成り立つ。
+
+逆に、全ての 
+$m\in\{0,1,\ldots,|E|\}$
+ について係数対称性が成り立つと仮定する。配位 
+$\sigma_{\mathsf{down}}:V\to\mathsf{Spin}$
+ を
+
+\[\sigma_{\mathsf{down}}(v):=\mathsf{down}
+\qquad(v\in V)\]
+で定める。
+\cref{lab:def_spin_configuration_set}
+ より 
+$\sigma_{\mathsf{down}}\in\mathcal S_G$
+ である。
+\cref{lab:def_broken_edge_set}
+ より
+
+\[\begin{aligned}
+B_G(\sigma_{\mathsf{down}})
+&=\varnothing
+&&\bigl(\because\ \text{全頂点のスピンラベルが }\mathsf{down}\text{ で等しい}\bigr)\\
+b_G(\sigma_{\mathsf{down}})
+&=0
+&&\bigl(\because\ |\varnothing|=0\bigr).
+\end{aligned}\]
+\cref{lab:def_broken_edge_multiplicity}
+ より
+
+\[\begin{aligned}
+\Omega_G(0)
+&=\left|\left\{\sigma\in\mathcal S_G\ \middle|\ b_G(\sigma)=0\right\}\right|
+&&\bigl(\because\ \text{破れ辺数の多重度の定義}\bigr)\\
+&\ge 1
+&&\bigl(\because\ \sigma_{\mathsf{down}}\text{ がこの有限集合に属する}\bigr).
+\end{aligned}\]
+仮定した係数対称性へ 
+$m=0$
+ を適用すると
+
+\[\begin{aligned}
+\Omega_G(|E|)
+&=\Omega_G(0)
+&&\bigl(\because\ \text{係数対称性の仮定を }m=0\text{ に適用}\bigr)\\
+&\ge 1
+&&\bigl(\because\ \Omega_G(0)\ge 1\bigr).
+\end{aligned}\]
+\cref{lab:def_broken_edge_multiplicity}
+ より、ある配位 
+$\sigma_*\in\mathcal S_G$
+ が存在して 
+$b_G(\sigma_*)=|E|$
+ である。
+\cref{lab:def_broken_edge_set}
+ より 
+$B_G(\sigma_*)\subseteq E$
+ なので
+
+\[\begin{aligned}
+|B_G(\sigma_*)|
+&=|E|
+&&\bigl(\because\ b_G(\sigma_*)=|E|\text{ と破れ辺数の定義}\bigr)\\
+B_G(\sigma_*)
+&=E
+&&\bigl(\because\ B_G(\sigma_*)\subseteq E\text{ かつ二つの有限集合の元数が等しい}\bigr).
+\end{aligned}\]
+頂点部分集合 
+$A_*\subseteq V$
+ を
+
+\[A_*:=\{v\in V\mid \sigma_*(v)=\mathsf{up}\}\]
+で定める。任意の 
+$e\in E$
+ に対し、直前の集合等式と 
+\cref{lab:def_broken_edge_set}
+ より
+
+\[\begin{aligned}
+e
+&\in B_G(\sigma_*)
+&&\bigl(\because\ B_G(\sigma_*)=E\bigr)\\
+\sigma_*\!\left(\partial_G(e,\mathsf{source})\right)
+&\ne
+\sigma_*\!\left(\partial_G(e,\mathsf{target})\right)
+&&\bigl(\because\ \text{破れ辺集合の定義}\bigr).
+\end{aligned}\]
+\cref{lab:def_spin_label_set}
+ の元は相異なる二つのラベル 
+$\mathsf{up},\mathsf{down}$
+ だけなので、各辺の二端点のうちちょうど一方の 
+$\sigma_*$
+ 値が 
+$\mathsf{up}$
+ である。したがって各辺の二端点のうちちょうど一方だけが 
+$A_*$
+ に属する。全ての集合は有限であり、多重度と辺数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全辺二分割をもつ有限グラフの正の有理評価における逆数対称性]\label{lab:theorem_full_cut_positive_rational_evaluation_reciprocity}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属すると仮定する。このとき、任意の正の有理数 
+$q\in\mathbb Q_{>0}$
+ について
+
+\[Z_G(q)=q^{|E|}Z_G(q^{-1})\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:def_ising_partition_polynomial}
+ と 
+\cref{lab:def_broken_edge_multiplicity}
+ より、正の有理数 
+$q$
+ における評価は多重度の有限和である。さらに 
+\cref{lab:theorem_full_cut_coefficient_symmetry}
+ より係数は辺数を中心に対称である。したがって
+
+\[\begin{aligned}
+Z_G(q)
+&=\sum_{m=0}^{|E|}\Omega_G(m)q^m
+&&\bigl(\because\ \text{Ising 分配多項式の定義を }q\text{ で評価}\bigr)\\
+&=\sum_{m=0}^{|E|}\Omega_G(|E|-m)q^m
+&&\bigl(\because\ \text{全辺二分割による係数対称性}\bigr)\\
+&=\sum_{n=0}^{|E|}\Omega_G(n)q^{|E|-n}
+&&\bigl(\because\ n=|E|-m\text{ による有限和の添字付け替え}\bigr)\\
+&=\sum_{n=0}^{|E|}\Omega_G(n)q^{|E|}q^{-n}
+&&\bigl(\because\ q^{|E|-n}=q^{|E|}q^{-n}\bigr)\\
+&=q^{|E|}\sum_{n=0}^{|E|}\Omega_G(n)q^{-n}
+&&\bigl(\because\ \text{有限和の分配律}\bigr)\\
+&=q^{|E|}Z_G(q^{-1})
+&&\bigl(\because\ q^{-1}\in\mathbb Q_{>0}\text{ と Ising 分配多項式の定義}\bigr).
+\end{aligned}\]
+評価点と評価値は有理数、多重度と辺数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[多項式逆数対称性による全辺二分割の特徴付け]\label{lab:theorem_partition_polynomial_reciprocity_characterizes_full_cut}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、次の二条件は同値である。
+
+ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属する。
+
+不定元 
+$x$
+ の整数係数 Laurent 多項式環 
+$\mathbb Z[x,x^{-1}]$
+ において
+
+\[Z_G(x)=x^{|E|}Z_G(x^{-1}).\]
+\end{theorem}
+\begin{proof}
+全ての辺の二端点のうちちょうど一方だけを含む頂点部分集合が存在すると仮定する。
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ と 
+\cref{lab:theorem_full_cut_coefficient_symmetry}
+ より、整数係数 Laurent 多項式環で
+
+\[\begin{aligned}
+x^{|E|}Z_G(x^{-1})
+&=x^{|E|}\sum_{m=0}^{|E|}\Omega_G(m)x^{-m}
+&&\bigl(\because\ \text{多重度による係数表示へ }x^{-1}\text{ を代入}\bigr)\\
+&=\sum_{m=0}^{|E|}x^{|E|}\Omega_G(m)x^{-m}
+&&\bigl(\because\ \text{有限和に対する分配律}\bigr)\\
+&=\sum_{m=0}^{|E|}\Omega_G(m)x^{|E|}x^{-m}
+&&\bigl(\because\ \text{Laurent 多項式環の乗法の可換律}\bigr)\\
+&=\sum_{m=0}^{|E|}\Omega_G(m)x^{|E|-m}
+&&\bigl(\because\ \text{整数指数の加法則}\bigr)\\
+&=\sum_{n=0}^{|E|}\Omega_G(|E|-n)x^n
+&&\bigl(\because\ n=|E|-m\text{ による有限和の添字付け替え}\bigr)\\
+&=\sum_{n=0}^{|E|}\Omega_G(n)x^n
+&&\bigl(\because\ \text{全辺二分割による係数対称性}\bigr)\\
+&=Z_G(x)
+&&\bigl(\because\ \text{多重度による係数表示}\bigr).
+\end{aligned}\]
+逆に、整数係数 Laurent 多項式環で 
+$Z_G(x)=x^{|E|}Z_G(x^{-1})$
+ と仮定する。Laurent 多項式 
+$P$
+ と整数 
+$k\in\mathbb Z$
+ に対し、
+$[x^k]P\in\mathbb Z$
+ を 
+$x^k$
+ の係数と書く。任意の 
+$m\in\{0,1,\ldots,|E|\}$
+ について
+
+\[\begin{aligned}
+\Omega_G(m)
+&=[x^m]Z_G(x)
+&&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
+&=[x^m]\!\left(x^{|E|}Z_G(x^{-1})\right)
+&&\bigl(\because\ \text{仮定した Laurent 多項式の等式}\bigr)\\
+&=[x^m]\!\left(x^{|E|}\sum_{n=0}^{|E|}\Omega_G(n)x^{-n}\right)
+&&\bigl(\because\ \text{多重度による係数表示へ }x^{-1}\text{ を代入}\bigr)\\
+&=\Omega_G(|E|-m)
+&&\bigl(\because\ \text{Laurent 多項式の係数の定義}\bigr).
+\end{aligned}\]
+したがって全ての 
+$m\in\{0,1,\ldots,|E|\}$
+ について係数対称性が成り立つ。
+\cref{lab:theorem_coefficient_symmetry_characterizes_full_cut}
+ より、全ての辺の二端点のうちちょうど一方だけを含む頂点部分集合が存在する。多重度と辺数は自然数、Laurent 多項式の係数は整数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全辺二分割をもつ有限グラフの Fisher 零点重複度の逆数対称性]\label{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属すると仮定する。
+\cref{lab:def_ising_partition_polynomial}
+ の係数を標準単射 
+$\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]$
+ で移した多項式を
+
+\[\overline P_G(x):=\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}\!\left(Z_G(x)\right)
+\in\overline{\mathbb Q}[x]\]
+と置く。各 
+$\alpha\in\overline{\mathbb Q}$
+ の零点重複度を
+
+\[\mu_G(\alpha):=
+\max\left\{
+  k\in\mathbb N
+  \,\middle|\,
+  (x-\alpha)^k\mid\overline P_G(x)
+  \text{ in }\overline{\mathbb Q}[x]
+\right\}
+\in\mathbb N\]
+で定める。このとき任意の 
+$\alpha\in\overline{\mathbb Q}^{\times}$
+ について
+
+\[\mu_G(\alpha^{-1})=\mu_G(\alpha).\]
+特に、非零 Fisher 零点は逆数を取る写像で重複度ごとに保たれる。
+
+\end{theorem}
+\begin{proof}
+全頂点下向き配位 
+$\sigma_{\mathsf{down}}\in\mathcal S_G$
+ は破れ辺数零をもつので、
+\cref{lab:def_broken_edge_multiplicity}
+ より
+
+\[\Omega_G(0)\geq1.\]
+\cref{lab:theorem_full_cut_coefficient_symmetry}
+ を 
+$m=0$
+ に適用すると
+
+\[\Omega_G(|E|)=\Omega_G(0)\geq1.\]
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ より
+
+\[\deg\overline P_G=|E|,
+\qquad
+\overline P_G(0)=\Omega_G(0)\ne0.\]
+したがって 
+$\overline P_G$
+ は非零多項式であり、零点重複度を定める集合は 
+$k=0$
+ を含み、
+$|E|$
+ 以下なので、
+$\mu_G(\alpha)$
+ は全ての 
+$\alpha\in\overline{\mathbb Q}$
+ で一意に定まる。
+
+$\alpha\in\overline{\mathbb Q}^{\times}$
+ を固定し、
+$r:=\mu_G(\alpha)\in\mathbb N$
+ と置く。重複度の定義より、ある 
+$Q_\alpha(x)\in\overline{\mathbb Q}[x]$
+ が一意に存在して
+
+\[\overline P_G(x)=(x-\alpha)^rQ_\alpha(x),
+\qquad
+Q_\alpha(\alpha)\ne0,
+\qquad
+\deg Q_\alpha=|E|-r.\]
+\cref{lab:theorem_partition_polynomial_reciprocity_characterizes_full_cut}
+ の順方向を標準単射で 
+$\overline{\mathbb Q}[x,x^{-1}]$
+ へ移し、直前の因子分解を代入すると
+
+\[\begin{aligned}
+\overline P_G(x)
+&=x^{|E|}\overline P_G(x^{-1})
+&&\bigl(\because\ \text{全辺二分割による多項式逆数対称性}\bigr)\\
+&=x^{|E|}(x^{-1}-\alpha)^rQ_\alpha(x^{-1})
+&&\bigl(\because\ \overline P_G(x^{-1})=(x^{-1}-\alpha)^rQ_\alpha(x^{-1})\bigr)\\
+&=x^{|E|-r}(1-\alpha x)^rQ_\alpha(x^{-1})
+&&\bigl(\because\ x^{-1}-\alpha=x^{-1}(1-\alpha x)\bigr)\\
+&=(-\alpha)^r(x-\alpha^{-1})^r x^{|E|-r}Q_\alpha(x^{-1})
+&&\bigl(\because\ 1-\alpha x=-\alpha(x-\alpha^{-1})\bigr).
+\end{aligned}\]
+$\deg Q_\alpha=|E|-r$
+ なので、逆順多項式
+
+\[R_\alpha(x):=x^{|E|-r}Q_\alpha(x^{-1})
+\in\overline{\mathbb Q}[x]\]
+は次を満たす。
+
+\[\begin{aligned}
+R_\alpha(\alpha^{-1})
+&=(\alpha^{-1})^{|E|-r}Q_\alpha(\alpha)
+&&\bigl(\because\ R_\alpha\text{ の定義へ }x=\alpha^{-1}\text{ を代入}\bigr)\\
+&\ne0
+&&\bigl(\because\ \alpha\ne0\text{ かつ }Q_\alpha(\alpha)\ne0\bigr).
+\end{aligned}\]
+また 
+$(-\alpha)^r\ne0$
+ である。したがって直前の因子分解における 
+$x-\alpha^{-1}$
+ の指数はちょうど 
+$r$
+ であり、
+
+\[\mu_G(\alpha^{-1})=r=\mu_G(\alpha).\]
+多項式と係数は 
+$\overline{\mathbb Q}$
+、重複度と辺数は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全辺二分割をもつ有限グラフの Fisher 零点積]\label{lab:theorem_full_cut_fisher_zero_product}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属すると仮定する。
+\cref{lab:def_ising_partition_polynomial}
+ の係数を標準単射で 
+$\overline{\mathbb Q}[x]$
+ へ移した多項式を 
+$\overline P_G(x)$
+ と書く。重複度を込めた全ての零点を 
+$\alpha_1,\ldots,\alpha_{|E|}\in\overline{\mathbb Q}$
+ と書くとき、
+
+\[\prod_{j=1}^{|E|}\alpha_j=(-1)^{|E|}\quad\text{in }\overline{\mathbb Q}.\]
+$E=\varnothing$
+ の場合、左辺は空積 
+$1\in\overline{\mathbb Q}$
+ である。
+
+\end{theorem}
+\begin{proof}
+全頂点下向き配位は破れ辺数零をもつので、
+\cref{lab:def_broken_edge_multiplicity}
+ より
+
+\[\Omega_G(0)\geq1.\]
+\cref{lab:theorem_full_cut_coefficient_symmetry}
+ を 
+$m=0$
+ に適用すると
+
+\[\Omega_G(|E|)=\Omega_G(0)\geq1.\]
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ より 
+$\deg\overline P_G=|E|$
+ かつ 
+$\overline P_G(0)=\Omega_G(0)\ne0$
+ である。代数的閉体 
+$\overline{\mathbb Q}$
+ 上の一次因子分解により、重複度を込めた零点 
+$\alpha_1,\ldots,\alpha_{|E|}$
+ を選んで
+
+\[\overline P_G(x)
+=\Omega_G(|E|)\prod_{j=1}^{|E|}(x-\alpha_j)\]
+と書ける。したがって、
+
+\[\begin{aligned}
+\Omega_G(0)
+&=\overline P_G(0)
+&&\bigl(\because\ \text{定数項の定義}\bigr)\\
+&=\Omega_G(|E|)\prod_{j=1}^{|E|}(0-\alpha_j)
+&&\bigl(\because\ \text{一次因子分解へ }x=0\text{ を代入}\bigr)\\
+&=\Omega_G(|E|)(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j
+&&\bigl(\because\ \text{有限積の各因子から }-1\text{ を取り出す}\bigr).
+\end{aligned}\]
+\cref{lab:theorem_full_cut_coefficient_symmetry}
+ を再び 
+$m=0$
+ に適用すると
+
+\[\Omega_G(|E|)(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j
+=\Omega_G(0)(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j.\]
+直前の二つの等式より
+
+\[\Omega_G(0)=\Omega_G(0)(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j.\]
+$\Omega_G(0)\ne0$
+ なので、代数的数の体の消去律より
+
+\[1=(-1)^{|E|}\prod_{j=1}^{|E|}\alpha_j.\]
+$(-1)^{2|E|}=1$
+ なので、
+
+\[\prod_{j=1}^{|E|}\alpha_j=(-1)^{|E|}.\]
+零点と積は 
+$\overline{\mathbb Q}$
+、多重度と辺数は自然数、係数は整数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全辺二分割をもつ有限グラフの零点 -1 の重複度の偶奇]\label{lab:theorem_full_cut_fisher_zero_minus_one_multiplicity_parity}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属すると仮定する。
+\cref{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+ の零点重複度 
+$\mu_G:\overline{\mathbb Q}\to\mathbb N$
+ について、零点 
+$-1\in\overline{\mathbb Q}$
+ の重複度と辺数の偶奇は一致する。すなわち
+
+\[\mu_G(-1)\equiv |E|\pmod 2.\]
+\end{theorem}
+\begin{proof}
+全頂点下向き配位は破れ辺数零をもつので、
+\cref{lab:def_broken_edge_multiplicity}
+ より
+
+\[\Omega_G(0)\geq1.\]
+\cref{lab:theorem_full_cut_coefficient_symmetry}
+ を 
+$m=0$
+ に適用すると
+
+\[\Omega_G(|E|)=\Omega_G(0)\geq1.\]
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ より
+
+\[\deg\overline P_G=|E|,
+\qquad
+\overline P_G(0)=\Omega_G(0)\ne0.\]
+したがって零点台を
+
+\[\mathcal Z_G:=
+\left\{
+  \alpha\in\overline{\mathbb Q}^{\times}
+  \;\middle|\;
+  \mu_G(\alpha)>0
+\right\}\]
+と書ける。これは 
+$\overline P_G$
+ の有限な零点集合である。さらに、
+\cref{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+ より逆数写像 
+$\alpha\mapsto\alpha^{-1}$
+ は 
+$\mathcal Z_G$
+ を保ち、各零点の重複度を保つ。
+
+\[\mu_G(\alpha^{-1})=\mu_G(\alpha)
+\quad\text{for every }\alpha\in\mathcal Z_G.\]
+$\alpha\in\mathcal Z_G$
+ が逆数写像の固定点ならば、代数的数の体で
+
+\[\begin{aligned}
+\alpha
+&=\alpha^{-1}
+&&\bigl(\because\ \text{逆数写像の固定点である}\bigr)\\
+\alpha^2
+&=1
+&&\bigl(\because\ \alpha\ne0\text{ なので両辺へ }\alpha\text{ を掛ける}\bigr)\\
+\alpha^2-1
+&=0
+&&\bigl(\because\ \text{両辺から }1\text{ を引く}\bigr)\\
+(\alpha-1)(\alpha+1)
+&=0
+&&\bigl(\because\ \alpha^2-1=(\alpha-1)(\alpha+1)\bigr).
+\end{aligned}\]
+$\overline{\mathbb Q}$
+ は体なので、固定点は 
+$\alpha\in\{-1,1\}$
+ に限られる。ゆえに 
+$\mathcal Z_G\setminus\{-1,1\}$
+ は逆数写像の二元軌道へ分割され、各軌道 
+$\{\alpha,\alpha^{-1}\}$
+ の重複度総和は
+
+\[\begin{aligned}
+\mu_G(\alpha)+\mu_G(\alpha^{-1})
+&=\mu_G(\alpha)+\mu_G(\alpha)
+&&\bigl(\because\ \text{逆数による重複度保存}\bigr)\\
+&=2\mu_G(\alpha)
+&&\bigl(\because\ \mathbb N\text{ の加法}\bigr).
+\end{aligned}\]
+したがって
+
+\[\sum_{\alpha\in\mathcal Z_G\setminus\{-1,1\}}\mu_G(\alpha)
+\equiv0\pmod2.\]
+\cref{lab:claim_partition_polynomial_value_at_one}
+ を標準単射で移すと
+
+\[\begin{aligned}
+\overline P_G(1)
+&=2^{|V|}
+&&\bigl(\because\ Z_G(1)=2^{|V|}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}>0\bigr).
+\end{aligned}\]
+\[\mu_G(1)=0
+\quad\bigl(\because\ \overline P_G(1)\ne0\bigr).\]
+代数的閉体上の一次因子分解における重複度総和は多項式の次数に等しく、
+上で得た 
+$\deg\overline P_G=|E|$
+ なので
+
+\[\begin{aligned}
+|E|
+&=\sum_{\alpha\in\mathcal Z_G}\mu_G(\alpha)
+&&\bigl(\because\ \text{一次因子分解における重複度総和}\bigr)\\
+&=\mu_G(-1)+\mu_G(1)
+  +\sum_{\alpha\in\mathcal Z_G\setminus\{-1,1\}}\mu_G(\alpha)
+&&\bigl(\because\ \mu_G\text{ は零点台の外で零、有限零点台を三部分へ分割}\bigr)\\
+&\equiv\mu_G(-1)+\mu_G(1)\pmod2
+&&\bigl(\because\ \text{非固定軌道の重複度総和は偶数}\bigr)\\
+&=\mu_G(-1)\pmod2
+&&\bigl(\because\ \mu_G(1)=0\bigr).
+\end{aligned}\]
+零点は 
+$\overline{\mathbb Q}$
+、重複度と辺数は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全辺二分割をもつ有限グラフの零点 -1 を除く Fisher 零点積]\label{lab:theorem_full_cut_fisher_zero_product_away_from_minus_one}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属すると仮定する。
+\cref{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+ の零点重複度を 
+$\mu_G:\overline{\mathbb Q}\to\mathbb N$
+ とし、非零 Fisher 零点の有限集合を
+
+\[\mathcal Z_G:=
+\left\{
+  \alpha\in\overline{\mathbb Q}^{\times}
+  \;\middle|\;
+  \mu_G(\alpha)>0
+\right\}\]
+と置く。このとき零点 
+$-1$
+ を除く重複度込み積は
+
+\[\prod_{\alpha\in\mathcal Z_G\setminus\{-1\}}
+\alpha^{\mu_G(\alpha)}=1
+\quad\text{in }\overline{\mathbb Q}.\]
+$\mathcal Z_G\setminus\{-1\}=\varnothing$
+ の場合、左辺は空積 
+$1\in\overline{\mathbb Q}$
+ である。
+
+\end{theorem}
+\begin{proof}
+\cref{lab:claim_partition_polynomial_value_at_one}
+ を標準単射で 
+$\overline{\mathbb Q}$
+ へ移すと
+
+\[\begin{aligned}
+\overline P_G(1)
+&=2^{|V|}
+&&\bigl(\because\ Z_G(1)=2^{|V|}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}>0\bigr).
+\end{aligned}\]
+\[\mu_G(1)=0
+\quad\bigl(\because\ \overline P_G(1)\ne0\bigr).\]
+\cref{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+ より、逆数写像は 
+$\mathcal Z_G$
+ と各零点の重複度を保つ。さらに 
+$\alpha\in\overline{\mathbb Q}^{\times}$
+ が逆数写像の固定点ならば
+
+\[\begin{aligned}
+\alpha
+&=\alpha^{-1}
+&&\bigl(\because\ \text{逆数写像の固定点である}\bigr)\\
+\alpha^2
+&=1
+&&\bigl(\because\ \alpha\ne0\text{ なので両辺へ }\alpha\text{ を掛ける}\bigr)\\
+\alpha^2-1
+&=0
+&&\bigl(\because\ \text{両辺から }1\text{ を引く}\bigr)\\
+(\alpha-1)(\alpha+1)
+&=0
+&&\bigl(\because\ \alpha^2-1=(\alpha-1)(\alpha+1)\bigr).
+\end{aligned}\]
+$\overline{\mathbb Q}$
+ は体であり、
+$\mu_G(1)=0$
+ なので、
+$\mathcal Z_G\setminus\{-1\}$
+ は相異なる二元からなる逆数軌道 
+$\{\alpha,\alpha^{-1}\}$
+ へ分割される。その軌道全体からなる有限集合を
+
+\[\mathcal O_G:=
+\left\{
+  \{\alpha,\alpha^{-1}\}
+  \;\middle|\;
+  \alpha\in\mathcal Z_G\setminus\{-1\}
+\right\}\]
+と置く。各 
+$O=\{\alpha,\alpha^{-1}\}\in\mathcal O_G$
+ について
+
+\[\begin{aligned}
+\prod_{\beta\in O}\beta^{\mu_G(\beta)}
+&=\alpha^{\mu_G(\alpha)}(\alpha^{-1})^{\mu_G(\alpha^{-1})}
+&&\bigl(\because\ O=\{\alpha,\alpha^{-1}\}\text{ かつ }\alpha\ne\alpha^{-1}\bigr)\\
+&=\alpha^{\mu_G(\alpha)}(\alpha^{-1})^{\mu_G(\alpha)}
+&&\bigl(\because\ \mu_G(\alpha^{-1})=\mu_G(\alpha)\bigr)\\
+&=(\alpha\alpha^{-1})^{\mu_G(\alpha)}
+&&\bigl(\because\ \text{可換体における同じ自然数冪の積}\bigr)\\
+&=1
+&&\bigl(\because\ \alpha\ne0\text{ かつ }\alpha\alpha^{-1}=1\bigr).
+\end{aligned}\]
+したがって有限な逆数軌道全体にわたって積を取ると
+
+\[\begin{aligned}
+\prod_{\alpha\in\mathcal Z_G\setminus\{-1\}}\alpha^{\mu_G(\alpha)}
+&=\prod_{O\in\mathcal O_G}\prod_{\beta\in O}\beta^{\mu_G(\beta)}
+&&\bigl(\because\ \text{有限集合の逆数二元軌道による分割}\bigr)\\
+&=\prod_{O\in\mathcal O_G}1
+&&\bigl(\because\ \text{各逆数軌道の積は }1\bigr)\\
+&=1
+&&\bigl(\because\ \text{有限個の }1\text{ の積、空積も }1\bigr).
+\end{aligned}\]
+零点と積は 
+$\overline{\mathbb Q}$
+、重複度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全辺二分割をもつ有限グラフの Fisher 零点台の奇偶による奇接続辺数頂点の特徴付け]\label{lab:theorem_full_cut_fisher_zero_support_parity_characterization}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属すると仮定する。
+\cref{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+ の零点重複度を 
+$\mu_G:\overline{\mathbb Q}\to\mathbb N$
+ とし、非零 Fisher 零点の有限集合を
+
+\[\mathcal Z_G:=
+\left\{
+  \alpha\in\overline{\mathbb Q}^{\times}
+  \;\middle|\;
+  \mu_G(\alpha)>0
+\right\}\]
+と置く。各 
+$w\in V$
+ に接続する辺の有限集合を
+
+\[I_w:=
+\left\{
+  e\in E
+  \;\middle|\;
+  \partial_G(e,\mathsf{source})=w
+  \quad\text{または}\quad
+  \partial_G(e,\mathsf{target})=w
+\right\}\]
+と置く。このとき、Fisher 零点台の元数が奇数であることと、奇数本の辺が接続する頂点が存在することは同値である。すなわち
+
+\[|\mathcal Z_G|\in\{2n+1\mid n\in\mathbb N\}
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad |I_w|\in\{2n+1\mid n\in\mathbb N\}.\]
+\end{theorem}
+\begin{proof}
+全頂点下向き配位は破れ辺数零をもつので、
+\cref{lab:def_broken_edge_multiplicity}
+ より 
+$\Omega_G(0)\geq1$
+ である。
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ を標準単射で 
+$\overline{\mathbb Q}$
+ へ移すと
+
+\[\begin{aligned}
+\overline P_G(0)
+&=\Omega_G(0)
+&&\bigl(\because\ \text{定数項の定義}\bigr)\\
+&\ne0
+&&\bigl(\because\ \Omega_G(0)\geq1\bigr).
+\end{aligned}\]
+\[\mu_G(0)=0
+\quad\bigl(\because\ \overline P_G(0)\ne0\bigr).\]
+したがって 
+$\mathcal Z_G$
+ は相異なる Fisher 零点全体の有限集合である。
+
+\cref{lab:claim_partition_polynomial_value_at_one}
+ を標準単射で 
+$\overline{\mathbb Q}$
+ へ移すと
+
+\[\begin{aligned}
+\overline P_G(1)
+&=2^{|V|}
+&&\bigl(\because\ Z_G(1)=2^{|V|}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}>0\bigr).
+\end{aligned}\]
+\[\mu_G(1)=0
+\quad\bigl(\because\ \overline P_G(1)\ne0\bigr).\]
+\cref{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+ より、逆数写像は 
+$\mathcal Z_G$
+ を保つ。さらに 
+$\alpha\in\overline{\mathbb Q}^{\times}$
+ が逆数写像の固定点ならば
+
+\[\begin{aligned}
+\alpha
+&=\alpha^{-1}
+&&\bigl(\because\ \text{逆数写像の固定点である}\bigr)\\
+\alpha^2
+&=1
+&&\bigl(\because\ \alpha\ne0\text{ なので両辺へ }\alpha\text{ を掛ける}\bigr)\\
+\alpha^2-1
+&=0
+&&\bigl(\because\ \text{両辺から }1\text{ を引く}\bigr)\\
+(\alpha-1)(\alpha+1)
+&=0
+&&\bigl(\because\ \alpha^2-1=(\alpha-1)(\alpha+1)\bigr).
+\end{aligned}\]
+$\overline{\mathbb Q}$
+ は体であり、
+$\mu_G(1)=0$
+ なので、
+$\mathcal Z_G\setminus\{-1\}$
+ は相異なる二元からなる逆数軌道へ分割される。その軌道全体の有限集合を 
+$\mathcal O_G$
+ と置く。また
+
+\[\varepsilon_G:=
+\begin{cases}
+1,&\mu_G(-1)>0,\\
+0,&\mu_G(-1)=0
+\end{cases}
+\in\mathbb N\]
+と置く。有限集合の二元軌道による分割から
+
+\[|\mathcal Z_G|=2|\mathcal O_G|+\varepsilon_G
+\quad\bigl(\because\ -1\text{ だけが }\mathcal Z_G\text{ に属し得る逆数固定点である}\bigr).\]
+したがって、
+\cref{lab:theorem_root_minus_one_characterizes_odd_incident_edge_count}
+ と上の定義を順に用いると
+
+\[\begin{aligned}
+|\mathcal Z_G|\in\{2n+1\mid n\in\mathbb N\}
+&\Longleftrightarrow\varepsilon_G=1
+&&\bigl(\because\ |\mathcal Z_G|=2|\mathcal O_G|+\varepsilon_G\bigr)\\
+&\Longleftrightarrow\mu_G(-1)>0
+&&\bigl(\because\ \varepsilon_G\text{ の定義}\bigr)\\
+&\Longleftrightarrow\overline P_G(-1)=0
+&&\bigl(\because\ \mu_G(-1)\text{ は零点重複度である}\bigr)\\
+&\Longleftrightarrow Z_G(-1)=0
+&&\bigl(\because\ \mathbb Z\hookrightarrow\overline{\mathbb Q}\text{ は単射である}\bigr)\\
+&\Longleftrightarrow\exists w\in V,\quad |I_w|\in\{2n+1\mid n\in\mathbb N\}
+&&\bigl(\because\ \text{零点 }-1\text{ による奇接続辺数頂点の特徴付け}\bigr),
+\end{aligned}\]
+零点は 
+$\overline{\mathbb Q}$
+、零点台、逆数軌道、頂点集合、辺集合は有限集合、重複度、元数、接続辺数は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全辺二分割をもつ有限グラフの相異なる Fisher 零点積]\label{lab:theorem_full_cut_distinct_fisher_zero_product}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属すると仮定する。
+\cref{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+ の零点重複度を 
+$\mu_G:\overline{\mathbb Q}\to\mathbb N$
+ とし、相異なる非零 Fisher 零点の有限集合を
+
+\[\mathcal Z_G:=
+\left\{
+  \alpha\in\overline{\mathbb Q}^{\times}
+  \;\middle|\;
+  \mu_G(\alpha)>0
+\right\}\]
+と置く。各 
+$w\in V$
+ に接続する辺の有限集合を
+
+\[I_w:=
+\left\{
+  e\in E
+  \;\middle|\;
+  \partial_G(e,\mathsf{source})=w
+  \quad\text{または}\quad
+  \partial_G(e,\mathsf{target})=w
+\right\}\]
+と置く。このとき、相異なる非零 Fisher 零点の積は
+
+\[\prod_{\alpha\in\mathcal Z_G}\alpha
+=
+\begin{cases}
+-1,&\exists w\in V,\quad |I_w|\in\{2n+1\mid n\in\mathbb N\},\\
+1,&\forall w\in V,\quad |I_w|\in\{2n\mid n\in\mathbb N\}
+\end{cases}
+\quad\text{in }\overline{\mathbb Q}.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:claim_partition_polynomial_value_at_one}
+ を標準単射で 
+$\overline{\mathbb Q}$
+ へ移すと
+
+\[\begin{aligned}
+\overline P_G(1)
+&=2^{|V|}
+&&\bigl(\because\ Z_G(1)=2^{|V|}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}>0\bigr).
+\end{aligned}\]
+\[\mu_G(1)=0
+\quad\bigl(\because\ \overline P_G(1)\ne0\bigr).\]
+\cref{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+ より逆数写像は 
+$\mathcal Z_G$
+ を保つ。また、
+$\alpha\in\overline{\mathbb Q}^{\times}$
+ が逆数写像の固定点ならば
+
+\[\begin{aligned}
+\alpha
+&=\alpha^{-1}
+&&\bigl(\because\ \text{逆数写像の固定点である}\bigr)\\
+\alpha^2
+&=1
+&&\bigl(\because\ \alpha\ne0\text{ なので両辺へ }\alpha\text{ を掛ける}\bigr)\\
+\alpha^2-1
+&=0
+&&\bigl(\because\ \text{両辺から }1\text{ を引く}\bigr)\\
+(\alpha-1)(\alpha+1)
+&=0
+&&\bigl(\because\ \alpha^2-1=(\alpha-1)(\alpha+1)\bigr).
+\end{aligned}\]
+$\overline{\mathbb Q}$
+ は体なので零積律より固定点は 
+$1,-1$
+ だけである。さらに 
+$\mu_G(1)=0$
+ である。したがって 
+$\mathcal Z_G\setminus\{-1\}$
+ は相異なる二元からなる逆数軌道へ分割される。その軌道全体の有限集合を 
+$\mathcal O_G$
+ と置く。各 
+$O\in\mathcal O_G$
+ について、ある 
+$\alpha\in\mathcal Z_G\setminus\{-1\}$
+ が存在して 
+$O=\{\alpha,\alpha^{-1}\}$
+ なので
+
+\[\begin{aligned}
+\prod_{\beta\in O}\beta
+&=\alpha\alpha^{-1}
+&&\bigl(\because\ O=\{\alpha,\alpha^{-1}\}\bigr)\\
+&=1
+&&\bigl(\because\ \alpha\in\overline{\mathbb Q}^{\times}\bigr).
+\end{aligned}\]
+有限集合の逆数軌道による分割と空積の規約から
+
+\[\begin{aligned}
+\prod_{\alpha\in\mathcal Z_G}\alpha
+&=
+\begin{cases}
+(-1)\displaystyle\prod_{O\in\mathcal O_G}\prod_{\beta\in O}\beta,&-1\in\mathcal Z_G,\\
+\displaystyle\prod_{O\in\mathcal O_G}\prod_{\beta\in O}\beta,&-1\notin\mathcal Z_G
+\end{cases}
+&&\bigl(\because\ \mathcal Z_G\text{ の逆数軌道分割}\bigr)\\
+&=
+\begin{cases}
+-1,&-1\in\mathcal Z_G,\\
+1,&-1\notin\mathcal Z_G
+\end{cases}
+&&\bigl(\because\ \text{各二元軌道の積は }1\bigr).
+\end{aligned}\]
+\cref{lab:theorem_root_minus_one_characterizes_odd_incident_edge_count}
+ と零点重複度の定義より
+
+\[\begin{aligned}
+-1\in\mathcal Z_G
+&\Longleftrightarrow\mu_G(-1)>0
+&&\bigl(\because\ \mathcal Z_G\text{ の定義}\bigr)\\
+&\Longleftrightarrow\overline P_G(-1)=0
+&&\bigl(\because\ \mu_G(-1)\text{ は零点重複度である}\bigr)\\
+&\Longleftrightarrow Z_G(-1)=0
+&&\bigl(\because\ \mathbb Z\hookrightarrow\overline{\mathbb Q}\text{ は単射である}\bigr)\\
+&\Longleftrightarrow\exists w\in V,\quad |I_w|\in\{2n+1\mid n\in\mathbb N\}
+&&\bigl(\because\ \text{零点 }-1\text{ による奇接続辺数頂点の特徴付け}\bigr).
+\end{aligned}\]
+自然数の二による除法の一意性より、奇数本の辺が接続する頂点が存在しないことは、全ての頂点で接続辺数が偶数であることと同値である。以上を直前の積の場合分けへ代入すると主張を得る。
+
+零点と積は 
+$\overline{\mathbb Q}$
+、零点台、逆数軌道、頂点集合、辺集合は有限集合、重複度と接続辺数は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[全辺二分割をもつ有限グラフの相異なる Fisher 零点積と零点台の奇偶]\label{lab:theorem_full_cut_distinct_fisher_zero_product_support_parity}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、ある頂点部分集合 
+$A\subseteq V$
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
+$A$
+ に属すると仮定する。
+\cref{lab:theorem_full_cut_fisher_zero_reciprocal_multiplicity}
+ の零点重複度を 
+$\mu_G:\overline{\mathbb Q}\to\mathbb N$
+ とし、相異なる非零 Fisher 零点の有限集合を
+
+\[\mathcal Z_G:=
+\left\{
+  \alpha\in\overline{\mathbb Q}^{\times}
+  \;\middle|\;
+  \mu_G(\alpha)>0
+\right\}\]
+と置く。また、各 
+$w\in V$
+ に接続する辺の有限集合を
+
+\[I_w:=
+\left\{
+  e\in E
+  \;\middle|\;
+  \partial_G(e,\mathsf{source})=w
+  \quad\text{または}\quad
+  \partial_G(e,\mathsf{target})=w
+\right\}\]
+と置く。このとき、相異なる非零 Fisher 零点の積は零点台の元数の奇偶だけで定まり、
+
+\[\prod_{\alpha\in\mathcal Z_G}\alpha
+=(-1)^{|\mathcal Z_G|}
+\quad\text{in }\overline{\mathbb Q}.\]
+\end{theorem}
+\begin{proof}
+自然数の二による除法の一意性より、
+$|\mathcal Z_G|$
+ は偶数または奇数のちょうど一方である。まず、ある 
+$n\in\mathbb N$
+ について 
+$|\mathcal Z_G|=2n+1$
+ と仮定する。
+\cref{lab:theorem_full_cut_fisher_zero_support_parity_characterization}
+ より
+
+\[\exists w\in V,\quad
+|I_w|\in\{2m+1\mid m\in\mathbb N\}
+\quad\bigl(\because\ |\mathcal Z_G|\text{ は奇数である}\bigr).\]
+\cref{lab:theorem_full_cut_distinct_fisher_zero_product}
+ の奇接続辺数頂点が存在する場合を用いると
+
+\[\begin{aligned}
+\prod_{\alpha\in\mathcal Z_G}\alpha
+&=-1
+&&\bigl(\because\ \exists w\in V,\ |I_w|\in\{2m+1\mid m\in\mathbb N\}\bigr)\\
+&=(-1)^{2n+1}
+&&\bigl(\because\ (-1)^{2n}=1\bigr)\\
+&=(-1)^{|\mathcal Z_G|}
+&&\bigl(\because\ |\mathcal Z_G|=2n+1\bigr).
+\end{aligned}\]
+次に、ある 
+$n\in\mathbb N$
+ について 
+$|\mathcal Z_G|=2n$
+ と仮定する。
+\cref{lab:theorem_full_cut_fisher_zero_support_parity_characterization}
+ の同値性の対偶より
+
+\[\neg\left(
+\exists w\in V,\quad |I_w|\in\{2m+1\mid m\in\mathbb N\}
+\right)
+\quad\bigl(\because\ |\mathcal Z_G|\text{ は偶数である}\bigr).\]
+各 
+$|I_w|\in\mathbb N$
+ に二による除法を適用すると
+
+\[\forall w\in V,\quad
+|I_w|\in\{2m\mid m\in\mathbb N\}
+\quad\bigl(\because\ \text{奇数でない自然数は偶数である}\bigr).\]
+\cref{lab:theorem_full_cut_distinct_fisher_zero_product}
+ の全接続辺数が偶数である場合を用いると
+
+\[\begin{aligned}
+\prod_{\alpha\in\mathcal Z_G}\alpha
+&=1
+&&\bigl(\because\ \text{全頂点の接続辺数が偶数である}\bigr)\\
+&=(-1)^{2n}
+&&\bigl(\because\ (-1)^{2n}=1\bigr)\\
+&=(-1)^{|\mathcal Z_G|}
+&&\bigl(\because\ |\mathcal Z_G|=2n\bigr).
+\end{aligned}\]
+以上の二場合で全ての自然数 
+$|\mathcal Z_G|$
+ を尽くすので主張を得る。零点と積は 
+$\overline{\mathbb Q}$
+、零点台は有限集合、重複度と零点台の元数は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{claim}[係数総和]\label{lab:claim_partition_polynomial_value_at_one}
+\[Z_G(1)=\sum_{m=0}^{|E|}\Omega_G(m)=2^{|V|}.\]
+\end{claim}
+\begin{proof}
+\[\begin{aligned}
+Z_G(1)
+&=\sum_{\sigma\in\mathcal S_G}1^{b_G(\sigma)}
+&&\bigl(\because\ \text{Ising 分配多項式の定義}\bigr)\\
+&=\sum_{\sigma\in\mathcal S_G}1
+&&\bigl(\because\ 1^n=1\ \text{for every }n\in\mathbb N\bigr)\\
+&=|\mathcal S_G|
+&&\bigl(\because\ \text{有限集合の元の個数の定義}\bigr)\\
+&=2^{|V|}
+&&\bigl(\because\ \text{各頂点で二つのスピン値を独立に選ぶ}\bigr).
+\end{aligned}\]
+多重度の和との等号は 
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ に 
+$x=1$
+ を代入して得る。
+
+\end{proof}
+
+\begin{theorem}[Ising 分配多項式の正の有理評価の二配位下界]\label{lab:theorem_no_positive_rational_root}
+\cref{lab:def_finite_graph_input}
+ の任意の有限グラフと任意の正の有理数 
+$q\in\mathbb Q_{>0}$
+ について
+
+\[Z_G(q)\ge 2\quad\text{in }\mathbb Q.\]
+特に、正の有理数は Ising 分配多項式の零点ではない。
+
+\end{theorem}
+\begin{proof}
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ の整数係数を自然数から有理数への標準単射で移し、
+$x=q$
+ を代入すると
+
+\[Z_G(q)
+=\sum_{m=0}^{|E|}\Omega_G(m)q^m
+\quad\bigl(\because\ \text{多重度による係数表示}\bigr).\]
+二つの配位 
+$\sigma_{\mathsf{up}},\sigma_{\mathsf{down}}:V\to\mathsf{Spin}$
+ を全ての 
+$v\in V$
+ について 
+$\sigma_{\mathsf{up}}(v):=\mathsf{up}$
+ および 
+$\sigma_{\mathsf{down}}(v):=\mathsf{down}$
+ と定める。
+\cref{lab:def_spin_configuration_set}
+ より
+
+\[\sigma_{\mathsf{up}},\sigma_{\mathsf{down}}\in\mathcal S_G
+\quad\bigl(\because\ \text{いずれも }V\text{ から }\mathsf{Spin}\text{ への写像である}\bigr).\]
+\cref{lab:def_finite_graph_input}
+ より 
+$V$
+ は空でないので、ある 
+$v_*\in V$
+ を選ぶ。すると
+
+\[\begin{aligned}
+\sigma_{\mathsf{up}}(v_*)
+&=\mathsf{up}
+&&\bigl(\because\ \sigma_{\mathsf{up}}\text{ の定義}\bigr)\\
+&\ne\mathsf{down}
+&&\bigl(\because\ \mathsf{up}\ne\mathsf{down}\bigr)\\
+&=\sigma_{\mathsf{down}}(v_*)
+&&\bigl(\because\ \sigma_{\mathsf{down}}\text{ の定義}\bigr).
+\end{aligned}\]
+\[\sigma_{\mathsf{up}}\ne\sigma_{\mathsf{down}}
+\quad\bigl(\because\ v_*\text{ における二つの写像の値が異なる}\bigr).\]
+\cref{lab:def_broken_edge_set}
+ より
+
+\[\begin{aligned}
+B_G(\sigma_{\mathsf{up}})
+&=\varnothing
+&&\bigl(\because\ \text{全頂点のスピンラベルが }\mathsf{up}\text{ で等しい}\bigr)\\
+b_G(\sigma_{\mathsf{up}})
+&=0
+&&\bigl(\because\ |\varnothing|=0\bigr),\\[4pt]
+B_G(\sigma_{\mathsf{down}})
+&=\varnothing
+&&\bigl(\because\ \text{全頂点のスピンラベルが }\mathsf{down}\text{ で等しい}\bigr)\\
+b_G(\sigma_{\mathsf{down}})
+&=0
+&&\bigl(\because\ |\varnothing|=0\bigr).
+\end{aligned}\]
+\cref{lab:def_broken_edge_multiplicity}
+ より
+
+\[\Omega_G(0)
+\ge 2
+\quad\bigl(\because\ \sigma_{\mathsf{up}},\sigma_{\mathsf{down}}\text{ は破れ辺数 }0\text{ のファイバーに属する相異なる二元である}\bigr).\]
+\[\begin{aligned}
+Z_G(q)
+&\ge \Omega_G(0)q^0
+&&\bigl(\because\ \Omega_G(m)\in\mathbb N\text{ かつ }q^m>0\text{ for every }m\in\mathbb N\bigr)\\
+&=\Omega_G(0)
+&&\bigl(\because\ q^0=1\bigr)\\
+&\ge2
+&&\bigl(\because\ \Omega_G(0)\ge2\bigr).
+\end{aligned}\]
+評価点と評価値は有理数、多重度と辺数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[Ising 分配多項式の正の有理評価の単調性]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_monotonicity}
+\cref{lab:def_finite_graph_input}
+ の任意の有限グラフと、
+$0<q_1\le q_2$
+ を満たす任意の正の有理数 
+$q_1,q_2\in\mathbb Q_{>0}$
+ について
+
+\[Z_G(q_1)\le Z_G(q_2)\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ の整数係数を自然数から有理数への標準単射で移す。各 
+$m\in\{0,1,\ldots,|E|\}$
+ について、正の有理数の冪の順序保存より
+
+\[q_1^m\le q_2^m
+\quad\bigl(\because\ 0<q_1\le q_2\text{ かつ }m\in\mathbb N\bigr).\]
+\cref{lab:def_broken_edge_multiplicity}
+ より 
+$\Omega_G(m)\in\mathbb N$
+ なので、有理数の順序と非負数の乗法の両立性より
+
+\[\Omega_G(m)q_1^m\le\Omega_G(m)q_2^m
+\quad\bigl(\because\ q_1^m\le q_2^m\text{ かつ }\Omega_G(m)\ge0\bigr).\]
+直前の項別不等式を有限集合 
+$\{0,1,\ldots,|E|\}$
+ 上で加えると
+
+\[\sum_{m=0}^{|E|}\Omega_G(m)q_1^m
+\le
+\sum_{m=0}^{|E|}\Omega_G(m)q_2^m
+\quad\bigl(\because\ \text{有理数の有限和は項別順序を保存する}\bigr).\]
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ の係数表示へ二つの評価点をそれぞれ代入すると
+
+\[\begin{aligned}
+Z_G(q_1)
+&=\sum_{m=0}^{|E|}\Omega_G(m)q_1^m
+&&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
+&\le\sum_{m=0}^{|E|}\Omega_G(m)q_2^m
+&&\bigl(\because\ \text{直前に得た有限和の不等式}\bigr)\\
+&=Z_G(q_2)
+&&\bigl(\because\ \text{多重度による係数表示}\bigr).
+\end{aligned}\]
+評価点と評価値は有理数、多重度、指数、辺数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[辺をもつ有限グラフの正の有理評価の厳密単調性]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity}
+\cref{lab:def_finite_graph_input}
+ の有限グラフで 
+$E\ne\varnothing$
+ とする。
+$0<q_1<q_2$
+ を満たす任意の正の有理数 
+$q_1,q_2\in\mathbb Q_{>0}$
+ について
+
+\[Z_G(q_1)<Z_G(q_2)\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+$E\ne\varnothing$
+ より辺 
+$e_*\in E$
+ を一つ選ぶ。配位 
+$\sigma_*:V\to\mathsf{Spin}$
+ を
+
+\[\sigma_*(v):=
+\begin{cases}
+\mathsf{up} & \bigl(v=\partial_G(e_*,\mathsf{source})\bigr),\\
+\mathsf{down} & \bigl(v\ne\partial_G(e_*,\mathsf{source})\bigr)
+\end{cases}
+\qquad(v\in V)\]
+\cref{lab:def_spin_configuration_set}
+ より 
+$\sigma_*\in\mathcal S_G$
+ である。
+\cref{lab:def_finite_graph_input}
+ の端点相異性より
+
+\[\begin{aligned}
+\sigma_*\!\left(\partial_G(e_*,\mathsf{source})\right)
+&=\mathsf{up}
+&&\bigl(\because\ \sigma_*\text{ の定義}\bigr)\\
+&\ne\mathsf{down}
+&&\bigl(\because\ \mathsf{up}\ne\mathsf{down}\bigr)\\
+&=\sigma_*\!\left(\partial_G(e_*,\mathsf{target})\right)
+&&\bigl(\because\ \partial_G(e_*,\mathsf{source})\ne\partial_G(e_*,\mathsf{target})\text{ と }\sigma_*\text{ の定義}\bigr).
+\end{aligned}\]
+\cref{lab:def_broken_edge_set}
+ より
+
+\[\begin{aligned}
+e_*
+&\in B_G(\sigma_*)
+&&\bigl(\because\ \text{破れ辺集合の定義}\bigr)\\
+b_G(\sigma_*)
+&\ge1
+&&\bigl(\because\ e_*\in B_G(\sigma_*)\bigr).
+\end{aligned}\]
+$m_*:=b_G(\sigma_*)\in\{1,\ldots,|E|\}$
+ と置く。
+\cref{lab:def_broken_edge_multiplicity}
+ より
+
+\[\Omega_G(m_*)\ge1
+\quad\bigl(\because\ \sigma_*\text{ は破れ辺数 }m_*\text{ のファイバーに属する}\bigr).\]
+\[q_1^{m_*}<q_2^{m_*}
+\quad\bigl(\because\ 0<q_1<q_2\text{ かつ }m_*\ge1\bigr).\]
+\[\Omega_G(m_*)q_1^{m_*}<\Omega_G(m_*)q_2^{m_*}
+\quad\bigl(\because\ \Omega_G(m_*)\ge1\bigr).\]
+また各 
+$m\in\{0,1,\ldots,|E|\}$
+ について、
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_monotonicity}
+ の項別計算と同じく
+
+\[\Omega_G(m)q_1^m\le\Omega_G(m)q_2^m
+\quad\bigl(\because\ 0<q_1<q_2\text{ かつ }\Omega_G(m)\ge0\bigr).\]
+\[\sum_{m=0}^{|E|}\Omega_G(m)q_1^m
+<
+\sum_{m=0}^{|E|}\Omega_G(m)q_2^m
+\quad\bigl(\because\ m=m_*\text{ の項は狭義不等式であり、他の項は弱不等式である}\bigr).\]
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ の係数表示へ二つの評価点を代入すると
+
+\[\begin{aligned}
+Z_G(q_1)
+&=\sum_{m=0}^{|E|}\Omega_G(m)q_1^m
+&&\bigl(\because\ \text{多重度による係数表示}\bigr)\\
+&<\sum_{m=0}^{|E|}\Omega_G(m)q_2^m
+&&\bigl(\because\ \text{直前に得た有限和の狭義不等式}\bigr)\\
+&=Z_G(q_2)
+&&\bigl(\because\ \text{多重度による係数表示}\bigr).
+\end{aligned}\]
+評価点と評価値は有理数、多重度、指数、頂点数、辺数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[辺をもつ有限グラフの正の有理評価点の一意性]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_injectivity}
+\cref{lab:def_finite_graph_input}
+ の有限グラフで 
+$E\ne\varnothing$
+ とする。任意の正の有理数 
+$q_1,q_2\in\mathbb Q_{>0}$
+ について
+
+\[Z_G(q_1)=Z_G(q_2)\quad\Longleftrightarrow\quad q_1=q_2\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+$q_1=q_2$
+ とする。等しい有理数を同じ整数係数多項式へ代入すると
+
+\[Z_G(q_1)=Z_G(q_2)
+\quad\bigl(\because\ q_1=q_2\text{ の等号への代入}\bigr).\]
+逆に 
+$Z_G(q_1)=Z_G(q_2)$
+ とする。
+$q_1\ne q_2$
+ と仮定すると、有理数の全順序性より
+
+\[q_1<q_2\quad\text{または}\quad q_2<q_1
+\quad\bigl(\because\ q_1\ne q_2\text{ かつ }\mathbb Q\text{ の全順序性}\bigr).\]
+$q_1<q_2$
+ の場合、
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity}
+ より
+
+\[Z_G(q_1)<Z_G(q_2)
+\quad\bigl(\because\ 0<q_1<q_2\bigr),\]
+となり、
+$Z_G(q_1)=Z_G(q_2)$
+ に反する。
+
+$q_2<q_1$
+ の場合も、
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity}
+ より
+
+\[Z_G(q_2)<Z_G(q_1)
+\quad\bigl(\because\ 0<q_2<q_1\bigr),\]
+となり、
+$Z_G(q_1)=Z_G(q_2)$
+ に反する。したがって
+
+\[q_1=q_2
+\quad\bigl(\because\ q_1\ne q_2\text{ の仮定から得る二場合がともに矛盾}\bigr).\]
+評価点と評価値は有理数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[辺をもつ有限グラフの正の有理評価における狭義順序の反映]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_order_reflection}
+\cref{lab:def_finite_graph_input}
+ の有限グラフで 
+$E\ne\varnothing$
+ とする。任意の正の有理数 
+$q_1,q_2\in\mathbb Q_{>0}$
+ について
+
+\[Z_G(q_1)<Z_G(q_2)\quad\Longleftrightarrow\quad q_1<q_2\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+$q_1<q_2$
+ とする。
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity}
+ より
+
+\[Z_G(q_1)<Z_G(q_2)
+\quad\bigl(\because\ 0<q_1<q_2\bigr).\]
+逆に 
+$Z_G(q_1)<Z_G(q_2)$
+ とする。
+$q_1<q_2$
+ でないと仮定すると、有理数の全順序性より
+
+\[q_2\le q_1
+\quad\bigl(\because\ q_1<q_2\text{ でないことと }\mathbb Q\text{ の全順序性}\bigr).\]
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_monotonicity}
+ を 
+$q_2\le q_1$
+ へ適用すると
+
+\[Z_G(q_2)\le Z_G(q_1)
+\quad\bigl(\because\ 0<q_2\le q_1\bigr),\]
+となり、
+$Z_G(q_1)<Z_G(q_2)$
+ に反する。したがって
+
+\[q_1<q_2
+\quad\bigl(\because\ q_1<q_2\text{ でないという仮定から矛盾を得た}\bigr).\]
+評価点と評価値は有理数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[辺をもつ有限グラフの正の有理評価における弱順序の反映]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_weak_order_reflection}
+\cref{lab:def_finite_graph_input}
+ の有限グラフで 
+$E\ne\varnothing$
+ とする。任意の正の有理数 
+$q_1,q_2\in\mathbb Q_{>0}$
+ について
+
+\[Z_G(q_1)\le Z_G(q_2)\quad\Longleftrightarrow\quad q_1\le q_2\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+$q_1\le q_2$
+ とする。
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_monotonicity}
+ より
+
+\[Z_G(q_1)\le Z_G(q_2)
+\quad\bigl(\because\ 0<q_1\le q_2\bigr).\]
+逆に 
+$Z_G(q_1)\le Z_G(q_2)$
+ とする。
+$q_1\le q_2$
+ でないと仮定すると、有理数の全順序性より
+
+\[q_2<q_1
+\quad\bigl(\because\ q_1\le q_2\text{ でないことと }\mathbb Q\text{ の全順序性}\bigr).\]
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity}
+ を 
+$q_2<q_1$
+ へ適用すると
+
+\[Z_G(q_2)<Z_G(q_1)
+\quad\bigl(\because\ 0<q_2<q_1\bigr),\]
+となり、
+$Z_G(q_1)\le Z_G(q_2)$
+ に反する。したがって
+
+\[q_1\le q_2
+\quad\bigl(\because\ q_1\le q_2\text{ でないという仮定から矛盾を得た}\bigr).\]
+評価点と評価値は有理数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[正の有理評価が全配位数以下となる評価点の特徴付け]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_at_most_configuration_count}
+\cref{lab:def_finite_graph_input}
+ の有限グラフで 
+$E\ne\varnothing$
+ とする。任意の正の有理数 
+$q\in\mathbb Q_{>0}$
+ について、自然数 
+$2^{|V|}$
+ を有理数へ標準単射で移すと
+
+\[Z_G(q)\le 2^{|V|}\quad\Longleftrightarrow\quad q\le1\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:claim_partition_polynomial_value_at_one}
+ より
+
+\[Z_G(1)=2^{|V|}
+\quad\bigl(\because\ \text{係数総和}\bigr).\]
+\[Z_G(q)\le2^{|V|}
+\quad\Longleftrightarrow\quad
+Z_G(q)\le Z_G(1)
+\quad\bigl(\because\ Z_G(1)=2^{|V|}\text{ の代入}\bigr).\]
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_weak_order_reflection}
+ を正の有理評価点 
+$q,1\in\mathbb Q_{>0}$
+ へ適用すると
+
+\[Z_G(q)\le Z_G(1)
+\quad\Longleftrightarrow\quad
+q\le1
+\quad\bigl(\because\ \text{正の有理評価における弱順序の反映}\bigr).\]
+\[Z_G(q)\le2^{|V|}
+\quad\Longleftrightarrow\quad
+q\le1
+\quad\bigl(\because\ \text{直前の二つの同値関係の推移性}\bigr).\]
+評価点と評価値は有理数、頂点数と全配位数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[正の有理評価が全配位数以上となる評価点の特徴付け]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_at_least_configuration_count}
+\cref{lab:def_finite_graph_input}
+ の有限グラフで 
+$E\ne\varnothing$
+ とする。任意の正の有理数 
+$q\in\mathbb Q_{>0}$
+ について、自然数 
+$2^{|V|}$
+ を有理数へ標準単射で移すと
+
+\[2^{|V|}\le Z_G(q)\quad\Longleftrightarrow\quad 1\le q\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:claim_partition_polynomial_value_at_one}
+ より
+
+\[Z_G(1)=2^{|V|}
+\quad\bigl(\because\ \text{係数総和}\bigr).\]
+\[2^{|V|}\le Z_G(q)
+\quad\Longleftrightarrow\quad
+Z_G(1)\le Z_G(q)
+\quad\bigl(\because\ Z_G(1)=2^{|V|}\text{ の代入}\bigr).\]
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_weak_order_reflection}
+ を正の有理評価点 
+$1,q\in\mathbb Q_{>0}$
+ へ適用すると
+
+\[Z_G(1)\le Z_G(q)
+\quad\Longleftrightarrow\quad
+1\le q
+\quad\bigl(\because\ \text{正の有理評価における弱順序の反映}\bigr).\]
+\[2^{|V|}\le Z_G(q)
+\quad\Longleftrightarrow\quad
+1\le q
+\quad\bigl(\because\ \text{直前の二つの同値関係の推移性}\bigr).\]
+評価点と評価値は有理数、頂点数と全配位数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[正の有理評価が全配位数に等しくなる評価点の特徴付け]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_equal_configuration_count}
+\cref{lab:def_finite_graph_input}
+ の有限グラフで 
+$E\ne\varnothing$
+ とする。任意の正の有理数 
+$q\in\mathbb Q_{>0}$
+ について、自然数 
+$2^{|V|}$
+ を有理数へ標準単射で移すと
+
+\[Z_G(q)=2^{|V|}\quad\Longleftrightarrow\quad q=1\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:claim_partition_polynomial_value_at_one}
+ より
+
+\[Z_G(1)=2^{|V|}
+\quad\bigl(\because\ \text{係数総和}\bigr).\]
+\[Z_G(q)=2^{|V|}
+\quad\Longleftrightarrow\quad
+Z_G(q)=Z_G(1)
+\quad\bigl(\because\ Z_G(1)=2^{|V|}\text{ の代入}\bigr).\]
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_injectivity}
+ を正の有理評価点 
+$q,1\in\mathbb Q_{>0}$
+ へ適用すると
+
+\[Z_G(q)=Z_G(1)
+\quad\Longleftrightarrow\quad
+q=1
+\quad\bigl(\because\ \text{正の有理評価点の一意性}\bigr).\]
+\[Z_G(q)=2^{|V|}
+\quad\Longleftrightarrow\quad
+q=1
+\quad\bigl(\because\ \text{直前の二つの同値関係の推移性}\bigr).\]
+評価点と評価値は有理数、頂点数と全配位数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[正の有理評価が全配位数より小さくなる評価点の特徴付け]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_strictly_below_configuration_count}
+\cref{lab:def_finite_graph_input}
+ の有限グラフで 
+$E\ne\varnothing$
+ とする。任意の正の有理数 
+$q\in\mathbb Q_{>0}$
+ について、自然数 
+$2^{|V|}$
+ を有理数へ標準単射で移すと
+
+\[Z_G(q)<2^{|V|}\quad\Longleftrightarrow\quad q<1\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:claim_partition_polynomial_value_at_one}
+ より
+
+\[Z_G(1)=2^{|V|}
+\quad\bigl(\because\ \text{係数総和}\bigr).\]
+\[Z_G(q)<2^{|V|}
+\quad\Longleftrightarrow\quad
+Z_G(q)<Z_G(1)
+\quad\bigl(\because\ Z_G(1)=2^{|V|}\text{ の代入}\bigr).\]
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_order_reflection}
+ を正の有理評価点 
+$q,1\in\mathbb Q_{>0}$
+ へ適用すると
+
+\[Z_G(q)<Z_G(1)
+\quad\Longleftrightarrow\quad
+q<1
+\quad\bigl(\because\ \text{正の有理評価における狭義順序の反映}\bigr).\]
+\[Z_G(q)<2^{|V|}
+\quad\Longleftrightarrow\quad
+q<1
+\quad\bigl(\because\ \text{直前の二つの同値関係の推移性}\bigr).\]
+評価点と評価値は有理数、頂点数と全配位数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[正の有理評価が全配位数より大きくなる評価点の特徴付け]\label{lab:theorem_partition_polynomial_positive_rational_evaluation_strictly_above_configuration_count}
+\cref{lab:def_finite_graph_input}
+ の有限グラフで 
+$E\ne\varnothing$
+ とする。任意の正の有理数 
+$q\in\mathbb Q_{>0}$
+ について、自然数 
+$2^{|V|}$
+ を有理数へ標準単射で移すと
+
+\[2^{|V|}<Z_G(q)\quad\Longleftrightarrow\quad 1<q\quad\text{in }\mathbb Q.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:claim_partition_polynomial_value_at_one}
+ より
+
+\[Z_G(1)=2^{|V|}
+\quad\bigl(\because\ \text{係数総和}\bigr).\]
+\[2^{|V|}<Z_G(q)
+\quad\Longleftrightarrow\quad
+Z_G(1)<Z_G(q)
+\quad\bigl(\because\ Z_G(1)=2^{|V|}\text{ の代入}\bigr).\]
+\cref{lab:theorem_partition_polynomial_positive_rational_evaluation_order_reflection}
+ を正の有理評価点 
+$1,q\in\mathbb Q_{>0}$
+ へ適用すると
+
+\[Z_G(1)<Z_G(q)
+\quad\Longleftrightarrow\quad
+1<q
+\quad\bigl(\because\ \text{正の有理評価における狭義順序の反映}\bigr).\]
+\[2^{|V|}<Z_G(q)
+\quad\Longleftrightarrow\quad
+1<q
+\quad\bigl(\because\ \text{直前の二つの同値関係の推移性}\bigr).\]
+評価点と評価値は有理数、頂点数と全配位数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\begin{theorem}[一次多項式 x-1 は Ising 分配多項式を割り切らない]\label{lab:theorem_no_linear_factor_x_minus_one}
+\cref{lab:def_finite_graph_input}
+ の任意の有限グラフについて、整数係数多項式 
+$x-1$
+ は Ising 分配多項式を割り切らない。すなわち
+
+\[(x-1)\nmid Z_G(x)\quad\text{in }\mathbb Z[x].\]
+\end{theorem}
+\begin{proof}
+\cref{lab:def_ising_partition_polynomial}
+ より 
+$Z_G(x)\in\mathbb Z[x]$
+ である。モニック一次多項式による整数係数多項式の除法より、ある 
+$Q_G(x)\in\mathbb Z[x]$
+ と 
+$r_G\in\mathbb Z$
+ が一意に存在して
+
+\[Z_G(x)=(x-1)Q_G(x)+r_G.\]
+\[r_G
+=Z_G(1)
+\quad\bigl(\because\ x=1\text{ を直前の除法等式へ代入}\bigr).\]
+\cref{lab:claim_partition_polynomial_value_at_one}
+ より
+
+\[\begin{aligned}
+r_G
+&=2^{|V|}
+&&\bigl(\because\ Z_G(1)=2^{|V|}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}\text{ は正の整数である}\bigr).
+\end{aligned}\]
+\[(x-1)\nmid Z_G(x)
+\quad\bigl(\because\ x-1\text{ による除法の余り }r_G\text{ が零でない}\bigr).\]
+除法の商は整数係数多項式、余りと評価値は整数、頂点数は自然数に属する。実数、複素数、極限、積分を用いない。
+
+\end{proof}
+
+\part{形式的高温展開}
+
+\begin{definition}[辺のスピン符号]\label{lab:def_edge_spin_sign}
+各 
+$\sigma\in\mathcal S_G$
+ と 
+$e\in E$
+ に対し
+
+\[s_G(\sigma,e):=\kappa\!\left(\sigma\!\left(\partial_G(e,\mathsf{source})\right)\right)\kappa\!\left(\sigma\!\left(\partial_G(e,\mathsf{target})\right)\right)\in\{-1,+1\}\subset\mathbb Z\]
+と定める。スピンラベルから整数への移行には 
+\cref{lab:def_spin_integer_realization}
+ の写像 
+$\kappa$
+ だけを用いる。
+
+\end{definition}
+
+\begin{definition}[形式的辺重み和]\label{lab:def_formal_edge_weight_sum}
+独立な不定元 
+$u,v$
+ に対し
+
+\[H_G(u,v):=\sum_{\sigma\in\mathcal S_G}\prod_{e\in E}\bigl(u+v\,s_G(\sigma,e)\bigr)\in\mathbb Z[u,v]\]
+と定める。指数関数、双曲関数、実温度はこの定義に含まれない。
+
+\end{definition}
+
+\begin{definition}[辺部分集合の境界偶奇]\label{lab:def_mod_two_boundary_parity}
+辺部分集合 
+$A\subseteq E$
+ と頂点 
+$w\in V$
+ に対し
+
+\[\beta_G(A)(w):=\left|\left\{(e,a)\in A\times\mathsf{End}\ \middle|\ \partial_G(e,a)=w\right\}\right|\bmod 2\in\mathbb F_2\]
+と定める。各辺の二端点は異なるので、一つの辺を同じ頂点で二重に数えない。
+
+\end{definition}
+
+\begin{definition}[偶辺部分集合]\label{lab:def_even_edge_subset}
+\[\mathcal Z_1(G):=\{A\subseteq E\mid \beta_G(A)(w)=0\ \text{for every }w\in V\}\]
+と定める。これは有限集合である。境界偶奇は 
+\cref{lab:def_mod_two_boundary_parity}
+ で定めた。
+
+\end{definition}
+
+\begin{definition}[偶部分グラフ多項式]\label{lab:def_even_subgraph_polynomial}
+\[Q_G(u,v):=\sum_{A\in\mathcal Z_1(G)}u^{|E|-|A|}v^{|A|}\in\mathbb Z[u,v]\]
+と定める。
+
+\end{definition}
+
+\begin{theorem}[形式的高温展開の有限和恒等式]\label{lab:theorem_formal_high_temperature_expansion}
+\[H_G(u,v)=2^{|V|}Q_G(u,v)\in\mathbb Z[u,v].\]
+\end{theorem}
+\begin{proof}
+積を辺部分集合ごとに展開すると
+
+\[\begin{aligned}
+H_G(u,v)
+&=\sum_{\sigma\in\mathcal S_G}\ \sum_{A\subseteq E}u^{|E|-|A|}v^{|A|}\prod_{e\in A}s_G(\sigma,e)
+&&\bigl(\because\ \text{有限積に分配則を適用}\bigr)\\
+&=\sum_{A\subseteq E}u^{|E|-|A|}v^{|A|}\sum_{\sigma\in\mathcal S_G}\prod_{e\in A}s_G(\sigma,e)
+&&\bigl(\because\ \text{二つの有限和の順序交換}\bigr).
+\end{aligned}\]
+$A\in\mathcal Z_1(G)$
+ なら、各頂点のスピンは積に偶数回現れるので内側の積は全ての配位で 
+$1$
+ となり、内側の和は 
+$2^{|V|}$
+ である。
+
+$A\notin\mathcal Z_1(G)$
+ なら、境界偶奇が 
+$1$
+ である頂点 
+$w$
+ が存在する。
+\cref{lab:def_single_vertex_spin_flip}
+ の写像 
+$T_w$
+ は 
+$\mathcal S_G$
+ 上の不動点を持たない対合であることは 
+\cref{lab:claim_single_vertex_spin_flip_involution}
+ で示した。境界偶奇が 
+$1$
+ なので、
+\cref{lab:claim_spin_reversal_integer_realization}
+ により 
+$\sigma$
+ と 
+$T_w(\sigma)$
+ に対応する積の整数符号は逆になる。したがって内側の和は 
+$0$
+ である。
+
+\[\begin{aligned}
+H_G(u,v)
+&=\sum_{A\in\mathcal Z_1(G)}u^{|E|-|A|}v^{|A|}\,2^{|V|}
+&&\bigl(\because\ \text{上の偶奇による二場合}\bigr)\\
+&=2^{|V|}Q_G(u,v)
+&&\bigl(\because\ \text{偶部分グラフ多項式の定義}\bigr).
+\end{aligned}\]
+用いた定義は 
+\cref{lab:def_formal_edge_weight_sum}
+、
+\cref{lab:def_edge_spin_sign}
+、
+\cref{lab:def_even_edge_subset}
+、
+\cref{lab:def_even_subgraph_polynomial}
+ である。
+
+\end{proof}
+\end{document}

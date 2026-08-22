@@ -101,6 +101,8 @@
   時間発展）と、統計力学／場の量子論に現れる作用素・代数構造との対応関係の探索
 - `countable-ising-on-hyperbolic-surfaces/` — 有限群・剰余類から得る閉双曲曲面の有限セル分割上で、
   Ising 分配多項式、ホモロジー類別高温展開、有限 Fourier 双対、算術的不変量を構成する
+- `finite-graph-ising-partition-polynomial-and-fisher-zeros/` — 任意の有限グラフ上で、破れ辺数から
+  Ising 分配多項式を構成し、係数・有理評価・整除性・代数的 Fisher 零点を研究する
 
 ### 共通ツール
 
@@ -254,6 +256,12 @@
   Ising 分配関数は整係数多項式、高温展開は `F_2` 一次サイクル、主格子・双対格子の変換は
   第一ホモロジー群上の有限 Fourier 変換として書く。Fisher 零点そのものは代数的数として扱い、
   数値描画・零点集積・熱力学極限だけを明示的な ℝ/ℂ 脱出へ分離する。
+
+- **`finite-graph-ising-partition-polynomial-and-fisher-zeros/` で作業するときは、着手前に必ず
+  [その README](finite-graph-ising-partition-polynomial-and-fisher-zeros/README.md) を読むこと。**
+- 要点: 一般有限グラフ理論の正本はこのプロジェクトだけに置く。双曲曲面側は内容名ラベルによる
+  最小接続だけを持つ。一般理論を追加・並べ替えるときは接続集合・推移的参照・並べ替え不変性の
+  検査を通し、Fisher 零点の代数的表現と複素平面上の数値表現を分離する。
 
 ### 証明の記述形式（全プロジェクト共通）
 
