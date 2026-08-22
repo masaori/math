@@ -38,32 +38,5 @@ theorem charMatrix_eq_necSuf (A : RowMatrix L) (τ τ' : RowConfig L) :
   unfold charMatrix NecSuf.AlgebraicEigenvalue.charMatrix constSecond
   split <;> rfl
 
-/-- 具体版の主張「特性多項式はモニックな次数 `2^L` の元である」を、必要十分版から導いたもの。 -/
-theorem monicDeg_charPoly_from_necSuf (A : RowMatrix L) : MonicDeg (charPoly L A) (2 ^ L) := by
-  classical
-  haveI : Nonempty (RowConfig L) := ⟨fun _ => ⟨1, Or.inl rfl⟩⟩
-  have hw : (fun φ : Equiv.Perm (RowConfig L) => constSecond (constPoly (permSign L φ))) 1 = 1 := by
-    show constSecond (constPoly (permSign L (1 : Equiv.Perm (RowConfig L)))) = 1
-    rw [permSign_id, constSecond_constPoly_one]
-  have hwdeg : ∀ φ : Equiv.Perm (RowConfig L),
-      NecSuf.AlgebraicEigenvalue.DegLe (constSecond (constPoly (permSign L φ))) 0 := by
-    intro φ
-    intro k hk
-    -- 具体版の degLe_constSecond（κ(0) と書く）を、必要十分版の書き方（0）へ移す。
-    have := degLe_constSecond (constPoly (permSign L φ)) k hk
-    rwa [constPoly_zero] at this
-  have := NecSuf.AlgebraicEigenvalue.monicDeg_charDet
-    (ι := RowConfig L) (S := Polynomial ℤ)
-    (fun φ => constSecond (constPoly (permSign L φ))) hw hwdeg (fun a b => -A a b)
-  -- 具体版の χ_A と個数 2^L の書き方へ戻す。
-  rw [charPoly, secondDeterminant]
-  simp only [charMatrix_eq_necSuf]
-  rw [MonicDeg, NecSuf.AlgebraicEigenvalue.MonicDeg] at *
-  rw [card_rowConfig] at this
-  refine ⟨fun k hk => ?_, ?_⟩
-  · rw [constPoly_zero]
-    exact this.1 k hk
-  · rw [constPoly_one]
-    exact this.2
 
 end Ising2DLambda.AlgebraicEigenvalue

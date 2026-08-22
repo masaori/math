@@ -440,7 +440,6 @@ def identity_row_permutation(L):
 
 # --- 章「固有値の代数性」の続き: 行列式 ------------------------------------
 #   def_constant_polynomial / def_identity_matrix / def_determinant
-#   claim_permutation_moves_two / claim_determinant_diagonal
 
 
 def const_poly(n):
@@ -489,11 +488,3 @@ def determinant(L, A, signed_perms=None, key_order=None):
             product *= A[(key, row_config_key(L, phi[key]))]
         total += const_poly(sgn) * product
     return total
-
-
-def moved_row_configs(L, phi):
-    """claim_permutation_moves_two: M(phi) = { tau in R_L | phi(tau) != tau }。"""
-    return [
-        key for key in row_matrix_keys(L)
-        if row_config_key(L, phi[key]) != key
-    ]

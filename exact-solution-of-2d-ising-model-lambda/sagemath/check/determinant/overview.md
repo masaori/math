@@ -2,13 +2,11 @@
 
 ## 対象
 
-**対象ラベル**: `def_constant_polynomial` / `def_identity_matrix` / `def_determinant` /
-`claim_permutation_moves_two` / `claim_determinant_diagonal`
+**対象ラベル**: `def_constant_polynomial` / `def_identity_matrix` / `def_determinant`
 （structured-latex 側の安定識別子）
 
 - 本文: `structured-latex/content/main-text.ts` の章「固有値の代数性」の定義
-  「定数多項式を与える写像、単位行列、そして行列式」と主張 2 件
-  （「恒等写像でない置換は少なくとも 2 つの行配位を動かす」「対角行列の行列式は対角成分の積である」）
+  「定数多項式を与える写像、単位行列、そして行列式」
 - 併せて使う定義: `def_row_configuration` / `def_matrix_over_row_configs` /
   `def_row_permutation` / `def_permutation_sign` / `def_transfer_matrix`
 
@@ -27,16 +25,11 @@ $\det A=\sum_{\varphi\in\mathfrak{S}_L}\kappa(\mathrm{sgn}(\varphi))\prod_{\tau\
    $\prod_{\tau\in R_L}$ が添字を並べる順序によらないことを、並べ方を 4 通り変えて確かめる。
    本文はこれを「$\mathbb{Z}[x]$ の積が可換なので順序によらない」と述べており、
    その帰結として「行列式を書くのに順序 $\prec$ は要らない」を主張しているので、空でない確認である。
-3. `claim_permutation_moves_two`。恒等でないすべての置換について $|M(\varphi)|\ge2$。
-   あわせて人手証明の作り方そのもの（$\tau_1$ と $\tau_2=\varphi(\tau_1)$ が相異なり、
-   ともに $M(\varphi)$ に属すること）と、境界（$|M(\mathrm{id}_{R_L})|=0$）も見る。
-4. `claim_determinant_diagonal`。対角行列について $\det A=\prod_\tau A_{\tau,\tau}$、
-   および $\det I=\kappa(1)$。
-5. 本文の行列式が SageMath 自身の行列式（`Matrix.determinant()`）と一致すること。
+3. 本文の行列式が SageMath 自身の行列式（`Matrix.determinant()`）と一致すること。
 
-5 を置いたのは、4 だけでは対角行列しか見ておらず、定義の取り違えを検出できないからである
-（符号の向き、$A_{\tau,\varphi(\tau)}$ と $A_{\varphi(\tau),\tau}$ の取り違えは、
-対角行列の上ではどちらも同じ値を与える）。Sage の行列式は分数自由なアルゴリズムで計算されており、
+3 を置いたのは、2 だけでは定義の取り違え（符号の向き、$A_{\tau,\varphi(\tau)}$ と
+$A_{\varphi(\tau),\tau}$ の取り違え）を検出できないからである。
+Sage の行列式は分数自由なアルゴリズムで計算されており、
 置換にわたる和という本文の定義とは作り方が独立である。
 
 突き合わせる行列は 4 種である。転送行列 $T$、成分がすべて異なる $x$ の冪である行列、
@@ -45,11 +38,11 @@ $\det A=\sum_{\varphi\in\mathfrak{S}_L}\kappa(\mathrm{sgn}(\varphi))\prod_{\tau\
 
 ### 走らせた範囲（打ち切りを隠さない）
 
-| $L$ | 行配位 $|R_L|$ | 置換 $|\mathfrak{S}_L|$ | 3 で見た置換 | 2・4・5 で見た行列 |
-|---|---|---|---|---|
-| 1 | 2 | 2 | 恒等でない全 1 個 | 4 種 |
-| 2 | 4 | 24 | 恒等でない全 23 個 | 4 種 |
-| 3 | 8 | 40320 | 恒等でない全 40319 個 | 4 種 |
+| $L$ | 行配位 $|R_L|$ | 置換 $|\mathfrak{S}_L|$ | 2・3 で見た行列 |
+|---|---|---|---|
+| 1 | 2 | 2 | 4 種 |
+| 2 | 4 | 24 | 4 種 |
+| 3 | 8 | 40320 | 4 種 |
 
 3（置換についての主張）はすべての置換を走っており標本ではない。
 2・4・5 は行列式が置換の全体にわたる和なので、**行列については上の 4 種に限っている**

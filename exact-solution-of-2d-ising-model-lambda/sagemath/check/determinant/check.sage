@@ -1,10 +1,7 @@
 # 対象ラベル: def_constant_polynomial / def_identity_matrix / def_determinant
-#             claim_permutation_moves_two / claim_determinant_diagonal
 #
 # 本文（structured-latex/content/main-text.ts）の章「固有値の代数性」の
 #   定義   定数多項式を与える写像、単位行列、そして行列式
-#   主張   恒等写像でない置換は少なくとも 2 つの行配位を動かす
-#   主張   対角行列の行列式は対角成分の積である
 # を、小さい L で総当たりに確かめる。
 #
 # 確かめること。
@@ -13,21 +10,17 @@
 #   2. def_determinant。定義の右辺が確定すること、および積の添字 R_L に順序を入れていないこと。
 #      後者は、添字を並べる順序をいくつか変えて同じ値が出ることで確かめる
 #      （本文は「ZZ[x] の積が可換なので順序によらない」と述べており、それが空でない主張である）。
-#   3. claim_permutation_moves_two。恒等でない全ての置換について |M(phi)| >= 2。
-#      あわせて恒等置換については |M(id)| = 0 であることも見る（境界の確認）。
-#   4. claim_determinant_diagonal。対角行列について det A = prod_tau A_{tau,tau}、
-#      および det I = kappa(1)。
-#   5. 本文の行列式が SageMath 自身の行列式と一致すること。本文の det は置換にわたる和で
+#   3. 本文の行列式が SageMath 自身の行列式と一致すること。本文の det は置換にわたる和で
 #      定めており、Sage の Matrix.determinant() は別の作り方（分数自由なアルゴリズム）なので、
 #      一致は定義の取り違え（符号の向き、A_{phi(tau),tau} と A_{tau,phi(tau)} の取り違え）を
-#      検出する。4 だけでは対角行列しか見ないので、これを検出できない。
-#   6. 転送行列 T の行列式も 5 で突き合わせる（本文が実際に扱う行列で確かめるため）。
+#      検出する。
+#   4. 転送行列 T の行列式も 3 で突き合わせる（本文が実際に扱う行列で確かめるため）。
 #
 # 走らせる範囲（打ち切りを隠さない）。
-#   L = 1: 行配位 2 個、置換 2 個。1〜6 をすべて走る。
-#   L = 2: 行配位 4 個、置換 24 個。1〜6 をすべて走る。
-#   L = 3: 行配位 8 個、置換 40320 個。3 は全ての置換について走る。
-#          2・4・5・6 は行列式が 40320 項の和になるので、行列は転送行列と
+#   L = 1: 行配位 2 個、置換 2 個。1〜4 をすべて走る。
+#   L = 2: 行配位 4 個、置換 24 個。1〜4 をすべて走る。
+#   L = 3: 行配位 8 個、置換 40320 個。
+#          2・3・4 は行列式が 40320 項の和になるので、行列は転送行列と
 #          「成分がすべて異なる x の冪である行列」と対角行列の 3 つに限る（行列についての標本）。
 #
 # 厳密計算のみ（ZZ、ZZ[x]）。浮動小数点は使わない。
@@ -84,41 +77,6 @@ def sage_matrix_of(L, A):
     return matrix(PolynomialRingZx, len(keys), len(keys),
                   [[A[(a, b)] for b in keys] for a in keys])
 
-
-def check_moves_two(L, signed_perms):
-    """claim_permutation_moves_two: phi != id なら |M(phi)| >= 2。"""
-    identity = identity_row_permutation(L)
-    identity_keys = {key: row_config_key(L, tau) for key, tau in identity.items()}
-    assert len(moved_row_configs(L, identity)) == 0, L
-    checked = 0
-    for phi, _sgn in signed_perms:
-        phi_keys = {key: row_config_key(L, tau) for key, tau in phi.items()}
-        if phi_keys == identity_keys:
-            continue
-        moved = moved_row_configs(L, phi)
-        assert len(moved) >= 2, (L, phi_keys, moved)
-        # 証明の作り方そのもの（tau_1 と tau_2 = phi(tau_1) がともに動く）も確かめる。
-        key1 = moved[0]
-        key2 = row_config_key(L, phi[key1])
-        assert key2 != key1, (L, key1)
-        assert row_config_key(L, phi[key2]) != key2, (L, key1, key2)
-        checked += 1
-    return checked
-
-
-def check_determinant_diagonal(L, signed_perms):
-    """claim_determinant_diagonal: 対角行列の det は対角成分の積、det I = kappa(1)。"""
-    keys = row_matrix_keys(L)
-    A = diagonal_matrix_over_zx(L)
-    left = determinant(L, A, signed_perms)
-    right = const_poly(1)
-    for key in keys:
-        right *= A[(key, key)]
-    assert left == right, (L, left, right)
-    identity_matrix_entries = identity_row_matrix(L)
-    assert determinant(L, identity_matrix_entries, signed_perms) == const_poly(1), L
-
-
 def check_determinant_matches_sage(L, signed_perms, matrices):
     """本文の det（置換にわたる和）と Sage の determinant()（別の作り方）が一致する。"""
     for name, A in matrices:
@@ -139,8 +97,6 @@ def check_product_order_independent(L, signed_perms, A):
 def check_all(L):
     signed_perms = signed_row_permutations(L)
     keys = row_matrix_keys(L)
-    moved_checked = check_moves_two(L, signed_perms)
-    check_determinant_diagonal(L, signed_perms)
     matrices = [
         ('transfer', transfer_matrix(L)),
         ('distinct-powers', distinct_power_matrix(L)),
@@ -153,8 +109,7 @@ def check_all(L):
     print(
         'L =', L,
         ': 行配位', len(keys), '個・置換', len(signed_perms), '個。',
-        '|M(phi)| >= 2 を恒等でない全', moved_checked, '個の置換で確認。',
-        '対角行列と det I、Sage の行列式との一致を行列', len(matrices), '種で確認。',
+        'Sage の行列式との一致を行列', len(matrices), '種で確認。',
         'det T =', det_transfer,
     )
 

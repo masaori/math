@@ -3,12 +3,11 @@
 ## 対象
 
 **対象ラベル**: `def_row_permutation` / `def_inversion_count` / `def_permutation_sign` /
-`claim_permutation_sign_values` / `claim_permutation_sign_mul`
+`claim_permutation_sign_mul`
 （structured-latex 側の安定識別子）
 
 - 本文: `structured-latex/content/main-text.ts` の章「固有値の代数性」の定義
-  「行配位の置換、転倒数、そして符号」と主張 2 件
-  （「符号は +1 か -1 であり、恒等写像の符号は +1 である」「符号は合成について乗法的である」）
+  「行配位の置換、転倒数、そして符号」と主張「符号は合成について乗法的である」
 - 併せて使う定義: `def_row_configuration` / `def_row_config_order` / `def_spin_index`
 
 ### 何を確定させるための検証か
@@ -16,32 +15,30 @@
 本文は、行列式を置換にわたる和として定めるために、行配位の集合 $R_L$ の上の置換 $\varphi$ と、
 順序 $\prec$ についての転倒数 $\mathrm{inv}(\varphi)$、およびその符号
 $\mathrm{sgn}(\varphi)=(-1)^{\mathrm{inv}(\varphi)}$ を定めている。この検証は、定義そのものと
-2 つの主張、および乗法性の証明が使う準備を、小さい $L$ で総当たりに固定する。
+乗法性の主張と、その証明が使う準備を、小さい $L$ で総当たりに固定する。
 
 1. `def_inversion_count` / `def_permutation_sign`。$\mathrm{inv}(\varphi)$ が $P_L$ の
    部分集合の個数であること（$0\le\mathrm{inv}(\varphi)\le|P_L|$）。
-2. `claim_permutation_sign_values`。$\mathrm{sgn}(\varphi)\in\{+1,-1\}$、
-   $\mathrm{sgn}(\varphi)^2=1$、$\mathrm{sgn}(\mathrm{id}_{R_L})=+1$。
-3. `claim_permutation_sign_mul`。$\mathrm{sgn}(\varphi\circ\psi)=\mathrm{sgn}(\varphi)\mathrm{sgn}(\psi)$。
-4. 本文の符号が順序 $\prec$ の取り方に依存しないこと。行配位を列挙順で番号付けて得られる
+2. `claim_permutation_sign_mul`。$\mathrm{sgn}(\varphi\circ\psi)=\mathrm{sgn}(\varphi)\mathrm{sgn}(\psi)$。
+3. 本文の符号が順序 $\prec$ の取り方に依存しないこと。行配位を列挙順で番号付けて得られる
    置換について SageMath 自身が計算する符号（`Permutation(...).signature()`）と一致することを見る。
    本文の $\mathrm{inv}$ は $\prec$ についての転倒数であり、列挙順とは作り方が独立である。
-5. 乗法性の証明が使う準備。$\psi$ が定める写像 $\Psi:P_L\to P_L$ が本当に $P_L$ へ入り
+4. 乗法性の証明が使う準備。$\psi$ が定める写像 $\Psi:P_L\to P_L$ が本当に $P_L$ へ入り
    単射であること（有限集合なので全単射）。および各対 $(\tau,\tau')\in P_L$ について、
    証明に現れる 3 つの集合 $A,B,C$ のうちその対が属するものの個数が偶数であること。
 
-4 を置いたのは、2 と 3 だけでは定義の取り違えを検出できないからである
+3 を置いたのは、2 だけでは定義の取り違えを検出できないからである
 （例えば $\prec$ の向きを逆に取っても、符号は同じ値になる場合と変わる場合があるが、
-乗法性と値域は誤った定義でも成り立ちうる）。5 を置いたのは、乗法性の証明の骨格
+乗法性は誤った定義でも成り立ちうる）。4 を置いたのは、乗法性の証明の骨格
 （各対で偶数個）が本当に成り立っていることを、結論とは別に固定するためである。
 
 ### 走らせた範囲（打ち切りを隠さない）
 
 | $L$ | 置換の個数 | 順序対 $|P_L|$ | 全置換で見たもの | 対で見たもの |
 |---|---|---|---|---|
-| 1 | 2 | 1 | 1・2・4 | 3・5 を全 2 個の置換の全対 |
-| 2 | 24 | 6 | 1・2・4 | 3・5 を全 24 個の置換の全対 |
-| 3 | 40320 | 28 | 1・2・4 | 3・5 を列挙順の先頭 60 個の置換の全対（3600 通り。**標本である**） |
+| 1 | 2 | 1 | 1・3 | 2・4 を全 2 個の置換の全対 |
+| 2 | 24 | 6 | 1・3 | 2・4 を全 24 個の置換の全対 |
+| 3 | 40320 | 28 | 1・3 | 2・4 を列挙順の先頭 60 個の置換の全対（3600 通り。**標本である**） |
 
 $L=3$ で全対を走らないのは、$40320^2\approx1.6\times10^9$ 通りになるためである。
 $L=1,2$ では全対を走っており、そこでは標本ではない。

@@ -1,44 +1,31 @@
-# SageMath Check: 特性多項式と、それがモニックな次数 $2^L$ の元であること
+# SageMath Check: 特性行列と特性多項式
 
 ## 対象
 
 **対象ラベル**: `def_second_matrix` / `def_second_determinant` / `def_indeterminate_element` /
-`def_characteristic_matrix` / `def_characteristic_polynomial` /
-`claim_second_const_degree_zero` / `claim_second_linear_monic` /
-`claim_characteristic_polynomial_monic`（structured-latex 側の安定識別子）
+`def_characteristic_matrix` / `def_characteristic_polynomial`（structured-latex 側の安定識別子）
 
 - 本文: `structured-latex/content/main-text.ts` の章「固有値の代数性」の定義 5 件
   （$\mathbb{Z}[x][t]$ を成分とする行列・その行列式 $\mathrm{det}_t$・不定元 $t$ 自身が定める元・
-  特性行列 $\mathrm{ch}(A)$・特性多項式 $\chi_A$）と主張 3 件
-  （$\iota(a)\in\mathcal{D}_0$・$t+\iota(a)\in\mathcal{M}_1$・$\chi_A\in\mathcal{M}_{2^L}$）
-- 併せて使う定義・主張: `def_constant_polynomial`（$\kappa$）、`def_second_constant_embedding`（$\iota$）、
-  `def_permutation_sign`（符号）、`claim_permutation_moves_two`（恒等でない置換は 2 点以上を動かす）、
-  `def_second_degree_bound` / `def_second_monic`（$\mathcal{D}_n$ / $\mathcal{M}_n$）
+  特性行列 $\mathrm{ch}(A)$・特性多項式 $\chi_A$）
+- 併せて使う定義: `def_constant_polynomial`（$\kappa$）、`def_second_constant_embedding`（$\iota$）、
+  `def_permutation_sign`（符号）
 
 ### 何を確定させるための検証か
 
 本文は、転送行列の固有値が代数的であることへ進む足場として、特性多項式
-$\chi_A=\mathrm{det}_t(\mathrm{ch}(A))$ を定義し、それがモニックな次数 $2^L$ の元であることを示した。
-この検証はその主張と、証明の途中の 3 つの見積もりを固定する。
+$\chi_A=\mathrm{det}_t(\mathrm{ch}(A))$ を定義した。この検証はその定義そのものを固定する。
 
 1. `def_indeterminate_element`。$t$ の係数が本文の 2 つの等式どおりであること
    （$\mathrm{cf}_1(t)=\kappa(1)$、$k\ne1$ で $\mathrm{cf}_k(t)=\kappa(0)$）。
-2. `claim_second_const_degree_zero`。$\iota(a)\in\mathcal{D}_0$。
-3. `claim_second_linear_monic`。$t+\iota(a)\in\mathcal{M}_1$。
-4. `def_characteristic_matrix`。本文は符号の反転を $\mathbb{Z}[x]$ の中で先に済ませる書き方
+2. `def_characteristic_matrix`。本文は符号の反転を $\mathbb{Z}[x]$ の中で先に済ませる書き方
    （$t+\iota(-A_{\tau,\tau})$）を採り、$\mathbb{Z}[x][t]$ の引き算を使わない。この書き方が、
    引き算で書いた $tI-A$ と同じ元であることを確かめる（書き方の違いが値の違いになっていないこと）。
-5. `def_second_determinant` / `def_characteristic_polynomial`。本文の $\mathrm{det}_t$ が
+3. `def_second_determinant` / `def_characteristic_polynomial`。本文の $\mathrm{det}_t$ が
    SageMath 自身の `Matrix.determinant()` と一致すること。Sage の行列式は置換にわたる和ではなく
    分数自由なアルゴリズムであり作り方が独立なので、符号の向きや
    $B_{\tau,\varphi(\tau)}$ と $B_{\varphi(\tau),\tau}$ の取り違えを検出できる。
    あわせて積の添字の並べ方を逆順にしても値が変わらないことを見る。
-6. `claim_characteristic_polynomial_monic`。$\chi_A\in\mathcal{M}_{2^L}$ を、本文の述語
-   （係数で書いた $\mathcal{D}_n$ / $\mathcal{M}_n$）と Sage 自身の
-   `degree()` / `leading_coefficient()` の両方で判定して一致を見る。
-7. 人手証明の 3 つの準備そのもの。恒等置換の項が $\mathcal{M}_{2^L}$ に属すること、恒等でない
-   置換の項が $\mathcal{D}_{2^L-2}$ に属すること、それらの総和が $\mathcal{D}_{2^L-2}$ に属すること。
-   最終の主張だけを見ると、途中の見積もりが誤っていても結論がたまたま成り立つ場合を見逃す。
 
 ## 走らせた範囲（打ち切りを隠さない）
 
@@ -46,8 +33,6 @@ $\chi_A=\mathrm{det}_t(\mathrm{ch}(A))$ を定義し、それがモニックな�
 - 行列 $A$ は 3 種類に限る。転送行列 $T$、成分がすべて異なる $x$ の冪である行列、対角行列。
   **行列の全体は無限集合なので総当たりではない。** 成分がすべて異なる行列を入れたのは、
   $T$ が対称な成分を多く持ち、添字の順序を取り違えても値が変わらない場合があるためである。
-- $\iota(a)\in\mathcal{D}_0$ と $t+\iota(a)\in\mathcal{M}_1$ は $\mathbb{Z}[x]$ の 6 元
-  $\{\kappa(0),\kappa(1),\kappa(2),x,x+\kappa(1),x^2-\kappa(1)\}$ について見る（標本）。
 
 厳密計算のみ（$\mathbb{Z}$、$\mathbb{Z}[x]$、$\mathbb{Z}[x][t]$）。浮動小数点は使わない。
 本文がこの範囲で $\mathbb{R}$ へ脱出していないので、検証側にも脱出を持ち込まない。
@@ -60,16 +45,21 @@ sage sagemath/check/characteristic-polynomial/check.sage
 
 ## 結果
 
-**2026-08-08 実行。すべてのアサーションが成立した。**
+**2026-08-22 実行。すべてのアサーションが成立した。**
 
 ```text
 OK: 不定元 t の係数が本文の 2 つの等式どおりである（cf_1 = kappa(1)、他は kappa(0)）
-OK: iota(a) は D_0 に属し、t + iota(a) は M_1 に属する（ZZ[x] の 6 元で確認）
-OK: L = 1。特性多項式が M_{2^L} に属し、Sage の行列式と一致し、人手証明の 3 つの準備
-    （恒等の項・恒等でない項・その総和）も成り立つ
+OK: L = 1。特性行列の成分が tI - A どおりであり、特性多項式が Sage の行列式と一致し、積の添字の順序によらない
 OK: L = 2。（同上）
 OK: L = 3。（同上）
 すべてのアサーションが成立した（行列は 3 種類に限った標本。置換は全列挙。厳密計算のみ）
 ```
 
 失敗の記録は消さない。この検証では失敗は出ていない。
+
+### 記録
+
+- 2026-08-22 まで、この検証は「特性多項式がモニックな次数 $2^L$ の元である」ことと、その人手証明の
+  途中の見積もり（恒等置換の項・恒等でない置換の項・その総和の次数）も扱っていた。依存関係の集計で
+  その主張を本文のどこも引いていないことが分かったため、本文から次数・モニック性の一連を削除し、
+  この検証もそれに合わせて縮めた。

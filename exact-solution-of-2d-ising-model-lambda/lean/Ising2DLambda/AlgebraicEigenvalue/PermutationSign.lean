@@ -2,17 +2,16 @@
 章「固有値の代数性」の置換と符号の具体版（人手証明と 1 対 1 に対応させる）。
 
 人手証明の正本は `structured-latex/content/main-text.ts`。このファイルは定義 1 件
-（ラベル `def_row_permutation` / `def_inversion_count` / `def_permutation_sign`）と主張 2 件
-（`claim_permutation_sign_values` / `claim_permutation_sign_mul`）に対応する。
+（ラベル `def_row_permutation` / `def_inversion_count` / `def_permutation_sign`）と
+主張「符号は合成について乗法的である」（`claim_permutation_sign_mul`）に対応する。
 
   人手証明                                  このファイル
   S_L（行配位の置換の全体）                 Equiv.Perm (RowConfig L)
   P_L（順序づけられた対の全体）             orderedPairs
   inv(φ)                                    inversionCount
   sgn(φ)                                    permSign
-  第一の主張（sgn は ±1）                   permSign_eq_one_or_neg_one
-  第二の主張（sgn の 2 乗は 1）             permSign_mul_self
-  第三の主張（sgn(id) = 1）                 permSign_id（と inversionCount_id）
+  乗法性の証明が使う段（sgn は ±1）         permSign_eq_one_or_neg_one
+  乗法性の証明が使う段（sgn の 2 乗は 1）   permSign_mul_self
   乗法性の証明の準備の写像 Ψ                pairMap
   Ψ が P_L の中へ入ること                   pairMap_mem
   Ψ が全単射であること                      pairMap_pairMap / pairMap_pairMap_inv
@@ -89,26 +88,17 @@ lemma rowConfigLess_or_rowConfigLess {τ τ' : RowConfig L} (h : τ ≠ τ') :
   · exact absurd heq h
   · exact Or.inr hgt
 
-/-- 第一の主張。符号は `+1` か `-1` である。 -/
-theorem permSign_eq_one_or_neg_one (φ : Equiv.Perm (RowConfig L)) :
+/-- 符号は `+1` か `-1` である（乗法性の証明が使う段）。 -/
+lemma permSign_eq_one_or_neg_one (φ : Equiv.Perm (RowConfig L)) :
     permSign L φ = 1 ∨ permSign L φ = -1 :=
   neg_one_pow_eq_or ℤ _
 
-/-- 第二の主張。符号の 2 乗は `1` である（人手証明の 4 つの等号）。 -/
-theorem permSign_mul_self (φ : Equiv.Perm (RowConfig L)) :
+/-- 符号の 2 乗は `1` である（乗法性の証明が使う段）。 -/
+lemma permSign_mul_self (φ : Equiv.Perm (RowConfig L)) :
     permSign L φ * permSign L φ = 1 := by
   unfold permSign
   rw [← pow_add, ← two_mul, pow_mul, neg_one_sq, one_pow]
 
-/-- 第三の主張の前半。恒等置換の転倒数は `0` である。 -/
-theorem inversionCount_id : inversionCount L (1 : Equiv.Perm (RowConfig L)) = 0 := by
-  rw [inversionCount, card_eq_zero, filter_eq_empty_iff]
-  intro p hp
-  exact not_rowConfigLess_of_rowConfigLess (mem_orderedPairs.mp hp)
-
-/-- 第三の主張。恒等置換の符号は `+1` である（人手証明の 3 つの等号）。 -/
-theorem permSign_id : permSign L (1 : Equiv.Perm (RowConfig L)) = 1 := by
-  rw [permSign, inversionCount_id, pow_zero]
 
 variable (L)
 
