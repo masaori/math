@@ -157,3 +157,4 @@ import Ising3DCut.LimitQuantity.PartitionValueDoesNotDetermineLimitQuantityFromN
 import Ising3DCut.Prediction.PfaffianConstantSign
 import Ising3DCut.Prediction.FisherBoundaryResponsePfaffian
 import Ising3DCut.Prediction.FisherTerminalWeightSum
+import Ising3DCut.Prediction.TerminalMatchingInternalWeight
