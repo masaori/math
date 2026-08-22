@@ -1264,6 +1264,113 @@ d\mid43!.`),
     ],
   },
   {
+    id: "arithmetic_invariants_theorem_fixed_quotient_fisher_splitting_field_degree_prime_131_modular_cycle_constraint",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Fisher 分解体次数の素数百三十一における有限体分解型による絞り込み" },
+    labels: ["theorem_fixed_quotient_fisher_splitting_field_degree_prime_131_modular_cycle_constraint"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-fisher-splitting-field-degree-prime-131-modular-cycle-constraint"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"),
+        " で構成した分解体 ",
+        math(String.raw`K_Q\subset\overline{\mathbb Q}`),
+        " の次数は、",
+      ]),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+\in\left\{93620266740h\,\middle|\,h\in\mathbb N_{>0},\ h\mid\frac{43!}{2127733335}\right\}.`),
+      paragraph([
+        "複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"),
+        " の次数四十四の既約因子を ",
+        math(String.raw`Q_Q\in\mathbb Z[x]`),
+        " とし、素数を ",
+        math(String.raw`p:=131\in\mathbb N`),
+        " とする。",
+        math(String.raw`\operatorname{lc}(Q_Q)\in\mathbb Z`),
+        " を先頭係数、",
+        math(String.raw`\operatorname{disc}(Q_Q)\in\mathbb Z`),
+        " を判別式と書く。整数係数による厳密計算から、",
+      ]),
+      displayMath(String.raw`\operatorname{lc}(Q_Q)\bmod p=63\ne0\in\mathbb F_{131}.`),
+      displayMath(String.raw`\operatorname{disc}(Q_Q)\bmod p=18\ne0\in\mathbb F_{131}.`),
+      paragraph([
+        math(String.raw`\breve{Q}_Q\in\mathbb F_{131}[x]`),
+        " を ",
+        math(String.raw`Q_Q`),
+        " の係数を ",
+        math(String.raw`\mathbb F_{131}`),
+        " へ移した多項式とする。有限体上の厳密因数分解により、",
+      ]),
+      displayMath(String.raw`\breve{Q}_Q
+=63t_1t_2t_{41}\in\mathbb F_{131}[x],`),
+      displayMath(String.raw`\deg t_j=j
+\qquad\bigl(j\in\{1,2,41\}\bigr),`),
+      paragraph([
+        "かつ各 ",
+        math(String.raw`t_j\in\mathbb F_{131}[x]`),
+        " はモニック既約多項式である。先頭係数と判別式が ",
+        math(String.raw`p`),
+        " で零でないので、Dedekind の有限体分解型定理により、",
+        math(String.raw`\operatorname{Gal}(K_Q/\mathbb Q)`),
+        " は四十四根上で巡回長 ",
+        math(String.raw`1,2,41`),
+        " の置換を一つ含む。これを ",
+        math(String.raw`\tau`),
+        " とする。互いに素な巡回置換の積の位数公式により、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{ord}(\tau)
+&=\operatorname{lcm}(1,2,41)
+&&\bigl(\because\ \tau\text{ の巡回分解}\bigr)\\
+&=82.
+\end{aligned}`),
+      paragraph(["Lagrange の定理により、"]),
+      displayMath(String.raw`82\mid\left|\operatorname{Gal}(K_Q/\mathbb Q)\right|.`),
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_splitting_field_degree_divides_factorial"),
+        " の証明で得た有限 Galois 拡大の次数公式により、",
+      ]),
+      displayMath(String.raw`\left|\operatorname{Gal}(K_Q/\mathbb Q)\right|=[K_Q:\mathbb Q].`),
+      displayMath(String.raw`82\mid[K_Q:\mathbb Q].`),
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_degree_prime_103_modular_cycle_constraint"), " より、"]),
+      displayMath(String.raw`207583740\mid[K_Q:\mathbb Q].`),
+      paragraph(["正整数の最小公倍数の性質により、"]),
+      displayMath(String.raw`\operatorname{lcm}(82,207583740)\mid[K_Q:\mathbb Q].`),
+      displayMath(String.raw`8510933340\mid[K_Q:\mathbb Q].`),
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_degree_irreducible_factor_multiple"), " より、"]),
+      displayMath(String.raw`[K_Q:\mathbb Q]=44d,
+\qquad
+d\in\mathbb N_{>0},
+\qquad
+d\mid43!.`),
+      displayMath(String.raw`8510933340\mid44d.`),
+      displayMath(String.raw`4\cdot2127733335\mid4\cdot11d.`),
+      paragraph(["正整数の整除関係における四の消去により、"]),
+      displayMath(String.raw`2127733335\mid11d.`),
+      displayMath(String.raw`\gcd(2127733335,11)=1.`),
+      paragraph(["Euclid の補題により、"]),
+      displayMath(String.raw`2127733335\mid d.`),
+      paragraph([
+        math(String.raw`h:=d/2127733335\in\mathbb N_{>0}`),
+        " と置く。すると",
+      ]),
+      displayMath(String.raw`d=2127733335h.`),
+      displayMath(String.raw`2127733335h\mid43!.`),
+      paragraph(["正整数の整除関係における共通因子の消去により、"]),
+      displayMath(String.raw`h\mid\frac{43!}{2127733335}.`),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+=44\cdot2127733335h.`),
+      displayMath(String.raw`[K_Q:\mathbb Q]=93620266740h.`),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+\in\left\{93620266740h\,\middle|\,h\in\mathbb N_{>0},\ h\mid\frac{43!}{2127733335}\right\}.`),
+    ],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
     kind: "theorem",
     title: { text: "固定剰余類格子の Fisher 零点の有理矩形根分離証明書" },
