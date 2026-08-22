@@ -343,6 +343,7 @@ targets=(
   Ising3DCut.LimitQuantity.padicValRat_two_pow
   Ising3DCut.LimitQuantity.padicValRat_ne_two_pow
   Ising3DCut.LimitQuantity.magnitude_truncated_prime_exponents_are_not_sufficient_for_limit_quantity
+  Ising3DCut.LimitQuantity.sign_of_prime_exponents_is_not_sufficient_for_limit_quantity
   Ising3DCut.NecSuf.finite_coordinate_truncation_not_sufficient
   Ising3DCut.LimitQuantity.realOfExponents_zero
   Ising3DCut.LimitQuantity.realOfExponents_single
