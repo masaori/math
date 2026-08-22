@@ -241,6 +241,19 @@ def truncatedTreeNodeLevel :
   | depth + 1, _, Sum.inr p =>
       truncatedTreeNodeLevel depth p.1 p.2 + 1
 
+/-- 打ち切り前像木の根節点。深さにかかわらず基点そのものを表す。 -/
+def truncatedTreeNodeRoot :
+    (depth : ℕ) → (y : V → State) → TruncatedTreeNode N f depth y
+  | 0, _ => PUnit.unit
+  | _ + 1, _ => Sum.inl PUnit.unit
+
+/-- 根節点が表す配位は基点である。 -/
+theorem truncatedTreeNodeConfiguration_root
+    (depth : ℕ) (y : V → State) :
+    truncatedTreeNodeConfiguration N f depth y
+      (truncatedTreeNodeRoot N f depth y) = y := by
+  cases depth <;> rfl
+
 /-- 抽象節点が表す配位を、その節点の深さだけ一段発展すると基点へ戻る。
     これは節点型と有限配位表を個数だけで対応させず、実際の親子辺を保存する
     全単射へ置き換えるための基礎となる。 -/
@@ -405,6 +418,15 @@ theorem treeNodeEquivOfMatching_root
     treeNodeEquivOfMatching N f NW fW (depth + 1) y yW hmatch (Sum.inl PUnit.unit) =
       Sum.inl PUnit.unit := by
   rfl
+
+/-- 再帰的前像木対応は、深さ零を含む全ての打ち切り深さで根を根へ送る。 -/
+theorem treeNodeEquivOfMatching_root_all
+    (depth : ℕ) (y : V → State) (yW : W → State)
+    (hmatch : HasTreeMatching N f NW fW depth y yW) :
+    treeNodeEquivOfMatching N f NW fW depth y yW hmatch
+        (truncatedTreeNodeRoot N f depth y) =
+      truncatedTreeNodeRoot NW fW depth yW := by
+  cases depth <;> rfl
 
 /-- 子分岐では、選択した子出現対応を先に適用し、その下の部分木対応へ再帰する。 -/
 theorem treeNodeEquivOfMatching_child
@@ -1184,6 +1206,79 @@ theorem preimageTreeNodeTableEquivOfMatching_bijective
         hdepth hdepthW hmatch) :=
   (preimageTreeNodeTableEquivOfMatching N f NW fW q qW hq hqW depth
     hdepth hdepthW hmatch).bijective
+
+/-- 再帰対応で選ばれた非周期子は、構造保存された有限配位表の
+    全単射によって対応先の非周期子そのものへ移る。 -/
+theorem preimageTreeNodeTableEquivOfMatching_maps_child
+    {W : Type} [Fintype W] [DecidableEq W]
+    (NW : W → Finset W)
+    (fW : (w : W) → (↥(NW w) → State) → State)
+    (q : V → State) (qW : W → State)
+    (hq : IsPeriodicPoint N f q) (hqW : IsPeriodicPoint NW fW qW)
+    (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth + 1)
+    (hdepthW : 2 ^ Fintype.card W - 1 ≤ depth + 1)
+    (hmatch : HasTreeMatching N f NW fW (depth + 1) q qW)
+    (z : (nonperiodicChildren N f q).val) :
+    let sourceNode : TruncatedTreeNode N f (depth + 1) q :=
+      Sum.inr ⟨z, truncatedTreeNodeRoot N f depth z⟩
+    let sourceConfiguration :=
+      truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq (depth + 1) hdepth
+        sourceNode
+    (preimageTreeNodeTableEquivOfMatching N f NW fW q qW hq hqW
+        (depth + 1) hdepth hdepthW hmatch sourceConfiguration : W → State) =
+      Classical.choose hmatch z := by
+  dsimp only
+  change
+    ((truncatedTreeNodeEquivPreimageTreeNodeTable NW fW qW hqW
+        (depth + 1) hdepthW)
+      (treeNodeEquivOfMatching N f NW fW (depth + 1) q qW hmatch
+        ((truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq
+          (depth + 1) hdepth).symm
+          (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq
+            (depth + 1) hdepth
+            (Sum.inr ⟨z, truncatedTreeNodeRoot N f depth z⟩)))) : W → State) =
+      Classical.choose hmatch z
+  rw [Equiv.symm_apply_apply]
+  rw [treeNodeEquivOfMatching_child]
+  rw [treeNodeEquivOfMatching_root_all]
+  rw [truncatedTreeNodeEquivPreimageTreeNodeTable_apply]
+  rw [truncatedTreeNodeConfiguration]
+  rw [truncatedTreeNodeConfiguration_root]
+
+/-- 上の有限配位表全単射は、選ばれた非周期子から周期根への
+    一段発展を両側で保存する。 -/
+theorem preimageTreeNodeTableEquivOfMatching_preserves_child_parent_edge
+    {W : Type} [Fintype W] [DecidableEq W]
+    (NW : W → Finset W)
+    (fW : (w : W) → (↥(NW w) → State) → State)
+    (q : V → State) (qW : W → State)
+    (hq : IsPeriodicPoint N f q) (hqW : IsPeriodicPoint NW fW qW)
+    (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth + 1)
+    (hdepthW : 2 ^ Fintype.card W - 1 ≤ depth + 1)
+    (hmatch : HasTreeMatching N f NW fW (depth + 1) q qW)
+    (z : (nonperiodicChildren N f q).val) :
+    let sourceNode : TruncatedTreeNode N f (depth + 1) q :=
+      Sum.inr ⟨z, truncatedTreeNodeRoot N f depth z⟩
+    let sourceConfiguration :=
+      truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq (depth + 1) hdepth
+        sourceNode
+    globalMap N f sourceConfiguration = q ∧
+      globalMap NW fW
+        (preimageTreeNodeTableEquivOfMatching N f NW fW q qW hq hqW
+          (depth + 1) hdepth hdepthW hmatch sourceConfiguration) = qW := by
+  dsimp only
+  constructor
+  · rw [truncatedTreeNodeEquivPreimageTreeNodeTable_apply]
+    rw [truncatedTreeNodeConfiguration]
+    rw [truncatedTreeNodeConfiguration_root]
+    exact (mem_nonperiodicChildren_iff N f q z).1
+      (occurrence_mem (nonperiodicChildren N f q).val z) |>.1
+  · rw [preimageTreeNodeTableEquivOfMatching_maps_child]
+    exact (mem_nonperiodicChildren_iff NW fW qW (Classical.choose hmatch z)).1
+      (occurrence_mem (nonperiodicChildren NW fW qW).val
+        (Classical.choose hmatch z)) |>.1
 
 /-- 相異なる周期点に流入する二つの前像木節点表は交わらない。 -/
 theorem preimageTreeNodeTable_disjoint
