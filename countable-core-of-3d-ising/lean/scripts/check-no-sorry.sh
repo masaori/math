@@ -340,6 +340,7 @@ targets=(
   Ising3DCut.LimitQuantity.exists_prime_not_mem
   Ising3DCut.LimitQuantity.padicValRat_prime_ne
   Ising3DCut.LimitQuantity.finitely_many_primes_are_not_sufficient_for_limit_quantity
+  Ising3DCut.NecSuf.finite_coordinate_truncation_not_sufficient
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
