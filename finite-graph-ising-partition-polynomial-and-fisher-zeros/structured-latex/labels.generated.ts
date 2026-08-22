@@ -63,6 +63,7 @@ export const ALL_LABELS = [
   "theorem_partition_polynomial_positive_rational_evaluation_strictly_below_configuration_count",
   "theorem_partition_polynomial_positive_rational_evaluation_weak_order_reflection",
   "theorem_partition_polynomial_reciprocity_characterizes_full_cut",
+  "theorem_reciprocal_fisher_zero_cube_sum_coefficient_ratio",
   "theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio",
   "theorem_reciprocal_fisher_zero_square_sum_coefficient_ratio",
   "theorem_root_minus_one_characterizes_odd_incident_edge_count",

@@ -2066,6 +2066,144 @@ e_3=-\frac{\Omega_G(d-3)}{\Omega_G(d)}.`),
     ],
   },
   {
+    id: "finite_graph_theorem_reciprocal_fisher_zero_cube_sum_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点逆数の三乗和と係数比" },
+    labels: ["theorem_reciprocal_fisher_zero_cube_sum_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/reciprocal-fisher-zero-cube-sum-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置き、",
+        math(String.raw`d\ge3`),
+        " と仮定する。係数を標準単射",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。このとき、",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\alpha_j^{-3}
+=
+\frac{
+  -\Omega_G(1)^3
+  +3\Omega_G(0)\Omega_G(1)\Omega_G(2)
+  -3\Omega_G(0)^2\Omega_G(3)
+}{
+  \Omega_G(0)^3
+}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.`),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fisher_zeros_nonzero"),
+        " より、全ての",
+        math(String.raw`j\in\{1,\ldots,d\}`),
+        " について",
+        math(String.raw`\alpha_j\ne0`),
+        " であり、逆数",
+        math(String.raw`\alpha_j^{-1}\in\overline{\mathbb Q}`),
+        " が定まる。代数的数",
+        math(String.raw`\widehat e_1,\widehat e_2,\widehat e_3,\widehat s_{2,1}\in\overline{\mathbb Q}`),
+        " を",
+      ]),
+      displayMath(String.raw`\widehat e_1:=\sum_{j=1}^{d}\alpha_j^{-1},
+\qquad
+\widehat e_2:=\sum_{1\le i<j\le d}\alpha_i^{-1}\alpha_j^{-1},
+\qquad
+\widehat e_3:=\sum_{1\le i<j<k\le d}\alpha_i^{-1}\alpha_j^{-1}\alpha_k^{-1},
+\qquad
+\widehat s_{2,1}:=\sum_{\substack{1\le i,j\le d\\i\ne j}}\alpha_i^{-2}\alpha_j^{-1}`),
+      paragraph(["と定める。有限和の分配律により、"]),
+      displayMath(String.raw`\begin{aligned}
+\widehat e_1^3
+&=
+\sum_{j=1}^{d}\alpha_j^{-3}+3\widehat s_{2,1}+6\widehat e_3
+&&\bigl(\because\ \text{三つの添字が全て同じ、二つだけ同じ、全て異なる場合へ分ける}\bigr),\\
+\widehat e_1\widehat e_2
+&=
+\widehat s_{2,1}+3\widehat e_3
+&&\bigl(\because\ \text{一つの添字が選択対に属する場合と属さない場合へ分ける}\bigr).
+\end{aligned}`),
+      paragraph(["したがって代数的数の体で、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{d}\alpha_j^{-3}
+&=
+\widehat e_1^3-3\widehat s_{2,1}-6\widehat e_3
+&&\bigl(\because\ \text{最初の有限和恒等式を移項する}\bigr)\\
+&=
+\widehat e_1^3-3(\widehat e_1\widehat e_2-3\widehat e_3)-6\widehat e_3
+&&\bigl(\because\ \text{二番目の有限和恒等式を }\widehat s_{2,1}\text{ について解いて代入する}\bigr)\\
+&=
+\widehat e_1^3-3\widehat e_1\widehat e_2+9\widehat e_3-6\widehat e_3
+&&\bigl(\because\ \text{分配律}\bigr)\\
+&=
+\widehat e_1^3-3\widehat e_1\widehat e_2+3\widehat e_3
+&&\bigl(\because\ 9\widehat e_3-6\widehat e_3=3\widehat e_3\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio"),
+        " を",
+        math(String.raw`k=1,2,3`),
+        " に適用すると、",
+      ]),
+      displayMath(String.raw`\widehat e_1=-\frac{\Omega_G(1)}{\Omega_G(0)},
+\qquad
+\widehat e_2=\frac{\Omega_G(2)}{\Omega_G(0)},
+\qquad
+\widehat e_3=-\frac{\Omega_G(3)}{\Omega_G(0)}.`),
+      paragraph([
+        "全頂点下向き配位は",
+        ref("def_spin_configuration_set"),
+        " に属し、",
+        ref("def_broken_edge_set"),
+        " の破れ辺数零をもつので、",
+        ref("def_broken_edge_multiplicity"),
+        " より",
+        math(String.raw`\Omega_G(0)\in\mathbb N_{>0}`),
+        " である。直前の三つの逆数族基本対称式を代入すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{d}\alpha_j^{-3}
+&=
+\left(-\frac{\Omega_G(1)}{\Omega_G(0)}\right)^3
+-3\left(-\frac{\Omega_G(1)}{\Omega_G(0)}\right)
+\frac{\Omega_G(2)}{\Omega_G(0)}
++3\left(-\frac{\Omega_G(3)}{\Omega_G(0)}\right)
+&&\bigl(\because\ \text{三つの逆数族基本対称式を代入する}\bigr)\\
+&=
+-\frac{\Omega_G(1)^3}{\Omega_G(0)^3}
++\frac{3\Omega_G(1)\Omega_G(2)}{\Omega_G(0)^2}
+-\frac{3\Omega_G(3)}{\Omega_G(0)}
+&&\bigl(\because\ \text{商の積と }(-1)^3=-1\bigr)\\
+&=
+-\frac{\Omega_G(1)^3}{\Omega_G(0)^3}
++\frac{3\Omega_G(0)\Omega_G(1)\Omega_G(2)}{\Omega_G(0)^3}
+-\frac{3\Omega_G(0)^2\Omega_G(3)}{\Omega_G(0)^3}
+&&\bigl(\because\ \Omega_G(0)\ne0\text{ なので共通分母へ移す}\bigr)\\
+&=
+\frac{
+  -\Omega_G(1)^3
+  +3\Omega_G(0)\Omega_G(1)\Omega_G(2)
+  -3\Omega_G(0)^2\Omega_G(3)
+}{
+  \Omega_G(0)^3
+}
+&&\bigl(\because\ \text{同じ分母をもつ三つの分数を加える}\bigr).
+\end{aligned}`),
+      paragraph([
+        "右辺は有理数なので、Fisher 零点逆数の三乗和は",
+        math(String.raw`\mathbb Q\subset\overline{\mathbb Q}`),
+        " に属する。零点、その逆数と三乗、有限積および有限和は代数的数、次数と多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_full_cut_coefficient_symmetry",
     kind: "theorem",
     title: { text: "全ての辺を横切る頂点二分割と係数対称性" },
