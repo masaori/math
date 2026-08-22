@@ -890,6 +890,58 @@ Q_Q(\sigma(\alpha))
     ],
   },
   {
+    id: "arithmetic_invariants_theorem_fixed_quotient_fisher_splitting_field_degree_irreducible_factor_multiple",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Fisher 分解体次数の既約因子次数による絞り込み" },
+    labels: ["theorem_fixed_quotient_fisher_splitting_field_degree_irreducible_factor_multiple"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-fisher-splitting-field-degree-irreducible-factor-multiple"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"),
+        " で構成した分解体 ",
+        math(String.raw`K_Q\subset\overline{\mathbb Q}`),
+        " の次数は、",
+      ]),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+\in\left\{44d\mid d\in\mathbb N_{>0},\ d\mid43!\right\}.`),
+      paragraph([
+        "複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"),
+        " の次数四十四の既約因子 ",
+        math(String.raw`Q_Q\in\mathbb Q[x]`),
+        " の根を一つ ",
+        math(String.raw`\alpha_1\in\overline{\mathbb Q}`),
+        " とする。同じ定理より、",
+      ]),
+      displayMath(String.raw`[\mathbb Q(\alpha_1):\mathbb Q]=44.`),
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"), " より、"]),
+      displayMath(String.raw`\mathbb Q(\alpha_1)\subset K_Q.`),
+      paragraph(["有限拡大の体の塔の次数公式により、"]),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+=[K_Q:\mathbb Q(\alpha_1)][\mathbb Q(\alpha_1):\mathbb Q].`),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+=44[K_Q:\mathbb Q(\alpha_1)].`),
+      paragraph([
+        math(String.raw`d:=[K_Q:\mathbb Q(\alpha_1)]\in\mathbb N_{>0}`),
+        " と置く。すると",
+      ]),
+      displayMath(String.raw`[K_Q:\mathbb Q]=44d.`),
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_degree_divides_factorial"), " より、"]),
+      displayMath(String.raw`44d\mid44!.`),
+      displayMath(String.raw`44!=44\cdot43!.`),
+      displayMath(String.raw`44d\mid44\cdot43!.`),
+      paragraph(["正整数の整除関係における四十四の消去により、"]),
+      displayMath(String.raw`d\mid43!.`),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+\in\left\{44d\mid d\in\mathbb N_{>0},\ d\mid43!\right\}.`),
+    ],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
     kind: "theorem",
     title: { text: "固定剰余類格子の Fisher 零点の有理矩形根分離証明書" },

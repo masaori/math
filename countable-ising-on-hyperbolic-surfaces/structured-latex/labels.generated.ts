@@ -85,6 +85,7 @@ export const ALL_LABELS = [
   "theorem_finite_fourier_inverse_transform",
   "theorem_fixed_quotient_coefficient_support",
   "theorem_fixed_quotient_fisher_splitting_field_degree_divides_factorial",
+  "theorem_fixed_quotient_fisher_splitting_field_degree_irreducible_factor_multiple",
   "theorem_fixed_quotient_fisher_splitting_field_factorial_degree_bound",
   "theorem_fixed_quotient_fisher_splitting_field_finite_degree",
   "theorem_fixed_quotient_fisher_zero_multiplicity_data",
