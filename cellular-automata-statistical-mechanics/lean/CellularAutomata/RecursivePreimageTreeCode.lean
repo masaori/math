@@ -21,6 +21,7 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 再帰的な子対応が両側の一段発展を親へ移す局所可換性も証明する。
 周期成分表が全配位を重複なく被覆し、各配位の成分添字が一意であることも示す。
 対応する周期成分表ごとの有限全単射を、一意な成分添字に従って全配位写像へ接着する。
+各周期成分表を、周期上の一意な根とその根へ流入する有限配位表との従属和へ分解する。
 この写像を再帰的前像木対応で置き換えた全単射性・共役条件・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
@@ -1087,6 +1088,63 @@ theorem exists_unique_periodicComponent (y : V → State) :
   intro P hyP
   apply Subtype.ext
   exact ((mem_periodicComponentNodeTable_iff N f P y).1 hyP).symm
+
+/-- 一つの周期軌道へ流入する周期成分表は、周期上の一意な根と、
+    その根へ流入する前像木節点表との従属和に全単射である。
+    周期位置ごとの前像木対応を周期成分対応へ接着するための分割である。 -/
+noncomputable def periodicComponentRootSigmaEquiv
+    (q : V → State) (hq : IsPeriodicPoint N f q) :
+    (Σ n : Fin (minPeriod N f q),
+      ↑(preimageTreeNodeTable N f (iterate N f n q))) ≃
+        ↑(periodicComponentNodeTable N f (periodicOrbit N f q)) :=
+  Equiv.ofBijective
+    (fun p => ⟨p.2, by
+      rw [mem_periodicComponentNodeTable_iff]
+      have hroot := (mem_preimageTreeNodeTable_iff N f _ p.2).1 p.2.property
+      rw [hroot]
+      exact periodicOrbit_eq_of_mem N f q (iterate N f p.1 q) hq
+        ((mem_periodicOrbit_iff_exists N f q _ hq).2 ⟨p.1, rfl⟩)⟩)
+    ⟨by
+      intro a b hab
+      have hroota := (mem_preimageTreeNodeTable_iff N f _ a.2).1 a.2.property
+      have hrootb := (mem_preimageTreeNodeTable_iff N f _ b.2).1 b.2.property
+      have habValue : (a.2 : V → State) = (b.2 : V → State) :=
+        congrArg Subtype.val hab
+      have hiter : iterate N f a.1 q = iterate N f b.1 q := by
+        exact hroota.symm.trans
+          ((congrArg (eventualPeriodicRoot N f) habValue).trans hrootb)
+      have hn : (a.1 : ℕ) = (b.1 : ℕ) :=
+        iterate_injective_before_minPeriod N f q hq
+          (by simp [a.1.isLt]) (by simp [b.1.isLt]) hiter
+      have habIndex : a.1 = b.1 := Fin.ext hn
+      cases a with
+      | mk ai av =>
+          cases b with
+          | mk bi bv =>
+              cases habIndex
+              have hav : av = bv := Subtype.ext habValue
+              cases hav
+              rfl,
+    by
+      intro y
+      have hyorbit := (mem_periodicComponentNodeTable_iff N f _ y).1 y.property
+      have hyroot := eventualPeriodicRoot_isPeriodicPoint N f y
+      have hrootmem : eventualPeriodicRoot N f y ∈ periodicOrbit N f q := by
+        have hself := mem_periodicOrbit_self N f _ hyroot
+        rw [hyorbit] at hself
+        exact hself
+      obtain ⟨n, hn, hiterate⟩ := Finset.mem_image.mp hrootmem
+      let p : Σ n : Fin (minPeriod N f q),
+          ↑(preimageTreeNodeTable N f (iterate N f n q)) :=
+        ⟨⟨n, Finset.mem_range.mp hn⟩, ⟨y, by
+          rw [mem_preimageTreeNodeTable_iff]
+          exact hiterate.symm⟩⟩
+      exact ⟨p, Subtype.ext rfl⟩⟩
+
+theorem periodicComponentRootSigmaEquiv_bijective
+    (q : V → State) (hq : IsPeriodicPoint N f q) :
+    Function.Bijective (periodicComponentRootSigmaEquiv N f q hq) :=
+  (periodicComponentRootSigmaEquiv N f q hq).bijective
 
 /-- 周期点を基点とする一周期の前像木節点数は、十分な深さでは
     その周期成分へ流入する全配位の個数に一致する。 -/
