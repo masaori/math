@@ -505,6 +505,7 @@ export const ALL_LABELS = [
   "def_walk_of_family",
   "def_walk_weight",
   "def_zero_pinching_predicate",
+  "remark_low_high_duality_roles",
   "remark_planned_chapters",
   "remark_positive_cone_sign_choice",
   "remark_real_escape_plan",

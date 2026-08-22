@@ -18,4 +18,6 @@
 
 ## 現在のタスク
 
-まだ指示書は無い。次にやることは [MEMORY.md](../../MEMORY.md) の「次回やること」を見る。
+Onsager 閉形式までの実行順序と個別指示書は
+[Onsager 閉形式への接続](onsager-closed-form-connection/task-dependency-graph.md) にある。
+最初に実行可能なのは、トーラスの向き付き辺・回転位相・四つのスピン構造を定義するタスクである。

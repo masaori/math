@@ -28878,7 +28878,7 @@ S_L(A)
         kind: "section",
         id: "fisher_zero_heading_winding_sectors",
         labels: [],
-        title: { text: "巻き付きセクターと双対恒等式" },
+        title: { text: "巻き付きセクターによる低温展開と高温展開の対応" },
         children: [
           {
             role: "primary",
@@ -35578,27 +35578,47 @@ a\cdot a
                       " のとおりで、",
                       math(String.raw`x_c`),
                       " の指定は同じ形で保たれる。実数の平方根記号を使う流儀ではこの元は ",
+                      math(String.raw`\sqrt2-1`),
+                      " と書かれるが、本文ではその記号を使わず、",
+                      math(String.raw`s`),
+                      " と正錐で指定する（実数体の順序は使っていない）。",
                     ]),
                     paragraph([
-                      "この元を臨界点と呼ぶ理由は、それが双対変換の不動点だからである。",
-                      ref("claim_kw_self_dual_quadratic_equivalence"),
-                      " により、",
-                      math(String.raw`1+\xi\ne0`),
-                      " を満たす ",
-                      math(String.raw`\xi\in\overline{\mathbb{Q}}`),
-                      " について ",
-                      math(String.raw`\mathrm{KW}(\xi)=\xi`),
-                      " と ",
-                      math(String.raw`\xi^2+2\xi-1=0`),
-                      " は同値なので、上で自己双対方程式の根として指定した ",
-                      math(String.raw`x_c`),
-                      " は ",
-                      math(String.raw`\mathrm{KW}`),
-                      " の不動点である（",
-                      math(String.raw`1+x_c=s\ne0`),
-                      " は ",
+                      "次に、この元が双対変換の不動点であることを示す。",
+                      ref("claim_self_dual_quadratic_roots"),
+                      " により ",
+                      math(String.raw`x_c^2+2x_c-1=0`),
+                      " である。また ",
+                      math(String.raw`1+x_c=s`),
+                      " であり、",
                       math(String.raw`s\cdot s=2\ne0`),
-                      " から従う）。さらに ",
+                      " なので ",
+                      math(String.raw`s\ne0`),
+                      "、したがって ",
+                      math(String.raw`1+x_c\ne0`),
+                      " である。ゆえに ",
+                      ref("claim_kw_self_dual_quadratic_equivalence"),
+                      " を ",
+                      math(String.raw`\xi=x_c`),
+                      " へ適用して ",
+                      math(String.raw`\mathrm{KW}(x_c)=x_c`),
+                      " を得る。逆に、",
+                      math(String.raw`\xi\in P_s`),
+                      " が ",
+                      math(String.raw`1+\xi\ne0`),
+                      " を満たし、かつ ",
+                      math(String.raw`\mathrm{KW}(\xi)=\xi`),
+                      " ならば、分母非零の仮定が揃っているので同じ同値から ",
+                      math(String.raw`\xi^2+2\xi-1=0`),
+                      "、さらに ",
+                      ref("claim_self_dual_positive_root_unique"),
+                      " から ",
+                      math(String.raw`\xi=x_c`),
+                      " である。したがって ",
+                      math(String.raw`x_c`),
+                      " は正錐 ",
+                      math(String.raw`P_s`),
+                      " に属する唯一の不動点である。さらに ",
                       ref("claim_kw_dual_transform_involution"),
                       " により ",
                       math(String.raw`\mathrm{KW}`),
@@ -35609,10 +35629,6 @@ a\cdot a
                       " は対等に対応する。不動点はその対応で自分自身に写る点であり、この意味で ",
                       math(String.raw`x_c`),
                       " は自己双対な点である。",
-                      math(String.raw`\sqrt2-1`),
-                      " と書かれるが、本文ではその記号を使わず、",
-                      math(String.raw`s`),
-                      " と正錐で指定する（実数体の順序は使っていない）。",
                     ]),
                   ],
                 },
@@ -35635,6 +35651,50 @@ a\cdot a
               kind: "elementGroup",
               id: "group_of_fisher_zero_claim_sector_value_duality",
               beforeFocus: [
+                {
+                  role: "explanation",
+                  element:
+                    {
+                      id: "fisher_zero_remark_low_high_duality_roles",
+                      kind: "remark",
+                      title: { text: "低温展開・高温展開・双対変換の役割" },
+                      labels: ["remark_low_high_duality_roles"],
+                      habitat: "Q",
+                      statement: [
+                        paragraph([
+                          "ここまでに現れた三種類の等式は役割が異なる。低温展開は、配位の破れた辺を双対辺へ移し、同じ点 ",
+                          math(String.raw`q`),
+                          " で ",
+                          math(String.raw`Z_L(q)=2G^{0,0}_L(q)`),
+                          " と書く（",
+                          ref("claim_low_temperature_trivial_sector_expression"),
+                          "）。周期配位から得る領域壁は巻き付き偶奇が零なので、自明セクターだけが現れる。",
+                        ]),
+                        paragraph([
+                          "高温展開は、各辺の二項を展開して同じ点 ",
+                          math(String.raw`q`),
+                          " で ",
+                          math(String.raw`2^{L^2}Z_L(q)=H_L(q)`),
+                          " と書き（",
+                          ref("claim_high_temperature_polynomial_identity"),
+                          "）、偶部分グラフを四つの巻き付きセクターへ分けて ",
+                          math(String.raw`H_L(q)=\sum_{a,b}H^{a,b}_L(q)`),
+                          " と書く（",
+                          ref("claim_high_temperature_sector_decomposition"),
+                          "）。ここまでは一つの点での数え直しであり、双対変換ではない。",
+                        ]),
+                        paragraph([
+                          "Kramers--Wannier 双対変換が初めて現れるのは、次の主張で点を ",
+                          math(String.raw`q`),
+                          " から ",
+                          math(String.raw`\mathrm{KW}(q)=(1-q)(1+q)^{-1}`),
+                          " へ移し、各セクターについて ",
+                          math(String.raw`H^{a,b}_L(q)=(1+q)^{2L^2}G^{a,b}_L(\mathrm{KW}(q))`),
+                          " と結ぶ段である。したがって、低温展開と高温展開は同じ分配多項式の二つの有限な数え直しであり、双対変換は高温側の各セクターを双対な点での低温型生成多項式へ結ぶ写像である。",
+                        ]),
+                      ],
+                    },
+                },
                 {
                   role: "prerequisiteDefinition",
                   element:
@@ -36099,14 +36159,6 @@ H^{a,b}_L(q)
                         ]),
                         displayMath(String.raw`\begin{aligned}
 2^{L^2}\cdot Z_L(q)
-&=2^{L^2}\cdot\bigl(2\cdot G^{0,0}_L(q)\bigr)
-&&\bigl(\because\ \blkref{claim_low_temperature_trivial_sector_expression}\ \text{と、代入は環準同型なので積を保つ}\bigr)\\
-&=\bigl(2^{L^2}\cdot2\bigr)\cdot G^{0,0}_L(q)
-&&\bigl(\because\ \text{積の結合則}\bigr)\\
-&=2^{\,L^2+1}\cdot G^{0,0}_L(q)
-&&\bigl(\because\ \text{冪の指数法則}\ 2^{L^2}\cdot2=2^{L^2+1}\bigr)\\
-&=2^{L^2}\cdot Z_L(q)
-&&\bigl(\because\ \blkref{claim_low_temperature_trivial_sector_expression}\ \text{を右辺から左辺へ}\bigr)\\
 &=H_L(q)
 &&\bigl(\because\ \blkref{claim_high_temperature_polynomial_identity}\ \text{と、代入は環準同型}\bigr)\\
 &=H^{0,0}_L(q)+H^{0,1}_L(q)+H^{1,0}_L(q)+H^{1,1}_L(q)
