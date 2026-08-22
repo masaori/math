@@ -1246,6 +1246,17 @@ theorem componentwiseConfigurationMap_mem_corresponding_component
     (periodicComponentOccurrenceIndex N f y)
       ⟨y, periodicComponentIndex_spec N f y⟩).property
 
+/-- 配位 `y` が周期成分 `O` の成分表に入るなら、
+    一意性によって選んだ成分添字は `O` そのものである。 -/
+theorem periodicComponentIndex_eq_of_mem
+    (O : periodicOrbitTable N f) (y : V → State)
+    (hy : y ∈ periodicComponentNodeTable N f O) :
+    periodicComponentIndex N f y = O := by
+  apply Subtype.ext
+  exact ((mem_periodicComponentNodeTable_iff N f _ y).1
+    (periodicComponentIndex_spec N f y)).symm.trans
+      ((mem_periodicComponentNodeTable_iff N f _ y).1 hy)
+
 /-- 等しい基点語を持つ周期点の対応に、周期上の各位置へ
     非周期前像木の全深さ対応を接着する。共通の打ち切り深さを
     作るときにだけ、両舞台のセル数一致を使う。 -/
