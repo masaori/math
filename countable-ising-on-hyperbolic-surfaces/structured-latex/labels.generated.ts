@@ -103,6 +103,7 @@ export const ALL_LABELS = [
   "theorem_full_cut_coefficient_symmetry",
   "theorem_full_cut_fisher_zero_minus_one_multiplicity_parity",
   "theorem_full_cut_fisher_zero_product",
+  "theorem_full_cut_fisher_zero_product_away_from_minus_one",
   "theorem_full_cut_fisher_zero_reciprocal_multiplicity",
   "theorem_full_cut_positive_rational_evaluation_reciprocity",
   "theorem_generated_quotient_cellulation_is_hyperbolic_regular",

@@ -1774,6 +1774,121 @@ R_\alpha(\alpha^{-1})
     ],
   },
   {
+    id: "finite_graph_theorem_full_cut_fisher_zero_product_away_from_minus_one",
+    kind: "theorem",
+    title: { text: "全辺二分割をもつ有限グラフの零点 -1 を除く Fisher 零点積" },
+    labels: ["theorem_full_cut_fisher_zero_product_away_from_minus_one"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/full-cut-fisher-zero-product-away-from-minus-one"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属すると仮定する。",
+        ref("theorem_full_cut_fisher_zero_reciprocal_multiplicity"),
+        " の零点重複度を ",
+        math(String.raw`\mu_G:\overline{\mathbb Q}\to\mathbb N`),
+        " とし、非零 Fisher 零点の有限集合を",
+      ]),
+      displayMath(String.raw`\mathcal Z_G:=
+\left\{
+  \alpha\in\overline{\mathbb Q}^{\times}
+  \;\middle|\;
+  \mu_G(\alpha)>0
+\right\}`),
+      paragraph(["と置く。このとき零点 ", math(String.raw`-1`), " を除く重複度込み積は"]),
+      displayMath(String.raw`\prod_{\alpha\in\mathcal Z_G\setminus\{-1\}}
+\alpha^{\mu_G(\alpha)}=1
+\quad\text{in }\overline{\mathbb Q}.`),
+      paragraph([
+        math(String.raw`\mathcal Z_G\setminus\{-1\}=\varnothing`),
+        " の場合、左辺は空積 ",
+        math(String.raw`1\in\overline{\mathbb Q}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("claim_partition_polynomial_value_at_one"), " を標準単射で ", math(String.raw`\overline{\mathbb Q}`), " へ移すと"]),
+      displayMath(String.raw`\begin{aligned}
+\overline P_G(1)
+&=2^{|V|}
+&&\bigl(\because\ Z_G(1)=2^{|V|}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}>0\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\mu_G(1)=0
+\quad\bigl(\because\ \overline P_G(1)\ne0\bigr).`),
+      paragraph([
+        ref("theorem_full_cut_fisher_zero_reciprocal_multiplicity"),
+        " より、逆数写像は ",
+        math(String.raw`\mathcal Z_G`),
+        " と各零点の重複度を保つ。さらに ",
+        math(String.raw`\alpha\in\overline{\mathbb Q}^{\times}`),
+        " が逆数写像の固定点ならば",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha
+&=\alpha^{-1}
+&&\bigl(\because\ \text{逆数写像の固定点である}\bigr)\\
+\alpha^2
+&=1
+&&\bigl(\because\ \alpha\ne0\text{ なので両辺へ }\alpha\text{ を掛ける}\bigr)\\
+\alpha^2-1
+&=0
+&&\bigl(\because\ \text{両辺から }1\text{ を引く}\bigr)\\
+(\alpha-1)(\alpha+1)
+&=0
+&&\bigl(\because\ \alpha^2-1=(\alpha-1)(\alpha+1)\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\overline{\mathbb Q}`),
+        " は体であり、",
+        math(String.raw`\mu_G(1)=0`),
+        " なので、",
+        math(String.raw`\mathcal Z_G\setminus\{-1\}`),
+        " は相異なる二元からなる逆数軌道 ",
+        math(String.raw`\{\alpha,\alpha^{-1}\}`),
+        " へ分割される。その軌道全体からなる有限集合を",
+      ]),
+      displayMath(String.raw`\mathcal O_G:=
+\left\{
+  \{\alpha,\alpha^{-1}\}
+  \;\middle|\;
+  \alpha\in\mathcal Z_G\setminus\{-1\}
+\right\}`),
+      paragraph(["と置く。各 ", math(String.raw`O=\{\alpha,\alpha^{-1}\}\in\mathcal O_G`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\beta\in O}\beta^{\mu_G(\beta)}
+&=\alpha^{\mu_G(\alpha)}(\alpha^{-1})^{\mu_G(\alpha^{-1})}
+&&\bigl(\because\ O=\{\alpha,\alpha^{-1}\}\text{ かつ }\alpha\ne\alpha^{-1}\bigr)\\
+&=\alpha^{\mu_G(\alpha)}(\alpha^{-1})^{\mu_G(\alpha)}
+&&\bigl(\because\ \mu_G(\alpha^{-1})=\mu_G(\alpha)\bigr)\\
+&=(\alpha\alpha^{-1})^{\mu_G(\alpha)}
+&&\bigl(\because\ \text{可換体における同じ自然数冪の積}\bigr)\\
+&=1
+&&\bigl(\because\ \alpha\ne0\text{ かつ }\alpha\alpha^{-1}=1\bigr).
+\end{aligned}`),
+      paragraph(["したがって有限な逆数軌道全体にわたって積を取ると"]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\alpha\in\mathcal Z_G\setminus\{-1\}}\alpha^{\mu_G(\alpha)}
+&=\prod_{O\in\mathcal O_G}\prod_{\beta\in O}\beta^{\mu_G(\beta)}
+&&\bigl(\because\ \text{有限集合の逆数二元軌道による分割}\bigr)\\
+&=\prod_{O\in\mathcal O_G}1
+&&\bigl(\because\ \text{各逆数軌道の積は }1\bigr)\\
+&=1
+&&\bigl(\because\ \text{有限個の }1\text{ の積、空積も }1\bigr).
+\end{aligned}`),
+      paragraph([
+        "零点と積は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        "、重複度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },
