@@ -488,7 +488,7 @@ P_f^Q\longrightarrow\mathcal E_Q\times\mathsf{Ori}`),
     standing: "mainTheorem",
     title: { text: "生成剰余類セルデータの有限検査" },
     labels: ["theorem_generated_quotient_cellulation_is_hyperbolic_regular"],
-    habitat: "Q",
+    habitat: "N",
     verification: ["sagemath/check/generated-quotient-cellulation-finite-check"],
     statement: [
       paragraph([
@@ -536,23 +536,26 @@ r_E
         math(String.raw`\mathcal C_Q`),
         "、",
         math(String.raw`\bigl(\partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f\bigr)_{f\in\mathcal F_Q}`),
-        " と書く。このとき",
+        " と書き、構造化データを",
       ]),
-      displayMath(String.raw`\operatorname{HyperbolicRegularType}_{3,7}
+      displayMath(String.raw`\mathcal X_Q
+:=
 \left(
   G_Q,
   \mathcal C_Q,
   \left(
+    \mathcal P_f^Q,
     \partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f
   \right)_{f\in\mathcal F_Q}
-\right)
-=\mathrm{true}`),
+\right)`),
+      paragraph(["とする。このとき"]),
+      displayMath(String.raw`(3,7)
+\in
+\operatorname{HyperbolicRegularTypes}(\mathcal X_Q)`),
       paragraph([
         "である。ここで ",
         math(String.raw`3,7\in\mathbb N_{>0}`),
-        "、三つのセル集合、端点写像、位置集合、境界語は有限集合または有限集合間の写像であり、双曲型判定の不等式だけが ",
-        math(String.raw`\mathbb Q`),
-        " に属する。実数、複素数、極限、積分は用いない。",
+        "、三つのセル集合、端点写像、位置集合、境界語は有限集合または有限集合間の写像である。双曲条件も自然数上で判定し、実数、複素数、極限、積分は用いない。",
       ]),
     ],
     proof: [
@@ -598,35 +601,29 @@ r_E
 =\mathrm{true}.`),
       paragraph([
         "さらに全五十六面の位置集合の元数は三であり、全二十四頂点に接する角位置の元数は七である。",
-        ref("def_finite_cellulation_regular_type"),
+        "したがって ",
+        math(String.raw`D_F(\mathcal X_Q)=\{3\}`),
+        " および ",
+        math(String.raw`D_V(\mathcal X_Q)=\{7\}`),
+        " である。",
+        ref("def_finite_cellulation_regular_type_set"),
         " より",
       ]),
-      displayMath(String.raw`\operatorname{RegularType}_{3,7}
-\left(
-  G_Q,
-  \mathcal C_Q,
-  \left(
-    \partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f
-  \right)_{f\in\mathcal F_Q}
-\right)
-=\mathrm{true}.`),
+      displayMath(String.raw`(3,7)
+\in
+\operatorname{RegularTypes}(\mathcal X_Q).`),
       displayMath(String.raw`\begin{aligned}
-\frac13+\frac17
-&=\frac{10}{21},\\
-\frac{10}{21}
-&<\frac12
-\qquad(\because 20<21).
+2(3+7)
+&=20,\\
+3\cdot 7
+&=21,\\
+20
+&<21.
 \end{aligned}`),
-      paragraph([ref("def_finite_cellulation_hyperbolic_regular_type"), " より"]),
-      displayMath(String.raw`\operatorname{HyperbolicRegularType}_{3,7}
-\left(
-  G_Q,
-  \mathcal C_Q,
-  \left(
-    \partial_{\mathrm{word}}^{Q,\eta_E^{\min}}f
-  \right)_{f\in\mathcal F_Q}
-\right)
-=\mathrm{true}.`),
+      paragraph([ref("def_finite_cellulation_hyperbolic_regular_type_set"), " より"]),
+      displayMath(String.raw`(3,7)
+\in
+\operatorname{HyperbolicRegularTypes}(\mathcal X_Q).`),
     ],
   },
   {

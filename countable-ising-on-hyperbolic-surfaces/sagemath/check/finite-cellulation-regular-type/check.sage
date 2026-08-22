@@ -1,7 +1,7 @@
-# SageMath: 有限セル分割の正則型を判定する有限述語の厳密検算
-# 対象ラベル: def_finite_cellulation_regular_type
-# 対象: structured-latex/content/finite-cellulation.ts の「有限セル分割の正則型」
-# 帰属: 辺端・向き・位置の各有限ラベル集合、NN、真偽値だけを用いる。
+# SageMath: 有限セル分割データの正則型集合の厳密検算
+# 対象ラベル: def_finite_cellulation_regular_type_set
+# 対象: structured-latex/content/finite-cellulation.ts の「有限セル分割データの正則型集合」
+# 帰属: 辺端・向き・位置の各有限ラベル集合と NN だけを用いる。
 
 SOURCE = "source"
 TARGET = "target"
@@ -43,20 +43,18 @@ def corner_vertex(word, position, endpoints):
     return endpoints[edge][terminal_label]
 
 
-def regular_type(vertices, endpoints, boundary_words, p, q, oriented_closed):
-    p = NN(p)
-    q = NN(q)
-    if p == 0 or q == 0 or not oriented_closed:
-        return False
-    if any(len(word["positions"]) != p for word in boundary_words.values()):
-        return False
-
+def regular_types(vertices, endpoints, boundary_words):
+    face_degree_image = Set([NN(len(word["positions"])) for word in boundary_words.values()])
     corner_counts = {vertex: NN(0) for vertex in vertices}
     for word in boundary_words.values():
         for position in word["positions"]:
             vertex = corner_vertex(word, position, endpoints)
             corner_counts[vertex] += 1
-    return all(corner_counts[vertex] == q for vertex in vertices)
+    vertex_degree_image = Set([corner_counts[vertex] for vertex in vertices])
+
+    if face_degree_image.cardinality() != 1 or vertex_degree_image.cardinality() != 1:
+        return Set([])
+    return Set([(face_degree_image.an_element(), vertex_degree_image.an_element())])
 
 
 # 三角形二面を反対向きに貼った球面では、各面に三つの辺出現があり、各頂点に二つの角が接する。
@@ -70,41 +68,41 @@ sphere_boundary_words = {
     "north": cyclic_word((("north-a", "a", FORWARD), ("north-b", "b", FORWARD), ("north-c", "c", FORWARD))),
     "south": cyclic_word((("south-c", "c", REVERSE), ("south-b", "b", REVERSE), ("south-a", "a", REVERSE))),
 }
-assert regular_type(
+assert regular_types(
     sphere_vertices,
     sphere_endpoints,
     sphere_boundary_words,
-    3,
-    2,
-    oriented_closed=True,
+) == Set([(NN(3), NN(2))])
+assert (NN(3), NN(2)) in regular_types(
+    sphere_vertices,
+    sphere_endpoints,
+    sphere_boundary_words,
 )
 
-# 面の辺出現数または頂点の角出現数が指定値と異なれば拒否する。
-assert not regular_type(
-    sphere_vertices,
-    sphere_endpoints,
-    sphere_boundary_words,
-    4,
-    2,
-    oriented_closed=True,
-)
-assert not regular_type(
-    sphere_vertices,
-    sphere_endpoints,
-    sphere_boundary_words,
-    3,
-    3,
-    oriented_closed=True,
-)
+# 三角形四面と正方形一面からなる四角錐の球面では、面次数と頂点次数が一定でない。
+pyramid_vertices = ("A", "B", "C", "D", "E")
+pyramid_endpoints = {
+    "AB": {SOURCE: "A", TARGET: "B"},
+    "AC": {SOURCE: "A", TARGET: "C"},
+    "AD": {SOURCE: "A", TARGET: "D"},
+    "AE": {SOURCE: "A", TARGET: "E"},
+    "BC": {SOURCE: "B", TARGET: "C"},
+    "CD": {SOURCE: "C", TARGET: "D"},
+    "DE": {SOURCE: "D", TARGET: "E"},
+    "EB": {SOURCE: "E", TARGET: "B"},
+}
+pyramid_boundary_words = {
+    "ABC": cyclic_word((("ABC-AB", "AB", FORWARD), ("ABC-BC", "BC", FORWARD), ("ABC-AC", "AC", REVERSE))),
+    "ACD": cyclic_word((("ACD-AC", "AC", FORWARD), ("ACD-CD", "CD", FORWARD), ("ACD-AD", "AD", REVERSE))),
+    "ADE": cyclic_word((("ADE-AD", "AD", FORWARD), ("ADE-DE", "DE", FORWARD), ("ADE-AE", "AE", REVERSE))),
+    "AEB": cyclic_word((("AEB-AE", "AE", FORWARD), ("AEB-EB", "EB", FORWARD), ("AEB-AB", "AB", REVERSE))),
+    "BCDE": cyclic_word((("BCDE-EB", "EB", REVERSE), ("BCDE-DE", "DE", REVERSE), ("BCDE-CD", "CD", REVERSE), ("BCDE-BC", "BC", REVERSE))),
+}
 
-# incidence が一致しても、向き付け閉曲面述語を満たさない入力は正則型と呼ばない。
-assert not regular_type(
-    sphere_vertices,
-    sphere_endpoints,
-    sphere_boundary_words,
-    3,
-    2,
-    oriented_closed=False,
-)
+assert regular_types(
+    pyramid_vertices,
+    pyramid_endpoints,
+    pyramid_boundary_words,
+) == Set([])
 
-print("RESULT: PASS — accepted regular type {3,2} and rejected three failed conjuncts")
+print("RESULT: PASS — the regular-type set is {(3,2)} for the triangular sphere and empty for the irregular pyramid sphere")

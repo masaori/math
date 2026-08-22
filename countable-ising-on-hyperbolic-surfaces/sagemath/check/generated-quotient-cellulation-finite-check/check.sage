@@ -1,6 +1,6 @@
 # SageMath: 生成剰余類セルデータの有限検査
 # 対象ラベル: theorem_generated_quotient_cellulation_is_hyperbolic_regular
-# 帰属: 有限置換群、有限集合、NN、QQ、真偽値だけを用いる
+# 帰属: 有限置換群、有限集合、NN、真偽値だけを用いる
 
 SOURCE = "source"
 TARGET = "target"
@@ -249,7 +249,7 @@ assert cyclic_links
 assert connected
 assert oriented_closed
 
-face_sizes_are_three = all(len(word["positions"]) == 3 for word in boundary_words.values())
+face_degree_image = Set([NN(len(word["positions"])) for word in boundary_words.values()])
 corner_counts = {vertex: 0 for vertex in vertices}
 for word in boundary_words.values():
     for position in word["positions"]:
@@ -257,17 +257,24 @@ for word in boundary_words.values():
         orientation = word["orientation_at"][position]
         corner_vertex = endpoints[edge][TERMINAL_END[orientation]]
         corner_counts[corner_vertex] += 1
-vertex_corner_counts_are_seven = all(count == 7 for count in corner_counts.values())
-regular_type = oriented_closed and face_sizes_are_three and vertex_corner_counts_are_seven
-assert regular_type
+vertex_degree_image = Set([NN(count) for count in corner_counts.values()])
+assert face_degree_image == Set([NN(3)])
+assert vertex_degree_image == Set([NN(7)])
 
-hyperbolic_inequality = QQ(1) / QQ(3) + QQ(1) / QQ(7) < QQ(1) / QQ(2)
-hyperbolic_regular_type = regular_type and hyperbolic_inequality
-assert hyperbolic_inequality
-assert hyperbolic_regular_type
+regular_types = Set([])
+if face_degree_image.cardinality() == 1 and vertex_degree_image.cardinality() == 1:
+    regular_types = Set([(face_degree_image.an_element(), vertex_degree_image.an_element())])
+assert regular_types == Set([(NN(3), NN(7))])
+
+hyperbolic_regular_types = Set([
+    (p, q)
+    for p, q in regular_types
+    if 2 * (p + q) < p * q
+])
+assert (NN(3), NN(7)) in hyperbolic_regular_types
 
 print(
     "RESULT: PASS — the sourced degree-eight Hurwitz triple generates 24 vertices, "
     "84 edges, and 56 triangular faces; all vertex links are seven-cycles, the "
-    "one-skeleton is connected, and the existing {3,7} hyperbolic regular predicate holds"
+    "one-skeleton is connected, and (3,7) belongs to the hyperbolic regular-type set"
 )

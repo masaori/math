@@ -519,47 +519,67 @@ v_0=v,\qquad v_r=w,\qquad
     ],
   },
   {
-    id: "finite_cellulation_definition_regular_type",
+    id: "finite_cellulation_definition_regular_type_set",
     kind: "definition",
-    title: { text: "有限セル分割の正則型" },
-    labels: ["def_finite_cellulation_regular_type"],
+    title: { text: "有限セル分割データの正則型集合" },
+    labels: ["def_finite_cellulation_regular_type_set"],
     habitat: "finite",
     verification: ["sagemath/check/finite-cellulation-regular-type"],
     statement: [
       paragraph([
         ref("def_oriented_closed_surface_cellulation"),
-        " を満たす有限セル分割と、正整数 ",
-        math(String.raw`p,q\in\mathbb N_{>0}`),
-        " に対し、そのセル分割が正則型 ",
-        math(String.raw`\{p,q\}`),
-        " であることを表す述語 ",
-        math(String.raw`\operatorname{RegularType}_{p,q}`),
-        " を次の条件として定める。",
+        " を満たす有限セル分割の入力を、一つの構造化データ",
+      ]),
+      displayMath(String.raw`\mathcal X
+:=
+\left(
+  G,
+  \mathcal C_{\mathrm{cell}},
+  \left(
+    \mathcal P_f,
+    \partial_{\mathrm{word}}f
+  \right)_{f\in F_{\mathrm{cell}}}
+\right)`),
+      paragraph([
+        "とまとめる。以下では ",
+        math(String.raw`\mathcal X`),
+        " が向き付け閉曲面条件",
+      ]),
+      displayMath(String.raw`\operatorname{OrientedClosedSurfaceCellulation}
+\left(
+  G,
+  \mathcal C_{\mathrm{cell}},
+  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
+\right)
+=\mathrm{true}`),
+      paragraph([
+        "を満たすことを仮定する。面次数写像と頂点次数写像をそれぞれ",
       ]),
       displayMath(String.raw`\begin{aligned}
-&\operatorname{RegularType}_{p,q}
-\left(
-  G,
-  \mathcal C_{\mathrm{cell}},
-  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
-\right)
-\Longleftrightarrow\\
-&\quad
-\operatorname{OrientedClosedSurfaceCellulation}
-\left(
-  G,
-  \mathcal C_{\mathrm{cell}},
-  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
-\right)
-\ \land\\
-&\quad
-\lvert P_f\rvert=p
-\qquad\left(\text{任意の }f\in F_{\mathrm{cell}}\text{ に対して}\right)
-\ \land\\
-&\quad
-\lvert C_v\rvert=q
-\qquad\left(\text{任意の }v\in V_{\mathrm{cell}}\text{ に対して}\right).
+d_F^{\mathcal X}
+&:F_{\mathrm{cell}}\longrightarrow\mathbb N_{>0},
+&d_F^{\mathcal X}(f)&:=\lvert P_f\rvert,\\
+d_V^{\mathcal X}
+&:V_{\mathrm{cell}}\longrightarrow\mathbb N_{>0},
+&d_V^{\mathcal X}(v)&:=\lvert C_v\rvert
 \end{aligned}`),
+      paragraph(["と定め、その像を有限集合"]),
+      displayMath(String.raw`D_F(\mathcal X):=d_F^{\mathcal X}\!\left(F_{\mathrm{cell}}\right),
+\qquad
+D_V(\mathcal X):=d_V^{\mathcal X}\!\left(V_{\mathrm{cell}}\right)`),
+      paragraph([
+        "と書く。このとき、",
+        math(String.raw`\mathcal X`),
+        " の正則型集合を",
+      ]),
+      displayMath(String.raw`\operatorname{RegularTypes}(\mathcal X)
+:=
+\left\{
+  (p,q)\in\mathbb N_{>0}^{\,2}
+  \ \middle|\
+  D_F(\mathcal X)=\{p\},\quad
+  D_V(\mathcal X)=\{q\}
+\right\}`),
       paragraph([
         ref("def_finite_cellulation_face_boundary_word"),
         " の有限集合 ",
@@ -576,59 +596,39 @@ v_0=v,\qquad v_r=w,\qquad
         math(String.raw`p`),
         " 個の辺出現を持つこと、第二の元数条件は全ての頂点に ",
         math(String.raw`q`),
-        " 個の角出現が接することを表す。面や辺が境界語の中で反復する場合も、相異なる面や辺の個数へ置き換えず、有限の出現位置を数える。この述語は有限集合の元数と自然数の等号だけで判定でき、実数・複素数・極限・積分を用いない。",
+        " 個の角出現が接することを表す。面や辺が境界語の中で反復する場合も、相異なる面や辺の個数へ置き換えず、有限の出現位置を数える。セル集合は空でないので、",
+        math(String.raw`\operatorname{RegularTypes}(\mathcal X)`),
+        " は空集合または一元集合である。この定義は真偽値述語を入れ子にせず、型の順序対を元にもつ有限集合を返す。実数・複素数・極限・積分を用いない。",
       ]),
     ],
   },
   {
-    id: "finite_cellulation_definition_hyperbolic_regular_type",
+    id: "finite_cellulation_definition_hyperbolic_regular_type_set",
     kind: "definition",
-    title: { text: "正則型の双曲型判定" },
-    labels: ["def_finite_cellulation_hyperbolic_regular_type"],
-    habitat: "Q",
+    title: { text: "有限セル分割データの双曲正則型集合" },
+    labels: ["def_finite_cellulation_hyperbolic_regular_type_set"],
+    habitat: "N",
     verification: ["sagemath/check/finite-cellulation-hyperbolic-regular-type"],
     statement: [
       paragraph([
-        ref("def_finite_cellulation_regular_type"),
-        " の正則型述語と、正整数 ",
-        math(String.raw`p,q\in\mathbb N_{>0}`),
-        " に対し、そのセル分割が双曲型の正則型 ",
-        math(String.raw`\{p,q\}`),
-        " であることを表す述語 ",
-        math(String.raw`\operatorname{HyperbolicRegularType}_{p,q}`),
-        " を次の条件として定める。",
+        ref("def_finite_cellulation_regular_type_set"),
+        " の正則型集合を用い、有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " の双曲正則型集合を",
       ]),
-      displayMath(String.raw`\begin{aligned}
-&\operatorname{HyperbolicRegularType}_{p,q}
-\left(
-  G,
-  \mathcal C_{\mathrm{cell}},
-  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
-\right)
-\Longleftrightarrow\\
-&\quad
-\operatorname{RegularType}_{p,q}
-\left(
-  G,
-  \mathcal C_{\mathrm{cell}},
-  \bigl(\partial_{\mathrm{word}}f\bigr)_{f\in F_{\mathrm{cell}}}
-\right)
-\ \land\\
-&\quad
-\frac{1}{\iota_{\mathbb N,\mathbb Q}(p)}
-+
-\frac{1}{\iota_{\mathbb N,\mathbb Q}(q)}
-<
-\frac{1}{2}.
-\end{aligned}`),
+      displayMath(String.raw`\operatorname{HyperbolicRegularTypes}(\mathcal X)
+:=
+\left\{
+  (p,q)\in\operatorname{RegularTypes}(\mathcal X)
+  \ \middle|\
+  2(p+q)<pq
+\right\}`),
       paragraph([
-        "ここで ",
-        math(String.raw`\iota_{\mathbb N,\mathbb Q}:\mathbb N\to\mathbb Q`),
-        " は ",
-        math(String.raw`n\mapsto n/1`),
-        " で与えられる標準単射である。したがって三つの分母は ",
-        math(String.raw`\mathbb Q_{>0}`),
-        " に属し、不等式は有理数の加法、逆数、順序比較だけで判定できる。双曲関数、実数、複素数、極限、積分は用いない。",
+        "と定める。これは ",
+        math(String.raw`\operatorname{RegularTypes}(\mathcal X)`),
+        " の部分集合であり、型の順序対 ",
+        math(String.raw`(p,q)`),
+        " が双曲条件を満たす場合だけその元を残す。条件は自然数の加法、乗法、順序比較だけで判定できる。逆数、双曲関数、実数、複素数、極限、積分は用いない。",
       ]),
     ],
   },
