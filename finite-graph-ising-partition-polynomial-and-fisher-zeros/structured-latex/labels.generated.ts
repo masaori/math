@@ -28,6 +28,7 @@ export const ALL_LABELS = [
   "theorem_coefficient_symmetry_characterizes_full_cut",
   "theorem_even_incident_edge_counts_evaluation_minus_one",
   "theorem_even_linear_factor_characterizes_odd_incident_edge_count",
+  "theorem_fisher_zero_cube_sum_coefficient_ratio",
   "theorem_fisher_zero_elementary_symmetric_coefficient_ratio",
   "theorem_fisher_zero_product_coefficient_ratio",
   "theorem_fisher_zero_reciprocal_sum_coefficient_ratio",

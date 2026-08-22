@@ -1664,6 +1664,134 @@ d
     ],
   },
   {
+    id: "finite_graph_theorem_fisher_zero_cube_sum_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点の三乗和と係数比" },
+    labels: ["theorem_fisher_zero_cube_sum_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-cube-sum-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置き、",
+        math(String.raw`d\ge3`),
+        " と仮定する。係数を標準単射",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。このとき、",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\alpha_j^3
+=
+\frac{
+  -\Omega_G(d-1)^3
+  +3\Omega_G(d)\Omega_G(d-1)\Omega_G(d-2)
+  -3\Omega_G(d)^2\Omega_G(d-3)
+}{
+  \Omega_G(d)^3
+}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.`),
+    ],
+    proof: [
+      paragraph([
+        "代数的数",
+        math(String.raw`e_1,e_2,e_3,s_{2,1}\in\overline{\mathbb Q}`),
+        " を",
+      ]),
+      displayMath(String.raw`e_1:=\sum_{j=1}^{d}\alpha_j,
+\qquad
+e_2:=\sum_{1\le i<j\le d}\alpha_i\alpha_j,
+\qquad
+e_3:=\sum_{1\le i<j<k\le d}\alpha_i\alpha_j\alpha_k,
+\qquad
+s_{2,1}:=\sum_{\substack{1\le i,j\le d\\i\ne j}}\alpha_i^2\alpha_j`),
+      paragraph(["と定める。有限和の分配律により、"]),
+      displayMath(String.raw`\begin{aligned}
+e_1^3
+&=
+\sum_{j=1}^{d}\alpha_j^3+3s_{2,1}+6e_3
+&&\bigl(\because\ \text{三つの添字が全て同じ、二つだけ同じ、全て異なる場合へ分ける}\bigr),\\
+e_1e_2
+&=
+s_{2,1}+3e_3
+&&\bigl(\because\ \text{一つの添字が選択対に属する場合と属さない場合へ分ける}\bigr).
+\end{aligned}`),
+      paragraph(["したがって代数的数の体で、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{d}\alpha_j^3
+&=
+e_1^3-3s_{2,1}-6e_3
+&&\bigl(\because\ \text{最初の有限和恒等式を移項する}\bigr)\\
+&=
+e_1^3-3(e_1e_2-3e_3)-6e_3
+&&\bigl(\because\ \text{二番目の有限和恒等式を }s_{2,1}\text{ について解いて代入する}\bigr)\\
+&=
+e_1^3-3e_1e_2+9e_3-6e_3
+&&\bigl(\because\ \text{分配律}\bigr)\\
+&=
+e_1^3-3e_1e_2+3e_3
+&&\bigl(\because\ 9e_3-6e_3=3e_3\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_fisher_zero_elementary_symmetric_coefficient_ratio"),
+        " を",
+        math(String.raw`k=1,2,3`),
+        " に適用すると、",
+      ]),
+      displayMath(String.raw`e_1=-\frac{\Omega_G(d-1)}{\Omega_G(d)},
+\qquad
+e_2=\frac{\Omega_G(d-2)}{\Omega_G(d)},
+\qquad
+e_3=-\frac{\Omega_G(d-3)}{\Omega_G(d)}.`),
+      paragraph([
+        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
+        " と",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " より",
+        math(String.raw`\Omega_G(d)\in\mathbb N_{>0}`),
+        " である。直前の三つの基本対称式を代入すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{d}\alpha_j^3
+&=
+\left(-\frac{\Omega_G(d-1)}{\Omega_G(d)}\right)^3
+-3\left(-\frac{\Omega_G(d-1)}{\Omega_G(d)}\right)
+\frac{\Omega_G(d-2)}{\Omega_G(d)}
++3\left(-\frac{\Omega_G(d-3)}{\Omega_G(d)}\right)
+&&\bigl(\because\ \text{三つの基本対称式を代入する}\bigr)\\
+&=
+-\frac{\Omega_G(d-1)^3}{\Omega_G(d)^3}
++\frac{3\Omega_G(d-1)\Omega_G(d-2)}{\Omega_G(d)^2}
+-\frac{3\Omega_G(d-3)}{\Omega_G(d)}
+&&\bigl(\because\ \text{商の積と }(-1)^3=-1\bigr)\\
+&=
+-\frac{\Omega_G(d-1)^3}{\Omega_G(d)^3}
++\frac{3\Omega_G(d)\Omega_G(d-1)\Omega_G(d-2)}{\Omega_G(d)^3}
+-\frac{3\Omega_G(d)^2\Omega_G(d-3)}{\Omega_G(d)^3}
+&&\bigl(\because\ \Omega_G(d)\ne0\text{ なので共通分母へ移す}\bigr)\\
+&=
+\frac{
+  -\Omega_G(d-1)^3
+  +3\Omega_G(d)\Omega_G(d-1)\Omega_G(d-2)
+  -3\Omega_G(d)^2\Omega_G(d-3)
+}{
+  \Omega_G(d)^3
+}
+&&\bigl(\because\ \text{同じ分母をもつ三つの分数を加える}\bigr).
+\end{aligned}`),
+      paragraph([
+        "右辺は有理数なので、Fisher 零点の三乗和は",
+        math(String.raw`\mathbb Q\subset\overline{\mathbb Q}`),
+        " に属する。零点、その三乗、有限積および有限和は代数的数、次数と多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio",
     kind: "theorem",
     title: { text: "一般有限グラフの Fisher 零点逆数族の基本対称式と係数比" },
