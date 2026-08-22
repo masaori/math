@@ -224,6 +224,39 @@ def TruncatedTreeNode : (depth : ℕ) → (V → State) → Type
       PUnit ⊕ (Σ z : (nonperiodicChildren N f y).val,
         TruncatedTreeNode depth z)
 
+/-- 打ち切り前像木の抽象節点が表す実際の配位。
+    根は基点そのものを表し、子部分木では子の出現を一段降りて再帰する。 -/
+def truncatedTreeNodeConfiguration :
+    (depth : ℕ) → (y : V → State) → TruncatedTreeNode N f depth y → (V → State)
+  | 0, y, _ => y
+  | _ + 1, y, Sum.inl _ => y
+  | depth + 1, _, Sum.inr p =>
+      truncatedTreeNodeConfiguration depth p.1 p.2
+
+/-- 打ち切り前像木の抽象節点の、基点から測った深さ。 -/
+def truncatedTreeNodeLevel :
+    (depth : ℕ) → (y : V → State) → TruncatedTreeNode N f depth y → ℕ
+  | 0, _, _ => 0
+  | _ + 1, _, Sum.inl _ => 0
+  | depth + 1, _, Sum.inr p =>
+      truncatedTreeNodeLevel depth p.1 p.2 + 1
+
+/-- 抽象節点が表す配位を、その節点の深さだけ一段発展すると基点へ戻る。
+    これは節点型と有限配位表を個数だけで対応させず、実際の親子辺を保存する
+    全単射へ置き換えるための基礎となる。 -/
+theorem iterate_truncatedTreeNodeConfiguration_eq_root :
+    (depth : ℕ) → (y : V → State) → (u : TruncatedTreeNode N f depth y) →
+      iterate N f (truncatedTreeNodeLevel N f depth y u)
+          (truncatedTreeNodeConfiguration N f depth y u) = y
+  | 0, _, _ => rfl
+  | _ + 1, _, Sum.inl _ => rfl
+  | depth + 1, y, Sum.inr p => by
+      have ih := iterate_truncatedTreeNodeConfiguration_eq_root depth p.1 p.2
+      have hp : globalMap N f p.1 = y :=
+        (mem_nonperiodicChildren_iff N f y p.1).1
+          (occurrence_mem (nonperiodicChildren N f y).val p.1) |>.1
+      rw [truncatedTreeNodeLevel, truncatedTreeNodeConfiguration, iterate_succ, ih, hp]
+
 /-- 打ち切り前像木の節点型は有限である。後続深さでは根一つと、
     有限個の非周期子に付く一つ浅い有限節点型の従属和に分ける。 -/
 @[reducible] noncomputable def truncatedTreeNodeFintype :
