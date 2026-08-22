@@ -74,6 +74,46 @@ $M=R_1/(2,x)$ は有限表示だが自由でなく射影でもない。有限表
 
 ## 自由加群と有限生成射影加群
 
+### 基底が存在するための必要十分条件
+
+$S$ を可換単位的環、$M$ を $S$ 加群とする。部分集合 $B\subseteq M$ が基底であるとは、各 $m\in M$ が有限個の $b\in B$ と一意な係数 $a_b\in S$ により
+$$m=\sum_{b\in B}a_bb$$
+と表されることをいう。したがって次は定義から同値である。
+
+- $M$ に基底が存在する。
+- ある集合 $B$ に対して $M\cong\bigoplus_{b\in B}S$ である。
+- $M$ は自由 $S$ 加群である。
+
+これは判定条件を別の言葉へ移しただけなので、有限表示加群に対しては次の段階に分ける。
+
+### 局所基底と大域基底
+
+有限表示 $S$ 加群 $M$ が階数 $r\in\mathbb Z_{\ge0}$ の有限生成射影加群であることは、各素イデアル $\mathfrak p\subset S$ で局所化した $M_{\mathfrak p}$ が自由 $S_{\mathfrak p}$ 加群であり、その階数が $r$ で一定であることと同値である。Fitting ideal では
+$$\operatorname{Fitt}_{r-1}(M)=0,qquad \operatorname{Fitt}_r(M)=S$$
+と表せる。[Stacks Project の Fitting ideal による局所自由性判定](https://stacks.math.columbia.edu/tag/07ZD) がこの同値を与える。
+
+しかし、各 $M_{\mathfrak p}$ に基底があることから $M$ 全体の基底が自動的に得られるわけではない。局所自由加群は有限生成射影加群に対応し、大域基底の存在は、その射影加群が自由であること、すなわち局所基底を一つの大域基底へ貼り合わせられることを追加で要求する。一般の環では非自由な有限生成射影加群が存在する。
+
+### よく使える十分条件
+
+- $S$ が体なら、選択公理を用いる通常の集合論ではすべての $S$ ベクトル空間に基底がある。
+- $S$ が局所環なら、有限生成射影 $S$ 加群は有限階数自由である。
+- $S$ が PID なら、有限生成 torsion-free $S$ 加群は自由である。特に有限生成射影加群は自由である。
+- $S=\mathbb Z[x_1,\ldots,x_n]$ なら、有限生成射影加群は Quillen の結果により自由である。
+- $S=\mathbb Z[x_1^{\pm1},\ldots,x_n^{\pm1}]$ なら、有限生成射影加群は Swan の結果により自由である。
+
+したがって本稿の二つの整数係数環では、有限表示加群について
+$$\text{一定階数で局所自由}\quad\Longleftrightarrow\quad\text{有限生成射影}\quad\Longrightarrow\quad\text{自由}\quad\Longleftrightarrow\quad\text{基底が存在}$$
+と進める。最後の含意に使う定理は通常多項式環と Laurent 多項式環で異なる。
+
+### 必要条件だけでは足りない例
+
+整域上の自由加群は torsion-free なので、torsion-free 性は必要条件である。しかし十分ではない。$R_1=\mathbb Z[x]$ のイデアル
+$$I:=(2,x)\subset R_1$$
+は整域 $R_1$ の部分加群なので torsion-free であり、分数体上へ係数拡大した rank は $1$ である。それでも $I$ が rank $1$ の自由加群なら一元生成イデアルになるため、非単項性に矛盾する。よって $I$ は torsion-free rank $1$ だが基底をもたない。
+
+同様に、有限生成であること、有限表示であること、一定の generic rank をもつことだけから基底の存在は従わない。射影性も一般の環では自由性を含意せず、係数環固有の自由化定理が必要である。
+
 ### 有限生成射影加群は自由である
 
 $R_n=\mathbb Z[x_1,\ldots,x_n]$ 上の有限生成射影加群は自由である。ここで使うのは、体上の多項式環だけを扱う通常の Quillen--Suslin の標語を無条件に拡張したものではない。Quillen の局所化・貼り合わせの結果を Dedekind 環である $\mathbb Z$ に適用すると、有限生成射影 $R_n$ 加群は $\mathbb Z$ 上の有限生成射影加群から拡大されたものになる。$\mathbb Z$ 上の有限生成射影加群は自由なので、$R_n$ 上でも自由になる。
@@ -86,6 +126,54 @@ $R_n=\mathbb Z[x_1,\ldots,x_n]$ 上の有限生成射影加群は自由である
 - 「射影」は外せない。有限生成加群一般は、前節の $R_1/(2,x)$ のように自由でない。
 - 「多項式環」を Laurent 多項式環、形式冪級数環、商環へ置き換えない。それぞれ別の定理が必要である。
 - 自由であることは、入力された有限表示から基底を直ちに計算できることを意味しない。存在定理と具体的な基底抽出アルゴリズムを区別する。
+
+### 基底を構成する問題の入力と証明書
+
+有限生成射影加群 $P$ を計算機へ渡すには、単に「$P$ は射影」と宣言するのではなく有限データが要る。代表的な入力は次のいずれかである。
+
+- 冪等行列 $E\in\operatorname{Mat}_{q\times q}(R_n)$ と恒等式 $E^2=E$。このとき $P:=\operatorname{im}(E)\subseteq R_n^q$ は射影である。
+- 多項式行列の像、核、余核としての表示と、その加群が一定階数の射影加群であることを示す計算可能な条件。
+- 最大小行列式が単位イデアルを生成する unimodular 行列 $U$。このとき unimodular completion は、$U$ を恒等行列のブロックへ変える可逆行列を求める問題である。
+
+Alessandro Logar と Bernd Sturmfels の一次資料 [“Algorithms for the Quillen--Suslin theorem”](https://doi.org/10.1016/0021-8693(92)90189-S) は、体 $\mathbb C$ 上で多項式行列の像・核・余核として表示された射影加群の自由基底を Gröbner 基底により構成する。係数環を $\mathbb Z$ へ拡張した実装については、Brett Barwick と Branden Stone の [Macaulay2 `QuillenSuslin` 公式文書](https://macaulay2.com/doc/Macaulay2-1.25.11/share/doc/Macaulay2/QuillenSuslin/html/index.html) が、$\mathbb Q$、$\mathbb Z$、有限体上の通常多項式環を対応対象として明記する。
+
+同公式文書の各操作は役割が異なる。
+
+- `isProjective` は、Noether 環上の入力加群が一定階数の射影加群かを判定する。
+- `computeFreeBasis` は、射影性が成立する入力加群の自由基底を列として返す。
+- `qsIsomorphism` は、自由加群と入力射影加群の間の同型を返す。
+- `qsAlgorithm` は、unimodular 行列 $U$ に対して $UM=[I\ 0]$ またはその転置型となる正方可逆行列 $M$ を返す。
+- `completeMatrix` は、unimodular 行列を正方可逆行列へ補完する。
+
+したがって計算結果の検証は「基底が返った」という表示だけで終えず、出力行列 $B$ の列が $P$ を生成すること、$\ker(B)=0$ であること、または自由加群との往復写像の合成が両側の恒等写像になることを厳密に再計算する。unimodular completion なら、$UM$ のブロック恒等式と $\det(M)$ が係数環の単元であることが独立な証明書になる。
+
+この環境には調査時点で Macaulay2 実行ファイルが存在しなかったため、公式文書と査読済み実装論文の仕様確認までを行い、ローカル実行結果が得られたとは記していない。
+
+## 整数係数 Laurent 多項式環
+
+### 定義と通常多項式環との差
+
+有限個の不定元について
+$$L_n:=\mathbb Z[x_1^{\pm1},\ldots,x_n^{\pm1}]\cong\mathbb Z[\mathbb Z^n]$$
+と置く。右辺は有限生成自由アーベル群 $\mathbb Z^n$ の群環である。$L_n$ は $R_n$ の積 $x_1\cdots x_n$ による局所化なので、Noether 性、正則性、整域性、一意分解性は保存される。一方、単元群は
+$$L_n^\times=\{\pm x_1^{a_1}\cdots x_n^{a_n}\mid(a_1,\ldots,a_n)\in\mathbb Z^n\}$$
+であり、$R_n^\times=\{\pm1\}$ より大きい。
+
+$L_n$ も $n\ge1$ では PID でない。例えば $L_1$ のイデアル $(2,x-1)$ は、環準同型
+$$L_1\longrightarrow\mathbb F_2,\qquad f(x)\longmapsto f(1)\bmod2$$
+の核である。これが単項なら、その生成元は UFD $L_1$ で $2$ と $x-1$ の共通約元なので単元となり、真のイデアルであることに矛盾する。したがって PID 型の有限生成加群分類と一般の Smith 標準形は Laurent 化しても復活しない。反例行列は $[2\ x-1]$ である。
+
+### 有限生成射影加群の分類
+
+Richard G. Swan の一次資料 [“Projective modules over Laurent polynomial rings”](https://doi.org/10.1090/S0002-9947-1978-0469906-4), *Transactions of the AMS* 237 (1978), 111--120 は、$G$ が有限生成自由アーベル群、$A$ が体または PID なら、群環 $A[G]$ 上の有限生成射影加群が自由であることを述べる。$A=\mathbb Z$、$G=\mathbb Z^n$ と特殊化すると、有限生成射影 $L_n$ 加群はすべて自由である。
+
+この結論は「局所化は射影加群をすべて多項式環から降ろす」という一般原理から推測したものではない。Swan 論文は、一般の正則係数環では Laurent 多項式加群の局所・大域原理が多項式環と同じ形では成立しない反例も与える。したがって、ここでの自由性は係数環が PID であるという仮定を保って引用する。
+
+### Laurent 環での構成アルゴリズム
+
+H. Park の一次資料 [“A Computational Theory of Laurent Polynomial Rings and Multidimensional FIR Systems”](https://www2.eecs.berkeley.edu/Pubs/TechRpts/1995/2775.html) は、多項式環上の completion を Laurent 多項式環へ移すアルゴリズムを構成し、Singular による例を示す。Joseph Gubeladze の [“An algorithm for the Quillen--Suslin theorem for monoid rings”](https://doi.org/10.1016/S0022-4049(97)00020-0) は、体 $k$ と一定の有限生成可換モノイド $M$ に対する $k[M]$ 上の自由基底アルゴリズムを与え、多項式環・Laurent 多項式環を応用として含む。
+
+係数環の仮定は実装ごとに異なる。Macaulay2 の公式 `QuillenSuslin` 文書は、通常多項式環では $\mathbb Z$ を対応対象に含める一方、Laurent 多項式環の completion は $\mathbb Q$ または有限体についてのみ対応すると明記する。よって Swan の定理が保証する $\mathbb Z[x_1^{\pm1},\ldots,x_n^{\pm1}]$ 上の自由性と、同パッケージで利用できる Laurent completion の係数範囲は一致しない。本調査で確認した公式実装資料からは、整数係数 Laurent 環の任意の射影加群表示を直接受け取り自由基底を返す検証済み経路を確定できなかった。
 
 ## 行列について成立すること
 
@@ -152,6 +240,23 @@ Fitting ideal は有用な同型不変量だが、一般に有限表示加群の
 
 [Singular 公式マニュアル](https://www.singular.uni-kl.de/index.php/singular.pdf) は `std` による標準基底、`syz` による第一 syzygy、自由分解関連コマンドを定義している。実計算では環宣言の係数領域と項順序を成果物に記録し、`QQ` 上へ勝手に係数拡大しない。$\mathbb Z[x_1,\ldots,x_n]$ から $\mathbb Q[x_1,\ldots,x_n]$ へ移すと整数 torsion の情報が消える。
 
+### 計算量について確定できること
+
+一般入力に対する Gröbner 基底計算を「常に現実的」と評価する根拠はない。Ernst Mayr と Albert Meyer の一次資料 [“The complexity of the word problems for commutative semigroups and polynomial ideals”](https://doi.org/10.1016/0001-8708(82)90048-2) は、多項式イデアル所属問題に本質的に大きな記憶量を要求する族を構成した。David Bayer と Michael Stillman の [“On the complexity of computing syzygies”](https://doi.org/10.1016/S0747-7171(88)80039-7) は Mayr--Meyer 型の例を整理し、最小 syzygy の次数が変数数に対して二重指数的に増大する族を与える。
+
+Logar--Sturmfels 型の基底構成は Gröbner 基底を部分手続きとして用いるため、この障害を無視できない。ただし、Mayr--Meyer の下界は一般のイデアル所属・syzygy 入力に対するものであり、「射影性が既知のすべての Quillen--Suslin 入力」に同じ下界がそのまま成立するとは本調査から結論できない。
+
+したがってアルゴリズムの比較は次の軸を混ぜずに行う。
+
+| 経路 | 確認した係数環 | 主な出力 | 確定した制約 |
+|---|---|---|---|
+| Logar--Sturmfels | 原論文は $\mathbb C[x_1,\ldots,x_n]$ | 像・核・余核で与えた射影加群の自由基底 | Gröbner 基底を使用 |
+| Macaulay2 `QuillenSuslin` | 通常多項式環は $\mathbb Q,\mathbb Z,\mathbb F_p$ | 射影性判定、自由基底、同型、unimodular completion | 公式文書の対応範囲。実行環境には本体なし |
+| Park の Laurent 化 | Laurent 多項式環 | unimodular completion と安定性計算 | 多項式環の結果を Laurent 環へ移す構成 |
+| Gubeladze のモノイド環算法 | 体上の所定のモノイド環 | 有限生成射影加群の自由基底 | 係数環を $\mathbb Z$ へ変更できない |
+
+この表は実測速度の順位ではない。入力次数、変数数、係数のビット長、項順序、出力基底の次数と係数成長を固定した共通ベンチマークを実行していないため、どの実装が速いかという比較はしていない。
+
 ### 計算の再現可能な流れ
 
 有限表示行列 $A$ から調べる場合、次の順序なら各出力の意味が分離される。
@@ -216,6 +321,8 @@ $R_n$ が可算で等号が決定可能であることは、本リポジトリ�
 | 有限生成射影加群は自由 | 成立 | 成立 | 成立 | Quillen の係数環に関する定理を使用 |
 | 正方行列が可逆 iff 行列式が $\pm1$ | 成立 | 成立 | 成立 | Laurent 環では単元が増える |
 
+Laurent 多項式環 $L_n$ については、Noether・UFD・有限生成射影加群の自由性が成立する一方、PID、PID 型加群分類、一般の Smith 標準形は成立しない。正方行列の可逆条件は、行列式が $\pm x_1^{a_1}\cdots x_n^{a_n}$ の形の単元であることへ変わる。
+
 ## 出典と確認範囲
 
 ### 一次資料・継続的標準資料
@@ -227,7 +334,15 @@ $R_n$ が可算で等号が決定可能であることは、本リポジトリ�
 - [Stacks Project, “More Noetherian rings”](https://stacks.math.columbia.edu/tag/00IJ). Noether 環上の有限加群、部分加群、有限表示の関係。
 - [Stacks Project, “Regular rings and global dimension”](https://stacks.math.columbia.edu/tag/065U). 正則 Noether 環の大域次元と有限射影分解。
 - [Stacks Project, “Fitting ideals”](https://stacks.math.columbia.edu/tag/07Z6). 表示行列による Fitting ideal の定義、表示独立性、基底変換。
+- [Stacks Project, Fitting ideal による有限局所自由性判定](https://stacks.math.columbia.edu/tag/07ZD). 一定階数の局所基底が存在するための必要十分条件。
 - [Singular 公式マニュアル](https://www.singular.uni-kl.de/index.php/singular.pdf). 標準基底、syzygy、加群、自由分解の計算コマンドと係数環・項順序の仕様。
+- Richard G. Swan, [“Projective modules over Laurent polynomial rings”](https://doi.org/10.1090/S0002-9947-1978-0469906-4), *Transactions of the AMS* 237 (1978), 111--120. 体または PID の有限生成自由アーベル群環上の有限生成射影加群の自由性、および一般係数環での Laurent 型局所・大域原理の限界。
+- Alessandro Logar and Bernd Sturmfels, [“Algorithms for the Quillen--Suslin theorem”](https://doi.org/10.1016/0021-8693(92)90189-S), *Journal of Algebra* 145 (1992), 231--239. 多項式行列で表示された射影加群の自由基底構成。
+- Ernst Mayr and Albert Meyer, [“The complexity of the word problems for commutative semigroups and polynomial ideals”](https://doi.org/10.1016/0001-8708(82)90048-2), *Advances in Mathematics* 46 (1982), 305--329. 一般の多項式イデアル所属問題の複雑性下界。
+- David Bayer and Michael Stillman, [“On the complexity of computing syzygies”](https://doi.org/10.1016/S0747-7171(88)80039-7), *Journal of Symbolic Computation* 6 (1988), 135--147. 二重指数次数をもつ最小 syzygy の例。
+- H. Park, [“A Computational Theory of Laurent Polynomial Rings and Multidimensional FIR Systems”](https://www2.eecs.berkeley.edu/Pubs/TechRpts/1995/2775.html), Berkeley technical report UCB/ERL M95/39. Laurent 多項式行列の構成アルゴリズムと Singular 実装例。
+- Joseph Gubeladze, [“An algorithm for the Quillen--Suslin theorem for monoid rings”](https://doi.org/10.1016/S0022-4049(97)00020-0), *Journal of Pure and Applied Algebra* 117--118 (1997), 395--429. 体上のモノイド環に対する自由基底アルゴリズム。
+- [Macaulay2 `QuillenSuslin` 公式文書](https://macaulay2.com/doc/Macaulay2-1.25.11/share/doc/Macaulay2/QuillenSuslin/html/index.html). 対応係数環、射影性判定、自由基底、同型、unimodular completion の実装仕様。
 
 ### 標準参考文献
 
@@ -236,7 +351,7 @@ $R_n$ が可算で等号が決定可能であることは、本リポジトリ�
 
 ### この調査の限界
 
-- Gröbner 基底、syzygy、自由分解については計算法の存在と入力・出力の意味を調べた。特定の実装に対する計算量上界や、すべてのアルゴリズムの比較は調査対象外である。
-- 有限生成射影加群の自由性は存在定理として確認した。任意の入力表示から基底を構成する実装の完全な検証は行っていない。
-- Laurent 多項式環は混同防止のため局所化と単元だけを記した。Laurent 多項式環上の射影加群分類は本稿の主張に含めない。
+- Macaulay2 がこの環境にインストールされていないため、整数係数通常多項式環上の公式 `QuillenSuslin` 実装は仕様と査読済み論文まで確認し、ローカル再実行はしていない。
+- 整数係数 Laurent 多項式環上の有限生成射影加群が自由であることは確定したが、任意の表示から基底を返す検証済み実装経路は、確認した公式資料の範囲では確定できなかった。
+- 複雑性の一般下界と各アルゴリズムの入力・出力は確認したが、共通ベンチマークによる実測比較は行っていない。したがって実装間の速度順位は主張しない。
 - Fitting ideal は計算可能な不変量として扱ったが、有限表示加群の完全分類を与えるとは主張しない。
