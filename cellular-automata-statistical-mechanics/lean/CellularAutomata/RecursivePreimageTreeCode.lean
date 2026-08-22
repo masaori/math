@@ -214,6 +214,49 @@ def HasTreeMatching : (depth : ℕ) → (V → State) → (W → State) → Prop
       ∃ e : (nonperiodicChildren N f y).val ≃ (nonperiodicChildren NW fW yW).val,
         ∀ z : (nonperiodicChildren N f y).val, HasTreeMatching depth z (e z)
 
+/-! 打ち切り前像木の節点は、根または非周期一段前像を根とする子部分木の節点である。
+    子の出現を型に残すことで、個数一致だけでなく選んだ再帰分岐そのものを記録する。 -/
+def TruncatedTreeNode : (depth : ℕ) → (V → State) → Type
+  | 0, _ => PUnit
+  | depth + 1, y =>
+      PUnit ⊕ (Σ z : (nonperiodicChildren N f y).val,
+        TruncatedTreeNode depth z)
+
+/-- 再帰的前像木対応から、打ち切り節点型の実際の全単射を構成する。
+    後続深さでは根を根へ固定し、子出現の全単射を適用してから、
+    対応する各子部分木の内部で独立に再帰する。 -/
+noncomputable def treeNodeEquivOfMatching :
+    (depth : ℕ) → (y : V → State) → (yW : W → State) →
+      HasTreeMatching N f NW fW depth y yW →
+        TruncatedTreeNode N f depth y ≃ TruncatedTreeNode NW fW depth yW
+  | 0, _, _, _ => Equiv.refl PUnit
+  | depth + 1, y, yW, hmatch =>
+      Equiv.sumCongr (Equiv.refl PUnit)
+        (Equiv.sigmaCongr (Classical.choose hmatch) fun z =>
+          treeNodeEquivOfMatching depth z (Classical.choose hmatch z)
+            (Classical.choose_spec hmatch z))
+
+/-- 再帰的前像木対応から構成した全単射は根を根へ送る。 -/
+theorem treeNodeEquivOfMatching_root
+    (depth : ℕ) (y : V → State) (yW : W → State)
+    (hmatch : HasTreeMatching N f NW fW (depth + 1) y yW) :
+    treeNodeEquivOfMatching N f NW fW (depth + 1) y yW hmatch (Sum.inl PUnit.unit) =
+      Sum.inl PUnit.unit := by
+  rfl
+
+/-- 子分岐では、選択した子出現対応を先に適用し、その下の部分木対応へ再帰する。 -/
+theorem treeNodeEquivOfMatching_child
+    (depth : ℕ) (y : V → State) (yW : W → State)
+    (hmatch : HasTreeMatching N f NW fW (depth + 1) y yW)
+    (z : (nonperiodicChildren N f y).val)
+    (u : TruncatedTreeNode N f depth z) :
+    treeNodeEquivOfMatching N f NW fW (depth + 1) y yW hmatch
+        (Sum.inr ⟨z, u⟩) =
+      Sum.inr ⟨Classical.choose hmatch z,
+        treeNodeEquivOfMatching N f NW fW depth z
+          (Classical.choose hmatch z) (Classical.choose_spec hmatch z) u⟩ := by
+  rfl
+
 /-- 正の深さの前像木対応から選ぶ子の全単射は、対応する各子を
     それぞれの親へ送る一段発展を両側で保存する。これは完全性証明の
     非周期辺上の共役条件そのものであり、全配位への接着はまだ行わない。 -/
