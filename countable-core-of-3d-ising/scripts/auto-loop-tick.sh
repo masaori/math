@@ -347,7 +347,13 @@ if [ "$agent" = "claude" ]; then
     printf '%s' "$PROMPT" | CLAUDE_CONFIG_DIR="$CLAUDE_TICK_CONFIG_DIR" \
       CLAUDE_CODE_OAUTH_TOKEN="$oauth_token" \
       timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
-    --model claude-fable-5 --effort medium \
+    # モデルは claude-sonnet-5。以前は claude-fable-5 だったが、このループ専用アカウント
+    # （coding-agent-0004）の Fable 5 の枠が尽き、2026-08-20 07:36 の公開を最後に
+    # 2 日以上すべての tick が 2 秒で異常終了し続けた（実測 60 回）。同じアカウントで
+    # sonnet / opus / haiku は応答するのを確認したうえでの変更であり、実行時に別モデルへ
+    # 落とすフォールバックではない（どのモデルで何が動いたか分からなくなるため、
+    # 実行時の切り替えは引き続きしない）。
+    --model claude-sonnet-5 --effort medium \
     --dangerously-skip-permissions --strict-mcp-config \
     --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
     status=$?
