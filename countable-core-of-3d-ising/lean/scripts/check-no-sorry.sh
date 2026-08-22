@@ -345,6 +345,9 @@ targets=(
   Ising3DCut.LimitQuantity.magnitude_truncated_prime_exponents_are_not_sufficient_for_limit_quantity
   Ising3DCut.LimitQuantity.sign_of_prime_exponents_is_not_sufficient_for_limit_quantity
   Ising3DCut.LimitQuantity.colliding_coarse_graining_is_not_sufficient_for_limit_quantity
+  Ising3DCut.NecSuf.colliding_map_not_sufficient
+  Ising3DCut.LimitQuantity.posRoot_one_eq
+  Ising3DCut.LimitQuantity.colliding_coarse_graining_is_not_sufficient_for_limit_quantity_viaNecSuf
   Ising3DCut.LimitQuantity.posRoot_one_const
   Ising3DCut.NecSuf.finite_coordinate_truncation_not_sufficient
   Ising3DCut.LimitQuantity.realOfExponents_zero
