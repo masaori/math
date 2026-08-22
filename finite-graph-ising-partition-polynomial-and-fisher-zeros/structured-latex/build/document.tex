@@ -1209,11 +1209,11 @@ $\mathbb Q\subset\overline{\mathbb Q}$
 $E\ne\varnothing$
  と仮定し、
 \cref{lab:def_ising_partition_polynomial}
- の次数を
+ の次数を 
 $d:=\deg Z_G(x)\in\mathbb N_{>0}$
- と置く。係数を標準単射
+ と置く。係数を標準単射 
 $\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]$
- で移した多項式の重複度込み Fisher 零点を
+ で移した多項式の重複度込み Fisher 零点を 
 $\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
  と書く。このとき、
 
@@ -1225,7 +1225,7 @@ $\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
 \end{theorem}
 \begin{proof}
 $e_0\in E$
- を一つ選び、配位
+ を一つ選び、配位 
 $\sigma_0$
  を
 
@@ -1241,7 +1241,7 @@ $\sigma_0$
 \[\sigma_0\in\mathcal S_G
 \quad\bigl(\because\ \sigma_0:V\to\mathsf{Spin}\text{ は写像である}\bigr).\]
 \cref{lab:def_finite_graph_input}
- の二端点の相異性と
+ の二端点の相異性と 
 \cref{lab:def_broken_edge_set}
  より、
 
@@ -1265,9 +1265,9 @@ d
 &\ge1
 &&\bigl(\because\ b_G(\sigma_0)\ge1\bigr).
 \end{aligned}\]
-係数を移した多項式を
+係数を移した多項式を 
 $\overline P_G(x)\in\overline{\mathbb Q}[x]$
- と書く。代数的閉体上の一次因子分解と
+ と書く。代数的閉体上の一次因子分解と 
 \cref{lab:claim_partition_polynomial_coefficient_expansion}
  の係数表示より、
 
@@ -1283,30 +1283,120 @@ $\overline P_G(x)\in\overline{\mathbb Q}[x]$
 &&\bigl(\because\ \text{分配律}\bigr).
 \end{aligned}\]
 \cref{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
- と
+ と 
 \cref{lab:claim_partition_polynomial_coefficient_expansion}
  より、
 $\Omega_G(d)\in\mathbb N_{>0}$
- は最高次係数である。したがって代数的数の体で
+ は最高次係数である。したがって代数的数の体で 
 $-\Omega_G(d)$
  を消去すると、
 
 \[\sum_{j=1}^{d}\alpha_j
 =
 -\frac{\Omega_G(d-1)}{\Omega_G(d)}.\]
-右辺は有理数なので、零点和は
+右辺は有理数なので、零点和は 
 $\mathbb Q\subset\overline{\mathbb Q}$
  に属する。零点は代数的数、次数と多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
 
 \end{proof}
 
+\begin{theorem}[一般有限グラフの Fisher 零点の基本対称式と係数比]\label{lab:theorem_fisher_zero_elementary_symmetric_coefficient_ratio}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、
+\cref{lab:def_ising_partition_polynomial}
+ の次数を 
+$d:=\deg Z_G(x)\in\mathbb N$
+ と置く。係数を標準単射 
+$\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]$
+ で移した多項式の重複度込み Fisher 零点を 
+$\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
+ と書く。このとき、任意の 
+$k\in\{0,\ldots,d\}$
+ について、
+
+\[\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j
+=
+(-1)^k\frac{\Omega_G(d-k)}{\Omega_G(d)}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.\]
+$I=\varnothing$
+ の項に現れる積は空積 
+$1\in\overline{\mathbb Q}$
+ とする。
+
+\end{theorem}
+\begin{proof}
+係数を移した多項式を 
+$\overline P_G(x)\in\overline{\mathbb Q}[x]$
+ と書く。
+\cref{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
+ と 
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ より、
+$\Omega_G(d)\in\mathbb N_{>0}$
+ は最高次係数である。代数的閉体上の一次因子分解により、
+
+\[\overline P_G(x)
+=
+\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j)\]
+と書ける。任意の 
+$k\in\{0,\ldots,d\}$
+ を取る。
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ の係数表示と上の一次因子分解の 
+$x^{d-k}$
+ の係数より、
+
+\[\begin{aligned}
+\Omega_G(d-k)
+&=
+\Omega_G(d)
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}(-\alpha_j)
+&&\bigl(\because\ k\text{ 個の因子から定数項を選ぶ}\bigr)\\
+&=
+\Omega_G(d)(-1)^k
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j
+&&\bigl(\because\ \text{各選択積の }k\text{ 個の因子から }-1\text{ を取り出す}\bigr).
+\end{aligned}\]
+$\Omega_G(d)\ne0$
+ なので、代数的数の体で最高次係数を消去すると、
+
+\[\frac{\Omega_G(d-k)}{\Omega_G(d)}
+=
+(-1)^k
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j.\]
+$(-1)^{2k}=1$
+ なので、
+
+\[\begin{aligned}
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j
+&=
+(-1)^{2k}
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j
+&&\bigl(\because\ (-1)^{2k}=1\bigr)\\
+&=
+(-1)^k\frac{\Omega_G(d-k)}{\Omega_G(d)}
+&&\bigl(\because\ \text{直前の係数比の等式}\bigr).
+\end{aligned}\]
+右辺は有理数なので、基本対称式は 
+$\mathbb Q\subset\overline{\mathbb Q}$
+ に属する。零点と有限積は代数的数、次数、添字部分集合の元数、多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
 \begin{theorem}[全ての辺を横切る頂点二分割と係数対称性]\label{lab:theorem_full_cut_coefficient_symmetry}
 \cref{lab:def_finite_graph_input}
- の有限グラフについて、ある頂点部分集合
+ の有限グラフについて、ある頂点部分集合 
 $A\subseteq V$
- が存在し、全ての辺の二端点のうちちょうど一方だけが
+ が存在し、全ての辺の二端点のうちちょうど一方だけが 
 $A$
- に属すると仮定する。すなわち、全ての
+ に属すると仮定する。すなわち、全ての 
 $e\in E$
  について
 

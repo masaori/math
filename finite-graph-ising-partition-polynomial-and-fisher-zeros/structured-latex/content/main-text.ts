@@ -1468,6 +1468,107 @@ d
     ],
   },
   {
+    id: "finite_graph_theorem_fisher_zero_elementary_symmetric_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点の基本対称式と係数比" },
+    labels: ["theorem_fisher_zero_elementary_symmetric_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-elementary-symmetric-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を ",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置く。係数を標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を ",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。このとき、任意の ",
+        math(String.raw`k\in\{0,\ldots,d\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j
+=
+(-1)^k\frac{\Omega_G(d-k)}{\Omega_G(d)}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.`),
+      paragraph([
+        math(String.raw`I=\varnothing`),
+        " の項に現れる積は空積 ",
+        math(String.raw`1\in\overline{\mathbb Q}`),
+        " とする。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "係数を移した多項式を ",
+        math(String.raw`\overline P_G(x)\in\overline{\mathbb Q}[x]`),
+        " と書く。",
+        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
+        " と ",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " より、",
+        math(String.raw`\Omega_G(d)\in\mathbb N_{>0}`),
+        " は最高次係数である。代数的閉体上の一次因子分解により、",
+      ]),
+      displayMath(String.raw`\overline P_G(x)
+=
+\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j)`),
+      paragraph([
+        "と書ける。任意の ",
+        math(String.raw`k\in\{0,\ldots,d\}`),
+        " を取る。",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " の係数表示と上の一次因子分解の ",
+        math(String.raw`x^{d-k}`),
+        " の係数より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_G(d-k)
+&=
+\Omega_G(d)
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}(-\alpha_j)
+&&\bigl(\because\ k\text{ 個の因子から定数項を選ぶ}\bigr)\\
+&=
+\Omega_G(d)(-1)^k
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j
+&&\bigl(\because\ \text{各選択積の }k\text{ 個の因子から }-1\text{ を取り出す}\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\Omega_G(d)\ne0`),
+        " なので、代数的数の体で最高次係数を消去すると、",
+      ]),
+      displayMath(String.raw`\frac{\Omega_G(d-k)}{\Omega_G(d)}
+=
+(-1)^k
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j.`),
+      paragraph([math(String.raw`(-1)^{2k}=1`), " なので、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j
+&=
+(-1)^{2k}
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j
+&&\bigl(\because\ (-1)^{2k}=1\bigr)\\
+&=
+(-1)^k\frac{\Omega_G(d-k)}{\Omega_G(d)}
+&&\bigl(\because\ \text{直前の係数比の等式}\bigr).
+\end{aligned}`),
+      paragraph([
+        "右辺は有理数なので、基本対称式は ",
+        math(String.raw`\mathbb Q\subset\overline{\mathbb Q}`),
+        " に属する。零点と有限積は代数的数、次数、添字部分集合の元数、多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_full_cut_coefficient_symmetry",
     kind: "theorem",
     title: { text: "全ての辺を横切る頂点二分割と係数対称性" },
