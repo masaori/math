@@ -512,6 +512,139 @@ x^{191^{44}}&\equiv x\pmod{\overline Q_Q},\\
     ],
   },
   {
+    id: "arithmetic_invariants_theorem_fixed_quotient_fisher_splitting_field_finite_degree",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Fisher 分解体の有限次性" },
+    labels: ["theorem_fixed_quotient_fisher_splitting_field_finite_degree"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-fisher-splitting-field-finite-degree"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"),
+        " の次数四十四の既約因子 ",
+        math(String.raw`Q_Q`),
+        " の相異なる四十四根を一つの全順序に従って ",
+        math(String.raw`\alpha_1,\ldots,\alpha_{44}\in\overline{\mathbb Q}`),
+        " と書く。",
+      ]),
+      displayMath(String.raw`K_Q:=\mathbb Q(\alpha_1,\ldots,\alpha_{44})
+\subset\overline{\mathbb Q}`),
+      paragraph([
+        "と置く。このとき ",
+        math(String.raw`K_Q`),
+        " は固定剰余類格子の Ising 分配多項式 ",
+        math(String.raw`Z_{G_Q}(x)`),
+        " の ",
+        math(String.raw`\mathbb Q`),
+        " 上の分解体であり、",
+      ]),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+\in\left\{n\in\mathbb N_{>0}\mid n\le44^{44}\right\}.`),
+      paragraph([
+        "特に Fisher 零点を全て含む最小の体も有限次の代数拡大として ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " の中に留まる。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fixed_quotient_partition_polynomial_irreducible_factorization"),
+        " と ",
+        ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"),
+        " より、各 ",
+        math(String.raw`r\in\{1,\ldots,44\}`),
+        " に対して ",
+        math(String.raw`\alpha_r`),
+        " は次数 ",
+        math("44"),
+        " の既約多項式 ",
+        math(String.raw`Q_Q\in\mathbb Q[x]`),
+        " の根である。したがって",
+      ]),
+      displayMath(String.raw`[\mathbb Q(\alpha_r):\mathbb Q]=44
+\qquad(r\in\{1,\ldots,44\}).`),
+      paragraph([
+        math(String.raw`K_0:=\mathbb Q`),
+        " とし、各 ",
+        math(String.raw`r\in\{1,\ldots,44\}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`K_r:=K_{r-1}(\alpha_r)\subset\overline{\mathbb Q}`),
+      paragraph([
+        "と置く。",
+        math(String.raw`\alpha_r`),
+        " の ",
+        math(String.raw`K_{r-1}`),
+        " 上の最小多項式は ",
+        math(String.raw`Q_Q`),
+        " を ",
+        math(String.raw`K_{r-1}[x]`),
+        " で割り切るので、",
+      ]),
+      displayMath(String.raw`[K_r:K_{r-1}]\le 44
+\qquad(r\in\{1,\ldots,44\}).`),
+      displayMath(String.raw`[K_0:\mathbb Q]
+=[\mathbb Q:\mathbb Q]
+=1
+=44^0.`),
+      paragraph(["体の塔の次数公式と帰納法により、任意の ", math(String.raw`r\in\{1,\ldots,44\}`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+[K_r:\mathbb Q]
+&=[K_r:K_{r-1}][K_{r-1}:\mathbb Q]
+&&\bigl(\because\ \text{体の塔の次数公式}\bigr)\\
+&\le 44[K_{r-1}:\mathbb Q]
+&&\bigl(\because\ [K_r:K_{r-1}]\le44\bigr)\\
+&\le 44\cdot44^{r-1}
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=44^r.
+\end{aligned}`),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+=[K_{44}:\mathbb Q]
+\le44^{44}\in\mathbb N_{>0}.`),
+      paragraph([
+        "全ての ",
+        math(String.raw`\alpha_r`),
+        " が ",
+        math(String.raw`K_Q`),
+        " に属するので、",
+        math(String.raw`Q_Q`),
+        " は ",
+        math(String.raw`K_Q[x]`),
+        " で一次式の積へ分解する。さらに ",
+        ref("theorem_fixed_quotient_partition_polynomial_irreducible_factorization"),
+        " より",
+      ]),
+      displayMath(String.raw`Z_{G_Q}(x)=2(x+1)^{12}Q_Q(x),`),
+      paragraph([
+        "かつ ",
+        math(String.raw`-1\in\mathbb Q\subset K_Q`),
+        " なので、",
+        math(String.raw`Z_{G_Q}`),
+        " も ",
+        math(String.raw`K_Q[x]`),
+        " で一次式の積へ分解する。逆に、",
+        math(String.raw`\mathbb Q`),
+        " を含み ",
+        math(String.raw`Z_{G_Q}`),
+        " が一次式の積へ分解する任意の ",
+        math(String.raw`L\subset\overline{\mathbb Q}`),
+        " は全ての ",
+        math(String.raw`\alpha_r`),
+        " を含むため、",
+      ]),
+      displayMath(String.raw`K_Q=\mathbb Q(\alpha_1,\ldots,\alpha_{44})\subset L.`),
+      paragraph([
+        "よって ",
+        math(String.raw`K_Q`),
+        " は ",
+        math(String.raw`Z_{G_Q}`),
+        " の ",
+        math(String.raw`\mathbb Q`),
+        " 上の分解体である。",
+      ]),
+    ],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
     kind: "theorem",
     title: { text: "固定剰余類格子の Fisher 零点の有理矩形根分離証明書" },
