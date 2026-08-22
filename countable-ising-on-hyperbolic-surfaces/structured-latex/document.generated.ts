@@ -18,6 +18,7 @@ import type {
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
+import blocks_about_article_scope from './content/about-article-scope.ts'
 import blocks_arithmetic_invariants from './content/arithmetic-invariants.ts'
 import blocks_finite_cellulation from './content/finite-cellulation.ts'
 import blocks_finite_fourier_duality from './content/finite-fourier-duality.ts'
@@ -30,6 +31,7 @@ import blocks_quotient_tower from './content/quotient-tower.ts'
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
+  ...typeof blocks_about_article_scope,
   ...typeof blocks_arithmetic_invariants,
   ...typeof blocks_finite_cellulation,
   ...typeof blocks_finite_fourier_duality,

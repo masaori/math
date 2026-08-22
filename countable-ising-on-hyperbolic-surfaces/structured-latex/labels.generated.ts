@@ -39,6 +39,7 @@ export const ALL_LABELS = [
   "def_finite_quotient_face_cyclic_position_system",
   "def_finite_quotient_oriented_coset_edge_endpoint_data",
   "def_finite_quotient_oriented_coset_face_boundary_word",
+  "def_finite_quotient_regular_cellulated_closed_hyperbolic_surface",
   "def_finite_quotient_role_stabilizers_and_coset_cell_sets",
   "def_first_boundary_matrix_over_f2",
   "def_first_cycle_space_over_f2",
