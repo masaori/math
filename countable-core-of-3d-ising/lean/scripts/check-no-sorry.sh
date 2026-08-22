@@ -330,6 +330,11 @@ targets=(
   Ising3DCut.LimitQuantity.cofinal_cross_power_equality_is_sufficient_for_limit_quantity
   Ising3DCut.LimitQuantity.cofinal_cross_power_equality_is_sufficient_for_limit_quantity_abstract
   Ising3DCut.LimitQuantity.cofinal_cross_power_equality_is_sufficient_for_limit_quantity_fromNecSuf
+  Ising3DCut.LimitQuantity.posRoot_one_one
+  Ising3DCut.LimitQuantity.posRoot_two_one
+  Ising3DCut.LimitQuantity.finitely_many_cross_power_equalities_are_not_sufficient_for_limit_quantity
+  Ising3DCut.LimitQuantity.finitely_many_cross_power_equalities_are_not_sufficient_for_limit_quantity_fromNecSuf
+  Ising3DCut.NecSuf.finitely_many_agreements_are_not_sufficient_abstract
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
