@@ -64,6 +64,8 @@ export const ALL_LABELS = [
   "claim_symmetrized_prime_exponent_data_is_reciprocal_invariant",
   "claim_tail_agreement_is_equivalence_relation",
   "claim_tail_agreement_is_sufficient_for_limit_quantity",
+  "claim_tail_cross_power_equality_is_sufficient_for_limit_quantity",
+  "claim_tail_equal_positive_real_sequences_transfer_limit",
   "claim_two_dimensional_boundary_response_even_subgraph_sum",
   "claim_two_dimensional_boundary_response_pfaffian_prediction",
   "def_bipartite_successor_system",

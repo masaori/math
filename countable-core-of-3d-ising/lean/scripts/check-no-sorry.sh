@@ -321,6 +321,9 @@ targets=(
   Ising3DCut.LimitQuantity.crossPowerEquality_fails_at_two
   Ising3DCut.LimitQuantity.cross_power_equality_is_not_necessary_for_limit_quantity
   Ising3DCut.LimitQuantity.cross_power_equality_is_not_necessary_for_limit_quantity_fromNecSuf
+  Ising3DCut.LimitQuantity.tail_cross_power_equality_is_sufficient_for_limit_quantity
+  Ising3DCut.LimitQuantity.tail_cross_power_equality_is_sufficient_for_limit_quantity_abstract
+  Ising3DCut.LimitQuantity.tail_cross_power_equality_is_sufficient_for_limit_quantity_fromNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
