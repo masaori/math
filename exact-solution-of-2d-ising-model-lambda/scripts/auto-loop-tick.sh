@@ -20,8 +20,13 @@ TICK_TIMEOUT_SECONDS=2700
 
 mkdir -p "$LOG_DIR"
 
+# 進捗行は auto-loop.log と launchd の標準出力の両方へ書く。**片方だけだと、外から
+# 見張っている点検（local-pc-management の check-daily-jobs-health.py）が失敗の原因を
+# 読めない。** 実際に 2026-08-22、launchd 側が空だったせいで、上限で終えた tick の原因が
+# 「ログは空」としか出ず、2日前の無関係な ssh エラーが原因として拾われた。
+# エージェントの生出力は量が多いので LOG_FILE だけに残し、ここでは短い進捗行だけ複製する。
 log() {
-  printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"
+  printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" | tee -a "$LOG_FILE"
 }
 
 # launchd は対話シェルの PATH を持たないので、必要なものを明示的に足す。
