@@ -15,6 +15,7 @@ export const ALL_LABELS = [
   "claim_coarse_graining_values_agree_implies_partition_values_agree",
   "claim_cofinal_cross_power_equality_is_sufficient_for_limit_quantity",
   "claim_cofinal_equal_positive_real_sequences_share_limit",
+  "claim_colliding_coarse_graining_is_not_sufficient_for_limit_quantity",
   "claim_cross_power_equality_implies_root_equality",
   "claim_cross_power_equality_is_sufficient_for_limit_quantity",
   "claim_cross_power_sequences_satisfy_limit_transfer_hypothesis",
