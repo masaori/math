@@ -2161,6 +2161,113 @@ R_\alpha(\alpha^{-1})
     ],
   },
   {
+    id: "finite_graph_theorem_full_cut_distinct_fisher_zero_product_support_parity",
+    kind: "theorem",
+    title: { text: "全辺二分割をもつ有限グラフの相異なる Fisher 零点積と零点台の奇偶" },
+    labels: ["theorem_full_cut_distinct_fisher_zero_product_support_parity"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/full-cut-distinct-fisher-zero-product-support-parity"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属すると仮定する。",
+        ref("theorem_full_cut_fisher_zero_reciprocal_multiplicity"),
+        " の零点重複度を ",
+        math(String.raw`\mu_G:\overline{\mathbb Q}\to\mathbb N`),
+        " とし、相異なる非零 Fisher 零点の有限集合を",
+      ]),
+      displayMath(String.raw`\mathcal Z_G:=
+\left\{
+  \alpha\in\overline{\mathbb Q}^{\times}
+  \;\middle|\;
+  \mu_G(\alpha)>0
+\right\}`),
+      paragraph(["と置く。また、各 ", math(String.raw`w\in V`), " に接続する辺の有限集合を"]),
+      displayMath(String.raw`I_w:=
+\left\{
+  e\in E
+  \;\middle|\;
+  \partial_G(e,\mathsf{source})=w
+  \quad\text{または}\quad
+  \partial_G(e,\mathsf{target})=w
+\right\}`),
+      paragraph(["と置く。このとき、相異なる非零 Fisher 零点の積は零点台の元数の奇偶だけで定まり、"]),
+      displayMath(String.raw`\prod_{\alpha\in\mathcal Z_G}\alpha
+=(-1)^{|\mathcal Z_G|}
+\quad\text{in }\overline{\mathbb Q}.`),
+    ],
+    proof: [
+      paragraph([
+        "自然数の二による除法の一意性より、",
+        math(String.raw`|\mathcal Z_G|`),
+        " は偶数または奇数のちょうど一方である。まず、ある ",
+        math(String.raw`n\in\mathbb N`),
+        " について ",
+        math(String.raw`|\mathcal Z_G|=2n+1`),
+        " と仮定する。",
+        ref("theorem_full_cut_fisher_zero_support_parity_characterization"),
+        " より",
+      ]),
+      displayMath(String.raw`\exists w\in V,\quad
+|I_w|\in\{2m+1\mid m\in\mathbb N\}
+\quad\bigl(\because\ |\mathcal Z_G|\text{ は奇数である}\bigr).`),
+      paragraph([
+        ref("theorem_full_cut_distinct_fisher_zero_product"),
+        " の奇接続辺数頂点が存在する場合を用いると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\alpha\in\mathcal Z_G}\alpha
+&=-1
+&&\bigl(\because\ \exists w\in V,\ |I_w|\in\{2m+1\mid m\in\mathbb N\}\bigr)\\
+&=(-1)^{2n+1}
+&&\bigl(\because\ (-1)^{2n}=1\bigr)\\
+&=(-1)^{|\mathcal Z_G|}
+&&\bigl(\because\ |\mathcal Z_G|=2n+1\bigr).
+\end{aligned}`),
+      paragraph([
+        "次に、ある ",
+        math(String.raw`n\in\mathbb N`),
+        " について ",
+        math(String.raw`|\mathcal Z_G|=2n`),
+        " と仮定する。",
+        ref("theorem_full_cut_fisher_zero_support_parity_characterization"),
+        " の同値性の対偶より",
+      ]),
+      displayMath(String.raw`\neg\left(
+\exists w\in V,\quad |I_w|\in\{2m+1\mid m\in\mathbb N\}
+\right)
+\quad\bigl(\because\ |\mathcal Z_G|\text{ は偶数である}\bigr).`),
+      paragraph(["各 ", math(String.raw`|I_w|\in\mathbb N`), " に二による除法を適用すると"]),
+      displayMath(String.raw`\forall w\in V,\quad
+|I_w|\in\{2m\mid m\in\mathbb N\}
+\quad\bigl(\because\ \text{奇数でない自然数は偶数である}\bigr).`),
+      paragraph([
+        ref("theorem_full_cut_distinct_fisher_zero_product"),
+        " の全接続辺数が偶数である場合を用いると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{\alpha\in\mathcal Z_G}\alpha
+&=1
+&&\bigl(\because\ \text{全頂点の接続辺数が偶数である}\bigr)\\
+&=(-1)^{2n}
+&&\bigl(\because\ (-1)^{2n}=1\bigr)\\
+&=(-1)^{|\mathcal Z_G|}
+&&\bigl(\because\ |\mathcal Z_G|=2n\bigr).
+\end{aligned}`),
+      paragraph([
+        "以上の二場合で全ての自然数 ",
+        math(String.raw`|\mathcal Z_G|`),
+        " を尽くすので主張を得る。零点と積は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        "、零点台は有限集合、重複度と零点台の元数は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },
