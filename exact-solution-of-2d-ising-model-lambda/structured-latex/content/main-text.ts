@@ -3262,7 +3262,7 @@ b(\sigma)
                 {
                   id: "transfer_matrix_definition_matrix_over_row_configs",
                   kind: "definition",
-                  title: { text: "行配位を添字とする行列と、その積・冪・トレース" },
+                  title: { text: "有限集合を添字とする行列と、その積・冪・トレース" },
                   labels: ["def_matrix_over_row_configs", "def_matrix_product", "def_matrix_trace"],
                   habitat: "Z",
                   lean: [
@@ -3273,42 +3273,40 @@ b(\sigma)
                   ],
                   statement: [
                     paragraph([
-                      "行と列を ",
-                      ref("def_row_configuration"),
-                      " の行配位で添字づけた行列を扱う。写像 ",
-                      math(String.raw`A:R_L\times R_L\to\mathbb{Z}[x]`),
+                      "空でない有限集合 ",
+                      math(String.raw`\mathcal{J}`),
+                      " を 1 つ固定する。行と列をその元で添字づけた行列を扱う",
+                      "（この論文で使うときは、行配位の全体を取る）。写像 ",
+                      math(String.raw`A:\mathcal{J}\times \mathcal{J}\to\mathbb{Z}[x]`),
                       " のことを行列と呼び、その全体の集合を ",
-                      math(String.raw`\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x]\bigr)`),
+                      math(String.raw`\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x]\bigr)`),
                       " と書く。値 ",
-                      math(String.raw`A(\tau,\tau')`),
+                      math(String.raw`A(u,u')`),
                       " を成分と呼び ",
-                      math(String.raw`A_{\tau,\tau'}`),
+                      math(String.raw`A_{u,u'}`),
                       " と書く。",
                     ]),
                     paragraph([
-                      math(String.raw`R_L`),
-                      " は ",
-                      math(String.raw`2^{L}`),
-                      " 個の元をもつ有限集合なので、その元に ",
+                      math(String.raw`\mathcal{J}`),
+                      " の元に ",
                       math(String.raw`1`),
                       " から ",
-                      math(String.raw`2^{L}`),
+                      math(String.raw`|\mathcal{J}|`),
                       " までの番号を付ければ、この集合は通常の ",
-                      math(String.raw`2^{L}`),
-                      " 次正方行列の集合 ",
-                      math(String.raw`M_{2^{L}}\bigl(\mathbb{Z}[x]\bigr)`),
-                      " と同じものになる。以下では番号を付けず、添字を行配位のまま扱う",
-                      "（番号の付け方に依存しない形で書くため）。",
+                      math(String.raw`|\mathcal{J}|`),
+                      " 次正方行列の集合と同じものになる。以下では番号を付けず、添字を ",
+                      math(String.raw`\mathcal{J}`),
+                      " の元のまま扱う（番号の付け方に依存しない形で書くため）。",
                     ]),
                     paragraph([
                       "積・冪・トレースを次で定める。",
-                      math(String.raw`A,B\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+                      math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
                       " に対し積 ",
                       math(String.raw`AB`),
                       " を",
                     ]),
                     displayMath(
-                      String.raw`(AB)_{\tau,\tau''}:=\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\qquad(\tau,\tau''\in R_L)`,
+                      String.raw`(AB)_{u,u''}:=\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\qquad(u,u''\in \mathcal{J})`,
                     ),
                     paragraph([
                       "で定める（有限個の項の和なので右辺は ",
@@ -3325,7 +3323,7 @@ b(\sigma)
                       math(String.raw`\operatorname{Tr}A\in\mathbb{Z}[x]`),
                       " を",
                     ]),
-                    displayMath(String.raw`\operatorname{Tr}A:=\sum_{\tau\in R_L}A_{\tau,\tau}`),
+                    displayMath(String.raw`\operatorname{Tr}A:=\sum_{u\in \mathcal{J}}A_{u,u}`),
                     paragraph([
                       "で定める。以上の演算はすべて ",
                       math(String.raw`\mathbb{Z}[x]`),
@@ -4776,7 +4774,7 @@ const chapter_shift_symmetry = defineSection({
                 {
                   id: "algebraic_eigenvalue_definition_permutation_sign",
                   kind: "definition",
-                  title: { text: "行配位の置換、転倒数、そして符号" },
+                  title: { text: "線型順序を持つ有限集合の上の置換、転倒数、そして符号" },
                   labels: ["def_row_permutation", "def_inversion_count", "def_permutation_sign"],
                   habitat: "Z",
                   lean: [
@@ -4787,26 +4785,28 @@ const chapter_shift_symmetry = defineSection({
                   verification: ["sagemath/check/permutation-sign"],
                   statement: [
                     paragraph([
-                      "行列式を置換にわたる和として定めるために、",
-                      ref("def_row_configuration"),
-                      " の行配位の集合 ",
-                      math(String.raw`R_L`),
-                      " の上の置換と、その符号を定める。",
-                      "符号は ",
-                      ref("def_row_config_order"),
-                      " の順序 ",
+                      "行列式を置換にわたる和として定めるために、固定した有限集合 ",
+                      math(String.raw`\mathcal{J}`),
+                      "（",
+                      ref("def_matrix_over_row_configs"),
+                      "）の上の置換と、その符号を定める。",
+                      "ここでは ",
+                      math(String.raw`\mathcal{J}`),
+                      " に線型順序 ",
+                      math(String.raw`\prec`),
+                      " が 1 つ与えられているとする。符号はその順序 ",
                       math(String.raw`\prec`),
                       " に対する転倒数で定める。",
                     ]),
                     paragraph([
                       "第一に、",
-                      math(String.raw`R_L`),
+                      math(String.raw`\mathcal{J}`),
                       " の置換とは全単射 ",
-                      math(String.raw`\varphi:R_L\to R_L`),
+                      math(String.raw`\varphi:\mathcal{J}\to \mathcal{J}`),
                       " のことであり、その全体を ",
                       math(String.raw`\mathfrak{S}_L`),
                       " と書く。",
-                      math(String.raw`R_L`),
+                      math(String.raw`\mathcal{J}`),
                       " は有限集合なので ",
                       math(String.raw`\mathfrak{S}_L`),
                       " も有限集合である。",
@@ -4815,9 +4815,9 @@ const chapter_shift_symmetry = defineSection({
                       " の合成 ",
                       math(String.raw`\varphi\circ\psi`),
                       "（",
-                      math(String.raw`(\varphi\circ\psi)(\tau)=\varphi(\psi(\tau))`),
+                      math(String.raw`(\varphi\circ\psi)(u)=\varphi(\psi(u))`),
                       "）は再び置換であり、恒等写像 ",
-                      math(String.raw`\mathrm{id}_{R_L}`),
+                      math(String.raw`\mathrm{id}_{\mathcal{J}}`),
                       " も置換である。全単射 ",
                       math(String.raw`\varphi`),
                       " には逆写像 ",
@@ -4830,11 +4830,11 @@ const chapter_shift_symmetry = defineSection({
                       " について順序づけられた対の集合を",
                     ]),
                     displayMath(
-                      String.raw`P_L:=\bigl\{\,(\tau,\tau')\in R_L\times R_L \;\bigm|\; \tau\prec\tau'\,\bigr\}`,
+                      String.raw`P_L:=\bigl\{\,(u,u')\in \mathcal{J}\times \mathcal{J} \;\bigm|\; u\prec u'\,\bigr\}`,
                     ),
                     paragraph([
                       "と置き（",
-                      math(String.raw`R_L\times R_L`),
+                      math(String.raw`\mathcal{J}\times \mathcal{J}`),
                       " が有限集合なので ",
                       math(String.raw`P_L`),
                       " も有限集合）、置換 ",
@@ -4842,7 +4842,7 @@ const chapter_shift_symmetry = defineSection({
                       " の転倒数を",
                     ]),
                     displayMath(
-                      String.raw`\mathrm{inv}(\varphi):=\bigl|\,\bigl\{\,(\tau,\tau')\in P_L \;\bigm|\; \varphi(\tau')\prec\varphi(\tau)\,\bigr\}\,\bigr|\in\mathbb{N}`,
+                      String.raw`\mathrm{inv}(\varphi):=\bigl|\,\bigl\{\,(u,u')\in P_L \;\bigm|\; \varphi(u')\prec\varphi(u)\,\bigr\}\,\bigr|\in\mathbb{N}`,
                     ),
                     paragraph([
                       "で定める。すなわち ",
@@ -4913,26 +4913,26 @@ const chapter_shift_symmetry = defineSection({
                       math(String.raw`\Psi:P_L\to P_L`),
                       " を",
                     ]),
-                    displayMath(String.raw`\Psi(\tau,\tau'):=
+                    displayMath(String.raw`\Psi(u,u'):=
 \begin{cases}
-\bigl(\psi(\tau),\psi(\tau')\bigr) & \bigl(\psi(\tau)\prec\psi(\tau')\ \text{のとき}\bigr)\\
-\bigl(\psi(\tau'),\psi(\tau)\bigr) & \bigl(\psi(\tau')\prec\psi(\tau)\ \text{のとき}\bigr)
+\bigl(\psi(u),\psi(u')\bigr) & \bigl(\psi(u)\prec\psi(u')\ \text{のとき}\bigr)\\
+\bigl(\psi(u'),\psi(u)\bigr) & \bigl(\psi(u')\prec\psi(u)\ \text{のとき}\bigr)
 \end{cases}`),
                     paragraph([
                       "で定める。これが定まることを見る。",
-                      math(String.raw`(\tau,\tau')\in P_L`),
+                      math(String.raw`(u,u')\in P_L`),
                       " なら ",
-                      math(String.raw`\tau\prec\tau'`),
+                      math(String.raw`u\prec u'`),
                       " なので三分律から ",
-                      math(String.raw`\tau\ne\tau'`),
+                      math(String.raw`u\ne u'`),
                       " であり、",
                       math(String.raw`\psi`),
                       " が単射なので ",
-                      math(String.raw`\psi(\tau)\ne\psi(\tau')`),
+                      math(String.raw`\psi(u)\ne\psi(u')`),
                       " である。ふたたび三分律から ",
-                      math(String.raw`\psi(\tau)\prec\psi(\tau')`),
+                      math(String.raw`\psi(u)\prec\psi(u')`),
                       " と ",
-                      math(String.raw`\psi(\tau')\prec\psi(\tau)`),
+                      math(String.raw`\psi(u')\prec\psi(u)`),
                       " のちょうど一方が成り立つ。どちらの場合も右辺は ",
                       math(String.raw`P_L`),
                       " の元である。",
@@ -4944,37 +4944,37 @@ const chapter_shift_symmetry = defineSection({
                       " から同じ作り方で得られる写像 ",
                       math(String.raw`\Psi':P_L\to P_L`),
                       " が逆写像になる。",
-                      math(String.raw`(\tau,\tau')\in P_L`),
+                      math(String.raw`(u,u')\in P_L`),
                       " について、",
-                      math(String.raw`\psi(\tau)\prec\psi(\tau')`),
+                      math(String.raw`\psi(u)\prec\psi(u')`),
                       " の場合は ",
-                      math(String.raw`\Psi(\tau,\tau')=(\psi(\tau),\psi(\tau'))`),
+                      math(String.raw`\Psi(u,u')=(\psi(u),\psi(u'))`),
                       " であり、その 2 成分を ",
                       math(String.raw`\psi^{-1}`),
                       " で戻すと ",
-                      math(String.raw`\tau,\tau'`),
+                      math(String.raw`u,u'`),
                       " で、",
-                      math(String.raw`\tau\prec\tau'`),
+                      math(String.raw`u\prec u'`),
                       " なので ",
-                      math(String.raw`\Psi'(\Psi(\tau,\tau'))=(\tau,\tau')`),
+                      math(String.raw`\Psi'(\Psi(u,u'))=(u,u')`),
                       " である。",
-                      math(String.raw`\psi(\tau')\prec\psi(\tau)`),
+                      math(String.raw`\psi(u')\prec\psi(u)`),
                       " の場合は ",
-                      math(String.raw`\Psi(\tau,\tau')=(\psi(\tau'),\psi(\tau))`),
+                      math(String.raw`\Psi(u,u')=(\psi(u'),\psi(u))`),
                       " であり、その 2 成分を ",
                       math(String.raw`\psi^{-1}`),
                       " で戻すと ",
-                      math(String.raw`\tau',\tau`),
+                      math(String.raw`u',u`),
                       " で、やはり ",
-                      math(String.raw`\tau\prec\tau'`),
+                      math(String.raw`u\prec u'`),
                       " なので ",
-                      math(String.raw`\Psi'(\Psi(\tau,\tau'))=(\tau,\tau')`),
+                      math(String.raw`\Psi'(\Psi(u,u'))=(u,u')`),
                       " である。",
                       math(String.raw`\psi`),
                       " と ",
                       math(String.raw`\psi^{-1}`),
                       " を入れ替えれば同じ議論で ",
-                      math(String.raw`\Psi(\Psi'(\tau,\tau'))=(\tau,\tau')`),
+                      math(String.raw`\Psi(\Psi'(u,u'))=(u,u')`),
                       " が出る。",
                     ]),
                     paragraph([
@@ -4983,9 +4983,9 @@ const chapter_shift_symmetry = defineSection({
                       " の 3 つの部分集合",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-A&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| (\varphi\circ\psi)(\tau')\prec(\varphi\circ\psi)(\tau)\,\bigr\},\\
-B&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \psi(\tau')\prec\psi(\tau)\,\bigr\},\\
-C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\prec\varphi\bigl(\Psi(\tau,\tau')_1\bigr)\,\bigr\}
+A&:=\bigl\{\,(u,u')\in P_L \bigm| (\varphi\circ\psi)(u')\prec(\varphi\circ\psi)(u)\,\bigr\},\\
+B&:=\bigl\{\,(u,u')\in P_L \bigm| \psi(u')\prec\psi(u)\,\bigr\},\\
+C&:=\bigl\{\,(u,u')\in P_L \bigm| \varphi\bigl(\Psi(u,u')_2\bigr)\prec\varphi\bigl(\Psi(u,u')_1\bigr)\,\bigr\}
 \end{aligned}`),
                     paragraph([
                       "を置く（",
@@ -5010,23 +5010,23 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                     ]),
                     paragraph([
                       "各 ",
-                      math(String.raw`(\tau,\tau')\in P_L`),
+                      math(String.raw`(u,u')\in P_L`),
                       " について、",
                       math(String.raw`A,B,C`),
                       " のうちその対が属するものの個数は偶数である。場合を分けて確かめる。",
                     ]),
                     paragraph([
-                      math(String.raw`\psi(\tau)\prec\psi(\tau')`),
+                      math(String.raw`\psi(u)\prec\psi(u')`),
                       " の場合。三分律から ",
-                      math(String.raw`\psi(\tau')\prec\psi(\tau)`),
+                      math(String.raw`\psi(u')\prec\psi(u)`),
                       " は成り立たないので、その対は ",
                       math(String.raw`B`),
                       " に属さない。このとき ",
-                      math(String.raw`\Psi(\tau,\tau')=(\psi(\tau),\psi(\tau'))`),
+                      math(String.raw`\Psi(u,u')=(\psi(u),\psi(u'))`),
                       " なので ",
                       math(String.raw`C`),
                       " の条件は ",
-                      math(String.raw`\varphi(\psi(\tau'))\prec\varphi(\psi(\tau))`),
+                      math(String.raw`\varphi(\psi(u'))\prec\varphi(\psi(u))`),
                       " であり、これは ",
                       math(String.raw`A`),
                       " の条件と同じである。よって属するものの個数は ",
@@ -5036,21 +5036,21 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                       " 個であり、いずれも偶数である。",
                     ]),
                     paragraph([
-                      math(String.raw`\psi(\tau')\prec\psi(\tau)`),
+                      math(String.raw`\psi(u')\prec\psi(u)`),
                       " の場合。その対は ",
                       math(String.raw`B`),
                       " に属する。このとき ",
-                      math(String.raw`\Psi(\tau,\tau')=(\psi(\tau'),\psi(\tau))`),
+                      math(String.raw`\Psi(u,u')=(\psi(u'),\psi(u))`),
                       " なので ",
                       math(String.raw`C`),
                       " の条件は ",
-                      math(String.raw`\varphi(\psi(\tau))\prec\varphi(\psi(\tau'))`),
+                      math(String.raw`\varphi(\psi(u))\prec\varphi(\psi(u'))`),
                       " である。",
-                      math(String.raw`\tau\ne\tau'`),
+                      math(String.raw`u\ne u'`),
                       " と ",
                       math(String.raw`\varphi\circ\psi`),
                       " が単射であることから ",
-                      math(String.raw`\varphi(\psi(\tau))\ne\varphi(\psi(\tau'))`),
+                      math(String.raw`\varphi(\psi(u))\ne\varphi(\psi(u'))`),
                       " なので、三分律により ",
                       math(String.raw`A`),
                       " の条件と ",
@@ -5070,16 +5070,16 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                       math(String.raw`f_X:P_L\to\mathbb{Z}`),
                       " を",
                     ]),
-                    displayMath(String.raw`f_X(\tau,\tau'):=
+                    displayMath(String.raw`f_X(u,u'):=
 \begin{cases}
--1 & \bigl((\tau,\tau')\in X\ \text{のとき}\bigr)\\
-+1 & \bigl((\tau,\tau')\notin X\ \text{のとき}\bigr)
+-1 & \bigl((u,u')\in X\ \text{のとき}\bigr)\\
++1 & \bigl((u,u')\notin X\ \text{のとき}\bigr)
 \end{cases}`),
                     paragraph([
                       "で定める。いま見たことは、各 ",
-                      math(String.raw`(\tau,\tau')\in P_L`),
+                      math(String.raw`(u,u')\in P_L`),
                       " について ",
-                      math(String.raw`f_A(\tau,\tau')\cdot f_C(\tau,\tau')\cdot f_B(\tau,\tau')=1`),
+                      math(String.raw`f_A(u,u')\cdot f_C(u,u')\cdot f_B(u,u')=1`),
                       " が成り立つことを言っている（",
                       math(String.raw`-1`),
                       " が偶数個掛かるからである）。したがって",
@@ -5090,11 +5090,11 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
 &&(\because\ \text{符号の定義})\\
 &=(-1)^{|A|}\cdot(-1)^{|C|}\cdot(-1)^{|B|}
 &&(\because\ |A|=\mathrm{inv}(\varphi\circ\psi),\ |C|=\mathrm{inv}(\varphi),\ |B|=\mathrm{inv}(\psi))\\
-&=\prod_{(\tau,\tau')\in P_L}f_A(\tau,\tau')\cdot\prod_{(\tau,\tau')\in P_L}f_C(\tau,\tau')\cdot\prod_{(\tau,\tau')\in P_L}f_B(\tau,\tau')
+&=\prod_{(u,u')\in P_L}f_A(u,u')\cdot\prod_{(u,u')\in P_L}f_C(u,u')\cdot\prod_{(u,u')\in P_L}f_B(u,u')
 &&(\because\ \text{属するときだけ}\ -1\ \text{を掛けた有限積は}\ (-1)\ \text{の個数乗})\\
-&=\prod_{(\tau,\tau')\in P_L}\bigl(f_A(\tau,\tau')\cdot f_C(\tau,\tau')\cdot f_B(\tau,\tau')\bigr)
+&=\prod_{(u,u')\in P_L}\bigl(f_A(u,u')\cdot f_C(u,u')\cdot f_B(u,u')\bigr)
 &&(\because\ \text{有限積の各因子ごとのまとめ})\\
-&=\prod_{(\tau,\tau')\in P_L}1
+&=\prod_{(u,u')\in P_L}1
 &&(\because\ \text{属するものの個数が偶数})\\
 &=1
 &&(\because\ 1\ \text{の有限積は}\ 1)
@@ -5117,8 +5117,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                       "以上で使ったのは、",
                       math(String.raw`\prec`),
                       " の三分律、置換が単射であること、有限集合の数え上げ、そして整数の積だけである。",
-                      ref("claim_row_config_order_linear"),
-                      " の推移律は一度も使っていない。実数体も複素数体も現れない。",
+                      "線型順序の推移律は一度も使っていない。実数体も複素数体も現れない。",
                     ]),
                   ],
                 },
@@ -5157,7 +5156,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                     paragraph([
                       ref("def_matrix_over_row_configs"),
                       " の行列 ",
-                      math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
                       " の行列式を、",
                       ref("def_permutation_sign"),
                       " の符号を係数とする置換にわたる和として定める。",
@@ -5192,15 +5191,15 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                     ]),
                     paragraph([
                       "第二に、単位行列 ",
-                      math(String.raw`I\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+                      math(String.raw`I\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
                       " を",
                     ]),
-                    displayMath(String.raw`I_{\tau,\tau'}:=
+                    displayMath(String.raw`I_{u,u'}:=
 \begin{cases}
-\kappa(1) & (\tau=\tau'\ \text{のとき})\\
-\kappa(0) & (\tau\ne\tau'\ \text{のとき})
+\kappa(1) & (u=u'\ \text{のとき})\\
+\kappa(0) & (u\ne u'\ \text{のとき})
 \end{cases}
-\qquad(\tau,\tau'\in R_L)`),
+\qquad(u,u'\in \mathcal{J})`),
                     paragraph([
                       "で定める。",
                     ]),
@@ -5210,7 +5209,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                       " を",
                     ]),
                     displayMath(
-                      String.raw`\det A:=\sum_{\varphi\in\mathfrak{S}_L}\kappa\bigl(\mathrm{sgn}(\varphi)\bigr)\cdot\prod_{\tau\in R_L}A_{\tau,\varphi(\tau)}`,
+                      String.raw`\det A:=\sum_{\varphi\in\mathfrak{S}_L}\kappa\bigl(\mathrm{sgn}(\varphi)\bigr)\cdot\prod_{u\in \mathcal{J}}A_{u,\varphi(u)}`,
                     ),
                     paragraph([
                       "で定める。右辺が ",
@@ -5220,15 +5219,13 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                       " の ",
                       math(String.raw`\mathfrak{S}_L`),
                       " は有限集合であり ",
-                      math(String.raw`R_L`),
+                      math(String.raw`\mathcal{J}`),
                       " も有限集合なので、和も積も有限個の項からなる。",
                       math(String.raw`\mathbb{Z}[x]`),
                       " の積は可換かつ結合的なので、",
-                      math(String.raw`\prod_{\tau\in R_L}`),
+                      math(String.raw`\prod_{u\in \mathcal{J}}`),
                       " は因子を並べる順序によらず定まる",
-                      "（すなわちこの積を書くのに ",
-                      ref("def_row_config_order"),
-                      " の順序 ",
+                      "（すなわちこの積を書くのに順序 ",
                       math(String.raw`\prec`),
                       " は要らない。",
                       math(String.raw`\prec`),
@@ -5263,8 +5260,8 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                       verification: ["sagemath/check/second-polynomial-ring"],
                       statement: [
                         paragraph([
-                          "特性多項式を書く場所を用意する。",
-                          ref("def_partition_polynomial"),
+                          "特性多項式を書く場所を用意する。整係数多項式環 ",
+                          math(String.raw`\mathbb{Z}[x]`),
                           " の不定元 ",
                           math(String.raw`x`),
                           " とは別の不定元 ",
@@ -5397,7 +5394,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                     {
                       id: "algebraic_eigenvalue_definition_second_matrix",
                       kind: "definition",
-                      title: { text: "もう 1 つの不定元の多項式を成分とする、行配位を添字とする行列" },
+                      title: { text: "もう 1 つの不定元の多項式を成分とする、有限集合を添字とする行列" },
                       labels: ["def_second_matrix"],
                       habitat: "Z",
                       lean: ["Ising2DLambda.AlgebraicEigenvalue.SecondRowMatrix"],
@@ -5410,20 +5407,20 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                           " の ",
                           math(String.raw`\mathbb{Z}[x][t]`),
                           " である場合について書き下す。すなわち写像 ",
-                          math(String.raw`B:R_L\times R_L\to\mathbb{Z}[x][t]`),
+                          math(String.raw`B:\mathcal{J}\times \mathcal{J}\to\mathbb{Z}[x][t]`),
                           " のことを行列と呼び、その全体の集合を ",
-                          math(String.raw`\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+                          math(String.raw`\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x][t]\bigr)`),
                           " と書く。値 ",
-                          math(String.raw`B(\tau,\tau')`),
+                          math(String.raw`B(u,u')`),
                           " を成分と呼び ",
-                          math(String.raw`B_{\tau,\tau'}`),
+                          math(String.raw`B_{u,u'}`),
                           " と書く。",
                         ]),
                         paragraph([
                           "成分の住む集合が違うので、",
                           ref("def_matrix_over_row_configs"),
                           " の ",
-                          math(String.raw`\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+                          math(String.raw`\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
                           " とは別の集合である。",
                           "一般の可換環を成分とする行列としてまとめて述べることはしない",
                           "（人手証明は具体的な対象について書く。抽象化は Lean の必要十分版の側で行う）。",
@@ -5446,13 +5443,13 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                         paragraph([
                           ref("def_second_matrix"),
                           " の行列 ",
-                          math(String.raw`B\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+                          math(String.raw`B\in\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x][t]\bigr)`),
                           " の行列式 ",
                           math(String.raw`\mathrm{det}_{t}\,B\in\mathbb{Z}[x][t]`),
                           " を",
                         ]),
                         displayMath(
-                          String.raw`\mathrm{det}_{t}\,B:=\sum_{\varphi\in\mathfrak{S}_L}\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{\tau\in R_L}B_{\tau,\varphi(\tau)}`,
+                          String.raw`\mathrm{det}_{t}\,B:=\sum_{\varphi\in\mathfrak{S}_L}\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{u\in \mathcal{J}}B_{u,\varphi(u)}`,
                         ),
                         paragraph([
                           "で定める（",
@@ -5488,7 +5485,7 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                           " と同じである。和も積も有限個の項からなり、",
                           math(String.raw`\mathbb{Z}[x][t]`),
                           " の積は可換かつ結合的なので ",
-                          math(String.raw`\prod_{\tau\in R_L}`),
+                          math(String.raw`\prod_{u\in \mathcal{J}}`),
                           " は因子を並べる順序によらない。",
                         ]),
                       ],
@@ -5545,19 +5542,19 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
                         paragraph([
                           ref("def_matrix_over_row_configs"),
                           " の行列 ",
-                          math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
                           " に対して、",
                           ref("def_second_matrix"),
                           " の行列 ",
-                          math(String.raw`\mathrm{ch}(A)\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+                          math(String.raw`\mathrm{ch}(A)\in\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x][t]\bigr)`),
                           " を",
                         ]),
-                        displayMath(String.raw`\mathrm{ch}(A)_{\tau,\tau'}:=
+                        displayMath(String.raw`\mathrm{ch}(A)_{u,u'}:=
 \begin{cases}
-t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
-\iota\bigl(-A_{\tau,\tau'}\bigr) & (\tau\ne\tau'\ \text{のとき})
+t+\iota\bigl(-A_{u,u}\bigr) & (u=u'\ \text{のとき})\\
+\iota\bigl(-A_{u,u'}\bigr) & (u\ne u'\ \text{のとき})
 \end{cases}
-\qquad(\tau,\tau'\in R_L)`),
+\qquad(u,u'\in \mathcal{J})`),
                         paragraph([
                           "で定める（",
                           math(String.raw`t`),
@@ -5575,7 +5572,7 @@ t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
                           " と書かれる行列であるが、符号の反転を ",
                           math(String.raw`\mathbb{Z}[x]`),
                           " の中で先に済ませてある。",
-                          math(String.raw`-A_{\tau,\tau'}`),
+                          math(String.raw`-A_{u,u'}`),
                           " は ",
                           math(String.raw`\mathbb{Z}[x]`),
                           " の加法についての逆元であり、",
@@ -5604,7 +5601,7 @@ t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
                     paragraph([
                       ref("def_matrix_over_row_configs"),
                       " の行列 ",
-                      math(String.raw`A\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])`),
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
                       " の特性多項式 ",
                       math(String.raw`\chi_A\in\mathbb{Z}[x][t]`),
                       " を",
@@ -5620,9 +5617,7 @@ t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
                       " は ",
                       ref("def_second_determinant"),
                       "）。",
-                      "とくに ",
-                      ref("def_transfer_matrix"),
-                      " の転送行列 ",
+                      "とくに転送行列 ",
                       math(String.raw`T`),
                       " に対する ",
                       math(String.raw`\chi_T`),
