@@ -1274,7 +1274,10 @@ b_G(\sigma_{\mathsf{down}})
   \mathsf{up} & \bigl(v\ne\partial_G(e_0,\mathsf{target})\bigr)
 \end{cases}
 \qquad(v\in V)`),
-      paragraph(["を定める。", ref("def_finite_graph_input"), " の二端点の相異性と ", ref("def_broken_edge_set"), " より、"]),
+      paragraph(["を定める。", ref("def_spin_configuration_set"), " より、"]),
+      displayMath(String.raw`\sigma_0\in\mathcal S_G
+\quad\bigl(\because\ \sigma_0:V\to\mathsf{Spin}\text{ は写像である}\bigr).`),
+      paragraph([ref("def_finite_graph_input"), " の二端点の相異性と ", ref("def_broken_edge_set"), " より、"]),
       displayMath(String.raw`\begin{aligned}
 e_0
 &\in B_G(\sigma_0)

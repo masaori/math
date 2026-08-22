@@ -28,6 +28,10 @@ def partition_data(name, vertex_count, edges):
     )
     return {
         "name": name,
+        "vertex_count": vertex_count,
+        "edges": edges,
+        "configurations": configurations,
+        "broken_counts": broken_counts,
         "degree": degree,
         "multiplicities": multiplicities,
         "polynomial": polynomial,

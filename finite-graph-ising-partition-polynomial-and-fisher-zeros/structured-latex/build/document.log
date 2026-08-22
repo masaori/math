@@ -592,32 +592,32 @@ Overfull \hbox (128.07771pt too wide) detected at line 887
  []
 
 [8] [9] [10] [11] [12] [13]
-Overfull \hbox (59.38475pt too wide) detected at line 1552
+Overfull \hbox (59.38475pt too wide) detected at line 1557
 [][]
  []
 
 [14]
-Overfull \hbox (5.54675pt too wide) detected at line 1713
+Overfull \hbox (5.54675pt too wide) detected at line 1718
 [][]
  []
 
 [15] [16] [17] [18] [19] [20]
-Overfull \hbox (30.98936pt too wide) detected at line 2302
+Overfull \hbox (30.98936pt too wide) detected at line 2307
 [][]
  []
 
 [21] [22]
-Overfull \hbox (90.3594pt too wide) detected at line 2553
+Overfull \hbox (90.3594pt too wide) detected at line 2558
 [][]
  []
 
 [23]
-Overfull \hbox (19.42285pt too wide) detected at line 2690
+Overfull \hbox (19.42285pt too wide) detected at line 2695
 [][]
  []
 
 [24] [25] [26] [27]
-Overfull \hbox (23.56679pt too wide) detected at line 3034
+Overfull \hbox (23.56679pt too wide) detected at line 3039
 [] \OT1/cmr/m/n/10.95 
 [](\OML/cmm/m/it/10.95 m\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 q[] < [] \OT1/c
 mr/m/n/10.95 
@@ -633,4 +633,4 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 136D271E6B286FF0E67A1A8C4C9E49EB;288.
  )
-Output written on document.xdv (33 pages, 418748 bytes).
+Output written on document.xdv (33 pages, 419296 bytes).

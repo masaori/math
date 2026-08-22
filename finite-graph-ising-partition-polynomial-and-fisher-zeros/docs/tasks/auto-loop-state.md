@@ -11,6 +11,7 @@
 - 一般有限グラフについて、重複度込み Fisher 零点の任意次数の基本対称式が、符号付きの対応高次係数と最高次係数の比に等しい定理を追加した。現在は本文 56 ラベル、対応 SageMath 検算 37 件である。
 - 一般有限グラフについて、非零な Fisher 零点の逆数族の任意次数の基本対称式が、符号付きの対応低次係数と定数項の比に等しい定理を追加した。現在は本文 57 ラベル、対応 SageMath 検算 38 件である。
 - 次数二以上の一般有限グラフについて、重複度込み Fisher 零点の二乗和が、最高次側三係数の有理式に等しい定理を追加した。現在は本文 58 ラベル、対応 SageMath 検算 39 件である。
+- Fisher 零点の逆数和と低次係数比の既存証明について、構成した配位がスピン配位集合に属することを示す一行を補い、選んだ破れ辺から正次数を得る対応 SageMath 検算を追加した。本文ラベル数と検算対応件数は変わらない。
 - 一般有限グラフの今後の研究はこの台帳だけで管理する。Lean 具体版と必要十分版は未着手。
 
 ## 実行待ち
@@ -25,6 +26,7 @@
 - 一般有限グラフの Fisher 零点積と両端係数比: `theorem_fisher_zero_product_coefficient_ratio` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点の非零性: `theorem_fisher_zeros_nonzero` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点の逆数和と低次係数比: `theorem_fisher_zero_reciprocal_sum_coefficient_ratio` と対応 SageMath 検算を追加済み。
+- 一般有限グラフの Fisher 零点の逆数和と低次係数比の記述レビュー: 構成配位の所属を明示し、正次数を与える配位の検算を追加済み。
 - 一般有限グラフの Fisher 零点和と高次係数比: `theorem_fisher_zero_sum_coefficient_ratio` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点の基本対称式と係数比: `theorem_fisher_zero_elementary_symmetric_coefficient_ratio` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点逆数族の基本対称式と係数比: `theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio` と対応 SageMath 検算を追加済み。

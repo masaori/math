@@ -5,15 +5,16 @@
 ## 対象
 
 - ファイル: `structured-latex/content/main-text.ts`（ブロック `finite_graph_theorem_fisher_zero_reciprocal_sum_coefficient_ratio`）
-- 範囲: 一次因子分解の一次係数、零点を一つ除いた積、非零 Fisher 零点の逆数和、低次係数比
+- 範囲: 構成したスピン配位の所属と正次数、一次因子分解の一次係数、零点を一つ除いた積、非零 Fisher 零点の逆数和、低次係数比
 - 依存する本文ラベル: `theorem_fisher_zeros_nonzero`、`theorem_fisher_zero_product_coefficient_ratio`
 
 ## チェック一覧
 
-実行日: 2026-08-22
+実行日: 2026-08-23
 
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
+| `check_broken_edge_witness_and_positive_degree.sage` | 構成した配位がスピン配位集合に属し、選んだ辺を破って次数を正にする | PASS | 辺をもつ全四例で成立 |
 | `check_linear_coefficient_expansion.sage` | 一次因子分解の一次係数を、零点を一つずつ除いた積の和として復元する | PASS | 辺をもつ全四例で一致 |
 | `check_excluded_products_as_reciprocals.sage` | 零点を一つ除いた積を、全零点積とその零点の逆数の積へ書き換える | PASS | 全四例で零点が非零かつ式が一致 |
 | `check_reciprocal_sum_ratio.sage` | 重複度込み逆数和が負の一次係数・定数項比に一致する | PASS | 非二部グラフと孤立頂点を含む全四例で一致 |
