@@ -1889,6 +1889,140 @@ R_\alpha(\alpha^{-1})
     ],
   },
   {
+    id: "finite_graph_theorem_full_cut_fisher_zero_support_parity_characterization",
+    kind: "theorem",
+    title: { text: "全辺二分割をもつ有限グラフの Fisher 零点台の奇偶による奇接続辺数頂点の特徴付け" },
+    labels: ["theorem_full_cut_fisher_zero_support_parity_characterization"],
+    habitat: "N",
+    verification: ["sagemath/check/full-cut-fisher-zero-support-parity-characterization"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、ある頂点部分集合 ",
+        math(String.raw`A\subseteq V`),
+        " が存在し、全ての辺の二端点のうちちょうど一方だけが ",
+        math(String.raw`A`),
+        " に属すると仮定する。",
+        ref("theorem_full_cut_fisher_zero_reciprocal_multiplicity"),
+        " の零点重複度を ",
+        math(String.raw`\mu_G:\overline{\mathbb Q}\to\mathbb N`),
+        " とし、非零 Fisher 零点の有限集合を",
+      ]),
+      displayMath(String.raw`\mathcal Z_G:=
+\left\{
+  \alpha\in\overline{\mathbb Q}^{\times}
+  \;\middle|\;
+  \mu_G(\alpha)>0
+\right\}`),
+      paragraph(["と置く。各 ", math(String.raw`w\in V`), " に接続する辺の有限集合を"]),
+      displayMath(String.raw`I_w:=
+\left\{
+  e\in E
+  \;\middle|\;
+  \partial_G(e,\mathsf{source})=w
+  \quad\text{または}\quad
+  \partial_G(e,\mathsf{target})=w
+\right\}`),
+      paragraph(["と置く。このとき、Fisher 零点台の元数が奇数であることと、奇数本の辺が接続する頂点が存在することは同値である。すなわち"]),
+      displayMath(String.raw`|\mathcal Z_G|\in\{2n+1\mid n\in\mathbb N\}
+\quad\Longleftrightarrow\quad
+\exists w\in V,\quad |I_w|\in\{2n+1\mid n\in\mathbb N\}.`),
+    ],
+    proof: [
+      paragraph([
+        "全頂点下向き配位は破れ辺数零をもつので、",
+        ref("def_broken_edge_multiplicity"),
+        " より ",
+        math(String.raw`\Omega_G(0)\geq1`),
+        " である。",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " を標準単射で ",
+        math(String.raw`\overline{\mathbb Q}`),
+        " へ移すと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline P_G(0)
+&=\Omega_G(0)
+&&\bigl(\because\ \text{定数項の定義}\bigr)\\
+&\ne0
+&&\bigl(\because\ \Omega_G(0)\geq1\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\mu_G(0)=0
+\quad\bigl(\because\ \overline P_G(0)\ne0\bigr).`),
+      paragraph(["したがって ", math(String.raw`\mathcal Z_G`), " は相異なる Fisher 零点全体の有限集合である。"]),
+      paragraph([ref("claim_partition_polynomial_value_at_one"), " を標準単射で ", math(String.raw`\overline{\mathbb Q}`), " へ移すと"]),
+      displayMath(String.raw`\begin{aligned}
+\overline P_G(1)
+&=2^{|V|}
+&&\bigl(\because\ Z_G(1)=2^{|V|}\bigr)\\
+&\ne0
+&&\bigl(\because\ |V|\in\mathbb N\text{ かつ }2^{|V|}>0\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\mu_G(1)=0
+\quad\bigl(\because\ \overline P_G(1)\ne0\bigr).`),
+      paragraph([
+        ref("theorem_full_cut_fisher_zero_reciprocal_multiplicity"),
+        " より、逆数写像は ",
+        math(String.raw`\mathcal Z_G`),
+        " を保つ。さらに ",
+        math(String.raw`\alpha\in\overline{\mathbb Q}^{\times}`),
+        " が逆数写像の固定点ならば",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\alpha
+&=\alpha^{-1}
+&&\bigl(\because\ \text{逆数写像の固定点である}\bigr)\\
+\alpha^2
+&=1
+&&\bigl(\because\ \alpha\ne0\text{ なので両辺へ }\alpha\text{ を掛ける}\bigr)\\
+\alpha^2-1
+&=0
+&&\bigl(\because\ \text{両辺から }1\text{ を引く}\bigr)\\
+(\alpha-1)(\alpha+1)
+&=0
+&&\bigl(\because\ \alpha^2-1=(\alpha-1)(\alpha+1)\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\overline{\mathbb Q}`),
+        " は体であり、",
+        math(String.raw`\mu_G(1)=0`),
+        " なので、",
+        math(String.raw`\mathcal Z_G\setminus\{-1\}`),
+        " は相異なる二元からなる逆数軌道へ分割される。その軌道全体の有限集合を ",
+        math(String.raw`\mathcal O_G`),
+        " と置く。また",
+      ]),
+      displayMath(String.raw`\varepsilon_G:=
+\begin{cases}
+1,&\mu_G(-1)>0,\\
+0,&\mu_G(-1)=0
+\end{cases}
+\in\mathbb N`),
+      paragraph(["と置く。有限集合の二元軌道による分割から"]),
+      displayMath(String.raw`|\mathcal Z_G|=2|\mathcal O_G|+\varepsilon_G
+\quad\bigl(\because\ -1\text{ だけが }\mathcal Z_G\text{ に属し得る逆数固定点である}\bigr).`),
+      paragraph(["したがって、", ref("theorem_root_minus_one_characterizes_odd_incident_edge_count"), " と上の定義を順に用いると"]),
+      displayMath(String.raw`\begin{aligned}
+|\mathcal Z_G|\in\{2n+1\mid n\in\mathbb N\}
+&\Longleftrightarrow\varepsilon_G=1
+&&\bigl(\because\ |\mathcal Z_G|=2|\mathcal O_G|+\varepsilon_G\bigr)\\
+&\Longleftrightarrow\mu_G(-1)>0
+&&\bigl(\because\ \varepsilon_G\text{ の定義}\bigr)\\
+&\Longleftrightarrow\overline P_G(-1)=0
+&&\bigl(\because\ \mu_G(-1)\text{ は零点重複度である}\bigr)\\
+&\Longleftrightarrow Z_G(-1)=0
+&&\bigl(\because\ \mathbb Z\hookrightarrow\overline{\mathbb Q}\text{ は単射である}\bigr)\\
+&\Longleftrightarrow\exists w\in V,\quad |I_w|\in\{2n+1\mid n\in\mathbb N\}
+&&\bigl(\because\ \text{零点 }-1\text{ による奇接続辺数頂点の特徴付け}\bigr),
+\end{aligned}`),
+      paragraph([
+        "零点は ",
+        math(String.raw`\overline{\mathbb Q}`),
+        "、零点台、逆数軌道、頂点集合、辺集合は有限集合、重複度、元数、接続辺数は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_claim_value_at_one",
     kind: "claim",
     title: { text: "係数総和" },

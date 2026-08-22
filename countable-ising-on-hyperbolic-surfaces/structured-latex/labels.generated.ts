@@ -105,6 +105,7 @@ export const ALL_LABELS = [
   "theorem_full_cut_fisher_zero_product",
   "theorem_full_cut_fisher_zero_product_away_from_minus_one",
   "theorem_full_cut_fisher_zero_reciprocal_multiplicity",
+  "theorem_full_cut_fisher_zero_support_parity_characterization",
   "theorem_full_cut_positive_rational_evaluation_reciprocity",
   "theorem_generated_quotient_cellulation_is_hyperbolic_regular",
   "theorem_homology_class_polynomials_recombine",
