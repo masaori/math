@@ -771,6 +771,125 @@ K_r:=K_{r-1}(\alpha_r)\subset\overline{\mathbb Q}
     ],
   },
   {
+    id: "arithmetic_invariants_theorem_fixed_quotient_fisher_splitting_field_degree_divides_factorial",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Fisher 分解体次数の階乗整除性" },
+    labels: ["theorem_fixed_quotient_fisher_splitting_field_degree_divides_factorial"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-fisher-splitting-field-degree-divides-factorial"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"),
+        " で構成した分解体 ",
+        math(String.raw`K_Q\subset\overline{\mathbb Q}`),
+        " の次数は ",
+        math(String.raw`44!`),
+        " を割り切る。すなわち",
+      ]),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+\in\left\{n\in\mathbb N_{>0}\mid n\mid44!\right\}.`),
+      paragraph([
+        "複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"),
+        " の次数四十四の既約因子 ",
+        math(String.raw`Q_Q\in\mathbb Q[x]`),
+        " の根集合を",
+      ]),
+      displayMath(String.raw`A_Q:=\left\{\alpha\in\overline{\mathbb Q}\mid Q_Q(\alpha)=0\right\}`),
+      paragraph(["と置く。同じ定理より、"]),
+      displayMath(String.raw`|A_Q|=44.`),
+      paragraph([
+        math(String.raw`\mathbb Q`),
+        " の標数は零なので ",
+        math(String.raw`Q_Q`),
+        " は分離的である。さらに ",
+        ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"),
+        " より ",
+        math(String.raw`K_Q/\mathbb Q`),
+        " は有限分離拡大かつ正規拡大である。したがって",
+      ]),
+      displayMath(String.raw`K_Q/\mathbb Q\text{ は有限 Galois 拡大である}.`),
+      paragraph([
+        math(String.raw`\operatorname{Gal}(K_Q/\mathbb Q)`),
+        " を ",
+        math(String.raw`K_Q/\mathbb Q`),
+        " の Galois 群、",
+        math(String.raw`\operatorname{Sym}(A_Q)`),
+        " を有限集合 ",
+        math(String.raw`A_Q`),
+        " の全ての置換からなる群とする。任意の ",
+        math(String.raw`\sigma\in\operatorname{Gal}(K_Q/\mathbb Q)`),
+        " と ",
+        math(String.raw`\alpha\in A_Q`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Q_Q(\sigma(\alpha))
+&=\sigma(Q_Q(\alpha))
+&&\bigl(\because\ \sigma\text{ は }\mathbb Q\text{ を固定する体自己同型}\bigr)\\
+&=\sigma(0)
+&&\bigl(\because\ \alpha\in A_Q\bigr)\\
+&=0.
+\end{aligned}`),
+      displayMath(String.raw`\sigma(\alpha)\in A_Q.`),
+      paragraph([
+        math(String.raw`\sigma^{-1}\in\operatorname{Gal}(K_Q/\mathbb Q)`),
+        " にも同じ議論を適用すると、",
+      ]),
+      displayMath(String.raw`\sigma^{-1}(\alpha)\in A_Q
+\qquad(\alpha\in A_Q).`),
+      paragraph(["したがって ", math(String.raw`\sigma|_{A_Q}`), " は逆写像 ", math(String.raw`\sigma^{-1}|_{A_Q}`), " をもつ置換である。ゆえに根集合への制限により写像"]),
+      displayMath(String.raw`\rho:\operatorname{Gal}(K_Q/\mathbb Q)\longrightarrow\operatorname{Sym}(A_Q),
+\qquad
+\rho(\sigma):=\sigma|_{A_Q}`),
+      paragraph(["が定まる。任意の ", math(String.raw`\sigma,\tau\in\operatorname{Gal}(K_Q/\mathbb Q)`), " と ", math(String.raw`\alpha\in A_Q`), " に対して"]),
+      displayMath(String.raw`\begin{aligned}
+\rho(\sigma\circ\tau)(\alpha)
+&=(\sigma\circ\tau)(\alpha)
+&&\bigl(\because\ \rho\text{ の定義}\bigr)\\
+&=\sigma(\tau(\alpha))
+&&\bigl(\because\ \text{写像の合成の定義}\bigr)\\
+&=(\rho(\sigma)\circ\rho(\tau))(\alpha)
+&&\bigl(\because\ \rho\text{ の定義}\bigr).
+\end{aligned}`),
+      paragraph(["したがって ", math(String.raw`\rho`), " は群準同型である。次に ", math(String.raw`\rho(\sigma)=\operatorname{id}_{A_Q}`), " と仮定する。すると"]),
+      displayMath(String.raw`\sigma(\alpha)=\alpha
+\qquad(\alpha\in A_Q).`),
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"), " より、"]),
+      displayMath(String.raw`K_Q=\mathbb Q(A_Q).`),
+      paragraph([
+        math(String.raw`\sigma`),
+        " は ",
+        math(String.raw`\mathbb Q`),
+        " と全ての ",
+        math(String.raw`\alpha\in A_Q`),
+        " を固定するので、",
+      ]),
+      displayMath(String.raw`\sigma=\operatorname{id}_{K_Q}.`),
+      paragraph(["よって ", math(String.raw`\ker\rho=\{\operatorname{id}_{K_Q}\}`), " であり、", math(String.raw`\rho`), " は単射である。したがって"]),
+      displayMath(String.raw`\left|\operatorname{Gal}(K_Q/\mathbb Q)\right|
+=|\rho(\operatorname{Gal}(K_Q/\mathbb Q))|.`),
+      displayMath(String.raw`\rho(\operatorname{Gal}(K_Q/\mathbb Q))
+\le\operatorname{Sym}(A_Q).`),
+      paragraph(["Lagrange の定理により、"]),
+      displayMath(String.raw`|\rho(\operatorname{Gal}(K_Q/\mathbb Q))|
+\mid|\operatorname{Sym}(A_Q)|.`),
+      displayMath(String.raw`|\operatorname{Sym}(A_Q)|=|A_Q|!=44!.`),
+      paragraph(["有限 Galois 拡大の次数公式により、"]),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+=\left|\operatorname{Gal}(K_Q/\mathbb Q)\right|.`),
+      displayMath(String.raw`[K_Q:\mathbb Q]\mid44!.`),
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"), " より、"]),
+      displayMath(String.raw`[K_Q:\mathbb Q]\in\mathbb N_{>0}.`),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+\in\left\{n\in\mathbb N_{>0}\mid n\mid44!\right\}.`),
+    ],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
     kind: "theorem",
     title: { text: "固定剰余類格子の Fisher 零点の有理矩形根分離証明書" },
