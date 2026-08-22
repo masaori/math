@@ -220,6 +220,7 @@ targets=(
   Ising3DCut.Prediction.fisherExternalEdgeWeights_cleared
   Ising3DCut.Prediction.fisherMatchingWeight_cleared
   Ising3DCut.Prediction.fisherBoundaryResponse_clearedWeightSum_eq_evenSubgraphSum
+  Ising3DCut.Prediction.fisherBoundaryResponse_clearedPfaffian_eq_evenSubgraphSum
   Ising3DCut.Prediction.constantSign_finiteExpansion
   Ising3DCut.LimitQuantity.tendsto_congr_of_pointwise_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_data_eq
