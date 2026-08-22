@@ -1257,6 +1257,93 @@ theorem periodicComponentIndex_eq_of_mem
     (periodicComponentIndex_spec N f y)).symm.trans
       ((mem_periodicComponentNodeTable_iff N f _ y).1 hy)
 
+/-- 周期軌道表は有限集合なので、その基礎多重集合で同じ周期成分を表す
+    二つの出現は等しい。 -/
+theorem periodicOrbitOccurrence_eq_of_coe_eq
+    (O P : (periodicOrbitTable N f).val)
+    (h : (O : Finset (V → State)) = (P : Finset (V → State))) :
+    O = P := by
+  rcases O with ⟨O, i⟩
+  rcases P with ⟨P, j⟩
+  simp only at h
+  subst P
+  congr 1
+  apply Fin.ext
+  have hcount : (periodicOrbitTable N f).val.count O = 1 := by
+    exact Multiset.count_eq_one_of_mem (periodicOrbitTable N f).nodup
+      (occurrence_mem (periodicOrbitTable N f).val ⟨O, i⟩)
+  omega
+
+/-- 配位が周期成分の一つの出現に属するなら、一意性から選んだ
+    出現添字はその出現そのものである。 -/
+theorem periodicComponentOccurrenceIndex_eq_of_mem
+    (O : (periodicOrbitTable N f).val) (y : V → State)
+    (hy : y ∈ periodicComponentNodeTable N f O) :
+    periodicComponentOccurrenceIndex N f y = O := by
+  apply periodicOrbitOccurrence_eq_of_coe_eq N f
+  exact congrArg Subtype.val (periodicComponentIndex_eq_of_mem N f
+    ⟨O, occurrence_mem (periodicOrbitTable N f).val O⟩ y hy)
+
+/-- 全配位集合は、一意な周期成分出現とその成分内の配位の従属和に全単射である。 -/
+noncomputable def configurationComponentSigmaEquiv :
+    (Σ O : (periodicOrbitTable N f).val,
+      ↑(periodicComponentNodeTable N f O)) ≃ (V → State) where
+  toFun p := p.2
+  invFun y := ⟨periodicComponentOccurrenceIndex N f y,
+    ⟨y, periodicComponentIndex_spec N f y⟩⟩
+  left_inv p := by
+    have hp : periodicComponentOccurrenceIndex N f p.2 = p.1 :=
+      periodicComponentOccurrenceIndex_eq_of_mem N f p.1 p.2 p.2.property
+    refine Sigma.ext hp ?_
+    exact (Subtype.heq_iff_coe_eq (fun y => by
+      change y ∈ periodicComponentNodeTable N f
+          (periodicComponentOccurrenceIndex N f p.2) ↔
+        y ∈ periodicComponentNodeTable N f p.1
+      rw [hp])).2 rfl
+  right_inv y := rfl
+
+/-- 周期成分出現の対応と各成分表の有限全単射を従属和上で接着した全単射。 -/
+noncomputable def componentwiseConfigurationEquiv
+    (hcode : mapCode NW fW = mapCode N f) :
+    (V → State) ≃ (W → State) :=
+  (configurationComponentSigmaEquiv N f).symm |>.trans
+    (Equiv.sigmaCongr (orbitEquivOfMapCode N f NW fW hcode)
+      (periodicComponentEquivOfMapCode N f NW fW hcode)) |>.trans
+        (configurationComponentSigmaEquiv NW fW)
+
+theorem componentwiseConfigurationEquiv_apply
+    (hcode : mapCode NW fW = mapCode N f) (y : V → State) :
+    componentwiseConfigurationEquiv N f NW fW hcode y =
+      componentwiseConfigurationMap N f NW fW hcode y := by
+  rfl
+
+/-- 周期成分ごとの有限全単射を一意な成分分割に沿って接着した写像は単射である。 -/
+theorem componentwiseConfigurationMap_injective
+    (hcode : mapCode NW fW = mapCode N f) :
+    Function.Injective (componentwiseConfigurationMap N f NW fW hcode) := by
+  intro x y hxy
+  apply (componentwiseConfigurationEquiv N f NW fW hcode).injective
+  rw [componentwiseConfigurationEquiv_apply, componentwiseConfigurationEquiv_apply]
+  exact hxy
+
+/-- 周期成分ごとの有限全単射を一意な成分分割に沿って接着した写像は全射である。 -/
+theorem componentwiseConfigurationMap_surjective
+    (hcode : mapCode NW fW = mapCode N f) :
+    Function.Surjective (componentwiseConfigurationMap N f NW fW hcode) := by
+  intro z
+  obtain ⟨y, hy⟩ := (componentwiseConfigurationEquiv N f NW fW hcode).surjective z
+  refine ⟨y, ?_⟩
+  rw [← componentwiseConfigurationEquiv_apply]
+  exact hy
+
+/-- 接着した全配位写像は全単射である。この段は成分表の一意な分割と、
+    各対応成分表の有限全単射だけを使い、時間発展との可換性はまだ主張しない。 -/
+theorem componentwiseConfigurationMap_bijective
+    (hcode : mapCode NW fW = mapCode N f) :
+    Function.Bijective (componentwiseConfigurationMap N f NW fW hcode) :=
+  ⟨componentwiseConfigurationMap_injective N f NW fW hcode,
+    componentwiseConfigurationMap_surjective N f NW fW hcode⟩
+
 /-- 等しい基点語を持つ周期点の対応に、周期上の各位置へ
     非周期前像木の全深さ対応を接着する。共通の打ち切り深さを
     作るときにだけ、両舞台のセル数一致を使う。 -/
