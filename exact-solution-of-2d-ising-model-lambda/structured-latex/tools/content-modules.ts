@@ -10,7 +10,9 @@ import { existsSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-import type { ConvertedBlock, Note } from "../schema.ts";
+import { compileDocumentStructure } from "../schema.ts";
+import type { ConvertedBlock, Note, Section } from "../schema.ts";
+import type { CompiledDocumentStructure } from "../../../structured-latex/domain-model/index.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -45,19 +47,60 @@ async function loadDefaultExport(dir: string, fileName: string): Promise<unknown
 }
 
 export type LoadedBlockFile = { file: string; blocks: ConvertedBlock[] };
+
+/** 節・グループ所属を保った索引。所属を文書順から推測しないための正本。 */
+export type LoadedStructure = CompiledDocumentStructure<string, unknown>;
 export type LoadedNoteFile = { file: string; notes: Note[] };
 
-/** content/ の全ファイルを文書順で読む。default export が配列でなければ落とす。 */
+const isSectionArray = (value: unknown): value is readonly Section[] =>
+  Array.isArray(value) &&
+  value.length > 0 &&
+  value.every(
+    (item) =>
+      typeof item === "object" && item !== null && (item as { kind?: unknown }).kind === "section",
+  );
+
+/**
+ * content/ の全ファイルを文書順で読む。
+ *
+ * default export は **章（`Section`）の配列**（木が正本のファイル）か、ブロックの配列
+ * （まだ移していないファイル）のどちらか。木は `compileDocumentStructure` で平坦化する。
+ * **フォールバックしない**: 構造の不備はここで止める。
+ */
 export async function loadContentFiles(): Promise<LoadedBlockFile[]> {
-  const out: LoadedBlockFile[] = [];
+  const { files } = await loadContent();
+  return files;
+}
+
+/** 平坦なブロック列と、節・グループ所属の索引を同時に返す。 */
+export async function loadContent(): Promise<{
+  files: LoadedBlockFile[];
+  structures: Map<string, LoadedStructure>;
+}> {
+  const files: LoadedBlockFile[] = [];
+  const structures = new Map<string, LoadedStructure>();
   for (const file of listSourceFiles(contentDir)) {
-    const blocks = await loadDefaultExport(contentDir, file);
-    if (!Array.isArray(blocks)) {
+    const source = await loadDefaultExport(contentDir, file);
+    if (isSectionArray(source)) {
+      const compiled = compileDocumentStructure({
+        kind: "documentStructure",
+        sections: source,
+      });
+      if (!compiled.success) {
+        throw new TypeError(
+          `${file} の文書構造を正規化できない: ${JSON.stringify(compiled.error)}`,
+        );
+      }
+      structures.set(file, compiled.data as LoadedStructure);
+      files.push({ file, blocks: compiled.data.blocks as ConvertedBlock[] });
+      continue;
+    }
+    if (!Array.isArray(source)) {
       throw new TypeError(`${file} default export must be an array`);
     }
-    out.push({ file, blocks: blocks as ConvertedBlock[] });
+    files.push({ file, blocks: source as ConvertedBlock[] });
   }
-  return out;
+  return { files, structures };
 }
 
 /** notes/ の全ファイルを読む。ディレクトリが無ければ 0 件。 */

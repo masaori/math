@@ -12,6 +12,7 @@ import type {
   AssertNoDuplicate,
   Block,
   BlockIdsOf,
+  BlocksOfSections,
   FindDuplicate,
   LabelsOf,
   Note,
@@ -26,7 +27,7 @@ import notes_partition_polynomial from './notes/partition-polynomial.ts'
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
-  ...typeof blocks_main_text,
+  ...BlocksOfSections<typeof blocks_main_text>,
 ]
 
 /** 全ノート。 */

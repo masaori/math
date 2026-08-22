@@ -25,13 +25,17 @@
 import { z } from "zod";
 
 import {
+  compileDocumentStructure,
   createRuntimeSchema,
   createStructuredTextSchema,
   type Block,
+  type DocumentStructure as SystemDocumentStructure,
+  type ElementGroup as SystemElementGroup,
   type FigureBlock,
   type HeadingBlock as SystemHeadingBlock,
   type NoDuplicateBlockId,
   type NoDuplicateLabel,
+  type Section as SystemSection,
   type Node as SystemNode,
   type Note as SystemNote,
   type Origin,
@@ -185,6 +189,36 @@ export const defineBlocks = <const T extends readonly ConvertedBlock[]>(
 ): T => blocks;
 
 export const defineNotes = schema.defineNotes;
+
+/**
+ * 章 1 つ分の節の木。**章・節の親子関係と、要素の所属・主従を文書順から推測させない**ための
+ * 入力である（システム側 README「節と要素グループ」）。
+ *
+ * `role: "primary"` を付けたグループの中心（`focus`）が、その節の主定理・主な主張・主な定義に
+ * なる。HTML の「この節の主な定義」「この節の主定理・主張」はここからだけ導く
+ * （身分の宣言と直前の見出しから推測しない）。
+ *
+ * **章ごとに分けて型検査する。** 本文全体を 1 つのリテラルにすると TypeScript の
+ * 単一リテラル比較の予算を超え、実在しない不一致を報告するようになる（実測 2026-08-22）。
+ */
+export const defineSection = schema.defineSection;
+
+/** 再利用する要素グループを単体で文脈型に通す。 */
+export const defineElementGroup = schema.defineElementGroup;
+
+/** 章の配列を 1 つの文書構造として束ねる。 */
+export const defineDocumentStructure = schema.defineDocumentStructure;
+
+export type Section = SystemSection<Label, ProjectMeta>;
+export type ElementGroup = SystemElementGroup<Label, ProjectMeta>;
+export type DocumentStructure = SystemDocumentStructure<Label, ProjectMeta>;
+
+/**
+ * 木を、既存のセグメント契約が受け取れる平坦なブロック列と、所属を保った索引へ正規化する。
+ * 構造上の不備（節の深さ超過・構造 ID の重複・同じブロックの複数所属）は Result のエラーで返る。
+ * 呼び出し側はフォールバックせず、エラーならそこで止めること。
+ */
+export { compileDocumentStructure };
 
 /** 相互参照。実在しないラベルはコンパイル時に落ちる。 */
 export const ref = schema.ref;

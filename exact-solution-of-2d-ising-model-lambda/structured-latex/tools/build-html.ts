@@ -29,14 +29,17 @@ import {
   renderChapterNavigation,
 } from "../../../structured-latex/renderers/html/chapter-navigation.ts";
 import {
-  renderMainTheoremLead,
   renderStandingAwareBlock,
   THEOREM_STANDING_CSS,
-  type MainTheoremEntry,
 } from "../../../structured-latex/renderers/html/theorem-standing.ts";
+import {
+  PRIMARY_ELEMENTS_CSS,
+  primaryElementEntriesOf,
+  renderPrimaryElementsLead,
+} from "../../../structured-latex/renderers/html/primary-elements.ts";
 import { standingOf } from "../../../structured-latex/domain-model/index.ts";
 import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
-import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
+import { loadContent, structuredLatexDir } from "./content-modules.ts";
 
 const require = createRequire(import.meta.url);
 const katexDist = dirname(require.resolve("katex/dist/katex.min.css"));
@@ -55,7 +58,7 @@ const HEADINGS: Record<TheoremLikeKind, string> = {
 const escapeHtml = (s: string): string =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-const contentFiles = await loadContentFiles();
+const { files: contentFiles, structures } = await loadContent();
 
 // --- 採番（LaTeX と同じ規則）-------------------------------------------------
 
@@ -84,30 +87,21 @@ for (const { blocks } of contentFiles) {
   }
 }
 
-// --- 主定理（節の冒頭に列挙するもの）-----------------------------------------
+// --- 節の主要要素（節の冒頭に列挙するもの）-----------------------------------
 //
-// 身分の宣言はシステム側の入力言語が持つ（宣言が無ければサブ定理）。ここでやるのは
-// 「どの節に属するか」を文書順から拾い、節ごとにまとめることだけである。
+// **所属は入力の木が持つ。** 身分の宣言（standing）と「直前の見出し」から推測しない。
+// `role: "primary"` を付けたグループの中心だけが、その節の主な定義・主定理・主張である。
 
-/**
- * 見出しブロックの id → その見出しの直後に属する主定理。
- * 「属する」は**直前の見出し**で決める（見出しの深さに依存しないので、章だけの文書でも、
- * 節を切った文書でも、同じ規則でその見出しの守備範囲に入る）。
- */
-const mainTheoremsByHeading = new Map<string, MainTheoremEntry[]>();
+const primaryLeadBySection = new Map<string, string>();
 {
-  let headingId = "";
-  for (const { blocks } of contentFiles) {
-    for (const block of blocks) {
-      if (block.kind === "heading") {
-        headingId = block.id;
-        continue;
-      }
-      if (block.kind === "figure") continue;
-      if (standingOf(block) !== "mainTheorem") continue;
-      const entries = mainTheoremsByHeading.get(headingId) ?? [];
-      entries.push({ anchor: `blk-${block.id}`, text: headLine(block) });
-      mainTheoremsByHeading.set(headingId, entries);
+  for (const structure of structures.values()) {
+    for (const section of structure.sections) {
+      const entries = primaryElementEntriesOf(structure, section.sectionId, (block) =>
+        block.kind === "heading" || block.kind === "figure"
+          ? ""
+          : headLine(block as TheoremLikeBlock),
+      ).map((entry) => ({ ...entry, anchor: `blk-${entry.anchor}` }));
+      primaryLeadBySection.set(section.sectionId, renderPrimaryElementsLead(entries));
     }
   }
 }
@@ -175,8 +169,8 @@ function renderHeading(block: HeadingBlock): string {
   const ids = block.labels.map((label) => `<span id="sec-${label}"></span>`).join("");
   const shown = number === "" ? title : `${number}　${title}`;
   const heading = `${ids}<${tag} id="sec-${anchor}" class="lv${block.level}">${shown}</${tag}>`;
-  // 見出しの冒頭に、その見出しに属する主定理を並べる。読み始める前に到達点が見えるようにする。
-  return heading + renderMainTheoremLead(mainTheoremsByHeading.get(block.id) ?? []);
+  // 節の冒頭に、その節の主な定義と主定理・主張を並べる。読み始める前に到達点が見えるようにする。
+  return heading + (primaryLeadBySection.get(block.id) ?? "");
 }
 
 /** ブロックの見出し行（「定理 3.4（題名）」）。節冒頭の一覧とブロック本体で同じものを使う。 */
@@ -307,6 +301,7 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
 ${CHAPTER_NAVIGATION_CSS}
 ${THEOREM_STANDING_CSS}
+${PRIMARY_ELEMENTS_CSS}
 </style></head><body>
 ${mobileHtml}
 <div class="page-layout">
