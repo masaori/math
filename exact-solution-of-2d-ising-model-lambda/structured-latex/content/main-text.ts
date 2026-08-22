@@ -27,6 +27,14 @@ export default defineBlocks([
   },
 
   {
+    id: "partition_polynomial_heading_lattice_and_configuration",
+    kind: "heading",
+    level: 2,
+    title: { text: "格子と配位" },
+    labels: [],
+  },
+
+  {
     id: "partition_polynomial_definition_cardinality_notation",
     kind: "definition",
     title: { text: "有限集合の元の個数の記法" },
@@ -344,6 +352,14 @@ n_{\mathrm{v}}(i,j):=L^2+L\cdot s(i)+s(j)+1`,
         " の元として読む。",
       ]),
     ],
+  },
+
+  {
+    id: "partition_polynomial_heading_broken_bonds_and_polynomial",
+    kind: "heading",
+    level: 2,
+    title: { text: "破れボンド数と分配多項式" },
+    labels: [],
   },
 
   {
@@ -734,7 +750,15 @@ Z_L
     id: "free_entropy_heading",
     kind: "heading",
     level: 1,
-    title: { text: "有限系の自由エントロピー" },
+    title: { text: "対数順序群と有限系の自由エントロピー" },
+    labels: [],
+  },
+
+  {
+    id: "free_entropy_heading_log_order_group",
+    kind: "heading",
+    level: 2,
+    title: { text: "対数順序群と正の有理数の対数" },
     labels: [],
   },
 
@@ -1166,6 +1190,14 @@ v_p(a)+v_p(b')
   },
 
   {
+    id: "free_entropy_heading_finite_free_entropy",
+    kind: "heading",
+    level: 2,
+    title: { text: "有限系の自由エントロピー" },
+    labels: [],
+  },
+
+  {
     id: "free_entropy_claim_value_at_rational_is_positive",
     kind: "claim",
     title: { text: "分配多項式の正の有理点での値は正の有理数である" },
@@ -1307,6 +1339,14 @@ Z_L(q)
         "実数を経由しない。",
       ]),
     ],
+  },
+
+  {
+    id: "free_entropy_heading_log_properties",
+    kind: "heading",
+    level: 2,
+    title: { text: "対数の性質と、すべての配位を等しく数える点" },
+    labels: [],
   },
 
   {
@@ -2383,6 +2423,14 @@ N\lambda\le_{\Lambda}N\mu
   },
 
   {
+    id: "transfer_matrix_heading_row_configs",
+    kind: "heading",
+    level: 2,
+    title: { text: "行配位と破れの分解" },
+    labels: [],
+  },
+
+  {
     id: "transfer_matrix_definition_row_configuration",
     kind: "definition",
     title: { text: "行配位と、配位の行への制限" },
@@ -2891,6 +2939,14 @@ b(\sigma)
   },
 
   {
+    id: "transfer_matrix_heading_transfer_matrix",
+    kind: "heading",
+    level: 2,
+    title: { text: "転送行列" },
+    labels: [],
+  },
+
+  {
     id: "transfer_matrix_definition_row_family",
     kind: "definition",
     title: { text: "行配位の族と、配位を行の並びとして読む写像" },
@@ -3102,6 +3158,14 @@ b(\sigma)
         " 行の間の破れを担う。",
       ]),
     ],
+  },
+
+  {
+    id: "transfer_matrix_heading_closed_walks_and_trace",
+    kind: "heading",
+    level: 2,
+    title: { text: "配位と閉じた道の対応、そしてトレース表示" },
+    labels: [],
   },
 
   {
@@ -4004,7 +4068,15 @@ Z_L
     id: "algebraic_eigenvalue_heading",
     kind: "heading",
     level: 1,
-    title: { text: "固有値の代数性" },
+    title: { text: "シフト対称性と特性多項式" },
+    labels: [],
+  },
+
+  {
+    id: "shift_symmetry_heading_order_and_sign",
+    kind: "heading",
+    level: 2,
+    title: { text: "行配位の線形順序と置換の符号" },
     labels: [],
   },
 
@@ -4752,6 +4824,14 @@ C&:=\bigl\{\,(\tau,\tau')\in P_L \bigm| \varphi\bigl(\Psi(\tau,\tau')_2\bigr)\pr
   },
 
   {
+    id: "shift_symmetry_heading_determinant_and_char_poly",
+    kind: "heading",
+    level: 2,
+    title: { text: "行列式と特性多項式" },
+    labels: [],
+  },
+
+  {
     id: "algebraic_eigenvalue_definition_determinant",
     kind: "definition",
     title: { text: "定数多項式を与える写像、単位行列、そして行列式" },
@@ -5213,6 +5293,14 @@ t+\iota\bigl(-A_{\tau,\tau}\bigr) & (\tau=\tau'\ \text{のとき})\\
         " の元だけであり、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "shift_symmetry_heading_column_translation",
+    kind: "heading",
+    level: 2,
+    title: { text: "列の平行移動と行配位の巡回シフト" },
+    labels: [],
   },
 
   {
@@ -5694,6 +5782,14 @@ T_{S(\tau),S(\tau')}
   },
 
   {
+    id: "shift_symmetry_heading_shift_matrix",
+    kind: "heading",
+    level: 2,
+    title: { text: "シフト行列" },
+    labels: [],
+  },
+
+  {
     id: "algebraic_eigenvalue_definition_shift_matrix",
     kind: "definition",
     title: { text: "シフト行列" },
@@ -5978,6 +6074,14 @@ T_{S(\tau),S(\tau')}
     ],
   },
 
+
+  {
+    id: "shift_symmetry_heading_iterate_and_period",
+    kind: "heading",
+    level: 2,
+    title: { text: "シフトの反復と最小周期" },
+    labels: [],
+  },
 
   {
     id: "algebraic_eigenvalue_definition_column_translation_iterate",
@@ -7013,6 +7117,14 @@ S^{[e\,(q+1)]}(\tau)
   },
 
   {
+    id: "shift_symmetry_heading_orbits",
+    kind: "heading",
+    level: 2,
+    title: { text: "行配位の軌道" },
+    labels: [],
+  },
+
+  {
     id: "algebraic_eigenvalue_claim_row_config_shift_iterate_injective",
     kind: "claim",
     title: { text: "反復した巡回シフトは単射である" },
@@ -7809,6 +7921,14 @@ O(\tau_1)
         " とその部分集合だけであり、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "shift_symmetry_heading_orbit_preserving_permutations",
+    kind: "heading",
+    level: 2,
+    title: { text: "軌道を保つ置換" },
+    labels: [],
   },
 
   {
@@ -9018,6 +9138,14 @@ O(\tau)
         " とその部分集合、およびその上の写像だけであり、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "shift_symmetry_heading_inversion_decomposition",
+    kind: "heading",
+    level: 2,
+    title: { text: "転倒数の軌道分解" },
+    labels: [],
   },
 
   {
@@ -10876,6 +11004,14 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
   },
 
   {
+    id: "shift_symmetry_heading_sign_and_factor_decomposition",
+    kind: "heading",
+    level: 2,
+    title: { text: "符号と因子の軌道分解" },
+    labels: [],
+  },
+
+  {
     id: "algebraic_eigenvalue_definition_orbit_permutation_sign",
     kind: "definition",
     title: { text: "軌道の上の全単射の符号" },
@@ -12481,6 +12617,14 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
         " の有限和と有限積だけであり、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "shift_symmetry_heading_orbit_bijections",
+    kind: "heading",
+    level: 2,
+    title: { text: "軌道ごとの全単射と符号" },
+    labels: [],
   },
 
   {
@@ -15664,6 +15808,14 @@ W_{O}\bigl(\mathrm{ch}(U),\psi\bigr)
   },
 
   {
+    id: "shift_symmetry_heading_orbit_sum",
+    kind: "heading",
+    level: 2,
+    title: { text: "軌道ごとの和の計算" },
+    labels: [],
+  },
+
+  {
     id: "algebraic_eigenvalue_claim_orbit_fixed_iff_card_one",
     kind: "claim",
     title: {
@@ -17270,6 +17422,7 @@ t^{L}+u
   {
     id: "algebraic_eigenvalue_claim_shift_char_orbit_factorization",
     kind: "claim",
+    standing: "mainTheorem",
     title: {
       text:
         "シフト行列の特性多項式は、軌道ごとに、その軌道の元の個数を指数とする冪と単位元の逆元との和を掛け合わせたものである",
@@ -17376,6 +17529,22 @@ t^{L}+u
         " へはまだ入っていない。",
       ]),
     ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_heading_chapter",
+    kind: "heading",
+    level: 1,
+    title: { text: "固有値の代数性" },
+    labels: [],
+  },
+
+  {
+    id: "algebraic_eigenvalue_heading_qbar_and_roots_of_unity",
+    kind: "heading",
+    level: 2,
+    title: { text: "代数的数と 1 の冪根" },
+    labels: [],
   },
 
   {
@@ -17582,6 +17751,14 @@ z^{n}
         " の元とその積の反復、および自然数の積だけであり、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_heading_char_poly_roots",
+    kind: "heading",
+    level: 2,
+    title: { text: "特性多項式の値と 1 の冪根" },
+    labels: [],
   },
 
   {
@@ -18197,6 +18374,14 @@ z^{n}
   },
 
   {
+    id: "algebraic_eigenvalue_heading_qbar_matrices",
+    kind: "heading",
+    level: 2,
+    title: { text: "代数的数を成分とする行列と作用" },
+    labels: [],
+  },
+
+  {
     id: "algebraic_eigenvalue_definition_qbar_matrix",
     kind: "definition",
     title: { text: "代数的数を成分とする行列" },
@@ -18693,6 +18878,14 @@ z^{n}
         "実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_heading_eigenspaces",
+    kind: "heading",
+    level: 2,
+    title: { text: "固有ベクトルと固有空間" },
+    labels: [],
   },
 
   {
@@ -19490,6 +19683,14 @@ A^{k+1}\cdot v
         "実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_heading_matrix_evaluation",
+    kind: "heading",
+    level: 2,
+    title: { text: "整係数多項式を成分とする行列の評価" },
+    labels: [],
   },
 
   {
@@ -20321,6 +20522,14 @@ z&=z\cdot1
         "実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_heading_shift_eigenvalues",
+    kind: "heading",
+    level: 2,
+    title: { text: "シフト行列の固有値と固有空間" },
+    labels: [],
   },
 
   {
@@ -21447,6 +21656,14 @@ z^{\,L+1}&=z^{L}\,z
         "実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_heading_root_of_unity_sums",
+    kind: "heading",
+    level: 2,
+    title: { text: "1 の冪根の積と冪の和" },
+    labels: [],
   },
 
   {
@@ -22628,6 +22845,14 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
         " を因子に持つことを使う。この主張はその因数分解を与える等式である。",
       ]),
     ],
+  },
+
+  {
+    id: "algebraic_eigenvalue_heading_qbar_polynomials",
+    kind: "heading",
+    level: 2,
+    title: { text: "代数的数係数の多項式と因数定理" },
+    labels: [],
   },
 
   {
@@ -24220,8 +24445,17 @@ w'
   },
 
   {
+    id: "algebraic_eigenvalue_heading_distinct_roots",
+    kind: "heading",
+    level: 2,
+    title: { text: "相異なる根の個数" },
+    labels: [],
+  },
+
+  {
     id: "algebraic_eigenvalue_claim_qbar_distinct_roots_card_bound",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "零でない多項式の相異なる根は係数の上界を超えない" },
     labels: ["claim_qbar_distinct_roots_card_bound"],
     habitat: "Qbar",
@@ -26069,8 +26303,17 @@ f
   },
 
   {
+    id: "algebraic_eigenvalue_heading_root_of_unity_card",
+    kind: "heading",
+    level: 2,
+    title: { text: "1 の冪根の個数と冪の和の値" },
+    labels: [],
+  },
+
+  {
     id: "algebraic_eigenvalue_claim_root_of_unity_card",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "1 の冪根の全体はちょうど指数個の元を持つ" },
     labels: ["claim_root_of_unity_card"],
     habitat: "Qbar",
@@ -26492,6 +26735,14 @@ n
   },
 
   {
+    id: "algebraic_eigenvalue_heading_eigenspaces_span",
+    kind: "heading",
+    level: 2,
+    title: { text: "固有空間が全体を張ること" },
+    labels: [],
+  },
+
+  {
     id: "algebraic_eigenvalue_claim_qbar_projector_reconstruction",
     kind: "claim",
     title: { text: "固有空間へ落とす写像から列ベクトルを復元できる" },
@@ -26621,7 +26872,15 @@ u_z&=\frac{1}{L}\odot P_{A,z}(v)
     id: "fisher_zero_heading",
     kind: "heading",
     level: 1,
-    title: { text: "Fisher 零点" },
+    title: { text: "Fisher 零点と双対性" },
+    labels: [],
+  },
+
+  {
+    id: "fisher_zero_heading_fisher_zeros",
+    kind: "heading",
+    level: 2,
+    title: { text: "有限格子の Fisher 零点" },
     labels: [],
   },
 
@@ -26723,6 +26982,14 @@ Z_L(1)
         "実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "fisher_zero_heading_low_temperature",
+    kind: "heading",
+    level: 2,
+    title: { text: "低温展開（破れた辺の集合）" },
+    labels: [],
   },
 
   {
@@ -26975,6 +27242,14 @@ Z_L
   },
 
   {
+    id: "fisher_zero_heading_high_temperature",
+    kind: "heading",
+    level: 2,
+    title: { text: "偶部分グラフと高温展開" },
+    labels: [],
+  },
+
+  {
     id: "fisher_zero_definition_incidence_count",
     kind: "definition",
     title: { text: "辺の部分集合が頂点に持つ端点の個数" },
@@ -27218,6 +27493,14 @@ S_L(A)
 \end{aligned}`),
       paragraph(["全過程は有限集合、自然数、整数係数多項式だけで閉じる。"]),
     ],
+  },
+
+  {
+    id: "fisher_zero_heading_winding_sectors",
+    kind: "heading",
+    level: 2,
+    title: { text: "巻き付きセクターと双対恒等式" },
+    labels: [],
   },
 
   {
@@ -27958,6 +28241,14 @@ H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
 \end{aligned}`),
       paragraph(["である。全過程は有限集合と整数係数多項式の中で閉じ、実数体も複素数体も現れない。"]),
     ],
+  },
+
+  {
+    id: "fisher_zero_heading_dual_transform",
+    kind: "heading",
+    level: 2,
+    title: { text: "双対変換と自己双対方程式" },
+    labels: [],
   },
 
   {
@@ -29454,6 +29745,14 @@ b
         " の四則の中で閉じ、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "fisher_zero_heading_quadratic_field",
+    kind: "heading",
+    level: 2,
+    title: { text: "二次体の台集合と表示" },
+    labels: [],
   },
 
   {
@@ -31188,6 +31487,14 @@ r\cdot r
         " の四則の中で閉じ、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "fisher_zero_heading_positive_cone",
+    kind: "heading",
+    level: 2,
+    title: { text: "正錐と順序" },
+    labels: [],
   },
 
   {
@@ -33142,6 +33449,14 @@ c\cdot\xi
   },
 
   {
+    id: "fisher_zero_heading_critical_point",
+    kind: "heading",
+    level: 2,
+    title: { text: "臨界点" },
+    labels: [],
+  },
+
+  {
     id: "fisher_zero_claim_critical_partition_value_positive",
     kind: "claim",
     title: { text: "分配多項式の臨界点での値は正錐の元である" },
@@ -33781,6 +34096,14 @@ a\cdot a
   },
 
   {
+    id: "fisher_zero_heading_dual_free_entropy",
+    kind: "heading",
+    level: 2,
+    title: { text: "双対な点どうしの自由エントロピー" },
+    labels: [],
+  },
+
+  {
     id: "fisher_zero_definition_unit_interval_rationals",
     kind: "definition",
     title: { text: "零と一の間の有理数の集合" },
@@ -34393,6 +34716,14 @@ L^2\,\ell_2+\Phi_L(q)
   },
 
   {
+    id: "zero_pinching_heading_rational_points",
+    kind: "heading",
+    level: 2,
+    title: { text: "有理点と零点" },
+    labels: [],
+  },
+
+  {
     id: "zero_pinching_claim_positive_rational_not_fisher_zero",
     kind: "claim",
     standing: "mainTheorem",
@@ -34483,6 +34814,14 @@ L^2\,\ell_2+\Phi_L(q)
         "実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "zero_pinching_heading_real_closed_subfield",
+    kind: "heading",
+    level: 2,
+    title: { text: "実閉部分体と実代数的数の順序" },
+    labels: [],
   },
 
   {
@@ -34876,6 +35215,7 @@ L^2\,\ell_2+\Phi_L(q)
   {
     id: "zero_pinching_claim_real_algebraic_order_trichotomy",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "実代数的数の狭義順序の三分法" },
     labels: ["claim_real_algebraic_order_trichotomy"],
     habitat: "Qbar",
@@ -35423,7 +35763,6 @@ c-a
   {
     id: "zero_pinching_claim_critical_point_mem_real_closed",
     kind: "claim",
-    standing: "mainTheorem",
     title: { text: "自己双対点の平方根と臨界点は実閉部分体の元である" },
     labels: ["claim_critical_point_mem_real_closed"],
     habitat: "Qbar",
@@ -35493,6 +35832,14 @@ c-a
         " だけであり、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "zero_pinching_heading_distance",
+    kind: "heading",
+    level: 2,
+    title: { text: "零点と有理点の距離、そして相転移の可算な言明" },
+    labels: [],
   },
 
   {
@@ -36100,7 +36447,15 @@ w\cdot w
     id: "thermodynamic_limit_heading",
     kind: "heading",
     level: 1,
-    title: { text: "熱力学極限" },
+    title: { text: "自由エントロピー密度と Cauchy 性" },
+    labels: [],
+  },
+
+  {
+    id: "thermodynamic_limit_heading_rational_log_order_group",
+    kind: "heading",
+    level: 2,
+    title: { text: "有理係数の対数順序群" },
     labels: [],
   },
 
@@ -37502,6 +37857,14 @@ N\cdot(\lambda+\nu)
     ],
   },
   {
+    id: "thermodynamic_limit_heading_finite_density",
+    kind: "heading",
+    level: 2,
+    title: { text: "有限系の自由エントロピー密度" },
+    labels: [],
+  },
+
+  {
     id: "thermodynamic_limit_def_finite_free_entropy_density",
     kind: "definition",
     title: { text: "有限系の自由エントロピー密度" },
@@ -38477,6 +38840,14 @@ Z_L(q)
       ]),
     ],
   },
+  {
+    id: "thermodynamic_limit_heading_open_rectangle",
+    kind: "heading",
+    level: 2,
+    title: { text: "開境界長方形と接合不等式" },
+    labels: [],
+  },
+
   {
     id: "thermodynamic_limit_def_open_rectangle_vertices",
     kind: "definition",
@@ -40251,6 +40622,14 @@ q^{2L}\sum_{\tau\in\Sigma^{\mathrm{op}}_{L,L}}q^{\,b^{\mathrm{op}}_{L,L}(\tau)}
     ],
   },
   {
+    id: "thermodynamic_limit_heading_open_square_density",
+    kind: "heading",
+    level: 2,
+    title: { text: "開境界正方形の密度の評価" },
+    labels: [],
+  },
+
+  {
     id: "thermodynamic_limit_def_open_rectangle_constant_plus_configuration",
     kind: "definition",
     title: { text: "開境界長方形の全て正の定数配位" },
@@ -41735,6 +42114,14 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
   },
 
   {
+    id: "thermodynamic_limit_heading_cauchy_and_archimedean",
+    kind: "heading",
+    level: 2,
+    title: { text: "Cauchy 列と Archimedes 性" },
+    labels: [],
+  },
+
+  {
     id: "thermodynamic_limit_def_rational_log_order_group_cauchy_sequence",
     kind: "definition",
     title: { text: "有理係数の対数順序群の Cauchy 列" },
@@ -41919,6 +42306,7 @@ k^2\,\log Z^{\mathrm{op}}_{a,a}(q)
   {
     id: "thermodynamic_limit_claim_rational_log_order_group_archimedean",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "有理係数の対数順序群の Archimedes 性" },
     labels: ["claim_rational_log_order_group_archimedean"],
     habitat: "Lambda",
@@ -43008,6 +43396,14 @@ q\le q'
       ]),
     ],
   },
+  {
+    id: "thermodynamic_limit_heading_uniform_difference",
+    kind: "heading",
+    level: 2,
+    title: { text: "密度の差の一様な評価" },
+    labels: [],
+  },
+
   {
     id: "thermodynamic_limit_claim_open_square_multiple_side_subsquare_density_error_bound",
     kind: "claim",
@@ -45235,6 +45631,14 @@ Y
     ],
   },
   {
+    id: "thermodynamic_limit_heading_density_cauchy",
+    kind: "heading",
+    level: 2,
+    title: { text: "密度の列は Cauchy 列であること" },
+    labels: [],
+  },
+
+  {
     id: "thermodynamic_limit_claim_open_square_density_sequence_cauchy_le_one",
     kind: "claim",
     standing: "mainTheorem",
@@ -45477,6 +45881,22 @@ Y
       ]),
     ],
   },
+  {
+    id: "real_escape_heading_chapter",
+    kind: "heading",
+    level: 1,
+    title: { text: "実数体への脱出と熱力学極限" },
+    labels: [],
+  },
+
+  {
+    id: "real_escape_heading_lower_sets",
+    kind: "heading",
+    level: 2,
+    title: { text: "列が定める下組" },
+    labels: [],
+  },
+
   {
     id: "thermodynamic_limit_def_rational_log_order_group_sequence_lower_set",
     kind: "definition",
@@ -45992,6 +46412,14 @@ Y
       ]),
     ],
   },
+  {
+    id: "real_escape_heading_real_field",
+    kind: "heading",
+    level: 2,
+    title: { text: "実数体と実対数（実数体への脱出）" },
+    labels: [],
+  },
+
   {
     id: "thermodynamic_limit_def_real_logarithm",
     kind: "definition",
@@ -46905,6 +47333,14 @@ Y
     ],
   },
   {
+    id: "real_escape_heading_density_agreement",
+    kind: "heading",
+    level: 2,
+    title: { text: "周期境界と開境界の密度の一致" },
+    labels: [],
+  },
+
+  {
     id: "thermodynamic_limit_def_periodic_density_lower_set",
     kind: "definition",
     title: { text: "周期境界の密度の列が定める下組" },
@@ -47746,6 +48182,22 @@ f^{\mathrm{per}}(q)
   },
 
   {
+    id: "fisher_zero_density_heading_chapter",
+    kind: "heading",
+    level: 1,
+    title: { text: "Fisher 零点の個数と密度" },
+    labels: [],
+  },
+
+  {
+    id: "fisher_zero_density_heading_rational_disc",
+    kind: "heading",
+    level: 2,
+    title: { text: "有理円板と多項式の持ち上げ" },
+    labels: [],
+  },
+
+  {
     id: "thermodynamic_limit_def_rational_disc",
     kind: "definition",
     title: { text: "有理点を中心とする有理半径の円板（代数的数の部分集合）" },
@@ -48102,6 +48554,14 @@ f^{\mathrm{per}}(q)
   },
 
   {
+    id: "fisher_zero_density_heading_finiteness",
+    kind: "heading",
+    level: 2,
+    title: { text: "零点の有限性" },
+    labels: [],
+  },
+
+  {
     id: "thermodynamic_limit_claim_fisher_zero_finset_card_bound",
     kind: "claim",
     title: { text: "有限格子の Fisher 零点の有限部分集合の個数は $2L^2$ を超えない" },
@@ -48199,6 +48659,7 @@ f^{\mathrm{per}}(q)
   {
     id: "thermodynamic_limit_claim_fisher_zero_set_finite_card_bound",
     kind: "claim",
+    standing: "mainTheorem",
     title: { text: "有限格子の Fisher 零点の全体は有限集合であり元の個数は $2L^2$ を超えない" },
     labels: ["claim_fisher_zero_set_finite_card_bound"],
     habitat: "Qbar",
@@ -48615,6 +49076,14 @@ f^{\mathrm{per}}(q)
         " は、ここでは主張しない。",
       ]),
     ],
+  },
+
+  {
+    id: "fisher_zero_density_heading_multiplicity",
+    kind: "heading",
+    level: 2,
+    title: { text: "根の重複度" },
+    labels: [],
   },
 
   {
@@ -49633,6 +50102,14 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
   },
 
   {
+    id: "fisher_zero_density_heading_density_bound",
+    kind: "heading",
+    level: 2,
+    title: { text: "重複度付きの零点密度" },
+    labels: [],
+  },
+
+  {
     id: "thermodynamic_limit_def_fisher_zero_mult_count_in_rational_disc",
     kind: "definition",
     title: { text: "有理円板内の重複度付きの Fisher 零点の個数" },
@@ -49814,6 +50291,14 @@ N^{\mathrm{mult}}_{L}(c,r)
     kind: "heading",
     level: 1,
     title: { text: "臨界指数を零点列で書く" },
+    labels: [],
+  },
+
+  {
+    id: "critical_exponent_heading_leading_distance",
+    kind: "heading",
+    level: 2,
+    title: { text: "先頭距離" },
     labels: [],
   },
 
@@ -50149,6 +50634,14 @@ D
         " の中の議論で閉じ、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "critical_exponent_heading_rational_approximation",
+    kind: "heading",
+    level: 2,
+    title: { text: "臨界点の有理近似" },
+    labels: [],
   },
 
   {
@@ -50687,6 +51180,14 @@ h\cdot h-(q-x_c)\cdot(q-x_c)
   },
 
   {
+    id: "critical_exponent_heading_pinching",
+    kind: "heading",
+    level: 2,
+    title: { text: "先頭距離の詰め寄り" },
+    labels: [],
+  },
+
+  {
     id: "critical_exponent_claim_leading_distance_pinching_implies_predicate",
     kind: "claim",
     standing: "mainTheorem",
@@ -50833,6 +51334,14 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
         " の中で閉じ、実数体も複素数体も現れない。",
       ]),
     ],
+  },
+
+  {
+    id: "critical_exponent_heading_finite_size_scaling",
+    kind: "heading",
+    level: 2,
+    title: { text: "有限サイズスケーリング（条件付き読み）" },
+    labels: [],
   },
 
   {

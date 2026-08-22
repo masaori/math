@@ -176,13 +176,21 @@ SageMath 検証は浮動小数点を既定にしない。$\mathbb{R}$ 脱出を�
 | 章 | 内容 | 主な住処 |
 | --- | --- | --- |
 | 分配多項式 | 格子・配位・破れボンド数・多重度・$Z_L(x)\in\mathbb{Z}[x]$ | $\mathbb{N}$, $\mathbb{Z}[x]$ |
-| 有限系の自由エントロピー | $\Phi_L=\log Z_L(q)\in\Lambda$（素因数分解の指数ベクトル） | $\Lambda$ |
+| 対数順序群と有限系の自由エントロピー | $\Lambda$（素因数分解の指数ベクトル）と $\Phi_L=\log Z_L(q)\in\Lambda$ | $\Lambda$ |
 | 転送行列 | $T(x)\in M_{2^L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$ | $\mathbb{Z}[x]$ |
-| 固有値の代数性 | 特性多項式 $\in\mathbb{Z}[x][t]$、円分体上の対角化 | $\overline{\mathbb{Q}}$ |
-| Fisher 零点 | 零点 $\in\overline{\mathbb{Q}}$、Kramers–Wannier 双対、$x_c=\sqrt2-1$ | $\overline{\mathbb{Q}}$ |
-| 零点の詰め寄り | 相転移を $\mathbb{Q}$ 上の量化言明として書く | $\mathbb{Q}$, $\overline{\mathbb{Q}}$ |
-| 熱力学極限 | 自由エネルギー密度・零点密度。**ここが $\mathbb{R}$ 脱出** | $\mathbb{R}$ |
+| シフト対称性と特性多項式 | 置換・行列式・特性多項式、シフト行列、軌道分解 | $\mathbb{Z}[x][t]$ |
+| 固有値の代数性 | 固有値は 1 の冪根、固有空間が全体を張る | $\overline{\mathbb{Q}}$ |
+| Fisher 零点と双対性 | 高温展開、Kramers–Wannier 双対、二次体と正錐、$x_c=\sqrt2-1$ | $\overline{\mathbb{Q}}$ |
+| 零点の詰め寄り | 実閉部分体の順序、相転移を $\mathbb{Q}$ 上の量化言明として書く | $\mathbb{Q}$, $\overline{\mathbb{Q}}$ |
+| 自由エントロピー密度と Cauchy 性 | $\Lambda_{\mathbb{Q}}$、接合不等式、密度の差の一様評価 | $\Lambda$ |
+| 実数体への脱出と熱力学極限 | 下組と完備性。**ここが $\mathbb{R}$ 脱出** | $\mathbb{R}$ |
+| Fisher 零点の個数と密度 | 零点の有限性、根の重複度、零点密度の上界 | $\overline{\mathbb{Q}}$ |
 | 臨界指数を零点列で書く | 先頭零点列 $\{x_1(L)\}_L\subset\overline{\mathbb{Q}}$ と有限サイズスケーリング | mixed |
+
+各章は節（レベル 2 の見出し）に分かれる。各章には**主定理**（`standing: "mainTheorem"`）が
+少なくとも 1 つあり、**主定理だけを順に読めば論文全体の主張が追える**ように選んである
+（全 25 件。選び方は「これを言うために何ブロックが費やされているか」＝依存グラフの上流数が大きく、
+かつ他の主張の部品になっていない＝下流数が小さいもの）。
 
 読む順序はこの表が正本である。**ファイル名に連番を付けない**（リポジトリ直下 [CLAUDE.md](../CLAUDE.md)
 「文書・定理を番号や記号で管理しない」）。文書順は `content/` の各ファイル内の配列の並びで決まる。
