@@ -22,7 +22,8 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 周期成分表が全配位を重複なく被覆し、各配位の成分添字が一意であることも示す。
 対応する周期成分表ごとの有限全単射を、一意な成分添字に従って全配位写像へ接着する。
 各周期成分表を、周期上の一意な根とその根へ流入する有限配位表との従属和へ分解する。
-この写像を再帰的前像木対応で置き換えた全単射性・共役条件・完全性・有限決定は後続 tick で形式化する。
+周期位置ごとの再帰的前像木対応をその従属和上で接着し、対応する周期成分表の全単射も構成する。
+この全単射の共役条件・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -1561,6 +1562,54 @@ theorem hasTreeMatching_iterate_of_baseWord_eq
         codeAtDepth N f (2 ^ Fintype.card V - 1) (iterate N f n r) := by
     simpa [recursiveCode, hcard, hmu, hmuW] using hrecursive
   exact hasTreeMatching_of_codeAtDepth_eq N f NW fW _ _ _ hdepth
+
+/-- 等しい基点語を持つ二つの周期点について、周期位置ごとの再帰的前像木対応を
+    一意な周期根による従属和分割に沿って接着し、対応する周期成分表の全単射を得る。
+    この段では全単射性だけを固定し、一段発展との可換性はまだ主張しない。 -/
+noncomputable def periodicComponentEquivOfBaseWordEq
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r) :
+    ↑(periodicComponentNodeTable N f (periodicOrbit N f r)) ≃
+      ↑(periodicComponentNodeTable NW fW (periodicOrbit NW fW rW)) := by
+  let depth := max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)
+  have hperiod : minPeriod NW fW rW = minPeriod N f r :=
+    minPeriod_eq_of_baseWord_eq N f NW fW r rW hbase
+  let eIndex : Fin (minPeriod N f r) ≃ Fin (minPeriod NW fW rW) :=
+    finCongr hperiod.symm
+  let eTrees :
+      (Σ n : Fin (minPeriod N f r),
+        ↑(preimageTreeNodeTable N f (iterate N f n r))) ≃
+        (Σ nW : Fin (minPeriod NW fW rW),
+          ↑(preimageTreeNodeTable NW fW (iterate NW fW nW rW))) :=
+    Equiv.sigmaCongr eIndex fun n => by
+      have hn : (n : ℕ) < minPeriod N f r := n.isLt
+      have hrn : IsPeriodicPoint N f (iterate N f n r) :=
+        isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
+          ((mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨n, rfl⟩)
+      have hrWn : IsPeriodicPoint NW fW (iterate NW fW n rW) :=
+        isPeriodicPoint_of_mem_periodicOrbit NW fW rW _ hrW
+          ((mem_periodicOrbit_iff_exists NW fW rW _ hrW).2 ⟨n, rfl⟩)
+      have hmatch := hasTreeMatching_iterate_of_baseWord_eq_commonDepth
+        N f NW fW r rW hr hrW hbase n hn
+      have hdepth : 2 ^ Fintype.card V - 1 ≤ depth := by
+        exact Nat.le_max_left _ _
+      have hdepthW : 2 ^ Fintype.card W - 1 ≤ depth := by
+        exact Nat.le_max_right _ _
+      simpa [eIndex, depth, hperiod] using
+        preimageTreeNodeTableEquivOfMatching N f NW fW
+          (iterate N f n r) (iterate NW fW n rW) hrn hrWn depth
+          hdepth hdepthW hmatch
+  exact (periodicComponentRootSigmaEquiv N f r hr).symm |>.trans
+    eTrees |>.trans (periodicComponentRootSigmaEquiv NW fW rW hrW)
+
+theorem periodicComponentEquivOfBaseWordEq_bijective
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r) :
+    Function.Bijective
+      (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase) :=
+  (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase).bijective
 
 /-- 写像符号が等しくセル数も等しいとき、周期軌道の出現の
     重複度付き対応と、対応する周期上の全ての位置に接着した
