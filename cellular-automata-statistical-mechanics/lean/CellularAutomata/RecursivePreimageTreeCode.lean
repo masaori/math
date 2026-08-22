@@ -20,7 +20,8 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 写像符号から得た配位数一致を使い、全配位集合の全単射も定義する。
 再帰的な子対応が両側の一段発展を親へ移す局所可換性も証明する。
 周期成分表が全配位を重複なく被覆し、各配位の成分添字が一意であることも示す。
-この局所対応を全周期成分で接着した全単射・完全性・有限決定は後続 tick で形式化する。
+対応する周期成分表ごとの有限全単射を、一意な成分添字に従って全配位写像へ接着する。
+この写像を再帰的前像木対応で置き換えた全単射性・共役条件・完全性・有限決定は後続 tick で形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -1182,6 +1183,68 @@ theorem configurationEquivOfMapCode_bijective
     (hcode : mapCode NW fW = mapCode N f) :
     Function.Bijective (configurationEquivOfMapCode N f NW fW hcode) :=
   (configurationEquivOfMapCode N f NW fW hcode).bijective
+
+/-- 写像符号が与える周期成分の重複度付き対応を一つ固定する。 -/
+noncomputable def orbitEquivOfMapCode
+    (hcode : mapCode NW fW = mapCode N f) :
+    (periodicOrbitTable N f).val ≃ (periodicOrbitTable NW fW).val :=
+  Classical.choose
+    (exists_orbit_equiv_with_periodicComponentNodeTable_cards N f NW fW hcode)
+
+/-- 固定した周期成分対応は、対応する成分表の個数を保存する。 -/
+theorem orbitEquivOfMapCode_component_card
+    (hcode : mapCode NW fW = mapCode N f)
+    (O : (periodicOrbitTable N f).val) :
+    (periodicComponentNodeTable NW fW (orbitEquivOfMapCode N f NW fW hcode O)).card =
+      (periodicComponentNodeTable N f O).card := by
+  exact Classical.choose_spec
+    (exists_orbit_equiv_with_periodicComponentNodeTable_cards N f NW fW hcode) O
+
+/-- 対応する二つの周期成分表の間に有限全単射を固定する。
+    この段では成分表の個数一致だけを使い、時間発展との可換性はまだ要求しない。 -/
+noncomputable def periodicComponentEquivOfMapCode
+    (hcode : mapCode NW fW = mapCode N f)
+    (O : (periodicOrbitTable N f).val) :
+    ↑(periodicComponentNodeTable N f O) ≃
+      ↑(periodicComponentNodeTable NW fW (orbitEquivOfMapCode N f NW fW hcode O)) :=
+  Fintype.equivOfCardEq (by
+    simp only [Fintype.card_coe]
+    exact (orbitEquivOfMapCode_component_card N f NW fW hcode O).symm)
+
+/-- 各配位が属する一意な周期成分添字を固定する。 -/
+noncomputable def periodicComponentIndex (y : V → State) :
+    (periodicOrbitTable N f) :=
+  Classical.choose (exists_unique_periodicComponent N f y)
+
+theorem periodicComponentIndex_spec (y : V → State) :
+    y ∈ periodicComponentNodeTable N f (periodicComponentIndex N f y) :=
+  (Classical.choose_spec (exists_unique_periodicComponent N f y)).1
+
+/-- 一意な周期成分添字を、重複度付き周期軌道表の出現型へ移す。 -/
+noncomputable def periodicComponentOccurrenceIndex (y : V → State) :
+    (periodicOrbitTable N f).val :=
+  (periodicOrbitTable N f).val.mkToType (periodicComponentIndex N f y)
+    ⟨0, Multiset.count_pos.mpr (periodicComponentIndex N f y).property⟩
+
+/-- 一意な成分分割を使い、対応する成分表ごとの有限全単射を
+    全配位上の一つの写像へ接着する。成分内の再帰的前像木対応を使う
+    全単射性と時間発展との可換性は後続段で証明する。 -/
+noncomputable def componentwiseConfigurationMap
+    (hcode : mapCode NW fW = mapCode N f) (y : V → State) : W → State :=
+  periodicComponentEquivOfMapCode N f NW fW hcode
+    (periodicComponentOccurrenceIndex N f y)
+    ⟨y, periodicComponentIndex_spec N f y⟩
+
+/-- 接着した写像の値は、元の配位が属する周期成分に対応する成分表へ入る。 -/
+theorem componentwiseConfigurationMap_mem_corresponding_component
+    (hcode : mapCode NW fW = mapCode N f) (y : V → State) :
+    componentwiseConfigurationMap N f NW fW hcode y ∈
+      periodicComponentNodeTable NW fW
+        (orbitEquivOfMapCode N f NW fW hcode
+          (periodicComponentOccurrenceIndex N f y)) := by
+  exact (periodicComponentEquivOfMapCode N f NW fW hcode
+    (periodicComponentOccurrenceIndex N f y)
+      ⟨y, periodicComponentIndex_spec N f y⟩).property
 
 /-- 等しい基点語を持つ周期点の対応に、周期上の各位置へ
     非周期前像木の全深さ対応を接着する。共通の打ち切り深さを
