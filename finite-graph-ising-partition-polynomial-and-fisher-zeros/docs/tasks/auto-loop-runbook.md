@@ -21,6 +21,7 @@
 - README に記載した全検証と、変更した `.sage` の実行を通す。
 - `auto-loop-state.md` と `MEMORY.md` を更新し、Lean 未着手を完了と書かない。
 - commit 前に再度 fetch し、成果を remote default branch へ push して ancestry を確認する。
-- `slack-notification` skill で成果物 URL を付けて通知する。
+- `slack-notification` skill で、公開本文
+  `https://hexcomp-artifacts.web.app/math/finite-graph-ising-partition-polynomial/` を付けて通知する。
+  commit URL は人間へ本文を見せる URL として使わない。
 - 一つの主張を進めたら終了し、次は次回 tick へ残す。
-

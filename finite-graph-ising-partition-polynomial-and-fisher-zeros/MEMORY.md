@@ -14,3 +14,4 @@
   対応する 3 本の SageMath 検算を厳密演算で実行し、本文 52 ラベル、検算 33 件となった。
   Lean 具体版と必要十分版は未着手。次は零が Fisher 零点として現れないことの定理化。
 - 双曲曲面側の接続層は一般理論の見出しを輸出せず、内容名ラベルで選んだ十二ブロックだけを輸出する。用途を示す接続見出しは双曲曲面側が所有する。
+- 自動 tick の Slack 通知は公開本文 `https://hexcomp-artifacts.web.app/math/finite-graph-ising-partition-polynomial/` を見せる URL とし、commit URL で代用しない。
