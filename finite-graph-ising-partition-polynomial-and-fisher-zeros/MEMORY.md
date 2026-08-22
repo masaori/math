@@ -57,5 +57,10 @@
   に等しい定理を追加した。対応する 10 本の SageMath 検算を厳密演算で実行し、本文 61 ラベル、検算対応
   42 件、個別検算 165 本となった。変更前レビューでは既存 155 本も全て PASS した。Lean 具体版と
   必要十分版は未着手。次の具体的な研究対象は未選定。
+- 2026-08-23: 次数四以上の一般有限グラフについて、重複度込み Fisher 零点の四乗和が、最高次側五係数の
+  有理式 `(Omega_G(d-1)^4 - 4 Omega_G(d) Omega_G(d-1)^2 Omega_G(d-2) + 2 Omega_G(d)^2 Omega_G(d-2)^2 + 4 Omega_G(d)^2 Omega_G(d-1) Omega_G(d-3) - 4 Omega_G(d)^3 Omega_G(d-4)) / Omega_G(d)^4`
+  に等しい定理を追加した。対応する 12 本の SageMath 検算を厳密演算で実行し、本文 62 ラベル、検算対応
+  43 件、個別検算 178 本となった。変更前レビューでは既存 166 本も全て PASS した。Lean 具体版と
+  必要十分版は未着手。次の具体的な研究対象は未選定。
 - 双曲曲面側の接続層は一般理論の見出しを輸出せず、内容名ラベルで選んだ十二ブロックだけを輸出する。用途を示す接続見出しは双曲曲面側が所有する。
 - 自動 tick の Slack 通知は公開本文 `https://hexcomp-artifacts.web.app/math/finite-graph-ising-partition-polynomial/` を見せる URL とし、commit URL で代用しない。

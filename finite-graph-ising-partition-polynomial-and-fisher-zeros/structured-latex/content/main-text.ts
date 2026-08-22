@@ -1792,6 +1792,164 @@ e_3=-\frac{\Omega_G(d-3)}{\Omega_G(d)}.`),
     ],
   },
   {
+    id: "finite_graph_theorem_fisher_zero_fourth_power_sum_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点の四乗和と係数比" },
+    labels: ["theorem_fisher_zero_fourth_power_sum_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-fourth-power-sum-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置き、",
+        math(String.raw`d\ge4`),
+        " と仮定する。係数を標準単射",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。このとき、",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\alpha_j^4
+=
+\frac{
+  \Omega_G(d-1)^4
+  -4\Omega_G(d)\Omega_G(d-1)^2\Omega_G(d-2)
+  +2\Omega_G(d)^2\Omega_G(d-2)^2
+  +4\Omega_G(d)^2\Omega_G(d-1)\Omega_G(d-3)
+  -4\Omega_G(d)^3\Omega_G(d-4)
+}{
+  \Omega_G(d)^4
+}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.`),
+    ],
+    proof: [
+      paragraph([
+        "各",
+        math(String.raw`r\in\{1,2,3,4\}`),
+        "について代数的数",
+        math(String.raw`p_r\in\overline{\mathbb Q}`),
+        "を",
+        math(String.raw`p_r:=\sum_{j=1}^{d}\alpha_j^r`),
+        "と定める。また代数的数",
+        math(String.raw`e_1,e_2,e_3,e_4,s_{3,1},s_{2,1,1}\in\overline{\mathbb Q}`),
+        "を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e_r
+&:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\prod_{j\in I}\alpha_j
+&&\bigl(r\in\{1,2,3,4\}\bigr),\\
+s_{3,1}
+&:=
+\sum_{1\le i<j\le d}
+\left(\alpha_i^3\alpha_j+\alpha_i\alpha_j^3\right),\\
+s_{2,1,1}
+&:=
+\sum_{1\le i<j<k\le d}
+\alpha_i\alpha_j\alpha_k
+\left(\alpha_i+\alpha_j+\alpha_k\right)
+\end{aligned}`),
+      paragraph(["と定める。有限和の分配律により、"]),
+      displayMath(String.raw`\begin{aligned}
+e_1p_3
+&=p_4+s_{3,1}
+&&\bigl(\because\ \text{二つの添字が同じ場合と異なる場合へ分ける}\bigr),\\
+e_2p_2
+&=s_{3,1}+s_{2,1,1}
+&&\bigl(\because\ \text{平方を取る添字が選択対に属する場合と属さない場合へ分ける}\bigr),\\
+e_3p_1
+&=s_{2,1,1}+4e_4
+&&\bigl(\because\ \text{一つの添字が選択三つ組に属する場合と属さない場合へ分ける}\bigr).
+\end{aligned}`),
+      paragraph(["したがって代数的数の体で、"]),
+      displayMath(String.raw`\begin{aligned}
+p_4
+&=e_1p_3-s_{3,1}
+&&\bigl(\because\ \text{最初の有限和恒等式を移項する}\bigr)\\
+&=e_1p_3-\left(e_2p_2-s_{2,1,1}\right)
+&&\bigl(\because\ \text{二番目の有限和恒等式を }s_{3,1}\text{ について解いて代入する}\bigr)\\
+&=e_1p_3-e_2p_2+s_{2,1,1}
+&&\bigl(\because\ \text{分配律}\bigr)\\
+&=e_1p_3-e_2p_2+\left(e_3p_1-4e_4\right)
+&&\bigl(\because\ \text{三番目の有限和恒等式を }s_{2,1,1}\text{ について解いて代入する}\bigr)\\
+&=e_1p_3-e_2p_2+e_3p_1-4e_4
+&&\bigl(\because\ \text{括弧を外す}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_fisher_zero_elementary_symmetric_coefficient_ratio"),
+        " を",
+        math(String.raw`r=1,2,3,4`),
+        " に適用し、",
+        ref("theorem_fisher_zero_square_sum_coefficient_ratio"),
+        " と",
+        ref("theorem_fisher_zero_cube_sum_coefficient_ratio"),
+        " を用いる。さらに",
+        math(String.raw`B:=\Omega_G(d)`),
+        " および各",
+        math(String.raw`r\in\{1,2,3,4\}`),
+        "について",
+        math(String.raw`A_r:=\Omega_G(d-r)`),
+        "と置くと、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+e_r&=(-1)^r\frac{A_r}{B}&&\bigl(r\in\{1,2,3,4\}\bigr),\\
+p_1&=-\frac{A_1}{B},\\
+p_2&=\frac{A_1^2-2BA_2}{B^2},\\
+p_3&=\frac{-A_1^3+3BA_1A_2-3B^2A_3}{B^3}.
+\end{aligned}`),
+      paragraph([
+        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
+        " と",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " より",
+        math(String.raw`B\in\mathbb N_{>0}`),
+        " である。直前の係数比を四次 Newton 恒等式へ代入すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+p_4
+&=
+\left(-\frac{A_1}{B}\right)
+\frac{-A_1^3+3BA_1A_2-3B^2A_3}{B^3}
+-\frac{A_2}{B}\frac{A_1^2-2BA_2}{B^2}
++\left(-\frac{A_3}{B}\right)\left(-\frac{A_1}{B}\right)
+-4\frac{A_4}{B}
+&&\bigl(\because\ \text{直前の係数比を代入する}\bigr)\\
+&=
+\frac{A_1^4-3BA_1^2A_2+3B^2A_1A_3}{B^4}
++\frac{-A_1^2A_2+2BA_2^2}{B^3}
++\frac{A_1A_3}{B^2}
+-\frac{4A_4}{B}
+&&\bigl(\because\ \text{各積を展開する}\bigr)\\
+&=
+\frac{A_1^4-3BA_1^2A_2+3B^2A_1A_3}{B^4}
++\frac{-BA_1^2A_2+2B^2A_2^2}{B^4}
++\frac{B^2A_1A_3}{B^4}
+-\frac{4B^3A_4}{B^4}
+&&\bigl(\because\ B\ne0\text{ なので共通分母へ移す}\bigr)\\
+&=
+\frac{
+  A_1^4
+  -4BA_1^2A_2
+  +2B^2A_2^2
+  +4B^2A_1A_3
+  -4B^3A_4
+}{B^4}
+&&\bigl(\because\ \text{同じ分母をもつ項を加えて同類項をまとめる}\bigr).
+\end{aligned}`),
+      paragraph([
+        "右辺は有理数なので、Fisher 零点の四乗和は",
+        math(String.raw`\mathbb Q\subset\overline{\mathbb Q}`),
+        " に属する。零点、その四乗、有限積および有限和は代数的数、次数と多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio",
     kind: "theorem",
     title: { text: "一般有限グラフの Fisher 零点逆数族の基本対称式と係数比" },

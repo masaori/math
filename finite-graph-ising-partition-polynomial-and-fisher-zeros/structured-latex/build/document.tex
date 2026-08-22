@@ -1602,6 +1602,154 @@ $\mathbb Q\subset\overline{\mathbb Q}$
 
 \end{proof}
 
+\begin{theorem}[一般有限グラフの Fisher 零点の四乗和と係数比]\label{lab:theorem_fisher_zero_fourth_power_sum_coefficient_ratio}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、
+\cref{lab:def_ising_partition_polynomial}
+ の次数を
+$d:=\deg Z_G(x)\in\mathbb N$
+ と置き、
+$d\ge4$
+ と仮定する。係数を標準単射
+$\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]$
+ で移した多項式の重複度込み Fisher 零点を
+$\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
+ と書く。このとき、
+
+\[\sum_{j=1}^{d}\alpha_j^4
+=
+\frac{
+  \Omega_G(d-1)^4
+  -4\Omega_G(d)\Omega_G(d-1)^2\Omega_G(d-2)
+  +2\Omega_G(d)^2\Omega_G(d-2)^2
+  +4\Omega_G(d)^2\Omega_G(d-1)\Omega_G(d-3)
+  -4\Omega_G(d)^3\Omega_G(d-4)
+}{
+  \Omega_G(d)^4
+}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.\]
+\end{theorem}
+\begin{proof}
+各
+$r\in\{1,2,3,4\}$
+について代数的数
+$p_r\in\overline{\mathbb Q}$
+を
+$p_r:=\sum_{j=1}^{d}\alpha_j^r$
+と定める。また代数的数
+$e_1,e_2,e_3,e_4,s_{3,1},s_{2,1,1}\in\overline{\mathbb Q}$
+を
+
+\[\begin{aligned}
+e_r
+&:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\prod_{j\in I}\alpha_j
+&&\bigl(r\in\{1,2,3,4\}\bigr),\\
+s_{3,1}
+&:=
+\sum_{1\le i<j\le d}
+\left(\alpha_i^3\alpha_j+\alpha_i\alpha_j^3\right),\\
+s_{2,1,1}
+&:=
+\sum_{1\le i<j<k\le d}
+\alpha_i\alpha_j\alpha_k
+\left(\alpha_i+\alpha_j+\alpha_k\right)
+\end{aligned}\]
+と定める。有限和の分配律により、
+
+\[\begin{aligned}
+e_1p_3
+&=p_4+s_{3,1}
+&&\bigl(\because\ \text{二つの添字が同じ場合と異なる場合へ分ける}\bigr),\\
+e_2p_2
+&=s_{3,1}+s_{2,1,1}
+&&\bigl(\because\ \text{平方を取る添字が選択対に属する場合と属さない場合へ分ける}\bigr),\\
+e_3p_1
+&=s_{2,1,1}+4e_4
+&&\bigl(\because\ \text{一つの添字が選択三つ組に属する場合と属さない場合へ分ける}\bigr).
+\end{aligned}\]
+したがって代数的数の体で、
+
+\[\begin{aligned}
+p_4
+&=e_1p_3-s_{3,1}
+&&\bigl(\because\ \text{最初の有限和恒等式を移項する}\bigr)\\
+&=e_1p_3-\left(e_2p_2-s_{2,1,1}\right)
+&&\bigl(\because\ \text{二番目の有限和恒等式を }s_{3,1}\text{ について解いて代入する}\bigr)\\
+&=e_1p_3-e_2p_2+s_{2,1,1}
+&&\bigl(\because\ \text{分配律}\bigr)\\
+&=e_1p_3-e_2p_2+\left(e_3p_1-4e_4\right)
+&&\bigl(\because\ \text{三番目の有限和恒等式を }s_{2,1,1}\text{ について解いて代入する}\bigr)\\
+&=e_1p_3-e_2p_2+e_3p_1-4e_4
+&&\bigl(\because\ \text{括弧を外す}\bigr).
+\end{aligned}\]
+\cref{lab:theorem_fisher_zero_elementary_symmetric_coefficient_ratio}
+ を
+$r=1,2,3,4$
+ に適用し、
+\cref{lab:theorem_fisher_zero_square_sum_coefficient_ratio}
+ と
+\cref{lab:theorem_fisher_zero_cube_sum_coefficient_ratio}
+ を用いる。さらに
+$B:=\Omega_G(d)$
+ および各
+$r\in\{1,2,3,4\}$
+について
+$A_r:=\Omega_G(d-r)$
+と置くと、
+
+\[\begin{aligned}
+e_r&=(-1)^r\frac{A_r}{B}&&\bigl(r\in\{1,2,3,4\}\bigr),\\
+p_1&=-\frac{A_1}{B},\\
+p_2&=\frac{A_1^2-2BA_2}{B^2},\\
+p_3&=\frac{-A_1^3+3BA_1A_2-3B^2A_3}{B^3}.
+\end{aligned}\]
+\cref{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
+ と
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ より
+$B\in\mathbb N_{>0}$
+ である。直前の係数比を四次 Newton 恒等式へ代入すると、
+
+\[\begin{aligned}
+p_4
+&=
+\left(-\frac{A_1}{B}\right)
+\frac{-A_1^3+3BA_1A_2-3B^2A_3}{B^3}
+-\frac{A_2}{B}\frac{A_1^2-2BA_2}{B^2}
++\left(-\frac{A_3}{B}\right)\left(-\frac{A_1}{B}\right)
+-4\frac{A_4}{B}
+&&\bigl(\because\ \text{直前の係数比を代入する}\bigr)\\
+&=
+\frac{A_1^4-3BA_1^2A_2+3B^2A_1A_3}{B^4}
++\frac{-A_1^2A_2+2BA_2^2}{B^3}
++\frac{A_1A_3}{B^2}
+-\frac{4A_4}{B}
+&&\bigl(\because\ \text{各積を展開する}\bigr)\\
+&=
+\frac{A_1^4-3BA_1^2A_2+3B^2A_1A_3}{B^4}
++\frac{-BA_1^2A_2+2B^2A_2^2}{B^4}
++\frac{B^2A_1A_3}{B^4}
+-\frac{4B^3A_4}{B^4}
+&&\bigl(\because\ B\ne0\text{ なので共通分母へ移す}\bigr)\\
+&=
+\frac{
+  A_1^4
+  -4BA_1^2A_2
+  +2B^2A_2^2
+  +4B^2A_1A_3
+  -4B^3A_4
+}{B^4}
+&&\bigl(\because\ \text{同じ分母をもつ項を加えて同類項をまとめる}\bigr).
+\end{aligned}\]
+右辺は有理数なので、Fisher 零点の四乗和は
+$\mathbb Q\subset\overline{\mathbb Q}$
+ に属する。零点、その四乗、有限積および有限和は代数的数、次数と多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
 \begin{theorem}[一般有限グラフの Fisher 零点逆数族の基本対称式と係数比]\label{lab:theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio}
 \cref{lab:def_finite_graph_input}
  の有限グラフについて、

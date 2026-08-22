@@ -15,6 +15,7 @@
 - 次数二以上の一般有限グラフについて、重複度込み Fisher 零点逆数の二乗和が、低次三係数の有理式に等しい定理を追加した。現在は本文 59 ラベル、対応 SageMath 検算 40 件である。
 - 次数三以上の一般有限グラフについて、重複度込み Fisher 零点の三乗和が、最高次側四係数の有理式に等しい定理を追加した。現在は本文 60 ラベル、対応 SageMath 検算 41 件である。
 - 次数三以上の一般有限グラフについて、重複度込み Fisher 零点逆数の三乗和が、低次側四係数の有理式に等しい定理を追加した。現在は本文 61 ラベル、対応 SageMath 検算 42 件、個別検算 165 本である。
+- 次数四以上の一般有限グラフについて、重複度込み Fisher 零点の四乗和が、最高次側五係数の有理式に等しい定理を追加した。現在は本文 62 ラベル、対応 SageMath 検算 43 件、個別検算 178 本である。
 - 一般有限グラフの今後の研究はこの台帳だけで管理する。Lean 具体版と必要十分版は未着手。
 
 ## 実行待ち
@@ -37,6 +38,7 @@
 - 一般有限グラフの Fisher 零点逆数の二乗和と係数比: `theorem_reciprocal_fisher_zero_square_sum_coefficient_ratio` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点の三乗和と係数比: `theorem_fisher_zero_cube_sum_coefficient_ratio` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点逆数の三乗和と係数比: `theorem_reciprocal_fisher_zero_cube_sum_coefficient_ratio` と対応 SageMath 検算を追加済み。
+- 一般有限グラフの Fisher 零点の四乗和と係数比: `theorem_fisher_zero_fourth_power_sum_coefficient_ratio` と対応 SageMath 検算を追加済み。
 
 ## 判断の固定事項
 
