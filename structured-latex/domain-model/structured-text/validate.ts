@@ -16,6 +16,7 @@ import { z } from 'zod'
 import { err, ok, type Result } from '../result.ts'
 import { HEADING_LEVELS, STANDING_BEARING_KINDS, THEOREM_LIKE_KINDS, THEOREM_STANDINGS } from './block.ts'
 import type { Block, Note, StandingBearingKind, TheoremLikeKind } from './block.ts'
+import type { DocumentStructure } from './document-structure.ts'
 
 export type ValidationIssue = { path: string; message: string }
 
@@ -96,6 +97,11 @@ export type RuntimeSchema<L extends string, M> = {
   validateBlocks: (values: unknown, where: string) => Result<readonly Block<L, M>[], ValidationIssue[]>
   validateNote: (value: unknown, where: string) => Result<Note<L>, ValidationIssue[]>
   validateNotes: (values: unknown, where: string) => Result<readonly Note<L>[], ValidationIssue[]>
+  /** 節・要素グループの再帰構造を検証する。 */
+  validateDocumentStructure: (
+    value: unknown,
+    where: string,
+  ) => Result<DocumentStructure<L, M>, ValidationIssue[]>
 }
 
 /**
@@ -225,10 +231,112 @@ export const createRuntimeSchema = <
     return issues.length > 0 ? err(issues) : ok(data)
   }
 
+  const validateDocumentStructure = (
+    value: unknown,
+    where: string,
+  ): Result<DocumentStructure<L, M>, ValidationIssue[]> => {
+    const issues: ValidationIssue[] = []
+    const recordOf = (candidate: unknown, path: string): Record<string, unknown> | null => {
+      if (typeof candidate !== 'object' || candidate === null || Array.isArray(candidate)) {
+        issues.push({ path, message: 'オブジェクトでなければならない' })
+        return null
+      }
+      return candidate as Record<string, unknown>
+    }
+    const exactKeys = (record: Record<string, unknown>, allowed: readonly string[], path: string): void => {
+      for (const key of Object.keys(record)) {
+        if (!allowed.includes(key)) issues.push({ path: `${path}.${key}`, message: '未知のフィールド' })
+      }
+    }
+    const validateTitle = (title: unknown, path: string): void => {
+      const result = validateBlock(
+        { id: '__title__', kind: 'heading', level: 1, labels: [], title },
+        path,
+      )
+      if (!result.success) issues.push(...result.error.map((issue) => ({ ...issue, path })))
+    }
+    const validateBlockAt = (
+      candidate: unknown,
+      path: string,
+      permittedKinds: readonly string[],
+    ): void => {
+      const result = validateBlock(candidate, path)
+      if (!result.success) {
+        issues.push(...result.error)
+        return
+      }
+      if (!permittedKinds.includes(result.data.kind)) {
+        issues.push({ path: `${path}.kind`, message: `${permittedKinds.join(' / ')} のいずれかでなければならない` })
+      }
+    }
+    const validateGroupMember = (candidate: unknown, path: string): void => {
+      const member = recordOf(candidate, path)
+      if (member === null) return
+      exactKeys(member, ['role', 'element'], path)
+      if (member.role === 'subgroup') validateGroup(member.element, `${path}.element`)
+      else if (member.role === 'prerequisiteDefinition') validateBlockAt(member.element, `${path}.element`, ['definition'])
+      else if (member.role === 'supportingClaim') validateBlockAt(member.element, `${path}.element`, ['theorem', 'claim'])
+      else if (member.role === 'explanation') validateBlockAt(member.element, `${path}.element`, ['remark', 'note'])
+      else if (member.role === 'figure') validateBlockAt(member.element, `${path}.element`, ['figure'])
+      else issues.push({ path: `${path}.role`, message: '未知のグループ内役割' })
+    }
+    const validateMembers = (candidate: unknown, path: string): void => {
+      if (candidate === undefined) return
+      if (!Array.isArray(candidate)) {
+        issues.push({ path, message: '配列でなければならない' })
+        return
+      }
+      candidate.forEach((member, index) => validateGroupMember(member, `${path}[${index}]`))
+    }
+    const validateGroup = (candidate: unknown, path: string): void => {
+      const group = recordOf(candidate, path)
+      if (group === null) return
+      exactKeys(group, ['kind', 'id', 'title', 'beforeFocus', 'focus', 'afterFocus'], path)
+      if (group.kind !== 'elementGroup') issues.push({ path: `${path}.kind`, message: 'elementGroup でなければならない' })
+      if (typeof group.id !== 'string' || group.id.length === 0) issues.push({ path: `${path}.id`, message: '空でない文字列でなければならない' })
+      if (group.title !== undefined) validateTitle(group.title, `${path}.title`)
+      validateMembers(group.beforeFocus, `${path}.beforeFocus`)
+      validateBlockAt(group.focus, `${path}.focus`, ['theorem', 'claim', 'definition'])
+      validateMembers(group.afterFocus, `${path}.afterFocus`)
+    }
+    const validateSectionMember = (candidate: unknown, path: string): void => {
+      const member = recordOf(candidate, path)
+      if (member === null) return
+      exactKeys(member, ['role', 'element'], path)
+      if (member.role === 'subsection') validateSection(member.element, `${path}.element`)
+      else if (member.role === 'primary' || member.role === 'supporting') validateGroup(member.element, `${path}.element`)
+      else if (member.role === 'exposition') validateBlockAt(member.element, `${path}.element`, ['remark', 'note', 'figure'])
+      else issues.push({ path: `${path}.role`, message: '未知の節内役割' })
+    }
+    const validateSection = (candidate: unknown, path: string): void => {
+      const section = recordOf(candidate, path)
+      if (section === null) return
+      exactKeys(section, ['kind', 'id', 'labels', 'title', 'children'], path)
+      if (section.kind !== 'section') issues.push({ path: `${path}.kind`, message: 'section でなければならない' })
+      const headingResult = validateBlock(
+        { id: section.id, kind: 'heading', level: 1, labels: section.labels, title: section.title },
+        path,
+      )
+      if (!headingResult.success) issues.push(...headingResult.error)
+      if (!Array.isArray(section.children)) issues.push({ path: `${path}.children`, message: '配列でなければならない' })
+      else section.children.forEach((member, index) => validateSectionMember(member, `${path}.children[${index}]`))
+    }
+
+    const document = recordOf(value, where)
+    if (document !== null) {
+      exactKeys(document, ['kind', 'sections'], where)
+      if (document.kind !== 'documentStructure') issues.push({ path: `${where}.kind`, message: 'documentStructure でなければならない' })
+      if (!Array.isArray(document.sections)) issues.push({ path: `${where}.sections`, message: '配列でなければならない' })
+      else document.sections.forEach((section, index) => validateSection(section, `${where}.sections[${index}]`))
+    }
+    return issues.length > 0 ? err(issues) : ok(value as DocumentStructure<L, M>)
+  }
+
   return {
     validateBlock,
     validateBlocks: (values, where) => validateEach(values, where, validateBlock),
     validateNote,
     validateNotes: (values, where) => validateEach(values, where, validateNote),
+    validateDocumentStructure,
   }
 }

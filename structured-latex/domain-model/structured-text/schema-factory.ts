@@ -16,6 +16,7 @@
  */
 
 import type { Block, Note } from './block.ts'
+import type { DocumentStructure } from './document-structure.ts'
 import type { RefNode } from './node.ts'
 import type { NoDuplicateBlockId, NoDuplicateLabel, NoDuplicateNoteId } from './uniqueness.ts'
 
@@ -35,6 +36,9 @@ export type StructuredTextSchema<L extends string, M> = {
   defineNotes: <const T extends readonly Note<L>[]>(
     notes: T & readonly Note<L>[] & NoDuplicateNoteId<T>,
   ) => T
+
+  /** 節・要素グループ・主要／補助所属を明示した文書構造を定義する。 */
+  defineDocumentStructure: <const T extends DocumentStructure<L, M>>(document: T) => T
 
   /** 相互参照。実在しないラベルはコンパイル時に落ちる（I2 の型側の担保）。 */
   ref: (target: L, label?: string) => RefNode<L>
@@ -62,6 +66,7 @@ export const createStructuredTextSchema = <
   defineNotes: <const T extends readonly Note<L>[]>(
     notes: T & readonly Note<L>[] & NoDuplicateNoteId<T>,
   ): T => notes,
+  defineDocumentStructure: <const T extends DocumentStructure<L, M>>(document: T): T => document,
   ref: (target: L, label?: string): RefNode<L> =>
     label === undefined ? { type: 'ref', target } : { type: 'ref', target, label },
 })

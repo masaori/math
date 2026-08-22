@@ -216,6 +216,38 @@ test('身分の宣言できる種別は、語彙を所有しない読み手で�
   )
 })
 
+test('節・要素グループ構造は主な定義を受け入れ、役割と中心種別の誤りを拒否する', () => {
+  const valid = schema.validateDocumentStructure({
+    kind: 'documentStructure',
+    sections: [{
+      kind: 'section', id: 'section', labels: [], title: { text: '節' }, children: [{
+        role: 'primary', element: {
+          kind: 'elementGroup', id: 'main-definition',
+          focus: { kind: 'definition', id: 'definition', labels: [], statement: [] },
+        },
+      }],
+    }],
+  }, 'document')
+  assert.equal(valid.success, true)
+
+  const invalid = schema.validateDocumentStructure({
+    kind: 'documentStructure',
+    sections: [{
+      kind: 'section', id: 'section', labels: [], title: { text: '節' }, children: [{
+        role: 'primary', element: {
+          kind: 'elementGroup', id: 'bad-focus',
+          focus: { kind: 'remark', id: 'remark', labels: [], statement: [] },
+          typo: true,
+        },
+      }],
+    }],
+  }, 'document')
+  assert.equal(invalid.success, false)
+  if (invalid.success) return
+  assert.equal(invalid.error.some((issue) => issue.path.endsWith('.typo')), true)
+  assert.equal(invalid.error.some((issue) => issue.path.endsWith('.focus.kind')), true)
+})
+
 test('エラーは 1 件目で止めずに全件返す', () => {
   const result = schema.validateBlocks(
     [

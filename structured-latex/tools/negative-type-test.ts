@@ -32,7 +32,7 @@ export type Habitation =
   | { habitat: 'countable'; realEscape?: never }
   | { habitat: 'uncountable'; realEscape: string }
 
-export const { defineBlocks, defineNotes, ref } = createStructuredTextSchema<Label, Habitation>()
+export const { defineBlocks, defineNotes, defineDocumentStructure, ref } = createStructuredTextSchema<Label, Habitation>()
 `,
   // exclude も継承されるので明示的に空へ戻す（親の exclude は tools/.tmp を含むため、
   // そのままだとフィクスチャ自身が検査対象から外れて「入力が 1 件も無い」になる）。
@@ -340,6 +340,52 @@ export default defineBlocks([
     content: [],${broken ? '\n    statement: [],' : ''}
   },`,
       ),
+    }),
+  },
+  {
+    name: '要素グループの中心は定理・主張・定義だけ',
+    expect: 'TS2322',
+    files: (broken) => ({
+      'fixture.ts': `import { defineDocumentStructure } from './schema.ts'
+
+defineDocumentStructure({
+  kind: 'documentStructure',
+  sections: [{
+    kind: 'section', id: 'section', labels: [], title: { text: '節' }, children: [{
+      role: 'primary', element: {
+        kind: 'elementGroup', id: 'focus-group',
+        focus: {
+          kind: '${broken ? 'remark' : 'definition'}', id: 'focus', labels: [],
+          habitat: 'countable', statement: [],
+        },
+      },
+    }],
+  }],
+})
+`,
+    }),
+  },
+  {
+    name: '節の主要所属には要素グループだけを置ける',
+    expect: 'TS2322',
+    files: (broken) => ({
+      'fixture.ts': `import { defineDocumentStructure } from './schema.ts'
+
+defineDocumentStructure({
+  kind: 'documentStructure',
+  sections: [{
+    kind: 'section', id: 'section', labels: [], title: { text: '節' }, children: [{
+      role: 'primary', element: ${broken ? `{
+        kind: 'definition', id: 'definition', labels: [], habitat: 'countable', statement: [],
+      }` : `{
+        kind: 'elementGroup', id: 'definition-group', focus: {
+          kind: 'definition', id: 'definition', labels: [], habitat: 'countable', statement: [],
+        },
+      }`},
+    }],
+  }],
+})
+`,
     }),
   },
 ]

@@ -66,13 +66,62 @@ structured-latex/
   サブ定理のブロックを題名だけ見せて既定で閉じる（`details` / `summary` なので JavaScript に
   依存しない）。定義・注意は身分を持たないので閉じない。LaTeX / PDF の出力は身分で変わらない。
 
+この `standing` は平坦な既存文書の互換入力である。新しい文書構造では、主従をブロック自身の
+絶対的属性にせず、下記の節所属と要素グループから導出する。
+
+## 節と要素グループ
+
+章立て、要素の所属、主従を文書順から推測せず、入力の木として宣言できる。
+
+```typescript
+const structure = defineDocumentStructure({
+  kind: 'documentStructure',
+  sections: [{
+    kind: 'section',
+    id: 'transfer-matrix',
+    labels: ['sec:transfer-matrix'],
+    title: { text: '転送行列' },
+    children: [{
+      role: 'primary',
+      element: {
+        kind: 'elementGroup',
+        id: 'transfer-matrix-definition-group',
+        focus: {
+          kind: 'definition',
+          id: 'transfer-matrix-definition',
+          labels: ['def:transfer-matrix'],
+          statement: [],
+        },
+      },
+    }],
+  }],
+})
+
+const compiled = compileDocumentStructure(structure)
+```
+
+- `section` の再帰が章・節・項の親子関係そのものであり、`level` は木の深さから生成される。
+- `elementGroup.focus` はそのまとまりの中心で、定理・主張・定義を置ける。
+- 節に `role: 'primary'` で属するグループの中心が、主定理・主な主張・主な定義になる。
+- `role: 'supporting'` は節の主要要素を支えるグループである。
+- グループ内の役割が、中心に対する定義・補助主張・下位グループ・説明・図表の関係を表す。
+- `beforeFocus` / `afterFocus` により、中心が一つであることを保ったまま提示順も確定する。
+
+`compileDocumentStructure` は既存のセグメント契約へ渡せる平坦な `blocks` と、節・グループ所属を
+保持した索引を同時に返す。同じブロックの複数所属、構造 ID 重複、6 段を超える節は Result の
+エラーになる。外部 JSON は `createRuntimeSchema().validateDocumentStructure` で同じ形を検査する。
+
+HTML は `renderers/html/primary-elements.ts` を使う。`primaryElementEntriesOf` が明示された所属から
+主要要素を取り出し、`renderPrimaryElementsLead` が「この節の主な定義」と
+「この節の主定理・主張」を分けて節冒頭へ表示する。
+
 ## 使う側がやること
 
 ```typescript
 // 1. 生成された Label（実在するラベルのユニオン型）を受け取り、
 // 2. プロジェクト固有メタデータを宣言し（不要なら省略）、
 // 3. ファクトリを具体化する
-const { defineBlocks, defineNotes, ref } = createStructuredTextSchema<Label, Meta>()
+const { defineBlocks, defineNotes, defineDocumentStructure, ref } = createStructuredTextSchema<Label, Meta>()
 ```
 
 あとは `content/*.ts` にブロック列を書くだけで、次が**書いた瞬間に型で落ちる**。

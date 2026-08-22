@@ -77,6 +77,26 @@ export {
 } from './structured-text/schema-factory.ts'
 
 export {
+  compileDocumentStructure,
+  type AssertionBlock,
+  type CompiledDocumentStructure,
+  type CompiledElementGroup,
+  type CompiledSection,
+  type DefinitionBlock,
+  type DocumentStructure,
+  type DocumentStructureError,
+  type ElementGroup,
+  type ExpositoryBlock,
+  type FocalBlock,
+  type GroupMember,
+  type GroupSupportRole,
+  type RemarkBlock,
+  type Section,
+  type SectionGroupRole,
+  type SectionMember,
+} from './structured-text/document-structure.ts'
+
+export {
   createRuntimeSchema,
   type RuntimeSchema,
   type ValidationIssue,
