@@ -1569,6 +1569,169 @@ d
     ],
   },
   {
+    id: "finite_graph_theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点逆数族の基本対称式と係数比" },
+    labels: ["theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/reciprocal-fisher-zero-elementary-symmetric-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を ",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置く。係数を標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を ",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。このとき、任意の ",
+        math(String.raw`k\in\{0,\ldots,d\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j^{-1}
+=
+(-1)^k\frac{\Omega_G(k)}{\Omega_G(0)}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.`),
+      paragraph([
+        math(String.raw`I=\varnothing`),
+        " の項に現れる積は空積 ",
+        math(String.raw`1\in\overline{\mathbb Q}`),
+        " とする。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fisher_zeros_nonzero"),
+        " より、全ての ",
+        math(String.raw`j\in\{1,\ldots,d\}`),
+        " について ",
+        math(String.raw`\alpha_j\ne0`),
+        " であり、逆数 ",
+        math(String.raw`\alpha_j^{-1}\in\overline{\mathbb Q}`),
+        " が定まる。",
+      ]),
+      paragraph([
+        "全頂点下向き配位 ",
+        math(String.raw`\sigma_{\mathsf{down}}:V\to\mathsf{Spin}`),
+        " を全ての ",
+        math(String.raw`v\in V`),
+        " について ",
+        math(String.raw`\sigma_{\mathsf{down}}(v):=\mathsf{down}`),
+        " と定める。",
+        ref("def_spin_configuration_set"),
+        " と ",
+        ref("def_broken_edge_set"),
+        " より ",
+        math(String.raw`\sigma_{\mathsf{down}}\in\mathcal S_G`),
+        " かつ ",
+        math(String.raw`b_G(\sigma_{\mathsf{down}})=0`),
+        " なので、",
+        ref("def_broken_edge_multiplicity"),
+        " より ",
+        math(String.raw`\Omega_G(0)\in\mathbb N_{>0}`),
+        " である。任意の ",
+        math(String.raw`k\in\{0,\ldots,d\}`),
+        " を取り、",
+        math(String.raw`I\subseteq\{1,\ldots,d\}`),
+        " かつ ",
+        math(String.raw`|I|=k`),
+        " とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j\in I}\alpha_j^{-1}
+&=
+\left(
+  \prod_{j=1}^{d}\alpha_j
+\right)^{-1}
+\prod_{j\in\{1,\ldots,d\}\setminus I}\alpha_j
+&&\bigl(\because\ \text{全ての }\alpha_j\text{ が非零であり、有限積を }I\text{ とその補集合へ分割する}\bigr).
+\end{aligned}`),
+      paragraph([
+        "補集合写像 ",
+        math(String.raw`I\mapsto\{1,\ldots,d\}\setminus I`),
+        " は、元数 ",
+        math(String.raw`k`),
+        " の部分集合全体から元数 ",
+        math(String.raw`d-k`),
+        " の部分集合全体への全単射である。したがって、直前の等式を全ての ",
+        math(String.raw`I`),
+        " について加えると、",
+      ]),
+      displayMath(String.raw`\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j^{-1}
+=
+\frac{
+  \displaystyle
+  \sum_{\substack{J\subseteq\{1,\ldots,d\}\\|J|=d-k}}
+  \prod_{j\in J}\alpha_j
+}{
+  \displaystyle
+  \prod_{j=1}^{d}\alpha_j
+}
+\quad\bigl(\because\ \text{補集合写像は全単射である}\bigr).`),
+      paragraph([
+        ref("theorem_fisher_zero_elementary_symmetric_coefficient_ratio"),
+        " を元数 ",
+        math(String.raw`d-k`),
+        " と元数 ",
+        math(String.raw`d`),
+        " に適用すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{J\subseteq\{1,\ldots,d\}\\|J|=d-k}}
+\prod_{j\in J}\alpha_j
+&=
+(-1)^{d-k}\frac{\Omega_G(k)}{\Omega_G(d)}
+&&\bigl(\because\ \text{Fisher 零点の基本対称式と係数比}\bigr),\\
+\prod_{j=1}^{d}\alpha_j
+&=
+(-1)^d\frac{\Omega_G(0)}{\Omega_G(d)}
+&&\bigl(\because\ \text{Fisher 零点の基本対称式と係数比}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
+        " と ",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " より ",
+        math(String.raw`\Omega_G(d)\in\mathbb N_{>0}`),
+        " である。直前の二等式を補集合による等式へ代入すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\prod_{j\in I}\alpha_j^{-1}
+&=
+\frac{
+  \displaystyle
+  (-1)^{d-k}\frac{\Omega_G(k)}{\Omega_G(d)}
+}{
+  \displaystyle
+  (-1)^d\frac{\Omega_G(0)}{\Omega_G(d)}
+}
+&&\bigl(\because\ \text{二つの基本対称式の係数比を代入する}\bigr)\\
+&=
+(-1)^{d-k}\frac{\Omega_G(k)}{\Omega_G(d)}
+\cdot
+(-1)^d\frac{\Omega_G(d)}{\Omega_G(0)}
+&&\bigl(\because\ (-1)^d\text{ は自身の逆元である}\bigr)\\
+&=
+(-1)^{2d-k}\frac{\Omega_G(k)}{\Omega_G(0)}
+&&\bigl(\because\ \Omega_G(d)\ne0\text{ なので約分する}\bigr)\\
+&=
+(-1)^k\frac{\Omega_G(k)}{\Omega_G(0)}
+&&\bigl(\because\ 2d-k\text{ と }k\text{ の差 }2(d-k)\text{ は偶数である}\bigr).
+\end{aligned}`),
+      paragraph([
+        "右辺は有理数なので、逆数族の基本対称式は ",
+        math(String.raw`\mathbb Q\subset\overline{\mathbb Q}`),
+        " に属する。零点、その逆数、有限積は代数的数、次数、添字部分集合の元数、多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_full_cut_coefficient_symmetry",
     kind: "theorem",
     title: { text: "全ての辺を横切る頂点二分割と係数対称性" },
