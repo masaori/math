@@ -175,10 +175,11 @@ SageMath 検証は浮動小数点を既定にしない。$\mathbb{R}$ 脱出を�
 
 | 章 | 内容 | 主な住処 |
 | --- | --- | --- |
+| **道具: 可算な代数の足場** | 対数順序群 $\Lambda$、有限集合を添字とする行列と行列式、代数的数と 1 の冪根、$\overline{\mathbb{Q}}$ 上の線型代数。**Ising が一度も現れない** | $\Lambda$, $\mathbb{Z}[x]$, $\overline{\mathbb{Q}}$ |
 | 分配多項式 | 格子・配位・破れボンド数・多重度・$Z_L(x)\in\mathbb{Z}[x]$ | $\mathbb{N}$, $\mathbb{Z}[x]$ |
-| 対数順序群と有限系の自由エントロピー | $\Lambda$（素因数分解の指数ベクトル）と $\Phi_L=\log Z_L(q)\in\Lambda$ | $\Lambda$ |
-| 転送行列 | $T(x)\in M_{2^L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$ | $\mathbb{Z}[x]$ |
-| シフト対称性と特性多項式 | 置換・行列式・特性多項式、シフト行列、軌道分解 | $\mathbb{Z}[x][t]$ |
+| 有限系の自由エントロピー | $\Phi_L=\log Z_L(q)\in\Lambda$ | $\Lambda$ |
+| 転送行列 | $T(x)\in\mathrm{Mat}_{R_L}(\mathbb{Z}[x])$ と $Z_L(x)=\operatorname{Tr}T(x)^L$ | $\mathbb{Z}[x]$ |
+| シフト対称性と特性多項式 | 行配位の辞書式順序、シフト行列、特性多項式の軌道分解 | $\mathbb{Z}[x][t]$ |
 | 固有値の代数性 | 固有値は 1 の冪根、固有空間が全体を張る | $\overline{\mathbb{Q}}$ |
 | Fisher 零点と双対性 | 高温展開、Kramers–Wannier 双対、二次体と正錐、$x_c=\sqrt2-1$ | $\overline{\mathbb{Q}}$ |
 | 零点の詰め寄り | 実閉部分体の順序、相転移を $\mathbb{Q}$ 上の量化言明として書く | $\mathbb{Q}$, $\overline{\mathbb{Q}}$ |
@@ -186,6 +187,10 @@ SageMath 検証は浮動小数点を既定にしない。$\mathbb{R}$ 脱出を�
 | 実数体への脱出と熱力学極限 | 下組と完備性。**ここが $\mathbb{R}$ 脱出** | $\mathbb{R}$ |
 | Fisher 零点の個数と密度 | 零点の有限性、根の重複度、零点密度の上界 | $\overline{\mathbb{Q}}$ |
 | 臨界指数を零点列で書く | 先頭零点列 $\{x_1(L)\}_L\subset\overline{\mathbb{Q}}$ と有限サイズスケーリング | mixed |
+
+**道具の章を先頭に置く。** そこに入るのは、依存関係を辿っても格子にも配位にも到達しないブロック
+だけである（機械的に判定できる）。逆に、内容が一般的でも Ising の対象を参照していれば道具では
+ないので、参照を外すか、参照する側を本論へ置く。
 
 各章は節（レベル 2 の見出し）に分かれる。各章には**主定理**（`standing: "mainTheorem"`）が
 少なくとも 1 つあり、**主定理だけを順に読めば論文全体の主張が追える**ように選んである

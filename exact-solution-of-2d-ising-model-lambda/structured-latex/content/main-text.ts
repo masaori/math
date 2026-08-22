@@ -31,823 +31,17 @@ import {
   todo,
 } from "../schema.ts";
 
-const chapter_partition_polynomial = defineSection({
+const chapter_tools = defineSection({
   kind: "section",
-  id: "partition_polynomial_heading",
+  id: "tools_heading",
   labels: [],
-  title: { text: "分配多項式" },
+  title: { text: "道具: 可算な代数の足場" },
   children: [
     {
       role: "subsection",
       element: {
         kind: "section",
-        id: "partition_polynomial_heading_lattice_and_configuration",
-        labels: [],
-        title: { text: "格子と配位" },
-        children: [
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_partition_polynomial_definition_lattice_and_configuration",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "partition_polynomial_definition_cardinality_notation",
-                      kind: "definition",
-                      title: { text: "有限集合の元の個数の記法" },
-                      labels: ["def_cardinality_notation"],
-                      habitat: "N",
-                      statement: [
-                        paragraph([
-                          "有限集合 ",
-                          math(String.raw`X`),
-                          " に対し ",
-                          math(String.raw`|X|`),
-                          " でその元の個数（",
-                          math(String.raw`\mathbb{N}`),
-                          " の元）を表す。この記法をこれ以外の意味（絶対値・ノルム）では使わない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "partition_polynomial_definition_residue_maps",
-                      kind: "definition",
-                      title: { text: "整数と剰余類を行き来する 2 つの写像" },
-                      labels: ["def_residue_maps"],
-                      habitat: "Z",
-                      statement: [
-                        paragraph([
-                          "整数 ",
-                          math(String.raw`L\in\mathbb{N}`),
-                          "、",
-                          math(String.raw`L\ge1`),
-                          " を固定する。",
-                          math(String.raw`\mathbb{Z}`),
-                          " と ",
-                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-                          " を行き来する写像に名前を与える。一方は自然な射影",
-                        ]),
-                        displayMath(String.raw`\pi:\mathbb{Z}\to\mathbb{Z}/L\mathbb{Z},\qquad \pi(n):=n+L\mathbb{Z}`),
-                        paragraph([
-                          "であり、もう一方は代表を取る写像",
-                        ]),
-                        displayMath(
-                          String.raw`s:\mathbb{Z}/L\mathbb{Z}\to\mathbb{Z},\qquad
-0\le s(y)\le L-1\ \text{かつ}\ \pi(s(y))=y`,
-                        ),
-                        paragraph([
-                          "である。各 ",
-                          math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
-                          " に対しこの条件を満たす整数はちょうど 1 つなので（除法の原理）、",
-                          math(String.raw`s`),
-                          " は写像として定まる。以下、この 2 本以外の経路で ",
-                          math(String.raw`\mathbb{Z}`),
-                          " と ",
-                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-                          " を行き来しない。とくに、整数を剰余類と「みなす」ことはしない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "partition_polynomial_definition_residue_addition_notation",
-                      kind: "definition",
-                      title: { text: "剰余類の加法の記法" },
-                      labels: ["def_residue_addition_notation"],
-                      habitat: "Z",
-                      statement: [
-                        paragraph([
-                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-                          " の加法を ",
-                          math(String.raw`+_{\mathbb{Z}/L\mathbb{Z}}`),
-                          " と書き、",
-                          math(String.raw`\mathbb{Z}`),
-                          " の加法 ",
-                          math(String.raw`+`),
-                          " と区別する。また ",
-                          math(String.raw`\bar1:=\pi(1)\in\mathbb{Z}/L\mathbb{Z}`),
-                          " と置く（",
-                          math(String.raw`\pi`),
-                          " は ",
-                          ref("def_residue_maps"),
-                          "）。",
-                          math(String.raw`\bar1`),
-                          " と ",
-                          math(String.raw`1`),
-                          " は別の対象であり、書き分ける。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "partition_polynomial_definition_lattice_and_configuration",
-                  kind: "definition",
-                  title: { text: "格子" },
-                  labels: ["def_lattice"],
-                  habitat: "N",
-                  lean: [
-                    "Ising2DLambda.PartitionPolynomial.Vertex",
-                    "Ising2DLambda.PartitionPolynomial.Edge",
-                  ],
-                  statement: [
-                    paragraph([
-                      "格子とは、頂点集合",
-                    ]),
-                    displayMath(String.raw`V_L:=(\mathbb{Z}/L\mathbb{Z})\times(\mathbb{Z}/L\mathbb{Z})`),
-                    paragraph([
-                      "と、横向きの辺の番号の集合・縦向きの辺の番号の集合",
-                    ]),
-                    displayMath(
-                      String.raw`E_{L,\mathrm{h}}:=\{1,2,\dots,L^2\},\qquad
-E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
-                    ),
-                    paragraph([
-                      "および、その合併",
-                    ]),
-                    displayMath(String.raw`E_L:=E_{L,\mathrm{h}}\cup E_{L,\mathrm{v}}=\{1,2,\dots,2L^2\}`),
-                    paragraph([
-                      "と、端点写像 ",
-                      math(String.raw`\partial_0,\partial_1:E_L\to V_L`),
-                      "（",
-                      ref("def_boundary_maps"),
-                      "）の 5 つ組 ",
-                      math(String.raw`(V_L,E_{L,\mathrm{h}},E_{L,\mathrm{v}},\partial_0,\partial_1)`),
-                      " のことである。",
-                    ]),
-                    paragraph([
-                      math(String.raw`V_L`),
-                      " の元を ",
-                      math(String.raw`(i,j)`),
-                      " と書き、第 1 成分 ",
-                      math(String.raw`i`),
-                      " を行番号、第 2 成分 ",
-                      math(String.raw`j`),
-                      " を列番号と呼ぶ。すなわち行番号が等しい頂点どうしが同じ行に属する。この呼び方は以下で固定し、",
-                      "第 1 成分を列番号と読むことはしない。",
-                    ]),
-                    paragraph([
-                      math(String.raw`E_{L,\mathrm{h}}`),
-                      " と ",
-                      math(String.raw`E_{L,\mathrm{v}}`),
-                      " は番号の範囲が重ならないので互いに素であり、どの ",
-                      math(String.raw`e\in E_L`),
-                      " もちょうど一方に属する。",
-                      "横向きと縦向きを最初から別の集合にしておくのは、後の章で破れボンド数を",
-                      "「同じ行の中の破れ」と「隣り合う行の間の破れ」に分けるとき、この分割をそのまま使うためである。",
-                    ]),
-                    paragraph([
-                      math(String.raw`V_L`),
-                      " は有限集合で ",
-                      math(String.raw`|V_L|=L^2`),
-                      "、",
-                      math(String.raw`E_{L,\mathrm{h}}`),
-                      " と ",
-                      math(String.raw`E_{L,\mathrm{v}}`),
-                      " はいずれも有限集合で ",
-                      math(String.raw`|E_{L,\mathrm{h}}|=|E_{L,\mathrm{v}}|=L^2`),
-                      " である（連続する整数の個数。記法は ",
-                      ref("def_cardinality_notation"),
-                      "）。両者は互いに素なので ",
-                      math(String.raw`|E_L|=L^2+L^2=2L^2`),
-                      " となる。",
-                    ]),
-                    paragraph([
-                      "辺そのものを頂点の 2 元集合 ",
-                      math(String.raw`\{u,w\}`),
-                      " として定義しないのは、",
-                      math(String.raw`L\le2`),
-                      " のとき異なる辺が同じ 2 元集合になってしまうからである（",
-                      math(String.raw`L=1`),
-                      " では両端が一致して 1 元集合になり、",
-                      math(String.raw`L=2`),
-                      " では横向きの 2 本が同じ 2 点を結ぶ）。2 元集合の集合として数えると本数が ",
-                      math(String.raw`2L^2`),
-                      " からずれ、以下の主張が小さい ",
-                      math(String.raw`L`),
-                      " で成り立たなくなる。番号を付けておけば、同じ 2 点を結ぶ辺が複数あっても別の辺として数えられる。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_partition_polynomial_definition_configuration",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "partition_polynomial_definition_edge_numbering",
-                      kind: "definition",
-                      title: { text: "頂点から辺の番号を与える写像" },
-                      labels: ["def_edge_numbering"],
-                      habitat: "Z",
-                      statement: [
-                        paragraph([
-                          "頂点 ",
-                          math(String.raw`(i,j)\in V_L`),
-                          "（",
-                          ref("def_lattice"),
-                          "）に対し、番号を与える写像 ",
-                          math(String.raw`n_{\mathrm{h}},n_{\mathrm{v}}:V_L\to\mathbb{Z}`),
-                          " を",
-                        ]),
-                        displayMath(
-                          String.raw`n_{\mathrm{h}}(i,j):=L\cdot s(i)+s(j)+1,\qquad
-n_{\mathrm{v}}(i,j):=L^2+L\cdot s(i)+s(j)+1`,
-                        ),
-                        paragraph([
-                          "で定める（",
-                          math(String.raw`s`),
-                          " は ",
-                          ref("def_residue_maps"),
-                          "。右辺は ",
-                          math(String.raw`\mathbb{Z}`),
-                          " の中の計算である）。",
-                          math(String.raw`0\le s(i),s(j)\le L-1`),
-                          " より ",
-                          math(String.raw`n_{\mathrm{h}}(i,j)\in E_{L,\mathrm{h}}`),
-                          " かつ ",
-                          math(String.raw`n_{\mathrm{v}}(i,j)\in E_{L,\mathrm{v}}`),
-                          " であり、どちらも全単射である（",
-                          ref("claim_edge_row_partition"),
-                          "）。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "partition_polynomial_definition_boundary_maps",
-                      kind: "definition",
-                      title: { text: "端点写像" },
-                      labels: ["def_boundary_maps"],
-                      habitat: "N",
-                      lean: [
-                        "Ising2DLambda.PartitionPolynomial.boundary0",
-                        "Ising2DLambda.PartitionPolynomial.boundary1",
-                      ],
-                      statement: [
-                        paragraph([
-                          "端点写像 ",
-                          math(String.raw`\partial_0,\partial_1:E_L\to V_L`),
-                          " は、",
-                          ref("def_edge_numbering"),
-                          " の全単射の逆向きに定める。",
-                          math(String.raw`e\in E_{L,\mathrm{h}}`),
-                          " に対しては ",
-                          math(String.raw`e=n_{\mathrm{h}}(i,j)`),
-                          " を満たす唯一の ",
-                          math(String.raw`(i,j)\in V_L`),
-                          " を取り",
-                        ]),
-                        displayMath(
-                          String.raw`\partial_0(e):=(i,\,j),\qquad
-\partial_1(e):=\bigl(i,\ j+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)`,
-                        ),
-                        paragraph([
-                          "と定め（行番号を変えず列番号だけを進める。だから横向きである）、",
-                          math(String.raw`e\in E_{L,\mathrm{v}}`),
-                          " に対しては ",
-                          math(String.raw`e=n_{\mathrm{v}}(i,j)`),
-                          " を満たす唯一の ",
-                          math(String.raw`(i,j)\in V_L`),
-                          " を取り",
-                        ]),
-                        displayMath(
-                          String.raw`\partial_0(e):=(i,\,j),\qquad
-\partial_1(e):=\bigl(i+_{\mathbb{Z}/L\mathbb{Z}}\bar1,\ j\bigr)`,
-                        ),
-                        paragraph([
-                          "と定める（加法の記法は ",
-                          ref("def_residue_addition_notation"),
-                          "）。行番号・列番号を進める操作が ",
-                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-                          " の中の加法であることが、周期境界条件そのものである。",
-                          math(String.raw`\bar1`),
-                          " を足すのであって ",
-                          math(String.raw`1`),
-                          " を足すのではない。",
-                        ]),
-                        paragraph([
-                          "この定め方により、横向きの辺は両端の行番号が等しく（同じ行の中）、",
-                          "縦向きの辺は両端の列番号が等しく行番号だけが ",
-                          math(String.raw`\bar1`),
-                          " 異なる（隣り合う行の間）。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "partition_polynomial_definition_configuration",
-                  kind: "definition",
-                  title: { text: "配位" },
-                  labels: ["def_configuration"],
-                  habitat: "N",
-                  lean: [
-                    "Ising2DLambda.PartitionPolynomial.Config",
-                    "Ising2DLambda.PartitionPolynomial.card_config",
-                  ],
-                  statement: [
-                    paragraph([
-                      "配位とは写像 ",
-                      math(String.raw`\sigma:V_L\to\{+1,-1\}`),
-                      " のことである。配位全体の集合を",
-                    ]),
-                    displayMath(
-                      String.raw`\Sigma_L:=\bigl\{\,\sigma \;\bigm|\; \sigma\ \text{は}\ V_L\ \text{から}\ \{+1,-1\}\ \text{への写像}\,\bigr\}`,
-                    ),
-                    paragraph([
-                      "と書く（写像全体の集合を冪の記法 ",
-                      math(String.raw`\{+1,-1\}^{V_L}`),
-                      " で表すことはしない。指数と紛れるため）。",
-                      math(String.raw`\Sigma_L`),
-                      " は有限集合で ",
-                      math(String.raw`|\Sigma_L|=2^{L^2}`),
-                      " である（各頂点に独立に 2 通りの値を割り当てるので、",
-                      math(String.raw`|V_L|=L^2`),
-                      " 個の 2 通りの積）。",
-                    ]),
-                    paragraph([
-                      "この定義に現れる対象はすべて有限集合とその上の写像であり、実数体も複素数体も使っていない。値 ",
-                      math(String.raw`\pm1`),
-                      " は ",
-                      math(String.raw`\mathbb{Z}`),
-                      " の元として読む。",
-                    ]),
-                  ],
-                },
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "partition_polynomial_heading_broken_bonds_and_polynomial",
-        labels: [],
-        title: { text: "破れボンド数と分配多項式" },
-        children: [
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_partition_polynomial_definition_broken_bond_count",
-              focus:
-                {
-                  id: "partition_polynomial_definition_broken_bond_count",
-                  kind: "definition",
-                  title: { text: "破れボンド数" },
-                  labels: ["def_broken_bond_count"],
-                  habitat: "N",
-                  lean: [
-                    "Ising2DLambda.PartitionPolynomial.brokenBondCount",
-                    "Ising2DLambda.PartitionPolynomial.brokenBondCount_le",
-                  ],
-                  statement: [
-                    paragraph([
-                      ref("def_configuration"),
-                      " の配位 ",
-                      math(String.raw`\sigma\in\Sigma_L`),
-                      " と ",
-                      ref("def_lattice"),
-                      " の辺の番号 ",
-                      math(String.raw`e\in E_L`),
-                      " に対し、",
-                      math(String.raw`\sigma(\partial_0(e))\ne\sigma(\partial_1(e))`),
-                      " が成り立つとき「辺 ",
-                      math(String.raw`e`),
-                      " は ",
-                      math(String.raw`\sigma`),
-                      " のもとで破れている」という。",
-                    ]),
-                    paragraph([
-                      "配位 ",
-                      math(String.raw`\sigma`),
-                      " の破れボンド数 ",
-                      math(String.raw`b(\sigma)`),
-                      " を、破れている辺の番号の個数",
-                    ]),
-                    displayMath(
-                      String.raw`b(\sigma):=\bigl|\bigl\{\,e\in E_L \;\bigm|\; \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\bigr\}\bigr|`,
-                    ),
-                    paragraph([
-                      "で定める。有限集合の部分集合の元の個数なので ",
-                      math(String.raw`b(\sigma)\in\mathbb{N}`),
-                      " であり、",
-                      math(String.raw`0\le b(\sigma)\le|E_L|=2L^2`),
-                      " が成り立つ。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_partition_polynomial_definition_partition_polynomial",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "partition_polynomial_definition_multiplicity",
-                      kind: "definition",
-                      title: { text: "多重度" },
-                      labels: ["def_multiplicity"],
-                      habitat: "N",
-                      lean: ["Ising2DLambda.PartitionPolynomial.multiplicity"],
-                      statement: [
-                        paragraph([
-                          "整数 ",
-                          math(String.raw`m\in\{0,1,\dots,2L^2\}`),
-                          " に対し、多重度 ",
-                          math(String.raw`\Omega_L(m)`),
-                          " を",
-                        ]),
-                        displayMath(
-                          String.raw`\Omega_L(m):=\bigl|\bigl\{\,\sigma\in\Sigma_L \;\bigm|\; b(\sigma)=m\,\bigr\}\bigr|`,
-                        ),
-                        paragraph([
-                          "で定める（",
-                          math(String.raw`b(\sigma)`),
-                          " は ",
-                          ref("def_broken_bond_count"),
-                          "）。有限集合 ",
-                          math(String.raw`\Sigma_L`),
-                          " の部分集合の元の個数なので ",
-                          math(String.raw`\Omega_L(m)\in\mathbb{N}`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "多重度は数え上げだけで定義されており、温度・エネルギーといった量を含まない。",
-                          "これがこの章の主張のすべてを可算側に留める理由である。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "partition_polynomial_definition_partition_polynomial",
-                  kind: "definition",
-                  title: { text: "分配多項式" },
-                  labels: ["def_partition_polynomial"],
-                  habitat: "Z",
-                  lean: ["Ising2DLambda.PartitionPolynomial.partitionPolynomial"],
-                  statement: [
-                    paragraph([
-                      math(String.raw`x`),
-                      " を不定元とし、多項式環 ",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の中で分配多項式を",
-                    ]),
-                    displayMath(String.raw`Z_L:=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}\ \in\ \mathbb{Z}[x]`),
-                    paragraph([
-                      "で定める（",
-                      math(String.raw`b(\sigma)`),
-                      " は ",
-                      ref("def_broken_bond_count"),
-                      "）。有限個の項の和なので右辺は ",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の元として確定する。",
-                    ]),
-                    paragraph([
-                      "和の各項の指数は ",
-                      math(String.raw`b(\sigma)\in\mathbb{N}`),
-                      "、係数はいずれも ",
-                      math(String.raw`1\in\mathbb{Z}`),
-                      " である。この定義は多重度を用いていない。",
-                      "多重度を用いた形（各 ",
-                      math(String.raw`x^{\,m}`),
-                      " の係数が ",
-                      math(String.raw`\Omega_L(m)`),
-                      " であること）は定義ではなく、下で証明する。",
-                    ]),
-                    paragraph([
-                      "記法について 2 点を約束する。第一に、",
-                      math(String.raw`Z_L`),
-                      " は多項式そのものを表し、",
-                      math(String.raw`x`),
-                      " は不定元であって数ではない。第二に、可換環 ",
-                      math(String.raw`R`),
-                      " と元 ",
-                      math(String.raw`r\in R`),
-                      " に対する代入（評価）の結果を ",
-                      math(String.raw`Z_L(r)\in R`),
-                      " と書く。すなわち丸括弧が付いたものだけが代入の結果であり、",
-                      math(String.raw`Z_L`),
-                      " と ",
-                      math(String.raw`Z_L(r)`),
-                      " は別の対象である。",
-                    ]),
-                    paragraph([
-                      "この定義では代入を行わない。物理の分配関数を得るには ",
-                      math(String.raw`x`),
-                      " へ ",
-                      math(String.raw`e^{-2\beta J}`),
-                      " を代入するが、その代入は実数体への脱出であり、脱出を宣言したブロックでのみ行う（README「形式変数のまま進む」）。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_partition_polynomial_claim_coefficient_representation",
-              beforeFocus: [
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "partition_polynomial_claim_configuration_partition",
-                      kind: "claim",
-                      title: { text: "配位全体は破れボンド数の値ごとに類別される" },
-                      labels: ["claim_configuration_partition"],
-                      habitat: "N",
-                      lean: [
-                        "Ising2DLambda.PartitionPolynomial.biUnion_brokenFiber",
-                        "Ising2DLambda.PartitionPolynomial.brokenFiber_pairwise_disjoint",
-                        "Ising2DLambda.NecSuf.PartitionPolynomial.biUnion_fiber",
-                        "Ising2DLambda.NecSuf.PartitionPolynomial.fiber_pairwise_disjoint",
-                      ],
-                      statement: [
-                        paragraph([
-                          "各 ",
-                          math(String.raw`L\ge1`),
-                          " と各 ",
-                          math(String.raw`m\in\{0,1,\dots,2L^2\}`),
-                          " に対し、破れボンド数が ",
-                          math(String.raw`m`),
-                          " である配位の集合を",
-                        ]),
-                        displayMath(
-                          String.raw`A_{L,m}:=\bigl\{\,\sigma\in\Sigma_L \;\bigm|\; b(\sigma)=m\,\bigr\}`,
-                        ),
-                        paragraph([
-                          "と書く（",
-                          math(String.raw`\Sigma_L`),
-                          " は ",
-                          ref("def_configuration"),
-                          "、",
-                          math(String.raw`b(\sigma)`),
-                          " は ",
-                          ref("def_broken_bond_count"),
-                          "）。右辺は ",
-                          math(String.raw`L`),
-                          " にも依存するので、添字には ",
-                          math(String.raw`m`),
-                          " だけでなく ",
-                          math(String.raw`L`),
-                          " も書く。このとき次の 2 つが成り立つ。",
-                        ]),
-                        list([
-                          [
-                            "（被覆）",
-                            math(String.raw`\Sigma_L=\bigcup_{m=0}^{2L^2}A_{L,m}`),
-                            " である。",
-                          ],
-                          [
-                            "（互いに素）",
-                            math(String.raw`m,m'\in\{0,1,\dots,2L^2\}`),
-                            " が ",
-                            math(String.raw`m\ne m'`),
-                            " を満たすならば ",
-                            math(String.raw`A_{L,m}\cap A_{L,m'}=\varnothing`),
-                            " である。",
-                          ],
-                        ]),
-                        paragraph([
-                          "すなわち ",
-                          math(String.raw`\{A_{L,m}\}_{m=0}^{2L^2}`),
-                          " は ",
-                          math(String.raw`\Sigma_L`),
-                          " の互いに素な有限個の部分集合への分割である。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "示すことは 2 つある。合併が ",
-                          math(String.raw`\Sigma_L`),
-                          " に等しいことと、互いに素であることである。",
-                        ]),
-                        paragraph([
-                          "合併が等しいこと。",
-                          math(String.raw`A_{L,m}`),
-                          " の定義より ",
-                          math(String.raw`A_{L,m}\subset\Sigma_L`),
-                          " なので、合併も ",
-                          math(String.raw`\Sigma_L`),
-                          " に含まれる。逆を示す。任意の ",
-                          math(String.raw`\sigma\in\Sigma_L`),
-                          " に対し、",
-                          ref("def_broken_bond_count"),
-                          " より ",
-                          math(String.raw`b(\sigma)\in\mathbb{N}`),
-                          " かつ ",
-                          math(String.raw`b(\sigma)\le 2L^2`),
-                          " である。そこで ",
-                          math(String.raw`m:=b(\sigma)`),
-                          " と置くと ",
-                          math(String.raw`m\in\{0,1,\dots,2L^2\}`),
-                          " であり、",
-                          math(String.raw`b(\sigma)=m`),
-                          " なので ",
-                          math(String.raw`\sigma\in A_{L,m}`),
-                          " である。よって ",
-                          math(String.raw`\sigma`),
-                          " は合併に属する。",
-                        ]),
-                        paragraph([
-                          "互いに素であること。",
-                          math(String.raw`m\ne m'`),
-                          " とし、",
-                          math(String.raw`\sigma\in A_{L,m}\cap A_{L,m'}`),
-                          " が存在したとする。この ",
-                          math(String.raw`\sigma`),
-                          " について",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-m
-&=b(\sigma)
-&&(\because\ \sigma\in A_{L,m}\ \text{と}\ A_{L,m}\ \text{の定義})\\
-&=m'
-&&(\because\ b\ \text{は写像なので}\ \sigma\ \text{に対する値は 1 つであり、}
-\sigma\in A_{L,m'}\ \text{と}\ A_{L,m'}\ \text{の定義})
-\end{aligned}`),
-                        paragraph([
-                          "となり、",
-                          math(String.raw`m\ne m'`),
-                          " に反する。したがってそのような ",
-                          math(String.raw`\sigma`),
-                          " は存在せず、",
-                          math(String.raw`A_{L,m}\cap A_{L,m'}=\varnothing`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "以上の 2 つは有限集合の包含関係と写像の一意性だけからなり、実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "partition_polynomial_claim_coefficient_representation",
-                  kind: "claim",
-                  standing: "mainTheorem",
-                  title: { text: "分配多項式の係数は多重度である" },
-                  labels: ["claim_coefficient_representation"],
-                  habitat: "Z",
-                  lean: [
-                    "Ising2DLambda.PartitionPolynomial.partitionPolynomial_eq_sum_multiplicity",
-                    "Ising2DLambda.PartitionPolynomial.partitionPolynomial_eq_sum_multiplicity_from_necSuf",
-                    "Ising2DLambda.NecSuf.PartitionPolynomial.sum_comp_eq_sum_nsmul",
-                  ],
-                  verification: ["sagemath/check/partition-polynomial-coefficient-representation"],
-                  statement: [
-                    paragraph([
-                      "各 ",
-                      math(String.raw`L\ge1`),
-                      " について、多項式環 ",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の中で",
-                    ]),
-                    displayMath(String.raw`Z_L=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{\,m}`),
-                    paragraph([
-                      "が成り立つ（",
-                      math(String.raw`Z_L`),
-                      " は ",
-                      ref("def_partition_polynomial"),
-                      "、",
-                      math(String.raw`\Omega_L(m)`),
-                      " は ",
-                      ref("def_multiplicity"),
-                      "）。すなわち ",
-                      math(String.raw`\Omega_L(m)\in\mathbb{N}\subset\mathbb{Z}`),
-                      " は ",
-                      math(String.raw`Z_L`),
-                      " の ",
-                      math(String.raw`x^{\,m}`),
-                      " の係数である。",
-                    ]),
-                  ],
-                  proof: [
-                    displayMath(String.raw`\begin{aligned}
-Z_L
-&=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}
-&&(\because\ \blkref{def_partition_polynomial})\\
-&=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,b(\sigma)}
-&&(\because\ \blkref{claim_configuration_partition})\\
-&=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,m}
-&&(\because\ \sigma\in A_{L,m}\ \Rightarrow\ b(\sigma)=m)\\
-&=\sum_{m=0}^{2L^2}|A_{L,m}|\cdot x^{\,m}
-&&(\because\ \text{同じ元を }|A_{L,m}|\text{ 個足した})\\
-&=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{\,m}
-&&(\because\ \blkref{def_multiplicity})
-\end{aligned}`),
-                    paragraph([
-                      "以上は有限和の組み替えと数え上げだけからなり、",
-                      math(String.raw`x`),
-                      " への代入を行っていない。実数体も複素数体も現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "supporting",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_partition_polynomial_claim_coefficient_sum",
-              focus:
-                {
-                  id: "partition_polynomial_claim_coefficient_sum",
-                  kind: "claim",
-                  title: { text: "多重度の総和は配位の総数に等しい" },
-                  labels: ["claim_coefficient_sum"],
-                  habitat: "N",
-                  lean: [
-                    "Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow",
-                    "Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow_from_necSuf",
-                    "Ising2DLambda.NecSuf.PartitionPolynomial.sum_card_fiber_eq_card",
-                  ],
-                  verification: ["sagemath/check/partition-polynomial-coefficient-sum"],
-                  statement: [
-                    paragraph([
-                      "各 ",
-                      math(String.raw`L\ge1`),
-                      " について",
-                    ]),
-                    displayMath(String.raw`\sum_{m=0}^{2L^2}\Omega_L(m)=2^{L^2}`),
-                    paragraph([
-                      "が成り立つ（",
-                      math(String.raw`\Omega_L(m)`),
-                      " は ",
-                      ref("def_multiplicity"),
-                      "）。両辺は ",
-                      math(String.raw`\mathbb{N}`),
-                      " の元である。",
-                    ]),
-                  ],
-                  proof: [
-                    displayMath(String.raw`\begin{aligned}
-\sum_{m=0}^{2L^2}\Omega_L(m)
-&=\sum_{m=0}^{2L^2}|A_{L,m}|
-&&(\because\ \blkref{def_multiplicity})\\
-&=|\Sigma_L|
-&&(\because\ \blkref{claim_configuration_partition})\\
-&=2^{L^2}
-&&(\because\ \blkref{def_configuration})
-\end{aligned}`),
-                    paragraph([
-                      "以上は有限集合の元の個数の計算だけからなり、実数体も複素数体も現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-        ],
-      },
-    },
-  ],
-});
-
-const chapter_free_entropy = defineSection({
-  kind: "section",
-  id: "free_entropy_heading",
-  labels: [],
-  title: { text: "対数順序群と有限系の自由エントロピー" },
-  children: [
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "free_entropy_heading_log_order_group",
+        id: "tools_heading_log_order_group",
         labels: [],
         title: { text: "対数順序群と正の有理数の対数" },
         children: [
@@ -1309,176 +503,9 @@ v_p(a)+v_p(b')
       role: "subsection",
       element: {
         kind: "section",
-        id: "free_entropy_heading_finite_free_entropy",
+        id: "tools_heading_log_properties",
         labels: [],
-        title: { text: "有限系の自由エントロピー" },
-        children: [
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_free_entropy_definition_finite_free_entropy",
-              beforeFocus: [
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "free_entropy_claim_value_at_rational_is_positive",
-                      kind: "claim",
-                      title: { text: "分配多項式の正の有理点での値は正の有理数である" },
-                      labels: ["claim_value_at_rational_is_positive"],
-                      habitat: "Q",
-                      lean: [
-                        "Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos",
-                        "Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos_from_necSuf",
-                        "Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos",
-                      ],
-                      verification: ["sagemath/check/free-entropy-definition"],
-                      statement: [
-                        paragraph([
-                          "各 ",
-                          math(String.raw`L\ge1`),
-                          " と各 ",
-                          math(String.raw`q\in\mathbb{Q}_{>0}`),
-                          " について、",
-                          ref("def_partition_polynomial"),
-                          " の分配多項式へ ",
-                          math(String.raw`q`),
-                          " を代入した値は",
-                        ]),
-                        displayMath(String.raw`Z_L(q)\in\mathbb{Q}_{>0}`),
-                        paragraph([
-                          "を満たす。ここで代入は ",
-                          ref("def_partition_polynomial"),
-                          " の約束どおり、可換環 ",
-                          math(String.raw`\mathbb{Q}`),
-                          " とその元 ",
-                          math(String.raw`q`),
-                          " についての評価である。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "準備として、各 ",
-                          math(String.raw`\sigma\in\Sigma_L`),
-                          " について ",
-                          math(String.raw`q^{\,b(\sigma)}>0`),
-                          " である。実際 ",
-                          math(String.raw`b(\sigma)\in\mathbb{N}`),
-                          " であり（",
-                          ref("def_broken_bond_count"),
-                          "）、正の有理数を ",
-                          math(String.raw`b(\sigma)`),
-                          " 個掛けたものは正である（",
-                          math(String.raw`b(\sigma)=0`),
-                          " のときは空積で ",
-                          math(String.raw`q^{0}=1>0`),
-                          "）。また ",
-                          math(String.raw`|\Sigma_L|=2^{L^2}\ge1`),
-                          " なので（",
-                          ref("def_configuration"),
-                          "）、下の和は少なくとも 1 個の項を持つ。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-Z_L(q)
-&=\Bigl(\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}\Bigr)(q)
-&&(\because\ \blkref{def_partition_polynomial})\\
-&=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
-&&(\because\ \text{代入は環準同型なので和と積を保つ})\\
-&\in\mathbb{Q}_{>0}
-&&(\because\ \text{正の有理数を 1 個以上足したものは正})
-\end{aligned}`),
-                        paragraph([
-                          "以上は有理数の四則と有限和だけからなり、実数体も複素数体も現れない。",
-                          "代入したのは有理数であって、指数関数の値ではない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "free_entropy_definition_finite_free_entropy",
-                  kind: "definition",
-                  title: { text: "有限系の自由エントロピー" },
-                  labels: ["def_finite_free_entropy"],
-                  habitat: "Lambda",
-                  lean: ["Ising2DLambda.FreeEntropy.freeEntropy"],
-                  statement: [
-                    paragraph([
-                      "各 ",
-                      math(String.raw`L\ge1`),
-                      " と各 ",
-                      math(String.raw`q\in\mathbb{Q}_{>0}`),
-                      " に対し、有限系の自由エントロピーを",
-                    ]),
-                    displayMath(String.raw`\Phi_L(q):=\log Z_L(q)\ \in\ \Lambda`),
-                    paragraph([
-                      "で定める（",
-                      math(String.raw`\log`),
-                      " は ",
-                      ref("def_rational_log"),
-                      "、",
-                      math(String.raw`Z_L(q)`),
-                      " は ",
-                      ref("def_partition_polynomial"),
-                      " への代入）。",
-                      ref("claim_value_at_rational_is_positive"),
-                      " により ",
-                      math(String.raw`Z_L(q)`),
-                      " は正の有理数なので ",
-                      math(String.raw`\log`),
-                      " の定義域に入っており、右辺は ",
-                      math(String.raw`\Lambda`),
-                      " の元として確定する。",
-                    ]),
-                    paragraph([
-                      math(String.raw`\Phi_L`),
-                      " は ",
-                      math(String.raw`\mathbb{Q}_{>0}`),
-                      " から ",
-                      math(String.raw`\Lambda`),
-                      " への写像であり、",
-                      math(String.raw`\Phi_L(q)`),
-                      " はその値である。",
-                      math(String.raw`\Phi_L`),
-                      " と ",
-                      math(String.raw`\Phi_L(q)`),
-                      " を同じ記号で書くことはしない。",
-                    ]),
-                    paragraph([
-                      "具体例を 1 つ挙げる。",
-                      math(String.raw`L=2`),
-                      "、",
-                      math(String.raw`q=1/2`),
-                      " のとき ",
-                      math(String.raw`Z_2=2+12x^4+2x^8`),
-                      " なので",
-                    ]),
-                    displayMath(
-                      String.raw`Z_2(1/2)=2+\frac{12}{2^4}+\frac{2}{2^8}=\frac{353}{2^7},\qquad
-\Phi_2(1/2)=\ell_{353}-7\,\ell_2\ \in\ \Lambda`,
-                    ),
-                    paragraph([
-                      "である（",
-                      math(String.raw`353`),
-                      " は素数）。自由エントロピーは分配多項式の値の素因数分解の指数ベクトルそのものであり、",
-                      "実数を経由しない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "free_entropy_heading_log_properties",
-        labels: [],
-        title: { text: "対数の性質と、すべての配位を等しく数える点" },
+        title: { text: "対数の性質と順序" },
         children: [
           {
             role: "primary",
@@ -2527,6 +1554,4833 @@ N\lambda\le_{\Lambda}N\mu
                 },
             },
           },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_matrices_over_finite_index",
+        labels: [],
+        title: { text: "有限集合を添字とする行列" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_transfer_matrix_definition_matrix_over_row_configs",
+              focus:
+                {
+                  id: "transfer_matrix_definition_matrix_over_row_configs",
+                  kind: "definition",
+                  title: { text: "有限集合を添字とする行列と、その積・冪・トレース" },
+                  labels: ["def_matrix_over_row_configs", "def_matrix_product", "def_matrix_trace"],
+                  habitat: "Z",
+                  lean: [
+                    "Ising2DLambda.TransferMatrix.RowMatrix",
+                    "Ising2DLambda.TransferMatrix.rowMatrixProduct",
+                    "Ising2DLambda.TransferMatrix.rowMatrixPow",
+                    "Ising2DLambda.TransferMatrix.rowMatrixTrace",
+                  ],
+                  statement: [
+                    paragraph([
+                      "空でない有限集合 ",
+                      math(String.raw`\mathcal{J}`),
+                      " を 1 つ固定する。行と列をその元で添字づけた行列を扱う",
+                      "（この論文で使うときは、行配位の全体を取る）。写像 ",
+                      math(String.raw`A:\mathcal{J}\times \mathcal{J}\to\mathbb{Z}[x]`),
+                      " のことを行列と呼び、その全体の集合を ",
+                      math(String.raw`\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x]\bigr)`),
+                      " と書く。値 ",
+                      math(String.raw`A(u,u')`),
+                      " を成分と呼び ",
+                      math(String.raw`A_{u,u'}`),
+                      " と書く。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\mathcal{J}`),
+                      " の元に ",
+                      math(String.raw`1`),
+                      " から ",
+                      math(String.raw`|\mathcal{J}|`),
+                      " までの番号を付ければ、この集合は通常の ",
+                      math(String.raw`|\mathcal{J}|`),
+                      " 次正方行列の集合と同じものになる。以下では番号を付けず、添字を ",
+                      math(String.raw`\mathcal{J}`),
+                      " の元のまま扱う（番号の付け方に依存しない形で書くため）。",
+                    ]),
+                    paragraph([
+                      "積・冪・トレースを次で定める。",
+                      math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
+                      " に対し積 ",
+                      math(String.raw`AB`),
+                      " を",
+                    ]),
+                    displayMath(
+                      String.raw`(AB)_{u,u''}:=\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\qquad(u,u''\in \mathcal{J})`,
+                    ),
+                    paragraph([
+                      "で定める（有限個の項の和なので右辺は ",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の元として確定する）。整数 ",
+                      math(String.raw`k\ge1`),
+                      " に対し冪 ",
+                      math(String.raw`A^{k}`),
+                      " を、",
+                      math(String.raw`A^{1}:=A`),
+                      " と ",
+                      math(String.raw`A^{k+1}:=A^{k}A`),
+                      " により帰納的に定める。トレース ",
+                      math(String.raw`\operatorname{Tr}A\in\mathbb{Z}[x]`),
+                      " を",
+                    ]),
+                    displayMath(String.raw`\operatorname{Tr}A:=\sum_{u\in \mathcal{J}}A_{u,u}`),
+                    paragraph([
+                      "で定める。以上の演算はすべて ",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の有限個の元の和と積だけを使っており、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_permutation_sign",
+        labels: [],
+        title: { text: "置換・転倒数・符号" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_permutation_sign",
+              focus:
+                {
+                  id: "algebraic_eigenvalue_definition_permutation_sign",
+                  kind: "definition",
+                  title: { text: "線型順序を持つ有限集合の上の置換、転倒数、そして符号" },
+                  labels: ["def_row_permutation", "def_inversion_count", "def_permutation_sign"],
+                  habitat: "Z",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.orderedPairs",
+                    "Ising2DLambda.AlgebraicEigenvalue.inversionCount",
+                    "Ising2DLambda.AlgebraicEigenvalue.permSign",
+                  ],
+                  verification: ["sagemath/check/permutation-sign"],
+                  statement: [
+                    paragraph([
+                      "行列式を置換にわたる和として定めるために、固定した有限集合 ",
+                      math(String.raw`\mathcal{J}`),
+                      "（",
+                      ref("def_matrix_over_row_configs"),
+                      "）の上の置換と、その符号を定める。",
+                      "ここでは ",
+                      math(String.raw`\mathcal{J}`),
+                      " に線型順序 ",
+                      math(String.raw`\prec`),
+                      " が 1 つ与えられているとする。符号はその順序 ",
+                      math(String.raw`\prec`),
+                      " に対する転倒数で定める。",
+                    ]),
+                    paragraph([
+                      "第一に、",
+                      math(String.raw`\mathcal{J}`),
+                      " の置換とは全単射 ",
+                      math(String.raw`\varphi:\mathcal{J}\to \mathcal{J}`),
+                      " のことであり、その全体を ",
+                      math(String.raw`\mathfrak{S}_L`),
+                      " と書く。",
+                      math(String.raw`\mathcal{J}`),
+                      " は有限集合なので ",
+                      math(String.raw`\mathfrak{S}_L`),
+                      " も有限集合である。",
+                      "2 つの置換 ",
+                      math(String.raw`\varphi,\psi\in\mathfrak{S}_L`),
+                      " の合成 ",
+                      math(String.raw`\varphi\circ\psi`),
+                      "（",
+                      math(String.raw`(\varphi\circ\psi)(u)=\varphi(\psi(u))`),
+                      "）は再び置換であり、恒等写像 ",
+                      math(String.raw`\mathrm{id}_{\mathcal{J}}`),
+                      " も置換である。全単射 ",
+                      math(String.raw`\varphi`),
+                      " には逆写像 ",
+                      math(String.raw`\varphi^{-1}\in\mathfrak{S}_L`),
+                      " がある。",
+                    ]),
+                    paragraph([
+                      "第二に、",
+                      math(String.raw`\prec`),
+                      " について順序づけられた対の集合を",
+                    ]),
+                    displayMath(
+                      String.raw`P_L:=\bigl\{\,(u,u')\in \mathcal{J}\times \mathcal{J} \;\bigm|\; u\prec u'\,\bigr\}`,
+                    ),
+                    paragraph([
+                      "と置き（",
+                      math(String.raw`\mathcal{J}\times \mathcal{J}`),
+                      " が有限集合なので ",
+                      math(String.raw`P_L`),
+                      " も有限集合）、置換 ",
+                      math(String.raw`\varphi\in\mathfrak{S}_L`),
+                      " の転倒数を",
+                    ]),
+                    displayMath(
+                      String.raw`\mathrm{inv}(\varphi):=\bigl|\,\bigl\{\,(u,u')\in P_L \;\bigm|\; \varphi(u')\prec\varphi(u)\,\bigr\}\,\bigr|\in\mathbb{N}`,
+                    ),
+                    paragraph([
+                      "で定める。すなわち ",
+                      math(String.raw`\mathrm{inv}(\varphi)`),
+                      " は、",
+                      math(String.raw`\varphi`),
+                      " によって順序が入れ替わる対の個数である。",
+                      "これは有限集合の元の個数なので自然数である。",
+                    ]),
+                    paragraph([
+                      "第三に、置換 ",
+                      math(String.raw`\varphi\in\mathfrak{S}_L`),
+                      " の符号を",
+                    ]),
+                    displayMath(String.raw`\mathrm{sgn}(\varphi):=(-1)^{\mathrm{inv}(\varphi)}\in\mathbb{Z}`),
+                    paragraph([
+                      "で定める。右辺は整数 ",
+                      math(String.raw`-1`),
+                      " の自然数冪であり、",
+                      math(String.raw`\mathbb{Z}`),
+                      " の中の計算である。",
+                      "ここに現れるのは有限集合とその上の写像、数え上げ、および整数の積だけであり、実数体は現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_claim_permutation_sign_mul",
+              focus:
+                {
+                  id: "algebraic_eigenvalue_claim_permutation_sign_mul",
+                  kind: "claim",
+                  title: { text: "符号は合成について乗法的である" },
+                  labels: ["claim_permutation_sign_mul"],
+                  habitat: "Z",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.permSign_comp",
+                    "Ising2DLambda.AlgebraicEigenvalue.permSign_comp_from_necSuf",
+                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_comp",
+                  ],
+                  verification: ["sagemath/check/permutation-sign"],
+                  statement: [
+                    paragraph([
+                      "任意の ",
+                      math(String.raw`\varphi,\psi\in\mathfrak{S}_L`),
+                      " について",
+                    ]),
+                    displayMath(
+                      String.raw`\mathrm{sgn}(\varphi\circ\psi)=\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)`,
+                    ),
+                    paragraph([
+                      "が成り立つ（",
+                      ref("def_permutation_sign"),
+                      "）。両辺は ",
+                      math(String.raw`\mathbb{Z}`),
+                      " の元であり、実数体は現れない。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として ",
+                      math(String.raw`\psi`),
+                      " が定める写像 ",
+                      math(String.raw`\Psi:P_L\to P_L`),
+                      " を",
+                    ]),
+                    displayMath(String.raw`\Psi(u,u'):=
+\begin{cases}
+\bigl(\psi(u),\psi(u')\bigr) & \bigl(\psi(u)\prec\psi(u')\ \text{のとき}\bigr)\\
+\bigl(\psi(u'),\psi(u)\bigr) & \bigl(\psi(u')\prec\psi(u)\ \text{のとき}\bigr)
+\end{cases}`),
+                    paragraph([
+                      "で定める。これが定まることを見る。",
+                      math(String.raw`(u,u')\in P_L`),
+                      " なら ",
+                      math(String.raw`u\prec u'`),
+                      " なので三分律から ",
+                      math(String.raw`u\ne u'`),
+                      " であり、",
+                      math(String.raw`\psi`),
+                      " が単射なので ",
+                      math(String.raw`\psi(u)\ne\psi(u')`),
+                      " である。ふたたび三分律から ",
+                      math(String.raw`\psi(u)\prec\psi(u')`),
+                      " と ",
+                      math(String.raw`\psi(u')\prec\psi(u)`),
+                      " のちょうど一方が成り立つ。どちらの場合も右辺は ",
+                      math(String.raw`P_L`),
+                      " の元である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\Psi`),
+                      " は全単射である。実際 ",
+                      math(String.raw`\psi^{-1}`),
+                      " から同じ作り方で得られる写像 ",
+                      math(String.raw`\Psi':P_L\to P_L`),
+                      " が逆写像になる。",
+                      math(String.raw`(u,u')\in P_L`),
+                      " について、",
+                      math(String.raw`\psi(u)\prec\psi(u')`),
+                      " の場合は ",
+                      math(String.raw`\Psi(u,u')=(\psi(u),\psi(u'))`),
+                      " であり、その 2 成分を ",
+                      math(String.raw`\psi^{-1}`),
+                      " で戻すと ",
+                      math(String.raw`u,u'`),
+                      " で、",
+                      math(String.raw`u\prec u'`),
+                      " なので ",
+                      math(String.raw`\Psi'(\Psi(u,u'))=(u,u')`),
+                      " である。",
+                      math(String.raw`\psi(u')\prec\psi(u)`),
+                      " の場合は ",
+                      math(String.raw`\Psi(u,u')=(\psi(u'),\psi(u))`),
+                      " であり、その 2 成分を ",
+                      math(String.raw`\psi^{-1}`),
+                      " で戻すと ",
+                      math(String.raw`u',u`),
+                      " で、やはり ",
+                      math(String.raw`u\prec u'`),
+                      " なので ",
+                      math(String.raw`\Psi'(\Psi(u,u'))=(u,u')`),
+                      " である。",
+                      math(String.raw`\psi`),
+                      " と ",
+                      math(String.raw`\psi^{-1}`),
+                      " を入れ替えれば同じ議論で ",
+                      math(String.raw`\Psi(\Psi'(u,u'))=(u,u')`),
+                      " が出る。",
+                    ]),
+                    paragraph([
+                      "次に、",
+                      math(String.raw`P_L`),
+                      " の 3 つの部分集合",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+A&:=\bigl\{\,(u,u')\in P_L \bigm| (\varphi\circ\psi)(u')\prec(\varphi\circ\psi)(u)\,\bigr\},\\
+B&:=\bigl\{\,(u,u')\in P_L \bigm| \psi(u')\prec\psi(u)\,\bigr\},\\
+C&:=\bigl\{\,(u,u')\in P_L \bigm| \varphi\bigl(\Psi(u,u')_2\bigr)\prec\varphi\bigl(\Psi(u,u')_1\bigr)\,\bigr\}
+\end{aligned}`),
+                    paragraph([
+                      "を置く（",
+                      math(String.raw`(\upsilon,\upsilon')_1:=\upsilon`),
+                      "、",
+                      math(String.raw`(\upsilon,\upsilon')_2:=\upsilon'`),
+                      " は対の成分を取り出す記号である）。転倒数の定義から ",
+                      math(String.raw`|A|=\mathrm{inv}(\varphi\circ\psi)`),
+                      " と ",
+                      math(String.raw`|B|=\mathrm{inv}(\psi)`),
+                      " である。また ",
+                      math(String.raw`C`),
+                      " は ",
+                      math(String.raw`\Psi`),
+                      " による ",
+                      math(String.raw`\{(\upsilon,\upsilon')\in P_L\mid\varphi(\upsilon')\prec\varphi(\upsilon)\}`),
+                      " の逆像であり、",
+                      math(String.raw`\Psi`),
+                      " が全単射なので ",
+                      math(String.raw`|C|=\mathrm{inv}(\varphi)`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      "各 ",
+                      math(String.raw`(u,u')\in P_L`),
+                      " について、",
+                      math(String.raw`A,B,C`),
+                      " のうちその対が属するものの個数は偶数である。場合を分けて確かめる。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\psi(u)\prec\psi(u')`),
+                      " の場合。三分律から ",
+                      math(String.raw`\psi(u')\prec\psi(u)`),
+                      " は成り立たないので、その対は ",
+                      math(String.raw`B`),
+                      " に属さない。このとき ",
+                      math(String.raw`\Psi(u,u')=(\psi(u),\psi(u'))`),
+                      " なので ",
+                      math(String.raw`C`),
+                      " の条件は ",
+                      math(String.raw`\varphi(\psi(u'))\prec\varphi(\psi(u))`),
+                      " であり、これは ",
+                      math(String.raw`A`),
+                      " の条件と同じである。よって属するものの個数は ",
+                      math(String.raw`0`),
+                      " 個か ",
+                      math(String.raw`2`),
+                      " 個であり、いずれも偶数である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\psi(u')\prec\psi(u)`),
+                      " の場合。その対は ",
+                      math(String.raw`B`),
+                      " に属する。このとき ",
+                      math(String.raw`\Psi(u,u')=(\psi(u'),\psi(u))`),
+                      " なので ",
+                      math(String.raw`C`),
+                      " の条件は ",
+                      math(String.raw`\varphi(\psi(u))\prec\varphi(\psi(u'))`),
+                      " である。",
+                      math(String.raw`u\ne u'`),
+                      " と ",
+                      math(String.raw`\varphi\circ\psi`),
+                      " が単射であることから ",
+                      math(String.raw`\varphi(\psi(u))\ne\varphi(\psi(u'))`),
+                      " なので、三分律により ",
+                      math(String.raw`A`),
+                      " の条件と ",
+                      math(String.raw`C`),
+                      " の条件のちょうど一方が成り立つ。よって属するものの個数は ",
+                      math(String.raw`B`),
+                      " のぶんと合わせてちょうど ",
+                      math(String.raw`2`),
+                      " 個であり、偶数である。",
+                    ]),
+                    paragraph([
+                      "準備として、",
+                      math(String.raw`P_L`),
+                      " の部分集合 ",
+                      math(String.raw`X`),
+                      " に対して写像 ",
+                      math(String.raw`f_X:P_L\to\mathbb{Z}`),
+                      " を",
+                    ]),
+                    displayMath(String.raw`f_X(u,u'):=
+\begin{cases}
+-1 & \bigl((u,u')\in X\ \text{のとき}\bigr)\\
++1 & \bigl((u,u')\notin X\ \text{のとき}\bigr)
+\end{cases}`),
+                    paragraph([
+                      "で定める。いま見たことは、各 ",
+                      math(String.raw`(u,u')\in P_L`),
+                      " について ",
+                      math(String.raw`f_A(u,u')\cdot f_C(u,u')\cdot f_B(u,u')=1`),
+                      " が成り立つことを言っている（",
+                      math(String.raw`-1`),
+                      " が偶数個掛かるからである）。したがって",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
+&=(-1)^{\mathrm{inv}(\varphi\circ\psi)}\cdot(-1)^{\mathrm{inv}(\varphi)}\cdot(-1)^{\mathrm{inv}(\psi)}
+&&(\because\ \text{符号の定義})\\
+&=(-1)^{|A|}\cdot(-1)^{|C|}\cdot(-1)^{|B|}
+&&(\because\ |A|=\mathrm{inv}(\varphi\circ\psi),\ |C|=\mathrm{inv}(\varphi),\ |B|=\mathrm{inv}(\psi))\\
+&=\prod_{(u,u')\in P_L}f_A(u,u')\cdot\prod_{(u,u')\in P_L}f_C(u,u')\cdot\prod_{(u,u')\in P_L}f_B(u,u')
+&&(\because\ \text{属するときだけ}\ -1\ \text{を掛けた有限積は}\ (-1)\ \text{の個数乗})\\
+&=\prod_{(u,u')\in P_L}\bigl(f_A(u,u')\cdot f_C(u,u')\cdot f_B(u,u')\bigr)
+&&(\because\ \text{有限積の各因子ごとのまとめ})\\
+&=\prod_{(u,u')\in P_L}1
+&&(\because\ \text{属するものの個数が偶数})\\
+&=1
+&&(\because\ 1\ \text{の有限積は}\ 1)
+\end{aligned}`),
+                    paragraph([
+                      "である。これを使って",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(\varphi\circ\psi)
+&=\mathrm{sgn}(\varphi\circ\psi)\cdot1\cdot1\\
+&=\mathrm{sgn}(\varphi\circ\psi)\cdot\bigl(\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\varphi)\bigr)\cdot\bigl(\mathrm{sgn}(\psi)\cdot\mathrm{sgn}(\psi)\bigr)
+&&(\because\ \text{符号の 2 乗は}\ 1)\\
+&=\bigl(\mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)\bigr)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)\\
+&=1\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
+&&(\because\ \text{直前の等式})\\
+&=\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
+\end{aligned}`),
+                    paragraph(["を得る。"]),
+                    paragraph([
+                      "以上で使ったのは、",
+                      math(String.raw`\prec`),
+                      " の三分律、置換が単射であること、有限集合の数え上げ、そして整数の積だけである。",
+                      "線型順序の推移律は一度も使っていない。実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_determinant",
+        labels: [],
+        title: { text: "行列式と特性多項式" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_determinant",
+              focus:
+                {
+                  id: "algebraic_eigenvalue_definition_determinant",
+                  kind: "definition",
+                  title: { text: "定数多項式を与える写像、単位行列、そして行列式" },
+                  labels: ["def_constant_polynomial", "def_identity_matrix", "def_determinant"],
+                  habitat: "Z",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.constPoly",
+                    "Ising2DLambda.AlgebraicEigenvalue.identityRowMatrix",
+                    "Ising2DLambda.AlgebraicEigenvalue.determinant",
+                  ],
+                  verification: ["sagemath/check/determinant"],
+                  statement: [
+                    paragraph([
+                      ref("def_matrix_over_row_configs"),
+                      " の行列 ",
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
+                      " の行列式を、",
+                      ref("def_permutation_sign"),
+                      " の符号を係数とする置換にわたる和として定める。",
+                      "その前に、整数を成分として書くための写像と単位行列を用意する。",
+                    ]),
+                    paragraph([
+                      "第一に、整数 ",
+                      math(String.raw`n\in\mathbb{Z}`),
+                      " に対して定数多項式を与える写像 ",
+                      math(String.raw`\kappa:\mathbb{Z}\to\mathbb{Z}[x]`),
+                      " を、",
+                      math(String.raw`\kappa(n)`),
+                      " は ",
+                      math(String.raw`x^{0}`),
+                      " の係数が ",
+                      math(String.raw`n`),
+                      " で他の係数がすべて ",
+                      math(String.raw`0`),
+                      " である多項式、として定める。",
+                      math(String.raw`\kappa`),
+                      " は和と積を保ち、",
+                      math(String.raw`\kappa(0)`),
+                      " は ",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の零元、",
+                      math(String.raw`\kappa(1)`),
+                      " は単位元である。",
+                      "整数を ",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の元として扱う経路はこの写像だけとし、整数と定数多項式を同じ記号で書くことはしない",
+                      "（どちらの集合の中で計算しているかを式に残すため）。",
+                    ]),
+                    paragraph([
+                      "第二に、単位行列 ",
+                      math(String.raw`I\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
+                      " を",
+                    ]),
+                    displayMath(String.raw`I_{u,u'}:=
+\begin{cases}
+\kappa(1) & (u=u'\ \text{のとき})\\
+\kappa(0) & (u\ne u'\ \text{のとき})
+\end{cases}
+\qquad(u,u'\in \mathcal{J})`),
+                    paragraph([
+                      "で定める。",
+                    ]),
+                    paragraph([
+                      "第三に、行列式 ",
+                      math(String.raw`\det A\in\mathbb{Z}[x]`),
+                      " を",
+                    ]),
+                    displayMath(
+                      String.raw`\det A:=\sum_{\varphi\in\mathfrak{S}_L}\kappa\bigl(\mathrm{sgn}(\varphi)\bigr)\cdot\prod_{u\in \mathcal{J}}A_{u,\varphi(u)}`,
+                    ),
+                    paragraph([
+                      "で定める。右辺が ",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の元として確定することを見る。",
+                      ref("def_row_permutation"),
+                      " の ",
+                      math(String.raw`\mathfrak{S}_L`),
+                      " は有限集合であり ",
+                      math(String.raw`\mathcal{J}`),
+                      " も有限集合なので、和も積も有限個の項からなる。",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の積は可換かつ結合的なので、",
+                      math(String.raw`\prod_{u\in \mathcal{J}}`),
+                      " は因子を並べる順序によらず定まる",
+                      "（すなわちこの積を書くのに順序 ",
+                      math(String.raw`\prec`),
+                      " は要らない。",
+                      math(String.raw`\prec`),
+                      " が要るのは符号 ",
+                      math(String.raw`\mathrm{sgn}(\varphi)`),
+                      " を転倒数で定める箇所だけである）。",
+                    ]),
+                    paragraph([
+                      "以上に現れるのは有限集合の上の和と積、整数、および整係数多項式だけであり、",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_second_constant_embedding",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_second_polynomial",
+                      kind: "definition",
+                      title: { text: "整係数多項式を係数とする、もう 1 つの不定元の多項式" },
+                      labels: ["def_second_polynomial_ring"],
+                      habitat: "Z",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.SecondPoly"],
+                      verification: ["sagemath/check/second-polynomial-ring"],
+                      statement: [
+                        paragraph([
+                          "特性多項式を書く場所を用意する。整係数多項式環 ",
+                          math(String.raw`\mathbb{Z}[x]`),
+                          " の不定元 ",
+                          math(String.raw`x`),
+                          " とは別の不定元 ",
+                          math(String.raw`t`),
+                          " を取り、",
+                          math(String.raw`\mathbb{Z}[x]`),
+                          " を係数環とする ",
+                          math(String.raw`t`),
+                          " の多項式環を ",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " と書く。",
+                        ]),
+                        paragraph([
+                          math(String.raw`f\in\mathbb{Z}[x][t]`),
+                          " と ",
+                          math(String.raw`k\in\mathbb{N}`),
+                          " に対して、",
+                          math(String.raw`f`),
+                          " の ",
+                          math(String.raw`t^{k}`),
+                          " の係数を ",
+                          math(String.raw`\mathrm{cf}_k(f)\in\mathbb{Z}[x]`),
+                          " と書く（",
+                          math(String.raw`\mathbb{Z}[x]`),
+                          " の零元と単位元は ",
+                          ref("def_constant_polynomial"),
+                          " の ",
+                          math(String.raw`\kappa(0)`),
+                          "、",
+                          math(String.raw`\kappa(1)`),
+                          " と書き、整数の ",
+                          math(String.raw`0`),
+                          "、",
+                          math(String.raw`1`),
+                          " と同じ記号では書かない）。",
+                          math(String.raw`\mathrm{cf}_k(f)\ne\kappa(0)`),
+                          " となる ",
+                          math(String.raw`k`),
+                          " は有限個であり、",
+                        ]),
+                        displayMath(String.raw`f=\sum_{k:\ \mathrm{cf}_k(f)\ne\kappa(0)}\mathrm{cf}_k(f)\cdot t^{\,k}`),
+                        paragraph([
+                          "が成り立つ。和と積は係数の言葉で",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{cf}_k(f+g)&=\mathrm{cf}_k(f)+\mathrm{cf}_k(g)\\
+\mathrm{cf}_k(f\cdot g)&=\sum_{i=0}^{k}\mathrm{cf}_i(f)\cdot\mathrm{cf}_{k-i}(g)
+\end{aligned}
+\qquad(f,g\in\mathbb{Z}[x][t],\ k\in\mathbb{N})`),
+                        paragraph([
+                          "で与えられる。これは多項式環の演算の定義であって、証明すべきことではない。",
+                          "以下の主張はすべてこの 2 つの等式だけから出る。",
+                        ]),
+                        paragraph([
+                          "不定元の名前について 1 点を約束する。この不定元を ",
+                          math(String.raw`\lambda`),
+                          " と書かない。",
+                          math(String.raw`\lambda`),
+                          " は ",
+                          ref("def_log_order_group"),
+                          " の元を表す記号として固定してあり、同じ記号に 2 つの意味を持たせないためである。",
+                        ]),
+                        paragraph([
+                          "現れるのは整数、有限和、有限積だけであり、実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "algebraic_eigenvalue_definition_second_constant_embedding",
+                  kind: "definition",
+                  title: { text: "整係数多項式を定数として送る写像" },
+                  labels: ["def_second_constant_embedding"],
+                  habitat: "Z",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.constSecond"],
+                  verification: ["sagemath/check/second-polynomial-ring"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`a\in\mathbb{Z}[x]`),
+                      " に対して、",
+                      ref("def_second_polynomial_ring"),
+                      " の ",
+                      math(String.raw`t`),
+                      " について定数である元を与える写像 ",
+                      math(String.raw`\iota:\mathbb{Z}[x]\to\mathbb{Z}[x][t]`),
+                      " を",
+                    ]),
+                    displayMath(String.raw`\mathrm{cf}_0\bigl(\iota(a)\bigr):=a,
+\qquad
+\mathrm{cf}_k\bigl(\iota(a)\bigr):=\kappa(0)\quad(k\ge1)`),
+                    paragraph([
+                      "で定める。",
+                      math(String.raw`\iota`),
+                      " は和と積を保ち、",
+                      math(String.raw`\iota\bigl(\kappa(0)\bigr)`),
+                      " は ",
+                      math(String.raw`\mathbb{Z}[x][t]`),
+                      " の零元、",
+                      math(String.raw`\iota\bigl(\kappa(1)\bigr)`),
+                      " は単位元である（",
+                      math(String.raw`\kappa`),
+                      " は ",
+                      ref("def_constant_polynomial"),
+                      "）。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の元を ",
+                      math(String.raw`\mathbb{Z}[x][t]`),
+                      " の元として扱う経路はこの写像だけとし、両者を同じ記号で書くことはしない",
+                      "（",
+                      ref("def_constant_polynomial"),
+                      " で整数と定数多項式を書き分けたのと同じ理由である）。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_characteristic_polynomial",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_second_matrix",
+                      kind: "definition",
+                      title: { text: "もう 1 つの不定元の多項式を成分とする、有限集合を添字とする行列" },
+                      labels: ["def_second_matrix"],
+                      habitat: "Z",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.SecondRowMatrix"],
+                      verification: ["sagemath/check/characteristic-polynomial"],
+                      statement: [
+                        paragraph([
+                          ref("def_matrix_over_row_configs"),
+                          " と同じ形の行列を、成分が ",
+                          ref("def_second_polynomial_ring"),
+                          " の ",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " である場合について書き下す。すなわち写像 ",
+                          math(String.raw`B:\mathcal{J}\times \mathcal{J}\to\mathbb{Z}[x][t]`),
+                          " のことを行列と呼び、その全体の集合を ",
+                          math(String.raw`\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x][t]\bigr)`),
+                          " と書く。値 ",
+                          math(String.raw`B(u,u')`),
+                          " を成分と呼び ",
+                          math(String.raw`B_{u,u'}`),
+                          " と書く。",
+                        ]),
+                        paragraph([
+                          "成分の住む集合が違うので、",
+                          ref("def_matrix_over_row_configs"),
+                          " の ",
+                          math(String.raw`\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
+                          " とは別の集合である。",
+                          "一般の可換環を成分とする行列としてまとめて述べることはしない",
+                          "（人手証明は具体的な対象について書く。抽象化は Lean の必要十分版の側で行う）。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_second_determinant",
+                      kind: "definition",
+                      title: { text: "もう 1 つの不定元の多項式を成分とする行列の行列式" },
+                      labels: ["def_second_determinant"],
+                      habitat: "Z",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.secondDeterminant"],
+                      verification: ["sagemath/check/characteristic-polynomial"],
+                      statement: [
+                        paragraph([
+                          ref("def_second_matrix"),
+                          " の行列 ",
+                          math(String.raw`B\in\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x][t]\bigr)`),
+                          " の行列式 ",
+                          math(String.raw`\mathrm{det}_{t}\,B\in\mathbb{Z}[x][t]`),
+                          " を",
+                        ]),
+                        displayMath(
+                          String.raw`\mathrm{det}_{t}\,B:=\sum_{\varphi\in\mathfrak{S}_L}\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{u\in \mathcal{J}}B_{u,\varphi(u)}`,
+                        ),
+                        paragraph([
+                          "で定める（",
+                          math(String.raw`\mathfrak{S}_L`),
+                          " と ",
+                          math(String.raw`\mathrm{sgn}`),
+                          " は ",
+                          ref("def_permutation_sign"),
+                          "、",
+                          math(String.raw`\kappa`),
+                          " は ",
+                          ref("def_constant_polynomial"),
+                          "、",
+                          math(String.raw`\iota`),
+                          " は ",
+                          ref("def_second_constant_embedding"),
+                          "）。",
+                          "整数である符号を ",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " の元として使う経路は ",
+                          math(String.raw`\iota\circ\kappa`),
+                          " だけであり、新しい写像は導入しない。",
+                        ]),
+                        paragraph([
+                          ref("def_determinant"),
+                          " の ",
+                          math(String.raw`\det`),
+                          " とは値の住む集合が違うので、記号を分けて ",
+                          math(String.raw`\mathrm{det}_{t}`),
+                          " と書く。",
+                          "右辺が定まる理由は ",
+                          ref("def_determinant"),
+                          " と同じである。和も積も有限個の項からなり、",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " の積は可換かつ結合的なので ",
+                          math(String.raw`\prod_{u\in \mathcal{J}}`),
+                          " は因子を並べる順序によらない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_indeterminate_t",
+                      kind: "definition",
+                      title: { text: "不定元 t 自身が定める元" },
+                      labels: ["def_indeterminate_element"],
+                      habitat: "Z",
+                      lean: ["Polynomial.X"],
+                      verification: ["sagemath/check/characteristic-polynomial"],
+                      statement: [
+                        paragraph([
+                          ref("def_second_polynomial_ring"),
+                          " の不定元 ",
+                          math(String.raw`t`),
+                          " そのものを ",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " の元と見るときの係数を書いておく。すなわち",
+                        ]),
+                        displayMath(String.raw`\mathrm{cf}_1(t):=\kappa(1),
+\qquad
+\mathrm{cf}_k(t):=\kappa(0)\quad(k\ne1)`),
+                        paragraph([
+                          "である（",
+                          math(String.raw`\kappa`),
+                          " は ",
+                          ref("def_constant_polynomial"),
+                          "）。",
+                          "以下では係数の言葉だけで議論するので、この 2 つの等式が ",
+                          math(String.raw`t`),
+                          " について使う唯一の性質である。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_characteristic_matrix",
+                      kind: "definition",
+                      title: { text: "転送行列の型の行列に対する特性行列" },
+                      labels: ["def_characteristic_matrix"],
+                      habitat: "Z",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.charMatrix"],
+                      verification: ["sagemath/check/characteristic-polynomial"],
+                      statement: [
+                        paragraph([
+                          ref("def_matrix_over_row_configs"),
+                          " の行列 ",
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
+                          " に対して、",
+                          ref("def_second_matrix"),
+                          " の行列 ",
+                          math(String.raw`\mathrm{ch}(A)\in\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x][t]\bigr)`),
+                          " を",
+                        ]),
+                        displayMath(String.raw`\mathrm{ch}(A)_{u,u'}:=
+\begin{cases}
+t+\iota\bigl(-A_{u,u}\bigr) & (u=u'\ \text{のとき})\\
+\iota\bigl(-A_{u,u'}\bigr) & (u\ne u'\ \text{のとき})
+\end{cases}
+\qquad(u,u'\in \mathcal{J})`),
+                        paragraph([
+                          "で定める（",
+                          math(String.raw`t`),
+                          " は ",
+                          ref("def_indeterminate_element"),
+                          "、",
+                          math(String.raw`\iota`),
+                          " は ",
+                          ref("def_second_constant_embedding"),
+                          "）。",
+                        ]),
+                        paragraph([
+                          "これは通常 ",
+                          math(String.raw`tI-A`),
+                          " と書かれる行列であるが、符号の反転を ",
+                          math(String.raw`\mathbb{Z}[x]`),
+                          " の中で先に済ませてある。",
+                          math(String.raw`-A_{u,u'}`),
+                          " は ",
+                          math(String.raw`\mathbb{Z}[x]`),
+                          " の加法についての逆元であり、",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " の元として扱う経路は ",
+                          math(String.raw`\iota`),
+                          " だけである。",
+                          "こう書くと、以下の議論に ",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " の引き算が一度も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "algebraic_eigenvalue_definition_characteristic_polynomial",
+                  kind: "definition",
+                  title: { text: "転送行列の型の行列に対する特性多項式" },
+                  labels: ["def_characteristic_polynomial"],
+                  habitat: "Z",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.charPoly"],
+                  verification: ["sagemath/check/characteristic-polynomial"],
+                  statement: [
+                    paragraph([
+                      ref("def_matrix_over_row_configs"),
+                      " の行列 ",
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
+                      " の特性多項式 ",
+                      math(String.raw`\chi_A\in\mathbb{Z}[x][t]`),
+                      " を",
+                    ]),
+                    displayMath(String.raw`\chi_A:=\mathrm{det}_{t}\bigl(\mathrm{ch}(A)\bigr)`),
+                    paragraph([
+                      "で定める（",
+                      math(String.raw`\mathrm{ch}`),
+                      " は ",
+                      ref("def_characteristic_matrix"),
+                      "、",
+                      math(String.raw`\mathrm{det}_{t}`),
+                      " は ",
+                      ref("def_second_determinant"),
+                      "）。",
+                      "とくに転送行列 ",
+                      math(String.raw`T`),
+                      " に対する ",
+                      math(String.raw`\chi_T`),
+                      " が、この章の目標である。",
+                    ]),
+                    paragraph([
+                      "現れるのは整数、有限和、有限積、および ",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " と ",
+                      math(String.raw`\mathbb{Z}[x][t]`),
+                      " の元だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_qbar_and_roots_of_unity",
+        labels: [],
+        title: { text: "代数的数と 1 の冪根" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_def_algebraic_numbers",
+              focus:
+                {
+                  id: "algebraic_eigenvalue_def_algebraic_numbers",
+                  kind: "definition",
+                  title: { text: "代数的数の全体" },
+                  labels: ["def_algebraic_numbers"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.Qbar"],
+                  verification: ["sagemath/check/root-of-unity-divisor"],
+                  statement: [
+                    paragraph([
+                      "有理数体 ",
+                      math(String.raw`\mathbb{Q}`),
+                      " の代数閉包を 1 つ固定し、それを ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " と書く。すなわち ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " は次の 3 条件を満たす体である。",
+                    ]),
+                    list([
+                      [
+                        math(String.raw`\mathbb{Q}`),
+                        " は ",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " の部分体である。",
+                      ],
+                      [
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " を係数とする次数 1 以上の多項式は ",
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " の中に根を持つ（代数閉であること）。",
+                      ],
+                      [
+                        math(String.raw`\overline{\mathbb{Q}}`),
+                        " の各元 ",
+                        math(String.raw`z`),
+                        " について、",
+                        math(String.raw`z`),
+                        " を根に持つ ",
+                        math(String.raw`\mathbb{Q}`),
+                        " 係数の零でない多項式が存在する（各元が ",
+                        math(String.raw`\mathbb{Q}`),
+                        " 上代数的であること）。",
+                      ],
+                    ]),
+                    paragraph([
+                      "この 3 条件を満たす体が存在すること、および 2 つあれば ",
+                      math(String.raw`\mathbb{Q}`),
+                      " を動かさない体の同型で移り合うことは既知である。",
+                      "以下ではその 1 つを固定して使い、どれを固定したかに依存する主張は述べない。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " は可算集合である（",
+                      math(String.raw`\mathbb{Q}`),
+                      " 係数の零でない多項式の全体が可算であり、そのそれぞれが有限個の根しか持たないことによる）。",
+                      "したがってここで実数体にも複素数体にも脱出していない。",
+                      "複素数体の部分体として取ることもできるが、そうすると非可算な集合を経由することになるので、",
+                      "本文ではそのような取り方をしない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_def_root_of_unity_set",
+              focus:
+                {
+                  id: "algebraic_eigenvalue_def_root_of_unity_set",
+                  kind: "definition",
+                  title: { text: "1 の冪根の全体" },
+                  labels: ["def_root_of_unity_set"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.RootOfUnity"],
+                  verification: ["sagemath/check/root-of-unity-divisor"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`n\in\mathbb{N}`),
+                      " を任意に取る。",
+                      math(String.raw`n`),
+                      " 乗すると 1 になる代数的数の全体を",
+                    ]),
+                    displayMath(
+                      String.raw`\mu_{n}:=\bigl\{\,z\in\overline{\mathbb{Q}} \;\bigm|\; z^{n}=1\,\bigr\}`,
+                    ),
+                    paragraph([
+                      "と置く（",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " は ",
+                      ref("def_algebraic_numbers"),
+                      "、",
+                      math(String.raw`z^{n}`),
+                      " は体 ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の積の ",
+                      math(String.raw`n`),
+                      " 回の反復で、",
+                      math(String.raw`z^{0}=1`),
+                      " と約束する）。",
+                      math(String.raw`\mu_{n}`),
+                      " の元を 1 の ",
+                      math(String.raw`n`),
+                      " 乗根と呼ぶ。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\mu_{n}`),
+                      " は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の部分集合であり、実数体も複素数体も現れない。",
+                      math(String.raw`n=0`),
+                      " のときは ",
+                      math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`),
+                      " である（",
+                      math(String.raw`z^{0}=1`),
+                      " がすべての ",
+                      math(String.raw`z`),
+                      " について成り立つため）。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_claim_root_of_unity_divisor",
+              focus:
+                {
+                  id: "algebraic_eigenvalue_claim_root_of_unity_divisor",
+                  kind: "claim",
+                  title: {
+                    text: "約数を指数として 1 になる代数的数は、その倍数を指数としても 1 になる",
+                  },
+                  labels: ["claim_root_of_unity_divisor"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd",
+                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_eq_one_of_dvd_necSuf",
+                    "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd_from_necSuf",
+                  ],
+                  verification: ["sagemath/check/root-of-unity-divisor"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`d\in\mathbb{N}`),
+                      " と ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " が ",
+                      math(String.raw`d\mid n`),
+                      "（",
+                      math(String.raw`n=dk`),
+                      " を満たす ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " が存在すること）を満たすとする。このとき",
+                    ]),
+                    displayMath(String.raw`\mu_{d}\subset\mu_{n}`),
+                    paragraph([
+                      "が成り立つ（",
+                      math(String.raw`\mu_{d}`),
+                      " と ",
+                      math(String.raw`\mu_{n}`),
+                      " は ",
+                      ref("def_root_of_unity_set"),
+                      "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`z\in\mu_{d}`),
+                      " を任意に取る。",
+                      ref("def_root_of_unity_set"),
+                      " により ",
+                      math(String.raw`z\in\overline{\mathbb{Q}}`),
+                      " かつ ",
+                      math(String.raw`z^{d}=1`),
+                      " である。",
+                      "仮定 ",
+                      math(String.raw`d\mid n`),
+                      " により ",
+                      math(String.raw`n=dk`),
+                      " を満たす ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " を 1 つ取る。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+z^{n}
+&=z^{dk}
+&&(\because\ n=dk)\\
+&=\bigl(z^{d}\bigr)^{k}
+&&(\because\ \text{体}\ \overline{\mathbb{Q}}\ \text{の積の反復についての指数法則})\\
+&=1^{k}
+&&(\because\ z^{d}=1)\\
+&=1
+&&(\because\ \text{単位元の反復積は単位元である})
+\end{aligned}`),
+                    paragraph([
+                      "よって ",
+                      math(String.raw`z\in\overline{\mathbb{Q}}`),
+                      " かつ ",
+                      math(String.raw`z^{n}=1`),
+                      " であり、",
+                      ref("def_root_of_unity_set"),
+                      " により ",
+                      math(String.raw`z\in\mu_{n}`),
+                      " である。",
+                      math(String.raw`z\in\mu_{d}`),
+                      " は任意だったので ",
+                      math(String.raw`\mu_{d}\subset\mu_{n}`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      "現れるのは ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の元とその積の反復、および自然数の積だけであり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_qbar_matrices",
+        labels: [],
+        title: { text: "代数的数を成分とする行列と作用" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_qbar_matrix",
+              focus:
+                {
+                  id: "algebraic_eigenvalue_definition_qbar_matrix",
+                  kind: "definition",
+                  title: { text: "代数的数を成分とする行列" },
+                  labels: ["def_qbar_matrix"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.QbarRowMatrix"],
+                  verification: ["sagemath/check/qbar-action-product"],
+                  statement: [
+                    paragraph([
+                      "添字集合は、",
+                      ref("def_matrix_over_row_configs"),
+                      " で固定した空でない有限集合 ",
+                      math(String.raw`\mathcal{J}`),
+                      " をそのまま使う。ここから ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " を成分とする線型代数を作るが、行配位であることも格子の形も使わない",
+                      "（この論文でこの節の結果を使うときは、行配位の全体を添字集合に取る）。",
+                    ]),
+                    paragraph([
+                      "写像 ",
+                      math(String.raw`A:\mathcal{J}\times \mathcal{J}\to\overline{\mathbb{Q}}`),
+                      "（",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " は ",
+                      ref("def_algebraic_numbers"),
+                      "）のことを代数的数を成分とする行列と呼び、その全体の集合を ",
+                      math(String.raw`\mathrm{Mat}_{\mathcal{J}}\bigl(\overline{\mathbb{Q}}\bigr)`),
+                      " と書く。値 ",
+                      math(String.raw`A(u,u')`),
+                      " を成分と呼び ",
+                      math(String.raw`A_{u,u'}`),
+                      " と書く。",
+                    ]),
+                    paragraph([
+                      "添字集合も成分の型も違うので、これは整係数多項式を成分とする行列とは別の対象である。",
+                      "実数体も複素数体も現れない（",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " は可算集合である）。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_qbar_vector_smul",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_qbar_matrix_product",
+                      kind: "definition",
+                      title: { text: "代数的数を成分とする行列の積" },
+                      labels: ["def_qbar_matrix_product"],
+                      habitat: "Qbar",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarRowMatrixProduct"],
+                      verification: ["sagemath/check/qbar-action-product"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          "（",
+                          ref("def_qbar_matrix"),
+                          "）に対し積 ",
+                          math(String.raw`AB\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          " を",
+                        ]),
+                        displayMath(
+                          String.raw`(AB)_{u,u''}:=\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\qquad(u,u''\in \mathcal{J})`,
+                        ),
+                        paragraph([
+                          "で定める（",
+                          math(String.raw`\mathcal{J}`),
+                          " は有限集合なので右辺は ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " の有限個の元の和であり、",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " の元として確定する）。",
+                        ]),
+                        paragraph([
+                          "成分の型が違うので、これは整係数多項式を成分とする行列とその積とは別の対象である。同じ記号 ",
+                          math(String.raw`AB`),
+                          " を使うが、どちらの積かは行列の成分がどちらの集合の元かで決まる。",
+                          "実数体も複素数体も現れない（",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " は可算集合である）。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_qbar_vector",
+                      kind: "definition",
+                      title: { text: "代数的数を成分とする列ベクトル" },
+                      labels: ["def_qbar_vector"],
+                      habitat: "Qbar",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.QbarRowVector"],
+                      verification: ["sagemath/check/qbar-action-product"],
+                      statement: [
+                        paragraph([
+                          "写像 ",
+                          math(String.raw`v:\mathcal{J}\to\overline{\mathbb{Q}}`),
+                          " のことを列ベクトルと呼び、その全体の集合を ",
+                          math(String.raw`V_{\mathcal{J}}:=\bigl\{\,v\mid v:\mathcal{J}\to\overline{\mathbb{Q}}\,\bigr\}`),
+                          " と書く。値 ",
+                          math(String.raw`v(u)`),
+                          " を成分と呼ぶ（行列の成分と違い、添字は 1 つである）。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_qbar_matrix_action",
+                      kind: "definition",
+                      title: { text: "代数的数を成分とする行列の列ベクトルへの作用" },
+                      labels: ["def_qbar_matrix_action"],
+                      habitat: "Qbar",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarAction"],
+                      verification: ["sagemath/check/qbar-action-product"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          "（",
+                          ref("def_qbar_matrix"),
+                          "）と ",
+                          math(String.raw`v\in V_{\mathcal{J}}`),
+                          " に対し、",
+                          math(String.raw`A`),
+                          " の ",
+                          math(String.raw`v`),
+                          " への作用 ",
+                          math(String.raw`A\cdot v\in V_{\mathcal{J}}`),
+                          " を",
+                        ]),
+                        displayMath(
+                          String.raw`(A\cdot v)(u):=\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')\qquad(u\in \mathcal{J})`,
+                        ),
+                        paragraph([
+                          "で定める（右辺は ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " の有限個の元の和である）。",
+                          "作用を表す点 ",
+                          math(String.raw`\cdot`),
+                          " は、行列どうしの積（",
+                          ref("def_qbar_matrix_product"),
+                          "）と区別するために書く。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_action_product",
+                      kind: "claim",
+                      title: { text: "行列の積の作用は、作用を 2 度施したものである" },
+                      labels: ["claim_qbar_action_product"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_product",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_product_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_product_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-action-product"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          "（",
+                          ref("def_qbar_matrix"),
+                          "）と ",
+                          math(String.raw`v\in V_{\mathcal{J}}`),
+                          "（",
+                          ref("def_qbar_vector"),
+                          "）を任意に取る。このとき",
+                        ]),
+                        displayMath(String.raw`(AB)\cdot v=A\cdot(B\cdot v)`),
+                        paragraph([
+                          "が成り立つ（左辺の ",
+                          math(String.raw`AB`),
+                          " は ",
+                          ref("def_qbar_matrix_product"),
+                          "、点は ",
+                          ref("def_qbar_matrix_action"),
+                          "）。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "両辺は ",
+                          math(String.raw`V_{\mathcal{J}}`),
+                          " の元、すなわち ",
+                          math(String.raw`\mathcal{J}`),
+                          " 上の写像なので、",
+                          math(String.raw`u\in \mathcal{J}`),
+                          " を任意に取り、その ",
+                          math(String.raw`u`),
+                          " における値が等しいことを示す。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\bigl((AB)\cdot v\bigr)(u)
+&=\sum_{u''\in \mathcal{J}}(AB)_{u,u''}\,v(u'')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\sum_{u''\in \mathcal{J}}\Bigl(\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\Bigr)v(u'')
+&&(\because\ \blkref{def_qbar_matrix_product})\\
+&=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,B_{u',u''}\bigr)v(u'')
+&&(\because\ \text{有限和と元の積についての分配則})\\
+&=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,v(u'')\bigr)
+&&(\because\ \text{積の結合則})\\
+&=\sum_{u'\in \mathcal{J}}\ \sum_{u''\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,v(u'')\bigr)
+&&(\because\ \text{有限和の順序の入れ替え})\\
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\sum_{u''\in \mathcal{J}}B_{u',u''}\,v(u'')
+&&(\because\ \text{元と有限和の積についての分配則})\\
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(B\cdot v)(u')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\bigl(A\cdot(B\cdot v)\bigr)(u)
+&&(\because\ \blkref{def_qbar_matrix_action})
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`u\in \mathcal{J}`),
+                          " は任意だったので、2 つの写像は等しい。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、積の結合則と、有限和と元の積についての分配則",
+                          "（両側）だけである。加法の逆元も、零元でない元の逆元も、体であることも使っていない。",
+                          "有限和の順序の入れ替えが使えるのは ",
+                          math(String.raw`\mathcal{J}`),
+                          " が有限集合で、加法が可換かつ結合的だからである。",
+                          "現れるのは ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " の元と有限和・有限積だけであり、実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_qbar_vector_add",
+                      kind: "definition",
+                      title: { text: "代数的数を成分とする列ベクトルの和" },
+                      labels: ["def_qbar_vector_add"],
+                      habitat: "Qbar",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarVectorAdd"],
+                      verification: ["sagemath/check/qbar-action-linear"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`v,w\in V_{\mathcal{J}}`),
+                          "（",
+                          ref("def_qbar_vector"),
+                          "）に対し、和 ",
+                          math(String.raw`v\oplus w\in V_{\mathcal{J}}`),
+                          " を",
+                        ]),
+                        displayMath(String.raw`(v\oplus w)(u):=v(u)+w(u)\qquad(u\in \mathcal{J})`),
+                        paragraph([
+                          "で定める。右辺の ",
+                          math(String.raw`+`),
+                          " は ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          "（",
+                          ref("def_algebraic_numbers"),
+                          "）の加法であり、左辺の ",
+                          math(String.raw`\oplus`),
+                          " は列ベクトルどうしの演算である。",
+                          "同じ記号を使うと、どちらの集合の演算かが式に書かれないので、記号を分けて書く。",
+                          "実数体も複素数体も現れない（",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " は可算集合である）。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "algebraic_eigenvalue_definition_qbar_vector_smul",
+                  kind: "definition",
+                  title: { text: "代数的数を成分とする列ベクトルのスカラー倍" },
+                  labels: ["def_qbar_vector_smul"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarVectorSmul"],
+                  verification: ["sagemath/check/qbar-action-linear"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`v\in V_{\mathcal{J}}`),
+                      "（",
+                      ref("def_qbar_vector"),
+                      "）と ",
+                      math(String.raw`z\in\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）に対し、スカラー倍 ",
+                      math(String.raw`z\odot v\in V_{\mathcal{J}}`),
+                      " を",
+                    ]),
+                    displayMath(String.raw`(z\odot v)(u):=z\,v(u)\qquad(u\in \mathcal{J})`),
+                    paragraph([
+                      "で定める。右辺の積は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " のものであり、左辺の ",
+                      math(String.raw`\odot`),
+                      " は代数的数と列ベクトルの演算である。",
+                      "和（",
+                      ref("def_qbar_vector_add"),
+                      "）と同じ理由で記号を分けて書く。",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_qbar_zero_vector",
+              beforeFocus: [
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_action_add",
+                      kind: "claim",
+                      title: { text: "行列の作用は列ベクトルの和を保つ" },
+                      labels: ["claim_qbar_action_add"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_add",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_add_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_add_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-action-linear"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          "（",
+                          ref("def_qbar_matrix"),
+                          "）と ",
+                          math(String.raw`v,w\in V_{\mathcal{J}}`),
+                          "（",
+                          ref("def_qbar_vector"),
+                          "）を任意に取る。このとき",
+                        ]),
+                        displayMath(String.raw`A\cdot(v\oplus w)=(A\cdot v)\oplus(A\cdot w)`),
+                        paragraph([
+                          "が成り立つ（点は ",
+                          ref("def_qbar_matrix_action"),
+                          "、",
+                          math(String.raw`\oplus`),
+                          " は ",
+                          ref("def_qbar_vector_add"),
+                          "）。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "両辺は ",
+                          math(String.raw`V_{\mathcal{J}}`),
+                          " の元、すなわち ",
+                          math(String.raw`\mathcal{J}`),
+                          " 上の写像なので、",
+                          math(String.raw`u\in \mathcal{J}`),
+                          " を任意に取り、その ",
+                          math(String.raw`u`),
+                          " における値が等しいことを示す。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot(v\oplus w)\bigr)(u)
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(v\oplus w)(u')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(v(u')+w(u')\bigr)
+&&(\because\ \blkref{def_qbar_vector_add})\\
+&=\sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,v(u')+A_{u,u'}\,w(u')\bigr)
+&&(\because\ \text{元と 2 元の和の積についての分配則})\\
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')+\sum_{u'\in \mathcal{J}}A_{u,u'}\,w(u')
+&&(\because\ \text{有限和の項ごとの分割})\\
+&=(A\cdot v)(u)+(A\cdot w)(u)
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(u)
+&&(\because\ \blkref{def_qbar_vector_add})
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`u\in \mathcal{J}`),
+                          " は任意だったので、2 つの写像は等しい。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、元と 2 元の和の積についての分配則と、",
+                          "加法が可換モノイドであること（有限和を項ごとに分けるのに要る）だけである。",
+                          "積の結合則も可換性も、加法の逆元も、体であることも使っていない。",
+                          "現れるのは ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " の元と有限和だけであり、実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_action_smul",
+                      kind: "claim",
+                      title: { text: "行列の作用は列ベクトルのスカラー倍を保つ" },
+                      labels: ["claim_qbar_action_smul"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_smul",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_smul_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_smul_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-action-linear"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          "（",
+                          ref("def_qbar_matrix"),
+                          "）と ",
+                          math(String.raw`v\in V_{\mathcal{J}}`),
+                          "（",
+                          ref("def_qbar_vector"),
+                          "）と ",
+                          math(String.raw`z\in\overline{\mathbb{Q}}`),
+                          " を任意に取る。このとき",
+                        ]),
+                        displayMath(String.raw`A\cdot(z\odot v)=z\odot(A\cdot v)`),
+                        paragraph([
+                          "が成り立つ（点は ",
+                          ref("def_qbar_matrix_action"),
+                          "、",
+                          math(String.raw`\odot`),
+                          " は ",
+                          ref("def_qbar_vector_smul"),
+                          "）。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "両辺は ",
+                          math(String.raw`V_{\mathcal{J}}`),
+                          " の元、すなわち ",
+                          math(String.raw`\mathcal{J}`),
+                          " 上の写像なので、",
+                          math(String.raw`u\in \mathcal{J}`),
+                          " を任意に取り、その ",
+                          math(String.raw`u`),
+                          " における値が等しいことを示す。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot(z\odot v)\bigr)(u)
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(z\odot v)(u')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(z\,v(u')\bigr)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=\sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,z\bigr)v(u')
+&&(\because\ \text{積の結合則})\\
+&=\sum_{u'\in \mathcal{J}}\bigl(z\,A_{u,u'}\bigr)v(u')
+&&(\because\ \text{積の可換性})\\
+&=\sum_{u'\in \mathcal{J}}z\bigl(A_{u,u'}\,v(u')\bigr)
+&&(\because\ \text{積の結合則})\\
+&=z\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')
+&&(\because\ \text{元と有限和の積についての分配則})\\
+&=z\,(A\cdot v)(u)
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\bigl(z\odot(A\cdot v)\bigr)(u)
+&&(\because\ \blkref{def_qbar_vector_smul})
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`u\in \mathcal{J}`),
+                          " は任意だったので、2 つの写像は等しい。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、積の結合則と可換性、および元と有限和の積についての",
+                          "分配則だけである。",
+                          math(String.raw`z`),
+                          " を成分の左へ移す箇所で積の可換性を使っており、",
+                          "そこが前の主張（和を保つこと）との違いである。",
+                          "加法の逆元も、零元でない元の逆元も、体であることも使っていない。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "algebraic_eigenvalue_definition_qbar_zero_vector",
+                  kind: "definition",
+                  title: { text: "零ベクトル" },
+                  labels: ["def_qbar_zero_vector"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarZeroVector"],
+                  verification: ["sagemath/check/qbar-eigenspace"],
+                  statement: [
+                    paragraph([
+                      "零ベクトル ",
+                      math(String.raw`o_{\mathcal{J}}\in V_{\mathcal{J}}`),
+                      "（",
+                      ref("def_qbar_vector"),
+                      "）を",
+                    ]),
+                    displayMath(String.raw`o_{\mathcal{J}}(u):=0\qquad(u\in \mathcal{J})`),
+                    paragraph([
+                      "で定める。右辺の ",
+                      math(String.raw`0`),
+                      " は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）の零元である。",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_eigenspaces",
+        labels: [],
+        title: { text: "固有ベクトルと固有空間" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_qbar_eigenspace",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_qbar_eigenvector",
+                      kind: "definition",
+                      title: { text: "代数的数を成分とする行列の固有ベクトル" },
+                      labels: ["def_qbar_eigenvector"],
+                      habitat: "Qbar",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.IsQbarEigenvector"],
+                      verification: ["sagemath/check/qbar-eigenspace"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          "（",
+                          ref("def_qbar_matrix"),
+                          "）と ",
+                          math(String.raw`z\in\overline{\mathbb{Q}}`),
+                          " と ",
+                          math(String.raw`v\in V_{\mathcal{J}}`),
+                          " について、",
+                        ]),
+                        displayMath(String.raw`A\cdot v=z\odot v\quad\text{かつ}\quad v\ne o_{\mathcal{J}}`),
+                        paragraph([
+                          "が成り立つとき、",
+                          math(String.raw`v`),
+                          " は ",
+                          math(String.raw`A`),
+                          " の ",
+                          math(String.raw`z`),
+                          " に属する固有ベクトルであるという（点は ",
+                          ref("def_qbar_matrix_action"),
+                          "、",
+                          math(String.raw`\odot`),
+                          " は ",
+                          ref("def_qbar_vector_smul"),
+                          "、",
+                          math(String.raw`o_{\mathcal{J}}`),
+                          " は ",
+                          ref("def_qbar_zero_vector"),
+                          "）。",
+                          "零ベクトルを除くのは、除かないと任意の ",
+                          math(String.raw`z`),
+                          " について ",
+                          math(String.raw`o_{\mathcal{J}}`),
+                          " が条件を満たしてしまい、",
+                          math(String.raw`z`),
+                          " が ",
+                          math(String.raw`A`),
+                          " から何も決まらなくなるためである。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_qbar_eigenvalue",
+                      kind: "definition",
+                      title: { text: "代数的数を成分とする行列の固有値" },
+                      labels: ["def_qbar_eigenvalue"],
+                      habitat: "Qbar",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.IsQbarEigenvalue"],
+                      verification: ["sagemath/check/qbar-eigenspace"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          " と ",
+                          math(String.raw`z\in\overline{\mathbb{Q}}`),
+                          " について、",
+                          math(String.raw`z`),
+                          " に属する ",
+                          math(String.raw`A`),
+                          " の固有ベクトル（",
+                          ref("def_qbar_eigenvector"),
+                          "）が少なくとも 1 つ存在するとき、",
+                          math(String.raw`z`),
+                          " は ",
+                          math(String.raw`A`),
+                          " の固有値であるという。",
+                        ]),
+                        paragraph([
+                          "固有ベクトルは ",
+                          math(String.raw`V_{\mathcal{J}}`),
+                          " の元、固有値は ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " の元であり、別の集合の対象である。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "algebraic_eigenvalue_definition_qbar_eigenspace",
+                  kind: "definition",
+                  title: { text: "代数的数を成分とする行列の固有空間" },
+                  labels: ["def_qbar_eigenspace"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace"],
+                  verification: ["sagemath/check/qbar-eigenspace"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                      " と ",
+                      math(String.raw`z\in\overline{\mathbb{Q}}`),
+                      " に対し、",
+                    ]),
+                    displayMath(
+                      String.raw`E_{A}(z):=\{\,v\in V_{\mathcal{J}}\mid A\cdot v=z\odot v\,\}\subset V_{\mathcal{J}}`,
+                    ),
+                    paragraph([
+                      "と定める。",
+                      "固有ベクトルの定義（",
+                      ref("def_qbar_eigenvector"),
+                      "）と違い、条件から ",
+                      math(String.raw`v\ne o_{\mathcal{J}}`),
+                      " を外してある。",
+                      "外すのは、外さないと和とスカラー倍で閉じなくなるためである",
+                      "（",
+                      math(String.raw`v`),
+                      " が条件を満たすとき ",
+                      math(String.raw`0\odot v=o_{\mathcal{J}}`),
+                      " も満たすので、零ベクトルを除いた集合はスカラー倍で閉じない。",
+                      "ここで ",
+                      math(String.raw`0\odot v=o_{\mathcal{J}}`),
+                      " は、各 ",
+                      math(String.raw`u\in \mathcal{J}`),
+                      " について ",
+                      math(String.raw`(0\odot v)(u)=0\,v(u)=0=o_{\mathcal{J}}(u)`),
+                      " であることによる。第 1 の等号はスカラー倍の定義（",
+                      ref("def_qbar_vector_smul"),
+                      "）、第 2 の等号は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の零元との積が零元であること、第 3 の等号は零ベクトルの定義（",
+                      ref("def_qbar_zero_vector"),
+                      "）である）。",
+                      "したがって ",
+                      math(String.raw`E_A(z)`),
+                      " の元は固有ベクトルとは限らず、",
+                      math(String.raw`o_{\mathcal{J}}`),
+                      " 以外の元がちょうど ",
+                      math(String.raw`z`),
+                      " に属する固有ベクトルである。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_qbar_matrix_power",
+              beforeFocus: [
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_eigenspace_add",
+                      kind: "claim",
+                      title: { text: "固有空間は和で閉じる" },
+                      labels: ["claim_qbar_eigenspace_add"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_add",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eigenspace_add_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_add_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-eigenspace"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          " と ",
+                          math(String.raw`z\in\overline{\mathbb{Q}}`),
+                          " を任意に取る。",
+                          math(String.raw`v,w\in E_{A}(z)`),
+                          "（",
+                          ref("def_qbar_eigenspace"),
+                          "）ならば ",
+                          math(String.raw`v\oplus w\in E_{A}(z)`),
+                          "（",
+                          ref("def_qbar_vector_add"),
+                          "）である。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "示すべきは ",
+                          math(String.raw`A\cdot(v\oplus w)=z\odot(v\oplus w)`),
+                          " である。両辺は ",
+                          math(String.raw`V_{\mathcal{J}}`),
+                          " の元、すなわち ",
+                          math(String.raw`\mathcal{J}`),
+                          " 上の写像なので、",
+                          math(String.raw`u\in \mathcal{J}`),
+                          " を任意に取り、その ",
+                          math(String.raw`u`),
+                          " における値が等しいことを示す。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot(v\oplus w)\bigr)(u)
+&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(u)
+&&(\because\ \blkref{claim_qbar_action_add})\\
+&=(A\cdot v)(u)+(A\cdot w)(u)
+&&(\because\ \blkref{def_qbar_vector_add})\\
+&=(z\odot v)(u)+(z\odot w)(u)
+&&(\because\ v,w\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
+&=z\,v(u)+z\,w(u)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=z\bigl(v(u)+w(u)\bigr)
+&&(\because\ \text{元と 2 元の和の積についての分配則})\\
+&=z\,(v\oplus w)(u)
+&&(\because\ \blkref{def_qbar_vector_add})\\
+&=\bigl(z\odot(v\oplus w)\bigr)(u)
+&&(\because\ \blkref{def_qbar_vector_smul})
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`u\in \mathcal{J}`),
+                          " は任意だったので 2 つの写像は等しく、",
+                          math(String.raw`v\oplus w\in E_{A}(z)`),
+                          " である。",
+                        ]),
+                        paragraph([
+                          "この段が使っているのは、作用が和を保つこと（",
+                          ref("claim_qbar_action_add"),
+                          "）と、スカラー倍が和に配ること（第 5 段の分配則）の 2 つだけである。",
+                          math(String.raw`A`),
+                          " の成分についても ",
+                          math(String.raw`z`),
+                          " についても、それ以外の性質は使っていない。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_eigenspace_smul",
+                      kind: "claim",
+                      title: { text: "固有空間はスカラー倍で閉じる" },
+                      labels: ["claim_qbar_eigenspace_smul"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_smul",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eigenspace_smul_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_smul_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-eigenspace"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          " と ",
+                          math(String.raw`z,c\in\overline{\mathbb{Q}}`),
+                          " を任意に取る。",
+                          math(String.raw`v\in E_{A}(z)`),
+                          " ならば ",
+                          math(String.raw`c\odot v\in E_{A}(z)`),
+                          "（",
+                          ref("def_qbar_vector_smul"),
+                          "）である。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "示すべきは ",
+                          math(String.raw`A\cdot(c\odot v)=z\odot(c\odot v)`),
+                          " である。両辺は ",
+                          math(String.raw`\mathcal{J}`),
+                          " 上の写像なので、",
+                          math(String.raw`u\in \mathcal{J}`),
+                          " を任意に取り、その ",
+                          math(String.raw`u`),
+                          " における値が等しいことを示す。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\bigl(A\cdot(c\odot v)\bigr)(u)
+&=\bigl(c\odot(A\cdot v)\bigr)(u)
+&&(\because\ \blkref{claim_qbar_action_smul})\\
+&=c\,(A\cdot v)(u)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=c\,(z\odot v)(u)
+&&(\because\ v\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
+&=c\bigl(z\,v(u)\bigr)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=(c\,z)\,v(u)
+&&(\because\ \text{積の結合則})\\
+&=(z\,c)\,v(u)
+&&(\because\ \text{積の可換性})\\
+&=z\bigl(c\,v(u)\bigr)
+&&(\because\ \text{積の結合則})\\
+&=z\,(c\odot v)(u)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=\bigl(z\odot(c\odot v)\bigr)(u)
+&&(\because\ \blkref{def_qbar_vector_smul})
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`u\in \mathcal{J}`),
+                          " は任意だったので 2 つの写像は等しく、",
+                          math(String.raw`c\odot v\in E_{A}(z)`),
+                          " である。",
+                        ]),
+                        paragraph([
+                          "この段が使っているのは、作用がスカラー倍を保つこと（",
+                          ref("claim_qbar_action_smul"),
+                          "）と、2 つのスカラー倍が交換できること（第 5 段から第 7 段の、結合則・可換性・結合則）の",
+                          "2 つだけである。前の主張（和で閉じること）が積の可換性を使わなかったのに対し、",
+                          "この主張は ",
+                          math(String.raw`c`),
+                          " と ",
+                          math(String.raw`z`),
+                          " の順を入れ替える箇所で使っている。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_qbar_identity_matrix",
+                      kind: "definition",
+                      title: { text: "代数的数を成分とする単位行列" },
+                      labels: ["def_qbar_identity_matrix"],
+                      habitat: "Qbar",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarIdentityMatrix"],
+                      verification: ["sagemath/check/qbar-identity-action"],
+                      statement: [
+                        paragraph([
+                          "単位行列 ",
+                          math(String.raw`I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          "（",
+                          ref("def_qbar_matrix"),
+                          "）を",
+                        ]),
+                        displayMath(String.raw`\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}:=\begin{cases}1&(u'=u)\\0&(u'\ne u)\end{cases}\qquad(u,u'\in \mathcal{J})`),
+                        paragraph([
+                          "で定める。右辺の ",
+                          math(String.raw`1`),
+                          " と ",
+                          math(String.raw`0`),
+                          " は ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          "（",
+                          ref("def_algebraic_numbers"),
+                          "）の単位元と零元である。",
+                          "場合分けが意味をもつのは、",
+                          math(String.raw`\mathcal{J}`),
+                          " の 2 元が等しいか否かが判定できるからである",
+                          "（有限集合の相等は決定できる）。",
+                        ]),
+                        paragraph([
+                          "添字集合も成分の型も違うので、これは整係数多項式を成分とする行列の単位行列 ",
+                          math(String.raw`I`),
+                          " とは別の対象である。上付きの ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " は、どちらの集合の単位行列かを記号に残すためのものである。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_identity_action",
+                      kind: "claim",
+                      title: { text: "単位行列の作用は列ベクトルを動かさない" },
+                      labels: ["claim_qbar_identity_action"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.identity_action_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-identity-action"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`v\in V_{\mathcal{J}}`),
+                          "（",
+                          ref("def_qbar_vector"),
+                          "）を任意に取る。このとき",
+                        ]),
+                        displayMath(String.raw`I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v=v`),
+                        paragraph([
+                          "が成り立つ（左辺の単位行列は ",
+                          ref("def_qbar_identity_matrix"),
+                          "、点は ",
+                          ref("def_qbar_matrix_action"),
+                          "）。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "両辺は ",
+                          math(String.raw`V_{\mathcal{J}}`),
+                          " の元、すなわち ",
+                          math(String.raw`\mathcal{J}`),
+                          " 上の写像なので、",
+                          math(String.raw`u\in \mathcal{J}`),
+                          " を任意に取り、その ",
+                          math(String.raw`u`),
+                          " における値が等しいことを示す。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v\bigr)(u)
+&=\sum_{u'\in \mathcal{J}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,v(u')
+&&(\because\ \blkref{def_qbar_matrix_action})\\
+&=\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u}\,v(u)
++\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,v(u')
+&&(\because\ \text{有限和から }u'=u\text{ の 1 項を分ける})\\
+&=1\cdot v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot v(u')
+&&(\because\ \blkref{def_qbar_identity_matrix})\\
+&=v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot v(u')
+&&(\because\ \text{単位元との積})\\
+&=v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0
+&&(\because\ \text{零元との積})\\
+&=v(u)+0
+&&(\because\ \text{零元だけの有限和は零元である})\\
+&=v(u)
+&&(\because\ \text{零元を足しても変わらない})
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`u\in \mathcal{J}`),
+                          " は任意だったので、2 つの写像は等しい。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、単位元との積・零元との積・零元との和の 3 つだけである",
+                          "（加法の逆元も、零元でない元の逆元も、積の可換性も、体であることも使っていない）。",
+                          math(String.raw`\mathcal{J}`),
+                          " について使っているのは、有限集合であることと 2 元の相等が判定できることの 2 つだけである",
+                          "（1 項を分ける段と、場合分けの段でそれぞれ効く）。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "algebraic_eigenvalue_definition_qbar_matrix_power",
+                  kind: "definition",
+                  title: { text: "代数的数を成分とする行列の冪" },
+                  labels: ["def_qbar_matrix_power"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarMatrixPow"],
+                  verification: ["sagemath/check/qbar-action-pow"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                      "（",
+                      ref("def_qbar_matrix"),
+                      "）と ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " に対し、冪 ",
+                      math(String.raw`A^{k}\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                      " を ",
+                      math(String.raw`k`),
+                      " についての帰納法で",
+                    ]),
+                    displayMath(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_{\mathcal{J}},\qquad A^{k+1}:=A\,A^{k}\qquad(k\in\mathbb{N})`),
+                    paragraph([
+                      "と定める（右辺の単位行列は ",
+                      ref("def_qbar_identity_matrix"),
+                      "、積は ",
+                      ref("def_qbar_matrix_product"),
+                      "）。",
+                    ]),
+                    paragraph([
+                      "2 点、整係数多項式を成分とする行列の冪との違いを書いておく。第一に、成分の型が違うので別の対象である",
+                      "（同じ記号 ",
+                      math(String.raw`A^{k}`),
+                      " を使うが、どちらの冪かは行列の成分がどちらの集合の元かで決まる）。",
+                      "第二に、出発点と一歩の取り方が違う。",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の側は ",
+                      math(String.raw`A^{1}:=A`),
+                      " から始めて ",
+                      math(String.raw`A^{k+1}:=A^{k}A`),
+                      " と右から掛けるが、ここでは ",
+                      math(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}`),
+                      " から始めて左から掛ける。左から掛けるのは、次の主張の帰納法の一歩で ",
+                      math(String.raw`A^{k+1}`),
+                      " から左の因子 ",
+                      math(String.raw`A`),
+                      " を 1 つ外し、残りへ帰納法の仮定を当てるためである",
+                      "（",
+                      ref("claim_qbar_action_product"),
+                      " が外せるのは左の因子である）。",
+                      math(String.raw`k=0`),
+                      " から始めるのは、その出発点が ",
+                      ref("claim_qbar_identity_action"),
+                      " でそのまま済むためである。",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_claim_qbar_eigenvector_pow",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_qbar_action_iterate",
+                      kind: "definition",
+                      title: { text: "代数的数を成分とする行列の作用の反復" },
+                      labels: ["def_qbar_action_iterate"],
+                      habitat: "Qbar",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarActionIterate"],
+                      verification: ["sagemath/check/qbar-action-pow"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          "（",
+                          ref("def_qbar_matrix"),
+                          "）と ",
+                          math(String.raw`v\in V_{\mathcal{J}}`),
+                          "（",
+                          ref("def_qbar_vector"),
+                          "）と ",
+                          math(String.raw`k\in\mathbb{N}`),
+                          " に対し、作用（",
+                          ref("def_qbar_matrix_action"),
+                          "）を ",
+                          math(String.raw`k`),
+                          " 回反復した列ベクトル ",
+                          math(String.raw`\mathrm{it}^{[k]}_{A}(v)\in V_{\mathcal{J}}`),
+                          " を ",
+                          math(String.raw`k`),
+                          " についての帰納法で",
+                        ]),
+                        displayMath(String.raw`\mathrm{it}^{[0]}_{A}(v):=v,\qquad \mathrm{it}^{[k+1]}_{A}(v):=A\cdot\bigl(\mathrm{it}^{[k]}_{A}(v)\bigr)\qquad(k\in\mathbb{N})`),
+                        paragraph([
+                          "と定める。上付きの角括弧は、これが積の反復ではなく作用の反復であることを",
+                          "記号に残すためのものである。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_action_pow",
+                      kind: "claim",
+                      title: { text: "行列の冪の作用は、作用を反復したものである" },
+                      labels: ["claim_qbar_action_pow"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-action-pow"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                          "（",
+                          ref("def_qbar_matrix"),
+                          "）と ",
+                          math(String.raw`v\in V_{\mathcal{J}}`),
+                          "（",
+                          ref("def_qbar_vector"),
+                          "）を任意に取る。このとき任意の ",
+                          math(String.raw`k\in\mathbb{N}`),
+                          " について",
+                        ]),
+                        displayMath(String.raw`A^{k}\cdot v=\mathrm{it}^{[k]}_{A}(v)`),
+                        paragraph([
+                          "が成り立つ（左辺の冪は ",
+                          ref("def_qbar_matrix_power"),
+                          "、点は ",
+                          ref("def_qbar_matrix_action"),
+                          "、右辺は ",
+                          ref("def_qbar_action_iterate"),
+                          "）。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          math(String.raw`A`),
+                          " と ",
+                          math(String.raw`v`),
+                          " を固定し、",
+                          math(String.raw`k`),
+                          " についての帰納法で示す。",
+                        ]),
+                        paragraph([
+                          math(String.raw`k=0`),
+                          " の場合。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+A^{0}\cdot v
+&=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=v
+&&(\because\ \blkref{claim_qbar_identity_action})\\
+&=\mathrm{it}^{[0]}_{A}(v)
+&&(\because\ \blkref{def_qbar_action_iterate})
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`k`),
+                          " の場合に ",
+                          math(String.raw`A^{k}\cdot v=\mathrm{it}^{[k]}_{A}(v)`),
+                          " が成り立つとして、",
+                          math(String.raw`k+1`),
+                          " の場合を示す。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+A^{k+1}\cdot v
+&=\bigl(A\,A^{k}\bigr)\cdot v
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=A\cdot\bigl(A^{k}\cdot v\bigr)
+&&(\because\ \blkref{claim_qbar_action_product})\\
+&=A\cdot\bigl(\mathrm{it}^{[k]}_{A}(v)\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=\mathrm{it}^{[k+1]}_{A}(v)
+&&(\because\ \blkref{def_qbar_action_iterate})
+\end{aligned}`),
+                        paragraph([
+                          "よって任意の ",
+                          math(String.raw`k\in\mathbb{N}`),
+                          " について主張が成り立つ。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について新しく使っているものは無い。使っているのは上の各行で引いた 2 つの主張",
+                          "（単位行列の作用が列ベクトルを動かさないことと、行列の積の作用が作用を 2 度施した",
+                          "ものであること）と、2 つの定義の再帰の式だけである。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "algebraic_eigenvalue_claim_qbar_eigenvector_pow",
+                  kind: "claim",
+                  title: { text: "固有ベクトルへ行列の冪を作用させると、固有値の冪のスカラー倍になる" },
+                  labels: ["claim_qbar_eigenvector_pow"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul",
+                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_smul_necSuf",
+                    "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul_from_necSuf",
+                  ],
+                  verification: ["sagemath/check/qbar-eigenvector-pow"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
+                      "（",
+                      ref("def_qbar_matrix"),
+                      "）と ",
+                      math(String.raw`v\in V_{\mathcal{J}}`),
+                      "（",
+                      ref("def_qbar_vector"),
+                      "）と ",
+                      math(String.raw`z\in\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）が ",
+                      math(String.raw`A\cdot v=z\odot v`),
+                      " を満たすとする。このとき任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`A^{k}\cdot v=z^{k}\odot v`),
+                    paragraph([
+                      "が成り立つ（左辺の冪は ",
+                      ref("def_qbar_matrix_power"),
+                      "、点は ",
+                      ref("def_qbar_matrix_action"),
+                      "、",
+                      math(String.raw`\odot`),
+                      " は ",
+                      ref("def_qbar_vector_smul"),
+                      "、右辺の ",
+                      math(String.raw`z^{k}`),
+                      " は ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " の積の反復で ",
+                      math(String.raw`z^{0}=1`),
+                      "・",
+                      math(String.raw`z^{k+1}=z^{k}z`),
+                      " と約束したもの（",
+                      ref("def_root_of_unity_set"),
+                      "）である）。",
+                    ]),
+                    paragraph([
+                      "仮定は ",
+                      ref("def_qbar_eigenvector"),
+                      " の 2 条件のうち等式の側だけである。",
+                      math(String.raw`v\ne o_{\mathcal{J}}`),
+                      " は使わないので、",
+                      math(String.raw`z`),
+                      " に属する固有ベクトルにはこの主張がそのまま当たる。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、スカラー倍についての 2 つの等式を作る。",
+                      "第一に、任意の ",
+                      math(String.raw`w\in V_{\mathcal{J}}`),
+                      " と任意の ",
+                      math(String.raw`u\in \mathcal{J}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+(1\odot w)(u)
+&=1\,w(u)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=w(u)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の単位元との積})
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`u`),
+                      " は任意なので ",
+                      math(String.raw`1\odot w=w`),
+                      " である。第二に、任意の ",
+                      math(String.raw`y,z\in\overline{\mathbb{Q}}`),
+                      " と任意の ",
+                      math(String.raw`w\in V_{\mathcal{J}}`),
+                      " と任意の ",
+                      math(String.raw`u\in \mathcal{J}`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\bigl((y\,z)\odot w\bigr)(u)
+&=(y\,z)\,w(u)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=y\,\bigl(z\,w(u)\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=y\,\bigl((z\odot w)(u)\bigr)
+&&(\because\ \blkref{def_qbar_vector_smul})\\
+&=\bigl(y\odot(z\odot w)\bigr)(u)
+&&(\because\ \blkref{def_qbar_vector_smul})
+\end{aligned}`),
+                    paragraph([
+                      "であり、",
+                      math(String.raw`u`),
+                      " は任意なので ",
+                      math(String.raw`(y\,z)\odot w=y\odot(z\odot w)`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`A`),
+                      " と ",
+                      math(String.raw`v`),
+                      " と ",
+                      math(String.raw`z`),
+                      " を固定し、",
+                      math(String.raw`k`),
+                      " についての帰納法で示す。",
+                    ]),
+                    paragraph([
+                      math(String.raw`k=0`),
+                      " の場合。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+A^{0}\cdot v
+&=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=v
+&&(\because\ \blkref{claim_qbar_identity_action})\\
+&=1\odot v
+&&(\because\ \text{準備の第 1 の等式})\\
+&=z^{0}\odot v
+&&(\because\ z^{0}=1\ \text{の約束。}\ \blkref{def_root_of_unity_set})
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`k`),
+                      " の場合に ",
+                      math(String.raw`A^{k}\cdot v=z^{k}\odot v`),
+                      " が成り立つとして、",
+                      math(String.raw`k+1`),
+                      " の場合を示す。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+A^{k+1}\cdot v
+&=\bigl(A\,A^{k}\bigr)\cdot v
+&&(\because\ \blkref{def_qbar_matrix_power})\\
+&=A\cdot\bigl(A^{k}\cdot v\bigr)
+&&(\because\ \blkref{claim_qbar_action_product})\\
+&=A\cdot\bigl(z^{k}\odot v\bigr)
+&&(\because\ \text{帰納法の仮定})\\
+&=z^{k}\odot\bigl(A\cdot v\bigr)
+&&(\because\ \blkref{claim_qbar_action_smul})\\
+&=z^{k}\odot\bigl(z\odot v\bigr)
+&&(\because\ \text{仮定}\ A\cdot v=z\odot v)\\
+&=\bigl(z^{k}z\bigr)\odot v
+&&(\because\ \text{準備の第 2 の等式})\\
+&=z^{k+1}\odot v
+&&(\because\ z^{k+1}=z^{k}z\ \text{の約束。}\ \blkref{def_root_of_unity_set})
+\end{aligned}`),
+                    paragraph([
+                      "よって任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について主張が成り立つ。",
+                    ]),
+                    paragraph([
+                      "この段が ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " について使っているのは、単位元との積と積の結合則だけである",
+                      "（準備の 2 つの等式でだけ使う。逆元も、可換性も、体であることも使わない）。",
+                      "行列については上の各行で引いた 3 つの主張だけを使う。",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_root_of_unity_sums",
+        labels: [],
+        title: { text: "1 の冪根の積と冪の和" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_claim_qbar_power_difference_factorization",
+              beforeFocus: [
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_mul_pow",
+                      kind: "claim",
+                      title: { text: "代数的数の積の冪は、冪の積である" },
+                      labels: ["claim_qbar_mul_pow"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarMul_pow",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_pow_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarMul_pow_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-mul-pow"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`w,z\in\overline{\mathbb{Q}}`),
+                          "（",
+                          ref("def_algebraic_numbers"),
+                          "）と ",
+                          math(String.raw`n\in\mathbb{N}`),
+                          " を任意に取る。このとき",
+                        ]),
+                        displayMath(String.raw`(wz)^{n}=w^{n}z^{n}`),
+                        paragraph([
+                          "が成り立つ（冪は ",
+                          ref("def_root_of_unity_set"),
+                          " で置いた約束、すなわち ",
+                          math(String.raw`y^{0}:=1`),
+                          " と ",
+                          math(String.raw`y^{j+1}:=y^{j}y`),
+                          " による）。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          math(String.raw`n`),
+                          " についての帰納法で示す。",
+                        ]),
+                        paragraph([
+                          "出発点（",
+                          math(String.raw`n=0`),
+                          "）。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(wz)^{0}&=1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)\\
+&=1\cdot 1
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=w^{0}\cdot 1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)\\
+&=w^{0}z^{0}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)
+\end{aligned}`),
+                        paragraph([
+                          "一歩。",
+                          math(String.raw`n\in\mathbb{N}`),
+                          " について ",
+                          math(String.raw`(wz)^{n}=w^{n}z^{n}`),
+                          " を仮定する。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(wz)^{n+1}&=(wz)^{n}(wz)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)\\
+&=\bigl(w^{n}z^{n}\bigr)(wz)
+&&(\because\ \text{帰納法の仮定})\\
+&=w^{n}\bigl(z^{n}(wz)\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=w^{n}\bigl((z^{n}w)z\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=w^{n}\bigl((wz^{n})z\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を}\ z^{n}\ \text{と}\ w\ \text{に当てる})\\
+&=w^{n}\bigl(w(z^{n}z)\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=\bigl(w^{n}w\bigr)\bigl(z^{n}z\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=w^{n+1}\bigl(z^{n}z\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)\\
+&=w^{n+1}z^{n+1}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)
+\end{aligned}`),
+                        paragraph([
+                          "したがってすべての ",
+                          math(String.raw`n\in\mathbb{N}`),
+                          " について ",
+                          math(String.raw`(wz)^{n}=w^{n}z^{n}`),
+                          " である。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、積の単位元・積の結合則・および ",
+                          math(String.raw`z^{n}`),
+                          " と ",
+                          math(String.raw`w`),
+                          " という 2 元についての可換則だけである。",
+                          "加法も零元も分配則も、逆元の存在も、体であることも使っていない。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                        paragraph([
+                          "この主張は、1 の ",
+                          math(String.raw`L`),
+                          " 乗根の全体 ",
+                          math(String.raw`\mu_L`),
+                          "（",
+                          ref("def_root_of_unity_set"),
+                          "）が積で閉じることを示すための足場である。",
+                          "そこから、",
+                          math(String.raw`\mu_L`),
+                          " の元を掛ける操作が ",
+                          math(String.raw`\mu_L`),
+                          " の全単射であることを経て、",
+                          math(String.raw`\mu_L`),
+                          " の元の冪の総和（指数が ",
+                          math(String.raw`L`),
+                          " の倍数なら元の個数、そうでなければ零元）へ進む。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_root_of_unity_mul",
+                      kind: "claim",
+                      title: { text: "1 の冪根の全体は積で閉じている" },
+                      labels: ["claim_root_of_unity_mul"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_mul",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_mem_pow_eq_one_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_mul_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/root-of-unity-mul"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`n\in\mathbb{N}`),
+                          " を任意に取る。",
+                          math(String.raw`w\in\mu_{n}`),
+                          " と ",
+                          math(String.raw`z\in\mu_{n}`),
+                          "（",
+                          ref("def_root_of_unity_set"),
+                          "）を任意に取る。このとき",
+                        ]),
+                        displayMath(String.raw`wz\in\mu_{n}`),
+                        paragraph([
+                          "が成り立つ。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          ref("def_root_of_unity_set"),
+                          " により ",
+                          math(String.raw`w\in\overline{\mathbb{Q}}`),
+                          " かつ ",
+                          math(String.raw`w^{n}=1`),
+                          " であり、同じく ",
+                          math(String.raw`z\in\overline{\mathbb{Q}}`),
+                          " かつ ",
+                          math(String.raw`z^{n}=1`),
+                          " である。",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " は体なので積で閉じており（",
+                          ref("def_algebraic_numbers"),
+                          "）、",
+                          math(String.raw`wz\in\overline{\mathbb{Q}}`),
+                          " である。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(wz)^{n}&=w^{n}z^{n}
+&&(\because\ \blkref{claim_qbar_mul_pow})\\
+&=1\cdot z^{n}
+&&(\because\ w^{n}=1)\\
+&=1\cdot 1
+&&(\because\ z^{n}=1)\\
+&=1
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
+\end{aligned}`),
+                        paragraph([
+                          "よって ",
+                          math(String.raw`wz\in\overline{\mathbb{Q}}`),
+                          " かつ ",
+                          math(String.raw`(wz)^{n}=1`),
+                          " であり、",
+                          ref("def_root_of_unity_set"),
+                          " により ",
+                          math(String.raw`wz\in\mu_{n}`),
+                          " である。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、積で閉じていること・積の単位元・および ",
+                          ref("claim_qbar_mul_pow"),
+                          " が使う性質（結合則と 2 元についての可換則）だけである。",
+                          "加法も零元も分配則も、逆元の存在も、代数閉であることも使っていない。",
+                          math(String.raw`n=0`),
+                          " のときも鎖はそのまま通る（",
+                          math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`),
+                          " なので主張は自明だが、鎖はそれを使っていない）。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_root_of_unity_pow",
+                      kind: "claim",
+                      title: { text: "1 の冪根の冪は 1 の冪根である" },
+                      labels: ["claim_root_of_unity_pow"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_pow",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_mem_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_pow_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/root-of-unity-pow"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`n\in\mathbb{N}`),
+                          " を任意に取り、",
+                          math(String.raw`w\in\mu_{n}`),
+                          "（",
+                          ref("def_root_of_unity_set"),
+                          "）を任意に取る。このとき任意の ",
+                          math(String.raw`k\in\mathbb{N}`),
+                          " について",
+                        ]),
+                        displayMath(String.raw`w^{k}\in\mu_{n}`),
+                        paragraph([
+                          "が成り立つ。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          math(String.raw`k`),
+                          " についての帰納法で示す。",
+                        ]),
+                        paragraph([
+                          "出発点（",
+                          math(String.raw`k=0`),
+                          "）。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+w^{0}&=1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{0}=1)\\
+1^{n}&=1
+&&(\because\ \text{単位元の反復積は単位元である})
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`1\in\overline{\mathbb{Q}}`),
+                          " は ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " が体であること（",
+                          ref("def_algebraic_numbers"),
+                          "）による。よって ",
+                          ref("def_root_of_unity_set"),
+                          " により ",
+                          math(String.raw`w^{0}=1\in\mu_{n}`),
+                          " である。",
+                        ]),
+                        paragraph([
+                          "一歩（",
+                          math(String.raw`k`),
+                          " のとき ",
+                          math(String.raw`w^{k}\in\mu_{n}`),
+                          " が成り立つと仮定して ",
+                          math(String.raw`k+1`),
+                          " のときを示す）。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+w^{k+1}&=w^{k}\,w
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{j+1}=y^{j}y)\\
+&\in\mu_{n}
+&&(\because\ \blkref{claim_root_of_unity_mul}\ \text{を}\ w^{k}\in\mu_{n}\ \text{（帰納法の仮定）と}\ w\in\mu_{n}\ \text{（仮定）へ当てる})
+\end{aligned}`),
+                        paragraph([
+                          "以上より、任意の ",
+                          math(String.raw`k\in\mathbb{N}`),
+                          " について ",
+                          math(String.raw`w^{k}\in\mu_{n}`),
+                          " である。",
+                        ]),
+                        paragraph([
+                          "この段が使っているのは、",
+                          math(String.raw`\mu_{n}`),
+                          " が 1 を含むことと積で閉じていること（",
+                          ref("claim_root_of_unity_mul"),
+                          "）の 2 つだけである。",
+                          math(String.raw`w`),
+                          " が 1 の冪根であることは、",
+                          math(String.raw`w\in\mu_{n}`),
+                          " という所属としてしか使っていない。",
+                          "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_def_root_of_unity_mul_map",
+                      kind: "definition",
+                      title: { text: "1 の冪根を掛ける写像" },
+                      labels: ["def_root_of_unity_mul_map"],
+                      habitat: "Qbar",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.mulMap"],
+                      verification: ["sagemath/check/root-of-unity-mul-map"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`n\in\mathbb{N}`),
+                          " を任意に取り、",
+                          math(String.raw`w\in\mu_{n}`),
+                          "（",
+                          ref("def_root_of_unity_set"),
+                          "）を任意に取る。写像",
+                        ]),
+                        displayMath(
+                          String.raw`\theta^{(n)}_{w}:\mu_{n}\to\mu_{n},\qquad
+\theta^{(n)}_{w}(z):=wz`,
+                        ),
+                        paragraph([
+                          "を定める。ここで ",
+                          math(String.raw`wz`),
+                          " は体 ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " の積（",
+                          ref("def_algebraic_numbers"),
+                          "）である。行き先が ",
+                          math(String.raw`\mu_{n}`),
+                          " に収まること、すなわち ",
+                          math(String.raw`z\in\mu_{n}`),
+                          " ならば ",
+                          math(String.raw`wz\in\mu_{n}`),
+                          " であることは ",
+                          ref("claim_root_of_unity_mul"),
+                          " による（これを言わないと写像として定まらない）。",
+                        ]),
+                        paragraph([
+                          "上付きの ",
+                          math(String.raw`(n)`),
+                          " と下付きの ",
+                          math(String.raw`w`),
+                          " は、この写像が ",
+                          math(String.raw`n`),
+                          " と ",
+                          math(String.raw`w`),
+                          " の取り方に依存することを記号に残すためのものである。",
+                          "掛ける操作を表す文字に ",
+                          math(String.raw`m`),
+                          " を使わない（",
+                          math(String.raw`m`),
+                          " は多重度 ",
+                          math(String.raw`\Omega_L(m)`),
+                          " の添字に固定してある）ので ",
+                          math(String.raw`\theta`),
+                          " とした。",
+                          "実数体も複素数体も現れない（定義域も値域も代数的数の部分集合である）。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_root_of_unity_mul_map_bijective",
+                      kind: "claim",
+                      title: { text: "1 の冪根を掛ける写像は全単射である" },
+                      labels: ["claim_root_of_unity_mul_map_bijective"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mulMap_bijective_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/root-of-unity-mul-map"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`n\in\mathbb{N}`),
+                          " を ",
+                          math(String.raw`n\ge1`),
+                          " を満たすように任意に取り、",
+                          math(String.raw`w\in\mu_{n}`),
+                          "（",
+                          ref("def_root_of_unity_set"),
+                          "）を任意に取る。このとき ",
+                          ref("def_root_of_unity_mul_map"),
+                          " の写像 ",
+                          math(String.raw`\theta^{(n)}_{w}`),
+                          " は全単射であり、その逆写像は ",
+                          math(String.raw`\theta^{(n)}_{w^{n-1}}`),
+                          " である。すなわち任意の ",
+                          math(String.raw`z\in\mu_{n}`),
+                          " について",
+                        ]),
+                        displayMath(String.raw`\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z)\bigr)=z,
+\qquad
+\theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)=z`),
+                        paragraph([
+                          "が成り立つ。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "準備。",
+                          ref("claim_root_of_unity_pow"),
+                          " を ",
+                          math(String.raw`k=n-1`),
+                          " に当てて ",
+                          math(String.raw`w^{n-1}\in\mu_{n}`),
+                          " を得る。したがって ",
+                          ref("def_root_of_unity_mul_map"),
+                          " により写像 ",
+                          math(String.raw`\theta^{(n)}_{w^{n-1}}:\mu_{n}\to\mu_{n}`),
+                          " が定まる。この 2 つの元の積は次のように 1 である。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+w^{n-1}\,w&=w^{(n-1)+1}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{j+1}=y^{j}y)\\
+&=w^{n}
+&&(\because\ n\ge1\ \text{より}\ (n-1)+1=n)\\
+&=1
+&&(\because\ w\in\mu_{n}\ \text{と}\ \blkref{def_root_of_unity_set})
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`z\in\mu_{n}`),
+                          " を任意に取る。第 1 の往復は次のとおりである。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z)\bigr)&=\theta^{(n)}_{w^{n-1}}(wz)
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
+&=w^{n-1}(wz)
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ})\\
+&=(w^{n-1}w)z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=1\cdot z
+&&(\because\ \text{準備の等式}\ w^{n-1}w=1)\\
+&=z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
+\end{aligned}`),
+                        paragraph([
+                          "第 2 の往復は次のとおりである。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)&=\theta^{(n)}_{w}(w^{n-1}z)
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ})\\
+&=w(w^{n-1}z)
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
+&=(w\,w^{n-1})z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=(w^{n-1}w)z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則})\\
+&=1\cdot z
+&&(\because\ \text{準備の等式}\ w^{n-1}w=1)\\
+&=z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
+\end{aligned}`),
+                        paragraph([
+                          "単射性。",
+                          math(String.raw`z_1\in\mu_{n}`),
+                          " と ",
+                          math(String.raw`z_2\in\mu_{n}`),
+                          " が ",
+                          math(String.raw`\theta^{(n)}_{w}(z_1)=\theta^{(n)}_{w}(z_2)`),
+                          " を満たすとする。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+z_1&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_1)\bigr)
+&&(\because\ \text{第 1 の往復を}\ z_1\ \text{へ})\\
+&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_2)\bigr)
+&&(\because\ \theta^{(n)}_{w}(z_1)=\theta^{(n)}_{w}(z_2))\\
+&=z_2
+&&(\because\ \text{第 1 の往復を}\ z_2\ \text{へ})
+\end{aligned}`),
+                        paragraph([
+                          "全射性。",
+                          math(String.raw`z\in\mu_{n}`),
+                          " を任意に取る。",
+                          ref("def_root_of_unity_mul_map"),
+                          " により ",
+                          math(String.raw`\theta^{(n)}_{w^{n-1}}(z)\in\mu_{n}`),
+                          " であり、第 2 の往復により ",
+                          math(String.raw`\theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)=z`),
+                          " である。すなわち ",
+                          math(String.raw`z`),
+                          " は ",
+                          math(String.raw`\theta^{(n)}_{w}`),
+                          " の像に属する。",
+                        ]),
+                        paragraph([
+                          "以上より ",
+                          math(String.raw`\theta^{(n)}_{w}`),
+                          " は単射かつ全射、すなわち全単射であり、2 つの往復が恒等写像であることから ",
+                          math(String.raw`\theta^{(n)}_{w^{n-1}}`),
+                          " がその逆写像である。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、積の結合則・積の可換則・積の単位元の 3 つだけである。",
+                          "加法も零元も分配則も、逆元の存在も、代数閉であることも使っていない。",
+                          math(String.raw`w`),
+                          " が 1 の冪根であることは、",
+                          math(String.raw`w^{n-1}w=1`),
+                          " という 1 つの等式（と可換則から出る ",
+                          math(String.raw`w\,w^{n-1}=1`),
+                          "）としてしか使っていない。",
+                          math(String.raw`n\ge1`),
+                          " が要るのは準備の第 2 段 ",
+                          math(String.raw`(n-1)+1=n`),
+                          " だけである（",
+                          math(String.raw`n=0`),
+                          " のときは ",
+                          math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`),
+                          " なので ",
+                          math(String.raw`w=0`),
+                          " が取れてしまい、掛ける操作は全単射でない）。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_root_of_unity_power_sum_invariant",
+                      kind: "claim",
+                      title: {
+                        text: "1 の冪根の全体にわたる冪の和は、1 の冪根の冪を掛けても動かない",
+                      },
+                      labels: ["claim_root_of_unity_power_sum_invariant"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.powerSum_mul_invariant",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_mul_invariant_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.powerSum_mul_invariant_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/root-of-unity-power-sum-invariant"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`n\in\mathbb{N}`),
+                          " を ",
+                          math(String.raw`n\ge1`),
+                          " を満たすように任意に取り、",
+                          math(String.raw`\mu_{n}`),
+                          "（",
+                          ref("def_root_of_unity_set"),
+                          "）が有限集合であると仮定する。",
+                          math(String.raw`m\in\mathbb{N}`),
+                          " を任意に取り、",
+                        ]),
+                        displayMath(String.raw`S_{n,m}:=\sum_{z\in\mu_{n}}z^{m}\in\overline{\mathbb{Q}}`),
+                        paragraph([
+                          "と置く（右辺は ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          "（",
+                          ref("def_algebraic_numbers"),
+                          "）の有限個の元の和であり、仮定した有限性によって定まる）。このとき任意の ",
+                          math(String.raw`w\in\mu_{n}`),
+                          " について",
+                        ]),
+                        displayMath(String.raw`w^{m}\,S_{n,m}=S_{n,m}`),
+                        paragraph([
+                          "が成り立つ。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          math(String.raw`w\in\mu_{n}`),
+                          " を任意に取る。",
+                          ref("claim_root_of_unity_mul_map_bijective"),
+                          " により ",
+                          math(String.raw`\theta^{(n)}_{w}:\mu_{n}\to\mu_{n}`),
+                          "（",
+                          ref("def_root_of_unity_mul_map"),
+                          "）は全単射である。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
+&&(\because\ S_{n,m}\ \text{の定義})\\
+&=\sum_{z\in\mu_{n}}w^{m}z^{m}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則を有限和へ})\\
+&=\sum_{z\in\mu_{n}}(wz)^{m}
+&&(\because\ \blkref{claim_qbar_mul_pow}\ \text{を}\ w\ \text{と}\ z\ \text{へ})\\
+&=\sum_{z\in\mu_{n}}\bigl(\theta^{(n)}_{w}(z)\bigr)^{m}
+&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
+&=\sum_{y\in\mu_{n}}y^{m}
+&&(\because\ \blkref{claim_root_of_unity_mul_map_bijective}\ \text{による添字の取り替え})\\
+&=S_{n,m}
+&&(\because\ S_{n,m}\ \text{の定義})
+\end{aligned}`),
+                        paragraph([
+                          "第 5 の等号は和の添字の取り替えである。",
+                          math(String.raw`\theta^{(n)}_{w}:\mu_{n}\to\mu_{n}`),
+                          " が全単射で、逆写像が ",
+                          math(String.raw`\theta^{(n)}_{w^{n-1}}`),
+                          " なので、",
+                          math(String.raw`z`),
+                          " にわたる有限和は ",
+                          math(String.raw`y=\theta^{(n)}_{w}(z)`),
+                          " にわたる有限和と同じ項を同じ回数ずつ足し合わせている（",
+                          math(String.raw`z=\theta^{(n)}_{w^{n-1}}(y)`),
+                          " が対応を戻す）。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、有限和が定まること（加法の結合則と可換則）と、",
+                          "積が有限和へ分配されることの 2 つだけである。",
+                          math(String.raw`\mu_{n}`),
+                          " の有限性は仮定であって、ここでは示していない（",
+                          math(String.raw`\mu_{n}`),
+                          " がちょうど ",
+                          math(String.raw`n`),
+                          " 個の元を持つことは別の段で示す）。",
+                          "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_geometric_telescope",
+                      kind: "claim",
+                      title: {
+                        text: "代数的数の冪の有限和は、1 を引いたものを掛けると伸縮する",
+                      },
+                      labels: ["claim_qbar_geometric_telescope"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarGeometricTelescope",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.geometric_telescope_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarGeometricTelescope_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-geometric-telescope"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`z\in\overline{\mathbb{Q}}`),
+                          "（",
+                          ref("def_algebraic_numbers"),
+                          "）を任意に取り、",
+                          math(String.raw`n\in\mathbb{N}`),
+                          " を任意に取る。",
+                        ]),
+                        displayMath(
+                          String.raw`G_{n}(z):=\sum_{k=0}^{n-1}z^{k}\in\overline{\mathbb{Q}}`,
+                        ),
+                        paragraph([
+                          "と置く（",
+                          math(String.raw`n=0`),
+                          " のときは空和であり ",
+                          math(String.raw`G_{0}(z)=0`),
+                          "、",
+                          math(String.raw`n+1`),
+                          " のときは ",
+                          math(String.raw`G_{n+1}(z)=G_{n}(z)+z^{n}`),
+                          " である）。このとき",
+                        ]),
+                        displayMath(String.raw`(z-1)\,G_{n}(z)=z^{n}-1`),
+                        paragraph([
+                          "が成り立つ。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          math(String.raw`z\in\overline{\mathbb{Q}}`),
+                          " を固定する。",
+                        ]),
+                        paragraph([
+                          "準備。任意の ",
+                          math(String.raw`k\in\mathbb{N}`),
+                          " について ",
+                          math(String.raw`z\,z^{k}=z^{k}z`),
+                          " が成り立つ（冪の約束（",
+                          ref("def_root_of_unity_set"),
+                          "）が与えるのは ",
+                          math(String.raw`z^{k+1}=z^{k}z`),
+                          " の向きだけなので、",
+                          math(String.raw`z\,z^{k}`),
+                          " をこれへ結び付けるにはこの等式が要る）。",
+                          math(String.raw`k`),
+                          " についての帰納法で示す。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+z\,z^{0}&=z\cdot 1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
+&=z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=1\cdot z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=z^{0}z
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`z\,z^{k}=z^{k}z`),
+                          " を仮定する。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)\\
+&=\bigl(z\,z^{k}\bigr)z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=\bigl(z^{k}z\bigr)z
+&&(\because\ \text{帰納法の仮定})\\
+&=z^{k+1}z
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)
+\end{aligned}`),
+                        paragraph([
+                          "以下、主張を ",
+                          math(String.raw`n`),
+                          " についての帰納法で示す。",
+                        ]),
+                        paragraph([
+                          "出発点（",
+                          math(String.raw`n=0`),
+                          "）。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(z-1)\,G_{0}(z)&=(z-1)\cdot 0
+&&(\because\ G_{0}(z)\ \text{は空和である})\\
+&=0
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
+&=1-1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元})\\
+&=z^{0}-1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
+\end{aligned}`),
+                        paragraph([
+                          "一歩（",
+                          math(String.raw`n`),
+                          " から ",
+                          math(String.raw`n+1`),
+                          " へ）。",
+                          math(String.raw`(z-1)\,G_{n}(z)=z^{n}-1`),
+                          " を仮定する。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(z-1)\,G_{n+1}(z)&=(z-1)\bigl(G_{n}(z)+z^{n}\bigr)
+&&(\because\ G_{n+1}(z)\ \text{の定義})\\
+&=(z-1)\,G_{n}(z)+(z-1)z^{n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=(z^{n}-1)+(z-1)z^{n}
+&&(\because\ \text{帰納法の仮定})\\
+&=(z^{n}-1)+\bigl(z\,z^{n}-1\cdot z^{n}\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=(z^{n}-1)+\bigl(z\,z^{n}-z^{n}\bigr)
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=(z^{n}-1)+\bigl(z^{n}z-z^{n}\bigr)
+&&(\because\ \text{準備の}\ z\,z^{n}=z^{n}z)\\
+&=(z^{n}-1)+\bigl(z^{n+1}-z^{n}\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z)\\
+&=z^{n+1}-1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}\ \text{が相殺する})
+\end{aligned}`),
+                        paragraph([
+                          "出発点と一歩により、すべての ",
+                          math(String.raw`n\in\mathbb{N}`),
+                          " について主張が成り立つ。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、加法群であること（結合則・可換則・零元・加法の逆元）と、",
+                          "積が和へ分配されること、積が結合的であること（準備の段で使う）、積の単位元があること、",
+                          "そして零元との積が零元であることだけである。",
+                          "積の可換則も、積の逆元の存在も、代数閉であることも使っていない（",
+                          math(String.raw`z`),
+                          " は自分自身の冪とだけ掛け合わされ、",
+                          math(String.raw`z\,z^{k}=z^{k}z`),
+                          " は準備の段で結合則から出している）。",
+                          "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
+                        ]),
+                        paragraph([
+                          "これは、",
+                          math(String.raw`\mu_{n}`),
+                          "（",
+                          ref("def_root_of_unity_set"),
+                          "）の元 ",
+                          math(String.raw`z`),
+                          " が ",
+                          math(String.raw`z\ne1`),
+                          " を満たすとき ",
+                          math(String.raw`G_{n}(z)=0`),
+                          " を出すための足場である（",
+                          math(String.raw`z^{n}-1=0`),
+                          " と、体に零因子が無いことによる）。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_qbar_no_zero_divisors",
+                      kind: "claim",
+                      title: {
+                        text: "代数的数の積が零元ならば、零元でない方で割って他方が零元と分かる",
+                      },
+                      labels: ["claim_qbar_no_zero_divisors"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarNoZeroDivisors",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.no_zero_divisors_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.qbarNoZeroDivisors_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/qbar-no-zero-divisors"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`a,b\in\overline{\mathbb{Q}}`),
+                          "（",
+                          ref("def_algebraic_numbers"),
+                          "）が ",
+                          math(String.raw`ab=0`),
+                          " と ",
+                          math(String.raw`a\ne0`),
+                          " を満たすとする。このとき",
+                        ]),
+                        displayMath(String.raw`b=0`),
+                        paragraph([
+                          "が成り立つ。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "準備。",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " は体であり（",
+                          ref("def_algebraic_numbers"),
+                          "）、",
+                          math(String.raw`a\ne0`),
+                          " であるから、",
+                          math(String.raw`a^{-1}a=1`),
+                          " を満たす ",
+                          math(String.raw`a^{-1}\in\overline{\mathbb{Q}}`),
+                          " が取れる。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+b&=1\cdot b
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=\bigl(a^{-1}a\bigr)b
+&&(\because\ \text{準備で取った}\ a^{-1}\ \text{の性質}\ a^{-1}a=1)\\
+&=a^{-1}(ab)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=a^{-1}\cdot 0
+&&(\because\ \text{仮定}\ ab=0)\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零元})
+\end{aligned}`),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について使っているのは、積が結合的であること、積の単位元があること、",
+                          "零元との積が零元であること、そして ",
+                          math(String.raw`a\ne0`),
+                          " に対して ",
+                          math(String.raw`a^{-1}a=1`),
+                          " を満たす元が取れることだけである。",
+                          "積の可換則も、加法についての性質も、代数閉であることも使っていない。",
+                          "実数体も複素数体も現れない。",
+                        ]),
+                        paragraph([
+                          "これは、",
+                          math(String.raw`\mu_{n}`),
+                          "（",
+                          ref("def_root_of_unity_set"),
+                          "）の元 ",
+                          math(String.raw`z`),
+                          " が ",
+                          math(String.raw`z\ne1`),
+                          " を満たすとき、伸縮の等式（",
+                          ref("claim_qbar_geometric_telescope"),
+                          "）の左辺 ",
+                          math(String.raw`(z-1)G_{n}(z)`),
+                          " が零元であることから ",
+                          math(String.raw`G_{n}(z)=0`),
+                          " を出すための段であり、",
+                          "1 の冪根の全体にわたる冪の和 ",
+                          math(String.raw`S_{n,m}`),
+                          " について ",
+                          math(String.raw`(w^{m}-1)S_{n,m}=0`),
+                          "（",
+                          ref("claim_root_of_unity_power_sum_invariant"),
+                          "）から ",
+                          math(String.raw`S_{n,m}=0`),
+                          " を出すための段でもある。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_claim_root_of_unity_geometric_sum_zero",
+                      kind: "claim",
+                      title: {
+                        text: "1 でない 1 の冪根の、冪の有限和は零元である",
+                      },
+                      labels: ["claim_root_of_unity_geometric_sum_zero"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityGeometricSumZero",
+                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.geometric_sum_zero_necSuf",
+                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityGeometricSumZero_from_necSuf",
+                      ],
+                      verification: ["sagemath/check/root-of-unity-geometric-sum-zero"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`n\in\mathbb{N}`),
+                          " を任意に取り、",
+                          math(String.raw`z\in\mu_{n}`),
+                          "（",
+                          ref("def_root_of_unity_set"),
+                          "）が ",
+                          math(String.raw`z\ne1`),
+                          " を満たすとする。このとき、",
+                          math(String.raw`G_{n}(z)=\sum_{k=0}^{n-1}z^{k}`),
+                          "（",
+                          ref("claim_qbar_geometric_telescope"),
+                          " で置いた元）について",
+                        ]),
+                        displayMath(String.raw`G_{n}(z)=0`),
+                        paragraph([
+                          "が成り立つ。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "準備。",
+                          math(String.raw`z-1\ne0`),
+                          " である。実際、",
+                          math(String.raw`z-1=0`),
+                          " とすると両辺に ",
+                          math(String.raw`1`),
+                          " を足して ",
+                          math(String.raw`z=1`),
+                          " となり、仮定 ",
+                          math(String.raw`z\ne1`),
+                          " に反する。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(z-1)\,G_{n}(z)&=z^{n}-1
+&&(\because\ \text{伸縮の等式})\\
+&=1-1
+&&(\because\ z\in\mu_{n}\ \text{すなわち}\ z^{n}=1)\\
+&=0
+&&(\because\ \overline{\mathbb{Q}}\ \text{の同じ元どうしの差は零元})
+\end{aligned}`),
+                        paragraph([
+                          "第 1 の等号は ",
+                          ref("claim_qbar_geometric_telescope"),
+                          "、第 2 の等号は ",
+                          ref("def_root_of_unity_set"),
+                          " による。",
+                        ]),
+                        paragraph([
+                          "この等式に、積が零元ならば零元でない方で割って他方が零元と分かること（",
+                          ref("claim_qbar_no_zero_divisors"),
+                          "）を ",
+                          math(String.raw`a=z-1`),
+                          "、",
+                          math(String.raw`b=G_{n}(z)`),
+                          " として当てる。仮定 ",
+                          math(String.raw`ab=0`),
+                          " は上の等式であり、仮定 ",
+                          math(String.raw`a\ne0`),
+                          " は準備で示した ",
+                          math(String.raw`z-1\ne0`),
+                          " である。よって ",
+                          math(String.raw`G_{n}(z)=0`),
+                          " を得る。",
+                        ]),
+                        paragraph([
+                          "この段が ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " について新たに使っているのは、引いた 2 つの主張が要求する性質のほかに、",
+                          "同じ元どうしの差が零元であること、および ",
+                          math(String.raw`z-1=0`),
+                          " と ",
+                          math(String.raw`z=1`),
+                          " が同値であること（加法群であること）だけである。",
+                          "積の可換則も、代数閉であることも使っていない。実数体も複素数体も現れない。",
+                        ]),
+                        paragraph([
+                          "これは、1 の冪根の全体にわたる冪の和 ",
+                          math(String.raw`S_{n,m}`),
+                          "（",
+                          ref("claim_root_of_unity_power_sum_invariant"),
+                          "）を、原始根を取って ",
+                          math(String.raw`G_{n}`),
+                          " の値として書き直す経路のための段である。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "algebraic_eigenvalue_claim_qbar_power_difference_factorization",
+                  kind: "claim",
+                  title: {
+                    text: "代数的数の冪の差は、もとの 2 元の差を因子に持つ",
+                  },
+                  labels: ["claim_qbar_power_difference_factorization"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.qbarPowerDifferenceFactorization",
+                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_difference_factorization_necSuf",
+                    "Ising2DLambda.AlgebraicEigenvalue.qbarPowerDifferenceFactorization_from_necSuf",
+                  ],
+                  verification: ["sagemath/check/qbar-power-difference-factorization"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`z,w\in\overline{\mathbb{Q}}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）を任意に取り、",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " を任意に取る。",
+                      math(String.raw`H_{n}(z,w)\in\overline{\mathbb{Q}}`),
+                      " を ",
+                      math(String.raw`n`),
+                      " についての次の約束で定める。",
+                    ]),
+                    displayMath(
+                      String.raw`H_{0}(z,w):=0,\qquad H_{n+1}(z,w):=H_{n}(z,w)\,w+z^{n}`,
+                    ),
+                    paragraph([
+                      "このとき",
+                    ]),
+                    displayMath(String.raw`(z-w)\,H_{n}(z,w)=z^{n}-w^{n}`),
+                    paragraph([
+                      "が成り立つ。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`z,w\in\overline{\mathbb{Q}}`),
+                      " を固定する。",
+                    ]),
+                    paragraph([
+                      "準備。任意の ",
+                      math(String.raw`k\in\mathbb{N}`),
+                      " について ",
+                      math(String.raw`z\,z^{k}=z^{k}z`),
+                      " が成り立つ（冪の約束（",
+                      ref("def_root_of_unity_set"),
+                      "）が与えるのは ",
+                      math(String.raw`z^{k+1}=z^{k}z`),
+                      " の向きだけなので、",
+                      math(String.raw`z\,z^{k}`),
+                      " をこれへ結び付けるにはこの等式が要る。",
+                      "この主張の眼目は ",
+                      math(String.raw`z`),
+                      " と ",
+                      math(String.raw`w`),
+                      " が可換であること以外を使わない点にあるので、ここを積の可換則で埋めることはできない）。",
+                      math(String.raw`k`),
+                      " についての帰納法で示す。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+z\,z^{0}&=z\cdot 1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
+&=z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=1\cdot z
+&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&=z^{0}z
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`z\,z^{k}=z^{k}z`),
+                      " を仮定する。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)\\
+&=\bigl(z\,z^{k}\bigr)z
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=\bigl(z^{k}z\bigr)z
+&&(\because\ \text{帰納法の仮定})\\
+&=z^{k+1}z
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)
+\end{aligned}`),
+                    paragraph([
+                      "以下、主張を ",
+                      math(String.raw`n`),
+                      " についての帰納法で示す。",
+                    ]),
+                    paragraph([
+                      "出発点（",
+                      math(String.raw`n=0`),
+                      "）。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+(z-w)\,H_{0}(z,w)&=(z-w)\cdot 0
+&&(\because\ H_{0}(z,w)=0\ \text{の約束})\\
+&=0
+&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
+&=1-1
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元})\\
+&=z^{0}-1
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
+&=z^{0}-w^{0}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{0}=1)
+\end{aligned}`),
+                    paragraph([
+                      "一歩（",
+                      math(String.raw`n`),
+                      " から ",
+                      math(String.raw`n+1`),
+                      " へ）。",
+                      math(String.raw`(z-w)\,H_{n}(z,w)=z^{n}-w^{n}`),
+                      " を仮定する。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+(z-w)\,H_{n+1}(z,w)&=(z-w)\bigl(H_{n}(z,w)\,w+z^{n}\bigr)
+&&(\because\ H_{n+1}(z,w)\ \text{の約束})\\
+&=(z-w)\bigl(H_{n}(z,w)\,w\bigr)+(z-w)z^{n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=\bigl((z-w)H_{n}(z,w)\bigr)w+(z-w)z^{n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&=\bigl(z^{n}-w^{n}\bigr)w+(z-w)z^{n}
+&&(\because\ \text{帰納法の仮定})\\
+&=\bigl(z^{n}w-w^{n}w\bigr)+(z-w)z^{n}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+(z-w)z^{n}
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{n+1}=w^{n}w)\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z\,z^{n}-w\,z^{n}\bigr)
+&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n}z-w\,z^{n}\bigr)
+&&(\because\ \text{準備の等式}\ z\,z^{n}=z^{n}z)\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-w\,z^{n}\bigr)
+&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z)\\
+&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-z^{n}w\bigr)
+&&(\because\ z\ \text{と}\ w\ \text{が可換であること})\\
+&=z^{n+1}-w^{n+1}
+&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}w\ \text{が相殺する})
+\end{aligned}`),
+                    paragraph([
+                      "出発点と一歩により、すべての ",
+                      math(String.raw`n\in\mathbb{N}`),
+                      " について主張が成り立つ。",
+                    ]),
+                    paragraph([
+                      "この段が ",
+                      math(String.raw`\overline{\mathbb{Q}}`),
+                      " について使っているのは、加法群であること（結合則・可換則・零元・加法の逆元）、",
+                      "積が和へ分配されること、積が結合的であること、積の単位元があること、",
+                      "零元との積が零元であること、そして ",
+                      math(String.raw`z`),
+                      " と ",
+                      math(String.raw`w`),
+                      " が可換であることだけである（一歩の鎖で ",
+                      math(String.raw`z`),
+                      " と ",
+                      math(String.raw`w`),
+                      " の可換性を使っているのは第 10 の等号の 1 箇所",
+                      "（",
+                      math(String.raw`w\,z^{n}=z^{n}w`),
+                      "）だけである。第 8 の等号の ",
+                      math(String.raw`z\,z^{n}=z^{n}z`),
+                      " は同じ元どうしの入れ替えであり、準備の段で積の結合則と単位元だけから示してある）。",
+                      "積の逆元の存在も、代数閉であることも使っていない。実数体も複素数体も現れない",
+                      "（元は代数的数、指数は自然数である）。",
+                    ]),
+                    paragraph([
+                      math(String.raw`w=1`),
+                      " と取ると ",
+                      math(String.raw`H_{n}(z,1)`),
+                      " の約束は ",
+                      math(String.raw`G_{n}(z)`),
+                      "（",
+                      ref("claim_qbar_geometric_telescope"),
+                      "）の約束に一致し、この主張は伸縮の等式に一致する。",
+                      "すなわちこれは伸縮の等式を 2 元へ広げたものである。",
+                    ]),
+                    paragraph([
+                      "これは、",
+                      math(String.raw`\mu_{n}`),
+                      "（",
+                      ref("def_root_of_unity_set"),
+                      "）がちょうど ",
+                      math(String.raw`n`),
+                      " 個の元を持つことを示すための足場である。",
+                      "その論法は「",
+                      math(String.raw`z^{n}-1`),
+                      " の根が高々 ",
+                      math(String.raw`n`),
+                      " 個であること」を経由し、そこで根 ",
+                      math(String.raw`w`),
+                      " を持つ多項式が ",
+                      math(String.raw`(t-w)`),
+                      " を因子に持つことを使う。この主張はその因数分解を与える等式である。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+  ],
+});
+
+const chapter_partition_polynomial = defineSection({
+  kind: "section",
+  id: "partition_polynomial_heading",
+  labels: [],
+  title: { text: "分配多項式" },
+  children: [
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "partition_polynomial_heading_lattice_and_configuration",
+        labels: [],
+        title: { text: "格子と配位" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_partition_polynomial_definition_lattice_and_configuration",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "partition_polynomial_definition_cardinality_notation",
+                      kind: "definition",
+                      title: { text: "有限集合の元の個数の記法" },
+                      labels: ["def_cardinality_notation"],
+                      habitat: "N",
+                      statement: [
+                        paragraph([
+                          "有限集合 ",
+                          math(String.raw`X`),
+                          " に対し ",
+                          math(String.raw`|X|`),
+                          " でその元の個数（",
+                          math(String.raw`\mathbb{N}`),
+                          " の元）を表す。この記法をこれ以外の意味（絶対値・ノルム）では使わない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "partition_polynomial_definition_residue_maps",
+                      kind: "definition",
+                      title: { text: "整数と剰余類を行き来する 2 つの写像" },
+                      labels: ["def_residue_maps"],
+                      habitat: "Z",
+                      statement: [
+                        paragraph([
+                          "整数 ",
+                          math(String.raw`L\in\mathbb{N}`),
+                          "、",
+                          math(String.raw`L\ge1`),
+                          " を固定する。",
+                          math(String.raw`\mathbb{Z}`),
+                          " と ",
+                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+                          " を行き来する写像に名前を与える。一方は自然な射影",
+                        ]),
+                        displayMath(String.raw`\pi:\mathbb{Z}\to\mathbb{Z}/L\mathbb{Z},\qquad \pi(n):=n+L\mathbb{Z}`),
+                        paragraph([
+                          "であり、もう一方は代表を取る写像",
+                        ]),
+                        displayMath(
+                          String.raw`s:\mathbb{Z}/L\mathbb{Z}\to\mathbb{Z},\qquad
+0\le s(y)\le L-1\ \text{かつ}\ \pi(s(y))=y`,
+                        ),
+                        paragraph([
+                          "である。各 ",
+                          math(String.raw`y\in\mathbb{Z}/L\mathbb{Z}`),
+                          " に対しこの条件を満たす整数はちょうど 1 つなので（除法の原理）、",
+                          math(String.raw`s`),
+                          " は写像として定まる。以下、この 2 本以外の経路で ",
+                          math(String.raw`\mathbb{Z}`),
+                          " と ",
+                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+                          " を行き来しない。とくに、整数を剰余類と「みなす」ことはしない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "partition_polynomial_definition_residue_addition_notation",
+                      kind: "definition",
+                      title: { text: "剰余類の加法の記法" },
+                      labels: ["def_residue_addition_notation"],
+                      habitat: "Z",
+                      statement: [
+                        paragraph([
+                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+                          " の加法を ",
+                          math(String.raw`+_{\mathbb{Z}/L\mathbb{Z}}`),
+                          " と書き、",
+                          math(String.raw`\mathbb{Z}`),
+                          " の加法 ",
+                          math(String.raw`+`),
+                          " と区別する。また ",
+                          math(String.raw`\bar1:=\pi(1)\in\mathbb{Z}/L\mathbb{Z}`),
+                          " と置く（",
+                          math(String.raw`\pi`),
+                          " は ",
+                          ref("def_residue_maps"),
+                          "）。",
+                          math(String.raw`\bar1`),
+                          " と ",
+                          math(String.raw`1`),
+                          " は別の対象であり、書き分ける。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "partition_polynomial_definition_lattice_and_configuration",
+                  kind: "definition",
+                  title: { text: "格子" },
+                  labels: ["def_lattice"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.PartitionPolynomial.Vertex",
+                    "Ising2DLambda.PartitionPolynomial.Edge",
+                  ],
+                  statement: [
+                    paragraph([
+                      "格子とは、頂点集合",
+                    ]),
+                    displayMath(String.raw`V_L:=(\mathbb{Z}/L\mathbb{Z})\times(\mathbb{Z}/L\mathbb{Z})`),
+                    paragraph([
+                      "と、横向きの辺の番号の集合・縦向きの辺の番号の集合",
+                    ]),
+                    displayMath(
+                      String.raw`E_{L,\mathrm{h}}:=\{1,2,\dots,L^2\},\qquad
+E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
+                    ),
+                    paragraph([
+                      "および、その合併",
+                    ]),
+                    displayMath(String.raw`E_L:=E_{L,\mathrm{h}}\cup E_{L,\mathrm{v}}=\{1,2,\dots,2L^2\}`),
+                    paragraph([
+                      "と、端点写像 ",
+                      math(String.raw`\partial_0,\partial_1:E_L\to V_L`),
+                      "（",
+                      ref("def_boundary_maps"),
+                      "）の 5 つ組 ",
+                      math(String.raw`(V_L,E_{L,\mathrm{h}},E_{L,\mathrm{v}},\partial_0,\partial_1)`),
+                      " のことである。",
+                    ]),
+                    paragraph([
+                      math(String.raw`V_L`),
+                      " の元を ",
+                      math(String.raw`(i,j)`),
+                      " と書き、第 1 成分 ",
+                      math(String.raw`i`),
+                      " を行番号、第 2 成分 ",
+                      math(String.raw`j`),
+                      " を列番号と呼ぶ。すなわち行番号が等しい頂点どうしが同じ行に属する。この呼び方は以下で固定し、",
+                      "第 1 成分を列番号と読むことはしない。",
+                    ]),
+                    paragraph([
+                      math(String.raw`E_{L,\mathrm{h}}`),
+                      " と ",
+                      math(String.raw`E_{L,\mathrm{v}}`),
+                      " は番号の範囲が重ならないので互いに素であり、どの ",
+                      math(String.raw`e\in E_L`),
+                      " もちょうど一方に属する。",
+                      "横向きと縦向きを最初から別の集合にしておくのは、後の章で破れボンド数を",
+                      "「同じ行の中の破れ」と「隣り合う行の間の破れ」に分けるとき、この分割をそのまま使うためである。",
+                    ]),
+                    paragraph([
+                      math(String.raw`V_L`),
+                      " は有限集合で ",
+                      math(String.raw`|V_L|=L^2`),
+                      "、",
+                      math(String.raw`E_{L,\mathrm{h}}`),
+                      " と ",
+                      math(String.raw`E_{L,\mathrm{v}}`),
+                      " はいずれも有限集合で ",
+                      math(String.raw`|E_{L,\mathrm{h}}|=|E_{L,\mathrm{v}}|=L^2`),
+                      " である（連続する整数の個数。記法は ",
+                      ref("def_cardinality_notation"),
+                      "）。両者は互いに素なので ",
+                      math(String.raw`|E_L|=L^2+L^2=2L^2`),
+                      " となる。",
+                    ]),
+                    paragraph([
+                      "辺そのものを頂点の 2 元集合 ",
+                      math(String.raw`\{u,w\}`),
+                      " として定義しないのは、",
+                      math(String.raw`L\le2`),
+                      " のとき異なる辺が同じ 2 元集合になってしまうからである（",
+                      math(String.raw`L=1`),
+                      " では両端が一致して 1 元集合になり、",
+                      math(String.raw`L=2`),
+                      " では横向きの 2 本が同じ 2 点を結ぶ）。2 元集合の集合として数えると本数が ",
+                      math(String.raw`2L^2`),
+                      " からずれ、以下の主張が小さい ",
+                      math(String.raw`L`),
+                      " で成り立たなくなる。番号を付けておけば、同じ 2 点を結ぶ辺が複数あっても別の辺として数えられる。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_partition_polynomial_definition_configuration",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "partition_polynomial_definition_edge_numbering",
+                      kind: "definition",
+                      title: { text: "頂点から辺の番号を与える写像" },
+                      labels: ["def_edge_numbering"],
+                      habitat: "Z",
+                      statement: [
+                        paragraph([
+                          "頂点 ",
+                          math(String.raw`(i,j)\in V_L`),
+                          "（",
+                          ref("def_lattice"),
+                          "）に対し、番号を与える写像 ",
+                          math(String.raw`n_{\mathrm{h}},n_{\mathrm{v}}:V_L\to\mathbb{Z}`),
+                          " を",
+                        ]),
+                        displayMath(
+                          String.raw`n_{\mathrm{h}}(i,j):=L\cdot s(i)+s(j)+1,\qquad
+n_{\mathrm{v}}(i,j):=L^2+L\cdot s(i)+s(j)+1`,
+                        ),
+                        paragraph([
+                          "で定める（",
+                          math(String.raw`s`),
+                          " は ",
+                          ref("def_residue_maps"),
+                          "。右辺は ",
+                          math(String.raw`\mathbb{Z}`),
+                          " の中の計算である）。",
+                          math(String.raw`0\le s(i),s(j)\le L-1`),
+                          " より ",
+                          math(String.raw`n_{\mathrm{h}}(i,j)\in E_{L,\mathrm{h}}`),
+                          " かつ ",
+                          math(String.raw`n_{\mathrm{v}}(i,j)\in E_{L,\mathrm{v}}`),
+                          " であり、どちらも全単射である（",
+                          ref("claim_edge_row_partition"),
+                          "）。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "partition_polynomial_definition_boundary_maps",
+                      kind: "definition",
+                      title: { text: "端点写像" },
+                      labels: ["def_boundary_maps"],
+                      habitat: "N",
+                      lean: [
+                        "Ising2DLambda.PartitionPolynomial.boundary0",
+                        "Ising2DLambda.PartitionPolynomial.boundary1",
+                      ],
+                      statement: [
+                        paragraph([
+                          "端点写像 ",
+                          math(String.raw`\partial_0,\partial_1:E_L\to V_L`),
+                          " は、",
+                          ref("def_edge_numbering"),
+                          " の全単射の逆向きに定める。",
+                          math(String.raw`e\in E_{L,\mathrm{h}}`),
+                          " に対しては ",
+                          math(String.raw`e=n_{\mathrm{h}}(i,j)`),
+                          " を満たす唯一の ",
+                          math(String.raw`(i,j)\in V_L`),
+                          " を取り",
+                        ]),
+                        displayMath(
+                          String.raw`\partial_0(e):=(i,\,j),\qquad
+\partial_1(e):=\bigl(i,\ j+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)`,
+                        ),
+                        paragraph([
+                          "と定め（行番号を変えず列番号だけを進める。だから横向きである）、",
+                          math(String.raw`e\in E_{L,\mathrm{v}}`),
+                          " に対しては ",
+                          math(String.raw`e=n_{\mathrm{v}}(i,j)`),
+                          " を満たす唯一の ",
+                          math(String.raw`(i,j)\in V_L`),
+                          " を取り",
+                        ]),
+                        displayMath(
+                          String.raw`\partial_0(e):=(i,\,j),\qquad
+\partial_1(e):=\bigl(i+_{\mathbb{Z}/L\mathbb{Z}}\bar1,\ j\bigr)`,
+                        ),
+                        paragraph([
+                          "と定める（加法の記法は ",
+                          ref("def_residue_addition_notation"),
+                          "）。行番号・列番号を進める操作が ",
+                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+                          " の中の加法であることが、周期境界条件そのものである。",
+                          math(String.raw`\bar1`),
+                          " を足すのであって ",
+                          math(String.raw`1`),
+                          " を足すのではない。",
+                        ]),
+                        paragraph([
+                          "この定め方により、横向きの辺は両端の行番号が等しく（同じ行の中）、",
+                          "縦向きの辺は両端の列番号が等しく行番号だけが ",
+                          math(String.raw`\bar1`),
+                          " 異なる（隣り合う行の間）。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "partition_polynomial_definition_configuration",
+                  kind: "definition",
+                  title: { text: "配位" },
+                  labels: ["def_configuration"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.PartitionPolynomial.Config",
+                    "Ising2DLambda.PartitionPolynomial.card_config",
+                  ],
+                  statement: [
+                    paragraph([
+                      "配位とは写像 ",
+                      math(String.raw`\sigma:V_L\to\{+1,-1\}`),
+                      " のことである。配位全体の集合を",
+                    ]),
+                    displayMath(
+                      String.raw`\Sigma_L:=\bigl\{\,\sigma \;\bigm|\; \sigma\ \text{は}\ V_L\ \text{から}\ \{+1,-1\}\ \text{への写像}\,\bigr\}`,
+                    ),
+                    paragraph([
+                      "と書く（写像全体の集合を冪の記法 ",
+                      math(String.raw`\{+1,-1\}^{V_L}`),
+                      " で表すことはしない。指数と紛れるため）。",
+                      math(String.raw`\Sigma_L`),
+                      " は有限集合で ",
+                      math(String.raw`|\Sigma_L|=2^{L^2}`),
+                      " である（各頂点に独立に 2 通りの値を割り当てるので、",
+                      math(String.raw`|V_L|=L^2`),
+                      " 個の 2 通りの積）。",
+                    ]),
+                    paragraph([
+                      "この定義に現れる対象はすべて有限集合とその上の写像であり、実数体も複素数体も使っていない。値 ",
+                      math(String.raw`\pm1`),
+                      " は ",
+                      math(String.raw`\mathbb{Z}`),
+                      " の元として読む。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "partition_polynomial_heading_broken_bonds_and_polynomial",
+        labels: [],
+        title: { text: "破れボンド数と分配多項式" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_partition_polynomial_definition_broken_bond_count",
+              focus:
+                {
+                  id: "partition_polynomial_definition_broken_bond_count",
+                  kind: "definition",
+                  title: { text: "破れボンド数" },
+                  labels: ["def_broken_bond_count"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.PartitionPolynomial.brokenBondCount",
+                    "Ising2DLambda.PartitionPolynomial.brokenBondCount_le",
+                  ],
+                  statement: [
+                    paragraph([
+                      ref("def_configuration"),
+                      " の配位 ",
+                      math(String.raw`\sigma\in\Sigma_L`),
+                      " と ",
+                      ref("def_lattice"),
+                      " の辺の番号 ",
+                      math(String.raw`e\in E_L`),
+                      " に対し、",
+                      math(String.raw`\sigma(\partial_0(e))\ne\sigma(\partial_1(e))`),
+                      " が成り立つとき「辺 ",
+                      math(String.raw`e`),
+                      " は ",
+                      math(String.raw`\sigma`),
+                      " のもとで破れている」という。",
+                    ]),
+                    paragraph([
+                      "配位 ",
+                      math(String.raw`\sigma`),
+                      " の破れボンド数 ",
+                      math(String.raw`b(\sigma)`),
+                      " を、破れている辺の番号の個数",
+                    ]),
+                    displayMath(
+                      String.raw`b(\sigma):=\bigl|\bigl\{\,e\in E_L \;\bigm|\; \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\bigr\}\bigr|`,
+                    ),
+                    paragraph([
+                      "で定める。有限集合の部分集合の元の個数なので ",
+                      math(String.raw`b(\sigma)\in\mathbb{N}`),
+                      " であり、",
+                      math(String.raw`0\le b(\sigma)\le|E_L|=2L^2`),
+                      " が成り立つ。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_partition_polynomial_definition_partition_polynomial",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "partition_polynomial_definition_multiplicity",
+                      kind: "definition",
+                      title: { text: "多重度" },
+                      labels: ["def_multiplicity"],
+                      habitat: "N",
+                      lean: ["Ising2DLambda.PartitionPolynomial.multiplicity"],
+                      statement: [
+                        paragraph([
+                          "整数 ",
+                          math(String.raw`m\in\{0,1,\dots,2L^2\}`),
+                          " に対し、多重度 ",
+                          math(String.raw`\Omega_L(m)`),
+                          " を",
+                        ]),
+                        displayMath(
+                          String.raw`\Omega_L(m):=\bigl|\bigl\{\,\sigma\in\Sigma_L \;\bigm|\; b(\sigma)=m\,\bigr\}\bigr|`,
+                        ),
+                        paragraph([
+                          "で定める（",
+                          math(String.raw`b(\sigma)`),
+                          " は ",
+                          ref("def_broken_bond_count"),
+                          "）。有限集合 ",
+                          math(String.raw`\Sigma_L`),
+                          " の部分集合の元の個数なので ",
+                          math(String.raw`\Omega_L(m)\in\mathbb{N}`),
+                          " である。",
+                        ]),
+                        paragraph([
+                          "多重度は数え上げだけで定義されており、温度・エネルギーといった量を含まない。",
+                          "これがこの章の主張のすべてを可算側に留める理由である。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "partition_polynomial_definition_partition_polynomial",
+                  kind: "definition",
+                  title: { text: "分配多項式" },
+                  labels: ["def_partition_polynomial"],
+                  habitat: "Z",
+                  lean: ["Ising2DLambda.PartitionPolynomial.partitionPolynomial"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`x`),
+                      " を不定元とし、多項式環 ",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の中で分配多項式を",
+                    ]),
+                    displayMath(String.raw`Z_L:=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}\ \in\ \mathbb{Z}[x]`),
+                    paragraph([
+                      "で定める（",
+                      math(String.raw`b(\sigma)`),
+                      " は ",
+                      ref("def_broken_bond_count"),
+                      "）。有限個の項の和なので右辺は ",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の元として確定する。",
+                    ]),
+                    paragraph([
+                      "和の各項の指数は ",
+                      math(String.raw`b(\sigma)\in\mathbb{N}`),
+                      "、係数はいずれも ",
+                      math(String.raw`1\in\mathbb{Z}`),
+                      " である。この定義は多重度を用いていない。",
+                      "多重度を用いた形（各 ",
+                      math(String.raw`x^{\,m}`),
+                      " の係数が ",
+                      math(String.raw`\Omega_L(m)`),
+                      " であること）は定義ではなく、下で証明する。",
+                    ]),
+                    paragraph([
+                      "記法について 2 点を約束する。第一に、",
+                      math(String.raw`Z_L`),
+                      " は多項式そのものを表し、",
+                      math(String.raw`x`),
+                      " は不定元であって数ではない。第二に、可換環 ",
+                      math(String.raw`R`),
+                      " と元 ",
+                      math(String.raw`r\in R`),
+                      " に対する代入（評価）の結果を ",
+                      math(String.raw`Z_L(r)\in R`),
+                      " と書く。すなわち丸括弧が付いたものだけが代入の結果であり、",
+                      math(String.raw`Z_L`),
+                      " と ",
+                      math(String.raw`Z_L(r)`),
+                      " は別の対象である。",
+                    ]),
+                    paragraph([
+                      "この定義では代入を行わない。物理の分配関数を得るには ",
+                      math(String.raw`x`),
+                      " へ ",
+                      math(String.raw`e^{-2\beta J}`),
+                      " を代入するが、その代入は実数体への脱出であり、脱出を宣言したブロックでのみ行う（README「形式変数のまま進む」）。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_partition_polynomial_claim_coefficient_representation",
+              beforeFocus: [
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "partition_polynomial_claim_configuration_partition",
+                      kind: "claim",
+                      title: { text: "配位全体は破れボンド数の値ごとに類別される" },
+                      labels: ["claim_configuration_partition"],
+                      habitat: "N",
+                      lean: [
+                        "Ising2DLambda.PartitionPolynomial.biUnion_brokenFiber",
+                        "Ising2DLambda.PartitionPolynomial.brokenFiber_pairwise_disjoint",
+                        "Ising2DLambda.NecSuf.PartitionPolynomial.biUnion_fiber",
+                        "Ising2DLambda.NecSuf.PartitionPolynomial.fiber_pairwise_disjoint",
+                      ],
+                      statement: [
+                        paragraph([
+                          "各 ",
+                          math(String.raw`L\ge1`),
+                          " と各 ",
+                          math(String.raw`m\in\{0,1,\dots,2L^2\}`),
+                          " に対し、破れボンド数が ",
+                          math(String.raw`m`),
+                          " である配位の集合を",
+                        ]),
+                        displayMath(
+                          String.raw`A_{L,m}:=\bigl\{\,\sigma\in\Sigma_L \;\bigm|\; b(\sigma)=m\,\bigr\}`,
+                        ),
+                        paragraph([
+                          "と書く（",
+                          math(String.raw`\Sigma_L`),
+                          " は ",
+                          ref("def_configuration"),
+                          "、",
+                          math(String.raw`b(\sigma)`),
+                          " は ",
+                          ref("def_broken_bond_count"),
+                          "）。右辺は ",
+                          math(String.raw`L`),
+                          " にも依存するので、添字には ",
+                          math(String.raw`m`),
+                          " だけでなく ",
+                          math(String.raw`L`),
+                          " も書く。このとき次の 2 つが成り立つ。",
+                        ]),
+                        list([
+                          [
+                            "（被覆）",
+                            math(String.raw`\Sigma_L=\bigcup_{m=0}^{2L^2}A_{L,m}`),
+                            " である。",
+                          ],
+                          [
+                            "（互いに素）",
+                            math(String.raw`m,m'\in\{0,1,\dots,2L^2\}`),
+                            " が ",
+                            math(String.raw`m\ne m'`),
+                            " を満たすならば ",
+                            math(String.raw`A_{L,m}\cap A_{L,m'}=\varnothing`),
+                            " である。",
+                          ],
+                        ]),
+                        paragraph([
+                          "すなわち ",
+                          math(String.raw`\{A_{L,m}\}_{m=0}^{2L^2}`),
+                          " は ",
+                          math(String.raw`\Sigma_L`),
+                          " の互いに素な有限個の部分集合への分割である。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "示すことは 2 つある。合併が ",
+                          math(String.raw`\Sigma_L`),
+                          " に等しいことと、互いに素であることである。",
+                        ]),
+                        paragraph([
+                          "合併が等しいこと。",
+                          math(String.raw`A_{L,m}`),
+                          " の定義より ",
+                          math(String.raw`A_{L,m}\subset\Sigma_L`),
+                          " なので、合併も ",
+                          math(String.raw`\Sigma_L`),
+                          " に含まれる。逆を示す。任意の ",
+                          math(String.raw`\sigma\in\Sigma_L`),
+                          " に対し、",
+                          ref("def_broken_bond_count"),
+                          " より ",
+                          math(String.raw`b(\sigma)\in\mathbb{N}`),
+                          " かつ ",
+                          math(String.raw`b(\sigma)\le 2L^2`),
+                          " である。そこで ",
+                          math(String.raw`m:=b(\sigma)`),
+                          " と置くと ",
+                          math(String.raw`m\in\{0,1,\dots,2L^2\}`),
+                          " であり、",
+                          math(String.raw`b(\sigma)=m`),
+                          " なので ",
+                          math(String.raw`\sigma\in A_{L,m}`),
+                          " である。よって ",
+                          math(String.raw`\sigma`),
+                          " は合併に属する。",
+                        ]),
+                        paragraph([
+                          "互いに素であること。",
+                          math(String.raw`m\ne m'`),
+                          " とし、",
+                          math(String.raw`\sigma\in A_{L,m}\cap A_{L,m'}`),
+                          " が存在したとする。この ",
+                          math(String.raw`\sigma`),
+                          " について",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+m
+&=b(\sigma)
+&&(\because\ \sigma\in A_{L,m}\ \text{と}\ A_{L,m}\ \text{の定義})\\
+&=m'
+&&(\because\ b\ \text{は写像なので}\ \sigma\ \text{に対する値は 1 つであり、}
+\sigma\in A_{L,m'}\ \text{と}\ A_{L,m'}\ \text{の定義})
+\end{aligned}`),
+                        paragraph([
+                          "となり、",
+                          math(String.raw`m\ne m'`),
+                          " に反する。したがってそのような ",
+                          math(String.raw`\sigma`),
+                          " は存在せず、",
+                          math(String.raw`A_{L,m}\cap A_{L,m'}=\varnothing`),
+                          " である。",
+                        ]),
+                        paragraph([
+                          "以上の 2 つは有限集合の包含関係と写像の一意性だけからなり、実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "partition_polynomial_claim_coefficient_representation",
+                  kind: "claim",
+                  standing: "mainTheorem",
+                  title: { text: "分配多項式の係数は多重度である" },
+                  labels: ["claim_coefficient_representation"],
+                  habitat: "Z",
+                  lean: [
+                    "Ising2DLambda.PartitionPolynomial.partitionPolynomial_eq_sum_multiplicity",
+                    "Ising2DLambda.PartitionPolynomial.partitionPolynomial_eq_sum_multiplicity_from_necSuf",
+                    "Ising2DLambda.NecSuf.PartitionPolynomial.sum_comp_eq_sum_nsmul",
+                  ],
+                  verification: ["sagemath/check/partition-polynomial-coefficient-representation"],
+                  statement: [
+                    paragraph([
+                      "各 ",
+                      math(String.raw`L\ge1`),
+                      " について、多項式環 ",
+                      math(String.raw`\mathbb{Z}[x]`),
+                      " の中で",
+                    ]),
+                    displayMath(String.raw`Z_L=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{\,m}`),
+                    paragraph([
+                      "が成り立つ（",
+                      math(String.raw`Z_L`),
+                      " は ",
+                      ref("def_partition_polynomial"),
+                      "、",
+                      math(String.raw`\Omega_L(m)`),
+                      " は ",
+                      ref("def_multiplicity"),
+                      "）。すなわち ",
+                      math(String.raw`\Omega_L(m)\in\mathbb{N}\subset\mathbb{Z}`),
+                      " は ",
+                      math(String.raw`Z_L`),
+                      " の ",
+                      math(String.raw`x^{\,m}`),
+                      " の係数である。",
+                    ]),
+                  ],
+                  proof: [
+                    displayMath(String.raw`\begin{aligned}
+Z_L
+&=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}
+&&(\because\ \blkref{def_partition_polynomial})\\
+&=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,b(\sigma)}
+&&(\because\ \blkref{claim_configuration_partition})\\
+&=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,m}
+&&(\because\ \sigma\in A_{L,m}\ \Rightarrow\ b(\sigma)=m)\\
+&=\sum_{m=0}^{2L^2}|A_{L,m}|\cdot x^{\,m}
+&&(\because\ \text{同じ元を }|A_{L,m}|\text{ 個足した})\\
+&=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{\,m}
+&&(\because\ \blkref{def_multiplicity})
+\end{aligned}`),
+                    paragraph([
+                      "以上は有限和の組み替えと数え上げだけからなり、",
+                      math(String.raw`x`),
+                      " への代入を行っていない。実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_partition_polynomial_claim_coefficient_sum",
+              focus:
+                {
+                  id: "partition_polynomial_claim_coefficient_sum",
+                  kind: "claim",
+                  title: { text: "多重度の総和は配位の総数に等しい" },
+                  labels: ["claim_coefficient_sum"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow",
+                    "Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow_from_necSuf",
+                    "Ising2DLambda.NecSuf.PartitionPolynomial.sum_card_fiber_eq_card",
+                  ],
+                  verification: ["sagemath/check/partition-polynomial-coefficient-sum"],
+                  statement: [
+                    paragraph([
+                      "各 ",
+                      math(String.raw`L\ge1`),
+                      " について",
+                    ]),
+                    displayMath(String.raw`\sum_{m=0}^{2L^2}\Omega_L(m)=2^{L^2}`),
+                    paragraph([
+                      "が成り立つ（",
+                      math(String.raw`\Omega_L(m)`),
+                      " は ",
+                      ref("def_multiplicity"),
+                      "）。両辺は ",
+                      math(String.raw`\mathbb{N}`),
+                      " の元である。",
+                    ]),
+                  ],
+                  proof: [
+                    displayMath(String.raw`\begin{aligned}
+\sum_{m=0}^{2L^2}\Omega_L(m)
+&=\sum_{m=0}^{2L^2}|A_{L,m}|
+&&(\because\ \blkref{def_multiplicity})\\
+&=|\Sigma_L|
+&&(\because\ \blkref{claim_configuration_partition})\\
+&=2^{L^2}
+&&(\because\ \blkref{def_configuration})
+\end{aligned}`),
+                    paragraph([
+                      "以上は有限集合の元の個数の計算だけからなり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+  ],
+});
+
+const chapter_free_entropy = defineSection({
+  kind: "section",
+  id: "free_entropy_heading",
+  labels: [],
+  title: { text: "有限系の自由エントロピー" },
+  children: [
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "free_entropy_heading_finite_free_entropy",
+        labels: [],
+        title: { text: "有限系の自由エントロピー" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_free_entropy_definition_finite_free_entropy",
+              beforeFocus: [
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "free_entropy_claim_value_at_rational_is_positive",
+                      kind: "claim",
+                      title: { text: "分配多項式の正の有理点での値は正の有理数である" },
+                      labels: ["claim_value_at_rational_is_positive"],
+                      habitat: "Q",
+                      lean: [
+                        "Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos",
+                        "Ising2DLambda.FreeEntropy.partitionPolynomial_eval_pos_from_necSuf",
+                        "Ising2DLambda.NecSuf.FreeEntropy.sum_pow_pos",
+                      ],
+                      verification: ["sagemath/check/free-entropy-definition"],
+                      statement: [
+                        paragraph([
+                          "各 ",
+                          math(String.raw`L\ge1`),
+                          " と各 ",
+                          math(String.raw`q\in\mathbb{Q}_{>0}`),
+                          " について、",
+                          ref("def_partition_polynomial"),
+                          " の分配多項式へ ",
+                          math(String.raw`q`),
+                          " を代入した値は",
+                        ]),
+                        displayMath(String.raw`Z_L(q)\in\mathbb{Q}_{>0}`),
+                        paragraph([
+                          "を満たす。ここで代入は ",
+                          ref("def_partition_polynomial"),
+                          " の約束どおり、可換環 ",
+                          math(String.raw`\mathbb{Q}`),
+                          " とその元 ",
+                          math(String.raw`q`),
+                          " についての評価である。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          "準備として、各 ",
+                          math(String.raw`\sigma\in\Sigma_L`),
+                          " について ",
+                          math(String.raw`q^{\,b(\sigma)}>0`),
+                          " である。実際 ",
+                          math(String.raw`b(\sigma)\in\mathbb{N}`),
+                          " であり（",
+                          ref("def_broken_bond_count"),
+                          "）、正の有理数を ",
+                          math(String.raw`b(\sigma)`),
+                          " 個掛けたものは正である（",
+                          math(String.raw`b(\sigma)=0`),
+                          " のときは空積で ",
+                          math(String.raw`q^{0}=1>0`),
+                          "）。また ",
+                          math(String.raw`|\Sigma_L|=2^{L^2}\ge1`),
+                          " なので（",
+                          ref("def_configuration"),
+                          "）、下の和は少なくとも 1 個の項を持つ。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+Z_L(q)
+&=\Bigl(\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}\Bigr)(q)
+&&(\because\ \blkref{def_partition_polynomial})\\
+&=\sum_{\sigma\in\Sigma_L}q^{\,b(\sigma)}
+&&(\because\ \text{代入は環準同型なので和と積を保つ})\\
+&\in\mathbb{Q}_{>0}
+&&(\because\ \text{正の有理数を 1 個以上足したものは正})
+\end{aligned}`),
+                        paragraph([
+                          "以上は有理数の四則と有限和だけからなり、実数体も複素数体も現れない。",
+                          "代入したのは有理数であって、指数関数の値ではない。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "free_entropy_definition_finite_free_entropy",
+                  kind: "definition",
+                  title: { text: "有限系の自由エントロピー" },
+                  labels: ["def_finite_free_entropy"],
+                  habitat: "Lambda",
+                  lean: ["Ising2DLambda.FreeEntropy.freeEntropy"],
+                  statement: [
+                    paragraph([
+                      "各 ",
+                      math(String.raw`L\ge1`),
+                      " と各 ",
+                      math(String.raw`q\in\mathbb{Q}_{>0}`),
+                      " に対し、有限系の自由エントロピーを",
+                    ]),
+                    displayMath(String.raw`\Phi_L(q):=\log Z_L(q)\ \in\ \Lambda`),
+                    paragraph([
+                      "で定める（",
+                      math(String.raw`\log`),
+                      " は ",
+                      ref("def_rational_log"),
+                      "、",
+                      math(String.raw`Z_L(q)`),
+                      " は ",
+                      ref("def_partition_polynomial"),
+                      " への代入）。",
+                      ref("claim_value_at_rational_is_positive"),
+                      " により ",
+                      math(String.raw`Z_L(q)`),
+                      " は正の有理数なので ",
+                      math(String.raw`\log`),
+                      " の定義域に入っており、右辺は ",
+                      math(String.raw`\Lambda`),
+                      " の元として確定する。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\Phi_L`),
+                      " は ",
+                      math(String.raw`\mathbb{Q}_{>0}`),
+                      " から ",
+                      math(String.raw`\Lambda`),
+                      " への写像であり、",
+                      math(String.raw`\Phi_L(q)`),
+                      " はその値である。",
+                      math(String.raw`\Phi_L`),
+                      " と ",
+                      math(String.raw`\Phi_L(q)`),
+                      " を同じ記号で書くことはしない。",
+                    ]),
+                    paragraph([
+                      "具体例を 1 つ挙げる。",
+                      math(String.raw`L=2`),
+                      "、",
+                      math(String.raw`q=1/2`),
+                      " のとき ",
+                      math(String.raw`Z_2=2+12x^4+2x^8`),
+                      " なので",
+                    ]),
+                    displayMath(
+                      String.raw`Z_2(1/2)=2+\frac{12}{2^4}+\frac{2}{2^8}=\frac{353}{2^7},\qquad
+\Phi_2(1/2)=\ell_{353}-7\,\ell_2\ \in\ \Lambda`,
+                    ),
+                    paragraph([
+                      "である（",
+                      math(String.raw`353`),
+                      " は素数）。自由エントロピーは分配多項式の値の素因数分解の指数ベクトルそのものであり、",
+                      "実数を経由しない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "free_entropy_heading_log_properties",
+        labels: [],
+        title: { text: "対数の性質と、すべての配位を等しく数える点" },
+        children: [
           {
             role: "primary",
             element: {
@@ -3172,162 +7026,84 @@ b(\sigma)
             role: "primary",
             element: {
               kind: "elementGroup",
-              id: "group_of_transfer_matrix_definition_matrix_over_row_configs",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "transfer_matrix_definition_row_family",
-                      kind: "definition",
-                      title: { text: "行配位の族と、配位を行の並びとして読む写像" },
-                      labels: ["def_row_family", "def_rows_map"],
-                      habitat: "N",
-                      lean: [
-                        "Ising2DLambda.TransferMatrix.RowFamily",
-                        "Ising2DLambda.TransferMatrix.rowsOf",
-                        "Ising2DLambda.TransferMatrix.configOfRows",
-                      ],
-                      statement: [
-                        paragraph([
-                          ref("def_row_configuration"),
-                          " の行配位を並べたものを扱う。行配位の族とは写像 ",
-                          math(String.raw`c:\mathbb{Z}/L\mathbb{Z}\to R_L`),
-                          " のことであり、その全体の集合を",
-                        ]),
-                        displayMath(
-                          String.raw`C_L:=\bigl\{\,c \;\bigm|\; c\ \text{は}\ \mathbb{Z}/L\mathbb{Z}\ \text{から}\ R_L\ \text{への写像}\,\bigr\}`,
-                        ),
-                        paragraph([
-                          "と書く。",
-                          math(String.raw`c(i)\in R_L`),
-                          " が第 ",
-                          math(String.raw`i`),
-                          " 行の配位を表す。",
-                        ]),
-                        paragraph([
-                          "配位をその行の並びとして読む写像 ",
-                          math(String.raw`\mathrm{rows}:\Sigma_L\to C_L`),
-                          " を",
-                        ]),
-                        displayMath(
-                          String.raw`\bigl(\mathrm{rows}(\sigma)\bigr)(i):=\rho_i(\sigma)\qquad(\sigma\in\Sigma_L,\ i\in\mathbb{Z}/L\mathbb{Z})`,
-                        ),
-                        paragraph([
-                          "で定める（",
-                          math(String.raw`\rho_i`),
-                          " は ",
-                          ref("def_row_restriction"),
-                          "）。逆向きに、行配位の族から配位を作る写像 ",
-                          math(String.raw`\mathrm{conf}:C_L\to\Sigma_L`),
-                          " を",
-                        ]),
-                        displayMath(
-                          String.raw`\bigl(\mathrm{conf}(c)\bigr)\bigl((i,j)\bigr):=\bigl(c(i)\bigr)(j)\qquad(c\in C_L,\ (i,j)\in V_L)`,
-                        ),
-                        paragraph([
-                          "で定める。右辺は ",
-                          math(String.raw`\{+1,-1\}`),
-                          " の元なので ",
-                          math(String.raw`\mathrm{conf}(c)`),
-                          " は ",
-                          math(String.raw`V_L`),
-                          " から ",
-                          math(String.raw`\{+1,-1\}`),
-                          " への写像であり、",
-                          ref("def_configuration"),
-                          " により ",
-                          math(String.raw`\Sigma_L`),
-                          " の元である。",
-                        ]),
-                        paragraph([
-                          math(String.raw`C_L`),
-                          " は有限集合で ",
-                          math(String.raw`|C_L|=\bigl(2^{L}\bigr)^{L}=2^{L^2}`),
-                          " である（",
-                          math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
-                          " の ",
-                          math(String.raw`L`),
-                          " 個の元それぞれに ",
-                          math(String.raw`R_L`),
-                          " の ",
-                          math(String.raw`2^{L}`),
-                          " 通りを独立に割り当てるため）。ここに現れる対象はすべて有限集合とその上の写像である。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
+              id: "group_of_transfer_matrix_definition_row_family",
               focus:
                 {
-                  id: "transfer_matrix_definition_matrix_over_row_configs",
+                  id: "transfer_matrix_definition_row_family",
                   kind: "definition",
-                  title: { text: "有限集合を添字とする行列と、その積・冪・トレース" },
-                  labels: ["def_matrix_over_row_configs", "def_matrix_product", "def_matrix_trace"],
-                  habitat: "Z",
+                  title: { text: "行配位の族と、配位を行の並びとして読む写像" },
+                  labels: ["def_row_family", "def_rows_map"],
+                  habitat: "N",
                   lean: [
-                    "Ising2DLambda.TransferMatrix.RowMatrix",
-                    "Ising2DLambda.TransferMatrix.rowMatrixProduct",
-                    "Ising2DLambda.TransferMatrix.rowMatrixPow",
-                    "Ising2DLambda.TransferMatrix.rowMatrixTrace",
+                    "Ising2DLambda.TransferMatrix.RowFamily",
+                    "Ising2DLambda.TransferMatrix.rowsOf",
+                    "Ising2DLambda.TransferMatrix.configOfRows",
                   ],
                   statement: [
                     paragraph([
-                      "空でない有限集合 ",
-                      math(String.raw`\mathcal{J}`),
-                      " を 1 つ固定する。行と列をその元で添字づけた行列を扱う",
-                      "（この論文で使うときは、行配位の全体を取る）。写像 ",
-                      math(String.raw`A:\mathcal{J}\times \mathcal{J}\to\mathbb{Z}[x]`),
-                      " のことを行列と呼び、その全体の集合を ",
-                      math(String.raw`\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x]\bigr)`),
-                      " と書く。値 ",
-                      math(String.raw`A(u,u')`),
-                      " を成分と呼び ",
-                      math(String.raw`A_{u,u'}`),
-                      " と書く。",
+                      ref("def_row_configuration"),
+                      " の行配位を並べたものを扱う。行配位の族とは写像 ",
+                      math(String.raw`c:\mathbb{Z}/L\mathbb{Z}\to R_L`),
+                      " のことであり、その全体の集合を",
+                    ]),
+                    displayMath(
+                      String.raw`C_L:=\bigl\{\,c \;\bigm|\; c\ \text{は}\ \mathbb{Z}/L\mathbb{Z}\ \text{から}\ R_L\ \text{への写像}\,\bigr\}`,
+                    ),
+                    paragraph([
+                      "と書く。",
+                      math(String.raw`c(i)\in R_L`),
+                      " が第 ",
+                      math(String.raw`i`),
+                      " 行の配位を表す。",
                     ]),
                     paragraph([
-                      math(String.raw`\mathcal{J}`),
-                      " の元に ",
-                      math(String.raw`1`),
-                      " から ",
-                      math(String.raw`|\mathcal{J}|`),
-                      " までの番号を付ければ、この集合は通常の ",
-                      math(String.raw`|\mathcal{J}|`),
-                      " 次正方行列の集合と同じものになる。以下では番号を付けず、添字を ",
-                      math(String.raw`\mathcal{J}`),
-                      " の元のまま扱う（番号の付け方に依存しない形で書くため）。",
-                    ]),
-                    paragraph([
-                      "積・冪・トレースを次で定める。",
-                      math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
-                      " に対し積 ",
-                      math(String.raw`AB`),
+                      "配位をその行の並びとして読む写像 ",
+                      math(String.raw`\mathrm{rows}:\Sigma_L\to C_L`),
                       " を",
                     ]),
                     displayMath(
-                      String.raw`(AB)_{u,u''}:=\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\qquad(u,u''\in \mathcal{J})`,
+                      String.raw`\bigl(\mathrm{rows}(\sigma)\bigr)(i):=\rho_i(\sigma)\qquad(\sigma\in\Sigma_L,\ i\in\mathbb{Z}/L\mathbb{Z})`,
                     ),
                     paragraph([
-                      "で定める（有限個の項の和なので右辺は ",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の元として確定する）。整数 ",
-                      math(String.raw`k\ge1`),
-                      " に対し冪 ",
-                      math(String.raw`A^{k}`),
-                      " を、",
-                      math(String.raw`A^{1}:=A`),
-                      " と ",
-                      math(String.raw`A^{k+1}:=A^{k}A`),
-                      " により帰納的に定める。トレース ",
-                      math(String.raw`\operatorname{Tr}A\in\mathbb{Z}[x]`),
+                      "で定める（",
+                      math(String.raw`\rho_i`),
+                      " は ",
+                      ref("def_row_restriction"),
+                      "）。逆向きに、行配位の族から配位を作る写像 ",
+                      math(String.raw`\mathrm{conf}:C_L\to\Sigma_L`),
                       " を",
                     ]),
-                    displayMath(String.raw`\operatorname{Tr}A:=\sum_{u\in \mathcal{J}}A_{u,u}`),
+                    displayMath(
+                      String.raw`\bigl(\mathrm{conf}(c)\bigr)\bigl((i,j)\bigr):=\bigl(c(i)\bigr)(j)\qquad(c\in C_L,\ (i,j)\in V_L)`,
+                    ),
                     paragraph([
-                      "で定める。以上の演算はすべて ",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の有限個の元の和と積だけを使っており、実数体も複素数体も現れない。",
+                      "で定める。右辺は ",
+                      math(String.raw`\{+1,-1\}`),
+                      " の元なので ",
+                      math(String.raw`\mathrm{conf}(c)`),
+                      " は ",
+                      math(String.raw`V_L`),
+                      " から ",
+                      math(String.raw`\{+1,-1\}`),
+                      " への写像であり、",
+                      ref("def_configuration"),
+                      " により ",
+                      math(String.raw`\Sigma_L`),
+                      " の元である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`C_L`),
+                      " は有限集合で ",
+                      math(String.raw`|C_L|=\bigl(2^{L}\bigr)^{L}=2^{L^2}`),
+                      " である（",
+                      math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
+                      " の ",
+                      math(String.raw`L`),
+                      " 個の元それぞれに ",
+                      math(String.raw`R_L`),
+                      " の ",
+                      math(String.raw`2^{L}`),
+                      " 通りを独立に割り当てるため）。ここに現れる対象はすべて有限集合とその上の写像である。",
                     ]),
                   ],
                 },
@@ -4482,1153 +8258,286 @@ const chapter_shift_symmetry = defineSection({
             },
           },
           {
-            role: "primary",
+            role: "supporting",
             element: {
               kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_permutation_sign",
-              beforeFocus: [
+              id: "group_of_algebraic_eigenvalue_claim_row_config_order_linear",
+              focus:
                 {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_row_config_order_linear",
-                      kind: "claim",
-                      title: { text: "行配位の辞書式順序は線形順序である" },
-                      labels: ["claim_row_config_order_linear"],
-                      habitat: "N",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trichotomy",
-                        "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trichotomy",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trans",
-                        "Ising2DLambda.AlgebraicEigenvalue.rowIndexCover",
-                        "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_iff_exists",
-                        "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_eq_lexLess",
-                        "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trichotomy_from_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans_from_necSuf",
+                  id: "algebraic_eigenvalue_claim_row_config_order_linear",
+                  kind: "claim",
+                  title: { text: "行配位の辞書式順序は線形順序である" },
+                  labels: ["claim_row_config_order_linear"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trichotomy",
+                    "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans",
+                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trichotomy",
+                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trans",
+                    "Ising2DLambda.AlgebraicEigenvalue.rowIndexCover",
+                    "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_iff_exists",
+                    "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_eq_lexLess",
+                    "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trichotomy_from_necSuf",
+                    "Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans_from_necSuf",
+                  ],
+                  verification: ["sagemath/check/row-config-order"],
+                  statement: [
+                    paragraph([
+                      ref("def_row_config_order"),
+                      " の関係 ",
+                      math(String.raw`\prec`),
+                      " について次の 2 つが成り立つ。",
+                    ]),
+                    list([
+                      [
+                        "三分律: 任意の ",
+                        math(String.raw`\tau,\tau'\in R_L`),
+                        " について、",
+                        math(String.raw`\tau\prec\tau'`),
+                        "、",
+                        math(String.raw`\tau=\tau'`),
+                        "、",
+                        math(String.raw`\tau'\prec\tau`),
+                        " のうちちょうど 1 つが成り立つ。",
                       ],
-                      verification: ["sagemath/check/row-config-order"],
-                      statement: [
-                        paragraph([
-                          ref("def_row_config_order"),
-                          " の関係 ",
-                          math(String.raw`\prec`),
-                          " について次の 2 つが成り立つ。",
-                        ]),
-                        list([
-                          [
-                            "三分律: 任意の ",
-                            math(String.raw`\tau,\tau'\in R_L`),
-                            " について、",
-                            math(String.raw`\tau\prec\tau'`),
-                            "、",
-                            math(String.raw`\tau=\tau'`),
-                            "、",
-                            math(String.raw`\tau'\prec\tau`),
-                            " のうちちょうど 1 つが成り立つ。",
-                          ],
-                          [
-                            "推移律: 任意の ",
-                            math(String.raw`\tau,\tau',\tau''\in R_L`),
-                            " について、",
-                            math(String.raw`\tau\prec\tau'`),
-                            " かつ ",
-                            math(String.raw`\tau'\prec\tau''`),
-                            " ならば ",
-                            math(String.raw`\tau\prec\tau''`),
-                            " である。",
-                          ],
-                        ]),
-                        paragraph([
-                          "すなわち ",
-                          math(String.raw`\prec`),
-                          " は ",
-                          math(String.raw`R_L`),
-                          " の上の狭義の線形順序である。",
-                          "両者はどちらも有限集合の元についての言明であり、実数体は現れない。",
-                        ]),
+                      [
+                        "推移律: 任意の ",
+                        math(String.raw`\tau,\tau',\tau''\in R_L`),
+                        " について、",
+                        math(String.raw`\tau\prec\tau'`),
+                        " かつ ",
+                        math(String.raw`\tau'\prec\tau''`),
+                        " ならば ",
+                        math(String.raw`\tau\prec\tau''`),
+                        " である。",
                       ],
-                      proof: [
-                        paragraph([
-                          "準備として、",
-                          math(String.raw`\tau\ne\tau'`),
-                          " のとき ",
-                          math(String.raw`k_0:=k_0(\tau,\tau')`),
-                          " は ",
-                          math(String.raw`D(\tau,\tau')`),
-                          " の最小元なので、次の 2 つが成り立つ（",
-                          ref("def_row_config_order"),
-                          "）。第一に ",
-                          math(String.raw`\tau(\pi(k_0))\ne\tau'(\pi(k_0))`),
-                          "。第二に ",
-                          math(String.raw`k<k_0`),
-                          " なる ",
-                          math(String.raw`k\in\{0,1,\dots,L-1\}`),
-                          " については ",
-                          math(String.raw`\tau(\pi(k))=\tau'(\pi(k))`),
-                          "。",
-                        ]),
-                        paragraph([
-                          "三分律。",
-                          math(String.raw`\tau=\tau'`),
-                          " の場合、",
-                          math(String.raw`\prec`),
-                          " の定義は左右の相異なることを要求するので ",
-                          math(String.raw`\tau\prec\tau'`),
-                          " も ",
-                          math(String.raw`\tau'\prec\tau`),
-                          " も成り立たず、",
-                          math(String.raw`\tau=\tau'`),
-                          " だけが成り立つ。",
-                        ]),
-                        paragraph([
-                          math(String.raw`\tau\ne\tau'`),
-                          " の場合、",
-                          math(String.raw`k_0:=k_0(\tau,\tau')`),
-                          " が定まり、準備の第一により ",
-                          math(String.raw`\tau(\pi(k_0))\ne\tau'(\pi(k_0))`),
-                          " である。",
-                          math(String.raw`\varepsilon`),
-                          " は全単射なので",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
+                    ]),
+                    paragraph([
+                      "すなわち ",
+                      math(String.raw`\prec`),
+                      " は ",
+                      math(String.raw`R_L`),
+                      " の上の狭義の線形順序である。",
+                      "両者はどちらも有限集合の元についての言明であり、実数体は現れない。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "準備として、",
+                      math(String.raw`\tau\ne\tau'`),
+                      " のとき ",
+                      math(String.raw`k_0:=k_0(\tau,\tau')`),
+                      " は ",
+                      math(String.raw`D(\tau,\tau')`),
+                      " の最小元なので、次の 2 つが成り立つ（",
+                      ref("def_row_config_order"),
+                      "）。第一に ",
+                      math(String.raw`\tau(\pi(k_0))\ne\tau'(\pi(k_0))`),
+                      "。第二に ",
+                      math(String.raw`k<k_0`),
+                      " なる ",
+                      math(String.raw`k\in\{0,1,\dots,L-1\}`),
+                      " については ",
+                      math(String.raw`\tau(\pi(k))=\tau'(\pi(k))`),
+                      "。",
+                    ]),
+                    paragraph([
+                      "三分律。",
+                      math(String.raw`\tau=\tau'`),
+                      " の場合、",
+                      math(String.raw`\prec`),
+                      " の定義は左右の相異なることを要求するので ",
+                      math(String.raw`\tau\prec\tau'`),
+                      " も ",
+                      math(String.raw`\tau'\prec\tau`),
+                      " も成り立たず、",
+                      math(String.raw`\tau=\tau'`),
+                      " だけが成り立つ。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\tau\ne\tau'`),
+                      " の場合、",
+                      math(String.raw`k_0:=k_0(\tau,\tau')`),
+                      " が定まり、準備の第一により ",
+                      math(String.raw`\tau(\pi(k_0))\ne\tau'(\pi(k_0))`),
+                      " である。",
+                      math(String.raw`\varepsilon`),
+                      " は全単射なので",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
 \varepsilon\bigl(\tau(\pi(k_0))\bigr)
 &\ne\varepsilon\bigl(\tau'(\pi(k_0))\bigr)
 &&(\because\ \varepsilon\ \text{が単射で}\ \tau(\pi(k_0))\ne\tau'(\pi(k_0)))
 \end{aligned}`),
-                        paragraph([
-                          "であり、相異なる 2 つの自然数についてはちょうど一方が他方より小さい。",
-                          math(String.raw`k_0(\tau',\tau)=k_0`),
-                          " なので、",
-                          math(String.raw`\tau\prec\tau'`),
-                          " と ",
-                          math(String.raw`\tau'\prec\tau`),
-                          " のちょうど一方が成り立ち、",
-                          math(String.raw`\tau=\tau'`),
-                          " は成り立たない。",
-                        ]),
-                        paragraph([
-                          "推移律の証明にはもう 1 つ準備が要る。準備の第三として、",
-                          math(String.raw`\tau,\tau''\in R_L`),
-                          " と ",
-                          math(String.raw`k\in\{0,1,\dots,L-1\}`),
-                          " が次の 2 つを満たすならば ",
-                          math(String.raw`\tau\prec\tau''`),
-                          " である。",
-                        ]),
-                        list([
-                          [
-                            math(String.raw`k`),
-                            " 未満のすべての ",
-                            math(String.raw`j\in\{0,1,\dots,L-1\}`),
-                            " について ",
-                            math(String.raw`\tau(\pi(j))=\tau''(\pi(j))`),
-                            " である。",
-                          ],
-                          [
-                            math(String.raw`\varepsilon\bigl(\tau(\pi(k))\bigr)<\varepsilon\bigl(\tau''(\pi(k))\bigr)`),
-                            " である。",
-                          ],
-                        ]),
-                        paragraph([
-                          "実際、第二の条件の両辺は相異なるので ",
-                          math(String.raw`\varepsilon`),
-                          " が単射であることから ",
-                          math(String.raw`\tau(\pi(k))\ne\tau''(\pi(k))`),
-                          " であり、したがって ",
-                          math(String.raw`\tau\ne\tau''`),
-                          " かつ ",
-                          math(String.raw`k\in D(\tau,\tau'')`),
-                          " である。第一の条件から ",
-                          math(String.raw`k`),
-                          " 未満の元は ",
-                          math(String.raw`D(\tau,\tau'')`),
-                          " に属さない。ゆえに ",
-                          math(String.raw`k_0(\tau,\tau'')=k`),
-                          " であり、第二の条件が ",
-                          ref("def_row_config_order"),
-                          " の不等式そのものになる。",
-                        ]),
-                        paragraph([
-                          "推移律。",
-                          math(String.raw`\tau\prec\tau'`),
-                          " かつ ",
-                          math(String.raw`\tau'\prec\tau''`),
-                          " とし、",
-                          math(String.raw`k_0:=k_0(\tau,\tau')`),
-                          "、",
-                          math(String.raw`k_1:=k_0(\tau',\tau'')`),
-                          " と置く。",
-                          math(String.raw`k_0<k_1`),
-                          "、",
-                          math(String.raw`k_0=k_1`),
-                          "、",
-                          math(String.raw`k_1<k_0`),
-                          " のいずれかであるから場合を分ける（最小元の位置によって値の比べ方が変わるので、",
-                          "一続きの式にはしない）。いずれの場合も、準備の第三の 2 つの条件を ",
-                          math(String.raw`k=k_0`),
-                          " または ",
-                          math(String.raw`k=k_1`),
-                          " について確かめる。",
-                        ]),
-                        paragraph([
-                          math(String.raw`k_0<k_1`),
-                          " の場合。",
-                          math(String.raw`k=k_0`),
-                          " について準備の第三を用いる。第一の条件は、",
-                          math(String.raw`j<k_0`),
-                          " なる ",
-                          math(String.raw`j`),
-                          " について ",
-                          math(String.raw`j<k_0<k_1`),
-                          " なので準備の第二を 2 回用いて ",
-                          math(String.raw`\tau(\pi(j))=\tau'(\pi(j))=\tau''(\pi(j))`),
-                          " から従う。第二の条件は、",
-                          math(String.raw`k_0<k_1`),
-                          " より準備の第二を ",
-                          math(String.raw`\tau',\tau''`),
-                          " に用いて得られる ",
-                          math(String.raw`\tau'(\pi(k_0))=\tau''(\pi(k_0))`),
-                          " を使って",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
+                    paragraph([
+                      "であり、相異なる 2 つの自然数についてはちょうど一方が他方より小さい。",
+                      math(String.raw`k_0(\tau',\tau)=k_0`),
+                      " なので、",
+                      math(String.raw`\tau\prec\tau'`),
+                      " と ",
+                      math(String.raw`\tau'\prec\tau`),
+                      " のちょうど一方が成り立ち、",
+                      math(String.raw`\tau=\tau'`),
+                      " は成り立たない。",
+                    ]),
+                    paragraph([
+                      "推移律の証明にはもう 1 つ準備が要る。準備の第三として、",
+                      math(String.raw`\tau,\tau''\in R_L`),
+                      " と ",
+                      math(String.raw`k\in\{0,1,\dots,L-1\}`),
+                      " が次の 2 つを満たすならば ",
+                      math(String.raw`\tau\prec\tau''`),
+                      " である。",
+                    ]),
+                    list([
+                      [
+                        math(String.raw`k`),
+                        " 未満のすべての ",
+                        math(String.raw`j\in\{0,1,\dots,L-1\}`),
+                        " について ",
+                        math(String.raw`\tau(\pi(j))=\tau''(\pi(j))`),
+                        " である。",
+                      ],
+                      [
+                        math(String.raw`\varepsilon\bigl(\tau(\pi(k))\bigr)<\varepsilon\bigl(\tau''(\pi(k))\bigr)`),
+                        " である。",
+                      ],
+                    ]),
+                    paragraph([
+                      "実際、第二の条件の両辺は相異なるので ",
+                      math(String.raw`\varepsilon`),
+                      " が単射であることから ",
+                      math(String.raw`\tau(\pi(k))\ne\tau''(\pi(k))`),
+                      " であり、したがって ",
+                      math(String.raw`\tau\ne\tau''`),
+                      " かつ ",
+                      math(String.raw`k\in D(\tau,\tau'')`),
+                      " である。第一の条件から ",
+                      math(String.raw`k`),
+                      " 未満の元は ",
+                      math(String.raw`D(\tau,\tau'')`),
+                      " に属さない。ゆえに ",
+                      math(String.raw`k_0(\tau,\tau'')=k`),
+                      " であり、第二の条件が ",
+                      ref("def_row_config_order"),
+                      " の不等式そのものになる。",
+                    ]),
+                    paragraph([
+                      "推移律。",
+                      math(String.raw`\tau\prec\tau'`),
+                      " かつ ",
+                      math(String.raw`\tau'\prec\tau''`),
+                      " とし、",
+                      math(String.raw`k_0:=k_0(\tau,\tau')`),
+                      "、",
+                      math(String.raw`k_1:=k_0(\tau',\tau'')`),
+                      " と置く。",
+                      math(String.raw`k_0<k_1`),
+                      "、",
+                      math(String.raw`k_0=k_1`),
+                      "、",
+                      math(String.raw`k_1<k_0`),
+                      " のいずれかであるから場合を分ける（最小元の位置によって値の比べ方が変わるので、",
+                      "一続きの式にはしない）。いずれの場合も、準備の第三の 2 つの条件を ",
+                      math(String.raw`k=k_0`),
+                      " または ",
+                      math(String.raw`k=k_1`),
+                      " について確かめる。",
+                    ]),
+                    paragraph([
+                      math(String.raw`k_0<k_1`),
+                      " の場合。",
+                      math(String.raw`k=k_0`),
+                      " について準備の第三を用いる。第一の条件は、",
+                      math(String.raw`j<k_0`),
+                      " なる ",
+                      math(String.raw`j`),
+                      " について ",
+                      math(String.raw`j<k_0<k_1`),
+                      " なので準備の第二を 2 回用いて ",
+                      math(String.raw`\tau(\pi(j))=\tau'(\pi(j))=\tau''(\pi(j))`),
+                      " から従う。第二の条件は、",
+                      math(String.raw`k_0<k_1`),
+                      " より準備の第二を ",
+                      math(String.raw`\tau',\tau''`),
+                      " に用いて得られる ",
+                      math(String.raw`\tau'(\pi(k_0))=\tau''(\pi(k_0))`),
+                      " を使って",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
 \varepsilon\bigl(\tau(\pi(k_0))\bigr)
 &<\varepsilon\bigl(\tau'(\pi(k_0))\bigr)
 &&(\because\ \tau\prec\tau'\ \text{と}\ k_0=k_0(\tau,\tau'))\\
 &=\varepsilon\bigl(\tau''(\pi(k_0))\bigr)
 &&(\because\ \tau'(\pi(k_0))=\tau''(\pi(k_0)))
 \end{aligned}`),
-                        paragraph([
-                          "から従う。よって準備の第三により ",
-                          math(String.raw`\tau\prec\tau''`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          math(String.raw`k_1<k_0`),
-                          " の場合。",
-                          math(String.raw`k=k_1`),
-                          " について準備の第三を用いる。第一の条件は、",
-                          math(String.raw`j<k_1`),
-                          " なる ",
-                          math(String.raw`j`),
-                          " について ",
-                          math(String.raw`j<k_1<k_0`),
-                          " なので準備の第二を 2 回用いて ",
-                          math(String.raw`\tau(\pi(j))=\tau'(\pi(j))=\tau''(\pi(j))`),
-                          " から従う。第二の条件は、",
-                          math(String.raw`k_1<k_0`),
-                          " より準備の第二を ",
-                          math(String.raw`\tau,\tau'`),
-                          " に用いて得られる ",
-                          math(String.raw`\tau(\pi(k_1))=\tau'(\pi(k_1))`),
-                          " を使って",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
+                    paragraph([
+                      "から従う。よって準備の第三により ",
+                      math(String.raw`\tau\prec\tau''`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`k_1<k_0`),
+                      " の場合。",
+                      math(String.raw`k=k_1`),
+                      " について準備の第三を用いる。第一の条件は、",
+                      math(String.raw`j<k_1`),
+                      " なる ",
+                      math(String.raw`j`),
+                      " について ",
+                      math(String.raw`j<k_1<k_0`),
+                      " なので準備の第二を 2 回用いて ",
+                      math(String.raw`\tau(\pi(j))=\tau'(\pi(j))=\tau''(\pi(j))`),
+                      " から従う。第二の条件は、",
+                      math(String.raw`k_1<k_0`),
+                      " より準備の第二を ",
+                      math(String.raw`\tau,\tau'`),
+                      " に用いて得られる ",
+                      math(String.raw`\tau(\pi(k_1))=\tau'(\pi(k_1))`),
+                      " を使って",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
 \varepsilon\bigl(\tau(\pi(k_1))\bigr)
 &=\varepsilon\bigl(\tau'(\pi(k_1))\bigr)
 &&(\because\ \tau(\pi(k_1))=\tau'(\pi(k_1)))\\
 &<\varepsilon\bigl(\tau''(\pi(k_1))\bigr)
 &&(\because\ \tau'\prec\tau''\ \text{と}\ k_1=k_0(\tau',\tau''))
 \end{aligned}`),
-                        paragraph([
-                          "から従う。よって準備の第三により ",
-                          math(String.raw`\tau\prec\tau''`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          math(String.raw`k_0=k_1`),
-                          " の場合。",
-                          math(String.raw`k=k_0`),
-                          " について準備の第三を用いる。第一の条件は、",
-                          math(String.raw`j<k_0`),
-                          " なる ",
-                          math(String.raw`j`),
-                          " について ",
-                          math(String.raw`j<k_0`),
-                          " と ",
-                          math(String.raw`j<k_1`),
-                          " の両方が成り立つので準備の第二を 2 回用いて ",
-                          math(String.raw`\tau(\pi(j))=\tau'(\pi(j))=\tau''(\pi(j))`),
-                          " から従う。第二の条件は",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
+                    paragraph([
+                      "から従う。よって準備の第三により ",
+                      math(String.raw`\tau\prec\tau''`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      math(String.raw`k_0=k_1`),
+                      " の場合。",
+                      math(String.raw`k=k_0`),
+                      " について準備の第三を用いる。第一の条件は、",
+                      math(String.raw`j<k_0`),
+                      " なる ",
+                      math(String.raw`j`),
+                      " について ",
+                      math(String.raw`j<k_0`),
+                      " と ",
+                      math(String.raw`j<k_1`),
+                      " の両方が成り立つので準備の第二を 2 回用いて ",
+                      math(String.raw`\tau(\pi(j))=\tau'(\pi(j))=\tau''(\pi(j))`),
+                      " から従う。第二の条件は",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
 \varepsilon\bigl(\tau(\pi(k_0))\bigr)
 &<\varepsilon\bigl(\tau'(\pi(k_0))\bigr)
 &&(\because\ \tau\prec\tau'\ \text{と}\ k_0=k_0(\tau,\tau'))\\
 &<\varepsilon\bigl(\tau''(\pi(k_0))\bigr)
 &&(\because\ \tau'\prec\tau''\ \text{と}\ k_0=k_1=k_0(\tau',\tau''))
 \end{aligned}`),
-                        paragraph([
-                          "と自然数の大小の推移律から従う。よって準備の第三により ",
-                          math(String.raw`\tau\prec\tau''`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "以上は有限集合の元の比較と自然数の大小だけからなり、実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "algebraic_eigenvalue_definition_permutation_sign",
-                  kind: "definition",
-                  title: { text: "線型順序を持つ有限集合の上の置換、転倒数、そして符号" },
-                  labels: ["def_row_permutation", "def_inversion_count", "def_permutation_sign"],
-                  habitat: "Z",
-                  lean: [
-                    "Ising2DLambda.AlgebraicEigenvalue.orderedPairs",
-                    "Ising2DLambda.AlgebraicEigenvalue.inversionCount",
-                    "Ising2DLambda.AlgebraicEigenvalue.permSign",
-                  ],
-                  verification: ["sagemath/check/permutation-sign"],
-                  statement: [
                     paragraph([
-                      "行列式を置換にわたる和として定めるために、固定した有限集合 ",
-                      math(String.raw`\mathcal{J}`),
-                      "（",
-                      ref("def_matrix_over_row_configs"),
-                      "）の上の置換と、その符号を定める。",
-                      "ここでは ",
-                      math(String.raw`\mathcal{J}`),
-                      " に線型順序 ",
-                      math(String.raw`\prec`),
-                      " が 1 つ与えられているとする。符号はその順序 ",
-                      math(String.raw`\prec`),
-                      " に対する転倒数で定める。",
-                    ]),
-                    paragraph([
-                      "第一に、",
-                      math(String.raw`\mathcal{J}`),
-                      " の置換とは全単射 ",
-                      math(String.raw`\varphi:\mathcal{J}\to \mathcal{J}`),
-                      " のことであり、その全体を ",
-                      math(String.raw`\mathfrak{S}_L`),
-                      " と書く。",
-                      math(String.raw`\mathcal{J}`),
-                      " は有限集合なので ",
-                      math(String.raw`\mathfrak{S}_L`),
-                      " も有限集合である。",
-                      "2 つの置換 ",
-                      math(String.raw`\varphi,\psi\in\mathfrak{S}_L`),
-                      " の合成 ",
-                      math(String.raw`\varphi\circ\psi`),
-                      "（",
-                      math(String.raw`(\varphi\circ\psi)(u)=\varphi(\psi(u))`),
-                      "）は再び置換であり、恒等写像 ",
-                      math(String.raw`\mathrm{id}_{\mathcal{J}}`),
-                      " も置換である。全単射 ",
-                      math(String.raw`\varphi`),
-                      " には逆写像 ",
-                      math(String.raw`\varphi^{-1}\in\mathfrak{S}_L`),
-                      " がある。",
-                    ]),
-                    paragraph([
-                      "第二に、",
-                      math(String.raw`\prec`),
-                      " について順序づけられた対の集合を",
-                    ]),
-                    displayMath(
-                      String.raw`P_L:=\bigl\{\,(u,u')\in \mathcal{J}\times \mathcal{J} \;\bigm|\; u\prec u'\,\bigr\}`,
-                    ),
-                    paragraph([
-                      "と置き（",
-                      math(String.raw`\mathcal{J}\times \mathcal{J}`),
-                      " が有限集合なので ",
-                      math(String.raw`P_L`),
-                      " も有限集合）、置換 ",
-                      math(String.raw`\varphi\in\mathfrak{S}_L`),
-                      " の転倒数を",
-                    ]),
-                    displayMath(
-                      String.raw`\mathrm{inv}(\varphi):=\bigl|\,\bigl\{\,(u,u')\in P_L \;\bigm|\; \varphi(u')\prec\varphi(u)\,\bigr\}\,\bigr|\in\mathbb{N}`,
-                    ),
-                    paragraph([
-                      "で定める。すなわち ",
-                      math(String.raw`\mathrm{inv}(\varphi)`),
-                      " は、",
-                      math(String.raw`\varphi`),
-                      " によって順序が入れ替わる対の個数である。",
-                      "これは有限集合の元の個数なので自然数である。",
-                    ]),
-                    paragraph([
-                      "第三に、置換 ",
-                      math(String.raw`\varphi\in\mathfrak{S}_L`),
-                      " の符号を",
-                    ]),
-                    displayMath(String.raw`\mathrm{sgn}(\varphi):=(-1)^{\mathrm{inv}(\varphi)}\in\mathbb{Z}`),
-                    paragraph([
-                      "で定める。右辺は整数 ",
-                      math(String.raw`-1`),
-                      " の自然数冪であり、",
-                      math(String.raw`\mathbb{Z}`),
-                      " の中の計算である。",
-                      "ここに現れるのは有限集合とその上の写像、数え上げ、および整数の積だけであり、実数体は現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "supporting",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_claim_permutation_sign_mul",
-              focus:
-                {
-                  id: "algebraic_eigenvalue_claim_permutation_sign_mul",
-                  kind: "claim",
-                  title: { text: "符号は合成について乗法的である" },
-                  labels: ["claim_permutation_sign_mul"],
-                  habitat: "Z",
-                  lean: [
-                    "Ising2DLambda.AlgebraicEigenvalue.permSign_comp",
-                    "Ising2DLambda.AlgebraicEigenvalue.permSign_comp_from_necSuf",
-                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sign_comp",
-                  ],
-                  verification: ["sagemath/check/permutation-sign"],
-                  statement: [
-                    paragraph([
-                      "任意の ",
-                      math(String.raw`\varphi,\psi\in\mathfrak{S}_L`),
-                      " について",
-                    ]),
-                    displayMath(
-                      String.raw`\mathrm{sgn}(\varphi\circ\psi)=\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)`,
-                    ),
-                    paragraph([
-                      "が成り立つ（",
-                      ref("def_permutation_sign"),
-                      "）。両辺は ",
-                      math(String.raw`\mathbb{Z}`),
-                      " の元であり、実数体は現れない。",
-                    ]),
-                  ],
-                  proof: [
-                    paragraph([
-                      "準備として ",
-                      math(String.raw`\psi`),
-                      " が定める写像 ",
-                      math(String.raw`\Psi:P_L\to P_L`),
-                      " を",
-                    ]),
-                    displayMath(String.raw`\Psi(u,u'):=
-\begin{cases}
-\bigl(\psi(u),\psi(u')\bigr) & \bigl(\psi(u)\prec\psi(u')\ \text{のとき}\bigr)\\
-\bigl(\psi(u'),\psi(u)\bigr) & \bigl(\psi(u')\prec\psi(u)\ \text{のとき}\bigr)
-\end{cases}`),
-                    paragraph([
-                      "で定める。これが定まることを見る。",
-                      math(String.raw`(u,u')\in P_L`),
-                      " なら ",
-                      math(String.raw`u\prec u'`),
-                      " なので三分律から ",
-                      math(String.raw`u\ne u'`),
-                      " であり、",
-                      math(String.raw`\psi`),
-                      " が単射なので ",
-                      math(String.raw`\psi(u)\ne\psi(u')`),
-                      " である。ふたたび三分律から ",
-                      math(String.raw`\psi(u)\prec\psi(u')`),
-                      " と ",
-                      math(String.raw`\psi(u')\prec\psi(u)`),
-                      " のちょうど一方が成り立つ。どちらの場合も右辺は ",
-                      math(String.raw`P_L`),
-                      " の元である。",
-                    ]),
-                    paragraph([
-                      math(String.raw`\Psi`),
-                      " は全単射である。実際 ",
-                      math(String.raw`\psi^{-1}`),
-                      " から同じ作り方で得られる写像 ",
-                      math(String.raw`\Psi':P_L\to P_L`),
-                      " が逆写像になる。",
-                      math(String.raw`(u,u')\in P_L`),
-                      " について、",
-                      math(String.raw`\psi(u)\prec\psi(u')`),
-                      " の場合は ",
-                      math(String.raw`\Psi(u,u')=(\psi(u),\psi(u'))`),
-                      " であり、その 2 成分を ",
-                      math(String.raw`\psi^{-1}`),
-                      " で戻すと ",
-                      math(String.raw`u,u'`),
-                      " で、",
-                      math(String.raw`u\prec u'`),
-                      " なので ",
-                      math(String.raw`\Psi'(\Psi(u,u'))=(u,u')`),
-                      " である。",
-                      math(String.raw`\psi(u')\prec\psi(u)`),
-                      " の場合は ",
-                      math(String.raw`\Psi(u,u')=(\psi(u'),\psi(u))`),
-                      " であり、その 2 成分を ",
-                      math(String.raw`\psi^{-1}`),
-                      " で戻すと ",
-                      math(String.raw`u',u`),
-                      " で、やはり ",
-                      math(String.raw`u\prec u'`),
-                      " なので ",
-                      math(String.raw`\Psi'(\Psi(u,u'))=(u,u')`),
-                      " である。",
-                      math(String.raw`\psi`),
-                      " と ",
-                      math(String.raw`\psi^{-1}`),
-                      " を入れ替えれば同じ議論で ",
-                      math(String.raw`\Psi(\Psi'(u,u'))=(u,u')`),
-                      " が出る。",
-                    ]),
-                    paragraph([
-                      "次に、",
-                      math(String.raw`P_L`),
-                      " の 3 つの部分集合",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-A&:=\bigl\{\,(u,u')\in P_L \bigm| (\varphi\circ\psi)(u')\prec(\varphi\circ\psi)(u)\,\bigr\},\\
-B&:=\bigl\{\,(u,u')\in P_L \bigm| \psi(u')\prec\psi(u)\,\bigr\},\\
-C&:=\bigl\{\,(u,u')\in P_L \bigm| \varphi\bigl(\Psi(u,u')_2\bigr)\prec\varphi\bigl(\Psi(u,u')_1\bigr)\,\bigr\}
-\end{aligned}`),
-                    paragraph([
-                      "を置く（",
-                      math(String.raw`(\upsilon,\upsilon')_1:=\upsilon`),
-                      "、",
-                      math(String.raw`(\upsilon,\upsilon')_2:=\upsilon'`),
-                      " は対の成分を取り出す記号である）。転倒数の定義から ",
-                      math(String.raw`|A|=\mathrm{inv}(\varphi\circ\psi)`),
-                      " と ",
-                      math(String.raw`|B|=\mathrm{inv}(\psi)`),
-                      " である。また ",
-                      math(String.raw`C`),
-                      " は ",
-                      math(String.raw`\Psi`),
-                      " による ",
-                      math(String.raw`\{(\upsilon,\upsilon')\in P_L\mid\varphi(\upsilon')\prec\varphi(\upsilon)\}`),
-                      " の逆像であり、",
-                      math(String.raw`\Psi`),
-                      " が全単射なので ",
-                      math(String.raw`|C|=\mathrm{inv}(\varphi)`),
+                      "と自然数の大小の推移律から従う。よって準備の第三により ",
+                      math(String.raw`\tau\prec\tau''`),
                       " である。",
                     ]),
                     paragraph([
-                      "各 ",
-                      math(String.raw`(u,u')\in P_L`),
-                      " について、",
-                      math(String.raw`A,B,C`),
-                      " のうちその対が属するものの個数は偶数である。場合を分けて確かめる。",
-                    ]),
-                    paragraph([
-                      math(String.raw`\psi(u)\prec\psi(u')`),
-                      " の場合。三分律から ",
-                      math(String.raw`\psi(u')\prec\psi(u)`),
-                      " は成り立たないので、その対は ",
-                      math(String.raw`B`),
-                      " に属さない。このとき ",
-                      math(String.raw`\Psi(u,u')=(\psi(u),\psi(u'))`),
-                      " なので ",
-                      math(String.raw`C`),
-                      " の条件は ",
-                      math(String.raw`\varphi(\psi(u'))\prec\varphi(\psi(u))`),
-                      " であり、これは ",
-                      math(String.raw`A`),
-                      " の条件と同じである。よって属するものの個数は ",
-                      math(String.raw`0`),
-                      " 個か ",
-                      math(String.raw`2`),
-                      " 個であり、いずれも偶数である。",
-                    ]),
-                    paragraph([
-                      math(String.raw`\psi(u')\prec\psi(u)`),
-                      " の場合。その対は ",
-                      math(String.raw`B`),
-                      " に属する。このとき ",
-                      math(String.raw`\Psi(u,u')=(\psi(u'),\psi(u))`),
-                      " なので ",
-                      math(String.raw`C`),
-                      " の条件は ",
-                      math(String.raw`\varphi(\psi(u))\prec\varphi(\psi(u'))`),
-                      " である。",
-                      math(String.raw`u\ne u'`),
-                      " と ",
-                      math(String.raw`\varphi\circ\psi`),
-                      " が単射であることから ",
-                      math(String.raw`\varphi(\psi(u))\ne\varphi(\psi(u'))`),
-                      " なので、三分律により ",
-                      math(String.raw`A`),
-                      " の条件と ",
-                      math(String.raw`C`),
-                      " の条件のちょうど一方が成り立つ。よって属するものの個数は ",
-                      math(String.raw`B`),
-                      " のぶんと合わせてちょうど ",
-                      math(String.raw`2`),
-                      " 個であり、偶数である。",
-                    ]),
-                    paragraph([
-                      "準備として、",
-                      math(String.raw`P_L`),
-                      " の部分集合 ",
-                      math(String.raw`X`),
-                      " に対して写像 ",
-                      math(String.raw`f_X:P_L\to\mathbb{Z}`),
-                      " を",
-                    ]),
-                    displayMath(String.raw`f_X(u,u'):=
-\begin{cases}
--1 & \bigl((u,u')\in X\ \text{のとき}\bigr)\\
-+1 & \bigl((u,u')\notin X\ \text{のとき}\bigr)
-\end{cases}`),
-                    paragraph([
-                      "で定める。いま見たことは、各 ",
-                      math(String.raw`(u,u')\in P_L`),
-                      " について ",
-                      math(String.raw`f_A(u,u')\cdot f_C(u,u')\cdot f_B(u,u')=1`),
-                      " が成り立つことを言っている（",
-                      math(String.raw`-1`),
-                      " が偶数個掛かるからである）。したがって",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-\mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
-&=(-1)^{\mathrm{inv}(\varphi\circ\psi)}\cdot(-1)^{\mathrm{inv}(\varphi)}\cdot(-1)^{\mathrm{inv}(\psi)}
-&&(\because\ \text{符号の定義})\\
-&=(-1)^{|A|}\cdot(-1)^{|C|}\cdot(-1)^{|B|}
-&&(\because\ |A|=\mathrm{inv}(\varphi\circ\psi),\ |C|=\mathrm{inv}(\varphi),\ |B|=\mathrm{inv}(\psi))\\
-&=\prod_{(u,u')\in P_L}f_A(u,u')\cdot\prod_{(u,u')\in P_L}f_C(u,u')\cdot\prod_{(u,u')\in P_L}f_B(u,u')
-&&(\because\ \text{属するときだけ}\ -1\ \text{を掛けた有限積は}\ (-1)\ \text{の個数乗})\\
-&=\prod_{(u,u')\in P_L}\bigl(f_A(u,u')\cdot f_C(u,u')\cdot f_B(u,u')\bigr)
-&&(\because\ \text{有限積の各因子ごとのまとめ})\\
-&=\prod_{(u,u')\in P_L}1
-&&(\because\ \text{属するものの個数が偶数})\\
-&=1
-&&(\because\ 1\ \text{の有限積は}\ 1)
-\end{aligned}`),
-                    paragraph([
-                      "である。これを使って",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-\mathrm{sgn}(\varphi\circ\psi)
-&=\mathrm{sgn}(\varphi\circ\psi)\cdot1\cdot1\\
-&=\mathrm{sgn}(\varphi\circ\psi)\cdot\bigl(\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\varphi)\bigr)\cdot\bigl(\mathrm{sgn}(\psi)\cdot\mathrm{sgn}(\psi)\bigr)
-&&(\because\ \text{符号の 2 乗は}\ 1)\\
-&=\bigl(\mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)\bigr)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)\\
-&=1\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
-&&(\because\ \text{直前の等式})\\
-&=\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
-\end{aligned}`),
-                    paragraph(["を得る。"]),
-                    paragraph([
-                      "以上で使ったのは、",
-                      math(String.raw`\prec`),
-                      " の三分律、置換が単射であること、有限集合の数え上げ、そして整数の積だけである。",
-                      "線型順序の推移律は一度も使っていない。実数体も複素数体も現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "shift_symmetry_heading_determinant_and_char_poly",
-        labels: [],
-        title: { text: "行列式と特性多項式" },
-        children: [
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_determinant",
-              focus:
-                {
-                  id: "algebraic_eigenvalue_definition_determinant",
-                  kind: "definition",
-                  title: { text: "定数多項式を与える写像、単位行列、そして行列式" },
-                  labels: ["def_constant_polynomial", "def_identity_matrix", "def_determinant"],
-                  habitat: "Z",
-                  lean: [
-                    "Ising2DLambda.AlgebraicEigenvalue.constPoly",
-                    "Ising2DLambda.AlgebraicEigenvalue.identityRowMatrix",
-                    "Ising2DLambda.AlgebraicEigenvalue.determinant",
-                  ],
-                  verification: ["sagemath/check/determinant"],
-                  statement: [
-                    paragraph([
-                      ref("def_matrix_over_row_configs"),
-                      " の行列 ",
-                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
-                      " の行列式を、",
-                      ref("def_permutation_sign"),
-                      " の符号を係数とする置換にわたる和として定める。",
-                      "その前に、整数を成分として書くための写像と単位行列を用意する。",
-                    ]),
-                    paragraph([
-                      "第一に、整数 ",
-                      math(String.raw`n\in\mathbb{Z}`),
-                      " に対して定数多項式を与える写像 ",
-                      math(String.raw`\kappa:\mathbb{Z}\to\mathbb{Z}[x]`),
-                      " を、",
-                      math(String.raw`\kappa(n)`),
-                      " は ",
-                      math(String.raw`x^{0}`),
-                      " の係数が ",
-                      math(String.raw`n`),
-                      " で他の係数がすべて ",
-                      math(String.raw`0`),
-                      " である多項式、として定める。",
-                      math(String.raw`\kappa`),
-                      " は和と積を保ち、",
-                      math(String.raw`\kappa(0)`),
-                      " は ",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の零元、",
-                      math(String.raw`\kappa(1)`),
-                      " は単位元である。",
-                      "整数を ",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の元として扱う経路はこの写像だけとし、整数と定数多項式を同じ記号で書くことはしない",
-                      "（どちらの集合の中で計算しているかを式に残すため）。",
-                    ]),
-                    paragraph([
-                      "第二に、単位行列 ",
-                      math(String.raw`I\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
-                      " を",
-                    ]),
-                    displayMath(String.raw`I_{u,u'}:=
-\begin{cases}
-\kappa(1) & (u=u'\ \text{のとき})\\
-\kappa(0) & (u\ne u'\ \text{のとき})
-\end{cases}
-\qquad(u,u'\in \mathcal{J})`),
-                    paragraph([
-                      "で定める。",
-                    ]),
-                    paragraph([
-                      "第三に、行列式 ",
-                      math(String.raw`\det A\in\mathbb{Z}[x]`),
-                      " を",
-                    ]),
-                    displayMath(
-                      String.raw`\det A:=\sum_{\varphi\in\mathfrak{S}_L}\kappa\bigl(\mathrm{sgn}(\varphi)\bigr)\cdot\prod_{u\in \mathcal{J}}A_{u,\varphi(u)}`,
-                    ),
-                    paragraph([
-                      "で定める。右辺が ",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の元として確定することを見る。",
-                      ref("def_row_permutation"),
-                      " の ",
-                      math(String.raw`\mathfrak{S}_L`),
-                      " は有限集合であり ",
-                      math(String.raw`\mathcal{J}`),
-                      " も有限集合なので、和も積も有限個の項からなる。",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の積は可換かつ結合的なので、",
-                      math(String.raw`\prod_{u\in \mathcal{J}}`),
-                      " は因子を並べる順序によらず定まる",
-                      "（すなわちこの積を書くのに順序 ",
-                      math(String.raw`\prec`),
-                      " は要らない。",
-                      math(String.raw`\prec`),
-                      " が要るのは符号 ",
-                      math(String.raw`\mathrm{sgn}(\varphi)`),
-                      " を転倒数で定める箇所だけである）。",
-                    ]),
-                    paragraph([
-                      "以上に現れるのは有限集合の上の和と積、整数、および整係数多項式だけであり、",
-                      "実数体も複素数体も現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_second_constant_embedding",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_second_polynomial",
-                      kind: "definition",
-                      title: { text: "整係数多項式を係数とする、もう 1 つの不定元の多項式" },
-                      labels: ["def_second_polynomial_ring"],
-                      habitat: "Z",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.SecondPoly"],
-                      verification: ["sagemath/check/second-polynomial-ring"],
-                      statement: [
-                        paragraph([
-                          "特性多項式を書く場所を用意する。整係数多項式環 ",
-                          math(String.raw`\mathbb{Z}[x]`),
-                          " の不定元 ",
-                          math(String.raw`x`),
-                          " とは別の不定元 ",
-                          math(String.raw`t`),
-                          " を取り、",
-                          math(String.raw`\mathbb{Z}[x]`),
-                          " を係数環とする ",
-                          math(String.raw`t`),
-                          " の多項式環を ",
-                          math(String.raw`\mathbb{Z}[x][t]`),
-                          " と書く。",
-                        ]),
-                        paragraph([
-                          math(String.raw`f\in\mathbb{Z}[x][t]`),
-                          " と ",
-                          math(String.raw`k\in\mathbb{N}`),
-                          " に対して、",
-                          math(String.raw`f`),
-                          " の ",
-                          math(String.raw`t^{k}`),
-                          " の係数を ",
-                          math(String.raw`\mathrm{cf}_k(f)\in\mathbb{Z}[x]`),
-                          " と書く（",
-                          math(String.raw`\mathbb{Z}[x]`),
-                          " の零元と単位元は ",
-                          ref("def_constant_polynomial"),
-                          " の ",
-                          math(String.raw`\kappa(0)`),
-                          "、",
-                          math(String.raw`\kappa(1)`),
-                          " と書き、整数の ",
-                          math(String.raw`0`),
-                          "、",
-                          math(String.raw`1`),
-                          " と同じ記号では書かない）。",
-                          math(String.raw`\mathrm{cf}_k(f)\ne\kappa(0)`),
-                          " となる ",
-                          math(String.raw`k`),
-                          " は有限個であり、",
-                        ]),
-                        displayMath(String.raw`f=\sum_{k:\ \mathrm{cf}_k(f)\ne\kappa(0)}\mathrm{cf}_k(f)\cdot t^{\,k}`),
-                        paragraph([
-                          "が成り立つ。和と積は係数の言葉で",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\mathrm{cf}_k(f+g)&=\mathrm{cf}_k(f)+\mathrm{cf}_k(g)\\
-\mathrm{cf}_k(f\cdot g)&=\sum_{i=0}^{k}\mathrm{cf}_i(f)\cdot\mathrm{cf}_{k-i}(g)
-\end{aligned}
-\qquad(f,g\in\mathbb{Z}[x][t],\ k\in\mathbb{N})`),
-                        paragraph([
-                          "で与えられる。これは多項式環の演算の定義であって、証明すべきことではない。",
-                          "以下の主張はすべてこの 2 つの等式だけから出る。",
-                        ]),
-                        paragraph([
-                          "不定元の名前について 1 点を約束する。この不定元を ",
-                          math(String.raw`\lambda`),
-                          " と書かない。",
-                          math(String.raw`\lambda`),
-                          " は ",
-                          ref("def_log_order_group"),
-                          " の元を表す記号として固定してあり、同じ記号に 2 つの意味を持たせないためである。",
-                        ]),
-                        paragraph([
-                          "現れるのは整数、有限和、有限積だけであり、実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "algebraic_eigenvalue_definition_second_constant_embedding",
-                  kind: "definition",
-                  title: { text: "整係数多項式を定数として送る写像" },
-                  labels: ["def_second_constant_embedding"],
-                  habitat: "Z",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.constSecond"],
-                  verification: ["sagemath/check/second-polynomial-ring"],
-                  statement: [
-                    paragraph([
-                      math(String.raw`a\in\mathbb{Z}[x]`),
-                      " に対して、",
-                      ref("def_second_polynomial_ring"),
-                      " の ",
-                      math(String.raw`t`),
-                      " について定数である元を与える写像 ",
-                      math(String.raw`\iota:\mathbb{Z}[x]\to\mathbb{Z}[x][t]`),
-                      " を",
-                    ]),
-                    displayMath(String.raw`\mathrm{cf}_0\bigl(\iota(a)\bigr):=a,
-\qquad
-\mathrm{cf}_k\bigl(\iota(a)\bigr):=\kappa(0)\quad(k\ge1)`),
-                    paragraph([
-                      "で定める。",
-                      math(String.raw`\iota`),
-                      " は和と積を保ち、",
-                      math(String.raw`\iota\bigl(\kappa(0)\bigr)`),
-                      " は ",
-                      math(String.raw`\mathbb{Z}[x][t]`),
-                      " の零元、",
-                      math(String.raw`\iota\bigl(\kappa(1)\bigr)`),
-                      " は単位元である（",
-                      math(String.raw`\kappa`),
-                      " は ",
-                      ref("def_constant_polynomial"),
-                      "）。",
-                    ]),
-                    paragraph([
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の元を ",
-                      math(String.raw`\mathbb{Z}[x][t]`),
-                      " の元として扱う経路はこの写像だけとし、両者を同じ記号で書くことはしない",
-                      "（",
-                      ref("def_constant_polynomial"),
-                      " で整数と定数多項式を書き分けたのと同じ理由である）。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "supporting",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_characteristic_polynomial",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_second_matrix",
-                      kind: "definition",
-                      title: { text: "もう 1 つの不定元の多項式を成分とする、有限集合を添字とする行列" },
-                      labels: ["def_second_matrix"],
-                      habitat: "Z",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.SecondRowMatrix"],
-                      verification: ["sagemath/check/characteristic-polynomial"],
-                      statement: [
-                        paragraph([
-                          ref("def_matrix_over_row_configs"),
-                          " と同じ形の行列を、成分が ",
-                          ref("def_second_polynomial_ring"),
-                          " の ",
-                          math(String.raw`\mathbb{Z}[x][t]`),
-                          " である場合について書き下す。すなわち写像 ",
-                          math(String.raw`B:\mathcal{J}\times \mathcal{J}\to\mathbb{Z}[x][t]`),
-                          " のことを行列と呼び、その全体の集合を ",
-                          math(String.raw`\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x][t]\bigr)`),
-                          " と書く。値 ",
-                          math(String.raw`B(u,u')`),
-                          " を成分と呼び ",
-                          math(String.raw`B_{u,u'}`),
-                          " と書く。",
-                        ]),
-                        paragraph([
-                          "成分の住む集合が違うので、",
-                          ref("def_matrix_over_row_configs"),
-                          " の ",
-                          math(String.raw`\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
-                          " とは別の集合である。",
-                          "一般の可換環を成分とする行列としてまとめて述べることはしない",
-                          "（人手証明は具体的な対象について書く。抽象化は Lean の必要十分版の側で行う）。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_second_determinant",
-                      kind: "definition",
-                      title: { text: "もう 1 つの不定元の多項式を成分とする行列の行列式" },
-                      labels: ["def_second_determinant"],
-                      habitat: "Z",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.secondDeterminant"],
-                      verification: ["sagemath/check/characteristic-polynomial"],
-                      statement: [
-                        paragraph([
-                          ref("def_second_matrix"),
-                          " の行列 ",
-                          math(String.raw`B\in\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x][t]\bigr)`),
-                          " の行列式 ",
-                          math(String.raw`\mathrm{det}_{t}\,B\in\mathbb{Z}[x][t]`),
-                          " を",
-                        ]),
-                        displayMath(
-                          String.raw`\mathrm{det}_{t}\,B:=\sum_{\varphi\in\mathfrak{S}_L}\iota\bigl(\kappa(\mathrm{sgn}(\varphi))\bigr)\cdot\prod_{u\in \mathcal{J}}B_{u,\varphi(u)}`,
-                        ),
-                        paragraph([
-                          "で定める（",
-                          math(String.raw`\mathfrak{S}_L`),
-                          " と ",
-                          math(String.raw`\mathrm{sgn}`),
-                          " は ",
-                          ref("def_permutation_sign"),
-                          "、",
-                          math(String.raw`\kappa`),
-                          " は ",
-                          ref("def_constant_polynomial"),
-                          "、",
-                          math(String.raw`\iota`),
-                          " は ",
-                          ref("def_second_constant_embedding"),
-                          "）。",
-                          "整数である符号を ",
-                          math(String.raw`\mathbb{Z}[x][t]`),
-                          " の元として使う経路は ",
-                          math(String.raw`\iota\circ\kappa`),
-                          " だけであり、新しい写像は導入しない。",
-                        ]),
-                        paragraph([
-                          ref("def_determinant"),
-                          " の ",
-                          math(String.raw`\det`),
-                          " とは値の住む集合が違うので、記号を分けて ",
-                          math(String.raw`\mathrm{det}_{t}`),
-                          " と書く。",
-                          "右辺が定まる理由は ",
-                          ref("def_determinant"),
-                          " と同じである。和も積も有限個の項からなり、",
-                          math(String.raw`\mathbb{Z}[x][t]`),
-                          " の積は可換かつ結合的なので ",
-                          math(String.raw`\prod_{u\in \mathcal{J}}`),
-                          " は因子を並べる順序によらない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_indeterminate_t",
-                      kind: "definition",
-                      title: { text: "不定元 t 自身が定める元" },
-                      labels: ["def_indeterminate_element"],
-                      habitat: "Z",
-                      lean: ["Polynomial.X"],
-                      verification: ["sagemath/check/characteristic-polynomial"],
-                      statement: [
-                        paragraph([
-                          ref("def_second_polynomial_ring"),
-                          " の不定元 ",
-                          math(String.raw`t`),
-                          " そのものを ",
-                          math(String.raw`\mathbb{Z}[x][t]`),
-                          " の元と見るときの係数を書いておく。すなわち",
-                        ]),
-                        displayMath(String.raw`\mathrm{cf}_1(t):=\kappa(1),
-\qquad
-\mathrm{cf}_k(t):=\kappa(0)\quad(k\ne1)`),
-                        paragraph([
-                          "である（",
-                          math(String.raw`\kappa`),
-                          " は ",
-                          ref("def_constant_polynomial"),
-                          "）。",
-                          "以下では係数の言葉だけで議論するので、この 2 つの等式が ",
-                          math(String.raw`t`),
-                          " について使う唯一の性質である。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_characteristic_matrix",
-                      kind: "definition",
-                      title: { text: "転送行列の型の行列に対する特性行列" },
-                      labels: ["def_characteristic_matrix"],
-                      habitat: "Z",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.charMatrix"],
-                      verification: ["sagemath/check/characteristic-polynomial"],
-                      statement: [
-                        paragraph([
-                          ref("def_matrix_over_row_configs"),
-                          " の行列 ",
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
-                          " に対して、",
-                          ref("def_second_matrix"),
-                          " の行列 ",
-                          math(String.raw`\mathrm{ch}(A)\in\mathrm{Mat}_{\mathcal{J}}\bigl(\mathbb{Z}[x][t]\bigr)`),
-                          " を",
-                        ]),
-                        displayMath(String.raw`\mathrm{ch}(A)_{u,u'}:=
-\begin{cases}
-t+\iota\bigl(-A_{u,u}\bigr) & (u=u'\ \text{のとき})\\
-\iota\bigl(-A_{u,u'}\bigr) & (u\ne u'\ \text{のとき})
-\end{cases}
-\qquad(u,u'\in \mathcal{J})`),
-                        paragraph([
-                          "で定める（",
-                          math(String.raw`t`),
-                          " は ",
-                          ref("def_indeterminate_element"),
-                          "、",
-                          math(String.raw`\iota`),
-                          " は ",
-                          ref("def_second_constant_embedding"),
-                          "）。",
-                        ]),
-                        paragraph([
-                          "これは通常 ",
-                          math(String.raw`tI-A`),
-                          " と書かれる行列であるが、符号の反転を ",
-                          math(String.raw`\mathbb{Z}[x]`),
-                          " の中で先に済ませてある。",
-                          math(String.raw`-A_{u,u'}`),
-                          " は ",
-                          math(String.raw`\mathbb{Z}[x]`),
-                          " の加法についての逆元であり、",
-                          math(String.raw`\mathbb{Z}[x][t]`),
-                          " の元として扱う経路は ",
-                          math(String.raw`\iota`),
-                          " だけである。",
-                          "こう書くと、以下の議論に ",
-                          math(String.raw`\mathbb{Z}[x][t]`),
-                          " の引き算が一度も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "algebraic_eigenvalue_definition_characteristic_polynomial",
-                  kind: "definition",
-                  title: { text: "転送行列の型の行列に対する特性多項式" },
-                  labels: ["def_characteristic_polynomial"],
-                  habitat: "Z",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.charPoly"],
-                  verification: ["sagemath/check/characteristic-polynomial"],
-                  statement: [
-                    paragraph([
-                      ref("def_matrix_over_row_configs"),
-                      " の行列 ",
-                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\mathbb{Z}[x])`),
-                      " の特性多項式 ",
-                      math(String.raw`\chi_A\in\mathbb{Z}[x][t]`),
-                      " を",
-                    ]),
-                    displayMath(String.raw`\chi_A:=\mathrm{det}_{t}\bigl(\mathrm{ch}(A)\bigr)`),
-                    paragraph([
-                      "で定める（",
-                      math(String.raw`\mathrm{ch}`),
-                      " は ",
-                      ref("def_characteristic_matrix"),
-                      "、",
-                      math(String.raw`\mathrm{det}_{t}`),
-                      " は ",
-                      ref("def_second_determinant"),
-                      "）。",
-                      "とくに転送行列 ",
-                      math(String.raw`T`),
-                      " に対する ",
-                      math(String.raw`\chi_T`),
-                      " が、この章の目標である。",
-                    ]),
-                    paragraph([
-                      "現れるのは整数、有限和、有限積、および ",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " と ",
-                      math(String.raw`\mathbb{Z}[x][t]`),
-                      " の元だけであり、実数体も複素数体も現れない。",
+                      "以上は有限集合の元の比較と自然数の大小だけからなり、実数体も複素数体も現れない。",
                     ]),
                   ],
                 },
@@ -11652,87 +14561,91 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
             role: "primary",
             element: {
               kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_orbit_term_factor",
-              beforeFocus: [
+              id: "group_of_algebraic_eigenvalue_definition_orbit_permutation_sign",
+              focus:
                 {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_orbit_permutation_sign",
-                      kind: "definition",
-                      title: { text: "軌道の上の全単射の符号" },
-                      labels: ["def_orbit_permutation_sign"],
-                      habitat: "Z",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.orbitPermSign"],
-                      verification: ["sagemath/check/orbit-permutation-sign"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`O\in\mathcal{O}_L`),
-                          "（",
-                          ref("def_row_config_orbit_set"),
-                          "）と、",
-                          math(String.raw`O`),
-                          " から ",
-                          math(String.raw`O`),
-                          " への全単射 ",
-                          math(String.raw`\psi`),
-                          " を任意に取る。",
-                          ref("def_orbit_inversion_count"),
-                          " の転倒数 ",
-                          math(String.raw`\mathrm{inv}_{O}(\psi)\in\mathbb{N}`),
-                          " を用いて、",
-                          math(String.raw`\psi`),
-                          " の符号を",
-                        ]),
-                        displayMath(
-                          String.raw`\mathrm{sgn}_{O}(\psi):=(-1)^{\mathrm{inv}_{O}(\psi)}\in\mathbb{Z}`,
-                        ),
-                        paragraph([
-                          "で定める。右辺は整数 ",
-                          math(String.raw`-1`),
-                          " の自然数冪であり、",
-                          math(String.raw`\mathbb{Z}`),
-                          " の中の計算である。",
-                        ]),
-                        paragraph([
-                          "これは ",
-                          ref("def_permutation_sign"),
-                          " の符号を、転倒数を ",
-                          math(String.raw`\mathrm{inv}`),
-                          " から ",
-                          math(String.raw`\mathrm{inv}_{O}`),
-                          " へ取り替えて写したものである。",
-                          "台が違うので同じ記号では書けず、下付きに ",
-                          math(String.raw`O`),
-                          " を付けて区別する。この下付きの ",
-                          math(String.raw`O`),
-                          " は台に取った集合を指す添え名であって、成分の添字ではない。",
-                        ]),
-                        paragraph([
-                          math(String.raw`\mathrm{sgn}_{O}(\psi)`),
-                          " の引数 ",
-                          math(String.raw`\psi`),
-                          " は ",
-                          math(String.raw`O`),
-                          " から ",
-                          math(String.raw`O`),
-                          " への全単射であって、",
-                          math(String.raw`R_L`),
-                          " の上の置換ではない。すなわち ",
-                          math(String.raw`\mathrm{sgn}_{O}`),
-                          " と ",
-                          math(String.raw`\mathrm{sgn}`),
-                          " は定義域が違う別の写像である。",
-                        ]),
-                        paragraph([
-                          "この定義に現れるのは有限集合 ",
-                          math(String.raw`R_L`),
-                          " とその部分集合、その上の写像と順序と数え上げ、および整数の積だけであり、",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
+                  id: "algebraic_eigenvalue_definition_orbit_permutation_sign",
+                  kind: "definition",
+                  title: { text: "軌道の上の全単射の符号" },
+                  labels: ["def_orbit_permutation_sign"],
+                  habitat: "Z",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.orbitPermSign"],
+                  verification: ["sagemath/check/orbit-permutation-sign"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`O\in\mathcal{O}_L`),
+                      "（",
+                      ref("def_row_config_orbit_set"),
+                      "）と、",
+                      math(String.raw`O`),
+                      " から ",
+                      math(String.raw`O`),
+                      " への全単射 ",
+                      math(String.raw`\psi`),
+                      " を任意に取る。",
+                      ref("def_orbit_inversion_count"),
+                      " の転倒数 ",
+                      math(String.raw`\mathrm{inv}_{O}(\psi)\in\mathbb{N}`),
+                      " を用いて、",
+                      math(String.raw`\psi`),
+                      " の符号を",
+                    ]),
+                    displayMath(
+                      String.raw`\mathrm{sgn}_{O}(\psi):=(-1)^{\mathrm{inv}_{O}(\psi)}\in\mathbb{Z}`,
+                    ),
+                    paragraph([
+                      "で定める。右辺は整数 ",
+                      math(String.raw`-1`),
+                      " の自然数冪であり、",
+                      math(String.raw`\mathbb{Z}`),
+                      " の中の計算である。",
+                    ]),
+                    paragraph([
+                      "これは ",
+                      ref("def_permutation_sign"),
+                      " の符号を、転倒数を ",
+                      math(String.raw`\mathrm{inv}`),
+                      " から ",
+                      math(String.raw`\mathrm{inv}_{O}`),
+                      " へ取り替えて写したものである。",
+                      "台が違うので同じ記号では書けず、下付きに ",
+                      math(String.raw`O`),
+                      " を付けて区別する。この下付きの ",
+                      math(String.raw`O`),
+                      " は台に取った集合を指す添え名であって、成分の添字ではない。",
+                    ]),
+                    paragraph([
+                      math(String.raw`\mathrm{sgn}_{O}(\psi)`),
+                      " の引数 ",
+                      math(String.raw`\psi`),
+                      " は ",
+                      math(String.raw`O`),
+                      " から ",
+                      math(String.raw`O`),
+                      " への全単射であって、",
+                      math(String.raw`R_L`),
+                      " の上の置換ではない。すなわち ",
+                      math(String.raw`\mathrm{sgn}_{O}`),
+                      " と ",
+                      math(String.raw`\mathrm{sgn}`),
+                      " は定義域が違う別の写像である。",
+                    ]),
+                    paragraph([
+                      "この定義に現れるのは有限集合 ",
+                      math(String.raw`R_L`),
+                      " とその部分集合、その上の写像と順序と数え上げ、および整数の積だけであり、",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
                 },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_algebraic_eigenvalue_definition_orbit_bijection_set",
+              beforeFocus: [
                 {
                   role: "supportingClaim",
                   element:
@@ -12020,100 +14933,94 @@ J_2&:=\bigl\{\,(\tau,\tau')\in J_\varphi(O,O') \;\bigm|\; \tau\in O'\ \text{か�
                       ],
                     },
                 },
-              ],
-              focus:
                 {
-                  id: "algebraic_eigenvalue_definition_orbit_term_factor",
-                  kind: "definition",
-                  title: { text: "軌道の因子" },
-                  labels: ["def_orbit_term_factor"],
-                  habitat: "Z",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.orbitFactor"],
-                  verification: ["sagemath/check/orbit-term-factorization"],
-                  statement: [
-                    paragraph([
-                      "行列 ",
-                      math(String.raw`B\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
-                      "（",
-                      ref("def_second_matrix"),
-                      "）、軌道 ",
-                      math(String.raw`O\in\mathcal{O}_L`),
-                      "（",
-                      ref("def_row_config_orbit_set"),
-                      "）、および ",
-                      math(String.raw`O`),
-                      " から ",
-                      math(String.raw`O`),
-                      " への全単射 ",
-                      math(String.raw`\psi`),
-                      " を任意に取る。",
-                      math(String.raw`B`),
-                      " が定める ",
-                      math(String.raw`O`),
-                      " の因子を",
-                    ]),
-                    displayMath(
-                      String.raw`W_{O}(B,\psi):=\iota\bigl(\kappa(\mathrm{sgn}_{O}(\psi))\bigr)\cdot\prod_{\tau\in O}B_{\tau,\psi(\tau)}\in\mathbb{Z}[x][t]`,
-                    ),
-                    paragraph([
-                      "で定める（",
-                      math(String.raw`\mathrm{sgn}_{O}`),
-                      " は ",
-                      ref("def_orbit_permutation_sign"),
-                      "、",
-                      math(String.raw`\kappa`),
-                      " は ",
-                      ref("def_constant_polynomial"),
-                      "、",
-                      math(String.raw`\iota`),
-                      " は ",
-                      ref("def_second_constant_embedding"),
-                      "）。",
-                      math(String.raw`\tau\in O`),
-                      " について ",
-                      math(String.raw`\psi(\tau)\in O\subset R_L`),
-                      " なので、成分 ",
-                      math(String.raw`B_{\tau,\psi(\tau)}`),
-                      " は定まっている。",
-                    ]),
-                    paragraph([
-                      "右辺の積は有限個の因子からなり、",
-                      math(String.raw`\mathbb{Z}[x][t]`),
-                      " の積は可換かつ結合的なので、因子を並べる順序によらない。",
-                      "整数である符号を ",
-                      math(String.raw`\mathbb{Z}[x][t]`),
-                      " の元として使う経路は ",
-                      ref("def_second_determinant"),
-                      " と同じく ",
-                      math(String.raw`\iota\circ\kappa`),
-                      " だけである。",
-                    ]),
-                    paragraph([
-                      math(String.raw`W_{O}`),
-                      " の下付きの ",
-                      math(String.raw`O`),
-                      " は台に取った軌道を指す添え名であって、成分の添字ではない。",
-                      "第 1 引数に行列を書くのは、この因子が ",
-                      math(String.raw`B`),
-                      " ごとに違う元だからである。",
-                    ]),
-                    paragraph([
-                      "この定義に現れるのは有限集合 ",
-                      math(String.raw`R_L`),
-                      " とその部分集合、その上の写像と順序と数え上げ、整数の積、および ",
-                      math(String.raw`\mathbb{Z}[x][t]`),
-                      " の積だけであり、実数体も複素数体も現れない。",
-                    ]),
-                  ],
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "algebraic_eigenvalue_definition_orbit_term_factor",
+                      kind: "definition",
+                      title: { text: "軌道の因子" },
+                      labels: ["def_orbit_term_factor"],
+                      habitat: "Z",
+                      lean: ["Ising2DLambda.AlgebraicEigenvalue.orbitFactor"],
+                      verification: ["sagemath/check/orbit-term-factorization"],
+                      statement: [
+                        paragraph([
+                          "行列 ",
+                          math(String.raw`B\in\mathrm{Mat}_{R_L}\bigl(\mathbb{Z}[x][t]\bigr)`),
+                          "（",
+                          ref("def_second_matrix"),
+                          "）、軌道 ",
+                          math(String.raw`O\in\mathcal{O}_L`),
+                          "（",
+                          ref("def_row_config_orbit_set"),
+                          "）、および ",
+                          math(String.raw`O`),
+                          " から ",
+                          math(String.raw`O`),
+                          " への全単射 ",
+                          math(String.raw`\psi`),
+                          " を任意に取る。",
+                          math(String.raw`B`),
+                          " が定める ",
+                          math(String.raw`O`),
+                          " の因子を",
+                        ]),
+                        displayMath(
+                          String.raw`W_{O}(B,\psi):=\iota\bigl(\kappa(\mathrm{sgn}_{O}(\psi))\bigr)\cdot\prod_{\tau\in O}B_{\tau,\psi(\tau)}\in\mathbb{Z}[x][t]`,
+                        ),
+                        paragraph([
+                          "で定める（",
+                          math(String.raw`\mathrm{sgn}_{O}`),
+                          " は ",
+                          ref("def_orbit_permutation_sign"),
+                          "、",
+                          math(String.raw`\kappa`),
+                          " は ",
+                          ref("def_constant_polynomial"),
+                          "、",
+                          math(String.raw`\iota`),
+                          " は ",
+                          ref("def_second_constant_embedding"),
+                          "）。",
+                          math(String.raw`\tau\in O`),
+                          " について ",
+                          math(String.raw`\psi(\tau)\in O\subset R_L`),
+                          " なので、成分 ",
+                          math(String.raw`B_{\tau,\psi(\tau)}`),
+                          " は定まっている。",
+                        ]),
+                        paragraph([
+                          "右辺の積は有限個の因子からなり、",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " の積は可換かつ結合的なので、因子を並べる順序によらない。",
+                          "整数である符号を ",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " の元として使う経路は ",
+                          ref("def_second_determinant"),
+                          " と同じく ",
+                          math(String.raw`\iota\circ\kappa`),
+                          " だけである。",
+                        ]),
+                        paragraph([
+                          math(String.raw`W_{O}`),
+                          " の下付きの ",
+                          math(String.raw`O`),
+                          " は台に取った軌道を指す添え名であって、成分の添字ではない。",
+                          "第 1 引数に行列を書くのは、この因子が ",
+                          math(String.raw`B`),
+                          " ごとに違う元だからである。",
+                        ]),
+                        paragraph([
+                          "この定義に現れるのは有限集合 ",
+                          math(String.raw`R_L`),
+                          " とその部分集合、その上の写像と順序と数え上げ、整数の積、および ",
+                          math(String.raw`\mathbb{Z}[x][t]`),
+                          " の積だけであり、実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
                 },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_orbit_bijection_set",
-              beforeFocus: [
                 {
                   role: "supportingClaim",
                   element:
@@ -18349,244 +21256,6 @@ const chapter_algebraic_eigenvalue = defineSection({
       role: "subsection",
       element: {
         kind: "section",
-        id: "algebraic_eigenvalue_heading_qbar_and_roots_of_unity",
-        labels: [],
-        title: { text: "代数的数と 1 の冪根" },
-        children: [
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_def_algebraic_numbers",
-              focus:
-                {
-                  id: "algebraic_eigenvalue_def_algebraic_numbers",
-                  kind: "definition",
-                  title: { text: "代数的数の全体" },
-                  labels: ["def_algebraic_numbers"],
-                  habitat: "Qbar",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.Qbar"],
-                  verification: ["sagemath/check/root-of-unity-divisor"],
-                  statement: [
-                    paragraph([
-                      "有理数体 ",
-                      math(String.raw`\mathbb{Q}`),
-                      " の代数閉包を 1 つ固定し、それを ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " と書く。すなわち ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " は次の 3 条件を満たす体である。",
-                    ]),
-                    list([
-                      [
-                        math(String.raw`\mathbb{Q}`),
-                        " は ",
-                        math(String.raw`\overline{\mathbb{Q}}`),
-                        " の部分体である。",
-                      ],
-                      [
-                        math(String.raw`\overline{\mathbb{Q}}`),
-                        " を係数とする次数 1 以上の多項式は ",
-                        math(String.raw`\overline{\mathbb{Q}}`),
-                        " の中に根を持つ（代数閉であること）。",
-                      ],
-                      [
-                        math(String.raw`\overline{\mathbb{Q}}`),
-                        " の各元 ",
-                        math(String.raw`z`),
-                        " について、",
-                        math(String.raw`z`),
-                        " を根に持つ ",
-                        math(String.raw`\mathbb{Q}`),
-                        " 係数の零でない多項式が存在する（各元が ",
-                        math(String.raw`\mathbb{Q}`),
-                        " 上代数的であること）。",
-                      ],
-                    ]),
-                    paragraph([
-                      "この 3 条件を満たす体が存在すること、および 2 つあれば ",
-                      math(String.raw`\mathbb{Q}`),
-                      " を動かさない体の同型で移り合うことは既知である。",
-                      "以下ではその 1 つを固定して使い、どれを固定したかに依存する主張は述べない。",
-                    ]),
-                    paragraph([
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " は可算集合である（",
-                      math(String.raw`\mathbb{Q}`),
-                      " 係数の零でない多項式の全体が可算であり、そのそれぞれが有限個の根しか持たないことによる）。",
-                      "したがってここで実数体にも複素数体にも脱出していない。",
-                      "複素数体の部分体として取ることもできるが、そうすると非可算な集合を経由することになるので、",
-                      "本文ではそのような取り方をしない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_def_root_of_unity_set",
-              focus:
-                {
-                  id: "algebraic_eigenvalue_def_root_of_unity_set",
-                  kind: "definition",
-                  title: { text: "1 の冪根の全体" },
-                  labels: ["def_root_of_unity_set"],
-                  habitat: "Qbar",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.RootOfUnity"],
-                  verification: ["sagemath/check/root-of-unity-divisor"],
-                  statement: [
-                    paragraph([
-                      math(String.raw`n\in\mathbb{N}`),
-                      " を任意に取る。",
-                      math(String.raw`n`),
-                      " 乗すると 1 になる代数的数の全体を",
-                    ]),
-                    displayMath(
-                      String.raw`\mu_{n}:=\bigl\{\,z\in\overline{\mathbb{Q}} \;\bigm|\; z^{n}=1\,\bigr\}`,
-                    ),
-                    paragraph([
-                      "と置く（",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " は ",
-                      ref("def_algebraic_numbers"),
-                      "、",
-                      math(String.raw`z^{n}`),
-                      " は体 ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " の積の ",
-                      math(String.raw`n`),
-                      " 回の反復で、",
-                      math(String.raw`z^{0}=1`),
-                      " と約束する）。",
-                      math(String.raw`\mu_{n}`),
-                      " の元を 1 の ",
-                      math(String.raw`n`),
-                      " 乗根と呼ぶ。",
-                    ]),
-                    paragraph([
-                      math(String.raw`\mu_{n}`),
-                      " は ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " の部分集合であり、実数体も複素数体も現れない。",
-                      math(String.raw`n=0`),
-                      " のときは ",
-                      math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`),
-                      " である（",
-                      math(String.raw`z^{0}=1`),
-                      " がすべての ",
-                      math(String.raw`z`),
-                      " について成り立つため）。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "supporting",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_claim_root_of_unity_divisor",
-              focus:
-                {
-                  id: "algebraic_eigenvalue_claim_root_of_unity_divisor",
-                  kind: "claim",
-                  title: {
-                    text: "約数を指数として 1 になる代数的数は、その倍数を指数としても 1 になる",
-                  },
-                  labels: ["claim_root_of_unity_divisor"],
-                  habitat: "Qbar",
-                  lean: [
-                    "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd",
-                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_eq_one_of_dvd_necSuf",
-                    "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_of_dvd_from_necSuf",
-                  ],
-                  verification: ["sagemath/check/root-of-unity-divisor"],
-                  statement: [
-                    paragraph([
-                      math(String.raw`d\in\mathbb{N}`),
-                      " と ",
-                      math(String.raw`n\in\mathbb{N}`),
-                      " が ",
-                      math(String.raw`d\mid n`),
-                      "（",
-                      math(String.raw`n=dk`),
-                      " を満たす ",
-                      math(String.raw`k\in\mathbb{N}`),
-                      " が存在すること）を満たすとする。このとき",
-                    ]),
-                    displayMath(String.raw`\mu_{d}\subset\mu_{n}`),
-                    paragraph([
-                      "が成り立つ（",
-                      math(String.raw`\mu_{d}`),
-                      " と ",
-                      math(String.raw`\mu_{n}`),
-                      " は ",
-                      ref("def_root_of_unity_set"),
-                      "）。",
-                    ]),
-                  ],
-                  proof: [
-                    paragraph([
-                      math(String.raw`z\in\mu_{d}`),
-                      " を任意に取る。",
-                      ref("def_root_of_unity_set"),
-                      " により ",
-                      math(String.raw`z\in\overline{\mathbb{Q}}`),
-                      " かつ ",
-                      math(String.raw`z^{d}=1`),
-                      " である。",
-                      "仮定 ",
-                      math(String.raw`d\mid n`),
-                      " により ",
-                      math(String.raw`n=dk`),
-                      " を満たす ",
-                      math(String.raw`k\in\mathbb{N}`),
-                      " を 1 つ取る。",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-z^{n}
-&=z^{dk}
-&&(\because\ n=dk)\\
-&=\bigl(z^{d}\bigr)^{k}
-&&(\because\ \text{体}\ \overline{\mathbb{Q}}\ \text{の積の反復についての指数法則})\\
-&=1^{k}
-&&(\because\ z^{d}=1)\\
-&=1
-&&(\because\ \text{単位元の反復積は単位元である})
-\end{aligned}`),
-                    paragraph([
-                      "よって ",
-                      math(String.raw`z\in\overline{\mathbb{Q}}`),
-                      " かつ ",
-                      math(String.raw`z^{n}=1`),
-                      " であり、",
-                      ref("def_root_of_unity_set"),
-                      " により ",
-                      math(String.raw`z\in\mu_{n}`),
-                      " である。",
-                      math(String.raw`z\in\mu_{d}`),
-                      " は任意だったので ",
-                      math(String.raw`\mu_{d}\subset\mu_{n}`),
-                      " である。",
-                    ]),
-                    paragraph([
-                      "現れるのは ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " の元とその積の反復、および自然数の積だけであり、実数体も複素数体も現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
         id: "algebraic_eigenvalue_heading_char_poly_roots",
         labels: [],
         title: { text: "特性多項式の値と 1 の冪根" },
@@ -19223,1402 +21892,6 @@ z^{n}
                       " は可算集合である。",
                       ref("def_algebraic_numbers"),
                       "）。",
-                    ]),
-                  ],
-                },
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "algebraic_eigenvalue_heading_qbar_matrices",
-        labels: [],
-        title: { text: "代数的数を成分とする行列と作用" },
-        children: [
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_qbar_matrix",
-              focus:
-                {
-                  id: "algebraic_eigenvalue_definition_qbar_matrix",
-                  kind: "definition",
-                  title: { text: "代数的数を成分とする行列" },
-                  labels: ["def_qbar_matrix"],
-                  habitat: "Qbar",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.QbarRowMatrix"],
-                  verification: ["sagemath/check/qbar-action-product"],
-                  statement: [
-                    paragraph([
-                      "空でない有限集合 ",
-                      math(String.raw`\mathcal{J}`),
-                      " を 1 つ固定する。ここから",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " を成分とする線型代数を作るが、行配位であることも格子の形も使わないので、",
-                      "添字集合は有限であることだけを仮定する",
-                      "（この論文でこの節の結果を使うときは、行配位の全体を添字集合に取る）。",
-                    ]),
-                    paragraph([
-                      "写像 ",
-                      math(String.raw`A:\mathcal{J}\times \mathcal{J}\to\overline{\mathbb{Q}}`),
-                      "（",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " は ",
-                      ref("def_algebraic_numbers"),
-                      "）のことを代数的数を成分とする行列と呼び、その全体の集合を ",
-                      math(String.raw`\mathrm{Mat}_{\mathcal{J}}\bigl(\overline{\mathbb{Q}}\bigr)`),
-                      " と書く。値 ",
-                      math(String.raw`A(u,u')`),
-                      " を成分と呼び ",
-                      math(String.raw`A_{u,u'}`),
-                      " と書く。",
-                    ]),
-                    paragraph([
-                      "添字集合も成分の型も違うので、これは整係数多項式を成分とする行列とは別の対象である。",
-                      "実数体も複素数体も現れない（",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " は可算集合である）。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_qbar_vector",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_qbar_matrix_product",
-                      kind: "definition",
-                      title: { text: "代数的数を成分とする行列の積" },
-                      labels: ["def_qbar_matrix_product"],
-                      habitat: "Qbar",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarRowMatrixProduct"],
-                      verification: ["sagemath/check/qbar-action-product"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          "（",
-                          ref("def_qbar_matrix"),
-                          "）に対し積 ",
-                          math(String.raw`AB\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          " を",
-                        ]),
-                        displayMath(
-                          String.raw`(AB)_{u,u''}:=\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\qquad(u,u''\in \mathcal{J})`,
-                        ),
-                        paragraph([
-                          "で定める（",
-                          math(String.raw`\mathcal{J}`),
-                          " は有限集合なので右辺は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の有限個の元の和であり、",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元として確定する）。",
-                        ]),
-                        paragraph([
-                          "成分の型が違うので、これは整係数多項式を成分とする行列とその積とは別の対象である。同じ記号 ",
-                          math(String.raw`AB`),
-                          " を使うが、どちらの積かは行列の成分がどちらの集合の元かで決まる。",
-                          "実数体も複素数体も現れない（",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " は可算集合である）。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "algebraic_eigenvalue_definition_qbar_vector",
-                  kind: "definition",
-                  title: { text: "代数的数を成分とする列ベクトル" },
-                  labels: ["def_qbar_vector"],
-                  habitat: "Qbar",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.QbarRowVector"],
-                  verification: ["sagemath/check/qbar-action-product"],
-                  statement: [
-                    paragraph([
-                      "写像 ",
-                      math(String.raw`v:\mathcal{J}\to\overline{\mathbb{Q}}`),
-                      " のことを列ベクトルと呼び、その全体の集合を ",
-                      math(String.raw`V_{\mathcal{J}}:=\bigl\{\,v\mid v:\mathcal{J}\to\overline{\mathbb{Q}}\,\bigr\}`),
-                      " と書く。値 ",
-                      math(String.raw`v(u)`),
-                      " を成分と呼ぶ（行列の成分と違い、添字は 1 つである）。",
-                      "実数体も複素数体も現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "supporting",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_qbar_zero_vector",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_qbar_matrix_action",
-                      kind: "definition",
-                      title: { text: "代数的数を成分とする行列の列ベクトルへの作用" },
-                      labels: ["def_qbar_matrix_action"],
-                      habitat: "Qbar",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarAction"],
-                      verification: ["sagemath/check/qbar-action-product"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          "（",
-                          ref("def_qbar_matrix"),
-                          "）と ",
-                          math(String.raw`v\in V_{\mathcal{J}}`),
-                          " に対し、",
-                          math(String.raw`A`),
-                          " の ",
-                          math(String.raw`v`),
-                          " への作用 ",
-                          math(String.raw`A\cdot v\in V_{\mathcal{J}}`),
-                          " を",
-                        ]),
-                        displayMath(
-                          String.raw`(A\cdot v)(u):=\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')\qquad(u\in \mathcal{J})`,
-                        ),
-                        paragraph([
-                          "で定める（右辺は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の有限個の元の和である）。",
-                          "作用を表す点 ",
-                          math(String.raw`\cdot`),
-                          " は、行列どうしの積（",
-                          ref("def_qbar_matrix_product"),
-                          "）と区別するために書く。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_action_product",
-                      kind: "claim",
-                      title: { text: "行列の積の作用は、作用を 2 度施したものである" },
-                      labels: ["claim_qbar_action_product"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_product",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_product_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_product_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-action-product"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A,B\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          "（",
-                          ref("def_qbar_matrix"),
-                          "）と ",
-                          math(String.raw`v\in V_{\mathcal{J}}`),
-                          "（",
-                          ref("def_qbar_vector"),
-                          "）を任意に取る。このとき",
-                        ]),
-                        displayMath(String.raw`(AB)\cdot v=A\cdot(B\cdot v)`),
-                        paragraph([
-                          "が成り立つ（左辺の ",
-                          math(String.raw`AB`),
-                          " は ",
-                          ref("def_qbar_matrix_product"),
-                          "、点は ",
-                          ref("def_qbar_matrix_action"),
-                          "）。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "両辺は ",
-                          math(String.raw`V_{\mathcal{J}}`),
-                          " の元、すなわち ",
-                          math(String.raw`\mathcal{J}`),
-                          " 上の写像なので、",
-                          math(String.raw`u\in \mathcal{J}`),
-                          " を任意に取り、その ",
-                          math(String.raw`u`),
-                          " における値が等しいことを示す。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\bigl((AB)\cdot v\bigr)(u)
-&=\sum_{u''\in \mathcal{J}}(AB)_{u,u''}\,v(u'')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\sum_{u''\in \mathcal{J}}\Bigl(\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\Bigr)v(u'')
-&&(\because\ \blkref{def_qbar_matrix_product})\\
-&=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,B_{u',u''}\bigr)v(u'')
-&&(\because\ \text{有限和と元の積についての分配則})\\
-&=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,v(u'')\bigr)
-&&(\because\ \text{積の結合則})\\
-&=\sum_{u'\in \mathcal{J}}\ \sum_{u''\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,v(u'')\bigr)
-&&(\because\ \text{有限和の順序の入れ替え})\\
-&=\sum_{u'\in \mathcal{J}}A_{u,u'}\sum_{u''\in \mathcal{J}}B_{u',u''}\,v(u'')
-&&(\because\ \text{元と有限和の積についての分配則})\\
-&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(B\cdot v)(u')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\bigl(A\cdot(B\cdot v)\bigr)(u)
-&&(\because\ \blkref{def_qbar_matrix_action})
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`u\in \mathcal{J}`),
-                          " は任意だったので、2 つの写像は等しい。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、積の結合則と、有限和と元の積についての分配則",
-                          "（両側）だけである。加法の逆元も、零元でない元の逆元も、体であることも使っていない。",
-                          "有限和の順序の入れ替えが使えるのは ",
-                          math(String.raw`\mathcal{J}`),
-                          " が有限集合で、加法が可換かつ結合的だからである。",
-                          "現れるのは ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元と有限和・有限積だけであり、実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_qbar_vector_add",
-                      kind: "definition",
-                      title: { text: "代数的数を成分とする列ベクトルの和" },
-                      labels: ["def_qbar_vector_add"],
-                      habitat: "Qbar",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarVectorAdd"],
-                      verification: ["sagemath/check/qbar-action-linear"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`v,w\in V_{\mathcal{J}}`),
-                          "（",
-                          ref("def_qbar_vector"),
-                          "）に対し、和 ",
-                          math(String.raw`v\oplus w\in V_{\mathcal{J}}`),
-                          " を",
-                        ]),
-                        displayMath(String.raw`(v\oplus w)(u):=v(u)+w(u)\qquad(u\in \mathcal{J})`),
-                        paragraph([
-                          "で定める。右辺の ",
-                          math(String.raw`+`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          "（",
-                          ref("def_algebraic_numbers"),
-                          "）の加法であり、左辺の ",
-                          math(String.raw`\oplus`),
-                          " は列ベクトルどうしの演算である。",
-                          "同じ記号を使うと、どちらの集合の演算かが式に書かれないので、記号を分けて書く。",
-                          "実数体も複素数体も現れない（",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " は可算集合である）。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_qbar_vector_smul",
-                      kind: "definition",
-                      title: { text: "代数的数を成分とする列ベクトルのスカラー倍" },
-                      labels: ["def_qbar_vector_smul"],
-                      habitat: "Qbar",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarVectorSmul"],
-                      verification: ["sagemath/check/qbar-action-linear"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`v\in V_{\mathcal{J}}`),
-                          "（",
-                          ref("def_qbar_vector"),
-                          "）と ",
-                          math(String.raw`z\in\overline{\mathbb{Q}}`),
-                          "（",
-                          ref("def_algebraic_numbers"),
-                          "）に対し、スカラー倍 ",
-                          math(String.raw`z\odot v\in V_{\mathcal{J}}`),
-                          " を",
-                        ]),
-                        displayMath(String.raw`(z\odot v)(u):=z\,v(u)\qquad(u\in \mathcal{J})`),
-                        paragraph([
-                          "で定める。右辺の積は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " のものであり、左辺の ",
-                          math(String.raw`\odot`),
-                          " は代数的数と列ベクトルの演算である。",
-                          "和（",
-                          ref("def_qbar_vector_add"),
-                          "）と同じ理由で記号を分けて書く。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_action_add",
-                      kind: "claim",
-                      title: { text: "行列の作用は列ベクトルの和を保つ" },
-                      labels: ["claim_qbar_action_add"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_add",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_add_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_add_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-action-linear"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          "（",
-                          ref("def_qbar_matrix"),
-                          "）と ",
-                          math(String.raw`v,w\in V_{\mathcal{J}}`),
-                          "（",
-                          ref("def_qbar_vector"),
-                          "）を任意に取る。このとき",
-                        ]),
-                        displayMath(String.raw`A\cdot(v\oplus w)=(A\cdot v)\oplus(A\cdot w)`),
-                        paragraph([
-                          "が成り立つ（点は ",
-                          ref("def_qbar_matrix_action"),
-                          "、",
-                          math(String.raw`\oplus`),
-                          " は ",
-                          ref("def_qbar_vector_add"),
-                          "）。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "両辺は ",
-                          math(String.raw`V_{\mathcal{J}}`),
-                          " の元、すなわち ",
-                          math(String.raw`\mathcal{J}`),
-                          " 上の写像なので、",
-                          math(String.raw`u\in \mathcal{J}`),
-                          " を任意に取り、その ",
-                          math(String.raw`u`),
-                          " における値が等しいことを示す。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\bigl(A\cdot(v\oplus w)\bigr)(u)
-&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(v\oplus w)(u')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(v(u')+w(u')\bigr)
-&&(\because\ \blkref{def_qbar_vector_add})\\
-&=\sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,v(u')+A_{u,u'}\,w(u')\bigr)
-&&(\because\ \text{元と 2 元の和の積についての分配則})\\
-&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')+\sum_{u'\in \mathcal{J}}A_{u,u'}\,w(u')
-&&(\because\ \text{有限和の項ごとの分割})\\
-&=(A\cdot v)(u)+(A\cdot w)(u)
-&&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_add})
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`u\in \mathcal{J}`),
-                          " は任意だったので、2 つの写像は等しい。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、元と 2 元の和の積についての分配則と、",
-                          "加法が可換モノイドであること（有限和を項ごとに分けるのに要る）だけである。",
-                          "積の結合則も可換性も、加法の逆元も、体であることも使っていない。",
-                          "現れるのは ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元と有限和だけであり、実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_action_smul",
-                      kind: "claim",
-                      title: { text: "行列の作用は列ベクトルのスカラー倍を保つ" },
-                      labels: ["claim_qbar_action_smul"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_smul",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_smul_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_smul_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-action-linear"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          "（",
-                          ref("def_qbar_matrix"),
-                          "）と ",
-                          math(String.raw`v\in V_{\mathcal{J}}`),
-                          "（",
-                          ref("def_qbar_vector"),
-                          "）と ",
-                          math(String.raw`z\in\overline{\mathbb{Q}}`),
-                          " を任意に取る。このとき",
-                        ]),
-                        displayMath(String.raw`A\cdot(z\odot v)=z\odot(A\cdot v)`),
-                        paragraph([
-                          "が成り立つ（点は ",
-                          ref("def_qbar_matrix_action"),
-                          "、",
-                          math(String.raw`\odot`),
-                          " は ",
-                          ref("def_qbar_vector_smul"),
-                          "）。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "両辺は ",
-                          math(String.raw`V_{\mathcal{J}}`),
-                          " の元、すなわち ",
-                          math(String.raw`\mathcal{J}`),
-                          " 上の写像なので、",
-                          math(String.raw`u\in \mathcal{J}`),
-                          " を任意に取り、その ",
-                          math(String.raw`u`),
-                          " における値が等しいことを示す。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\bigl(A\cdot(z\odot v)\bigr)(u)
-&=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(z\odot v)(u')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(z\,v(u')\bigr)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
-&=\sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,z\bigr)v(u')
-&&(\because\ \text{積の結合則})\\
-&=\sum_{u'\in \mathcal{J}}\bigl(z\,A_{u,u'}\bigr)v(u')
-&&(\because\ \text{積の可換性})\\
-&=\sum_{u'\in \mathcal{J}}z\bigl(A_{u,u'}\,v(u')\bigr)
-&&(\because\ \text{積の結合則})\\
-&=z\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')
-&&(\because\ \text{元と有限和の積についての分配則})\\
-&=z\,(A\cdot v)(u)
-&&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\bigl(z\odot(A\cdot v)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`u\in \mathcal{J}`),
-                          " は任意だったので、2 つの写像は等しい。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、積の結合則と可換性、および元と有限和の積についての",
-                          "分配則だけである。",
-                          math(String.raw`z`),
-                          " を成分の左へ移す箇所で積の可換性を使っており、",
-                          "そこが前の主張（和を保つこと）との違いである。",
-                          "加法の逆元も、零元でない元の逆元も、体であることも使っていない。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "algebraic_eigenvalue_definition_qbar_zero_vector",
-                  kind: "definition",
-                  title: { text: "零ベクトル" },
-                  labels: ["def_qbar_zero_vector"],
-                  habitat: "Qbar",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarZeroVector"],
-                  verification: ["sagemath/check/qbar-eigenspace"],
-                  statement: [
-                    paragraph([
-                      "零ベクトル ",
-                      math(String.raw`o_{\mathcal{J}}\in V_{\mathcal{J}}`),
-                      "（",
-                      ref("def_qbar_vector"),
-                      "）を",
-                    ]),
-                    displayMath(String.raw`o_{\mathcal{J}}(u):=0\qquad(u\in \mathcal{J})`),
-                    paragraph([
-                      "で定める。右辺の ",
-                      math(String.raw`0`),
-                      " は ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      "（",
-                      ref("def_algebraic_numbers"),
-                      "）の零元である。",
-                      "実数体も複素数体も現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "algebraic_eigenvalue_heading_eigenspaces",
-        labels: [],
-        title: { text: "固有ベクトルと固有空間" },
-        children: [
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_qbar_eigenspace",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_qbar_eigenvector",
-                      kind: "definition",
-                      title: { text: "代数的数を成分とする行列の固有ベクトル" },
-                      labels: ["def_qbar_eigenvector"],
-                      habitat: "Qbar",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.IsQbarEigenvector"],
-                      verification: ["sagemath/check/qbar-eigenspace"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          "（",
-                          ref("def_qbar_matrix"),
-                          "）と ",
-                          math(String.raw`z\in\overline{\mathbb{Q}}`),
-                          " と ",
-                          math(String.raw`v\in V_{\mathcal{J}}`),
-                          " について、",
-                        ]),
-                        displayMath(String.raw`A\cdot v=z\odot v\quad\text{かつ}\quad v\ne o_{\mathcal{J}}`),
-                        paragraph([
-                          "が成り立つとき、",
-                          math(String.raw`v`),
-                          " は ",
-                          math(String.raw`A`),
-                          " の ",
-                          math(String.raw`z`),
-                          " に属する固有ベクトルであるという（点は ",
-                          ref("def_qbar_matrix_action"),
-                          "、",
-                          math(String.raw`\odot`),
-                          " は ",
-                          ref("def_qbar_vector_smul"),
-                          "、",
-                          math(String.raw`o_{\mathcal{J}}`),
-                          " は ",
-                          ref("def_qbar_zero_vector"),
-                          "）。",
-                          "零ベクトルを除くのは、除かないと任意の ",
-                          math(String.raw`z`),
-                          " について ",
-                          math(String.raw`o_{\mathcal{J}}`),
-                          " が条件を満たしてしまい、",
-                          math(String.raw`z`),
-                          " が ",
-                          math(String.raw`A`),
-                          " から何も決まらなくなるためである。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_qbar_eigenvalue",
-                      kind: "definition",
-                      title: { text: "代数的数を成分とする行列の固有値" },
-                      labels: ["def_qbar_eigenvalue"],
-                      habitat: "Qbar",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.IsQbarEigenvalue"],
-                      verification: ["sagemath/check/qbar-eigenspace"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          " と ",
-                          math(String.raw`z\in\overline{\mathbb{Q}}`),
-                          " について、",
-                          math(String.raw`z`),
-                          " に属する ",
-                          math(String.raw`A`),
-                          " の固有ベクトル（",
-                          ref("def_qbar_eigenvector"),
-                          "）が少なくとも 1 つ存在するとき、",
-                          math(String.raw`z`),
-                          " は ",
-                          math(String.raw`A`),
-                          " の固有値であるという。",
-                        ]),
-                        paragraph([
-                          "固有ベクトルは ",
-                          math(String.raw`V_{\mathcal{J}}`),
-                          " の元、固有値は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元であり、別の集合の対象である。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "algebraic_eigenvalue_definition_qbar_eigenspace",
-                  kind: "definition",
-                  title: { text: "代数的数を成分とする行列の固有空間" },
-                  labels: ["def_qbar_eigenspace"],
-                  habitat: "Qbar",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace"],
-                  verification: ["sagemath/check/qbar-eigenspace"],
-                  statement: [
-                    paragraph([
-                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                      " と ",
-                      math(String.raw`z\in\overline{\mathbb{Q}}`),
-                      " に対し、",
-                    ]),
-                    displayMath(
-                      String.raw`E_{A}(z):=\{\,v\in V_{\mathcal{J}}\mid A\cdot v=z\odot v\,\}\subset V_{\mathcal{J}}`,
-                    ),
-                    paragraph([
-                      "と定める。",
-                      "固有ベクトルの定義（",
-                      ref("def_qbar_eigenvector"),
-                      "）と違い、条件から ",
-                      math(String.raw`v\ne o_{\mathcal{J}}`),
-                      " を外してある。",
-                      "外すのは、外さないと和とスカラー倍で閉じなくなるためである",
-                      "（",
-                      math(String.raw`v`),
-                      " が条件を満たすとき ",
-                      math(String.raw`0\odot v=o_{\mathcal{J}}`),
-                      " も満たすので、零ベクトルを除いた集合はスカラー倍で閉じない。",
-                      "ここで ",
-                      math(String.raw`0\odot v=o_{\mathcal{J}}`),
-                      " は、各 ",
-                      math(String.raw`u\in \mathcal{J}`),
-                      " について ",
-                      math(String.raw`(0\odot v)(u)=0\,v(u)=0=o_{\mathcal{J}}(u)`),
-                      " であることによる。第 1 の等号はスカラー倍の定義（",
-                      ref("def_qbar_vector_smul"),
-                      "）、第 2 の等号は ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " の零元との積が零元であること、第 3 の等号は零ベクトルの定義（",
-                      ref("def_qbar_zero_vector"),
-                      "）である）。",
-                      "したがって ",
-                      math(String.raw`E_A(z)`),
-                      " の元は固有ベクトルとは限らず、",
-                      math(String.raw`o_{\mathcal{J}}`),
-                      " 以外の元がちょうど ",
-                      math(String.raw`z`),
-                      " に属する固有ベクトルである。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_definition_qbar_matrix_power",
-              beforeFocus: [
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_eigenspace_add",
-                      kind: "claim",
-                      title: { text: "固有空間は和で閉じる" },
-                      labels: ["claim_qbar_eigenspace_add"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_add",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eigenspace_add_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_add_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-eigenspace"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          " と ",
-                          math(String.raw`z\in\overline{\mathbb{Q}}`),
-                          " を任意に取る。",
-                          math(String.raw`v,w\in E_{A}(z)`),
-                          "（",
-                          ref("def_qbar_eigenspace"),
-                          "）ならば ",
-                          math(String.raw`v\oplus w\in E_{A}(z)`),
-                          "（",
-                          ref("def_qbar_vector_add"),
-                          "）である。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "示すべきは ",
-                          math(String.raw`A\cdot(v\oplus w)=z\odot(v\oplus w)`),
-                          " である。両辺は ",
-                          math(String.raw`V_{\mathcal{J}}`),
-                          " の元、すなわち ",
-                          math(String.raw`\mathcal{J}`),
-                          " 上の写像なので、",
-                          math(String.raw`u\in \mathcal{J}`),
-                          " を任意に取り、その ",
-                          math(String.raw`u`),
-                          " における値が等しいことを示す。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\bigl(A\cdot(v\oplus w)\bigr)(u)
-&=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(u)
-&&(\because\ \blkref{claim_qbar_action_add})\\
-&=(A\cdot v)(u)+(A\cdot w)(u)
-&&(\because\ \blkref{def_qbar_vector_add})\\
-&=(z\odot v)(u)+(z\odot w)(u)
-&&(\because\ v,w\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
-&=z\,v(u)+z\,w(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
-&=z\bigl(v(u)+w(u)\bigr)
-&&(\because\ \text{元と 2 元の和の積についての分配則})\\
-&=z\,(v\oplus w)(u)
-&&(\because\ \blkref{def_qbar_vector_add})\\
-&=\bigl(z\odot(v\oplus w)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`u\in \mathcal{J}`),
-                          " は任意だったので 2 つの写像は等しく、",
-                          math(String.raw`v\oplus w\in E_{A}(z)`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "この段が使っているのは、作用が和を保つこと（",
-                          ref("claim_qbar_action_add"),
-                          "）と、スカラー倍が和に配ること（第 5 段の分配則）の 2 つだけである。",
-                          math(String.raw`A`),
-                          " の成分についても ",
-                          math(String.raw`z`),
-                          " についても、それ以外の性質は使っていない。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_eigenspace_smul",
-                      kind: "claim",
-                      title: { text: "固有空間はスカラー倍で閉じる" },
-                      labels: ["claim_qbar_eigenspace_smul"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_smul",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.eigenspace_smul_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_smul_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-eigenspace"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          " と ",
-                          math(String.raw`z,c\in\overline{\mathbb{Q}}`),
-                          " を任意に取る。",
-                          math(String.raw`v\in E_{A}(z)`),
-                          " ならば ",
-                          math(String.raw`c\odot v\in E_{A}(z)`),
-                          "（",
-                          ref("def_qbar_vector_smul"),
-                          "）である。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "示すべきは ",
-                          math(String.raw`A\cdot(c\odot v)=z\odot(c\odot v)`),
-                          " である。両辺は ",
-                          math(String.raw`\mathcal{J}`),
-                          " 上の写像なので、",
-                          math(String.raw`u\in \mathcal{J}`),
-                          " を任意に取り、その ",
-                          math(String.raw`u`),
-                          " における値が等しいことを示す。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\bigl(A\cdot(c\odot v)\bigr)(u)
-&=\bigl(c\odot(A\cdot v)\bigr)(u)
-&&(\because\ \blkref{claim_qbar_action_smul})\\
-&=c\,(A\cdot v)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
-&=c\,(z\odot v)(u)
-&&(\because\ v\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
-&=c\bigl(z\,v(u)\bigr)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
-&=(c\,z)\,v(u)
-&&(\because\ \text{積の結合則})\\
-&=(z\,c)\,v(u)
-&&(\because\ \text{積の可換性})\\
-&=z\bigl(c\,v(u)\bigr)
-&&(\because\ \text{積の結合則})\\
-&=z\,(c\odot v)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
-&=\bigl(z\odot(c\odot v)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`u\in \mathcal{J}`),
-                          " は任意だったので 2 つの写像は等しく、",
-                          math(String.raw`c\odot v\in E_{A}(z)`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "この段が使っているのは、作用がスカラー倍を保つこと（",
-                          ref("claim_qbar_action_smul"),
-                          "）と、2 つのスカラー倍が交換できること（第 5 段から第 7 段の、結合則・可換性・結合則）の",
-                          "2 つだけである。前の主張（和で閉じること）が積の可換性を使わなかったのに対し、",
-                          "この主張は ",
-                          math(String.raw`c`),
-                          " と ",
-                          math(String.raw`z`),
-                          " の順を入れ替える箇所で使っている。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_qbar_identity_matrix",
-                      kind: "definition",
-                      title: { text: "代数的数を成分とする単位行列" },
-                      labels: ["def_qbar_identity_matrix"],
-                      habitat: "Qbar",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarIdentityMatrix"],
-                      verification: ["sagemath/check/qbar-identity-action"],
-                      statement: [
-                        paragraph([
-                          "単位行列 ",
-                          math(String.raw`I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          "（",
-                          ref("def_qbar_matrix"),
-                          "）を",
-                        ]),
-                        displayMath(String.raw`\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}:=\begin{cases}1&(u'=u)\\0&(u'\ne u)\end{cases}\qquad(u,u'\in \mathcal{J})`),
-                        paragraph([
-                          "で定める。右辺の ",
-                          math(String.raw`1`),
-                          " と ",
-                          math(String.raw`0`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          "（",
-                          ref("def_algebraic_numbers"),
-                          "）の単位元と零元である。",
-                          "場合分けが意味をもつのは、",
-                          math(String.raw`\mathcal{J}`),
-                          " の 2 元が等しいか否かが判定できるからである",
-                          "（有限集合の相等は決定できる）。",
-                        ]),
-                        paragraph([
-                          "添字集合も成分の型も違うので、これは整係数多項式を成分とする行列の単位行列 ",
-                          math(String.raw`I`),
-                          " とは別の対象である。上付きの ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " は、どちらの集合の単位行列かを記号に残すためのものである。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_identity_action",
-                      kind: "claim",
-                      title: { text: "単位行列の作用は列ベクトルを動かさない" },
-                      labels: ["claim_qbar_identity_action"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.identity_action_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-identity-action"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`v\in V_{\mathcal{J}}`),
-                          "（",
-                          ref("def_qbar_vector"),
-                          "）を任意に取る。このとき",
-                        ]),
-                        displayMath(String.raw`I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v=v`),
-                        paragraph([
-                          "が成り立つ（左辺の単位行列は ",
-                          ref("def_qbar_identity_matrix"),
-                          "、点は ",
-                          ref("def_qbar_matrix_action"),
-                          "）。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "両辺は ",
-                          math(String.raw`V_{\mathcal{J}}`),
-                          " の元、すなわち ",
-                          math(String.raw`\mathcal{J}`),
-                          " 上の写像なので、",
-                          math(String.raw`u\in \mathcal{J}`),
-                          " を任意に取り、その ",
-                          math(String.raw`u`),
-                          " における値が等しいことを示す。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v\bigr)(u)
-&=\sum_{u'\in \mathcal{J}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,v(u')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
-&=\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u}\,v(u)
-+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,v(u')
-&&(\because\ \text{有限和から }u'=u\text{ の 1 項を分ける})\\
-&=1\cdot v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot v(u')
-&&(\because\ \blkref{def_qbar_identity_matrix})\\
-&=v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot v(u')
-&&(\because\ \text{単位元との積})\\
-&=v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0
-&&(\because\ \text{零元との積})\\
-&=v(u)+0
-&&(\because\ \text{零元だけの有限和は零元である})\\
-&=v(u)
-&&(\because\ \text{零元を足しても変わらない})
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`u\in \mathcal{J}`),
-                          " は任意だったので、2 つの写像は等しい。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、単位元との積・零元との積・零元との和の 3 つだけである",
-                          "（加法の逆元も、零元でない元の逆元も、積の可換性も、体であることも使っていない）。",
-                          math(String.raw`\mathcal{J}`),
-                          " について使っているのは、有限集合であることと 2 元の相等が判定できることの 2 つだけである",
-                          "（1 項を分ける段と、場合分けの段でそれぞれ効く）。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "algebraic_eigenvalue_definition_qbar_matrix_power",
-                  kind: "definition",
-                  title: { text: "代数的数を成分とする行列の冪" },
-                  labels: ["def_qbar_matrix_power"],
-                  habitat: "Qbar",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarMatrixPow"],
-                  verification: ["sagemath/check/qbar-action-pow"],
-                  statement: [
-                    paragraph([
-                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                      "（",
-                      ref("def_qbar_matrix"),
-                      "）と ",
-                      math(String.raw`k\in\mathbb{N}`),
-                      " に対し、冪 ",
-                      math(String.raw`A^{k}\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                      " を ",
-                      math(String.raw`k`),
-                      " についての帰納法で",
-                    ]),
-                    displayMath(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_{\mathcal{J}},\qquad A^{k+1}:=A\,A^{k}\qquad(k\in\mathbb{N})`),
-                    paragraph([
-                      "と定める（右辺の単位行列は ",
-                      ref("def_qbar_identity_matrix"),
-                      "、積は ",
-                      ref("def_qbar_matrix_product"),
-                      "）。",
-                    ]),
-                    paragraph([
-                      "2 点、整係数多項式を成分とする行列の冪との違いを書いておく。第一に、成分の型が違うので別の対象である",
-                      "（同じ記号 ",
-                      math(String.raw`A^{k}`),
-                      " を使うが、どちらの冪かは行列の成分がどちらの集合の元かで決まる）。",
-                      "第二に、出発点と一歩の取り方が違う。",
-                      math(String.raw`\mathbb{Z}[x]`),
-                      " の側は ",
-                      math(String.raw`A^{1}:=A`),
-                      " から始めて ",
-                      math(String.raw`A^{k+1}:=A^{k}A`),
-                      " と右から掛けるが、ここでは ",
-                      math(String.raw`A^{0}:=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}`),
-                      " から始めて左から掛ける。左から掛けるのは、次の主張の帰納法の一歩で ",
-                      math(String.raw`A^{k+1}`),
-                      " から左の因子 ",
-                      math(String.raw`A`),
-                      " を 1 つ外し、残りへ帰納法の仮定を当てるためである",
-                      "（",
-                      ref("claim_qbar_action_product"),
-                      " が外せるのは左の因子である）。",
-                      math(String.raw`k=0`),
-                      " から始めるのは、その出発点が ",
-                      ref("claim_qbar_identity_action"),
-                      " でそのまま済むためである。",
-                      "実数体も複素数体も現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-          {
-            role: "supporting",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_claim_qbar_eigenvector_pow",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_definition_qbar_action_iterate",
-                      kind: "definition",
-                      title: { text: "代数的数を成分とする行列の作用の反復" },
-                      labels: ["def_qbar_action_iterate"],
-                      habitat: "Qbar",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarActionIterate"],
-                      verification: ["sagemath/check/qbar-action-pow"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          "（",
-                          ref("def_qbar_matrix"),
-                          "）と ",
-                          math(String.raw`v\in V_{\mathcal{J}}`),
-                          "（",
-                          ref("def_qbar_vector"),
-                          "）と ",
-                          math(String.raw`k\in\mathbb{N}`),
-                          " に対し、作用（",
-                          ref("def_qbar_matrix_action"),
-                          "）を ",
-                          math(String.raw`k`),
-                          " 回反復した列ベクトル ",
-                          math(String.raw`\mathrm{it}^{[k]}_{A}(v)\in V_{\mathcal{J}}`),
-                          " を ",
-                          math(String.raw`k`),
-                          " についての帰納法で",
-                        ]),
-                        displayMath(String.raw`\mathrm{it}^{[0]}_{A}(v):=v,\qquad \mathrm{it}^{[k+1]}_{A}(v):=A\cdot\bigl(\mathrm{it}^{[k]}_{A}(v)\bigr)\qquad(k\in\mathbb{N})`),
-                        paragraph([
-                          "と定める。上付きの角括弧は、これが積の反復ではなく作用の反復であることを",
-                          "記号に残すためのものである。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_action_pow",
-                      kind: "claim",
-                      title: { text: "行列の冪の作用は、作用を反復したものである" },
-                      labels: ["claim_qbar_action_pow"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-action-pow"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                          "（",
-                          ref("def_qbar_matrix"),
-                          "）と ",
-                          math(String.raw`v\in V_{\mathcal{J}}`),
-                          "（",
-                          ref("def_qbar_vector"),
-                          "）を任意に取る。このとき任意の ",
-                          math(String.raw`k\in\mathbb{N}`),
-                          " について",
-                        ]),
-                        displayMath(String.raw`A^{k}\cdot v=\mathrm{it}^{[k]}_{A}(v)`),
-                        paragraph([
-                          "が成り立つ（左辺の冪は ",
-                          ref("def_qbar_matrix_power"),
-                          "、点は ",
-                          ref("def_qbar_matrix_action"),
-                          "、右辺は ",
-                          ref("def_qbar_action_iterate"),
-                          "）。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          math(String.raw`A`),
-                          " と ",
-                          math(String.raw`v`),
-                          " を固定し、",
-                          math(String.raw`k`),
-                          " についての帰納法で示す。",
-                        ]),
-                        paragraph([
-                          math(String.raw`k=0`),
-                          " の場合。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-A^{0}\cdot v
-&=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v
-&&(\because\ \blkref{def_qbar_matrix_power})\\
-&=v
-&&(\because\ \blkref{claim_qbar_identity_action})\\
-&=\mathrm{it}^{[0]}_{A}(v)
-&&(\because\ \blkref{def_qbar_action_iterate})
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`k`),
-                          " の場合に ",
-                          math(String.raw`A^{k}\cdot v=\mathrm{it}^{[k]}_{A}(v)`),
-                          " が成り立つとして、",
-                          math(String.raw`k+1`),
-                          " の場合を示す。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-A^{k+1}\cdot v
-&=\bigl(A\,A^{k}\bigr)\cdot v
-&&(\because\ \blkref{def_qbar_matrix_power})\\
-&=A\cdot\bigl(A^{k}\cdot v\bigr)
-&&(\because\ \blkref{claim_qbar_action_product})\\
-&=A\cdot\bigl(\mathrm{it}^{[k]}_{A}(v)\bigr)
-&&(\because\ \text{帰納法の仮定})\\
-&=\mathrm{it}^{[k+1]}_{A}(v)
-&&(\because\ \blkref{def_qbar_action_iterate})
-\end{aligned}`),
-                        paragraph([
-                          "よって任意の ",
-                          math(String.raw`k\in\mathbb{N}`),
-                          " について主張が成り立つ。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について新しく使っているものは無い。使っているのは上の各行で引いた 2 つの主張",
-                          "（単位行列の作用が列ベクトルを動かさないことと、行列の積の作用が作用を 2 度施した",
-                          "ものであること）と、2 つの定義の再帰の式だけである。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "algebraic_eigenvalue_claim_qbar_eigenvector_pow",
-                  kind: "claim",
-                  title: { text: "固有ベクトルへ行列の冪を作用させると、固有値の冪のスカラー倍になる" },
-                  labels: ["claim_qbar_eigenvector_pow"],
-                  habitat: "Qbar",
-                  lean: [
-                    "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul",
-                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_smul_necSuf",
-                    "Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul_from_necSuf",
-                  ],
-                  verification: ["sagemath/check/qbar-eigenvector-pow"],
-                  statement: [
-                    paragraph([
-                      math(String.raw`A\in\mathrm{Mat}_{\mathcal{J}}(\overline{\mathbb{Q}})`),
-                      "（",
-                      ref("def_qbar_matrix"),
-                      "）と ",
-                      math(String.raw`v\in V_{\mathcal{J}}`),
-                      "（",
-                      ref("def_qbar_vector"),
-                      "）と ",
-                      math(String.raw`z\in\overline{\mathbb{Q}}`),
-                      "（",
-                      ref("def_algebraic_numbers"),
-                      "）が ",
-                      math(String.raw`A\cdot v=z\odot v`),
-                      " を満たすとする。このとき任意の ",
-                      math(String.raw`k\in\mathbb{N}`),
-                      " について",
-                    ]),
-                    displayMath(String.raw`A^{k}\cdot v=z^{k}\odot v`),
-                    paragraph([
-                      "が成り立つ（左辺の冪は ",
-                      ref("def_qbar_matrix_power"),
-                      "、点は ",
-                      ref("def_qbar_matrix_action"),
-                      "、",
-                      math(String.raw`\odot`),
-                      " は ",
-                      ref("def_qbar_vector_smul"),
-                      "、右辺の ",
-                      math(String.raw`z^{k}`),
-                      " は ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " の積の反復で ",
-                      math(String.raw`z^{0}=1`),
-                      "・",
-                      math(String.raw`z^{k+1}=z^{k}z`),
-                      " と約束したもの（",
-                      ref("def_root_of_unity_set"),
-                      "）である）。",
-                    ]),
-                    paragraph([
-                      "仮定は ",
-                      ref("def_qbar_eigenvector"),
-                      " の 2 条件のうち等式の側だけである。",
-                      math(String.raw`v\ne o_{\mathcal{J}}`),
-                      " は使わないので、",
-                      math(String.raw`z`),
-                      " に属する固有ベクトルにはこの主張がそのまま当たる。",
-                    ]),
-                  ],
-                  proof: [
-                    paragraph([
-                      "準備として、スカラー倍についての 2 つの等式を作る。",
-                      "第一に、任意の ",
-                      math(String.raw`w\in V_{\mathcal{J}}`),
-                      " と任意の ",
-                      math(String.raw`u\in \mathcal{J}`),
-                      " について",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-(1\odot w)(u)
-&=1\,w(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
-&=w(u)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の単位元との積})
-\end{aligned}`),
-                    paragraph([
-                      "であり、",
-                      math(String.raw`u`),
-                      " は任意なので ",
-                      math(String.raw`1\odot w=w`),
-                      " である。第二に、任意の ",
-                      math(String.raw`y,z\in\overline{\mathbb{Q}}`),
-                      " と任意の ",
-                      math(String.raw`w\in V_{\mathcal{J}}`),
-                      " と任意の ",
-                      math(String.raw`u\in \mathcal{J}`),
-                      " について",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-\bigl((y\,z)\odot w\bigr)(u)
-&=(y\,z)\,w(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
-&=y\,\bigl(z\,w(u)\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=y\,\bigl((z\odot w)(u)\bigr)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
-&=\bigl(y\odot(z\odot w)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})
-\end{aligned}`),
-                    paragraph([
-                      "であり、",
-                      math(String.raw`u`),
-                      " は任意なので ",
-                      math(String.raw`(y\,z)\odot w=y\odot(z\odot w)`),
-                      " である。",
-                    ]),
-                    paragraph([
-                      math(String.raw`A`),
-                      " と ",
-                      math(String.raw`v`),
-                      " と ",
-                      math(String.raw`z`),
-                      " を固定し、",
-                      math(String.raw`k`),
-                      " についての帰納法で示す。",
-                    ]),
-                    paragraph([
-                      math(String.raw`k=0`),
-                      " の場合。",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-A^{0}\cdot v
-&=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v
-&&(\because\ \blkref{def_qbar_matrix_power})\\
-&=v
-&&(\because\ \blkref{claim_qbar_identity_action})\\
-&=1\odot v
-&&(\because\ \text{準備の第 1 の等式})\\
-&=z^{0}\odot v
-&&(\because\ z^{0}=1\ \text{の約束。}\ \blkref{def_root_of_unity_set})
-\end{aligned}`),
-                    paragraph([
-                      math(String.raw`k`),
-                      " の場合に ",
-                      math(String.raw`A^{k}\cdot v=z^{k}\odot v`),
-                      " が成り立つとして、",
-                      math(String.raw`k+1`),
-                      " の場合を示す。",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-A^{k+1}\cdot v
-&=\bigl(A\,A^{k}\bigr)\cdot v
-&&(\because\ \blkref{def_qbar_matrix_power})\\
-&=A\cdot\bigl(A^{k}\cdot v\bigr)
-&&(\because\ \blkref{claim_qbar_action_product})\\
-&=A\cdot\bigl(z^{k}\odot v\bigr)
-&&(\because\ \text{帰納法の仮定})\\
-&=z^{k}\odot\bigl(A\cdot v\bigr)
-&&(\because\ \blkref{claim_qbar_action_smul})\\
-&=z^{k}\odot\bigl(z\odot v\bigr)
-&&(\because\ \text{仮定}\ A\cdot v=z\odot v)\\
-&=\bigl(z^{k}z\bigr)\odot v
-&&(\because\ \text{準備の第 2 の等式})\\
-&=z^{k+1}\odot v
-&&(\because\ z^{k+1}=z^{k}z\ \text{の約束。}\ \blkref{def_root_of_unity_set})
-\end{aligned}`),
-                    paragraph([
-                      "よって任意の ",
-                      math(String.raw`k\in\mathbb{N}`),
-                      " について主張が成り立つ。",
-                    ]),
-                    paragraph([
-                      "この段が ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " について使っているのは、単位元との積と積の結合則だけである",
-                      "（準備の 2 つの等式でだけ使う。逆元も、可換性も、体であることも使わない）。",
-                      "行列については上の各行で引いた 3 つの主張だけを使う。",
-                      "実数体も複素数体も現れない。",
                     ]),
                   ],
                 },
@@ -22683,1234 +23956,6 @@ z^{\,L+1}&=z^{L}\,z
                       "）は、どちらもこの 2 つの仮定を置かずに述べてある",
                       "（この証明はその 2 つを根拠として引いているが、引いている先が仮定を使っていない、という意味である）。",
                       "実数体も複素数体も現れない。",
-                    ]),
-                  ],
-                },
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "algebraic_eigenvalue_heading_root_of_unity_sums",
-        labels: [],
-        title: { text: "1 の冪根の積と冪の和" },
-        children: [
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_algebraic_eigenvalue_claim_qbar_power_difference_factorization",
-              beforeFocus: [
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_mul_pow",
-                      kind: "claim",
-                      title: { text: "代数的数の積の冪は、冪の積である" },
-                      labels: ["claim_qbar_mul_pow"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarMul_pow",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_pow_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarMul_pow_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-mul-pow"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`w,z\in\overline{\mathbb{Q}}`),
-                          "（",
-                          ref("def_algebraic_numbers"),
-                          "）と ",
-                          math(String.raw`n\in\mathbb{N}`),
-                          " を任意に取る。このとき",
-                        ]),
-                        displayMath(String.raw`(wz)^{n}=w^{n}z^{n}`),
-                        paragraph([
-                          "が成り立つ（冪は ",
-                          ref("def_root_of_unity_set"),
-                          " で置いた約束、すなわち ",
-                          math(String.raw`y^{0}:=1`),
-                          " と ",
-                          math(String.raw`y^{j+1}:=y^{j}y`),
-                          " による）。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          math(String.raw`n`),
-                          " についての帰納法で示す。",
-                        ]),
-                        paragraph([
-                          "出発点（",
-                          math(String.raw`n=0`),
-                          "）。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-(wz)^{0}&=1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)\\
-&=1\cdot 1
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
-&=w^{0}\cdot 1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)\\
-&=w^{0}z^{0}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)
-\end{aligned}`),
-                        paragraph([
-                          "一歩。",
-                          math(String.raw`n\in\mathbb{N}`),
-                          " について ",
-                          math(String.raw`(wz)^{n}=w^{n}z^{n}`),
-                          " を仮定する。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-(wz)^{n+1}&=(wz)^{n}(wz)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)\\
-&=\bigl(w^{n}z^{n}\bigr)(wz)
-&&(\because\ \text{帰納法の仮定})\\
-&=w^{n}\bigl(z^{n}(wz)\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=w^{n}\bigl((z^{n}w)z\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=w^{n}\bigl((wz^{n})z\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を}\ z^{n}\ \text{と}\ w\ \text{に当てる})\\
-&=w^{n}\bigl(w(z^{n}z)\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=\bigl(w^{n}w\bigr)\bigl(z^{n}z\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=w^{n+1}\bigl(z^{n}z\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)\\
-&=w^{n+1}z^{n+1}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)
-\end{aligned}`),
-                        paragraph([
-                          "したがってすべての ",
-                          math(String.raw`n\in\mathbb{N}`),
-                          " について ",
-                          math(String.raw`(wz)^{n}=w^{n}z^{n}`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、積の単位元・積の結合則・および ",
-                          math(String.raw`z^{n}`),
-                          " と ",
-                          math(String.raw`w`),
-                          " という 2 元についての可換則だけである。",
-                          "加法も零元も分配則も、逆元の存在も、体であることも使っていない。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                        paragraph([
-                          "この主張は、1 の ",
-                          math(String.raw`L`),
-                          " 乗根の全体 ",
-                          math(String.raw`\mu_L`),
-                          "（",
-                          ref("def_root_of_unity_set"),
-                          "）が積で閉じることを示すための足場である。",
-                          "そこから、",
-                          math(String.raw`\mu_L`),
-                          " の元を掛ける操作が ",
-                          math(String.raw`\mu_L`),
-                          " の全単射であることを経て、",
-                          math(String.raw`\mu_L`),
-                          " の元の冪の総和（指数が ",
-                          math(String.raw`L`),
-                          " の倍数なら元の個数、そうでなければ零元）へ進む。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_root_of_unity_mul",
-                      kind: "claim",
-                      title: { text: "1 の冪根の全体は積で閉じている" },
-                      labels: ["claim_root_of_unity_mul"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_mul",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mul_mem_pow_eq_one_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_mul_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/root-of-unity-mul"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`n\in\mathbb{N}`),
-                          " を任意に取る。",
-                          math(String.raw`w\in\mu_{n}`),
-                          " と ",
-                          math(String.raw`z\in\mu_{n}`),
-                          "（",
-                          ref("def_root_of_unity_set"),
-                          "）を任意に取る。このとき",
-                        ]),
-                        displayMath(String.raw`wz\in\mu_{n}`),
-                        paragraph([
-                          "が成り立つ。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          ref("def_root_of_unity_set"),
-                          " により ",
-                          math(String.raw`w\in\overline{\mathbb{Q}}`),
-                          " かつ ",
-                          math(String.raw`w^{n}=1`),
-                          " であり、同じく ",
-                          math(String.raw`z\in\overline{\mathbb{Q}}`),
-                          " かつ ",
-                          math(String.raw`z^{n}=1`),
-                          " である。",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " は体なので積で閉じており（",
-                          ref("def_algebraic_numbers"),
-                          "）、",
-                          math(String.raw`wz\in\overline{\mathbb{Q}}`),
-                          " である。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-(wz)^{n}&=w^{n}z^{n}
-&&(\because\ \blkref{claim_qbar_mul_pow})\\
-&=1\cdot z^{n}
-&&(\because\ w^{n}=1)\\
-&=1\cdot 1
-&&(\because\ z^{n}=1)\\
-&=1
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
-\end{aligned}`),
-                        paragraph([
-                          "よって ",
-                          math(String.raw`wz\in\overline{\mathbb{Q}}`),
-                          " かつ ",
-                          math(String.raw`(wz)^{n}=1`),
-                          " であり、",
-                          ref("def_root_of_unity_set"),
-                          " により ",
-                          math(String.raw`wz\in\mu_{n}`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、積で閉じていること・積の単位元・および ",
-                          ref("claim_qbar_mul_pow"),
-                          " が使う性質（結合則と 2 元についての可換則）だけである。",
-                          "加法も零元も分配則も、逆元の存在も、代数閉であることも使っていない。",
-                          math(String.raw`n=0`),
-                          " のときも鎖はそのまま通る（",
-                          math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`),
-                          " なので主張は自明だが、鎖はそれを使っていない）。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_root_of_unity_pow",
-                      kind: "claim",
-                      title: { text: "1 の冪根の冪は 1 の冪根である" },
-                      labels: ["claim_root_of_unity_pow"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_pow",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.pow_mem_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnity_pow_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/root-of-unity-pow"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`n\in\mathbb{N}`),
-                          " を任意に取り、",
-                          math(String.raw`w\in\mu_{n}`),
-                          "（",
-                          ref("def_root_of_unity_set"),
-                          "）を任意に取る。このとき任意の ",
-                          math(String.raw`k\in\mathbb{N}`),
-                          " について",
-                        ]),
-                        displayMath(String.raw`w^{k}\in\mu_{n}`),
-                        paragraph([
-                          "が成り立つ。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          math(String.raw`k`),
-                          " についての帰納法で示す。",
-                        ]),
-                        paragraph([
-                          "出発点（",
-                          math(String.raw`k=0`),
-                          "）。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-w^{0}&=1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{0}=1)\\
-1^{n}&=1
-&&(\because\ \text{単位元の反復積は単位元である})
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`1\in\overline{\mathbb{Q}}`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " が体であること（",
-                          ref("def_algebraic_numbers"),
-                          "）による。よって ",
-                          ref("def_root_of_unity_set"),
-                          " により ",
-                          math(String.raw`w^{0}=1\in\mu_{n}`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "一歩（",
-                          math(String.raw`k`),
-                          " のとき ",
-                          math(String.raw`w^{k}\in\mu_{n}`),
-                          " が成り立つと仮定して ",
-                          math(String.raw`k+1`),
-                          " のときを示す）。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-w^{k+1}&=w^{k}\,w
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{j+1}=y^{j}y)\\
-&\in\mu_{n}
-&&(\because\ \blkref{claim_root_of_unity_mul}\ \text{を}\ w^{k}\in\mu_{n}\ \text{（帰納法の仮定）と}\ w\in\mu_{n}\ \text{（仮定）へ当てる})
-\end{aligned}`),
-                        paragraph([
-                          "以上より、任意の ",
-                          math(String.raw`k\in\mathbb{N}`),
-                          " について ",
-                          math(String.raw`w^{k}\in\mu_{n}`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "この段が使っているのは、",
-                          math(String.raw`\mu_{n}`),
-                          " が 1 を含むことと積で閉じていること（",
-                          ref("claim_root_of_unity_mul"),
-                          "）の 2 つだけである。",
-                          math(String.raw`w`),
-                          " が 1 の冪根であることは、",
-                          math(String.raw`w\in\mu_{n}`),
-                          " という所属としてしか使っていない。",
-                          "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_def_root_of_unity_mul_map",
-                      kind: "definition",
-                      title: { text: "1 の冪根を掛ける写像" },
-                      labels: ["def_root_of_unity_mul_map"],
-                      habitat: "Qbar",
-                      lean: ["Ising2DLambda.AlgebraicEigenvalue.mulMap"],
-                      verification: ["sagemath/check/root-of-unity-mul-map"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`n\in\mathbb{N}`),
-                          " を任意に取り、",
-                          math(String.raw`w\in\mu_{n}`),
-                          "（",
-                          ref("def_root_of_unity_set"),
-                          "）を任意に取る。写像",
-                        ]),
-                        displayMath(
-                          String.raw`\theta^{(n)}_{w}:\mu_{n}\to\mu_{n},\qquad
-\theta^{(n)}_{w}(z):=wz`,
-                        ),
-                        paragraph([
-                          "を定める。ここで ",
-                          math(String.raw`wz`),
-                          " は体 ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の積（",
-                          ref("def_algebraic_numbers"),
-                          "）である。行き先が ",
-                          math(String.raw`\mu_{n}`),
-                          " に収まること、すなわち ",
-                          math(String.raw`z\in\mu_{n}`),
-                          " ならば ",
-                          math(String.raw`wz\in\mu_{n}`),
-                          " であることは ",
-                          ref("claim_root_of_unity_mul"),
-                          " による（これを言わないと写像として定まらない）。",
-                        ]),
-                        paragraph([
-                          "上付きの ",
-                          math(String.raw`(n)`),
-                          " と下付きの ",
-                          math(String.raw`w`),
-                          " は、この写像が ",
-                          math(String.raw`n`),
-                          " と ",
-                          math(String.raw`w`),
-                          " の取り方に依存することを記号に残すためのものである。",
-                          "掛ける操作を表す文字に ",
-                          math(String.raw`m`),
-                          " を使わない（",
-                          math(String.raw`m`),
-                          " は多重度 ",
-                          math(String.raw`\Omega_L(m)`),
-                          " の添字に固定してある）ので ",
-                          math(String.raw`\theta`),
-                          " とした。",
-                          "実数体も複素数体も現れない（定義域も値域も代数的数の部分集合である）。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_root_of_unity_mul_map_bijective",
-                      kind: "claim",
-                      title: { text: "1 の冪根を掛ける写像は全単射である" },
-                      labels: ["claim_root_of_unity_mul_map_bijective"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.mulMap_bijective_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.mulMap_bijective_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/root-of-unity-mul-map"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`n\in\mathbb{N}`),
-                          " を ",
-                          math(String.raw`n\ge1`),
-                          " を満たすように任意に取り、",
-                          math(String.raw`w\in\mu_{n}`),
-                          "（",
-                          ref("def_root_of_unity_set"),
-                          "）を任意に取る。このとき ",
-                          ref("def_root_of_unity_mul_map"),
-                          " の写像 ",
-                          math(String.raw`\theta^{(n)}_{w}`),
-                          " は全単射であり、その逆写像は ",
-                          math(String.raw`\theta^{(n)}_{w^{n-1}}`),
-                          " である。すなわち任意の ",
-                          math(String.raw`z\in\mu_{n}`),
-                          " について",
-                        ]),
-                        displayMath(String.raw`\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z)\bigr)=z,
-\qquad
-\theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)=z`),
-                        paragraph([
-                          "が成り立つ。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "準備。",
-                          ref("claim_root_of_unity_pow"),
-                          " を ",
-                          math(String.raw`k=n-1`),
-                          " に当てて ",
-                          math(String.raw`w^{n-1}\in\mu_{n}`),
-                          " を得る。したがって ",
-                          ref("def_root_of_unity_mul_map"),
-                          " により写像 ",
-                          math(String.raw`\theta^{(n)}_{w^{n-1}}:\mu_{n}\to\mu_{n}`),
-                          " が定まる。この 2 つの元の積は次のように 1 である。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-w^{n-1}\,w&=w^{(n-1)+1}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{j+1}=y^{j}y)\\
-&=w^{n}
-&&(\because\ n\ge1\ \text{より}\ (n-1)+1=n)\\
-&=1
-&&(\because\ w\in\mu_{n}\ \text{と}\ \blkref{def_root_of_unity_set})
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`z\in\mu_{n}`),
-                          " を任意に取る。第 1 の往復は次のとおりである。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z)\bigr)&=\theta^{(n)}_{w^{n-1}}(wz)
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
-&=w^{n-1}(wz)
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ})\\
-&=(w^{n-1}w)z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=1\cdot z
-&&(\because\ \text{準備の等式}\ w^{n-1}w=1)\\
-&=z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
-\end{aligned}`),
-                        paragraph([
-                          "第 2 の往復は次のとおりである。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)&=\theta^{(n)}_{w}(w^{n-1}z)
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ})\\
-&=w(w^{n-1}z)
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
-&=(w\,w^{n-1})z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=(w^{n-1}w)z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則})\\
-&=1\cdot z
-&&(\because\ \text{準備の等式}\ w^{n-1}w=1)\\
-&=z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
-\end{aligned}`),
-                        paragraph([
-                          "単射性。",
-                          math(String.raw`z_1\in\mu_{n}`),
-                          " と ",
-                          math(String.raw`z_2\in\mu_{n}`),
-                          " が ",
-                          math(String.raw`\theta^{(n)}_{w}(z_1)=\theta^{(n)}_{w}(z_2)`),
-                          " を満たすとする。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-z_1&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_1)\bigr)
-&&(\because\ \text{第 1 の往復を}\ z_1\ \text{へ})\\
-&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_2)\bigr)
-&&(\because\ \theta^{(n)}_{w}(z_1)=\theta^{(n)}_{w}(z_2))\\
-&=z_2
-&&(\because\ \text{第 1 の往復を}\ z_2\ \text{へ})
-\end{aligned}`),
-                        paragraph([
-                          "全射性。",
-                          math(String.raw`z\in\mu_{n}`),
-                          " を任意に取る。",
-                          ref("def_root_of_unity_mul_map"),
-                          " により ",
-                          math(String.raw`\theta^{(n)}_{w^{n-1}}(z)\in\mu_{n}`),
-                          " であり、第 2 の往復により ",
-                          math(String.raw`\theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)=z`),
-                          " である。すなわち ",
-                          math(String.raw`z`),
-                          " は ",
-                          math(String.raw`\theta^{(n)}_{w}`),
-                          " の像に属する。",
-                        ]),
-                        paragraph([
-                          "以上より ",
-                          math(String.raw`\theta^{(n)}_{w}`),
-                          " は単射かつ全射、すなわち全単射であり、2 つの往復が恒等写像であることから ",
-                          math(String.raw`\theta^{(n)}_{w^{n-1}}`),
-                          " がその逆写像である。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、積の結合則・積の可換則・積の単位元の 3 つだけである。",
-                          "加法も零元も分配則も、逆元の存在も、代数閉であることも使っていない。",
-                          math(String.raw`w`),
-                          " が 1 の冪根であることは、",
-                          math(String.raw`w^{n-1}w=1`),
-                          " という 1 つの等式（と可換則から出る ",
-                          math(String.raw`w\,w^{n-1}=1`),
-                          "）としてしか使っていない。",
-                          math(String.raw`n\ge1`),
-                          " が要るのは準備の第 2 段 ",
-                          math(String.raw`(n-1)+1=n`),
-                          " だけである（",
-                          math(String.raw`n=0`),
-                          " のときは ",
-                          math(String.raw`\mu_{0}=\overline{\mathbb{Q}}`),
-                          " なので ",
-                          math(String.raw`w=0`),
-                          " が取れてしまい、掛ける操作は全単射でない）。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_root_of_unity_power_sum_invariant",
-                      kind: "claim",
-                      title: {
-                        text: "1 の冪根の全体にわたる冪の和は、1 の冪根の冪を掛けても動かない",
-                      },
-                      labels: ["claim_root_of_unity_power_sum_invariant"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.powerSum_mul_invariant",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_mul_invariant_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.powerSum_mul_invariant_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/root-of-unity-power-sum-invariant"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`n\in\mathbb{N}`),
-                          " を ",
-                          math(String.raw`n\ge1`),
-                          " を満たすように任意に取り、",
-                          math(String.raw`\mu_{n}`),
-                          "（",
-                          ref("def_root_of_unity_set"),
-                          "）が有限集合であると仮定する。",
-                          math(String.raw`m\in\mathbb{N}`),
-                          " を任意に取り、",
-                        ]),
-                        displayMath(String.raw`S_{n,m}:=\sum_{z\in\mu_{n}}z^{m}\in\overline{\mathbb{Q}}`),
-                        paragraph([
-                          "と置く（右辺は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          "（",
-                          ref("def_algebraic_numbers"),
-                          "）の有限個の元の和であり、仮定した有限性によって定まる）。このとき任意の ",
-                          math(String.raw`w\in\mu_{n}`),
-                          " について",
-                        ]),
-                        displayMath(String.raw`w^{m}\,S_{n,m}=S_{n,m}`),
-                        paragraph([
-                          "が成り立つ。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          math(String.raw`w\in\mu_{n}`),
-                          " を任意に取る。",
-                          ref("claim_root_of_unity_mul_map_bijective"),
-                          " により ",
-                          math(String.raw`\theta^{(n)}_{w}:\mu_{n}\to\mu_{n}`),
-                          "（",
-                          ref("def_root_of_unity_mul_map"),
-                          "）は全単射である。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
-&&(\because\ S_{n,m}\ \text{の定義})\\
-&=\sum_{z\in\mu_{n}}w^{m}z^{m}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則を有限和へ})\\
-&=\sum_{z\in\mu_{n}}(wz)^{m}
-&&(\because\ \blkref{claim_qbar_mul_pow}\ \text{を}\ w\ \text{と}\ z\ \text{へ})\\
-&=\sum_{z\in\mu_{n}}\bigl(\theta^{(n)}_{w}(z)\bigr)^{m}
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
-&=\sum_{y\in\mu_{n}}y^{m}
-&&(\because\ \blkref{claim_root_of_unity_mul_map_bijective}\ \text{による添字の取り替え})\\
-&=S_{n,m}
-&&(\because\ S_{n,m}\ \text{の定義})
-\end{aligned}`),
-                        paragraph([
-                          "第 5 の等号は和の添字の取り替えである。",
-                          math(String.raw`\theta^{(n)}_{w}:\mu_{n}\to\mu_{n}`),
-                          " が全単射で、逆写像が ",
-                          math(String.raw`\theta^{(n)}_{w^{n-1}}`),
-                          " なので、",
-                          math(String.raw`z`),
-                          " にわたる有限和は ",
-                          math(String.raw`y=\theta^{(n)}_{w}(z)`),
-                          " にわたる有限和と同じ項を同じ回数ずつ足し合わせている（",
-                          math(String.raw`z=\theta^{(n)}_{w^{n-1}}(y)`),
-                          " が対応を戻す）。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、有限和が定まること（加法の結合則と可換則）と、",
-                          "積が有限和へ分配されることの 2 つだけである。",
-                          math(String.raw`\mu_{n}`),
-                          " の有限性は仮定であって、ここでは示していない（",
-                          math(String.raw`\mu_{n}`),
-                          " がちょうど ",
-                          math(String.raw`n`),
-                          " 個の元を持つことは別の段で示す）。",
-                          "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_geometric_telescope",
-                      kind: "claim",
-                      title: {
-                        text: "代数的数の冪の有限和は、1 を引いたものを掛けると伸縮する",
-                      },
-                      labels: ["claim_qbar_geometric_telescope"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarGeometricTelescope",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.geometric_telescope_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarGeometricTelescope_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-geometric-telescope"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`z\in\overline{\mathbb{Q}}`),
-                          "（",
-                          ref("def_algebraic_numbers"),
-                          "）を任意に取り、",
-                          math(String.raw`n\in\mathbb{N}`),
-                          " を任意に取る。",
-                        ]),
-                        displayMath(
-                          String.raw`G_{n}(z):=\sum_{k=0}^{n-1}z^{k}\in\overline{\mathbb{Q}}`,
-                        ),
-                        paragraph([
-                          "と置く（",
-                          math(String.raw`n=0`),
-                          " のときは空和であり ",
-                          math(String.raw`G_{0}(z)=0`),
-                          "、",
-                          math(String.raw`n+1`),
-                          " のときは ",
-                          math(String.raw`G_{n+1}(z)=G_{n}(z)+z^{n}`),
-                          " である）。このとき",
-                        ]),
-                        displayMath(String.raw`(z-1)\,G_{n}(z)=z^{n}-1`),
-                        paragraph([
-                          "が成り立つ。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          math(String.raw`z\in\overline{\mathbb{Q}}`),
-                          " を固定する。",
-                        ]),
-                        paragraph([
-                          "準備。任意の ",
-                          math(String.raw`k\in\mathbb{N}`),
-                          " について ",
-                          math(String.raw`z\,z^{k}=z^{k}z`),
-                          " が成り立つ（冪の約束（",
-                          ref("def_root_of_unity_set"),
-                          "）が与えるのは ",
-                          math(String.raw`z^{k+1}=z^{k}z`),
-                          " の向きだけなので、",
-                          math(String.raw`z\,z^{k}`),
-                          " をこれへ結び付けるにはこの等式が要る）。",
-                          math(String.raw`k`),
-                          " についての帰納法で示す。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-z\,z^{0}&=z\cdot 1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
-&=z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
-&=1\cdot z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
-&=z^{0}z
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`z\,z^{k}=z^{k}z`),
-                          " を仮定する。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)\\
-&=\bigl(z\,z^{k}\bigr)z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=\bigl(z^{k}z\bigr)z
-&&(\because\ \text{帰納法の仮定})\\
-&=z^{k+1}z
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)
-\end{aligned}`),
-                        paragraph([
-                          "以下、主張を ",
-                          math(String.raw`n`),
-                          " についての帰納法で示す。",
-                        ]),
-                        paragraph([
-                          "出発点（",
-                          math(String.raw`n=0`),
-                          "）。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-(z-1)\,G_{0}(z)&=(z-1)\cdot 0
-&&(\because\ G_{0}(z)\ \text{は空和である})\\
-&=0
-&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
-&=1-1
-&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元})\\
-&=z^{0}-1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
-\end{aligned}`),
-                        paragraph([
-                          "一歩（",
-                          math(String.raw`n`),
-                          " から ",
-                          math(String.raw`n+1`),
-                          " へ）。",
-                          math(String.raw`(z-1)\,G_{n}(z)=z^{n}-1`),
-                          " を仮定する。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-(z-1)\,G_{n+1}(z)&=(z-1)\bigl(G_{n}(z)+z^{n}\bigr)
-&&(\because\ G_{n+1}(z)\ \text{の定義})\\
-&=(z-1)\,G_{n}(z)+(z-1)z^{n}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
-&=(z^{n}-1)+(z-1)z^{n}
-&&(\because\ \text{帰納法の仮定})\\
-&=(z^{n}-1)+\bigl(z\,z^{n}-1\cdot z^{n}\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
-&=(z^{n}-1)+\bigl(z\,z^{n}-z^{n}\bigr)
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
-&=(z^{n}-1)+\bigl(z^{n}z-z^{n}\bigr)
-&&(\because\ \text{準備の}\ z\,z^{n}=z^{n}z)\\
-&=(z^{n}-1)+\bigl(z^{n+1}-z^{n}\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z)\\
-&=z^{n+1}-1
-&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}\ \text{が相殺する})
-\end{aligned}`),
-                        paragraph([
-                          "出発点と一歩により、すべての ",
-                          math(String.raw`n\in\mathbb{N}`),
-                          " について主張が成り立つ。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、加法群であること（結合則・可換則・零元・加法の逆元）と、",
-                          "積が和へ分配されること、積が結合的であること（準備の段で使う）、積の単位元があること、",
-                          "そして零元との積が零元であることだけである。",
-                          "積の可換則も、積の逆元の存在も、代数閉であることも使っていない（",
-                          math(String.raw`z`),
-                          " は自分自身の冪とだけ掛け合わされ、",
-                          math(String.raw`z\,z^{k}=z^{k}z`),
-                          " は準備の段で結合則から出している）。",
-                          "実数体も複素数体も現れない（元は代数的数、指数は自然数である）。",
-                        ]),
-                        paragraph([
-                          "これは、",
-                          math(String.raw`\mu_{n}`),
-                          "（",
-                          ref("def_root_of_unity_set"),
-                          "）の元 ",
-                          math(String.raw`z`),
-                          " が ",
-                          math(String.raw`z\ne1`),
-                          " を満たすとき ",
-                          math(String.raw`G_{n}(z)=0`),
-                          " を出すための足場である（",
-                          math(String.raw`z^{n}-1=0`),
-                          " と、体に零因子が無いことによる）。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_qbar_no_zero_divisors",
-                      kind: "claim",
-                      title: {
-                        text: "代数的数の積が零元ならば、零元でない方で割って他方が零元と分かる",
-                      },
-                      labels: ["claim_qbar_no_zero_divisors"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarNoZeroDivisors",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.no_zero_divisors_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.qbarNoZeroDivisors_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/qbar-no-zero-divisors"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`a,b\in\overline{\mathbb{Q}}`),
-                          "（",
-                          ref("def_algebraic_numbers"),
-                          "）が ",
-                          math(String.raw`ab=0`),
-                          " と ",
-                          math(String.raw`a\ne0`),
-                          " を満たすとする。このとき",
-                        ]),
-                        displayMath(String.raw`b=0`),
-                        paragraph([
-                          "が成り立つ。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "準備。",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " は体であり（",
-                          ref("def_algebraic_numbers"),
-                          "）、",
-                          math(String.raw`a\ne0`),
-                          " であるから、",
-                          math(String.raw`a^{-1}a=1`),
-                          " を満たす ",
-                          math(String.raw`a^{-1}\in\overline{\mathbb{Q}}`),
-                          " が取れる。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-b&=1\cdot b
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
-&=\bigl(a^{-1}a\bigr)b
-&&(\because\ \text{準備で取った}\ a^{-1}\ \text{の性質}\ a^{-1}a=1)\\
-&=a^{-1}(ab)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=a^{-1}\cdot 0
-&&(\because\ \text{仮定}\ ab=0)\\
-&=0
-&&(\because\ \overline{\mathbb{Q}}\ \text{の零元との積は零元})
-\end{aligned}`),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について使っているのは、積が結合的であること、積の単位元があること、",
-                          "零元との積が零元であること、そして ",
-                          math(String.raw`a\ne0`),
-                          " に対して ",
-                          math(String.raw`a^{-1}a=1`),
-                          " を満たす元が取れることだけである。",
-                          "積の可換則も、加法についての性質も、代数閉であることも使っていない。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                        paragraph([
-                          "これは、",
-                          math(String.raw`\mu_{n}`),
-                          "（",
-                          ref("def_root_of_unity_set"),
-                          "）の元 ",
-                          math(String.raw`z`),
-                          " が ",
-                          math(String.raw`z\ne1`),
-                          " を満たすとき、伸縮の等式（",
-                          ref("claim_qbar_geometric_telescope"),
-                          "）の左辺 ",
-                          math(String.raw`(z-1)G_{n}(z)`),
-                          " が零元であることから ",
-                          math(String.raw`G_{n}(z)=0`),
-                          " を出すための段であり、",
-                          "1 の冪根の全体にわたる冪の和 ",
-                          math(String.raw`S_{n,m}`),
-                          " について ",
-                          math(String.raw`(w^{m}-1)S_{n,m}=0`),
-                          "（",
-                          ref("claim_root_of_unity_power_sum_invariant"),
-                          "）から ",
-                          math(String.raw`S_{n,m}=0`),
-                          " を出すための段でもある。",
-                        ]),
-                      ],
-                    },
-                },
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "algebraic_eigenvalue_claim_root_of_unity_geometric_sum_zero",
-                      kind: "claim",
-                      title: {
-                        text: "1 でない 1 の冪根の、冪の有限和は零元である",
-                      },
-                      labels: ["claim_root_of_unity_geometric_sum_zero"],
-                      habitat: "Qbar",
-                      lean: [
-                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityGeometricSumZero",
-                        "Ising2DLambda.NecSuf.AlgebraicEigenvalue.geometric_sum_zero_necSuf",
-                        "Ising2DLambda.AlgebraicEigenvalue.rootOfUnityGeometricSumZero_from_necSuf",
-                      ],
-                      verification: ["sagemath/check/root-of-unity-geometric-sum-zero"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`n\in\mathbb{N}`),
-                          " を任意に取り、",
-                          math(String.raw`z\in\mu_{n}`),
-                          "（",
-                          ref("def_root_of_unity_set"),
-                          "）が ",
-                          math(String.raw`z\ne1`),
-                          " を満たすとする。このとき、",
-                          math(String.raw`G_{n}(z)=\sum_{k=0}^{n-1}z^{k}`),
-                          "（",
-                          ref("claim_qbar_geometric_telescope"),
-                          " で置いた元）について",
-                        ]),
-                        displayMath(String.raw`G_{n}(z)=0`),
-                        paragraph([
-                          "が成り立つ。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "準備。",
-                          math(String.raw`z-1\ne0`),
-                          " である。実際、",
-                          math(String.raw`z-1=0`),
-                          " とすると両辺に ",
-                          math(String.raw`1`),
-                          " を足して ",
-                          math(String.raw`z=1`),
-                          " となり、仮定 ",
-                          math(String.raw`z\ne1`),
-                          " に反する。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-(z-1)\,G_{n}(z)&=z^{n}-1
-&&(\because\ \text{伸縮の等式})\\
-&=1-1
-&&(\because\ z\in\mu_{n}\ \text{すなわち}\ z^{n}=1)\\
-&=0
-&&(\because\ \overline{\mathbb{Q}}\ \text{の同じ元どうしの差は零元})
-\end{aligned}`),
-                        paragraph([
-                          "第 1 の等号は ",
-                          ref("claim_qbar_geometric_telescope"),
-                          "、第 2 の等号は ",
-                          ref("def_root_of_unity_set"),
-                          " による。",
-                        ]),
-                        paragraph([
-                          "この等式に、積が零元ならば零元でない方で割って他方が零元と分かること（",
-                          ref("claim_qbar_no_zero_divisors"),
-                          "）を ",
-                          math(String.raw`a=z-1`),
-                          "、",
-                          math(String.raw`b=G_{n}(z)`),
-                          " として当てる。仮定 ",
-                          math(String.raw`ab=0`),
-                          " は上の等式であり、仮定 ",
-                          math(String.raw`a\ne0`),
-                          " は準備で示した ",
-                          math(String.raw`z-1\ne0`),
-                          " である。よって ",
-                          math(String.raw`G_{n}(z)=0`),
-                          " を得る。",
-                        ]),
-                        paragraph([
-                          "この段が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " について新たに使っているのは、引いた 2 つの主張が要求する性質のほかに、",
-                          "同じ元どうしの差が零元であること、および ",
-                          math(String.raw`z-1=0`),
-                          " と ",
-                          math(String.raw`z=1`),
-                          " が同値であること（加法群であること）だけである。",
-                          "積の可換則も、代数閉であることも使っていない。実数体も複素数体も現れない。",
-                        ]),
-                        paragraph([
-                          "これは、1 の冪根の全体にわたる冪の和 ",
-                          math(String.raw`S_{n,m}`),
-                          "（",
-                          ref("claim_root_of_unity_power_sum_invariant"),
-                          "）を、原始根を取って ",
-                          math(String.raw`G_{n}`),
-                          " の値として書き直す経路のための段である。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
-              focus:
-                {
-                  id: "algebraic_eigenvalue_claim_qbar_power_difference_factorization",
-                  kind: "claim",
-                  title: {
-                    text: "代数的数の冪の差は、もとの 2 元の差を因子に持つ",
-                  },
-                  labels: ["claim_qbar_power_difference_factorization"],
-                  habitat: "Qbar",
-                  lean: [
-                    "Ising2DLambda.AlgebraicEigenvalue.qbarPowerDifferenceFactorization",
-                    "Ising2DLambda.NecSuf.AlgebraicEigenvalue.power_difference_factorization_necSuf",
-                    "Ising2DLambda.AlgebraicEigenvalue.qbarPowerDifferenceFactorization_from_necSuf",
-                  ],
-                  verification: ["sagemath/check/qbar-power-difference-factorization"],
-                  statement: [
-                    paragraph([
-                      math(String.raw`z,w\in\overline{\mathbb{Q}}`),
-                      "（",
-                      ref("def_algebraic_numbers"),
-                      "）を任意に取り、",
-                      math(String.raw`n\in\mathbb{N}`),
-                      " を任意に取る。",
-                      math(String.raw`H_{n}(z,w)\in\overline{\mathbb{Q}}`),
-                      " を ",
-                      math(String.raw`n`),
-                      " についての次の約束で定める。",
-                    ]),
-                    displayMath(
-                      String.raw`H_{0}(z,w):=0,\qquad H_{n+1}(z,w):=H_{n}(z,w)\,w+z^{n}`,
-                    ),
-                    paragraph([
-                      "このとき",
-                    ]),
-                    displayMath(String.raw`(z-w)\,H_{n}(z,w)=z^{n}-w^{n}`),
-                    paragraph([
-                      "が成り立つ。",
-                    ]),
-                  ],
-                  proof: [
-                    paragraph([
-                      math(String.raw`z,w\in\overline{\mathbb{Q}}`),
-                      " を固定する。",
-                    ]),
-                    paragraph([
-                      "準備。任意の ",
-                      math(String.raw`k\in\mathbb{N}`),
-                      " について ",
-                      math(String.raw`z\,z^{k}=z^{k}z`),
-                      " が成り立つ（冪の約束（",
-                      ref("def_root_of_unity_set"),
-                      "）が与えるのは ",
-                      math(String.raw`z^{k+1}=z^{k}z`),
-                      " の向きだけなので、",
-                      math(String.raw`z\,z^{k}`),
-                      " をこれへ結び付けるにはこの等式が要る。",
-                      "この主張の眼目は ",
-                      math(String.raw`z`),
-                      " と ",
-                      math(String.raw`w`),
-                      " が可換であること以外を使わない点にあるので、ここを積の可換則で埋めることはできない）。",
-                      math(String.raw`k`),
-                      " についての帰納法で示す。",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-z\,z^{0}&=z\cdot 1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
-&=z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
-&=1\cdot z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
-&=z^{0}z
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
-\end{aligned}`),
-                    paragraph([
-                      math(String.raw`z\,z^{k}=z^{k}z`),
-                      " を仮定する。",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)\\
-&=\bigl(z\,z^{k}\bigr)z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=\bigl(z^{k}z\bigr)z
-&&(\because\ \text{帰納法の仮定})\\
-&=z^{k+1}z
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)
-\end{aligned}`),
-                    paragraph([
-                      "以下、主張を ",
-                      math(String.raw`n`),
-                      " についての帰納法で示す。",
-                    ]),
-                    paragraph([
-                      "出発点（",
-                      math(String.raw`n=0`),
-                      "）。",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-(z-w)\,H_{0}(z,w)&=(z-w)\cdot 0
-&&(\because\ H_{0}(z,w)=0\ \text{の約束})\\
-&=0
-&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
-&=1-1
-&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元})\\
-&=z^{0}-1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
-&=z^{0}-w^{0}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{0}=1)
-\end{aligned}`),
-                    paragraph([
-                      "一歩（",
-                      math(String.raw`n`),
-                      " から ",
-                      math(String.raw`n+1`),
-                      " へ）。",
-                      math(String.raw`(z-w)\,H_{n}(z,w)=z^{n}-w^{n}`),
-                      " を仮定する。",
-                    ]),
-                    displayMath(String.raw`\begin{aligned}
-(z-w)\,H_{n+1}(z,w)&=(z-w)\bigl(H_{n}(z,w)\,w+z^{n}\bigr)
-&&(\because\ H_{n+1}(z,w)\ \text{の約束})\\
-&=(z-w)\bigl(H_{n}(z,w)\,w\bigr)+(z-w)z^{n}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
-&=\bigl((z-w)H_{n}(z,w)\bigr)w+(z-w)z^{n}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
-&=\bigl(z^{n}-w^{n}\bigr)w+(z-w)z^{n}
-&&(\because\ \text{帰納法の仮定})\\
-&=\bigl(z^{n}w-w^{n}w\bigr)+(z-w)z^{n}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
-&=\bigl(z^{n}w-w^{n+1}\bigr)+(z-w)z^{n}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{n+1}=w^{n}w)\\
-&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z\,z^{n}-w\,z^{n}\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
-&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n}z-w\,z^{n}\bigr)
-&&(\because\ \text{準備の等式}\ z\,z^{n}=z^{n}z)\\
-&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-w\,z^{n}\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z)\\
-&=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-z^{n}w\bigr)
-&&(\because\ z\ \text{と}\ w\ \text{が可換であること})\\
-&=z^{n+1}-w^{n+1}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}w\ \text{が相殺する})
-\end{aligned}`),
-                    paragraph([
-                      "出発点と一歩により、すべての ",
-                      math(String.raw`n\in\mathbb{N}`),
-                      " について主張が成り立つ。",
-                    ]),
-                    paragraph([
-                      "この段が ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " について使っているのは、加法群であること（結合則・可換則・零元・加法の逆元）、",
-                      "積が和へ分配されること、積が結合的であること、積の単位元があること、",
-                      "零元との積が零元であること、そして ",
-                      math(String.raw`z`),
-                      " と ",
-                      math(String.raw`w`),
-                      " が可換であることだけである（一歩の鎖で ",
-                      math(String.raw`z`),
-                      " と ",
-                      math(String.raw`w`),
-                      " の可換性を使っているのは第 10 の等号の 1 箇所",
-                      "（",
-                      math(String.raw`w\,z^{n}=z^{n}w`),
-                      "）だけである。第 8 の等号の ",
-                      math(String.raw`z\,z^{n}=z^{n}z`),
-                      " は同じ元どうしの入れ替えであり、準備の段で積の結合則と単位元だけから示してある）。",
-                      "積の逆元の存在も、代数閉であることも使っていない。実数体も複素数体も現れない",
-                      "（元は代数的数、指数は自然数である）。",
-                    ]),
-                    paragraph([
-                      math(String.raw`w=1`),
-                      " と取ると ",
-                      math(String.raw`H_{n}(z,1)`),
-                      " の約束は ",
-                      math(String.raw`G_{n}(z)`),
-                      "（",
-                      ref("claim_qbar_geometric_telescope"),
-                      "）の約束に一致し、この主張は伸縮の等式に一致する。",
-                      "すなわちこれは伸縮の等式を 2 元へ広げたものである。",
-                    ]),
-                    paragraph([
-                      "これは、",
-                      math(String.raw`\mu_{n}`),
-                      "（",
-                      ref("def_root_of_unity_set"),
-                      "）がちょうど ",
-                      math(String.raw`n`),
-                      " 個の元を持つことを示すための足場である。",
-                      "その論法は「",
-                      math(String.raw`z^{n}-1`),
-                      " の根が高々 ",
-                      math(String.raw`n`),
-                      " 個であること」を経由し、そこで根 ",
-                      math(String.raw`w`),
-                      " を持つ多項式が ",
-                      math(String.raw`(t-w)`),
-                      " を因子に持つことを使う。この主張はその因数分解を与える等式である。",
                     ]),
                   ],
                 },
@@ -28859,7 +28904,7 @@ S_L(A)
             role: "primary",
             element: {
               kind: "elementGroup",
-              id: "group_of_fisher_zero_definition_torus_homology_sector",
+              id: "group_of_fisher_zero_definition_sector_generating_polynomial",
               beforeFocus: [
                 {
                   role: "prerequisiteDefinition",
@@ -28898,38 +28943,32 @@ C_{L,\mathrm{v}}:=\{n_{\mathrm{v}}(\pi(-1),j)\mid j\in\mathbb{Z}/L\mathbb{Z}\}`)
                       ],
                     },
                 },
-              ],
-              focus:
                 {
-                  id: "fisher_zero_definition_torus_homology_sector",
-                  kind: "definition",
-                  title: { text: "周期トーラスの四つの辺セクター" },
-                  labels: ["def_torus_homology_sector"],
-                  habitat: "N",
-                  lean: [
-                    "Ising2DLambda.FisherZero.torusHomologySector",
-                    "Ising2DLambda.FisherZero.IsInTorusHomologySector",
-                  ],
-                  verification: ["sagemath/check/torus-homology-sector-partition"],
-                  statement: [
-                    paragraph([
-                      math(String.raw`a,b\in\{0,1\}`), " に対し、偶部分グラフのセクターを",
-                    ]),
-                    displayMath(String.raw`\mathcal{E}^{a,b}_L:=\{A\subseteq E_L\mid
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "fisher_zero_definition_torus_homology_sector",
+                      kind: "definition",
+                      title: { text: "周期トーラスの四つの辺セクター" },
+                      labels: ["def_torus_homology_sector"],
+                      habitat: "N",
+                      lean: [
+                        "Ising2DLambda.FisherZero.torusHomologySector",
+                        "Ising2DLambda.FisherZero.IsInTorusHomologySector",
+                      ],
+                      verification: ["sagemath/check/torus-homology-sector-partition"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`a,b\in\{0,1\}`), " に対し、偶部分グラフのセクターを",
+                        ]),
+                        displayMath(String.raw`\mathcal{E}^{a,b}_L:=\{A\subseteq E_L\mid
 \operatorname{Even}_L(A),\ \varepsilon_{L,\mathrm{h}}(A)=a,\ \varepsilon_{L,\mathrm{v}}(A)=b\}`),
-                    paragraph([
-                      "で定める。上付きの ", math(String.raw`a,b`), " は冪ではなく、二つの巻き付き偶奇を記録する添字である。",
-                    ]),
-                  ],
+                        paragraph([
+                          "で定める。上付きの ", math(String.raw`a,b`), " は冪ではなく、二つの巻き付き偶奇を記録する添字である。",
+                        ]),
+                      ],
+                    },
                 },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_fisher_zero_definition_sector_generating_polynomial",
-              beforeFocus: [
                 {
                   role: "supportingClaim",
                   element:
@@ -29450,7 +29489,7 @@ B
             role: "primary",
             element: {
               kind: "elementGroup",
-              id: "group_of_fisher_zero_claim_mixed_boundary_duality_identity",
+              id: "group_of_fisher_zero_definition_high_temperature_sector_polynomial",
               beforeFocus: [
                 {
                   role: "supportingClaim",
@@ -29525,35 +29564,41 @@ Z_L
                       ],
                     },
                 },
+              ],
+              focus:
                 {
-                  role: "prerequisiteDefinition",
-                  element:
-                    {
-                      id: "fisher_zero_definition_high_temperature_sector_polynomial",
-                      kind: "definition",
-                      title: { text: "高温展開のセクター多項式" },
-                      labels: ["def_high_temperature_sector_polynomial"],
-                      habitat: "Z",
-                      verification: ["sagemath/check/high-temperature-sector-decomposition"],
-                      lean: ["Ising2DLambda.FisherZero.highTemperatureSectorPolynomial"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`L\ge1`), " とし、", math(String.raw`a,b\in\{0,1\}`),
-                          " を取る。", ref("def_torus_homology_sector"), " で定めたセクター ",
-                          math(String.raw`\mathcal{E}^{a,b}_L`), " だけにわたる整数係数多項式を",
-                        ]),
-                        displayMath(String.raw`H^{a,b}_L:=\sum_{A\in\mathcal{E}^{a,b}_L}
+                  id: "fisher_zero_definition_high_temperature_sector_polynomial",
+                  kind: "definition",
+                  title: { text: "高温展開のセクター多項式" },
+                  labels: ["def_high_temperature_sector_polynomial"],
+                  habitat: "Z",
+                  verification: ["sagemath/check/high-temperature-sector-decomposition"],
+                  lean: ["Ising2DLambda.FisherZero.highTemperatureSectorPolynomial"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`L\ge1`), " とし、", math(String.raw`a,b\in\{0,1\}`),
+                      " を取る。", ref("def_torus_homology_sector"), " で定めたセクター ",
+                      math(String.raw`\mathcal{E}^{a,b}_L`), " だけにわたる整数係数多項式を",
+                    ]),
+                    displayMath(String.raw`H^{a,b}_L:=\sum_{A\in\mathcal{E}^{a,b}_L}
 (1+x)^{2L^2-|A|}(1-x)^{|A|}\ \in\ \mathbb{Z}[x]`),
-                        paragraph([
-                          "で定める。", math(String.raw`\mathcal{E}^{a,b}_L`), " は有限集合なのでこの和は有限和であり、",
-                          math(String.raw`A\subseteq E_L`), " かつ ", math(String.raw`|E_L|=2L^2`),
-                          " なので指数 ", math(String.raw`2L^2-|A|`), " は自然数である。上付きの ",
-                          math(String.raw`a,b`), " は冪ではなく、二つの巻き付き偶奇を記録する添字である。",
-                          "有限集合・自然数・整数係数多項式だけを用い、実数体、複素数体、指数関数は現れない。",
-                        ]),
-                      ],
-                    },
+                    paragraph([
+                      "で定める。", math(String.raw`\mathcal{E}^{a,b}_L`), " は有限集合なのでこの和は有限和であり、",
+                      math(String.raw`A\subseteq E_L`), " かつ ", math(String.raw`|E_L|=2L^2`),
+                      " なので指数 ", math(String.raw`2L^2-|A|`), " は自然数である。上付きの ",
+                      math(String.raw`a,b`), " は冪ではなく、二つの巻き付き偶奇を記録する添字である。",
+                      "有限集合・自然数・整数係数多項式だけを用い、実数体、複素数体、指数関数は現れない。",
+                    ]),
+                  ],
                 },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_fisher_zero_claim_mixed_boundary_duality_identity",
+              beforeFocus: [
                 {
                   role: "supportingClaim",
                   element:
@@ -53980,13 +54025,13 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
 });
 
 /**
- * 章の並びが文書順の正本である。
+ * 章の並びが文書順の正本である。**道具の章を先頭に置く**（Ising が一度も現れない章）。
  *
- * ここでは平坦化しない。**平坦なブロック列と、節・グループ所属の索引を作るのは読み込み側**
- * （`tools/content-modules.ts` と生成器）である。ここで束ねて型検査に通すと、章ごとに確定させた
- * 型が文書全体の 1 つのリテラルとして再比較され、TypeScript の予算を超える（実測 2026-08-22）。
+ * ここでは平坦化しない。平坦なブロック列と、節・グループ所属の索引を作るのは読み込み側
+ * （`tools/content-modules.ts` と生成器）である。
  */
 const chapters = [
+  chapter_tools,
   chapter_partition_polynomial,
   chapter_free_entropy,
   chapter_transfer_matrix,
