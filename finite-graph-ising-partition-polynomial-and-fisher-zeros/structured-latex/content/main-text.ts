@@ -1367,6 +1367,107 @@ d
     ],
   },
   {
+    id: "finite_graph_theorem_fisher_zero_sum_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点和と高次係数比" },
+    labels: ["theorem_fisher_zero_sum_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-sum-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        math(String.raw`E\ne\varnothing`),
+        " と仮定し、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を ",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N_{>0}`),
+        " と置く。係数を標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を ",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。このとき、",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\alpha_j
+=
+-\frac{\Omega_G(d-1)}{\Omega_G(d)}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`e_0\in E`),
+        " を一つ選び、配位 ",
+        math(String.raw`\sigma_0`),
+        " を",
+      ]),
+      displayMath(String.raw`\sigma_0(v):=
+\begin{cases}
+  \mathsf{down} & \bigl(v=\partial_G(e_0,\mathsf{target})\bigr),\\
+  \mathsf{up} & \bigl(v\ne\partial_G(e_0,\mathsf{target})\bigr)
+\end{cases}
+\qquad(v\in V)`),
+      paragraph([ref("def_spin_configuration_set"), " より、"]),
+      displayMath(String.raw`\sigma_0\in\mathcal S_G
+\quad\bigl(\because\ \sigma_0:V\to\mathsf{Spin}\text{ は写像である}\bigr).`),
+      paragraph([ref("def_finite_graph_input"), " の二端点の相異性と ", ref("def_broken_edge_set"), " より、"]),
+      displayMath(String.raw`\begin{aligned}
+e_0
+&\in B_G(\sigma_0)
+&&\bigl(\because\ \sigma_0(\partial_G(e_0,\mathsf{source}))=\mathsf{up}\ne\mathsf{down}=\sigma_0(\partial_G(e_0,\mathsf{target}))\bigr)\\
+b_G(\sigma_0)
+&\ge1
+&&\bigl(\because\ e_0\in B_G(\sigma_0)\bigr).
+\end{aligned}`),
+      paragraph([ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"), " より、"]),
+      displayMath(String.raw`\begin{aligned}
+d
+&=\max_{\sigma\in\mathcal S_G}b_G(\sigma)
+&&\bigl(\because\ \text{Ising 分配多項式の次数と最大破れ辺数}\bigr)\\
+&\ge b_G(\sigma_0)
+&&\bigl(\because\ \sigma_0\in\mathcal S_G\bigr)\\
+&\ge1
+&&\bigl(\because\ b_G(\sigma_0)\ge1\bigr).
+\end{aligned}`),
+      paragraph([
+        "係数を移した多項式を ",
+        math(String.raw`\overline P_G(x)\in\overline{\mathbb Q}[x]`),
+        " と書く。代数的閉体上の一次因子分解と ",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " の係数表示より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Omega_G(d-1)
+&=
+\Omega_G(d)
+\sum_{k=1}^{d}(-\alpha_k)
+&&\bigl(\because\ \overline P_G(x)=\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j)\text{ の }x^{d-1}\text{ の係数}\bigr)\\
+&=
+-\Omega_G(d)
+\sum_{k=1}^{d}\alpha_k
+&&\bigl(\because\ \text{分配律}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
+        " と ",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " より、",
+        math(String.raw`\Omega_G(d)\in\mathbb N_{>0}`),
+        " は最高次係数である。したがって代数的数の体で ",
+        math(String.raw`-\Omega_G(d)`),
+        " を消去すると、",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\alpha_j
+=
+-\frac{\Omega_G(d-1)}{\Omega_G(d)}.`),
+      paragraph([
+        "右辺は有理数なので、零点和は ",
+        math(String.raw`\mathbb Q\subset\overline{\mathbb Q}`),
+        " に属する。零点は代数的数、次数と多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_full_cut_coefficient_symmetry",
     kind: "theorem",
     title: { text: "全ての辺を横切る頂点二分割と係数対称性" },
