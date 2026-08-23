@@ -120,6 +120,7 @@ export const ALL_LABELS = [
   "theorem_hyperbolic_regular_type_negative_euler_characteristic",
   "theorem_hyperbolic_regular_type_nonstrict_product_difference_criterion",
   "theorem_hyperbolic_regular_type_product_difference_criterion",
+  "theorem_minimal_product_difference_hyperbolic_types",
   "theorem_primal_coboundary_transport_is_dual_boundary",
   "theorem_primal_cocycle_transport_is_dual_cycle",
   "theorem_primal_cohomology_dual_homology_transport_is_bijective",
