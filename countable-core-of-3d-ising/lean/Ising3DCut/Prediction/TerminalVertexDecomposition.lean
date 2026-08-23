@@ -194,5 +194,48 @@ theorem selectedOriginalEdges_image_externalEdge {V Edge : Type*}
     refine ⟨e, ⟨he, ?_⟩, hes⟩
     simpa [hes] using hsm
 
+/-- 完全マッチングで外部辺として選ばれなかった元の辺 `e` の端子は、
+同じ city の内部辺によって覆われる。ここでは端点 `endpoint₀ e` 側を述べる。
+端子の第二成分が元の辺 `e` 自身なので、別の元の辺の外部辺がこの端子を覆うことはない。 -/
+theorem unselected_terminal_zero_is_covered_by_internal_edge {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (e : Edge) (he : e ∈ edges)
+    (ht : (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) ∈ terminalVertices vertices incidentEdges)
+    (hUnselected : e ∉ selectedOriginalEdges edges endpoint₀ endpoint₁ matching) :
+    ∃ s ∈ matching,
+      (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) ∈ s ∧
+        s ∈ internalEdges vertices incidentEdges := by
+  obtain ⟨s, ⟨hsm, hts⟩, _⟩ := hMatching.2 _ ht
+  refine ⟨s, hsm, hts, ?_⟩
+  have hsTerminal := hMatching.1 hsm
+  rcases (mem_terminalEdges_iff vertices edges incidentEdges endpoint₀ endpoint₁ s).mp
+      hsTerminal with hsInternal | hsExternal
+  · exact hsInternal
+  · exfalso
+    obtain ⟨f, hf, hfs⟩ :=
+      (mem_externalEdges_iff edges endpoint₀ endpoint₁ s).mp hsExternal
+    have htExternalF :
+        (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) ∈ externalEdge endpoint₀ endpoint₁ f := by
+      simpa [hfs] using hts
+    have hTerminalEq :
+        (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) = ⟨endpoint₀ f, f⟩ ∨
+          (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) = ⟨endpoint₁ f, f⟩ := by
+      simpa [externalEdge, Finset.mem_insert, Finset.mem_singleton] using htExternalF
+    have hef : e = f := by
+      rcases hTerminalEq with h | h
+      · exact congrArg Sigma.snd h
+      · exact congrArg Sigma.snd h
+    apply hUnselected
+    rw [selectedOriginalEdges, Finset.mem_filter]
+    refine ⟨he, ?_⟩
+    rw [hef, hfs]
+    exact hsm
+
 
 end Ising3DCut.Prediction
