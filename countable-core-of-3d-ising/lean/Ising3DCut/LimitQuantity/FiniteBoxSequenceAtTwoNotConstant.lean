@@ -10,10 +10,32 @@
 箱の大きさの極限は使わない。
 -/
 import Ising3DCut.LimitQuantity.FiniteBoxValueAtTwoForBoxOne
+import Ising3DCut.NullModel.PartitionSupportEndpoints
 
 namespace Ising3DCut.LimitQuantity
 
 open NullModel
+
+/-- 人手証明の二つ目の有限箱計算 `Z₂(2) > 2⁸`。
+各係数の非負性により有限和は最高次項以上であり、`L = 2` では辺数が `12`、
+最高次係数が `2` 以上なので、その項だけで `2 * 2^12 > 2^8` である。 -/
+theorem isingValueSeq_two_at_two_gt_two_pow_eight :
+    (256 : ℝ) < isingValueSeq 2 2 := by
+  have hEdge : Fintype.card (Edge 2) = 12 := by native_decide
+  have hTop : 2 ≤ NullModel.multiplicity 2 (Fintype.card (Edge 2)) :=
+    NullModel.two_le_multiplicity_full (by norm_num)
+  have hLower :
+      (2 : ℚ) * 2 ^ Fintype.card (Edge 2) ≤
+        evalAtRational 2 (partitionPolynomial 2) := by
+    rw [partitionPolynomial, evalAtRational, map_sum]
+    simp only [Polynomial.coe_eval₂RingHom, Polynomial.eval₂_monomial, eq_intCast]
+    apply le_trans _ (Finset.single_le_sum
+      (fun m _ => mul_nonneg
+        (by exact_mod_cast Nat.zero_le (NullModel.multiplicity 2 m)) (by positivity))
+      (Finset.mem_range.mpr (Nat.lt_succ_self _)))
+    exact mul_le_mul_of_nonneg_right (by exact_mod_cast hTop) (by positivity)
+  unfold isingValueSeq
+  exact_mod_cast (lt_of_lt_of_le (by norm_num [hEdge]) hLower)
 
 /-- 人手証明の最初の有限箱計算 `a₁(2) = 2`。 -/
 theorem rootSeq_isingValueSeq_two_at_one
@@ -63,5 +85,11 @@ theorem rootSeq_isingValueSeq_two_not_constant_of_box_two
     (hTwoValue : (256 : ℝ) < isingValueSeq 2 2) :
     ¬ ∃ c : ℝ, rootSeq (isingValueSeq 2) siteCountSeq = fun _ => c :=
   rootSeq_isingValueSeq_two_not_constant isingValueSeq_two_at_one hTwoValue
+
+/-- `L = 1,2` の有限箱計算をともに閉じた具体版。 -/
+theorem rootSeq_isingValueSeq_two_not_constant_closed :
+    ¬ ∃ c : ℝ, rootSeq (isingValueSeq 2) siteCountSeq = fun _ => c :=
+  rootSeq_isingValueSeq_two_not_constant_of_box_two
+    isingValueSeq_two_at_two_gt_two_pow_eight
 
 end Ising3DCut.LimitQuantity
