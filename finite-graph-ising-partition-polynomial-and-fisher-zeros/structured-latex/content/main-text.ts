@@ -4773,7 +4773,8 @@ x^{m-1}
 \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
 \right)
-\prod_{j=1}^{d}(x-\alpha_j).`),
+\prod_{j=1}^{d}(x-\alpha_j)
+\quad\bigl(\because\ \text{代数的閉体上の重複度込み一次因子分解}\bigr).`),
       paragraph(["直前の一次因子分解を形式微分すると、"]),
       displayMath(String.raw`D\overline P_G(x)
 =
