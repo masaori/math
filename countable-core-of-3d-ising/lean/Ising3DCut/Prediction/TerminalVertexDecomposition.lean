@@ -10,7 +10,8 @@
 組の集合として定義し、分解が交わりを持たないこと、および端子がどの頂点に属するかが第一成分だけで決まることを示す。
 端子の総数が各頂点の接続辺の本数の有限和に等しいことも、この分解の濃度として示す。
 
-内部辺の張り方（同じ頂点から出た端子どうしをどう結ぶか）と向き付けはここでは扱わない。
+内部辺の張り方は、同じ頂点に属する相異なる二端子の組として定義する。
+向き付けはここでは扱わない。
 -/
 import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
@@ -62,5 +63,17 @@ theorem card_terminalsAt {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
     (incidentEdges : V → Finset Edge) (v : V) :
     (terminalsAt incidentEdges v).card = (incidentEdges v).card := by
   simp [terminalsAt, Finset.card_sigma]
+
+/-- 頂点 `v` の city の内部辺は、`v` に属する相異なる二端子の組である。 -/
+def internalEdgesAt {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V) : Finset (Finset (Σ _ : V, Edge)) :=
+  (terminalsAt incidentEdges v).powersetCard 2
+
+/-- 二端子の組が頂点 `v` の city の内部辺であるための条件。 -/
+theorem mem_internalEdgesAt_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V) (s : Finset (Σ _ : V, Edge)) :
+    s ∈ internalEdgesAt incidentEdges v ↔
+      s ⊆ terminalsAt incidentEdges v ∧ s.card = 2 := by
+  simp [internalEdgesAt]
 
 end Ising3DCut.Prediction
