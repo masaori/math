@@ -73,6 +73,7 @@ export const ALL_LABELS = [
   "claim_sign_of_prime_exponents_is_not_sufficient_for_limit_quantity",
   "claim_splitting_degree_galois_group_do_not_determine_polynomial",
   "claim_structural_palindrome",
+  "claim_sufficient_coarse_graining_admits_a_left_inverse",
   "claim_symmetrized_prime_exponent_data_is_reciprocal_invariant",
   "claim_tail_agreement_is_equivalence_relation",
   "claim_tail_agreement_is_sufficient_for_limit_quantity",
