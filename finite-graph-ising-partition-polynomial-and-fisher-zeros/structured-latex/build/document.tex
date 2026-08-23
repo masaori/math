@@ -4263,6 +4263,42 @@ $b$
 
 \end{proof}
 
+\begin{definition}[一般有限グラフの代数的評価点における Fisher 零点差の逆数和]\label{lab:def_fisher_zero_algebraic_shifted_reciprocal_sum}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、
+\cref{lab:def_ising_partition_polynomial}
+ の次数を
+$d:=\deg Z_G(x)\in\mathbb N$
+ と置く。係数を標準単射
+$\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]$
+ で移した多項式を
+$\overline P_G(x)\in\overline{\mathbb Q}[x]$
+、その重複度込み Fisher 零点を
+$\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
+ と書く。
+$\overline P_G(a)\ne0$
+ を満たす代数的評価点
+$a\in\overline{\mathbb Q}$
+ における Fisher 零点差の逆数和を
+
+\[\mathcal R_G(a)
+:=
+\sum_{j=1}^{d}\frac{1}{a-\alpha_j}
+\in\overline{\mathbb Q}\]
+と定める。
+\cref{lab:theorem_fisher_zero_algebraic_shifted_product_coefficient_ratio}
+ より
+$\prod_{j=1}^{d}(a-\alpha_j)\ne0$
+ であるから、各
+$a-\alpha_j\in\overline{\mathbb Q}$
+ は零でなく、全ての逆数が定義される。有限和は零点の並べ方に依存しない。
+$d=0$
+ の場合は空和
+$\mathcal R_G(a):=0\in\overline{\mathbb Q}$
+ と定める。評価点、Fisher 零点、差、逆数、有限和は代数的数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{definition}
+
 \begin{theorem}[一般有限グラフの Fisher 零点と有理評価点との差の積]\label{lab:theorem_fisher_zero_rational_shifted_product_coefficient_ratio}
 \cref{lab:def_finite_graph_input}
  の有限グラフについて、

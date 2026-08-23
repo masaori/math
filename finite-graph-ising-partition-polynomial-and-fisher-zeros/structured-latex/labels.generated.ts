@@ -17,6 +17,7 @@ export const ALL_LABELS = [
   "def_even_edge_subset",
   "def_even_subgraph_polynomial",
   "def_finite_graph_input",
+  "def_fisher_zero_algebraic_shifted_reciprocal_sum",
   "def_formal_edge_weight_sum",
   "def_ising_partition_polynomial",
   "def_mod_two_boundary_parity",
