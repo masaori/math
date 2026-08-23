@@ -4991,10 +4991,20 @@ x^{m-2}
 =
 \sum_{m=2}^{|E|}
 \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+  \eta_{\mathbb N,\mathbb Q}(m)
+  \eta_{\mathbb N,\mathbb Q}(m-1)
+\right)
+x^{m-2}
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は積を保つ}\bigr).`),
+      displayMath(String.raw`D^2\overline P_G(x)
+=
+\sum_{m=2}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)\Omega_G(m)\right)
 \right)
 x^{m-2}
-\quad\bigl(\because\ \text{二つの標準単射は積を保つ}\bigr).`),
+\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は積を保つ}\bigr).`),
       displayMath(String.raw`D^2\overline P_G(a)
 =B_G(a)
 \quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).`),
