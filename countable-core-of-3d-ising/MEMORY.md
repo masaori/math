@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-23 14:34（自動ループ）: 本流「一般の族でも、衝突を持たない粗視化は十分である」の **Lean 具体版**を書いて通した（status を `Lean 具体版まで` へ）。`lean/Ising3DCut/LimitQuantity/CollisionFreeCoarseGrainingSufficientOnGeneralFamilies.lean` に、人手証明の段と 1 対 1 に対応する三つの定理を置いた——`collision_free_coarse_graining_gives_equal_root_sequences`（任意の $L$ で粗視化の値が一致する段、衝突が無いので $A(L)=B(L)$ を得る段、同じ次数 $M(L)$ の正の乗根を取って二つの乗根列が写像として等しくなる段）、`collision_free_coarse_graining_is_sufficient_on_general_families`（写像としての一致から、一方の箱サイズ極限の存在が他方の存在を与える段）、`collision_free_coarse_graining_limits_agree_on_general_families`（実数列の極限の一意性で両者が一致する段）。定数列に限った版と違い、族への仮定は各項の正値性だけである。`Ising3DCut.lean` へ import 1 件、`check-no-sorry.sh` へ新規 3 件を登録して 325 件が sorry 非依存、`lake build` 8831 ジョブ成功、`npm run check` 136 ブロック・273 参照すべて解決、linkage 58 件。本文（構造化テキスト）は変更していない。**次 tick はこのセクションの Lean 必要十分版から。** レビューでは同セクションの本文・SageMath 検証・台帳の status を突き合わせ、許されない脱出も記号の濫用も見つからなかった。並行ストリームはまとめ締切のため見送った。
+
 - 2026-08-23 14:07（自動ループ・並行）: terminal graph の各頂点の city の内部辺を、同じ頂点に属する相異なる二端子の組 `internalEdgesAt` として定義し、その所属条件 `mem_internalEdgesAt_iff` を Lean で証明した。個別 target の build は成功。次は各頂点の内部辺を terminal graph 全体へ束ねる。
 
 - 2026-08-23 14:04（自動ループ）: 本流「一般の族でも、衝突を持たない粗視化は十分である」の SageMath 検証を新設し、恒等写像と正の有理数の素指数データについて、定数列ではない二つの族の元の値と正の乗根列が項別に一致する有限側を `QQ`・`ZZ` の厳密計算で確認した（status は `記述と SageMath まで`、linkage 58 件）。極限の存在と収束移送は唯一許された箱の大きさの極限なので有限検査の対象外。次 tick は同セクションの Lean 具体版。
