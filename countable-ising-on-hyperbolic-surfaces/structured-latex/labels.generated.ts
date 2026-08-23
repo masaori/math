@@ -115,6 +115,7 @@ export const ALL_LABELS = [
   "theorem_fixed_quotient_partition_polynomial_not_solvable_by_radicals",
   "theorem_generated_quotient_cellulation_is_hyperbolic_regular",
   "theorem_homology_class_polynomials_recombine",
+  "theorem_hyperbolic_regular_type_degree_lower_bounds",
   "theorem_hyperbolic_regular_type_iff_negative_euler_characteristic",
   "theorem_hyperbolic_regular_type_negative_euler_characteristic",
   "theorem_hyperbolic_regular_type_nonstrict_product_difference_criterion",

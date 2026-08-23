@@ -1106,4 +1106,69 @@ q\lvert V_{\mathrm{cell}}\rvert
 \end{aligned}`),
     ],
   },
+  {
+    id: "finite_cellulation_theorem_hyperbolic_regular_type_degree_lower_bounds",
+    kind: "theorem",
+    title: { text: "双曲正則型の面次数と頂点次数の下界" },
+    labels: ["theorem_hyperbolic_regular_type_degree_lower_bounds"],
+    habitat: "N",
+    verification: ["sagemath/check/hyperbolic-regular-type-degree-lower-bounds"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_hyperbolic_regular_type_set"),
+        " の有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " と双曲正則型 ",
+        math(String.raw`(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`3\le p\qquad\text{かつ}\qquad 3\le q\quad\text{in }\mathbb N.`),
+      paragraph([
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        " である。この下界は双曲正則型集合を定める自然数不等式だけから得られ、整数への移送、除算、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([math(String.raw`p\le2`), " と仮定する。このとき、"]),
+      displayMath(String.raw`\begin{aligned}
+pq
+&\le 2q
+&&\bigl(\because\ p\le2\text{ と }0<q\text{ による乗法順序保存}\bigr)\\
+&<2p+2q
+&&\bigl(\because\ 0<2p\text{ による加法順序保存}\bigr)\\
+&=2(p+q)
+&&\bigl(\because\ \text{自然数の分配律}\bigr)\\
+&<pq
+&&\bigl(\because\ \text{\blkref{def_finite_cellulation_hyperbolic_regular_type_set}}\bigr).
+\end{aligned}`),
+      paragraph(["これは ", math(String.raw`pq<pq`), " を与えて矛盾する。したがって、"]),
+      displayMath(String.raw`\begin{aligned}
+p\nleq2
+&\Longrightarrow 2<p
+&&\bigl(\because\ \mathbb N\text{ の全順序性}\bigr)\\
+&\Longrightarrow 3\le p
+&&\bigl(\because\ \mathbb N\text{ の順序の離散性}\bigr).
+\end{aligned}`),
+      paragraph([math(String.raw`q\le2`), " と仮定すると、同様に"]),
+      displayMath(String.raw`\begin{aligned}
+pq
+&\le 2p
+&&\bigl(\because\ q\le2\text{ と }0<p\text{ による乗法順序保存}\bigr)\\
+&<2p+2q
+&&\bigl(\because\ 0<2q\text{ による加法順序保存}\bigr)\\
+&=2(p+q)
+&&\bigl(\because\ \text{自然数の分配律}\bigr)\\
+&<pq
+&&\bigl(\because\ \text{\blkref{def_finite_cellulation_hyperbolic_regular_type_set}}\bigr).
+\end{aligned}`),
+      paragraph(["これは ", math(String.raw`pq<pq`), " を与えて矛盾する。したがって、"]),
+      displayMath(String.raw`\begin{aligned}
+q\nleq2
+&\Longrightarrow 2<q
+&&\bigl(\because\ \mathbb N\text{ の全順序性}\bigr)\\
+&\Longrightarrow 3\le q
+&&\bigl(\because\ \mathbb N\text{ の順序の離散性}\bigr).
+\end{aligned}`),
+    ],
+  },
 ]);
