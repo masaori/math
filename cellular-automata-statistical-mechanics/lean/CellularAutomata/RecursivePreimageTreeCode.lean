@@ -2317,6 +2317,93 @@ theorem exists_orbit_equiv_with_component_matchings_and_stability
     fun y hy => globalMap_mem_periodicComponentNodeTable N f O y hy,
     fun yW hyW => globalMap_mem_periodicComponentNodeTable NW fW (e O) yW hyW⟩
 
+/-- 写像符号の等号から、全周期成分の構造保存対応を同時に与える
+    重複度付き周期成分対応を一つ固定する。 -/
+noncomputable def structurePreservingOrbitEquiv
+    (hcode : mapCode NW fW = mapCode N f) :
+    Equiv (periodicOrbitTable N f).val (periodicOrbitTable NW fW).val :=
+  Classical.choose
+    (exists_orbit_equiv_with_component_matchings_and_stability N f NW fW hcode)
+
+/-- 固定した周期成分対応の各成分には、等しい基点語を持つ周期根と
+    両成分の一段発展安定性を同時に選べる。 -/
+theorem structurePreservingOrbitEquiv_spec
+    (hcode : mapCode NW fW = mapCode N f)
+    (O : (periodicOrbitTable N f).val) :
+    ∃ r : V → State, ∃ rW : W → State,
+      r ∈ (O : Finset (V → State)) ∧
+        rW ∈ (structurePreservingOrbitEquiv N f NW fW hcode O :
+          Finset (W → State)) ∧
+          baseWord NW fW rW = baseWord N f r ∧
+            (∀ y ∈ periodicComponentNodeTable N f O,
+              globalMap N f y ∈ periodicComponentNodeTable N f O) ∧
+            (∀ yW ∈ periodicComponentNodeTable NW fW
+                (structurePreservingOrbitEquiv N f NW fW hcode O),
+              globalMap NW fW yW ∈ periodicComponentNodeTable NW fW
+                (structurePreservingOrbitEquiv N f NW fW hcode O)) := by
+  exact Classical.choose_spec
+    (exists_orbit_equiv_with_component_matchings_and_stability N f NW fW hcode) O
+
+/-- 同時に選んだ対応成分ごとに、再帰的前像木対応から作った
+    構造保存全単射を固定する。 -/
+noncomputable def structurePreservingPeriodicComponentEquiv
+    (hcode : mapCode NW fW = mapCode N f)
+    (O : (periodicOrbitTable N f).val) :
+    Equiv ↑(periodicComponentNodeTable N f O)
+      ↑(periodicComponentNodeTable NW fW
+        (structurePreservingOrbitEquiv N f NW fW hcode O)) := by
+  let hex := structurePreservingOrbitEquiv_spec N f NW fW hcode O
+  let r := Classical.choose hex
+  let hexW := Classical.choose_spec hex
+  let rW := Classical.choose hexW
+  have hspec := Classical.choose_spec hexW
+  have hrO := hspec.1
+  have hrWO := hspec.2.1
+  have hbase := hspec.2.2.1
+  have hOmem : (O : Finset (V → State)) ∈ periodicOrbitTable N f :=
+    occurrence_mem (periodicOrbitTable N f).val O
+  have hOWmem :
+      (structurePreservingOrbitEquiv N f NW fW hcode O : Finset (W → State)) ∈
+        periodicOrbitTable NW fW :=
+    occurrence_mem (periodicOrbitTable NW fW).val
+      (structurePreservingOrbitEquiv N f NW fW hcode O)
+  have hr : IsPeriodicPoint N f r :=
+    isPeriodicPoint_of_mem_periodicOrbitTable N f O hOmem r hrO
+  have hrW : IsPeriodicPoint NW fW rW :=
+    isPeriodicPoint_of_mem_periodicOrbitTable NW fW
+      (structurePreservingOrbitEquiv N f NW fW hcode O) hOWmem rW hrWO
+  have hOrbit : periodicOrbit N f r = (O : Finset (V → State)) := by
+    obtain ⟨q, hq, hqO⟩ := (mem_periodicOrbitTable_iff N f O).1 hOmem
+    rw [periodicOrbit_eq_of_mem N f q r hq]
+    · exact hqO
+    · rwa [hqO]
+  have hOrbitW : periodicOrbit NW fW rW =
+      (structurePreservingOrbitEquiv N f NW fW hcode O : Finset (W → State)) := by
+    obtain ⟨qW, hqW, hqWO⟩ :=
+      (mem_periodicOrbitTable_iff NW fW
+        (structurePreservingOrbitEquiv N f NW fW hcode O)).1 hOWmem
+    rw [periodicOrbit_eq_of_mem NW fW qW rW hqW]
+    · exact hqWO
+    · rwa [hqWO]
+  rw [← hOrbit, ← hOrbitW]
+  exact periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase
+
+/-- 同時に選んだ周期成分対応と成分内の構造保存全単射を、
+    一意な周期成分分割に沿って全配位の全単射へ接着する。 -/
+noncomputable def structurePreservingConfigurationEquiv
+    (hcode : mapCode NW fW = mapCode N f) :
+    Equiv (V → State) (W → State) :=
+  (configurationComponentSigmaEquiv N f).symm |>.trans
+    (Equiv.sigmaCongr (structurePreservingOrbitEquiv N f NW fW hcode)
+      (structurePreservingPeriodicComponentEquiv N f NW fW hcode)) |>.trans
+        (configurationComponentSigmaEquiv NW fW)
+
+/-- 周期成分ごとの再帰的前像木対応を接着した全配位対応は全単射である。 -/
+theorem structurePreservingConfigurationEquiv_bijective
+    (hcode : mapCode NW fW = mapCode N f) :
+    Function.Bijective (structurePreservingConfigurationEquiv N f NW fW hcode) :=
+  (structurePreservingConfigurationEquiv N f NW fW hcode).bijective
+
 end OrbitTreeMatching
 
 section ConjugacyTransport
