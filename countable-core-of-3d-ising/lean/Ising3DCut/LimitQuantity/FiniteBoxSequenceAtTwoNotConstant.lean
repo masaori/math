@@ -2,11 +2,14 @@
 人手証明「有理点 2 では有限箱の量の列は定数列でない」
 （ラベル `claim_finite_box_sequence_at_two_is_not_constant`）の Lean 具体版。
 
-この tick では、`L = 1, 2` の有限箱計算から正の実数乗根を取った二項が
-相異なることを導く段を形式化する。有限箱計算そのものの Lean 化は次段に残す。
+`L = 1, 2` の有限箱計算から正の実数乗根を取った二項が相異なることを導く段を形式化する。
+`L = 1` の有限箱計算 `Z_1(2) = 2` は
+`FiniteBoxValueAtTwoForBoxOne`（`isingValueSeq_two_at_one`）で閉じてあるので、
+下の `rootSeq_isingValueSeq_two_not_constant_of_box_two` はそれを外した形になる。
+`L = 2` の有限箱計算 `Z_2(2) > 2^8` の Lean 化は次段に残す。
 箱の大きさの極限は使わない。
 -/
-import Ising3DCut.LimitQuantity.LimitQuantityAtOneEqualsTwo
+import Ising3DCut.LimitQuantity.FiniteBoxValueAtTwoForBoxOne
 
 namespace Ising3DCut.LimitQuantity
 
@@ -54,5 +57,11 @@ theorem rootSeq_isingValueSeq_two_not_constant :
   rw [rootSeq_isingValueSeq_two_at_one hOneValue] at hOne
   apply rootSeq_isingValueSeq_two_at_two_ne_two hTwoValue
   exact hTwo.trans hOne.symm
+
+/-- `L = 1` の有限箱計算を閉じた版。残る仮定は `L = 2` の有限箱計算だけである。 -/
+theorem rootSeq_isingValueSeq_two_not_constant_of_box_two
+    (hTwoValue : (256 : ℝ) < isingValueSeq 2 2) :
+    ¬ ∃ c : ℝ, rootSeq (isingValueSeq 2) siteCountSeq = fun _ => c :=
+  rootSeq_isingValueSeq_two_not_constant isingValueSeq_two_at_one hTwoValue
 
 end Ising3DCut.LimitQuantity

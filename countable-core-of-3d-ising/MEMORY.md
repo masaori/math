@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-24 06:36: 本流「有理点 2 では有限箱の量の列は定数列でない」の Lean 具体版で、$L=1$ の箱に辺が無いこと（`card_edge_one`）から分配多項式が定数 $2$ になること（`partitionPolynomial_box_one`）を示し、$Z_1(2)=2$（`isingValueSeq_two_at_one`）を仮定から証明へ閉じた。非定数性の定理は $L=2$ の不等式だけを仮定する形（`rootSeq_isingValueSeq_two_not_constant_of_box_two`）へ縮んだ。新ファイルは `lean/Ising3DCut/LimitQuantity/FiniteBoxValueAtTwoForBoxOne.lean`。sorry 検査の登録は 370 件。次は係数の非負性と台の最高次係数から $Z_2(2)>2^8$ を Lean で導き、具体版を閉じる。
 - 2026-08-24 06:04: 本流「有理点 2 では有限箱の量の列は定数列でない」の Lean 具体版に着手し、有限箱の値の不等式から正の実数乗根列の非定数性を導く段を形式化した。次は $Z_1(2)=2$ と $Z_2(2)>2^8$ 自体を既存の係数・台の定理から Lean で導き、具体版を閉じる。
 - 2026-08-24 05:33: 本流の記述層。有理点 2 では有限箱の量の列が定数列でないことを示した（`claim_finite_box_sequence_at_two_is_not_constant`）。$a_1(2)=2$、$a_2(2)>2$。有理点 1 で極限量の存在を閉じた定数列の経路が有理点 2 に使えないことが、観察ではなく定理になった。箱の大きさの極限は使っていない。SageMath 検証も同 tick で通した（$Z_2(1)=256$、$Z_2(2)=36450$）。次は同セクションの Lean 具体版。
 - 2026-08-24 05:05（並行）: Pfaffian 予言の Lean 具体版で、完全マッチングのうち外部辺として選ばれたものに対応する元の辺の集合 `selectedOriginalEdges` を定義し、その外部辺像が完全マッチングと全外部辺の共通部分に等しいことを `selectedOriginalEdges_image_externalEdge` で示した。次は選ばれなかった元の辺が内部辺で覆われる端子配置を決める。

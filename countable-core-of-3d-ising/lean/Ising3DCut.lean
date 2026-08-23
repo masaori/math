@@ -200,3 +200,4 @@ import Ising3DCut.LimitQuantity.LimitQuantityAtOneEqualsTwo
 import Ising3DCut.NecSuf.LimitQuantityAtOneEqualsTwo
 import Ising3DCut.LimitQuantity.LimitQuantityAtOneEqualsTwoFromNecSuf
 import Ising3DCut.LimitQuantity.FiniteBoxSequenceAtTwoNotConstant
+import Ising3DCut.LimitQuantity.FiniteBoxValueAtTwoForBoxOne
