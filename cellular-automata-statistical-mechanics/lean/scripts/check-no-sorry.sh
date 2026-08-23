@@ -1021,6 +1021,7 @@ targets=(
   CellularAutomata.RecursivePreimageTreeCode.componentwiseConfigurationMap_bijective
   CellularAutomata.RecursivePreimageTreeCode.exists_orbit_equiv_with_tree_matchings
   CellularAutomata.RecursivePreimageTreeCode.exists_orbit_equiv_with_component_matchings
+  CellularAutomata.RecursivePreimageTreeCode.exists_orbit_equiv_with_component_matchings_and_stability
   CellularAutomata.RecursivePreimageTreeCode.image_periodicOrbitTable
   CellularAutomata.RecursivePreimageTreeCode.mapCode_transport
 )

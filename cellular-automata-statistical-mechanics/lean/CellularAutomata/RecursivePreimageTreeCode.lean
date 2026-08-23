@@ -2295,6 +2295,28 @@ theorem exists_orbit_equiv_with_component_matchings
   exact periodic_index_matching_preserves_edges
     N f NW fW r rW hr hrW hbase n hn
 
+/-- 写像符号が等しいとき、全ての周期成分について再帰的前像木対応を
+    同時に選べ、両側の一段発展が対応する各周期成分を保存する。 -/
+theorem exists_orbit_equiv_with_component_matchings_and_stability
+    (hcode : mapCode NW fW = mapCode N f) :
+    ∃ e : (periodicOrbitTable N f).val ≃ (periodicOrbitTable NW fW).val,
+      ∀ O : (periodicOrbitTable N f).val,
+        ∃ r : V → State, ∃ rW : W → State,
+          r ∈ (O : Finset (V → State)) ∧
+            rW ∈ (e O : Finset (W → State)) ∧
+              baseWord NW fW rW = baseWord N f r ∧
+                (∀ y ∈ periodicComponentNodeTable N f O,
+                  globalMap N f y ∈ periodicComponentNodeTable N f O) ∧
+                (∀ yW ∈ periodicComponentNodeTable NW fW (e O),
+                  globalMap NW fW yW ∈ periodicComponentNodeTable NW fW (e O)) := by
+  obtain ⟨e, he⟩ := exists_orbit_equiv_with_component_matchings
+    N f NW fW hcode
+  refine ⟨e, fun O => ?_⟩
+  obtain ⟨r, rW, hrO, hrWO, hbase, _⟩ := he O
+  exact ⟨r, rW, hrO, hrWO, hbase,
+    fun y hy => globalMap_mem_periodicComponentNodeTable N f O y hy,
+    fun yW hyW => globalMap_mem_periodicComponentNodeTable NW fW (e O) yW hyW⟩
+
 end OrbitTreeMatching
 
 section ConjugacyTransport
