@@ -350,6 +350,9 @@ targets=(
   Ising3DCut.LimitQuantity.colliding_coarse_graining_is_not_sufficient_for_limit_quantity
   Ising3DCut.LimitQuantity.primeTruncation
   Ising3DCut.LimitQuantity.finite_prime_truncation_has_a_value_collision
+  Ising3DCut.LimitQuantity.intSign
+  Ising3DCut.LimitQuantity.signCollapse
+  Ising3DCut.LimitQuantity.sign_collapse_has_a_value_collision
   Ising3DCut.LimitQuantity.magnitude_truncation_has_a_value_collision
   Ising3DCut.LimitQuantity.magnitude_truncation_has_a_value_collision_fromNecSuf
   Ising3DCut.NecSuf.finite_coordinate_truncation_has_a_value_collision

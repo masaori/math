@@ -175,3 +175,4 @@ import Ising3DCut.NecSuf.CollidingMapNotSufficient
 import Ising3DCut.NecSuf.MagnitudeTruncationNotSufficient
 import Ising3DCut.NecSuf.FinitePrimeTruncationCollision
 import Ising3DCut.NecSuf.MagnitudeTruncationCollision
+import Ising3DCut.LimitQuantity.SignCollapseCollision
