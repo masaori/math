@@ -371,6 +371,13 @@ targets=(
   Ising3DCut.LimitQuantity.positiveCoarseLeftInverse_spec
   Ising3DCut.LimitQuantity.positiveCoarseLeftInverse_leftInverse
   Ising3DCut.LimitQuantity.positiveCoarseLeftInverse_unique
+  Ising3DCut.NecSuf.exists_good_preimage
+  Ising3DCut.NecSuf.good_preimage_unique
+  Ising3DCut.NecSuf.goodLeftInverse
+  Ising3DCut.NecSuf.goodLeftInverse_spec
+  Ising3DCut.NecSuf.goodLeftInverse_leftInverse
+  Ising3DCut.NecSuf.goodLeftInverse_unique
+  Ising3DCut.LimitQuantity.positiveCoarseLeftInverse_leftInverse_fromNecSuf
   Ising3DCut.LimitQuantity.finite_prime_truncation_has_a_value_collision
   Ising3DCut.LimitQuantity.intSign
   Ising3DCut.LimitQuantity.signCollapse
