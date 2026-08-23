@@ -365,6 +365,12 @@ targets=(
   Ising3DCut.LimitQuantity.collision_free_coarse_graining_is_sufficient_on_general_families_viaNecSuf
   Ising3DCut.LimitQuantity.collision_free_coarse_graining_limits_agree_on_general_families_viaNecSuf
   Ising3DCut.LimitQuantity.primeTruncation
+  Ising3DCut.LimitQuantity.exists_positive_preimage
+  Ising3DCut.LimitQuantity.positive_preimage_unique
+  Ising3DCut.LimitQuantity.positiveCoarseLeftInverse
+  Ising3DCut.LimitQuantity.positiveCoarseLeftInverse_spec
+  Ising3DCut.LimitQuantity.positiveCoarseLeftInverse_leftInverse
+  Ising3DCut.LimitQuantity.positiveCoarseLeftInverse_unique
   Ising3DCut.LimitQuantity.finite_prime_truncation_has_a_value_collision
   Ising3DCut.LimitQuantity.intSign
   Ising3DCut.LimitQuantity.signCollapse
