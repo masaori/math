@@ -703,6 +703,13 @@ noncomputable def periodicOrbit (q : V → State) : Finset (V → State) :=
 noncomputable def baseWord (q : V → State) : List ℕ :=
   List.ofFn fun n : Fin (minPeriod N f q) => recursiveCode N f (iterate N f n q)
 
+/-- 具体版の基点語は、必要十分版の周期長を最小周期、反復列を大域写像の反復、
+点符号を完成した再帰的前像木符号とする特殊化である。 -/
+theorem baseWord_eq_necessary_sufficient (q : V → State) :
+    baseWord N f q =
+      NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.baseWord
+        (minPeriod N f) (iterate N f) (recursiveCode N f) q := rfl
+
 /-- 一つの周期軌道を、全基点語の有限集合で表した成分符号。 -/
 noncomputable def componentCode (q : V → State) : Finset (List ℕ) :=
   (periodicOrbit N f q).image (baseWord N f)
@@ -2730,12 +2737,13 @@ theorem recursiveCode_transport (y : V → State) :
 /-- 共役全単射は周期点の基点語を保存する。 -/
 theorem baseWord_transport (q : V → State) :
     baseWord NW fW (h q) = baseWord N f q := by
-  simp only [baseWord, minPeriod_transport N f NW fW h hconj q]
-  congr 1
-  funext n
-  simp only [Fin.val_cast]
-  rw [← IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj (n : ℕ) q,
-    recursiveCode_transport N f NW fW h hconj]
+  rw [baseWord_eq_necessary_sufficient, baseWord_eq_necessary_sufficient]
+  exact NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.baseWord_transport
+    (minPeriod N f) (minPeriod NW fW) (iterate N f) (iterate NW fW)
+    (recursiveCode N f) (recursiveCode NW fW) h
+    (minPeriod_transport N f NW fW h hconj)
+    (fun n y => IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj n y)
+    (recursiveCode_transport N f NW fW h hconj) q
 
 /-- 共役全単射は周期軌道の有限表を全単射に移す。 -/
 theorem image_periodicOrbit (q : V → State) :

@@ -198,4 +198,25 @@ theorem completedCode_transport (childrenX : X → Finset X) (childrenY : Y → 
   simp only [completedCode, hlevel x, ← hbound]
   exact codeAtDepth_transport childrenX childrenY h hchildren _ x
 
+/-- 選んだ周期一周に沿って点符号を読み取った有限語。
+定義に入るのは周期長、反復列、点符号だけである。 -/
+def baseWord (period : X → ℕ) (iterate : ℕ → X → X) (code : X → ℕ)
+    (x : X) : List ℕ :=
+  List.ofFn fun n : Fin (period x) => code (iterate n x)
+
+/-- 全単射が周期長、各反復、点符号を保存するなら基点語も保存する。
+有限性、自己写像の反復則、周期性、点符号の再帰構成は使わない。 -/
+theorem baseWord_transport (periodX : X → ℕ) (periodY : Y → ℕ)
+    (iterateX : ℕ → X → X) (iterateY : ℕ → Y → Y)
+    (codeX : X → ℕ) (codeY : Y → ℕ) (h : X ≃ Y)
+    (hperiod : ∀ x, periodY (h x) = periodX x)
+    (hiterate : ∀ n x, h (iterateX n x) = iterateY n (h x))
+    (hcode : ∀ x, codeY (h x) = codeX x) (x : X) :
+    baseWord periodY iterateY codeY (h x) = baseWord periodX iterateX codeX x := by
+  simp only [baseWord, hperiod x]
+  congr 1
+  funext n
+  simp only [Fin.val_cast]
+  rw [← hiterate (n : ℕ) x, hcode]
+
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance
