@@ -2467,6 +2467,22 @@ theorem structurePreservingOrbitEquiv_spec
   exact Classical.choose_spec
     (exists_orbit_equiv_with_component_matchings_and_stability N f NW fW hcode) O
 
+/-- 有限集合の等号に沿って、部分型の間の全単射を移す。 -/
+noncomputable def transferEquiv {X Y : Type} {P P' : Finset X} {Q Q' : Finset Y}
+    (hP : P = P') (hQ : Q = Q') (e : ↑P ≃ ↑Q) : ↑P' ≃ ↑Q' := by
+  subst hP
+  subst hQ
+  exact e
+
+/-- 移した全単射の値は、元の全単射の値と同じ元である。 -/
+theorem transferEquiv_coe {X Y : Type} {P P' : Finset X} {Q Q' : Finset Y}
+    (hP : P = P') (hQ : Q = Q') (e : ↑P ≃ ↑Q) (y : ↑P') :
+    ((transferEquiv hP hQ e y : Y))
+      = (e ⟨(y : X), by rw [hP]; exact y.property⟩ : Y) := by
+  subst hP
+  subst hQ
+  rfl
+
 /-- 同時に選んだ対応成分ごとに、再帰的前像木対応から作った
     構造保存全単射を固定する。 -/
 noncomputable def structurePreservingPeriodicComponentEquiv
@@ -2508,8 +2524,9 @@ noncomputable def structurePreservingPeriodicComponentEquiv
     rw [periodicOrbit_eq_of_mem NW fW qW rW hqW]
     · exact hqWO
     · rwa [hqWO]
-  rw [← hOrbit, ← hOrbitW]
-  exact periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase
+  exact transferEquiv (congrArg (periodicComponentNodeTable N f) hOrbit)
+    (congrArg (periodicComponentNodeTable NW fW) hOrbitW)
+    (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase)
 
 /-- 同時に選んだ周期成分対応と成分内の構造保存全単射を、
     一意な周期成分分割に沿って全配位の全単射へ接着する。 -/
@@ -2572,29 +2589,42 @@ theorem structurePreservingPeriodicComponentEquiv_commutes_globalMap
     rw [periodicOrbit_eq_of_mem N f q r hq]
     · exact hqO
     · rwa [hqO]
-  let y' : ↑(periodicComponentNodeTable N f (periodicOrbit N f r)) :=
-    ⟨y, by rwa [hOrbit]⟩
-  simpa only [structurePreservingPeriodicComponentEquiv] using
-    periodicComponentEquivOfBaseWordEq_commutes_globalMap
-      N f NW fW r rW hr hrW hbase y'
+  simp only [structurePreservingPeriodicComponentEquiv, transferEquiv_coe]
+  exact periodicComponentEquivOfBaseWordEq_commutes_globalMap
+    N f NW fW r rW hr hrW hbase ⟨(y : V → State), by rw [hOrbit]; exact y.property⟩
+
+/-- 配位が属する周期成分表を一つ指定すれば、接着した全配位対応の値は
+    その成分の構造保存全単射の値に一致する。 -/
+theorem structurePreservingConfigurationEquiv_apply_of_mem
+    (hcode : mapCode NW fW = mapCode N f)
+    (O : (periodicOrbitTable N f).val) (y : V → State)
+    (hy : y ∈ periodicComponentNodeTable N f O) :
+    structurePreservingConfigurationEquiv N f NW fW hcode y =
+      (structurePreservingPeriodicComponentEquiv N f NW fW hcode O ⟨y, hy⟩ : W → State) := by
+  have hidx : periodicComponentOccurrenceIndex N f y = O :=
+    periodicComponentOccurrenceIndex_eq_of_mem N f O y hy
+  subst hidx
+  rw [structurePreservingConfigurationEquiv_apply]
 
 /-- 写像符号の等号から接着した全配位全単射は一段発展と可換する。 -/
 theorem structurePreservingConfigurationEquiv_commutes_globalMap
     (hcode : mapCode NW fW = mapCode N f) (y : V → State) :
     structurePreservingConfigurationEquiv N f NW fW hcode (globalMap N f y) =
       globalMap NW fW (structurePreservingConfigurationEquiv N f NW fW hcode y) := by
-  let O := periodicComponentOccurrenceIndex N f y
-  have hy : y ∈ periodicComponentNodeTable N f O := by
-    exact periodicComponentIndex_spec N f y
-  have hFy : globalMap N f y ∈ periodicComponentNodeTable N f O :=
-    globalMap_mem_periodicComponentNodeTable N f O y hy
-  have hindex : periodicComponentOccurrenceIndex N f (globalMap N f y) = O :=
-    periodicComponentOccurrenceIndex_eq_of_mem N f O (globalMap N f y) hFy
-  rw [structurePreservingConfigurationEquiv_apply,
-    structurePreservingConfigurationEquiv_apply]
-  simpa only [hindex] using
-    (structurePreservingPeriodicComponentEquiv_commutes_globalMap
-      N f NW fW hcode O ⟨y, hy⟩).symm
+  have hy : y ∈ periodicComponentNodeTable N f (periodicComponentOccurrenceIndex N f y) :=
+    periodicComponentIndex_spec N f y
+  have hFy : globalMap N f y ∈
+      periodicComponentNodeTable N f (periodicComponentOccurrenceIndex N f y) :=
+    globalMap_mem_periodicComponentNodeTable N f _ y hy
+  have hindex : periodicComponentOccurrenceIndex N f (globalMap N f y)
+      = periodicComponentOccurrenceIndex N f y :=
+    periodicComponentOccurrenceIndex_eq_of_mem N f _ (globalMap N f y) hFy
+  rw [structurePreservingConfigurationEquiv_apply_of_mem N f NW fW hcode
+      (periodicComponentOccurrenceIndex N f y) (globalMap N f y) hFy,
+    structurePreservingConfigurationEquiv_apply_of_mem N f NW fW hcode
+      (periodicComponentOccurrenceIndex N f y) y hy]
+  exact (structurePreservingPeriodicComponentEquiv_commutes_globalMap
+    N f NW fW hcode (periodicComponentOccurrenceIndex N f y) ⟨y, hy⟩).symm
 
 end OrbitTreeMatching
 
@@ -2789,5 +2819,32 @@ theorem mapCode_transport : mapCode NW fW = mapCode N f := by
     componentCode_eq_of_mem N f q hne.choose hq hne.choose_spec]
 
 end ConjugacyTransport
+
+section CompleteInvariant
+
+variable {W : Type} [Fintype W] [DecidableEq W]
+variable (NW : W → Finset W)
+variable (fW : (w : W) → (↥(NW w) → State) → State)
+
+/-- 写像符号が等しければ共役全単射を構成できる
+    （`claim_recursive_preimage_tree_code_completeness` の結論）。 -/
+theorem exists_conjugacy_of_mapCode_eq (hcode : mapCode NW fW = mapCode N f) :
+    ∃ h : (V → State) ≃ (W → State),
+      ∀ y, h (globalMap N f y) = globalMap NW fW (h y) :=
+  ⟨structurePreservingConfigurationEquiv N f NW fW hcode,
+    structurePreservingConfigurationEquiv_commutes_globalMap N f NW fW hcode⟩
+
+/-- 再帰的前像木符号は共役の完全不変量である
+    （`claim_recursive_preimage_tree_code_complete_invariant` の結論）。 -/
+theorem mapCode_eq_iff_exists_conjugacy :
+    mapCode NW fW = mapCode N f ↔
+      ∃ h : (V → State) ≃ (W → State),
+        ∀ y, h (globalMap N f y) = globalMap NW fW (h y) := by
+  constructor
+  · exact exists_conjugacy_of_mapCode_eq N f NW fW
+  · rintro ⟨h, hconj⟩
+    exact mapCode_transport N f NW fW h hconj
+
+end CompleteInvariant
 
 end CellularAutomata.RecursivePreimageTreeCode
