@@ -951,4 +951,69 @@ q\lvert V_{\mathrm{cell}}\rvert
 \end{aligned}`),
     ],
   },
+  {
+    id: "finite_cellulation_theorem_hyperbolic_regular_type_iff_negative_euler_characteristic",
+    kind: "theorem",
+    title: { text: "正則型の双曲性と負の Euler 標数の同値性" },
+    labels: ["theorem_hyperbolic_regular_type_iff_negative_euler_characteristic"],
+    habitat: "Z",
+    verification: ["sagemath/check/hyperbolic-regular-type-iff-negative-euler-characteristic"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_regular_type_set"),
+        " の有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " と正則型 ",
+        math(String.raw`(p,q)\in\operatorname{RegularTypes}(\mathcal X)`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)
+\quad\Longleftrightarrow\quad
+\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)<0.`),
+      paragraph([
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        " であり、Euler 標数は整数に属する。この同値性は自然数の双曲不等式と整数の Euler incidence 等式だけから得られ、除算、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "自然数から整数への標準単射を ",
+        math(String.raw`\iota_{\mathbb N,\mathbb Z}:\mathbb N\to\mathbb Z`),
+        " とし、",
+      ]),
+      displayMath(String.raw`\bar p:=\iota_{\mathbb N,\mathbb Z}(p),\qquad
+\bar q:=\iota_{\mathbb N,\mathbb Z}(q),\qquad
+\bar e:=\iota_{\mathbb N,\mathbb Z}\!\left(\lvert E_{\mathrm{cell}}\rvert\right)`),
+      paragraph(["順方向は既に証明した負性定理そのものである。"]),
+      displayMath(String.raw`(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)
+\Longrightarrow
+\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)<0
+\quad\bigl(\because\ \text{\blkref{theorem_hyperbolic_regular_type_negative_euler_characteristic}}\bigr).`),
+      paragraph(["逆方向を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)<0
+&\Longrightarrow
+\bar p\,\bar q\,
+\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)<0
+&&\bigl(\because\ 0<\bar p\,\bar q\text{ かつ正の整数による乗法は狭義順序を保つ}\bigr)\\
+&\Longrightarrow
+\left(
+  2\bar p+2\bar q-\bar p\,\bar q
+\right)\bar e<0
+&&\bigl(\because\ \text{\blkref{theorem_regular_cellulation_euler_incidence_identity}}\bigr)\\
+&\Longrightarrow
+2\bar p+2\bar q-\bar p\,\bar q<0
+&&\bigl(\because\ 0<\bar e\text{ かつ正の整数による乗法は狭義順序を反映する}\bigr)\\
+&\Longrightarrow
+2\bar p+2\bar q<\bar p\,\bar q
+&&\bigl(\because\ \text{整数の加法による順序保存}\bigr)\\
+&\Longrightarrow
+2(p+q)<pq
+&&\bigl(\because\ \text{標準単射は加法・乗法・狭義順序を反映する}\bigr)\\
+&\Longrightarrow
+(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)
+&&\bigl(\because\ \text{\blkref{def_finite_cellulation_hyperbolic_regular_type_set}}\bigr).
+\end{aligned}`),
+    ],
+  },
 ]);
