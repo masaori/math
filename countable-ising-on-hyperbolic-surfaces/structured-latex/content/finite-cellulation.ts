@@ -632,4 +632,85 @@ D_V(\mathcal X):=d_V^{\mathcal X}\!\left(V_{\mathrm{cell}}\right)`),
       ]),
     ],
   },
+  {
+    id: "finite_cellulation_theorem_regular_face_edge_incidence",
+    kind: "theorem",
+    title: { text: "正則セル分割の面と辺の incidence 等式" },
+    labels: ["theorem_regular_cellulation_face_edge_incidence"],
+    habitat: "N",
+    verification: ["sagemath/check/regular-cellulation-face-edge-incidence"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_regular_type_set"),
+        " の有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " と正則型 ",
+        math(String.raw`(p,q)\in\operatorname{RegularTypes}(\mathcal X)`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`p\lvert F_{\mathrm{cell}}\rvert
+=
+2\lvert E_{\mathrm{cell}}\rvert
+\in\mathbb N.`),
+      paragraph([
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        " であり、",
+        math(String.raw`\lvert F_{\mathrm{cell}}\rvert,\lvert E_{\mathrm{cell}}\rvert\in\mathbb N`),
+        " である。等式は面境界の有限な辺出現位置を二通りに数えるだけであり、実数・複素数・極限・積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "全ての面境界に現れる辺出現位置の有限集合を",
+      ]),
+      displayMath(String.raw`\mathcal O_{\mathcal X}
+:=
+\left\{
+  (f,i)
+  \ \middle|\
+  f\in F_{\mathrm{cell}},\ i\in P_f
+\right\}`),
+      paragraph([
+        "と置く。",
+        ref("def_finite_cellulation_regular_type_set"),
+        " により全ての ",
+        math(String.raw`f\in F_{\mathrm{cell}}`),
+        " について ",
+        math(String.raw`\lvert P_f\rvert=p`),
+        " であり、",
+        ref("def_finite_cellulation_opposite_edge_occurrences"),
+        " により各 ",
+        math(String.raw`e\in E_{\mathrm{cell}}`),
+        " の出現位置ファイバーは二元である。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+p\lvert F_{\mathrm{cell}}\rvert
+&=
+\sum_{f\in F_{\mathrm{cell}}}p
+&&\bigl(\because\ \text{有限集合上の定数和}\bigr)\\
+&=
+\sum_{f\in F_{\mathrm{cell}}}\lvert P_f\rvert
+&&\bigl(\because\ \text{正則型集合の定義}\bigr)\\
+&=
+\lvert\mathcal O_{\mathcal X}\rvert
+&&\bigl(\because\ \text{面ごとの互いに素な有限和集合の元数}\bigr)\\
+&=
+\sum_{e\in E_{\mathrm{cell}}}
+\left\lvert
+  \left\{
+    (f,i)\in\mathcal O_{\mathcal X}
+    \ \middle|\
+    e_{f,i}=e
+  \right\}
+\right\rvert
+&&\bigl(\because\ \text{辺成分による有限ファイバー分割}\bigr)\\
+&=
+\sum_{e\in E_{\mathrm{cell}}}2
+&&\bigl(\because\ \text{各辺の逆向き二回出現}\bigr)\\
+&=
+2\lvert E_{\mathrm{cell}}\rvert
+&&\bigl(\because\ \text{有限集合上の定数和}\bigr).
+\end{aligned}`),
+    ],
+  },
 ]);
