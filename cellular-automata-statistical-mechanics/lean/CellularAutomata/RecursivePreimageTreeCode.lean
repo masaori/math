@@ -495,6 +495,30 @@ theorem treeNodeEquivOfMatching_preserves_parent_edge
       exact TruncatedTreeParentEdge.inChild (N := NW) (f := fW)
         depth _ (Classical.choose hmatch z) (ih (Classical.choose_spec hmatch z))
 
+/-- 打ち切り前像木の各節点は根そのものか、一意な一段発展先を表す
+    親節点を持つ。後続深さでは、根直下と子部分木内部を分けて示す。 -/
+theorem truncatedTreeNode_eq_root_or_exists_parent :
+    (depth : ℕ) → (y : V → State) → (u : TruncatedTreeNode N f depth y) →
+      u = truncatedTreeNodeRoot N f depth y ∨
+        ∃ v : TruncatedTreeNode N f depth y,
+          TruncatedTreeParentEdge N f depth y u v
+  | 0, _, u => by
+      left
+      cases u
+      rfl
+  | depth + 1, y, Sum.inl u => by
+      left
+      exact congrArg Sum.inl (Subsingleton.elim u PUnit.unit)
+  | depth + 1, y, Sum.inr ⟨z, u⟩ => by
+      rcases truncatedTreeNode_eq_root_or_exists_parent depth z u with hu | ⟨v, huv⟩
+      · right
+        subst u
+        exact ⟨truncatedTreeNodeRoot N f (depth + 1) y,
+          TruncatedTreeParentEdge.rootChild (N := N) (f := f) depth y z⟩
+      · right
+        exact ⟨Sum.inr ⟨z, v⟩,
+          TruncatedTreeParentEdge.inChild (N := N) (f := f) depth y z huv⟩
+
 /-- 正の深さの前像木対応から選ぶ子の全単射は、対応する各子を
     それぞれの親へ送る一段発展を両側で保存する。これは完全性証明の
     非周期辺上の共役条件そのものであり、全配位への接着はまだ行わない。 -/
@@ -1260,6 +1284,34 @@ theorem preimageTreeNodeTableEquivOfMatching_bijective
         hdepth hdepthW hmatch) :=
   (preimageTreeNodeTableEquivOfMatching N f NW fW q qW hq hqW depth
     hdepth hdepthW hmatch).bijective
+
+/-- 再帰的対応から作った有限配位表全単射は、根を対応先の根へ送る。 -/
+theorem preimageTreeNodeTableEquivOfMatching_maps_root
+    {W : Type} [Fintype W] [DecidableEq W]
+    (NW : W → Finset W)
+    (fW : (w : W) → (↥(NW w) → State) → State)
+    (q : V → State) (qW : W → State)
+    (hq : IsPeriodicPoint N f q) (hqW : IsPeriodicPoint NW fW qW)
+    (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth)
+    (hdepthW : 2 ^ Fintype.card W - 1 ≤ depth)
+    (hmatch : HasTreeMatching N f NW fW depth q qW) :
+    let sourceRoot :=
+      truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth
+        (truncatedTreeNodeRoot N f depth q)
+    (preimageTreeNodeTableEquivOfMatching N f NW fW q qW hq hqW depth
+        hdepth hdepthW hmatch sourceRoot : W → State) = qW := by
+  dsimp only
+  change
+    ((truncatedTreeNodeEquivPreimageTreeNodeTable NW fW qW hqW depth hdepthW)
+      (treeNodeEquivOfMatching N f NW fW depth q qW hmatch
+        ((truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth).symm
+          (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth
+            (truncatedTreeNodeRoot N f depth q)))) : W → State) = qW
+  rw [Equiv.symm_apply_apply]
+  rw [treeNodeEquivOfMatching_root_all]
+  rw [truncatedTreeNodeEquivPreimageTreeNodeTable_apply]
+  rw [truncatedTreeNodeConfiguration_root]
 
 /-- 再帰対応で選ばれた非周期子は、構造保存された有限配位表の
     全単射によって対応先の非周期子そのものへ移る。 -/
@@ -2045,6 +2097,46 @@ theorem periodicComponentEquivOfBaseWordEq_preserves_parent_edge
     simp only [Equiv.sigmaCongr, Equiv.sigmaCongrRight, Equiv.sigmaCongrLeft]
     convert hedge.2 using 1 <;> simp [depth]
     all_goals congr 1
+
+/-- 対応する一つの周期成分では、同じ有限添字で対応させた周期辺と、
+    周期成分全単射で対応させた非周期前像木の全親子辺の双方で
+    一段発展が保存される。 -/
+theorem periodicComponentEquivOfBaseWordEq_preserves_all_component_edges
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r) :
+    let depth := max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)
+    (∀ n : Fin (minPeriod N f r),
+      globalMap N f (iterate N f n r) =
+          (if (n : ℕ) + 1 < minPeriod N f r then iterate N f (n + 1) r else r) ∧
+        globalMap NW fW (iterate NW fW n rW) =
+          (if (n : ℕ) + 1 < minPeriod N f r then iterate NW fW (n + 1) rW else rW)) ∧
+    (∀ (n : Fin (minPeriod N f r))
+        (u v : TruncatedTreeNode N f depth (iterate N f n r)),
+      TruncatedTreeParentEdge N f depth (iterate N f n r) u v →
+      let hrn : IsPeriodicPoint N f (iterate N f n r) :=
+        isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
+          ((mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨n, rfl⟩)
+      let sourceChildTree :=
+        truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+          depth (Nat.le_max_left _ _) u
+      let sourceParentTree :=
+        truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+          depth (Nat.le_max_left _ _) v
+      let sourceChild := periodicComponentRootSigmaEquiv N f r hr ⟨n, sourceChildTree⟩
+      let sourceParent := periodicComponentRootSigmaEquiv N f r hr ⟨n, sourceParentTree⟩
+      globalMap N f sourceChild = sourceParent ∧
+        globalMap NW fW
+            (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase sourceChild) =
+          periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase sourceParent) := by
+  dsimp only
+  constructor
+  · intro n
+    exact periodic_index_matching_preserves_edges
+      N f NW fW r rW hr hrW hbase n n.isLt
+  · intro n u v huv
+    exact periodicComponentEquivOfBaseWordEq_preserves_parent_edge
+      N f NW fW r rW hr hrW hbase n u v huv
 
 /-- 写像符号が等しくセル数も等しいとき、周期軌道の出現の
     重複度付き対応と、対応する周期上の全ての位置に接着した
