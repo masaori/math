@@ -6681,7 +6681,7 @@ Z_3(2)
     id: "soundness_bridge_claim_countable_core_corresponds_to_prime_exponent_data",
     kind: "claim",
     title: {
-      text: "値の衝突を持たない粗視化の像は素指数データと一対一に対応する",
+      text: "任意の正の有理数列を許す設定では、値の衝突を持たない粗視化の像は素指数データと一対一に対応する",
     },
     labels: [
       "claim_countable_core_corresponds_to_prime_exponent_data",
@@ -6728,9 +6728,9 @@ Z_3(2)
         " の元）だけであり、非可算への脱出はない。",
       ]),
       paragraph([
-        "値の衝突を持たないことは箱サイズ極限に対して十分であることと同値である（",
+        "任意の正の有理数列を許す設定では、値の衝突を持たないことは箱サイズ極限に対して十分であることと同値である（",
         ref("claim_collision_free_coarse_graining_is_sufficient_on_general_families"),
-        "）から、この主張は「十分な粗視化がその値として保持している情報は、素指数データそのものである」と読める。",
+        "）から、この設定では「十分な粗視化がその値として保持している情報は、素指数データそのものである」と読める。実際の Ising 有限箱データから生じる列だけへ制限すると、粗視化の衝突がその列の族に現れるとは限らないので、この主張だけではその制限下の最小性は従わない。",
       ]),
     ],
     proof: [
