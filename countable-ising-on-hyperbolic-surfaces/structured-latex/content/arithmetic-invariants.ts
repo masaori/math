@@ -2632,6 +2632,60 @@ d\in\mathbb N_{>0}`),
     ],
   },
   {
+    id: "arithmetic_invariants_theorem_fixed_quotient_fisher_splitting_field_galois_group_nonsolvable",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Fisher 分解体 Galois 群の非可解性" },
+    labels: ["theorem_fixed_quotient_fisher_splitting_field_galois_group_nonsolvable"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-fisher-splitting-field-galois-group-nonsolvable"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"),
+        " で構成した分解体の Galois 群を ",
+        math(String.raw`G_Q:=\operatorname{Gal}(K_Q/\mathbb Q)`),
+        " と置く。交換子部分群を用いて導来列を",
+      ]),
+      displayMath(String.raw`G_Q^{(0)}:=G_Q,
+\qquad
+G_Q^{(r+1)}:=[G_Q^{(r)},G_Q^{(r)}]
+\quad(r\in\mathbb N)`),
+      paragraph(["と定める。このとき、任意の ", math(String.raw`r\in\mathbb N`), " に対して"]),
+      displayMath(String.raw`G_Q^{(r)}\ne\{\operatorname{id}_{\mathcal R_Q}\}`),
+      paragraph(["である。したがって ", math(String.raw`G_Q`), " は可解群ではない。有限集合と有限置換群だけを用い、実数、複素数、極限、積分を用いない。"]),
+    ],
+    proof: [
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_full_symmetric_galois_group"), " より、"]),
+      displayMath(String.raw`G_Q
+=\operatorname{Sym}(\mathcal R_Q).`),
+      paragraph(["導来列の定義より、"]),
+      displayMath(String.raw`G_Q^{(0)}=G_Q.`),
+      paragraph(["したがって、"]),
+      displayMath(String.raw`G_Q^{(0)}
+=\operatorname{Sym}(\mathcal R_Q).`),
+      paragraph([ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"), " より、"]),
+      displayMath(String.raw`|\mathcal R_Q|=44.`),
+      paragraph(["導来列の定義より、"]),
+      displayMath(String.raw`G_Q^{(1)}
+=[\operatorname{Sym}(\mathcal R_Q),\operatorname{Sym}(\mathcal R_Q)].`),
+      paragraph(["三元以上の有限集合上の全対称群の交換子部分群は交代群なので、"]),
+      displayMath(String.raw`[\operatorname{Sym}(\mathcal R_Q),\operatorname{Sym}(\mathcal R_Q)]
+=\operatorname{Alt}(\mathcal R_Q).`),
+      paragraph(["したがって、"]),
+      displayMath(String.raw`G_Q^{(1)}=\operatorname{Alt}(\mathcal R_Q).`),
+      paragraph([
+        math(String.raw`44\ge5`),
+        " なので、五元以上の有限集合上の交代群が非可換単純群であることを適用する。交換子部分群は正規部分群であり、非可換性により自明群ではない。単純性により、",
+      ]),
+      displayMath(String.raw`[\operatorname{Alt}(\mathcal R_Q),\operatorname{Alt}(\mathcal R_Q)]
+=\operatorname{Alt}(\mathcal R_Q).`),
+      paragraph(["以上を基底段階とし、導来列の定義を帰納段階に用いると、任意の ", math(String.raw`r\in\mathbb N_{>0}`), " に対して、"]),
+      displayMath(String.raw`G_Q^{(r)}
+=\operatorname{Alt}(\mathcal R_Q).`),
+      paragraph(["特に任意の ", math(String.raw`r\in\mathbb N`), " に対して、"]),
+      displayMath(String.raw`G_Q^{(r)}\ne\{\operatorname{id}_{\mathcal R_Q}\}.`),
+    ],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
     kind: "theorem",
     title: { text: "固定剰余類格子の Fisher 零点の有理矩形根分離証明書" },

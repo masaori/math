@@ -105,6 +105,7 @@ export const ALL_LABELS = [
   "theorem_fixed_quotient_fisher_splitting_field_factorial_degree_bound",
   "theorem_fixed_quotient_fisher_splitting_field_finite_degree",
   "theorem_fixed_quotient_fisher_splitting_field_full_symmetric_galois_group",
+  "theorem_fixed_quotient_fisher_splitting_field_galois_group_nonsolvable",
   "theorem_fixed_quotient_fisher_zero_multiplicity_data",
   "theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
   "theorem_fixed_quotient_ising_partition_polynomial",
