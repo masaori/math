@@ -4562,7 +4562,8 @@ Z_G(1)
   \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
     \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
   \right)
-}
+}.`),
+      displayMath(String.raw`\prod_{j=1}^{d}(b-\alpha_j)
 \ne0
 \quad\bigl(\because\ \overline P_G(b)\ne0\text{ かつ最高次係数は零でない}\bigr).`),
       paragraph([
