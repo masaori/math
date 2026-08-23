@@ -407,6 +407,10 @@ targets=(
   Ising3DCut.NecSuf.goodImageToGoodImage_goodImageFromGoodImage
   Ising3DCut.NecSuf.good_images_correspond
   Ising3DCut.LimitQuantity.countable_core_corresponds_to_prime_exponent_data_viaNecSuf
+  Ising3DCut.NecSuf.data_eq_of_pointwise_collision_free_coarse_graining
+  Ising3DCut.NecSuf.observed_eventuallyEq_of_pointwise_collision_free_coarse_graining
+  Ising3DCut.NecSuf.tendsto_of_pointwise_collision_free_coarse_graining
+  Ising3DCut.NecSuf.limit_eq_of_pointwise_collision_free_coarse_graining
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
