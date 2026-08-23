@@ -117,6 +117,7 @@ export const ALL_LABELS = [
   "theorem_homology_class_polynomials_recombine",
   "theorem_hyperbolic_regular_type_iff_negative_euler_characteristic",
   "theorem_hyperbolic_regular_type_negative_euler_characteristic",
+  "theorem_hyperbolic_regular_type_product_difference_criterion",
   "theorem_primal_coboundary_transport_is_dual_boundary",
   "theorem_primal_cocycle_transport_is_dual_cycle",
   "theorem_primal_cohomology_dual_homology_transport_is_bijective",
