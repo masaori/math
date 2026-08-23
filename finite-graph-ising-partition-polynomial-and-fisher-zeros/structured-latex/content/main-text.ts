@@ -4735,10 +4735,21 @@ Z_G(1)
 =
 \sum_{m=1}^{|E|}
 \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
-  \eta_{\mathbb N,\mathbb Q}\!\left(m\Omega_G(m)\right)
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(m)
 \right)
 x^{m-1}
 \quad\bigl(\because\ \text{有限和の項別形式微分}\bigr).`),
+      displayMath(String.raw`D\overline P_G(x)
+=
+\sum_{m=1}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m\Omega_G(m)\right)
+\right)
+x^{m-1}
+\quad\bigl(\because\ \text{二つの標準単射は積を保つ}\bigr).`),
       paragraph([
         ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
         " と",
