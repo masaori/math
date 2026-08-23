@@ -46,4 +46,21 @@ theorem card_terminalVertices {V Edge : Type*} [DecidableEq V] [DecidableEq Edge
     (terminalVertices vertices incidentEdges).card = ∑ v ∈ vertices, (incidentEdges v).card := by
   exact Finset.card_sigma vertices incidentEdges
 
+/-- 頂点 `v` に属する端子の集合。頂点分解の `v` 成分である。 -/
+def terminalsAt {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V) : Finset (Σ _ : V, Edge) :=
+  ({v} : Finset V).sigma incidentEdges
+
+/-- 頂点 `v` に属する端子であることは、第一成分が `v` で第二成分が `v` の接続辺であることと同値。 -/
+theorem mem_terminalsAt_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V) (t : Σ _ : V, Edge) :
+    t ∈ terminalsAt incidentEdges v ↔ t.1 = v ∧ t.2 ∈ incidentEdges t.1 := by
+  simp [terminalsAt, Finset.mem_sigma]
+
+/-- 頂点 `v` に属する端子の個数は、`v` に接続する辺の本数に等しい。 -/
+theorem card_terminalsAt {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V) :
+    (terminalsAt incidentEdges v).card = (incidentEdges v).card := by
+  simp [terminalsAt, Finset.card_sigma]
+
 end Ising3DCut.Prediction
