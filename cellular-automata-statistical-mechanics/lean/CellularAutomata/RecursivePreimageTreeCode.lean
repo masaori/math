@@ -26,6 +26,7 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 この全単射の共役条件・完全性・有限決定も形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
+import CellularAutomata.NecSuf.RecursivePreimageTreeCode
 import CellularAutomata.IterateMonoidStableFiberDepth
 import CellularAutomata.IterateMonoidConjugacyInvariance
 import CellularAutomata.PeriodicPointCount
@@ -2850,7 +2851,10 @@ theorem mapCode_eq_iff_exists_conjugacy :
 /-- 二つの有限な写像符号の等号は決定可能である。写像符号は、有限配位表から
     最小前周期の有限上界まで再帰して作った自然数の有限多重集合である。 -/
 noncomputable instance mapCodeEqualityDecidable : Decidable (mapCode NW fW = mapCode N f) :=
-  inferInstance
+  @CellularAutomata.NecSuf.RecursivePreimageTreeCode.codeEqualityDecidable
+    (Multiset (Finset (List ℕ)))
+    CellularAutomata.NecSuf.RecursivePreimageTreeCode.mapCodeTypeDecidableEq
+    (mapCode N f) (mapCode NW fW)
 
 /-- 共役全単射の存在は、完全不変量である写像符号の等号を有限比較することで
     決定できる。全単射を先に全数走査する必要はない。 -/
@@ -2888,5 +2892,46 @@ theorem conjugacyFromMapCodeDecision_isSome_iff :
   · simp [conjugacyFromMapCodeDecision, hcode]
 
 end CompleteInvariant
+
+/-! ## 必要十分版からの導出 -/
+
+section NecSufDerivation
+
+variable {W : Type} [Fintype W] [DecidableEq W]
+variable (NW : W → Finset W)
+variable (fW : (w : W) → (↥(NW w) → State) → State)
+
+open CellularAutomata.NecSuf.RecursivePreimageTreeCode
+
+/-- 具体版の共役全単射の存在は、必要十分版の `HasConjugacy` の特殊化である。 -/
+theorem hasConjugacy_eq :
+    HasConjugacy (globalMap N f) (globalMap NW fW) =
+      ∃ h : (V → State) ≃ (W → State),
+        ∀ y, h (globalMap N f y) = globalMap NW fW (h y) := rfl
+
+/-- 具体版の完全不変量は、必要十分版の同値の特殊化として得られる
+    （完全性と共役不変性の二つの含意だけを渡す）。 -/
+theorem mapCode_eq_iff_exists_conjugacy_of_necSuf :
+    mapCode NW fW = mapCode N f ↔
+      ∃ h : (V → State) ≃ (W → State),
+        ∀ y, h (globalMap N f y) = globalMap NW fW (h y) :=
+  code_eq_iff_hasConjugacy (globalMap N f) (globalMap NW fW)
+    (mapCode N f) (mapCode NW fW)
+    (exists_conjugacy_of_mapCode_eq N f NW fW)
+    (fun hconj => mapCode_transport N f NW fW hconj.choose hconj.choose_spec)
+
+/-- 具体版の有限決定が返す `Option` は、必要十分版の選択に
+    符号型 `Multiset (Finset (List ℕ))` の等号判定と、符号の等号から
+    共役全単射を作る具体版の構成を渡した特殊化である。 -/
+theorem conjugacyFromMapCodeDecision_of_necSuf :
+    conjugacyFromMapCodeDecision N f NW fW =
+      @conjugacyFromDecision (V → State) (W → State) (Multiset (Finset (List ℕ)))
+        mapCodeTypeDecidableEq (mapCode N f) (mapCode NW fW)
+        (fun hcode => structurePreservingConfigurationEquiv N f NW fW hcode) := by
+  by_cases hcode : mapCode NW fW = mapCode N f
+  · simp [conjugacyFromMapCodeDecision, conjugacyFromDecision, hcode]
+  · simp [conjugacyFromMapCodeDecision, conjugacyFromDecision, hcode]
+
+end NecSufDerivation
 
 end CellularAutomata.RecursivePreimageTreeCode
