@@ -109,4 +109,19 @@ theorem mem_externalEdges_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge
       ∃ e ∈ edges, externalEdge endpoint₀ endpoint₁ e = s := by
   simp [externalEdges]
 
+/-- Terminal graph の辺集合は、内部辺と外部辺の和である。 -/
+def terminalEdges {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V) : Finset (Finset (Σ _ : V, Edge)) :=
+  internalEdges vertices incidentEdges ∪ externalEdges edges endpoint₀ endpoint₁
+
+/-- 二端子の組が terminal graph の辺であることは、内部辺であるか外部辺であることと同値。 -/
+theorem mem_terminalEdges_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V) (s : Finset (Σ _ : V, Edge)) :
+    s ∈ terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁ ↔
+      s ∈ internalEdges vertices incidentEdges ∨
+        s ∈ externalEdges edges endpoint₀ endpoint₁ := by
+  simp [terminalEdges]
+
 end Ising3DCut.Prediction
