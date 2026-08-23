@@ -1982,6 +1982,70 @@ theorem periodicComponentEquivOfBaseWordEq_bijective
       (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase) :=
   (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase).bijective
 
+/-- 周期位置ごとの前像木対応を従属和上で接着した周期成分全単射は、
+    各位置へ流入する全ての非周期親子辺で一段発展と可換する。 -/
+theorem periodicComponentEquivOfBaseWordEq_preserves_parent_edge
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r)
+    (n : Fin (minPeriod N f r))
+    (u v : TruncatedTreeNode N f
+      (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+      (iterate N f n r))
+    (huv : TruncatedTreeParentEdge N f
+      (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+      (iterate N f n r) u v) :
+    let depth := max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)
+    let hrn : IsPeriodicPoint N f (iterate N f n r) :=
+      isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
+        ((mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨n, rfl⟩)
+    let sourceChildTree :=
+      truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+        depth (Nat.le_max_left _ _) u
+    let sourceParentTree :=
+      truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+        depth (Nat.le_max_left _ _) v
+    let sourceChild := periodicComponentRootSigmaEquiv N f r hr ⟨n, sourceChildTree⟩
+    let sourceParent := periodicComponentRootSigmaEquiv N f r hr ⟨n, sourceParentTree⟩
+    globalMap N f sourceChild = sourceParent ∧
+      globalMap NW fW
+          (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase
+            sourceChild) =
+        periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase
+          sourceParent := by
+  dsimp only
+  let depth := max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)
+  have hperiod : minPeriod NW fW rW = minPeriod N f r :=
+    minPeriod_eq_of_baseWord_eq N f NW fW r rW hbase
+  have hrn : IsPeriodicPoint N f (iterate N f n r) :=
+    isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
+      ((mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨n, rfl⟩)
+  have hrWn : IsPeriodicPoint NW fW (iterate NW fW n rW) :=
+    isPeriodicPoint_of_mem_periodicOrbit NW fW rW _ hrW
+      ((mem_periodicOrbit_iff_exists NW fW rW _ hrW).2 ⟨n, rfl⟩)
+  have hmatch := hasTreeMatching_iterate_of_baseWord_eq_commonDepth
+    N f NW fW r rW hr hrW hbase n n.isLt
+  have hedge := preimageTreeNodeTableEquivOfMatching_preserves_parent_edge
+    N f NW fW (iterate N f n r) (iterate NW fW n rW) hrn hrWn depth
+      (Nat.le_max_left _ _) (Nat.le_max_right _ _) hmatch u v huv
+  constructor
+  · simpa [periodicComponentRootSigmaEquiv] using hedge.1
+  · change globalMap NW fW
+        (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase
+          (periodicComponentRootSigmaEquiv N f r hr ⟨n,
+            truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+              depth (Nat.le_max_left _ _) u⟩)) =
+      periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase
+        (periodicComponentRootSigmaEquiv N f r hr ⟨n,
+          truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+            depth (Nat.le_max_left _ _) v⟩)
+    unfold periodicComponentEquivOfBaseWordEq
+    simp only [Equiv.trans_apply, Equiv.symm_apply_apply]
+    simp only [periodicComponentRootSigmaEquiv]
+    simp only [Equiv.sigmaCongr, Equiv.sigmaCongrRight, Equiv.sigmaCongrLeft]
+    convert hedge.2 using 1 <;> simp [depth]
+    all_goals congr 1
+
 /-- 写像符号が等しくセル数も等しいとき、周期軌道の出現の
     重複度付き対応と、対応する周期上の全ての位置に接着した
     前像木対応を同時に選べる。 -/
