@@ -2147,15 +2147,15 @@ $0\in\overline{\mathbb Q}$
 
 \end{theorem}
 \begin{proof}
-まず
+まず 
 $d=0$
- の場合、Fisher 零点の重複度込み族は空族なので、全ての
+ の場合、Fisher 零点の重複度込み族は空族なので、全ての 
 $k\in\mathbb N_{>0}$
- について
+ について 
 $\widehat p_k=0$
- である。主張の第二の場合の右辺も空和により
+ である。主張の第二の場合の右辺も空和により 
 $0$
- である。以下では
+ である。以下では 
 $d\ge1$
  とする。
 
@@ -2179,7 +2179,7 @@ $k=1$
 &=-\frac{\Omega_G(1)}{\Omega_G(0)}
 &&\bigl(\because\ \text{Fisher 零点逆数族の一次基本対称式と係数比}\bigr).
 \end{aligned}\]
-これは空和を用いた主張の第一の場合に等しい。以下では
+これは空和を用いた主張の第一の場合に等しい。以下では 
 $2\le k\le d$
  とする。各 
 $r\in\{1,\ldots,k\}$
@@ -2335,15 +2335,15 @@ k\frac{\Omega_G(k)}{\Omega_G(0)}
 }
 &&\bigl(\because\ \Omega_G(0)\ne0\text{ なので共通分母へ移す}\bigr).
 \end{aligned}\]
-以上で
+以上で 
 $1\le k\le d$
- の場合を得た。次に任意の
+ の場合を得た。次に任意の 
 $q\in\mathbb N_{>0}$
- で
+ で 
 $q>d$
- を満たすものを取る。各
+ を満たすものを取る。各 
 $r\in\{1,\ldots,d\}$
- について
+ について 
 $E_r,H_r^{(q)}\in\overline{\mathbb Q}$
  を
 
@@ -2363,7 +2363,7 @@ H_r^{(q)}
 \right),
 \qquad
 H_{d+1}^{(q)}:=0\]
-と定める。各
+と定める。各 
 $r\in\{1,\ldots,d\}$
  について有限和の分配律により、
 
@@ -2398,9 +2398,9 @@ E_r\widehat p_{q-r}
 &=H_r^{(q)}+H_{r+1}^{(q)}
 &&\bigl(\because\ J=I\cup\{j\}\text{ と置いて第二項を }|J|=r+1\text{ の和へ移す}\bigr).
 \end{aligned}\]
-直前の等式へ
+直前の等式へ 
 $(-1)^{r-1}$
- を掛けて
+ を掛けて 
 $r=1,\ldots,d$
  を足すと、
 
@@ -2415,7 +2415,7 @@ $r=1,\ldots,d$
 &&\bigl(\because\ H_1^{(q)}=\sum_{j=1}^{d}\beta_j\beta_j^{q-1}=\widehat p_q\bigr).
 \end{aligned}\]
 \cref{lab:theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio}
- を
+ を 
 $r=1,\ldots,d$
  に適用すると、
 
@@ -2440,11 +2440,11 @@ $r=1,\ldots,d$
 }
 &&\bigl(\because\ \Omega_G(0)\ne0\text{ なので共通分母へ移す}\bigr).
 \end{aligned}\]
-第一の場合を
+第一の場合を 
 $k=1,\ldots,d$
- の順に用い、続いて第二の場合を
+ の順に用い、続いて第二の場合を 
 $k=d+1,d+2,\ldots$
- の順に用いると、自然数と有理数の四則演算だけで全ての
+ の順に用いると、自然数と有理数の四則演算だけで全ての 
 $\widehat p_k$
  が有理数として定まる。したがって 
 $\widehat p_k\in\mathbb Q\subset\overline{\mathbb Q}$
@@ -4023,6 +4023,67 @@ Z_G(1)
  に 
 $x=1$
  を代入して得る。
+
+\end{proof}
+
+\begin{theorem}[一般有限グラフの Fisher 零点の一との差の積と全配位数]\label{lab:theorem_fisher_zero_shifted_product_configuration_count}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、
+\cref{lab:def_ising_partition_polynomial}
+ の次数を 
+$d:=\deg Z_G(x)\in\mathbb N$
+ と置く。係数を標準単射 
+$\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]$
+ で移した多項式の重複度込み Fisher 零点を 
+$\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
+ と書く。このとき、
+
+\[\prod_{j=1}^{d}(1-\alpha_j)
+=
+\frac{2^{|V|}}{\Omega_G(d)}
+\in\mathbb Q_{>0}
+\subset\overline{\mathbb Q}.\]
+$d=0$
+ の場合、左辺は空積 
+$1\in\overline{\mathbb Q}$
+ である。
+
+\end{theorem}
+\begin{proof}
+\cref{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
+ と 
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ より、
+$\Omega_G(d)\in\mathbb N_{>0}$
+ は最高次係数である。標準単射で係数を移した多項式を 
+$\overline P_G(x)\in\overline{\mathbb Q}[x]$
+ と書く。代数的閉体上の一次因子分解により、
+
+\[\overline P_G(x)
+=
+\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j)\]
+\cref{lab:claim_partition_polynomial_value_at_one}
+ より、
+
+\[\begin{aligned}
+2^{|V|}
+&=Z_G(1)
+&&\bigl(\because\ \text{係数総和}\bigr)\\
+&=\overline P_G(1)
+&&\bigl(\because\ \text{標準単射は整数 }1\text{ での評価を保存する}\bigr)\\
+&=\Omega_G(d)\prod_{j=1}^{d}(1-\alpha_j)
+&&\bigl(\because\ \text{一次因子分解へ }x=1\text{ を代入する}\bigr).
+\end{aligned}\]
+$\Omega_G(d)\ne0$
+ なので、代数的数の体で最高次係数を消去すると、
+
+\[\prod_{j=1}^{d}(1-\alpha_j)
+=
+\frac{2^{|V|}}{\Omega_G(d)}.\]
+$2^{|V|}\in\mathbb N_{>0}$
+ かつ 
+$\Omega_G(d)\in\mathbb N_{>0}$
+ なので、右辺は正の有理数に属する。零点、一との差、有限積は代数的数、頂点数、次数、多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
 
 \end{proof}
 

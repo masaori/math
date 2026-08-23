@@ -34,6 +34,7 @@ export const ALL_LABELS = [
   "theorem_fisher_zero_power_sum_newton_recurrence",
   "theorem_fisher_zero_product_coefficient_ratio",
   "theorem_fisher_zero_reciprocal_sum_coefficient_ratio",
+  "theorem_fisher_zero_shifted_product_configuration_count",
   "theorem_fisher_zero_square_sum_coefficient_ratio",
   "theorem_fisher_zero_sum_coefficient_ratio",
   "theorem_fisher_zeros_nonzero",
