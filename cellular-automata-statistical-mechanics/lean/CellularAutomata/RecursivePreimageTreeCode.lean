@@ -23,7 +23,7 @@ structured-latex/content/recursive-preimage-tree-code.ts。
 対応する周期成分表ごとの有限全単射を、一意な成分添字に従って全配位写像へ接着する。
 各周期成分表を、周期上の一意な根とその根へ流入する有限配位表との従属和へ分解する。
 周期位置ごとの再帰的前像木対応をその従属和上で接着し、対応する周期成分表の全単射も構成する。
-この全単射の共役条件・完全性・有限決定は後続 tick で形式化する。
+この全単射の共役条件・完全性・有限決定も形式化する。
 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
 -/
 import CellularAutomata.IterateMonoidStableFiberDepth
@@ -2844,6 +2844,48 @@ theorem mapCode_eq_iff_exists_conjugacy :
   · exact exists_conjugacy_of_mapCode_eq N f NW fW
   · rintro ⟨h, hconj⟩
     exact mapCode_transport N f NW fW h hconj
+
+/-! ## 有限決定（`claim_recursive_preimage_tree_code_finite_decidability`） -/
+
+/-- 二つの有限な写像符号の等号は決定可能である。写像符号は、有限配位表から
+    最小前周期の有限上界まで再帰して作った自然数の有限多重集合である。 -/
+noncomputable instance mapCodeEqualityDecidable : Decidable (mapCode NW fW = mapCode N f) :=
+  inferInstance
+
+/-- 共役全単射の存在は、完全不変量である写像符号の等号を有限比較することで
+    決定できる。全単射を先に全数走査する必要はない。 -/
+noncomputable instance conjugacyExistenceDecidable :
+    Decidable
+      (∃ h : (V → State) ≃ (W → State),
+        ∀ y, h (globalMap N f y) = globalMap NW fW (h y)) :=
+  decidable_of_iff (mapCode NW fW = mapCode N f)
+    (mapCode_eq_iff_exists_conjugacy N f NW fW)
+
+/-- 符号の有限比較が一致を返した場合に固定する共役全単射。
+    不一致の場合は `none` を返す。 -/
+noncomputable def conjugacyFromMapCodeDecision : Option ((V → State) ≃ (W → State)) :=
+  if hcode : mapCode NW fW = mapCode N f then
+    some (structurePreservingConfigurationEquiv N f NW fW hcode)
+  else
+    none
+
+/-- 符号が等しい場合、有限決定から得る値は、再帰的前像木対応を接着して
+    構成した共役全単射そのものである。 -/
+theorem conjugacyFromMapCodeDecision_eq_some
+    (hcode : mapCode NW fW = mapCode N f) :
+    conjugacyFromMapCodeDecision N f NW fW =
+      some (structurePreservingConfigurationEquiv N f NW fW hcode) := by
+  simp [conjugacyFromMapCodeDecision, hcode]
+
+/-- 有限決定が返す `Option` に値があることと、共役全単射が存在することは同値である。 -/
+theorem conjugacyFromMapCodeDecision_isSome_iff :
+    (conjugacyFromMapCodeDecision N f NW fW).isSome ↔
+      ∃ h : (V → State) ≃ (W → State),
+        ∀ y, h (globalMap N f y) = globalMap NW fW (h y) := by
+  rw [← mapCode_eq_iff_exists_conjugacy N f NW fW]
+  by_cases hcode : mapCode NW fW = mapCode N f
+  · simp [conjugacyFromMapCodeDecision, hcode]
+  · simp [conjugacyFromMapCodeDecision, hcode]
 
 end CompleteInvariant
 

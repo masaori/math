@@ -1031,6 +1031,8 @@ targets=(
   CellularAutomata.RecursivePreimageTreeCode.structurePreservingConfigurationEquiv_apply_of_mem
   CellularAutomata.RecursivePreimageTreeCode.exists_conjugacy_of_mapCode_eq
   CellularAutomata.RecursivePreimageTreeCode.mapCode_eq_iff_exists_conjugacy
+  CellularAutomata.RecursivePreimageTreeCode.conjugacyFromMapCodeDecision_eq_some
+  CellularAutomata.RecursivePreimageTreeCode.conjugacyFromMapCodeDecision_isSome_iff
   CellularAutomata.RecursivePreimageTreeCode.image_periodicOrbitTable
   CellularAutomata.RecursivePreimageTreeCode.mapCode_transport
 )
