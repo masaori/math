@@ -96,6 +96,8 @@ export const ALL_LABELS = [
   "def_full_boundary_response_polynomial",
   "def_global_spin_flip",
   "def_ising_realizable_finite_box_sequences",
+  "def_ising_realizable_finite_box_values",
+  "def_limit_quantity_domain",
   "def_limit_quantity_from_finite_box_sequence",
   "def_multiplicity",
   "def_nonfixed_reciprocal_roots",

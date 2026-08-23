@@ -7066,18 +7066,15 @@ Z_3(2)
   },
 
   {
-    id: "soundness_bridge_definition_ising_realizable_sequences_and_sufficiency",
+    id: "soundness_bridge_definition_limit_domain",
     kind: "definition",
     title: {
-      text: "実際の Ising 有限箱データから生じる列の族と、その族の上での十分性",
+      text: "極限量が存在する有理点の集合",
     },
-    labels: [
-      "def_ising_realizable_finite_box_sequences",
-      "def_sufficiency_on_ising_realizable_family",
-    ],
+    labels: ["def_limit_quantity_domain"],
     habitat: "R",
     realEscape:
-      "族の添字集合 Q_alpha を「極限量 alpha(q) が存在する有理点」で定めるため、また十分性の結論が alpha(q)=alpha(q') という実数の等式であるため、既に取った箱の大きさの極限を参照する。新たな脱出は行わず、def_limit_quantity_from_finite_box_sequence で一度だけ取った極限をそのまま使う。族そのもの（各列の各項）と粗視化の値の一致は可算側にある。",
+      "集合 Q_alpha を「極限量 alpha(q) が存在する有理点」で定めるため、def_limit_quantity_from_finite_box_sequence で一度だけ取った箱の大きさの極限を参照する。新たな脱出は行わない。",
     statement: [
       paragraph([
         "極限量（",
@@ -7087,8 +7084,21 @@ Z_3(2)
       displayMath(
         String.raw`\mathcal Q_\alpha:=\{\,q\in\mathbb Q_{>0}\ :\ \alpha(q)\ \text{が存在する}\,\}`,
       ),
+      paragraph(["と定める。"]),
+    ],
+  },
+
+  {
+    id: "soundness_bridge_definition_ising_realizable_sequences",
+    kind: "definition",
+    title: { text: "実際の Ising 有限箱データから生じる列の族" },
+    labels: ["def_ising_realizable_finite_box_sequences"],
+    habitat: "Q",
+    statement: [
       paragraph([
-        "と書き、これらの有理点における有限箱の列（",
+        "極限量が存在する有理点の集合（",
+        ref("def_limit_quantity_domain"),
+        "）に属する有理点における有限箱の列（",
         ref("def_finite_box_prime_exponent_sequence"),
         "）を集めた族",
       ]),
@@ -7096,17 +7106,43 @@ Z_3(2)
         String.raw`\mathcal S_{\mathrm{Ising}}:=\{\,S_q\ :\ q\in\mathcal Q_\alpha\,\}`,
       ),
       paragraph([
-        "を、",
-        "実際の Ising 有限箱データから生じる列の族と呼ぶ。あわせて、これらの列に実際に現れる正の有理数の集合を",
+        "を、実際の Ising 有限箱データから生じる列の族と呼ぶ。",
+      ]),
+    ],
+  },
+
+  {
+    id: "soundness_bridge_definition_ising_realizable_values",
+    kind: "definition",
+    title: { text: "実際の Ising 有限箱データに現れる値の集合" },
+    labels: ["def_ising_realizable_finite_box_values"],
+    habitat: "Q",
+    statement: [
+      paragraph([
+        "極限量が存在する有理点の集合（",
+        ref("def_limit_quantity_domain"),
+        "）から生じる有限箱の値を集めた集合を",
       ]),
       displayMath(
         String.raw`\mathcal V_{\mathrm{Ising}}:=\{\,Z_L(q)\ :\ L\in\mathbb N_{\ge1},\ q\in\mathcal Q_\alpha\,\}\subseteq\mathbb Q_{>0}`,
       ),
       paragraph([
-        "と書き、実現値の集合と呼ぶ。",
+        "と定め、実現値の集合と呼ぶ。",
         math(String.raw`\mathcal V_{\mathrm{Ising}}`),
         " の各元は整係数多項式の有理点での値なので、この集合の定義に実数は現れない。",
       ]),
+    ],
+  },
+
+  {
+    id: "soundness_bridge_definition_sufficiency_on_ising_realizable_family",
+    kind: "definition",
+    title: { text: "実際の Ising 有限箱データから生じる列の族の上での十分性" },
+    labels: ["def_sufficiency_on_ising_realizable_family"],
+    habitat: "R",
+    realEscape:
+      "十分性の結論が alpha(q)=alpha(q') という実数の等式であるため、def_limit_quantity_from_finite_box_sequence で一度だけ取った箱の大きさの極限を参照する。新たな脱出は行わず、粗視化の値の一致は可算側にある。",
+    statement: [
       paragraph([
         "写像 ",
         math(String.raw`\pi\colon\mathbb Q_{>0}\to S`),
@@ -7140,12 +7176,8 @@ Z_3(2)
         "定数列が ",
         math(String.raw`\mathcal S_{\mathrm{Ising}}`),
         " に属するとは限らないため、この族の上ではそのまま使えない。",
-        "したがって、",
-        math(String.raw`\mathcal S_{\mathrm{Ising}}`),
-        " の上での最小性を判定するには、衝突する二つの値を実際に ",
-        math(String.raw`\mathcal V_{\mathrm{Ising}}`),
-        " の中で、しかも極限量が異なる二つの有理点の同じ箱の項として実現できるか、という別の問いを立てる必要がある。",
-        "この問いは本セクションでは未解決であり、次のセクションで一つの主張として切り分ける。",
+        "したがって、この族の上での非十分性を示すには、一つの箱で衝突値を実現するだけでは足りず、極限量が異なる二つの有理点がすべての箱で同じ粗視化値を持つことが必要である。",
+        "この条件は次のセクションで一つの主張として切り分ける。",
       ]),
     ],
   },
