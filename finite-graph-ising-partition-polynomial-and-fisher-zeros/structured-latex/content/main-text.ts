@@ -4503,6 +4503,115 @@ Z_G(1)
     ],
   },
   {
+    id: "finite_graph_theorem_fisher_zero_algebraic_shifted_product_evaluation_quotient",
+    kind: "theorem",
+    title: { text: "一般有限グラフの二つの代数的評価点における Fisher 零点差積の商" },
+    labels: ["theorem_fisher_zero_algebraic_shifted_product_evaluation_quotient"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-algebraic-shifted-product-evaluation-quotient"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置く。係数を標準単射",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式を",
+        math(String.raw`\overline P_G(x)\in\overline{\mathbb Q}[x]`),
+        "、その重複度込み Fisher 零点を",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。代数的数",
+        math(String.raw`a,b\in\overline{\mathbb Q}`),
+        " が",
+        math(String.raw`\overline P_G(b)\ne0`),
+        " を満たすならば、",
+      ]),
+      displayMath(String.raw`\frac{
+  \prod_{j=1}^{d}(a-\alpha_j)
+}{
+  \prod_{j=1}^{d}(b-\alpha_j)
+}
+=
+\frac{
+  \overline P_G(a)
+}{
+  \overline P_G(b)
+}
+\in\overline{\mathbb Q}.`),
+      paragraph([
+        math(String.raw`d=0`),
+        " の場合、二つの有限積はいずれも空積",
+        math(String.raw`1\in\overline{\mathbb Q}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fisher_zero_algebraic_shifted_product_coefficient_ratio"),
+        " を評価点",
+        math(String.raw`b`),
+        " に適用すると、",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{d}(b-\alpha_j)
+=
+\frac{
+  \overline P_G(b)
+}{
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  \right)
+}
+\ne0
+\quad\bigl(\because\ \overline P_G(b)\ne0\text{ かつ最高次係数は零でない}\bigr).`),
+      paragraph([
+        ref("theorem_fisher_zero_algebraic_shifted_product_coefficient_ratio"),
+        " を評価点",
+        math(String.raw`a`),
+        " と",
+        math(String.raw`b`),
+        " に適用すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{
+  \prod_{j=1}^{d}(a-\alpha_j)
+}{
+  \prod_{j=1}^{d}(b-\alpha_j)
+}
+&=
+\frac{
+  \dfrac{
+    \overline P_G(a)
+  }{
+    \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+      \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+    \right)
+  }
+}{
+  \dfrac{
+    \overline P_G(b)
+  }{
+    \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+      \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+    \right)
+  }
+}
+\quad\bigl(\because\ \text{二つの代数的評価点における零点差積の係数比表示}\bigr)\\
+&=
+\frac{
+  \overline P_G(a)
+}{
+  \overline P_G(b)
+}
+\quad\bigl(\because\ \text{零でない共通の最高次係数を消去する}\bigr).
+\end{aligned}`),
+      paragraph([
+        "評価点、評価値、Fisher 零点、差、有限積、商は代数的数、次数と多重度は自然数、最高次係数は正の自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_fisher_zero_rational_shifted_product_coefficient_ratio",
     kind: "theorem",
     title: { text: "一般有限グラフの Fisher 零点と有理評価点との差の積" },
