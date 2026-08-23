@@ -223,6 +223,7 @@ targets=(
   Ising3DCut.Prediction.fisherBoundaryResponse_clearedPfaffian_eq_evenSubgraphSum
   Ising3DCut.Prediction.constantSign_finiteExpansion
   Ising3DCut.Prediction.terminalMatching_weight_eq_externalPart_prod
+  Ising3DCut.Prediction.mem_externalEdges_iff
   Ising3DCut.Prediction.mem_terminalVertices_iff
   Ising3DCut.Prediction.terminalVertex_vertex_ne
   Ising3DCut.Prediction.card_terminalVertices

@@ -90,4 +90,23 @@ theorem mem_internalEdges_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge
       ∃ v ∈ vertices, s ∈ internalEdgesAt incidentEdges v := by
   simp [internalEdges]
 
+/-- 元の辺 `e` に対応する外部辺は、`e` の二端点に属する二つの端子を結ぶ。 -/
+def externalEdge {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (endpoint₀ endpoint₁ : Edge → V) (e : Edge) : Finset (Σ _ : V, Edge) :=
+  {⟨endpoint₀ e, e⟩, ⟨endpoint₁ e, e⟩}
+
+/-- Terminal graph 全体の外部辺は、元の各辺に対応する外部辺の像である。 -/
+def externalEdges {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (edges : Finset Edge) (endpoint₀ endpoint₁ : Edge → V) :
+    Finset (Finset (Σ _ : V, Edge)) :=
+  edges.image (externalEdge endpoint₀ endpoint₁)
+
+/-- 二端子の組が外部辺であることは、ある元の辺に対応することと同値。 -/
+theorem mem_externalEdges_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (edges : Finset Edge) (endpoint₀ endpoint₁ : Edge → V)
+    (s : Finset (Σ _ : V, Edge)) :
+    s ∈ externalEdges edges endpoint₀ endpoint₁ ↔
+      ∃ e ∈ edges, externalEdge endpoint₀ endpoint₁ e = s := by
+  simp [externalEdges]
+
 end Ising3DCut.Prediction
