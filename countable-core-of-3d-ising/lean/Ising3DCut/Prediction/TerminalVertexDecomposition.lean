@@ -76,4 +76,18 @@ theorem mem_internalEdgesAt_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Ed
       s ⊆ terminalsAt incidentEdges v ∧ s.card = 2 := by
   simp [internalEdgesAt]
 
+/-- Terminal graph 全体の内部辺は、元の各頂点の city の内部辺を束ねた集合である。 -/
+def internalEdges {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (incidentEdges : V → Finset Edge) :
+    Finset (Finset (Σ _ : V, Edge)) :=
+  vertices.biUnion (internalEdgesAt incidentEdges)
+
+/-- 二端子の組が terminal graph の内部辺であることは、ある元頂点の city の内部辺であることと同値。 -/
+theorem mem_internalEdges_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (incidentEdges : V → Finset Edge)
+    (s : Finset (Σ _ : V, Edge)) :
+    s ∈ internalEdges vertices incidentEdges ↔
+      ∃ v ∈ vertices, s ∈ internalEdgesAt incidentEdges v := by
+  simp [internalEdges]
+
 end Ising3DCut.Prediction
