@@ -4640,12 +4640,22 @@ Z_G(q)
         math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
         " と書く。任意の正の有理数",
         math(String.raw`q\in\mathbb Q_{>0}`),
-        " について",
+        " について、自然数から有理数への標準単射を",
+        math(String.raw`\eta_{\mathbb N,\mathbb Q}:\mathbb N\hookrightarrow\mathbb Q`),
+        "、有理数から代数的数への標準単射を",
+        math(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+        " と書く。このとき",
       ]),
-      displayMath(String.raw`\prod_{j=1}^{d}(q-\alpha_j)
+      displayMath(String.raw`\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
 =
-\frac{Z_G(q)}{\Omega_G(d)}
-\in\mathbb Q_{>0}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+\in\iota_{\mathbb Q,\overline{\mathbb Q}}(\mathbb Q_{>0})
 \subset\overline{\mathbb Q}.`),
       paragraph([
         math(String.raw`d=0`),
@@ -4655,40 +4665,41 @@ Z_G(q)
       ]),
     ],
     proof: [
-      paragraph([
-        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
-        " と",
-        ref("claim_partition_polynomial_coefficient_expansion"),
-        " より、",
-        math(String.raw`\Omega_G(d)\in\mathbb N_{>0}`),
-        " は最高次係数である。標準単射で係数を移した多項式を",
-        math(String.raw`\overline P_G(x)\in\overline{\mathbb Q}[x]`),
-        " と書く。代数的閉体上の一次因子分解により、",
-      ]),
-      displayMath(String.raw`\overline P_G(x)
+      paragraph([ref("theorem_fisher_zero_rational_shifted_product_coefficient_ratio"), " を正の有理数", math(String.raw`q`), "に適用すると"]),
+      displayMath(String.raw`\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
 =
-\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j).`),
-      displayMath(String.raw`\begin{aligned}
-Z_G(q)
-&=\overline P_G(q)
-&&\bigl(\because\ \text{標準単射は有理数 }q\text{ での評価を保存する}\bigr)\\
-&=\Omega_G(d)\prod_{j=1}^{d}(q-\alpha_j)
-&&\bigl(\because\ \text{一次因子分解へ }x=q\text{ を代入する}\bigr).
-\end{aligned}`),
-      paragraph([
-        math(String.raw`\Omega_G(d)\ne0`),
-        " なので、代数的数の体で最高次係数を消去すると、",
-      ]),
-      displayMath(String.raw`\prod_{j=1}^{d}(q-\alpha_j)
-=
-\frac{Z_G(q)}{\Omega_G(d)}.`),
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+\quad\bigl(\because\ \text{有理評価点との差の積}\bigr).`),
       paragraph([ref("theorem_no_positive_rational_root"), " より"]),
       displayMath(String.raw`Z_G(q)\in\mathbb Q_{>0}
 \quad\bigl(\because\ Z_G(q)\ge2\text{ in }\mathbb Q\bigr).`),
-      displayMath(String.raw`\frac{Z_G(q)}{\Omega_G(d)}\in\mathbb Q_{>0}
-\quad\bigl(\because\ Z_G(q)\in\mathbb Q_{>0}\text{ かつ }\Omega_G(d)\in\mathbb N_{>0}\bigr).`),
+      paragraph([ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"), " と", ref("claim_partition_polynomial_coefficient_expansion"), "より"]),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(\Omega_G(d))\in\mathbb Q_{>0}
+\quad\bigl(\because\ \Omega_G(d)\in\mathbb N_{>0}\text{ は最高次係数である}\bigr).`),
+      displayMath(String.raw`\frac{
+  Z_G(q)
+}{
+  \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+}
+\in\mathbb Q_{>0}
+\quad\bigl(\because\ \text{正の有理数どうしの商は正の有理数である}\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+\in\iota_{\mathbb Q,\overline{\mathbb Q}}(\mathbb Q_{>0})
+\quad\bigl(\because\ \text{標準単射の像の定義}\bigr).`),
       paragraph([
-        "評価点と係数比は有理数、Fisher 零点、差、有限積は代数的数、次数と多重度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+        "評価点と係数比は有理数、その標準単射像、Fisher 零点、差、有限積は代数的数、次数と多重度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
       ]),
     ],
   },

@@ -1,5 +1,5 @@
 # 対象ラベル: theorem_fisher_zero_positive_rational_shifted_product_coefficient_ratio
-# 式ペア: Pbar_G(q) = Omega_G(d) product_j (q-alpha_j)
+# 式ペア: Pbar_G(iota(q)) = iota(eta(Omega_G(d))) product_j (iota(q)-alpha_j)
 load("finite-graph-ising-partition-polynomial-and-fisher-zeros/sagemath/check/fisher-zero-positive-rational-shifted-product-coefficient-ratio/_prelude.sage")
 for data in examples:
     for q in positive_rational_evaluation_points:

@@ -16,7 +16,7 @@
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
 | `check_factorization_evaluation_at_positive_rational.sage` | 一次因子分解の正有理点評価 | PASS | 全例・全評価点で一致 |
-| `check_positive_rational_shifted_product_ratio.sage` | 零点差積と評価値・最高次係数比 | PASS | 全例・全評価点で一致 |
+| `check_positive_rational_shifted_product_ratio.sage` | 標準単射で移した零点差積と評価値・最高次係数比 | PASS | 全例・全評価点で正有理係数比の `QQbar` 像として一致 |
 | `check_ratio_positivity_and_one_specialization.sage` | 係数比の正値性と一点評価への特殊化 | PASS | 全例で正有理数かつ既存表示と一致 |
 
 ## 備考

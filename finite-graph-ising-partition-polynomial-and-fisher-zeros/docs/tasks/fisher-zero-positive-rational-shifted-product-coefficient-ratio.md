@@ -10,8 +10,9 @@
 - リポジトリ直下の `CLAUDE.md`、`AGENTS.md`、`docs/context/` と、このプロジェクトの `README.md` を読む。
 - 依存する本文ラベルは `def_ising_partition_polynomial`、
   `theorem_partition_polynomial_degree_maximum_broken_edge_count`、
-  `claim_partition_polynomial_coefficient_expansion`、`theorem_no_positive_rational_root` である。
-- 係数を `Qbar[x]` へ移した分配多項式の一次因子分解を正有理点で評価する。
+  `claim_partition_polynomial_coefficient_expansion`、`theorem_no_positive_rational_root`、
+  `theorem_fisher_zero_rational_shifted_product_coefficient_ratio` である。
+- `Q` から `Qbar` への標準単射を明記し、一般有理評価点の定理を正有理点へ特殊化する。
 
 ## スコープ
 
@@ -22,16 +23,16 @@
 
 - グラフ、スピン配位集合、零点添字集合は有限集合に属する。
 - 次数と係数の多重度は `N`、Ising 分配多項式は `Z[x]`、評価点と評価値は `Q` に属する。
-- Fisher 零点、評価点との差、有限積は `Qbar`、評価値と最高次係数の比は `Q` に属する。
+- Fisher 零点、標準単射で `Qbar` へ移した評価点との差、有限積は `Qbar`、評価値と最高次係数の比は `Q` に属する。
 - 複素平面への埋め込み、数値近似、実数、極限、積分を使わないため、`R/C` 脱出は起きない。
 
 ## 作業内容
 
 ### 構造化本文
 
-- 分配多項式を `Qbar[x]` 上で重複度込み Fisher 零点の一次因子へ分解する。
-- 一次因子分解を任意の `q in Q_{>0}` で評価する。
-- 非零な最高次係数を消去し、正有理評価の下界から係数比の正値性を得る。
+- 一般有理評価点の定理を任意の `q in Q_{>0}` へ適用する。
+- 正有理評価の下界と最高次係数の正値性から、有理数内で係数比の正値性を得る。
+- 係数比を標準単射で `Qbar` へ移し、零点差積との等号を得る。
 
 ### SageMath 検算
 

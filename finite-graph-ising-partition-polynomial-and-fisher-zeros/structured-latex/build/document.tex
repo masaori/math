@@ -4279,12 +4279,22 @@ $\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overli
 $\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
  と書く。任意の正の有理数
 $q\in\mathbb Q_{>0}$
- について
+ について、自然数から有理数への標準単射を
+$\eta_{\mathbb N,\mathbb Q}:\mathbb N\hookrightarrow\mathbb Q$
+、有理数から代数的数への標準単射を
+$\iota_{\mathbb Q,\overline{\mathbb Q}}:\mathbb Q\hookrightarrow\overline{\mathbb Q}$
+ と書く。このとき
 
-\[\prod_{j=1}^{d}(q-\alpha_j)
+\[\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
 =
-\frac{Z_G(q)}{\Omega_G(d)}
-\in\mathbb Q_{>0}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+\in\iota_{\mathbb Q,\overline{\mathbb Q}}(\mathbb Q_{>0})
 \subset\overline{\mathbb Q}.\]
 $d=0$
  の場合、左辺は空積
@@ -4293,39 +4303,50 @@ $1\in\overline{\mathbb Q}$
 
 \end{theorem}
 \begin{proof}
-\cref{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
- と
-\cref{lab:claim_partition_polynomial_coefficient_expansion}
- より、
-$\Omega_G(d)\in\mathbb N_{>0}$
- は最高次係数である。標準単射で係数を移した多項式を
-$\overline P_G(x)\in\overline{\mathbb Q}[x]$
- と書く。代数的閉体上の一次因子分解により、
+\cref{lab:theorem_fisher_zero_rational_shifted_product_coefficient_ratio}
+ を正の有理数
+$q$
+に適用すると
 
-\[\overline P_G(x)
+\[\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
 =
-\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j).\]
-\[\begin{aligned}
-Z_G(q)
-&=\overline P_G(q)
-&&\bigl(\because\ \text{標準単射は有理数 }q\text{ での評価を保存する}\bigr)\\
-&=\Omega_G(d)\prod_{j=1}^{d}(q-\alpha_j)
-&&\bigl(\because\ \text{一次因子分解へ }x=q\text{ を代入する}\bigr).
-\end{aligned}\]
-$\Omega_G(d)\ne0$
- なので、代数的数の体で最高次係数を消去すると、
-
-\[\prod_{j=1}^{d}(q-\alpha_j)
-=
-\frac{Z_G(q)}{\Omega_G(d)}.\]
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+\quad\bigl(\because\ \text{有理評価点との差の積}\bigr).\]
 \cref{lab:theorem_no_positive_rational_root}
  より
 
 \[Z_G(q)\in\mathbb Q_{>0}
 \quad\bigl(\because\ Z_G(q)\ge2\text{ in }\mathbb Q\bigr).\]
-\[\frac{Z_G(q)}{\Omega_G(d)}\in\mathbb Q_{>0}
-\quad\bigl(\because\ Z_G(q)\in\mathbb Q_{>0}\text{ かつ }\Omega_G(d)\in\mathbb N_{>0}\bigr).\]
-評価点と係数比は有理数、Fisher 零点、差、有限積は代数的数、次数と多重度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+\cref{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
+ と
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+より
+
+\[\eta_{\mathbb N,\mathbb Q}(\Omega_G(d))\in\mathbb Q_{>0}
+\quad\bigl(\because\ \Omega_G(d)\in\mathbb N_{>0}\text{ は最高次係数である}\bigr).\]
+\[\frac{
+  Z_G(q)
+}{
+  \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+}
+\in\mathbb Q_{>0}
+\quad\bigl(\because\ \text{正の有理数どうしの商は正の有理数である}\bigr).\]
+\[\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+\in\iota_{\mathbb Q,\overline{\mathbb Q}}(\mathbb Q_{>0})
+\quad\bigl(\because\ \text{標準単射の像の定義}\bigr).\]
+評価点と係数比は有理数、その標準単射像、Fisher 零点、差、有限積は代数的数、次数と多重度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
 
 \end{proof}
 
