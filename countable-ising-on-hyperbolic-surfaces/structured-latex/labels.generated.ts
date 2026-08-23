@@ -124,6 +124,7 @@ export const ALL_LABELS = [
   "theorem_primal_coboundary_transport_is_dual_boundary",
   "theorem_primal_cocycle_transport_is_dual_cycle",
   "theorem_primal_cohomology_dual_homology_transport_is_bijective",
+  "theorem_product_difference_eight_hyperbolic_types",
   "theorem_product_difference_seven_hyperbolic_types",
   "theorem_product_difference_six_hyperbolic_types",
   "theorem_quotient_tower_coset_cell_incidence_forward_preservation",
