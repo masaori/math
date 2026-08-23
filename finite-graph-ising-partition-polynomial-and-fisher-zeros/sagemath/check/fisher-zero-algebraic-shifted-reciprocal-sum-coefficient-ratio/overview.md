@@ -14,6 +14,7 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
+| `check_embedded_coefficient_expansion.sage` | `NN` の多重度を `QQ`、`QQbar` へ順に移した係数表示 | PASS | 全例で多項式として一致 |
 | `check_coefficient_formal_derivative.sage` | `NN` の係数添字と多重度を `QQ`、`QQbar` へ順に移した係数表示の項別形式微分 | PASS | 全例で多項式として一致 |
 | `check_standard_embeddings_preserve_product.sage` | `NN` の係数添字と多重度の積を `QQ`、`QQbar` へ移す二つの標準単射の乗法性 | PASS | 全例・全係数添字で一致 |
 | `check_product_formal_derivative.sage` | 一次因子積の形式微分と一因子を除いた積の和 | PASS | 全例で多項式として一致 |

@@ -4729,8 +4729,17 @@ Z_G(1)
         math(String.raw`\overline{\mathbb Q}`),
         " 上線形に拡張する。",
         ref("claim_partition_polynomial_coefficient_expansion"),
-        " の係数表示を標準単射で移して形式微分すると、",
+        " の係数表示を標準単射で移すと、",
       ]),
+      displayMath(String.raw`\overline P_G(x)
+=
+\sum_{m=0}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+x^m
+\quad\bigl(\because\ \text{係数表示を二つの標準単射で移す}\bigr).`),
+      paragraph(["直前の多項式恒等式を形式微分すると、"]),
       displayMath(String.raw`D\overline P_G(x)
 =
 \sum_{m=1}^{|E|}
