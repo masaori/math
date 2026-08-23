@@ -7310,4 +7310,143 @@ a_L(1)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_finite_box_sequence_at_two_is_not_constant",
+    kind: "claim",
+    title: { text: "有理点 2 では有限箱の量の列は定数列でない" },
+    labels: ["claim_finite_box_sequence_at_two_is_not_constant"],
+    habitat: "R",
+    realEscape:
+      "結論に現れる a_1(2) と a_2(2) は正の有理数の正の実数乗根であり ℝ に住む。ここで箱の大きさの極限は取らない。比較は二つの項の間の等号の否定だけであり、上限・下限・級数・指数関数・実対数を使わない。",
+    statement: [
+      paragraph([
+        "有理点 ",
+        math(String.raw`q=2`),
+        " について、有限箱の量の列 ",
+        math(String.raw`L\mapsto a_L(2)`),
+        "（",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        "）は定数列でない。実際、",
+      ]),
+      displayMath(String.raw`a_1(2)=2,\qquad a_2(2)>2`),
+      paragraph([" が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "まず ",
+        math(String.raw`L=1`),
+        " を見る。箱 ",
+        math(String.raw`V_1`),
+        " は 1 点集合であり ",
+        math(String.raw`\#V_1=1`),
+        " である（",
+        ref("def_box"),
+        "）。相異なる 2 点を結ぶ辺は存在しないので ",
+        math(String.raw`\#E_1=0`),
+        " である（",
+        ref("def_edge_set"),
+        "）。係数が非零である最大の次数は ",
+        math(String.raw`\#E_1`),
+        " なので（",
+        ref("claim_partition_support_endpoints"),
+        "）、",
+        math(String.raw`Z_1`),
+        " は定数多項式 ",
+        math(String.raw`\Omega_1(0)`),
+        " である。その値は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Omega_1(0)
+&=Z_1(1)
+&&(\because\ \text{定数多項式の値はどの点でも係数に等しい})\\
+&=2^{\#V_1}
+&&(\because\ \blkref{claim_partition_value_at_one})\\
+&=2
+&&(\because\ \#V_1=1)
+\end{aligned}`,
+      ),
+      paragraph([
+        " である。したがって ",
+        math(String.raw`Z_1(2)=2`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`a_1(2)=Z_1(2)^{1/\#V_1}=2^{1/1}=2`,
+      ),
+      paragraph([
+        " を得る（",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        "）。",
+      ]),
+      paragraph([
+        "次に ",
+        math(String.raw`L=2`),
+        " を見る。",
+        math(String.raw`\#V_2=8`),
+        " である（",
+        ref("def_box"),
+        "）。第一座標だけが ",
+        math(String.raw`1`),
+        " だけ違う 2 点は辺を成すので ",
+        math(String.raw`\#E_2\ge1`),
+        " である（",
+        ref("def_edge_set"),
+        "）。分配多項式の係数はすべて非負の自然数であり（",
+        ref("claim_partition_coefficients_nonnegative"),
+        "）、次数 ",
+        math(String.raw`\#E_2`),
+        " の係数は ",
+        math(String.raw`\Omega_2(\#E_2)\ge2`),
+        " を満たす（",
+        ref("claim_partition_support_endpoints"),
+        "）。有限和の各項を比べると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_2(2)-Z_2(1)
+&=\sum_{m=0}^{\#E_2}\Omega_2(m)\,2^{m}-\sum_{m=0}^{\#E_2}\Omega_2(m)
+&&(\because\ \text{有限和による分配多項式の定義})\\
+&=\sum_{m=0}^{\#E_2}\Omega_2(m)\,(2^{m}-1)
+&&(\because\ \text{項ごとにまとめた})\\
+&\ge\Omega_2(\#E_2)\,(2^{\#E_2}-1)
+&&(\because\ \blkref{claim_partition_coefficients_nonnegative}\ \text{と}\ 2^{m}-1\ge0)\\
+&\ge2\,(2^{\#E_2}-1)
+&&(\because\ \blkref{claim_partition_support_endpoints})\\
+&>0
+&&(\because\ \#E_2\ge1\ \text{より}\ 2^{\#E_2}-1\ge1)
+\end{aligned}`,
+      ),
+      paragraph([
+        " となる。ここで ",
+        math(String.raw`Z_2(1)=2^{\#V_2}=2^{8}`),
+        " である（",
+        ref("claim_partition_value_at_one"),
+        "）から、",
+        math(String.raw`Z_2(2)>2^{8}`),
+        " を得る。正の実数の ",
+        math(String.raw`8`),
+        " 乗は狭義単調増加なので、",
+        math(String.raw`a_2(2)^{8}=Z_2(2)>2^{8}`),
+        " から ",
+        math(String.raw`a_2(2)>2`),
+        " が従う。",
+      ]),
+      paragraph([
+        "以上より ",
+        math(String.raw`a_1(2)=2`),
+        " と ",
+        math(String.raw`a_2(2)>2`),
+        " は相異なるので、列 ",
+        math(String.raw`L\mapsto a_L(2)`),
+        " は定数列でない。とくに、有理点 ",
+        math(String.raw`1`),
+        " で極限量の存在を閉じた経路（定数列がその値へ収束すること。",
+        ref("claim_limit_quantity_at_one_equals_two"),
+        "）は、有理点 ",
+        math(String.raw`2`),
+        " には適用できない。",
+      ]),
+    ],
+  },
 ]);

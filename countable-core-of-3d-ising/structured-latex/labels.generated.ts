@@ -29,6 +29,7 @@ export const ALL_LABELS = [
   "claim_even_multiplicity",
   "claim_factorization_type_determines_root_minimal_degrees",
   "claim_finite_box_equalities_transfer_to_limit_quantity",
+  "claim_finite_box_sequence_at_two_is_not_constant",
   "claim_finite_prime_truncation_has_a_value_collision",
   "claim_finitely_many_cross_power_equalities_are_not_sufficient_for_limit_quantity",
   "claim_finitely_many_primes_are_not_sufficient_for_limit_quantity",
