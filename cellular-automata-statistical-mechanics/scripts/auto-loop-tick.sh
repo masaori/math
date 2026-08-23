@@ -23,7 +23,7 @@ TICK_TIMEOUT_SECONDS=1620
 
 # launchd は対話シェルのアカウント割り当てを継承しない。既定の Claude 資格情報へ
 # 暗黙に接続すると、別アカウントへの全体切り替えでこの tick の経路まで変わる。
-# 利用上限へ達していない Fable 5 のアカウントを、このプロセスだけへ明示的に割り当てる。
+# Claude 用の専用アカウントを、このプロセスだけへ明示的に割り当てる。
 CLAUDE_TICK_CONFIG_DIR="$HOME/.claude-coding-agent-0004"
 CLAUDE_TICK_TOKEN_FILE="$HOME/.config/agent-tokens/claude-coding-agent-0004.token"
 
@@ -234,13 +234,16 @@ run_claude() {  # $1 = モデル名
 
 set +e
 if [ "$agent" = "claude" ]; then
-  run_claude claude-fable-5
+  # 固定モデルは claude-opus-5。以前の claude-fable-5 は、この専用アカウントで
+  # 2026-08-22 以降すべて利用上限により終了した。同じアカウントの別ループで Opus 5 の
+  # 正常終了を確認したうえでの固定変更であり、実行時のフォールバックは行わない。
+  run_claude claude-opus-5
   status=$?
   # モデル単位の上限は、別モデルへ勝手に落とさずエラーとして扱う。何のモデルで何が
   # 動いたのか分からなくなるため（人間の判断 2026-08-17）。
   if [ "$status" -ne 0 ]; then
     case "$(tail -5 "$LOG_FILE")" in
-      *"Switch to another model"*) log "    claude-fable-5 が利用上限。この tick はエラーで終える" ;;
+      *"Switch to another model"*) log "    claude-opus-5 が利用上限。この tick はエラーで終える" ;;
     esac
   fi
 else
