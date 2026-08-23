@@ -153,4 +153,22 @@ theorem IsPerfectMatching.disjoint_within_vertices {Terminal : Type*} [Decidable
   fun _ ht hte => hMatching.not_mem_of_mem_of_ne vertices edges matching he hf hne ht hte
 
 
+/-- 元の辺から外部辺への対応は単射である。外部辺の各端子が元の辺そのものを第二成分として
+持っているため、外部辺の集合から元の辺が読み取れる（端点の相異なりは要らない）。 -/
+theorem externalEdge_injective {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (endpoint₀ endpoint₁ : Edge → V) :
+    Function.Injective (externalEdge (V := V) endpoint₀ endpoint₁) := by
+  intro e f hef
+  have hmem : (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) ∈ externalEdge endpoint₀ endpoint₁ e := by
+    simp [externalEdge]
+  rw [hef] at hmem
+  have hmem' :
+      (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) = ⟨endpoint₀ f, f⟩ ∨
+        (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) = ⟨endpoint₁ f, f⟩ := by
+    simpa [externalEdge, Finset.mem_insert, Finset.mem_singleton] using hmem
+  rcases hmem' with h | h
+  · exact congrArg Sigma.snd h
+  · exact congrArg Sigma.snd h
+
+
 end Ising3DCut.Prediction
