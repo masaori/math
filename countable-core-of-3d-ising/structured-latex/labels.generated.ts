@@ -67,6 +67,7 @@ export const ALL_LABELS = [
   "claim_shifted_free_family_partition_value_does_not_determine_limit_quantity",
   "claim_shifted_free_family_partition_values_differ_but_finite_box_quantities_agree",
   "claim_shifted_free_family_root_set_does_not_determine_limit_quantity",
+  "claim_sign_collapse_has_a_value_collision",
   "claim_sign_of_prime_exponents_is_not_sufficient_for_limit_quantity",
   "claim_splitting_degree_galois_group_do_not_determine_polynomial",
   "claim_structural_palindrome",
@@ -117,6 +118,7 @@ export const ALL_LABELS = [
   "remark_magnitude_truncation_not_sufficient_is_a_specialization",
   "remark_null_model_positioning",
   "remark_odd_period_positioning",
+  "remark_sign_collapse_not_sufficient_is_a_specialization",
   "remark_two_dimensional_prediction_filter",
 ] as const
 
