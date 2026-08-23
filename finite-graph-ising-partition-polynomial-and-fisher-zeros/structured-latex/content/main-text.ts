@@ -4516,6 +4516,78 @@ Z_G(q)
     ],
   },
   {
+    id: "finite_graph_theorem_fisher_zero_positive_rational_shifted_product_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点と正有理評価点との差の積" },
+    labels: ["theorem_fisher_zero_positive_rational_shifted_product_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-positive-rational-shifted-product-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置く。係数を標準単射",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。任意の正の有理数",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " について",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{d}(q-\alpha_j)
+=
+\frac{Z_G(q)}{\Omega_G(d)}
+\in\mathbb Q_{>0}
+\subset\overline{\mathbb Q}.`),
+      paragraph([
+        math(String.raw`d=0`),
+        " の場合、左辺は空積",
+        math(String.raw`1\in\overline{\mathbb Q}`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
+        " と",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " より、",
+        math(String.raw`\Omega_G(d)\in\mathbb N_{>0}`),
+        " は最高次係数である。標準単射で係数を移した多項式を",
+        math(String.raw`\overline P_G(x)\in\overline{\mathbb Q}[x]`),
+        " と書く。代数的閉体上の一次因子分解により、",
+      ]),
+      displayMath(String.raw`\overline P_G(x)
+=
+\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j).`),
+      displayMath(String.raw`\begin{aligned}
+Z_G(q)
+&=\overline P_G(q)
+&&\bigl(\because\ \text{標準単射は有理数 }q\text{ での評価を保存する}\bigr)\\
+&=\Omega_G(d)\prod_{j=1}^{d}(q-\alpha_j)
+&&\bigl(\because\ \text{一次因子分解へ }x=q\text{ を代入する}\bigr).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\Omega_G(d)\ne0`),
+        " なので、代数的数の体で最高次係数を消去すると、",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{d}(q-\alpha_j)
+=
+\frac{Z_G(q)}{\Omega_G(d)}.`),
+      paragraph([ref("theorem_no_positive_rational_root"), " より"]),
+      displayMath(String.raw`Z_G(q)\in\mathbb Q_{>0}
+\quad\bigl(\because\ Z_G(q)\ge2\text{ in }\mathbb Q\bigr).`),
+      displayMath(String.raw`\frac{Z_G(q)}{\Omega_G(d)}\in\mathbb Q_{>0}
+\quad\bigl(\because\ Z_G(q)\in\mathbb Q_{>0}\text{ かつ }\Omega_G(d)\in\mathbb N_{>0}\bigr).`),
+      paragraph([
+        "評価点と係数比は有理数、Fisher 零点、差、有限積は代数的数、次数と多重度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_positive_rational_evaluation_monotonicity",
     kind: "theorem",
     title: { text: "Ising 分配多項式の正の有理評価の単調性" },

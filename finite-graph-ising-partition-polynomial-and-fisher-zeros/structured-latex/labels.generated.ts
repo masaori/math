@@ -31,6 +31,7 @@ export const ALL_LABELS = [
   "theorem_fisher_zero_cube_sum_coefficient_ratio",
   "theorem_fisher_zero_elementary_symmetric_coefficient_ratio",
   "theorem_fisher_zero_fourth_power_sum_coefficient_ratio",
+  "theorem_fisher_zero_positive_rational_shifted_product_coefficient_ratio",
   "theorem_fisher_zero_power_sum_newton_recurrence",
   "theorem_fisher_zero_product_coefficient_ratio",
   "theorem_fisher_zero_reciprocal_sum_coefficient_ratio",
