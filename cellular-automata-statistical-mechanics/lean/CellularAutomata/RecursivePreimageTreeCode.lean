@@ -737,6 +737,14 @@ noncomputable def mapCode : Multiset (Finset (List ℕ)) :=
   (periodicOrbitTable N f).val.map fun orbit =>
     if h : orbit.Nonempty then componentCode N f h.choose else ∅
 
+/-- 具体版の写像符号は、必要十分版の有限表上の符号集約を、周期軌道表と
+各軌道の成分符号へ特殊化したものである。 -/
+theorem mapCode_eq_necessary_sufficient :
+    mapCode N f =
+      NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.aggregateCode
+        (periodicOrbitTable N f)
+        (fun orbit => if h : orbit.Nonempty then componentCode N f h.choose else ∅) := rfl
+
 /-- 反復の加法則 `F^{m+n} = F^m ∘ F^n`（`m` の帰納法）。 -/
 theorem iterate_add (m n : ℕ) (y : V → State) :
     iterate N f (m + n) y = iterate N f m (iterate N f n y) := by
@@ -2798,16 +2806,16 @@ theorem image_periodicOrbitTable :
 /-- 共役全単射は写像全体の符号を保存する
     （`claim_recursive_preimage_tree_code_conjugacy_invariance` の結論）。 -/
 theorem mapCode_transport : mapCode NW fW = mapCode N f := by
-  unfold mapCode
-  rw [← image_periodicOrbitTable N f NW fW h hconj,
-    Finset.image_val_of_injOn (Finset.image_injective h.injective).injOn,
-    Multiset.map_map]
-  refine Multiset.map_congr rfl fun O hO => ?_
+  rw [mapCode_eq_necessary_sufficient, mapCode_eq_necessary_sufficient]
+  apply NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.aggregateCode_transport
+    (periodicOrbitTable N f) (periodicOrbitTable NW fW) (Finset.image h)
+    (Finset.image_injective h.injective)
+    (image_periodicOrbitTable N f NW fW h hconj)
+  intro O hO
   have hOmem : O ∈ periodicOrbitTable N f := hO
   obtain ⟨q, hq, rfl⟩ := (mem_periodicOrbitTable_iff N f O).1 hOmem
   have hne : (periodicOrbit N f q).Nonempty := ⟨q, mem_periodicOrbit_self N f q hq⟩
   have hneW : ((periodicOrbit N f q).image h).Nonempty := hne.image h
-  simp only [Function.comp_apply]
   rw [dif_pos hneW, dif_pos hne]
   obtain ⟨z, hzmem, hzeq⟩ := Finset.mem_image.mp hneW.choose_spec
   rw [← hzeq, componentCode_transport N f NW fW h hconj z,

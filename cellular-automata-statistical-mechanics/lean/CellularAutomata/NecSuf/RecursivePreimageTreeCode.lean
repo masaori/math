@@ -255,4 +255,21 @@ theorem componentCode_transport {L : Type} [DecidableEq L]
   rw [← horbit x, Finset.image_image]
   exact Finset.image_congr fun r _ => hword r
 
+/-- 有限表の各元へ付けた符号を、重複度を保つ有限多重集合へ集める。
+型全体の有限性、自己写像、周期軌道、符号の内部構造は使わない。 -/
+def aggregateCode {O L : Type} (table : Finset O) (code : O → L) : Multiset L :=
+  table.val.map code
+
+/-- 有限表を単射で移し、表の各元に付く符号を保存するなら、
+重複度を含む集約符号も保存される。要るのは有限表、単射、各元の符号保存だけである。 -/
+theorem aggregateCode_transport {OX OY L : Type} [DecidableEq OX] [DecidableEq OY]
+    (tableX : Finset OX) (tableY : Finset OY) (move : OX → OY)
+    (hmove : Function.Injective move) (htable : tableX.image move = tableY)
+    (codeX : OX → L) (codeY : OY → L)
+    (hcode : ∀ o, o ∈ tableX → codeY (move o) = codeX o) :
+    aggregateCode tableY codeY = aggregateCode tableX codeX := by
+  rw [← htable]
+  simp only [aggregateCode, Finset.image_val_of_injOn hmove.injOn, Multiset.map_map]
+  exact Multiset.map_congr rfl fun o ho => hcode o ho
+
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance

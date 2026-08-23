@@ -1049,8 +1049,10 @@ targets=(
   CellularAutomata.RecursivePreimageTreeCode.mapCode_transport
   CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.image_periodicOrbit
   CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.componentCode_transport
+  CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.aggregateCode_transport
   CellularAutomata.RecursivePreimageTreeCode.periodicOrbit_eq_necessary_sufficient
   CellularAutomata.RecursivePreimageTreeCode.componentCode_eq_necessary_sufficient
+  CellularAutomata.RecursivePreimageTreeCode.mapCode_eq_necessary_sufficient
   CellularAutomata.RecursivePreimageTreeCode.image_periodicOrbit
   CellularAutomata.RecursivePreimageTreeCode.componentCode_transport
 )
