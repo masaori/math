@@ -112,6 +112,7 @@ export const ALL_LABELS = [
   "theorem_fixed_quotient_ising_partition_polynomial",
   "theorem_fixed_quotient_partition_polynomial_has_square_factor",
   "theorem_fixed_quotient_partition_polynomial_irreducible_factorization",
+  "theorem_fixed_quotient_partition_polynomial_not_solvable_by_radicals",
   "theorem_generated_quotient_cellulation_is_hyperbolic_regular",
   "theorem_homology_class_polynomials_recombine",
   "theorem_primal_coboundary_transport_is_dual_boundary",

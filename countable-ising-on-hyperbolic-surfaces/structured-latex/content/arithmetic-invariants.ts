@@ -2744,6 +2744,77 @@ F_i=F_{i-1}(a_i),\quad a_i^{n_i}\in F_{i-1}
     ],
   },
   {
+    id: "arithmetic_invariants_theorem_fixed_quotient_partition_polynomial_not_solvable_by_radicals",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Ising 分配多項式の根式非可解性" },
+    labels: ["theorem_fixed_quotient_partition_polynomial_not_solvable_by_radicals"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-partition-polynomial-not-solvable-by-radicals"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_partition_polynomial_irreducible_factorization"),
+        " の固定剰余類格子の Ising 分配多項式を ",
+        math(String.raw`Z_Q\in\mathbb Z[x]`),
+        " とし、その根集合を ",
+        math(String.raw`\mathcal Z_Q:=\{\alpha\in\overline{\mathbb Q}\mid Z_Q(\alpha)=0\}`),
+        " とする。このとき、次の条件を満たす部分体の有限列は存在しない。",
+      ]),
+      displayMath(String.raw`\mathbb Q=F_0\subset F_1\subset\cdots\subset F_m\subset\overline{\mathbb Q},
+\qquad
+\mathcal Z_Q\subset F_m,`),
+      displayMath(String.raw`\forall i\in\{1,\ldots,m\}\quad
+\exists a_i\in F_i\quad
+\exists n_i\in\mathbb N_{>0}\quad
+F_i=F_{i-1}(a_i),
+\qquad
+a_i^{n_i}\in F_{i-1}.`),
+      paragraph([
+        "したがって ",
+        math(String.raw`Z_Q`),
+        " は ",
+        math(String.raw`\mathbb Q`),
+        " 上で根式によって解けない。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fixed_quotient_partition_polynomial_irreducible_factorization"),
+        " より、次数四十四の既約因子 ",
+        math(String.raw`Q_Q\in\mathbb Z[x]`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`Z_Q(x)=2(x+1)^{12}Q_Q(x).`),
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_irreducible_factor_not_solvable_by_radicals"),
+        " の根集合を ",
+        math(String.raw`\mathcal R_Q:=\{\alpha\in\overline{\mathbb Q}\mid Q_Q(\alpha)=0\}`),
+        " とする。任意の ",
+        math(String.raw`\alpha\in\mathcal R_Q`),
+        " について、根集合の定義より、",
+      ]),
+      displayMath(String.raw`Q_Q(\alpha)=0.`),
+      paragraph([ref("theorem_fixed_quotient_partition_polynomial_irreducible_factorization"), " を ", math(String.raw`\alpha`), " で評価すると、"]),
+      displayMath(String.raw`\begin{aligned}
+Z_Q(\alpha)
+&=2(\alpha+1)^{12}Q_Q(\alpha)
+&&\bigl(\because\ Z_Q(x)=2(x+1)^{12}Q_Q(x)\bigr)\\
+&=0
+&&\bigl(\because\ Q_Q(\alpha)=0\bigr).
+\end{aligned}`),
+      paragraph(["したがって、"]),
+      displayMath(String.raw`\mathcal R_Q\subset\mathcal Z_Q.`),
+      paragraph([
+        "所定の有限列が存在すると仮定する。このとき ",
+        math(String.raw`\mathcal Z_Q\subset F_m`),
+        " と ",
+        math(String.raw`\mathcal R_Q\subset\mathcal Z_Q`),
+        " に包含関係の推移律を適用して、",
+      ]),
+      displayMath(String.raw`\mathcal R_Q\subset F_m.`),
+      paragraph([ref("theorem_fixed_quotient_fisher_irreducible_factor_not_solvable_by_radicals"), " に反する。ゆえに所定の有限列は存在せず、", math(String.raw`Z_Q`), " は ", math(String.raw`\mathbb Q`), " 上で根式によって解けない。"]),
+    ],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
     kind: "theorem",
     title: { text: "固定剰余類格子の Fisher 零点の有理矩形根分離証明書" },
