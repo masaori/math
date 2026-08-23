@@ -132,21 +132,18 @@ theorem codeAtDepth_eq_recursiveCode_of_remaining_le
 /-- 二つの多重集合を写した結果が等しければ、各値を保つ出現の全単射を取れる。
     多重集合の出現型を使うので、同じ値を持つ相異なる子の重複度を失わない。 -/
 theorem exists_occurrence_equiv_of_map_eq
-    {X Y C : Type} [DecidableEq X] [DecidableEq Y]
+    {X Y C : Type} [DecidableEq X] [DecidableEq Y] [DecidableEq C]
     (s : Multiset X) (t : Multiset Y)
     (a : X → C) (b : Y → C) (hmap : s.map a = t.map b) :
-    ∃ e : s ≃ t, ∀ x : s, b (e x) = a x := by
-  let e : s ≃ t :=
-    (s.mapEquiv a).trans (Multiset.cast hmap) |>.trans (t.mapEquiv b).symm
-  refine ⟨e, fun x => ?_⟩
-  have happly := Multiset.mapEquiv_apply t b
-    ((t.mapEquiv b).symm ((Multiset.cast hmap) (s.mapEquiv a x)))
-  simpa [e] using happly.symm
+    ∃ e : s ≃ t, ∀ x : s, b (e x) = a x :=
+  NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.exists_occurrence_equiv_of_map_eq
+    s t a b hmap
 
-/-- 多重集合の出現型の元が表す値は、元の多重集合に属する。 -/
+/-- 多重集合の出現型の元が表す値は、元の多重集合に属する
+    （必要十分版の `occurrenceValue_mem` の特殊化）。 -/
 theorem occurrence_mem {X : Type} [DecidableEq X]
-    (s : Multiset X) (x : s) : (x : X) ∈ s := by
-  exact Multiset.coe_mem
+    (s : Multiset X) (x : s) : (x : X) ∈ s :=
+  NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.occurrenceValue_mem s x
 
 section ChildCodeMatching
 
@@ -970,11 +967,12 @@ theorem exists_periodicOrbit_occurrence_equiv_of_mapCode_eq
             componentCode NW fW hO.choose else ∅) =
           (if hO : (O : Finset (V → State)).Nonempty then
             componentCode N f hO.choose else ∅) := by
-  apply exists_occurrence_equiv_of_map_eq
-    (periodicOrbitTable N f).val (periodicOrbitTable NW fW).val
+  apply NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.exists_occurrence_equiv_of_aggregateCode_eq
+    (periodicOrbitTable N f) (periodicOrbitTable NW fW)
     (fun orbit => if hO : orbit.Nonempty then componentCode N f hO.choose else ∅)
     (fun orbit => if hO : orbit.Nonempty then componentCode NW fW hO.choose else ∅)
-  simpa only [mapCode] using hcode.symm
+  rw [← mapCode_eq_necessary_sufficient, ← mapCode_eq_necessary_sufficient]
+  exact hcode
 
 /-- 写像符号が等しいとき、周期軌道の各出現を対応させたうえで、
     対応する各軌道から等しい基点語を持つ周期点の組を選べる。 -/

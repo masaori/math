@@ -34,6 +34,7 @@ import Mathlib.Data.Finset.Basic
 import Mathlib.Data.Finset.Image
 import Mathlib.Data.Finset.Range
 import Mathlib.Data.Multiset.Sort
+import Mathlib.Data.Multiset.Fintype
 
 namespace CellularAutomata.NecSuf.RecursivePreimageTreeCode
 
@@ -271,5 +272,42 @@ theorem aggregateCode_transport {OX OY L : Type} [DecidableEq OX] [DecidableEq O
   rw [← htable]
   simp only [aggregateCode, Finset.image_val_of_injOn hmove.injOn, Multiset.map_map]
   exact Multiset.map_congr rfl fun o ho => hcode o ho
+
+/-- 多重集合の出現型の元が表す値は、その多重集合に属する。
+要るのは多重集合一つと、その出現型を作るための元の等号判定だけであり、
+写像・符号・型全体の有限性は使わない。 -/
+theorem occurrenceValue_mem {O : Type} [DecidableEq O] (s : Multiset O) (o : s) : (o : O) ∈ s :=
+  Multiset.coe_mem
+
+/-- 二つの多重集合を符号で写した結果が等しければ、出現どうしの全単射で
+符号を保つものが取れる。出現型を使うので、同じ符号を持つ相異なる元の重複度を失わない。
+要るのは二つの多重集合、その上の二つの符号、および写した結果の等号だけであり、
+表が有限集合から来ること、符号の内部構造、型全体の有限性は使わない。
+落とせなかった仮定は三つの等号判定である。両側の元の等号判定は出現型を作るために要り、
+符号の等号判定は、写した二つの多重集合の出現型の間の移送に要る。 -/
+theorem exists_occurrence_equiv_of_map_eq {OX OY L : Type}
+    [DecidableEq OX] [DecidableEq OY] [DecidableEq L]
+    (s : Multiset OX) (t : Multiset OY) (codeX : OX → L) (codeY : OY → L)
+    (hmap : s.map codeX = t.map codeY) :
+    ∃ e : s ≃ t, ∀ o : s, codeY (e o) = codeX o := by
+  let e : s ≃ t :=
+    (s.mapEquiv codeX).trans (Multiset.cast hmap) |>.trans (t.mapEquiv codeY).symm
+  refine ⟨e, fun o => ?_⟩
+  have happly := Multiset.mapEquiv_apply t codeY
+    ((t.mapEquiv codeY).symm ((Multiset.cast hmap) (s.mapEquiv codeX o)))
+  simpa [e] using happly.symm
+
+/-- 集約符号が等しければ、二つの有限表の出現を重複度つきで対応させる全単射が取れ、
+対応する出現どうしで符号が一致する。`aggregateCode_transport` の逆向きの段であり、
+要るのは二つの有限表、その上の二つの符号、集約符号の等号、
+および上と同じ三つの等号判定だけである。
+型全体の有限性、自己写像、周期軌道、符号の内部構造は使わない。 -/
+theorem exists_occurrence_equiv_of_aggregateCode_eq {OX OY L : Type}
+    [DecidableEq OX] [DecidableEq OY] [DecidableEq L]
+    (tableX : Finset OX) (tableY : Finset OY) (codeX : OX → L) (codeY : OY → L)
+    (hcode : aggregateCode tableY codeY = aggregateCode tableX codeX) :
+    ∃ e : tableX.val ≃ tableY.val, ∀ o : tableX.val, codeY (e o) = codeX o :=
+  exists_occurrence_equiv_of_map_eq tableX.val tableY.val codeX codeY
+    (by simpa only [aggregateCode] using hcode.symm)
 
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance
