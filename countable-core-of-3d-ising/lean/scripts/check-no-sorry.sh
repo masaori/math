@@ -225,6 +225,7 @@ targets=(
   Ising3DCut.Prediction.terminalMatching_weight_eq_externalPart_prod
   Ising3DCut.Prediction.mem_terminalVertices_iff
   Ising3DCut.Prediction.terminalVertex_vertex_ne
+  Ising3DCut.Prediction.card_terminalVertices
   Ising3DCut.Prediction.terminalMatching_weight_eq_unselectedEdges_prod
   Ising3DCut.LimitQuantity.tendsto_congr_of_pointwise_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_data_eq

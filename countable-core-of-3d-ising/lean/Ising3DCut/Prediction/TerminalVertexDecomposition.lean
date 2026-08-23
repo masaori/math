@@ -8,12 +8,12 @@
 偶部分グラフの全単射そのものを書くには、terminal graph の頂点集合が実際に
 どう分解されているかが要る。ここではその分解を、元の頂点と「そこに接続する辺」の
 組の集合として定義し、分解が交わりを持たないこと、および端子がどの頂点に属するかが第一成分だけで決まることを示す。
-端子の総数が各頂点の接続辺の本数の有限和に等しいことは次の tick で足す（mathlib の
-`Finset.sigma` の濃度の補題の名前が特定できず、この tick では閉じられなかった）。
+端子の総数が各頂点の接続辺の本数の有限和に等しいことも、この分解の濃度として示す。
 
 内部辺の張り方（同じ頂点から出た端子どうしをどう結ぶか）と向き付けはここでは扱わない。
 -/
 import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
 import Mathlib.Data.Finset.Sigma
 
 namespace Ising3DCut.Prediction
@@ -39,5 +39,11 @@ theorem terminalVertex_vertex_ne {V Edge : Type*}
     (⟨v, e⟩ : Σ _ : V, Edge) ≠ ⟨v', e'⟩ := by
   intro hEq
   exact hne (congrArg Sigma.fst hEq)
+
+/-- 端子の総数は、各頂点に接続する辺の本数の有限和に等しい。 -/
+theorem card_terminalVertices {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (incidentEdges : V → Finset Edge) :
+    (terminalVertices vertices incidentEdges).card = ∑ v ∈ vertices, (incidentEdges v).card := by
+  exact Finset.card_sigma vertices incidentEdges
 
 end Ising3DCut.Prediction
