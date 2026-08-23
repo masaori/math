@@ -28,8 +28,10 @@
 -/
 
 import Mathlib.Logic.Equiv.Defs
+import Mathlib.Logic.Equiv.List
 import Mathlib.Data.Multiset.Basic
 import Mathlib.Data.Finset.Basic
+import Mathlib.Data.Finset.Image
 import Mathlib.Data.Multiset.Sort
 
 namespace CellularAutomata.NecSuf.RecursivePreimageTreeCode
@@ -127,5 +129,73 @@ theorem codeAtDepth_transport (childrenX : X → Finset X) (childrenY : Y → Fi
       rw [hval, Multiset.map_map]
       congr 1
       exact Multiset.map_congr rfl fun z _ => ih z
+
+/-- 各点に付く残り深さ `bound - level x` で打ち切って得る完成符号。 -/
+noncomputable def completedCode (children : X → Finset X) (bound : ℕ)
+    (level : X → ℕ) (x : X) : ℕ :=
+  codeAtDepth children (bound - level x) x
+
+/-- 残り深さ以上へ打ち切りを延ばしても完成符号は変わらない。
+実際に使うのは「子では level がちょうど一つ増える」ことと
+「level は bound を越えない」ことだけであり、型全体の有限性、自己写像、
+周期点、level が最小前周期であることは使わない。 -/
+theorem codeAtDepth_eq_completedCode_of_remaining_le
+    (children : X → Finset X) (bound : ℕ) (level : X → ℕ)
+    (hchild : ∀ x z, z ∈ children x → level z = level x + 1)
+    (hlevel : ∀ x, level x ≤ bound)
+    (x : X) (depth : ℕ) (hdepth : bound - level x ≤ depth) :
+    codeAtDepth children depth x = completedCode children bound level x := by
+  generalize hremaining : bound - level x = remaining at hdepth ⊢
+  induction remaining using Nat.strong_induction_on generalizing x depth with
+  | h remaining ih =>
+      by_cases hzero : remaining = 0
+      · have hchildren : children x = ∅ := by
+          rw [Finset.eq_empty_iff_forall_notMem]
+          intro z hz
+          have hzlevel := hchild x z hz
+          have hzbound := hlevel z
+          omega
+        cases depth with
+        | zero => simp [completedCode, hremaining, hzero]
+        | succ depth =>
+            have hempty : codeAtDepth children (depth + 1) x
+                = codeAtDepth children 0 x := by
+              simp only [codeAtDepth, hchildren]
+              congr 1
+              simp
+            rw [hempty]
+            simp [completedCode, hremaining, hzero]
+      · obtain ⟨remaining', hremainingSucc⟩ := Nat.exists_eq_succ_of_ne_zero hzero
+        rw [hremainingSucc] at hdepth
+        obtain ⟨depth', hdepthEq⟩ := Nat.exists_eq_add_of_le hdepth
+        subst depth
+        rw [Nat.succ_add]
+        simp only [codeAtDepth, completedCode, hremaining, hremainingSucc]
+        congr 1
+        congr 1
+        apply Multiset.map_congr rfl
+        intro z hz
+        have hzfin : z ∈ children x := hz
+        have hzlevel := hchild x z hzfin
+        have hzremaining : bound - level z = remaining' := by omega
+        calc
+          codeAtDepth children (remaining' + depth') z
+              = completedCode children bound level z :=
+            ih remaining' (by omega) z (remaining' + depth')
+              hzremaining (Nat.le_add_right remaining' depth')
+          _ = codeAtDepth children remaining' z := by
+            rw [completedCode, hzremaining]
+
+/-- 子表を全単射に移し、`level` を保存し、`bound` が一致するなら、
+完成符号も保存される。型全体の有限性も自己写像も使わない。 -/
+theorem completedCode_transport (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    (h : X ≃ Y) (hchildren : ∀ x, (childrenX x).image h = childrenY (h x))
+    (boundX boundY : ℕ) (hbound : boundX = boundY)
+    (levelX : X → ℕ) (levelY : Y → ℕ) (hlevel : ∀ x, levelY (h x) = levelX x)
+    (x : X) :
+    completedCode childrenY boundY levelY (h x)
+      = completedCode childrenX boundX levelX x := by
+  simp only [completedCode, hlevel x, ← hbound]
+  exact codeAtDepth_transport childrenX childrenY h hchildren _ x
 
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance

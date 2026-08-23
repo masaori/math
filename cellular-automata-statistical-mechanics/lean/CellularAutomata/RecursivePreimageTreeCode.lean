@@ -89,6 +89,13 @@ noncomputable def codeAtDepth : ℕ → (V → State) → ℕ
 noncomputable def recursiveCode (y : V → State) : ℕ :=
   codeAtDepth N f (2 ^ Fintype.card V - 1 - minPreperiod N f y) y
 
+/-- 具体版の再帰的前像木符号は、必要十分版の完成符号の特殊化である
+    （子表は非周期一段前像、`level` は最小前周期、`bound` は `2^|V|-1`）。 -/
+theorem recursiveCode_eq_completedCode (y : V → State) :
+    recursiveCode N f y =
+      NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.completedCode
+        (nonperiodicChildren N f) (2 ^ Fintype.card V - 1) (minPreperiod N f) y := rfl
+
 /-- 深さ 0 では符号は空多重集合である。 -/
 theorem codeAtDepth_zero (y : V → State) :
     codeAtDepth N f 0 y = Encodable.encode ([] : List ℕ) := rfl
@@ -115,43 +122,12 @@ theorem codeAtDepth_eq_recursiveCode_of_remaining_le
     (y : V → State) (depth : ℕ)
     (hdepth : 2 ^ Fintype.card V - 1 - minPreperiod N f y ≤ depth) :
     codeAtDepth N f depth y = recursiveCode N f y := by
-  generalize hremaining : 2 ^ Fintype.card V - 1 - minPreperiod N f y = remaining at hdepth ⊢
-  induction remaining using Nat.strong_induction_on generalizing y depth with
-  | h remaining ih =>
-      by_cases hzero : remaining = 0
-      · have hchildren : nonperiodicChildren N f y = ∅ := by
-          rw [Finset.eq_empty_iff_forall_notMem]
-          intro z hz
-          have hzmu := child_minPreperiod_eq_add_one N f y z hz
-          have hzbound := minPreperiod_le_configuration_card_sub_one N f z
-          omega
-        cases depth with
-        | zero => simp [recursiveCode, hremaining, hzero]
-        | succ depth =>
-            rw [codeAtDepth_succ_eq_zero_of_children_empty N f depth y hchildren]
-            simp [recursiveCode, hremaining, hzero]
-      · obtain ⟨remaining', hremainingSucc⟩ := Nat.exists_eq_succ_of_ne_zero hzero
-        rw [hremainingSucc] at hdepth
-        obtain ⟨depth', hdepthEq⟩ := Nat.exists_eq_add_of_le hdepth
-        subst depth
-        rw [Nat.succ_add]
-        rw [codeAtDepth_succ, recursiveCode]
-        rw [hremaining, hremainingSucc]
-        congr 1
-        congr 1
-        apply Multiset.map_congr rfl
-        intro z hz
-        have hzfin : z ∈ nonperiodicChildren N f y := hz
-        have hzmu := child_minPreperiod_eq_add_one N f y z hzfin
-        have hzremaining :
-            2 ^ Fintype.card V - 1 - minPreperiod N f z = remaining' := by
-          omega
-        calc
-          codeAtDepth N f (remaining' + depth') z = recursiveCode N f z :=
-            ih remaining' (by omega) z (remaining' + depth')
-              hzremaining (Nat.le_add_right remaining' depth')
-          _ = codeAtDepth N f remaining' z := by
-            rw [recursiveCode, hzremaining]
+  rw [recursiveCode_eq_completedCode]
+  exact NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.codeAtDepth_eq_completedCode_of_remaining_le
+    (nonperiodicChildren N f) (2 ^ Fintype.card V - 1) (minPreperiod N f)
+    (fun y z hz => child_minPreperiod_eq_add_one N f y z hz)
+    (fun y => minPreperiod_le_configuration_card_sub_one N f y)
+    y depth hdepth
 
 /-- 二つの多重集合を写した結果が等しければ、各値を保つ出現の全単射を取れる。
     多重集合の出現型を使うので、同じ値を持つ相異なる子の重複度を失わない。 -/
@@ -2742,9 +2718,14 @@ theorem codeAtDepth_transport (depth : ℕ) (y : V → State) :
 /-- 共役全単射は再帰的前像木符号を点ごとに保存する。 -/
 theorem recursiveCode_transport (y : V → State) :
     recursiveCode NW fW (h y) = recursiveCode N f y := by
-  have hcard := card_cells_eq h
-  simp only [recursiveCode, minPreperiod_transport N f NW fW h hconj y, ← hcard]
-  exact codeAtDepth_transport N f NW fW h hconj _ y
+  rw [recursiveCode_eq_completedCode, recursiveCode_eq_completedCode]
+  exact NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.completedCode_transport
+    (nonperiodicChildren N f) (nonperiodicChildren NW fW) h
+    (image_nonperiodicChildren N f NW fW h hconj)
+    (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)
+    (by rw [card_cells_eq h])
+    (minPreperiod N f) (minPreperiod NW fW)
+    (minPreperiod_transport N f NW fW h hconj) y
 
 /-- 共役全単射は周期点の基点語を保存する。 -/
 theorem baseWord_transport (q : V → State) :
