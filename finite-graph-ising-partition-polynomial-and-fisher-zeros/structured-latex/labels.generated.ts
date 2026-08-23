@@ -68,6 +68,7 @@ export const ALL_LABELS = [
   "theorem_reciprocal_fisher_zero_cube_sum_coefficient_ratio",
   "theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio",
   "theorem_reciprocal_fisher_zero_fourth_power_sum_coefficient_ratio",
+  "theorem_reciprocal_fisher_zero_power_sum_newton_recurrence",
   "theorem_reciprocal_fisher_zero_square_sum_coefficient_ratio",
   "theorem_root_minus_one_characterizes_odd_incident_edge_count",
 ] as const

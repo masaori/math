@@ -2320,6 +2320,232 @@ p_4
     ],
   },
   {
+    id: "finite_graph_theorem_reciprocal_fisher_zero_power_sum_newton_recurrence",
+    kind: "theorem",
+    title: { text: "一般有限グラフの Fisher 零点逆数冪和の Newton 漸化式と係数比" },
+    labels: ["theorem_reciprocal_fisher_zero_power_sum_newton_recurrence"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/reciprocal-fisher-zero-power-sum-newton-recurrence"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を ",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置く。係数を標準単射 ",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式の重複度込み Fisher 零点を ",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。各 ",
+        math(String.raw`s\in\{1,\ldots,d\}`),
+        " について ",
+        math(String.raw`\widehat p_s:=\sum_{j=1}^{d}\alpha_j^{-s}\in\overline{\mathbb Q}`),
+        " と定める。このとき、任意の ",
+        math(String.raw`k\in\{1,\ldots,d\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\widehat p_k
+=
+-\frac{
+  \displaystyle
+  \sum_{r=1}^{k-1}\Omega_G(r)\widehat p_{k-r}
+  +k\Omega_G(k)
+}{
+  \Omega_G(0)
+}
+\in\mathbb Q
+\subset\overline{\mathbb Q}.`),
+      paragraph([
+        math(String.raw`k=1`),
+        " のとき、右辺の和は空和 ",
+        math(String.raw`0\in\overline{\mathbb Q}`),
+        " とする。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fisher_zeros_nonzero"),
+        " より、全ての ",
+        math(String.raw`j\in\{1,\ldots,d\}`),
+        " について ",
+        math(String.raw`\beta_j:=\alpha_j^{-1}\in\overline{\mathbb Q}`),
+        " が定まる。任意の ",
+        math(String.raw`k\in\{1,\ldots,d\}`),
+        " を取る。まず ",
+        math(String.raw`k=1`),
+        " の場合、",
+        ref("theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio"),
+        " を一次へ適用すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\widehat p_1
+&=\widehat e_1
+&&\bigl(\because\ \widehat p_1\text{ と逆数族の一次基本対称式の定義}\bigr)\\
+&=-\frac{\Omega_G(1)}{\Omega_G(0)}
+&&\bigl(\because\ \text{Fisher 零点逆数族の一次基本対称式と係数比}\bigr).
+\end{aligned}`),
+      paragraph([
+        "これは空和を用いた主張の式に等しい。以下では ",
+        math(String.raw`k\ge2`),
+        " とする。各 ",
+        math(String.raw`r\in\{1,\ldots,k\}`),
+        " について代数的数 ",
+        math(String.raw`\widehat e_r,\widehat h_r\in\overline{\mathbb Q}`),
+        " を",
+      ]),
+      displayMath(String.raw`\widehat e_r
+:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\prod_{i\in I}\beta_i,
+\qquad
+\widehat h_r
+:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{j\in I}\beta_j^{k-r}
+\right)`),
+      paragraph(["と定める。各 ", math(String.raw`r\in\{1,\ldots,k-1\}`), " について有限和の分配律により、"]),
+      displayMath(String.raw`\begin{aligned}
+\widehat e_r\widehat p_{k-r}
+&=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{j=1}^{d}\beta_j^{k-r}
+\right)
+&&\bigl(\because\ \text{定義を代入する}\bigr)\\
+&=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{j\in I}\beta_j^{k-r}
+\right)
++
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{\substack{1\le j\le d\\j\notin I}}\beta_j^{k-r}
+\right)
+&&\bigl(\because\ \{1,\ldots,d\}=I\sqcup(\{1,\ldots,d\}\setminus I)\bigr)\\
+&=\widehat h_r+\widehat h_{r+1}
+&&\bigl(\because\ J=I\cup\{j\}\text{ と置いて第二項を }|J|=r+1\text{ の和へ移す}\bigr).
+\end{aligned}`),
+      paragraph(["直前の等式へ ", math(String.raw`(-1)^{r-1}`), " を掛けて ", math(String.raw`r=1,\ldots,k-1`), " を足すと、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{r=1}^{k-1}(-1)^{r-1}\widehat e_r\widehat p_{k-r}
+&=
+\sum_{r=1}^{k-1}(-1)^{r-1}(\widehat h_r+\widehat h_{r+1})
+&&\bigl(\because\ \widehat e_r\widehat p_{k-r}=\widehat h_r+\widehat h_{r+1}\bigr)\\
+&=\widehat h_1+(-1)^{k-2}\widehat h_k
+&&\bigl(\because\ \widehat h_2,\ldots,\widehat h_{k-1}\text{ の係数が }(-1)^{r-1}+(-1)^r=0\bigr).
+\end{aligned}`),
+      paragraph(["定義から、"]),
+      displayMath(String.raw`\begin{aligned}
+\widehat h_1
+&=\sum_{j=1}^{d}\beta_j\beta_j^{k-1}
+&&\bigl(\because\ |I|=1\bigr)\\
+&=\widehat p_k
+&&\bigl(\because\ \beta_j\beta_j^{k-1}=\beta_j^k\bigr),\\
+\widehat h_k
+&=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=k}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\sum_{j\in I}1
+&&\bigl(\because\ \beta_j^{k-k}=1\bigr)\\
+&=k\widehat e_k
+&&\bigl(\because\ |I|=k\bigr).
+\end{aligned}`),
+      paragraph(["したがって代数的数の体で、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{r=1}^{k-1}(-1)^{r-1}\widehat e_r\widehat p_{k-r}
+&=\widehat p_k+(-1)^{k-2}k\widehat e_k
+&&\bigl(\because\ \widehat h_1=\widehat p_k\text{ および }\widehat h_k=k\widehat e_k\bigr)\\
+\widehat p_k
+&=
+\sum_{r=1}^{k-1}(-1)^{r-1}\widehat e_r\widehat p_{k-r}
++(-1)^{k-1}k\widehat e_k
+&&\bigl(\because\ \text{移項する}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio"),
+        " を ",
+        math(String.raw`r=1,\ldots,k`),
+        " に適用すると、",
+      ]),
+      displayMath(String.raw`\widehat e_r=(-1)^r\frac{\Omega_G(r)}{\Omega_G(0)}
+\qquad(r\in\{1,\ldots,k\}).`),
+      paragraph([
+        "全頂点下向き配位 ",
+        math(String.raw`\sigma_{\mathsf{down}}:V\to\mathsf{Spin}`),
+        " を全ての ",
+        math(String.raw`v\in V`),
+        " について ",
+        math(String.raw`\sigma_{\mathsf{down}}(v):=\mathsf{down}`),
+        " と定める。",
+        ref("def_spin_configuration_set"),
+        " と ",
+        ref("def_broken_edge_set"),
+        " より ",
+        math(String.raw`\sigma_{\mathsf{down}}\in\mathcal S_G`),
+        " かつ ",
+        math(String.raw`b_G(\sigma_{\mathsf{down}})=0`),
+        " なので、",
+        ref("def_broken_edge_multiplicity"),
+        " より ",
+        math(String.raw`\Omega_G(0)\in\mathbb N_{>0}`),
+        " である。直前の係数比を Newton 漸化式へ代入すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\widehat p_k
+&=
+\sum_{r=1}^{k-1}
+(-1)^{r-1}
+(-1)^r
+\frac{\Omega_G(r)}{\Omega_G(0)}\widehat p_{k-r}
++
+(-1)^{k-1}k(-1)^k
+\frac{\Omega_G(k)}{\Omega_G(0)}
+&&\bigl(\because\ \text{逆数族の基本対称式の係数比を代入する}\bigr)\\
+&=
+-\sum_{r=1}^{k-1}
+\frac{\Omega_G(r)}{\Omega_G(0)}\widehat p_{k-r}
+-
+k\frac{\Omega_G(k)}{\Omega_G(0)}
+&&\bigl(\because\ (-1)^{2r-1}=(-1)^{2k-1}=-1\bigr)\\
+&=
+-\frac{
+  \displaystyle
+  \sum_{r=1}^{k-1}\Omega_G(r)\widehat p_{k-r}
+  +k\Omega_G(k)
+}{
+  \Omega_G(0)
+}
+&&\bigl(\because\ \Omega_G(0)\ne0\text{ なので共通分母へ移す}\bigr).
+\end{aligned}`),
+      paragraph([
+        "この等式を ",
+        math(String.raw`k=1`),
+        " から順に用いると、空和から始まり、自然数と有理数の四則演算だけで全ての ",
+        math(String.raw`\widehat p_k`),
+        " が有理数として定まる。したがって ",
+        math(String.raw`\widehat p_k\in\mathbb Q\subset\overline{\mathbb Q}`),
+        " である。零点、その逆数と冪、有限積および有限和は代数的数、次数、冪指数、添字部分集合の元数、多重度は自然数、係数比と逆数冪和は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_reciprocal_fisher_zero_square_sum_coefficient_ratio",
     kind: "theorem",
     title: { text: "一般有限グラフの Fisher 零点逆数の二乗和と係数比" },
