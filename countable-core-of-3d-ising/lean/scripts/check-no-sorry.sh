@@ -350,6 +350,7 @@ targets=(
   Ising3DCut.LimitQuantity.magnitude_truncated_prime_exponents_are_not_sufficient_for_limit_quantity
   Ising3DCut.LimitQuantity.sign_of_prime_exponents_is_not_sufficient_for_limit_quantity
   Ising3DCut.LimitQuantity.colliding_coarse_graining_is_not_sufficient_for_limit_quantity
+  Ising3DCut.LimitQuantity.collision_free_coarse_graining_is_sufficient_on_constant_sequences
   Ising3DCut.LimitQuantity.primeTruncation
   Ising3DCut.LimitQuantity.finite_prime_truncation_has_a_value_collision
   Ising3DCut.LimitQuantity.intSign
