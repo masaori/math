@@ -2527,6 +2527,75 @@ theorem structurePreservingConfigurationEquiv_bijective
     Function.Bijective (structurePreservingConfigurationEquiv N f NW fW hcode) :=
   (structurePreservingConfigurationEquiv N f NW fW hcode).bijective
 
+theorem structurePreservingConfigurationEquiv_apply
+    (hcode : mapCode NW fW = mapCode N f) (y : V → State) :
+    structurePreservingConfigurationEquiv N f NW fW hcode y =
+      structurePreservingPeriodicComponentEquiv N f NW fW hcode
+        (periodicComponentOccurrenceIndex N f y)
+        ⟨y, periodicComponentIndex_spec N f y⟩ := by
+  rfl
+
+/-- 同時に選んだ各周期成分の構造保存全単射は、
+    その成分内の全配位で一段発展と可換する。 -/
+theorem structurePreservingPeriodicComponentEquiv_commutes_globalMap
+    (hcode : mapCode NW fW = mapCode N f)
+    (O : (periodicOrbitTable N f).val)
+    (y : ↑(periodicComponentNodeTable N f O)) :
+    globalMap NW fW
+        (structurePreservingPeriodicComponentEquiv N f NW fW hcode O y : W → State) =
+      (structurePreservingPeriodicComponentEquiv N f NW fW hcode O
+        ⟨globalMap N f (y : V → State),
+          globalMap_mem_periodicComponentNodeTable N f O
+            (y : V → State) y.property⟩ : W → State) := by
+  let hex := structurePreservingOrbitEquiv_spec N f NW fW hcode O
+  let r := Classical.choose hex
+  let hexW := Classical.choose_spec hex
+  let rW := Classical.choose hexW
+  have hspec := Classical.choose_spec hexW
+  have hrO := hspec.1
+  have hrWO := hspec.2.1
+  have hbase := hspec.2.2.1
+  have hOmem : (O : Finset (V → State)) ∈ periodicOrbitTable N f :=
+    occurrence_mem (periodicOrbitTable N f).val O
+  have hOWmem :
+      (structurePreservingOrbitEquiv N f NW fW hcode O : Finset (W → State)) ∈
+        periodicOrbitTable NW fW :=
+    occurrence_mem (periodicOrbitTable NW fW).val
+      (structurePreservingOrbitEquiv N f NW fW hcode O)
+  have hr : IsPeriodicPoint N f r :=
+    isPeriodicPoint_of_mem_periodicOrbitTable N f O hOmem r hrO
+  have hrW : IsPeriodicPoint NW fW rW :=
+    isPeriodicPoint_of_mem_periodicOrbitTable NW fW
+      (structurePreservingOrbitEquiv N f NW fW hcode O) hOWmem rW hrWO
+  have hOrbit : periodicOrbit N f r = (O : Finset (V → State)) := by
+    obtain ⟨q, hq, hqO⟩ := (mem_periodicOrbitTable_iff N f O).1 hOmem
+    rw [periodicOrbit_eq_of_mem N f q r hq]
+    · exact hqO
+    · rwa [hqO]
+  let y' : ↑(periodicComponentNodeTable N f (periodicOrbit N f r)) :=
+    ⟨y, by rwa [hOrbit]⟩
+  simpa only [structurePreservingPeriodicComponentEquiv] using
+    periodicComponentEquivOfBaseWordEq_commutes_globalMap
+      N f NW fW r rW hr hrW hbase y'
+
+/-- 写像符号の等号から接着した全配位全単射は一段発展と可換する。 -/
+theorem structurePreservingConfigurationEquiv_commutes_globalMap
+    (hcode : mapCode NW fW = mapCode N f) (y : V → State) :
+    structurePreservingConfigurationEquiv N f NW fW hcode (globalMap N f y) =
+      globalMap NW fW (structurePreservingConfigurationEquiv N f NW fW hcode y) := by
+  let O := periodicComponentOccurrenceIndex N f y
+  have hy : y ∈ periodicComponentNodeTable N f O := by
+    exact periodicComponentIndex_spec N f y
+  have hFy : globalMap N f y ∈ periodicComponentNodeTable N f O :=
+    globalMap_mem_periodicComponentNodeTable N f O y hy
+  have hindex : periodicComponentOccurrenceIndex N f (globalMap N f y) = O :=
+    periodicComponentOccurrenceIndex_eq_of_mem N f O (globalMap N f y) hFy
+  rw [structurePreservingConfigurationEquiv_apply,
+    structurePreservingConfigurationEquiv_apply]
+  simpa only [hindex] using
+    (structurePreservingPeriodicComponentEquiv_commutes_globalMap
+      N f NW fW hcode O ⟨y, hy⟩).symm
+
 end OrbitTreeMatching
 
 section ConjugacyTransport
