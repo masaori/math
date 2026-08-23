@@ -18,6 +18,7 @@ export const ALL_LABELS = [
   "claim_colliding_coarse_graining_is_not_sufficient_for_limit_quantity",
   "claim_collision_free_coarse_graining_is_sufficient_on_constant_sequences",
   "claim_collision_free_coarse_graining_is_sufficient_on_general_families",
+  "claim_constant_finite_box_sequence_only_at_one",
   "claim_countable_core_corresponds_to_prime_exponent_data",
   "claim_cross_power_equality_implies_root_equality",
   "claim_cross_power_equality_is_sufficient_for_limit_quantity",
