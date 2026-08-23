@@ -43,6 +43,7 @@ export const ALL_LABELS = [
   "claim_full_boundary_response_value_at_one",
   "claim_galois_hyperoctahedral_bound",
   "claim_insufficiency_witness_on_ising_realizable_family",
+  "claim_limit_quantity_at_one_equals_two",
   "claim_limit_quantity_depends_only_on_finite_box_sequence",
   "claim_magnitude_truncated_prime_exponents_are_not_sufficient_for_limit_quantity",
   "claim_magnitude_truncation_has_a_value_collision",

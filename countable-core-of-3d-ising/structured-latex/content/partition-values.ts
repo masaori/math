@@ -7223,4 +7223,91 @@ Z_3(2)
       ]),
     ],
   },
+
+  {
+    id: "constant_coarse_graining_witness_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "実際の Ising 有限箱データ上で定数粗視化が十分でない証人を作る" },
+    labels: [],
+  },
+
+  {
+    id: "constant_coarse_graining_witness_claim_limit_at_one",
+    kind: "claim",
+    standing: "mainTheorem",
+    title: { text: "有理点 1 では極限量が存在して 2 に等しい" },
+    labels: ["claim_limit_quantity_at_one_equals_two"],
+    habitat: "R",
+    realEscape:
+      "結論の α(1) は def_limit_quantity_from_finite_box_sequence で一度だけ取った箱の大きさの極限である。ここで新たな脱出は行わず、定数列の極限がその値に等しいことだけを使う。",
+    statement: [
+      paragraph([
+        "有理点 ",
+        math(String.raw`q=1`),
+        " について、極限量 ",
+        math(String.raw`\alpha(1)`),
+        "（",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        "）は存在し、",
+      ]),
+      displayMath(String.raw`\alpha(1)=2`),
+      paragraph([
+        " が成り立つ。とくに ",
+        math(String.raw`1\in\mathcal Q_\alpha`),
+        "（",
+        ref("def_limit_quantity_domain"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "箱の大きさ ",
+        math(String.raw`L\in\mathbb N_{\ge1}`),
+        " を任意にとる。点の個数 ",
+        math(String.raw`\#V_L`),
+        " は正の自然数である。分配多項式の 1 での値は配位の個数であり（",
+        ref("claim_partition_value_at_one"),
+        "）、",
+      ]),
+      displayMath(String.raw`Z_L(1)=2^{\#V_L}`),
+      paragraph([
+        " が成り立つ。正の実数 ",
+        math(String.raw`2`),
+        " は ",
+        math(String.raw`2^{\#V_L}`),
+        " の正の ",
+        math(String.raw`\#V_L`),
+        " 乗根であり、正の実数の正の乗根は一意なので、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a_L(1)
+&=Z_L(1)^{1/\#V_L}
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})\\
+&=\bigl(2^{\#V_L}\bigr)^{1/\#V_L}
+&&(\because\ \blkref{claim_partition_value_at_one})\\
+&=2
+&&(\because\ \text{正の実数の正の乗根の一意性})
+\end{aligned}`,
+      ),
+      paragraph([
+        " となる。",
+        math(String.raw`L`),
+        " は任意だったので、列 ",
+        math(String.raw`L\mapsto a_L(1)`),
+        " は値 ",
+        math(String.raw`2`),
+        " の定数列である。定数列は自身の値へ収束するので、極限 ",
+        math(String.raw`\alpha(1)=\lim_{L\to\infty}a_L(1)`),
+        " は存在して ",
+        math(String.raw`2`),
+        " に等しい。よって ",
+        math(String.raw`1`),
+        " は極限量が存在する有理点の集合に属する（",
+        ref("def_limit_quantity_domain"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
