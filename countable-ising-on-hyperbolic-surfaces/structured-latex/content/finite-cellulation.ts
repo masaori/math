@@ -891,4 +891,64 @@ q\lvert V_{\mathrm{cell}}\rvert
 \end{aligned}`),
     ],
   },
+  {
+    id: "finite_cellulation_theorem_hyperbolic_regular_type_negative_euler_characteristic",
+    kind: "theorem",
+    title: { text: "双曲正則型をもつ有限セル分割の負の Euler 標数" },
+    labels: ["theorem_hyperbolic_regular_type_negative_euler_characteristic"],
+    habitat: "Z",
+    verification: ["sagemath/check/hyperbolic-regular-type-negative-euler-characteristic"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_hyperbolic_regular_type_set"),
+        " の有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " と双曲正則型 ",
+        math(String.raw`(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)<0
+\quad\text{in }\mathbb Z.`),
+      paragraph([
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        " であり、Euler 標数は整数に属する。結論は自然数の双曲不等式と有限セル集合の元数だけから得られ、除算、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "自然数から整数への標準単射を ",
+        math(String.raw`\iota_{\mathbb N,\mathbb Z}:\mathbb N\to\mathbb Z`),
+        " とし、",
+      ]),
+      displayMath(String.raw`\bar p:=\iota_{\mathbb N,\mathbb Z}(p),\qquad
+\bar q:=\iota_{\mathbb N,\mathbb Z}(q),\qquad
+\bar e:=\iota_{\mathbb N,\mathbb Z}\!\left(\lvert E_{\mathrm{cell}}\rvert\right)`),
+      paragraph([
+        "と置く。双曲正則型集合の定義、標準単射の順序保存性、セル集合の非空性、および ",
+        ref("theorem_regular_cellulation_euler_incidence_identity"),
+        " を順に用いると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2(p+q)&<pq
+&&\bigl(\because\ \text{\blkref{def_finite_cellulation_hyperbolic_regular_type_set}}\bigr)\\
+2\bar p+2\bar q&<\bar p\,\bar q
+&&\bigl(\because\ \text{標準単射は加法・乗法・狭義順序を保つ}\bigr)\\
+2\bar p+2\bar q-\bar p\,\bar q&<0
+&&\bigl(\because\ \text{整数の加法による順序保存}\bigr)\\
+0&<\bar e
+&&\bigl(\because\ E_{\mathrm{cell}}\text{ は空でなく、標準単射は狭義順序を保つ}\bigr)\\
+\left(
+  2\bar p+2\bar q-\bar p\,\bar q
+\right)\bar e&<0
+&&\bigl(\because\ \text{負の整数と正の整数の積は負}\bigr)\\
+\bar p\,\bar q\,
+\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)&<0
+&&\bigl(\because\ \text{\blkref{theorem_regular_cellulation_euler_incidence_identity}}\bigr)\\
+0&<\bar p\,\bar q
+&&\bigl(\because\ p,q\in\mathbb N_{>0}\text{ かつ標準単射は積と狭義順序を保つ}\bigr)\\
+\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)&<0
+&&\bigl(\because\ \text{正の整数による乗法は狭義順序を反映する}\bigr).
+\end{aligned}`),
+    ],
+  },
 ]);
