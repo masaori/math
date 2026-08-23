@@ -1064,4 +1064,46 @@ q\lvert V_{\mathrm{cell}}\rvert
 \end{aligned}`),
     ],
   },
+  {
+    id: "finite_cellulation_theorem_hyperbolic_regular_type_nonstrict_product_difference_criterion",
+    kind: "theorem",
+    title: { text: "双曲正則型の非狭義積差による特徴付け" },
+    labels: ["theorem_hyperbolic_regular_type_nonstrict_product_difference_criterion"],
+    habitat: "Z",
+    verification: ["sagemath/check/hyperbolic-regular-type-nonstrict-product-difference-criterion"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_regular_type_set"),
+        " の有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " と正則型 ",
+        math(String.raw`(p,q)\in\operatorname{RegularTypes}(\mathcal X)`),
+        " に対し、自然数から整数への標準単射を ",
+        math(String.raw`\iota_{\mathbb N,\mathbb Z}:\mathbb N\to\mathbb Z`),
+        " とし、",
+      ]),
+      displayMath(String.raw`\bar p:=\iota_{\mathbb N,\mathbb Z}(p),\qquad
+\bar q:=\iota_{\mathbb N,\mathbb Z}(q)`),
+      paragraph(["と書けば、"]),
+      displayMath(String.raw`(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)
+\quad\Longleftrightarrow\quad
+5\le\left(\bar p-2\right)\left(\bar q-2\right)
+\quad\text{in }\mathbb Z.`),
+      paragraph([
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        "、",
+        math(String.raw`\bar p,\bar q\in\mathbb Z`),
+        " である。この同値性は直前の積差による特徴付けと整数順序の離散性だけから得られ、除算、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)
+&\Longleftrightarrow 4<\left(\bar p-2\right)\left(\bar q-2\right)
+&&\bigl(\because\ \text{\blkref{theorem_hyperbolic_regular_type_product_difference_criterion}}\bigr)\\
+&\Longleftrightarrow 5\le\left(\bar p-2\right)\left(\bar q-2\right)
+&&\bigl(\because\ \text{整数順序の離散性}\bigr).
+\end{aligned}`),
+    ],
+  },
 ]);
