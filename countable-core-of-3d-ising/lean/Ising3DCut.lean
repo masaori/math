@@ -196,3 +196,4 @@ import Ising3DCut.NecSuf.MagnitudeTruncationCollision
 import Ising3DCut.LimitQuantity.SignCollapseCollision
 import Ising3DCut.NecSuf.SignCollapseCollision
 import Ising3DCut.LimitQuantity.SignCollapseCollisionFromNecSuf
+import Ising3DCut.LimitQuantity.LimitQuantityAtOneEqualsTwo

@@ -55,6 +55,9 @@ fi
 #    具体版・必要十分版・両者をつなぐ導出の 3 本を、いずれも登録する。
 targets=(
   Ising3DCut.LimitQuantity.not_sufficient_on_ising_realizable_family_iff_exists_witness
+  Ising3DCut.LimitQuantity.tendsto_rootSeq_isingValueSeq_one
+  Ising3DCut.LimitQuantity.rootSeq_isingValueSeq_one
+  Ising3DCut.LimitQuantity.isingValueSeq_one
   Ising3DCut.LimitQuantity.card_dvd_card_group_of_pretransitive
   Ising3DCut.LimitQuantity.forty_dvd_card_galois_group_of_irreducible
   Ising3DCut.LimitQuantity.no_equiv_of_card_four_of_forty_dvd_card
