@@ -124,4 +124,11 @@ theorem mem_terminalEdges_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge
         s ∈ externalEdges edges endpoint₀ endpoint₁ := by
   simp [terminalEdges]
 
+/-- Terminal graph の完全マッチングは、辺集合の部分集合であって、
+各端子をちょうど一つの選んだ辺が覆うものである。 -/
+def IsPerfectMatching {Terminal : Type*} [DecidableEq Terminal]
+    (vertices : Finset Terminal) (edges matching : Finset (Finset Terminal)) : Prop :=
+  matching ⊆ edges ∧
+    ∀ t ∈ vertices, ∃! e, e ∈ matching ∧ t ∈ e
+
 end Ising3DCut.Prediction

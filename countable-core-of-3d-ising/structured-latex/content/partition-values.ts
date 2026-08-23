@@ -7181,4 +7181,46 @@ Z_3(2)
       ]),
     ],
   },
+
+  {
+    id: "soundness_bridge_claim_insufficiency_witness_on_ising_realizable_family",
+    kind: "claim",
+    title: { text: "実際の Ising 有限箱データから生じる列の族の上での非十分性の証人" },
+    labels: ["claim_insufficiency_witness_on_ising_realizable_family"],
+    habitat: "R",
+    realEscape:
+      "極限量が異なることを非十分性の証人に含めるため、def_limit_quantity_from_finite_box_sequence で一度だけ取った箱の大きさの極限を参照する。新たな脱出は行わず、すべての箱での粗視化値の一致は可算側にある。",
+    statement: [
+      paragraph([
+        "写像 ",
+        math(String.raw`\pi\colon\mathbb Q_{>0}\to S`),
+        " が実際の Ising 有限箱データから生じる列の族の上で極限量に対して十分でないことと、次を満たす ",
+        math(String.raw`q,q'\in\mathcal Q_\alpha`),
+        " が存在することは同値である。",
+      ]),
+      displayMath(
+        String.raw`\alpha(q)\ne\alpha(q')\quad\text{かつ}\quad
+\forall L\in\mathbb N_{\ge1}\colon\ \pi(Z_L(q))=\pi(Z_L(q'))`,
+      ),
+      paragraph([
+        "したがって、一つの箱で値の衝突を実現するだけでは非十分性の証人にならない。必要なのは、極限量が異なる同じ二点がすべての箱で同じ粗視化値を持つことである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "写像 ",
+        math(String.raw`\pi`),
+        " が十分でないとする。十分性の定義（",
+        ref("def_sufficiency_on_ising_realizable_family"),
+        "）を否定すると、ある ",
+        math(String.raw`q,q'\in\mathcal Q_\alpha`),
+        " について、すべての箱で粗視化値が一致し、かつ極限量が一致しない。これは右辺の証人である。",
+      ]),
+      paragraph([
+        "逆に右辺の証人を取る。すべての箱で粗視化値が一致するので、十分性の定義の含意の仮定は成り立つ。一方で極限量は一致しないので、その含意の結論は成り立たない。したがって ",
+        math(String.raw`\pi`),
+        " は十分でない。",
+      ]),
+    ],
+  },
 ]);
