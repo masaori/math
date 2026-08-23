@@ -796,4 +796,99 @@ q\lvert V_{\mathrm{cell}}\rvert
 \end{aligned}`),
     ],
   },
+  {
+    id: "finite_cellulation_theorem_regular_euler_incidence_identity",
+    kind: "theorem",
+    title: { text: "正則セル分割の Euler 標数と incidence 数の等式" },
+    labels: ["theorem_regular_cellulation_euler_incidence_identity"],
+    habitat: "Z",
+    verification: ["sagemath/check/regular-cellulation-euler-incidence-identity"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_regular_type_set"),
+        " の有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " と正則型 ",
+        math(String.raw`(p,q)\in\operatorname{RegularTypes}(\mathcal X)`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`\bar p:=\iota_{\mathbb N,\mathbb Z}(p),\qquad
+\bar q:=\iota_{\mathbb N,\mathbb Z}(q),\qquad
+\bar e:=\iota_{\mathbb N,\mathbb Z}\!\left(\lvert E_{\mathrm{cell}}\rvert\right)`),
+      paragraph(["と書けば、"]),
+      displayMath(String.raw`\bar p\,\bar q\,
+\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)
+=
+\left(
+  2\bar p+2\bar q-\bar p\,\bar q
+\right)\bar e
+\in\mathbb Z.`),
+      paragraph([
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        "、",
+        math(String.raw`\bar p,\bar q,\bar e\in\mathbb Z`),
+        "、",
+        math(String.raw`\chi_{\mathrm{cell}}(\mathcal C_{\mathrm{cell}})\in\mathbb Z`),
+        " である。この等式は自然数の incidence 等式を標準単射で整数へ移して得られ、除算、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明中だけ用いる整数記号を ",
+        math(String.raw`\bar v:=\iota_{\mathbb N,\mathbb Z}(\lvert V_{\mathrm{cell}}\rvert)`),
+        "、",
+        math(String.raw`\bar f:=\iota_{\mathbb N,\mathbb Z}(\lvert F_{\mathrm{cell}}\rvert)`),
+        " と置く。自然数の二つの incidence 等式は、標準単射が加法と乗法を保つことにより整数の等式へ移される。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bar p\,\bar q\,\chi_{\mathrm{cell}}\!\left(\mathcal C_{\mathrm{cell}}\right)
+&=
+\bar p\,\bar q
+\left(
+  \bar v-\bar e+\bar f
+\right)
+&&\bigl(\because\ \text{\blkref{def_finite_cellulation_euler_characteristic}}\bigr)\\
+&=
+\bar p\,\bar q\,\bar v
+-\bar p\,\bar q\,\bar e
++\bar p\,\bar q\,\bar f
+&&\bigl(\because\ \text{整数の分配律}\bigr)\\
+&=
+\bar p\left(\bar q\,\bar v\right)
+-\bar p\,\bar q\,\bar e
++\bar q\left(\bar p\,\bar f\right)
+&&\bigl(\because\ \text{整数の乗法の結合律・交換律}\bigr)\\
+&=
+\bar p\,\iota_{\mathbb N,\mathbb Z}\!\left(q\lvert V_{\mathrm{cell}}\rvert\right)
+-\bar p\,\bar q\,\bar e
++\bar q\,\iota_{\mathbb N,\mathbb Z}\!\left(p\lvert F_{\mathrm{cell}}\rvert\right)
+&&\bigl(\because\ \text{標準単射は乗法を保つ}\bigr)\\
+&=
+\bar p\,\iota_{\mathbb N,\mathbb Z}\!\left(2\lvert E_{\mathrm{cell}}\rvert\right)
+-\bar p\,\bar q\,\bar e
++\bar q\,\iota_{\mathbb N,\mathbb Z}\!\left(p\lvert F_{\mathrm{cell}}\rvert\right)
+&&\bigl(\because\ \text{\blkref{theorem_regular_cellulation_vertex_edge_incidence}}\bigr)\\
+&=
+\bar p\left(2\bar e\right)
+-\bar p\,\bar q\,\bar e
++\bar q\,\iota_{\mathbb N,\mathbb Z}\!\left(p\lvert F_{\mathrm{cell}}\rvert\right)
+&&\bigl(\because\ \text{標準単射は乗法を保つ}\bigr)\\
+&=
+\bar p\left(2\bar e\right)
+-\bar p\,\bar q\,\bar e
++\bar q\,\iota_{\mathbb N,\mathbb Z}\!\left(2\lvert E_{\mathrm{cell}}\rvert\right)
+&&\bigl(\because\ \text{\blkref{theorem_regular_cellulation_face_edge_incidence}}\bigr)\\
+&=
+\bar p\left(2\bar e\right)
+-\bar p\,\bar q\,\bar e
++\bar q\left(2\bar e\right)
+&&\bigl(\because\ \text{標準単射は乗法を保つ}\bigr)\\
+&=
+\left(
+  2\bar p+2\bar q-\bar p\,\bar q
+\right)\bar e
+&&\bigl(\because\ \text{整数の分配律}\bigr),
+\end{aligned}`),
+    ],
+  },
 ]);

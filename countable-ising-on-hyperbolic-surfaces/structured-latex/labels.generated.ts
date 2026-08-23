@@ -134,6 +134,7 @@ export const ALL_LABELS = [
   "theorem_quotient_tower_two_stage_fisher_zero_multiplicity_difference_finite_support",
   "theorem_quotient_tower_two_stage_ising_coefficient_ratio_logarithmic_value_compatibility",
   "theorem_quotient_tower_two_stage_ising_coefficient_valuation_difference_finite_support",
+  "theorem_regular_cellulation_euler_incidence_identity",
   "theorem_regular_cellulation_face_edge_incidence",
   "theorem_regular_cellulation_vertex_edge_incidence",
 ] as const
