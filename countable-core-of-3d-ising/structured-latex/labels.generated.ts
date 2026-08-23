@@ -56,6 +56,7 @@ export const ALL_LABELS = [
   "claim_periodic_no_all_broken",
   "claim_periodic_not_palindrome",
   "claim_periodic_successor_not_palindrome",
+  "claim_pointwise_collision_free_coarse_graining_family_is_sufficient",
   "claim_pointwise_cross_power_equality_implies_root_sequence_equality",
   "claim_pointwise_equal_positive_real_sequences_transfer_limit",
   "claim_pointwise_root_sequence_equality_implies_tail_agreement",
