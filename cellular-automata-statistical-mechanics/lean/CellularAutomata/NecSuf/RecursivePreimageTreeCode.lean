@@ -30,6 +30,7 @@
 import Mathlib.Logic.Equiv.Defs
 import Mathlib.Data.Multiset.Basic
 import Mathlib.Data.Finset.Basic
+import Mathlib.Data.Multiset.Sort
 
 namespace CellularAutomata.NecSuf.RecursivePreimageTreeCode
 
@@ -88,3 +89,43 @@ def mapCodeTypeDecidableEq : DecidableEq (Multiset (Finset (List ℕ))) :=
   inferInstance
 
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode
+
+namespace CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance
+
+/-!
+共役不変性のうち、再帰的前像木符号を深さごとに保存する段の必要十分版。
+
+具体版の証明が実際に使うのは、二つの有限子表、両表を全単射に移す写像、
+および「子の符号を重複込みで集め、整列した有限列を自然数へ符号化する」
+同一の再帰だけである。自己写像、周期点、最小前周期、二値状態、セル、
+近傍、局所規則、型全体の有限性、R / C はこの段では使わない。
+-/
+
+variable {X Y : Type} [DecidableEq X] [DecidableEq Y]
+
+/-- 有限子表だけから作る、深さを打ち切った再帰符号。 -/
+noncomputable def codeAtDepth (children : X → Finset X) : ℕ → X → ℕ
+  | 0, _ => Encodable.encode ([] : List ℕ)
+  | depth + 1, x =>
+      Encodable.encode
+        (((children x).val.map (codeAtDepth children depth)).sort (· ≤ ·))
+
+/-- 子表を全単射に移す写像は、全ての打ち切り深さで再帰符号を保存する。
+型全体の有限性は要らず、各点の子表が有限であることだけを使う。 -/
+theorem codeAtDepth_transport (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    (h : X ≃ Y) (hchildren : ∀ x, (childrenX x).image h = childrenY (h x))
+    (depth : ℕ) (x : X) :
+    codeAtDepth childrenY depth (h x) = codeAtDepth childrenX depth x := by
+  induction depth generalizing x with
+  | zero => rfl
+  | succ depth ih =>
+      simp only [codeAtDepth]
+      congr 1
+      have hval : (childrenY (h x)).val = (childrenX x).val.map h := by
+        rw [← hchildren x]
+        exact Finset.image_val_of_injOn h.injective.injOn
+      rw [hval, Multiset.map_map]
+      congr 1
+      exact Multiset.map_congr rfl fun z _ => ih z
+
+end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance

@@ -82,10 +82,8 @@ theorem minPreperiod_le_configuration_card_sub_one (y : V → State) :
     後続段で子がない場合と同じ空の有限列の符号にする。
     符号化の単射性により順序を捨て、重複度を保つ。 -/
 noncomputable def codeAtDepth : ℕ → (V → State) → ℕ
-  | 0, _ => Encodable.encode ([] : List ℕ)
-  | depth + 1, y =>
-      Encodable.encode
-        (((nonperiodicChildren N f y).val.map (codeAtDepth depth)).sort (· ≤ ·))
+  := NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.codeAtDepth
+    (nonperiodicChildren N f)
 
 /-- 人手証明の上界 `2^|V|-1-μ(y)` を使った再帰的前像木符号。 -/
 noncomputable def recursiveCode (y : V → State) : ℕ :=
@@ -2737,18 +2735,9 @@ theorem card_cells_eq : Fintype.card V = Fintype.card W := by
 /-- 共役全単射は打ち切り深さごとの符号を保存する（深さの帰納法）。 -/
 theorem codeAtDepth_transport (depth : ℕ) (y : V → State) :
     codeAtDepth NW fW depth (h y) = codeAtDepth N f depth y := by
-  induction depth generalizing y with
-  | zero => rfl
-  | succ depth ih =>
-      rw [codeAtDepth_succ, codeAtDepth_succ]
-      congr 1
-      have hval : (nonperiodicChildren NW fW (h y)).val
-          = (nonperiodicChildren N f y).val.map h := by
-        rw [← image_nonperiodicChildren N f NW fW h hconj y]
-        exact Finset.image_val_of_injOn h.injective.injOn
-      rw [hval, Multiset.map_map]
-      congr 1
-      exact Multiset.map_congr rfl fun z _ => ih z
+  exact NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.codeAtDepth_transport
+    (nonperiodicChildren N f) (nonperiodicChildren NW fW) h
+    (image_nonperiodicChildren N f NW fW h hconj) depth y
 
 /-- 共役全単射は再帰的前像木符号を点ごとに保存する。 -/
 theorem recursiveCode_transport (y : V → State) :

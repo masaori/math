@@ -1036,6 +1036,7 @@ targets=(
   CellularAutomata.NecSuf.RecursivePreimageTreeCode.code_eq_iff_hasConjugacy
   CellularAutomata.NecSuf.RecursivePreimageTreeCode.conjugacyFromDecision_eq_some
   CellularAutomata.NecSuf.RecursivePreimageTreeCode.conjugacyFromDecision_isSome_iff
+  CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.codeAtDepth_transport
   CellularAutomata.RecursivePreimageTreeCode.hasConjugacy_eq
   CellularAutomata.RecursivePreimageTreeCode.mapCode_eq_iff_exists_conjugacy_of_necSuf
   CellularAutomata.RecursivePreimageTreeCode.conjugacyFromMapCodeDecision_of_necSuf
