@@ -256,6 +256,23 @@ theorem componentCode_transport {L : Type} [DecidableEq L]
   rw [← horbit x, Finset.image_image]
   exact Finset.image_congr fun r _ => hword r
 
+omit [DecidableEq X] [DecidableEq Y] in
+/-- 二つの有限表の付値の像が等しいとき、左表で指定した元の付値と
+等しい付値を持つ元を右表から選べる。要るのは二つの有限表、二つの付値、
+左表の元の所属、および像の等号だけである。型全体の有限性、自己写像、
+周期性、付値が基点語であることは使わない。付値型の等号判定は
+`Finset.image` の構成にだけ要る。 -/
+theorem exists_value_eq_of_componentCode_eq {L : Type} [DecidableEq L]
+    (orbitX : X → Finset X) (orbitY : Y → Finset Y)
+    (wordX : X → L) (wordY : Y → L) (x : X) (y : Y)
+    (hx : x ∈ orbitX x)
+    (hcode : componentCode orbitY wordY y = componentCode orbitX wordX x) :
+    ∃ y' : Y, y' ∈ orbitY y ∧ wordY y' = wordX x := by
+  have hword : wordX x ∈ componentCode orbitX wordX x :=
+    Finset.mem_image.mpr ⟨x, hx, rfl⟩
+  rw [← hcode] at hword
+  exact Finset.mem_image.mp hword
+
 /-- 有限表の各元へ付けた符号を、重複度を保つ有限多重集合へ集める。
 型全体の有限性、自己写像、周期軌道、符号の内部構造は使わない。 -/
 def aggregateCode {O L : Type} (table : Finset O) (code : O → L) : Multiset L :=

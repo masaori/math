@@ -879,10 +879,18 @@ theorem exists_baseWord_eq_of_componentCode_eq
       r ∈ periodicOrbit N f q ∧ rW ∈ periodicOrbit NW fW qW ∧
         baseWord NW fW rW = baseWord N f r := by
   have hqmem : q ∈ periodicOrbit N f q := mem_periodicOrbit_self N f q hq
-  have hword : baseWord N f q ∈ componentCode N f q := by
-    exact Finset.mem_image.mpr ⟨q, hqmem, rfl⟩
-  rw [← hcode] at hword
-  obtain ⟨rW, hrW, hbase⟩ := Finset.mem_image.mp hword
+  have hcodeNecessarySufficient :
+      NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.componentCode
+          (periodicOrbit NW fW) (baseWord NW fW) qW =
+        NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.componentCode
+          (periodicOrbit N f) (baseWord N f) q := by
+    rw [← componentCode_eq_necessary_sufficient,
+      ← componentCode_eq_necessary_sufficient]
+    exact hcode
+  obtain ⟨rW, hrW, hbase⟩ :=
+    NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.exists_value_eq_of_componentCode_eq
+      (periodicOrbit N f) (periodicOrbit NW fW)
+      (baseWord N f) (baseWord NW fW) q qW hqmem hcodeNecessarySufficient
   exact ⟨q, rW, hqmem, hrW, hbase⟩
 
 /-- 等しい基点語の長さは等しいので、二つの基点の最小周期は等しい。 -/
