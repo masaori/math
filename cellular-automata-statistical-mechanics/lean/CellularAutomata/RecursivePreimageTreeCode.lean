@@ -2226,6 +2226,129 @@ theorem periodicComponentEquivOfBaseWordEq_preserves_all_component_edges
     exact periodicComponentEquivOfBaseWordEq_preserves_parent_edge
       N f NW fW r rW hr hrW hbase n u v huv
 
+/-- 周期成分全単射は、成分表の全ての配位で一段発展と可換する。
+    節点が根であるか親を持つかで場合分けし、周期辺の保存と
+    非周期親子辺の保存をそれぞれ適用する。 -/
+theorem periodicComponentEquivOfBaseWordEq_commutes_globalMap
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r)
+    (y : ↑(periodicComponentNodeTable N f (periodicOrbit N f r))) :
+    globalMap NW fW
+        (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase y :
+          W → State) =
+      (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase
+        ⟨globalMap N f (y : V → State),
+          globalMap_mem_periodicComponentNodeTable N f
+            (periodicOrbit N f r) (y : V → State) y.property⟩ : W → State) := by
+  classical
+  obtain ⟨p, hp⟩ := (periodicComponentRootSigmaEquiv N f r hr).surjective y
+  obtain ⟨n, w⟩ := p
+  have hrn : IsPeriodicPoint N f (iterate N f n r) :=
+    isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
+      ((mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨n, rfl⟩)
+  obtain ⟨u, hu⟩ := (truncatedTreeNodeEquivPreimageTreeNodeTable N f
+      (iterate N f n r) hrn
+      (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+      (Nat.le_max_left _ _)).surjective w
+  rcases truncatedTreeNode_eq_root_or_exists_parent N f
+      (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+      (iterate N f n r) u with hroot | ⟨v, huv⟩
+  · -- 節点が根の場合。周期辺の保存を使う。
+    subst hroot
+    have hyval : (y : V → State) = iterate N f n r := by
+      rw [← hp, ← hu]
+      exact truncatedTreeNodeConfiguration_root N f _ _
+    have hpos : 0 < minPeriod N f r := lt_of_le_of_lt (Nat.zero_le _) n.isLt
+    have hedge := periodic_index_matching_preserves_edges N f NW fW r rW hr hrW
+      hbase (n : ℕ) n.isLt
+    have hEy : (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase y :
+        W → State) = iterate NW fW n rW := by
+      rw [show y = periodicComponentRootSigmaEquiv N f r hr
+          ⟨n, truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+            (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+            (Nat.le_max_left _ _)
+            (truncatedTreeNodeRoot N f
+              (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+              (iterate N f n r))⟩ from by rw [hu]; exact hp.symm]
+      exact periodicComponentEquivOfBaseWordEq_maps_periodic_root
+        N f NW fW r rW hr hrW hbase n
+    by_cases hnext : (n : ℕ) + 1 < minPeriod N f r
+    · have hm : ((⟨(n : ℕ) + 1, hnext⟩ : Fin (minPeriod N f r)) : ℕ) = (n : ℕ) + 1 := rfl
+      have hgoalSource : globalMap N f (y : V → State) =
+          iterate N f (⟨(n : ℕ) + 1, hnext⟩ : Fin (minPeriod N f r)) r := by
+        rw [hyval, hedge.1, if_pos hnext, hm]
+      have hsub : (⟨globalMap N f (y : V → State),
+            globalMap_mem_periodicComponentNodeTable N f
+              (periodicOrbit N f r) (y : V → State) y.property⟩ :
+          ↑(periodicComponentNodeTable N f (periodicOrbit N f r))) =
+          periodicComponentRootSigmaEquiv N f r hr
+            ⟨⟨(n : ℕ) + 1, hnext⟩,
+              truncatedTreeNodeEquivPreimageTreeNodeTable N f
+                (iterate N f (⟨(n : ℕ) + 1, hnext⟩ : Fin (minPeriod N f r)) r)
+                (isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
+                  ((mem_periodicOrbit_iff_exists N f r _ hr).2
+                    ⟨(n : ℕ) + 1, rfl⟩))
+                (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+                (Nat.le_max_left _ _)
+                (truncatedTreeNodeRoot N f
+                  (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+                  (iterate N f (⟨(n : ℕ) + 1, hnext⟩ : Fin (minPeriod N f r)) r))⟩ := by
+        apply Subtype.ext
+        change globalMap N f (y : V → State) = _
+        rw [hgoalSource]
+        exact (truncatedTreeNodeConfiguration_root N f _ _).symm
+      rw [hEy, hsub, hedge.2, if_pos hnext,
+        periodicComponentEquivOfBaseWordEq_maps_periodic_root
+          N f NW fW r rW hr hrW hbase ⟨(n : ℕ) + 1, hnext⟩]
+    · have hm : ((⟨0, hpos⟩ : Fin (minPeriod N f r)) : ℕ) = 0 := rfl
+      have hgoalSource : globalMap N f (y : V → State) =
+          iterate N f (⟨0, hpos⟩ : Fin (minPeriod N f r)) r := by
+        rw [hyval, hedge.1, if_neg hnext, hm, iterate_zero]
+      have hsub : (⟨globalMap N f (y : V → State),
+            globalMap_mem_periodicComponentNodeTable N f
+              (periodicOrbit N f r) (y : V → State) y.property⟩ :
+          ↑(periodicComponentNodeTable N f (periodicOrbit N f r))) =
+          periodicComponentRootSigmaEquiv N f r hr
+            ⟨⟨0, hpos⟩,
+              truncatedTreeNodeEquivPreimageTreeNodeTable N f
+                (iterate N f (⟨0, hpos⟩ : Fin (minPeriod N f r)) r)
+                (isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
+                  ((mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨0, rfl⟩))
+                (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+                (Nat.le_max_left _ _)
+                (truncatedTreeNodeRoot N f
+                  (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+                  (iterate N f (⟨0, hpos⟩ : Fin (minPeriod N f r)) r))⟩ := by
+        apply Subtype.ext
+        change globalMap N f (y : V → State) = _
+        rw [hgoalSource]
+        exact (truncatedTreeNodeConfiguration_root N f _ _).symm
+      rw [hEy, hsub, hedge.2, if_neg hnext,
+        periodicComponentEquivOfBaseWordEq_maps_periodic_root
+          N f NW fW r rW hr hrW hbase ⟨0, hpos⟩, hm, iterate_zero]
+  · -- 節点が親を持つ場合。非周期親子辺の保存を使う。
+    have hedge := periodicComponentEquivOfBaseWordEq_preserves_parent_edge
+      N f NW fW r rW hr hrW hbase n u v huv
+    dsimp only at hedge
+    obtain ⟨hsrc, hcomm⟩ := hedge
+    have hchild : periodicComponentRootSigmaEquiv N f r hr
+        ⟨n, truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+          (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+          (Nat.le_max_left _ _) u⟩ = y := by
+      rw [hu]; exact hp
+    rw [hchild] at hsrc hcomm
+    have hsub : (⟨globalMap N f (y : V → State),
+          globalMap_mem_periodicComponentNodeTable N f
+            (periodicOrbit N f r) (y : V → State) y.property⟩ :
+        ↑(periodicComponentNodeTable N f (periodicOrbit N f r))) =
+        periodicComponentRootSigmaEquiv N f r hr
+          ⟨n, truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+            (max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1))
+            (Nat.le_max_left _ _) v⟩ := Subtype.ext hsrc
+    rw [hsub]
+    exact hcomm
+
 /-- 写像符号が等しくセル数も等しいとき、周期軌道の出現の
     重複度付き対応と、対応する周期上の全ての位置に接着した
     前像木対応を同時に選べる。 -/
