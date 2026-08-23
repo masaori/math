@@ -237,6 +237,7 @@ targets=(
   Ising3DCut.Prediction.card_terminalsAt
   Ising3DCut.Prediction.mem_internalEdgesAt_iff
   Ising3DCut.Prediction.mem_internalEdges_iff
+  Ising3DCut.Prediction.selectedOriginalEdges_image_externalEdge
   Ising3DCut.Prediction.terminalMatching_weight_eq_unselectedEdges_prod
   Ising3DCut.LimitQuantity.tendsto_congr_of_pointwise_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_data_eq

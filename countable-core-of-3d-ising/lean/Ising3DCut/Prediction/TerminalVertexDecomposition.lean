@@ -170,5 +170,29 @@ theorem externalEdge_injective {V Edge : Type*} [DecidableEq V] [DecidableEq Edg
   · exact congrArg Sigma.snd h
   · exact congrArg Sigma.snd h
 
+/-- 完全マッチングのうち外部辺として選ばれたものに対応する元の辺の集合。 -/
+def selectedOriginalEdges {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (edges : Finset Edge) (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) : Finset Edge :=
+  edges.filter fun e => externalEdge endpoint₀ endpoint₁ e ∈ matching
+
+/-- 選ばれた元の辺を外部辺へ写した像は、完全マッチングと全外部辺の共通部分に等しい。 -/
+theorem selectedOriginalEdges_image_externalEdge {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (edges : Finset Edge) (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) :
+    (selectedOriginalEdges edges endpoint₀ endpoint₁ matching).image
+        (externalEdge endpoint₀ endpoint₁) =
+      matching ∩ externalEdges edges endpoint₀ endpoint₁ := by
+  ext s
+  simp only [selectedOriginalEdges, Finset.mem_image, Finset.mem_inter,
+    Finset.mem_filter, mem_externalEdges_iff]
+  constructor
+  · rintro ⟨e, ⟨he, hem⟩, rfl⟩
+    exact ⟨hem, ⟨e, he, rfl⟩⟩
+  · rintro ⟨hsm, ⟨e, he, hes⟩⟩
+    refine ⟨e, ⟨he, ?_⟩, hes⟩
+    simpa [hes] using hsm
+
 
 end Ising3DCut.Prediction
