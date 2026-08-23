@@ -2686,6 +2686,64 @@ G_Q^{(r+1)}:=[G_Q^{(r)},G_Q^{(r)}]
     ],
   },
   {
+    id: "arithmetic_invariants_theorem_fixed_quotient_fisher_irreducible_factor_not_solvable_by_radicals",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Fisher 既約因子の根式非可解性" },
+    labels: ["theorem_fixed_quotient_fisher_irreducible_factor_not_solvable_by_radicals"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-fisher-irreducible-factor-not-solvable-by-radicals"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"),
+        " の次数四十四の既約因子を ",
+        math(String.raw`Q_Q\in\mathbb Z[x]`),
+        " とし、その根集合を ",
+        math(String.raw`\mathcal R_Q\subset\overline{\mathbb Q}`),
+        " とする。このとき、次の条件を満たす部分体の有限列は存在しない。",
+      ]),
+      displayMath(String.raw`\mathbb Q=F_0\subset F_1\subset\cdots\subset F_m\subset\overline{\mathbb Q},
+\qquad
+\mathcal R_Q\subset F_m,`),
+      displayMath(String.raw`\forall i\in\{1,\ldots,m\}\quad
+\exists a_i\in F_i\quad
+\exists n_i\in\mathbb N_{>0}\quad
+F_i=F_{i-1}(a_i),
+\qquad
+a_i^{n_i}\in F_{i-1}.`),
+      paragraph([
+        "したがって ",
+        math(String.raw`Q_Q`),
+        " は ",
+        math(String.raw`\mathbb Q`),
+        " 上で根式によって解けない。実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"), " より、"]),
+      displayMath(String.raw`Q_Q\in\mathbb Q[x]`),
+      paragraph(["は既約な次数四十四の多項式である。また有理数体の標数は零なので、"]),
+      displayMath(String.raw`\operatorname{char}(\mathbb Q)=0.`),
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"),
+        " の構成より、",
+      ]),
+      displayMath(String.raw`K_Q=\mathbb Q(\mathcal R_Q)`),
+      paragraph(["は ", math(String.raw`Q_Q`), " の分解体である。標数零の多項式に対する根式可解性の Galois 判定より、"]),
+      displayMath(String.raw`\begin{aligned}
+&\exists m\in\mathbb N\ \exists F_0,\ldots,F_m\subset\overline{\mathbb Q}\quad
+\mathbb Q=F_0\subset\cdots\subset F_m,
+\quad \mathcal R_Q\subset F_m,\\
+&\qquad\forall i\in\{1,\ldots,m\}\ \exists a_i\in F_i\ \exists n_i\in\mathbb N_{>0}\quad
+F_i=F_{i-1}(a_i),\quad a_i^{n_i}\in F_{i-1}
+\\
+&\iff \operatorname{Gal}(K_Q/\mathbb Q)\text{ は可解群である}.
+\end{aligned}`),
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_galois_group_nonsolvable"), " より、"]),
+      displayMath(String.raw`\operatorname{Gal}(K_Q/\mathbb Q)\text{ は可解群ではない}.`),
+      paragraph(["したがって、上の同値性の左辺は偽である。ゆえに所定の有限列は存在せず、", math(String.raw`Q_Q`), " は ", math(String.raw`\mathbb Q`), " 上で根式によって解けない。"]),
+    ],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
     kind: "theorem",
     title: { text: "固定剰余類格子の Fisher 零点の有理矩形根分離証明書" },

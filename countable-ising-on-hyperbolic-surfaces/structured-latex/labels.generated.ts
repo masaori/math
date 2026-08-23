@@ -85,6 +85,7 @@ export const ALL_LABELS = [
   "theorem_finite_character_orthogonality",
   "theorem_finite_fourier_inverse_transform",
   "theorem_fixed_quotient_coefficient_support",
+  "theorem_fixed_quotient_fisher_irreducible_factor_not_solvable_by_radicals",
   "theorem_fixed_quotient_fisher_splitting_field_degree_divides_factorial",
   "theorem_fixed_quotient_fisher_splitting_field_degree_irreducible_factor_multiple",
   "theorem_fixed_quotient_fisher_splitting_field_degree_modular_cycle_constraint",
