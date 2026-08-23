@@ -32,6 +32,7 @@ import Mathlib.Logic.Equiv.List
 import Mathlib.Data.Multiset.Basic
 import Mathlib.Data.Finset.Basic
 import Mathlib.Data.Finset.Image
+import Mathlib.Data.Finset.Range
 import Mathlib.Data.Multiset.Sort
 
 namespace CellularAutomata.NecSuf.RecursivePreimageTreeCode
@@ -218,5 +219,40 @@ theorem baseWord_transport (periodX : X → ℕ) (periodY : Y → ℕ)
   funext n
   simp only [Fin.val_cast]
   rw [← hiterate (n : ℕ) x, hcode]
+
+
+/-- 周期長と反復列だけから作る、一周期分の有限表。
+自己写像であること、周期性、点符号は定義に入らない。 -/
+def periodicOrbit (period : X → ℕ) (iterate : ℕ → X → X) (x : X) : Finset X :=
+  (Finset.range (period x)).image fun n => iterate n x
+
+/-- 全単射が周期長と各反復を保存するなら、一周期分の有限表を全単射に移す。
+型の有限性、自己写像の反復則、周期性は使わない。 -/
+theorem image_periodicOrbit (periodX : X → ℕ) (periodY : Y → ℕ)
+    (iterateX : ℕ → X → X) (iterateY : ℕ → Y → Y) (h : X ≃ Y)
+    (hperiod : ∀ x, periodY (h x) = periodX x)
+    (hiterate : ∀ n x, h (iterateX n x) = iterateY n (h x)) (x : X) :
+    (periodicOrbit periodX iterateX x).image h
+      = periodicOrbit periodY iterateY (h x) := by
+  simp only [periodicOrbit, hperiod x, Finset.image_image]
+  exact Finset.image_congr fun n _ => hiterate n x
+
+/-- 有限表とその上の付値だけから作る成分符号。
+付値の値の型に要るのは等号判定だけであり、有限列であることは使わない。 -/
+def componentCode {L : Type} [DecidableEq L] (orbit : X → Finset X) (word : X → L)
+    (x : X) : Finset L :=
+  (orbit x).image word
+
+/-- 全単射が有限表を移し付値を保存するなら、成分符号も保存される。
+型全体の有限性、自己写像、周期性、付値が基点語であることは使わない。 -/
+theorem componentCode_transport {L : Type} [DecidableEq L]
+    (orbitX : X → Finset X) (orbitY : Y → Finset Y)
+    (wordX : X → L) (wordY : Y → L) (h : X ≃ Y)
+    (horbit : ∀ x, (orbitX x).image h = orbitY (h x))
+    (hword : ∀ x, wordY (h x) = wordX x) (x : X) :
+    componentCode orbitY wordY (h x) = componentCode orbitX wordX x := by
+  simp only [componentCode]
+  rw [← horbit x, Finset.image_image]
+  exact Finset.image_congr fun r _ => hword r
 
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance

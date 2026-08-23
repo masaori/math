@@ -699,6 +699,13 @@ end ChildCodeMatching
 noncomputable def periodicOrbit (q : V → State) : Finset (V → State) :=
   (Finset.range (minPeriod N f q)).image fun n => iterate N f n q
 
+/-- 具体版の一周期表は、必要十分版の周期長を最小周期、反復列を大域写像の反復と
+する特殊化である。 -/
+theorem periodicOrbit_eq_necessary_sufficient (q : V → State) :
+    periodicOrbit N f q =
+      NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.periodicOrbit
+        (minPeriod N f) (iterate N f) q := rfl
+
 /-- 周期点の基点語。 -/
 noncomputable def baseWord (q : V → State) : List ℕ :=
   List.ofFn fun n : Fin (minPeriod N f q) => recursiveCode N f (iterate N f n q)
@@ -713,6 +720,13 @@ theorem baseWord_eq_necessary_sufficient (q : V → State) :
 /-- 一つの周期軌道を、全基点語の有限集合で表した成分符号。 -/
 noncomputable def componentCode (q : V → State) : Finset (List ℕ) :=
   (periodicOrbit N f q).image (baseWord N f)
+
+/-- 具体版の成分符号は、必要十分版の有限表を一周期表、付値を基点語とする
+特殊化である。 -/
+theorem componentCode_eq_necessary_sufficient (q : V → State) :
+    componentCode N f q =
+      NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.componentCode
+        (periodicOrbit N f) (baseWord N f) q := rfl
 
 /-- 全ての周期軌道を重複なく列挙する有限表。 -/
 noncomputable def periodicOrbitTable : Finset (Finset (V → State)) :=
@@ -2748,17 +2762,20 @@ theorem baseWord_transport (q : V → State) :
 /-- 共役全単射は周期軌道の有限表を全単射に移す。 -/
 theorem image_periodicOrbit (q : V → State) :
     (periodicOrbit N f q).image h = periodicOrbit NW fW (h q) := by
-  simp only [periodicOrbit, minPeriod_transport N f NW fW h hconj q,
-    Finset.image_image]
-  exact Finset.image_congr fun n _ =>
-    IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj n q
+  rw [periodicOrbit_eq_necessary_sufficient, periodicOrbit_eq_necessary_sufficient]
+  exact NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.image_periodicOrbit
+    (minPeriod N f) (minPeriod NW fW) (iterate N f) (iterate NW fW) h
+    (minPeriod_transport N f NW fW h hconj)
+    (fun n y => IterateMonoidConjugacyInvariance.conjugate_iterate N f NW fW h hconj n y) q
 
 /-- 共役全単射は周期軌道の成分符号を保存する。 -/
 theorem componentCode_transport (q : V → State) :
     componentCode NW fW (h q) = componentCode N f q := by
-  simp only [componentCode]
-  rw [← image_periodicOrbit N f NW fW h hconj q, Finset.image_image]
-  exact Finset.image_congr fun r _ => baseWord_transport N f NW fW h hconj r
+  rw [componentCode_eq_necessary_sufficient, componentCode_eq_necessary_sufficient]
+  exact NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.componentCode_transport
+    (periodicOrbit N f) (periodicOrbit NW fW) (baseWord N f) (baseWord NW fW) h
+    (image_periodicOrbit N f NW fW h hconj)
+    (baseWord_transport N f NW fW h hconj) q
 
 /-- 共役全単射は周期軌道の有限表全体を全単射に移す。 -/
 theorem image_periodicOrbitTable :
