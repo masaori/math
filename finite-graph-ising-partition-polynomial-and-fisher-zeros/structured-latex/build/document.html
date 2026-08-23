@@ -81,7 +81,7 @@ footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; co
 <aside class="chapter-navigation chapter-navigation--desktop" aria-label="章の目次"><div class="chapter-navigation__title">目次</div><ul><li><a class="chapter-link" data-target="sec-finite_graph_heading" data-root-target="sec-finite_graph_heading" href="#sec-finite_graph_heading">有限グラフ上の Ising 多項式</a></li><li><a class="chapter-link" data-target="sec-formal_high_temperature_heading" data-root-target="sec-formal_high_temperature_heading" href="#sec-formal_high_temperature_heading">形式的高温展開</a></li></ul></aside>
 <main class="document">
 <h1>有限グラフ上の Ising 分配多項式と Fisher 零点</h1>
-<p class="version">版 d0e320f1+（未コミットの変更を含む）・2026-08-23 13:05</p>
+<p class="version">版 85acc6dd+（未コミットの変更を含む）・2026-08-23 14:09</p>
 <h2 id="sec-finite_graph_heading" class="lv1">有限グラフ上の Ising 多項式</h2><nav class="main-theorem-lead" aria-label="この節の主定理"><div class="main-theorem-lead__title">この節の主定理</div><ul><li><a href="#blk-finite_graph_claim_coefficient_expansion">主張 0.13（多重度による係数表示）</a></li></ul></nav>
 <section class="block definition" id="blk-finite_graph_definition_endpoint_labels"><div class="head">定義 0.1（辺端ラベル集合）</div><div class="statement"><p>二つの形式的ラベルからなる有限集合を</p><div class="display math" data-tex="\mathsf{End}:=\{\mathsf{source},\mathsf{target}\}" data-display="1"></div><p>と定める。<span class="math" data-tex="\mathsf{source}"></span> と <span class="math" data-tex="\mathsf{target}"></span> は辺の二つの端を区別するラベルであり、整数 <span class="math" data-tex="0,1\in\mathbb Z"></span> ではない。この集合には加法、減法、乗法、大小関係を入れない。</p></div></section>
 <section class="block definition" id="blk-finite_graph_definition_input"><div class="head">定義 0.2（有限グラフの入力）</div><div class="statement"><p>有限グラフの入力を、空でない有限集合 <span class="math" data-tex="V"></span>、有限集合 <span class="math" data-tex="E"></span>、<a href="#blk-finite_graph_definition_endpoint_labels">定義 0.1</a> の辺端ラベルを入力に取る写像 <span class="math" data-tex="\partial_G:E\times\mathsf{End}\to V"></span> の組 <span class="math" data-tex="G=(V,E,\partial_G)"></span> と定める。任意の <span class="math" data-tex="e\in E"></span> について <span class="math" data-tex="\partial_G(e,\mathsf{source})\ne\partial_G(e,\mathsf{target})"></span> を仮定する。異なる辺が同じ二頂点を結ぶことは許す。</p></div></section>
@@ -1852,21 +1852,50 @@ Z_G(1)
 \end{aligned}" data-display="1"></div><p><span class="math" data-tex="\Omega_G(d)\ne0"></span> なので、代数的数の体で最高次係数を消去すると、</p><div class="display math" data-tex="\prod_{j=1}^{d}(1-\alpha_j)
 =
 \frac{2^{|V|}}{\Omega_G(d)}." data-display="1"></div><p><span class="math" data-tex="2^{|V|}\in\mathbb N_{&gt;0}"></span> かつ <span class="math" data-tex="\Omega_G(d)\in\mathbb N_{&gt;0}"></span> なので、右辺は正の有理数に属する。零点、一との差、有限積は代数的数、頂点数、次数、多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。</p><span class="qed">□</span></div></div></details></section>
-<section class="block theorem block--sub" id="blk-finite_graph_theorem_fisher_zero_rational_shifted_product_coefficient_ratio"><details class="fold"><summary class="head">定理 0.49（一般有限グラフの Fisher 零点と有理評価点との差の積）</summary><div class="fold__body"><div class="statement"><p><a href="#blk-finite_graph_definition_input">定義 0.2</a> の有限グラフについて、<a href="#blk-finite_graph_definition_partition_polynomial">定義 0.12</a> の次数を<span class="math" data-tex="d:=\deg Z_G(x)\in\mathbb N"></span> と置く。係数を標準単射<span class="math" data-tex="\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]"></span> で移した多項式の重複度込み Fisher 零点を<span class="math" data-tex="\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}"></span> と書く。任意の有理数<span class="math" data-tex="q\in\mathbb Q"></span> について</p><div class="display math" data-tex="\prod_{j=1}^{d}(q-\alpha_j)
+<section class="block theorem block--sub" id="blk-finite_graph_theorem_fisher_zero_rational_shifted_product_coefficient_ratio"><details class="fold"><summary class="head">定理 0.49（一般有限グラフの Fisher 零点と有理評価点との差の積）</summary><div class="fold__body"><div class="statement"><p><a href="#blk-finite_graph_definition_input">定義 0.2</a> の有限グラフについて、<a href="#blk-finite_graph_definition_partition_polynomial">定義 0.12</a> の次数を<span class="math" data-tex="d:=\deg Z_G(x)\in\mathbb N"></span> と置く。係数を標準単射<span class="math" data-tex="\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]"></span> で移した多項式の重複度込み Fisher 零点を<span class="math" data-tex="\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}"></span> と書く。自然数から有理数への標準単射を<span class="math" data-tex="\eta_{\mathbb N,\mathbb Q}:\mathbb N\hookrightarrow\mathbb Q"></span>、有理数から代数的数への標準単射を<span class="math" data-tex="\iota_{\mathbb Q,\overline{\mathbb Q}}:\mathbb Q\hookrightarrow\overline{\mathbb Q}"></span> と書く。整数係数を有理数へ移した<span class="math" data-tex="Z_G(x)"></span> の、任意の有理数<span class="math" data-tex="q\in\mathbb Q"></span> における値を<span class="math" data-tex="Z_G(q)\in\mathbb Q"></span> と書く。このとき</p><div class="display math" data-tex="\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
 =
-\frac{Z_G(q)}{\Omega_G(d)}
-\in\mathbb Q
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+\in\iota_{\mathbb Q,\overline{\mathbb Q}}(\mathbb Q)
 \subset\overline{\mathbb Q}." data-display="1"></div><p><span class="math" data-tex="d=0"></span> の場合、左辺は空積<span class="math" data-tex="1\in\overline{\mathbb Q}"></span> である。</p></div><div class="proof"><span class="proofhead">証明.</span> <p><a href="#blk-finite_graph_theorem_partition_polynomial_degree_maximum_broken_edge_count">定理 0.20</a> と<a href="#blk-finite_graph_claim_coefficient_expansion">主張 0.13</a> より、<span class="math" data-tex="\Omega_G(d)\in\mathbb N_{&gt;0}"></span> は最高次係数である。標準単射で係数を移した多項式を<span class="math" data-tex="\overline P_G(x)\in\overline{\mathbb Q}[x]"></span> と書く。代数的閉体上の一次因子分解により、</p><div class="display math" data-tex="\overline P_G(x)
 =
-\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j)." data-display="1"></div><div class="display math" data-tex="\begin{aligned}
-Z_G(q)
-&amp;=\overline P_G(q)
-&amp;&amp;\bigl(\because\ \text{標準単射は有理数 }q\text{ での評価を保存する}\bigr)\\
-&amp;=\Omega_G(d)\prod_{j=1}^{d}(q-\alpha_j)
-&amp;&amp;\bigl(\because\ \text{一次因子分解へ }x=q\text{ を代入する}\bigr).
-\end{aligned}" data-display="1"></div><p><span class="math" data-tex="\Omega_G(d)\ne0"></span> なので、代数的数の体で最高次係数を消去すると、</p><div class="display math" data-tex="\prod_{j=1}^{d}(q-\alpha_j)
-=
-\frac{Z_G(q)}{\Omega_G(d)}." data-display="1"></div><p><span class="math" data-tex="Z_G(q)\in\mathbb Q,\quad \Omega_G(d)\in\mathbb N_{&gt;0}"></span> なので、右辺は有理数に属する。評価点と係数比は有理数、Fisher 零点、差、有限積は代数的数、次数と多重度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。</p><span class="qed">□</span></div></div></details></section>
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+\right)
+\prod_{j=1}^{d}(x-\alpha_j)." data-display="1"></div><div class="display math" data-tex="\begin{aligned}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(Z_G(q)\right)
+&amp;=\overline P_G\!\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)\right)
+&amp;&amp;\bigl(\because\ \text{係数の標準単射と評価は可換する}\bigr)\\
+&amp;=\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+\right)
+\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
+&amp;&amp;\bigl(\because\ \text{一次因子分解へ }x=\iota_{\mathbb Q,\overline{\mathbb Q}}(q)\text{ を代入する}\bigr).
+\end{aligned}" data-display="1"></div><p><span class="math" data-tex="\eta_{\mathbb N,\mathbb Q}(\Omega_G(d))\ne0"></span> かつ標準単射は零でない元を零でない元へ移すので、代数的数の体で最高次係数を消去すると、</p><div class="display math" data-tex="\begin{aligned}
+\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
+&amp;=
+\frac{
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(Z_G(q)\right)
+}{
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  \right)
+}
+&amp;&amp;\bigl(\because\ \text{零でない最高次係数を消去する}\bigr)\\
+&amp;=\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+&amp;&amp;\bigl(\because\ \text{標準単射は商を保存する}\bigr).
+\end{aligned}" data-display="1"></div><p><span class="math" data-tex="Z_G(q)\in\mathbb Q,\quad \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))\in\mathbb Q_{&gt;0}"></span> なので、単射の引数である係数比は有理数に属する。評価点と係数比は有理数、その標準単射像、Fisher 零点、差、有限積は代数的数、次数と多重度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。</p><span class="qed">□</span></div></div></details></section>
 <section class="block theorem block--sub" id="blk-finite_graph_theorem_no_positive_rational_root"><details class="fold"><summary class="head">定理 0.50（Ising 分配多項式の正の有理評価の二配位下界）</summary><div class="fold__body"><div class="statement"><p><a href="#blk-finite_graph_definition_input">定義 0.2</a> の任意の有限グラフと任意の正の有理数 <span class="math" data-tex="q\in\mathbb Q_{&gt;0}"></span> について</p><div class="display math" data-tex="Z_G(q)\ge 2\quad\text{in }\mathbb Q." data-display="1"></div><p>特に、正の有理数は Ising 分配多項式の零点ではない。</p></div><div class="proof"><span class="proofhead">証明.</span> <p><a href="#blk-finite_graph_claim_coefficient_expansion">主張 0.13</a> の整数係数を自然数から有理数への標準単射で移し、<span class="math" data-tex="x=q"></span> を代入すると</p><div class="display math" data-tex="Z_G(q)
 =\sum_{m=0}^{|E|}\Omega_G(m)q^m
 \quad\bigl(\because\ \text{多重度による係数表示}\bigr)." data-display="1"></div><p>二つの配位 <span class="math" data-tex="\sigma_{\mathsf{up}},\sigma_{\mathsf{down}}:V\to\mathsf{Spin}"></span> を全ての <span class="math" data-tex="v\in V"></span> について <span class="math" data-tex="\sigma_{\mathsf{up}}(v):=\mathsf{up}"></span> および <span class="math" data-tex="\sigma_{\mathsf{down}}(v):=\mathsf{down}"></span> と定める。<a href="#blk-finite_graph_definition_spin_configurations">定義 0.7</a> より</p><div class="display math" data-tex="\sigma_{\mathsf{up}},\sigma_{\mathsf{down}}\in\mathcal S_G

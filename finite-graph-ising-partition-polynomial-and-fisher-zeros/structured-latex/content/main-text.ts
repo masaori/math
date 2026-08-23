@@ -4434,14 +4434,28 @@ Z_G(1)
         math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
         " で移した多項式の重複度込み Fisher 零点を",
         math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
-        " と書く。任意の有理数",
+        " と書く。自然数から有理数への標準単射を",
+        math(String.raw`\eta_{\mathbb N,\mathbb Q}:\mathbb N\hookrightarrow\mathbb Q`),
+        "、有理数から代数的数への標準単射を",
+        math(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+        " と書く。整数係数を有理数へ移した",
+        math(String.raw`Z_G(x)`),
+        " の、任意の有理数",
         math(String.raw`q\in\mathbb Q`),
-        " について",
+        " における値を",
+        math(String.raw`Z_G(q)\in\mathbb Q`),
+        " と書く。このとき",
       ]),
-      displayMath(String.raw`\prod_{j=1}^{d}(q-\alpha_j)
+      displayMath(String.raw`\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
 =
-\frac{Z_G(q)}{\Omega_G(d)}
-\in\mathbb Q
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+\in\iota_{\mathbb Q,\overline{\mathbb Q}}(\mathbb Q)
 \subset\overline{\mathbb Q}.`),
       paragraph([
         math(String.raw`d=0`),
@@ -4463,24 +4477,47 @@ Z_G(1)
       ]),
       displayMath(String.raw`\overline P_G(x)
 =
-\Omega_G(d)\prod_{j=1}^{d}(x-\alpha_j).`),
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+\right)
+\prod_{j=1}^{d}(x-\alpha_j).`),
       displayMath(String.raw`\begin{aligned}
-Z_G(q)
-&=\overline P_G(q)
-&&\bigl(\because\ \text{標準単射は有理数 }q\text{ での評価を保存する}\bigr)\\
-&=\Omega_G(d)\prod_{j=1}^{d}(q-\alpha_j)
-&&\bigl(\because\ \text{一次因子分解へ }x=q\text{ を代入する}\bigr).
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(Z_G(q)\right)
+&=\overline P_G\!\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)\right)
+&&\bigl(\because\ \text{係数の標準単射と評価は可換する}\bigr)\\
+&=\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+\right)
+\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
+&&\bigl(\because\ \text{一次因子分解へ }x=\iota_{\mathbb Q,\overline{\mathbb Q}}(q)\text{ を代入する}\bigr).
 \end{aligned}`),
       paragraph([
-        math(String.raw`\Omega_G(d)\ne0`),
-        " なので、代数的数の体で最高次係数を消去すると、",
+        math(String.raw`\eta_{\mathbb N,\mathbb Q}(\Omega_G(d))\ne0`),
+        " かつ標準単射は零でない元を零でない元へ移すので、代数的数の体で最高次係数を消去すると、",
       ]),
-      displayMath(String.raw`\prod_{j=1}^{d}(q-\alpha_j)
-=
-\frac{Z_G(q)}{\Omega_G(d)}.`),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{d}\left(\iota_{\mathbb Q,\overline{\mathbb Q}}(q)-\alpha_j\right)
+&=
+\frac{
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(Z_G(q)\right)
+}{
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  \right)
+}
+&&\bigl(\because\ \text{零でない最高次係数を消去する}\bigr)\\
+&=\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \frac{
+    Z_G(q)
+  }{
+    \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))
+  }
+\right)
+&&\bigl(\because\ \text{標準単射は商を保存する}\bigr).
+\end{aligned}`),
       paragraph([
-        math(String.raw`Z_G(q)\in\mathbb Q,\quad \Omega_G(d)\in\mathbb N_{>0}`),
-        " なので、右辺は有理数に属する。評価点と係数比は有理数、Fisher 零点、差、有限積は代数的数、次数と多重度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+        math(String.raw`Z_G(q)\in\mathbb Q,\quad \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))\in\mathbb Q_{>0}`),
+        " なので、単射の引数である係数比は有理数に属する。評価点と係数比は有理数、その標準単射像、Fisher 零点、差、有限積は代数的数、次数と多重度は自然数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
       ]),
     ],
   },

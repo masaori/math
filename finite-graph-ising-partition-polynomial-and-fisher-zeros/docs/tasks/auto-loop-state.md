@@ -23,6 +23,7 @@
 - 一般有限グラフについて、重複度込み Fisher 零点の一との差の積が、全スピン配位数と最高次係数の比 `2^{|V|}/Omega_G(d)` に等しい定理を追加した。現在は本文 66 ラベル、対応 SageMath 検算 47 件、個別検算 203 本である。変更前レビューでは既存 199 本の `check_*.sage` を全て個別実行して PASS した。
 - 一般有限グラフについて、重複度込み Fisher 零点と任意の正有理評価点 `q` との差の積が、分配多項式の評価値と最高次係数の比 `Z_G(q)/Omega_G(d)` に等しい定理を追加した。現在は本文 67 ラベル、対応 SageMath 検算 48 件、個別検算 205 本である。変更前レビューでは既存 202 本の `check_*.sage` を全て個別実行して PASS した。
 - 一般有限グラフについて、重複度込み Fisher 零点と任意の有理評価点 `q` との差の積が、分配多項式の評価値と最高次係数の比 `Z_G(q)/Omega_G(d)` に等しい定理を追加した。現在は本文 68 ラベル、対応 SageMath 検算 49 件、個別検算 208 本である。変更前レビューでは既存 205 本の `check_*.sage` を全て個別実行して PASS した。
+- Fisher 零点と有理評価点との差の積の既存定理をレビューし、有理数 `q` と有理係数比を代数的数として無名に同一視していたため、`Q` から `Qbar` への標準単射をステートメントと証明の各式へ明記した。本文 68 ラベル、対応 SageMath 検算 49 件、個別検算 208 本のままであり、既存 208 本を全て個別実行して PASS した。Lean 具体版と必要十分版は未着手。
 - 一般有限グラフの今後の研究はこの台帳だけで管理する。Lean 具体版と必要十分版は未着手。
 
 ## 実行待ち
@@ -52,6 +53,7 @@
 - 一般有限グラフの Fisher 零点の一との差の積と全配位数: `theorem_fisher_zero_shifted_product_configuration_count` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点と正有理評価点との差の積: `theorem_fisher_zero_positive_rational_shifted_product_coefficient_ratio` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点と有理評価点との差の積: `theorem_fisher_zero_rational_shifted_product_coefficient_ratio` と対応 SageMath 検算を追加済み。
+- 一般有限グラフの Fisher 零点と有理評価点との差の積の記述レビュー: `Q` から `Qbar` への標準単射を明記し、無名の同一視を除去済み。
 
 ## 判断の固定事項
 
