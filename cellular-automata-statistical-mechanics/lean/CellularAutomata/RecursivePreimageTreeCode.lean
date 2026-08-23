@@ -1474,6 +1474,52 @@ theorem mem_periodicComponentNodeTable_iff
       periodicOrbit N f (eventualPeriodicRoot N f y) = O := by
   simp [periodicComponentNodeTable]
 
+/-- 一段発展は、各配位が最終的に流入する周期成分を変えない。 -/
+theorem globalMap_mem_periodicComponentNodeTable
+    (O : Finset (V → State)) (y : V → State)
+    (hy : y ∈ periodicComponentNodeTable N f O) :
+    globalMap N f y ∈ periodicComponentNodeTable N f O := by
+  rw [mem_periodicComponentNodeTable_iff] at hy ⊢
+  by_cases hzero : minPreperiod N f y = 0
+  · have hyper : IsPeriodicPoint N f y :=
+      (isPeriodicPoint_iff_minPreperiod_zero N f y).2 hzero
+    have hFper : IsPeriodicPoint N f (globalMap N f y) := by
+      obtain ⟨p, hp, hperiod⟩ := hyper
+      refine ⟨p, hp, ?_⟩
+      calc
+        iterate N f p (globalMap N f y) = iterate N f p (iterate N f 1 y) := by
+          rw [iterate_succ, iterate_zero]
+        _ = iterate N f (p + 1) y := (iterate_add N f p 1 y).symm
+        _ = globalMap N f (iterate N f p y) := (iterate_succ N f p y).symm
+        _ = globalMap N f y := congrArg (globalMap N f) hperiod
+    have hrootY : eventualPeriodicRoot N f y = y := by
+      unfold eventualPeriodicRoot
+      rw [hzero, iterate_zero]
+    have hrootF : eventualPeriodicRoot N f (globalMap N f y) = globalMap N f y := by
+      unfold eventualPeriodicRoot
+      rw [(isPeriodicPoint_iff_minPreperiod_zero N f _).1 hFper, iterate_zero]
+    rw [hrootY] at hy
+    rw [hrootF]
+    rw [periodicOrbit_eq_of_mem N f y (globalMap N f y) hyper]
+    · exact hy
+    · exact (mem_periodicOrbit_iff_exists N f y _ hyper).2 ⟨1, by
+        rw [iterate_succ, iterate_zero]⟩
+  · have hpos : 0 < minPreperiod N f y := Nat.pos_of_ne_zero hzero
+    have hdec := minPreperiod_globalMap_eq_sub_one N f y hpos
+    have hroot : eventualPeriodicRoot N f (globalMap N f y) =
+        eventualPeriodicRoot N f y := by
+      unfold eventualPeriodicRoot
+      rw [hdec]
+      calc
+        iterate N f (minPreperiod N f y - 1) (globalMap N f y) =
+            iterate N f (minPreperiod N f y - 1) (iterate N f 1 y) := by
+          rw [iterate_succ, iterate_zero]
+        _ = iterate N f (minPreperiod N f y - 1 + 1) y :=
+          (iterate_add N f (minPreperiod N f y - 1) 1 y).symm
+        _ = iterate N f (minPreperiod N f y) y := by congr 1 <;> omega
+    rw [hroot]
+    exact hy
+
 /-- 相異なる周期軌道に流入する周期成分表は交わらない。 -/
 theorem periodicComponentNodeTable_disjoint
     (O P : Finset (V → State)) (hOP : O ≠ P) :
@@ -2033,6 +2079,48 @@ theorem periodicComponentEquivOfBaseWordEq_bijective
     Function.Bijective
       (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase) :=
   (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase).bijective
+
+/-- 周期成分全単射は、同じ有限添字の周期根を対応先の周期根へ送る。 -/
+theorem periodicComponentEquivOfBaseWordEq_maps_periodic_root
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r)
+    (n : Fin (minPeriod N f r)) :
+    let hrn : IsPeriodicPoint N f (iterate N f n r) :=
+      isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
+        ((mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨n, rfl⟩)
+    let depth := max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)
+    let sourceRootTree :=
+      truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+        depth (Nat.le_max_left _ _) (truncatedTreeNodeRoot N f depth (iterate N f n r))
+    let sourceRoot := periodicComponentRootSigmaEquiv N f r hr ⟨n, sourceRootTree⟩
+    (periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase sourceRoot :
+      W → State) = iterate NW fW n rW := by
+  dsimp only
+  let depth := max (2 ^ Fintype.card V - 1) (2 ^ Fintype.card W - 1)
+  have hrn : IsPeriodicPoint N f (iterate N f n r) :=
+    isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
+      ((mem_periodicOrbit_iff_exists N f r _ hr).2 ⟨n, rfl⟩)
+  have hrWn : IsPeriodicPoint NW fW (iterate NW fW n rW) :=
+    isPeriodicPoint_of_mem_periodicOrbit NW fW rW _ hrW
+      ((mem_periodicOrbit_iff_exists NW fW rW _ hrW).2 ⟨n, rfl⟩)
+  have hmatch := hasTreeMatching_iterate_of_baseWord_eq_commonDepth
+    N f NW fW r rW hr hrW hbase n n.isLt
+  change
+    ((periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase)
+      (periodicComponentRootSigmaEquiv N f r hr ⟨n,
+        truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
+          depth (Nat.le_max_left _ _)
+          (truncatedTreeNodeRoot N f depth (iterate N f n r))⟩) :
+      W → State) = iterate NW fW n rW
+  unfold periodicComponentEquivOfBaseWordEq
+  simp only [Equiv.trans_apply, Equiv.symm_apply_apply]
+  simp only [Equiv.sigmaCongr, Equiv.sigmaCongrRight, Equiv.sigmaCongrLeft]
+  simp only [periodicComponentRootSigmaEquiv]
+  convert preimageTreeNodeTableEquivOfMatching_maps_root
+    N f NW fW (iterate N f n r) (iterate NW fW n rW) hrn hrWn depth
+      (Nat.le_max_left _ _) (Nat.le_max_right _ _) hmatch using 1 <;> simp [depth]
+  all_goals congr 1
 
 /-- 周期位置ごとの前像木対応を従属和上で接着した周期成分全単射は、
     各位置へ流入する全ての非周期親子辺で一段発展と可換する。 -/
