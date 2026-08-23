@@ -4724,7 +4724,7 @@ Z_G(1)
         " と定め、任意の",
         math(String.raw`m\in\mathbb N_{>0}`),
         " に対して",
-        math(String.raw`D(cx^m)=cmx^{m-1}`),
+        math(String.raw`D(cx^m)=c\,\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(\eta_{\mathbb N,\mathbb Q}(m)\right)x^{m-1}`),
         " と定め、これらの規則を",
         math(String.raw`\overline{\mathbb Q}`),
         " 上線形に拡張する。",

@@ -4,7 +4,7 @@ load("finite-graph-ising-partition-polynomial-and-fisher-zeros/sagemath/check/fi
 for data in examples:
     coefficient_derivative = sum(
         (
-            QQbar(exponent * data["multiplicities"][exponent])
+            QQbar(QQ(NN(exponent) * data["multiplicities"][exponent]))
             * data["x"] ** (exponent - 1)
             for exponent in range(1, data["edge_count"] + 1)
         ),

@@ -14,7 +14,7 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
-| `check_coefficient_formal_derivative.sage` | 係数表示の項別形式微分 | PASS | 全例で多項式として一致 |
+| `check_coefficient_formal_derivative.sage` | `NN` の係数添字と多重度を `QQ`、`QQbar` へ順に移した係数表示の項別形式微分 | PASS | 全例で多項式として一致 |
 | `check_product_formal_derivative.sage` | 一次因子積の形式微分と一因子を除いた積の和 | PASS | 全例で多項式として一致 |
 | `check_distribute_root_product.sage` | 零点差積を逆数和の各項へ分配する中間等式 | PASS | 全例・全対象評価点で一致 |
 | `check_cancel_root_differences.sage` | 非零な各零点差を対応する項で消去する中間等式 | PASS | 全例・全対象評価点で一致 |
