@@ -15,15 +15,16 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
-| `check_split_selected_index.sage` | 逆数族の基本対称式と冪和の積を選択添字の内外へ分ける | PASS | 全例の全対象次数で一致 |
-| `check_alternating_cancellation.sage` | 交代和で中間の添字和が相殺する | PASS | 全例の全対象次数で一致 |
-| `check_newton_recurrence.sage` | 任意次数の Newton 漸化式を得る | PASS | 全例の全対象次数で一致 |
-| `check_substitute_coefficient_ratios.sage` | 逆数族の基本対称式を低次係数比へ置き換える | PASS | 全例の全対象次数で一致 |
-| `check_final_coefficient_recurrence.sage` | 逆数冪和を低次係数による有理漸化式へまとめる | PASS | 全例の全対象次数で一致 |
+| `check_split_selected_index.sage` | 逆数族の基本対称式と冪和の積を選択添字の内外へ分ける | PASS | 次数を超える冪を含む全対象次数で一致 |
+| `check_alternating_cancellation.sage` | 交代和で中間の添字和が相殺する | PASS | 次数を超える冪では末端項が空和となり一致 |
+| `check_newton_recurrence.sage` | 任意次数の Newton 漸化式を得る | PASS | 次数を超える冪を含む全対象次数で一致 |
+| `check_substitute_coefficient_ratios.sage` | 逆数族の基本対称式を低次係数比へ置き換える | PASS | 次数を超える冪を含む全対象次数で一致 |
+| `check_final_coefficient_recurrence.sage` | 逆数冪和を低次係数による有理漸化式へまとめる | PASS | 次数を超える冪を含む全対象次数で一致 |
 
 ## 備考
 
-- 一辺グラフ、四辺道、五サイクル、四頂点完全グラフを用い、各分配多項式の次数以下の全逆数冪和を検査する。
+- 無辺グラフ、一辺グラフ、四辺道、五サイクル、四頂点完全グラフを用い、次数ゼロの場合と各分配多項式の
+  次数を超える逆数冪和まで検査する。
 - 有限集合、`NN`、`ZZ`、`QQ`、`QQbar`、`QQbar[x]` の厳密演算だけを用いる。複素平面への埋め込み、
   浮動小数点近似、距離、偏角、実数、極限、積分を用いない。
 - 記述と SageMath 検算までを対象とする。Lean 具体版と Lean 必要十分版は未着手である。

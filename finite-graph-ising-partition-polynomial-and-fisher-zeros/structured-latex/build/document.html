@@ -81,7 +81,7 @@ footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; co
 <aside class="chapter-navigation chapter-navigation--desktop" aria-label="章の目次"><div class="chapter-navigation__title">目次</div><ul><li><a class="chapter-link" data-target="sec-finite_graph_heading" data-root-target="sec-finite_graph_heading" href="#sec-finite_graph_heading">有限グラフ上の Ising 多項式</a></li><li><a class="chapter-link" data-target="sec-formal_high_temperature_heading" data-root-target="sec-formal_high_temperature_heading" href="#sec-formal_high_temperature_heading">形式的高温展開</a></li></ul></aside>
 <main class="document">
 <h1>有限グラフ上の Ising 分配多項式と Fisher 零点</h1>
-<p class="version">版 9137aa28+（未コミットの変更を含む）・2026-08-23 09:33</p>
+<p class="version">版 ac8eb0e8+（未コミットの変更を含む）・2026-08-23 10:35</p>
 <h2 id="sec-finite_graph_heading" class="lv1">有限グラフ上の Ising 多項式</h2><nav class="main-theorem-lead" aria-label="この節の主定理"><div class="main-theorem-lead__title">この節の主定理</div><ul><li><a href="#blk-finite_graph_claim_coefficient_expansion">主張 0.13（多重度による係数表示）</a></li></ul></nav>
 <section class="block definition" id="blk-finite_graph_definition_endpoint_labels"><div class="head">定義 0.1（辺端ラベル集合）</div><div class="statement"><p>二つの形式的ラベルからなる有限集合を</p><div class="display math" data-tex="\mathsf{End}:=\{\mathsf{source},\mathsf{target}\}" data-display="1"></div><p>と定める。<span class="math" data-tex="\mathsf{source}"></span> と <span class="math" data-tex="\mathsf{target}"></span> は辺の二つの端を区別するラベルであり、整数 <span class="math" data-tex="0,1\in\mathbb Z"></span> ではない。この集合には加法、減法、乗法、大小関係を入れない。</p></div></section>
 <section class="block definition" id="blk-finite_graph_definition_input"><div class="head">定義 0.2（有限グラフの入力）</div><div class="statement"><p>有限グラフの入力を、空でない有限集合 <span class="math" data-tex="V"></span>、有限集合 <span class="math" data-tex="E"></span>、<a href="#blk-finite_graph_definition_endpoint_labels">定義 0.1</a> の辺端ラベルを入力に取る写像 <span class="math" data-tex="\partial_G:E\times\mathsf{End}\to V"></span> の組 <span class="math" data-tex="G=(V,E,\partial_G)"></span> と定める。任意の <span class="math" data-tex="e\in E"></span> について <span class="math" data-tex="\partial_G(e,\mathsf{source})\ne\partial_G(e,\mathsf{target})"></span> を仮定する。異なる辺が同じ二頂点を結ぶことは許す。</p></div></section>
@@ -987,23 +987,33 @@ p_4
 (-1)^k\frac{\Omega_G(k)}{\Omega_G(0)}
 &amp;&amp;\bigl(\because\ 2d-k\text{ と }k\text{ の差 }2(d-k)\text{ は偶数である}\bigr).
 \end{aligned}" data-display="1"></div><p>右辺は有理数なので、逆数族の基本対称式は <span class="math" data-tex="\mathbb Q\subset\overline{\mathbb Q}"></span> に属する。零点、その逆数、有限積は代数的数、次数、添字部分集合の元数、多重度は自然数、係数比は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。</p><span class="qed">□</span></div></div></details></section>
-<section class="block theorem block--sub" id="blk-finite_graph_theorem_reciprocal_fisher_zero_power_sum_newton_recurrence"><details class="fold"><summary class="head">定理 0.32（一般有限グラフの Fisher 零点逆数冪和の Newton 漸化式と係数比）</summary><div class="fold__body"><div class="statement"><p><a href="#blk-finite_graph_definition_input">定義 0.2</a> の有限グラフについて、<a href="#blk-finite_graph_definition_partition_polynomial">定義 0.12</a> の次数を <span class="math" data-tex="d:=\deg Z_G(x)\in\mathbb N"></span> と置く。係数を標準単射 <span class="math" data-tex="\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]"></span> で移した多項式の重複度込み Fisher 零点を <span class="math" data-tex="\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}"></span> と書く。各 <span class="math" data-tex="s\in\{1,\ldots,d\}"></span> について <span class="math" data-tex="\widehat p_s:=\sum_{j=1}^{d}\alpha_j^{-s}\in\overline{\mathbb Q}"></span> と定める。このとき、任意の <span class="math" data-tex="k\in\{1,\ldots,d\}"></span> について、</p><div class="display math" data-tex="\widehat p_k
+<section class="block theorem block--sub" id="blk-finite_graph_theorem_reciprocal_fisher_zero_power_sum_newton_recurrence"><details class="fold"><summary class="head">定理 0.32（一般有限グラフの Fisher 零点逆数冪和の Newton 漸化式と係数比）</summary><div class="fold__body"><div class="statement"><p><a href="#blk-finite_graph_definition_input">定義 0.2</a> の有限グラフについて、<a href="#blk-finite_graph_definition_partition_polynomial">定義 0.12</a> の次数を <span class="math" data-tex="d:=\deg Z_G(x)\in\mathbb N"></span> と置く。係数を標準単射 <span class="math" data-tex="\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]"></span> で移した多項式の重複度込み Fisher 零点を <span class="math" data-tex="\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}"></span> と書く。各 <span class="math" data-tex="s\in\mathbb N_{&gt;0}"></span> について <span class="math" data-tex="\widehat p_s:=\sum_{j=1}^{d}\alpha_j^{-s}\in\overline{\mathbb Q}"></span> と定める。このとき、任意の <span class="math" data-tex="k\in\mathbb N_{&gt;0}"></span> について、次の漸化式が成り立つ。</p><div class="display math" data-tex="\widehat p_k
 =
+\begin{cases}
 -\frac{
   \displaystyle
   \sum_{r=1}^{k-1}\Omega_G(r)\widehat p_{k-r}
   +k\Omega_G(k)
 }{
   \Omega_G(0)
-}
+},
+&amp;1\le k\le d,\\[8pt]
+-\frac{
+  \displaystyle
+  \sum_{r=1}^{d}\Omega_G(r)\widehat p_{k-r}
+}{
+  \Omega_G(0)
+},
+&amp;k&gt;d
+\end{cases}
 \in\mathbb Q
-\subset\overline{\mathbb Q}." data-display="1"></div><p><span class="math" data-tex="k=1"></span> のとき、右辺の和は空和 <span class="math" data-tex="0\in\overline{\mathbb Q}"></span> とする。</p></div><div class="proof"><span class="proofhead">証明.</span> <p><a href="#blk-finite_graph_theorem_fisher_zeros_nonzero">定理 0.23</a> より、全ての <span class="math" data-tex="j\in\{1,\ldots,d\}"></span> について <span class="math" data-tex="\beta_j:=\alpha_j^{-1}\in\overline{\mathbb Q}"></span> が定まる。任意の <span class="math" data-tex="k\in\{1,\ldots,d\}"></span> を取る。まず <span class="math" data-tex="k=1"></span> の場合、<a href="#blk-finite_graph_theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio">定理 0.31</a> を一次へ適用すると、</p><div class="display math" data-tex="\begin{aligned}
+\subset\overline{\mathbb Q}." data-display="1"></div><p><span class="math" data-tex="k=1"></span> のとき、右辺の和は空和 <span class="math" data-tex="0\in\overline{\mathbb Q}"></span> とする。</p></div><div class="proof"><span class="proofhead">証明.</span> <p>まず <span class="math" data-tex="d=0"></span> の場合、Fisher 零点の重複度込み族は空族なので、全ての <span class="math" data-tex="k\in\mathbb N_{&gt;0}"></span> について <span class="math" data-tex="\widehat p_k=0"></span> である。主張の第二の場合の右辺も空和により <span class="math" data-tex="0"></span> である。以下では <span class="math" data-tex="d\ge1"></span> とする。</p><p><a href="#blk-finite_graph_theorem_fisher_zeros_nonzero">定理 0.23</a> より、全ての <span class="math" data-tex="j\in\{1,\ldots,d\}"></span> について <span class="math" data-tex="\beta_j:=\alpha_j^{-1}\in\overline{\mathbb Q}"></span> が定まる。任意の <span class="math" data-tex="k\in\{1,\ldots,d\}"></span> を取る。まず <span class="math" data-tex="k=1"></span> の場合、<a href="#blk-finite_graph_theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio">定理 0.31</a> を一次へ適用すると、</p><div class="display math" data-tex="\begin{aligned}
 \widehat p_1
 &amp;=\widehat e_1
 &amp;&amp;\bigl(\because\ \widehat p_1\text{ と逆数族の一次基本対称式の定義}\bigr)\\
 &amp;=-\frac{\Omega_G(1)}{\Omega_G(0)}
 &amp;&amp;\bigl(\because\ \text{Fisher 零点逆数族の一次基本対称式と係数比}\bigr).
-\end{aligned}" data-display="1"></div><p>これは空和を用いた主張の式に等しい。以下では <span class="math" data-tex="k\ge2"></span> とする。各 <span class="math" data-tex="r\in\{1,\ldots,k\}"></span> について代数的数 <span class="math" data-tex="\widehat e_r,\widehat h_r\in\overline{\mathbb Q}"></span> を</p><div class="display math" data-tex="\widehat e_r
+\end{aligned}" data-display="1"></div><p>これは空和を用いた主張の第一の場合に等しい。以下では <span class="math" data-tex="2\le k\le d"></span> とする。各 <span class="math" data-tex="r\in\{1,\ldots,k\}"></span> について代数的数 <span class="math" data-tex="\widehat e_r,\widehat h_r\in\overline{\mathbb Q}"></span> を</p><div class="display math" data-tex="\widehat e_r
 :=
 \sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
 \prod_{i\in I}\beta_i,
@@ -1105,7 +1115,81 @@ k\frac{\Omega_G(k)}{\Omega_G(0)}
   \Omega_G(0)
 }
 &amp;&amp;\bigl(\because\ \Omega_G(0)\ne0\text{ なので共通分母へ移す}\bigr).
-\end{aligned}" data-display="1"></div><p>この等式を <span class="math" data-tex="k=1"></span> から順に用いると、空和から始まり、自然数と有理数の四則演算だけで全ての <span class="math" data-tex="\widehat p_k"></span> が有理数として定まる。したがって <span class="math" data-tex="\widehat p_k\in\mathbb Q\subset\overline{\mathbb Q}"></span> である。零点、その逆数と冪、有限積および有限和は代数的数、次数、冪指数、添字部分集合の元数、多重度は自然数、係数比と逆数冪和は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。</p><span class="qed">□</span></div></div></details></section>
+\end{aligned}" data-display="1"></div><p>以上で <span class="math" data-tex="1\le k\le d"></span> の場合を得た。次に任意の <span class="math" data-tex="q\in\mathbb N_{&gt;0}"></span> で <span class="math" data-tex="q&gt;d"></span> を満たすものを取る。各 <span class="math" data-tex="r\in\{1,\ldots,d\}"></span> について <span class="math" data-tex="E_r,H_r^{(q)}\in\overline{\mathbb Q}"></span> を</p><div class="display math" data-tex="E_r
+:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\prod_{i\in I}\beta_i,
+\qquad
+H_r^{(q)}
+:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{j\in I}\beta_j^{q-r}
+\right),
+\qquad
+H_{d+1}^{(q)}:=0" data-display="1"></div><p>と定める。各 <span class="math" data-tex="r\in\{1,\ldots,d\}"></span> について有限和の分配律により、</p><div class="display math" data-tex="\begin{aligned}
+E_r\widehat p_{q-r}
+&amp;=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{j=1}^{d}\beta_j^{q-r}
+\right)
+&amp;&amp;\bigl(\because\ \text{定義を代入する}\bigr)\\
+&amp;=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{j\in I}\beta_j^{q-r}
+\right)
++
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{\substack{1\le j\le d\\j\notin I}}\beta_j^{q-r}
+\right)
+&amp;&amp;\bigl(\because\ \{1,\ldots,d\}=I\sqcup(\{1,\ldots,d\}\setminus I)\bigr)\\
+&amp;=H_r^{(q)}+H_{r+1}^{(q)}
+&amp;&amp;\bigl(\because\ J=I\cup\{j\}\text{ と置いて第二項を }|J|=r+1\text{ の和へ移す}\bigr).
+\end{aligned}" data-display="1"></div><p>直前の等式へ <span class="math" data-tex="(-1)^{r-1}"></span> を掛けて <span class="math" data-tex="r=1,\ldots,d"></span> を足すと、</p><div class="display math" data-tex="\begin{aligned}
+\sum_{r=1}^{d}(-1)^{r-1}E_r\widehat p_{q-r}
+&amp;=
+\sum_{r=1}^{d}(-1)^{r-1}\left(H_r^{(q)}+H_{r+1}^{(q)}\right)
+&amp;&amp;\bigl(\because\ E_r\widehat p_{q-r}=H_r^{(q)}+H_{r+1}^{(q)}\bigr)\\
+&amp;=H_1^{(q)}
+&amp;&amp;\bigl(\because\ H_2^{(q)},\ldots,H_d^{(q)}\text{ が相殺し }H_{d+1}^{(q)}=0\bigr)\\
+&amp;=\widehat p_q
+&amp;&amp;\bigl(\because\ H_1^{(q)}=\sum_{j=1}^{d}\beta_j\beta_j^{q-1}=\widehat p_q\bigr).
+\end{aligned}" data-display="1"></div><p><a href="#blk-finite_graph_theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio">定理 0.31</a> を <span class="math" data-tex="r=1,\ldots,d"></span> に適用すると、</p><div class="display math" data-tex="\begin{aligned}
+\widehat p_q
+&amp;=
+\sum_{r=1}^{d}
+(-1)^{r-1}
+(-1)^r
+\frac{\Omega_G(r)}{\Omega_G(0)}\widehat p_{q-r}
+&amp;&amp;\bigl(\because\ E_r=(-1)^r\Omega_G(r)/\Omega_G(0)\bigr)\\
+&amp;=
+-\sum_{r=1}^{d}
+\frac{\Omega_G(r)}{\Omega_G(0)}\widehat p_{q-r}
+&amp;&amp;\bigl(\because\ (-1)^{2r-1}=-1\bigr)\\
+&amp;=
+-\frac{
+  \displaystyle
+  \sum_{r=1}^{d}\Omega_G(r)\widehat p_{q-r}
+}{
+  \Omega_G(0)
+}
+&amp;&amp;\bigl(\because\ \Omega_G(0)\ne0\text{ なので共通分母へ移す}\bigr).
+\end{aligned}" data-display="1"></div><p>第一の場合を <span class="math" data-tex="k=1,\ldots,d"></span> の順に用い、続いて第二の場合を <span class="math" data-tex="k=d+1,d+2,\ldots"></span> の順に用いると、自然数と有理数の四則演算だけで全ての <span class="math" data-tex="\widehat p_k"></span> が有理数として定まる。したがって <span class="math" data-tex="\widehat p_k\in\mathbb Q\subset\overline{\mathbb Q}"></span> である。零点、その逆数と冪、有限積および有限和は代数的数、次数、冪指数、添字部分集合の元数、多重度は自然数、係数比と逆数冪和は有理数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。</p><span class="qed">□</span></div></div></details></section>
 <section class="block theorem block--sub" id="blk-finite_graph_theorem_reciprocal_fisher_zero_square_sum_coefficient_ratio"><details class="fold"><summary class="head">定理 0.33（一般有限グラフの Fisher 零点逆数の二乗和と係数比）</summary><div class="fold__body"><div class="statement"><p><a href="#blk-finite_graph_definition_input">定義 0.2</a> の有限グラフについて、<a href="#blk-finite_graph_definition_partition_polynomial">定義 0.12</a> の次数を<span class="math" data-tex="d:=\deg Z_G(x)\in\mathbb N"></span> と置き、<span class="math" data-tex="d\ge2"></span> と仮定する。係数を標準単射<span class="math" data-tex="\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]"></span> で移した多項式の重複度込み Fisher 零点を<span class="math" data-tex="\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}"></span> と書く。このとき、</p><div class="display math" data-tex="\sum_{j=1}^{d}\alpha_j^{-2}
 =
 \frac{

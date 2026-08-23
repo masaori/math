@@ -3,8 +3,8 @@
 load("finite-graph-ising-partition-polynomial-and-fisher-zeros/sagemath/check/reciprocal-fisher-zero-power-sum-newton-recurrence/_prelude.sage")
 for data in examples:
     values, degree = data["reciprocals"], data["degree"]
-    for k in range(2, degree + 1):
-        for r in range(1, k):
+    for k in range(2, 2 * degree + 3):
+        for r in range(1, min(k - 1, degree) + 1):
             left = elementary(values, r) * power_sum(values, k - r)
             right = indexed_sum(values, k, r) + indexed_sum(values, k, r + 1)
             assert left == right, (data["name"], k, r)

@@ -628,17 +628,22 @@ Overfull \hbox (59.38475pt too wide) detected at line 2026
  []
 
 [18]
-Overfull \hbox (199.21974pt too wide) detected at line 2216
+Overfull \hbox (199.21974pt too wide) detected at line 2238
 [][]
  []
 
 [19]
-Overfull \hbox (52.3007pt too wide) detected at line 2315
+Overfull \hbox (52.3007pt too wide) detected at line 2337
 [][]
  []
 
-[20]
-Overfull \hbox (24.78067pt too wide) detected at line 2469
+
+Overfull \hbox (200.53354pt too wide) detected at line 2400
+[][]
+ []
+
+[20] [21]
+Overfull \hbox (24.78067pt too wide) detected at line 2598
 [] \OT1/cmr/m/n/10.95 := [] \OML/cmm/m/it/10.95 ^^K[];  [] \OT1/cmr/m/n/10.95 :
 = [] \OML/cmm/m/it/10.95 ^^K[]^^K[];  [] \OT1/cmr/m/n/10.95 := [] \OML/cmm/m/it
 /10.95 ^^K[]^^K[]^^K[];  [] \OT1/cmr/m/n/10.95 := [] \OML/cmm/m/it/10.95 ^^K[]^
@@ -646,53 +651,53 @@ Overfull \hbox (24.78067pt too wide) detected at line 2469
  []
 
 
-Overfull \hbox (33.7777pt too wide) detected at line 2481
-[][]
- []
-
-[21]
-Overfull \hbox (4.80469pt too wide) detected at line 2498
+Overfull \hbox (33.7777pt too wide) detected at line 2610
 [][]
  []
 
 
-Overfull \hbox (55.21915pt too wide) detected at line 2546
+Overfull \hbox (4.80469pt too wide) detected at line 2627
+[][]
+ []
+
+[22]
+Overfull \hbox (55.21915pt too wide) detected at line 2675
 [][]
  []
 
 
-Overfull \hbox (69.05365pt too wide) detected at line 2579
+Overfull \hbox (69.05365pt too wide) detected at line 2708
 [] \OML/cmm/m/it/10.95 ^^K[] \OT1/cmr/m/n/10.95 = [] \OMS/cmsy/m/n/10.95 2 \U/m
 sb/m/n/10.95 Q \OMS/cmsy/m/n/10.95 ^^Z []\OML/cmm/m/it/10.95 :
  []
 
-[22]
-Overfull \hbox (204.66461pt too wide) detected at line 2700
-[][]
- []
-
 [23]
-Overfull \hbox (5.54675pt too wide) detected at line 2790
+Overfull \hbox (204.66461pt too wide) detected at line 2829
 [][]
  []
 
-[24] [25] [26] [27] [28] [29]
-Overfull \hbox (30.98936pt too wide) detected at line 3379
+[24]
+Overfull \hbox (5.54675pt too wide) detected at line 2919
 [][]
  []
 
-[30] [31]
-Overfull \hbox (90.3594pt too wide) detected at line 3630
+[25] [26] [27] [28] [29] [30]
+Overfull \hbox (30.98936pt too wide) detected at line 3508
 [][]
  []
 
-[32]
-Overfull \hbox (19.42285pt too wide) detected at line 3767
+[31] [32]
+Overfull \hbox (90.3594pt too wide) detected at line 3759
 [][]
  []
 
-[33] [34] [35] [36]
-Overfull \hbox (23.56679pt too wide) detected at line 4111
+[33]
+Overfull \hbox (19.42285pt too wide) detected at line 3896
+[][]
+ []
+
+[34] [35] [36]
+Overfull \hbox (23.56679pt too wide) detected at line 4240
 [] \OT1/cmr/m/n/10.95 
 [](\OML/cmm/m/it/10.95 m\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 q[] < [] \OT1/c
 mr/m/n/10.95 
@@ -708,4 +713,4 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 136D271E6B286FF0E67A1A8C4C9E49EB;288.
  )
-Output written on document.xdv (42 pages, 535888 bytes).
+Output written on document.xdv (42 pages, 544648 bytes).

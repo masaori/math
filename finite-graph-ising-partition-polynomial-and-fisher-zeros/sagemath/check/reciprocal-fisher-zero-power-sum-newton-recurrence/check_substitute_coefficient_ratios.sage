@@ -4,9 +4,12 @@ load("finite-graph-ising-partition-polynomial-and-fisher-zeros/sagemath/check/re
 for data in examples:
     values, degree, polynomial = data["reciprocals"], data["degree"], data["polynomial"]
     constant = QQ(polynomial[0])
-    for k in range(1, degree + 1):
+    for k in range(1, 2 * degree + 3):
         left = sum(
-            ((-1)**(r - 1) * elementary(values, r) * power_sum(values, k - r) for r in range(1, k)),
+            (
+                (-1)**(r - 1) * elementary(values, r) * power_sum(values, k - r)
+                for r in range(1, min(k - 1, degree) + 1)
+            ),
             QQbar(0),
         ) + (-1)**(k - 1) * k * elementary(values, k)
         right = sum(
@@ -14,7 +17,7 @@ for data in examples:
                 (-1)**(r - 1)
                 * ((-1)**r * QQ(polynomial[r]) / constant)
                 * power_sum(values, k - r)
-                for r in range(1, k)
+                for r in range(1, min(k - 1, degree) + 1)
             ),
             QQbar(0),
         ) + (-1)**(k - 1) * k * ((-1)**k * QQ(polynomial[k]) / constant)

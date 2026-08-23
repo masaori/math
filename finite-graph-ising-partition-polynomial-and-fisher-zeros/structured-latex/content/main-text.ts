@@ -2338,22 +2338,32 @@ p_4
         " で移した多項式の重複度込み Fisher 零点を ",
         math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
         " と書く。各 ",
-        math(String.raw`s\in\{1,\ldots,d\}`),
+        math(String.raw`s\in\mathbb N_{>0}`),
         " について ",
         math(String.raw`\widehat p_s:=\sum_{j=1}^{d}\alpha_j^{-s}\in\overline{\mathbb Q}`),
         " と定める。このとき、任意の ",
-        math(String.raw`k\in\{1,\ldots,d\}`),
-        " について、",
+        math(String.raw`k\in\mathbb N_{>0}`),
+        " について、次の漸化式が成り立つ。",
       ]),
       displayMath(String.raw`\widehat p_k
 =
+\begin{cases}
 -\frac{
   \displaystyle
   \sum_{r=1}^{k-1}\Omega_G(r)\widehat p_{k-r}
   +k\Omega_G(k)
 }{
   \Omega_G(0)
-}
+},
+&1\le k\le d,\\[8pt]
+-\frac{
+  \displaystyle
+  \sum_{r=1}^{d}\Omega_G(r)\widehat p_{k-r}
+}{
+  \Omega_G(0)
+},
+&k>d
+\end{cases}
 \in\mathbb Q
 \subset\overline{\mathbb Q}.`),
       paragraph([
@@ -2364,6 +2374,19 @@ p_4
       ]),
     ],
     proof: [
+      paragraph([
+        "まず ",
+        math(String.raw`d=0`),
+        " の場合、Fisher 零点の重複度込み族は空族なので、全ての ",
+        math(String.raw`k\in\mathbb N_{>0}`),
+        " について ",
+        math(String.raw`\widehat p_k=0`),
+        " である。主張の第二の場合の右辺も空和により ",
+        math(String.raw`0`),
+        " である。以下では ",
+        math(String.raw`d\ge1`),
+        " とする。",
+      ]),
       paragraph([
         ref("theorem_fisher_zeros_nonzero"),
         " より、全ての ",
@@ -2386,8 +2409,8 @@ p_4
 &&\bigl(\because\ \text{Fisher 零点逆数族の一次基本対称式と係数比}\bigr).
 \end{aligned}`),
       paragraph([
-        "これは空和を用いた主張の式に等しい。以下では ",
-        math(String.raw`k\ge2`),
+        "これは空和を用いた主張の第一の場合に等しい。以下では ",
+        math(String.raw`2\le k\le d`),
         " とする。各 ",
         math(String.raw`r\in\{1,\ldots,k\}`),
         " について代数的数 ",
@@ -2535,9 +2558,110 @@ k\frac{\Omega_G(k)}{\Omega_G(0)}
 &&\bigl(\because\ \Omega_G(0)\ne0\text{ なので共通分母へ移す}\bigr).
 \end{aligned}`),
       paragraph([
-        "この等式を ",
-        math(String.raw`k=1`),
-        " から順に用いると、空和から始まり、自然数と有理数の四則演算だけで全ての ",
+        "以上で ",
+        math(String.raw`1\le k\le d`),
+        " の場合を得た。次に任意の ",
+        math(String.raw`q\in\mathbb N_{>0}`),
+        " で ",
+        math(String.raw`q>d`),
+        " を満たすものを取る。各 ",
+        math(String.raw`r\in\{1,\ldots,d\}`),
+        " について ",
+        math(String.raw`E_r,H_r^{(q)}\in\overline{\mathbb Q}`),
+        " を",
+      ]),
+      displayMath(String.raw`E_r
+:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\prod_{i\in I}\beta_i,
+\qquad
+H_r^{(q)}
+:=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{j\in I}\beta_j^{q-r}
+\right),
+\qquad
+H_{d+1}^{(q)}:=0`),
+      paragraph(["と定める。各 ", math(String.raw`r\in\{1,\ldots,d\}`), " について有限和の分配律により、"]),
+      displayMath(String.raw`\begin{aligned}
+E_r\widehat p_{q-r}
+&=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{j=1}^{d}\beta_j^{q-r}
+\right)
+&&\bigl(\because\ \text{定義を代入する}\bigr)\\
+&=
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{j\in I}\beta_j^{q-r}
+\right)
++
+\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+\left(
+  \prod_{i\in I}\beta_i
+\right)
+\left(
+  \sum_{\substack{1\le j\le d\\j\notin I}}\beta_j^{q-r}
+\right)
+&&\bigl(\because\ \{1,\ldots,d\}=I\sqcup(\{1,\ldots,d\}\setminus I)\bigr)\\
+&=H_r^{(q)}+H_{r+1}^{(q)}
+&&\bigl(\because\ J=I\cup\{j\}\text{ と置いて第二項を }|J|=r+1\text{ の和へ移す}\bigr).
+\end{aligned}`),
+      paragraph(["直前の等式へ ", math(String.raw`(-1)^{r-1}`), " を掛けて ", math(String.raw`r=1,\ldots,d`), " を足すと、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{r=1}^{d}(-1)^{r-1}E_r\widehat p_{q-r}
+&=
+\sum_{r=1}^{d}(-1)^{r-1}\left(H_r^{(q)}+H_{r+1}^{(q)}\right)
+&&\bigl(\because\ E_r\widehat p_{q-r}=H_r^{(q)}+H_{r+1}^{(q)}\bigr)\\
+&=H_1^{(q)}
+&&\bigl(\because\ H_2^{(q)},\ldots,H_d^{(q)}\text{ が相殺し }H_{d+1}^{(q)}=0\bigr)\\
+&=\widehat p_q
+&&\bigl(\because\ H_1^{(q)}=\sum_{j=1}^{d}\beta_j\beta_j^{q-1}=\widehat p_q\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio"),
+        " を ",
+        math(String.raw`r=1,\ldots,d`),
+        " に適用すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\widehat p_q
+&=
+\sum_{r=1}^{d}
+(-1)^{r-1}
+(-1)^r
+\frac{\Omega_G(r)}{\Omega_G(0)}\widehat p_{q-r}
+&&\bigl(\because\ E_r=(-1)^r\Omega_G(r)/\Omega_G(0)\bigr)\\
+&=
+-\sum_{r=1}^{d}
+\frac{\Omega_G(r)}{\Omega_G(0)}\widehat p_{q-r}
+&&\bigl(\because\ (-1)^{2r-1}=-1\bigr)\\
+&=
+-\frac{
+  \displaystyle
+  \sum_{r=1}^{d}\Omega_G(r)\widehat p_{q-r}
+}{
+  \Omega_G(0)
+}
+&&\bigl(\because\ \Omega_G(0)\ne0\text{ なので共通分母へ移す}\bigr).
+\end{aligned}`),
+      paragraph([
+        "第一の場合を ",
+        math(String.raw`k=1,\ldots,d`),
+        " の順に用い、続いて第二の場合を ",
+        math(String.raw`k=d+1,d+2,\ldots`),
+        " の順に用いると、自然数と有理数の四則演算だけで全ての ",
         math(String.raw`\widehat p_k`),
         " が有理数として定まる。したがって ",
         math(String.raw`\widehat p_k\in\mathbb Q\subset\overline{\mathbb Q}`),

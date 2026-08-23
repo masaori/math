@@ -26,7 +26,6 @@ def partition_data(name, vertex_count, edges):
         for alpha, multiplicity in polynomial.roots(ring=QQbar)
         for _index in range(ZZ(multiplicity))
     )
-    assert degree >= 1, name
     assert len(roots) == degree, name
     assert all(alpha != 0 for alpha in roots), name
     reciprocals = tuple(alpha**(-1) for alpha in roots)
@@ -61,6 +60,7 @@ def indexed_sum(values, power_order, subset_order):
 
 
 examples = (
+    partition_data("edgeless_graph", 2, ()),
     partition_data("one_edge", 2, ((0, 1),)),
     partition_data("four_edge_path", 5, ((0, 1), (1, 2), (2, 3), (3, 4))),
     partition_data("five_cycle", 5, ((0, 1), (1, 2), (2, 3), (3, 4), (4, 0))),

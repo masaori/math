@@ -19,6 +19,7 @@
 - 次数四以上の一般有限グラフについて、重複度込み Fisher 零点逆数の四乗和が、低次側五係数の有理式に等しい定理を追加した。現在は本文 63 ラベル、対応 SageMath 検算 44 件、個別検算 190 本である。
 - 一般有限グラフについて、重複度込み Fisher 零点の任意次数の冪和を、それ以前の冪和と高次係数から再帰的に決める Newton 漸化式を追加した。現在は本文 64 ラベル、対応 SageMath 検算 45 件、個別検算 194 本である。
 - 一般有限グラフについて、重複度込み Fisher 零点逆数の任意次数の冪和を、それ以前の逆数冪和と低次係数から再帰的に決める Newton 漸化式を追加した。現在は本文 65 ラベル、対応 SageMath 検算 46 件、個別検算 200 本である。変更前レビューでは既存 195 本を全て個別実行して PASS した。
+- Fisher 零点逆数冪和の Newton 漸化式が本文では分配多項式の次数以下に限られていたため、次数を超える全ての正整数次数へ低次係数漸化式を延長した。本文 65 ラベル、対応 SageMath 検算 46 件、個別検算 200 本のままで、既存 200 本と変更した 5 本を厳密演算で PASS した。
 - 一般有限グラフの今後の研究はこの台帳だけで管理する。Lean 具体版と必要十分版は未着手。
 
 ## 実行待ち
@@ -44,7 +45,7 @@
 - 一般有限グラフの Fisher 零点の四乗和と係数比: `theorem_fisher_zero_fourth_power_sum_coefficient_ratio` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点逆数の四乗和と係数比: `theorem_reciprocal_fisher_zero_fourth_power_sum_coefficient_ratio` と対応 SageMath 検算を追加済み。
 - 一般有限グラフの Fisher 零点冪和の Newton 漸化式と係数比: `theorem_fisher_zero_power_sum_newton_recurrence` と対応 SageMath 検算を追加済み。
-- 一般有限グラフの Fisher 零点逆数冪和の Newton 漸化式と係数比: `theorem_reciprocal_fisher_zero_power_sum_newton_recurrence` と対応 SageMath 検算を追加済み。
+- 一般有限グラフの Fisher 零点逆数冪和の Newton 漸化式と係数比: `theorem_reciprocal_fisher_zero_power_sum_newton_recurrence` を次数を超える全ての正整数次数まで証明し、対応 SageMath 検算を追加済み。
 
 ## 判断の固定事項
 
