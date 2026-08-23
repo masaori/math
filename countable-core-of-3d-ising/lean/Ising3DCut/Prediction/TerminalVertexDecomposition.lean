@@ -131,4 +131,26 @@ def IsPerfectMatching {Terminal : Type*} [DecidableEq Terminal]
   matching ⊆ edges ∧
     ∀ t ∈ vertices, ∃! e, e ∈ matching ∧ t ∈ e
 
+/-- 完全マッチングに選ばれた相異なる二つの辺は、端子を共有しない。
+端子がどちらにも属すると、その端子を覆う辺の一意性からその二つの辺が一致してしまう。
+覆われる端子が `vertices` に属することは仮定として与える（一意性はそこでしか言えないため）。 -/
+theorem IsPerfectMatching.not_mem_of_mem_of_ne {Terminal : Type*} [DecidableEq Terminal]
+    (vertices : Finset Terminal) (edges matching : Finset (Finset Terminal))
+    (hMatching : IsPerfectMatching vertices edges matching)
+    {e f : Finset Terminal} (he : e ∈ matching) (hf : f ∈ matching) (hne : e ≠ f)
+    {t : Terminal} (ht : t ∈ vertices) (hte : t ∈ e) : t ∉ f := by
+  intro htf
+  obtain ⟨_, hUnique⟩ := hMatching
+  obtain ⟨_, _, hEq⟩ := hUnique t ht
+  exact hne ((hEq e ⟨he, hte⟩).trans (hEq f ⟨hf, htf⟩).symm)
+
+/-- 上と同じことを、二つの選んだ辺の共通部分が `vertices` の外にしか無い形で述べる。 -/
+theorem IsPerfectMatching.disjoint_within_vertices {Terminal : Type*} [DecidableEq Terminal]
+    (vertices : Finset Terminal) (edges matching : Finset (Finset Terminal))
+    (hMatching : IsPerfectMatching vertices edges matching)
+    {e f : Finset Terminal} (he : e ∈ matching) (hf : f ∈ matching) (hne : e ≠ f) :
+    ∀ t ∈ vertices, t ∈ e → t ∉ f :=
+  fun _ ht hte => hMatching.not_mem_of_mem_of_ne vertices edges matching he hf hne ht hte
+
+
 end Ising3DCut.Prediction
