@@ -353,6 +353,8 @@ targets=(
   Ising3DCut.LimitQuantity.intSign
   Ising3DCut.LimitQuantity.signCollapse
   Ising3DCut.LimitQuantity.sign_collapse_has_a_value_collision
+  Ising3DCut.NecSuf.coordinatewise_map_has_a_value_collision
+  Ising3DCut.LimitQuantity.sign_collapse_has_a_value_collision_fromNecSuf
   Ising3DCut.LimitQuantity.magnitude_truncation_has_a_value_collision
   Ising3DCut.LimitQuantity.magnitude_truncation_has_a_value_collision_fromNecSuf
   Ising3DCut.NecSuf.finite_coordinate_truncation_has_a_value_collision
