@@ -2593,6 +2593,45 @@ d\in\mathbb N_{>0}`),
     ],
   },
   {
+    id: "arithmetic_invariants_theorem_fixed_quotient_fisher_splitting_field_exact_degree",
+    kind: "theorem",
+    standing: "mainTheorem",
+    title: { text: "固定剰余類格子の Fisher 分解体の厳密次数" },
+    labels: ["theorem_fixed_quotient_fisher_splitting_field_exact_degree"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fixed-quotient-fisher-splitting-field-exact-degree"],
+    statement: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"),
+        " で構成した分解体 ",
+        math(String.raw`K_Q\subset\overline{\mathbb Q}`),
+        " の次数は厳密に",
+      ]),
+      displayMath(String.raw`[K_Q:\mathbb Q]=44!`),
+      paragraph(["である。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"),
+        " より ",
+        math(String.raw`K_Q/\mathbb Q`),
+        " は有限 Galois 拡大である。有限 Galois 拡大の次数公式により、",
+      ]),
+      displayMath(String.raw`[K_Q:\mathbb Q]
+=\left|\operatorname{Gal}(K_Q/\mathbb Q)\right|.`),
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_full_symmetric_galois_group"), " より、"]),
+      displayMath(String.raw`\left|\operatorname{Gal}(K_Q/\mathbb Q)\right|
+=\left|\operatorname{Sym}(\mathcal R_Q)\right|.`),
+      paragraph(["有限集合上の全対称群の位数公式により、"]),
+      displayMath(String.raw`\left|\operatorname{Sym}(\mathcal R_Q)\right|
+=|\mathcal R_Q|!.`),
+      paragraph([ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"), " より、"]),
+      displayMath(String.raw`|\mathcal R_Q|!=44!.`),
+      paragraph(["したがって、"]),
+      displayMath(String.raw`[K_Q:\mathbb Q]=44!.`),
+    ],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_fisher_zero_rational_rectangle_isolation",
     kind: "theorem",
     title: { text: "固定剰余類格子の Fisher 零点の有理矩形根分離証明書" },
