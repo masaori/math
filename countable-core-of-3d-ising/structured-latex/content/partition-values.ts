@@ -7064,4 +7064,89 @@ Z_3(2)
       ]),
     ],
   },
+
+  {
+    id: "soundness_bridge_definition_ising_realizable_sequences_and_sufficiency",
+    kind: "definition",
+    title: {
+      text: "実際の Ising 有限箱データから生じる列の族と、その族の上での十分性",
+    },
+    labels: [
+      "def_ising_realizable_finite_box_sequences",
+      "def_sufficiency_on_ising_realizable_family",
+    ],
+    habitat: "R",
+    realEscape:
+      "族の添字集合 Q_alpha を「極限量 alpha(q) が存在する有理点」で定めるため、また十分性の結論が alpha(q)=alpha(q') という実数の等式であるため、既に取った箱の大きさの極限を参照する。新たな脱出は行わず、def_limit_quantity_from_finite_box_sequence で一度だけ取った極限をそのまま使う。族そのもの（各列の各項）と粗視化の値の一致は可算側にある。",
+    statement: [
+      paragraph([
+        "極限量（",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        "）が存在する有理点の集合を",
+      ]),
+      displayMath(
+        String.raw`\mathcal Q_\alpha:=\{\,q\in\mathbb Q_{>0}\ :\ \alpha(q)\ \text{が存在する}\,\}`,
+      ),
+      paragraph([
+        "と書き、これらの有理点における有限箱の列（",
+        ref("def_finite_box_prime_exponent_sequence"),
+        "）を集めた族",
+      ]),
+      displayMath(
+        String.raw`\mathcal S_{\mathrm{Ising}}:=\{\,S_q\ :\ q\in\mathcal Q_\alpha\,\}`,
+      ),
+      paragraph([
+        "を、",
+        "実際の Ising 有限箱データから生じる列の族と呼ぶ。あわせて、これらの列に実際に現れる正の有理数の集合を",
+      ]),
+      displayMath(
+        String.raw`\mathcal V_{\mathrm{Ising}}:=\{\,Z_L(q)\ :\ L\in\mathbb N_{\ge1},\ q\in\mathcal Q_\alpha\,\}\subseteq\mathbb Q_{>0}`,
+      ),
+      paragraph([
+        "と書き、実現値の集合と呼ぶ。",
+        math(String.raw`\mathcal V_{\mathrm{Ising}}`),
+        " の各元は整係数多項式の有理点での値なので、この集合の定義に実数は現れない。",
+      ]),
+      paragraph([
+        "写像 ",
+        math(String.raw`\pi\colon\mathbb Q_{>0}\to S`),
+        "（",
+        math(String.raw`S`),
+        " は任意の集合）が",
+        math(String.raw`\ \mathcal S_{\mathrm{Ising}}\ `),
+        "の上で極限量に対して十分であるとは、すべての ",
+        math(String.raw`q,q'\in\mathcal Q_\alpha`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\bigl(\forall L\in\mathbb N_{\ge1}\colon\ \pi(Z_L(q))=\pi(Z_L(q'))\bigr)\ \Longrightarrow\ \alpha(q)=\alpha(q')`,
+      ),
+      paragraph([
+        "が成り立つことをいう。仮定はすべての ",
+        math(String.raw`L`),
+        " についての可算側の等式であり、結論だけが既に取った極限を参照する。",
+      ]),
+      paragraph([
+        "この定義は、任意の正の有理数列を許す一般設定での十分性（",
+        ref("def_coarse_graining_sufficient_and_not_necessary_for_limit_quantity"),
+        "）を、族を ",
+        math(String.raw`\mathcal S_{\mathrm{Ising}}`),
+        " へ制限して述べ直したものである。制限した分だけ仮定を満たす組 ",
+        math(String.raw`(q,q')`),
+        " が減るので、一般設定で十分であれば ",
+        math(String.raw`\mathcal S_{\mathrm{Ising}}`),
+        " の上でも十分である。逆向きは自明ではない。",
+        "一般設定で「十分ならば値の衝突を持たない」を示すときに用いた反例の作り方（衝突する二つの値を定数列として並べる）は、",
+        "定数列が ",
+        math(String.raw`\mathcal S_{\mathrm{Ising}}`),
+        " に属するとは限らないため、この族の上ではそのまま使えない。",
+        "したがって、",
+        math(String.raw`\mathcal S_{\mathrm{Ising}}`),
+        " の上での最小性を判定するには、衝突する二つの値を実際に ",
+        math(String.raw`\mathcal V_{\mathrm{Ising}}`),
+        " の中で、しかも極限量が異なる二つの有理点の同じ箱の項として実現できるか、という別の問いを立てる必要がある。",
+        "この問いは本セクションでは未解決であり、次のセクションで一つの主張として切り分ける。",
+      ]),
+    ],
+  },
 ]);
