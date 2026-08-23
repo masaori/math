@@ -14,7 +14,7 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
-| `check_denominator_product_nonzero.sage` | 非零な分母評価値から分母側零点差積の非零性 | PASS | 全例・全対象評価点で一致 |
+| `check_denominator_product_nonzero.sage` | 標準単射で移した最高次係数と、非零な分母評価値から分母側零点差積の非零性 | PASS | 全例・全対象評価点で一致 |
 | `check_shifted_product_evaluation_quotient.sage` | 零点差積の商と評価値比 | PASS | 全例・全対象評価点対で `QQbar` 上一致 |
 | `check_degree_zero_empty_products.sage` | 次数零の空積 | PASS | 空積の商と定数評価値比がともに `1` |
 
@@ -22,6 +22,7 @@
 
 - 無辺グラフ、一辺グラフ、四辺道、五サイクル、四頂点完全グラフを用いる。
 - 代数的評価点は `t^2-2`、`t^2+1`、`t^3-2` の全ての `QQbar` 根とし、厳密演算だけを用いる。
+- 最高次多重度は `NN` から `QQ`、`QQ` から `QQbar` へ順に標準単射で移し、本文で導入した写像の型を直接検査する。
 - 複素平面への埋め込み、浮動小数点近似、距離、偏角、実数、極限、積分を用いない。
 - 記述と SageMath 検算までを対象とする。Lean 具体版と Lean 必要十分版は未着手である。
 

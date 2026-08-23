@@ -30,6 +30,7 @@ def partition_data(name, vertex_count, edges):
     return {
         "name": name,
         "degree": degree,
+        "leading_multiplicity": multiplicities[degree],
         "leading_coefficient": QQbar(polynomial[degree]),
         "polynomial": polynomial,
         "roots": roots,

@@ -5,8 +5,10 @@ for data in examples:
     for b in algebraic_evaluation_points:
         evaluation = data["polynomial"](b)
         if evaluation != 0:
+            embedded_leading_multiplicity = QQbar(QQ(data["leading_multiplicity"]))
             denominator_product = prod((b - alpha for alpha in data["roots"]), QQbar(1))
-            coefficient_ratio = evaluation / data["leading_coefficient"]
+            coefficient_ratio = evaluation / embedded_leading_multiplicity
+            assert embedded_leading_multiplicity == data["leading_coefficient"], (data["name"], b)
             assert denominator_product == coefficient_ratio, (data["name"], b)
             assert denominator_product != 0, (data["name"], b)
 print("RESULT: PASS — every nonzero denominator evaluation gives a nonzero shifted-root product")
