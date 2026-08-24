@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-24 23:33（本流）: 「点数乗表示の底の既約分母は有理点の分子と互いに素である」の Lean 具体版を閉じた（`lean/Ising3DCut/LimitQuantity/RationalPowerBaseDenominatorCoprime.lean`）。共通素因子 $p$ の法へ合同式を移して $p \mid u^N$ を出す補題と、素数性・既約性の矛盾で互いに素性を結論する定理の二本。`lake build` と sorry 検査 410 件を通過。次は同主張の Lean 必要十分版。
 - 2026-08-24 23:05（並行）: `terminals_of_internalEdgeAt_have_same_vertex` を追加し、同じ city の内部辺に属する二端子が同じ元頂点に属することを、先に示した端子所属補題の二回適用で束ねた。次はこの二端子組と完全マッチングの一意性から、復号した辺集合の各頂点での偶数性へ接続する。
 - 2026-08-24 23:02（本流）: 「点数乗表示の底の既約分母は有理点の分子と互いに素である」の SageMath 層を閉じた（`sagemath/check/rational-power-base-den-coprime-to-numerator/`）。共通素因子、合同式の法の移送、素数が冪を割れば底を割る段、既約性との矛盾を `ZZ` の有限標本で本文と同順に全 PASS。次は Lean 具体版。
 - 2026-08-24 22:06（並行）: `terminal_of_mem_internalEdgeAt` を追加し、city の内部辺に属する各端子が同じ元頂点に属することを、内部辺の部分集合条件と端子の所属条件から導いた。次は完全マッチングで覆う内部辺を頂点ごとに組にして、復号した辺集合の次数の偶数性へ接続する。

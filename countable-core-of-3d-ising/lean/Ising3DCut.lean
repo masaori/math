@@ -219,3 +219,4 @@ import Ising3DCut.LimitQuantity.FiniteBoxValueAtTwoForBoxOne
 import Ising3DCut.LimitQuantity.RationalPowerBaseCongruences
 import Ising3DCut.NecSuf.RationalPowerBaseCongruences
 import Ising3DCut.LimitQuantity.RationalPowerBaseCongruencesFromNecSuf
+import Ising3DCut.LimitQuantity.RationalPowerBaseDenominatorCoprime
