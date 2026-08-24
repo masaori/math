@@ -409,4 +409,52 @@ theorem mem_encodedEvenSubgraph_iff {V Edge : Type*} [DecidableEq V] [DecidableE
     exact heExternal (Finset.mem_filter.mp heSelected).2
 
 
+/-- `v` の city で、選ばれた内部辺に覆われずに残る端子全体。
+これらは外部辺で覆われるので、復号した辺集合の `v` での次数に対応する。 -/
+def matchingUncoveredTerminalsAt {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) : Finset (Σ _ : V, Edge) :=
+  terminalsAt incidentEdges v \ matchingCoveredTerminalsAt incidentEdges v matching
+
+/-- 覆われずに残る端子の個数は、`v` の接続辺の本数から選ばれた内部辺の個数の二倍を引いたものである。
+内部辺に覆われる端子はすべて `v` に属するという仮定の下で、有限集合の差の個数として数える。 -/
+theorem card_matchingUncoveredTerminalsAt {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hsub : matchingCoveredTerminalsAt incidentEdges v matching ⊆ terminalsAt incidentEdges v)
+    (hcard : ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching, s.card = 2)
+    (hdisj : ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching,
+      ∀ t ∈ matchingInternalEdgesAt incidentEdges v matching, s ≠ t → Disjoint s t) :
+    (matchingUncoveredTerminalsAt incidentEdges v matching).card
+      = (incidentEdges v).card
+        - 2 * (matchingInternalEdgesAt incidentEdges v matching).card := by
+  classical
+  unfold matchingUncoveredTerminalsAt
+  rw [Finset.card_sdiff, Finset.inter_eq_left.mpr hsub,
+    card_matchingCoveredTerminalsAt incidentEdges v matching hcard hdisj,
+    card_terminalsAt]
+
+/-- 覆われずに残る端子の個数は、`v` の接続辺の本数と同じ偶奇を持つ。
+差として引かれるのが二の倍数だけだからである。 -/
+theorem card_matchingUncoveredTerminalsAt_even_iff {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hsub : matchingCoveredTerminalsAt incidentEdges v matching ⊆ terminalsAt incidentEdges v)
+    (hcard : ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching, s.card = 2)
+    (hdisj : ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching,
+      ∀ t ∈ matchingInternalEdgesAt incidentEdges v matching, s ≠ t → Disjoint s t) :
+    (Even (matchingUncoveredTerminalsAt incidentEdges v matching).card
+      ↔ Even (incidentEdges v).card) := by
+  classical
+  have hle : 2 * (matchingInternalEdgesAt incidentEdges v matching).card
+      ≤ (incidentEdges v).card := by
+    have := Finset.card_le_card hsub
+    rwa [card_matchingCoveredTerminalsAt incidentEdges v matching hcard hdisj,
+      card_terminalsAt] at this
+  rw [card_matchingUncoveredTerminalsAt incidentEdges v matching hsub hcard hdisj,
+    Nat.even_sub hle]
+  simp [even_two_mul]
+
 end Ising3DCut.Prediction
