@@ -485,6 +485,8 @@ targets=(
   Ising3DCut.LimitQuantity.not_two_dvd_numerator_of_two_dvd_denominator
   Ising3DCut.LimitQuantity.two_exponent_balance_of_integer_identity
   Ising3DCut.LimitQuantity.rational_power_base_den_two_exponent_balance
+  Ising3DCut.NecSuf.balance_of_zero_contribution
+  Ising3DCut.LimitQuantity.rational_power_base_den_two_exponent_balance_viaNecSuf
   Ising3DCut.NecSuf.false_of_positive_adjacent_balance
   Ising3DCut.LimitQuantity.rational_power_base_den_no_prime_missing_zero_multiplicity_viaNecSuf
   Ising3DCut.LimitQuantity.rational_power_base_denominator_coprime_to_numerator_viaNecSuf
