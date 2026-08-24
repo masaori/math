@@ -460,6 +460,7 @@ targets=(
   Ising3DCut.LimitQuantity.rational_power_base_congruences
   Ising3DCut.NecSuf.base_congruences_of_integer_equation
   Ising3DCut.LimitQuantity.rational_power_base_congruences_viaNecSuf
+  Ising3DCut.Prediction.terminal_of_mem_internalEdgeAt
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

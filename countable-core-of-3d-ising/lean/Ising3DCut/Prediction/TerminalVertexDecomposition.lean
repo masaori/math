@@ -76,6 +76,16 @@ theorem mem_internalEdgesAt_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Ed
       s ⊆ terminalsAt incidentEdges v ∧ s.card = 2 := by
   simp [internalEdgesAt]
 
+/-- city の内部辺に属する端子は、その city の元頂点に属する。 -/
+theorem terminal_of_mem_internalEdgeAt {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (s : Finset (Σ _ : V, Edge)) (hs : s ∈ internalEdgesAt incidentEdges v)
+    (t : Σ _ : V, Edge) (ht : t ∈ s) :
+    t.1 = v ∧ t.2 ∈ incidentEdges t.1 := by
+  have htAt : t ∈ terminalsAt incidentEdges v :=
+    ((mem_internalEdgesAt_iff incidentEdges v s).mp hs).1 ht
+  exact (mem_terminalsAt_iff incidentEdges v t).mp htAt
+
 /-- Terminal graph 全体の内部辺は、元の各頂点の city の内部辺を束ねた集合である。 -/
 def internalEdges {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
     (vertices : Finset V) (incidentEdges : V → Finset Edge) :
