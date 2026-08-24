@@ -112,6 +112,8 @@ targets=(
   Ising3DCut.NullModel.brokenCount_eq_zero_iff
   Ising3DCut.NullModel.eq_zeroSite_value_of_brokenCount_zero
   Ising3DCut.NullModel.multiplicity_zero_eq_two
+  Ising3DCut.NecSuf.NullModel.value_eq_root_of_rank_predecessor
+  Ising3DCut.NullModel.eq_zeroSite_value_of_brokenCount_zero_from_necSuf
   Ising3DCut.NecSuf.NullModel.card_eq_of_injective_of_le
   Ising3DCut.NullModel.multiplicity_zero_eq_two_from_necSuf
   Ising3DCut.NullModel.multiplicity_palindrome
