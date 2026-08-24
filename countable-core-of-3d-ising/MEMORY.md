@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-24 11:03: 本流「末尾定数性を分配多項式の冪等式へ言い換える」の SageMath 層を閉じた（`sagemath/check/eventually-constant-iff-power-identity/` の三検査を全 PASS）。共通値から交差べき等式へ移る段、交差べき等式から隣接有限箱量の等号を得る段、帰納的に末尾定数性へ束ねる段を `QQ`・`ZZ` だけで検査した。次は Lean 具体版。
 - 2026-08-24 10:06: 定数列より広く、それでも許されない完備性を持ち込まない次の経路として、有限箱量の末尾定数性を定義した。次はこの性質を持つ正の有理点を分類する。並行の Pfaffian 予言は、未選択辺の両端子が内部辺で覆われる個別定理まで Lean 具体化済み。
 - 2026-08-24 09:36: 本流「有限箱の量が定数列になる正の有理点を分類する」の Lean 必要十分版と導出を追加し、四層を閉じた（`lean/Ising3DCut/NecSuf/ConstantFiniteBoxSequenceOnlyAtOne.lean`、`lean/Ising3DCut/LimitQuantity/ConstantFiniteBoxSequenceOnlyAtOneFromNecSuf.lean`）。必要十分版 `eq_of_constant_of_strictMonoOn` の仮定は、定数族であること・添字 $i$ での値・添字 $j$ での値の $n$ 乗が比較写像の値であること・比較写像が集合上で狭義単調であることの四つだけで、モノイドと前順序があれば足りる。具体版はこれに箱 1・箱 2 の有限箱計算と箱 2 の分配多項式の狭義単調性を与えるだけになった。sorry 検査の登録は 381 件。次の本流は台帳の次の未完了セクション。
 - 2026-08-24 09:08: 本流「有限箱の量が定数列になる正の有理点を分類する」の Lean 具体版を追加した（`LimitQuantity/ConstantFiniteBoxSequenceOnlyAtOne.lean`）。箱 2 の分配多項式の有限和を項別比較し、非負係数と最高次係数の正値から正の有理数上の狭義単調性を証明したうえで、定数列の箱 1・箱 2 の値から $Z_2(q)=Z_2(1)$、したがって $q=1$ を導いた。次は Lean 必要十分版。
