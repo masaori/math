@@ -14,10 +14,14 @@ Mathlib の `Equiv.Perm.cycleType` と、人手証明の「全周期軌道の元
   claim_reversible_cycle_type_sum                    `cycleType_sum`, `cycleType_members_positive`
   claim_reversible_cycle_type_conjugacy_invariance   `cycleType_eq_of_conj`
   claim_reversible_cycle_type_completeness           `conj_of_cycleType_eq`
+  claim_reversible_cycle_type_realizes_every_partition
+                                                    `exists_cycleType_eq_partition`
+  claim_reversible_conjugacy_classes_bijection_partitions
+                                                    `reversibleConjClassEquivPartitions`
 
-周期軌道の分割と各軌道の元数＝最小周期は、`Equiv.Perm.cycleType` の周期分解に含まれる。
-本ファイルではその既製分解を、人手証明で導いた後の段（巡回型・共役）だけに適用する。
-分割の任意実現と共役類との全単射は次の Lean 必要十分版で分離する。
+周期軌道の分割と各軌道の元数＝最小周期は、人手証明と同じ反復列と最小性から直接示す。
+分割の実現では 1 の部分と 2 以上の部分を分け、後者を互いに交わらない巡回列へ切り分ける
+`Equiv.Perm.exists_with_cycleType_iff` の構成を使い、固定点を戻して人手証明の巡回型と一致させる。
 -/
 import CellularAutomata.ConjugacyClassCodeImageBijection
 import CellularAutomata.NecSuf.ReversibilityFiniteDecidability
@@ -270,5 +274,120 @@ theorem orbit_eq_of_mem_orbit (F : ReversibleMap V) (q z : Config V) (hz : z ∈
 theorem orbit_eq_of_not_disjoint (F : ReversibleMap V) (q q' z : Config V)
     (hz : z ∈ orbit F q) (hz' : z ∈ orbit F q') : orbit F q = orbit F q' := by
   rw [← orbit_eq_of_mem_orbit F q z hz, orbit_eq_of_mem_orbit F q' z hz']
+
+/-! ## 配位数の分割の実現と共役類
+
+以下は人手証明の
+  def_configuration_count_partitions
+  claim_reversible_cycle_type_realizes_every_partition
+  def_reversible_global_map_conjugacy_classes
+  claim_reversible_conjugacy_classes_bijection_partitions
+に対応する。
+-/
+
+/-- 配位数の正の自然数への分割。 -/
+def ConfigurationPartition (V : Type) [Fintype V] [DecidableEq V] :=
+  {m : Multiset ℕ // (∀ n ∈ m, 1 ≤ n) ∧ m.sum = Fintype.card (Config V)}
+
+/-- 正の要素だけを持つ有限多重集合は、1 の部分と 2 以上の部分に分解する。 -/
+theorem positive_multiset_decomposition (m : Multiset ℕ) (hpos : ∀ n ∈ m, 1 ≤ n) :
+    m.filter (fun n => 2 ≤ n) + Multiset.replicate (m.count 1) 1 = m := by
+  classical
+  have hcomp : m.filter (fun n => ¬ 2 ≤ n) = m.filter (Eq 1) := by
+    apply Multiset.filter_congr
+    intro n hn
+    constructor
+    · intro hnlt
+      have := hpos n hn
+      omega
+    · intro hn1
+      omega
+  have hrep : m.filter (fun n => ¬ 2 ≤ n) = Multiset.replicate (m.count 1) 1 :=
+    hcomp.trans (Multiset.filter_eq m 1)
+  calc
+    m.filter (fun n => 2 ≤ n) + Multiset.replicate (m.count 1) 1
+        = m.filter (fun n => 2 ≤ n) + m.filter (fun n => ¬ 2 ≤ n) := by rw [hrep]
+    _ = m := Multiset.filter_add_not (p := fun n : ℕ => 2 ≤ n) m
+
+/-- 配位数の各分割は、同じ有限配位型上の可逆写像の巡回型として実現する。 -/
+theorem exists_cycleType_eq_partition (p : ConfigurationPartition V) :
+    ∃ F : ReversibleMap V, cycleType F = p.1 := by
+  classical
+  let m := p.1.filter (fun n => 2 ≤ n)
+  have hmpos : ∀ n ∈ p.1, 1 ≤ n := p.2.1
+  have hsum_split : p.1.sum = m.sum + p.1.count 1 := by
+    calc p.1.sum
+        = (m + Multiset.replicate (p.1.count 1) 1).sum := by
+            exact congrArg Multiset.sum (positive_multiset_decomposition p.1 hmpos).symm
+      _ = m.sum + p.1.count 1 := by simp
+  have hmsum : m.sum ≤ Fintype.card (Config V) := by
+    rw [← p.2.2, hsum_split]
+    omega
+  have hmmem : ∀ n ∈ m, 2 ≤ n := by
+    intro n hn
+    exact (Multiset.mem_filter.1 hn).2
+  obtain ⟨g, hg⟩ := (Equiv.Perm.exists_with_cycleType_iff (Config V)).2 ⟨hmsum, hmmem⟩
+  let F : ReversibleMap V := ⟨g, g.injective⟩
+  refine ⟨F, ?_⟩
+  have hto : toPerm F = g := Equiv.ext (fun _ => rfl)
+  have hfixed : Fintype.card (Config V) - m.sum = p.1.count 1 := by
+    have hcard : Fintype.card (Config V) = p.1.sum := p.2.2.symm
+    calc
+      Fintype.card (Config V) - m.sum = p.1.sum - m.sum := congrArg (fun n => n - m.sum) hcard
+      _ = p.1.count 1 := by omega
+  rw [cycleType, hto, hg, hfixed]
+  exact positive_multiset_decomposition p.1 hmpos
+
+/-- 可逆写像の共役関係が作る同値関係。 -/
+def reversibleConjSetoid : Setoid (ReversibleMap V) where
+  r := Conj
+  iseqv := by
+    refine ⟨?_, ?_, ?_⟩
+    · intro F
+      exact ⟨Equiv.refl _, fun _ => rfl⟩
+    · intro F G hFG
+      obtain ⟨h, hcomm⟩ := hFG
+      refine ⟨h.symm, fun y => ?_⟩
+      apply h.injective
+      simpa using (hcomm (h.symm y)).symm
+    · intro F G H hFG hGH
+      obtain ⟨h, hcomm⟩ := hFG
+      obtain ⟨k, kcomm⟩ := hGH
+      refine ⟨h.trans k, fun y => ?_⟩
+      exact (congrArg k (hcomm y)).trans (kcomm (h y))
+
+/-- 一つの有限舞台上の可逆な大域写像の共役類。 -/
+def ReversibleConjClass (V : Type) [Fintype V] [DecidableEq V] :=
+  Quotient (reversibleConjSetoid (V := V))
+
+/-- 共役類から巡回型への写像。共役不変性が代表非依存性を与える。 -/
+noncomputable def quotientCycleType : ReversibleConjClass V → ConfigurationPartition V :=
+  Quotient.lift
+    (fun F => ⟨cycleType F, (fun n hn => cycleType_members_positive F hn), by
+      rw [cycleType_sum, CellularAutomata.GlobalMapIteration.card_config]⟩)
+    (fun F G hFG => Subtype.ext (cycleType_eq_of_conj hFG))
+
+/-- 巡回型が一致する共役類は等しい。 -/
+theorem quotientCycleType_injective : Function.Injective (quotientCycleType (V := V)) := by
+  intro K L hKL
+  induction K using Quotient.inductionOn with
+  | h F =>
+    induction L using Quotient.inductionOn with
+    | h G =>
+      apply Quotient.sound
+      exact conj_of_cycleType_eq (congrArg Subtype.val hKL)
+
+/-- 各分割は巡回型として実現するので、共役類から分割への写像は全射である。 -/
+theorem quotientCycleType_surjective : Function.Surjective (quotientCycleType (V := V)) := by
+  intro p
+  obtain ⟨F, hF⟩ := exists_cycleType_eq_partition p
+  refine ⟨Quotient.mk (reversibleConjSetoid (V := V)) F, ?_⟩
+  apply Subtype.ext
+  exact hF
+
+/-- 可逆な大域写像の共役類と、配位数の正の自然数への分割との全単射。 -/
+noncomputable def reversibleConjClassEquivPartitions :
+    ReversibleConjClass V ≃ ConfigurationPartition V :=
+  Equiv.ofBijective quotientCycleType ⟨quotientCycleType_injective, quotientCycleType_surjective⟩
 
 end CellularAutomata.ReversibleGlobalMapCycleType
