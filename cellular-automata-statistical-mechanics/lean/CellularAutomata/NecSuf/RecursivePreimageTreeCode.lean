@@ -457,4 +457,67 @@ theorem treeNodeEquivOfMatching_child
           (Classical.choose hmatch z) (Classical.choose_spec hmatch z) u⟩ :=
   rfl
 
+
+/-- 有限子表だけから作る打ち切り節点型の親子辺。直下の子から根への辺と、
+各子部分木の内部辺を再帰的に区別して記録する。要るのは一つの有限子表だけであり、
+型全体の有限性、自己写像、周期性、最小前周期、二値状態、セル、近傍、局所規則は使わない。 -/
+inductive TruncatedTreeParentEdge (children : X → Finset X) :
+    (depth : ℕ) → (x : X) →
+      TruncatedTreeNode children depth x → TruncatedTreeNode children depth x → Prop
+  | rootChild (depth : ℕ) (x : X) (z : (children x).val) :
+      TruncatedTreeParentEdge children (depth + 1) x
+        (Sum.inr ⟨z, truncatedTreeNodeRoot children depth z⟩)
+        (truncatedTreeNodeRoot children (depth + 1) x)
+  | inChild (depth : ℕ) (x : X) (z : (children x).val)
+      {u v : TruncatedTreeNode children depth z}
+      (huv : TruncatedTreeParentEdge children depth z u v) :
+      TruncatedTreeParentEdge children (depth + 1) x
+        (Sum.inr ⟨z, u⟩) (Sum.inr ⟨z, v⟩)
+
+/-- 対応から構成した節点全単射は、根直下だけでなく全ての子部分木の内部でも
+親子辺を親子辺へ送る。証明は辺の深さに関する帰納法であり、各段で使うのは
+根の保存と子分岐の形だけである。型全体の有限性、自己写像、周期性、最小前周期、
+二値状態、セル、近傍、局所規則は使わない。 -/
+theorem treeNodeEquivOfMatching_preserves_parent_edge
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    {depth : ℕ} {x : X} {y : Y}
+    (hmatch : HasTreeMatching childrenX childrenY depth x y)
+    {u v : TruncatedTreeNode childrenX depth x}
+    (huv : TruncatedTreeParentEdge childrenX depth x u v) :
+    TruncatedTreeParentEdge childrenY depth y
+      (treeNodeEquivOfMatching childrenX childrenY depth x y hmatch u)
+      (treeNodeEquivOfMatching childrenX childrenY depth x y hmatch v) := by
+  induction huv generalizing y with
+  | rootChild depth x z =>
+      rw [treeNodeEquivOfMatching_child, treeNodeEquivOfMatching_root_all,
+        treeNodeEquivOfMatching_root_all]
+      exact TruncatedTreeParentEdge.rootChild depth _ (Classical.choose hmatch z)
+  | inChild depth x z huv ih =>
+      rw [treeNodeEquivOfMatching_child, treeNodeEquivOfMatching_child]
+      exact TruncatedTreeParentEdge.inChild depth _ (Classical.choose hmatch z)
+        (ih (Classical.choose_spec hmatch z))
+
+/-- 打ち切り節点型の各節点は根そのものか、一意に定まる親節点への辺を持つ。
+後続深さでは根直下と子部分木内部を分けて示す。使うのは一つの有限子表だけである。 -/
+theorem truncatedTreeNode_eq_root_or_exists_parent (children : X → Finset X) :
+    (depth : ℕ) → (x : X) → (u : TruncatedTreeNode children depth x) →
+      u = truncatedTreeNodeRoot children depth x ∨
+        ∃ v : TruncatedTreeNode children depth x,
+          TruncatedTreeParentEdge children depth x u v
+  | 0, _, u => by
+      left
+      cases u
+      rfl
+  | _ + 1, _, Sum.inl u => by
+      left
+      exact congrArg Sum.inl (Subsingleton.elim u PUnit.unit)
+  | depth + 1, x, Sum.inr ⟨z, u⟩ => by
+      rcases truncatedTreeNode_eq_root_or_exists_parent children depth z u with hu | ⟨v, huv⟩
+      · right
+        subst hu
+        exact ⟨truncatedTreeNodeRoot children (depth + 1) x,
+          TruncatedTreeParentEdge.rootChild depth x z⟩
+      · right
+        exact ⟨Sum.inr ⟨z, v⟩, TruncatedTreeParentEdge.inChild depth x z huv⟩
+
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance

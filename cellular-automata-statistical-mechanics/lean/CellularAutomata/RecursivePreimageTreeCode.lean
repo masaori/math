@@ -451,6 +451,81 @@ inductive TruncatedTreeParentEdge :
       TruncatedTreeParentEdge (depth + 1) y
         (Sum.inr ⟨z, u⟩) (Sum.inr ⟨z, v⟩)
 
+/-- 具体版と必要十分版の打ち切り節点型を結ぶ全単射は、根を根へ送る。 -/
+theorem truncatedTreeNodeEquivNecessarySufficient_root
+    (depth : ℕ) (y : V → State) :
+    truncatedTreeNodeEquivNecessarySufficient N f depth y
+        (truncatedTreeNodeRoot N f depth y) =
+      NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.truncatedTreeNodeRoot
+        (nonperiodicChildren N f) depth y := by
+  cases depth <;> rfl
+
+/-- 具体版と必要十分版の打ち切り節点型を結ぶ全単射は、子の出現を変えずに
+    部分木の全単射へ再帰する。 -/
+theorem truncatedTreeNodeEquivNecessarySufficient_child
+    (depth : ℕ) (y : V → State) (z : (nonperiodicChildren N f y).val)
+    (u : TruncatedTreeNode N f depth z) :
+    truncatedTreeNodeEquivNecessarySufficient N f (depth + 1) y (Sum.inr ⟨z, u⟩) =
+      Sum.inr ⟨z, truncatedTreeNodeEquivNecessarySufficient N f depth z u⟩ :=
+  rfl
+
+/-- 逆向きの全単射も根を根へ送る。 -/
+theorem truncatedTreeNodeEquivNecessarySufficient_symm_root
+    (depth : ℕ) (y : V → State) :
+    (truncatedTreeNodeEquivNecessarySufficient N f depth y).symm
+        (NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.truncatedTreeNodeRoot
+          (nonperiodicChildren N f) depth y) =
+      truncatedTreeNodeRoot N f depth y := by
+  rw [Equiv.symm_apply_eq, truncatedTreeNodeEquivNecessarySufficient_root]
+
+/-- 逆向きの全単射も子の出現を変えずに部分木へ再帰する。 -/
+theorem truncatedTreeNodeEquivNecessarySufficient_symm_child
+    (depth : ℕ) (y : V → State) (z : (nonperiodicChildren N f y).val)
+    (a : NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.TruncatedTreeNode
+      (nonperiodicChildren N f) depth z) :
+    (truncatedTreeNodeEquivNecessarySufficient N f (depth + 1) y).symm (Sum.inr ⟨z, a⟩) =
+      Sum.inr ⟨z, (truncatedTreeNodeEquivNecessarySufficient N f depth z).symm a⟩ := by
+  rw [Equiv.symm_apply_eq, truncatedTreeNodeEquivNecessarySufficient_child,
+    Equiv.apply_symm_apply]
+
+/-- 具体版の親子辺は、節点型の全単射で必要十分版の親子辺へ移る。 -/
+theorem truncatedTreeParentEdge_toNecessarySufficient :
+    {depth : ℕ} → {y : V → State} → {u v : TruncatedTreeNode N f depth y} →
+      TruncatedTreeParentEdge N f depth y u v →
+        NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.TruncatedTreeParentEdge
+          (nonperiodicChildren N f) depth y
+          (truncatedTreeNodeEquivNecessarySufficient N f depth y u)
+          (truncatedTreeNodeEquivNecessarySufficient N f depth y v)
+  | _, _, _, _, .rootChild depth y z => by
+      rw [truncatedTreeNodeEquivNecessarySufficient_child,
+        truncatedTreeNodeEquivNecessarySufficient_root,
+        truncatedTreeNodeEquivNecessarySufficient_root]
+      exact .rootChild depth y z
+  | _, _, _, _, .inChild depth y z huv => by
+      rw [truncatedTreeNodeEquivNecessarySufficient_child,
+        truncatedTreeNodeEquivNecessarySufficient_child]
+      exact .inChild depth y z (truncatedTreeParentEdge_toNecessarySufficient huv)
+
+/-- 必要十分版の親子辺は、逆向きの全単射で具体版の親子辺へ移る。 -/
+theorem truncatedTreeParentEdge_ofNecessarySufficient :
+    {depth : ℕ} → {y : V → State} →
+      {a b : NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.TruncatedTreeNode
+        (nonperiodicChildren N f) depth y} →
+      NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.TruncatedTreeParentEdge
+        (nonperiodicChildren N f) depth y a b →
+        TruncatedTreeParentEdge N f depth y
+          ((truncatedTreeNodeEquivNecessarySufficient N f depth y).symm a)
+          ((truncatedTreeNodeEquivNecessarySufficient N f depth y).symm b)
+  | _, _, _, _, .rootChild depth y z => by
+      rw [truncatedTreeNodeEquivNecessarySufficient_symm_child,
+        truncatedTreeNodeEquivNecessarySufficient_symm_root,
+        truncatedTreeNodeEquivNecessarySufficient_symm_root]
+      exact .rootChild depth y z
+  | _, _, _, _, .inChild depth y z hab => by
+      rw [truncatedTreeNodeEquivNecessarySufficient_symm_child,
+        truncatedTreeNodeEquivNecessarySufficient_symm_child]
+      exact .inChild depth y z (truncatedTreeParentEdge_ofNecessarySufficient hab)
+
 /-- 抽象前像木の親子辺が表す二配位は、実際に一段発展で結ばれる。 -/
 theorem truncatedTreeParentEdge_configuration :
     {depth : ℕ} → {y : V → State} →
@@ -476,17 +551,11 @@ theorem treeNodeEquivOfMatching_preserves_parent_edge
     (huv : TruncatedTreeParentEdge N f depth y u v) :
     TruncatedTreeParentEdge NW fW depth yW
       (treeNodeEquivOfMatching N f NW fW depth y yW hmatch u)
-      (treeNodeEquivOfMatching N f NW fW depth y yW hmatch v) := by
-  induction huv generalizing yW with
-  | rootChild depth y z =>
-      rw [treeNodeEquivOfMatching_child, treeNodeEquivOfMatching_root_all,
-        treeNodeEquivOfMatching_root_all]
-      exact TruncatedTreeParentEdge.rootChild (N := NW) (f := fW)
-        depth _ (Classical.choose hmatch z)
-  | inChild depth y z huv ih =>
-      rw [treeNodeEquivOfMatching_child, treeNodeEquivOfMatching_child]
-      exact TruncatedTreeParentEdge.inChild (N := NW) (f := fW)
-        depth _ (Classical.choose hmatch z) (ih (Classical.choose_spec hmatch z))
+      (treeNodeEquivOfMatching N f NW fW depth y yW hmatch v) :=
+  truncatedTreeParentEdge_ofNecessarySufficient NW fW
+    (NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.treeNodeEquivOfMatching_preserves_parent_edge
+      (nonperiodicChildren N f) (nonperiodicChildren NW fW) hmatch
+      (truncatedTreeParentEdge_toNecessarySufficient N f huv))
 
 /-- 打ち切り前像木の各節点は根そのものか、一意な一段発展先を表す
     親節点を持つ。後続深さでは、根直下と子部分木内部を分けて示す。 -/
@@ -495,22 +564,20 @@ theorem truncatedTreeNode_eq_root_or_exists_parent :
       u = truncatedTreeNodeRoot N f depth y ∨
         ∃ v : TruncatedTreeNode N f depth y,
           TruncatedTreeParentEdge N f depth y u v
-  | 0, _, u => by
-      left
-      cases u
-      rfl
-  | depth + 1, y, Sum.inl u => by
-      left
-      exact congrArg Sum.inl (Subsingleton.elim u PUnit.unit)
-  | depth + 1, y, Sum.inr ⟨z, u⟩ => by
-      rcases truncatedTreeNode_eq_root_or_exists_parent depth z u with hu | ⟨v, huv⟩
+  | depth, y, u => by
+      rcases NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.truncatedTreeNode_eq_root_or_exists_parent
+        (nonperiodicChildren N f) depth y
+        (truncatedTreeNodeEquivNecessarySufficient N f depth y u) with hu | ⟨b, hb⟩
+      · left
+        have h := congrArg (truncatedTreeNodeEquivNecessarySufficient N f depth y).symm hu
+        rw [Equiv.symm_apply_apply,
+          truncatedTreeNodeEquivNecessarySufficient_symm_root] at h
+        exact h
       · right
-        subst u
-        exact ⟨truncatedTreeNodeRoot N f (depth + 1) y,
-          TruncatedTreeParentEdge.rootChild (N := N) (f := f) depth y z⟩
-      · right
-        exact ⟨Sum.inr ⟨z, v⟩,
-          TruncatedTreeParentEdge.inChild (N := N) (f := f) depth y z huv⟩
+        refine ⟨(truncatedTreeNodeEquivNecessarySufficient N f depth y).symm b, ?_⟩
+        have h := truncatedTreeParentEdge_ofNecessarySufficient N f hb
+        rw [Equiv.symm_apply_apply] at h
+        exact h
 
 /-- 正の深さの前像木対応から選ぶ子の全単射は、対応する各子を
     それぞれの親へ送る一段発展を両側で保存する。これは完全性証明の
