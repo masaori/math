@@ -5727,8 +5727,15 @@ S_{G,3}(a)
   \overline P_G(a)^3
 }
 \quad\bigl(\because\ q_3-q_1=q_2\bigr).`),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(2)\ne0
+\quad\bigl(\because\ 2\ne0\text{ かつ }\eta_{\mathbb N,\mathbb Q}\text{ は単射である}\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(2)
+\right)
+\ne0
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は単射である}\bigr).`),
       displayMath(String.raw`q_2\ne0
-\quad\bigl(\because\ 2\ne0\text{ かつ二つの標準単射は単射である}\bigr).`),
+\quad\bigl(\because\ q_2\text{ の定義}\bigr).`),
       displayMath(String.raw`S_{G,3}(a)
 =
 \frac{
