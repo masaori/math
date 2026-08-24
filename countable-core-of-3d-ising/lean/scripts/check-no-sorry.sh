@@ -479,6 +479,7 @@ targets=(
   Ising3DCut.Prediction.terminal_of_mem_internalEdgeAt
   Ising3DCut.Prediction.terminals_of_internalEdge_have_same_vertex
   Ising3DCut.Prediction.mem_matchingInternalEdgesAt_iff
+  Ising3DCut.Prediction.card_matchingCoveredTerminalsAt
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

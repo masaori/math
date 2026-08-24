@@ -141,6 +141,33 @@ theorem mem_matchingInternalEdgesAt_iff {V Edge : Type*}
       s ∈ matching ∧ s ∈ internalEdgesAt incidentEdges v := by
   simp [matchingInternalEdgesAt]
 
+/-- `v` の city で選ばれた内部辺が覆う端子全体。 -/
+def matchingCoveredTerminalsAt {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) : Finset (Σ _ : V, Edge) :=
+  (matchingInternalEdgesAt incidentEdges v matching).biUnion id
+
+/-- 各内部辺がちょうど二端子を覆い、相異なる選択辺が端子を共有しないなら、
+覆われる端子の個数は選ばれた内部辺の個数の二倍である。 -/
+theorem card_matchingCoveredTerminalsAt {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hcard : ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching, s.card = 2)
+    (hdisj : ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching,
+      ∀ t ∈ matchingInternalEdgesAt incidentEdges v matching, s ≠ t → Disjoint s t) :
+    (matchingCoveredTerminalsAt incidentEdges v matching).card
+      = 2 * (matchingInternalEdgesAt incidentEdges v matching).card := by
+  classical
+  unfold matchingCoveredTerminalsAt
+  rw [Finset.card_biUnion
+    (fun s hs t ht hst => by simpa [Function.onFun, id] using hdisj s hs t ht hst)]
+  have hsum : ∑ s ∈ matchingInternalEdgesAt incidentEdges v matching, (id s).card
+      = ∑ _s ∈ matchingInternalEdgesAt incidentEdges v matching, 2 :=
+    Finset.sum_congr rfl (fun s hs => by simpa [id] using hcard s hs)
+  rw [hsum]
+  simp [Finset.sum_const, Nat.mul_comm]
+
 /-- 元の辺 `e` に対応する外部辺は、`e` の二端点に属する二つの端子を結ぶ。 -/
 def externalEdge {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
     (endpoint₀ endpoint₁ : Edge → V) (e : Edge) : Finset (Σ _ : V, Edge) :=

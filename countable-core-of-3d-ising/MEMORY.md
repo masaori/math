@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-25 01:36（並行）: `matchingCoveredTerminalsAt` と `card_matchingCoveredTerminalsAt` を追加し、選ばれた内部辺が覆う端子数＝内部辺数の二倍を Lean で閉じた（sorry 検査 426 件）。次は復号した辺集合の次数との突き合わせ。
 - 2026-08-25 01:35（本流）: 「底の既約分母は破れ数ゼロの配位数を割らない素数では割り切れない」の Lean 具体版を閉じた（`lean/Ising3DCut/LimitQuantity/RationalPowerBaseDenNoPrimeMissingZeroMultiplicity.lean`）。法 $b$ の合同式からの $p\nmid P_M$、整数等式の素因子指数、点数・辺数の約分、隣接二箱からの $e_b=0$ を人手証明と同順で形式化した（lake build 通過、sorry 検査 419→425 件）。次は同主張の Lean 必要十分版。
 - 2026-08-25 01:05（並行）: 完全マッチングに選ばれた内部辺を元頂点ごとの有限集合へ分ける `matchingInternalEdgesAt` と所属条件 `mem_matchingInternalEdgesAt_iff` を Lean 具体版へ追加した。次は選択された内部辺が覆う端子数を内部辺数の二倍として数える。
 - 2026-08-25 01:03（本流）: 「底の既約分母は破れ数ゼロの配位数を割らない素数では割り切れない」の SageMath 層を閉じた（`sagemath/check/rational-power-base-den-no-prime-missing-zero-mult/`）。既約な分数からの非整除、法 $b$ の合同式からの $p\nmid P_M$、整数等式の素因子指数比較、隣接二箱の指数等式の不両立を `ZZ` の有限標本で本文と同順に全 PASS。次は同主張の Lean 具体版。
