@@ -19,7 +19,9 @@
 | `check_natural_product_commutativity.sage` | 自然数積の並べ替え | PASS | 全例で積の並べ替えが一致 |
 | `check_third_coefficient_sum_definition.sage` | 三回形式微分の評価と第三係数和 | PASS | 全例・全評価点で一致 |
 | `check_product_formal_derivatives.sage` | 一次因子積の前三回の形式微分 | PASS | 順序付き除外添字和と一致 |
-| `check_leading_coefficient_nonzero.sage` | 標準単射で移した最高次係数の非零性 | PASS | 全例で正値性と非零像を確認 |
+| `check_leading_multiplicity_nonzero.sage` | 自然数の最高次多重度の非零性 | PASS | 全例で正値性から非零性を確認 |
+| `check_rational_embedded_leading_coefficient_nonzero.sage` | 自然数から有理数への標準単射像の非零性 | PASS | 全例で有理数像の非零性を確認 |
+| `check_leading_coefficient_nonzero.sage` | 有理数から代数的数への標準単射像の非零性 | PASS | 全例で代数的数像の非零性を確認 |
 | `check_cancel_leading_coefficient.sage` | 三回微分比の最高次係数消去 | PASS | 全ての非零評価で一致 |
 | `check_distribute_third_derivative_ratio.sage` | 三重和への分母分配 | PASS | 全ての非零評価で一致 |
 | `check_cancel_three_root_factors.sage` | 各三重和項の三因子消去 | PASS | 全ての非零評価で項別に一致 |

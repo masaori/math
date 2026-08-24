@@ -5448,11 +5448,16 @@ a^{m-3}
 \right)
 \prod_{j=1}^{d}(a-\alpha_j)
 \quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).`),
+      displayMath(String.raw`\Omega_G(d)\ne0
+\quad\bigl(\because\ \Omega_G(d)>0\bigr).`),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\ne0
+\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は単射である}\bigr).`),
       displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
 \right)
 \ne0
-\quad\bigl(\because\ \Omega_G(d)>0\text{ かつ二つの標準単射は単射である}\bigr).`),
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は単射である}\bigr).`),
       displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
 \right)
