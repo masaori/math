@@ -50,4 +50,47 @@ theorem rat_pow_of_prime_exponents_dvd {a : ℚ} (ha : 0 < a) {n : ℕ} (hn : 0 
       exact Int.mul_ediv_cancel' (hdvd p hp)
     · simp [hpS', hOutside p hp hpS']
 
+/-- `claim_power_identity_iff_rational_power_form` の具体版。 -/
+theorem eventually_cross_power_identity_iff_rational_power_form
+    (q : ℚ) (hq : 0 < q) (L0 : ℕ) (hL0 : 0 < L0) :
+    (∀ L, L0 ≤ L →
+        rationalValueSeq q L ^ ((L + 1) ^ 3) =
+          rationalValueSeq q (L + 1) ^ (L ^ 3)) ↔
+      (∃ c : ℚ, 0 < c ∧ ∀ L, L0 ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) := by
+  constructor
+  · intro hcross
+    have hL0value : 0 < rationalValueSeq q L0 :=
+      partitionPolynomial_evalAtRational_pos hL0 hq
+    have hdiv : ∀ p : ℕ, p.Prime →
+        (((L0 ^ 3 : ℕ) : ℤ) ∣ padicValRat p (rationalValueSeq q L0)) := by
+      intro p hp
+      letI : Fact (Nat.Prime p) := ⟨hp⟩
+      have hv := congrArg (padicValRat p) (hcross L0 le_rfl)
+      rw [padicValRat.pow, padicValRat.pow] at hv
+      apply cube_dvd_of_cross_exponent_eq
+      exact_mod_cast hv
+    obtain ⟨c, hcpos, hcL0⟩ :=
+      rat_pow_of_prime_exponents_dvd hL0value (pow_pos hL0 3) hdiv
+    refine ⟨c, hcpos, ?_⟩
+    intro L hL
+    induction L, hL using Nat.le_induction with
+    | base => exact hcL0.symm
+    | succ n hn ih =>
+        have hnpos : 0 < n := lt_of_lt_of_le hL0 hn
+        have hn1pos : 0 < n + 1 := Nat.succ_pos n
+        have hvaluepos : 0 < rationalValueSeq q (n + 1) :=
+          partitionPolynomial_evalAtRational_pos hn1pos hq
+        have hpow : rationalValueSeq q (n + 1) ^ (n ^ 3) =
+            (c ^ ((n + 1) ^ 3)) ^ (n ^ 3) := by
+          calc
+            rationalValueSeq q (n + 1) ^ (n ^ 3)
+                = rationalValueSeq q n ^ ((n + 1) ^ 3) := (hcross n hn).symm
+            _ = (c ^ (n ^ 3)) ^ ((n + 1) ^ 3) := by rw [ih]
+            _ = c ^ (n ^ 3 * (n + 1) ^ 3) := by rw [pow_mul]
+            _ = c ^ ((n + 1) ^ 3 * n ^ 3) := by rw [Nat.mul_comm]
+            _ = (c ^ ((n + 1) ^ 3)) ^ (n ^ 3) := by rw [pow_mul]
+        exact (pow_left_inj₀ hvaluepos.le (pow_nonneg hcpos.le _) (pow_ne_zero 3 hnpos.ne')).1 hpow
+  · rintro ⟨c, _hcpos, hc⟩
+    exact cross_power_identity_of_rational_power_form q c L0 (fun L => L ^ 3) hc
+
 end Ising3DCut.LimitQuantity
