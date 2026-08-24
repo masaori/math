@@ -548,3 +548,46 @@ theorem attachedTableEquivOfMatching_bijective
   (attachedTableEquivOfMatching childrenX childrenY depth x y hmatch attachX attachY).bijective
 
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance
+
+namespace CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance
+
+/-- 添字ごとの部分表全単射を、従属和による分割に沿って全体表へ接着する。
+使うのは添字の全単射、添字ごとの部分表全単射、および各全体表を
+その従属和と結ぶ全単射だけである。添字が周期位置であること、部分表が
+前像木節点表であること、自己写像、周期性、最小前周期、二値状態、セル、
+近傍、局所規則は使わない。 -/
+def gluedTableEquivOfSigmaSplitting
+    {I J : Type} {PartX : I → Type} {PartY : J → Type} {TableX TableY : Type}
+    (eIndex : I ≃ J)
+    (ePart : (i : I) → PartX i ≃ PartY (eIndex i))
+    (splitX : (Σ i : I, PartX i) ≃ TableX)
+    (splitY : (Σ j : J, PartY j) ≃ TableY) :
+    TableX ≃ TableY :=
+  splitX.symm |>.trans (Equiv.sigmaCongr eIndex ePart) |>.trans splitY
+
+/-- 接着した全体表間写像は全単射である。 -/
+theorem gluedTableEquivOfSigmaSplitting_bijective
+    {I J : Type} {PartX : I → Type} {PartY : J → Type} {TableX TableY : Type}
+    (eIndex : I ≃ J)
+    (ePart : (i : I) → PartX i ≃ PartY (eIndex i))
+    (splitX : (Σ i : I, PartX i) ≃ TableX)
+    (splitY : (Σ j : J, PartY j) ≃ TableY) :
+    Function.Bijective
+      (gluedTableEquivOfSigmaSplitting eIndex ePart splitX splitY) :=
+  (gluedTableEquivOfSigmaSplitting eIndex ePart splitX splitY).bijective
+
+/-- 接着した写像の計算則。分割で得た添字 `i` の元 `u` は、
+対応添字 `eIndex i` の部分表全単射の像へ送られる。
+添字ごとの主張を全体表の主張へ移すときはこの等式だけを使う。 -/
+theorem gluedTableEquivOfSigmaSplitting_apply
+    {I J : Type} {PartX : I → Type} {PartY : J → Type} {TableX TableY : Type}
+    (eIndex : I ≃ J)
+    (ePart : (i : I) → PartX i ≃ PartY (eIndex i))
+    (splitX : (Σ i : I, PartX i) ≃ TableX)
+    (splitY : (Σ j : J, PartY j) ≃ TableY)
+    (i : I) (u : PartX i) :
+    gluedTableEquivOfSigmaSplitting eIndex ePart splitX splitY (splitX ⟨i, u⟩) =
+      splitY ⟨eIndex i, ePart i u⟩ := by
+  simp [gluedTableEquivOfSigmaSplitting, Equiv.sigmaCongr, Equiv.sigmaCongrRight]
+
+end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance

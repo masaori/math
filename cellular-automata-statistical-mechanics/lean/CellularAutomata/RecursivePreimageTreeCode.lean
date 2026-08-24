@@ -2174,12 +2174,10 @@ noncomputable def periodicComponentEquivOfBaseWordEq
     minPeriod_eq_of_baseWord_eq N f NW fW r rW hbase
   let eIndex : Fin (minPeriod N f r) ≃ Fin (minPeriod NW fW rW) :=
     finCongr hperiod.symm
-  let eTrees :
-      (Σ n : Fin (minPeriod N f r),
-        ↑(preimageTreeNodeTable N f (iterate N f n r))) ≃
-        (Σ nW : Fin (minPeriod NW fW rW),
-          ↑(preimageTreeNodeTable NW fW (iterate NW fW nW rW))) :=
-    Equiv.sigmaCongr eIndex fun n => by
+  let ePart : (n : Fin (minPeriod N f r)) →
+      ↑(preimageTreeNodeTable N f (iterate N f n r)) ≃
+        ↑(preimageTreeNodeTable NW fW (iterate NW fW ((eIndex n : Fin _) : ℕ) rW)) :=
+    fun n => by
       have hn : (n : ℕ) < minPeriod N f r := n.isLt
       have hrn : IsPeriodicPoint N f (iterate N f n r) :=
         isPeriodicPoint_of_mem_periodicOrbit N f r _ hr
@@ -2197,8 +2195,28 @@ noncomputable def periodicComponentEquivOfBaseWordEq
         preimageTreeNodeTableEquivOfMatching N f NW fW
           (iterate N f n r) (iterate NW fW n rW) hrn hrWn depth
           hdepth hdepthW hmatch
-  exact (periodicComponentRootSigmaEquiv N f r hr).symm |>.trans
-    eTrees |>.trans (periodicComponentRootSigmaEquiv NW fW rW hrW)
+  exact NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.gluedTableEquivOfSigmaSplitting
+    eIndex ePart
+    (periodicComponentRootSigmaEquiv N f r hr)
+    (periodicComponentRootSigmaEquiv NW fW rW hrW)
+
+/-- 周期成分全単射は、必要十分版の従属和接着の特殊化として得られる。
+添字の全単射と周期位置ごとの前像木表全単射を与えれば、周期成分表の全単射は
+必要十分版の接着そのものになる。 -/
+theorem periodicComponentEquivOfBaseWordEq_eq_glued
+    (r : V → State) (rW : W → State)
+    (hr : IsPeriodicPoint N f r) (hrW : IsPeriodicPoint NW fW rW)
+    (hbase : baseWord NW fW rW = baseWord N f r) :
+    ∃ (eIndex : Fin (minPeriod N f r) ≃ Fin (minPeriod NW fW rW))
+      (ePart : (n : Fin (minPeriod N f r)) →
+        ↑(preimageTreeNodeTable N f (iterate N f n r)) ≃
+          ↑(preimageTreeNodeTable NW fW (iterate NW fW ((eIndex n : Fin _) : ℕ) rW))),
+      periodicComponentEquivOfBaseWordEq N f NW fW r rW hr hrW hbase =
+        NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.gluedTableEquivOfSigmaSplitting
+          eIndex ePart
+          (periodicComponentRootSigmaEquiv N f r hr)
+          (periodicComponentRootSigmaEquiv NW fW rW hrW) :=
+  ⟨_, _, rfl⟩
 
 theorem periodicComponentEquivOfBaseWordEq_bijective
     (r : V → State) (rW : W → State)
@@ -2242,6 +2260,7 @@ theorem periodicComponentEquivOfBaseWordEq_maps_periodic_root
           (truncatedTreeNodeRoot N f depth (iterate N f n r))⟩) :
       W → State) = iterate NW fW n rW
   unfold periodicComponentEquivOfBaseWordEq
+  unfold NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.gluedTableEquivOfSigmaSplitting
   simp only [Equiv.trans_apply, Equiv.symm_apply_apply]
   simp only [Equiv.sigmaCongr, Equiv.sigmaCongrRight, Equiv.sigmaCongrLeft]
   simp only [periodicComponentRootSigmaEquiv]
@@ -2308,6 +2327,7 @@ theorem periodicComponentEquivOfBaseWordEq_preserves_parent_edge
           truncatedTreeNodeEquivPreimageTreeNodeTable N f (iterate N f n r) hrn
             depth (Nat.le_max_left _ _) v⟩)
     unfold periodicComponentEquivOfBaseWordEq
+    unfold NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.gluedTableEquivOfSigmaSplitting
     simp only [Equiv.trans_apply, Equiv.symm_apply_apply]
     simp only [periodicComponentRootSigmaEquiv]
     simp only [Equiv.sigmaCongr, Equiv.sigmaCongrRight, Equiv.sigmaCongrLeft]
