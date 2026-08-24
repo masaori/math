@@ -74,6 +74,7 @@ targets=(
   Ising3DCut.LimitQuantity.eventually_constant_iff_power_identity
   Ising3DCut.NecSuf.eventuallyConstant_iff_crossPowerIdentity
   Ising3DCut.NecSuf.crossPowerIdentity_iff_powerForm
+  Ising3DCut.LimitQuantity.eventually_cross_power_identity_iff_rational_power_form_viaNecSuf
   Ising3DCut.LimitQuantity.eventually_constant_iff_power_identity_viaNecSuf
   Ising3DCut.LimitQuantity.cross_power_identity_of_rational_power_form
   Ising3DCut.LimitQuantity.coprime_cube_succ
