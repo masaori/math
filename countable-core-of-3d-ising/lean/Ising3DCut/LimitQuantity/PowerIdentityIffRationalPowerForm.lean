@@ -15,6 +15,7 @@
 いずれも ℚ と ℤ の等式だけであり、正の実数乗根も箱の大きさの極限も現れない。
 -/
 import Ising3DCut.LimitQuantity.PartitionValuePositive
+import Ising3DCut.LimitQuantity.PrimeExponentDataDeterminesRat
 import Ising3DCut.LimitQuantity.FinitelyManyPrimesNotSufficient
 
 namespace Ising3DCut.LimitQuantity
@@ -138,5 +139,18 @@ theorem padicValRat_primePowerProduct {S : Finset ℕ} (t : ℕ → ℤ)
       · have hval : padicValRat r (p : ℚ) = 0 :=
           padicValRat_prime_ne r p hr hpPrime (Ne.symm hpr)
         simp [Ne.symm hpr, hval]
+
+/-- 正の有理数 `a` の非零素指数が有限素数集合 `S` に収まるなら、その素指数を指数とする
+有限積は `a` 自身を復元する。正の有理数が全素数での素指数により一意に決まることを使う。 -/
+theorem primePowerProduct_padicValRat_eq_self {a : ℚ} (ha : 0 < a) {S : Finset ℕ}
+    (hS : ∀ p ∈ S, Nat.Prime p)
+    (hOutside : ∀ p : ℕ, p.Prime → p ∉ S → padicValRat p a = 0) :
+    primePowerProduct S (fun p => padicValRat p a) = a := by
+  apply rat_eq_of_prime_exponents_eq (primePowerProduct_pos _ hS) ha
+  intro p hp
+  rw [padicValRat_primePowerProduct _ hS p hp]
+  by_cases hpS : p ∈ S
+  · simp [hpS]
+  · simp [hpS, hOutside p hp hpS]
 
 end Ising3DCut.LimitQuantity
