@@ -5071,22 +5071,13 @@ x^{m-2}
 \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
 \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell}}(x-\alpha_j)
 \quad\bigl(\because\ \text{有限積の形式微分の積法則}\bigr).`),
-      displayMath(String.raw`D^2\overline P_G(x)
-=
-2
-\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
-  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
-\right)
-\sum_{1\le k<\ell\le d}
-\prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell}}(x-\alpha_j)
-\quad\bigl(\because\ \text{各相異なる添字対は二つの順序で現れる}\bigr).`),
       displayMath(String.raw`D^2\overline P_G(a)
 =
-2
 \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
 \right)
-\sum_{1\le k<\ell\le d}
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
 \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell}}(a-\alpha_j)
 \quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).`),
       paragraph([ref("def_fisher_zero_algebraic_shifted_reciprocal_sum"), " より、"]),
@@ -5100,25 +5091,26 @@ x^{m-2}
 \right)
 &&\bigl(\because\ \text{二つの有限和の定義}\bigr)\\
 &=
-2\overline P_G(a)
-\sum_{1\le k<\ell\le d}
+\overline P_G(a)
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
 \frac{1}{(a-\alpha_k)(a-\alpha_\ell)}
-&&\bigl(\because\ \text{有限和の平方を対角項と相異なる添字対へ分ける}\bigr)\\
+&&\bigl(\because\ \text{有限和の平方を対角項と相異なる順序付き添字対へ分ける}\bigr)\\
 &=
-2
 \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
 \right)
 \prod_{j=1}^{d}(a-\alpha_j)
-\sum_{1\le k<\ell\le d}
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
 \frac{1}{(a-\alpha_k)(a-\alpha_\ell)}
 &&\bigl(\because\ \text{一次因子分解へ }x=a\text{ を代入する}\bigr)\\
 &=
-2
 \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
 \right)
-\sum_{1\le k<\ell\le d}
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
 \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell}}(a-\alpha_j)
 &&\bigl(\because\ (a-\alpha_k)(a-\alpha_\ell)\ne0\text{ を各項で消去する}\bigr)\\
 &=D^2\overline P_G(a)

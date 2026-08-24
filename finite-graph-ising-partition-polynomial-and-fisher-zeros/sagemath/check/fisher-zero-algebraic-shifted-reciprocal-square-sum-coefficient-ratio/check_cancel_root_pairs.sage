@@ -12,7 +12,9 @@ for data in examples:
             root_differences = [a - alpha for alpha in data["roots"]]
             assert all(difference != 0 for difference in root_differences), (data["name"], a)
             for first in range(data["degree"]):
-                for second in range(first + 1, data["degree"]):
+                for second in range(data["degree"]):
+                    if first == second:
+                        continue
                     omitted_product = prod(
                         (
                             a - alpha
