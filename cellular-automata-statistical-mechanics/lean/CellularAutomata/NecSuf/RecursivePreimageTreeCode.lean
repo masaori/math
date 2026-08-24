@@ -28,6 +28,7 @@
 -/
 
 import Mathlib.Logic.Equiv.Defs
+import Mathlib.Logic.Equiv.Basic
 import Mathlib.Logic.Equiv.List
 import Mathlib.Data.Multiset.Basic
 import Mathlib.Data.Finset.Basic
@@ -390,5 +391,70 @@ theorem hasTreeMatching_of_codeAtDepth_eq
       obtain ⟨e, he⟩ := exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
         childrenX childrenY depth x y hcode
       exact ⟨e, fun z => ih z (e z) (he z)⟩
+
+/-- 有限子表だけから作る、深さを打ち切った節点型。深さ零では根一点、
+後続段では根一点と、子の出現ごとに付く一つ浅い節点型の従属和である。
+要るのは一つの有限子表だけであり、型全体の有限性、自己写像、周期性、
+最小前周期、二値状態、セル、近傍、局所規則は使わない。
+落とせなかった仮定は元の等号判定で、子表の台多重集合を型として使うために要る。 -/
+def TruncatedTreeNode (children : X → Finset X) : (depth : ℕ) → X → Type
+  | 0, _ => PUnit
+  | depth + 1, x =>
+      PUnit ⊕ (Σ z : (children x).val, TruncatedTreeNode children depth z)
+
+/-- 打ち切り節点型の根。深さにかかわらず基点そのものを表す。 -/
+def truncatedTreeNodeRoot (children : X → Finset X) :
+    (depth : ℕ) → (x : X) → TruncatedTreeNode children depth x
+  | 0, _ => PUnit.unit
+  | _ + 1, _ => Sum.inl PUnit.unit
+
+/-- 再帰的前像木対応から、打ち切り節点型どうしの全単射を構成する。
+後続段では根を根へ固定し、対応が与える子出現の全単射を適用してから、
+対応した子ごとに一つ浅い全単射へ再帰する。使うのは二つの有限子表と、
+対応が持つ子出現全単射および一つ浅い対応だけである。型全体の有限性、
+自己写像、周期性、最小前周期、二値状態、セル、近傍、局所規則は使わない。
+落とせなかったのは、対応の存在文から全単射を一つ取り出すための選択である。 -/
+noncomputable def treeNodeEquivOfMatching
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y) :
+    (depth : ℕ) → (x : X) → (y : Y) → HasTreeMatching childrenX childrenY depth x y →
+      TruncatedTreeNode childrenX depth x ≃ TruncatedTreeNode childrenY depth y
+  | 0, _, _, _ => Equiv.refl PUnit
+  | depth + 1, x, y, hmatch =>
+      Equiv.sumCongr (Equiv.refl PUnit)
+        (Equiv.sigmaCongr (Classical.choose hmatch) fun z =>
+          treeNodeEquivOfMatching childrenX childrenY depth z (Classical.choose hmatch z)
+            (Classical.choose_spec hmatch z))
+
+/-- 構成した全単射は、後続段の根を根へ送る。 -/
+theorem treeNodeEquivOfMatching_root
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    (depth : ℕ) (x : X) (y : Y)
+    (hmatch : HasTreeMatching childrenX childrenY (depth + 1) x y) :
+    treeNodeEquivOfMatching childrenX childrenY (depth + 1) x y hmatch
+        (Sum.inl PUnit.unit) = Sum.inl PUnit.unit :=
+  rfl
+
+/-- 構成した全単射は、深さ零を含む全ての打ち切り深さで根を根へ送る。 -/
+theorem treeNodeEquivOfMatching_root_all
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    (depth : ℕ) (x : X) (y : Y)
+    (hmatch : HasTreeMatching childrenX childrenY depth x y) :
+    treeNodeEquivOfMatching childrenX childrenY depth x y hmatch
+        (truncatedTreeNodeRoot childrenX depth x) =
+      truncatedTreeNodeRoot childrenY depth y := by
+  cases depth <;> rfl
+
+/-- 子分岐では、選んだ子出現対応を先に適用し、その下の部分木の全単射へ再帰する。 -/
+theorem treeNodeEquivOfMatching_child
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    (depth : ℕ) (x : X) (y : Y)
+    (hmatch : HasTreeMatching childrenX childrenY (depth + 1) x y)
+    (z : (childrenX x).val) (u : TruncatedTreeNode childrenX depth z) :
+    treeNodeEquivOfMatching childrenX childrenY (depth + 1) x y hmatch
+        (Sum.inr ⟨z, u⟩) =
+      Sum.inr ⟨Classical.choose hmatch z,
+        treeNodeEquivOfMatching childrenX childrenY depth z
+          (Classical.choose hmatch z) (Classical.choose_spec hmatch z) u⟩ :=
+  rfl
 
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance
