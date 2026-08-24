@@ -68,6 +68,7 @@ export const ALL_LABELS = [
   "claim_power_identity_iff_rational_power_form",
   "claim_rational_power_base_congruences",
   "claim_rational_power_base_den_coprime_to_num",
+  "claim_rational_power_base_den_no_prime_missing_zero_mult",
   "claim_rational_power_base_denominator_primes",
   "claim_rational_values_determine_partition_polynomial",
   "claim_roots_leading_coefficient_multiplicities_determine_polynomial",
