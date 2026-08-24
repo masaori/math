@@ -267,6 +267,12 @@ targets=(
   Ising3DCut.Prediction.mem_internalEdges_iff
   Ising3DCut.Prediction.selectedOriginalEdges_image_externalEdge
   Ising3DCut.Prediction.unselected_terminal_zero_is_covered_by_internal_edge
+  Ising3DCut.Prediction.mem_terminalEdges_iff
+  Ising3DCut.Prediction.IsPerfectMatching.not_mem_of_mem_of_ne
+  Ising3DCut.Prediction.IsPerfectMatching.disjoint_within_vertices
+  Ising3DCut.Prediction.externalEdge_injective
+  Ising3DCut.Prediction.unselected_terminal_one_is_covered_by_internal_edge
+  Ising3DCut.Prediction.mem_encodedEvenSubgraph_iff
   Ising3DCut.Prediction.terminalMatching_weight_eq_unselectedEdges_prod
   Ising3DCut.LimitQuantity.tendsto_congr_of_pointwise_eq
   Ising3DCut.LimitQuantity.limitQuantity_tendsto_of_data_eq
