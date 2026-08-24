@@ -68,6 +68,9 @@ targets=(
   Ising3DCut.LimitQuantity.rootSeq_isingValueSeq_two_not_constant_closed
   Ising3DCut.NecSuf.not_constant_of_pow_ne
   Ising3DCut.LimitQuantity.rootSeq_isingValueSeq_two_not_constant_viaNecSuf
+  Ising3DCut.LimitQuantity.partitionPolynomial_two_strictMono
+  Ising3DCut.LimitQuantity.rootSeq_isingValueSeq_at_one
+  Ising3DCut.LimitQuantity.constant_finite_box_sequence_only_at_one
   Ising3DCut.LimitQuantity.card_dvd_card_group_of_pretransitive
   Ising3DCut.LimitQuantity.forty_dvd_card_galois_group_of_irreducible
   Ising3DCut.LimitQuantity.no_equiv_of_card_four_of_forty_dvd_card
