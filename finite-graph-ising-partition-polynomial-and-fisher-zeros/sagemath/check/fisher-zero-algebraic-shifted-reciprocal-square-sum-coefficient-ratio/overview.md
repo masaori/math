@@ -16,6 +16,8 @@
 | --- | --- | --- | --- |
 | `check_embedded_coefficient_expansion.sage` | 二つの標準単射で移した係数表示 | PASS | 全例で多項式として一致 |
 | `check_coefficient_first_formal_derivative.sage` | 係数表示の一回の項別形式微分 | PASS | 全例で多項式として一致 |
+| `check_apply_reciprocal_sum_coefficient_ratio.sage` | 逆数和の係数表示定理を明示的な係数有限和へ適用 | PASS | 全例・全対象評価点で一致 |
+| `check_first_coefficient_sum_definition.sage` | 明示的な第一係数和を局所定義 `A_G(a)` へ置換 | PASS | 全例・全対象評価点で一致 |
 | `check_coefficient_second_formal_derivative.sage` | 係数表示の二回の項別形式微分 | PASS | 全例で多項式として一致 |
 | `check_rational_to_algebraic_embedding_preserves_triple_product.sage` | 有理数から代数的数への標準単射が三因子の積を保つこと | PASS | 全例・全二次以上の係数で一致 |
 | `check_natural_to_rational_embedding_preserves_triple_product.sage` | 自然数から有理数への標準単射が三因子の積を保つこと | PASS | 全例・全二次以上の係数で一致 |

@@ -5169,6 +5169,27 @@ S_{G,2}(a)
 &&\bigl(\because\ \text{移項}\bigr).
 \end{aligned}`),
       paragraph([ref("theorem_fisher_zero_algebraic_shifted_reciprocal_sum_coefficient_ratio"), " より、"]),
+      displayMath(String.raw`\mathcal R_G(a)
+=
+\frac{
+  \displaystyle
+  \sum_{m=1}^{|E|}
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}\!\left(m\Omega_G(m)\right)
+  \right)
+  a^{m-1}
+}{
+  \overline P_G(a)
+}
+\quad\bigl(\because\ \text{Fisher 零点差の逆数和の係数表示}\bigr).`),
+      displayMath(String.raw`\mathcal R_G(a)
+=
+\frac{
+  A_G(a)
+}{
+  \overline P_G(a)
+}
+\quad\bigl(\because\ A_G(a)\text{ の定義}\bigr).`),
       displayMath(String.raw`\begin{aligned}
 S_{G,2}(a)
 &=
