@@ -93,6 +93,7 @@ export const ALL_LABELS = [
   "claim_tail_equal_positive_real_sequences_transfer_limit",
   "claim_two_dimensional_boundary_response_even_subgraph_sum",
   "claim_two_dimensional_boundary_response_pfaffian_prediction",
+  "claim_zero_breakage_multiplicity_is_two",
   "def_bipartite_successor_system",
   "def_boundary_response_polynomial",
   "def_box",
