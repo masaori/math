@@ -327,4 +327,41 @@ theorem exists_occurrence_equiv_of_aggregateCode_eq {OX OY L : Type}
   exists_occurrence_equiv_of_map_eq tableX.val tableY.val codeX codeY
     (by simpa only [aggregateCode] using hcode.symm)
 
+/-- 打ち切り深さ `depth + 1` の再帰符号が等しい二点では、
+子表の一つ浅い符号を重複込みで集めた多重集合が等しい。
+使うのは二つの子表と、`codeAtDepth` の後続段が
+「子符号の多重集合を整列して有限列にし、それを符号化する」ことだけである。
+型全体の有限性、自己写像、周期性、最小前周期、符号の外側の打ち切り規則は使わない。
+落とせなかった仮定は両側の元の等号判定で、これは子表を `Finset` として持ち、
+その台多重集合を写すために要る。 -/
+theorem childCodeMultiset_eq_of_codeAtDepth_succ_eq
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    (depth : ℕ) (x : X) (y : Y)
+    (hcode : codeAtDepth childrenY (depth + 1) y
+      = codeAtDepth childrenX (depth + 1) x) :
+    (childrenX x).val.map (codeAtDepth childrenX depth)
+      = (childrenY y).val.map (codeAtDepth childrenY depth) := by
+  simp only [codeAtDepth] at hcode
+  have hsorted := Encodable.encode_injective hcode
+  have hcoerced := congrArg (fun xs : List ℕ => (xs : Multiset ℕ)) hsorted.symm
+  simpa only [Multiset.sort_eq] using hcoerced
+
+/-- 打ち切り深さ `depth + 1` の再帰符号が等しい二点の子の出現には、
+重複度を保ち一つ浅い符号を保存する全単射がある。
+`childCodeMultiset_eq_of_codeAtDepth_succ_eq` と
+`exists_occurrence_equiv_of_map_eq` の合成であり、
+新たに要る構造はない。型全体の有限性、自己写像、周期性、二値状態、
+セル、近傍、局所規則は使わない。 -/
+theorem exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    (depth : ℕ) (x : X) (y : Y)
+    (hcode : codeAtDepth childrenY (depth + 1) y
+      = codeAtDepth childrenX (depth + 1) x) :
+    ∃ e : (childrenX x).val ≃ (childrenY y).val,
+      ∀ z : (childrenX x).val,
+        codeAtDepth childrenY depth (e z) = codeAtDepth childrenX depth z :=
+  exists_occurrence_equiv_of_map_eq (childrenX x).val (childrenY y).val
+    (codeAtDepth childrenX depth) (codeAtDepth childrenY depth)
+    (childCodeMultiset_eq_of_codeAtDepth_succ_eq childrenX childrenY depth x y hcode)
+
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance

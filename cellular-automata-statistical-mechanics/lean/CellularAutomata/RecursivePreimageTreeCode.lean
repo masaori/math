@@ -158,11 +158,9 @@ theorem child_code_multisets_eq_of_codeAtDepth_succ_eq
     (depth : ℕ) (y : V → State) (yW : W → State)
     (hcode : codeAtDepth NW fW (depth + 1) yW = codeAtDepth N f (depth + 1) y) :
     (nonperiodicChildren N f y).val.map (codeAtDepth N f depth) =
-      (nonperiodicChildren NW fW yW).val.map (codeAtDepth NW fW depth) := by
-  rw [codeAtDepth_succ, codeAtDepth_succ] at hcode
-  have hsorted := Encodable.encode_injective hcode
-  have hcoerced := congrArg (fun xs : List ℕ => (xs : Multiset ℕ)) hsorted.symm
-  simpa only [Multiset.sort_eq] using hcoerced
+      (nonperiodicChildren NW fW yW).val.map (codeAtDepth NW fW depth) :=
+  NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.childCodeMultiset_eq_of_codeAtDepth_succ_eq
+    (nonperiodicChildren N f) (nonperiodicChildren NW fW) depth y yW hcode
 
 /-- 後続深さの符号が等しい二頂点の子の出現には、重複度を保ち、
     一つ前の深さの符号を保存する全単射がある。出現型の両側はそれぞれ
@@ -172,13 +170,9 @@ theorem exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
     (hcode : codeAtDepth NW fW (depth + 1) yW = codeAtDepth N f (depth + 1) y) :
     ∃ e : (nonperiodicChildren N f y).val ≃ (nonperiodicChildren NW fW yW).val,
       ∀ z : (nonperiodicChildren N f y).val,
-        codeAtDepth NW fW depth (e z) = codeAtDepth N f depth z := by
-  have hchildren := child_code_multisets_eq_of_codeAtDepth_succ_eq
-    N f NW fW depth y yW hcode
-  obtain ⟨e, hcode_preserved⟩ := exists_occurrence_equiv_of_map_eq
-    (nonperiodicChildren N f y).val (nonperiodicChildren NW fW yW).val
-    (codeAtDepth N f depth) (codeAtDepth NW fW depth) hchildren
-  exact ⟨e, hcode_preserved⟩
+        codeAtDepth NW fW depth (e z) = codeAtDepth N f depth z :=
+  NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
+    (nonperiodicChildren N f) (nonperiodicChildren NW fW) depth y yW hcode
 
 /-- 深さ `depth` までの前像木の再帰的対応。後続段では、子の出現を
     重複度つきで全単射に対応させ、対応する各子で一つ浅い対応を要求する。 -/
