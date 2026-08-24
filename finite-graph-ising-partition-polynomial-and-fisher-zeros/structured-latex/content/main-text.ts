@@ -5212,6 +5212,408 @@ S_{G,2}(a)
     ],
   },
   {
+    id: "finite_graph_theorem_fisher_zero_algebraic_shifted_reciprocal_cube_sum_coefficient_ratio",
+    kind: "theorem",
+    title: { text: "一般有限グラフの代数的評価点における Fisher 零点差の逆三乗和と係数表示" },
+    labels: ["theorem_fisher_zero_algebraic_shifted_reciprocal_cube_sum_coefficient_ratio"],
+    habitat: "Qbar",
+    verification: ["sagemath/check/fisher-zero-algebraic-shifted-reciprocal-cube-sum-coefficient-ratio"],
+    statement: [
+      paragraph([
+        ref("def_finite_graph_input"),
+        " の有限グラフについて、",
+        ref("def_ising_partition_polynomial"),
+        " の次数を",
+        math(String.raw`d:=\deg Z_G(x)\in\mathbb N`),
+        " と置く。係数を標準単射",
+        math(String.raw`\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " で移した多項式を",
+        math(String.raw`\overline P_G(x)\in\overline{\mathbb Q}[x]`),
+        "、その重複度込み Fisher 零点を",
+        math(String.raw`\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}`),
+        " と書く。自然数から有理数への標準単射を",
+        math(String.raw`\eta_{\mathbb N,\mathbb Q}:\mathbb N\hookrightarrow\mathbb Q`),
+        "、有理数から代数的数への標準単射を",
+        math(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+        " と書き、",
+        math(String.raw`q_r:=\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(r))\in\overline{\mathbb Q}`),
+        " を",
+        math(String.raw`r\in\{1,2,3\}`),
+        " に対して定める。",
+        math(String.raw`\overline P_G(a)\ne0`),
+        " を満たす",
+        math(String.raw`a\in\overline{\mathbb Q}`),
+        " について、次の三つの代数的数を定める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A_G(a)
+&:=
+\sum_{m=1}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m\Omega_G(m)\right)
+\right)
+a^{m-1},\\
+B_G(a)
+&:=
+\sum_{m=2}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)\Omega_G(m)\right)
+\right)
+a^{m-2},\\
+C_G(a)
+&:=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)(m-2)\Omega_G(m)\right)
+\right)
+a^{m-3}
+\end{aligned}`),
+      paragraph([
+        "上端が下端より小さい有限和は空和",
+        math(String.raw`0\in\overline{\mathbb Q}`),
+        " とする。このとき Fisher 零点差の逆三乗和は",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^3}
+=
+\frac{
+  \displaystyle
+  q_2 A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+  +\overline P_G(a)^2C_G(a)
+}{
+  q_2\overline P_G(a)^3
+}
+\in\overline{\mathbb Q}.`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_fisher_zero_algebraic_shifted_reciprocal_sum"),
+        " の逆数和を",
+        math(String.raw`\mathcal R_G(a)\in\overline{\mathbb Q}`),
+        " と書き、証明中だけ用いる代数的数を",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_{G,2}(a)
+&:=\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^2}
+\in\overline{\mathbb Q},\\
+S_{G,3}(a)
+&:=\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^3}
+\in\overline{\mathbb Q},\\
+T_{G,3}(a)
+&:=
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+\frac{1}{(a-\alpha_k)(a-\alpha_\ell)(a-\alpha_h)}
+\in\overline{\mathbb Q}
+\end{aligned}`),
+      paragraph([
+        "と置く。代数的数係数多項式の形式微分を",
+        math(String.raw`D:\overline{\mathbb Q}[x]\to\overline{\mathbb Q}[x]`),
+        " と書く。すなわち任意の",
+        math(String.raw`c\in\overline{\mathbb Q}`),
+        " に対して",
+        math(String.raw`D(c)=0`),
+        " と定め、任意の",
+        math(String.raw`m\in\mathbb N_{>0}`),
+        " に対して",
+        math(String.raw`D(cx^m)=c\,\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(m))x^{m-1}`),
+        " と定め、これらの規則を",
+        math(String.raw`\overline{\mathbb Q}`),
+        " 上線形に拡張する。",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " の係数表示を二つの標準単射で移すと、",
+      ]),
+      displayMath(String.raw`\overline P_G(x)
+=
+\sum_{m=0}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+x^m
+\quad\bigl(\because\ \text{二つの標準単射で係数を移す}\bigr).`),
+      paragraph(["直前の多項式恒等式を一回形式微分すると、"]),
+      displayMath(String.raw`D\overline P_G(x)
+=
+\sum_{m=1}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(m)
+\right)
+x^{m-1}
+\quad\bigl(\because\ \text{有限和の項別形式微分}\bigr).`),
+      paragraph(["直前の多項式恒等式をもう一回形式微分すると、"]),
+      displayMath(String.raw`D^2\overline P_G(x)
+=
+\sum_{m=2}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(m)
+\right)
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(m-1)
+\right)
+x^{m-2}
+\quad\bigl(\because\ \text{有限和の項別形式微分}\bigr).`),
+      paragraph(["直前の多項式恒等式をもう一回形式微分すると、"]),
+      displayMath(String.raw`D^3\overline P_G(x)
+=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+\prod_{r=0}^{2}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(m-r)
+\right)
+x^{m-3}
+\quad\bigl(\because\ \text{有限和の項別形式微分}\bigr).`),
+      displayMath(String.raw`D^3\overline P_G(x)
+=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)(m-2)\Omega_G(m)\right)
+\right)
+x^{m-3}
+\quad\bigl(\because\ \text{二つの標準単射は積を保つ}\bigr).`),
+      displayMath(String.raw`D^3\overline P_G(a)
+=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)(m-2)\Omega_G(m)\right)
+\right)
+a^{m-3}
+\quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).`),
+      displayMath(String.raw`\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)(m-2)\Omega_G(m)\right)
+\right)
+a^{m-3}
+=C_G(a)
+\quad\bigl(\because\ C_G(a)\text{ の定義}\bigr).`),
+      paragraph([
+        ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
+        " と",
+        ref("claim_partition_polynomial_coefficient_expansion"),
+        " より、",
+        math(String.raw`\Omega_G(d)\in\mathbb N_{>0}`),
+        " は最高次係数である。代数的閉体上の重複度込み一次因子分解により、",
+      ]),
+      displayMath(String.raw`\overline P_G(x)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\prod_{j=1}^{d}(x-\alpha_j)
+\quad\bigl(\because\ \text{代数的閉体上の重複度込み一次因子分解}\bigr).`),
+      displayMath(String.raw`\overline P_G(a)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\prod_{j=1}^{d}(a-\alpha_j)
+\quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\prod_{j=1}^{d}(a-\alpha_j)
+\ne0
+\quad\bigl(\because\ \overline P_G(a)\ne0\text{ を直前の等式へ代入する}\bigr).`),
+      displayMath(String.raw`\prod_{j=1}^{d}(a-\alpha_j)
+\ne0
+\quad\bigl(\because\ \overline{\mathbb Q}\text{ の零積律の対偶}\bigr).`),
+      displayMath(String.raw`a-\alpha_j\ne0
+\qquad(1\le j\le d)
+\quad\bigl(\because\ \text{有限積が非零なら各因子は非零}\bigr).`),
+      paragraph(["一次因子分解を一回形式微分すると、"]),
+      displayMath(String.raw`D\overline P_G(x)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\sum_{k=1}^{d}
+\prod_{\substack{1\le j\le d\\j\ne k}}(x-\alpha_j)
+\quad\bigl(\because\ \text{有限積の形式微分の積法則}\bigr).`),
+      paragraph(["直前の多項式恒等式をもう一回形式微分すると、"]),
+      displayMath(String.raw`D^2\overline P_G(x)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell}}(x-\alpha_j)
+\quad\bigl(\because\ \text{有限積の形式微分の積法則}\bigr).`),
+      paragraph(["直前の多項式恒等式をもう一回形式微分すると、"]),
+      displayMath(String.raw`D^3\overline P_G(x)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+\prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(x-\alpha_j)
+\quad\bigl(\because\ \text{有限積の形式微分の積法則}\bigr).`),
+      displayMath(String.raw`D^3\overline P_G(a)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+\prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(a-\alpha_j)
+\quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).`),
+      displayMath(String.raw`\frac{D^3\overline P_G(a)}{\overline P_G(a)}
+=
+\frac{
+  \displaystyle
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+  \right)
+  \sum_{k=1}^{d}
+  \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+  \sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+  \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(a-\alpha_j)
+}{
+  \displaystyle
+  \overline P_G(a)
+}
+\quad\bigl(\because\ \text{三回形式微分式を分子へ代入する}\bigr).`),
+      displayMath(String.raw`\frac{D^3\overline P_G(a)}{\overline P_G(a)}
+=
+\frac{
+  \displaystyle
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+  \right)
+  \sum_{k=1}^{d}
+  \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+  \sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+  \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(a-\alpha_j)
+}{
+  \displaystyle
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+  \right)
+  \prod_{j=1}^{d}(a-\alpha_j)
+}
+\quad\bigl(\because\ \text{一次因子分解を分母へ代入する}\bigr).`),
+      displayMath(String.raw`\frac{D^3\overline P_G(a)}{\overline P_G(a)}
+=T_{G,3}(a)
+\quad\bigl(\because\ \text{各項で三つの非零因子を消去する}\bigr).`),
+      paragraph([ref("def_fisher_zero_algebraic_shifted_reciprocal_sum"), " より、"]),
+      displayMath(String.raw`\mathcal R_G(a)S_{G,2}(a)
+=
+S_{G,3}(a)
++
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
+\quad\bigl(\because\ \text{有限二重和を対角項と非対角項へ分ける}\bigr).`),
+      displayMath(String.raw`\mathcal R_G(a)^3
+=
+S_{G,3}(a)
++q_3
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
++T_{G,3}(a)
+\quad\bigl(\because\ \text{有限三重和を添字の一致型ごとに分ける}\bigr).`),
+      displayMath(String.raw`T_{G,3}(a)
+=
+\mathcal R_G(a)^3
+-q_3\mathcal R_G(a)S_{G,2}(a)
++q_2S_{G,3}(a)
+\quad\bigl(\because\ \text{直前二式から非対角二重和を消去する}\bigr).`),
+      displayMath(String.raw`\frac{C_G(a)}{\overline P_G(a)}
+=T_{G,3}(a)
+\quad\bigl(\because\ D^3\overline P_G(a)=C_G(a)\text{ を代入する}\bigr).`),
+      displayMath(String.raw`\frac{C_G(a)}{\overline P_G(a)}
+=
+\mathcal R_G(a)^3
+-q_3\mathcal R_G(a)S_{G,2}(a)
++q_2S_{G,3}(a)
+\quad\bigl(\because\ \text{直前の二つの等式の推移律}\bigr).`),
+      displayMath(String.raw`q_2S_{G,3}(a)
+=
+\frac{C_G(a)}{\overline P_G(a)}
+-\mathcal R_G(a)^3
++q_3\mathcal R_G(a)S_{G,2}(a)
+\quad\bigl(\because\ \text{移項}\bigr).`),
+      paragraph([ref("theorem_fisher_zero_algebraic_shifted_reciprocal_sum_coefficient_ratio"), " より、"]),
+      displayMath(String.raw`\mathcal R_G(a)
+=\frac{A_G(a)}{\overline P_G(a)}
+\quad\bigl(\because\ \text{Fisher 零点差の逆数和の係数表示}\bigr).`),
+      displayMath(String.raw`q_2S_{G,3}(a)
+=
+\frac{C_G(a)}{\overline P_G(a)}
+-\left(\frac{A_G(a)}{\overline P_G(a)}\right)^3
++q_3\frac{A_G(a)}{\overline P_G(a)}S_{G,2}(a)
+\quad\bigl(\because\ \text{直前の等式を代入する}\bigr).`),
+      paragraph([ref("theorem_fisher_zero_algebraic_shifted_reciprocal_square_sum_coefficient_ratio"), " より、"]),
+      displayMath(String.raw`S_{G,2}(a)
+=
+\frac{A_G(a)^2-\overline P_G(a)B_G(a)}{\overline P_G(a)^2}
+\quad\bigl(\because\ \text{Fisher 零点差の逆二乗和の係数表示}\bigr).`),
+      displayMath(String.raw`q_2S_{G,3}(a)
+=
+\frac{C_G(a)}{\overline P_G(a)}
+-\left(\frac{A_G(a)}{\overline P_G(a)}\right)^3
++q_3\frac{A_G(a)}{\overline P_G(a)}
+\frac{A_G(a)^2-\overline P_G(a)B_G(a)}{\overline P_G(a)^2}
+\quad\bigl(\because\ \text{直前の等式を代入する}\bigr).`),
+      displayMath(String.raw`q_2S_{G,3}(a)
+=
+\frac{
+  \overline P_G(a)^2C_G(a)
+  -A_G(a)^3
+  +q_3A_G(a)\left(A_G(a)^2-\overline P_G(a)B_G(a)\right)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ \text{共通分母化}\bigr).`),
+      displayMath(String.raw`q_2S_{G,3}(a)
+=
+\frac{
+  \overline P_G(a)^2C_G(a)
+  -q_1A_G(a)^3
+  +q_3A_G(a)\left(A_G(a)^2-\overline P_G(a)B_G(a)\right)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ q_1\text{ は }\overline{\mathbb Q}\text{ の乗法単位元}\bigr).`),
+      displayMath(String.raw`q_2S_{G,3}(a)
+=
+\frac{
+  q_2A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+  +\overline P_G(a)^2C_G(a)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ q_3-q_1=q_2\text{ と分配律}\bigr).`),
+      displayMath(String.raw`S_{G,3}(a)
+=
+\frac{
+  q_2A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+  +\overline P_G(a)^2C_G(a)
+}{
+  q_2\overline P_G(a)^3
+}
+\quad\bigl(\because\ q_2\ne0\text{ を消去する}\bigr).`),
+      paragraph([
+        "グラフ、スピン配位集合、零点添字集合は有限集合、次数、係数添字、多重度とそれらの積は自然数、分配多項式は整数係数多項式、評価点、Fisher 零点、差、逆数、三乗、有限和、評価値と商は代数的数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
+      ]),
+    ],
+  },
+  {
     id: "finite_graph_theorem_fisher_zero_rational_shifted_product_coefficient_ratio",
     kind: "theorem",
     title: { text: "一般有限グラフの Fisher 零点と有理評価点との差の積" },

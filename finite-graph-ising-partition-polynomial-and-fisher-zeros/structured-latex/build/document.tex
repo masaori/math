@@ -4836,6 +4836,407 @@ S_{G,2}(a)
 
 \end{proof}
 
+\begin{theorem}[一般有限グラフの代数的評価点における Fisher 零点差の逆三乗和と係数表示]\label{lab:theorem_fisher_zero_algebraic_shifted_reciprocal_cube_sum_coefficient_ratio}
+\cref{lab:def_finite_graph_input}
+ の有限グラフについて、
+\cref{lab:def_ising_partition_polynomial}
+ の次数を
+$d:=\deg Z_G(x)\in\mathbb N$
+ と置く。係数を標準単射
+$\iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}:\mathbb Z[x]\hookrightarrow\overline{\mathbb Q}[x]$
+ で移した多項式を
+$\overline P_G(x)\in\overline{\mathbb Q}[x]$
+、その重複度込み Fisher 零点を
+$\alpha_1,\ldots,\alpha_d\in\overline{\mathbb Q}$
+ と書く。自然数から有理数への標準単射を
+$\eta_{\mathbb N,\mathbb Q}:\mathbb N\hookrightarrow\mathbb Q$
+、有理数から代数的数への標準単射を
+$\iota_{\mathbb Q,\overline{\mathbb Q}}:\mathbb Q\hookrightarrow\overline{\mathbb Q}$
+ と書き、
+$q_r:=\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(r))\in\overline{\mathbb Q}$
+ を
+$r\in\{1,2,3\}$
+ に対して定める。
+$\overline P_G(a)\ne0$
+ を満たす
+$a\in\overline{\mathbb Q}$
+ について、次の三つの代数的数を定める。
+
+\[\begin{aligned}
+A_G(a)
+&:=
+\sum_{m=1}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m\Omega_G(m)\right)
+\right)
+a^{m-1},\\
+B_G(a)
+&:=
+\sum_{m=2}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)\Omega_G(m)\right)
+\right)
+a^{m-2},\\
+C_G(a)
+&:=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)(m-2)\Omega_G(m)\right)
+\right)
+a^{m-3}
+\end{aligned}\]
+上端が下端より小さい有限和は空和
+$0\in\overline{\mathbb Q}$
+ とする。このとき Fisher 零点差の逆三乗和は
+
+\[\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^3}
+=
+\frac{
+  \displaystyle
+  q_2 A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+  +\overline P_G(a)^2C_G(a)
+}{
+  q_2\overline P_G(a)^3
+}
+\in\overline{\mathbb Q}.\]
+\end{theorem}
+\begin{proof}
+\cref{lab:def_fisher_zero_algebraic_shifted_reciprocal_sum}
+ の逆数和を
+$\mathcal R_G(a)\in\overline{\mathbb Q}$
+ と書き、証明中だけ用いる代数的数を
+
+\[\begin{aligned}
+S_{G,2}(a)
+&:=\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^2}
+\in\overline{\mathbb Q},\\
+S_{G,3}(a)
+&:=\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^3}
+\in\overline{\mathbb Q},\\
+T_{G,3}(a)
+&:=
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+\frac{1}{(a-\alpha_k)(a-\alpha_\ell)(a-\alpha_h)}
+\in\overline{\mathbb Q}
+\end{aligned}\]
+と置く。代数的数係数多項式の形式微分を
+$D:\overline{\mathbb Q}[x]\to\overline{\mathbb Q}[x]$
+ と書く。すなわち任意の
+$c\in\overline{\mathbb Q}$
+ に対して
+$D(c)=0$
+ と定め、任意の
+$m\in\mathbb N_{>0}$
+ に対して
+$D(cx^m)=c\,\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(m))x^{m-1}$
+ と定め、これらの規則を
+$\overline{\mathbb Q}$
+ 上線形に拡張する。
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ の係数表示を二つの標準単射で移すと、
+
+\[\overline P_G(x)
+=
+\sum_{m=0}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+x^m
+\quad\bigl(\because\ \text{二つの標準単射で係数を移す}\bigr).\]
+直前の多項式恒等式を一回形式微分すると、
+
+\[D\overline P_G(x)
+=
+\sum_{m=1}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(m)
+\right)
+x^{m-1}
+\quad\bigl(\because\ \text{有限和の項別形式微分}\bigr).\]
+直前の多項式恒等式をもう一回形式微分すると、
+
+\[D^2\overline P_G(x)
+=
+\sum_{m=2}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(m)
+\right)
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(m-1)
+\right)
+x^{m-2}
+\quad\bigl(\because\ \text{有限和の項別形式微分}\bigr).\]
+直前の多項式恒等式をもう一回形式微分すると、
+
+\[D^3\overline P_G(x)
+=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+\right)
+\prod_{r=0}^{2}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(m-r)
+\right)
+x^{m-3}
+\quad\bigl(\because\ \text{有限和の項別形式微分}\bigr).\]
+\[D^3\overline P_G(x)
+=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)(m-2)\Omega_G(m)\right)
+\right)
+x^{m-3}
+\quad\bigl(\because\ \text{二つの標準単射は積を保つ}\bigr).\]
+\[D^3\overline P_G(a)
+=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)(m-2)\Omega_G(m)\right)
+\right)
+a^{m-3}
+\quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).\]
+\[\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)(m-2)\Omega_G(m)\right)
+\right)
+a^{m-3}
+=C_G(a)
+\quad\bigl(\because\ C_G(a)\text{ の定義}\bigr).\]
+\cref{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
+ と
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ より、
+$\Omega_G(d)\in\mathbb N_{>0}$
+ は最高次係数である。代数的閉体上の重複度込み一次因子分解により、
+
+\[\overline P_G(x)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\prod_{j=1}^{d}(x-\alpha_j)
+\quad\bigl(\because\ \text{代数的閉体上の重複度込み一次因子分解}\bigr).\]
+\[\overline P_G(a)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\prod_{j=1}^{d}(a-\alpha_j)
+\quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).\]
+\[\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\prod_{j=1}^{d}(a-\alpha_j)
+\ne0
+\quad\bigl(\because\ \overline P_G(a)\ne0\text{ を直前の等式へ代入する}\bigr).\]
+\[\prod_{j=1}^{d}(a-\alpha_j)
+\ne0
+\quad\bigl(\because\ \overline{\mathbb Q}\text{ の零積律の対偶}\bigr).\]
+\[a-\alpha_j\ne0
+\qquad(1\le j\le d)
+\quad\bigl(\because\ \text{有限積が非零なら各因子は非零}\bigr).\]
+一次因子分解を一回形式微分すると、
+
+\[D\overline P_G(x)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\sum_{k=1}^{d}
+\prod_{\substack{1\le j\le d\\j\ne k}}(x-\alpha_j)
+\quad\bigl(\because\ \text{有限積の形式微分の積法則}\bigr).\]
+直前の多項式恒等式をもう一回形式微分すると、
+
+\[D^2\overline P_G(x)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell}}(x-\alpha_j)
+\quad\bigl(\because\ \text{有限積の形式微分の積法則}\bigr).\]
+直前の多項式恒等式をもう一回形式微分すると、
+
+\[D^3\overline P_G(x)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+\prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(x-\alpha_j)
+\quad\bigl(\because\ \text{有限積の形式微分の積法則}\bigr).\]
+\[D^3\overline P_G(a)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+\prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(a-\alpha_j)
+\quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).\]
+\[\frac{D^3\overline P_G(a)}{\overline P_G(a)}
+=
+\frac{
+  \displaystyle
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+  \right)
+  \sum_{k=1}^{d}
+  \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+  \sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+  \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(a-\alpha_j)
+}{
+  \displaystyle
+  \overline P_G(a)
+}
+\quad\bigl(\because\ \text{三回形式微分式を分子へ代入する}\bigr).\]
+\[\frac{D^3\overline P_G(a)}{\overline P_G(a)}
+=
+\frac{
+  \displaystyle
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+  \right)
+  \sum_{k=1}^{d}
+  \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+  \sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+  \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(a-\alpha_j)
+}{
+  \displaystyle
+  \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+    \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+  \right)
+  \prod_{j=1}^{d}(a-\alpha_j)
+}
+\quad\bigl(\because\ \text{一次因子分解を分母へ代入する}\bigr).\]
+\[\frac{D^3\overline P_G(a)}{\overline P_G(a)}
+=T_{G,3}(a)
+\quad\bigl(\because\ \text{各項で三つの非零因子を消去する}\bigr).\]
+\cref{lab:def_fisher_zero_algebraic_shifted_reciprocal_sum}
+ より、
+
+\[\mathcal R_G(a)S_{G,2}(a)
+=
+S_{G,3}(a)
++
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
+\quad\bigl(\because\ \text{有限二重和を対角項と非対角項へ分ける}\bigr).\]
+\[\mathcal R_G(a)^3
+=
+S_{G,3}(a)
++q_3
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
++T_{G,3}(a)
+\quad\bigl(\because\ \text{有限三重和を添字の一致型ごとに分ける}\bigr).\]
+\[T_{G,3}(a)
+=
+\mathcal R_G(a)^3
+-q_3\mathcal R_G(a)S_{G,2}(a)
++q_2S_{G,3}(a)
+\quad\bigl(\because\ \text{直前二式から非対角二重和を消去する}\bigr).\]
+\[\frac{C_G(a)}{\overline P_G(a)}
+=T_{G,3}(a)
+\quad\bigl(\because\ D^3\overline P_G(a)=C_G(a)\text{ を代入する}\bigr).\]
+\[\frac{C_G(a)}{\overline P_G(a)}
+=
+\mathcal R_G(a)^3
+-q_3\mathcal R_G(a)S_{G,2}(a)
++q_2S_{G,3}(a)
+\quad\bigl(\because\ \text{直前の二つの等式の推移律}\bigr).\]
+\[q_2S_{G,3}(a)
+=
+\frac{C_G(a)}{\overline P_G(a)}
+-\mathcal R_G(a)^3
++q_3\mathcal R_G(a)S_{G,2}(a)
+\quad\bigl(\because\ \text{移項}\bigr).\]
+\cref{lab:theorem_fisher_zero_algebraic_shifted_reciprocal_sum_coefficient_ratio}
+ より、
+
+\[\mathcal R_G(a)
+=\frac{A_G(a)}{\overline P_G(a)}
+\quad\bigl(\because\ \text{Fisher 零点差の逆数和の係数表示}\bigr).\]
+\[q_2S_{G,3}(a)
+=
+\frac{C_G(a)}{\overline P_G(a)}
+-\left(\frac{A_G(a)}{\overline P_G(a)}\right)^3
++q_3\frac{A_G(a)}{\overline P_G(a)}S_{G,2}(a)
+\quad\bigl(\because\ \text{直前の等式を代入する}\bigr).\]
+\cref{lab:theorem_fisher_zero_algebraic_shifted_reciprocal_square_sum_coefficient_ratio}
+ より、
+
+\[S_{G,2}(a)
+=
+\frac{A_G(a)^2-\overline P_G(a)B_G(a)}{\overline P_G(a)^2}
+\quad\bigl(\because\ \text{Fisher 零点差の逆二乗和の係数表示}\bigr).\]
+\[q_2S_{G,3}(a)
+=
+\frac{C_G(a)}{\overline P_G(a)}
+-\left(\frac{A_G(a)}{\overline P_G(a)}\right)^3
++q_3\frac{A_G(a)}{\overline P_G(a)}
+\frac{A_G(a)^2-\overline P_G(a)B_G(a)}{\overline P_G(a)^2}
+\quad\bigl(\because\ \text{直前の等式を代入する}\bigr).\]
+\[q_2S_{G,3}(a)
+=
+\frac{
+  \overline P_G(a)^2C_G(a)
+  -A_G(a)^3
+  +q_3A_G(a)\left(A_G(a)^2-\overline P_G(a)B_G(a)\right)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ \text{共通分母化}\bigr).\]
+\[q_2S_{G,3}(a)
+=
+\frac{
+  \overline P_G(a)^2C_G(a)
+  -q_1A_G(a)^3
+  +q_3A_G(a)\left(A_G(a)^2-\overline P_G(a)B_G(a)\right)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ q_1\text{ は }\overline{\mathbb Q}\text{ の乗法単位元}\bigr).\]
+\[q_2S_{G,3}(a)
+=
+\frac{
+  q_2A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+  +\overline P_G(a)^2C_G(a)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ q_3-q_1=q_2\text{ と分配律}\bigr).\]
+\[S_{G,3}(a)
+=
+\frac{
+  q_2A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+  +\overline P_G(a)^2C_G(a)
+}{
+  q_2\overline P_G(a)^3
+}
+\quad\bigl(\because\ q_2\ne0\text{ を消去する}\bigr).\]
+グラフ、スピン配位集合、零点添字集合は有限集合、次数、係数添字、多重度とそれらの積は自然数、分配多項式は整数係数多項式、評価点、Fisher 零点、差、逆数、三乗、有限和、評価値と商は代数的数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。
+
+\end{proof}
+
 \begin{theorem}[一般有限グラフの Fisher 零点と有理評価点との差の積]\label{lab:theorem_fisher_zero_rational_shifted_product_coefficient_ratio}
 \cref{lab:def_finite_graph_input}
  の有限グラフについて、

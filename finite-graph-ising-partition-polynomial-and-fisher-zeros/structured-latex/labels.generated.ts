@@ -31,6 +31,7 @@ export const ALL_LABELS = [
   "theorem_even_linear_factor_characterizes_odd_incident_edge_count",
   "theorem_fisher_zero_algebraic_shifted_product_coefficient_ratio",
   "theorem_fisher_zero_algebraic_shifted_product_evaluation_quotient",
+  "theorem_fisher_zero_algebraic_shifted_reciprocal_cube_sum_coefficient_ratio",
   "theorem_fisher_zero_algebraic_shifted_reciprocal_square_sum_coefficient_ratio",
   "theorem_fisher_zero_algebraic_shifted_reciprocal_sum_coefficient_ratio",
   "theorem_fisher_zero_cube_sum_coefficient_ratio",
