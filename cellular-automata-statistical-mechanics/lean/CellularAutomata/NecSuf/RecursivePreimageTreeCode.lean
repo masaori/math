@@ -590,4 +590,35 @@ theorem gluedTableEquivOfSigmaSplitting_apply
       splitY ⟨eIndex i, ePart i u⟩ := by
   simp [gluedTableEquivOfSigmaSplitting, Equiv.sigmaCongr, Equiv.sigmaCongrRight]
 
+
+/-- 添字ごとの部分表が自己写像で閉じているとき、接着した全体表の全単射は
+両側の自己写像と可換する。使うのは添字の全単射、添字ごとの部分表全単射、
+両側の全体表とその従属和を結ぶ全単射、各部分表上に与えた自己写像、および
+それらが全体表の自己写像と両立することだけである。添字が周期成分であること、
+部分表が前像木節点表であること、周期性、最小前周期、二値状態、セル、近傍、
+局所規則は使わない。 -/
+theorem gluedTableEquivOfSigmaSplitting_commutes
+    {I J : Type} {PartX : I → Type} {PartY : J → Type} {TableX TableY : Type}
+    (eIndex : I ≃ J)
+    (ePart : (i : I) → PartX i ≃ PartY (eIndex i))
+    (splitX : (Σ i : I, PartX i) ≃ TableX)
+    (splitY : (Σ j : J, PartY j) ≃ TableY)
+    (SX : TableX → TableX) (SY : TableY → TableY)
+    (stepX : (i : I) → PartX i → PartX i)
+    (stepY : (j : J) → PartY j → PartY j)
+    (hstepX : ∀ (i : I) (u : PartX i), splitX ⟨i, stepX i u⟩ = SX (splitX ⟨i, u⟩))
+    (hstepY : ∀ (j : J) (v : PartY j), splitY ⟨j, stepY j v⟩ = SY (splitY ⟨j, v⟩))
+    (hpart : ∀ (i : I) (u : PartX i), ePart i (stepX i u) = stepY (eIndex i) (ePart i u))
+    (t : TableX) :
+    gluedTableEquivOfSigmaSplitting eIndex ePart splitX splitY (SX t) =
+      SY (gluedTableEquivOfSigmaSplitting eIndex ePart splitX splitY t) := by
+  rcases hp : splitX.symm t with ⟨i, u⟩
+  have ht : splitX ⟨i, u⟩ = t := by
+    rw [← hp]
+    exact splitX.apply_symm_apply t
+  rw [← ht, ← hstepX i u,
+    gluedTableEquivOfSigmaSplitting_apply eIndex ePart splitX splitY i (stepX i u),
+    gluedTableEquivOfSigmaSplitting_apply eIndex ePart splitX splitY i u,
+    hpart i u, hstepY (eIndex i) (ePart i u)]
+
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance

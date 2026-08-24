@@ -2769,25 +2769,32 @@ theorem structurePreservingConfigurationEquiv_apply_of_mem
   subst hidx
   rw [structurePreservingConfigurationEquiv_apply]
 
-/-- 写像符号の等号から接着した全配位全単射は一段発展と可換する。 -/
+/-- 写像符号の等号から接着した全配位全単射は一段発展と可換する。
+この段は必要十分版の従属和接着の可換性を、周期成分分割へ特殊化して得る。
+渡すのは周期成分添字の全単射、成分ごとの全単射、両側の全配位表と
+その従属和を結ぶ全単射、各成分表上の一段発展、および成分ごとの
+一段発展可換性だけである。 -/
 theorem structurePreservingConfigurationEquiv_commutes_globalMap
     (hcode : mapCode NW fW = mapCode N f) (y : V → State) :
     structurePreservingConfigurationEquiv N f NW fW hcode (globalMap N f y) =
       globalMap NW fW (structurePreservingConfigurationEquiv N f NW fW hcode y) := by
-  have hy : y ∈ periodicComponentNodeTable N f (periodicComponentOccurrenceIndex N f y) :=
-    periodicComponentIndex_spec N f y
-  have hFy : globalMap N f y ∈
-      periodicComponentNodeTable N f (periodicComponentOccurrenceIndex N f y) :=
-    globalMap_mem_periodicComponentNodeTable N f _ y hy
-  have hindex : periodicComponentOccurrenceIndex N f (globalMap N f y)
-      = periodicComponentOccurrenceIndex N f y :=
-    periodicComponentOccurrenceIndex_eq_of_mem N f _ (globalMap N f y) hFy
-  rw [structurePreservingConfigurationEquiv_apply_of_mem N f NW fW hcode
-      (periodicComponentOccurrenceIndex N f y) (globalMap N f y) hFy,
-    structurePreservingConfigurationEquiv_apply_of_mem N f NW fW hcode
-      (periodicComponentOccurrenceIndex N f y) y hy]
-  exact (structurePreservingPeriodicComponentEquiv_commutes_globalMap
-    N f NW fW hcode (periodicComponentOccurrenceIndex N f y) ⟨y, hy⟩).symm
+  rw [structurePreservingConfigurationEquiv_eq_glued N f NW fW hcode]
+  refine
+    NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.gluedTableEquivOfSigmaSplitting_commutes
+      _ _ _ _ (globalMap N f) (globalMap NW fW)
+      (fun O u => ⟨globalMap N f (u : V → State),
+        globalMap_mem_periodicComponentNodeTable N f O (u : V → State) u.property⟩)
+      (fun OW v => ⟨globalMap NW fW (v : W → State),
+        globalMap_mem_periodicComponentNodeTable NW fW OW (v : W → State) v.property⟩)
+      ?_ ?_ ?_ y
+  · intro O u
+    rfl
+  · intro OW v
+    rfl
+  · intro O u
+    exact Subtype.ext
+      (structurePreservingPeriodicComponentEquiv_commutes_globalMap
+        N f NW fW hcode O u).symm
 
 end OrbitTreeMatching
 
