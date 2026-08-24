@@ -3031,7 +3031,10 @@ noncomputable instance conjugacyExistenceDecidable :
     Decidable
       (∃ h : (V → State) ≃ (W → State),
         ∀ y, h (globalMap N f y) = globalMap NW fW (h y)) :=
-  decidable_of_iff (mapCode NW fW = mapCode N f)
+  @CellularAutomata.NecSuf.RecursivePreimageTreeCode.hasConjugacyDecidable
+    (V → State) (W → State) (Multiset (Finset (List ℕ)))
+    CellularAutomata.NecSuf.RecursivePreimageTreeCode.mapCodeTypeDecidableEq
+    (globalMap N f) (globalMap NW fW) (mapCode N f) (mapCode NW fW)
     (mapCode_eq_iff_exists_conjugacy N f NW fW)
 
 /-- 符号の有限比較が一致を返した場合に固定する共役全単射。
@@ -3088,6 +3091,16 @@ theorem mapCode_eq_iff_exists_conjugacy_of_necSuf :
     (mapCode N f) (mapCode NW fW)
     (exists_conjugacy_of_mapCode_eq N f NW fW)
     (fun hconj => mapCode_transport N f NW fW hconj.choose hconj.choose_spec)
+
+/-- 具体版の共役存在判定は、符号型の等号判定と完全不変量の
+同値だけを必要十分版へ渡した特殊化である。配位型の有限性と
+等号判定はこの判定に使わない。 -/
+theorem conjugacyExistenceDecidable_of_necSuf :
+    @conjugacyExistenceDecidable V _ _ N f W _ _ NW fW =
+      @hasConjugacyDecidable (V → State) (W → State)
+        (Multiset (Finset (List ℕ))) mapCodeTypeDecidableEq
+        (globalMap N f) (globalMap NW fW) (mapCode N f) (mapCode NW fW)
+        (mapCode_eq_iff_exists_conjugacy N f NW fW) := rfl
 
 /-- 具体版の有限決定が返す `Option` は、必要十分版の選択に
     符号型 `Multiset (Finset (List ℕ))` の等号判定と、符号の等号から

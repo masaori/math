@@ -1046,6 +1046,7 @@ targets=(
   CellularAutomata.RecursivePreimageTreeCode.baseWord_transport
   CellularAutomata.RecursivePreimageTreeCode.hasConjugacy_eq
   CellularAutomata.RecursivePreimageTreeCode.mapCode_eq_iff_exists_conjugacy_of_necSuf
+  CellularAutomata.RecursivePreimageTreeCode.conjugacyExistenceDecidable_of_necSuf
   CellularAutomata.RecursivePreimageTreeCode.conjugacyFromMapCodeDecision_of_necSuf
   CellularAutomata.RecursivePreimageTreeCode.image_periodicOrbitTable
   CellularAutomata.RecursivePreimageTreeCode.mapCode_transport
