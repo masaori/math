@@ -176,11 +176,9 @@ theorem exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
 
 /-- 深さ `depth` までの前像木の再帰的対応。後続段では、子の出現を
     重複度つきで全単射に対応させ、対応する各子で一つ浅い対応を要求する。 -/
-def HasTreeMatching : (depth : ℕ) → (V → State) → (W → State) → Prop
-  | 0, _, _ => True
-  | depth + 1, y, yW =>
-      ∃ e : (nonperiodicChildren N f y).val ≃ (nonperiodicChildren NW fW yW).val,
-        ∀ z : (nonperiodicChildren N f y).val, HasTreeMatching depth z (e z)
+abbrev HasTreeMatching :=
+  NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.HasTreeMatching
+    (nonperiodicChildren N f) (nonperiodicChildren NW fW)
 
 /-! 打ち切り前像木の節点は、根または非周期一段前像を根とする子部分木の節点である。
     子の出現を型に残すことで、個数一致だけでなく選んだ再帰分岐そのものを記録する。 -/
@@ -676,13 +674,9 @@ theorem treeNodeCount_eq_of_hasTreeMatching
 theorem hasTreeMatching_of_codeAtDepth_eq
     (depth : ℕ) (y : V → State) (yW : W → State)
     (hcode : codeAtDepth NW fW depth yW = codeAtDepth N f depth y) :
-    HasTreeMatching N f NW fW depth y yW := by
-  induction depth generalizing y yW with
-  | zero => trivial
-  | succ depth ih =>
-      obtain ⟨e, he⟩ := exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
-        N f NW fW depth y yW hcode
-      exact ⟨e, fun z => ih z (e z) (he z)⟩
+    HasTreeMatching N f NW fW depth y yW :=
+  NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.hasTreeMatching_of_codeAtDepth_eq
+    (nonperiodicChildren N f) (nonperiodicChildren NW fW) depth y yW hcode
 
 end ChildCodeMatching
 

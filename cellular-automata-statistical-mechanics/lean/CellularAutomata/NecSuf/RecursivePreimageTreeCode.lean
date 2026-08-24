@@ -364,4 +364,31 @@ theorem exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
     (codeAtDepth childrenX depth) (codeAtDepth childrenY depth)
     (childCodeMultiset_eq_of_codeAtDepth_succ_eq childrenX childrenY depth x y hcode)
 
+/-- 深さ `depth` までの有限子表の再帰的対応。深さ零では条件を置かず、
+後続段では子の出現を重複度つき全単射で対応させ、対応した子ごとに
+一つ浅い対応を要求する。要るのは二つの有限子表だけであり、型全体の
+有限性、自己写像、周期性、二値状態、セル、近傍、局所規則は使わない。 -/
+def HasTreeMatching (childrenX : X → Finset X) (childrenY : Y → Finset Y) :
+    (depth : ℕ) → X → Y → Prop
+  | 0, _, _ => True
+  | depth + 1, x, y =>
+      ∃ e : (childrenX x).val ≃ (childrenY y).val,
+        ∀ z : (childrenX x).val, HasTreeMatching childrenX childrenY depth z (e z)
+
+/-- 等しい打ち切り再帰符号から、その深さ全体にわたる有限子表の対応を
+深さ帰納法で構成できる。各後続段で使うのは、直前に分離した子出現対応と
+一つ浅い帰納仮定だけである。型全体の有限性、自己写像、周期性、
+最小前周期、二値状態、セル、近傍、局所規則は使わない。 -/
+theorem hasTreeMatching_of_codeAtDepth_eq
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    (depth : ℕ) (x : X) (y : Y)
+    (hcode : codeAtDepth childrenY depth y = codeAtDepth childrenX depth x) :
+    HasTreeMatching childrenX childrenY depth x y := by
+  induction depth generalizing x y with
+  | zero => trivial
+  | succ depth ih =>
+      obtain ⟨e, he⟩ := exists_child_occurrence_equiv_of_codeAtDepth_succ_eq
+        childrenX childrenY depth x y hcode
+      exact ⟨e, fun z => ih z (e z) (he z)⟩
+
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance
