@@ -77,4 +77,22 @@ theorem quotient_eq_of_cross_exponent_eq {L : ℕ} (hL : 0 < L) (t t' : ℤ)
   have hne : ((L : ℤ) + 1) ^ 3 * (L : ℤ) ^ 3 ≠ 0 := mul_ne_zero hL1 hL0
   exact (mul_left_cancel₀ hne h').symm
 
+/-- 人手証明の必要性の第三段の前半。正の有理数の非零素指数は有限集合に収まる。 -/
+theorem finite_prime_support_of_rat (a : ℚ) :
+    ∃ S : Finset ℕ, ∀ p : ℕ, p.Prime → p ∉ S → padicValRat p a = 0 := by
+  refine ⟨a.num.natAbs.factorization.support ∪ a.den.factorization.support, ?_⟩
+  intro p hp hpS
+  have hpNum : p ∉ a.num.natAbs.factorization.support := by
+    exact fun hmem => hpS (Finset.mem_union_left _ hmem)
+  have hpDen : p ∉ a.den.factorization.support := by
+    exact fun hmem => hpS (Finset.mem_union_right _ hmem)
+  have hnum : padicValNat p a.num.natAbs = 0 := by
+    rw [← Nat.factorization_def _ hp]
+    exact Finsupp.notMem_support_iff.mp hpNum
+  have hden : padicValNat p a.den = 0 := by
+    rw [← Nat.factorization_def _ hp]
+    exact Finsupp.notMem_support_iff.mp hpDen
+  rw [padicValRat, padicValInt, hnum, hden]
+  simp
+
 end Ising3DCut.LimitQuantity
