@@ -7537,4 +7537,125 @@ Z_2(2)-Z_2(1)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_eventually_constant_iff_power_identity",
+    kind: "claim",
+    title: { text: "末尾定数性は隣接する箱の分配多項式の冪等式に同値である" },
+    labels: ["claim_eventually_constant_iff_power_identity"],
+    habitat: "R",
+    realEscape:
+      "有限箱の量 a_L(q) は正の有理数の正の実数乗根として ℝ に住むが、箱の大きさの極限は取らない。同値性の右辺は ℤ における等式であり、上限・下限・級数・指数関数・実対数を使わない。",
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " をとる。有限箱の量の列 ",
+        math(String.raw`L\mapsto a_L(q)`),
+        "（",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        "）が末尾で定数である（",
+        ref("def_eventually_constant_finite_box_sequence"),
+        "）ための必要十分条件は、正の自然数 ",
+        math(String.raw`L_0`),
+        " が存在して、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`Z_L(q)^{\#V_{L+1}}=Z_{L+1}(q)^{\#V_L}`,
+      ),
+      paragraph([
+        "が成り立つことである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず末尾定数性を仮定する。閾値 ",
+        math(String.raw`L_0`),
+        " と正の実数 ",
+        math(String.raw`c`),
+        " をとり、",
+        math(String.raw`L\ge L_0`),
+        " とする。定義より ",
+        math(String.raw`a_L(q)=c`),
+        " かつ ",
+        math(String.raw`a_{L+1}(q)=c`),
+        " である（",
+        ref("def_eventually_constant_finite_box_sequence"),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_L(q)^{\#V_{L+1}}
+&=\bigl(a_L(q)^{\#V_L}\bigr)^{\#V_{L+1}}
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})\\
+&=c^{\#V_L\,\#V_{L+1}}
+&&(\because\ a_L(q)=c)\\
+&=\bigl(c^{\#V_{L+1}}\bigr)^{\#V_L}
+&&(\because\ \text{正の実数の冪の指数法則})\\
+&=\bigl(a_{L+1}(q)^{\#V_{L+1}}\bigr)^{\#V_L}
+&&(\because\ a_{L+1}(q)=c)\\
+&=Z_{L+1}(q)^{\#V_L}
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つので、冪等式が従う。",
+      ]),
+      paragraph([
+        "逆に、閾値 ",
+        math(String.raw`L_0`),
+        " 以後で冪等式が成り立つと仮定し、",
+        math(String.raw`L\ge L_0`),
+        " とする。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a_L(q)^{\#V_L\,\#V_{L+1}}
+&=\bigl(a_L(q)^{\#V_L}\bigr)^{\#V_{L+1}}
+&&(\because\ \text{正の実数の冪の指数法則})\\
+&=Z_L(q)^{\#V_{L+1}}
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})\\
+&=Z_{L+1}(q)^{\#V_L}
+&&(\because\ \text{仮定した冪等式})\\
+&=\bigl(a_{L+1}(q)^{\#V_{L+1}}\bigr)^{\#V_L}
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})\\
+&=a_{L+1}(q)^{\#V_L\,\#V_{L+1}}
+&&(\because\ \text{正の実数の冪の指数法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。",
+        math(String.raw`\#V_L\,\#V_{L+1}`),
+        " は正の自然数であり、正の実数のその冪は狭義単調増加なので単射である。ゆえに ",
+        math(String.raw`a_L(q)=a_{L+1}(q)`),
+        " が、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について成り立つ。",
+      ]),
+      paragraph([
+        "そこで ",
+        math(String.raw`c:=a_{L_0}(q)`),
+        " と置き、",
+        math(String.raw`L\ge L_0`),
+        " についての ",
+        math(String.raw`a_L(q)=c`),
+        " を ",
+        math(String.raw`L`),
+        " に関する帰納法で示す。",
+        math(String.raw`L=L_0`),
+        " では定義から等号が成り立つ。",
+        math(String.raw`L\ge L_0`),
+        " で ",
+        math(String.raw`a_L(q)=c`),
+        " が成り立つとすると、前段の ",
+        math(String.raw`a_L(q)=a_{L+1}(q)`),
+        " から ",
+        math(String.raw`a_{L+1}(q)=c`),
+        " を得る。したがって列は末尾で定数である（",
+        ref("def_eventually_constant_finite_box_sequence"),
+        "）。",
+      ]),
+    ],
+  },
 ]);

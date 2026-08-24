@@ -28,6 +28,7 @@ export const ALL_LABELS = [
   "claim_distinct_roots_do_not_determine_polynomial",
   "claim_edge_endpoints_parity",
   "claim_even_multiplicity",
+  "claim_eventually_constant_iff_power_identity",
   "claim_factorization_type_determines_root_minimal_degrees",
   "claim_finite_box_equalities_transfer_to_limit_quantity",
   "claim_finite_box_sequence_at_two_is_not_constant",
