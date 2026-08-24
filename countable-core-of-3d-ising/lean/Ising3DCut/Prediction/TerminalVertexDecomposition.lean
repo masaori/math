@@ -123,6 +123,24 @@ theorem terminals_of_internalEdge_have_same_vertex {V Edge : Type*}
   obtain ⟨v, _, hsv⟩ := (mem_internalEdges_iff vertices incidentEdges s).mp hs
   exact terminals_of_internalEdgeAt_have_same_vertex incidentEdges v s hsv t u ht hu
 
+/-- 完全マッチングに選ばれた内部辺のうち、元頂点 `v` の city に属するものだけを集める。
+復号した辺集合の `v` での次数と、city 内で内部辺に覆われる端子数を比較するための有限集合である。 -/
+def matchingInternalEdgesAt {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) : Finset (Finset (Σ _ : V, Edge)) :=
+  matching.filter (· ∈ internalEdgesAt incidentEdges v)
+
+/-- 辺が `v` の city で選ばれた内部辺であることは、完全マッチングと
+`v` の内部辺集合の両方に属することと同値である。 -/
+theorem mem_matchingInternalEdgesAt_iff {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (s : Finset (Σ _ : V, Edge)) :
+    s ∈ matchingInternalEdgesAt incidentEdges v matching ↔
+      s ∈ matching ∧ s ∈ internalEdgesAt incidentEdges v := by
+  simp [matchingInternalEdgesAt]
+
 /-- 元の辺 `e` に対応する外部辺は、`e` の二端点に属する二つの端子を結ぶ。 -/
 def externalEdge {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
     (endpoint₀ endpoint₁ : Edge → V) (e : Edge) : Finset (Σ _ : V, Edge) :=
