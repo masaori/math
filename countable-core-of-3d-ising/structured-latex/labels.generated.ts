@@ -66,6 +66,7 @@ export const ALL_LABELS = [
   "claim_pointwise_equal_positive_real_sequences_transfer_limit",
   "claim_pointwise_root_sequence_equality_implies_tail_agreement",
   "claim_power_identity_iff_rational_power_form",
+  "claim_rational_power_base_congruences",
   "claim_rational_power_base_denominator_primes",
   "claim_rational_values_determine_partition_polynomial",
   "claim_roots_leading_coefficient_multiplicities_determine_polynomial",

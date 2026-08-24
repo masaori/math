@@ -8028,4 +8028,202 @@ v_p\bigl(Z_L(q)\bigr)
       ]),
     ],
   },
+
+  {
+    id: "soundness_bridge_claim_rational_power_base_congruences",
+    kind: "claim",
+    title: { text: "破れ数ゼロの項から点数乗表示の底に合同式の制約が出る" },
+    labels: ["claim_rational_power_base_congruences"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "互いに素な正の自然数 ",
+        math(String.raw`a,b`),
+        " により正の有理数を ",
+        math(String.raw`q=a/b`),
+        " と表す。正の自然数 ",
+        math(String.raw`L_0`),
+        " と正の有理数 ",
+        math(String.raw`c\in\mathbb Q_{>0}`),
+        " が存在して、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`Z_L(q)=c^{\#V_L}`),
+        " が成り立つとし、",
+        math(String.raw`c`),
+        " の既約分数表示を ",
+        math(String.raw`c=u/v`),
+        "（",
+        math(String.raw`u,v`),
+        " は互いに素な正の自然数）とする（",
+        ref("claim_power_identity_iff_rational_power_form"),
+        " の右辺の形）。このとき ",
+        math(String.raw`L\ge\max(L_0,2)`),
+        " のすべてについて、二つの整数の合同式",
+      ]),
+      displayMath(
+        String.raw`\Omega_L(0)\,v^{\#V_L}\equiv u^{\#V_L}\pmod a,
+\qquad
+b\ \bigm|\ \Omega_L(0)\,v^{\#V_L}`,
+      ),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`\Omega_L(0)`),
+        " は破れ数が ",
+        math(String.raw`0`),
+        " の配位の個数（",
+        ref("def_multiplicity"),
+        "）である。主張は ",
+        math(String.raw`\mathbb Z`),
+        " の合同式だけからなり、箱の大きさの極限も正の実数乗根も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中だけで用いる整数を",
+      ]),
+      displayMath(
+        String.raw`P_L:=\sum_{m=0}^{\#E_L}\Omega_L(m)\,a^{m}\,b^{\#E_L-m}\in\mathbb Z_{>0}`,
+      ),
+      paragraph([
+        "と置く。",
+        ref("claim_rational_power_base_denominator_primes"),
+        " の証明の第一段と同じ計算により ",
+        math(String.raw`Z_L(q)=P_L/b^{\#E_L}`),
+        " が ",
+        math(String.raw`\mathbb Q_{>0}`),
+        " の等式として成り立つ。",
+      ]),
+      paragraph([
+        "まず整数の等式を作る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{P_L}{b^{\#E_L}}
+&=Z_L(q)
+&&(\because\ \text{上の表示})\\
+&=c^{\#V_L}
+&&(\because\ \text{仮定した表示})\\
+&=\frac{u^{\#V_L}}{v^{\#V_L}}
+&&(\because\ c=u/v \text{ と正の有理数の冪の指数法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、両辺へ正の自然数 ",
+        math(String.raw`b^{\#E_L}v^{\#V_L}`),
+        " を掛けて",
+      ]),
+      displayMath(
+        String.raw`P_L\,v^{\#V_L}=u^{\#V_L}\,b^{\#E_L}`,
+      ),
+      paragraph([
+        "を得る。",
+      ]),
+      paragraph([
+        "次に ",
+        math(String.raw`P_L`),
+        " を ",
+        math(String.raw`a`),
+        " で割った余りを取る。",
+        math(String.raw`m\ge1`),
+        " の各項は因子 ",
+        math(String.raw`a^{m}`),
+        " を持つので ",
+        math(String.raw`a`),
+        " で割り切れる。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+P_L
+&=\Omega_L(0)\,b^{\#E_L}+\sum_{m=1}^{\#E_L}\Omega_L(m)\,a^{m}\,b^{\#E_L-m}
+&&(\because\ \text{有限和を } m=0 \text{ の項と残りへ分ける})\\
+&\equiv\Omega_L(0)\,b^{\#E_L}\pmod a
+&&(\because\ m\ge1 \text{ の各項が } a \text{ で割り切れる})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。これを上の整数の等式へ入れると ",
+        math(String.raw`\Omega_L(0)\,b^{\#E_L}\,v^{\#V_L}\equiv u^{\#V_L}\,b^{\#E_L}\pmod a`),
+        " となる。",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`b`),
+        " は互いに素なので ",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`b^{\#E_L}`),
+        " も互いに素であり、合同式の両辺から ",
+        math(String.raw`b^{\#E_L}`),
+        " を約せる。よって",
+      ]),
+      displayMath(
+        String.raw`\Omega_L(0)\,v^{\#V_L}\equiv u^{\#V_L}\pmod a`,
+      ),
+      paragraph([
+        "が従う。",
+      ]),
+      paragraph([
+        "最後に ",
+        math(String.raw`b`),
+        " で割った余りを取る。回文性 ",
+        math(String.raw`\Omega_L(m)=\Omega_L(\#E_L-m)`),
+        "（",
+        ref("claim_palindrome"),
+        "）により、",
+        math(String.raw`m=\#E_L`),
+        " の項の係数は ",
+        math(String.raw`\Omega_L(\#E_L)=\Omega_L(0)`),
+        " である。",
+        math(String.raw`m\le\#E_L-1`),
+        " の各項は因子 ",
+        math(String.raw`b^{\#E_L-m}`),
+        " を持ち、その指数は ",
+        math(String.raw`1`),
+        " 以上なので ",
+        math(String.raw`b`),
+        " で割り切れる。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+P_L
+&=\Omega_L(0)\,a^{\#E_L}+\sum_{m=0}^{\#E_L-1}\Omega_L(m)\,a^{m}\,b^{\#E_L-m}
+&&(\because\ \blkref{claim_palindrome} \text{ と有限和の分割})\\
+&\equiv\Omega_L(0)\,a^{\#E_L}\pmod b
+&&(\because\ m\le\#E_L-1 \text{ の各項が } b \text{ で割り切れる})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`L\ge2`),
+        " では ",
+        math(String.raw`\#E_L\ge1`),
+        " なので、上の整数の等式の右辺 ",
+        math(String.raw`u^{\#V_L}b^{\#E_L}`),
+        " は ",
+        math(String.raw`b`),
+        " で割り切れる。よって ",
+        math(String.raw`\Omega_L(0)\,a^{\#E_L}\,v^{\#V_L}\equiv0\pmod b`),
+        " であり、",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`b`),
+        " が互いに素であることから ",
+        math(String.raw`a^{\#E_L}`),
+        " を約せて ",
+        math(String.raw`b\mid\Omega_L(0)\,v^{\#V_L}`),
+        " が従う。",
+      ]),
+      paragraph([
+        "なお、この論法は ",
+        math(String.raw`\Omega_L(0)`),
+        " の値を ",
+        math(String.raw`2`),
+        " と特定していない。用いたのは ",
+        ref("claim_partition_support_endpoints"),
+        " と ",
+        ref("claim_palindrome"),
+        " だけであり、両端の係数が一致することしか使っていない。",
+      ]),
+    ],
+  },
 ]);
