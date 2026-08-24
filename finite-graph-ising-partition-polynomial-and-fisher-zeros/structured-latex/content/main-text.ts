@@ -5032,9 +5032,22 @@ x^{m-2}
 \right)
 \prod_{j=1}^{d}(x-\alpha_j)
 \quad\bigl(\because\ \text{代数的閉体上の重複度込み一次因子分解}\bigr).`),
+      displayMath(String.raw`\overline P_G(a)
+=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\prod_{j=1}^{d}(a-\alpha_j)
+\quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\prod_{j=1}^{d}(a-\alpha_j)
+\ne0
+\quad\bigl(\because\ \overline P_G(a)\ne0\text{ を直前の等式へ代入する}\bigr).`),
       displayMath(String.raw`\prod_{j=1}^{d}(a-\alpha_j)
 \ne0
-\quad\bigl(\because\ \overline P_G(a)\ne0\text{ と一次因子分解}\bigr).`),
+\quad\bigl(\because\ \overline{\mathbb Q}\text{ の零積律の対偶}\bigr).`),
       displayMath(String.raw`a-\alpha_j
 \ne0
 \qquad(1\le j\le d)
