@@ -5376,10 +5376,39 @@ x^{m-3}
 =
 \sum_{m=3}^{|E|}
 \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
+  \prod_{r=0}^{2}
+  \eta_{\mathbb N,\mathbb Q}(m-r)
+\right)
+x^{m-3}
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は有限積を保つ}\bigr).`),
+      displayMath(String.raw`D^3\overline P_G(x)
+=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(
+    \Omega_G(m)
+    \prod_{r=0}^{2}(m-r)
+  \right)
+\right)
+x^{m-3}
+\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は有限積を保つ}\bigr).`),
+      displayMath(String.raw`D^3\overline P_G(x)
+=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)m(m-1)(m-2)\right)
+\right)
+x^{m-3}
+\quad\bigl(\because\ \text{有限積を展開する}\bigr).`),
+      displayMath(String.raw`D^3\overline P_G(x)
+=
+\sum_{m=3}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)(m-2)\Omega_G(m)\right)
 \right)
 x^{m-3}
-\quad\bigl(\because\ \text{二つの標準単射は積を保つ}\bigr).`),
+\quad\bigl(\because\ \mathbb N\text{ の乗法の交換律}\bigr).`),
       displayMath(String.raw`D^3\overline P_G(a)
 =
 \sum_{m=3}^{|E|}
@@ -5395,6 +5424,8 @@ a^{m-3}
 a^{m-3}
 =C_G(a)
 \quad\bigl(\because\ C_G(a)\text{ の定義}\bigr).`),
+      displayMath(String.raw`D^3\overline P_G(a)=C_G(a)
+\quad\bigl(\because\ \text{直前の二つの等式の推移律}\bigr).`),
       paragraph([
         ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
         " と",
@@ -5417,6 +5448,11 @@ a^{m-3}
 \right)
 \prod_{j=1}^{d}(a-\alpha_j)
 \quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\ne0
+\quad\bigl(\because\ \Omega_G(d)>0\text{ かつ二つの標準単射は単射である}\bigr).`),
       displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
 \right)
@@ -5505,8 +5541,41 @@ a^{m-3}
 }
 \quad\bigl(\because\ \text{一次因子分解を分母へ代入する}\bigr).`),
       displayMath(String.raw`\frac{D^3\overline P_G(a)}{\overline P_G(a)}
-=T_{G,3}(a)
+=
+\frac{
+  \displaystyle
+  \sum_{k=1}^{d}
+  \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+  \sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+  \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(a-\alpha_j)
+}{
+  \displaystyle
+  \prod_{j=1}^{d}(a-\alpha_j)
+}
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(\Omega_G(d)))\ne0\text{ を消去する}\bigr).`),
+      displayMath(String.raw`\frac{D^3\overline P_G(a)}{\overline P_G(a)}
+=
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+\frac{
+  \displaystyle
+  \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell,\ j\ne h}}(a-\alpha_j)
+}{
+  \displaystyle
+  \prod_{j=1}^{d}(a-\alpha_j)
+}
+\quad\bigl(\because\ \text{有限三重和に対する分配律}\bigr).`),
+      displayMath(String.raw`\frac{D^3\overline P_G(a)}{\overline P_G(a)}
+=
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+\frac{1}{(a-\alpha_k)(a-\alpha_\ell)(a-\alpha_h)}
 \quad\bigl(\because\ \text{各項で三つの非零因子を消去する}\bigr).`),
+      displayMath(String.raw`\frac{D^3\overline P_G(a)}{\overline P_G(a)}
+=T_{G,3}(a)
+\quad\bigl(\because\ T_{G,3}(a)\text{ の定義}\bigr).`),
       paragraph([ref("def_fisher_zero_algebraic_shifted_reciprocal_sum"), " より、"]),
       displayMath(String.raw`\mathcal R_G(a)S_{G,2}(a)
 =
@@ -5591,13 +5660,47 @@ S_{G,3}(a)
       displayMath(String.raw`q_2S_{G,3}(a)
 =
 \frac{
+  \overline P_G(a)^2C_G(a)
+  -q_1A_G(a)^3
+  +q_3A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ \text{分配律}\bigr).`),
+      displayMath(String.raw`q_2S_{G,3}(a)
+=
+\frac{
+  -q_1A_G(a)^3
+  +q_3A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+  +\overline P_G(a)^2C_G(a)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ \overline{\mathbb Q}\text{ の加法の交換律}\bigr).`),
+      displayMath(String.raw`q_2S_{G,3}(a)
+=
+\frac{
+  (q_3-q_1)A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+  +\overline P_G(a)^2C_G(a)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ \text{分配律}\bigr).`),
+      displayMath(String.raw`q_2S_{G,3}(a)
+=
+\frac{
   q_2A_G(a)^3
   -q_3\overline P_G(a)A_G(a)B_G(a)
   +\overline P_G(a)^2C_G(a)
 }{
   \overline P_G(a)^3
 }
-\quad\bigl(\because\ q_3-q_1=q_2\text{ と分配律}\bigr).`),
+\quad\bigl(\because\ q_3-q_1=q_2\bigr).`),
+      displayMath(String.raw`q_2\ne0
+\quad\bigl(\because\ 2\ne0\text{ かつ二つの標準単射は単射である}\bigr).`),
       displayMath(String.raw`S_{G,3}(a)
 =
 \frac{
