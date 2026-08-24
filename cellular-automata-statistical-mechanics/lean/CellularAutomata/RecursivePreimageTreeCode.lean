@@ -2681,10 +2681,25 @@ noncomputable def structurePreservingPeriodicComponentEquiv
 noncomputable def structurePreservingConfigurationEquiv
     (hcode : mapCode NW fW = mapCode N f) :
     Equiv (V → State) (W → State) :=
-  (configurationComponentSigmaEquiv N f).symm |>.trans
-    (Equiv.sigmaCongr (structurePreservingOrbitEquiv N f NW fW hcode)
-      (structurePreservingPeriodicComponentEquiv N f NW fW hcode)) |>.trans
-        (configurationComponentSigmaEquiv NW fW)
+  NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.gluedTableEquivOfSigmaSplitting
+    (structurePreservingOrbitEquiv N f NW fW hcode)
+    (structurePreservingPeriodicComponentEquiv N f NW fW hcode)
+    (configurationComponentSigmaEquiv N f)
+    (configurationComponentSigmaEquiv NW fW)
+
+/-- 全配位全単射は、必要十分版の従属和接着を周期成分分割へ
+特殊化したものである。この段で使うのは、周期成分添字の全単射、
+添字ごとの成分表全単射、および両側の全配位表をその従属和と
+結ぶ全単射だけである。 -/
+theorem structurePreservingConfigurationEquiv_eq_glued
+    (hcode : mapCode NW fW = mapCode N f) :
+    structurePreservingConfigurationEquiv N f NW fW hcode =
+      NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.gluedTableEquivOfSigmaSplitting
+        (structurePreservingOrbitEquiv N f NW fW hcode)
+        (structurePreservingPeriodicComponentEquiv N f NW fW hcode)
+        (configurationComponentSigmaEquiv N f)
+        (configurationComponentSigmaEquiv NW fW) :=
+  rfl
 
 /-- 周期成分ごとの再帰的前像木対応を接着した全配位対応は全単射である。 -/
 theorem structurePreservingConfigurationEquiv_bijective
