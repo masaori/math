@@ -110,4 +110,25 @@ theorem primePowerProduct_pos {S : Finset ℕ} (t : ℕ → ℤ)
     exact_mod_cast (hS p hp).pos
   exact zpow_pos hp0 _
 
+/-- 復元の有限積の素数 `r` における素指数は、`r` が有限集合に属するとき指定値 `t r`、
+属さないとき零である。有限積の各因子へ付値の積法則を一つずつ適用する。 -/
+theorem padicValRat_primePowerProduct {S : Finset ℕ} (t : ℕ → ℤ)
+    (hS : ∀ p ∈ S, Nat.Prime p) (r : ℕ) (hr : Nat.Prime r) :
+    padicValRat r (primePowerProduct S t) = if r ∈ S then t r else 0 := by
+  letI : Fact (Nat.Prime r) := ⟨hr⟩
+  simp only [primePowerProduct, Finset.prod_apply]
+  rw [padicValRat.prod]
+  · simp only [padicValRat.zpow]
+    rw [Finset.sum_eq_single r]
+    · simp [hr.one_lt]
+    · intro p hp hpr
+      have hpPrime := hS p hp
+      have hval : padicValRat r (p : ℚ) = 0 := by
+        exact padicValRat_prime_ne r p hr hpPrime (Ne.symm hpr)
+      simp [hval]
+    · intro hrS
+      simp [hrS]
+  · intro p hp
+    exact zpow_ne_zero _ (by exact_mod_cast (hS p hp).ne_zero)
+
 end Ising3DCut.LimitQuantity
