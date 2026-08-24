@@ -15,6 +15,7 @@
 いずれも ℚ と ℤ の等式だけであり、正の実数乗根も箱の大きさの極限も現れない。
 -/
 import Ising3DCut.LimitQuantity.PartitionValuePositive
+import Ising3DCut.LimitQuantity.FinitelyManyPrimesNotSufficient
 
 namespace Ising3DCut.LimitQuantity
 
@@ -116,19 +117,26 @@ theorem padicValRat_primePowerProduct {S : Finset ℕ} (t : ℕ → ℤ)
     (hS : ∀ p ∈ S, Nat.Prime p) (r : ℕ) (hr : Nat.Prime r) :
     padicValRat r (primePowerProduct S t) = if r ∈ S then t r else 0 := by
   letI : Fact (Nat.Prime r) := ⟨hr⟩
-  simp only [primePowerProduct, Finset.prod_apply]
-  rw [padicValRat.prod]
-  · simp only [padicValRat.zpow]
-    rw [Finset.sum_eq_single r]
-    · simp [hr.one_lt]
-    · intro p hp hpr
-      have hpPrime := hS p hp
-      have hval : padicValRat r (p : ℚ) = 0 := by
-        exact padicValRat_prime_ne r p hr hpPrime (Ne.symm hpr)
-      simp [hval]
-    · intro hrS
-      simp [hrS]
-  · intro p hp
-    exact zpow_ne_zero _ (by exact_mod_cast (hS p hp).ne_zero)
+  classical
+  induction S using Finset.induction_on with
+  | empty => simp [primePowerProduct]
+  | @insert p S hpS ih =>
+      have hpPrime : Nat.Prime p := hS p (Finset.mem_insert_self p S)
+      have hp0 : (p : ℚ) ≠ 0 := by exact_mod_cast hpPrime.ne_zero
+      have hProd0 : primePowerProduct S t ≠ 0 := by
+        apply Finset.prod_ne_zero_iff.mpr
+        intro s hs
+        exact zpow_ne_zero _ (by exact_mod_cast (hS s (Finset.mem_insert_of_mem hs)).ne_zero)
+      have hrec : primePowerProduct (insert p S) t =
+          (p : ℚ) ^ (t p) * primePowerProduct S t := by
+        simp [primePowerProduct, hpS]
+      rw [hrec, padicValRat.mul (zpow_ne_zero _ hp0) hProd0, padicValRat.zpow]
+      rw [ih (fun s hs => hS s (Finset.mem_insert_of_mem hs))]
+      by_cases hpr : p = r
+      · subst p
+        simp [hpS, hr.one_lt]
+      · have hval : padicValRat r (p : ℚ) = 0 :=
+          padicValRat_prime_ne r p hr hpPrime (Ne.symm hpr)
+        simp [Ne.symm hpr, hval]
 
 end Ising3DCut.LimitQuantity
