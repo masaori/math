@@ -14,7 +14,7 @@
 | --- | --- | --- | --- |
 | `check_box_one_value.sage` | 箱 1 に辺が無く、正の有理点で $Z_1(q)=2$、$\#V_1=1$ ゆえ $a_1(q)=2$ | PASS | 5 つの正の有理点で成立 |
 | `check_constant_forces_partition_value.sage` | $\#V_2=8$ と $a_2(q)=2$ から $Z_2(q)=2^8$、および $Z_2(1)=2^8$ | PASS | 成立 |
-| `check_strict_monotonicity.sage` | $Z_2$ の係数の非負性・最高次係数の正値・正の有理数上の狭義単調増加・$Z_2(q)=Z_2(1)$ の正の有理解が 1 のみ | PASS | 辺数 12、正の有理解は $q=1$ のみ |
+| `check_strict_monotonicity.sage` | $Z_2$ の係数の非負性・二変数の差商恒等式と差商の非負係数・非零性・$Z_2(q)=Z_2(1)$ の正の有理解が 1 のみ | PASS | 辺数 12、全ての正の有理数 $q<r$ で狭義単調、正の有理解は $q=1$ のみ |
 
 ## 備考
 

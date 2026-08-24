@@ -14,12 +14,27 @@ for degree in range(edge_count + 1):
     assert polynomial[ZZ(degree)] >= ZZ(0)
 assert polynomial[edge_count] > ZZ(0)
 
-# 狭義単調増加: 正の有理数 q < r で Z_2(q) < Z_2(r)。
-sample = [QQ(1) / QQ(7), QQ(1) / QQ(2), QQ(1), QQ(3) / QQ(2), QQ(2), QQ(5)]
-for i in range(len(sample)):
-    for j in range(i + 1, len(sample)):
-        assert sample[i] < sample[j]
-        assert polynomial(sample[i]) < polynomial(sample[j])
+# 狭義単調増加を有限標本ではなく二変数の多項式恒等式として検証する。
+# Z_2(R)-Z_2(Q)=(R-Q)D(Q,R) で、D の係数は全て非負かつ D は非零である。
+bivariate_ring = PolynomialRing(ZZ, names=("Q", "R"))
+Q, R = bivariate_ring.gens()
+polynomial_Q = bivariate_ring(polynomial(Q))
+polynomial_R = bivariate_ring(polynomial(R))
+difference = polynomial_R - polynomial_Q
+quotient, remainder = difference.quo_rem(R - Q)
+assert remainder == 0
+assert difference == (R - Q) * quotient
+assert all(coefficient >= 0 for coefficient in quotient.coefficients())
+assert quotient != 0
+
+# 各正次数 m の寄与は c_m(R^(m-1)+...+Q^(m-1)) であり、
+# Q,R>0 なら非負、最高次係数の寄与が正なので D(Q,R)>0 となる。
+expected_quotient = sum(
+    polynomial[m] * sum(R ** (m - 1 - k) * Q ** k for k in range(m))
+    for m in range(1, edge_count + 1)
+)
+assert quotient == expected_quotient
+assert polynomial[edge_count] > 0
 
 # Z_2(q)=Z_2(1) を満たす正の有理点は 1 のみ。
 shifted = polynomial - polynomial_ring(polynomial(QQ(1)))
