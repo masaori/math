@@ -1,8 +1,10 @@
 degree_pairs = [
-    (NN(3), NN(29)),
-    (NN(5), NN(11)),
-    (NN(11), NN(5)),
-    (NN(29), NN(3)),
+    (NN(3), NN(30)),
+    (NN(4), NN(16)),
+    (NN(6), NN(9)),
+    (NN(9), NN(6)),
+    (NN(16), NN(4)),
+    (NN(30), NN(3)),
 ]
 
 for p, q in degree_pairs:
