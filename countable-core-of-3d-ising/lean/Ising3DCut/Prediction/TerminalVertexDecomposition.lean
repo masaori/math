@@ -112,6 +112,17 @@ theorem mem_internalEdges_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge
       ∃ v ∈ vertices, s ∈ internalEdgesAt incidentEdges v := by
   simp [internalEdges]
 
+/-- Terminal graph 全体の内部辺に属する二端子も、同じ元頂点に属する。
+内部辺が属する city を取り出し、city 内の二端子についての補題へ戻す。 -/
+theorem terminals_of_internalEdge_have_same_vertex {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (incidentEdges : V → Finset Edge)
+    (s : Finset (Σ _ : V, Edge)) (hs : s ∈ internalEdges vertices incidentEdges)
+    (t u : Σ _ : V, Edge) (ht : t ∈ s) (hu : u ∈ s) :
+    t.1 = u.1 := by
+  obtain ⟨v, _, hsv⟩ := (mem_internalEdges_iff vertices incidentEdges s).mp hs
+  exact terminals_of_internalEdgeAt_have_same_vertex incidentEdges v s hsv t u ht hu
+
 /-- 元の辺 `e` に対応する外部辺は、`e` の二端点に属する二つの端子を結ぶ。 -/
 def externalEdge {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
     (endpoint₀ endpoint₁ : Edge → V) (e : Edge) : Finset (Σ _ : V, Edge) :=

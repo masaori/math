@@ -472,6 +472,7 @@ targets=(
   Ising3DCut.NecSuf.coprime_of_common_prime_dvd_left
   Ising3DCut.LimitQuantity.rational_power_base_denominator_coprime_to_numerator_viaNecSuf
   Ising3DCut.Prediction.terminal_of_mem_internalEdgeAt
+  Ising3DCut.Prediction.terminals_of_internalEdge_have_same_vertex
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
