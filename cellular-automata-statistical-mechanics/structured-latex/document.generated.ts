@@ -52,6 +52,7 @@ import blocks_periodic_point_count from './content/periodic-point-count.ts'
 import blocks_recursive_preimage_tree_code from './content/recursive-preimage-tree-code.ts'
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_reversibility_finite_decidability from './content/reversibility-finite-decidability.ts'
+import blocks_reversible_global_map_cycle_type from './content/reversible-global-map-cycle-type.ts'
 import blocks_time_expansion_dependency from './content/time-expansion-dependency.ts'
 import blocks_transitive_closure_antisymmetry from './content/transitive-closure-antisymmetry.ts'
 
@@ -93,6 +94,7 @@ export type AllBlocks = [
   ...typeof blocks_recursive_preimage_tree_code,
   ...typeof blocks_redundant_neighbor,
   ...typeof blocks_reversibility_finite_decidability,
+  ...typeof blocks_reversible_global_map_cycle_type,
   ...typeof blocks_time_expansion_dependency,
   ...typeof blocks_transitive_closure_antisymmetry,
 ]
