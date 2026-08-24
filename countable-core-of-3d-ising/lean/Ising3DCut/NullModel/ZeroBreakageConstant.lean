@@ -9,7 +9,7 @@
 
 第二段（定値配位の破れ数が 0 であること）は既に
 `Ising3DCut.NullModel.PartitionSupportEndpoints` の `brokenCount_constConfig` にある。
-第三段（多重度がちょうど 2 であること）は台帳で割った次の行が担う。
+第三段。原点での値への単射と既存の二つの定値配位を束ねる   `multiplicity_zero_eq_two`
 
 住処: `Fin`、`Nat`、整数 ±1、有限集合のみ。ℝ / ℂ は現れない。
 -/
@@ -102,3 +102,34 @@ theorem eq_zeroSite_value_of_brokenCount_zero
       have hlt : coordSum a' < coordSum a := by omega
       rw [← hstep]
       exact ih (coordSum a') hlt a' rfl
+
+/-- 第三段。破れ数 `0` の配位は、原点での値によって一意に決まり、
+二つの定値配位が実在するので、多重度はちょうど `2` である。 -/
+theorem multiplicity_zero_eq_two {L : ℕ} (hL : 0 < L) :
+    multiplicity L 0 = 2 := by
+  let valueAtOrigin : LevelSet L 0 → Spin := fun σ => σ.1 (zeroSite hL)
+  have hinjective : Function.Injective valueAtOrigin := by
+    intro σ τ hvalue
+    apply Subtype.ext
+    funext a
+    have hσzero : brokenCount σ.1 = 0 := by
+      exact (Finset.mem_filter.mp σ.2).2
+    have hτzero : brokenCount τ.1 = 0 := by
+      exact (Finset.mem_filter.mp τ.2).2
+    rw [eq_zeroSite_value_of_brokenCount_zero hL σ.1 hσzero a,
+      eq_zeroSite_value_of_brokenCount_zero hL τ.1 hτzero a]
+    exact hvalue
+  have hupper : multiplicity L 0 ≤ Fintype.card Spin := by
+    simpa [multiplicity] using Fintype.card_le_of_injective valueAtOrigin hinjective
+  let spinEquivBool : Spin ≃ Bool := {
+    toFun z := if z.1 = 1 then true else false
+    invFun b := if b then ⟨1, Or.inl rfl⟩ else ⟨-1, Or.inr rfl⟩
+    left_inv z := by
+      apply Subtype.ext
+      rcases z.2 with hz | hz <;> simp [hz]
+    right_inv b := by cases b <;> simp }
+  have hspin : Fintype.card Spin = 2 := by
+    rw [Fintype.card_congr spinEquivBool]
+    rfl
+  have hlower := two_le_multiplicity_zero hL
+  omega
