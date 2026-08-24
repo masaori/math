@@ -305,5 +305,30 @@ theorem unselected_terminals_are_covered_by_internal_edges {V Edge : Type*}
   · exact unselected_terminal_one_is_covered_by_internal_edge
       vertices edges incidentEdges endpoint₀ endpoint₁ matching hMatching e he ht₁ hUnselected
 
+/-- 完全マッチングから読み取る元の偶部分グラフ候補は、外部辺として選ばれなかった元の辺の集合である。 -/
+def encodedEvenSubgraph {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (edges : Finset Edge) (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) : Finset Edge :=
+  edges \ selectedOriginalEdges edges endpoint₀ endpoint₁ matching
+
+/-- 元の辺が復号した偶部分グラフ候補に属することは、その外部辺が完全マッチングに選ばれないことと同値。 -/
+theorem mem_encodedEvenSubgraph_iff {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (edges : Finset Edge) (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) (e : Edge) :
+    e ∈ encodedEvenSubgraph edges endpoint₀ endpoint₁ matching ↔
+      e ∈ edges ∧ externalEdge endpoint₀ endpoint₁ e ∉ matching := by
+  constructor
+  · intro he
+    obtain ⟨heEdges, heNotSelected⟩ := Finset.mem_sdiff.mp he
+    refine ⟨heEdges, ?_⟩
+    intro heExternal
+    apply heNotSelected
+    exact Finset.mem_filter.mpr ⟨heEdges, heExternal⟩
+  · rintro ⟨heEdges, heExternal⟩
+    apply Finset.mem_sdiff.mpr
+    refine ⟨heEdges, ?_⟩
+    intro heSelected
+    exact heExternal (Finset.mem_filter.mp heSelected).2
+
 
 end Ising3DCut.Prediction
