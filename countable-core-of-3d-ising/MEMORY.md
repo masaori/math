@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-24 23:02（本流）: 「点数乗表示の底の既約分母は有理点の分子と互いに素である」の SageMath 層を閉じた（`sagemath/check/rational-power-base-den-coprime-to-numerator/`）。共通素因子、合同式の法の移送、素数が冪を割れば底を割る段、既約性との矛盾を `ZZ` の有限標本で本文と同順に全 PASS。次は Lean 具体版。
 - 2026-08-24 22:06（並行）: `terminal_of_mem_internalEdgeAt` を追加し、city の内部辺に属する各端子が同じ元頂点に属することを、内部辺の部分集合条件と端子の所属条件から導いた。次は完全マッチングで覆う内部辺を頂点ごとに組にして、復号した辺集合の次数の偶数性へ接続する。
 - 2026-08-24 22:04（本流）: 「破れ数ゼロの項から底に合同式の制約を出す」の Lean 必要十分版 `NecSuf.base_congruences_of_integer_equation` と導出 `rational_power_base_congruences_viaNecSuf` を追加し、四層を閉じた。具体版から有限箱・分配多項式・有理数を落とすと、整数の等式、両端項の二合同式、法と約す因子の互いに素性だけが残る。次は合同式で有理点一以外を排除できるかの判定。
 - 2026-08-24 21:36（本流）: 「破れ数ゼロの項から底に合同式の制約を出す」の Lean 具体版を閉じた（`lean/Ising3DCut/LimitQuantity/RationalPowerBaseCongruences.lean`）。有理数表示から整数の等式、法 $a$ の合同式、回文性を使った法 $b$ の整除、二つを束ねる定理の四本。`lake build` と sorry 検査 404 件を通過。次は同主張の Lean 必要十分版。レビューで前 tick の Lean 定理 6 本が sorry 検査の登録配列から漏れていたのを見つけ登録した。
