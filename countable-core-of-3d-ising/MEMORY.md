@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-24 11:35（本流）: 「末尾定数性は隣接する箱の分配多項式の冪等式に同値である」の Lean 具体版 `eventually_constant_iff_power_identity` を追加した。`lake build` と sorry 検査（383 件）を通過。次は同主張の Lean 必要十分版。
 - 2026-08-24 11:07（並行）: Pfaffian 予言の Lean 具体版で、未選択の元の辺の両端子がそれぞれ内部辺で覆われることを `unselected_terminals_are_covered_by_internal_edges` へ束ねた。`lake build` と sorry 検査（382 件）を通過。次は二端子の内部辺配置から polygon–dimer 対応へ進む。
 - 2026-08-24 11:03: 本流「末尾定数性を分配多項式の冪等式へ言い換える」の SageMath 層を閉じた（`sagemath/check/eventually-constant-iff-power-identity/` の三検査を全 PASS）。共通値から交差べき等式へ移る段、交差べき等式から隣接有限箱量の等号を得る段、帰納的に末尾定数性へ束ねる段を `QQ`・`ZZ` だけで検査した。次は Lean 具体版。
 - 2026-08-24 10:06: 定数列より広く、それでも許されない完備性を持ち込まない次の経路として、有限箱量の末尾定数性を定義した。次はこの性質を持つ正の有理点を分類する。並行の Pfaffian 予言は、未選択辺の両端子が内部辺で覆われる個別定理まで Lean 具体化済み。
