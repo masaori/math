@@ -95,4 +95,19 @@ theorem finite_prime_support_of_rat (a : ℚ) :
   rw [padicValRat, padicValInt, hnum, hden]
   simp
 
+/-- 人手証明の必要性の第三段の後半で用いる復元の有限積。非零な素指数を持つ素数の有限集合 `S`
+と整数値の指数 `t` から、正の有理数の候補 `∏_{p∈S} p^{t p}` を作る。指数は負でもよいので
+整数冪（`zpow`）を使う。 -/
+noncomputable def primePowerProduct (S : Finset ℕ) (t : ℕ → ℤ) : ℚ :=
+  ∏ p ∈ S, (p : ℚ) ^ (t p)
+
+/-- 復元の有限積は正の有理数である。各因子は正の素数の整数冪だからである。 -/
+theorem primePowerProduct_pos {S : Finset ℕ} (t : ℕ → ℤ)
+    (hS : ∀ p ∈ S, Nat.Prime p) : 0 < primePowerProduct S t := by
+  refine Finset.prod_pos ?_
+  intro p hp
+  have hp0 : (0 : ℚ) < (p : ℚ) := by
+    exact_mod_cast (hS p hp).pos
+  exact zpow_pos hp0 _
+
 end Ising3DCut.LimitQuantity

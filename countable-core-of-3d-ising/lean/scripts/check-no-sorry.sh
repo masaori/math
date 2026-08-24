@@ -79,6 +79,7 @@ targets=(
   Ising3DCut.LimitQuantity.cube_dvd_of_cross_exponent_eq
   Ising3DCut.LimitQuantity.quotient_eq_of_cross_exponent_eq
   Ising3DCut.LimitQuantity.finite_prime_support_of_rat
+  Ising3DCut.LimitQuantity.primePowerProduct_pos
   Ising3DCut.NecSuf.eq_of_constant_of_strictMonoOn
   Ising3DCut.LimitQuantity.isingValueSeq_two_strictMonoOn
   Ising3DCut.LimitQuantity.constant_finite_box_sequence_only_at_one_viaNecSuf
