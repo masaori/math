@@ -198,4 +198,273 @@ F^{i+p}\,q&=F^{j}\,q\qquad(\because\ i+p=j)\\
       ]),
     ],
   },
+
+  {
+    id: "reversible_global_map_cycle_type_claim_orbits_partition_configurations",
+    kind: "claim",
+    title: { text: "可逆な大域写像の周期軌道は配位集合を分割する" },
+    labels: ["claim_reversible_orbits_partition_configurations"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        math(String.raw`F\in\mathcal M^{\times}(V)`), " について、周期軌道の集合 ",
+        math(String.raw`\mathcal O_F`), " は ", math(String.raw`A^V`),
+        " の有限分割である。すなわち、その合併は ", math(String.raw`A^V`),
+        " であり、相異なる二つの周期軌道は交わらない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_reversible_all_configurations_periodic"), " により任意の ",
+        math(String.raw`y\in A^V`), " は周期点であり、",
+        math(String.raw`y=F^0(y)\in O_F(y)`), "（",
+        ref("def_recursive_preimage_tree_code_periodic_orbits"), "）なので、",
+        math(String.raw`\mathcal O_F`), " の合併は ", math(String.raw`A^V`), " である。",
+      ]),
+      paragraph([
+        math(String.raw`O_F(q),O_F(q')\in\mathcal O_F`), " が点 ",
+        math(String.raw`z`), " を共有するとする。ある ",
+        math(String.raw`i,j\in\mathbb N`), " が存在して ",
+        math(String.raw`z=F^i(q)=F^j(q')`), " である。",
+        math(String.raw`q,q'`), " は周期点なので、正の自然数 ",
+        math(String.raw`a,b\in\mathbb N_{>0}`), " が存在して ",
+        math(String.raw`F^a(q)=q`), " かつ ", math(String.raw`F^b(q')=q'`),
+        " である（", ref("def_periodic_points"), "）。",
+        math(String.raw`m:=(i+1)a`), "、", math(String.raw`n:=(j+1)b`),
+        " と置けば ", math(String.raw`m>i`), "、", math(String.raw`n>j`), " かつ",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+q&=F^{m}(q)\qquad(\because\ F^a(q)=q\ \text{と}\ \blkref{claim_period_multiples})\\
+&=F^{m-i}(F^i(q))\qquad(\because\ \blkref{claim_iterate_composition_addition})\\
+&=F^{m-i}(z)\qquad(\because\ z=F^i(q)),
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+q'&=F^{n}(q')\qquad(\because\ F^b(q')=q'\ \text{と}\ \blkref{claim_period_multiples})\\
+&=F^{n-j}(F^j(q'))\qquad(\because\ \blkref{claim_iterate_composition_addition})\\
+&=F^{n-j}(z)\qquad(\because\ z=F^j(q'))
+\end{aligned}`),
+      paragraph([
+        "である。したがって ", math(String.raw`q\in O_F(z)`), " かつ ",
+        math(String.raw`q'\in O_F(z)`), " である。反復の加法則（",
+        ref("claim_iterate_composition_addition"), "）により、同じ軌道に属する二点から始めた周期軌道は",
+        "互いに包含し、", math(String.raw`O_F(q)=O_F(z)=O_F(q')`), " となる。よって、交わる二軌道は",
+        "等しく、相異なる二軌道は交わらない。",
+      ]),
+    ],
+  },
+
+  {
+    id: "reversible_global_map_cycle_type_claim_sum",
+    kind: "claim",
+    title: { text: "巡回型は配位数の分割である" },
+    labels: ["claim_reversible_cycle_type_sum"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        math(String.raw`F\in\mathcal M^{\times}(V)`), " について、",
+        math(String.raw`\mathrm{ct}(F)`), " の全要素の重複度つき和は",
+      ]),
+      displayMath(String.raw`\sum_{d\in\mathrm{ct}(F)}d=2^{|V|}`),
+      paragraph(["である。したがって巡回型は ", math(String.raw`2^{|V|}`), " の正の自然数への分割である。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_reversible_orbits_partition_configurations"), " により ",
+        math(String.raw`\mathcal O_F`), " は ", math(String.raw`A^V`),
+        " の有限分割である。有限分割の各部分の元数を足すと全体の元数になるので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{d\in\mathrm{ct}(F)}d
+&=\sum_{O\in\mathcal O_F}|O|\qquad(\because\ \blkref{def_reversible_cycle_type})\\
+&=|A^V|\qquad(\because\ \blkref{claim_reversible_orbits_partition_configurations})\\
+&=2^{|V|}\qquad(\because\ |A|=2.\ \blkref{def_state_set}).
+\end{aligned}`),
+    ],
+  },
+
+  {
+    id: "reversible_global_map_cycle_type_claim_conjugacy_invariance",
+    kind: "claim",
+    title: { text: "共役全単射は巡回型を保存する" },
+    labels: ["claim_reversible_cycle_type_conjugacy_invariance"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        math(String.raw`F,G\in\mathcal M^{\times}(V)`), " の間に共役全単射が存在するなら、",
+        math(String.raw`\mathrm{ct}(F)=\mathrm{ct}(G)`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`h:A^V\to A^V`), " を共役全単射とする。",
+        ref("claim_iterate_monoid_conjugacy_transports_iterates"), " により、各周期点 ",
+        math(String.raw`q`), " について ", math(String.raw`h(O_F(q))=O_G(h(q))`),
+        " である。", math(String.raw`h`), " は全単射なので、この制限も全単射であり、",
+        math(String.raw`|O_F(q)|=|O_G(h(q))|`), " である。さらに ",
+        math(String.raw`h`), " と ", math(String.raw`h^{-1}`),
+        " は周期軌道全体を互いに逆な写像で移す。よって軌道の元数を重複を保って集めた有限多重集合は一致し、",
+        ref("def_reversible_cycle_type"), " により ",
+        math(String.raw`\mathrm{ct}(F)=\mathrm{ct}(G)`), " である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "reversible_global_map_cycle_type_claim_completeness",
+    kind: "claim",
+    title: { text: "巡回型の一致から共役全単射を構成できる" },
+    labels: ["claim_reversible_cycle_type_completeness"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        math(String.raw`F,G\in\mathcal M^{\times}(V)`), " について、",
+        math(String.raw`\mathrm{ct}(F)=\mathrm{ct}(G)`),
+        " ならば ", math(String.raw`F`), " から ", math(String.raw`G`),
+        " への共役全単射 ", math(String.raw`h:A^V\to A^V`), " が存在する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_reversible_cycle_type"), " と有限多重集合の等号により、",
+        math(String.raw`\mathcal O_F`), " の各軌道を、同じ元数を持つ ",
+        math(String.raw`\mathcal O_G`), " の軌道へ重複度を保って一対一に対応させる写像 ",
+        math(String.raw`\psi:\mathcal O_F\to\mathcal O_G`), " を選べる。各 ",
+        math(String.raw`O\in\mathcal O_F`), " について基点 ",
+        math(String.raw`q_O\in O`), " と ", math(String.raw`q'_O\in\psi(O)`),
+        " を一つずつ選ぶ。", ref("claim_periodic_orbit_card_eq_min_period"),
+        " により、各 ", math(String.raw`y\in O`), " はただ一つの ",
+        math(String.raw`r\in\mathbb N`), "、", math(String.raw`r<|O|`),
+        " を用いて ", math(String.raw`y=F^r(q_O)`), " と書ける。そこで",
+      ]),
+      displayMath(String.raw`h\bigl(F^r(q_O)\bigr):=G^r(q'_O)\qquad(0\le r<|O|)`),
+      paragraph([
+        "と定める。", math(String.raw`|O|=|\psi(O)|`), " と ",
+        ref("claim_periodic_orbit_card_eq_min_period"), " により、この写像は各 ",
+        math(String.raw`O`), " から ", math(String.raw`\psi(O)`),
+        " への全単射である。", ref("claim_reversible_orbits_partition_configurations"),
+        " により両側の周期軌道はそれぞれ ", math(String.raw`A^V`),
+        " を分割し、", math(String.raw`\psi`), " は軌道全体の全単射なので、各軌道上の写像を接着した ",
+        math(String.raw`h:A^V\to A^V`), " は全単射である。",
+      ]),
+      paragraph([
+        math(String.raw`y=F^r(q_O)`), "、", math(String.raw`0\le r<|O|`),
+        " とする。", math(String.raw`r+1<|O|`), " の場合は反復の定義により",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+h(F(y))
+&=h(F^{r+1}(q_O))\qquad(\because\ \blkref{claim_iterate_composition_addition})\\
+&=G^{r+1}(q'_O)\qquad(\because\ h\ \text{の定義})\\
+&=G(h(y))\qquad(\because\ h\ \text{の定義と反復の定義}).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r+1=|O|`), " の場合は ",
+        ref("claim_periodic_orbit_card_eq_min_period"), " により ",
+        math(String.raw`F^{|O|}(q_O)=q_O`), " かつ ",
+        math(String.raw`G^{|O|}(q'_O)=q'_O`), " なので同じ等式が成り立つ。よって全ての ",
+        math(String.raw`y\in A^V`), " について ",
+        math(String.raw`h(F(y))=G(h(y))`), " であり、",
+        ref("def_iterate_monoid_conjugacy_bijection"), " により ",
+        math(String.raw`h`), " は共役全単射である。",
+      ]),
+    ],
+  },
+
+  {
+    id: "reversible_global_map_cycle_type_definition_partitions",
+    kind: "definition",
+    title: { text: "配位数の正の自然数への分割" },
+    labels: ["def_configuration_count_partitions"],
+    habitat: "finite",
+    statement: [
+      paragraph(["正の自然数からなる有限多重集合のうち、重複度つき和が ", math(String.raw`2^{|V|}`), " であるもの全体を"]),
+      displayMath(String.raw`\operatorname{Part}(2^{|V|}):=\left\{\lambda:\lambda\ \text{は}\ \mathbb N_{>0}\ \text{上の有限多重集合},\ \sum_{d\in\lambda}d=2^{|V|}\right\}`),
+      paragraph(["と定める。これは有限集合である。"]),
+    ],
+  },
+
+  {
+    id: "reversible_global_map_cycle_type_claim_partition_realization",
+    kind: "claim",
+    title: { text: "配位数の各分割は可逆な大域写像の巡回型として実現する" },
+    labels: ["claim_reversible_cycle_type_realizes_every_partition"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "任意の ", math(String.raw`\lambda\in\operatorname{Part}(2^{|V|})`),
+        " について、", math(String.raw`\mathrm{ct}(F)=\lambda`), " を満たす ",
+        math(String.raw`F\in\mathcal M^{\times}(V)`), " が存在する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_configuration_count_partitions"), " により ", math(String.raw`\lambda`),
+        " の要素は全て正で、その和は ", math(String.raw`|A^V|=2^{|V|}`), "（",
+        ref("def_state_set"), "）である。有限集合 ", math(String.raw`A^V`),
+        " の元を一列に並べ、その列を ", math(String.raw`\lambda`),
+        " の各出現の値を長さとする連続した有限列へ切り分ける。各有限列の中で各元を次の元へ、末尾を先頭へ送る写像 ",
+        math(String.raw`F:A^V\to A^V`), " を定める。各有限列上で巡回置換なので ",
+        math(String.raw`F`), " は単射であり、", ref("def_reversible_global_maps"),
+        " により ", math(String.raw`F\in\mathcal M^{\times}(V)`), " である。構成した有限列がちょうど ",
+        math(String.raw`F`), " の周期軌道であり、その元数を重複を保って集めると ",
+        math(String.raw`\lambda`), " になる。よって ", ref("def_reversible_cycle_type"),
+        " により ", math(String.raw`\mathrm{ct}(F)=\lambda`), " である。なお ",
+        ref("def_conjugacy_class_all_global_maps"), " により、この自己写像は全セルを近傍とする有限舞台上の 2 値セルオートマトンの大域写像として実現される。",
+      ]),
+    ],
+  },
+
+  {
+    id: "reversible_global_map_cycle_type_definition_conjugacy_classes",
+    kind: "definition",
+    title: { text: "可逆な大域写像の共役類" },
+    labels: ["def_reversible_global_map_conjugacy_classes"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        ref("def_conjugacy_class_relation"), " の関係 ", math(String.raw`\approx_V`),
+        " を有限集合 ", math(String.raw`\mathcal M^{\times}(V)`), " に制限し、その共役類全体を",
+      ]),
+      displayMath(String.raw`\mathcal C^{\times}(V):=\{\,[F]^{\times}_V\mid F\in\mathcal M^{\times}(V)\,\}`),
+      paragraph(["と定める。これは有限集合である。"]),
+    ],
+  },
+
+  {
+    id: "reversible_global_map_cycle_type_claim_quotient_bijection",
+    kind: "claim",
+    title: { text: "可逆な大域写像の共役類と配位数の分割は全単射である" },
+    labels: ["claim_reversible_conjugacy_classes_bijection_partitions"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "写像 ", math(String.raw`\overline{\mathrm{ct}}:\mathcal C^{\times}(V)\to\operatorname{Part}(2^{|V|})`),
+        " を ", math(String.raw`\overline{\mathrm{ct}}([F]^{\times}_V):=\mathrm{ct}(F)`),
+        " と定めると、これは全単射である。したがって可逆な大域写像の共役類は有限決定でき、その個数は ",
+        math(String.raw`2^{|V|}`), " の正の自然数への分割の個数に等しい。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_reversible_cycle_type_sum"), " により値は ",
+        math(String.raw`\operatorname{Part}(2^{|V|})`), " に属する。",
+        ref("claim_reversible_cycle_type_conjugacy_invariance"),
+        " により共役な代表は同じ巡回型を持つので、", math(String.raw`\overline{\mathrm{ct}}`),
+        " は代表の選び方に依存しない。",
+      ]),
+      paragraph([
+        math(String.raw`\overline{\mathrm{ct}}([F]^{\times}_V)=\overline{\mathrm{ct}}([G]^{\times}_V)`),
+        " ならば ", math(String.raw`\mathrm{ct}(F)=\mathrm{ct}(G)`), " であり、",
+        ref("claim_reversible_cycle_type_completeness"), " により ",
+        math(String.raw`F\approx_V G`), " なので ",
+        math(String.raw`[F]^{\times}_V=[G]^{\times}_V`), " である。よって単射である。",
+      ]),
+      paragraph([
+        "任意の ", math(String.raw`\lambda\in\operatorname{Part}(2^{|V|})`),
+        " は ", ref("claim_reversible_cycle_type_realizes_every_partition"),
+        " によりある ", math(String.raw`F\in\mathcal M^{\times}(V)`),
+        " の巡回型である。したがって ", math(String.raw`\overline{\mathrm{ct}}`),
+        " は全射であり、以上より全単射である。各対象は有限真理値表、有限集合、自然数の有限多重集合だけから有限列挙と等号比較で決定できる。",
+      ]),
+    ],
+  },
 ]);
