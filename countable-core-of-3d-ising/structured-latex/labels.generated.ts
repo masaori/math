@@ -96,6 +96,7 @@ export const ALL_LABELS = [
   "def_constant_coarse_graining_from_q_independent_invariant",
   "def_edge_set",
   "def_endpoint_maps",
+  "def_eventually_constant_finite_box_sequence",
   "def_finite_box_prime_exponent_sequence",
   "def_full_boundary_response_polynomial",
   "def_global_spin_flip",

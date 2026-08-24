@@ -7504,4 +7504,37 @@ Z_2(2)-Z_2(1)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_heading_eventually_constant_finite_box_sequence",
+    kind: "heading",
+    level: 2,
+    title: { text: "有限箱の量が末尾で定数になる有理点" },
+    labels: [],
+  },
+  {
+    id: "soundness_bridge_definition_eventually_constant_finite_box_sequence",
+    kind: "definition",
+    title: { text: "有限箱の量の末尾定数性" },
+    labels: ["def_eventually_constant_finite_box_sequence"],
+    habitat: "R",
+    realEscape:
+      "各有限箱の量は正の有理数の正の実数乗根として ℝ に住むが、箱の大きさの極限は取らない。定義は自然数の閾値以後の等号だけを使い、上限・下限・級数・指数関数・実対数を使わない。",
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " に対し、有限箱の量の列 ",
+        math(String.raw`L\mapsto a_L(q)`),
+        " が末尾で定数であるとは、正の自然数 ",
+        math(String.raw`L_0`),
+        " と正の実数 ",
+        math(String.raw`c`),
+        " が存在し、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`a_L(q)=c`),
+        " が成り立つことをいう。",
+      ]),
+    ],
+  },
 ]);
