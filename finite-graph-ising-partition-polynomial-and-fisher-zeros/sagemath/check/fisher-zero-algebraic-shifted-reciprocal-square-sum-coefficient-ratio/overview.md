@@ -25,6 +25,7 @@
 | `check_substitute_reciprocal_sum_definition.sage` | 逆数和の定義だけを代入する等式 | PASS | 全例・全対象評価点で一致 |
 | `check_substitute_reciprocal_square_sum_definition.sage` | 逆二乗和の定義だけを代入する等式 | PASS | 全例・全対象評価点で一致 |
 | `check_reciprocal_square_expansion.sage` | 逆数和の平方を対角項と相異なる順序付き添字対へ分離 | PASS | 全例・全対象評価点で一致 |
+| `check_distribute_root_pair_product.sage` | 零点差の全積を相異なる順序付き添字対の二重和へ分配 | PASS | 全例・全対象評価点で一致 |
 | `check_cancel_root_pairs.sage` | 一次因子分解の評価、非零積からの最高次係数の消去、各零点差の非零性、二つの零点差の消去 | PASS | 全段が全例・全対象評価点で成立 |
 | `check_second_derivative_ratio.sage` | 逆数対和と二回形式微分の評価値の一致 | PASS | 全例・全対象評価点で一致 |
 | `check_divide_nonzero_polynomial_value.sage` | 非零な評価値を消去して逆数対和を商として取り出す等式 | PASS | 全例・全対象評価点で一致 |

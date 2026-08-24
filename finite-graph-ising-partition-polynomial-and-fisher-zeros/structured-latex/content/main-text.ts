@@ -5118,6 +5118,19 @@ x^{m-2}
 \right)
 \sum_{k=1}^{d}
 \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{
+  \displaystyle
+  \prod_{j=1}^{d}(a-\alpha_j)
+}{
+  (a-\alpha_k)(a-\alpha_\ell)
+}
+&&\bigl(\because\ \text{有限二重和に対する分配律}\bigr)\\
+&=
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(d)\right)
+\right)
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
 \prod_{\substack{1\le j\le d\\j\ne k,\ j\ne\ell}}(a-\alpha_j)
 &&\bigl(\because\ (a-\alpha_k)(a-\alpha_\ell)\ne0\text{ を各項で消去する}\bigr)\\
 &=D^2\overline P_G(a)
