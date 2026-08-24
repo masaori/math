@@ -138,6 +138,7 @@ export const ALL_LABELS = [
   "theorem_product_difference_ten_hyperbolic_types",
   "theorem_product_difference_thirteen_hyperbolic_types",
   "theorem_product_difference_twelve_hyperbolic_types",
+  "theorem_product_difference_twenty_hyperbolic_types",
   "theorem_quotient_tower_coset_cell_incidence_forward_preservation",
   "theorem_quotient_tower_face_boundary_space_pushforward_over_f2",
   "theorem_quotient_tower_first_boundary_pushforward_commutativity_over_f2",
