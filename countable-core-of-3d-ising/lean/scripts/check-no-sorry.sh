@@ -448,6 +448,16 @@ targets=(
   Ising3DCut.NecSuf.observed_eventuallyEq_of_pointwise_collision_free_coarse_graining
   Ising3DCut.NecSuf.tendsto_of_pointwise_collision_free_coarse_graining
   Ising3DCut.NecSuf.limit_eq_of_pointwise_collision_free_coarse_graining
+  Ising3DCut.LimitQuantity.padicValRat_nat_div_pow_nonneg
+  Ising3DCut.LimitQuantity.padicValRat_base_nonneg_of_pow
+  Ising3DCut.LimitQuantity.not_dvd_den_of_padicValRat_nonneg
+  Ising3DCut.LimitQuantity.rational_power_base_den_not_dvd_of_not_dvd
+  Ising3DCut.NecSuf.base_value_nonnegative_of_positive_multiple
+  Ising3DCut.LimitQuantity.rational_power_base_den_not_dvd_of_not_dvd_viaNecSuf
+  Ising3DCut.LimitQuantity.integer_equation_of_rational_representation
+  Ising3DCut.LimitQuantity.brokenCountSum_modEq_a
+  Ising3DCut.LimitQuantity.brokenCountSum_modEq_b
+  Ising3DCut.LimitQuantity.rational_power_base_congruences
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
