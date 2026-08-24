@@ -8226,4 +8226,96 @@ P_L
       ]),
     ],
   },
+
+  {
+    id: "soundness_bridge_claim_rational_power_base_den_coprime_to_numerator_of_point",
+    kind: "claim",
+    title: { text: "点数乗表示の底の既約分母は有理点の分子と互いに素である" },
+    labels: ["claim_rational_power_base_den_coprime_to_num"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "互いに素な正の自然数 ",
+        math(String.raw`a,b`),
+        " により正の有理数を ",
+        math(String.raw`q=a/b`),
+        " と表す。正の自然数 ",
+        math(String.raw`L_0`),
+        " と正の有理数 ",
+        math(String.raw`c\in\mathbb Q_{>0}`),
+        " が存在して、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`Z_L(q)=c^{\#V_L}`),
+        " が成り立つとし、",
+        math(String.raw`c`),
+        " の既約分数表示を ",
+        math(String.raw`c=u/v`),
+        "（",
+        math(String.raw`u,v`),
+        " は互いに素な正の自然数）とする。このとき ",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`v`),
+        " は互いに素である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "素数 ",
+        math(String.raw`p`),
+        " が ",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`v`),
+        " の両方を割ると仮定して矛盾を導く。",
+      ]),
+      paragraph([
+        math(String.raw`L=\max(L_0,2)`),
+        " と置く。",
+        ref("claim_rational_power_base_congruences"),
+        " により、この ",
+        math(String.raw`L`),
+        " について合同式 ",
+        math(String.raw`\Omega_L(0)\,v^{\#V_L}\equiv u^{\#V_L}\pmod a`),
+        " が成り立つ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+u^{\#V_L}
+&\equiv\Omega_L(0)\,v^{\#V_L}\pmod a
+&&(\because\ \blkref{claim_rational_power_base_congruences})\\
+&\equiv\Omega_L(0)\,v^{\#V_L}\pmod p
+&&(\because\ p \text{ は } a \text{ を割る})\\
+&\equiv0\pmod p
+&&(\because\ \#V_L\ge1 \text{ かつ } p \text{ は } v \text{ を割る})
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって ",
+        math(String.raw`p\mid u^{\#V_L}`),
+        " である。",
+        math(String.raw`p`),
+        " は素数なので ",
+        math(String.raw`p\mid u`),
+        " が従う。ところが ",
+        math(String.raw`u`),
+        " と ",
+        math(String.raw`v`),
+        " は互いに素であり、",
+        math(String.raw`p`),
+        " は ",
+        math(String.raw`v`),
+        " も割るので ",
+        math(String.raw`p\mid\gcd(u,v)=1`),
+        " となって ",
+        math(String.raw`p\ge2`),
+        " に反する。したがって ",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`v`),
+        " を同時に割る素数は無く、両者は互いに素である。",
+      ]),
+    ],
+  },
 ]);
