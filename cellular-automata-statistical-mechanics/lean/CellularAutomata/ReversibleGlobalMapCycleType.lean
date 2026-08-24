@@ -21,6 +21,8 @@ Mathlib の `Equiv.Perm.cycleType` と、人手証明の「全周期軌道の元
 -/
 import CellularAutomata.ConjugacyClassCodeImageBijection
 import CellularAutomata.NecSuf.ReversibilityFiniteDecidability
+import CellularAutomata.NecSuf.PeriodicPointCount
+import CellularAutomata.NecSuf.IterateMonoidStableFiberRootedTree
 import Mathlib.GroupTheory.Perm.Cycle.PossibleTypes
 
 namespace CellularAutomata.ReversibleGlobalMapCycleType
@@ -143,5 +145,130 @@ theorem conj_of_cycleType_eq {F G : ReversibleMap V} (hct : cycleType F = cycleT
 theorem conj_iff_cycleType_eq (F G : ReversibleMap V) :
     Conj F G ↔ cycleType F = cycleType G :=
   ⟨cycleType_eq_of_conj, conj_of_cycleType_eq⟩
+
+
+/-
+以下は人手証明の
+  claim_periodic_orbit_card_eq_min_period            `card_orbit_eq_minPeriod`
+  claim_reversible_orbits_partition_configurations   `self_mem_orbit`, `orbit_eq_of_mem_orbit`,
+                                                     `orbit_eq_of_not_disjoint`
+に対応する段である。周期軌道は人手証明と同じく「一周期分の反復列」として定義し、
+その元数が最小周期に等しいこと、および周期軌道が配位集合を分割することを、
+Mathlib の巡回置換の分解を使わずに人手証明と同じ順序で示す。
+-/
+
+open CellularAutomata.NecSuf.GlobalMapIteration
+open CellularAutomata.NecSuf.MinimalPreperiodPeriod
+open CellularAutomata.NecSuf.PeriodicPointCount
+
+/-- 周期軌道。最小周期の長さぶんの反復列を集めた有限集合。 -/
+noncomputable def orbit (F : ReversibleMap V) (q : Config V) : Finset (Config V) :=
+  (Finset.range (minPeriod F.1 q)).image fun r => iterate F.1 r q
+
+/-- 最小周期より小さい二つの反復回数が同じ値を与えるなら、その回数は等しい。
+人手証明の第二段（差を周期の組へ移して最小性に反する）をそのまま写す。 -/
+theorem iterate_inj_below_minPeriod (F : ReversibleMap V) (q : Config V) {i j : ℕ}
+    (hi : i < minPeriod F.1 q) (hj : j < minPeriod F.1 q)
+    (h : iterate F.1 i q = iterate F.1 j q) : i = j := by
+  classical
+  have key : ∀ a b : ℕ, a < b → b < minPeriod F.1 q →
+      iterate F.1 a q = iterate F.1 b q → False := by
+    intro a b hab hb hval
+    have hp : 1 ≤ b - a := by omega
+    have hcol : iterate F.1 (a + (b - a)) q = iterate F.1 a q := by
+      have hab' : a + (b - a) = b := by omega
+      rw [hab', ← hval]
+    have hpair : IsPeriodicityPair F.1 q a (b - a) :=
+      (isPeriodicityPair_iff_collision F.1 q a (b - a)).2 ⟨hp, hcol⟩
+    have hle := (period_descends_to_minPreperiod F.1 q hpair).2.2
+    omega
+  rcases lt_trichotomy i j with hlt | heq | hgt
+  · exact absurd (key i j hlt hj h) (by simp)
+  · exact heq
+  · exact absurd (key j i hgt hi h.symm) (by simp)
+
+/-- 周期軌道の元数は最小周期に等しい。 -/
+theorem card_orbit_eq_minPeriod (F : ReversibleMap V) (q : Config V) :
+    (orbit F q).card = minPeriod F.1 q := by
+  classical
+  rw [orbit, Finset.card_image_of_injOn, Finset.card_range]
+  intro i hi j hj h
+  exact iterate_inj_below_minPeriod F q
+    (Finset.mem_range.1 (Finset.mem_coe.1 hi)) (Finset.mem_range.1 (Finset.mem_coe.1 hj)) h
+
+/-- 可逆な大域写像では、周期軌道は反復で到達できる配位全体に一致する。 -/
+theorem mem_orbit_iff (F : ReversibleMap V) (q z : Config V) :
+    z ∈ orbit F q ↔ ∃ n : ℕ, iterate F.1 n q = z := by
+  classical
+  constructor
+  · intro hz
+    rw [orbit, Finset.mem_image] at hz
+    obtain ⟨r, _, hr⟩ := hz
+    exact ⟨r, hr⟩
+  · rintro ⟨n, rfl⟩
+    have hzero : minPreperiod F.1 q = 0 :=
+      (isPeriodicPoint_iff_minPreperiod_zero F.1 q).1 (all_configurations_periodic F q)
+    have hp1 : 1 ≤ minPeriod F.1 q := one_le_minPeriod F.1 q
+    have hcol : iterate F.1 (0 + minPeriod F.1 q) q = iterate F.1 0 q := by
+      have hspec :=
+        ((isPeriodicityPair_iff_collision F.1 q (minPreperiod F.1 q) (minPeriod F.1 q)).1
+          (minPeriod_spec F.1 q)).2
+      rwa [hzero] at hspec
+    have hmul := period_multiples F.1 q hcol (n / minPeriod F.1 q)
+    have hfix : iterate F.1 (n / minPeriod F.1 q * minPeriod F.1 q) q = q := by
+      simpa [iterate_zero] using hmul
+    refine Finset.mem_image.2 ⟨n % minPeriod F.1 q, Finset.mem_range.2 (Nat.mod_lt _ hp1), ?_⟩
+    have hsplit : n / minPeriod F.1 q * minPeriod F.1 q + n % minPeriod F.1 q = n :=
+      Nat.div_add_mod' n (minPeriod F.1 q)
+    calc iterate F.1 (n % minPeriod F.1 q) q
+        = iterate F.1 (n % minPeriod F.1 q)
+            (iterate F.1 (n / minPeriod F.1 q * minPeriod F.1 q) q) := by rw [hfix]
+      _ = iterate F.1 (n / minPeriod F.1 q * minPeriod F.1 q + n % minPeriod F.1 q) q :=
+            (CellularAutomata.NecSuf.IterateMonoidStableFiberRootedTree.iterate_add F.1 _ _ q).symm
+      _ = iterate F.1 n q := by rw [hsplit]
+
+/-- 各配位は自分の周期軌道に属する（分割の被覆側）。 -/
+theorem self_mem_orbit (F : ReversibleMap V) (q : Config V) : q ∈ orbit F q :=
+  (mem_orbit_iff F q q).2 ⟨0, rfl⟩
+
+/-- 周期軌道に属する配位の周期軌道は、もとの周期軌道に等しい。 -/
+theorem orbit_eq_of_mem_orbit (F : ReversibleMap V) (q z : Config V) (hz : z ∈ orbit F q) :
+    orbit F z = orbit F q := by
+  classical
+  obtain ⟨n, hn⟩ := (mem_orbit_iff F q z).1 hz
+  have hzero : minPreperiod F.1 q = 0 :=
+    (isPeriodicPoint_iff_minPreperiod_zero F.1 q).1 (all_configurations_periodic F q)
+  have hp1 : 1 ≤ minPeriod F.1 q := one_le_minPeriod F.1 q
+  have hcol : iterate F.1 (0 + minPeriod F.1 q) q = iterate F.1 0 q := by
+    have hspec :=
+      ((isPeriodicityPair_iff_collision F.1 q (minPreperiod F.1 q) (minPeriod F.1 q)).1
+        (minPeriod_spec F.1 q)).2
+    rwa [hzero] at hspec
+  have hmul := period_multiples F.1 q hcol (n + 1)
+  have hfix : iterate F.1 ((n + 1) * minPeriod F.1 q) q = q := by simpa [iterate_zero] using hmul
+  have hge : n ≤ (n + 1) * minPeriod F.1 q := by
+    have : n + 1 ≤ (n + 1) * minPeriod F.1 q := Nat.le_mul_of_pos_right _ hp1
+    omega
+  have hback : iterate F.1 ((n + 1) * minPeriod F.1 q - n) z = q := by
+    rw [← hn,
+      ← CellularAutomata.NecSuf.IterateMonoidStableFiberRootedTree.iterate_add F.1 n _ q]
+    have hsum : n + ((n + 1) * minPeriod F.1 q - n) = (n + 1) * minPeriod F.1 q := by omega
+    rw [hsum, hfix]
+  apply Finset.ext
+  intro u
+  rw [mem_orbit_iff, mem_orbit_iff]
+  constructor
+  · rintro ⟨m, hm⟩
+    refine ⟨n + m, ?_⟩
+    rw [CellularAutomata.NecSuf.IterateMonoidStableFiberRootedTree.iterate_add F.1 n m q, hn, hm]
+  · rintro ⟨m, hm⟩
+    refine ⟨(n + 1) * minPeriod F.1 q - n + m, ?_⟩
+    rw [CellularAutomata.NecSuf.IterateMonoidStableFiberRootedTree.iterate_add F.1 _ m z,
+      hback, hm]
+
+/-- 交わる二つの周期軌道は等しい（分割の非交差側）。 -/
+theorem orbit_eq_of_not_disjoint (F : ReversibleMap V) (q q' z : Config V)
+    (hz : z ∈ orbit F q) (hz' : z ∈ orbit F q') : orbit F q = orbit F q' := by
+  rw [← orbit_eq_of_mem_orbit F q z hz, orbit_eq_of_mem_orbit F q' z hz']
 
 end CellularAutomata.ReversibleGlobalMapCycleType
