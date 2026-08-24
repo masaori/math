@@ -497,6 +497,7 @@ targets=(
   Ising3DCut.Prediction.card_matchingUncoveredTerminalsAt
   Ising3DCut.Prediction.card_matchingUncoveredTerminalsAt_even_iff
   Ising3DCut.Prediction.mem_matchingUncoveredTerminalsAt_iff
+  Ising3DCut.Prediction.mem_selectedIncidentEdgesAt_iff
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

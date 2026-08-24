@@ -473,4 +473,22 @@ theorem mem_matchingUncoveredTerminalsAt_iff {V Edge : Type*}
   rw [Finset.mem_sdiff, mem_terminalsAt_iff]
   simp [Finset.mem_biUnion]
 
+/-- 完全マッチングで外部辺として選ばれた元の辺のうち、元頂点 `v` に接続するものの集合。
+覆われずに残る端子との個数の対応先を、復号した辺集合の次数と比較する前に分離して定義する。 -/
+def selectedIncidentEdgesAt {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V) (matching : Finset (Finset (Σ _ : V, Edge)))
+    (v : V) : Finset Edge :=
+  incidentEdges v ∩ selectedOriginalEdges edges endpoint₀ endpoint₁ matching
+
+/-- 元の辺が `v` で選ばれた接続辺であるための条件。 -/
+theorem mem_selectedIncidentEdgesAt_iff {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V) (matching : Finset (Finset (Σ _ : V, Edge)))
+    (v : V) (e : Edge) :
+    e ∈ selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v ↔
+      e ∈ incidentEdges v ∧ e ∈ edges ∧ externalEdge endpoint₀ endpoint₁ e ∈ matching := by
+  simp [selectedIncidentEdgesAt, selectedOriginalEdges]
+
 end Ising3DCut.Prediction
