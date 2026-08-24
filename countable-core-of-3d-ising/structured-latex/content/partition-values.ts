@@ -7842,4 +7842,190 @@ Z_L(q)^{\#V_{L+1}}
       ]),
     ],
   },
+
+  {
+    id: "soundness_bridge_claim_rational_power_base_denominator_primes",
+    kind: "claim",
+    title: { text: "点数乗表示の底の分母の素因子は、有理点の分母の素因子に限られる" },
+    labels: ["claim_rational_power_base_denominator_primes"],
+    habitat: "Q",
+    statement: [
+      paragraph([
+        "互いに素な正の自然数 ",
+        math(String.raw`a,b`),
+        " により正の有理数を ",
+        math(String.raw`q=a/b`),
+        " と表す。正の自然数 ",
+        math(String.raw`L_0`),
+        " と正の有理数 ",
+        math(String.raw`c\in\mathbb Q_{>0}`),
+        " が存在して、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`Z_L(q)=c^{\#V_L}`),
+        " が成り立つとする（",
+        ref("claim_power_identity_iff_rational_power_form"),
+        " の右辺の形）。このとき、素数 ",
+        math(String.raw`p`),
+        " が ",
+        math(String.raw`b`),
+        " を割らないならば ",
+        math(String.raw`v_p(c)\ge0`),
+        " である。すなわち、",
+        math(String.raw`c`),
+        " を既約分数 ",
+        math(String.raw`c=u/v`),
+        "（",
+        math(String.raw`u,v`),
+        " は互いに素な正の自然数）と表したとき、",
+        math(String.raw`v`),
+        " の素因子はすべて ",
+        math(String.raw`b`),
+        " の素因子である。ここで ",
+        math(String.raw`v_p`),
+        " は正の有理数の素指数（",
+        ref("def_positive_rational_prime_exponent_data"),
+        "）であり、主張は ",
+        math(String.raw`\mathbb Q`),
+        " と ",
+        math(String.raw`\mathbb Z`),
+        " の言明だけからなる。箱の大きさの極限も正の実数乗根も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "素数 ",
+        math(String.raw`p`),
+        " が ",
+        math(String.raw`b`),
+        " を割らないとする。まず有限箱の値を整数の商として表す。",
+        ref("def_partition_polynomial"),
+        " により ",
+        math(String.raw`Z_L(X)=\sum_{m=0}^{\#E_L}\Omega_L(m)X^m`),
+        " であり、各 ",
+        math(String.raw`\Omega_L(m)`),
+        " は非負整数である。ここへ ",
+        math(String.raw`X=a/b`),
+        " を代入する。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_L(q)
+&=\sum_{m=0}^{\#E_L}\Omega_L(m)\Bigl(\frac{a}{b}\Bigr)^{m}
+&&(\because\ \text{代入})\\
+&=\sum_{m=0}^{\#E_L}\Omega_L(m)\,\frac{a^{m}\,b^{\#E_L-m}}{b^{\#E_L}}
+&&(\because\ \text{分母と分子へ } b^{\#E_L-m} \text{ を掛ける有理数の等式})\\
+&=\frac{1}{b^{\#E_L}}\sum_{m=0}^{\#E_L}\Omega_L(m)\,a^{m}\,b^{\#E_L-m}
+&&(\because\ \text{有限和からの共通因子のくくり出し})
+\end{aligned}`,
+      ),
+      paragraph([
+        "そこで整数 ",
+        math(String.raw`P_L:=\sum_{m=0}^{\#E_L}\Omega_L(m)\,a^{m}\,b^{\#E_L-m}\in\mathbb Z_{>0}`),
+        " と置く。これは非負整数と正の自然数の冪との有限個の積の有限和であり、",
+        math(String.raw`m=0`),
+        " の項が ",
+        math(String.raw`\Omega_L(0)\,b^{\#E_L}>0`),
+        " なので正である。以上より ",
+        math(String.raw`Z_L(q)=P_L/b^{\#E_L}`),
+        " が ",
+        math(String.raw`\mathbb Q_{>0}`),
+        " の等式として成り立つ。",
+      ]),
+      paragraph([
+        "次に素指数を取る。",
+        math(String.raw`v_p`),
+        " は正の有理数の積を整数の和へ、商を差へ写す（",
+        ref("def_positive_rational_prime_exponent_data"),
+        "）から、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+v_p\bigl(Z_L(q)\bigr)
+&=v_p(P_L)-v_p\bigl(b^{\#E_L}\bigr)
+&&(\because\ \text{商が差へ写ること})\\
+&=v_p(P_L)-\#E_L\,v_p(b)
+&&(\because\ \text{冪が指数倍へ写ること})\\
+&=v_p(P_L)
+&&(\because\ p \text{ は } b \text{ を割らないので } v_p(b)=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。",
+        math(String.raw`P_L`),
+        " は正の自然数なので、その素指数は非負である。すなわち ",
+        math(String.raw`v_p(P_L)\ge0`),
+        " であり、したがって ",
+        math(String.raw`v_p(Z_L(q))\ge0`),
+        " である。",
+      ]),
+      paragraph([
+        "最後に仮定した表示へ移す。",
+        math(String.raw`L\ge L_0`),
+        " を一つ取ると ",
+        math(String.raw`Z_L(q)=c^{\#V_L}`),
+        " なので、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\#V_L\,v_p(c)
+&=v_p\bigl(c^{\#V_L}\bigr)
+&&(\because\ \text{冪が指数倍へ写ること})\\
+&=v_p\bigl(Z_L(q)\bigr)
+&&(\because\ \text{仮定した表示})\\
+&\ge0
+&&(\because\ \text{前段})
+\end{aligned}`,
+      ),
+      paragraph([
+        "となる。",
+        math(String.raw`\#V_L=L^3`),
+        " は正の自然数なので、整数の不等式 ",
+        math(String.raw`L^3\,v_p(c)\ge0`),
+        " から ",
+        math(String.raw`v_p(c)\ge0`),
+        " が従う。",
+      ]),
+      paragraph([
+        "既約分数の表示 ",
+        math(String.raw`c=u/v`),
+        " について ",
+        math(String.raw`v_p(c)=v_p(u)-v_p(v)`),
+        " であり、",
+        math(String.raw`u`),
+        " と ",
+        math(String.raw`v`),
+        " は互いに素なので ",
+        math(String.raw`v_p(u)`),
+        " と ",
+        math(String.raw`v_p(v)`),
+        " の少なくとも一方は ",
+        math(String.raw`0`),
+        " である。したがって ",
+        math(String.raw`v_p(c)\ge0`),
+        " は ",
+        math(String.raw`v_p(v)=0`),
+        " に他ならない。よって ",
+        math(String.raw`b`),
+        " を割らない素数は ",
+        math(String.raw`v`),
+        " を割らない。対偶を取れば、",
+        math(String.raw`v`),
+        " の素因子はすべて ",
+        math(String.raw`b`),
+        " の素因子である。",
+      ]),
+      paragraph([
+        "なお、分子の側について同じ結論は出ない。",
+        math(String.raw`v_p(P_L)`),
+        " には上からの制約が無く、",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`b`),
+        " を割らない素数が ",
+        math(String.raw`u`),
+        " を割る可能性をこの論法は排除しない。分子の側は別の論法を要する。",
+      ]),
+    ],
+  },
 ]);
