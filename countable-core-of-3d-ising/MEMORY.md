@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-24 13:04: 本流「冪等式の末尾成立を正の有理数の点数乗という形へ言い換える」の SageMath 層を閉じた（`sagemath/check/power-identity-iff-rational-power-form/` の三検査を全 PASS）。点数乗表示から交差冪等式を得る段、素指数の交差等式から点数による可除性と商の不変性を得る段、有限個の非零素指数から正の有理数を復元する段を `ZZ`・`QQ` だけで検査した。次は同主張の Lean 具体版。
 - 2026-08-24 12:33: 本流の判定セクションを二つに割り、先頭「冪等式の末尾成立を正の有理数の点数乗という形へ言い換える」の記述層を閉じた（`claim_power_identity_iff_rational_power_form`）。素数ごとの指数について $(L+1)^3e_L=L^3e_{L+1}$ を立て、$\gcd(L^3,(L+1)^3)=1$ から $L^3\mid e_L$ を得る 1 論法。次は同主張の SageMath 層。
 - 2026-08-24 11:35（本流）: 「末尾定数性は隣接する箱の分配多項式の冪等式に同値である」の Lean 具体版 `eventually_constant_iff_power_identity` を追加した。`lake build` と sorry 検査（383 件）を通過。次は同主張の Lean 必要十分版。
 - 2026-08-24 11:07（並行）: Pfaffian 予言の Lean 具体版で、未選択の元の辺の両端子がそれぞれ内部辺で覆われることを `unselected_terminals_are_covered_by_internal_edges` へ束ねた。`lake build` と sorry 検査（382 件）を通過。次は二端子の内部辺配置から polygon–dimer 対応へ進む。
