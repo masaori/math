@@ -126,6 +126,7 @@ export const ALL_LABELS = [
   "theorem_primal_cohomology_dual_homology_transport_is_bijective",
   "theorem_product_difference_eight_hyperbolic_types",
   "theorem_product_difference_eleven_hyperbolic_types",
+  "theorem_product_difference_fifteen_hyperbolic_types",
   "theorem_product_difference_fourteen_hyperbolic_types",
   "theorem_product_difference_nine_hyperbolic_types",
   "theorem_product_difference_seven_hyperbolic_types",
