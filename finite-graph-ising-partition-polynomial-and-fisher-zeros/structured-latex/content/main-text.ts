@@ -5010,10 +5010,18 @@ x^{m-2}
 =
 \sum_{m=2}^{|E|}
 \iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
-  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)\Omega_G(m)\right)
+  \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)m(m-1)\right)
 \right)
 x^{m-2}
 \quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は積を保つ}\bigr).`),
+      displayMath(String.raw`D^2\overline P_G(x)
+=
+\sum_{m=2}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)\Omega_G(m)\right)
+\right)
+x^{m-2}
+\quad\bigl(\because\ \mathbb N\text{ の乗法の結合律と交換律}\bigr).`),
       displayMath(String.raw`D^2\overline P_G(a)
 =
 \sum_{m=2}^{|E|}
