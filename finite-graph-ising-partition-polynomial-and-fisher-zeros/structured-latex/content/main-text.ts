@@ -5118,7 +5118,6 @@ x^{m-2}
 &=B_G(a)
 &&\bigl(\because\ \text{係数表示の二回の項別形式微分}\bigr).
 \end{aligned}`),
-      paragraph([ref("theorem_fisher_zero_algebraic_shifted_reciprocal_sum_coefficient_ratio"), " より、"]),
       displayMath(String.raw`\begin{aligned}
 \mathcal R_G(a)^2-S_{G,2}(a)
 &=
@@ -5127,7 +5126,11 @@ x^{m-2}
 S_{G,2}(a)
 &=
 \mathcal R_G(a)^2-\frac{B_G(a)}{\overline P_G(a)}
-&&\bigl(\because\ \text{移項}\bigr)\\
+&&\bigl(\because\ \text{移項}\bigr).
+\end{aligned}`),
+      paragraph([ref("theorem_fisher_zero_algebraic_shifted_reciprocal_sum_coefficient_ratio"), " より、"]),
+      displayMath(String.raw`\begin{aligned}
+S_{G,2}(a)
 &=
 \left(\frac{A_G(a)}{\overline P_G(a)}\right)^2
 -
