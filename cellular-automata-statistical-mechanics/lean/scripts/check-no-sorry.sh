@@ -1084,6 +1084,20 @@ targets=(
   CellularAutomata.RecursivePreimageTreeCode.mapCode_eq_necessary_sufficient
   CellularAutomata.RecursivePreimageTreeCode.image_periodicOrbit
   CellularAutomata.RecursivePreimageTreeCode.componentCode_transport
+  CellularAutomata.ConjugacyClassCodeImageBijection.globalMap_fullRule
+  CellularAutomata.ConjugacyClassCodeImageBijection.card_allGlobalMaps
+  CellularAutomata.ConjugacyClassCodeImageBijection.conj_refl
+  CellularAutomata.ConjugacyClassCodeImageBijection.conj_symm
+  CellularAutomata.ConjugacyClassCodeImageBijection.conj_trans
+  CellularAutomata.ConjugacyClassCodeImageBijection.conj_iff_mapCode_eq
+  CellularAutomata.ConjugacyClassCodeImageBijection.mem_codeImage_iff
+  CellularAutomata.ConjugacyClassCodeImageBijection.quotientCode_mk
+  CellularAutomata.ConjugacyClassCodeImageBijection.quotientCode_injective
+  CellularAutomata.ConjugacyClassCodeImageBijection.quotientCode_mem_codeImage
+  CellularAutomata.ConjugacyClassCodeImageBijection.codeSubtypeMap_injective
+  CellularAutomata.ConjugacyClassCodeImageBijection.codeSubtypeMap_surjective
+  CellularAutomata.ConjugacyClassCodeImageBijection.codeSubtypeMap_bijective
+  CellularAutomata.ConjugacyClassCodeImageBijection.card_conjClass_eq_card_codeImage
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
