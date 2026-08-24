@@ -361,19 +361,46 @@ theorem truncatedTreeNodeConfiguration_injective :
         (PUnit ⊕ (Σ z : (nonperiodicChildren N f y).val,
           TruncatedTreeNode N f depth z)))
 
+/-- 具体版の打ち切り節点型と、有限子表だけから作る必要十分版の
+    打ち切り節点型の全単射。後続段では子の出現を変えず、各子部分木で
+    一つ浅い全単射へ再帰する。 -/
+noncomputable def truncatedTreeNodeEquivNecessarySufficient :
+    (depth : ℕ) → (y : V → State) →
+      TruncatedTreeNode N f depth y ≃
+        NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.TruncatedTreeNode
+          (nonperiodicChildren N f) depth y
+  | 0, _ => Equiv.refl PUnit
+  | depth + 1, y =>
+      Equiv.sumCongr (Equiv.refl PUnit)
+        (Equiv.sigmaCongr (Equiv.refl _) fun z =>
+          truncatedTreeNodeEquivNecessarySufficient depth z)
+
 /-- 再帰的前像木対応から、打ち切り節点型の実際の全単射を構成する。
-    後続深さでは根を根へ固定し、子出現の全単射を適用してから、
-    対応する各子部分木の内部で独立に再帰する。 -/
+    具体版と必要十分版の節点型の全単射を両端に挟み、有限子表だけを
+    使う必要十分版を非周期一段前像へ特殊化して導出する。 -/
 noncomputable def treeNodeEquivOfMatching :
     (depth : ℕ) → (y : V → State) → (yW : W → State) →
       HasTreeMatching N f NW fW depth y yW →
         TruncatedTreeNode N f depth y ≃ TruncatedTreeNode NW fW depth yW
-  | 0, _, _, _ => Equiv.refl PUnit
-  | depth + 1, y, yW, hmatch =>
-      Equiv.sumCongr (Equiv.refl PUnit)
-        (Equiv.sigmaCongr (Classical.choose hmatch) fun z =>
-          treeNodeEquivOfMatching depth z (Classical.choose hmatch z)
-            (Classical.choose_spec hmatch z))
+  | depth, y, yW, hmatch =>
+      (truncatedTreeNodeEquivNecessarySufficient N f depth y).trans
+        ((NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.treeNodeEquivOfMatching
+          (nonperiodicChildren N f) (nonperiodicChildren NW fW)
+          depth y yW hmatch).trans
+            (truncatedTreeNodeEquivNecessarySufficient NW fW depth yW).symm)
+
+/-- 具体版の節点全単射は、両側の節点型を必要十分版へ移す全単射と、
+    非周期一段前像表へ特殊化した必要十分版の合成である。 -/
+theorem treeNodeEquivOfMatching_from_necessarySufficient
+    (depth : ℕ) (y : V → State) (yW : W → State)
+    (hmatch : HasTreeMatching N f NW fW depth y yW) :
+    treeNodeEquivOfMatching N f NW fW depth y yW hmatch =
+      (truncatedTreeNodeEquivNecessarySufficient N f depth y).trans
+        ((NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.treeNodeEquivOfMatching
+          (nonperiodicChildren N f) (nonperiodicChildren NW fW)
+          depth y yW hmatch).trans
+            (truncatedTreeNodeEquivNecessarySufficient NW fW depth yW).symm) :=
+  rfl
 
 /-- 再帰的前像木対応から構成した全単射は根を根へ送る。 -/
 theorem treeNodeEquivOfMatching_root
@@ -381,6 +408,7 @@ theorem treeNodeEquivOfMatching_root
     (hmatch : HasTreeMatching N f NW fW (depth + 1) y yW) :
     treeNodeEquivOfMatching N f NW fW (depth + 1) y yW hmatch (Sum.inl PUnit.unit) =
       Sum.inl PUnit.unit := by
+  change Sum.inl PUnit.unit = Sum.inl PUnit.unit
   rfl
 
 /-- 再帰的前像木対応は、深さ零を含む全ての打ち切り深さで根を根へ送る。 -/
@@ -390,7 +418,7 @@ theorem treeNodeEquivOfMatching_root_all
     treeNodeEquivOfMatching N f NW fW depth y yW hmatch
         (truncatedTreeNodeRoot N f depth y) =
       truncatedTreeNodeRoot NW fW depth yW := by
-  cases depth <;> rfl
+  cases depth <;> change _ = _ <;> rfl
 
 /-- 子分岐では、選択した子出現対応を先に適用し、その下の部分木対応へ再帰する。 -/
 theorem treeNodeEquivOfMatching_child
@@ -403,6 +431,7 @@ theorem treeNodeEquivOfMatching_child
       Sum.inr ⟨Classical.choose hmatch z,
         treeNodeEquivOfMatching N f NW fW depth z
           (Classical.choose hmatch z) (Classical.choose_spec hmatch z) u⟩ := by
+  change Sum.inr _ = Sum.inr _
   rfl
 
 /-- 打ち切り前像木の非周期な親子辺。直下の子から根への辺と、
