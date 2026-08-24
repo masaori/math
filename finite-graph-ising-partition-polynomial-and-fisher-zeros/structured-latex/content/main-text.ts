@@ -5032,6 +5032,13 @@ x^{m-2}
 \right)
 \prod_{j=1}^{d}(x-\alpha_j)
 \quad\bigl(\because\ \text{代数的閉体上の重複度込み一次因子分解}\bigr).`),
+      displayMath(String.raw`\prod_{j=1}^{d}(a-\alpha_j)
+\ne0
+\quad\bigl(\because\ \overline P_G(a)\ne0\text{ と一次因子分解}\bigr).`),
+      displayMath(String.raw`a-\alpha_j
+\ne0
+\qquad(1\le j\le d)
+\quad\bigl(\because\ \text{有限積が非零なら各因子は非零}\bigr).`),
       paragraph(["直前の一次因子分解を一回形式微分すると、"]),
       displayMath(String.raw`D\overline P_G(x)
 =

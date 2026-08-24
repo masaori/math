@@ -4,6 +4,8 @@ load("finite-graph-ising-partition-polynomial-and-fisher-zeros/sagemath/check/fi
 for data in examples:
     for a in algebraic_evaluation_points:
         if data["polynomial"](a) != 0:
+            root_differences = [a - alpha for alpha in data["roots"]]
+            assert all(difference != 0 for difference in root_differences), (data["name"], a)
             total_product = prod((a - alpha for alpha in data["roots"]), QQbar(1))
             for first in range(data["degree"]):
                 for second in range(first + 1, data["degree"]):
@@ -17,4 +19,4 @@ for data in examples:
                     )
                     denominator = (a - data["roots"][first]) * (a - data["roots"][second])
                     assert total_product / denominator == omitted_product, (data["name"], a, first, second)
-print("RESULT: PASS — every nonzero pair of root differences cancels from its total product")
+print("RESULT: PASS — nonzero polynomial evaluation makes every root difference nonzero, and each pair cancels")
