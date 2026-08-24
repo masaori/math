@@ -5198,14 +5198,42 @@ $\Omega_G(d)\in\mathbb N_{>0}$
 \cref{lab:def_fisher_zero_algebraic_shifted_reciprocal_sum}
  より、
 
-\[\mathcal R_G(a)S_{G,2}(a)
-=
+\[\begin{aligned}
+\mathcal R_G(a)S_{G,2}(a)
+&=
+\left(
+  \sum_{k=1}^{d}\frac{1}{a-\alpha_k}
+\right)
+S_{G,2}(a)
+&&\bigl(\because\ \text{Fisher 零点差の逆数和の定義}\bigr)\\
+&=
+\left(
+  \sum_{k=1}^{d}\frac{1}{a-\alpha_k}
+\right)
+\left(
+  \sum_{\ell=1}^{d}\frac{1}{(a-\alpha_\ell)^2}
+\right)
+&&\bigl(\because\ S_{G,2}(a)\text{ の定義}\bigr)\\
+&=
+\sum_{k=1}^{d}
+\sum_{\ell=1}^{d}
+\frac{1}{(a-\alpha_k)(a-\alpha_\ell)^2}
+&&\bigl(\because\ \text{有限和に対する分配律}\bigr)\\
+&=
+S_{G,3}(a)
++
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{1}{(a-\alpha_k)(a-\alpha_\ell)^2}
+&&\bigl(\because\ \text{有限二重和を対角項と非対角項へ分ける}\bigr)\\
+&=
 S_{G,3}(a)
 +
 \sum_{k=1}^{d}
 \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
 \frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
-\quad\bigl(\because\ \text{有限二重和を対角項と非対角項へ分ける}\bigr).\]
+&&\bigl(\because\ \text{非対角項の添字 }k,\ell\text{ を交換する}\bigr).
+\end{aligned}\]
 \[\mathcal R_G(a)^3
 =
 S_{G,3}(a)

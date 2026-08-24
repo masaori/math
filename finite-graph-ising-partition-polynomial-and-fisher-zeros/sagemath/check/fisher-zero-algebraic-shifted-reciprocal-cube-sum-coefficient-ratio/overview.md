@@ -24,7 +24,11 @@
 | `check_distribute_third_derivative_ratio.sage` | 三重和への分母分配 | PASS | 全ての非零評価で一致 |
 | `check_cancel_three_root_factors.sage` | 各三重和項の三因子消去 | PASS | 全ての非零評価で項別に一致 |
 | `check_third_derivative_root_ratio.sage` | 三回微分と相異なる順序付き三重和 | PASS | 全ての非零評価で一致 |
-| `check_reciprocal_product_decomposition.sage` | 逆数和と逆二乗和の積の分解 | PASS | 対角・非対角分解が一致 |
+| `check_substitute_reciprocal_sum_definition.sage` | 逆数和の定義の代入 | PASS | 逆数和を有限和へ置換しても積が一致 |
+| `check_substitute_reciprocal_square_sum_definition.sage` | 逆二乗和の定義の代入 | PASS | 逆二乗和を有限和へ置換しても積が一致 |
+| `check_distribute_reciprocal_product.sage` | 二つの有限和の積の分配 | PASS | 積と順序付き有限二重和が一致 |
+| `check_reciprocal_product_decomposition.sage` | 順序付き有限二重和の対角・非対角分解 | PASS | 対角・非対角分解が一致 |
+| `check_swap_non_diagonal_pair_indices.sage` | 非対角二重和の添字交換 | PASS | 二つの順序付き非対角和が一致 |
 | `check_reciprocal_cube_decomposition.sage` | 逆数和の三乗の一致型分解 | PASS | 三つの添字一致型が一致 |
 | `check_eliminate_non_diagonal_pair_sum.sage` | 非対角二重和の消去 | PASS | 三次恒等式が一致 |
 | `check_substitute_lower_reciprocal_sums.sage` | 既存の一次・二次係数表示の代入 | PASS | 既存二定理の代入後も一致 |
