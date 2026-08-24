@@ -134,6 +134,22 @@ fi
 printf '%s\n' "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
+# launchd の kickstart -k や強制終了が Git の index 更新中に入ると、Git プロセスだけが
+# 終了して専用 worktree の空の index.lock が残る。このループ自身の排他ロックを取得済みで、
+# かつ lock を開いているプロセスが無い場合に限り回収する。保持者がいる lock は異常として止め、
+# 別プロセスの Git 操作へ割り込まない。
+WORKTREE_GIT_DIR="$(git -C "$MAIN_REPO_DIR" rev-parse --path-format=absolute \
+  --git-path worktrees/"$(basename "$LOOP_WORKTREE")")"
+WORKTREE_INDEX_LOCK="$WORKTREE_GIT_DIR/index.lock"
+if [ -e "$WORKTREE_INDEX_LOCK" ]; then
+  if /usr/sbin/lsof "$WORKTREE_INDEX_LOCK" >/dev/null 2>&1; then
+    log "ERROR: 専用 worktree の index.lock を別プロセスが保持している"
+    exit 1
+  fi
+  rm -f "$WORKTREE_INDEX_LOCK"
+  log "    保持者のいない専用 worktree の index.lock を回収した"
+fi
+
 # 機械が応答しないときは見送る。判定は load average の数字ではなく実際の応答時間で行う。
 probe_start="$(date +%s)"
 timeout 30 git -C "$MAIN_REPO_DIR" status --porcelain >/dev/null 2>&1 || true
