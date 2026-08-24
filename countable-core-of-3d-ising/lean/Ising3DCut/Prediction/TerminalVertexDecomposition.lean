@@ -457,4 +457,20 @@ theorem card_matchingUncoveredTerminalsAt_even_iff {V Edge : Type*}
     Nat.even_sub hle]
   simp [even_two_mul]
 
+
+/-- 覆われずに残る端子であることは、`v` の接続辺から作った端子であって、
+選ばれたどの内部辺にも属さないことと同値。
+外部辺との対応を付ける前段として、残った端子を辺の言葉で述べ直す。 -/
+theorem mem_matchingUncoveredTerminalsAt_iff {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) (t : Σ _ : V, Edge) :
+    t ∈ matchingUncoveredTerminalsAt incidentEdges v matching ↔
+      (t.1 = v ∧ t.2 ∈ incidentEdges t.1) ∧
+        ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching, t ∉ s := by
+  classical
+  unfold matchingUncoveredTerminalsAt matchingCoveredTerminalsAt
+  rw [Finset.mem_sdiff, mem_terminalsAt_iff]
+  simp [Finset.mem_biUnion]
+
 end Ising3DCut.Prediction
