@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-25 01:03（本流）: 「底の既約分母は破れ数ゼロの配位数を割らない素数では割り切れない」の SageMath 層を閉じた（`sagemath/check/rational-power-base-den-no-prime-missing-zero-mult/`）。既約な分数からの非整除、法 $b$ の合同式からの $p\nmid P_M$、整数等式の素因子指数比較、隣接二箱の指数等式の不両立を `ZZ` の有限標本で本文と同順に全 PASS。次は同主張の Lean 具体版。
 - 2026-08-25 00:41（本流）: 「法 $b$ の整除から底の既約分母を特定する」を三つへ割り、その先頭「底の既約分母は破れ数ゼロの配位数を割らない素数では割り切れない」の記述層を書いた（`claim_rational_power_base_den_no_prime_missing_zero_mult`）。$p\mid v$ を仮定すると $p\mid b$・$p\nmid a$・$p\nmid u$ が出て、回文性から $p\nmid P_M$ となり、整数等式の両辺の $p$ 指数が $Me_v=3(M-1)e_b$ を与える。隣接する二つの箱でこれを比べると $3e_b=0$ となり矛盾する。$\Omega_L(0)=2$ はまだ本文未確定なので、その値を使わず「$p\nmid\Omega_M(0)$」を仮定に置いた（割った二番目でこの仮定を奇素数へ置き換える）。次はこの行の SageMath 検証。
 - 2026-08-25 00:06（並行）: `terminals_of_internalEdge_have_same_vertex` を追加し、同じ city 内の二端子の所属一致を terminal graph 全体の内部辺へ持ち上げた。次は完全マッチングの内部辺を元頂点ごとの組として数え、復号した辺集合の各頂点での偶数性へ接続する。
 - 2026-08-25 00:04（本流）: 「点数乗表示の底の既約分母は有理点の分子と互いに素である」の Lean 必要十分版 `NecSuf.coprime_of_common_prime_dvd_left` と導出 `rational_power_base_denominator_coprime_to_numerator_viaNecSuf` を追加し、四層を閉じた。合同式・法の移送・冪を落とすと、共通素因子を底の分子へ移す条件と底の既約性だけが残る。`lake build` と sorry 検査 418 件を通過。次は法 $b$ の整除から底の既約分母を特定する記述。
