@@ -69,5 +69,6 @@ import CellularAutomata.PeriodicPointCount
 import CellularAutomata.RecursivePreimageTreeCode
 import CellularAutomata.RedundantNeighbor
 import CellularAutomata.ReversibilityFiniteDecidability
+import CellularAutomata.ReversibleGlobalMapCycleType
 import CellularAutomata.TimeExpansionDependency
 import CellularAutomata.TransitiveClosureAntisymmetry

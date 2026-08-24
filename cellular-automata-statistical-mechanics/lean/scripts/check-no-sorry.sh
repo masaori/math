@@ -53,6 +53,14 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.ReversibleGlobalMapCycleType.all_configurations_periodic
+  CellularAutomata.ReversibleGlobalMapCycleType.filter_cycleType
+  CellularAutomata.ReversibleGlobalMapCycleType.cycleType_members_positive
+  CellularAutomata.ReversibleGlobalMapCycleType.cycleType_sum
+  CellularAutomata.ReversibleGlobalMapCycleType.perm_conj_eq
+  CellularAutomata.ReversibleGlobalMapCycleType.cycleType_eq_of_conj
+  CellularAutomata.ReversibleGlobalMapCycleType.conj_of_cycleType_eq
+  CellularAutomata.ReversibleGlobalMapCycleType.conj_iff_cycleType_eq
   CellularAutomata.IterateMonoidStableFiberRootedTree.iterateMap_period_multiple_propagates
   CellularAutomata.IterateMonoidStableFiberRootedTree.rootReachExponent_mul_minPositivePeriod
   CellularAutomata.IterateMonoidStableFiberRootedTree.iterateMap_succ_mul_minPositivePeriod
