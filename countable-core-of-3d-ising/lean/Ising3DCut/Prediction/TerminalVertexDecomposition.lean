@@ -86,6 +86,18 @@ theorem terminal_of_mem_internalEdgeAt {V Edge : Type*} [DecidableEq V] [Decidab
     ((mem_internalEdgesAt_iff incidentEdges v s).mp hs).1 ht
   exact (mem_terminalsAt_iff incidentEdges v t).mp htAt
 
+/-- 同じ city の内部辺に属する二端子は、同じ元頂点に属する。
+内部辺が端子を頂点ごとの組へ分けることを、後続の偶数性の証明で直接使う形に束ねる。 -/
+theorem terminals_of_internalEdgeAt_have_same_vertex {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (incidentEdges : V → Finset Edge) (v : V)
+    (s : Finset (Σ _ : V, Edge)) (hs : s ∈ internalEdgesAt incidentEdges v)
+    (t u : Σ _ : V, Edge) (ht : t ∈ s) (hu : u ∈ s) :
+    t.1 = u.1 := by
+  have htVertex := (terminal_of_mem_internalEdgeAt incidentEdges v s hs t ht).1
+  have huVertex := (terminal_of_mem_internalEdgeAt incidentEdges v s hs u hu).1
+  exact htVertex.trans huVertex.symm
+
 /-- Terminal graph 全体の内部辺は、元の各頂点の city の内部辺を束ねた集合である。 -/
 def internalEdges {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
     (vertices : Finset V) (incidentEdges : V → Finset Edge) :
