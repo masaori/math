@@ -23,6 +23,8 @@
 | `check_reciprocal_square_expansion.sage` | 逆数和の平方を対角項と相異なる順序付き添字対へ分離 | PASS | 全例・全対象評価点で一致 |
 | `check_cancel_root_pairs.sage` | 一次因子分解の評価、非零積からの最高次係数の消去、各零点差の非零性、二つの零点差の消去 | PASS | 全段が全例・全対象評価点で成立 |
 | `check_second_derivative_ratio.sage` | 逆数対和と二回形式微分の評価値の一致 | PASS | 全例・全対象評価点で一致 |
+| `check_divide_nonzero_polynomial_value.sage` | 非零な評価値を消去して逆数対和を商として取り出す等式 | PASS | 全例・全対象評価点で一致 |
+| `check_rearrange_reciprocal_square_sum.sage` | 移項により逆二乗和を単独で取り出す等式 | PASS | 全例・全対象評価点で一致 |
 | `check_final_coefficient_ratio.sage` | 逆二乗和と係数有限和の比の一致 | PASS | 全例・全対象評価点で一致 |
 | `check_degree_zero_empty_sums.sage` | 次数零における三つの空和 | PASS | 三つの空和が `QQbar(0)` に一致 |
 

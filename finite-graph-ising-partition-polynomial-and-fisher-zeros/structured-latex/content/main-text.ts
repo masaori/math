@@ -5120,10 +5120,14 @@ x^{m-2}
 \end{aligned}`),
       paragraph([ref("theorem_fisher_zero_algebraic_shifted_reciprocal_sum_coefficient_ratio"), " より、"]),
       displayMath(String.raw`\begin{aligned}
+\mathcal R_G(a)^2-S_{G,2}(a)
+&=
+\frac{B_G(a)}{\overline P_G(a)}
+&&\bigl(\because\ \overline P_G(a)\ne0\text{ を消去する}\bigr)\\
 S_{G,2}(a)
 &=
 \mathcal R_G(a)^2-\frac{B_G(a)}{\overline P_G(a)}
-&&\bigl(\because\ \overline P_G(a)\ne0\text{ を消去する}\bigr)\\
+&&\bigl(\because\ \text{移項}\bigr)\\
 &=
 \left(\frac{A_G(a)}{\overline P_G(a)}\right)^2
 -
