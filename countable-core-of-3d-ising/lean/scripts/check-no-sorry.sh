@@ -470,6 +470,11 @@ targets=(
   Ising3DCut.LimitQuantity.dvd_pow_numerator_of_dvd_denominator
   Ising3DCut.LimitQuantity.rational_power_base_denominator_coprime_to_numerator
   Ising3DCut.NecSuf.coprime_of_common_prime_dvd_left
+  Ising3DCut.LimitQuantity.not_dvd_bridge_integer_of_not_dvd_zero_multiplicity
+  Ising3DCut.LimitQuantity.exponent_equation_of_integer_identity
+  Ising3DCut.LimitQuantity.box_exponent_equation_cancel
+  Ising3DCut.LimitQuantity.zero_exponent_of_two_adjacent_boxes
+  Ising3DCut.LimitQuantity.rational_power_base_den_no_prime_missing_zero_multiplicity
   Ising3DCut.LimitQuantity.rational_power_base_denominator_coprime_to_numerator_viaNecSuf
   Ising3DCut.Prediction.terminal_of_mem_internalEdgeAt
   Ising3DCut.Prediction.terminals_of_internalEdge_have_same_vertex
