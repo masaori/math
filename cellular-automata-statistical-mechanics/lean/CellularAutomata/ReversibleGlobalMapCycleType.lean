@@ -27,6 +27,7 @@ import CellularAutomata.ConjugacyClassCodeImageBijection
 import CellularAutomata.NecSuf.ReversibilityFiniteDecidability
 import CellularAutomata.NecSuf.PeriodicPointCount
 import CellularAutomata.NecSuf.IterateMonoidStableFiberRootedTree
+import CellularAutomata.NecSuf.ReversibleGlobalMapCycleType
 import Mathlib.GroupTheory.Perm.Cycle.PossibleTypes
 
 namespace CellularAutomata.ReversibleGlobalMapCycleType
@@ -389,5 +390,73 @@ theorem quotientCycleType_surjective : Function.Surjective (quotientCycleType (V
 noncomputable def reversibleConjClassEquivPartitions :
     ReversibleConjClass V ≃ ConfigurationPartition V :=
   Equiv.ofBijective quotientCycleType ⟨quotientCycleType_injective, quotientCycleType_surjective⟩
+
+
+/-! ## 必要十分版からの導出
+
+必要十分版は CellularAutomata/NecSuf/ReversibleGlobalMapCycleType.lean。
+そこでは台が有限型で等号判定を持つことしか要求しない。以下は、この章の具体版が
+台を配位型 `Config V` に取った特殊化として得られることを述べる。
+-/
+
+namespace Derivation
+
+open CellularAutomata.NecSuf.ReversibleGlobalMapCycleType
+
+/-- 具体版の可逆な大域写像は、必要十分版の単射な自己写像の、台を配位型に取ったものである。 -/
+def toInjSelfMap (F : ReversibleMap V) : InjSelfMap (Config V) := ⟨F.1, F.2⟩
+
+/-- 巡回型の定義は特殊化で一致する。 -/
+theorem cycleType_eq (F : ReversibleMap V) :
+    cycleType F = CellularAutomata.NecSuf.ReversibleGlobalMapCycleType.cycleType (toInjSelfMap F) :=
+  rfl
+
+/-- 共役全単射の定義は特殊化で一致する。 -/
+theorem conj_iff (F G : ReversibleMap V) :
+    Conj F G ↔ CellularAutomata.NecSuf.ReversibleGlobalMapCycleType.Conj
+      (toInjSelfMap F) (toInjSelfMap G) :=
+  Iff.rfl
+
+/-- 巡回型の総和の主張は、必要十分版の `Fintype.card X` 版を台の元数の計算と合わせたものである。 -/
+theorem cycleType_sum_of_necSuf (F : ReversibleMap V) :
+    (cycleType F).sum = 2 ^ Fintype.card V := by
+  rw [cycleType_eq]
+  rw [CellularAutomata.NecSuf.ReversibleGlobalMapCycleType.cycleType_sum]
+  exact CellularAutomata.GlobalMapIteration.card_config
+
+/-- 共役不変性は必要十分版の特殊化である。 -/
+theorem cycleType_eq_of_conj_of_necSuf {F G : ReversibleMap V} (hFG : Conj F G) :
+    cycleType F = cycleType G :=
+  CellularAutomata.NecSuf.ReversibleGlobalMapCycleType.cycleType_eq_of_conj
+    ((conj_iff F G).1 hFG)
+
+/-- 完全性は必要十分版の特殊化である。 -/
+theorem conj_of_cycleType_eq_of_necSuf {F G : ReversibleMap V}
+    (hct : cycleType F = cycleType G) : Conj F G :=
+  (conj_iff F G).2
+    (CellularAutomata.NecSuf.ReversibleGlobalMapCycleType.conj_of_cycleType_eq hct)
+
+/-- 分割の実現は必要十分版の特殊化である。配位数の分割は台の元数の分割そのものである。 -/
+theorem exists_cycleType_eq_partition_of_necSuf (p : ConfigurationPartition V) :
+    ∃ F : ReversibleMap V, cycleType F = p.1 := by
+  obtain ⟨F, hF⟩ :=
+    CellularAutomata.NecSuf.ReversibleGlobalMapCycleType.exists_cycleType_eq_partition
+      (X := Config V) ⟨p.1, p.2.1, p.2.2⟩
+  exact ⟨⟨F.1, F.2⟩, hF⟩
+
+/-- 具体版の共役類と、必要十分版の共役類の対応。 -/
+noncomputable def conjClassEquivNecSuf :
+    ReversibleConjClass V ≃ ConjClass (Config V) :=
+  Quotient.congr (Equiv.refl _) (fun F G => Iff.rfl)
+
+/-- 具体版の全単射の値は、必要十分版の全単射の値と一致する。 -/
+theorem quotientCycleType_eq (K : ReversibleConjClass V) :
+    (quotientCycleType K).1
+      = (CellularAutomata.NecSuf.ReversibleGlobalMapCycleType.quotientCycleType
+          (conjClassEquivNecSuf K)).1 := by
+  induction K using Quotient.inductionOn with
+  | h F => rfl
+
+end Derivation
 
 end CellularAutomata.ReversibleGlobalMapCycleType

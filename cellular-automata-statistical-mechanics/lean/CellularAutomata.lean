@@ -63,6 +63,7 @@ import CellularAutomata.NecSuf.PeriodicPointCount
 import CellularAutomata.NecSuf.RecursivePreimageTreeCode
 import CellularAutomata.NecSuf.RedundantNeighbor
 import CellularAutomata.NecSuf.ReversibilityFiniteDecidability
+import CellularAutomata.NecSuf.ReversibleGlobalMapCycleType
 import CellularAutomata.NecSuf.TimeExpansionDependency
 import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry
 import CellularAutomata.PeriodicPointCount
