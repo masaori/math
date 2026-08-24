@@ -458,6 +458,8 @@ targets=(
   Ising3DCut.LimitQuantity.brokenCountSum_modEq_a
   Ising3DCut.LimitQuantity.brokenCountSum_modEq_b
   Ising3DCut.LimitQuantity.rational_power_base_congruences
+  Ising3DCut.NecSuf.base_congruences_of_integer_equation
+  Ising3DCut.LimitQuantity.rational_power_base_congruences_viaNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
