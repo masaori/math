@@ -109,6 +109,8 @@ targets=(
   Ising3DCut.NullModel.brokenCount_oddFlip
   Ising3DCut.NecSuf.NullModel.card_filter_of_iff_not
   Ising3DCut.NullModel.brokenCount_oddFlip_from_necSuf
+  Ising3DCut.NullModel.brokenCount_eq_zero_iff
+  Ising3DCut.NullModel.eq_zeroSite_value_of_brokenCount_zero
   Ising3DCut.NullModel.multiplicity_palindrome
   Ising3DCut.NullModel.partitionPolynomial_value_at_one
   Ising3DCut.NecSuf.NullModel.levelPolynomial_value_at_one
