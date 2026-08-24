@@ -30,6 +30,7 @@ structured-latex/content/conjugacy-class-code-image-bijection.ts。
 -/
 import CellularAutomata.RecursivePreimageTreeCode
 import CellularAutomata.LocalRuleRepresentation
+import CellularAutomata.NecSuf.ConjugacyClassCodeImageBijection
 
 namespace CellularAutomata.ConjugacyClassCodeImageBijection
 
@@ -212,5 +213,39 @@ noncomputable def conjClassCodeEquiv : ConjClass V ≃ {c // c ∈ (codeImage (V
 theorem card_conjClass_eq_card_codeImage :
     Fintype.card (ConjClass V) = (codeImage (V := V)).card := by
   rw [Fintype.card_congr (conjClassCodeEquiv (V := V)), Fintype.card_coe]
+
+/-! ## 必要十分版からの導出 -/
+
+/-- 具体版の共役類と写像符号の集合論的な像の全単射は、同値関係と符号等号の両方向だけを
+    要求する必要十分版の特殊化である。有限性・等号判定はこの全単射には使わない。 -/
+noncomputable def conjClassCodeRangeEquiv :
+    ConjClass V ≃ Set.range (mapCodeOf (V := V)) :=
+  CellularAutomata.NecSuf.ConjugacyClassCodeImageBijection.quotientEquivCodeRange
+    (conjSetoid (V := V)) mapCodeOf
+    (fun hFG => ((conj_iff_mapCode_eq _ _).1 hFG).symm)
+    (fun hcode => (conj_iff_mapCode_eq _ _).2 hcode.symm)
+
+/-- 必要十分版から得た全単射の値は、具体版の代表符号写像と一致する。 -/
+theorem conjClassCodeRangeEquiv_apply (K : ConjClass V) :
+    (conjClassCodeRangeEquiv (V := V) K : Multiset (Finset (List ℕ))) = quotientCode K :=
+  rfl
+
+/-- 集合論的な符号像を、具体版が有限走査で作る `Finset` の符号像へ読み替える全単射。 -/
+noncomputable def codeRangeCodeImageEquiv :
+    Set.range (mapCodeOf (V := V)) ≃ {c // c ∈ (codeImage (V := V))} :=
+  Equiv.ofBijective
+    (fun c => ⟨c.1, (mem_codeImage_iff c.1).2 c.2⟩)
+    ⟨fun a b h => Subtype.ext (congrArg
+      (fun z : {c // c ∈ (codeImage (V := V))} => z.1) h), fun c =>
+      ⟨⟨c.1, (mem_codeImage_iff c.1).1 c.2⟩, rfl⟩⟩
+
+/-- 具体版の全単射そのものを、必要十分版の全単射と有限符号像への読み替えの合成として得る。 -/
+noncomputable def conjClassCodeEquiv_from_necSuf :
+    ConjClass V ≃ {c // c ∈ (codeImage (V := V))} :=
+  (conjClassCodeRangeEquiv (V := V)).trans (codeRangeCodeImageEquiv (V := V))
+
+theorem conjClassCodeEquiv_from_necSuf_apply (K : ConjClass V) :
+    conjClassCodeEquiv_from_necSuf (V := V) K = codeSubtypeMap K :=
+  rfl
 
 end CellularAutomata.ConjugacyClassCodeImageBijection

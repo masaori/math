@@ -1098,6 +1098,12 @@ targets=(
   CellularAutomata.ConjugacyClassCodeImageBijection.codeSubtypeMap_surjective
   CellularAutomata.ConjugacyClassCodeImageBijection.codeSubtypeMap_bijective
   CellularAutomata.ConjugacyClassCodeImageBijection.card_conjClass_eq_card_codeImage
+  CellularAutomata.NecSuf.ConjugacyClassCodeImageBijection.quotientCode_mk
+  CellularAutomata.NecSuf.ConjugacyClassCodeImageBijection.quotientCode_injective
+  CellularAutomata.NecSuf.ConjugacyClassCodeImageBijection.codeRangeMap_injective
+  CellularAutomata.NecSuf.ConjugacyClassCodeImageBijection.codeRangeMap_surjective
+  CellularAutomata.ConjugacyClassCodeImageBijection.conjClassCodeRangeEquiv_apply
+  CellularAutomata.ConjugacyClassCodeImageBijection.conjClassCodeEquiv_from_necSuf_apply
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"
