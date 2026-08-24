@@ -71,6 +71,7 @@ targets=(
   Ising3DCut.LimitQuantity.partitionPolynomial_two_strictMono
   Ising3DCut.LimitQuantity.rootSeq_isingValueSeq_at_one
   Ising3DCut.LimitQuantity.constant_finite_box_sequence_only_at_one
+  Ising3DCut.LimitQuantity.eventually_constant_iff_power_identity
   Ising3DCut.NecSuf.eq_of_constant_of_strictMonoOn
   Ising3DCut.LimitQuantity.isingValueSeq_two_strictMonoOn
   Ising3DCut.LimitQuantity.constant_finite_box_sequence_only_at_one_viaNecSuf
