@@ -712,14 +712,14 @@ Overfull \hbox (48.64456pt too wide) detected at line 4530
  []
 
 [39]
-Overfull \hbox (41.83241pt too wide) detected at line 4609
+Overfull \hbox (41.83241pt too wide) detected at line 4619
 \OML/cmm/m/it/10.95 D[][][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x\OT1/cmr/m/
 n/10.95 ) = [] \OML/cmm/m/it/10.95 ^^S[]  [] ^^S[]  [] ^^S[]  [] x[] []\U/msa/m
 /n/10.95 *  [][]\OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (39.11392pt too wide) detected at line 4674
+Overfull \hbox (39.11392pt too wide) detected at line 4684
 \OML/cmm/m/it/10.95 D[][][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x\OT1/cmr/m/
 n/10.95 ) = 2\OML/cmm/m/it/10.95 ^^S[]  [] [] []\OT1/cmr/m/n/10.95 (\OML/cmm/m/
 it/10.95 x \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 ^^K[]\OT1/cmr/m/n/10.95 
@@ -727,7 +727,7 @@ it/10.95 x \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 ^^K[]\OT1/cmr/m/n/10.95
  []
 
 
-Overfull \hbox (35.61613pt too wide) detected at line 4683
+Overfull \hbox (35.61613pt too wide) detected at line 4693
 \OML/cmm/m/it/10.95 D[][][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/
 n/10.95 ) = 2\OML/cmm/m/it/10.95 ^^S[]  [] [] []\OT1/cmr/m/n/10.95 (\OML/cmm/m/
 it/10.95 a \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 ^^K[]\OT1/cmr/m/n/10.95 
@@ -736,17 +736,17 @@ it/10.95 a \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 ^^K[]\OT1/cmr/m/n/10.95
  []
 
 
-Overfull \hbox (225.92026pt too wide) detected at line 4722
+Overfull \hbox (225.92026pt too wide) detected at line 4732
 [][]
  []
 
 [40]
-Overfull \hbox (16.41571pt too wide) detected at line 4813
+Overfull \hbox (16.41571pt too wide) detected at line 4823
 [][]
  []
 
 [41] [42] [43]
-Overfull \hbox (23.56679pt too wide) detected at line 5136
+Overfull \hbox (23.56679pt too wide) detected at line 5146
 [] \OT1/cmr/m/n/10.95 
 [](\OML/cmm/m/it/10.95 m\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 q[] < [] \OT1/c
 mr/m/n/10.95 
@@ -762,4 +762,4 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 136D271E6B286FF0E67A1A8C4C9E49EB;288.
  )
-Output written on document.xdv (49 pages, 643880 bytes).
+Output written on document.xdv (49 pages, 644572 bytes).
