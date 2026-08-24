@@ -487,6 +487,11 @@ targets=(
   Ising3DCut.LimitQuantity.rational_power_base_den_two_exponent_balance
   Ising3DCut.NecSuf.balance_of_zero_contribution
   Ising3DCut.LimitQuantity.rational_power_base_den_two_exponent_balance_viaNecSuf
+  Ising3DCut.LimitQuantity.lower_terms_divisible_by_four
+  Ising3DCut.LimitQuantity.partition_value_mod_four
+  Ising3DCut.LimitQuantity.two_valuation_of_mod_four_eq_two
+  Ising3DCut.LimitQuantity.square_divisibility_contradiction
+  Ising3DCut.LimitQuantity.rational_power_base_den_two_exponent_at_least_two_impossible
   Ising3DCut.NecSuf.false_of_positive_adjacent_balance
   Ising3DCut.LimitQuantity.rational_power_base_den_no_prime_missing_zero_multiplicity_viaNecSuf
   Ising3DCut.LimitQuantity.rational_power_base_denominator_coprime_to_numerator_viaNecSuf
