@@ -74,6 +74,7 @@ targets=(
   Ising3DCut.NecSuf.eq_of_constant_of_strictMonoOn
   Ising3DCut.LimitQuantity.isingValueSeq_two_strictMonoOn
   Ising3DCut.LimitQuantity.constant_finite_box_sequence_only_at_one_viaNecSuf
+  Ising3DCut.Prediction.unselected_terminals_are_covered_by_internal_edges
   Ising3DCut.LimitQuantity.card_dvd_card_group_of_pretransitive
   Ising3DCut.LimitQuantity.forty_dvd_card_galois_group_of_irreducible
   Ising3DCut.LimitQuantity.no_equiv_of_card_four_of_forty_dvd_card

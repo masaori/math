@@ -279,5 +279,31 @@ theorem unselected_terminal_one_is_covered_by_internal_edge {V Edge : Type*}
     rw [hef, hfs]
     exact hsm
 
+/-- 完全マッチングで外部辺として選ばれなかった元の辺では、両端子がそれぞれ
+同じ city の内部辺によって覆われる。 -/
+theorem unselected_terminals_are_covered_by_internal_edges {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (e : Edge) (he : e ∈ edges)
+    (ht₀ : (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) ∈ terminalVertices vertices incidentEdges)
+    (ht₁ : (⟨endpoint₁ e, e⟩ : Σ _ : V, Edge) ∈ terminalVertices vertices incidentEdges)
+    (hUnselected : e ∉ selectedOriginalEdges edges endpoint₀ endpoint₁ matching) :
+    (∃ s₀ ∈ matching,
+      (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) ∈ s₀ ∧
+        s₀ ∈ internalEdges vertices incidentEdges) ∧
+    (∃ s₁ ∈ matching,
+      (⟨endpoint₁ e, e⟩ : Σ _ : V, Edge) ∈ s₁ ∧
+        s₁ ∈ internalEdges vertices incidentEdges) := by
+  constructor
+  · exact unselected_terminal_zero_is_covered_by_internal_edge
+      vertices edges incidentEdges endpoint₀ endpoint₁ matching hMatching e he ht₀ hUnselected
+  · exact unselected_terminal_one_is_covered_by_internal_edge
+      vertices edges incidentEdges endpoint₀ endpoint₁ matching hMatching e he ht₁ hUnselected
+
 
 end Ising3DCut.Prediction
