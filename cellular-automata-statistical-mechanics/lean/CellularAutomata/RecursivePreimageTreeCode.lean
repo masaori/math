@@ -1346,6 +1346,19 @@ theorem truncatedTreeNodeEquivPreimageTreeNodeTable_bijective
       (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth) :=
   (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth).bijective
 
+/-- 具体的な前像木節点表を、必要十分版の有限子表から作る
+打ち切り節点型へ接着する全単射。具体的な打ち切り節点型と
+必要十分版の節点型の間の再帰的全単射と、節点が表す実配位への
+全単射だけを合成する。 -/
+noncomputable def necessarySufficientTreeNodeTableAttachment
+    (q : V → State) (hq : IsPeriodicPoint N f q) (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth) :
+    NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.TruncatedTreeNode
+        (nonperiodicChildren N f) depth q ≃
+      ↑(preimageTreeNodeTable N f q) :=
+  (truncatedTreeNodeEquivNecessarySufficient N f depth q).symm |>.trans
+    (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth)
+
 /-- 対応する二つの十分深い前像木では、再帰的な子対応から構成した
     節点全単射を、周期点へ流入する二つの有限配位表の全単射へ移せる。 -/
 noncomputable def preimageTreeNodeTableEquivOfMatching
@@ -1359,9 +1372,29 @@ noncomputable def preimageTreeNodeTableEquivOfMatching
     (hdepthW : 2 ^ Fintype.card W - 1 ≤ depth)
     (hmatch : HasTreeMatching N f NW fW depth q qW) :
     ↑(preimageTreeNodeTable N f q) ≃ ↑(preimageTreeNodeTable NW fW qW) :=
-  (truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth).symm |>.trans
-    (treeNodeEquivOfMatching N f NW fW depth q qW hmatch) |>.trans
-      (truncatedTreeNodeEquivPreimageTreeNodeTable NW fW qW hqW depth hdepthW)
+  NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance.attachedTableEquivOfMatching
+    (nonperiodicChildren N f) (nonperiodicChildren NW fW) depth q qW hmatch
+    (necessarySufficientTreeNodeTableAttachment N f q hq depth hdepth)
+    (necessarySufficientTreeNodeTableAttachment NW fW qW hqW depth hdepthW)
+
+/-- 必要十分版の表接着を展開すると、具体版の二つの節点表全単射の間に
+再帰的節点全単射を挟む従来の合成と一致する。 -/
+theorem preimageTreeNodeTableEquivOfMatching_eq_concrete_composition
+    {W : Type} [Fintype W] [DecidableEq W]
+    (NW : W → Finset W)
+    (fW : (w : W) → (↥(NW w) → State) → State)
+    (q : V → State) (qW : W → State)
+    (hq : IsPeriodicPoint N f q) (hqW : IsPeriodicPoint NW fW qW)
+    (depth : ℕ)
+    (hdepth : 2 ^ Fintype.card V - 1 ≤ depth)
+    (hdepthW : 2 ^ Fintype.card W - 1 ≤ depth)
+    (hmatch : HasTreeMatching N f NW fW depth q qW) :
+    preimageTreeNodeTableEquivOfMatching N f NW fW q qW hq hqW depth
+        hdepth hdepthW hmatch =
+      ((truncatedTreeNodeEquivPreimageTreeNodeTable N f q hq depth hdepth).symm |>.trans
+        (treeNodeEquivOfMatching N f NW fW depth q qW hmatch) |>.trans
+          (truncatedTreeNodeEquivPreimageTreeNodeTable NW fW qW hqW depth hdepthW)) :=
+  rfl
 
 theorem preimageTreeNodeTableEquivOfMatching_bijective
     {W : Type} [Fintype W] [DecidableEq W]
@@ -1509,7 +1542,8 @@ theorem preimageTreeNodeTableEquivOfMatching_preserves_parent_edge
   constructor
   · simp only [truncatedTreeNodeEquivPreimageTreeNodeTable_apply]
     exact truncatedTreeParentEdge_configuration N f huv
-  · simp only [preimageTreeNodeTableEquivOfMatching, Equiv.trans_apply,
+  · rw [preimageTreeNodeTableEquivOfMatching_eq_concrete_composition]
+    simp only [Equiv.trans_apply,
       Equiv.symm_apply_apply]
     simp only [truncatedTreeNodeEquivPreimageTreeNodeTable_apply]
     exact truncatedTreeParentEdge_configuration NW fW

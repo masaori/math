@@ -520,4 +520,31 @@ theorem truncatedTreeNode_eq_root_or_exists_parent (children : X → Finset X) :
       · right
         exact ⟨Sum.inr ⟨z, v⟩, TruncatedTreeParentEdge.inChild depth x z huv⟩
 
+/-- 打ち切り節点型を別の節点表へ全単射で読み替えられるとき、
+再帰的対応から作った節点全単射を二つの表の間へ接着する。
+使うのは二つの有限子表、その再帰的対応、および各打ち切り節点型と
+対象表を結ぶ全単射だけである。表の元の意味、自己写像、周期性、
+最小前周期、二値状態、セル、近傍、局所規則は使わない。 -/
+noncomputable def attachedTableEquivOfMatching
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    {TableX TableY : Type} (depth : ℕ) (x : X) (y : Y)
+    (hmatch : HasTreeMatching childrenX childrenY depth x y)
+    (attachX : TruncatedTreeNode childrenX depth x ≃ TableX)
+    (attachY : TruncatedTreeNode childrenY depth y ≃ TableY) :
+    TableX ≃ TableY :=
+  attachX.symm |>.trans
+    (treeNodeEquivOfMatching childrenX childrenY depth x y hmatch) |>.trans
+      attachY
+
+/-- 接着した表間写像は全単射である。 -/
+theorem attachedTableEquivOfMatching_bijective
+    (childrenX : X → Finset X) (childrenY : Y → Finset Y)
+    {TableX TableY : Type} (depth : ℕ) (x : X) (y : Y)
+    (hmatch : HasTreeMatching childrenX childrenY depth x y)
+    (attachX : TruncatedTreeNode childrenX depth x ≃ TableX)
+    (attachY : TruncatedTreeNode childrenY depth y ≃ TableY) :
+    Function.Bijective
+      (attachedTableEquivOfMatching childrenX childrenY depth x y hmatch attachX attachY) :=
+  (attachedTableEquivOfMatching childrenX childrenY depth x y hmatch attachX attachY).bijective
+
 end CellularAutomata.NecSuf.RecursivePreimageTreeCode.ConjugacyInvariance
