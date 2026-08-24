@@ -3114,6 +3114,36 @@ theorem conjugacyFromMapCodeDecision_of_necSuf :
   · simp [conjugacyFromMapCodeDecision, conjugacyFromDecision, hcode]
   · simp [conjugacyFromMapCodeDecision, conjugacyFromDecision, hcode]
 
+/-- 符号が等しい場合に具体版の有限決定が返す値の形も、必要十分版の同じ主張の
+    特殊化として得られる。渡すのは符号型の等号判定、二つの写像符号、および
+    符号の等号から全単射を作る具体版の構成だけである。 -/
+theorem conjugacyFromMapCodeDecision_eq_some_of_necSuf
+    (hcode : mapCode NW fW = mapCode N f) :
+    conjugacyFromMapCodeDecision N f NW fW =
+      some (structurePreservingConfigurationEquiv N f NW fW hcode) := by
+  rw [conjugacyFromMapCodeDecision_of_necSuf N f NW fW]
+  exact @conjugacyFromDecision_eq_some (V → State) (W → State)
+    (Multiset (Finset (List ℕ))) mapCodeTypeDecidableEq
+    (mapCode N f) (mapCode NW fW)
+    (fun hc => structurePreservingConfigurationEquiv N f NW fW hc) hcode
+
+/-- 具体版の「有限決定が値を返すことと共役全単射の存在が同値である」は、
+    必要十分版の同じ主張の特殊化として得られる。渡すのは符号型
+    `Multiset (Finset (List ℕ))` の等号判定、二つの自己写像、二つの写像符号、
+    符号の等号から全単射を作る具体版の構成、および完全不変量の同値だけである。
+    配位型の有限性・等号判定、二値状態、セル、近傍、局所規則、前像木、
+    周期成分はこの段では使わない。 -/
+theorem conjugacyFromMapCodeDecision_isSome_iff_of_necSuf :
+    (conjugacyFromMapCodeDecision N f NW fW).isSome ↔
+      ∃ h : (V → State) ≃ (W → State),
+        ∀ y, h (globalMap N f y) = globalMap NW fW (h y) := by
+  rw [conjugacyFromMapCodeDecision_of_necSuf N f NW fW]
+  exact @conjugacyFromDecision_isSome_iff (V → State) (W → State)
+    (Multiset (Finset (List ℕ))) mapCodeTypeDecidableEq
+    (globalMap N f) (globalMap NW fW) (mapCode N f) (mapCode NW fW)
+    (fun hcode => structurePreservingConfigurationEquiv N f NW fW hcode)
+    (mapCode_eq_iff_exists_conjugacy N f NW fW)
+
 end NecSufDerivation
 
 end CellularAutomata.RecursivePreimageTreeCode

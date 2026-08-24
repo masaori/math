@@ -3215,3 +3215,19 @@ PDF、検算対応 35 件、対象 SageMath 5 本）は成功し、$\mathbb R/\m
 対象 SageMath 5 本）は成功し、$\mathbb R/\mathbb C$ 脱出はない。
 対象は実態どおり `Lean 具体版まで` のまま。次 tick はまず具体版を本 tick の必要十分版の
 特殊化として導出し直し（今回はビルド不成立で戻した）、その後で節点全単射の辺保存を接続する。
+
+## 自動ループ tick: 共役全単射の値と存在の同値を必要十分版から導出（2026-08-24 20:12）
+
+前 tick の共役存在判定の導出をレビューし、修正を要する不一致は見つからなかった。
+本 tick は、前 tick で未接続だった二段を必要十分版へ接続した。符号が等しいときに有限決定が
+返す値の形（`conjugacyFromMapCodeDecision_eq_some_of_necSuf`）と、`Option` に値があることと
+共役全単射の存在が同値であること（`conjugacyFromMapCodeDecision_isSome_iff_of_necSuf`）を、
+必要十分版の `conjugacyFromDecision_eq_some`・`conjugacyFromDecision_isSome_iff` の特殊化として
+導出した。渡すのは符号型 `Multiset (Finset (List ℕ))` の等号判定、二つの自己写像、二つの写像符号、
+符号の等号から全単射を作る具体版の構成、および完全不変量の同値だけである。二値状態、セル、近傍、
+局所規則、前像木、周期成分、配位型の有限性はこの二段では使わない。
+全検証（Lean build、sorry 検査、構造化テキスト check と PDF 67 ページ、検算対応 35 件、
+対象 SageMath 5 本）は成功し、$\mathbb R/\mathbb C$ 脱出はない。
+対象は実態どおり `Lean 具体版まで` のまま。完全不変量と有限決定の段は接続し終えたが、本章前段
+（子符号対応・周期成分符号対応・軌道出現対応・軌道木対応・共役移送）の導出の網羅性は未確認である。
+次 tick は前段の具体版と必要十分版の対応を突き合わせ、欠けている導出を洗い出して一段接続する。
