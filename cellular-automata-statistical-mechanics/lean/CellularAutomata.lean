@@ -2,6 +2,7 @@
 import CellularAutomata.CausalSetPrimaryLiterature
 import CellularAutomata.CausalStructureComparison
 import CellularAutomata.ConjugacyClassCodeImageBijection
+import CellularAutomata.NecSuf.ConjugacyClassCodeImageBijection
 import CellularAutomata.DependencyOrderSubstructures
 import CellularAutomata.EssentialDependency
 import CellularAutomata.FinitePropagationBoundary
