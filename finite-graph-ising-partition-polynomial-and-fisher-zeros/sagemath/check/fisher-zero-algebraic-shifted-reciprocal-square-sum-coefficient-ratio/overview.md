@@ -20,6 +20,7 @@
 | `check_rational_to_algebraic_embedding_preserves_triple_product.sage` | 有理数から代数的数への標準単射が三因子の積を保つこと | PASS | 全例・全二次以上の係数で一致 |
 | `check_natural_to_rational_embedding_preserves_triple_product.sage` | 自然数から有理数への標準単射が三因子の積を保つこと | PASS | 全例・全二次以上の係数で一致 |
 | `check_evaluate_second_coefficient_sum.sage` | 二回形式微分式への評価点代入と第二係数和 | PASS | 全例・全代数的評価点で一致 |
+| `check_second_coefficient_sum_definition.sage` | 評価後の第二係数和への局所定義 `B_G(a)` の適用 | PASS | 全例・全代数的評価点で一致 |
 | `check_product_second_formal_derivative.sage` | 一次因子積の二回形式微分と相異なる順序付き添字対ごとに二因子を除いた積の和 | PASS | 全例で多項式として一致 |
 | `check_product_second_derivative_ordered_pairs.sage` | 一回形式微分の因子和をもう一回微分した順序付き添字対の和 | PASS | 全例で多項式として一致 |
 | `check_substitute_reciprocal_sum_definition.sage` | 逆数和の定義だけを代入する等式 | PASS | 全例・全対象評価点で一致 |

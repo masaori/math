@@ -5015,8 +5015,20 @@ x^{m-2}
 x^{m-2}
 \quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は積を保つ}\bigr).`),
       displayMath(String.raw`D^2\overline P_G(a)
-=B_G(a)
+=
+\sum_{m=2}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)\Omega_G(m)\right)
+\right)
+a^{m-2}
 \quad\bigl(\because\ \text{直前の多項式恒等式へ }x=a\text{ を代入する}\bigr).`),
+      displayMath(String.raw`\sum_{m=2}^{|E|}
+\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}\!\left(m(m-1)\Omega_G(m)\right)
+\right)
+a^{m-2}
+=B_G(a)
+\quad\bigl(\because\ B_G(a)\text{ の定義}\bigr).`),
       paragraph([
         ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
         " と",
