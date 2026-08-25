@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "claim_antichain_order_convex",
+  "claim_binary_bijection_is_identity_or_negation",
   "claim_collision_finite_decidability",
   "claim_collision_shift",
   "claim_conjugacy_class_code_image_bijection",
@@ -25,6 +26,8 @@ export const ALL_LABELS = [
   "claim_fixed_point_count_decomposition",
   "claim_fixed_point_count_finite_decidability",
   "claim_flip_test_equivalence",
+  "claim_general_self_neighborhood_pointwise_form",
+  "claim_general_self_neighborhood_reversible_pointwise_bijective",
   "claim_global_flip_characterization",
   "claim_global_map_injective_iff_all_periodic",
   "claim_global_map_injective_iff_surjective",
