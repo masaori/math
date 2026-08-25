@@ -1,0 +1,24 @@
+# 積差五十二をもつ双曲正則型の分類の検算
+
+**対象ラベル**: `theorem_product_difference_fifty_two_hyperbolic_types`
+- 対象: 正整数の因数対から面次数と頂点次数を復元する有限分類
+- 記号の所属: 因数と次数は `NN`、積差は標準単射で `ZZ` に移して計算する
+
+| 検算 | 状態 | 結果 |
+| --- | --- | --- |
+| 正の因数対 | PASS | `52` の正の順序付き因数対は `(1,52),(2,26),(4,13),(13,4),(26,2),(52,1)` に限る |
+| 次数対の復元 | PASS | 各成分へ `2` を加えると `(3,54),(4,28),(6,15),(15,6),(28,4),(54,3)` を得る |
+| 双曲不等式 | PASS | 復元した全次数対で自然数不等式 `2(p+q)<pq` |
+| 整数積差 | PASS | 復元した全次数対で `(p-2)(q-2)=52` |
+
+## 実行履歴
+
+- 2026-08-26: 四つの検算を実行し、すべて PASS。
+
+## 実行コマンド
+
+```sh
+for f in countable-ising-on-hyperbolic-surfaces/sagemath/check/product-difference-fifty-two-hyperbolic-types/*.sage; do
+  sage "$f"
+done
+```
