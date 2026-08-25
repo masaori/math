@@ -92,4 +92,44 @@ lemma shiftUp_shiftDown {L : ℕ} (a : Site L) (j : Fin 3) (hpos : 1 ≤ a.1 j)
     omega
   · rw [shiftUp_apply_of_ne _ _ _ _ hm, shiftDown_apply_of_ne _ _ _ hm]
 
+/-- 正側に置いた正方形の、元の辺 `(a,i)` と隣り合う一本目 `(a,j)`。人手証明の三辺のうち
+始点を共有するものに対応する。 -/
+def squareUpEdgeFromStart {L : ℕ} (e : Edge L) (j : Fin 3) (hj : e.start.1 j + 1 < L) : Edge L :=
+  ⟨e.start, j, hj⟩
+
+/-- 正側に置いた正方形の二本目 `(a+ε_j, i)`。始点をずらしても `i` 成分は変わらないので、
+第二端点が箱内にあることは元の辺の条件からそのまま従う。 -/
+def squareUpEdgeShifted {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hj : e.start.1 j + 1 < L) : Edge L :=
+  ⟨shiftUp e.start j hj, e.axis, by
+    rw [shiftUp_apply_of_ne e.start j e.axis hj (Ne.symm hji)]
+    exact e.next_lt⟩
+
+/-- 正側に置いた正方形の三本目 `(a+ε_i, j)`。 -/
+def squareUpEdgeOpposite {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hj : e.start.1 j + 1 < L) : Edge L :=
+  ⟨shiftUp e.start e.axis e.next_lt, j, by
+    rw [shiftUp_apply_of_ne e.start e.axis j e.next_lt hji]
+    exact hj⟩
+
+/-- 三本目の始点は一本目の始点を `i` 方向へずらした点であり、元の辺の第二端点に等しい。 -/
+lemma squareUpEdgeOpposite_start {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hj : e.start.1 j + 1 < L) :
+    (squareUpEdgeOpposite e j hji hj).start = endpoint1 e :=
+  (endpoint1_eq_shiftUp e).symm
+
+/-- 二本目の始点は一本目の第二端点に等しい。 -/
+lemma squareUpEdgeShifted_start {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hj : e.start.1 j + 1 < L) :
+    (squareUpEdgeShifted e j hji hj).start = endpoint1 (squareUpEdgeFromStart e j hj) :=
+  (endpoint1_eq_shiftUp (squareUpEdgeFromStart e j hj)).symm
+
+/-- 正方形が閉じること。二本目と三本目の第二端点はどちらも `a+ε_i+ε_j` であり一致する。
+人手証明の「四隅のうち向かい合う一隅が二通りに書ける」に対応する。 -/
+theorem squareUp_closes {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hj : e.start.1 j + 1 < L) :
+    endpoint1 (squareUpEdgeShifted e j hji hj) = endpoint1 (squareUpEdgeOpposite e j hji hj) := by
+  rw [endpoint1_eq_shiftUp, endpoint1_eq_shiftUp]
+  exact shiftUp_comm e.start j e.axis hji hj e.next_lt _ _
+
 end Ising3DCut.NullModel

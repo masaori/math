@@ -507,6 +507,7 @@ targets=(
   Ising3DCut.Prediction.mem_selectedIncidentEdgesAt_iff
   Ising3DCut.Prediction.secondProjection_bijOn_uncovered_selected
   Ising3DCut.NullModel.brokenCount_ne_one_of_alternate_three_edges
+  Ising3DCut.NullModel.squareUp_closes
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
