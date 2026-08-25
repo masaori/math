@@ -669,4 +669,23 @@ theorem card_uncovered_eq_card_selected_of_perfectMatching {V Edge : Type*}
     obtain ⟨t, ht, hte⟩ := hbij.2.2 he
     exact ⟨t, ht, hte⟩
 
+/-- 頂点ごとの個数等式を有限和で束ねると、全頂点で覆われずに残る端子の総数と、
+各頂点で選ばれた接続辺の個数の総和が等しい。 -/
+theorem sum_card_uncovered_eq_sum_card_selected_of_perfectMatching {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w) :
+    ∑ v ∈ vertices, (matchingUncoveredTerminalsAt incidentEdges v matching).card
+      = ∑ v ∈ vertices,
+          (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v).card := by
+  apply Finset.sum_congr rfl
+  intro v hv
+  exact card_uncovered_eq_card_selected_of_perfectMatching
+    vertices edges incidentEdges endpoint₀ endpoint₁ matching hMatching hIncident v hv
+
 end Ising3DCut.Prediction
