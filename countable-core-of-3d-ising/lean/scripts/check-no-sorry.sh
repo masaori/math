@@ -536,6 +536,12 @@ targets=(
   Ising3DCut.NullModel.brokenCount_ne_one_from_necSuf
   Ising3DCut.Prediction.uncovered_terminal_second_mem_selected
   Ising3DCut.Prediction.selected_incident_edge_terminal_uncovered
+  Ising3DCut.LimitQuantity.vertexNumberGap_eq_three_mul_mul_succ_add_one
+  Ising3DCut.LimitQuantity.vertexNumberGap_succ_eq_add_six_mul_succ
+  Ising3DCut.LimitQuantity.dvd_two_or_three_or_succ_of_dvd_six_mul_succ
+  Ising3DCut.LimitQuantity.false_of_dvd_gap_and_dvd_three_mul_mul_succ
+  Ising3DCut.LimitQuantity.two_dvd_three_mul_mul_succ
+  Ising3DCut.LimitQuantity.adjacent_vertex_number_gaps_are_coprime
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
