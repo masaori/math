@@ -81,7 +81,7 @@ footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; co
 <aside class="chapter-navigation chapter-navigation--desktop" aria-label="章の目次"><div class="chapter-navigation__title">目次</div><ul><li><a class="chapter-link" data-target="sec-finite_graph_heading" data-root-target="sec-finite_graph_heading" href="#sec-finite_graph_heading">有限グラフ上の Ising 多項式</a></li><li><a class="chapter-link" data-target="sec-formal_high_temperature_heading" data-root-target="sec-formal_high_temperature_heading" href="#sec-formal_high_temperature_heading">形式的高温展開</a></li></ul></aside>
 <main class="document">
 <h1>有限グラフ上の Ising 分配多項式と Fisher 零点</h1>
-<p class="version">版 e71c6ab4+（未コミットの変更を含む）・2026-08-25 21:27</p>
+<p class="version">版 578beefa+（未コミットの変更を含む）・2026-08-25 22:36</p>
 <h2 id="sec-finite_graph_heading" class="lv1">有限グラフ上の Ising 多項式</h2><nav class="main-theorem-lead" aria-label="この節の主定理"><div class="main-theorem-lead__title">この節の主定理</div><ul><li><a href="#blk-finite_graph_claim_coefficient_expansion">主張 0.13（多重度による係数表示）</a></li></ul></nav>
 <section class="block definition" id="blk-finite_graph_definition_endpoint_labels"><div class="head">定義 0.1（辺端ラベル集合）</div><div class="statement"><p>二つの形式的ラベルからなる有限集合を</p><div class="display math" data-tex="\mathsf{End}:=\{\mathsf{source},\mathsf{target}\}" data-display="1"></div><p>と定める。<span class="math" data-tex="\mathsf{source}"></span> と <span class="math" data-tex="\mathsf{target}"></span> は辺の二つの端を区別するラベルであり、整数 <span class="math" data-tex="0,1\in\mathbb Z"></span> ではない。この集合には加法、減法、乗法、大小関係を入れない。</p></div></section>
 <section class="block definition" id="blk-finite_graph_definition_input"><div class="head">定義 0.2（有限グラフの入力）</div><div class="statement"><p>有限グラフの入力を、空でない有限集合 <span class="math" data-tex="V"></span>、有限集合 <span class="math" data-tex="E"></span>、<a href="#blk-finite_graph_definition_endpoint_labels">定義 0.1</a> の辺端ラベルを入力に取る写像 <span class="math" data-tex="\partial_G:E\times\mathsf{End}\to V"></span> の組 <span class="math" data-tex="G=(V,E,\partial_G)"></span> と定める。任意の <span class="math" data-tex="e\in E"></span> について <span class="math" data-tex="\partial_G(e,\mathsf{source})\ne\partial_G(e,\mathsf{target})"></span> を仮定する。異なる辺が同じ二頂点を結ぶことは許す。</p></div></section>
@@ -2790,6 +2790,30 @@ S_{G,3}(a)
 \frac{A_G(a)^2-\overline P_G(a)B_G(a)}{\overline P_G(a)^2}
 \quad\bigl(\because\ \text{直前の等式を代入する}\bigr)." data-display="1"></div><div class="display math" data-tex="q_2S_{G,3}(a)
 =
+\frac{C_G(a)}{\overline P_G(a)}
+-\frac{A_G(a)^3}{\overline P_G(a)^3}
++q_3\frac{A_G(a)}{\overline P_G(a)}
+\frac{A_G(a)^2-\overline P_G(a)B_G(a)}{\overline P_G(a)^2}
+\quad\bigl(\because\ \text{商の三乗則}\bigr)." data-display="1"></div><div class="display math" data-tex="q_2S_{G,3}(a)
+=
+\frac{C_G(a)}{\overline P_G(a)}
+-\frac{A_G(a)^3}{\overline P_G(a)^3}
++q_3\frac{
+  A_G(a)\left(A_G(a)^2-\overline P_G(a)B_G(a)\right)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ \text{商の積の法則}\bigr)." data-display="1"></div><div class="display math" data-tex="q_2S_{G,3}(a)
+=
+\frac{\overline P_G(a)^2C_G(a)}{\overline P_G(a)^3}
+-\frac{A_G(a)^3}{\overline P_G(a)^3}
++q_3\frac{
+  A_G(a)\left(A_G(a)^2-\overline P_G(a)B_G(a)\right)
+}{
+  \overline P_G(a)^3
+}
+\quad\bigl(\because\ \text{第一項の分母と分子へ }\overline P_G(a)^2\ne0\text{ を掛ける}\bigr)." data-display="1"></div><div class="display math" data-tex="q_2S_{G,3}(a)
+=
 \frac{
   \overline P_G(a)^2C_G(a)
   -A_G(a)^3
@@ -2797,7 +2821,7 @@ S_{G,3}(a)
 }{
   \overline P_G(a)^3
 }
-\quad\bigl(\because\ \text{共通分母化}\bigr)." data-display="1"></div><div class="display math" data-tex="q_2S_{G,3}(a)
+\quad\bigl(\because\ \text{同じ分母を持つ三つの商を結合する}\bigr)." data-display="1"></div><div class="display math" data-tex="q_2S_{G,3}(a)
 =
 \frac{
   \overline P_G(a)^2C_G(a)

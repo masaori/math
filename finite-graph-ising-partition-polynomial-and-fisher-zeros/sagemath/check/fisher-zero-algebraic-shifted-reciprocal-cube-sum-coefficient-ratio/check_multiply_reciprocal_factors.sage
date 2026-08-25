@@ -1,5 +1,5 @@
 # 対象ラベル: theorem_fisher_zero_algebraic_shifted_reciprocal_cube_sum_coefficient_ratio
-# 式ペア: P^2C/P^3-A^3/P^3+q_3A(A^2-PB)/P^3 = (P^2C-A^3+q_3A(A^2-PB))/P^3
+# 式ペア: (A/P)((A^2-PB)/P^2) = A(A^2-PB)/P^3
 load("finite-graph-ising-partition-polynomial-and-fisher-zeros/sagemath/check/fisher-zero-algebraic-shifted-reciprocal-cube-sum-coefficient-ratio/_prelude.sage")
 for data in examples:
     for a in algebraic_evaluation_points:
@@ -7,8 +7,7 @@ for data in examples:
         if P != 0:
             A = coefficient_sum(data, a, 1)
             B = coefficient_sum(data, a, 2)
-            C = coefficient_sum(data, a, 3)
-            left = P**2 * C / P**3 - A**3 / P**3 + q3 * A * (A**2 - P * B) / P**3
-            right = (P**2 * C - A**3 + q3 * A * (A**2 - P * B)) / P**3
+            left = (A / P) * ((A**2 - P * B) / P**2)
+            right = A * (A**2 - P * B) / P**3
             assert left == right, (data["name"], a)
-print("RESULT: PASS — the three quotients with the same denominator combine into one quotient")
+print("RESULT: PASS — multiplying the two quotients gives the displayed cubic denominator")

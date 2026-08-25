@@ -59,7 +59,10 @@
 | `check_eliminate_non_diagonal_pair_sum_before_integer_coefficient.sage` | 非対角二重和を消去した直後の係数 | PASS | 標準単射像の整数係数整理前に `q_3-1_{Qbar}` を持つ三次恒等式が一致 |
 | `check_eliminate_non_diagonal_pair_sum.sage` | 非対角二重和の消去 | PASS | 三次恒等式が一致 |
 | `check_substitute_lower_reciprocal_sums.sage` | 既存の一次・二次係数表示の代入 | PASS | 既存二定理の代入後も一致 |
-| `check_common_denominator.sage` | 共通分母化 | PASS | 共通分母化の前後が一致 |
+| `check_expand_cubed_quotient.sage` | 商の三乗 | PASS | 商の三乗と三乗どうしの商が一致 |
+| `check_multiply_reciprocal_factors.sage` | 二つの商の積 | PASS | 分子の積と三次分母を持つ商に一致 |
+| `check_raise_first_denominator.sage` | 第一項の分母引き上げ | PASS | 非零な分母の二乗を分子・分母へ掛けても一致 |
+| `check_common_denominator.sage` | 同じ分母を持つ三項の結合 | PASS | 三つの商と結合後の一つの商が一致 |
 | `check_rational_embedding_one_identity.sage` | 自然数から有理数への標準単射の乗法単位元保存 | PASS | `eta(1)=1_Q` を厳密確認 |
 | `check_algebraic_embedding_one_identity.sage` | 有理数から代数的数への標準単射の乗法単位元保存 | PASS | `iota(eta(1))=1_Qbar` を厳密確認 |
 | `check_q1_multiplicative_identity.sage` | 標準単射像 `q_1` と乗法単位元 | PASS | `q_1=1` を厳密確認 |
