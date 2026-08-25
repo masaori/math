@@ -21,10 +21,13 @@
   claim_neighborhood_assignment_composition_not_commutative
     `noncommutative_witness`
 
+必要十分版は NecSuf/FiniteNeighborhoodAssignmentMonoid.lean、そこからの導出は
+このファイル末尾の `Derivation` 名前空間に置く。
+
 住処: 有限型、有限部分集合、有限写像、自然数だけ。ℝ / ℂ は現れない。
-必要十分版と具体版からの導出は未着手である。
 -/
 import CellularAutomata.ComposedNeighborhoodClosure
+import CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid
 
 namespace CellularAutomata.FiniteNeighborhoodAssignmentMonoid
 
@@ -126,5 +129,84 @@ theorem noncommutative_witness :
   have hAtA := congrFun h 0
   rw [noncommutative_left_at_a, noncommutative_right_at_a] at hAtA
   exact Finset.singleton_ne_empty 2 hAtA
+
+/-! ### 必要十分版からの導出
+
+必要十分版は舞台の有限性を単位律・結合律・モノイド構造から外し、要る構造を
+合併先の型の等号判定だけに絞っている。さらに合成の始域と終域が同じ型である必要も無く、
+部分集合を `Set` で表せば等号判定すら要らない。有限性は元数と合成表の段だけで要る。
+非可換性については、具体版が使う三元舞台は必要でなく、二元で十分かつ必要である。 -/
+
+namespace Derivation
+
+open CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid
+
+omit [Fintype V] in
+/-- 具体版の自己近傍割り当ては、必要十分版のそれと同じ写像である。 -/
+theorem identityNeighborhood_eq :
+    identityNeighborhood V =
+      _root_.CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid.identityNeighborhood V :=
+  rfl
+
+omit [Fintype V] in
+/-- 具体版の左単位律は、必要十分版の型をまたぐ左単位律を同じ型に取ったものである。 -/
+theorem identity_composedNeighborhood_of_necSuf (N : NeighborhoodAssignment V) :
+    composedNeighborhood (identityNeighborhood V) N = N :=
+  identity_hetComp N
+
+omit [Fintype V] in
+/-- 具体版の右単位律は、必要十分版の型をまたぐ右単位律を同じ型に取ったものである。 -/
+theorem composedNeighborhood_identity_of_necSuf (N : NeighborhoodAssignment V) :
+    composedNeighborhood N (identityNeighborhood V) = N :=
+  hetComp_identity N
+
+omit [Fintype V] in
+/-- 具体版の結合律は、必要十分版の型をまたぐ結合律を同じ型に取ったものである。 -/
+theorem composedNeighborhood_assoc_of_necSuf (N M L : NeighborhoodAssignment V) :
+    composedNeighborhood (composedNeighborhood N M) L =
+      composedNeighborhood N (composedNeighborhood M L) :=
+  hetComp_assoc N M L
+
+omit [Fintype V] in
+/-- 具体版のモノイドの積・単位元は、必要十分版のモノイド構造のそれと一致する。 -/
+theorem monoid_mul_eq_necSuf (N M : NeighborhoodAssignment V) :
+    N * M =
+      (_root_.CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid.neighborhoodAssignmentMonoid
+        (V := V)).mul N M :=
+  rfl
+
+omit [Fintype V] in
+theorem monoid_one_eq_necSuf :
+    (1 : NeighborhoodAssignment V) =
+      (_root_.CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid.neighborhoodAssignmentMonoid
+        (V := V)).one :=
+  rfl
+
+/-- 具体版の元数は、必要十分版の元数を始域と終域が同じ場合に取ったものである。 -/
+theorem card_neighborhoodAssignment_of_necSuf :
+    Fintype.card (NeighborhoodAssignment V) =
+      2 ^ (Fintype.card V * Fintype.card V) :=
+  card_assignment (V := V) (W := V)
+
+/-- 具体版の合成表への所属は、必要十分版の合成表への所属と同じ主張である。 -/
+theorem mem_compositionTable_of_necSuf (N M : NeighborhoodAssignment V) :
+    (N, M, composedNeighborhood N M) ∈
+      _root_.CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid.compositionTable V :=
+  _root_.CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid.mem_compositionTable N M
+
+/-- 具体版は三元舞台の反例を使うが、必要十分版が示すとおり二元で足りる。 -/
+theorem noncommutative_two_element_suffices :
+    composedNeighborhood twoElementN twoElementM ≠
+      composedNeighborhood twoElementM twoElementN :=
+  twoElement_noncommutative
+
+/-- 逆向きの必要性: 舞台が高々一元なら合成は可換になる。
+    したがって具体版の反例が二元以上の舞台を要求することは落とせない。 -/
+theorem noncommutative_needs_two_elements {W : Type} [DecidableEq W] [Subsingleton W]
+    (N M : NeighborhoodAssignment W) :
+    composedNeighborhood N M = composedNeighborhood M N :=
+  comp_comm_of_subsingleton N M
+
+end Derivation
 
 end CellularAutomata.FiniteNeighborhoodAssignmentMonoid
