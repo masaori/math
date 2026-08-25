@@ -728,4 +728,22 @@ theorem mem_selectedEndpointIncidences_iff {V Edge : Type*}
   · intro ht
     exact Finset.mem_sigma.mpr ⟨ht.1, ht.2⟩
 
+/-- 選ばれた端点・辺の組の第一成分は、その辺の二つの端点のどちらかである。
+元辺への射影の各繊維が両端点の二元であることを示す前段にあたる。 -/
+theorem first_eq_endpoint_of_mem_selectedEndpointIncidences {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (t : Σ _ : V, Edge)
+    (ht : t ∈ selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁ matching) :
+    endpoint₀ t.2 = t.1 ∨ endpoint₁ t.2 = t.1 := by
+  have hmem := (mem_selectedEndpointIncidences_iff vertices edges incidentEdges
+    endpoint₀ endpoint₁ matching t).mp ht
+  have hinc : t.2 ∈ incidentEdges t.1 :=
+    ((mem_selectedIncidentEdgesAt_iff edges incidentEdges endpoint₀ endpoint₁
+      matching t.1 t.2).mp hmem.2).1
+  exact hIncident t.1 t.2 hinc
+
 end Ising3DCut.Prediction

@@ -542,6 +542,7 @@ targets=(
   Ising3DCut.LimitQuantity.false_of_dvd_gap_and_dvd_three_mul_mul_succ
   Ising3DCut.LimitQuantity.two_dvd_three_mul_mul_succ
   Ising3DCut.LimitQuantity.adjacent_vertex_number_gaps_are_coprime
+  Ising3DCut.Prediction.first_eq_endpoint_of_mem_selectedEndpointIncidences
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
