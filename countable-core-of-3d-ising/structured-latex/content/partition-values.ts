@@ -9170,7 +9170,7 @@ v_2(P_M)+\#V_M\,e_v
         "）。",
       ]),
       paragraph([
-        "第二段（三本の辺が破れていないこと）。",
+        "第二段（矛盾に使う三本の辺が破れていないこと）。",
         math(String.raw`f_1`),
         " と ",
         math(String.raw`f_3`),
@@ -9190,7 +9190,13 @@ v_2(P_M)+\#V_M\,e_v
         math(String.raw`c\ne a`),
         " より ",
         math(String.raw`f_2\ne(a,i)`),
-        " である。",
+        " である。したがって前者では ",
+        math(String.raw`f_1,f_3,(a+\varepsilon_j,i)`),
+        " が、後者では ",
+        math(String.raw`f_1,f_2,f_3`),
+        " がそれぞれ唯一の破れ辺 ",
+        math(String.raw`(a,i)`),
+        " と異なる三本の辺である。",
       ]),
       paragraph([
         math(String.raw`D_L(\sigma)=\{(a,i)\}`),
