@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 06:02（本流）: `claim_power_minus_one_gcd_equals_power_of_exponent_gcd` の SageMath 層を閉じた。`sagemath/check/power-minus-one-gcd-equals-power-of-exponent-gcd/` で、同じ自然数どうしの最大公約数の相互整除、指数の最大公約数で定まる到達形の書き換え、最終等式までの三段を `ZZ` の三検査へ分けて全 PASS。次は同主張の Lean 具体版。着手前レビュー修正なし。
 - 2026-08-26 05:31（本流）: `claim_power_minus_one_gcd_equals_power_of_exponent_gcd` を記述した。$\gcd(a,a)=a$ を両方向の整除で準備し、直前に閉じた到達形 $\gcd(c^m-1,c^n-1)=\gcd(c^{g}-1,c^{g}-1)$ へ $a=c^{g}-1$ を当てて、$\gcd(c^m-1,c^n-1)=c^{\gcd(m,n)}-1$ を得た。`npm run check` はブロック 169 件・参照 376 件すべて解決、PDF 58 ページ。次はこの記述の SageMath 検証。着手前レビュー修正なし。
 - 2026-08-26 04:36（本流）: `lean/Ising3DCut/LimitQuantity/PowerMinusOneGcdReachesExponentGcd.lean` を追加し、`claim_power_minus_one_gcd_reaches_exponent_gcd` の Lean 具体版を閉じた。準備の `gcd_sub_left_eq`（$\gcd(m-n,n)=\gcd(m,n)$ を両方向の整除で）、指数の和についての強い帰納法の本体（`m<n`・`m=n`・`m>n` の三場合）、束ねた `powerMinusOne_gcd_reaches_exponent_gcd` を人手証明と同じ順に並べた。`lake build` 成功、未証明依存検査 521 件、`npm run check` 168 ブロック・376 参照すべて解決、linkage 83 件。次は同主張の Lean 必要十分版。着手前レビュー修正なし。
 - 2026-08-26 04:05（並行）: `card_selectedEndpointIncidences_eq_two_mul_card_selectedOriginalEdges` を追加し、元辺への第二成分写像で全体を繊維分解して、各繊維の個数二から選ばれた端点・辺の組の総数が選ばれた元辺数の二倍であることを閉じた。対象ビルド成功。次はこの個数等式を覆われずに残る端子の総数へ接続する。
