@@ -58,6 +58,9 @@
 | `check_factor_eliminated_pair_sum.sage` | 非対角二重和代入後の係数括り出し | PASS | `S_{G,3}` の係数が `q_3-1_{Qbar}` に一致 |
 | `check_eliminate_non_diagonal_pair_sum_before_integer_coefficient.sage` | 非対角二重和を消去した直後の係数 | PASS | 標準単射像の整数係数整理前に `q_3-1_{Qbar}` を持つ三次恒等式が一致 |
 | `check_eliminate_non_diagonal_pair_sum.sage` | 非対角二重和の消去 | PASS | 三次恒等式が一致 |
+| `check_subtract_reciprocal_cube.sage` | 逆数和の三乗を両辺から引く操作 | PASS | 三乗を引いた後の等式が一致 |
+| `check_add_reciprocal_product.sage` | 逆数和と逆二乗和の積を両辺へ加える操作 | PASS | 積を加えた後に `q_2S_{G,3}` が孤立する |
+| `check_reverse_isolated_reciprocal_cube_sum.sage` | 孤立した逆三乗和等式の対称律 | PASS | 左右を反転した等式が一致 |
 | `check_substitute_lower_reciprocal_sums.sage` | 既存の一次・二次係数表示の代入 | PASS | 既存二定理の代入後も一致 |
 | `check_expand_cubed_quotient.sage` | 商の三乗 | PASS | 商の三乗と三乗どうしの商が一致 |
 | `check_multiply_reciprocal_factors.sage` | 二つの商の積 | PASS | 分子の積と三次分母を持つ商に一致 |

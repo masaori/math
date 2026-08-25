@@ -5831,12 +5831,23 @@ S_{G,3}(a)
 -q_3\mathcal R_G(a)S_{G,2}(a)
 +q_2S_{G,3}(a)
 \quad\bigl(\because\ \text{直前の二つの等式の推移律}\bigr).`),
+      displayMath(String.raw`\frac{C_G(a)}{\overline P_G(a)}
+-\mathcal R_G(a)^3
+=
+-q_3\mathcal R_G(a)S_{G,2}(a)
++q_2S_{G,3}(a)
+\quad\bigl(\because\ \text{直前の等式の両辺から }\mathcal R_G(a)^3\text{ を引く}\bigr).`),
+      displayMath(String.raw`\frac{C_G(a)}{\overline P_G(a)}
+-\mathcal R_G(a)^3
++q_3\mathcal R_G(a)S_{G,2}(a)
+=q_2S_{G,3}(a)
+\quad\bigl(\because\ \text{直前の等式の両辺へ }q_3\mathcal R_G(a)S_{G,2}(a)\text{ を加える}\bigr).`),
       displayMath(String.raw`q_2S_{G,3}(a)
 =
 \frac{C_G(a)}{\overline P_G(a)}
 -\mathcal R_G(a)^3
 +q_3\mathcal R_G(a)S_{G,2}(a)
-\quad\bigl(\because\ \text{移項}\bigr).`),
+\quad\bigl(\because\ \text{直前の等式の対称律}\bigr).`),
       paragraph([ref("theorem_fisher_zero_algebraic_shifted_reciprocal_sum_coefficient_ratio"), " より、"]),
       displayMath(String.raw`\mathcal R_G(a)
 =\frac{A_G(a)}{\overline P_G(a)}
