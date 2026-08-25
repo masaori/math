@@ -6,6 +6,7 @@ import CellularAutomata.NecSuf.ConjugacyClassCodeImageBijection
 import CellularAutomata.DependencyOrderSubstructures
 import CellularAutomata.EssentialDependency
 import CellularAutomata.FinitePropagationBoundary
+import CellularAutomata.FixedNeighborhoodCompositionNonclosure
 import CellularAutomata.GlobalMapIteration
 import CellularAutomata.InverseMapLocality
 import CellularAutomata.IterateMonoid
