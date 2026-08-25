@@ -563,4 +563,52 @@ theorem uncovered_terminal_second_mem_selected {V Edge : Type*}
     · rw [hef]; exact hf
     · rw [hef, hfs]; exact hsm
 
+
+/-- 逆向き。`v` で選ばれた接続辺 `e` に対し、端子 `⟨v,e⟩` は覆われずに残る。
+外部辺 `externalEdge e` がその端子を覆っているので、完全マッチングの一意性により
+その端子を覆う辺は他に無く、とくに `v` の city の内部辺ではありえない。
+内部辺は端子を二つ持つのに対し、外部辺が内部辺と一致するなら両端子の第一成分が
+ともに `v` になって一元集合になってしまうため、両者は相異なる。 -/
+theorem selected_incident_edge_terminal_uncovered {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    -- 接続辺の端点にその頂点が現れること。接続関係と端点写像を結ぶ唯一の仮定である。
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (v : V) (e : Edge)
+    (he : e ∈ selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v)
+    (hv : (⟨v, e⟩ : Σ _ : V, Edge) ∈ terminalVertices vertices incidentEdges) :
+    (⟨v, e⟩ : Σ _ : V, Edge) ∈ matchingUncoveredTerminalsAt incidentEdges v matching := by
+  classical
+  obtain ⟨hInc, _, hExt⟩ :=
+    (mem_selectedIncidentEdgesAt_iff edges incidentEdges endpoint₀ endpoint₁ matching v e).mp he
+  have hMem : (⟨v, e⟩ : Σ _ : V, Edge) ∈ externalEdge endpoint₀ endpoint₁ e := by
+    rcases hIncident v e hInc with h | h
+    · simp [externalEdge, h]
+    · simp [externalEdge, h]
+  refine (mem_matchingUncoveredTerminalsAt_iff incidentEdges v matching ⟨v, e⟩).mpr
+    ⟨⟨rfl, hInc⟩, ?_⟩
+  intro s hs hts
+  obtain ⟨hsm, hsAt⟩ :=
+    (mem_matchingInternalEdgesAt_iff incidentEdges v matching s).mp hs
+  have hcard : s.card = 2 := ((mem_internalEdgesAt_iff incidentEdges v s).mp hsAt).2
+  have hne : s ≠ externalEdge endpoint₀ endpoint₁ e := by
+    intro hEq
+    -- 一致するなら外部辺の二端子はどちらも第一成分が `v` なので、集合は一元集合になる。
+    have h₀ : (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) ∈ s := by
+      rw [hEq]; simp [externalEdge]
+    have h₁ : (⟨endpoint₁ e, e⟩ : Σ _ : V, Edge) ∈ s := by
+      rw [hEq]; simp [externalEdge]
+    have e₀ : endpoint₀ e = v :=
+      (terminal_of_mem_internalEdgeAt incidentEdges v s hsAt _ h₀).1
+    have e₁ : endpoint₁ e = v :=
+      (terminal_of_mem_internalEdgeAt incidentEdges v s hsAt _ h₁).1
+    rw [hEq] at hcard
+    simp [externalEdge, e₀, e₁] at hcard
+  exact hMatching.not_mem_of_mem_of_ne _ _ _ hsm hExt hne hv hts hMem
+
 end Ising3DCut.Prediction

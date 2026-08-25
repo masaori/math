@@ -516,6 +516,7 @@ targets=(
   Ising3DCut.NecSuf.NullModel.broken_count_ne_one_of_alternate_chain
   Ising3DCut.NullModel.brokenCount_ne_one_from_necSuf
   Ising3DCut.Prediction.uncovered_terminal_second_mem_selected
+  Ising3DCut.Prediction.selected_incident_edge_terminal_uncovered
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
