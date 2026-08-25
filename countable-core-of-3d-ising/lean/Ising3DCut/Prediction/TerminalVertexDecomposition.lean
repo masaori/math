@@ -519,4 +519,48 @@ theorem secondProjection_bijOn_uncovered_selected {V Edge : Type*}
     refine ⟨⟨v, e⟩, ?_, rfl⟩
     exact (hCorrespondence ⟨v, e⟩).mpr he
 
+/-- 覆われずに残る端子は、その第二成分が選ばれた接続辺であることを導く。
+完全マッチングがその端子を覆う辺は、`v` の city の内部辺ではありえないので外部辺であり、
+外部辺の端子は第二成分に元の辺そのものを持つため、その元の辺は選ばれている。 -/
+theorem uncovered_terminal_second_mem_selected {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (v : V) (t : Σ _ : V, Edge)
+    (ht : t ∈ matchingUncoveredTerminalsAt incidentEdges v matching)
+    (htv : t ∈ terminalVertices vertices incidentEdges) :
+    t.2 ∈ selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v := by
+  classical
+  obtain ⟨⟨htFirst, htInc⟩, hUncovered⟩ :=
+    (mem_matchingUncoveredTerminalsAt_iff incidentEdges v matching t).mp ht
+  obtain ⟨s, ⟨hsm, hts⟩, _⟩ := hMatching.2 _ htv
+  have hsTerminal := hMatching.1 hsm
+  rcases (mem_terminalEdges_iff vertices edges incidentEdges endpoint₀ endpoint₁ s).mp
+      hsTerminal with hsInternal | hsExternal
+  · exfalso
+    obtain ⟨w, _, hsw⟩ := (mem_internalEdges_iff vertices incidentEdges s).mp hsInternal
+    have hsub : s ⊆ terminalsAt incidentEdges w :=
+      (Finset.mem_powersetCard.mp hsw).1
+    have htw : t ∈ terminalsAt incidentEdges w := hsub hts
+    have : t.1 = w := ((mem_terminalsAt_iff incidentEdges w t).mp htw).1
+    have hwv : w = v := by rw [← this, htFirst]
+    subst hwv
+    exact hUncovered s ((mem_matchingInternalEdgesAt_iff incidentEdges w matching s).mpr
+      ⟨hsm, hsw⟩) hts
+  · obtain ⟨f, hf, hfs⟩ :=
+      (mem_externalEdges_iff edges endpoint₀ endpoint₁ s).mp hsExternal
+    have htf : t = ⟨endpoint₀ f, f⟩ ∨ t = ⟨endpoint₁ f, f⟩ := by
+      have : t ∈ externalEdge endpoint₀ endpoint₁ f := hfs ▸ hts
+      simpa [externalEdge] using this
+    have hef : t.2 = f := by rcases htf with h | h <;> rw [h]
+    rw [mem_selectedIncidentEdgesAt_iff]
+    refine ⟨?_, ?_, ?_⟩
+    · rw [← htFirst]; exact htInc
+    · rw [hef]; exact hf
+    · rw [hef, hfs]; exact hsm
+
 end Ising3DCut.Prediction
