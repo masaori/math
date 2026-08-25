@@ -66,7 +66,10 @@
 | `check_cubic_numerator_distribution.sage` | 三次分子の分配 | PASS | 全例・全評価点で一致 |
 | `check_cubic_numerator_reordering.sage` | 三次分子の加法項の並べ替え | PASS | 全例・全評価点で一致 |
 | `check_cubic_coefficient_factoring.sage` | 三次係数の括り出し | PASS | 全例・全評価点で一致 |
-| `check_rational_embedding_three_minus_one.sage` | 自然数像の有理数内での差 `3-1=2` | PASS | `eta(3)-eta(1)=eta(2)` を厳密確認 |
+| `check_natural_three_as_one_plus_two.sage` | 自然数内の加法 `3=1+2` | PASS | `3=1+2` を `NN` 内で厳密確認 |
+| `check_apply_rational_embedding_to_one_plus_two.sage` | `3=1+2` への自然数から有理数への標準単射の適用 | PASS | 等式の両辺の有理数像が一致 |
+| `check_rational_embedding_one_plus_two.sage` | 自然数から有理数への標準単射の二項加法保存 | PASS | `eta(3)=eta(1)+eta(2)` を厳密確認 |
+| `check_rational_embedding_three_minus_one.sage` | 有理数内の移項 | PASS | `eta(3)-eta(1)=eta(2)` を厳密確認 |
 | `check_apply_algebraic_embedding_to_three_minus_one.sage` | 有理数内の差の等式への代数的数標準単射の適用 | PASS | `iota(eta(3)-eta(1))=iota(eta(2))` を厳密確認 |
 | `check_algebraic_embedding_three_minus_one.sage` | 有理数から代数的数への標準単射の差の保存 | PASS | `iota(eta(3))-iota(eta(1))=iota(eta(2))` を厳密確認 |
 | `check_embedded_integer_coefficients.sage` | 標準単射像の整数係数整理 | PASS | `q_3-q_1=q_2` と分配を確認 |

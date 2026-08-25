@@ -5781,9 +5781,18 @@ S_{G,3}(a)
 -q_3\mathcal R_G(a)S_{G,2}(a)
 +(q_3-1_{\overline{\mathbb Q}})S_{G,3}(a)
 \quad\bigl(\because\ \text{分配律}\bigr).`),
+      displayMath(String.raw`3=1+2
+\quad\text{in }\mathbb N
+\quad\bigl(\because\ \mathbb N\text{ の加法}\bigr).`),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(3)
+=\eta_{\mathbb N,\mathbb Q}(1+2)
+\quad\bigl(\because\ \text{直前の等式へ }\eta_{\mathbb N,\mathbb Q}\text{ を適用する}\bigr).`),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(3)
+=\eta_{\mathbb N,\mathbb Q}(1)+\eta_{\mathbb N,\mathbb Q}(2)
+\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は加法を保つ}\bigr).`),
       displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(3)-\eta_{\mathbb N,\mathbb Q}(1)
 =\eta_{\mathbb N,\mathbb Q}(2)
-\quad\bigl(\because\ 3-1=2\text{ in }\mathbb Q\bigr).`),
+\quad\bigl(\because\ \mathbb Q\text{ の加法で移項する}\bigr).`),
       displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
   \eta_{\mathbb N,\mathbb Q}(3)-\eta_{\mathbb N,\mathbb Q}(1)
 \right)

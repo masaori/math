@@ -1,5 +1,5 @@
 # 対象ラベル: theorem_fisher_zero_algebraic_shifted_reciprocal_cube_sum_coefficient_ratio
-# 式ペア: eta_{N,Q}(3)-eta_{N,Q}(1)=eta_{N,Q}(2)
+# 式ペア: 3 = 1+2 in NN
 load("finite-graph-ising-partition-polynomial-and-fisher-zeros/sagemath/check/fisher-zero-algebraic-shifted-reciprocal-cube-sum-coefficient-ratio/_prelude.sage")
-assert QQ(NN(3)) - QQ(NN(1)) == QQ(NN(2))
-print("RESULT: PASS — rearranging eta(3)=eta(1)+eta(2) in QQ gives eta(3)-eta(1)=eta(2)")
+assert NN(3) == NN(1) + NN(2)
+print("RESULT: PASS — three is one plus two in NN")
