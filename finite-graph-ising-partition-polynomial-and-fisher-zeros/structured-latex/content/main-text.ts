@@ -5921,8 +5921,10 @@ S_{G,3}(a)
   \overline P_G(a)^3
 }
 \quad\bigl(\because\ \text{直前の等式を代入する}\bigr).`),
+      displayMath(String.raw`2\in\mathbb N_{>0}
+\quad\bigl(\because\ \mathbb N_{>0}\text{ の定義}\bigr).`),
       displayMath(String.raw`2\ne0
-\quad\bigl(\because\ 2\in\mathbb N_{>0}\bigr).`),
+\quad\bigl(\because\ \mathbb N_{>0}\text{ の元は零でない}\bigr).`),
       displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(2)\ne0
 \quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は単射である}\bigr).`),
       displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
