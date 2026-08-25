@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-25 18:03（本流）: `sagemath/check/rational-power-point-numerator-divides-base-power-difference/` を追加し、底の既約分母が一になる段、隣接二箱の底の点数乗がともに二へ合同なら差が零へ合同になる段、零合同と整除の同値を `ZZ`・`QQ` の三ファイルで一行ずつ検査して全 PASS。次は同主張の Lean 具体版。直前の記述のレビュー修正なし。
 - 2026-08-25 17:37（並行）: `card_uncovered_eq_card_selected_of_perfectMatching` を追加し、全単射から覆われずに残る端子数と選ばれた接続辺数の等式を得た。`lake build` 通過、未証明依存検査 469 件。次は各頂点の個数等式を束ねる。
 - 2026-08-25 17:34（本流）: 次のセクションを二つへ割り、先頭「点数乗表示が成り立つ正の有理点の分子は隣接する二つの箱の底の点数乗の差を割る」の記述を追加した（`claim_rational_power_point_numerator_divides_base_power_difference`）。底が正の自然数であることから既約分数表示の分母を 1 とし、法 $a$ の合同式で隣接する二つの箱がともに $c^{\#V_L}\equiv2$ を満たすことから $a\mid c^{\#V_{L+1}}-c^{\#V_L}$ を得た。`npm run check` 163 ブロック・373 参照すべて解決、linkage 77 件。次は同主張の SageMath 検証。直前の並行成果のレビュー修正なし。
 - 2026-08-25 17:07（並行）: `secondProjection_bijOn_uncovered_selected_of_perfectMatching` を追加し、覆われずに残る端子と選ばれた接続辺の所属対応の両方向から、第二成分写像の全単射を完全マッチングの仮定だけで導いた。従来の補助定理の強すぎる全称同値は、定義域上の順方向と構成した逆像についての逆方向へ修正した。次は全単射から両有限集合の濃度等式を得る。
