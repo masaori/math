@@ -6,10 +6,12 @@
 固定近傍での表現不能を、人手証明と同じ対象・仮定・順序で形式化する。
 有限型・有限部分集合・写像だけを使い、R / C は現れない。
 
-必要十分版と、具体版がその特殊化であることの導出は次の層で扱う。
+必要十分版は NecSuf/FixedNeighborhoodCompositionNonclosure.lean、そこからの導出は
+この file 末尾の `Derivation` 名前空間にある。
 -/
 import CellularAutomata.LocalRuleRepresentation
 import CellularAutomata.LocalityRestrictsCycleType
+import CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure
 
 namespace CellularAutomata.FixedNeighborhoodCompositionNonclosure
 
@@ -135,5 +137,78 @@ theorem reversible_stage_maps_not_composition_closed :
       F ∘ F ∉ stageGlobalMaps nbhd :=
   ⟨shiftMap, shiftMap_mem_stageGlobalMaps, shiftMap_injective,
     shiftMap_comp_not_mem_stageGlobalMaps⟩
+
+
+/-! ### 必要十分版からの導出
+
+添字型を `Cell`、状態型を `State`、ν を `nu`、基準値を `State.zero`、
+s を `shift`、s の右逆写像 t を `fun v => shift (shift v)`、v₀ を `Cell.a` に特殊化する。
+有限性を使うのは、大域写像全体 `stageGlobalMaps` を有限集合として集める最後の段だけである。 -/
+
+namespace Derivation
+
+
+/-- 具体版の近傍は、必要十分版の近傍を s := shift に特殊化したものである。 -/
+theorem nbhd_eq :
+    nbhd = _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.shiftNbhd shift :=
+  rfl
+
+/-- 具体版の座標送り写像は、必要十分版の座標送り写像の特殊化である。 -/
+theorem shiftMap_eq : (shiftMap : (Cell → State) → Cell → State) = _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.shiftMap shift := rfl
+
+/-- 具体版の「局所規則族の大域写像が F に一致する」は必要十分版の特殊化である。 -/
+theorem globalMap_shiftRules_of_necSuf : globalMap nbhd shiftRules = shiftMap :=
+  _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.globalMap_shiftRules (A := State) shift
+
+/-- 具体版の単射性は、s の右逆写像 t := s ∘ s を取った必要十分版の特殊化である。 -/
+theorem shiftMap_injective_of_necSuf : Function.Injective shiftMap :=
+  _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.shiftMap_injective (A := State) shift (fun v => shift (shift v))
+    (fun v => shift_three v)
+
+/-- 具体版の両側逆写像は、必要十分版の二つの合成条件の特殊化である。 -/
+theorem shiftMap_comp_inverseShiftMap_of_necSuf : shiftMap ∘ inverseShiftMap = id :=
+  _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.shiftMap_comp_left (A := State) shift (fun v => shift (shift v))
+    (fun v => shift_three v)
+
+theorem inverseShiftMap_comp_shiftMap_of_necSuf : inverseShiftMap ∘ shiftMap = id :=
+  _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.shiftMap_comp_right (A := State) shift (fun v => shift (shift v))
+    (fun v => shift_three v)
+
+/-- 具体版の「c は g_a の本質的依存台に属する」は、必要十分版の本質的依存を
+    ν := nu、基準値 := zero に特殊化し、依存台の所属へ言い換えて得られる。 -/
+theorem cellC_mem_twiceAtA_supp_of_necSuf : Cell.c ∈ supp twiceAtA := by
+  have h := _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.twiceCellMap_essentialDep nu ne_iff_eq_nu State.zero shift Cell.a
+  exact (mem_supp_iff twiceAtA Cell.c).mpr h
+
+/-- 具体版の表現不能は、必要十分版を「読む添字が近傍の外にある」条件
+    s (s a) = c ≠ b = s a のもとで特殊化して得られる。 -/
+theorem twiceAtA_not_representable_of_necSuf : ¬ Representable (nbhd Cell.a) twiceAtA :=
+  _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.twiceCellMap_not_representable nu ne_iff_eq_nu State.zero shift Cell.a
+    (by decide)
+
+/-- 具体版の「F ∘ F を同じ固定近傍の局所規則族では表せない」は必要十分版の特殊化である。 -/
+theorem shiftMap_comp_not_representable_of_necSuf :
+    ¬ ∃ f : LocalRuleFamily nbhd, globalMap nbhd f = shiftMap ∘ shiftMap :=
+  _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.shiftMap_comp_not_globalMap nu ne_iff_eq_nu State.zero shift Cell.a (by decide)
+
+/-- 具体版の最終主張は、必要十分版の合成非閉性に有限性を足して
+    大域写像全体を有限集合として集めたものである。 -/
+theorem reversible_stage_maps_not_composition_closed_of_necSuf :
+    ∃ F, F ∈ stageGlobalMaps nbhd ∧ Function.Injective F ∧
+      F ∘ F ∉ stageGlobalMaps nbhd := by
+  classical
+  obtain ⟨F, ⟨f, hf⟩, hinj, hnot⟩ :=
+    _root_.CellularAutomata.NecSuf.FixedNeighborhoodCompositionNonclosure.reversible_fixed_neighborhood_not_composition_closed
+      nu ne_iff_eq_nu State.zero shift (fun v => shift (shift v))
+      (fun v => shift_three v) Cell.a (by decide)
+  refine ⟨F, ?_, hinj, ?_⟩
+  · rw [stageGlobalMaps]
+    exact Finset.mem_image.mpr ⟨f, Finset.mem_univ _, hf⟩
+  · intro hmem
+    rw [stageGlobalMaps] at hmem
+    obtain ⟨g, -, hg⟩ := Finset.mem_image.mp hmem
+    exact hnot ⟨g, hg⟩
+
+end Derivation
 
 end CellularAutomata.FixedNeighborhoodCompositionNonclosure
