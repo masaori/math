@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_adjacent_vertex_number_gaps_are_coprime",
   "claim_all_edge_variables_to_one_indeterminate_gives_partition_polynomial",
   "claim_boundary_response_outer_box_independence",
   "claim_boundary_response_outer_box_stability",
