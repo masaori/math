@@ -581,6 +581,8 @@ targets=(
   Ising3DCut.NecSuf.reduction_reaches_index_gcd_aux
   Ising3DCut.NecSuf.reduction_reaches_index_gcd
   Ising3DCut.LimitQuantity.powerMinusOne_gcd_reaches_exponent_gcd_viaNecSuf
+  Ising3DCut.NecSuf.combine_eq_normalize_of_reaches_self
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_equals_power_of_exponent_gcd_viaNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
