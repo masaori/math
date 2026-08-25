@@ -5680,6 +5680,15 @@ S_{G,3}(a)
   \overline P_G(a)^3
 }
 \quad\bigl(\because\ \text{共通分母化}\bigr).`),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(1)=1_{\mathbb Q}
+\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は乗法単位元を保つ}\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(1)
+\right)
+=1_{\overline{\mathbb Q}}
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は乗法単位元を保つ}\bigr).`),
+      displayMath(String.raw`q_1=1_{\overline{\mathbb Q}}
+\quad\bigl(\because\ q_1\text{ の定義}\bigr).`),
       displayMath(String.raw`q_2S_{G,3}(a)
 =
 \frac{
@@ -5689,7 +5698,7 @@ S_{G,3}(a)
 }{
   \overline P_G(a)^3
 }
-\quad\bigl(\because\ q_1\text{ は }\overline{\mathbb Q}\text{ の乗法単位元}\bigr).`),
+\quad\bigl(\because\ q_1=1_{\overline{\mathbb Q}}\text{ を代入する}\bigr).`),
       displayMath(String.raw`q_2S_{G,3}(a)
 =
 \frac{

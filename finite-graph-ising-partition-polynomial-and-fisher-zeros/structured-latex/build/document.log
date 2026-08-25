@@ -808,24 +808,25 @@ Overfull \hbox (4.61627pt too wide) detected at line 5297
  []
 
 
-Overfull \hbox (38.4547pt too wide) detected at line 5317
+Overfull \hbox (31.18883pt too wide) detected at line 5326
 \OML/cmm/m/it/10.95 q[]S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n
-/10.95 ) = [] []\U/msa/m/n/10.95 *  \OML/cmm/m/it/10.95 q[][][][][]:
+/10.95 ) = [] []\U/msa/m/n/10.95 *  \OML/cmm/m/it/10.95 q[] \OT1/cmr/m/n/10.95 
+= 1[][][]\OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (31.46254pt too wide) detected at line 5339
+Overfull \hbox (31.46254pt too wide) detected at line 5348
 \OML/cmm/m/it/10.95 q[]S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n
 /10.95 ) = [] []\U/msa/m/n/10.95 *  [][][]\OML/cmm/m/it/10.95 :
  []
 
 [46]
-Overfull \hbox (16.41571pt too wide) detected at line 5462
+Overfull \hbox (16.41571pt too wide) detected at line 5471
 [][]
  []
 
 [47] [48] [49]
-Overfull \hbox (23.56679pt too wide) detected at line 5785
+Overfull \hbox (23.56679pt too wide) detected at line 5794
 [] \OT1/cmr/m/n/10.95 
 [](\OML/cmm/m/it/10.95 m\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 q[] < [] \OT1/c
 mr/m/n/10.95 
@@ -841,4 +842,4 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 136D271E6B286FF0E67A1A8C4C9E49EB;288.
  )
-Output written on document.xdv (55 pages, 698884 bytes).
+Output written on document.xdv (55 pages, 699700 bytes).

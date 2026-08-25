@@ -35,6 +35,8 @@
 | `check_eliminate_non_diagonal_pair_sum.sage` | 非対角二重和の消去 | PASS | 三次恒等式が一致 |
 | `check_substitute_lower_reciprocal_sums.sage` | 既存の一次・二次係数表示の代入 | PASS | 既存二定理の代入後も一致 |
 | `check_common_denominator.sage` | 共通分母化 | PASS | 共通分母化の前後が一致 |
+| `check_rational_embedding_one_identity.sage` | 自然数から有理数への標準単射の乗法単位元保存 | PASS | `eta(1)=1_Q` を厳密確認 |
+| `check_algebraic_embedding_one_identity.sage` | 有理数から代数的数への標準単射の乗法単位元保存 | PASS | `iota(eta(1))=1_Qbar` を厳密確認 |
 | `check_q1_multiplicative_identity.sage` | 標準単射像 `q_1` と乗法単位元 | PASS | `q_1=1` を厳密確認 |
 | `check_cubic_numerator_distribution.sage` | 三次分子の分配 | PASS | 全例・全評価点で一致 |
 | `check_cubic_numerator_reordering.sage` | 三次分子の加法項の並べ替え | PASS | 全例・全評価点で一致 |
