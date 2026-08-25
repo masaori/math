@@ -10134,4 +10134,124 @@ c^{\,n(k+1)}-1
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_power_minus_one_gcd_reduces_exponent_difference",
+    kind: "claim",
+    title: {
+      text: "底の冪から 1 を引いた二数の最大公約数は、指数の差へ還元できる",
+    },
+    labels: ["claim_power_minus_one_gcd_exponent_difference_step"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`c`),
+        " と、",
+        math(String.raw`m>n`),
+        " を満たす正の自然数 ",
+        math(String.raw`m`),
+        "、",
+        math(String.raw`n`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\gcd\bigl(c^{\,m}-1,\ c^{\,n}-1\bigr)=\gcd\bigl(c^{\,m-n}-1,\ c^{\,n}-1\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`m-n`),
+        " は ",
+        math(String.raw`m>n`),
+        " より正の自然数であり、四つの数 ",
+        math(String.raw`c^{\,m}-1`),
+        "、",
+        math(String.raw`c^{\,n}-1`),
+        "、",
+        math(String.raw`c^{\,m-n}-1`),
+        "、およびそれらの最大公約数はいずれも自然数である。主張は ",
+        math(String.raw`\mathbb Z`),
+        " の等式だけからなり、箱の大きさの極限も無限和も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず ",
+        math(String.raw`c^{\,m}-1`),
+        " を ",
+        math(String.raw`c^{\,n}-1`),
+        " と ",
+        math(String.raw`c^{\,m-n}-1`),
+        " で書き直す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c^{\,m}-1
+&=c^{\,(m-n)+n}-1
+&&(\because\ m>n \text{ より } m=(m-n)+n)\\
+&=c^{\,m-n}\,c^{\,n}-1
+&&(\because\ \text{同じ底の冪の積})\\
+&=c^{\,m-n}\,c^{\,n}-c^{\,m-n}+c^{\,m-n}-1
+&&(\because\ -c^{\,m-n}+c^{\,m-n}=0)\\
+&=c^{\,m-n}\bigl(c^{\,n}-1\bigr)+\bigl(c^{\,m-n}-1\bigr)
+&&(\because\ \text{分配則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "すなわち ",
+        math(String.raw`q:=c^{\,m-n}`),
+        " と置くと ",
+        math(String.raw`c^{\,m}-1=q\bigl(c^{\,n}-1\bigr)+\bigl(c^{\,m-n}-1\bigr)`),
+        " である。以下、両側の最大公約数を割り合うことで等号を示す。",
+      ]),
+      paragraph([
+        math(String.raw`d:=\gcd\bigl(c^{\,m}-1,\ c^{\,n}-1\bigr)`),
+        " と置く。",
+        math(String.raw`d\mid c^{\,m}-1`),
+        " かつ ",
+        math(String.raw`d\mid c^{\,n}-1`),
+        " なので ",
+        math(String.raw`d\mid q\bigl(c^{\,n}-1\bigr)`),
+        " であり、上の等式から ",
+        math(String.raw`d\mid\bigl(c^{\,m}-1\bigr)-q\bigl(c^{\,n}-1\bigr)=c^{\,m-n}-1`),
+        " を得る。",
+        math(String.raw`d`),
+        " は ",
+        math(String.raw`c^{\,m-n}-1`),
+        " と ",
+        math(String.raw`c^{\,n}-1`),
+        " の公約数なので ",
+        math(String.raw`d\mid\gcd\bigl(c^{\,m-n}-1,\ c^{\,n}-1\bigr)`),
+        " である。",
+      ]),
+      paragraph([
+        "逆に ",
+        math(String.raw`e:=\gcd\bigl(c^{\,m-n}-1,\ c^{\,n}-1\bigr)`),
+        " と置く。",
+        math(String.raw`e\mid c^{\,n}-1`),
+        " なので ",
+        math(String.raw`e\mid q\bigl(c^{\,n}-1\bigr)`),
+        " であり、",
+        math(String.raw`e\mid c^{\,m-n}-1`),
+        " と合わせて、上の等式から ",
+        math(String.raw`e\mid q\bigl(c^{\,n}-1\bigr)+\bigl(c^{\,m-n}-1\bigr)=c^{\,m}-1`),
+        " を得る。",
+        math(String.raw`e`),
+        " は ",
+        math(String.raw`c^{\,m}-1`),
+        " と ",
+        math(String.raw`c^{\,n}-1`),
+        " の公約数なので ",
+        math(String.raw`e\mid d`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`d`),
+        " と ",
+        math(String.raw`e`),
+        " は互いに割り合う自然数なので ",
+        math(String.raw`d=e`),
+        " であり、主張の等式を得る。",
+      ]),
+    ],
+  },
 ]);
