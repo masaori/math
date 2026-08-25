@@ -21,6 +21,12 @@ def otherAxis (i : Fin 3) : Fin 3 := if i = 0 then 1 else 0
 lemma otherAxis_ne (i : Fin 3) : otherAxis i ≠ i := by
   fin_cases i <;> decide
 
+/-- 一辺が二以上の箱では、任意の座標について正方向へ一つ進めるか、負方向へ一つ戻れる。
+正方形を元の辺の正側と負側のどちらへ置くかを、この二つの場合で決める。 -/
+lemma shiftUp_available_or_shiftDown_available {L : ℕ} (hL : 2 ≤ L) (a : Site L) (j : Fin 3) :
+    a.1 j + 1 < L ∨ 1 ≤ a.1 j := by
+  omega
+
 /-- 点の第 `j` 座標だけを 1 増やした点。`ε_j` を足す操作に対応する。 -/
 def shiftUp {L : ℕ} (a : Site L) (j : Fin 3) (h : a.1 j + 1 < L) : Site L :=
   ⟨Function.update a.1 j (a.1 j + 1), by

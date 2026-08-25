@@ -491,4 +491,32 @@ theorem mem_selectedIncidentEdgesAt_iff {V Edge : Type*}
       e ∈ incidentEdges v ∧ e ∈ edges ∧ externalEdge endpoint₀ endpoint₁ e ∈ matching := by
   simp [selectedIncidentEdgesAt, selectedOriginalEdges]
 
+/-- 覆われずに残る端子と選ばれた接続辺の所属条件が第二成分について一致するなら、
+第二成分を取る写像は両者の間の全単射である。
+
+この補題は、端子の第一成分がすべて `v` に固定されているため単射であり、選ばれた辺 `e` の
+逆像を端子 `⟨v,e⟩` として明示できる、という人手証明の有限集合の段に対応する。 -/
+theorem secondProjection_bijOn_uncovered_selected {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V) (matching : Finset (Finset (Σ _ : V, Edge)))
+    (v : V)
+    (hCorrespondence : ∀ t : Σ _ : V, Edge,
+      t ∈ matchingUncoveredTerminalsAt incidentEdges v matching ↔
+        t.2 ∈ selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v) :
+    Set.BijOn (fun t : Σ _ : V, Edge => t.2)
+      (matchingUncoveredTerminalsAt incidentEdges v matching : Set (Σ _ : V, Edge))
+      (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v : Set Edge) := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro t ht
+    exact (hCorrespondence t).mp ht
+  · intro t ht u hu htu
+    apply Sigma.ext
+    · exact ((mem_matchingUncoveredTerminalsAt_iff incidentEdges v matching t).mp ht).1.1.trans
+        ((mem_matchingUncoveredTerminalsAt_iff incidentEdges v matching u).mp hu).1.1.symm
+    · simpa using htu
+  · intro e he
+    refine ⟨⟨v, e⟩, ?_, rfl⟩
+    exact (hCorrespondence ⟨v, e⟩).mpr he
+
 end Ising3DCut.Prediction
