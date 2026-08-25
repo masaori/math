@@ -6,6 +6,7 @@
 有限集合・写像・自然数だけを使い、R / C は現れない。
 -/
 import CellularAutomata.LocalityRestrictsCycleType
+import CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup
 
 namespace CellularAutomata.SelfNeighborhoodReversibleMapGroup
 
@@ -270,5 +271,139 @@ theorem cycleType_flipMap_empty :
     simp [ReversibleGlobalMapCycleType.Config, Fintype.card_fun,
       CellularAutomata.EssentialDependency.card_state]
   simpa [F] using hfinal
+
+
+/-!
+### 必要十分版からの導出
+
+必要十分版は CellularAutomata/NecSuf/SelfNeighborhoodReversibleMapGroup.lean。
+そこでは舞台を有限型に固定せず、状態集合の二元性を「各元と異なる元が入れ替え写像の値に
+一意に定まる」性質だけへ、反転集合を決定可能な述語だけへ弱めている。
+以下は、この章の具体版がその特殊化として得られることを述べる。
+-/
+
+namespace Derivation
+
+open CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup
+open CellularAutomata.NecSuf.LocalityRestrictsCycleType
+
+/-- 二元状態集合の否定写像は、必要十分版が要求する「別値の一意性」を満たす。 -/
+theorem isOtherValue_nu : IsOtherValue nu := fun a b => ne_iff_eq_nu a b
+
+/-- 具体版の大域写像は、必要十分版の成分ごとの写像が定める写像の特殊化である。 -/
+theorem globalMap_eq_productMap (f : SelfLocalRuleFamily (V := V)) :
+    globalMap (selfNbhd (V := V)) f = productMap (valueMap f) := by
+  funext x v
+  rw [globalMap_self_apply]
+  rfl
+
+/-- 具体版の値写像の単射性は、必要十分版の単射性の同値の特殊化として得られる。 -/
+theorem valueMap_injective_of_globalMap_injective_via_necsuf
+    (f : SelfLocalRuleFamily (V := V))
+    (hF : Function.Injective (globalMap (selfNbhd (V := V)) f)) (v : V) :
+    Function.Injective (valueMap f v) := by
+  rw [globalMap_eq_productMap] at hF
+  exact (productMap_injective_iff (valueMap f)).1 hF v
+
+/-- 具体版の二分類は、必要十分版を状態型 `State` と `nu` へ特殊化して得られる。 -/
+theorem binary_bijection_is_identity_or_negation_via_necsuf {g : State → State}
+    (hg : Function.Bijective g) : g = id ∨ g = nu :=
+  eq_id_or_neg_of_injective isOtherValue_nu hg.1
+
+/-- 具体版の反転集合の写像は、必要十分版の反転述語の写像を所属述語へ特殊化したものである。 -/
+theorem flipMap_eq_necsuf (S : Finset V) :
+    flipMap S = CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup.flipMap
+      nu (fun v => v ∈ S) := by
+  funext x v
+  by_cases hv : v ∈ S <;>
+    simp [flipMap, CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup.flipMap, hv]
+
+/-- 具体版の対合性は、必要十分版の対合性の特殊化として得られる。 -/
+theorem flipMap_involution_via_necsuf (S : Finset V) (x : V → State) :
+    flipMap S (flipMap S x) = x := by
+  rw [flipMap_eq_necsuf]
+  exact CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup.flipMap_involution
+    (fun a => neg_neg isOtherValue_nu a) _ x
+
+/-- 具体版の合成と対称差の一致は、必要十分版の排他的論理和版の特殊化として得られる。 -/
+theorem flipMap_comp_via_necsuf (S T : Finset V) :
+    flipMap S ∘ flipMap T = flipMap (symmDiff S T) := by
+  classical
+  rw [flipMap_eq_necsuf, flipMap_eq_necsuf, flipMap_eq_necsuf,
+    CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup.flipMap_comp
+      (fun a => neg_neg isOtherValue_nu a)]
+  funext x v
+  by_cases hs : v ∈ S <;> by_cases ht : v ∈ T <;>
+    simp [CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup.flipMap, symmDiff,
+      hs, ht]
+
+/-- 具体版の反転集合の一意性は、必要十分版の述語の一意性の特殊化として得られる。 -/
+theorem flipMap_family_injective_via_necsuf :
+    Function.Injective (flipMap : Finset V → (V → State) → V → State) := by
+  intro S T hST
+  haveI : Nonempty State := ⟨State.zero⟩
+  ext v
+  rw [flipMap_eq_necsuf, flipMap_eq_necsuf] at hST
+  exact CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup.flipMap_family_injective
+    (fun a => neg_ne_self isOtherValue_nu a) _ _ hST v
+
+/-- 具体版の固定点のなさは、必要十分版の特殊化として得られる。 -/
+theorem flipMap_fixedPointFree_via_necsuf (S : Finset V) (hS : S.Nonempty) (x : V → State) :
+    flipMap S x ≠ x := by
+  obtain ⟨v, hv⟩ := hS
+  rw [flipMap_eq_necsuf]
+  exact CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup.flipMap_fixedPointFree
+    (fun a => neg_ne_self isOtherValue_nu a) _ hv x
+
+/-- 具体版の巡回型（空でない反転集合）は、必要十分版の固定点のない対合の巡回型の特殊化である。
+    台を配位型に取り、元数 2^{|V|} を代入すると 2 の個数が 2^{|V|-1} に決まる。 -/
+theorem cycleType_flipMap_of_nonempty_via_necsuf (S : Finset V) (hS : S.Nonempty) :
+    ReversibleGlobalMapCycleType.cycleType
+        (⟨flipMap S, flipMap_injective S⟩ :
+          ReversibleGlobalMapCycleType.ReversibleMap V) =
+      Multiset.replicate (2 ^ (Fintype.card V - 1)) 2 := by
+  classical
+  set F : ReversibleGlobalMapCycleType.ReversibleMap V := ⟨flipMap S, flipMap_injective S⟩ with hF
+  obtain ⟨n, hcard, hct⟩ :=
+    CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup.cycleType_of_fixedPointFree_involution
+      (ReversibleGlobalMapCycleType.Derivation.toInjSelfMap F)
+      (fun x => flipMap_involution S x)
+      (fun x => flipMap_fixedPointFree S hS x)
+  have hconfig : Fintype.card (ReversibleGlobalMapCycleType.Config V) = 2 ^ Fintype.card V := by
+    simp [ReversibleGlobalMapCycleType.Config, Fintype.card_fun,
+      CellularAutomata.EssentialDependency.card_state]
+  have hVpos : 0 < Fintype.card V := by
+    obtain ⟨v, -⟩ := hS
+    exact Fintype.card_pos_iff.mpr ⟨v⟩
+  have hsplit : 2 ^ Fintype.card V = 2 * 2 ^ (Fintype.card V - 1) := by
+    obtain ⟨k, hk⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hVpos)
+    rw [hk]
+    simp [Nat.succ_sub_one, pow_succ, Nat.mul_comm]
+  have hn : n = 2 ^ (Fintype.card V - 1) := by
+    rw [hconfig, hsplit] at hcard
+    omega
+  rw [ReversibleGlobalMapCycleType.Derivation.cycleType_eq, hct, hn]
+
+/-- 具体版の巡回型（空の反転集合）は、必要十分版の恒等写像の巡回型の特殊化である。 -/
+theorem cycleType_flipMap_empty_via_necsuf :
+    ReversibleGlobalMapCycleType.cycleType
+        (⟨flipMap (∅ : Finset V), flipMap_injective ∅⟩ :
+          ReversibleGlobalMapCycleType.ReversibleMap V) =
+      Multiset.replicate (2 ^ Fintype.card V) 1 := by
+  classical
+  have hct :=
+    CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup.cycleType_of_id
+      (ReversibleGlobalMapCycleType.Derivation.toInjSelfMap
+        (⟨flipMap (∅ : Finset V), flipMap_injective ∅⟩ :
+          ReversibleGlobalMapCycleType.ReversibleMap V))
+      (fun x => by
+        show flipMap (∅ : Finset V) x = x
+        simpa using congrFun (flipMap_empty (V := V)) x)
+  have hconfig : Fintype.card (ReversibleGlobalMapCycleType.Config V) = 2 ^ Fintype.card V := by
+    simp [ReversibleGlobalMapCycleType.Config,
+      CellularAutomata.EssentialDependency.card_state]
+  rw [ReversibleGlobalMapCycleType.Derivation.cycleType_eq, hct, hconfig]
+
+end Derivation
 
 end CellularAutomata.SelfNeighborhoodReversibleMapGroup
