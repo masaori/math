@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-25 13:03（本流）: 「破れ数がちょうど 1 の配位は存在しない」の必要十分版 `NecSuf.NullModel.broken_count_ne_one_of_alternate_chain` と具体導出 `brokenCount_ne_one_from_necSuf` を追加し、四層を閉じた。三次元箱・座標・正方形・スピン値を落とすと、有限辺系、端点写像、頂点上の値、各辺の両端を別の三辺で結ぶ条件だけが残る。次は「既約分母の 2 の指数が 1 の場合を判定する」。並行は覆われずに残る端子と選ばれた接続辺の所属対応の逆向きから。
 - 2026-08-25 12:33（本流）: `SquareAroundEdge.lean` に `squareUp_edges_ne` / `squareDown_edges_ne` / `squareUp_connects_chain` / `squareDown_connects_chain` / `alternate_three_edges_exists` / `brokenCount_ne_one` を追加し、一辺が二以上の箱では破れ数がちょうど 1 の配位が存在しないことを Lean 具体版で閉じた（`claim_one_breakage_multiplicity_is_zero` の三層目）。未証明依存検査へ登録済み（460 件）。次は必要十分版。締切のため並行は次の tick。
 - 2026-08-25 12:04（本流）: `SquareAroundEdge.lean` に負側の正方形の三辺 `squareDownEdgeToStart`・`squareDownEdgeFromLower`・`squareDownEdgeOpposite` を追加し、一本目が元の始点へ戻り、二本目から三本目へつながり、三本目が元の終点へ着くことを証明した。次は正側・負側を場合分けして `brokenCount_ne_one_of_alternate_three_edges` へ渡し、`claim_one_breakage_multiplicity_is_zero` の Lean 具体版を閉じる。直前成果のレビュー修正なし。
 - 2026-08-25 11:36（並行）: `uncovered_terminal_second_mem_selected` を追加し、覆われずに残る端子の第二成分が選ばれた接続辺であることを完全マッチングから導いた（所属対応の片方向）。未証明依存検査へ登録済み（455 件）。次は逆向きを示して `secondProjection_bijOn_uncovered_selected` の仮定を外す。
