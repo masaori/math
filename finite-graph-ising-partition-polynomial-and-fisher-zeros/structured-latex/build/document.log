@@ -821,12 +821,12 @@ Overfull \hbox (31.46254pt too wide) detected at line 5348
  []
 
 [46]
-Overfull \hbox (16.41571pt too wide) detected at line 5471
+Overfull \hbox (16.41571pt too wide) detected at line 5473
 [][]
  []
 
 [47] [48] [49]
-Overfull \hbox (23.56679pt too wide) detected at line 5794
+Overfull \hbox (23.56679pt too wide) detected at line 5796
 [] \OT1/cmr/m/n/10.95 
 [](\OML/cmm/m/it/10.95 m\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 q[] < [] \OT1/c
 mr/m/n/10.95 
@@ -842,4 +842,4 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 136D271E6B286FF0E67A1A8C4C9E49EB;288.
  )
-Output written on document.xdv (55 pages, 699700 bytes).
+Output written on document.xdv (55 pages, 699740 bytes).

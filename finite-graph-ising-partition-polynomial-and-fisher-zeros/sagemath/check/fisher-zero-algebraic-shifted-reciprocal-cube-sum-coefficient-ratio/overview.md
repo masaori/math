@@ -46,6 +46,7 @@
 | `check_rational_embedding_three_minus_one.sage` | 自然数像の有理数内での差 `3-1=2` | PASS | `eta(3)-eta(1)=eta(2)` を厳密確認 |
 | `check_algebraic_embedding_three_minus_one.sage` | 有理数から代数的数への標準単射の差の保存 | PASS | `iota(eta(3))-iota(eta(1))=iota(eta(2))` を厳密確認 |
 | `check_embedded_integer_coefficients.sage` | 標準単射像の整数係数整理 | PASS | `q_3-q_1=q_2` と分配を確認 |
+| `check_natural_two_nonzero.sage` | 自然数 `2` の非零性 | PASS | `2\ne0` を `NN` 内で厳密確認 |
 | `check_rational_embedding_two_nonzero.sage` | 自然数 `2` の有理数への標準単射像の非零性 | PASS | `eta_{N,Q}(2) != 0` を厳密確認 |
 | `check_algebraic_embedding_two_nonzero.sage` | 有理数 `eta_{N,Q}(2)` の代数的数への標準単射像の非零性 | PASS | `iota_{Q,Qbar}(eta_{N,Q}(2)) != 0` を厳密確認 |
 | `check_q2_nonzero.sage` | 標準単射像 `q_2` の非零性 | PASS | `q_2\ne0` を厳密確認 |
