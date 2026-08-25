@@ -17,6 +17,8 @@
 | `check_qq_embedding_finite_product.sage` | 自然数から有理数への標準単射の有限積保存 | PASS | 全例で四因子積が一致 |
 | `check_falling_factorial_expansion.sage` | 三因子下降積の展開 | PASS | 全例で有限積の展開が一致 |
 | `check_natural_product_commutativity.sage` | 自然数積の並べ替え | PASS | 全例で積の並べ替えが一致 |
+| `check_evaluate_third_coefficient_sum.sage` | 三回形式微分式への評価点代入 | PASS | 全例・全評価点で表示した係数有限和と一致 |
+| `check_third_coefficient_sum_local_definition.sage` | 評価後の係数有限和と局所記号 `C_G(a)` | PASS | 表示した有限和と局所定義が一致 |
 | `check_third_coefficient_sum_definition.sage` | 三回形式微分の評価と第三係数和 | PASS | 全例・全評価点で一致 |
 | `check_product_formal_derivatives.sage` | 一次因子積の前三回の形式微分 | PASS | 順序付き除外添字和と一致 |
 | `check_leading_multiplicity_nonzero.sage` | 自然数の最高次多重度の非零性 | PASS | 全例で正値性から非零性を確認 |
