@@ -53,6 +53,14 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.FiniteNeighborhoodAssignmentMonoid.identity_composedNeighborhood
+  CellularAutomata.FiniteNeighborhoodAssignmentMonoid.composedNeighborhood_identity
+  CellularAutomata.FiniteNeighborhoodAssignmentMonoid.composedNeighborhood_assoc
+  CellularAutomata.FiniteNeighborhoodAssignmentMonoid.card_neighborhoodAssignment
+  CellularAutomata.FiniteNeighborhoodAssignmentMonoid.mem_compositionTable
+  CellularAutomata.FiniteNeighborhoodAssignmentMonoid.noncommutative_left_at_a
+  CellularAutomata.FiniteNeighborhoodAssignmentMonoid.noncommutative_right_at_a
+  CellularAutomata.FiniteNeighborhoodAssignmentMonoid.noncommutative_witness
   CellularAutomata.NecSuf.ComposedNeighborhoodClosure.inner_mem_composedNeighborhood
   CellularAutomata.NecSuf.ComposedNeighborhoodClosure.twoStageRestriction
   CellularAutomata.NecSuf.ComposedNeighborhoodClosure.globalMap_composition_eq
