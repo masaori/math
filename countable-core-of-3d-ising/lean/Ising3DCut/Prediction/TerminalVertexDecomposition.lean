@@ -810,4 +810,52 @@ theorem endpoint_pair_subset_fiber_of_selectedEndpointIncidences {V Edge : Type*
       subst t
       rfl
 
+/-- 前二つの包含を束ねる。元辺 `e` が両端点で選ばれているなら、元辺への射影の繊維は
+両端点との二つの組がなす集合にちょうど一致する。 -/
+theorem fiber_eq_endpoint_pair_of_selectedEndpointIncidences {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (e : Edge)
+    (he : e ∈ edges)
+    (hvertex₀ : endpoint₀ e ∈ vertices) (hvertex₁ : endpoint₁ e ∈ vertices)
+    (hincident₀ : e ∈ incidentEdges (endpoint₀ e))
+    (hincident₁ : e ∈ incidentEdges (endpoint₁ e))
+    (hselected : externalEdge endpoint₀ endpoint₁ e ∈ matching) :
+    ((selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁
+        matching).filter (fun t => t.2 = e))
+      = ({⟨endpoint₀ e, e⟩, ⟨endpoint₁ e, e⟩} : Finset (Σ _ : V, Edge)) :=
+  Finset.Subset.antisymm
+    (fiber_subset_endpoint_pair_of_selectedEndpointIncidences vertices edges incidentEdges
+      endpoint₀ endpoint₁ matching hIncident e)
+    (endpoint_pair_subset_fiber_of_selectedEndpointIncidences vertices edges incidentEdges
+      endpoint₀ endpoint₁ matching e he hvertex₀ hvertex₁ hincident₀ hincident₁ hselected)
+
+/-- 両端点が相異なるとき、元辺への射影の繊維の元の個数はちょうど二である。 -/
+theorem card_fiber_eq_two_of_selectedEndpointIncidences {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (e : Edge)
+    (he : e ∈ edges)
+    (hvertex₀ : endpoint₀ e ∈ vertices) (hvertex₁ : endpoint₁ e ∈ vertices)
+    (hincident₀ : e ∈ incidentEdges (endpoint₀ e))
+    (hincident₁ : e ∈ incidentEdges (endpoint₁ e))
+    (hselected : externalEdge endpoint₀ endpoint₁ e ∈ matching)
+    (hne : endpoint₀ e ≠ endpoint₁ e) :
+    ((selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁
+        matching).filter (fun t => t.2 = e)).card = 2 := by
+  rw [fiber_eq_endpoint_pair_of_selectedEndpointIncidences vertices edges incidentEdges
+    endpoint₀ endpoint₁ matching hIncident e he hvertex₀ hvertex₁ hincident₀ hincident₁ hselected]
+  have hnotmem : (⟨endpoint₀ e, e⟩ : Σ _ : V, Edge) ∉
+      ({⟨endpoint₁ e, e⟩} : Finset (Σ _ : V, Edge)) := by
+    simp only [Finset.mem_singleton]
+    intro hcontra
+    exact hne (congrArg Sigma.fst hcontra)
+  rw [Finset.card_insert_of_notMem hnotmem, Finset.card_singleton]
+
 end Ising3DCut.Prediction

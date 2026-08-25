@@ -547,6 +547,8 @@ targets=(
   Ising3DCut.Prediction.first_eq_endpoint_of_mem_selectedEndpointIncidences
   Ising3DCut.Prediction.fiber_subset_endpoint_pair_of_selectedEndpointIncidences
   Ising3DCut.Prediction.endpoint_pair_subset_fiber_of_selectedEndpointIncidences
+  Ising3DCut.Prediction.fiber_eq_endpoint_pair_of_selectedEndpointIncidences
+  Ising3DCut.Prediction.card_fiber_eq_two_of_selectedEndpointIncidences
   Ising3DCut.LimitQuantity.powerMinusOne_witness_zero
   Ising3DCut.LimitQuantity.powerMinusOne_exponent_succ
   Ising3DCut.LimitQuantity.powerMinusOne_succ_decompose
