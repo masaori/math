@@ -5722,6 +5722,21 @@ S_{G,3}(a)
   \overline P_G(a)^3
 }
 \quad\bigl(\because\ \text{分配律}\bigr).`),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(3)-\eta_{\mathbb N,\mathbb Q}(1)
+=\eta_{\mathbb N,\mathbb Q}(2)
+\quad\bigl(\because\ 3-1=2\text{ in }\mathbb Q\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(3)
+\right)
+-\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(1)
+\right)
+=\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(2)
+\right)
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は差を保つ}\bigr).`),
+      displayMath(String.raw`q_3-q_1=q_2
+\quad\bigl(\because\ q_1,q_2,q_3\text{ の定義}\bigr).`),
       displayMath(String.raw`q_2S_{G,3}(a)
 =
 \frac{
@@ -5731,7 +5746,7 @@ S_{G,3}(a)
 }{
   \overline P_G(a)^3
 }
-\quad\bigl(\because\ q_3-q_1=q_2\bigr).`),
+\quad\bigl(\because\ \text{直前の等式を代入する}\bigr).`),
       displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(2)\ne0
 \quad\bigl(\because\ 2\ne0\text{ かつ }\eta_{\mathbb N,\mathbb Q}\text{ は単射である}\bigr).`),
       displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
