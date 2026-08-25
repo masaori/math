@@ -20,6 +20,7 @@ import type {
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_causal_set_primary_literature from './content/causal-set-primary-literature.ts'
 import blocks_causal_structure_comparison from './content/causal-structure-comparison.ts'
+import blocks_composed_neighborhood_closure from './content/composed-neighborhood-closure.ts'
 import blocks_conjugacy_class_code_image_bijection from './content/conjugacy-class-code-image-bijection.ts'
 import blocks_dependency_order_substructures from './content/dependency-order-substructures.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
@@ -65,6 +66,7 @@ import blocks_transitive_closure_antisymmetry from './content/transitive-closure
 export type AllBlocks = [
   ...typeof blocks_causal_set_primary_literature,
   ...typeof blocks_causal_structure_comparison,
+  ...typeof blocks_composed_neighborhood_closure,
   ...typeof blocks_conjugacy_class_code_image_bijection,
   ...typeof blocks_dependency_order_substructures,
   ...typeof blocks_essential_dependency,
