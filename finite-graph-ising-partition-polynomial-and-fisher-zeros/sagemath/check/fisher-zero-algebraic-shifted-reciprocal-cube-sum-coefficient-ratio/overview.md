@@ -39,6 +39,15 @@
 | `check_expand_reciprocal_cube.sage` | 逆数和の三乗の有限三重和への展開 | PASS | 三乗と順序付き有限三重和が一致 |
 | `check_partition_reciprocal_cube_indices.sage` | 有限三重和の添字一致型による分割 | PASS | 対角・三つの二重一致・相異なる三重添字の五項が一致 |
 | `check_swap_reciprocal_cube_pair_indices.sage` | 二重一致項の非対角添字交換 | PASS | `V_{G,1,2}=U_{G,2,1}` を厳密確認 |
+| `check_natural_three_as_sum_of_ones.sage` | 自然数 `3` の三つの単位元への加法分解 | PASS | `3=1+1+1` を `NN` 内で厳密確認 |
+| `check_apply_rational_embedding_to_three_sum.sage` | `3=1+1+1` への自然数から有理数への標準単射の適用 | PASS | 等式の両辺の有理数像が一致 |
+| `check_rational_embedding_three_sum.sage` | 自然数から有理数への標準単射の三項加法保存 | PASS | `eta(3)=eta(1)+eta(1)+eta(1)` を厳密確認 |
+| `check_apply_algebraic_embedding_to_three_sum.sage` | 有理数像の三項和への代数的数への標準単射の適用 | PASS | 等式の両辺の代数的数像が一致 |
+| `check_algebraic_embedding_three_sum.sage` | 有理数から代数的数への標準単射の三項加法保存 | PASS | 三項和の像が像の三項和と一致 |
+| `check_q3_as_triple_q1.sage` | 局所係数 `q_3` と三つの `q_1` の和 | PASS | `q_3=q_1+q_1+q_1` を厳密確認 |
+| `check_substitute_q1_pair_terms.sage` | 三つの非対角和への `q_1=1` の適用 | PASS | 三項の各項へ同じ単位元を適用しても一致 |
+| `check_factor_q1_pair_terms.sage` | 三つの `q_1` 付き非対角和の分配律による括り出し | PASS | 三項和が `(q_1+q_1+q_1)U_{G,2,1}` と一致 |
+| `check_substitute_q3_pair_terms.sage` | `q_3=q_1+q_1+q_1` の非対角和への代入 | PASS | 括り出した係数が `q_3` 倍と一致 |
 | `check_collect_reciprocal_cube_pair_terms.sage` | 三つの二重一致項の係数集約 | PASS | 三つの同一和が `q_3U_{G,2,1}` に一致 |
 | `check_reciprocal_cube_decomposition.sage` | 逆数和の三乗の一致型分解 | PASS | 三つの添字一致型が一致 |
 | `check_isolate_triple_sum.sage` | 相異なる順序付き三重和の分離 | PASS | 一致型分解から `T_{G,3}` を移項した等式が一致 |

@@ -5675,6 +5675,50 @@ S_{G,3}(a)
       displayMath(String.raw`V_{G,1,2}(a)
 =U_{G,2,1}(a)
 \quad\bigl(\because\ \text{非対角項の添字 }k,\ell\text{ を交換する}\bigr).`),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(1)=1_{\mathbb Q}
+\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は乗法単位元を保つ}\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(1)
+\right)
+=1_{\overline{\mathbb Q}}
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は乗法単位元を保つ}\bigr).`),
+      displayMath(String.raw`q_1=1_{\overline{\mathbb Q}}
+\quad\bigl(\because\ q_1\text{ の定義}\bigr).`),
+      displayMath(String.raw`3=1+1+1
+\quad\text{in }\mathbb N
+\quad\bigl(\because\ \mathbb N\text{ の加法}\bigr).`),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(3)
+=\eta_{\mathbb N,\mathbb Q}(1+1+1)
+\quad\bigl(\because\ \text{直前の等式へ }\eta_{\mathbb N,\mathbb Q}\text{ を適用する}\bigr).`),
+      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(3)
+=\eta_{\mathbb N,\mathbb Q}(1)
++\eta_{\mathbb N,\mathbb Q}(1)
++\eta_{\mathbb N,\mathbb Q}(1)
+\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は有限和を保つ}\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(3)
+\right)
+=\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(1)
+  +\eta_{\mathbb N,\mathbb Q}(1)
+  +\eta_{\mathbb N,\mathbb Q}(1)
+\right)
+\quad\bigl(\because\ \text{直前の等式へ }\iota_{\mathbb Q,\overline{\mathbb Q}}\text{ を適用する}\bigr).`),
+      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(3)
+\right)
+=\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(1)
+\right)
++\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(1)
+\right)
++\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(1)
+\right)
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は有限和を保つ}\bigr).`),
+      displayMath(String.raw`q_3=q_1+q_1+q_1
+\quad\bigl(\because\ q_1,q_3\text{ の定義}\bigr).`),
       displayMath(String.raw`\mathcal R_G(a)^3
 =
 S_{G,3}(a)
@@ -5686,8 +5730,18 @@ S_{G,3}(a)
       displayMath(String.raw`U_{G,2,1}(a)
 +U_{G,2,1}(a)
 +U_{G,2,1}(a)
+=q_1U_{G,2,1}(a)
++q_1U_{G,2,1}(a)
++q_1U_{G,2,1}(a)
+\quad\bigl(\because\ q_1=1_{\overline{\mathbb Q}}\text{ を同じ三項へ適用する}\bigr).`),
+      displayMath(String.raw`q_1U_{G,2,1}(a)
++q_1U_{G,2,1}(a)
++q_1U_{G,2,1}(a)
+=\left(q_1+q_1+q_1\right)U_{G,2,1}(a)
+\quad\bigl(\because\ \text{分配律}\bigr).`),
+      displayMath(String.raw`\left(q_1+q_1+q_1\right)U_{G,2,1}(a)
 =q_3U_{G,2,1}(a)
-\quad\bigl(\because\ \text{標準単射像 }q_3\text{ は三重加法の係数である}\bigr).`),
+\quad\bigl(\because\ q_3=q_1+q_1+q_1\text{ を代入する}\bigr).`),
       displayMath(String.raw`\mathcal R_G(a)^3
 =
 S_{G,3}(a)
@@ -5727,15 +5781,6 @@ S_{G,3}(a)
 -q_3\mathcal R_G(a)S_{G,2}(a)
 +(q_3-1_{\overline{\mathbb Q}})S_{G,3}(a)
 \quad\bigl(\because\ \text{分配律}\bigr).`),
-      displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(1)=1_{\mathbb Q}
-\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は乗法単位元を保つ}\bigr).`),
-      displayMath(String.raw`\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
-  \eta_{\mathbb N,\mathbb Q}(1)
-\right)
-=1_{\overline{\mathbb Q}}
-\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は乗法単位元を保つ}\bigr).`),
-      displayMath(String.raw`q_1=1_{\overline{\mathbb Q}}
-\quad\bigl(\because\ q_1\text{ の定義}\bigr).`),
       displayMath(String.raw`\eta_{\mathbb N,\mathbb Q}(3)-\eta_{\mathbb N,\mathbb Q}(1)
 =\eta_{\mathbb N,\mathbb Q}(2)
 \quad\bigl(\because\ 3-1=2\text{ in }\mathbb Q\bigr).`),
