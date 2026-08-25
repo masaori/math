@@ -509,6 +509,10 @@ targets=(
   Ising3DCut.NullModel.brokenCount_ne_one_of_alternate_three_edges
   Ising3DCut.NullModel.squareUp_closes
   Ising3DCut.NullModel.squareDown_closes
+  Ising3DCut.NullModel.squareUp_connects_chain
+  Ising3DCut.NullModel.squareDown_connects_chain
+  Ising3DCut.NullModel.alternate_three_edges_exists
+  Ising3DCut.NullModel.brokenCount_ne_one
   Ising3DCut.Prediction.uncovered_terminal_second_mem_selected
 )
 

@@ -132,6 +132,40 @@ theorem squareUp_closes {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
   rw [endpoint1_eq_shiftUp, endpoint1_eq_shiftUp]
   exact shiftUp_comm e.start j e.axis hji hj e.next_lt _ _
 
+/-- 正側の正方形の三辺は、いずれも元の辺とは異なる。一本目と三本目は方向が `j\ne i` で異なり、
+二本目は方向が同じでも始点の `j` 成分が 1 だけ大きい。 -/
+lemma squareUp_edges_ne {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hj : e.start.1 j + 1 < L) :
+    squareUpEdgeFromStart e j hj ≠ e ∧
+    squareUpEdgeShifted e j hji hj ≠ e ∧
+    squareUpEdgeOpposite e j hji hj ≠ e := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro h; exact hji (congrArg Edge.axis h)
+  · intro h
+    have hs : (squareUpEdgeShifted e j hji hj).start = e.start := congrArg Edge.start h
+    have := congrFun (congrArg Subtype.val hs) j
+    rw [show (squareUpEdgeShifted e j hji hj).start = shiftUp e.start j hj from rfl] at this
+    rw [shiftUp_apply_self e.start j hj] at this
+    omega
+  · intro h; exact hji (congrArg Edge.axis h)
+
+/-- 正側の正方形の三辺が、元の辺の始点から第二端点までを向きによらずつなぐこと。
+一本目と二本目は始点から進み、三本目は元の辺の第二端点から向かい合う隅へ向かうので、
+向きを問わない `Connects` で述べる。 -/
+theorem squareUp_connects_chain {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hj : e.start.1 j + 1 < L) :
+    ∃ (f₁ f₂ f₃ : Edge L) (p q : Site L),
+      f₁ ≠ e ∧ f₂ ≠ e ∧ f₃ ≠ e ∧
+      Connects f₁ (endpoint0 e) p ∧ Connects f₂ p q ∧ Connects f₃ q (endpoint1 e) := by
+  obtain ⟨h₁, h₂, h₃⟩ := squareUp_edges_ne e j hji hj
+  refine ⟨squareUpEdgeFromStart e j hj, squareUpEdgeShifted e j hji hj,
+    squareUpEdgeOpposite e j hji hj,
+    endpoint1 (squareUpEdgeFromStart e j hj), endpoint1 (squareUpEdgeShifted e j hji hj),
+    h₁, h₂, h₃, Or.inl ⟨rfl, rfl⟩, Or.inl ⟨?_, rfl⟩, Or.inr ⟨?_, ?_⟩⟩
+  · exact squareUpEdgeShifted_start e j hji hj
+  · exact squareUpEdgeOpposite_start e j hji hj
+  · exact (squareUp_closes e j hji hj).symm
+
 /-- 第 `j` 座標が正なら、一つ戻した点から `j` 方向へ進む辺は箱内にある。 -/
 lemma shiftDown_next_lt {L : ℕ} (a : Site L) (j : Fin 3) (hpos : 1 ≤ a.1 j) :
     (shiftDown a j).1 j + 1 < L := by
@@ -183,5 +217,55 @@ theorem squareDown_closes {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis
   funext m
   by_cases hmj : m = j <;> by_cases hmi : m = e.axis <;>
     simp_all [endpoint1, squareDownEdgeOpposite, shiftUp, shiftDown, Function.update_apply]
+
+/-- 負側の正方形の三辺も、いずれも元の辺とは異なる。一本目と三本目は方向が `j\ne i` で異なり、
+二本目は方向が同じでも始点の `j` 成分が 1 だけ小さい。 -/
+lemma squareDown_edges_ne {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hpos : 1 ≤ e.start.1 j) :
+    squareDownEdgeToStart e j hpos ≠ e ∧
+    squareDownEdgeFromLower e j hji hpos ≠ e ∧
+    squareDownEdgeOpposite e j hji hpos ≠ e := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro h; exact hji (congrArg Edge.axis h)
+  · intro h
+    have hs : (squareDownEdgeFromLower e j hji hpos).start = e.start := congrArg Edge.start h
+    have := congrFun (congrArg Subtype.val hs) j
+    rw [show (squareDownEdgeFromLower e j hji hpos).start = shiftDown e.start j from rfl] at this
+    rw [shiftDown_apply_self e.start j] at this
+    omega
+  · intro h; exact hji (congrArg Edge.axis h)
+
+/-- 負側の正方形の三辺が、元の辺の始点から第二端点までを向きによらずつなぐこと。
+一本目は元の辺の始点へ向かって戻る辺なので、ここでも向きを問わない `Connects` が要る。 -/
+theorem squareDown_connects_chain {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hpos : 1 ≤ e.start.1 j) :
+    ∃ (f₁ f₂ f₃ : Edge L) (p q : Site L),
+      f₁ ≠ e ∧ f₂ ≠ e ∧ f₃ ≠ e ∧
+      Connects f₁ (endpoint0 e) p ∧ Connects f₂ p q ∧ Connects f₃ q (endpoint1 e) := by
+  obtain ⟨h₁, h₂, h₃⟩ := squareDown_edges_ne e j hji hpos
+  refine ⟨squareDownEdgeToStart e j hpos, squareDownEdgeFromLower e j hji hpos,
+    squareDownEdgeOpposite e j hji hpos,
+    shiftDown e.start j, endpoint1 (squareDownEdgeFromLower e j hji hpos),
+    h₁, h₂, h₃, Or.inr ⟨rfl, ?_⟩, Or.inl ⟨rfl, rfl⟩, Or.inl ⟨?_, ?_⟩⟩
+  · exact squareDownEdgeToStart_endpoint e j hpos
+  · exact squareDownEdgeOpposite_start e j hji hpos
+  · exact squareDown_closes e j hji hpos
+
+/-- 箱の一辺が二以上なら、どの辺についても、その両端を結ぶ別の三辺が取れる。
+補助方向 `j` は元の方向と異なるものを選び、`j` 方向へ進めるなら正側の正方形を、
+進めないなら（一辺が二以上なので）戻れるので負側の正方形を使う。 -/
+theorem alternate_three_edges_exists {L : ℕ} (hL : 2 ≤ L) (e : Edge L) :
+    ∃ (f₁ f₂ f₃ : Edge L) (p q : Site L),
+      f₁ ≠ e ∧ f₂ ≠ e ∧ f₃ ≠ e ∧
+      Connects f₁ (endpoint0 e) p ∧ Connects f₂ p q ∧ Connects f₃ q (endpoint1 e) := by
+  have hji : otherAxis e.axis ≠ e.axis := otherAxis_ne e.axis
+  rcases shiftUp_available_or_shiftDown_available hL e.start (otherAxis e.axis) with hup | hdown
+  · exact squareUp_connects_chain e (otherAxis e.axis) hji hup
+  · exact squareDown_connects_chain e (otherAxis e.axis) hji hdown
+
+/-- 一辺が二以上の箱では、破れ数がちょうど 1 の配位は存在しない。
+すなわち多重度 `Ω_L(1)` は零である。 -/
+theorem brokenCount_ne_one {L : ℕ} (hL : 2 ≤ L) (σ : Config L) : brokenCount σ ≠ 1 :=
+  brokenCount_ne_one_of_alternate_three_edges σ (alternate_three_edges_exists hL)
 
 end Ising3DCut.NullModel
