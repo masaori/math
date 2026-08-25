@@ -3448,3 +3448,21 @@ $\mathcal M(V,N)$、局所規則の族から大域写像への対応の単射性
 検証: 構造化テキスト check、PDF 76 ページ（相互参照 844 件すべて解決）、検算対応検査 37 件、
 Lean 全体ビルド（8,730 ジョブ）と sorry 検査。SageMath と Lean は本 tick で変更していない。
 $\mathbb R/\mathbb C$ 脱出はない。対象は `構造化記述まで`。次 tick は本章の SageMath 検算を作る。
+
+## 2026-08-25 12:12 tick（局所性による巡回型の制限: Lean 具体版の前半）
+
+前 tick の SageMath 検算 4 本を再実行して全て PASS を確認し、構造化記述との対応に修正を要する
+不一致がないことを確認した。
+
+Lean 具体版 `lean/CellularAutomata/LocalityRestrictsCycleType.lean` を人手証明と同じ対象・仮定・
+順序で書いた。局所規則の族から大域写像への対応の単射性（基準値延長で証人配位を作る人手証明の
+論法をそのまま形式化）、その帰結の個数公式 $|\mathcal M(V,N)|=\prod_v 2^{2^{|N(v)|}}$、
+$\mathcal M(V,N)$・$\mathcal M^\times(V,N)$・$\mathrm{CT}(V,N)$ の定義、3 セル自己近傍舞台での
+$(F\,x)(v)=g_v(x(v))$、大域単射性と各値写像の単射性の同値、単射な $A$ 上の自己写像が恒等写像か
+否定写像に限ること、$F^2=\mathrm{id}$ まで。
+
+実現巡回型が二つだけであることと真部分集合性は未形式化（file 冒頭に明記）。必要十分版も未着手。
+対象は `SageMath まで` のまま。次 tick は具体版の残りを追加する。
+
+検証: SageMath 4 本再実行、structured-latex check、PDF、検算対応検査 38 件、lake build 全体
+（8,731 ジョブ）、sorry 検査（新 6 定理を登録）。$\mathbb R/\mathbb C$ 脱出はない。

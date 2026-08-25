@@ -29,6 +29,7 @@ import CellularAutomata.IterateMonoidStableImage
 import CellularAutomata.IterateMonoidStablePartition
 import CellularAutomata.IterateMonoidTailCycleDecomposition
 import CellularAutomata.LocalRuleRepresentation
+import CellularAutomata.LocalityRestrictsCycleType
 import CellularAutomata.MinimalPreperiodPeriod
 import CellularAutomata.NecSuf.CausalSetPrimaryLiterature
 import CellularAutomata.NecSuf.CausalStructureComparison

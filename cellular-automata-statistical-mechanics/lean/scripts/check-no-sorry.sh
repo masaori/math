@@ -57,6 +57,12 @@ targets=(
   CellularAutomata.ReversibleGlobalMapCycleType.filter_cycleType
   CellularAutomata.ReversibleGlobalMapCycleType.cycleType_members_positive
   CellularAutomata.ReversibleGlobalMapCycleType.cycleType_sum
+  CellularAutomata.LocalityRestrictsCycleType.localRuleFamily_injective
+  CellularAutomata.LocalityRestrictsCycleType.card_stageGlobalMaps
+  CellularAutomata.LocalityRestrictsCycleType.globalMap_self_apply
+  CellularAutomata.LocalityRestrictsCycleType.selfGlobal_injective_iff
+  CellularAutomata.LocalityRestrictsCycleType.selfRule_eq_id_or_neg
+  CellularAutomata.LocalityRestrictsCycleType.selfGlobal_involution
   CellularAutomata.ReversibleGlobalMapCycleType.perm_conj_eq
   CellularAutomata.ReversibleGlobalMapCycleType.cycleType_eq_of_conj
   CellularAutomata.ReversibleGlobalMapCycleType.conj_of_cycleType_eq
