@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-25 19:34（本流）: 「分子が割る差の形から正の有理点一以外を排除できるか判定する」を二つへ割り、先頭 `claim_rational_power_point_numerator_divides_twice_gap_power_minus_one` を記述した（$a\mid2(c^{3L^2+3L+1}-1)$）。破れ数ゼロの配位数 2 と既約分母 1 を法 $a$ の合同式へ入れ、隣接二箱の合同を一続きの変形で結んで底の共通部分を落とした。次はこの記述の SageMath 検証。レビューでは既約分母が 2 を割る証明の整除記号の連鎖を等式の連鎖へ正した。
 - 2026-08-25 19:07（並行）: `sum_card_uncovered_eq_sum_card_selected_of_perfectMatching` を追加し、頂点ごとの「覆われずに残る端子数と選ばれた接続辺数の一致」を有限和で束ねた。次は選ばれた各元辺が両端点で二回数えられることを示し、選ばれた元辺総数の二倍へ接続する。
 - 2026-08-25 19:05（本流）: 「分子は隣接する二つの箱の底の点数乗の差を割る」の必要十分版 `NecSuf.equality_and_dvd_difference_of_common_residue` と具体導出 `rational_power_point_numerator_divides_base_power_difference_viaNecSuf` を追加し、四層を閉じた。有限箱・有理数・点数乗を落とすと、対象の等号と二つの整数が同じ剰余へ合同であることだけが残る。次は「分子が割る差の形から正の有理点一以外を排除できるか判定する」の記述。直前の具体版のレビュー修正なし。
 - 2026-08-25 18:03（本流）: `sagemath/check/rational-power-point-numerator-divides-base-power-difference/` を追加し、底の既約分母が一になる段、隣接二箱の底の点数乗がともに二へ合同なら差が零へ合同になる段、零合同と整除の同値を `ZZ`・`QQ` の三ファイルで一行ずつ検査して全 PASS。次は同主張の Lean 具体版。直前の記述のレビュー修正なし。

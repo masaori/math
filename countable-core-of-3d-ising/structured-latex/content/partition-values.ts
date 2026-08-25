@@ -9790,4 +9790,123 @@ c^{\#V_L}
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_rational_power_point_numerator_divides_twice_gap_power_minus_one",
+    kind: "claim",
+    title: {
+      text: "点数乗表示が成り立つ正の有理点の分子は隣接する二つの箱の頂点数の差だけの点数乗から 1 を引いた数の 2 倍を割る",
+    },
+    labels: ["claim_rational_power_point_numerator_divides_twice_gap_power_minus_one"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "互いに素な正の自然数 ",
+        math(String.raw`a,b`),
+        " により正の有理数を ",
+        math(String.raw`q=a/b`),
+        " と表す。正の自然数 ",
+        math(String.raw`L_0`),
+        " と正の有理数 ",
+        math(String.raw`c\in\mathbb Q_{>0}`),
+        " が存在して、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`Z_L(q)=c^{\#V_L}`),
+        " が成り立つとする。このとき ",
+        math(String.raw`c`),
+        " は正の自然数であり、かつ ",
+        math(String.raw`L\ge\max(L_0,2)`),
+        " のすべてについて整除",
+      ]),
+      displayMath(
+        String.raw`a\ \bigm|\ 2\bigl(c^{\,3L^2+3L+1}-1\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ。ここで指数 ",
+        math(String.raw`3L^2+3L+1`),
+        " は隣接する二つの箱の頂点数の差 ",
+        math(String.raw`\#V_{L+1}-\#V_L`),
+        " であり、箱の大きさに依存する正の自然数である。主張は ",
+        math(String.raw`\mathbb Z`),
+        " の整除性だけからなり、箱の大きさの極限も正の実数乗根も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として二つの量を固定する。",
+        ref("claim_rational_power_point_denominator_divides_two"),
+        " より ",
+        math(String.raw`c`),
+        " は正の自然数なので、",
+        math(String.raw`c`),
+        " の既約分数表示を ",
+        math(String.raw`c=u/v`),
+        "（",
+        math(String.raw`u,v`),
+        " は互いに素な正の自然数）とすると ",
+        math(String.raw`u=c`),
+        " かつ ",
+        math(String.raw`v=1`),
+        " である。また ",
+        math(String.raw`\#V_L=L^3`),
+        " なので ",
+        math(String.raw`g_L:=\#V_{L+1}-\#V_L=(L+1)^3-L^3=3L^2+3L+1`),
+        " と置くと ",
+        math(String.raw`g_L`),
+        " は正の自然数であり ",
+        math(String.raw`\#V_{L+1}=\#V_L+g_L`),
+        " を満たす。",
+      ]),
+      paragraph([
+        math(String.raw`L\ge\max(L_0,2)`),
+        " を取る。以下の一連の変形に現れる合同はすべて法 ",
+        math(String.raw`a`),
+        " で取る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2\,c^{\,g_L}
+&=\Omega_L(0)\,c^{\,g_L}
+&&(\because\ \blkref{claim_zero_breakage_multiplicity_is_two})\\
+&=\Omega_L(0)\,v^{\#V_L}\,c^{\,g_L}
+&&(\because\ \text{準備の } v=1)\\
+&\equiv u^{\#V_L}\,c^{\,g_L}
+&&(\because\ \blkref{claim_rational_power_base_congruences})\\
+&=c^{\#V_L}\,c^{\,g_L}
+&&(\because\ \text{準備の } u=c)\\
+&=c^{\#V_L+g_L}
+&&(\because\ \text{同じ底の冪の積})\\
+&=c^{\#V_{L+1}}
+&&(\because\ \text{準備の } \#V_{L+1}=\#V_L+g_L)\\
+&=u^{\#V_{L+1}}
+&&(\because\ \text{準備の } u=c)\\
+&\equiv \Omega_{L+1}(0)\,v^{\#V_{L+1}}
+&&(\because\ \blkref{claim_rational_power_base_congruences} \text{ を } L+1 \text{ に適用})\\
+&=\Omega_{L+1}(0)
+&&(\because\ \text{準備の } v=1)\\
+&=2
+&&(\because\ \blkref{claim_zero_breakage_multiplicity_is_two})
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。ここで ",
+        math(String.raw`L+1\ge\max(L_0,2)`),
+        " なので ",
+        ref("claim_rational_power_base_congruences"),
+        " を ",
+        math(String.raw`L+1`),
+        " に適用できる。合同 ",
+        math(String.raw`2\,c^{\,g_L}\equiv2\pmod a`),
+        " と法 ",
+        math(String.raw`a`),
+        " の合同式の定義により ",
+        math(String.raw`a\mid 2\,c^{\,g_L}-2`),
+        " であり、",
+        math(String.raw`2\,c^{\,g_L}-2=2\bigl(c^{\,g_L}-1\bigr)`),
+        " と ",
+        math(String.raw`g_L=3L^2+3L+1`),
+        " を代入して主張の整除を得る。",
+      ]),
+    ],
+  },
 ]);

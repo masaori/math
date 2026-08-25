@@ -76,6 +76,7 @@ export const ALL_LABELS = [
   "claim_rational_power_base_denominator_primes",
   "claim_rational_power_point_denominator_divides_two",
   "claim_rational_power_point_numerator_divides_base_power_difference",
+  "claim_rational_power_point_numerator_divides_twice_gap_power_minus_one",
   "claim_rational_values_determine_partition_polynomial",
   "claim_roots_leading_coefficient_multiplicities_determine_polynomial",
   "claim_same_partition_different_pair_data",
