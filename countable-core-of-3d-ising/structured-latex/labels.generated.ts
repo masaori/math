@@ -72,6 +72,7 @@ export const ALL_LABELS = [
   "claim_rational_power_base_den_no_prime_missing_zero_mult",
   "claim_rational_power_base_den_two_exponent_at_least_two_impossible",
   "claim_rational_power_base_den_two_exponent_balance",
+  "claim_rational_power_base_den_two_exponent_one_impossible",
   "claim_rational_power_base_denominator_primes",
   "claim_rational_values_determine_partition_polynomial",
   "claim_roots_leading_coefficient_multiplicities_determine_polynomial",
