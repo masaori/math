@@ -1,6 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
-- 2026-08-25 22:04（本流）: `sagemath/check/adjacent-vertex-number-gaps-are-coprime/` を追加し、準備の因数分解、隣接差を $6(L+1)$ へ移す四段、最大公約数の結論を `ZZ` の六ファイルで一行ずつ検査して全 PASS。次は `claim_adjacent_vertex_number_gaps_are_coprime` の Lean 具体版。直前本流と並行のレビュー修正なし。
+- 2026-08-25 22:04（本流）: `sagemath/check/adjacent-vertex-number-gaps-are-coprime/` を追加し、準備の因数分解、隣接差を $6(L+1)$ へ移す四段、最大公約数の結論を `ZZ` の六ファイルで一行ずつ検査して全 PASS。次は `claim_adjacent_vertex_number_gaps_are_coprime` の Lean 具体版。直前本流と並行のレビュー修正なし。まとめ締切に入ったため並行ストリームは見送った。
 - 2026-08-25 21:35（並行）: `mem_selectedEndpointIncidences_iff` を追加し、選ばれた端点・辺の組の所属条件を頂点の所属と選択接続辺の所属へ分解した。前 tick の `card_selectedEndpointIncidences` が sorry 検査へ未登録だったので登録した。`lake build` 成功、未証明依存検査 482 件。次は元辺への射影の各繊維が両端点の二元であることを示す。
 - 2026-08-25 21:33（本流）: 「頂点数の差だけの点数乗の整除から正の有理点一以外を排除できるか判定する」を三つへ割り、先頭 `claim_adjacent_vertex_number_gaps_are_coprime`（$\gcd(g_L,g_{L+1})=1$、$g_L=3L^2+3L+1$）を記述した。$g_L=3L(L+1)+1$ と $g_{L+1}-g_L=6(L+1)$ を準備し、共通素因子が $L+1$・$2$・$3$ のいずれを割る場合も $g_L-3L(L+1)=1$ へ落ちる三場合分けで閉じた。`npm run check` 165 ブロック・376 参照すべて解決、linkage 79 件。次はこの記述の SageMath 検証。直前の Lean 必要十分版のレビュー修正なし。
 - 2026-08-25 21:04（本流）: 「分子は頂点数の差だけの点数乗から 1 を引いた数の 2 倍を割る」の必要十分版 `NecSuf.equality_and_dvd_twice_gap_power_minus_one` と具体導出 `rational_power_point_numerator_divides_twice_gap_power_minus_one_viaNecSuf` を追加し、四層を閉じた。有限箱・有理数・三次元の頂点数を落とすと、指数の加法分解、共通剰余、保存する対象の等号だけが残る。`lake build` 成功、未証明依存検査 480 件。次は「頂点数の差だけの点数乗の整除から正の有理点一以外を排除できるか判定する」の記述。直前の具体版のレビュー修正なし。
