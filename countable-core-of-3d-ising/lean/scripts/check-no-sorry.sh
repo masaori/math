@@ -511,6 +511,9 @@ targets=(
   Ising3DCut.NecSuf.false_of_positive_adjacent_balance
   Ising3DCut.LimitQuantity.rational_power_base_den_no_prime_missing_zero_multiplicity_viaNecSuf
   Ising3DCut.LimitQuantity.rational_power_base_denominator_coprime_to_numerator_viaNecSuf
+  Ising3DCut.NecSuf.twice_gap_power_congr_two_of_common_residue
+  Ising3DCut.NecSuf.equality_and_dvd_twice_gap_power_minus_one
+  Ising3DCut.LimitQuantity.rational_power_point_numerator_divides_twice_gap_power_minus_one_viaNecSuf
   Ising3DCut.Prediction.terminal_of_mem_internalEdgeAt
   Ising3DCut.Prediction.terminals_of_internalEdge_have_same_vertex
   Ising3DCut.Prediction.mem_matchingInternalEdgesAt_iff
