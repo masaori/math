@@ -132,4 +132,56 @@ theorem squareUp_closes {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
   rw [endpoint1_eq_shiftUp, endpoint1_eq_shiftUp]
   exact shiftUp_comm e.start j e.axis hji hj e.next_lt _ _
 
+/-- 第 `j` 座標が正なら、一つ戻した点から `j` 方向へ進む辺は箱内にある。 -/
+lemma shiftDown_next_lt {L : ℕ} (a : Site L) (j : Fin 3) (hpos : 1 ≤ a.1 j) :
+    (shiftDown a j).1 j + 1 < L := by
+  rw [shiftDown_apply_self]
+  rw [Nat.sub_add_cancel hpos]
+  exact a.2 j
+
+/-- 負側に置いた正方形の、元の辺の始点へ戻る一本目 `(a-ε_j,j)`。 -/
+def squareDownEdgeToStart {L : ℕ} (e : Edge L) (j : Fin 3) (hpos : 1 ≤ e.start.1 j) :
+    Edge L :=
+  ⟨shiftDown e.start j, j, shiftDown_next_lt e.start j hpos⟩
+
+/-- 負側に置いた正方形の二本目 `(a-ε_j,i)`。 -/
+def squareDownEdgeFromLower {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hpos : 1 ≤ e.start.1 j) : Edge L :=
+  ⟨shiftDown e.start j, e.axis, by
+    rw [shiftDown_apply_of_ne e.start j e.axis (Ne.symm hji)]
+    exact e.next_lt⟩
+
+/-- 負側に置いた正方形の三本目 `(a-ε_j+ε_i,j)`。 -/
+def squareDownEdgeOpposite {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hpos : 1 ≤ e.start.1 j) : Edge L :=
+  ⟨shiftUp (shiftDown e.start j) e.axis (by
+      rw [shiftDown_apply_of_ne e.start j e.axis (Ne.symm hji)]
+      exact e.next_lt),
+    j, by
+      rw [shiftUp_apply_of_ne _ e.axis j _ hji]
+      exact shiftDown_next_lt e.start j hpos⟩
+
+/-- 一本目の第二端点は元の辺の始点に戻る。 -/
+lemma squareDownEdgeToStart_endpoint {L : ℕ} (e : Edge L) (j : Fin 3)
+    (hpos : 1 ≤ e.start.1 j) :
+    endpoint1 (squareDownEdgeToStart e j hpos) = e.start := by
+  rw [endpoint1_eq_shiftUp]
+  exact shiftUp_shiftDown e.start j hpos _
+
+/-- 二本目の第二端点は三本目の始点に等しい。 -/
+lemma squareDownEdgeOpposite_start {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hpos : 1 ≤ e.start.1 j) :
+    (squareDownEdgeOpposite e j hji hpos).start =
+      endpoint1 (squareDownEdgeFromLower e j hji hpos) :=
+  (endpoint1_eq_shiftUp (squareDownEdgeFromLower e j hji hpos)).symm
+
+/-- 負側の正方形が閉じること。三本目の第二端点は元の辺の第二端点に等しい。 -/
+theorem squareDown_closes {L : ℕ} (e : Edge L) (j : Fin 3) (hji : j ≠ e.axis)
+    (hpos : 1 ≤ e.start.1 j) :
+    endpoint1 (squareDownEdgeOpposite e j hji hpos) = endpoint1 e := by
+  apply Subtype.ext
+  funext m
+  by_cases hmj : m = j <;> by_cases hmi : m = e.axis <;>
+    simp_all [endpoint1, squareDownEdgeOpposite, shiftUp, shiftDown, Function.update_apply]
+
 end Ising3DCut.NullModel
