@@ -26,6 +26,7 @@
 | `check_leading_multiplicity_nonzero.sage` | 自然数の最高次多重度の非零性 | PASS | 全例で正値性から非零性を確認 |
 | `check_rational_embedded_leading_coefficient_nonzero.sage` | 自然数から有理数への標準単射像の非零性 | PASS | 全例で有理数像の非零性を確認 |
 | `check_leading_coefficient_nonzero.sage` | 有理数から代数的数への標準単射像の非零性 | PASS | 全例で代数的数像の非零性を確認 |
+| `check_evaluated_factorization_nonzero.sage` | 非零評価値を一次因子分解の評価式へ移した積の非零性 | PASS | 全ての非零評価で最高次係数像と零点差積の積が非零 |
 | `check_cancel_leading_coefficient.sage` | 三回微分比の最高次係数消去 | PASS | 全ての非零評価で一致 |
 | `check_distribute_third_derivative_ratio.sage` | 三重和への分母分配 | PASS | 全ての非零評価で一致 |
 | `check_cancel_three_root_factors.sage` | 各三重和項の三因子消去 | PASS | 全ての非零評価で項別に一致 |
