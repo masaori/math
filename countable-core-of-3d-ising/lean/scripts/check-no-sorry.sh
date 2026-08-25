@@ -59,6 +59,7 @@ targets=(
   Ising3DCut.NecSuf.denominator_one_and_outer_denominator_divides_constant
   Ising3DCut.LimitQuantity.rational_power_point_denominator_divides_two_viaNecSuf
   Ising3DCut.Prediction.secondProjection_bijOn_uncovered_selected_of_perfectMatching
+  Ising3DCut.Prediction.card_uncovered_eq_card_selected_of_perfectMatching
   Ising3DCut.LimitQuantity.tendsto_rootSeq_isingValueSeq_one_viaNecSuf
   Ising3DCut.NecSuf.eventually_constant_sequence_tendsto
   Ising3DCut.LimitQuantity.not_sufficient_on_ising_realizable_family_iff_exists_witness

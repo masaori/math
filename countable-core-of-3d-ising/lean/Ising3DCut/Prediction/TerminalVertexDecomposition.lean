@@ -645,4 +645,28 @@ theorem secondProjection_bijOn_uncovered_selected_of_perfectMatching {V Edge : T
     exact selected_incident_edge_terminal_uncovered vertices edges incidentEdges endpoint₀ endpoint₁
       matching hMatching hIncident v e he heVertex
 
+/-- 全単射から、覆われずに残る端子の個数と選ばれた接続辺の個数が等しいことを得る。 -/
+theorem card_uncovered_eq_card_selected_of_perfectMatching {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (v : V) (hv : v ∈ vertices) :
+    (matchingUncoveredTerminalsAt incidentEdges v matching).card
+      = (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v).card := by
+  have hbij := secondProjection_bijOn_uncovered_selected_of_perfectMatching
+    vertices edges incidentEdges endpoint₀ endpoint₁ matching hMatching hIncident v hv
+  refine Finset.card_bij (fun t _ => t.2) ?_ ?_ ?_
+  · intro t ht
+    exact hbij.1 ht
+  · intro t ht u hu htu
+    exact hbij.2.1 ht hu htu
+  · intro e he
+    obtain ⟨t, ht, hte⟩ := hbij.2.2 he
+    exact ⟨t, ht, hte⟩
+
 end Ising3DCut.Prediction
