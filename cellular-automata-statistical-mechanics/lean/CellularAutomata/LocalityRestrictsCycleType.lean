@@ -8,6 +8,8 @@
                                                         `card_stageGlobalMaps`
   def_stage_reversible_global_maps                      `stageReversibleGlobalMaps`
   def_stage_realized_cycle_types                        `realizedCycleTypes`
+  claim_stage_realized_cycle_types_decidable            `realizedCycleTypes_subset_partitions`,
+                                                        `realizedCycleTypes_finite`
   def_self_neighborhood_stage                           `SelfCell`, `selfNbhd`
   claim_self_neighborhood_injective_iff_pointwise_bijective
                                                         `globalMap_self_apply`,
@@ -19,11 +21,15 @@
   claim_locality_restricts_cycle_type                   `eight_cycle_not_realized`,
                                                         `realizedCycleTypes_selfNbhd_proper`
 
+必要十分版は NecSuf/LocalityRestrictsCycleType.lean、そこからの導出はこの file 末尾の
+`Derivation` 名前空間にある。
+
 住処: 有限型・自然数のみ。ℝ / ℂ は現れない（人手証明と同じ）。
 抽象度は人手証明に固定する。
 -/
 import CellularAutomata.TimeExpansionDependency
 import CellularAutomata.ReversibleGlobalMapCycleType
+import CellularAutomata.NecSuf.LocalityRestrictsCycleType
 
 namespace CellularAutomata.LocalityRestrictsCycleType
 
@@ -80,6 +86,31 @@ noncomputable def stageReversibleGlobalMaps (N : V → Finset V) :
 noncomputable def realizedCycleTypes (N : V → Finset V) : Set (Multiset ℕ) :=
   {m | ∃ F : ReversibleGlobalMapCycleType.ReversibleMap V,
         F.1 ∈ stageGlobalMaps N ∧ ReversibleGlobalMapCycleType.cycleType F = m}
+
+/-- `claim_stage_realized_cycle_types_decidable` の前段。
+    実現される巡回型は配位数 2^{|V|} の正の自然数への分割である。
+    可逆な大域写像は可逆な自己写像であり、巡回型の正値性と総和がそのまま使える。 -/
+theorem realizedCycleTypes_subset_partitions (N : V → Finset V) :
+    realizedCycleTypes N ⊆
+      {m : Multiset ℕ | (∀ n ∈ m, 1 ≤ n) ∧ m.sum = 2 ^ Fintype.card V} := by
+  rintro m ⟨F, -, rfl⟩
+  exact ⟨fun n hn => ReversibleGlobalMapCycleType.cycleType_members_positive F hn,
+    ReversibleGlobalMapCycleType.cycleType_sum F⟩
+
+/-- `claim_stage_realized_cycle_types_decidable` の後段。
+    実現される巡回型の集合は有限である。可逆な大域写像全体が有限型なので、
+    その巡回型の像も有限であり、有限多重集合の等号判定で重複を除いて集められる。 -/
+theorem realizedCycleTypes_finite (N : V → Finset V) : (realizedCycleTypes N).Finite := by
+  classical
+  haveI : Finite (ReversibleGlobalMapCycleType.ReversibleMap V) := by
+    unfold ReversibleGlobalMapCycleType.ReversibleMap
+    infer_instance
+  have hsub : realizedCycleTypes N ⊆
+      Set.range (fun F : ReversibleGlobalMapCycleType.ReversibleMap V =>
+        ReversibleGlobalMapCycleType.cycleType F) := by
+    rintro m ⟨F, -, rfl⟩
+    exact ⟨F, rfl⟩
+  exact Set.Finite.subset (Set.finite_range _) hsub
 
 /-- `def_self_neighborhood_stage` の舞台のセル集合 V• = {v₁, v₂, v₃}。 -/
 abbrev SelfCell := Fin 3
@@ -340,5 +371,91 @@ theorem realizedCycleTypes_selfNbhd_proper :
       norm_num
     rw [← heq] at hmem
     exact eight_cycle_not_realized hmem
+
+/-
+必要十分版 NecSuf/LocalityRestrictsCycleType.lean からの導出。
+上の具体版の各主張が、必要十分版の主張を次の特殊化で得たものであることを示す。
+
+  添字型 V ↦ SelfCell、状態型 A ↦ State（card State = 2）、
+  成分ごとの写像の族 g ↦ valueMap f、台 X ↦ Config SelfCell（元数 8）。
+
+具体版が使っていた基準値延長写像 ι は必要十分版では要らない（必要十分版の冒頭を参照）。
+-/
+
+namespace Derivation
+
+open CellularAutomata.NecSuf.LocalityRestrictsCycleType
+
+/-- 自己近傍舞台の大域写像は、値写像の族が定める成分ごとの写像である。 -/
+theorem globalMap_self_eq_productMap (f : LocalRuleFamily selfNbhd) :
+    globalMap selfNbhd f = productMap (valueMap f) := by
+  funext y v
+  rw [globalMap_self_apply, productMap_apply]
+
+/-- 具体版の単射性の同値は、必要十分版の成分分解の同値の特殊化である。 -/
+theorem selfGlobal_injective_iff_of_necSuf (f : LocalRuleFamily selfNbhd) :
+    Function.Injective (globalMap selfNbhd f) ↔
+      ∀ v : SelfCell, Function.Injective (valueMap f v) := by
+  rw [globalMap_self_eq_productMap]
+  exact productMap_injective_iff (valueMap f)
+
+/-- 具体版の対合性は、必要十分版の「元数 2 の型上の単射写像は対合」と
+    「成分ごとに対合なら全体も対合」の合成の特殊化である。 -/
+theorem selfGlobal_involution_of_necSuf (f : LocalRuleFamily selfNbhd)
+    (hF : Function.Injective (globalMap selfNbhd f)) (y : SelfCell → State) :
+    globalMap selfNbhd f (globalMap selfNbhd f y) = y := by
+  have hg : ∀ v : SelfCell, Function.Injective (valueMap f v) :=
+    (selfGlobal_injective_iff_of_necSuf f).1 hF
+  have hinv : ∀ (v : SelfCell) (a : State), valueMap f v (valueMap f v a) = a :=
+    fun v a =>
+      involution_of_injective_of_card_two
+        CellularAutomata.EssentialDependency.card_state (hg v) a
+  rw [globalMap_self_eq_productMap]
+  exact productMap_involution (valueMap f) hinv y
+
+/-- 自己近傍舞台の配位型の元数は 8 である。 -/
+theorem card_selfConfig :
+    Fintype.card (ReversibleGlobalMapCycleType.Config SelfCell) = 8 := by
+  norm_num [ReversibleGlobalMapCycleType.Config, SelfCell, Fintype.card_fun,
+    CellularAutomata.EssentialDependency.card_state]
+
+/-- 具体版の「八つの配位を一周する巡回型は実現しない」は、必要十分版の
+    「元数 3 以上の台では対合が台全体の一周を実現しない」の特殊化である。 -/
+theorem eight_cycle_not_realized_of_necSuf :
+    ({8} : Multiset ℕ) ∉ realizedCycleTypes selfNbhd := by
+  classical
+  rintro ⟨F, hstage, hct⟩
+  rw [stageGlobalMaps, Finset.mem_image] at hstage
+  obtain ⟨f, -, hf⟩ := hstage
+  have hfInj : Function.Injective (globalMap selfNbhd f) := by
+    rw [hf]; exact F.2
+  have hinv : ∀ x : ReversibleGlobalMapCycleType.Config SelfCell, F.1 (F.1 x) = x := by
+    intro x
+    rw [← hf]
+    exact selfGlobal_involution_of_necSuf f hfInj x
+  have h3 : 3 ≤ Fintype.card (ReversibleGlobalMapCycleType.Config SelfCell) := by
+    rw [card_selfConfig]; norm_num
+  have hne := cycleType_ne_singleton_card
+    (ReversibleGlobalMapCycleType.Derivation.toInjSelfMap F) hinv h3
+  apply hne
+  rw [← ReversibleGlobalMapCycleType.Derivation.cycleType_eq, hct, card_selfConfig]
+
+/-- 具体版の真部分集合性は、必要十分版の真部分集合性と同じ反例（台全体の一周）から得られる。 -/
+theorem realizedCycleTypes_selfNbhd_proper_of_necSuf :
+    realizedCycleTypes selfNbhd ⊂
+      {m : Multiset ℕ | (∀ n ∈ m, 1 ≤ n) ∧ m.sum = 8} := by
+  apply Set.ssubset_iff_subset_ne.mpr
+  constructor
+  · rintro m ⟨F, -, rfl⟩
+    exact ⟨fun n hn => ReversibleGlobalMapCycleType.cycleType_members_positive F hn,
+      by norm_num [ReversibleGlobalMapCycleType.cycleType_sum]⟩
+  · intro heq
+    have hmem : ({8} : Multiset ℕ) ∈
+        {m : Multiset ℕ | (∀ n ∈ m, 1 ≤ n) ∧ m.sum = 8} := by
+      norm_num
+    rw [← heq] at hmem
+    exact eight_cycle_not_realized_of_necSuf hmem
+
+end Derivation
 
 end CellularAutomata.LocalityRestrictsCycleType
