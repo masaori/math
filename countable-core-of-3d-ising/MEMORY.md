@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 04:05（並行）: `card_selectedEndpointIncidences_eq_two_mul_card_selectedOriginalEdges` を追加し、元辺への第二成分写像で全体を繊維分解して、各繊維の個数二から選ばれた端点・辺の組の総数が選ばれた元辺数の二倍であることを閉じた。対象ビルド成功。次はこの個数等式を覆われずに残る端子の総数へ接続する。
+- 2026-08-26 04:02（本流）: `claim_power_minus_one_gcd_reaches_exponent_gcd` の SageMath 層を閉じた。`sagemath/check/power-minus-one-gcd-reaches-exponent-gcd/` で指数差による最大公約数の不変性、強い帰納法の三場合の減少、指数の最大公約数への到達等式を `ZZ` の三検査へ分け、全 PASS。linkage 83 件、`npm run check` は 168 ブロック・376 参照すべて解決。次は同主張の Lean 具体版。着手前レビュー修正なし。
 - 2026-08-26 03:33（本流）: `claim_power_minus_one_gcd_reaches_exponent_gcd` を記述した。指数の和についての強い帰納法で一段の還元を繰り返し、二つの指数が等しい場合・大きいほうから引く場合・小さいほうから引く場合の三つに分けて $\gcd(c^m-1,c^n-1)=\gcd(c^{\gcd(m,n)}-1,c^{\gcd(m,n)}-1)$ へ落とした。準備で差による指数の最大公約数の不変性を両方向の整除から示した。`npm run check` はブロック 168 件・参照 376 件すべて解決、linkage 82 件、PDF 58 ページ。次は同主張の SageMath 検証。着手前レビュー修正なし。
 - 2026-08-26 03:04（本流）: 「指数の差への一段の還元」の Lean 必要十分版 `NecSuf.PowerMinusOneGcdExponentDifferenceStep` と具体導出を追加し、四層を閉じた。冪と指数を落とすと整数の分解、最大公約数の相互整除、自然数の反対称性だけが残る。次は還元を強い帰納法で繰り返して指数の最大公約数へ到達する主張の記述。
 - 2026-08-26 02:35（本流）: `lean/Ising3DCut/LimitQuantity/PowerMinusOneGcdExponentDifferenceStep.lean` を追加し、`claim_power_minus_one_gcd_exponent_difference_step`（$\gcd(c^m-1,c^n-1)=\gcd(c^{m-n}-1,c^n-1)$）の Lean 具体版を六定理で閉じた。冪は $\mathbb Z$、最大公約数は `Int.gcd` の自然数値で扱い、相互整除から `Nat.dvd_antisymm` で等号へ着地した。`lake build` 成功、未証明依存検査 514 件。次は必要十分版。

@@ -858,4 +858,49 @@ theorem card_fiber_eq_two_of_selectedEndpointIncidences {V Edge : Type*}
     exact hne (congrArg Sigma.fst hcontra)
   rw [Finset.card_insert_of_notMem hnotmem, Finset.card_singleton]
 
+/-- 選ばれた各元辺の両端点が箱に属し、両端点で接続辺として登録され、両端点が相異なるなら、
+選ばれた端点・辺の組の総数は選ばれた元辺数の二倍である。 -/
+theorem card_selectedEndpointIncidences_eq_two_mul_card_selectedOriginalEdges
+    {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (hEndpoints : ∀ e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching,
+      endpoint₀ e ∈ vertices ∧ endpoint₁ e ∈ vertices)
+    (hRegistered : ∀ e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching,
+      e ∈ incidentEdges (endpoint₀ e) ∧ e ∈ incidentEdges (endpoint₁ e))
+    (hDistinct : ∀ e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching,
+      endpoint₀ e ≠ endpoint₁ e) :
+    (selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁ matching).card
+      = 2 * (selectedOriginalEdges edges endpoint₀ endpoint₁ matching).card := by
+  let incidences :=
+    selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁ matching
+  let selected := selectedOriginalEdges edges endpoint₀ endpoint₁ matching
+  have hMapsTo : Set.MapsTo (fun t : Σ _ : V, Edge => t.2)
+      (incidences : Set (Σ _ : V, Edge)) (selected : Set Edge) := by
+    intro t ht
+    have hmem := (mem_selectedEndpointIncidences_iff vertices edges incidentEdges
+      endpoint₀ endpoint₁ matching t).mp (by simpa [incidences] using ht)
+    have hselected := (mem_selectedIncidentEdgesAt_iff edges incidentEdges endpoint₀ endpoint₁
+      matching t.1 t.2).mp hmem.2
+    exact Finset.mem_filter.mpr ⟨hselected.2.1, hselected.2.2⟩
+  have hpartition := Finset.card_eq_sum_card_fiberwise
+    (f := fun t : Σ _ : V, Edge => t.2) (s := incidences) (t := selected) hMapsTo
+  calc
+    incidences.card
+        = ∑ e ∈ selected, (incidences.filter (fun t => t.2 = e)).card := hpartition
+    _ = ∑ _e ∈ selected, 2 := by
+      apply Finset.sum_congr rfl
+      intro e he
+      have he' : e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching := by
+        simpa [selected] using he
+      exact card_fiber_eq_two_of_selectedEndpointIncidences vertices edges incidentEdges
+        endpoint₀ endpoint₁ matching hIncident e (Finset.mem_filter.mp he').1
+        (hEndpoints e he').1 (hEndpoints e he').2
+        (hRegistered e he').1 (hRegistered e he').2
+        (Finset.mem_filter.mp he').2 (hDistinct e he')
+    _ = 2 * selected.card := by simp [Nat.mul_comm]
+
+
 end Ising3DCut.Prediction
