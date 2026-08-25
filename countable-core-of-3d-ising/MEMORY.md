@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-25 20:33（本流）: 「分子は頂点数の差だけの点数乗から 1 を引いた数の 2 倍を割る」の Lean 具体版 `rational_power_point_numerator_divides_twice_gap_power_minus_one` を追加し、三層目を閉じた。準備段（隣接二箱の頂点数の差が $3L^2+3L+1$ で大きい側が小さい側と差の和）、第二段（二つの合同式と指数法則から $2c^{g}\equiv2$）、第三段（合同式の定義から $a\mid2(c^{g}-1)$）を人手証明の三段と 1 対 1 に並べた。`lake build` 成功、未証明依存検査 477 件、`npm run check` 164 ブロック・376 参照すべて解決、linkage 79 件、PDF 56 ページ。次は同主張の Lean 必要十分版。直前の記述と SageMath のレビュー修正なし。まとめ締切のため並行ストリームは見送った。
 - 2026-08-25 19:34（本流）: 「分子が割る差の形から正の有理点一以外を排除できるか判定する」を二つへ割り、先頭 `claim_rational_power_point_numerator_divides_twice_gap_power_minus_one` を記述した（$a\mid2(c^{3L^2+3L+1}-1)$）。破れ数ゼロの配位数 2 と既約分母 1 を法 $a$ の合同式へ入れ、隣接二箱の合同を一続きの変形で結んで底の共通部分を落とした。次はこの記述の SageMath 検証。レビューでは既約分母が 2 を割る証明の整除記号の連鎖を等式の連鎖へ正した。
 - 2026-08-25 19:07（並行）: `sum_card_uncovered_eq_sum_card_selected_of_perfectMatching` を追加し、頂点ごとの「覆われずに残る端子数と選ばれた接続辺数の一致」を有限和で束ねた。次は選ばれた各元辺が両端点で二回数えられることを示し、選ばれた元辺総数の二倍へ接続する。
 - 2026-08-25 19:05（本流）: 「分子は隣接する二つの箱の底の点数乗の差を割る」の必要十分版 `NecSuf.equality_and_dvd_difference_of_common_residue` と具体導出 `rational_power_point_numerator_divides_base_power_difference_viaNecSuf` を追加し、四層を閉じた。有限箱・有理数・点数乗を落とすと、対象の等号と二つの整数が同じ剰余へ合同であることだけが残る。次は「分子が割る差の形から正の有理点一以外を排除できるか判定する」の記述。直前の具体版のレビュー修正なし。
