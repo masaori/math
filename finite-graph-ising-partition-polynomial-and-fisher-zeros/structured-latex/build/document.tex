@@ -4920,6 +4920,12 @@ U_{G,2,1}(a)
 \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
 \frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
 \in\overline{\mathbb Q},\\
+V_{G,1,2}(a)
+&:=
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{1}{(a-\alpha_k)(a-\alpha_\ell)^2}
+\in\overline{\mathbb Q},\\
 T_{G,3}(a)
 &:=
 \sum_{k=1}^{d}
@@ -5265,15 +5271,44 @@ S_{G,3}(a)
 S_{G,3}(a)+U_{G,2,1}(a)
 &&\bigl(\because\ U_{G,2,1}(a)\text{ の定義}\bigr).
 \end{aligned}\]
+\[\begin{aligned}
+\mathcal R_G(a)^3
+&=
+\left(
+  \sum_{k=1}^{d}\frac{1}{a-\alpha_k}
+\right)^3
+&&\bigl(\because\ \text{Fisher 零点差の逆数和の定義}\bigr)\\
+&=
+\sum_{k=1}^{d}
+\sum_{\ell=1}^{d}
+\sum_{h=1}^{d}
+\frac{1}{(a-\alpha_k)(a-\alpha_\ell)(a-\alpha_h)}
+&&\bigl(\because\ \text{有限和に対する分配律}\bigr)\\
+&=
+S_{G,3}(a)
++U_{G,2,1}(a)
++U_{G,2,1}(a)
++V_{G,1,2}(a)
++T_{G,3}(a)
+&&\bigl(\because\ \text{有限三重和を添字の一致型ごとに分ける}\bigr).
+\end{aligned}\]
+\[V_{G,1,2}(a)
+=U_{G,2,1}(a)
+\quad\bigl(\because\ \text{非対角項の添字 }k,\ell\text{ を交換する}\bigr).\]
 \[\mathcal R_G(a)^3
 =
 S_{G,3}(a)
-+q_3
-\sum_{k=1}^{d}
-\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
-\frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
++U_{G,2,1}(a)
++U_{G,2,1}(a)
++U_{G,2,1}(a)
 +T_{G,3}(a)
-\quad\bigl(\because\ \text{有限三重和を添字の一致型ごとに分ける}\bigr).\]
+\quad\bigl(\because\ V_{G,1,2}(a)=U_{G,2,1}(a)\text{ を代入する}\bigr).\]
+\[\mathcal R_G(a)^3
+=
+S_{G,3}(a)
++q_3U_{G,2,1}(a)
++T_{G,3}(a)
+\quad\bigl(\because\ q_3\text{ の定義と有限加法}\bigr).\]
 \[T_{G,3}(a)
 =
 \mathcal R_G(a)^3-S_{G,3}(a)-q_3U_{G,2,1}(a)

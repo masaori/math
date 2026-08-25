@@ -36,6 +36,10 @@
 | `check_reciprocal_product_decomposition.sage` | 順序付き有限二重和の対角・非対角分解 | PASS | 対角・非対角分解が一致 |
 | `check_swap_non_diagonal_pair_indices.sage` | 非対角二重和の添字交換 | PASS | 二つの順序付き非対角和が一致 |
 | `check_non_diagonal_pair_sum_local_definition.sage` | 非対角二重和の局所定義 | PASS | 逆数和と逆二乗和の積が `S_{G,3}+U_{G,2,1}` に一致 |
+| `check_expand_reciprocal_cube.sage` | 逆数和の三乗の有限三重和への展開 | PASS | 三乗と順序付き有限三重和が一致 |
+| `check_partition_reciprocal_cube_indices.sage` | 有限三重和の添字一致型による分割 | PASS | 対角・三つの二重一致・相異なる三重添字の五項が一致 |
+| `check_swap_reciprocal_cube_pair_indices.sage` | 二重一致項の非対角添字交換 | PASS | `V_{G,1,2}=U_{G,2,1}` を厳密確認 |
+| `check_collect_reciprocal_cube_pair_terms.sage` | 三つの二重一致項の係数集約 | PASS | 三つの同一和が `q_3U_{G,2,1}` に一致 |
 | `check_reciprocal_cube_decomposition.sage` | 逆数和の三乗の一致型分解 | PASS | 三つの添字一致型が一致 |
 | `check_isolate_triple_sum.sage` | 相異なる順序付き三重和の分離 | PASS | 一致型分解から `T_{G,3}` を移項した等式が一致 |
 | `check_isolate_non_diagonal_pair_sum.sage` | 非対角二重和の分離 | PASS | 逆数積から `U_{G,2,1}` を移項した等式が一致 |
