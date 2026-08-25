@@ -87,6 +87,7 @@
 | `check_rational_embedding_two_nonzero.sage` | 自然数 `2` の有理数への標準単射像の非零性 | PASS | `eta_{N,Q}(2) != 0` を厳密確認 |
 | `check_algebraic_embedding_two_nonzero.sage` | 有理数 `eta_{N,Q}(2)` の代数的数への標準単射像の非零性 | PASS | `iota_{Q,Qbar}(eta_{N,Q}(2)) != 0` を厳密確認 |
 | `check_q2_nonzero.sage` | 標準単射像 `q_2` の非零性 | PASS | `q_2\ne0` を厳密確認 |
+| `check_cancel_q2_from_reciprocal_cube_sum.sage` | 非零な `q_2` の消去 | PASS | `q_2S_{G,3}=N/P^3` から `S_{G,3}=q_2^{-1}(N/P^3)` へ移る等式を直接確認 |
 | `check_merge_q2_denominator.sage` | `q_2` の消去後に商の結合律で三次分母へ結合 | PASS | 除算後の二重の商と結合後の分数が一致 |
 | `check_final_coefficient_ratio.sage` | 最終逆三乗和係数比 | PASS | 全ての非零評価で一致 |
 | `check_low_degree_empty_sums.sage` | 次数三未満の空和 | PASS | 第三係数和と三重和が零 |
