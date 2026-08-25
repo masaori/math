@@ -9683,4 +9683,105 @@ b
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_rational_power_point_numerator_divides_base_power_difference",
+    kind: "claim",
+    title: {
+      text: "点数乗表示が成り立つ正の有理点の分子は隣接する二つの箱の底の点数乗の差を割る",
+    },
+    labels: ["claim_rational_power_point_numerator_divides_base_power_difference"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "互いに素な正の自然数 ",
+        math(String.raw`a,b`),
+        " により正の有理数を ",
+        math(String.raw`q=a/b`),
+        " と表す。正の自然数 ",
+        math(String.raw`L_0`),
+        " と正の有理数 ",
+        math(String.raw`c\in\mathbb Q_{>0}`),
+        " が存在して、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`Z_L(q)=c^{\#V_L}`),
+        " が成り立つとする。このとき ",
+        math(String.raw`c`),
+        " は正の自然数であり、かつ ",
+        math(String.raw`L\ge\max(L_0,2)`),
+        " のすべてについて整除",
+      ]),
+      displayMath(
+        String.raw`a\ \bigm|\ c^{\#V_{L+1}}-c^{\#V_L}`,
+      ),
+      paragraph([
+        "が成り立つ。主張は ",
+        math(String.raw`\mathbb Z`),
+        " の整除性だけからなり、箱の大きさの極限も正の実数乗根も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "第一段（",
+        math(String.raw`c`),
+        " の既約分数表示の分母は ",
+        math(String.raw`1`),
+        " である）。",
+        ref("claim_rational_power_point_denominator_divides_two"),
+        " より ",
+        math(String.raw`c`),
+        " は正の自然数である。したがって ",
+        math(String.raw`c`),
+        " の既約分数表示を ",
+        math(String.raw`c=u/v`),
+        "（",
+        math(String.raw`u,v`),
+        " は互いに素な正の自然数）とすると ",
+        math(String.raw`u=c`),
+        " かつ ",
+        math(String.raw`v=1`),
+        " である。",
+      ]),
+      paragraph([
+        "第二段（各箱での法 ",
+        math(String.raw`a`),
+        " の合同式）。",
+        math(String.raw`L\ge\max(L_0,2)`),
+        " を取る。以下の一連の変形に現れる合同はすべて法 ",
+        math(String.raw`a`),
+        " で取る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c^{\#V_L}
+&=u^{\#V_L}
+&&(\because\ \text{第一段の } u=c)\\
+&\equiv \Omega_L(0)\,v^{\#V_L}
+&&(\because\ \blkref{claim_rational_power_base_congruences})\\
+&=\Omega_L(0)\cdot1^{\#V_L}
+&&(\because\ \text{第一段の } v=1)\\
+&=2
+&&(\because\ \blkref{claim_zero_breakage_multiplicity_is_two} \text{ と } 1^{\#V_L}=1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。",
+        math(String.raw`L+1\ge\max(L_0,2)`),
+        " も成り立つので、同じ四行を ",
+        math(String.raw`L+1`),
+        " に適用して ",
+        math(String.raw`c^{\#V_{L+1}}\equiv2\pmod a`),
+        " も得る。",
+      ]),
+      paragraph([
+        "第三段（差を取る）。第二段の二つの合同式から ",
+        math(String.raw`c^{\#V_{L+1}}\equiv2\equiv c^{\#V_L}\pmod a`),
+        " であり、法 ",
+        math(String.raw`a`),
+        " の合同式の定義により ",
+        math(String.raw`a\mid c^{\#V_{L+1}}-c^{\#V_L}`),
+        " が従う。",
+      ]),
+    ],
+  },
 ]);
