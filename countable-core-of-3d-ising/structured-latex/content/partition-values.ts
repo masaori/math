@@ -10254,4 +10254,149 @@ c^{\,m}-1
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_power_minus_one_gcd_reaches_exponent_gcd",
+    kind: "claim",
+    title: {
+      text: "還元を繰り返すと指数はどちらも指数の最大公約数に到達する",
+    },
+    labels: ["claim_power_minus_one_gcd_reaches_exponent_gcd"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`c`),
+        " と正の自然数 ",
+        math(String.raw`m`),
+        "、",
+        math(String.raw`n`),
+        " について、",
+        math(String.raw`g:=\gcd(m,n)`),
+        " と置くと",
+      ]),
+      displayMath(
+        String.raw`\gcd\bigl(c^{\,m}-1,\ c^{\,n}-1\bigr)=\gcd\bigl(c^{\,g}-1,\ c^{\,g}-1\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`g`),
+        " は正の自然数であり、両辺に現れる冪差とその最大公約数はいずれも自然数である。主張は ",
+        math(String.raw`\mathbb Z`),
+        " の等式だけからなり、箱の大きさの極限も無限和も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、正の自然数 ",
+        math(String.raw`m>n`),
+        " について ",
+        math(String.raw`\gcd(m-n,\ n)=\gcd(m,n)`),
+        " を示す。",
+        math(String.raw`t:=\gcd(m,n)`),
+        " と置くと ",
+        math(String.raw`t\mid m`),
+        " かつ ",
+        math(String.raw`t\mid n`),
+        " なので ",
+        math(String.raw`t\mid m-n`),
+        " であり、",
+        math(String.raw`t`),
+        " は ",
+        math(String.raw`m-n`),
+        " と ",
+        math(String.raw`n`),
+        " の公約数だから ",
+        math(String.raw`t\mid\gcd(m-n,\ n)`),
+        " である。逆に ",
+        math(String.raw`u:=\gcd(m-n,\ n)`),
+        " と置くと ",
+        math(String.raw`u\mid m-n`),
+        " かつ ",
+        math(String.raw`u\mid n`),
+        " なので ",
+        math(String.raw`u\mid (m-n)+n=m`),
+        " であり、",
+        math(String.raw`u`),
+        " は ",
+        math(String.raw`m`),
+        " と ",
+        math(String.raw`n`),
+        " の公約数だから ",
+        math(String.raw`u\mid t`),
+        " である。互いに割り合う自然数は等しいので ",
+        math(String.raw`\gcd(m-n,\ n)=\gcd(m,n)`),
+        " を得る。",
+      ]),
+      paragraph([
+        "本体は和 ",
+        math(String.raw`m+n`),
+        " についての強い帰納法で示す。正の自然数 ",
+        math(String.raw`N`),
+        " について、",
+        math(String.raw`m+n=N`),
+        " を満たすすべての正の自然数の組 ",
+        math(String.raw`(m,n)`),
+        " で主張の等式が成り立つことを ",
+        math(String.raw`P(N)`),
+        " と書き、",
+        math(String.raw`N`),
+        " 未満のすべての値で ",
+        math(String.raw`P`),
+        " が成り立つとして ",
+        math(String.raw`P(N)`),
+        " を示す。",
+        math(String.raw`m`),
+        " と ",
+        math(String.raw`n`),
+        " の大小で三つに分ける。",
+      ]),
+      paragraph([
+        math(String.raw`m=n`),
+        " のとき。このとき ",
+        math(String.raw`g=\gcd(m,m)=m`),
+        " なので、主張の右辺は ",
+        math(String.raw`\gcd\bigl(c^{\,m}-1,\ c^{\,m}-1\bigr)`),
+        " であり、左辺と同じ式である。",
+      ]),
+      paragraph([
+        math(String.raw`m>n`),
+        " のとき。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gcd\bigl(c^{\,m}-1,\ c^{\,n}-1\bigr)
+&=\gcd\bigl(c^{\,m-n}-1,\ c^{\,n}-1\bigr)
+&&(\because\ \blkref{claim_power_minus_one_gcd_exponent_difference_step})\\
+&=\gcd\bigl(c^{\,\gcd(m-n,\,n)}-1,\ c^{\,\gcd(m-n,\,n)}-1\bigr)
+&&(\because\ (m-n)+n=m<m+n \text{ より帰納法の仮定})\\
+&=\gcd\bigl(c^{\,g}-1,\ c^{\,g}-1\bigr)
+&&(\because\ \gcd(m-n,\,n)=\gcd(m,n)=g)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`m<n`),
+        " のとき。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gcd\bigl(c^{\,m}-1,\ c^{\,n}-1\bigr)
+&=\gcd\bigl(c^{\,n}-1,\ c^{\,m}-1\bigr)
+&&(\because\ \text{最大公約数は二つの引数の順序に依らない})\\
+&=\gcd\bigl(c^{\,n-m}-1,\ c^{\,m}-1\bigr)
+&&(\because\ \blkref{claim_power_minus_one_gcd_exponent_difference_step})\\
+&=\gcd\bigl(c^{\,\gcd(n-m,\,m)}-1,\ c^{\,\gcd(n-m,\,m)}-1\bigr)
+&&(\because\ (n-m)+m=n<m+n \text{ より帰納法の仮定})\\
+&=\gcd\bigl(c^{\,g}-1,\ c^{\,g}-1\bigr)
+&&(\because\ \gcd(n-m,\,m)=\gcd(n,m)=g)
+\end{aligned}`,
+      ),
+      paragraph([
+        "三つの場合いずれでも主張の等式が成り立つので ",
+        math(String.raw`P(N)`),
+        " が成り立つ。強い帰納法により、すべての正の自然数の組 ",
+        math(String.raw`(m,n)`),
+        " について主張を得る。",
+      ]),
+    ],
+  },
 ]);

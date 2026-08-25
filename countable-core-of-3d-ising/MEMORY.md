@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 03:33（本流）: `claim_power_minus_one_gcd_reaches_exponent_gcd` を記述した。指数の和についての強い帰納法で一段の還元を繰り返し、二つの指数が等しい場合・大きいほうから引く場合・小さいほうから引く場合の三つに分けて $\gcd(c^m-1,c^n-1)=\gcd(c^{\gcd(m,n)}-1,c^{\gcd(m,n)}-1)$ へ落とした。準備で差による指数の最大公約数の不変性を両方向の整除から示した。`npm run check` はブロック 168 件・参照 376 件すべて解決、linkage 82 件、PDF 58 ページ。次は同主張の SageMath 検証。着手前レビュー修正なし。
 - 2026-08-26 03:04（本流）: 「指数の差への一段の還元」の Lean 必要十分版 `NecSuf.PowerMinusOneGcdExponentDifferenceStep` と具体導出を追加し、四層を閉じた。冪と指数を落とすと整数の分解、最大公約数の相互整除、自然数の反対称性だけが残る。次は還元を強い帰納法で繰り返して指数の最大公約数へ到達する主張の記述。
 - 2026-08-26 02:35（本流）: `lean/Ising3DCut/LimitQuantity/PowerMinusOneGcdExponentDifferenceStep.lean` を追加し、`claim_power_minus_one_gcd_exponent_difference_step`（$\gcd(c^m-1,c^n-1)=\gcd(c^{m-n}-1,c^n-1)$）の Lean 具体版を六定理で閉じた。冪は $\mathbb Z$、最大公約数は `Int.gcd` の自然数値で扱い、相互整除から `Nat.dvd_antisymm` で等号へ着地した。`lake build` 成功、未証明依存検査 514 件。次は必要十分版。
 - 2026-08-26 02:04（本流）: 「指数の差への一段の還元」の SageMath 層を追加し、冪差の分解、二つの最大公約数の相互整除、最大公約数の等式を `ZZ` の三検査で全 PASS させた。底一では最大公約数が零になるため、相互整除は剰余でなく `ZZ.divides` で検査した。次は同主張の Lean 具体版。
