@@ -688,4 +688,26 @@ theorem sum_card_uncovered_eq_sum_card_selected_of_perfectMatching {V Edge : Typ
   exact card_uncovered_eq_card_selected_of_perfectMatching
     vertices edges incidentEdges endpoint₀ endpoint₁ matching hMatching hIncident v hv
 
+/-- 選ばれた元辺を、それが接続する頂点と組にした有限集合。
+各元辺が両端点で二回数えられることを示す前に、頂点ごとの個数和を一つの有限集合の個数へ移す。 -/
+def selectedEndpointIncidences {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) : Finset (Σ _ : V, Edge) :=
+  vertices.sigma
+    (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching)
+
+/-- 頂点ごとの選択接続辺数の和は、選ばれた端点・辺の組の個数に等しい。 -/
+theorem card_selectedEndpointIncidences {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) :
+    (selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁ matching).card
+      = ∑ v ∈ vertices,
+          (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v).card := by
+  exact Finset.card_sigma vertices
+    (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching)
+
 end Ising3DCut.Prediction
