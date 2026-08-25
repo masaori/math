@@ -575,6 +575,10 @@ targets=(
   Ising3DCut.NecSuf.gcd_eq_of_decomposition
   Ising3DCut.LimitQuantity.powerMinusOne_gcd_exponent_difference_step_viaNecSuf
   Ising3DCut.LimitQuantity.powerMinusOne_gcd_exponent_difference_step_of_lt_viaNecSuf
+  Ising3DCut.NecSuf.gcd_sub_left_eq
+  Ising3DCut.NecSuf.reduction_reaches_index_gcd_aux
+  Ising3DCut.NecSuf.reduction_reaches_index_gcd
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_reaches_exponent_gcd_viaNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
