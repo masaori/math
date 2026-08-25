@@ -2,6 +2,8 @@
 import CellularAutomata.CausalSetPrimaryLiterature
 import CellularAutomata.CausalStructureComparison
 import CellularAutomata.ConjugacyClassCodeImageBijection
+import CellularAutomata.ComposedNeighborhoodClosure
+import CellularAutomata.NecSuf.ComposedNeighborhoodClosure
 import CellularAutomata.NecSuf.ConjugacyClassCodeImageBijection
 import CellularAutomata.DependencyOrderSubstructures
 import CellularAutomata.EssentialDependency
