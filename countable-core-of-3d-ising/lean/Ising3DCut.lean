@@ -251,3 +251,5 @@ import Ising3DCut.LimitQuantity.RationalPowerBaseDenominatorCoprimeFromNecSuf
 import Ising3DCut.NullModel.OneBreakageImpossible
 import Ising3DCut.NullModel.SquareAroundEdge
 import Ising3DCut.LimitQuantity.AdjacentVertexNumberGapsAreCoprime
+import Ising3DCut.NecSuf.AdjacentVertexNumberGapsAreCoprime
+import Ising3DCut.LimitQuantity.AdjacentVertexNumberGapsAreCoprimeFromNecSuf

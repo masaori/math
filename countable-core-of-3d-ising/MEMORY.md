@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-25 23:04（本流）: `NecSuf.coprime_of_add_one_and_prime_divisors_of_offset_dvd_base` と具体導出 `adjacent_vertex_number_gaps_are_coprime_viaNecSuf` を追加し、隣接する頂点数差の互いに素性の四層を閉じた。三次元の頂点数を落とすと、前項が一と部分の和、後項が前項と差の和、その差の素因子が部分を割るという仮定だけが残る。次の本流は「分子は底から 1 を引いた数の 2 倍を割る」の記述。
 - 2026-08-25 22:36（並行）: `first_eq_endpoint_of_mem_selectedEndpointIncidences` を追加し、選ばれた端点・辺の組の第一成分が元辺の二端点のいずれかであることを示した。`lake build` 成功、未証明依存検査 489 件。次は繊維がちょうど二元であることを示す。
 - 2026-08-25 22:34（本流）: `lean/Ising3DCut/LimitQuantity/AdjacentVertexNumberGapsAreCoprime.lean` を追加し、`claim_adjacent_vertex_number_gaps_are_coprime` の Lean 具体版を閉じた。準備の二等式（$g_L=3L(L+1)+1$、$g_{L+1}=g_L+6(L+1)$）、共通素因子が $2\cdot3\cdot(L+1)$ を割ることからの三分岐、どの分岐でも $p\mid3L(L+1)$ を得て $p\mid1$ へ落ちる着地を、人手証明と同じ順の六定理として並べた。`lake build` 成功、未証明依存検査 488 件、`npm run check` 165 ブロック・376 参照すべて解決、linkage 80 件。次は同主張の Lean 必要十分版。直前の SageMath 層のレビュー修正なし。
 - 2026-08-25 22:04（本流）: `sagemath/check/adjacent-vertex-number-gaps-are-coprime/` を追加し、準備の因数分解、隣接差を $6(L+1)$ へ移す四段、最大公約数の結論を `ZZ` の六ファイルで一行ずつ検査して全 PASS。次は `claim_adjacent_vertex_number_gaps_are_coprime` の Lean 具体版。直前本流と並行のレビュー修正なし。まとめ締切に入ったため並行ストリームは見送った。
