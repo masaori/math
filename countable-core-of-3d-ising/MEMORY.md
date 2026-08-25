@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 08:35（本流）: `lean/Ising3DCut/LimitQuantity/NumeratorDividesTwiceBaseMinusOne.lean` を追加し、二つの箱から得た整除を一つへまとめて箱の大きさに依存しない形へ移す主張の Lean 具体版を閉じた（準備の二段 `gcd_two_mul_eq_two_mul_gcd`・`int_gcd_two_mul_eq_two_mul_gcd` と本体 `numerator_divides_twice_base_minus_one`）。`lake build` 成功、未証明依存検査 530 件。次は同主張の Lean 必要十分版。着手前レビュー修正なし。
 - 2026-08-26 08:03（本流）: `sagemath/check/numerator-divides-twice-base-minus-one/` に三検査を追加し、最大公約数への二倍の移送、隣接指数の互いに素性による箱サイズの消去、最終整除を `ZZ` 上で全 PASS させた。次は同主張の Lean 具体版。着手前レビュー修正なし。
 - 2026-08-26 07:34（並行）: 覆われずに残る端子数の偶数性を各頂点へ降ろす同値を Lean で閉じた（`forall_even_card_uncovered_iff_forall_even_card_incidentEdges`）。未証明依存検査 530 件。次は偶部分グラフの条件そのものへ接続する。
 - 2026-08-26 07:36: 本流「二つの箱から得た整除を一つへまとめて箱の大きさに依存しない形へ移す」を記述した（`claim_numerator_divides_twice_base_minus_one`）。隣接する二つの箱の頂点数の差が互いに素であることと、冪から一を引いた数の最大公約数が指数の最大公約数で決まることを合わせ、箱の大きさを含まない整除 $a\mid 2(c-1)$ を得た。次はこの記述の SageMath 検証。
