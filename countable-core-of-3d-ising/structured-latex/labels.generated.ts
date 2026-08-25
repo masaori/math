@@ -52,6 +52,7 @@ export const ALL_LABELS = [
   "claim_magnitude_truncation_has_a_value_collision",
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
+  "claim_one_breakage_multiplicity_is_zero",
   "claim_palindrome",
   "claim_partition_coefficients_nonnegative",
   "claim_partition_support_endpoints",
