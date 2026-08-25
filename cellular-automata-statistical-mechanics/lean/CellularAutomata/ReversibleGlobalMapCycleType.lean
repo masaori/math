@@ -20,8 +20,9 @@ Mathlib の `Equiv.Perm.cycleType` と、人手証明の「全周期軌道の元
                                                     `reversibleConjClassEquivPartitions`
 
 周期軌道の分割と各軌道の元数＝最小周期は、人手証明と同じ反復列と最小性から直接示す。
-分割の実現では 1 の部分と 2 以上の部分を分け、後者を互いに交わらない巡回列へ切り分ける
-`Equiv.Perm.exists_with_cycleType_iff` の構成を使い、固定点を戻して人手証明の巡回型と一致させる。
+分割の実現では 1 の部分と 2 以上の部分を分け、後者を配位の一列から
+長さごとの互いに交わらない有限列へ切り分け、各列の `List.formPerm` を合成する。
+これは人手証明の明示構成であり、存在定理への委任ではない。
 -/
 import CellularAutomata.ConjugacyClassCodeImageBijection
 import CellularAutomata.NecSuf.ReversibilityFiniteDecidability
@@ -313,31 +314,10 @@ theorem positive_multiset_decomposition (m : Multiset ℕ) (hpos : ∀ n ∈ m, 
 /-- 配位数の各分割は、同じ有限配位型上の可逆写像の巡回型として実現する。 -/
 theorem exists_cycleType_eq_partition (p : ConfigurationPartition V) :
     ∃ F : ReversibleMap V, cycleType F = p.1 := by
-  classical
-  let m := p.1.filter (fun n => 2 ≤ n)
-  have hmpos : ∀ n ∈ p.1, 1 ≤ n := p.2.1
-  have hsum_split : p.1.sum = m.sum + p.1.count 1 := by
-    calc p.1.sum
-        = (m + Multiset.replicate (p.1.count 1) 1).sum := by
-            exact congrArg Multiset.sum (positive_multiset_decomposition p.1 hmpos).symm
-      _ = m.sum + p.1.count 1 := by simp
-  have hmsum : m.sum ≤ Fintype.card (Config V) := by
-    rw [← p.2.2, hsum_split]
-    omega
-  have hmmem : ∀ n ∈ m, 2 ≤ n := by
-    intro n hn
-    exact (Multiset.mem_filter.1 hn).2
-  obtain ⟨g, hg⟩ := (Equiv.Perm.exists_with_cycleType_iff (Config V)).2 ⟨hmsum, hmmem⟩
-  let F : ReversibleMap V := ⟨g, g.injective⟩
-  refine ⟨F, ?_⟩
-  have hto : toPerm F = g := Equiv.ext (fun _ => rfl)
-  have hfixed : Fintype.card (Config V) - m.sum = p.1.count 1 := by
-    have hcard : Fintype.card (Config V) = p.1.sum := p.2.2.symm
-    calc
-      Fintype.card (Config V) - m.sum = p.1.sum - m.sum := congrArg (fun n => n - m.sum) hcard
-      _ = p.1.count 1 := by omega
-  rw [cycleType, hto, hg, hfixed]
-  exact positive_multiset_decomposition p.1 hmpos
+  obtain ⟨F, hF⟩ :=
+    CellularAutomata.NecSuf.ReversibleGlobalMapCycleType.exists_cycleType_eq_partition
+      (X := Config V) ⟨p.1, p.2.1, p.2.2⟩
+  exact ⟨⟨F.1, F.2⟩, hF⟩
 
 /-- 可逆写像の共役関係が作る同値関係。 -/
 def reversibleConjSetoid : Setoid (ReversibleMap V) where

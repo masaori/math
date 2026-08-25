@@ -155,6 +155,49 @@ theorem positive_multiset_decomposition (m : Multiset ℕ) (hpos : ∀ n ∈ m, 
         = m.filter (fun n => 2 ≤ n) + m.filter (fun n => ¬ 2 ≤ n) := by rw [hrep]
     _ = m := Multiset.filter_add_not (p := fun n : ℕ => 2 ≤ n) m
 
+/-- 台の元を `Fintype.equivFin` で一列に並べ、指定された長さごとの
+連続した有限列へ切り分ける。人手証明の分割構成そのものである。 -/
+theorem explicit_disjoint_blocks (lengths : List ℕ)
+    (hsum : lengths.sum ≤ Fintype.card X) :
+    ∃ blocks : List (List X),
+      blocks.map List.length = lengths ∧
+      (∀ block ∈ blocks, block.Nodup) ∧
+      blocks.Pairwise List.Disjoint := by
+  let liftIndex (n : ℕ) (hn : n < Fintype.card X) : Fin (Fintype.card X) := ⟨n, hn⟩
+  let liftRange (range : List ℕ) (hrange : ∀ n ∈ range, n < Fintype.card X) :
+      List (Fin (Fintype.card X)) := List.pmap liftIndex range hrange
+  have hrange_lt : ∀ range ∈ lengths.ranges, ∀ n ∈ range, n < Fintype.card X := by
+    intro range hrange n hn
+    apply lt_of_lt_of_le _ hsum
+    rw [← List.mem_mem_ranges_iff_lt_sum]
+    exact ⟨range, hrange, hn⟩
+  let liftedRanges := lengths.ranges.pmap liftRange hrange_lt
+  have hlifted_value : ∀ (range : List ℕ) (hrange : range ∈ lengths.ranges),
+      (liftRange range (hrange_lt range hrange)).map Fin.valEmbedding = range := by
+    intro range hrange
+    conv_rhs => rw [← List.map_id range]
+    rw [List.map_pmap]
+    simp [liftIndex, Fin.valEmbedding_apply, List.pmap_eq_map, List.map_id']
+  refine ⟨liftedRanges.map (List.map (Fintype.equivFin X).symm), ?_, ?_, ?_⟩
+  · rw [← List.ranges_length lengths]
+    simp only [liftedRanges, liftRange, List.map_pmap, List.length_pmap,
+      List.pmap_eq_map]
+  · intro block hblock
+    rw [List.mem_map] at hblock
+    obtain ⟨finBlock, hfinBlock, rfl⟩ := hblock
+    apply List.Nodup.map (Equiv.injective _)
+    obtain ⟨range, hrange, rfl⟩ := List.mem_pmap.mp hfinBlock
+    apply List.Nodup.of_map
+    rw [hlifted_value range hrange]
+    exact List.ranges_nodup hrange
+  · refine List.Pairwise.map _ (fun left right => List.disjoint_map (Equiv.injective _)) ?_
+    apply List.Pairwise.pmap (List.ranges_disjoint lengths)
+    intro left hleft right hright hlr
+    apply List.disjoint_pmap
+    · intro a b ha hb hab
+      simpa only [liftIndex, Fin.mk_eq_mk] using hab
+    exact hlr
+
 /-- 台の元数の各分割は、同じ台の上の単射な自己写像の巡回型として実現する。 -/
 theorem exists_cycleType_eq_partition (p : CardPartition X) :
     ∃ F : InjSelfMap X, cycleType F = p.1 := by
@@ -172,7 +215,35 @@ theorem exists_cycleType_eq_partition (p : CardPartition X) :
   have hmmem : ∀ n ∈ m, 2 ≤ n := by
     intro n hn
     exact (Multiset.mem_filter.1 hn).2
-  obtain ⟨g, hg⟩ := (Equiv.Perm.exists_with_cycleType_iff X).2 ⟨hmsum, hmmem⟩
+  have hlist_sum : m.toList.sum ≤ Fintype.card X := by
+    simpa only [Multiset.sum_toList] using hmsum
+  obtain ⟨blocks, hlengths, hnodup, hdisjoint⟩ := explicit_disjoint_blocks m.toList hlist_sum
+  let g : Equiv.Perm X := List.prod (blocks.map fun block => List.formPerm block)
+  have hblock_two : ∀ block ∈ blocks, 2 ≤ block.length := by
+    intro block hblock
+    apply hmmem block.length
+    rw [← Multiset.mem_toList, ← hlengths, List.mem_map]
+    exact ⟨block, hblock, rfl⟩
+  have hg : g.cycleType = m := by
+    rw [Equiv.Perm.cycleType_eq _ rfl]
+    · rw [← Multiset.coe_toList m]
+      apply congrArg
+      rw [List.map_map, ← hlengths]
+      apply List.map_congr_left
+      intro block hblock
+      simp only [Function.comp_apply]
+      rw [List.support_formPerm_of_nodup block (hnodup block hblock)]
+      · exact List.toFinset_card_of_nodup (hnodup block hblock)
+      · grind
+    · simpa using fun block hblock =>
+        List.isCycle_formPerm (hnodup block hblock) (hblock_two block hblock)
+    · rw [List.pairwise_map]
+      apply List.Pairwise.imp_of_mem _ hdisjoint
+      intro left right hleft hright hlr
+      rw [List.formPerm_disjoint_iff
+        (hnodup left hleft) (hnodup right hright)
+        (hblock_two left hleft) (hblock_two right hright)]
+      exact hlr
   let F : InjSelfMap X := ⟨g, g.injective⟩
   refine ⟨F, ?_⟩
   have hto : toPerm F = g := Equiv.ext (fun _ => rfl)
