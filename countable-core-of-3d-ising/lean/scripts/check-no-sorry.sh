@@ -505,6 +505,7 @@ targets=(
   Ising3DCut.Prediction.card_matchingUncoveredTerminalsAt_even_iff
   Ising3DCut.Prediction.mem_matchingUncoveredTerminalsAt_iff
   Ising3DCut.Prediction.mem_selectedIncidentEdgesAt_iff
+  Ising3DCut.NullModel.brokenCount_ne_one_of_alternate_three_edges
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
