@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 00:34（本流）: `lean/Ising3DCut/LimitQuantity/PowerMinusOneDividesMultipleExponent.lean` を追加し、`claim_power_minus_one_divides_multiple_exponent`（$c^n-1\mid c^{nk}-1$）の Lean 具体版を閉じた。基底の証人、指数の加法と同じ底の冪の積、帰納段の分解、証人の更新、帰納法による証人の存在、整除への着地の六定理を人手証明と同じ順に並べた。`lake build` 成功、未証明依存検査 499 件、`npm run check` 166 ブロック・376 参照すべて解決、linkage 81 件。次は同主張の Lean 必要十分版。着手前レビュー修正なし。
 - 2026-08-26 00:06（並行）: `endpoint_pair_subset_fiber_of_selectedEndpointIncidences` を追加し、選ばれた元辺の両端点との組がどちらも元辺への射影の繊維に属する逆向きの包含を閉じた。対象ビルド成功、未証明依存検査 493 件。次は前 tick の包含と束ねて繊維の等号と個数二を示す。
 - 2026-08-26 00:03（本流）: `claim_power_minus_one_divides_multiple_exponent` の SageMath 層を閉じた。`sagemath/check/power-minus-one-divides-multiple-exponent/` で帰納法の基底、指数法則、帰納段の分解、整除証人の更新を `ZZ` 上で一行ずつ確認し、四検査すべて PASS、linkage 81 件。次は同主張の Lean 具体版。着手前レビュー修正なし。
 - 2026-08-25 23:36（並行）: `Ising3DCut.Prediction.fiber_subset_endpoint_pair_of_selectedEndpointIncidences` を追加し、元辺への射影の繊維が二つの端点との組の二元集合に含まれることを示した。`lake build` 成功、未証明依存検査 492 件。次は逆向きの包含。

@@ -253,3 +253,4 @@ import Ising3DCut.NullModel.SquareAroundEdge
 import Ising3DCut.LimitQuantity.AdjacentVertexNumberGapsAreCoprime
 import Ising3DCut.NecSuf.AdjacentVertexNumberGapsAreCoprime
 import Ising3DCut.LimitQuantity.AdjacentVertexNumberGapsAreCoprimeFromNecSuf
+import Ising3DCut.LimitQuantity.PowerMinusOneDividesMultipleExponent
