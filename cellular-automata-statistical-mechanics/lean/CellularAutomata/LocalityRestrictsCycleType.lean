@@ -14,10 +14,10 @@
                                                         `selfGlobal_injective_iff`
   claim_self_neighborhood_involution                    `selfRule_eq_id_or_neg`,
                                                         `selfGlobal_involution`
-
-この tick で形式化した範囲は上表までである。実現巡回型の決定
-（claim_self_neighborhood_realized_cycle_types）と真部分集合性
-（claim_locality_restricts_cycle_type）は未形式化である。
+  claim_self_neighborhood_realized_cycle_types          `selfGlobal_cycleType_cases`,
+                                                        `realizedCycleTypes_selfNbhd`
+  claim_locality_restricts_cycle_type                   `eight_cycle_not_realized`,
+                                                        `realizedCycleTypes_selfNbhd_proper`
 
 住処: 有限型・自然数のみ。ℝ / ℂ は現れない（人手証明と同じ）。
 抽象度は人手証明に固定する。
@@ -170,5 +170,175 @@ theorem selfGlobal_involution (f : LocalRuleFamily selfNbhd)
   rcases selfRule_eq_id_or_neg hg with h | h
   · rw [h]; rfl
   · rw [h]; cases y v <;> rfl
+
+/-- 可逆な自己近傍舞台の大域写像は恒等写像であるか、固定点を持たない。
+    否定写像であるセルが一つでもあれば、そのセルの値が必ず変わる。 -/
+theorem selfGlobal_eq_id_or_fixedPointFree (f : LocalRuleFamily selfNbhd)
+    (hF : Function.Injective (globalMap selfNbhd f)) :
+    globalMap selfNbhd f = id ∨ ∀ y, globalMap selfNbhd f y ≠ y := by
+  classical
+  by_cases hall : ∀ v : SelfCell, valueMap f v = id
+  · left
+    funext y v
+    rw [globalMap_self_apply, hall v]
+    rfl
+  · right
+    push_neg at hall
+    obtain ⟨v, hv⟩ := hall
+    have hg : Function.Injective (valueMap f v) := (selfGlobal_injective_iff f).1 hF v
+    have hneg : valueMap f v = nu := (selfRule_eq_id_or_neg hg).resolve_left hv
+    intro y hy
+    have hyv := congrFun hy v
+    rw [globalMap_self_apply, hneg] at hyv
+    cases h : y v <;> simp [h, nu] at hyv
+
+/-- 恒等写像の巡回型は八つの 1 である。 -/
+theorem cycleType_eq_ones_of_eq_id (F : ReversibleGlobalMapCycleType.ReversibleMap SelfCell)
+    (hF : F.1 = id) :
+    ReversibleGlobalMapCycleType.cycleType F = Multiset.replicate 8 1 := by
+  classical
+  have hp : ReversibleGlobalMapCycleType.toPerm F = 1 := by
+    apply Equiv.ext
+    intro y
+    simpa [ReversibleGlobalMapCycleType.toPerm_apply] using congrFun hF y
+  rw [ReversibleGlobalMapCycleType.cycleType, hp]
+  norm_num [ReversibleGlobalMapCycleType.Config, SelfCell, Fintype.card_fun,
+    CellularAutomata.EssentialDependency.card_state]
+
+/-- 固定点を持たない二回反復恒等写像の巡回型は四つの 2 である。 -/
+theorem cycleType_eq_twos_of_involution_fixedPointFree
+    (F : ReversibleGlobalMapCycleType.ReversibleMap SelfCell)
+    (hinv : ∀ y, F (F y) = y) (hfree : ∀ y, F y ≠ y) :
+    ReversibleGlobalMapCycleType.cycleType F = Multiset.replicate 4 2 := by
+  classical
+  let σ := ReversibleGlobalMapCycleType.toPerm F
+  have hpow : σ ^ 2 = 1 := by
+    apply Equiv.ext
+    intro y
+    simpa [σ, pow_two] using hinv y
+  have hsupport : σ.support = Finset.univ := by
+    ext y
+    simp [Equiv.Perm.mem_support, σ, hfree y]
+  have htype := Equiv.Perm.cycleType_of_pow_prime_eq_one (p := 2) hpow
+  have hsum : σ.cycleType.sum = 8 := by
+    rw [σ.sum_cycleType, hsupport]
+    norm_num [ReversibleGlobalMapCycleType.Config, SelfCell, Fintype.card_fun,
+      CellularAutomata.EssentialDependency.card_state]
+  have hcard : σ.cycleType.card = 4 := by
+    have hcount := hsum
+    rw [htype, Multiset.sum_replicate, nsmul_eq_mul] at hcount
+    norm_num at hcount
+    omega
+  have hconfig : Fintype.card (ReversibleGlobalMapCycleType.Config SelfCell) = 8 := by
+    norm_num [ReversibleGlobalMapCycleType.Config, SelfCell, Fintype.card_fun,
+      CellularAutomata.EssentialDependency.card_state]
+  rw [ReversibleGlobalMapCycleType.cycleType, htype, hcard]
+  norm_num [hconfig]
+
+/-- `claim_self_neighborhood_realized_cycle_types` の分類段。
+    可逆な局所規則族の巡回型は八つの 1 または四つの 2 のどちらかである。 -/
+theorem selfGlobal_cycleType_cases (f : LocalRuleFamily selfNbhd)
+    (hF : Function.Injective (globalMap selfNbhd f)) :
+    ReversibleGlobalMapCycleType.cycleType ⟨globalMap selfNbhd f, hF⟩ =
+        Multiset.replicate 8 1 ∨
+      ReversibleGlobalMapCycleType.cycleType ⟨globalMap selfNbhd f, hF⟩ =
+        Multiset.replicate 4 2 := by
+  rcases selfGlobal_eq_id_or_fixedPointFree f hF with hid | hfree
+  · exact Or.inl (cycleType_eq_ones_of_eq_id _ hid)
+  · exact Or.inr (cycleType_eq_twos_of_involution_fixedPointFree _
+      (selfGlobal_involution f hF) hfree)
+
+/-- 全セルで恒等値写像を使う局所規則族。 -/
+def identityRuleFamily : LocalRuleFamily selfNbhd :=
+  fun v z => z ⟨v, Finset.mem_singleton_self v⟩
+
+/-- 全セルで否定値写像を使う局所規則族。 -/
+def negationRuleFamily : LocalRuleFamily selfNbhd :=
+  fun v z => nu (z ⟨v, Finset.mem_singleton_self v⟩)
+
+theorem globalMap_identityRuleFamily : globalMap selfNbhd identityRuleFamily = id := by
+  funext y v
+  simp [globalMap_self_apply, valueMap, identityRuleFamily]
+
+theorem globalMap_negationRuleFamily (y : SelfCell → State) :
+    globalMap selfNbhd negationRuleFamily y = fun v => nu (y v) := by
+  funext v
+  simp [globalMap_self_apply, valueMap, negationRuleFamily]
+
+theorem identityRuleFamily_injective :
+    Function.Injective (globalMap selfNbhd identityRuleFamily) := by
+  rw [globalMap_identityRuleFamily]
+  exact Function.injective_id
+
+theorem negationRuleFamily_injective :
+    Function.Injective (globalMap selfNbhd negationRuleFamily) := by
+  intro y z hyz
+  funext v
+  have hv := congrFun hyz v
+  simp [globalMap_negationRuleFamily] at hv
+  cases hy : y v <;> cases hz : z v <;> simp [hy, hz, nu] at hv ⊢
+
+/-- `claim_self_neighborhood_realized_cycle_types`。
+    恒等族と、一つ以上の否定を含む族が二つの巡回型を実現し、他は存在しない。 -/
+theorem realizedCycleTypes_selfNbhd :
+    realizedCycleTypes selfNbhd =
+      {Multiset.replicate 8 1, Multiset.replicate 4 2} := by
+  classical
+  ext m
+  constructor
+  · rintro ⟨F, hstage, rfl⟩
+    rw [stageGlobalMaps, Finset.mem_image] at hstage
+    obtain ⟨f, -, hf⟩ := hstage
+    have hfInj : Function.Injective (globalMap selfNbhd f) := by
+      rw [hf]
+      exact F.2
+    have hcases := selfGlobal_cycleType_cases f hfInj
+    have hEq :
+        (⟨globalMap selfNbhd f, hfInj⟩ :
+          ReversibleGlobalMapCycleType.ReversibleMap SelfCell) = F := Subtype.ext hf
+    simpa [hEq] using hcases
+  · intro hm
+    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hm
+    rcases hm with rfl | rfl
+    · let F : ReversibleGlobalMapCycleType.ReversibleMap SelfCell :=
+        ⟨globalMap selfNbhd identityRuleFamily, identityRuleFamily_injective⟩
+      refine ⟨F, ?_, ?_⟩
+      · rw [stageGlobalMaps, Finset.mem_image]
+        exact ⟨identityRuleFamily, Finset.mem_univ _, rfl⟩
+      · exact cycleType_eq_ones_of_eq_id F globalMap_identityRuleFamily
+    · let F : ReversibleGlobalMapCycleType.ReversibleMap SelfCell :=
+        ⟨globalMap selfNbhd negationRuleFamily, negationRuleFamily_injective⟩
+      refine ⟨F, ?_, ?_⟩
+      · rw [stageGlobalMaps, Finset.mem_image]
+        exact ⟨negationRuleFamily, Finset.mem_univ _, rfl⟩
+      · apply cycleType_eq_twos_of_involution_fixedPointFree F
+        · intro y
+          funext v
+          cases h : y v <;> simp [F, globalMap_negationRuleFamily, h, nu]
+        · intro y hy
+          have hv := congrFun hy 0
+          cases h : y 0 <;> simp [F, globalMap_negationRuleFamily, h, nu] at hv
+
+/-- 八つの配位を一周する巡回型は自己近傍舞台では実現しない。 -/
+theorem eight_cycle_not_realized :
+    ({8} : Multiset ℕ) ∉ realizedCycleTypes selfNbhd := by
+  rw [realizedCycleTypes_selfNbhd]
+  decide
+
+/-- `claim_locality_restricts_cycle_type`。実現巡回型は配位数 8 の分割全体の真部分集合である。 -/
+theorem realizedCycleTypes_selfNbhd_proper :
+    realizedCycleTypes selfNbhd ⊂
+      {m : Multiset ℕ | (∀ n ∈ m, 1 ≤ n) ∧ m.sum = 8} := by
+  apply Set.ssubset_iff_subset_ne.mpr
+  constructor
+  · rintro m ⟨F, -, rfl⟩
+    exact ⟨fun n hn => ReversibleGlobalMapCycleType.cycleType_members_positive F hn,
+      by norm_num [ReversibleGlobalMapCycleType.cycleType_sum]⟩
+  · intro heq
+    have hmem : ({8} : Multiset ℕ) ∈
+        {m : Multiset ℕ | (∀ n ∈ m, 1 ≤ n) ∧ m.sum = 8} := by
+      norm_num
+    rw [← heq] at hmem
+    exact eight_cycle_not_realized hmem
 
 end CellularAutomata.LocalityRestrictsCycleType
