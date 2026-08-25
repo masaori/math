@@ -58,6 +58,10 @@ targets=(
   Ising3DCut.NecSuf.denominator_eq_one_of_prime_divisors_restricted
   Ising3DCut.NecSuf.denominator_one_and_outer_denominator_divides_constant
   Ising3DCut.LimitQuantity.rational_power_point_denominator_divides_two_viaNecSuf
+  Ising3DCut.LimitQuantity.eq_num_of_den_eq_one
+  Ising3DCut.LimitQuantity.base_power_congr_two
+  Ising3DCut.LimitQuantity.dvd_base_power_difference_of_congr_two
+  Ising3DCut.LimitQuantity.rational_power_point_numerator_divides_base_power_difference
   Ising3DCut.Prediction.secondProjection_bijOn_uncovered_selected_of_perfectMatching
   Ising3DCut.Prediction.card_uncovered_eq_card_selected_of_perfectMatching
   Ising3DCut.LimitQuantity.tendsto_rootSeq_isingValueSeq_one_viaNecSuf
