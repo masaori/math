@@ -710,4 +710,22 @@ theorem card_selectedEndpointIncidences {V Edge : Type*}
   exact Finset.card_sigma vertices
     (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching)
 
+/-- 選ばれた端点・辺の組に属するための条件。頂点が箱の頂点であり、
+その頂点で辺が選ばれた接続辺であることと同値である。 -/
+theorem mem_selectedEndpointIncidences_iff {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge))) (t : Σ _ : V, Edge) :
+    t ∈ selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁ matching
+      ↔ t.1 ∈ vertices ∧
+        t.2 ∈ selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching t.1 := by
+  unfold selectedEndpointIncidences
+  constructor
+  · intro ht
+    have h := Finset.mem_sigma.mp (by simpa using ht)
+    exact ⟨h.1, h.2⟩
+  · intro ht
+    exact Finset.mem_sigma.mpr ⟨ht.1, ht.2⟩
+
 end Ising3DCut.Prediction
