@@ -568,6 +568,12 @@ targets=(
   Ising3DCut.LimitQuantity.powerMinusOne_gcd_reduced_dvd
   Ising3DCut.LimitQuantity.powerMinusOne_gcd_exponent_difference_step
   Ising3DCut.LimitQuantity.powerMinusOne_gcd_exponent_difference_step_of_lt
+  Ising3DCut.NecSuf.gcd_dvd_remainder_of_decomposition
+  Ising3DCut.NecSuf.gcd_dvd_reduced_of_decomposition
+  Ising3DCut.NecSuf.reduced_gcd_dvd_of_decomposition
+  Ising3DCut.NecSuf.gcd_eq_of_decomposition
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_exponent_difference_step_viaNecSuf
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_exponent_difference_step_of_lt_viaNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
