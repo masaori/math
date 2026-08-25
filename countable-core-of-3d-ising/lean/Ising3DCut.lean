@@ -235,3 +235,4 @@ import Ising3DCut.LimitQuantity.RationalPowerBaseDenNoPrimeMissingZeroMultiplici
 import Ising3DCut.NecSuf.RationalPowerBaseDenominatorCoprime
 import Ising3DCut.LimitQuantity.RationalPowerBaseDenominatorCoprimeFromNecSuf
 import Ising3DCut.NullModel.OneBreakageImpossible
+import Ising3DCut.NullModel.SquareAroundEdge
