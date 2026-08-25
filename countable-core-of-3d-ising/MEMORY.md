@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-25 23:36（並行）: `Ising3DCut.Prediction.fiber_subset_endpoint_pair_of_selectedEndpointIncidences` を追加し、元辺への射影の繊維が二つの端点との組の二元集合に含まれることを示した。`lake build` 成功、未証明依存検査 492 件。次は逆向きの包含。
 - 2026-08-25 23:33（本流）: 「分子は底から 1 を引いた数の 2 倍を割る」を三つへ割り、その先頭 `claim_power_minus_one_divides_multiple_exponent`（$c^n-1\mid c^{nk}-1$）を記述した。自然数 $k$ の帰納法一本で、$c^{n(k+1)}-1=c^{nk}(c^n-1)+(c^{nk}-1)$ の分解を一行ずつ書いた。`npm run check` はブロック 166 件・参照 376 件すべて解決。次はこの記述の SageMath 検証。
 - 2026-08-25 23:04（本流）: `NecSuf.coprime_of_add_one_and_prime_divisors_of_offset_dvd_base` と具体導出 `adjacent_vertex_number_gaps_are_coprime_viaNecSuf` を追加し、隣接する頂点数差の互いに素性の四層を閉じた。三次元の頂点数を落とすと、前項が一と部分の和、後項が前項と差の和、その差の素因子が部分を割るという仮定だけが残る。次の本流は「分子は底から 1 を引いた数の 2 倍を割る」の記述。
 - 2026-08-25 22:36（並行）: `first_eq_endpoint_of_mem_selectedEndpointIncidences` を追加し、選ばれた端点・辺の組の第一成分が元辺の二端点のいずれかであることを示した。`lake build` 成功、未証明依存検査 489 件。次は繊維がちょうど二元であることを示す。

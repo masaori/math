@@ -746,4 +746,31 @@ theorem first_eq_endpoint_of_mem_selectedEndpointIncidences {V Edge : Type*}
       matching t.1 t.2).mp hmem.2).1
   exact hIncident t.1 t.2 hinc
 
+
+/-- 元辺への射影の繊維は、その辺の二つの端点との組からなる二元集合に含まれる。
+繊維がちょうど二元であることを示す二方向のうち、含まれる側にあたる。 -/
+theorem fiber_subset_endpoint_pair_of_selectedEndpointIncidences {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (e : Edge) :
+    ((selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁
+        matching).filter (fun t => t.2 = e))
+      ⊆ ({⟨endpoint₀ e, e⟩, ⟨endpoint₁ e, e⟩} : Finset (Σ _ : V, Edge)) := by
+  intro t ht
+  have hmem : t ∈ selectedEndpointIncidences vertices edges incidentEdges
+      endpoint₀ endpoint₁ matching := (Finset.mem_filter.mp ht).1
+  have hsnd : t.2 = e := (Finset.mem_filter.mp ht).2
+  have hend : endpoint₀ t.2 = t.1 ∨ endpoint₁ t.2 = t.1 :=
+    first_eq_endpoint_of_mem_selectedEndpointIncidences vertices edges incidentEdges
+      endpoint₀ endpoint₁ matching hIncident t hmem
+  obtain ⟨v, f⟩ := t
+  simp only at hsnd hend
+  subst hsnd
+  rcases hend with h | h
+  · exact Finset.mem_insert.mpr (Or.inl (by rw [h]))
+  · exact Finset.mem_insert.mpr (Or.inr (Finset.mem_singleton.mpr (by rw [h])))
+
 end Ising3DCut.Prediction
