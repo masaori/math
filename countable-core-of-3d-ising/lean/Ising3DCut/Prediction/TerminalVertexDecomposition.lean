@@ -958,4 +958,29 @@ theorem even_sum_card_uncovered_of_perfectMatching
     hDistinct]
   exact even_two_mul _
 
+/-- 総和側で固定した偶奇を各頂点へ降ろす。全頂点で覆われずに残る端子数が偶数であることは、
+全頂点で接続辺の本数が偶数であることと同値である。
+偶部分グラフの条件は各頂点での次数の偶奇で述べられるので、この同値がその接続点になる。 -/
+theorem forall_even_card_uncovered_iff_forall_even_card_incidentEdges
+    {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (incidentEdges : V → Finset Edge)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hsub : ∀ v ∈ vertices,
+      matchingCoveredTerminalsAt incidentEdges v matching ⊆ terminalsAt incidentEdges v)
+    (hcard : ∀ v ∈ vertices,
+      ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching, s.card = 2)
+    (hdisj : ∀ v ∈ vertices,
+      ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching,
+      ∀ t ∈ matchingInternalEdgesAt incidentEdges v matching, s ≠ t → Disjoint s t) :
+    (∀ v ∈ vertices, Even (matchingUncoveredTerminalsAt incidentEdges v matching).card)
+      ↔ (∀ v ∈ vertices, Even (incidentEdges v).card) := by
+  constructor
+  · intro h v hv
+    exact (card_matchingUncoveredTerminalsAt_even_iff incidentEdges v matching
+      (hsub v hv) (hcard v hv) (hdisj v hv)).mp (h v hv)
+  · intro h v hv
+    exact (card_matchingUncoveredTerminalsAt_even_iff incidentEdges v matching
+      (hsub v hv) (hcard v hv) (hdisj v hv)).mpr (h v hv)
+
+
 end Ising3DCut.Prediction

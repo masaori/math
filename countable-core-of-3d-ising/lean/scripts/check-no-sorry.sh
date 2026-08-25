@@ -552,6 +552,7 @@ targets=(
   Ising3DCut.Prediction.card_selectedEndpointIncidences_eq_two_mul_card_selectedOriginalEdges
   Ising3DCut.Prediction.sum_card_uncovered_eq_two_mul_card_selectedOriginalEdges_of_perfectMatching
   Ising3DCut.Prediction.even_sum_card_uncovered_of_perfectMatching
+  Ising3DCut.Prediction.forall_even_card_uncovered_iff_forall_even_card_incidentEdges
   Ising3DCut.LimitQuantity.powerMinusOne_witness_zero
   Ising3DCut.LimitQuantity.powerMinusOne_exponent_succ
   Ising3DCut.LimitQuantity.powerMinusOne_succ_decompose
