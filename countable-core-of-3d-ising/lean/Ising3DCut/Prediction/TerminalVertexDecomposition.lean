@@ -902,5 +902,37 @@ theorem card_selectedEndpointIncidences_eq_two_mul_card_selectedOriginalEdges
         (Finset.mem_filter.mp he').2 (hDistinct e he')
     _ = 2 * selected.card := by simp [Nat.mul_comm]
 
+/-- 完全マッチングで覆われずに残る端子の総数は、選ばれた元辺数の二倍である。 -/
+theorem sum_card_uncovered_eq_two_mul_card_selectedOriginalEdges_of_perfectMatching
+    {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (hEndpoints : ∀ e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching,
+      endpoint₀ e ∈ vertices ∧ endpoint₁ e ∈ vertices)
+    (hRegistered : ∀ e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching,
+      e ∈ incidentEdges (endpoint₀ e) ∧ e ∈ incidentEdges (endpoint₁ e))
+    (hDistinct : ∀ e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching,
+      endpoint₀ e ≠ endpoint₁ e) :
+    ∑ v ∈ vertices, (matchingUncoveredTerminalsAt incidentEdges v matching).card
+      = 2 * (selectedOriginalEdges edges endpoint₀ endpoint₁ matching).card := by
+  calc
+    ∑ v ∈ vertices, (matchingUncoveredTerminalsAt incidentEdges v matching).card
+        = ∑ v ∈ vertices,
+            (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v).card :=
+      sum_card_uncovered_eq_sum_card_selected_of_perfectMatching vertices edges incidentEdges
+        endpoint₀ endpoint₁ matching hMatching hIncident
+    _ = (selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁
+          matching).card :=
+      (card_selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁
+        matching).symm
+    _ = 2 * (selectedOriginalEdges edges endpoint₀ endpoint₁ matching).card :=
+      card_selectedEndpointIncidences_eq_two_mul_card_selectedOriginalEdges vertices edges
+        incidentEdges endpoint₀ endpoint₁ matching hIncident hEndpoints hRegistered hDistinct
+
 
 end Ising3DCut.Prediction
