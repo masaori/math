@@ -62,6 +62,9 @@ targets=(
   Ising3DCut.LimitQuantity.base_power_congr_two
   Ising3DCut.LimitQuantity.dvd_base_power_difference_of_congr_two
   Ising3DCut.LimitQuantity.rational_power_point_numerator_divides_base_power_difference
+  Ising3DCut.NecSuf.common_residue_dvd_difference
+  Ising3DCut.NecSuf.equality_and_dvd_difference_of_common_residue
+  Ising3DCut.LimitQuantity.rational_power_point_numerator_divides_base_power_difference_viaNecSuf
   Ising3DCut.Prediction.secondProjection_bijOn_uncovered_selected_of_perfectMatching
   Ising3DCut.Prediction.card_uncovered_eq_card_selected_of_perfectMatching
   Ising3DCut.LimitQuantity.tendsto_rootSeq_isingValueSeq_one_viaNecSuf
