@@ -24,6 +24,7 @@ import blocks_composed_neighborhood_closure from './content/composed-neighborhoo
 import blocks_conjugacy_class_code_image_bijection from './content/conjugacy-class-code-image-bijection.ts'
 import blocks_dependency_order_substructures from './content/dependency-order-substructures.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
+import blocks_finite_neighborhood_assignment_monoid from './content/finite-neighborhood-assignment-monoid.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
 import blocks_global_map_iteration from './content/global-map-iteration.ts'
 import blocks_inverse_map_locality from './content/inverse-map-locality.ts'
@@ -70,6 +71,7 @@ export type AllBlocks = [
   ...typeof blocks_conjugacy_class_code_image_bijection,
   ...typeof blocks_dependency_order_substructures,
   ...typeof blocks_essential_dependency,
+  ...typeof blocks_finite_neighborhood_assignment_monoid,
   ...typeof blocks_finite_propagation_boundary,
   ...typeof blocks_global_map_iteration,
   ...typeof blocks_inverse_map_locality,
