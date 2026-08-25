@@ -562,6 +562,12 @@ targets=(
   Ising3DCut.NecSuf.exists_witness_powerMinusOne_dvd_multiple_exponent
   Ising3DCut.NecSuf.powerMinusOne_dvd_multiple_exponent
   Ising3DCut.LimitQuantity.powerMinusOne_dvd_multiple_exponent_viaNecSuf
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_decompose
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_dvd_difference_power
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_dvd_reduced
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_reduced_dvd
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_exponent_difference_step
+  Ising3DCut.LimitQuantity.powerMinusOne_gcd_exponent_difference_step_of_lt
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
