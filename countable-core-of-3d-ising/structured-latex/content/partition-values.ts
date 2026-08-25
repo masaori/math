@@ -10162,7 +10162,7 @@ c^{\,n(k+1)}-1
         math(String.raw`m-n`),
         " は ",
         math(String.raw`m>n`),
-        " より正の自然数であり、四つの数 ",
+        " より正の自然数であり、ここに現れる三つの冪差 ",
         math(String.raw`c^{\,m}-1`),
         "、",
         math(String.raw`c^{\,n}-1`),
