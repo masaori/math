@@ -4914,6 +4914,12 @@ S_{G,2}(a)
 S_{G,3}(a)
 &:=\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^3}
 \in\overline{\mathbb Q},\\
+U_{G,2,1}(a)
+&:=
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
+\in\overline{\mathbb Q},\\
 T_{G,3}(a)
 &:=
 \sum_{k=1}^{d}
@@ -5254,7 +5260,10 @@ S_{G,3}(a)
 \sum_{k=1}^{d}
 \sum_{\substack{1\le\ell\le d\\\ell\ne k}}
 \frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
-&&\bigl(\because\ \text{非対角項の添字 }k,\ell\text{ を交換する}\bigr).
+&&\bigl(\because\ \text{非対角項の添字 }k,\ell\text{ を交換する}\bigr)\\
+&=
+S_{G,3}(a)+U_{G,2,1}(a)
+&&\bigl(\because\ U_{G,2,1}(a)\text{ の定義}\bigr).
 \end{aligned}\]
 \[\mathcal R_G(a)^3
 =
@@ -5267,10 +5276,71 @@ S_{G,3}(a)
 \quad\bigl(\because\ \text{有限三重和を添字の一致型ごとに分ける}\bigr).\]
 \[T_{G,3}(a)
 =
+\mathcal R_G(a)^3-S_{G,3}(a)-q_3U_{G,2,1}(a)
+\quad\bigl(\because\ \text{直前の一致型分解から移項する}\bigr).\]
+\[U_{G,2,1}(a)
+=\mathcal R_G(a)S_{G,2}(a)-S_{G,3}(a)
+\quad\bigl(\because\ \mathcal R_G(a)S_{G,2}(a)=S_{G,3}(a)+U_{G,2,1}(a)\text{ から移項する}\bigr).\]
+\[T_{G,3}(a)
+=
+\mathcal R_G(a)^3
+-S_{G,3}(a)
+-q_3\left(\mathcal R_G(a)S_{G,2}(a)-S_{G,3}(a)\right)
+\quad\bigl(\because\ U_{G,2,1}(a)\text{ の式を代入する}\bigr).\]
+\[T_{G,3}(a)
+=
+\mathcal R_G(a)^3
+-S_{G,3}(a)
+-q_3\mathcal R_G(a)S_{G,2}(a)
++q_3S_{G,3}(a)
+\quad\bigl(\because\ \text{分配律}\bigr).\]
+\[T_{G,3}(a)
+=
+\mathcal R_G(a)^3
+-q_3\mathcal R_G(a)S_{G,2}(a)
++q_3S_{G,3}(a)
+-S_{G,3}(a)
+\quad\bigl(\because\ \overline{\mathbb Q}\text{ の加法の交換律}\bigr).\]
+\[T_{G,3}(a)
+=
+\mathcal R_G(a)^3
+-q_3\mathcal R_G(a)S_{G,2}(a)
++(q_3-1_{\overline{\mathbb Q}})S_{G,3}(a)
+\quad\bigl(\because\ \text{分配律}\bigr).\]
+\[\eta_{\mathbb N,\mathbb Q}(1)=1_{\mathbb Q}
+\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は乗法単位元を保つ}\bigr).\]
+\[\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(1)
+\right)
+=1_{\overline{\mathbb Q}}
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は乗法単位元を保つ}\bigr).\]
+\[q_1=1_{\overline{\mathbb Q}}
+\quad\bigl(\because\ q_1\text{ の定義}\bigr).\]
+\[\eta_{\mathbb N,\mathbb Q}(3)-\eta_{\mathbb N,\mathbb Q}(1)
+=\eta_{\mathbb N,\mathbb Q}(2)
+\quad\bigl(\because\ 3-1=2\text{ in }\mathbb Q\bigr).\]
+\[\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(3)
+\right)
+-\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(1)
+\right)
+=\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
+  \eta_{\mathbb N,\mathbb Q}(2)
+\right)
+\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は差を保つ}\bigr).\]
+\[q_3-q_1=q_2
+\quad\bigl(\because\ q_1,q_2,q_3\text{ の定義}\bigr).\]
+\[q_3-1_{\overline{\mathbb Q}}=q_3-q_1
+\quad\bigl(\because\ q_1=1_{\overline{\mathbb Q}}\text{ を代入する}\bigr).\]
+\[q_3-1_{\overline{\mathbb Q}}=q_2
+\quad\bigl(\because\ \text{直前の二つの等式の推移律}\bigr).\]
+\[T_{G,3}(a)
+=
 \mathcal R_G(a)^3
 -q_3\mathcal R_G(a)S_{G,2}(a)
 +q_2S_{G,3}(a)
-\quad\bigl(\because\ \text{直前二式から非対角二重和を消去する}\bigr).\]
+\quad\bigl(\because\ q_3-1_{\overline{\mathbb Q}}=q_2\text{ を代入する}\bigr).\]
 \[\frac{C_G(a)}{\overline P_G(a)}
 =T_{G,3}(a)
 \quad\bigl(\because\ D^3\overline P_G(a)=C_G(a)\text{ を代入する}\bigr).\]
@@ -5322,15 +5392,6 @@ S_{G,3}(a)
   \overline P_G(a)^3
 }
 \quad\bigl(\because\ \text{共通分母化}\bigr).\]
-\[\eta_{\mathbb N,\mathbb Q}(1)=1_{\mathbb Q}
-\quad\bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は乗法単位元を保つ}\bigr).\]
-\[\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
-  \eta_{\mathbb N,\mathbb Q}(1)
-\right)
-=1_{\overline{\mathbb Q}}
-\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は乗法単位元を保つ}\bigr).\]
-\[q_1=1_{\overline{\mathbb Q}}
-\quad\bigl(\because\ q_1\text{ の定義}\bigr).\]
 \[q_2S_{G,3}(a)
 =
 \frac{
@@ -5373,21 +5434,6 @@ S_{G,3}(a)
   \overline P_G(a)^3
 }
 \quad\bigl(\because\ \text{分配律}\bigr).\]
-\[\eta_{\mathbb N,\mathbb Q}(3)-\eta_{\mathbb N,\mathbb Q}(1)
-=\eta_{\mathbb N,\mathbb Q}(2)
-\quad\bigl(\because\ 3-1=2\text{ in }\mathbb Q\bigr).\]
-\[\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
-  \eta_{\mathbb N,\mathbb Q}(3)
-\right)
--\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
-  \eta_{\mathbb N,\mathbb Q}(1)
-\right)
-=\iota_{\mathbb Q,\overline{\mathbb Q}}\!\left(
-  \eta_{\mathbb N,\mathbb Q}(2)
-\right)
-\quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は差を保つ}\bigr).\]
-\[q_3-q_1=q_2
-\quad\bigl(\because\ q_1,q_2,q_3\text{ の定義}\bigr).\]
 \[q_2S_{G,3}(a)
 =
 \frac{
