@@ -5892,6 +5892,8 @@ S_{G,3}(a)
   \overline P_G(a)^3
 }
 \quad\bigl(\because\ \text{商の積の法則}\bigr).`),
+      displayMath(String.raw`\overline P_G(a)^2\ne0
+\quad\bigl(\because\ \overline P_G(a)\ne0\text{ と }\overline{\mathbb Q}\text{ の零積律}\bigr).`),
       displayMath(String.raw`q_2S_{G,3}(a)
 =
 \frac{\overline P_G(a)^2C_G(a)}{\overline P_G(a)^3}
@@ -5901,7 +5903,7 @@ S_{G,3}(a)
 }{
   \overline P_G(a)^3
 }
-\quad\bigl(\because\ \text{第一項の分母と分子へ }\overline P_G(a)^2\ne0\text{ を掛ける}\bigr).`),
+\quad\bigl(\because\ \text{直前の非零な }\overline P_G(a)^2\text{ を第一項の分母と分子へ掛ける}\bigr).`),
       displayMath(String.raw`q_2S_{G,3}(a)
 =
 \frac{

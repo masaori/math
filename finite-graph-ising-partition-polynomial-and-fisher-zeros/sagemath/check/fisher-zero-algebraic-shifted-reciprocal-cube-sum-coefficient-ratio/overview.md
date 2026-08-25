@@ -67,6 +67,7 @@
 | `check_substitute_lower_reciprocal_sums.sage` | 既存の一次・二次係数表示の代入 | PASS | 既存二定理の代入後も一致 |
 | `check_expand_cubed_quotient.sage` | 商の三乗 | PASS | 商の三乗と三乗どうしの商が一致 |
 | `check_multiply_reciprocal_factors.sage` | 二つの商の積 | PASS | 分子の積と三次分母を持つ商に一致 |
+| `check_evaluation_square_nonzero.sage` | 非零評価値の二乗の非零性 | PASS | `Pbar_G(a)\ne0` から `Pbar_G(a)^2\ne0` を厳密確認 |
 | `check_raise_first_denominator.sage` | 第一項の分母引き上げ | PASS | 非零な分母の二乗を分子・分母へ掛けても一致 |
 | `check_common_denominator.sage` | 同じ分母を持つ三項の結合 | PASS | 三つの商と結合後の一つの商が一致 |
 | `check_rational_embedding_one_identity.sage` | 自然数から有理数への標準単射の乗法単位元保存 | PASS | `eta(1)=1_Q` を厳密確認 |
