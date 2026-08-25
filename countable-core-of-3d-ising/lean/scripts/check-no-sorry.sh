@@ -555,6 +555,13 @@ targets=(
   Ising3DCut.LimitQuantity.powerMinusOne_witness_succ
   Ising3DCut.LimitQuantity.exists_witness_powerMinusOne_dvd_multiple_exponent
   Ising3DCut.LimitQuantity.powerMinusOne_dvd_multiple_exponent
+  Ising3DCut.NecSuf.powerMinusOne_witness_zero
+  Ising3DCut.NecSuf.powerMinusOne_exponent_succ
+  Ising3DCut.NecSuf.powerMinusOne_succ_decompose
+  Ising3DCut.NecSuf.powerMinusOne_witness_succ
+  Ising3DCut.NecSuf.exists_witness_powerMinusOne_dvd_multiple_exponent
+  Ising3DCut.NecSuf.powerMinusOne_dvd_multiple_exponent
+  Ising3DCut.LimitQuantity.powerMinusOne_dvd_multiple_exponent_viaNecSuf
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
