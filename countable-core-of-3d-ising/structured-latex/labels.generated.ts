@@ -69,6 +69,7 @@ export const ALL_LABELS = [
   "claim_pointwise_root_sequence_equality_implies_tail_agreement",
   "claim_power_identity_iff_rational_power_form",
   "claim_power_minus_one_divides_multiple_exponent",
+  "claim_power_minus_one_gcd_equals_power_of_exponent_gcd",
   "claim_power_minus_one_gcd_exponent_difference_step",
   "claim_power_minus_one_gcd_reaches_exponent_gcd",
   "claim_rational_power_base_congruences",

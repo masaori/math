@@ -10399,4 +10399,85 @@ c^{\,m}-1
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_power_minus_one_gcd_equals_power_of_exponent_gcd",
+    kind: "claim",
+    title: {
+      text: "冪から一を引いた二つの数の最大公約数は指数の最大公約数の冪から一を引いた数である",
+    },
+    labels: ["claim_power_minus_one_gcd_equals_power_of_exponent_gcd"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`c`),
+        " と正の自然数 ",
+        math(String.raw`m`),
+        "、",
+        math(String.raw`n`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\gcd\bigl(c^{\,m}-1,\ c^{\,n}-1\bigr)=c^{\,\gcd(m,n)}-1`,
+      ),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`\gcd(m,n)`),
+        " は正の自然数であり、両辺はいずれも自然数である。主張は ",
+        math(String.raw`\mathbb Z`),
+        " の等式だけからなり、箱の大きさの極限も無限和も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、自然数 ",
+        math(String.raw`a`),
+        " について ",
+        math(String.raw`\gcd(a,a)=a`),
+        " を示す。",
+        math(String.raw`a`),
+        " は ",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`a`),
+        " の公約数なので ",
+        math(String.raw`a\mid\gcd(a,a)`),
+        " であり、逆に最大公約数は第一引数を割るので ",
+        math(String.raw`\gcd(a,a)\mid a`),
+        " である。互いに割り合う自然数は等しいので ",
+        math(String.raw`\gcd(a,a)=a`),
+        " を得る。",
+      ]),
+      paragraph([
+        math(String.raw`g:=\gcd(m,n)`),
+        " と置く。",
+        math(String.raw`m`),
+        " と ",
+        math(String.raw`n`),
+        " はいずれも正の自然数なので ",
+        math(String.raw`g`),
+        " も正の自然数であり、",
+        math(String.raw`g\mid m`),
+        " かつ ",
+        math(String.raw`g\mid n`),
+        " である。したがって ",
+        math(String.raw`c^{\,g}-1`),
+        " は自然数であり、主張の右辺は意味をもつ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gcd\bigl(c^{\,m}-1,\ c^{\,n}-1\bigr)
+&=\gcd\bigl(c^{\,g}-1,\ c^{\,g}-1\bigr)
+&&(\because\ \blkref{claim_power_minus_one_gcd_reaches_exponent_gcd})\\
+&=c^{\,g}-1
+&&(\because\ \text{上で示した }\gcd(a,a)=a\text{ に }a=c^{\,g}-1\text{ を適用})\\
+&=c^{\,\gcd(m,n)}-1
+&&(\because\ g=\gcd(m,n)\text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "以上で主張の等式を得る。",
+      ]),
+    ],
+  },
 ]);
