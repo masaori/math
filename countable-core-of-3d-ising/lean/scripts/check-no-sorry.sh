@@ -546,6 +546,7 @@ targets=(
   Ising3DCut.LimitQuantity.adjacent_vertex_number_gaps_are_coprime_viaNecSuf
   Ising3DCut.Prediction.first_eq_endpoint_of_mem_selectedEndpointIncidences
   Ising3DCut.Prediction.fiber_subset_endpoint_pair_of_selectedEndpointIncidences
+  Ising3DCut.Prediction.endpoint_pair_subset_fiber_of_selectedEndpointIncidences
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

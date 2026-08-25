@@ -773,4 +773,41 @@ theorem fiber_subset_endpoint_pair_of_selectedEndpointIncidences {V Edge : Type*
   · exact Finset.mem_insert.mpr (Or.inl (by rw [h]))
   · exact Finset.mem_insert.mpr (Or.inr (Finset.mem_singleton.mpr (by rw [h])))
 
+/-- 選ばれた元辺の両端点が箱の頂点であり、その辺が両端点の接続辺として登録されているなら、
+両端点との二つの組はいずれも元辺への射影の繊維に属する。 -/
+theorem endpoint_pair_subset_fiber_of_selectedEndpointIncidences {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (e : Edge)
+    (he : e ∈ edges)
+    (hvertex₀ : endpoint₀ e ∈ vertices) (hvertex₁ : endpoint₁ e ∈ vertices)
+    (hincident₀ : e ∈ incidentEdges (endpoint₀ e))
+    (hincident₁ : e ∈ incidentEdges (endpoint₁ e))
+    (hselected : externalEdge endpoint₀ endpoint₁ e ∈ matching) :
+    ({⟨endpoint₀ e, e⟩, ⟨endpoint₁ e, e⟩} : Finset (Σ _ : V, Edge)) ⊆
+      (selectedEndpointIncidences vertices edges incidentEdges endpoint₀ endpoint₁
+        matching).filter (fun t => t.2 = e) := by
+  intro t ht
+  rw [Finset.mem_filter]
+  constructor
+  · rw [mem_selectedEndpointIncidences_iff]
+    rcases Finset.mem_insert.mp ht with h₀ | h₁
+    · subst t
+      refine ⟨hvertex₀, ?_⟩
+      exact (mem_selectedIncidentEdgesAt_iff edges incidentEdges endpoint₀ endpoint₁
+        matching (endpoint₀ e) e).mpr ⟨hincident₀, he, hselected⟩
+    · have h₁' : t = ⟨endpoint₁ e, e⟩ := Finset.mem_singleton.mp h₁
+      subst t
+      refine ⟨hvertex₁, ?_⟩
+      exact (mem_selectedIncidentEdgesAt_iff edges incidentEdges endpoint₀ endpoint₁
+        matching (endpoint₁ e) e).mpr ⟨hincident₁, he, hselected⟩
+  · rcases Finset.mem_insert.mp ht with h₀ | h₁
+    · subst t
+      rfl
+    · have h₁' : t = ⟨endpoint₁ e, e⟩ := Finset.mem_singleton.mp h₁
+      subst t
+      rfl
+
 end Ising3DCut.Prediction
