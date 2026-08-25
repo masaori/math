@@ -47,6 +47,7 @@ import blocks_iterate_monoid_tail_cycle_decomposition from './content/iterate-mo
 import blocks_iterate_monoid_tail_equivalence from './content/iterate-monoid-tail-equivalence.ts'
 import blocks_iterate_monoid from './content/iterate-monoid.ts'
 import blocks_local_rule_representation from './content/local-rule-representation.ts'
+import blocks_locality_restricts_cycle_type from './content/locality-restricts-cycle-type.ts'
 import blocks_minimal_preperiod_period from './content/minimal-preperiod-period.ts'
 import blocks_periodic_point_count from './content/periodic-point-count.ts'
 import blocks_recursive_preimage_tree_code from './content/recursive-preimage-tree-code.ts'
@@ -89,6 +90,7 @@ export type AllBlocks = [
   ...typeof blocks_iterate_monoid_tail_equivalence,
   ...typeof blocks_iterate_monoid,
   ...typeof blocks_local_rule_representation,
+  ...typeof blocks_locality_restricts_cycle_type,
   ...typeof blocks_minimal_preperiod_period,
   ...typeof blocks_periodic_point_count,
   ...typeof blocks_recursive_preimage_tree_code,
