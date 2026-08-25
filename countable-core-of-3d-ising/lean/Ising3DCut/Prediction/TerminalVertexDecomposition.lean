@@ -935,4 +935,27 @@ theorem sum_card_uncovered_eq_two_mul_card_selectedOriginalEdges_of_perfectMatch
         incidentEdges endpoint₀ endpoint₁ matching hIncident hEndpoints hRegistered hDistinct
 
 
+/-- 上の個数等式の直接の帰結。完全マッチングで覆われずに残る端子の総数は偶数である。
+偶部分グラフの条件は各頂点での次数の偶奇で述べられるので、その総和側の偶奇をまず固定する。 -/
+theorem even_sum_card_uncovered_of_perfectMatching
+    {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (hEndpoints : ∀ e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching,
+      endpoint₀ e ∈ vertices ∧ endpoint₁ e ∈ vertices)
+    (hRegistered : ∀ e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching,
+      e ∈ incidentEdges (endpoint₀ e) ∧ e ∈ incidentEdges (endpoint₁ e))
+    (hDistinct : ∀ e ∈ selectedOriginalEdges edges endpoint₀ endpoint₁ matching,
+      endpoint₀ e ≠ endpoint₁ e) :
+    Even (∑ v ∈ vertices, (matchingUncoveredTerminalsAt incidentEdges v matching).card) := by
+  rw [sum_card_uncovered_eq_two_mul_card_selectedOriginalEdges_of_perfectMatching vertices edges
+    incidentEdges endpoint₀ endpoint₁ matching hMatching hIncident hEndpoints hRegistered
+    hDistinct]
+  exact even_two_mul _
+
 end Ising3DCut.Prediction
