@@ -12,6 +12,8 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 |---|---|---|---|
+| `check_rational_coefficient_expansion.sage` | 整数係数表示を有理数係数表示へ移す標準単射 | PASS | 全例で係数ごとの像が一致 |
+| `check_algebraic_coefficient_expansion.sage` | 有理数係数表示を代数的数係数表示へ移す標準単射 | PASS | 全例で係数ごとの像が一致 |
 | `check_coefficient_formal_derivatives.sage` | 係数表示の前三回の形式微分 | PASS | 三つの多項式恒等式が一致 |
 | `check_qbar_embedding_finite_product.sage` | 有理数から代数的数への標準単射の有限積保存 | PASS | 全例で四因子積が一致 |
 | `check_qq_embedding_finite_product.sage` | 自然数から有理数への標準単射の有限積保存 | PASS | 全例で四因子積が一致 |

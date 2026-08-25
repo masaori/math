@@ -5320,10 +5320,28 @@ T_{G,3}(a)
         math(String.raw`D(cx^m)=c\,\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(m))x^{m-1}`),
         " と定め、これらの規則を",
         math(String.raw`\overline{\mathbb Q}`),
-        " 上線形に拡張する。",
+        " 上線形に拡張する。整数係数を標準単射",
+        math(String.raw`\iota_{\mathbb Z[x],\mathbb Q[x]}:\mathbb Z[x]\hookrightarrow\mathbb Q[x]`),
+        " で移した多項式を",
+        math(String.raw`P_G^{\mathbb Q}(x):=\iota_{\mathbb Z[x],\mathbb Q[x]}(Z_G(x))\in\mathbb Q[x]`),
+        " と書く。",
         ref("claim_partition_polynomial_coefficient_expansion"),
-        " の係数表示を二つの標準単射で移すと、",
+        " の係数表示を自然数から有理数への標準単射で移すと、",
       ]),
+      displayMath(String.raw`P_G^{\mathbb Q}(x)
+=
+\sum_{m=0}^{|E|}
+\eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)x^m
+\quad\bigl(\because\ \iota_{\mathbb Z[x],\mathbb Q[x]}\text{ で係数を移す}\bigr).`),
+      paragraph([
+        "有理数係数多項式から代数的数係数多項式への標準単射を",
+        math(String.raw`\iota_{\mathbb Q[x],\overline{\mathbb Q}[x]}:\mathbb Q[x]\hookrightarrow\overline{\mathbb Q}[x]`),
+        " と書く。標準単射の合成により、",
+      ]),
+      displayMath(String.raw`\overline P_G(x)
+=\iota_{\mathbb Q[x],\overline{\mathbb Q}[x]}\!\left(P_G^{\mathbb Q}(x)\right)
+\quad\bigl(\because\ \iota_{\mathbb Z[x],\overline{\mathbb Q}[x]}
+=\iota_{\mathbb Q[x],\overline{\mathbb Q}[x]}\circ\iota_{\mathbb Z[x],\mathbb Q[x]}\bigr).`),
       displayMath(String.raw`\overline P_G(x)
 =
 \sum_{m=0}^{|E|}
@@ -5331,7 +5349,7 @@ T_{G,3}(a)
   \eta_{\mathbb N,\mathbb Q}\!\left(\Omega_G(m)\right)
 \right)
 x^m
-\quad\bigl(\because\ \text{二つの標準単射で係数を移す}\bigr).`),
+\quad\bigl(\because\ \iota_{\mathbb Q[x],\overline{\mathbb Q}[x]}\text{ を係数ごとに適用する}\bigr).`),
       paragraph(["直前の多項式恒等式を一回形式微分すると、"]),
       displayMath(String.raw`D\overline P_G(x)
 =
