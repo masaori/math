@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-25 17:07（並行）: `secondProjection_bijOn_uncovered_selected_of_perfectMatching` を追加し、覆われずに残る端子と選ばれた接続辺の所属対応の両方向から、第二成分写像の全単射を完全マッチングの仮定だけで導いた。従来の補助定理の強すぎる全称同値は、定義域上の順方向と構成した逆像についての逆方向へ修正した。次は全単射から両有限集合の濃度等式を得る。
 - 2026-08-25 17:03（本流）: 「点数乗表示が成り立つ正の有理点の既約分母は 2 を割る」の必要十分版 `NecSuf.denominator_one_and_outer_denominator_divides_constant` と具体導出 `rational_power_point_denominator_divides_two_viaNecSuf` を追加し、四層を閉じた。有限箱・有理数・素数 2 を落とすと、分母の素因子が指定した自然数に限られること、その自然数自身は分母を割らないこと、外側の分母が定数と分母冪の積を割ることだけが残る。次は「既約分母が 2 を割る形から正の有理点一以外を排除できるか判定する」の記述。直前の具体版のレビュー修正なし。
 
 - 2026-08-25 16:38（本流）: 「点数乗表示が成り立つ正の有理点の既約分母は 2 を割る」の Lean 具体版を閉じた（`lean/Ising3DCut/LimitQuantity/RationalPowerPointDenominatorDividesTwo.lean`）。奇素数が底の既約分母を割らないことから既約分母を割る素数が 2 に限られる段、そこへ 2 の非整除を合わせて既約分母が 1 になる段、法 $b$ の整除 $b\mid2v^{\#V_L}$ へ $v=1$ を入れて $b\mid2$ を得る段を、人手証明の四段と 1 対 1 に並べた（`rational_power_point_denominator_divides_two`）。先行する三主張（奇素数の排除・指数 1 の不可能性・指数 2 以上の不可能性）は本文と同じく結論を仮定として受け取る形にした。`lake build` 通過、未証明依存検査 463 件、`npm run check` 162 ブロック・372 参照すべて解決、linkage 77 件。次は同主張の Lean 必要十分版。レビュー修正なし。まとめ締切のため並行ストリームは見送った。

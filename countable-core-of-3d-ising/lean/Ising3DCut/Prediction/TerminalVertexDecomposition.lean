@@ -501,15 +501,18 @@ theorem secondProjection_bijOn_uncovered_selected {V Edge : Type*}
     (edges : Finset Edge) (incidentEdges : V → Finset Edge)
     (endpoint₀ endpoint₁ : Edge → V) (matching : Finset (Finset (Σ _ : V, Edge)))
     (v : V)
-    (hCorrespondence : ∀ t : Σ _ : V, Edge,
-      t ∈ matchingUncoveredTerminalsAt incidentEdges v matching ↔
-        t.2 ∈ selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v) :
+    (hForward : ∀ t : Σ _ : V, Edge,
+      t ∈ matchingUncoveredTerminalsAt incidentEdges v matching →
+        t.2 ∈ selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v)
+    (hReverse : ∀ e : Edge,
+      e ∈ selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v →
+        (⟨v, e⟩ : Σ _ : V, Edge) ∈ matchingUncoveredTerminalsAt incidentEdges v matching) :
     Set.BijOn (fun t : Σ _ : V, Edge => t.2)
       (matchingUncoveredTerminalsAt incidentEdges v matching : Set (Σ _ : V, Edge))
       (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v : Set Edge) := by
   refine ⟨?_, ?_, ?_⟩
   · intro t ht
-    exact (hCorrespondence t).mp ht
+    exact hForward t ht
   · intro t ht u hu htu
     apply Sigma.ext
     · exact ((mem_matchingUncoveredTerminalsAt_iff incidentEdges v matching t).mp ht).1.1.trans
@@ -517,7 +520,7 @@ theorem secondProjection_bijOn_uncovered_selected {V Edge : Type*}
     · simpa using htu
   · intro e he
     refine ⟨⟨v, e⟩, ?_, rfl⟩
-    exact (hCorrespondence ⟨v, e⟩).mpr he
+    exact hReverse e he
 
 /-- 覆われずに残る端子は、その第二成分が選ばれた接続辺であることを導く。
 完全マッチングがその端子を覆う辺は、`v` の city の内部辺ではありえないので外部辺であり、
@@ -610,5 +613,36 @@ theorem selected_incident_edge_terminal_uncovered {V Edge : Type*}
     rw [hEq] at hcard
     simp [externalEdge, e₀, e₁] at hcard
   exact hMatching.not_mem_of_mem_of_ne _ _ _ hsm hExt hne hv hts hMem
+
+/-- 完全マッチングから所属対応の両方向を導き、第二成分写像の全単射を得る。 -/
+theorem secondProjection_bijOn_uncovered_selected_of_perfectMatching {V Edge : Type*}
+    [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (v : V) (hv : v ∈ vertices) :
+    Set.BijOn (fun t : Σ _ : V, Edge => t.2)
+      (matchingUncoveredTerminalsAt incidentEdges v matching : Set (Σ _ : V, Edge))
+      (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v : Set Edge) := by
+  apply secondProjection_bijOn_uncovered_selected
+  · intro t ht
+    have htVertex : t ∈ terminalVertices vertices incidentEdges := by
+      obtain ⟨⟨htFirst, htInc⟩, _⟩ :=
+        (mem_matchingUncoveredTerminalsAt_iff incidentEdges v matching t).mp ht
+      exact (mem_terminalVertices_iff vertices incidentEdges t).mpr
+        ⟨by simpa [htFirst] using hv, htInc⟩
+    exact uncovered_terminal_second_mem_selected vertices edges incidentEdges endpoint₀ endpoint₁
+      matching hMatching v t ht htVertex
+  · intro e he
+    have heInc :=
+      ((mem_selectedIncidentEdgesAt_iff edges incidentEdges endpoint₀ endpoint₁ matching v e).mp he).1
+    have heVertex : (⟨v, e⟩ : Σ _ : V, Edge) ∈ terminalVertices vertices incidentEdges :=
+      (mem_terminalVertices_iff vertices incidentEdges ⟨v, e⟩).mpr ⟨hv, heInc⟩
+    exact selected_incident_edge_terminal_uncovered vertices edges incidentEdges endpoint₀ endpoint₁
+      matching hMatching hIncident v e he heVertex
 
 end Ising3DCut.Prediction
