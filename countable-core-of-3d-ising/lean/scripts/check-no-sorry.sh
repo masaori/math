@@ -54,6 +54,10 @@ fi
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 #    具体版・必要十分版・両者をつなぐ導出の 3 本を、いずれも登録する。
 targets=(
+  Ising3DCut.LimitQuantity.rational_power_point_denominator_divides_two
+  Ising3DCut.NecSuf.denominator_eq_one_of_prime_divisors_restricted
+  Ising3DCut.NecSuf.denominator_one_and_outer_denominator_divides_constant
+  Ising3DCut.LimitQuantity.rational_power_point_denominator_divides_two_viaNecSuf
   Ising3DCut.LimitQuantity.tendsto_rootSeq_isingValueSeq_one_viaNecSuf
   Ising3DCut.NecSuf.eventually_constant_sequence_tendsto
   Ising3DCut.LimitQuantity.not_sufficient_on_ising_realizable_family_iff_exists_witness
