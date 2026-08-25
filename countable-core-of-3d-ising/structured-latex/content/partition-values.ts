@@ -10045,4 +10045,93 @@ g_{L+1}-g_L
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_power_minus_one_divides_multiple_exponent_power_minus_one",
+    kind: "claim",
+    title: {
+      text: "底の冪から 1 を引いた数は、指数を自然数倍した冪から 1 を引いた数を割る",
+    },
+    labels: ["claim_power_minus_one_divides_multiple_exponent"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`c`),
+        "、正の自然数 ",
+        math(String.raw`n`),
+        "、自然数 ",
+        math(String.raw`k`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\bigl(c^{\,n}-1\bigr)\ \bigm|\ \bigl(c^{\,nk}-1\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`c^{\,n}-1`),
+        " と ",
+        math(String.raw`c^{\,nk}-1`),
+        " はともに自然数であり、主張は ",
+        math(String.raw`\mathbb Z`),
+        " の整除性だけからなる。有限個の積と有限和しか使わないので、箱の大きさの極限も無限和も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "自然数 ",
+        math(String.raw`k`),
+        " についての帰納法で示す。示す命題を ",
+        math(String.raw`P(k)`),
+        "、すなわち「ある整数 ",
+        math(String.raw`t_k`),
+        " が存在して ",
+        math(String.raw`c^{\,nk}-1=\bigl(c^{\,n}-1\bigr)t_k`),
+        " が成り立つ」とする。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " のとき ",
+        math(String.raw`c^{\,n\cdot0}-1=c^{\,0}-1=1-1=0=\bigl(c^{\,n}-1\bigr)\cdot0`),
+        " なので ",
+        math(String.raw`t_0=0`),
+        " と取れて ",
+        math(String.raw`P(0)`),
+        " が成り立つ。",
+      ]),
+      paragraph([
+        math(String.raw`P(k)`),
+        " を仮定し、その整数を ",
+        math(String.raw`t_k`),
+        " とする。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c^{\,n(k+1)}-1
+&=c^{\,nk+n}-1
+&&(\because\ n(k+1)=nk+n)\\
+&=c^{\,nk}\,c^{\,n}-1
+&&(\because\ \text{同じ底の冪の積})\\
+&=c^{\,nk}\,c^{\,n}-c^{\,nk}+c^{\,nk}-1
+&&(\because\ -c^{\,nk}+c^{\,nk}=0)\\
+&=c^{\,nk}\bigl(c^{\,n}-1\bigr)+\bigl(c^{\,nk}-1\bigr)
+&&(\because\ \text{分配則})\\
+&=c^{\,nk}\bigl(c^{\,n}-1\bigr)+\bigl(c^{\,n}-1\bigr)t_k
+&&(\because\ \text{帰納法の仮定 } P(k))\\
+&=\bigl(c^{\,n}-1\bigr)\bigl(c^{\,nk}+t_k\bigr)
+&&(\because\ \text{分配則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので ",
+        math(String.raw`t_{k+1}:=c^{\,nk}+t_k`),
+        " と取れて ",
+        math(String.raw`P(k+1)`),
+        " が成り立つ。よってすべての自然数 ",
+        math(String.raw`k`),
+        " について ",
+        math(String.raw`P(k)`),
+        " が成り立ち、整除の定義により主張を得る。",
+      ]),
+    ],
+  },
 ]);
