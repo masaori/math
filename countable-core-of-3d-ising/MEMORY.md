@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 06:34（本流）: `lean/Ising3DCut/LimitQuantity/PowerMinusOneGcdEqualsPowerOfExponentGcd.lean` を追加し、`claim_power_minus_one_gcd_equals_power_of_exponent_gcd` の Lean 具体版を閉じた。準備の `gcd_self_eq_of_dvd_antisymm`（$\gcd(a,a)=a$ を両方向の整除で）、それを非負整数へ移す `int_gcd_self_eq_of_nonneg`、主張の三段を並べた `powerMinusOne_gcd_equals_power_of_exponent_gcd` を人手証明と同じ順に置いた。`lake build` 成功、未証明依存検査 526 件、`npm run check` 169 ブロック・376 参照すべて解決、linkage 84 件。次は同主張の Lean 必要十分版。着手前レビュー修正なし。
 - 2026-08-26 06:05（並行）: `sum_card_uncovered_eq_two_mul_card_selectedOriginalEdges_of_perfectMatching` を追加した。完全マッチングから得た頂点ごとの覆われない端子数の和を、選ばれた端点・元辺の組の個数へ移し、各元辺の二つの端点による個数二の定理と合成して、選ばれた元辺数の二倍へ接続した。対象ビルド成功、未証明依存検査 526 件。次はこの偶数性を偶部分グラフの条件へ接続する。
 - 2026-08-26 06:02（本流）: `claim_power_minus_one_gcd_equals_power_of_exponent_gcd` の SageMath 層を閉じた。`sagemath/check/power-minus-one-gcd-equals-power-of-exponent-gcd/` で、同じ自然数どうしの最大公約数の相互整除、指数の最大公約数で定まる到達形の書き換え、最終等式までの三段を `ZZ` の三検査へ分けて全 PASS。次は同主張の Lean 具体版。着手前レビュー修正なし。
 - 2026-08-26 05:31（本流）: `claim_power_minus_one_gcd_equals_power_of_exponent_gcd` を記述した。$\gcd(a,a)=a$ を両方向の整除で準備し、直前に閉じた到達形 $\gcd(c^m-1,c^n-1)=\gcd(c^{g}-1,c^{g}-1)$ へ $a=c^{g}-1$ を当てて、$\gcd(c^m-1,c^n-1)=c^{\gcd(m,n)}-1$ を得た。`npm run check` はブロック 169 件・参照 376 件すべて解決、PDF 58 ページ。次はこの記述の SageMath 検証。着手前レビュー修正なし。
