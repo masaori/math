@@ -5683,12 +5683,17 @@ S_{G,3}(a)
 +U_{G,2,1}(a)
 +T_{G,3}(a)
 \quad\bigl(\because\ V_{G,1,2}(a)=U_{G,2,1}(a)\text{ を代入する}\bigr).`),
+      displayMath(String.raw`U_{G,2,1}(a)
++U_{G,2,1}(a)
++U_{G,2,1}(a)
+=q_3U_{G,2,1}(a)
+\quad\bigl(\because\ \text{標準単射像 }q_3\text{ は三重加法の係数である}\bigr).`),
       displayMath(String.raw`\mathcal R_G(a)^3
 =
 S_{G,3}(a)
 +q_3U_{G,2,1}(a)
 +T_{G,3}(a)
-\quad\bigl(\because\ q_3\text{ の定義と有限加法}\bigr).`),
+\quad\bigl(\because\ \text{直前の等式を代入する}\bigr).`),
       displayMath(String.raw`T_{G,3}(a)
 =
 \mathcal R_G(a)^3-S_{G,3}(a)-q_3U_{G,2,1}(a)
