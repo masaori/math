@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 07:36: 本流「二つの箱から得た整除を一つへまとめて箱の大きさに依存しない形へ移す」を記述した（`claim_numerator_divides_twice_base_minus_one`）。隣接する二つの箱の頂点数の差が互いに素であることと、冪から一を引いた数の最大公約数が指数の最大公約数で決まることを合わせ、箱の大きさを含まない整除 $a\mid 2(c-1)$ を得た。次はこの記述の SageMath 検証。
 - 2026-08-26 07:03（本流）: `NecSuf.combine_eq_normalize_of_reaches_self` と具体導出 `powerMinusOne_gcd_equals_power_of_exponent_gcd_viaNecSuf` を追加し、到達形を指数の最大公約数乗から一を引いた数へ書き換える主張の四層を閉じた。具体的な冪差・整数・最大公約数を落とすと、二項演算が同じ値へ到達する等式と同じ二値を一値へ正規化する等式だけが残る。`lake build` 成功、未証明依存検査 529 件。次は二つの箱から得た整除を一つへまとめる記述。着手前レビュー修正なし。
 - 2026-08-26 06:35（並行）: `even_sum_card_uncovered_of_perfectMatching` を追加した。直前に閉じた「覆われずに残る端子の総数は選ばれた元辺数の二倍」から、その総数が偶数であることを直接の帰結として得た。偶部分グラフの条件は各頂点での次数の偶奇で述べられるので、まず総和側の偶奇を固定した。対象ビルド成功、未証明依存検査 527 件。次は各頂点での偶奇へ降ろす。
 - 2026-08-26 06:34（本流）: `lean/Ising3DCut/LimitQuantity/PowerMinusOneGcdEqualsPowerOfExponentGcd.lean` を追加し、`claim_power_minus_one_gcd_equals_power_of_exponent_gcd` の Lean 具体版を閉じた。準備の `gcd_self_eq_of_dvd_antisymm`（$\gcd(a,a)=a$ を両方向の整除で）、それを非負整数へ移す `int_gcd_self_eq_of_nonneg`、主張の三段を並べた `powerMinusOne_gcd_equals_power_of_exponent_gcd` を人手証明と同じ順に置いた。`lake build` 成功、未証明依存検査 526 件、`npm run check` 169 ブロック・376 参照すべて解決、linkage 84 件。次は同主張の Lean 必要十分版。着手前レビュー修正なし。

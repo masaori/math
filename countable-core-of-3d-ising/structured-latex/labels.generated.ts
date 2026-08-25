@@ -51,6 +51,7 @@ export const ALL_LABELS = [
   "claim_limit_quantity_depends_only_on_finite_box_sequence",
   "claim_magnitude_truncated_prime_exponents_are_not_sufficient_for_limit_quantity",
   "claim_magnitude_truncation_has_a_value_collision",
+  "claim_numerator_divides_twice_base_minus_one",
   "claim_odd_flip_involution",
   "claim_odd_flip_reverses_edges",
   "claim_one_breakage_multiplicity_is_zero",
