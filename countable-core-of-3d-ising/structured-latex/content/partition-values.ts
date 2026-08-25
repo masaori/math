@@ -9664,20 +9664,26 @@ v_2(P_M)+\#V_M\,e_v
         "）。",
         math(String.raw`L:=\max(L_0,2)`),
         " と置く。",
+        ref("claim_rational_power_base_congruences"),
+        " より整除 ",
+        math(String.raw`b\mid\Omega_L(0)\,v^{\#V_L}`),
+        " が成り立つ。この右辺を書き換える。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-b
-&\bigm| \Omega_L(0)\,v^{\#V_L}
-&&(\because\ \blkref{claim_rational_power_base_congruences})\\
-&\bigm| \Omega_L(0)\cdot1^{\#V_L}
-&&(\because\ v=1)\\
-&\bigm| 2
-&&(\because\ \blkref{claim_zero_breakage_multiplicity_is_two} \text{ と } 1^{\#V_L}=1)
+\Omega_L(0)\,v^{\#V_L}
+&=\Omega_L(0)\cdot1^{\#V_L}
+&&(\because\ \text{第三段の } v=1)\\
+&=\Omega_L(0)
+&&(\because\ 1^{\#V_L}=1)\\
+&=2
+&&(\because\ \blkref{claim_zero_breakage_multiplicity_is_two})
 \end{aligned}`,
       ),
       paragraph([
-        "であり、",
+        "であるから、整除される数は ",
+        math(String.raw`2`),
+        " に等しく、",
         math(String.raw`b\mid2`),
         " が従う。",
       ]),
