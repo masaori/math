@@ -73,6 +73,8 @@ targets=(
   Ising3DCut.LimitQuantity.partitionValueAtTwoNat_mod_four
   Ising3DCut.LimitQuantity.positive_power_ne_two_mod_four
   Ising3DCut.LimitQuantity.eventual_power_form_at_two_is_impossible
+  Ising3DCut.LimitQuantity.eq_one_of_eventual_power_form
+  Ising3DCut.LimitQuantity.eventual_power_form_at_one
   Ising3DCut.LimitQuantity.polyOfMultiplicity_eval_two_eq_partitionValueAtTwoNat
   Ising3DCut.LimitQuantity.two_pow_edge_mul_partitionValueAtOneHalf_eq_partitionValueAtTwo
   Ising3DCut.LimitQuantity.two_le_card_edge
