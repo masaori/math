@@ -5,6 +5,20 @@
 > [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
 > [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
+## 自動ループ tick: 点ごとの和と合成の分配性の Lean 具体版（2026-08-26 17:12）
+
+前 tick の SageMath 検算 5 本を再実行して構造化記述の各段と突き合わせ、全て PASS した。
+修正を要する不一致は見つからなかった。
+
+`lean/CellularAutomata/NeighborhoodAssignmentUnionDistributivity.lean` に Lean 具体版を追加した。
+有限舞台上の空近傍割り当てと点ごとの和を定義し、和の可換・結合・冪等・単位律、包含順序の
+`N \preccurlyeq M \leftrightarrow N \sqcup M=M`、合成近傍の左右分配、空近傍の両側吸収を
+人手証明と同じ対象・仮定・順序で形式化した。点ごとの和の全演算表と、その表への任意の演算結果の
+所属も形式化した。入口 import と sorry 検査へ新定理を登録した。有限型・有限部分集合・写像だけで閉じ、
+$\mathbb R/\mathbb C$ 脱出はない。
+
+対象は `Lean 具体版まで`。次 tick は全層レビュー後、Lean 必要十分版と具体版からの導出を作る。
+
 ## 自動ループ tick: 点ごとの和と合成の分配性の SageMath 検算（2026-08-26 16:12）
 
 前 tick の構造化記述を、引用先の定義（合成近傍、点ごとの包含順序、合成モノイドと元数の有限決定）から
