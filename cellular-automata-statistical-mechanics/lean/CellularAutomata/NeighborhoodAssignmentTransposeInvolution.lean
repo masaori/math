@@ -21,6 +21,7 @@ structured-latex/content/neighborhood-assignment-transpose-involution.ts。
 有限舞台、有限近傍割り当て、有限集合の所属判定だけを使う。ℝ / ℂ は現れない。
 -/
 import CellularAutomata.NeighborhoodAssignmentIntersectionNondistributivity
+import CellularAutomata.NecSuf.NeighborhoodAssignmentTransposeInvolution
 
 namespace CellularAutomata.NeighborhoodAssignmentTransposeInvolution
 
@@ -106,5 +107,72 @@ theorem transpose_bijective :
     simpa [transpose_transpose] using hT
   · intro N
     exact ⟨transpose N, transpose_transpose N⟩
+
+/-! ### 必要十分版からの導出
+
+以下は、上の具体版の定義・定理が必要十分版
+（`NecSuf.NeighborhoodAssignmentTransposeInvolution`）を
+始域と終域を同じ有限舞台に取ることで得られることを示す。 -/
+
+namespace Derivation
+
+open CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid
+open CellularAutomata.NecSuf.NeighborhoodAssignmentUnionDistributivity
+open CellularAutomata.NecSuf.NeighborhoodAssignmentIntersectionNondistributivity
+open CellularAutomata.NecSuf.NeighborhoodAssignmentTransposeInvolution
+
+/-- 具体版の転置は、必要十分版の型をまたぐ転置を同じ型に取ったものである。 -/
+theorem transpose_eq_necSuf (N : NeighborhoodAssignment V) :
+    transpose N = hetTranspose N := rfl
+
+/-- 具体版の所属同値は、必要十分版の特殊化である。 -/
+theorem mem_transpose_of_necSuf (N : NeighborhoodAssignment V) (v w : V) :
+    v ∈ transpose N w ↔ w ∈ N v :=
+  mem_hetTranspose N v w
+
+/-- 具体版の対合性は、必要十分版の特殊化である。 -/
+theorem transpose_transpose_of_necSuf (N : NeighborhoodAssignment V) :
+    transpose (transpose N) = N :=
+  hetTranspose_hetTranspose N
+
+/-- 具体版の合成順序の反転は、必要十分版の三つの型を同じ舞台に取ったものである。 -/
+theorem transpose_composedNeighborhood_of_necSuf (N M : NeighborhoodAssignment V) :
+    transpose (composedNeighborhood N M) =
+      composedNeighborhood (transpose M) (transpose N) :=
+  hetTranspose_hetComp N M
+
+/-- 具体版の点ごとの和の保存は、必要十分版の特殊化である。 -/
+theorem transpose_pointwiseUnion_of_necSuf (N M : NeighborhoodAssignment V) :
+    transpose (pointwiseUnion N M) = pointwiseUnion (transpose N) (transpose M) :=
+  hetTranspose_hetUnion N M
+
+/-- 具体版の点ごとの積の保存は、必要十分版の特殊化である。 -/
+theorem transpose_pointwiseIntersection_of_necSuf (N M : NeighborhoodAssignment V) :
+    transpose (pointwiseIntersection N M) =
+      pointwiseIntersection (transpose N) (transpose M) :=
+  hetTranspose_hetInter N M
+
+/-- 具体版の自己近傍割り当ての保存は、必要十分版の特殊化である。 -/
+theorem transpose_identityNeighborhood_of_necSuf :
+    transpose (_root_.CellularAutomata.FiniteNeighborhoodAssignmentMonoid.identityNeighborhood V) =
+      _root_.CellularAutomata.FiniteNeighborhoodAssignmentMonoid.identityNeighborhood V :=
+  hetTranspose_identityNeighborhood
+
+/-- 具体版の全単射性は、必要十分版の特殊化である。 -/
+theorem transpose_bijective_of_necSuf :
+    Function.Bijective (transpose : NeighborhoodAssignment V → NeighborhoodAssignment V) :=
+  hetTranspose_bijective
+
+/-- 具体版の転置表は、必要十分版の表を同じ型に取ったものである。 -/
+theorem transposeTable_eq_necSuf :
+    (transposeTable : Finset (NeighborhoodAssignment V × NeighborhoodAssignment V)) =
+      hetTransposeTable V V := rfl
+
+/-- 具体版の表への所属は、必要十分版の特殊化である。 -/
+theorem mem_transposeTable_of_necSuf (N : NeighborhoodAssignment V) :
+    (N, transpose N) ∈ (transposeTable : Finset (NeighborhoodAssignment V × NeighborhoodAssignment V)) :=
+  mem_hetTransposeTable N
+
+end Derivation
 
 end CellularAutomata.NeighborhoodAssignmentTransposeInvolution
