@@ -194,4 +194,63 @@ theorem periodic_square_selected_edges_even
   · intro v _
     exact card_latticeIncidentEdges_eq_four hn v
 
+/-- 復号された辺集合のうち、周期正方格子の頂点 `v` に接続する辺。 -/
+def periodicSquareEncodedIncidentEdgesAt
+    {n : ℕ} [NeZero n]
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)))
+    (v : LatticeVertex n) : Finset (LatticeEdge n) :=
+  latticeIncidentEdges v ∩
+    encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁ matching
+
+/-- 一辺が二以上の周期正方格子では、完全マッチングから復号した辺集合そのものが
+各頂点で偶数本の辺を持つ。選ばれなかった辺は全接続辺から選ばれた辺を除いた集合であり、
+全接続辺数四と選ばれた辺数がともに偶数なので、その差も偶数である。 -/
+theorem periodic_square_encoded_even_subgraph
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n)
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)))
+    (hSelected : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      Even (selectedIncidentEdgesAt Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁ matching v).card) :
+    ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      Even (periodicSquareEncodedIncidentEdgesAt matching v).card := by
+  intro v hv
+  have hset : periodicSquareEncodedIncidentEdgesAt matching v =
+      latticeIncidentEdges v \
+        selectedIncidentEdgesAt Finset.univ latticeIncidentEdges
+          latticeEndpoint₀ latticeEndpoint₁ matching v := by
+    ext e
+    simp [periodicSquareEncodedIncidentEdgesAt, encodedEvenSubgraph,
+      selectedIncidentEdgesAt, selectedOriginalEdges]
+  have hsub : selectedIncidentEdgesAt Finset.univ latticeIncidentEdges
+      latticeEndpoint₀ latticeEndpoint₁ matching v ⊆ latticeIncidentEdges v := by
+    intro e he
+    exact (Finset.mem_inter.mp he).1
+  rw [hset, Finset.card_sdiff, Finset.inter_eq_left.mpr hsub,
+    Nat.even_sub (Finset.card_le_card hsub)]
+  rw [card_latticeIncidentEdges_eq_four hn v]
+  norm_num [hSelected v hv]
+
+/-- 周期正方格子の terminal graph の完全マッチングを、選ばれなかった外部辺として復号すると、
+得られる元辺集合は偶部分グラフである。 -/
+theorem periodic_square_matching_decodes_even_subgraph
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n)
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices Finset.univ latticeIncidentEdges)
+      (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁) matching)
+    (hsub : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      matchingCoveredTerminalsAt latticeIncidentEdges v matching ⊆
+        terminalsAt latticeIncidentEdges v)
+    (hcard : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      ∀ s ∈ matchingInternalEdgesAt latticeIncidentEdges v matching, s.card = 2)
+    (hdisj : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      ∀ s ∈ matchingInternalEdgesAt latticeIncidentEdges v matching,
+      ∀ t ∈ matchingInternalEdgesAt latticeIncidentEdges v matching,
+        s ≠ t → Disjoint s t) :
+    ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      Even (periodicSquareEncodedIncidentEdgesAt matching v).card :=
+  periodic_square_encoded_even_subgraph hn matching
+    (periodic_square_selected_edges_even hn matching hMatching hsub hcard hdisj)
+
 end Ising3DCut.Prediction

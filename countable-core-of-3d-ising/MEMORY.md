@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 04:36（並行）: `periodicSquareEncodedIncidentEdgesAt` と `periodic_square_matching_decodes_even_subgraph` を追加した。周期正方格子の接続辺数四と、完全マッチングで選ばれた外部辺の各頂点での偶数性を合わせ、選ばれなかった外部辺として復号した集合そのものが偶部分グラフになる結論まで束ねた。次はこの復号を全単射へ拡張する。
 - 2026-08-27 04:33: `positive_rational_three_candidates_of_num_den_dvd_two` を追加し、正の有理点の既約分子と既約分母がともに 2 を割るなら候補は二分の一・一・二に尽きることを Lean 具体版で閉じた。既約性により二分の二を除く。`eq_one_of_cross_power_identity_of_den_one` も候補三点を外部仮定で受け取らず、この補題を使う形へ更新した。次は点数乗表示の底の既約分母が一であることを既存の有限箱定理から束ねる。
 - 2026-08-27 04:03: `LimitQuantity/EventuallyConstantOnlyAtOneBundle.lean` に `eq_one_of_cross_power_identity_of_den_one` を追加した。冪等式の末尾成立から底を取り出し（`eventually_cross_power_identity_iff_rational_power_form_viaNecSuf`）、既約分母が 1 であることを受けて自然数の底へ移し（`eventualPowerFormAt_of_rationalPowerForm_den_one`）、三点の候補からの分岐（`eq_one_of_eventual_power_form`）へ渡して有理点を 1 に定める。候補が三点に尽きることと底の既約分母が 1 であることは本文の有限箱の整除と合同式による絞り込みで、Lean へは未移行なので仮定として明示した。`lake build` と未証明依存検査 576 件を通過。次はこの絞り込み自体の Lean 具体版。
 - 2026-08-27 03:34: `EventuallyConstantOnlyAtOne.lean` に `eventualPowerFormAt_of_rationalPowerForm_den_one` を追加した。既約分母が一と分かった正の有理数の底を分子の絶対値という正の自然数へ移し、同じ有限箱の点数乗表示を `EventualPowerFormAt` へ接続する。次は候補三点への絞り込みを既存の有限箱定理から束ねて、末尾定数性分類の Lean 具体版を閉じる。
