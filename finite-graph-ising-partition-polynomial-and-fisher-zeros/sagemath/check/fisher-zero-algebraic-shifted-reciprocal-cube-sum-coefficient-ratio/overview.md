@@ -23,6 +23,7 @@
 | `check_third_coefficient_sum_local_definition.sage` | 評価後の係数有限和と局所記号 `C_G(a)` | PASS | 表示した有限和と局所定義が一致 |
 | `check_third_coefficient_sum_definition.sage` | 三回形式微分の評価と第三係数和 | PASS | 全例・全評価点で一致 |
 | `check_product_formal_derivatives.sage` | 一次因子積の前三回の形式微分 | PASS | 順序付き除外添字和と一致 |
+| `check_evaluate_product_third_derivative.sage` | 一次因子積の三回形式微分式への評価点代入 | PASS | 全例・全評価点で評価後の順序付き除外添字和と一致 |
 | `check_linear_factorization.sage` | 代数的閉体上の重複度込み一次因子分解 | PASS | 全例で最高次係数と零点差の有限積が分配多項式に一致 |
 | `check_evaluate_linear_factorization.sage` | 一次因子分解への評価点代入 | PASS | 全例・全評価点で評価値と最高次係数像を掛けた零点差積が一致 |
 | `check_leading_multiplicity_nonzero.sage` | 自然数の最高次多重度の非零性 | PASS | 全例で正値性から非零性を確認 |
