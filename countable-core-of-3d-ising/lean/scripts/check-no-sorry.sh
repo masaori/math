@@ -58,6 +58,7 @@ targets=(
   Ising3DCut.NecSuf.relation_of_relation_and_three_equalities
   Ising3DCut.LimitQuantity.numerator_divides_twice_base_minus_one_viaNecSuf
   Ising3DCut.Prediction.forall_even_card_selected_iff_forall_even_card_incidentEdges
+  Ising3DCut.Prediction.forall_even_card_selected_of_card_incidentEdges_eq_four
   Ising3DCut.LimitQuantity.rational_power_point_denominator_divides_two
   Ising3DCut.NecSuf.denominator_eq_one_of_prime_divisors_restricted
   Ising3DCut.NecSuf.denominator_one_and_outer_denominator_divides_constant

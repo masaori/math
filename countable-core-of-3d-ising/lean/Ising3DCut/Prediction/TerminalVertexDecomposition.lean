@@ -1018,4 +1018,34 @@ theorem forall_even_card_selected_iff_forall_even_card_incidentEdges
     exact hUncovered.mpr hIncidentEven v hv
 
 
+/-- 平面正方格子のように、どの頂点にも接続辺がちょうど四本ある場合への具体化。
+接続辺数が四本なら偶数なので、完全マッチングから復号された辺集合は、
+どの頂点でも選ばれた接続辺の本数が偶数、すなわち偶部分グラフである。
+四という具体値がここでだけ効き、上の同値そのものは次数の値に依らない。 -/
+theorem forall_even_card_selected_of_card_incidentEdges_eq_four
+    {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (hsub : ∀ v ∈ vertices,
+      matchingCoveredTerminalsAt incidentEdges v matching ⊆ terminalsAt incidentEdges v)
+    (hcard : ∀ v ∈ vertices,
+      ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching, s.card = 2)
+    (hdisj : ∀ v ∈ vertices,
+      ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching,
+      ∀ t ∈ matchingInternalEdgesAt incidentEdges v matching, s ≠ t → Disjoint s t)
+    (hdeg : ∀ v ∈ vertices, (incidentEdges v).card = 4) :
+    ∀ v ∈ vertices,
+      Even (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v).card := by
+  apply (forall_even_card_selected_iff_forall_even_card_incidentEdges
+    vertices edges incidentEdges endpoint₀ endpoint₁ matching
+    hMatching hIncident hsub hcard hdisj).mpr
+  intro v hv
+  rw [hdeg v hv]
+  exact ⟨2, rfl⟩
+
 end Ising3DCut.Prediction
