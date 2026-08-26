@@ -52,6 +52,13 @@ theorem outgoing_lattice_edges_mem_and_ne {n : ℕ} [NeZero n] (v : LatticeVerte
       ((v, 0) : LatticeEdge n) ≠ (v, 1) := by
   simp [latticeIncidentEdges, latticeEndpoint₀]
 
+/-- 各頂点へ入る横辺と縦辺は、ともにその頂点へ接続し、相異なる。 -/
+theorem incoming_lattice_edges_mem_and_ne {n : ℕ} [NeZero n] (v : LatticeVertex n) :
+    ((((v.1 - 1, v.2), 0)) : LatticeEdge n) ∈ latticeIncidentEdges v ∧
+      ((((v.1, v.2 - 1), 1)) : LatticeEdge n) ∈ latticeIncidentEdges v ∧
+      ((((v.1 - 1, v.2), 0)) : LatticeEdge n) ≠ (((v.1, v.2 - 1), 1)) := by
+  simp [latticeIncidentEdges, latticeEndpoint₁]
+
 /-- 一辺 `3` の周期格子では、どの頂点にも接続辺がちょうど四本ある。
 横に二本（自分が起点のものと、左隣が起点のもの）、縦に二本である。 -/
 theorem card_latticeIncidentEdges_eq_four_three (v : LatticeVertex 3) :
