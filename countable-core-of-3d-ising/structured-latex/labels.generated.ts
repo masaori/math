@@ -25,6 +25,7 @@ export const ALL_LABELS = [
   "claim_cross_power_equality_implies_root_equality",
   "claim_cross_power_equality_is_sufficient_for_limit_quantity",
   "claim_cross_power_sequences_satisfy_limit_transfer_hypothesis",
+  "claim_denominator_two_point_and_final_candidate_set",
   "claim_discriminant_does_not_determine_polynomial",
   "claim_discriminant_free_vs_periodic_differ_at_L3",
   "claim_distinct_roots_do_not_determine_polynomial",

@@ -11036,4 +11036,122 @@ Z_{L_0}(a)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_denominator_two_point_and_final_candidate_set",
+    kind: "claim",
+    title: {
+      text: "分母 2 の有理点と整数の有理点を合わせた候補は三つに限られる",
+    },
+    labels: ["claim_denominator_two_point_and_final_candidate_set"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "互いに素な正の自然数 ",
+        math(String.raw`a,2`),
+        " により ",
+        math(String.raw`q=a/2`),
+        " と表される分母 2 の有理点を取る。正の自然数 ",
+        math(String.raw`L_0,c,n`),
+        " が ",
+        math(String.raw`n=\#V_{L_0}`),
+        "、",
+        math(String.raw`Z_{L_0}(a/2)=c^{\,n}`),
+        "、",
+        math(String.raw`a\mid2(c^{\,n}-1)`),
+        " を満たすならば ",
+        math(String.raw`a=1`),
+        "、したがって ",
+        math(String.raw`q=1/2`),
+        " である。",
+      ]),
+      paragraph([
+        "一方、有理点が正の整数である場合の候補は ",
+        math(String.raw`q\in\{1,2\}`),
+        " に限られる。よって、これまでに得た整除から残る正の有理点は",
+      ]),
+      displayMath(String.raw`q\in\left\{\frac12,1,2\right\}`),
+      paragraph([
+        "の三つに限られる。特に、この関係だけでは ",
+        math(String.raw`q\ne1`),
+        " をこれらの整除の必要条件だけからは排除できない。使ったのは有限和、自然数の冪、整除だけである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`E:=\#E_{L_0}`),
+        " と置く。",
+        ref("def_partition_polynomial"),
+        " へ ",
+        math(String.raw`a/2`),
+        " を代入し、有限和の各項に ",
+        math(String.raw`2^E`),
+        " を掛ける。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2^E c^{\,n}
+&=2^E Z_{L_0}(a/2)
+&&\bigl(\because\ Z_{L_0}(a/2)=c^{\,n}\bigr)\\
+&=\sum_{m=0}^{E}\Omega_{L_0}(m)\,a^m2^{E-m}
+&&\bigl(\because\ \text{分配多項式の定義と }0\le m\le E\bigr)\\
+&=2^E\Omega_{L_0}(0)
+ +a\sum_{m=1}^{E}\Omega_{L_0}(m)\,a^{m-1}2^{E-m}
+&&\bigl(\because\ m=0\text{ の項の分離と有限和からの }a\text{ のくくり出し}\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "最後の有限和を ",
+        math(String.raw`S`),
+        " と置くと、",
+        math(String.raw`2^E c^{\,n}=2^E\Omega_{L_0}(0)+aS`),
+        " である。両辺から ",
+        math(String.raw`2^E`),
+        " を引いて 2 倍すると、",
+      ]),
+      displayMath(
+        String.raw`2^{E+1}(c^{\,n}-1)
+=2^{E+1}\bigl(\Omega_{L_0}(0)-1\bigr)+2aS`,
+      ),
+      paragraph([
+        "を得る。仮定 ",
+        math(String.raw`a\mid2(c^{\,n}-1)`),
+        " の商に ",
+        math(String.raw`2^E`),
+        " を掛ければ ",
+        math(String.raw`a\mid2^{E+1}(c^{\,n}-1)`),
+        " である。また ",
+        math(String.raw`a\mid2aS`),
+        " である。整除は差について保たれるので、上の等式から",
+      ]),
+      displayMath(
+        String.raw`a\mid2^{E+1}\bigl(\Omega_{L_0}(0)-1\bigr)`,
+      ),
+      paragraph([
+        "が従う。",
+        ref("claim_zero_breakage_multiplicity_is_two"),
+        " により ",
+        math(String.raw`\Omega_{L_0}(0)=2`),
+        " なので ",
+        math(String.raw`a\mid2^{E+1}`),
+        " である。",
+        math(String.raw`a`),
+        " は 2 と互いに素で正なので、",
+        math(String.raw`a=1`),
+        " を得る。よって ",
+        math(String.raw`q=1/2`),
+        " である。",
+      ]),
+      paragraph([
+        "整数の場合は ",
+        ref("claim_integer_point_numerator_divides_twice_zero_multiplicity_minus_one"),
+        " と ",
+        ref("claim_zero_breakage_multiplicity_is_two"),
+        " から ",
+        math(String.raw`q\mid2`),
+        " である。正の整数で 2 を割るものは 1 と 2 だけなので、",
+        math(String.raw`q\in\{1,2\}`),
+        " である。これと分母 2 の場合を合わせると、三つの候補を得る。",
+      ]),
+    ],
+  },
 ]);
