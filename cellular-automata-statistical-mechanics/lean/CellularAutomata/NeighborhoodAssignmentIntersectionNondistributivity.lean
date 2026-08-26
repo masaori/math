@@ -6,6 +6,7 @@ structured-latex/content/neighborhood-assignment-intersection-nondistributivity.
 有限舞台、有限近傍割り当て、有限集合の共通部分だけを使う。ℝ / ℂ は現れない。
 -/
 import CellularAutomata.NeighborhoodAssignmentUnionDistributivity
+import CellularAutomata.NecSuf.NeighborhoodAssignmentIntersectionNondistributivity
 
 namespace CellularAutomata.NeighborhoodAssignmentIntersectionNondistributivity
 
@@ -229,5 +230,147 @@ theorem mem_rightDistributiveTriples
       composedNeighborhood L (pointwiseIntersection N M) =
         pointwiseIntersection (composedNeighborhood L N) (composedNeighborhood L M) := by
   simp [rightDistributiveTriples]
+
+
+/-! ### 必要十分版からの導出
+
+必要十分版は NecSuf/NeighborhoodAssignmentIntersectionNondistributivity.lean にある。
+ここでは具体版の各主張が、その特殊化として得られることを示す。 -/
+
+namespace Derivation
+
+open CellularAutomata.NecSuf.NeighborhoodAssignmentIntersectionNondistributivity
+
+omit [Fintype V] in
+/-- 具体版の点ごとの積は、必要十分版の型をまたぐ積を同じ型に取ったものである。 -/
+theorem pointwiseIntersection_eq_necSuf (N M : NeighborhoodAssignment V) :
+    pointwiseIntersection N M = hetInter N M := rfl
+
+/-- 具体版の全近傍割り当ては、必要十分版の型をまたぐ全近傍割り当てを
+    同じ型に取ったものである。 -/
+theorem fullNeighborhood_eq_necSuf :
+    fullNeighborhood V = hetFull V V := rfl
+
+omit [Fintype V] in
+/-- 具体版の可換律は、必要十分版の可換律の特殊化である。 -/
+theorem pointwiseIntersection_comm_of_necSuf (N M : NeighborhoodAssignment V) :
+    pointwiseIntersection N M = pointwiseIntersection M N :=
+  hetInter_comm N M
+
+omit [Fintype V] in
+/-- 具体版の結合律は、必要十分版の結合律の特殊化である。 -/
+theorem pointwiseIntersection_assoc_of_necSuf (N M L : NeighborhoodAssignment V) :
+    pointwiseIntersection (pointwiseIntersection N M) L =
+      pointwiseIntersection N (pointwiseIntersection M L) :=
+  hetInter_assoc N M L
+
+omit [Fintype V] in
+/-- 具体版の冪等律は、必要十分版の冪等律の特殊化である。 -/
+theorem pointwiseIntersection_idem_of_necSuf (N : NeighborhoodAssignment V) :
+    pointwiseIntersection N N = N :=
+  hetInter_idem N
+
+/-- 具体版の右単位律は、必要十分版の右単位律の特殊化である。
+    ここだけ舞台の有限性を落とせない（全近傍を `Finset` として書くため）。 -/
+theorem pointwiseIntersection_full_right_of_necSuf (N : NeighborhoodAssignment V) :
+    pointwiseIntersection N (fullNeighborhood V) = N :=
+  hetInter_full_right N
+
+/-- 具体版の左単位律は、必要十分版の左単位律の特殊化である。 -/
+theorem pointwiseIntersection_full_left_of_necSuf (N : NeighborhoodAssignment V) :
+    pointwiseIntersection (fullNeighborhood V) N = N :=
+  hetInter_full_left N
+
+omit [Fintype V] in
+/-- 具体版の第一の分配律は、必要十分版の型をまたぐ分配律を同じ型に取ったものである。 -/
+theorem pointwiseIntersection_pointwiseUnion_of_necSuf (N M L : NeighborhoodAssignment V) :
+    pointwiseIntersection N (pointwiseUnion M L) =
+      pointwiseUnion (pointwiseIntersection N M) (pointwiseIntersection N L) :=
+  hetInter_hetUnion N M L
+
+omit [Fintype V] in
+/-- 具体版の第二の分配律は、必要十分版の型をまたぐ分配律を同じ型に取ったものである。 -/
+theorem pointwiseUnion_pointwiseIntersection_of_necSuf (N M L : NeighborhoodAssignment V) :
+    pointwiseUnion N (pointwiseIntersection M L) =
+      pointwiseIntersection (pointwiseUnion N M) (pointwiseUnion N L) :=
+  hetUnion_hetInter N M L
+
+omit [Fintype V] in
+/-- 具体版の最小上界性は、必要十分版の最小上界性の特殊化である。 -/
+theorem pointwiseUnion_least_of_necSuf {N M L : NeighborhoodAssignment V}
+    (hNL : PointwiseInclusion N L) (hML : PointwiseInclusion M L) :
+    PointwiseInclusion (pointwiseUnion N M) L :=
+  hetUnion_least hNL hML
+
+omit [Fintype V] in
+/-- 具体版の最大下界性は、必要十分版の最大下界性の特殊化である。 -/
+theorem pointwiseIntersection_greatest_of_necSuf {N M L : NeighborhoodAssignment V}
+    (hLN : PointwiseInclusion L N) (hLM : PointwiseInclusion L M) :
+    PointwiseInclusion L (pointwiseIntersection N M) :=
+  hetInter_greatest hLN hLM
+
+omit [Fintype V] in
+/-- 具体版の分配束の全公理は、必要十分版の全公理の特殊化である。 -/
+theorem finite_distributive_lattice_laws_of_necSuf :
+    (∀ N M L : NeighborhoodAssignment V,
+      pointwiseIntersection N (pointwiseUnion M L) =
+        pointwiseUnion (pointwiseIntersection N M) (pointwiseIntersection N L)) ∧
+    (∀ N M L : NeighborhoodAssignment V,
+      pointwiseUnion N (pointwiseIntersection M L) =
+        pointwiseIntersection (pointwiseUnion N M) (pointwiseUnion N L)) ∧
+    (∀ N M L : NeighborhoodAssignment V,
+      PointwiseInclusion N L → PointwiseInclusion M L →
+        PointwiseInclusion (pointwiseUnion N M) L) ∧
+    (∀ N M L : NeighborhoodAssignment V,
+      PointwiseInclusion L N → PointwiseInclusion L M →
+        PointwiseInclusion L (pointwiseIntersection N M)) :=
+  distributive_lattice_laws (V := V) (W := V)
+
+/-- 具体版の左の非分配性は、必要十分版の非分配性へ三元舞台の値を入れて得られる。
+    必要十分版が要求する `b ≠ c` は、この舞台では `1 ≠ 2` として満たされる。 -/
+theorem composition_not_left_distributive_of_necSuf :
+    composedNeighborhood (pointwiseIntersection leftN leftM) leftL ≠
+      pointwiseIntersection (composedNeighborhood leftN leftL)
+        (composedNeighborhood leftM leftL) :=
+  hetComp_hetInter_left_ne (0 : IntersectionWitnessStage) 1 2 (by decide) 0
+    leftN leftM leftL (by decide) (by decide) (by decide) (by decide)
+
+/-- 具体版の右の非分配性は、必要十分版の非分配性へ三元舞台の値を入れて得られる。
+    必要十分版は `b ≠ c` を要求せず、`L(a)` のどの元でも両方には入らないことだけを使う。 -/
+theorem composition_not_right_distributive_of_necSuf :
+    composedNeighborhood rightL (pointwiseIntersection rightN rightM) ≠
+      pointwiseIntersection (composedNeighborhood rightL rightN)
+        (composedNeighborhood rightL rightM) :=
+  hetComp_hetInter_right_ne (0 : IntersectionWitnessStage) 1 2 0
+    rightL rightN rightM (by decide) (by decide) (by decide) (by decide) (by decide)
+
+/-- 具体版の積の演算表は、必要十分版の型をまたぐ表を同じ型に取ったものである。 -/
+theorem intersectionTable_eq_necSuf :
+    intersectionTable (V := V) = hetInterTable V V := rfl
+
+/-- 具体版の左分配三つ組の表は、必要十分版の表を同じ型に取ったものである。 -/
+theorem leftDistributiveTriples_eq_necSuf :
+    leftDistributiveTriples (V := V) = hetLeftDistributiveTriples V := rfl
+
+/-- 具体版の右分配三つ組の表は、必要十分版の表を同じ型に取ったものである。 -/
+theorem rightDistributiveTriples_eq_necSuf :
+    rightDistributiveTriples (V := V) = hetRightDistributiveTriples V := rfl
+
+omit [Fintype V] in
+/-- 具体版が `Finset` で要求する等号判定は有限表現のためだけであり、
+    点ごとの積そのものは集合として読んでも同じ演算である。 -/
+theorem pointwiseIntersection_coe_eq_setInter (N M : NeighborhoodAssignment V) (v : V) :
+    ((pointwiseIntersection N M v : Finset V) : Set V) =
+      setInter (fun v => ((N v : Finset V) : Set V))
+        (fun v => ((M v : Finset V) : Set V)) v :=
+  coe_hetInter N M v
+
+/-- 具体版が全近傍割り当てに要求する有限性も有限表現のためだけであり、
+    集合として読めば全近傍は `Set.univ` である。 -/
+theorem fullNeighborhood_coe_eq_setFull (v : V) :
+    ((fullNeighborhood V v : Finset V) : Set V) = setFull V V v :=
+  coe_hetFull v
+
+end Derivation
 
 end CellularAutomata.NeighborhoodAssignmentIntersectionNondistributivity
