@@ -11218,4 +11218,78 @@ Z_L(2)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_eventual_power_form_at_one_half_is_impossible",
+    kind: "claim",
+    title: {
+      text: "有理点 2 分の 1 では点数乗表示は末尾で成り立たない",
+    },
+    labels: ["claim_eventual_power_form_at_one_half_is_impossible"],
+    habitat: "Q",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`L_0,c`),
+        " をどのように取っても、すべての自然数 ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`Z_L(1/2)=c^{\#V_L}`),
+        " が成り立つことはない。したがって、有理点 2 分の 1 では有限箱の量の列は末尾で定数にならない。使うのは有限和、回文性、法 4 の整数計算だけである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L:=\max\{L_0,2\}`),
+        "、",
+        math(String.raw`E:=\#E_L`),
+        " と置く。このとき ",
+        math(String.raw`L\ge L_0`),
+        " かつ ",
+        math(String.raw`L\ge2`),
+        " である。",
+        ref("def_partition_polynomial"),
+        " と ",
+        ref("claim_palindrome"),
+        " により、有限和の添字を ",
+        math(String.raw`k=E-m`),
+        " と取り直すと、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2^E Z_L(1/2)
+&=\sum_{m=0}^{E}\Omega_L(m)\,2^{E-m}
+&&(\because\ \text{分配多項式の定義})\\
+&=\sum_{m=0}^{E}\Omega_L(E-m)\,2^{E-m}
+&&(\because\ \blkref{claim_palindrome})\\
+&=\sum_{k=0}^{E}\Omega_L(k)\,2^k
+&&(\because\ k=E-m\ \text{による有限和の添字変更})\\
+&=Z_L(2)
+&&(\because\ \blkref{def_partition_polynomial}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "仮定から ",
+        math(String.raw`Z_L(1/2)=c^{L^3}`),
+        " である。",
+        ref("def_edge_set"),
+        " により ",
+        math(String.raw`E=3L^2(L-1)`),
+        " であり、",
+        math(String.raw`L\ge2`),
+        " から ",
+        math(String.raw`E\ge2`),
+        " を得る。したがって ",
+        math(String.raw`4\mid2^E c^{L^3}=Z_L(2)`),
+        " である。一方、",
+        ref("claim_zero_breakage_multiplicity_is_two"),
+        " と ",
+        ref("claim_one_breakage_multiplicity_is_zero"),
+        " から ",
+        math(String.raw`Z_L(2)\equiv2\pmod4`),
+        " であるから矛盾する。よって、そのような ",
+        math(String.raw`L_0,c`),
+        " は存在しない。",
+      ]),
+    ],
+  },
 ]);

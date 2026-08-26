@@ -31,6 +31,7 @@ export const ALL_LABELS = [
   "claim_distinct_roots_do_not_determine_polynomial",
   "claim_edge_endpoints_parity",
   "claim_even_multiplicity",
+  "claim_eventual_power_form_at_one_half_is_impossible",
   "claim_eventual_power_form_at_two_is_impossible",
   "claim_eventually_constant_iff_power_identity",
   "claim_factorization_type_determines_root_minimal_degrees",
