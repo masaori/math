@@ -70,6 +70,7 @@ import CellularAutomata.NecSuf.IterateMonoidTailCycleDecomposition
 import CellularAutomata.NecSuf.LocalRuleRepresentation
 import CellularAutomata.NecSuf.LocalityRestrictsCycleType
 import CellularAutomata.NecSuf.MinimalPreperiodPeriod
+import CellularAutomata.NecSuf.NeighborhoodAssignmentUnionDistributivity
 import CellularAutomata.NecSuf.OrderedNeighborhoodAssignmentMonoid
 import CellularAutomata.NecSuf.PeriodicPointCount
 import CellularAutomata.NecSuf.RecursivePreimageTreeCode
