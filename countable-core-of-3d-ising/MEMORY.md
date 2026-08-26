@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 09:04（本流）: `NecSuf.relation_of_relation_and_three_equalities` と具体導出 `numerator_divides_twice_base_minus_one_viaNecSuf` を追加し、二つの箱から得た整除を箱に依存しない一つへまとめる主張の四層を閉じた。整数・冪・最大公約数を落とすと、対象関係が中間値について成り立つことと三段の等式による移送だけが残る。`lake build` 成功、未証明依存検査 533 件。次は箱に依存しない整除から正の有理点一以外を排除できるかの判定を記述する。着手前レビュー修正なし。
 - 2026-08-26 08:35（本流）: `lean/Ising3DCut/LimitQuantity/NumeratorDividesTwiceBaseMinusOne.lean` を追加し、二つの箱から得た整除を一つへまとめて箱の大きさに依存しない形へ移す主張の Lean 具体版を閉じた（準備の二段 `gcd_two_mul_eq_two_mul_gcd`・`int_gcd_two_mul_eq_two_mul_gcd` と本体 `numerator_divides_twice_base_minus_one`）。`lake build` 成功、未証明依存検査 530 件。次は同主張の Lean 必要十分版。着手前レビュー修正なし。
 - 2026-08-26 08:03（本流）: `sagemath/check/numerator-divides-twice-base-minus-one/` に三検査を追加し、最大公約数への二倍の移送、隣接指数の互いに素性による箱サイズの消去、最終整除を `ZZ` 上で全 PASS させた。次は同主張の Lean 具体版。着手前レビュー修正なし。
 - 2026-08-26 07:34（並行）: 覆われずに残る端子数の偶数性を各頂点へ降ろす同値を Lean で閉じた（`forall_even_card_uncovered_iff_forall_even_card_incidentEdges`）。未証明依存検査 530 件。次は偶部分グラフの条件そのものへ接続する。
