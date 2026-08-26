@@ -59,6 +59,7 @@ targets=(
   Ising3DCut.LimitQuantity.numerator_divides_twice_threshold_box_value_minus_one
   Ising3DCut.NecSuf.relation_of_relation_preserving_map_and_target_equality
   Ising3DCut.LimitQuantity.numerator_divides_twice_threshold_box_value_minus_one_viaNecSuf
+  Ising3DCut.Prediction.outgoing_lattice_edges_mem_and_ne
   Ising3DCut.LimitQuantity.numerator_divides_twice_base_minus_one
   Ising3DCut.LimitQuantity.box_free_divisibility_excludes_no_rational_point
   Ising3DCut.NecSuf.every_target_has_related_admissible_witness
