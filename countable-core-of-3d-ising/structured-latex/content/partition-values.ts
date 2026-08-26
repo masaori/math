@@ -10915,4 +10915,125 @@ Z_{L_0}(q)=c^{\,n}`,
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_integer_point_numerator_divides_twice_zero_multiplicity_minus_one",
+    kind: "claim",
+    title: {
+      text: "有理点が整数のとき分子は多重度ゼロの値から 1 を引いた数の 2 倍を割る",
+    },
+    labels: [
+      "claim_integer_point_numerator_divides_twice_zero_multiplicity_minus_one",
+    ],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`a`),
+        " と正の自然数 ",
+        math(String.raw`L_0`),
+        " を取る。整除",
+      ]),
+      displayMath(
+        String.raw`a\ \bigm|\ 2\,\bigl(Z_{L_0}(a)-1\bigr)`,
+      ),
+      paragraph([
+        "が成り立つならば",
+      ]),
+      displayMath(
+        String.raw`a\ \bigm|\ 2\,\bigl(\Omega_{L_0}(0)-1\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`\Omega_{L_0}(0)`),
+        " は多重度（",
+        ref("def_multiplicity"),
+        "）の ",
+        math(String.raw`m=0`),
+        " での値であり、分配多項式（",
+        ref("def_partition_polynomial"),
+        "）の定数項である。右辺は箱の大きさ ",
+        math(String.raw`L_0`),
+        " だけに依存し、",
+        math(String.raw`a`),
+        " を含まない。箱の大きさの極限も無限和も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_partition_polynomial"),
+        " により、",
+        math(String.raw`Z_{L_0}(a)`),
+        " は有限個の自然数の和として次のように書ける。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_{L_0}(a)
+&=\sum_{m=0}^{\#E_{L_0}}\Omega_{L_0}(m)\,a^{\,m}
+&&(\because\ \text{分配多項式の定義への代入})\\
+&=\Omega_{L_0}(0)\,a^{\,0}+\sum_{m=1}^{\#E_{L_0}}\Omega_{L_0}(m)\,a^{\,m}
+&&(\because\ m=0 \text{ の項を分離した})\\
+&=\Omega_{L_0}(0)+\sum_{m=1}^{\#E_{L_0}}\Omega_{L_0}(m)\,a^{\,m}
+&&(\because\ a^{\,0}=1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "有限個の自然数の和 ",
+        math(
+          String.raw`S:=\sum_{m=1}^{\#E_{L_0}}\Omega_{L_0}(m)\,a^{\,m-1}`,
+        ),
+        " を置く。各項の指数 ",
+        math(String.raw`m-1`),
+        " は ",
+        math(String.raw`m\ge1`),
+        " より自然数なので、",
+        math(String.raw`S`),
+        " は自然数である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{m=1}^{\#E_{L_0}}\Omega_{L_0}(m)\,a^{\,m}
+&=\sum_{m=1}^{\#E_{L_0}}\Omega_{L_0}(m)\,a\cdot a^{\,m-1}
+&&(\because\ m\ge1 \text{ より } a^{\,m}=a\cdot a^{\,m-1})\\
+&=a\sum_{m=1}^{\#E_{L_0}}\Omega_{L_0}(m)\,a^{\,m-1}
+&&(\because\ \text{有限和からの共通因子のくくり出し})\\
+&=a\,S
+&&(\because\ S \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`Z_{L_0}(a)=\Omega_{L_0}(0)+a\,S`),
+        " である。両辺から 1 を引いて 2 倍すると、有限個の項からなる次の等式を得る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2\,\bigl(Z_{L_0}(a)-1\bigr)
+&=2\,\bigl(\Omega_{L_0}(0)+a\,S-1\bigr)
+&&(\because\ Z_{L_0}(a)=\Omega_{L_0}(0)+a\,S)\\
+&=2\,\bigl(\Omega_{L_0}(0)-1\bigr)+2\,a\,S
+&&(\because\ \text{分配法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "仮定より ",
+        math(String.raw`a\mid 2\bigl(Z_{L_0}(a)-1\bigr)`),
+        " であり、",
+        math(String.raw`2S`),
+        " は自然数なので ",
+        math(String.raw`a\mid 2\,a\,S`),
+        " である。整除は差について保たれるので、",
+      ]),
+      displayMath(
+        String.raw`2\,\bigl(\Omega_{L_0}(0)-1\bigr)
+=2\,\bigl(Z_{L_0}(a)-1\bigr)-2\,a\,S`,
+      ),
+      paragraph([
+        "の右辺の二つの項をともに ",
+        math(String.raw`a`),
+        " が割るから、",
+        math(String.raw`a\mid 2\bigl(\Omega_{L_0}(0)-1\bigr)`),
+        " を得る。",
+      ]),
+    ],
+  },
 ]);
