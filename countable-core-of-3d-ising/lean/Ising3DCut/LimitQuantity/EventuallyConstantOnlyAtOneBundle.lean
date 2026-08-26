@@ -10,8 +10,43 @@
 -/
 import Ising3DCut.LimitQuantity.EventuallyConstantOnlyAtOne
 import Ising3DCut.LimitQuantity.CrossPowerIdentityIffRationalPowerFormFromNecSuf
+import Ising3DCut.LimitQuantity.DenominatorTwoPointAndFinalCandidateSet
 
 namespace Ising3DCut.LimitQuantity
+
+/-- 正の有理点の既約分子と既約分母がともに `2` を割るなら、候補は三点に尽きる。 -/
+theorem positive_rational_three_candidates_of_num_den_dvd_two
+    {q : ℚ} (hq : 0 < q)
+    (hnum : q.num.natAbs ∣ 2) (hden : q.den ∣ 2) :
+    q = 1 / 2 ∨ q = 1 ∨ q = 2 := by
+  have hnumPos : 0 < q.num.natAbs := Int.natAbs_pos.mpr (Rat.num_ne_zero.mpr hq.ne')
+  have hdenPos : 0 < q.den := q.den_pos
+  rcases positive_integer_dvd_two_candidates hnumPos hnum with hn | hn
+  · rcases positive_integer_dvd_two_candidates hdenPos hden with hd | hd
+    · right; left
+      rw [← Rat.num_div_den q]
+      rw [show q.num = 1 by
+        have hqnum : (0 : ℤ) < q.num := Rat.num_pos.mpr hq
+        omega]
+      norm_num [hd]
+    · left
+      rw [← Rat.num_div_den q]
+      rw [show q.num = 1 by
+        have hqnum : (0 : ℤ) < q.num := Rat.num_pos.mpr hq
+        omega]
+      norm_num [hd]
+  · rcases positive_integer_dvd_two_candidates hdenPos hden with hd | hd
+    · right; right
+      rw [← Rat.num_div_den q]
+      rw [show q.num = 2 by
+        have hqnum : (0 : ℤ) < q.num := Rat.num_pos.mpr hq
+        omega]
+      norm_num [hd]
+    · exfalso
+      have hnot : ¬Nat.Coprime q.num.natAbs q.den := by
+        rw [hn, hd]
+        norm_num
+      exact hnot q.reduced
 
 /-- 冪等式が閾値以後で成り立ち、そこから決まる底の既約分母が 1 であり、
 候補が三点に尽きているなら、有理点は 1 である。 -/
@@ -21,12 +56,13 @@ theorem eq_one_of_cross_power_identity_of_den_one
       rationalValueSeq q L ^ ((L + 1) ^ 3) = rationalValueSeq q (L + 1) ^ (L ^ 3))
     (hden : ∀ c : ℚ, 0 < c →
       (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) → c.den = 1)
-    (hcandidates : q = 1 / 2 ∨ q = 1 ∨ q = 2) :
+    (hqnum : q.num.natAbs ∣ 2) (hqden : q.den ∣ 2) :
     q = 1 := by
   obtain ⟨c, hcpos, hform⟩ :=
     (eventually_cross_power_identity_iff_rational_power_form_viaNecSuf q hq L₀ hL₀).mp hcross
   have hpower : EventualPowerFormAt q :=
     eventualPowerFormAt_of_rationalPowerForm_den_one hcpos (hden c hcpos hform) hL₀ hform
-  exact eq_one_of_eventual_power_form hpower hcandidates
+  exact eq_one_of_eventual_power_form hpower
+    (positive_rational_three_candidates_of_num_den_dvd_two hq hqnum hqden)
 
 end Ising3DCut.LimitQuantity
