@@ -6,6 +6,7 @@ structured-latex/content/neighborhood-assignment-intersection-minimal-counterexa
 有限舞台、有限近傍割り当て、有限集合の共通部分だけを使う。ℝ / ℂ は現れない。
 -/
 import CellularAutomata.NeighborhoodAssignmentIntersectionNondistributivity
+import CellularAutomata.NecSuf.NeighborhoodAssignmentIntersectionMinimalCounterexample
 
 namespace CellularAutomata.NeighborhoodAssignmentIntersectionMinimalCounterexample
 
@@ -145,5 +146,103 @@ theorem minimal_cell_count_for_composition_intersection_nondistributivity :
         (composedNeighborhood rightL rightM) := by
   exact ⟨fun _ _ _ hcard N M L => subsingleton_distributive hcard N M L,
     two_cell_stage_card, two_cell_left_failure, two_cell_right_failure⟩
+
+
+/-! ### 必要十分版からの導出
+
+必要十分版は NecSuf/NeighborhoodAssignmentIntersectionMinimalCounterexample.lean にある。
+ここでは具体版の各主張が、その特殊化として得られることを示す。 -/
+
+namespace Derivation
+
+open CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid
+open CellularAutomata.NecSuf.NeighborhoodAssignmentIntersectionNondistributivity
+open CellularAutomata.NecSuf.NeighborhoodAssignmentIntersectionMinimalCounterexample
+
+omit [Fintype V] in
+/-- 具体版の合成近傍は、必要十分版の型をまたぐ合成を同じ型に取ったものである。 -/
+theorem composedNeighborhood_eq_necSuf (N M : NeighborhoodAssignment V) :
+    composedNeighborhood N M = hetComp N M := rfl
+
+omit [Fintype V] in
+/-- 具体版の点ごとの積は、必要十分版の型をまたぐ積を同じ型に取ったものである。 -/
+theorem pointwiseIntersection_eq_necSuf (N M : NeighborhoodAssignment V) :
+    pointwiseIntersection N M = hetInter N M := rfl
+
+/-- 具体版の「一元以下なら合成と点ごとの積が一致する」は、必要十分版の
+    `Subsingleton` 版の特殊化である。有限性は `card ≤ 1` から `Subsingleton` を
+    取り出す段でだけ使う。 -/
+theorem subsingleton_composition_equals_intersection_of_necSuf
+    (hcard : Fintype.card V ≤ 1) (N M : NeighborhoodAssignment V) :
+    composedNeighborhood N M = pointwiseIntersection N M := by
+  letI : Subsingleton V := Fintype.card_le_one_iff_subsingleton.mp hcard
+  exact subsingleton_hetComp_eq_hetInter N M
+
+/-- 具体版の一元以下での左分配律は、必要十分版の特殊化である。 -/
+theorem subsingleton_left_distributive_of_necSuf
+    (hcard : Fintype.card V ≤ 1) (N M L : NeighborhoodAssignment V) :
+    composedNeighborhood (pointwiseIntersection N M) L =
+      pointwiseIntersection (composedNeighborhood N L) (composedNeighborhood M L) := by
+  letI : Subsingleton V := Fintype.card_le_one_iff_subsingleton.mp hcard
+  exact subsingleton_hetComp_hetInter_left N M L
+
+/-- 具体版の一元以下での右分配律は、必要十分版の特殊化である。 -/
+theorem subsingleton_right_distributive_of_necSuf
+    (hcard : Fintype.card V ≤ 1) (L N M : NeighborhoodAssignment V) :
+    composedNeighborhood L (pointwiseIntersection N M) =
+      pointwiseIntersection (composedNeighborhood L N) (composedNeighborhood L M) := by
+  letI : Subsingleton V := Fintype.card_le_one_iff_subsingleton.mp hcard
+  exact subsingleton_hetComp_hetInter_right L N M
+
+/-- 具体版の二元舞台の左の証人は、必要十分版の証人を `a := 0`、`b := 1` に取ったものである。 -/
+theorem leftN_eq_necSuf : leftN = leftWitnessN (0 : TwoCellStage) 1 := rfl
+
+theorem leftM_eq_necSuf : leftM = leftWitnessM (1 : TwoCellStage) := rfl
+
+theorem leftL_eq_necSuf : leftL = leftWitnessL (0 : TwoCellStage) := rfl
+
+/-- 具体版の左の反例は、必要十分版の左の反例の `a := 0`、`b := 1` への特殊化である。 -/
+theorem two_cell_left_failure_of_necSuf :
+    composedNeighborhood (pointwiseIntersection leftN leftM) leftL ≠
+      pointwiseIntersection (composedNeighborhood leftN leftL)
+        (composedNeighborhood leftM leftL) :=
+  leftWitness_failure (a := (0 : TwoCellStage)) (b := 1) (by decide)
+
+/-- 具体版の二元舞台の右の証人は、必要十分版の証人を `a := 0`、`b := 1` に取ったものである。 -/
+theorem rightL_eq_necSuf : rightL = rightWitnessL (0 : TwoCellStage) 1 := rfl
+
+theorem rightN_eq_necSuf : rightN = rightWitnessN (0 : TwoCellStage) 1 := rfl
+
+theorem rightM_eq_necSuf : rightM = rightWitnessM (0 : TwoCellStage) := rfl
+
+/-- 具体版の右の反例は、必要十分版の右の反例の `a := 0`、`b := 1` への特殊化である。 -/
+theorem two_cell_right_failure_of_necSuf :
+    composedNeighborhood rightL (pointwiseIntersection rightN rightM) ≠
+      pointwiseIntersection (composedNeighborhood rightL rightN)
+        (composedNeighborhood rightL rightM) :=
+  rightWitness_failure (a := (0 : TwoCellStage)) (b := 1) (by decide)
+
+/-- 具体版の最小舞台定理は、必要十分版の同値から得られる。
+    一元以下での非存在は同値の逆向き、二元での存在は同値の順向きの対偶である。 -/
+theorem minimal_cell_count_of_necSuf :
+    (∀ (W : Type) [Fintype W] [DecidableEq W], Fintype.card W ≤ 1 →
+      ∀ N M L : NeighborhoodAssignment W,
+        composedNeighborhood (pointwiseIntersection N M) L =
+            pointwiseIntersection (composedNeighborhood N L) (composedNeighborhood M L) ∧
+          composedNeighborhood L (pointwiseIntersection N M) =
+            pointwiseIntersection (composedNeighborhood L N) (composedNeighborhood L M)) ∧
+    Fintype.card TwoCellStage = 2 ∧
+    composedNeighborhood (pointwiseIntersection leftN leftM) leftL ≠
+      pointwiseIntersection (composedNeighborhood leftN leftL)
+        (composedNeighborhood leftM leftL) ∧
+    composedNeighborhood rightL (pointwiseIntersection rightN rightM) ≠
+      pointwiseIntersection (composedNeighborhood rightL rightN)
+        (composedNeighborhood rightL rightM) :=
+  ⟨fun _ _ _ hcard N M L =>
+      ⟨subsingleton_left_distributive_of_necSuf hcard N M L,
+        subsingleton_right_distributive_of_necSuf hcard L N M⟩,
+    two_cell_stage_card, two_cell_left_failure_of_necSuf, two_cell_right_failure_of_necSuf⟩
+
+end Derivation
 
 end CellularAutomata.NeighborhoodAssignmentIntersectionMinimalCounterexample
