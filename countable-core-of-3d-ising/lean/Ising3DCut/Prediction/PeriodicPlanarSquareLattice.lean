@@ -34,6 +34,11 @@ def latticeIncidentEdges {n : ℕ} [NeZero n] (v : LatticeVertex n) :
     Finset (LatticeEdge n) :=
   Finset.univ.filter (fun e => latticeEndpoint₀ e = v ∨ latticeEndpoint₁ e = v)
 
+/-- 一辺 `n` の周期格子の辺は、各頂点を起点とする横辺と縦辺の二本ずつで、総数は `2n²`。 -/
+theorem card_univ_latticeEdge (n : ℕ) :
+    (Finset.univ : Finset (LatticeEdge n)).card = 2 * n ^ 2 := by
+  simp [LatticeEdge, Nat.mul_comm, Nat.mul_assoc, pow_two]
+
 /-- 接続辺は定義から端点条件を満たす。直前の定理が要求する仮定 `hIncident` にそのまま渡せる。 -/
 theorem latticeIncident {n : ℕ} [NeZero n] (v : LatticeVertex n)
     (e : LatticeEdge n) (he : e ∈ latticeIncidentEdges v) :
