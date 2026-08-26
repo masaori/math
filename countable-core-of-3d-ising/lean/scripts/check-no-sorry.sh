@@ -56,6 +56,8 @@ fi
 targets=(
   Ising3DCut.LimitQuantity.numerator_divides_twice_base_minus_one
   Ising3DCut.LimitQuantity.box_free_divisibility_excludes_no_rational_point
+  Ising3DCut.NecSuf.every_target_has_related_admissible_witness
+  Ising3DCut.LimitQuantity.box_free_divisibility_excludes_no_rational_point_viaNecSuf
   Ising3DCut.NecSuf.relation_of_relation_and_three_equalities
   Ising3DCut.LimitQuantity.numerator_divides_twice_base_minus_one_viaNecSuf
   Ising3DCut.Prediction.forall_even_card_selected_iff_forall_even_card_incidentEdges
