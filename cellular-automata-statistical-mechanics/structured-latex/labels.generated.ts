@@ -205,6 +205,8 @@ export const ALL_LABELS = [
   "claim_stage_global_maps_count",
   "claim_stage_realized_cycle_types_decidable",
   "claim_start_cell_in_propagation_ball",
+  "claim_subsingleton_neighborhood_composition_distributes_over_intersection",
+  "claim_subsingleton_neighborhood_composition_equals_intersection",
   "claim_support_finite_decidability",
   "claim_support_invariance",
   "claim_support_is_minimum_representing_set",
@@ -212,6 +214,7 @@ export const ALL_LABELS = [
   "claim_three_cell_cyclic_shift_reversible",
   "claim_time_slice_antichain",
   "claim_time_strictly_increases",
+  "claim_two_cell_composition_intersection_nondistributivity",
   "claim_up_set_order_convex",
   "def_antichain",
   "def_base_value_extension",
@@ -320,6 +323,7 @@ export const ALL_LABELS = [
   "def_three_cell_cyclic_dependency_stage",
   "def_time_interval",
   "def_time_slice",
+  "def_two_cell_intersection_nondistributivity_witnesses",
   "def_up_set",
   "remark_causal_comparison_scope",
   "remark_causal_set_not_claimed",
@@ -330,6 +334,7 @@ export const ALL_LABELS = [
   "remark_local_rule_representation_scope",
   "remark_locality_counting_criterion_insufficient",
   "remark_reversibility_not_claimed",
+  "theorem_minimal_cell_count_for_composition_intersection_nondistributivity",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */
