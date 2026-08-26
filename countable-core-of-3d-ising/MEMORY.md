@@ -435,6 +435,8 @@
 - 2026-08-16: 健全性の橋の 2 番目「極限量を定義する」を記述（`def_limit_quantity_from_finite_box_sequence`、habitat R、唯一の脱出。実対数の代わりに正の実数乗根の極限で書いた——要レビュー）。次は割った 3 番目。
 ## 直近（2026-08-16 18:45 tick）
 
+- 2026-08-26 15:06: 本流「底の従属性を整除へ代入して分子と箱の値を結ぶ」の Lean 具体版を追加（`lean/Ising3DCut/LimitQuantity/NumeratorDividesTwiceThresholdBoxValueMinusOne.lean`）。`lake build` 成功、未証明依存検査 541 件。次は同主張の Lean 必要十分版。
+
 - 2026-08-26 14:33: 本流「底の従属性を整除へ代入して分子と箱の値を結ぶ」の SageMath 三検査を全 PASS。次は同主張の Lean 具体版。
 
 - 2026-08-26 14:05: 本流「底の従属性を整除へ代入して分子と箱の値を結ぶ」を記述（`claim_numerator_divides_twice_threshold_box_value_minus_one`）。次は同主張の SageMath 検証。
