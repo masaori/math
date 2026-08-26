@@ -18,10 +18,12 @@
 人手証明と同じく、本質的依存台が最小の表現集合であること、合成近傍上で合成を
 表現できること、表現可能性から依存台包含が従うことをこの順で使う。
 有限型・有限部分集合・二元状態上の写像だけを扱い、ℝ / ℂ は現れない。
-必要十分版とそこからの導出は本 tick の範囲外である。
+必要十分版は CellularAutomata.NecSuf.CompositeMapEssentialDependency にあり、
+本 file 末尾で具体版の主要主張がその特殊化として得られることを示す。
 -/
 import CellularAutomata.ComposedNeighborhoodClosure
 import CellularAutomata.LocalRuleRepresentation
+import CellularAutomata.NecSuf.CompositeMapEssentialDependency
 
 namespace CellularAutomata.CompositeMapEssentialDependency
 
@@ -119,5 +121,72 @@ theorem composite_support_bound_can_be_strict :
       composedNeighborhood (dependencyAssignment strictF) (dependencyAssignment strictG)
         StrictCell.a := by
   native_decide
+
+/-! ### 必要十分版からの導出 -/
+
+/-- 状態型 `State` と入れ替え写像 `nu` へ特殊化した、本質的依存の決定手続き。
+    必要十分版はこの手続きを仮定として外へ出している。 -/
+def stateEssentialDepDecidable (g : (V → State) → State) (w : V) :
+    Decidable (NecSuf.EssentialDependency.EssentialDep g w) :=
+  NecSuf.EssentialDependency.essentialDepDecidable nu ne_iff_eq_nu g w
+
+omit [Fintype V] [DecidableEq V] in
+/-- 具体版の値写像は、必要十分版の値写像を状態型 `State` へ特殊化したものである。 -/
+theorem cellMap_eq_necessary_sufficient (F : (V → State) → (V → State)) (v : V) :
+    cellMap F v = NecSuf.CompositeMapEssentialDependency.cellMap F v := rfl
+
+/-- 具体版の依存台割り当ては、必要十分版の依存台割り当てを、状態型 `State` と
+    その有限真理値表による決定手続きへ特殊化したものである。 -/
+theorem dependencyAssignment_eq_necessary_sufficient (F : (V → State) → (V → State)) (v : V) :
+    dependencyAssignment F v =
+      NecSuf.CompositeMapEssentialDependency.supportAssignment
+        stateEssentialDepDecidable F v := by
+  ext w
+  rw [NecSuf.CompositeMapEssentialDependency.mem_supportAssignment_iff]
+  exact mem_supp_iff (cellMap F v) w
+
+/-- `claim_composite_map_support_bounded_by_composed_support` が、必要十分版の包含定理を
+    状態型 `State`、入れ替え写像 `nu`、基準値 `State.zero` へ特殊化して得られること。 -/
+theorem composite_support_subset_from_necessary_sufficient
+    (F G : (V → State) → (V → State)) (v : V) :
+    dependencyAssignment (F ∘ G) v ⊆
+      composedNeighborhood (dependencyAssignment F) (dependencyAssignment G) v := by
+  have h := NecSuf.CompositeMapEssentialDependency.supportAssignment_composite_subset
+    (V := V) (A := State) stateEssentialDepDecidable State.zero nu ne_iff_eq_nu F G v
+  have hD : ∀ H : (V → State) → (V → State),
+      dependencyAssignment H =
+        NecSuf.CompositeMapEssentialDependency.supportAssignment stateEssentialDepDecidable H :=
+    fun H => funext (fun u => dependencyAssignment_eq_necessary_sufficient H u)
+  rw [composedNeighborhood, hD F, hD G, hD (F ∘ G)]
+  exact h
+
+/-- 具体版の複製写像は、必要十分版の複製写像をセル `StrictCell.a` へ特殊化したものである。 -/
+theorem strictG_eq_necessary_sufficient :
+    strictG = NecSuf.CompositeMapEssentialDependency.dupMap (A := State) StrictCell.a := rfl
+
+/-- 具体版の相違読み取り写像は、必要十分版の相違読み取り写像を
+    セル `StrictCell.a`・`StrictCell.b` と値 `State.zero`・`State.one` へ特殊化したものである。 -/
+theorem strictF_eq_necessary_sufficient :
+    strictF = NecSuf.CompositeMapEssentialDependency.diffMap
+      StrictCell.a StrictCell.b State.zero State.one := by
+  funext y c
+  cases c <;> simp [strictF, NecSuf.CompositeMapEssentialDependency.diffMap]
+
+/-- `claim_composite_map_support_bound_can_be_strict` が、必要十分版の反例定理を
+    二セルの舞台と状態型 `State` の相異なる二値へ特殊化して得られること。 -/
+theorem composite_support_bound_can_be_strict_from_necessary_sufficient :
+    dependencyAssignment (strictF ∘ strictG) StrictCell.a ⊂
+      composedNeighborhood (dependencyAssignment strictF) (dependencyAssignment strictG)
+        StrictCell.a := by
+  have h := NecSuf.CompositeMapEssentialDependency.supportAssignment_composite_subset_can_be_strict
+    (C := StrictCell) (A := State) stateEssentialDepDecidable
+    StrictCell.a StrictCell.b (by decide) State.zero State.one (by decide)
+  have hD : ∀ H : (StrictCell → State) → (StrictCell → State),
+      dependencyAssignment H =
+        NecSuf.CompositeMapEssentialDependency.supportAssignment stateEssentialDepDecidable H :=
+    fun H => funext (fun u => dependencyAssignment_eq_necessary_sufficient H u)
+  rw [composedNeighborhood, hD strictF, hD strictG, hD (strictF ∘ strictG),
+    strictF_eq_necessary_sufficient, strictG_eq_necessary_sufficient]
+  exact h
 
 end CellularAutomata.CompositeMapEssentialDependency
