@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 06:37（並行）: 偶部分グラフの補集合を terminal graph の外部辺へ送る `encodePeriodicSquareExternalEdges` と所属条件を追加した。次は各頂点で残る端子を内部辺で一意に覆う集合を構成する。
 - 2026-08-27 06:34: 分母二の場合の有限箱結論を渡す `denominator_two_numerator_eq_one_from_finite_box` を追加した。分母を払った有限箱等式と分子の整除から二の有限冪への整除を導き、破れ数零の多重度二と既約性で分子を一に定める。次は分母一・分母二の結論を最終の束ね定理へ直接接続する。
 - 2026-08-27 06:04: 分母一の場合の有限箱結論を渡す `integer_point_numerator_divides_two` を追加した（多重度零が二であることと既存の整除定理の合成）。次は分母二の場合を渡す段。
 - 2026-08-27 05:37（並行）: `PeriodicSquareEvenSubgraph` と `decodePeriodicSquareMatching` を追加し、完全マッチングから復号した辺集合を偶次数の証明ごと一つの型へ入れた。次は偶部分グラフから完全マッチングを構成する逆向き。

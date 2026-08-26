@@ -280,4 +280,20 @@ noncomputable def decodePeriodicSquareMatching
   ⟨encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁ matching,
     periodic_square_matching_decodes_even_subgraph hn matching hMatching hsub hcard hdisj⟩
 
+/-- 偶部分グラフから完全マッチングを復元するときに選ぶ外部辺の集合。
+polygon に属さない元の辺だけを terminal graph の外部辺へ送る。 -/
+noncomputable def encodePeriodicSquareExternalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :=
+  (Finset.univ \ subgraph.1).image (externalEdge latticeEndpoint₀ latticeEndpoint₁)
+
+/-- 復元用の外部辺に属することは、元の辺が偶部分グラフに属さないことと同値である。 -/
+theorem mem_encodePeriodicSquareExternalEdges_iff
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (s : Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :
+    s ∈ encodePeriodicSquareExternalEdges subgraph ↔
+      ∃ e : LatticeEdge n, e ∉ subgraph.1 ∧
+        externalEdge latticeEndpoint₀ latticeEndpoint₁ e = s := by
+  simp [encodePeriodicSquareExternalEdges]
+
 end Ising3DCut.Prediction
