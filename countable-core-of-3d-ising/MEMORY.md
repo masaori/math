@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 01:05（並行）: 周期境界の平面正方格子の各頂点の接続辺がちょうど四本であることを Lean で閉じた（`four_lattice_edges_subset_incidentEdges` と `card_latticeIncidentEdges_eq_four`、未証明依存検査 568 件）。次はこの個数を偶部分グラフの条件へ接続する。
+
 - 2026-08-27 01:02: 束ね主張 `claim_eventual_power_form_only_at_one` の SageMath 検証を追加した（`sagemath/check/eventual-power-form-only-at-one/`、三検査すべて PASS、linkage 93 件）。候補が三点で尽きること、有理点 2 と 2 分の 1 の排除、有理点 1 で底 2 の点数乗が成り立ち底が 2 に限られることを段ごとに検査した。次はこの主張の Lean 具体版。
 
 - 2026-08-27 00:32: これまでの有限箱の候補絞り込みと有理点 2・2 分の 1 の排除を束ね、末尾で点数乗表示が成り立つ正の有理点は 1 に限られることを `claim_eventual_power_form_only_at_one` として記述した。逆向きは既存の $Z_L(1)=2^{\#V_L}$ を使う。次はこの束ね主張の SageMath 検証。

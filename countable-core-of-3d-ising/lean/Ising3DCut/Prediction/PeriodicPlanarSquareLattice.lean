@@ -131,4 +131,33 @@ theorem latticeIncidentEdges_subset_four {n : ℕ} [NeZero n] (v : LatticeVertex
       have hb : b = v.2 - 1 := eq_sub_of_add_eq h2
       simp [hb, h1]
 
+/-- 四本は逆にすべて接続辺である。出る二辺と入る二辺の所属をそのまま集めるだけでよい。 -/
+theorem four_lattice_edges_subset_incidentEdges {n : ℕ} [NeZero n] (v : LatticeVertex n) :
+    ({(v, 0), (v, 1), ((v.1 - 1, v.2), 0), ((v.1, v.2 - 1), 1)} :
+        Finset (LatticeEdge n)) ⊆ latticeIncidentEdges v := by
+  obtain ⟨h₀, h₁, -⟩ := outgoing_lattice_edges_mem_and_ne v
+  obtain ⟨h₂, h₃, -⟩ := incoming_lattice_edges_mem_and_ne v
+  intro e he
+  simp only [Finset.mem_insert, Finset.mem_singleton] at he
+  rcases he with rfl | rfl | rfl | rfl
+  · exact h₀
+  · exact h₁
+  · exact h₂
+  · exact h₃
+
+/-- 一辺が二以上なら、各頂点の接続辺はちょうど四本である。
+両包含で接続辺集合が四本の集合に一致し、四本が相異なることから個数が四になる。 -/
+theorem card_latticeIncidentEdges_eq_four {n : ℕ} [NeZero n] (hn : 2 ≤ n)
+    (v : LatticeVertex n) : (latticeIncidentEdges v).card = 4 := by
+  have hset : latticeIncidentEdges v =
+      ({(v, 0), (v, 1), ((v.1 - 1, v.2), 0), ((v.1, v.2 - 1), 1)} :
+        Finset (LatticeEdge n)) :=
+    Finset.Subset.antisymm (latticeIncidentEdges_subset_four v)
+      (four_lattice_edges_subset_incidentEdges v)
+  obtain ⟨h01, h02, h03, h12, h13, h23⟩ := four_incident_lattice_edges_pairwise_ne hn v
+  rw [hset]
+  rw [Finset.card_insert_of_notMem (by simp [h01, h02, h03]),
+    Finset.card_insert_of_notMem (by simp [h12, h13]),
+    Finset.card_insert_of_notMem (by simp [h23]), Finset.card_singleton]
+
 end Ising3DCut.Prediction
