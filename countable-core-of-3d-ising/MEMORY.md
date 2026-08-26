@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 18:04（本流）: `NecSuf/DivisibilityTransfersAlongAdditiveDecomposition.lean`（`NecSuf.dvd_of_additive_decomposition`）と具体導出 `integer_point_numerator_divides_twice_zero_multiplicity_minus_one_viaNecSuf` を追加し、整数の有理点を定数項へ帰着する主張の四層を閉じた。具体版から有限和・冪・自然数の減法を落とすと、可換環で対象が定数項と有理点の倍数へ分かれる加法的な分解だけが残る。自然数版へは多重度ゼロの値と分配多項式の値の非負性だけで戻る。構築成功、未証明依存検査 544 件、`npm run check` 175 ブロック・386 参照すべて解決、linkage 89 件。次は「二つの箱から得た整除を一つへまとめて箱の大きさに依存しない形へ移す」の SageMath 検証。着手前レビュー修正なし。
 - 2026-08-26 17:33（本流）: `lean/Ising3DCut/LimitQuantity/IntegerPointNumeratorDividesTwiceZeroMultiplicityMinusOne.lean` を追加し、整数の有理点を定数項へ帰着する主張の Lean 具体版を閉じた。有限和の定数項分離、自然数減法に必要な `Omega 0 >= 1`、二倍した差、整除の差を人手証明と同じ三段で並べた。対象ファイルの構築成功、未証明依存検査 544 件。次は同主張の Lean 必要十分版。着手前レビュー修正なし。
 - 2026-08-26 16:36（並行）: `incoming_lattice_edges_mem_and_ne` を追加し、周期境界の平面正方格子で各頂点へ入る横辺と縦辺を一つ前の巡回座標から構成して、接続辺集合への所属と相異性を閉じた。次は出入りの四辺の相異性と、接続辺集合がこの四辺だけであることを示す。
 - 2026-08-26 16:33（本流）: `claim_integer_point_numerator_divides_twice_zero_multiplicity_minus_one` の SageMath 層を追加した。定数項分離と二倍した差を `ZZ` 上の多項式恒等式で、整除の差による保存を整数の厳密標本で確認し、三検査とも PASS、linkage 89 件。次は同主張の Lean 具体版。着手前レビュー修正なし。
