@@ -33,6 +33,7 @@ export const ALL_LABELS = [
   "claim_even_multiplicity",
   "claim_eventual_power_form_at_one_half_is_impossible",
   "claim_eventual_power_form_at_two_is_impossible",
+  "claim_eventual_power_form_only_at_one",
   "claim_eventually_constant_iff_power_identity",
   "claim_factorization_type_determines_root_minimal_degrees",
   "claim_finite_box_equalities_transfer_to_limit_quantity",
