@@ -11349,4 +11349,26 @@ Z_L(2)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_eventually_constant_only_at_one",
+    kind: "claim",
+    title: { text: "有限箱の量が末尾で一定となる正の有理点は 1 に限られる" },
+    labels: ["claim_eventually_constant_only_at_one"],
+    habitat: "Q",
+    statement: [
+      paragraph([
+        "正の有理数 ", math(String.raw`q`), " について、有限箱の量の列 ",
+        math(String.raw`L\mapsto a_L(q)`), " が末尾で一定となることと ",
+        math(String.raw`q=1`), " であることは同値である。したがって、末尾定数列の収束だけから極限量の存在を閉じられる正の有理点は 1 だけである。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("claim_eventually_constant_iff_power_identity"), " により、末尾定数性は隣接する箱の分配多項式の冪等式が末尾で成り立つことと同値である。"]),
+      paragraph([ref("claim_power_identity_iff_rational_power_form"), " により、その冪等式の末尾成立は、一つの正の有理数を底とする点数乗表示が末尾で成り立つことと同値である。"]),
+      paragraph([
+        ref("claim_eventual_power_form_only_at_one"), " により、この点数乗表示が成り立つことと ",
+        math(String.raw`q=1`), " であることは同値である。以上の三つの同値を合成して主張を得る。すべて有限箱の等式であり、新しい非可算への脱出はない。",
+      ]),
+    ],
+  },
 ]);
