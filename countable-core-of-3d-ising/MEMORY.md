@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 13:03（本流）: `lean/Ising3DCut/LimitQuantity/PowerFormBaseDeterminedByThresholdBox.lean` を追加し、`claim_power_form_base_is_determined_by_threshold_box` の Lean 具体版を閉じた。人手証明と同じ順で、準備段（閾値の箱の点の数 $n=L_0^3\ge1$）、第二段（正の有理数の狭義大小は非零自然数乗で保たれる。因子を一つずつ置き換える帰納）、着地（三分律で両側の不等号を第一段の等式との矛盾で排除）を置いた。扱うのは $\mathbb Q$ の等式と大小だけで、正の実数乗根も箱の大きさの極限も現れない。`lake build` 成功、未証明依存検査 538 件、`npm run check` 173 ブロック・452 参照すべて解決、linkage 87 件。次は同主張の Lean 必要十分版。着手前レビュー修正なし。
 - 2026-08-26 12:36（本流）: `claim_power_form_base_is_determined_by_threshold_box` の SageMath 層を追加した。閾値での冪等式、正の有理数の有限乗の狭義順序保存、同じ冪からの底の一意性を三ファイルに分けて全 PASS、linkage 87 件。次は Lean 具体版。
 - 2026-08-26 12:34（レビュー）: 直前に記述済みの `claim_power_form_base_is_determined_by_threshold_box` が台帳で `todo` のままだった不整合を「記述まで」へ訂正した。本文は正の有理数の有限乗の単射性だけで閉じ、許されない脱出は無い。次は SageMath 検証。
 - 2026-08-26 12:07（本流）: 次の本流をゴール文書の自由エネルギー密度の最小性の行から引き直し、三つへ割って台帳へ書いた（底の一意性 → 整除への代入 → 排除の判定）。その先頭 `claim_power_form_base_is_determined_by_threshold_box` を記述した。点数乗表示 $Z_L(q)=c^{\#V_L}$ の底 $c$ は自由変数ではなく、閾値の箱 $L_0$ の値と点の数だけで一意に決まる。証明は三分律と、正の有理数の積の狭義単調性を $n=\#V_{L_0}\ge1$ 回用いるだけである。`npm run check` はブロック 173 件・参照 381 件すべて解決。次はこの記述の SageMath 検証。着手前レビュー修正なし。
