@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 16:33（本流）: `claim_integer_point_numerator_divides_twice_zero_multiplicity_minus_one` の SageMath 層を追加した。定数項分離と二倍した差を `ZZ` 上の多項式恒等式で、整除の差による保存を整数の厳密標本で確認し、三検査とも PASS、linkage 89 件。次は同主張の Lean 具体版。着手前レビュー修正なし。
 - 2026-08-26 15:36（並行）: `outgoing_lattice_edges_mem_and_ne` を追加し、周期境界の平面正方格子で各頂点から出る横辺と縦辺が接続辺集合に属し、相異なることを閉じた。接続辺数四の一般形を出る二辺と入る二辺の構成へ割った先頭で、次は入る二辺の構成と四辺の相異性を示す。
 - 2026-08-26 16:02（本流）: 「結んだ関係から正の有理点一以外を排除できるか判定する」を整数の場合と分母 2 の場合へ割り、先頭を記述した（`claim_integer_point_numerator_divides_twice_zero_multiplicity_minus_one`）。整数の有理点では関係が定数項 $\Omega_{L_0}(0)$ だけの整除へ帰着し、候補が有限個に絞られる。次は同主張の SageMath 検証。着手前レビュー修正なし。
 - 2026-08-26 15:34（本流）: `NecSuf.relation_of_relation_preserving_map_and_target_equality` と具体導出 `numerator_divides_twice_threshold_box_value_minus_one_viaNecSuf` を追加し、「底の従属性を整除へ代入して分子と箱の値を結ぶ」の四層を完了した。自然数・冪・有限等比和・整除を落とすと、関係を保つ写像、関係の推移、最後の対象の等号だけが残る。次は「結んだ関係から正の有理点一以外を排除できるか判定する」の記述。着手前レビュー修正なし。
