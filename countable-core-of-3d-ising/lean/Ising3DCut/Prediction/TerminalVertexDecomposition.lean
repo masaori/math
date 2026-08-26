@@ -982,5 +982,40 @@ theorem forall_even_card_uncovered_iff_forall_even_card_incidentEdges
     exact (card_matchingUncoveredTerminalsAt_even_iff incidentEdges v matching
       (hsub v hv) (hcard v hv) (hdisj v hv)).mpr (h v hv)
 
+/-- 完全マッチングから復号された辺集合が偶部分グラフであるという頂点ごとの条件を、
+元の接続辺数の偶数性へ移す。 -/
+theorem forall_even_card_selected_iff_forall_even_card_incidentEdges
+    {V Edge : Type*} [DecidableEq V] [DecidableEq Edge]
+    (vertices : Finset V) (edges : Finset Edge) (incidentEdges : V → Finset Edge)
+    (endpoint₀ endpoint₁ : Edge → V)
+    (matching : Finset (Finset (Σ _ : V, Edge)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices vertices incidentEdges)
+      (terminalEdges vertices edges incidentEdges endpoint₀ endpoint₁) matching)
+    (hIncident : ∀ w : V, ∀ f ∈ incidentEdges w, endpoint₀ f = w ∨ endpoint₁ f = w)
+    (hsub : ∀ v ∈ vertices,
+      matchingCoveredTerminalsAt incidentEdges v matching ⊆ terminalsAt incidentEdges v)
+    (hcard : ∀ v ∈ vertices,
+      ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching, s.card = 2)
+    (hdisj : ∀ v ∈ vertices,
+      ∀ s ∈ matchingInternalEdgesAt incidentEdges v matching,
+      ∀ t ∈ matchingInternalEdgesAt incidentEdges v matching, s ≠ t → Disjoint s t) :
+    (∀ v ∈ vertices,
+      Even (selectedIncidentEdgesAt edges incidentEdges endpoint₀ endpoint₁ matching v).card)
+      ↔ (∀ v ∈ vertices, Even (incidentEdges v).card) := by
+  have hUncovered := forall_even_card_uncovered_iff_forall_even_card_incidentEdges
+    vertices incidentEdges matching hsub hcard hdisj
+  constructor
+  · intro hSelected
+    apply hUncovered.mp
+    intro v hv
+    rw [card_uncovered_eq_card_selected_of_perfectMatching vertices edges incidentEdges
+      endpoint₀ endpoint₁ matching hMatching hIncident v hv]
+    exact hSelected v hv
+  · intro hIncidentEven v hv
+    rw [← card_uncovered_eq_card_selected_of_perfectMatching vertices edges incidentEdges
+      endpoint₀ endpoint₁ matching hMatching hIncident v hv]
+    exact hUncovered.mpr hIncidentEven v hv
+
 
 end Ising3DCut.Prediction
