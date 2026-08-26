@@ -87,6 +87,9 @@ targets=(
   Ising3DCut.NecSuf.pow_mod_prime_sq_ne_prime
   Ising3DCut.NecSuf.no_eventual_power_form_of_prime_sq_residue
   Ising3DCut.LimitQuantity.eventual_power_form_at_two_is_impossible_fromNecSuf
+  Ising3DCut.NecSuf.eq_of_three_candidates_of_two_impossible
+  Ising3DCut.NecSuf.eq_of_candidates_of_unique
+  Ising3DCut.LimitQuantity.eq_one_of_eventual_power_form_fromNecSuf
   Ising3DCut.NecSuf.relation_of_relation_and_three_equalities
   Ising3DCut.LimitQuantity.numerator_divides_twice_base_minus_one_viaNecSuf
   Ising3DCut.Prediction.forall_even_card_selected_iff_forall_even_card_incidentEdges

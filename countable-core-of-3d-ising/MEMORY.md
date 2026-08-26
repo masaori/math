@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 02:03: 束ね主張 `claim_eventual_power_form_only_at_one` の Lean 必要十分版 `NecSuf/EventualPowerFormOnlyAtOne.lean` と導出 `LimitQuantity/EventualPowerFormOnlyAtOneFromNecSuf.lean` を追加し、この主張の四層を完成させた。必要十分版に残るのは「候補が三つに尽きること」と「そのうち二つで性質が成り立たないこと」の二つだけで、台となる型にも性質にも構造は要らない。候補が有限個であることすら本質ではないため、一意性から一点を決める一般形も併せて置いた。未証明依存検査 574 件。次の標的は `可算コアの同定とは何か.md` から引き直す。
+
 - 2026-08-27 01:37（並行）: `periodic_square_selected_edges_even` を追加し、周期正方格子の接続辺数四を完全マッチングからの偶部分グラフ定理へ接続した。次は Pfaffian 予言の復号写像全体の結論へ束ねる。
 
 - 2026-08-27 01:34: 束ね主張 `claim_eventual_power_form_only_at_one` の Lean 具体版 `LimitQuantity/EventualPowerFormOnlyAtOne.lean` を追加した。候補三点から有理点 2 分の 1 と 2 を既存の不可能性定理で除き、有理点 1 では底 2 の点数乗表示が全箱で成り立つことを有限和から示した。次は Lean 必要十分版。
