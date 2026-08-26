@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 04:03: `LimitQuantity/EventuallyConstantOnlyAtOneBundle.lean` に `eq_one_of_cross_power_identity_of_den_one` を追加した。冪等式の末尾成立から底を取り出し（`eventually_cross_power_identity_iff_rational_power_form_viaNecSuf`）、既約分母が 1 であることを受けて自然数の底へ移し（`eventualPowerFormAt_of_rationalPowerForm_den_one`）、三点の候補からの分岐（`eq_one_of_eventual_power_form`）へ渡して有理点を 1 に定める。候補が三点に尽きることと底の既約分母が 1 であることは本文の有限箱の整除と合同式による絞り込みで、Lean へは未移行なので仮定として明示した。`lake build` と未証明依存検査 576 件を通過。次はこの絞り込み自体の Lean 具体版。
 - 2026-08-27 03:34: `EventuallyConstantOnlyAtOne.lean` に `eventualPowerFormAt_of_rationalPowerForm_den_one` を追加した。既約分母が一と分かった正の有理数の底を分子の絶対値という正の自然数へ移し、同じ有限箱の点数乗表示を `EventualPowerFormAt` へ接続する。次は候補三点への絞り込みを既存の有限箱定理から束ねて、末尾定数性分類の Lean 具体版を閉じる。
 - 2026-08-27 03:32（レビュー）: `claim_eventually_constant_only_at_one` は、冪等式から得る底が正の有理数である一方、引用先 `claim_eventual_power_form_only_at_one` は底を正の自然数と仮定し、候補三点も外部仮定として受け取っているため、そのままでは合成できない。本文へ TODO を戻した。次は底の自然数化と候補三点への絞り込みを既存の有限箱定理から束ねて Lean 具体版を閉じる。
 - 2026-08-27 03:09: `claim_eventually_constant_only_at_one` の SageMath 層を `sagemath/check/eventually-constant-only-at-one/` に置いた。合成の両端を実際の自由境界の箱の値で確かめ、有理点 1 では $Z_L(1)=2^{#V_L}$ と隣接箱の冪等式が一辺 4 の箱まで成り立つこと、有理点 1 以外の有限標本では冪等式が一辺 1 と 2 の組で既に破れることを 2 ファイルとも PASS。有理点での値が要る検査は全配位列挙が回る一辺 1・2 に限る。次は同主張の Lean 具体版。
