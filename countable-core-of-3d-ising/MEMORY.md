@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 12:34（レビュー）: 直前に記述済みの `claim_power_form_base_is_determined_by_threshold_box` が台帳で `todo` のままだった不整合を「記述まで」へ訂正した。本文は正の有理数の有限乗の単射性だけで閉じ、許されない脱出は無い。次は SageMath 検証。
 - 2026-08-26 12:07（本流）: 次の本流をゴール文書の自由エネルギー密度の最小性の行から引き直し、三つへ割って台帳へ書いた（底の一意性 → 整除への代入 → 排除の判定）。その先頭 `claim_power_form_base_is_determined_by_threshold_box` を記述した。点数乗表示 $Z_L(q)=c^{\#V_L}$ の底 $c$ は自由変数ではなく、閾値の箱 $L_0$ の値と点の数だけで一意に決まる。証明は三分律と、正の有理数の積の狭義単調性を $n=\#V_{L_0}\ge1$ 回用いるだけである。`npm run check` はブロック 173 件・参照 381 件すべて解決。次はこの記述の SageMath 検証。着手前レビュー修正なし。
 - 2026-08-26 11:35（本流）: `NecSuf.every_target_has_related_admissible_witness` と具体導出 `box_free_divisibility_excludes_no_rational_point_viaNecSuf` を追加し、箱に依存しない整除による否定判定の四層を閉じた。整数・正値性・整除を落とすと、対象ごとに許容される証人を構成し、所定の関係を満たすことだけが残る。次の本流はゴール文書の「最初の三手」「極限側で問う言明」「否定判定」から引き直す。着手前レビュー修正なし。
 - 2026-08-26 10:34（本流）: `lean/Ising3DCut/LimitQuantity/BoxFreeDivisibilityExcludesNoRationalPoint.lean` を追加し、`claim_box_free_divisibility_excludes_no_rational_point` の Lean 具体版を閉じた。分子 $a>0$ に対し底を $c=a+1$ に取り、人手証明と同じ三段（$1\le c$、$2(c-1)=2a$、$a\mid 2a$）で $a\mid 2(c-1)$ を示す存在主張である。**否定判定**なので、証人の構成そのものが結論であり、これ以上絞れるのは分子と底の組だけである。`lake build` 成功、未証明依存検査 536 件、`npm run check` はブロック 172 件・参照 379 件すべて解決、linkage 86 件。次は同主張の Lean 必要十分版。着手前レビュー修正なし。
