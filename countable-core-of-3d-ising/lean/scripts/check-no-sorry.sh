@@ -54,6 +54,7 @@ fi
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 #    具体版・必要十分版・両者をつなぐ導出の 3 本を、いずれも登録する。
 targets=(
+  Ising3DCut.LimitQuantity.eventualPowerFormAt_of_rationalPowerForm_den_one
   Ising3DCut.Prediction.four_incident_lattice_edges_pairwise_ne
   Ising3DCut.Prediction.fin_sub_one_ne_self
   Ising3DCut.LimitQuantity.denominatorTwo_scaled_partition_sum_split
