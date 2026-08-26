@@ -334,4 +334,13 @@ theorem even_card_encodePeriodicSquareRemainingTerminalsAt
   rw [card_encodePeriodicSquareRemainingTerminalsAt]
   exact subgraph.2 v (Finset.mem_univ v)
 
+/-- 偶部分グラフから内部辺を復元するとき、各 city で候補となる内部辺。
+残存端子の二元部分集合だけを候補とする。次の段で、この候補から互いに
+交わらず全端子を一度ずつ覆う集合を構成する。 -/
+def encodePeriodicSquareCandidateInternalEdgesAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :=
+  (encodePeriodicSquareRemainingTerminalsAt subgraph v).powersetCard 2
+
 end Ising3DCut.Prediction

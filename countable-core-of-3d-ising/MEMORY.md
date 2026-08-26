@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 08:36（並行）: 残存端子の対構成を、候補内部辺の定義と完全被覆の証明に分け、先頭の `encodePeriodicSquareCandidateInternalEdgesAt` を二元部分集合として置いた。次は偶数性から交わらない完全被覆を構成する。
 - 2026-08-27 08:32: 点の分母が偶数の場合を、底の既約分母における素数二の指数が一の場合と二以上の場合に分ける `two_not_dvd_power_base_den_of_exponent_cases` を Lean 具体版で閉じた。次は有限箱の先行定理から両分岐の矛盾を構成して渡す。
 - 2026-08-27 08:06（並行）: 残存端子の個数が偶部分グラフの次数に等しいこと（`card_encodePeriodicSquareRemainingTerminalsAt`）と、その偶数性（`even_card_encodePeriodicSquareRemainingTerminalsAt`）を閉じた。次は偶数個の端子を内部辺で対にして覆う集合の構成。
 - 2026-08-27 08:03: 点の分母が奇数の場合について、素数二も点数乗表示の底の既約分母を割らないことを、同じ有限箱の正整数商表示から `two_not_dvd_power_base_den_from_finite_box_representation` として Lean 具体版で閉じた。次は点の分母が偶数の場合と、法 q.den の整除を有限箱の先行主張から接続する。
