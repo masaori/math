@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 15:34（本流）: `NecSuf.relation_of_relation_preserving_map_and_target_equality` と具体導出 `numerator_divides_twice_threshold_box_value_minus_one_viaNecSuf` を追加し、「底の従属性を整除へ代入して分子と箱の値を結ぶ」の四層を完了した。自然数・冪・有限等比和・整除を落とすと、関係を保つ写像、関係の推移、最後の対象の等号だけが残る。次は「結んだ関係から正の有理点一以外を排除できるか判定する」の記述。着手前レビュー修正なし。
 - 2026-08-26 14:34（並行）: `card_univ_latticeEdge` を追加し、周期境界の平面正方格子の辺総数が一辺 $n$ に対して $2n^2$ であることを Lean で閉じた。端点写像から接続辺を定義しているのと同じ辺型を数えており、対象ファイルの単独再構築に成功。次は接続辺数四の一般形を示して偶部分グラフ条件へ接続する。
 - 2026-08-26 14:33（本流）: `claim_numerator_divides_twice_threshold_box_value_minus_one` の SageMath 層を追加した。有限等比和の四段、整除の二倍への移送と推移、閾値の箱の値の代入を `ZZ` の三検査へ分けて全 PASS、linkage 88 件。次は同主張の Lean 具体版。着手前レビュー修正なし。
 - 2026-08-26 13:06（並行）: `lean/Ising3DCut/Prediction/PeriodicPlanarSquareLattice.lean` を追加し、周期境界の平面正方格子を具体的に構成した。頂点 `Fin n × Fin n`、辺は起点と方向（横・縦）の組、端点写像は巡回和で一つ進めるだけ。接続辺は端点写像から定義するので格子の形を担うのは端点写像だけである。端点条件 `latticeIncident` と、$n=3$・$n=4$ での接続辺数四（`decide`）を示した。これで直前の `forall_even_card_selected_of_card_incidentEdges_eq_four` の仮定を満たす具体例が出た。`lake build` 成功、未証明依存検査 538 件。次は辺の総数と偶部分グラフ条件の接続。
