@@ -10611,4 +10611,111 @@ c^{\,m}-1
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_box_free_divisibility_excludes_no_rational_point",
+    kind: "claim",
+    title: {
+      text: "箱の大きさに依存しない整除を満たす底はどの分子に対しても存在する",
+    },
+    labels: ["claim_box_free_divisibility_excludes_no_rational_point"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        "任意の正の自然数 ",
+        math(String.raw`a`),
+        " に対して、正の自然数 ",
+        math(String.raw`c`),
+        " であって",
+      ]),
+      displayMath(
+        String.raw`a\ \bigm|\ 2\,(c-1)`,
+      ),
+      paragraph([
+        "を満たすものが存在する。主張は ",
+        math(String.raw`\mathbb Z`),
+        " の整除だけからなり、箱の大きさの極限も無限和も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`c:=a+1`),
+        " と置く。",
+        math(String.raw`a`),
+        " は正の自然数なので ",
+        math(String.raw`c=a+1`),
+        " も正の自然数である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2\,(c-1)
+&=2\,\bigl((a+1)-1\bigr)
+&&(\because\ c=a+1)\\
+&=2a
+&&(\because\ (a+1)-1=a)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`a\mid 2a`),
+        " なので ",
+        math(String.raw`a\mid 2(c-1)`),
+        " を得る。",
+      ]),
+    ],
+  },
+  {
+    id: "soundness_bridge_remark_box_free_divisibility_judgement",
+    kind: "remark",
+    title: {
+      text: "箱の大きさに依存しない整除だけでは正の有理点は一つも排除されない",
+    },
+    labels: ["remark_box_free_divisibility_judgement"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        ref("claim_numerator_divides_twice_base_minus_one"),
+        " が与える整除 ",
+        math(String.raw`a\mid 2(c-1)`),
+        " は、分子 ",
+        math(String.raw`a`),
+        " と底 ",
+        math(String.raw`c`),
+        " の二つの自然数を結ぶ関係であり、",
+        math(String.raw`c`),
+        " を制約しない限り ",
+        math(String.raw`a`),
+        " を制約しない。実際 ",
+        ref("claim_box_free_divisibility_excludes_no_rational_point"),
+        " により、どの正の自然数 ",
+        math(String.raw`a`),
+        " に対しても整除を満たす正の自然数 ",
+        math(String.raw`c`),
+        " が存在する。したがってこの整除だけを根拠として ",
+        math(String.raw`a=1`),
+        "、すなわち正の有理点 ",
+        math(String.raw`q=a/b`),
+        " が ",
+        math(String.raw`q=1`),
+        " であることを導くことはできない。",
+      ]),
+      paragraph([
+        "この整除が絞っているのは、正の有理点 ",
+        math(String.raw`q`),
+        " そのものではなく、",
+        math(String.raw`q`),
+        " と、その点で有限箱の値がとる冪の底 ",
+        math(String.raw`c`),
+        " との組である。次に必要なのは、",
+        math(String.raw`c`),
+        " を ",
+        math(String.raw`q`),
+        " から決める関係、すなわち一つの箱の大きさにおける値 ",
+        math(String.raw`Z_L(q)=c^{\#V_L}`),
+        " を ",
+        math(String.raw`a`),
+        " と ",
+        math(String.raw`b`),
+        " の言葉で書き下すことである。",
+      ]),
+    ],
+  },
 ]);
