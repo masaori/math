@@ -20,6 +20,8 @@ import Ising3DCut.LimitQuantity.RationalPowerPointDenominatorDividesTwo
 import Ising3DCut.LimitQuantity.IntegerPointNumeratorDividesTwo
 import Ising3DCut.LimitQuantity.DenominatorTwoNumeratorEqualsOne
 import Ising3DCut.LimitQuantity.RationalPowerBaseDenominatorPrimes
+import Ising3DCut.LimitQuantity.RationalPowerBaseDenTwoExponentOneImpossible
+import Ising3DCut.LimitQuantity.RationalPowerBaseDenTwoExponentAtLeastTwoImpossible
 
 namespace Ising3DCut.LimitQuantity
 
@@ -55,6 +57,22 @@ theorem two_not_dvd_power_base_den_from_finite_box_representation
     ¬ (2 : ℕ) ∣ c.den :=
   odd_prime_not_dvd_power_base_den_from_finite_box_representation
     hc hL hL₀L hform hvalue hP 2 Nat.prime_two hodd
+
+/-- 接続の第六段の第三歩。底の既約分母が偶数だと仮定すると、
+素数 `2` の指数は `1` か `2` 以上である。それぞれの場合を有限箱の
+先行定理で排除できれば、`2` は底の既約分母を割らない。
+この歩は指数による場合分けだけを担い、極限は使わない。 -/
+theorem two_not_dvd_power_base_den_of_exponent_cases
+    {c : ℚ}
+    (hone : c.den.factorization 2 = 1 → False)
+    (hgeTwo : 2 ≤ c.den.factorization 2 → False) :
+    ¬ (2 : ℕ) ∣ c.den := by
+  intro htwo
+  have hpos : 0 < c.den.factorization 2 :=
+    Nat.Prime.factorization_pos_of_dvd Nat.prime_two c.den_nz htwo
+  by_cases hone' : c.den.factorization 2 = 1
+  · exact hone hone'
+  · exact hgeTwo (by omega)
 
 /-- 正の有理点の既約分子と既約分母がともに `2` を割るなら、候補は三点に尽きる。 -/
 theorem positive_rational_three_candidates_of_num_den_dvd_two
