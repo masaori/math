@@ -16,6 +16,7 @@
 | `check_polynomial_embedding_composition.sage` | 整数係数多項式から代数的数係数多項式への標準単射の合成 | PASS | 直接の像と有理数係数多項式を経由した像が一致 |
 | `check_algebraic_coefficient_expansion.sage` | 有理数係数表示を代数的数係数表示へ移す標準単射 | PASS | 全例で係数ごとの像が一致 |
 | `check_coefficient_formal_derivatives.sage` | 係数表示の前三回の形式微分 | PASS | 三つの多項式恒等式が一致 |
+| `check_first_coefficient_formal_derivative.sage` | 係数表示の一回形式微分 | PASS | 本文の一回形式微分式が全例で一致 |
 | `check_qbar_embedding_finite_product.sage` | 有理数から代数的数への標準単射の有限積保存 | PASS | 全例で四因子積が一致 |
 | `check_qq_embedding_finite_product.sage` | 自然数から有理数への標準単射の有限積保存 | PASS | 全例で四因子積が一致 |
 | `check_falling_factorial_expansion.sage` | 三因子下降積の展開 | PASS | 全例で有限積の展開が一致 |
