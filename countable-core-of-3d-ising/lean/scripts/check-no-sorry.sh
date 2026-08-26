@@ -94,6 +94,7 @@ targets=(
   Ising3DCut.Prediction.latticeIncidentEdges_subset_four
   Ising3DCut.Prediction.four_lattice_edges_subset_incidentEdges
   Ising3DCut.Prediction.card_latticeIncidentEdges_eq_four
+  Ising3DCut.Prediction.periodic_square_selected_edges_even
   Ising3DCut.LimitQuantity.rational_power_point_denominator_divides_two
   Ising3DCut.NecSuf.denominator_eq_one_of_prime_divisors_restricted
   Ising3DCut.NecSuf.denominator_one_and_outer_denominator_divides_constant

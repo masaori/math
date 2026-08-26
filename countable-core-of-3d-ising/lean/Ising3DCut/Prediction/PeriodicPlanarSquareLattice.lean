@@ -13,6 +13,7 @@
 接続辺数が四であることは、辺集合が有限なので各 `n` について決定計算で確かめられる。
 -/
 import Mathlib
+import Ising3DCut.Prediction.TerminalVertexDecomposition
 
 namespace Ising3DCut.Prediction
 
@@ -159,5 +160,38 @@ theorem card_latticeIncidentEdges_eq_four {n : ℕ} [NeZero n] (hn : 2 ≤ n)
   rw [Finset.card_insert_of_notMem (by simp [h01, h02, h03]),
     Finset.card_insert_of_notMem (by simp [h12, h13]),
     Finset.card_insert_of_notMem (by simp [h23]), Finset.card_singleton]
+
+/-- 一辺が二以上の周期正方格子では、terminal graph の完全マッチングから復号した
+辺集合は各頂点で偶数本の接続辺を持つ。接続辺数四の具体計算を、一般の
+完全マッチングからの偶部分グラフ定理へ接続したもの。 -/
+theorem periodic_square_selected_edges_even
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n)
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices Finset.univ latticeIncidentEdges)
+      (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁) matching)
+    (hsub : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      matchingCoveredTerminalsAt latticeIncidentEdges v matching ⊆
+        terminalsAt latticeIncidentEdges v)
+    (hcard : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      ∀ s ∈ matchingInternalEdgesAt latticeIncidentEdges v matching, s.card = 2)
+    (hdisj : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      ∀ s ∈ matchingInternalEdgesAt latticeIncidentEdges v matching,
+      ∀ t ∈ matchingInternalEdgesAt latticeIncidentEdges v matching,
+        s ≠ t → Disjoint s t) :
+    ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      Even (selectedIncidentEdgesAt Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁ matching v).card := by
+  apply forall_even_card_selected_of_card_incidentEdges_eq_four
+    Finset.univ Finset.univ latticeIncidentEdges latticeEndpoint₀ latticeEndpoint₁
+    matching hMatching
+  · intro w f hf
+    exact (Finset.mem_filter.mp hf).2
+  · exact hsub
+  · exact hcard
+  · exact hdisj
+  · intro v _
+    exact card_latticeIncidentEdges_eq_four hn v
 
 end Ising3DCut.Prediction

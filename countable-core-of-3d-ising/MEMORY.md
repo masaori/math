@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 01:37（並行）: `periodic_square_selected_edges_even` を追加し、周期正方格子の接続辺数四を完全マッチングからの偶部分グラフ定理へ接続した。次は Pfaffian 予言の復号写像全体の結論へ束ねる。
+
 - 2026-08-27 01:34: 束ね主張 `claim_eventual_power_form_only_at_one` の Lean 具体版 `LimitQuantity/EventualPowerFormOnlyAtOne.lean` を追加した。候補三点から有理点 2 分の 1 と 2 を既存の不可能性定理で除き、有理点 1 では底 2 の点数乗表示が全箱で成り立つことを有限和から示した。次は Lean 必要十分版。
 
 - 2026-08-27 01:05（並行）: 周期境界の平面正方格子の各頂点の接続辺がちょうど四本であることを Lean で閉じた（`four_lattice_edges_subset_incidentEdges` と `card_latticeIncidentEdges_eq_four`、未証明依存検査 568 件）。次はこの個数を偶部分グラフの条件へ接続する。
