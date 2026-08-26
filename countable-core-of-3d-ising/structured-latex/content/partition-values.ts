@@ -10819,4 +10819,100 @@ c^{\,m}-1
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_numerator_divides_twice_threshold_box_value_minus_one",
+    kind: "claim",
+    title: {
+      text: "分子は閾値の箱の値から 1 を引いた数の 2 倍を割る",
+    },
+    labels: ["claim_numerator_divides_twice_threshold_box_value_minus_one"],
+    habitat: "N",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`a`),
+        "、正の自然数 ",
+        math(String.raw`L_0`),
+        "、正の自然数 ",
+        math(String.raw`c`),
+        "、正の自然数 ",
+        math(String.raw`n`),
+        " を取る（適用の際は ",
+        math(String.raw`n=\#V_{L_0}`),
+        " と置く）。",
+      ]),
+      displayMath(
+        String.raw`a\ \bigm|\ 2\,(c-1)
+\qquad\text{および}\qquad
+Z_{L_0}(q)=c^{\,n}`,
+      ),
+      paragraph([
+        "がともに成り立つならば",
+      ]),
+      displayMath(
+        String.raw`a\ \bigm|\ 2\,\bigl(Z_{L_0}(q)-1\bigr)`,
+      ),
+      paragraph([
+        "が成り立つ。すなわち ",
+        ref("claim_numerator_divides_twice_base_minus_one"),
+        " が与える整除は、",
+        ref("claim_power_form_base_is_determined_by_threshold_box"),
+        " による底の従属性を代入することで、底 ",
+        math(String.raw`c`),
+        " を含まない、分子 ",
+        math(String.raw`a`),
+        " と閾値の箱の値 ",
+        math(String.raw`Z_{L_0}(q)`),
+        " だけの ",
+        math(String.raw`\mathbb Z`),
+        " の関係へ移る。箱の大きさは ",
+        math(String.raw`L_0`),
+        " ただ一つに固定されており、箱の大きさの極限も無限和も現れない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n`),
+        " は正の自然数なので、有限個の項からなる次の等式が成り立つ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(c-1)\sum_{k=0}^{n-1}c^{\,k}
+&=\sum_{k=0}^{n-1}c^{\,k+1}-\sum_{k=0}^{n-1}c^{\,k}
+&&(\because\ \text{分配法則})\\
+&=\sum_{k=1}^{n}c^{\,k}-\sum_{k=0}^{n-1}c^{\,k}
+&&(\because\ \text{添字の付け替え } k+1\mapsto k)\\
+&=c^{\,n}-c^{\,0}
+&&(\because\ \text{両辺に共通する } k=1,\dots,n-1 \text{ の項が相殺する})\\
+&=c^{\,n}-1
+&&(\because\ c^{\,0}=1)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\sum_{k=0}^{n-1}c^{\,k}`),
+        " は自然数なので、この等式から ",
+        math(String.raw`(c-1)\mid\bigl(c^{\,n}-1\bigr)`),
+        " が従う。",
+      ]),
+      paragraph([
+        "整除の両辺を 2 倍しても整除は保たれるので ",
+        math(String.raw`2(c-1)\mid 2\bigl(c^{\,n}-1\bigr)`),
+        " である。",
+      ]),
+      paragraph([
+        "仮定より ",
+        math(String.raw`a\mid 2(c-1)`),
+        " であり、整除は推移的なので ",
+        math(String.raw`a\mid 2\bigl(c^{\,n}-1\bigr)`),
+        " を得る。",
+      ]),
+      paragraph([
+        "仮定 ",
+        math(String.raw`Z_{L_0}(q)=c^{\,n}`),
+        " をこの整除へ代入して ",
+        math(String.raw`a\mid 2\bigl(Z_{L_0}(q)-1\bigr)`),
+        " を得る。",
+      ]),
+    ],
+  },
 ]);

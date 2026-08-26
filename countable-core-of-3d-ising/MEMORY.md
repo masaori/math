@@ -433,6 +433,8 @@
 - 2026-08-16: 健全性の橋の 2 番目「極限量を定義する」を記述（`def_limit_quantity_from_finite_box_sequence`、habitat R、唯一の脱出。実対数の代わりに正の実数乗根の極限で書いた——要レビュー）。次は割った 3 番目。
 ## 直近（2026-08-16 18:45 tick）
 
+- 2026-08-26 14:05: 本流「底の従属性を整除へ代入して分子と箱の値を結ぶ」を記述（`claim_numerator_divides_twice_threshold_box_value_minus_one`）。次は同主張の SageMath 検証。
+
 - 2026-08-24 13:37: 本流「冪等式の末尾成立を正の有理数の点数乗という形へ言い換える」の Lean 具体版を前半・後半へ割り、前半（十分性と、隣接立方数の互いに素性・点数による可除性・商の不変性の算術三段）を `lean/Ising3DCut/LimitQuantity/PowerIdentityIffRationalPowerForm.lean` へ書いて build と sorry 検査 389 件を通した。後半は有限積による正の有理数の復元と同値性の完成で、次の tick はここから。
 - 2026-08-17 10:00 tick: 本流「対称化した列は q↔1/q で不変である（有限箱の等式）」の Lean 必要十分版 `lean/Ising3DCut/NecSuf/SymmetrizedReciprocalInvariant.lean`（仮定は回文・次数≤E・q≠0・f(1/q)≠0 だけ）と零モデル版の導出 `LimitQuantity/SymmetrizedReciprocalInvariantNullModelFromNecSuf.lean`。sorry 検査 204 件。status done。次は本流「対称化した極限量に対して粗視化 q↦ε_{L,q}(Z_L) は必要でない」に着手。
 - 2026-08-17 06:45 tick: 本流「極限量に対して必要でない粗視化を一つ同定する」を 2 つに割った（先頭: 回文性から対称化した量 τ_L(q)=λ(Z_L(q))−(#E_L/2)λ(q) の q↔1/q 不変（有限箱の等式）、次: その箱の極限 α̃ に対して粗視化が必要でない）。対称化しない α には Z_L の単射性から反例が立たない論点を台帳に記録。割った先頭を記述（`claim_symmetrized_prime_exponent_data_is_reciprocal_invariant`、σ_L(q)=2λ(Z_L(q))−#E_L λ(q)∈Λ。check 95 ブロック、build:pdf 26 ページ）。同主張の SageMath 検証 PASS（L=1 で Z_1=2 が定数という例外を検査が発見し、主張に L≥2 の条件を追加）。status `記述と SageMath まで`。次は同主張の Lean 具体版。
