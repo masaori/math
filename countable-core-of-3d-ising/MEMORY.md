@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-26 19:03（本流）: `sagemath/check/denominator-two-point-and-final-candidate-set/` に三検査を追加し全 PASS させ、`claim_denominator_two_point_and_final_candidate_set` の SageMath 層を閉じた。分母を払って定数項と分子の倍数へ分ける段とくくり出した和の整数性、両辺から一を引いて二倍する段は `QQ` 上の多項式恒等式で、奇数の分子が $2^{E+1}$ を割ることから $a=1$ が従う段は整数の厳密標本（採用 33 件・除外 2079 件）で確認した。候補集合が $\{1/2,1,2\}$ の三つに限られることも確かめた。linkage 90 件、`npm run check` 176 ブロック・461 参照すべて解決、PDF 62 ページ。次は同主張の Lean 具体版。着手前レビュー修正なし。
 - 2026-08-26 18:35（本流）: `claim_denominator_two_point_and_final_candidate_set` を記述した。分配多項式の有限和に分母を払う 2 の有限冪を掛け、定数項以外から分子をくくり出すことで、分母 2 側は二分の一に限られる。整数側の既存主張と合わせた候補は二分の一・一・二の三つであり、現在の関係だけでは一以外を排除できないと判定した。次はこの主張の SageMath 検証。
 - 2026-08-26 18:32（レビュー）: 直前の整数有理点の定数項帰着の四層を再照合し、数学的な修正事項は無かった。セクション表の末尾に、四層完了済みの「二つの箱の整除を箱に依存しない一つの整除へまとめる」を「記述まで」とする古い重複行が残っていたため削除した。次は本流「分母 2 の有理点と最終判定」の記述。
 - 2026-08-26 18:04（本流）: `NecSuf/DivisibilityTransfersAlongAdditiveDecomposition.lean`（`NecSuf.dvd_of_additive_decomposition`）と具体導出 `integer_point_numerator_divides_twice_zero_multiplicity_minus_one_viaNecSuf` を追加し、整数の有理点を定数項へ帰着する主張の四層を閉じた。具体版から有限和・冪・自然数の減法を落とすと、可換環で対象が定数項と有理点の倍数へ分かれる加法的な分解だけが残る。自然数版へは多重度ゼロの値と分配多項式の値の非負性だけで戻る。構築成功、未証明依存検査 544 件、`npm run check` 175 ブロック・386 参照すべて解決、linkage 89 件。次は「二つの箱から得た整除を一つへまとめて箱の大きさに依存しない形へ移す」の SageMath 検証。着手前レビュー修正なし。
