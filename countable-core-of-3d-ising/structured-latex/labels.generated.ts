@@ -69,6 +69,7 @@ export const ALL_LABELS = [
   "claim_pointwise_cross_power_equality_implies_root_sequence_equality",
   "claim_pointwise_equal_positive_real_sequences_transfer_limit",
   "claim_pointwise_root_sequence_equality_implies_tail_agreement",
+  "claim_power_form_base_is_determined_by_threshold_box",
   "claim_power_identity_iff_rational_power_form",
   "claim_power_minus_one_divides_multiple_exponent",
   "claim_power_minus_one_gcd_equals_power_of_exponent_gcd",
