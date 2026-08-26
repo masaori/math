@@ -106,4 +106,29 @@ theorem four_incident_lattice_edges_pairwise_ne {n : ℕ} [NeZero n]
     exact fin_sub_one_ne_self hn v.2 (congrArg (fun e : LatticeEdge n => e.1.2) h).symm
   · simp
 
+/-- 接続辺は上の四本で尽きる。端点条件の場合分けで、起点が自分なら出る二辺、
+第二の端点が自分なら巡回座標を一つ戻した入る二辺になる。 -/
+theorem latticeIncidentEdges_subset_four {n : ℕ} [NeZero n] (v : LatticeVertex n) :
+    latticeIncidentEdges v ⊆
+      ({(v, 0), (v, 1), ((v.1 - 1, v.2), 0), ((v.1, v.2 - 1), 1)} :
+        Finset (LatticeEdge n)) := by
+  intro e he
+  have h := latticeIncident v e he
+  obtain ⟨⟨a, b⟩, d⟩ := e
+  fin_cases d
+  · rcases h with h | h
+    · simp only [latticeEndpoint₀] at h
+      simp [h]
+    · simp only [latticeEndpoint₁] at h
+      obtain ⟨h1, h2⟩ := Prod.mk.injEq .. ▸ h
+      have ha : a = v.1 - 1 := eq_sub_of_add_eq h1
+      simp [ha, h2]
+  · rcases h with h | h
+    · simp only [latticeEndpoint₀] at h
+      simp [h]
+    · simp only [latticeEndpoint₁] at h
+      obtain ⟨h1, h2⟩ := Prod.mk.injEq .. ▸ h
+      have hb : b = v.2 - 1 := eq_sub_of_add_eq h2
+      simp [hb, h1]
+
 end Ising3DCut.Prediction
