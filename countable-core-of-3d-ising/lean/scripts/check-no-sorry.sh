@@ -57,6 +57,7 @@ targets=(
   Ising3DCut.LimitQuantity.eventualPowerFormAt_of_rationalPowerForm_den_one
   Ising3DCut.LimitQuantity.positive_rational_three_candidates_of_num_den_dvd_two
   Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_of_den_one
+  Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_of_base_den_conditions
   Ising3DCut.Prediction.periodic_square_matching_decodes_even_subgraph
   Ising3DCut.Prediction.four_incident_lattice_edges_pairwise_ne
   Ising3DCut.Prediction.fin_sub_one_ne_self

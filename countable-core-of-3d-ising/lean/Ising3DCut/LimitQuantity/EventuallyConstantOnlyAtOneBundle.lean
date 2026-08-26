@@ -5,12 +5,15 @@
 三点の候補からの分岐へ渡して 1 に定める。
 
 扱うのは有限箱の有理評価・自然数冪・有理数の既約分母だけであり、極限は使わない。
-候補が三点に尽きること自体は本文の有限箱の整除と合同式による絞り込みであり、
-ここでは仮定として受け取る（Lean へはまだ移していない）。
+候補が三点に尽きること自体は、既約分子と既約分母がともに 2 を割ることから
+この場で示す。既約分子・既約分母が 2 を割ること、および底の既約分母が 1 で
+あることは、本文の有限箱の整除と合同式による絞り込みであり、ここでは仮定と
+して受け取る（Lean へはまだ移していない）。
 -/
 import Ising3DCut.LimitQuantity.EventuallyConstantOnlyAtOne
 import Ising3DCut.LimitQuantity.CrossPowerIdentityIffRationalPowerFormFromNecSuf
 import Ising3DCut.LimitQuantity.DenominatorTwoPointAndFinalCandidateSet
+import Ising3DCut.LimitQuantity.RationalPowerPointDenominatorDividesTwo
 
 namespace Ising3DCut.LimitQuantity
 
@@ -62,6 +65,36 @@ theorem eq_one_of_cross_power_identity_of_den_one
     (eventually_cross_power_identity_iff_rational_power_form_viaNecSuf q hq L₀ hL₀).mp hcross
   have hpower : EventualPowerFormAt q :=
     eventualPowerFormAt_of_rationalPowerForm_den_one hcpos (hden c hcpos hform) hL₀ hform
+  exact eq_one_of_eventual_power_form hpower
+    (positive_rational_three_candidates_of_num_den_dvd_two hq hqnum hqden)
+
+/-- 接続の第三段。底の既約分母が 1 であることと、有理点の既約分母が `2` を割ることを、
+既に示した「点数乗表示が成り立つ正の有理点の既約分母は 2 を割る」から同時に受け取る。
+
+`hodd`（奇素数は底の既約分母を割らない）・`htwo`（2 も割らない）・`hdvd`（法 `q.den` の整除）は
+本文の三つの先行主張の結論であり、ここではそれぞれ仮定として受け取る。
+既約分子が `2` を割ることだけが未接続なので、`hqnum` として残す。 -/
+theorem eq_one_of_cross_power_identity_of_base_den_conditions
+    {q : ℚ} (hq : 0 < q) {L₀ : ℕ} (hL₀ : 0 < L₀)
+    (hcross : ∀ L, L₀ ≤ L →
+      rationalValueSeq q L ^ ((L + 1) ^ 3) = rationalValueSeq q (L + 1) ^ (L ^ 3))
+    (hodd : ∀ c : ℚ, 0 < c →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) →
+      ∀ p : ℕ, p.Prime → p ≠ 2 → ¬ p ∣ c.den)
+    (htwo : ∀ c : ℚ, 0 < c →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) → ¬ (2 : ℕ) ∣ c.den)
+    (hdvd : ∀ c : ℚ, 0 < c →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) →
+      q.den ∣ 2 * c.den ^ (L₀ ^ 3))
+    (hqnum : q.num.natAbs ∣ 2) :
+    q = 1 := by
+  obtain ⟨c, hcpos, hform⟩ :=
+    (eventually_cross_power_identity_iff_rational_power_form_viaNecSuf q hq L₀ hL₀).mp hcross
+  obtain ⟨hcden, hqden⟩ :=
+    rational_power_point_denominator_divides_two c q.den (L₀ ^ 3)
+      (hodd c hcpos hform) (htwo c hcpos hform) (hdvd c hcpos hform)
+  have hpower : EventualPowerFormAt q :=
+    eventualPowerFormAt_of_rationalPowerForm_den_one hcpos hcden hL₀ hform
   exact eq_one_of_eventual_power_form hpower
     (positive_rational_three_candidates_of_num_den_dvd_two hq hqnum hqden)
 
