@@ -4921,4 +4921,67 @@ q\nleq2
 \end{aligned}`),
     ],
   },
+  {
+    id: "finite_cellulation_theorem_product_difference_sixty_five_hyperbolic_types",
+    kind: "theorem",
+    title: { text: "積差六十五をもつ双曲正則型の分類" },
+    labels: ["theorem_product_difference_sixty_five_hyperbolic_types"],
+    habitat: "Z",
+    verification: ["sagemath/check/product-difference-sixty-five-hyperbolic-types"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_hyperbolic_regular_type_set"),
+        " の有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " と双曲正則型 ",
+        math(String.raw`(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)`),
+        " に対し、自然数から整数への標準単射を ",
+        math(String.raw`\iota_{\mathbb N,\mathbb Z}:\mathbb N\to\mathbb Z`),
+        " とし、",
+      ]),
+      displayMath(String.raw`\bar p:=\iota_{\mathbb N,\mathbb Z}(p),\qquad
+\bar q:=\iota_{\mathbb N,\mathbb Z}(q)`),
+      paragraph(["と書けば、"]),
+      displayMath(String.raw`\begin{aligned}
+\left(\bar p-2\right)\left(\bar q-2\right)=65
+\quad\Longleftrightarrow\quad
+(p,q)=(3,67)\ \text{または}\ (p,q)=(7,15)\ \text{または}\\
+\hspace{9.5em}(p,q)=(15,7)\ \text{または}\ (p,q)=(67,3).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        "、",
+        math(String.raw`\bar p,\bar q\in\mathbb Z`),
+        " である。この分類は自然数の加法、六十五の正の因子対、および標準単射だけから得られ、除算、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("theorem_hyperbolic_regular_type_degree_lower_bounds"), " より"]),
+      displayMath(String.raw`3\le p\qquad\text{かつ}\qquad3\le q.`),
+      paragraph([
+        "したがって、一意な ",
+        math(String.raw`a,b\in\mathbb N_{>0}`),
+        " が存在して ",
+        math(String.raw`p=a+2`),
+        " および ",
+        math(String.raw`q=b+2`),
+        " を満たす。この ",
+        math(String.raw`a,b`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\bar p-2\right)\left(\bar q-2\right)=65
+&\Longleftrightarrow ab=65
+&&\bigl(\because\ \text{標準単射は加法・乗法・等号を保存し反映する}\bigr)\\
+&\Longleftrightarrow
+(a,b)=(1,65)\ \text{または}\ (a,b)=(5,13)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(13,5)\ \text{または}\ (a,b)=(65,1)
+&&\bigl(\because\ 65\text{ の正の因子対の全体}\bigr)\\
+&\Longleftrightarrow
+(p,q)=(3,67)\ \text{または}\ (p,q)=(7,15)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(15,7)\ \text{または}\ (p,q)=(67,3)
+&&\bigl(\because\ p=a+2\text{ および }q=b+2\bigr).
+\end{aligned}`),
+    ],
+  },
 ]);
