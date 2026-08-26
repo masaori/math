@@ -19,8 +19,28 @@ import Ising3DCut.LimitQuantity.DenominatorTwoPointAndFinalCandidateSet
 import Ising3DCut.LimitQuantity.RationalPowerPointDenominatorDividesTwo
 import Ising3DCut.LimitQuantity.IntegerPointNumeratorDividesTwo
 import Ising3DCut.LimitQuantity.DenominatorTwoNumeratorEqualsOne
+import Ising3DCut.LimitQuantity.RationalPowerBaseDenominatorPrimes
 
 namespace Ising3DCut.LimitQuantity
+
+/-- 接続の第六段の先頭。閾値以後の一つの有限箱値を既約な有理点の分母を用いて
+正整数の商として表示できれば、その分母を割らない奇素数は点数乗表示の底の
+既約分母も割らない。有限箱表示と点数乗表示を同じ箱で結び、既存の素指数の
+主張へ渡すだけであり、極限は使わない。 -/
+theorem odd_prime_not_dvd_power_base_den_from_finite_box_representation
+    {q c : ℚ} {L₀ P E L : ℕ}
+    (hc : 0 < c) (hL : 0 < L) (hL₀L : L₀ ≤ L)
+    (hform : ∀ K, L₀ ≤ K → rationalValueSeq q K = c ^ (K ^ 3))
+    (hvalue : rationalValueSeq q L = (P : ℚ) / (q.den : ℚ) ^ E)
+    (hP : 0 < P) (p : ℕ) (hp : p.Prime) (hpNotDvd : ¬ p ∣ q.den) :
+    ¬ p ∣ c.den := by
+  have hN : 0 < L ^ 3 := pow_pos hL 3
+  have hrep : (P : ℚ) / (q.den : ℚ) ^ E = c ^ (L ^ 3) := by
+    calc
+      (P : ℚ) / (q.den : ℚ) ^ E = rationalValueSeq q L := hvalue.symm
+      _ = c ^ (L ^ 3) := hform L hL₀L
+  exact rational_power_base_den_not_dvd_of_not_dvd
+    p P q.den E (L ^ 3) hp hP q.den_pos hN hpNotDvd c hc hrep
 
 /-- 正の有理点の既約分子と既約分母がともに `2` を割るなら、候補は三点に尽きる。 -/
 theorem positive_rational_three_candidates_of_num_den_dvd_two
