@@ -73,6 +73,10 @@ targets=(
   Ising3DCut.LimitQuantity.partitionValueAtTwoNat_mod_four
   Ising3DCut.LimitQuantity.positive_power_ne_two_mod_four
   Ising3DCut.LimitQuantity.eventual_power_form_at_two_is_impossible
+  Ising3DCut.NecSuf.sum_modEq_distinguished_of_dvd_others
+  Ising3DCut.NecSuf.pow_mod_prime_sq_ne_prime
+  Ising3DCut.NecSuf.no_eventual_power_form_of_prime_sq_residue
+  Ising3DCut.LimitQuantity.eventual_power_form_at_two_is_impossible_fromNecSuf
   Ising3DCut.NecSuf.relation_of_relation_and_three_equalities
   Ising3DCut.LimitQuantity.numerator_divides_twice_base_minus_one_viaNecSuf
   Ising3DCut.Prediction.forall_even_card_selected_iff_forall_even_card_incidentEdges
