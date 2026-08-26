@@ -92,6 +92,7 @@
 | `check_algebraic_embedding_three_minus_one.sage` | 有理数から代数的数への標準単射の差の保存 | PASS | `iota(eta(3))-iota(eta(1))=iota(eta(2))` を厳密確認 |
 | `check_embedded_integer_coefficients.sage` | 標準単射像の整数係数整理 | PASS | `q_3-q_1=q_2` と分配を確認 |
 | `check_substitute_q1_in_coefficient_difference.sage` | `q_1=1` の係数差への代入 | PASS | `q_3-1_{Qbar}=q_3-q_1` を厳密確認 |
+| `check_coefficient_difference_transitivity.sage` | 係数差の二等式の推移律 | PASS | `q_3-1_{Qbar}=q_3-q_1` と `q_3-q_1=q_2` から `q_3-1_{Qbar}=q_2` を厳密確認 |
 | `check_natural_two_positive.sage` | 自然数 `2` の正値性 | PASS | `2\in\mathbb N_{>0}` を `NN` 内で厳密確認 |
 | `check_natural_two_nonzero.sage` | 自然数 `2` の非零性 | PASS | `2\ne0` を `NN` 内で厳密確認 |
 | `check_rational_embedding_two_nonzero.sage` | 自然数 `2` の有理数への標準単射像の非零性 | PASS | `eta_{N,Q}(2) != 0` を厳密確認 |
