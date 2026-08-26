@@ -42,6 +42,20 @@ theorem odd_prime_not_dvd_power_base_den_from_finite_box_representation
   exact rational_power_base_den_not_dvd_of_not_dvd
     p P q.den E (L ^ 3) hp hP q.den_pos hN hpNotDvd c hc hrep
 
+/-- 接続の第六段の第二歩。閾値以後の一つの有限箱値を既約な有理点の分母を用いて
+正整数の商として表示でき、かつその分母が奇数であれば、素数 `2` も点数乗表示の底の
+既約分母を割らない。前の歩と同じ有限箱表示を、素数 `2` について読み直すだけであり、
+極限は使わない。点の分母が偶数の場合はこの経路では閉じないので、別の歩で扱う。 -/
+theorem two_not_dvd_power_base_den_from_finite_box_representation
+    {q c : ℚ} {L₀ P E L : ℕ}
+    (hc : 0 < c) (hL : 0 < L) (hL₀L : L₀ ≤ L)
+    (hform : ∀ K, L₀ ≤ K → rationalValueSeq q K = c ^ (K ^ 3))
+    (hvalue : rationalValueSeq q L = (P : ℚ) / (q.den : ℚ) ^ E)
+    (hP : 0 < P) (hodd : ¬ (2 : ℕ) ∣ q.den) :
+    ¬ (2 : ℕ) ∣ c.den :=
+  odd_prime_not_dvd_power_base_den_from_finite_box_representation
+    hc hL hL₀L hform hvalue hP 2 Nat.prime_two hodd
+
 /-- 正の有理点の既約分子と既約分母がともに `2` を割るなら、候補は三点に尽きる。 -/
 theorem positive_rational_three_candidates_of_num_den_dvd_two
     {q : ℚ} (hq : 0 < q)
