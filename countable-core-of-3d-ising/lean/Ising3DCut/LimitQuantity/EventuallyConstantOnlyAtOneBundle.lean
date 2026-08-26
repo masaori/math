@@ -51,6 +51,18 @@ theorem positive_rational_three_candidates_of_num_den_dvd_two
         norm_num
       exact hnot q.reduced
 
+/-- 有理点の既約分母が `2` を割り、分母 `1` と分母 `2` の各場合について
+有限箱側の既存定理から得た分子の結論があれば、既約分子は `2` を割る。 -/
+theorem rational_point_numerator_divides_two_of_denominator_cases
+    {q : ℚ} (hden : q.den ∣ 2)
+    (hdenOne : q.den = 1 → q.num.natAbs ∣ 2)
+    (hdenTwo : q.den = 2 → q.num.natAbs = 1) :
+    q.num.natAbs ∣ 2 := by
+  rcases positive_integer_dvd_two_candidates q.den_pos hden with hd | hd
+  · exact hdenOne hd
+  · rw [hdenTwo hd]
+    exact one_dvd 2
+
 /-- 冪等式が閾値以後で成り立ち、そこから決まる底の既約分母が 1 であり、
 候補が三点に尽きているなら、有理点は 1 である。 -/
 theorem eq_one_of_cross_power_identity_of_den_one
@@ -93,6 +105,36 @@ theorem eq_one_of_cross_power_identity_of_base_den_conditions
   obtain ⟨hcden, hqden⟩ :=
     rational_power_point_denominator_divides_two c q.den (L₀ ^ 3)
       (hodd c hcpos hform) (htwo c hcpos hform) (hdvd c hcpos hform)
+  have hpower : EventualPowerFormAt q :=
+    eventualPowerFormAt_of_rationalPowerForm_den_one hcpos hcden hL₀ hform
+  exact eq_one_of_eventual_power_form hpower
+    (positive_rational_three_candidates_of_num_den_dvd_two hq hqnum hqden)
+
+/-- 接続の第四段。底と有理点の既約分母についての三条件に加え、
+有理点の分母が `1` の場合と `2` の場合に既存の有限箱定理が与える結論を束ね、
+外から既約分子の整除を仮定せずに有理点を `1` に定める。 -/
+theorem eq_one_of_cross_power_identity_of_finite_box_numerator_conditions
+    {q : ℚ} (hq : 0 < q) {L₀ : ℕ} (hL₀ : 0 < L₀)
+    (hcross : ∀ L, L₀ ≤ L →
+      rationalValueSeq q L ^ ((L + 1) ^ 3) = rationalValueSeq q (L + 1) ^ (L ^ 3))
+    (hodd : ∀ c : ℚ, 0 < c →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) →
+      ∀ p : ℕ, p.Prime → p ≠ 2 → ¬ p ∣ c.den)
+    (htwo : ∀ c : ℚ, 0 < c →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) → ¬ (2 : ℕ) ∣ c.den)
+    (hdvd : ∀ c : ℚ, 0 < c →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) →
+      q.den ∣ 2 * c.den ^ (L₀ ^ 3))
+    (hdenOne : q.den = 1 → q.num.natAbs ∣ 2)
+    (hdenTwo : q.den = 2 → q.num.natAbs = 1) :
+    q = 1 := by
+  obtain ⟨c, hcpos, hform⟩ :=
+    (eventually_cross_power_identity_iff_rational_power_form_viaNecSuf q hq L₀ hL₀).mp hcross
+  obtain ⟨hcden, hqden⟩ :=
+    rational_power_point_denominator_divides_two c q.den (L₀ ^ 3)
+      (hodd c hcpos hform) (htwo c hcpos hform) (hdvd c hcpos hform)
+  have hqnum : q.num.natAbs ∣ 2 :=
+    rational_point_numerator_divides_two_of_denominator_cases hqden hdenOne hdenTwo
   have hpower : EventualPowerFormAt q :=
     eventualPowerFormAt_of_rationalPowerForm_den_one hcpos hcden hL₀ hform
   exact eq_one_of_eventual_power_form hpower
