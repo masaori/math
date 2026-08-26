@@ -18,6 +18,7 @@
 | `check_coefficient_formal_derivatives.sage` | 係数表示の前三回の形式微分 | PASS | 三つの多項式恒等式が一致 |
 | `check_first_coefficient_formal_derivative.sage` | 係数表示の一回形式微分 | PASS | 本文の一回形式微分式が全例で一致 |
 | `check_second_coefficient_formal_derivative.sage` | 係数表示の二回形式微分 | PASS | 本文の二回形式微分式が全例で一致 |
+| `check_third_coefficient_formal_derivative.sage` | 係数表示の三回形式微分 | PASS | 本文の三回形式微分式が全例で一致 |
 | `check_qbar_embedding_finite_product.sage` | 有理数から代数的数への標準単射の有限積保存 | PASS | 全例で四因子積が一致 |
 | `check_qq_embedding_finite_product.sage` | 自然数から有理数への標準単射の有限積保存 | PASS | 全例で四因子積が一致 |
 | `check_falling_factorial_expansion.sage` | 三因子下降積の展開 | PASS | 全例で有限積の展開が一致 |
