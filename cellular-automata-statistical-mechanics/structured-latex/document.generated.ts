@@ -52,6 +52,7 @@ import blocks_iterate_monoid from './content/iterate-monoid.ts'
 import blocks_local_rule_representation from './content/local-rule-representation.ts'
 import blocks_locality_restricts_cycle_type from './content/locality-restricts-cycle-type.ts'
 import blocks_minimal_preperiod_period from './content/minimal-preperiod-period.ts'
+import blocks_neighborhood_assignment_intersection_nondistributivity from './content/neighborhood-assignment-intersection-nondistributivity.ts'
 import blocks_neighborhood_assignment_union_distributivity from './content/neighborhood-assignment-union-distributivity.ts'
 import blocks_ordered_neighborhood_assignment_monoid from './content/ordered-neighborhood-assignment-monoid.ts'
 import blocks_periodic_point_count from './content/periodic-point-count.ts'
@@ -102,6 +103,7 @@ export type AllBlocks = [
   ...typeof blocks_local_rule_representation,
   ...typeof blocks_locality_restricts_cycle_type,
   ...typeof blocks_minimal_preperiod_period,
+  ...typeof blocks_neighborhood_assignment_intersection_nondistributivity,
   ...typeof blocks_neighborhood_assignment_union_distributivity,
   ...typeof blocks_ordered_neighborhood_assignment_monoid,
   ...typeof blocks_periodic_point_count,
