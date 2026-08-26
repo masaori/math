@@ -74,6 +74,7 @@
 | `check_add_reciprocal_product.sage` | 逆数和と逆二乗和の積を両辺へ加える操作 | PASS | 積を加えた後に `q_2S_{G,3}` が孤立する |
 | `check_reverse_isolated_reciprocal_cube_sum.sage` | 孤立した逆三乗和等式の対称律 | PASS | 左右を反転した等式が一致 |
 | `check_substitute_reciprocal_sum_coefficient_ratio.sage` | 逆数和の係数表示定理の代入 | PASS | `R_G=A_G/Pbar_G` の代入前後が一致 |
+| `check_substitute_reciprocal_square_sum_coefficient_ratio.sage` | 逆二乗和の係数表示定理の代入 | PASS | `S_{G,2}=(A_G^2-Pbar_GB_G)/Pbar_G^2` の代入前後が一致 |
 | `check_substitute_lower_reciprocal_sums.sage` | 既存の一次・二次係数表示の代入 | PASS | 既存二定理の代入後も一致 |
 | `check_expand_cubed_quotient.sage` | 商の三乗 | PASS | 商の三乗と三乗どうしの商が一致 |
 | `check_multiply_reciprocal_factors.sage` | 二つの商の積 | PASS | 分子の積と三次分母を持つ商に一致 |
