@@ -296,4 +296,20 @@ theorem mem_encodePeriodicSquareExternalEdges_iff
         externalEdge latticeEndpoint₀ latticeEndpoint₁ e = s := by
   simp [encodePeriodicSquareExternalEdges]
 
+/-- 復元用の外部辺に覆われず、各 city で内部辺により覆うべき端子の集合。
+端子に対応する元の辺が polygon に属する場合だけ残す。 -/
+def encodePeriodicSquareRemainingTerminalsAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) : Finset (Σ _ : LatticeVertex n, LatticeEdge n) :=
+  (terminalsAt latticeIncidentEdges v).filter (fun t => t.2 ∈ subgraph.1)
+
+/-- city に残る端子であることは、その city に属し、対応する元の辺が polygon に
+属することと同値である。 -/
+theorem mem_encodePeriodicSquareRemainingTerminalsAt_iff
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) (t : Σ _ : LatticeVertex n, LatticeEdge n) :
+    t ∈ encodePeriodicSquareRemainingTerminalsAt subgraph v ↔
+      t ∈ terminalsAt latticeIncidentEdges v ∧ t.2 ∈ subgraph.1 := by
+  simp [encodePeriodicSquareRemainingTerminalsAt]
+
 end Ising3DCut.Prediction
