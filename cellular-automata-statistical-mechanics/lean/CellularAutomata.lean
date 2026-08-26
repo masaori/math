@@ -77,6 +77,7 @@ import CellularAutomata.NecSuf.ReversibleGlobalMapCycleType
 import CellularAutomata.NecSuf.SelfNeighborhoodReversibleMapGroup
 import CellularAutomata.NecSuf.TimeExpansionDependency
 import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry
+import CellularAutomata.OrderedNeighborhoodAssignmentMonoid
 import CellularAutomata.PeriodicPointCount
 import CellularAutomata.RecursivePreimageTreeCode
 import CellularAutomata.RedundantNeighbor
