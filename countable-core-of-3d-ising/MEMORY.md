@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 03:32（レビュー）: `claim_eventually_constant_only_at_one` は、冪等式から得る底が正の有理数である一方、引用先 `claim_eventual_power_form_only_at_one` は底を正の自然数と仮定し、候補三点も外部仮定として受け取っているため、そのままでは合成できない。本文へ TODO を戻した。次は底の自然数化と候補三点への絞り込みを既存の有限箱定理から束ねて Lean 具体版を閉じる。
 - 2026-08-27 03:09: `claim_eventually_constant_only_at_one` の SageMath 層を `sagemath/check/eventually-constant-only-at-one/` に置いた。合成の両端を実際の自由境界の箱の値で確かめ、有理点 1 では $Z_L(1)=2^{#V_L}$ と隣接箱の冪等式が一辺 4 の箱まで成り立つこと、有理点 1 以外の有限標本では冪等式が一辺 1 と 2 の組で既に破れることを 2 ファイルとも PASS。有理点での値が要る検査は全配位列挙が回る一辺 1・2 に限る。次は同主張の Lean 具体版。
 - 2026-08-27 02:34: 末尾定数性・隣接箱の冪等式・点数乗表示の三つの同値を合成し、有限箱の量が末尾で一定となる正の有理点は 1 に限られることを `claim_eventually_constant_only_at_one` として記述した。次は同主張の SageMath 検証。
 

@@ -4,7 +4,7 @@
  * 有限集合の数え上げと整係数多項式だけを使う。非可算な量は現れない。
  */
 
-import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
+import { defineBlocks, displayMath, math, paragraph, ref, todo } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -11366,8 +11366,7 @@ Z_L(2)
       paragraph([ref("claim_eventually_constant_iff_power_identity"), " により、末尾定数性は隣接する箱の分配多項式の冪等式が末尾で成り立つことと同値である。"]),
       paragraph([ref("claim_power_identity_iff_rational_power_form"), " により、その冪等式の末尾成立は、一つの正の有理数を底とする点数乗表示が末尾で成り立つことと同値である。"]),
       paragraph([
-        ref("claim_eventual_power_form_only_at_one"), " により、この点数乗表示が成り立つことと ",
-        math(String.raw`q=1`), " であることは同値である。以上の三つの同値を合成して主張を得る。すべて有限箱の等式であり、新しい非可算への脱出はない。",
+        todo("直前の同値が与える底は正の有理数だが、引用先の分類は底を正の自然数と仮定し、候補三点への絞り込みも外部仮定として受け取っている。底の自然数化と候補の絞り込みを既存の有限箱定理から接続してから、この二つの同値と分類を合成する。"),
       ]),
     ],
   },
