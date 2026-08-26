@@ -312,4 +312,26 @@ theorem mem_encodePeriodicSquareRemainingTerminalsAt_iff
       t ∈ terminalsAt latticeIncidentEdges v ∧ t.2 ∈ subgraph.1 := by
   simp [encodePeriodicSquareRemainingTerminalsAt]
 
+/-- city に残る端子の個数は、その city の接続辺のうち polygon に属するものの個数に等しい。
+端子の第二成分を取る対応が両向きに定まるので、個数はそのまま移る。 -/
+theorem card_encodePeriodicSquareRemainingTerminalsAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    (encodePeriodicSquareRemainingTerminalsAt subgraph v).card
+      = (latticeIncidentEdges v ∩ subgraph.1).card := by
+  refine Finset.card_nbij' (fun t => t.2) (fun e => (⟨v, e⟩ : Σ _ : LatticeVertex n, LatticeEdge n))
+    ?_ ?_ ?_ ?_ <;>
+    intro x hx <;>
+    simp only [encodePeriodicSquareRemainingTerminalsAt, Finset.mem_filter, terminalsAt,
+      Finset.mem_sigma, Finset.mem_singleton, Finset.mem_inter] at hx ⊢ <;>
+    aesop
+
+/-- 各 city に残る端子の個数は偶数である。偶部分グラフの偶次数条件をそのまま移したもの。 -/
+theorem even_card_encodePeriodicSquareRemainingTerminalsAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    Even (encodePeriodicSquareRemainingTerminalsAt subgraph v).card := by
+  rw [card_encodePeriodicSquareRemainingTerminalsAt]
+  exact subgraph.2 v (Finset.mem_univ v)
+
 end Ising3DCut.Prediction
