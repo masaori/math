@@ -6,14 +6,19 @@
 
 扱うのは有限箱の有理評価・自然数冪・有理数の既約分母だけであり、極限は使わない。
 候補が三点に尽きること自体は、既約分子と既約分母がともに 2 を割ることから
-この場で示す。既約分子・既約分母が 2 を割ること、および底の既約分母が 1 で
-あることは、本文の有限箱の整除と合同式による絞り込みであり、ここでは仮定と
-して受け取る（Lean へはまだ移していない）。
+この場で示す。既約分母が 2 を割ることと底の既約分母が 1 であることは、
+本文の合同式による絞り込みから第三段で受け取り、既約分子が 2 を割ることは、
+分母 1 と分母 2 の各場合について有限箱側の定理から第四段・第五段で受け取る。
+第五段では有限箱データそのものを仮定に置き、分子についての結論を外から
+受け取らない形にしてある。底の既約分母についての三つの仮定（奇素数・2・
+法 q.den の整除）だけが、本文の先行主張の結論として残る。
 -/
 import Ising3DCut.LimitQuantity.EventuallyConstantOnlyAtOne
 import Ising3DCut.LimitQuantity.CrossPowerIdentityIffRationalPowerFormFromNecSuf
 import Ising3DCut.LimitQuantity.DenominatorTwoPointAndFinalCandidateSet
 import Ising3DCut.LimitQuantity.RationalPowerPointDenominatorDividesTwo
+import Ising3DCut.LimitQuantity.IntegerPointNumeratorDividesTwo
+import Ising3DCut.LimitQuantity.DenominatorTwoNumeratorEqualsOne
 
 namespace Ising3DCut.LimitQuantity
 
@@ -139,5 +144,46 @@ theorem eq_one_of_cross_power_identity_of_finite_box_numerator_conditions
     eventualPowerFormAt_of_rationalPowerForm_den_one hcpos hcden hL₀ hform
   exact eq_one_of_eventual_power_form hpower
     (positive_rational_three_candidates_of_num_den_dvd_two hq hqnum hqden)
+
+/-- 接続の第五段。分母 `1` と分母 `2` の各場合について、有限箱側の定理が消費する
+データそのものを仮定に置き、分子についての結論を外から受け取らずに有理点を `1` に定める。
+
+`hdenOneData` は、有理点が正の自然数である場合に、ある有限箱の多重度表示とその値に対する
+分子の整除が取れることを述べる。`hdenTwoData` は、既約分母が `2` の場合に、分母を払った
+有限箱等式と分子の整除が取れることを述べる。いずれも一つの箱に固定した有限の主張であり、
+極限も無限和も現れない。 -/
+theorem eq_one_of_cross_power_identity_from_finite_box_data
+    {q : ℚ} (hq : 0 < q) {L₀ : ℕ} (hL₀ : 0 < L₀)
+    (hcross : ∀ L, L₀ ≤ L →
+      rationalValueSeq q L ^ ((L + 1) ^ 3) = rationalValueSeq q (L + 1) ^ (L ^ 3))
+    (hodd : ∀ c : ℚ, 0 < c →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) →
+      ∀ p : ℕ, p.Prime → p ≠ 2 → ¬ p ∣ c.den)
+    (htwo : ∀ c : ℚ, 0 < c →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) → ¬ (2 : ℕ) ∣ c.den)
+    (hdvd : ∀ c : ℚ, 0 < c →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) →
+      q.den ∣ 2 * c.den ^ (L₀ ^ 3))
+    (hdenOneData : q.den = 1 → ∃ E Z L : ℕ, 0 < L ∧
+      Z = ∑ m ∈ Finset.range (E + 1), NullModel.multiplicity L m * q.num.natAbs ^ m ∧
+      q.num.natAbs ∣ 2 * (Z - 1))
+    (hdenTwoData : q.den = 2 → ∃ E c n L S : ℕ, 0 < L ∧
+      (2 : ℤ) ^ E * (c : ℤ) ^ n =
+        (2 : ℤ) ^ E * (NullModel.multiplicity L 0 : ℤ) + (q.num.natAbs : ℤ) * S ∧
+      (q.num.natAbs : ℤ) ∣ 2 * ((c : ℤ) ^ n - 1)) :
+    q = 1 := by
+  have hdenOne : q.den = 1 → q.num.natAbs ∣ 2 := by
+    intro hd
+    obtain ⟨E, Z, L, hLpos, hZ, hdvdZ⟩ := hdenOneData hd
+    exact integer_point_numerator_divides_two hLpos hZ hdvdZ
+  have hdenTwo : q.den = 2 → q.num.natAbs = 1 := by
+    intro hd
+    obtain ⟨E, c, n, L, S, hLpos, hscaled, hdvdc⟩ := hdenTwoData hd
+    have hcoprime : Nat.Coprime q.num.natAbs 2 := by
+      have := q.reduced
+      rwa [hd] at this
+    exact denominator_two_numerator_eq_one_from_finite_box hLpos hcoprime hscaled hdvdc
+  exact eq_one_of_cross_power_identity_of_finite_box_numerator_conditions
+    hq hL₀ hcross hodd htwo hdvd hdenOne hdenTwo
 
 end Ising3DCut.LimitQuantity

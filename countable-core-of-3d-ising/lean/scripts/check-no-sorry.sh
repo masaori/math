@@ -63,6 +63,7 @@ targets=(
   Ising3DCut.LimitQuantity.denominator_two_numerator_eq_one_from_finite_box
   Ising3DCut.Prediction.mem_encodePeriodicSquareExternalEdges_iff
   Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_of_finite_box_numerator_conditions
+  Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_from_finite_box_data
   Ising3DCut.Prediction.periodic_square_matching_decodes_even_subgraph
   Ising3DCut.Prediction.decodePeriodicSquareMatching
   Ising3DCut.Prediction.four_incident_lattice_edges_pairwise_ne
