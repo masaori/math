@@ -1,0 +1,49 @@
+# 章「近傍割り当ての転置対合」の検算で共有する補助。
+# 帰属: 有限集合、有限写像表、自然数の等号だけを使う。浮動小数点と R/C 脱出はない。
+
+from itertools import combinations, product
+
+
+def subsets(cells):
+    for size in range(len(cells) + 1):
+        for combination in combinations(cells, size):
+            yield frozenset(combination)
+
+
+def neighborhood_assignments(cells):
+    """def_finite_neighborhood_assignment_space の N(V) を全列挙する。"""
+    return tuple(product(tuple(subsets(cells)), repeat=len(cells)))
+
+
+def identity_assignment(cells):
+    """def_identity_neighborhood_assignment の I_V(v) = {v}。"""
+    return tuple(frozenset((v,)) for v in cells)
+
+
+def compose(cells, outer, inner):
+    """def_composed_neighborhood の (N*M)(v) = ∪_{u in N(v)} M(u)。"""
+    return tuple(
+        frozenset().union(*[inner[u] for u in outer[v]]) if outer[v] else frozenset()
+        for v in cells
+    )
+
+
+def pointwise_union(cells, left, right):
+    """def_neighborhood_assignment_pointwise_union の (N⊔M)(v) = N(v) ∪ M(v)。"""
+    return tuple(left[v] | right[v] for v in cells)
+
+
+def pointwise_intersection(cells, left, right):
+    """def_neighborhood_assignment_pointwise_intersection の (N⊓M)(v) = N(v) ∩ M(v)。"""
+    return tuple(left[v] & right[v] for v in cells)
+
+
+def transpose(cells, assignment):
+    """def_neighborhood_assignment_transpose の N^T(w) = {v in V | w in N(v)}。
+
+    定義の右辺そのものを所属判定の全数走査で構成する。
+    """
+    return tuple(
+        frozenset(v for v in cells if w in assignment[v])
+        for w in cells
+    )
