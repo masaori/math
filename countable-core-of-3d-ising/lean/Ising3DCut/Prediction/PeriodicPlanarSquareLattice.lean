@@ -253,4 +253,31 @@ theorem periodic_square_matching_decodes_even_subgraph
   periodic_square_encoded_even_subgraph hn matching
     (periodic_square_selected_edges_even hn matching hMatching hsub hcard hdisj)
 
+/-- 周期正方格子の偶部分グラフ。元の辺集合と、各頂点での偶次数条件を一つの型に束ねる。 -/
+def PeriodicSquareEvenSubgraph (n : ℕ) [NeZero n] :=
+  {subgraph : Finset (LatticeEdge n) //
+    ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      Even (latticeIncidentEdges v ∩ subgraph).card}
+
+/-- terminal graph の完全マッチングを、周期正方格子の偶部分グラフへ復号する写像。 -/
+noncomputable def decodePeriodicSquareMatching
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n)
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)))
+    (hMatching : IsPerfectMatching
+      (terminalVertices Finset.univ latticeIncidentEdges)
+      (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁) matching)
+    (hsub : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      matchingCoveredTerminalsAt latticeIncidentEdges v matching ⊆
+        terminalsAt latticeIncidentEdges v)
+    (hcard : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      ∀ s ∈ matchingInternalEdgesAt latticeIncidentEdges v matching, s.card = 2)
+    (hdisj : ∀ v ∈ (Finset.univ : Finset (LatticeVertex n)),
+      ∀ s ∈ matchingInternalEdgesAt latticeIncidentEdges v matching,
+      ∀ t ∈ matchingInternalEdgesAt latticeIncidentEdges v matching,
+        s ≠ t → Disjoint s t) :
+    PeriodicSquareEvenSubgraph n :=
+  ⟨encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁ matching,
+    periodic_square_matching_decodes_even_subgraph hn matching hMatching hsub hcard hdisj⟩
+
 end Ising3DCut.Prediction

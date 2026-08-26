@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 05:37（並行）: `PeriodicSquareEvenSubgraph` と `decodePeriodicSquareMatching` を追加し、完全マッチングから復号した辺集合を偶次数の証明ごと一つの型へ入れた。次は偶部分グラフから完全マッチングを構成する逆向き。
 - 2026-08-27 05:34: `rational_point_numerator_divides_two_of_denominator_cases` を追加し、有理点の既約分母が 1 か 2 かで有限箱側の結論を場合分けして、既約分子が 2 を割ることへ束ねた。`eq_one_of_cross_power_identity_of_finite_box_numerator_conditions` で底の分母判定と候補三点の分岐へ接続した。次は分母一・分母二の各結論を既存の有限箱定理から直接渡す。
 - 2026-08-27 05:32（レビュー）: 直前の束ね定理を先行定理と照合し、立場違反・未証明依存・記号の衝突が無いことを確認した。修正なし。
 - 2026-08-27 05:04: `eq_one_of_cross_power_identity_of_base_den_conditions` を追加した。冪等式の末尾成立から底を取り出し、`rational_power_point_denominator_divides_two` へ渡して底の既約分母が 1 であることと有理点の既約分母が 2 を割ることを同時に受け取り、候補三点の分岐へつなぐ。未接続に残るのは既約分子が 2 を割る段だけ。`lake build` と未証明依存検査 579 件を通過。次は既約分子が 2 を割る段を束ねる。
