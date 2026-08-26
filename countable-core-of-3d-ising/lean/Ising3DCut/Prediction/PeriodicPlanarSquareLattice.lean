@@ -82,4 +82,28 @@ theorem fin_sub_one_ne_self {n : ℕ} [NeZero n] (hn : 2 ≤ n) (x : Fin n) :
   have hval : ((1 : Fin n) : ℕ) = ((0 : Fin n) : ℕ) := congrArg Fin.val h1
   simp [Nat.mod_eq_of_lt (show 1 < n by omega)] at hval
 
+/-- 一辺が二以上なら、各頂点を起点とする横・縦の二辺と、各頂点へ入る横・縦の二辺は
+四本とも相異なる。方向が違う組は方向成分で区別し、方向が同じ組は巡回座標で区別する。 -/
+theorem four_incident_lattice_edges_pairwise_ne {n : ℕ} [NeZero n]
+    (hn : 2 ≤ n) (v : LatticeVertex n) :
+    ((v, 0) : LatticeEdge n) ≠ (v, 1) ∧
+      ((v, 0) : LatticeEdge n) ≠ ((v.1 - 1, v.2), 0) ∧
+      ((v, 0) : LatticeEdge n) ≠ ((v.1, v.2 - 1), 1) ∧
+      ((v, 1) : LatticeEdge n) ≠ ((v.1 - 1, v.2), 0) ∧
+      ((v, 1) : LatticeEdge n) ≠ ((v.1, v.2 - 1), 1) ∧
+      ((((v.1 - 1, v.2), 0)) : LatticeEdge n) ≠ ((v.1, v.2 - 1), 1) := by
+  constructor
+  · simp
+  constructor
+  · intro h
+    exact fin_sub_one_ne_self hn v.1 (congrArg (fun e : LatticeEdge n => e.1.1) h).symm
+  constructor
+  · simp
+  constructor
+  · simp
+  constructor
+  · intro h
+    exact fin_sub_one_ne_self hn v.2 (congrArg (fun e : LatticeEdge n => e.1.2) h).symm
+  · simp
+
 end Ising3DCut.Prediction
