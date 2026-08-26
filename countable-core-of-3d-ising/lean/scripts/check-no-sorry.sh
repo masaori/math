@@ -77,6 +77,10 @@ targets=(
   Ising3DCut.LimitQuantity.two_pow_edge_mul_partitionValueAtOneHalf_eq_partitionValueAtTwo
   Ising3DCut.LimitQuantity.two_le_card_edge
   Ising3DCut.LimitQuantity.eventual_power_form_at_one_half_is_impossible
+  Ising3DCut.NecSuf.prime_sq_dvd_pow_mul
+  Ising3DCut.NecSuf.not_prime_sq_dvd_of_mod_eq
+  Ising3DCut.NecSuf.no_scaled_natural_value_of_prime_sq_residue
+  Ising3DCut.LimitQuantity.eventual_power_form_at_one_half_is_impossible_fromNecSuf
   Ising3DCut.NecSuf.sum_modEq_distinguished_of_dvd_others
   Ising3DCut.NecSuf.pow_mod_prime_sq_ne_prime
   Ising3DCut.NecSuf.no_eventual_power_form_of_prime_sq_residue
