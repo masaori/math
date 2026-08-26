@@ -11154,4 +11154,68 @@ Z_{L_0}(a)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_eventual_power_form_at_two_is_impossible",
+    kind: "claim",
+    title: {
+      text: "有理点 2 では点数乗表示は末尾で成り立たない",
+    },
+    labels: ["claim_eventual_power_form_at_two_is_impossible"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`L_0,c`),
+        " をどのように取っても、すべての自然数 ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`Z_L(2)=c^{\#V_L}`),
+        " が成り立つことはない。したがって、有理点 2 では有限箱の量の列は末尾で定数にならない。使うのは有限和と法 4 の整数計算だけである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L:=\max\{L_0,2\}`),
+        " と置く。このとき ",
+        math(String.raw`L\ge L_0`),
+        " かつ ",
+        math(String.raw`L\ge2`),
+        " である。",
+        ref("def_partition_polynomial"),
+        " に 2 を代入し、",
+        ref("claim_zero_breakage_multiplicity_is_two"),
+        " と ",
+        ref("claim_one_breakage_multiplicity_is_zero"),
+        " を使うと、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_L(2)
+&=\sum_{m=0}^{\#E_L}\Omega_L(m)\,2^m
+&&\bigl(\because\ \text{分配多項式の定義}\bigr)\\
+&=2+\sum_{m=2}^{\#E_L}\Omega_L(m)\,2^m
+&&\bigl(\because\ \Omega_L(0)=2,\ \Omega_L(1)=0\bigr)\\
+&\equiv2\pmod 4
+&&\bigl(\because\ m\ge2\ \Longrightarrow\ 4\mid2^m\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "仮定から ",
+        math(String.raw`Z_L(2)=c^{L^3}`),
+        " である。正の自然数 ",
+        math(String.raw`c`),
+        " が奇数なら ",
+        math(String.raw`c^{L^3}`),
+        " は奇数であり、上の合同式に反する。",
+        math(String.raw`c`),
+        " が偶数なら、",
+        math(String.raw`L^3\ge2`),
+        " なので ",
+        math(String.raw`4\mid c^{L^3}`),
+        " となり、やはり上の合同式に反する。よって、そのような ",
+        math(String.raw`L_0,c`),
+        " は存在しない。",
+      ]),
+    ],
+  },
 ]);
