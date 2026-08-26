@@ -100,6 +100,7 @@
 | `check_rational_embedding_three_minus_one.sage` | 有理数内の移項 | PASS | `eta(3)-eta(1)=eta(2)` を厳密確認 |
 | `check_apply_algebraic_embedding_to_three_minus_one.sage` | 有理数内の差の等式への代数的数標準単射の適用 | PASS | `iota(eta(3)-eta(1))=iota(eta(2))` を厳密確認 |
 | `check_algebraic_embedding_three_minus_one.sage` | 有理数から代数的数への標準単射の差の保存 | PASS | `iota(eta(3))-iota(eta(1))=iota(eta(2))` を厳密確認 |
+| `check_q3_minus_q1_equals_q2.sage` | 局所係数の差 `q_3-q_1=q_2` | PASS | 三つの局所定義を適用した等式を単独で厳密確認 |
 | `check_embedded_integer_coefficients.sage` | 標準単射像の整数係数整理 | PASS | `q_3-q_1=q_2` と分配を確認 |
 | `check_substitute_q1_in_coefficient_difference.sage` | `q_1=1` の係数差への代入 | PASS | `q_3-1_{Qbar}=q_3-q_1` を厳密確認 |
 | `check_coefficient_difference_transitivity.sage` | 係数差の二等式の推移律 | PASS | `q_3-1_{Qbar}=q_3-q_1` と `q_3-q_1=q_2` から `q_3-1_{Qbar}=q_2` を厳密確認 |
