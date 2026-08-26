@@ -72,8 +72,6 @@ theorem card_latticeIncidentEdges_eq_four_four (v : LatticeVertex 4) :
   revert v
   decide
 
-end Ising3DCut.Prediction
-
 /-- 一辺が二以上のとき、巡回座標を一つ戻すと元へは戻らない。
 一辺が一のときはこれが破れる（`Fin 1` では全ての元が等しい）ので、
 出る辺と入る辺が相異なることを言うには一辺が二以上という仮定が要る。 -/
@@ -83,3 +81,5 @@ theorem fin_sub_one_ne_self {n : ℕ} [NeZero n] (hn : 2 ≤ n) (x : Fin n) :
   have h1 : (1 : Fin n) = 0 := sub_eq_self.mp h
   have hval : ((1 : Fin n) : ℕ) = ((0 : Fin n) : ℕ) := congrArg Fin.val h1
   simp [Nat.mod_eq_of_lt (show 1 < n by omega)] at hval
+
+end Ising3DCut.Prediction
