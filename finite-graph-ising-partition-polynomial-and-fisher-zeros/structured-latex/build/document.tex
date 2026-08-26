@@ -4902,39 +4902,7 @@ $0\in\overline{\mathbb Q}$
 \in\overline{\mathbb Q}.\]
 \end{theorem}
 \begin{proof}
-\cref{lab:def_fisher_zero_algebraic_shifted_reciprocal_sum}
- の逆数和を
-$\mathcal R_G(a)\in\overline{\mathbb Q}$
- と書き、証明中だけ用いる代数的数を
-
-\[\begin{aligned}
-S_{G,2}(a)
-&:=\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^2}
-\in\overline{\mathbb Q},\\
-S_{G,3}(a)
-&:=\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^3}
-\in\overline{\mathbb Q},\\
-U_{G,2,1}(a)
-&:=
-\sum_{k=1}^{d}
-\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
-\frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
-\in\overline{\mathbb Q},\\
-V_{G,1,2}(a)
-&:=
-\sum_{k=1}^{d}
-\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
-\frac{1}{(a-\alpha_k)(a-\alpha_\ell)^2}
-\in\overline{\mathbb Q},\\
-T_{G,3}(a)
-&:=
-\sum_{k=1}^{d}
-\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
-\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
-\frac{1}{(a-\alpha_k)(a-\alpha_\ell)(a-\alpha_h)}
-\in\overline{\mathbb Q}
-\end{aligned}\]
-と置く。代数的数係数多項式の形式微分を
+代数的数係数多項式の形式微分を
 $D:\overline{\mathbb Q}[x]\to\overline{\mathbb Q}[x]$
  と書く。すなわち任意の
 $c\in\overline{\mathbb Q}$
@@ -5115,6 +5083,44 @@ $\Omega_G(d)\in\mathbb N_{>0}$
 \[a-\alpha_j\ne0
 \qquad(1\le j\le d)
 \quad\bigl(\because\ \text{有限積が非零なら各因子は非零}\bigr).\]
+\cref{lab:def_fisher_zero_algebraic_shifted_reciprocal_sum}
+ の逆数和を
+$\mathcal R_G(a)\in\overline{\mathbb Q}$
+ と書き、証明中だけ用いる代数的数を
+
+\[\begin{aligned}
+S_{G,2}(a)
+&:=\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^2}
+\in\overline{\mathbb Q},\\
+S_{G,3}(a)
+&:=\sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^3}
+\in\overline{\mathbb Q},\\
+U_{G,2,1}(a)
+&:=
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{1}{(a-\alpha_k)^2(a-\alpha_\ell)}
+\in\overline{\mathbb Q},\\
+V_{G,1,2}(a)
+&:=
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\frac{1}{(a-\alpha_k)(a-\alpha_\ell)^2}
+\in\overline{\mathbb Q},\\
+T_{G,3}(a)
+&:=
+\sum_{k=1}^{d}
+\sum_{\substack{1\le\ell\le d\\\ell\ne k}}
+\sum_{\substack{1\le h\le d\\h\ne k,\ h\ne\ell}}
+\frac{1}{(a-\alpha_k)(a-\alpha_\ell)(a-\alpha_h)}
+\in\overline{\mathbb Q}
+\end{aligned}\]
+と置く。直前に示した
+$a-\alpha_j\ne0$
+により、すべての逆数と有限和は
+$\overline{\mathbb Q}$
+ 内で定義される。
+
 一次因子分解を一回形式微分すると、
 
 \[D\overline P_G(x)
