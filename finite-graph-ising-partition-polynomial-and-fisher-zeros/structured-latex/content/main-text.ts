@@ -5997,6 +5997,10 @@ S_{G,3}(a)
 \quad\bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は単射である}\bigr).`),
       displayMath(String.raw`q_2\ne0
 \quad\bigl(\because\ q_2\text{ の定義}\bigr).`),
+      displayMath(String.raw`\overline P_G(a)^3\ne0
+\quad\bigl(\because\ \overline P_G(a)\ne0\text{ と }\overline{\mathbb Q}\text{ の零積律}\bigr).`),
+      displayMath(String.raw`q_2\overline P_G(a)^3\ne0
+\quad\bigl(\because\ q_2\ne0,\ \overline P_G(a)^3\ne0\text{ と }\overline{\mathbb Q}\text{ の零積律}\bigr).`),
       displayMath(String.raw`S_{G,3}(a)
 =
 \frac{1}{q_2}

@@ -111,6 +111,8 @@
 | `check_rational_embedding_two_nonzero.sage` | 自然数 `2` の有理数への標準単射像の非零性 | PASS | `eta_{N,Q}(2) != 0` を厳密確認 |
 | `check_algebraic_embedding_two_nonzero.sage` | 有理数 `eta_{N,Q}(2)` の代数的数への標準単射像の非零性 | PASS | `iota_{Q,Qbar}(eta_{N,Q}(2)) != 0` を厳密確認 |
 | `check_q2_nonzero.sage` | 標準単射像 `q_2` の非零性 | PASS | `q_2\ne0` を厳密確認 |
+| `check_evaluation_cube_nonzero.sage` | 非零評価値の三乗の非零性 | PASS | `Pbar_G(a)\ne0` から `Pbar_G(a)^3\ne0` を厳密確認 |
+| `check_final_denominator_nonzero.sage` | 最終係数比の分母の非零性 | PASS | `q_2\ne0` と `Pbar_G(a)^3\ne0` から積 `q_2Pbar_G(a)^3\ne0` を厳密確認 |
 | `check_scaled_reciprocal_cube_sum_coefficient_ratio.sage` | 最終係数整理後の `q_2` 倍された逆三乗和 | PASS | `q_2S_{G,3}` と三次係数商が一致 |
 | `check_cancel_q2_from_reciprocal_cube_sum.sage` | 非零な `q_2` の消去 | PASS | `q_2S_{G,3}=N/P^3` から `S_{G,3}=q_2^{-1}(N/P^3)` へ移る等式を直接確認 |
 | `check_merge_q2_denominator.sage` | `q_2` の消去後に商の結合律で三次分母へ結合 | PASS | 除算後の二重の商と結合後の分数が一致 |
