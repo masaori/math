@@ -704,6 +704,8 @@ targets=(
   Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_from_free_box_closed
   Ising3DCut.LimitQuantity.eventually_periodic_residue_class_constant
   Ising3DCut.LimitQuantity.residue_class_values_agree_gives_eventually_constant
+  Ising3DCut.NecSuf.residueClassValuesAgree_givesEventuallyConstant
+  Ising3DCut.LimitQuantity.residue_class_values_agree_gives_eventually_constant_fromNecSuf
   Ising3DCut.Prediction.encodedEvenSubgraph_encodePeriodicSquareMatching_subset
 )
 
