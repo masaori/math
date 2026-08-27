@@ -16,6 +16,7 @@ import Ising3DCut.NullModel.MultiplicityPalindrome
 import Ising3DCut.NullModel.ZeroBreakageConstant
 import Ising3DCut.NullModel.SquareAroundEdge
 import Ising3DCut.LimitQuantity.EventualPowerFormAtOneHalfImpossible
+import Ising3DCut.LimitQuantity.RationalPowerBaseDenNoPrimeMissingZeroMultiplicity
 
 namespace Ising3DCut.LimitQuantity
 
@@ -255,5 +256,76 @@ theorem base_den_eq_one_of_no_prime_divisor
   by_cases hp2 : p = 2
   · exact htwo (hp2 ▸ hpdvd)
   · exact hodd p hp hp2 hpdvd
+
+/-- 二以外の素数が有理点の既約分母を割る場合にも、隣接する二つの
+自由境界箱の有限和と回文性を使うと、その素数は点数乗表示の底の
+既約分母を割らない。極限は使わない。 -/
+theorem odd_prime_not_dvd_base_den_of_rational_value_form_when_dvd_point_den
+    {q c : ℚ} {L₀ p : ℕ} (hq : 0 < q) (hc : 0 < c)
+    (hform : ∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3))
+    (hp : p.Prime) (hp2 : p ≠ 2) (hpb : p ∣ q.den) :
+    ¬ p ∣ c.den := by
+  apply rational_power_base_den_no_prime_missing_zero_multiplicity
+    L₀ q.num.natAbs q.den c.num.natAbs c.den
+    2 2
+    (brokenCountSum (NullModel.multiplicity (L₀ + 1)) q.num.natAbs q.den
+      (Fintype.card (NullModel.Edge (L₀ + 1))))
+    (brokenCountSum (NullModel.multiplicity (L₀ + 2)) q.num.natAbs q.den
+      (Fintype.card (NullModel.Edge (L₀ + 2)))) p hp
+  · exact Int.natAbs_pos.mpr (ne_of_gt (Rat.num_pos.mpr hq))
+  · exact q.den_pos
+  · exact Int.natAbs_pos.mpr (ne_of_gt (Rat.num_pos.mpr hc))
+  · exact c.den_pos
+  · exact brokenCountSum_multiplicity_pos (by omega)
+  · exact brokenCountSum_multiplicity_pos (by omega)
+  · exact q.reduced
+  · exact c.reduced
+  · exact hpb
+  · intro h
+    have hle : p ≤ 2 := Nat.le_of_dvd (by norm_num) h
+    have hlt := hp.one_lt
+    exact hp2 (by omega)
+  · intro h
+    have hle : p ≤ 2 := Nat.le_of_dvd (by norm_num) h
+    have hlt := hp.one_lt
+    exact hp2 (by omega)
+  · have hpal := NullModel.multiplicity_palindrome
+      (L := L₀ + 1) (m := Fintype.card (NullModel.Edge (L₀ + 1))) (le_refl _)
+    have hcong := brokenCountSum_modEq_b (NullModel.multiplicity (L₀ + 1))
+      q.num.natAbs q.den (Fintype.card (NullModel.Edge (L₀ + 1))) (by simpa using hpal)
+    rw [NullModel.multiplicity_zero_eq_two (by omega)] at hcong
+    simpa [NullModel.card_edge, pow_two, mul_assoc, mul_comm, mul_left_comm] using hcong
+  · have hpal := NullModel.multiplicity_palindrome
+      (L := L₀ + 2) (m := Fintype.card (NullModel.Edge (L₀ + 2))) (le_refl _)
+    have hcong := brokenCountSum_modEq_b (NullModel.multiplicity (L₀ + 2))
+      q.num.natAbs q.den (Fintype.card (NullModel.Edge (L₀ + 2))) (by simpa using hpal)
+    rw [NullModel.multiplicity_zero_eq_two (by omega)] at hcong
+    simpa [NullModel.card_edge, pow_two, mul_assoc, mul_comm, mul_left_comm] using hcong
+  · simpa [NullModel.card_edge, pow_two, pow_three, mul_assoc, mul_comm, mul_left_comm] using
+      integer_equation_of_rational_value_form hq hc (L₀ := L₀)
+        (L := L₀ + 1) (by omega) hform
+  · simpa [NullModel.card_edge, pow_two, pow_three, mul_assoc, mul_comm, mul_left_comm] using
+      integer_equation_of_rational_value_form hq hc (L₀ := L₀)
+        (L := L₀ + 2) (by omega) hform
+
+/-- 二以外の素数について、有理点の分母を割るか否かの二場合を束ねる。 -/
+theorem odd_prime_not_dvd_base_den_of_rational_value_form
+    {q c : ℚ} {L₀ p : ℕ} (hq : 0 < q) (hL₀ : 2 ≤ L₀) (hc : 0 < c)
+    (hform : ∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3))
+    (hp : p.Prime) (hp2 : p ≠ 2) : ¬ p ∣ c.den := by
+  by_cases hpb : p ∣ q.den
+  · exact odd_prime_not_dvd_base_den_of_rational_value_form_when_dvd_point_den
+      hq hc hform hp hp2 hpb
+  · exact prime_not_dvd_base_den_of_rational_value_form hq (by omega) hc hform p hp hpb
+
+/-- 末尾の点数乗表示の底の既約分母は `1` である。 -/
+theorem base_den_eq_one_of_rational_value_form
+    {q c : ℚ} {L₀ : ℕ} (hq : 0 < q) (hL₀ : 2 ≤ L₀) (hc : 0 < c)
+    (hform : ∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) :
+    c.den = 1 :=
+  base_den_eq_one_of_no_prime_divisor
+    (two_not_dvd_base_den_of_rational_value_form hq hL₀ hc hform)
+    (fun p hp hp2 ↦ odd_prime_not_dvd_base_den_of_rational_value_form
+      hq hL₀ hc hform hp hp2)
 
 end Ising3DCut.LimitQuantity
