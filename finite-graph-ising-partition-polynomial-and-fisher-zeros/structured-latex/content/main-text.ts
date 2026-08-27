@@ -5832,7 +5832,8 @@ S_{G,3}(a)
       displayMath(String.raw`q_3-1_{\overline{\mathbb Q}}=q_3-q_1
 \quad\bigl(\because\ q_1=1_{\overline{\mathbb Q}}\text{ を代入する}\bigr).`),
       displayMath(String.raw`q_3-1_{\overline{\mathbb Q}}=q_2
-\quad\bigl(\because\ \text{直前の二つの等式の推移律}\bigr).`),
+\quad\bigl(\because\ q_3-1_{\overline{\mathbb Q}}=q_3-q_1
+\text{ と }q_3-q_1=q_2\text{ の推移律}\bigr).`),
       displayMath(String.raw`T_{G,3}(a)
 =
 \mathcal R_G(a)^3
@@ -5847,7 +5848,9 @@ S_{G,3}(a)
 \mathcal R_G(a)^3
 -q_3\mathcal R_G(a)S_{G,2}(a)
 +q_2S_{G,3}(a)
-\quad\bigl(\because\ \text{直前の二つの等式の推移律}\bigr).`),
+\quad\biggl(\because\ \frac{C_G(a)}{\overline P_G(a)}=T_{G,3}(a)
+\text{ と }T_{G,3}(a)=\mathcal R_G(a)^3-q_3\mathcal R_G(a)S_{G,2}(a)+q_2S_{G,3}(a)
+\text{ の推移律}\biggr).`),
       displayMath(String.raw`\frac{C_G(a)}{\overline P_G(a)}
 -\mathcal R_G(a)^3
 =
@@ -6024,7 +6027,10 @@ S_{G,3}(a)
 }{
   q_2\overline P_G(a)^3
 }
-\quad\bigl(\because\ \text{直前の二つの等式の推移律}\bigr).`),
+\quad\biggl(\because\ \sum_{j=1}^{d}\frac{1}{(a-\alpha_j)^3}=S_{G,3}(a)
+\text{ と }S_{G,3}(a)=
+\frac{q_2A_G(a)^3-q_3\overline P_G(a)A_G(a)B_G(a)+\overline P_G(a)^2C_G(a)}
+{q_2\overline P_G(a)^3}\text{ の推移律}\biggr).`),
       paragraph([
         "グラフ、スピン配位集合、零点添字集合は有限集合、次数、係数添字、多重度とそれらの積は自然数、分配多項式は整数係数多項式、評価点、Fisher 零点、差、逆数、三乗、有限和、評価値と商は代数的数に属する。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。",
       ]),
