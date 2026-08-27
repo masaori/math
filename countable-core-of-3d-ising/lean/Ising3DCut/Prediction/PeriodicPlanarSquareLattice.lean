@@ -706,4 +706,21 @@ theorem encodePeriodicSquareMatching_isPerfectMatching
       (fun hsu ↦ hne hsu.symm)
     exact (Finset.disjoint_left.mp hdisjoint hts hu.2)
 
+/-- 復元した完全マッチングを復号すると、得られる辺集合は元の偶部分グラフに含まれる。
+復号は外部辺がマッチングに選ばれない元の辺だけを残すのに対し、偶部分グラフに
+属さない元の辺の外部辺は復元でそのまま選ばれているので、復号後には残らない。
+逆向きの包含（元の偶部分グラフの辺が復号後にも残ること）は、外部辺が city 内部辺に
+なりえないことを要するので、ここでは示さない。 -/
+theorem encodedEvenSubgraph_encodePeriodicSquareMatching_subset
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁
+        (encodePeriodicSquareMatching subgraph) ⊆ subgraph.1 := by
+  intro e he
+  have hnot := (mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁
+    (encodePeriodicSquareMatching subgraph) e).mp he |>.2
+  by_contra hsub
+  refine hnot ?_
+  rw [encodePeriodicSquareMatching, Finset.mem_union]
+  exact Or.inr ((mem_encodePeriodicSquareExternalEdges_iff subgraph _).mpr ⟨e, hsub, rfl⟩)
+
 end Ising3DCut.Prediction
