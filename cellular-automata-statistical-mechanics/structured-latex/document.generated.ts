@@ -63,6 +63,7 @@ import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_reversibility_finite_decidability from './content/reversibility-finite-decidability.ts'
 import blocks_reversible_global_map_cycle_type from './content/reversible-global-map-cycle-type.ts'
 import blocks_self_neighborhood_reversible_map_group from './content/self-neighborhood-reversible-map-group.ts'
+import blocks_self_transpose_composition_closure from './content/self-transpose-composition-closure.ts'
 import blocks_self_transpose_neighborhood_assignment_count from './content/self-transpose-neighborhood-assignment-count.ts'
 import blocks_stage_reversible_composition_nonclosure from './content/stage-reversible-composition-nonclosure.ts'
 import blocks_time_expansion_dependency from './content/time-expansion-dependency.ts'
@@ -117,6 +118,7 @@ export type AllBlocks = [
   ...typeof blocks_reversibility_finite_decidability,
   ...typeof blocks_reversible_global_map_cycle_type,
   ...typeof blocks_self_neighborhood_reversible_map_group,
+  ...typeof blocks_self_transpose_composition_closure,
   ...typeof blocks_self_transpose_neighborhood_assignment_count,
   ...typeof blocks_stage_reversible_composition_nonclosure,
   ...typeof blocks_time_expansion_dependency,
