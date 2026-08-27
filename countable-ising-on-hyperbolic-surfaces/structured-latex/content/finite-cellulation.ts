@@ -6148,4 +6148,79 @@ q\nleq2
 \end{aligned}`),
     ],
   },
+  {
+    id: "finite_cellulation_theorem_product_difference_eighty_four_hyperbolic_types",
+    kind: "theorem",
+    title: { text: "積差八十四をもつ双曲正則型の分類" },
+    labels: ["theorem_product_difference_eighty_four_hyperbolic_types"],
+    habitat: "Z",
+    verification: ["sagemath/check/product-difference-eighty-four-hyperbolic-types"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_hyperbolic_regular_type_set"),
+        " の有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " と双曲正則型 ",
+        math(String.raw`(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)`),
+        " に対し、自然数から整数への標準単射を ",
+        math(String.raw`\iota_{\mathbb N,\mathbb Z}:\mathbb N\to\mathbb Z`),
+        " とし、",
+      ]),
+      displayMath(String.raw`\bar p:=\iota_{\mathbb N,\mathbb Z}(p),\qquad
+\bar q:=\iota_{\mathbb N,\mathbb Z}(q)`),
+      paragraph(["と書けば、"]),
+      displayMath(String.raw`\begin{aligned}
+\left(\bar p-2\right)\left(\bar q-2\right)=84
+\quad\Longleftrightarrow\quad
+&(p,q)=(3,86)\ \text{または}\ (p,q)=(4,44)\ \text{または}\\
+&(p,q)=(5,30)\ \text{または}\ (p,q)=(6,23)\ \text{または}\\
+&(p,q)=(8,16)\ \text{または}\ (p,q)=(9,14)\ \text{または}\\
+&(p,q)=(14,9)\ \text{または}\ (p,q)=(16,8)\ \text{または}\\
+&(p,q)=(23,6)\ \text{または}\ (p,q)=(30,5)\ \text{または}\\
+&(p,q)=(44,4)\ \text{または}\ (p,q)=(86,3).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        "、",
+        math(String.raw`\bar p,\bar q\in\mathbb Z`),
+        " である。この分類は自然数の加法、八十四の正の因子対、および標準単射だけから得られ、除算、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("theorem_hyperbolic_regular_type_degree_lower_bounds"), " より"]),
+      displayMath(String.raw`3\le p\qquad\text{かつ}\qquad3\le q.`),
+      paragraph([
+        "したがって、一意な ",
+        math(String.raw`a,b\in\mathbb N_{>0}`),
+        " が存在して ",
+        math(String.raw`p=a+2`),
+        " および ",
+        math(String.raw`q=b+2`),
+        " を満たす。この ",
+        math(String.raw`a,b`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\bar p-2\right)\left(\bar q-2\right)=84
+&\Longleftrightarrow ab=84
+&&\bigl(\because\ \text{標準単射は加法・乗法・等号を保存し反映する}\bigr)\\
+&\Longleftrightarrow
+(a,b)=(1,84)\ \text{または}\ (a,b)=(2,42)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(3,28)\ \text{または}\ (a,b)=(4,21)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(6,14)\ \text{または}\ (a,b)=(7,12)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(12,7)\ \text{または}\ (a,b)=(14,6)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(21,4)\ \text{または}\ (a,b)=(28,3)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(42,2)\ \text{または}\ (a,b)=(84,1)
+&&\bigl(\because\ 84\text{ の正の因子対の全体}\bigr)\\
+&\Longleftrightarrow
+(p,q)=(3,86)\ \text{または}\ (p,q)=(4,44)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(5,30)\ \text{または}\ (p,q)=(6,23)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(8,16)\ \text{または}\ (p,q)=(9,14)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(14,9)\ \text{または}\ (p,q)=(16,8)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(23,6)\ \text{または}\ (p,q)=(30,5)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(44,4)\ \text{または}\ (p,q)=(86,3)
+&&\bigl(\because\ p=a+2\text{ および }q=b+2\bigr).
+\end{aligned}`),
+    ],
+  },
 ]);
