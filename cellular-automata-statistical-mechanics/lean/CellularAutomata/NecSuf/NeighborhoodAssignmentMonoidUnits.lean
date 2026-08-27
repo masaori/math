@@ -3,7 +3,7 @@
 
 具体版（CellularAutomata.NeighborhoodAssignmentMonoidUnits）と同じ順序で、
 左右逆元から各近傍が一元集合であること、その唯一元が定める自己写像の単射性、
-有限性による全単射性、近傍割り当てと置換の対応、逆置換による逆向き、
+役割交換で得る右逆写像による全射性、近傍割り当てと置換の対応、逆置換による逆向き、
 単位律と結合律による逆元の一意性、置換との一対一対応による個数を示す。
 
 必要な構造の検査結果:
@@ -12,15 +12,18 @@
     （`setIsInvertible_iff_exists_permutation`, `setInverse_unique`）。
     具体版の `DecidableEq V` は、近傍を `Finset` で表して `Finset.biUnion` で合成する
     ための要求であって、主張そのものの要求ではない。
-  - **`Fintype V` は `Finite V` まで弱められる。** 具体版が舞台の有限性を使うのは
-    「単射な自己写像は全単射である」の一箇所（`Finite.injective_iff_surjective`）だけであり、
-    そこで要るのは有限性の命題だけで、元の全列挙は要らない。
-    `Fintype V` が要るのは可逆元の有限表と個数の段だけである。
-  - **有限性そのものは、この証明手順では落とせない。** 単射性を示したあと全射性を
-    有限性から出す順序が人手証明の手順であり、これを別の論法へ差し替えないため
-    `Finite V` を残す。**なお、既に示した一元性の補題を N と M の役割を入れ替えて
-    適用すれば、有限性を使わずに全射性が出る見込みがある。** これは人手証明の手順の
-    変更にあたるので本 tick では行わず、次の対象として台帳へ残す。
+  - **舞台の有限性は落とせる。** 人手証明が全射性を役割交換の右逆写像で出すように
+    差し替わったため、可逆元が置換に対応することの特徴づけ
+    （`setIsInvertible_iff_exists_permutation`）は舞台の有限性を一切使わない。
+    以前の版が置いていた `Finite V`（`Finite.injective_iff_surjective` のための仮定）は
+    削除した。有限表現の可逆性との同値（`isInvertible_iff_setIsInvertible`）も
+    有限性を使わない。
+  - **`Fintype V` が要るのは個数の段だけである。** 可逆元を置換の像として並べる
+    有限表 `unitTable` と個数公式 `card_unitTable_of_necSuf` は、元の全列挙を使うため
+    `Fintype V` を落とせない。ここが有限性を実際に使う唯一の段である。
+  - **具体版の `Fintype V` は主張の要求ではない。** 具体版はファイル全体で
+    `Fintype V` を仮定しているが、必要十分版の検査により、それが必要なのは
+    可逆元の有限表と個数の段だけだと分かる。
   - **始域と終域が同じ型であることは落とせない。** 可逆性の定義が `N ⋆ M` と `M ⋆ N` を
     同じ自己近傍割り当てと比較するため、型をまたぐ合成では可逆性そのものが書けない。
   - **舞台が空でも成り立つ。** 空舞台では可逆元は一つ（空写像）であり、個数 `0! = 1` と合う。
@@ -123,26 +126,43 @@ theorem setPermutationFunction_injective {V : Type} {N M : V → Set V}
   rw [hv, h2] at h1
   exact (Set.singleton_eq_singleton_iff.mp h1.symm)
 
-section FiniteStage
+/-- 人手証明の全射性の段。`N` と `M` の役割を入れ替えて一元性の補題を適用し、
+    得られた `τ(u)` を右逆像に取る。舞台の有限性を使わない。 -/
+theorem setPermutationFunction_surjective_by_role_swap {V : Type} {N M : V → Set V}
+    (hNM : setComp N M = setIdentity V) (hMN : setComp M N = setIdentity V) :
+    Function.Surjective (setPermutationFunction hNM hMN) := by
+  intro u
+  refine ⟨setPermutationFunction hMN hNM u, ?_⟩
+  have hcompMN : setComp M N u = {u} := congrFun hMN u
+  have hexpand : setComp M N u = N (setPermutationFunction hMN hNM u) := by
+    ext w
+    constructor
+    · rintro ⟨y, hy, hw⟩
+      rw [set_value_eq_singleton hMN hNM] at hy
+      have hyu : y = setPermutationFunction hMN hNM u := hy
+      rwa [hyu] at hw
+    · intro hw
+      exact ⟨setPermutationFunction hMN hNM u,
+        by rw [set_value_eq_singleton hMN hNM]; rfl, hw⟩
+  have hNτ : N (setPermutationFunction hMN hNM u) = {u} := hexpand.symm.trans hcompMN
+  have hNσ : N (setPermutationFunction hMN hNM u) =
+      {setPermutationFunction hNM hMN (setPermutationFunction hMN hNM u)} :=
+    set_value_eq_singleton hNM hMN _
+  exact Set.singleton_eq_singleton_iff.mp (hNσ.symm.trans hNτ)
 
-variable {V : Type} [Finite V]
-
-/-- 人手証明で構成した置換。全射性の段でだけ舞台の有限性が要る。
-    元の全列挙は要らないので `Fintype V` ではなく `Finite V` で足りる。 -/
-noncomputable def setPermutationOfInverse {N M : V → Set V}
+/-- 人手証明で構成した置換。単射性も全射性も舞台の有限性を使わない。 -/
+noncomputable def setPermutationOfInverse {V : Type} {N M : V → Set V}
     (hNM : setComp N M = setIdentity V) (hMN : setComp M N = setIdentity V) : Equiv.Perm V :=
   Equiv.ofBijective (setPermutationFunction hNM hMN)
     ⟨setPermutationFunction_injective hNM hMN,
-      Finite.injective_iff_surjective.mp (setPermutationFunction_injective hNM hMN)⟩
+      setPermutationFunction_surjective_by_role_swap hNM hMN⟩
 
-theorem set_eq_setPermutationNeighborhood {N M : V → Set V}
+theorem set_eq_setPermutationNeighborhood {V : Type} {N M : V → Set V}
     (hNM : setComp N M = setIdentity V) (hMN : setComp M N = setIdentity V) :
     N = setPermutationNeighborhood (setPermutationOfInverse hNM hMN) := by
   funext v
   rw [set_value_eq_singleton hNM hMN]
   rfl
-
-end FiniteStage
 
 /-- 人手証明の逆向き。逆置換が左右の逆元を与える。有限性も等号判定も使わない。 -/
 theorem setPermutationNeighborhood_inverse_laws {V : Type} (σ : Equiv.Perm V) :
@@ -176,8 +196,8 @@ theorem setPermutationNeighborhood_inverse_laws {V : Type} (σ : Equiv.Perm V) :
     simp
 
 /-- `claim_invertible_neighborhood_assignments_are_permutations` の必要十分版。
-    等号判定を使わず、有限性は全射性の段だけで使う。 -/
-theorem setIsInvertible_iff_exists_permutation {V : Type} [Finite V] (N : V → Set V) :
+    等号判定も舞台の有限性も使わない。 -/
+theorem setIsInvertible_iff_exists_permutation {V : Type} (N : V → Set V) :
     SetIsInvertible N ↔ ∃! σ : Equiv.Perm V, N = setPermutationNeighborhood σ := by
   constructor
   · rintro ⟨M, hNM, hMN⟩
@@ -254,7 +274,7 @@ theorem coeAssign_permutationNeighborhood (σ : Equiv.Perm V) :
   simp [coeAssign, permutationNeighborhood, setPermutationNeighborhood]
 
 /-- 有限表現の可逆性は、集合として読んだ割り当ての可逆性と同値である。 -/
-theorem isInvertible_iff_setIsInvertible [Finite V] (N : NeighborhoodAssignment V) :
+theorem isInvertible_iff_setIsInvertible (N : NeighborhoodAssignment V) :
     IsInvertible N ↔ SetIsInvertible (coeAssign N) := by
   constructor
   · rintro ⟨M, hNM, hMN⟩
@@ -290,6 +310,44 @@ open CellularAutomata.ComposedNeighborhoodClosure
 open CellularAutomata.NeighborhoodAssignmentMonoidUnits
 
 variable {V : Type} [Fintype V] [DecidableEq V]
+
+/-- 有限表現の左逆元等式を、集合として読んだ割り当ての左逆元等式へ翻訳する。 -/
+theorem coeAssign_inverse_law {N M : NeighborhoodAssignment V}
+    (hNM : composedNeighborhood N M =
+      CellularAutomata.FiniteNeighborhoodAssignmentMonoid.identityNeighborhood V) :
+    setComp (coeAssign N) (coeAssign M) = setIdentity V := by
+  rw [← coeAssign_composed, hNM, coeAssign_identity (V := V)]
+
+/-- 具体版が選んだ一元値の写像は、必要十分版が選んだものと一致する。
+    どちらも同じ一元集合の唯一の元だからである。 -/
+theorem permutationFunctionOfInverse_eq_setPermutationFunction
+    {N M : NeighborhoodAssignment V}
+    (hNM : composedNeighborhood N M =
+      CellularAutomata.FiniteNeighborhoodAssignmentMonoid.identityNeighborhood V)
+    (hMN : composedNeighborhood M N =
+      CellularAutomata.FiniteNeighborhoodAssignmentMonoid.identityNeighborhood V) :
+    permutationFunctionOfInverse hNM hMN =
+      setPermutationFunction (coeAssign_inverse_law hNM) (coeAssign_inverse_law hMN) := by
+  funext v
+  have h1 : coeAssign N v = {permutationFunctionOfInverse hNM hMN v} := by
+    show ((N v : Finset V) : Set V) = _
+    rw [value_eq_permutationFunction_singleton hNM hMN]
+    simp
+  have h2 : coeAssign N v =
+      {setPermutationFunction (coeAssign_inverse_law hNM) (coeAssign_inverse_law hMN) v} :=
+    set_value_eq_singleton _ _ v
+  exact Set.singleton_eq_singleton_iff.mp (h1.symm.trans h2)
+
+/-- 具体版 `permutationFunction_surjective_by_role_swap` は、必要十分版の全射性の特殊化である。 -/
+theorem permutationFunction_surjective_by_role_swap_of_necSuf
+    {N M : NeighborhoodAssignment V}
+    (hNM : composedNeighborhood N M =
+      CellularAutomata.FiniteNeighborhoodAssignmentMonoid.identityNeighborhood V)
+    (hMN : composedNeighborhood M N =
+      CellularAutomata.FiniteNeighborhoodAssignmentMonoid.identityNeighborhood V) :
+    Function.Surjective (permutationFunctionOfInverse hNM hMN) := by
+  rw [permutationFunctionOfInverse_eq_setPermutationFunction hNM hMN]
+  exact setPermutationFunction_surjective_by_role_swap _ _
 
 /-- 具体版 `isInvertible_iff_exists_permutation` は、必要十分版の特徴づけの特殊化である。 -/
 theorem isInvertible_iff_exists_permutation_of_necSuf (N : NeighborhoodAssignment V) :
