@@ -343,4 +343,13 @@ def encodePeriodicSquareCandidateInternalEdgesAt
     Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :=
   (encodePeriodicSquareRemainingTerminalsAt subgraph v).powersetCard 2
 
+/-- 復元用の候補内部辺であることは、残存端子だけからなる二元集合であることと同値である。
+完全被覆の構成では、この特徴づけを使って各対が terminal graph の内部辺であることを確認する。 -/
+theorem mem_encodePeriodicSquareCandidateInternalEdgesAt_iff
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) (s : Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :
+    s ∈ encodePeriodicSquareCandidateInternalEdgesAt subgraph v ↔
+      s ⊆ encodePeriodicSquareRemainingTerminalsAt subgraph v ∧ s.card = 2 := by
+  simp [encodePeriodicSquareCandidateInternalEdgesAt]
+
 end Ising3DCut.Prediction

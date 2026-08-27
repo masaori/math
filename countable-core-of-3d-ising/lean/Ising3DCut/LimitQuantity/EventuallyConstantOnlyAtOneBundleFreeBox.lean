@@ -206,4 +206,26 @@ theorem brokenCountSum_mod_four_eq_two
   have hmod : q.num.natAbs ^ E % 2 = 1 := Nat.two_dvd_ne_zero.mp hodd
   omega
 
+/-- 偶数分母の場合の接続の第五歩。末尾の点数乗表示が成り立つ正の有理点の
+既約分母が偶数なら、素数 `2` は底の既約分母を割らない。
+閾値の箱で得た自然数の等式へ、自由境界箱の辺数、最高次から一つ下の多重度の消滅、
+最高次多重度 `2` を入れ、既存の素数 `2` の指数による排除へ渡す。
+一つの有限箱だけを使う主張であり、極限は使わない。 -/
+theorem two_not_dvd_base_den_of_rational_value_form_of_even_point_den
+    {q c : ℚ} {L₀ : ℕ} (hq : 0 < q) (hL₀ : 2 ≤ L₀) (hc : 0 < c)
+    (hform : ∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3))
+    (heven : (2 : ℕ) ∣ q.den) :
+    ¬ (2 : ℕ) ∣ c.den := by
+  apply two_not_dvd_power_base_den_from_finite_box_even_point_den
+    (q := q) (c := c) (M := L₀) (Omega := NullModel.multiplicity L₀)
+    hq hc hL₀ heven
+  · simpa [NullModel.card_edge, mul_assoc, mul_comm, mul_left_comm] using
+      multiplicity_card_edge_sub_one_eq_zero hL₀
+  · have hpal := NullModel.multiplicity_palindrome
+      (L := L₀) (m := Fintype.card (NullModel.Edge L₀)) (le_refl _)
+    rw [Nat.sub_self, NullModel.multiplicity_zero_eq_two (by omega)] at hpal
+    simpa [NullModel.card_edge, mul_assoc, mul_comm, mul_left_comm] using hpal
+  · have hid := integer_equation_of_rational_value_form hq hc (le_refl L₀) hform
+    simpa [brokenCountSum, NullModel.card_edge, mul_assoc, mul_comm, mul_left_comm] using hid
+
 end Ising3DCut.LimitQuantity
