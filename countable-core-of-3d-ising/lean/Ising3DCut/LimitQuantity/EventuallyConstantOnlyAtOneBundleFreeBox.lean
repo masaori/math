@@ -14,6 +14,7 @@ import Ising3DCut.LimitQuantity.EventuallyConstantOnlyAtOneBundle
 import Ising3DCut.LimitQuantity.NullModelEvalNeInv
 import Ising3DCut.NullModel.MultiplicityPalindrome
 import Ising3DCut.NullModel.ZeroBreakageConstant
+import Ising3DCut.NullModel.SquareAroundEdge
 
 namespace Ising3DCut.LimitQuantity
 
@@ -130,5 +131,20 @@ theorem integer_equation_of_rational_value_form
       (Fintype.card (NullModel.Edge L))) q.den c.num.natAbs c.den
       (Fintype.card (NullModel.Edge L)) (L ^ 3) q.den_pos c.den_pos hrep
   exact_mod_cast hInt
+
+/-- 偶数分母の場合の接続の第二歩。自由境界の箱 `L` について、破れ辺数が
+辺数から `1` を引いた数である配位は存在しない。回文性で破れ辺数 `1` の場合へ移し、
+破れ辺数がちょうど `1` の配位が無いこと（`brokenCount_ne_one`）を使う。
+一つの箱に固定した有限の主張であり、極限は使わない。 -/
+theorem multiplicity_card_edge_sub_one_eq_zero {L : ℕ} (hL : 2 ≤ L) :
+    NullModel.multiplicity L (Fintype.card (NullModel.Edge L) - 1) = 0 := by
+  have hE : 1 ≤ Fintype.card (NullModel.Edge L) := one_le_card_edge hL
+  have hpal := NullModel.multiplicity_palindrome (L := L) (m := 1) hE
+  have hone : NullModel.multiplicity L 1 = 0 := by
+    rw [NullModel.multiplicity, Fintype.card_eq_zero_iff]
+    constructor
+    intro σ
+    exact NullModel.brokenCount_ne_one hL σ.1 ((Finset.mem_filter.mp σ.2).2)
+  exact hpal ▸ hone
 
 end Ising3DCut.LimitQuantity
