@@ -352,4 +352,74 @@ theorem mem_encodePeriodicSquareCandidateInternalEdgesAt_iff
       s ⊆ encodePeriodicSquareRemainingTerminalsAt subgraph v ∧ s.card = 2 := by
   simp [encodePeriodicSquareCandidateInternalEdgesAt]
 
+
+
+/-- 偶数個の端子は、互いに交わらない二元集合の族でちょうど一度ずつ覆える。
+個数についての強い帰納法で、二つ取り除いては残りへ戻るだけの構成であり、
+有限集合の外へ出る道具は使わない。次の段で、この族を各 city の内部辺として
+terminal graph の完全マッチングへ組み上げる。 -/
+theorem exists_pairing_of_even_card {α : Type*} [DecidableEq α]
+    (s : Finset α) (hs : Even s.card) :
+    ∃ P : Finset (Finset α),
+      (∀ e ∈ P, e.card = 2) ∧ (P : Set (Finset α)).PairwiseDisjoint id ∧
+        P.biUnion id = s := by
+  classical
+  induction s using Finset.strongInduction with
+  | _ s ih =>
+    rcases Finset.eq_empty_or_nonempty s with rfl | ⟨a, ha⟩
+    · exact ⟨∅, by simp, by simp, by simp⟩
+    · have hcard : 2 ≤ s.card := by
+        rcases hs with ⟨k, hk⟩
+        have : 0 < s.card := Finset.card_pos.mpr ⟨a, ha⟩
+        omega
+      have hb : (s.erase a).Nonempty := by
+        rw [← Finset.card_pos, Finset.card_erase_of_mem ha]; omega
+      obtain ⟨b, hbmem⟩ := hb
+      set t := (s.erase a).erase b with ht
+      have hts : t ⊂ s :=
+        lt_of_le_of_lt (Finset.erase_subset _ _) (Finset.erase_ssubset ha)
+      have hcardt : t.card = s.card - 2 := by
+        rw [ht, Finset.card_erase_of_mem hbmem, Finset.card_erase_of_mem ha]
+        omega
+      have hte : Even t.card := by
+        rcases hs with ⟨k, hk⟩; rw [hcardt]; exact ⟨k - 1, by omega⟩
+      obtain ⟨P, hP2, hPd, hPu⟩ := ih t hts hte
+      have hab : a ≠ b := fun h => (Finset.ne_of_mem_erase hbmem) h.symm
+      have hanot : a ∉ t := by simp [ht, Finset.mem_erase]
+      have hbnot : b ∉ t := by simp [ht, Finset.mem_erase]
+      have hpairnot : ({a, b} : Finset α) ∉ P := by
+        intro hmem
+        have : a ∈ P.biUnion id := Finset.mem_biUnion.mpr ⟨_, hmem, by simp⟩
+        rw [hPu] at this; exact hanot this
+      refine ⟨insert {a, b} P, ?_, ?_, ?_⟩
+      · intro e he
+        rcases Finset.mem_insert.mp he with rfl | he
+        · rw [Finset.card_insert_of_notMem (by simpa using hab)]; simp
+        · exact hP2 e he
+      · rw [Finset.coe_insert]
+        refine Set.PairwiseDisjoint.insert hPd ?_
+        intro e he _
+        refine Finset.disjoint_left.mpr ?_
+        intro x hx hxe
+        have : x ∈ P.biUnion id := Finset.mem_biUnion.mpr ⟨e, he, hxe⟩
+        rw [hPu] at this
+        obtain h | h := Finset.mem_insert.mp hx
+        · exact hanot (h ▸ this)
+        · simp only [Finset.mem_singleton] at h; exact hbnot (h ▸ this)
+      · rw [Finset.biUnion_insert, hPu, ht]
+        ext x
+        simp only [Finset.mem_union, Finset.mem_insert, Finset.mem_singleton,
+          Finset.mem_erase, id]
+        constructor
+        · rintro ((rfl | rfl) | ⟨_, _, hx⟩)
+          · exact ha
+          · exact Finset.mem_of_mem_erase hbmem
+          · exact hx
+        · intro hx
+          by_cases hxa : x = a
+          · exact Or.inl (Or.inl hxa)
+          by_cases hxb : x = b
+          · exact Or.inl (Or.inr hxb)
+          · exact Or.inr ⟨hxb, hxa, hx⟩
+
 end Ising3DCut.Prediction
