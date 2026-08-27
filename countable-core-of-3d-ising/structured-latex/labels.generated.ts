@@ -162,6 +162,7 @@ export const ALL_LABELS = [
   "remark_boundary_response_only_outer_count_survives",
   "remark_box_free_divisibility_judgement",
   "remark_cofinal_agreement_does_not_give_existence",
+  "remark_eventually_periodic_candidate_reduction_stops_at_residue_classes",
   "remark_finite_prime_truncation_not_sufficient_is_a_specialization",
   "remark_magnitude_truncation_not_sufficient_is_a_specialization",
   "remark_null_model_positioning",
