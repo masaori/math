@@ -128,6 +128,7 @@ export const ALL_LABELS = [
   "theorem_product_difference_eighteen_hyperbolic_types",
   "theorem_product_difference_eighty_hyperbolic_types",
   "theorem_product_difference_eighty_one_hyperbolic_types",
+  "theorem_product_difference_eighty_two_hyperbolic_types",
   "theorem_product_difference_eleven_hyperbolic_types",
   "theorem_product_difference_fifteen_hyperbolic_types",
   "theorem_product_difference_fifty_eight_hyperbolic_types",
