@@ -53,6 +53,14 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.SelfTransposeCompositionClosure.composition_selfTranspose_iff_commute
+  CellularAutomata.SelfTransposeCompositionClosure.witnessLoop_selfTranspose
+  CellularAutomata.SelfTransposeCompositionClosure.witnessEdge_selfTranspose
+  CellularAutomata.SelfTransposeCompositionClosure.witness_left_at_a
+  CellularAutomata.SelfTransposeCompositionClosure.witness_right_at_a
+  CellularAutomata.SelfTransposeCompositionClosure.witness_noncommute
+  CellularAutomata.SelfTransposeCompositionClosure.witness_composition_not_selfTranspose
+  CellularAutomata.SelfTransposeCompositionClosure.mem_compositionClosedPairTable
   CellularAutomata.NeighborhoodAssignmentTransposeInvolution.mem_transpose
   CellularAutomata.NeighborhoodAssignmentTransposeInvolution.transpose_transpose
   CellularAutomata.NeighborhoodAssignmentTransposeInvolution.transpose_composedNeighborhood
