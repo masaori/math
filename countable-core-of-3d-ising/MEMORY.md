@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 22:34: 末尾周期性と周期だけ離れた箱の冪等式の同値を Lean 具体版 `eventually_periodic_iff_power_identity` に移した。正の有限箱値の乗根表示と非零自然数冪の単射性だけを使い、極限は使わない。`lake build` と sorry 非依存検査 619 件を通過。次は Lean 必要十分版。
 - 2026-08-27 22:03: 末尾周期性と周期だけ離れた箱の冪等式の同値について SageMath 検証を追加した（`sagemath/check/eventually-periodic-iff-power-identity/`、3 ファイル PASS、linkage 95 件）。着手前レビューでは定義と同値主張を読み直し、修正事項は無かった。次は同主張の Lean 具体版。
 - 2026-08-27 21:04: レビューで、末尾定数性の最終分類の証明に残る唯一の TODO（底の自然数化と候補三点への絞り込みを外部仮定として受け取っていた箇所）を、既存の主張がどちらも内部で閉じていることを確かめて埋めた。本文の TODO は 0 件。そのうえで本流をゴール文書から引き直し、末尾定数性を真に含む有限的条件として末尾周期性 $a_L(q)=a_{L+p}(q)$（閾値以後）を定義した。次は周期 $p$ の冪等式への言い換え。
 - 2026-08-27 20:34: 末尾定数性の最終分類について、有限箱の合同式から底の整除へ至る全段を既存の必要十分版から再導出する `base_divisibility_of_rational_value_form_viaNecSuf` と、分類へ束ねる `eq_one_of_cross_power_identity_from_free_box_closed_viaNecSuf` を追加して四層を閉じた。並行では各 city の残存端子を候補内部辺の互いに交わらない二元集合で完全被覆する `exists_candidate_internal_edge_cover_at` を追加した。Lean build と sorry 検査 619 件を通過。次の本流はゴール文書から標的を引き直し、並行は city ごとの被覆を全体の内部辺集合へ束ねる。
