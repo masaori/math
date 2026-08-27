@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 20:05: 分類を閉じる接続のうち、整除を冪へ持ち上げる段の Lean 必要十分版 `NecSuf.dvd_mul_pow_sub_pow_of_dvd_mul_sub` を置いた（仮定は可換環であることだけで、有理点・箱・係数 2・指数 $L_0^3$ を外し、任意の $k,x,y,n$ で $a\mid k(x-y)\Rightarrow a\mid k(x^n-y^n)$）。具体版をその特殊化として導出する `power_numerator_divisibility_of_base_divisibility_fromNecSuf` も置いた。`lake build` と sorry 検査 616 件、`npm run check`（180 ブロック・405 参照すべて解決）、`build:pdf` 63 ページを通過。次は残る段（有限箱の合同式から底の整除を得る部分と束ね）の必要十分版。
 - 2026-08-27 19:37: 隣接する三箱の有限合同式から二つの頂点数差に対する整除を作り、差の互いに素性と既存の最大公約数定理で `a ∣ 2(c-1)` を導いた。これを直前の束ねへ渡す `eq_one_of_cross_power_identity_from_free_box_closed` により、冪等式だけから有理点を一に定める Lean 具体版を閉じた。次はこの最終接続の Lean 必要十分版。
 - 2026-08-27 19:03: 束ね定理が外から受け取る二つの分子整除のうち、閾値の箱の点数乗についてのものが、箱に依存しない `a ∣ 2(c-1)` だけから従うことを `power_numerator_divisibility_of_base_divisibility` で示し、外部仮定を一つに減らした版 `eq_one_of_cross_power_identity_from_free_box_base_divisibility` を置いた。`lake build` と sorry 検査 609 件、`npm run check`（180 ブロック・405 参照すべて解決）、検証対応 94 件を通過。次は残った一つの仮定を、底を有限箱の値から決める先行結果から接続する。
 - 2026-08-27 18:06: 分母二の場合の閾値箱の等式を、有限和から破れ辺数ゼロの項を取り出す分解 `brokenCountSum_head_split` を介して既存の分母二の判定へ接続し、有理点の既約分子が一になることを Lean 具体版 `denominator_two_numerator_eq_one_of_rational_value_form` で閉じた。次は分母一・分母二の二つの接続を束ね定理の残る二仮定へ渡して主張全体を閉じる。
