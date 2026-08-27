@@ -11725,4 +11725,99 @@ a_L(q)^{\#V_L\,\#V_{L+p}}
       ]),
     ],
   },
+
+  {
+    id: "soundness_bridge_heading_eventually_periodic_residue_class_constant",
+    kind: "heading",
+    level: 2,
+    title: { text: "末尾周期性は剰余類ごとの末尾定数性を与える" },
+    labels: [],
+  },
+  {
+    id: "soundness_bridge_claim_eventually_periodic_residue_class_constant",
+    kind: "claim",
+    standing: "mainTheorem",
+    title: { text: "末尾周期的な有理点では剰余類ごとの部分列が定数である" },
+    labels: ["claim_eventually_periodic_residue_class_constant"],
+    habitat: "R",
+    realEscape:
+      "各有限箱の量は正の有理数の正の実数乗根として ℝ に住むが、箱の大きさの極限は取らない。主張は自然数の添字についての等号だけを使い、上限・下限・級数・指数関数・実対数を使わない。",
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " について、有限箱の量の列 ",
+        math(String.raw`L\mapsto a_L(q)`),
+        " が閾値 ",
+        math(String.raw`L_0`),
+        " と周期 ",
+        math(String.raw`p`),
+        " で末尾周期的であるとする（",
+        ref("def_eventually_periodic_finite_box_sequence"),
+        "）。このとき、各 ",
+        math(String.raw`0\le r<p`),
+        " について、すべての ",
+        math(String.raw`k\in\mathbb N`),
+        " で",
+      ]),
+      displayMath(String.raw`a_{L_0+r+kp}(q)=a_{L_0+r}(q)`),
+      paragraph([
+        "が成り立つ。すなわち、箱の幅を ",
+        math(String.raw`p`),
+        " ずつ増やした各剰余類の部分列は、閾値以後で定数である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`0\le r<p`),
+        " を固定し、",
+        math(String.raw`k`),
+        " についての自然数の帰納法で示す。",
+      ]),
+      paragraph([
+        math(String.raw`k=0`),
+        " のときは主張する等式が ",
+        math(String.raw`a_{L_0+r}(q)=a_{L_0+r}(q)`),
+        " であり、等号の反射律から成り立つ。",
+      ]),
+      paragraph([
+        "ある ",
+        math(String.raw`k\in\mathbb N`),
+        " について ",
+        math(String.raw`a_{L_0+r+kp}(q)=a_{L_0+r}(q)`),
+        " が成り立つと仮定する。",
+        math(String.raw`r\ge0`),
+        " と ",
+        math(String.raw`kp\ge0`),
+        " から ",
+        math(String.raw`L_0+r+kp\ge L_0`),
+        " なので、末尾周期性の等式を添字 ",
+        math(String.raw`L=L_0+r+kp`),
+        " に適用できる。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a_{L_0+r+(k+1)p}(q)
+&=a_{(L_0+r+kp)+p}(q)
+&&(\because\ \text{自然数の結合律})\\
+&=a_{L_0+r+kp}(q)
+&&(\because\ \blkref{def_eventually_periodic_finite_box_sequence})\\
+&=a_{L_0+r}(q)
+&&(\because\ \text{帰納法の仮定})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。よって ",
+        math(String.raw`k+1`),
+        " についても主張の等式が成り立つ。帰納法により、すべての ",
+        math(String.raw`k\in\mathbb N`),
+        " について ",
+        math(String.raw`a_{L_0+r+kp}(q)=a_{L_0+r}(q)`),
+        " である。",
+      ]),
+      paragraph([
+        "用いたのは末尾周期性の定義の等式と自然数の帰納法だけであり、箱の大きさの極限は使っていない。",
+      ]),
+    ],
+  },
 ]);
