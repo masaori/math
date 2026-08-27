@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_all_self_transpose_assignments_composition_closed_iff_subsingleton",
   "claim_antichain_order_convex",
   "claim_binary_bijection_is_identity_or_negation",
   "claim_collision_finite_decidability",
@@ -231,6 +232,7 @@ export const ALL_LABELS = [
   "claim_two_cell_composition_intersection_nondistributivity",
   "claim_unordered_cell_pair_count",
   "claim_up_set_order_convex",
+  "def_all_self_transpose_assignments_composition_closed",
   "def_antichain",
   "def_base_value_extension",
   "def_cardinality_notation",
