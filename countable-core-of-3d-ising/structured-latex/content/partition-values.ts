@@ -11947,4 +11947,100 @@ a_L(q)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_heading_root_equality_implies_cross_power_equality",
+    kind: "heading",
+    level: 2,
+    title: { text: "剰余類ごとの値の一致は有限の有理数等式で判定できる" },
+    labels: [],
+  },
+  {
+    id: "soundness_bridge_claim_root_equality_implies_cross_power_equality",
+    kind: "claim",
+    standing: "mainTheorem",
+    title: { text: "正の乗根の一致は交差べき等式を決める" },
+    labels: ["claim_root_equality_implies_cross_power_equality"],
+    habitat: "R",
+    realEscape:
+      "正の実数乗根は def_limit_quantity_from_finite_box_sequence で各有限箱量を作るのに使ったものである。この主張は箱の大きさの極限を取らず、その乗根が満たす等式と正の自然数べきの有限回の積だけを使う。結論は正有理数の有限回の積の等式であり、可算側で決定できる。",
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`A,B\in\mathbb Q_{>0}`),
+        " と正の自然数 ",
+        math(String.raw`N,M\in\mathbb N_{\ge1}`),
+        " について、",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        " で各有限箱量を作るのと同じ正の実数乗根が",
+      ]),
+      displayMath(String.raw`A^{1/N}=B^{1/M}`),
+      paragraph(["を満たすとする。このとき"]),
+      displayMath(String.raw`A^M=B^N`),
+      paragraph([
+        "が成り立つ。これは正有理数の有限回の積だけからなる等式なので、有限整数算術で判定できる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x=A^{1/N}\in\mathbb R_{>0}`),
+        " と置く。正の実数乗根の定義から ",
+        math(String.raw`x^N=A`),
+        " である。仮定 ",
+        math(String.raw`A^{1/N}=B^{1/M}`),
+        " から ",
+        math(String.raw`x=B^{1/M}`),
+        " なので、同じく正の実数乗根の定義から ",
+        math(String.raw`x^M=B`),
+        " である。したがって、一行ごとに有限回の積を計算すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+A^M&=(x^N)^M &&(\because\ x^N=A)\\
+&=x^{NM} &&(\because\ \text{自然数べきの積})\\
+&=x^{MN} &&(\because\ NM=MN)\\
+&=(x^M)^N &&(\because\ \text{自然数べきの積})\\
+&=B^N &&(\because\ x^M=B)
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。用いたのは正の実数乗根が満たす等式と自然数べきの積の法則だけであり、箱の大きさの極限は使っていない。",
+      ]),
+    ],
+  },
+  {
+    id: "soundness_bridge_remark_residue_class_values_agree_is_decidable",
+    kind: "remark",
+    title: { text: "剰余類の代表どうしの値の一致は有理数の等式と同値である" },
+    labels: ["remark_residue_class_values_agree_is_decidable"],
+    habitat: "R",
+    realEscape:
+      "各有限箱の量は正の有理数の正の実数乗根として ℝ に住むが、箱の大きさの極限は取らない。",
+    statement: [
+      paragraph([
+        "上の主張（",
+        ref("claim_root_equality_implies_cross_power_equality"),
+        "）と、その逆向き（",
+        ref("claim_cross_power_equality_implies_root_equality"),
+        "）を合わせると、正の有理数 ",
+        math(String.raw`A,B\in\mathbb Q_{>0}`),
+        " と正の自然数 ",
+        math(String.raw`N,M\in\mathbb N_{\ge1}`),
+        " について ",
+        math(String.raw`A^{1/N}=B^{1/M}`),
+        " と ",
+        math(String.raw`A^M=B^N`),
+        " は同値である。とくに二つの箱幅 ",
+        math(String.raw`L,L'`),
+        " について ",
+        math(String.raw`a_L(q)=a_{L'}(q)`),
+        " は ",
+        math(String.raw`Z_L(q)^{\#V_{L'}}=Z_{L'}(q)^{\#V_L}`),
+        " と同値であり、後者は正の有理数の有限回の積の等式なので有限整数算術で判定できる。したがって、末尾周期性の分類で残っている「剰余類ごとの定数値のうち少なくとも二つが相異なる場合」（",
+        ref("remark_residue_class_values_agree_reduces_to_one"),
+        "）は、閾値以後の代表箱 ",
+        math(String.raw`L_0,L_0+1,\dots,L_0+p-1`),
+        " についての有限個の有理数等式が成り立たないこととして、可算側で述べ直せる。",
+      ]),
+    ],
+  },
 ]);

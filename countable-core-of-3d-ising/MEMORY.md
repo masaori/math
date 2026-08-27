@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 08:03: 本流をゴール文書へ引き直し、「剰余類ごとの値の一致は有限の有理数等式で判定できる」の記述層を追加した（`claim_root_equality_implies_cross_power_equality` と `remark_residue_class_values_agree_is_decidable`）。正の乗根の一致から交差べき等式が従い、既に閉じていた逆向きと合わせて同値になるので、二つの箱幅の量の一致は分配多項式の値の有限個の有理数等式で判定できる。次は同主張の SageMath 検証。
+
 - 2026-08-28 07:34: 本流 `claim_residue_class_values_agree_gives_eventually_constant` の Lean 必要十分版 `NecSuf.residueClassValuesAgree_givesEventuallyConstant` と具体導出を追加し、四層で閉じた。必要なのは任意型の自然数列、正の周期、剰余類ごとの定数性、代表値の共通値への一致だけである。次はゴール文書へ戻り、剰余類ごとの値が食い違う場合を有限の等式で判定する標的を引き直す。
 - 2026-08-28 07:06（並行）: `encodedEvenSubgraph_encodePeriodicSquareMatching_subset` を追加し、復元→復号が元の偶部分グラフの部分集合を返すことを閉じた（sorry 非依存検査 651 件）。逆向きの包含には外部辺が city 内部辺になりえないこと（元の辺の二端点が相異なる city にあること）が要る。次はそれを示す。
 - 2026-08-28 07:05: 本流 `claim_residue_class_values_agree_gives_eventually_constant` の Lean 具体版 `Ising3DCut.LimitQuantity.residue_class_values_agree_gives_eventually_constant` を追加した。自然数の除法の定理で `L = L0 + (L-L0) % p + ((L-L0)/p) * p` と分け、剰余類ごとの末尾定数性で `a_{L0+r}` へ落として共通値 `c` に着く。`lake build` と sorry 非依存検査 650 件を通過。次は同主張の Lean 必要十分版。
