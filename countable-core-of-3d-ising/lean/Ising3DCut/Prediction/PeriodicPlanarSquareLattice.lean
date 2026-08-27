@@ -647,4 +647,40 @@ theorem biUnion_encodePeriodicSquareMatching
         rcases hendpoint with hendpoint | hendpoint <;>
           simp [externalEdge, hendpoint]
 
+/-- 復元用の外部辺どうしは端子を共有しない。外部辺の端子は第二成分に元の辺そのものを
+持つので、共通端子があれば元の辺が一致し、二つの外部辺も一致する。 -/
+theorem pairwiseDisjoint_encodePeriodicSquareExternalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    (encodePeriodicSquareExternalEdges subgraph :
+      Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id := by
+  intro s₁ hs₁ s₂ hs₂ hne
+  obtain ⟨e₁, _, rfl⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph s₁).mp hs₁
+  obtain ⟨e₂, _, rfl⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph s₂).mp hs₂
+  refine Finset.disjoint_left.mpr ?_
+  intro x hx₁ hx₂
+  have h₁ : x.2 = e₁ := by
+    have hx : x = ⟨latticeEndpoint₀ e₁, e₁⟩ ∨ x = ⟨latticeEndpoint₁ e₁, e₁⟩ := by
+      simpa [externalEdge] using hx₁
+    rcases hx with rfl | rfl <;> rfl
+  have h₂ : x.2 = e₂ := by
+    have hx : x = ⟨latticeEndpoint₀ e₂, e₂⟩ ∨ x = ⟨latticeEndpoint₁ e₂, e₂⟩ := by
+      simpa [externalEdge] using hx₂
+    rcases hx with rfl | rfl <;> rfl
+  exact hne (by rw [h₁.symm.trans h₂])
+
+/-- 復元した辺集合全体の相異なる二辺は端子を共有しない。内部辺どうし・外部辺どうし・
+内部辺と外部辺の三つの場合に分け、それぞれ既に示した排他性へ帰着する。 -/
+theorem pairwiseDisjoint_encodePeriodicSquareMatching
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    (encodePeriodicSquareMatching subgraph :
+      Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id := by
+  intro s₁ hs₁ s₂ hs₂ hne
+  rw [Finset.mem_coe, encodePeriodicSquareMatching, Finset.mem_union] at hs₁ hs₂
+  rcases hs₁ with hs₁ | hs₁ <;> rcases hs₂ with hs₂ | hs₂
+  · exact pairwiseDisjoint_encodePeriodicSquareInternalEdges subgraph hs₁ hs₂ hne
+  · exact disjoint_encodePeriodicSquareInternalEdges_externalEdges subgraph s₁ s₂ hs₁ hs₂
+  · exact (disjoint_encodePeriodicSquareInternalEdges_externalEdges subgraph s₂ s₁
+      hs₂ hs₁).symm
+  · exact pairwiseDisjoint_encodePeriodicSquareExternalEdges subgraph hs₁ hs₂ hne
+
 end Ising3DCut.Prediction

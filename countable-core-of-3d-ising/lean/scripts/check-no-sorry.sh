@@ -55,6 +55,8 @@ fi
 #    具体版・必要十分版・両者をつなぐ導出の 3 本を、いずれも登録する。
 targets=(
   Ising3DCut.Prediction.biUnion_encodePeriodicSquareMatching
+  Ising3DCut.Prediction.pairwiseDisjoint_encodePeriodicSquareExternalEdges
+  Ising3DCut.Prediction.pairwiseDisjoint_encodePeriodicSquareMatching
   Ising3DCut.LimitQuantity.eventually_periodic_residue_class_constant
   Ising3DCut.NecSuf.eventuallyPeriodic_residueClassConstant
   Ising3DCut.LimitQuantity.eventually_periodic_residue_class_constant_fromNecSuf

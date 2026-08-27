@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 06:07（並行）: `pairwiseDisjoint_encodePeriodicSquareExternalEdges` と `pairwiseDisjoint_encodePeriodicSquareMatching` を追加し、復元辺集合全体の相異なる二辺が端子を共有しないことを閉じた。sorry 非依存検査 648 件通過。次は全端子の被覆と排他性を合わせて完全マッチング性を閉じる。
 - 2026-08-28 06:03: 本流をゴール文書から引き直し、「剰余類ごとの値が一致する末尾周期性は末尾定数性である」を記述した（`claim_residue_class_values_agree_gives_eventually_constant` と注記 `remark_residue_class_values_agree_reduces_to_one`）。自然数の除法の定理で閾値以後の箱幅を剰余類へ落とすので、剰余類ごとの定数値が一致する末尾周期的な有理点は既存分類から 1 に限られ、末尾周期性で残るのは剰余類ごとの値が食い違う場合だけになった。次は同主張の SageMath 検証。
 - 2026-08-28 05:34: 本流「末尾周期性は剰余類ごとの末尾定数性を与える」を Lean 必要十分版 `NecSuf.eventuallyPeriodic_residueClassConstant` と具体導出まで閉じた。必要なのは任意の型への自然数列と閾値以後の周期等式だけである。次はゴール文書へ戻り、この結果を第二の有理点での極限量の存在へ接続できる条件を引き直す。
 - 2026-08-28 05:36（並行）: `biUnion_encodePeriodicSquareMatching` を追加し、復元した内部辺と外部辺の和が terminal graph の全端子を覆うことを示した。次は復元辺集合全体の相異なる二辺の排他性を閉じる。
