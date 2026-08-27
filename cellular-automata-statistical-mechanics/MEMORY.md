@@ -5,6 +5,34 @@
 > [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
 > [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
+## 自動ループ tick: 自己転置な近傍割り当て全体の合成閉性の特徴づけの Lean 必要十分版と導出（2026-08-27 18:12）
+
+前 tick の Lean 具体版を、構造化記述の正本
+`structured-latex/content/self-transpose-composition-total-closure-characterization.ts`、
+SageMath 検算 4 本、検査入口、sorry 検査対象と突き合わせた。閉性の述語、順方向の二つの証人と
+非可換性、逆方向の合成所属条件の交換、同値の向きと順序に修正を要する不一致は見つからなかった。
+
+Lean 必要十分版 `lean/CellularAutomata/NecSuf/SelfTransposeCompositionTotalClosureCharacterization.lean`
+を追加した。閉性と `Subsingleton V` の同値は、値を `Set` で表せば型にインスタンスを一つも要求せずに
+成り立つ（`setAllSelfTransposeCompositionClosed_iff_subsingleton`）。具体版の条件
+`Fintype.card V ≤ 1` は有限舞台での `Subsingleton V` の言い換えにすぎず、主張そのものが有限性を
+要求してはいない。順方向に要るのは前章の必要十分版の非閉性（相異なる二元だけを使う
+`not_closed_of_exists_ne`）であり、逆方向に要るのは合成の証人と出力元を入力セルへ移す二回の
+`Subsingleton.elim` と連言の交換だけである（`setComp_comm_of_subsingleton`）。自己転置性は
+逆方向では前章の同値へ渡す最後の一段でしか使わない。空舞台も `Subsingleton V` に含まれ、
+証明はそのまま通る。有限性と等号判定が要るのは、転置を `Finset.univ.filter`、合成を
+`Finset.biUnion` で書く有限表現の段だけであることを、同じ順序の証明
+（`hetAllSelfTransposeCompositionClosed_iff_subsingleton`）と、両表現の閉性が同値であること
+（`hetAll_iff_setAll`）で示した。導出として、具体版の述語が有限表現版の述語そのものであること
+（`allSelfTransposeCompositionClosed_eq_het`、定義の一致）、具体版の同値が必要十分版の同値と
+`Fintype.card V ≤ 1 ↔ Subsingleton V` の合成で得られること、具体版の証人の非可換性が有限表現版の
+特殊化であることを別々の定理として置いた。新規 9 定理を sorry 検査対象へ登録した。
+
+構造化テキストの検査、PDF（98 ページ、未解決参照 0、版面外へ出た行 0）、SageMath 4 本、
+検算対応検査 51 件、Lean 全体ビルド、sorry 検査を通した。有限集合・有限部分集合・自然数だけで閉じ、
+$\mathbb R/\mathbb C$ 脱出はない。本対象は四層が揃い `done`。
+次 tick は本必要十分版と導出を全層とレビューし、次の対象を起票する。
+
 ## 自動ループ tick: 自己転置な近傍割り当て全体の合成閉性の特徴づけの Lean 具体版（2026-08-27 17:12）
 
 前 tick の SageMath 検算 4 本を構造化記述と突き合わせ、修正を要する不一致は見つからなかった。
