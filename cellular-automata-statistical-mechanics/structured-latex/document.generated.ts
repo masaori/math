@@ -54,6 +54,7 @@ import blocks_locality_restricts_cycle_type from './content/locality-restricts-c
 import blocks_minimal_preperiod_period from './content/minimal-preperiod-period.ts'
 import blocks_neighborhood_assignment_intersection_minimal_counterexample from './content/neighborhood-assignment-intersection-minimal-counterexample.ts'
 import blocks_neighborhood_assignment_intersection_nondistributivity from './content/neighborhood-assignment-intersection-nondistributivity.ts'
+import blocks_neighborhood_assignment_monoid_center from './content/neighborhood-assignment-monoid-center.ts'
 import blocks_neighborhood_assignment_transpose_involution from './content/neighborhood-assignment-transpose-involution.ts'
 import blocks_neighborhood_assignment_union_distributivity from './content/neighborhood-assignment-union-distributivity.ts'
 import blocks_ordered_neighborhood_assignment_monoid from './content/ordered-neighborhood-assignment-monoid.ts'
@@ -110,6 +111,7 @@ export type AllBlocks = [
   ...typeof blocks_minimal_preperiod_period,
   ...typeof blocks_neighborhood_assignment_intersection_minimal_counterexample,
   ...typeof blocks_neighborhood_assignment_intersection_nondistributivity,
+  ...typeof blocks_neighborhood_assignment_monoid_center,
   ...typeof blocks_neighborhood_assignment_transpose_involution,
   ...typeof blocks_neighborhood_assignment_union_distributivity,
   ...typeof blocks_ordered_neighborhood_assignment_monoid,
