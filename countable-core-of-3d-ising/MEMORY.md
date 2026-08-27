@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 03:04: 有理点 2 分の 1 の末尾周期性排除を Lean 必要十分版 `NecSuf.pow_ne_pow_of_pow_additive_index_mul_ne` と `NecSuf.no_eventual_cross_power_identity_of_pow_additive_index_mul_ne` へ抽象化し、このセクションを四層で閉じた。仮定は「各箱の値の冪の上で加法的な `ℤ` 値の指標」と「点数と指標の積が二つの箱で相異なること」だけで、回文性・有理数体・素数 2・点数の立方は落ちた。有理点 2 の版と違い指標の値が 1 であることは残らず、また指標は負の値を取るので値域を `ℕ` から `ℤ` へ広げる必要がある。具体版は `eventually_periodic_at_one_half_power_identity_impossible_fromNecSuf` として導出。sorry 非依存検査 639 件通過。次の本流は末尾周期性の残る正の有理点の判定。
 - 2026-08-28 02:36: 有理点 2 分の 1 の末尾周期性排除を Lean 具体版へ移した（`EventuallyPeriodicAtOneHalfImpossible.lean`）。回文性から有限箱値の素数 2 の指数を `1-#E_L` と定め、周期交差冪等式の両辺の指数差が正になる有限計算で矛盾を閉じた。次は Lean 必要十分版。
 - 2026-08-28 02:09: 有理点 2 分の 1 の末尾周期性排除について SageMath 検証を追加した（`sagemath/check/eventually-periodic-at-one-half-impossible/`、3 ファイル PASS、linkage 97 件）。回文性 $2^{\#E_M}Z_M(1/2)=Z_M(2)$ を分配多項式への直接代入で独立に確認し、指数等式の差 $(L+p)^3-L^3+3pL^2(L+p)^2$ の全係数が正であることを $\mathbb Z[L,p]$ の恒等式として確認した。次は Lean 具体版。
 - 2026-08-28 01:36（並行）: 各 city で選んだ内部辺被覆の相異なる二辺が端子を共有しないことを `pairwiseDisjoint_encodePeriodicSquareInternalEdgesAt` として存在定理から取り出した。次は city 間と外部辺との排他性を合わせる。
