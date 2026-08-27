@@ -21,7 +21,8 @@
 | ファイル | 検証内容 | ステータス |
 | --- | --- | --- |
 | `check_invertible_forces_singleton.sage` | 本文の前半。`(N star M)(v) = {v}` から証人 `u in N(v)` と `N(v) != ∅` を出す段、`M(u) ⊆ {v}` の段、`(M star N)(u) = {u}` が空でないことから `M(u) != ∅` を出す段、`M(u) = {v}` の段、`{u} = (M star N)(u) = ∪_{x in M(u)} N(x) = N(v)` の三つの等号を分けて検査し、`N(v)` が一元集合であることを出す | PASS |
-| `check_permutation_from_invertible.sage` | 本文の後半。一元集合 `N(v)` の唯一の元として `sigma(v)` を置く段、`M(sigma(v)) = {v}` を経由する単射性の段、有限性から全単射を出す段、`N = P_sigma` の段、`N = P_tau` なら `tau = sigma` という一意性を分けて検査する | PASS |
+| `check_permutation_from_invertible.sage` | 本文の後半。一元集合 `N(v)` の唯一の元として `sigma(v)` を置く段、`M(sigma(v)) = {v}` を経由する単射性の段、役割交換で得た `tau` から `sigma(tau(u)) = u` を出す全射性の段、`N = P_sigma` の段、`N = P_rho` なら `rho = sigma` という一意性を分けて検査する | PASS |
+| `check_role_swap_surjectivity.sage` | 全射性の段だけを取り出し、一元性の論証を `N` と `M` の役割を入れ替えて各段辿り、`M(u) = {tau(u)}` かつ `N(tau(u)) = {u}` を得る段、`{sigma(tau(u))} = N(tau(u)) = {u}` の二つの等号の段、`u` が `sigma` の値であること（witness は `tau(u)`）を分けて検査する。元数を数えず、舞台の有限性を全射性の導出に使わない | PASS |
 | `check_permutation_assignment_is_invertible.sage` | 本文の逆向きの式変形を一行ずつ検査する。合成近傍と `P_sigma` の定義による展開、一元集合を添字とする合併、`sigma^{-1} ∘ sigma = id_V`、自己近傍割り当ての定義の各行を分け、逆向きの合成 `P_{sigma^{-1}} star P_sigma = I_V` も同じ形で検査し、写像の外延性から両合成の等号と可逆性を出す | PASS |
 | `check_units_cardinality_finite_decision.sage` | 全数走査で得た可逆元全体が `{P_sigma}` に一致すること、`sigma |-> P_sigma` の単射性と個数が `n!` になること、各可逆元の逆元が唯一で `P_{sigma^{-1}}` に等しいこと、表との有限比較による可逆性判定が全数走査の判定と一致すること、割り当ての等号が `|V|^2` 回の所属判定へ展開できることを分けて検査する | PASS |
 
@@ -36,6 +37,12 @@
   一般の場合の根拠は構造化記述の証明である。
 
 ## 走査で分かったこと（本文の記述との差）
+
+- 2026-08-28 の tick で本文の全射性の論証が「有限集合の単射な自己写像は全単射」から
+  「一元性の論証を `N` と `M` の役割を入れ替えて得た右逆写像 `tau`」へ差し替わったため、
+  検算もその段へ作り直した。走査した 10 組の `(N, M)` すべてで、役割交換の各段が成立し、
+  `sigma(tau(u)) = u` が成り立った。有限性を使う段は個数公式
+  `check_units_cardinality_finite_decision.sage` の側にだけ残っている。
 
 - 逆元が一意であることを走査が示したのに対し、前 tick の本文は個数の claim で「各逆元を決定できる」と
   述べるだけで一意性を主張していなかった。本 tick で `claim_invertible_neighborhood_assignment_inverse_unique`

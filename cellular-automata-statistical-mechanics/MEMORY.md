@@ -5,6 +5,19 @@
 > [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
 > [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
+## 自動ループ tick: 役割交換による全射性の SageMath 検算（2026-08-28 04:12）
+
+前 tick が差し替えた全射性の人手証明を定義へ戻って検査し、誤りは見つからなかった。
+SageMath の検算を、有限性から全射性を出す段から、役割交換で得る右逆写像 $\tau$ による段へ
+作り直した。新規 `check_role_swap_surjectivity.sage` は役割交換した一元性の論証の各段、
+$\{\sigma(\tau(u))\}=N(\tau(u))=\{u\}$ の二つの等号、witness $\tau(u)$ による全射性を分けて検査する。
+既存 `check_permutation_from_invertible.sage` の全射性の段も同じ経路へ置き換えた。
+$0\le|V|\le3$ の全 531 割り当て、逆元を持つ 10 組で PASS。$\mathbb R/\mathbb C$ 脱出はない。
+
+構造化テキストの検査と PDF、本章 SageMath 5 本、検算対応検査、Lean 全体ビルド、sorry 検査を通した。
+対象は `SageMath まで`。次 tick は Lean 具体版の全射性を
+`Finite.injective_iff_surjective` から役割交換の右逆写像へ書き換える（現在は人手証明と食い違う）。
+
 ## 自動ループ tick: 可逆な近傍割り当ての全射性から有限性を除去（2026-08-28 03:12）
 
 前 tick の必要十分版と導出を全層・検査入口と突き合わせた。左右逆元を持つ $N,M$ について、
