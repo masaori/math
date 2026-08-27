@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 10:36: `point_den_dvd_two_mul_base_den_pow_of_rational_value_form` を追加し、閾値箱が幅二以上なら有限箱評価を分母を払った多重度の有限和へ展開して、点数乗表示から束ね定理の法分母の整除を直接得た。次は奇素数と素数二の非整除も束ね定理へ接続する。
 - 2026-08-27 10:07: 前歩の整除を実際の自由境界の箱へ渡す `point_den_dvd_two_mul_base_den_pow_from_free_box` を Lean 具体版に追加した。回文性 `Ω_L(#E_L)=Ω_L(0)` と `Ω_L(0)=2` を入れると、右辺が箱に依存しない `2 * c.den ^ N` になる。次はこの整除を束ね定理の法 `q.den` の仮定へ接続する。
 - 2026-08-27 09:34: 既存の `rational_power_base_congruences` から法 `q.den` の整除を取り出し、整数上の整除を自然数上へ戻す `point_den_dvd_zero_multiplicity_mul_base_den_pow_from_finite_box` を Lean 具体版に追加した。次は自由境界箱の回文性と破れ数ゼロの多重度二をこの整除へ渡す。
 - 2026-08-27 09:04: 点の分母が偶数の場合を閉じた。場合分けは点の既約分母の素数二の指数について行う形へ直し（先行の二つの排除定理がそちらで分岐しているため）、有限箱の等式から両分岐を排除する `two_not_dvd_power_base_den_from_finite_box_even_point_den` を追加した。次は法 q.den の整除の仮定を接続する。
