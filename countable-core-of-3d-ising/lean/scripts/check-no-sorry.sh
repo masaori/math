@@ -54,6 +54,10 @@ fi
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 #    具体版・必要十分版・両者をつなぐ導出の 3 本を、いずれも登録する。
 targets=(
+  Ising3DCut.Prediction.biUnion_encodePeriodicSquareMatching
+  Ising3DCut.LimitQuantity.eventually_periodic_residue_class_constant
+  Ising3DCut.NecSuf.eventuallyPeriodic_residueClassConstant
+  Ising3DCut.LimitQuantity.eventually_periodic_residue_class_constant_fromNecSuf
   Ising3DCut.LimitQuantity.eventualPowerFormAt_of_rationalPowerForm_den_one
   Ising3DCut.LimitQuantity.positive_rational_three_candidates_of_num_den_dvd_two
   Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_of_den_one

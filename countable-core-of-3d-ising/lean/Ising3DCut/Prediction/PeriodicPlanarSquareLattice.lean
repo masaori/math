@@ -595,4 +595,56 @@ theorem encodePeriodicSquareMatching_subset_terminalEdges
       rw [mem_externalEdges_iff]
       exact ⟨e, Finset.mem_univ e, rfl⟩)
 
+/-- 復元した内部辺と外部辺を合わせると、terminal graph の全端子を覆う。
+元の辺が polygon に属する端子は city 内部辺に、属さない端子は対応する
+外部辺に覆われる。 -/
+theorem biUnion_encodePeriodicSquareMatching
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    (encodePeriodicSquareMatching subgraph).biUnion id =
+      terminalVertices Finset.univ latticeIncidentEdges := by
+  ext t
+  constructor
+  · intro ht
+    obtain ⟨s, hs, hts⟩ := Finset.mem_biUnion.mp ht
+    rw [encodePeriodicSquareMatching, Finset.mem_union] at hs
+    rcases hs with hs | hs
+    · have htInternal : t ∈ (encodePeriodicSquareInternalEdges subgraph).biUnion id :=
+        Finset.mem_biUnion.mpr ⟨s, hs, hts⟩
+      rw [biUnion_encodePeriodicSquareInternalEdges] at htInternal
+      obtain ⟨v, _, htv⟩ := Finset.mem_biUnion.mp htInternal
+      have hrem := (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mp htv
+      rw [mem_terminalVertices_iff]
+      have htcity : t.1 = v ∧ t.2 ∈ latticeIncidentEdges t.1 := by
+        simpa [terminalsAt] using hrem.1
+      exact ⟨Finset.mem_univ _, htcity.2⟩
+    ·
+      obtain ⟨e, _, rfl⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph s).mp hs
+      rw [mem_terminalVertices_iff]
+      simp only [Finset.mem_univ, true_and]
+      have htendpoint : t = ⟨latticeEndpoint₀ e, e⟩ ∨
+          t = ⟨latticeEndpoint₁ e, e⟩ := by
+        simpa [externalEdge] using hts
+      rcases htendpoint with rfl | rfl <;> simp [latticeIncidentEdges]
+  · intro ht
+    rw [mem_terminalVertices_iff] at ht
+    by_cases he : t.2 ∈ subgraph.1
+    · rw [Finset.mem_biUnion]
+      have htInternal : t ∈ (encodePeriodicSquareInternalEdges subgraph).biUnion id := by
+        rw [biUnion_encodePeriodicSquareInternalEdges, Finset.mem_biUnion]
+        refine ⟨t.1, Finset.mem_univ _, ?_⟩
+        rw [mem_encodePeriodicSquareRemainingTerminalsAt_iff]
+        exact ⟨by simpa [terminalsAt] using ht.2, he⟩
+      obtain ⟨s, hs, hts⟩ := Finset.mem_biUnion.mp htInternal
+      refine ⟨s, ?_, hts⟩
+      rw [encodePeriodicSquareMatching, Finset.mem_union]
+      exact Or.inl hs
+    · rw [Finset.mem_biUnion]
+      refine ⟨externalEdge latticeEndpoint₀ latticeEndpoint₁ t.2, ?_, ?_⟩
+      · rw [encodePeriodicSquareMatching, Finset.mem_union]
+        exact Or.inr ((mem_encodePeriodicSquareExternalEdges_iff subgraph _).mpr
+          ⟨t.2, he, rfl⟩)
+      · have hendpoint := latticeIncident t.1 t.2 ht.2
+        rcases hendpoint with hendpoint | hendpoint <;>
+          simp [externalEdge, hendpoint]
+
 end Ising3DCut.Prediction
