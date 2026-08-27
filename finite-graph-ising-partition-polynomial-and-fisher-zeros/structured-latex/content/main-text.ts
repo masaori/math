@@ -5799,6 +5799,13 @@ S_{G,3}(a)
 =
 \mathcal R_G(a)^3
 -q_3\mathcal R_G(a)S_{G,2}(a)
++q_3S_{G,3}(a)
+-1_{\overline{\mathbb Q}}S_{G,3}(a)
+\quad\bigl(\because\ 1_{\overline{\mathbb Q}}S_{G,3}(a)=S_{G,3}(a)\text{ を代入する}\bigr).`),
+      displayMath(String.raw`T_{G,3}(a)
+=
+\mathcal R_G(a)^3
+-q_3\mathcal R_G(a)S_{G,2}(a)
 +(q_3-1_{\overline{\mathbb Q}})S_{G,3}(a)
 \quad\bigl(\because\ \text{分配律}\bigr).`),
       displayMath(String.raw`3=1+2

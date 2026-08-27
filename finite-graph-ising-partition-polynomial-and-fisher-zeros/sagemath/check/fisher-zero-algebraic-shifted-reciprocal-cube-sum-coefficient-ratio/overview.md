@@ -77,6 +77,7 @@
 | `check_substitute_non_diagonal_pair_sum.sage` | 非対角二重和の代入 | PASS | 分離した `U_{G,2,1}` の式を三重和へ代入した等式が一致 |
 | `check_distribute_eliminated_pair_sum.sage` | 非対角二重和代入後の分配 | PASS | 括弧を分配した等式が一致 |
 | `check_reorder_eliminated_pair_sum.sage` | 非対角二重和代入後の並べ替え | PASS | 加法項を並べ替えた等式が一致 |
+| `check_insert_multiplicative_identity_before_factoring.sage` | 逆三乗和項への乗法単位元の挿入 | PASS | `-S_{G,3}` と `-1_{Qbar}S_{G,3}` が一致 |
 | `check_factor_eliminated_pair_sum.sage` | 非対角二重和代入後の係数括り出し | PASS | `S_{G,3}` の係数が `q_3-1_{Qbar}` に一致 |
 | `check_eliminate_non_diagonal_pair_sum_before_integer_coefficient.sage` | 非対角二重和を消去した直後の係数 | PASS | 標準単射像の整数係数整理前に `q_3-1_{Qbar}` を持つ三次恒等式が一致 |
 | `check_eliminate_non_diagonal_pair_sum.sage` | 非対角二重和の消去 | PASS | 三次恒等式が一致 |
