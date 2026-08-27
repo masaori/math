@@ -422,4 +422,25 @@ theorem exists_pairing_of_even_card {α : Type*} [DecidableEq α]
           · exact Or.inl (Or.inr hxb)
           · exact Or.inr ⟨hxb, hxa, hx⟩
 
+/-- 各 city の残存端子は、候補内部辺に属する互いに交わらない二元集合で
+ちょうど一度ずつ覆える。一般の偶数有限集合の対分けを残存端子へ適用したもの。 -/
+theorem exists_candidate_internal_edge_cover_at
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    ∃ P : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)),
+      P ⊆ encodePeriodicSquareCandidateInternalEdgesAt subgraph v ∧
+        (P : Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id ∧
+          P.biUnion id = encodePeriodicSquareRemainingTerminalsAt subgraph v := by
+  obtain ⟨P, hP2, hPd, hPu⟩ := exists_pairing_of_even_card
+    (encodePeriodicSquareRemainingTerminalsAt subgraph v)
+    (even_card_encodePeriodicSquareRemainingTerminalsAt subgraph v)
+  refine ⟨P, ?_, hPd, hPu⟩
+  intro e he
+  rw [mem_encodePeriodicSquareCandidateInternalEdgesAt_iff]
+  constructor
+  · intro x hx
+    have : x ∈ P.biUnion id := Finset.mem_biUnion.mpr ⟨e, he, hx⟩
+    simpa [hPu] using this
+  · exact hP2 e he
+
 end Ising3DCut.Prediction
