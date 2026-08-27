@@ -11632,4 +11632,64 @@ a_L(q)^{\#V_L\,\#V_{L+p}}
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_eventually_periodic_at_one_half_is_impossible",
+    kind: "claim",
+    title: { text: "有理点 2 分の 1 では有限箱の量は末尾周期的にならない" },
+    labels: ["claim_eventually_periodic_at_one_half_is_impossible"],
+    habitat: "Q",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`L_0,p`),
+        " をどのように取っても、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`Z_L(1/2)^{\#V_{L+p}}=Z_{L+p}(1/2)^{\#V_L}`),
+        " が成り立つことはない。したがって、有理点 2 分の 1 では有限箱の量の列は末尾で周期的にならない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L:=\max\{L_0,2\}`),
+        "、",
+        math(String.raw`E_M:=\#E_M`),
+        " と置く。",
+        ref("claim_eventual_power_form_at_one_half_is_impossible"),
+        " の有限和の添字変更を箱 ",
+        math(String.raw`M=L,L+p`),
+        " に適用すると、",
+        math(String.raw`2^{E_M}Z_M(1/2)=Z_M(2)`),
+        " である。また ",
+        ref("claim_eventual_power_form_at_two_is_impossible"),
+        " の有限和の計算から、",
+        math(String.raw`Z_M(2)`),
+        " に含まれる素因子 2 の指数は 1 である。よって ",
+        math(String.raw`Z_M(1/2)`),
+        " に含まれる素因子 2 の指数は ",
+        math(String.raw`1-E_M`),
+        " である。",
+      ]),
+      paragraph(["周期の冪等式を仮定し、両辺に含まれる素因子 2 の指数を取ると、"]),
+      displayMath(
+        String.raw`\bigl(1-E_L\bigr)(L+p)^3=\bigl(1-E_{L+p}\bigr)L^3`,
+      ),
+      paragraph(["を得る。一方、自由境界の箱では ", math(String.raw`E_M=3M^2(M-1)`), " なので、左辺から右辺を引くと"]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\bigl(1-3L^2(L-1)\bigr)(L+p)^3
+-\bigl(1-3(L+p)^2(L+p-1)\bigr)L^3\\
+&=(L+p)^3-L^3+3pL^2(L+p)^2
+&&\bigl(\because\ \text{分配法則}\bigr)\\
+&>0
+&&\bigl(\because\ L>0,\ p>0\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって二つの素因子指数は等しくならず、仮定した冪等式に反する。よって ",
+        ref("claim_eventually_periodic_iff_power_identity"),
+        " により末尾周期性も成り立たない。使ったのは有限和、回文性、整数の素因子指数、自然数の冪だけである。",
+      ]),
+    ],
+  },
 ]);
