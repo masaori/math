@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 21:04: レビューで、末尾定数性の最終分類の証明に残る唯一の TODO（底の自然数化と候補三点への絞り込みを外部仮定として受け取っていた箇所）を、既存の主張がどちらも内部で閉じていることを確かめて埋めた。本文の TODO は 0 件。そのうえで本流をゴール文書から引き直し、末尾定数性を真に含む有限的条件として末尾周期性 $a_L(q)=a_{L+p}(q)$（閾値以後）を定義した。次は周期 $p$ の冪等式への言い換え。
 - 2026-08-27 20:34: 末尾定数性の最終分類について、有限箱の合同式から底の整除へ至る全段を既存の必要十分版から再導出する `base_divisibility_of_rational_value_form_viaNecSuf` と、分類へ束ねる `eq_one_of_cross_power_identity_from_free_box_closed_viaNecSuf` を追加して四層を閉じた。並行では各 city の残存端子を候補内部辺の互いに交わらない二元集合で完全被覆する `exists_candidate_internal_edge_cover_at` を追加した。Lean build と sorry 検査 619 件を通過。次の本流はゴール文書から標的を引き直し、並行は city ごとの被覆を全体の内部辺集合へ束ねる。
 - 2026-08-27 20:05: 分類を閉じる接続のうち、整除を冪へ持ち上げる段の Lean 必要十分版 `NecSuf.dvd_mul_pow_sub_pow_of_dvd_mul_sub` を置いた（仮定は可換環であることだけで、有理点・箱・係数 2・指数 $L_0^3$ を外し、任意の $k,x,y,n$ で $a\mid k(x-y)\Rightarrow a\mid k(x^n-y^n)$）。具体版をその特殊化として導出する `power_numerator_divisibility_of_base_divisibility_fromNecSuf` も置いた。`lake build` と sorry 検査 616 件、`npm run check`（180 ブロック・405 参照すべて解決）、`build:pdf` 63 ページを通過。次は残る段（有限箱の合同式から底の整除を得る部分と束ね）の必要十分版。
 - 2026-08-27 19:37: 隣接する三箱の有限合同式から二つの頂点数差に対する整除を作り、差の互いに素性と既存の最大公約数定理で `a ∣ 2(c-1)` を導いた。これを直前の束ねへ渡す `eq_one_of_cross_power_identity_from_free_box_closed` により、冪等式だけから有理点を一に定める Lean 具体版を閉じた。次はこの最終接続の Lean 必要十分版。

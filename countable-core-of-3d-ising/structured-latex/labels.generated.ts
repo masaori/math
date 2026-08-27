@@ -126,6 +126,7 @@ export const ALL_LABELS = [
   "def_edge_set",
   "def_endpoint_maps",
   "def_eventually_constant_finite_box_sequence",
+  "def_eventually_periodic_finite_box_sequence",
   "def_finite_box_prime_exponent_sequence",
   "def_full_boundary_response_polynomial",
   "def_global_spin_flip",
