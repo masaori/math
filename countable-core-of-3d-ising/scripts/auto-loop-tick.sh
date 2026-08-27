@@ -517,22 +517,10 @@ fi
 # 公開まで到達しなかった tick（打ち切り・異常終了）が一度も報告されなかった。
 notify_slack() {
   local message="$1"
-  local git_common_dir repository
-  # リポジトリ名は共有チェックアウトの名前にする（worktree 名だと通知先の分類が壊れる）。
-  git_common_dir="$(git -C "$LOOP_WORKTREE" rev-parse --path-format=absolute --git-common-dir 2>/dev/null || true)"
-  if [ -n "$git_common_dir" ]; then
-    repository="$(basename "$(dirname "$git_common_dir")")"
-  else
-    repository="math"
+  if ! slack route-post math "$message" >> "$LOG_FILE" 2>&1; then
+    log "    Slack の明示routeへの通知に失敗した"
+    return 1
   fi
-  # 送り先は **math リポジトリ専用**のもの（2026-08-15 に slack-notification skill が
-  # リポジトリ別の送り先へ分かれた。正本は ~/.claude/skills/slack-notification/SKILL.md）。
-  # この URL は秘密ではないので、伏せ字にせずこのまま置く。
-  curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
-    -H "Content-Type: application/json" \
-    --data "$(jq -n --arg message "$message" --arg window "3次元 Ising の可算核 自動ループ" \
-      '{window: $window, message: $message}')" >> "$LOG_FILE" 2>&1 \
-    || log "    Slack への通知に失敗した"
 }
 
 # 見出しは README の表題から取る。**固定文字列にすると、ゴール設定が変わったときに

@@ -419,13 +419,9 @@ case "$tick_outcome" in
   *)     tick_line="$tick_outcome" ;;
 esac
 tick_message="$(printf '%s\n%s' "$tick_line" "$published_url")"
-# 送り先は **math リポジトリ専用**のもの（2026-08-15 に slack-notification skill が
-# リポジトリ別の送り先へ分かれた。正本は ~/.claude/skills/slack-notification/SKILL.md）。
-# この URL は秘密ではないので、伏せ字にせずこのまま置く。
-curl -sS -X POST 'https://hooks.slack.com/triggers/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' \
-  -H "Content-Type: application/json" \
-  --data "$(jq -n --arg message "$tick_message" --arg window "2次元 Ising（Λ の立場）自動ループ" \
-    '{window: $window, message: $message}')" >> "$LOG_FILE" 2>&1 \
-  || log "    Slack への通知に失敗した"
+if ! slack route-post math "$tick_message" >> "$LOG_FILE" 2>&1; then
+  log "    Slack の明示routeへの通知に失敗した"
+  exit 1
+fi
 
 exit "$status"

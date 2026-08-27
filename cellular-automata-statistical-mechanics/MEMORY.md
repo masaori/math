@@ -4298,3 +4298,6 @@ $\mathbb R/\mathbb C$ 脱出はない。対象は `Lean 具体版まで`。次 t
 有限決定も記述した。有限集合・有限部分集合・自然数だけで閉じ、$\mathbb R/\mathbb C$ 脱出はない。
 
 対象は `構造化記述まで`。次 tick は本章をレビュー後、SageMath 検算だけを作る。
+# Slack配送経路
+
+- 論文公開通知は旧Workflow Builder triggerを使わず、`slack route-post math`が解決するHex-AIの明示routeだけへ送る。

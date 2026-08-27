@@ -5492,3 +5492,6 @@ $S_{n,m}=\sum_{z\in\mu_n}z^{m}\in\overline{\mathbb{Q}}$ を置き、次を示し
 - プロジェクト雛形の作成（構造化テキスト・SageMath・Lean・docs、および検査の一式）。
 - 住処 `habitat` と脱出 `realEscape` の型・実行時強制、負テスト 8 件・実行時テスト 9 件。
 - 可算な住処を宣言したブロックの数式に $\mathbb{R}/\mathbb{C}$ が現れないことの機械検査。
+# Slack配送経路
+
+- 自動tickと監査の報告は旧Workflow Builder triggerを使わず、`slack route-post math`が解決するHex-AIの明示routeだけへ送る。
