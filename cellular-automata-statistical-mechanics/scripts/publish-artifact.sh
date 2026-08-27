@@ -18,7 +18,6 @@ STAGE="$HOME/.artifact-uploads/math/$SLUG"
 # 成功しているのに照合だけが落ち、ティックが毎回失敗として記録される（2026-08-16）。
 EXPECTED_URL="https://hexcomp-artifacts.web.app/math/$SLUG/"
 PUBLISHER="/Users/masaori/git/masaori/artifacts/publish.py"
-WEBHOOK_URL="https://hooks.slack.com/triggers/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"
 
 mkdir -p "$LOG_DIR"
 log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"; }
@@ -122,13 +121,12 @@ case "$message" in
     exit 1
     ;;
 esac
-slack_response="$(curl --fail -sS -X POST "$WEBHOOK_URL" \
-  -H 'Content-Type: application/json' \
-  --data "$(jq -n --arg message "$message" --arg window "セルオートマトンと統計力学 公開" \
-    '{window: $window, message: $message}')")"
+slack_response="$(slack route-post math "$message")"
 printf '%s\n' "$slack_response" >> "$LOG_FILE"
-if ! printf '%s' "$slack_response" | jq -e '.ok == true' >/dev/null; then
-  log "NG: Slack が成功応答を返さなかった（版 ${short_commit}）"
+if ! printf '%s' "$slack_response" | jq -e \
+  '.repository == "math" and .channel == "local-pc-management" and (.ts | type == "string")' \
+  >/dev/null; then
+  log "NG: Slack の明示routeから期待した配送応答を得られなかった（版 ${short_commit}）"
   exit 1
 fi
 

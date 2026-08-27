@@ -19,7 +19,6 @@ LOG_FILE="$LOG_DIR/audit.log"
 LOCK_DIR="$LOG_DIR/audit.lock"
 WORKTREE="$LOG_DIR/audit-worktree"
 PROJECT_NAME="$(basename "$PROJECT_DIR")"
-WEBHOOK_URL='https://hooks.slack.com/triggers/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'
 
 mkdir -p "$LOG_DIR"
 
@@ -151,8 +150,8 @@ for p in "${problems[@]}"; do message="$message"$'\n'"・$p"; done
 message="$message"$'\n'"詳細: $PROJECT_NAME/logs/audit.log"
 
 log "監査で ${#problems[@]} 件の異常を検出したので通知する"
-curl -sS -X POST "$WEBHOOK_URL" -H "Content-Type: application/json" \
-  --data "$(jq -n --arg message "$message" --arg window "2次元 Ising（Λ の立場）監査" \
-    '{window: $window, message: $message}')" >> "$LOG_FILE" 2>&1
+if ! slack route-post math "$message" >> "$LOG_FILE" 2>&1; then
+  log "Slack の明示routeへの通知に失敗した"
+fi
 
 exit 1
