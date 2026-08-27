@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 01:36（並行）: 各 city で選んだ内部辺被覆の相異なる二辺が端子を共有しないことを `pairwiseDisjoint_encodePeriodicSquareInternalEdgesAt` として存在定理から取り出した。次は city 間と外部辺との排他性を合わせる。
 - 2026-08-28 01:32: 有理点 2 分の 1 で末尾周期性が不可能であることを本文に記述した（`claim_eventually_periodic_at_one_half_is_impossible`）。回文性から各箱値の素数 2 の指数が `1-#E_L` となり、周期交差冪等式が強制する指数等式は、自由境界の辺数を代入すると両辺の差が正になるため成立しない。次は SageMath 検証。
 - 2026-08-28 01:06: 有理点 2 で末尾周期性が不可能であることを Lean 必要十分版 `NecSuf.pow_ne_pow_of_pow_additive_index_eq_one` と `NecSuf.no_eventual_cross_power_identity_of_pow_additive_index_eq_one` へ抽象化し、このセクションを四層で閉じた。仮定は「冪の上で加法的な指標が二値でともに 1」「二つの指数が相異なる」だけで、素数 2・法 4・自然数・モノイド則は落ちた。具体版は `eventually_periodic_at_two_power_identity_impossible_fromNecSuf` として導出。sorry 非依存検査 632 件通過。次の本流は有理点 2 分の 1 の末尾周期性の排除。
 - 2026-08-28 00:34: 有理点 2 で末尾周期性が不可能であることの Lean 具体版 `partitionValueAtTwoNat_cross_power_ne` と `eventually_periodic_at_two_power_identity_impossible` を閉じた。法 4 で 2 の有限箱値は素数 2 の指数が一であり、交差冪等式は異なる箱の点数が等しいと強制するため矛盾する。着手前レビュでは直前の並行成果に修正事項は無かった。次は同主張の Lean 必要十分版。

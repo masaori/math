@@ -458,6 +458,15 @@ theorem encodePeriodicSquareInternalEdgesAt_subset_candidates
       encodePeriodicSquareCandidateInternalEdgesAt subgraph v :=
   (Classical.choose_spec (exists_candidate_internal_edge_cover_at subgraph v)).1
 
+/-- 選んだ city 内被覆の相異なる二辺は端子を共有しない。
+各端子をただ一度だけ覆うことの一意性側を、存在定理から取り出したもの。 -/
+theorem pairwiseDisjoint_encodePeriodicSquareInternalEdgesAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    (encodePeriodicSquareInternalEdgesAt subgraph v :
+      Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id :=
+  (Classical.choose_spec (exists_candidate_internal_edge_cover_at subgraph v)).2.1
+
 /-- 選んだ city 内被覆は、その city の残存端子をちょうど覆う。 -/
 theorem biUnion_encodePeriodicSquareInternalEdgesAt
     {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
