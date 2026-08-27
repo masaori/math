@@ -550,6 +550,27 @@ theorem pairwiseDisjoint_encodePeriodicSquareInternalEdges
   have hd := pairwiseDisjoint_encodePeriodicSquareInternalEdgesAt subgraph v₁ hs₁v hs₂v hne
   exact Finset.disjoint_left.mp hd ht₁ ht₂
 
+/-- 束ねた内部辺と復元用の外部辺は端子を共有しない。
+内部辺の端子に対応する元の辺は polygon に属し、外部辺に対応する元の辺は
+polygon の補集に属するので、共通端子があれば矛盾する。 -/
+theorem disjoint_encodePeriodicSquareInternalEdges_externalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (s t : Finset (Σ _ : LatticeVertex n, LatticeEdge n))
+    (hs : s ∈ encodePeriodicSquareInternalEdges subgraph)
+    (ht : t ∈ encodePeriodicSquareExternalEdges subgraph) :
+    Disjoint s t := by
+  obtain ⟨v, _, hsv⟩ := Finset.mem_biUnion.mp hs
+  obtain ⟨e, he, rfl⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph t).mp ht
+  refine Finset.disjoint_left.mpr ?_
+  intro x hxs hxe
+  have hcand := encodePeriodicSquareInternalEdgesAt_subset_candidates subgraph v hsv
+  rw [mem_encodePeriodicSquareCandidateInternalEdgesAt_iff] at hcand
+  have hxsub : x.2 ∈ subgraph.1 :=
+    (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v x).mp (hcand.1 hxs) |>.2
+  have hx : x = ⟨latticeEndpoint₀ e, e⟩ ∨ x = ⟨latticeEndpoint₁ e, e⟩ := by
+    simpa [externalEdge] using hxe
+  rcases hx with rfl | rfl <;> exact he hxsub
+
 /-- 偶部分グラフから復元する terminal graph の辺集合。各 city で選んだ内部辺と、
 polygon に属さない元の辺に対応する外部辺を合わせる。 -/
 noncomputable def encodePeriodicSquareMatching

@@ -79,6 +79,7 @@ targets=(
   Ising3DCut.Prediction.biUnion_encodePeriodicSquareInternalEdgesAt
   Ising3DCut.Prediction.encodePeriodicSquareInternalEdges_subset_internalEdges
   Ising3DCut.Prediction.encodePeriodicSquareMatching_subset_terminalEdges
+  Ising3DCut.Prediction.disjoint_encodePeriodicSquareInternalEdges_externalEdges
   Ising3DCut.Prediction.mem_encodePeriodicSquareRemainingTerminalsAt_iff
   Ising3DCut.Prediction.card_encodePeriodicSquareRemainingTerminalsAt
   Ising3DCut.Prediction.even_card_encodePeriodicSquareRemainingTerminalsAt
