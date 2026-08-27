@@ -11799,7 +11799,7 @@ a_L(q)^{\#V_L\,\#V_{L+p}}
         String.raw`\begin{aligned}
 a_{L_0+r+(k+1)p}(q)
 &=a_{(L_0+r+kp)+p}(q)
-&&(\because\ \text{自然数の結合律})\\
+&&(\because\ \text{自然数の分配法則と結合律})\\
 &=a_{L_0+r+kp}(q)
 &&(\because\ \blkref{def_eventually_periodic_finite_box_sequence})\\
 &=a_{L_0+r}(q)
