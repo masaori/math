@@ -18,9 +18,13 @@ structured-latex/content/self-transpose-composition-closure.ts。
   claim_self_transpose_composition_closure_finitely_decidable
     `compositionClosedPairTable`, `mem_compositionClosedPairTable`
 
+必要十分版は NecSuf/SelfTransposeCompositionClosure.lean、そこからの導出は
+末尾の `Derivation` 名前空間にある。
+
 有限舞台、有限近傍割り当て、有限表の等号だけを使う。ℝ / ℂ は現れない。
 -/
 import CellularAutomata.SelfTransposeNeighborhoodAssignmentCount
+import CellularAutomata.NecSuf.SelfTransposeCompositionClosure
 
 namespace CellularAutomata.SelfTransposeCompositionClosure
 
@@ -112,5 +116,73 @@ theorem mem_compositionClosedPairTable (N M : NeighborhoodAssignment V) :
   · rintro ⟨hN, hM, hSelfTranspose⟩
     exact ⟨hN, hM,
       (composition_selfTranspose_iff_commute N M hN hM).1 hSelfTranspose⟩
+
+
+/-! ### 必要十分版からの導出
+
+具体版の各主張が、必要十分版
+`CellularAutomata.NecSuf.SelfTransposeCompositionClosure` の特殊化として
+得られることを示す。 -/
+
+namespace Derivation
+
+open CellularAutomata.NecSuf.FiniteNeighborhoodAssignmentMonoid
+open CellularAutomata.NecSuf.NeighborhoodAssignmentTransposeInvolution
+open CellularAutomata.NecSuf.SelfTransposeCompositionClosure
+
+/-- 具体版の同値は、必要十分版の有限表現版の特殊化である。 -/
+theorem composition_selfTranspose_iff_commute_of_necSuf
+    (N M : NeighborhoodAssignment V) (hN : transpose N = N) (hM : transpose M = M) :
+    transpose (composedNeighborhood N M) = composedNeighborhood N M ↔
+      composedNeighborhood N M = composedNeighborhood M N :=
+  hetComp_selfTranspose_iff_commute N M hN hM
+
+/-- 具体版の自己ループの証人は、必要十分版の証人の `a = 0` への特殊化である。 -/
+theorem witnessLoop_eq_necSuf :
+    witnessLoop = hetWitnessLoop (0 : WitnessStage) := rfl
+
+/-- 具体版の二点を結ぶ証人は、必要十分版の証人の `a = 0`, `b = 1` への特殊化である。
+    具体版は舞台が二元であることを使って最後の分岐を省いている。 -/
+theorem witnessEdge_eq_necSuf :
+    witnessEdge = hetWitnessEdge (0 : WitnessStage) 1 := by
+  funext v
+  fin_cases v <;> rfl
+
+/-- 具体版の自己ループの証人の自己転置性は、必要十分版の特殊化である。 -/
+theorem witnessLoop_selfTranspose_of_necSuf :
+    transpose witnessLoop = witnessLoop := by
+  rw [witnessLoop_eq_necSuf]
+  exact hetWitnessLoop_selfTranspose 0
+
+/-- 具体版の二点を結ぶ証人の自己転置性は、必要十分版の特殊化である。 -/
+theorem witnessEdge_selfTranspose_of_necSuf :
+    transpose witnessEdge = witnessEdge := by
+  rw [witnessEdge_eq_necSuf]
+  exact hetWitnessEdge_selfTranspose 0 1
+
+/-- 具体版の非自己転置性は、必要十分版の同値と具体版の非可換性から得られる。 -/
+theorem witness_composition_not_selfTranspose_of_necSuf :
+    transpose (composedNeighborhood witnessLoop witnessEdge) ≠
+      composedNeighborhood witnessLoop witnessEdge := by
+  intro h
+  exact witness_noncommute
+    ((composition_selfTranspose_iff_commute_of_necSuf witnessLoop witnessEdge
+      witnessLoop_selfTranspose witnessEdge_selfTranspose).1 h)
+
+/-- 具体版の有限表は、必要十分版の有限表と同じ定義である。 -/
+theorem compositionClosedPairTable_eq_necSuf :
+    (compositionClosedPairTable :
+        Finset (NeighborhoodAssignment V × NeighborhoodAssignment V)) =
+      hetCompositionClosedPairTable := rfl
+
+/-- 具体版の有限決定は、必要十分版の特殊化である。 -/
+theorem mem_compositionClosedPairTable_of_necSuf (N M : NeighborhoodAssignment V) :
+    (N, M) ∈ (compositionClosedPairTable :
+        Finset (NeighborhoodAssignment V × NeighborhoodAssignment V)) ↔
+      transpose N = N ∧ transpose M = M ∧
+        transpose (composedNeighborhood N M) = composedNeighborhood N M :=
+  mem_hetCompositionClosedPairTable N M
+
+end Derivation
 
 end CellularAutomata.SelfTransposeCompositionClosure
