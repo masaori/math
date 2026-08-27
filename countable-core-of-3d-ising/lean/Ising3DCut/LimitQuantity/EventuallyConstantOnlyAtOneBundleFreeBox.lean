@@ -17,6 +17,7 @@ import Ising3DCut.NullModel.ZeroBreakageConstant
 import Ising3DCut.NullModel.SquareAroundEdge
 import Ising3DCut.LimitQuantity.EventualPowerFormAtOneHalfImpossible
 import Ising3DCut.LimitQuantity.RationalPowerBaseDenNoPrimeMissingZeroMultiplicity
+import Ising3DCut.LimitQuantity.RationalPowerPointNumeratorDividesBasePowerDifference
 
 namespace Ising3DCut.LimitQuantity
 
@@ -359,5 +360,28 @@ theorem eq_one_of_cross_power_identity_from_free_box
     (fun c hc hform ↦ two_not_dvd_base_den_of_rational_value_form hq hL₀ hc hform)
     (fun c hc hform ↦ point_den_dvd_two_mul_base_den_pow_of_rational_value_form hq hL₀ hc hform)
     hdenOne hdenTwo
+
+/-- 前歩の有理数の等式を自然数の等式へ移す一段。点数乗表示の底の既約分母が `1`
+であれば、閾値の自由境界箱の有限和は底の既約分子の点数乗に**自然数として**等しい。
+
+両辺とも分母が `1` の有理数なので、有理数への埋め込みが単射であることだけで移せる。
+箱は閾値の一つに固定されており、極限も無限和も現れない。 -/
+theorem integer_point_threshold_box_sum_eq_nat_power
+    {q c : ℚ} {L₀ : ℕ} (hq : 0 < q) (hden : q.den = 1) (hc : 0 < c)
+    (hcden : c.den = 1)
+    (hform : ∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) :
+    brokenCountSum (NullModel.multiplicity L₀) q.num.natAbs q.den
+      (Fintype.card (NullModel.Edge L₀)) = c.num.natAbs ^ (L₀ ^ 3) := by
+  have hsum := integer_point_threshold_box_sum_eq_power hq hden hform
+  have hcnum : c = ((c.num.natAbs : ℕ) : ℚ) := by
+    rw [Nat.cast_natAbs, abs_of_pos (Rat.num_pos.mpr hc)]
+    exact eq_num_of_den_eq_one c hcden
+  have : ((brokenCountSum (NullModel.multiplicity L₀) q.num.natAbs q.den
+      (Fintype.card (NullModel.Edge L₀)) : ℕ) : ℚ)
+      = ((c.num.natAbs ^ (L₀ ^ 3) : ℕ) : ℚ) := by
+    rw [hsum]
+    push_cast
+    rw [← hcnum]
+  exact_mod_cast this
 
 end Ising3DCut.LimitQuantity
