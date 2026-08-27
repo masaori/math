@@ -18,6 +18,7 @@ import Ising3DCut.NullModel.SquareAroundEdge
 import Ising3DCut.LimitQuantity.EventualPowerFormAtOneHalfImpossible
 import Ising3DCut.LimitQuantity.RationalPowerBaseDenNoPrimeMissingZeroMultiplicity
 import Ising3DCut.LimitQuantity.RationalPowerPointNumeratorDividesBasePowerDifference
+import Ising3DCut.LimitQuantity.NumeratorDividesTwiceThresholdBoxValueMinusOne
 
 namespace Ising3DCut.LimitQuantity
 
@@ -383,5 +384,27 @@ theorem integer_point_threshold_box_sum_eq_nat_power
     push_cast
     rw [← hcnum]
   exact_mod_cast this
+
+/-- 分母 `1` の場合に、閾値の自由境界箱の有限和データと分子の整除を同時に得る。
+底について既に得た箱に依存しない整除を、直前の自然数等式を介して閾値箱の値へ移す
+一段だけであり、極限も無限和も現れない。 -/
+theorem integer_point_finite_box_data_of_rational_value_form
+    {q c : ℚ} {L₀ : ℕ} (hq : 0 < q) (hL₀ : 0 < L₀)
+    (hden : q.den = 1) (hc : 0 < c) (hcden : c.den = 1)
+    (hform : ∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3))
+    (hdvd : q.num.natAbs ∣ 2 * (c.num.natAbs - 1)) :
+    ∃ E Z L : ℕ, 0 < L ∧
+      Z = ∑ m ∈ Finset.range (E + 1),
+        NullModel.multiplicity L m * q.num.natAbs ^ m ∧
+      q.num.natAbs ∣ 2 * (Z - 1) := by
+  let E := Fintype.card (NullModel.Edge L₀)
+  let Z := brokenCountSum (NullModel.multiplicity L₀) q.num.natAbs q.den E
+  refine ⟨E, Z, L₀, hL₀, ?_, ?_⟩
+  · simp [Z, E, brokenCountSum, hden]
+  · apply numerator_divides_twice_threshold_box_value_minus_one
+      (c := c.num.natAbs) (n := L₀ ^ 3)
+    · exact Nat.succ_le_iff.mpr (Int.natAbs_pos.mpr (ne_of_gt (Rat.num_pos.mpr hc)))
+    · exact hdvd
+    · exact integer_point_threshold_box_sum_eq_nat_power hq hden hc hcden hform
 
 end Ising3DCut.LimitQuantity
