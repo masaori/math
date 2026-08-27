@@ -1,6 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
 - 2026-08-27 22:36（並行）: 偶部分グラフから復元する内部辺と外部辺の和 `encodePeriodicSquareMatching` を定義し、terminal graph の辺集合への包含を Lean で示した。次は各端子の被覆の存在と一意性。
+- 2026-08-27 23:05: 末尾周期性と周期だけ離れた箱の冪等式の同値を Lean 必要十分版へ抽象化し、このセクションを四層で閉じた。`NecSuf.root_eq_iff_crossPowerEquality` と `NecSuf.eventuallyPeriodic_iff_crossPowerIdentity` の仮定はモノイド・冪等式・指数の非零性・非零指数の冪写像の単射性だけで、順序・実数・有理数・分配多項式は使わない。具体版は `eventually_periodic_iff_power_identity_viaNecSuf` として導いた。前 tick の具体版が sorry 非依存検査へ未登録だったのを直し、検査は 623 件を通過。次は末尾周期的な正の有理点が 1 に限られるかの判定。
 - 2026-08-27 22:34: 末尾周期性と周期だけ離れた箱の冪等式の同値を Lean 具体版 `eventually_periodic_iff_power_identity` に移した。正の有限箱値の乗根表示と非零自然数冪の単射性だけを使い、極限は使わない。`lake build` と sorry 非依存検査 619 件を通過。次は Lean 必要十分版。
 - 2026-08-27 22:03: 末尾周期性と周期だけ離れた箱の冪等式の同値について SageMath 検証を追加した（`sagemath/check/eventually-periodic-iff-power-identity/`、3 ファイル PASS、linkage 95 件）。着手前レビューでは定義と同値主張を読み直し、修正事項は無かった。次は同主張の Lean 具体版。
 - 2026-08-27 21:04: レビューで、末尾定数性の最終分類の証明に残る唯一の TODO（底の自然数化と候補三点への絞り込みを外部仮定として受け取っていた箇所）を、既存の主張がどちらも内部で閉じていることを確かめて埋めた。本文の TODO は 0 件。そのうえで本流をゴール文書から引き直し、末尾定数性を真に含む有限的条件として末尾周期性 $a_L(q)=a_{L+p}(q)$（閾値以後）を定義した。次は周期 $p$ の冪等式への言い換え。
