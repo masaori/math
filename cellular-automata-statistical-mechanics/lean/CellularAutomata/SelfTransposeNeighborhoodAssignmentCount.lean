@@ -9,6 +9,7 @@ structured-latex/content/self-transpose-neighborhood-assignment-count.ts。
 -/
 import CellularAutomata.NeighborhoodAssignmentTransposeInvolution
 import Mathlib.Data.Sym.Card
+import CellularAutomata.NecSuf.SelfTransposeNeighborhoodAssignmentCount
 
 namespace CellularAutomata.SelfTransposeNeighborhoodAssignmentCount
 
@@ -132,5 +133,80 @@ def selfTransposeTable : Finset (NeighborhoodAssignment V) :=
 theorem selfTranspose_finitelyDecidable (N : NeighborhoodAssignment V) :
     N ∈ selfTransposeTable ↔ transpose N = N :=
   mem_selfTransposeTable N
+
+
+/-! ### 必要十分版からの導出
+
+具体版の各主張が、必要十分版
+`CellularAutomata.NecSuf.SelfTransposeNeighborhoodAssignmentCount` の特殊化として
+得られることを示す。 -/
+
+namespace Derivation
+
+open CellularAutomata.NecSuf.NeighborhoodAssignmentTransposeInvolution
+open CellularAutomata.NecSuf.SelfTransposeNeighborhoodAssignmentCount
+
+/-- 具体版の自己転置な近傍割り当ては、必要十分版の有限表現版と同じ対象である。 -/
+theorem selfTransposeAssignment_eq_necSuf :
+    SelfTransposeAssignment V = HetSelfTranspose V := rfl
+
+/-- 具体版の自己転置性の特徴づけは、必要十分版の特殊化である。 -/
+theorem selfTranspose_iff_symmetricMembership_of_necSuf (N : NeighborhoodAssignment V) :
+    transpose N = N ↔ ∀ v w : V, (w ∈ N v ↔ v ∈ N w) :=
+  hetSelfTranspose_iff_symmetricMembership N
+
+/-- 具体版の符号は、必要十分版の有限表現版の符号と一致する。 -/
+theorem pairEncoding_eq_necSuf (N : SelfTransposeAssignment V) :
+    pairEncoding N = hetPairEncoding N := by
+  ext z
+  induction z using Sym2.inductionOn with
+  | _ v w => simp
+
+/-- 具体版の復元は、必要十分版の有限表現版の復元と同じ定義である。 -/
+theorem pairReconstruction_eq_necSuf (B : Finset (Sym2 V)) :
+    pairReconstruction B = hetPairReconstruction B := rfl
+
+/-- 具体版の復元の所属の対称性は、必要十分版の特殊化である。 -/
+theorem pairReconstruction_symmetricMembership_of_necSuf (B : Finset (Sym2 V)) (v w : V) :
+    w ∈ pairReconstruction B v ↔ v ∈ pairReconstruction B w :=
+  hetPairReconstruction_symmetricMembership B v w
+
+/-- 具体版の復元が自己転置であることは、必要十分版の特殊化である。 -/
+theorem pairReconstruction_selfTranspose_of_necSuf (B : Finset (Sym2 V)) :
+    transpose (pairReconstruction B) = pairReconstruction B :=
+  hetPairReconstruction_selfTranspose B
+
+/-- 具体版の非順序対の個数（二項係数表示）は、必要十分版の特殊化である。
+    必要十分版は `DecidableEq V` を使わない。 -/
+theorem card_unorderedCellPair_choose_of_necSuf :
+    Fintype.card (UnorderedCellPair V) =
+      Fintype.card V + (Fintype.card V).choose 2 :=
+  card_sym2_choose
+
+/-- 具体版の非順序対の個数は、必要十分版の特殊化である。 -/
+theorem card_unorderedCellPair_of_necSuf :
+    Fintype.card (UnorderedCellPair V) =
+      Fintype.card V * (Fintype.card V + 1) / 2 :=
+  card_sym2
+
+/-- 具体版の個数は、必要十分版の有限表現版の個数と同じ値である。 -/
+theorem card_selfTransposeAssignment_of_necSuf :
+    Fintype.card (SelfTransposeAssignment V) =
+      2 ^ (Fintype.card V * (Fintype.card V + 1) / 2) := by
+  have h : Fintype.card (SelfTransposeAssignment V) = Fintype.card (HetSelfTranspose V) :=
+    Fintype.card_congr (Equiv.refl _)
+  rw [h, card_hetSelfTranspose]
+
+/-- 具体版の有限表は、必要十分版の有限表と同じ定義である。 -/
+theorem selfTransposeTable_eq_necSuf :
+    (selfTransposeTable : Finset (NeighborhoodAssignment V)) =
+      hetSelfTransposeTable := rfl
+
+/-- 具体版の有限決定は、必要十分版の特殊化である。 -/
+theorem selfTranspose_finitelyDecidable_of_necSuf (N : NeighborhoodAssignment V) :
+    N ∈ (selfTransposeTable : Finset (NeighborhoodAssignment V)) ↔ transpose N = N :=
+  mem_hetSelfTransposeTable N
+
+end Derivation
 
 end CellularAutomata.SelfTransposeNeighborhoodAssignmentCount
