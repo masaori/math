@@ -112,6 +112,21 @@ theorem card_fixed_axis_edge_starts (L : ℕ) (j : Fin 3) :
     rw [Fintype.card_fun, hsub, Fintype.card_fin]
   rw [Fintype.card_congr e, Fintype.card_prod, card_forward_start_coordinates, hfun]
 
+/-- 自由境界の三次元箱の辺は `3 * (L - 1) * L ^ 2` 本である。
+各辺を、その方向と、その方向へ一つ進める始点に分けて数える。 -/
+theorem card_edge (L : ℕ) :
+    Fintype.card (Edge L) = 3 * (L - 1) * L ^ 2 := by
+  let e : Edge L ≃ Σ j : Fin 3, {f : Fin 3 → Fin L // (f j).1 + 1 < L} :=
+    { toFun := fun edge =>
+        ⟨edge.axis, ⟨siteEquiv edge.start, by simpa [siteEquiv] using edge.next_lt⟩⟩
+      invFun := fun p =>
+        ⟨siteEquiv.symm p.2.1, p.1, by simpa [siteEquiv] using p.2.2⟩
+      left_inv := fun edge => by cases edge; rfl
+      right_inv := fun p => by cases p with | mk j f => cases f; rfl }
+  rw [Fintype.card_congr e, Fintype.card_sigma]
+  simp_rw [card_fixed_axis_edge_starts]
+  simp [Nat.mul_assoc]
+
 /-- 破れている辺の集合 D_L(σ)（`def_broken_count` の前半）。 -/
 def brokenSet {L : ℕ} (σ : Config L) : Finset (Edge L) :=
   Finset.univ.filter (fun e => σ (endpoint0 e) ≠ σ (endpoint1 e))
