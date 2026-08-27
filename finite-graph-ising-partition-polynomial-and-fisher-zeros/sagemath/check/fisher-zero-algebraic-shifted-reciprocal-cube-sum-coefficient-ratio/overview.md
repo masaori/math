@@ -70,6 +70,7 @@
 | `check_subtract_non_diagonal_term_from_triple_decomposition.sage` | 非対角二重和項を引く操作 | PASS | `R_G^3-S_{G,3}-q_3U_{G,2,1}=T_{G,3}` が一致 |
 | `check_reverse_isolated_triple_sum.sage` | 孤立した相異なる三重和等式の対称律 | PASS | 左右を反転した等式が一致 |
 | `check_isolate_triple_sum.sage` | 相異なる順序付き三重和の分離 | PASS | 一致型分解から `T_{G,3}` を移項した等式が一致 |
+| `check_subtract_reciprocal_cube_from_pair_product.sage` | 逆数積の両辺から逆三乗和を引く操作 | PASS | `R_GS_{G,2}-S_{G,3}=U_{G,2,1}` が一致 |
 | `check_isolate_non_diagonal_pair_sum.sage` | 非対角二重和の分離 | PASS | 逆数積から `U_{G,2,1}` を移項した等式が一致 |
 | `check_substitute_non_diagonal_pair_sum.sage` | 非対角二重和の代入 | PASS | 分離した `U_{G,2,1}` の式を三重和へ代入した等式が一致 |
 | `check_distribute_eliminated_pair_sum.sage` | 非対角二重和代入後の分配 | PASS | 括弧を分配した等式が一致 |

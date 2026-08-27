@@ -5769,9 +5769,12 @@ S_{G,3}(a)
       displayMath(String.raw`T_{G,3}(a)
 =\mathcal R_G(a)^3-S_{G,3}(a)-q_3U_{G,2,1}(a)
 \quad\bigl(\because\ \text{直前の等式の対称律}\bigr).`),
+      displayMath(String.raw`\mathcal R_G(a)S_{G,2}(a)-S_{G,3}(a)
+=U_{G,2,1}(a)
+\quad\bigl(\because\ \mathcal R_G(a)S_{G,2}(a)=S_{G,3}(a)+U_{G,2,1}(a)\text{ の両辺から }S_{G,3}(a)\text{ を引く}\bigr).`),
       displayMath(String.raw`U_{G,2,1}(a)
 =\mathcal R_G(a)S_{G,2}(a)-S_{G,3}(a)
-\quad\bigl(\because\ \mathcal R_G(a)S_{G,2}(a)=S_{G,3}(a)+U_{G,2,1}(a)\text{ から移項する}\bigr).`),
+\quad\bigl(\because\ \text{直前の等式の対称律}\bigr).`),
       displayMath(String.raw`T_{G,3}(a)
 =
 \mathcal R_G(a)^3
