@@ -15,6 +15,7 @@ import Ising3DCut.LimitQuantity.NullModelEvalNeInv
 import Ising3DCut.NullModel.MultiplicityPalindrome
 import Ising3DCut.NullModel.ZeroBreakageConstant
 import Ising3DCut.NullModel.SquareAroundEdge
+import Ising3DCut.LimitQuantity.EventualPowerFormAtOneHalfImpossible
 
 namespace Ising3DCut.LimitQuantity
 
@@ -146,5 +147,63 @@ theorem multiplicity_card_edge_sub_one_eq_zero {L : ℕ} (hL : 2 ≤ L) :
     intro σ
     exact NullModel.brokenCount_ne_one hL σ.1 ((Finset.mem_filter.mp σ.2).2)
   exact hpal ▸ hone
+
+/-- 偶数分母の場合の接続の第三歩。有理点の既約分母が偶数なら、その既約分子は奇数である。
+既約分数の分子と分母が互いに素であることだけを使う。 -/
+theorem num_odd_of_den_even {q : ℚ} (h2 : (2 : ℕ) ∣ q.den) :
+    ¬ (2 : ℕ) ∣ q.num.natAbs := by
+  intro hnum
+  have hcop := q.reduced
+  have : (2 : ℕ) ∣ Nat.gcd q.num.natAbs q.den := Nat.dvd_gcd hnum h2
+  rw [hcop] at this
+  omega
+
+/-- 偶数分母の場合の接続の第四歩。有理点の既約分母が偶数なら、
+自由境界の箱 `L` の有限和は法 `4` で `2` に合同である。
+破れ辺数が辺数より二以上小さい項は既約分母の二乗を因子に持つので法 `4` で消え、
+破れ辺数が辺数から一を引いた数の項は多重度が零で消え、
+残る破れ辺数が辺数の項は回文性と破れ辺数零の多重度から `2 * a ^ #E_L` になる。
+既約分子が奇数なのでこれは法 `4` で `2` である。有限和だけの主張であり、極限は使わない。 -/
+theorem brokenCountSum_mod_four_eq_two
+    {q : ℚ} {L : ℕ} (hL : 2 ≤ L) (h2 : (2 : ℕ) ∣ q.den) :
+    brokenCountSum (NullModel.multiplicity L) q.num.natAbs q.den
+      (Fintype.card (NullModel.Edge L)) % 4 = 2 := by
+  set E := Fintype.card (NullModel.Edge L) with hE
+  have hE2 : 2 ≤ E := two_le_card_edge hL
+  have hsplit : brokenCountSum (NullModel.multiplicity L) q.num.natAbs q.den E =
+      (∑ m ∈ Finset.range (E - 1), NullModel.multiplicity L m * q.num.natAbs ^ m *
+          q.den ^ (E - m)) +
+        (NullModel.multiplicity L (E - 1) * q.num.natAbs ^ (E - 1) * q.den ^ (E - (E - 1)) +
+          NullModel.multiplicity L E * q.num.natAbs ^ E * q.den ^ (E - E)) := by
+    have h1 : E + 1 = (E - 1) + 1 + 1 := by omega
+    rw [brokenCountSum, h1, Finset.sum_range_succ, Finset.sum_range_succ]
+    have : E - 1 + 1 = E := by omega
+    rw [this]
+    ring
+  have hzero : NullModel.multiplicity L (E - 1) = 0 :=
+    multiplicity_card_edge_sub_one_eq_zero hL
+  have hfull : NullModel.multiplicity L E = 2 := by
+    have hpal := NullModel.multiplicity_palindrome (L := L) (m := E) (le_refl _)
+    rw [← hE, Nat.sub_self, NullModel.multiplicity_zero_eq_two (by omega)] at hpal
+    exact hpal
+  have hhead : 4 ∣ ∑ m ∈ Finset.range (E - 1), NullModel.multiplicity L m *
+      q.num.natAbs ^ m * q.den ^ (E - m) := by
+    refine Finset.dvd_sum ?_
+    intro m hm
+    have hmlt : m < E - 1 := Finset.mem_range.mp hm
+    have h4 : (4 : ℕ) ∣ q.den ^ (E - m) := by
+      have hle : 2 ≤ E - m := by omega
+      have : q.den ^ 2 ∣ q.den ^ (E - m) := pow_dvd_pow _ hle
+      exact dvd_trans (by
+        have : (2 : ℕ) ^ 2 ∣ q.den ^ 2 := pow_dvd_pow_of_dvd h2 2
+        simpa using this) this
+    exact Dvd.dvd.mul_left h4 _
+  have hodd : ¬ (2 : ℕ) ∣ q.num.natAbs ^ E :=
+    fun h => num_odd_of_den_even h2 (Nat.Prime.dvd_of_dvd_pow Nat.prime_two h)
+  obtain ⟨k, hk⟩ := hhead
+  rw [hsplit, hzero, hfull, hk]
+  simp only [Nat.sub_self, pow_zero, mul_one, Nat.zero_mul, Nat.zero_add]
+  have hmod : q.num.natAbs ^ E % 2 = 1 := Nat.two_dvd_ne_zero.mp hodd
+  omega
 
 end Ising3DCut.LimitQuantity
