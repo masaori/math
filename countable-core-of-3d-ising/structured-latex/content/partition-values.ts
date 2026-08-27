@@ -11820,4 +11820,131 @@ a_{L_0+r+(k+1)p}(q)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_heading_residue_class_values_agree_gives_eventually_constant",
+    kind: "heading",
+    level: 2,
+    title: { text: "剰余類ごとの値が一致する末尾周期性は末尾定数性である" },
+    labels: [],
+  },
+  {
+    id: "soundness_bridge_claim_residue_class_values_agree_gives_eventually_constant",
+    kind: "claim",
+    standing: "mainTheorem",
+    title: {
+      text: "剰余類ごとの定数値がすべて一致すれば有限箱の量の列は末尾で定数である",
+    },
+    labels: ["claim_residue_class_values_agree_gives_eventually_constant"],
+    habitat: "R",
+    realEscape:
+      "各有限箱の量は正の有理数の正の実数乗根として ℝ に住むが、箱の大きさの極限は取らない。証明は自然数の除法の定理と閾値以後の等号だけを使い、上限・下限・級数・指数関数・実対数を使わない。",
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " について、有限箱の量の列 ",
+        math(String.raw`L\mapsto a_L(q)`),
+        " が閾値 ",
+        math(String.raw`L_0`),
+        " と周期 ",
+        math(String.raw`p`),
+        " で末尾周期的であるとする（",
+        ref("def_eventually_periodic_finite_box_sequence"),
+        "）。さらに、ある正の実数 ",
+        math(String.raw`c`),
+        " が存在して、すべての ",
+        math(String.raw`0\le r<p`),
+        " について ",
+        math(String.raw`a_{L_0+r}(q)=c`),
+        " が成り立つとする。このとき列 ",
+        math(String.raw`L\mapsto a_L(q)`),
+        " は閾値 ",
+        math(String.raw`L_0`),
+        " と値 ",
+        math(String.raw`c`),
+        " で末尾定数である（",
+        ref("def_eventually_constant_finite_box_sequence"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "自然数 ",
+        math(String.raw`L\ge L_0`),
+        " を任意に取る。",
+      ]),
+      paragraph([
+        math(String.raw`L-L_0`),
+        " は自然数であり、",
+        math(String.raw`p`),
+        " は正の自然数なので、自然数の除法の定理により、自然数 ",
+        math(String.raw`k`),
+        " と自然数 ",
+        math(String.raw`r`),
+        " で ",
+        math(String.raw`L-L_0=kp+r`),
+        " かつ ",
+        math(String.raw`0\le r<p`),
+        " を満たすものが存在する。両辺に ",
+        math(String.raw`L_0`),
+        " を加えて ",
+        math(String.raw`L=L_0+r+kp`),
+        " を得る。",
+      ]),
+      paragraph([
+        "この ",
+        math(String.raw`r`),
+        " は ",
+        math(String.raw`0\le r<p`),
+        " を満たすので、次の等式の列が成り立つ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a_L(q)
+&=a_{L_0+r+kp}(q)
+&&(\because\ L=L_0+r+kp)\\
+&=a_{L_0+r}(q)
+&&(\because\ \blkref{claim_eventually_periodic_residue_class_constant})\\
+&=c
+&&(\because\ \text{仮定})
+\end{aligned}`,
+      ),
+      paragraph([
+        "よってすべての ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`a_L(q)=c`),
+        " である。",
+        math(String.raw`c`),
+        " は正の実数なので、これは末尾定数性の定義（",
+        ref("def_eventually_constant_finite_box_sequence"),
+        "）が要求する形そのものである。",
+      ]),
+      paragraph([
+        "用いたのは自然数の除法の定理と剰余類ごとの末尾定数性（",
+        ref("claim_eventually_periodic_residue_class_constant"),
+        "）だけであり、箱の大きさの極限は使っていない。",
+      ]),
+    ],
+  },
+  {
+    id: "soundness_bridge_remark_residue_class_values_agree_reduces_to_one",
+    kind: "remark",
+    title: { text: "残るのは剰余類ごとの値が食い違う場合だけである" },
+    labels: ["remark_residue_class_values_agree_reduces_to_one"],
+    habitat: "R",
+    realEscape:
+      "各有限箱の量は正の有理数の正の実数乗根として ℝ に住むが、箱の大きさの極限は取らない。",
+    statement: [
+      paragraph([
+        "上の主張（",
+        ref("claim_residue_class_values_agree_gives_eventually_constant"),
+        "）と、末尾定数となる正の有理点が 1 に限られること（",
+        ref("claim_eventually_constant_only_at_one"),
+        "）を合わせると、末尾周期的であって剰余類ごとの定数値がすべて一致する正の有理点は ",
+        math(String.raw`q=1`),
+        " に限られる。したがって末尾周期性の分類で未決着として残っているのは、剰余類ごとの定数値のうち少なくとも二つが相異なる場合だけである。",
+      ]),
+    ],
+  },
 ]);
