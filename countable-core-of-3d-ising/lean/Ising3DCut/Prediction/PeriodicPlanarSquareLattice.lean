@@ -519,6 +519,37 @@ theorem biUnion_encodePeriodicSquareInternalEdges
     exact Finset.mem_biUnion.mpr
       ⟨s, Finset.mem_biUnion.mpr ⟨v, hv, hs⟩, hts⟩
 
+/-- 束ねた内部辺の相異なる二辺は、異なる city に由来する場合も端子を共有しない。
+共通端子があればその第一成分から二つの city が一致し、city 内の排他性へ戻る。 -/
+theorem pairwiseDisjoint_encodePeriodicSquareInternalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    (encodePeriodicSquareInternalEdges subgraph :
+      Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id := by
+  intro s₁ hs₁ s₂ hs₂ hne
+  obtain ⟨v₁, _, hs₁v⟩ := Finset.mem_biUnion.mp hs₁
+  obtain ⟨v₂, _, hs₂v⟩ := Finset.mem_biUnion.mp hs₂
+  refine Finset.disjoint_left.mpr ?_
+  intro t ht₁ ht₂
+  have hcand₁ := encodePeriodicSquareInternalEdgesAt_subset_candidates subgraph v₁ hs₁v
+  have hcand₂ := encodePeriodicSquareInternalEdgesAt_subset_candidates subgraph v₂ hs₂v
+  rw [mem_encodePeriodicSquareCandidateInternalEdgesAt_iff] at hcand₁ hcand₂
+  have hv₁ : t.1 = v₁ := by
+    have ht := (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v₁ t).mp
+      (hcand₁.1 ht₁)
+    have htcity : t.1 = v₁ ∧ t.2 ∈ latticeIncidentEdges t.1 := by
+      simpa [terminalsAt] using ht.1
+    exact htcity.1
+  have hv₂ : t.1 = v₂ := by
+    have ht := (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v₂ t).mp
+      (hcand₂.1 ht₂)
+    have htcity : t.1 = v₂ ∧ t.2 ∈ latticeIncidentEdges t.1 := by
+      simpa [terminalsAt] using ht.1
+    exact htcity.1
+  have hv : v₁ = v₂ := hv₁.symm.trans hv₂
+  rw [← hv] at hs₂v
+  have hd := pairwiseDisjoint_encodePeriodicSquareInternalEdgesAt subgraph v₁ hs₁v hs₂v hne
+  exact Finset.disjoint_left.mp hd ht₁ ht₂
+
 /-- 偶部分グラフから復元する terminal graph の辺集合。各 city で選んだ内部辺と、
 polygon に属さない元の辺に対応する外部辺を合わせる。 -/
 noncomputable def encodePeriodicSquareMatching

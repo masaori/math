@@ -75,6 +75,7 @@ targets=(
   Ising3DCut.LimitQuantity.eventually_periodic_at_two_power_identity_impossible_fromNecSuf
   Ising3DCut.Prediction.biUnion_encodePeriodicSquareInternalEdges
   Ising3DCut.Prediction.pairwiseDisjoint_encodePeriodicSquareInternalEdgesAt
+  Ising3DCut.Prediction.pairwiseDisjoint_encodePeriodicSquareInternalEdges
   Ising3DCut.Prediction.biUnion_encodePeriodicSquareInternalEdgesAt
   Ising3DCut.Prediction.encodePeriodicSquareInternalEdges_subset_internalEdges
   Ising3DCut.Prediction.encodePeriodicSquareMatching_subset_terminalEdges
