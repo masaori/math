@@ -5,6 +5,18 @@
 > [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
 > [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
+## 自動ループ tick: 役割交換による全射性の Lean 具体版（2026-08-28 05:12）
+
+前 tick の SageMath 検算を人手証明と突き合わせ、修正を要する不一致は見つからなかった。
+Lean 具体版に、役割交換で得る $M(u)=\{\tau(u)\}$ と
+$N(\tau(u))=\{u\}=\{\sigma(\tau(u))\}$ から、右逆像 $\tau(u)$ を明示して $\sigma$ の
+全射性を導く定理を追加した。置換の構成はこの定理を使い、`Finite.injective_iff_surjective` への
+依存を除いた。新定理は sorry 検査対象へ登録した。有限舞台の具体版なのでファイル全体の
+`Fintype V` は保つが、全射性の証明では有限性を使わない。$\mathbb R/\mathbb C$ 脱出はない。
+
+構造化テキストの検査と PDF、本章 SageMath 5 本、検算対応検査、Lean 全体ビルド、sorry 検査を通した。
+対象は `Lean 具体版まで`。次 tick は Lean 必要十分版から `Finite V` を除き、具体版の導出を作り直す。
+
 ## 自動ループ tick: 役割交換による全射性の SageMath 検算（2026-08-28 04:12）
 
 前 tick が差し替えた全射性の人手証明を定義へ戻って検査し、誤りは見つからなかった。

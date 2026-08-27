@@ -109,13 +109,32 @@ theorem permutationFunction_injective {N M : NeighborhoodAssignment V}
   rw [hv, hMv'] at hMv
   exact Finset.singleton_injective hMv.symm
 
+/-- 人手証明の全射性の段。N と M の役割を交換して得る一元値を右逆像に取る。 -/
+theorem permutationFunction_surjective_by_role_swap {N M : NeighborhoodAssignment V}
+    (hNM : composedNeighborhood N M = identityNeighborhood V)
+    (hMN : composedNeighborhood M N = identityNeighborhood V) :
+    Function.Surjective (permutationFunctionOfInverse hNM hMN) := by
+  intro u
+  let τ := permutationFunctionOfInverse hMN hNM
+  refine ⟨τ u, ?_⟩
+  have hNτ : N (τ u) = {u} := by
+    calc
+      N (τ u) = composedNeighborhood M N u := by
+        symm
+        simp [composedNeighborhood, τ, value_eq_permutationFunction_singleton hMN hNM]
+      _ = {u} := by simpa [identityNeighborhood] using congrFun hMN u
+  have hNσ :
+      N (τ u) = {permutationFunctionOfInverse hNM hMN (τ u)} :=
+    value_eq_permutationFunction_singleton hNM hMN (τ u)
+  exact Finset.singleton_injective (hNσ.symm.trans hNτ)
+
 /-- 人手証明で構成した置換。 -/
 noncomputable def permutationOfInverse {N M : NeighborhoodAssignment V}
     (hNM : composedNeighborhood N M = identityNeighborhood V)
     (hMN : composedNeighborhood M N = identityNeighborhood V) : Equiv.Perm V :=
   Equiv.ofBijective (permutationFunctionOfInverse hNM hMN)
     ⟨permutationFunction_injective hNM hMN,
-      Finite.injective_iff_surjective.mp (permutationFunction_injective hNM hMN)⟩
+      permutationFunction_surjective_by_role_swap hNM hMN⟩
 
 theorem neighborhood_eq_permutationNeighborhood_of_inverse {N M : NeighborhoodAssignment V}
     (hNM : composedNeighborhood N M = identityNeighborhood V)
