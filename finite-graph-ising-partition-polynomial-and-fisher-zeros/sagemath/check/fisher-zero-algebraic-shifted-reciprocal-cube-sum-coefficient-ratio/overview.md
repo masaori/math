@@ -55,6 +55,7 @@
 | `check_expand_reciprocal_cube.sage` | 逆数和の三乗の有限三重和への展開 | PASS | 三乗と順序付き有限三重和が一致 |
 | `check_partition_reciprocal_cube_indices.sage` | 有限三重和の添字一致型による分割 | PASS | 対角・三つの二重一致・相異なる三重添字の五項が一致 |
 | `check_swap_reciprocal_cube_pair_indices.sage` | 二重一致項の非対角添字交換 | PASS | `V_{G,1,2}=U_{G,2,1}` を厳密確認 |
+| `check_substitute_swapped_pair_sum_in_cube_decomposition.sage` | 添字交換で得た `V_{G,1,2}=U_{G,2,1}` の五項分解への代入 | PASS | `S_{G,3}+U_{G,2,1}+U_{G,2,1}+V_{G,1,2}+T_{G,3}` が `S_{G,3}+U_{G,2,1}+U_{G,2,1}+U_{G,2,1}+T_{G,3}` に一致 |
 | `check_natural_three_as_sum_of_ones.sage` | 自然数 `3` の三つの単位元への加法分解 | PASS | `3=1+1+1` を `NN` 内で厳密確認 |
 | `check_apply_rational_embedding_to_three_sum.sage` | `3=1+1+1` への自然数から有理数への標準単射の適用 | PASS | 等式の両辺の有理数像が一致 |
 | `check_rational_embedding_three_sum.sage` | 自然数から有理数への標準単射の三項加法保存 | PASS | `eta(3)=eta(1)+eta(1)+eta(1)` を厳密確認 |
