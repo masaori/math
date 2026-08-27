@@ -130,6 +130,34 @@ export default defineBlocks([
     ],
   },
   {
+    id: "neighborhood_assignment_monoid_units_claim_inverse_unique",
+    kind: "claim",
+    title: { text: "可逆元の逆元は一意である" },
+    labels: ["claim_invertible_neighborhood_assignment_inverse_unique"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "有限集合 ", math(String.raw`V`), " と ", math(String.raw`N\in\mathcal N(V)`),
+        " について、", ref("def_invertible_neighborhood_assignment"), " の条件を満たす ",
+        math(String.raw`M\in\mathcal N(V)`), " は高々一つである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`M,M'\in\mathcal N(V)`), " がともに ",
+        ref("def_invertible_neighborhood_assignment"), " の条件を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+M
+&=M\star I_V\qquad(\because\ \blkref{claim_identity_neighborhood_assignment_is_composition_identity})\\
+&=M\star(N\star M')\qquad(\because\ N\star M'=I_V)\\
+&=(M\star N)\star M'\qquad(\because\ \blkref{claim_composed_neighborhood_associative})\\
+&=I_V\star M'\qquad(\because\ M\star N=I_V)\\
+&=M'\qquad(\because\ \blkref{claim_identity_neighborhood_assignment_is_composition_identity})
+\end{aligned}`),
+    ],
+  },
+  {
     id: "neighborhood_assignment_monoid_units_claim_cardinality_decidable",
     kind: "claim",
     title: { text: "可逆元の個数と有限決定" },
@@ -147,7 +175,9 @@ export default defineBlocks([
         math(String.raw`V`), " の置換は一対一に対応する。有限な ", math(String.raw`n`),
         " 元集合の置換は ", math(String.raw`n!`), " 個なので個数公式を得る。有限集合 ",
         math(String.raw`V`), " の置換を全列挙し、", ref("def_permutation_neighborhood_assignment"),
-        " の有限表を作れば可逆元全体を決定できる。逆置換の有限表から各逆元を決定でき、任意の ",
+        " の有限表を作れば可逆元全体を決定できる。",
+        ref("claim_invertible_neighborhood_assignment_inverse_unique"),
+        " により逆元は一意であり、逆置換の有限表からそれを決定できる。任意の ",
         math(String.raw`N\in\mathcal N(V)`), " と列挙した可逆元との等号を有限回比較すれば可逆性を決定できる。",
       ]),
     ],

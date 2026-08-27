@@ -52,6 +52,7 @@ export const ALL_LABELS = [
   "claim_inverse_support_finite_decidability",
   "claim_inverse_support_not_in_neighborhood_counterexample",
   "claim_invertible_neighborhood_assignment_cardinality_decidable",
+  "claim_invertible_neighborhood_assignment_inverse_unique",
   "claim_invertible_neighborhood_assignments_are_permutations",
   "claim_iterate_collision_gives_eventual_period",
   "claim_iterate_collision_stabilizes_tails",
