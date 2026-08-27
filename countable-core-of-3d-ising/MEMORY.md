@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 09:34: 既存の `rational_power_base_congruences` から法 `q.den` の整除を取り出し、整数上の整除を自然数上へ戻す `point_den_dvd_zero_multiplicity_mul_base_den_pow_from_finite_box` を Lean 具体版に追加した。次は自由境界箱の回文性と破れ数ゼロの多重度二をこの整除へ渡す。
 - 2026-08-27 09:04: 点の分母が偶数の場合を閉じた。場合分けは点の既約分母の素数二の指数について行う形へ直し（先行の二つの排除定理がそちらで分岐しているため）、有限箱の等式から両分岐を排除する `two_not_dvd_power_base_den_from_finite_box_even_point_den` を追加した。次は法 q.den の整除の仮定を接続する。
 - 2026-08-27 08:36（並行）: 残存端子の対構成を、候補内部辺の定義と完全被覆の証明に分け、先頭の `encodePeriodicSquareCandidateInternalEdgesAt` を二元部分集合として置いた。次は偶数性から交わらない完全被覆を構成する。
 - 2026-08-27 08:32: 点の分母が偶数の場合を、底の既約分母における素数二の指数が一の場合と二以上の場合に分ける `two_not_dvd_power_base_den_of_exponent_cases` を Lean 具体版で閉じた。次は有限箱の先行定理から両分岐の矛盾を構成して渡す。

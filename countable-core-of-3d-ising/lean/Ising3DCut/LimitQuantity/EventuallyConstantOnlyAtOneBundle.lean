@@ -20,6 +20,7 @@ import Ising3DCut.LimitQuantity.RationalPowerPointDenominatorDividesTwo
 import Ising3DCut.LimitQuantity.IntegerPointNumeratorDividesTwo
 import Ising3DCut.LimitQuantity.DenominatorTwoNumeratorEqualsOne
 import Ising3DCut.LimitQuantity.RationalPowerBaseDenominatorPrimes
+import Ising3DCut.LimitQuantity.RationalPowerBaseCongruences
 import Ising3DCut.LimitQuantity.RationalPowerBaseDenTwoExponentOneImpossible
 import Ising3DCut.LimitQuantity.RationalPowerBaseDenTwoExponentAtLeastTwoImpossible
 
@@ -103,6 +104,21 @@ theorem two_not_dvd_power_base_den_from_finite_box_even_point_den
     exact rational_power_base_den_two_exponent_at_least_two_impossible Omega
       q.num.natAbs q.den c.num.natAbs c.den M hqnum q.den_pos hcnum c.den_pos
       q.reduced c.reduced hv2 hM hOmegaTop heb hid
+
+/-- 接続の第六段の第五歩。有限箱の有理数表示と点数乗表示を同じ箱で結び、
+回文性を与えると、有理点の既約分母は破れ数ゼロの多重度と底の既約分母の
+点数乗との積を割る。既存の二つの合同式のうち法 `q.den` の整除だけを取り出し、
+整数上の整除を自然数上へ戻す一段であり、極限は使わない。 -/
+theorem point_den_dvd_zero_multiplicity_mul_base_den_pow_from_finite_box
+    {q c : ℚ} {E N : ℕ} (Omega : ℕ → ℕ)
+    (hc : 0 < c) (hE : 1 ≤ E) (hpal : Omega E = Omega 0)
+    (hrep : (brokenCountSum Omega q.num.natAbs q.den E : ℚ) /
+        (q.den : ℚ) ^ E = c ^ N) :
+    q.den ∣ Omega 0 * c.den ^ N := by
+  have hdvdZ := (rational_power_base_congruences Omega q.num.natAbs q.den
+    c.num.natAbs c.den E N q.den_pos c.den_pos hE q.reduced hpal (by
+      simpa [Rat.num_div_den, abs_of_pos (Rat.num_pos.mpr hc)] using hrep)).2
+  exact_mod_cast hdvdZ
 
 /-- 正の有理点の既約分子と既約分母がともに `2` を割るなら、候補は三点に尽きる。 -/
 theorem positive_rational_three_candidates_of_num_den_dvd_two

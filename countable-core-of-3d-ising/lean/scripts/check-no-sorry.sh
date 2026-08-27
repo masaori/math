@@ -71,6 +71,7 @@ targets=(
   Ising3DCut.LimitQuantity.two_not_dvd_power_base_den_from_finite_box_representation
   Ising3DCut.LimitQuantity.two_not_dvd_power_base_den_of_point_den_exponent_cases
   Ising3DCut.LimitQuantity.two_not_dvd_power_base_den_from_finite_box_even_point_den
+  Ising3DCut.LimitQuantity.point_den_dvd_zero_multiplicity_mul_base_den_pow_from_finite_box
   Ising3DCut.Prediction.periodic_square_matching_decodes_even_subgraph
   Ising3DCut.Prediction.decodePeriodicSquareMatching
   Ising3DCut.Prediction.four_incident_lattice_edges_pairwise_ne
