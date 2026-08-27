@@ -18,6 +18,7 @@ STAGE="$HOME/.artifact-uploads/math/$SLUG"
 # 成功しているのに照合だけが落ち、ティックが毎回失敗として記録される（2026-08-16）。
 EXPECTED_URL="https://hexcomp-artifacts.web.app/math/$SLUG/"
 PUBLISHER="/Users/masaori/git/masaori/artifacts/publish.py"
+SLACK_RESPONSE_VALIDATOR="$PROJECT_DIR/scripts/validate-slack-route-response.sh"
 
 mkdir -p "$LOG_DIR"
 log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"; }
@@ -123,9 +124,7 @@ case "$message" in
 esac
 slack_response="$(slack route-post math "$message")"
 printf '%s\n' "$slack_response" >> "$LOG_FILE"
-if ! printf '%s' "$slack_response" | jq -e \
-  '.repository == "math" and .channel == "local-pc-management" and (.ts | type == "string")' \
-  >/dev/null; then
+if ! printf '%s' "$slack_response" | "$SLACK_RESPONSE_VALIDATOR" math; then
   log "NG: Slack の明示routeから期待した配送応答を得られなかった（版 ${short_commit}）"
   exit 1
 fi

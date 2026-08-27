@@ -4360,3 +4360,10 @@ $\mathbb R/\mathbb C$ 脱出はない。対象は `Lean 具体版まで`。次 t
 # Slack配送経路
 
 - 論文公開通知は旧Workflow Builder triggerを使わず、`slack route-post math`が解決するHex-AIの明示routeだけへ送る。
+## 公開通知の正規ルート応答検証（2026-08-27）
+
+`scripts/publish-artifact.sh` が `slack route-post math` の成功応答を旧配送先
+`local-pc-management` に固定していたため、SSOT が選んだ `math-ai-notification` への投稿成功後に
+tick を exit 1 にしていた。チャンネル名の知識を呼出元から除去し、中央Slack経路がSSOTを照合した後の
+応答について、リポジトリ名と非空のチャンネル名・チャンネルID・Slack時刻だけを検証する独立ヘルパーへ
+置き換えた。配送先変更を受理し、別リポジトリや欠落フィールドを拒否する回帰テストを追加した。
