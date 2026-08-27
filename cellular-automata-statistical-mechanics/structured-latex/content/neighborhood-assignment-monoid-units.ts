@@ -102,7 +102,26 @@ export default defineBlocks([
       displayMath(String.raw`\{v\}=M(\sigma(v))=M(\sigma(v'))=\{v'\}`),
       paragraph([
         "なので ", math(String.raw`v=v'`), " である。したがって ", math(String.raw`\sigma`),
-        " は単射であり、有限集合 ", math(String.raw`V`), " の単射な自己写像なので全単射である。",
+        " は単射である。",
+      ]),
+      paragraph([
+        "次に、上の一元性の論証で ", math(String.raw`N`), " と ", math(String.raw`M`),
+        " の役割を入れ替える。各 ", math(String.raw`u\in V`), " に対して唯一の ",
+        math(String.raw`\tau(u)\in V`), " が存在し、",
+      ]),
+      displayMath(String.raw`M(u)=\{\tau(u)\}\qquad\text{かつ}\qquad N(\tau(u))=\{u\}`),
+      paragraph(["を得る。一方、", math(String.raw`N(v)=\{\sigma(v)\}`), " なので"]),
+      displayMath(String.raw`\begin{aligned}
+\{\sigma(\tau(u))\}
+&=N(\tau(u))\qquad(\because\ N(v)=\{\sigma(v)\})\\
+&=\{u\}\qquad(\because\ N(\tau(u))=\{u\})
+\end{aligned}`),
+      paragraph([
+        "であり、", math(String.raw`\sigma(\tau(u))=u`), " である。任意の ",
+        math(String.raw`u\in V`), " が ", math(String.raw`\sigma`),
+        " の値なので、", math(String.raw`\sigma`),
+        " は全射である。この全射性の導出は ", math(String.raw`V`),
+        " の有限性を使わない。以上により ", math(String.raw`\sigma`), " は全単射である。",
         ref("def_permutation_neighborhood_assignment"), " より ", math(String.raw`N=P_\sigma`),
         " である。また各 ", math(String.raw`\sigma(v)`), " は一元集合 ", math(String.raw`N(v)`),
         " の唯一の元なので、", math(String.raw`\sigma`), " も一意である。",
