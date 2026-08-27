@@ -76,6 +76,34 @@ theorem two_not_dvd_power_base_den_of_point_den_exponent_cases
   · exact hone htwo hone'
   · exact hgeTwo htwo (by omega)
 
+/-- 接続の第六段の第四歩。点の既約分母が偶数のとき、閾値以後の一つの箱 `M` について
+破れ辺数の多重度で書いた有限和と点数乗表示を結ぶ自然数の等式があれば、
+素数 `2` は点数乗表示の底の既約分母を割らない。
+点の既約分母の素数 `2` の指数が `1` の場合と `2` 以上の場合の排除定理へ、
+既約性と正値性を渡して分岐させるだけであり、極限は使わない。 -/
+theorem two_not_dvd_power_base_den_from_finite_box_even_point_den
+    {q c : ℚ} {M : ℕ} (Omega : ℕ → ℕ)
+    (hq : 0 < q) (hc : 0 < c) (hM : 2 ≤ M)
+    (hden : (2 : ℕ) ∣ q.den)
+    (hOmegaPen : Omega (3 * M ^ 2 * (M - 1) - 1) = 0)
+    (hOmegaTop : Omega (3 * M ^ 2 * (M - 1)) = 2)
+    (hid : (∑ m ∈ Finset.range (3 * M ^ 2 * (M - 1) + 1),
+              Omega m * q.num.natAbs ^ m * q.den ^ (3 * M ^ 2 * (M - 1) - m))
+              * c.den ^ (M ^ 3)
+            = c.num.natAbs ^ (M ^ 3) * q.den ^ (3 * M ^ 2 * (M - 1))) :
+    ¬ (2 : ℕ) ∣ c.den := by
+  have hqnum : 0 < q.num.natAbs := Int.natAbs_pos.mpr (Rat.num_ne_zero.mpr hq.ne')
+  have hcnum : 0 < c.num.natAbs := Int.natAbs_pos.mpr (Rat.num_ne_zero.mpr hc.ne')
+  refine two_not_dvd_power_base_den_of_point_den_exponent_cases hden ?_ ?_
+  · intro hv2 heb
+    exact rational_power_base_den_two_exponent_one_impossible Omega
+      q.num.natAbs q.den c.num.natAbs c.den M hqnum q.den_pos hcnum c.den_pos
+      q.reduced c.reduced hv2 hM hOmegaPen hOmegaTop heb hid
+  · intro hv2 heb
+    exact rational_power_base_den_two_exponent_at_least_two_impossible Omega
+      q.num.natAbs q.den c.num.natAbs c.den M hqnum q.den_pos hcnum c.den_pos
+      q.reduced c.reduced hv2 hM hOmegaTop heb hid
+
 /-- 正の有理点の既約分子と既約分母がともに `2` を割るなら、候補は三点に尽きる。 -/
 theorem positive_rational_three_candidates_of_num_den_dvd_two
     {q : ℚ} (hq : 0 < q)
