@@ -80,6 +80,7 @@ targets=(
   Ising3DCut.LimitQuantity.two_not_dvd_base_den_of_rational_value_form_of_odd_point_den
   Ising3DCut.LimitQuantity.integer_equation_of_rational_value_form
   Ising3DCut.LimitQuantity.multiplicity_card_edge_sub_one_eq_zero
+  Ising3DCut.NullModel.card_forward_start_coordinates
   Ising3DCut.Prediction.periodic_square_matching_decodes_even_subgraph
   Ising3DCut.Prediction.decodePeriodicSquareMatching
   Ising3DCut.Prediction.four_incident_lattice_edges_pairwise_ne
