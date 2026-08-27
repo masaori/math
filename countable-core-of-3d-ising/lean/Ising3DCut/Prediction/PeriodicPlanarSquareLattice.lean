@@ -489,4 +489,28 @@ theorem encodePeriodicSquareInternalEdges_subset_internalEdges
   have hremaining := hcand.1 ht
   exact (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mp hremaining |>.1
 
+/-- 偶部分グラフから復元する terminal graph の辺集合。各 city で選んだ内部辺と、
+polygon に属さない元の辺に対応する外部辺を合わせる。 -/
+noncomputable def encodePeriodicSquareMatching
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :=
+  encodePeriodicSquareInternalEdges subgraph ∪ encodePeriodicSquareExternalEdges subgraph
+
+/-- 復元用に選んだ辺はすべて terminal graph の辺である。完全マッチング性のうち、
+辺集合への包含だけを先に閉じる。 -/
+theorem encodePeriodicSquareMatching_subset_terminalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    encodePeriodicSquareMatching subgraph ⊆
+      terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁ := by
+  intro s hs
+  rw [encodePeriodicSquareMatching, Finset.mem_union] at hs
+  rw [mem_terminalEdges_iff]
+  rcases hs with hs | hs
+  · exact Or.inl (encodePeriodicSquareInternalEdges_subset_internalEdges subgraph hs)
+  · exact Or.inr (by
+      obtain ⟨e, he, rfl⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph s).mp hs
+      rw [mem_externalEdges_iff]
+      exact ⟨e, Finset.mem_univ e, rfl⟩)
+
 end Ising3DCut.Prediction
