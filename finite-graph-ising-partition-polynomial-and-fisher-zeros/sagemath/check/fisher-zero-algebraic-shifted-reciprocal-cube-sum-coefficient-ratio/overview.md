@@ -115,6 +115,7 @@
 | `check_cancel_q2_from_reciprocal_cube_sum.sage` | 非零な `q_2` の消去 | PASS | `q_2S_{G,3}=N/P^3` から `S_{G,3}=q_2^{-1}(N/P^3)` へ移る等式を直接確認 |
 | `check_merge_q2_denominator.sage` | `q_2` の消去後に商の結合律で三次分母へ結合 | PASS | 除算後の二重の商と結合後の分数が一致 |
 | `check_reciprocal_cube_sum_local_definition.sage` | 定理本文の逆三乗有限和への局所定義の適用 | PASS | 表示した有限和と `S_{G,3}(a)` の局所定義が一致 |
+| `check_final_statement_transitivity.sage` | 局所逆三乗和から定理本文の有限和と係数比への推移律 | PASS | 二つの既出等式から定理本文の最終等式が一致 |
 | `check_final_coefficient_ratio.sage` | 最終逆三乗和係数比 | PASS | 全ての非零評価で一致 |
 | `check_low_degree_empty_sums.sage` | 次数三未満の空和 | PASS | 第三係数和と三重和が零 |
 
