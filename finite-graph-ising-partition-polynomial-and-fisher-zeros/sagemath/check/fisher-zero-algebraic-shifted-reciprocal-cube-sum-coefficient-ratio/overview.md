@@ -93,6 +93,7 @@
 | `check_rational_embedding_one_identity.sage` | 自然数から有理数への標準単射の乗法単位元保存 | PASS | `eta(1)=1_Q` を厳密確認 |
 | `check_algebraic_embedding_one_identity.sage` | 有理数から代数的数への標準単射の乗法単位元保存 | PASS | `iota(eta(1))=1_Qbar` を厳密確認 |
 | `check_q1_multiplicative_identity.sage` | 標準単射像 `q_1` と乗法単位元 | PASS | `q_1=1` を厳密確認 |
+| `check_substitute_q1_in_cubic_numerator.sage` | 三次分子の負の三乗項への `q_1=1` の代入 | PASS | `-A_G(a)^3=-q_1A_G(a)^3` を全例で厳密確認 |
 | `check_cubic_numerator_distribution.sage` | 三次分子の分配 | PASS | 全例・全評価点で一致 |
 | `check_cubic_numerator_reordering.sage` | 三次分子の加法項の並べ替え | PASS | 全例・全評価点で一致 |
 | `check_cubic_coefficient_factoring.sage` | 三次係数の括り出し | PASS | 全例・全評価点で一致 |
