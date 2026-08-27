@@ -695,6 +695,7 @@ targets=(
   Ising3DCut.LimitQuantity.base_divisibility_of_rational_value_form
   Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_from_free_box_base_divisibility
   Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_from_free_box_closed
+  Ising3DCut.LimitQuantity.eventually_periodic_residue_class_constant
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
