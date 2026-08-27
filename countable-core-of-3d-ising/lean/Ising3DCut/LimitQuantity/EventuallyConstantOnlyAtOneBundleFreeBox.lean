@@ -111,4 +111,24 @@ theorem two_not_dvd_base_den_of_rational_value_form_of_odd_point_den
     ¬ (2 : ℕ) ∣ c.den :=
   prime_not_dvd_base_den_of_rational_value_form hq hL₀ hc hform 2 Nat.prime_two hodd
 
+/-- 偶数分母の場合の接続の第一歩。末尾の点数乗表示を一つの箱 `L` で読み、
+有理点と底の既約分子・分母だけで書いた自然数の等式へ移す。
+有理数の分母を払う一段だけであり、極限は使わない。 -/
+theorem integer_equation_of_rational_value_form
+    {q c : ℚ} {L₀ L : ℕ} (hq : 0 < q) (hc : 0 < c) (hL₀L : L₀ ≤ L)
+    (hform : ∀ K, L₀ ≤ K → rationalValueSeq q K = c ^ (K ^ 3)) :
+    brokenCountSum (NullModel.multiplicity L) q.num.natAbs q.den
+          (Fintype.card (NullModel.Edge L)) * c.den ^ (L ^ 3) =
+      c.num.natAbs ^ (L ^ 3) * q.den ^ (Fintype.card (NullModel.Edge L)) := by
+  have hcRep : c = (c.num.natAbs : ℚ) / (c.den : ℚ) := by
+    rw [Nat.cast_natAbs, abs_of_pos (Rat.num_pos.mpr hc), Rat.num_div_den]
+  have hrep := (rationalValueSeq_eq_brokenCountSum_div hq L).symm.trans
+    (hform L hL₀L)
+  rw [hcRep] at hrep
+  have hInt := integer_equation_of_rational_representation
+    (brokenCountSum (NullModel.multiplicity L) q.num.natAbs q.den
+      (Fintype.card (NullModel.Edge L))) q.den c.num.natAbs c.den
+      (Fintype.card (NullModel.Edge L)) (L ^ 3) q.den_pos c.den_pos hrep
+  exact_mod_cast hInt
+
 end Ising3DCut.LimitQuantity
