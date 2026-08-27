@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 07:05: 本流 `claim_residue_class_values_agree_gives_eventually_constant` の Lean 具体版 `Ising3DCut.LimitQuantity.residue_class_values_agree_gives_eventually_constant` を追加した。自然数の除法の定理で `L = L0 + (L-L0) % p + ((L-L0)/p) * p` と分け、剰余類ごとの末尾定数性で `a_{L0+r}` へ落として共通値 `c` に着く。`lake build` と sorry 非依存検査 650 件を通過。次は同主張の Lean 必要十分版。
 - 2026-08-28 06:35（並行）: `encodePeriodicSquareMatching_isPerfectMatching` を追加し、偶部分グラフから復元した辺集合の terminal graph における完全マッチング性を閉じた。次は復元と復号が互いに逆であることを示す。
 - 2026-08-28 06:32: 本流 `claim_residue_class_values_agree_gives_eventually_constant` の SageMath 三検査を追加し、自然数の除法、剰余類代表への帰着、共通値から末尾定数性を得る等式を `ZZ` と `QQ` で全 PASS。次は同主張の Lean 具体版。
 - 2026-08-28 06:07（並行）: `pairwiseDisjoint_encodePeriodicSquareExternalEdges` と `pairwiseDisjoint_encodePeriodicSquareMatching` を追加し、復元辺集合全体の相異なる二辺が端子を共有しないことを閉じた。sorry 非依存検査 648 件通過。次は全端子の被覆と排他性を合わせて完全マッチング性を閉じる。
