@@ -683,4 +683,27 @@ theorem pairwiseDisjoint_encodePeriodicSquareMatching
       hs₂ hs₁).symm
   · exact pairwiseDisjoint_encodePeriodicSquareExternalEdges subgraph hs₁ hs₂ hne
 
+/-- 偶部分グラフから復元した辺集合は terminal graph の完全マッチングである。
+辺集合への包含、全端子の被覆、相異なる辺の端子非共有を直前の三定理から束ねる。 -/
+theorem encodePeriodicSquareMatching_isPerfectMatching
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    IsPerfectMatching
+      (terminalVertices Finset.univ latticeIncidentEdges)
+      (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁)
+      (encodePeriodicSquareMatching subgraph) := by
+  constructor
+  · exact encodePeriodicSquareMatching_subset_terminalEdges subgraph
+  · intro t ht
+    have htCovered : t ∈ (encodePeriodicSquareMatching subgraph).biUnion id := by
+      rw [biUnion_encodePeriodicSquareMatching]
+      exact ht
+    obtain ⟨s, hs, hts⟩ := Finset.mem_biUnion.mp htCovered
+    refine ⟨s, ⟨hs, hts⟩, ?_⟩
+    intro u hu
+    by_contra hne
+    have hdisjoint := pairwiseDisjoint_encodePeriodicSquareMatching subgraph hs hu.1
+      (fun hsu ↦ hne hsu.symm)
+    exact (Finset.disjoint_left.mp hdisjoint hts hu.2)
+
 end Ising3DCut.Prediction
