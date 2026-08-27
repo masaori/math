@@ -4,7 +4,7 @@
  * 有限集合の数え上げと整係数多項式だけを使う。非可算な量は現れない。
  */
 
-import { defineBlocks, displayMath, math, paragraph, ref, todo } from "../schema.ts";
+import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -11366,7 +11366,44 @@ Z_L(2)
       paragraph([ref("claim_eventually_constant_iff_power_identity"), " により、末尾定数性は隣接する箱の分配多項式の冪等式が末尾で成り立つことと同値である。"]),
       paragraph([ref("claim_power_identity_iff_rational_power_form"), " により、その冪等式の末尾成立は、一つの正の有理数を底とする点数乗表示が末尾で成り立つことと同値である。"]),
       paragraph([
-        todo("直前の同値が与える底は正の有理数だが、引用先の分類は底を正の自然数と仮定し、候補三点への絞り込みも外部仮定として受け取っている。底の自然数化と候補の絞り込みを既存の有限箱定理から接続してから、この二つの同値と分類を合成する。"),
+        "直前の同値が与える底は正の有理数 ",
+        math(String.raw`c\in\mathbb Q_{>0}`),
+        " であって、正の自然数とは限らない。しかし ",
+        ref("claim_rational_power_point_denominator_divides_two"),
+        " は、正の有理数の底についての点数乗表示 ",
+        math(String.raw`Z_L(q)=c^{\#V_L}`),
+        "（閾値以後のすべての ",
+        math(String.raw`L`),
+        " について）だけを仮定して、",
+        math(String.raw`c`),
+        " が正の自然数であることを結論する。したがって底は正の自然数としてよい。",
+      ]),
+      paragraph([
+        "底が正の自然数になったので ",
+        ref("claim_eventual_power_form_only_at_one"),
+        " を適用でき、",
+        math(String.raw`q=1`),
+        " を得る。候補を三点へ絞る段はこの引用先の証明の中に含まれており、外から仮定として渡す必要はない。",
+      ]),
+      paragraph([
+        "逆向きを示す。",
+        math(String.raw`q=1`),
+        " のとき ",
+        ref("claim_partition_value_at_one"),
+        " により、すべての正の自然数 ",
+        math(String.raw`L`),
+        " について ",
+        math(String.raw`Z_L(1)=2^{\#V_L}`),
+        " である。よって ",
+        math(String.raw`a_L(1)=2`),
+        " がすべての ",
+        math(String.raw`L`),
+        " で成り立ち、列は末尾で（実際には最初から）定数である。",
+      ]),
+      paragraph([
+        "以上により同値が示された。用いたのはいずれも有限箱の等式と ",
+        math(String.raw`\mathbb Z`),
+        " の整除性であり、箱の大きさの極限は使っていない。",
       ]),
     ],
   },
