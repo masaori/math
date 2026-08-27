@@ -228,4 +228,32 @@ theorem two_not_dvd_base_den_of_rational_value_form_of_even_point_den
   · have hid := integer_equation_of_rational_value_form hq hc (le_refl L₀) hform
     simpa [brokenCountSum, NullModel.card_edge, mul_assoc, mul_comm, mul_left_comm] using hid
 
+/-- 偶数分母の場合の接続の第六歩。奇偶の二場合を束ねる。閾値の箱が少なくとも
+二点幅であれば、点の既約分母の偶奇によらず、素数 `2` は末尾の点数乗表示の底の
+既約分母を割らない。点の既約分母が偶数か否かで場合を分け、それぞれ既に閉じた
+二つの定理へ渡すだけである。一つの有限箱だけを使う主張であり、極限は使わない。 -/
+theorem two_not_dvd_base_den_of_rational_value_form
+    {q c : ℚ} {L₀ : ℕ} (hq : 0 < q) (hL₀ : 2 ≤ L₀) (hc : 0 < c)
+    (hform : ∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) :
+    ¬ (2 : ℕ) ∣ c.den := by
+  by_cases heven : (2 : ℕ) ∣ q.den
+  · exact two_not_dvd_base_den_of_rational_value_form_of_even_point_den
+      hq hL₀ hc hform heven
+  · exact two_not_dvd_base_den_of_rational_value_form_of_odd_point_den
+      hq (by omega) hc hform heven
+
+/-- 底の既約分母が `1` であることを、素数についての二つの排除から取り出す一段。
+素数 `2` が割らないことと、`2` 以外の素数が割らないことを合わせると、
+既約分母を割る素数が存在しないので既約分母は `1` である。有理数一つについての
+主張であり、箱も極限も現れない。 -/
+theorem base_den_eq_one_of_no_prime_divisor
+    {c : ℚ} (htwo : ¬ (2 : ℕ) ∣ c.den)
+    (hodd : ∀ p : ℕ, p.Prime → p ≠ 2 → ¬ p ∣ c.den) :
+    c.den = 1 := by
+  by_contra hne
+  obtain ⟨p, hp, hpdvd⟩ := Nat.exists_prime_and_dvd hne
+  by_cases hp2 : p = 2
+  · exact htwo (hp2 ▸ hpdvd)
+  · exact hodd p hp hp2 hpdvd
+
 end Ising3DCut.LimitQuantity
