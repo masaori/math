@@ -114,7 +114,8 @@
 | `check_evaluation_cube_nonzero.sage` | 非零評価値の三乗の非零性 | PASS | `Pbar_G(a)\ne0` から `Pbar_G(a)^3\ne0` を厳密確認 |
 | `check_final_denominator_nonzero.sage` | 最終係数比の分母の非零性 | PASS | `q_2\ne0` と `Pbar_G(a)^3\ne0` から積 `q_2Pbar_G(a)^3\ne0` を厳密確認 |
 | `check_scaled_reciprocal_cube_sum_coefficient_ratio.sage` | 最終係数整理後の `q_2` 倍された逆三乗和 | PASS | `q_2S_{G,3}` と三次係数商が一致 |
-| `check_cancel_q2_from_reciprocal_cube_sum.sage` | 非零な `q_2` の消去 | PASS | `q_2S_{G,3}=N/P^3` から `S_{G,3}=q_2^{-1}(N/P^3)` へ移る等式を直接確認 |
+| `check_multiply_scaled_equality_by_q2_inverse.sage` | `q_2` 倍された等式の両辺への逆元の乗法 | PASS | `q_2S_{G,3}=N/P^3` の両辺へ `q_2^{-1}` を掛けても等式が保たれることを厳密確認 |
+| `check_cancel_q2_from_reciprocal_cube_sum.sage` | 非零な `q_2` と逆元の相殺 | PASS | `q_2^{-1}(q_2S_{G,3})=S_{G,3}` を独立に厳密確認 |
 | `check_merge_q2_denominator.sage` | `q_2` の消去後に商の結合律で三次分母へ結合 | PASS | 除算後の二重の商と結合後の分数が一致 |
 | `check_reciprocal_cube_sum_local_definition.sage` | 定理本文の逆三乗有限和への局所定義の適用 | PASS | 表示した有限和と `S_{G,3}(a)` の局所定義が一致 |
 | `check_final_statement_transitivity.sage` | 局所逆三乗和から定理本文の有限和と係数比への推移律 | PASS | 二つの既出等式から定理本文の最終等式が一致 |

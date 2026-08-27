@@ -6001,6 +6001,21 @@ S_{G,3}(a)
 \quad\bigl(\because\ \overline P_G(a)\ne0\text{ と }\overline{\mathbb Q}\text{ の零積律}\bigr).`),
       displayMath(String.raw`q_2\overline P_G(a)^3\ne0
 \quad\bigl(\because\ q_2\ne0,\ \overline P_G(a)^3\ne0\text{ と }\overline{\mathbb Q}\text{ の零積律}\bigr).`),
+      displayMath(String.raw`\frac{1}{q_2}\left(q_2S_{G,3}(a)\right)
+=
+\frac{1}{q_2}
+\frac{
+  q_2A_G(a)^3
+  -q_3\overline P_G(a)A_G(a)B_G(a)
+  +\overline P_G(a)^2C_G(a)
+}{
+  \overline P_G(a)^3
+}
+\quad\biggl(\because\ q_2\ne0\text{ のもとで }
+q_2S_{G,3}(a)=
+\frac{q_2A_G(a)^3-q_3\overline P_G(a)A_G(a)B_G(a)+\overline P_G(a)^2C_G(a)}
+{\overline P_G(a)^3}
+\text{ の両辺へ }1/q_2\text{ を掛ける}\biggr).`),
       displayMath(String.raw`S_{G,3}(a)
 =
 \frac{1}{q_2}
@@ -6011,7 +6026,7 @@ S_{G,3}(a)
 }{
   \overline P_G(a)^3
 }
-\quad\bigl(\because\ q_2\ne0\text{ を消去する}\bigr).`),
+\quad\bigl(\because\ q_2\ne0\text{ と逆元の相殺律}\bigr).`),
       displayMath(String.raw`S_{G,3}(a)
 =
 \frac{
