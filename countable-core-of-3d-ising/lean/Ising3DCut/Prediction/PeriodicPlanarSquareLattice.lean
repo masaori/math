@@ -443,4 +443,50 @@ theorem exists_candidate_internal_edge_cover_at
     simpa [hPu] using this
   · exact hP2 e he
 
+/-- 各 city について選んだ残存端子の完全被覆。存在定理から一つを選ぶ。 -/
+noncomputable def encodePeriodicSquareInternalEdgesAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :=
+  Classical.choose (exists_candidate_internal_edge_cover_at subgraph v)
+
+/-- 選んだ city 内被覆は候補内部辺だけからなる。 -/
+theorem encodePeriodicSquareInternalEdgesAt_subset_candidates
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    encodePeriodicSquareInternalEdgesAt subgraph v ⊆
+      encodePeriodicSquareCandidateInternalEdgesAt subgraph v :=
+  (Classical.choose_spec (exists_candidate_internal_edge_cover_at subgraph v)).1
+
+/-- 選んだ city 内被覆は、その city の残存端子をちょうど覆う。 -/
+theorem biUnion_encodePeriodicSquareInternalEdgesAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    (encodePeriodicSquareInternalEdgesAt subgraph v).biUnion id =
+      encodePeriodicSquareRemainingTerminalsAt subgraph v :=
+  (Classical.choose_spec (exists_candidate_internal_edge_cover_at subgraph v)).2.2
+
+/-- 各 city で選んだ内部辺被覆を、terminal graph 全体の一つの内部辺集合へ束ねる。 -/
+noncomputable def encodePeriodicSquareInternalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :=
+  Finset.univ.biUnion (encodePeriodicSquareInternalEdgesAt subgraph)
+
+/-- 束ねた辺はすべて terminal graph の内部辺である。 -/
+theorem encodePeriodicSquareInternalEdges_subset_internalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    encodePeriodicSquareInternalEdges subgraph ⊆
+      internalEdges Finset.univ latticeIncidentEdges := by
+  intro s hs
+  obtain ⟨v, _, hsv⟩ := Finset.mem_biUnion.mp hs
+  rw [mem_internalEdges_iff]
+  refine ⟨v, Finset.mem_univ v, ?_⟩
+  rw [mem_internalEdgesAt_iff]
+  have hcand := encodePeriodicSquareInternalEdgesAt_subset_candidates subgraph v hsv
+  rw [mem_encodePeriodicSquareCandidateInternalEdgesAt_iff] at hcand
+  refine ⟨?_, hcand.2⟩
+  intro t ht
+  have hremaining := hcand.1 ht
+  exact (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mp hremaining |>.1
+
 end Ising3DCut.Prediction

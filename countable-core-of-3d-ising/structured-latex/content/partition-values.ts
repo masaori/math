@@ -11468,4 +11468,106 @@ Z_L(2)
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_eventually_periodic_iff_power_identity",
+    kind: "claim",
+    title: { text: "末尾周期性は周期だけ離れた箱の分配多項式の冪等式に同値である" },
+    labels: ["claim_eventually_periodic_iff_power_identity"],
+    habitat: "R",
+    realEscape:
+      "有限箱の量 a_L(q) は正の有理数の正の実数乗根として ℝ に住むが、箱の大きさの極限は取らない。同値性の右辺は正の有理数の有限回の積の等式であり、上限・下限・級数・指数関数・実対数を使わない。",
+    statement: [
+      paragraph([
+        "正の有理数 ",
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " をとる。有限箱の量の列 ",
+        math(String.raw`L\mapsto a_L(q)`),
+        " が末尾で周期的である（",
+        ref("def_eventually_periodic_finite_box_sequence"),
+        "）ための必要十分条件は、正の自然数 ",
+        math(String.raw`L_0`),
+        " と正の自然数 ",
+        math(String.raw`p`),
+        " が存在して、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`Z_L(q)^{\#V_{L+p}}=Z_{L+p}(q)^{\#V_L}`,
+      ),
+      paragraph(["が成り立つことである。"]),
+    ],
+    proof: [
+      paragraph([
+        "まず末尾周期性を仮定し、その閾値 ",
+        math(String.raw`L_0`),
+        " と周期 ",
+        math(String.raw`p`),
+        " をとる。任意の ",
+        math(String.raw`L\ge L_0`),
+        " について、定義より ",
+        math(String.raw`a_L(q)=a_{L+p}(q)`),
+        " である（",
+        ref("def_eventually_periodic_finite_box_sequence"),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_L(q)^{\#V_{L+p}}
+&=\bigl(a_L(q)^{\#V_L}\bigr)^{\#V_{L+p}}
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})\\
+&=a_L(q)^{\#V_L\,\#V_{L+p}}
+&&(\because\ \text{正の実数の冪の指数法則})\\
+&=a_{L+p}(q)^{\#V_L\,\#V_{L+p}}
+&&(\because\ a_L(q)=a_{L+p}(q))\\
+&=\bigl(a_{L+p}(q)^{\#V_{L+p}}\bigr)^{\#V_L}
+&&(\because\ \text{正の実数の冪の指数法則})\\
+&=Z_{L+p}(q)^{\#V_L}
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})
+\end{aligned}`,
+      ),
+      paragraph(["よって必要な冪等式が成り立つ。"]),
+      paragraph([
+        "逆に、正の自然数 ",
+        math(String.raw`L_0,p`),
+        " が存在し、閾値以後で冪等式が成り立つと仮定する。任意の ",
+        math(String.raw`L\ge L_0`),
+        " をとる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a_L(q)^{\#V_L\,\#V_{L+p}}
+&=\bigl(a_L(q)^{\#V_L}\bigr)^{\#V_{L+p}}
+&&(\because\ \text{正の実数の冪の指数法則})\\
+&=Z_L(q)^{\#V_{L+p}}
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})\\
+&=Z_{L+p}(q)^{\#V_L}
+&&(\because\ \text{仮定した冪等式})\\
+&=\bigl(a_{L+p}(q)^{\#V_{L+p}}\bigr)^{\#V_L}
+&&(\because\ \blkref{def_limit_quantity_from_finite_box_sequence})\\
+&=a_{L+p}(q)^{\#V_L\,\#V_{L+p}}
+&&(\because\ \text{正の実数の冪の指数法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\#V_L\,\#V_{L+p}`),
+        " は正の自然数であり、正の実数のその冪は単射である。したがって ",
+        math(String.raw`a_L(q)=a_{L+p}(q)`),
+        " が成り立つ。これは任意の ",
+        math(String.raw`L\ge L_0`),
+        " について成り立つので、列は閾値 ",
+        math(String.raw`L_0`),
+        " 以後で周期 ",
+        math(String.raw`p`),
+        " を持つ。",
+      ]),
+      paragraph([
+        "特に ",
+        math(String.raw`p=1`),
+        " と置けば冪等式は ",
+        ref("claim_eventually_constant_iff_power_identity"),
+        " の冪等式と一致する。",
+      ]),
+    ],
+  },
 ]);
