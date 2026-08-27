@@ -68,6 +68,20 @@ theorem rationalValueSeq_eq_brokenCountSum_div
   simpa [mul_assoc] using
     congrArg (fun x : ℚ => (NullModel.multiplicity L m : ℚ) * x) hpow.symm
 
+/-- 有理点の既約分母が `1` なら、閾値の自由境界箱の有限和そのものが
+点数乗表示の値に等しい。分母 `1` を有限和表示へ代入する一段だけであり、
+極限も無限和も現れない。 -/
+theorem integer_point_threshold_box_sum_eq_power
+    {q c : ℚ} {L₀ : ℕ} (hq : 0 < q) (hden : q.den = 1)
+    (hform : ∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) :
+    ((brokenCountSum (NullModel.multiplicity L₀) q.num.natAbs q.den
+      (Fintype.card (NullModel.Edge L₀)) : ℕ) : ℚ) = c ^ (L₀ ^ 3) := by
+  have heval := rationalValueSeq_eq_brokenCountSum_div hq L₀
+  have hpower := hform L₀ (le_refl L₀)
+  rw [hden] at heval
+  rw [hden]
+  simpa using heval.symm.trans hpower
+
 /-- 上の有限和は正である。破れ辺数 `0` の項が多重度 `2` と点の既約分母の辺数乗の積で
 あり、残りの項はすべて非負だからである。 -/
 theorem brokenCountSum_multiplicity_pos
