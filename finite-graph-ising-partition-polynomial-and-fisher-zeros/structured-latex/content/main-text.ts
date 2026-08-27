@@ -5460,7 +5460,9 @@ a^{m-3}
 \right)
 \prod_{j=1}^{d}(a-\alpha_j)
 \ne0
-\quad\bigl(\because\ \overline P_G(a)\ne0\text{ を直前の等式へ代入する}\bigr).`),
+\quad\bigl(\because\ \overline P_G(a)
+=\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(\Omega_G(d)))
+\prod_{j=1}^{d}(a-\alpha_j)\text{ と }\overline P_G(a)\ne0\bigr).`),
       displayMath(String.raw`\prod_{j=1}^{d}(a-\alpha_j)
 \ne0
 \quad\bigl(\because\ \overline{\mathbb Q}\text{ の零積律の対偶}\bigr).`),
