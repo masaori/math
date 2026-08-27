@@ -59,6 +59,29 @@ def edgeEquiv {L : ℕ} : Edge L ≃ {p : Site L × Fin 3 // p.1.1 p.2 + 1 < L} 
 instance {L : ℕ} : Fintype (Edge L) :=
   Fintype.ofEquiv _ edgeEquiv.symm
 
+/-- 方向を一つ固定したとき、その方向へ一つ進める始点座標は
+`L - 1` 通りである。箱の辺数を数える最初の因子である。 -/
+theorem card_forward_start_coordinates (L : ℕ) :
+    Fintype.card {i : Fin L // i.1 + 1 < L} = L - 1 := by
+  let f : {i : Fin L // i.1 + 1 < L} → Fin (L - 1) := fun i =>
+    ⟨i.1.1, by omega⟩
+  have hf : Function.Bijective f := by
+    constructor
+    · intro i j hij
+      apply Subtype.ext
+      apply Fin.ext
+      simpa [f] using congrArg Fin.val hij
+    · intro j
+      have hj : j.1 < L - 1 := j.2
+      have hpred : 0 < L - 1 := lt_of_le_of_lt (Nat.zero_le _) hj
+      have hL : 1 < L := Nat.sub_pos_iff_lt.mp hpred
+      have hjL : j.1 < L := by omega
+      have hnext : j.1 + 1 < L := by omega
+      refine ⟨⟨⟨j.1, hjL⟩, hnext⟩, ?_⟩
+      apply Fin.ext
+      rfl
+  simpa using Fintype.card_congr (Equiv.ofBijective f hf)
+
 /-- 破れている辺の集合 D_L(σ)（`def_broken_count` の前半）。 -/
 def brokenSet {L : ℕ} (σ : Config L) : Finset (Edge L) :=
   Finset.univ.filter (fun e => σ (endpoint0 e) ≠ σ (endpoint1 e))
