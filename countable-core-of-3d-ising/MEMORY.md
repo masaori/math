@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-27 11:05: 閾値の箱の有理評価を破れ辺数の多重度の有限和の商へ展開する補題 `rationalValueSeq_eq_brokenCountSum_div` と、その和の正値性 `brokenCountSum_multiplicity_pos` を切り出し、束ね定理が要求する第一の仮定（点の既約分母を割らない素数は底の既約分母も割らない）と、第二の仮定のうち点の既約分母が奇数の場合を Lean 具体版で接続した。残るのは点の既約分母が偶数の場合の素数二の非整除である。
 - 2026-08-27 10:36: `point_den_dvd_two_mul_base_den_pow_of_rational_value_form` を追加し、閾値箱が幅二以上なら有限箱評価を分母を払った多重度の有限和へ展開して、点数乗表示から束ね定理の法分母の整除を直接得た。次は奇素数と素数二の非整除も束ね定理へ接続する。
 - 2026-08-27 10:07: 前歩の整除を実際の自由境界の箱へ渡す `point_den_dvd_two_mul_base_den_pow_from_free_box` を Lean 具体版に追加した。回文性 `Ω_L(#E_L)=Ω_L(0)` と `Ω_L(0)=2` を入れると、右辺が箱に依存しない `2 * c.den ^ N` になる。次はこの整除を束ね定理の法 `q.den` の仮定へ接続する。
 - 2026-08-27 09:34: 既存の `rational_power_base_congruences` から法 `q.den` の整除を取り出し、整数上の整除を自然数上へ戻す `point_den_dvd_zero_multiplicity_mul_base_den_pow_from_finite_box` を Lean 具体版に追加した。次は自由境界箱の回文性と破れ数ゼロの多重度二をこの整除へ渡す。
