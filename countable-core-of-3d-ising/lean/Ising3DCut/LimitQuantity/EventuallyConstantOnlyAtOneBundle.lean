@@ -58,21 +58,23 @@ theorem two_not_dvd_power_base_den_from_finite_box_representation
   odd_prime_not_dvd_power_base_den_from_finite_box_representation
     hc hL hL₀L hform hvalue hP 2 Nat.prime_two hodd
 
-/-- 接続の第六段の第三歩。底の既約分母が偶数だと仮定すると、
-素数 `2` の指数は `1` か `2` 以上である。それぞれの場合を有限箱の
-先行定理で排除できれば、`2` は底の既約分母を割らない。
-この歩は指数による場合分けだけを担い、極限は使わない。 -/
-theorem two_not_dvd_power_base_den_of_exponent_cases
-    {c : ℚ}
-    (hone : c.den.factorization 2 = 1 → False)
-    (hgeTwo : 2 ≤ c.den.factorization 2 → False) :
+/-- 接続の第六段の第三歩。点の既約分母が偶数のとき、その素数 `2` の指数は
+`1` か `2` 以上である。底の既約分母が偶数だと仮定したうえで、それぞれの場合を
+有限箱の先行定理で排除できれば、`2` は底の既約分母を割らない。
+場合分けは点の既約分母の指数について行う（先行の二つの排除定理が場合分けしているのは
+点の既約分母の指数であり、底の既約分母については偶数であることだけを使う）。
+この歩は場合分けだけを担い、極限は使わない。 -/
+theorem two_not_dvd_power_base_den_of_point_den_exponent_cases
+    {q c : ℚ} (hden : (2 : ℕ) ∣ q.den)
+    (hone : (2 : ℕ) ∣ c.den → q.den.factorization 2 = 1 → False)
+    (hgeTwo : (2 : ℕ) ∣ c.den → 2 ≤ q.den.factorization 2 → False) :
     ¬ (2 : ℕ) ∣ c.den := by
   intro htwo
-  have hpos : 0 < c.den.factorization 2 :=
-    Nat.Prime.factorization_pos_of_dvd Nat.prime_two c.den_nz htwo
-  by_cases hone' : c.den.factorization 2 = 1
-  · exact hone hone'
-  · exact hgeTwo (by omega)
+  have hpos : 0 < q.den.factorization 2 :=
+    Nat.Prime.factorization_pos_of_dvd Nat.prime_two q.den_nz hden
+  by_cases hone' : q.den.factorization 2 = 1
+  · exact hone htwo hone'
+  · exact hgeTwo htwo (by omega)
 
 /-- 正の有理点の既約分子と既約分母がともに `2` を割るなら、候補は三点に尽きる。 -/
 theorem positive_rational_three_candidates_of_num_den_dvd_two
