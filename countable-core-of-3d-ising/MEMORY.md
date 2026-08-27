@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 02:09: 有理点 2 分の 1 の末尾周期性排除について SageMath 検証を追加した（`sagemath/check/eventually-periodic-at-one-half-impossible/`、3 ファイル PASS、linkage 97 件）。回文性 $2^{\#E_M}Z_M(1/2)=Z_M(2)$ を分配多項式への直接代入で独立に確認し、指数等式の差 $(L+p)^3-L^3+3pL^2(L+p)^2$ の全係数が正であることを $\mathbb Z[L,p]$ の恒等式として確認した。次は Lean 具体版。
 - 2026-08-28 01:36（並行）: 各 city で選んだ内部辺被覆の相異なる二辺が端子を共有しないことを `pairwiseDisjoint_encodePeriodicSquareInternalEdgesAt` として存在定理から取り出した。次は city 間と外部辺との排他性を合わせる。
 - 2026-08-28 01:32: 有理点 2 分の 1 で末尾周期性が不可能であることを本文に記述した（`claim_eventually_periodic_at_one_half_is_impossible`）。回文性から各箱値の素数 2 の指数が `1-#E_L` となり、周期交差冪等式が強制する指数等式は、自由境界の辺数を代入すると両辺の差が正になるため成立しない。次は SageMath 検証。
 - 2026-08-28 01:06: 有理点 2 で末尾周期性が不可能であることを Lean 必要十分版 `NecSuf.pow_ne_pow_of_pow_additive_index_eq_one` と `NecSuf.no_eventual_cross_power_identity_of_pow_additive_index_eq_one` へ抽象化し、このセクションを四層で閉じた。仮定は「冪の上で加法的な指標が二値でともに 1」「二つの指数が相異なる」だけで、素数 2・法 4・自然数・モノイド則は落ちた。具体版は `eventually_periodic_at_two_power_identity_impossible_fromNecSuf` として導出。sorry 非依存検査 632 件通過。次の本流は有理点 2 分の 1 の末尾周期性の排除。
