@@ -1210,3 +1210,4 @@ SageMath で検証する（例: $L'=1,L=2,L''=3$ の自由境界箱、`ZZ` 上�
 # Slack配送経路
 
 - 自動tickの報告は旧Workflow Builder triggerを使わず、`slack route-post math`が解決するHex-AIの明示routeだけへ送る。
+- launchd の非対話環境でも上記経路を解決できるよう、tick の明示 PATH に `~/.agent-shims` を含める。対話シェルの初期化へ依存させない。

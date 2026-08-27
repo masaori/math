@@ -19,6 +19,12 @@ for relative in "${TARGETS[@]}"; do
   fi
 done
 
+if ! grep -Fq 'PATH="$HOME/.agent-shims:' \
+  "$ROOT/countable-core-of-3d-ising/scripts/auto-loop-tick.sh"; then
+  printf '3次元Ising tickの非対話PATHからSlack shimが欠落している\n' >&2
+  exit 1
+fi
+
 if rg -n 'hooks[.]slack[.]com/(triggers|workflows)' \
   "$ROOT/cellular-automata-statistical-mechanics/scripts" \
   "$ROOT/countable-core-of-3d-ising/scripts" \

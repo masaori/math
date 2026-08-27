@@ -76,7 +76,7 @@ log() {
 }
 
 # launchd は対話シェルの PATH を持たないので、必要なものを明示的に足す。
-PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+PATH="$HOME/.agent-shims:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 # node / npm は mise または nvm 配下にある。足さないと npm run check も build:pdf も回せない。
 if [ -d "$HOME/.local/share/mise/shims" ]; then
