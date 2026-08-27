@@ -20,6 +20,7 @@
 import Mathlib.Data.Fintype.Card
 import Mathlib.Data.Fintype.Pi
 import Mathlib.Data.Fintype.Prod
+import Mathlib.Data.Fintype.BigOperators
 import Ising3DCut.NullModel.OddFlipReversesEdges
 
 namespace Ising3DCut.NullModel
@@ -81,6 +82,35 @@ theorem card_forward_start_coordinates (L : ℕ) :
       apply Fin.ext
       rfl
   simpa using Fintype.card_congr (Equiv.ofBijective f hf)
+
+/-- 方向を一つ固定したとき、その方向へ辺を出せる始点は `(L - 1) * L ^ 2` 個である。
+固定した方向の座標だけが `L - 1` 通りに制限され、残る二つの座標は自由に `L` 通りである。 -/
+theorem card_fixed_axis_edge_starts (L : ℕ) (j : Fin 3) :
+    Fintype.card {f : Fin 3 → Fin L // (f j).1 + 1 < L} = (L - 1) * L ^ 2 := by
+  have e : {f : Fin 3 → Fin L // (f j).1 + 1 < L}
+      ≃ {i : Fin L // i.1 + 1 < L} × ({k : Fin 3 // k ≠ j} → Fin L) := by
+    refine
+      { toFun := fun f => (⟨f.1 j, f.2⟩, fun k => f.1 k.1)
+        invFun := fun p => ⟨fun k => if h : k = j then p.1.1 else p.2 ⟨k, h⟩, by simpa using p.1.2⟩
+        left_inv := ?_
+        right_inv := ?_ }
+    · intro f
+      apply Subtype.ext
+      funext k
+      by_cases h : k = j
+      · subst h; simp
+      · simp [h]
+    · intro p
+      refine Prod.ext ?_ ?_
+      · apply Subtype.ext
+        simp
+      · funext k
+        simp [k.2]
+  have hsub : Fintype.card {k : Fin 3 // k ≠ j} = 2 := by
+    simpa using Fintype.card_subtype_compl (fun k : Fin 3 => k = j)
+  have hfun : Fintype.card ({k : Fin 3 // k ≠ j} → Fin L) = L ^ 2 := by
+    rw [Fintype.card_fun, hsub, Fintype.card_fin]
+  rw [Fintype.card_congr e, Fintype.card_prod, card_forward_start_coordinates, hfun]
 
 /-- 破れている辺の集合 D_L(σ)（`def_broken_count` の前半）。 -/
 def brokenSet {L : ℕ} (σ : Config L) : Finset (Edge L) :=
