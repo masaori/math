@@ -95,6 +95,8 @@ targets=(
   Ising3DCut.LimitQuantity.pred_dvd_pow_sub_one
   Ising3DCut.LimitQuantity.numerator_divides_twice_threshold_box_value_minus_one
   Ising3DCut.LimitQuantity.integer_point_finite_box_data_of_rational_value_form
+  Ising3DCut.LimitQuantity.brokenCountSum_head_split
+  Ising3DCut.LimitQuantity.denominator_two_numerator_eq_one_of_rational_value_form
   Ising3DCut.NecSuf.relation_of_relation_preserving_map_and_target_equality
   Ising3DCut.LimitQuantity.numerator_divides_twice_threshold_box_value_minus_one_viaNecSuf
   Ising3DCut.Prediction.outgoing_lattice_edges_mem_and_ne
