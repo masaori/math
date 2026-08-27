@@ -63,4 +63,35 @@ theorem denominator_two_numerator_eq_one_of_rational_value_form
   exact denominator_two_numerator_eq_one_from_finite_box (L := L₀) (S := S)
     hL₀ hcoprime hscaled hdvd
 
+/-- 分母 `1` と分母 `2` の二つの有限箱接続を束ね、自由境界箱の
+合同式から有理点を `1` に定める束ね定理の残る二仮定へ渡す。
+底についての箱に依存しない分子整除は先行する合同式の接続から受け取り、
+この一段では新しい極限も無限和も使わない。 -/
+theorem eq_one_of_cross_power_identity_from_free_box_numerator_connections
+    {q : ℚ} (hq : 0 < q) {L₀ : ℕ} (hL₀ : 2 ≤ L₀)
+    (hcross : ∀ L, L₀ ≤ L →
+      rationalValueSeq q L ^ ((L + 1) ^ 3) = rationalValueSeq q (L + 1) ^ (L ^ 3))
+    (hbaseDvd : ∀ c : ℚ, 0 < c → c.den = 1 →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) →
+      q.num.natAbs ∣ 2 * (c.num.natAbs - 1))
+    (hpowerDvd : ∀ c : ℚ, 0 < c → c.den = 1 →
+      (∀ L, L₀ ≤ L → rationalValueSeq q L = c ^ (L ^ 3)) →
+      (q.num.natAbs : ℤ) ∣ 2 * ((c.num.natAbs : ℤ) ^ (L₀ ^ 3) - 1)) :
+    q = 1 := by
+  obtain ⟨c, hc, hform⟩ :=
+    (eventually_cross_power_identity_iff_rational_power_form_viaNecSuf q hq L₀
+      (by omega)).mp hcross
+  have hcden := base_den_eq_one_of_rational_value_form hq hL₀ hc hform
+  have hdvd := hbaseDvd c hc hcden hform
+  apply eq_one_of_cross_power_identity_from_free_box hq hL₀ hcross
+  · intro hden
+    obtain ⟨E, Z, L, hL, hZ, hdiv⟩ :=
+      integer_point_finite_box_data_of_rational_value_form
+        hq (by omega) hden hc hcden hform hdvd
+    exact integer_point_numerator_divides_two hL hZ hdiv
+  · intro hden
+    apply denominator_two_numerator_eq_one_of_rational_value_form
+      hq (by omega) hden hc hcden hform
+    exact hpowerDvd c hc hcden hform
+
 end Ising3DCut.LimitQuantity
