@@ -5422,7 +5422,9 @@ a^{m-3}
 =C_G(a)
 \quad\bigl(\because\ C_G(a)\text{ の定義}\bigr).`),
       displayMath(String.raw`D^3\overline P_G(a)=C_G(a)
-\quad\bigl(\because\ \text{直前の二つの等式の推移律}\bigr).`),
+\quad\bigl(\because\ D^3\overline P_G(a)
+=\sum_{m=3}^{|E|}\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(m(m-1)(m-2)\Omega_G(m)))a^{m-3}
+\text{ と }\sum_{m=3}^{|E|}\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(m(m-1)(m-2)\Omega_G(m)))a^{m-3}=C_G(a)\bigr).`),
       paragraph([
         ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
         " と",
