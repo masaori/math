@@ -328,4 +328,22 @@ theorem base_den_eq_one_of_rational_value_form
     (fun p hp hp2 ↦ odd_prime_not_dvd_base_den_of_rational_value_form
       hq hL₀ hc hform hp hp2)
 
+/-- 自由境界の箱の側で閉じた三つの排除――素数 `2` が底の既約分母を割らないこと、
+`2` 以外の素数も割らないこと、有理点の既約分母が `2` と底の既約分母の点数乗との積を
+割ること――を、束ねの定理へまとめて渡す一段。外から残る仮定は有理点の既約分子に
+ついての二場合だけになる。極限も無限和も現れない。 -/
+theorem eq_one_of_cross_power_identity_from_free_box
+    {q : ℚ} (hq : 0 < q) {L₀ : ℕ} (hL₀ : 2 ≤ L₀)
+    (hcross : ∀ L, L₀ ≤ L →
+      rationalValueSeq q L ^ ((L + 1) ^ 3) = rationalValueSeq q (L + 1) ^ (L ^ 3))
+    (hdenOne : q.den = 1 → q.num.natAbs ∣ 2)
+    (hdenTwo : q.den = 2 → q.num.natAbs = 1) :
+    q = 1 :=
+  eq_one_of_cross_power_identity_of_finite_box_numerator_conditions hq (by omega) hcross
+    (fun c hc hform _p hp hp2 ↦
+      odd_prime_not_dvd_base_den_of_rational_value_form hq hL₀ hc hform hp hp2)
+    (fun c hc hform ↦ two_not_dvd_base_den_of_rational_value_form hq hL₀ hc hform)
+    (fun c hc hform ↦ point_den_dvd_two_mul_base_den_pow_of_rational_value_form hq hL₀ hc hform)
+    hdenOne hdenTwo
+
 end Ising3DCut.LimitQuantity
