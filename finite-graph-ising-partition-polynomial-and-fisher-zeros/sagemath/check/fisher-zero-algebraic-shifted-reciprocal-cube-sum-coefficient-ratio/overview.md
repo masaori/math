@@ -52,6 +52,7 @@
 | `check_reciprocal_product_decomposition.sage` | 順序付き有限二重和の対角・非対角分解 | PASS | 対角・非対角分解が一致 |
 | `check_swap_non_diagonal_pair_indices.sage` | 非対角二重和の添字交換 | PASS | 二つの順序付き非対角和が一致 |
 | `check_non_diagonal_pair_sum_local_definition.sage` | 非対角二重和の局所定義 | PASS | 逆数和と逆二乗和の積が `S_{G,3}+U_{G,2,1}` に一致 |
+| `check_substitute_reciprocal_sum_definition_into_cube.sage` | 逆数和の定義を三乗へ代入 | PASS | `R_G(a)^3` と明示した逆数有限和の三乗が一致 |
 | `check_expand_reciprocal_cube.sage` | 逆数和の三乗の有限三重和への展開 | PASS | 三乗と順序付き有限三重和が一致 |
 | `check_partition_reciprocal_cube_indices.sage` | 有限三重和の添字一致型による分割 | PASS | 対角・三つの二重一致・相異なる三重添字の五項が一致 |
 | `check_swap_reciprocal_cube_pair_indices.sage` | 二重一致項の非対角添字交換 | PASS | `V_{G,1,2}=U_{G,2,1}` を厳密確認 |
