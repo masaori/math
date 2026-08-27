@@ -11570,4 +11570,66 @@ a_L(q)^{\#V_L\,\#V_{L+p}}
       ]),
     ],
   },
+  {
+    id: "soundness_bridge_claim_eventually_periodic_at_two_is_impossible",
+    kind: "claim",
+    title: { text: "有理点 2 では有限箱の量は末尾周期的にならない" },
+    labels: ["claim_eventually_periodic_at_two_is_impossible"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        "正の自然数 ",
+        math(String.raw`L_0,p`),
+        " をどのように取っても、すべての ",
+        math(String.raw`L\ge L_0`),
+        " について ",
+        math(String.raw`Z_L(2)^{\#V_{L+p}}=Z_{L+p}(2)^{\#V_L}`),
+        " が成り立つことはない。したがって、有理点 2 では有限箱の量の列は末尾で周期的にならない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L:=\max\{L_0,2\}`),
+        " と置く。",
+        ref("claim_eventual_power_form_at_two_is_impossible"),
+        " の有限和の計算から ",
+        math(String.raw`Z_L(2)\equiv2\pmod4`),
+        " かつ ",
+        math(String.raw`Z_{L+p}(2)\equiv2\pmod4`),
+        " である。したがって奇数 ",
+        math(String.raw`u,v\in\mathbb N`),
+        " が存在して ",
+        math(String.raw`Z_L(2)=2u`),
+        " および ",
+        math(String.raw`Z_{L+p}(2)=2v`),
+        " と書ける。",
+      ]),
+      paragraph([
+        "周期の冪等式を仮定する。自由境界の箱では ",
+        math(String.raw`\#V_L=L^3`),
+        " であり、",
+        math(String.raw`p>0`),
+        " なので ",
+        math(String.raw`(L+p)^3>L^3`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(2u)^{(L+p)^3}&=(2v)^{L^3}
+&&\bigl(\because\ \text{仮定した周期の冪等式}\bigr)\\
+2^{(L+p)^3-L^3}u^{(L+p)^3}&=v^{L^3}
+&&\bigl(\because\ \text{両辺から }2^{L^3}\text{ を除く}\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "左辺は ",
+        math(String.raw`(L+p)^3-L^3>0`),
+        " により偶数であり、右辺は ",
+        math(String.raw`v`),
+        " が奇数なので奇数である。これは矛盾する。よって周期の冪等式は成り立たず、",
+        ref("claim_eventually_periodic_iff_power_identity"),
+        " により末尾周期性も成り立たない。使ったのは有限和、自然数の冪、偶奇だけである。",
+      ]),
+    ],
+  },
 ]);
