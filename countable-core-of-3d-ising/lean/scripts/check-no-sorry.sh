@@ -663,6 +663,11 @@ targets=(
   Ising3DCut.LimitQuantity.powerMinusOne_gcd_reaches_exponent_gcd_viaNecSuf
   Ising3DCut.NecSuf.combine_eq_normalize_of_reaches_self
   Ising3DCut.LimitQuantity.powerMinusOne_gcd_equals_power_of_exponent_gcd_viaNecSuf
+  Ising3DCut.LimitQuantity.int_dvd_two_mul_pow_sub_one_of_nat
+  Ising3DCut.LimitQuantity.power_numerator_divisibility_of_base_divisibility
+  Ising3DCut.LimitQuantity.base_divisibility_of_rational_value_form
+  Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_from_free_box_base_divisibility
+  Ising3DCut.LimitQuantity.eq_one_of_cross_power_identity_from_free_box_closed
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
