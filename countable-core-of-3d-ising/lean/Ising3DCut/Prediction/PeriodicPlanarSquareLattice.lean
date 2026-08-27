@@ -489,6 +489,27 @@ theorem encodePeriodicSquareInternalEdges_subset_internalEdges
   have hremaining := hcand.1 ht
   exact (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mp hremaining |>.1
 
+/-- 束ねた内部辺の合併は、各 city に残る端子を全ての city にわたって集めたものに一致する。
+city ごとの完全被覆を合併しただけなので、束ねても覆う端子は増減しない。 -/
+theorem biUnion_encodePeriodicSquareInternalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    (encodePeriodicSquareInternalEdges subgraph).biUnion id =
+      Finset.univ.biUnion (encodePeriodicSquareRemainingTerminalsAt subgraph) := by
+  ext t
+  constructor
+  · intro ht
+    obtain ⟨s, hs, hts⟩ := Finset.mem_biUnion.mp ht
+    obtain ⟨v, hv, hsv⟩ := Finset.mem_biUnion.mp hs
+    refine Finset.mem_biUnion.mpr ⟨v, hv, ?_⟩
+    rw [← biUnion_encodePeriodicSquareInternalEdgesAt subgraph v]
+    exact Finset.mem_biUnion.mpr ⟨s, hsv, hts⟩
+  · intro ht
+    obtain ⟨v, hv, htv⟩ := Finset.mem_biUnion.mp ht
+    rw [← biUnion_encodePeriodicSquareInternalEdgesAt subgraph v] at htv
+    obtain ⟨s, hs, hts⟩ := Finset.mem_biUnion.mp htv
+    exact Finset.mem_biUnion.mpr
+      ⟨s, Finset.mem_biUnion.mpr ⟨v, hv, hs⟩, hts⟩
+
 /-- 偶部分グラフから復元する terminal graph の辺集合。各 city で選んだ内部辺と、
 polygon に属さない元の辺に対応する外部辺を合わせる。 -/
 noncomputable def encodePeriodicSquareMatching
