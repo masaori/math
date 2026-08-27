@@ -1,5 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 00:34: 有理点 2 で末尾周期性が不可能であることの Lean 具体版 `partitionValueAtTwoNat_cross_power_ne` と `eventually_periodic_at_two_power_identity_impossible` を閉じた。法 4 で 2 の有限箱値は素数 2 の指数が一であり、交差冪等式は異なる箱の点数が等しいと強制するため矛盾する。着手前レビュでは直前の並行成果に修正事項は無かった。次は同主張の Lean 必要十分版。
 - 2026-08-28 00:06（並行）: 束ねた内部辺の合併が全 city の残存端子に一致することを `biUnion_encodePeriodicSquareInternalEdges` で閉じ、未登録だった三定理を sorry 非依存検査へ登録した（627 件）。次は各端子の被覆の一意性。
 - 2026-08-28 00:02: 有理点 2 では有限箱の量が末尾周期的にならないことについて SageMath 検証を追加した（`sagemath/check/eventually-periodic-at-two-impossible/`、3 ファイル PASS、linkage 96 件）。有限箱値の 2 の指数がちょうど 1 であること、周期の冪等式から共通の 2 の冪を除く式変形、残る両辺の偶奇の食い違い、一辺 2・3・4 の実データでの非等号を段ごとに確かめた。着手前レビューでは前 tick の記述に修正事項は無かった。次は同主張の Lean 具体版。
 - 2026-08-27 22:36（並行）: 偶部分グラフから復元する内部辺と外部辺の和 `encodePeriodicSquareMatching` を定義し、terminal graph の辺集合への包含を Lean で示した。次は各端子の被覆の存在と一意性。

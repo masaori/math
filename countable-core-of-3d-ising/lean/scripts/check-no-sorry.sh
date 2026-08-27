@@ -62,6 +62,8 @@ targets=(
   Ising3DCut.LimitQuantity.integer_point_numerator_divides_two
   Ising3DCut.LimitQuantity.denominator_two_numerator_eq_one_from_finite_box
   Ising3DCut.Prediction.mem_encodePeriodicSquareExternalEdges_iff
+  Ising3DCut.LimitQuantity.partitionValueAtTwoNat_cross_power_ne
+  Ising3DCut.LimitQuantity.eventually_periodic_at_two_power_identity_impossible
   Ising3DCut.Prediction.biUnion_encodePeriodicSquareInternalEdges
   Ising3DCut.Prediction.biUnion_encodePeriodicSquareInternalEdgesAt
   Ising3DCut.Prediction.encodePeriodicSquareInternalEdges_subset_internalEdges
