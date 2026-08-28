@@ -42,7 +42,8 @@ structured-latex/content/neighborhood-assignment-reachability-closure.ts。
 決定可能であること（`instDecidableMemReachabilityClosure`）と、人手証明が数える
 走査の組の総数が `(|V|²+1)·|V|³` であること（`card_closureScan`）である。
 
-必要十分版は未着手であり、このファイルは具体版だけを持つ。
+必要十分版と具体版からの導出は
+`CellularAutomata.NecSuf.NeighborhoodAssignmentReachabilityClosure` に置く。
 
 住処: 有限型、有限部分集合、有限写像、自然数だけ。ℝ / ℂ は現れない。
 -/
