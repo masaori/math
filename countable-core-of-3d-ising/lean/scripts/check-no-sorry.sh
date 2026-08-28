@@ -749,6 +749,7 @@ targets=(
   Ising3DCut.Prediction.biUnion_periodicSquareFiberInternalEdgesAt_subset_terminalsAt
   Ising3DCut.Prediction.remainingTerminalsAt_subset_biUnion_periodicSquareFiberInternalEdgesAt
   Ising3DCut.Prediction.biUnion_periodicSquareFiberInternalEdgesAt_subset_remainingTerminalsAt
+  Ising3DCut.Prediction.biUnion_periodicSquareFiberInternalEdgesAt_eq_remainingTerminalsAt
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

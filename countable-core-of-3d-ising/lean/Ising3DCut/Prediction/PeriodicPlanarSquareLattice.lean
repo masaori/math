@@ -1010,4 +1010,21 @@ theorem biUnion_periodicSquareFiberInternalEdgesAt_subset_remainingTerminalsAt
       latticeEndpoint₀ latticeEndpoint₁)
     matching hsData.1 hExternal hne htVertex hts htExternal
 
+/-- 復号繊維の完全マッチングから city ごとに取り出した内部辺が覆う端子の全体は、
+その city の残存端子の全体にちょうど一致する。両向きの包含
+（`biUnion_periodicSquareFiberInternalEdgesAt_subset_remainingTerminalsAt` と
+`remainingTerminalsAt_subset_biUnion_periodicSquareFiberInternalEdgesAt`）を束ねる。 -/
+theorem biUnion_periodicSquareFiberInternalEdgesAt_eq_remainingTerminalsAt
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    {matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))}
+    (hmatching : matching ∈ periodicSquareDecodingFiber subgraph)
+    (v : LatticeVertex n) :
+    (periodicSquareFiberInternalEdgesAt matching v).biUnion id =
+      encodePeriodicSquareRemainingTerminalsAt subgraph v :=
+  Finset.Subset.antisymm
+    (biUnion_periodicSquareFiberInternalEdgesAt_subset_remainingTerminalsAt
+      hn subgraph hmatching v)
+    (remainingTerminalsAt_subset_biUnion_periodicSquareFiberInternalEdgesAt
+      subgraph hmatching v)
+
 end Ising3DCut.Prediction
