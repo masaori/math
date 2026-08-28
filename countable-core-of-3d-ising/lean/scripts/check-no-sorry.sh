@@ -737,6 +737,7 @@ targets=(
   Ising3DCut.Prediction.exists_perfectMatching_decoding_to_subgraph
   Ising3DCut.Prediction.encodePeriodicSquareMatching_mem_decodingFiber
   Ising3DCut.Prediction.mem_periodicSquareFiberInternalEdgesAt_iff
+  Ising3DCut.Prediction.disjoint_periodicSquareFiberInternalEdgesAt
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

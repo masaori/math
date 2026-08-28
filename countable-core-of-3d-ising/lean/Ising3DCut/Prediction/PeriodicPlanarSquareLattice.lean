@@ -876,4 +876,27 @@ theorem mem_periodicSquareFiberInternalEdgesAt_iff
       s ∈ matching ∧ s ∈ internalEdgesAt latticeIncidentEdges v := by
   simp [periodicSquareFiberInternalEdgesAt]
 
+/-- 相異なる二つの city について、取り出した内部辺の集合は互いに素である。
+内部辺は空でなく、その端子の第一成分が属する city を一意に定めるためである。
+繊維の元を city ごとの族へ分解する写像が、辺を重複して数えないことを保証する。 -/
+theorem disjoint_periodicSquareFiberInternalEdgesAt
+    {n : ℕ} [NeZero n]
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)))
+    {v w : LatticeVertex n} (hvw : v ≠ w) :
+    Disjoint (periodicSquareFiberInternalEdgesAt matching v)
+      (periodicSquareFiberInternalEdgesAt matching w) := by
+  classical
+  refine Finset.disjoint_left.mpr ?_
+  intro s hsv hsw
+  have hv := ((mem_periodicSquareFiberInternalEdgesAt_iff matching v s).mp hsv).2
+  have hw := ((mem_periodicSquareFiberInternalEdgesAt_iff matching w s).mp hsw).2
+  have hcard : s.card = 2 :=
+    ((mem_internalEdgesAt_iff latticeIncidentEdges v s).mp hv).2
+  obtain ⟨t, ht⟩ : ∃ t, t ∈ s := Finset.card_pos.mp (by omega) |>.imp fun _ h ↦ h
+  have htv : t.1 = v :=
+    (terminal_of_mem_internalEdgeAt latticeIncidentEdges v s hv t ht).1
+  have htw : t.1 = w :=
+    (terminal_of_mem_internalEdgeAt latticeIncidentEdges w s hw t ht).1
+  exact hvw (htv.symm.trans htw)
+
 end Ising3DCut.Prediction
