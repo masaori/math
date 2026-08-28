@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 12:03: 本文末尾の注記が三つの主張を繋いだ結論を証明なしに述べていたので、定理 `claim_eventually_periodic_limit_quantity_only_at_one`（末尾周期的で極限量が存在するなら正の有理点は 1）を立て、剰余類ごとの定数値がすべて一致するか二つ相異なるかの場合分け一本で証明した。注記は判定可能性の補足として残した。`npm run check` 198 ブロック・参照 444 件、`build:pdf` 68 ページ、linkage 101 件。次は同主張の SageMath 検証。
+
 - 2026-08-28 11:03: 本流 `claim_residue_class_values_differ_no_limit_quantity` の Lean 具体版 `lean/Ising3DCut/LimitQuantity/ResidueClassValuesDifferNoLimitQuantity.lean` を追加した。剰余類の添字列 `k ↦ L0 + t + k*p` が `atTop` へ飛ぶこと、その部分列の極限が剰余類の定数値に一致すること（部分列の収束・定数列の極限・ℝ の極限の一意性のみ）、二つの定数値が相異なれば矛盾することを三本に分けて示した。`lake build` 成功、sorry 非依存検査 665 件。次は同主張の Lean 必要十分版。
 
 - 2026-08-28 10:36（並行）: `encodedEvenSubgraph_encodePeriodicSquareMatching` を追加し、偶部分グラフから復元した完全マッチングの復号が元の辺集合へ戻ることを二包含から閉じた。次は逆向きの復元等式を示し、全単射へ束ねる。

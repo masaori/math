@@ -39,6 +39,7 @@ export const ALL_LABELS = [
   "claim_eventually_periodic_at_one_half_is_impossible",
   "claim_eventually_periodic_at_two_is_impossible",
   "claim_eventually_periodic_iff_power_identity",
+  "claim_eventually_periodic_limit_quantity_only_at_one",
   "claim_eventually_periodic_residue_class_constant",
   "claim_factorization_type_determines_root_minimal_degrees",
   "claim_finite_box_equalities_transfer_to_limit_quantity",
