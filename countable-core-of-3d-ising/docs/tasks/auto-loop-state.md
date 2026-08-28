@@ -7,6 +7,7 @@
 [docs/discussion/3次元Isingを可算側で書く/可算コアの同定とは何か.md](../../../docs/discussion/3次元Isingを可算側で書く/可算コアの同定とは何か.md)。
 
 ## 現在地
+- 2026-08-28 11:03: 本流「剰余類ごとの値が食い違うなら極限量は存在しない」の Lean 具体版を追加した。剰余類の添字列が atTop へ飛ぶこと、部分列の極限が定数値に一致すること、二つの定数値が相異なると矛盾することを三本に分けて示し、`lake build` と sorry 非依存検査 665 件を通した。着手前レビューでは直前の記述と SageMath 二検査に修正事項は無かった。次は同主張の Lean 必要十分版。
 - 2026-08-28 10:36（並行）: 偶部分グラフから復元した完全マッチングを復号すると元の辺集合へ戻る等式 `encodedEvenSubgraph_encodePeriodicSquareMatching` を、直前に閉じた二つの包含から示した。全単射の片側の逆写像等式が閉じたので、次は完全マッチングから復号した偶部分グラフを再び復元すると元のマッチングへ戻る逆向きの等式を示す。
 - 2026-08-28 10:32: 本流「剰余類ごとの値が食い違うなら極限量は存在しない」の SageMath 層を追加した。二つの剰余類部分列が相異なる有理数の定数列になることと、その二定数の距離の 3 分の 1 を幅に取った近傍が両立しないことを `ZZ` と `QQ` の厳密計算で全 PASS させた。着手前レビューでは直前の記述に修正事項は無かった。次は同主張の Lean 具体版。
 - 2026-08-28 10:06（並行）: 復元した完全マッチングを復号すると元の偶部分グラフの辺がすべて残ること（逆向きの包含 `subset_encodedEvenSubgraph_encodePeriodicSquareMatching`）を Lean で示した。外部辺は第二成分に元の辺を持つので単射であり（`externalEdge_injective_lattice`）、偶部分グラフの辺の外部辺は復元の外部辺に入らない。また外部辺は任意の元の辺について city 内部辺になりえない（`externalEdge_not_mem_internalEdges`。直前の tick の主張から偶部分グラフに属さないという仮定を外した一般形）。既存の逆包含と合わせて、復元と復号は互いに逆である。sorry 非依存検査 661 件。
@@ -1286,7 +1287,7 @@ tick は**最初の未完了セクションの、足りない層**を 1 つ進�
 
 | **【本流】剰余類ごとの値の一致は有限の有理数等式で判定できる** | 2026-08-28 08:03 にゴール文書へ戻って引き直した。正の有理数 $A,B$ と正の自然数 $N,M$ について $A^{1/N}=B^{1/M}$ から $A^M=B^N$ を示す（逆向きは `claim_cross_power_equality_implies_root_equality` で既に閉じている）。同値になるので、二つの箱幅の量が等しいことは分配多項式の値の有限個の有理数等式で判定でき、末尾周期性で残った「剰余類ごとの定数値が食い違う場合」を可算側の判定へ移せる | done（2026-08-28 08:03 に `claim_root_equality_implies_cross_power_equality` と `remark_residue_class_values_agree_is_decidable` を記述。08:34 に `sagemath/check/root-equality-implies-cross-power-equality/` の五検査をすべて PASS、linkage 100 件。09:03 に `LimitQuantity/RootEqualityImpliesCrossPowerEquality.lean` の `posRoot_equality_implies_cross_power_equality` を追加し、人手証明と同じ五つの等号で `A^M` を `B^N` へ運ぶ順序を 1 対 1 で形式化。09:34 に必要十分版 `NecSuf.common_root_implies_cross_power_equality` と具体導出を追加し、モノイドのべき乗則だけへ抽象化。`lake build` 8968 ジョブ成功、sorry 非依存検査 658 件） |
 
-| **【本流】剰余類ごとの値が食い違うなら極限量は存在しない** | 2026-08-28 10:02 にゴール文書へ戻って引き直した。末尾周期的な列の剰余類ごとの定数値のうち二つが相異なるなら、収束列の部分列の極限の一意性から矛盾が出るので極限量は存在しない。これで末尾周期性の未決着部分が閉じ、極限量を持つ正の有理点は 1 に限られる | 記述と SageMath まで（2026-08-28 10:32 に `sagemath/check/residue-class-values-differ-no-limit-quantity/` の二検査を `ZZ` と `QQ` で全 PASS） |
+| **【本流】剰余類ごとの値が食い違うなら極限量は存在しない** | 2026-08-28 10:02 にゴール文書へ戻って引き直した。末尾周期的な列の剰余類ごとの定数値のうち二つが相異なるなら、収束列の部分列の極限の一意性から矛盾が出るので極限量は存在しない。これで末尾周期性の未決着部分が閉じ、極限量を持つ正の有理点は 1 に限られる | Lean 具体版まで（2026-08-28 10:32 に `sagemath/check/residue-class-values-differ-no-limit-quantity/` の二検査を `ZZ` と `QQ` で全 PASS。2026-08-28 11:03 に Lean 具体版 `lean/Ising3DCut/LimitQuantity/ResidueClassValuesDifferNoLimitQuantity.lean`：`tendsto_residue_class_index_atTop`・`residue_class_value_eq_limitQuantity`・`residue_class_values_differ_no_limit_quantity`、sorry 非依存検査 665 件） |
 
 ### 従属標的（本体にしない。降格済み。**本文からは退避済み**）
 
@@ -1392,6 +1393,8 @@ tick は**最初の未完了セクションの、足りない層**を 1 つ進�
 - 2026-08-22 20:35: 新標的「最小性: 尾部の交差べき等式は極限量に対して十分である」を四層すべて 1 tick で閉じた。既存の全箱版の十分性主張の証明が実際には各添字ごとの適用と収束移送の合成でしかないことに着目し、仮定をある添字 $L_0$ 以降だけへ弱めても十分性が保たれることを示した。
 
 ## レビュー記録（新しい 5 件まで）
+
+- 2026-08-28 11:03: 直前の tick で書いた本文（剰余類ごとの定数値が二つ相異なるなら極限量は存在しない）と SageMath 二検査を読み直した。極限の一意性と定数列の極限だけを使い、上限・下限・積分・微分・無限和を使っていないこと、極限量を参照するブロックが `habitat` を非可算にして `realEscape` を書いていることを確認した。修正事項は無かった。
 
 - 2026-08-28 09:31: 直前の「正の乗根の一致は交差べき等式を決める」の本文・SageMath 五検査・Lean 具体版を照合した。共通の乗根を置き、二つのべき等式を得て、指数の積と可換性を通して交差べき等式へ至る五段が同じ順序であり、住処と脱出の宣言および台帳の状態も実態と一致していた。修正事項は無かった。
 
