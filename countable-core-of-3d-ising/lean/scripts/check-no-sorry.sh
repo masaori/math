@@ -712,6 +712,8 @@ targets=(
   Ising3DCut.LimitQuantity.tendsto_residue_class_index_atTop
   Ising3DCut.LimitQuantity.residue_class_value_eq_limitQuantity
   Ising3DCut.LimitQuantity.residue_class_values_differ_no_limit_quantity
+  Ising3DCut.NecSuf.differingConstantCofinalSubsequences_noLimit
+  Ising3DCut.LimitQuantity.residue_class_values_differ_no_limit_quantity_fromNecSuf
   Ising3DCut.Prediction.encodedEvenSubgraph_encodePeriodicSquareMatching_subset
   Ising3DCut.Prediction.latticeEndpoint₀_ne_latticeEndpoint₁
   Ising3DCut.Prediction.encodePeriodicSquareExternalEdges_not_mem_internalEdges
