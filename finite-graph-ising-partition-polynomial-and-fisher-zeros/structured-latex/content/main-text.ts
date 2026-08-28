@@ -6055,7 +6055,8 @@ S_{G,3}(a)
 \frac{C_G(a)}{\overline P_G(a)}
 -\left(\frac{A_G(a)}{\overline P_G(a)}\right)^3
 +q_3\frac{A_G(a)}{\overline P_G(a)}S_{G,2}(a)
-\quad\bigl(\because\ \text{直前の等式を代入する}\bigr).`),
+\quad\biggl(\because\ \mathcal R_G(a)=\frac{A_G(a)}{\overline P_G(a)}
+\text{ を代入する}\biggr).`),
       paragraph([ref("theorem_fisher_zero_algebraic_shifted_reciprocal_square_sum_coefficient_ratio"), " より、"]),
       displayMath(String.raw`S_{G,2}(a)
 =
@@ -6067,7 +6068,9 @@ S_{G,3}(a)
 -\left(\frac{A_G(a)}{\overline P_G(a)}\right)^3
 +q_3\frac{A_G(a)}{\overline P_G(a)}
 \frac{A_G(a)^2-\overline P_G(a)B_G(a)}{\overline P_G(a)^2}
-\quad\bigl(\because\ \text{直前の等式を代入する}\bigr).`),
+\quad\biggl(\because\ S_{G,2}(a)
+=\frac{A_G(a)^2-\overline P_G(a)B_G(a)}{\overline P_G(a)^2}
+\text{ を代入する}\biggr).`),
       displayMath(String.raw`q_2S_{G,3}(a)
 =
 \frac{C_G(a)}{\overline P_G(a)}
@@ -6096,7 +6099,9 @@ S_{G,3}(a)
 }{
   \overline P_G(a)^3
 }
-\quad\bigl(\because\ \text{直前の非零な }\overline P_G(a)^2\text{ を第一項の分母と分子へ掛ける}\bigr).`),
+\quad\biggl(\because\ \overline P_G(a)^2\ne0\text{ より、第一項へ }
+\frac{\overline P_G(a)^2}{\overline P_G(a)^2}=1_{\overline{\mathbb Q}}
+\text{ を掛ける}\biggr).`),
       displayMath(String.raw`q_2S_{G,3}(a)
 =
 \frac{
