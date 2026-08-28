@@ -1109,4 +1109,25 @@ theorem periodicSquareFiberInternalEdgesAt_mem_pairingsAt
   (mem_periodicSquarePairingsAt_iff subgraph v _).mpr
     (periodicSquareFiberInternalEdgesAt_isPairing hn subgraph hmatching v)
 
+/-- 復号繊維の一つの完全マッチングを、各 city の残存端子の対分けへ送る写像。
+値が各 city の対分けの全体に属することは、直前の定理が保証する。 -/
+noncomputable def periodicSquareFiberToPairingsProduct
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    {matching // matching ∈ periodicSquareDecodingFiber subgraph} →
+      (v : LatticeVertex n) →
+        {pairing // pairing ∈ periodicSquarePairingsAt subgraph v} :=
+  fun matching v ↦
+    ⟨periodicSquareFiberInternalEdgesAt matching.1 v,
+      periodicSquareFiberInternalEdgesAt_mem_pairingsAt hn subgraph matching.2 v⟩
+
+/-- 復号繊維から city ごとの対分けへの写像の `v` 成分は、元の完全マッチングを
+city `v` の内部辺へ制限したものである。 -/
+theorem periodicSquareFiberToPairingsProduct_apply
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    (matching : {matching // matching ∈ periodicSquareDecodingFiber subgraph})
+    (v : LatticeVertex n) :
+    (periodicSquareFiberToPairingsProduct hn subgraph matching v).1 =
+      periodicSquareFiberInternalEdgesAt matching.1 v :=
+  rfl
+
 end Ising3DCut.Prediction
