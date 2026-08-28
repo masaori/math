@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 10:32: 本流 `claim_residue_class_values_differ_no_limit_quantity` の SageMath 層を追加した。二つの剰余類部分列が相異なる有理数の定数列になることと、その二定数の共通極限を排除する互いに交わらない有理数近傍を `ZZ` と `QQ` で検査して全 PASS。次は Lean 具体版。
+
 - 2026-08-28 10:06（並行・最新）: 復号→復元の逆向きの包含 `subset_encodedEvenSubgraph_encodePeriodicSquareMatching` を Lean で閉じ、外部辺の単射性と、任意の元の辺について外部辺が city 内部辺になりえないことを一般形で示した。これで復元と復号は互いに逆である。sorry 非依存検査 661 件。次は偶部分グラフと完全マッチングの個数の一致（全単射）を述べる。
 
 - 2026-08-28 10:02: 本流をゴール文書へ引き直し、「剰余類ごとの値が食い違うなら極限量は存在しない」の記述層を追加した（`claim_residue_class_values_differ_no_limit_quantity` と `remark_eventually_periodic_limit_quantity_reduces_to_one`）。収束列の部分列が同じ極限へ収束すること、定数列の極限がその定数であること、ℝ の極限の一意性だけから、剰余類ごとの定数値が二つ相異なれば矛盾が出る。これで末尾周期性から極限量の存在を得られる正の有理点は 1 だけに確定した。次は同主張の SageMath 検証。
