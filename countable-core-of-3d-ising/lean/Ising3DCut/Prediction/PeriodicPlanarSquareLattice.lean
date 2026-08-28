@@ -1208,4 +1208,55 @@ theorem filter_externalEdges_eq_of_mem_periodicSquareDecodingFiber
       (mem_externalEdges_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁ _).mpr
         ⟨e, Finset.mem_univ e, rfl⟩⟩
 
+/-- 復号繊維から city ごとの対分けの直積への写像は単射である。像が一致すれば、
+内部辺の側は各 city の制限の合併として復元でき（第一段）、外部辺の側は共通の
+復号値から一意に定まる（第二段）。完全マッチングの辺はいずれか一方なので、
+二つの完全マッチングは一致する。全単射性の主張のうち単射性を閉じたものである。 -/
+theorem periodicSquareFiberToPairingsProduct_injective
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    Function.Injective (periodicSquareFiberToPairingsProduct hn subgraph) := by
+  classical
+  rintro ⟨m₁, hm₁⟩ ⟨m₂, hm₂⟩ h
+  have hInternalAt : ∀ v : LatticeVertex n,
+      periodicSquareFiberInternalEdgesAt m₁ v = periodicSquareFiberInternalEdgesAt m₂ v := by
+    intro v
+    have hv := congrFun h v
+    simpa [periodicSquareFiberToPairingsProduct, Subtype.ext_iff] using hv
+  have hIn : m₁.filter (fun s ↦ s ∈ internalEdges Finset.univ latticeIncidentEdges)
+      = m₂.filter (fun s ↦ s ∈ internalEdges Finset.univ latticeIncidentEdges) := by
+    rw [filter_internalEdges_eq_biUnion_periodicSquareFiberInternalEdgesAt,
+      filter_internalEdges_eq_biUnion_periodicSquareFiberInternalEdgesAt]
+    exact Finset.biUnion_congr rfl (fun v _ => hInternalAt v)
+  have hOut := filter_externalEdges_eq_of_mem_periodicSquareDecodingFiber subgraph hm₁ hm₂
+  have hsub : ∀ {m : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))},
+      m ∈ periodicSquareDecodingFiber subgraph → ∀ s ∈ m,
+        s ∈ internalEdges Finset.univ latticeIncidentEdges ∨
+          s ∈ externalEdges Finset.univ latticeEndpoint₀ latticeEndpoint₁ := by
+    intro m hm s hs
+    simp only [periodicSquareDecodingFiber, Finset.mem_filter, Finset.mem_univ,
+      true_and] at hm
+    exact (mem_terminalEdges_iff Finset.univ Finset.univ latticeIncidentEdges
+      latticeEndpoint₀ latticeEndpoint₁ s).mp (hm.1.1 hs)
+  refine Subtype.ext ?_
+  ext s
+  constructor
+  · intro hs
+    rcases hsub hm₁ s hs with hint | hext
+    · have : s ∈ m₂.filter (fun s ↦ s ∈ internalEdges Finset.univ latticeIncidentEdges) := by
+        rw [← hIn]; exact Finset.mem_filter.mpr ⟨hs, hint⟩
+      exact (Finset.mem_filter.mp this).1
+    · have : s ∈ m₂.filter
+          (fun s ↦ s ∈ externalEdges Finset.univ latticeEndpoint₀ latticeEndpoint₁) := by
+        rw [← hOut]; exact Finset.mem_filter.mpr ⟨hs, hext⟩
+      exact (Finset.mem_filter.mp this).1
+  · intro hs
+    rcases hsub hm₂ s hs with hint | hext
+    · have : s ∈ m₁.filter (fun s ↦ s ∈ internalEdges Finset.univ latticeIncidentEdges) := by
+        rw [hIn]; exact Finset.mem_filter.mpr ⟨hs, hint⟩
+      exact (Finset.mem_filter.mp this).1
+    · have : s ∈ m₁.filter
+          (fun s ↦ s ∈ externalEdges Finset.univ latticeEndpoint₀ latticeEndpoint₁) := by
+        rw [hOut]; exact Finset.mem_filter.mpr ⟨hs, hext⟩
+      exact (Finset.mem_filter.mp this).1
+
 end Ising3DCut.Prediction
