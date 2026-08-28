@@ -1071,4 +1071,42 @@ theorem periodicSquareFiberInternalEdgesAt_isPairing
         latticeEndpoint₀ latticeEndpoint₁)
       matching hsData.1 htData.1 hst hxTerminal hxs hxt
 
+/-- city `v` の残存端子の対分けの全体。二元集合からなり、互いに素で、合併が
+残存端子全体に一致するような有限族を集めた有限集合である。繊維を city ごとの
+対分けの直積へ写す際の、行き先の側を与える。 -/
+noncomputable def periodicSquarePairingsAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    Finset (Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))) := by
+  classical
+  exact Finset.univ.filter fun pairing ↦
+    (∀ s ∈ pairing, s.card = 2) ∧
+      (pairing : Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id ∧
+      pairing.biUnion id = encodePeriodicSquareRemainingTerminalsAt subgraph v
+
+/-- 対分けの全体に属することの言い換え。 -/
+theorem mem_periodicSquarePairingsAt_iff
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n)
+    (pairing : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))) :
+    pairing ∈ periodicSquarePairingsAt subgraph v ↔
+      (∀ s ∈ pairing, s.card = 2) ∧
+        (pairing : Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id ∧
+        pairing.biUnion id = encodePeriodicSquareRemainingTerminalsAt subgraph v := by
+  classical
+  simp [periodicSquarePairingsAt]
+
+/-- 復号繊維の完全マッチングを city `v` へ制限したものは、その city の対分けの
+全体に属する。`periodicSquareFiberInternalEdgesAt_isPairing` の三条件を、
+対分けの全体の定義へそのまま移したものである。 -/
+theorem periodicSquareFiberInternalEdgesAt_mem_pairingsAt
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    {matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))}
+    (hmatching : matching ∈ periodicSquareDecodingFiber subgraph)
+    (v : LatticeVertex n) :
+    periodicSquareFiberInternalEdgesAt matching v ∈
+      periodicSquarePairingsAt subgraph v :=
+  (mem_periodicSquarePairingsAt_iff subgraph v _).mpr
+    (periodicSquareFiberInternalEdgesAt_isPairing hn subgraph hmatching v)
+
 end Ising3DCut.Prediction
