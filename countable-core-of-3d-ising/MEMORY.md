@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 13:36（並行）: 復号後の再復元が元の完全マッチングへ戻るという候補を落とした。`encodePeriodicSquareInternalEdgesAt` は存在定理から city 内部完全被覆を `Classical.choose` で一つ選ぶため、復号で失われた内部マッチングの選択を復元できない。次は全単射ではなく、復号写像の繊維を city ごとの内部完全被覆の個数で数える重み付き恒等式を標的にする。
+
 - 2026-08-28 13:33: 本流 `claim_eventually_periodic_limit_quantity_only_at_one` の Lean 必要十分版 `NecSuf.eventuallyPeriodicLimit_onlyTarget` と具体導出を追加し、四層を閉じた。必要なのは Hausdorff 位相空間に値を持つ自然数列、正の周期、剰余類ごとの定数性、各剰余類の添字列の共終性、列の極限、末尾定数性から対象を一意に定める分類だけである。次の本流はゴール文書から引き直す。
 
 - 2026-08-28 13:06: 本流 `claim_eventually_periodic_limit_quantity_only_at_one` の Lean 具体版 `lean/Ising3DCut/LimitQuantity/EventuallyPeriodicLimitQuantityOnlyAtOne.lean` を追加した。人手証明と同じく、剰余類ごとの定数値がすべて一致するか二つ相異なるかで場合を分け、相異なる側は `residue_class_values_differ_no_limit_quantity` で極限量の存在の仮定と矛盾させ、一致する側は `residue_class_values_agree_gives_eventually_constant` で末尾定数性へ落とした。末尾定数となる正の有理点が 1 に限られることは、人手証明が既出の主張を引用しているのと 1 対 1 に対応させて仮定 `heventuallyConstantOnlyAtOne` として受け取る（Lean 側では有限箱値の有理数表示を経由する別系統で既に閉じている）。`lake build` 8972 ジョブ成功、sorry 非依存検査 668 件、`npm run check` 参照 444 件、linkage 102 件。次は同主張の Lean 必要十分版。
