@@ -1158,4 +1158,54 @@ theorem filter_internalEdges_eq_biUnion_periodicSquareFiberInternalEdgesAt
       (mem_internalEdges_iff Finset.univ latticeIncidentEdges s).mpr
         ⟨v, Finset.mem_univ v, hsAt⟩⟩
 
+/-- 同じ偶部分グラフへ復号される二つの完全マッチングでは、外部辺の部分が一致する。
+外部辺がマッチングに選ばれないことと、対応する元の辺が復号後の偶部分グラフに
+属することが同値なので、共通の復号値が外部辺の側を一意に定める。繊維から city
+ごとの対分けの直積への写像が単射であることを示す第二段である。 -/
+theorem filter_externalEdges_eq_of_mem_periodicSquareDecodingFiber
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    {matching₁ matching₂ : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))}
+    (hmatching₁ : matching₁ ∈ periodicSquareDecodingFiber subgraph)
+    (hmatching₂ : matching₂ ∈ periodicSquareDecodingFiber subgraph) :
+    matching₁.filter (fun s ↦ s ∈ externalEdges Finset.univ latticeEndpoint₀ latticeEndpoint₁) =
+      matching₂.filter (fun s ↦ s ∈ externalEdges Finset.univ latticeEndpoint₀ latticeEndpoint₁) := by
+  classical
+  simp only [periodicSquareDecodingFiber, Finset.mem_filter, Finset.mem_univ,
+    true_and] at hmatching₁ hmatching₂
+  ext s
+  simp only [Finset.mem_filter]
+  constructor
+  · rintro ⟨hsMatching₁, hsExternal⟩
+    obtain ⟨e, -, rfl⟩ :=
+      (mem_externalEdges_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁ s).mp hsExternal
+    have heDecoded : e ∉ subgraph.1 := by
+      rw [← hmatching₁.2]
+      exact fun he ↦ ((mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀
+        latticeEndpoint₁ matching₁ e).mp he).2 hsMatching₁
+    have hsMatching₂ : externalEdge latticeEndpoint₀ latticeEndpoint₁ e ∈ matching₂ := by
+      by_contra hnot
+      have he : e ∈ encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁ matching₂ :=
+        (mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁
+          matching₂ e).mpr ⟨Finset.mem_univ e, hnot⟩
+      exact heDecoded (hmatching₂.2 ▸ he)
+    exact ⟨hsMatching₂,
+      (mem_externalEdges_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁ _).mpr
+        ⟨e, Finset.mem_univ e, rfl⟩⟩
+  · rintro ⟨hsMatching₂, hsExternal⟩
+    obtain ⟨e, -, rfl⟩ :=
+      (mem_externalEdges_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁ s).mp hsExternal
+    have heDecoded : e ∉ subgraph.1 := by
+      rw [← hmatching₂.2]
+      exact fun he ↦ ((mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀
+        latticeEndpoint₁ matching₂ e).mp he).2 hsMatching₂
+    have hsMatching₁ : externalEdge latticeEndpoint₀ latticeEndpoint₁ e ∈ matching₁ := by
+      by_contra hnot
+      have he : e ∈ encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁ matching₁ :=
+        (mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁
+          matching₁ e).mpr ⟨Finset.mem_univ e, hnot⟩
+      exact heDecoded (hmatching₁.2 ▸ he)
+    exact ⟨hsMatching₁,
+      (mem_externalEdges_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁ _).mpr
+        ⟨e, Finset.mem_univ e, rfl⟩⟩
+
 end Ising3DCut.Prediction

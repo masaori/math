@@ -760,6 +760,7 @@ targets=(
   Ising3DCut.Prediction.periodicSquareFiberInternalEdgesAt_mem_pairingsAt
   Ising3DCut.Prediction.periodicSquareFiberToPairingsProduct_apply
   Ising3DCut.Prediction.filter_internalEdges_eq_biUnion_periodicSquareFiberInternalEdgesAt
+  Ising3DCut.Prediction.filter_externalEdges_eq_of_mem_periodicSquareDecodingFiber
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
