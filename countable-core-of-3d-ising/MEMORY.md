@@ -1,4 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-28 23:03（本流）: `claim_second_limit_quantity_candidate_has_infinite_range` の Lean 必要十分版 `NecSuf.infiniteRange_of_ne_target` と具体導出 `second_limit_quantity_candidate_has_infinite_range_fromNecSuf` を追加し、四層を閉じた。仮定は Hausdorff 位相空間に値をとる自然数列、極限の存在、末尾定数性が対象を一意に定めること、対象と異なることだけである。`T2Space` は直前の必要十分版が有限値域から末尾定数性を得るために残した。lake build 8983 ジョブ成功、sorry 非依存検査 687 件。次の本流はゴール文書へ戻って標的を引き直す。
+
 - 2026-08-28 22:30（本流）: `claim_second_limit_quantity_candidate_has_infinite_range` の Lean 具体版 `second_limit_quantity_candidate_has_infinite_range` を追加した。値域の有限性を仮定し、既存の `finite_range_limit_quantity_only_at_one` から $q=1$ を得て $q\ne1$ に反する対偶一段である。lake build 成功、sorry 非依存検査 685 件。次は同主張の Lean 必要十分版。
 
 - 2026-08-28 19:05（並行）: `disjoint_periodicSquareFiberInternalEdgesAt` を追加し、city ごとに取り出した内部辺の集合が相異なる city の間で互いに素であることを閉じた。内部辺の端子の第一成分がその city を一意に定めることによる。lake build 成功、sorry 非依存検査 684 件。次は各成分がその city の残存端子を完全被覆することを示す。
