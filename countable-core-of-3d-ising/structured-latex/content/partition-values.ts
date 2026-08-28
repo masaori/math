@@ -12383,6 +12383,49 @@ c_t&=\alpha(q) &&(\because\ \mathbb R\ \text{の極限の一意性})
     ],
   },
   {
+    id: "soundness_bridge_claim_tail_cross_power_failure_not_sufficient_for_limit_quantity",
+    kind: "claim",
+    title: { text: "どの閾値の先にもある交差冪等式の破れだけでは極限量の存在を保証しない" },
+    labels: ["claim_tail_cross_power_failure_not_sufficient_for_limit_quantity"],
+    habitat: "R",
+    realEscape:
+      "箱の大きさで添字づけた列が極限を持たないことを述べるため、箱の大きさの極限だけを参照する。構成する有限箱値と交差冪等式の破れは正の有理数の有限乗だけで書く。",
+    statement: [
+      paragraph([
+        "任意の ", math(String.raw`L\ge1`), " に対して正の有理数 ", math(String.raw`c_L`), " と ",
+        math(String.raw`A_L`), " を",
+      ]),
+      displayMath(String.raw`c_L:=\begin{cases}1&(L\text{ が偶数}),\\2&(L\text{ が奇数}),\end{cases}\qquad A_L:=c_L^{L^3}`),
+      paragraph([
+        "と定める。このとき、任意の ", math(String.raw`K\in\mathbb N`), " に対して ",
+        math(String.raw`L,M\ge\max\{K,1\}`), " かつ ",
+        math(String.raw`A_L^{M^3}\ne A_M^{L^3}`),
+        " となる二つの箱幅が存在するが、列 ", math(String.raw`L\mapsto c_L`),
+        " は極限を持たない。したがって、直前の探索条件（",
+        ref("claim_second_limit_candidate_has_tail_cross_power_failure"),
+        "）は第二候補に必要だが、それだけでは極限量の存在に十分でない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`N:=\max\{K,1\}`), " とおく。", math(String.raw`N`),
+        " が偶数なら ", math(String.raw`L:=N`), "、奇数なら ", math(String.raw`L:=N+1`),
+        " とおき、", math(String.raw`M:=L+1`), " とおく。このとき ",
+        math(String.raw`L,M\ge\max\{K,1\}`), "、", math(String.raw`L`), " は偶数、",
+        math(String.raw`M`), " は奇数である。",
+      ]),
+      displayMath(String.raw`A_L^{M^3}=(1^{L^3})^{M^3}=1`),
+      displayMath(String.raw`A_M^{L^3}=(2^{M^3})^{L^3}=2^{L^3M^3}>1`),
+      paragraph([
+        "よって ", math(String.raw`A_L^{M^3}\ne A_M^{L^3}`), " である。一方、偶数の箱幅に沿う部分列 ",
+        math(String.raw`c_{2n}`), " は定数 ", math(String.raw`1`), "、奇数の箱幅に沿う部分列 ",
+        math(String.raw`c_{2n+1}`), " は定数 ", math(String.raw`2`),
+        " である。二つの部分列の極限が相異なるので、列 ", math(String.raw`L\mapsto c_L`),
+        " は極限を持たない。",
+      ]),
+    ],
+  },
+  {
     id: "soundness_bridge_remark_eventually_periodic_limit_quantity_reduces_to_one",
     kind: "remark",
     title: { text: "末尾周期性で極限量を持つ正の有理点は 1 に限られる" },

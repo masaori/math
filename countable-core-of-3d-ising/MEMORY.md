@@ -1,4 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 01:32（本流）: `claim_tail_cross_power_failure_not_sufficient_for_limit_quantity` を記述した。箱幅の偶奇で正の有理数列を一と二に交互化すると、任意の閾値の先に交差冪等式の破れがあるが極限は存在しない。したがって直前の探索条件は必要条件に留まり、実際の Ising 有限箱データから第二候補を得るには模型固有の追加条件が要る。次は SageMath 検証。
+
 - 2026-08-29 01:06（並行）: 完全被覆の等式の束ね先を定義から確定した。相手は city の端子全体ではなく残存端子である（残存端子＝対応する元の辺が polygon に属する端子、polygon 所属＝外部辺が未選択）。前 tick の見立ては誤りなので撤回した。次は `内部辺成分の合併 ⊆ 残存端子` を Lean で示して等式にする。
 
 - 2026-08-29 01:03（本流）: `claim_second_limit_candidate_has_tail_cross_power_failure` の Lean 必要十分版 `NecSuf.exists_pair_not_related_of_infinite_range`（補助に `eq_of_forall_related_of_ge` と `finite_range_of_eventually_constant`）と具体導出 `second_limit_candidate_has_tail_cross_power_failure_fromNecSuf` を追加し、四層を閉じた。必要十分版が使うのは、自然数で添字づけられた列、閾値以後の対で関係が値の一致を導くこと、値域が有限でないことだけで、実数・極限・分配多項式・乗根は要らない。lake build 成功、sorry 非依存検査 694 件。次の本流はゴール文書へ戻って標的を引き直す。
