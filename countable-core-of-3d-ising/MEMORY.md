@@ -1,4 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 00:34（本流）: `claim_second_limit_candidate_has_tail_cross_power_failure` の Lean 具体版 `second_limit_candidate_has_tail_cross_power_failure` を追加した。ある閾値以後の全二箱で交差冪等式が成り立つという反対仮定から、正の乗根の一意性で有限箱量の列を末尾定数にし、値域を閾値未満の有限個と末尾の一値へ分けて有限性を示し、既出の無限値域に反した。次は同主張の Lean 必要十分版。
+
 - 2026-08-29 00:02（本流）: `claim_second_limit_candidate_has_tail_cross_power_failure` の SageMath 層を `sagemath/check/second-limit-candidate-has-tail-cross-power-failure/` に置き、二検査とも PASS。閾値 $K=0,1$ について交差冪等式を破る二箱の組 $(1,2)$ が有理点 1 以外の八標本で実在すること（主張が空虚でないこと）と、有理点 1 では同じ組に破れが無いこと（仮定 $q\ne1$ の必要性）を、根を作らず有理数の等式だけで検査した。`npm run check` 202 ブロック・175 ラベル・参照 453 件、linkage 106 件。次はこの主張の Lean 具体版。
 
 - 2026-08-28 23:36（並行）: 復号繊維の完全マッチングについて、各 city の残存端子がその city の内部辺成分にすべて覆われる包含を Lean で閉じた。次は直前の逆包含と束ねて完全被覆の等式にする。

@@ -730,6 +730,7 @@ targets=(
   Ising3DCut.LimitQuantity.second_limit_quantity_candidate_has_infinite_range
   Ising3DCut.NecSuf.infiniteRange_of_ne_target
   Ising3DCut.LimitQuantity.second_limit_quantity_candidate_has_infinite_range_fromNecSuf
+  Ising3DCut.LimitQuantity.second_limit_candidate_has_tail_cross_power_failure
   Ising3DCut.Prediction.encodedEvenSubgraph_encodePeriodicSquareMatching_subset
   Ising3DCut.Prediction.latticeEndpoint₀_ne_latticeEndpoint₁
   Ising3DCut.Prediction.encodePeriodicSquareExternalEdges_not_mem_internalEdges
