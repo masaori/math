@@ -111,11 +111,32 @@ for first_coefficients, second_coefficients in coefficient_pairs:
     )
     assert distributed_additive_terms == separated_positive_degrees
 
+    split_monomial_powers = sum(
+        (
+            first_coefficients[first_degree]
+            * QQbar(QQ(first_degree))
+            * x^(first_degree - 1)
+        )
+        * (second_coefficients[second_degree] * x^second_degree)
+        for first_degree in range(1, len(first_coefficients))
+        for second_degree in range(len(second_coefficients))
+    ) + sum(
+        (first_coefficients[first_degree] * x^first_degree)
+        * (
+            second_coefficients[second_degree]
+            * QQbar(QQ(second_degree))
+            * x^(second_degree - 1)
+        )
+        for first_degree in range(len(first_coefficients))
+        for second_degree in range(1, len(second_coefficients))
+    )
+    assert separated_positive_degrees == split_monomial_powers
+
     factored_finite_sums = (
         derivative_from_coefficients(first_coefficients) * second_polynomial
         + first_polynomial * derivative_from_coefficients(second_coefficients)
     )
-    assert separated_positive_degrees == factored_finite_sums
+    assert split_monomial_powers == factored_finite_sums
     assert factored_finite_sums == (
         first_polynomial.derivative() * second_polynomial
         + first_polynomial * second_polynomial.derivative()

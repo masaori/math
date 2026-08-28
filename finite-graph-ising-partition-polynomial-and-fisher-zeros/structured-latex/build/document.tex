@@ -5012,6 +5012,29 @@ g=\sum_{j=0}^{m}b_j x^j
 \[
         D(fg)
         =
+        \sum_{i=1}^{n}\sum_{j=0}^{m}
+        \left(
+          a_i\,
+          \iota_{\mathbb Q,\overline{\mathbb Q}}
+          \!\left(\eta_{\mathbb N,\mathbb Q}(i)\right)
+          x^{i-1}
+        \right)
+        \left(b_jx^j\right)
+        +
+        \sum_{i=0}^{n}\sum_{j=1}^{m}
+        \left(a_ix^i\right)
+        \left(
+          b_j\,
+          \iota_{\mathbb Q,\overline{\mathbb Q}}
+          \!\left(\eta_{\mathbb N,\mathbb Q}(j)\right)
+          x^{j-1}
+        \right)
+        \quad
+        \bigl(\because\ x^{i+j-1}=x^{i-1}x^j\text{ および }x^{i+j-1}=x^ix^{j-1}\bigr).
+      \]
+\[
+        D(fg)
+        =
         \left(
           \sum_{i=1}^{n}
           a_i\,
