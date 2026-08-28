@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 02:02（本流）: 「どの閾値の先にも交差冪等式の破れがある」だけでは極限量の存在に十分でないという主張の SageMath 検証を追加した（`sagemath/check/tail-cross-power-failure-not-sufficient-for-limit-quantity/`、全 5 段 PASS）。台帳の当該セクションは「記述と SageMath まで」。次は Lean 具体版。
 - 2026-08-29 01:35（並行）: `biUnion_periodicSquareFiberInternalEdgesAt_subset_remainingTerminalsAt` を追加した。city の内部辺成分が覆う端子では対応する外部辺が完全マッチングに選ばれないため、復号後の偶部分グラフに属し、残存端子への包含が成り立つ。次は逆包含と束ねて等式にする。
 
 - 2026-08-29 01:32（本流）: `claim_tail_cross_power_failure_not_sufficient_for_limit_quantity` を記述した。箱幅の偶奇で正の有理数列を一と二に交互化すると、任意の閾値の先に交差冪等式の破れがあるが極限は存在しない。したがって直前の探索条件は必要条件に留まり、実際の Ising 有限箱データから第二候補を得るには模型固有の追加条件が要る。次は SageMath 検証。
