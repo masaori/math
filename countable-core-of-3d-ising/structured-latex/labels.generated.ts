@@ -47,6 +47,7 @@ export const ALL_LABELS = [
   "claim_finite_prime_truncation_has_a_value_collision",
   "claim_finitely_many_cross_power_equalities_are_not_sufficient_for_limit_quantity",
   "claim_finitely_many_primes_are_not_sufficient_for_limit_quantity",
+  "claim_finitely_many_values_gives_eventually_constant",
   "claim_full_boundary_response_common_outer_box_comparison",
   "claim_full_boundary_response_degree_at_most_one",
   "claim_full_boundary_response_degree_exactly_one",
