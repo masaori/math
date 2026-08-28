@@ -899,4 +899,19 @@ theorem disjoint_periodicSquareFiberInternalEdgesAt
     (terminal_of_mem_internalEdgeAt latticeIncidentEdges w s hw t ht).1
   exact hvw (htv.symm.trans htw)
 
+/-- city ごとに取り出した内部辺が覆う端子は、すべてその city の端子である。
+完全被覆の主張のうち、覆う側が city の外へはみ出さないことを述べる一方の包含である。
+内部辺の端子はその city の端子だけからなることによる。 -/
+theorem biUnion_periodicSquareFiberInternalEdgesAt_subset_terminalsAt
+    {n : ℕ} [NeZero n]
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)))
+    (v : LatticeVertex n) :
+    (periodicSquareFiberInternalEdgesAt matching v).biUnion id ⊆
+      terminalsAt latticeIncidentEdges v := by
+  classical
+  intro t ht
+  obtain ⟨s, hs, hts⟩ := Finset.mem_biUnion.mp ht
+  have hsInternal := ((mem_periodicSquareFiberInternalEdgesAt_iff matching v s).mp hs).2
+  exact ((mem_internalEdgesAt_iff latticeIncidentEdges v s).mp hsInternal).1 hts
+
 end Ising3DCut.Prediction
