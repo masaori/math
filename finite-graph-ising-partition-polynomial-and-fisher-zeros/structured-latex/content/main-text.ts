@@ -5583,6 +5583,17 @@ a^{m-3}
 =\sum_{m=3}^{|E|}\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(m(m-1)(m-2)\Omega_G(m)))a^{m-3}
 \text{ と }\sum_{m=3}^{|E|}\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(m(m-1)(m-2)\Omega_G(m)))a^{m-3}=C_G(a)\bigr).`),
       paragraph([
+        "以下、",
+        math(String.raw`\overline{\mathbb Q}[x]`),
+        "内の有限積の添字集合が空なら、その値を乗法単位元",
+        math(String.raw`1_{\overline{\mathbb Q}[x]}`),
+        "とし、評価後の",
+        math(String.raw`\overline{\mathbb Q}`),
+        "内の有限積の添字集合が空なら、その値を乗法単位元",
+        math(String.raw`1_{\overline{\mathbb Q}}`),
+        "とする。",
+      ]),
+      paragraph([
         ref("theorem_partition_polynomial_degree_maximum_broken_edge_count"),
         " と",
         ref("claim_partition_polynomial_coefficient_expansion"),
