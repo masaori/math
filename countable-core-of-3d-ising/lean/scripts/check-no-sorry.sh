@@ -360,6 +360,7 @@ targets=(
   Ising3DCut.LimitQuantity.eq_posRoot_of_pow_eq
   Ising3DCut.LimitQuantity.posRoot_congr
   Ising3DCut.LimitQuantity.cross_power_equality_implies_posRoot_equality
+  Ising3DCut.LimitQuantity.posRoot_equality_implies_cross_power_equality
   Ising3DCut.LimitQuantity.pointwise_cross_power_equality_implies_root_sequence_equality
   Ising3DCut.LimitQuantity.cross_power_equality_is_sufficient_for_limit_quantity
   Ising3DCut.LimitQuantity.cross_power_equality_is_sufficient_for_limit_quantity_abstract

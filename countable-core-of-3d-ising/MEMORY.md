@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 09:03: 本流 `claim_root_equality_implies_cross_power_equality` の Lean 具体版 `Ising3DCut.LimitQuantity.posRoot_equality_implies_cross_power_equality` を追加した。`x := posRoot A N` と置き、仮定の乗根一致から `x^M = B` を取り、`A^M=(x^N)^M=x^{NM}=x^{MN}=(x^M)^N=B^N` の五つの等号を人手証明と同じ順で形式化した。`lake build` 8966 ジョブ成功、sorry 非依存検査 654 件。次は同主張の Lean 必要十分版。
+
 - 2026-08-28 08:34: 本流 `claim_root_equality_implies_cross_power_equality` の SageMath 層を追加した。`A^M=(x^N)^M=x^{NM}=x^{MN}=(x^M)^N=B^N` の五段を `QQ` と `ZZ` の厳密計算で一行ずつ全 PASS とし、検証対応は 100 件。次は同主張の Lean 具体版。
 
 - 2026-08-28 08:03: 本流をゴール文書へ引き直し、「剰余類ごとの値の一致は有限の有理数等式で判定できる」の記述層を追加した（`claim_root_equality_implies_cross_power_equality` と `remark_residue_class_values_agree_is_decidable`）。正の乗根の一致から交差べき等式が従い、既に閉じていた逆向きと合わせて同値になるので、二つの箱幅の量の一致は分配多項式の値の有限個の有理数等式で判定できる。次は同主張の SageMath 検証。
