@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 03:04（本流）: `NecSuf.cofinalPairFailure_of_divergentIndices`・`NecSuf.cofinalPairFailure_and_noLimit` と導出 `tail_cross_power_failure_not_sufficient_for_limit_quantity_viaNecSuf` を追加し、末尾の交差冪等式の破れだけでは極限量の存在を保証しないという主張の四層を閉じた。必要十分版が使うのは、限りなく大きくなる二つの添字列・各段での述語の破れ・二つの定数部分列の値の相違と Hausdorff 位相空間だけで、交差冪等式・乗根・偶奇・素数 2 は落ちた。lake build 成功、sorry 非依存検査 701 件。次はゴール文書へ戻って標的を引き直す。
 - 2026-08-29 02:34（本流）: `tail_cross_power_failure_not_sufficient_for_limit_quantity` を追加した。偶奇で交互化した有限箱値が任意の閾値以後に交差冪等式の破れを持つことと、対応する乗根列が相異なる二つの共終な定数部分列を持つため極限を持たないことを Lean 具体版で閉じた。次は同主張の Lean 必要十分版。
 - 2026-08-29 02:04（並行）: `biUnion_periodicSquareFiberInternalEdgesAt_eq_remainingTerminalsAt` を追加し、city の内部辺成分が覆う端子と残存端子の一致を等式で閉じた。次は繊維の個数を city ごとの積として数える恒等式へ接続する。
 - 2026-08-29 02:02（本流）: 「どの閾値の先にも交差冪等式の破れがある」だけでは極限量の存在に十分でないという主張の SageMath 検証を追加した（`sagemath/check/tail-cross-power-failure-not-sufficient-for-limit-quantity/`、全 5 段 PASS）。台帳の当該セクションは「記述と SageMath まで」。次は Lean 具体版。
