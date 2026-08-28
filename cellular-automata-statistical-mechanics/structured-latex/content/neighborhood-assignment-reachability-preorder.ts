@@ -146,7 +146,7 @@ v_0\neq v_1`),
       displayMath(String.raw`\begin{aligned}
 v_1&\in N_2(v_0)
   \qquad(\because\ \blkref{def_reachability_preorder_antisymmetry_counterexample})\\
-&\subseteq N_2^{*}(v_0)
+&\Longrightarrow v_1\in N_2^{*}(v_0)
   \qquad(\because\ \blkref{claim_reflexive_transitive_closure_contains_original})\\
 &\Longrightarrow v_0\preceq_{N_2}v_1
   \qquad(\because\ \blkref{def_neighborhood_reachability_preorder})
