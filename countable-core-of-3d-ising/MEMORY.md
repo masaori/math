@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 09:06（並行）: `latticeEndpoint₀_ne_latticeEndpoint₁`（$n\ge2$ で自己ループ無し）と `encodePeriodicSquareExternalEdges_not_mem_internalEdges` を追加し、外部辺が city 内部辺になりえないことを閉じた（sorry 非依存検査 656 件）。次は復号が元の偶部分グラフを含む逆向きの包含を示す。
+
 - 2026-08-28 09:03: 本流 `claim_root_equality_implies_cross_power_equality` の Lean 具体版 `Ising3DCut.LimitQuantity.posRoot_equality_implies_cross_power_equality` を追加した。`x := posRoot A N` と置き、仮定の乗根一致から `x^M = B` を取り、`A^M=(x^N)^M=x^{NM}=x^{MN}=(x^M)^N=B^N` の五つの等号を人手証明と同じ順で形式化した。`lake build` 8966 ジョブ成功、sorry 非依存検査 654 件。次は同主張の Lean 必要十分版。
 
 - 2026-08-28 08:34: 本流 `claim_root_equality_implies_cross_power_equality` の SageMath 層を追加した。`A^M=(x^N)^M=x^{NM}=x^{MN}=(x^M)^N=B^N` の五段を `QQ` と `ZZ` の厳密計算で一行ずつ全 PASS とし、検証対応は 100 件。次は同主張の Lean 具体版。

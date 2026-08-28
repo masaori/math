@@ -723,4 +723,42 @@ theorem encodedEvenSubgraph_encodePeriodicSquareMatching_subset
   rw [encodePeriodicSquareMatching, Finset.mem_union]
   exact Or.inr ((mem_encodePeriodicSquareExternalEdges_iff subgraph _).mpr ⟨e, hsub, rfl⟩)
 
+/-- 格子の辺には自己ループが無い（$n\ge2$）。第二の端点はどちらの向きでも
+座標を一つ進めるので、第一の端点と一致すれば `Fin n` で `1 = 0` になる。 -/
+theorem latticeEndpoint₀_ne_latticeEndpoint₁
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (e : LatticeEdge n) :
+    latticeEndpoint₀ e ≠ latticeEndpoint₁ e := by
+  have hone : (1 : Fin n) ≠ 0 := by
+    intro h
+    have : ((1 : Fin n) : ℕ) = ((0 : Fin n) : ℕ) := by rw [h]
+    rw [Fin.val_one', Fin.val_zero, Nat.mod_eq_of_lt hn] at this
+    exact one_ne_zero this
+  intro h
+  rw [latticeEndpoint₀, latticeEndpoint₁] at h
+  by_cases h0 : e.2 = 0
+  · rw [if_pos h0, Prod.ext_iff] at h
+    exact hone (by simpa using (add_eq_left.mp h.1.symm))
+  · rw [if_neg h0, Prod.ext_iff] at h
+    exact hone (by simpa using (add_eq_left.mp h.2.symm))
+
+/-- 復元用の外部辺は city 内部辺になりえない。内部辺の端子は第一成分がその city に
+等しいので、外部辺が内部辺なら二つの端点が一致し、自己ループが無いことに反する。
+これが復号の逆向きの包含で要る排他性である。 -/
+theorem encodePeriodicSquareExternalEdges_not_mem_internalEdges
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    {s : Finset (Σ _ : LatticeVertex n, LatticeEdge n)}
+    (hs : s ∈ encodePeriodicSquareExternalEdges subgraph) :
+    s ∉ internalEdges Finset.univ latticeIncidentEdges := by
+  obtain ⟨e, _, rfl⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph s).mp hs
+  intro hmem
+  obtain ⟨v, _, hv⟩ := (mem_internalEdges_iff Finset.univ latticeIncidentEdges _).mp hmem
+  have hsub := (mem_internalEdgesAt_iff latticeIncidentEdges v _).mp hv |>.1
+  have h₀ : (⟨latticeEndpoint₀ e, e⟩ : Σ _ : LatticeVertex n, LatticeEdge n) ∈
+      terminalsAt latticeIncidentEdges v := hsub (by simp [externalEdge])
+  have h₁ : (⟨latticeEndpoint₁ e, e⟩ : Σ _ : LatticeVertex n, LatticeEdge n) ∈
+      terminalsAt latticeIncidentEdges v := hsub (by simp [externalEdge])
+  have e₀ : latticeEndpoint₀ e = v := (mem_terminalsAt_iff latticeIncidentEdges v _).mp h₀ |>.1
+  have e₁ : latticeEndpoint₁ e = v := (mem_terminalsAt_iff latticeIncidentEdges v _).mp h₁ |>.1
+  exact latticeEndpoint₀_ne_latticeEndpoint₁ hn e (e₀.trans e₁.symm)
+
 end Ising3DCut.Prediction

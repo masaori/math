@@ -708,6 +708,8 @@ targets=(
   Ising3DCut.NecSuf.residueClassValuesAgree_givesEventuallyConstant
   Ising3DCut.LimitQuantity.residue_class_values_agree_gives_eventually_constant_fromNecSuf
   Ising3DCut.Prediction.encodedEvenSubgraph_encodePeriodicSquareMatching_subset
+  Ising3DCut.Prediction.latticeEndpoint₀_ne_latticeEndpoint₁
+  Ising3DCut.Prediction.encodePeriodicSquareExternalEdges_not_mem_internalEdges
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
