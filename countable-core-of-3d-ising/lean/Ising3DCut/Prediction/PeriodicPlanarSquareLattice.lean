@@ -1027,4 +1027,48 @@ theorem biUnion_periodicSquareFiberInternalEdgesAt_eq_remainingTerminalsAt
     (remainingTerminalsAt_subset_biUnion_periodicSquareFiberInternalEdgesAt
       subgraph hmatching v)
 
+/-- 復号繊維の完全マッチングを一つの city へ制限すると、残存端子を二元集合で
+重なりなくちょうど覆う対分けになる。繊維を city ごとの対分けの直積へ写す前段である。 -/
+theorem periodicSquareFiberInternalEdgesAt_isPairing
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    {matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))}
+    (hmatching : matching ∈ periodicSquareDecodingFiber subgraph)
+    (v : LatticeVertex n) :
+    (∀ s ∈ periodicSquareFiberInternalEdgesAt matching v, s.card = 2) ∧
+      (periodicSquareFiberInternalEdgesAt matching v :
+        Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id ∧
+      (periodicSquareFiberInternalEdgesAt matching v).biUnion id =
+        encodePeriodicSquareRemainingTerminalsAt subgraph v := by
+  classical
+  have hperfect : IsPerfectMatching
+      (terminalVertices Finset.univ latticeIncidentEdges)
+      (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁)
+      matching := by
+    have hm := hmatching
+    simp only [periodicSquareDecodingFiber, Finset.mem_filter, Finset.mem_univ,
+      true_and] at hm
+    exact hm.1
+  refine ⟨?_, ?_,
+    biUnion_periodicSquareFiberInternalEdgesAt_eq_remainingTerminalsAt
+      hn subgraph hmatching v⟩
+  · intro s hs
+    exact ((mem_internalEdgesAt_iff latticeIncidentEdges v s).mp
+      ((mem_periodicSquareFiberInternalEdgesAt_iff matching v s).mp hs).2).2
+  · intro s hs t ht hst
+    refine Finset.disjoint_left.mpr ?_
+    intro x hxs hxt
+    have hsData := (mem_periodicSquareFiberInternalEdgesAt_iff matching v s).mp hs
+    have htData := (mem_periodicSquareFiberInternalEdgesAt_iff matching v t).mp ht
+    have hxTerminal : x ∈ terminalVertices Finset.univ latticeIncidentEdges := by
+      rw [mem_terminalVertices_iff]
+      have hxCity := terminal_of_mem_internalEdgeAt latticeIncidentEdges v s
+        hsData.2 x hxs
+      exact ⟨Finset.mem_univ _, hxCity.2⟩
+    exact hperfect.not_mem_of_mem_of_ne
+      (terminalVertices Finset.univ latticeIncidentEdges)
+      (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁)
+      matching hsData.1 htData.1 hst hxTerminal hxs hxt
+
 end Ising3DCut.Prediction
