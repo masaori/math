@@ -5217,7 +5217,10 @@ S_{G,2}(a)
     title: { text: "一般有限グラフの代数的評価点における Fisher 零点差の逆三乗和と係数表示" },
     labels: ["theorem_fisher_zero_algebraic_shifted_reciprocal_cube_sum_coefficient_ratio"],
     habitat: "Qbar",
-    verification: ["sagemath/check/fisher-zero-algebraic-shifted-reciprocal-cube-sum-coefficient-ratio"],
+    verification: [
+      "sagemath/check/fisher-zero-algebraic-shifted-reciprocal-cube-sum-coefficient-ratio",
+      "sagemath/check/fisher-zero-algebraic-shifted-reciprocal-cube-sum-formal-derivative-linearity",
+    ],
     statement: [
       paragraph([
         ref("def_finite_graph_input"),
