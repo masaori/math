@@ -856,4 +856,24 @@ theorem encodePeriodicSquareMatching_mem_decodingFiber
   exact ⟨encodePeriodicSquareMatching_isPerfectMatching subgraph,
     encodedEvenSubgraph_encodePeriodicSquareMatching hn subgraph⟩
 
+/-- 復号繊維の完全マッチングから、一つの city に属する内部辺だけを取り出す。
+繊維の元を city ごとの内部完全被覆の族へ分解する写像の各成分である。 -/
+noncomputable def periodicSquareFiberInternalEdgesAt
+    {n : ℕ} [NeZero n]
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)))
+    (v : LatticeVertex n) :
+    Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) := by
+  classical
+  exact matching.filter fun s ↦ s ∈ internalEdgesAt latticeIncidentEdges v
+
+/-- city ごとに取り出した辺は、元の完全マッチングとその city の内部辺集合の双方に属する。 -/
+theorem mem_periodicSquareFiberInternalEdgesAt_iff
+    {n : ℕ} [NeZero n]
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)))
+    (v : LatticeVertex n)
+    (s : Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :
+    s ∈ periodicSquareFiberInternalEdgesAt matching v ↔
+      s ∈ matching ∧ s ∈ internalEdgesAt latticeIncidentEdges v := by
+  simp [periodicSquareFiberInternalEdgesAt]
+
 end Ising3DCut.Prediction
