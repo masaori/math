@@ -39,6 +39,7 @@
 | `check_evaluated_factorization_nonzero.sage` | 非零評価値を一次因子分解の評価式へ移した積の非零性 | PASS | 全ての非零評価で最高次係数像と零点差積の積が非零 |
 | `check_root_difference_product_nonzero.sage` | 非零な最高次係数像との積から零点差積の非零性を導く一行 | PASS | 全ての非零な評価済み因子分解で零点差積が非零 |
 | `check_root_differences_nonzero.sage` | 非零な零点差積から各零点差の非零性を導く一行 | PASS | 全ての非零な零点差積で各因子が非零 |
+| `check_local_reciprocal_quantities_well_defined.sage` | 局所逆数和の `QQbar` 内 well-defined 性 | PASS | 全ての非零評価で各零点差が非零であり、六つの局所有限和が `QQbar` に所属 |
 | `check_substitute_third_derivative_numerator.sage` | 三回形式微分比の分子へ一次因子積の三回形式微分式を代入 | PASS | 全ての非零評価で代入前後が一致 |
 | `check_substitute_factorization_denominator.sage` | 三回形式微分比の分母へ評価済み一次因子分解を代入 | PASS | 全ての非零評価で代入前後が一致 |
 | `check_cancel_leading_coefficient.sage` | 三回微分比の最高次係数消去 | PASS | 全ての非零評価で一致 |
