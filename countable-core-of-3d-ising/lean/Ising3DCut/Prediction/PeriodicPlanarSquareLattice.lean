@@ -1130,6 +1130,39 @@ theorem periodicSquareFiberToPairingsProduct_apply
       periodicSquareFiberInternalEdgesAt matching.1 v :=
   rfl
 
+/-- city ごとに指定した残存端子の対分けを、terminal graph 全体の内部辺集合へ束ねる。
+復号繊維から対分けの直積への写像の全射性を示すため、像として指定された対分け族から
+逆向きに完全マッチングを構成する最初の段である。 -/
+noncomputable def periodicSquarePairingsProductInternalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :=
+  Finset.univ.biUnion fun v ↦ (pairings v).1
+
+/-- city ごとに指定した対分けを束ねた各辺は、terminal graph の内部辺である。
+対分けの被覆等式から各端子がその city の残存端子に属することを取り出し、
+二元性と合わせて `internalEdgesAt` の二条件へ移す。 -/
+theorem periodicSquarePairingsProductInternalEdges_subset_internalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    periodicSquarePairingsProductInternalEdges subgraph pairings ⊆
+      internalEdges Finset.univ latticeIncidentEdges := by
+  intro s hs
+  obtain ⟨v, -, hsv⟩ := Finset.mem_biUnion.mp hs
+  have hv := (mem_periodicSquarePairingsAt_iff subgraph v (pairings v).1).mp
+    (pairings v).2
+  rw [mem_internalEdges_iff]
+  refine ⟨v, Finset.mem_univ v, ?_⟩
+  rw [mem_internalEdgesAt_iff]
+  refine ⟨?_, hv.1 s hsv⟩
+  intro t hts
+  have ht : t ∈ (pairings v).1.biUnion id :=
+    Finset.mem_biUnion.mpr ⟨s, hsv, hts⟩
+  rw [hv.2.2] at ht
+  exact (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mp ht |>.1
+
 
 /-- 完全マッチングのうち内部辺であるものの全体は、city ごとの制限を全 city にわたって
 束ねたものにちょうど一致する。左から右は、内部辺が属する city を取り出して
