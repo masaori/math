@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 02:34（本流）: `tail_cross_power_failure_not_sufficient_for_limit_quantity` を追加した。偶奇で交互化した有限箱値が任意の閾値以後に交差冪等式の破れを持つことと、対応する乗根列が相異なる二つの共終な定数部分列を持つため極限を持たないことを Lean 具体版で閉じた。次は同主張の Lean 必要十分版。
 - 2026-08-29 02:04（並行）: `biUnion_periodicSquareFiberInternalEdgesAt_eq_remainingTerminalsAt` を追加し、city の内部辺成分が覆う端子と残存端子の一致を等式で閉じた。次は繊維の個数を city ごとの積として数える恒等式へ接続する。
 - 2026-08-29 02:02（本流）: 「どの閾値の先にも交差冪等式の破れがある」だけでは極限量の存在に十分でないという主張の SageMath 検証を追加した（`sagemath/check/tail-cross-power-failure-not-sufficient-for-limit-quantity/`、全 5 段 PASS）。台帳の当該セクションは「記述と SageMath まで」。次は Lean 具体版。
 - 2026-08-29 01:35（並行）: `biUnion_periodicSquareFiberInternalEdgesAt_subset_remainingTerminalsAt` を追加した。city の内部辺成分が覆う端子では対応する外部辺が完全マッチングに選ばれないため、復号後の偶部分グラフに属し、残存端子への包含が成り立つ。次は逆包含と束ねて等式にする。
