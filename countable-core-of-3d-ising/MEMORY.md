@@ -1,4 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 01:03（本流）: `claim_second_limit_candidate_has_tail_cross_power_failure` の Lean 必要十分版 `NecSuf.exists_pair_not_related_of_infinite_range`（補助に `eq_of_forall_related_of_ge` と `finite_range_of_eventually_constant`）と具体導出 `second_limit_candidate_has_tail_cross_power_failure_fromNecSuf` を追加し、四層を閉じた。必要十分版が使うのは、自然数で添字づけられた列、閾値以後の対で関係が値の一致を導くこと、値域が有限でないことだけで、実数・極限・分配多項式・乗根は要らない。lake build 成功、sorry 非依存検査 694 件。次の本流はゴール文書へ戻って標的を引き直す。
+
 - 2026-08-29 00:34（本流）: `claim_second_limit_candidate_has_tail_cross_power_failure` の Lean 具体版 `second_limit_candidate_has_tail_cross_power_failure` を追加した。ある閾値以後の全二箱で交差冪等式が成り立つという反対仮定から、正の乗根の一意性で有限箱量の列を末尾定数にし、値域を閾値未満の有限個と末尾の一値へ分けて有限性を示し、既出の無限値域に反した。次は同主張の Lean 必要十分版。
 
 - 2026-08-29 00:02（本流）: `claim_second_limit_candidate_has_tail_cross_power_failure` の SageMath 層を `sagemath/check/second-limit-candidate-has-tail-cross-power-failure/` に置き、二検査とも PASS。閾値 $K=0,1$ について交差冪等式を破る二箱の組 $(1,2)$ が有理点 1 以外の八標本で実在すること（主張が空虚でないこと）と、有理点 1 では同じ組に破れが無いこと（仮定 $q\ne1$ の必要性）を、根を作らず有理数の等式だけで検査した。`npm run check` 202 ブロック・175 ラベル・参照 453 件、linkage 106 件。次はこの主張の Lean 具体版。

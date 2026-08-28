@@ -731,6 +731,10 @@ targets=(
   Ising3DCut.NecSuf.infiniteRange_of_ne_target
   Ising3DCut.LimitQuantity.second_limit_quantity_candidate_has_infinite_range_fromNecSuf
   Ising3DCut.LimitQuantity.second_limit_candidate_has_tail_cross_power_failure
+  Ising3DCut.NecSuf.eq_of_forall_related_of_ge
+  Ising3DCut.NecSuf.finite_range_of_eventually_constant
+  Ising3DCut.NecSuf.exists_pair_not_related_of_infinite_range
+  Ising3DCut.LimitQuantity.second_limit_candidate_has_tail_cross_power_failure_fromNecSuf
   Ising3DCut.Prediction.encodedEvenSubgraph_encodePeriodicSquareMatching_subset
   Ising3DCut.Prediction.latticeEndpoint₀_ne_latticeEndpoint₁
   Ising3DCut.Prediction.encodePeriodicSquareExternalEdges_not_mem_internalEdges
