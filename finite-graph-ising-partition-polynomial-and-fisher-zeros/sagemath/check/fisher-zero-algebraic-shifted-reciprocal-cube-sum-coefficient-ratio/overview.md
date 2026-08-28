@@ -27,6 +27,7 @@
 | `check_third_coefficient_sum_local_definition.sage` | 評価後の係数有限和と局所記号 `C_G(a)` | PASS | 表示した有限和と局所定義が一致 |
 | `check_third_coefficient_sum_definition.sage` | 三回形式微分の評価と第三係数和 | PASS | 全例・全評価点で一致 |
 | `check_local_coefficient_quantities_well_defined.sage` | 三つの局所係数有限和の `QQbar` 内 well-defined 性 | PASS | 全ての非零評価で `A_G(a)`, `B_G(a)`, `C_G(a)` が `QQbar` に所属 |
+| `check_embedded_natural_coefficients_well_defined.sage` | 三つの埋め込み係数 `q_r` の `QQbar` 内 well-defined 性 | PASS | `r` が `1, 2, 3` の各場合に、自然数から有理数を経た標準単射像と一致し `QQbar` に所属 |
 | `check_first_product_formal_derivative.sage` | 一次因子積の一回形式微分 | PASS | 本文の一回形式微分式が全例で一致 |
 | `check_second_product_formal_derivative.sage` | 一次因子積の二回形式微分 | PASS | 本文の二回形式微分式が全例で一致 |
 | `check_third_product_formal_derivative.sage` | 一次因子積の三回形式微分 | PASS | 本文の三回形式微分式が全例で一致 |
