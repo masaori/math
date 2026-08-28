@@ -761,4 +761,53 @@ theorem encodePeriodicSquareExternalEdges_not_mem_internalEdges
   have e₁ : latticeEndpoint₁ e = v := (mem_terminalsAt_iff latticeIncidentEdges v _).mp h₁ |>.1
   exact latticeEndpoint₀_ne_latticeEndpoint₁ hn e (e₀.trans e₁.symm)
 
+/-- 外部辺は元の辺を第二成分に持つので、外部辺の一致は元の辺の一致を与える。 -/
+theorem externalEdge_injective_lattice
+    {n : ℕ} [NeZero n] {e f : LatticeEdge n}
+    (h : externalEdge latticeEndpoint₀ latticeEndpoint₁ e =
+      externalEdge latticeEndpoint₀ latticeEndpoint₁ f) : e = f := by
+  have hmem : (⟨latticeEndpoint₀ e, e⟩ : Σ _ : LatticeVertex n, LatticeEdge n) ∈
+      externalEdge latticeEndpoint₀ latticeEndpoint₁ f := by
+    rw [← h]; simp [externalEdge]
+  simp only [externalEdge, Finset.mem_insert, Finset.mem_singleton] at hmem
+  rcases hmem with h₀ | h₁
+  · exact congrArg Sigma.snd h₀
+  · exact congrArg Sigma.snd h₁
+
+/-- 元の辺に対応する外部辺は、どの city の内部辺にもなりえない。内部辺の端子は
+第一成分がその city に等しいので、内部辺であれば辺の二端点が一致し、
+自己ループが無いことに反する。 -/
+theorem externalEdge_not_mem_internalEdges
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (e : LatticeEdge n) :
+    externalEdge latticeEndpoint₀ latticeEndpoint₁ e ∉
+      internalEdges Finset.univ latticeIncidentEdges := by
+  intro hmem
+  obtain ⟨v, _, hv⟩ := (mem_internalEdges_iff Finset.univ latticeIncidentEdges _).mp hmem
+  have hsub := (mem_internalEdgesAt_iff latticeIncidentEdges v _).mp hv |>.1
+  have h₀ : (⟨latticeEndpoint₀ e, e⟩ : Σ _ : LatticeVertex n, LatticeEdge n) ∈
+      terminalsAt latticeIncidentEdges v := hsub (by simp [externalEdge])
+  have h₁ : (⟨latticeEndpoint₁ e, e⟩ : Σ _ : LatticeVertex n, LatticeEdge n) ∈
+      terminalsAt latticeIncidentEdges v := hsub (by simp [externalEdge])
+  have e₀ : latticeEndpoint₀ e = v := (mem_terminalsAt_iff latticeIncidentEdges v _).mp h₀ |>.1
+  have e₁ : latticeEndpoint₁ e = v := (mem_terminalsAt_iff latticeIncidentEdges v _).mp h₁ |>.1
+  exact latticeEndpoint₀_ne_latticeEndpoint₁ hn e (e₀.trans e₁.symm)
+
+/-- 復元した完全マッチングを復号すると、元の偶部分グラフの辺はすべて残る。
+偶部分グラフの辺の外部辺は、復元の外部辺（偶部分グラフに属さない辺の像）には
+外部辺の単射性から入らず、city の内部辺にもなりえないからである。 -/
+theorem subset_encodedEvenSubgraph_encodePeriodicSquareMatching
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    subgraph.1 ⊆ encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁
+      (encodePeriodicSquareMatching subgraph) := by
+  intro e he
+  refine (mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁
+    (encodePeriodicSquareMatching subgraph) e).mpr ⟨Finset.mem_univ e, ?_⟩
+  intro hmem
+  rw [encodePeriodicSquareMatching, Finset.mem_union] at hmem
+  rcases hmem with hint | hext
+  · exact externalEdge_not_mem_internalEdges hn e
+      (encodePeriodicSquareInternalEdges_subset_internalEdges subgraph hint)
+  · obtain ⟨f, hf, hfe⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph _).mp hext
+    exact hf (externalEdge_injective_lattice hfe ▸ he)
+
 end Ising3DCut.Prediction

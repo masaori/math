@@ -712,6 +712,9 @@ targets=(
   Ising3DCut.Prediction.encodedEvenSubgraph_encodePeriodicSquareMatching_subset
   Ising3DCut.Prediction.latticeEndpoint₀_ne_latticeEndpoint₁
   Ising3DCut.Prediction.encodePeriodicSquareExternalEdges_not_mem_internalEdges
+  Ising3DCut.Prediction.externalEdge_injective_lattice
+  Ising3DCut.Prediction.externalEdge_not_mem_internalEdges
+  Ising3DCut.Prediction.subset_encodedEvenSubgraph_encodePeriodicSquareMatching
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
