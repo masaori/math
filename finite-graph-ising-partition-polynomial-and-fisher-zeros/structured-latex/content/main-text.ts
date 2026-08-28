@@ -5302,7 +5302,17 @@ a^{m-3}
         math(String.raw`D(cx^m)=c\,\iota_{\mathbb Q,\overline{\mathbb Q}}(\eta_{\mathbb N,\mathbb Q}(m))x^{m-1}`),
         " と定め、これらの規則を",
         math(String.raw`\overline{\mathbb Q}`),
-        " 上線形に拡張する。多項式の係数表示の一意性により、この線形拡張は well-defined である。反復する形式微分を",
+        " 上線形に拡張する。多項式の係数表示の一意性により、この線形拡張は well-defined である。この形式微分は任意の",
+        math(String.raw`f,g\in\overline{\mathbb Q}[x]`),
+        " に対して積法則",
+      ]),
+      displayMath(String.raw`
+        D(fg)=D(f)g+fD(g)
+        \qquad
+        (\because\ \overline{\mathbb Q}[x]\text{ 上の形式微分の積法則})
+      `),
+      paragraph([
+        "を満たす。反復する形式微分を",
         math(String.raw`D^2:=D\circ D`),
         " および",
         math(String.raw`D^3:=D\circ D\circ D`),

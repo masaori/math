@@ -18,6 +18,7 @@
 | `check_formal_derivative_constant_rule.sage` | 代数的数係数多項式の形式微分における定数則 | PASS | 有理数および無理代数的数の定数多項式で形式微分が零 |
 | `check_formal_derivative_monomial_rule.sage` | 代数的数係数多項式の形式微分における正次数単項式則 | PASS | 有理数および無理代数的数の係数と複数の正次数で定義式が一致 |
 | `check_formal_derivative_well_defined.sage` | 一意な係数表示による形式微分の線形拡張の well-defined 性 | PASS | 同じ多項式の異なる表示が同じ係数表示と形式微分を与える |
+| `check_formal_derivative_product_rule.sage` | 代数的数係数多項式の形式微分における積法則 | PASS | 零・定数・無理代数的係数を含む多項式対で `D(fg)=D(f)g+fD(g)` が一致 |
 | `check_formal_derivative_iterates.sage` | 二回・三回形式微分の合成による反復定義 | PASS | `D^2=D\circ D` と `D^3=D\circ D\circ D` が零・定数・無理代数的係数を含む多項式で一致 |
 | `check_coefficient_formal_derivatives.sage` | 係数表示の前三回の形式微分 | PASS | 三つの多項式恒等式が一致 |
 | `check_first_coefficient_formal_derivative.sage` | 係数表示の一回形式微分 | PASS | 本文の一回形式微分式が全例で一致 |
