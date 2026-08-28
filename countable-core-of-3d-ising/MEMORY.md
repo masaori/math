@@ -1,5 +1,9 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 16:06: 前 tick の打ち切りで未コミットだった Lean 必要十分版 `NecSuf.finiteRangeConvergent_eventuallyConstant` を検証して反映。あわせて `lean/scripts/check-no-sorry.sh` の登録簿に、この主張に関わる具体版・必要十分版の計七件が未登録だったのを追加した（登録簿は手で足す必要があり、漏れても検査は通ってしまう。追加後 677 件）。
+
+- 2026-08-28 15:35: 本流 `claim_finitely_many_values_gives_eventually_constant` の Lean 必要十分版 `NecSuf.finiteRangeConvergent_eventuallyConstant` と具体導出を追加し、四層を閉じた。必要なのは Hausdorff 空間への自然数列、値域の有限性、列の極限だけである。次は `claim_finitely_many_values_limit_only_at_one` の記述。
+
 - 2026-08-28 14:41（本流）: 着手前レビューで `claim_finitely_many_values_gives_eventually_constant` の閾値の取り方を修正した。有限な例外添字の合併に属さない最小値では後続の例外を排除できないため、合併が空なら 1、空でなければ最大例外添字に 1 を足す。修正を前進前に main へ反映した。その後 `sagemath/check/finitely-many-values-gives-eventually-constant/` を追加し、相異なる定数部分列と極限候補の有理数近傍による分離、および有限例外集合から末尾閾値を作る算術を `ZZ` と `QQ` で検査して二件とも PASS。次は同主張の Lean 具体版。
 
 - 2026-08-28 14:04（本流）: セクション表に本流の未完了が無くなったので、ゴール文書「可算コアの同定とは何か」の自由エネルギー密度の行へ戻り、次の標的を「有限個の値しかとらない列で極限量を持つものは末尾定数である」に引き直した。末尾周期性はこの条件の特別な場合であり、直前まで四層で閉じた分類を包含したうえで、第二の有理点を探す条件を広げる。大きいので二つへ割り、割った先頭（鳩の巣原理と極限の一意性だけの一論法）と、既存の「末尾定数となる正の有理点は 1 に限る」との合成を台帳へ書いた。あわせて割った先頭の記述層 `claim_finitely_many_values_gives_eventually_constant` を本文へ追加した。極限と異なる値の添字集合が無限なら定数部分列が別の極限を持って極限の一意性に反する、という一論法である。`npm run check` 199 ブロック・参照 446 件、`build:pdf` 68 ページ、linkage 102 件。次は同主張の SageMath 層。
