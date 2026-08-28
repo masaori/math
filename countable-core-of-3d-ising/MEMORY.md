@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 03:33（本流・判断待ち）: ゴール文書へ戻って次の標的を再選定した。残る未決着点は第二の正の有理点で極限量の存在を閉じることだけだが、確認済みの経路は上限または実数の完備性を箱の大きさの極限とは別に使い、現在の立場では採用できない。直前の Lean 必要十分版には修正事項なし。立場を緩めるか、許された道具だけで閉じる模型固有の定理が与えられるまで、本流で小主張を派生させない。
 - 2026-08-29 03:04（本流）: `NecSuf.cofinalPairFailure_of_divergentIndices`・`NecSuf.cofinalPairFailure_and_noLimit` と導出 `tail_cross_power_failure_not_sufficient_for_limit_quantity_viaNecSuf` を追加し、末尾の交差冪等式の破れだけでは極限量の存在を保証しないという主張の四層を閉じた。必要十分版が使うのは、限りなく大きくなる二つの添字列・各段での述語の破れ・二つの定数部分列の値の相違と Hausdorff 位相空間だけで、交差冪等式・乗根・偶奇・素数 2 は落ちた。lake build 成功、sorry 非依存検査 701 件。次はゴール文書へ戻って標的を引き直す。
 - 2026-08-29 02:34（本流）: `tail_cross_power_failure_not_sufficient_for_limit_quantity` を追加した。偶奇で交互化した有限箱値が任意の閾値以後に交差冪等式の破れを持つことと、対応する乗根列が相異なる二つの共終な定数部分列を持つため極限を持たないことを Lean 具体版で閉じた。次は同主張の Lean 必要十分版。
 - 2026-08-29 02:04（並行）: `biUnion_periodicSquareFiberInternalEdgesAt_eq_remainingTerminalsAt` を追加し、city の内部辺成分が覆う端子と残存端子の一致を等式で閉じた。次は繊維の個数を city ごとの積として数える恒等式へ接続する。
