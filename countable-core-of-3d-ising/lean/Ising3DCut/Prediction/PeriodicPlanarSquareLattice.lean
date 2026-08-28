@@ -1292,4 +1292,36 @@ theorem periodicSquareFiberToPairingsProduct_injective
         rw [hOut]; exact Finset.mem_filter.mpr ⟨hs, hext⟩
       exact (Finset.mem_filter.mp this).1
 
+/-- city ごとに指定した対分けを束ねた内部辺集合に、偶部分グラフの polygon に属さない辺の
+外部辺を合わせた terminal graph の辺集合。復号繊維から対分けの直積への写像の全射性を
+示すため、指定された対分け族から逆向きに完全マッチングの候補を構成する第二段である。 -/
+noncomputable def periodicSquarePairingsProductMatching
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) :=
+  periodicSquarePairingsProductInternalEdges subgraph pairings ∪
+    encodePeriodicSquareExternalEdges subgraph
+
+/-- 指定された対分け族から構成した候補の辺は、すべて terminal graph の辺である。
+内部辺の側は直前の包含から、外部辺の側は外部辺の定義から従う。完全マッチング性のうち、
+辺集合への包含だけを先に閉じる。 -/
+theorem periodicSquarePairingsProductMatching_subset_terminalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    periodicSquarePairingsProductMatching subgraph pairings ⊆
+      terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁ := by
+  intro s hs
+  rw [periodicSquarePairingsProductMatching, Finset.mem_union] at hs
+  rw [mem_terminalEdges_iff]
+  rcases hs with hs | hs
+  · exact Or.inl
+      (periodicSquarePairingsProductInternalEdges_subset_internalEdges subgraph pairings hs)
+  · refine Or.inr ?_
+    obtain ⟨e, he, rfl⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph s).mp hs
+    rw [mem_externalEdges_iff]
+    exact ⟨e, Finset.mem_univ e, rfl⟩
+
 end Ising3DCut.Prediction
