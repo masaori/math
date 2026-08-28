@@ -12281,6 +12281,42 @@ c_t&=\alpha(q) &&(\because\ \mathbb R\ \text{の極限の一意性})
     ],
   },
   {
+    id: "soundness_bridge_claim_finitely_many_values_limit_quantity_only_at_one",
+    kind: "claim",
+    title: { text: "有限個の値しかとらず極限量を持つ正の有理点は 1 に限られる" },
+    labels: ["claim_finitely_many_values_limit_quantity_only_at_one"],
+    habitat: "R",
+    realEscape:
+      "極限量を参照するので、def_limit_quantity_from_finite_box_sequence の箱の大きさの極限を一度だけ引く。証明は既出の二主張の合成だけであり、新たな脱出は加えない。",
+    statement: [
+      paragraph([
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " とし、有限箱の量の列 ",
+        math(String.raw`L\mapsto a_L(q)`),
+        " のとる値の集合が有限集合であるとする。この列の極限量 ",
+        math(String.raw`\alpha(q)`),
+        "（",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        "）が存在するならば、",
+        math(String.raw`q=1`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "有限個の値しかとらない列が極限量を持つなら末尾定数である（",
+        ref("claim_finitely_many_values_gives_eventually_constant"),
+        "）。末尾定数となる正の有理点は ",
+        math(String.raw`1`),
+        " に限られる（",
+        ref("claim_eventually_constant_only_at_one"),
+        "）。よって ",
+        math(String.raw`q=1`),
+        " である。",
+      ]),
+    ],
+  },
+  {
     id: "soundness_bridge_remark_eventually_periodic_limit_quantity_reduces_to_one",
     kind: "remark",
     title: { text: "末尾周期性で極限量を持つ正の有理点は 1 に限られる" },
