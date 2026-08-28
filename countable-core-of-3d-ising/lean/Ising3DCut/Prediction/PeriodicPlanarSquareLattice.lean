@@ -1130,4 +1130,32 @@ theorem periodicSquareFiberToPairingsProduct_apply
       periodicSquareFiberInternalEdgesAt matching.1 v :=
   rfl
 
+
+/-- 完全マッチングのうち内部辺であるものの全体は、city ごとの制限を全 city にわたって
+束ねたものにちょうど一致する。左から右は、内部辺が属する city を取り出して
+その city の制限へ入れることによる。右から左は、city の制限が元の完全マッチングと
+その city の内部辺の双方に属することによる。繊維から city ごとの対分けの直積への
+写像が単射であることを示す第一段であり、内部辺の側が像から復元できることを述べる。 -/
+theorem filter_internalEdges_eq_biUnion_periodicSquareFiberInternalEdgesAt
+    {n : ℕ} [NeZero n]
+    (matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))) :
+    matching.filter (fun s ↦ s ∈ internalEdges Finset.univ latticeIncidentEdges) =
+      Finset.univ.biUnion (fun v ↦ periodicSquareFiberInternalEdgesAt matching v) := by
+  classical
+  ext s
+  constructor
+  · intro hs
+    obtain ⟨hsMatching, hsInternal⟩ := Finset.mem_filter.mp hs
+    obtain ⟨v, -, hsv⟩ :=
+      (mem_internalEdges_iff Finset.univ latticeIncidentEdges s).mp hsInternal
+    exact Finset.mem_biUnion.mpr ⟨v, Finset.mem_univ v,
+      (mem_periodicSquareFiberInternalEdgesAt_iff matching v s).mpr ⟨hsMatching, hsv⟩⟩
+  · intro hs
+    obtain ⟨v, -, hsv⟩ := Finset.mem_biUnion.mp hs
+    obtain ⟨hsMatching, hsAt⟩ :=
+      (mem_periodicSquareFiberInternalEdgesAt_iff matching v s).mp hsv
+    exact Finset.mem_filter.mpr ⟨hsMatching,
+      (mem_internalEdges_iff Finset.univ latticeIncidentEdges s).mpr
+        ⟨v, Finset.mem_univ v, hsAt⟩⟩
+
 end Ising3DCut.Prediction
