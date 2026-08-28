@@ -59,6 +59,7 @@ import blocks_neighborhood_assignment_monoid_center from './content/neighborhood
 import blocks_neighborhood_assignment_monoid_units from './content/neighborhood-assignment-monoid-units.ts'
 import blocks_neighborhood_assignment_reachability_closure from './content/neighborhood-assignment-reachability-closure.ts'
 import blocks_neighborhood_assignment_reachability_preorder from './content/neighborhood-assignment-reachability-preorder.ts'
+import blocks_neighborhood_assignment_reachability_quotient_order from './content/neighborhood-assignment-reachability-quotient-order.ts'
 import blocks_neighborhood_assignment_subset_union_action from './content/neighborhood-assignment-subset-union-action.ts'
 import blocks_neighborhood_assignment_transpose_involution from './content/neighborhood-assignment-transpose-involution.ts'
 import blocks_neighborhood_assignment_union_distributivity from './content/neighborhood-assignment-union-distributivity.ts'
@@ -122,6 +123,7 @@ export type AllBlocks = [
   ...typeof blocks_neighborhood_assignment_monoid_units,
   ...typeof blocks_neighborhood_assignment_reachability_closure,
   ...typeof blocks_neighborhood_assignment_reachability_preorder,
+  ...typeof blocks_neighborhood_assignment_reachability_quotient_order,
   ...typeof blocks_neighborhood_assignment_subset_union_action,
   ...typeof blocks_neighborhood_assignment_transpose_involution,
   ...typeof blocks_neighborhood_assignment_union_distributivity,
