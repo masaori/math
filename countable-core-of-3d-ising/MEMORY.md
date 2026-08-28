@@ -1,4 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-28 22:30（本流）: `claim_second_limit_quantity_candidate_has_infinite_range` の Lean 具体版 `second_limit_quantity_candidate_has_infinite_range` を追加した。値域の有限性を仮定し、既存の `finite_range_limit_quantity_only_at_one` から $q=1$ を得て $q\ne1$ に反する対偶一段である。lake build 成功、sorry 非依存検査 685 件。次は同主張の Lean 必要十分版。
+
 - 2026-08-28 19:05（並行）: `disjoint_periodicSquareFiberInternalEdgesAt` を追加し、city ごとに取り出した内部辺の集合が相異なる city の間で互いに素であることを閉じた。内部辺の端子の第一成分がその city を一意に定めることによる。lake build 成功、sorry 非依存検査 684 件。次は各成分がその city の残存端子を完全被覆することを示す。
 
 - 2026-08-28 19:02（本流）: `claim_second_limit_quantity_candidate_has_infinite_range` の SageMath 層を `sagemath/check/second-limit-quantity-candidate-has-infinite-range/` に置き、二検査とも PASS。結論の必要条件（有理点 1 以外の八標本で一辺 1 と 2 の量が既に相異なり、値の集合が一点でない）と、仮定 $q\ne1$ の必要性（有理点 1 では値の集合が一点）を、根を作らず交差冪の有理数等式だけで検査した。`npm run check` 201 ブロック・174 ラベル・参照 451 件、linkage 105 件。次は同主張の Lean 具体版。
