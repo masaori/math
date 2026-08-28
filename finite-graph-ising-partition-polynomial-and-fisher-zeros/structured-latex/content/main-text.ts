@@ -5304,15 +5304,129 @@ a^{m-3}
         math(String.raw`\overline{\mathbb Q}`),
         " 上線形に拡張する。多項式の係数表示の一意性により、この線形拡張は well-defined である。この形式微分は任意の",
         math(String.raw`f,g\in\overline{\mathbb Q}[x]`),
-        " に対して積法則",
+        " に対して積法則を満たす。実際、ある",
+        math(String.raw`n,m\in\mathbb N`),
+        " と",
+        math(String.raw`a_0,\ldots,a_n,b_0,\ldots,b_m\in\overline{\mathbb Q}`),
+        " を用いて、多項式の有限係数表示により",
       ]),
+      displayMath(String.raw`f=\sum_{i=0}^{n}a_i x^i,
+\qquad
+g=\sum_{j=0}^{m}b_j x^j
+\quad\bigl(\because\ \overline{\mathbb Q}[x]\text{ の有限係数表示}\bigr).`),
+      displayMath(String.raw`
+        fg
+        =
+        \sum_{i=0}^{n}\sum_{j=0}^{m}a_i b_jx^{i+j}
+        \quad
+        \bigl(\because\ \text{有限和の分配律}\bigr).
+      `),
+      displayMath(String.raw`
+        D(fg)
+        =
+        \sum_{\substack{0\le i\le n,\ 0\le j\le m\\i+j>0}}
+        a_i b_j\,
+        \iota_{\mathbb Q,\overline{\mathbb Q}}
+        \!\left(\eta_{\mathbb N,\mathbb Q}(i+j)\right)
+        x^{i+j-1}
+        \quad
+        \bigl(\because\ \text{形式微分の線形性、定数則、正次数単項式則}\bigr).
+      `),
+      displayMath(String.raw`
+        D(fg)
+        =
+        \sum_{\substack{0\le i\le n,\ 0\le j\le m\\i+j>0}}
+        a_i b_j\,
+        \iota_{\mathbb Q,\overline{\mathbb Q}}
+        \!\left(
+          \eta_{\mathbb N,\mathbb Q}(i)
+          +
+          \eta_{\mathbb N,\mathbb Q}(j)
+        \right)
+        x^{i+j-1}
+        \quad
+        \bigl(\because\ \eta_{\mathbb N,\mathbb Q}\text{ は加法を保つ}\bigr).
+      `),
+      displayMath(String.raw`
+        D(fg)
+        =
+        \sum_{\substack{0\le i\le n,\ 0\le j\le m\\i+j>0}}
+        a_i b_j
+        \left(
+          \iota_{\mathbb Q,\overline{\mathbb Q}}
+          \!\left(\eta_{\mathbb N,\mathbb Q}(i)\right)
+          +
+          \iota_{\mathbb Q,\overline{\mathbb Q}}
+          \!\left(\eta_{\mathbb N,\mathbb Q}(j)\right)
+        \right)
+        x^{i+j-1}
+        \quad
+        \bigl(\because\ \iota_{\mathbb Q,\overline{\mathbb Q}}\text{ は加法を保つ}\bigr).
+      `),
+      displayMath(String.raw`
+        D(fg)
+        =
+        \sum_{\substack{0\le i\le n,\ 0\le j\le m\\i+j>0}}
+        a_i b_j\,
+        \iota_{\mathbb Q,\overline{\mathbb Q}}
+        \!\left(\eta_{\mathbb N,\mathbb Q}(i)\right)
+        x^{i+j-1}
+        +
+        \sum_{\substack{0\le i\le n,\ 0\le j\le m\\i+j>0}}
+        a_i b_j\,
+        \iota_{\mathbb Q,\overline{\mathbb Q}}
+        \!\left(\eta_{\mathbb N,\mathbb Q}(j)\right)
+        x^{i+j-1}
+        \quad
+        \bigl(\because\ \text{有限和の分配律}\bigr).
+      `),
+      displayMath(String.raw`
+        D(fg)
+        =
+        \sum_{i=1}^{n}\sum_{j=0}^{m}
+        a_i b_j\,
+        \iota_{\mathbb Q,\overline{\mathbb Q}}
+        \!\left(\eta_{\mathbb N,\mathbb Q}(i)\right)
+        x^{i+j-1}
+        +
+        \sum_{i=0}^{n}\sum_{j=1}^{m}
+        a_i b_j\,
+        \iota_{\mathbb Q,\overline{\mathbb Q}}
+        \!\left(\eta_{\mathbb N,\mathbb Q}(j)\right)
+        x^{i+j-1}
+        \quad
+        \bigl(\because\ \eta_{\mathbb N,\mathbb Q}(0)=0\text{ である零項の除去}\bigr).
+      `),
+      displayMath(String.raw`
+        D(fg)
+        =
+        \left(
+          \sum_{i=1}^{n}
+          a_i\,
+          \iota_{\mathbb Q,\overline{\mathbb Q}}
+          \!\left(\eta_{\mathbb N,\mathbb Q}(i)\right)
+          x^{i-1}
+        \right)
+        \left(\sum_{j=0}^{m}b_jx^j\right)
+        +
+        \left(\sum_{i=0}^{n}a_ix^i\right)
+        \left(
+          \sum_{j=1}^{m}
+          b_j\,
+          \iota_{\mathbb Q,\overline{\mathbb Q}}
+          \!\left(\eta_{\mathbb N,\mathbb Q}(j)\right)
+          x^{j-1}
+        \right)
+        \quad
+        \bigl(\because\ \text{有限和の分配律}\bigr).
+      `),
       displayMath(String.raw`
         D(fg)=D(f)g+fD(g)
-        \qquad
-        (\because\ \overline{\mathbb Q}[x]\text{ 上の形式微分の積法則})
+        \quad
+        \bigl(\because\ \text{形式微分と }f,g\text{ の係数表示}\bigr).
       `),
       paragraph([
-        "を満たす。反復する形式微分を",
+        "反復する形式微分を",
         math(String.raw`D^2:=D\circ D`),
         " および",
         math(String.raw`D^3:=D\circ D\circ D`),
