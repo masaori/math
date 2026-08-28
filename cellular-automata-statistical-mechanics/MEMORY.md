@@ -5,6 +5,18 @@
 > [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
 > [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
+## 自動ループ tick: 合併作用の Lean 具体版（2026-08-28 13:12）
+
+前 tick の SageMath 検算 7 本を構造化記述と突き合わせ、合併の存在量化、合成の向き、恒等作用、
+一元部分集合からの復元、単射性、冪等性、有限決定に修正を要する不一致は見つからなかった。
+
+Lean 具体版 `lean/CellularAutomata/NeighborhoodAssignmentSubsetUnionAction.lean` を追加した。
+有限部分集合を `Finset V`、合併写像を `S.biUnion N` として、人手証明と同じ順序で主要主張を
+形式化した。部分集合全体の元数、全表への所属、冪等性の決定可能性も記録した。
+有限型・有限部分集合・自然数だけで閉じ、$\mathbb R/\mathbb C$ 脱出はない。
+
+対象は `Lean 具体版まで`。次 tick は全層レビュー後、Lean 必要十分版と具体版からの導出だけを作る。
+
 ## 自動ループ tick: 合併作用の SageMath 検算（2026-08-28 12:12）
 
 前 tick の「近傍割り当てが部分集合に定める合併作用」の構造化記述を、合成近傍・自己近傍割り当ての
