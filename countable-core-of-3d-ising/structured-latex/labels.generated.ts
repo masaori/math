@@ -105,6 +105,7 @@ export const ALL_LABELS = [
   "claim_root_equality_implies_cross_power_equality",
   "claim_roots_leading_coefficient_multiplicities_determine_polynomial",
   "claim_same_partition_different_pair_data",
+  "claim_second_limit_candidate_has_tail_cross_power_failure",
   "claim_second_limit_quantity_candidate_has_infinite_range",
   "claim_shifted_free_family_cross_power_equality_fails_at_two",
   "claim_shifted_free_family_cross_power_equality_is_not_necessary_for_limit_quantity",

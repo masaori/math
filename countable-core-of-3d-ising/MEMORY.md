@@ -1,4 +1,8 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-28 23:36（並行）: 復号繊維の完全マッチングについて、各 city の残存端子がその city の内部辺成分にすべて覆われる包含を Lean で閉じた。次は直前の逆包含と束ねて完全被覆の等式にする。
+
+- 2026-08-28 23:32（本流）: 第二の極限量候補の無限値域を、任意の閾値の先に交差冪等式を破る二箱が存在するという有限の探索条件へ移した。本文記述までで、次は SageMath 層。
+
 - 2026-08-28 23:06（並行）: `biUnion_periodicSquareFiberInternalEdgesAt_subset_terminalsAt` を追加し、city ごとの成分が覆う端子がその city の端子に収まることを閉じた。完全被覆を二つの包含へ割った先頭である。lake build 成功、sorry 非依存検査 688 件。次は残存端子が覆われる側の包含。
 
 - 2026-08-28 23:03（本流）: `claim_second_limit_quantity_candidate_has_infinite_range` の Lean 必要十分版 `NecSuf.infiniteRange_of_ne_target` と具体導出 `second_limit_quantity_candidate_has_infinite_range_fromNecSuf` を追加し、四層を閉じた。仮定は Hausdorff 位相空間に値をとる自然数列、極限の存在、末尾定数性が対象を一意に定めること、対象と異なることだけである。`T2Space` は直前の必要十分版が有限値域から末尾定数性を得るために残した。lake build 8983 ジョブ成功、sorry 非依存検査 687 件。次の本流はゴール文書へ戻って標的を引き直す。

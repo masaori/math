@@ -12353,6 +12353,36 @@ c_t&=\alpha(q) &&(\because\ \mathbb R\ \text{の極限の一意性})
     ],
   },
   {
+    id: "soundness_bridge_claim_second_limit_candidate_has_tail_cross_power_failure",
+    kind: "claim",
+    title: { text: "第二の極限量候補ではどの閾値の先にも交差冪等式の破れがある" },
+    labels: ["claim_second_limit_candidate_has_tail_cross_power_failure"],
+    habitat: "R",
+    realEscape:
+      "極限量を持つ第二候補の必要条件を引くため、def_limit_quantity_from_finite_box_sequence の箱の大きさの極限を一度だけ参照する。結論そのものは二つの有限箱値についての有理数の不等式であり、追加の脱出を含まない。",
+    statement: [
+      paragraph([
+        math(String.raw`q\in\mathbb Q_{>0}`), " とし、", math(String.raw`q\ne1`),
+        " とする。有限箱の量の列の極限量が存在するならば、任意の ", math(String.raw`K\in\mathbb N`),
+        " に対して、", math(String.raw`L,M\ge\max\{K,1\}`), " である二つの箱幅が存在して、",
+      ]),
+      displayMath(String.raw`Z_L(q)^{M^3}\ne Z_M(q)^{L^3}`),
+      paragraph(["となる。したがって、第二候補の探索条件は、どの閾値の先でも有限個の整数係数多項式の有理点での値から検査できる不等式の証拠が一つ見つかることである。"]),
+    ],
+    proof: [
+      paragraph([
+        "反対に、ある ", math(String.raw`K\in\mathbb N`), " について、すべての ",
+        math(String.raw`L,M\ge\max\{K,1\}`),
+        " で交差冪等式が成り立つと仮定する。交差冪等式から有限箱の量の一致が従う（",
+        ref("claim_cross_power_equality_implies_root_equality"),
+        "）ので、列は閾値以後で一定である。したがって値の集合は有限集合である。しかし、",
+        math(String.raw`q\ne1`), " で極限量を持つ候補の値の集合は無限集合である（",
+        ref("claim_second_limit_quantity_candidate_has_infinite_range"),
+        "）。これは矛盾である。よって任意の閾値の先に交差冪等式を破る二箱が存在する。",
+      ]),
+    ],
+  },
+  {
     id: "soundness_bridge_remark_eventually_periodic_limit_quantity_reduces_to_one",
     kind: "remark",
     title: { text: "末尾周期性で極限量を持つ正の有理点は 1 に限られる" },

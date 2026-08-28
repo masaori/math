@@ -914,4 +914,56 @@ theorem biUnion_periodicSquareFiberInternalEdgesAt_subset_terminalsAt
   have hsInternal := ((mem_periodicSquareFiberInternalEdgesAt_iff matching v s).mp hs).2
   exact ((mem_internalEdgesAt_iff latticeIncidentEdges v s).mp hsInternal).1 hts
 
+/-- 復号繊維の完全マッチングでは、その city の残存端子がすべて city 内部辺に覆われる。
+残存端子に対応する元の辺は復号後の偶部分グラフに属するため、その端子を覆う
+マッチング辺は外部辺ではありえず、同じ city の内部辺でなければならない。 -/
+theorem remainingTerminalsAt_subset_biUnion_periodicSquareFiberInternalEdgesAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    {matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))}
+    (hmatching : matching ∈ periodicSquareDecodingFiber subgraph)
+    (v : LatticeVertex n) :
+    encodePeriodicSquareRemainingTerminalsAt subgraph v ⊆
+      (periodicSquareFiberInternalEdgesAt matching v).biUnion id := by
+  classical
+  simp only [periodicSquareDecodingFiber, Finset.mem_filter, Finset.mem_univ,
+    true_and] at hmatching
+  intro t ht
+  have htData := (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mp ht
+  have htVertex : t ∈ terminalVertices Finset.univ latticeIncidentEdges := by
+    rw [mem_terminalVertices_iff]
+    have htCity : t.1 = v ∧ t.2 ∈ latticeIncidentEdges t.1 := by
+      simpa [terminalsAt] using htData.1
+    exact ⟨Finset.mem_univ _, htCity.2⟩
+  obtain ⟨s, hs, _⟩ := hmatching.1.2 t htVertex
+  have hsTerminal := hmatching.1.1 hs.1
+  rw [mem_terminalEdges_iff] at hsTerminal
+  rcases hsTerminal with hsInternal | hsExternal
+  · obtain ⟨w, _, hsw⟩ :=
+      (mem_internalEdges_iff Finset.univ latticeIncidentEdges s).mp hsInternal
+    have htw : t.1 = w :=
+      (terminal_of_mem_internalEdgeAt latticeIncidentEdges w s hsw t hs.2).1
+    have htv : t.1 = v :=
+      (mem_terminalsAt_iff latticeIncidentEdges v t).mp htData.1 |>.1
+    have hwv : w = v := htw.symm.trans htv
+    rw [hwv] at hsw
+    exact Finset.mem_biUnion.mpr
+      ⟨s, (mem_periodicSquareFiberInternalEdgesAt_iff matching v s).mpr
+        ⟨hs.1, hsw⟩, hs.2⟩
+  · obtain ⟨e, _, hse⟩ :=
+      (mem_externalEdges_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁ s).mp hsExternal
+    have hte : t.2 = e := by
+      have htendpoint :
+          t = (⟨latticeEndpoint₀ e, e⟩ : Σ _ : LatticeVertex n, LatticeEdge n) ∨
+            t = ⟨latticeEndpoint₁ e, e⟩ := by
+        rw [← hse] at hs
+        simpa [externalEdge] using hs.2
+      rcases htendpoint with h | h
+      · exact congrArg Sigma.snd h
+      · exact congrArg Sigma.snd h
+    have heDecoded : e ∈ encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁ matching := by
+      rw [hmatching.2]
+      simpa [hte] using htData.2
+    exact False.elim (((mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁
+      matching e).mp heDecoded).2 (hse ▸ hs.1))
+
 end Ising3DCut.Prediction
