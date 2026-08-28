@@ -820,4 +820,19 @@ theorem encodedEvenSubgraph_encodePeriodicSquareMatching
   · exact encodedEvenSubgraph_encodePeriodicSquareMatching_subset subgraph
   · exact subset_encodedEvenSubgraph_encodePeriodicSquareMatching hn subgraph
 
+/-- 復号写像の各偶部分グラフ上の繊維は空でない。復元した完全マッチングを証人に取り、
+完全マッチング性と復号後の等式を直前の二定理から束ねる。繊維の個数を数える前段である。 -/
+theorem exists_perfectMatching_decoding_to_subgraph
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    ∃ matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)),
+      IsPerfectMatching
+        (terminalVertices Finset.univ latticeIncidentEdges)
+        (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+          latticeEndpoint₀ latticeEndpoint₁)
+        matching ∧
+      encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁ matching = subgraph.1 := by
+  exact ⟨encodePeriodicSquareMatching subgraph,
+    encodePeriodicSquareMatching_isPerfectMatching subgraph,
+    encodedEvenSubgraph_encodePeriodicSquareMatching hn subgraph⟩
+
 end Ising3DCut.Prediction
