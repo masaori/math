@@ -966,4 +966,48 @@ theorem remainingTerminalsAt_subset_biUnion_periodicSquareFiberInternalEdgesAt
     exact False.elim (((mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁
       matching e).mp heDecoded).2 (hse ▸ hs.1))
 
+/-- 復号繊維の完全マッチングから city ごとに取り出した内部辺が覆う端子は、
+その city の残存端子である。内部辺と同じ端子を覆う外部辺は完全マッチングの
+一意性により選ばれず、したがって対応する元の辺は復号後の偶部分グラフに属する。 -/
+theorem biUnion_periodicSquareFiberInternalEdgesAt_subset_remainingTerminalsAt
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    {matching : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))}
+    (hmatching : matching ∈ periodicSquareDecodingFiber subgraph)
+    (v : LatticeVertex n) :
+    (periodicSquareFiberInternalEdgesAt matching v).biUnion id ⊆
+      encodePeriodicSquareRemainingTerminalsAt subgraph v := by
+  classical
+  simp only [periodicSquareDecodingFiber, Finset.mem_filter, Finset.mem_univ,
+    true_and] at hmatching
+  intro t ht
+  have htCity := biUnion_periodicSquareFiberInternalEdgesAt_subset_terminalsAt matching v ht
+  refine (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mpr ⟨htCity, ?_⟩
+  rw [← hmatching.2]
+  refine (mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁
+    matching t.2).mpr ⟨Finset.mem_univ _, ?_⟩
+  intro hExternal
+  obtain ⟨s, hsComponent, hts⟩ := Finset.mem_biUnion.mp ht
+  have hsData := (mem_periodicSquareFiberInternalEdgesAt_iff matching v s).mp hsComponent
+  have htVertex : t ∈ terminalVertices Finset.univ latticeIncidentEdges := by
+    rw [mem_terminalVertices_iff]
+    exact ⟨Finset.mem_univ _, (mem_terminalsAt_iff latticeIncidentEdges v t).mp htCity |>.2⟩
+  have htExternal : t ∈ externalEdge latticeEndpoint₀ latticeEndpoint₁ t.2 := by
+    have hIncident := (mem_terminalsAt_iff latticeIncidentEdges v t).mp htCity |>.2
+    simp only [latticeIncidentEdges, Finset.mem_filter, Finset.mem_univ, true_and] at hIncident
+    rcases hIncident with h₀ | h₁
+    · exact Finset.mem_insert.mpr (Or.inl (Sigma.ext h₀.symm (by simp)))
+    · exact Finset.mem_insert.mpr
+        (Or.inr (Finset.mem_singleton.mpr (Sigma.ext h₁.symm (by simp))))
+  have hne : s ≠ externalEdge latticeEndpoint₀ latticeEndpoint₁ t.2 := by
+    have hsInternalGlobal : s ∈ internalEdges Finset.univ latticeIncidentEdges :=
+      (mem_internalEdges_iff Finset.univ latticeIncidentEdges s).mpr
+        ⟨v, Finset.mem_univ _, hsData.2⟩
+    intro heq
+    exact externalEdge_not_mem_internalEdges hn t.2 (heq ▸ hsInternalGlobal)
+  exact hmatching.1.not_mem_of_mem_of_ne
+    (terminalVertices Finset.univ latticeIncidentEdges)
+    (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+      latticeEndpoint₀ latticeEndpoint₁)
+    matching hsData.1 hExternal hne htVertex hts htExternal
+
 end Ising3DCut.Prediction
