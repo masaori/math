@@ -724,6 +724,7 @@ targets=(
   Ising3DCut.NecSuf.eqLimit_of_infiniteLevelSet
   Ising3DCut.NecSuf.finiteRangeConvergent_eventuallyConstant
   Ising3DCut.LimitQuantity.ising_eventually_constant_of_finite_range_fromNecSuf
+  Ising3DCut.LimitQuantity.finite_range_limit_quantity_only_at_one
   Ising3DCut.Prediction.encodedEvenSubgraph_encodePeriodicSquareMatching_subset
   Ising3DCut.Prediction.latticeEndpoint₀_ne_latticeEndpoint₁
   Ising3DCut.Prediction.encodePeriodicSquareExternalEdges_not_mem_internalEdges
