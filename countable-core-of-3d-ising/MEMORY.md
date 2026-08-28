@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 18:34（本流）: ゴール文書の「第二の正の有理点で極限量の存在を閉じる」へ戻り、`claim_second_limit_quantity_candidate_has_infinite_range` を記述した。$q\ne1$ で極限量が存在するなら、直前の有限値域点の分類の対偶により有限箱量の値域は無限集合である。次は SageMath 検証。
+
 - 2026-08-28 17:38（並行）: 復号写像の繊維を有限集合 `periodicSquareDecodingFiber` として定義し、`encodePeriodicSquareMatching_mem_decodingFiber` で復元した完全マッチングが対応する繊維の元であることを閉じた。次は繊維の各元を city ごとの内部完全被覆の族へ分解する。
 
 - 2026-08-28 17:34（本流）: `claim_finitely_many_values_limit_quantity_only_at_one` の Lean 具体版 `finite_range_limit_quantity_only_at_one` を追加した。有限値域と極限量から `ising_eventually_constant_of_finite_range` で末尾定数性を得て、既存の末尾定数点の分類へ渡す人手証明の合成一段と 1 対 1 に対応する。`lake build` 成功、sorry 非依存検査 679 件。次は同主張の Lean 必要十分版。

@@ -12317,6 +12317,42 @@ c_t&=\alpha(q) &&(\because\ \mathbb R\ \text{の極限の一意性})
     ],
   },
   {
+    id: "soundness_bridge_claim_second_limit_quantity_candidate_has_infinite_range",
+    kind: "claim",
+    title: { text: "第二の極限量候補は無限個の有限箱量を持つ" },
+    labels: ["claim_second_limit_quantity_candidate_has_infinite_range"],
+    habitat: "R",
+    realEscape:
+      "極限量を参照するので、def_limit_quantity_from_finite_box_sequence の箱の大きさの極限を一度だけ引く。証明は直前の分類の対偶だけであり、新たな脱出は加えない。",
+    statement: [
+      paragraph([
+        math(String.raw`q\in\mathbb Q_{>0}`),
+        " とし、",
+        math(String.raw`q\ne1`),
+        " とする。有限箱の量の列 ",
+        math(String.raw`L\mapsto a_L(q)`),
+        " の極限量 ",
+        math(String.raw`\alpha(q)`),
+        "（",
+        ref("def_limit_quantity_from_finite_box_sequence"),
+        "）が存在するならば、値の集合 ",
+        math(String.raw`\{a_L(q)\mid L\ge1\}`),
+        " は無限集合である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "値の集合が有限集合であると仮定する。このとき、有限個の値しかとらず極限量を持つ正の有理点の分類（",
+        ref("claim_finitely_many_values_limit_quantity_only_at_one"),
+        "）より ",
+        math(String.raw`q=1`),
+        " である。これは ",
+        math(String.raw`q\ne1`),
+        " に反する。したがって値の集合は無限集合である。",
+      ]),
+    ],
+  },
+  {
     id: "soundness_bridge_remark_eventually_periodic_limit_quantity_reduces_to_one",
     kind: "remark",
     title: { text: "末尾周期性で極限量を持つ正の有理点は 1 に限られる" },
