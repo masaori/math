@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 09:34（最新）: 本流「剰余類ごとの値の一致は有限の有理数等式で判定できる」を Lean 必要十分版と具体導出まで追加して四層で閉じた。抽象版に必要なのは一つのモノイドの元とその二つの自然数べきだけで、実数・正値性・乗根の一意性・指数の非零性・可換性は不要である。次の本流はゴール文書へ戻り、有限等式へ移した剰余類ごとの値の食い違いを分類へ接続する標的を引き直す。台帳「現在地」先頭を参照。
+
 - 2026-08-28 09:06（並行）: `latticeEndpoint₀_ne_latticeEndpoint₁`（$n\ge2$ で自己ループ無し）と `encodePeriodicSquareExternalEdges_not_mem_internalEdges` を追加し、外部辺が city 内部辺になりえないことを閉じた（sorry 非依存検査 656 件）。次は復号が元の偶部分グラフを含む逆向きの包含を示す。
 
 - 2026-08-28 09:03: 本流 `claim_root_equality_implies_cross_power_equality` の Lean 具体版 `Ising3DCut.LimitQuantity.posRoot_equality_implies_cross_power_equality` を追加した。`x := posRoot A N` と置き、仮定の乗根一致から `x^M = B` を取り、`A^M=(x^N)^M=x^{NM}=x^{MN}=(x^M)^N=B^N` の五つの等号を人手証明と同じ順で形式化した。`lake build` 8966 ジョブ成功、sorry 非依存検査 654 件。次は同主張の Lean 必要十分版。
