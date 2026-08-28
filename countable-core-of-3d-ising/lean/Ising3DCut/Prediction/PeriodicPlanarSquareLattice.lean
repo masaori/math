@@ -810,4 +810,14 @@ theorem subset_encodedEvenSubgraph_encodePeriodicSquareMatching
   · obtain ⟨f, hf, hfe⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph _).mp hext
     exact hf (externalEdge_injective_lattice hfe ▸ he)
 
+/-- 偶部分グラフから完全マッチングを復元して辺集合を復号すると、元の辺集合に戻る。
+直前の二つの包含を束ねた、全単射の片側の逆写像等式である。 -/
+theorem encodedEvenSubgraph_encodePeriodicSquareMatching
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁
+        (encodePeriodicSquareMatching subgraph) = subgraph.1 := by
+  apply Finset.Subset.antisymm
+  · exact encodedEvenSubgraph_encodePeriodicSquareMatching_subset subgraph
+  · exact subset_encodedEvenSubgraph_encodePeriodicSquareMatching hn subgraph
+
 end Ising3DCut.Prediction

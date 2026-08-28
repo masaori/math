@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 10:36（並行）: `encodedEvenSubgraph_encodePeriodicSquareMatching` を追加し、偶部分グラフから復元した完全マッチングの復号が元の辺集合へ戻ることを二包含から閉じた。次は逆向きの復元等式を示し、全単射へ束ねる。
+
 - 2026-08-28 10:32: 本流 `claim_residue_class_values_differ_no_limit_quantity` の SageMath 層を追加した。二つの剰余類部分列が相異なる有理数の定数列になることと、その二定数の共通極限を排除する互いに交わらない有理数近傍を `ZZ` と `QQ` で検査して全 PASS。次は Lean 具体版。
 
 - 2026-08-28 10:06（並行・最新）: 復号→復元の逆向きの包含 `subset_encodedEvenSubgraph_encodePeriodicSquareMatching` を Lean で閉じ、外部辺の単射性と、任意の元の辺について外部辺が city 内部辺になりえないことを一般形で示した。これで復元と復号は互いに逆である。sorry 非依存検査 661 件。次は偶部分グラフと完全マッチングの個数の一致（全単射）を述べる。
