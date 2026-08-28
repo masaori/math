@@ -1,5 +1,7 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
 
+- 2026-08-28 17:08（本流）: `claim_finitely_many_values_limit_quantity_only_at_one` の SageMath 層を `sagemath/check/finitely-many-values-limit-quantity-only-at-one/` に置き、二検査とも PASS。二つの箱の量の一致は根を作らず交差冪の有理数等式で判定する（`QQ` の中で閉じる）。有理点 1 では一辺 1 と 2 の量が一致し値の集合が一点、有理点 1 以外の六標本では既に相異なる。`npm run check` 200 ブロック・173 ラベル・参照 449 件、linkage 104 件。次は同主張の Lean 具体版。
+
 - 2026-08-28 16:36（並行）: 復号写像の各偶部分グラフ上の繊維が空でないことを `exists_perfectMatching_decoding_to_subgraph` で閉じた。復元した完全マッチングを証人に取り、完全マッチング性と復号後の等式を束ねた。次は city ごとの内部完全被覆数による繊維の個数公式。
 
 - 2026-08-28 16:33（本流）: `claim_finitely_many_values_limit_quantity_only_at_one` を記述した。有限値域と極限量から末尾定数性を得る直前の定理を、既存の `claim_eventually_constant_only_at_one` へ合成し、正の有理点を 1 に定める。`npm run check` 200 ブロック・173 ラベル・参照 449 件、SageMath 二検査、linkage 103 件、Lean build 8977 ジョブ、sorry 非依存検査 677 件を通した。次は同主張の SageMath 検証。
