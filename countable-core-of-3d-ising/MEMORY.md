@@ -1,4 +1,6 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-28 19:02（本流）: `claim_second_limit_quantity_candidate_has_infinite_range` の SageMath 層を `sagemath/check/second-limit-quantity-candidate-has-infinite-range/` に置き、二検査とも PASS。結論の必要条件（有理点 1 以外の八標本で一辺 1 と 2 の量が既に相異なり、値の集合が一点でない）と、仮定 $q\ne1$ の必要性（有理点 1 では値の集合が一点）を、根を作らず交差冪の有理数等式だけで検査した。`npm run check` 201 ブロック・174 ラベル・参照 451 件、linkage 105 件。次は同主張の Lean 具体版。
+
 
 - 2026-08-28 18:36（並行）: 復号繊維の完全マッチングを city ごとの内部辺へ分解する成分 `periodicSquareFiberInternalEdgesAt` を定義し、所属同値を閉じた。次は各成分がその city の残存端子を完全被覆することを示す。
 
