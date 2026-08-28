@@ -7704,4 +7704,77 @@ q\nleq2
 \end{aligned}`),
     ],
   },
+  {
+    id: "finite_cellulation_theorem_product_difference_one_hundred_eight_hyperbolic_types",
+    kind: "theorem",
+    title: { text: "積差百八をもつ双曲正則型の分類" },
+    labels: ["theorem_product_difference_one_hundred_eight_hyperbolic_types"],
+    habitat: "Z",
+    verification: ["sagemath/check/product-difference-one-hundred-eight-hyperbolic-types"],
+    statement: [
+      paragraph([
+        ref("def_finite_cellulation_hyperbolic_regular_type_set"),
+        " の有限セル分割データ ",
+        math(String.raw`\mathcal X`),
+        " と双曲正則型 ",
+        math(String.raw`(p,q)\in\operatorname{HyperbolicRegularTypes}(\mathcal X)`),
+        " に対し、自然数から整数への標準単射を ",
+        math(String.raw`\iota_{\mathbb N,\mathbb Z}:\mathbb N\to\mathbb Z`),
+        " とし、",
+      ]),
+      displayMath(String.raw`\bar p:=\iota_{\mathbb N,\mathbb Z}(p),\qquad
+\bar q:=\iota_{\mathbb N,\mathbb Z}(q)`),
+      paragraph(["と書けば、"]),
+      displayMath(String.raw`\begin{aligned}
+\left(\bar p-2\right)\left(\bar q-2\right)=108
+\quad\Longleftrightarrow\quad
+(p,q)={}&(3,110)\ \text{または}\ (4,56)\ \text{または}\ (5,38)\ \text{または}\\
+&(6,29)\ \text{または}\ (8,20)\ \text{または}\ (11,14)\ \text{または}\\
+&(14,11)\ \text{または}\ (20,8)\ \text{または}\ (29,6)\ \text{または}\\
+&(38,5)\ \text{または}\ (56,4)\ \text{または}\ (110,3)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p,q\in\mathbb N_{>0}`),
+        "、",
+        math(String.raw`\bar p,\bar q\in\mathbb Z`),
+        " である。この分類は自然数の加法、百八の正の因子対、および標準単射だけから得られ、除算、実数、複素数、極限、積分を用いない。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("theorem_hyperbolic_regular_type_degree_lower_bounds"), " より"]),
+      displayMath(String.raw`3\le p\qquad\text{かつ}\qquad3\le q.`),
+      paragraph([
+        "したがって、一意な ",
+        math(String.raw`a,b\in\mathbb N_{>0}`),
+        " が存在して ",
+        math(String.raw`p=a+2`),
+        " および ",
+        math(String.raw`q=b+2`),
+        " を満たす。この ",
+        math(String.raw`a,b`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\bar p-2\right)\left(\bar q-2\right)=108
+&\Longleftrightarrow ab=108
+&&\bigl(\because\ \text{標準単射は加法・乗法・等号を保存し反映する}\bigr)\\
+&\Longleftrightarrow
+(a,b)=(1,108)\ \text{または}\ (a,b)=(2,54)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(3,36)\ \text{または}\ (a,b)=(4,27)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(6,18)\ \text{または}\ (a,b)=(9,12)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(12,9)\ \text{または}\ (a,b)=(18,6)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(27,4)\ \text{または}\ (a,b)=(36,3)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(54,2)\ \text{または}\ (a,b)=(108,1)
+&&\bigl(\because\ 108\text{ の正の因子対の全体}\bigr)\\
+&\Longleftrightarrow
+(p,q)=(3,110)\ \text{または}\ (p,q)=(4,56)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(5,38)\ \text{または}\ (p,q)=(6,29)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(8,20)\ \text{または}\ (p,q)=(11,14)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(14,11)\ \text{または}\ (p,q)=(20,8)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(29,6)\ \text{または}\ (p,q)=(38,5)\ \text{または}\\
+&\hspace{5.7em}(p,q)=(56,4)\ \text{または}\ (p,q)=(110,3)
+&&\bigl(\because\ p=a+2\text{ および }q=b+2\bigr).
+\end{aligned}`),
+    ],
+  },
 ]);
