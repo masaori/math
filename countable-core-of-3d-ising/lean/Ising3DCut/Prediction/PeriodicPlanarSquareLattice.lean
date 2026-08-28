@@ -835,4 +835,25 @@ theorem exists_perfectMatching_decoding_to_subgraph
     encodePeriodicSquareMatching_isPerfectMatching subgraph,
     encodedEvenSubgraph_encodePeriodicSquareMatching hn subgraph⟩
 
+/-- 偶部分グラフへ復号される完全マッチングの有限集合。繊維の個数公式の左辺を定める。 -/
+noncomputable def periodicSquareDecodingFiber
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n) :
+    Finset (Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))) := by
+  classical
+  exact Finset.univ.filter fun matching ↦
+    IsPerfectMatching
+      (terminalVertices Finset.univ latticeIncidentEdges)
+      (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁)
+      matching ∧
+    encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁ matching = subgraph.1
+
+/-- 復元した完全マッチングは、対応する復号繊維の元である。 -/
+theorem encodePeriodicSquareMatching_mem_decodingFiber
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    encodePeriodicSquareMatching subgraph ∈ periodicSquareDecodingFiber subgraph := by
+  simp only [periodicSquareDecodingFiber, Finset.mem_filter, Finset.mem_univ, true_and]
+  exact ⟨encodePeriodicSquareMatching_isPerfectMatching subgraph,
+    encodedEvenSubgraph_encodePeriodicSquareMatching hn subgraph⟩
+
 end Ising3DCut.Prediction
