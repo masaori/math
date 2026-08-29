@@ -1617,4 +1617,37 @@ theorem fiberInternalEdgesAt_pairingsProductMatching_subset_periodicSquarePairin
         ⟨v, Finset.mem_univ v, hsAt⟩)
       (encodePeriodicSquareExternalEdges_not_mem_internalEdges hn subgraph hsExt)
 
+/-- 指定対分け族から構成した完全マッチングを一つの city へ制限すると、
+その city に指定した対分けへ戻る。直前の二つの包含を束ねた等式である。 -/
+theorem fiberInternalEdgesAt_pairingsProductMatching
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v})
+    (v : LatticeVertex n) :
+    periodicSquareFiberInternalEdgesAt
+      (periodicSquarePairingsProductMatching subgraph pairings) v = (pairings v).1 := by
+  apply Finset.Subset.antisymm
+  · exact fiberInternalEdgesAt_pairingsProductMatching_subset_periodicSquarePairing
+      hn subgraph pairings v
+  · exact periodicSquarePairing_subset_fiberInternalEdgesAt_pairingsProductMatching
+      subgraph pairings v
+
+/-- 復号繊維から city ごとの対分けの直積への写像は全射である。
+指定された対分け族から構成した完全マッチングを証人に取り、復号値と city ごとの
+制限が指定値へ戻ることを用いる。 -/
+theorem periodicSquareFiberToPairingsProduct_surjective
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    Function.Surjective (periodicSquareFiberToPairingsProduct hn subgraph) := by
+  classical
+  intro pairings
+  have hmatching : periodicSquarePairingsProductMatching subgraph pairings ∈
+      periodicSquareDecodingFiber subgraph := by
+    simp only [periodicSquareDecodingFiber, Finset.mem_filter, Finset.mem_univ, true_and]
+    exact ⟨periodicSquarePairingsProductMatching_isPerfectMatching subgraph pairings,
+      encodedEvenSubgraph_periodicSquarePairingsProductMatching hn subgraph pairings⟩
+  refine ⟨⟨periodicSquarePairingsProductMatching subgraph pairings, hmatching⟩, ?_⟩
+  funext v
+  apply Subtype.ext
+  exact fiberInternalEdgesAt_pairingsProductMatching hn subgraph pairings v
+
 end Ising3DCut.Prediction
