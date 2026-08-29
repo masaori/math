@@ -35,7 +35,7 @@ export default defineBlocks([
         " に対し、反復 ",
         math(String.raw`F^n:X\to X`),
         " は ",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         " の再帰で定める。写像の集合",
       ]),
       displayMath(String.raw`P_F:=\{\,F^n:X\to X\mid n\in\mathbb{N}\,\}`),
@@ -71,13 +71,13 @@ export default defineBlocks([
         " について帰納法を行う。",
         math(String.raw`m=0`),
         " のとき、",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         " と自然数の加法の単位元則より",
       ]),
       displayMath(String.raw`\begin{aligned}
 F^0\circ F^n
 &=\operatorname{id}_{X}\circ F^n
-  \quad(\because\ \blkref{def_global_map_iterate})\\
+  \quad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=F^n
   \quad(\because\ \text{恒等写像の性質})\\
 &=F^{0+n}
@@ -86,19 +86,19 @@ F^0\circ F^n
       paragraph([
         math(String.raw`F^m\circ F^n=F^{m+n}`),
         " と仮定する。",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         "、写像合成の結合律、帰納法の仮定を順に用いると",
       ]),
       displayMath(String.raw`\begin{aligned}
 F^{m+1}\circ F^n
 &=(F\circ F^m)\circ F^n
-  \quad(\because\ \blkref{def_global_map_iterate})\\
+  \quad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=F\circ(F^m\circ F^n)
   \quad(\because\ \text{写像合成の結合律})\\
 &=F\circ F^{m+n}
   \quad(\because\ \text{帰納法の仮定})\\
 &=F^{(m+n)+1}
-  \quad(\because\ \blkref{def_global_map_iterate})\\
+  \quad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=F^{(m+1)+n}
   \quad(\because\ \mathbb{N}\text{ の加法の結合律と交換律})
 \end{aligned}`),
@@ -122,7 +122,7 @@ F^{m+1}\circ F^n
     ],
     proof: [
       paragraph([
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         " より ",
         math(String.raw`F^0=\operatorname{id}_{X}\in P_F`),
         " である。任意の ",

@@ -42,7 +42,7 @@ export default defineBlocks([
   },
 
   {
-    id: "iterate_monoid_minimal_period_claim_propagation",
+    id: "iterate_monoid_minimal_period_claim_divisibility_extension",
     kind: "claim",
     title: { text: "最小衝突開始位置での周期は以後の全ての位置へ伝わる" },
     labels: ["claim_iterate_monoid_period_propagates_after_collision_start"],

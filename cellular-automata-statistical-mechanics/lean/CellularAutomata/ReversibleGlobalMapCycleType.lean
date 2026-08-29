@@ -8,8 +8,8 @@ Mathlib の `Equiv.Perm.cycleType` と、人手証明の「全周期軌道の元
 有限集合・自然数・有限多重集合だけを使い、R / C は使わない。
 
 対応表（人手証明 → この file）
-  def_reversible_global_maps                         `ReversibleMap`, `toPerm`
-  claim_reversible_all_configurations_periodic       `all_configurations_periodic`
+  def_bijective_self_maps                         `ReversibleMap`, `toPerm`
+  claim_bijective_self_map_all_elements_periodic       `all_configurations_periodic`
   def_reversible_cycle_type                          `cycleType`
   claim_reversible_cycle_type_sum                    `cycleType_sum`, `cycleType_members_positive`
   claim_reversible_cycle_type_conjugacy_invariance   `cycleType_eq_of_conj`
@@ -156,7 +156,7 @@ theorem conj_iff_cycleType_eq (F G : ReversibleMap V) :
 /-
 以下は人手証明の
   claim_periodic_orbit_card_eq_min_period            `card_orbit_eq_minPeriod`
-  claim_reversible_orbits_partition_configurations   `self_mem_orbit`, `orbit_eq_of_mem_orbit`,
+  claim_bijective_self_map_orbits_partition_carrier   `self_mem_orbit`, `orbit_eq_of_mem_orbit`,
                                                      `orbit_eq_of_not_disjoint`
 に対応する段である。周期軌道は人手証明と同じく「一周期分の反復列」として定義し、
 その元数が最小周期に等しいこと、および周期軌道が配位集合を分割することを、
@@ -280,9 +280,9 @@ theorem orbit_eq_of_not_disjoint (F : ReversibleMap V) (q q' z : Config V)
 /-! ## 配位数の分割の実現と共役類
 
 以下は人手証明の
-  def_configuration_count_partitions
+  def_carrier_cardinality_partitions
   claim_reversible_cycle_type_realizes_every_partition
-  def_reversible_global_map_conjugacy_classes
+  def_bijective_self_map_conjugacy_classes
   claim_reversible_conjugacy_classes_bijection_partitions
 に対応する。
 -/

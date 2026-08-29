@@ -1,4 +1,4 @@
-# 対象ラベル: claim_iterate_collision_gives_eventual_period
+# 対象ラベル: claim_iterate_collision_gives_repeating_tail
 # 衝突 F^i = F^j (i < j, p = j - i >= 1) から、n >= i のとき F^{n+p} = F^n が従うことを、
 # 人手証明の式変形の各行（k = n - i と置き、指数の書き換え・加法則・衝突の代入・加法則・指数の書き換え）
 # を一行ずつ真理値表の等号で検査する。

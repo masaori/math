@@ -2,9 +2,9 @@
 
 ## 対象
 
-**対象ラベル**: `claim_global_map_injectivity_finite_decidability`
+**対象ラベル**: `claim_finite_self_map_injectivity_finite_decidability`
 
-- 併せて検証するラベル: `claim_global_map_injective_iff_surjective`、`claim_global_map_injective_iff_all_periodic`
+- 併せて検証するラベル: `claim_finite_self_map_injective_iff_surjective`、`claim_finite_self_map_injective_iff_all_periodic`
 - 検証範囲: 単射性と全射性の同値（証明が使う像の個数の数え上げの各段を含む）、単射性と「全配位の最小前周期が 0」の同値（両方向の中間段を含む）、全対走査と最小前周期走査による有限決定
 - 全数範囲: 配位数 $1,2,4$ の有限集合上の全自己写像、およびセル数 $1$ から $4$ の巡回舞台上の全 256 初等 CA 規則（合計 1,285 写像。うち単射な写像は 263）
 

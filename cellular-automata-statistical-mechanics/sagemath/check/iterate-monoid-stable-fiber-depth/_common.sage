@@ -7,7 +7,7 @@ load(os.path.join(_dir, '..', 'iterate-monoid-stable-fiber-dynamics', '_common.s
 
 
 def orbit(F, y, last_exponent):
-    """F^0 y, F^1 y, ..., F^{last_exponent} y の列（def_global_map_iterate の反復を一段ずつ適用）。"""
+    """F^0 y, F^1 y, ..., F^{last_exponent} y の列（def_finite_self_map_iterate の反復を一段ずつ適用）。"""
     values = [y]
     for _ in range(last_exponent):
         values.append(F[values[-1]])

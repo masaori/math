@@ -38,7 +38,7 @@ variable (f : (v : V) → (↥(N v) → State) → State)
 def IsPeriodicityPair (y : V → State) (i p : ℕ) : Prop :=
   1 ≤ p ∧ ∀ n : ℕ, i ≤ n → iterate N f (n + p) y = iterate N f n y
 
-/-- P(y) ≠ ∅（`claim_eventual_periodicity` による）。 -/
+/-- P(y) ≠ ∅（`claim_finite_self_map_repeating_tail` による）。 -/
 theorem exists_periodicityPair (y : V → State) : ∃ i p : ℕ, IsPeriodicityPair N f y i p := by
   obtain ⟨i, p, hp, _, h⟩ := eventual_periodicity N f y
   exact ⟨i, p, hp, h⟩

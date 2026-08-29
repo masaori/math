@@ -7,11 +7,11 @@
 - 併せて検証するラベル:
   `def_self_transpose_neighborhood_assignment`、
   `claim_self_transpose_iff_symmetric_membership`、
-  `def_unordered_cell_pairs`、
+  `def_unordered_carrier_pairs`、
   `def_self_transpose_pair_encoding`、
   `def_pair_set_neighborhood_reconstruction`、
   `claim_self_transpose_pair_encoding_bijection`、
-  `claim_unordered_cell_pair_count`、
+  `claim_unordered_carrier_pair_count`、
   `claim_self_transpose_neighborhood_assignments_finitely_decidable`
 - 本文の各段（自己転置性と近傍所属の対称性の同値、非順序対符号と復元が互いに逆であること、
   非順序対の個数、最終個数、有限決定）を別々の検算に分け、最終式だけの一致で済ませない。

@@ -45,7 +45,7 @@ export default defineBlocks([
         "と定める（",
         math(String.raw`F^{n}`),
         " は ",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         "）。", math(String.raw`Z_{n}(F)`), " はその元の個数である。",
       ]),
     ],
@@ -118,7 +118,7 @@ export default defineBlocks([
         " を取る。",
         math(String.raw`F^{0}\,y=y`),
         "（",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         "）なので ",
         math(String.raw`F^{0+n}\,y=F^{0}\,y`),
         "（",
@@ -220,7 +220,7 @@ export default defineBlocks([
 F^{n}\,y
 &=F^{0+k\,\pi(y)}\,y\qquad(\because\ n=k\,\pi(y),\ 0+n=n)\\
 &=F^{0}\,y\qquad(\because\ \blkref{claim_period_multiples}\ \text{を } i:=0,\ q:=\pi(y),\ k \text{ に適用})\\
-&=y\qquad(\because\ \blkref{def_global_map_iterate})
+&=y\qquad(\because\ \blkref{def_finite_self_map_iterate})
 \end{aligned}`),
       paragraph([
         "よって ",
@@ -417,7 +417,7 @@ F^{r}\,y
         " の二元の等号 1 回である（",
         math(String.raw`F^{n}\,y`),
         " は ",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         " の再帰で有限回の ",
         math(String.raw`F`),
         " の適用として計算される）。",

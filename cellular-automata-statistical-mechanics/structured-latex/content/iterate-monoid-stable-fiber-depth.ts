@@ -80,9 +80,9 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`\begin{aligned}
 F^{n+p}(F(y))
-&=F^{n+p+1}(y)\quad(\because\ \blkref{def_global_map_iterate})\\
+&=F^{n+p+1}(y)\quad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=F^{n+1}(y)\quad(\because\ (m,p)\in P(y)\ \text{かつ}\ n+1\ge m)\\
-&=F^n(F(y))\quad(\because\ \blkref{def_global_map_iterate}).
+&=F^n(F(y))\quad(\because\ \blkref{def_finite_self_map_iterate}).
 \end{aligned}`),
       paragraph([
         "よって ", math(String.raw`(m-1,p)\in P(F(y))`), " であり、",
@@ -95,9 +95,9 @@ F^{n+p}(F(y))
       ]),
       displayMath(String.raw`\begin{aligned}
 F^{n+r}(y)
-&=F^{h+r}(F(y))\quad(\because\ n=h+1\ \text{と}\ \blkref{def_global_map_iterate})\\
+&=F^{h+r}(F(y))\quad(\because\ n=h+1\ \text{と}\ \blkref{def_finite_self_map_iterate})\\
 &=F^h(F(y))\quad(\because\ (j,r)\in P(F(y))\ \text{かつ}\ h\ge j)\\
-&=F^n(y)\quad(\because\ n=h+1\ \text{と}\ \blkref{def_global_map_iterate}).
+&=F^n(y)\quad(\because\ n=h+1\ \text{と}\ \blkref{def_finite_self_map_iterate}).
 \end{aligned}`),
       paragraph([
         "よって ", math(String.raw`(j+1,r)\in P(y)`), " であり、",

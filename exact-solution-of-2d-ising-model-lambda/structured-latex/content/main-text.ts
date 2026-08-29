@@ -49234,6 +49234,593 @@ s_n:=\frac{1}{2}\left(d_n-\sum_{j=1}^{n-1}s_js_{n-j}\right)\quad(n\ge1)`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_walk_twist_sign",
+        labels: [],
+        title: { text: "辺列に沿うねじれ符号" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_walk_twist_sign_product",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_edge_sequence_seam_parities",
+                    kind: "definition",
+                    title: { text: "有限な向き付き辺列の切断線偶奇" },
+                    labels: ["def_edge_sequence_seam_parities"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        math(String.raw`m\in\mathbb N`), " とし、有限な向き付き辺列を ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        " とし、各 ", math(String.raw`k\in\{1,\ldots,m\}`), " について ",
+                        math(String.raw`\vec e_k\in\vec E_L`),
+                        " とする。横周期と縦周期の切断線を横切る回数の偶奇を、それぞれ",
+                      ]),
+                      displayMath(String.raw`h(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)\right)\bmod2,
+\qquad
+v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
+                      paragraph([
+                        "で定める（", ref("def_seam_parities"), "）。したがって ",
+                        math(String.raw`h(\gamma),v(\gamma)\in\{0,1\}`),
+                        " である。空列では二つの和を空和 ", math(String.raw`0\in\mathbb N`),
+                        " とする。この定義は有限和と二で割った余りだけで閉じる。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_walk_twist_sign_product",
+                kind: "claim",
+                title: { text: "辺列に沿うねじれ符号の積は切断線偶奇だけで決まる" },
+                labels: ["claim_walk_twist_sign_product"],
+                habitat: "Z",
+                verification: ["sagemath/check/walk-twist-sign-product"],
+                lean: [
+                  "Ising2DLambda.KacWard.walkTwistSign_product",
+                  "Ising2DLambda.NecSuf.KacWard.walkTwistSign_product_necSuf",
+                  "Ising2DLambda.KacWard.walkTwistSign_product_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`(a,b)\in\mathcal S`), "（",
+                    ref("def_spin_structures"), "）と有限な向き付き辺列 ",
+                    math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " について、整数の等式",
+                  ]),
+                  displayMath(String.raw`\prod_{k=1}^{m}\varepsilon_{a,b}(\vec e_k)
+=(-1)^{a\,h(\gamma)+b\,v(\gamma)}`),
+                  paragraph([
+                    "が成り立つ。左辺のねじれ符号は ", ref("def_spin_structures"),
+                    "、右辺の二つの偶奇は ", ref("def_edge_sequence_seam_parities"), " で定めた。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`\alpha_k:=a\,c_{\mathrm h}(\vec e_k)+b\,c_{\mathrm v}(\vec e_k)\in\mathbb N`),
+                    " と置く。求めたい積から始めると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\prod_{k=1}^{m}\varepsilon_{a,b}(\vec e_k)
+&=\prod_{k=1}^{m}(-1)^{\alpha_k}
+&&\bigl(\because\ \blkref{def_spin_structures}\bigr)\\
+&=(-1)^{\sum_{k=1}^{m}\alpha_k}
+&&\bigl(\because\ (-1)^r(-1)^s=(-1)^{r+s}\text{ を有限積へ繰り返し当てる}\bigr)\\
+&=(-1)^{a\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)+b\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)}
+&&\bigl(\because\ \alpha_k\text{ の定義と }\mathbb Z\text{ の分配則・有限和の並べ替え}\bigr)\\
+&=(-1)^{\left(a\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)+b\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2}
+&&\bigl(\because\ (-1)^{n+2}=(-1)^n\text{ を二で割った商の回数だけ当てる}\bigr)\\
+&=(-1)^{\left(a\,h(\gamma)+b\,v(\gamma)\right)\bmod2}
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\text{。法 }2\text{ で合同な因子に取り換えても }\bmod2\text{ の値は変わらない}\bigr)\\
+&=(-1)^{a\,h(\gamma)+b\,v(\gamma)}
+&&\bigl(\because\ (-1)^{n+2}=(-1)^n\text{ を二で割った商の回数だけ当てる}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "空列では左辺が空積 ", math(String.raw`1`), "、右辺が ",
+                    math(String.raw`(-1)^0=1`), " なので同じ等式が成り立つ。",
+                    "閉路であることも辺の接続も使っていないため、この符号因子は後続の歩道展開でそのまま使える。",
+                    "全過程は自然数の偶奇と整数の有限積だけで閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_reversal_direction_shift",
+        labels: [],
+        title: { text: "反転と方向番号" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_reversal_direction_shift",
+              beforeFocus: [],
+              focus: {
+                id: "kac_ward_claim_reversal_direction_shift",
+                kind: "claim",
+                title: { text: "反転は方向番号を二だけ進める" },
+                labels: ["claim_reversal_direction_shift"],
+                habitat: "Z",
+                verification: ["sagemath/check/reversal-direction-shift"],
+                lean: [
+                  "Ising2DLambda.KacWard.directionNumber_reversal",
+                  "Ising2DLambda.NecSuf.KacWard.offset_reverse_necSuf",
+                  "Ising2DLambda.KacWard.directionNumber_reversal_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`),
+                    "（", ref("def_oriented_edges"), "）について、",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " の等式",
+                  ]),
+                  displayMath(String.raw`\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`),
+                  paragraph([
+                    "が成り立つ。方向番号 ", math(String.raw`\operatorname{dir}`), " は ",
+                    ref("def_oriented_edge_direction"), "、反転写像 ", math(String.raw`\iota`),
+                    " は ", ref("def_edge_reversal"), " で定めた。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`\vec e=(e,d)`), " と書く。", ref("def_oriented_edge_direction"),
+                    " の四つの場合は重ならず全ての向き付き辺を尽くすので、場合ごとに示す。",
+                    "まず ", math(String.raw`e\in E_{L,\mathrm h}`), " かつ ",
+                    math(String.raw`d=0`), " の場合は",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\iota(e,0))
+&=\operatorname{dir}(e,1)
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }1-0=1\bigr)\\
+&=2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm h},\ d=1\text{ の場合}\bigr)\\
+&=0+2
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の零元の加法}\bigr)\\
+&=\operatorname{dir}(e,0)+2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm h},\ d=0\text{ の場合}\bigr)
+\end{aligned}`),
+                  paragraph(["である。次に ", math(String.raw`e\in E_{L,\mathrm v}`),
+                    " かつ ", math(String.raw`d=0`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\iota(e,0))
+&=\operatorname{dir}(e,1)
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }1-0=1\bigr)\\
+&=3
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm v},\ d=1\text{ の場合}\bigr)\\
+&=1+2
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ で }1+2=3\bigr)\\
+&=\operatorname{dir}(e,0)+2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm v},\ d=0\text{ の場合}\bigr)
+\end{aligned}`),
+                  paragraph(["である。次に ", math(String.raw`e\in E_{L,\mathrm h}`),
+                    " かつ ", math(String.raw`d=1`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\iota(e,1))
+&=\operatorname{dir}(e,0)
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }1-1=0\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm h},\ d=0\text{ の場合}\bigr)\\
+&=2+2
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ で }2+2=4=0\bigr)\\
+&=\operatorname{dir}(e,1)+2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm h},\ d=1\text{ の場合}\bigr)
+\end{aligned}`),
+                  paragraph(["である。最後に ", math(String.raw`e\in E_{L,\mathrm v}`),
+                    " かつ ", math(String.raw`d=1`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\iota(e,1))
+&=\operatorname{dir}(e,0)
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }1-1=0\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm v},\ d=0\text{ の場合}\bigr)\\
+&=3+2
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ で }3+2=5=1\bigr)\\
+&=\operatorname{dir}(e,1)+2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm v},\ d=1\text{ の場合}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。四つの場合を合わせて主張を得る。",
+                    "後続の歩道と逆歩道の対称性（逆歩道の回転位相の積が元の積の逆数になること）は、",
+                    "この等式を繰り返し引く。全過程は有限集合の場合分けと ",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " の加法だけで閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_reversal_rotation_phase",
+        labels: [],
+        title: { text: "逆歩道の回転位相" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_reversal_rotation_phase_product",
+              beforeFocus: [],
+              focus: {
+                id: "kac_ward_claim_reversal_rotation_phase_product",
+                kind: "claim",
+                title: { text: "反転辺対の回転位相の積は一である" },
+                labels: ["claim_reversal_rotation_phase_product"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/reversal-rotation-phase"],
+                lean: [
+                  "Ising2DLambda.KacWard.reversal_rotation_phase_product",
+                  "Ising2DLambda.NecSuf.KacWard.reverse_phase_mul_necSuf",
+                  "Ising2DLambda.KacWard.reversal_rotation_phase_product_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " と ",
+                    math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " に対し、",
+                    math(String.raw`\iota(\vec e)\in\operatorname{Next}(\iota(\vec f))`), " であり、",
+                  ]),
+                  displayMath(String.raw`\rho\bigl(\iota(\vec f),\iota(\vec e)\bigr)\,
+\rho(\vec e,\vec f)=1\quad\text{in }\overline{\mathbb Q}`),
+                  paragraph([
+                    "が成り立つ。反転写像は ", ref("def_edge_reversal"), "、非後退接続は ",
+                    ref("def_nonbacktracking_successors"), "、回転位相は ", ref("def_rotation_phase"), " で定めた。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " より ",
+                    math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{src}(\vec f)`), " かつ ",
+                    math(String.raw`\vec f\ne\iota(\vec e)`), " である。反転は始点と終点を交換するので",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}\bigl(\iota(\vec f)\bigr)
+&=\operatorname{src}(\vec f)
+&&\bigl(\because\ \blkref{def_oriented_edge_endpoints}\text{ と }\blkref{def_edge_reversal}\bigr)\\
+&=\operatorname{tgt}(\vec e)
+&&\bigl(\because\ \vec f\in\operatorname{Next}(\vec e)\bigr)\\
+&=\operatorname{src}\bigl(\iota(\vec e)\bigr)
+&&\bigl(\because\ \blkref{def_oriented_edge_endpoints}\text{ と }\blkref{def_edge_reversal}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となる。また ", math(String.raw`\iota(\vec e)=\iota(\iota(\vec f))`), " と仮定すると、",
+                    ref("claim_reversal_is_involution"), " により ", math(String.raw`\vec e=\iota(\vec f)`),
+                    "、さらに同じ対合性により ", math(String.raw`\vec f=\iota(\vec e)`),
+                    " となって非後退接続の仮定に反する。したがって ",
+                    math(String.raw`\iota(\vec e)\in\operatorname{Next}(\iota(\vec f))`), " である。",
+                  ]),
+                  paragraph([
+                    math(String.raw`\theta:=\operatorname{dir}(\vec f)-\operatorname{dir}(\vec e)\in\mathbb Z/4\mathbb Z`),
+                    " と置く。非後退接続の三つの場合により ",
+                    math(String.raw`\theta\in\{0,1,-1\}`), " である。逆順にした反転辺対の回転差は",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}\bigl(\iota(\vec e)\bigr)-\operatorname{dir}\bigl(\iota(\vec f)\bigr)
+&=\bigl(\operatorname{dir}(\vec e)+2\bigr)-\bigl(\operatorname{dir}(\vec f)+2\bigr)
+&&\bigl(\because\ \blkref{claim_reversal_direction_shift}\text{ を二辺へ適用}\bigr)\\
+&=\operatorname{dir}(\vec e)-\operatorname{dir}(\vec f)
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の四則}\bigr)\\
+&=-\theta
+&&\bigl(\because\ \theta\text{ の定義と }\mathbb Z/4\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                  paragraph(["となる。", math(String.raw`\theta=0`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho\bigl(\iota(\vec f),\iota(\vec e)\bigr)\rho(\vec e,\vec f)
+&=1\cdot1
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の直進の場合}\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の単位元}\bigr)
+\end{aligned}`),
+                  paragraph([math(String.raw`\theta=1`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho\bigl(\iota(\vec f),\iota(\vec e)\bigr)\rho(\vec e,\vec f)
+&=\zeta_8^{-1}\zeta_8
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ と逆順では回転差が }-\theta\bigr)\\
+&=1
+&&\bigl(\because\ \zeta_8^4=-1\text{ より }\zeta_8\ne0\text{、}\overline{\mathbb Q}\text{ の逆元}\bigr)
+\end{aligned}`),
+                  paragraph([math(String.raw`\theta=-1`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho\bigl(\iota(\vec f),\iota(\vec e)\bigr)\rho(\vec e,\vec f)
+&=\zeta_8\zeta_8^{-1}
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ と逆順では回転差が }-\theta\bigr)\\
+&=1
+&&\bigl(\because\ \zeta_8^4=-1\text{ より }\zeta_8\ne0\text{、}\overline{\mathbb Q}\text{ の逆元}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。三つの場合を合わせて主張を得る。有限集合、",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), "、代数的数の体の中だけで閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_total_turning",
+        labels: [],
+        title: { text: "非後退辺列の総回転数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_walk_rotation_phase_total_turning",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_nonbacktracking_edge_sequence",
+                    kind: "definition",
+                    title: { text: "非後退辺列" },
+                    labels: ["def_nonbacktracking_edge_sequence"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        math(String.raw`m\in\mathbb N`), "、", math(String.raw`m\ge1`),
+                        " とする。有限な向き付き辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        "（各 ", math(String.raw`k\in\{1,\ldots,m\}`), " について ",
+                        math(String.raw`\vec e_k\in\vec E_L`),
+                        "）が**非後退辺列**であるとは、",
+                        math(String.raw`1\le k\le m-1`), " を満たすすべての ",
+                        math(String.raw`k\in\mathbb N`), " について",
+                      ]),
+                      displayMath(String.raw`\vec e_{k+1}\in\operatorname{Next}(\vec e_k)`),
+                      paragraph([
+                        "が成り立つことをいう（", ref("def_nonbacktracking_successors"),
+                        "）。", math(String.raw`m=1`),
+                        " のときは条件が空なので、一辺だけの列はすべて非後退辺列である。",
+                        "この定義は有限集合の元の有限列とその所属の検査だけで閉じる。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_step_turning",
+                    kind: "definition",
+                    title: { text: "一歩の回転数" },
+                    labels: ["def_step_turning"],
+                    habitat: "Z",
+                    statement: [
+                      paragraph([
+                        math(String.raw`\vec e\in\vec E_L`), " と ",
+                        math(String.raw`\vec f\in\operatorname{Next}(\vec e)`),
+                        " に対し、一歩の回転数 ",
+                        math(String.raw`\tau(\vec e,\vec f)\in\mathbb Z`), " を",
+                      ]),
+                      displayMath(String.raw`\tau(\vec e,\vec f):=
+\begin{cases}
+0,&\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e),\\
+1,&\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)+1,\\
+-1,&\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)-1
+\end{cases}`),
+                      paragraph([
+                        "で定める。方向番号 ", math(String.raw`\operatorname{dir}`),
+                        " と等式は ", math(String.raw`\mathbb Z/4\mathbb Z`), " のもの（",
+                        ref("def_oriented_edge_direction"), "）、値 ",
+                        math(String.raw`0,1,-1`), " は整数である。三つの場合は ",
+                        ref("def_rotation_phase"),
+                        " の三つの場合と同じであり、後続辺を尽くし、",
+                        math(String.raw`\mathbb Z/4\mathbb Z`), " で ",
+                        math(String.raw`0,1,-1`),
+                        " が相異なるため重ならない。したがってこの定義は well-defined である。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_total_turning",
+                    kind: "definition",
+                    title: { text: "総回転数" },
+                    labels: ["def_total_turning"],
+                    habitat: "Z",
+                    statement: [
+                      paragraph([
+                        "非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        "（", ref("def_nonbacktracking_edge_sequence"),
+                        "）の総回転数 ", math(String.raw`t(\gamma)\in\mathbb Z`), " を",
+                      ]),
+                      displayMath(String.raw`t(\gamma):=\sum_{k=1}^{m-1}\tau(\vec e_k,\vec e_{k+1})`),
+                      paragraph([
+                        "で定める（", ref("def_step_turning"), "）。",
+                        math(String.raw`m=1`), " のときは空和 ",
+                        math(String.raw`0\in\mathbb Z`),
+                        " とする。この定義は整数の有限和だけで閉じる。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "supportingClaim",
+                  element: {
+                    id: "kac_ward_claim_rotation_phase_as_turning_power",
+                    kind: "claim",
+                    title: { text: "回転位相は一歩の回転数の冪である" },
+                    labels: ["claim_rotation_phase_as_turning_power"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/walk-rotation-phase-total-turning"],
+                    lean: [
+                      "Ising2DLambda.KacWard.phaseOfTurn_eq_zpow",
+                      "Ising2DLambda.NecSuf.KacWard.phaseOfTurn_eq_zpow_necSuf",
+                      "Ising2DLambda.KacWard.phaseOfTurn_eq_zpow_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`\vec e\in\vec E_L`), " と ",
+                        math(String.raw`\vec f\in\operatorname{Next}(\vec e)`),
+                        " について、", math(String.raw`\overline{\mathbb Q}`), " の等式",
+                      ]),
+                      displayMath(String.raw`\rho(\vec e,\vec f)=\zeta_8^{\,\tau(\vec e,\vec f)}`),
+                      paragraph([
+                        "が成り立つ。左辺は ", ref("def_rotation_phase"),
+                        "、右辺の指数は整数 ", math(String.raw`\tau(\vec e,\vec f)\in\{0,1,-1\}`),
+                        "（", ref("def_step_turning"), "）であり、負の指数の冪は体 ",
+                        math(String.raw`\overline{\mathbb Q}`), " の逆元による（",
+                        math(String.raw`\zeta_8^4=-1`), " より ",
+                        math(String.raw`\zeta_8\ne0`), " なので逆元は存在する）。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        ref("def_rotation_phase"), " と ", ref("def_step_turning"),
+                        " の三つの場合は同じ場合分けなので、場合ごとに示す。直進（",
+                        math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)`),
+                        "）の場合は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\rho(\vec e,\vec f)
+&=1
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の直進の場合}\bigr)\\
+&=\zeta_8^{\,0}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零乗 }y^{0}=1\bigr)\\
+&=\zeta_8^{\,\tau(\vec e,\vec f)}
+&&\bigl(\because\ \blkref{def_step_turning}\text{ の直進の場合}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。左回転（",
+                        math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)+1`),
+                        "）の場合は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\rho(\vec e,\vec f)
+&=\zeta_8
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の左回転の場合}\bigr)\\
+&=\zeta_8^{\,1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の一乗 }y^{1}=y\bigr)\\
+&=\zeta_8^{\,\tau(\vec e,\vec f)}
+&&\bigl(\because\ \blkref{def_step_turning}\text{ の左回転の場合}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。右回転（",
+                        math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)-1`),
+                        "）の場合は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\rho(\vec e,\vec f)
+&=\zeta_8^{-1}
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の右回転の場合}\bigr)\\
+&=\zeta_8^{\,\tau(\vec e,\vec f)}
+&&\bigl(\because\ \blkref{def_step_turning}\text{ の右回転の場合}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。三つの場合が ", ref("def_rotation_phase"),
+                        " の後続辺を尽くすので主張を得る。全過程は場合分けと ",
+                        math(String.raw`\overline{\mathbb Q}`),
+                        " の冪だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_walk_rotation_phase_total_turning",
+                kind: "claim",
+                title: { text: "回転位相の積は総回転数の冪である" },
+                labels: ["claim_walk_rotation_phase_total_turning"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/walk-rotation-phase-total-turning"],
+                lean: [
+                  "Ising2DLambda.KacWard.walk_rotation_phase_total_turning",
+                  "Ising2DLambda.NecSuf.KacWard.phase_prod_eq_zpow_sum_necSuf",
+                  "Ising2DLambda.KacWard.walk_rotation_phase_total_turning_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の非後退辺列 ",
+                    math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_nonbacktracking_edge_sequence"),
+                    "）について、", math(String.raw`\overline{\mathbb Q}`), " の等式",
+                  ]),
+                  displayMath(String.raw`\prod_{k=1}^{m-1}\rho(\vec e_k,\vec e_{k+1})
+=\zeta_8^{\,t(\gamma)}`),
+                  paragraph([
+                    "が成り立つ。左辺は回転位相（", ref("def_rotation_phase"),
+                    "）の有限積（", math(String.raw`m=1`), " のときは空積 ",
+                    math(String.raw`1`), "）、右辺の指数は総回転数 ",
+                    math(String.raw`t(\gamma)\in\mathbb Z`), "（",
+                    ref("def_total_turning"), "）である。",
+                    "したがって回転位相の積は、辺列そのものではなく一つの整数 ",
+                    math(String.raw`t(\gamma)`), " だけで決まる。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "辺の本数 ", math(String.raw`m`), " についての帰納法で示す。",
+                    "底 ", math(String.raw`m=1`), " の場合は",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\prod_{k=1}^{0}\rho(\vec e_k,\vec e_{k+1})
+&=1
+&&\bigl(\because\ \text{空積の約束}\bigr)\\
+&=\zeta_8^{\,0}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零乗 }y^{0}=1\bigr)\\
+&=\zeta_8^{\,t(\gamma)}
+&&\bigl(\because\ \blkref{def_total_turning}\text{ の空和の約束}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。帰納段では ", math(String.raw`m\ge2`), " とし、短くした列 ",
+                    math(String.raw`\gamma':=(\vec e_1,\ldots,\vec e_{m-1})`),
+                    " について主張が成り立つと仮定する。",
+                    math(String.raw`\gamma`), " が非後退辺列なので ",
+                    math(String.raw`\gamma'`),
+                    " も非後退辺列である（条件の全称範囲が狭まるだけである）。このとき",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\prod_{k=1}^{m-1}\rho(\vec e_k,\vec e_{k+1})
+&=\left(\prod_{k=1}^{m-2}\rho(\vec e_k,\vec e_{k+1})\right)\cdot\rho(\vec e_{m-1},\vec e_m)
+&&\bigl(\because\ \text{有限積から末尾の因子を分離}\bigr)\\
+&=\zeta_8^{\,t(\gamma')}\cdot\rho(\vec e_{m-1},\vec e_m)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=\zeta_8^{\,t(\gamma')}\cdot\zeta_8^{\,\tau(\vec e_{m-1},\vec e_m)}
+&&\bigl(\because\ \blkref{claim_rotation_phase_as_turning_power}\bigr)\\
+&=\zeta_8^{\,t(\gamma')+\tau(\vec e_{m-1},\vec e_m)}
+&&\bigl(\because\ \zeta_8\ne0\text{ と体 }\overline{\mathbb Q}\text{ の整数指数の指数法則 }y^{r}y^{s}=y^{r+s}\bigr)\\
+&=\zeta_8^{\,t(\gamma)}
+&&\bigl(\because\ \blkref{def_total_turning}\text{ の有限和から末尾の項を分離}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となり、帰納段が閉じる。したがってすべての ",
+                    math(String.raw`m\ge1`),
+                    " について主張が成り立つ。全過程は整数の有限和と ",
+                    math(String.raw`\overline{\mathbb Q}`),
+                    " の冪だけで閉じ、実数体も複素数体も現れない。",
+                    "後続の閉歩道の回転位相の計算は、この等式を通じて整数 ",
+                    math(String.raw`t(\gamma)`), " の計算に帰着する。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

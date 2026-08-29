@@ -45,7 +45,7 @@ N\star M=M\star N`),
     ],
   },
   {
-    id: "self_transpose_composition_closure_definition_two_cell_witness",
+    id: "self_transpose_composition_closure_definition_two_element_witness",
     kind: "definition",
     title: { text: "合成閉性を破る二元舞台" },
     labels: ["def_self_transpose_composition_nonclosure_witness"],

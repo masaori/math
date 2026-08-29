@@ -5,7 +5,7 @@ structured-latex/content/conjugacy-class-code-image-bijection.ts。
 
 人手証明のブロックとこのファイルの対応:
 
-  def_conjugacy_class_all_global_maps            `fullNeighborhood` / `fullRule` /
+  def_conjugacy_class_all_self_maps            `fullNeighborhood` / `fullRule` /
                                                  `globalMap_fullRule` / `card_allGlobalMaps`
   def_conjugacy_class_relation                   `Conj`
   claim_conjugacy_class_relation_is_equivalence  `conj_refl` / `conj_symm` / `conj_trans`
@@ -43,7 +43,7 @@ open CellularAutomata.RecursivePreimageTreeCode
 
 variable {V : Type} [Fintype V] [DecidableEq V]
 
-/-! ## 一つの有限舞台上の大域写像全体（`def_conjugacy_class_all_global_maps`） -/
+/-! ## 一つの有限舞台上の大域写像全体（`def_conjugacy_class_all_self_maps`） -/
 
 /-- 全セルを近傍に取る近傍写像 N(v) = V。 -/
 def fullNeighborhood (_v : V) : Finset V := Finset.univ
@@ -55,7 +55,7 @@ def fullRule (F : (V → State) → V → State) :
     (v : V) → (↥(fullNeighborhood v) → State) → State :=
   fun v x => F (baseExtend (Finset.univ : Finset V) x) v
 
-/-- `def_conjugacy_class_all_global_maps` の後段。A^V 上の任意の自己写像は、近傍 N(v) = V の
+/-- `def_conjugacy_class_all_self_maps` の後段。A^V 上の任意の自己写像は、近傍 N(v) = V の
     2 値セルオートマトン (V, N, (f_v)) の大域写像である。人手証明どおり、各セル v について
     値写像 y ↦ F(y)(v) へ `claim_support_subset_implies_representable` を S = V で適用する。 -/
 theorem globalMap_fullRule (F : (V → State) → V → State) :
@@ -64,7 +64,7 @@ theorem globalMap_fullRule (F : (V → State) → V → State) :
   exact (supp_subset_implies_representable (Finset.univ : Finset V) (fun y => F y v)
     (Finset.subset_univ _) y).symm
 
-/-- `def_conjugacy_class_all_global_maps` の個数 |M(V)| = (2^{|V|})^{2^{|V|}}。 -/
+/-- `def_conjugacy_class_all_self_maps` の個数 |M(V)| = (2^{|V|})^{2^{|V|}}。 -/
 theorem card_allGlobalMaps :
     Fintype.card ((V → State) → (V → State))
       = (2 ^ Fintype.card V) ^ (2 ^ Fintype.card V) := by

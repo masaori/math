@@ -45,9 +45,9 @@ export default defineBlocks([
         " の前周期・周期の組の集合と呼ぶ（",
         math(String.raw`F^{n}`),
         " は ",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         "）。",
-        ref("claim_eventual_periodicity"),
+        ref("claim_finite_self_map_repeating_tail"),
         " により ",
         math(String.raw`P(y)\neq\emptyset`),
         " である。",
@@ -355,7 +355,7 @@ F^{\mu+p}\,y
     ],
     proof: [
       paragraph([
-        ref("claim_eventual_periodicity"),
+        ref("claim_finite_self_map_repeating_tail"),
         " により ",
         math(String.raw`(i,p)\in P(y)`),
         " で ",

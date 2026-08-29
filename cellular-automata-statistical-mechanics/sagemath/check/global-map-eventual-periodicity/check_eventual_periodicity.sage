@@ -1,4 +1,4 @@
-# 対象ラベル: claim_eventual_periodicity
+# 対象ラベル: claim_finite_self_map_repeating_tail
 # 衝突から得る p = j-i が正で、i+p <= 2^|V| かつ F^(n+p)y = F^n y となることを検査する。
 # 帰属: 有限集合と非負整数の等号・大小比較・加減算だけを使う。R/C 脱出なし。
 

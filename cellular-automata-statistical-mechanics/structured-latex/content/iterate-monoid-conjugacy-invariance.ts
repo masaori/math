@@ -35,7 +35,7 @@ export default defineBlocks([
       paragraph([
         "が成り立つことをいう。以下この章では ",
         math(String.raw`F,G,h`), " を固定する。", math(String.raw`G`),
-        " についての反復（", ref("def_global_map_iterate"), "）、衝突開始位置と最小衝突開始位置 ",
+        " についての反復（", ref("def_finite_self_map_iterate"), "）、衝突開始位置と最小衝突開始位置 ",
         math(String.raw`\mu_G`), "（", ref("def_iterate_monoid_collision_start"),
         "）、正周期の集合 ", math(String.raw`\Pi_G`), " と最小正周期 ",
         math(String.raw`\lambda_G`), "（", ref("def_iterate_monoid_minimal_positive_period"),
@@ -76,8 +76,8 @@ export default defineBlocks([
       displayMath(String.raw`\begin{aligned}
 (h\circ F^0)(y)
 &=h(F^0\,y)\quad(\because\ \text{写像の合成の定義})\\
-&=h(y)\quad(\because\ F^0\,y=y.\ \blkref{def_global_map_iterate})\\
-&=G^0(h(y))\quad(\because\ G^0\,z=z.\ \blkref{def_global_map_iterate})\\
+&=h(y)\quad(\because\ F^0\,y=y.\ \blkref{def_finite_self_map_iterate})\\
+&=G^0(h(y))\quad(\because\ G^0\,z=z.\ \blkref{def_finite_self_map_iterate})\\
 &=(G^0\circ h)(y)\quad(\because\ \text{写像の合成の定義}).
 \end{aligned}`),
       paragraph([
@@ -87,10 +87,10 @@ export default defineBlocks([
       displayMath(String.raw`\begin{aligned}
 (h\circ F^{n+1})(y)
 &=h(F^{n+1}\,y)\quad(\because\ \text{写像の合成の定義})\\
-&=h(F(F^n\,y))\quad(\because\ F^{n+1}\,y=F(F^n\,y).\ \blkref{def_global_map_iterate})\\
+&=h(F(F^n\,y))\quad(\because\ F^{n+1}\,y=F(F^n\,y).\ \blkref{def_finite_self_map_iterate})\\
 &=G(h(F^n\,y))\quad(\because\ h\circ F=G\circ h\ \text{を}\ F^n\,y\ \text{で評価する。}\ \blkref{def_iterate_monoid_conjugacy_bijection})\\
 &=G(G^n(h(y)))\quad(\because\ \text{帰納法の仮定を}\ y\ \text{で評価する})\\
-&=G^{n+1}(h(y))\quad(\because\ G^{n+1}\,z=G(G^n\,z).\ \blkref{def_global_map_iterate})\\
+&=G^{n+1}(h(y))\quad(\because\ G^{n+1}\,z=G(G^n\,z).\ \blkref{def_finite_self_map_iterate})\\
 &=(G^{n+1}\circ h)(y)\quad(\because\ \text{写像の合成の定義}).
 \end{aligned}`),
     ],
@@ -389,21 +389,21 @@ h\circ R_F
       displayMath(String.raw`\begin{aligned}
 h\circ R_F^0
 &=h
-  \quad(\because\ R_F^0\ \text{は恒等写像}.\ \blkref{def_global_map_iterate})\\
+  \quad(\because\ R_F^0\ \text{は恒等写像}.\ \blkref{def_finite_self_map_iterate})\\
 &=R_G^0\circ h
-  \quad(\because\ R_G^0\ \text{は恒等写像}.\ \blkref{def_global_map_iterate}).
+  \quad(\because\ R_G^0\ \text{は恒等写像}.\ \blkref{def_finite_self_map_iterate}).
 \end{aligned}`),
       paragraph([math(String.raw`h\circ R_F^n=R_G^n\circ h`), " を仮定すると"]),
       displayMath(String.raw`\begin{aligned}
 h\circ R_F^{n+1}
 &=h\circ R_F\circ R_F^n
-  \quad(\because\ \blkref{def_global_map_iterate})\\
+  \quad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=R_G\circ h\circ R_F^n
   \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_one_period_map})\\
 &=R_G\circ R_G^n\circ h
   \quad(\because\ \text{帰納法の仮定})\\
 &=R_G^{n+1}\circ h
-  \quad(\because\ \blkref{def_global_map_iterate}).
+  \quad(\because\ \blkref{def_finite_self_map_iterate}).
 \end{aligned}`),
     ],
   },
@@ -423,7 +423,7 @@ h\circ R_F^{n+1}
       displayMath(String.raw`\begin{aligned}
 R_F^0
 &=F^0
-  \quad(\because\ \text{どちらも恒等写像}.\ \blkref{def_global_map_iterate})\\
+  \quad(\because\ \text{どちらも恒等写像}.\ \blkref{def_finite_self_map_iterate})\\
 &=F^{0\cdot\lambda_F}
   \quad(\because\ 0\cdot\lambda_F=0).
 \end{aligned}`),
@@ -431,7 +431,7 @@ R_F^0
       displayMath(String.raw`\begin{aligned}
 R_F^{n+1}
 &=R_F\circ R_F^n
-  \quad(\because\ \blkref{def_global_map_iterate})\\
+  \quad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=R_F\circ F^{n\lambda_F}
   \quad(\because\ \text{帰納法の仮定})\\
 &=F^{(n+1)\lambda_F}

@@ -1,4 +1,4 @@
-# 対象ラベル: claim_unordered_cell_pair_count
+# 対象ラベル: claim_unordered_carrier_pair_count
 # |U(V)| = n + C(n,2) = n(n+1)/2 を全数検査する。本文の証明の各段を分けて検査する。
 #   U(V) は一元部分集合全体と二元部分集合全体の非交和である
 #   一元部分集合は v ↦ {v} により V と全単射で n 個

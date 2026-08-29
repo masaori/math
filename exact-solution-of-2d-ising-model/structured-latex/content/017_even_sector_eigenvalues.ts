@@ -1057,27 +1057,50 @@ R_\mu^{(1)} + R_\mu^{(0)}
         " の 2 因子を隣接させられて",
       ]),
       displayMath(
-        String.raw`\check{Q}_\epsilon \check{Q}_{\epsilon'}
-= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon \check{Q}_{\epsilon'}
+&= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)
   R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
-= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\cdot 0
-= 0`,
+  \quad (\because \text{因子の可換性により添字 }\nu\text{ の二因子を末尾へ寄せる}) \\
+&= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\cdot 0
+  \quad (\because \epsilon_\nu\neq\epsilon'_\nu\text{ と Step 0 の異なる上付き添字の積}) \\
+&= 0
+  \quad (\because \text{零行列は行列積の零元})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\epsilon = \epsilon'`),
-        " のときは各因子が Step 0 より冪等なので ",
-        math(String.raw`\check{Q}_\epsilon^2 = \check{Q}_\epsilon`),
-        "。",
-      ]),
-      paragraph([
-        "Step 2（(2) の証明）。Step 0 の ",
-        math(String.raw`R_\mu^{(1)} + R_\mu^{(0)} = I`),
-        " を各因子に代入し、可換な有限個の因子の積を分配法則で展開すると",
+        " のときは各因子が Step 0 より冪等なので、",
       ]),
       displayMath(
-        String.raw`I = \prod_{\mu=1}^{M}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
-= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}
-= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \check{Q}_\epsilon`,
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon^2
+&=\left(\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}\right)
+  \left(\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}\right)
+  \quad (\because \check{Q}_\epsilon\text{ の定義}) \\
+&=\prod_{\mu=1}^{M}\left(R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon_\mu)}\right)
+  \quad (\because \text{異なる添字の因子の可換性}) \\
+&=\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}
+  \quad (\because \text{Step 0 の二つの冪等性を各因子へ同時に適用}) \\
+&=\check{Q}_\epsilon
+  \quad (\because \check{Q}_\epsilon\text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 2（(2) の証明）。主張の左辺から始める：",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \check{Q}_\epsilon
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}
+   \quad (\because \check{Q}_\epsilon \text{ の定義（冒頭）}) \\
+&= \prod_{\mu=1}^{M}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
+   \quad (\because \text{可換な有限個の因子の積の分配法則による展開}) \\
+&= \prod_{\mu=1}^{M} I
+   \quad (\because \text{Step 0 の和が単位行列であることを各因子へ同時に適用}) \\
+&= I
+   \quad (\because \text{単位行列の有限積は単位行列})
+\end{aligned}`,
       ),
       paragraph([
         "（展開して現れる項は、各 ",
@@ -1095,27 +1118,65 @@ R_\mu^{(1)} + R_\mu^{(0)}
       paragraph([
         "Step 3（(3) の証明）。",
         math(String.raw`\nu \in \check{\mathcal{M}}`),
-        " を固定する。因子はすべて可換なので",
+        " を固定する。因子はすべて可換なので、主張の左辺は",
       ]),
       displayMath(
-        String.raw`\check{n}_\nu \check{Q}_\epsilon
-= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}\right)
-  \check{n}_\nu R_\nu^{(\epsilon_\nu)}`,
+        String.raw`\begin{aligned}
+\check{n}_\nu \check{Q}_\epsilon
+&=\check{n}_\nu\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}
+  \quad (\because \check{Q}_\epsilon\text{ の定義}) \\
+&=\left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}\right)
+  \check{n}_\nu R_\nu^{(\epsilon_\nu)}
+  \quad (\because \text{異なる添字の因子の可換性})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\epsilon_\nu = 1`),
-        " なら ",
-        math(String.raw`\check{n}_\nu R_\nu^{(1)} = \check{n}_\nu\check{n}_\nu = \check{n}_\nu
-= R_\nu^{(1)} = \epsilon_\nu R_\nu^{(\epsilon_\nu)}`),
-        "、",
-        math(String.raw`\epsilon_\nu = 0`),
-        " なら ",
-        math(String.raw`\check{n}_\nu R_\nu^{(0)} = \check{n}_\nu(I - \check{n}_\nu) = 0
-= \epsilon_\nu R_\nu^{(\epsilon_\nu)}`),
-        "。いずれの場合も ",
-        math(String.raw`\check{n}_\nu \check{Q}_\epsilon = \epsilon_\nu \check{Q}_\epsilon`),
-        "。",
+        " の場合は",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu R_\nu^{(1)}
+&=\check{n}_\nu\check{n}_\nu
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+&=\check{n}_\nu
+  \quad (\because \text{数演算子の冪等性 (3)}) \\
+&=R_\nu^{(1)}
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+&=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
+  \quad (\because \epsilon_\nu=1\text{ と単位元の積})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon_\nu = 0`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu R_\nu^{(0)}
+&=\check{n}_\nu\left(I-\check{n}_\nu\right)
+  \quad (\because R_\nu^{(0)}\text{ の定義（冒頭）}) \\
+&=\check{n}_\nu-\check{n}_\nu\check{n}_\nu
+  \quad (\because \text{分配法則と、単位行列との積}) \\
+&=\check{n}_\nu-\check{n}_\nu
+  \quad (\because \text{数演算子の冪等性 (3)}) \\
+&=0
+  \quad (\because \text{行列の加法逆元}) \\
+&=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
+  \quad (\because \epsilon_\nu=0\text{ と零元の積})
+\end{aligned}`,
+      ),
+      paragraph(["したがって、どちらの場合も"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu\check{Q}_\epsilon
+&=\left(\prod_{\mu\ne\nu}R_\mu^{(\epsilon_\mu)}\right)
+  \epsilon_\nu R_\nu^{(\epsilon_\nu)}
+  \quad (\because \text{直前の二つの場合}) \\
+&=\epsilon_\nu\check{Q}_\epsilon
+  \quad (\because \check{Q}_\epsilon\text{ の定義とスカラーの分配})
+\end{aligned}`,
+      ),
       paragraph([
         "**左右どちらから掛けても同じである。** 実際 ",
         math(String.raw`\check{n}_\nu`),
@@ -1136,10 +1197,16 @@ R_\mu^{(1)} + R_\mu^{(0)}
         " の可換性で、後者は ",
         ref("scalar_identity_commutes"),
         " による）から、",
-        math(String.raw`\check{Q}_\epsilon \check{n}_\nu = \check{n}_\nu \check{Q}_\epsilon
-= \epsilon_\nu \check{Q}_\epsilon`),
-        " を得る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon\check{n}_\nu
+&=\check{n}_\nu\check{Q}_\epsilon
+  \quad (\because \check{n}_\nu\text{ と }\check{Q}_\epsilon\text{ の全因子の可換性}) \\
+&=\epsilon_\nu\check{Q}_\epsilon
+  \quad (\because \text{直前の結果})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 4（(4) の証明）。",
         math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}`),
@@ -1160,7 +1227,15 @@ R_\mu^{(1)} + R_\mu^{(0)}
         " として適用でき、",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}\!\left(\check{Q}_\epsilon\right) = 2^{M-M} = 1`,
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
+&= 2^{M-M}
+  \quad (\because \text{数演算子の積のトレース（上の適用）}) \\
+&= 2^{0}
+  \quad (\because M-M=0) \\
+&= 1
+  \quad (\because \text{冪の零乗})
+\end{aligned}`,
       ),
       paragraph([
         "を得る（",
@@ -1172,11 +1247,19 @@ R_\mu^{(1)} + R_\mu^{(0)}
       paragraph([
         math(String.raw`\check{Q}_\epsilon`),
         " は Step 1 より冪等なので、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\dim_{\mathbb{C}}\mathrm{im}\,\check{Q}_\epsilon
+&= \mathrm{tr}\!\left(\check{Q}_\epsilon\right)
+  \quad (\because \text{冪等行列のトレースは像の次元。}\check{Q}_\epsilon\text{ は Step 1 より冪等}) \\
+&= 1
+  \quad (\because \text{上で計算した } \mathrm{tr}(\check{Q}_\epsilon))
+\end{aligned}`,
+      ),
+      paragraph([
         ref("trace_of_idempotent"),
-        " より ",
-        math(String.raw`\dim_{\mathbb{C}}\mathrm{im}\,\check{Q}_\epsilon
-= \mathrm{tr}\!\left(\check{Q}_\epsilon\right) = 1`),
-        "。009 章の同じ計算が ",
+        " を引いた。009 章の同じ計算が ",
         math(String.raw`2^{M-m}`),
         " を与えるところで、",
         math(String.raw`m = M`),

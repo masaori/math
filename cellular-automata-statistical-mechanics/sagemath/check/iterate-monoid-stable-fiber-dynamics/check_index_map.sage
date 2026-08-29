@@ -12,7 +12,7 @@ for stage_size, rule, table in exhaustive_instances():
     F, mu, lam, e, E, FE1, Q, fibers, sigma = stable_fiber_dynamics_data(table)
     for q in Q:
         assert sigma[q] == F[q]            # 定義
-        assert sigma[q] in Q               # F(q) ∈ Q_F（claim_iterate_monoid_global_map_bijective_on_stable_image）
+        assert sigma[q] in Q               # F(q) ∈ Q_F（claim_iterate_monoid_generator_bijective_on_stable_image）
         points += 1
     assert len(frozenset(sigma[q] for q in Q)) == len(Q)   # 単射
     assert frozenset(sigma[q] for q in Q) == Q             # 全射

@@ -95,10 +95,10 @@ L\star(N\sqcap M)
     ],
   },
   {
-    id: "neighborhood_assignment_intersection_minimal_counterexample_definition_two_cell_witnesses",
+    id: "neighborhood_assignment_intersection_minimal_counterexample_definition_two_element_witnesses",
     kind: "definition",
     title: { text: "二元舞台の左右の非分配証人" },
-    labels: ["def_two_cell_intersection_nondistributivity_witnesses"],
+    labels: ["def_two_element_intersection_nondistributivity_witnesses"],
     habitat: "finite",
     statement: [
       paragraph(["相異なる二元からなる有限集合 ", math(String.raw`V_2:=\{a,b\}`), " 上で、左側の証人を"]),
@@ -113,13 +113,13 @@ L'(a):=\varnothing,\quad L'(b):=\{a,b\}`),
     ],
   },
   {
-    id: "neighborhood_assignment_intersection_minimal_counterexample_claim_two_cell_failures",
+    id: "neighborhood_assignment_intersection_minimal_counterexample_claim_two_element_failures",
     kind: "claim",
     title: { text: "二元舞台で左右の分配律はともに破れる" },
-    labels: ["claim_two_cell_composition_intersection_nondistributivity"],
+    labels: ["claim_two_element_composition_intersection_nondistributivity"],
     habitat: "finite",
     statement: [
-      paragraph([ref("def_two_cell_intersection_nondistributivity_witnesses"), " の証人について"]),
+      paragraph([ref("def_two_element_intersection_nondistributivity_witnesses"), " の証人について"]),
       displayMath(String.raw`(N\sqcap M)\star L\neq(N\star L)\sqcap(M\star L),\qquad
 L'\star(N'\sqcap M')\neq(L'\star N')\sqcap(L'\star M')`),
       paragraph(["である。"]),
@@ -131,29 +131,29 @@ L'\star(N'\sqcap M')\neq(L'\star N')\sqcap(L'\star M')`),
 &=\bigcup_{u\in N(b)\cap M(b)}L(u)
   \qquad(\because\ \blkref{def_neighborhood_assignment_pointwise_intersection},\ \blkref{def_composed_neighborhood})\\
 &=\bigcup_{u\in\varnothing}L(u)
-  \qquad(\because\ \blkref{def_two_cell_intersection_nondistributivity_witnesses})\\
+  \qquad(\because\ \blkref{def_two_element_intersection_nondistributivity_witnesses})\\
 &=\varnothing
   \qquad(\because\ \text{空集合を添字とする合併}),\\[4pt]
 ((N\star L)\sqcap(M\star L))(b)
 &=L(a)\cap L(b)
-  \qquad(\because\ \blkref{def_composed_neighborhood},\ \blkref{def_neighborhood_assignment_pointwise_intersection},\ \blkref{def_two_cell_intersection_nondistributivity_witnesses})\\
+  \qquad(\because\ \blkref{def_composed_neighborhood},\ \blkref{def_neighborhood_assignment_pointwise_intersection},\ \blkref{def_two_element_intersection_nondistributivity_witnesses})\\
 &=\{a\}
-  \qquad(\because\ \blkref{def_two_cell_intersection_nondistributivity_witnesses}).
+  \qquad(\because\ \blkref{def_two_element_intersection_nondistributivity_witnesses}).
 \end{aligned}`),
       paragraph(["右側について、", math(String.raw`b`), " での値を計算すると"]),
       displayMath(String.raw`\begin{aligned}
 (L'\star(N'\sqcap M'))(b)
 &=(N'\sqcap M')(a)\cup(N'\sqcap M')(b)
-  \qquad(\because\ \blkref{def_composed_neighborhood},\ \blkref{def_two_cell_intersection_nondistributivity_witnesses})\\
+  \qquad(\because\ \blkref{def_composed_neighborhood},\ \blkref{def_two_element_intersection_nondistributivity_witnesses})\\
 &=\varnothing\cup\varnothing
-  \qquad(\because\ \blkref{def_neighborhood_assignment_pointwise_intersection},\ \blkref{def_two_cell_intersection_nondistributivity_witnesses})\\
+  \qquad(\because\ \blkref{def_neighborhood_assignment_pointwise_intersection},\ \blkref{def_two_element_intersection_nondistributivity_witnesses})\\
 &=\varnothing
   \qquad(\because\ \text{空集合の合併}),\\[4pt]
 ((L'\star N')\sqcap(L'\star M'))(b)
 &=(N'(a)\cup N'(b))\cap(M'(a)\cup M'(b))
-  \qquad(\because\ \blkref{def_composed_neighborhood},\ \blkref{def_neighborhood_assignment_pointwise_intersection},\ \blkref{def_two_cell_intersection_nondistributivity_witnesses})\\
+  \qquad(\because\ \blkref{def_composed_neighborhood},\ \blkref{def_neighborhood_assignment_pointwise_intersection},\ \blkref{def_two_element_intersection_nondistributivity_witnesses})\\
 &=\{a\}\cap\{a\}
-  \qquad(\because\ \blkref{def_two_cell_intersection_nondistributivity_witnesses})\\
+  \qquad(\because\ \blkref{def_two_element_intersection_nondistributivity_witnesses})\\
 &=\{a\}
   \qquad(\because\ \text{集合の冪等律}).
 \end{aligned}`),
@@ -164,7 +164,7 @@ L'\star(N'\sqcap M')\neq(L'\star N')\sqcap(L'\star M')`),
     id: "neighborhood_assignment_intersection_minimal_counterexample_theorem_minimal_size",
     kind: "theorem",
     title: { text: "非分配反例の最小舞台は二元である" },
-    labels: ["theorem_minimal_cell_count_for_composition_intersection_nondistributivity"],
+    labels: ["theorem_minimal_carrier_size_for_composition_intersection_nondistributivity"],
     habitat: "N",
     statement: [
       paragraph([
@@ -179,7 +179,7 @@ L'\star(N'\sqcap M')\neq(L'\star N')\sqcap(L'\star M')`),
         " ならば左右の反例は存在しない。",
       ]),
       paragraph([
-        ref("claim_two_cell_composition_intersection_nondistributivity"),
+        ref("claim_two_element_composition_intersection_nondistributivity"),
         " により、舞台元数 ", math(String.raw`2`), " で左右それぞれの反例が存在する。したがって最小舞台元数はどちらも ",
         math(String.raw`2`), " である。",
       ]),

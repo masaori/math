@@ -63,10 +63,10 @@ w\in N^{\mathsf T}(v)
     ],
   },
   {
-    id: "self_transpose_neighborhood_assignment_count_definition_unordered_cell_pairs",
+    id: "self_transpose_neighborhood_assignment_count_definition_unordered_carrier_pairs",
     kind: "definition",
     title: { text: "元の非空な一元・二元部分集合" },
-    labels: ["def_unordered_cell_pairs"],
+    labels: ["def_unordered_carrier_pairs"],
     habitat: "finite",
     statement: [
       paragraph(["有限集合 ", math(String.raw`V`), " に対し、"]),
@@ -149,10 +149,10 @@ w\in\rho_V(\varepsilon_V(N))(v)
     id: "self_transpose_neighborhood_assignment_count_claim_unordered_pair_count",
     kind: "claim",
     title: { text: "非順序対の個数" },
-    labels: ["claim_unordered_cell_pair_count"],
+    labels: ["claim_unordered_carrier_pair_count"],
     habitat: "N",
     statement: [
-      paragraph([math(String.raw`\mathcal U(V)`), " を ", ref("def_unordered_cell_pairs"),
+      paragraph([math(String.raw`\mathcal U(V)`), " を ", ref("def_unordered_carrier_pairs"),
         " とし、", math(String.raw`n:=|V|\in\mathbb N`), " とおくと"]),
       displayMath(String.raw`|\mathcal U(V)|=n+\binom n2=\frac{n(n+1)}2`),
       paragraph(["が成り立つ。右端の商は自然数である。"]),
@@ -190,7 +190,7 @@ w\in\rho_V(\varepsilon_V(N))(v)
       paragraph(["である。"]),
     ],
     proof: [
-      paragraph([ref("claim_self_transpose_pair_encoding_bijection"), " と ", ref("claim_unordered_cell_pair_count"), " により"]),
+      paragraph([ref("claim_self_transpose_pair_encoding_bijection"), " と ", ref("claim_unordered_carrier_pair_count"), " により"]),
       displayMath(String.raw`\begin{aligned}
 |\{N\in\mathcal N(V)\mid N^{\mathsf T}=N\}|
 &=|\{B\mid B\subseteq\mathcal U(V)\}|
@@ -198,7 +198,7 @@ w\in\rho_V(\varepsilon_V(N))(v)
 &=2^{|\mathcal U(V)|}
   \qquad(\because\ \text{有限集合の部分集合の個数})\\
 &=2^{n(n+1)/2}
-  \qquad(\because\ \blkref{claim_unordered_cell_pair_count}).
+  \qquad(\because\ \blkref{claim_unordered_carrier_pair_count}).
 \end{aligned}`),
     ],
   },

@@ -1,5 +1,5 @@
-# def_configuration_count_partitions、claim_reversible_cycle_type_realizes_every_partition、
-# def_reversible_global_map_conjugacy_classes、claim_reversible_conjugacy_classes_bijection_partitions の検算。
+# def_carrier_cardinality_partitions、claim_reversible_cycle_type_realizes_every_partition、
+# def_bijective_self_map_conjugacy_classes、claim_reversible_conjugacy_classes_bijection_partitions の検算。
 # 元数 1,2,4,8 について、Part(2^|V|) の各分割が構成した巡回置換の巡回型として実現すること、
 # 実現した写像が単射であること、単射な自己写像の巡回型の像が Part(2^|V|) 全体に一致すること、
 # および元数 1,2,4 では有限置換による共役類の全数計算が巡回型の等しい類と一致することを検査する。

@@ -66,7 +66,7 @@ export const documentOrganization = [
         output: "最終周期、反復モノイド、安定像・安定ファイバー・根付き木までの有限決定可能な構造を得る。",
         main: "主定理は、軌道が最終的に周期化し、反復モノイドが過渡部と有限巡回群へ分解されることである。",
         mainLabels: [
-          "claim_eventual_periodicity",
+          "claim_finite_self_map_repeating_tail",
           "claim_iterate_monoid_transient_cycle_partition_cardinality",
           "claim_iterate_monoid_cycle_part_is_cyclic_of_order_min_period",
         ],

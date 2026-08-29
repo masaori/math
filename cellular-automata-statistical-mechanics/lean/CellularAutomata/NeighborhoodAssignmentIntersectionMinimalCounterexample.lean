@@ -128,7 +128,7 @@ theorem two_cell_right_failure :
 theorem two_cell_stage_card : Fintype.card TwoCellStage = 2 := by
   decide
 
-/-- `theorem_minimal_cell_count_for_composition_intersection_nondistributivity`。
+/-- `theorem_minimal_carrier_size_for_composition_intersection_nondistributivity`。
     一元以下での非存在と、二元舞台での左右それぞれの存在を一つにまとめる。 -/
 theorem minimal_cell_count_for_composition_intersection_nondistributivity :
     (∀ (W : Type) [Fintype W] [DecidableEq W], Fintype.card W ≤ 1 →

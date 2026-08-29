@@ -36,7 +36,7 @@ for stage_size, rule, table in exhaustive_instances():
         powers = power_tables(table, 2 * e)
         assert compose(powers[e], powers[e]) == powers[e + e]  # 加法則 F^{e+e} = F^e ∘ F^e
         assert e + e == e + i * p                          # e = i p
-        # claim_iterate_collision_gives_eventual_period を指数 e, e+p, ..., e+(i-1)p に順に適用
+        # claim_iterate_collision_gives_repeating_tail を指数 e, e+p, ..., e+(i-1)p に順に適用
         for k in range(i):
             base = e + k * p
             assert base >= i                               # 適用条件 n >= i（e >= i より）

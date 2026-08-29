@@ -27,7 +27,7 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`\sigma_F(q):=F(q)\qquad(q\in Q_F)`),
       paragraph([
-        "と定める。", ref("claim_iterate_monoid_global_map_bijective_on_stable_image"),
+        "と定める。", ref("claim_iterate_monoid_generator_bijective_on_stable_image"),
         " より ", math(String.raw`F(q)\in Q_F`), " なので、この写像は定義され、全単射である。",
       ]),
     ],
@@ -36,7 +36,7 @@ export default defineBlocks([
     id: "iterate_monoid_stable_fiber_dynamics_claim_commutation",
     kind: "claim",
     title: { text: "冪等反復写像と一段発展は可換である" },
-    labels: ["claim_iterate_monoid_cycle_idempotent_commutes_with_global_map"],
+    labels: ["claim_iterate_monoid_cycle_idempotent_commutes_with_generator"],
     habitat: "finite",
     statement: [
       paragraph(["すべての ", math(String.raw`y\in X`), " に対して"]),
@@ -79,7 +79,7 @@ E_F(F(y))
       displayMath(String.raw`\begin{aligned}
 E_F(F(y))
 &=F(E_F(y))
-  \quad(\because\ \blkref{claim_iterate_monoid_cycle_idempotent_commutes_with_global_map})\\
+  \quad(\because\ \blkref{claim_iterate_monoid_cycle_idempotent_commutes_with_generator})\\
 &=F(q)
   \quad(\because\ y\in B_F(q))\\
 &=\sigma_F(q)
@@ -93,7 +93,7 @@ E_F(F(y))
       displayMath(String.raw`\begin{aligned}
 F(E_F(y))
 &=E_F(F(y))
-  \quad(\because\ \blkref{claim_iterate_monoid_cycle_idempotent_commutes_with_global_map})\\
+  \quad(\because\ \blkref{claim_iterate_monoid_cycle_idempotent_commutes_with_generator})\\
 &=\sigma_F(q)
   \quad(\because\ F(y)\in B_F(\sigma_F(q)))\\
 &=F(q)
@@ -102,7 +102,7 @@ F(E_F(y))
       paragraph([
         ref("def_iterate_monoid_stable_image"), " より ", math(String.raw`E_F(y)\in Q_F`),
         " であり、仮定より ", math(String.raw`q\in Q_F`), " である。",
-        ref("claim_iterate_monoid_global_map_bijective_on_stable_image"),
+        ref("claim_iterate_monoid_generator_bijective_on_stable_image"),
         " の単射性から ", math(String.raw`E_F(y)=q`), " である。よって ",
         ref("def_iterate_monoid_stable_fiber"), " より ", math(String.raw`y\in B_F(q)`), " である。",
       ]),

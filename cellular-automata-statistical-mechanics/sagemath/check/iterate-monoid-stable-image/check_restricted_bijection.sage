@@ -1,4 +1,4 @@
-# 対象ラベル: claim_iterate_monoid_global_map_bijective_on_stable_image
+# 対象ラベル: claim_iterate_monoid_generator_bijective_on_stable_image
 # S_F := F^{e_F+λ_F-1}。各 z = F^{e_F}(y) ∈ Q_F について F(z) = F^{e_F+1}(y) ∈ Q_F、
 # S_F(z) = F^{2e_F+λ_F-1}(y) ∈ Q_F（前 claim の像の一致を指数 e_F+1、2e_F+λ_F-1 に適用）、
 # 周期の伝播 F^{e_F+λ_F} = F^{e_F} と反復回数の加法則から F∘S_F = S_F∘F = E_F、

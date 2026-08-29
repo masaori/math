@@ -1,4 +1,4 @@
-# def_reversible_global_maps と claim_reversible_all_configurations_periodic の検算。
+# def_bijective_self_maps と claim_bijective_self_map_all_elements_periodic の検算。
 # 元数 1,2,4,8 の配位集合について、単射な自己写像の個数が size! であること、
 # 単射な自己写像では全ての配位の最小前周期が 0 で Per(F) = A^V になることを検査する。
 # さらに元数 1,2,4 では、単射でない自己写像に最小前周期が正の配位が必ずあることも検査する。

@@ -11,11 +11,11 @@
 配位の等号が各セルの状態の等号に分解されること、候補組上の存在文が決定可能であることを形式化する。
 
 対応表（人手証明 → この file）
-  def_global_map_iterate                     `iterate`, `iterate_zero`, `iterate_succ`
+  def_finite_self_map_iterate                     `iterate`, `iterate_zero`, `iterate_succ`
   def_orbit                                  `orbit`
   claim_orbit_collision                      `card_config`（既出 `card_state` を使う）, `orbit_collision`
   claim_collision_shift                      `collision_shift`
-  claim_eventual_periodicity                 `eventual_periodicity`
+  claim_finite_self_map_repeating_tail                 `eventual_periodicity`
   claim_collision_finite_decidability        `scanPairs`, `mem_scanPairs`, `card_scanPairs_two_mul`,
                                              `exists_collision_in_scanPairs`, `config_eq_iff`,
                                              `instance : Decidable (∃ x ∈ scanPairs M, ...)`
@@ -34,7 +34,7 @@ variable {V : Type} [Fintype V] [DecidableEq V]
 variable (N : V → Finset V)
 variable (f : (v : V) → (↥(N v) → State) → State)
 
-/-- 大域写像の n 回反復 F^n（`def_global_map_iterate`）。n についての再帰で定める。 -/
+/-- 大域写像の n 回反復 F^n（`def_finite_self_map_iterate`）。n についての再帰で定める。 -/
 def iterate : ℕ → (V → State) → (V → State)
   | 0, y => y
   | n + 1, y => globalMap N f (iterate n y)
@@ -79,7 +79,7 @@ theorem collision_shift (y : V → State) {i j : ℕ}
     show globalMap N f (iterate N f (i + k) y) = globalMap N f (iterate N f (j + k) y)
     rw [ih]
 
-/-- 軌道は最終的に周期的である（`claim_eventual_periodicity`）。
+/-- 軌道は最終的に周期的である（`claim_finite_self_map_repeating_tail`）。
     衝突 (i, j) から p := j - i とし、n ≥ i に対し k := n - i で衝突の反復不変性を使う。 -/
 theorem eventual_periodicity (y : V → State) :
     ∃ i p : ℕ, 1 ≤ p ∧ i + p ≤ 2 ^ Fintype.card V ∧

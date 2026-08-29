@@ -25,7 +25,7 @@ export default defineBlocks([
   },
 
   {
-    id: "global_map_iteration_definition_finite_self_map",
+    id: "finite_self_map_iteration_definition_finite_self_map",
     kind: "definition",
     title: { text: "有限集合上の自己写像" },
     labels: ["def_finite_self_map"],
@@ -70,10 +70,10 @@ export default defineBlocks([
   },
 
   {
-    id: "global_map_iteration_definition_iterate",
+    id: "finite_self_map_iteration_definition_iterate",
     kind: "definition",
     title: { text: "自己写像の反復" },
-    labels: ["def_global_map_iterate"],
+    labels: ["def_finite_self_map_iterate"],
     habitat: "finite",
     statement: [
       paragraph([
@@ -104,7 +104,7 @@ export default defineBlocks([
   },
 
   {
-    id: "global_map_iteration_definition_orbit",
+    id: "finite_self_map_iteration_definition_orbit",
     kind: "definition",
     title: { text: "元の軌道" },
     labels: ["def_orbit"],
@@ -122,14 +122,14 @@ export default defineBlocks([
         " の軌道と呼ぶ（",
         math(String.raw`F^{n}`),
         " は ",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         "）。",
       ]),
     ],
   },
 
   {
-    id: "global_map_iteration_claim_orbit_finite",
+    id: "finite_self_map_iteration_claim_orbit_finite",
     kind: "claim",
     title: { text: "有限自己写像の軌道は有限集合である" },
     labels: ["claim_finite_self_map_orbit_finite"],
@@ -151,7 +151,7 @@ export default defineBlocks([
   },
 
   {
-    id: "global_map_iteration_claim_orbit_collision",
+    id: "finite_self_map_iteration_claim_orbit_collision",
     kind: "claim",
     title: { text: "軌道は高々 |X| 回の反復のうちに衝突する" },
     labels: ["claim_orbit_collision"],
@@ -177,7 +177,7 @@ export default defineBlocks([
         " を ",
         math(String.raw`\iota_y(n):=F^{n}\,y`),
         " で定める（",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         "）。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -216,7 +216,7 @@ export default defineBlocks([
   },
 
   {
-    id: "global_map_iteration_claim_shift_invariance",
+    id: "finite_self_map_iteration_claim_shift_invariance",
     kind: "claim",
     title: { text: "衝突は反復で保たれる" },
     labels: ["claim_collision_shift"],
@@ -255,19 +255,19 @@ export default defineBlocks([
       displayMath(String.raw`\begin{aligned}
 F^{i+(k+1)}\,y
 &=F^{(i+k)+1}\,y\qquad(\because\ \mathbb{N} \text{ の加法の結合則})\\
-&=F\,(F^{i+k}\,y)\qquad(\because\ \blkref{def_global_map_iterate})\\
+&=F\,(F^{i+k}\,y)\qquad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=F\,(F^{j+k}\,y)\qquad(\because\ \text{帰納法の仮定})\\
-&=F^{(j+k)+1}\,y\qquad(\because\ \blkref{def_global_map_iterate})\\
+&=F^{(j+k)+1}\,y\qquad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=F^{j+(k+1)}\,y\qquad(\because\ \mathbb{N} \text{ の加法の結合則})
 \end{aligned}`),
     ],
   },
 
   {
-    id: "global_map_iteration_claim_eventual_periodicity",
+    id: "finite_self_map_iteration_claim_repeating_tail",
     kind: "claim",
     title: { text: "軌道は最終的に周期的である" },
-    labels: ["claim_eventual_periodicity"],
+    labels: ["claim_finite_self_map_repeating_tail"],
     habitat: "N",
     statement: [
       paragraph([
@@ -329,7 +329,7 @@ F^{n+p}\,y
   },
 
   {
-    id: "global_map_iteration_claim_collision_finite_decidability",
+    id: "finite_self_map_iteration_claim_collision_finite_decidability",
     kind: "claim",
     title: { text: "衝突する組は有限個の等号検査で見つかる" },
     labels: ["claim_collision_finite_decidability"],
@@ -378,7 +378,7 @@ F^{n+p}\,y
   },
 
   {
-    id: "global_map_iteration_remark_not_claimed",
+    id: "finite_self_map_iteration_remark_not_claimed",
     kind: "remark",
     title: { text: "この章で主張しないこと" },
     labels: ["remark_iteration_not_claimed"],
@@ -390,7 +390,7 @@ F^{n+p}\,y
         " の反復についてのものである。無限集合上の自己写像、その上の位相、極限集合、",
         "周期点の個数の母関数（形式的冪級数）は、この章では定義も主張もしない。",
         "また、",
-        ref("claim_eventual_periodicity"),
+        ref("claim_finite_self_map_repeating_tail"),
         " の ",
         math(String.raw`(i,p)`),
         " は存在だけを述べており、最小の前周期・最小の周期の定義と一意性は次の層で扱う。",

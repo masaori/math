@@ -51,7 +51,7 @@ export default defineBlocks([
     id: "iterate_monoid_idempotents_claim_collision_period",
     kind: "claim",
     title: { text: "反復写像の衝突は以後の周期を与える" },
-    labels: ["claim_iterate_collision_gives_eventual_period"],
+    labels: ["claim_iterate_collision_gives_repeating_tail"],
     habitat: "N",
     statement: [
       paragraph([
@@ -154,7 +154,7 @@ F^e\circ F^e
         " より ",
         math(String.raw`e=ip\ge i`),
         " である。",
-        ref("claim_iterate_collision_gives_eventual_period"),
+        ref("claim_iterate_collision_gives_repeating_tail"),
         " を、指数 ",
         math(String.raw`e,e+p,\ldots,e+(i-1)p`),
         " に順に適用すると、",
@@ -166,7 +166,7 @@ F^e\circ F^e
 &=F^{e+ip}
   \quad(\because\ e=ip)\\
 &=F^e
-  \quad(\because\ \blkref{claim_iterate_collision_gives_eventual_period}\text{ を }i\text{ 回適用})
+  \quad(\because\ \blkref{claim_iterate_collision_gives_repeating_tail}\text{ を }i\text{ 回適用})
 \end{aligned}`),
       paragraph(["となる。どちらの場合も正の冪等指数が得られる。"]),
     ],

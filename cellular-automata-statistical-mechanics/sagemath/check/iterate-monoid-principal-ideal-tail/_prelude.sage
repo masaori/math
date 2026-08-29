@@ -41,7 +41,7 @@ def compose(outer, inner):
 
 
 def power_tables(table, last_exponent):
-    """F^0, F^1, ..., F^{last_exponent} を def_global_map_iterate の再帰 F^{n+1} = F ∘ F^n で計算する。"""
+    """F^0, F^1, ..., F^{last_exponent} を def_finite_self_map_iterate の再帰 F^{n+1} = F ∘ F^n で計算する。"""
     result = [identity_table(len(table))]
     for _ in range(last_exponent):
         result.append(compose(table, result[-1]))

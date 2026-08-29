@@ -98,7 +98,7 @@ export default defineBlocks([
         "）。これは有限半順序の区間である。時間区間 ",
         math(String.raw`[0,\tau]_{\mathbb{N}}`),
         "（",
-        ref("def_time_interval"),
+        ref("def_finite_index_interval"),
         "）とは別の対象なので、記号は ",
         math(String.raw`I_\tau(a,b)`),
         " を使い、角括弧による区間記法を使い回さない。",

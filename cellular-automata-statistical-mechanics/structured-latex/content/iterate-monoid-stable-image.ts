@@ -107,7 +107,7 @@ E_F(z)
     id: "iterate_monoid_stable_image_claim_restricted_bijection",
     kind: "claim",
     title: { text: "自己写像は安定像上で全単射になる" },
-    labels: ["claim_iterate_monoid_global_map_bijective_on_stable_image"],
+    labels: ["claim_iterate_monoid_generator_bijective_on_stable_image"],
     habitat: "finite",
     statement: [
       paragraph([

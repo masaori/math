@@ -1,4 +1,4 @@
-# 対象ラベル: claim_global_map_injective_iff_all_periodic
+# 対象ラベル: claim_finite_self_map_injective_iff_all_periodic
 # 単射性が「全ての配位の最小前周期が 0 である」ことと同値であることを検査する。
 # 併せて (⇒) の中間段（単射なら μ(y) ≥ 1 のとき (μ(y)-1, π(y)) が周期組になり最小性に反する）と
 # (⇐) の中間段（μ(y) = 0 なら y = F(F^k y) となる k が存在する）を別々に検査する。

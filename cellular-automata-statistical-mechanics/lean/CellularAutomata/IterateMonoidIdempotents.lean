@@ -28,7 +28,7 @@ def IsIdempotentExponent (e : ℕ) : Prop := iterateMap N f e ∈ idempotents N 
 
 omit [Fintype V] [DecidableEq V] in
 /-- 衝突 F^i=F^j は時刻 i 以後に周期 p=j-i を与える
-    （`claim_iterate_collision_gives_eventual_period`）。 -/
+    （`claim_iterate_collision_gives_repeating_tail`）。 -/
 theorem collision_gives_eventual_period {i j n : ℕ} (hij : i < j)
     (h : iterateMap N f i = iterateMap N f j) (hn : i ≤ n) :
     iterateMap N f (n + (j - i)) = iterateMap N f n := by
