@@ -1586,15 +1586,36 @@ E_K \check{Q}_\epsilon
         math(String.raw`y \in \mathrm{im}\,\check{Q}_\epsilon`),
         " なら ",
         math(String.raw`y = \check{Q}_\epsilon x`),
-        " と書けて、",
-        ref("check_joint_eigenspace_decomposition"),
-        " (1) より ",
-        math(String.raw`\check{Q}_\epsilon y = \check{Q}_\epsilon^2 x = \check{Q}_\epsilon x = y`),
-        " だから",
+        " と書けて",
       ]),
       displayMath(
-        String.raw`\check{V}' y = \check{V}'\check{Q}_\epsilon y
-= e^{\check{g}(\epsilon)}\check{Q}_\epsilon y = e^{\check{g}(\epsilon)} y`,
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon y
+&= \check{Q}_\epsilon\left(\check{Q}_\epsilon x\right)
+   \quad (\because y = \check{Q}_\epsilon x \text{ と書いた}) \\
+&= \check{Q}_\epsilon^2 x
+   \quad (\because \text{行列積の結合法則}) \\
+&= \check{Q}_\epsilon x
+   \quad (\because \text{check\_joint\_eigenspace\_decomposition (1) の冪等性}) \\
+&= y
+   \quad (\because y = \check{Q}_\epsilon x \text{ と書いた})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（冪等性は ",
+        ref("check_joint_eigenspace_decomposition"),
+        " (1)）。だから",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{V}' y
+&= \check{V}'\left(\check{Q}_\epsilon y\right)
+   \quad (\because \text{上の等式 }\check{Q}_\epsilon y = y) \\
+&= e^{\check{g}(\epsilon)}\check{Q}_\epsilon y
+   \quad (\because \text{Step 3}) \\
+&= e^{\check{g}(\epsilon)} y
+   \quad (\because \text{上の等式 }\check{Q}_\epsilon y = y)
+\end{aligned}`,
       ),
       paragraph([
         ref("check_joint_eigenspace_decomposition"),
