@@ -49099,6 +49099,139 @@ c_{\mathrm v}(e,d):=
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_formal_square_root_existence",
+        labels: [],
+        title: { text: "定数項一の形式的平方根の存在" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_formal_square_root_exists",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_sqrt_coefficient_recursion",
+                    kind: "definition",
+                    title: { text: "平方根係数列の再帰" },
+                    labels: ["def_sqrt_coefficient_recursion"],
+                    habitat: "Qbar",
+                    statement: [
+                      paragraph([
+                        "代数的数の列 ", math(String.raw`D=(d_n)_{n\in\mathbb N}`),
+                        " が ", math(String.raw`d_0=1`),
+                        " を満たすとする。代数的数の列 ", math(String.raw`s=(s_n)_{n\in\mathbb N}`),
+                        " を、添字 ", math(String.raw`n\in\mathbb N`), " についての再帰",
+                      ]),
+                      displayMath(String.raw`s_0:=1,\qquad
+s_n:=\frac{1}{2}\left(d_n-\sum_{j=1}^{n-1}s_js_{n-j}\right)\quad(n\ge1)`),
+                      paragraph([
+                        "で定め、", math(String.raw`D`), " の平方根係数列と呼ぶ。右辺の和は ",
+                        math(String.raw`j`), " が ", math(String.raw`1`), " から ",
+                        math(String.raw`n-1`), " までを走る有限和であり（",
+                        math(String.raw`n=1`), " では空和で、その値は ",
+                        math(String.raw`0\in\overline{\mathbb Q}`),
+                        " とする）、現れる ", math(String.raw`s_j`),
+                        " の添字はいずれも ", math(String.raw`n`),
+                        " より小さいので、この再帰は各 ", math(String.raw`s_n\in\overline{\mathbb Q}`),
+                        " を一意に定める。", math(String.raw`2`), " による除法は、",
+                        math(String.raw`\overline{\mathbb Q}`), " が体であり ",
+                        math(String.raw`2\ne0`), "（標数零）だから定義される。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_formal_square_root_exists",
+                kind: "claim",
+                title: { text: "定数項一の形式的平方根は存在する" },
+                labels: ["claim_formal_square_root_exists"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/formal-square-root-existence"],
+                lean: [
+                  "Ising2DLambda.KacWard.formalSquareRoot_exists",
+                  "Ising2DLambda.NecSuf.KacWard.mk_sqrtCoeff_mul_self",
+                  "Ising2DLambda.KacWard.formalSquareRoot_exists_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`D(x)=\sum_n d_nx^n\in\overline{\mathbb Q}[[x]]`),
+                    " が ", math(String.raw`\mathrm{ac}_0(D)=1`),
+                    " を満たすとする。", math(String.raw`D`),
+                    " の平方根係数列 ", math(String.raw`s`), "（",
+                    ref("def_sqrt_coefficient_recursion"), "）から作る形式的冪級数を ",
+                    math(String.raw`S(x):=\sum_{n\in\mathbb N}s_nx^n\in\overline{\mathbb Q}[[x]]`),
+                    " と置くと、",
+                    math(String.raw`\mathrm{ac}_0(S)=1`), " かつ ",
+                    math(String.raw`S(x)S(x)=D(x)`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "定数項は ",
+                    math(String.raw`\mathrm{ac}_0(S)=s_0=1`),
+                    "（", math(String.raw`\because`), " 定数項の定義 ",
+                    ref("def_qbar_formal_power_series"), " と ",
+                    math(String.raw`s_0:=1`), " ",
+                    ref("def_sqrt_coefficient_recursion"),
+                    "）。形式的冪級数は係数列そのものだから、",
+                    math(String.raw`S(x)S(x)=D(x)`),
+                    " を示すには、すべての ", math(String.raw`n\in\mathbb N`),
+                    " について Cauchy 積の ", math(String.raw`n`),
+                    " 次係数が ", math(String.raw`d_n`),
+                    " に一致することを示せばよい（",
+                    math(String.raw`\because`), " ", ref("def_qbar_formal_power_series"),
+                    "）。", math(String.raw`n=0`), " のとき:",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\sum_{j=0}^{0}s_js_{0-j}
+&=s_0s_0
+&&\bigl(\because\ \text{一項の和}\bigr)\\
+&=1\cdot1
+&&\bigl(\because\ s_0=1.\ \blkref{def_sqrt_coefficient_recursion}\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法単位元}\bigr)\\
+&=d_0
+&&\bigl(\because\ \mathrm{ac}_0(D)=1\text{（仮定）と }\mathrm{ac}_0(D)=d_0.\ \blkref{def_qbar_formal_power_series}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`n\ge1`), " のとき（",
+                    math(String.raw`n=1`), " では ",
+                    math(String.raw`\sum_{j=1}^{n-1}`),
+                    " は空和で値は ", math(String.raw`0`), " である）:",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\sum_{j=0}^{n}s_js_{n-j}
+&=s_0s_n+\left(\sum_{j=1}^{n-1}s_js_{n-j}\right)+s_ns_0
+&&\bigl(\because\ \text{有限和から }j=0\text{ と }j=n\text{ の項を分ける}\bigr)\\
+&=s_n+\left(\sum_{j=1}^{n-1}s_js_{n-j}\right)+s_n
+&&\bigl(\because\ s_0=1\text{ と }\overline{\mathbb Q}\text{ の乗法単位元}.\ \blkref{def_sqrt_coefficient_recursion}\bigr)\\
+&=2s_n+\sum_{j=1}^{n-1}s_js_{n-j}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法と分配則}\bigr)\\
+&=\left(d_n-\sum_{j=1}^{n-1}s_js_{n-j}\right)+\sum_{j=1}^{n-1}s_js_{n-j}
+&&\bigl(\because\ 2s_n=d_n-\textstyle\sum_{j=1}^{n-1}s_js_{n-j}.\ \blkref{def_sqrt_coefficient_recursion}\bigr)\\
+&=d_n
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法逆元}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "ゆえにすべての ", math(String.raw`n\in\mathbb N`),
+                    " で Cauchy 積の ", math(String.raw`n`), " 次係数は ",
+                    math(String.raw`d_n`), " に一致し、",
+                    math(String.raw`S(x)S(x)=D(x)`), " である。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

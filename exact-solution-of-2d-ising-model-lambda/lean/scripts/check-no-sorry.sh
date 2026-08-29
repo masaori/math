@@ -1539,6 +1539,10 @@ targets=(
   Ising2DLambda.KacWard.formalSquareRoot_unique
   Ising2DLambda.NecSuf.KacWard.formalSquareRoot_unique_necSuf
   Ising2DLambda.KacWard.formalSquareRoot_unique_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.constantCoeff_mk_sqrtCoeff
+  Ising2DLambda.NecSuf.KacWard.mk_sqrtCoeff_mul_self
+  Ising2DLambda.KacWard.formalSquareRoot_exists
+  Ising2DLambda.KacWard.formalSquareRoot_exists_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
