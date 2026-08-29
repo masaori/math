@@ -48579,6 +48579,167 @@ c_{\mathrm v}(e,d):=
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_transition_matrices",
+        labels: [],
+        title: { text: "四つの Kac--Ward 遷移行列" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_transition_entries_in_mu8",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_transition_matrices",
+                    kind: "definition",
+                    title: { text: "四つの Kac--Ward 遷移行列" },
+                    labels: ["def_kac_ward_transition_matrices"],
+                    habitat: "Qbar",
+                    statement: [
+                      paragraph([
+                        "代数的数を成分とする行列（", ref("def_qbar_matrix"),
+                        "）の添字集合 ", math(String.raw`\mathcal J`), " を、向き付き辺の集合 ",
+                        math(String.raw`\vec E_L`), "（", ref("def_oriented_edges"),
+                        "）と取る。", math(String.raw`\vec E_L`), " は元の個数が ",
+                        math(String.raw`4L^2\ge4`), " の空でない有限集合なので、この取り方は許される。",
+                        "スピン構造 ", math(String.raw`(a,b)\in\mathcal S`), "（",
+                        ref("def_spin_structures"), "）ごとに、Kac--Ward 遷移行列 ",
+                        math(String.raw`M^{a,b}\in\mathrm{Mat}_{\vec E_L}\bigl(\overline{\mathbb Q}\bigr)`),
+                        " を、成分ごとの場合分けで",
+                      ]),
+                      displayMath(String.raw`M^{a,b}_{\vec e,\vec f}:=
+\begin{cases}
+\varepsilon_{a,b}(\vec f)\cdot\rho(\vec e,\vec f),&\vec f\in\operatorname{Next}(\vec e),\\
+0,&\vec f\notin\operatorname{Next}(\vec e)
+\end{cases}
+\qquad(\vec e,\vec f\in\vec E_L)`),
+                      paragraph([
+                        "で定める。ねじれ符号 ", math(String.raw`\varepsilon_{a,b}`), " は ",
+                        ref("def_spin_structures"), "、回転位相 ", math(String.raw`\rho`), " は ",
+                        ref("def_rotation_phase"), "、直ちに引き返さない後続辺の集合 ",
+                        math(String.raw`\operatorname{Next}`), " は ",
+                        ref("def_nonbacktracking_successors"), " で定めた。",
+                        "第一の場合の右辺は、整数 ", math(String.raw`\varepsilon_{a,b}(\vec f)\in\{-1,1\}`),
+                        " を ", math(String.raw`\overline{\mathbb Q}`),
+                        " の元と見た値と回転位相との、体 ",
+                        math(String.raw`\overline{\mathbb Q}`), " の積である。したがってどの成分も ",
+                        math(String.raw`\overline{\mathbb Q}`),
+                        " に属し、実数体も複素数体も現れない。四つのスピン構造に対応して行列は四つある。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_transition_entries_in_mu8",
+                kind: "claim",
+                title: { text: "遷移行列の成分は零か 1 の 8 乗根である" },
+                labels: ["claim_transition_entries_in_mu8"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/kac-ward-transition-matrices"],
+                lean: [
+                  "Ising2DLambda.KacWard.transitionEntry_mem_mu8",
+                  "Ising2DLambda.NecSuf.KacWard.signed_phase_pow_eight",
+                  "Ising2DLambda.KacWard.transitionEntry_mem_mu8_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`(a,b)\in\mathcal S`), " と ",
+                    math(String.raw`\vec e,\vec f\in\vec E_L`), " について、成分 ",
+                    math(String.raw`M^{a,b}_{\vec e,\vec f}`), "（",
+                    ref("def_kac_ward_transition_matrices"), "）は ",
+                    math(String.raw`0`), " であるか、または 1 の 8 乗根の全体 ",
+                    math(String.raw`\mu_8`), "（", ref("def_root_of_unity_set"),
+                    "）に属する。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`(a,b)\in\mathcal S`), " と ",
+                    math(String.raw`\vec e,\vec f\in\vec E_L`), " を取る。",
+                    ref("def_kac_ward_transition_matrices"), " の場合分けに従う。",
+                  ]),
+                  paragraph([
+                    math(String.raw`\vec f\notin\operatorname{Next}(\vec e)`), " の場合。",
+                    ref("def_kac_ward_transition_matrices"), " により ",
+                    math(String.raw`M^{a,b}_{\vec e,\vec f}=0`), " であり、主張の第一の選択肢が成り立つ。",
+                  ]),
+                  paragraph([
+                    math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " の場合。",
+                    ref("def_root_of_unity_set"), " により、示すべきことは",
+                  ]),
+                  displayMath(String.raw`\bigl(M^{a,b}_{\vec e,\vec f}\bigr)^{8}=1`),
+                  paragraph([
+                    "である。まず符号とは独立に、8 乗が位相だけで決まることを見る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\bigl(M^{a,b}_{\vec e,\vec f}\bigr)^{8}
+&=\bigl(\varepsilon_{a,b}(\vec f)\cdot\rho(\vec e,\vec f)\bigr)^{8}
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices}\bigr)\\
+&=\varepsilon_{a,b}(\vec f)^{8}\cdot\rho(\vec e,\vec f)^{8}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換性と結合性}\bigr)\\
+&=\bigl(\varepsilon_{a,b}(\vec f)^{2}\bigr)^{4}\cdot\rho(\vec e,\vec f)^{8}
+&&\bigl(\because\ \text{指数法則 }y^{8}=(y^{2})^{4}\bigr)\\
+&=1^{4}\cdot\rho(\vec e,\vec f)^{8}
+&&\bigl(\because\ \blkref{def_spin_structures}\text{ の }\varepsilon_{a,b}(\vec f)\in\{-1,1\}\text{ と }(-1)^2=1^2=1\bigr)\\
+&=\rho(\vec e,\vec f)^{8}
+&&\bigl(\because\ 1^{4}=1\text{ と }\overline{\mathbb Q}\text{ の単位元}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "次に ", ref("def_rotation_phase"), " の三つの場合で ",
+                    math(String.raw`\rho(\vec e,\vec f)^{8}=1`), " を示す。直進の場合。",
+                  ]),
+                  displayMath(String.raw`\rho(\vec e,\vec f)^{8}
+=1^{8}
+=1
+\qquad\bigl(\because\ \blkref{def_rotation_phase}\text{ と }\overline{\mathbb Q}\text{ の単位元の冪}\bigr)`),
+                  paragraph(["左回転の場合。"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho(\vec e,\vec f)^{8}
+&=\zeta_8^{8}
+&&\bigl(\because\ \blkref{def_rotation_phase}\bigr)\\
+&=\bigl(\zeta_8^{4}\bigr)^{2}
+&&\bigl(\because\ \text{指数法則 }y^{8}=(y^{4})^{2}\bigr)\\
+&=(-1)^{2}
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の約束 }\zeta_8^{4}=-1\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積 }(-1)\cdot(-1)=1\bigr)
+\end{aligned}`),
+                  paragraph(["右回転の場合。"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho(\vec e,\vec f)^{8}
+&=\bigl(\zeta_8^{-1}\bigr)^{8}
+&&\bigl(\because\ \blkref{def_rotation_phase}\bigr)\\
+&=\bigl(\zeta_8^{8}\bigr)^{-1}
+&&\bigl(\because\ \text{体 }\overline{\mathbb Q}\text{ の逆元の冪 }(y^{-1})^{8}=(y^{8})^{-1}\bigr)\\
+&=1^{-1}
+&&\bigl(\because\ \text{左回転の場合で示した }\zeta_8^{8}=1\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の単位元の逆元}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "三つの場合が ", ref("def_rotation_phase"),
+                    " の後続辺を尽くすので、どの場合も ",
+                    math(String.raw`\bigl(M^{a,b}_{\vec e,\vec f}\bigr)^{8}=1`),
+                    " であり、", ref("def_root_of_unity_set"), " により ",
+                    math(String.raw`M^{a,b}_{\vec e,\vec f}\in\mu_8`),
+                    " である。全過程は有限集合と ",
+                    math(String.raw`\overline{\mathbb Q}`),
+                    " の四則だけで閉じ、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

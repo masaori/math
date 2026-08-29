@@ -64,6 +64,10 @@ targets=(
   Ising2DLambda.KacWard.reversal_involutive_from_necSuf
   Ising2DLambda.KacWard.reversal_ne_from_necSuf
   Ising2DLambda.KacWard.spinStructures_card_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.pow_eight_of_pow_four_neg_one
+  Ising2DLambda.NecSuf.KacWard.signed_phase_pow_eight
+  Ising2DLambda.KacWard.transitionEntry_mem_mu8
+  Ising2DLambda.KacWard.transitionEntry_mem_mu8_from_necSuf
   Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow
   Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow_from_necSuf
   Ising2DLambda.NecSuf.PartitionPolynomial.sum_card_fiber_eq_card

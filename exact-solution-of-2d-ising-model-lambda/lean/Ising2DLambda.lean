@@ -890,3 +890,5 @@ import Ising2DLambda.KacWard.BasicFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.ArfFourierSignProjection
 import Ising2DLambda.KacWard.ArfFourierSignProjection
 import Ising2DLambda.KacWard.ArfFourierSignProjectionFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.TransitionEntries
+import Ising2DLambda.KacWard.TransitionEntries
