@@ -1087,14 +1087,20 @@ R_\mu^{(1)} + R_\mu^{(0)}
 \end{aligned}`,
       ),
       paragraph([
-        "Step 2（(2) の証明）。Step 0 の ",
-        math(String.raw`R_\mu^{(1)} + R_\mu^{(0)} = I`),
-        " を各因子に代入し、可換な有限個の因子の積を分配法則で展開すると",
+        "Step 2（(2) の証明）。主張の左辺から始める：",
       ]),
       displayMath(
-        String.raw`I = \prod_{\mu=1}^{M}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
-= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}
-= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \check{Q}_\epsilon`,
+        String.raw`\begin{aligned}
+\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \check{Q}_\epsilon
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}
+   \quad (\because \check{Q}_\epsilon \text{ の定義（冒頭）}) \\
+&= \prod_{\mu=1}^{M}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
+   \quad (\because \text{可換な有限個の因子の積の分配法則による展開}) \\
+&= \prod_{\mu=1}^{M} I
+   \quad (\because \text{Step 0 の和が単位行列であることを各因子へ同時に適用}) \\
+&= I
+   \quad (\because \text{単位行列の有限積は単位行列})
+\end{aligned}`,
       ),
       paragraph([
         "（展開して現れる項は、各 ",

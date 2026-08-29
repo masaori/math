@@ -48,13 +48,13 @@
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
 
+- 2026-08-29（10 回目）: 姉妹側の偶数セクター固有値章の「数演算子の同時固有空間分解」（`check_joint_eigenspace_decomposition`）の Step 2 で、一行に三つの等号が同居していた「和が単位行列」の鎖を、主張の左辺から始まる一行一等号・行末根拠つきの四段（定義→分配法則→Step 0 の和→単位行列の有限積）へ開いた。内容と参照は不変。姉妹側 SageMath 対象検算（check\_02 PASS）・check・PDF 338 ページ通過。
 - 2026-08-29（9 回目）: 姉妹側の偶数セクター固有値章の「数演算子の同時固有空間分解」（`check_joint_eigenspace_decomposition`）の Step 1 で、異なる射影子の積が零になる三等号を一行一等号・行末根拠つきへ開き、同じ添字の射影子の冪等性も積の定義・因子の可換性・各因子の冪等性・積の定義の四段へ開いた。内容と参照は不変。姉妹側 SageMath 対象検算（check\_02 PASS）・check・PDF 338 ページ通過。
 - 2026-08-29（8 回目）: 姉妹側の偶数セクター固有値章の「数演算子の同時固有空間分解」（`check_joint_eigenspace_decomposition`）の Step 0 で、1 行に複数の等号が同居していた四つの関係（冪等性二つ・異添字積の零・和の単位行列）を、関係ごとの一行一等号・行末根拠つきの鎖へ開き、機械識別子の行末根拠（`check_number_operator_idempotent (3)` 等）を人間可読な名前へ直した。`= 0 = R^{(0)}R^{(1)}` と畳まれていた逆順の積も独立の鎖にした。内容と参照は不変。姉妹側 SageMath 対象検算（check\_02 PASS）・check・PDF 337 ページ通過。
 - 2026-08-29（7 回目）: 姉妹側の偶数セクター固有値章の「数演算子の積のトレース」で、数演算子の冪等性への機械識別子を人間可読な名前とラベル参照へ直し、移項と 2 による除法、二つの分岐、帰納法の最終計算に同居していた複数の等号を一行一等号・行末根拠つきの鎖へ開いた。主張内容と参照は不変。
 
 - 2026-08-29（6 回目）: 姉妹側の偶数セクター固有値章（`017_even_sector_eigenvalues.ts`）の「数演算子どうしは可換」（`check_number_operators_commute`）で、Step 3 の一行に六つの等号が並んでいた鎖を一行一等号・行末根拠つきの七段へ開き（数演算子の定義・結合法則・(1) の適用を明示）、Step 1・Step 2 の行末根拠の機械識別子（`anticommutator_of_check_psi`・`def_check_number_operator`）を人間可読な名前（「$\check\psi$ の反交換関係の第 1〜3 式」「数演算子の定義」）へ直し、Step 2・Step 3 の導入散文へ `def_check_number_operator` のラベル参照を補った。元の内容と参照は不変。姉妹側 SageMath 対象検算（check\_01\_number\_operator PASS）・check・PDF 336 ページ通過。
 
-- 2026-08-29（5 回目）: 姉妹側の偶数セクター固有値章（`017_even_sector_eigenvalues.ts`）の「数演算子の冪等性」（`check_number_operator_idempotent`）で、二つ目の二乗零性を「同じく」で省略せず反交換子の展開と 2 による除法の鎖へ開き、反交換関係から $I-\check n_\mu$ への移項を主張の左辺から始まる三段へ直し、冪等性の最終行へ零元の根拠を補った。機械識別子の行末根拠も人間可読な名前へ直した。元の内容と `anticommutator_of_check_psi`・`def_check_index_set`・`def_check_number_operator` の参照は不変。姉妹側 SageMath 対象検算（check\_01 PASS）・check・PDF 336 ページ通過。
 
 
 
