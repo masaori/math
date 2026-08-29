@@ -49937,6 +49937,269 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_cyclic_turning_multiple_of_four",
+        labels: [],
+        title: { text: "循環総回転数は 4 の倍数である" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_cyclic_total_turning_multiple_of_four",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_direction_residue_projection",
+                    kind: "definition",
+                    title: { text: "整数から方向番号の剰余類への射影" },
+                    labels: ["def_direction_residue_projection"],
+                    habitat: "Z",
+                    statement: [
+                      paragraph([
+                        math(String.raw`\mathbb Z`), " と方向番号の住む ",
+                        math(String.raw`\mathbb Z/4\mathbb Z`),
+                        "（", ref("def_oriented_edge_direction"), "）を結ぶ自然な射影",
+                      ]),
+                      displayMath(String.raw`\pi_4:\mathbb Z\to\mathbb Z/4\mathbb Z,\qquad
+\pi_4(n):=n+4\mathbb Z`),
+                      paragraph([
+                        "を定める。剰余類の加法の定義により、すべての ",
+                        math(String.raw`a,b\in\mathbb Z`), " について ",
+                        math(String.raw`\pi_4(a+b)=\pi_4(a)+\pi_4(b)`),
+                        " が成り立つ（以後これを ", math(String.raw`\pi_4`),
+                        " の加法性と呼ぶ）。以後、この写像以外の経路で ",
+                        math(String.raw`\mathbb Z`), " と ",
+                        math(String.raw`\mathbb Z/4\mathbb Z`),
+                        " を行き来しない。とくに、整数を剰余類と「みなす」ことはしない。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "supportingClaim",
+                  element: {
+                    id: "kac_ward_claim_step_advances_direction",
+                    kind: "claim",
+                    title: { text: "一歩は方向番号を回転数だけ進める" },
+                    labels: ["claim_step_advances_direction"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/cyclic-turning-multiple-of-four"],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`\vec e\in\vec E_L`), " と任意の ",
+                        math(String.raw`\vec f\in\operatorname{Next}(\vec e)`),
+                        "（", ref("def_nonbacktracking_successors"), "）について、",
+                        math(String.raw`\mathbb Z/4\mathbb Z`), " の等式",
+                      ]),
+                      displayMath(String.raw`\operatorname{dir}(\vec f)
+=\operatorname{dir}(\vec e)+\pi_4(\tau(\vec e,\vec f))`),
+                      paragraph([
+                        "が成り立つ（", ref("def_oriented_edge_direction"), "、",
+                        ref("def_step_turning"), "、",
+                        ref("def_direction_residue_projection"), "）。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "一歩の回転数の定義（", ref("def_step_turning"),
+                        "）の三つの場合で確かめる。直進の場合（",
+                        math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)`),
+                        "、", math(String.raw`\tau(\vec e,\vec f)=0`), "）は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec f)
+&=\operatorname{dir}(\vec e)
+&&\bigl(\because\ \blkref{def_step_turning}\text{ の直進の場合の条件}\bigr)\\
+&=\operatorname{dir}(\vec e)+0
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の零元の加法}\bigr)\\
+&=\operatorname{dir}(\vec e)+\pi_4(0)
+&&\bigl(\because\ \pi_4(0)=0+4\mathbb Z\text{ は零元。}\blkref{def_direction_residue_projection}\bigr)\\
+&=\operatorname{dir}(\vec e)+\pi_4(\tau(\vec e,\vec f))
+&&\bigl(\because\ \text{直進の場合 }\tau(\vec e,\vec f)=0\text{。}\blkref{def_step_turning}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。左回転の場合（",
+                        math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)+1`),
+                        "、", math(String.raw`\tau(\vec e,\vec f)=1`), "）は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec f)
+&=\operatorname{dir}(\vec e)+1
+&&\bigl(\because\ \blkref{def_step_turning}\text{ の左回転の場合の条件}\bigr)\\
+&=\operatorname{dir}(\vec e)+\pi_4(1)
+&&\bigl(\because\ \pi_4(1)=1+4\mathbb Z\text{ は剰余類 }1\text{。}\blkref{def_direction_residue_projection}\bigr)\\
+&=\operatorname{dir}(\vec e)+\pi_4(\tau(\vec e,\vec f))
+&&\bigl(\because\ \text{左回転の場合 }\tau(\vec e,\vec f)=1\text{。}\blkref{def_step_turning}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。右回転の場合（",
+                        math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)-1`),
+                        "、", math(String.raw`\tau(\vec e,\vec f)=-1`), "）は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec f)
+&=\operatorname{dir}(\vec e)-1
+&&\bigl(\because\ \blkref{def_step_turning}\text{ の右回転の場合の条件}\bigr)\\
+&=\operatorname{dir}(\vec e)+(-\pi_4(1))
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の減法の定義と }\pi_4(1)=1+4\mathbb Z\bigr)\\
+&=\operatorname{dir}(\vec e)+\pi_4(-1)
+&&\bigl(\because\ \pi_4(-1)+\pi_4(1)=\pi_4(0)=0\text{。}\pi_4\text{ の加法性、}\blkref{def_direction_residue_projection}\bigr)\\
+&=\operatorname{dir}(\vec e)+\pi_4(\tau(\vec e,\vec f))
+&&\bigl(\because\ \text{右回転の場合 }\tau(\vec e,\vec f)=-1\text{。}\blkref{def_step_turning}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。三つの場合は後続辺を尽くす（", ref("def_step_turning"),
+                        "）。全過程は ", math(String.raw`\mathbb Z/4\mathbb Z`),
+                        " の加法だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "supportingClaim",
+                  element: {
+                    id: "kac_ward_claim_walk_direction_difference",
+                    kind: "claim",
+                    title: { text: "端の方向番号の差は総回転数である" },
+                    labels: ["claim_walk_direction_difference"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/cyclic-turning-multiple-of-four"],
+                    lean: [
+                      "Ising2DLambda.NecSuf.KacWard.foldl_add_hom_eq_add_sum_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        "（", ref("def_nonbacktracking_edge_sequence"), "）について、",
+                        math(String.raw`\mathbb Z/4\mathbb Z`), " の等式",
+                      ]),
+                      displayMath(String.raw`\operatorname{dir}(\vec e_m)
+=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma))`),
+                      paragraph([
+                        "が成り立つ。指数の中は総回転数 ",
+                        math(String.raw`t(\gamma)\in\mathbb Z`),
+                        "（", ref("def_total_turning"), "）である。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "辺の本数 ", math(String.raw`m`), " についての帰納法で示す。",
+                        "底 ", math(String.raw`m=1`), " の場合は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec e_1)
+&=\operatorname{dir}(\vec e_1)+0
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の零元の加法}\bigr)\\
+&=\operatorname{dir}(\vec e_1)+\pi_4(0)
+&&\bigl(\because\ \pi_4(0)=0+4\mathbb Z\text{ は零元。}\blkref{def_direction_residue_projection}\bigr)\\
+&=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma))
+&&\bigl(\because\ \blkref{def_total_turning}\text{ の空和の約束}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。帰納段では ", math(String.raw`m\ge2`), " とし、短くした列 ",
+                        math(String.raw`\gamma':=(\vec e_1,\ldots,\vec e_{m-1})`),
+                        " について主張が成り立つと仮定する。",
+                        math(String.raw`\gamma`), " が非後退辺列なので ",
+                        math(String.raw`\gamma'`),
+                        " も非後退辺列である（条件の全称範囲が狭まるだけである）。このとき",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec e_m)
+&=\operatorname{dir}(\vec e_{m-1})+\pi_4(\tau(\vec e_{m-1},\vec e_m))
+&&\bigl(\because\ \blkref{claim_step_advances_direction}\bigr)\\
+&=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma'))+\pi_4(\tau(\vec e_{m-1},\vec e_m))
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma')+\tau(\vec e_{m-1},\vec e_m))
+&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma))
+&&\bigl(\because\ \blkref{def_total_turning}\text{ の有限和から末尾の項を分離}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "となり、帰納段が閉じる。したがってすべての ",
+                        math(String.raw`m\ge1`),
+                        " について主張が成り立つ。全過程は整数の有限和と ",
+                        math(String.raw`\mathbb Z/4\mathbb Z`),
+                        " の加法だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_cyclic_total_turning_multiple_of_four",
+                kind: "claim",
+                title: { text: "閉歩道の循環総回転数は 4 の倍数である" },
+                labels: ["claim_cyclic_total_turning_multiple_of_four"],
+                habitat: "Z",
+                verification: ["sagemath/check/cyclic-turning-multiple-of-four"],
+                lean: [
+                  "Ising2DLambda.KacWard.cyclic_total_turning_vanishes",
+                  "Ising2DLambda.KacWard.four_dvd_cyclic_total_turning",
+                  "Ising2DLambda.NecSuf.KacWard.closed_walk_hom_vanishes_necSuf",
+                  "Ising2DLambda.KacWard.cyclic_total_turning_vanishes_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の閉じた非後退辺列 ",
+                    math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）について、",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " の等式",
+                  ]),
+                  displayMath(String.raw`\pi_4(t_{\circ}(\gamma))=0`),
+                  paragraph([
+                    "が成り立つ。すなわち、射影の定義（",
+                    ref("def_direction_residue_projection"),
+                    "）により、循環総回転数 ", math(String.raw`t_{\circ}(\gamma)`),
+                    "（", ref("def_cyclic_total_turning"),
+                    "）は部分集合 ", math(String.raw`4\mathbb Z\subset\mathbb Z`),
+                    " に属する（4 の倍数である）。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "閉性により ",
+                    math(String.raw`\vec e_1\in\operatorname{Next}(\vec e_m)`),
+                    " である（", ref("def_closed_nonbacktracking_walk"), "）。このとき",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec e_1)
+&=\operatorname{dir}(\vec e_m)+\pi_4(\tau(\vec e_m,\vec e_1))
+&&\bigl(\because\ \blkref{claim_step_advances_direction}\bigr)\\
+&=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma))+\pi_4(\tau(\vec e_m,\vec e_1))
+&&\bigl(\because\ \blkref{claim_walk_direction_difference}\bigr)\\
+&=\operatorname{dir}(\vec e_1)+\pi_4(t(\gamma)+\tau(\vec e_m,\vec e_1))
+&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&=\operatorname{dir}(\vec e_1)+\pi_4(t_{\circ}(\gamma))
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となる。両辺に ",
+                    math(String.raw`\operatorname{dir}(\vec e_1)`),
+                    " の加法逆元を左から加えると（",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " は加法群）、",
+                    math(String.raw`0=\pi_4(t_{\circ}(\gamma))`),
+                    " を得る。したがって ",
+                    math(String.raw`t_{\circ}(\gamma)+4\mathbb Z=0+4\mathbb Z`),
+                    "、すなわち ", math(String.raw`t_{\circ}(\gamma)\in4\mathbb Z`),
+                    " である（剰余類の等号の定義）。全過程は ",
+                    math(String.raw`\mathbb Z/4\mathbb Z`),
+                    " の加法だけで閉じ、実数体も複素数体も現れない。",
+                    "この整数 ", math(String.raw`t_{\circ}(\gamma)`),
+                    " を 4 で割った商は閉歩道の回転数であり、後続で自己交差数の偶奇と比較される。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
