@@ -10,7 +10,9 @@ set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 REPO_DIR="$(cd "$PROJECT_DIR/.." && pwd -P)"
-LOG_DIR="$PROJECT_DIR/logs"
+# 専用worktreeで動かしても監視・監査が従来の正本ログと同じ場所を読むよう、
+# 起動口から共有ログ先を注入できる。未指定の手動実行は従来どおりプロジェクト配下。
+LOG_DIR="${ISING_LAMBDA_LOG_DIR:-$PROJECT_DIR/logs}"
 LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
 
@@ -102,9 +104,8 @@ if [ "$probe_elapsed" -ge 20 ]; then
   exit 0
 fi
 
-# 作業ツリーが汚れているときは見送る。
-# このリポジトリでは人間の対話セッションが同じ作業ツリーを使うので、
-# 編集の途中に tick が割り込むと互いの変更を踏む。ロックは tick どうしの衝突しか防げない。
+# 作業ツリーが汚れているときは見送る。launchd はこの研究専用worktreeから起動するため、
+# ここで見える差分はこのtick自身の残骸だけであり、共有mathの別研究差分は混入しない。
 cd "$REPO_DIR"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
 # 残骸が片付いていれば目印を消す（人手で拾ったあとも残り続けると、次の tick が
