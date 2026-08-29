@@ -18,6 +18,11 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
+if [ -f "$SCRIPT_DIR/../docs/tasks/auto-loop-paused.md" ]; then
+  printf '%s\n' "3次元 Ising の自動 tick は人間指示により停止中である。"
+  exit 0
+fi
+
 # このループ専用の作業ツリーと、その中のプロジェクト。
 LOOP_WORKTREE="$HOME/git/masaori/math-ising-3d-cut-loop"
 LOOP_BRANCH="ising-3d-cut-loop"

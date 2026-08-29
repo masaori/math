@@ -2102,4 +2102,31 @@ theorem card_periodicSquarePairingsAt_eq_one_or_three
   · exact Or.inl (card_periodicSquarePairingsAt_of_card_eq_two subgraph v htwo)
   · exact Or.inr (card_periodicSquarePairingsAt_of_card_eq_four subgraph v hfour)
 
+/-- 一辺が二以上なら、復号繊維の個数は、対分けが三通りある city の個数を指数とする三の冪である。
+各 city の対分け数が一か三のいずれかであることを、復号繊維の個数の積表示に代入したものである。 -/
+theorem card_periodicSquareDecodingFiber_eq_three_pow
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    (periodicSquareDecodingFiber subgraph).card =
+      3 ^ (Finset.univ.filter fun v : LatticeVertex n =>
+        (periodicSquarePairingsAt subgraph v).card = 3).card := by
+  rw [card_periodicSquareDecodingFiber hn subgraph]
+  classical
+  have hfactor (v : LatticeVertex n) :
+      (periodicSquarePairingsAt subgraph v).card =
+        if (periodicSquarePairingsAt subgraph v).card = 3 then 3 else 1 := by
+    rcases card_periodicSquarePairingsAt_eq_one_or_three hn subgraph v with hone | hthree
+    · simp [hone]
+    · simp [hthree]
+  calc
+    ∏ v : LatticeVertex n, (periodicSquarePairingsAt subgraph v).card =
+        ∏ v : LatticeVertex n,
+          if (periodicSquarePairingsAt subgraph v).card = 3 then 3 else 1 :=
+      Finset.prod_congr rfl (fun v _ ↦ hfactor v)
+    _ = (∏ v ∈ Finset.univ.filter (fun v : LatticeVertex n ↦
+          (periodicSquarePairingsAt subgraph v).card = 3), 3) :=
+      (Finset.prod_filter _ _).symm
+    _ = 3 ^ (Finset.univ.filter fun v : LatticeVertex n ↦
+          (periodicSquarePairingsAt subgraph v).card = 3).card :=
+      Finset.prod_const 3
+
 end Ising3DCut.Prediction
