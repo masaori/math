@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 3 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 4 回目の tick 時点）
+
+**閉歩道の循環総回転数が 4 の倍数であることを四層で証明した。** 整数から方向番号の剰余類への射影 $\pi_4:\mathbb Z\to\mathbb Z/4\mathbb Z$（`def_direction_residue_projection`）を定義し、一歩が方向番号を回転数だけ進めること（`claim_step_advances_direction`、三場合）、端の方向番号の差が総回転数であること（`claim_walk_direction_difference`、辺の本数の帰納法）を経て、閉性の一周から $\pi_4(t_{\circ}(\gamma))=0$ すなわち $t_{\circ}(\gamma)\in4\mathbb Z$ を左簡約で得た（`claim_cyclic_total_turning_multiple_of_four`）。SageMath `cyclic-turning-multiple-of-four` は接続 660 件・辺列 6,776 件・閉歩道 1,064 件を `Integers(4)` と `ZZ` で厳密検査した。Lean は `KacWard/CyclicTurningVanishes.lean`（ℤ/4ℤ 具体版と 4 の整除の言い換え）と `NecSuf/KacWard/CyclicTurningVanishes.lean` を通し、必要十分版に残る仮定は φ の零の保存・加法性と左簡約（`AddLeftCancelMonoid`）だけである（加法群は不要と分かった）。次は循環総回転数を 4 で割った商（回転数）と自己交差数の偶奇の同定（Whitney 型の偶奇公式）へ進む。
+
+前進前レビューでは、直前の閉歩道の循環総回転数（コミット `d80e365f`）を本文・SageMath・Lean 二本・sorry 検査登録で照合し、一致を確認した。修正対象は無かった。
+
+並列の式変形統一は、姉妹側の偶数セクター固有値章の「V̌′ の固有値」の Step 2 まで進んだ。一行四等号の冪の帰納段を五段の一行一等号・行末根拠つきへ開いた。次は同じ証明の Step 3 以降の複数等号を見る。
+
+## ひとつ前の到達点（2026-08-30 の 3 回目の tick 時点）
 
 **閉じた非後退辺列と循環総回転数を定義し、閉歩道の回転位相積が $\zeta_8$ の循環総回転数冪になることを四層で証明した。** 閉性は終辺から始辺も非後退接続になること、循環総回転数は $t_{\circ}(\gamma):=t(\gamma)+\tau(\vec e_m,\vec e_1)$ と定めた。証明は、開いた辺列の位相積の等式へ閉じる一歩の位相を加え、整数指数の指数法則でまとめる四段である。SageMath `closed-walk-rotation-phase` は $L=1,2,3$・辺 1〜5 本の閉じた非後退辺列 1,064 件を `QQbar` と `ZZ` で厳密検査した。Lean は `KacWard/ClosedWalkRotationPhase.lean` と `NecSuf/KacWard/ClosedWalkRotationPhase.lean` を通し、必要十分版に残る仮定は整数指数の指数法則に必要な底の非零性だけである。次は循環総回転数と自己交差数の偶奇を同定し、回転位相積を自己交差符号へ接続する。
 
@@ -10,7 +18,7 @@
 
 並列の式変形統一は、姉妹側の「数演算子の同時固有空間分解」（017 章）の Step 5 まで進んだ。全体を張る等式と直和性の一行二等号を、一行一等号・行末根拠つきの鎖へ開いた。次は同じ証明の後続ブロックを見る。
 
-## ひとつ前の到達点（2026-08-30 の 2 回目の tick 時点）
+## それ以前の到達点（2026-08-30 の 2 回目の tick 時点）
 
 **非後退辺列の総回転数を定義し、回転位相の積が $\zeta_8$ の総回転数冪になることを四層で証明した。** 非後退辺列（各隣接対が非後退接続）、一歩の回転数 $\tau(\vec e,\vec f)\in\{0,1,-1\}\subset\mathbb Z$、総回転数 $t(\gamma)\in\mathbb Z$ を定義し、$\rho(\vec e,\vec f)=\zeta_8^{\tau}$（三場合の照合）と $\prod_k\rho(\vec e_k,\vec e_{k+1})=\zeta_8^{t(\gamma)}$（辺の本数の帰納法）を示した。回転位相の積は整数 $t(\gamma)$ だけで決まるので、後続の閉歩道の位相計算は整数計算へ帰着する。SageMath `walk-rotation-phase-total-turning` は $L=1,\dots,5$ の 660 接続と $L=1,2,3$ の辺 4 本までの全 2,240 非後退辺列を `QQbar` で厳密検査、Lean は `KacWard/TotalTurning.lean` と `NecSuf/KacWard/TotalTurning.lean` を通した（一歩の等式は仮定不要、積の等式は底の非零＝`zpow_add₀` だけ）。次は閉歩道（始辺へ戻る非後退辺列）と自己交差符号を扱う。
 

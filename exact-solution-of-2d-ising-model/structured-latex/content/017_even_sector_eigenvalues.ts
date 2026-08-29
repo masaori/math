@@ -1449,14 +1449,22 @@ y_{\epsilon'}
         math(String.raw`k = 0`),
         " は自明。",
         math(String.raw`\check{X}^k\check{Q}_\epsilon = \check{g}(\epsilon)^k\check{Q}_\epsilon`),
-        " を仮定すると、Step 1 より",
+        " を仮定すると",
       ]),
       displayMath(
-        String.raw`\check{X}^{k+1}\check{Q}_\epsilon
-= \check{X}\left(\check{X}^k\check{Q}_\epsilon\right)
-= \check{X}\left(\check{g}(\epsilon)^k\check{Q}_\epsilon\right)
-= \check{g}(\epsilon)^k\left(\check{X}\check{Q}_\epsilon\right)
-= \check{g}(\epsilon)^{k+1}\check{Q}_\epsilon`,
+        String.raw`\begin{aligned}
+\check{X}^{k+1}\check{Q}_\epsilon
+&= \check{X}\left(\check{X}^k\check{Q}_\epsilon\right)
+   \quad (\because \text{行列の冪の定義と積の結合法則}) \\
+&= \check{X}\left(\check{g}(\epsilon)^k\check{Q}_\epsilon\right)
+   \quad (\because \text{帰納法の仮定}) \\
+&= \check{g}(\epsilon)^k\left(\check{X}\check{Q}_\epsilon\right)
+   \quad (\because \text{スカラー倍と行列の積の交換}) \\
+&= \check{g}(\epsilon)^k\left(\check{g}(\epsilon)\,\check{Q}_\epsilon\right)
+   \quad (\because \text{Step 1}) \\
+&= \check{g}(\epsilon)^{k+1}\check{Q}_\epsilon
+   \quad (\because \text{スカラー倍の結合法則})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3（指数関数へ）。",
