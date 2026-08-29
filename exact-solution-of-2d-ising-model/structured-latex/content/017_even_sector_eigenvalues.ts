@@ -959,19 +959,71 @@ A\,\check{n}_\nu
         ref("check_number_operator_idempotent"),
         " (3) の ",
         math(String.raw`\check{n}_\mu^2 = \check{n}_\mu`),
-        " より",
+        " と、単位行列が任意の行列と可換であること（",
+        ref("scalar_identity_commutes"),
+        "）を使う。まず 2 つの冪等性：",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-R_\mu^{(1)}R_\mu^{(1)} &= \check{n}_\mu^2 = \check{n}_\mu = R_\mu^{(1)}
-   \quad (\because \text{check\_number\_operator\_idempotent (3)}), \\
-R_\mu^{(0)}R_\mu^{(0)} &= \left(I-\check{n}_\mu\right)^2
-  = I - 2\check{n}_\mu + \check{n}_\mu^2 = I - \check{n}_\mu = R_\mu^{(0)}
-   \quad (\because \text{scalar\_identity\_commutes と check\_number\_operator\_idempotent (3)}), \\
-R_\mu^{(1)}R_\mu^{(0)} &= \check{n}_\mu\left(I - \check{n}_\mu\right)
-  = \check{n}_\mu - \check{n}_\mu^2 = 0 = R_\mu^{(0)}R_\mu^{(1)}
-   \quad (\because \text{check\_number\_operator\_idempotent (3)}), \\
-R_\mu^{(1)} + R_\mu^{(0)} &= \check{n}_\mu + \left(I - \check{n}_\mu\right) = I
+R_\mu^{(1)}R_\mu^{(1)}
+&= \check{n}_\mu\check{n}_\mu
+   \quad (\because R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+&= \check{n}_\mu
+   \quad (\because \text{数演算子の冪等性 (3)}) \\
+&= R_\mu^{(1)}
+   \quad (\because R_\mu^{(1)} \text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(0)}R_\mu^{(0)}
+&= \left(I-\check{n}_\mu\right)\left(I-\check{n}_\mu\right)
+   \quad (\because R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+&= I - \check{n}_\mu - \check{n}_\mu + \check{n}_\mu\check{n}_\mu
+   \quad (\because \text{分配法則と、単位行列との積}) \\
+&= I - \check{n}_\mu - \check{n}_\mu + \check{n}_\mu
+   \quad (\because \text{数演算子の冪等性 (3)}) \\
+&= I - \check{n}_\mu
+   \quad (\because \text{行列の加法（同じ項の消去）}) \\
+&= R_\mu^{(0)}
+   \quad (\because R_\mu^{(0)} \text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      paragraph(["次に異なる上付き添字の積が両順序とも零であること："]),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(1)}R_\mu^{(0)}
+&= \check{n}_\mu\left(I - \check{n}_\mu\right)
+   \quad (\because R_\mu^{(1)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+&= \check{n}_\mu - \check{n}_\mu\check{n}_\mu
+   \quad (\because \text{分配法則と、単位行列との積}) \\
+&= \check{n}_\mu - \check{n}_\mu
+   \quad (\because \text{数演算子の冪等性 (3)}) \\
+&= 0
+   \quad (\because \text{行列の加法逆元})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(0)}R_\mu^{(1)}
+&= \left(I - \check{n}_\mu\right)\check{n}_\mu
+   \quad (\because R_\mu^{(0)}, R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+&= \check{n}_\mu - \check{n}_\mu\check{n}_\mu
+   \quad (\because \text{分配法則と、単位行列との積}) \\
+&= \check{n}_\mu - \check{n}_\mu
+   \quad (\because \text{数演算子の冪等性 (3)}) \\
+&= 0
+   \quad (\because \text{行列の加法逆元})
+\end{aligned}`,
+      ),
+      paragraph(["最後に和が単位行列であること："]),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(1)} + R_\mu^{(0)}
+&= \check{n}_\mu + \left(I - \check{n}_\mu\right)
+   \quad (\because R_\mu^{(1)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+&= I
+   \quad (\because \text{行列の加法（加法逆元と単位元）})
 \end{aligned}`,
       ),
       paragraph([

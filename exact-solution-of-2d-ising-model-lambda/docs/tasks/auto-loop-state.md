@@ -48,6 +48,7 @@
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
 
+- 2026-08-29（8 回目）: 姉妹側の偶数セクター固有値章の「数演算子の同時固有空間分解」（`check_joint_eigenspace_decomposition`）の Step 0 で、1 行に複数の等号が同居していた四つの関係（冪等性二つ・異添字積の零・和の単位行列）を、関係ごとの一行一等号・行末根拠つきの鎖へ開き、機械識別子の行末根拠（`check_number_operator_idempotent (3)` 等）を人間可読な名前へ直した。`= 0 = R^{(0)}R^{(1)}` と畳まれていた逆順の積も独立の鎖にした。内容と参照は不変。姉妹側 SageMath 対象検算（check\_02 PASS）・check・PDF 337 ページ通過。
 - 2026-08-29（7 回目）: 姉妹側の偶数セクター固有値章の「数演算子の積のトレース」で、数演算子の冪等性への機械識別子を人間可読な名前とラベル参照へ直し、移項と 2 による除法、二つの分岐、帰納法の最終計算に同居していた複数の等号を一行一等号・行末根拠つきの鎖へ開いた。主張内容と参照は不変。
 
 - 2026-08-29（6 回目）: 姉妹側の偶数セクター固有値章（`017_even_sector_eigenvalues.ts`）の「数演算子どうしは可換」（`check_number_operators_commute`）で、Step 3 の一行に六つの等号が並んでいた鎖を一行一等号・行末根拠つきの七段へ開き（数演算子の定義・結合法則・(1) の適用を明示）、Step 1・Step 2 の行末根拠の機械識別子（`anticommutator_of_check_psi`・`def_check_number_operator`）を人間可読な名前（「$\check\psi$ の反交換関係の第 1〜3 式」「数演算子の定義」）へ直し、Step 2・Step 3 の導入散文へ `def_check_number_operator` のラベル参照を補った。元の内容と参照は不変。姉妹側 SageMath 対象検算（check\_01\_number\_operator PASS）・check・PDF 336 ページ通過。
@@ -56,7 +57,6 @@
 
 - 2026-08-29（4 回目）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$V^{(+)}=c\check V'$」（`V_plus_eq_c_check_Vprime`）の Step 5 で、機械識別子の生文字列の行末根拠（`scalar_identity_commutes`）を「スカラー行列との積の可換性」へ直し、根拠の無かった最終行に「行列積の単位元」を補い、鎖の後置きだった参照の段落を Step 5 の導入の散文（ラベル参照つき）へ移した。元の内容と `scalar_identity_commutes` の参照は不変。姉妹側 SageMath 対象検算（check\_06 PASS）・check・PDF 336 ページ通過。
 
-- 2026-08-29（3 回目）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$V^{(+)}=c\check V'$」（`V_plus_eq_c_check_Vprime`）で、Step 1 の鎖に単位元の根拠を補って直後の重複した言い換えを削り、Step 2 の散文に畳まれていた共役式から $Wx=xW$ までの消去を三段の鎖へ開いた。行末根拠の機械識別子も「可逆元の定義」「二つの共役作用の一致」「積の逆元の公式」へ直した。元の内容と `def_invertible_elements_of_R`・`T_V_plus_eq_T_check_Vprime`・`conjugation_is_ring_homomorphism` の参照は不変。姉妹側 SageMath 対象検算（check\_06 PASS）・check・PDF 通過。
 
 
 
