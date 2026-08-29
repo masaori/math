@@ -740,14 +740,25 @@ Overfull \hbox (270.63675pt too wide) detected at line 4784
  []
 
 [41] [42]
-Overfull \hbox (17.30307pt too wide) detected at line 4954
+Overfull \hbox (31.92834pt too wide) detected at line 4953
 \OML/cmm/m/it/10.95 D\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 fg\OT1/cmr/m/n/10.
-95 ) = [] \OML/cmm/m/it/10.95 a[]b[] ^^S[]  [] x[] []\U/msa/m/n/10.95 *  [][]\O
-ML/cmm/m/it/10.95 :
+95 ) = \OML/cmm/m/it/10.95 D\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a[]b[]\OT1/
+cmr/m/n/10.95 ) + [] \OML/cmm/m/it/10.95 D  []  []\U/msa/m/n/10.95 *  []\OT1/cm
+r/m/n/10.95 (\OML/cmm/m/it/10.95 i; j\OT1/cmr/m/n/10.95 ) = (0\OML/cmm/m/it/10.
+95 ; \OT1/cmr/m/n/10.95 0)[]\OML/cmm/m/it/10.95 i \OT1/cmr/m/n/10.95 + \OML/cmm
+/m/it/10.95 j > \OT1/cmr/m/n/10.95 0[][]\OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (63.69852pt too wide) detected at line 5002
+Overfull \hbox (91.29951pt too wide) detected at line 4982
+\OML/cmm/m/it/10.95 D\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 fg\OT1/cmr/m/n/10.
+95 ) = [] \OML/cmm/m/it/10.95 a[]b[] ^^S[]  [] x[] []\U/msa/m/n/10.95 *  []\OML
+/cmm/m/it/10.95 i \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/10.95 j > \OT1/cmr/m/n/10.
+95 0[][]\OML/cmm/m/it/10.95 :
+ []
+
+
+Overfull \hbox (63.69852pt too wide) detected at line 5030
 \OML/cmm/m/it/10.95 D\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 fg\OT1/cmr/m/n/10.
 95 ) = [] \OML/cmm/m/it/10.95 a[]b[] ^^S[]  [] x[] \OT1/cmr/m/n/10.95 + [] \OML
 /cmm/m/it/10.95 a[]b[] ^^S[]  [] x[] []\U/msa/m/n/10.95 *  [][]\OML/cmm/m/it/10
@@ -755,7 +766,7 @@ Overfull \hbox (63.69852pt too wide) detected at line 5002
  []
 
 
-Overfull \hbox (78.73425pt too wide) detected at line 5019
+Overfull \hbox (78.73425pt too wide) detected at line 5047
 \OML/cmm/m/it/10.95 D\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 fg\OT1/cmr/m/n/10.
 95 ) = [] [] \OML/cmm/m/it/10.95 a[]b[] ^^S[]  [] x[] \OT1/cmr/m/n/10.95 + [] [
 ] \OML/cmm/m/it/10.95 a[]b[] ^^S[]  [] x[] []\U/msa/m/n/10.95 *  \OML/cmm/m/it/
@@ -763,7 +774,7 @@ Overfull \hbox (78.73425pt too wide) detected at line 5019
  []
 
 
-Overfull \hbox (175.20868pt too wide) detected at line 5042
+Overfull \hbox (175.20868pt too wide) detected at line 5070
 \OML/cmm/m/it/10.95 D\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 fg\OT1/cmr/m/n/10.
 95 ) = [] [] [] [] + [] [] [] []  []\U/msa/m/n/10.95 *  \OML/cmm/m/it/10.95 x[]
  \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 x[]x[][]x[] \OT1/cmr/m/n/10.95 = \OML
@@ -771,27 +782,27 @@ Overfull \hbox (175.20868pt too wide) detected at line 5042
  []
 
 
-Overfull \hbox (88.54222pt too wide) detected at line 5065
+Overfull \hbox (88.54222pt too wide) detected at line 5093
 \OML/cmm/m/it/10.95 D\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 fg\OT1/cmr/m/n/10.
 95 ) = [] [] + [] []  []\U/msa/m/n/10.95 *  [][]\OML/cmm/m/it/10.95 :
  []
 
 [43]
-Overfull \hbox (41.83241pt too wide) detected at line 5151
+Overfull \hbox (41.83241pt too wide) detected at line 5179
 \OML/cmm/m/it/10.95 D[][][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x\OT1/cmr/m/
 n/10.95 ) = [] \OML/cmm/m/it/10.95 ^^S[]  [] ^^S[]  [] ^^S[]  [] x[] []\U/msa/m
 /n/10.95 *  [][]\OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (54.76494pt too wide) detected at line 5210
+Overfull \hbox (54.76494pt too wide) detected at line 5238
 \OML/cmm/m/it/10.95 D[][][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/
 n/10.95 ) = [] \OML/cmm/m/it/10.95 ^^S[]  [] a[] []\U/msa/m/n/10.95 *  []\OML/c
 mm/m/it/10.95 x \OT1/cmr/m/n/10.95 = \OML/cmm/m/it/10.95 a[][]:
  []
 
 
-Overfull \hbox (205.30093pt too wide) detected at line 5221
+Overfull \hbox (205.30093pt too wide) detected at line 5249
 \OML/cmm/m/it/10.95 D[][][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/
 n/10.95 ) = \OML/cmm/m/it/10.95 C[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT
 1/cmr/m/n/10.95 ) []\U/msa/m/n/10.95 *  \OML/cmm/m/it/10.95 D[][][]\OT1/cmr/m/n
@@ -810,8 +821,8 @@ m/n/10.95 = \OML/cmm/m/it/10.95 C[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT
 1/cmr/m/n/10.95 )[]\OML/cmm/m/it/10.95 :
  []
 
-[44]
-Overfull \hbox (34.70844pt too wide) detected at line 5347
+[44] [45]
+Overfull \hbox (34.70844pt too wide) detected at line 5375
 \OML/cmm/m/it/10.95 D[][][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x\OT1/cmr/m/
 n/10.95 ) = \OML/cmm/m/it/10.95 ^^S[]  [] [] [] [] []\OT1/cmr/m/n/10.95 (\OML/c
 mm/m/it/10.95 x \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 ^^K[]\OT1/cmr/m/n/1
@@ -819,7 +830,7 @@ mm/m/it/10.95 x \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 ^^K[]\OT1/cmr/m/n/1
  []
 
 
-Overfull \hbox (96.91063pt too wide) detected at line 5357
+Overfull \hbox (96.91063pt too wide) detected at line 5385
 \OML/cmm/m/it/10.95 D[][][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/
 n/10.95 ) = \OML/cmm/m/it/10.95 ^^S[]  [] [] [] [] []\OT1/cmr/m/n/10.95 (\OML/c
 mm/m/it/10.95 a \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 ^^K[]\OT1/cmr/m/n/1
@@ -828,34 +839,34 @@ cmm/m/it/10.95 a[][]:
  []
 
 
-Overfull \hbox (76.28465pt too wide) detected at line 5373
-[] \OT1/cmr/m/n/10.95 = [] []\U/msa/m/n/10.95 *  [][]\OML/cmm/m/it/10.95 :
- []
-
-[45]
-Overfull \hbox (65.33466pt too wide) detected at line 5392
+Overfull \hbox (76.28465pt too wide) detected at line 5401
 [] \OT1/cmr/m/n/10.95 = [] []\U/msa/m/n/10.95 *  [][]\OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (159.00734pt too wide) detected at line 5425
+Overfull \hbox (65.33466pt too wide) detected at line 5420
+[] \OT1/cmr/m/n/10.95 = [] []\U/msa/m/n/10.95 *  [][]\OML/cmm/m/it/10.95 :
+ []
+
+
+Overfull \hbox (159.00734pt too wide) detected at line 5453
 [] \OT1/cmr/m/n/10.95 = [] [] [] [] []\U/msa/m/n/10.95 *  []\OML/cmm/m/it/10.95
  j [] \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 k; `; h\OMS/cmsy/m/n/10.95 g[][]
 \OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (34.51231pt too wide) detected at line 5470
-[][]
- []
-
-
-Overfull \hbox (76.99855pt too wide) detected at line 5491
+Overfull \hbox (34.51231pt too wide) detected at line 5498
 [][]
  []
 
 [46]
-Overfull \hbox (17.41707pt too wide) detected at line 5546
+Overfull \hbox (76.99855pt too wide) detected at line 5519
+[][]
+ []
+
+
+Overfull \hbox (17.41707pt too wide) detected at line 5574
 \OMS/cmsy/m/n/10.95 R[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10
 .95 )[] = \OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/
 cmr/m/n/10.95 ) + \OML/cmm/m/it/10.95 U[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.9
@@ -869,7 +880,7 @@ OML/cmm/m/it/10.95 U[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.
  []
 
 
-Overfull \hbox (61.48286pt too wide) detected at line 5553
+Overfull \hbox (61.48286pt too wide) detected at line 5581
 \OML/cmm/m/it/10.95 U[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10
 .95 ) + \OML/cmm/m/it/10.95 U[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cm
 r/m/n/10.95 ) + \OML/cmm/m/it/10.95 U[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 
@@ -881,7 +892,7 @@ ML/cmm/m/it/10.95 q[] \OT1/cmr/m/n/10.95 = 1[][][]\OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (136.33253pt too wide) detected at line 5568
+Overfull \hbox (136.33253pt too wide) detected at line 5596
 \OMS/cmsy/m/n/10.95 R[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10
 .95 )[] = \OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/
 cmr/m/n/10.95 ) + \OML/cmm/m/it/10.95 q[]U[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/1
@@ -895,7 +906,7 @@ mm/m/it/10.95 U[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 )
  []
 
 
-Overfull \hbox (42.12334pt too wide) detected at line 5580
+Overfull \hbox (42.12334pt too wide) detected at line 5608
 \OMS/cmsy/m/n/10.95 R[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10
 .95 )\OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m
 /n/10.95 ) \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 (\
@@ -909,8 +920,8 @@ T1/cmr/m/n/10.95 )[]\OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10
 .95 a\OT1/cmr/m/n/10.95 )[][]\OML/cmm/m/it/10.95 :
  []
 
-
-Overfull \hbox (12.74915pt too wide) detected at line 5610
+[47]
+Overfull \hbox (12.74915pt too wide) detected at line 5638
 \OML/cmm/m/it/10.95 T[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10
 .95 ) = \OMS/cmsy/m/n/10.95 R[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cm
 r/m/n/10.95 )[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 q[]\OMS/cmsy/m/n/10
@@ -924,8 +935,8 @@ L/cmm/m/it/10.95 q[]S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10
 cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 )[][]\OML/cmm/m/it/10.95 :
  []
 
-[47]
-Overfull \hbox (171.08673pt too wide) detected at line 5669
+
+Overfull \hbox (171.08673pt too wide) detected at line 5697
 [] \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 R[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/i
 t/10.95 a\OT1/cmr/m/n/10.95 )[] \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 q[]
 \OMS/cmsy/m/n/10.95 R[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10
@@ -943,7 +954,7 @@ m/m/it/10.95 q[]S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95
  []
 
 
-Overfull \hbox (21.61769pt too wide) detected at line 5680
+Overfull \hbox (21.61769pt too wide) detected at line 5708
 [] \OMS/cmsy/m/n/10.95 ^^@ R[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr
 /m/n/10.95 )[] + \OML/cmm/m/it/10.95 q[]\OMS/cmsy/m/n/10.95 R[]\OT1/cmr/m/n/10.
 95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 S[]\OT1/cmr/m/
@@ -955,15 +966,15 @@ OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 )[][]\OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (118.83661pt too wide) detected at line 5715
+Overfull \hbox (118.83661pt too wide) detected at line 5743
 \OML/cmm/m/it/10.95 q[]S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n
 /10.95 ) = [] \OMS/cmsy/m/n/10.95 ^^@ [][] \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/1
 0.95 q[][][] []\U/msa/m/n/10.95 *  \OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 (\
 OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 ) = [][][]\OML/cmm/m/it/10.95 :
  []
 
-
-Overfull \hbox (174.68027pt too wide) detected at line 5746
+[48]
+Overfull \hbox (174.68027pt too wide) detected at line 5774
 \OML/cmm/m/it/10.95 q[]S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n
 /10.95 ) = [] \OMS/cmsy/m/n/10.95 ^^@ [] \OT1/cmr/m/n/10.95 + \OML/cmm/m/it/10.
 95 q[][] []\U/msa/m/n/10.95 *  [][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT
@@ -972,26 +983,26 @@ ML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (101.9187pt too wide) detected at line 5756
+Overfull \hbox (101.9187pt too wide) detected at line 5784
 \OML/cmm/m/it/10.95 q[]S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n
 /10.95 ) = [] []\U/msa/m/n/10.95 *  [][]\OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (31.18883pt too wide) detected at line 5766
+Overfull \hbox (31.18883pt too wide) detected at line 5794
 \OML/cmm/m/it/10.95 q[]S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n
 /10.95 ) = [] []\U/msa/m/n/10.95 *  \OML/cmm/m/it/10.95 q[] \OT1/cmr/m/n/10.95 
 = 1[][][]\OML/cmm/m/it/10.95 :
  []
 
 
-Overfull \hbox (31.46254pt too wide) detected at line 5788
+Overfull \hbox (31.46254pt too wide) detected at line 5816
 \OML/cmm/m/it/10.95 q[]S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n
 /10.95 ) = [] []\U/msa/m/n/10.95 *  [][][]\OML/cmm/m/it/10.95 :
  []
 
-[48]
-Overfull \hbox (405.02553pt too wide) detected at line 5840
+
+Overfull \hbox (405.02553pt too wide) detected at line 5868
 [] [] \OT1/cmr/m/n/10.95 = [][] []\U/msa/m/n/10.95 *  \OML/cmm/m/it/10.95 q[] \
 OMS/cmsy/m/n/10.95 6\OT1/cmr/m/n/10.95 = 0[]\OML/cmm/m/it/10.95 q[]S[]\OT1/cmr/
 m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 ) = [][]1/\OML/cmm/m/it/10.9
@@ -999,20 +1010,20 @@ m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 ) = [][]1/\OML/cmm/m/it/10.9
  []
 
 
-Overfull \hbox (363.0989pt too wide) detected at line 5877
+Overfull \hbox (363.0989pt too wide) detected at line 5905
 [] [] \OT1/cmr/m/n/10.95 = [] []\U/msa/m/n/10.95 *  [] [] \OT1/cmr/m/n/10.95 = 
 \OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10
 .95 )[]\OML/cmm/m/it/10.95 S[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr
 /m/n/10.95 ) = [][][]\OML/cmm/m/it/10.95 :
  []
 
-
-Overfull \hbox (16.41571pt too wide) detected at line 5946
+[49]
+Overfull \hbox (16.41571pt too wide) detected at line 5974
 [][]
  []
 
-[49] [50] [51] [52]
-Overfull \hbox (23.56679pt too wide) detected at line 6269
+[50] [51] [52]
+Overfull \hbox (23.56679pt too wide) detected at line 6297
 [] \OT1/cmr/m/n/10.95 
 [](\OML/cmm/m/it/10.95 m\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 q[] < [] \OT1/c
 mr/m/n/10.95 
@@ -1028,4 +1039,4 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 136D271E6B286FF0E67A1A8C4C9E49EB;288.
  )
-Output written on document.xdv (58 pages, 736660 bytes).
+Output written on document.xdv (58 pages, 738180 bytes).
