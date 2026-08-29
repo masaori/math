@@ -1351,6 +1351,49 @@ theorem pairing_with_first_pair_of_four
       · exact hxs
   rw [hpairing, hsecondEq]
 
+/-- 相異なる四端子 `a,b,c,d` の全体を、二元集合二組で互いに素に覆う族は、
+`ab|cd`、`ac|bd`、`ad|bc` の三候補のいずれかである。`a` を含む組の形が三通りに
+限られること（`pair_containing_first_of_four`）と、一組が決まれば残る一組が
+補集合として決まること（`pairing_with_first_pair_of_four`）を束ねたものである。 -/
+theorem pairing_of_four_eq_one_of_three
+    {α : Type} [DecidableEq α] {a b c d : α}
+    (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d)
+    {pairing : Finset (Finset α)}
+    (hcard : pairing.card = 2)
+    (hpair : ∀ s ∈ pairing, s.card = 2)
+    (hdisj : (pairing : Set (Finset α)).PairwiseDisjoint id)
+    (hunion : pairing.biUnion id = ({a, b, c, d} : Finset α)) :
+    pairing = ({{a, b}, {c, d}} : Finset (Finset α)) ∨
+      pairing = ({{a, c}, {b, d}} : Finset (Finset α)) ∨
+      pairing = ({{a, d}, {b, c}} : Finset (Finset α)) := by
+  classical
+  have hamem : a ∈ pairing.biUnion id := by
+    rw [hunion]
+    simp
+  obtain ⟨s, hs, has⟩ := Finset.mem_biUnion.mp hamem
+  have hasub : s ⊆ ({a, b, c, d} : Finset α) := by
+    intro x hx
+    rw [← hunion]
+    exact Finset.mem_biUnion.mpr ⟨s, hs, hx⟩
+  rcases pair_containing_first_of_four (hpair s hs) has hasub with h | h | h
+  · refine Or.inl ?_
+    exact pairing_with_first_pair_of_four hac had hbc hbd hcard hdisj hunion (h ▸ hs)
+  · refine Or.inr (Or.inl ?_)
+    have hunion' : pairing.biUnion id = ({a, c, b, d} : Finset α) := by
+      rw [hunion]
+      ext x
+      simp only [Finset.mem_insert, Finset.mem_singleton]
+      tauto
+    exact pairing_with_first_pair_of_four hab had hbc.symm hcd hcard hdisj hunion' (h ▸ hs)
+  · refine Or.inr (Or.inr ?_)
+    have hunion' : pairing.biUnion id = ({a, d, b, c} : Finset α) := by
+      rw [hunion]
+      ext x
+      simp only [Finset.mem_insert, Finset.mem_singleton]
+      tauto
+    exact pairing_with_first_pair_of_four hab hac hbd.symm hcd.symm hcard hdisj hunion' (h ▸ hs)
+
 /-- 復号繊維の完全マッチングを city `v` へ制限したものは、その city の対分けの
 全体に属する。`periodicSquareFiberInternalEdgesAt_isPairing` の三条件を、
 対分けの全体の定義へそのまま移したものである。 -/
