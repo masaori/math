@@ -1587,6 +1587,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.opposite_bool_unordered_pairs_card_necSuf
   Ising2DLambda.KacWard.vertex_crossing_number_factorization
   Ising2DLambda.KacWard.vertex_crossing_number_factorization_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.flip_single_membership_card_necSuf
+  Ising2DLambda.KacWard.smoothing_straight_visit_count_update
+  Ising2DLambda.KacWard.smoothing_straight_visit_count_update_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

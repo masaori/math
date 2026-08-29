@@ -51038,6 +51038,200 @@ c_v(\gamma)&=|H_v\times V_v|
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_straight_visit_count",
+        labels: [],
+        title: { text: "横断の平滑化と直進通過数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_smoothing_straight_visit_count_update",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_smoothing_straight_visit_count",
+                    kind: "definition",
+                    title: { text: "平滑化後の直進通過数" },
+                    labels: ["def_smoothing_straight_visit_count"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        " と、横断する添字 ", math(String.raw`k,l\in I_m`), "、",
+                        math(String.raw`k<l`), " を取る（", ref("def_index_pair_crossing"),
+                        "）。共通の通過頂点を ",
+                        math(String.raw`v:=\operatorname{tgt}(\vec e_k)=\operatorname{tgt}(\vec e_l)\in V_L`),
+                        " とする。平滑化後の通過族 ", math(String.raw`(u_r^{\mathrm{sm}})_{r\in I_m}`),
+                        " は ", ref("def_isolated_crossing_smoothing"),
+                        " のものとする（その構成は孤立性を使わないので、任意の横断に対して定まる）。各添字 ",
+                        math(String.raw`r\in I_m`), " の平滑化後の出辺 ",
+                        math(String.raw`\vec f_r\in\vec E_L`), " を",
+                      ]),
+                      displayMath(String.raw`\vec f_k:=\vec e_{\sigma(l)},\qquad
+\vec f_l:=\vec e_{\sigma(k)},\qquad
+\vec f_r:=\vec e_{\sigma(r)}\quad(r\ne k,l)`),
+                      paragraph([
+                        "と書く（", math(String.raw`u_r^{\mathrm{sm}}=(\vec e_r\to\vec f_r)`),
+                        "。巡回後続写像 ", math(String.raw`\sigma`), " は ",
+                        ref("def_closed_walk_passes"), " のもの）。格子頂点 ",
+                        math(String.raw`w\in V_L`), " と軸 ", math(String.raw`a\in\mathbb Z/2\mathbb Z`),
+                        " について、平滑化後に頂点 ", math(String.raw`w`), " を軸 ",
+                        math(String.raw`a`), " に沿って直進する通過の個数 ",
+                        math(String.raw`n^{\mathrm{sm}}_{w,a}(\gamma;k,l)\in\mathbb N`), " を",
+                      ]),
+                      displayMath(String.raw`n^{\mathrm{sm}}_{w,a}(\gamma;k,l):=\bigl|\{r\in I_m\mid
+\operatorname{tgt}(\vec e_r)=w,\ \tau(\vec e_r,\vec f_r)=0,\
+\operatorname{ax}(\operatorname{dir}(\vec e_r))=a\}\bigr|`),
+                      paragraph([
+                        "で定める（回転数 ", math(String.raw`\tau`), " と軸 ",
+                        math(String.raw`\operatorname{ax}`), " は ", ref("def_transverse_crossing"),
+                        " のもの）。有限な添字集合の部分集合の元の個数なので、値は自然数として定まる。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_smoothing_straight_visit_count_update",
+                kind: "claim",
+                title: { text: "横断の平滑化は横断の頂点で各軸の直進通過数を一つ減らす" },
+                labels: ["claim_smoothing_straight_visit_count_update"],
+                habitat: "N",
+                verification: ["sagemath/check/smoothing-straight-visit-count"],
+                lean: [
+                  "Ising2DLambda.KacWard.smoothing_straight_visit_count_update",
+                  "Ising2DLambda.NecSuf.KacWard.flip_single_membership_card_necSuf",
+                  "Ising2DLambda.KacWard.smoothing_straight_visit_count_update_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                    "、横断する添字 ", math(String.raw`k<l`), "、その共通の通過頂点 ",
+                    math(String.raw`v\in V_L`), " について、任意の格子頂点 ",
+                    math(String.raw`w\in V_L`), " と軸 ",
+                    math(String.raw`a\in\mathbb Z/2\mathbb Z`), " に対し",
+                  ]),
+                  displayMath(String.raw`n^{\mathrm{sm}}_{w,a}(\gamma;k,l)=
+\begin{cases}
+n_{w,a}(\gamma)-1 & (w=v)\\[1mm]
+n_{w,a}(\gamma) & (w\ne v)
+\end{cases}`),
+                  paragraph([
+                    "が成り立つ（左辺は ", ref("def_smoothing_straight_visit_count"),
+                    "、右辺は ", ref("def_vertex_axis_straight_visit_count"),
+                    "）。", math(String.raw`w=v`), " の場合は ",
+                    math(String.raw`n_{v,a}(\gamma)\ge1`),
+                    " であり（証明中で示す）、減算は自然数に留まる。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`S_{w,a}:=\{r\in I_m\mid\operatorname{tgt}(\vec e_r)=w,\ \tau(\vec e_r,\vec e_{\sigma(r)})=0,\ \operatorname{ax}(\operatorname{dir}(\vec e_r))=a\}`),
+                    "、",
+                    math(String.raw`S^{\mathrm{sm}}_{w,a}:=\{r\in I_m\mid\operatorname{tgt}(\vec e_r)=w,\ \tau(\vec e_r,\vec f_r)=0,\ \operatorname{ax}(\operatorname{dir}(\vec e_r))=a\}`),
+                    " と置く。", ref("def_vertex_axis_straight_visit_count"), " より ",
+                    math(String.raw`|S_{w,a}|=n_{w,a}(\gamma)`), "、",
+                    ref("def_smoothing_straight_visit_count"), " より ",
+                    math(String.raw`|S^{\mathrm{sm}}_{w,a}|=n^{\mathrm{sm}}_{w,a}(\gamma;k,l)`),
+                    " である。", math(String.raw`a_k:=\operatorname{ax}(\operatorname{dir}(\vec e_k))`),
+                    "、", math(String.raw`a_l:=\operatorname{ax}(\operatorname{dir}(\vec e_l))`),
+                    " と書く。横断の定義（", ref("def_index_pair_crossing"), "、",
+                    ref("def_transverse_crossing"), "）より ",
+                    math(String.raw`\tau(\vec e_k,\vec e_{\sigma(k)})=0`), "、",
+                    math(String.raw`\tau(\vec e_l,\vec e_{\sigma(l)})=0`), "、",
+                    math(String.raw`a_k\ne a_l`), " である。",
+                    math(String.raw`\mathbb Z/2\mathbb Z`),
+                    " の元は二つだけなので、任意の軸 ", math(String.raw`a`),
+                    " は ", math(String.raw`a_k`), " と ", math(String.raw`a_l`),
+                    " のちょうど一方に等しい。",
+                  ]),
+                  paragraph([
+                    "選んだ二添字は平滑化後に直進でない。実際、もし ",
+                    math(String.raw`\tau(\vec e_k,\vec f_k)=0`), " ならば、",
+                    ref("claim_step_advances_direction"), " を接続 ",
+                    math(String.raw`\vec e_k\to\vec f_k`), " に適用して ",
+                    math(String.raw`\operatorname{dir}(\vec f_k)=\operatorname{dir}(\vec e_k)`),
+                    "。一方 ", math(String.raw`\vec f_k=\vec e_{\sigma(l)}`), " と ",
+                    math(String.raw`\tau(\vec e_l,\vec e_{\sigma(l)})=0`), " に同じ主張を適用して ",
+                    math(String.raw`\operatorname{dir}(\vec f_k)=\operatorname{dir}(\vec e_l)`),
+                    "。よって ",
+                    math(String.raw`\operatorname{dir}(\vec e_k)=\operatorname{dir}(\vec e_l)`),
+                    " となり、写像 ", math(String.raw`\operatorname{ax}`), " を施すと ",
+                    math(String.raw`a_k=a_l`), "。これは ", math(String.raw`a_k\ne a_l`),
+                    " に反するので ", math(String.raw`\tau(\vec e_k,\vec f_k)\ne0`),
+                    "。", math(String.raw`k`), " と ", math(String.raw`l`),
+                    " を入れ替えて同様に ", math(String.raw`\tau(\vec e_l,\vec f_l)\ne0`), "。",
+                  ]),
+                  paragraph([
+                    "次に集合の等式を示す。", math(String.raw`r\in I_m`), " が ",
+                    math(String.raw`k`), " とも ", math(String.raw`l`), " とも異なるならば ",
+                    math(String.raw`\vec f_r=\vec e_{\sigma(r)}`), " なので、",
+                    math(String.raw`r\in S^{\mathrm{sm}}_{w,a}`), " と ",
+                    math(String.raw`r\in S_{w,a}`), " は同値である。",
+                    math(String.raw`k`), " は ", math(String.raw`\tau(\vec e_k,\vec f_k)\ne0`),
+                    " により ", math(String.raw`S^{\mathrm{sm}}_{w,a}`), " に属さず、",
+                    math(String.raw`l`), " も同様である。よって",
+                  ]),
+                  displayMath(String.raw`S^{\mathrm{sm}}_{w,a}=S_{w,a}\setminus\{k,l\}`),
+                  paragraph([
+                    "である。また ", math(String.raw`\operatorname{tgt}(\vec e_k)=v`), "、",
+                    math(String.raw`\tau(\vec e_k,\vec e_{\sigma(k)})=0`), " により、",
+                    math(String.raw`k\in S_{w,a}`), " は「", math(String.raw`w=v`),
+                    " かつ ", math(String.raw`a=a_k`), "」と同値であり、",
+                    math(String.raw`l\in S_{w,a}`), " は「", math(String.raw`w=v`),
+                    " かつ ", math(String.raw`a=a_l`), "」と同値である。",
+                  ]),
+                  paragraph([
+                    math(String.raw`w=v`), " の場合。任意の軸 ", math(String.raw`a`),
+                    " は ", math(String.raw`a_k`), " と ", math(String.raw`a_l`),
+                    " のちょうど一方に等しいので、", math(String.raw`k`), " と ",
+                    math(String.raw`l`), " のうちちょうど一方が ",
+                    math(String.raw`S_{v,a}`), " に属する。とくに ",
+                    math(String.raw`S_{v,a}`), " は空でないので ",
+                    math(String.raw`n_{v,a}(\gamma)\ge1`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+n^{\mathrm{sm}}_{v,a}(\gamma;k,l)&=|S^{\mathrm{sm}}_{v,a}|
+&&\bigl(\because\ \blkref{def_smoothing_straight_visit_count}\bigr)\\
+&=|S_{v,a}\setminus\{k,l\}|
+&&\bigl(\because\ S^{\mathrm{sm}}_{w,a}=S_{w,a}\setminus\{k,l\}\bigr)\\
+&=|S_{v,a}|-1
+&&\bigl(\because\ S_{v,a}\text{ と }\{k,l\}\text{ の共通部分はちょうど一元}\bigr)\\
+&=n_{v,a}(\gamma)-1
+&&\bigl(\because\ \blkref{def_vertex_axis_straight_visit_count}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`w\ne v`), " の場合。", math(String.raw`k`), " も ",
+                    math(String.raw`l`), " も ", math(String.raw`S_{w,a}`),
+                    " に属さないので ",
+                    math(String.raw`S_{w,a}\setminus\{k,l\}=S_{w,a}`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+n^{\mathrm{sm}}_{w,a}(\gamma;k,l)&=|S^{\mathrm{sm}}_{w,a}|
+&&\bigl(\because\ \blkref{def_smoothing_straight_visit_count}\bigr)\\
+&=|S_{w,a}\setminus\{k,l\}|
+&&\bigl(\because\ S^{\mathrm{sm}}_{w,a}=S_{w,a}\setminus\{k,l\}\bigr)\\
+&=|S_{w,a}|
+&&\bigl(\because\ k,l\notin S_{w,a}\bigr)\\
+&=n_{w,a}(\gamma)
+&&\bigl(\because\ \blkref{def_vertex_axis_straight_visit_count}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "を得る。全過程は有限集合の数え上げと自然数の算術だけで閉じ、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

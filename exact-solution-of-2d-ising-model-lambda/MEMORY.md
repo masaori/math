@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 11 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 12 回目の tick 時点）
+
+**横断の平滑化が横断の頂点で各軸の直進通過数を一つ減らし、他の頂点では変えないことを四層で証明した。** 平滑化後の出辺 $\vec f_r$ と平滑化後の直進通過数 $n^{\mathrm{sm}}_{w,a}(\gamma;k,l)\in\mathbb N$（`def_smoothing_straight_visit_count`）を定義した。平滑化の構成は孤立性を使わないことを明示し、選んだ二添字が平滑化後に直進を失うこと（`claim_step_advances_direction` による方向番号の一致からの矛盾）と他の添字の帰属の不変性から、$S^{\mathrm{sm}}_{w,a}=S_{w,a}\setminus\{k,l\}$ の一元除去で更新式（`claim_smoothing_straight_visit_count_update`）を得た。SageMath `smoothing-straight-visit-count` は閉歩道 24,628 件・横断対 3,584 対（非孤立 1,248 対、$L=2,3$ は辺 8 本まで）を `ZZ` で厳密検査した。Lean は `KacWard/SmoothingStraightVisitCount.lean` と必要十分版 `flip_single_membership_card_necSuf` を通し、必要十分版に残る仮定は「述語がただ一つの元で真から偽へ変わり、他では変わらない」ことだけである。次は頂点ごとの横断数の更新 $c_v^{\mathrm{sm}}=(n_{v,0}-1)(n_{v,1}-1)$ を積表示（`claim_vertex_crossing_number_factorization`）と結合して示す。
+
+前進前レビューでは、前 tick の積表示の SageMath 検算が左辺 $c_v(\gamma)$ を横断の定義から独立に計算せず、直積から作った対の非重複だけを見ていた（ほぼ恒真）ことを発見し、横断述語で独立に数える形へ強化してコミット `3b28df9b` として前進前に push した。
+
+## ひとつ前の到達点（2026-08-30 の 11 回目の tick 時点）
 
 **頂点ごとの横断数が二軸の直進通過数の積になることを四層で証明した。** 頂点 $v$ を軸 $a\in\mathbb Z/2\mathbb Z$ に沿って直進する通過数 $n_{v,a}(\gamma)\in\mathbb N$（`def_vertex_axis_straight_visit_count`）を定義し、軸 0 と軸 1 の通過の直積から二添字を小さい順に並べる全単射により $c_v(\gamma)=n_{v,0}(\gamma)n_{v,1}(\gamma)$（`claim_vertex_crossing_number_factorization`）を得た。SageMath `vertex-crossing-factorization` は閉歩道 1,064 件・頂点 5,480 件（多重直進通過 92 件）を `ZZ` で厳密検査した。Lean は `KacWard/VertexCrossingFactorization.lean` と必要十分版 `opposite_bool_unordered_pairs_card_necSuf` を通し、必要十分版には有限全順序集合と二値写像だけが残る。次は選んだ一横断の平滑化で二軸の直進通過数が一つずつ減ることから、頂点ごとの横断数の更新式を示す。
 
