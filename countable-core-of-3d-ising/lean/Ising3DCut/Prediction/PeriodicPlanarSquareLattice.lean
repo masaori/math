@@ -1111,6 +1111,41 @@ theorem mem_periodicSquarePairingsAt_iff
   classical
   simp [periodicSquarePairingsAt]
 
+/-- 残存端子が無い city では、対分けは空の族ただ一つである。
+二元集合は空でないので、その元が端子の合併に現れてしまい、残存端子が空という
+条件と両立しない。したがって族そのものが空になる。 -/
+theorem periodicSquarePairingsAt_eq_singleton_empty_of_card_eq_zero
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n)
+    (hzero : (encodePeriodicSquareRemainingTerminalsAt subgraph v).card = 0) :
+    periodicSquarePairingsAt subgraph v = {∅} := by
+  classical
+  have hempty : encodePeriodicSquareRemainingTerminalsAt subgraph v = ∅ :=
+    Finset.card_eq_zero.mp hzero
+  refine Finset.eq_singleton_iff_unique_mem.mpr ⟨?_, ?_⟩
+  · refine (mem_periodicSquarePairingsAt_iff subgraph v ∅).mpr ⟨?_, ?_, ?_⟩
+    · simp
+    · simp
+    · simp [hempty]
+  · intro pairing hpairing
+    obtain ⟨hcard, _, hunion⟩ := (mem_periodicSquarePairingsAt_iff subgraph v pairing).mp hpairing
+    refine Finset.eq_empty_of_forall_notMem ?_
+    intro s hs
+    have hs2 : s.card = 2 := hcard s hs
+    obtain ⟨x, hx⟩ : s.Nonempty := Finset.card_pos.mp (by omega)
+    have hxmem : x ∈ pairing.biUnion id := Finset.mem_biUnion.mpr ⟨s, hs, hx⟩
+    rw [hunion, hempty] at hxmem
+    exact absurd hxmem (Finset.notMem_empty x)
+
+/-- 残存端子が無い city の対分けの個数は一である。 -/
+theorem card_periodicSquarePairingsAt_of_card_eq_zero
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n)
+    (hzero : (encodePeriodicSquareRemainingTerminalsAt subgraph v).card = 0) :
+    (periodicSquarePairingsAt subgraph v).card = 1 := by
+  rw [periodicSquarePairingsAt_eq_singleton_empty_of_card_eq_zero subgraph v hzero]
+  simp
+
 /-- 復号繊維の完全マッチングを city `v` へ制限したものは、その city の対分けの
 全体に属する。`periodicSquareFiberInternalEdgesAt_isPairing` の三条件を、
 対分けの全体の定義へそのまま移したものである。 -/

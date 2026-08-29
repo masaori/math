@@ -780,6 +780,8 @@ targets=(
   Ising3DCut.Prediction.periodicSquareFiberToPairingsProduct_bijective
   Ising3DCut.Prediction.card_periodicSquareDecodingFiber
   Ising3DCut.Prediction.card_encodePeriodicSquareRemainingTerminalsAt_eq_zero_or_two_or_four
+  Ising3DCut.Prediction.periodicSquarePairingsAt_eq_singleton_empty_of_card_eq_zero
+  Ising3DCut.Prediction.card_periodicSquarePairingsAt_of_card_eq_zero
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
