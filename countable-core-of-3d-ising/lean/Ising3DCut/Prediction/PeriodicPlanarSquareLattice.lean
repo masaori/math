@@ -1394,6 +1394,124 @@ theorem pairing_of_four_eq_one_of_three
       tauto
     exact pairing_with_first_pair_of_four hab hac hbd.symm hcd.symm hcard hdisj hunion' (h ▸ hs)
 
+set_option maxHeartbeats 4000000 in
+/-- 残存端子が四個の city の対分けは三通りである。四端子を名前付けし、
+直前の網羅性と三候補の相異性を合わせて有限集合自体を三候補と同定する。 -/
+theorem card_periodicSquarePairingsAt_of_card_eq_four
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n)
+    (hfour : (encodePeriodicSquareRemainingTerminalsAt subgraph v).card = 4) :
+    (periodicSquarePairingsAt subgraph v).card = 3 := by
+  classical
+  let terminals := encodePeriodicSquareRemainingTerminalsAt subgraph v
+  obtain ⟨a, s₃, ha, haInsert, hs₃⟩ := Finset.card_eq_succ.mp (by simpa [terminals] using hfour)
+  obtain ⟨b, s₂, hb, hbInsert, hs₂⟩ := Finset.card_eq_succ.mp (by simpa using hs₃)
+  obtain ⟨c, s₁, hc, hcInsert, hs₁⟩ := Finset.card_eq_succ.mp (by simpa using hs₂)
+  obtain ⟨d, s₀, hd, hdInsert, hs₀⟩ := Finset.card_eq_succ.mp (by simpa using hs₁)
+  have hs₀Empty : s₀ = ∅ := Finset.card_eq_zero.mp (by simpa using hs₀)
+  have hterminals : terminals = ({a, b, c, d} : Finset _) := by
+    change encodePeriodicSquareRemainingTerminalsAt subgraph v = _
+    rw [← haInsert, ← hbInsert, ← hcInsert, ← hdInsert, hs₀Empty]
+    simp
+  have hs₃Eq : s₃ = {b, c, d} := by
+    rw [← hbInsert, ← hcInsert, ← hdInsert, hs₀Empty]
+    simp
+  have hs₂Eq : s₂ = {c, d} := by
+    rw [← hcInsert, ← hdInsert, hs₀Empty]
+    simp
+  have hs₁Eq : s₁ = {d} := by
+    rw [← hdInsert, hs₀Empty]
+    simp
+  have haNe : a ≠ b ∧ a ≠ c ∧ a ≠ d := by simpa [hs₃Eq] using ha
+  have hbNe : b ≠ c ∧ b ≠ d := by simpa [hs₂Eq] using hb
+  have hcd : c ≠ d := by simpa [hs₁Eq] using hc
+  have hab := haNe.1
+  have hac := haNe.2.1
+  have had := haNe.2.2
+  have hbc := hbNe.1
+  have hbd := hbNe.2
+  let p₁ : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) := {{a, b}, {c, d}}
+  let p₂ : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) := {{a, c}, {b, d}}
+  let p₃ : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n)) := {{a, d}, {b, c}}
+  have hp₁ : p₁ ∈ periodicSquarePairingsAt subgraph v := by
+    apply (mem_periodicSquarePairingsAt_iff subgraph v p₁).mpr
+    constructor
+    · simp [p₁, hab, hcd]
+    constructor
+    · intro s hs t ht hne
+      simp only [p₁, Finset.mem_coe, Finset.mem_insert, Finset.mem_singleton] at hs ht
+      rcases hs with rfl | rfl <;> rcases ht with rfl | rfl
+      · exact absurd rfl hne
+      · exact Finset.disjoint_left.mpr (by simp [hac, had, hbc, hbd])
+      · exact (Finset.disjoint_left.mpr (by simp [hac, had, hbc, hbd])).symm
+      · exact absurd rfl hne
+    · rw [show encodePeriodicSquareRemainingTerminalsAt subgraph v = terminals by rfl,
+          hterminals]
+      ext x
+      simp [p₁]
+      tauto
+  have hp₂ : p₂ ∈ periodicSquarePairingsAt subgraph v := by
+    apply (mem_periodicSquarePairingsAt_iff subgraph v p₂).mpr
+    constructor
+    · simp [p₂, hac, hbd]
+    constructor
+    · intro s hs t ht hne
+      simp only [p₂, Finset.mem_coe, Finset.mem_insert, Finset.mem_singleton] at hs ht
+      rcases hs with rfl | rfl <;> rcases ht with rfl | rfl
+      · exact absurd rfl hne
+      · exact Finset.disjoint_left.mpr (by simp [hab, had, hbc, hbc.symm, hcd])
+      · exact (Finset.disjoint_left.mpr (by simp [hab, had, hbc, hbc.symm, hcd])).symm
+      · exact absurd rfl hne
+    · rw [show encodePeriodicSquareRemainingTerminalsAt subgraph v = terminals by rfl,
+          hterminals]
+      ext x
+      simp [p₂]
+      tauto
+  have hp₃ : p₃ ∈ periodicSquarePairingsAt subgraph v := by
+    apply (mem_periodicSquarePairingsAt_iff subgraph v p₃).mpr
+    constructor
+    · simp [p₃, had, hbc]
+    constructor
+    · intro s hs t ht hne
+      simp only [p₃, Finset.mem_coe, Finset.mem_insert, Finset.mem_singleton] at hs ht
+      rcases hs with rfl | rfl <;> rcases ht with rfl | rfl
+      · exact absurd rfl hne
+      · exact Finset.disjoint_left.mpr (by simp [hab, hac, hbd, hbd.symm, hcd, hcd.symm])
+      · exact (Finset.disjoint_left.mpr
+          (by simp [hab, hac, hbd, hbd.symm, hcd, hcd.symm])).symm
+      · exact absurd rfl hne
+    · rw [show encodePeriodicSquareRemainingTerminalsAt subgraph v = terminals by rfl,
+          hterminals]
+      ext x
+      simp [p₃]
+      tauto
+  have hdistinct : p₁ ≠ p₂ ∧ p₁ ≠ p₃ ∧ p₂ ≠ p₃ := by
+    simpa [p₁, p₂, p₃] using
+      three_pairings_of_four_distinct hab hac had hbc hbd hcd
+  have heq : periodicSquarePairingsAt subgraph v = {p₁, p₂, p₃} := by
+    ext pairing
+    constructor
+    · intro hpairing
+      obtain ⟨hpair, hdisj, hunion⟩ :=
+        (mem_periodicSquarePairingsAt_iff subgraph v pairing).mp hpairing
+      have hcard := card_eq_two_of_mem_periodicSquarePairingsAt_of_card_eq_four
+        subgraph v hfour hpairing
+      have hunion' : pairing.biUnion id = ({a, b, c, d} : Finset _) := by
+        simpa [terminals, hterminals] using hunion
+      rcases pairing_of_four_eq_one_of_three hab hac had hbc hbd hcd
+          hcard hpair hdisj hunion' with h | h | h
+      · simp [p₁, h]
+      · simp [p₂, h]
+      · simp [p₃, h]
+    · intro hpairing
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hpairing
+      rcases hpairing with h | h | h
+      · simpa [h] using hp₁
+      · simpa [h] using hp₂
+      · simpa [h] using hp₃
+  rw [heq]
+  simp [hdistinct.1, hdistinct.2.1, hdistinct.2.2]
+
 /-- 復号繊維の完全マッチングを city `v` へ制限したものは、その city の対分けの
 全体に属する。`periodicSquareFiberInternalEdgesAt_isPairing` の三条件を、
 対分けの全体の定義へそのまま移したものである。 -/
