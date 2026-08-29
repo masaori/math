@@ -48742,6 +48742,190 @@ c_{\mathrm v}(e,d):=
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_polynomial_matrices_and_constant_term",
+        labels: [],
+        title: { text: "Kac--Ward 多項式行列と行列式の定数項" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_definition_qbar_polynomial_matrix",
+              focus: {
+                id: "kac_ward_definition_qbar_polynomial_matrix",
+                kind: "definition",
+                title: { text: "代数的数係数多項式を成分とする有限行列" },
+                labels: ["def_qbar_polynomial_matrix"],
+                habitat: "Qbar",
+                statement: [
+                  paragraph([
+                    "空でない有限集合 ", math(String.raw`\mathcal J`), " を取る。",
+                    ref("def_qbar_polynomial_ring"), " の不定元をこの節では ",
+                    math(String.raw`x`), " と書き、成分が ",
+                    math(String.raw`\overline{\mathbb Q}[x]`), " に属する ",
+                    math(String.raw`\mathcal J\times\mathcal J`), " 行列の全体を",
+                  ]),
+                  displayMath(String.raw`\mathrm{Mat}_{\mathcal J}\bigl(\overline{\mathbb Q}[x]\bigr)
+:=\bigl\{\,B:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]\,\bigr\}`),
+                  paragraph([
+                    "と定める。ここでの ", math(String.raw`x`), " は分配多項式の形式変数と同じ意味を持ち、",
+                    ref("def_qbar_polynomial_ring"), " の記述で根を表す変数との衝突を避けるため ",
+                    math(String.raw`t`), " と書いていた不定元の名前だけを戻したものである。",
+                    "現れるのは有限集合と代数的数係数多項式だけであり、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_definition_qbar_polynomial_determinant",
+              focus: {
+                id: "kac_ward_definition_qbar_polynomial_determinant",
+                kind: "definition",
+                title: { text: "代数的数係数多項式行列の行列式" },
+                labels: ["def_qbar_polynomial_determinant"],
+                habitat: "Qbar",
+                statement: [
+                  paragraph([
+                    math(String.raw`\mathcal J`), " に線型順序を一つ固定する。",
+                    math(String.raw`B\in\mathrm{Mat}_{\mathcal J}(\overline{\mathbb Q}[x])`), "（",
+                    ref("def_qbar_polynomial_matrix"), "）に対して、その行列式を",
+                  ]),
+                  displayMath(String.raw`\det_x(B):=
+\sum_{\varphi\in\operatorname{Perm}(\mathcal J)}
+\widehat{\operatorname{sgn}(\varphi)}
+\prod_{j\in\mathcal J}B_{j,\varphi(j)}
+\in\overline{\mathbb Q}[x]`),
+                  paragraph([
+                    "で定める。置換と符号は ", ref("def_permutation_sign"), "、代数的数を定数多項式へ送る写像 ",
+                    math(String.raw`z\mapsto\widehat z`), " は ", ref("def_qbar_constant_embedding"),
+                    " で定めた。和と積は有限であり、積の値は可換環 ",
+                    math(String.raw`\overline{\mathbb Q}[x]`), " の中で順序によらない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_definition_polynomial_matrices",
+              focus: {
+                id: "kac_ward_definition_polynomial_matrices",
+                kind: "definition",
+                title: { text: "四つの Kac--Ward 多項式行列" },
+                labels: ["def_kac_ward_polynomial_matrices"],
+                habitat: "Qbar",
+                statement: [
+                  paragraph([
+                    "スピン構造 ", math(String.raw`(a,b)\in\mathcal S`), " ごとに、",
+                    ref("def_kac_ward_transition_matrices"), " の各成分を ",
+                    ref("def_qbar_constant_embedding"), " で定数多項式へ送った行列を ",
+                    math(String.raw`\widehat{M}^{a,b}`), " と書く。Kac--Ward 多項式行列を",
+                  ]),
+                  displayMath(String.raw`K^{a,b}(x):=I_{\vec E_L}-x\widehat M^{a,b}
+\in\mathrm{Mat}_{\vec E_L}\bigl(\overline{\mathbb Q}[x]\bigr)`),
+                  paragraph([
+                    "で定める。成分ごとには ",
+                    math(String.raw`K^{a,b}_{\vec e,\vec f}(x)=\delta_{\vec e,\vec f}-x\widehat{M^{a,b}_{\vec e,\vec f}}`),
+                    " である。", math(String.raw`I_{\vec E_L}`), " は対角成分が定数多項式 ",
+                    math(String.raw`1`), "、非対角成分が零多項式の単位行列である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_determinant_constant_term_one",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_determinants",
+                    kind: "definition",
+                    title: { text: "四つの Kac--Ward 行列式" },
+                    labels: ["def_kac_ward_determinants"],
+                    habitat: "Qbar",
+                    statement: [
+                      paragraph([
+                        "四つの Kac--Ward 行列式を",
+                      ]),
+                      displayMath(String.raw`D^{a,b}_L(x):=\det_x\bigl(K^{a,b}(x)\bigr)
+\in\overline{\mathbb Q}[x]
+\qquad((a,b)\in\mathcal S)`),
+                      paragraph([
+                        "で定める。右辺の行列は ", ref("def_kac_ward_polynomial_matrices"),
+                        "、行列式は ", ref("def_qbar_polynomial_determinant"), " で定めた。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_determinant_constant_term_one",
+                kind: "claim",
+                title: { text: "四つの Kac--Ward 行列式の定数項は一である" },
+                labels: ["claim_kac_ward_determinant_constant_term_one"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/kac-ward-determinant-constant-term"],
+                lean: [
+                  "Ising2DLambda.KacWard.kacWardDeterminant_coeff_zero",
+                  "Ising2DLambda.NecSuf.KacWard.det_one_sub_X_mul_coeff_zero",
+                  "Ising2DLambda.KacWard.kacWardDeterminant_coeff_zero_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`(a,b)\in\mathcal S`), " について、",
+                    ref("def_kac_ward_determinants"), " の定数項は",
+                  ]),
+                  displayMath(String.raw`\mathrm{ac}_0\bigl(D^{a,b}_L(x)\bigr)=1`),
+                  paragraph([
+                    "である。ここで ", math(String.raw`\mathrm{ac}_0`), " は ",
+                    ref("def_qbar_polynomial_ring"), " の定数項を表す。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "多項式を ", math(String.raw`x=0`), " で評価する写像を ",
+                    math(String.raw`\operatorname{ev}_0:\overline{\mathbb Q}[x]\to\overline{\mathbb Q}`),
+                    " と書く。定数項の定義により ",
+                    math(String.raw`\mathrm{ac}_0(f)=\operatorname{ev}_0(f)`), " であり、",
+                    math(String.raw`\operatorname{ev}_0`), " は有限和と有限積を保つ。したがって ",
+                    ref("def_qbar_polynomial_determinant"), " の有限な置換展開へ項ごとに適用できる。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_0\bigl(D^{a,b}_L(x)\bigr)
+&=\operatorname{ev}_0\!\left(\det_x\bigl(K^{a,b}(x)\bigr)\right)
+&&\bigl(\because\ \blkref{def_kac_ward_determinants}\text{ と定数項の定義}\bigr)\\
+&=\det\!\left(\operatorname{ev}_0\bigl(K^{a,b}(x)\bigr)\right)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\text{ の有限和・有限積へ }\operatorname{ev}_0\text{ を適用}\bigr)\\
+&=\det\!\left(I_{\vec E_L}\right)
+&&\bigl(\because\ \blkref{def_kac_ward_polynomial_matrices}\text{ と }\operatorname{ev}_0(x)=0\bigr)\\
+&=1
+&&\bigl(\because\ \text{単位行列の行列式}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "よって四つの行列式はいずれも定数項が 1 である。これは後で定数項 1 の平方根を選ぶための基点を与える。",
+                    "議論は代数的数係数多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

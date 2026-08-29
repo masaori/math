@@ -1533,6 +1533,9 @@ targets=(
   Ising2DLambda.CriticalExponent.leadingDistance_pinching_implies_predicate_from_necSuf
   Ising2DLambda.CriticalExponent.realizedLeadingDistance_pos
   Ising2DLambda.CriticalExponent.latticeSizeRealLog_pos
+  Ising2DLambda.KacWard.kacWardDeterminant_coeff_zero
+  Ising2DLambda.NecSuf.KacWard.det_one_sub_X_mul_coeff_zero
+  Ising2DLambda.KacWard.kacWardDeterminant_coeff_zero_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
