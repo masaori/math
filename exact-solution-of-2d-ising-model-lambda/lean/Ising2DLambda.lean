@@ -912,3 +912,5 @@ import Ising2DLambda.NecSuf.KacWard.CyclicTurningVanishes
 import Ising2DLambda.KacWard.CyclicTurningVanishes
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkRotationNumberSign
 import Ising2DLambda.KacWard.ClosedWalkRotationNumberSign
+import Ising2DLambda.NecSuf.KacWard.ReconnectionTurningDifference
+import Ising2DLambda.KacWard.ReconnectionTurningDifference

@@ -50278,6 +50278,155 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_reconnection_turning_difference",
+        labels: [],
+        title: { text: "接続の組み替えと回転差" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_reconnection_turning_difference",
+              focus: {
+                id: "kac_ward_claim_reconnection_turning_difference",
+                kind: "claim",
+                title: { text: "接続の組み替えの回転差は −4, 0, 4 に限る" },
+                labels: ["claim_reconnection_turning_difference"],
+                habitat: "Z",
+                verification: ["sagemath/check/reconnection-turning-difference"],
+                lean: [
+                  "Ising2DLambda.KacWard.reconnection_turning_difference",
+                  "Ising2DLambda.NecSuf.KacWard.dvd_four_bounded_mem_necSuf",
+                  "Ising2DLambda.KacWard.reconnection_turning_difference_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の向き付き辺 ",
+                    math(String.raw`\vec e,\vec e',\vec f,\vec f'\in\vec E_L`),
+                    " について、四つの接続 ",
+                    math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), "、",
+                    math(String.raw`\vec f'\in\operatorname{Next}(\vec e)`), "、",
+                    math(String.raw`\vec f\in\operatorname{Next}(\vec e')`), "、",
+                    math(String.raw`\vec f'\in\operatorname{Next}(\vec e')`),
+                    "（", ref("def_nonbacktracking_successors"),
+                    "）がすべて成り立つならば、整数",
+                  ]),
+                  displayMath(String.raw`\bigl(\tau(\vec e,\vec f)+\tau(\vec e',\vec f')\bigr)
+-\bigl(\tau(\vec e,\vec f')+\tau(\vec e',\vec f)\bigr)`),
+                  paragraph([
+                    "は部分集合 ", math(String.raw`\{-4,0,4\}\subset\mathbb Z`),
+                    " に属する（", ref("def_step_turning"), "）。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "証明の中だけで使う略記を置く。",
+                    math(String.raw`S_1:=\tau(\vec e,\vec f)+\tau(\vec e',\vec f')\in\mathbb Z`), "、",
+                    math(String.raw`S_2:=\tau(\vec e,\vec f')+\tau(\vec e',\vec f)\in\mathbb Z`), "、",
+                    math(String.raw`D:=S_1-S_2\in\mathbb Z`),
+                    " とする（", ref("def_step_turning"),
+                    "。整数の加法と減法）。仮定の四つの接続それぞれに ",
+                    ref("claim_step_advances_direction"),
+                    " を適用できる。まず組 ",
+                    math(String.raw`(\vec e\to\vec f,\ \vec e'\to\vec f')`),
+                    " の接続で",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec f)+\operatorname{dir}(\vec f')
+&=\bigl(\operatorname{dir}(\vec e)+\pi_4(\tau(\vec e,\vec f))\bigr)
+  +\bigl(\operatorname{dir}(\vec e')+\pi_4(\tau(\vec e',\vec f'))\bigr)
+&&\bigl(\because\ \blkref{claim_step_advances_direction}\text{ を二つの接続へ同時適用}\bigr)\\
+&=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)
+  +\bigl(\pi_4(\tau(\vec e,\vec f))+\pi_4(\tau(\vec e',\vec f'))\bigr)
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の加法の可換性と結合性}\bigr)\\
+&=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)
+  +\pi_4\bigl(\tau(\vec e,\vec f)+\tau(\vec e',\vec f')\bigr)
+&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_1)
+&&\bigl(\because\ S_1\text{ の置き方}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。次に組 ",
+                    math(String.raw`(\vec e\to\vec f',\ \vec e'\to\vec f)`),
+                    " の接続で",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\vec f)+\operatorname{dir}(\vec f')
+&=\bigl(\operatorname{dir}(\vec e')+\pi_4(\tau(\vec e',\vec f))\bigr)
+  +\bigl(\operatorname{dir}(\vec e)+\pi_4(\tau(\vec e,\vec f'))\bigr)
+&&\bigl(\because\ \blkref{claim_step_advances_direction}\text{ を二つの接続へ同時適用}\bigr)\\
+&=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)
+  +\bigl(\pi_4(\tau(\vec e,\vec f'))+\pi_4(\tau(\vec e',\vec f))\bigr)
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の加法の可換性と結合性}\bigr)\\
+&=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)
+  +\pi_4\bigl(\tau(\vec e,\vec f')+\tau(\vec e',\vec f)\bigr)
+&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_2)
+&&\bigl(\because\ S_2\text{ の置き方}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。二つの鎖の左辺は同じ値なので、",
+                    math(String.raw`\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_1)
+=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_2)`),
+                    " である。両辺に ",
+                    math(String.raw`\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')`),
+                    " の加法逆元を左から加えると（",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " は加法群）、",
+                    math(String.raw`\pi_4(S_1)=\pi_4(S_2)`),
+                    " を得る。このとき",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\pi_4(S_2)+\pi_4(D)
+&=\pi_4(S_2+D)
+&&\bigl(\because\ \pi_4\text{ の加法性。}\blkref{def_direction_residue_projection}\bigr)\\
+&=\pi_4(S_1)
+&&\bigl(\because\ S_2+D=S_1\text{。}D\text{ の置き方と }\mathbb Z\text{ の加法}\bigr)\\
+&=\pi_4(S_2)
+&&\bigl(\because\ \text{上で得た }\pi_4(S_1)=\pi_4(S_2)\bigr)\\
+&=\pi_4(S_2)+0
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の零元の加法}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となる。両辺に ", math(String.raw`\pi_4(S_2)`),
+                    " の加法逆元を左から加えると（",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " は加法群）、",
+                    math(String.raw`\pi_4(D)=0`),
+                    " を得る。射影の定義（", ref("def_direction_residue_projection"),
+                    "）により ", math(String.raw`D\in4\mathbb Z`),
+                    " である。一方、一歩の回転数は四つとも部分集合 ",
+                    math(String.raw`\{0,1,-1\}\subset\mathbb Z`),
+                    " の元なので（", ref("def_step_turning"), "）、整数の順序で ",
+                    math(String.raw`-2\le S_1\le2`), " かつ ",
+                    math(String.raw`-2\le S_2\le2`), "、したがって ",
+                    math(String.raw`-4\le D\le4`),
+                    " である。", math(String.raw`4\mathbb Z`),
+                    " の元は整数 ", math(String.raw`k\in\mathbb Z`),
+                    " により ", math(String.raw`4k`), " と書け、",
+                    math(String.raw`-4\le 4k\le4`), " なら ",
+                    math(String.raw`k\in\{-1,0,1\}`),
+                    " に限る（整数の順序と乗法）。ゆえに ",
+                    math(String.raw`D\in\{-4,0,4\}`),
+                    " である。全過程は整数と ",
+                    math(String.raw`\mathbb Z/4\mathbb Z`),
+                    " の加法だけで閉じ、実数体も複素数体も現れない。",
+                    "閉歩道を共有頂点で組み替える（二つの入辺と二つの出辺の対応を入れ替える）と、",
+                    "循環総回転数はちょうど ", math(String.raw`D`),
+                    " だけ変わるので、この主張により回転数（",
+                    ref("def_closed_walk_rotation_number"),
+                    "）の変化は高々 1 である。後続の自己交差偶奇との比較（平滑化の帰納法）は",
+                    "この局所的な主張を繰り返し引く。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
