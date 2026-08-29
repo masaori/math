@@ -1543,6 +1543,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.mk_sqrtCoeff_mul_self
   Ising2DLambda.KacWard.formalSquareRoot_exists
   Ising2DLambda.KacWard.formalSquareRoot_exists_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.walkTwistSign_product_necSuf
+  Ising2DLambda.KacWard.walkTwistSign_product
+  Ising2DLambda.KacWard.walkTwistSign_product_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

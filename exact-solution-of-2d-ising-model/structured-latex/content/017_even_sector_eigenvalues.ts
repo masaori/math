@@ -1057,18 +1057,35 @@ R_\mu^{(1)} + R_\mu^{(0)}
         " の 2 因子を隣接させられて",
       ]),
       displayMath(
-        String.raw`\check{Q}_\epsilon \check{Q}_{\epsilon'}
-= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon \check{Q}_{\epsilon'}
+&= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)
   R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
-= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\cdot 0
-= 0`,
+  \quad (\because \text{因子の可換性により添字 }\nu\text{ の二因子を末尾へ寄せる}) \\
+&= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\cdot 0
+  \quad (\because \epsilon_\nu\neq\epsilon'_\nu\text{ と Step 0 の異なる上付き添字の積}) \\
+&= 0
+  \quad (\because \text{零行列は行列積の零元})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\epsilon = \epsilon'`),
-        " のときは各因子が Step 0 より冪等なので ",
-        math(String.raw`\check{Q}_\epsilon^2 = \check{Q}_\epsilon`),
-        "。",
+        " のときは各因子が Step 0 より冪等なので、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon^2
+&=\left(\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}\right)
+  \left(\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}\right)
+  \quad (\because \check{Q}_\epsilon\text{ の定義}) \\
+&=\prod_{\mu=1}^{M}\left(R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon_\mu)}\right)
+  \quad (\because \text{異なる添字の因子の可換性}) \\
+&=\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}
+  \quad (\because \text{Step 0 の二つの冪等性を各因子へ同時に適用}) \\
+&=\check{Q}_\epsilon
+  \quad (\because \check{Q}_\epsilon\text{ の定義})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 2（(2) の証明）。Step 0 の ",
         math(String.raw`R_\mu^{(1)} + R_\mu^{(0)} = I`),

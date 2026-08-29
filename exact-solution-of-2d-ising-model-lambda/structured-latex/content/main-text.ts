@@ -49234,6 +49234,103 @@ s_n:=\frac{1}{2}\left(d_n-\sum_{j=1}^{n-1}s_js_{n-j}\right)\quad(n\ge1)`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_walk_twist_sign",
+        labels: [],
+        title: { text: "辺列に沿うねじれ符号" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_walk_twist_sign_product",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_edge_sequence_seam_parities",
+                    kind: "definition",
+                    title: { text: "有限な向き付き辺列の切断線偶奇" },
+                    labels: ["def_edge_sequence_seam_parities"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        math(String.raw`m\in\mathbb N`), " とし、有限な向き付き辺列を ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        " とし、各 ", math(String.raw`k\in\{1,\ldots,m\}`), " について ",
+                        math(String.raw`\vec e_k\in\vec E_L`),
+                        " とする。横周期と縦周期の切断線を横切る回数の偶奇を、それぞれ",
+                      ]),
+                      displayMath(String.raw`h(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)\right)\bmod2,
+\qquad
+v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
+                      paragraph([
+                        "で定める（", ref("def_seam_parities"), "）。したがって ",
+                        math(String.raw`h(\gamma),v(\gamma)\in\{0,1\}`),
+                        " である。空列では二つの和を空和 ", math(String.raw`0\in\mathbb N`),
+                        " とする。この定義は有限和と二で割った余りだけで閉じる。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_walk_twist_sign_product",
+                kind: "claim",
+                title: { text: "辺列に沿うねじれ符号の積は切断線偶奇だけで決まる" },
+                labels: ["claim_walk_twist_sign_product"],
+                habitat: "Z",
+                verification: ["sagemath/check/walk-twist-sign-product"],
+                lean: [
+                  "Ising2DLambda.KacWard.walkTwistSign_product",
+                  "Ising2DLambda.NecSuf.KacWard.walkTwistSign_product_necSuf",
+                  "Ising2DLambda.KacWard.walkTwistSign_product_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`(a,b)\in\mathcal S`), "（",
+                    ref("def_spin_structures"), "）と有限な向き付き辺列 ",
+                    math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " について、整数の等式",
+                  ]),
+                  displayMath(String.raw`\prod_{k=1}^{m}\varepsilon_{a,b}(\vec e_k)
+=(-1)^{a\,h(\gamma)+b\,v(\gamma)}`),
+                  paragraph([
+                    "が成り立つ。左辺のねじれ符号は ", ref("def_spin_structures"),
+                    "、右辺の二つの偶奇は ", ref("def_edge_sequence_seam_parities"), " で定めた。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`\alpha_k:=a\,c_{\mathrm h}(\vec e_k)+b\,c_{\mathrm v}(\vec e_k)\in\mathbb N`),
+                    " と置く。求めたい積から始めると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\prod_{k=1}^{m}\varepsilon_{a,b}(\vec e_k)
+&=\prod_{k=1}^{m}(-1)^{\alpha_k}
+&&\bigl(\because\ \blkref{def_spin_structures}\bigr)\\
+&=(-1)^{\sum_{k=1}^{m}\alpha_k}
+&&\bigl(\because\ (-1)^r(-1)^s=(-1)^{r+s}\text{ を有限積へ繰り返し当てる}\bigr)\\
+&=(-1)^{\left(\sum_{k=1}^{m}\alpha_k\right)\bmod2}
+&&\bigl(\because\ (-1)^{n+2}=(-1)^n\text{ を二で割った商の回数だけ当てる}\bigr)\\
+&=(-1)^{a\,h(\gamma)+b\,v(\gamma)}
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\text{ と二を法とする加法・分配則}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "空列では左辺が空積 ", math(String.raw`1`), "、右辺が ",
+                    math(String.raw`(-1)^0=1`), " なので同じ等式が成り立つ。",
+                    "閉路であることも辺の接続も使っていないため、この符号因子は後続の歩道展開でそのまま使える。",
+                    "全過程は自然数の偶奇と整数の有限積だけで閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
