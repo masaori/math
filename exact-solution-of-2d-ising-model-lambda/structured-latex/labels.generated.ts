@@ -286,6 +286,7 @@ export const ALL_LABELS = [
   "claim_reversal_direction_shift",
   "claim_reversal_has_no_fixed_point",
   "claim_reversal_is_involution",
+  "claim_reversal_rotation_phase_product",
   "claim_root_factor_quotient_value_ne_zero",
   "claim_root_of_unity_card",
   "claim_root_of_unity_divisor",

@@ -49444,6 +49444,116 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_reversal_rotation_phase",
+        labels: [],
+        title: { text: "逆歩道の回転位相" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_reversal_rotation_phase_product",
+              beforeFocus: [],
+              focus: {
+                id: "kac_ward_claim_reversal_rotation_phase_product",
+                kind: "claim",
+                title: { text: "反転辺対の回転位相の積は一である" },
+                labels: ["claim_reversal_rotation_phase_product"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/reversal-rotation-phase"],
+                lean: [
+                  "Ising2DLambda.KacWard.reversal_rotation_phase_product",
+                  "Ising2DLambda.NecSuf.KacWard.reverse_phase_mul_necSuf",
+                  "Ising2DLambda.KacWard.reversal_rotation_phase_product_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " と ",
+                    math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " に対し、",
+                    math(String.raw`\iota(\vec e)\in\operatorname{Next}(\iota(\vec f))`), " であり、",
+                  ]),
+                  displayMath(String.raw`\rho\bigl(\iota(\vec f),\iota(\vec e)\bigr)\,
+\rho(\vec e,\vec f)=1\quad\text{in }\overline{\mathbb Q}`),
+                  paragraph([
+                    "が成り立つ。反転写像は ", ref("def_edge_reversal"), "、非後退接続は ",
+                    ref("def_nonbacktracking_successors"), "、回転位相は ", ref("def_rotation_phase"), " で定めた。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " より ",
+                    math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{src}(\vec f)`), " かつ ",
+                    math(String.raw`\vec f\ne\iota(\vec e)`), " である。反転は始点と終点を交換するので",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}\bigl(\iota(\vec f)\bigr)
+&=\operatorname{src}(\vec f)
+&&\bigl(\because\ \blkref{def_oriented_edge_endpoints}\text{ と }\blkref{def_edge_reversal}\bigr)\\
+&=\operatorname{tgt}(\vec e)
+&&\bigl(\because\ \vec f\in\operatorname{Next}(\vec e)\bigr)\\
+&=\operatorname{src}\bigl(\iota(\vec e)\bigr)
+&&\bigl(\because\ \blkref{def_oriented_edge_endpoints}\text{ と }\blkref{def_edge_reversal}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となる。また ", math(String.raw`\iota(\vec e)=\iota(\iota(\vec f))`), " と仮定すると、",
+                    ref("claim_reversal_is_involution"), " により ", math(String.raw`\vec e=\iota(\vec f)`),
+                    "、さらに同じ対合性により ", math(String.raw`\vec f=\iota(\vec e)`),
+                    " となって非後退接続の仮定に反する。したがって ",
+                    math(String.raw`\iota(\vec e)\in\operatorname{Next}(\iota(\vec f))`), " である。",
+                  ]),
+                  paragraph([
+                    math(String.raw`\theta:=\operatorname{dir}(\vec f)-\operatorname{dir}(\vec e)\in\mathbb Z/4\mathbb Z`),
+                    " と置く。非後退接続の三つの場合により ",
+                    math(String.raw`\theta\in\{0,1,-1\}`), " である。逆順にした反転辺対の回転差は",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}\bigl(\iota(\vec e)\bigr)-\operatorname{dir}\bigl(\iota(\vec f)\bigr)
+&=\bigl(\operatorname{dir}(\vec e)+2\bigr)-\bigl(\operatorname{dir}(\vec f)+2\bigr)
+&&\bigl(\because\ \blkref{claim_reversal_direction_shift}\text{ を二辺へ適用}\bigr)\\
+&=\operatorname{dir}(\vec e)-\operatorname{dir}(\vec f)
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の四則}\bigr)\\
+&=-\theta
+&&\bigl(\because\ \theta\text{ の定義と }\mathbb Z/4\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                  paragraph(["となる。", math(String.raw`\theta=0`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho\bigl(\iota(\vec f),\iota(\vec e)\bigr)\rho(\vec e,\vec f)
+&=1\cdot1
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の直進の場合}\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の単位元}\bigr)
+\end{aligned}`),
+                  paragraph([math(String.raw`\theta=1`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho\bigl(\iota(\vec f),\iota(\vec e)\bigr)\rho(\vec e,\vec f)
+&=\zeta_8^{-1}\zeta_8
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ と逆順では回転差が }-\theta\bigr)\\
+&=1
+&&\bigl(\because\ \zeta_8^4=-1\text{ より }\zeta_8\ne0\text{、}\overline{\mathbb Q}\text{ の逆元}\bigr)
+\end{aligned}`),
+                  paragraph([math(String.raw`\theta=-1`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\rho\bigl(\iota(\vec f),\iota(\vec e)\bigr)\rho(\vec e,\vec f)
+&=\zeta_8\zeta_8^{-1}
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ と逆順では回転差が }-\theta\bigr)\\
+&=1
+&&\bigl(\because\ \zeta_8^4=-1\text{ より }\zeta_8\ne0\text{、}\overline{\mathbb Q}\text{ の逆元}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。三つの場合を合わせて主張を得る。有限集合、",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), "、代数的数の体の中だけで閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

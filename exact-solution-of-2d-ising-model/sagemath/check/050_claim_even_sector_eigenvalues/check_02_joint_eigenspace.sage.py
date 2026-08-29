@@ -71,4 +71,3 @@ print(f"  |{{0,1}}^M| = 2^M に反した例の個数 = {count_bad}  ->  {'PASS' 
 ok_all &= (rank_bad == _sage_const_0  and count_bad == _sage_const_0 )
 
 print("check_02:", "PASS" if ok_all else "FAIL")
-

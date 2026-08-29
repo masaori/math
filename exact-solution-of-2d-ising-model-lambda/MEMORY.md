@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-29 時点）
+## 現在の到達点（2026-08-30 時点）
+
+**反転辺対の回転位相の積が 1 になることを四層で証明した。** 非後退接続を逆順にして両辺を反転すると再び非後退接続になり、前段の方向番号シフトにより回転差が符号反転する。直進・左回転・右回転の三場合で位相積を $1$へ落とした。SageMath `reversal-rotation-phase` は $L=1,\dots,5$ の 660 接続を `QQbar` で厳密検査、Lean は `KacWard/ReversalRotationPhase.lean` と `NecSuf/KacWard/ReversalRotationPhase.lean` を通した。必要十分版に残るのは三元の回転の型、体、左回転位相の非零性だけである。次は閉歩道の回転位相と自己交差符号を追跡する。
+
+前進前レビューでは、前 tick の方向番号シフトの四層が一致し、後続で繰り返し引く実質的な主張であるため「何も言っていない主張」ではないと確認した。修正対象は無かった。
+
+並列の式変形統一は、姉妹側の「数演算子の同時固有空間分解」の Step 3 まで進んだ。左作用・二場合・再結合・右作用を一行一等号の鎖へ開いた。次は同じ証明の Step 4 を見る。
 
 **反転が方向番号を二だけ進めることを四層で証明した。** 任意の向き付き辺 $\vec e\in\vec E_L$ について $\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2$（$\mathbb Z/4\mathbb Z$ の等式）を、方向番号の表の四場合の一行一等号計算で示した。SageMath は $L=1,\dots,5$ の全 220 向き付き辺を整数の合同で検査（`sagemath/check/reversal-direction-shift`）、Lean は四場合分けの具体版（`KacWard/ReversalDirectionShift.lean`）と「加法可換モノイドと $c+c=0$」だけを仮定する必要十分版を通した（辺の種類は基底値へ吸収され、本質は $2+2=0$ だと分かった）。後続の「逆歩道の回転位相の積は元の積の逆数」がこの等式を繰り返し引く。次は反転辺対の回転位相の積が 1 になること（$\vec f\in\operatorname{Next}(\vec e)$ のとき $\iota(\vec e)\in\operatorname{Next}(\iota(\vec f))$ と $\rho(\iota(\vec f),\iota(\vec e))\,\rho(\vec e,\vec f)=1$）。
 
