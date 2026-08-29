@@ -51303,17 +51303,13 @@ r<s,\ \operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s)=w,\
                   paragraph([
                     "平滑化後に頂点 ", math(String.raw`v`),
                     " を軸 0 に沿って直進する添字の集合と、軸 1 に沿って直進する添字の集合の直積から、",
-                    "二添字を小さい順に並べる。", ref("claim_vertex_crossing_number_factorization"),
-                    " の全単射と同じ全単射により、",
+                    "二添字を小さい順に並べる全単射（", ref("claim_vertex_crossing_number_factorization"),
+                    " の全単射と同じ構成）を平滑化後の通過族に取る。",
                   ]),
-                  displayMath(String.raw`c_v^{\mathrm{sm}}(\gamma;k,l)
-=n_{v,0}^{\mathrm{sm}}(\gamma;k,l)\,n_{v,1}^{\mathrm{sm}}(\gamma;k,l)
-\quad\bigl(\because\ \text{二軸の直進通過の直積と }\blkref{def_smoothed_vertexwise_crossing_number}\bigr)`),
-                  paragraph([ref("claim_smoothing_straight_visit_count_update"), " を軸 0 と軸 1 に適用すると"]),
                   displayMath(String.raw`\begin{aligned}
 c_v^{\mathrm{sm}}(\gamma;k,l)
 &=n_{v,0}^{\mathrm{sm}}(\gamma;k,l)\,n_{v,1}^{\mathrm{sm}}(\gamma;k,l)
-&&\bigl(\because\ \text{上の全単射}\bigr)\\
+&&\bigl(\because\ \text{二軸の直進通過の直積と }\blkref{def_smoothed_vertexwise_crossing_number}\bigr)\\
 &=\bigl(n_{v,0}(\gamma)-1\bigr)n_{v,1}^{\mathrm{sm}}(\gamma;k,l)
 &&\bigl(\because\ \blkref{claim_smoothing_straight_visit_count_update}\text{ を軸 }0\text{ に適用}\bigr)\\
 &=\bigl(n_{v,0}(\gamma)-1\bigr)\bigl(n_{v,1}(\gamma)-1\bigr)
