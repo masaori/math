@@ -36,7 +36,8 @@ node countable-ising-on-hyperbolic-surfaces/sagemath/tools/verify-check-linkage.
 - `auto-loop-state.md` と `MEMORY.md` を実態に合わせて更新する。Lean 未着手を完了と書かない。
 - 変更をコミットする前に再度 fetch し、remote default branch の進行を確認する。競合しない遅れは取り込む。
 - 成果を `origin/main` へ push し、成果コミットが fetch 後の `origin/main` の祖先であることを確認する。ここまで済まなければ完了ではない。
-- リポジトリに別の通知規則が追加されていなければ、作業結果を `slack-notification` skill で一回通知する。
+- 作業結果を通知する場合は話題名を「有限双曲曲面上の可算イジング模型」とし、公開本文
+  `https://hexcomp-artifacts.web.app/math/countable-hyperbolic-ising-mathjax/` を付ける。
 - 一つの主張を進めたら止まる。次の主張は次の tick へ残す。
 
 ## レビュー観点

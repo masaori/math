@@ -17,6 +17,14 @@ for relative in "${TARGETS[@]}"; do
     printf 'Hex-AIのmath明示routeを使っていない: %s\n' "$relative" >&2
     exit 1
   fi
+  if ! grep -Fq -- '--topic' "$file"; then
+    printf 'math通知の人間可読な話題名が無い: %s\n' "$relative" >&2
+    exit 1
+  fi
+  if ! grep -Fq -- '--artifact-url' "$file"; then
+    printf 'math通知の既存成果物URLが無い: %s\n' "$relative" >&2
+    exit 1
+  fi
 done
 
 if ! grep -Fq 'PATH="$HOME/.agent-shims:' \

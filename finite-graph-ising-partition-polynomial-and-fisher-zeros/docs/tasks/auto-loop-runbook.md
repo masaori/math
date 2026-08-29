@@ -23,5 +23,6 @@
 - commit 前に再度 fetch し、成果を remote default branch へ push して ancestry を確認する。
 - `slack-notification` skill で、公開本文
   `https://hexcomp-artifacts.web.app/math/finite-graph-ising-partition-polynomial/` を付けて通知する。
+  話題名は「有限グラフのイジング分配多項式とFisher零点」とする。
   commit URL は人間へ本文を見せる URL として使わない。
 - 一つの主張を進めたら終了し、次は次回 tick へ残す。

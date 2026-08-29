@@ -70,7 +70,7 @@ PROMPT='[[AI_AGENT_MESSAGE]]
 
 リポジトリ直下の AGENTS.md、CLAUDE.md、docs/context/ の全ファイルを読み、続いて countable-ising-on-hyperbolic-surfaces/README.md、MEMORY.md、docs/tasks/auto-loop-runbook.md、docs/tasks/auto-loop-state.md、docs/tasks/hyperbolic-ising/task-dependency-graph.md、今回の個別タスク文書を読んでください。.codex/skills/math-prover/SKILL.md も完全に読み、その skill を使うことを commentary で宣言してください。
 
-runbook に厳密に従い、既存成果のレビュー後、実行待ちの最初の一件から構造化本文の一つの定義・主張・定理だけを前進させてください。必要な SageMath 検算、全検証、台帳と MEMORY の更新、コミット、origin の remote default branch への push、包含確認、Slack 通知まで行ってください。一 tick 一主張を超えて次へ進まないでください。'
+runbook に厳密に従い、既存成果のレビュー後、実行待ちの最初の一件から構造化本文の一つの定義・主張・定理だけを前進させてください。必要な SageMath 検算、全検証、台帳と MEMORY の更新、コミット、origin の remote default branch への push、包含確認、Slack 通知まで行ってください。Slack は --topic "有限双曲曲面上の可算イジング模型" --artifact-url "https://hexcomp-artifacts.web.app/math/countable-hyperbolic-ising-mathjax/" を指定してください。一 tick 一主張を超えて次へ進まないでください。'
 
 log "=== tick 開始"
 set +e
@@ -88,4 +88,3 @@ else
   log "=== tick 異常終了 (exit $status)。未コミット成果は次回へ残す"
 fi
 exit "$status"
-

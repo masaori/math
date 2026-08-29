@@ -150,7 +150,10 @@ for p in "${problems[@]}"; do message="$message"$'\n'"・$p"; done
 message="$message"$'\n'"詳細: $PROJECT_NAME/logs/audit.log"
 
 log "監査で ${#problems[@]} 件の異常を検出したので通知する"
-if ! slack route-post math "$message" >> "$LOG_FILE" 2>&1; then
+if ! slack route-post math "$message" \
+  --topic "可算対数順序群による二次元イジング模型" \
+  --artifact-url "https://hexcomp-artifacts.web.app/math/ising-lambda/" \
+  >> "$LOG_FILE" 2>&1; then
   log "Slack の明示routeへの通知に失敗した"
 fi
 

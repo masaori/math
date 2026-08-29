@@ -5043,6 +5043,7 @@ SageMath 検算 6 本を追加し、区間の両端所属と真の減少、被�
 # Slack配送経路
 
 - 論文公開通知は旧Workflow Builder triggerを使わず、`slack route-post math`が解決するHex-AIの明示routeだけへ送る。
+- 同通知は話題名「セルオートマトン統計力学」と正規成果物 `https://hexcomp-artifacts.web.app/math/cellular-automata-statistical-mechanics/` を必ず付ける。
 ## 公開通知の正規ルート応答検証（2026-08-27）
 
 `scripts/publish-artifact.sh` が `slack route-post math` の成功応答を旧配送先
