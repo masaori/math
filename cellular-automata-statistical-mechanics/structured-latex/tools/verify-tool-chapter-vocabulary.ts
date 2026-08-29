@@ -9,6 +9,7 @@
  * 有限集合・写像・関係だけで定義されていることを本文で確認してから足すこと。
  */
 import { collectRefTargets, loadContentFiles } from "./content-modules.ts";
+import { documentOrganization } from "./document-organization.ts";
 
 const CA_TERMS = [
   "セルオートマトン",
@@ -177,6 +178,62 @@ for (const file of files) {
 }
 violations.push(...identifierViolations);
 
+/**
+ * 節の設計そのものの検査。
+ *
+ * 上の二つの軸は content/ 由来のブロックだけを見ており、`organization_` で始まる生成ブロック
+ * （節見出しと「この節の入力・出力・主定理」）を明示的に読み飛ばしている。その文面は
+ * document-organization.ts の title / input / output / main に書かれ、**出版本文に現れる**のに、
+ * どちらの軸からも原理的に一件も検出できない。数学的道具立て章の節の説明へ CA 固有語を書いても、
+ * 節 id や章 id へ CA 由来語・既存物理由来語を置いても、検査を通ってしまう状態だった。
+ * 節の設計は成果整理の一層そのものなので、本文ブロックと同じ境界を節の記述にも課す。
+ */
+const TOOL_CHAPTER_ID = "mathematical_tools";
+const CA_CHAPTER_ID = "binary_cellular_automaton_semantics";
+
+const organizationViolations: string[] = [];
+for (const chapter of documentOrganization) {
+  // 章 id は as const で literal 型になるため、比較で never へ潰れないよう string へ広げてから見る。
+  const chapterId: string = chapter.id;
+  const inTools = chapterId === TOOL_CHAPTER_ID;
+  const inCa = chapterId === CA_CHAPTER_ID;
+  if (!inTools && !inCa) {
+    organizationViolations.push(`二章のどちらでもない章がある: ${chapterId}`);
+    continue;
+  }
+  for (const section of chapter.sections) {
+    const hits = caTermsIn([section.title, section.input, section.output, section.main]);
+    if (inTools && hits.length > 0) {
+      organizationViolations.push(
+        `数学的道具立て章の節の記述に CA 固有語がある: ${chapterId}/${section.id}（${hits.join("、")}）`,
+      );
+    }
+    if (inCa && hits.length === 0) {
+      organizationViolations.push(
+        `CA 章の節の記述に CA 固有語が無い: ${chapterId}/${section.id}`,
+      );
+    }
+    if (!inTools) continue;
+    for (const identifier of [{ key: `chapter:${chapterId}`, value: chapterId }, { key: `section:${section.id}`, value: String(section.id) }]) {
+      const caHits = CA_IDENTIFIER_TERMS.filter((term) => identifier.value.includes(term));
+      if (caHits.length > 0) {
+        organizationViolations.push(
+          `数学的道具立て章の節の識別子に CA 由来語がある: ${identifier.key}（${caHits.join("、")}）`,
+        );
+      }
+      const physicsHits = PHYSICS_IDENTIFIER_TERMS.filter((term) => identifier.value.includes(term));
+      if (physicsHits.length > 0) {
+        organizationViolations.push(
+          `数学的道具立て章の節の識別子に既存物理由来語がある: ${identifier.key}（${physicsHits.join("、")}）`,
+        );
+      }
+    }
+  }
+}
+violations.push(...organizationViolations);
+
+
+
 if (violations.length > 0) {
   console.error("章の意味境界に違反がある:");
   for (const line of violations) console.error(`  ${line}`);
@@ -184,5 +241,6 @@ if (violations.length > 0) {
 }
 console.log(
   `章の意味境界の語彙検査 OK（本文の CA 固有語 ${CA_TERMS.length} 件、CA 章 ${caBlockIds.size} 件、` +
-    "数学的道具立て章に残る CA 由来識別子 0 件、既存物理由来識別子 0 件）",
+    "数学的道具立て章に残る CA 由来識別子 0 件、既存物理由来識別子 0 件、" +
+    `節の記述と節識別子の違反 0 件 / 節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
