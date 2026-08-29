@@ -920,3 +920,5 @@ import Ising2DLambda.NecSuf.KacWard.CrossingNumberDouble
 import Ising2DLambda.KacWard.CrossingNumberDouble
 import Ising2DLambda.NecSuf.KacWard.IsolatedSmoothingCrossingParity
 import Ising2DLambda.KacWard.IsolatedSmoothingCrossingParity
+import Ising2DLambda.NecSuf.KacWard.CrossingNumberVertexDecomposition
+import Ising2DLambda.KacWard.CrossingNumberVertexDecomposition

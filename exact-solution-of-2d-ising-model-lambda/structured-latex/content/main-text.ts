@@ -50830,6 +50830,121 @@ c(\gamma)&=|C|
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_crossing_number_vertex_decomposition",
+        labels: [],
+        title: { text: "横断数の頂点ごとの分解" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_crossing_number_vertex_decomposition",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_vertexwise_crossing_number",
+                    kind: "definition",
+                    title: { text: "頂点ごとの横断数" },
+                    labels: ["def_vertexwise_crossing_number"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        " の横断対の有限集合を",
+                      ]),
+                      displayMath(String.raw`C:=\{(k,l)\in I_m\times I_m\mid k<l,\ k\text{ と }l\text{ が横断する}\}`),
+                      paragraph([
+                        "と置く（横断は ", ref("def_index_pair_crossing"),
+                        "）。横断する二添字の通過の頂点は等しい（",
+                        math(String.raw`\operatorname{tgt}(\vec e_k)=\operatorname{tgt}(\vec e_l)`),
+                        "。", ref("def_index_pair_crossing"),
+                        " の第一条件）ので、横断対 ", math(String.raw`(k,l)\in C`),
+                        " の頂点を ", math(String.raw`\operatorname{tgt}(\vec e_k)\in V_L`),
+                        " と定めてよい。格子頂点 ", math(String.raw`v\in V_L`),
+                        " ごとの横断数 ", math(String.raw`c_v(\gamma)\in\mathbb N`), " を",
+                      ]),
+                      displayMath(String.raw`C_v:=\{(k,l)\in C\mid \operatorname{tgt}(\vec e_k)=v\},\qquad
+c_v(\gamma):=|C_v|`),
+                      paragraph([
+                        "で定める。有限集合 ", math(String.raw`C`),
+                        " の部分集合の元の個数なので、値は自然数として定まる。実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_crossing_number_vertex_decomposition",
+                kind: "claim",
+                title: { text: "横断数は頂点ごとの横断数の和である" },
+                labels: ["claim_crossing_number_vertex_decomposition"],
+                habitat: "N",
+                verification: ["sagemath/check/crossing-number-vertex-decomposition"],
+                lean: [
+                  "Ising2DLambda.KacWard.crossing_number_vertex_decomposition",
+                  "Ising2DLambda.NecSuf.KacWard.card_eq_sum_fiber_card_necSuf",
+                  "Ising2DLambda.KacWard.crossing_number_vertex_decomposition_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の閉じた非後退辺列 ", math(String.raw`\gamma`), " について",
+                  ]),
+                  displayMath(String.raw`c(\gamma)=\sum_{v\in V_L}c_v(\gamma)`),
+                  paragraph([
+                    "が成り立つ（左辺は ", ref("def_closed_walk_crossing_number"),
+                    "、右辺の各項は ", ref("def_vertexwise_crossing_number"),
+                    "。和は有限集合 ", math(String.raw`V_L`),
+                    " の上の自然数の有限和である）。したがって ",
+                    math(String.raw`c(\gamma)`), " の偶奇は ",
+                    math(String.raw`c_v(\gamma)`), " が奇数である頂点の個数の偶奇に等しい。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "横断対の集合 ", math(String.raw`C`), " とその部分集合 ",
+                    math(String.raw`C_v`), "（", math(String.raw`v\in V_L`), "）は ",
+                    ref("def_vertexwise_crossing_number"), " のものとする。二つの準備をする。",
+                    "第一に、任意の横断対 ", math(String.raw`(k,l)\in C`),
+                    " について、その頂点 ", math(String.raw`\operatorname{tgt}(\vec e_k)`),
+                    " は ", math(String.raw`V_L`), " の元である（",
+                    ref("def_closed_walk_passes"),
+                    "）。よって ", math(String.raw`(k,l)`), " はちょうど一つの ",
+                    math(String.raw`v=\operatorname{tgt}(\vec e_k)`), " について ",
+                    math(String.raw`C_v`), " に属し、",
+                    math(String.raw`v\ne w`), " なら ",
+                    math(String.raw`C_v\cap C_w=\varnothing`),
+                    "（一つの対の頂点は一つに定まるため）。第二に、この二つから ",
+                    math(String.raw`C`), " は互いに交わらない部分集合の族 ",
+                    math(String.raw`(C_v)_{v\in V_L}`), " の合併である。したがって",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+c(\gamma)&=|C|
+&&\bigl(\because\ \blkref{def_closed_walk_crossing_number}\bigr)\\
+&=\Bigl|\,\bigcup_{v\in V_L}C_v\,\Bigr|
+&&\bigl(\because\ \text{各横断対の頂点は }V_L\text{ の元（第一の準備）}\bigr)\\
+&=\sum_{v\in V_L}|C_v|
+&&\bigl(\because\ \text{互いに交わらない有限集合の合併の個数は個数の和（第二の準備）}\bigr)\\
+&=\sum_{v\in V_L}c_v(\gamma)
+&&\bigl(\because\ \blkref{def_vertexwise_crossing_number}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "を得る。偶奇の言い換えは、この等式を法 2 で読み、偶数の項が消えることによる。",
+                    "全過程は有限集合の数え上げと自然数の加法だけで閉じる。",
+                    "この分解により、平滑化が横断数の偶奇へ与える影響は頂点ごとに切り分けて調べられる。",
+                    "同じ頂点を三回以上通る場合の解析は、この頂点ごとの横断数について後続で行う。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

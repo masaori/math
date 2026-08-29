@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 9 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 10 回目の tick 時点）
+
+**閉歩道の横断数が通過頂点ごとの横断数の和に分解されることを四層で証明した。** 横断対の二つの通過の頂点は等しいので、横断対の頂点を第一添字の通過の頂点として定めてよい。頂点ごとの横断数 $c_v(\gamma):=|C_v|\in\mathbb N$（`def_vertexwise_crossing_number`）を導入し、被覆（各横断対の頂点は $V_L$ の元）と互いに素（一つの対の頂点は一つに定まる）の二段で $c(\gamma)=\sum_{v\in V_L}c_v(\gamma)$（`claim_crossing_number_vertex_decomposition`）を得た。横断数の偶奇は $c_v$ が奇数である頂点の個数の偶奇に等しく、平滑化が偶奇へ与える影響は頂点ごとに切り分けられる。SageMath `crossing-number-vertex-decomposition` は閉歩道 1,064 件・横断対 96 対を `ZZ` で厳密検査し、Lean は `KacWard/CrossingNumberVertexDecomposition.lean`（`Fintype V` 上の和）と必要十分版 `card_eq_sum_fiber_card_necSuf`（仮定は二つの型の決定可能な等号と値の被覆だけ）を通した。次は同じ頂点を三回以上通る頂点の局所解析（頂点ごとの横断数と平滑化）を進める。
+
+前進前レビューでは前 tick の孤立横断の平滑化（コミット `ad144a04`）の四層を照合し、修正対象は無かった。
+
+## ひとつ前の到達点（2026-08-30 の 9 回目の tick 時点）
 
 **孤立した横断の平滑化が横断数を一つ減らし、偶奇を反転させることを四層で証明した。** 選択した横断の頂点を通る通過がその二つだけであることを孤立性として明示し、二通過の出辺を交換した平滑化後の通過族を定義した（`def_isolated_crossing_smoothing`）。選択対は二つの曲がる通過へ変わって横断でなくなり、他の添字対の横断判定は変わらないので、平滑化後の横断対集合は元の集合から $(k,l)$ 一元だけを除いたものになり、$c(\gamma)=c_{\mathrm{sm}}(\gamma;k,l)+1$（`claim_isolated_smoothing_crossing_number_update`）。SageMath `isolated-smoothing-crossing-parity` は有限局所データ 115,400 件を `ZZ` で検査し、Lean は `KacWard/IsolatedSmoothingCrossingParity.lean` と必要十分版を通した。必要十分版に残るのは全順序と実在する順序なし対を一つ除くことだけである。同じ頂点を三回以上通る場合には無条件の偶奇反転が成り立たない有限反例があるため、次は一般の場合を孤立横断へ分解する。
 
