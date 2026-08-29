@@ -5452,9 +5452,26 @@ g=\sum_{j=0}^{m}b_j x^j
         \bigl(\because\ \text{有限和の分配律}\bigr).
       `),
       displayMath(String.raw`
+        D(fg)
+        =
+        D(f)\left(\sum_{j=0}^{m}b_jx^j\right)
+        +
+        \left(\sum_{i=0}^{n}a_ix^i\right)D(g)
+        \quad
+        \bigl(\because\ \text{形式微分の定義}\bigr).
+      `),
+      displayMath(String.raw`
+        D(fg)
+        =
+        D(f)\left(\sum_{j=0}^{m}b_jx^j\right)
+        +fD(g)
+        \quad
+        \bigl(\because\ f=\sum_{i=0}^{n}a_ix^i\text{ を代入する}\bigr).
+      `),
+      displayMath(String.raw`
         D(fg)=D(f)g+fD(g)
         \quad
-        \bigl(\because\ \text{形式微分と }f,g\text{ の係数表示}\bigr).
+        \bigl(\because\ g=\sum_{j=0}^{m}b_jx^j\text{ を代入する}\bigr).
       `),
       paragraph([
         "反復する形式微分を",

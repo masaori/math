@@ -21,6 +21,9 @@
 | `check_formal_derivative_product_rule.sage` | 代数的数係数多項式の形式微分における積法則 | PASS | 零・定数・無理代数的係数を含む多項式対で `D(fg)=D(f)g+fD(g)` が一致 |
 | `check_formal_derivative_product_rule_linearity_step.sage` | 積の有限係数表示へ形式微分の線形性を適用する一行 | PASS | 積の形式微分と各有限和項を形式微分した和が一致 |
 | `check_formal_derivative_product_rule_coefficient_expansion.sage` | 形式微分の積法則の有限係数表示からの導出 | PASS | 積の分配、埋め込みの加法保存、正次数和への分離、単項式の指数分解、有限和の因数分解を順に確認 |
+| `check_formal_derivative_product_rule_definition_step.sage` | 因数分解した有限係数和への形式微分の定義の適用 | PASS | 二つの係数微分和がそれぞれ `D(f)` と `D(g)` に一致 |
+| `check_formal_derivative_product_rule_substitute_f.sage` | 第一多項式の係数表示の単独代入 | PASS | `f=sum_i a_i x^i` の代入前後が一致 |
+| `check_formal_derivative_product_rule_substitute_g.sage` | 第二多項式の係数表示の単独代入 | PASS | `g=sum_j b_j x^j` の代入前後が一致 |
 | `check_formal_derivative_iterates.sage` | 二回・三回形式微分の合成による反復定義 | PASS | `D^2=D\circ D` と `D^3=D\circ D\circ D` が零・定数・無理代数的係数を含む多項式で一致 |
 | `check_coefficient_formal_derivatives.sage` | 係数表示の前三回の形式微分 | PASS | 三つの多項式恒等式が一致 |
 | `check_first_coefficient_formal_derivative.sage` | 係数表示の一回形式微分 | PASS | 本文の一回形式微分式が全例で一致 |
