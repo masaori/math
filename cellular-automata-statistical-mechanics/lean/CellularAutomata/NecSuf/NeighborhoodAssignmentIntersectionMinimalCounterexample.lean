@@ -113,7 +113,7 @@ theorem leftWitness_rhs_at_b {V : Type} [DecidableEq V] {a b : V} :
       (hetComp (leftWitnessM b) (leftWitnessL a)) b = {a} := by
   simp [hetInter, hetComp, leftWitnessN, leftWitnessM, leftWitnessL]
 
-/-- `claim_two_cell_composition_intersection_nondistributivity` の左側の必要十分版。
+/-- `claim_two_element_composition_intersection_nondistributivity` の左側の必要十分版。
     要るのは相異なる二点だけで、舞台の有限性は要らない。 -/
 theorem leftWitness_failure {V : Type} [DecidableEq V] {a b : V} (hab : a ≠ b) :
     hetComp (hetInter (leftWitnessN a b) (leftWitnessM b)) (leftWitnessL a) ≠
@@ -151,7 +151,7 @@ theorem rightWitness_rhs_at_b {V : Type} [DecidableEq V] {a b : V} (hab : a ≠ 
       (hetComp (rightWitnessL a b) (rightWitnessM a)) b = {a} := by
   simp [hetInter, hetComp, rightWitnessL, rightWitnessN, rightWitnessM, hab, Ne.symm hab]
 
-/-- `claim_two_cell_composition_intersection_nondistributivity` の右側の必要十分版。 -/
+/-- `claim_two_element_composition_intersection_nondistributivity` の右側の必要十分版。 -/
 theorem rightWitness_failure {V : Type} [DecidableEq V] {a b : V} (hab : a ≠ b) :
     hetComp (rightWitnessL a b) (hetInter (rightWitnessN a b) (rightWitnessM a)) ≠
       hetInter (hetComp (rightWitnessL a b) (rightWitnessN a b))

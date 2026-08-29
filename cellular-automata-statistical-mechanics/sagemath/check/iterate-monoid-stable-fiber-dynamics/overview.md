@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_iterate_monoid_stable_fiber_exact_preimage`
 
-- 併せて検証するラベル: `def_iterate_monoid_stable_fiber_index_map`、`claim_iterate_monoid_cycle_idempotent_commutes_with_global_map`、`claim_iterate_monoid_stable_fiber_image_can_be_strict`、`claim_iterate_monoid_stable_fiber_dynamics_finite_decidability`
+- 併せて検証するラベル: `def_iterate_monoid_stable_fiber_index_map`、`claim_iterate_monoid_cycle_idempotent_commutes_with_generator`、`claim_iterate_monoid_stable_fiber_image_can_be_strict`、`claim_iterate_monoid_stable_fiber_dynamics_finite_decidability`
 - 検証範囲: 安定像上の添字写像 $\sigma_F(q)=F(q)$ が定義され $Q_F$ 上で全単射であること、$E_F\circ F=F\circ E_F$、完全逆像 $F^{-1}(B_F(\sigma_F(q)))=B_F(q)$ の両包含、一元舞台の定値規則による反例 $F(B_F(q))\subsetneq B_F(\sigma_F(q))$、有限走査による $\sigma_F$ の表・像・完全逆像の決定
 - 全数範囲: セル数 0 の唯一の大域写像、および `1 <= |V| <= 3` の巡回舞台上の全 256 初等 CA 規則（計 769 個の大域写像）
 

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_positive_idempotent_iterate_exists`
 
-- 併せて検証するラベル: `claim_iterate_collision_gives_eventual_period`、`claim_iterate_monoid_idempotents_finite_decidability`、`claim_nonidentity_idempotent_not_forced`、`claim_iterate_monoid_idempotent_uniqueness_fails`
+- 併せて検証するラベル: `claim_iterate_collision_gives_repeating_tail`、`claim_iterate_monoid_idempotents_finite_decidability`、`claim_nonidentity_idempotent_not_forced`、`claim_iterate_monoid_idempotent_uniqueness_fails`
 - 検証範囲: 衝突からの以後の周期、正の冪等指数の構成（$i=0$ と $i\ge1$ の場合分け）、冪等元全体の 2 値状態等号走査による有限決定、恒等 CA と定値規則による 2 つの反例
 - 全数範囲: セル数 $0$ の唯一の大域写像、および $1\leq|V|\leq3$ の巡回舞台上の全 256 初等 CA 規則（計 769 個の大域写像）。反例 2 件は構造化記述が構成する一元舞台の有限対象そのもの
 

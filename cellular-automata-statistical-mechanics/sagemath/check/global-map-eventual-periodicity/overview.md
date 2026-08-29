@@ -2,7 +2,7 @@
 
 ## 対象
 
-**対象ラベル**: `claim_eventual_periodicity`
+**対象ラベル**: `claim_finite_self_map_repeating_tail`
 
 - 併せて検証するラベル: `claim_orbit_collision`、`claim_collision_shift`、`claim_collision_finite_decidability`
 - 検証範囲: 軌道衝突の上界、衝突の反復不変性、最終周期性、衝突組の走査回数

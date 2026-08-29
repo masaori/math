@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_reversible_conjugacy_classes_bijection_partitions`
 
-- 併せて検証するラベル: `def_reversible_global_maps`、`claim_reversible_all_configurations_periodic`、`claim_periodic_orbit_card_eq_min_period`、`def_reversible_cycle_type`、`claim_reversible_orbits_partition_configurations`、`claim_reversible_cycle_type_sum`、`claim_reversible_cycle_type_conjugacy_invariance`、`claim_reversible_cycle_type_completeness`、`def_configuration_count_partitions`、`claim_reversible_cycle_type_realizes_every_partition`、`def_reversible_global_map_conjugacy_classes`
+- 併せて検証するラベル: `def_bijective_self_maps`、`claim_bijective_self_map_all_elements_periodic`、`claim_periodic_orbit_card_eq_min_period`、`def_reversible_cycle_type`、`claim_bijective_self_map_orbits_partition_carrier`、`claim_reversible_cycle_type_sum`、`claim_reversible_cycle_type_conjugacy_invariance`、`claim_reversible_cycle_type_completeness`、`def_carrier_cardinality_partitions`、`claim_reversible_cycle_type_realizes_every_partition`、`def_bijective_self_map_conjugacy_classes`
 - 元数 1・2・4・8 の配位集合、すなわちセル数 0・1・2・3 の固定舞台上の単射な自己写像 40,347 個を検査する。周期軌道の元数と最小周期の一致は、単射に限らない全自己写像 261 個（元数 1・2・4）で検査する。
 - 有限写像表、有限置換、有限集合、正の自然数の有限多重集合だけを列挙し、浮動小数点を使わない。
 

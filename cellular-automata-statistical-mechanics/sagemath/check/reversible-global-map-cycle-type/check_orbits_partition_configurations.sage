@@ -1,4 +1,4 @@
-# claim_reversible_orbits_partition_configurations の検算。
+# claim_bijective_self_map_orbits_partition_carrier の検算。
 # 元数 1,2,4,8 の配位集合上の全ての単射な自己写像について、周期軌道の集合 𝒪_F が
 # A^V の分割であること、すなわち合併が A^V であることと、相異なる二軌道が交わらないことを
 # それぞれ分けて検査する。

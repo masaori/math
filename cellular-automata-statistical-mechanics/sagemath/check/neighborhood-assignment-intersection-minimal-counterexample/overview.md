@@ -2,13 +2,13 @@
 
 ## 対象
 
-**対象ラベル**: `theorem_minimal_cell_count_for_composition_intersection_nondistributivity`
+**対象ラベル**: `theorem_minimal_carrier_size_for_composition_intersection_nondistributivity`
 
 - 併せて検証するラベル:
   `claim_subsingleton_neighborhood_composition_equals_intersection`、
   `claim_subsingleton_neighborhood_composition_distributes_over_intersection`、
-  `def_two_cell_intersection_nondistributivity_witnesses`、
-  `claim_two_cell_composition_intersection_nondistributivity`
+  `def_two_element_intersection_nondistributivity_witnesses`、
+  `claim_two_element_composition_intersection_nondistributivity`
 - 本文の各段（一元以下の舞台での合成と点ごとの積の一致、そこから従う左右の分配律、
   二元舞台の左右の明示証人の式変形、最小舞台元数）を別々の検算に分け、
   最終式だけの一致で済ませない。

@@ -1,4 +1,4 @@
-# 対象ラベル: def_time_interval
+# 対象ラベル: def_finite_index_interval
 # [0,tau]_NN={t in NN | t<=tau}={0,...,tau} と、その元の個数 tau+1 を検査する。
 # 帰属: 非負整数と有限集合の等号だけを使う。R/C 脱出なし。
 

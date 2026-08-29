@@ -18,14 +18,14 @@ export default defineBlocks([
   },
 
   {
-    id: "reversible_global_map_cycle_type_definition_reversible_maps",
+    id: "bijective_self_map_cycle_type_definition_bijective_maps",
     kind: "definition",
     title: { text: "一つの有限集合上の可逆な自己写像全体" },
-    labels: ["def_reversible_global_maps"],
+    labels: ["def_bijective_self_maps"],
     habitat: "finite",
     statement: [
       paragraph([
-        "有限集合 ", math(String.raw`X`), " に対し、", ref("def_conjugacy_class_all_global_maps"), " の ",
+        "有限集合 ", math(String.raw`X`), " に対し、", ref("def_conjugacy_class_all_self_maps"), " の ",
         math(String.raw`\operatorname{End}(X)`), " の部分集合",
       ]),
       displayMath(
@@ -38,26 +38,26 @@ export default defineBlocks([
   },
 
   {
-    id: "reversible_global_map_cycle_type_claim_all_periodic",
+    id: "bijective_self_map_cycle_type_claim_all_periodic",
     kind: "claim",
     title: { text: "可逆な自己写像では全ての元が周期点である" },
-    labels: ["claim_reversible_all_configurations_periodic"],
+    labels: ["claim_bijective_self_map_all_elements_periodic"],
     habitat: "finite",
     statement: [
       paragraph([
         math(String.raw`F\in\operatorname{Perm}(X)`), "（",
-        ref("def_reversible_global_maps"), "）について ",
+        ref("def_bijective_self_maps"), "）について ",
         math(String.raw`\mathrm{Per}(F)=X`), "（",
         ref("def_periodic_points"), "）。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`F`), " は単射である（", ref("def_reversible_global_maps"),
+        math(String.raw`F`), " は単射である（", ref("def_bijective_self_maps"),
         "）。任意の ", math(String.raw`y\in X`), " について、",
       ]),
       displayMath(String.raw`\begin{aligned}
-\mu(y)&=0\qquad(\because\ \blkref{claim_global_map_injective_iff_all_periodic}\ \text{の右向きを}\ F\ \text{の単射性に適用})\\
+\mu(y)&=0\qquad(\because\ \blkref{claim_finite_self_map_injective_iff_all_periodic}\ \text{の右向きを}\ F\ \text{の単射性に適用})\\
 y&\in\mathrm{Per}(F)\qquad(\because\ \blkref{claim_periodic_iff_min_preperiod_zero}\ \text{の左向きを}\ \mu(y)=0\ \text{に適用})
 \end{aligned}`),
       paragraph([
@@ -70,7 +70,7 @@ y&\in\mathrm{Per}(F)\qquad(\because\ \blkref{claim_periodic_iff_min_preperiod_ze
   },
 
   {
-    id: "reversible_global_map_cycle_type_claim_orbit_card",
+    id: "bijective_self_map_cycle_type_claim_orbit_card",
     kind: "claim",
     title: { text: "周期点の周期軌道の元数は最小周期に等しい" },
     labels: ["claim_periodic_orbit_card_eq_min_period"],
@@ -96,7 +96,7 @@ y&\in\mathrm{Per}(F)\qquad(\because\ \blkref{claim_periodic_iff_min_preperiod_ze
         String.raw`\theta:\{\,r\in\mathbb{N}\ :\ r<\pi\,\}\to X,\qquad \theta(r):=F^{r}\,q`,
       ),
       paragraph([
-        "を定める（", ref("def_global_map_iterate"), "）。以下、",
+        "を定める（", ref("def_finite_self_map_iterate"), "）。以下、",
         math(String.raw`\theta`), " の像が ", math(String.raw`O_F(q)`),
         " であること（第一段）と ", math(String.raw`\theta`),
         " が単射であること（第二段）を示す。",
@@ -167,7 +167,7 @@ F^{i+p}\,q&=F^{j}\,q\qquad(\because\ i+p=j)\\
   },
 
   {
-    id: "reversible_global_map_cycle_type_definition_cycle_type",
+    id: "bijective_self_map_cycle_type_definition_cycle_type",
     kind: "definition",
     title: { text: "可逆な自己写像の巡回型" },
     labels: ["def_reversible_cycle_type"],
@@ -175,7 +175,7 @@ F^{i+p}\,q&=F^{j}\,q\qquad(\because\ i+p=j)\\
     statement: [
       paragraph([
         math(String.raw`F\in\operatorname{Perm}(X)`), "（",
-        ref("def_reversible_global_maps"), "）に対し、周期軌道の集合 ",
+        ref("def_bijective_self_maps"), "）に対し、周期軌道の集合 ",
         math(String.raw`\mathcal O_F`), "（",
         ref("def_recursive_preimage_tree_code_periodic_orbits"),
         "）の各元にその元数を対応させて得る有限多重集合",
@@ -196,10 +196,10 @@ F^{i+p}\,q&=F^{j}\,q\qquad(\because\ i+p=j)\\
   },
 
   {
-    id: "reversible_global_map_cycle_type_claim_orbits_partition_configurations",
+    id: "bijective_self_map_cycle_type_claim_orbits_partition_carrier",
     kind: "claim",
     title: { text: "可逆な自己写像の周期軌道は元集合を分割する" },
-    labels: ["claim_reversible_orbits_partition_configurations"],
+    labels: ["claim_bijective_self_map_orbits_partition_carrier"],
     habitat: "finite",
     statement: [
       paragraph([
@@ -211,7 +211,7 @@ F^{i+p}\,q&=F^{j}\,q\qquad(\because\ i+p=j)\\
     ],
     proof: [
       paragraph([
-        ref("claim_reversible_all_configurations_periodic"), " により任意の ",
+        ref("claim_bijective_self_map_all_elements_periodic"), " により任意の ",
         math(String.raw`y\in X`), " は周期点であり、",
         math(String.raw`y=F^0(y)\in O_F(y)`), "（",
         ref("def_recursive_preimage_tree_code_periodic_orbits"), "）なので、",
@@ -250,7 +250,7 @@ q'&=F^{n}(q')\qquad(\because\ F^b(q')=q'\ \text{と}\ \blkref{claim_period_multi
   },
 
   {
-    id: "reversible_global_map_cycle_type_claim_sum",
+    id: "bijective_self_map_cycle_type_claim_sum",
     kind: "claim",
     title: { text: "巡回型は元数の分割である" },
     labels: ["claim_reversible_cycle_type_sum"],
@@ -265,20 +265,20 @@ q'&=F^{n}(q')\qquad(\because\ F^b(q')=q'\ \text{と}\ \blkref{claim_period_multi
     ],
     proof: [
       paragraph([
-        ref("claim_reversible_orbits_partition_configurations"), " により ",
+        ref("claim_bijective_self_map_orbits_partition_carrier"), " により ",
         math(String.raw`\mathcal O_F`), " は ", math(String.raw`X`),
         " の有限分割である。有限分割の各部分の元数を足すと全体の元数になるので、",
       ]),
       displayMath(String.raw`\begin{aligned}
 \sum_{d\in\mathrm{ct}(F)}d
 &=\sum_{O\in\mathcal O_F}|O|\qquad(\because\ \blkref{def_reversible_cycle_type})\\
-&=|X|\qquad(\because\ \blkref{claim_reversible_orbits_partition_configurations}).
+&=|X|\qquad(\because\ \blkref{claim_bijective_self_map_orbits_partition_carrier}).
 \end{aligned}`),
     ],
   },
 
   {
-    id: "reversible_global_map_cycle_type_claim_conjugacy_invariance",
+    id: "bijective_self_map_cycle_type_claim_conjugacy_invariance",
     kind: "claim",
     title: { text: "共役全単射は巡回型を保存する" },
     labels: ["claim_reversible_cycle_type_conjugacy_invariance"],
@@ -305,7 +305,7 @@ q'&=F^{n}(q')\qquad(\because\ F^b(q')=q'\ \text{と}\ \blkref{claim_period_multi
   },
 
   {
-    id: "reversible_global_map_cycle_type_claim_completeness",
+    id: "bijective_self_map_cycle_type_claim_completeness",
     kind: "claim",
     title: { text: "巡回型の一致から共役全単射を構成できる" },
     labels: ["claim_reversible_cycle_type_completeness"],
@@ -336,7 +336,7 @@ q'&=F^{n}(q')\qquad(\because\ F^b(q')=q'\ \text{と}\ \blkref{claim_period_multi
         "と定める。", math(String.raw`|O|=|\psi(O)|`), " と ",
         ref("claim_periodic_orbit_card_eq_min_period"), " により、この写像は各 ",
         math(String.raw`O`), " から ", math(String.raw`\psi(O)`),
-        " への全単射である。", ref("claim_reversible_orbits_partition_configurations"),
+        " への全単射である。", ref("claim_bijective_self_map_orbits_partition_carrier"),
         " により両側の周期軌道はそれぞれ ", math(String.raw`X`),
         " を分割し、", math(String.raw`\psi`), " は軌道全体の全単射なので、各軌道上の写像を接着した ",
         math(String.raw`h:X\to X`), " は全単射である。",
@@ -365,10 +365,10 @@ h(F(y))
   },
 
   {
-    id: "reversible_global_map_cycle_type_definition_partitions",
+    id: "bijective_self_map_cycle_type_definition_partitions",
     kind: "definition",
     title: { text: "元数の正の自然数への分割" },
-    labels: ["def_configuration_count_partitions"],
+    labels: ["def_carrier_cardinality_partitions"],
     habitat: "finite",
     statement: [
       paragraph(["正の自然数からなる有限多重集合のうち、重複度つき和が ", math(String.raw`|X|`), " であるもの全体を"]),
@@ -378,10 +378,10 @@ h(F(y))
   },
 
   {
-    id: "reversible_global_map_cycle_type_claim_partitions_finite",
+    id: "bijective_self_map_cycle_type_claim_partitions_finite",
     kind: "claim",
     title: { text: "元数の正の自然数への分割は有限個である" },
-    labels: ["claim_configuration_count_partitions_finite"],
+    labels: ["claim_carrier_cardinality_partitions_finite"],
     habitat: "finite",
     statement: [
       paragraph([math(String.raw`\operatorname{Part}(|X|)`), " は有限集合である。"]),
@@ -399,7 +399,7 @@ h(F(y))
   },
 
   {
-    id: "reversible_global_map_cycle_type_claim_partition_realization",
+    id: "bijective_self_map_cycle_type_claim_partition_realization",
     kind: "claim",
     title: { text: "元数の各分割は可逆な自己写像の巡回型として実現する" },
     labels: ["claim_reversible_cycle_type_realizes_every_partition"],
@@ -413,12 +413,12 @@ h(F(y))
     ],
     proof: [
       paragraph([
-        ref("def_configuration_count_partitions"), " により ", math(String.raw`\lambda`),
+        ref("def_carrier_cardinality_partitions"), " により ", math(String.raw`\lambda`),
         " の要素は全て正で、その和は ", math(String.raw`|X|`), " である。有限集合 ", math(String.raw`X`),
         " の元を一列に並べ、その列を ", math(String.raw`\lambda`),
         " の各出現の値を長さとする連続した有限列へ切り分ける。各有限列の中で各元を次の元へ、末尾を先頭へ送る写像 ",
         math(String.raw`F:X\to X`), " を定める。各有限列上で巡回置換なので ",
-        math(String.raw`F`), " は単射であり、", ref("def_reversible_global_maps"),
+        math(String.raw`F`), " は単射であり、", ref("def_bijective_self_maps"),
         " により ", math(String.raw`F\in\operatorname{Perm}(X)`), " である。構成した有限列がちょうど ",
         math(String.raw`F`), " の周期軌道であり、その元数を重複を保って集めると ",
         math(String.raw`\lambda`), " になる。よって ", ref("def_reversible_cycle_type"),
@@ -453,10 +453,10 @@ h(F(y))
   },
 
   {
-    id: "reversible_global_map_cycle_type_definition_conjugacy_classes",
+    id: "bijective_self_map_cycle_type_definition_conjugacy_classes",
     kind: "definition",
     title: { text: "可逆な自己写像の共役類" },
-    labels: ["def_reversible_global_map_conjugacy_classes"],
+    labels: ["def_bijective_self_map_conjugacy_classes"],
     habitat: "finite",
     statement: [
       paragraph([
@@ -469,7 +469,7 @@ h(F(y))
   },
 
   {
-    id: "reversible_global_map_cycle_type_claim_quotient_bijection",
+    id: "bijective_self_map_cycle_type_claim_quotient_bijection",
     kind: "claim",
     title: { text: "可逆な自己写像の共役類と元数の分割は全単射である" },
     labels: ["claim_reversible_conjugacy_classes_bijection_partitions"],

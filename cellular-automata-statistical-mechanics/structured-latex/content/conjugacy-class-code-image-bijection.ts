@@ -18,10 +18,10 @@ export default defineBlocks([
   },
 
   {
-    id: "conjugacy_class_code_image_bijection_definition_all_global_maps",
+    id: "conjugacy_class_code_image_bijection_definition_all_self_maps",
     kind: "definition",
     title: { text: "一つの有限集合上の自己写像全体" },
-    labels: ["def_conjugacy_class_all_global_maps"],
+    labels: ["def_conjugacy_class_all_self_maps"],
     habitat: "finite",
     statement: [
       paragraph([
@@ -43,7 +43,7 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        ref("def_conjugacy_class_all_global_maps"), " の各元は、有限集合 ",
+        ref("def_conjugacy_class_all_self_maps"), " の各元は、有限集合 ",
         math(String.raw`X`), " の各元に対して像を一つ選ぶことで一意に定まる。各入力について ",
         math(String.raw`|X|`), " 通りの選択があり、入力は ", math(String.raw`|X|`),
         " 個なので、有限集合間の写像の個数より主張を得る。",
@@ -84,7 +84,7 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        math(String.raw`F,G\in\operatorname{End}(X)`), "（", ref("def_conjugacy_class_all_global_maps"),
+        math(String.raw`F,G\in\operatorname{End}(X)`), "（", ref("def_conjugacy_class_all_self_maps"),
         "）に対し、",
       ]),
       displayMath(String.raw`F\approx_X G\quad:\Longleftrightarrow\quad
@@ -271,7 +271,7 @@ F\circ h^{-1}&=\mathrm{id}\circ(F\circ h^{-1})\quad(\because\ \text{恒等写像
         math(String.raw`|\mathcal C(X)|=|\mathcal K(\operatorname{End}(X))|`), " である。",
       ]),
       paragraph([
-        "有限決定。", ref("def_conjugacy_class_all_global_maps"), " により ",
+        "有限決定。", ref("def_conjugacy_class_all_self_maps"), " により ",
         math(String.raw`\operatorname{End}(X)`), " は ",
         math(String.raw`\bigl(|X|\bigr)^{|X|}`),
         " 個の写像表として列挙でき、各 ",

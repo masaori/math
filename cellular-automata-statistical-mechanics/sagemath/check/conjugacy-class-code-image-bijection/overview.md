@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_conjugacy_class_code_image_bijection`
 
-- 併せて検証するラベル: `def_conjugacy_class_all_global_maps`、`def_conjugacy_class_relation`、`claim_conjugacy_class_relation_is_equivalence`、`def_conjugacy_class_quotient`、`def_conjugacy_class_code_image`、`claim_conjugacy_class_count_finite_decidability`
+- 併せて検証するラベル: `def_conjugacy_class_all_self_maps`、`def_conjugacy_class_relation`、`claim_conjugacy_class_relation_is_equivalence`、`def_conjugacy_class_quotient`、`def_conjugacy_class_code_image`、`claim_conjugacy_class_count_finite_decidability`
 - 元数 1・2・4 の配位集合、すなわちセル数 0・1・2 の固定舞台上の全自己写像 261 個を検査する。
 - 全写像表、有限置換、再帰的前像木符号をそれぞれ有限列挙し、浮動小数点を使わない。
 

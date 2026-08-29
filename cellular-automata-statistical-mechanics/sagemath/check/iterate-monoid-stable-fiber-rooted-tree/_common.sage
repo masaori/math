@@ -18,7 +18,7 @@ def rooted_tree_data(table):
 
 
 def apply_table_power(table, y, exponent):
-    """def_global_map_iterate に従って table^exponent(y) を一段ずつ計算する。"""
+    """def_finite_self_map_iterate に従って table^exponent(y) を一段ずつ計算する。"""
     value = y
     for _ in range(exponent):
         value = table[value]

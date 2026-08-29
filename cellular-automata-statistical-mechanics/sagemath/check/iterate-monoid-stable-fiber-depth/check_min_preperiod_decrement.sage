@@ -24,7 +24,7 @@ for stage_size, rule, table in exhaustive_instances():
         if m == 0:
             zero_cases += 1
             continue
-        # def_global_map_iterate: F^k(F(y)) = F^{k+1}(y) を窓の範囲で確認
+        # def_finite_self_map_iterate: F^k(F(y)) = F^{k+1}(y) を窓の範囲で確認
         orb_y = orbit(F, y, 2 * M + p + r + 2)
         orb_fy = orbit(F, fy, 2 * M + p + r + 1)
         for k in range(2 * M + p + r + 1):

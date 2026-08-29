@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_one_step_dependency_finite_decidability`
 
-- 併せて検証: `claim_global_flip_characterization`、`def_time_interval`、`claim_event_set_cardinality`、`claim_time_strictly_increases`
+- 併せて検証: `claim_global_flip_characterization`、`def_finite_index_interval`、`claim_event_set_cardinality`、`claim_time_strictly_increases`
 - 検証範囲: 大域写像の一点反転による特徴づけ、時間区間とイベント集合の個数、一段依存関係の有限性と所属条件、依存台走査の比較回数上界、一段依存での時刻増加
 - 全数範囲: 大域写像と一段依存は $|V|=0,1,2,3$ の全ての $N(v)\subseteq V$ と全局所真理値表。依存台走査は $|N(v)|=0,1,2,3$ の全局所真理値表。時間・個数の検算範囲は各ファイルに記載
 

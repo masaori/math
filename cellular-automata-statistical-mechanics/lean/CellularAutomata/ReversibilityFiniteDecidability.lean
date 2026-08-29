@@ -19,15 +19,15 @@
   有限集合から元を 1 個除いた集合の元の個数（`Finset.card_erase_of_mem`）。
 
 対応表（人手証明 → この file）
-  def_global_map_injective_surjective              `image`, `mem_image`, `Injective`, `Surjective`
-  claim_global_map_injective_iff_surjective        `card_image_le_card_univ`, `image_eq_univ_iff_card`,
+  def_finite_self_map_injective_surjective              `image`, `mem_image`, `Injective`, `Surjective`
+  claim_finite_self_map_injective_iff_surjective        `card_image_le_card_univ`, `image_eq_univ_iff_card`,
                                                    `card_image_of_injective_eq`, `image_eq_image_erase`,
                                                    `injective_iff_surjective`
-  claim_global_map_injective_iff_all_periodic      `minPreperiod_eq_zero_of_injective`,
+  claim_finite_self_map_injective_iff_all_periodic      `minPreperiod_eq_zero_of_injective`,
                                                    `surjective_of_forall_minPreperiod_zero`,
                                                    `injective_iff_forall_minPreperiod_zero`,
                                                    `injective_iff_forall_isPeriodicPoint`
-  claim_global_map_injectivity_finite_decidability `injective_iff_forall_pairs`, `card_config_pairs`,
+  claim_finite_self_map_injectivity_finite_decidability `injective_iff_forall_pairs`, `card_config_pairs`,
                                                    `instance : Decidable (Injective N f)`,
                                                    `injective_iff_forall_config_minPreperiod_zero`,
                                                    `card_univ_config`（前章）
@@ -48,17 +48,17 @@ variable {V : Type} [Fintype V] [DecidableEq V]
 variable (N : V → Finset V)
 variable (f : (v : V) → (↥(N v) → State) → State)
 
-/-- 像 Im(F) := { F y : y ∈ A^V }（`def_global_map_injective_surjective`）。 -/
+/-- 像 Im(F) := { F y : y ∈ A^V }（`def_finite_self_map_injective_surjective`）。 -/
 def image : Finset (V → State) := Finset.univ.image (globalMap N f)
 
 theorem mem_image (z : V → State) : z ∈ image N f ↔ ∃ y : V → State, globalMap N f y = z := by
   simp [image]
 
 omit [Fintype V] [DecidableEq V] in
-/-- F が単射（`def_global_map_injective_surjective`）: ∀ y y', F y = F y' → y = y'。 -/
+/-- F が単射（`def_finite_self_map_injective_surjective`）: ∀ y y', F y = F y' → y = y'。 -/
 def Injective : Prop := ∀ y y' : V → State, globalMap N f y = globalMap N f y' → y = y'
 
-/-- F が全射（`def_global_map_injective_surjective`）: Im(F) = A^V。 -/
+/-- F が全射（`def_finite_self_map_injective_surjective`）: Im(F) = A^V。 -/
 def Surjective : Prop := image N f = Finset.univ
 
 /-- 前段: |Im(F)| ≤ |A^V|（Im(F) ⊆ A^V）。 -/
@@ -96,7 +96,7 @@ theorem image_eq_image_erase {y₀ y₁ : V → State} (hne : y₀ ≠ y₁)
   · -- ⊇ は B ⊆ A^V から。
     exact Finset.image_subset_image (Finset.subset_univ _)
 
-/-- 有限舞台上では単射性と全射性は同値（`claim_global_map_injective_iff_surjective`）。 -/
+/-- 有限舞台上では単射性と全射性は同値（`claim_finite_self_map_injective_iff_surjective`）。 -/
 theorem injective_iff_surjective : Injective N f ↔ Surjective N f := by
   constructor
   · -- (⇒) |Im(F)| = |A^V| から前段により Im(F) = A^V。
@@ -129,7 +129,7 @@ theorem injective_iff_surjective : Injective N f ↔ Surjective N f := by
     -- |A^V| ≤ |A^V| - 1 < |A^V|、ℕ の大小関係の非反射性に矛盾。
     omega
 
-/-- （⇒）F が単射なら全ての配位で μ(y) = 0（`claim_global_map_injective_iff_all_periodic`）。 -/
+/-- （⇒）F が単射なら全ての配位で μ(y) = 0（`claim_finite_self_map_injective_iff_all_periodic`）。 -/
 theorem minPreperiod_eq_zero_of_injective (hinj : Injective N f) (y : V → State) :
     minPreperiod N f y = 0 := by
   by_contra hne
@@ -154,7 +154,7 @@ theorem minPreperiod_eq_zero_of_injective (hinj : Injective N f) (y : V → Stat
   have hle : minPreperiod N f y ≤ m := minPreperiod_le N f y ⟨_, hpair⟩
   omega
 
-/-- （⇐）全ての配位で μ(y) = 0 なら F は全射（`claim_global_map_injective_iff_all_periodic`）。 -/
+/-- （⇐）全ての配位で μ(y) = 0 なら F は全射（`claim_finite_self_map_injective_iff_all_periodic`）。 -/
 theorem surjective_of_forall_minPreperiod_zero (h : ∀ y : V → State, minPreperiod N f y = 0) :
     Surjective N f := by
   unfold Surjective
@@ -169,7 +169,7 @@ theorem surjective_of_forall_minPreperiod_zero (h : ∀ y : V → State, minPrep
   -- z := F^k y が y = F z を満たす。
   exact (mem_image N f y).2 ⟨iterate N f k y, hFn⟩
 
-/-- 単射性は全ての配位の最小前周期が 0 であることと同値（`claim_global_map_injective_iff_all_periodic`）。 -/
+/-- 単射性は全ての配位の最小前周期が 0 であることと同値（`claim_finite_self_map_injective_iff_all_periodic`）。 -/
 theorem injective_iff_forall_minPreperiod_zero :
     Injective N f ↔ ∀ y : V → State, minPreperiod N f y = 0 := by
   constructor
@@ -185,7 +185,7 @@ theorem injective_iff_forall_isPeriodicPoint :
   · intro h y; exact (isPeriodicPoint_iff_minPreperiod_zero N f y).2 (h y)
   · intro h y; exact (isPeriodicPoint_iff_minPreperiod_zero N f y).1 (h y)
 
-/-! ## 有限決定（`claim_global_map_injectivity_finite_decidability`） -/
+/-! ## 有限決定（`claim_finite_self_map_injectivity_finite_decidability`） -/
 
 /-- （像の走査）単射性は A^V × A^V 上の全称文であり、走査する対の有限集合で言い換えられる。 -/
 theorem injective_iff_forall_pairs :

@@ -1,9 +1,9 @@
 # 対象ラベル: claim_iterate_monoid_zero_depth_maps_to_zero_depth
 # μ(y) = 0 の各配位で、人手証明の各段を分けて確かめる。
 #   p := π(y) >= 1 かつ (0,p) ∈ P(y)                    (def_min_period)
-#   各 n の窓で F^{n+p}(F(y)) = F^{n+p+1}(y)             (def_global_map_iterate)
+#   各 n の窓で F^{n+p}(F(y)) = F^{n+p+1}(y)             (def_finite_self_map_iterate)
 #             = F^{n+1}(y)                               ((0,p) ∈ P(y) を n+1 で適用)
-#             = F^n(F(y))                                (def_global_map_iterate)
+#             = F^n(F(y))                                (def_finite_self_map_iterate)
 #   よって (0,p) ∈ P(F(y))、最小性から μ(F(y)) = 0
 # 帰属: 有限集合の写像の等号と非負整数の大小比較だけを使う。R/C 脱出なし。
 

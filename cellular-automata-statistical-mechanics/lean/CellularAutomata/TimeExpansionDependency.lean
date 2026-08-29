@@ -11,7 +11,7 @@
                                                 `globalMap_eq_extendRule`（値写像が冗長拡大に等しいこと）
   claim_global_flip_characterization             `globalFlip_iff_mem_supp`
                                                 （前二章の同値と依存台不変性の合成。人手証明と同じ順）
-  時間区間 [0,τ]_ℕ（`def_time_interval`）        `timeInterval`（{t ∈ ℕ | t ≤ τ}。`mem_timeInterval`）と
+  時間区間 [0,τ]_ℕ（`def_finite_index_interval`）        `timeInterval`（{t ∈ ℕ | t ≤ τ}。`mem_timeInterval`）と
                                                 `card_timeInterval`（|[0,τ]_ℕ| = τ+1）
   イベント集合 E_τ（`def_event_set`）            `eventSet`（[0,τ]_ℕ × V の直積）
   claim_event_set_cardinality                    `card_eventSet`（|E_τ| = (τ+1)·|V|。直積の積の法則）
@@ -32,7 +32,7 @@ claim_one_step_dependency_finite_decidability について形式化した範囲:
   形式化していない。
 
 住処: 有限型・自然数のみ。ℝ / ℂ は現れない（人手証明と同じ）。時間に使う ℕ の構造は
-大小比較と後者（+1）だけである（人手証明 `def_time_interval` と同じ）。
+大小比較と後者（+1）だけである（人手証明 `def_finite_index_interval` と同じ）。
 
 抽象度は人手証明に固定する。使う mathlib の補題は、人手証明が根拠に挙げる初等的事実
 （有限集合の直積の個数の積、範囲 {0,…,τ} の個数、filter の所属）に限る。
@@ -89,11 +89,11 @@ theorem globalFlip_iff_mem_supp (u v : V) :
   -- `claim_support_invariance` を S = N(v)、T = V に適用すると supp(f_v∘ρ) = supp(f_v) の像。
   rw [supp_extendRule (N v) (f v)]
 
-/-- 時間区間 [0,τ]_ℕ = {t ∈ ℕ | t ≤ τ}（`def_time_interval`）。 -/
+/-- 時間区間 [0,τ]_ℕ = {t ∈ ℕ | t ≤ τ}（`def_finite_index_interval`）。 -/
 def timeInterval (τ : ℕ) : Finset ℕ :=
   Finset.range (τ + 1)
 
-/-- [0,τ]_ℕ の所属は ℕ の大小比較 t ≤ τ である（`def_time_interval` の所属条件）。 -/
+/-- [0,τ]_ℕ の所属は ℕ の大小比較 t ≤ τ である（`def_finite_index_interval` の所属条件）。 -/
 theorem mem_timeInterval (τ t : ℕ) : t ∈ timeInterval τ ↔ t ≤ τ := by
   simp [timeInterval, Nat.lt_succ_iff]
 

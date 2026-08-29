@@ -23,7 +23,7 @@ export default defineBlocks([
   },
 
   {
-    id: "time_expansion_dependency_definition_finite_stage",
+    id: "finite_layered_relation_definition_finite_stage",
     kind: "definition",
     title: { text: "有限舞台" },
     labels: ["def_finite_stage"],
@@ -225,10 +225,10 @@ export default defineBlocks([
   },
 
   {
-    id: "time_expansion_dependency_definition_time_interval",
+    id: "finite_layered_relation_definition_index_interval",
     kind: "definition",
     title: { text: "自然数の有限初期区間" },
-    labels: ["def_time_interval"],
+    labels: ["def_finite_index_interval"],
     habitat: "N",
     statement: [
       paragraph([
@@ -278,7 +278,7 @@ export default defineBlocks([
         "と呼ぶ。このとき自然数の有限初期区間を時間の添字集合として読む（",
         math(String.raw`[0,\tau]_{\mathbb{N}}`),
         " は ",
-        ref("def_time_interval"),
+        ref("def_finite_index_interval"),
         "）。第 1 成分 ",
         math(String.raw`t\in\mathbb{N}`),
         " を時刻、第 2 成分 ",
@@ -314,14 +314,14 @@ export default defineBlocks([
 |E_\tau|
 &=|[0,\tau]_{\mathbb{N}}\times V|\qquad(\because\ \blkref{def_event_set})\\
 &=|[0,\tau]_{\mathbb{N}}|\cdot|V|\qquad(\because\ \text{有限集合の直積の元の個数は個数の積（積の法則）})\\
-&=(\tau+1)\cdot|V|\qquad(\because\ [0,\tau]_{\mathbb{N}}=\{0,1,\dots,\tau\}\ \text{の元は}\ \tau+1\ \text{個。}\blkref{def_time_interval})
+&=(\tau+1)\cdot|V|\qquad(\because\ [0,\tau]_{\mathbb{N}}=\{0,1,\dots,\tau\}\ \text{の元は}\ \tau+1\ \text{個。}\blkref{def_finite_index_interval})
 \end{aligned}`),
       paragraph([
         math(String.raw`[0,\tau]_{\mathbb{N}}`),
         " と ",
         math(String.raw`V`),
         " はいずれも有限集合（",
-        ref("def_time_interval"),
+        ref("def_finite_index_interval"),
         " と ",
         ref("def_finite_stage"),
         "）なので、その直積 ",

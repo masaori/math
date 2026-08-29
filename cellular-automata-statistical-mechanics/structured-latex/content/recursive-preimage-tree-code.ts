@@ -159,7 +159,7 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`O_F(q):=\{\,F^n(q)\mid n\in\mathbb N\,\}\subseteq X`),
       paragraph([
-        "と定め（", ref("def_global_map_iterate"), "）、周期軌道の集合を",
+        "と定め（", ref("def_finite_self_map_iterate"), "）、周期軌道の集合を",
       ]),
       displayMath(String.raw`\mathcal O_F:=\{\,O_F(q)\mid q\in\mathrm{Per}(F)\,\}`),
       paragraph(["と定める。"]),
@@ -179,7 +179,7 @@ export default defineBlocks([
       displayMath(String.raw`w_F(q):=\bigl(c_F(F^n(q))\bigr)_{n=0}^{\pi(q)-1}`),
       paragraph([
         "と定める（", ref("def_recursive_preimage_tree_code"), "、",
-        ref("def_global_map_iterate"), "）。",
+        ref("def_finite_self_map_iterate"), "）。",
       ]),
     ],
   },
@@ -332,7 +332,7 @@ c_F(y)
         " を経路に沿って繰り返して ", math(String.raw`\mu(z)=\mu(y)+1+a=\mu(y)+1+b`),
         " となるので ", math(String.raw`a=b`), " である。決定的な写像の同じ回数の反復値は一意なので、",
         "二つの子は等しくなり矛盾する。",
-        "また有限集合上の軌道の最終周期性（", ref("claim_eventual_periodicity"),
+        "また有限集合上の軌道の最終周期性（", ref("claim_finite_self_map_repeating_tail"),
         "）により、全ての元はただ一つの周期軌道へ到達する。したがって全周期成分で得た対応は互いに交わらず、",
         "合わせると全単射 ", math(String.raw`h:X\to Y`), " になる。",
       ]),

@@ -1,4 +1,4 @@
-# 対象ラベル: claim_global_map_injectivity_finite_decidability
+# 対象ラベル: claim_finite_self_map_injectivity_finite_decidability
 # 全ての対 (y, y') を走査して F y = F y' かつ y ≠ y' の対が無いことと、単射性の一致を検査する。
 # 走査する対の個数が |A^V|^2 であることも数える。
 # 帰属: 有限集合と非負整数の等号だけを使う。R/C 脱出なし。

@@ -2,7 +2,7 @@
 
 ## 対象
 
-**対象ラベル**: `claim_iterate_monoid_global_map_bijective_on_stable_image`
+**対象ラベル**: `claim_iterate_monoid_generator_bijective_on_stable_image`
 
 - 併せて検証するラベル: `def_iterate_monoid_stable_image`、`claim_iterate_monoid_cycle_idempotent_retracts_stable_image`、`claim_iterate_monoid_stable_power_image_equals_stable_image`、`def_iterate_monoid_stable_image_inverse_candidate`、`claim_iterate_monoid_stable_image_finite_decidability`
 - 検証範囲: 安定像 $Q_F=E_F(A^V)$、$E_F$ が $Q_F$ 上で恒等になること、$\mu_F\le n$ の全反復写像の像が $Q_F$ に一致すること、$F$ と $S_F=F^{e_F+\lambda_F-1}$ が $Q_F$ を保ち制限が互いに逆写像であること、有限真理値表からの $Q_F$ と制限写像の表の走査

@@ -1,4 +1,4 @@
-# 対象ラベル: theorem_minimal_cell_count_for_composition_intersection_nondistributivity
+# 対象ラベル: theorem_minimal_carrier_size_for_composition_intersection_nondistributivity
 # 舞台元数 |V| = 0, 1, 2 の全ての近傍割り当ての三つ組を走査し、
 # 左右それぞれの非分配反例が現れる最小の舞台元数がどちらも 2 であることを検査する。
 # 反例の非存在（|V| <= 1）と存在（|V| = 2）を別々に数え、最小元数を集合の最小として取る。

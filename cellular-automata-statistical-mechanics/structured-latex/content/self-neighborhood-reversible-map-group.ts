@@ -288,7 +288,7 @@ F_{\varnothing}&=\mathrm{id}_{A^V}\qquad(\because\ \blkref{def_finite_self_neigh
         " なので ", math(String.raw`F_Sx\neq x`), " であり固定点はない。一方 ",
         ref("claim_self_neighborhood_reversible_maps_finite_commutative_group"), " により ",
         math(String.raw`F_S^2=\mathrm{id}_{A^V}`), " なので、全ての周期軌道の元数は 2 である。",
-        ref("claim_reversible_orbits_partition_configurations"), " により周期軌道が ",
+        ref("claim_bijective_self_map_orbits_partition_carrier"), " により周期軌道が ",
         math(String.raw`2^{|V|}`), " 個の配位を分割するので、軌道の個数は ",
         math(String.raw`2^{|V|}/2=2^{|V|-1}`), " である。",
       ]),

@@ -426,7 +426,7 @@ export default defineBlocks([
       paragraph([
         math(String.raw`t\in[0,\tau]_{\mathbb{N}}`),
         "（",
-        ref("def_time_interval"),
+        ref("def_finite_index_interval"),
         "）に対し、集合",
       ]),
       displayMath(

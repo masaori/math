@@ -38,7 +38,7 @@ theorem selfTranspose_iff_symmetricMembership (N : NeighborhoodAssignment V) :
       w ∈ transpose N v ↔ v ∈ N w := mem_transpose N w v
       _ ↔ w ∈ N v := (h v w).symm
 
-/-- `def_unordered_cell_pairs`。`s(v,w)` は本文の `{v,w}` を符号化する。 -/
+/-- `def_unordered_carrier_pairs`。`s(v,w)` は本文の `{v,w}` を符号化する。 -/
 abbrev UnorderedCellPair (V : Type) := Sym2 V
 
 /-- `def_self_transpose_pair_encoding` の所属述語。
@@ -97,7 +97,7 @@ noncomputable def pairEncodingEquiv : SelfTransposeAssignment V ≃ Finset (Sym2
 noncomputable instance : Fintype (SelfTransposeAssignment V) :=
   Fintype.ofEquiv (Finset (Sym2 V)) pairEncodingEquiv.symm
 
-/-- `claim_unordered_cell_pair_count` の第一の等号。
+/-- `claim_unordered_carrier_pair_count` の第一の等号。
     `Sym2 V` は一元部分集合と二元部分集合の非交和なので `n + choose n 2` 個である。 -/
 theorem card_unorderedCellPair_choose :
     Fintype.card (UnorderedCellPair V) =
@@ -105,7 +105,7 @@ theorem card_unorderedCellPair_choose :
   rw [Sym2.card]
   simp [Nat.choose_succ_succ']
 
-/-- `claim_unordered_cell_pair_count` の最終表示。 -/
+/-- `claim_unordered_carrier_pair_count` の最終表示。 -/
 theorem card_unorderedCellPair :
     Fintype.card (UnorderedCellPair V) =
       Fintype.card V * (Fintype.card V + 1) / 2 := by

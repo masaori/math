@@ -1,4 +1,4 @@
-# 対象ラベル: claim_global_map_injectivity_finite_decidability
+# 対象ラベル: claim_finite_self_map_injectivity_finite_decidability
 # 全ての配位 y について最小前周期を「最小前周期と最小周期」の章の有限走査で求め、
 # 全て 0 であることと単射性の一致を検査する。走査する配位の個数が |A^V| であることも数える。
 # 帰属: 有限集合と非負整数の等号・大小比較だけを使う。R/C 脱出なし。

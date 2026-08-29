@@ -1,4 +1,4 @@
-# 対象ラベル: claim_iterate_monoid_cycle_idempotent_commutes_with_global_map
+# 対象ラベル: claim_iterate_monoid_cycle_idempotent_commutes_with_generator
 # すべての y について E_F(F(y)) = F^{e_F+1}(y) = F(E_F(y)) を、人手証明の等号ごとに確かめる。
 # 帰属: 有限集合の写像の値の等号だけを使う。R/C 脱出なし。
 

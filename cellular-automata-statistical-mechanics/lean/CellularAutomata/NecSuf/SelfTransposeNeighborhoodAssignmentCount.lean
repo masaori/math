@@ -111,13 +111,13 @@ def setPairEncodingEquiv {V : Type} : SetSelfTranspose V ≃ Set (Sym2 V) where
 非順序対の個数と自己転置な割り当ての個数には `Fintype V` だけが要り、
 `DecidableEq V` は要らない。 -/
 
-/-- `claim_unordered_cell_pair_count` の第一の等号の必要十分版。 -/
+/-- `claim_unordered_carrier_pair_count` の第一の等号の必要十分版。 -/
 theorem card_sym2_choose {V : Type} [Fintype V] :
     Fintype.card (Sym2 V) = Fintype.card V + (Fintype.card V).choose 2 := by
   rw [Sym2.card]
   simp [Nat.choose_succ_succ']
 
-/-- `claim_unordered_cell_pair_count` の最終表示の必要十分版。 -/
+/-- `claim_unordered_carrier_pair_count` の最終表示の必要十分版。 -/
 theorem card_sym2 {V : Type} [Fintype V] :
     Fintype.card (Sym2 V) = Fintype.card V * (Fintype.card V + 1) / 2 := by
   rw [Sym2.card, Nat.choose_two_right]

@@ -32,7 +32,7 @@ export default defineBlocks([
         "と定める（", ref("def_finite_ca"), " と ", ref("def_global_map"), "）。",
         math(String.raw`\mathcal M(V,N)`), " の各元は ", math(String.raw`A^{V}`),
         " から ", math(String.raw`A^{V}`), " への写像なので、",
-        ref("def_conjugacy_class_all_global_maps"), " により ",
+        ref("def_conjugacy_class_all_self_maps"), " により ",
         math(String.raw`\mathcal M(V,N)\subseteq\mathcal M(V)`), " である。",
       ]),
     ],
@@ -97,8 +97,8 @@ f_v(z)
       ]),
       displayMath(String.raw`\mathcal M^{\times}(V,N):=\{\,F\in\mathcal M(V,N)\ :\ F\ \text{は単射}\,\}`),
       paragraph([
-        "と定める（単射性は ", ref("def_global_map_injective_surjective"), "）。",
-        ref("def_stage_global_maps"), " の包含と ", ref("def_reversible_global_maps"),
+        "と定める（単射性は ", ref("def_finite_self_map_injective_surjective"), "）。",
+        ref("def_stage_global_maps"), " の包含と ", ref("def_bijective_self_maps"),
         " により ", math(String.raw`\mathcal M^{\times}(V,N)\subseteq\mathcal M^{\times}(V)`),
         " である。",
       ]),
@@ -130,7 +130,7 @@ f_v(z)
     statement: [
       paragraph([
         math(String.raw`\mathrm{CT}(V,N)\subseteq\operatorname{Part}(2^{|V|})`), "（",
-        ref("def_configuration_count_partitions"),
+        ref("def_carrier_cardinality_partitions"),
         "）であり、この集合は有限個の局所規則の族の走査で決定できる。",
       ]),
     ],
@@ -149,9 +149,9 @@ f_v(z)
         " 個の有限個であり、その各々について大域写像 ", math(String.raw`F`), " が ",
         ref("def_global_map"), " の右辺の有限回の評価で定まる。",
         math(String.raw`F`), " の単射性は ",
-        ref("claim_global_map_injectivity_finite_decidability"),
+        ref("claim_finite_self_map_injectivity_finite_decidability"),
         " により有限検査で決まり、単射な ", math(String.raw`F`), " の巡回型は ",
-        ref("claim_reversible_orbits_partition_configurations"),
+        ref("claim_bijective_self_map_orbits_partition_carrier"),
         " により有限集合 ", math(String.raw`A^{V}`),
         " を周期軌道へ分けて各軌道の元数を数えれば得られる。",
         "得られた有限多重集合を重複を除いて集めたものが ",
@@ -289,7 +289,7 @@ f_v(z)
       ]),
       displayMath(String.raw`\begin{aligned}
 (F^{2}x)(v)
-&=(F(F\,x))(v)\qquad(\because\ \blkref{def_global_map_iterate})\\
+&=(F(F\,x))(v)\qquad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=g_v\bigl((F\,x)(v)\bigr)\qquad(\because\ \blkref{claim_self_neighborhood_injective_iff_pointwise_bijective})\\
 &=g_v\bigl(g_v(x(v))\bigr)\qquad(\because\ \blkref{claim_self_neighborhood_injective_iff_pointwise_bijective})\\
 &=x(v)\qquad(\because\ g_v\circ g_v=\mathrm{id}_{A})
@@ -334,7 +334,7 @@ f_v(z)
         " である。このとき各 ", math(String.raw`x`), " の周期軌道は ",
         math(String.raw`\{x\}`), " であり（", ref("def_recursive_preimage_tree_code_periodic_orbits"),
         " と ", ref("def_min_period"), "）、その元数は ", math(String.raw`1`),
-        " である。", ref("claim_reversible_orbits_partition_configurations"),
+        " である。", ref("claim_bijective_self_map_orbits_partition_carrier"),
         " により周期軌道は ", math(String.raw`A^{V_{\bullet}}`), " を分割するので軌道は ",
         math(String.raw`8`), " 個あり、", ref("def_reversible_cycle_type"), " により ",
         math(String.raw`\mathrm{ct}(F)=\{\!\{1,1,1,1,1,1,1,1\}\!\}`), " である。",
@@ -349,7 +349,7 @@ f_v(z)
         " により最小周期は ", math(String.raw`\pi(x)=2`), " である。",
         ref("claim_periodic_orbit_card_eq_min_period"),
         " により各周期軌道の元数は ", math(String.raw`2`), " であり、",
-        ref("claim_reversible_orbits_partition_configurations"),
+        ref("claim_bijective_self_map_orbits_partition_carrier"),
         " により軌道の元数の総和は ", math(String.raw`8`), " なので軌道は ",
         math(String.raw`4`), " 個ある。よって ",
         math(String.raw`\mathrm{ct}(F)=\{\!\{2,2,2,2\}\!\}`), " である。",
@@ -388,7 +388,7 @@ f_v(z)
       paragraph([
         math(String.raw`\{\!\{8\}\!\}`), " は正の自然数からなる有限多重集合で、その重複度つき和は ",
         math(String.raw`8=2^{3}=2^{|V_{\bullet}|}`), " なので ",
-        ref("def_configuration_count_partitions"), " により ",
+        ref("def_carrier_cardinality_partitions"), " により ",
         math(String.raw`\operatorname{Part}(2^{|V_{\bullet}|})`), " の元である。",
         "一方 ", ref("claim_self_neighborhood_realized_cycle_types"), " により ",
         math(String.raw`\mathrm{CT}(V_{\bullet},N_{\bullet})`),
@@ -406,7 +406,7 @@ f_v(z)
         ref("claim_reversible_cycle_type_realizes_every_partition"), " は近傍 ",
         math(String.raw`N(v)=V`), " の舞台の大域写像全体 ",
         math(String.raw`\mathcal M^{\times}(V)`),
-        " について述べられている（", ref("def_conjugacy_class_all_global_maps"),
+        " について述べられている（", ref("def_conjugacy_class_all_self_maps"),
         "）。いま示したのは、同じ配位集合の上でも近傍を ",
         math(String.raw`N_{\bullet}(v)=\{v\}`),
         " に制限すると実現される巡回型が減ることである。",

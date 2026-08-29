@@ -35,9 +35,9 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`\begin{aligned}
 F^{n+p}(F(y))
-&=F^{n+p+1}(y)\quad(\because\ \blkref{def_global_map_iterate})\\
+&=F^{n+p+1}(y)\quad(\because\ \blkref{def_finite_self_map_iterate})\\
 &=F^{n+1}(y)\quad(\because\ (0,p)\in P(y))\\
-&=F^n(F(y))\quad(\because\ \blkref{def_global_map_iterate}).
+&=F^n(F(y))\quad(\because\ \blkref{def_finite_self_map_iterate}).
 \end{aligned}`),
       paragraph([
         "よって ", math(String.raw`(0,p)\in P(F(y))`), " である。",

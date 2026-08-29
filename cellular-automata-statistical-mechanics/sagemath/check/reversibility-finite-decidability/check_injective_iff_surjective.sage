@@ -1,4 +1,4 @@
-# 対象ラベル: claim_global_map_injective_iff_surjective
+# 対象ラベル: claim_finite_self_map_injective_iff_surjective
 # 有限集合上の自己写像について、単射性と全射性が同値であることを検査する。
 # 併せて、証明が使う数え上げの各段（|Im F| ≤ |A^V|、|Im F| = |A^V| ⟺ Im F = A^V、
 # 単射なら |Im F| = |A^V|、非単射なら |Im F| ≤ |A^V| - 1）を別々に検査する。

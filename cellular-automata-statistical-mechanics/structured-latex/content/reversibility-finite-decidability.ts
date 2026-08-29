@@ -27,14 +27,14 @@ export default defineBlocks([
     id: "reversibility_finite_decidability_definition_injective_surjective",
     kind: "definition",
     title: { text: "自己写像の単射性・全射性・像" },
-    labels: ["def_global_map_injective_surjective"],
+    labels: ["def_finite_self_map_injective_surjective"],
     habitat: "finite",
     statement: [
       paragraph([
         "自己写像 ",
         math(String.raw`F:X\to X`),
         "（",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         " の直前で固定したもの）について、",
       ]),
       displayMath(
@@ -70,7 +70,7 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        ref("def_global_map_injective_surjective"), " より ",
+        ref("def_finite_self_map_injective_surjective"), " より ",
         math(String.raw`\mathrm{Im}(F)\subseteq X`), " である。",
         ref("def_finite_self_map"), " より ", math(String.raw`X`),
         " は有限集合なので、その部分集合 ", math(String.raw`\mathrm{Im}(F)`), " も有限集合である。",
@@ -82,7 +82,7 @@ export default defineBlocks([
     id: "reversibility_finite_decidability_claim_injective_iff_surjective",
     kind: "claim",
     title: { text: "有限集合上では単射性と全射性は同値である" },
-    labels: ["claim_global_map_injective_iff_surjective"],
+    labels: ["claim_finite_self_map_injective_iff_surjective"],
     habitat: "N",
     statement: [
       paragraph([
@@ -125,7 +125,7 @@ export default defineBlocks([
         " から ",
         math(String.raw`\mathrm{Im}(F)`),
         " への全射であり（",
-        ref("def_global_map_injective_surjective"),
+        ref("def_finite_self_map_injective_surjective"),
         " の像の定義）、単射でもあるので、",
         math(String.raw`X`),
         " と ",
@@ -152,7 +152,7 @@ export default defineBlocks([
         " を満たす ",
         math(String.raw`y_{0},y_{1}\in X`),
         " が存在する（",
-        ref("def_global_map_injective_surjective"),
+        ref("def_finite_self_map_injective_surjective"),
         " の単射の定義の否定）。",
         math(String.raw`B:=X\setminus\{y_{1}\}`),
         " とおくと ",
@@ -203,7 +203,7 @@ export default defineBlocks([
     id: "reversibility_finite_decidability_claim_injective_iff_all_periodic",
     kind: "claim",
     title: { text: "単射性は全ての元の最小前周期が 0 であることと同値である" },
-    labels: ["claim_global_map_injective_iff_all_periodic"],
+    labels: ["claim_finite_self_map_injective_iff_all_periodic"],
     habitat: "N",
     statement: [
       paragraph([
@@ -258,7 +258,7 @@ export default defineBlocks([
         "（",
         math(String.raw`\mathbb{N}`),
         " の加法の結合性と可換性）。",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         " により ",
         math(String.raw`F^{(m+\pi(y))+1}\,y=F\,(F^{m+\pi(y)}\,y)`),
         "、",
@@ -268,7 +268,7 @@ export default defineBlocks([
         "。",
         math(String.raw`F`),
         " の単射性（",
-        ref("def_global_map_injective_surjective"),
+        ref("def_finite_self_map_injective_surjective"),
         "）により ",
         math(String.raw`F^{m+\pi(y)}\,y=F^{m}\,y`),
         "。",
@@ -317,7 +317,7 @@ export default defineBlocks([
         "、",
         math(String.raw`n=k+1`),
         "。",
-        ref("def_global_map_iterate"),
+        ref("def_finite_self_map_iterate"),
         " により ",
         math(String.raw`F^{k+1}\,y=F\,(F^{k}\,y)`),
         "。よって ",
@@ -329,7 +329,7 @@ export default defineBlocks([
         " を満たすので ",
         math(String.raw`y\in\mathrm{Im}(F)`),
         "（",
-        ref("def_global_map_injective_surjective"),
+        ref("def_finite_self_map_injective_surjective"),
         "）。",
         math(String.raw`y`),
         " は任意なので ",
@@ -341,7 +341,7 @@ export default defineBlocks([
         "、すなわち ",
         math(String.raw`F`),
         " は全射である。",
-        ref("claim_global_map_injective_iff_surjective"),
+        ref("claim_finite_self_map_injective_iff_surjective"),
         " により ",
         math(String.raw`F`),
         " は単射である。",
@@ -353,13 +353,13 @@ export default defineBlocks([
     id: "reversibility_finite_decidability_claim_finite_decidability",
     kind: "claim",
     title: { text: "単射性・全射性は有限個の等号検査で決定できる" },
-    labels: ["claim_global_map_injectivity_finite_decidability"],
+    labels: ["claim_finite_self_map_injectivity_finite_decidability"],
     habitat: "N",
     statement: [
       paragraph([
         math(String.raw`F`),
         " が単射であるか否か（",
-        ref("claim_global_map_injective_iff_surjective"),
+        ref("claim_finite_self_map_injective_iff_surjective"),
         " により、全射であるか否かと同じ）は、次のいずれの手続きでも有限回の元の等号検査で決定できる。",
       ]),
       paragraph([
@@ -398,7 +398,7 @@ export default defineBlocks([
     proof: [
       paragraph([
         "（像の走査）",
-        ref("def_global_map_injective_surjective"),
+        ref("def_finite_self_map_injective_surjective"),
         " の単射の定義は、",
         math(String.raw`X\times X`),
         " 上の全称文「",
@@ -413,7 +413,7 @@ export default defineBlocks([
       ]),
       paragraph([
         "（最小前周期の走査）",
-        ref("claim_global_map_injective_iff_all_periodic"),
+        ref("claim_finite_self_map_injective_iff_all_periodic"),
         " により、単射性は ",
         math(String.raw`X`),
         " 上の全称文「",

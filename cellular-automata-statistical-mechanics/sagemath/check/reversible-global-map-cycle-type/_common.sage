@@ -10,7 +10,7 @@ load(os.path.join(_dir, '..', 'conjugacy-class-code-image-bijection', '_common.s
 
 
 def injective_maps(size):
-    """def_reversible_global_maps: 元数 size の配位集合上の単射な自己写像の全表。"""
+    """def_bijective_self_maps: 元数 size の配位集合上の単射な自己写像の全表。"""
     return tuple(itertools.permutations(range(size)))
 
 
@@ -31,7 +31,7 @@ def cycle_type(table):
 
 
 def partitions_of(total):
-    """def_configuration_count_partitions: 正の自然数からなり和が total の有限多重集合の全体。
+    """def_carrier_cardinality_partitions: 正の自然数からなり和が total の有限多重集合の全体。
     昇順整列タプルで正準表現する。"""
     def extend(remaining, least):
         if remaining == 0:

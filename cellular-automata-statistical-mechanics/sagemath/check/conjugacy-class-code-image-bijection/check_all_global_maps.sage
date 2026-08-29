@@ -1,4 +1,4 @@
-# def_conjugacy_class_all_global_maps の検算。
+# def_conjugacy_class_all_self_maps の検算。
 # |V| = 0,1,2 について、A^V の元数 q=2^|V| と全写像表の個数 q^q を照合し、
 # 各写像表の各出力セルが全近傍 V 上の真理値表としてその写像を再現することを検査する。
 

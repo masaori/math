@@ -257,7 +257,7 @@ H
         " について ",
         math(String.raw`H=F^{i+k}`),
         " である。",
-        ref("claim_iterate_collision_gives_eventual_period"),
+        ref("claim_iterate_collision_gives_repeating_tail"),
         " を ",
         math(String.raw`d`),
         " 回繰り返すと",

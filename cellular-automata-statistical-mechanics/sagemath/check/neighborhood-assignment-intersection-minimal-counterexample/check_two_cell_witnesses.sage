@@ -1,5 +1,5 @@
-# 対象ラベル: claim_two_cell_composition_intersection_nondistributivity
-# def_two_cell_intersection_nondistributivity_witnesses の二元舞台 V_2 = {a, b} で、
+# 対象ラベル: claim_two_element_composition_intersection_nondistributivity
+# def_two_element_intersection_nondistributivity_witnesses の二元舞台 V_2 = {a, b} で、
 # 本文の証明の各式変形を段ごとに検査する。
 #   ((N⊓M)*L)(b)   = ∪_{u ∈ N(b)∩M(b)} L(u) = ∪_{u ∈ ∅} L(u) = ∅
 #   ((N*L)⊓(M*L))(b) = L(a) ∩ L(b) = {a}

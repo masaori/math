@@ -24,7 +24,7 @@ def transpose(cells, assignment):
 
 
 def unordered_pairs(cells):
-    """def_unordered_cell_pairs の U(V) = {{v,w} ⊆ V | v,w ∈ V}。
+    """def_unordered_carrier_pairs の U(V) = {{v,w} ⊆ V | v,w ∈ V}。
 
     定義の右辺そのものを v, w の全数走査で構成する（一元集合 {v,v} = {v} を含む）。
     """

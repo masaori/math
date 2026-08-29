@@ -31,7 +31,7 @@ export default defineBlocks([
     ],
   },
   {
-    id: "iterate_monoid_stable_fiber_rooted_tree_claim_multiple_propagation",
+    id: "iterate_monoid_stable_fiber_rooted_tree_claim_multiple_iteration",
     kind: "claim",
     title: { text: "最小正周期の倍数だけの遅れは衝突開始後に消える" },
     labels: ["claim_iterate_monoid_period_multiple_propagates"],
@@ -232,7 +232,7 @@ R_F(q)
         math(String.raw`F^{d\lambda_F}(y)=y`), " を示す。",
         math(String.raw`d=0`), " のとき、",
       ]),
-      displayMath(String.raw`F^{0\cdot\lambda_F}(y)=F^{0}(y)=y\quad(\because\ 0\cdot\lambda_F=0\ \text{と}\ \blkref{def_global_map_iterate})`),
+      displayMath(String.raw`F^{0\cdot\lambda_F}(y)=F^{0}(y)=y\quad(\because\ 0\cdot\lambda_F=0\ \text{と}\ \blkref{def_finite_self_map_iterate})`),
       paragraph([math(String.raw`F^{d\lambda_F}(y)=y`), " と仮定すると、"]),
       displayMath(String.raw`\begin{aligned}
 F^{(d+1)\lambda_F}(y)
@@ -345,12 +345,12 @@ q
 &=F^{0}(y)
   \quad(\because\ 0\cdot\lambda_F=0)\\
 &=y
-  \quad(\because\ \blkref{def_global_map_iterate}).
+  \quad(\because\ \blkref{def_finite_self_map_iterate}).
 \end{aligned}`),
       paragraph([
         "逆に ", math(String.raw`y=q`), " なら ",
         math(String.raw`F^{0}(y)=y=q`), "（", math(String.raw`\because`), " ",
-        ref("def_global_map_iterate"), "）なので ", math(String.raw`0`),
+        ref("def_finite_self_map_iterate"), "）なので ", math(String.raw`0`),
         " が集合に属し、最小元は ", math(String.raw`0`), " である。",
       ]),
     ],

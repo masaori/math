@@ -38,7 +38,7 @@ export default defineBlocks([
         "（",
         math(String.raw`[0,n]_{\mathbb{N}}`),
         " は ",
-        ref("def_time_interval"),
+        ref("def_finite_index_interval"),
         "）であって、すべての ",
         math(String.raw`i\in[0,n-1]_{\mathbb{N}}`),
         " について ",
