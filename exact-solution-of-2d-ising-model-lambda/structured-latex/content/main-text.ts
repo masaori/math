@@ -49161,7 +49161,7 @@ s_n:=\frac{1}{2}\left(d_n-\sum_{j=1}^{n-1}s_js_{n-j}\right)\quad(n\ge1)`),
                 ],
                 statement: [
                   paragraph([
-                    math(String.raw`D(x)=\sum_n d_nx^n\in\overline{\mathbb Q}[[x]]`),
+                    math(String.raw`D(x)=\sum_{n\in\mathbb N}d_nx^n\in\overline{\mathbb Q}[[x]]`),
                     " が ", math(String.raw`\mathrm{ac}_0(D)=1`),
                     " を満たすとする。", math(String.raw`D`),
                     " の平方根係数列 ", math(String.raw`s`), "（",
@@ -49173,14 +49173,16 @@ s_n:=\frac{1}{2}\left(d_n-\sum_{j=1}^{n-1}s_js_{n-j}\right)\quad(n\ge1)`),
                   ]),
                 ],
                 proof: [
+                  paragraph(["定数項について、"]),
+                  displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_0(S)
+&=s_0
+&&\bigl(\because\ \blkref{def_qbar_formal_power_series}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_sqrt_coefficient_recursion}\bigr)
+\end{aligned}`),
                   paragraph([
-                    "定数項は ",
-                    math(String.raw`\mathrm{ac}_0(S)=s_0=1`),
-                    "（", math(String.raw`\because`), " 定数項の定義 ",
-                    ref("def_qbar_formal_power_series"), " と ",
-                    math(String.raw`s_0:=1`), " ",
-                    ref("def_sqrt_coefficient_recursion"),
-                    "）。形式的冪級数は係数列そのものだから、",
+                    "である。形式的冪級数は係数列そのものだから、",
                     math(String.raw`S(x)S(x)=D(x)`),
                     " を示すには、すべての ", math(String.raw`n\in\mathbb N`),
                     " について Cauchy 積の ", math(String.raw`n`),
