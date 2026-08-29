@@ -26,6 +26,9 @@ jobs:
       - name: Install structured-text system dependencies
         working-directory: structured-latex
         run: pnpm install --frozen-lockfile
+      - name: Install finite-graph source dependencies
+        working-directory: finite-graph-ising-partition-polynomial-and-fisher-zeros/structured-latex
+        run: pnpm install --frozen-lockfile
       - name: Install project dependencies
         working-directory: countable-ising-on-hyperbolic-surfaces/structured-latex
         run: pnpm install --frozen-lockfile
@@ -35,4 +38,3 @@ jobs:
       - name: Verify SageMath linkage
         working-directory: countable-ising-on-hyperbolic-surfaces
         run: node sagemath/tools/verify-check-linkage.ts
-
