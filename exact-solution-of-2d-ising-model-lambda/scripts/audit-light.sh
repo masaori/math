@@ -40,9 +40,11 @@ add() { problems+=("$1"); log "NG: $1"; }
 
 # 1. tick のログから、通知されていない失敗を拾う（スクリプトが書いた行だけを見る）。
 since="$(date -v-3H '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -d '3 hours ago' '+%Y-%m-%d %H:%M:%S')"
-if [ -f "$LOG_DIR/auto-loop.log" ]; then
+TICK_STATUS_LOG="$LOG_DIR/auto-loop-status.log"
+[ -f "$TICK_STATUS_LOG" ] || TICK_STATUS_LOG="$LOG_DIR/auto-loop.log"
+if [ -f "$TICK_STATUS_LOG" ]; then
   recent="$(awk -v since="$since" '/^20[0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] === / && $0 >= since' \
-    "$LOG_DIR/auto-loop.log" 2>/dev/null || true)"
+    "$TICK_STATUS_LOG" 2>/dev/null || true)"
   cut_count="$(printf '%s\n' "$recent" | grep -c '=== tick 打ち切り' || true)"
   err_count="$(printf '%s\n' "$recent" | grep -c '=== tick 異常終了' || true)"
   [ "${cut_count:-0}" -gt 1 ] && add "直近 3 時間で tick が ${cut_count} 回上限で打ち切られた（セクションが大きすぎる）"
