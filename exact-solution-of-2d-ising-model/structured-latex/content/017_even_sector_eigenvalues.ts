@@ -1767,18 +1767,16 @@ E_K \check{Q}_\epsilon
         " の Step 1〜4 も符号を替えるだけで通る）",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)
-= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)
-= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-= \mathrm{tr}\!\left(\check{V}'\right)`,
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)
+&= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)
+   \quad (\because \text{Step 1--2 を }\gamma(\tilde\theta_\mu)\mapsto-\gamma(\tilde\theta_\mu)\text{ として適用}) \\
+&= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+   \quad (\because \cosh\text{ は偶関数}) \\
+&= \mathrm{tr}\!\left(\check{V}'\right)
+   \quad (\because \text{Step 1--2 の }\check{V}'\text{ のトレース表示})
+\end{aligned}`,
       ),
-      paragraph([
-        "最後から 2 番目の等号は ",
-        math(String.raw`\cosh`),
-        " が偶関数であること（",
-        ref("cosh_sinh_basic_properties"),
-        "）による。",
-      ]),
       paragraph([
         "Step 4（正値性）。",
         ref("def_gamma_theta_tilde_mu"),
@@ -1786,14 +1784,27 @@ E_K \check{Q}_\epsilon
         math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}_{>0}`),
         " であり、",
         ref("cosh_sinh_basic_properties"),
-        " より ",
-        math(String.raw`\cosh x \geq 1`),
-        "。よって各因子は ",
-        math(String.raw`2\cosh\left(\gamma(\tilde\theta_\mu)/2\right) \geq 2 > 0`),
-        " であり、",
-        math(String.raw`\mathrm{tr}\!\left(\check{V}'\right) > 0`),
-        "。",
+        " より各 ", math(String.raw`\mu`), " について次の鎖を得る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&\ge 2
+   \quad (\because \cosh x\ge1) \\
+&>0
+   \quad (\because 2>0)
+\end{aligned}`,
+      ),
+      paragraph(["したがって正数の有限積と Step 1--2 のトレース表示により"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(\check{V}'\right)
+&=\prod_{\mu=1}^{M}2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+   \quad (\because \text{Step 1--2}) \\
+&>0
+   \quad (\because \text{正数の有限積は正})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",

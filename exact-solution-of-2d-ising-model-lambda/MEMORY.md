@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 8 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 9 回目の tick 時点）
+
+**孤立した横断の平滑化が横断数を一つ減らし、偶奇を反転させることを四層で証明した。** 選択した横断の頂点を通る通過がその二つだけであることを孤立性として明示し、二通過の出辺を交換した平滑化後の通過族を定義した（`def_isolated_crossing_smoothing`）。選択対は二つの曲がる通過へ変わって横断でなくなり、他の添字対の横断判定は変わらないので、平滑化後の横断対集合は元の集合から $(k,l)$ 一元だけを除いたものになり、$c(\gamma)=c_{\mathrm{sm}}(\gamma;k,l)+1$（`claim_isolated_smoothing_crossing_number_update`）。SageMath `isolated-smoothing-crossing-parity` は有限局所データ 115,400 件を `ZZ` で検査し、Lean は `KacWard/IsolatedSmoothingCrossingParity.lean` と必要十分版を通した。必要十分版に残るのは全順序と実在する順序なし対を一つ除くことだけである。同じ頂点を三回以上通る場合には無条件の偶奇反転が成り立たない有限反例があるため、次は一般の場合を孤立横断へ分解する。
+
+前進前レビューでは前 tick の閉歩道の横断数と二倍等式（コミット `e8a15b68`）の四層を照合し、「何も言っていない主張」を含む修正対象は無かった。
+
+並列の式変形統一は、姉妹側の「V̌′ のトレース」で逆行列のトレースの一行三等号と正値性の散文中の不等式を、一行一等号・行末根拠つきへ開いた。次は同じ章の後続証明を見る。
+
+## ひとつ前の到達点（2026-08-30 の 8 回目の tick 時点）
 
 **閉歩道の通過と横断数を定義し、順序つき横断対の個数が横断数の二倍になることを四層で証明した。** 閉じた非後退辺列 $\gamma=(\vec e_1,\ldots,\vec e_m)$ の添字集合 $I_m$ に巡回後続写像 $\sigma$ を置き、添字 $k$ の通過を非後退接続 $\vec e_k\to\vec e_{\sigma(k)}$、通過の頂点を $\operatorname{tgt}(\vec e_k)$ と定めた（`def_closed_walk_passes`）。添字対の横断は頂点の一致と前 tick の横断関係（`def_index_pair_crossing`）、横断数は $k<l$ の横断対の個数 $c(\gamma)\in\mathbb N$（`def_closed_walk_crossing_number`）。順序つき横断対の集合を三分律で $A_<$ と $A_>$ に分け、入れ替え写像が横断の対称性（`claim_transverse_crossing_symmetric`）により全単射になることから $|A|=2c(\gamma)$（`claim_ordered_crossing_pairs_double`）。SageMath `closed-walk-crossing-number` は閉歩道 1,064 件（横断あり 56 件・横断なし 1,008 件）を `ZZ` で厳密検査し、Lean は `KacWard/CrossingNumberDouble.lean` と `NecSuf/KacWard/CrossingNumberDouble.lean` を通した。必要十分版に残る仮定は添字の全順序と関係の対称性だけである。次は平滑化による横断数の偶奇更新を定義・証明する。
 

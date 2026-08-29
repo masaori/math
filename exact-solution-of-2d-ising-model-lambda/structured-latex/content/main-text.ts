@@ -50721,6 +50721,115 @@ A_{>}:=\{(k,l)\in A\mid l<k\}`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_isolated_smoothing_crossing_parity",
+        labels: [],
+        title: { text: "孤立横断の平滑化と横断数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_isolated_smoothing_crossing_number_update",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_isolated_crossing_smoothing",
+                    kind: "definition",
+                    title: { text: "孤立した横断の平滑化" },
+                    labels: ["def_isolated_crossing_smoothing"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        " と、横断する添字 ", math(String.raw`k,l\in I_m`), "、",
+                        math(String.raw`k<l`), " を取る（", ref("def_index_pair_crossing"),
+                        "）。共通の通過頂点を ", math(String.raw`v:=\operatorname{tgt}(\vec e_k)=\operatorname{tgt}(\vec e_l)\in V_L`),
+                        " とする。この横断が**孤立している**とは、任意の ",
+                        math(String.raw`r\in I_m`), " について",
+                      ]),
+                      displayMath(String.raw`\operatorname{tgt}(\vec e_r)=v\quad\Longleftrightarrow\quad r=k\ \text{または}\ r=l`),
+                      paragraph([
+                        "が成り立つことをいう。巡回後続写像 ", math(String.raw`\sigma:I_m\to I_m`),
+                        " は ", ref("def_closed_walk_passes"), " のものとする。平滑化後の通過族 ",
+                        math(String.raw`(u_r^{\mathrm{sm}})_{r\in I_m}`), " を",
+                      ]),
+                      displayMath(String.raw`u_k^{\mathrm{sm}}:=(\vec e_k\to\vec e_{\sigma(l)}),\qquad
+u_l^{\mathrm{sm}}:=(\vec e_l\to\vec e_{\sigma(k)}),\qquad
+u_r^{\mathrm{sm}}:=(\vec e_r\to\vec e_{\sigma(r)})\quad(r\ne k,l)`),
+                      paragraph([
+                        "で定める。選んだ二通過は異なる軸の直進なので（", ref("def_transverse_crossing"),
+                        "）、出辺を交換した二接続は右回転または左回転であり、逆行しない。したがって各 ",
+                        math(String.raw`u_r^{\mathrm{sm}}`), " は非後退接続である。平滑化後の横断数 ",
+                        math(String.raw`c_{\mathrm{sm}}(\gamma;k,l)\in\mathbb N`), " を、",
+                        math(String.raw`r<s`), " かつ平滑化後の通過 ", math(String.raw`u_r^{\mathrm{sm}},u_s^{\mathrm{sm}}`),
+                        " が横断する添字対の個数とする。有限集合の数え上げだけなので、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_isolated_smoothing_crossing_number_update",
+                kind: "claim",
+                title: { text: "孤立した横断の平滑化は横断数を一つ減らす" },
+                labels: ["claim_isolated_smoothing_crossing_number_update"],
+                habitat: "N",
+                verification: ["sagemath/check/isolated-smoothing-crossing-parity"],
+                lean: [
+                  "Ising2DLambda.KacWard.isolated_smoothing_crossing_number_update",
+                  "Ising2DLambda.NecSuf.KacWard.remove_unordered_pair_card_add_one_necSuf",
+                  "Ising2DLambda.KacWard.isolated_smoothing_crossing_number_update_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                    " と、その孤立した横断 ", math(String.raw`k<l`), " について",
+                  ]),
+                  displayMath(String.raw`c(\gamma)=c_{\mathrm{sm}}(\gamma;k,l)+1`),
+                  paragraph([
+                    "が成り立つ（平滑化は ", ref("def_isolated_crossing_smoothing"),
+                    "、元の横断数は ", ref("def_closed_walk_crossing_number"), "）。したがって二つの横断数の偶奇は反対である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "平滑化前に選んだ二通過は横断する。平滑化後は出辺を交換したため、二つとも直進ではなく右回転または左回転になり、互いに横断しない（",
+                    ref("def_transverse_crossing"), "）。孤立性により頂点 ", math(String.raw`v`),
+                    " を通る第三の通過は無いので、平滑化によって横断判定が変わる順序なし添字対は ",
+                    math(String.raw`\{k,l\}`), " だけである。他の添字対では二つの通過がともに変更されないか、変更された一方とは異なる頂点を通るので、横断判定は変わらない。",
+                  ]),
+                  paragraph([
+                    "元の ", math(String.raw`r<s`), " の横断対の有限集合を ", math(String.raw`C`),
+                    "、平滑化後のものを ", math(String.raw`C_{\mathrm{sm}}`), " と置く。上の判定から",
+                  ]),
+                  displayMath(String.raw`C_{\mathrm{sm}}=C\setminus\{(k,l)\},\qquad (k,l)\in C`),
+                  paragraph(["である。したがって有限集合の元の個数について"]),
+                  displayMath(String.raw`\begin{aligned}
+c(\gamma)&=|C|
+&&\bigl(\because\ \blkref{def_closed_walk_crossing_number}\bigr)\\
+&=|C\setminus\{(k,l)\}|+1
+&&\bigl(\because\ (k,l)\in C\text{ である有限集合から一元を除く}\bigr)\\
+&=|C_{\mathrm{sm}}|+1
+&&\bigl(\because\ C_{\mathrm{sm}}=C\setminus\{(k,l)\}\bigr)\\
+&=c_{\mathrm{sm}}(\gamma;k,l)+1
+&&\bigl(\because\ \blkref{def_isolated_crossing_smoothing}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "を得る。最後の偶奇の反転はこの等式を法 2 で読むことによる。全過程は有限集合と自然数の加法だけで閉じる。",
+                    "孤立していない横断では同じ頂点の第三の通過との横断判定も変わり得るため、この主張は適用しない。後続では一般の閉歩道を孤立横断へ分解する手続きを別に示す。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
