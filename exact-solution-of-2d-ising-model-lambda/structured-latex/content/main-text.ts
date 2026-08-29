@@ -49821,6 +49821,122 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_closed_walk_rotation_phase",
+        labels: [],
+        title: { text: "閉歩道の循環総回転数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_closed_walk_rotation_phase",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_closed_nonbacktracking_walk",
+                    kind: "definition",
+                    title: { text: "閉じた非後退辺列" },
+                    labels: ["def_closed_nonbacktracking_walk"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        "（", ref("def_nonbacktracking_edge_sequence"), "）が閉じているとは、",
+                      ]),
+                      displayMath(String.raw`\vec e_1\in\operatorname{Next}(\vec e_m)`),
+                      paragraph([
+                        "が成り立つことをいう。すなわち、終辺 ",
+                        math(String.raw`\vec e_m`), " の終点は始辺 ",
+                        math(String.raw`\vec e_1`), " の始点に等しく、かつ ",
+                        math(String.raw`\vec e_1\ne\iota(\vec e_m)`),
+                        " である（", ref("def_nonbacktracking_successors"), "）。",
+                        "この条件により、終辺から始辺への回転位相と一歩の回転数が定義される。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_cyclic_total_turning",
+                    kind: "definition",
+                    title: { text: "循環総回転数" },
+                    labels: ["def_cyclic_total_turning"],
+                    habitat: "Z",
+                    statement: [
+                      paragraph([
+                        "閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        "（", ref("def_closed_nonbacktracking_walk"), "）の循環総回転数 ",
+                        math(String.raw`t_{\circ}(\gamma)\in\mathbb Z`), " を",
+                      ]),
+                      displayMath(String.raw`t_{\circ}(\gamma):=t(\gamma)+\tau(\vec e_m,\vec e_1)`),
+                      paragraph([
+                        "で定める。第一項は辺列の総回転数（", ref("def_total_turning"),
+                        "）、第二項は終辺から始辺への一歩の回転数（", ref("def_step_turning"),
+                        "）であり、整数の加法だけで閉じる。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_closed_walk_rotation_phase",
+                kind: "claim",
+                title: { text: "閉歩道の回転位相積は循環総回転数の冪である" },
+                labels: ["claim_closed_walk_rotation_phase"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/closed-walk-rotation-phase"],
+                lean: [
+                  "Ising2DLambda.KacWard.closed_walk_rotation_phase",
+                  "Ising2DLambda.NecSuf.KacWard.phase_prod_mul_closing_eq_zpow_sum_add_necSuf",
+                  "Ising2DLambda.KacWard.closed_walk_rotation_phase_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の閉じた非後退辺列 ",
+                    math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）について、",
+                    math(String.raw`\overline{\mathbb Q}`), " の等式",
+                  ]),
+                  displayMath(String.raw`\left(\prod_{k=1}^{m-1}\rho(\vec e_k,\vec e_{k+1})\right)
+\rho(\vec e_m,\vec e_1)
+=\zeta_8^{\,t_{\circ}(\gamma)}`),
+                  paragraph([
+                    "が成り立つ。左辺は閉歩道を一周するすべての接続の回転位相を一度ずつ掛けた値であり、",
+                    "右辺の指数は整数 ", math(String.raw`t_{\circ}(\gamma)`),
+                    "（", ref("def_cyclic_total_turning"), "）である。",
+                  ]),
+                ],
+                proof: [
+                  displayMath(String.raw`\begin{aligned}
+\left(\prod_{k=1}^{m-1}\rho(\vec e_k,\vec e_{k+1})\right)\rho(\vec e_m,\vec e_1)
+&=\zeta_8^{\,t(\gamma)}\rho(\vec e_m,\vec e_1)
+&&\bigl(\because\ \blkref{claim_walk_rotation_phase_total_turning}\bigr)\\
+&=\zeta_8^{\,t(\gamma)}\zeta_8^{\,\tau(\vec e_m,\vec e_1)}
+&&\bigl(\because\ \blkref{claim_rotation_phase_as_turning_power}\bigr)\\
+&=\zeta_8^{\,t(\gamma)+\tau(\vec e_m,\vec e_1)}
+&&\bigl(\because\ \zeta_8\ne0\text{ と }\overline{\mathbb Q}\text{ の整数指数の指数法則}\bigr)\\
+&=\zeta_8^{\,t_{\circ}(\gamma)}
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となる。全過程は整数の加法と代数的数の冪だけで閉じ、実数体も複素数体も現れない。",
+                    "この等式により、閉歩道の回転位相積と自己交差符号の比較は、循環総回転数の整数計算へ帰着する。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

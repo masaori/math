@@ -906,3 +906,5 @@ import Ising2DLambda.NecSuf.KacWard.ReversalRotationPhase
 import Ising2DLambda.KacWard.ReversalRotationPhase
 import Ising2DLambda.NecSuf.KacWard.TotalTurning
 import Ising2DLambda.KacWard.TotalTurning
+import Ising2DLambda.NecSuf.KacWard.ClosedWalkRotationPhase
+import Ising2DLambda.KacWard.ClosedWalkRotationPhase
