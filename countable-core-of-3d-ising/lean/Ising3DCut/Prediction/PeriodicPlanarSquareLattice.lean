@@ -1576,4 +1576,45 @@ theorem periodicSquarePairing_subset_fiberInternalEdgesAt_pairingsProductMatchin
     rw [hv.2.2] at ht
     exact (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mp ht |>.1
 
+/-- 指定対分け族から構成した完全マッチングを一つの city へ制限した内部辺集合は、
+その city に指定した対分けに含まれる。city ごとの制限が指定値へ戻ることを二つの
+包含へ分けたうち、制限から指定値への包含である。制限に属する辺は内部辺なので
+外部辺の側には入らず、束ねた内部辺のどこかの city から来る。その辺の端子は
+一方の city の残存端子であり同時に制限した city の端子なので、二つの city は
+一致する。 -/
+theorem fiberInternalEdgesAt_pairingsProductMatching_subset_periodicSquarePairing
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v})
+    (v : LatticeVertex n) :
+    periodicSquareFiberInternalEdgesAt
+      (periodicSquarePairingsProductMatching subgraph pairings) v ⊆ (pairings v).1 := by
+  intro s hs
+  obtain ⟨hsMatching, hsAt⟩ :=
+    (mem_periodicSquareFiberInternalEdgesAt_iff
+      (periodicSquarePairingsProductMatching subgraph pairings) v s).mp hs
+  rw [periodicSquarePairingsProductMatching, Finset.mem_union] at hsMatching
+  rcases hsMatching with hsInt | hsExt
+  · obtain ⟨w, -, hsw⟩ := Finset.mem_biUnion.mp hsInt
+    have hw := (mem_periodicSquarePairingsAt_iff subgraph w (pairings w).1).mp
+      (pairings w).2
+    have hcard : s.card = 2 := hw.1 s hsw
+    have hne : s.Nonempty := Finset.card_pos.mp (by rw [hcard]; norm_num)
+    obtain ⟨t, ht⟩ := hne
+    have htv : t.1 = v :=
+      (terminal_of_mem_internalEdgeAt latticeIncidentEdges v s hsAt t ht).1
+    have htw : t ∈ (pairings w).1.biUnion id :=
+      Finset.mem_biUnion.mpr ⟨s, hsw, ht⟩
+    rw [hw.2.2] at htw
+    have htTerm : t ∈ terminalsAt latticeIncidentEdges w :=
+      (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph w t).mp htw |>.1
+    have htw' : t.1 = w := (mem_terminalsAt_iff latticeIncidentEdges w t).mp htTerm |>.1
+    have : w = v := htw'.symm.trans htv
+    subst this
+    exact hsw
+  · exact absurd
+      ((mem_internalEdges_iff Finset.univ latticeIncidentEdges s).mpr
+        ⟨v, Finset.mem_univ v, hsAt⟩)
+      (encodePeriodicSquareExternalEdges_not_mem_internalEdges hn subgraph hsExt)
+
 end Ising3DCut.Prediction

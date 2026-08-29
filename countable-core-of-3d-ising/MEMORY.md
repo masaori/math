@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 10:03（並行）: `fiberInternalEdgesAt_pairingsProductMatching_subset_periodicSquarePairing` を追加し、構成した完全マッチングの city 制限が指定対分けに戻る等式のうち、制限から指定対分けへの逆包含を閉じた。両包含が揃ったので、次は等式へまとめて全射性を閉じる。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
 - 2026-08-29 09:35（並行）: `periodicSquarePairing_subset_fiberInternalEdgesAt_pairingsProductMatching` を追加し、構成した完全マッチングの city 制限が指定対分けに戻る等式のうち、指定対分けから制限への包含を閉じた。次は逆包含を示して等式と全射性を閉じる。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
 - 2026-08-29 09:04（並行）: `encodedEvenSubgraph_periodicSquarePairingsProductMatching` を追加し、指定対分けから構成した完全マッチングの復号値が元の偶部分グラフに戻ることを閉じた。次は city ごとの制限が指定対分けに戻ることを示し、全射性を閉じる。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
 - 2026-08-29 08:38（並行）: `periodicSquarePairingsProductMatching_isPerfectMatching` を追加し、city ごとの指定対分けと外部辺から構成した候補が terminal graph の全端子をちょうど一度ずつ覆う完全マッチングであることを閉じた。次は復号値と指定対分けへの戻りを示し、全射性を閉じる。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
