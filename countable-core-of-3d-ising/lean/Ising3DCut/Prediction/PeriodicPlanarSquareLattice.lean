@@ -1501,4 +1501,54 @@ theorem periodicSquarePairingsProductMatching_isPerfectMatching
       pairings hs hu.1 (fun hsu ↦ hne hsu.symm)
     exact (Finset.disjoint_left.mp hdisjoint hts hu.2)
 
+/-- 指定された対分け族から構成した完全マッチングを復号すると、得られる辺集合は
+元の偶部分グラフの辺に限られる。復号は外部辺がマッチングに選ばれない元の辺だけを残すが、
+偶部分グラフに属さない元の辺の外部辺は構成でそのまま選ばれているので、復号後には残らない。 -/
+theorem encodedEvenSubgraph_periodicSquarePairingsProductMatching_subset
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁
+        (periodicSquarePairingsProductMatching subgraph pairings) ⊆ subgraph.1 := by
+  intro e he
+  have hnot := (mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁
+    (periodicSquarePairingsProductMatching subgraph pairings) e).mp he |>.2
+  by_contra hsub
+  refine hnot ?_
+  rw [periodicSquarePairingsProductMatching, Finset.mem_union]
+  exact Or.inr ((mem_encodePeriodicSquareExternalEdges_iff subgraph _).mpr ⟨e, hsub, rfl⟩)
+
+/-- 元の偶部分グラフの辺は、構成した完全マッチングを復号しても残る。
+その外部辺は、外部辺の単射性から構成の外部辺（偶部分グラフに属さない辺の像）には入らず、
+外部辺は city の内部辺にもなりえないからである。 -/
+theorem subset_encodedEvenSubgraph_periodicSquarePairingsProductMatching
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    subgraph.1 ⊆ encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁
+      (periodicSquarePairingsProductMatching subgraph pairings) := by
+  intro e he
+  refine (mem_encodedEvenSubgraph_iff Finset.univ latticeEndpoint₀ latticeEndpoint₁
+    (periodicSquarePairingsProductMatching subgraph pairings) e).mpr ⟨Finset.mem_univ e, ?_⟩
+  intro hmem
+  rw [periodicSquarePairingsProductMatching, Finset.mem_union] at hmem
+  rcases hmem with hint | hext
+  · exact externalEdge_not_mem_internalEdges hn e
+      (periodicSquarePairingsProductInternalEdges_subset_internalEdges subgraph pairings hint)
+  · obtain ⟨f, hf, hfe⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph _).mp hext
+    exact hf (externalEdge_injective_lattice hfe ▸ he)
+
+/-- 指定された対分け族から構成した完全マッチングの復号値は、元の偶部分グラフに戻る。
+直前の二つの包含を束ねたものであり、構成した完全マッチングが同じ偶部分グラフの
+復号繊維に属することを与える。全射性の第三段の前半である。 -/
+theorem encodedEvenSubgraph_periodicSquarePairingsProductMatching
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    encodedEvenSubgraph Finset.univ latticeEndpoint₀ latticeEndpoint₁
+        (periodicSquarePairingsProductMatching subgraph pairings) = subgraph.1 := by
+  apply Finset.Subset.antisymm
+  · exact encodedEvenSubgraph_periodicSquarePairingsProductMatching_subset subgraph pairings
+  · exact subset_encodedEvenSubgraph_periodicSquarePairingsProductMatching hn subgraph pairings
+
 end Ising3DCut.Prediction

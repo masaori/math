@@ -770,6 +770,9 @@ targets=(
   Ising3DCut.Prediction.pairwiseDisjoint_periodicSquarePairingsProductMatching
   Ising3DCut.Prediction.biUnion_periodicSquarePairingsProductMatching
   Ising3DCut.Prediction.periodicSquarePairingsProductMatching_isPerfectMatching
+  Ising3DCut.Prediction.encodedEvenSubgraph_periodicSquarePairingsProductMatching_subset
+  Ising3DCut.Prediction.subset_encodedEvenSubgraph_periodicSquarePairingsProductMatching
+  Ising3DCut.Prediction.encodedEvenSubgraph_periodicSquarePairingsProductMatching
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
