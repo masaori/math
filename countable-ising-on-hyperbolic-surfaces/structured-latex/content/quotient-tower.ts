@@ -2526,6 +2526,7 @@ A_h
   {
     id: "quotient_tower_theorem_fourier_pushforward_pullback_compatibility",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "商の塔における有限 Fourier 変換と押し出し・引き戻しの整合性" },
     labels: ["theorem_quotient_tower_fourier_pushforward_pullback_compatibility"],
     habitat: "ZPolynomial",
@@ -2920,19 +2921,14 @@ p\nmid a\ \text{かつ}\ p\nmid b
     verification: ["sagemath/check/two-stage-quotient-tower-ising-coefficient-valuation-difference-logarithmic-value"],
     statement: [
       paragraph([
-        "素数全体の集合を ",
+        ref("def_prime_exponent_logarithmic_group"),
+        " の素数集合 ",
         math(String.raw`\mathcal P`),
-        " とし、各 ",
-        math(String.raw`p\in\mathcal P`),
-        " に形式的生成元 ",
+        "、形式的生成元 ",
         math(String.raw`\ell_p`),
-        " を割り当てる。有限台をもつ整数係数写像全体からなる対数順序群を",
-      ]),
-      displayMath(String.raw`\Lambda
-:=
-\bigoplus_{p\in\mathcal P}\mathbb Z\,\ell_p`),
-      paragraph([
-        "と書く。",
+        "、対数順序群 ",
+        math(String.raw`\Lambda`),
+        " を用いる。",
         ref("theorem_quotient_tower_two_stage_ising_coefficient_valuation_difference_finite_support"),
         " の次数 ",
         math(String.raw`m\in\mathbb N`),
@@ -2967,7 +2963,7 @@ p\nmid a\ \text{かつ}\ p\nmid b
     verification: ["sagemath/check/positive-rational-logarithmic-value-map"],
     statement: [
       paragraph([
-        ref("def_quotient_tower_two_stage_ising_coefficient_valuation_difference_logarithmic_value"),
+        ref("def_prime_exponent_logarithmic_group"),
         " の素数集合 ",
         math(String.raw`\mathcal P`),
         "、形式的生成元 ",

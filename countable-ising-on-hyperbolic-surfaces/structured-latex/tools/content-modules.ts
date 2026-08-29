@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import type { ConvertedBlock, Note } from "../schema.ts";
+import { organizePublication } from "./publication-order.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const structuredLatexDir = join(here, "..");
@@ -32,6 +33,10 @@ export async function loadContentFiles(): Promise<{ file: string; blocks: Conver
   return result;
 }
 
+export async function loadPublicationContentFiles(): Promise<{ file: string; blocks: ConvertedBlock[] }[]> {
+  return organizePublication(await loadContentFiles());
+}
+
 export async function loadNoteFiles(): Promise<{ file: string; notes: Note[] }[]> {
   const result: { file: string; notes: Note[] }[] = [];
   for (const file of sourceFiles(notesDir)) {
@@ -41,4 +46,3 @@ export async function loadNoteFiles(): Promise<{ file: string; notes: Note[] }[]
   }
   return result;
 }
-

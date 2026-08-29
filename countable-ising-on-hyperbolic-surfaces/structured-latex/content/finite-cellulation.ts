@@ -799,6 +799,7 @@ q\lvert V_{\mathrm{cell}}\rvert
   {
     id: "finite_cellulation_theorem_regular_euler_incidence_identity",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "正則セル分割の Euler 標数と incidence 数の等式" },
     labels: ["theorem_regular_cellulation_euler_incidence_identity"],
     habitat: "Z",
@@ -954,6 +955,7 @@ q\lvert V_{\mathrm{cell}}\rvert
   {
     id: "finite_cellulation_theorem_hyperbolic_regular_type_iff_negative_euler_characteristic",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "正則型の双曲性と負の Euler 標数の同値性" },
     labels: ["theorem_hyperbolic_regular_type_iff_negative_euler_characteristic"],
     habitat: "Z",

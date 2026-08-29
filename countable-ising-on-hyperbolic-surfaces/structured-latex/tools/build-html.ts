@@ -36,7 +36,7 @@ import {
 } from "../../../structured-latex/renderers/html/theorem-standing.ts";
 import { standingOf } from "../../../structured-latex/domain-model/index.ts";
 import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
-import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
+import { loadPublicationContentFiles, structuredLatexDir } from "./content-modules.ts";
 
 const require = createRequire(import.meta.url);
 const katexDist = dirname(require.resolve("katex/dist/katex.min.css"));
@@ -55,7 +55,7 @@ const HEADINGS: Record<TheoremLikeKind, string> = {
 const escapeHtml = (s: string): string =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-const contentFiles = await loadContentFiles();
+const contentFiles = await loadPublicationContentFiles();
 
 // --- 採番（LaTeX と同じ規則）-------------------------------------------------
 

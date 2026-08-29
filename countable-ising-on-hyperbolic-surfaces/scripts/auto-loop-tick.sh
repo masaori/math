@@ -25,6 +25,9 @@ mkdir -p "$LOG_DIR"
 # エージェントの生出力は量が多いので LOG_FILE だけに残し、ここでは短い進捗行だけ複製する。
 log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" | tee -a "$LOG_FILE"; }
 
+log "SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中"
+exit 0
+
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then
   log "SKIP: 前の tick が動作中"
   exit 0

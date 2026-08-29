@@ -4,14 +4,14 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import type { ConvertedBlock, Node, TheoremLikeBlock } from "../schema.ts";
-import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
+import { loadPublicationContentFiles, structuredLatexDir } from "./content-modules.ts";
 
 const buildDir = join(structuredLatexDir, "build");
 const texPath = join(buildDir, "document.tex");
 const withPdf = process.argv.includes("--pdf");
 const cjkMainFont = process.env.HYPERBOLIC_ISING_PDF_CJK_MAIN_FONT ?? "Hiragino Mincho ProN";
 const cjkSansFont = process.env.HYPERBOLIC_ISING_PDF_CJK_SANS_FONT ?? "Hiragino Sans";
-const blocks = (await loadContentFiles()).flatMap(({ blocks }) => blocks);
+const blocks = (await loadPublicationContentFiles()).flatMap(({ blocks }) => blocks);
 const labelOwner = new Set<string>(blocks.flatMap((block) => [...block.labels]));
 const usedRefs: string[] = [];
 

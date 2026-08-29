@@ -117,6 +117,7 @@ export default defineBlocks([
   {
     id: "homology_sector_theorem_boundary_of_boundary_is_zero",
     kind: "theorem",
+    standing: "mainTheorem",
     title: { text: "二つの境界写像の積は零行列である" },
     labels: ["theorem_boundary_of_boundary_is_zero_over_f2"],
     habitat: "F2",
@@ -544,7 +545,7 @@ A
   {
     id: "homology_sector_definition_homology_class_generating_polynomial",
     kind: "definition",
-    title: { text: "第一ホモロジー類別の高温生成多項式" },
+    title: { text: "第一ホモロジー類別の偶部分グラフ生成多項式" },
     labels: ["def_homology_class_generating_polynomial"],
     habitat: "ZPolynomial",
     verification: ["sagemath/check/homology-class-generating-polynomial"],
@@ -557,7 +558,7 @@ A
         math(String.raw`u,v`),
         " について、第一ホモロジー類 ",
         math(String.raw`h`),
-        " の高温生成多項式を",
+        " の偶部分グラフ生成多項式を",
       ]),
       displayMath(String.raw`Q_{\mathcal C_{\mathrm{cell}},h}(u,v)
 :=
@@ -583,7 +584,7 @@ u^{|E_{\mathrm{cell}}|-|A|}v^{|A|}
     id: "homology_sector_theorem_homology_class_polynomials_recombine",
     kind: "theorem",
     standing: "mainTheorem",
-    title: { text: "第一ホモロジー類別生成多項式の再結合" },
+    title: { text: "第一ホモロジー類別の偶部分グラフ生成多項式の再結合" },
     labels: ["theorem_homology_class_polynomials_recombine"],
     habitat: "ZPolynomial",
     verification: ["sagemath/check/homology-class-polynomials-recombine"],

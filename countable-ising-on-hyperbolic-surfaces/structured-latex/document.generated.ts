@@ -20,11 +20,13 @@ import type {
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_about_article_scope from './content/about-article-scope.ts'
 import blocks_arithmetic_invariants from './content/arithmetic-invariants.ts'
+import blocks_arithmetic_tools from './content/arithmetic-tools.ts'
 import blocks_finite_cellulation from './content/finite-cellulation.ts'
 import blocks_finite_fourier_duality from './content/finite-fourier-duality.ts'
 import blocks_finite_quotient_lattice from './content/finite-quotient-lattice.ts'
 import blocks_homology_sector_expansion from './content/homology-sector-expansion.ts'
 import blocks_main_text from './content/main-text.ts'
+import blocks_publication_structure from './content/publication-structure.ts'
 import blocks_quotient_tower from './content/quotient-tower.ts'
 
 
@@ -33,11 +35,13 @@ import blocks_quotient_tower from './content/quotient-tower.ts'
 export type AllBlocks = [
   ...typeof blocks_about_article_scope,
   ...typeof blocks_arithmetic_invariants,
+  ...typeof blocks_arithmetic_tools,
   ...typeof blocks_finite_cellulation,
   ...typeof blocks_finite_fourier_duality,
   ...typeof blocks_finite_quotient_lattice,
   ...typeof blocks_homology_sector_expansion,
   ...typeof blocks_main_text,
+  ...typeof blocks_publication_structure,
   ...typeof blocks_quotient_tower,
 ]
 
