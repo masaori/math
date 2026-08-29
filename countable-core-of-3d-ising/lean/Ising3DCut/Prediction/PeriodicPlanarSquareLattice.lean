@@ -1196,6 +1196,39 @@ theorem card_periodicSquarePairingsAt_of_card_eq_two
   rw [periodicSquarePairingsAt_eq_singleton_of_card_eq_two subgraph v htwo]
   simp
 
+/-- 対分けに属する族の組の個数は、残存端子の個数のちょうど半分である。
+各組は二元集合であり、互いに素なので、合併に現れる端子の個数は組の個数の二倍に
+等しい。残存端子が四個の city の対分けを数える段で、族がちょうど二組からなること
+を与える土台である。 -/
+theorem two_mul_card_of_mem_periodicSquarePairingsAt
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n)
+    {pairing : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))}
+    (hpairing : pairing ∈ periodicSquarePairingsAt subgraph v) :
+    2 * pairing.card = (encodePeriodicSquareRemainingTerminalsAt subgraph v).card := by
+  classical
+  obtain ⟨hcard, hdisj, hunion⟩ :=
+    (mem_periodicSquarePairingsAt_iff subgraph v pairing).mp hpairing
+  have hbi : (pairing.biUnion id).card = ∑ s ∈ pairing, s.card :=
+    Finset.card_biUnion fun x hx y hy hxy ↦
+      hdisj (Finset.mem_coe.mpr hx) (Finset.mem_coe.mpr hy) hxy
+  have hsum : ∑ s ∈ pairing, s.card = ∑ _s ∈ pairing, 2 :=
+    Finset.sum_congr rfl fun s hs ↦ hcard s hs
+  rw [← hunion, hbi, hsum, Finset.sum_const, smul_eq_mul, mul_comm]
+
+/-- 残存端子が四個の city では、対分けはちょうど二組からなる。
+直前の等式で残存端子の個数を四と置いたものである。 -/
+theorem card_eq_two_of_mem_periodicSquarePairingsAt_of_card_eq_four
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n)
+    (hfour : (encodePeriodicSquareRemainingTerminalsAt subgraph v).card = 4)
+    {pairing : Finset (Finset (Σ _ : LatticeVertex n, LatticeEdge n))}
+    (hpairing : pairing ∈ periodicSquarePairingsAt subgraph v) :
+    pairing.card = 2 := by
+  have h := two_mul_card_of_mem_periodicSquarePairingsAt subgraph v hpairing
+  rw [hfour] at h
+  omega
+
 /-- 復号繊維の完全マッチングを city `v` へ制限したものは、その city の対分けの
 全体に属する。`periodicSquareFiberInternalEdgesAt_isPairing` の三条件を、
 対分けの全体の定義へそのまま移したものである。 -/
