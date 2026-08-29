@@ -15,6 +15,7 @@ REPO_DIR="$(cd "$PROJECT_DIR/.." && pwd -P)"
 LOG_DIR="${ISING_LAMBDA_LOG_DIR:-$PROJECT_DIR/logs}"
 LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
+STATUS_FILE="$LOG_DIR/auto-loop-status.log"
 
 # 1 tick の上限。次の発火（60 分後）と、その前に走る監査（毎時 55 分）に食い込ませないため
 # 45 分で打ち切る。30 分間隔・25 分上限では四層まで終わらず 4 回打ち切られたので広げた。
@@ -28,7 +29,7 @@ mkdir -p "$LOG_DIR"
 # 「ログは空」としか出ず、2日前の無関係な ssh エラーが原因として拾われた。
 # エージェントの生出力は量が多いので LOG_FILE だけに残し、ここでは短い進捗行だけ複製する。
 log() {
-  printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" | tee -a "$LOG_FILE"
+  printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" | tee -a "$LOG_FILE" "$STATUS_FILE"
 }
 
 # launchd は対話シェルの PATH を持たないので、必要なものを明示的に足す。
@@ -86,6 +87,10 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
 fi
 printf '%s\n' "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
+
+# 前の tick が閉じたあとだけ raw log を可逆圧縮する。ロック取得後なので、稼働中の
+# writer が指す inode を rename/truncate することはない。
+bash "$PROJECT_DIR/scripts/rotate-auto-loop-log.sh" "$LOG_FILE"
 
 # 機械の負荷が高すぎるときは見送る。負荷が高いと lake build も date も返らず、
 # 45 分の上限まで何もできずに終わる（実測 2026-08-10 05:00: load average 248。

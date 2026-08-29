@@ -312,7 +312,7 @@ tick は開始時に作業ツリーが汚れていたら見送るが、**残骸�
 交互にするのは、**同じモデルの癖がそのまま証明の癖になるのを避けるため**である。
 どちらが書いた tick かはログの `=== tick 開始（<エージェント名> / …）` で分かる。
 片方でしか起きない失敗（例: 特定の CLI の引数の扱い）を切り分けるときはここを見る。
-| ログ | `logs/auto-loop.log`（git 管理外） |
+| ログ | `logs/auto-loop.log`（現在の raw 出力）、`logs/auto-loop-status.log`（直近の進捗・結果）、`logs/auto-loop.<UTC時刻>.<PID>.log.gz`（可逆圧縮した過去 8 世代、いずれも git 管理外） |
 
 ### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）
 
@@ -328,6 +328,6 @@ tick は開始時に作業ツリーが汚れていたら見送るが、**残骸�
 ```sh
 bash scripts/auto-loop-tick.sh                                   # 手で 1 tick 回す（launchd を触らない）
 launchctl print "gui/$(id -u)/com.masaori.ising-lambda-auto-loop" | grep -E 'state =|last exit|calendar'
-tail -50 logs/auto-loop.log           # 見送り／打ち切り／異常終了の区別
+tail -50 logs/auto-loop-status.log    # 見送り／打ち切り／異常終了の区別（rotation 後も読める）
 python3 ~/git/masaori/local-pc-management/agent-sessions/audit-tick-schedules.py  # 宣言との食い違い
 ```
