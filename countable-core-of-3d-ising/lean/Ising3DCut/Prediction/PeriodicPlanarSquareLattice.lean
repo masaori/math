@@ -334,6 +334,21 @@ theorem even_card_encodePeriodicSquareRemainingTerminalsAt
   rw [card_encodePeriodicSquareRemainingTerminalsAt]
   exact subgraph.2 v (Finset.mem_univ v)
 
+/-- 一辺が二以上なら、各 city の残存端子数は零、二、四のいずれかである。
+残存端子は四本の接続辺の部分集合であり、その個数は偶数なので、有限算術だけで三通りに絞れる。 -/
+theorem card_encodePeriodicSquareRemainingTerminalsAt_eq_zero_or_two_or_four
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    (encodePeriodicSquareRemainingTerminalsAt subgraph v).card = 0 ∨
+      (encodePeriodicSquareRemainingTerminalsAt subgraph v).card = 2 ∨
+      (encodePeriodicSquareRemainingTerminalsAt subgraph v).card = 4 := by
+  have hle : (encodePeriodicSquareRemainingTerminalsAt subgraph v).card ≤ 4 := by
+    rw [card_encodePeriodicSquareRemainingTerminalsAt,
+      ← card_latticeIncidentEdges_eq_four hn v]
+    exact Finset.card_le_card Finset.inter_subset_left
+  obtain ⟨k, hk⟩ := even_card_encodePeriodicSquareRemainingTerminalsAt subgraph v
+  omega
+
 /-- 偶部分グラフから内部辺を復元するとき、各 city で候補となる内部辺。
 残存端子の二元部分集合だけを候補とする。次の段で、この候補から互いに
 交わらず全端子を一度ずつ覆う集合を構成する。 -/
