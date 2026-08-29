@@ -48487,6 +48487,98 @@ c_{\mathrm v}(e,d):=
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_arf_fourier_sign_projection",
+        labels: [],
+        title: { text: "四つのスピン構造による巻き付き符号の射影" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_arf_fourier_sign_projection",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_torus_quadratic_sign",
+                    kind: "definition",
+                    title: { text: "トーラスの巻き付き二次符号と Arf 符号" },
+                    labels: ["def_torus_quadratic_sign"],
+                    habitat: "Z",
+                    statement: [
+                      paragraph([
+                        math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）と巻き付き偶奇 ",
+                        math(String.raw`(h,v)\in\{0,1\}\times\{0,1\}`), " に対し、整数の偶奇として",
+                      ]),
+                      displayMath(String.raw`q_{a,b}(h,v):=hv+(1-a)h+(1-b)v\pmod 2`),
+                      paragraph(["を定め、その二次符号と Arf 符号をそれぞれ"]),
+                      displayMath(String.raw`\chi_{a,b}(h,v):=(-1)^{q_{a,b}(h,v)}\in\{-1,1\},\qquad
+\eta_{a,b}:=(-1)^{(1-a)(1-b)}\in\{-1,1\}`),
+                      paragraph([
+                        "で定める。したがって ", math(String.raw`\eta_{0,0}=-1`), " であり、残りの三つの ",
+                        math(String.raw`\eta_{a,b}`), " は ", math(String.raw`1`), " である。これは genus one の四つのスピン構造の Arf 符号を、",
+                        "切断線の二つの偶奇だけで書いた有限な定義である。実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_arf_fourier_sign_projection",
+                kind: "claim",
+                title: { text: "Arf 符号付き四項和は各巻き付きセクターを係数一で残す" },
+                labels: ["claim_arf_fourier_sign_projection"],
+                habitat: "Q",
+                verification: ["sagemath/check/arf-fourier-sign-projection"],
+                lean: [
+                  "Ising2DLambda.KacWard.arfFourierSignProjection",
+                  "Ising2DLambda.NecSuf.KacWard.arfFourierSignProjection_necSuf",
+                  "Ising2DLambda.KacWard.arfFourierSignProjection_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`(h,v)\in\{0,1\}\times\{0,1\}`), " について、有理数の等式",
+                  ]),
+                  displayMath(String.raw`\frac12\sum_{(a,b)\in\mathcal S}\eta_{a,b}\chi_{a,b}(h,v)=1`),
+                  paragraph([
+                    "が成り立つ。したがって、四つの Kac--Ward 平方根で巻き付きセクター ",
+                    math(String.raw`(h,v)`), " に付く符号が ", math(String.raw`\chi_{a,b}(h,v)`),
+                    " であることを示せば、Arf 符号付き和はそのセクターを係数 ", math(String.raw`1`), " で数える。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`q_{a,b}`), " と ", math(String.raw`\eta_{a,b}`), " は ",
+                    ref("def_torus_quadratic_sign"), " で定めた。四つの巻き付き偶奇を順に計算すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\frac12\sum_{(a,b)\in\mathcal S}\eta_{a,b}\chi_{a,b}(0,0)
+&=\frac12(-1+1+1+1)=1
+&&\bigl(\because\ q_{a,b}(0,0)=0\bigr)\\
+\frac12\sum_{(a,b)\in\mathcal S}\eta_{a,b}\chi_{a,b}(1,0)
+&=\frac12(1-1+1+1)=1
+&&\bigl(\because\ q_{a,b}(1,0)=1-a\bigr)\\
+\frac12\sum_{(a,b)\in\mathcal S}\eta_{a,b}\chi_{a,b}(0,1)
+&=\frac12(1+1-1+1)=1
+&&\bigl(\because\ q_{a,b}(0,1)=1-b\bigr)\\
+\frac12\sum_{(a,b)\in\mathcal S}\eta_{a,b}\chi_{a,b}(1,1)
+&=\frac12(1+1+1-1)=1
+&&\bigl(\because\ q_{a,b}(1,1)=1+(1-a)+(1-b)\pmod2\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "ゆえに四つの場合のすべてで主張の等式が成り立つ。全過程は二元集合と整数の有限和だけで閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

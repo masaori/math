@@ -2115,15 +2115,11 @@ T_{(V^{(+)})}(xy)
 &= \left(\check{V}'\left(\check{V}'\right)^{-1}\right)V^{(+)}
    \quad (\because \text{行列の積の結合律}) \\
 &= I\,V^{(+)}
-   \quad (\because \text{def\_invertible\_elements\_of\_R}) \\
+   \quad (\because \text{可逆元の定義}) \\
 &= V^{(+)}
+   \quad (\because \text{行列積の単位元})
 \end{aligned}`,
       ),
-      paragraph([
-        "すなわち ",
-        math(String.raw`V^{(+)} = \check{V}'W`),
-        "（行列の積の結合律を使った）。",
-      ]),
       paragraph([
         "Step 2（",
         math(String.raw`W`),
@@ -2143,11 +2139,11 @@ T_{(V^{(+)})}(xy)
         String.raw`\begin{aligned}
 V^{(+)}\,x\,\left(V^{(+)}\right)^{-1}
 &= T_{(V^{(+)})}(x)
-   \quad (\because \text{def\_V\_plus\_and\_T\_V\_plus (3) と def\_T\_g}) \\
+   \quad (\because \text{転送行列が定める共役作用}) \\
 &= T_{(\check{V}')}(x)
-   \quad (\because \text{T\_V\_plus\_eq\_T\_check\_Vprime}) \\
+   \quad (\because \text{二つの共役作用の一致}) \\
 &= \check{V}'\,x\,\left(\check{V}'\right)^{-1}
-   \quad (\because \text{def\_check\_Vprime (2) と def\_T\_g})
+   \quad (\because \text{転送行列が定める共役作用})
 \end{aligned}`,
       ),
       paragraph([
@@ -2159,13 +2155,13 @@ V^{(+)}\,x\,\left(V^{(+)}\right)^{-1}
         math(String.raw`V^{(+)} = \check{V}'W`),
         " から ",
         math(String.raw`\left(V^{(+)}\right)^{-1} = W^{-1}\left(\check{V}'\right)^{-1}`),
-        " なので、左辺は",
+        " である。したがって、左辺は",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 V^{(+)}x\left(V^{(+)}\right)^{-1}
 &= \left(\check{V}'W\right)x\left(W^{-1}\left(\check{V}'\right)^{-1}\right)
-   \quad (\because \text{Step 1 と conjugation\_is\_ring\_homomorphism}\ ((AB)^{-1} = B^{-1}A^{-1})) \\
+   \quad (\because \text{Step 1 と積の逆元の公式}) \\
 &= \check{V}'\left(W x W^{-1}\right)\left(\check{V}'\right)^{-1}
    \quad (\because \text{行列の積の結合律})
 \end{aligned}`,
@@ -2173,17 +2169,25 @@ V^{(+)}x\left(V^{(+)}\right)^{-1}
       paragraph([
         "と書ける。したがって ",
         math(String.raw`\check{V}'\left(WxW^{-1}\right)\left(\check{V}'\right)^{-1} = \check{V}'x\left(\check{V}'\right)^{-1}`),
-        " であり、両辺に左から ",
-        math(String.raw`\left(\check{V}'\right)^{-1}`),
-        "、右から ",
-        math(String.raw`\check{V}'`),
-        " を掛けると ",
-        math(String.raw`WxW^{-1} = x`),
-        "、さらに右から ",
+        " である。可逆な ",
+        math(String.raw`\check V'`),
+        " と ",
         math(String.raw`W`),
-        " を掛けて",
+        " を順に消去すると、",
       ]),
-      displayMath(String.raw`Wx = xW \qquad \left(x \in \mathrm{Mat}(2^M,\mathbb{C}) \text{ は任意}\right)`),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{V}'\left(WxW^{-1}\right)\left(\check{V}'\right)^{-1}
+&= \check{V}'x\left(\check{V}'\right)^{-1}
+   \quad (\because \text{上の二つの共役作用の一致}) \\
+WxW^{-1}
+&= x
+   \quad (\because \check V' \text{ の可逆性}) \\
+Wx
+&= xW
+   \quad (\because W \text{ の可逆性})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 3（スカラーであること）。Step 2 と ",
         ref("centralizer_is_scalar"),

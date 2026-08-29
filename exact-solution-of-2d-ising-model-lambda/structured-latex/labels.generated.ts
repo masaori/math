@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_arf_fourier_sign_projection",
   "claim_attainable_dual_image_trivial_sector",
   "claim_broken_bond_row_decomposition",
   "claim_closed_walk_bijection",
@@ -511,6 +512,7 @@ export const ALL_LABELS = [
   "def_spin_index",
   "def_spin_structures",
   "def_torus_homology_sector",
+  "def_torus_quadratic_sign",
   "def_torus_winding_parities",
   "def_transfer_matrix",
   "def_unit_interval_rationals",

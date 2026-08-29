@@ -13263,4 +13263,9 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 2026-08-19（tick 460）: tick 459 のコミット `d04c21f6` を差分で突き合わせ、「$\gamma_1,\gamma_2$ の周期性と共役添字」で開かれた鎖が元の内容と `conjugate_index_of_check_Z_Y`・`def_gamma1_gamma2_of_theta` の参照を失っていないことを確認したが、運動量の分配則の行に分数の分割が、共役添字の分配則の行に可換則の並べ替えが同居していた（二操作一行）ため、中間行を補って一操作ずつへ分け、コミット `5e977456` を前進前に push した。「何も言っていない主張」の候補を四則・分母・移項・約分の記述から検索し、独立ブロックの削除対象は無かった。本文末尾（命題候補待ちの一項目のみ）と todo 表（空）も一致している。
 - 2026-08-19（tick 459）: tick 458 のコミット `17a03b59` を差分で突き合わせ、$\gamma_2(\tilde\theta_\mu)\neq0$ の等価変形は一行一操作・行末根拠つきで、元の内容と `def_gamma1_gamma2_of_theta`・`abs_basic_properties`・`euler_formula_cos_sin`・`complex_numbers_form_a_field`・`definition_of_cc`・`def_half_integer_modes`・`gamma_2_theta_is_0` の参照を失っていなかった（本文の修正なし）。「何も言っていない主張」の候補を本文・ノート・SageMath・Lean の四則・分母・移項・約分の記述から検索し、独立ブロックはいずれも住処・定義域・非零性または後続の反復利用を担うため削除対象は無かった。本文末尾と todo 表も一致している。
 - 2026-08-19（tick 459）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$\gamma_1,\gamma_2$ の周期性と共役添字 $M+1-\mu$」（`periodicity_of_check_fermi`）で、Euler の公式・運動量・共役添字の根拠を機械識別子の生文字列から人間可読な名前とラベル参照へ直し、運動量の導出で根拠の無かった分配則の行を補った。また、「同じ計算」に省略していた $\gamma_2(-\tilde\theta_{M+1-\mu})=\gamma_2(\tilde\theta_\mu)$ と $\gamma_1(\tilde\theta_{M+1-\mu})=\gamma_1(\tilde\theta_\mu)$ の導出を、各結論の左辺から始まる鎖へ開いた。元の内容と `euler_formula_cos_sin`・`antiperiodic_exp_sum`・`conjugate_index_of_check_Z_Y`・`def_gamma1_gamma2_of_theta` の参照は不変。姉妹側 SageMath 対象検算（check\_01 PASS）。
+## 2026-08-29 の 3 回目の tick で台帳から移した記録（tick 462）
+
+- 現在地: todo が空で命題候補も無かったため本文の前進は行わず、前 tick の式変形の重複した散文根拠を削除してから、姉妹側の「$T_{(\check V')}$ の $\check\psi$ への作用」の式変形を統一した。対象 SageMath、両プロジェクトの check、Lambda 側 Lean 全体検証、両 PDF を通した。
+- 前進記録: 未登録のセクションや追加の数値観察には着手せず、レビュー修正一件と runbook の式変形統一一件を進めた。
+- レビュー記録: tick 461 のコミット `14daffcb` を差分で確認し、線型作用の鎖が元の内容・参照を保つ一方、直後の散文が行末根拠と重複していたため内容を担う部分だけ残してコミット `1384ed81` を前進前に push した。「何も言っていない主張」の削除対象は無かった。
 
