@@ -50,7 +50,8 @@ async function loadDefaultExport(dir: string, fileName: string): Promise<unknown
 export type LoadedBlockFile = { file: string; blocks: ConvertedBlock[] };
 export type LoadedNoteFile = { file: string; notes: Note[] };
 
-function collectRefTargets(value: unknown, targets: Set<string>): void {
+/** ノード木の `ref` と数式文字列中の `\blkref{...}` の 2 経路から参照先ラベルを集める。 */
+export function collectRefTargets(value: unknown, targets: Set<string>): void {
   if (Array.isArray(value)) {
     for (const item of value) collectRefTargets(item, targets);
     return;

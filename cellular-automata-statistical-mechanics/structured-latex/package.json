@@ -17,7 +17,8 @@
     "build:html": "node tools/build-html.ts",
     "build:pdf": "node tools/build-latex.ts --pdf && node tools/verify-no-notes-in-output.ts",
     "verify:no-notes": "node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts",
-    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run inventory:check && npm run verify:no-notes && npm run test:types && npm run test:runtime"
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run inventory:check && npm run verify:chapters && npm run verify:no-notes && npm run test:types && npm run test:runtime",
+    "verify:chapters": "node tools/verify-tool-chapter-vocabulary.ts"
   },
   "dependencies": {
     "zod": "3.25.76"
