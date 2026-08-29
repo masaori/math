@@ -1227,7 +1227,15 @@ R_\mu^{(1)} + R_\mu^{(0)}
         " として適用でき、",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}\!\left(\check{Q}_\epsilon\right) = 2^{M-M} = 1`,
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
+&= 2^{M-M}
+  \quad (\because \text{数演算子の積のトレース（上の適用）}) \\
+&= 2^{0}
+  \quad (\because M-M=0) \\
+&= 1
+  \quad (\because \text{冪の零乗})
+\end{aligned}`,
       ),
       paragraph([
         "を得る（",
@@ -1239,11 +1247,19 @@ R_\mu^{(1)} + R_\mu^{(0)}
       paragraph([
         math(String.raw`\check{Q}_\epsilon`),
         " は Step 1 より冪等なので、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\dim_{\mathbb{C}}\mathrm{im}\,\check{Q}_\epsilon
+&= \mathrm{tr}\!\left(\check{Q}_\epsilon\right)
+  \quad (\because \text{冪等行列のトレースは像の次元。}\check{Q}_\epsilon\text{ は Step 1 より冪等}) \\
+&= 1
+  \quad (\because \text{上で計算した } \mathrm{tr}(\check{Q}_\epsilon))
+\end{aligned}`,
+      ),
+      paragraph([
         ref("trace_of_idempotent"),
-        " より ",
-        math(String.raw`\dim_{\mathbb{C}}\mathrm{im}\,\check{Q}_\epsilon
-= \mathrm{tr}\!\left(\check{Q}_\epsilon\right) = 1`),
-        "。009 章の同じ計算が ",
+        " を引いた。009 章の同じ計算が ",
         math(String.raw`2^{M-m}`),
         " を与えるところで、",
         math(String.raw`m = M`),

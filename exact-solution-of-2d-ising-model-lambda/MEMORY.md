@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 時点）
+## 現在の到達点（2026-08-30 の 2 回目の tick 時点）
+
+**非後退辺列の総回転数を定義し、回転位相の積が $\zeta_8$ の総回転数冪になることを四層で証明した。** 非後退辺列（各隣接対が非後退接続）、一歩の回転数 $\tau(\vec e,\vec f)\in\{0,1,-1\}\subset\mathbb Z$、総回転数 $t(\gamma)\in\mathbb Z$ を定義し、$\rho(\vec e,\vec f)=\zeta_8^{\tau}$（三場合の照合）と $\prod_k\rho(\vec e_k,\vec e_{k+1})=\zeta_8^{t(\gamma)}$（辺の本数の帰納法）を示した。回転位相の積は整数 $t(\gamma)$ だけで決まるので、後続の閉歩道の位相計算は整数計算へ帰着する。SageMath `walk-rotation-phase-total-turning` は $L=1,\dots,5$ の 660 接続と $L=1,2,3$ の辺 4 本までの全 2,240 非後退辺列を `QQbar` で厳密検査、Lean は `KacWard/TotalTurning.lean` と `NecSuf/KacWard/TotalTurning.lean` を通した（一歩の等式は仮定不要、積の等式は底の非零＝`zpow_add₀` だけ）。次は閉歩道（始辺へ戻る非後退辺列）と自己交差符号を扱う。
+
+前進前レビューで、前 2 tick の Lean 定理 6 件（方向番号シフト・逆歩道の回転位相）が sorry 検査の対象配列へ未登録だったのを発見して登録した（検査の穴。先行してコミット・push 済み）。本文側の修正対象は無かった。
+
+並列の式変形統一は、姉妹側の「数演算子の同時固有空間分解」（017 章）の Step 4 まで進んだ。トレース計算の一行二等号と、散文中の $\dim\mathrm{im}=\mathrm{tr}=1$ を一行一等号の鎖へ開いた。次は同じ証明の Step 5 を見る。
+
+## ひとつ前の到達点（2026-08-30 時点）
 
 **反転辺対の回転位相の積が 1 になることを四層で証明した。** 非後退接続を逆順にして両辺を反転すると再び非後退接続になり、前段の方向番号シフトにより回転差が符号反転する。直進・左回転・右回転の三場合で位相積を $1$へ落とした。SageMath `reversal-rotation-phase` は $L=1,\dots,5$ の 660 接続を `QQbar` で厳密検査、Lean は `KacWard/ReversalRotationPhase.lean` と `NecSuf/KacWard/ReversalRotationPhase.lean` を通した。必要十分版に残るのは三元の回転の型、体、左回転位相の非零性だけである。次は閉歩道の回転位相と自己交差符号を追跡する。
 
