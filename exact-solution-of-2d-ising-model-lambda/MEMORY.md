@@ -8,6 +8,8 @@
 
 前進前レビューでは、前 tick の積表示の証明（コミット `59ef5f57`）で同じ等式が独立の表示式と鎖の先頭に二重に書かれ、間に日本語が挟まっていたのを一続きの式変形一本へ統合した（コミットして前進前に push した）。
 
+並列の式変形統一は、姉妹側の「$\check\Lambda_{\max}=\Lambda^{(1/2)}_M$ であり単純固有値」で、(2) の一行四関係・一行三関係と (3) 末尾の一行二等号を一行一関係・行末根拠つきの鎖へ開いた。次は同じ章の後続（018 章の閉じ）を見る。
+
 ## ひとつ前の到達点（2026-08-30 の 13 回目の tick 時点）
 
 **横断の平滑化後の頂点横断数が、平滑化前の各軸の直進通過数から一つずつ引いた積になることを四層で証明した。** 平滑化後に頂点 $w$ で横断する添字対の個数 $c_w^{\mathrm{sm}}(\gamma;k,l)\in\mathbb N$（`def_smoothed_vertexwise_crossing_number`）を定義し、二軸の直進通過の直積との全単射と `claim_smoothing_straight_visit_count_update` を結合して、横断の頂点 $v$ で $c_v^{\mathrm{sm}}=(n_{v,0}-1)(n_{v,1}-1)$（`claim_smoothing_vertex_crossing_number_update`）を得た。SageMath `smoothing-straight-visit-count` は閉歩道 24,628 件・横断対 3,584 対（非孤立 1,248 対）について、平滑化後の横断数を横断述語から独立に数えた。Lean は `KacWard/SmoothingVertexCrossingNumber.lean` と必要十分版 `two_factor_after_single_decrement_necSuf` を通し、必要十分版に残る仮定は二因子が各一つ減ることと更新後の積表示だけである。次は平滑化前後の頂点横断数の差を求め、他頂点の不変性と頂点分解へ結合する。

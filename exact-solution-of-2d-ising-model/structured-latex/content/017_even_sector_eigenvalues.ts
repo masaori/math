@@ -2573,34 +2573,37 @@ V^{(+)}\check{Q}_\epsilon
         " について",
       ]),
       displayMath(
-        String.raw`\check{g}(1,\dots,1) - \check{g}(\epsilon)
-= \sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)
+        String.raw`\begin{aligned}
+\check{g}(1,\dots,1) - \check{g}(\epsilon)
+&= \sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)
 \Bigl(1 - \epsilon_\mu\Bigr)
-\ \geq\ \gamma(\tilde\theta_{\mu_0})\left(1 - 0\right)
-= \gamma(\tilde\theta_{\mu_0}) > 0`,
+   \quad (\because \text{eigenvalues\_of\_check\_Vprime の }\check{g}\text{ の定義と分配法則}) \\
+&\geq \gamma(\tilde\theta_{\mu_0})\Bigl(1 - \epsilon_{\mu_0}\Bigr)
+   \quad (\because \text{各項は }\gamma(\tilde\theta_\mu) > 0\text{ と }
+1 - \epsilon_\mu \in \{0,1\}\text{ より} \geq 0\text{。}\mu = \mu_0\text{ の項だけを残す}) \\
+&= \gamma(\tilde\theta_{\mu_0})
+   \quad (\because \epsilon_{\mu_0} = 0) \\
+&> 0
+   \quad (\because \text{def\_gamma\_theta\_tilde\_mu})
+\end{aligned}`,
       ),
       paragraph([
-        "である（各項は ",
-        math(String.raw`\gamma(\tilde\theta_\mu) > 0`),
-        " と ",
-        math(String.raw`1 - \epsilon_\mu \in \{0,1\}`),
-        " より ",
-        math(String.raw`\geq 0`),
-        " なので、",
-        math(String.raw`\mu = \mu_0`),
-        " の項だけを残す不等式が成り立つ。最後の狭義の不等号は ",
-        ref("def_gamma_theta_tilde_mu"),
-        "）。よって ",
+        "である。よって ",
         math(String.raw`\check{g}(\epsilon) < \check{g}(1,\dots,1)`),
         " であり、",
-        math(String.raw`t \mapsto e^t`),
-        " が狭義単調増加で ",
-        math(String.raw`(2s_2)^{M/2} > 0`),
-        " だから",
       ]),
       displayMath(
-        String.raw`\check\Lambda_\epsilon = (2s_2)^{M/2}e^{\check{g}(\epsilon)}
-< (2s_2)^{M/2}e^{\check{g}(1,\dots,1)} = \check\Lambda_{\max}`,
+        String.raw`\begin{aligned}
+\check\Lambda_\epsilon
+&= (2s_2)^{M/2}e^{\check{g}(\epsilon)}
+   \quad (\because \text{eigenvalues\_of\_V\_plus の }\check\Lambda_\epsilon\text{ の定義と }
+\text{eigenvalues\_of\_check\_Vprime の }\check{g}\text{ の定義}) \\
+&< (2s_2)^{M/2}e^{\check{g}(1,\dots,1)}
+   \quad (\because \check{g}(\epsilon) < \check{g}(1,\dots,1)\text{、}
+t \mapsto e^t\text{ は狭義単調増加、}(2s_2)^{M/2} > 0) \\
+&= \check\Lambda_{\max}
+   \quad (\because \text{eigenvalues\_of\_V\_plus (2)})
+\end{aligned}`,
       ),
       paragraph([
         "（",
@@ -2656,11 +2659,17 @@ V^{(+)}\check{Q}_\epsilon
         " の項がすべて消え、",
       ]),
       displayMath(
-        String.raw`x = \sum_{\epsilon}\check{Q}_\epsilon x
-= \check{Q}_{(1,\dots,1)}x \in \mathrm{im}\,\check{Q}_{(1,\dots,1)}`,
+        String.raw`\begin{aligned}
+x &= \sum_{\epsilon}\check{Q}_\epsilon x
+   \quad (\because \text{check\_joint\_eigenspace\_decomposition (2)}) \\
+&= \check{Q}_{(1,\dots,1)}x
+   \quad (\because \epsilon \neq (1,\dots,1)\text{ の項は }\check{Q}_\epsilon x = 0)
+\end{aligned}`,
       ),
       paragraph([
-        "逆に ",
+        "とくに ",
+        math(String.raw`x \in \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
+        " である。逆に ",
         math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
         " の各元が固有値 ",
         math(String.raw`\check\Lambda_{\max}`),
