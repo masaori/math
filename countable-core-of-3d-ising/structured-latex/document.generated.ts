@@ -18,19 +18,15 @@ import type {
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
-import blocks_main_text from './content/main-text.ts'
-import blocks_partition_values from './content/partition-values.ts'
-import blocks_periodic_structural_core from './content/periodic-structural-core.ts'
-import blocks_structural_core from './content/structural-core.ts'
+import blocks_mathematical_toolkit from './content/mathematical-toolkit.ts'
+import blocks_three_dimensional_ising_semantics from './content/three-dimensional-ising-semantics.ts'
 
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
-  ...typeof blocks_main_text,
-  ...typeof blocks_partition_values,
-  ...typeof blocks_periodic_structural_core,
-  ...typeof blocks_structural_core,
+  ...typeof blocks_mathematical_toolkit,
+  ...typeof blocks_three_dimensional_ising_semantics,
 ]
 
 /** 全ノート。 */
