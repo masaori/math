@@ -3,6 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 VERIFY="$SCRIPT_DIR/verify-paper-organization-tick-result.sh"
+TICK="$SCRIPT_DIR/paper-organization-tick.sh"
 TEST_DIR="$(mktemp -d)"
 trap 'rm -f "$TEST_DIR/stop.log" "$TEST_DIR/invalid.log" "$TEST_DIR/valid.log" "$TEST_DIR/duplicate.log"; rmdir "$TEST_DIR"' EXIT
 
@@ -29,5 +30,11 @@ if "$VERIFY" "$TEST_DIR/duplicate.log" "$prefix" >/dev/null 2>&1; then
   printf '重複成功マーカーを成功と判定した\n' >&2
   exit 1
 fi
+
+if grep -Eq 'gh[[:space:]]+pr|gh[[:space:]]+auth' "$TICK"; then
+  printf 'tmux外tickへGitHub CLI操作が混入している\n' >&2
+  exit 1
+fi
+grep -Fq "git push origin HEAD:\$default_branch" "$TICK"
 
 printf 'tick結果判定の回帰テスト成功\n'
