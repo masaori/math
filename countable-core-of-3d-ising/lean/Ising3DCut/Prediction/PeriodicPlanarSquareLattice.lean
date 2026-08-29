@@ -1650,4 +1650,26 @@ theorem periodicSquareFiberToPairingsProduct_surjective
   apply Subtype.ext
   exact fiberInternalEdgesAt_pairingsProductMatching hn subgraph pairings v
 
+/-- 復号繊維から city ごとの対分けの直積への写像は全単射である。
+単射性と全射性を束ねたものである。 -/
+theorem periodicSquareFiberToPairingsProduct_bijective
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    Function.Bijective (periodicSquareFiberToPairingsProduct hn subgraph) :=
+  ⟨periodicSquareFiberToPairingsProduct_injective hn subgraph,
+    periodicSquareFiberToPairingsProduct_surjective hn subgraph⟩
+
+/-- 復号繊維の個数は、city ごとの対分けの個数の積に等しい。
+全単射から有限集合の個数の等式へ移したものである。 -/
+theorem card_periodicSquareDecodingFiber
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n) :
+    (periodicSquareDecodingFiber subgraph).card
+      = ∏ v : LatticeVertex n, (periodicSquarePairingsAt subgraph v).card := by
+  classical
+  have hcard :
+      Fintype.card {matching // matching ∈ periodicSquareDecodingFiber subgraph}
+        = Fintype.card ((v : LatticeVertex n) →
+            {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :=
+    Fintype.card_of_bijective (periodicSquareFiberToPairingsProduct_bijective hn subgraph)
+  simpa [Fintype.card_coe, Fintype.card_pi] using hcard
+
 end Ising3DCut.Prediction
