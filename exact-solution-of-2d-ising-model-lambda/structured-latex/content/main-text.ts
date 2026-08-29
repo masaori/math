@@ -51346,8 +51346,8 @@ c_v^{\mathrm{sm}}(\gamma;k,l)
                 verification: ["sagemath/check/smoothing-straight-visit-count"],
                 lean: [
                   "Ising2DLambda.KacWard.smoothing_other_vertex_crossing_invariance",
-                  "Ising2DLambda.NecSuf.KacWard.product_with_equal_factors_necSuf",
-                  "Ising2DLambda.KacWard.smoothing_other_vertex_crossing_invariance_from_necSuf",
+                  "Ising2DLambda.NecSuf.KacWard.opposite_bool_unordered_pairs_card_necSuf",
+                  "Ising2DLambda.NecSuf.KacWard.flip_single_membership_card_necSuf",
                 ],
                 statement: [
                   paragraph([

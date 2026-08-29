@@ -1593,9 +1593,7 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.two_factor_after_single_decrement_necSuf
   Ising2DLambda.KacWard.smoothing_vertex_crossing_number_update
   Ising2DLambda.KacWard.smoothing_vertex_crossing_number_update_from_necSuf
-  Ising2DLambda.NecSuf.KacWard.product_with_equal_factors_necSuf
   Ising2DLambda.KacWard.smoothing_other_vertex_crossing_invariance
-  Ising2DLambda.KacWard.smoothing_other_vertex_crossing_invariance_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

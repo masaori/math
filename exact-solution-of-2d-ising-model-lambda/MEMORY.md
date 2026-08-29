@@ -4,9 +4,9 @@
 
 ## 現在の到達点（2026-08-30 の 14 回目の tick 時点）
 
-**横断の平滑化が横断の頂点以外の頂点の横断数を変えないことを四層で証明した。** 横断の頂点 $v$ と異なる任意の格子頂点 $w$ について $c_w^{\mathrm{sm}}(\gamma;k,l)=c_w(\gamma)$（`claim_smoothing_other_vertex_crossing_invariance`）を、平滑化後の積表示（`claim_vertex_crossing_number_factorization` の全単射を平滑化後の通過族に適用）・各軸の直進通過数の不変性（`claim_smoothing_straight_visit_count_update` の $w\ne v$ の場合）・平滑化前の積表示を結ぶ等式の鎖一本で示した。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対の他頂点の横断数を平滑化の前後で独立に数えて一致を 11,904 件検査した。Lean は `KacWard/SmoothingOtherVertexInvariance.lean` と必要十分版 `product_with_equal_factors_necSuf` を通し、必要十分版に残る仮定は二項演算 `Mul` と四つの等式だけである。次は横断の頂点での平滑化前後の横断数の差 $c_v-c_v^{\mathrm{sm}}=n_{v,0}+n_{v,1}-1$ を求め、頂点分解（`claim_crossing_number_vertex_decomposition`）と結合して閉歩道全体の横断数の更新式を得る。
+**横断の平滑化が横断の頂点以外の頂点の横断数を変えないことを四層で証明した。** 横断の頂点 $v$ と異なる任意の格子頂点 $w$ について $c_w^{\mathrm{sm}}(\gamma;k,l)=c_w(\gamma)$（`claim_smoothing_other_vertex_crossing_invariance`）を、平滑化後の積表示（`claim_vertex_crossing_number_factorization` の全単射を平滑化後の通過族に適用）・各軸の直進通過数の不変性（`claim_smoothing_straight_visit_count_update` の $w\ne v$ の場合）・平滑化前の積表示を結ぶ等式の鎖一本で示した。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対の他頂点の横断数を平滑化の前後で独立に数えて一致を 11,904 件検査した。Lean は具体版と、既存の「二軸の直進通過の直積」「一元だけ帰属が変わる」の必要十分版の組合せを通した。次は横断の頂点での平滑化前後の横断数の差 $c_v-c_v^{\mathrm{sm}}=n_{v,0}+n_{v,1}-1$ を求め、頂点分解（`claim_crossing_number_vertex_decomposition`）と結合して閉歩道全体の横断数の更新式を得る。
 
-前進前レビューでは、前 tick の積表示の証明（コミット `59ef5f57`）で同じ等式が独立の表示式と鎖の先頭に二重に書かれ、間に日本語が挟まっていたのを一続きの式変形一本へ統合した（コミットして前進前に push した）。
+次 tick の前進前レビューでは、Lean 必要十分版の「二つの積表示と対応する因子の等式から結果の等式を得る」が等式の代入以外を言っていないことを確認した。この独立定理と導出定理を削除し、具体版の鎖に代入を直接書き、既存の直積と一元変更の必要十分版に対応づけた。
 
 並列の式変形統一は、姉妹側の「$\check\Lambda_{\max}=\Lambda^{(1/2)}_M$ であり単純固有値」で、(2) の一行四関係・一行三関係と (3) 末尾の一行二等号を一行一関係・行末根拠つきの鎖へ開いた。次は同じ章の後続（018 章の閉じ）を見る。
 
