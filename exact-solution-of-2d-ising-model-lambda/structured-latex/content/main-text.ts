@@ -50899,9 +50899,7 @@ c_v(\gamma):=|C_v|`),
                     "が成り立つ（左辺は ", ref("def_closed_walk_crossing_number"),
                     "、右辺の各項は ", ref("def_vertexwise_crossing_number"),
                     "。和は有限集合 ", math(String.raw`V_L`),
-                    " の上の自然数の有限和である）。したがって ",
-                    math(String.raw`c(\gamma)`), " の偶奇は ",
-                    math(String.raw`c_v(\gamma)`), " が奇数である頂点の個数の偶奇に等しい。",
+                    " の上の自然数の有限和である）。",
                   ]),
                 ],
                 proof: [
@@ -50933,8 +50931,7 @@ c(\gamma)&=|C|
 &&\bigl(\because\ \blkref{def_vertexwise_crossing_number}\bigr)
 \end{aligned}`),
                   paragraph([
-                    "を得る。偶奇の言い換えは、この等式を法 2 で読み、偶数の項が消えることによる。",
-                    "全過程は有限集合の数え上げと自然数の加法だけで閉じる。",
+                    "を得る。全過程は有限集合の数え上げと自然数の加法だけで閉じる。",
                     "この分解により、平滑化が横断数の偶奇へ与える影響は頂点ごとに切り分けて調べられる。",
                     "同じ頂点を三回以上通る場合の解析は、この頂点ごとの横断数について後続で行う。",
                   ]),

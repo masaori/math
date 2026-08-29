@@ -76,7 +76,6 @@ for L in range(1, 4):
                                  if endpoints(L, walk[k])[1] == v))
                           for v in vertices]
             assert total == sum(vertexwise)
-            assert (total % 2) == (sum(1 for c_v in vertexwise if c_v % 2 == 1) % 2)
             if total > 0:
                 positive_crossing_walks += 1
             closed_walk_total += 1

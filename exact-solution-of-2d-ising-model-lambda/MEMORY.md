@@ -4,7 +4,9 @@
 
 ## 現在の到達点（2026-08-30 の 10 回目の tick 時点）
 
-**閉歩道の横断数が通過頂点ごとの横断数の和に分解されることを四層で証明した。** 横断対の二つの通過の頂点は等しいので、横断対の頂点を第一添字の通過の頂点として定めてよい。頂点ごとの横断数 $c_v(\gamma):=|C_v|\in\mathbb N$（`def_vertexwise_crossing_number`）を導入し、被覆（各横断対の頂点は $V_L$ の元）と互いに素（一つの対の頂点は一つに定まる）の二段で $c(\gamma)=\sum_{v\in V_L}c_v(\gamma)$（`claim_crossing_number_vertex_decomposition`）を得た。横断数の偶奇は $c_v$ が奇数である頂点の個数の偶奇に等しく、平滑化が偶奇へ与える影響は頂点ごとに切り分けられる。SageMath `crossing-number-vertex-decomposition` は閉歩道 1,064 件・横断対 96 対を `ZZ` で厳密検査し、Lean は `KacWard/CrossingNumberVertexDecomposition.lean`（`Fintype V` 上の和）と必要十分版 `card_eq_sum_fiber_card_necSuf`（仮定は二つの型の決定可能な等号と値の被覆だけ）を通した。次は同じ頂点を三回以上通る頂点の局所解析（頂点ごとの横断数と平滑化）を進める。
+**閉歩道の横断数が通過頂点ごとの横断数の和に分解されることを四層で証明した。** 横断対の二つの通過の頂点は等しいので、横断対の頂点を第一添字の通過の頂点として定めてよい。頂点ごとの横断数 $c_v(\gamma):=|C_v|\in\mathbb N$（`def_vertexwise_crossing_number`）を導入し、被覆（各横断対の頂点は $V_L$ の元）と互いに素（一つの対の頂点は一つに定まる）の二段で $c(\gamma)=\sum_{v\in V_L}c_v(\gamma)$（`claim_crossing_number_vertex_decomposition`）を得た。平滑化が横断数の偶奇へ与える影響は頂点ごとの和へ切り分けられる。SageMath `crossing-number-vertex-decomposition` は閉歩道 1,064 件・横断対 96 対を `ZZ` で厳密検査し、Lean は `KacWard/CrossingNumberVertexDecomposition.lean`（`Fintype V` 上の和）と必要十分版 `card_eq_sum_fiber_card_necSuf`（仮定は二つの型の決定可能な等号と値の被覆だけ）を通した。次は同じ頂点を三回以上通る頂点の局所解析（頂点ごとの横断数と平滑化）を進める。
+
+次 tick の前進前レビューでは、この分解の本文にだけ「横断数の偶奇は、頂点ごとの横断数が奇数である頂点数の偶奇に等しい」という未形式化の帰結が混入していたため削除した。四層の対象を和の等式へ揃え、SageMath の対応外検算も除いた。
 
 前進前レビューでは前 tick の孤立横断の平滑化（コミット `ad144a04`）の四層を照合し、修正対象は無かった。
 
