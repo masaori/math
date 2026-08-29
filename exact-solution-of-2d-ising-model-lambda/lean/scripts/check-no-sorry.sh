@@ -1575,6 +1575,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.transverse_crossing_symmetric_necSuf
   Ising2DLambda.KacWard.transverse_crossing_symmetric
   Ising2DLambda.KacWard.transverse_crossing_symmetric_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.ordered_pairs_double_necSuf
+  Ising2DLambda.KacWard.ordered_crossing_pairs_double
+  Ising2DLambda.KacWard.ordered_crossing_pairs_double_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

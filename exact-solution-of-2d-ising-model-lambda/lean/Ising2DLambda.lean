@@ -916,3 +916,5 @@ import Ising2DLambda.NecSuf.KacWard.ReconnectionTurningDifference
 import Ising2DLambda.KacWard.ReconnectionTurningDifference
 import Ising2DLambda.NecSuf.KacWard.TransverseCrossing
 import Ising2DLambda.KacWard.TransverseCrossing
+import Ising2DLambda.NecSuf.KacWard.CrossingNumberDouble
+import Ising2DLambda.KacWard.CrossingNumberDouble

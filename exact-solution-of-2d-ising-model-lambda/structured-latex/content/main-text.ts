@@ -50541,6 +50541,186 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_closed_walk_crossing_number",
+        labels: [],
+        title: { text: "閉歩道の横断数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_ordered_crossing_pairs_double",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_closed_walk_passes",
+                    kind: "definition",
+                    title: { text: "閉歩道の通過" },
+                    labels: ["def_closed_walk_passes"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        "（", ref("def_closed_nonbacktracking_walk"),
+                        "）の添字集合を ", math(String.raw`I_m:=\{1,\ldots,m\}\subset\mathbb N`),
+                        " とし、巡回後続写像 ", math(String.raw`\sigma:I_m\to I_m`), " を",
+                      ]),
+                      displayMath(String.raw`\sigma(k):=k+1\quad(1\le k\le m-1),\qquad\sigma(m):=1`),
+                      paragraph([
+                        "で定める。添字 ", math(String.raw`k\in I_m`), " の通過とは、非後退接続 ",
+                        math(String.raw`\vec e_k\to\vec e_{\sigma(k)}`),
+                        " のことをいう。", math(String.raw`1\le k\le m-1`),
+                        " の場合は非後退辺列の定義（", ref("def_nonbacktracking_edge_sequence"),
+                        "）、", math(String.raw`k=m`), " の場合は閉性（",
+                        ref("def_closed_nonbacktracking_walk"),
+                        "）により、これは実際に非後退接続である。通過の頂点を ",
+                        math(String.raw`\operatorname{tgt}(\vec e_k)\in V_L`),
+                        "（", ref("def_oriented_edge_endpoints"),
+                        "）と定める。すべて有限集合の元であり、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_index_pair_crossing",
+                    kind: "definition",
+                    title: { text: "添字対の横断" },
+                    labels: ["def_index_pair_crossing"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        " の二つの添字 ", math(String.raw`k,l\in I_m`),
+                        "、", math(String.raw`k\ne l`),
+                        " が横断するとは、二つの通過の頂点が等しく（",
+                        math(String.raw`\operatorname{tgt}(\vec e_k)=\operatorname{tgt}(\vec e_l)`),
+                        "）、かつ添字 ", math(String.raw`k`), " の通過 ",
+                        math(String.raw`\vec e_k\to\vec e_{\sigma(k)}`),
+                        " と添字 ", math(String.raw`l`), " の通過 ",
+                        math(String.raw`\vec e_l\to\vec e_{\sigma(l)}`),
+                        " がその頂点で横断する（", ref("def_transverse_crossing"),
+                        "）ことをいう（通過と ", math(String.raw`\sigma`), " は ",
+                        ref("def_closed_walk_passes"), "）。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_closed_walk_crossing_number",
+                    kind: "definition",
+                    title: { text: "閉歩道の横断数" },
+                    labels: ["def_closed_walk_crossing_number"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "閉じた非後退辺列 ", math(String.raw`\gamma`),
+                        " の横断数 ", math(String.raw`c(\gamma)\in\mathbb N`), " を",
+                      ]),
+                      displayMath(String.raw`c(\gamma):=\bigl|\,\{(k,l)\in I_m\times I_m
+\mid k<l,\ k\text{ と }l\text{ が横断する}\}\,\bigr|`),
+                      paragraph([
+                        "で定める。横断は ", ref("def_index_pair_crossing"),
+                        "、順序は自然数の全順序である。有限集合 ",
+                        math(String.raw`I_m\times I_m`),
+                        " の部分集合の元の個数なので、値は自然数として定まる。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_ordered_crossing_pairs_double",
+                kind: "claim",
+                title: { text: "順序つき横断対の個数は横断数の二倍である" },
+                labels: ["claim_ordered_crossing_pairs_double"],
+                habitat: "N",
+                verification: ["sagemath/check/closed-walk-crossing-number"],
+                lean: [
+                  "Ising2DLambda.KacWard.ordered_crossing_pairs_double",
+                  "Ising2DLambda.NecSuf.KacWard.ordered_pairs_double_necSuf",
+                  "Ising2DLambda.KacWard.ordered_crossing_pairs_double_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の閉じた非後退辺列 ", math(String.raw`\gamma`), " について",
+                  ]),
+                  displayMath(String.raw`\bigl|\,\{(k,l)\in I_m\times I_m
+\mid k\ne l,\ k\text{ と }l\text{ が横断する}\}\,\bigr|=2\,c(\gamma)`),
+                  paragraph([
+                    "が成り立つ（横断は ", ref("def_index_pair_crossing"),
+                    "、横断数は ", ref("def_closed_walk_crossing_number"),
+                    "）。特に、順序つき横断対の個数は偶数である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "順序つき横断対の集合を ",
+                    math(String.raw`A:=\{(k,l)\in I_m\times I_m\mid k\ne l,\ k\text{ と }l\text{ が横断する}\}`),
+                    "、その二つの部分を",
+                  ]),
+                  displayMath(String.raw`A_{<}:=\{(k,l)\in A\mid k<l\},\qquad
+A_{>}:=\{(k,l)\in A\mid l<k\}`),
+                  paragraph([
+                    "と置く。自然数の全順序の三分律により、",
+                    math(String.raw`k\ne l`), " なら ", math(String.raw`k<l`), " か ",
+                    math(String.raw`l<k`), " のちょうど一方が成り立つので、",
+                    math(String.raw`A`), " は互いに交わらない ",
+                    math(String.raw`A_{<}`), " と ", math(String.raw`A_{>}`),
+                    " の和集合である。互いに交わらない有限集合の和集合の元の個数は個数の和なので",
+                  ]),
+                  displayMath(String.raw`|A|=|A_{<}|+|A_{>}|`),
+                  paragraph([
+                    "である。次に、入れ替え写像 ",
+                    math(String.raw`\mathrm{sw}:(k,l)\mapsto(l,k)`),
+                    " が ", math(String.raw`A_{<}`), " から ", math(String.raw`A_{>}`),
+                    " への全単射であることを示す。",
+                    math(String.raw`(k,l)\in A_{<}`), " とすると、頂点の等式 ",
+                    math(String.raw`\operatorname{tgt}(\vec e_k)=\operatorname{tgt}(\vec e_l)`),
+                    " は等号の対称性で ",
+                    math(String.raw`\operatorname{tgt}(\vec e_l)=\operatorname{tgt}(\vec e_k)`),
+                    " になり、二つの通過の横断は順序に依らない（",
+                    ref("claim_transverse_crossing_symmetric"),
+                    "）ので、添字 ", math(String.raw`l`), " と ", math(String.raw`k`),
+                    " は横断する（", ref("def_index_pair_crossing"), "）。さらに ",
+                    math(String.raw`k<l`), " だから ",
+                    math(String.raw`(l,k)\in A_{>}`), " である。同じ論法を ",
+                    math(String.raw`A_{>}`), " の元へ適用すると ",
+                    math(String.raw`\mathrm{sw}`), " は ", math(String.raw`A_{>}`),
+                    " を ", math(String.raw`A_{<}`), " へ移し、",
+                    math(String.raw`\mathrm{sw}\circ\mathrm{sw}`),
+                    " は恒等写像なので、二つの写像は互いに逆の全単射である。全単射で結ばれる有限集合の元の個数は等しいので",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+|A|&=|A_{<}|+|A_{>}|\\
+&=|A_{<}|+|A_{<}|
+&&\bigl(\because\ \mathrm{sw}\text{ による全単射}\bigr)\\
+&=2\,|A_{<}|
+&&\bigl(\because\ \mathbb N\text{ の加法と乗法}\bigr)\\
+&=2\,c(\gamma)
+&&\bigl(\because\ \blkref{def_closed_walk_crossing_number}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "を得る。全過程は有限集合の数え上げと自然数の算術だけで閉じ、実数体も複素数体も現れない。",
+                    "この二倍の等式により、後続の平滑化の偶奇の議論では、順序つき対で数えても順序なし対で数えても偶奇の解釈が食い違わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
