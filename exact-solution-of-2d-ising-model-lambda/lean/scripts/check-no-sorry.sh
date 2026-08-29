@@ -1566,6 +1566,9 @@ targets=(
   Ising2DLambda.KacWard.cyclic_total_turning_vanishes
   Ising2DLambda.KacWard.four_dvd_cyclic_total_turning
   Ising2DLambda.KacWard.cyclic_total_turning_vanishes_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.zpow_four_mul_eq_neg_one_zpow_necSuf
+  Ising2DLambda.KacWard.closed_walk_rotation_phase_sign
+  Ising2DLambda.KacWard.closed_walk_rotation_phase_sign_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -1,5 +1,9 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 2026-08-30: 「V̌′ の固有値」の部分和計算を一行一等号へ統一
+
+Step 3 の部分和を射影子へ掛ける一行三等号を、部分和の定義・有限和と行列積の分配・Step 2・共通因子のくくり出しの四段へ開いた。内容と参照は不変で、対象 SageMath 検算、構造化本文の全検査、PDF 生成を通した。次は同じ証明の Step 3 の極限と Step 3' を見る。
+
 ## 2026-08-30: launchd tickのGitHub反映経路をSSH Gitへ固定
 
 launchd由来のtmux外Codexが `gh` のkeyringを読めず、成果push後のPR作成で停止した。

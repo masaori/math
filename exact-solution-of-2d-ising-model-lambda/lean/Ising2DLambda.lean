@@ -910,3 +910,5 @@ import Ising2DLambda.NecSuf.KacWard.ClosedWalkRotationPhase
 import Ising2DLambda.KacWard.ClosedWalkRotationPhase
 import Ising2DLambda.NecSuf.KacWard.CyclicTurningVanishes
 import Ising2DLambda.KacWard.CyclicTurningVanishes
+import Ising2DLambda.NecSuf.KacWard.ClosedWalkRotationNumberSign
+import Ising2DLambda.KacWard.ClosedWalkRotationNumberSign
