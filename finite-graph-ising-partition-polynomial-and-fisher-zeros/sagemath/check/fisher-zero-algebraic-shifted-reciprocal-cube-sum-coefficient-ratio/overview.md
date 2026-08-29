@@ -19,7 +19,8 @@
 | `check_formal_derivative_monomial_rule.sage` | 代数的数係数多項式の形式微分における正次数単項式則 | PASS | 有理数および無理代数的数の係数と複数の正次数で定義式が一致 |
 | `check_formal_derivative_well_defined.sage` | 一意な係数表示による形式微分の線形拡張の well-defined 性 | PASS | 同じ多項式の異なる表示が同じ係数表示と形式微分を与える |
 | `check_formal_derivative_product_rule.sage` | 代数的数係数多項式の形式微分における積法則 | PASS | 零・定数・無理代数的係数を含む多項式対で `D(fg)=D(f)g+fD(g)` が一致 |
-| `check_formal_derivative_product_rule_linearity_step.sage` | 積の有限係数表示へ形式微分の線形性を適用する一行 | PASS | 積の形式微分と各有限和項を形式微分した和が一致 |
+| `check_formal_derivative_product_rule_substitute_coefficient_expansion.sage` | 積の有限係数表示を形式微分の引数へ代入する一行 | PASS | 積の形式微分と有限係数展開の形式微分が一致 |
+| `check_formal_derivative_product_rule_linearity_step.sage` | 有限係数和へ形式微分の線形性を適用する一行 | PASS | 有限係数和の形式微分と各有限和項を形式微分した和が一致 |
 | `check_formal_derivative_product_rule_split_constant_term.sage` | 項別形式微分和の定数項と正次数項への分割 | PASS | 全添字和が `(i,j)=(0,0)` の項と `i+j>0` の和に一致 |
 | `check_formal_derivative_product_rule_constant_rule_step.sage` | 分離した定数項への形式微分の定数則の適用 | PASS | `D(a_0b_0)` を零へ置換した前後が一致 |
 | `check_formal_derivative_product_rule_remove_additive_zero.sage` | 定数項の形式微分から得た加法零元の除去 | PASS | `0` と正次数項和の和が正次数項和に一致 |

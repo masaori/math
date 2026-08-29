@@ -1,5 +1,5 @@
 # 対象ラベル: theorem_fisher_zero_algebraic_shifted_reciprocal_cube_sum_coefficient_ratio
-# 式列: 有限係数和へ形式微分の線形性を適用する一行
+# 式列: 積の有限係数表示を形式微分の引数へ代入する一行
 # 帰属: QQbar, QQbar[x] だけを用いる
 polynomial_ring = PolynomialRing(QQbar, "x")
 x = polynomial_ring.gen()
@@ -33,18 +33,6 @@ for first_coefficients, second_coefficients in coefficient_pairs:
         ),
         polynomial_ring.zero(),
     )
-    termwise_derivative = sum(
-        (
-            (
-                first_coefficients[first_degree]
-                * second_coefficients[second_degree]
-                * x^(first_degree + second_degree)
-            ).derivative()
-            for first_degree in range(len(first_coefficients))
-            for second_degree in range(len(second_coefficients))
-        ),
-        polynomial_ring.zero(),
-    )
-    assert expanded_product.derivative() == termwise_derivative
+    assert (first_polynomial * second_polynomial).derivative() == expanded_product.derivative()
 
-print("RESULT: PASS - linearity moves the formal derivative through the finite coefficient sum")
+print("RESULT: PASS - the finite coefficient expansion is substituted before differentiation")
