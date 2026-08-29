@@ -7,17 +7,28 @@ success_prefix="$2"
 test -f "$run_output"
 test -n "$success_prefix"
 
-marker_count="$(awk -v prefix="$success_prefix" '
-  index($0, prefix) == 1 && length($0) == length(prefix) + 40 && substr($0, length(prefix) + 1) ~ /^[0-9a-f]+$/ { count++ }
-  END { print count + 0 }
-' "$run_output")"
-if [ "$marker_count" -ne 1 ]; then
-  printf 'success marker count must be 1, got %s\n' "$marker_count" >&2
-  exit 1
-fi
-
 awk -v prefix="$success_prefix" '
-  index($0, prefix) == 1 && length($0) == length(prefix) + 40 && substr($0, length(prefix) + 1) ~ /^[0-9a-f]+$/ {
-    print substr($0, length(prefix) + 1)
+  index($0, prefix) == 1 {
+    commit = substr($0, length(prefix) + 1)
+    if (length($0) != length(prefix) + 40 || commit !~ /^[0-9a-f]+$/) {
+      invalid++
+    } else {
+      commits[commit] = 1
+    }
+  }
+  END {
+    if (invalid > 0) {
+      printf "invalid success marker count must be 0, got %d\n", invalid > "/dev/stderr"
+      exit 1
+    }
+    for (commit in commits) {
+      unique++
+      result = commit
+    }
+    if (unique != 1) {
+      printf "unique success commit count must be 1, got %d\n", unique > "/dev/stderr"
+      exit 1
+    }
+    print result
   }
 ' "$run_output"

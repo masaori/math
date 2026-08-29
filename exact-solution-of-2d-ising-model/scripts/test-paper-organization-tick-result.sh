@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 VERIFY="$SCRIPT_DIR/verify-paper-organization-tick-result.sh"
 TICK="$SCRIPT_DIR/paper-organization-tick.sh"
 TEST_DIR="$(mktemp -d)"
-trap 'rm -f "$TEST_DIR/stop.log" "$TEST_DIR/invalid.log" "$TEST_DIR/valid.log" "$TEST_DIR/duplicate.log"; rmdir "$TEST_DIR"' EXIT
+trap 'rm -f "$TEST_DIR/stop.log" "$TEST_DIR/invalid.log" "$TEST_DIR/valid.log" "$TEST_DIR/duplicate.log" "$TEST_DIR/different.log" "$TEST_DIR/mixed-invalid.log"; rmdir "$TEST_DIR"' EXIT
 
 prefix='TICK_RESULT_SUCCESS:run-123:'
 commit='0123456789abcdef0123456789abcdef01234567'
@@ -26,8 +26,18 @@ printf '作業完了\n%s%s\n' "$prefix" "$commit" > "$TEST_DIR/valid.log"
 test "$("$VERIFY" "$TEST_DIR/valid.log" "$prefix")" = "$commit"
 
 printf '%s%s\n%s%s\n' "$prefix" "$commit" "$prefix" "$commit" > "$TEST_DIR/duplicate.log"
-if "$VERIFY" "$TEST_DIR/duplicate.log" "$prefix" >/dev/null 2>&1; then
-  printf '重複成功マーカーを成功と判定した\n' >&2
+test "$("$VERIFY" "$TEST_DIR/duplicate.log" "$prefix")" = "$commit"
+
+different_commit='89abcdef0123456789abcdef0123456789abcdef'
+printf '%s%s\n%s%s\n' "$prefix" "$commit" "$prefix" "$different_commit" > "$TEST_DIR/different.log"
+if "$VERIFY" "$TEST_DIR/different.log" "$prefix" >/dev/null 2>&1; then
+  printf '異なる成果コミットを一意の成功と判定した\n' >&2
+  exit 1
+fi
+
+printf '%s%s\n%s%s\n' "$prefix" "$commit" "$prefix" 'not-a-commit' > "$TEST_DIR/mixed-invalid.log"
+if "$VERIFY" "$TEST_DIR/mixed-invalid.log" "$prefix" >/dev/null 2>&1; then
+  printf '正当なマーカーと混在した不正マーカーを無視した\n' >&2
   exit 1
 fi
 
