@@ -50200,6 +50200,84 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_closed_walk_rotation_number_sign",
+        labels: [],
+        title: { text: "閉歩道の回転数と回転位相の符号" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_closed_walk_rotation_phase_sign",
+              beforeFocus: [{
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_closed_walk_rotation_number",
+                  kind: "definition",
+                  title: { text: "閉歩道の回転数" },
+                  labels: ["def_closed_walk_rotation_number"],
+                  habitat: "Z",
+                  statement: [
+                    paragraph([
+                      "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                      "（", ref("def_closed_nonbacktracking_walk"), "）について、循環総回転数は 4 の倍数である（",
+                      ref("claim_cyclic_total_turning_multiple_of_four"), "）。そこで閉歩道の回転数 ",
+                      math(String.raw`\operatorname{rot}(\gamma)\in\mathbb Z`), " を",
+                    ]),
+                    displayMath(String.raw`\operatorname{rot}(\gamma):=t_{\circ}(\gamma)/4`),
+                    paragraph(["で定める。整数の除法と 4 の整除性により"]),
+                    displayMath(String.raw`t_{\circ}(\gamma)=4\operatorname{rot}(\gamma)`),
+                    paragraph(["である。この定義は整数だけで閉じ、実数体も複素数体も現れない。"]),
+                  ],
+                },
+              }],
+              focus: {
+                id: "kac_ward_claim_closed_walk_rotation_phase_sign",
+                kind: "claim",
+                title: { text: "閉歩道の回転位相積は回転数の符号である" },
+                labels: ["claim_closed_walk_rotation_phase_sign"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/closed-walk-rotation-number-sign"],
+                lean: [
+                  "Ising2DLambda.KacWard.closed_walk_rotation_phase_sign",
+                  "Ising2DLambda.NecSuf.KacWard.zpow_four_mul_eq_neg_one_zpow_necSuf",
+                  "Ising2DLambda.KacWard.closed_walk_rotation_phase_sign_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    " について、", math(String.raw`\overline{\mathbb Q}`), " の等式",
+                  ]),
+                  displayMath(String.raw`\left(\prod_{k=1}^{m-1}\rho(\vec e_k,\vec e_{k+1})\right)
+\rho(\vec e_m,\vec e_1)=(-1)^{\operatorname{rot}(\gamma)}`),
+                  paragraph(["が成り立つ。左辺は閉歩道の全接続の回転位相積である。"]),
+                ],
+                proof: [
+                  displayMath(String.raw`\begin{aligned}
+\left(\prod_{k=1}^{m-1}\rho(\vec e_k,\vec e_{k+1})\right)\rho(\vec e_m,\vec e_1)
+&=\zeta_8^{\,t_{\circ}(\gamma)}
+&&\bigl(\because\ \blkref{claim_closed_walk_rotation_phase}\bigr)\\
+&=\zeta_8^{\,4\operatorname{rot}(\gamma)}
+&&\bigl(\because\ \blkref{def_closed_walk_rotation_number}\bigr)\\
+&=\left(\zeta_8^4\right)^{\operatorname{rot}(\gamma)}
+&&\bigl(\because\ \overline{\mathbb Q}^{\times}\text{ の整数指数の積の法則}\bigr)\\
+&=(-1)^{\operatorname{rot}(\gamma)}
+&&\bigl(\because\ \zeta_8^4=-1\text{。}\blkref{def_rotation_phase}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "全過程は代数的数の整数冪だけで閉じ、実数体も複素数体も現れない。トーラス上では、この符号を自己交差数だけで表す平面の式は成り立たず、巻き付き偶奇による補正が必要である。たとえば自己交差のない水平一周路は回転数 0 である。後続では補正項を明示して自己交差偶奇と比較する。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

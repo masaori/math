@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 4 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 5 回目の tick 時点）
+
+**閉歩道の回転数を定義し、回転位相積がその回転数の符号になることを四層で証明した。** 循環総回転数の 4 の倍数性から $\operatorname{rot}(\gamma):=t_{\circ}(\gamma)/4\in\mathbb Z$ を定め、$t_{\circ}(\gamma)=4\operatorname{rot}(\gamma)$、既存の閉歩道の位相積、$\zeta_8^4=-1$ を一続きに結んで位相積 $=(-1)^{\operatorname{rot}(\gamma)}$ を得た。SageMath `closed-walk-rotation-number-sign` は閉じた非後退辺列 1,064 件を `ZZ` と `QQbar` で厳密検査した。Lean は `KacWard/ClosedWalkRotationNumberSign.lean` と必要十分版を通し、必要十分版には体・整数指数の積の法則・第四冪の値だけが残る。平面の Whitney 式はトーラスではそのまま成り立たない（自己交差のない水平一周路は回転数 0）ため、次は巻き付き偶奇の補正項を明示して自己交差数と比較する。
+
+前進前レビューでは、前 tick の 4 の倍数性の本文 `lean` 配線と sorry 検査に実在しない旧定理名二つが残っていることを発見し、実在する定理名へ直して先行コミット・push した。「何も言っていない主張」の削除対象は無かった。
+
+並列の式変形統一は、姉妹側の「V̌′ の固有値」の Step 3 まで進んだ。部分和の一行三等号を四段の一行一等号・行末根拠つきへ開いた。次は同じ証明の Step 3 の極限と Step 3' を見る。
+
+## ひとつ前の到達点（2026-08-30 の 4 回目の tick 時点）
 
 **閉歩道の循環総回転数が 4 の倍数であることを四層で証明した。** 整数から方向番号の剰余類への射影 $\pi_4:\mathbb Z\to\mathbb Z/4\mathbb Z$（`def_direction_residue_projection`）を定義し、一歩が方向番号を回転数だけ進めること（`claim_step_advances_direction`、三場合）、端の方向番号の差が総回転数であること（`claim_walk_direction_difference`、辺の本数の帰納法）を経て、閉性の一周から $\pi_4(t_{\circ}(\gamma))=0$ すなわち $t_{\circ}(\gamma)\in4\mathbb Z$ を左簡約で得た（`claim_cyclic_total_turning_multiple_of_four`）。SageMath `cyclic-turning-multiple-of-four` は接続 660 件・辺列 6,776 件・閉歩道 1,064 件を `Integers(4)` と `ZZ` で厳密検査した。Lean は `KacWard/CyclicTurningVanishes.lean`（ℤ/4ℤ 具体版と 4 の整除の言い換え）と `NecSuf/KacWard/CyclicTurningVanishes.lean` を通し、必要十分版に残る仮定は φ の零の保存・加法性と左簡約（`AddLeftCancelMonoid`）だけである（加法群は不要と分かった）。次は循環総回転数を 4 で割った商（回転数）と自己交差数の偶奇の同定（Whitney 型の偶奇公式）へ進む。
 

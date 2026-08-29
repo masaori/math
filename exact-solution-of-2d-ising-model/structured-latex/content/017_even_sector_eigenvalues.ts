@@ -1480,9 +1480,17 @@ y_{\epsilon'}
         " と書くと、Step 2 と有限和の線型性から",
       ]),
       displayMath(
-        String.raw`E_K \check{Q}_\epsilon
-= \sum_{k=0}^{K}\frac{1}{k!}\check{X}^k\check{Q}_\epsilon
-= \left(\sum_{k=0}^{K}\frac{\check{g}(\epsilon)^k}{k!}\right)\check{Q}_\epsilon`,
+        String.raw`\begin{aligned}
+E_K \check{Q}_\epsilon
+&= \left(\sum_{k=0}^{K}\frac{1}{k!}\check{X}^k\right)\check{Q}_\epsilon
+   \quad (\because E_K \text{ の定義}) \\
+&= \sum_{k=0}^{K}\frac{1}{k!}\left(\check{X}^k\check{Q}_\epsilon\right)
+   \quad (\because \text{有限和と行列積の分配法則}) \\
+&= \sum_{k=0}^{K}\frac{1}{k!}\left(\check{g}(\epsilon)^k\check{Q}_\epsilon\right)
+   \quad (\because \text{Step 2}) \\
+&= \left(\sum_{k=0}^{K}\frac{\check{g}(\epsilon)^k}{k!}\right)\check{Q}_\epsilon
+   \quad (\because \text{有限和からの共通因子のくくり出し})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`K \to \infty`),
