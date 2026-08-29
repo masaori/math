@@ -26,6 +26,12 @@ type CalculationFormulaBoundary = {
   rationale: string;
 };
 
+type FiniteMatrixToolBoundary = {
+  nonPrerequisiteReferenceLabels?: string[];
+  statementDomain: string;
+  rationale: string;
+};
+
 const calculationFormulaBoundaryById = new Map<string, CalculationFormulaBoundary>([
   ["calc_formulae_000b_claim_cosh_sinh_basic_properties", {
     closure: "実数解析への脱出を伴う",
@@ -183,6 +189,34 @@ const calculationFormulaBoundaryById = new Map<string, CalculationFormulaBoundar
   }],
 ]);
 
+const finiteMatrixToolBoundaryById = new Map<string, FiniteMatrixToolBoundary>([
+  ["linear_space_general_000_definition_kronecker_product", {
+    nonPrerequisiteReferenceLabels: ["kronecker_product_rule", "tensor_basis"],
+    statementDomain: "有限次元複素ベクトル空間と有限複素行列",
+    rationale: "成分によるクロネッカー積の定義であり、後続の積公式と基底定理への参照は前提ではなく利用先の案内である。",
+  }],
+  ["linear_space_general_000b_claim_kronecker_product_rule", {
+    statementDomain: "有限複素行列",
+    rationale: "クロネッカー積の定義と有限和だけで積公式を示す。",
+  }],
+  ["linear_space_general_000c_claim_kronecker_multilinear", {
+    statementDomain: "有限複素行列",
+    rationale: "クロネッカー積の定義から成分ごとの有限な四則演算だけで多重線型性を示す。",
+  }],
+  ["linear_space_general_001_theorem_tensor_product_basis", {
+    statementDomain: "有限次元複素ベクトル空間",
+    rationale: "標準基底とクロネッカー積の多重線型性から有限個の基底を具体的に構成する。",
+  }],
+  ["linear_space_general_002_claim_scalar_identity_commutes", {
+    statementDomain: "現行 statement は任意の体上の有限正方行列（複素行列を含む）",
+    rationale: "スカラー行列と有限正方行列の成分計算だけで閉じる。現行の体 K による一般化は、最終的な複素行列への具体化時に別途確認する。",
+  }],
+  ["linear_space_general_004_lemma_centralizer_is_scalar", {
+    statementDomain: "有限次元複素ベクトル空間と有限複素行列",
+    rationale: "クロネッカー積で構成した行列単位との有限な交換関係だけから中心化する行列をスカラー行列に限定する。",
+  }],
+]);
+
 const directRealAnalysisInputsById = new Map<string, string[]>(
   [...calculationFormulaBoundaryById]
     .filter(([, boundary]) => boundary.directRealAnalysisInputs.length > 0)
@@ -222,7 +256,7 @@ for (const { block } of allBlocks) {
     incomingReferenceCount.set(target, (incomingReferenceCount.get(target) ?? 0) + 1);
   }
 }
-const isingSemanticPattern = /Ising|イジング|spin|スピン|lattice|格子|transfer|転送|sector|セクター|momentum|運動量|fermion|フェルミオン/i;
+const isingSemanticPattern = /Ising|イジング|spin|スピン|site|サイト|lattice|格子|transfer|転送|sector|セクター|momentum|運動量|fermion|フェルミオン/i;
 const baseEntries = files.flatMap(({ file, blocks }) =>
   blocks
     .filter(({ kind }) => kind === "definition" || kind === "claim" || kind === "theorem")
@@ -283,15 +317,36 @@ if (missingCalculationFormulaReviewIds.length > 0 || staleCalculationFormulaRevi
     `計算公式群の境界レビュー割当が棚卸し対象と一致しません。未割当=${missingCalculationFormulaReviewIds.join(",") || "なし"}; 対象外=${staleCalculationFormulaReviewIds.join(",") || "なし"}`,
   );
 }
+const configuredFiniteMatrixToolIds = new Set(finiteMatrixToolBoundaryById.keys());
+for (const id of configuredFiniteMatrixToolIds) {
+  const entry = baseEntryById.get(id);
+  if (entry === undefined) throw new Error(`有限複素行列の道具群の所有ブロックが存在しません: ${id}`);
+  if (entry.sourceFile !== "002_linear_space_general.ts") {
+    throw new Error(`有限複素行列の道具群が線型空間一般ファイルにありません: ${id}: ${entry.sourceFile}`);
+  }
+  if (entry.provisionalFinalChapter !== "数学的道具立て") {
+    throw new Error(`有限複素行列の道具群が数学的道具立てへ仮分類されていません: ${id}`);
+  }
+}
+const reviewedFiniteMatrixToolEntries = [...configuredFiniteMatrixToolIds]
+  .map((id) => baseEntryById.get(id)!)
+  .sort((left, right) => left.id.localeCompare(right.id));
+const reviewedFiniteMatrixToolLabels = new Set<string>(
+  reviewedFiniteMatrixToolEntries.flatMap(({ labels }) => labels),
+);
 const reviewedCalculationFormulaLabels = new Set<string>(
   reviewedCalculationFormulaEntries.flatMap(({ labels }) => labels),
 );
 const semanticPrerequisiteLabelsById = new Map<string, string[]>();
 for (const entry of baseEntries) {
-  const boundary = calculationFormulaBoundaryById.get(entry.id);
-  const excluded = boundary?.nonPrerequisiteReferenceLabels ?? [];
-  const implicit = boundary?.implicitPrerequisiteLabels ?? [];
-  const realAnalysisPropagationExcluded = boundary?.realAnalysisPropagationExcludedLabels ?? [];
+  const calculationBoundary = calculationFormulaBoundaryById.get(entry.id);
+  const finiteMatrixBoundary = finiteMatrixToolBoundaryById.get(entry.id);
+  const excluded = [
+    ...(calculationBoundary?.nonPrerequisiteReferenceLabels ?? []),
+    ...(finiteMatrixBoundary?.nonPrerequisiteReferenceLabels ?? []),
+  ];
+  const implicit = calculationBoundary?.implicitPrerequisiteLabels ?? [];
+  const realAnalysisPropagationExcluded = calculationBoundary?.realAnalysisPropagationExcludedLabels ?? [];
   if (new Set(excluded).size !== excluded.length) {
     throw new Error(`前提でない参照ラベルが重複しています: ${entry.id}`);
   }
@@ -328,6 +383,18 @@ for (const entry of baseEntries) {
     }
   }
   semanticPrerequisiteLabelsById.set(entry.id, semanticPrerequisiteLabels);
+}
+const finiteMatrixToolOutsideDependencies = reviewedFiniteMatrixToolEntries.flatMap(({ id }) =>
+  (semanticPrerequisiteLabelsById.get(id) ?? [])
+    .filter((label) => !reviewedFiniteMatrixToolLabels.has(label))
+    .map((label) => ({ entryId: id, label, ownerId: labelOwners.get(label) ?? null })),
+);
+if (finiteMatrixToolOutsideDependencies.length > 0) {
+  throw new Error(
+    `有限複素行列の道具群に外部前提があります: ${finiteMatrixToolOutsideDependencies
+      .map(({ entryId, label, ownerId }) => `${entryId}:${label}:${ownerId ?? "所有者なし"}`)
+      .join(",")}`,
+  );
 }
 
 type TransitiveRealAnalysisDependency = {
@@ -382,7 +449,41 @@ function transitiveRealAnalysisDependencies(
 
 const entries = baseEntries.map((entry) => {
   const boundary = calculationFormulaBoundaryById.get(entry.id);
-  if (boundary === undefined) return entry;
+  const finiteMatrixBoundary = finiteMatrixToolBoundaryById.get(entry.id);
+  if (boundary === undefined && finiteMatrixBoundary === undefined) return entry;
+  if (finiteMatrixBoundary !== undefined) {
+    const nonPrerequisiteReferenceLabels = new Set(
+      finiteMatrixBoundary.nonPrerequisiteReferenceLabels ?? [],
+    );
+    const prerequisiteLabels = semanticPrerequisiteLabelsById.get(entry.id) ?? [];
+    const insideDependencyLabels = prerequisiteLabels
+      .filter((label) => reviewedFiniteMatrixToolLabels.has(label))
+      .sort();
+    const outsideDependencyLabels = prerequisiteLabels
+      .filter((label) => !reviewedFiniteMatrixToolLabels.has(label))
+      .sort();
+    return {
+      ...entry,
+      finiteMatrixToolBoundaryReview: {
+        statementDomain: finiteMatrixBoundary.statementDomain,
+        rationale: finiteMatrixBoundary.rationale,
+        finalChapter: "数学的道具立て",
+        dependencyBoundary: {
+          insideReviewedFiniteMatrixToolLabels: insideDependencyLabels,
+          outsideReviewedFiniteMatrixToolLabels: outsideDependencyLabels,
+          referenceLabelsNotUsedAsPrerequisites: [...nonPrerequisiteReferenceLabels].sort(),
+          outsideReviewedFiniteMatrixToolOwners: outsideDependencyLabels
+            .map((label) => ({ label, ownerId: labelOwners.get(label) ?? null })),
+        },
+        isingSemanticVocabulary: {
+          matches: entry.classificationEvidence.isingSemanticMatches,
+          contaminated: entry.classificationEvidence.isingSemanticMatches.length > 0,
+          inspectedFields: ["title", "statement", "proof"],
+        },
+      },
+    };
+  }
+  if (boundary === undefined) throw new Error(`計算公式群の境界情報がありません: ${entry.id}`);
   const nonPrerequisiteReferenceLabels = new Set(boundary.nonPrerequisiteReferenceLabels ?? []);
   const implicitPrerequisiteLabels = [...(boundary.implicitPrerequisiteLabels ?? [])].sort();
   const realAnalysisPropagationExcludedLabels = [
@@ -464,6 +565,16 @@ const inventory = {
     ).length,
     classificationRule: "完備性・アルキメデス性・実指数関数・三角関数・逆三角関数・Euler公式を直接または依存先経由で使うものを実数解析への脱出とし、それらを使わず有限回の複素数・複素行列・商集合の代数操作だけで閉じるものを有限複素行列側とする。",
     reviewedEntryIds: [...reviewedCalculationFormulaIds].sort(),
+  },
+  finiteMatrixToolBoundaryReview: {
+    status: "クロネッカー積・その基底・スカラー行列・中心化に属する道具群について、依存境界とイジング固有語彙混入をブロック単位で確定した。",
+    reviewedEntryCount: reviewedFiniteMatrixToolEntries.length,
+    isingContaminatedEntryCount: reviewedFiniteMatrixToolEntries.filter(
+      ({ classificationEvidence }) => classificationEvidence.isingSemanticMatches.length > 0,
+    ).length,
+    outsideDependencyLabelCount: finiteMatrixToolOutsideDependencies.length,
+    classificationRule: "イジング模型を参照せず、有限次元のベクトル・行列の成分計算だけで statement と proof の意味が閉じるものを数学的道具立てに置く。",
+    reviewedEntryIds: reviewedFiniteMatrixToolEntries.map(({ id }) => id),
   },
   realAnalysisDependencySources: [...directRealAnalysisInputsById]
     .map(([id, directInputs]) => ({

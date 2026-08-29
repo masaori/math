@@ -292,7 +292,7 @@ export default defineBlocks([
           "1 行 1 等号の一続きの鎖と行末の (∵ …) へ揃えた（ν の定義から始め、和の差・l<k の項の消去・l=k の項の分離、" +
           "三角不等式・各項の評価・添字の置き換え・Step 2 の等比和・最後の狭義不等号）。内容は不変で、段は増えており減った段は無い。",
         "2026-08-09: 式変形の書き方の統一。Step 0〜3 という番号での区切りを、" +
-          "それぞれの中間目標の名前（多重添字の和を各サイトごとの和の積へ直すこと・" +
+          "それぞれの中間目標の名前（多重添字の和を各因子ごとの和の積へ直すこと・" +
           "(1) の証明・(2) の証明・(3) の証明）へ変えた（リポジトリの規約「番号や記号で管理しない」）。" +
           "(2) は式のあとに置かれていた日本語の説明（積が 1 になる条件、ν の単射性）を、" +
           "3 段の一続きの鎖の各行末の (∵ …) へ移した。段は増えており、減った段は無い。",
@@ -308,7 +308,7 @@ export default defineBlocks([
     id: "linear_space_general_000b_claim_kronecker_product_rule",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
-    title: { text: "クロネッカー積の積の規則（各サイトごとの積になること）" },
+    title: { text: "クロネッカー積の積の規則（各因子ごとの積になること）" },
     labels: ["kronecker_product_rule"],
     statement: [
       paragraph([
@@ -354,7 +354,7 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        "多重添字についての和を、各サイトごとの和の積へ直すこと。",
+        "多重添字についての和を、各因子ごとの和の積へ直すこと。",
         math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
         " と、各 ",
         math(String.raw`k\in\{1,\dots,M\}`),
@@ -423,7 +423,7 @@ export default defineBlocks([
 &= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(B_k)_{t_kl_k}\right)
 \quad (\because \text{複素数の積の可換律・結合律}) \\
 &= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(B_k)_{tl_k}\right)
-\quad (\because \text{多重添字の和を各サイトごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(B_k)_{tl_k} \text{ に適用}) \\
+\quad (\because \text{多重添字の和を各因子ごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(B_k)_{tl_k} \text{ に適用}) \\
 &= \prod_{k=1}^{M}(A_kB_k)_{i_kl_k}
 \quad (\because \text{行列の積の定義}) \\
 &= \left((A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)\right)_{\nu(I),\nu(L)}
@@ -477,7 +477,7 @@ export default defineBlocks([
 &= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(v_k)_{t_k}\right)
 \quad (\because \text{複素数の積の可換律・結合律}) \\
 &= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(v_k)_{t}\right)
-\quad (\because \text{多重添字の和を各サイトごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(v_k)_{t} \text{ に適用}) \\
+\quad (\because \text{多重添字の和を各因子ごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(v_k)_{t} \text{ に適用}) \\
 &= \prod_{k=1}^{M}(A_kv_k)_{i_k}
 \quad (\because \text{行列と数ベクトルの積の定義}) \\
 &= \left((A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)\right)_{\nu(I)}
@@ -492,7 +492,7 @@ export default defineBlocks([
           "004 章以降の証明で繰り返し根拠として使われているのに、定義も証明も本文に無かった" +
           "（goal-alignment-audit の A-3）。クロネッカー積として定義したことで、成分計算で証明できる" +
           "主張になったのでここに置いた。",
-        "2026-08-10: 式変形の書き方の統一。2 箇所を直した。準備（多重添字の和を各サイトごとの" +
+        "2026-08-10: 式変形の書き方の統一。2 箇所を直した。準備（多重添字の和を各因子ごとの" +
           "和の積へ直す段）の鎖の最終行に根拠が無かったので (∵ …) を付けた。" +
           "(3) の鎖は、1 行で 2 つの定理を同時に適用していた段（ν が全単射であることと ⊠ の定義で" +
           "書き換える段に、複素数の積の可換律・結合律による並べ替えを混ぜていた）を 2 段へ割り、" +
