@@ -80,6 +80,21 @@
       "calculation_formulae_046_claim_conjugation_is_ring_homomorphism"
     ]
   },
+  "finiteMatrixToolBoundaryReview": {
+    "status": "クロネッカー積・その基底・スカラー行列・中心化に属する道具群について、依存境界とイジング固有語彙混入をブロック単位で確定した。",
+    "reviewedEntryCount": 6,
+    "isingContaminatedEntryCount": 0,
+    "outsideDependencyLabelCount": 0,
+    "classificationRule": "イジング模型を参照せず、有限次元のベクトル・行列の成分計算だけで statement と proof の意味が閉じるものを数学的道具立てに置く。",
+    "reviewedEntryIds": [
+      "linear_space_general_000_definition_kronecker_product",
+      "linear_space_general_000b_claim_kronecker_product_rule",
+      "linear_space_general_000c_claim_kronecker_multilinear",
+      "linear_space_general_001_theorem_tensor_product_basis",
+      "linear_space_general_002_claim_scalar_identity_commutes",
+      "linear_space_general_004_lemma_centralizer_is_scalar"
+    ]
+  },
   "realAnalysisDependencySources": [
     {
       "id": "calc_formulae_000b_claim_cosh_sinh_basic_properties",
@@ -2706,12 +2721,35 @@
       "dependsOnLabels": [
         "kronecker_product_rule",
         "tensor_basis"
-      ]
+      ],
+      "finiteMatrixToolBoundaryReview": {
+        "statementDomain": "有限次元複素ベクトル空間と有限複素行列",
+        "rationale": "成分によるクロネッカー積の定義であり、後続の積公式と基底定理への参照は前提ではなく利用先の案内である。",
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedFiniteMatrixToolLabels": [],
+          "outsideReviewedFiniteMatrixToolLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [
+            "kronecker_product_rule",
+            "tensor_basis"
+          ],
+          "outsideReviewedFiniteMatrixToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_000b_claim_kronecker_product_rule",
       "kind": "claim",
-      "title": "クロネッカー積の積の規則（各サイトごとの積になること）",
+      "title": "クロネッカー積の積の規則（各因子ごとの積になること）",
       "labels": [
         "kronecker_product_rule"
       ],
@@ -2726,7 +2764,29 @@
       },
       "dependsOnLabels": [
         "def_kronecker"
-      ]
+      ],
+      "finiteMatrixToolBoundaryReview": {
+        "statementDomain": "有限複素行列",
+        "rationale": "クロネッカー積の定義と有限和だけで積公式を示す。",
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedFiniteMatrixToolLabels": [
+            "def_kronecker"
+          ],
+          "outsideReviewedFiniteMatrixToolLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "outsideReviewedFiniteMatrixToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_000c_claim_kronecker_multilinear",
@@ -2746,7 +2806,29 @@
       },
       "dependsOnLabels": [
         "def_kronecker"
-      ]
+      ],
+      "finiteMatrixToolBoundaryReview": {
+        "statementDomain": "有限複素行列",
+        "rationale": "クロネッカー積の定義から成分ごとの有限な四則演算だけで多重線型性を示す。",
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedFiniteMatrixToolLabels": [
+            "def_kronecker"
+          ],
+          "outsideReviewedFiniteMatrixToolLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "outsideReviewedFiniteMatrixToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_000d_claim_kronecker_transpose",
@@ -2787,7 +2869,30 @@
       "dependsOnLabels": [
         "def_kronecker",
         "kronecker_multilinear"
-      ]
+      ],
+      "finiteMatrixToolBoundaryReview": {
+        "statementDomain": "有限次元複素ベクトル空間",
+        "rationale": "標準基底とクロネッカー積の多重線型性から有限個の基底を具体的に構成する。",
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedFiniteMatrixToolLabels": [
+            "def_kronecker",
+            "kronecker_multilinear"
+          ],
+          "outsideReviewedFiniteMatrixToolLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "outsideReviewedFiniteMatrixToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_002_claim_scalar_identity_commutes",
@@ -2805,7 +2910,27 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "finiteMatrixToolBoundaryReview": {
+        "statementDomain": "現行 statement は任意の体上の有限正方行列（複素行列を含む）",
+        "rationale": "スカラー行列と有限正方行列の成分計算だけで閉じる。現行の体 K による一般化は、最終的な複素行列への具体化時に別途確認する。",
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedFiniteMatrixToolLabels": [],
+          "outsideReviewedFiniteMatrixToolLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "outsideReviewedFiniteMatrixToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_004_lemma_centralizer_is_scalar",
@@ -2828,7 +2953,32 @@
         "kronecker_multilinear",
         "kronecker_product_rule",
         "tensor_basis"
-      ]
+      ],
+      "finiteMatrixToolBoundaryReview": {
+        "statementDomain": "有限次元複素ベクトル空間と有限複素行列",
+        "rationale": "クロネッカー積で構成した行列単位との有限な交換関係だけから中心化する行列をスカラー行列に限定する。",
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedFiniteMatrixToolLabels": [
+            "def_kronecker",
+            "kronecker_multilinear",
+            "kronecker_product_rule",
+            "tensor_basis"
+          ],
+          "outsideReviewedFiniteMatrixToolLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "outsideReviewedFiniteMatrixToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_002b_definition_matrix_norm",
@@ -3646,7 +3796,9 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "incomingReferenceCount": 2,
-        "isingSemanticMatches": [],
+        "isingSemanticMatches": [
+          "サイト"
+        ],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
       "dependsOnLabels": [
@@ -3878,7 +4030,9 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "incomingReferenceCount": 1,
-        "isingSemanticMatches": [],
+        "isingSemanticMatches": [
+          "サイト"
+        ],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
       "dependsOnLabels": [
@@ -5180,7 +5334,7 @@
         "mathematicalToolCandidateFile": false,
         "incomingReferenceCount": 3,
         "isingSemanticMatches": [
-          "transfer"
+          "サイト"
         ],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
@@ -6055,7 +6209,7 @@
         "mathematicalToolCandidateFile": false,
         "incomingReferenceCount": 3,
         "isingSemanticMatches": [
-          "transfer"
+          "サイト"
         ],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
@@ -7411,7 +7565,7 @@
         "mathematicalToolCandidateFile": false,
         "incomingReferenceCount": 0,
         "isingSemanticMatches": [
-          "transfer"
+          "サイト"
         ],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
