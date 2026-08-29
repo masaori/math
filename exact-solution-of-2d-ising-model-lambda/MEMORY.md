@@ -8,6 +8,8 @@
 
 前進前レビューでは、任意の横断を扱う平滑化後の通過族が孤立横断だけを定義域とする既存定義を引用していたため、出辺交換の三場合をその場で直接定義し、定義域の暗黙の拡張を除いた（コミット `38b7b617`）。
 
+並列の式変形統一は、姉妹側の「$V^{(+)}$ の固有値」で右固有値等式の一行三等号を三段へ、最大・最小固有値の積を二段へ開いた。次は同じ章の「$V^{(+)}$ の最大固有値は単純である」を見る。
+
 ## ひとつ前の到達点（2026-08-30 の 12 回目の tick 時点）
 
 **横断の平滑化が横断の頂点で各軸の直進通過数を一つ減らし、他の頂点では変えないことを四層で証明した。** 平滑化後の出辺 $\vec f_r$ と平滑化後の直進通過数 $n^{\mathrm{sm}}_{w,a}(\gamma;k,l)\in\mathbb N$（`def_smoothing_straight_visit_count`）を定義した。平滑化の構成は孤立性を使わないことを明示し、選んだ二添字が平滑化後に直進を失うこと（`claim_step_advances_direction` による方向番号の一致からの矛盾）と他の添字の帰属の不変性から、$S^{\mathrm{sm}}_{w,a}=S_{w,a}\setminus\{k,l\}$ の一元除去で更新式（`claim_smoothing_straight_visit_count_update`）を得た。SageMath `smoothing-straight-visit-count` は閉歩道 24,628 件・横断対 3,584 対（非孤立 1,248 対、$L=2,3$ は辺 8 本まで）を `ZZ` で厳密検査した。Lean は `KacWard/SmoothingStraightVisitCount.lean` と必要十分版 `flip_single_membership_card_necSuf` を通し、必要十分版に残る仮定は「述語がただ一つの元で真から偽へ変わり、他では変わらない」ことだけである。次は頂点ごとの横断数の更新 $c_v^{\mathrm{sm}}=(n_{v,0}-1)(n_{v,1}-1)$ を積表示（`claim_vertex_crossing_number_factorization`）と結合して示す。

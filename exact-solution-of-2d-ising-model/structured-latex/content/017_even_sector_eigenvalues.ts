@@ -2312,9 +2312,15 @@ c^2 &= (2s_2)^M
         " だから",
       ]),
       displayMath(
-        String.raw`V^{(+)}\check{Q}_\epsilon = (2s_2)^{M/2}\check{V}'\check{Q}_\epsilon
-= (2s_2)^{M/2}e^{\check{g}(\epsilon)}\check{Q}_\epsilon
-= \check\Lambda_\epsilon\check{Q}_\epsilon`,
+        String.raw`\begin{aligned}
+V^{(+)}\check{Q}_\epsilon
+&= (2s_2)^{M/2}\check{V}'\check{Q}_\epsilon
+   \quad (\because \text{定数 }c\text{ の決定}) \\
+&= (2s_2)^{M/2}e^{\check{g}(\epsilon)}\check{Q}_\epsilon
+   \quad (\because \check{V}'\text{ の固有値}) \\
+&= \check\Lambda_\epsilon\check{Q}_\epsilon
+   \quad (\because \check\Lambda_\epsilon\text{ の定義})
+\end{aligned}`,
       ),
       paragraph([
         "同じ式変形を ",
@@ -2387,14 +2393,18 @@ c^2 &= (2s_2)^M
       paragraph([
         "を代入して statement の ",
         math(String.raw`\check\Lambda_{\max}, \check\Lambda_{\min}`),
-        " を得る。積は指数部分が打ち消し合って ",
-        math(String.raw`\check\Lambda_{\max}\check\Lambda_{\min} = (2s_2)^{M}`),
-        " であり、",
-        ref("constant_c_value_even_sector"),
-        " より これは ",
-        math(String.raw`c^2`),
-        " である。",
+        " を得る。さらに",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\Lambda_{\max}\check\Lambda_{\min}
+&= (2s_2)^M
+   \quad (\because \text{指数部分が互いに打ち消し合う}) \\
+&= c^2
+   \quad (\because \text{定数 }c\text{ の決定})
+\end{aligned}`,
+      ),
+      paragraph([ref("constant_c_value_even_sector"), " を第 2 行で用いた。"]),
     ],
     conversion: {
       status: "added",
