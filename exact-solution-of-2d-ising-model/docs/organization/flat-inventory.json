@@ -110,6 +110,21 @@
       "linear_space_general_003d_claim_matrix_completeness"
     ]
   },
+  "matrixExponentialToolBoundaryReview": {
+    "status": "実指数級数、行列指数級数の収束、各点収束、指数関数の定義、可換行列の積公式、零行列の指数関数について、実数解析への脱出と依存境界をブロック単位で確定した。",
+    "reviewedEntryCount": 6,
+    "realAnalysisEscapeEntryCount": 6,
+    "isingContaminatedEntryCount": 0,
+    "classificationRule": "指数級数を定義する極限・完備性、実数級数の剰余、行列級数のノルム収束を直接または依存先経由で使うものは、有限行列計算を主要部分に含んでも実数解析への脱出を伴うものとして数学的道具立てに置く。",
+    "reviewedEntryIds": [
+      "exp_linear_map_000a_claim_real_exp_series_converges",
+      "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+      "exp_linear_map_002_definition_exp_of_endomorphism",
+      "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+      "exp_linear_map_004_theorem_exp_zero_is_identity"
+    ]
+  },
   "realAnalysisDependencySources": [
     {
       "id": "calc_formulae_000b_claim_cosh_sinh_basic_properties",
@@ -117,6 +132,8 @@
         "cosh_sinh_basic_properties"
       ],
       "reviewedCalculationFormula": true,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "実指数関数の乗法性 exp(x)exp(y)=exp(x+y)",
         "実指数関数の単位元での値 exp(0)=1",
@@ -130,6 +147,8 @@
         "sqrt_nonnegative_existence_uniqueness"
       ],
       "reviewedCalculationFormula": true,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "実数の完備性（上限性質）"
       ]
@@ -138,6 +157,8 @@
       "id": "calc_formulae_012_definition_arc_length",
       "labels": [],
       "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "実曲線の弧長"
       ]
@@ -146,6 +167,8 @@
       "id": "calc_formulae_014_definition_inverse_trig_functions",
       "labels": [],
       "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "実三角関数の連続性と逆関数の存在"
       ]
@@ -156,6 +179,8 @@
         "cos_arctan_sin_arctan"
       ],
       "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "逆三角関数 arctan と三角関数 sin・cos"
       ]
@@ -166,6 +191,8 @@
         "angle_section_existence_uniqueness"
       ],
       "reviewedCalculationFormula": true,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "実数のアルキメデス性（完備性から従う）"
       ]
@@ -176,6 +203,8 @@
         "def_phi_polar"
       ],
       "reviewedCalculationFormula": true,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "逆三角関数 arctan"
       ]
@@ -186,6 +215,8 @@
         "def_phi_cartesian"
       ],
       "reviewedCalculationFormula": true,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "三角関数 sin・cos と周期性"
       ]
@@ -196,8 +227,78 @@
         "euler_formula_cos_sin"
       ],
       "reviewedCalculationFormula": true,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "Euler の公式と三角関数の偶奇性"
+      ]
+    },
+    {
+      "id": "exp_linear_map_000a_claim_real_exp_series_converges",
+      "labels": [
+        "real_exp_series_converges"
+      ],
+      "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": true,
+      "directInputs": [
+        "実数のアルキメデス性（完備性から従う）",
+        "単調非減少かつ上に有界な実数列の収束（実数の完備性）",
+        "単調収束列の極限と上限の一致",
+        "実数列の極限の差"
+      ]
+    },
+    {
+      "id": "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "labels": [
+        "matrix_exp_series_converges"
+      ],
+      "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": true,
+      "directInputs": [
+        "単調非減少かつ上に有界な実数列の収束（実数の完備性）"
+      ]
+    },
+    {
+      "id": "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+      "labels": [
+        "exp_converges"
+      ],
+      "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": true,
+      "directInputs": [
+        "実数列のはさみうちの原理",
+        "0 に収束する実数列の定数倍も 0 に収束すること",
+        "有限個の実数列の極限と有限和の交換",
+        "単調非減少かつ上に有界な実数列の収束（実数の完備性）"
+      ]
+    },
+    {
+      "id": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+      "labels": [
+        "theorem_exp_product"
+      ],
+      "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": true,
+      "directInputs": [
+        "無限大へ発散する自然数添字に沿った 0 収束列も 0 に収束すること",
+        "0 に収束する実数列の有限和・非負定数倍も 0 に収束すること"
+      ]
+    },
+    {
+      "id": "exp_linear_map_004_theorem_exp_zero_is_identity",
+      "labels": [
+        "theorem_exp_zero"
+      ],
+      "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": false,
+      "reviewedMatrixExponentialTool": true,
+      "directInputs": [
+        "収束級数から有限個の初項を分離すること",
+        "収束する行列級数の項別スカラー倍"
       ]
     },
     {
@@ -206,6 +307,8 @@
         "def_matrix_norm"
       ],
       "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": true,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "実数列の収束概念"
       ]
@@ -216,6 +319,8 @@
         "matrix_norm_triangle_inequality"
       ],
       "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": true,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "実数列の極限の和",
         "非負定数を 0 収束列で上から抑える極限・順序則"
@@ -227,6 +332,8 @@
         "matrix_multiplication_continuity"
       ],
       "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": true,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "0 に収束する実数列の定数倍も 0 に収束すること"
       ]
@@ -237,6 +344,8 @@
         "matrix_completeness"
       ],
       "reviewedCalculationFormula": false,
+      "reviewedAnalyticMatrixTool": true,
+      "reviewedMatrixExponentialTool": false,
       "directInputs": [
         "実数の完備性（実数 Cauchy 列の収束）",
         "0 に収束する実数列の平方も 0 に収束すること",
@@ -3535,7 +3644,37 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "matrixExponentialToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "非負実数上の指数級数、その部分和と剰余",
+        "rationale": "上限性質に基づく単調収束定理とアルキメデス性を直接使って、指数級数の収束と剰余評価を示す。",
+        "directRealAnalysisInputs": [
+          "実数のアルキメデス性（完備性から従う）",
+          "単調非減少かつ上に有界な実数列の収束（実数の完備性）",
+          "単調収束列の極限と上限の一致",
+          "実数列の極限の差"
+        ],
+        "transitiveRealAnalysisDependencies": [],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedMatrixExponentialToolLabels": [],
+          "outsideReviewedMatrixExponentialToolLabels": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [],
+          "realAnalysisPropagationExcludedPaths": [],
+          "outsideReviewedMatrixExponentialToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "exp_linear_map_000b_claim_matrix_exp_series_converges",
@@ -3559,7 +3698,118 @@
         "matrix_norm_submultiplicativity",
         "matrix_norm_triangle_inequality",
         "real_exp_series_converges"
-      ]
+      ],
+      "matrixExponentialToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の実・複素正方行列、その実数値 Frobenius ノルムと行列級数",
+        "rationale": "行列級数を実指数級数で評価し、行列空間の完備性と絶対収束判定を使う。三角不等式から使うのは有限和とスカラー倍の性質であり、その証明に同居する極限則は使わない。",
+        "directRealAnalysisInputs": [
+          "単調非減少かつ上に有界な実数列の収束（実数の完備性）"
+        ],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "def_matrix_norm",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_000a_claim_real_exp_series_converges",
+            "sourceLabels": [
+              "real_exp_series_converges"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）",
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）",
+              "単調収束列の極限と上限の一致",
+              "実数列の極限の差"
+            ],
+            "pathLabels": [
+              "real_exp_series_converges"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002b_definition_matrix_norm",
+            "sourceLabels": [
+              "def_matrix_norm"
+            ],
+            "directInputs": [
+              "実数列の収束概念"
+            ],
+            "pathLabels": [
+              "def_matrix_norm"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_003d_claim_matrix_completeness",
+            "sourceLabels": [
+              "matrix_completeness"
+            ],
+            "directInputs": [
+              "実数の完備性（実数 Cauchy 列の収束）",
+              "0 に収束する実数列の平方も 0 に収束すること",
+              "有限個の実数列の極限と有限和の交換",
+              "収束する実数列は Cauchy 列であること",
+              "非負項級数の部分和と極限の順序、および極限への不等式の移行"
+            ],
+            "pathLabels": [
+              "matrix_completeness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedMatrixExponentialToolLabels": [
+            "real_exp_series_converges"
+          ],
+          "outsideReviewedMatrixExponentialToolLabels": [
+            "def_matrix_norm",
+            "matrix_completeness",
+            "matrix_norm_submultiplicativity",
+            "matrix_norm_triangle_inequality"
+          ],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [
+            "matrix_norm_triangle_inequality"
+          ],
+          "realAnalysisPropagationExcludedPaths": [],
+          "outsideReviewedMatrixExponentialToolOwners": [
+            {
+              "label": "def_matrix_norm",
+              "ownerId": "linear_space_general_002b_definition_matrix_norm"
+            },
+            {
+              "label": "matrix_completeness",
+              "ownerId": "linear_space_general_003d_claim_matrix_completeness"
+            },
+            {
+              "label": "matrix_norm_submultiplicativity",
+              "ownerId": "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+            },
+            {
+              "label": "matrix_norm_triangle_inequality",
+              "ownerId": "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "exp_linear_map_001_theorem_exp_series_pointwise_converges",
@@ -3584,7 +3834,145 @@
         "matrix_norm_triangle_inequality",
         "matrix_norm_vector_bound",
         "real_exp_series_converges"
-      ]
+      ],
+      "matrixExponentialToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の実・複素正方行列、数ベクトル、行列上の線型写像と、それらの指数級数の各点収束",
+        "rationale": "行列指数級数のノルム収束を数ベクトル・成分へ移す際に実数列のはさみうちを使い、線型写像の指数級数では単調有界収束と有限和の極限則を直接使う。",
+        "directRealAnalysisInputs": [
+          "実数列のはさみうちの原理",
+          "0 に収束する実数列の定数倍も 0 に収束すること",
+          "有限個の実数列の極限と有限和の交換",
+          "単調非減少かつ上に有界な実数列の収束（実数の完備性）"
+        ],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "def_matrix_norm",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_000a_claim_real_exp_series_converges",
+            "sourceLabels": [
+              "real_exp_series_converges"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）",
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）",
+              "単調収束列の極限と上限の一致",
+              "実数列の極限の差"
+            ],
+            "pathLabels": [
+              "real_exp_series_converges"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_000b_claim_matrix_exp_series_converges",
+            "sourceLabels": [
+              "matrix_exp_series_converges"
+            ],
+            "directInputs": [
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）"
+            ],
+            "pathLabels": [
+              "matrix_exp_series_converges"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002b_definition_matrix_norm",
+            "sourceLabels": [
+              "def_matrix_norm"
+            ],
+            "directInputs": [
+              "実数列の収束概念"
+            ],
+            "pathLabels": [
+              "def_matrix_norm"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+            "sourceLabels": [
+              "matrix_norm_triangle_inequality"
+            ],
+            "directInputs": [
+              "実数列の極限の和",
+              "非負定数を 0 収束列で上から抑える極限・順序則"
+            ],
+            "pathLabels": [
+              "matrix_norm_triangle_inequality"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_003d_claim_matrix_completeness",
+            "sourceLabels": [
+              "matrix_completeness"
+            ],
+            "directInputs": [
+              "実数の完備性（実数 Cauchy 列の収束）",
+              "0 に収束する実数列の平方も 0 に収束すること",
+              "有限個の実数列の極限と有限和の交換",
+              "収束する実数列は Cauchy 列であること",
+              "非負項級数の部分和と極限の順序、および極限への不等式の移行"
+            ],
+            "pathLabels": [
+              "matrix_completeness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedMatrixExponentialToolLabels": [
+            "matrix_exp_series_converges",
+            "real_exp_series_converges"
+          ],
+          "outsideReviewedMatrixExponentialToolLabels": [
+            "def_matrix_norm",
+            "matrix_completeness",
+            "matrix_norm_triangle_inequality",
+            "matrix_norm_vector_bound"
+          ],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [],
+          "realAnalysisPropagationExcludedPaths": [],
+          "outsideReviewedMatrixExponentialToolOwners": [
+            {
+              "label": "def_matrix_norm",
+              "ownerId": "linear_space_general_002b_definition_matrix_norm"
+            },
+            {
+              "label": "matrix_completeness",
+              "ownerId": "linear_space_general_003d_claim_matrix_completeness"
+            },
+            {
+              "label": "matrix_norm_triangle_inequality",
+              "ownerId": "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+            },
+            {
+              "label": "matrix_norm_vector_bound",
+              "ownerId": "linear_space_general_003c_claim_matrix_norm_vector_bound"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "exp_linear_map_002_definition_exp_of_endomorphism",
@@ -3607,7 +3995,147 @@
         "exp_converges",
         "matrix_exp_series_converges",
         "matrix_norm_triangle_inequality"
-      ]
+      ],
+      "matrixExponentialToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の実・複素正方行列と、行列空間上の線型写像",
+        "rationale": "行列と行列上の線型写像の指数関数を、先行するノルム収束・各点収束と極限一意性に基づいて定義する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "def_matrix_norm",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_000a_claim_real_exp_series_converges",
+            "sourceLabels": [
+              "real_exp_series_converges"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）",
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）",
+              "単調収束列の極限と上限の一致",
+              "実数列の極限の差"
+            ],
+            "pathLabels": [
+              "exp_converges",
+              "real_exp_series_converges"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_000b_claim_matrix_exp_series_converges",
+            "sourceLabels": [
+              "matrix_exp_series_converges"
+            ],
+            "directInputs": [
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）"
+            ],
+            "pathLabels": [
+              "matrix_exp_series_converges"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+            "sourceLabels": [
+              "exp_converges"
+            ],
+            "directInputs": [
+              "実数列のはさみうちの原理",
+              "0 に収束する実数列の定数倍も 0 に収束すること",
+              "有限個の実数列の極限と有限和の交換",
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）"
+            ],
+            "pathLabels": [
+              "exp_converges"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002b_definition_matrix_norm",
+            "sourceLabels": [
+              "def_matrix_norm"
+            ],
+            "directInputs": [
+              "実数列の収束概念"
+            ],
+            "pathLabels": [
+              "def_matrix_norm"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+            "sourceLabels": [
+              "matrix_norm_triangle_inequality"
+            ],
+            "directInputs": [
+              "実数列の極限の和",
+              "非負定数を 0 収束列で上から抑える極限・順序則"
+            ],
+            "pathLabels": [
+              "matrix_norm_triangle_inequality"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_003d_claim_matrix_completeness",
+            "sourceLabels": [
+              "matrix_completeness"
+            ],
+            "directInputs": [
+              "実数の完備性（実数 Cauchy 列の収束）",
+              "0 に収束する実数列の平方も 0 に収束すること",
+              "有限個の実数列の極限と有限和の交換",
+              "収束する実数列は Cauchy 列であること",
+              "非負項級数の部分和と極限の順序、および極限への不等式の移行"
+            ],
+            "pathLabels": [
+              "exp_converges",
+              "matrix_completeness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedMatrixExponentialToolLabels": [
+            "exp_converges",
+            "matrix_exp_series_converges"
+          ],
+          "outsideReviewedMatrixExponentialToolLabels": [
+            "def_matrix_norm",
+            "matrix_norm_triangle_inequality"
+          ],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [],
+          "realAnalysisPropagationExcludedPaths": [],
+          "outsideReviewedMatrixExponentialToolOwners": [
+            {
+              "label": "def_matrix_norm",
+              "ownerId": "linear_space_general_002b_definition_matrix_norm"
+            },
+            {
+              "label": "matrix_norm_triangle_inequality",
+              "ownerId": "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
@@ -3632,7 +4160,145 @@
         "matrix_norm_submultiplicativity",
         "matrix_norm_triangle_inequality",
         "real_exp_series_converges"
-      ]
+      ],
+      "matrixExponentialToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の可換な実・複素正方行列と、その指数関数",
+        "rationale": "二項定理と有限行列計算に加え、指数級数の剰余を発散する添字で評価し、ノルム収束列の積と有限和の極限を使う。",
+        "directRealAnalysisInputs": [
+          "無限大へ発散する自然数添字に沿った 0 収束列も 0 に収束すること",
+          "0 に収束する実数列の有限和・非負定数倍も 0 に収束すること"
+        ],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "def_matrix_norm",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_000a_claim_real_exp_series_converges",
+            "sourceLabels": [
+              "real_exp_series_converges"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）",
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）",
+              "単調収束列の極限と上限の一致",
+              "実数列の極限の差"
+            ],
+            "pathLabels": [
+              "real_exp_series_converges"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_000b_claim_matrix_exp_series_converges",
+            "sourceLabels": [
+              "matrix_exp_series_converges"
+            ],
+            "directInputs": [
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）"
+            ],
+            "pathLabels": [
+              "matrix_exp_series_converges"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002b_definition_matrix_norm",
+            "sourceLabels": [
+              "def_matrix_norm"
+            ],
+            "directInputs": [
+              "実数列の収束概念"
+            ],
+            "pathLabels": [
+              "def_matrix_norm"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+            "sourceLabels": [
+              "matrix_norm_triangle_inequality"
+            ],
+            "directInputs": [
+              "実数列の極限の和",
+              "非負定数を 0 収束列で上から抑える極限・順序則"
+            ],
+            "pathLabels": [
+              "matrix_norm_triangle_inequality"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_003d_claim_matrix_completeness",
+            "sourceLabels": [
+              "matrix_completeness"
+            ],
+            "directInputs": [
+              "実数の完備性（実数 Cauchy 列の収束）",
+              "0 に収束する実数列の平方も 0 に収束すること",
+              "有限個の実数列の極限と有限和の交換",
+              "収束する実数列は Cauchy 列であること",
+              "非負項級数の部分和と極限の順序、および極限への不等式の移行"
+            ],
+            "pathLabels": [
+              "matrix_exp_series_converges",
+              "matrix_completeness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedMatrixExponentialToolLabels": [
+            "def_exp",
+            "matrix_exp_series_converges",
+            "real_exp_series_converges"
+          ],
+          "outsideReviewedMatrixExponentialToolLabels": [
+            "def_matrix_norm",
+            "matrix_norm_submultiplicativity",
+            "matrix_norm_triangle_inequality"
+          ],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [],
+          "realAnalysisPropagationExcludedPaths": [
+            [
+              "def_exp",
+              "exp_converges"
+            ]
+          ],
+          "outsideReviewedMatrixExponentialToolOwners": [
+            {
+              "label": "def_matrix_norm",
+              "ownerId": "linear_space_general_002b_definition_matrix_norm"
+            },
+            {
+              "label": "matrix_norm_submultiplicativity",
+              "ownerId": "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+            },
+            {
+              "label": "matrix_norm_triangle_inequality",
+              "ownerId": "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "exp_linear_map_004_theorem_exp_zero_is_identity",
@@ -3652,7 +4318,133 @@
       },
       "dependsOnLabels": [
         "def_exp"
-      ]
+      ],
+      "matrixExponentialToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の零行列・単位行列と、その指数関数",
+        "rationale": "有限な零行列計算そのものに加え、指数関数を定める収束行列級数の初項分離と項別スカラー倍を使う。",
+        "directRealAnalysisInputs": [
+          "収束級数から有限個の初項を分離すること",
+          "収束する行列級数の項別スカラー倍"
+        ],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "def_exp",
+              "def_matrix_norm",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_000a_claim_real_exp_series_converges",
+            "sourceLabels": [
+              "real_exp_series_converges"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）",
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）",
+              "単調収束列の極限と上限の一致",
+              "実数列の極限の差"
+            ],
+            "pathLabels": [
+              "def_exp",
+              "matrix_exp_series_converges",
+              "real_exp_series_converges"
+            ]
+          },
+          {
+            "sourceId": "exp_linear_map_000b_claim_matrix_exp_series_converges",
+            "sourceLabels": [
+              "matrix_exp_series_converges"
+            ],
+            "directInputs": [
+              "単調非減少かつ上に有界な実数列の収束（実数の完備性）"
+            ],
+            "pathLabels": [
+              "def_exp",
+              "matrix_exp_series_converges"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002b_definition_matrix_norm",
+            "sourceLabels": [
+              "def_matrix_norm"
+            ],
+            "directInputs": [
+              "実数列の収束概念"
+            ],
+            "pathLabels": [
+              "def_exp",
+              "def_matrix_norm"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+            "sourceLabels": [
+              "matrix_norm_triangle_inequality"
+            ],
+            "directInputs": [
+              "実数列の極限の和",
+              "非負定数を 0 収束列で上から抑える極限・順序則"
+            ],
+            "pathLabels": [
+              "def_exp",
+              "matrix_norm_triangle_inequality"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_003d_claim_matrix_completeness",
+            "sourceLabels": [
+              "matrix_completeness"
+            ],
+            "directInputs": [
+              "実数の完備性（実数 Cauchy 列の収束）",
+              "0 に収束する実数列の平方も 0 に収束すること",
+              "有限個の実数列の極限と有限和の交換",
+              "収束する実数列は Cauchy 列であること",
+              "非負項級数の部分和と極限の順序、および極限への不等式の移行"
+            ],
+            "pathLabels": [
+              "def_exp",
+              "matrix_exp_series_converges",
+              "matrix_completeness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedMatrixExponentialToolLabels": [
+            "def_exp"
+          ],
+          "outsideReviewedMatrixExponentialToolLabels": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [],
+          "realAnalysisPropagationExcludedPaths": [
+            [
+              "def_exp",
+              "exp_converges"
+            ]
+          ],
+          "outsideReviewedMatrixExponentialToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "transfer_matrix_001_definition_symbols",

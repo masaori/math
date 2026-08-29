@@ -41,6 +41,12 @@ type AnalyticMatrixToolBoundary = {
   rationale: string;
 };
 
+type MatrixExponentialToolBoundary = AnalyticMatrixToolBoundary;
+
+type MatrixExponentialToolBoundaryWithPaths = MatrixExponentialToolBoundary & {
+  realAnalysisPropagationExcludedPaths?: string[][];
+};
+
 const calculationFormulaBoundaryById = new Map<string, CalculationFormulaBoundary>([
   ["calc_formulae_000b_claim_cosh_sinh_basic_properties", {
     closure: "実数解析への脱出を伴う",
@@ -285,8 +291,66 @@ const analyticMatrixToolBoundaryById = new Map<string, AnalyticMatrixToolBoundar
   }],
 ]);
 
+const matrixExponentialToolBoundaryById = new Map<string, MatrixExponentialToolBoundaryWithPaths>([
+  ["exp_linear_map_000a_claim_real_exp_series_converges", {
+    closure: "実数解析への脱出を伴う",
+    directRealAnalysisInputs: [
+      "実数のアルキメデス性（完備性から従う）",
+      "単調非減少かつ上に有界な実数列の収束（実数の完備性）",
+      "単調収束列の極限と上限の一致",
+      "実数列の極限の差",
+    ],
+    statementDomain: "非負実数上の指数級数、その部分和と剰余",
+    rationale: "上限性質に基づく単調収束定理とアルキメデス性を直接使って、指数級数の収束と剰余評価を示す。",
+  }],
+  ["exp_linear_map_000b_claim_matrix_exp_series_converges", {
+    closure: "実数解析への脱出を伴う",
+    directRealAnalysisInputs: ["単調非減少かつ上に有界な実数列の収束（実数の完備性）"],
+    directRealAnalysisInputExcludedLabels: ["matrix_norm_triangle_inequality"],
+    statementDomain: "有限次元の実・複素正方行列、その実数値 Frobenius ノルムと行列級数",
+    rationale: "行列級数を実指数級数で評価し、行列空間の完備性と絶対収束判定を使う。三角不等式から使うのは有限和とスカラー倍の性質であり、その証明に同居する極限則は使わない。",
+  }],
+  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", {
+    closure: "実数解析への脱出を伴う",
+    directRealAnalysisInputs: [
+      "実数列のはさみうちの原理",
+      "0 に収束する実数列の定数倍も 0 に収束すること",
+      "有限個の実数列の極限と有限和の交換",
+      "単調非減少かつ上に有界な実数列の収束（実数の完備性）",
+    ],
+    statementDomain: "有限次元の実・複素正方行列、数ベクトル、行列上の線型写像と、それらの指数級数の各点収束",
+    rationale: "行列指数級数のノルム収束を数ベクトル・成分へ移す際に実数列のはさみうちを使い、線型写像の指数級数では単調有界収束と有限和の極限則を直接使う。",
+  }],
+  ["exp_linear_map_002_definition_exp_of_endomorphism", {
+    closure: "実数解析への脱出を伴う",
+    directRealAnalysisInputs: [],
+    statementDomain: "有限次元の実・複素正方行列と、行列空間上の線型写像",
+    rationale: "行列と行列上の線型写像の指数関数を、先行するノルム収束・各点収束と極限一意性に基づいて定義する。",
+  }],
+  ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", {
+    closure: "実数解析への脱出を伴う",
+    directRealAnalysisInputs: [
+      "無限大へ発散する自然数添字に沿った 0 収束列も 0 に収束すること",
+      "0 に収束する実数列の有限和・非負定数倍も 0 に収束すること",
+    ],
+    realAnalysisPropagationExcludedPaths: [["def_exp", "exp_converges"]],
+    statementDomain: "有限次元の可換な実・複素正方行列と、その指数関数",
+    rationale: "二項定理と有限行列計算に加え、指数級数の剰余を発散する添字で評価し、ノルム収束列の積と有限和の極限を使う。",
+  }],
+  ["exp_linear_map_004_theorem_exp_zero_is_identity", {
+    closure: "実数解析への脱出を伴う",
+    directRealAnalysisInputs: [
+      "収束級数から有限個の初項を分離すること",
+      "収束する行列級数の項別スカラー倍",
+    ],
+    realAnalysisPropagationExcludedPaths: [["def_exp", "exp_converges"]],
+    statementDomain: "有限次元の零行列・単位行列と、その指数関数",
+    rationale: "有限な零行列計算そのものに加え、指数関数を定める収束行列級数の初項分離と項別スカラー倍を使う。",
+  }],
+]);
+
 const directRealAnalysisInputsById = new Map<string, string[]>(
-  [...calculationFormulaBoundaryById, ...analyticMatrixToolBoundaryById]
+  [...calculationFormulaBoundaryById, ...analyticMatrixToolBoundaryById, ...matrixExponentialToolBoundaryById]
     .filter(([, boundary]) => boundary.directRealAnalysisInputs.length > 0)
     .map(([id, boundary]) => [id, boundary.directRealAnalysisInputs]),
 );
@@ -422,6 +486,45 @@ const reviewedAnalyticMatrixToolEntries = [...configuredAnalyticMatrixToolIds]
 const reviewedAnalyticMatrixToolLabels = new Set<string>(
   reviewedAnalyticMatrixToolEntries.flatMap(({ labels }) => labels),
 );
+const reviewedMatrixExponentialCandidateIds = new Set(
+  baseEntries
+    .filter(
+      ({ sourceFile, provisionalFinalChapter }) =>
+        sourceFile === "003_exp_linear_map.ts" && provisionalFinalChapter === "数学的道具立て",
+    )
+    .map(({ id }) => id),
+);
+const configuredMatrixExponentialToolIds = new Set(matrixExponentialToolBoundaryById.keys());
+const missingMatrixExponentialToolReviewIds = [...reviewedMatrixExponentialCandidateIds]
+  .filter((id) => !configuredMatrixExponentialToolIds.has(id))
+  .sort();
+const staleMatrixExponentialToolReviewIds = [...configuredMatrixExponentialToolIds]
+  .filter((id) => !reviewedMatrixExponentialCandidateIds.has(id))
+  .sort();
+if (missingMatrixExponentialToolReviewIds.length > 0 || staleMatrixExponentialToolReviewIds.length > 0) {
+  throw new Error(
+    `行列指数関数の境界レビュー割当が棚卸し対象と一致しません。未割当=${missingMatrixExponentialToolReviewIds.join(",") || "なし"}; 対象外=${staleMatrixExponentialToolReviewIds.join(",") || "なし"}`,
+  );
+}
+for (const id of configuredMatrixExponentialToolIds) {
+  const entry = baseEntryById.get(id);
+  if (entry === undefined) throw new Error(`行列指数関数の道具群の所有ブロックが存在しません: ${id}`);
+  if (entry.sourceFile !== "003_exp_linear_map.ts") {
+    throw new Error(`行列指数関数の道具群が線型写像の exp ファイルにありません: ${id}: ${entry.sourceFile}`);
+  }
+  if (entry.provisionalFinalChapter !== "数学的道具立て") {
+    throw new Error(`行列指数関数の道具群が数学的道具立てへ仮分類されていません: ${id}`);
+  }
+  if (entry.classificationEvidence.isingSemanticMatches.length > 0) {
+    throw new Error(`行列指数関数の道具群にイジング固有語彙が混入しています: ${id}`);
+  }
+}
+const reviewedMatrixExponentialToolEntries = [...configuredMatrixExponentialToolIds]
+  .map((id) => baseEntryById.get(id)!)
+  .sort((left, right) => left.id.localeCompare(right.id));
+const reviewedMatrixExponentialToolLabels = new Set<string>(
+  reviewedMatrixExponentialToolEntries.flatMap(({ labels }) => labels),
+);
 const reviewedCalculationFormulaLabels = new Set<string>(
   reviewedCalculationFormulaEntries.flatMap(({ labels }) => labels),
 );
@@ -430,6 +533,7 @@ for (const entry of baseEntries) {
   const calculationBoundary = calculationFormulaBoundaryById.get(entry.id);
   const finiteMatrixBoundary = finiteMatrixToolBoundaryById.get(entry.id);
   const analyticMatrixBoundary = analyticMatrixToolBoundaryById.get(entry.id);
+  const matrixExponentialBoundary = matrixExponentialToolBoundaryById.get(entry.id);
   const excluded = [
     ...(calculationBoundary?.nonPrerequisiteReferenceLabels ?? []),
     ...(finiteMatrixBoundary?.nonPrerequisiteReferenceLabels ?? []),
@@ -438,6 +542,7 @@ for (const entry of baseEntries) {
   const realAnalysisPropagationExcluded = calculationBoundary?.realAnalysisPropagationExcludedLabels ?? [];
   realAnalysisPropagationExcluded.push(
     ...(analyticMatrixBoundary?.realAnalysisPropagationExcludedLabels ?? []),
+    ...(matrixExponentialBoundary?.realAnalysisPropagationExcludedLabels ?? []),
   );
   if (new Set(excluded).size !== excluded.length) {
     throw new Error(`前提でない参照ラベルが重複しています: ${entry.id}`);
@@ -450,6 +555,7 @@ for (const entry of baseEntries) {
   }
   const directRealAnalysisInputExcluded = [
     ...(analyticMatrixBoundary?.directRealAnalysisInputExcludedLabels ?? []),
+    ...(matrixExponentialBoundary?.directRealAnalysisInputExcludedLabels ?? []),
   ];
   if (new Set(directRealAnalysisInputExcluded).size !== directRealAnalysisInputExcluded.length) {
     throw new Error(`直接実数解析入力を除外するラベルが重複しています: ${entry.id}`);
@@ -494,6 +600,29 @@ for (const entry of baseEntries) {
   }
   semanticPrerequisiteLabelsById.set(entry.id, semanticPrerequisiteLabels);
 }
+for (const [entryId, boundary] of matrixExponentialToolBoundaryById) {
+  const excludedPaths = boundary.realAnalysisPropagationExcludedPaths ?? [];
+  const serializedPaths = excludedPaths.map((path) => path.join("->"));
+  if (new Set(serializedPaths).size !== serializedPaths.length) {
+    throw new Error(`実数解析伝播を除外する経路が重複しています: ${entryId}`);
+  }
+  for (const path of excludedPaths) {
+    if (path.length < 2) {
+      throw new Error(`実数解析伝播を除外する経路は2辺以上必要です: ${entryId}: ${path.join("->")}`);
+    }
+    let ownerId = entryId;
+    for (const label of path) {
+      if (!(semanticPrerequisiteLabelsById.get(ownerId) ?? []).includes(label)) {
+        throw new Error(`実数解析伝播を除外する経路が意味的前提に存在しません: ${entryId}: ${path.join("->")}: ${ownerId}:${label}`);
+      }
+      const nextOwnerId = labelOwners.get(label);
+      if (nextOwnerId === undefined) {
+        throw new Error(`実数解析伝播を除外する経路の所有者が存在しません: ${entryId}: ${path.join("->")}: ${label}`);
+      }
+      ownerId = nextOwnerId;
+    }
+  }
+}
 const finiteMatrixToolOutsideDependencies = reviewedFiniteMatrixToolEntries.flatMap(({ id }) =>
   (semanticPrerequisiteLabelsById.get(id) ?? [])
     .filter((label) => !reviewedFiniteMatrixToolLabels.has(label))
@@ -518,6 +647,8 @@ function transitiveRealAnalysisDependencies(
   entryId: string,
   visiting = new Set<string>(),
   inheritedDirectInputExcludedOwnerIds = new Set<string>(),
+  rootEntryId = entryId,
+  pathPrefix: string[] = [],
 ): TransitiveRealAnalysisDependency[] {
   if (visiting.has(entryId)) return [];
   const nextVisiting = new Set(visiting).add(entryId);
@@ -526,6 +657,7 @@ function transitiveRealAnalysisDependencies(
     [
       ...(calculationFormulaBoundaryById.get(entryId)?.realAnalysisPropagationExcludedLabels ?? []),
       ...(analyticMatrixToolBoundaryById.get(entryId)?.realAnalysisPropagationExcludedLabels ?? []),
+      ...(matrixExponentialToolBoundaryById.get(entryId)?.realAnalysisPropagationExcludedLabels ?? []),
     ],
   );
   const directInputExcludedOwnerIds = new Set(
@@ -538,8 +670,19 @@ function transitiveRealAnalysisDependencies(
     }
     directInputExcludedOwnerIds.add(ownerId);
   }
+  for (const label of matrixExponentialToolBoundaryById.get(entryId)?.directRealAnalysisInputExcludedLabels ?? []) {
+    const ownerId = labelOwners.get(label);
+    if (ownerId === undefined) {
+      throw new Error(`直接実数解析入力を除外するラベルの所有者が存在しません: ${entryId}: ${label}`);
+    }
+    directInputExcludedOwnerIds.add(ownerId);
+  }
   for (const label of semanticPrerequisiteLabelsById.get(entryId) ?? []) {
     if (propagationExcludedLabels.has(label)) continue;
+    const pathLabels = [...pathPrefix, label];
+    const rootExcludedPaths = matrixExponentialToolBoundaryById.get(rootEntryId)
+      ?.realAnalysisPropagationExcludedPaths ?? [];
+    if (rootExcludedPaths.some((path) => path.join("->") === pathLabels.join("->"))) continue;
     const ownerId = labelOwners.get(label);
     if (ownerId === undefined) throw new Error(`意味的前提ラベルの所有者が存在しません: ${entryId}: ${label}`);
     const directInputs = directRealAnalysisInputsById.get(ownerId);
@@ -555,6 +698,8 @@ function transitiveRealAnalysisDependencies(
       ownerId,
       nextVisiting,
       directInputExcludedOwnerIds,
+      rootEntryId,
+      pathLabels,
     )) {
       dependencies.push({ ...nested, pathLabels: [label, ...nested.pathLabels] });
     }
@@ -579,7 +724,13 @@ const entries = baseEntries.map((entry) => {
   const boundary = calculationFormulaBoundaryById.get(entry.id);
   const finiteMatrixBoundary = finiteMatrixToolBoundaryById.get(entry.id);
   const analyticMatrixBoundary = analyticMatrixToolBoundaryById.get(entry.id);
-  if (boundary === undefined && finiteMatrixBoundary === undefined && analyticMatrixBoundary === undefined) return entry;
+  const matrixExponentialBoundary = matrixExponentialToolBoundaryById.get(entry.id);
+  if (
+    boundary === undefined &&
+    finiteMatrixBoundary === undefined &&
+    analyticMatrixBoundary === undefined &&
+    matrixExponentialBoundary === undefined
+  ) return entry;
   if (finiteMatrixBoundary !== undefined) {
     const nonPrerequisiteReferenceLabels = new Set(
       finiteMatrixBoundary.nonPrerequisiteReferenceLabels ?? [],
@@ -644,6 +795,51 @@ const entries = baseEntries.map((entry) => {
             ...(analyticMatrixBoundary.directRealAnalysisInputExcludedLabels ?? []),
           ].sort(),
           outsideReviewedAnalyticMatrixToolOwners: outsideDependencyLabels
+            .map((label) => ({ label, ownerId: labelOwners.get(label) ?? null })),
+        },
+        isingSemanticVocabulary: {
+          matches: entry.classificationEvidence.isingSemanticMatches,
+          contaminated: entry.classificationEvidence.isingSemanticMatches.length > 0,
+          inspectedFields: ["title", "statement", "proof"],
+        },
+      },
+    };
+  }
+  if (matrixExponentialBoundary !== undefined) {
+    const prerequisiteLabels = semanticPrerequisiteLabelsById.get(entry.id) ?? [];
+    const insideDependencyLabels = prerequisiteLabels
+      .filter((label) => reviewedMatrixExponentialToolLabels.has(label))
+      .sort();
+    const outsideDependencyLabels = prerequisiteLabels
+      .filter((label) => !reviewedMatrixExponentialToolLabels.has(label))
+      .sort();
+    const directRealAnalysisInputs = directRealAnalysisInputsById.get(entry.id) ?? [];
+    const transitiveDependencies = transitiveRealAnalysisDependencies(entry.id);
+    if (directRealAnalysisInputs.length === 0 && transitiveDependencies.length === 0) {
+      throw new Error(`行列指数関数の道具群から実数解析へ到達できません: ${entry.id}`);
+    }
+    return {
+      ...entry,
+      matrixExponentialToolBoundaryReview: {
+        closure: matrixExponentialBoundary.closure,
+        statementDomain: matrixExponentialBoundary.statementDomain,
+        rationale: matrixExponentialBoundary.rationale,
+        directRealAnalysisInputs,
+        transitiveRealAnalysisDependencies: transitiveDependencies,
+        finalChapter: "数学的道具立て",
+        dependencyBoundary: {
+          insideReviewedMatrixExponentialToolLabels: insideDependencyLabels,
+          outsideReviewedMatrixExponentialToolLabels: outsideDependencyLabels,
+          realAnalysisPropagationExcludedLabels: [
+            ...(matrixExponentialBoundary.realAnalysisPropagationExcludedLabels ?? []),
+          ].sort(),
+          directRealAnalysisInputExcludedLabels: [
+            ...(matrixExponentialBoundary.directRealAnalysisInputExcludedLabels ?? []),
+          ].sort(),
+          realAnalysisPropagationExcludedPaths: [
+            ...(matrixExponentialBoundary.realAnalysisPropagationExcludedPaths ?? []),
+          ].map((path) => [...path]),
+          outsideReviewedMatrixExponentialToolOwners: outsideDependencyLabels
             .map((label) => ({ label, ownerId: labelOwners.get(label) ?? null })),
         },
         isingSemanticVocabulary: {
@@ -759,11 +955,25 @@ const inventory = {
     classificationRule: "有限次元の成分計算だけで証明の主要部分を記述できても、実数値ノルム・極限・Cauchy 列・無限級数が非負実数の平方根または実数の完備性へ依存するものは、数学的道具立てに置いたまま実数解析への脱出を明記する。",
     reviewedEntryIds: reviewedAnalyticMatrixToolEntries.map(({ id }) => id),
   },
+  matrixExponentialToolBoundaryReview: {
+    status: "実指数級数、行列指数級数の収束、各点収束、指数関数の定義、可換行列の積公式、零行列の指数関数について、実数解析への脱出と依存境界をブロック単位で確定した。",
+    reviewedEntryCount: reviewedMatrixExponentialToolEntries.length,
+    realAnalysisEscapeEntryCount: reviewedMatrixExponentialToolEntries.filter(
+      ({ id }) => matrixExponentialToolBoundaryById.get(id)?.closure === "実数解析への脱出を伴う",
+    ).length,
+    isingContaminatedEntryCount: reviewedMatrixExponentialToolEntries.filter(
+      ({ classificationEvidence }) => classificationEvidence.isingSemanticMatches.length > 0,
+    ).length,
+    classificationRule: "指数級数を定義する極限・完備性、実数級数の剰余、行列級数のノルム収束を直接または依存先経由で使うものは、有限行列計算を主要部分に含んでも実数解析への脱出を伴うものとして数学的道具立てに置く。",
+    reviewedEntryIds: reviewedMatrixExponentialToolEntries.map(({ id }) => id),
+  },
   realAnalysisDependencySources: [...directRealAnalysisInputsById]
     .map(([id, directInputs]) => ({
       id,
       labels: [...(baseEntryById.get(id)?.labels ?? [])],
       reviewedCalculationFormula: reviewedCalculationFormulaIds.has(id),
+      reviewedAnalyticMatrixTool: configuredAnalyticMatrixToolIds.has(id),
+      reviewedMatrixExponentialTool: configuredMatrixExponentialToolIds.has(id),
       directInputs,
     }))
     .sort((left, right) => left.id.localeCompare(right.id)),
