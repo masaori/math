@@ -8,6 +8,8 @@
 
 前進前レビューでは、前 tick の積表示の SageMath 検算が左辺 $c_v(\gamma)$ を横断の定義から独立に計算せず、直積から作った対の非重複だけを見ていた（ほぼ恒真）ことを発見し、横断述語で独立に数える形へ強化してコミット `3b28df9b` として前進前に push した。
 
+次 tick の前進前レビューでは、任意の横断について定める平滑化後の通過族が、孤立横断だけを定義域とする `def_isolated_crossing_smoothing` を引用して定義域を暗黙に拡張していたため、出辺交換の三場合を `def_smoothing_straight_visit_count` の中で直接定義した。更新式の四層の内容は変わらない。
+
 ## ひとつ前の到達点（2026-08-30 の 11 回目の tick 時点）
 
 **頂点ごとの横断数が二軸の直進通過数の積になることを四層で証明した。** 頂点 $v$ を軸 $a\in\mathbb Z/2\mathbb Z$ に沿って直進する通過数 $n_{v,a}(\gamma)\in\mathbb N$（`def_vertex_axis_straight_visit_count`）を定義し、軸 0 と軸 1 の通過の直積から二添字を小さい順に並べる全単射により $c_v(\gamma)=n_{v,0}(\gamma)n_{v,1}(\gamma)$（`claim_vertex_crossing_number_factorization`）を得た。SageMath `vertex-crossing-factorization` は閉歩道 1,064 件・頂点 5,480 件（多重直進通過 92 件）を `ZZ` で厳密検査した。Lean は `KacWard/VertexCrossingFactorization.lean` と必要十分版 `opposite_bool_unordered_pairs_card_necSuf` を通し、必要十分版には有限全順序集合と二値写像だけが残る。次は選んだ一横断の平滑化で二軸の直進通過数が一つずつ減ることから、頂点ごとの横断数の更新式を示す。
