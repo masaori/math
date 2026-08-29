@@ -1146,6 +1146,56 @@ theorem card_periodicSquarePairingsAt_of_card_eq_zero
   rw [periodicSquarePairingsAt_eq_singleton_empty_of_card_eq_zero subgraph v hzero]
   simp
 
+/-- 残存端子が二個の city では、その二端子を一組にする対分けだけが存在する。 -/
+theorem periodicSquarePairingsAt_eq_singleton_of_card_eq_two
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n)
+    (htwo : (encodePeriodicSquareRemainingTerminalsAt subgraph v).card = 2) :
+    periodicSquarePairingsAt subgraph v =
+      {{encodePeriodicSquareRemainingTerminalsAt subgraph v}} := by
+  classical
+  let terminals := encodePeriodicSquareRemainingTerminalsAt subgraph v
+  have hterminals : terminals.card = 2 := htwo
+  refine Finset.eq_singleton_iff_unique_mem.mpr ⟨?_, ?_⟩
+  · refine (mem_periodicSquarePairingsAt_iff subgraph v {terminals}).mpr ⟨?_, ?_, ?_⟩
+    · intro s hs
+      simp only [Finset.mem_singleton] at hs
+      subst s
+      exact hterminals
+    · simp
+    · simp [terminals]
+  · intro pairing hpairing
+    obtain ⟨hcard, _, hunion⟩ :=
+      (mem_periodicSquarePairingsAt_iff subgraph v pairing).mp hpairing
+    have heach : ∀ s ∈ pairing, s = terminals := by
+      intro s hs
+      have hsubset : s ⊆ terminals := by
+        intro x hx
+        have hxmem : x ∈ pairing.biUnion id := Finset.mem_biUnion.mpr ⟨s, hs, hx⟩
+        simpa [terminals] using (show x ∈ encodePeriodicSquareRemainingTerminalsAt subgraph v by
+          simpa [hunion] using hxmem)
+      exact Finset.eq_of_subset_of_card_le hsubset (by
+        rw [hcard s hs, hterminals])
+    have hnonempty : pairing.Nonempty := by
+      obtain ⟨x, hx⟩ : terminals.Nonempty := Finset.card_pos.mp (by omega)
+      have hxmem : x ∈ pairing.biUnion id := by
+        rw [hunion]
+        simpa [terminals] using hx
+      obtain ⟨s, hs, _⟩ := Finset.mem_biUnion.mp hxmem
+      exact ⟨s, hs⟩
+    obtain ⟨s, hs⟩ := hnonempty
+    have hterminalsMem : terminals ∈ pairing := by simpa [heach s hs] using hs
+    exact Finset.eq_singleton_iff_unique_mem.mpr ⟨hterminalsMem, heach⟩
+
+/-- 残存端子が二個の city の対分けの個数は一である。 -/
+theorem card_periodicSquarePairingsAt_of_card_eq_two
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n)
+    (htwo : (encodePeriodicSquareRemainingTerminalsAt subgraph v).card = 2) :
+    (periodicSquarePairingsAt subgraph v).card = 1 := by
+  rw [periodicSquarePairingsAt_eq_singleton_of_card_eq_two subgraph v htwo]
+  simp
+
 /-- 復号繊維の完全マッチングを city `v` へ制限したものは、その city の対分けの
 全体に属する。`periodicSquareFiberInternalEdgesAt_isPairing` の三条件を、
 対分けの全体の定義へそのまま移したものである。 -/
