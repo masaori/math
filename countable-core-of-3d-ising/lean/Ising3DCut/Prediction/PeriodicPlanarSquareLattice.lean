@@ -1301,6 +1301,56 @@ theorem pair_containing_first_of_four
   · exact Or.inr (Or.inl (by rw [hseq, h]))
   · exact Or.inr (Or.inr (by rw [hseq, h]))
 
+/-- 四端子 `a,b,c,d` の対分けで `{a,b}` が一組なら、
+残る一組は `{c,d}` に限られる。二組が互いに素で、合併が四端子全体に
+一致することだけを使う。 -/
+theorem pairing_with_first_pair_of_four
+    {α : Type} [DecidableEq α] {a b c d : α}
+    (hac : a ≠ c) (had : a ≠ d) (hbc : b ≠ c) (hbd : b ≠ d)
+    {pairing : Finset (Finset α)}
+    (hcard : pairing.card = 2)
+    (hdisj : (pairing : Set (Finset α)).PairwiseDisjoint id)
+    (hunion : pairing.biUnion id = ({a, b, c, d} : Finset α))
+    (hfirst : ({a, b} : Finset α) ∈ pairing) :
+    pairing = ({{a, b}, {c, d}} : Finset (Finset α)) := by
+  classical
+  let first : Finset α := {a, b}
+  have herase : (pairing.erase first).card = 1 := by
+    rw [Finset.card_erase_of_mem hfirst, hcard]
+  obtain ⟨second, hsecond⟩ := Finset.card_eq_one.mp herase
+  have hsecondErase : second ∈ pairing.erase first := by rw [hsecond]; simp
+  have hsecondMem : second ∈ pairing := Finset.mem_of_mem_erase hsecondErase
+  have hsecondNe : second ≠ first := Finset.ne_of_mem_erase hsecondErase
+  have hpairing : pairing = {first, second} := by
+    rw [← Finset.insert_erase hfirst, hsecond]
+  have hfirstSecond : Disjoint first second :=
+    hdisj (Finset.mem_coe.mpr hfirst) (Finset.mem_coe.mpr hsecondMem) hsecondNe.symm
+  have hcover : first ∪ second = ({a, b, c, d} : Finset α) := by
+    simpa [hpairing, first] using hunion
+  have hsecondEq : second = ({c, d} : Finset α) := by
+    ext x
+    have hnotFirst : x ∈ second → x ∉ first := fun hx hxf ↦
+      Finset.disjoint_left.mp hfirstSecond hxf hx
+    constructor
+    · intro hx
+      have hxall : x ∈ ({a, b, c, d} : Finset α) := by
+        rw [← hcover]
+        exact Finset.mem_union_right first hx
+      have hxnf := hnotFirst hx
+      simp only [first, Finset.mem_insert, Finset.mem_singleton, not_or] at hxnf
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hxall ⊢
+      aesop
+    · intro hx
+      have hxall : x ∈ ({a, b, c, d} : Finset α) := by
+        simpa only [Finset.mem_insert, Finset.mem_singleton] using Or.inr (Or.inr hx)
+      rw [← hcover] at hxall
+      rcases Finset.mem_union.mp hxall with hxf | hxs
+      · simp only [first, Finset.mem_insert, Finset.mem_singleton] at hxf
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+        aesop
+      · exact hxs
+  rw [hpairing, hsecondEq]
+
 /-- 復号繊維の完全マッチングを city `v` へ制限したものは、その city の対分けの
 全体に属する。`periodicSquareFiberInternalEdgesAt_isPairing` の三条件を、
 対分けの全体の定義へそのまま移したものである。 -/
