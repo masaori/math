@@ -1168,13 +1168,9 @@ h
     labels: ["matrix_exp_conjugation"],
     statement: [
       paragraph([
-        math(String.raw`K := \mathbb{R}`),
-        " または ",
-        math(String.raw`K := \mathbb{C}`),
-        "、",
         math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
         "、",
-        math(String.raw`X, Y\in\mathrm{Mat}(n,K)`),
+        math(String.raw`X, Y\in\mathrm{Mat}(n,\mathbb{C})`),
         " とする。ノルム ",
         math(String.raw`\|\cdot\|`),
         " と収束は ",
@@ -1202,7 +1198,7 @@ h
           "(1) 級数 ",
           math(String.raw`\displaystyle\sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`),
           " は ",
-          math(String.raw`\mathrm{Mat}(n,K)`),
+          math(String.raw`\mathrm{Mat}(n,\mathbb{C})`),
           " において収束し、",
         ],
         [
@@ -1238,9 +1234,9 @@ h
         " を使う。また ",
         math(String.raw`N\in\mathbb{Z}_{\ge 0}`),
         "、",
-        math(String.raw`A\in\mathrm{Mat}(n,K)`),
+        math(String.raw`A\in\mathrm{Mat}(n,\mathbb{C})`),
         " について ",
-        math(String.raw`S_N(A):=\sum_{p=0}^{N}\frac{1}{p!}A^{p}\in\mathrm{Mat}(n,K)`),
+        math(String.raw`S_N(A):=\sum_{p=0}^{N}\frac{1}{p!}A^{p}\in\mathrm{Mat}(n,\mathbb{C})`),
         "（",
         math(String.raw`A^0:=I`),
         "）とおく。",
@@ -1249,25 +1245,31 @@ h
         math(String.raw`S_N(X)\to\exp(X)`),
         "、",
         math(String.raw`S_N(-X)\to\exp(-X)`),
-        "。この収束が本証明で使う唯一の解析的事実であり、その根拠は ",
+        "。この二つの収束と、後で使う実指数級数の剰余 ",
+        math(String.raw`R_N(a)\to 0`),
+        " の根拠は ",
         math(String.raw`\mathbb{R}`),
         " の完備性（",
         ref("matrix_completeness"),
-        "）である。ここから先で非可算集合 ",
+        " および ",
+        ref("real_exp_series_converges"),
+        "）へ遡る。さらに Step 2 では収束する実数列の有界性、有界列と 0 収束列の積、および 0 収束列の有限和を使う。Step 5 では ",
+        math(String.raw`\lfloor N/2\rfloor\to\infty`),
+        " に沿う 0 収束、0 収束列の非負定数倍、およびはさみうちを使う。Step 6 では 0 収束列の和と、",
+        ref("matrix_norm_triangle_inequality"),
+        " (4) の極限一意性を使う。したがって非可算集合 ",
         math(String.raw`\mathbb{R}/\mathbb{C}`),
-        " の解析を使うのは、この極限操作と ",
-        math(String.raw`R_N(a)\to 0`),
-        " の 2 箇所だけであり、残りはすべて有限和の代数計算である。",
+        " の解析へ移る箇所は、これらの実数列・行列列の極限操作であり、それ以外は有限和の代数計算である。",
       ]),
       paragraph([
         "Step 1: ",
         math(String.raw`\mathrm{ad}_X`),
         " は ",
-        math(String.raw`K`),
+        math(String.raw`\mathbb{C}`),
         "-線型。",
-        math(String.raw`Z,W\in\mathrm{Mat}(n,K)`),
+        math(String.raw`Z,W\in\mathrm{Mat}(n,\mathbb{C})`),
         "、",
-        math(String.raw`c\in K`),
+        math(String.raw`c\in\mathbb{C}`),
         " について分配律より",
       ]),
       displayMath(
@@ -1298,13 +1300,13 @@ h
       ),
       paragraph([
         "したがって ",
-        math(String.raw`\mathrm{ad}_X\in\mathrm{End}\!\left(\mathrm{Mat}(n,K)\right)`),
+        math(String.raw`\mathrm{ad}_X\in\mathrm{End}\!\left(\mathrm{Mat}(n,\mathbb{C})\right)`),
         " であり、",
-        math(String.raw`\mathrm{Mat}(n,K)`),
+        math(String.raw`\mathrm{Mat}(n,\mathbb{C})`),
         " は ",
         ref("def_matrix_norm"),
         " のノルムをもつ有限次元 ",
-        math(String.raw`K`),
+        math(String.raw`\mathbb{C}`),
         "-線型空間（次元 ",
         math(String.raw`n^2`),
         "）なので、",
@@ -1892,10 +1894,12 @@ X(-X)
       notes: [
         "原文（Typst）に対応ブロックは無い。原文は一般の Lie 群に対する " +
           "Ad(exp X)=exp(ad X) と Brian Hall Prop 3.35（Matrix Lie群版）を未証明のまま置いていたが、" +
-          "本プロジェクトで実際に必要なのは行列環 Mat(n,K) 上の版だけである。" +
-          "そちらは labels: ad_binomial（純代数）と labels: real_exp_series_converges / " +
-          "matrix_norm_submultiplicativity / matrix_exp_series_converges（絶対収束と劣乗法性）" +
-          "だけから完全に証明できるので、Lie 群論を経由せずここで証明した。",
+          "本プロジェクトで実際に必要なのは複素行列環 Mat(n,C) 上の版だけである。" +
+          "そちらは labels: ad_binomial / def_ad_X_matrix（交換子の純代数）、labels: def_matrix_norm / " +
+          "matrix_norm_triangle_inequality / matrix_norm_submultiplicativity / matrix_completeness（ノルムと完備性）、" +
+          "labels: real_exp_series_converges / matrix_exp_series_converges / exp_converges / def_exp（指数級数とその定義）、" +
+          "labels: theorem_exp_product / theorem_exp_zero（可逆性）を使って完全に証明できるので、" +
+          "Lie 群論を経由せずここで証明した。",
       ],
     },
   },
