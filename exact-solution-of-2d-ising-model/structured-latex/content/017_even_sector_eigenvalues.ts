@@ -1270,29 +1270,48 @@ R_\mu^{(1)} + R_\mu^{(0)}
       paragraph([
         "Step 5（(5) の証明）。(2) より任意の ",
         math(String.raw`x \in \mathbb{C}^{2^M}`),
-        " は ",
-        math(String.raw`x = \sum_\epsilon \check{Q}_\epsilon x`),
-        " と書け、各項は ",
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+x
+&= Ix
+  \quad (\because \text{単位行列の作用}) \\
+&= \left(\sum_\epsilon \check{Q}_\epsilon\right)x
+  \quad (\because \text{Step 2 の射影子の和}) \\
+&= \sum_\epsilon \check{Q}_\epsilon x
+  \quad (\because \text{行列の作用の分配法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。各項 ", math(String.raw`\check{Q}_\epsilon x`), " は ",
         math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
         " に属するから和は全体を張る。直和であることを見るために ",
         math(String.raw`\sum_\epsilon y_\epsilon = 0`),
         "（",
         math(String.raw`y_\epsilon \in \mathrm{im}\,\check{Q}_\epsilon`),
-        "）とする。",
-        math(String.raw`y_\epsilon = \check{Q}_\epsilon x_\epsilon`),
-        " と書くと (1) より ",
-        math(String.raw`\check{Q}_{\epsilon'} y_\epsilon`),
-        " は ",
-        math(String.raw`\epsilon \neq \epsilon'`),
-        " のとき ",
-        math(String.raw`0`),
-        "、",
-        math(String.raw`\epsilon = \epsilon'`),
-        " のとき ",
-        math(String.raw`\check{Q}_\epsilon x_\epsilon = y_\epsilon`),
-        " である。よって ",
-        math(String.raw`0 = \check{Q}_{\epsilon'}\left(\sum_\epsilon y_\epsilon\right) = y_{\epsilon'}`),
-        " が各 ",
+        "）とする。任意の ", math(String.raw`\epsilon'`), " を固定する。Step 1 より、",
+        math(String.raw`\epsilon\ne\epsilon'`), " なら ",
+        math(String.raw`\check{Q}_{\epsilon'}y_\epsilon=0`),
+        " であり、", math(String.raw`y_{\epsilon'}\in\mathrm{im}\,\check{Q}_{\epsilon'}`),
+        " と冪等性から ",
+        math(String.raw`\check{Q}_{\epsilon'}y_{\epsilon'}=y_{\epsilon'}`), " である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+y_{\epsilon'}
+&= \sum_\epsilon \check{Q}_{\epsilon'}y_\epsilon
+  \quad (\because \text{Step 1 の直交性と冪等性}) \\
+&= \check{Q}_{\epsilon'}\left(\sum_\epsilon y_\epsilon\right)
+  \quad (\because \text{行列の作用の分配法則}) \\
+&= \check{Q}_{\epsilon'}0
+  \quad (\because \sum_\epsilon y_\epsilon=0) \\
+&= 0
+  \quad (\because \text{零ベクトルへの行列の作用})
+\end{aligned}`,
+      ),
+      paragraph([
+        "が各 ",
         math(String.raw`\epsilon'`),
         " について成り立ち、直和である。",
       ]),
