@@ -95,6 +95,21 @@
       "linear_space_general_004_lemma_centralizer_is_scalar"
     ]
   },
+  "analyticMatrixToolBoundaryReview": {
+    "status": "数ベクトル・行列ノルム、劣乗法性、ベクトル評価、完備性、行列乗算の連続性について、実数解析への脱出と依存境界をブロック単位で確定した。",
+    "reviewedEntryCount": 6,
+    "realAnalysisEscapeEntryCount": 6,
+    "isingContaminatedEntryCount": 0,
+    "classificationRule": "有限次元の成分計算だけで証明の主要部分を記述できても、実数値ノルム・極限・Cauchy 列・無限級数が非負実数の平方根または実数の完備性へ依存するものは、数学的道具立てに置いたまま実数解析への脱出を明記する。",
+    "reviewedEntryIds": [
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+      "linear_space_general_003b_claim_matrix_multiplication_continuity",
+      "linear_space_general_003c_claim_matrix_norm_vector_bound",
+      "linear_space_general_003d_claim_matrix_completeness"
+    ]
+  },
   "realAnalysisDependencySources": [
     {
       "id": "calc_formulae_000b_claim_cosh_sinh_basic_properties",
@@ -183,6 +198,51 @@
       "reviewedCalculationFormula": true,
       "directInputs": [
         "Euler の公式と三角関数の偶奇性"
+      ]
+    },
+    {
+      "id": "linear_space_general_002b_definition_matrix_norm",
+      "labels": [
+        "def_matrix_norm"
+      ],
+      "reviewedCalculationFormula": false,
+      "directInputs": [
+        "実数列の収束概念"
+      ]
+    },
+    {
+      "id": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "labels": [
+        "matrix_norm_triangle_inequality"
+      ],
+      "reviewedCalculationFormula": false,
+      "directInputs": [
+        "実数列の極限の和",
+        "非負定数を 0 収束列で上から抑える極限・順序則"
+      ]
+    },
+    {
+      "id": "linear_space_general_003b_claim_matrix_multiplication_continuity",
+      "labels": [
+        "matrix_multiplication_continuity"
+      ],
+      "reviewedCalculationFormula": false,
+      "directInputs": [
+        "0 に収束する実数列の定数倍も 0 に収束すること"
+      ]
+    },
+    {
+      "id": "linear_space_general_003d_claim_matrix_completeness",
+      "labels": [
+        "matrix_completeness"
+      ],
+      "reviewedCalculationFormula": false,
+      "directInputs": [
+        "実数の完備性（実数 Cauchy 列の収束）",
+        "0 に収束する実数列の平方も 0 に収束すること",
+        "有限個の実数列の極限と有限和の交換",
+        "収束する実数列は Cauchy 列であること",
+        "非負項級数の部分和と極限の順序、および極限への不等式の移行"
       ]
     }
   ],
@@ -3000,7 +3060,66 @@
         "abs_basic_properties",
         "def_abs_arg",
         "definition_of_sqrt_r_positive"
-      ]
+      ],
+      "analyticMatrixToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の実・複素数ベクトル空間と有限正方行列、および実数列の収束",
+        "rationale": "Frobenius ノルムの平方根と複素絶対値を使う。偏角は参照先ブロックに同居するだけで、この定義の前提ではない。",
+        "directRealAnalysisInputs": [
+          "実数列の収束概念"
+        ],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedAnalyticMatrixToolLabels": [],
+          "outsideReviewedAnalyticMatrixToolLabels": [
+            "abs_basic_properties",
+            "def_abs_arg",
+            "definition_of_sqrt_r_positive"
+          ],
+          "realAnalysisPropagationExcludedLabels": [
+            "def_abs_arg"
+          ],
+          "directRealAnalysisInputExcludedLabels": [],
+          "outsideReviewedAnalyticMatrixToolOwners": [
+            {
+              "label": "abs_basic_properties",
+              "ownerId": "calculation_formulae_031b_claim_abs_basic_properties"
+            },
+            {
+              "label": "def_abs_arg",
+              "ownerId": "calculation_formulae_031_definition_abs_arg"
+            },
+            {
+              "label": "definition_of_sqrt_r_positive",
+              "ownerId": "calc_formulae_001_sqrt_nonnegative_real"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
@@ -3024,7 +3143,86 @@
         "def_matrix_norm",
         "definition_of_sqrt_r_positive",
         "inclusion_rr_to_cc"
-      ]
+      ],
+      "analyticMatrixToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の実・複素正方行列と、その実数値 Frobenius ノルム",
+        "rationale": "複素絶対値・非負実数の平方根・実数の順序を使ってノルムの基本性質を示す。偏角そのものは使わない。",
+        "directRealAnalysisInputs": [
+          "実数列の極限の和",
+          "非負定数を 0 収束列で上から抑える極限・順序則"
+        ],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002b_definition_matrix_norm",
+            "sourceLabels": [
+              "def_matrix_norm"
+            ],
+            "directInputs": [
+              "実数列の収束概念"
+            ],
+            "pathLabels": [
+              "def_matrix_norm"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedAnalyticMatrixToolLabels": [
+            "def_matrix_norm"
+          ],
+          "outsideReviewedAnalyticMatrixToolLabels": [
+            "abs_basic_properties",
+            "def_abs_arg",
+            "definition_of_sqrt_r_positive",
+            "inclusion_rr_to_cc"
+          ],
+          "realAnalysisPropagationExcludedLabels": [
+            "def_abs_arg"
+          ],
+          "directRealAnalysisInputExcludedLabels": [],
+          "outsideReviewedAnalyticMatrixToolOwners": [
+            {
+              "label": "abs_basic_properties",
+              "ownerId": "calculation_formulae_031b_claim_abs_basic_properties"
+            },
+            {
+              "label": "def_abs_arg",
+              "ownerId": "calculation_formulae_031_definition_abs_arg"
+            },
+            {
+              "label": "definition_of_sqrt_r_positive",
+              "ownerId": "calc_formulae_001_sqrt_nonnegative_real"
+            },
+            {
+              "label": "inclusion_rr_to_cc",
+              "ownerId": "calc_formulae_007_inclusion_rr_to_cc"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_003_claim_matrix_norm_submultiplicativity",
@@ -3045,7 +3243,52 @@
       "dependsOnLabels": [
         "def_matrix_norm",
         "matrix_norm_triangle_inequality"
-      ]
+      ],
+      "analyticMatrixToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の実・複素正方行列と、その実数値 Frobenius ノルム",
+        "rationale": "有限和の Cauchy--Schwarz 型評価は代数的だが、実数解析へ脱出するノルムの定義と基本性質を前提とする。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "def_matrix_norm",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedAnalyticMatrixToolLabels": [
+            "def_matrix_norm",
+            "matrix_norm_triangle_inequality"
+          ],
+          "outsideReviewedAnalyticMatrixToolLabels": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [
+            "def_matrix_norm",
+            "matrix_norm_triangle_inequality"
+          ],
+          "outsideReviewedAnalyticMatrixToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_003c_claim_matrix_norm_vector_bound",
@@ -3067,7 +3310,53 @@
         "def_matrix_norm",
         "matrix_norm_submultiplicativity",
         "matrix_norm_triangle_inequality"
-      ]
+      ],
+      "analyticMatrixToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の実・複素数ベクトルと有限正方行列、およびそれらの実数値 Frobenius ノルム",
+        "rationale": "数ベクトルを一列目に埋め込んだ有限行列の劣乗法性へ帰着するため、ノルムの解析的前提を推移的に引き継ぐ。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "def_matrix_norm",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedAnalyticMatrixToolLabels": [
+            "def_matrix_norm",
+            "matrix_norm_submultiplicativity",
+            "matrix_norm_triangle_inequality"
+          ],
+          "outsideReviewedAnalyticMatrixToolLabels": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [
+            "def_matrix_norm",
+            "matrix_norm_triangle_inequality"
+          ],
+          "outsideReviewedAnalyticMatrixToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_003d_claim_matrix_completeness",
@@ -3090,7 +3379,81 @@
         "complex_numbers_form_a_field",
         "def_matrix_norm",
         "matrix_norm_triangle_inequality"
-      ]
+      ],
+      "analyticMatrixToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の実・複素正方行列からなるノルム空間と、その Cauchy 列・無限級数",
+        "rationale": "実数の完備性を直接使い、複素数列と有限行列列の完備性および絶対収束判定へ移す。",
+        "directRealAnalysisInputs": [
+          "実数の完備性（実数 Cauchy 列の収束）",
+          "0 に収束する実数列の平方も 0 に収束すること",
+          "有限個の実数列の極限と有限和の交換",
+          "収束する実数列は Cauchy 列であること",
+          "非負項級数の部分和と極限の順序、および極限への不等式の移行"
+        ],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "abs_basic_properties",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "linear_space_general_002b_definition_matrix_norm",
+            "sourceLabels": [
+              "def_matrix_norm"
+            ],
+            "directInputs": [
+              "実数列の収束概念"
+            ],
+            "pathLabels": [
+              "def_matrix_norm"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedAnalyticMatrixToolLabels": [
+            "def_matrix_norm",
+            "matrix_norm_triangle_inequality"
+          ],
+          "outsideReviewedAnalyticMatrixToolLabels": [
+            "abs_basic_properties",
+            "complex_numbers_form_a_field"
+          ],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [
+            "matrix_norm_triangle_inequality"
+          ],
+          "outsideReviewedAnalyticMatrixToolOwners": [
+            {
+              "label": "abs_basic_properties",
+              "ownerId": "calculation_formulae_031b_claim_abs_basic_properties"
+            },
+            {
+              "label": "complex_numbers_form_a_field",
+              "ownerId": "calculation_formulae_025_claim_complex_numbers_form_a_field"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "linear_space_general_003b_claim_matrix_multiplication_continuity",
@@ -3110,7 +3473,51 @@
       },
       "dependsOnLabels": [
         "matrix_norm_submultiplicativity"
-      ]
+      ],
+      "analyticMatrixToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限次元の実・複素正方行列の収束と固定行列による右乗算",
+        "rationale": "行列ノルムの劣乗法性から実数列の極限評価へ帰着するため、ノルムの解析的前提を推移的に引き継ぐ。",
+        "directRealAnalysisInputs": [
+          "0 に収束する実数列の定数倍も 0 に収束すること"
+        ],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "matrix_norm_submultiplicativity",
+              "def_matrix_norm",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "dependencyBoundary": {
+          "insideReviewedAnalyticMatrixToolLabels": [
+            "matrix_norm_submultiplicativity"
+          ],
+          "outsideReviewedAnalyticMatrixToolLabels": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "directRealAnalysisInputExcludedLabels": [],
+          "outsideReviewedAnalyticMatrixToolOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "exp_linear_map_000a_claim_real_exp_series_converges",
