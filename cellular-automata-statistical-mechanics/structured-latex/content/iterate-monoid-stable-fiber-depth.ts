@@ -27,7 +27,7 @@ export default defineBlocks([
         math(String.raw`\mu(y)\in\mathbb{N}`), " を用いる。各 ",
         math(String.raw`q\in Q_F`), " と ", math(String.raw`k\in\mathbb{N}`), " に対し、",
       ]),
-      displayMath(String.raw`L_F(q,k):=\{\,y\in B_F(q)\mid \mu(y)=k\,\}\subseteq A^V`),
+      displayMath(String.raw`L_F(q,k):=\{\,y\in B_F(q)\mid \mu(y)=k\,\}\subseteq X`),
       paragraph(["と定め、", math(String.raw`q`), " の最小前周期 ", math(String.raw`k`), " の層と呼ぶ。"]),
     ],
   },
@@ -66,7 +66,7 @@ export default defineBlocks([
     habitat: "N",
     statement: [
       paragraph([
-        "各 ", math(String.raw`y\in A^V`), " について ", math(String.raw`\mu(y)>0`), " なら",
+        "各 ", math(String.raw`y\in X`), " について ", math(String.raw`\mu(y)>0`), " なら",
       ]),
       displayMath(String.raw`\mu(F(y))=\mu(y)-1`),
       paragraph(["である。"]),
@@ -142,16 +142,16 @@ F^{n+r}(y)
     labels: ["claim_iterate_monoid_stable_fiber_depth_finite_decidability"],
     habitat: "N",
     statement: [
-      paragraph([math(String.raw`M:=2^{|V|}`), " と置く。各 ", math(String.raw`q\in Q_F`), " について"]),
+      paragraph([math(String.raw`M:=|X|`), " と置く。各 ", math(String.raw`q\in Q_F`), " について"]),
       displayMath(String.raw`|B_F(q)|=\sum_{k\in[0,M]_{\mathbb{N}}}|L_F(q,k)|`),
       paragraph([
-        "であり、全ての層とその個数は有限舞台上の局所真理値表から有限決定できる。",
+        "であり、全ての層とその個数は有限集合上の自己写像の有限表から有限決定できる。",
       ]),
     ],
     proof: [
       paragraph([
         ref("claim_min_preperiod_period_bound"), " と ", ref("def_min_period"), " の ",
-        math(String.raw`\pi(y)\ge1`), " により、全ての ", math(String.raw`y\in A^V`), " で ",
+        math(String.raw`\pi(y)\ge1`), " により、全ての ", math(String.raw`y\in X`), " で ",
         math(String.raw`\mu(y)\le M`), "。", ref("claim_iterate_monoid_stable_fiber_depth_partition"),
         " により各 ", math(String.raw`y\in B_F(q)`), " は添字区間 ",
         math(String.raw`[0,M]_{\mathbb{N}}`), " のただ一つの層に属する。したがって有限集合の非交和の個数から表示式を得る。",
@@ -159,8 +159,8 @@ F^{n+r}(y)
       paragraph([
         ref("claim_iterate_monoid_stable_fibers_finite_decidability"), " により ",
         math(String.raw`Q_F`), " と全ての ", math(String.raw`B_F(q)`), " を有限決定でき、",
-        ref("claim_min_preperiod_period_finite_decidability"), " により各配位の ",
-        math(String.raw`\mu(y)`), " を有限決定できる。各配位をその値の層へ一度だけ加え、各有限集合の元を数えればよい。",
+        ref("claim_min_preperiod_period_finite_decidability"), " により各元の ",
+        math(String.raw`\mu(y)`), " を有限決定できる。各元をその値の層へ一度だけ加え、各有限集合の元を数えればよい。",
       ]),
       paragraph(["この検査は有限集合と自然数だけで閉じる。実数、複素数、極限、完備化は使わない。"]),
     ],

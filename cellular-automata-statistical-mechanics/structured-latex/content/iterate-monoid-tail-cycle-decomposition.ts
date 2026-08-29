@@ -84,7 +84,8 @@ F^a
     labels: ["claim_iterate_monoid_stable_tail_equals_cycle_part"],
     habitat: "finite",
     statement: [
-      paragraph([ref("def_iterate_monoid_tail"), " の後尾集合について、"]),
+      paragraph([ref("def_iterate_monoid_tail"), " の後尾集合と ",
+        ref("def_iterate_monoid_transient_and_cycle_parts"), " の巡回部について、"]),
       displayMath(String.raw`I_{\mu_F}(F)=C_F`),
       paragraph(["が成り立つ。"]),
     ],
@@ -202,9 +203,9 @@ F^{\mu_F+k}
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台、近傍、局所真理値表から、", math(String.raw`T_F`), "、",
+        "有限集合と自己写像の有限表から、", math(String.raw`T_F`), "、",
         math(String.raw`C_F`), "、および ", math(String.raw`|P_F|=\mu_F+\lambda_F`),
-        " を有限回の 2 値状態の等号検査で決定できる。",
+        " を有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
@@ -212,7 +213,7 @@ F^{\mu_F+k}
         ref("claim_iterate_monoid_first_stable_equals_min_collision_start"), " により ",
         math(String.raw`\mu_F`), " を有限決定でき、",
         ref("claim_iterate_monoid_minimal_period_finite_decidability"), " により ",
-        math(String.raw`\lambda_F`), " を有限決定できる。大域真理値表を ",
+        math(String.raw`\lambda_F`), " を有限決定できる。自己写像の有限表を ",
         math(String.raw`\mu_F+\lambda_F`), " 回まで合成して並べれば ",
         math(String.raw`T_F`), " と ", math(String.raw`C_F`),
         " を得る。前 claim により、この列挙は ", math(String.raw`P_F`),

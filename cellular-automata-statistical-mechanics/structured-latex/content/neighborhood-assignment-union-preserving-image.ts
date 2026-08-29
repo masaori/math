@@ -121,7 +121,8 @@ w\in U_N(S\cup T)
     statement: [
       paragraph([
         "有限集合 ", math(String.raw`V`), " と合併保存写像 ",
-        math(String.raw`\Phi\in\operatorname{UP}(V)`), " に対し、任意の ",
+        math(String.raw`\Phi\in\operatorname{UP}(V)`), "（", ref("def_union_preserving_subset_map"),
+        "）に対し、任意の ",
         math(String.raw`S\in\operatorname{Sub}(V)`), " について",
       ]),
       displayMath(String.raw`\Phi(S)=\bigcup_{v\in S}\Phi(\{v\})`),
@@ -345,7 +346,7 @@ w\in U_N(S\cup T)
       ]),
       paragraph([
         "第一条件 ", math(String.raw`\Phi(\emptyset)=\emptyset`), " は、",
-        math(String.raw`|V|\in\mathbb N`), " 個のセルについて ",
+        math(String.raw`|V|\in\mathbb N`), " 個の元について ",
         math(String.raw`w\in\Phi(\emptyset)`),
         " の真偽を調べれば決まる。",
       ]),
@@ -353,7 +354,7 @@ w\in U_N(S\cup T)
         "第二条件は、", math(String.raw`(S,T)`), " の組が ",
         math(String.raw`2^{|V|}\cdot 2^{|V|}=2^{2|V|}\in\mathbb N`),
         " 個であり、各組について両辺の部分集合が表から定まるので、",
-        math(String.raw`|V|`), " 個のセルの所属判定で等号の真偽が決まる。",
+        math(String.raw`|V|`), " 個の元の所属判定で等号の真偽が決まる。",
         "よって全体で有限回の判定で第二条件の真偽が決まる。",
       ]),
       paragraph([

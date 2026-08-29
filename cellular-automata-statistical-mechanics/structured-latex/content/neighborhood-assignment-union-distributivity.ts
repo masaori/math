@@ -24,7 +24,7 @@ export default defineBlocks([
     statement: [
       paragraph([
         "有限集合 ", math(String.raw`V`), " 上の近傍割り当て ",
-        math(String.raw`O_V\in\mathcal N(V)`), " を",
+        math(String.raw`O_V\in\mathcal N(V)`), "（", ref("def_finite_neighborhood_assignment_space"), "）を",
       ]),
       displayMath(String.raw`O_V(v):=\varnothing\qquad(v\in V)`),
       paragraph(["で定める。"]),
@@ -39,7 +39,8 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        "任意の ", math(String.raw`N,M\in\mathcal N(V)`), " に対し、点ごとの和 ",
+        "任意の ", math(String.raw`N,M\in\mathcal N(V)`), "（",
+        ref("def_finite_neighborhood_assignment_space"), "）に対し、点ごとの和 ",
         math(String.raw`N\sqcup M\in\mathcal N(V)`), " を",
       ]),
       displayMath(String.raw`(N\sqcup M)(v):=N(v)\cup M(v)\qquad(v\in V)`),
@@ -208,7 +209,7 @@ w\in(L\star(N\sqcup M))(v)
         ref("claim_empty_neighborhood_assignment_is_composition_absorbing"), " により ",
         math(String.raw`O_V`), " は合成の吸収元である。有限性と合成表の有限決定は ",
         ref("claim_finite_neighborhood_assignment_monoid_cardinality_decidable"),
-        " から従い、点ごとの和は各セルで有限集合の合併を取ることで有限決定できる。",
+        " から従い、点ごとの和は各点で有限集合の合併を取ることで有限決定できる。",
       ]),
     ],
   },

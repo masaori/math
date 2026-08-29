@@ -9,6 +9,11 @@
   D の各一段で時刻が増えることだけを使う。
 * X の有限性は到達可能関係の有限性にだけ使う。
 
+構造化本文の `def_dependency_path`、`def_reachability`、
+`claim_one_step_subset_reachability`、`claim_reachability_transitive`、
+`claim_reachability_minimal`、`claim_reachability_finite`、
+`def_reflexive_reachability` に対応する一般形をこのファイルに置く。
+
 舞台、状態、近傍、局所規則、自然数、グラフ、物理的因果、ℝ / ℂ は使わない。
 -/
 import Mathlib

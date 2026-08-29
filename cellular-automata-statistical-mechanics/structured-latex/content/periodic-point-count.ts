@@ -6,7 +6,7 @@
  * - y ∈ Per(F) ⟺ μ(y) = 0（最小前周期が 0）
  * - y ∈ Fix_n(F) ⟺ μ(y) = 0 かつ π(y) が n を割り切る（除法の原理と π(y) の最小性）
  * - Z_n(F) は最小周期ごとの個数の和へ分解される
- * - Fix_n(F) の所属は F^n y = y という 1 回の配位の等号で決まり、Z_n(F) は 2^{|V|} 回の等号検査で決まる
+ * - Fix_n(F) の所属は F^n y = y という 1 回の元の等号で決まり、Z_n(F) は |X| 回の等号検査で決まる
  *
  * 使う ℕ の構造は加法・乗法・大小比較・等号・除法の原理・整列性だけである。
  * 「分配関数」「トレース」等の統計力学・線形代数の名前は使わず、Z_n は個数としてだけ定義する。
@@ -39,20 +39,14 @@ export default defineBlocks([
         " に対し、",
       ]),
       displayMath(
-        String.raw`\mathrm{Fix}_{n}(F):=\{\,y\in A^{V}\ :\ F^{n}\,y=y\,\},\qquad Z_{n}(F):=|\mathrm{Fix}_{n}(F)|\in\mathbb{N}`,
+        String.raw`\mathrm{Fix}_{n}(F):=\{\,y\in X\ :\ F^{n}\,y=y\,\},\qquad Z_{n}(F):=|\mathrm{Fix}_{n}(F)|\in\mathbb{N}`,
       ),
       paragraph([
         "と定める（",
         math(String.raw`F^{n}`),
         " は ",
         ref("def_global_map_iterate"),
-        "）。",
-        math(String.raw`\mathrm{Fix}_{n}(F)`),
-        " は有限集合 ",
-        math(String.raw`A^{V}`),
-        " の部分集合なので有限であり、",
-        math(String.raw`Z_{n}(F)`),
-        " はその元の個数である。",
+        "）。", math(String.raw`Z_{n}(F)`), " はその元の個数である。",
       ]),
     ],
   },
@@ -66,7 +60,7 @@ export default defineBlocks([
     statement: [
       paragraph(["集合"]),
       displayMath(
-        String.raw`\mathrm{Per}(F):=\{\,y\in A^{V}\ :\ \exists n\in\mathbb{N}\,(\,n\ge 1\ \text{かつ}\ F^{n}\,y=y\,)\,\}`,
+        String.raw`\mathrm{Per}(F):=\{\,y\in X\ :\ \exists n\in\mathbb{N}\,(\,n\ge 1\ \text{かつ}\ F^{n}\,y=y\,)\,\}`,
       ),
       paragraph([
         "を ",
@@ -95,7 +89,7 @@ export default defineBlocks([
     statement: [
       paragraph([
         "各 ",
-        math(String.raw`y\in A^{V}`),
+        math(String.raw`y\in X`),
         " について、",
         math(String.raw`y\in\mathrm{Per}(F)`),
         " ",
@@ -188,7 +182,7 @@ export default defineBlocks([
     statement: [
       paragraph([
         "各 ",
-        math(String.raw`y\in A^{V}`),
+        math(String.raw`y\in X`),
         " と ",
         math(String.raw`n\in\mathbb{N}`),
         "、",
@@ -318,7 +312,7 @@ F^{r}\,y
         "、",
         math(String.raw`d\ge 1`),
         " に対し ",
-        math(String.raw`C_{d}(F):=\{\,y\in A^{V}\ :\ \mu(y)=0\ \text{かつ}\ \pi(y)=d\,\}`),
+        math(String.raw`C_{d}(F):=\{\,y\in X\ :\ \mu(y)=0\ \text{かつ}\ \pi(y)=d\,\}`),
         " と置く。各 ",
         math(String.raw`n\ge 1`),
         " について",
@@ -391,7 +385,7 @@ F^{r}\,y
   {
     id: "periodic_point_count_claim_finite_decidability",
     kind: "claim",
-    title: { text: "反復の不動点の個数は有限回の配位の等号検査で決まる" },
+    title: { text: "反復の不動点の個数は有限回の元の等号検査で決まる" },
     labels: ["claim_fixed_point_count_finite_decidability"],
     habitat: "N",
     statement: [
@@ -400,13 +394,13 @@ F^{r}\,y
         math(String.raw`n\ge 1`),
         " について、",
         math(String.raw`y\in\mathrm{Fix}_{n}(F)`),
-        " かどうかは配位の等号 ",
+        " かどうかは元の等号 ",
         math(String.raw`F^{n}\,y=y`),
         " の 1 回の検査で決まり、",
         math(String.raw`Z_{n}(F)`),
         " は ",
-        math(String.raw`|A^{V}|=2^{|V|}`),
-        " 回の配位の等号検査で決まる。",
+        math(String.raw`|X|`),
+        " 回の元の等号検査で決まる。",
       ]),
     ],
     proof: [
@@ -419,7 +413,7 @@ F^{r}\,y
         " ",
         math(String.raw`F^{n}\,y=y`),
         " であり、右辺は有限集合 ",
-        math(String.raw`A^{V}`),
+        math(String.raw`X`),
         " の二元の等号 1 回である（",
         math(String.raw`F^{n}\,y`),
         " は ",
@@ -429,14 +423,10 @@ F^{r}\,y
         " の適用として計算される）。",
         math(String.raw`Z_{n}(F)`),
         " は ",
-        math(String.raw`A^{V}`),
+        math(String.raw`X`),
         " の全 ",
-        math(String.raw`2^{|V|}`),
-        " 元（",
-        math(String.raw`|A|=2`),
-        "、",
-        math(String.raw`|A^{V}|=|A|^{|V|}`),
-        "）についてこの検査を行い、成り立った元を数えた個数である。",
+        math(String.raw`|X|`),
+        " 元についてこの検査を行い、成り立った元を数えた個数である。",
       ]),
     ],
   },

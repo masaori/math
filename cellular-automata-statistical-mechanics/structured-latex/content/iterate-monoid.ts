@@ -1,12 +1,12 @@
 /**
- * 章「大域写像の反復が生成する有限可換モノイド」。
- * 有限舞台上の大域写像 F の反復だけから、物理的意味を入れずに得られる代数構造を抽出する。
+ * 章「自己写像の反復が生成する有限可換モノイド」。
+ * 有限集合上の自己写像 F の反復だけから、物理的意味を入れずに得られる代数構造を抽出する。
  *
  * - 反復写像全体 P_F と写像の合成
  * - F^m ∘ F^n = F^{m+n}
  * - P_F が有限可換モノイドであること
  * - 写像空間の有限性による反復写像どうしの衝突と、有限代表集合
- * - 真理値表の全走査によるモノイドの有限決定
+ * - 有限表の全走査によるモノイドの有限決定
  *
  * 有限集合と自然数だけを使う。無限反復の極限や位相は取らず、ℝ / ℂ は現れない。
  */
@@ -18,7 +18,7 @@ export default defineBlocks([
     id: "iterate_monoid_heading",
     kind: "heading",
     level: 1,
-    title: { text: "大域写像の反復が生成する有限可換モノイド" },
+    title: { text: "自己写像の反復が生成する有限可換モノイド" },
     labels: [],
   },
 
@@ -30,31 +30,21 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台上の 2 値セルオートマトンの大域写像 ",
-        math(String.raw`F:A^V\to A^V`),
+        "有限集合上の自己写像 ",
+        math(String.raw`F:X\to X`),
         " に対し、反復 ",
-        math(String.raw`F^n:A^V\to A^V`),
+        math(String.raw`F^n:X\to X`),
         " は ",
         ref("def_global_map_iterate"),
         " の再帰で定める。写像の集合",
       ]),
-      displayMath(String.raw`P_F:=\{\,F^n:A^V\to A^V\mid n\in\mathbb{N}\,\}`),
+      displayMath(String.raw`P_F:=\{\,F^n:X\to X\mid n\in\mathbb{N}\,\}`),
       paragraph([
         "を ",
         math(String.raw`F`),
         " の反復写像の集合と呼ぶ。二項演算は写像の合成 ",
         math(String.raw`\circ`),
-        " とする。ここで ",
-        math(String.raw`A=\{0,1\}`),
-        " は有限集合（",
-        ref("def_state_set"),
-        "）、",
-        math(String.raw`V`),
-        " は有限集合（",
-        ref("def_finite_stage"),
-        "）であり、したがって ",
-        math(String.raw`A^V`),
-        " も有限集合である。",
+        " とする。",
       ]),
     ],
   },
@@ -70,7 +60,7 @@ export default defineBlocks([
         "すべての ",
         math(String.raw`m,n\in\mathbb{N}`),
         " について、写像 ",
-        math(String.raw`A^V\to A^V`),
+        math(String.raw`X\to X`),
         " として",
       ]),
       displayMath(String.raw`F^m\circ F^n=F^{m+n}`),
@@ -86,7 +76,7 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`\begin{aligned}
 F^0\circ F^n
-&=\operatorname{id}_{A^V}\circ F^n
+&=\operatorname{id}_{X}\circ F^n
   \quad(\because\ \blkref{def_global_map_iterate})\\
 &=F^n
   \quad(\because\ \text{恒等写像の性質})\\
@@ -126,7 +116,7 @@ F^{m+1}\circ F^n
       paragraph([
         math(String.raw`(P_F,\circ)`),
         " は有限可換モノイドである。単位元は ",
-        math(String.raw`F^0=\operatorname{id}_{A^V}`),
+        math(String.raw`F^0=\operatorname{id}_{X}`),
         " である。",
       ]),
     ],
@@ -134,7 +124,7 @@ F^{m+1}\circ F^n
       paragraph([
         ref("def_global_map_iterate"),
         " より ",
-        math(String.raw`F^0=\operatorname{id}_{A^V}\in P_F`),
+        math(String.raw`F^0=\operatorname{id}_{X}\in P_F`),
         " である。任意の ",
         math(String.raw`F^m,F^n\in P_F`),
         " に対し、",
@@ -158,14 +148,14 @@ F^m\circ F^n
 \end{aligned}`),
       paragraph([
         "なので可換である。有限性を示す。",
-        math(String.raw`M:=|A^V|=2^{|V|}\in\mathbb{N}_{>0}`),
+        math(String.raw`M:=|X|\in\mathbb{N}`),
         " と置く。有限集合 ",
-        math(String.raw`A^V`),
+        math(String.raw`X`),
         " からそれ自身への写像は ",
         math(String.raw`M^M`),
         " 個なので、",
       ]),
-      displayMath(String.raw`P_F\subseteq (A^V)^{A^V},\qquad |P_F|\leq M^M`),
+      displayMath(String.raw`P_F\subseteq X^{X},\qquad |P_F|\leq M^M`),
       paragraph(["である。したがって ", math(String.raw`P_F`), " は有限集合である。"]),
     ],
   },
@@ -178,7 +168,7 @@ F^m\circ F^n
     habitat: "N",
     statement: [
       paragraph([
-        math(String.raw`M:=2^{|V|}`),
+        math(String.raw`M:=|X|`),
         "、",
         math(String.raw`K:=M^M`),
         " と置く。ある ",
@@ -196,7 +186,7 @@ F^m\circ F^n
       paragraph([
         ref("claim_iterate_powers_form_finite_commutative_monoid"),
         " の証明より、終域 ",
-        math(String.raw`(A^V)^{A^V}`),
+        math(String.raw`X^{X}`),
         " の元は ",
         math(String.raw`K=M^M`),
         " 個である。",
@@ -273,37 +263,32 @@ F^n
   {
     id: "iterate_monoid_claim_finite_decidability",
     kind: "claim",
-    title: { text: "反復モノイドは有限真理値表から決定できる" },
+    title: { text: "反復モノイドは自己写像の有限表から決定できる" },
     labels: ["claim_iterate_monoid_finite_decidability"],
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台、近傍、局所真理値表から、反復モノイド ",
+        "有限集合 ", math(String.raw`X`), " と自己写像 ", math(String.raw`F:X\to X`),
+        " の有限表から、反復モノイド ",
         math(String.raw`(P_F,\circ)`),
-        " の全ての元と合成表を有限回の 2 値状態の等号検査で決定できる。",
+        " の全ての元と合成表を有限回の ", math(String.raw`X`), " の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
       paragraph([
-        "局所真理値表から大域写像 ",
-        math(String.raw`F:A^V\to A^V`),
-        " の有限真理値表を得る（",
-        ref("def_global_map"),
-        "）。各 ",
+        "各 ",
         math(String.raw`0\leq n\leq K`),
         " について ",
         math(String.raw`F^n`),
-        " の真理値表を再帰的に計算する。二つの反復写像 ",
+        " の有限表を再帰的に計算する。二つの反復写像 ",
         math(String.raw`F^a,F^b`),
         " の等号は",
       ]),
-      displayMath(String.raw`F^a=F^b\iff \forall y\in A^V,\ F^a y=F^b y`),
+      displayMath(String.raw`F^a=F^b\iff \forall y\in X,\ F^a y=F^b y`),
       paragraph([
         "であり、",
-        math(String.raw`A^V`),
-        " と ",
-        math(String.raw`V`),
-        " は有限集合なので、右辺は全配位・全セルの有限走査で決定できる。",
+        math(String.raw`X`),
+        " は有限集合なので、右辺は全ての元の有限走査で決定できる。",
         ref("claim_iterate_map_collision_finite_representatives"),
         " により、有限個の候補組 ",
         math(String.raw`0\leq i<j\leq K`),

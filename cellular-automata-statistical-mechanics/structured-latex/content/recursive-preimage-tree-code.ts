@@ -45,10 +45,10 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台上の 2 値セルオートマトンの大域写像 ", math(String.raw`F:A^V\to A^V`),
-        " と配位 ", math(String.raw`y\in A^V`), " に対し、有限集合",
+        "有限集合上の自己写像 ", math(String.raw`F:X\to X`),
+        " と元 ", math(String.raw`y\in X`), " に対し、有限集合",
       ]),
-      displayMath(String.raw`C_F(y):=\{\,z\in A^V\mid F(z)=y\ \text{かつ}\ z\notin\mathrm{Per}(F)\,\}`),
+      displayMath(String.raw`C_F(y):=\{\,z\in X\mid F(z)=y\ \text{かつ}\ z\notin\mathrm{Per}(F)\,\}`),
       paragraph([
         "を ", math(String.raw`y`), " の非周期一段前像の集合と呼ぶ。ここで ",
         math(String.raw`\mathrm{Per}(F)`), " は ", ref("def_periodic_points"),
@@ -66,7 +66,7 @@ export default defineBlocks([
     habitat: "N",
     statement: [
       paragraph([
-        "各 ", math(String.raw`y\in A^V`), " と各 ", math(String.raw`z\in C_F(y)`),
+        "各 ", math(String.raw`y\in X`), " と各 ", math(String.raw`z\in C_F(y)`),
         " について ", math(String.raw`\mu(z)=\mu(y)+1`), " である。",
       ]),
     ],
@@ -90,13 +90,13 @@ export default defineBlocks([
   {
     id: "recursive_preimage_tree_code_preperiod_upper_bound_claim",
     kind: "claim",
-    title: { text: "最小前周期は配位の個数より小さい" },
+    title: { text: "最小前周期は元の個数より小さい" },
     labels: ["claim_recursive_preimage_tree_code_preperiod_upper_bound"],
     habitat: "N",
     statement: [
       paragraph([
-        "各 ", math(String.raw`y\in A^V`), " について ",
-        math(String.raw`\mu(y)\le 2^{|V|}-1`), " である。",
+        "各 ", math(String.raw`y\in X`), " について ",
+        math(String.raw`\mu(y)\le |X|-1`), " である。",
       ]),
     ],
     proof: [
@@ -107,10 +107,10 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`\begin{aligned}
 \mu(y)+1&\le\mu(y)+\pi(y)\quad(\because\ \pi(y)\ge1)\\
-&\le 2^{|V|}\quad(\because\ \blkref{claim_min_preperiod_period_bound})
+&\le |X|\quad(\because\ \blkref{claim_min_preperiod_period_bound})
 \end{aligned}`),
       paragraph([
-        "移項により ", math(String.raw`\mu(y)\le 2^{|V|}-1`), " を得る。",
+        "移項により ", math(String.raw`\mu(y)\le |X|-1`), " を得る。",
       ]),
     ],
   },
@@ -123,7 +123,7 @@ export default defineBlocks([
     statement: [
       paragraph([
         math(String.raw`j\in\mathbb N`), " に関する帰納法で、",
-        math(String.raw`\mu(y)=2^{|V|}-1-j`), " を満たす各配位 ", math(String.raw`y\in A^V`),
+        math(String.raw`\mu(y)=|X|-1-j`), " を満たす各元 ", math(String.raw`y\in X`),
         " に対し、その再帰的前像木符号 ",
         math(String.raw`c_F(y)\in\mathbb M_{j}`), "（", ref("def_recursive_preimage_tree_code_multiset_hierarchy"),
         "）を",
@@ -135,12 +135,12 @@ export default defineBlocks([
         "この帰納法は well-defined である。実際、各 ", math(String.raw`z\in C_F(y)`),
         " は ", math(String.raw`\mu(z)=\mu(y)+1`), " を満たす（",
         ref("claim_recursive_preimage_tree_code_child_preperiod_increment"), "）。",
-        math(String.raw`j=0`), " のとき ", math(String.raw`\mu(z)=2^{|V|}`), " は ",
+        math(String.raw`j=0`), " のとき ", math(String.raw`\mu(z)=|X|`), " は ",
         ref("claim_recursive_preimage_tree_code_preperiod_upper_bound"),
         " に反するので ", math(String.raw`C_F(y)`), " は空集合であり、",
         math(String.raw`c_F(y)=\{\!\{\,\}\!\}\in\mathbb M_0`), " である。",
         math(String.raw`j+1`), " のときは各 ", math(String.raw`z\in C_F(y)`), " が ",
-        math(String.raw`\mu(z)=2^{|V|}-1-j`), " を満たし、帰納法の仮定により ",
+        math(String.raw`\mu(z)=|X|-1-j`), " を満たし、帰納法の仮定により ",
         math(String.raw`c_F(z)\in\mathbb M_{j}`), " が定義済みなので、",
         ref("def_recursive_preimage_tree_code_multiset_hierarchy"), " により ",
         math(String.raw`c_F(y)\in\mathbb M_{j+1}`), " である。",
@@ -157,10 +157,9 @@ export default defineBlocks([
       paragraph([
         "各周期点 ", math(String.raw`q\in\mathrm{Per}(F)`), " に対し、その周期軌道を",
       ]),
-      displayMath(String.raw`O_F(q):=\{\,F^n(q)\mid n\in\mathbb N\,\}\subseteq A^V`),
+      displayMath(String.raw`O_F(q):=\{\,F^n(q)\mid n\in\mathbb N\,\}\subseteq X`),
       paragraph([
-        "と定め（", ref("def_global_map_iterate"), "。", math(String.raw`A^V`),
-        " の部分集合なので有限集合である）、周期軌道の集合を",
+        "と定め（", ref("def_global_map_iterate"), "）、周期軌道の集合を",
       ]),
       displayMath(String.raw`\mathcal O_F:=\{\,O_F(q)\mid q\in\mathrm{Per}(F)\,\}`),
       paragraph(["と定める。"]),
@@ -211,7 +210,7 @@ export default defineBlocks([
     habitat: "countable",
     statement: [
       paragraph([
-        "大域写像 ", math(String.raw`F`), " の符号を、有限多重集合",
+        "自己写像 ", math(String.raw`F`), " の符号を、有限多重集合",
       ]),
       displayMath(String.raw`\mathcal K(F):=\{\!\{\,K_F(O)\mid O\in\mathcal O_F\,\}\!\}`),
       paragraph([
@@ -229,9 +228,9 @@ export default defineBlocks([
     habitat: "countable",
     statement: [
       paragraph([
-        "有限舞台上の二つの 2 値セルオートマトンの大域写像 ",
-        math(String.raw`F:A^V\to A^V`), " と ", math(String.raw`G:A^W\to A^W`),
-        " の間に共役全単射 ", math(String.raw`h:A^V\to A^W`), "（",
+        "有限集合上の二つの自己写像 ",
+        math(String.raw`F:X\to X`), " と ", math(String.raw`G:Y\to Y`),
+        " の間に共役全単射 ", math(String.raw`h:X\to Y`), "（",
         ref("def_iterate_monoid_conjugacy_bijection"), "）が存在するなら、",
       ]),
       displayMath(String.raw`\mathcal K(F)=\mathcal K(G)`),
@@ -240,9 +239,9 @@ export default defineBlocks([
     proof: [
       paragraph([
         ref("claim_iterate_monoid_conjugacy_transports_iterates"), " により、各 ",
-        math(String.raw`y\in A^V`), " と各 ", math(String.raw`n\in\mathbb N`), " について ",
+        math(String.raw`y\in X`), " と各 ", math(String.raw`n\in\mathbb N`), " について ",
         math(String.raw`h(F^n(y))=G^n(h(y))`), " である。したがって各 ",
-        math(String.raw`y\in A^V`), " について",
+        math(String.raw`y\in X`), " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 h(y)\in\mathrm{Per}(G)
@@ -255,7 +254,7 @@ h(y)\in\mathrm{Per}(G)
 &\Longleftrightarrow y\in\mathrm{Per}(F)
   \quad(\because\ \blkref{def_periodic_points}).
 \end{aligned}`),
-      paragraph(["この同値と共役条件、", math(String.raw`h`), " の全単射性により各 ", math(String.raw`y\in A^V`), " について"]),
+      paragraph(["この同値と共役条件、", math(String.raw`h`), " の全単射性により各 ", math(String.raw`y\in X`), " について"]),
       displayMath(String.raw`h(C_F(y))=C_G(h(y))\quad(\because\ \blkref{def_recursive_preimage_tree_code_children})`),
       paragraph([
         "である。最小前周期の大きい側からの帰納法で ",
@@ -288,12 +287,12 @@ c_F(y)
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台上の二つの 2 値セルオートマトンの大域写像 ",
-        math(String.raw`F:A^V\to A^V`), " と ", math(String.raw`G:A^W\to A^W`), " について",
+        "有限集合上の二つの自己写像 ",
+        math(String.raw`F:X\to X`), " と ", math(String.raw`G:Y\to Y`), " について",
       ]),
       displayMath(String.raw`\mathcal K(F)=\mathcal K(G)`),
       paragraph([
-        "ならば、共役全単射 ", math(String.raw`h:A^V\to A^W`),
+        "ならば、共役全単射 ", math(String.raw`h:X\to Y`),
         " を有限回の選択と再帰だけで構成できる。",
       ]),
     ],
@@ -315,8 +314,8 @@ c_F(y)
         math(String.raw`h\circ F=G\circ h`), " を満たす。",
       ]),
       paragraph([
-        "次に、対応済みの二点 ", math(String.raw`y\in A^V`), " と ",
-        math(String.raw`u\in A^W`), " が ", math(String.raw`c_F(y)=c_G(u)`),
+        "次に、対応済みの二点 ", math(String.raw`y\in X`), " と ",
+        math(String.raw`u\in Y`), " が ", math(String.raw`c_F(y)=c_G(u)`),
         " を満たすとする。再帰符号の等号は、子符号ごとの重複度を含めた多重集合の等号だから、",
         math(String.raw`C_F(y)`), " の各元を、同じ符号を持つ ", math(String.raw`C_G(u)`),
         " の元へ一対一に対応させられる。各対応する子の組に同じ操作を繰り返す。",
@@ -334,14 +333,14 @@ c_F(y)
         " となるので ", math(String.raw`a=b`), " である。決定的な写像の同じ回数の反復値は一意なので、",
         "二つの子は等しくなり矛盾する。",
         "また有限集合上の軌道の最終周期性（", ref("claim_eventual_periodicity"),
-        "）により、全ての配位はただ一つの周期軌道へ到達する。したがって全周期成分で得た対応は互いに交わらず、",
-        "合わせると全単射 ", math(String.raw`h:A^V\to A^W`), " になる。",
+        "）により、全ての元はただ一つの周期軌道へ到達する。したがって全周期成分で得た対応は互いに交わらず、",
+        "合わせると全単射 ", math(String.raw`h:X\to Y`), " になる。",
       ]),
       paragraph([
         "非周期点 ", math(String.raw`z`), " は、その親 ", math(String.raw`F(z)`),
         " の子として対応させたので ", math(String.raw`G(h(z))=h(F(z))`),
         " である。周期点では上の周期辺の対応により同じ等号が成り立つ。ゆえに全ての ",
-        math(String.raw`z\in A^V`), " について ",
+        math(String.raw`z\in X`), " について ",
         math(String.raw`h(F(z))=G(h(z))`), " であり、", math(String.raw`h`),
         " は共役全単射である。",
       ]),
@@ -355,8 +354,8 @@ c_F(y)
     habitat: "countable",
     statement: [
       paragraph([
-        "有限舞台上の二つの 2 値セルオートマトンの大域写像 ",
-        math(String.raw`F:A^V\to A^V`), " と ", math(String.raw`G:A^W\to A^W`), " について",
+        "有限集合上の二つの自己写像 ",
+        math(String.raw`F:X\to X`), " と ", math(String.raw`G:Y\to Y`), " について",
       ]),
       displayMath(String.raw`\mathcal K(F)=\mathcal K(G)
 \quad\Longleftrightarrow\quad
@@ -379,16 +378,16 @@ F\ \text{から}\ G\ \text{への共役全単射が存在する}`),
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台上の二つの 2 値セルオートマトンについて、各写像符号の計算、符号の等号、",
+        "有限集合上の二つの自己写像について、各写像符号の計算、符号の等号、",
         "共役全単射の存在、および符号が等しい場合の共役全単射の一つの構成は、",
-        "二つの局所真理値表から有限回の走査で決定できる。",
+        "二つの自己写像の有限表から有限回の走査で決定できる。",
       ]),
     ],
     proof: [
       paragraph([
-        ref("claim_iterate_monoid_finite_decidability"), " の冒頭の有限走査により、各局所真理値表から有限な配位集合上の",
-        "大域写像表を作れる。", ref("claim_min_preperiod_period_finite_decidability"),
-        " により各配位の最小前周期と最小周期を有限走査できるので、周期点、非周期一段前像、周期軌道を全て列挙できる。",
+        ref("claim_iterate_monoid_finite_decidability"), " の冒頭の有限走査により、各自己写像の有限表から有限な元集合上の",
+        "自己写像表を作れる。", ref("claim_min_preperiod_period_finite_decidability"),
+        " により各元の最小前周期と最小周期を有限走査できるので、周期点、非周期一段前像、周期軌道を全て列挙できる。",
         ref("claim_recursive_preimage_tree_code_preperiod_upper_bound"),
         " の有限上界から最小前周期の大きい順に各再帰符号を計算し、各周期軌道の有限個の基点語、",
         "成分符号、写像符号を順に作れる。有限列・有限集合・有限多重集合の等号はいずれも有限比較で決まる。",

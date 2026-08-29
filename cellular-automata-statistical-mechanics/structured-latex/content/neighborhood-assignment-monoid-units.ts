@@ -23,11 +23,14 @@ export default defineBlocks([
     statement: [
       paragraph([
         "有限集合 ", math(String.raw`V`), " と ", math(String.raw`N\in\mathcal N(V)`),
+        "（", ref("def_finite_neighborhood_assignment_space"), "）",
         " に対し、ある ", math(String.raw`M\in\mathcal N(V)`), " が存在して",
       ]),
       displayMath(String.raw`N\star M=I_V=M\star N`),
       paragraph([
-        "となるとき、", math(String.raw`N`), " を合成近傍について可逆と呼び、",
+        "となるとき（合成は ", ref("def_composed_neighborhood"), "、単位元は ",
+        ref("def_identity_neighborhood_assignment"), "）、", math(String.raw`N`),
+        " を合成近傍について可逆と呼び、",
         math(String.raw`M`), " をその逆元と呼ぶ。",
       ]),
     ],
@@ -41,7 +44,8 @@ export default defineBlocks([
     statement: [
       paragraph([
         "有限集合 ", math(String.raw`V`), " の全単射 ", math(String.raw`\sigma:V\to V`),
-        " に対し、近傍割り当て ", math(String.raw`P_\sigma\in\mathcal N(V)`), " を",
+        " に対し、近傍割り当て ", math(String.raw`P_\sigma\in\mathcal N(V)`),
+        "（", ref("def_finite_neighborhood_assignment_space"), "）を",
       ]),
       displayMath(String.raw`P_\sigma(v):=\{\sigma(v)\}\qquad(v\in V)`),
       paragraph(["で定める。"])],

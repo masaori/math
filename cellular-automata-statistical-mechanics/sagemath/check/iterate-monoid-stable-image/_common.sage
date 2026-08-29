@@ -12,7 +12,7 @@ def image_of(table):
 
 
 def stable_image_data(table):
-    """μ_F、λ_F、e_F、反復写像列、E_F、R_F=F^{e_F+λ_F-1}、Q_F=E_F(A^V) を返す。"""
+    """μ_F、λ_F、e_F、反復写像列、E_F、S_F=F^{e_F+λ_F-1}、Q_F=E_F(A^V) を返す。"""
     mu, lam, e, powers = cycle_group_data(table)
     E = powers[e]
     R = powers[e + lam - 1]

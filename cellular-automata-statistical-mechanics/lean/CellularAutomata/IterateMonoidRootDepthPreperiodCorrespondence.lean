@@ -4,7 +4,7 @@
 structured-latex/content/iterate-monoid-root-depth-preperiod-correspondence.ts。
 
 全写像の最小正周期を各配位の最小前周期位置へ移し、最小前周期を
-λ_F 単位で切り上げた値 c_F(y) を定義する。人手証明と同じ順序で、
+λ_F 単位で切り上げた値 r_F(y) を定義する。人手証明と同じ順序で、
 切り上げ位置での根到達、それより前の非到達、根付き木の深さとの一致、
 有限走査を形式化する。有限集合・自然数・写像の等号だけを使い、R / C は使わない。
 -/
@@ -46,7 +46,7 @@ theorem globalPeriod_at_minPreperiod (y : V → State) :
   exact ⟨minPreperiod_le N f y ⟨minPositivePeriod N f, hpair⟩,
     (period_descends_to_minPreperiod N f y hpair).1⟩
 
-/-- `c_F(y)` の最小化集合は `m_F` を含む。 -/
+/-- `r_F(y)` の最小化集合は `m_F` を含む。 -/
 theorem exists_roundedPreperiod (y : V → State) :
     ∃ d : ℕ, minPreperiod N f y ≤ d * minPositivePeriod N f := by
   refine ⟨rootReachExponent N f, ?_⟩
@@ -56,7 +56,7 @@ theorem exists_roundedPreperiod (y : V → State) :
     _ = rootReachExponent N f * minPositivePeriod N f :=
       (rootReachExponent_mul_minPositivePeriod N f).symm
 
-/-- `c_F(y) := min {d | μ(y) ≤ d λ_F}`
+/-- `r_F(y) := min {d | μ(y) ≤ d λ_F}`
     （`def_iterate_monoid_rounded_preperiod_depth`）。 -/
 noncomputable def roundedPreperiod (y : V → State) : ℕ := by
   classical
@@ -162,7 +162,7 @@ theorem fiberTreeDepth_eq_roundedPreperiod (q : stableImage N f)
     exact before_roundedPreperiod_not_root N f q hy hlt
       (fiberTreeDepth_reaches_root N f q hy)
 
-/-- 全配位を有限走査して `(y, μ(y), c_F(y), d_F(y))` を得る表
+/-- 全配位を有限走査して `(y, μ(y), r_F(y), d_F(y))` を得る表
     （`claim_iterate_monoid_root_depth_preperiod_correspondence_finite_decidability`）。 -/
 noncomputable def correspondenceTable :
     Finset ((V → State) × ℕ × ℕ × ℕ) := by

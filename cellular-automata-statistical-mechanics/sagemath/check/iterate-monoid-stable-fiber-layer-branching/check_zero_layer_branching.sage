@@ -1,10 +1,10 @@
 # 対象ラベル: claim_iterate_monoid_zero_depth_layer_predecessor_count
-# 各 q ∈ Q_F で |L_F(q,0)| + |L_F(q,1)| = Σ_{z ∈ L_F(σ_F(q),0)} d_F(z) を、人手証明の 5 等号を分けて確かめる。
+# 各 q ∈ Q_F で |L_F(q,0)| + |L_F(q,1)| = Σ_{z ∈ L_F(σ_F(q),0)} b_F(z) を、人手証明の 5 等号を分けて確かめる。
 #   |L_F(q,0)| + |L_F(q,1)| = |L_F(q,0) ∪ L_F(q,1)|   (claim_iterate_monoid_stable_fiber_depth_partition: 層の非交差)
 #                        = |F^{-1}(L_F(σ_F(q),0))|     (claim_iterate_monoid_zero_depth_layer_exact_preimage)
 #                        = |∪_{z} Pre_F(z)|            (claim_iterate_monoid_finite_subset_preimage_decomposition)
 #                        = Σ_{z} |Pre_F(z)|            (claim_iterate_monoid_stable_fiber_predecessors_disjoint)
-#                        = Σ_{z} d_F(z)                (def_iterate_monoid_stable_fiber_predecessor_count)
+#                        = Σ_{z} b_F(z)                (def_iterate_monoid_stable_fiber_predecessor_count)
 # 帰属: 有限集合の等号・所属・合併・共通部分と非負整数の加算・等号だけを使う。R/C 脱出なし。
 
 import os
@@ -35,7 +35,7 @@ for stage_size, rule, table in exhaustive_instances():
         c4 = sum(len(pre_sets[z]) for z in source)
         assert c3 == c4                               # 非交和の個数は和
         c5 = sum(predecessor_count(F, z) for z in source)
-        assert c4 == c5                               # d_F の定義
+        assert c4 == c5                               # b_F の定義
         assert c1 == c2 == c3 == c4 == c5
         equalities += 1
     instances += 1

@@ -2,10 +2,10 @@
 章「反復モノイドの冪等元が定める安定像」の必要十分版。
 
 具体版と同じ手順（安定像 Q_F = im E_F、E_F の Q_F 上での恒等性、衝突開始後の反復写像の像と Q_F の
-一致、逆写像候補 R_F = F^(e_F+λ_F-1) の左右恒等性、F・R_F が Q_F を保つこと、制限の相互逆性と
+一致、逆写像候補 S_F = F^(e_F+λ_F-1) の左右恒等性、F・S_F が Q_F を保つこと、制限の相互逆性と
 全単射性、有限走査表）を保ち、実際に使う構造だけを残す。
 
-* 安定像の定義、E_F の恒等性、R_F の左右恒等性、F・R_F が Q_F を保つこと、制限の相互逆性と
+* 安定像の定義、E_F の恒等性、S_F の左右恒等性、F・S_F が Q_F を保つこと、制限の相互逆性と
   全単射性には、型 X、自己写像 F : X → X、衝突開始位置の存在（前章の e_F・λ_F・周期の伝播を
   与える）だけが要る。X の有限性はその存在を与える側にだけ現れ、この章の定理には現れない。
 * X → X の等号判定（`DecidableEq (X → X)`）は、人手証明が「F^n ∈ C_F」を経由する
@@ -65,12 +65,12 @@ theorem stable_power_image_eq (n : ℕ) (hn : minCollisionStart F hex ≤ n) :
     exact ⟨H y, congrFun hright y⟩
 
 omit [DecidableEq (X → X)] in
-/-- `R_F := F^(e_F+λ_F-1)`。 -/
+/-- `S_F := F^(e_F+λ_F-1)`。 -/
 noncomputable def stableInverse : X → X :=
   iterateMap F (minStablePeriodMultiple F hex + minPositivePeriod F hex - 1)
 
 omit [DecidableEq (X → X)] in
-/-- `F ∘ R_F = E_F` と `R_F ∘ F = E_F`。周期の伝播と加法則だけを使う。 -/
+/-- `F ∘ S_F = E_F` と `S_F ∘ F = E_F`。周期の伝播と加法則だけを使う。 -/
 theorem stableInverse_two_sided :
     F ∘ stableInverse F hex = cycleIdempotent F hex ∧
       stableInverse F hex ∘ F = cycleIdempotent F hex := by
@@ -101,7 +101,7 @@ theorem globalMap_maps_stableImage
   rw [← stable_power_image_eq F hex (1 + minStablePeriodMultiple F hex) (by omega)]
   exact ⟨y, rfl⟩
 
-/-- `R_F` は `Q_F` をそれ自身へ写す。 -/
+/-- `S_F` は `Q_F` をそれ自身へ写す。 -/
 theorem stableInverse_maps_stableImage
     {z : X} (hz : z ∈ stableImage F hex) :
     stableInverse F hex z ∈ stableImage F hex := by
@@ -121,7 +121,7 @@ theorem stableInverse_maps_stableImage
 noncomputable def stableStep : stableImage F hex → stableImage F hex :=
   fun z => ⟨F z.1, globalMap_maps_stableImage F hex z.2⟩
 
-/-- `R_F` の `Q_F` への制限。 -/
+/-- `S_F` の `Q_F` への制限。 -/
 noncomputable def stableStepInverse : stableImage F hex → stableImage F hex :=
   fun z => ⟨stableInverse F hex z.1, stableInverse_maps_stableImage F hex z.2⟩
 
@@ -157,7 +157,7 @@ theorem coe_stableImageTable :
   simp [stableImageTable, stableImage]
 
 omit [DecidableEq (X → X)] in
-/-- `Q_F` 上の `E_F`、`F`、`R_F` の有限な表。 -/
+/-- `Q_F` 上の `E_F`、`F`、`S_F` の有限な表。 -/
 noncomputable def stableRestrictedTables : Finset (X × X × X × X) :=
   (stableImageTable F hex).image
     (fun z => (z, cycleIdempotent F hex z, F z, stableInverse F hex z))

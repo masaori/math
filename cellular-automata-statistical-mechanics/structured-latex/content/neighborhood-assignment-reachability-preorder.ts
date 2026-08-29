@@ -162,15 +162,6 @@ v_1&\in N_2(v_0)
         math(String.raw`v_0=v_1`), " を要求するので、この ",
         math(String.raw`N_2`), " では成り立たない。",
       ]),
-      paragraph([
-        "時間展開の依存関係では ", ref("claim_no_mutual_reachability"),
-        " により相異なる二元が互いに到達し合うことはなく、",
-        ref("claim_reachability_partial_order"),
-        " で部分順序が得られていた。そこで反対称性を与えていたのは、",
-        ref("claim_path_time_strictly_increases"),
-        " の時間座標の厳密増加である。近傍割り当てには時間座標が無いので、",
-        "この論証は移せず、上の反例が実際に反対称性を破る。",
-      ]),
     ],
   },
 

@@ -37,9 +37,7 @@ export default defineBlocks([
       paragraph([
         "と定め、",
         math(String.raw`n`),
-        " から始まる反復写像の後尾集合と呼ぶ。これは有限集合 ",
-        math(String.raw`P_F`),
-        " の部分集合なので有限集合である。",
+        " から始まる反復写像の後尾集合と呼ぶ。",
       ]),
     ],
   },
@@ -305,11 +303,11 @@ H
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台、近傍、局所真理値表から、相異なる後尾集合の列と、最初に ",
+        "有限集合と自己写像の有限表から、相異なる後尾集合の列と、最初に ",
         math(String.raw`I_n(F)=I_{n+1}(F)`),
         " となる ",
         math(String.raw`n\in\mathbb{N}`),
-        " を有限回の 2 値状態の等号検査で決定できる。",
+        " を有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [

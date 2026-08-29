@@ -19,7 +19,8 @@ variable {V : Type} [Fintype V] [DecidableEq V]
 variable (N : V → Finset V)
 variable (f : (v : V) → (↥(N v) → State) → State)
 
-/-- 順序区間 I_τ(a,b)（`def_order_interval`）。 -/
+/-- 有限半順序の区間（`def_finite_poset_interval`）を依存順序へ特殊化した
+    順序区間 I_τ(a,b)（`def_order_interval`）。 -/
 def orderInterval (τ : ℕ) (a b : ℕ × V) : Set (ℕ × V) :=
   {c | c ∈ eventSet τ ∧ (a, c) ∈ ReflReachable N f τ ∧
     (c, b) ∈ ReflReachable N f τ}
@@ -41,7 +42,8 @@ theorem orderInterval_ncard_le (τ : ℕ) (a b : ℕ × V) :
     _ = (eventSet (V := V) τ).card := Set.ncard_coe_finset _
     _ = (τ + 1) * Fintype.card V := card_eventSet τ
 
-/-- 到達可能関係 C_τ の被覆関係（`def_covering_relation`）。 -/
+/-- 有限関係の被覆関係（`def_finite_relation_covering`）を C_τ へ特殊化した
+    被覆関係（`def_covering_relation`）。 -/
 def Covering (τ : ℕ) : Set ((ℕ × V) × (ℕ × V)) :=
   {ab | ab ∈ Reachable N f τ ∧
     ¬ ∃ c, c ∈ eventSet τ ∧ (ab.1, c) ∈ Reachable N f τ ∧

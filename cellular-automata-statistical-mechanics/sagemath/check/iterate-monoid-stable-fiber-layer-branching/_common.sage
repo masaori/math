@@ -13,7 +13,7 @@ def predecessor_set(F, z):
 
 
 def predecessor_count(F, z):
-    """def_iterate_monoid_stable_fiber_predecessor_count: d_F(z) = |Pre_F(z)| ∈ N。"""
+    """def_iterate_monoid_stable_fiber_predecessor_count: b_F(z) = |Pre_F(z)| ∈ N。"""
     return len(predecessor_set(F, z))
 
 

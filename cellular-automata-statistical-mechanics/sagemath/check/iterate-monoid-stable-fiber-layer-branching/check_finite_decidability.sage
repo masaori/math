@@ -1,8 +1,8 @@
 # 対象ラベル: claim_iterate_monoid_depth_layer_branching_finite_decidability
-# 局所真理値表から、全ての層 L_F(q,k) の個数と全ての d_F(z) を有限走査で決定し、
+# 局所真理値表から、全ての層 L_F(q,k) の個数と全ての b_F(z) を有限走査で決定し、
 # 一段前像数の層別総和（有限加算）が正の層・零層の両保存式を満たすことを、
 # 定義どおり（全配位の所属検査・完全逆像）に計算した値との一致で確かめる。
-#   - d_F(z) は配位ごとに一度の F 適用の数え上げ走査で得、定義どおりの |Pre_F(z)| と比較する。
+#   - b_F(z) は配位ごとに一度の F 適用の数え上げ走査で得、定義どおりの |Pre_F(z)| と比較する。
 #   - 層の個数は既有限決定の層分割（claim_iterate_monoid_stable_fiber_depth_finite_decidability）から得る。
 #   - 総和は自然数の有限加算だけで計算し、層の個数（正の層は一つ上、零層は零層と一層の和）と比較する。
 # 帰属: 有限集合の写像の等号・所属と非負整数の加算・等号だけを使う。R/C 脱出なし。
@@ -18,7 +18,7 @@ zero_identities = 0
 for stage_size, rule, table in exhaustive_instances():
     F, E, Q, fibers, sigma, mp, mu_of, layers = depth_data(table)
     M = len(F)
-    # 配位ごとに一度の F 適用で全ての d_F(z) を数え上げる走査
+    # 配位ごとに一度の F 適用で全ての b_F(z) を数え上げる走査
     scan_count = {z: 0 for z in range(M)}
     for y in range(M):
         scan_count[F[y]] += 1

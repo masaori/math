@@ -1,7 +1,7 @@
 /**
  * 章「安定ファイバー根付き木族の数値プロファイルは共役を決定しない」。
  * 共役で保存される深さ別個数と分岐個数分布を数値プロファイルとして束ね、
- * それが完全不変量ではない 8 配位上の反例と、共役自体の有限決定を記述する。
+ * それが完全不変量ではない 8 元上の反例と、共役自体の有限決定を記述する。
  * 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
  */
 
@@ -23,7 +23,7 @@ export default defineBlocks([
     habitat: "N",
     statement: [
       paragraph([
-        "有限舞台上の 2 値セルオートマトンの大域写像 ", math(String.raw`F:A^V\to A^V`),
+        "有限集合上の自己写像 ", math(String.raw`F:X\to X`),
         " に対し、各 ", math(String.raw`q\in Q_F`), " と ", math(String.raw`z\in B_F(q)`), " について",
       ]),
       displayMath(String.raw`b_F(q,z):=\left|\{\,y\in B_F(q)\mid (y,z)\in T_F(q)\,\}\right|\in\mathbb N`),
@@ -40,7 +40,7 @@ export default defineBlocks([
         " はそれぞれ ", ref("def_iterate_monoid_collision_start"), "、",
         ref("def_iterate_monoid_minimal_positive_period"), "、", ref("def_iterate_monoid_stable_image"), "、",
         ref("def_iterate_monoid_stable_fiber"), "、", ref("def_iterate_monoid_fiber_tree_edges"), "、",
-        ref("def_iterate_monoid_fiber_tree_depth"), " で定めた有限対象である。多重集合は値の重複を保って数える。",
+        ref("def_iterate_monoid_fiber_tree_depth"), " で定めた対象である。多重集合は値の重複を保って数える。",
       ]),
     ],
   },
@@ -90,32 +90,46 @@ export default defineBlocks([
   {
     id: "iterate_monoid_conjugacy_numerical_profile_counterexample_definition",
     kind: "definition",
-    title: { text: "八配位上の二つの大域写像" },
+    title: { text: "八元上の二つの自己写像" },
     labels: ["def_iterate_monoid_conjugacy_numerical_profile_counterexample"],
     habitat: "finite",
     statement: [
       paragraph([
-        math(String.raw`|V|=3`), " とし、8 元の配位空間 ", math(String.raw`A^V`), " の元を ",
+        "8 元集合 ", math(String.raw`X`), " の元を ",
         math(String.raw`x_0,x_1,\ldots,x_7`), " と名付ける。二つの写像 ",
-        math(String.raw`F,G:A^V\to A^V`), " を次の有限表で定める。",
+        math(String.raw`F,G:X\to X`), " を次の有限表で定める。",
       ]),
       displayMath(String.raw`\begin{array}{c|cccccccc}
 y&x_0&x_1&x_2&x_3&x_4&x_5&x_6&x_7\\ \hline
 F(y)&x_0&x_0&x_0&x_1&x_1&x_2&x_4&x_7\\
 G(y)&x_0&x_0&x_0&x_1&x_1&x_2&x_5&x_7
 \end{array}`),
+    ],
+  },
+  {
+    id: "iterate_monoid_conjugacy_numerical_profile_counterexample_ca_specialization",
+    kind: "claim",
+    title: { text: "八元反例は三セル二値セルオートマトンとして実現できる" },
+    labels: ["claim_iterate_monoid_conjugacy_numerical_profile_counterexample_ca_specialization"],
+    habitat: "finite",
+    statement: [
       paragraph([
-        "これは 2 値セルオートマトンの大域写像として実現できる。実際、各 ", math(String.raw`v\in V`),
-        " で ", math(String.raw`N(v):=V`), " とし、局所規則を ",
-        math(String.raw`f_v(y):=F(y)(v)`), " と定めれば大域写像は ", math(String.raw`F`),
-        " になり、同様に ", math(String.raw`G`), " も有限真理値表から得られる。",
+        ref("def_iterate_monoid_conjugacy_numerical_profile_counterexample"),
+        " の二つの自己写像は、三元舞台の全近傍二値セルオートマトンの大域写像として実現できる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`|V|=3`), " なら ", math(String.raw`|A^V|=8`), " である。",
+        math(String.raw`X`), " と ", math(String.raw`A^V`), " の間の全単射で二つの自己写像を移し、",
+        ref("claim_all_self_maps_binary_ca_full_neighborhood_specialization"), " をそれぞれに適用する。",
       ]),
     ],
   },
   {
     id: "iterate_monoid_conjugacy_numerical_profile_counterexample_claim",
     kind: "claim",
-    title: { text: "同じ数値プロファイルをもつ非共役な二つの大域写像が存在する" },
+    title: { text: "同じ数値プロファイルをもつ非共役な二つの自己写像が存在する" },
     labels: ["claim_iterate_monoid_conjugacy_numerical_profile_not_complete"],
     habitat: "finite",
     statement: [
@@ -129,7 +143,7 @@ G(y)&x_0&x_0&x_0&x_1&x_1&x_2&x_5&x_7
       displayMath(String.raw`F^2(x_6)=x_1\ne x_0=F^3(x_6),\qquad
 G^2(x_6)=x_2\ne x_0=G^3(x_6)`),
       paragraph([
-        "であり、他方で全ての ", math(String.raw`y\in A^V`), " について ",
+        "であり、他方で全ての ", math(String.raw`y\in X`), " について ",
         math(String.raw`F^3(y)=F^4(y)`), " かつ ", math(String.raw`G^3(y)=G^4(y)`),
         " である。さらに ", math(String.raw`F^0(x_1)=G^0(x_1)=x_1`), " だが正の反復では両方とも ",
         math(String.raw`x_0`), " へ移るので、反復回数 0 からの衝突はない。反復回数 1 については",
@@ -179,23 +193,22 @@ G^2(x_6)=x_2\ne x_0=G^3(x_6)`),
   {
     id: "iterate_monoid_conjugacy_finite_decidability_claim",
     kind: "claim",
-    title: { text: "有限大域写像の共役は有限決定できる" },
+    title: { text: "有限自己写像の共役は有限決定できる" },
     labels: ["claim_iterate_monoid_conjugacy_finite_decidability"],
     habitat: "finite",
     statement: [
       paragraph([
-        "二つの有限舞台上の局所真理値表から、その大域写像の間に共役全単射が存在するかを有限回の二値状態の等号検査で決定できる。",
+        "二つの有限集合上の自己写像の有限表から、その自己写像の間に共役全単射が存在するかを有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
       paragraph([
-        "まず両配位空間の有限な元数を比較する。異なれば全単射は存在しない。等しければ、二つの有限集合の間の全単射を全て列挙する。",
-        "各候補 ", math(String.raw`h`), " について、全ての配位 ", math(String.raw`y`), " で ",
+        "まず二つの台集合の元数を比較する。異なれば全単射は存在しない。等しければ、二つの有限集合の間の全単射を全て列挙する。",
+        "各候補 ", math(String.raw`h`), " について、全ての元 ", math(String.raw`y`), " で ",
         math(String.raw`h(F(y))=G(h(y))`), " かを有限表から検査する。全候補が不成立なら共役は存在せず、",
         "一つでも成立すれば ", ref("def_iterate_monoid_conjugacy_bijection"), " の共役全単射である。",
       ]),
       paragraph([
-        "局所真理値表の各有限入力を評価すれば、大域真理値表も有限回の二値状態の等号検査で得られる。",
         "この手続きは有限集合と自然数だけで閉じ、実数、複素数、極限、完備化を使わない。",
       ]),
     ],

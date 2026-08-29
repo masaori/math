@@ -31,13 +31,24 @@ export default defineBlocks([
         math(String.raw`v,w\in V`), " に対し、", math(String.raw`V`), " の部分集合",
       ]),
       displayMath(String.raw`I_R(v,w):=\{\,u\in V\ \mid\ (v,u)\in R\ \land\ (u,w)\in R\,\}`),
-      paragraph([
-        "を ", math(String.raw`(v,w)`), " の区間と呼ぶ。",
-        math(String.raw`V`), " が有限なので ", math(String.raw`I_R(v,w)`),
-        " は有限集合であり、その元数 ", math(String.raw`|I_R(v,w)|\in\mathbb N`),
-        " が定まる。",
-      ]),
+      paragraph(["を ", math(String.raw`(v,w)`), " の区間と呼ぶ。"]),
     ],
+  },
+
+  {
+    id: "neighborhood_covering_relation_claim_interval_finite",
+    kind: "claim",
+    title: { text: "有限半順序の区間は有限である" },
+    labels: ["claim_finite_poset_interval_finite"],
+    habitat: "finite",
+    statement: [paragraph([
+      ref("def_finite_poset_interval"), " の区間 ", math(String.raw`I_R(v,w)`),
+      " は有限集合であり、その元数 ", math(String.raw`|I_R(v,w)|\in\mathbb{N}`), " が定まる。",
+    ])],
+    proof: [paragraph([
+      math(String.raw`I_R(v,w)\subseteq V`), "（", math(String.raw`\because`), " ", ref("def_finite_poset_interval"),
+      "）であり、有限集合の部分集合は有限である。",
+    ])],
   },
 
   {

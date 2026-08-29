@@ -22,14 +22,31 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台上の 2 値セルオートマトンの大域写像を ",
-        math(String.raw`F:A^V\to A^V`), " とする。各 ", math(String.raw`z\in A^V`),
+        "有限集合上の自己写像を ",
+        math(String.raw`F:X\to X`), " とする。各 ", math(String.raw`z\in X`),
         " の一段前像集合を",
       ]),
-      displayMath(String.raw`\operatorname{Pre}_F(z):=\{y\in A^V\mid F(y)=z\}\subseteq A^V`),
+      displayMath(String.raw`\operatorname{Pre}_F(z):=\{y\in X\mid F(y)=z\}\subseteq X`),
+      paragraph(["と定める。"]),
+    ],
+  },
+  {
+    id: "iterate_monoid_stable_fiber_branching_claim_predecessor_set_finite",
+    kind: "claim",
+    title: { text: "一段前像集合は有限集合である" },
+    labels: ["claim_iterate_monoid_stable_fiber_predecessor_set_finite"],
+    habitat: "finite",
+    statement: [
       paragraph([
-        "と定める。", math(String.raw`V`), " と ", math(String.raw`A=\{0,1\}`),
-        " は有限なので、", math(String.raw`\operatorname{Pre}_F(z)`), " は有限集合である。",
+        "各 ", math(String.raw`z\in X`), " について ",
+        math(String.raw`\operatorname{Pre}_F(z)`), " は有限集合である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_iterate_monoid_stable_fiber_predecessor_set"), " より ",
+        math(String.raw`\operatorname{Pre}_F(z)\subseteq X`),
+        " であり、有限集合の部分集合は有限集合である。",
       ]),
     ],
   },
@@ -40,18 +57,20 @@ export default defineBlocks([
     labels: ["def_iterate_monoid_stable_fiber_predecessor_count"],
     habitat: "N",
     statement: [
-      paragraph([math(String.raw`z\in A^V`), " に対して"]),
-      displayMath(String.raw`d_F(z):=\left|\operatorname{Pre}_F(z)\right|\in\mathbb N`),
+      paragraph([math(String.raw`z\in X`), " と ", ref("def_iterate_monoid_stable_fiber_predecessor_set"),
+        " の一段前像集合に対して"]),
+      displayMath(String.raw`b_F(z):=\left|\operatorname{Pre}_F(z)\right|\in\mathbb N`),
       paragraph(["と定める。"])],
   },
   {
     id: "iterate_monoid_stable_fiber_branching_claim_disjoint_predecessors",
     kind: "claim",
-    title: { text: "異なる配位の一段前像集合は交わらない" },
+    title: { text: "異なる元の一段前像集合は交わらない" },
     labels: ["claim_iterate_monoid_stable_fiber_predecessors_disjoint"],
     habitat: "finite",
     statement: [
-      paragraph([math(String.raw`z,w\in A^V`), " と ", math(String.raw`z\ne w`), " に対して"]),
+      paragraph([math(String.raw`z,w\in X`), " と ", math(String.raw`z\ne w`),
+        " に対し、一段前像集合（", ref("def_iterate_monoid_stable_fiber_predecessor_set"), "）は"]),
       displayMath(String.raw`\operatorname{Pre}_F(z)\cap\operatorname{Pre}_F(w)=\varnothing`),
       paragraph(["である。"]),
     ],
@@ -77,7 +96,7 @@ export default defineBlocks([
       paragraph(["である。"]),
     ],
     proof: [
-      paragraph([math(String.raw`y\in A^V`), " を取る。"]),
+      paragraph([math(String.raw`y\in X`), " を取る。"]),
       displayMath(String.raw`\begin{aligned}
 y\in F^{-1}\!\left(B_F(\sigma_F(q))\right)
 &\Longleftrightarrow F(y)\in B_F(\sigma_F(q))
@@ -89,7 +108,7 @@ y\in F^{-1}\!\left(B_F(\sigma_F(q))\right)
 &\Longleftrightarrow y\in\bigcup_{z\in B_F(\sigma_F(q))}\operatorname{Pre}_F(z)
   \quad(\because\ \text{有限合併への所属の定義}).
 \end{aligned}`),
-      paragraph(["任意の ", math(String.raw`y\in A^V`), " で所属が同値なので、集合は等しい。"]),
+      paragraph(["任意の ", math(String.raw`y\in X`), " で所属が同値なので、集合は等しい。"]),
     ],
   },
   {
@@ -101,7 +120,7 @@ y\in F^{-1}\!\left(B_F(\sigma_F(q))\right)
     statement: [
       paragraph([math(String.raw`q\in Q_F`), " に対して"]),
       displayMath(String.raw`\left|B_F(q)\right|
-=\sum_{z\in B_F(\sigma_F(q))}d_F(z)`),
+=\sum_{z\in B_F(\sigma_F(q))}b_F(z)`),
       paragraph(["である。"]),
     ],
     proof: [
@@ -113,7 +132,7 @@ y\in F^{-1}\!\left(B_F(\sigma_F(q))\right)
   \quad(\because\ \blkref{claim_iterate_monoid_stable_fiber_preimage_decomposition})\\
 &=\sum_{z\in B_F(\sigma_F(q))}\left|\operatorname{Pre}_F(z)\right|
   \quad(\because\ \blkref{claim_iterate_monoid_stable_fiber_predecessors_disjoint})\\
-&=\sum_{z\in B_F(\sigma_F(q))}d_F(z)
+&=\sum_{z\in B_F(\sigma_F(q))}b_F(z)
   \quad(\because\ \blkref{def_iterate_monoid_stable_fiber_predecessor_count}).
 \end{aligned}`),
     ],
@@ -126,10 +145,10 @@ y\in F^{-1}\!\left(B_F(\sigma_F(q))\right)
     habitat: "N",
     statement: [
       paragraph([
-        "有限舞台上の局所真理値表から、全ての ", math(String.raw`z\in A^V`),
-        " に対する ", math(String.raw`\operatorname{Pre}_F(z)`), " と ", math(String.raw`d_F(z)`),
+        "有限集合上の自己写像の有限表から、全ての ", math(String.raw`z\in X`),
+        " に対する ", math(String.raw`\operatorname{Pre}_F(z)`), " と ", math(String.raw`b_F(z)`),
         "、および各 ", math(String.raw`q\in Q_F`), " に対する一段前像数の総和を、",
-        "有限回の二値状態の等号検査で決定できる。",
+        "有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
@@ -137,7 +156,7 @@ y\in F^{-1}\!\left(B_F(\sigma_F(q))\right)
         ref("claim_iterate_monoid_stable_fiber_dynamics_finite_decidability"),
         " により ", math(String.raw`Q_F`), "、各 ", math(String.raw`B_F(q)`),
         "、および ", math(String.raw`\sigma_F`), " の表を有限決定できる。有限集合 ",
-        math(String.raw`A^V`), " の全ての組 ", math(String.raw`(y,z)\in A^V\times A^V`),
+        math(String.raw`X`), " の全ての組 ", math(String.raw`(y,z)\in X\times X`),
         " について ", math(String.raw`F(y)=z`), " を検査すれば、全ての一段前像集合とその個数を得る。",
         "各 ", math(String.raw`B_F(\sigma_F(q))`), " 上で得られた自然数を有限加算すれば総和を得る。",
         "全ての走査対象は有限集合である。",

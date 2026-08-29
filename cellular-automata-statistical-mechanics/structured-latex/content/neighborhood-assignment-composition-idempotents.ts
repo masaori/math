@@ -41,7 +41,8 @@ export default defineBlocks([
     statement: [
       paragraph([
         "有限集合 ", math(String.raw`V`), " 上の近傍割り当て ",
-        math(String.raw`N\in\mathcal N(V)`), " が推移的であるとは、任意の ",
+        math(String.raw`N\in\mathcal N(V)`), "（", ref("def_finite_neighborhood_assignment_space"),
+        "）が推移的であるとは、任意の ",
         math(String.raw`v,u,w\in V`), " について",
       ]),
       displayMath(String.raw`u\in N(v)\ \land\ w\in N(u)\quad\Longrightarrow\quad w\in N(v)`),
@@ -56,7 +57,8 @@ export default defineBlocks([
     statement: [
       paragraph([
         "有限集合 ", math(String.raw`V`), " 上の近傍割り当て ",
-        math(String.raw`N\in\mathcal N(V)`), " が二段分解可能であるとは、任意の ",
+        math(String.raw`N\in\mathcal N(V)`), "（", ref("def_finite_neighborhood_assignment_space"),
+        "）が二段分解可能であるとは、任意の ",
         math(String.raw`v,w\in V`), " について",
       ]),
       displayMath(String.raw`w\in N(v)\quad\Longrightarrow\quad
@@ -163,7 +165,9 @@ w\in N(v)
     habitat: "finite",
     statement: [
       paragraph([
-        "推移的だが二段分解可能でない有限近傍割り当てと、二段分解可能だが推移的でない有限近傍割り当てが存在する。",
+        "推移的（", ref("def_transitive_neighborhood_assignment"),
+        "）だが二段分解可能（", ref("def_two_step_factorable_neighborhood_assignment"),
+        "）でない有限近傍割り当てと、その逆の有限近傍割り当てが存在する。",
       ]),
     ],
     proof: [

@@ -1,15 +1,15 @@
 /**
- * 章「大域写像の反復と軌道の最終周期性」: 第二の探索列の最初の章。
- * 有限舞台上の大域写像 F: A^V → A^V（前章までの定義）を自然数回反復し、
+ * 章「自己写像の反復と軌道の最終周期性」: 第二の探索列の最初の章。
+ * 有限集合上の自己写像 F: X → X（前章までの定義）を自然数回反復し、
  * 有限集合上の写像であることだけから内在的に定まる構造を抽出する。
  *
  * - 反復 F^n と軌道 O(y) の定義（時刻・物理的意味を入れない）
- * - 軌道の衝突: 各配位 y について 0 ≤ i < j ≤ 2^{|V|} で F^i y = F^j y となる組がある（鳩の巣）
+ * - 軌道の衝突: 各元 y について 0 ≤ i < j ≤ |X| で F^i y = F^j y となる組がある（鳩の巣）
  * - 最終周期性: 衝突から、ある p ≥ 1 と i について全ての n ≥ i で F^{n+p} y = F^n y
- * - 有限決定可能性: 衝突する組は高々 2^{|V|}+1 個の配位の等号検査で見つかる
+ * - 有限決定可能性: 衝突する組は高々 |X|+1 個の元の等号検査で見つかる
  *
- * 使う ℕ の構造は大小比較・後者・加法・等号だけである。無限舞台・極限集合・
- * 全配位空間の位相は扱わない（remark に明記）。ℝ/ℂ は現れない。
+ * 使う ℕ の構造は大小比較・後者・加法・等号だけである。無限集合・極限集合・
+ * 位相は扱わない（remark に明記）。ℝ/ℂ は現れない。
  * 文書順はこの配列の並びが正本である。
  */
 
@@ -20,36 +20,74 @@ export default defineBlocks([
     id: "global_map_iteration_heading",
     kind: "heading",
     level: 1,
-    title: { text: "大域写像の反復と軌道の最終周期性" },
+    title: { text: "自己写像の反復と軌道の最終周期性" },
     labels: [],
+  },
+
+  {
+    id: "global_map_iteration_definition_finite_self_map",
+    kind: "definition",
+    title: { text: "有限集合上の自己写像" },
+    labels: ["def_finite_self_map"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "有限集合 ", math(String.raw`X`), " と写像 ", math(String.raw`F:X\to X`),
+        " の組を有限集合上の自己写像と呼ぶ。", math(String.raw`|X|\in\mathbb N`),
+        " は ", ref("def_cardinality_notation"), " の記法で表す。",
+      ]),
+    ],
+  },
+
+  {
+    id: "global_map_iteration_claim_binary_ca_specialization",
+    kind: "claim",
+    title: { text: "有限舞台上の 2 値セルオートマトンは有限自己写像を定める" },
+    labels: ["claim_finite_binary_ca_specializes_to_finite_self_map"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "有限舞台上の 2 値セルオートマトン（", ref("def_finite_ca"), "）に対し、",
+        math(String.raw`X:=A^V`), " と置く。その大域写像（", ref("def_global_map"), "）は ",
+        math(String.raw`F:X\to X`), " であり、", ref("def_finite_self_map"),
+        " の有限自己写像を定める。さらに ", math(String.raw`|X|=2^{|V|}`), " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`A`), " と ", math(String.raw`V`), " は有限集合（",
+        ref("def_state_set"), "、", ref("def_finite_stage"), "）なので、写像集合 ",
+        math(String.raw`X=A^V`), " は有限集合である。大域写像の始域と終域はともに ",
+        math(String.raw`A^V=X`), " である。元数は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|X|
+&=|A^V|\qquad(\because\ X=A^V)\\
+&=|A|^{|V|}\qquad(\because\ \text{有限集合間の写像の個数})\\
+&=2^{|V|}\qquad(\because\ |A|=2.\ \blkref{def_state_set})
+\end{aligned}`),
+    ],
   },
 
   {
     id: "global_map_iteration_definition_iterate",
     kind: "definition",
-    title: { text: "大域写像の反復" },
+    title: { text: "自己写像の反復" },
     labels: ["def_global_map_iterate"],
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台上の 2 値セルオートマトン ",
-        math(String.raw`\bigl((V,N),(f_v)_{v\in V}\bigr)`),
-        "（",
-        ref("def_finite_ca"),
-        "）の大域写像 ",
-        math(String.raw`F:A^{V}\to A^{V}`),
-        "（",
-        ref("def_global_map"),
-        "）に対し、各 ",
+        "有限集合上の自己写像 ", math(String.raw`F:X\to X`), "（",
+        ref("def_finite_self_map"), "）に対し、各 ",
         math(String.raw`n\in\mathbb{N}`),
         " について写像 ",
-        math(String.raw`F^{n}:A^{V}\to A^{V}`),
+        math(String.raw`F^{n}:X\to X`),
         " を ",
         math(String.raw`n`),
         " についての再帰で",
       ]),
       displayMath(
-        String.raw`F^{0}\,y:=y,\qquad F^{n+1}\,y:=F\,(F^{n}\,y)\qquad(y\in A^{V},\ n\in\mathbb{N})`,
+        String.raw`F^{0}\,y:=y,\qquad F^{n+1}\,y:=F\,(F^{n}\,y)\qquad(y\in X,\ n\in\mathbb{N})`,
       ),
       paragraph([
         "と定め、",
@@ -68,16 +106,16 @@ export default defineBlocks([
   {
     id: "global_map_iteration_definition_orbit",
     kind: "definition",
-    title: { text: "配位の軌道" },
+    title: { text: "元の軌道" },
     labels: ["def_orbit"],
     habitat: "finite",
     statement: [
       paragraph([
-        "配位 ",
-        math(String.raw`y\in A^{V}`),
+        "元 ",
+        math(String.raw`y\in X`),
         " に対し、集合",
       ]),
-      displayMath(String.raw`O(y):=\{\,F^{n}\,y\ :\ n\in\mathbb{N}\,\}\subseteq A^{V}`),
+      displayMath(String.raw`O(y):=\{\,F^{n}\,y\ :\ n\in\mathbb{N}\,\}\subseteq X`),
       paragraph([
         "を ",
         math(String.raw`y`),
@@ -86,20 +124,28 @@ export default defineBlocks([
         " は ",
         ref("def_global_map_iterate"),
         "）。",
-        math(String.raw`O(y)`),
-        " は有限集合 ",
-        math(String.raw`A^{V}`),
-        " の部分集合なので有限集合である（",
-        math(String.raw`A^{V}`),
-        " の有限性は、",
-        math(String.raw`A`),
-        " と ",
-        math(String.raw`V`),
-        " がともに有限集合であることによる。",
-        ref("def_state_set"),
-        "、",
-        ref("def_finite_stage"),
-        "）。",
+      ]),
+    ],
+  },
+
+  {
+    id: "global_map_iteration_claim_orbit_finite",
+    kind: "claim",
+    title: { text: "有限自己写像の軌道は有限集合である" },
+    labels: ["claim_finite_self_map_orbit_finite"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        "各 ", math(String.raw`y\in X`), " について、軌道 ",
+        math(String.raw`O(y)`), " は有限集合である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_orbit"), " より ", math(String.raw`O(y)\subseteq X`),
+        " であり、", ref("def_finite_self_map"), " より ", math(String.raw`X`),
+        " は有限集合である。有限集合の部分集合は有限集合なので、",
+        math(String.raw`O(y)`), " は有限集合である。",
       ]),
     ],
   },
@@ -107,31 +153,27 @@ export default defineBlocks([
   {
     id: "global_map_iteration_claim_orbit_collision",
     kind: "claim",
-    title: { text: "軌道は高々 2^{|V|} 回の反復のうちに衝突する" },
+    title: { text: "軌道は高々 |X| 回の反復のうちに衝突する" },
     labels: ["claim_orbit_collision"],
     habitat: "N",
     statement: [
       paragraph([
-        "各配位 ",
-        math(String.raw`y\in A^{V}`),
+        "各元 ",
+        math(String.raw`y\in X`),
         " について、",
-        math(String.raw`0\le i<j\le 2^{|V|}`),
+        math(String.raw`0\le i<j\le |X|`),
         " を満たす ",
         math(String.raw`i,j\in\mathbb{N}`),
         " で ",
         math(String.raw`F^{i}\,y=F^{j}\,y`),
-        " となるものが存在する（",
-        math(String.raw`|V|`),
-        " は ",
-        ref("def_cardinality_notation"),
-        "）。",
+        " となるものが存在する。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`M:=2^{|V|}\in\mathbb{N}`),
+        math(String.raw`M:=|X|\in\mathbb{N}`),
         " と置く。写像 ",
-        math(String.raw`\iota_y:\{0,1,\dots,M\}\to A^{V}`),
+        math(String.raw`\iota_y:\{0,1,\dots,M\}\to X`),
         " を ",
         math(String.raw`\iota_y(n):=F^{n}\,y`),
         " で定める（",
@@ -139,16 +181,10 @@ export default defineBlocks([
         "）。",
       ]),
       displayMath(String.raw`\begin{aligned}
-|A^{V}|
-&=|A|^{|V|}\qquad(\because\ \text{有限集合 } V \text{ から有限集合 } A \text{ への写像の個数は } |A|^{|V|})\\
-&=2^{|V|}\qquad(\because\ |A|=2.\ \blkref{def_state_set})\\
-&=M\qquad(\because\ M \text{ の定義})
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
 |\{0,1,\dots,M\}|
 &=M+1\qquad(\because\ 0 \text{ から } M \text{ までの自然数は } M+1 \text{ 個})\\
 &>M\qquad(\because\ \mathbb{N} \text{ の大小比較})\\
-&=|A^{V}|\qquad(\because\ \text{上の等式})
+&=|X|\qquad(\because\ M=|X|)
 \end{aligned}`),
       paragraph([
         "定義域の元の個数が終域の元の個数より大きいので、",
@@ -173,7 +209,7 @@ export default defineBlocks([
         " の定義から ",
         math(String.raw`F^{i}\,y=F^{j}\,y`),
         " である。",
-        math(String.raw`0\le i<j\le M=2^{|V|}`),
+        math(String.raw`0\le i<j\le M=|X|`),
         " が示された。",
       ]),
     ],
@@ -187,7 +223,7 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        math(String.raw`y\in A^{V}`),
+        math(String.raw`y\in X`),
         "、",
         math(String.raw`i,j\in\mathbb{N}`),
         " が ",
@@ -235,8 +271,8 @@ F^{i+(k+1)}\,y
     habitat: "N",
     statement: [
       paragraph([
-        "各配位 ",
-        math(String.raw`y\in A^{V}`),
+        "各元 ",
+        math(String.raw`y\in X`),
         " について、",
         math(String.raw`i\in\mathbb{N}`),
         " と ",
@@ -244,7 +280,7 @@ F^{i+(k+1)}\,y
         " で、",
         math(String.raw`p\ge 1`),
         "、",
-        math(String.raw`i+p\le 2^{|V|}`),
+        math(String.raw`i+p\le |X|`),
         "、かつすべての ",
         math(String.raw`n\in\mathbb{N}`),
         " について ",
@@ -258,7 +294,7 @@ F^{i+(k+1)}\,y
       paragraph([
         ref("claim_orbit_collision"),
         " により ",
-        math(String.raw`0\le i<j\le 2^{|V|}`),
+        math(String.raw`0\le i<j\le |X|`),
         " かつ ",
         math(String.raw`F^{i}\,y=F^{j}\,y`),
         " を満たす ",
@@ -272,7 +308,7 @@ F^{i+(k+1)}\,y
         " の中で差が取れ、",
         math(String.raw`p\ge 1`),
         "。また ",
-        math(String.raw`i+p=j\le 2^{|V|}`),
+        math(String.raw`i+p=j\le |X|`),
         "）。",
         math(String.raw`n\in\mathbb{N}`),
         "、",
@@ -300,28 +336,22 @@ F^{n+p}\,y
     habitat: "N",
     statement: [
       paragraph([
-        "各配位 ",
-        math(String.raw`y\in A^{V}`),
+        "各元 ",
+        math(String.raw`y\in X`),
         " について、",
         ref("claim_orbit_collision"),
         " の組 ",
         math(String.raw`(i,j)`),
-        " は、配位 ",
-        math(String.raw`F^{0}y,F^{1}y,\dots,F^{2^{|V|}}y`),
+        " は、元 ",
+        math(String.raw`F^{0}y,F^{1}y,\dots,F^{|X|}y`),
         " の間の等号検査高々 ",
-        math(String.raw`\tfrac{1}{2}\,2^{|V|}\,(2^{|V|}+1)`),
-        " 回で見つかり、",
-        math(String.raw`A^{V}`),
-        " の元の等号検査 1 回は ",
-        math(String.raw`A`),
-        " の元の等号検査 ",
-        math(String.raw`|V|`),
-        " 回で決定できる。",
+        math(String.raw`\tfrac{1}{2}\,|X|\,(|X|+1)`),
+        " 回で見つかる。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`M:=2^{|V|}`),
+        math(String.raw`M:=|X|`),
         " と置く。",
         math(String.raw`0\le i<j\le M`),
         " を満たす組 ",
@@ -338,23 +368,11 @@ F^{n+p}\,y
 |\{(i,j)\ :\ 0\le i<j\le M\}|
 &=\binom{M+1}{2}\qquad(\because\ M+1 \text{ 個の元から 2 個を選ぶ選び方の個数})\\
 &=\tfrac{1}{2}\,(M+1)\,M\qquad(\because\ \text{二項係数の定義。}(M+1)M \text{ は偶数なので商は } \mathbb{N} \text{ の元})\\
-&=\tfrac{1}{2}\,2^{|V|}\,(2^{|V|}+1)\qquad(\because\ M \text{ の定義})
+&=\tfrac{1}{2}\,|X|\,(|X|+1)\qquad(\because\ M \text{ の定義})
 \end{aligned}`),
       paragraph([
-        "二つの配位 ",
-        math(String.raw`z,z'\in A^{V}`),
-        " について、",
-        math(String.raw`z=z'`),
-        " は「すべての ",
-        math(String.raw`v\in V`),
-        " について ",
-        math(String.raw`z(v)=z'(v)`),
-        "」と同値である（写像の外延性）。右辺は ",
-        math(String.raw`A`),
-        " の元の等号検査 ",
-        math(String.raw`|V|`),
-        " 回で決定できる。",
-        "以上の走査で使う対象はすべて有限集合の元であり、実数体も複素数体も現れない。",
+        "以上の走査で使う対象は有限集合 ", math(String.raw`X`),
+        " の元と自然数だけであり、実数体も複素数体も現れない。",
       ]),
     ],
   },
@@ -367,14 +385,10 @@ F^{n+p}\,y
     habitat: "finite",
     statement: [
       paragraph([
-        "この章の主張はすべて有限舞台 ",
-        math(String.raw`(V,N)`),
-        " 上の有限集合 ",
-        math(String.raw`A^{V}`),
-        " と、その上の写像 ",
+        "この章の一般論は有限集合 ", math(String.raw`X`), " と、その上の写像 ",
         math(String.raw`F`),
-        " の反復についてのものである。舞台のセル集合を無限にした場合の配位空間、",
-        "その上の位相、極限集合、周期点の個数の母関数（形式的冪級数）は、この章では定義も主張もしない。",
+        " の反復についてのものである。無限集合上の自己写像、その上の位相、極限集合、",
+        "周期点の個数の母関数（形式的冪級数）は、この章では定義も主張もしない。",
         "また、",
         ref("claim_eventual_periodicity"),
         " の ",

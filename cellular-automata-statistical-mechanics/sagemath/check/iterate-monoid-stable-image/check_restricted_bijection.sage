@@ -1,8 +1,8 @@
 # 対象ラベル: claim_iterate_monoid_global_map_bijective_on_stable_image
-# R_F := F^{e_F+λ_F-1}。各 z = F^{e_F}(y) ∈ Q_F について F(z) = F^{e_F+1}(y) ∈ Q_F、
-# R_F(z) = F^{2e_F+λ_F-1}(y) ∈ Q_F（前 claim の像の一致を指数 e_F+1、2e_F+λ_F-1 に適用）、
-# 周期の伝播 F^{e_F+λ_F} = F^{e_F} と反復回数の加法則から F∘R_F = R_F∘F = E_F、
-# Q_F 上で F(R_F(z)) = E_F(z) = z、R_F(F(z)) = E_F(z) = z を確かめ、F|_{Q_F} が全単射であることを見る。
+# S_F := F^{e_F+λ_F-1}。各 z = F^{e_F}(y) ∈ Q_F について F(z) = F^{e_F+1}(y) ∈ Q_F、
+# S_F(z) = F^{2e_F+λ_F-1}(y) ∈ Q_F（前 claim の像の一致を指数 e_F+1、2e_F+λ_F-1 に適用）、
+# 周期の伝播 F^{e_F+λ_F} = F^{e_F} と反復回数の加法則から F∘S_F = S_F∘F = E_F、
+# Q_F 上で F(S_F(z)) = E_F(z) = z、S_F(F(z)) = E_F(z) = z を確かめ、F|_{Q_F} が全単射であることを見る。
 # 帰属: 有限集合の写像の等号、非負整数だけを使う。R/C 脱出なし。
 
 import os
@@ -27,12 +27,12 @@ for stage_size, rule, table in exhaustive_instances():
         assert e + 1 >= mu
         assert powers[e + 1][y] in Q                         # 前 claim（像の一致）
         assert 2 * e + lam - 1 < len(powers)
-        assert R[z] == powers[2 * e + lam - 1][y]            # R_F(z) = F^{2e_F+λ_F-1}(y)
+        assert R[z] == powers[2 * e + lam - 1][y]            # S_F(z) = F^{2e_F+λ_F-1}(y)
         assert 2 * e + lam - 1 >= mu
         assert powers[2 * e + lam - 1][y] in Q               # 前 claim（像の一致）
-        assert table[R[z]] == E[z]                           # F(R_F(z)) = E_F(z)
+        assert table[R[z]] == E[z]                           # F(S_F(z)) = E_F(z)
         assert E[z] == z                                     # 安定像上で恒等
-        assert R[table[z]] == E[z]                           # R_F(F(z)) = E_F(z)
+        assert R[table[z]] == E[z]                           # S_F(F(z)) = E_F(z)
         points += 1
     restricted_F = {z: table[z] for z in Q}
     restricted_R = {z: R[z] for z in Q}

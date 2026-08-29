@@ -8,7 +8,7 @@ load(os.path.join(_dir, '..', 'iterate-monoid-stable-fiber-depth', '_common.sage
 
 
 def rounded_preperiod(mu_y, lam, m):
-    """def_iterate_monoid_rounded_preperiod_depth: c_F(y) = min{ d ∈ N | μ(y) <= d·λ_F }。
+    """def_iterate_monoid_rounded_preperiod_depth: r_F(y) = min{ d ∈ N | μ(y) <= d·λ_F }。
     定義の well-defined 性（m_F が集合に属する）により d = 0, 1, ..., m_F の有限走査で必ず見つかる。"""
     for d in range(m + 1):
         if mu_y <= d * lam:

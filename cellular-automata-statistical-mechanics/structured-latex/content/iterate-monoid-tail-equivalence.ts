@@ -53,7 +53,9 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        math(String.raw`G,H\in P_F`),
+        ref("def_iterate_monoid"), " の ", math(String.raw`G,H\in P_F`),
+        " と ", ref("def_iterate_monoid_generated_ideal"), " の主イデアル ",
+        math(String.raw`J_F`),
         " に対し、",
       ]),
       displayMath(String.raw`G\sim_F H\quad\Longleftrightarrow\quad J_F(G)=J_F(H)`),
@@ -181,6 +183,8 @@ export default defineBlocks([
     labels: ["def_iterate_monoid_generated_ideal_chain"],
     habitat: "finite",
     statement: [
+      paragraph([ref("def_iterate_monoid"), " の ", math(String.raw`P_F`),
+        " と ", ref("def_iterate_monoid_generated_ideal"), " の ", math(String.raw`J_F`), " に対し、"]),
       displayMath(String.raw`\mathcal{J}_F:=\{\,J_F(G)\mid G\in P_F\,\}`),
       paragraph(["と定める。"]),
     ],
@@ -197,9 +201,9 @@ export default defineBlocks([
         ref("def_iterate_monoid_generated_ideal_chain"),
         " の集合 ",
         math(String.raw`\mathcal{J}_F`),
-        " は有限であり、包含関係により任意の二元を比較できる。有限舞台、近傍、局所真理値表から、",
+        " は有限であり、包含関係により任意の二元を比較できる。有限集合と自己写像の有限表から、",
         math(String.raw`\mathcal{J}_F`),
-        " の全ての元、包含関係、主イデアル同値の各同値類を有限回の 2 値状態の等号検査で決定できる。",
+        " の全ての元、包含関係、主イデアル同値の各同値類を有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [

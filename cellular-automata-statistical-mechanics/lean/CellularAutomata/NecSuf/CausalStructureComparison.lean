@@ -15,6 +15,8 @@
   イベントの等号判定（入れ替え写像の定義に要る）だけを使う。舞台・近傍・局所規則は要らない。
 
 舞台、状態、近傍、局所規則、グラフ、物理的因果、R / C は使わない。
+構造化本文の `def_finite_relation_covering` は下の `Covering` に対応し、
+CA 固有の `def_covering_relation` はその X := E_τ、C := C_τ への特殊化である。
 -/
 import CellularAutomata.NecSuf.TransitiveClosureAntisymmetry
 

@@ -1,6 +1,6 @@
 /**
  * 章「安定ファイバー間の一段発展」。
- * 大域写像が安定ファイバーの添字をどう移し、各ファイバーをどこへ写すかを、
+ * 自己写像が安定ファイバーの添字をどう移し、各ファイバーをどこへ写すかを、
  * 有限集合、写像合成、写像の等号だけから導く。R / C は使わない。
  */
 
@@ -39,7 +39,7 @@ export default defineBlocks([
     labels: ["claim_iterate_monoid_cycle_idempotent_commutes_with_global_map"],
     habitat: "finite",
     statement: [
-      paragraph(["すべての ", math(String.raw`y\in A^V`), " に対して"]),
+      paragraph(["すべての ", math(String.raw`y\in X`), " に対して"]),
       displayMath(String.raw`E_F(F(y))=F(E_F(y))`),
       paragraph(["である。"]),
     ],
@@ -70,7 +70,7 @@ E_F(F(y))
     statement: [
       paragraph([math(String.raw`q\in Q_F`), " に対して"]),
       displayMath(String.raw`F^{-1}\!\left(B_F(\sigma_F(q))\right)=B_F(q)`),
-      paragraph(["である。すなわち、すべての ", math(String.raw`y\in A^V`), " に対して"]),
+      paragraph(["である。すなわち、すべての ", math(String.raw`y\in X`), " に対して"]),
       displayMath(String.raw`F(y)\in B_F(\sigma_F(q))\quad\Longleftrightarrow\quad y\in B_F(q)`),
       paragraph(["である。"]),
     ],
@@ -117,18 +117,19 @@ F(E_F(y))
     habitat: "finite",
     statement: [
       paragraph([
-        math(String.raw`F(B_F(q))\subsetneq B_F(\sigma_F(q))`),
-        " となる有限舞台上の 2 値セルオートマトンが存在する。",
+        ref("def_iterate_monoid_stable_image"), " の ", math(String.raw`Q_F`), "、",
+        ref("def_iterate_monoid_stable_fiber"), " の ", math(String.raw`B_F`), "、",
+        ref("def_iterate_monoid_stable_fiber_index_map"), " の ", math(String.raw`\sigma_F`),
+        " に対し、", math(String.raw`F(B_F(q))\subsetneq B_F(\sigma_F(q))`),
+        " となる有限集合上の自己写像が存在する。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`V:=\{v\}`), "、", math(String.raw`N(v):=\{v\}`),
-        " とし、局所規則を定値写像 ", math(String.raw`f_v(a):=0`), " とする。",
-        math(String.raw`x_0,x_1\in A^V`), " を ",
-        math(String.raw`x_0(v)=0`), "、", math(String.raw`x_1(v)=1`), " で定める。",
+        math(String.raw`X:=\{x_0,x_1\}`), " とし、自己写像 ",
+        math(String.raw`F:X\to X`), " を次の表で定める。",
       ]),
-      displayMath(String.raw`A^V=\{x_0,x_1\},\qquad F(x_0)=x_0,\qquad F(x_1)=x_0`),
+      displayMath(String.raw`X=\{x_0,x_1\},\qquad F(x_0)=x_0,\qquad F(x_1)=x_0`),
       displayMath(String.raw`F^0(x_1)=x_1\ne x_0=F^1(x_1)`),
       displayMath(String.raw`F^2(x_i)=F(x_0)=x_0=F(x_i)\qquad(i\in\{0,1\})`),
       paragraph([
@@ -152,10 +153,10 @@ F(E_F(y))
     habitat: "N",
     statement: [
       paragraph([
-        "有限舞台上の局所真理値表から、", math(String.raw`\sigma_F`), " の表と、各 ",
+        "有限集合上の自己写像の有限表から、", math(String.raw`\sigma_F`), " の表と、各 ",
         math(String.raw`q\in Q_F`), " に対する ", math(String.raw`F(B_F(q))`),
         "、", math(String.raw`F^{-1}(B_F(\sigma_F(q)))`),
-        " を有限回の二値状態の等号検査で決定できる。",
+        " を有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
@@ -165,7 +166,7 @@ F(E_F(y))
         " を有限決定できる。有限集合 ", math(String.raw`Q_F`), " の各元へ ",
         math(String.raw`F`), " を適用すれば ", math(String.raw`\sigma_F`), " の表を得る。さらに各 ",
         math(String.raw`B_F(q)`), " の全元へ ", math(String.raw`F`),
-        " を適用して重複を除けば像を得る。有限集合 ", math(String.raw`A^V`),
+        " を適用して重複を除けば像を得る。有限集合 ", math(String.raw`X`),
         " の各元について、その像が ", math(String.raw`B_F(\sigma_F(q))`),
         " に属するかを検査すれば完全逆像を得る。各手順は有限集合上の有限走査である。",
       ]),

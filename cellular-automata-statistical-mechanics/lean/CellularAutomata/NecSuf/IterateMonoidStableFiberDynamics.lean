@@ -11,7 +11,7 @@ F⁻¹(B(σ q)) = B(q) の両方向、像の包含 F(B(q)) ⊆ B(σ q)、定値�
   可換性に加えて F の range E 上での単射性が要る。E の冪等性、E が F の反復であること、
   衝突開始位置の存在、σ の全射性はこの章のどの主張にも要らない。
 * 反復層（E := E_F = F^{e_F}）: 可換性は加法則から従い、F が range E_F を保つことは可換性から
-  従い、range E_F 上の単射性は R_F ∘ F = E_F と E_F の恒等性（前々章）から従う。
+  従い、range E_F 上の単射性は S_F ∘ F = E_F と E_F の恒等性（前々章）から従う。
   したがって型 X・自己写像 F・衝突開始位置の存在だけで σ_F と完全逆像が定まる。
   前々章の `stableStep` は `DecidableEq (X → X)` を経由して定義されていたが、この章の
   σ_F にはそれが要らないことが分かった（両者が一致することは等号判定のもとで別に示す）。
@@ -133,7 +133,7 @@ theorem globalMap_maps_range_cycleIdempotent :
   rintro z ⟨y, rfl⟩
   exact ⟨F y, cycleIdempotent_commutes F hex y⟩
 
-/-- `F` は `range E_F` 上で単射である。`R_F ∘ F = E_F` と `E_F` の恒等性から従う。 -/
+/-- `F` は `range E_F` 上で単射である。`S_F ∘ F = E_F` と `E_F` の恒等性から従う。 -/
 theorem globalMap_injOn_range_cycleIdempotent :
     ∀ z ∈ IterateMonoidStablePartition.stableImage (cycleIdempotent F hex),
       ∀ w ∈ IterateMonoidStablePartition.stableImage (cycleIdempotent F hex),

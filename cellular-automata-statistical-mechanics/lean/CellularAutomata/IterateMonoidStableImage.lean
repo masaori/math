@@ -54,11 +54,11 @@ theorem stable_power_image_eq (n : ℕ) (hn : minCollisionStart N f ≤ n) :
   · rintro ⟨y, rfl⟩
     exact ⟨H y, congrFun hright y⟩
 
-/-- `R_F := F^(e_F+λ_F-1)`。 -/
+/-- `S_F := F^(e_F+λ_F-1)`。 -/
 noncomputable def stableInverse : (V → State) → (V → State) :=
   iterateMap N f (minStablePeriodMultiple N f + minPositivePeriod N f - 1)
 
-/-- `F ∘ R_F = E_F` と `R_F ∘ F = E_F`。 -/
+/-- `F ∘ S_F = E_F` と `S_F ∘ F = E_F`。 -/
 theorem stableInverse_two_sided :
     globalMap N f ∘ stableInverse N f = cycleIdempotent N f ∧
       stableInverse N f ∘ globalMap N f = cycleIdempotent N f := by
@@ -95,7 +95,7 @@ theorem globalMap_maps_stableImage
     (by omega)]
   exact ⟨y, rfl⟩
 
-/-- `R_F` は `Q_F` をそれ自身へ写す。 -/
+/-- `S_F` は `Q_F` をそれ自身へ写す。 -/
 theorem stableInverse_maps_stableImage
     {z : V → State} (hz : z ∈ stableImage N f) :
     stableInverse N f z ∈ stableImage N f := by
@@ -115,7 +115,7 @@ theorem stableInverse_maps_stableImage
 noncomputable def stableStep : stableImage N f → stableImage N f :=
   fun z => ⟨globalMap N f z.1, globalMap_maps_stableImage N f z.2⟩
 
-/-- `R_F` の `Q_F` への制限。 -/
+/-- `S_F` の `Q_F` への制限。 -/
 noncomputable def stableStepInverse : stableImage N f → stableImage N f :=
   fun z => ⟨stableInverse N f z.1, stableInverse_maps_stableImage N f z.2⟩
 
@@ -144,7 +144,7 @@ theorem coe_stableImageTable :
   ext z
   simp [stableImageTable, stableImage]
 
-/-- `Q_F` 上の `E_F`、`F`、`R_F` の有限な表。 -/
+/-- `Q_F` 上の `E_F`、`F`、`S_F` の有限な表。 -/
 noncomputable def stableRestrictedTables : Finset
     ((V → State) × (V → State) × (V → State) × (V → State)) :=
   (stableImageTable N f).image
@@ -168,7 +168,7 @@ theorem stableImage_eq_necessary_sufficient :
   rw [stableImage, CellularAutomata.NecSuf.IterateMonoidStableImage.stableImage,
     cycleIdempotent_eq_necessary_sufficient]
 
-/-- `R_F` は必要十分版の特殊化に一致する。 -/
+/-- `S_F` は必要十分版の特殊化に一致する。 -/
 theorem stableInverse_eq_necessary_sufficient :
     stableInverse N f =
       CellularAutomata.NecSuf.IterateMonoidStableImage.stableInverse

@@ -1,6 +1,6 @@
 /**
  * 章「自己転置な近傍割り当ての個数」。
- * 自己転置な近傍割り当てをセルの非空な一元・二元部分集合の選択として符号化し、個数を数える。
+ * 自己転置な近傍割り当てを元の非空な一元・二元部分集合の選択として符号化し、個数を数える。
  * 有限集合、有限部分集合、自然数だけを使う。R / C は現れない。
  */
 
@@ -65,7 +65,7 @@ w\in N^{\mathsf T}(v)
   {
     id: "self_transpose_neighborhood_assignment_count_definition_unordered_cell_pairs",
     kind: "definition",
-    title: { text: "セルの非空な一元・二元部分集合" },
+    title: { text: "元の非空な一元・二元部分集合" },
     labels: ["def_unordered_cell_pairs"],
     habitat: "finite",
     statement: [
@@ -152,7 +152,8 @@ w\in\rho_V(\varepsilon_V(N))(v)
     labels: ["claim_unordered_cell_pair_count"],
     habitat: "N",
     statement: [
-      paragraph([math(String.raw`n:=|V|\in\mathbb N`), " とおくと"]),
+      paragraph([math(String.raw`\mathcal U(V)`), " を ", ref("def_unordered_cell_pairs"),
+        " とし、", math(String.raw`n:=|V|\in\mathbb N`), " とおくと"]),
       displayMath(String.raw`|\mathcal U(V)|=n+\binom n2=\frac{n(n+1)}2`),
       paragraph(["が成り立つ。右端の商は自然数である。"]),
     ],

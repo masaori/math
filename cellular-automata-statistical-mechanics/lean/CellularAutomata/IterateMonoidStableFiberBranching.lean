@@ -35,7 +35,7 @@ theorem mem_predecessorTable_iff (z y : V → State) :
     y ∈ predecessorTable N f z ↔ y ∈ predecessorSet N f z := by
   simp [predecessorTable, predecessorSet]
 
-/-- `d_F(z) := |Pre_F(z)|`。 -/
+/-- `b_F(z) := |Pre_F(z)|`。 -/
 noncomputable def predecessorCount (z : V → State) : ℕ :=
   (predecessorTable N f z).card
 

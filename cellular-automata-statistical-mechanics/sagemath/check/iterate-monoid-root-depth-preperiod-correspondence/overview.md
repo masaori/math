@@ -12,10 +12,10 @@
 | ファイル | 検証内容 | ステータス | 結果 |
 | --- | --- | --- | --- |
 | `check_global_period_at_point.sage` | 全配位で $\mu(y)\le\mu_F$ と $F^{\mu(y)+\lambda_F}(y)=F^{\mu(y)}(y)$ | PASS | 769 写像・3,585 配位で成立 |
-| `check_rounded_preperiod_well_defined.sage` | 定義集合が $m_F$ を含むこと（$\mu(y)\le\mu_F\le e_F=m_F\lambda_F$）と、$c_F(y)$ の所属・最小性・$c_F(y)\le m_F$ | PASS | 769 写像・3,585 配位で成立 |
-| `check_reaches_root_at_rounded.sage` | $F^{c_F(y)\lambda_F}(y)=q$（切り上げ位置での根到達） | PASS | 769 写像・ファイバー元 3,585 個で成立 |
-| `check_not_root_before_rounded.sage` | 全ての $d<c_F(y)$ で $F^{d\lambda_F}(y)\ne q$（切り上げ位置より前の非到達） | PASS | 769 写像・前方位置 1,664 組で成立 |
-| `check_depth_formula.sage` | 根付き木の深さの有限走査 $d_F(y)$ と $c_F(y)$ の一致 | PASS | 769 写像・ファイバー元 3,585 個で一致 |
+| `check_rounded_preperiod_well_defined.sage` | 定義集合が $m_F$ を含むこと（$\mu(y)\le\mu_F\le e_F=m_F\lambda_F$）と、$r_F(y)$ の所属・最小性・$r_F(y)\le m_F$ | PASS | 769 写像・3,585 配位で成立 |
+| `check_reaches_root_at_rounded.sage` | $F^{r_F(y)\lambda_F}(y)=q$（切り上げ位置での根到達） | PASS | 769 写像・ファイバー元 3,585 個で成立 |
+| `check_not_root_before_rounded.sage` | 全ての $d<r_F(y)$ で $F^{d\lambda_F}(y)\ne q$（切り上げ位置より前の非到達） | PASS | 769 写像・前方位置 1,664 組で成立 |
+| `check_depth_formula.sage` | 根付き木の深さの有限走査 $d_F(y)$ と $r_F(y)$ の一致 | PASS | 769 写像・ファイバー元 3,585 個で一致 |
 | `check_finite_decidability.sage` | $d=0,1,\ldots$ の順の自然数比較走査が有限回で停止し、返した値と各深さの配位集合が定義値と一致 | PASS | 3,585 配位・比較 5,249 回で定義値と一致 |
 
 ## 限界と帰属

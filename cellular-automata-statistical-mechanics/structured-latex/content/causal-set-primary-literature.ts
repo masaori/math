@@ -30,7 +30,7 @@ export default defineBlocks([
     kind: "remark",
     title: { text: "照合する一次文献とこの章の範囲" },
     labels: ["remark_causal_set_source"],
-    habitat: "finite",
+    habitat: "none",
     statement: [
       paragraph([
         "照合先は L. Bombelli, J. Lee, D. Meyer, R. D. Sorkin, “Space-Time as a Causal Set,” ",
@@ -59,10 +59,10 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "局所有限な部分順序集合" },
     labels: ["def_locally_finite_partial_order"],
-    habitat: "finite",
+    habitat: "none",
     statement: [
       paragraph([
-        "有限集合 ",
+        "集合 ",
         math(String.raw`X`),
         " と ",
         math(String.raw`X`),
@@ -86,16 +86,26 @@ export default defineBlocks([
         "この定義は順序の言葉だけで書かれており、",
         math(String.raw`X`),
         " の元に物理的な意味を要求しない。",
-        "なお ",
-        math(String.raw`X`),
-        " が有限集合であるとき、",
-        math(String.raw`A_R(x,y)\subseteq X`),
-        " は有限集合の部分集合として常に有限であるから、有限集合上の部分順序はすべて局所有限である。",
-        "局所有限性が実質的な条件になるのは ",
-        math(String.raw`X`),
-        " が無限集合のときであり、このプロジェクトの有限舞台・有限時間区間の範囲では自動で満たされる。",
       ]),
     ],
+  },
+
+  {
+    id: "causal_set_primary_literature_claim_finite_partial_order_locally_finite",
+    kind: "claim",
+    title: { text: "有限集合上の部分順序は局所有限である" },
+    labels: ["claim_finite_partial_order_locally_finite"],
+    habitat: "finite",
+    statement: [paragraph([
+      "有限集合 ", math(String.raw`X`), " 上の任意の部分順序 ",
+      math(String.raw`R\subseteq X\times X`), " は局所有限（",
+      ref("def_locally_finite_partial_order"), "）である。",
+    ])],
+    proof: [paragraph([
+      "任意の ", math(String.raw`x,y\in X`), " に対し ",
+      math(String.raw`A_R(x,y)\subseteq X`), "（", math(String.raw`\because`), " ",
+      ref("def_locally_finite_partial_order"), "）であり、有限集合の部分集合は有限である。",
+    ])],
   },
 
   {
@@ -117,7 +127,7 @@ export default defineBlocks([
         "（",
         ref("def_event_set"),
         "、",
-        ref("def_reflexive_reachability"),
+        ref("def_ca_reflexive_reachability"),
         "）は局所有限な部分順序集合（",
         ref("def_locally_finite_partial_order"),
         "）である。さらに、その区間 ",
@@ -131,16 +141,16 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        ref("claim_event_set_cardinality"),
-        " より ",
-        math(String.raw`E_\tau`),
-        " は有限集合である。",
+        ref("claim_event_set_cardinality"), " より ", math(String.raw`E_\tau`),
+        " は有限集合であり、", ref("def_ca_reflexive_reachability"), " の関係 ",
+        math(String.raw`\preceq_\tau`), " を備える。",
         ref("claim_reachability_partial_order"),
         " より ",
         math(String.raw`\preceq_\tau`),
         " は ",
         math(String.raw`E_\tau`),
-        " 上の部分順序である。",
+        " 上の部分順序である。したがって ", ref("claim_finite_partial_order_locally_finite"),
+        " より局所有限である。",
       ]),
       paragraph([
         "任意の ",

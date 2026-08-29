@@ -1,5 +1,5 @@
 # 対象ラベル: claim_iterate_monoid_before_rounded_preperiod_not_root
-# 全ての q ∈ Q_F、y ∈ B_F(q)、d < c_F(y) について F^{d·λ_F}(y) ≠ q を検査する。
+# 全ての q ∈ Q_F、y ∈ B_F(q)、d < r_F(y) について F^{d·λ_F}(y) ≠ q を検査する。
 # 帰属: 有限写像の反復適用と有限集合の等号の否定だけを使う。R/C 脱出なし。
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'

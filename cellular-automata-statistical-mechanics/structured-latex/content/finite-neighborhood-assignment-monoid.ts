@@ -179,7 +179,8 @@ w\in((N\star M)\star L)(v)
     statement: [
       paragraph([
         "相異なる元からなる有限集合 ", math(String.raw`V_{\mathrm{nc}}:=\{a,b,c\}`),
-        " 上の近傍割り当て ", math(String.raw`N,M\in\mathcal N(V_{\mathrm{nc}})`), " を",
+        " 上の近傍割り当て ", math(String.raw`N,M\in\mathcal N(V_{\mathrm{nc}})`),
+        "（", ref("def_finite_neighborhood_assignment_space"), "）を",
       ]),
       displayMath(String.raw`\begin{aligned}
 &N(a):=\{b\},\qquad N(b):=N(c):=\varnothing,\\

@@ -12,12 +12,12 @@ def predecessor_set(F, z):
 
 
 def predecessor_count(F, z):
-    """def_iterate_monoid_stable_fiber_predecessor_count: d_F(z) = |Pre_F(z)| ∈ N。"""
+    """def_iterate_monoid_stable_fiber_predecessor_count: b_F(z) = |Pre_F(z)| ∈ N。"""
     return len(predecessor_set(F, z))
 
 
 def branching_data(table):
-    """F、E_F、Q_F、安定ファイバー、σ_F、全 z の Pre_F(z)、d_F(z) を返す。"""
+    """F、E_F、Q_F、安定ファイバー、σ_F、全 z の Pre_F(z)、b_F(z) を返す。"""
     F, mu, lam, e, E, FE1, Q, fibers, sigma = stable_fiber_dynamics_data(table)
     pre = {z: predecessor_set(F, z) for z in range(len(F))}
     d = {z: len(pre[z]) for z in range(len(F))}

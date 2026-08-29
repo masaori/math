@@ -1,6 +1,6 @@
 /**
  * 章「根付き木の深さと最小前周期層の対応」。
- * 一周期写像 R_F = F^{lambda_F} による根への深さが、配位ごとの最小前周期を
+ * 一周期写像 R_F = F^{lambda_F} による根への深さが、元ごとの最小前周期を
  * lambda_F 単位で切り上げた値に等しいことを示す。
  * 有限集合、自然数、写像の等号だけを使い、R / C は使わない。
  */
@@ -18,12 +18,12 @@ export default defineBlocks([
   {
     id: "iterate_monoid_root_depth_preperiod_correspondence_claim_global_period_at_point",
     kind: "claim",
-    title: { text: "全写像の最小正周期は各配位の最小前周期位置でも周期になる" },
+    title: { text: "全写像の最小正周期は各元の最小前周期位置でも周期になる" },
     labels: ["claim_iterate_monoid_global_period_at_point_min_preperiod"],
     habitat: "N",
     statement: [
       paragraph([
-        "すべての ", math(String.raw`y\in A^V`), " について、",
+        "すべての ", math(String.raw`y\in X`), " について、",
         math(String.raw`\mu(y)\le\mu_F`), " であり、",
       ]),
       displayMath(String.raw`F^{\mu(y)+\lambda_F}(y)=F^{\mu(y)}(y)`),
@@ -57,7 +57,7 @@ export default defineBlocks([
     habitat: "N",
     statement: [
       paragraph([
-        math(String.raw`y\in A^V`), " に対し、集合 ",
+        math(String.raw`y\in X`), " に対し、集合 ",
         math(String.raw`\{d\in\mathbb N\mid \mu(y)\le d\lambda_F\}`), " は、",
         ref("claim_iterate_monoid_global_period_at_point_min_preperiod"), " の ",
         math(String.raw`\mu(y)\le\mu_F`), "、",
@@ -69,7 +69,7 @@ export default defineBlocks([
         math(String.raw`\mu_F\le e_F`), " により ", math(String.raw`m_F`),
         " を含む。したがって自然数の整列性により最小元をもち、その最小元を",
       ]),
-      displayMath(String.raw`c_F(y):=\min\{d\in\mathbb N\mid \mu(y)\le d\lambda_F\}\in\mathbb N`),
+      displayMath(String.raw`r_F(y):=\min\{d\in\mathbb N\mid \mu(y)\le d\lambda_F\}\in\mathbb N`),
       paragraph(["と定める。"]),
     ],
   },
@@ -84,12 +84,12 @@ export default defineBlocks([
         "すべての ", math(String.raw`q\in Q_F`), " と ",
         math(String.raw`y\in B_F(q)`), " について、",
       ]),
-      displayMath(String.raw`F^{c_F(y)\lambda_F}(y)=q`),
+      displayMath(String.raw`F^{r_F(y)\lambda_F}(y)=q`),
       paragraph(["が成り立つ。"]),
     ],
     proof: [
       paragraph([
-        math(String.raw`c:=c_F(y)`), " と置く。",
+        math(String.raw`c:=r_F(y)`), " と置く。",
         ref("def_iterate_monoid_rounded_preperiod_depth"), " より ",
         math(String.raw`\mu(y)\le c\lambda_F`), " である。同じ定義の集合は ",
         math(String.raw`m_F`), " を含むので、最小性から ",
@@ -132,14 +132,14 @@ F^{c\lambda_F}(y)
       paragraph([
         "すべての ", math(String.raw`q\in Q_F`), "、",
         math(String.raw`y\in B_F(q)`), "、", math(String.raw`d\in\mathbb N`),
-        " について、", math(String.raw`d<c_F(y)`), " なら",
+        " について、", math(String.raw`d<r_F(y)`), " なら",
       ]),
       displayMath(String.raw`F^{d\lambda_F}(y)\ne q`),
       paragraph(["である。"]),
     ],
     proof: [
       paragraph([
-        math(String.raw`c:=c_F(y)`), " と置く。", math(String.raw`d<c`),
+        math(String.raw`c:=r_F(y)`), " と置く。", math(String.raw`d<c`),
         " と ", ref("def_iterate_monoid_rounded_preperiod_depth"), " の最小性から",
       ]),
       displayMath(String.raw`d\lambda_F<\mu(y)`),
@@ -177,16 +177,16 @@ F^{c\lambda_F}(y)
         "すべての ", math(String.raw`q\in Q_F`), " と ",
         math(String.raw`y\in B_F(q)`), " について、",
       ]),
-      displayMath(String.raw`d_F(y)=c_F(y)=\min\{d\in\mathbb N\mid \mu(y)\le d\lambda_F\}`),
+      displayMath(String.raw`d_F(y)=r_F(y)=\min\{d\in\mathbb N\mid \mu(y)\le d\lambda_F\}`),
       paragraph(["である。"]),
     ],
     proof: [
       paragraph([
         ref("claim_iterate_monoid_rounded_preperiod_reaches_root"), " より ",
-        math(String.raw`c_F(y)`), " は ", ref("def_iterate_monoid_fiber_tree_depth"),
+        math(String.raw`r_F(y)`), " は ", ref("def_iterate_monoid_fiber_tree_depth"),
         " の最小化対象に属する。", ref("claim_iterate_monoid_before_rounded_preperiod_not_root"),
         " より、それより小さい自然数は同じ対象に属さない。したがって自然数の最小元の一意性から ",
-        math(String.raw`d_F(y)=c_F(y)`), " である。第二の等号は ",
+        math(String.raw`d_F(y)=r_F(y)`), " である。第二の等号は ",
         ref("def_iterate_monoid_rounded_preperiod_depth"), " の定義である。",
       ]),
     ],
@@ -199,27 +199,27 @@ F^{c\lambda_F}(y)
     habitat: "N",
     statement: [
       paragraph([
-        "全ての配位の ", math(String.raw`\mu(y)`), "、",
-        math(String.raw`c_F(y)`), "、", math(String.raw`d_F(y)`),
-        " と、各深さに属する配位の有限集合は、有限舞台上の局所真理値表から有限決定できる。",
+        "全ての元の ", math(String.raw`\mu(y)`), "、",
+        math(String.raw`r_F(y)`), "、", math(String.raw`d_F(y)`),
+        " と、各深さに属する元の有限集合は、有限集合上の自己写像の有限表から有限決定できる。",
       ]),
     ],
     proof: [
       paragraph([
-        ref("claim_min_preperiod_period_finite_decidability"), " により各配位の ",
+        ref("claim_min_preperiod_period_finite_decidability"), " により各元の ",
         math(String.raw`\mu(y)`), " を有限決定でき、",
         ref("claim_iterate_monoid_minimal_period_finite_decidability"), " により ",
         math(String.raw`\lambda_F`), " を有限決定できる。各 ",
-        math(String.raw`y\in A^V`), " について ", math(String.raw`d=0,1,2,\ldots`),
+        math(String.raw`y\in X`), " について ", math(String.raw`d=0,1,2,\ldots`),
         " の順に ", math(String.raw`\mu(y)\le d\lambda_F`),
         " を自然数の有限比較で検査し、最初の ", math(String.raw`d`),
         " を返せば ", ref("def_iterate_monoid_rounded_preperiod_depth"), " の ",
-        math(String.raw`c_F(y)`), " が得られる。この走査は同定義により有限回で停止する。",
+        math(String.raw`r_F(y)`), " が得られる。この走査は同定義により有限回で停止する。",
         ref("claim_iterate_monoid_fiber_tree_depth_equals_rounded_preperiod"), " により返した値は ",
-        math(String.raw`d_F(y)`), " でもある。有限集合 ", math(String.raw`A^V`),
-        " の全配位を返した値ごとに分ければ、各深さの配位集合も有限決定できる。",
+        math(String.raw`d_F(y)`), " でもある。有限集合 ", math(String.raw`X`),
+        " の全元を返した値ごとに分ければ、各深さの元集合も有限決定できる。",
       ]),
-      paragraph(["この検査は有限集合、自然数、二値状態の等号だけで閉じる。実数、複素数、極限、完備化は使わない。"]),
+      paragraph(["この検査は有限集合、自然数、元の等号だけで閉じる。実数、複素数、極限、完備化は使わない。"]),
     ],
   },
 ]);

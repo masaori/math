@@ -78,15 +78,9 @@ export default defineBlocks([
         ref("def_composed_local_rule_family"), " の ", math(String.raw`f_v`), "・",
         math(String.raw`g_v`), "・", math(String.raw`h_v`), " が定める大域写像をそれぞれ ",
         math(String.raw`F`), "・", math(String.raw`G`), "・", math(String.raw`H:A^V\to A^V`),
-        " とする（", ref("def_global_map"), "）。このとき",
+        " とする（", ref("def_global_map"), "）。このとき次が成り立つ。",
       ]),
       displayMath(String.raw`F\circ G=H`),
-      paragraph([
-        "である。したがって ", math(String.raw`F\in\mathcal M(V,N)`), " かつ ",
-        math(String.raw`G\in\mathcal M(V,M)`), " ならば ",
-      ]),
-      displayMath(String.raw`F\circ G\in\mathcal M(V,N\star M)`),
-      paragraph(["である（", ref("def_stage_global_maps"), "）。"]),
     ],
     proof: [
       paragraph([
@@ -120,8 +114,6 @@ export default defineBlocks([
       paragraph([
         "が成り立つ。", math(String.raw`x`), " と ", math(String.raw`v`),
         " は任意なので、写像の外延性より ", math(String.raw`F\circ G=H`), " である。",
-        "後半の所属は ", math(String.raw`H`), " が合成近傍上の局所規則族 ",
-        math(String.raw`(h_v)_{v\in V}`), " の大域写像であることから従う。",
       ]),
     ],
   },

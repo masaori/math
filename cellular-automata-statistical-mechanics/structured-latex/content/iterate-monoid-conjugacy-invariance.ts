@@ -1,6 +1,6 @@
 /**
- * 章「有限大域写像の共役による安定ファイバー根付き木族の不変性」。
- * 二つの有限舞台上の 2 値 CA の大域写像を結ぶ共役全単射が、
+ * 章「有限自己写像の共役による安定ファイバー根付き木族の不変性」。
+ * 二つの有限集合上の自己写像を結ぶ共役全単射が、
  * 最小衝突開始位置・最小正周期・巡回冪等元・安定像・安定ファイバーと、
  * 一周期写像が定める根付き木の辺・深さ・分岐個数を保存することを、
  * 有限集合、自然数、写像の合成と等号だけから導く。R / C は使わない。
@@ -13,32 +13,27 @@ export default defineBlocks([
     id: "iterate_monoid_conjugacy_heading",
     kind: "heading",
     level: 1,
-    title: { text: "有限大域写像の共役による安定ファイバー根付き木族の不変性" },
+    title: { text: "有限自己写像の共役による安定ファイバー根付き木族の不変性" },
     labels: [],
   },
   {
     id: "iterate_monoid_conjugacy_definition_conjugacy",
     kind: "definition",
-    title: { text: "大域写像の共役全単射" },
+    title: { text: "自己写像の共役全単射" },
     labels: ["def_iterate_monoid_conjugacy_bijection"],
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台 ", math(String.raw`(V,N)`), " 上の 2 値セルオートマトン（",
-        ref("def_finite_ca"), "）の大域写像 ",
-        math(String.raw`F:A^V\to A^V`), "（", ref("def_global_map"), "）と、有限舞台 ",
-        math(String.raw`(W,M)`), " 上の 2 値セルオートマトンの大域写像 ",
-        math(String.raw`G:A^W\to A^W`), " に対し、写像 ",
-        math(String.raw`h:A^V\to A^W`), " が ", math(String.raw`F`), " から ",
+        "有限集合 ", math(String.raw`X,Y`), " と自己写像 ",
+        math(String.raw`F:X\to X`), "、",
+        math(String.raw`G:Y\to Y`), " に対し、写像 ",
+        math(String.raw`h:X\to Y`), " が ", math(String.raw`F`), " から ",
         math(String.raw`G`), " への共役全単射であるとは、",
         math(String.raw`h`), " が全単射であり、かつ",
       ]),
       displayMath(String.raw`h\circ F=G\circ h`),
       paragraph([
-        "が成り立つことをいう。ここで ", math(String.raw`A=\{0,1\}`),
-        " は共通の状態集合（", ref("def_state_set"), "）、",
-        math(String.raw`V,W`), " はそれぞれ有限集合（", ref("def_finite_stage"),
-        "）であり、", math(String.raw`A^V,A^W`), " はともに有限集合である。以下この章では ",
+        "が成り立つことをいう。以下この章では ",
         math(String.raw`F,G,h`), " を固定する。", math(String.raw`G`),
         " についての反復（", ref("def_global_map_iterate"), "）、衝突開始位置と最小衝突開始位置 ",
         math(String.raw`\mu_G`), "（", ref("def_iterate_monoid_collision_start"),
@@ -75,8 +70,8 @@ export default defineBlocks([
     proof: [
       paragraph([
         math(String.raw`n`), " についての帰納法で示す。写像の等号は各 ",
-        math(String.raw`y\in A^V`), " での値の等号で確かめる。基底 ",
-        math(String.raw`n=0`), " では、各 ", math(String.raw`y\in A^V`), " について",
+        math(String.raw`y\in X`), " での値の等号で確かめる。基底 ",
+        math(String.raw`n=0`), " では、各 ", math(String.raw`y\in X`), " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 (h\circ F^0)(y)
@@ -87,7 +82,7 @@ export default defineBlocks([
 \end{aligned}`),
       paragraph([
         "帰納段では ", math(String.raw`h\circ F^n=G^n\circ h`),
-        " を仮定する。各 ", math(String.raw`y\in A^V`), " について",
+        " を仮定する。各 ", math(String.raw`y\in X`), " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 (h\circ F^{n+1})(y)
@@ -114,9 +109,9 @@ export default defineBlocks([
     proof: [
       paragraph([
         "まず ", math(String.raw`F^m=F^n`), " を仮定する。",
-        math(String.raw`z\in A^W`), " を任意に取る。", math(String.raw`h`),
+        math(String.raw`z\in Y`), " を任意に取る。", math(String.raw`h`),
         " は全射なので（", ref("def_iterate_monoid_conjugacy_bijection"),
-        "）、", math(String.raw`h(y)=z`), " を満たす ", math(String.raw`y\in A^V`),
+        "）、", math(String.raw`h(y)=z`), " を満たす ", math(String.raw`y\in X`),
         " が存在する。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -130,7 +125,7 @@ G^m(z)
       paragraph([
         math(String.raw`z`), " は任意なので ", math(String.raw`G^m=G^n`),
         " である。逆に ", math(String.raw`G^m=G^n`), " を仮定する。各 ",
-        math(String.raw`y\in A^V`), " について",
+        math(String.raw`y\in X`), " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 h(F^m(y))
@@ -242,7 +237,7 @@ n\in D_F
         " である。等しい空でない自然数集合の最小値は等しいので、",
         ref("def_iterate_monoid_minimal_stable_period_multiple"), " の最小値として ",
         math(String.raw`e_F=e_G`), " である。次に、各 ",
-        math(String.raw`y\in A^V`), " について",
+        math(String.raw`y\in X`), " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 (h\circ E_F)(y)
@@ -272,12 +267,12 @@ n\in D_F
     proof: [
       displayMath(String.raw`\begin{aligned}
 h(Q_F)
-&=\{h(E_F(y))\mid y\in A^V\}
+&=\{h(E_F(y))\mid y\in X\}
   \quad(\because\ \blkref{def_iterate_monoid_stable_image})\\
-&=\{E_G(h(y))\mid y\in A^V\}
+&=\{E_G(h(y))\mid y\in X\}
   \quad(\because\ \blkref{claim_iterate_monoid_conjugacy_transports_cycle_idempotent})\\
-&=\{E_G(z)\mid z\in A^W\}
-  \quad(\because\ h:A^V\to A^W\ \text{は全射}.\ \blkref{def_iterate_monoid_conjugacy_bijection})\\
+&=\{E_G(z)\mid z\in Y\}
+  \quad(\because\ h:X\to Y\ \text{は全射}.\ \blkref{def_iterate_monoid_conjugacy_bijection})\\
 &=Q_G
   \quad(\because\ \blkref{def_iterate_monoid_stable_image}).
 \end{aligned}`),
@@ -305,9 +300,9 @@ h(Q_F)
         math(String.raw`h(q)\in h(Q_F)=Q_G`), " なので、",
         ref("def_iterate_monoid_stable_fiber"), " により ",
         math(String.raw`B_G(h(q))`), " が定まる。次に ",
-        math(String.raw`z\in A^W`), " を任意に取る。", math(String.raw`h`),
+        math(String.raw`z\in Y`), " を任意に取る。", math(String.raw`h`),
         " の全射性により、", math(String.raw`z=h(y)`), " を満たす ",
-        math(String.raw`y\in A^V`), " を取る。",
+        math(String.raw`y\in X`), " を取る。",
       ]),
       displayMath(String.raw`\begin{aligned}
 z\in h(B_F(q))
@@ -419,7 +414,7 @@ h\circ R_F^{n+1}
     labels: ["claim_iterate_monoid_conjugacy_one_period_iterate_power"],
     habitat: "finite",
     statement: [
-      paragraph(["すべての ", math(String.raw`n\in\mathbb N`), " について、写像 ", math(String.raw`A^V\to A^V`), " として"]),
+      paragraph(["すべての ", math(String.raw`n\in\mathbb N`), " について、写像 ", math(String.raw`X\to X`), " として"]),
       displayMath(String.raw`R_F^n=F^{n\lambda_F}`),
       paragraph(["である。"]),
     ],
@@ -527,8 +522,8 @@ F^{d\lambda_F}(y)=q
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台上の局所真理値表から、", math(String.raw`\mu_F,\lambda_F,E_F`),
-        "、安定像、全安定ファイバー、および各ファイバーの根付き辺・深さ・分岐個数を有限回の二値状態の等号検査で決定できる。",
+        "有限集合上の自己写像の有限表から、", math(String.raw`\mu_F,\lambda_F,E_F`),
+        "、安定像、全安定ファイバー、および各ファイバーの根付き辺・深さ・分岐個数を有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [

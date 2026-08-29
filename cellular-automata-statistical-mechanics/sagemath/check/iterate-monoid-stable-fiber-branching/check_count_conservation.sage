@@ -1,9 +1,9 @@
 # 対象ラベル: claim_iterate_monoid_stable_fiber_predecessor_count_conservation
-# 各 q ∈ Q_F について |B_F(q)| = Σ_{z ∈ B_F(σ_F(q))} d_F(z) を、人手証明の 4 等号を分けて確かめる。
+# 各 q ∈ Q_F について |B_F(q)| = Σ_{z ∈ B_F(σ_F(q))} b_F(z) を、人手証明の 4 等号を分けて確かめる。
 #   |B_F(q)| = |F^{-1}(B_F(σ_F(q)))|            (完全逆像の等号)
 #            = |⋃_{z} Pre_F(z)|                    (前像集合への分解)
 #            = Σ_{z} |Pre_F(z)|                    (非交差)
-#            = Σ_{z} d_F(z)                        (一段前像数の定義)
+#            = Σ_{z} b_F(z)                        (一段前像数の定義)
 # 帰属: 有限集合の個数と非負整数の加算だけを使う。R/C 脱出なし。
 
 import os
@@ -33,7 +33,7 @@ for stage_size, rule, table in exhaustive_instances():
         c4 = sum(len(p) for p in parts)
         assert c3 == c4                                       # 非交和の個数は和
         c5 = sum(d[z] for z in target)
-        assert c4 == c5                                       # d_F の定義
+        assert c4 == c5                                       # b_F の定義
         assert c1 == c5
         fibers_checked += 1
     instances += 1

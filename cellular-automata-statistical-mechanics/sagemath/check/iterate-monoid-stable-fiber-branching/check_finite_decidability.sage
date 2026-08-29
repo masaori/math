@@ -1,6 +1,6 @@
 # 対象ラベル: claim_iterate_monoid_stable_fiber_branching_finite_decidability
 # 前章の走査で得た Q_F、B_F(q)、σ_F から、A^V×A^V の全組 (y,z) で F(y)=z を検査して
-# 全ての Pre_F(z) と d_F(z) を得、各 B_F(σ_F(q)) 上で有限加算した総和が定義どおりの値に一致することを確かめる。
+# 全ての Pre_F(z) と b_F(z) を得、各 B_F(σ_F(q)) 上で有限加算した総和が定義どおりの値に一致することを確かめる。
 # 帰属: 有限集合の走査、配位番号の等号、非負整数の加算だけを使う。R/C 脱出なし。
 
 import os

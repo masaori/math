@@ -22,7 +22,9 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        "有限集合 ", math(String.raw`V`), " 上の近傍割り当てモノイドの中心を",
+        "有限集合 ", math(String.raw`V`), " 上の近傍割り当て全体（",
+        ref("def_finite_neighborhood_assignment_space"), "）と合成（",
+        ref("def_composed_neighborhood"), "）に対し、その中心を",
       ]),
       displayMath(String.raw`Z_{\star}(V):=
 \{N\in\mathcal N(V)\mid
@@ -40,7 +42,8 @@ export default defineBlocks([
     statement: [
       paragraph([
         "有限集合 ", math(String.raw`V`), " と ", math(String.raw`a,b\in V`), " に対し、",
-        math(String.raw`E_{a,b}\in\mathcal N(V)`), " を",
+        math(String.raw`E_{a,b}\in\mathcal N(V)`), "（",
+        ref("def_finite_neighborhood_assignment_space"), "）を",
       ]),
       displayMath(String.raw`E_{a,b}(v):=
 \begin{cases}

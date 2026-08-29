@@ -26,7 +26,7 @@ export default defineBlocks([
         ref("def_iterate_monoid_minimal_positive_period"), " の最小正周期 ",
         math(String.raw`\lambda_F\in\mathbb{N}_{>0}`), " に対し、",
       ]),
-      displayMath(String.raw`R_F:=F^{\lambda_F}:A^V\to A^V`),
+      displayMath(String.raw`R_F:=F^{\lambda_F}:X\to X`),
       paragraph(["と定め、一周期写像と呼ぶ。"]),
     ],
   },
@@ -41,7 +41,7 @@ export default defineBlocks([
         "すべての ", math(String.raw`n\in\mathbb{N}`), " と ",
         math(String.raw`d\in\mathbb{N}`), " について、",
         math(String.raw`n\ge\mu_F`), " なら写像 ",
-        math(String.raw`A^V\to A^V`), " として",
+        math(String.raw`X\to X`), " として",
       ]),
       displayMath(String.raw`F^{n+d\lambda_F}=F^{n}`),
       paragraph(["が成り立つ。"]),
@@ -100,7 +100,7 @@ F^{n+(d+1)\lambda_F}
     statement: [
       paragraph([
         "すべての ", math(String.raw`d\in\mathbb{N}`), " について、写像 ",
-        math(String.raw`A^V\to A^V`), " として",
+        math(String.raw`X\to X`), " として",
       ]),
       displayMath(String.raw`F^{(d+1)\lambda_F}=R_F\circ F^{d\lambda_F}`),
       paragraph(["が成り立つ。"]),
@@ -492,12 +492,12 @@ d_F(y_0)
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台上の局所真理値表から、すべての ", math(String.raw`q\in Q_F`),
+        "有限集合上の自己写像の有限表から、すべての ", math(String.raw`q\in Q_F`),
         " について、辺集合 ", math(String.raw`T_F(q)`), "、各 ",
         math(String.raw`y\in B_F(q)`), " の深さ ", math(String.raw`d_F(y)`),
         "、および各 ", math(String.raw`y\in B_F(q)`), " の分岐数（",
         math(String.raw`T_F(q)`), " の第二成分が ", math(String.raw`y`),
-        " に等しい辺の個数）を有限回の二値状態の等号検査で決定できる。",
+        " に等しい辺の個数）を有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
@@ -508,7 +508,7 @@ d_F(y_0)
         math(String.raw`e_F`), " を有限決定でき、",
         math(String.raw`m_F=e_F/\lambda_F`), " は自然数の有限除法で決まる（",
         ref("def_iterate_monoid_root_reach_exponent"), "）。有限集合 ",
-        math(String.raw`A^V`), " の各元へ ", math(String.raw`F`), " を ",
+        math(String.raw`X`), " の各元へ ", math(String.raw`F`), " を ",
         math(String.raw`\lambda_F`), " 回適用すれば ", math(String.raw`R_F`),
         " の表を得る（", ref("def_iterate_monoid_one_period_map"), "）。",
         ref("claim_iterate_monoid_stable_fibers_finite_decidability"), " により ",

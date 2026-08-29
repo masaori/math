@@ -4,14 +4,13 @@
 
 人手証明のブロックとこのファイルの対応:
 
-  依存経路（`def_dependency_path`）              `IsDepPath`（n ≥ 1、各 i ≤ n で p i ∈ E_τ、
-                                                各 i < n で隣接対が D_τ に入る）
+  有限関係の経路（`def_dependency_path`）        `IsDepPath` の X := E_τ、R := D_τ への特殊化
   claim_path_time_strictly_increases             `path_time_strictly_increases`
                                                 （経路長 n についての帰納法。基底は前章
                                                 `time_strictly_increases`、帰納段は制限と ℕ の推移性）
-  到達可能関係 C_τ（`def_reachability`）         `Reachable`（依存経路の存在）と
+  到達可能関係 C_τ（`def_ca_reachability`）      `Reachable`（`def_reachability` の特殊化）と
                                                 `reachable_subset_event_product`・`reachable_finite`
-                                                （E_τ × E_τ の部分集合ゆえ有限、という定義中の注記）
+                                                （`claim_reachability_finite` の特殊化）
   claim_one_step_subset_reachability             `oneStep_subset_reachable`（長さ 1 の経路）
   claim_reachability_transitive                  `reachable_transitive`（経路の連結。継ぎ目 i = m は
                                                 p(m) = b = q(0) で well-defined）
@@ -20,8 +19,8 @@
   claim_no_mutual_reachability                   `no_mutual_reachability`（時刻増加を両向きに使い、
                                                 ℕ の推移性と非反射性で矛盾）
   claim_reachability_irreflexive                 `reachable_irreflexive`（b := a の特例）
-  反射的到達可能関係 ⪯_τ（`def_reflexive_reachability`）  `ReflReachable`（E_τ × E_τ の元で
-                                                a = b または (a,b) ∈ C_τ）
+  反射的到達可能関係 ⪯_τ（`def_ca_reflexive_reachability`） `ReflReachable`
+                                                （`def_reflexive_reachability` の特殊化）
   部分順序（`def_partial_order`）                `IsPartialOrderOn`（反射・反対称・推移の 3 条件）
   claim_reachability_partial_order               `reflReachable_partial_order`
                                                 （反射は a = a、反対称は相互到達の不存在、
@@ -48,7 +47,8 @@ variable {V : Type} [Fintype V] [DecidableEq V]
 variable (N : V → Finset V)
 variable (f : (v : V) → (↥(N v) → State) → State)
 
-/-- 依存経路（`def_dependency_path`）。n ≥ 1 と写像 p:[0,n]_ℕ → E_τ であって、
+/-- 有限関係の経路（`def_dependency_path`）を X := E_τ、R := D_τ へ特殊化した依存経路。
+    n ≥ 1 と写像 p:[0,n]_ℕ → E_τ であって、
     すべての i ∈ [0,n-1]_ℕ で (p(i), p(i+1)) ∈ D_τ を満たすもの。
     写像は ℕ 上の写像で表し、使う範囲 [0,n]_ℕ の所属条件を `mem_eventSet` が持つ
     （定義域 [0,n]_ℕ と E_τ はいずれも有限集合である）。 -/
@@ -82,12 +82,12 @@ theorem path_time_strictly_increases (τ n : ℕ) (p : ℕ → ℕ × V)
       -- ℕ の大小比較の推移性
       exact Nat.lt_trans h0m hlast
 
-/-- 到達可能関係 C_τ（`def_reachability`）。始点から終点への依存経路が存在する組の集合。 -/
+/-- 到達可能関係 C_τ（`def_ca_reachability`）。`def_reachability` を D_τ へ特殊化する。 -/
 def Reachable (τ : ℕ) : Set ((ℕ × V) × (ℕ × V)) :=
   { ab | ∃ (n : ℕ) (p : ℕ → ℕ × V),
       IsDepPath N f τ n p ∧ p 0 = ab.1 ∧ p n = ab.2 }
 
-/-- `def_reachability` の注記の前半: C_τ ⊆ E_τ × E_τ（経路の値は E_τ に属するので、
+/-- `def_ca_reachability` の型付け: C_τ ⊆ E_τ × E_τ（経路の値は E_τ に属するので、
     始点・終点も E_τ に属する）。 -/
 theorem reachable_subset_event_product (τ : ℕ) :
     Reachable N f τ ⊆ ↑(eventSet (V := V) τ ×ˢ eventSet (V := V) τ) := by
@@ -95,7 +95,7 @@ theorem reachable_subset_event_product (τ : ℕ) :
   exact Finset.mem_coe.mpr (Finset.mem_product.mpr
     ⟨hp0 ▸ hmem 0 (Nat.zero_le n), hpn ▸ hmem n (le_refl n)⟩)
 
-/-- `def_reachability` の注記の後半: C_τ は有限集合 E_τ × E_τ の部分集合なので有限である。 -/
+/-- `claim_reachability_finite` の CA 特殊化: C_τ は有限集合 E_τ × E_τ の部分集合なので有限である。 -/
 theorem reachable_finite (τ : ℕ) : (Reachable N f τ).Finite :=
   Set.Finite.subset (Finset.finite_toSet _) (reachable_subset_event_product N f τ)
 
@@ -216,7 +216,8 @@ theorem reachable_irreflexive (τ : ℕ) (a : ℕ × V)
     (h : (a, a) ∈ Reachable N f τ) : False :=
   no_mutual_reachability N f τ a a h h
 
-/-- 反射的到達可能関係 ⪯_τ（`def_reflexive_reachability`）。E_τ × E_τ の元 (a,b) のうち
+/-- 反射的到達可能関係 ⪯_τ（`def_ca_reflexive_reachability`）。
+    `def_reflexive_reachability` を D_τ へ特殊化し、E_τ × E_τ の元 (a,b) のうち
     a = b（直積の元の等号）または (a,b) ∈ C_τ を満たすもの。 -/
 def ReflReachable (τ : ℕ) : Set ((ℕ × V) × (ℕ × V)) :=
   { ab | ab.1 ∈ eventSet τ ∧ ab.2 ∈ eventSet τ ∧

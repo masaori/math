@@ -1,6 +1,6 @@
 /**
- * 章「反復モノイドの安定像による配位集合の分割」。
- * 冪等反復写像 E_F の各値の逆像が配位集合を分割することを、
+ * 章「反復モノイドの安定像による元集合の分割」。
+ * 冪等反復写像 E_F の各値の逆像が元集合を分割することを、
  * 有限集合、自然数、写像の等号だけから導く。R / C は使わない。
  */
 
@@ -11,7 +11,7 @@ export default defineBlocks([
     id: "iterate_monoid_stable_fibers_heading",
     kind: "heading",
     level: 1,
-    title: { text: "反復モノイドの安定像による配位集合の分割" },
+    title: { text: "反復モノイドの安定像による元集合の分割" },
     labels: [],
   },
   {
@@ -25,7 +25,7 @@ export default defineBlocks([
         ref("def_iterate_monoid_stable_image"), " の安定像 ",
         math(String.raw`Q_F`), " の元 ", math(String.raw`q\in Q_F`), " に対し、",
       ]),
-      displayMath(String.raw`B_F(q):=\{\,y\in A^V\mid E_F(y)=q\,\}\subseteq A^V`),
+      displayMath(String.raw`B_F(q):=\{\,y\in X\mid E_F(y)=q\,\}\subseteq X`),
       paragraph(["と定め、", math(String.raw`q`), " の安定ファイバーと呼ぶ。"]),
     ],
   },
@@ -49,12 +49,12 @@ export default defineBlocks([
   {
     id: "iterate_monoid_stable_fibers_claim_unique_representative",
     kind: "claim",
-    title: { text: "各配位はただ一つの安定ファイバーに属する" },
+    title: { text: "各元はただ一つの安定ファイバーに属する" },
     labels: ["claim_iterate_monoid_stable_fiber_unique_representative"],
     habitat: "finite",
     statement: [
       paragraph([
-        "すべての ", math(String.raw`y\in A^V`), " に対し、",
+        "すべての ", math(String.raw`y\in X`), " に対し、",
         math(String.raw`y\in B_F(q)`), " を満たす ", math(String.raw`q\in Q_F`),
         " がただ一つ存在する。その元は ", math(String.raw`q=E_F(y)`), " である。",
       ]),
@@ -101,33 +101,29 @@ q
   {
     id: "iterate_monoid_stable_fibers_claim_cardinality_decomposition",
     kind: "claim",
-    title: { text: "安定ファイバーの個数の総和は全配位数に等しい" },
+    title: { text: "安定ファイバーの個数の総和は全元数に等しい" },
     labels: ["claim_iterate_monoid_stable_fiber_cardinality_decomposition"],
     habitat: "N",
     statement: [
-      displayMath(String.raw`\sum_{q\in Q_F}|B_F(q)|=|A^V|=2^{|V|}`),
+      displayMath(String.raw`\sum_{q\in Q_F}|B_F(q)|=|X|`),
     ],
     proof: [
       paragraph([
-        math(String.raw`q\in Q_F`), " と ", math(String.raw`y\in A^V`), " に対して、",
+        math(String.raw`q\in Q_F`), " と ", math(String.raw`y\in X`), " に対して、",
         math(String.raw`\delta_F(q,y)\in\{0,1\}`), " を ",
         math(String.raw`y\in B_F(q)`), " なら ", math(String.raw`1`),
         "、そうでなければ ", math(String.raw`0`), " と定める。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \sum_{q\in Q_F}|B_F(q)|
-&=\sum_{q\in Q_F}\sum_{y\in A^V}\delta_F(q,y)
+&=\sum_{q\in Q_F}\sum_{y\in X}\delta_F(q,y)
   \quad(\because\ B_F(q)\text{ の元を指示値で数える})\\
-&=\sum_{y\in A^V}\sum_{q\in Q_F}\delta_F(q,y)
+&=\sum_{y\in X}\sum_{q\in Q_F}\delta_F(q,y)
   \quad(\because\ \text{有限和の順序交換})\\
-&=\sum_{y\in A^V}1
+&=\sum_{y\in X}1
   \quad(\because\ \blkref{claim_iterate_monoid_stable_fiber_unique_representative})\\
-&=|A^V|
-  \quad(\because\ \text{有限集合の元ごとに }1\text{ を一度ずつ足す})\\
-&=|A|^{|V|}
-  \quad(\because\ V\text{ から }A\text{ への写像の個数})\\
-&=2^{|V|}
-  \quad(\because\ |A|=2.\ \blkref{def_state_set}).
+&=|X|
+  \quad(\because\ \text{有限集合の元ごとに }1\text{ を一度ずつ足す}).
 \end{aligned}`),
     ],
   },
@@ -139,16 +135,16 @@ q
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台上の局所真理値表から、全ての ", math(String.raw`q\in Q_F`),
+        "有限集合上の自己写像の有限表から、全ての ", math(String.raw`q\in Q_F`),
         " と ", math(String.raw`B_F(q)`), "、および各 ", math(String.raw`|B_F(q)|\in\mathbb{N}_{>0}`),
-        " を有限回の二値状態の等号検査で決定できる。",
+        " を有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
       paragraph([
         ref("claim_iterate_monoid_stable_image_finite_decidability"), " により ",
         math(String.raw`Q_F`), " と ", math(String.raw`E_F`), " の表を有限決定できる。有限集合 ",
-        math(String.raw`A^V`), " の各元 ", math(String.raw`y`), " について ",
+        math(String.raw`X`), " の各元 ", math(String.raw`y`), " について ",
         math(String.raw`E_F(y)`), " を読み、その値と等しい ", math(String.raw`q\in Q_F`),
         " のファイバーへ ", math(String.raw`y`), " を一度だけ加える。",
         ref("claim_iterate_monoid_stable_fiber_unique_representative"),

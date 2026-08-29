@@ -1,0 +1,131 @@
+/**
+ * 出版物の最終章立ての正本。
+ *
+ * content/ のファイル名と各ファイル先頭の旧見出しは、証明を追加してきた履歴を表すだけである。
+ * 出版時には全本文ブロックをここでいったんフラットにし、二章へ分類してから依存順に並べ直す。
+ */
+
+export type OrganizationSection = {
+  id: string;
+  title: string;
+  input: string;
+  output: string;
+  main: string;
+  mainLabels: readonly string[];
+};
+
+export type OrganizationChapter = {
+  id: string;
+  title: string;
+  sections: readonly OrganizationSection[];
+};
+
+export const documentOrganization = [
+  {
+    id: "mathematical_tools",
+    title: "数学的道具立て",
+    sections: [
+      {
+        id: "neighborhood_assignment_algebra",
+        title: "近傍割り当ての合成・順序・束演算",
+        input: "有限集合、有限集合上の二項関係、集合値写像を入力とする。",
+        output: "合成モノイド、包含順序、点ごとの和と積、冪等元、可逆元、中心を有限決定可能な形で得る。",
+        main: "主定理は、近傍割り当て全体が有限モノイドをなし、点ごとの包含と和を伴う有限順序代数になることである。",
+        mainLabels: [
+          "claim_finite_neighborhood_assignments_form_monoid",
+          "claim_finite_neighborhood_assignments_form_ordered_monoid",
+          "claim_finite_neighborhood_assignments_form_idempotent_semiring",
+        ],
+      },
+      {
+        id: "neighborhood_assignment_symmetry_and_action",
+        title: "近傍割り当ての転置・対称性・部分集合への作用",
+        input: "合成・和・積を備えた有限近傍割り当てを入力とする。",
+        output: "転置対合、自己転置性、部分集合の合併作用とその像を有限表として得る。",
+        main: "主定理は、近傍割り当てと合併保存写像が一対一に対応し、転置が合成順序を反転することである。",
+        mainLabels: [
+          "claim_union_preserving_map_representation_unique",
+          "claim_neighborhood_assignment_transpose_reverses_composition",
+        ],
+      },
+      {
+        id: "reachability_and_finite_orders",
+        title: "近傍割り当ての到達関係と有限半順序",
+        input: "有限近傍割り当ての合成・和・転置と、有限集合上の部分順序を入力とする。",
+        output: "反射推移閉包、相互到達成分、商半順序、有限半順序の実現と被覆関係による生成を得る。",
+        main: "主定理は、相互到達成分の商が有限半順序をなし、逆に任意の有限半順序がこの商として実現できることである。",
+        mainLabels: [
+          "claim_neighborhood_mutual_reachability_component_order_is_partial_order",
+          "claim_partial_order_quotient_realization_order",
+        ],
+      },
+      {
+        id: "finite_self_map_dynamics",
+        title: "有限自己写像の軌道と安定構造",
+        input: "有限集合と、その集合から自身への写像だけを入力とする。",
+        output: "最終周期、反復モノイド、安定像・安定ファイバー・根付き木までの有限決定可能な構造を得る。",
+        main: "主定理は、軌道が最終的に周期化し、反復モノイドが過渡部と有限巡回群へ分解されることである。",
+        mainLabels: [
+          "claim_eventual_periodicity",
+          "claim_iterate_monoid_transient_cycle_partition_cardinality",
+          "claim_iterate_monoid_cycle_part_is_cyclic_of_order_min_period",
+        ],
+      },
+      {
+        id: "finite_self_map_conjugacy",
+        title: "有限自己写像の共役分類",
+        input: "有限自己写像の軌道・安定根付き木と、有限集合上の全単射を入力とする。",
+        output: "共役不変量、再帰的前像木符号、置換の巡回型による完全分類を得る。",
+        main: "主定理は、再帰的前像木符号が有限自己写像の共役を完全に分類し、可逆な場合は巡回型が完全不変量になることである。",
+        mainLabels: [
+          "claim_recursive_preimage_tree_code_complete_invariant",
+          "claim_reversible_cycle_type_completeness",
+        ],
+      },
+    ],
+  },
+  {
+    id: "binary_cellular_automaton_semantics",
+    title: "2 値セルオートマトンのセマンティクスを持つもの",
+    sections: [
+      {
+        id: "binary_local_rules_and_essential_dependency",
+        title: "2 元状態の局所規則と本質的依存",
+        input: "構造を入れない 2 元状態集合と有限局所真理値表を入力とする。",
+        output: "一点反転、本質的依存台、冗長近傍に依らない最小の依存情報を得る。",
+        main: "主定理は、本質的依存が一点反転検査と同値であり、有限真理値表から決定できることである。",
+        mainLabels: ["claim_flip_test_equivalence", "claim_support_finite_decidability"],
+      },
+      {
+        id: "time_expansion_and_dependency_order",
+        title: "時間展開・依存順序・有限伝播",
+        input: "有限舞台上の 2 値局所規則と本質的依存台を入力とする。",
+        output: "有限時間のイベント、一段依存、到達順序、有限伝播境界とその部分構造を得る。",
+        main: "主定理は、一段依存の推移閉包が反対称になり、依存元が有限伝播球に収まることである。因果集合との比較では、得られた順序が局所有限である範囲と、時刻を保存しない順序同型までを明示する。",
+        mainLabels: ["claim_reachability_partial_order", "claim_finite_propagation_boundary", "claim_event_order_locally_finite"],
+      },
+      {
+        id: "local_representation_and_composition",
+        title: "局所表現・逆写像・大域写像の合成",
+        input: "本質的依存台、有限大域写像の可逆性、近傍割り当ての合成を入力とする。",
+        output: "局所規則で表せる必要十分条件、逆写像の最小近傍、合成写像の依存上界と非閉性反例を得る。",
+        main: "主定理は、局所表現可能性が依存台の包含と同値であり、大域写像の合成が合成近傍上で表せることである。",
+        mainLabels: [
+          "claim_representable_implies_support_subset",
+          "claim_support_subset_implies_representable",
+          "claim_global_map_composition_representable_on_composed_neighborhood",
+        ],
+      },
+      {
+        id: "conjugacy_and_locality_classification",
+        title: "共役分類と局所性による制限",
+        input: "有限自己写像の共役分類と、2 値 CA の局所表現を入力とする。",
+        output: "CA 大域写像を有限自己写像論へ接続し、局所性が実現可能な巡回型へ課す制限を得る。",
+        main: "主定理は、2 値 CA の局所性が有限置換として可能な巡回型を真に制限しうることである。",
+        mainLabels: [
+          "claim_locality_restricts_cycle_type",
+        ],
+      },
+    ],
+  },
+] as const satisfies readonly OrganizationChapter[];

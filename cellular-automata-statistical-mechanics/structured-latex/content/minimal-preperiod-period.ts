@@ -1,12 +1,12 @@
 /**
- * 章「最小前周期と最小周期」: 前章「大域写像の反復と軌道の最終周期性」の続き。
- * 各配位 y について、最終周期性を与える組 (i,p) の集合 P(y) を定義し、
+ * 章「最小前周期と最小周期」: 前章「自己写像の反復と軌道の最終周期性」の続き。
+ * 各元 y について、最終周期性を与える組 (i,p) の集合 P(y) を定義し、
  * その最小元として最小前周期 μ(y) と最小周期 π(y) を定める。
  *
- * - P(y) の所属は F^{i+p} y = F^{i} y という 1 回の配位の等号と同値（有限決定の根拠）
+ * - P(y) の所属は F^{i+p} y = F^{i} y という 1 回の元の等号と同値（有限決定の根拠）
  * - μ(y), π(y) は ℕ の整列性により一意に定まる
  * - 任意の周期 p は最小前周期の位置へ降りる（F^{μ(y)+p} y = F^{μ(y)} y）
- * - μ(y) + π(y) ≤ 2^{|V|}。したがって有限範囲の走査で μ(y), π(y) が決まる
+ * - μ(y) + π(y) ≤ |X|。したがって有限範囲の走査で μ(y), π(y) が決まる
  *
  * 使う ℕ の構造は後者・加法・乗法（k q の形）・大小比較・等号・整列性だけである。
  * 「過渡」「アトラクタ」等の名前は使わない。ℝ/ℂ は現れない。
@@ -32,8 +32,8 @@ export default defineBlocks([
     habitat: "N",
     statement: [
       paragraph([
-        "配位 ",
-        math(String.raw`y\in A^{V}`),
+        "元 ",
+        math(String.raw`y\in X`),
         " に対し、集合",
       ]),
       displayMath(
@@ -58,13 +58,13 @@ export default defineBlocks([
   {
     id: "minimal_preperiod_period_claim_pair_iff_collision",
     kind: "claim",
-    title: { text: "組の所属は 1 回の配位の等号と同値である" },
+    title: { text: "組の所属は 1 回の元の等号と同値である" },
     labels: ["claim_periodicity_pair_iff_collision"],
     habitat: "N",
     statement: [
       paragraph([
         "各 ",
-        math(String.raw`y\in A^{V}`),
+        math(String.raw`y\in X`),
         " と ",
         math(String.raw`(i,p)\in\mathbb{N}\times\mathbb{N}`),
         " について、",
@@ -139,8 +139,8 @@ F^{n+p}\,y
     habitat: "N",
     statement: [
       paragraph([
-        "配位 ",
-        math(String.raw`y\in A^{V}`),
+        "元 ",
+        math(String.raw`y\in X`),
         " に対し、集合",
       ]),
       displayMath(
@@ -174,8 +174,8 @@ F^{n+p}\,y
     habitat: "N",
     statement: [
       paragraph([
-        "配位 ",
-        math(String.raw`y\in A^{V}`),
+        "元 ",
+        math(String.raw`y\in X`),
         " に対し、集合",
       ]),
       displayMath(
@@ -213,7 +213,7 @@ F^{n+p}\,y
     habitat: "N",
     statement: [
       paragraph([
-        math(String.raw`y\in A^{V}`),
+        math(String.raw`y\in X`),
         "、",
         math(String.raw`i,q\in\mathbb{N}`),
         " が ",
@@ -262,7 +262,7 @@ F^{i+(k+1)q}\,y
     habitat: "N",
     statement: [
       paragraph([
-        math(String.raw`y\in A^{V}`),
+        math(String.raw`y\in X`),
         " と ",
         math(String.raw`(i,p)\in P(y)`),
         " について、",
@@ -341,15 +341,15 @@ F^{\mu+p}\,y
   {
     id: "minimal_preperiod_period_claim_bound",
     kind: "claim",
-    title: { text: "最小前周期と最小周期の和は配位の個数以下である" },
+    title: { text: "最小前周期と最小周期の和は元の個数以下である" },
     labels: ["claim_min_preperiod_period_bound"],
     habitat: "N",
     statement: [
       paragraph([
         "各 ",
-        math(String.raw`y\in A^{V}`),
+        math(String.raw`y\in X`),
         " について ",
-        math(String.raw`\mu(y)+\pi(y)\le 2^{|V|}`),
+        math(String.raw`\mu(y)+\pi(y)\le |X|`),
         "。",
       ]),
     ],
@@ -359,7 +359,7 @@ F^{\mu+p}\,y
         " により ",
         math(String.raw`(i,p)\in P(y)`),
         " で ",
-        math(String.raw`i+p\le 2^{|V|}`),
+        math(String.raw`i+p\le |X|`),
         " を満たすものを取る。",
         math(String.raw`i\in I(y)`),
         " なので ",
@@ -376,7 +376,7 @@ F^{\mu+p}\,y
 \mu(y)+\pi(y)
 &\le i+\pi(y)\qquad(\because\ \mu(y)\le i \text{ と } \mathbb{N} \text{ の加法の単調性})\\
 &\le i+p\qquad(\because\ \pi(y)\le p \text{ と } \mathbb{N} \text{ の加法の単調性})\\
-&\le 2^{|V|}\qquad(\because\ (i,p) \text{ の取り方})
+&\le |X|\qquad(\because\ (i,p) \text{ の取り方})
 \end{aligned}`),
     ],
   },
@@ -389,9 +389,9 @@ F^{\mu+p}\,y
     habitat: "N",
     statement: [
       paragraph([
-        math(String.raw`M:=2^{|V|}`),
+        math(String.raw`M:=|X|`),
         " と置く。各 ",
-        math(String.raw`y\in A^{V}`),
+        math(String.raw`y\in X`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -403,9 +403,7 @@ F^{\mu+p}\,y
         math(String.raw`\mu(y),\pi(y)`),
         " は、高々 ",
         math(String.raw`\tfrac{1}{2}(M+1)M`),
-        " 回の配位の等号検査（各検査は ",
-        math(String.raw`|V|`),
-        " 回の状態の等号検査に分解できる。",
+        " 回の ", math(String.raw`X`), " の元の等号検査（",
         ref("claim_collision_finite_decidability"),
         "）で決定できる。",
       ]),

@@ -76,7 +76,7 @@ theorem mem_predecessorTable_iff (z : Y) (y : X) :
     y ∈ predecessorTable F z ↔ y ∈ predecessorSet F z := by
   simp [predecessorTable, predecessorSet]
 
-/-- `d_F(z) := |Pre_F(z)|`。 -/
+/-- `b_F(z) := |Pre_F(z)|`。 -/
 def predecessorCount (z : Y) : ℕ :=
   (predecessorTable F z).card
 
@@ -109,7 +109,7 @@ theorem predecessorUnionTable_eq [DecidableEq X]
   · intro hy
     exact ⟨F y, (hAT y).1 hy, rfl⟩
 
-/-- 個数保存: `y ∈ A ⟺ F y ∈ T` ならば `|A| = Σ_{z∈T} d_F(z)`。 -/
+/-- 個数保存: `y ∈ A ⟺ F y ∈ T` ならば `|A| = Σ_{z∈T} b_F(z)`。 -/
 theorem predecessorCount_conservation [DecidableEq X]
     (A : Finset X) (T : Finset Y) (hAT : ∀ y, y ∈ A ↔ F y ∈ T) :
     A.card = ∑ z ∈ T, predecessorCount F z := by

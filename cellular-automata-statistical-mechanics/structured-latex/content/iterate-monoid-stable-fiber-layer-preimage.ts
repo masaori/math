@@ -22,7 +22,7 @@ export default defineBlocks([
     habitat: "N",
     statement: [
       paragraph([
-        "各 ", math(String.raw`y\in A^V`), " について ", math(String.raw`\mu(y)=0`), " なら",
+        "各 ", math(String.raw`y\in X`), " について ", math(String.raw`\mu(y)=0`), " なら",
       ]),
       displayMath(String.raw`\mu(F(y))=0`),
       paragraph(["である。"]),
@@ -140,8 +140,8 @@ k
     habitat: "N",
     statement: [
       paragraph([
-        "有限舞台上の局所真理値表から、全ての安定ファイバーの層と、その一段発展による完全逆像を",
-        "有限回の二値状態の等号検査で決定できる。",
+        "有限集合上の自己写像の有限表から、全ての安定ファイバーの層と、その一段発展による完全逆像を",
+        "有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
@@ -149,7 +149,7 @@ k
         ref("claim_iterate_monoid_stable_fiber_depth_finite_decidability"), " により全ての ",
         math(String.raw`L_F(q,k)`), " を有限決定できる。", ref("claim_iterate_monoid_stable_fiber_dynamics_finite_decidability"),
         " により ", math(String.raw`\sigma_F`), " の表を有限決定できる。有限集合 ",
-        math(String.raw`A^V`), " の各元へ ", math(String.raw`F`), " を適用し、各層への所属を検査すれば、",
+        math(String.raw`X`), " の各元へ ", math(String.raw`F`), " を適用し、各層への所属を検査すれば、",
         "全ての完全逆像を有限決定できる。実数、複素数、極限、完備化は使わない。",
       ]),
     ],

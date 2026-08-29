@@ -44,7 +44,7 @@ export default defineBlocks([
       displayMath(String.raw`U_N(S):=\bigcup_{v\in S}N(v)\qquad(S\in\operatorname{Sub}(V))`),
       paragraph([
         "で定める。", math(String.raw`S`), " と各 ", math(String.raw`N(v)`),
-        " は有限なので、この合併は有限部分集合として真理値表から決定できる。",
+        " は有限なので、この合併は近傍割り当ての有限な所属表から決定できる。",
       ]),
     ],
   },
@@ -134,7 +134,7 @@ w\in U_{I_V}(S)
     statement: [
       paragraph([
         "有限集合 ", math(String.raw`V`), "、近傍割り当て ",
-        math(String.raw`N\in\mathcal N(V)`), "、セル ", math(String.raw`v\in V`), " に対し、",
+        math(String.raw`N\in\mathcal N(V)`), "、点 ", math(String.raw`v\in V`), " に対し、",
       ]),
       displayMath(String.raw`U_N(\{v\})=N(v)`),
       paragraph(["が成り立つ。"]),
@@ -234,7 +234,7 @@ U_{N\star N}
     habitat: "finite",
     statement: [
       paragraph([
-        "有限集合 ", math(String.raw`V`), " と近傍割り当ての有限真理値表 ",
+        "有限集合 ", math(String.raw`V`), " と近傍割り当ての有限な所属表 ",
         math(String.raw`N\in\mathcal N(V)`), " から、写像 ",
         math(String.raw`U_N:\operatorname{Sub}(V)\to\operatorname{Sub}(V)`),
         " の全表と命題 ", math(String.raw`U_N\circ U_N=U_N`),
@@ -252,7 +252,7 @@ U_{N\star N}
       paragraph([
         "得られた有限表について、全ての ", math(String.raw`S\in\operatorname{Sub}(V)`),
         " で ", math(String.raw`U_N(U_N(S))=U_N(S)`),
-        " を有限個のセルの所属判定へ分解して検査すれば、冪等性の真偽が決まる。",
+        " を有限個の元の所属判定へ分解して検査すれば、冪等性の真偽が決まる。",
       ]),
     ],
   },

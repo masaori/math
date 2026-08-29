@@ -1,7 +1,7 @@
 # 対象ラベル: claim_iterate_monoid_stable_image_finite_decidability
 # 大域真理値表だけから、後尾集合の最初の安定で μ_F、正周期の逐次走査で λ_F、λ_F | n の判定で e_F を得て、
-# 合成の反復で E_F・R_F を作り、A^V の全元へ E_F を適用して重複を除いた集合が Q_F に一致し、
-# Q_F 上の E_F・F・R_F の表が構造化記述の定義どおりに得られることを、配位番号の等号検査回数を数えて確かめる。
+# 合成の反復で E_F・S_F を作り、A^V の全元へ E_F を適用して重複を除いた集合が Q_F に一致し、
+# Q_F 上の E_F・F・S_F の表が構造化記述の定義どおりに得られることを、配位番号の等号検査回数を数えて確かめる。
 # 帰属: 有限集合の写像の等号、非負整数だけを使う。R/C 脱出なし。
 
 import os
@@ -37,7 +37,7 @@ for stage_size, rule, table in exhaustive_instances():
     # e_F: μ_F 以上で λ_F の倍数の最小の n
     e_scan = min(n for n in range(mu_scan, mu_scan + lam_scan) if n % lam_scan == 0)
     assert e_scan == e
-    # E_F・R_F の合成による構成
+    # E_F・S_F の合成による構成
     E_scan = identity_table(size)
     for _ in range(e_scan):
         E_scan = compose(table, E_scan)

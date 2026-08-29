@@ -49,7 +49,7 @@ export default defineBlocks([
     habitat: "N",
     statement: [
       paragraph([
-        math(String.raw`p\in\Pi_F`),
+        ref("def_iterate_monoid_minimal_positive_period"), " の ", math(String.raw`p\in\Pi_F`),
         " ならば、すべての ",
         math(String.raw`n\in\mathbb{N}`),
         " について",
@@ -91,7 +91,8 @@ F^{n+p}
     labels: ["claim_iterate_monoid_minimal_period_divides_every_period"],
     habitat: "N",
     statement: [
-      paragraph(["すべての ", math(String.raw`p\in\Pi_F`), " について、"]),
+      paragraph([ref("def_iterate_monoid_minimal_positive_period"), " のすべての ",
+        math(String.raw`p\in\Pi_F`), " について、"]),
       displayMath(String.raw`\lambda_F\mid p`),
       paragraph(["が成り立つ。"]),
     ],
@@ -166,14 +167,14 @@ F^{\mu_F+r}
   {
     id: "iterate_monoid_minimal_period_claim_finite_decidability",
     kind: "claim",
-    title: { text: "最小正周期は有限真理値表から決定できる" },
+    title: { text: "最小正周期は自己写像の有限表から決定できる" },
     labels: ["claim_iterate_monoid_minimal_period_finite_decidability"],
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台、近傍、局所真理値表から ",
+        "有限集合と自己写像の有限表から ",
         math(String.raw`\lambda_F`),
-        " を有限回の 2 値状態の等号検査で決定できる。",
+        " を有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
@@ -183,7 +184,7 @@ F^{\mu_F+r}
         math(String.raw`\mu_F`),
         " を有限決定できる。次に ",
         math(String.raw`p=1,2,3,\ldots`),
-        " の順に、大域真理値表の全配位・全セルを走査して ",
+        " の順に、自己写像の有限表の全ての元を走査して ",
         math(String.raw`F^{\mu_F}=F^{\mu_F+p}`),
         " を判定し、最初に等号が成り立つ ",
         math(String.raw`p`),
@@ -193,7 +194,8 @@ F^{\mu_F+r}
         math(String.raw`\Pi_F`),
         " は空でないので、この走査は有限回で停止し、返す値は ",
         math(String.raw`\lambda_F`),
-        " である。各等号は有限個の 2 値状態の等号へ分解される。無限極限、位相、実数、複素数は使わない。",
+        " である。各等号は有限集合 ", math(String.raw`X`),
+        " の元の有限個の等号へ分解される。無限極限、位相、実数、複素数は使わない。",
       ]),
     ],
   },

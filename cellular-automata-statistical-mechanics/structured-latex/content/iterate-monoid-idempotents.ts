@@ -4,7 +4,7 @@
  *
  * - 衝突 F^i = F^j が時刻 i 以後の周期 p=j-i を与えること
  * - 正の指数をもつ冪等な反復写像が必ず存在すること
- * - 冪等元全体が有限真理値表から決定できること
+ * - 冪等元全体が自己写像の有限表から決定できること
  * - 非単位冪等元の存在と冪等元の一意性は一般には成り立たないこと
  *
  * 有限集合と自然数だけを使い、極限、実数、複素数は使わない。
@@ -36,7 +36,7 @@ export default defineBlocks([
       ]),
       displayMath(String.raw`\operatorname{Idem}(P_F):=\{\,G\in P_F\mid G\circ G=G\,\}`),
       paragraph([
-        "と定める。この有限集合の元を冪等元と呼ぶ。指数 ",
+        "と定める。この集合の元を冪等元と呼ぶ。指数 ",
         math(String.raw`e\in\mathbb{N}`),
         " が ",
         math(String.raw`F^e\in\operatorname{Idem}(P_F)`),
@@ -141,7 +141,7 @@ F^e\circ F^e
 &=F^0\circ F^0
   \quad(\because\ F^p=F^j=F^i=F^0)\\
 &=F^0
-  \quad(\because\ F^0=\operatorname{id}_{A^V})\\
+  \quad(\because\ F^0=\operatorname{id}_{X})\\
 &=F^e
   \quad(\because\ F^p=F^0\text{ かつ }e=p)
 \end{aligned}`),
@@ -175,14 +175,15 @@ F^e\circ F^e
   {
     id: "iterate_monoid_idempotents_claim_finite_decidability",
     kind: "claim",
-    title: { text: "冪等元全体は有限真理値表から決定できる" },
+    title: { text: "冪等元全体は自己写像の有限表から決定できる" },
     labels: ["claim_iterate_monoid_idempotents_finite_decidability"],
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台、近傍、局所真理値表から、有限集合 ",
+        "有限集合 ", math(String.raw`X`), " と自己写像 ", math(String.raw`F:X\to X`),
+        " の有限表から、集合 ",
         math(String.raw`\operatorname{Idem}(P_F)`),
-        " の全ての元を有限回の 2 値状態の等号検査で決定できる。",
+        " の全ての元を有限回の ", math(String.raw`X`), " の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
@@ -190,7 +191,7 @@ F^e\circ F^e
         ref("claim_iterate_monoid_finite_decidability"),
         " により、",
         math(String.raw`P_F`),
-        " の全ての元と合成表を有限回の 2 値状態の等号検査で決定できる。合成表の各 ",
+        " の全ての元と合成表を有限回の ", math(String.raw`X`), " の元の等号検査で決定できる。合成表の各 ",
         math(String.raw`G\in P_F`),
         " の対角成分 ",
         math(String.raw`G\circ G`),
@@ -211,26 +212,21 @@ F^e\circ F^e
     habitat: "finite",
     statement: [
       paragraph([
-        "反復モノイドが単位元でない冪等元をもつとは限らない。",
+        "反復モノイドの冪等元（", ref("def_iterate_monoid_idempotent"),
+        "）に、単位元でないものが存在するとは限らない。",
       ]),
     ],
     proof: [
       paragraph([
-        "一元舞台 ",
-        math(String.raw`V:=\{v\}`),
-        "、近傍 ",
-        math(String.raw`N(v):=\{v\}`),
-        "、局所規則 ",
-        math(String.raw`f_v(x):=x(v)`),
-        " を取る。この大域写像は恒等写像 ",
-        math(String.raw`F:=\operatorname{id}_{A^V}`),
-        " である。このとき全ての ",
+        "一元集合 ", math(String.raw`X:=\{x\}`), " と恒等写像 ",
+        math(String.raw`F:=\operatorname{id}_{X}:X\to X`),
+        " を取る。このとき全ての ",
         math(String.raw`n\in\mathbb{N}`),
         " について ",
-        math(String.raw`F^n=\operatorname{id}_{A^V}`),
+        math(String.raw`F^n=\operatorname{id}_{X}`),
         " なので、",
       ]),
-      displayMath(String.raw`P_F=\{\operatorname{id}_{A^V}\}`),
+      displayMath(String.raw`P_F=\{\operatorname{id}_{X}\}`),
       paragraph([
         "である。したがって ",
         math(String.raw`\operatorname{Idem}(P_F)`),
@@ -246,33 +242,22 @@ F^e\circ F^e
     labels: ["claim_iterate_monoid_idempotent_uniqueness_fails"],
     habitat: "finite",
     statement: [
-      paragraph(["反復モノイドの冪等元は一意とは限らない。"]),
+      paragraph(["反復モノイドの冪等元（", ref("def_iterate_monoid_idempotent"),
+        "）は一意とは限らない。"]),
     ],
     proof: [
       paragraph([
-        "一元舞台 ",
-        math(String.raw`V:=\{v\}`),
-        "、状態集合 ",
-        math(String.raw`A:=\{0,1\}`),
-        "、近傍 ",
-        math(String.raw`N(v):=\{v\}`),
-        "、定値局所規則 ",
-        math(String.raw`f_v(x):=0`),
-        " を取る。大域写像 ",
-        math(String.raw`F:A^V\to A^V`),
-        " は全配位を零配位へ送るので、",
+        "二元集合 ", math(String.raw`X:=\{0,1\}`), " と定値自己写像 ",
+        math(String.raw`F:X\to X`), "、", math(String.raw`F(x):=0`),
+        " を取る。",
       ]),
       displayMath(String.raw`F\circ F=F`),
       paragraph([
         "である。また ",
-        math(String.raw`F^0=\operatorname{id}_{A^V}`),
-        " も冪等である。配位 ",
-        math(String.raw`y\in A^V`),
-        " を ",
-        math(String.raw`y(v):=1`),
-        " で定めると、",
+        math(String.raw`F^0=\operatorname{id}_{X}`),
+        " も冪等である。また ", math(String.raw`1\in X`), " について、",
       ]),
-      displayMath(String.raw`F(y)(v)=0\neq1=F^0(y)(v)`),
+      displayMath(String.raw`F(1)=0\neq1=F^0(1)`),
       paragraph([
         "なので ",
         math(String.raw`F\neq F^0`),

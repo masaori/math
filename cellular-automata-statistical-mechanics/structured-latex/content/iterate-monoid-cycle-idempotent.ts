@@ -36,7 +36,8 @@ export default defineBlocks([
     title: { text: "安定後の周期倍数指数は存在する" },
     labels: ["claim_iterate_monoid_stable_period_multiple_exists"],
     habitat: "N",
-    statement: [paragraph([math(String.raw`D_F\ne\varnothing`), " である。"])],
+    statement: [paragraph([ref("def_iterate_monoid_stable_period_multiple_exponents"), " の集合 ",
+      math(String.raw`D_F`), " は ", math(String.raw`D_F\ne\varnothing`), " を満たす。"])],
     proof: [
       paragraph([math(String.raw`n:=\mu_F\lambda_F\in\mathbb{N}`), " と置く。"]),
       displayMath(String.raw`\lambda_F\mid n\quad(\because\ n=\mu_F\lambda_F)`),
@@ -65,6 +66,8 @@ export default defineBlocks([
     labels: ["def_iterate_monoid_cycle_idempotent_candidate"],
     habitat: "finite",
     statement: [
+      paragraph([ref("def_iterate_monoid_minimal_stable_period_multiple"), " の指数 ",
+        math(String.raw`e_F`), " に対し、"]),
       displayMath(String.raw`E_F:=F^{e_F}`),
       paragraph(["と定める。"])],
   },
@@ -172,8 +175,9 @@ E_F\circ E_F
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台、近傍、局所真理値表から ", math(String.raw`e_F`), " と ",
-        math(String.raw`E_F`), " を有限回の自然数演算と 2 値状態の等号検査で決定できる。",
+        "有限集合と自己写像の有限表から ", math(String.raw`e_F`), " と ",
+        math(String.raw`E_F`), " を有限回の自然数演算と有限集合 ", math(String.raw`X`),
+        " の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
@@ -185,7 +189,7 @@ E_F\circ E_F
         math(String.raw`n=\mu_F,\mu_F+1,\ldots`), " の順に ",
         math(String.raw`\lambda_F\mid n`), " を判定して最初の値を返せば ",
         math(String.raw`e_F`), " を得る。", ref("claim_iterate_monoid_stable_period_multiple_exists"),
-        " によりこの走査は停止する。局所真理値表から大域真理値表を作り ",
+        " によりこの走査は停止する。自己写像の有限表から自己写像の有限表を作り ",
         math(String.raw`e_F`), " 回合成すれば ", math(String.raw`E_F=F^{e_F}`),
         " を得る。無限極限、位相、実数、複素数は使わない。",
       ]),

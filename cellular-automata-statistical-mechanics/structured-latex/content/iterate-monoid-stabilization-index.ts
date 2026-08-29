@@ -160,9 +160,9 @@ export default defineBlocks([
         math(String.raw`n\in\mathbb{N}`),
         " は ",
         math(String.raw`\mu_F`),
-        " に等しい。したがって、有限舞台、近傍、局所真理値表から ",
+        " に等しい。したがって、有限集合と自己写像の有限表から ",
         math(String.raw`\mu_F`),
-        " を有限回の 2 値状態の等号検査で決定できる。",
+        " を有限回の元の等号検査で決定できる。",
       ]),
     ],
     proof: [

@@ -4,9 +4,10 @@
 
 人手証明のブロックとこのファイルの対応:
 
-  順序凸部分集合（`def_order_convex_subset`）    `IsOrderConvex`（a,c ∈ K、b ∈ E_τ、
+  順序凸部分集合（`def_order_convex_subset`）    `IsOrderConvex` の X := E_τ、R := ⪯_τ への特殊化
+                                                （a,c ∈ K、b ∈ E_τ、
                                                 a ⪯_τ b かつ b ⪯_τ c ならば b ∈ K。
-                                                K の有限性は `Finset` の型が表す）
+                                                `claim_order_convex_subset_finite` は `Finset` の型が表す）
   下方集合（`def_down_set`）                     `IsDownSet`
   上方集合（`def_up_set`）                       `IsUpSet`
   claim_down_set_order_convex                    `down_set_order_convex`（b ⪯_τ a の向きの
@@ -26,8 +27,8 @@
   claim_time_slice_antichain                     `time_slice_antichain`（⪯_τ を仮定すると
                                                 経路の時刻増加から t < t、ℕ の非反射性で矛盾。
                                                 a・b を入れ替えて両向き）
-  一段境界（`def_one_step_boundary`）            `oneStepBoundary` と `oneStepBoundary_finite`
-                                                （K の部分集合ゆえ有限、という定義中の注記）
+  一段境界（`def_one_step_boundary`）            `oneStepBoundary`
+  claim_one_step_boundary_finite                 `oneStepBoundary_finite`（K の部分集合ゆえ有限）
   claim_down_set_no_incoming_edge                `down_set_no_incoming_edge`（D_τ ⊆ C_τ、
                                                 反射的到達可能性、下方性の順で矛盾）
   claim_down_set_boundary_outgoing               `down_set_boundary_outgoing`（両包含。
@@ -57,9 +58,10 @@ variable {V : Type} [Fintype V] [DecidableEq V]
 variable (N : V → Finset V)
 variable (f : (v : V) → (↥(N v) → State) → State)
 
-/-- 順序凸部分集合（`def_order_convex_subset`）。K ⊆ E_τ が順序凸であるとは、
+/-- 有限半順序の順序凸部分集合（`def_order_convex_subset`）を
+    X := E_τ、R := ⪯_τ へ特殊化する。K ⊆ E_τ が順序凸であるとは、
     すべての a, c ∈ K とすべての b ∈ E_τ について、a ⪯_τ b かつ b ⪯_τ c ならば
-    b ∈ K が成り立つこと。K の有限性は `Finset` の型が表す。 -/
+    b ∈ K が成り立つこと。`claim_order_convex_subset_finite` は `Finset` の型が表す。 -/
 def IsOrderConvex (τ : ℕ) (K : Finset (ℕ × V)) : Prop :=
   ∀ a ∈ K, ∀ c ∈ K, ∀ b ∈ eventSet (V := V) τ,
     (a, b) ∈ ReflReachable N f τ → (b, c) ∈ ReflReachable N f τ → b ∈ K
@@ -183,7 +185,7 @@ def oneStepBoundary (τ : ℕ) (K : Finset (ℕ × V)) : Set (ℕ × V) :=
   { a | a ∈ K ∧ ∃ b, b ∈ eventSet (V := V) τ ∧ b ∉ K ∧
       ((a, b) ∈ oneStepDep N f τ ∨ (b, a) ∈ oneStepDep N f τ) }
 
-/-- `def_one_step_boundary` の注記: ∂K は有限集合 K の部分集合なので有限である。 -/
+/-- `claim_one_step_boundary_finite`: ∂K は有限集合 K の部分集合なので有限である。 -/
 theorem oneStepBoundary_finite (τ : ℕ) (K : Finset (ℕ × V)) :
     (oneStepBoundary N f τ K).Finite :=
   Set.Finite.subset (Finset.finite_toSet K) (fun _a ha => ha.1)

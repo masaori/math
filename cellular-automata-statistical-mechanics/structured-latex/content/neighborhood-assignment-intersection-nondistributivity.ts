@@ -21,7 +21,8 @@ export default defineBlocks([
     labels: ["def_neighborhood_assignment_pointwise_intersection"],
     habitat: "finite",
     statement: [
-      paragraph(["有限集合 ", math(String.raw`V`), " 上の ", math(String.raw`N,M\in\mathcal N(V)`), " に対し、点ごとの積を"]),
+      paragraph(["有限集合 ", math(String.raw`V`), " 上の ", math(String.raw`N,M\in\mathcal N(V)`),
+        "（", ref("def_finite_neighborhood_assignment_space"), "）に対し、点ごとの積を"]),
       displayMath(String.raw`(N\sqcap M)(v):=N(v)\cap M(v)\qquad(v\in V)`),
       paragraph(["で定める。"]),
     ],
@@ -33,7 +34,8 @@ export default defineBlocks([
     labels: ["def_full_neighborhood_assignment"],
     habitat: "finite",
     statement: [
-      paragraph(["有限集合 ", math(String.raw`V`), " 上の全近傍割り当て ", math(String.raw`U_V\in\mathcal N(V)`), " を"]),
+      paragraph(["有限集合 ", math(String.raw`V`), " 上の全近傍割り当て ",
+        math(String.raw`U_V\in\mathcal N(V)`), "（", ref("def_finite_neighborhood_assignment_space"), "）を"]),
       displayMath(String.raw`U_V(v):=V\qquad(v\in V)`),
       paragraph(["で定める。"]),
     ],

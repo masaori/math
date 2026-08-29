@@ -39,6 +39,7 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
+        ref("def_iterate_monoid_cycle_operation_and_successor"), " の巡回部と演算について、",
         math(String.raw`G,H\in C_F`), " なら ", math(String.raw`G\circ H\in C_F`),
         " である。", math(String.raw`E_F`), " は ", math(String.raw`C_F`),
         " 上の左右単位元であり、各 ", math(String.raw`G\in C_F`),
@@ -163,9 +164,10 @@ G\circ H
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台、近傍、局所真理値表から、", math(String.raw`C_F`), " の合成表、単位元 ",
+        "有限集合と自己写像の有限表から、", math(String.raw`C_F`), " の合成表、単位元 ",
         math(String.raw`E_F`), "、各元の逆元、生成元 ", math(String.raw`K_F`),
-        "、位数 ", math(String.raw`\lambda_F`), " を有限回の自然数演算と 2 値状態の等号検査で決定できる。",
+        "、位数 ", math(String.raw`\lambda_F`), " を有限回の自然数演算と有限集合 ",
+        math(String.raw`X`), " の元の等号検査で決定できる。",
       ]),
     ],
     proof: [
@@ -173,10 +175,10 @@ G\circ H
         ref("claim_iterate_monoid_transient_cycle_finite_decidability"), " により ",
         math(String.raw`C_F`), " と ", math(String.raw`\lambda_F`), " を有限決定でき、",
         ref("claim_iterate_monoid_cycle_idempotent_finite_decidability"), " により ",
-        math(String.raw`e_F`), " と ", math(String.raw`E_F`), " を有限決定できる。大域真理値表を合成して ",
+        math(String.raw`e_F`), " と ", math(String.raw`E_F`), " を有限決定できる。自己写像の有限表を合成して ",
         math(String.raw`K_F=F^{e_F+1}`), " と全ての積を求める。各行で積が ",
         math(String.raw`E_F`), " となる列を有限走査すれば逆元を得る。前 claim により各行で該当列は必ず存在する。",
-        "全対象は有限集合・自然数・2 値写像であり、無限極限、位相、実数、複素数は使わない。",
+        "全対象は有限集合・自然数・有限自己写像であり、無限極限、位相、実数、複素数は使わない。",
       ]),
     ],
   },
