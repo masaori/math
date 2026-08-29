@@ -5,6 +5,7 @@
   "type": "module",
   "description": "2次元Ising模型の厳密解の証明本体（構造化テキスト）。型検査で参照の誤りを検出する。",
   "scripts": {
+    "inventory:organization": "node tools/build-flat-inventory.ts",
     "gen": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project .",
     "check:generated": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project . --check",
     "typecheck": "tsc -p tsconfig.json --noEmit",
