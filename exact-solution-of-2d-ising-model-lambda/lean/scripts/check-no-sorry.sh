@@ -1590,6 +1590,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.flip_single_membership_card_necSuf
   Ising2DLambda.KacWard.smoothing_straight_visit_count_update
   Ising2DLambda.KacWard.smoothing_straight_visit_count_update_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.two_factor_after_single_decrement_necSuf
+  Ising2DLambda.KacWard.smoothing_vertex_crossing_number_update
+  Ising2DLambda.KacWard.smoothing_vertex_crossing_number_update_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

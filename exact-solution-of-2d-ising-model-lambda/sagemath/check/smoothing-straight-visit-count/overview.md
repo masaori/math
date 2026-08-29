@@ -1,6 +1,6 @@
 # 横断の平滑化と直進通過数
 
-**対象ラベル**: `claim_smoothing_straight_visit_count_update`
+**対象ラベル**: `claim_smoothing_straight_visit_count_update`, `claim_smoothing_vertex_crossing_number_update`
 - 実行: `sage sagemath/check/smoothing-straight-visit-count/check.sage`
 - 状態: PASS（2026-08-30、閉じた非後退辺列 24,628 件・横断対 3,584 対）
 - 使用する環: `ZZ` と有限集合だけ。浮動小数点は使わない。
@@ -11,3 +11,7 @@ $L=1$（辺 1〜5 本）と $L=2,3$（辺 1〜8 本）の全閉じた非後退�
 （他頂点検査 23,808 件）であることを検査する。平滑化後の各接続が非後退のままである
 ことと、孤立していない横断（同じ頂点を三回以上通る対 1,248 件）が標本に含まれる
 ことも確認する。
+
+同じ全横断対について、平滑化後の頂点横断数を横断の定義から独立に数え、平滑化後の二軸の
+直進通過数の積、および平滑化前の各軸の直進通過数から一つずつ引いた積と一致することを
+3,584 対すべてで検査する。

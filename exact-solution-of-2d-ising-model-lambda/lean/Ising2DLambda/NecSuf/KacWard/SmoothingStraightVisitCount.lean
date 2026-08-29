@@ -37,4 +37,12 @@ theorem flip_single_membership_card_necSuf {ι : Type} [DecidableEq ι]
   rw [hset, Finset.card_erase_of_mem hxmem]
   omega
 
+/-- 二つの因子がそれぞれ一つ減り、更新後の量が更新後の二因子の積なら、
+更新後の量は更新前の各因子から一つ引いた積である。必要なのは三つの等式だけである。 -/
+theorem two_factor_after_single_decrement_necSuf
+    (n₀ n₁ n₀' n₁' c' : ℕ)
+    (h₀ : n₀ = n₀' + 1) (h₁ : n₁ = n₁' + 1) (hc : c' = n₀' * n₁') :
+    c' = (n₀ - 1) * (n₁ - 1) := by
+  rw [hc, h₀, h₁, Nat.add_sub_cancel, Nat.add_sub_cancel]
+
 end Ising2DLambda.NecSuf.KacWard
