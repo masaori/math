@@ -50070,7 +50070,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                     habitat: "Z",
                     verification: ["sagemath/check/cyclic-turning-multiple-of-four"],
                     lean: [
-                      "Ising2DLambda.NecSuf.KacWard.foldl_add_hom_eq_add_sum_necSuf",
+                      "Ising2DLambda.NecSuf.KacWard.foldl_add_of_additive_necSuf",
                     ],
                     statement: [
                       paragraph([
@@ -50141,7 +50141,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                 lean: [
                   "Ising2DLambda.KacWard.cyclic_total_turning_vanishes",
                   "Ising2DLambda.KacWard.four_dvd_cyclic_total_turning",
-                  "Ising2DLambda.NecSuf.KacWard.closed_walk_hom_vanishes_necSuf",
+                  "Ising2DLambda.NecSuf.KacWard.closed_walk_additive_vanishes_necSuf",
                   "Ising2DLambda.KacWard.cyclic_total_turning_vanishes_from_necSuf",
                 ],
                 statement: [

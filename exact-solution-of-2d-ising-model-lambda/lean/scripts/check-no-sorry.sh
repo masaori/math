@@ -1561,8 +1561,8 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.phase_prod_mul_closing_eq_zpow_sum_add_necSuf
   Ising2DLambda.KacWard.closed_walk_rotation_phase
   Ising2DLambda.KacWard.closed_walk_rotation_phase_from_necSuf
-  Ising2DLambda.NecSuf.KacWard.foldl_add_hom_eq_add_sum_necSuf
-  Ising2DLambda.NecSuf.KacWard.closed_walk_hom_vanishes_necSuf
+  Ising2DLambda.NecSuf.KacWard.foldl_add_of_additive_necSuf
+  Ising2DLambda.NecSuf.KacWard.closed_walk_additive_vanishes_necSuf
   Ising2DLambda.KacWard.cyclic_total_turning_vanishes
   Ising2DLambda.KacWard.four_dvd_cyclic_total_turning
   Ising2DLambda.KacWard.cyclic_total_turning_vanishes_from_necSuf
