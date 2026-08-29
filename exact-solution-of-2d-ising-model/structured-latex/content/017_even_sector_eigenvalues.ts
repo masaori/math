@@ -356,7 +356,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         String.raw`\begin{aligned}
 0
 &= \left[\check\psi_\mu^\dagger, \check\psi_\mu^\dagger\right]_+
-   \quad (\because \text{anticommutator\_of\_check\_psi の第 1 式で } \nu = \mu) \\
+   \quad (\because \text{$\check\psi$ の反交換関係の第 1 式で } \nu = \mu) \\
 &= \check\psi_\mu^\dagger\check\psi_\mu^\dagger + \check\psi_\mu^\dagger\check\psi_\mu^\dagger
    \quad (\because \text{反交換子の定義}) \\
 &= 2\left(\check\psi_\mu^\dagger\right)^2
@@ -364,33 +364,49 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`2 \neq 0`),
-        " なので ",
-        math(String.raw`\left(\check\psi_\mu^\dagger\right)^2 = 0`),
-        "。同じく第 3 式 ",
-        math(String.raw`[\check\psi_\mu, \check\psi_\nu]_+ = 0`),
-        " を、",
-        ref("def_check_index_set"),
-        " (2) により ",
-        math(String.raw`\check{\mathcal{M}}`),
-        " に属する添字 ",
-        math(String.raw`M+1-\mu`),
-        " について（",
-        math(String.raw`\mu = \nu = M+1-\mu`),
-        " と取って）適用して ",
-        math(String.raw`\left(\check\psi_{M+1-\mu}\right)^2 = 0`),
-        "。",
-        ref("anticommutator_of_check_psi"),
-        " は ",
-        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
-        " のすべてについて成り立ち、共役添字 ",
-        math(String.raw`M+1-\mu`),
-        " も ",
-        math(String.raw`\check{\mathcal{M}}`),
-        " に属するので、009 章の ",
-        ref("number_operator_idempotent"),
-        " のように添字が定義域に入ることを個別に確かめる必要は無い。",
+        math(String.raw`2 \neq 0`), " なので、直前の鎖の両辺を 2 で割ると",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\check\psi_\mu^\dagger\right)^2
+&= \frac12\,2\left(\check\psi_\mu^\dagger\right)^2
+   \quad (\because \mathbb C\text{ の四則}) \\
+&= \frac12\,0
+   \quad (\because \text{直前の鎖}) \\
+&= 0
+   \quad (\because \mathbb C\text{ の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "第 3 式 ",
+        math(String.raw`[\check\psi_\mu, \check\psi_\nu]_+ = 0`),
+        " で両方の添字を ", math(String.raw`M+1-\mu`), " と取る。共役添字が ",
+        math(String.raw`\check{\mathcal M}`), " に属することは ", ref("def_check_index_set"),
+        " (2) による。上と同じ三段を省略せず書くと",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0
+&= \left[\check\psi_{M+1-\mu},\check\psi_{M+1-\mu}\right]_+
+   \quad (\because \text{$\check\psi$ の反交換関係の第 3 式}) \\
+&= \check\psi_{M+1-\mu}\check\psi_{M+1-\mu}
+  +\check\psi_{M+1-\mu}\check\psi_{M+1-\mu}
+   \quad (\because \text{反交換子の定義}) \\
+&= 2\left(\check\psi_{M+1-\mu}\right)^2
+   \quad (\because \text{同じ項の和})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\check\psi_{M+1-\mu}\right)^2
+&= \frac12\,2\left(\check\psi_{M+1-\mu}\right)^2
+   \quad (\because \mathbb C\text{ の四則}) \\
+&= \frac12\,0
+   \quad (\because \text{直前の鎖}) \\
+&= 0
+   \quad (\because \mathbb C\text{ の四則})
+\end{aligned}`,
+      ),
       paragraph([
         "(2) ",
         ref("anticommutator_of_check_psi"),
@@ -400,30 +416,30 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         math(String.raw`\nu = M+1-\mu`),
         " と取る。このとき ",
         math(String.raw`\delta_{M+1-\mu,\,M+1-\mu} = 1`),
-        " なので（**",
+        " なので（",
         math(String.raw`\check{\mathcal{M}}`),
-        " へ絞ったので合同式の計算が要らない**）、",
+        " へ絞ったので合同式の計算が要らない）、",
       ]),
       displayMath(
-        String.raw`\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
-+ \check\psi_{M+1-\mu}\check\psi_\mu^\dagger = I`,
+        String.raw`\begin{aligned}
+\check\psi_{M+1-\mu}\check\psi_\mu^\dagger
+&=\left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
+ +\check\psi_{M+1-\mu}\check\psi_\mu^\dagger\right)
+ -\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
+   \quad (\because \mathbb C\text{ の四則}) \\
+&= I-\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式}) \\
+&= I-\check n_\mu
+   \quad (\because \text{数演算子の定義})
+\end{aligned}`,
       ),
-      paragraph([
-        "左辺第 1 項は ",
-        ref("def_check_number_operator"),
-        " より ",
-        math(String.raw`\check{n}_\mu`),
-        " だから、移項して ",
-        math(String.raw`\check\psi_{M+1-\mu}\check\psi_\mu^\dagger = I - \check{n}_\mu`),
-        "。",
-      ]),
       paragraph(["(3) (1)(2) を使って"]),
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\mu^2
 &= \left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)
    \left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)
-   \quad (\because \text{def\_check\_number\_operator}) \\
+   \quad (\because \text{数演算子の定義}) \\
 &= \check\psi_\mu^\dagger\left(\check\psi_{M+1-\mu}\check\psi_\mu^\dagger\right)\check\psi_{M+1-\mu}
    \quad (\because \text{行列の積の結合法則}) \\
 &= \check\psi_\mu^\dagger\left(I - \check{n}_\mu\right)\check\psi_{M+1-\mu}
@@ -439,7 +455,9 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
    \quad (\because \text{結合法則}) \\
 &= \check{n}_\mu - 0\cdot 0
    \quad (\because \text{(1)})
-= \check{n}_\mu
+\\
+&= \check{n}_\mu
+   \quad (\because \text{零元との積と減法})
 \end{aligned}`,
       ),
     ],

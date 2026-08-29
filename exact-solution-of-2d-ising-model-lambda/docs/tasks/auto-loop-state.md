@@ -48,6 +48,8 @@
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
 
+- 2026-08-29（5 回目）: 姉妹側の偶数セクター固有値章（`017_even_sector_eigenvalues.ts`）の「数演算子の冪等性」（`check_number_operator_idempotent`）で、二つ目の二乗零性を「同じく」で省略せず反交換子の展開と 2 による除法の鎖へ開き、反交換関係から $I-\check n_\mu$ への移項を主張の左辺から始まる三段へ直し、冪等性の最終行へ零元の根拠を補った。機械識別子の行末根拠も人間可読な名前へ直した。元の内容と `anticommutator_of_check_psi`・`def_check_index_set`・`def_check_number_operator` の参照は不変。姉妹側 SageMath 対象検算（check\_01 PASS）・check・PDF 336 ページ通過。
+
 - 2026-08-29（4 回目）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$V^{(+)}=c\check V'$」（`V_plus_eq_c_check_Vprime`）の Step 5 で、機械識別子の生文字列の行末根拠（`scalar_identity_commutes`）を「スカラー行列との積の可換性」へ直し、根拠の無かった最終行に「行列積の単位元」を補い、鎖の後置きだった参照の段落を Step 5 の導入の散文（ラベル参照つき）へ移した。元の内容と `scalar_identity_commutes` の参照は不変。姉妹側 SageMath 対象検算（check\_06 PASS）・check・PDF 336 ページ通過。
 
 - 2026-08-29（3 回目）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$V^{(+)}=c\check V'$」（`V_plus_eq_c_check_Vprime`）で、Step 1 の鎖に単位元の根拠を補って直後の重複した言い換えを削り、Step 2 の散文に畳まれていた共役式から $Wx=xW$ までの消去を三段の鎖へ開いた。行末根拠の機械識別子も「可逆元の定義」「二つの共役作用の一致」「積の逆元の公式」へ直した。元の内容と `def_invertible_elements_of_R`・`T_V_plus_eq_T_check_Vprime`・`conjugation_is_ring_homomorphism` の参照は不変。姉妹側 SageMath 対象検算（check\_06 PASS）・check・PDF 通過。
@@ -56,9 +58,6 @@
 
 - 2026-08-19（tick 463）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$T_{(V^{(+)})}$ と $T_{(\check V')}$ は $\check Z,\check Y$ 上で一致する」（`T_V_plus_eq_T_check_Vprime_on_check_Z_Y`）で、Step 1 の行末根拠を人間可読な名前へ直し、フェルミオンへの成分分解に根拠を補い、Step 2 の二つの作用の一致を各固有値表示を介する鎖へ開き、Step 3 の鎖の両端に根拠を補って、$\check Y$ 側の「同じ計算」を $\check Z$ 側と同形の鎖へ開いた。元の内容と `diagonalization_check_P_D`・`commutation_V_plus_check_psi`・`def_check_fermi`・`action_of_T_check_Vprime_on_check_psi`・`def_check_index_set` の参照は不変。姉妹側 SageMath 対象検算（check\_05 PASS）・check 300 ブロック・PDF 335 ページ通過。
 
-- 2026-08-19（tick 462）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$T_{(\check V')}$ の $\check\psi$ への作用」（`action_of_T_check_Vprime_on_check_psi`）で、Step 1・1' で散文に畳まれていた交換子への回収（移項）を交換子の定義・直前の式変形・同類項の統合の鎖へ開き、Step 2 の鎖の末尾に同居していた移項 $\check X\check\psi_\mu^\dagger=\check\psi_\mu^\dagger(\check X+\gamma I)$ を独立の四段の鎖へ分け、Step 2' の一行三操作（定義・線型性・スカラー行列の消去）を Step 2 と同形の一操作ずつへ分け、Step 3 の一行二等号と根拠の無い行を直し、Step 5 の後置き注記 $\exp(\gamma I)=e^\gamma I$ を準備の等式へ移して鎖の行末根拠から引き、Steps 3'〜5' の「置き換えるだけで同じ計算」を Step 3〜5 と同形の鎖（帰納法・部分和・結論）へ開いた。機械識別子の行末根拠は人間可読な名前へ直した。元の内容と `anticommutator_of_check_psi`・`def_check_Vprime`・`scalar_identity_commutes`・`theorem_exp_product`・`periodicity_of_check_fermi`・`exp_converges`・`matrix_multiplication_continuity`・`def_check_index_set` の参照は不変。姉妹側 SageMath 対象検算（check\_04 PASS）・check 300 ブロック・PDF 335 ページ通過。
-
-- 2026-08-19（tick 461）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$V^{(+)}$ と $\check\psi$ の交換関係」（`commutation_V_plus_check_psi`）で、行ベクトルへの線型作用の一行二等号を定義・二列への線型性・行ベクトル積の定義の三段へ分け、転送行列作用の鎖の機械識別子を人間可読な根拠へ直し、末尾の一行二等号と固有値の指数表示への代入を各列の一続きの鎖へ開いた。元の内容と `def_check_fermi`・`linearity_of_T_on_check_Z_Y`・`T_V_plus_check_Z_Y`・`diagonalization_check_P_D`・`lambda_eq_exp_gamma_theta_tilde` の参照は不変。姉妹側 SageMath 対象検算（check\_03 PASS）・check 300 ブロック・PDF 334 ページ通過。
 
 
 ### 本プロジェクト（`exact-solution-of-2d-ising-model-lambda`）
