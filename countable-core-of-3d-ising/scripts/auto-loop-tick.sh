@@ -517,7 +517,10 @@ fi
 # 公開まで到達しなかった tick（打ち切り・異常終了）が一度も報告されなかった。
 notify_slack() {
   local message="$1"
-  if ! slack route-post math "$message" >> "$LOG_FILE" 2>&1; then
+  if ! slack route-post math "$message" \
+    --topic "可算核心による三次元イジング模型" \
+    --artifact-url "https://hexcomp-artifacts.web.app/math/ising-3d-cut/" \
+    >> "$LOG_FILE" 2>&1; then
     log "    Slack の明示routeへの通知に失敗した"
     return 1
   fi

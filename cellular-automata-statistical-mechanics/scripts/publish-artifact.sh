@@ -122,7 +122,9 @@ case "$message" in
     exit 1
     ;;
 esac
-slack_response="$(slack route-post math "$message")"
+slack_response="$(slack route-post math "$message" \
+  --topic "セルオートマトン統計力学" \
+  --artifact-url "$EXPECTED_URL")"
 printf '%s\n' "$slack_response" >> "$LOG_FILE"
 if ! printf '%s' "$slack_response" | "$SLACK_RESPONSE_VALIDATOR" math; then
   log "NG: Slack の明示routeから期待した配送応答を得られなかった（版 ${short_commit}）"

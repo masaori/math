@@ -419,7 +419,10 @@ case "$tick_outcome" in
   *)     tick_line="$tick_outcome" ;;
 esac
 tick_message="$(printf '%s\n%s' "$tick_line" "$published_url")"
-if ! slack route-post math "$tick_message" >> "$LOG_FILE" 2>&1; then
+if ! slack route-post math "$tick_message" \
+  --topic "可算対数順序群による二次元イジング模型" \
+  --artifact-url "https://hexcomp-artifacts.web.app/math/ising-lambda/" \
+  >> "$LOG_FILE" 2>&1; then
   log "    Slack の明示routeへの通知に失敗した"
   exit 1
 fi
