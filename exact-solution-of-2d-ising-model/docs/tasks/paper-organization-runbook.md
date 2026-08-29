@@ -11,7 +11,7 @@
 ## 毎回の手順
 
 - `AGENTS.md`、`CLAUDE.md`、`docs/context/` 全文、プロジェクト README、この Runbook、状態台帳、`MEMORY.md` を読む。
-- remote default branch を問い合わせて fetch し、専用worktreeが遅れていれば、未コミット成果を失わない方法で取り込む。共有main作業ツリー、lambda版、既存tickには触れない。
+- 120秒の上限付きで `origin` を fetch し、remote default branch は fetch 後のローカル `origin/HEAD` から取得する。専用worktreeが遅れていれば、未コミット成果を失わない方法で取り込む。通信処理の失敗時は別経路へ切り替えずエラーで終了し、共有main作業ツリー、lambda版、既存tickには触れない。
 - `npm run inventory:organization` で機械可読棚卸しを再生成し、件数・依存ラベル・差分を確認する。
 - 状態台帳の「次の一歩」だけを担当者が分析し、別のエージェントが、分類境界・依存方向・イジング固有セマンティクス混入・二章制約・高校生可読性をレビューする。指摘があれば同じ単位を修正して再レビューし、未解決のまま次へ進まない。
 - 必要な検証を全て通し、状態台帳と `MEMORY.md` を更新する。コミット、PR、remote defaultへのマージ、fetch後の包含確認までを同じtickで行う。
