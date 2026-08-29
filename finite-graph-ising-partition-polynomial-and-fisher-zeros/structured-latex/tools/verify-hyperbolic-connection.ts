@@ -39,7 +39,6 @@ function collectRefs(nodes: readonly Node[]): void {
 }
 
 for (const block of selected) {
-  if (block.kind === "heading") continue;
   collectRefs(block.statement ?? []);
   collectRefs("proof" in block ? block.proof ?? [] : []);
 }

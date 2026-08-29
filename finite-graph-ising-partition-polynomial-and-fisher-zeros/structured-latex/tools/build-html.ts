@@ -29,13 +29,19 @@ import {
   renderChapterNavigation,
 } from "../../../structured-latex/renderers/html/chapter-navigation.ts";
 import {
-  renderMainTheoremLead,
   renderStandingAwareBlock,
   THEOREM_STANDING_CSS,
-  type MainTheoremEntry,
 } from "../../../structured-latex/renderers/html/theorem-standing.ts";
+import {
+  PRIMARY_ELEMENTS_CSS,
+  primaryElementEntriesOf,
+  renderPrimaryElementsLead,
+} from "../../../structured-latex/renderers/html/primary-elements.ts";
 import { standingOf } from "../../../structured-latex/domain-model/index.ts";
-import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
+import { compileDocumentStructure } from "../schema.ts";
+import { finiteGraphDocumentStructure } from "../content/main-text.ts";
+import type { HeadingBlock, Node, ProjectMeta, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
+import type { Label } from "../labels.generated.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 
 const require = createRequire(import.meta.url);
@@ -56,6 +62,11 @@ const escapeHtml = (s: string): string =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const contentFiles = await loadContentFiles();
+const compiledStructureResult = compileDocumentStructure<Label, ProjectMeta>(finiteGraphDocumentStructure);
+if (!compiledStructureResult.success) {
+  throw new Error(`文書構造を解決できない: ${JSON.stringify(compiledStructureResult.error)}`);
+}
+const compiledStructure = compiledStructureResult.data;
 
 // --- 採番（LaTeX と同じ規則）-------------------------------------------------
 
@@ -80,33 +91,6 @@ for (const { blocks } of contentFiles) {
     const number = `${sectionNumber}.${counter}`;
     for (const label of block.labels) {
       byLabel.set(label, { kind: block.kind, number, blockId: block.id });
-    }
-  }
-}
-
-// --- 主定理（見出しの冒頭に列挙するもの）-------------------------------------
-//
-// 身分の宣言はシステム側の入力言語が持つ（宣言が無ければサブ定理）。ここでやるのは
-// 「どの見出しに属するか」を文書順から拾い、見出しごとにまとめることだけである。
-
-/**
- * 見出しブロックの id → その見出しの直後に属する主定理。
- * 「属する」は直前の見出しで決める。見出しの深さには依存しない。
- */
-const mainTheoremsByHeading = new Map<string, MainTheoremEntry[]>();
-{
-  let headingId = "";
-  for (const { blocks } of contentFiles) {
-    for (const block of blocks) {
-      if (block.kind === "heading") {
-        headingId = block.id;
-        continue;
-      }
-      if (block.kind === "figure") continue;
-      if (standingOf(block) !== "mainTheorem") continue;
-      const entries = mainTheoremsByHeading.get(headingId) ?? [];
-      entries.push({ anchor: `blk-${block.id}`, text: headLine(block) });
-      mainTheoremsByHeading.set(headingId, entries);
     }
   }
 }
@@ -174,7 +158,12 @@ function renderHeading(block: HeadingBlock): string {
   const ids = block.labels.map((label) => `<span id="sec-${label}"></span>`).join("");
   const shown = number === "" ? title : `${number}　${title}`;
   const heading = `${ids}<${tag} id="sec-${anchor}" class="lv${block.level}">${shown}</${tag}>`;
-  return heading + renderMainTheoremLead(mainTheoremsByHeading.get(block.id) ?? []);
+  const primaryEntries = primaryElementEntriesOf(compiledStructure, block.id, (candidate) => {
+    if (candidate.kind === "heading" || candidate.kind === "figure") return "";
+    return headLine(candidate);
+  })
+    .map((entry) => ({ ...entry, anchor: `blk-${entry.anchor}` }));
+  return heading + renderPrimaryElementsLead(primaryEntries);
 }
 
 /** ブロックの見出し行。見出し冒頭の一覧とブロック本体で同じ文字列を使う。 */
@@ -304,6 +293,7 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
 ${CHAPTER_NAVIGATION_CSS}
 ${THEOREM_STANDING_CSS}
+${PRIMARY_ELEMENTS_CSS}
 </style></head><body>
 ${mobileHtml}
 <div class="page-layout">

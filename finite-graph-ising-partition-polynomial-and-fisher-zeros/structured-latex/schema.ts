@@ -8,6 +8,7 @@ import {
   type Note as SystemNote,
   type TheoremLikeBlock as SystemTheoremLikeBlock,
   type HeadingBlock as SystemHeadingBlock,
+  compileDocumentStructure,
 } from "../../structured-latex/domain-model/index.ts";
 
 import type { Label } from "./labels.generated.ts";
@@ -25,11 +26,15 @@ export {
 
 export type {
   Block,
+  BlocksOfSections,
+  DocumentStructure,
+  SectionMember,
   HeadingLevel,
   Result,
   TheoremLikeKind,
   ValidationIssue,
 } from "../../structured-latex/domain-model/index.ts";
+export { compileDocumentStructure };
 
 export type CountableHabitat =
   | "finite"
@@ -80,6 +85,8 @@ export type Note = SystemNote<Label>;
 
 const schema = createStructuredTextSchema<Label, ProjectMeta>();
 export const defineBlocks = schema.defineBlocks;
+export const defineDocumentStructure = schema.defineDocumentStructure;
+export const defineSection = schema.defineSection;
 export const defineNotes = schema.defineNotes;
 export const ref = schema.ref;
 
@@ -122,4 +129,3 @@ export function checkHabitation(block: {
     ? []
     : [`${block.id}: 可算側の habitat に realEscape は書けない`];
 }
-
