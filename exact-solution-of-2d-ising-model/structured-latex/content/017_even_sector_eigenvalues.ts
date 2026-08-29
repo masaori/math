@@ -1517,15 +1517,62 @@ E_K \check{Q}_\epsilon
       paragraph([
         "Step 3'（右から掛ける形）。Step 1 の ",
         math(String.raw`\check{Q}_\epsilon\check{X} = \check{g}(\epsilon)\check{Q}_\epsilon`),
-        " から、Step 2 と同じ帰納法で ",
-        math(String.raw`\check{Q}_\epsilon\check{X}^k = \check{g}(\epsilon)^k\check{Q}_\epsilon`),
-        " であり、Step 3 と同じ極限操作（",
-        ref("matrix_multiplication_continuity"),
-        "）で",
+        " から、", math(String.raw`k`), " に関する帰納法を行う。",
+        math(String.raw`k=0`), " は単位行列の右単位元により成り立つ。",
+        math(String.raw`\check{Q}_\epsilon\check{X}^k=\check{g}(\epsilon)^k\check{Q}_\epsilon`),
+        " を仮定すると",
       ]),
       displayMath(
-        String.raw`\check{Q}_\epsilon\check{V}' = e^{\check{g}(\epsilon)}\check{Q}_\epsilon
-= \check{V}'\check{Q}_\epsilon`,
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon\check{X}^{k+1}
+&= \left(\check{Q}_\epsilon\check{X}^k\right)\check{X}
+   \quad (\because \text{行列の冪の定義と積の結合法則}) \\
+&= \left(\check{g}(\epsilon)^k\check{Q}_\epsilon\right)\check{X}
+   \quad (\because \text{帰納法の仮定}) \\
+&= \check{g}(\epsilon)^k\left(\check{Q}_\epsilon\check{X}\right)
+   \quad (\because \text{スカラー倍と行列の積の交換}) \\
+&= \check{g}(\epsilon)^k\left(\check{g}(\epsilon)\check{Q}_\epsilon\right)
+   \quad (\because \text{Step 1 の右から掛ける形}) \\
+&= \check{g}(\epsilon)^{k+1}\check{Q}_\epsilon
+   \quad (\because \text{スカラー倍の結合法則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって全ての ", math(String.raw`k\in\mathbb N`), " でこの等式が成り立つ。",
+        "Step 3 と同じ部分和 ", math(String.raw`E_K`), " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon E_K
+&= \check{Q}_\epsilon\left(\sum_{k=0}^{K}\frac{1}{k!}\check{X}^k\right)
+   \quad (\because E_K \text{ の定義}) \\
+&= \sum_{k=0}^{K}\frac{1}{k!}\left(\check{Q}_\epsilon\check{X}^k\right)
+   \quad (\because \text{有限和と行列積の分配法則}) \\
+&= \sum_{k=0}^{K}\frac{1}{k!}\left(\check{g}(\epsilon)^k\check{Q}_\epsilon\right)
+   \quad (\because \text{上の帰納法}) \\
+&= \left(\sum_{k=0}^{K}\frac{\check{g}(\epsilon)^k}{k!}\right)\check{Q}_\epsilon
+   \quad (\because \text{有限和からの共通因子のくくり出し})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`K\to\infty`), " の極限を取る。行列積の連続性（",
+        ref("matrix_multiplication_continuity"), "）と実指数級数の収束（",
+        ref("real_exp_series_converges"), "）により",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon\check{V}'
+&= \check{Q}_\epsilon\left(\lim_{K\to\infty}E_K\right)
+   \quad (\because \check{V}'=\exp(\check{X}) \text{ は部分和 }E_K\text{ の極限。Step 3 の級数表示}) \\
+&= \lim_{K\to\infty}\left(\check{Q}_\epsilon E_K\right)
+   \quad (\because \text{行列積の連続性}) \\
+&= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{\check{g}(\epsilon)^k}{k!}\right)\check{Q}_\epsilon\right)
+   \quad (\because \text{上の部分和の鎖}) \\
+&= e^{\check{g}(\epsilon)}\check{Q}_\epsilon
+   \quad (\because \text{実指数級数の収束と極限の一意性}) \\
+&= \check{V}'\check{Q}_\epsilon
+   \quad (\because \text{Step 3})
+\end{aligned}`,
       ),
       paragraph([
         "を得る。**この左からの形（",

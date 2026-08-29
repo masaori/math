@@ -50422,6 +50422,125 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_transverse_crossing",
+        labels: [],
+        title: { text: "格子頂点での横断" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_transverse_crossing_symmetric",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_direction_axis",
+                    kind: "definition",
+                    title: { text: "方向番号の軸" },
+                    labels: ["def_direction_axis"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "方向番号の軸を表す写像 ",
+                        math(String.raw`\operatorname{ax}:\mathbb Z/4\mathbb Z\to\mathbb Z/2\mathbb Z`),
+                        " を",
+                      ]),
+                      displayMath(String.raw`\operatorname{ax}(\bar0)=\operatorname{ax}(\bar2)=\bar0,\qquad
+\operatorname{ax}(\bar1)=\operatorname{ax}(\bar3)=\bar1`),
+                      paragraph([
+                        "で定める。値 ", math(String.raw`\bar0\in\mathbb Z/2\mathbb Z`),
+                        " は水平軸、値 ", math(String.raw`\bar1\in\mathbb Z/2\mathbb Z`),
+                        " は垂直軸を表す。方向番号は ", ref("def_oriented_edge_direction"),
+                        " で定めた有限集合の値なので、四つの場合は重ならず全てを尽くし、この写像は well-defined である。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_transverse_crossing",
+                    kind: "definition",
+                    title: { text: "格子頂点で横断する二つの通過" },
+                    labels: ["def_transverse_crossing"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "共通の頂点を通る二つの非後退接続 ",
+                        math(String.raw`\vec e\to\vec f`), " と ",
+                        math(String.raw`\vec e'\to\vec f'`),
+                        "（", ref("def_nonbacktracking_successors"),
+                        "）がその頂点で横断するとは、",
+                      ]),
+                      displayMath(String.raw`\tau(\vec e,\vec f)=0,\qquad
+\tau(\vec e',\vec f')=0,\qquad
+\operatorname{ax}(\operatorname{dir}(\vec e))\ne
+\operatorname{ax}(\operatorname{dir}(\vec e'))`),
+                      paragraph([
+                        "がすべて成り立つことをいう。一歩の回転数は ", ref("def_step_turning"),
+                        "、方向番号は ", ref("def_oriented_edge_direction"),
+                        "、軸は ", ref("def_direction_axis"),
+                        " で定めた。最初の二条件は二つの通過がともに直進すること、最後の条件は一方が水平で他方が垂直であることを表す。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_transverse_crossing_symmetric",
+                kind: "claim",
+                title: { text: "二つの通過の横断関係は順序に依らない" },
+                labels: ["claim_transverse_crossing_symmetric"],
+                habitat: "N",
+                verification: ["sagemath/check/transverse-crossing-symmetry"],
+                lean: [
+                  "Ising2DLambda.KacWard.transverse_crossing_symmetric",
+                  "Ising2DLambda.NecSuf.KacWard.transverse_crossing_symmetric_necSuf",
+                  "Ising2DLambda.KacWard.transverse_crossing_symmetric_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "共通の頂点を通る任意の二つの非後退接続について、第一の通過と第二の通過が横断することと、第二の通過と第一の通過が横断することは同値である（",
+                    ref("def_transverse_crossing"),
+                    "）。したがって横断は順序のない二つの通過の関係として数えられる。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "第一の通過を ", math(String.raw`u=(\vec e\to\vec f)`),
+                    "、第二の通過を ", math(String.raw`v=(\vec e'\to\vec f')`),
+                    " と書く。", math(String.raw`u`), " と ", math(String.raw`v`),
+                    " が横断すると仮定する。定義から",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\tau(\vec e',\vec f')&=0
+&&\bigl(\because\ \blkref{def_transverse_crossing}\text{ の第二条件}\bigr)\\
+\tau(\vec e,\vec f)&=0
+&&\bigl(\because\ \blkref{def_transverse_crossing}\text{ の第一条件}\bigr)\\
+\operatorname{ax}(\operatorname{dir}(\vec e'))
+&\ne\operatorname{ax}(\operatorname{dir}(\vec e))
+&&\bigl(\because\ \blkref{def_transverse_crossing}\text{ の第三条件と不等号の対称性}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。この三条件は ", ref("def_transverse_crossing"),
+                    " により ", math(String.raw`v`), " と ", math(String.raw`u`),
+                    " が横断することをいう。逆向きも同じ三条件で ",
+                    math(String.raw`u`), " と ", math(String.raw`v`),
+                    " を交換すれば得られる。したがって同値である。有限な方向番号と等式・不等式だけで閉じる。",
+                    "この対称性により、後続では閉歩道の通過の順序なし二元集合を横断点として数える。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

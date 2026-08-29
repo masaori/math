@@ -1572,6 +1572,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.dvd_four_bounded_mem_necSuf
   Ising2DLambda.KacWard.reconnection_turning_difference
   Ising2DLambda.KacWard.reconnection_turning_difference_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.transverse_crossing_symmetric_necSuf
+  Ising2DLambda.KacWard.transverse_crossing_symmetric
+  Ising2DLambda.KacWard.transverse_crossing_symmetric_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -914,3 +914,5 @@ import Ising2DLambda.NecSuf.KacWard.ClosedWalkRotationNumberSign
 import Ising2DLambda.KacWard.ClosedWalkRotationNumberSign
 import Ising2DLambda.NecSuf.KacWard.ReconnectionTurningDifference
 import Ising2DLambda.KacWard.ReconnectionTurningDifference
+import Ising2DLambda.NecSuf.KacWard.TransverseCrossing
+import Ising2DLambda.KacWard.TransverseCrossing
