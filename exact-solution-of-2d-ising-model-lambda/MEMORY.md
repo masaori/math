@@ -5496,3 +5496,4 @@ $S_{n,m}=\sum_{z\in\mu_n}z^{m}\in\overline{\mathbb{Q}}$ を置き、次を示し
 
 - 自動tickと監査の報告は旧Workflow Builder triggerを使わず、`slack route-post math`が解決するHex-AIの明示routeだけへ送る。
 - 同報告は話題名「可算対数順序群による二次元イジング模型」と正規成果物 `https://hexcomp-artifacts.web.app/math/ising-lambda/` を必ず付ける。
+- 2026-08-29: 自動tickは共有 `~/git/masaori/math` でなく専用worktree `~/git/masaori/math-ising-lambda-loop` から起動する。別研究の未コミット差分を「人間が作業中」と誤認して停止しない。ログとロックは起動口が従来の共有ログ先を注入する。
