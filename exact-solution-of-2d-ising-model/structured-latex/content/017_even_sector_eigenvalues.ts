@@ -769,7 +769,9 @@ A\,\check{n}_\nu
       paragraph([
         "まず ",
         math(String.raw`2\,\mathrm{tr}\!\left(\check{n}_{\mu_1}P\right) = \mathrm{tr}(P)`),
-        " を示す。",
+        " を示す。途中で使う ", ref("check_number_operator_idempotent"),
+        " の第 2 式は ", math(String.raw`\check\psi_{M+1-\mu_1}\check\psi_{\mu_1}^{\dagger}=I-\check n_{\mu_1}`),
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -782,7 +784,7 @@ A\,\check{n}_\nu
 &= \mathrm{tr}\!\left(P\,\check\psi_{M+1-\mu_1}\,\check\psi_{\mu_1}^\dagger\right)
    \quad (\because \check\psi_{M+1-\mu_1} \text{ と } P \text{ が可換}) \\
 &= \mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_1}\right)\right)
-   \quad (\because \text{check\_number\_operator\_idempotent (2)}) \\
+   \quad (\because \text{数演算子の冪等性の証明の第 2 式}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\,\check{n}_{\mu_1}\right)
    \quad (\because \text{トレースの線型性}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
@@ -790,11 +792,20 @@ A\,\check{n}_\nu
 \end{aligned}`,
       ),
       paragraph([
-        "移項して ",
-        math(String.raw`2\,\mathrm{tr}(\check{n}_{\mu_1}P) = \mathrm{tr}(P)`),
-        "、すなわち ",
-        math(String.raw`\mathrm{tr}\!\left(\check{n}_{\mu_1}P\right) = \tfrac12\mathrm{tr}(P)`),
-        "。これから ",
+        "直前の鎖を移項し、2 で割ると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2\,\mathrm{tr}\!\left(\check n_{\mu_1}P\right)
+&=\mathrm{tr}(P)
+   \quad (\because \mathbb C\text{ の四則}) \\
+\mathrm{tr}\!\left(\check n_{\mu_1}P\right)
+&=\frac12\,\mathrm{tr}(P)
+   \quad (\because \mathbb C\text{ の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "となる。これから ",
         math(String.raw`e_1`),
         " が ",
         math(String.raw`1`),
@@ -805,12 +816,19 @@ A\,\check{n}_\nu
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(R_{\mu_1}^{(1)}P\right)
-&= \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right) = \tfrac12\,\mathrm{tr}(P), \\
+&= \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
+   \quad (\because R_{\mu_1}^{(1)}=\check n_{\mu_1}) \\
+&= \tfrac12\,\mathrm{tr}(P)
+   \quad (\because \text{直前の鎖}), \\
 \mathrm{tr}\!\left(R_{\mu_1}^{(0)}P\right)
 &= \mathrm{tr}\!\left(\left(I - \check{n}_{\mu_1}\right)P\right)
- = \mathrm{tr}(P) - \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
-   \quad (\because \text{トレースの線型性}) \\
-&= \mathrm{tr}(P) - \tfrac12\,\mathrm{tr}(P) = \tfrac12\,\mathrm{tr}(P)
+   \quad (\because R_{\mu_1}^{(0)}=I-\check n_{\mu_1}) \\
+&= \mathrm{tr}(P) - \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
+   \quad (\because \text{分配則とトレースの線型性}) \\
+&= \mathrm{tr}(P) - \tfrac12\,\mathrm{tr}(P)
+   \quad (\because \text{直前の鎖}) \\
+&= \tfrac12\,\mathrm{tr}(P)
+   \quad (\because \mathbb C\text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
@@ -821,8 +839,15 @@ A\,\check{n}_\nu
         " なので、いずれの場合も",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\right)
-= \frac{1}{2}\,\mathrm{tr}(P) = \frac{1}{2}\cdot 2^{M-k+1} = 2^{M-k}`,
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\right)
+&= \frac{1}{2}\,\mathrm{tr}(P)
+   \quad (\because \text{直前の二場合}) \\
+&= \frac{1}{2}\cdot 2^{M-k+1}
+   \quad (\because \text{帰納法の仮定}) \\
+&= 2^{M-k}
+   \quad (\because \mathbb C\text{ の四則})
+\end{aligned}`,
       ),
       paragraph([
         "（",

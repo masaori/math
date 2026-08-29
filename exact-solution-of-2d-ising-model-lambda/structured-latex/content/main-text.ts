@@ -48994,6 +48994,99 @@ c_{\mathrm v}(e,d):=
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_formal_square_root_uniqueness",
+        labels: [],
+        title: { text: "定数項一の形式的平方根の一意性" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_formal_square_root_unique",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_qbar_formal_power_series",
+                    kind: "definition",
+                    title: { text: "代数的数係数の形式的冪級数" },
+                    labels: ["def_qbar_formal_power_series"],
+                    habitat: "Qbar",
+                    statement: [
+                      paragraph([
+                        "代数的数の列 ", math(String.raw`C=(c_n)_{n\in\mathbb N}`),
+                        " を代数的数係数の形式的冪級数と呼び、",
+                      ]),
+                      displayMath(String.raw`C(x)=\sum_{n\in\mathbb N}c_nx^n\in\overline{\mathbb Q}[[x]]`),
+                      paragraph([
+                        "と書く。二つの形式的冪級数 ", math(String.raw`C(x)=\sum_n c_nx^n`),
+                        " と ", math(String.raw`E(x)=\sum_n e_nx^n`), " の積は Cauchy 積",
+                      ]),
+                      displayMath(String.raw`C(x)E(x):=\sum_{n\in\mathbb N}\left(\sum_{j=0}^{n}c_je_{n-j}\right)x^n`),
+                      paragraph([
+                        "で定める。各係数に現れる和は有限である。定数項を ",
+                        math(String.raw`\mathrm{ac}_0(C):=c_0`), " と書く。これは可算集合 ",
+                        math(String.raw`\overline{\mathbb Q}^{\mathbb N}`),
+                        " と代数的数の有限和・有限積だけで定まり、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_formal_square_root_unique",
+                kind: "claim",
+                title: { text: "定数項一の形式的平方根は一意である" },
+                labels: ["claim_formal_square_root_unique"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/formal-square-root-uniqueness"],
+                lean: [
+                  "Ising2DLambda.KacWard.formalSquareRoot_unique",
+                  "Ising2DLambda.NecSuf.KacWard.formalSquareRoot_unique_necSuf",
+                  "Ising2DLambda.KacWard.formalSquareRoot_unique_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`D,S,T\in\overline{\mathbb Q}[[x]]`), " とする。",
+                    math(String.raw`\mathrm{ac}_0(S)=\mathrm{ac}_0(T)=1`), " かつ",
+                  ]),
+                  displayMath(String.raw`S(x)S(x)=D(x)=T(x)T(x)`),
+                  paragraph(["ならば ", math(String.raw`S(x)=T(x)`), " である。"]),
+                ],
+                proof: [
+                  paragraph(["二つの平方の等式から、求めたい差を因数に持つ積を作る。"]),
+                  displayMath(String.raw`\begin{aligned}
+\bigl(S(x)-T(x)\bigr)\bigl(S(x)+T(x)\bigr)
+&=S(x)S(x)-T(x)T(x)
+&&\bigl(\because\ \overline{\mathbb Q}[[x]]\text{ の分配則}\bigr)\\
+&=D(x)-D(x)
+&&\bigl(\because\ S(x)S(x)=D(x)=T(x)T(x)\text{（仮定）}\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb Q}[[x]]\text{ の加法逆元}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`\overline{\mathbb Q}`),
+                    " は体なので零因子を持たず、形式的冪級数の積も、最初の非零係数どうしの積を見ることで零因子を持たない。したがって ",
+                    math(String.raw`S(x)-T(x)=0`), " または ", math(String.raw`S(x)+T(x)=0`),
+                    " である。後者なら定数項を取って",
+                  ]),
+                  displayMath(String.raw`0=\mathrm{ac}_0\bigl(S(x)+T(x)\bigr)=1+1=2`),
+                  paragraph([
+                    "となるが、", math(String.raw`2\ne0`), " は ", math(String.raw`\overline{\mathbb Q}`),
+                    " の標数が零であることに反する。ゆえに ", math(String.raw`S(x)-T(x)=0`),
+                    " であり、", math(String.raw`S(x)=T(x)`), " である。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

@@ -89,4 +89,3 @@ print(f"  対照（対を -mu にした n = psi^dagger_mu psi_{{-mu}} の冪等�
 ok_all &= (w_wrong_pair > _sage_const_1en2 )
 
 print("check_01:", "PASS" if ok_all else "FAIL")
-

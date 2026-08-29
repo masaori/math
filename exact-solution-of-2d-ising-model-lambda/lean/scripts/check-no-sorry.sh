@@ -1536,6 +1536,9 @@ targets=(
   Ising2DLambda.KacWard.kacWardDeterminant_coeff_zero
   Ising2DLambda.NecSuf.KacWard.det_one_sub_X_mul_coeff_zero
   Ising2DLambda.KacWard.kacWardDeterminant_coeff_zero_from_necSuf
+  Ising2DLambda.KacWard.formalSquareRoot_unique
+  Ising2DLambda.NecSuf.KacWard.formalSquareRoot_unique_necSuf
+  Ising2DLambda.KacWard.formalSquareRoot_unique_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
