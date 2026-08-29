@@ -41,6 +41,136 @@
     "TV1_hatZ_hatY_025_claim_arg_gamma2_sum"
   ],
   "unresolvedInventoryDependencies": [],
+  "calculationFormulaBoundaryReview": {
+    "status": "数学的道具立てへ仮分類した計算公式群について、実数解析への脱出、依存境界、イジング固有語彙混入をブロック単位で確定した。",
+    "reviewedEntryCount": 30,
+    "realAnalysisEscapeEntryCount": 18,
+    "finiteComplexMatrixEntryCount": 12,
+    "classificationRule": "完備性・アルキメデス性・実指数関数・三角関数・逆三角関数・Euler公式を直接または依存先経由で使うものを実数解析への脱出とし、それらを使わず有限回の複素数・複素行列・商集合の代数操作だけで閉じるものを有限複素行列側とする。",
+    "reviewedEntryIds": [
+      "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_005_matrix_conjugation",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_016_definition_angle_equivalence_class",
+      "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+      "calc_formulae_017_definition_section_of_angle_representation",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_022_definition_operations_on_polar_representation",
+      "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_028_definition_phi_cartesian",
+      "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+      "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_036_claim_arg_of_reciprocal",
+      "calculation_formulae_038_definition_sqrt_of_complex_number",
+      "calculation_formulae_039_claim_sqrt_expansion_via_polar",
+      "calculation_formulae_040_claim_sqrt_commutativity_condition",
+      "calculation_formulae_041_claim_sqrt_squared_is_original",
+      "calculation_formulae_042_claim_square_of_sqrt",
+      "calculation_formulae_043_claim_sqrt_of_reciprocal",
+      "calculation_formulae_045_theorem_euler_formula_cos_sin",
+      "calculation_formulae_046_claim_conjugation_is_ring_homomorphism"
+    ]
+  },
+  "realAnalysisDependencySources": [
+    {
+      "id": "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+      "labels": [
+        "cosh_sinh_basic_properties"
+      ],
+      "reviewedCalculationFormula": true,
+      "directInputs": [
+        "実指数関数の乗法性 exp(x)exp(y)=exp(x+y)",
+        "実指数関数の単位元での値 exp(0)=1",
+        "実指数関数の正値性 exp(x)>0",
+        "実指数関数の狭義単調増加性"
+      ]
+    },
+    {
+      "id": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "labels": [
+        "sqrt_nonnegative_existence_uniqueness"
+      ],
+      "reviewedCalculationFormula": true,
+      "directInputs": [
+        "実数の完備性（上限性質）"
+      ]
+    },
+    {
+      "id": "calc_formulae_012_definition_arc_length",
+      "labels": [],
+      "reviewedCalculationFormula": false,
+      "directInputs": [
+        "実曲線の弧長"
+      ]
+    },
+    {
+      "id": "calc_formulae_014_definition_inverse_trig_functions",
+      "labels": [],
+      "reviewedCalculationFormula": false,
+      "directInputs": [
+        "実三角関数の連続性と逆関数の存在"
+      ]
+    },
+    {
+      "id": "calc_formulae_015_claim_cos_arctan_sin_arctan",
+      "labels": [
+        "cos_arctan_sin_arctan"
+      ],
+      "reviewedCalculationFormula": false,
+      "directInputs": [
+        "逆三角関数 arctan と三角関数 sin・cos"
+      ]
+    },
+    {
+      "id": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+      "labels": [
+        "angle_section_existence_uniqueness"
+      ],
+      "reviewedCalculationFormula": true,
+      "directInputs": [
+        "実数のアルキメデス性（完備性から従う）"
+      ]
+    },
+    {
+      "id": "calculation_formulae_027_definition_phi_polar",
+      "labels": [
+        "def_phi_polar"
+      ],
+      "reviewedCalculationFormula": true,
+      "directInputs": [
+        "逆三角関数 arctan"
+      ]
+    },
+    {
+      "id": "calculation_formulae_028_definition_phi_cartesian",
+      "labels": [
+        "def_phi_cartesian"
+      ],
+      "reviewedCalculationFormula": true,
+      "directInputs": [
+        "三角関数 sin・cos と周期性"
+      ]
+    },
+    {
+      "id": "calculation_formulae_045_theorem_euler_formula_cos_sin",
+      "labels": [
+        "euler_formula_cos_sin"
+      ],
+      "reviewedCalculationFormula": true,
+      "directInputs": [
+        "Euler の公式と三角関数の偶奇性"
+      ]
+    }
+  ],
   "entries": [
     {
       "id": "calc_formulae_000_cosh_sinh_product",
@@ -74,7 +204,35 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "statement が実指数関数の解析的性質を外部入力として明示する。",
+        "directRealAnalysisInputs": [
+          "実指数関数の乗法性 exp(x)exp(y)=exp(x+y)",
+          "実指数関数の単位元での値 exp(0)=1",
+          "実指数関数の正値性 exp(x)>0",
+          "実指数関数の狭義単調増加性"
+        ],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
@@ -94,7 +252,36 @@
       },
       "dependsOnLabels": [
         "cosh_sinh_basic_properties"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "proof が非可算集合 R の完備性への移行を明示する。",
+        "directRealAnalysisInputs": [
+          "実数の完備性（上限性質）"
+        ],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "cosh_sinh_basic_properties"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [
+            "cosh_sinh_basic_properties"
+          ],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_001_sqrt_nonnegative_real",
@@ -114,7 +301,45 @@
       },
       "dependsOnLabels": [
         "sqrt_nonnegative_existence_uniqueness"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "非負実数の平方根の存在と一意性に依存する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "sqrt_nonnegative_existence_uniqueness"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_002_negative_number_to_sqrt",
@@ -153,7 +378,30 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "有限複素行列の積だけを使う。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_004_action_on_matrix_pair",
@@ -187,7 +435,30 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "有限複素行列の積・和・逆行列だけを使う。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_006_definition_of_cc",
@@ -208,7 +479,33 @@
       "dependsOnLabels": [
         "abs_basic_properties",
         "matrix_exp_series_converges"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "R の対の有限な四則演算として C を定義する。statement 内の二つの参照は、この定義を後で使う箇所の案内であって前提ではない。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [
+            "abs_basic_properties",
+            "matrix_exp_series_converges"
+          ],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_007_inclusion_rr_to_cc",
@@ -226,7 +523,34 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "C の定義のもとで x を (x,0) へ送る有限な代数的写像である。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "definition_of_cc"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [
+            "definition_of_cc"
+          ],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_008_multiply_by_minus_one",
@@ -376,7 +700,30 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "実数上の同値関係と商集合だけを使い、完備性・極限・連続性を使わない。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
@@ -394,7 +741,32 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "proof が有理数体の代数だけでは閉じない箇所を明示する。",
+        "directRealAnalysisInputs": [
+          "実数のアルキメデス性（完備性から従う）"
+        ],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_017_definition_section_of_angle_representation",
@@ -414,7 +786,45 @@
       },
       "dependsOnLabels": [
         "angle_section_existence_uniqueness"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "角度切断の存在と一意性に依存する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+            "sourceLabels": [
+              "angle_section_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）"
+            ],
+            "pathLabels": [
+              "angle_section_existence_uniqueness"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "angle_section_existence_uniqueness"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calc_formulae_018_definition_angle_representation_of_rr",
@@ -450,7 +860,34 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "角度表現の同値類を使って実数対上の同値関係と商集合を定める。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "angle_equivalence_class"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [
+            "angle_equivalence_class"
+          ],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_022_definition_operations_on_polar_representation",
@@ -468,7 +905,36 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "二つの同値類の定義のもとで極座標表現上の有限な積・逆元を定める。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "angle_equivalence_class",
+            "polar_equivalence_class"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [
+            "angle_equivalence_class",
+            "polar_equivalence_class"
+          ],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
@@ -490,7 +956,34 @@
         "angle_equivalence_class",
         "operations_on_polar_representation",
         "polar_equivalence_class"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "極座標表現の有限な代数演算だけを使う。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "angle_equivalence_class",
+            "operations_on_polar_representation",
+            "polar_equivalence_class"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
@@ -511,7 +1004,33 @@
       "dependsOnLabels": [
         "definition_of_cc",
         "inclusion_rr_to_cc"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "複素数の有限な乗法計算だけを使う。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "definition_of_cc",
+            "inclusion_rr_to_cc"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_025_claim_complex_numbers_form_a_field",
@@ -534,7 +1053,41 @@
         "inclusion_rr_to_cc",
         "multiplicative_group_of_cc",
         "multiply_by_minus_one"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "複素数の有限な四則演算だけを使う。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "definition_of_cc",
+            "inclusion_rr_to_cc",
+            "multiplicative_group_of_cc"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [
+            "multiply_by_minus_one"
+          ],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": [
+            {
+              "label": "multiply_by_minus_one",
+              "ownerId": "calc_formulae_008_multiply_by_minus_one"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_027_definition_phi_polar",
@@ -552,7 +1105,54 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "非負実数の平方根と極座標表現は暗黙前提ラベルから辿り、ラベルを持たない arctan だけを直接解析入力とする。",
+        "directRealAnalysisInputs": [
+          "逆三角関数 arctan"
+        ],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "definition_of_cc",
+            "definition_of_sqrt_r_positive",
+            "polar_equivalence_class"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [
+            "definition_of_cc",
+            "definition_of_sqrt_r_positive",
+            "polar_equivalence_class"
+          ],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_028_definition_phi_cartesian",
@@ -570,7 +1170,38 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "複素数と極座標表現は暗黙前提ラベルから辿り、ラベルを持たない sin・cos と周期性を直接解析入力とする。",
+        "directRealAnalysisInputs": [
+          "三角関数 sin・cos と周期性"
+        ],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "definition_of_cc",
+            "polar_equivalence_class"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [
+            "definition_of_cc",
+            "polar_equivalence_class"
+          ],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
@@ -597,7 +1228,98 @@
         "negative_number_to_sqrt",
         "operations_on_polar_representation",
         "sqrt_nonnegative_existence_uniqueness"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "平方根・逆三角関数・三角関数を使う写像に依存する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_015_claim_cos_arctan_sin_arctan",
+            "sourceLabels": [
+              "cos_arctan_sin_arctan"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan と三角関数 sin・cos"
+            ],
+            "pathLabels": [
+              "cos_arctan_sin_arctan"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_027_definition_phi_polar",
+            "sourceLabels": [
+              "def_phi_polar"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan"
+            ],
+            "pathLabels": [
+              "def_phi_polar"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_028_definition_phi_cartesian",
+            "sourceLabels": [
+              "def_phi_cartesian"
+            ],
+            "directInputs": [
+              "三角関数 sin・cos と周期性"
+            ],
+            "pathLabels": [
+              "def_phi_cartesian"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "def_phi_cartesian",
+            "def_phi_polar",
+            "definition_of_cc",
+            "definition_of_sqrt_r_positive",
+            "operations_on_polar_representation",
+            "sqrt_nonnegative_existence_uniqueness"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [
+            "cos_arctan_sin_arctan",
+            "negative_number_to_sqrt"
+          ],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": [
+            {
+              "label": "cos_arctan_sin_arctan",
+              "ownerId": "calc_formulae_015_claim_cos_arctan_sin_arctan"
+            },
+            {
+              "label": "negative_number_to_sqrt",
+              "ownerId": "calc_formulae_002_negative_number_to_sqrt"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_030_definition_first_and_second_projections",
@@ -615,7 +1337,34 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "極座標表現の同値類からの有限な座標射影だけを使う。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "polar_equivalence_class"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [
+            "polar_equivalence_class"
+          ],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_031_definition_abs_arg",
@@ -633,7 +1382,80 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "絶対値と偏角が使う極座標写像・座標射影・角度切断を暗黙前提ラベルから辿る。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "def_phi_polar",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+            "sourceLabels": [
+              "angle_section_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）"
+            ],
+            "pathLabels": [
+              "section_of_angle_representation",
+              "angle_section_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_027_definition_phi_polar",
+            "sourceLabels": [
+              "def_phi_polar"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan"
+            ],
+            "pathLabels": [
+              "def_phi_polar"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "def_phi_polar",
+            "definition_of_cc",
+            "first_and_second_projections",
+            "section_of_angle_representation"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [
+            "def_phi_polar",
+            "definition_of_cc",
+            "first_and_second_projections",
+            "section_of_angle_representation"
+          ],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_031b_claim_abs_basic_properties",
@@ -661,7 +1483,57 @@
         "inclusion_rr_to_cc",
         "multiplicative_group_of_cc",
         "polar_equivalence_class"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "絶対値・極座標写像・非負実数の平方根に依存する。ただし偏角と極座標写像の角度成分は使わない。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "complex_numbers_form_a_field",
+            "def_abs_arg",
+            "def_phi_polar",
+            "definition_of_cc",
+            "definition_of_sqrt_r_positive",
+            "first_and_second_projections",
+            "inclusion_rr_to_cc",
+            "multiplicative_group_of_cc",
+            "polar_equivalence_class"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [
+            "def_abs_arg",
+            "def_phi_polar"
+          ],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_032_claim_arg_of_product",
@@ -785,7 +1657,103 @@
         "multiplicative_group_of_cc",
         "multiplicative_group_of_polar_representation",
         "section_of_angle_representation"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "偏角と角度切断に依存する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "isomorphism_of_phi_cartesian",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_015_claim_cos_arctan_sin_arctan",
+            "sourceLabels": [
+              "cos_arctan_sin_arctan"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan と三角関数 sin・cos"
+            ],
+            "pathLabels": [
+              "isomorphism_of_phi_cartesian",
+              "cos_arctan_sin_arctan"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+            "sourceLabels": [
+              "angle_section_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）"
+            ],
+            "pathLabels": [
+              "angle_section_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_027_definition_phi_polar",
+            "sourceLabels": [
+              "def_phi_polar"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan"
+            ],
+            "pathLabels": [
+              "def_abs_arg",
+              "def_phi_polar"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_028_definition_phi_cartesian",
+            "sourceLabels": [
+              "def_phi_cartesian"
+            ],
+            "directInputs": [
+              "三角関数 sin・cos と周期性"
+            ],
+            "pathLabels": [
+              "isomorphism_of_phi_cartesian",
+              "def_phi_cartesian"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "angle_section_existence_uniqueness",
+            "def_abs_arg",
+            "first_and_second_projections",
+            "isomorphism_of_phi_cartesian",
+            "multiplicative_group_of_cc",
+            "multiplicative_group_of_polar_representation",
+            "section_of_angle_representation"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_038_definition_sqrt_of_complex_number",
@@ -803,7 +1771,97 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "複素平方根が使う非負実数の平方根・角度切断・二つの極座標写像を暗黙前提ラベルから辿る。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+            "sourceLabels": [
+              "angle_section_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）"
+            ],
+            "pathLabels": [
+              "section_of_angle_representation",
+              "angle_section_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_027_definition_phi_polar",
+            "sourceLabels": [
+              "def_phi_polar"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan"
+            ],
+            "pathLabels": [
+              "def_phi_polar"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_028_definition_phi_cartesian",
+            "sourceLabels": [
+              "def_phi_cartesian"
+            ],
+            "directInputs": [
+              "三角関数 sin・cos と周期性"
+            ],
+            "pathLabels": [
+              "def_phi_cartesian"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "def_phi_cartesian",
+            "def_phi_polar",
+            "definition_of_cc",
+            "definition_of_sqrt_r_positive",
+            "first_and_second_projections",
+            "polar_equivalence_class",
+            "section_of_angle_representation"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [
+            "def_phi_cartesian",
+            "def_phi_polar",
+            "definition_of_cc",
+            "definition_of_sqrt_r_positive",
+            "first_and_second_projections",
+            "polar_equivalence_class",
+            "section_of_angle_representation"
+          ],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_039_claim_sqrt_expansion_via_polar",
@@ -831,7 +1889,90 @@
         "first_and_second_projections",
         "polar_equivalence_class",
         "section_of_angle_representation"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "非負実数の平方根・角度切断・極座標写像に依存する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+            "sourceLabels": [
+              "angle_section_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）"
+            ],
+            "pathLabels": [
+              "angle_section_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_027_definition_phi_polar",
+            "sourceLabels": [
+              "def_phi_polar"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan"
+            ],
+            "pathLabels": [
+              "def_phi_polar"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_028_definition_phi_cartesian",
+            "sourceLabels": [
+              "def_phi_cartesian"
+            ],
+            "directInputs": [
+              "三角関数 sin・cos と周期性"
+            ],
+            "pathLabels": [
+              "def_phi_cartesian"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "angle_equivalence_class",
+            "angle_section_existence_uniqueness",
+            "def_phi_cartesian",
+            "def_phi_polar",
+            "def_sqrt_cc",
+            "definition_of_sqrt_r_positive",
+            "first_and_second_projections",
+            "polar_equivalence_class",
+            "section_of_angle_representation"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_040_claim_sqrt_commutativity_condition",
@@ -860,7 +2001,105 @@
         "operations_on_polar_representation",
         "section_of_angle_representation",
         "sqrt_expansion_via_polar"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "複素平方根・偏角・角度切断に依存する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_015_claim_cos_arctan_sin_arctan",
+            "sourceLabels": [
+              "cos_arctan_sin_arctan"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan と三角関数 sin・cos"
+            ],
+            "pathLabels": [
+              "isomorphism_of_phi_cartesian",
+              "cos_arctan_sin_arctan"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+            "sourceLabels": [
+              "angle_section_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）"
+            ],
+            "pathLabels": [
+              "angle_section_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_027_definition_phi_polar",
+            "sourceLabels": [
+              "def_phi_polar"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan"
+            ],
+            "pathLabels": [
+              "def_abs_arg",
+              "def_phi_polar"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_028_definition_phi_cartesian",
+            "sourceLabels": [
+              "def_phi_cartesian"
+            ],
+            "directInputs": [
+              "三角関数 sin・cos と周期性"
+            ],
+            "pathLabels": [
+              "def_phi_cartesian"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "angle_section_existence_uniqueness",
+            "def_abs_arg",
+            "def_phi_cartesian",
+            "def_sqrt_cc",
+            "definition_of_sqrt_r_positive",
+            "first_and_second_projections",
+            "isomorphism_of_phi_cartesian",
+            "operations_on_polar_representation",
+            "section_of_angle_representation",
+            "sqrt_expansion_via_polar"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_041_claim_sqrt_squared_is_original",
@@ -886,7 +2125,102 @@
         "operations_on_polar_representation",
         "polar_equivalence_class",
         "sqrt_expansion_via_polar"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "非負実数の平方根と複素平方根に依存する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_015_claim_cos_arctan_sin_arctan",
+            "sourceLabels": [
+              "cos_arctan_sin_arctan"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan と三角関数 sin・cos"
+            ],
+            "pathLabels": [
+              "isomorphism_of_phi_cartesian",
+              "cos_arctan_sin_arctan"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+            "sourceLabels": [
+              "angle_section_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）"
+            ],
+            "pathLabels": [
+              "angle_section_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_027_definition_phi_polar",
+            "sourceLabels": [
+              "def_phi_polar"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan"
+            ],
+            "pathLabels": [
+              "def_phi_polar"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_028_definition_phi_cartesian",
+            "sourceLabels": [
+              "def_phi_cartesian"
+            ],
+            "directInputs": [
+              "三角関数 sin・cos と周期性"
+            ],
+            "pathLabels": [
+              "isomorphism_of_phi_cartesian",
+              "def_phi_cartesian"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "angle_section_existence_uniqueness",
+            "def_phi_polar",
+            "definition_of_sqrt_r_positive",
+            "isomorphism_of_phi_cartesian",
+            "operations_on_polar_representation",
+            "polar_equivalence_class",
+            "sqrt_expansion_via_polar"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_042_claim_square_of_sqrt",
@@ -908,7 +2242,102 @@
         "condition_of_commutativity_of_sqrt_and_product",
         "def_abs_arg",
         "sqrt_squared_is_original"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "複素平方根と偏角に依存する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "condition_of_commutativity_of_sqrt_and_product",
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_015_claim_cos_arctan_sin_arctan",
+            "sourceLabels": [
+              "cos_arctan_sin_arctan"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan と三角関数 sin・cos"
+            ],
+            "pathLabels": [
+              "condition_of_commutativity_of_sqrt_and_product",
+              "isomorphism_of_phi_cartesian",
+              "cos_arctan_sin_arctan"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+            "sourceLabels": [
+              "angle_section_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）"
+            ],
+            "pathLabels": [
+              "condition_of_commutativity_of_sqrt_and_product",
+              "angle_section_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_027_definition_phi_polar",
+            "sourceLabels": [
+              "def_phi_polar"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan"
+            ],
+            "pathLabels": [
+              "def_abs_arg",
+              "def_phi_polar"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_028_definition_phi_cartesian",
+            "sourceLabels": [
+              "def_phi_cartesian"
+            ],
+            "directInputs": [
+              "三角関数 sin・cos と周期性"
+            ],
+            "pathLabels": [
+              "condition_of_commutativity_of_sqrt_and_product",
+              "def_phi_cartesian"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "condition_of_commutativity_of_sqrt_and_product",
+            "def_abs_arg",
+            "sqrt_squared_is_original"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_043_claim_sqrt_of_reciprocal",
@@ -940,7 +2369,108 @@
         "range_of_args_of_reciprocal_of_complex_numbers",
         "sqrt_expansion_via_polar",
         "sqrt_squared_is_original"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "非負実数・複素数の平方根と角度切断に依存する。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_015_claim_cos_arctan_sin_arctan",
+            "sourceLabels": [
+              "cos_arctan_sin_arctan"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan と三角関数 sin・cos"
+            ],
+            "pathLabels": [
+              "condition_of_commutativity_of_sqrt_and_product",
+              "isomorphism_of_phi_cartesian",
+              "cos_arctan_sin_arctan"
+            ]
+          },
+          {
+            "sourceId": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+            "sourceLabels": [
+              "angle_section_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数のアルキメデス性（完備性から従う）"
+            ],
+            "pathLabels": [
+              "angle_section_existence_uniqueness"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_027_definition_phi_polar",
+            "sourceLabels": [
+              "def_phi_polar"
+            ],
+            "directInputs": [
+              "逆三角関数 arctan"
+            ],
+            "pathLabels": [
+              "def_phi_polar"
+            ]
+          },
+          {
+            "sourceId": "calculation_formulae_028_definition_phi_cartesian",
+            "sourceLabels": [
+              "def_phi_cartesian"
+            ],
+            "directInputs": [
+              "三角関数 sin・cos と周期性"
+            ],
+            "pathLabels": [
+              "def_phi_cartesian"
+            ]
+          }
+        ],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "angle_section_existence_uniqueness",
+            "condition_of_commutativity_of_sqrt_and_product",
+            "def_abs_arg",
+            "def_phi_cartesian",
+            "def_phi_polar",
+            "definition_of_cc",
+            "definition_of_sqrt_r_positive",
+            "inclusion_rr_to_cc",
+            "multiplicative_group_of_cc",
+            "polar_equivalence_class",
+            "range_of_args_of_reciprocal_of_complex_numbers",
+            "sqrt_expansion_via_polar",
+            "sqrt_squared_is_original"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_044_claim_reciprocal_of_sqrt",
@@ -979,7 +2509,36 @@
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
-      "dependsOnLabels": []
+      "dependsOnLabels": [],
+      "calculationFormulaBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "rationale": "proof が Euler の公式と sin・cos の解析的事実を外部入力として使う。",
+        "directRealAnalysisInputs": [
+          "Euler の公式と三角関数の偶奇性"
+        ],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "definition_of_cc"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [
+            "definition_of_cc"
+          ],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
@@ -999,7 +2558,32 @@
       },
       "dependsOnLabels": [
         "mat_conj"
-      ]
+      ],
+      "calculationFormulaBoundaryReview": {
+        "closure": "有限複素行列だけで閉じる",
+        "rationale": "有限複素行列の共役計算だけを使う。",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [],
+        "dependencyBoundary": {
+          "insideReviewedCalculationFormulaLabels": [
+            "mat_conj"
+          ],
+          "outsideReviewedCalculationFormulaLabels": [],
+          "implicitPrerequisiteLabels": [],
+          "referenceLabelsNotUsedAsPrerequisites": [],
+          "realAnalysisPropagationExcludedLabels": [],
+          "outsideReviewedCalculationFormulaOwners": []
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "calculation_formulae_047_claim_commutator_via_anticommutators",
@@ -3324,7 +4908,7 @@
       "provisionalFinalChapter": "2次元イジングモデル",
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [
           "フェルミオン"
         ],
@@ -5306,7 +6890,9 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "incomingReferenceCount": 3,
-        "isingSemanticMatches": [],
+        "isingSemanticMatches": [
+          "転送"
+        ],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
       "dependsOnLabels": [
@@ -5356,15 +6942,13 @@
       "provisionalFinalChapter": "2次元イジングモデル",
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
       },
       "dependsOnLabels": [
         "anticommutator_of_check_psi",
-        "def_check_index_set",
-        "def_check_number_operator",
-        "number_operator_idempotent"
+        "def_check_index_set"
       ]
     },
     {
@@ -5385,7 +6969,8 @@
       },
       "dependsOnLabels": [
         "anticommutator_of_check_psi",
-        "def_check_index_set"
+        "def_check_index_set",
+        "def_check_number_operator"
       ]
     },
     {
@@ -5406,6 +6991,7 @@
       },
       "dependsOnLabels": [
         "check_joint_eigenspace_decomposition",
+        "check_number_operator_idempotent",
         "check_number_operators_commute",
         "def_check_number_operator",
         "def_trace",
