@@ -2149,13 +2149,20 @@ V_2
         " でなく、辺々割ることができて",
       ]),
       displayMath(
-        String.raw`\frac{\mathrm{tr}\!\left(V^{(+)}\right)}
+        String.raw`\begin{aligned}
+\frac{\mathrm{tr}\!\left(V^{(+)}\right)}
 {\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)}
-= \frac{c\,\mathrm{tr}\!\left(\check{V}'\right)}
+&= \frac{c\,\mathrm{tr}\!\left(\check{V}'\right)}
 {c^{-1}\,\mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)}
-= c^2\,\frac{\mathrm{tr}\!\left(\check{V}'\right)}
+   \quad (\because \text{Step 3 の二つのトレース表示}) \\
+&= c^2\,\frac{\mathrm{tr}\!\left(\check{V}'\right)}
 {\mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)}
-= c^2`,
+   \quad (\because \mathbb{C}\text{ の四則}) \\
+&= c^2
+   \quad \left(\because
+   \mathrm{tr}\!\left(\check{V}'\right)
+   = \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right) > 0\right)
+\end{aligned}`,
       ),
       paragraph([
         "一方 Step 1・Step 2 より（",
@@ -2167,9 +2174,14 @@ V_2
         "）",
       ]),
       displayMath(
-        String.raw`\frac{\mathrm{tr}\!\left(V^{(+)}\right)}
+        String.raw`\begin{aligned}
+\frac{\mathrm{tr}\!\left(V^{(+)}\right)}
 {\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)}
-= \frac{(2s_2)^{M/2}\,\tau}{(2s_2)^{-M/2}\,\tau} = (2s_2)^{M}`,
+&= \frac{(2s_2)^{M/2}\,\tau}{(2s_2)^{-M/2}\,\tau}
+   \quad (\because \text{Step 1・Step 2}) \\
+&= (2s_2)^M
+   \quad (\because \tau\neq0\text{ と }\mathbb{C}\text{ の四則})
+\end{aligned}`,
       ),
       paragraph(["よって ", math(String.raw`c^2 = (2s_2)^{M}`), "。"]),
       paragraph([

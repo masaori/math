@@ -1584,6 +1584,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.card_eq_sum_fiber_card_necSuf
   Ising2DLambda.KacWard.crossing_number_vertex_decomposition
   Ising2DLambda.KacWard.crossing_number_vertex_decomposition_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.opposite_bool_unordered_pairs_card_necSuf
+  Ising2DLambda.KacWard.vertex_crossing_number_factorization
+  Ising2DLambda.KacWard.vertex_crossing_number_factorization_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

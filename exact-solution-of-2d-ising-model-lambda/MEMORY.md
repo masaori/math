@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 10 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 11 回目の tick 時点）
+
+**頂点ごとの横断数が二軸の直進通過数の積になることを四層で証明した。** 頂点 $v$ を軸 $a\in\mathbb Z/2\mathbb Z$ に沿って直進する通過数 $n_{v,a}(\gamma)\in\mathbb N$（`def_vertex_axis_straight_visit_count`）を定義し、軸 0 と軸 1 の通過の直積から二添字を小さい順に並べる全単射により $c_v(\gamma)=n_{v,0}(\gamma)n_{v,1}(\gamma)$（`claim_vertex_crossing_number_factorization`）を得た。SageMath `vertex-crossing-factorization` は閉歩道 1,064 件・頂点 5,480 件（多重直進通過 92 件）を `ZZ` で厳密検査した。Lean は `KacWard/VertexCrossingFactorization.lean` と必要十分版 `opposite_bool_unordered_pairs_card_necSuf` を通し、必要十分版には有限全順序集合と二値写像だけが残る。次は選んだ一横断の平滑化で二軸の直進通過数が一つずつ減ることから、頂点ごとの横断数の更新式を示す。
+
+前進前レビューでは、前 tick の横断数の頂点ごとの分解に混入していた未形式化の偶奇帰結を本文と SageMath から削除し、コミット `61beb98b` として前進前に push した。定義と和の等式は後続が直接引くため「何も言っていない主張」ではない。
+
+並列の式変形統一は、姉妹側の「定数 $c$ の決定」の Step 3 にあるトレース比の一行四等号と一行三等号を、一行一等号・行末根拠つきへ開いた。対象検算 check_05・check・PDF 340 ページを通した。次は同じ証明の残りの複数等号を見る。
+
+## ひとつ前の到達点（2026-08-30 の 10 回目の tick 時点）
 
 **閉歩道の横断数が通過頂点ごとの横断数の和に分解されることを四層で証明した。** 横断対の二つの通過の頂点は等しいので、横断対の頂点を第一添字の通過の頂点として定めてよい。頂点ごとの横断数 $c_v(\gamma):=|C_v|\in\mathbb N$（`def_vertexwise_crossing_number`）を導入し、被覆（各横断対の頂点は $V_L$ の元）と互いに素（一つの対の頂点は一つに定まる）の二段で $c(\gamma)=\sum_{v\in V_L}c_v(\gamma)$（`claim_crossing_number_vertex_decomposition`）を得た。平滑化が横断数の偶奇へ与える影響は頂点ごとの和へ切り分けられる。SageMath `crossing-number-vertex-decomposition` は閉歩道 1,064 件・横断対 96 対を `ZZ` で厳密検査し、Lean は `KacWard/CrossingNumberVertexDecomposition.lean`（`Fintype V` 上の和）と必要十分版 `card_eq_sum_fiber_card_necSuf`（仮定は二つの型の決定可能な等号と値の被覆だけ）を通した。次は同じ頂点を三回以上通る頂点の局所解析（頂点ごとの横断数と平滑化）を進める。
 

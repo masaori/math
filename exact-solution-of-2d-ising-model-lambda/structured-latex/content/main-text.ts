@@ -50942,6 +50942,102 @@ c(\gamma)&=|C|
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_vertex_crossing_factorization",
+        labels: [],
+        title: { text: "多重通過頂点の横断数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_vertex_crossing_number_factorization",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_vertex_axis_straight_visit_count",
+                    kind: "definition",
+                    title: { text: "頂点と軸を固定した直進通過数" },
+                    labels: ["def_vertex_axis_straight_visit_count"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                        "、格子頂点 ", math(String.raw`v\in V_L`), "、軸 ",
+                        math(String.raw`a\in\mathbb Z/2\mathbb Z`), " を取る。添字 ",
+                        math(String.raw`k\in I_m`), " の通過は ", ref("def_closed_walk_passes"),
+                        "、直進性と軸は ", ref("def_transverse_crossing"), " のものとする。頂点 ",
+                        math(String.raw`v`), " を軸 ", math(String.raw`a`),
+                        " に沿って直進する通過の個数 ", math(String.raw`n_{v,a}(\gamma)\in\mathbb N`), " を",
+                      ]),
+                      displayMath(String.raw`n_{v,a}(\gamma):=\bigl|\{k\in I_m\mid
+\operatorname{tgt}(\vec e_k)=v,\ \tau(\vec e_k,\vec e_{\sigma(k)})=0,\
+\operatorname{ax}(\operatorname{dir}(\vec e_k))=a\}\bigr|`),
+                      paragraph([
+                        "で定める。有限な添字集合の部分集合の元の個数なので、値は自然数として定まる。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_vertex_crossing_number_factorization",
+                kind: "claim",
+                title: { text: "頂点ごとの横断数は二軸の直進通過数の積である" },
+                labels: ["claim_vertex_crossing_number_factorization"],
+                habitat: "N",
+                verification: ["sagemath/check/vertex-crossing-factorization"],
+                lean: [
+                  "Ising2DLambda.KacWard.vertex_crossing_number_factorization",
+                  "Ising2DLambda.NecSuf.KacWard.opposite_bool_unordered_pairs_card_necSuf",
+                  "Ising2DLambda.KacWard.vertex_crossing_number_factorization_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の閉じた非後退辺列 ", math(String.raw`\gamma`), " と格子頂点 ",
+                    math(String.raw`v\in V_L`), " について",
+                  ]),
+                  displayMath(String.raw`c_v(\gamma)=n_{v,0}(\gamma)\,n_{v,1}(\gamma)`),
+                  paragraph([
+                    "が成り立つ（左辺は ", ref("def_vertexwise_crossing_number"),
+                    "、右辺は ", ref("def_vertex_axis_straight_visit_count"), "）。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`H_v:=\{k\in I_m\mid k\text{ は }v\text{ を軸 }0\text{ に沿って直進する}\}`),
+                    "、", math(String.raw`V_v:=\{k\in I_m\mid k\text{ は }v\text{ を軸 }1\text{ に沿って直進する}\}`),
+                    " と置く。", ref("def_vertex_axis_straight_visit_count"), " より ",
+                    math(String.raw`|H_v|=n_{v,0}(\gamma)`), "、",
+                    math(String.raw`|V_v|=n_{v,1}(\gamma)`), " である。",
+                  ]),
+                  paragraph([
+                    "直積 ", math(String.raw`H_v\times V_v`), " の元の二添字を小さい順に並べる写像を取る。",
+                    "同じ頂点を異なる軸で直進する二通過は横断する（", ref("def_index_pair_crossing"),
+                    "）。逆に、頂点 ", math(String.raw`v`),
+                    " の横断対から軸 0 の添字と軸 1 の添字をこの順に取ると、",
+                    math(String.raw`H_v\times V_v`), " の元が一意に戻る。二つの写像は互いに逆なので",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+c_v(\gamma)&=|H_v\times V_v|
+&&\bigl(\because\ \text{上の全単射と }\blkref{def_vertexwise_crossing_number}\bigr)\\
+&=|H_v|\,|V_v|
+&&\bigl(\because\ \text{有限集合の直積の個数}\bigr)\\
+&=n_{v,0}(\gamma)\,n_{v,1}(\gamma)
+&&\bigl(\because\ \blkref{def_vertex_axis_straight_visit_count}\bigr)
+\end{aligned}`),
+                  paragraph(["を得る。全過程は有限集合の全単射と自然数の乗法だけで閉じる。"]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
