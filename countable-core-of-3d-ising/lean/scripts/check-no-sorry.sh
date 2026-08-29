@@ -764,6 +764,12 @@ targets=(
   Ising3DCut.Prediction.periodicSquareFiberToPairingsProduct_injective
   Ising3DCut.Prediction.periodicSquarePairingsProductInternalEdges_subset_internalEdges
   Ising3DCut.Prediction.periodicSquarePairingsProductMatching_subset_terminalEdges
+  Ising3DCut.Prediction.biUnion_periodicSquarePairingsProductInternalEdges
+  Ising3DCut.Prediction.pairwiseDisjoint_periodicSquarePairingsProductInternalEdges
+  Ising3DCut.Prediction.disjoint_periodicSquarePairingsProductInternalEdges_externalEdges
+  Ising3DCut.Prediction.pairwiseDisjoint_periodicSquarePairingsProductMatching
+  Ising3DCut.Prediction.biUnion_periodicSquarePairingsProductMatching
+  Ising3DCut.Prediction.periodicSquarePairingsProductMatching_isPerfectMatching
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

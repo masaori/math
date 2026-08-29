@@ -1324,4 +1324,181 @@ theorem periodicSquarePairingsProductMatching_subset_terminalEdges
     rw [mem_externalEdges_iff]
     exact ⟨e, Finset.mem_univ e, rfl⟩
 
+/-- 指定した対分けを束ねた内部辺は、全 city の残存端子をちょうど覆う。 -/
+theorem biUnion_periodicSquarePairingsProductInternalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    (periodicSquarePairingsProductInternalEdges subgraph pairings).biUnion id =
+      Finset.univ.biUnion (encodePeriodicSquareRemainingTerminalsAt subgraph) := by
+  ext t
+  simp only [periodicSquarePairingsProductInternalEdges, Finset.mem_biUnion]
+  constructor
+  · rintro ⟨s, ⟨v, hv, hsv⟩, hts⟩
+    refine ⟨v, hv, ?_⟩
+    have hp := (mem_periodicSquarePairingsAt_iff subgraph v (pairings v).1).mp
+      (pairings v).2
+    rw [← hp.2.2]
+    exact Finset.mem_biUnion.mpr ⟨s, hsv, hts⟩
+  · rintro ⟨v, hv, htv⟩
+    have hp := (mem_periodicSquarePairingsAt_iff subgraph v (pairings v).1).mp
+      (pairings v).2
+    rw [← hp.2.2] at htv
+    obtain ⟨s, hsv, hts⟩ := Finset.mem_biUnion.mp htv
+    exact ⟨s, ⟨v, hv, hsv⟩, hts⟩
+
+/-- 指定した対分けを全 city にわたって束ねても、相異なる内部辺は端子を共有しない。 -/
+theorem pairwiseDisjoint_periodicSquarePairingsProductInternalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    (periodicSquarePairingsProductInternalEdges subgraph pairings :
+      Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id := by
+  intro s₁ hs₁ s₂ hs₂ hne
+  obtain ⟨v₁, _, hs₁v⟩ := Finset.mem_biUnion.mp hs₁
+  obtain ⟨v₂, _, hs₂v⟩ := Finset.mem_biUnion.mp hs₂
+  refine Finset.disjoint_left.mpr ?_
+  intro t ht₁ ht₂
+  have hp₁ := (mem_periodicSquarePairingsAt_iff subgraph v₁ (pairings v₁).1).mp
+    (pairings v₁).2
+  have hp₂ := (mem_periodicSquarePairingsAt_iff subgraph v₂ (pairings v₂).1).mp
+    (pairings v₂).2
+  have htRem₁ : t ∈ encodePeriodicSquareRemainingTerminalsAt subgraph v₁ := by
+    rw [← hp₁.2.2]
+    exact Finset.mem_biUnion.mpr ⟨s₁, hs₁v, ht₁⟩
+  have htRem₂ : t ∈ encodePeriodicSquareRemainingTerminalsAt subgraph v₂ := by
+    rw [← hp₂.2.2]
+    exact Finset.mem_biUnion.mpr ⟨s₂, hs₂v, ht₂⟩
+  have hv₁ : t.1 = v₁ := by
+    have hcity := (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v₁ t).mp
+      htRem₁ |>.1
+    have hcity' : t.1 = v₁ ∧ t.2 ∈ latticeIncidentEdges t.1 := by
+      simpa [terminalsAt] using hcity
+    exact hcity'.1
+  have hv₂ : t.1 = v₂ := by
+    have hcity := (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v₂ t).mp
+      htRem₂ |>.1
+    have hcity' : t.1 = v₂ ∧ t.2 ∈ latticeIncidentEdges t.1 := by
+      simpa [terminalsAt] using hcity
+    exact hcity'.1
+  have hv : v₁ = v₂ := hv₁.symm.trans hv₂
+  rw [← hv] at hs₂v
+  exact Finset.disjoint_left.mp (hp₁.2.1 hs₁v hs₂v hne) ht₁ ht₂
+
+/-- 指定対分けの内部辺と、polygon に属さない辺の外部辺は端子を共有しない。 -/
+theorem disjoint_periodicSquarePairingsProductInternalEdges_externalEdges
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v})
+    (s t : Finset (Σ _ : LatticeVertex n, LatticeEdge n))
+    (hs : s ∈ periodicSquarePairingsProductInternalEdges subgraph pairings)
+    (ht : t ∈ encodePeriodicSquareExternalEdges subgraph) :
+    Disjoint s t := by
+  obtain ⟨v, _, hsv⟩ := Finset.mem_biUnion.mp hs
+  obtain ⟨e, he, rfl⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph t).mp ht
+  refine Finset.disjoint_left.mpr ?_
+  intro x hxs hxe
+  have hp := (mem_periodicSquarePairingsAt_iff subgraph v (pairings v).1).mp
+    (pairings v).2
+  have hxRem : x ∈ encodePeriodicSquareRemainingTerminalsAt subgraph v := by
+    rw [← hp.2.2]
+    exact Finset.mem_biUnion.mpr ⟨s, hsv, hxs⟩
+  have hxsub : x.2 ∈ subgraph.1 :=
+    (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v x).mp hxRem |>.2
+  have hx : x = ⟨latticeEndpoint₀ e, e⟩ ∨ x = ⟨latticeEndpoint₁ e, e⟩ := by
+    simpa [externalEdge] using hxe
+  rcases hx with rfl | rfl <;> exact he hxsub
+
+/-- 指定対分けから構成した候補の相異なる二辺は端子を共有しない。 -/
+theorem pairwiseDisjoint_periodicSquarePairingsProductMatching
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    (periodicSquarePairingsProductMatching subgraph pairings :
+      Set (Finset (Σ _ : LatticeVertex n, LatticeEdge n))).PairwiseDisjoint id := by
+  intro s₁ hs₁ s₂ hs₂ hne
+  rw [Finset.mem_coe, periodicSquarePairingsProductMatching, Finset.mem_union] at hs₁ hs₂
+  rcases hs₁ with hs₁ | hs₁ <;> rcases hs₂ with hs₂ | hs₂
+  · exact pairwiseDisjoint_periodicSquarePairingsProductInternalEdges subgraph pairings
+      hs₁ hs₂ hne
+  · exact disjoint_periodicSquarePairingsProductInternalEdges_externalEdges subgraph
+      pairings s₁ s₂ hs₁ hs₂
+  · exact (disjoint_periodicSquarePairingsProductInternalEdges_externalEdges subgraph
+      pairings s₂ s₁ hs₂ hs₁).symm
+  · exact pairwiseDisjoint_encodePeriodicSquareExternalEdges subgraph hs₁ hs₂ hne
+
+/-- 指定対分けから構成した候補は terminal graph の全端子を覆う。 -/
+theorem biUnion_periodicSquarePairingsProductMatching
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    (periodicSquarePairingsProductMatching subgraph pairings).biUnion id =
+      terminalVertices Finset.univ latticeIncidentEdges := by
+  ext t
+  constructor
+  · intro ht
+    obtain ⟨s, hs, hts⟩ := Finset.mem_biUnion.mp ht
+    rw [periodicSquarePairingsProductMatching, Finset.mem_union] at hs
+    rcases hs with hs | hs
+    · have htInternal :
+          t ∈ (periodicSquarePairingsProductInternalEdges subgraph pairings).biUnion id :=
+        Finset.mem_biUnion.mpr ⟨s, hs, hts⟩
+      rw [biUnion_periodicSquarePairingsProductInternalEdges] at htInternal
+      obtain ⟨v, _, htv⟩ := Finset.mem_biUnion.mp htInternal
+      rw [mem_terminalVertices_iff]
+      have hrem := (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mp htv
+      have htcity : t.1 = v ∧ t.2 ∈ latticeIncidentEdges t.1 := by
+        simpa [terminalsAt] using hrem.1
+      exact ⟨Finset.mem_univ _, htcity.2⟩
+    · obtain ⟨e, _, rfl⟩ := (mem_encodePeriodicSquareExternalEdges_iff subgraph s).mp hs
+      rw [mem_terminalVertices_iff]
+      simp only [Finset.mem_univ, true_and]
+      have htendpoint : t = ⟨latticeEndpoint₀ e, e⟩ ∨
+          t = ⟨latticeEndpoint₁ e, e⟩ := by
+        simpa [externalEdge] using hts
+      rcases htendpoint with rfl | rfl <;> simp [latticeIncidentEdges]
+  · intro ht
+    rw [mem_terminalVertices_iff] at ht
+    by_cases he : t.2 ∈ subgraph.1
+    · have htInternal :
+          t ∈ (periodicSquarePairingsProductInternalEdges subgraph pairings).biUnion id := by
+        rw [biUnion_periodicSquarePairingsProductInternalEdges, Finset.mem_biUnion]
+        exact ⟨t.1, Finset.mem_univ _,
+          (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph t.1 t).mpr
+            ⟨by simpa [terminalsAt] using ht.2, he⟩⟩
+      obtain ⟨s, hs, hts⟩ := Finset.mem_biUnion.mp htInternal
+      exact Finset.mem_biUnion.mpr ⟨s,
+        Finset.mem_union.mpr (Or.inl hs), hts⟩
+    · refine Finset.mem_biUnion.mpr
+        ⟨externalEdge latticeEndpoint₀ latticeEndpoint₁ t.2, ?_, ?_⟩
+      · exact Finset.mem_union.mpr (Or.inr
+          ((mem_encodePeriodicSquareExternalEdges_iff subgraph _).mpr ⟨t.2, he, rfl⟩))
+      · have hendpoint := latticeIncident t.1 t.2 ht.2
+        rcases hendpoint with hendpoint | hendpoint <;>
+          simp [externalEdge, hendpoint]
+
+/-- city ごとの指定対分けから構成した候補は terminal graph の完全マッチングである。 -/
+theorem periodicSquarePairingsProductMatching_isPerfectMatching
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v}) :
+    IsPerfectMatching
+      (terminalVertices Finset.univ latticeIncidentEdges)
+      (terminalEdges Finset.univ Finset.univ latticeIncidentEdges
+        latticeEndpoint₀ latticeEndpoint₁)
+      (periodicSquarePairingsProductMatching subgraph pairings) := by
+  constructor
+  · exact periodicSquarePairingsProductMatching_subset_terminalEdges subgraph pairings
+  · intro t ht
+    have htCovered : t ∈ (periodicSquarePairingsProductMatching subgraph pairings).biUnion id := by
+      rw [biUnion_periodicSquarePairingsProductMatching]
+      exact ht
+    obtain ⟨s, hs, hts⟩ := Finset.mem_biUnion.mp htCovered
+    refine ⟨s, ⟨hs, hts⟩, ?_⟩
+    intro u hu
+    by_contra hne
+    have hdisjoint := pairwiseDisjoint_periodicSquarePairingsProductMatching subgraph
+      pairings hs hu.1 (fun hsu ↦ hne hsu.symm)
+    exact (Finset.disjoint_left.mp hdisjoint hts hu.2)
+
 end Ising3DCut.Prediction
