@@ -1,5 +1,11 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 2026-08-30: launchd tickのGitHub反映経路をSSH Gitへ固定
+
+launchd由来のtmux外Codexが `gh` のkeyringを読めず、成果push後のPR作成で停止した。
+tickから `gh` を除去し、レビュー・全検証後の成果コミットをSSHのGitでremote defaultへ直接pushする
+経路へ固定した。non-fast-forward時も同じGit経路をfetch・mergeして正常化し、別手段へ切り替えない。
+
 ## 2026-08-30: 論文構成再編で有限複素行列の道具群の境界を確定
 
 線型空間一般から、クロネッカー積・その基底・スカラー行列・中心化に属する6件をレビューした。
