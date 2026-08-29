@@ -2215,7 +2215,9 @@ Wx
         "。",
       ]),
       paragraph([
-        "Step 5（結論）。Step 1 と Step 3 より",
+        "Step 5（結論）。Step 1 と Step 3、およびスカラー行列との積の可換性（",
+        ref("scalar_identity_commutes"),
+        "）より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -2225,17 +2227,11 @@ V^{(+)}
 &= \check{V}'\left(c\,I\right)
    \quad (\because \text{Step 3}) \\
 &= c\left(\check{V}'I\right)
-   \quad (\because \text{scalar\_identity\_commutes}) \\
+   \quad (\because \text{スカラー行列との積の可換性}) \\
 &= c\,\check{V}'
+   \quad (\because \text{行列積の単位元 } \check{V}'I = \check{V}')
 \end{aligned}`,
       ),
-      paragraph([
-        "（スカラー倍が行列の積と可換であること（",
-        ref("scalar_identity_commutes"),
-        "）と ",
-        math(String.raw`\check{V}'I = \check{V}'`),
-        " を使った。）",
-      ]),
     ],
     conversion: {
       status: "added",

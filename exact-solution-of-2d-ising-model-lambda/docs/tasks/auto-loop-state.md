@@ -49,6 +49,8 @@
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
 
+- 2026-08-29（4 回目）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$V^{(+)}=c\check V'$」（`V_plus_eq_c_check_Vprime`）の Step 5 で、機械識別子の生文字列の行末根拠（`scalar_identity_commutes`）を「スカラー行列との積の可換性」へ直し、根拠の無かった最終行に「行列積の単位元」を補い、鎖の後置きだった参照の段落を Step 5 の導入の散文（ラベル参照つき）へ移した。元の内容と `scalar_identity_commutes` の参照は不変。姉妹側 SageMath 対象検算（check\_06 PASS）・check・PDF 336 ページ通過。
+
 - 2026-08-29（3 回目）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$V^{(+)}=c\check V'$」（`V_plus_eq_c_check_Vprime`）で、Step 1 の鎖に単位元の根拠を補って直後の重複した言い換えを削り、Step 2 の散文に畳まれていた共役式から $Wx=xW$ までの消去を三段の鎖へ開いた。行末根拠の機械識別子も「可逆元の定義」「二つの共役作用の一致」「積の逆元の公式」へ直した。元の内容と `def_invertible_elements_of_R`・`T_V_plus_eq_T_check_Vprime`・`conjugation_is_ring_homomorphism` の参照は不変。姉妹側 SageMath 対象検算（check\_06 PASS）・check・PDF 通過。
 
 - 2026-08-29（2 回目）: 姉妹側の半整数運動量のフェルミオン章（`016_even_sector_fermions.ts`）の「$T_{(V^{(+)})} = T_{(\check V')}$」（`T_V_plus_eq_T_check_Vprime`。全行列上の一致）で、Step 2 の $Z_m$ の鎖にあった一行二操作（復元公式の代入と線型性の同居）を五段の一操作ずつへ分け、$Y_m$ の「同じ計算」を $Z_m$ と同形の鎖へ開き、行末根拠の機械識別子（`T_V_plus_eq_T_check_Vprime_on_check_Z_Y`・`conjugation_is_ring_homomorphism`）を人間可読な名前（「$\check Z,\check Y$ 上の一致」「共役は環準同型（乗法的）」）へ直した。元の内容と `recover_Z_Y_from_check_Z_Y`・`T_V_plus_eq_T_check_Vprime_on_check_Z_Y`・`conjugation_is_ring_homomorphism`・`mat_conj`・`Z_Y_generate_algebra` の参照は不変。姉妹側 SageMath 対象検算（check\_05 PASS）・check 300 ブロック・PDF 336 ページ通過。
