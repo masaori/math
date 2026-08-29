@@ -51323,6 +51323,72 @@ c_v^{\mathrm{sm}}(\gamma;k,l)
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_other_vertex_invariance",
+        labels: [],
+        title: { text: "平滑化の他頂点への不変性" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_smoothing_other_vertex_crossing_invariance",
+              beforeFocus: [],
+              focus: {
+                id: "kac_ward_claim_smoothing_other_vertex_crossing_invariance",
+                kind: "claim",
+                title: { text: "横断の平滑化は他の頂点の横断数を変えない" },
+                labels: ["claim_smoothing_other_vertex_crossing_invariance"],
+                habitat: "N",
+                verification: ["sagemath/check/smoothing-straight-visit-count"],
+                lean: [
+                  "Ising2DLambda.KacWard.smoothing_other_vertex_crossing_invariance",
+                  "Ising2DLambda.NecSuf.KacWard.product_with_equal_factors_necSuf",
+                  "Ising2DLambda.KacWard.smoothing_other_vertex_crossing_invariance_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                    "、横断する添字 ", math(String.raw`k<l`),
+                    "、その共通の通過頂点 ", math(String.raw`v\in V_L`),
+                    " について、", math(String.raw`w\ne v`),
+                    " なる任意の格子頂点 ", math(String.raw`w\in V_L`), " に対し",
+                  ]),
+                  displayMath(String.raw`c_w^{\mathrm{sm}}(\gamma;k,l)=c_w(\gamma)`),
+                  paragraph([
+                    "が成り立つ（左辺は ", ref("def_smoothed_vertexwise_crossing_number"),
+                    "、右辺は ", ref("def_vertexwise_crossing_number"), "）。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "平滑化後に頂点 ", math(String.raw`w`),
+                    " を軸 0 に沿って直進する添字の集合と、軸 1 に沿って直進する添字の集合の直積から、",
+                    "二添字を小さい順に並べる全単射（", ref("claim_vertex_crossing_number_factorization"),
+                    " の全単射と同じ構成）を平滑化後の通過族に取る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+c_w^{\mathrm{sm}}(\gamma;k,l)
+&=n_{w,0}^{\mathrm{sm}}(\gamma;k,l)\,n_{w,1}^{\mathrm{sm}}(\gamma;k,l)
+&&\bigl(\because\ \text{二軸の直進通過の直積と }\blkref{def_smoothed_vertexwise_crossing_number}\bigr)\\
+&=n_{w,0}(\gamma)\,n_{w,1}^{\mathrm{sm}}(\gamma;k,l)
+&&\bigl(\because\ \blkref{claim_smoothing_straight_visit_count_update}\text{ の }w\ne v\text{ の場合を軸 }0\text{ に適用}\bigr)\\
+&=n_{w,0}(\gamma)\,n_{w,1}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_straight_visit_count_update}\text{ の }w\ne v\text{ の場合を軸 }1\text{ に適用}\bigr)\\
+&=c_w(\gamma)
+&&\bigl(\because\ \blkref{claim_vertex_crossing_number_factorization}\bigr)
+\end{aligned}`),
+                  paragraph(["を得る。全過程は有限集合の全単射と自然数の算術だけで閉じ、実数体も複素数体も現れない。"]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

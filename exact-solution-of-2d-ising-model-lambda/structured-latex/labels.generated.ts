@@ -357,6 +357,7 @@ export const ALL_LABELS = [
   "claim_shift_matrix_pow",
   "claim_shift_matrix_right",
   "claim_shift_orbit_preserving",
+  "claim_smoothing_other_vertex_crossing_invariance",
   "claim_smoothing_straight_visit_count_update",
   "claim_smoothing_vertex_crossing_number_update",
   "claim_sqrt_two_exists",

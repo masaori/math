@@ -52,6 +52,7 @@ crossing_pair_total = 0
 same_vertex_checks = 0
 other_vertex_checks = 0
 smoothed_crossing_checks = 0
+other_vertex_crossing_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -125,6 +126,29 @@ for L in range(1, 4):
                 assert after_crossings == ((before_axis[0] - 1)
                                            * (before_axis[1] - 1))
                 smoothed_crossing_checks += 1
+                for vertex in vertices:
+                    if vertex == cross_vertex:
+                        continue
+                    before_w = ZZ(sum(
+                        1 for r in range(m) for s in range(m)
+                        if r < s
+                        and endpoints(L, walk[r])[1] == vertex
+                        and endpoints(L, walk[s])[1] == vertex
+                        and straight(walk[r], walk[(r + 1) % m])
+                        and straight(walk[s], walk[(s + 1) % m])
+                        and direction_number(walk[r]) % 2
+                        != direction_number(walk[s]) % 2))
+                    after_w = ZZ(sum(
+                        1 for r in range(m) for s in range(m)
+                        if r < s
+                        and endpoints(L, walk[r])[1] == vertex
+                        and endpoints(L, walk[s])[1] == vertex
+                        and straight(walk[r], out_edge[r])
+                        and straight(walk[s], out_edge[s])
+                        and direction_number(walk[r]) % 2
+                        != direction_number(walk[s]) % 2))
+                    assert after_w == before_w
+                    other_vertex_crossing_checks += 1
                 crossing_pair_total += 1
             closed_walk_total += 1
         if length < max_length[L]:
@@ -137,7 +161,9 @@ assert same_vertex_checks > 0
 assert other_vertex_checks > 0
 assert non_isolated_pairs > 0
 assert smoothed_crossing_checks == crossing_pair_total
+assert other_vertex_crossing_checks > 0
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
-      f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks "
+      f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
+      f"{other_vertex_crossing_checks} other-vertex crossing invariance checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")
