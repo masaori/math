@@ -9,6 +9,7 @@ LOG_DIR="$HOME/Library/Logs/math-complex-matrix-ising-paper-organization"
 LOG_FILE="$LOG_DIR/tick.log"
 LOCK_DIR="$LOG_DIR/tick.lock"
 TIMEOUT_SECONDS=3300
+GIT_NETWORK_TIMEOUT_SECONDS=120
 
 PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$HOME/.elan/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH
@@ -34,8 +35,23 @@ trap 'rm -f "$LOCK_DIR/pid"; rmdir "$LOCK_DIR"' EXIT
 
 test "$REPO_DIR" = "$LOOP_WORKTREE"
 test "$(git -C "$REPO_DIR" branch --show-current)" = "$LOOP_BRANCH"
-git -C "$REPO_DIR" fetch origin
-default_branch="$(git -C "$REPO_DIR" remote show origin | sed -n 's/.*HEAD branch: //p')"
+log "PREPARE: remote default追随を開始"
+set +e
+timeout -k 10 "$GIT_NETWORK_TIMEOUT_SECONDS" git -C "$REPO_DIR" fetch origin >>"$LOG_FILE" 2>&1
+fetch_status=$?
+set -e
+if [ "$fetch_status" -ne 0 ]; then
+  log "ERROR: git fetchに失敗（exit $fetch_status）"
+  exit "$fetch_status"
+fi
+if ! default_ref="$(git -C "$REPO_DIR" symbolic-ref --quiet refs/remotes/origin/HEAD)"; then
+  log "ERROR: origin/HEADをローカル参照から取得できない"
+  exit 1
+fi
+case "$default_ref" in
+  refs/remotes/origin/*) default_branch="${default_ref#refs/remotes/origin/}" ;;
+  *) log "ERROR: origin/HEADがremote branchを指していない"; exit 1 ;;
+esac
 test -n "$default_branch"
 if [ -z "$(git -C "$REPO_DIR" status --porcelain)" ]; then
   git -C "$REPO_DIR" merge --ff-only "origin/$default_branch"

@@ -1,5 +1,11 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 2026-08-29: 論文構成tickのremote追随を有限時間化
+
+tick開始前の `git fetch` を120秒で打ち切るようにし、remote default branch は fetch 後の
+ローカル `origin/HEAD` から取得するよう変更した。ネットワークへ再接続する `git remote show` は使わない。
+fetchの失敗はログへ終了コードを残してエラー終了し、別経路へフォールバックしない。
+
 ## 2026-08-29: 論文構成再編の継続基盤と初回棚卸し
 
 本文の全定義・主張・定理を最終二章へ再編する専用 Runbook、状態台帳、tick、機械可読棚卸し生成器を追加した。
