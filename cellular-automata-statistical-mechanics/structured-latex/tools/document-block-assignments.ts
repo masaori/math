@@ -1,8 +1,8 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
   "causal_set_primary_literature_claim_event_order_locally_finite": "time_expansion_and_dependency_order",
-  "causal_set_primary_literature_claim_finite_partial_order_locally_finite": "reachability_and_finite_orders",
-  "causal_set_primary_literature_definition_locally_finite_partial_order": "reachability_and_finite_orders",
+  "finite_poset_locally_finite_claim_finite_partial_order_locally_finite": "reachability_and_finite_orders",
+  "finite_poset_locally_finite_definition_locally_finite_partial_order": "reachability_and_finite_orders",
   "causal_set_primary_literature_remark_not_claimed": "time_expansion_and_dependency_order",
   "causal_set_primary_literature_remark_source": "time_expansion_and_dependency_order",
   "causal_structure_comparison_claim_covering_subset_one_step": "time_expansion_and_dependency_order",
@@ -11,7 +11,7 @@ export const blockSectionAssignments = {
   "causal_structure_comparison_claim_one_step_subset_covering": "time_expansion_and_dependency_order",
   "causal_structure_comparison_claim_order_iso_not_time_preserving": "time_expansion_and_dependency_order",
   "causal_structure_comparison_definition_covering_relation": "time_expansion_and_dependency_order",
-  "causal_structure_comparison_definition_finite_relation_covering": "reachability_and_finite_orders",
+  "finite_relation_covering_definition_covering_relation": "reachability_and_finite_orders",
   "causal_structure_comparison_definition_order_interval": "time_expansion_and_dependency_order",
   "causal_structure_comparison_remark_scope": "time_expansion_and_dependency_order",
   "composed_neighborhood_closure_claim_global_composition_representable": "local_representation_and_composition",

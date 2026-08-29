@@ -58,6 +58,24 @@ const CA_IDENTIFIER_TERMS = [
   "local_",
 ];
 
+/**
+ * 識別子側の既存物理由来語。数学的道具立て章は「2 値 CA を仮定せずに述べられるもの」だが、
+ * 既存物理の名前を機械識別子へ残すと、章の分類を id から読んだときに比較章の所有物だと誤読する。
+ * CA 由来語と同じ性質の欠陥なので、同じ軸で無条件に止める。
+ * 一般数学の語と衝突しないもの（作用素・体・場のように数学側で常用される語を含めない）に限る。
+ */
+const PHYSICS_IDENTIFIER_TERMS = [
+  "causal",
+  "spacetime",
+  "lightcone",
+  "quantum",
+  "hilbert",
+  "manifold",
+  "relativity",
+  "particle",
+  "physical",
+];
+
 const TOOL_CHAPTER_PREFIX = "organization/mathematical_tools/";
 const CA_CHAPTER_PREFIX = "organization/binary_cellular_automaton_semantics/";
 
@@ -140,12 +158,20 @@ for (const file of files) {
       ...block.labels.map((label) => ({ key: `label:${label}`, value: label })),
     ];
     for (const identifier of identifiers) {
-      const hits = CA_IDENTIFIER_TERMS.filter((term) => identifier.value.includes(term));
-      if (hits.length === 0) continue;
-      identifierViolations.push(
-        `数学的道具立て章の識別子に CA 由来語が新たに入った: ${identifier.key}` +
-          `（所有ブロック ${block.id}、${hits.join("、")}）`,
-      );
+      const caHits = CA_IDENTIFIER_TERMS.filter((term) => identifier.value.includes(term));
+      if (caHits.length > 0) {
+        identifierViolations.push(
+          `数学的道具立て章の識別子に CA 由来語が新たに入った: ${identifier.key}` +
+            `（所有ブロック ${block.id}、${caHits.join("、")}）`,
+        );
+      }
+      const physicsHits = PHYSICS_IDENTIFIER_TERMS.filter((term) => identifier.value.includes(term));
+      if (physicsHits.length > 0) {
+        identifierViolations.push(
+          `数学的道具立て章の識別子に既存物理由来語が入っている: ${identifier.key}` +
+            `（所有ブロック ${block.id}、${physicsHits.join("、")}）`,
+        );
+      }
     }
   }
 }
@@ -158,5 +184,5 @@ if (violations.length > 0) {
 }
 console.log(
   `章の意味境界の語彙検査 OK（本文の CA 固有語 ${CA_TERMS.length} 件、CA 章 ${caBlockIds.size} 件、` +
-    "数学的道具立て章に残る CA 由来識別子 0 件）",
+    "数学的道具立て章に残る CA 由来識別子 0 件、既存物理由来識別子 0 件）",
 );

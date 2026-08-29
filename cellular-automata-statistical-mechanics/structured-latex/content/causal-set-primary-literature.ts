@@ -55,7 +55,7 @@ export default defineBlocks([
   },
 
   {
-    id: "causal_set_primary_literature_definition_locally_finite_partial_order",
+    id: "finite_poset_locally_finite_definition_locally_finite_partial_order",
     kind: "definition",
     title: { text: "局所有限な部分順序集合" },
     labels: ["def_locally_finite_partial_order"],
@@ -91,7 +91,7 @@ export default defineBlocks([
   },
 
   {
-    id: "causal_set_primary_literature_claim_finite_partial_order_locally_finite",
+    id: "finite_poset_locally_finite_claim_finite_partial_order_locally_finite",
     kind: "claim",
     title: { text: "有限集合上の部分順序は局所有限である" },
     labels: ["claim_finite_partial_order_locally_finite"],

@@ -157,7 +157,7 @@ export default defineBlocks([
   },
 
   {
-    id: "causal_structure_comparison_definition_finite_relation_covering",
+    id: "finite_relation_covering_definition_covering_relation",
     kind: "definition",
     title: { text: "有限関係の被覆関係" },
     labels: ["def_finite_relation_covering"],

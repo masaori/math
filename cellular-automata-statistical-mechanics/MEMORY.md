@@ -5,6 +5,23 @@
 > [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
 > [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
+## 自動ループ tick: 識別子検査へ既存物理由来語の軸を追加（2026-08-30 01:12）
+
+前 tick の改名をレビューし、識別子検査の語彙が **CA 由来語だけ**で、既存物理由来語を一件も
+見ていないことを確認した。実測すると、数学的道具立て章の 3 ブロックが因果集合との照合章由来の
+`causal_set_primary_literature_` / `causal_structure_comparison_` を block id に残していた。
+中身は局所有限な部分順序集合の定義、有限集合上の部分順序が局所有限であること、有限関係の被覆関係で、
+いずれも順序の言葉だけで書かれた一般数学である。誤っているのは名前だけで、前 tick が直した欠陥と同種である。
+
+3 件の block id を `finite_poset_locally_finite_*` と `finite_relation_covering_*` へ改名した。
+label は一般数学名のままなので、SageMath の対象ラベルと Lean の対応キーは変更していない。
+あわせて `verify-tool-chapter-vocabulary.ts` へ既存物理由来語の軸（`causal`、`spacetime`、`quantum`、
+`hilbert`、`manifold`、`relativity`、`particle`、`lightcone`、`physical`）を無条件検査として足した。
+数学側で常用される語（作用素・体・場）は誤検出を生むので入れていない。負テストは実機で行い、
+改名後の id を `causal_set_` へ戻すと exit 1 で違反を報告することを確認した。
+
+本文の分類、定義、定理、証明内容は変更していない。新しい定義・定理・証明対象は起票していない。
+
 ## 自動ループ tick: 数学的道具立て章の機械識別子を一般数学名へ改名（2026-08-30 00:12）
 
 前 tick の所有ブロック単位ラチェットをレビューし、既知例外 53 件が名前の誤りを固定するだけで、

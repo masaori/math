@@ -18,6 +18,37 @@
 | 節の設計と入力・出力・主定理の明示 | 依存上のまとまりから節を設計し、各節の入力・出力・主定理または主張を本文に明示する | done |
 | 全層の検証と公開物への反映 | 構造化テキスト・PDF・全 SageMath・Lean 全体を検証し、公開物へ反映する | done |
 
+### 識別子検査への既存物理由来語の軸の追加（2026-08-30 01:12 tick）
+
+前 tick の改名をレビューした。改名そのものに誤りは見つからなかったが、識別子検査の語彙が
+CA 由来語だけで構成されており、**既存物理由来の語を一件も見ていない**という穴を見つけた。
+数学的道具立て章は「2 値 CA を仮定せずに述べられるもの」なので、CA 語だけでなく既存物理の名前も
+機械識別子へ残っていてはならない（章の分類を id から読むと比較章の所有物だと誤読する）。
+
+実測した違反は 3 件である。`causal_set_primary_literature_definition_locally_finite_partial_order`、
+`causal_set_primary_literature_claim_finite_partial_order_locally_finite`、
+`causal_structure_comparison_definition_finite_relation_covering`。中身はそれぞれ局所有限な部分順序集合の
+定義、有限集合上の部分順序が局所有限であること、有限関係の被覆関係の定義で、いずれも順序の言葉だけで
+書かれている。分類は正しく、誤っているのは名前だけである。
+
+`finite_poset_locally_finite_definition_locally_finite_partial_order`、
+`finite_poset_locally_finite_claim_finite_partial_order_locally_finite`、
+`finite_relation_covering_definition_covering_relation` へ改名した。**label は一般数学名のままなので、
+SageMath の対象ラベルと Lean の対応キーは変更していない**（改名の影響は本文・章割り当て・全項目一覧に閉じる）。
+
+検査側には既存物理由来語の軸を無条件検査として追加した（`causal`、`spacetime`、`lightcone`、`quantum`、
+`hilbert`、`manifold`、`relativity`、`particle`、`physical`）。作用素・体・場のように数学で常用される語は
+誤検出を生むため入れていない。CA 語の軸と同じく例外表を持たず、一件でも入れば失敗する。
+負テストは実機で行い、改名後の id を `causal_set_` へ戻すと exit 1 で該当語を報告することを確認した後、
+本文を元へ戻した。なお初回の改名案 `finite_poset_local_finiteness_*` は既存の CA 語 `local_`
+（局所規則由来）に当たって検査が落ちたため、`locally_finite` を使う名前へ直している。
+
+この tick で通した検証は、構造化テキストの `pnpm run check`（新しい軸を含む）、PDF 生成、
+SageMath と本文の対応検査（接続済み 61 件、未昇格の探索 2 件）、Lean 全体のビルドと
+`sorryAx` 非依存検査である。`sagemath/` は変更していないため、全 SageMath の再実行対象はない。
+本文の分類・定義・定理・証明内容は変更しておらず、新しい定義・定理・証明対象は起票していない。
+成果整理は全層 `done` のままである。
+
 ### 数学的道具立て章の機械識別子の一般数学名への改名（2026-08-30 00:12 tick）
 
 前 tick の所有ブロック単位ラチェットをレビューし、既知例外 53 件が分類上の誤りではない一方、
