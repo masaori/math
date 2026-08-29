@@ -1868,16 +1868,33 @@ E_K \check{Q}_\epsilon
     ],
     proof: [
       paragraph([
-        "Step 1（表示）。",
+        "Step 1（表示）。二つの因子を順に書き直す（",
         ref("def_V_plus_and_T_V_plus"),
-        " の定義より ",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2} = \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)
-= \exp\!\left(\tfrac12 S_1^{(+)}\right)`),
-        " である。また ",
+        "、",
         ref("def_transfer_matrix_symbols"),
-        " より ",
-        math(String.raw`V_2 = (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right) = (2s_2)^{M/2}\exp(S_2)`),
-        " であり、",
+        "、",
+        ref("iH_is_real_symmetric"),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(V_1^{(+)}\right)^{1/2}
+&= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)
+   \quad (\because \left(V_1^{(+)}\right)^{1/2} \text{ の定義}) \\
+&= \exp\!\left(\tfrac12 S_1^{(+)}\right)
+   \quad (\because S_1^{(+)} = iK_1H_1^{(+)})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+V_2
+&= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)
+   \quad (\because V_2 \text{ の表示}) \\
+&= (2s_2)^{M/2}\exp(S_2)
+   \quad (\because S_2 = iK_2^*H_2)
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`(2s_2)^{M/2}`),
         " はスカラーなので ",
         ref("scalar_identity_commutes"),
@@ -1915,8 +1932,13 @@ E_K \check{Q}_\epsilon
         " であり、",
       ]),
       displayMath(
-        String.raw`\exp\!\left(\tfrac12 S_1^{(+)}\right)\exp(S_2)
-\exp\!\left(\tfrac12 S_1^{(+)}\right) = BAB = B^*AB`,
+        String.raw`\begin{aligned}
+\exp\!\left(\tfrac12 S_1^{(+)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(+)}\right)
+&= BAB
+   \quad (\because B,\ A \text{ の定義（Step 2）}) \\
+&= B^*AB
+   \quad (\because B^* = B)
+\end{aligned}`,
       ),
       paragraph([
         ref("exp_hermitian_is_positive_definite"),
