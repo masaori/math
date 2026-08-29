@@ -58,14 +58,47 @@ if [ -z "$(git -C "$REPO_DIR" status --porcelain)" ]; then
 else
   log "INFO: 前回tickの未コミット成果を保持して続行"
 fi
+start_default_commit="$(git -C "$REPO_DIR" rev-parse "origin/$default_branch")"
+run_id="$(date '+%Y%m%dT%H%M%S')-$$"
+success_prefix="TICK_RESULT_SUCCESS:$run_id:"
+run_output="$LOG_DIR/tick-run-$run_id.log"
 
-PROMPT='[[AI_AGENT_MESSAGE]] 複素行列版2次元イジング模型の論文構成再編を1 tickだけ進める。AGENTS.md、CLAUDE.md、docs/context/全ファイル、exact-solution-of-2d-ising-model/README.md、paper-organization-runbook.md、paper-organization-state.md、MEMORY.mdを全文読む。状態台帳の「次の一歩」だけを実施し、別エージェントによるレビューと指摘修正を同じ単位で反復する。共有main作業ツリー、lambda版、既存tick、docs/contextは変更しない。棚卸し再生成、全検証、状態とMEMORY更新、コミット、PR、remote defaultへのマージ、fetch後の包含確認まで行う。失敗時は別手段へフォールバックせず、一次情報をログへ残して停止する。'
+PROMPT="[[AI_AGENT_MESSAGE]] 複素行列版2次元イジング模型の論文構成再編を1 tickだけ進める。AGENTS.md、CLAUDE.md、docs/context/全ファイル、exact-solution-of-2d-ising-model/README.md、paper-organization-runbook.md、paper-organization-state.md、MEMORY.mdを全文読む。状態台帳の『次の一歩』だけを実施し、別エージェントによるレビューと指摘修正を同じ単位で反復する。共有main作業ツリー、lambda版、既存tick、docs/contextは変更しない。棚卸し再生成は必ず '$PROJECT_DIR/structured-latex' で npm run inventory:organization を実行する。全検証、状態とMEMORY更新、コミット、PR、remote defaultへのマージ、fetch後の包含確認まで行う。失敗時は別手段へフォールバックせず、一次情報をログへ残して停止し、成功マーカーを出力しない。全作業が成功し、今回の成果コミットがremote defaultの祖先であることをfetch後に確認した場合だけ、最終行へ '${success_prefix}<成果コミットの40桁小文字SHA>' を正確に1行出力する。"
 
 log "START: 論文構成tick"
 set +e
-printf '%s' "$PROMPT" | timeout -k 60 "$TIMEOUT_SECONDS" codex exec -C "$REPO_DIR" - >>"$LOG_FILE" 2>&1
-status=$?
+printf '%s' "$PROMPT" \
+  | timeout -k 60 "$TIMEOUT_SECONDS" codex exec -C "$REPO_DIR" - 2>&1 \
+  | tee -a "$LOG_FILE" "$run_output"
+pipeline_status=("${PIPESTATUS[@]}")
+status="${pipeline_status[1]}"
+tee_status="${pipeline_status[2]}"
 set -e
+if [ "$tee_status" -ne 0 ]; then
+  status="$tee_status"
+  log "ERROR: tick出力の記録に失敗（exit $tee_status）"
+fi
+if [ "$status" -eq 0 ]; then
+  if ! result_commit="$("$PROJECT_DIR/scripts/verify-paper-organization-tick-result.sh" "$run_output" "$success_prefix")"; then
+    status=1
+    log "ERROR: 成果包含を示す実行固有成功マーカーの検証に失敗"
+  else
+    set +e
+    timeout -k 10 "$GIT_NETWORK_TIMEOUT_SECONDS" git -C "$REPO_DIR" fetch origin >>"$LOG_FILE" 2>&1
+    verify_fetch_status=$?
+    set -e
+    if [ "$verify_fetch_status" -ne 0 ]; then
+      status="$verify_fetch_status"
+      log "ERROR: 成果包含確認のgit fetchに失敗（exit $verify_fetch_status）"
+    elif [ "$result_commit" = "$start_default_commit" ]; then
+      status=1
+      log "ERROR: 成果コミットがtick開始時のremote defaultと同一"
+    elif ! git -C "$REPO_DIR" merge-base --is-ancestor "$result_commit" "origin/$default_branch"; then
+      status=1
+      log "ERROR: 成果コミットがremote defaultに含まれていない（$result_commit）"
+    fi
+  fi
+fi
 case "$status" in
   0) log "SUCCESS: 論文構成tick完了" ;;
   124|137) log "TIMEOUT: 前回成果をworktreeへ保持（exit $status）" ;;
