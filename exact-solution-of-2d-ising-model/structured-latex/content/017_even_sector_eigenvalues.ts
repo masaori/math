@@ -534,15 +534,15 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       displayMath(
         String.raw`\begin{aligned}
 {\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+} &= 0
-   \quad (\because \text{anticommutator\_of\_check\_psi の第 1 式}), \\
+   \quad (\because \text{$\check\psi$ の反交換関係の第 1 式}), \\
 {\left[\check\psi_\mu^\dagger, \check\psi_{M+1-\nu}\right]_+}
   &= \delta_{M+1-\nu,\,M+1-\mu}\,I = 0
-   \quad (\because \text{anticommutator\_of\_check\_psi の第 2 式と直前の displayMath}), \\
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式と直前の }\delta\text{ の計算}), \\
 {\left[\check\psi_{M+1-\mu}, \check\psi_\nu^\dagger\right]_+}
   &= \delta_{M+1-\mu,\,M+1-\nu}\,I = 0
-   \quad (\because \text{同第 2 式を } (\nu, M+1-\mu) \text{ へ適用し、反交換子の対称性}), \\
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式を } (\nu, M+1-\mu) \text{ へ適用し、反交換子の対称性}), \\
 {\left[\check\psi_{M+1-\mu}, \check\psi_{M+1-\nu}\right]_+} &= 0
-   \quad (\because \text{anticommutator\_of\_check\_psi の第 3 式})
+   \quad (\because \text{$\check\psi$ の反交換関係の第 3 式})
 \end{aligned}`,
       ),
       paragraph([
@@ -563,23 +563,25 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       paragraph([
         "Step 2（(1) の証明）。",
         math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M+1-\mu}\}`),
-        " を取ると、Step 1 を 2 回使って",
+        " を取ると、数演算子の定義（",
+        ref("def_check_number_operator"),
+        "）を開き、Step 1 を 2 回使って",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 A\,\check{n}_\nu
 &= A\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
-   \quad (\because \text{def\_check\_number\_operator}) \\
+   \quad (\because \text{数演算子の定義}) \\
 &= \left(-\check\psi_\nu^\dagger A\right)\check\psi_{M+1-\nu}
-   \quad (\because A\check\psi_\nu^\dagger = -\check\psi_\nu^\dagger A) \\
+   \quad (\because \text{Step 1 の } A\check\psi_\nu^\dagger = -\check\psi_\nu^\dagger A) \\
 &= -\check\psi_\nu^\dagger\left(A\,\check\psi_{M+1-\nu}\right)
    \quad (\because \text{結合法則}) \\
 &= -\check\psi_\nu^\dagger\left(-\check\psi_{M+1-\nu}A\right)
-   \quad (\because A\check\psi_{M+1-\nu} = -\check\psi_{M+1-\nu}A) \\
+   \quad (\because \text{Step 1 の } A\check\psi_{M+1-\nu} = -\check\psi_{M+1-\nu}A) \\
 &= \check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}\,A
    \quad (\because (-1)^2 = 1) \\
 &= \check{n}_\nu\,A
-   \quad (\because \text{def\_check\_number\_operator})
+   \quad (\because \text{数演算子の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -591,15 +593,29 @@ A\,\check{n}_\nu
         math(String.raw`A = \check\psi_{M+1-\mu}`),
         " の両方でこれが成り立つ。",
       ]),
-      paragraph(["Step 3（(2) の証明）。(1) を 2 回使って"]),
+      paragraph([
+        "Step 3（(2) の証明）。数演算子の定義（",
+        ref("def_check_number_operator"),
+        "）を開き、(1) を 2 回使って",
+      ]),
       displayMath(
-        String.raw`\check{n}_\mu \check{n}_\nu
-= \check\psi_\mu^\dagger\left(\check\psi_{M+1-\mu}\,\check{n}_\nu\right)
-= \check\psi_\mu^\dagger\left(\check{n}_\nu\,\check\psi_{M+1-\mu}\right)
-= \left(\check\psi_\mu^\dagger\,\check{n}_\nu\right)\check\psi_{M+1-\mu}
-= \left(\check{n}_\nu\,\check\psi_\mu^\dagger\right)\check\psi_{M+1-\mu}
-= \check{n}_\nu\,\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
-= \check{n}_\nu \check{n}_\mu`,
+        String.raw`\begin{aligned}
+\check{n}_\mu \check{n}_\nu
+&= \left(\check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}\right)\check{n}_\nu
+   \quad (\because \text{数演算子の定義}) \\
+&= \check\psi_\mu^\dagger\left(\check\psi_{M+1-\mu}\,\check{n}_\nu\right)
+   \quad (\because \text{結合法則}) \\
+&= \check\psi_\mu^\dagger\left(\check{n}_\nu\,\check\psi_{M+1-\mu}\right)
+   \quad (\because \text{(1) を } A = \check\psi_{M+1-\mu} \text{ に適用}) \\
+&= \left(\check\psi_\mu^\dagger\,\check{n}_\nu\right)\check\psi_{M+1-\mu}
+   \quad (\because \text{結合法則}) \\
+&= \left(\check{n}_\nu\,\check\psi_\mu^\dagger\right)\check\psi_{M+1-\mu}
+   \quad (\because \text{(1) を } A = \check\psi_\mu^\dagger \text{ に適用}) \\
+&= \check{n}_\nu\left(\check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}\right)
+   \quad (\because \text{結合法則}) \\
+&= \check{n}_\nu \check{n}_\mu
+   \quad (\because \text{数演算子の定義})
+\end{aligned}`,
       ),
     ],
     conversion: {
