@@ -1229,6 +1229,52 @@ theorem card_eq_two_of_mem_periodicSquarePairingsAt_of_card_eq_four
   rw [hfour] at h
   omega
 
+/-- 相異なる四端子 `a,b,c,d` の三つの二組分割
+`ab|cd`、`ac|bd`、`ad|bc` は互いに異なる。四端子の対分けが三通りであることを
+示す段を、三候補の相異性と任意の対分けの網羅性へ分けた前半である。 -/
+theorem three_pairings_of_four_distinct
+    {α : Type} [DecidableEq α] {a b c d : α}
+    (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d) :
+    ({{a, b}, {c, d}} : Finset (Finset α)) ≠ {{a, c}, {b, d}} ∧
+      ({{a, b}, {c, d}} : Finset (Finset α)) ≠ {{a, d}, {b, c}} ∧
+      ({{a, c}, {b, d}} : Finset (Finset α)) ≠ {{a, d}, {b, c}} := by
+  classical
+  refine ⟨?_, ?_, ?_⟩
+  · intro h
+    have hm : {a, b} ∈ ({{a, c}, {b, d}} : Finset (Finset _)) := by
+      rw [← h]
+      simp
+    rcases (Finset.mem_insert.mp hm) with h₁ | h₂
+    · have hb : b ∈ ({a, c} : Finset _) := by rw [← h₁]; simp
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hb
+      exact hb.elim (fun hba ↦ hab hba.symm) (fun hbc' ↦ hbc hbc')
+    · have ha : a ∈ ({b, d} : Finset _) := by rw [← Finset.mem_singleton.mp h₂]; simp
+      simp only [Finset.mem_insert, Finset.mem_singleton] at ha
+      exact ha.elim hab (fun had' ↦ had had')
+  · intro h
+    have hm : {a, b} ∈ ({{a, d}, {b, c}} : Finset (Finset _)) := by
+      rw [← h]
+      simp
+    rcases (Finset.mem_insert.mp hm) with h₁ | h₂
+    · have hb : b ∈ ({a, d} : Finset _) := by rw [← h₁]; simp
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hb
+      exact hb.elim (fun hba ↦ hab hba.symm) (fun hbd' ↦ hbd hbd')
+    · have ha : a ∈ ({b, c} : Finset _) := by rw [← Finset.mem_singleton.mp h₂]; simp
+      simp only [Finset.mem_insert, Finset.mem_singleton] at ha
+      exact ha.elim hab (fun hac' ↦ hac hac')
+  · intro h
+    have hm : {a, c} ∈ ({{a, d}, {b, c}} : Finset (Finset _)) := by
+      rw [← h]
+      simp
+    rcases (Finset.mem_insert.mp hm) with h₁ | h₂
+    · have hc : c ∈ ({a, d} : Finset _) := by rw [← h₁]; simp
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hc
+      exact hc.elim (fun hca ↦ hac hca.symm) (fun hcd' ↦ hcd hcd')
+    · have ha : a ∈ ({b, c} : Finset _) := by rw [← Finset.mem_singleton.mp h₂]; simp
+      simp only [Finset.mem_insert, Finset.mem_singleton] at ha
+      exact ha.elim hab (fun hac' ↦ hac hac')
+
 /-- 復号繊維の完全マッチングを city `v` へ制限したものは、その city の対分けの
 全体に属する。`periodicSquareFiberInternalEdgesAt_isPairing` の三条件を、
 対分けの全体の定義へそのまま移したものである。 -/
