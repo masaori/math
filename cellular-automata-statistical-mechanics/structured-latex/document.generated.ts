@@ -65,6 +65,7 @@ import blocks_neighborhood_assignment_subset_union_action from './content/neighb
 import blocks_neighborhood_assignment_transpose_involution from './content/neighborhood-assignment-transpose-involution.ts'
 import blocks_neighborhood_assignment_union_distributivity from './content/neighborhood-assignment-union-distributivity.ts'
 import blocks_neighborhood_assignment_union_preserving_image from './content/neighborhood-assignment-union-preserving-image.ts'
+import blocks_neighborhood_covering_relation_of_finite_poset from './content/neighborhood-covering-relation-of-finite-poset.ts'
 import blocks_ordered_neighborhood_assignment_monoid from './content/ordered-neighborhood-assignment-monoid.ts'
 import blocks_periodic_point_count from './content/periodic-point-count.ts'
 import blocks_recursive_preimage_tree_code from './content/recursive-preimage-tree-code.ts'
@@ -130,6 +131,7 @@ export type AllBlocks = [
   ...typeof blocks_neighborhood_assignment_transpose_involution,
   ...typeof blocks_neighborhood_assignment_union_distributivity,
   ...typeof blocks_neighborhood_assignment_union_preserving_image,
+  ...typeof blocks_neighborhood_covering_relation_of_finite_poset,
   ...typeof blocks_ordered_neighborhood_assignment_monoid,
   ...typeof blocks_periodic_point_count,
   ...typeof blocks_recursive_preimage_tree_code,
