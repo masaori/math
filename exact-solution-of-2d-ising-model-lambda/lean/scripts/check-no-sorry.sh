@@ -1546,6 +1546,12 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.walkTwistSign_product_necSuf
   Ising2DLambda.KacWard.walkTwistSign_product
   Ising2DLambda.KacWard.walkTwistSign_product_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.offset_reverse_necSuf
+  Ising2DLambda.KacWard.directionNumber_reversal
+  Ising2DLambda.KacWard.directionNumber_reversal_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.reverse_phase_mul_necSuf
+  Ising2DLambda.KacWard.reversal_rotation_phase_product
+  Ising2DLambda.KacWard.reversal_rotation_phase_product_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
