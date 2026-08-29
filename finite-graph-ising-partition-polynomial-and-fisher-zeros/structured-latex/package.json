@@ -9,11 +9,12 @@
     "check:generated": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project . --check",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "verify:connection": "node tools/verify-hyperbolic-connection.ts",
+    "verify:organization": "node tools/verify-chapter-organization.ts",
     "validate": "node tools/validate-content.ts",
     "build:tex": "node tools/build-latex.ts",
     "build:html": "node tools/build-html.ts",
     "build:pdf": "node tools/build-latex.ts --pdf",
-    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:connection && npm run build:tex && npm run build:html"
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:organization && npm run verify:connection && npm run build:tex && npm run build:html"
   },
   "dependencies": {
     "zod": "3.25.76"

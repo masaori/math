@@ -21,7 +21,14 @@
 \date{}
 \begin{document}
 \maketitle
-\part{有限グラフ上の Ising 多項式}
+\part{数学的道具立て}
+
+\section{有限グラフの入力}
+
+\begin{remark}[有限グラフの入力の入出力]
+入力: 二つの辺端ラベルと有限な頂点集合・辺集合。出力: ループを持たず多重辺を許す有限グラフ。主定義・主定理・主張: 有限グラフの入力。
+
+\end{remark}
 
 \begin{definition}[辺端ラベル集合]\label{lab:def_edge_endpoint_label_set}
 二つの形式的ラベルからなる有限集合を
@@ -55,6 +62,48 @@ $\partial_G(e,\mathsf{source})\ne\partial_G(e,\mathsf{target})$
  を仮定する。異なる辺が同じ二頂点を結ぶことは許す。
 
 \end{definition}
+
+\section{辺部分集合の偶奇と多項式}
+
+\begin{remark}[辺部分集合の偶奇と多項式の入出力]
+入力: 有限グラフ、その辺部分集合、独立な不定元 u,v。出力: 各頂点で偶次数となる辺部分集合とその二変数多項式。主定義・主定理・主張: 偶部分グラフ多項式。
+
+\end{remark}
+
+\begin{definition}[辺部分集合の境界偶奇]\label{lab:def_mod_two_boundary_parity}
+辺部分集合 
+$A\subseteq E$
+ と頂点 
+$w\in V$
+ に対し
+
+\[\beta_G(A)(w):=\left|\left\{(e,a)\in A\times\mathsf{End}\ \middle|\ \partial_G(e,a)=w\right\}\right|\bmod 2\in\mathbb F_2\]
+と定める。各辺の二端点は異なるので、一つの辺を同じ頂点で二重に数えない。
+
+\end{definition}
+
+\begin{definition}[偶辺部分集合]\label{lab:def_even_edge_subset}
+\[\mathcal Z_1(G):=\{A\subseteq E\mid \beta_G(A)(w)=0\ \text{for every }w\in V\}\]
+と定める。これは有限集合である。境界偶奇は 
+\cref{lab:def_mod_two_boundary_parity}
+ で定めた。
+
+\end{definition}
+
+\begin{definition}[偶部分グラフ多項式]\label{lab:def_even_subgraph_polynomial}
+\[Q_G(u,v):=\sum_{A\in\mathcal Z_1(G)}u^{|E|-|A|}v^{|A|}\in\mathbb Z[u,v]\]
+と定める。
+
+\end{definition}
+
+\part{有限グラフ上の Ising 模型・分配多項式と Fisher 零点}
+
+\section{スピンと配位}
+
+\begin{remark}[スピンと配位の入出力]
+入力: 有限グラフと二つの形式的スピンラベル。出力: スピン配位と一頂点反転。主定義・主定理・主張: 一頂点での配位反転が不動点を持たない対合であること。
+
+\end{remark}
 
 \begin{definition}[スピンラベル集合]\label{lab:def_spin_label_set}
 二つの形式的ラベルからなる有限集合を
@@ -202,6 +251,13 @@ $T_w(\sigma)\ne\sigma$
  である。
 
 \end{proof}
+
+\section{破れ辺と Ising 分配多項式}
+
+\begin{remark}[破れ辺と Ising 分配多項式の入出力]
+入力: 有限グラフ上のスピン配位と形式的不定元 x。出力: 破れ辺数の多重度と整数係数分配多項式。主定義・主定理・主張: 多重度による係数表示と全係数の偶数性。
+
+\end{remark}
 
 \begin{definition}[破れ辺集合と破れ辺数]\label{lab:def_broken_edge_set}
 配位 
@@ -367,6 +423,36 @@ $n_m\in\mathbb N$
 全ての集合は有限であり、多重度は自然数に属する。実数、複素数、極限、積分を用いない。
 
 \end{proof}
+
+\begin{claim}[係数総和]\label{lab:claim_partition_polynomial_value_at_one}
+\[Z_G(1)=\sum_{m=0}^{|E|}\Omega_G(m)=2^{|V|}.\]
+\end{claim}
+\begin{proof}
+\[\begin{aligned}
+Z_G(1)
+&=\sum_{\sigma\in\mathcal S_G}1^{b_G(\sigma)}
+&&\bigl(\because\ \text{Ising 分配多項式の定義}\bigr)\\
+&=\sum_{\sigma\in\mathcal S_G}1
+&&\bigl(\because\ 1^n=1\ \text{for every }n\in\mathbb N\bigr)\\
+&=|\mathcal S_G|
+&&\bigl(\because\ \text{有限集合の元の個数の定義}\bigr)\\
+&=2^{|V|}
+&&\bigl(\because\ \text{各頂点で二つのスピン値を独立に選ぶ}\bigr).
+\end{aligned}\]
+多重度の和との等号は 
+\cref{lab:claim_partition_polynomial_coefficient_expansion}
+ に 
+$x=1$
+ を代入して得る。
+
+\end{proof}
+
+\section{特別値 −1 と奇接続辺数}
+
+\begin{remark}[特別値 −1 と奇接続辺数の入出力]
+入力: Ising 分配多項式と頂点に接続する辺数の偶奇。出力: −1 における評価と一次因子による同値条件。主定義・主定理・主張: 零点 −1 による奇接続辺数頂点の特徴付け。
+
+\end{remark}
 
 \begin{theorem}[奇数本の辺が接続する頂点と零点 -1]\label{lab:theorem_odd_incident_edge_count_root_minus_one}
 \cref{lab:def_finite_graph_input}
@@ -724,6 +810,13 @@ $(x+1)\mid Z_G(x)$
 
 \end{proof}
 
+\section{次数とカット}
+
+\begin{remark}[次数とカットの入出力]
+入力: 破れ辺数と頂点二分割。出力: 分配多項式の次数の組合せ論的意味。主定義・主定理・主張: 分配多項式の次数が最大カット辺数に等しいこと。
+
+\end{remark}
+
 \begin{theorem}[Ising 分配多項式の次数と最大破れ辺数]\label{lab:theorem_partition_polynomial_degree_maximum_broken_edge_count}
 \cref{lab:def_spin_configuration_set}
  の有限で空でないスピン配位集合に対し、
@@ -888,6 +981,13 @@ b_G(\sigma)
 全ての集合は有限であり、次数と辺数は自然数に属する。実数、複素数、極限、積分を用いない。
 
 \end{proof}
+
+\section{Fisher 零点と係数}
+
+\begin{remark}[Fisher 零点と係数の入出力]
+入力: 正の両端係数を持つ Ising 分配多項式。出力: 零点の積・対称式・冪和と係数比。主定義・主定理・主張: Fisher 零点冪和と逆数冪和の Newton 漸化式。
+
+\end{remark}
 
 \begin{theorem}[一般有限グラフの Fisher 零点積と両端係数比]\label{lab:theorem_fisher_zero_product_coefficient_ratio}
 \cref{lab:def_finite_graph_input}
@@ -2833,6 +2933,13 @@ $\mathbb Q\subset\overline{\mathbb Q}$
 
 \end{proof}
 
+\section{全辺を横切る二分割と逆数対称性}
+
+\begin{remark}[全辺を横切る二分割と逆数対称性の入出力]
+入力: 有限グラフと、全辺二分割・係数対称性・多項式逆数対称性のいずれかの条件。出力: 係数・多項式・Fisher 零点の逆数対称性。主定義・主定理・主張: 多項式逆数対称性による全辺二分割の特徴付け。
+
+\end{remark}
+
 \begin{theorem}[全ての辺を横切る頂点二分割と係数対称性]\label{lab:theorem_full_cut_coefficient_symmetry}
 \cref{lab:def_finite_graph_input}
  の有限グラフについて、ある頂点部分集合 
@@ -4003,28 +4110,12 @@ $\overline{\mathbb Q}$
 
 \end{proof}
 
-\begin{claim}[係数総和]\label{lab:claim_partition_polynomial_value_at_one}
-\[Z_G(1)=\sum_{m=0}^{|E|}\Omega_G(m)=2^{|V|}.\]
-\end{claim}
-\begin{proof}
-\[\begin{aligned}
-Z_G(1)
-&=\sum_{\sigma\in\mathcal S_G}1^{b_G(\sigma)}
-&&\bigl(\because\ \text{Ising 分配多項式の定義}\bigr)\\
-&=\sum_{\sigma\in\mathcal S_G}1
-&&\bigl(\because\ 1^n=1\ \text{for every }n\in\mathbb N\bigr)\\
-&=|\mathcal S_G|
-&&\bigl(\because\ \text{有限集合の元の個数の定義}\bigr)\\
-&=2^{|V|}
-&&\bigl(\because\ \text{各頂点で二つのスピン値を独立に選ぶ}\bigr).
-\end{aligned}\]
-多重度の和との等号は 
-\cref{lab:claim_partition_polynomial_coefficient_expansion}
- に 
-$x=1$
- を代入して得る。
+\section{評価点から見た Fisher 零点}
 
-\end{proof}
+\begin{remark}[評価点から見た Fisher 零点の入出力]
+入力: 一つまたは二つの代数的評価点と分配多項式の係数（商の分母側と逆数冪和では零点でない評価点）。出力: 零点差の積、商、逆数冪和の有限係数表示。主定義・主定理・主張: 代数的評価点における零点差の逆三乗和の係数表示。
+
+\end{remark}
 
 \begin{theorem}[一般有限グラフの Fisher 零点の一との差の積と全配位数]\label{lab:theorem_fisher_zero_shifted_product_configuration_count}
 \cref{lab:def_finite_graph_input}
@@ -6009,6 +6100,13 @@ $Z_G(q)\in\mathbb Q,\quad \eta_{\mathbb N,\mathbb Q}(\Omega_G(d))\in\mathbb Q_{>
 
 \end{proof}
 
+\section{正の有理評価の順序}
+
+\begin{remark}[正の有理評価の順序の入出力]
+入力: 正の有理数と Ising 分配多項式。出力: 非零性、零点差積、単調性、順序反映、全配位数との比較、一次多項式 x−1 の非整除。主定義・主定理・主張: 辺を持つ有限グラフでの正の有理評価の厳密単調性。
+
+\end{remark}
+
 \begin{theorem}[Ising 分配多項式の正の有理評価の二配位下界]\label{lab:theorem_no_positive_rational_root}
 \cref{lab:def_finite_graph_input}
  の任意の有限グラフと任意の正の有理数 
@@ -6691,7 +6789,12 @@ r_G
 
 \end{proof}
 
-\part{形式的高温展開}
+\section{形式的高温展開}
+
+\begin{remark}[形式的高温展開の入出力]
+入力: 有限グラフ、独立な不定元 u,v、スピン配位、数学的道具立ての偶部分グラフ多項式。出力: 整数係数二変数多項式としての有限和恒等式。主定義・主定理・主張: 形式的高温展開の有限和恒等式。
+
+\end{remark}
 
 \begin{definition}[辺のスピン符号]\label{lab:def_edge_spin_sign}
 各 
@@ -6716,32 +6819,6 @@ $u,v$
 
 \[H_G(u,v):=\sum_{\sigma\in\mathcal S_G}\prod_{e\in E}\bigl(u+v\,s_G(\sigma,e)\bigr)\in\mathbb Z[u,v]\]
 と定める。指数関数、双曲関数、実温度はこの定義に含まれない。
-
-\end{definition}
-
-\begin{definition}[辺部分集合の境界偶奇]\label{lab:def_mod_two_boundary_parity}
-辺部分集合 
-$A\subseteq E$
- と頂点 
-$w\in V$
- に対し
-
-\[\beta_G(A)(w):=\left|\left\{(e,a)\in A\times\mathsf{End}\ \middle|\ \partial_G(e,a)=w\right\}\right|\bmod 2\in\mathbb F_2\]
-と定める。各辺の二端点は異なるので、一つの辺を同じ頂点で二重に数えない。
-
-\end{definition}
-
-\begin{definition}[偶辺部分集合]\label{lab:def_even_edge_subset}
-\[\mathcal Z_1(G):=\{A\subseteq E\mid \beta_G(A)(w)=0\ \text{for every }w\in V\}\]
-と定める。これは有限集合である。境界偶奇は 
-\cref{lab:def_mod_two_boundary_parity}
- で定めた。
-
-\end{definition}
-
-\begin{definition}[偶部分グラフ多項式]\label{lab:def_even_subgraph_polynomial}
-\[Q_G(u,v):=\sum_{A\in\mathcal Z_1(G)}u^{|E|-|A|}v^{|A|}\in\mathbb Z[u,v]\]
-と定める。
 
 \end{definition}
 

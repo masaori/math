@@ -1,13 +1,6 @@
 import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
-export const finiteGraphTheory = defineBlocks([
-  {
-    id: "finite_graph_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "有限グラフ上の Ising 多項式" },
-    labels: [],
-  },
+export const flatFiniteGraphTheory = defineBlocks([
   {
     id: "finite_graph_definition_endpoint_labels",
     kind: "definition",
@@ -7182,13 +7175,6 @@ r_G
     ],
   },
   {
-    id: "formal_high_temperature_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "形式的高温展開" },
-    labels: [],
-  },
-  {
     id: "formal_high_temperature_definition_edge_sign",
     kind: "definition",
     title: { text: "辺のスピン符号" },
@@ -7324,6 +7310,226 @@ H_G(u,v)
       ]),
     ],
   },
+]);
+
+type FlatFiniteGraphBlock = (typeof flatFiniteGraphTheory)[number];
+type FlatFiniteGraphLabel = FlatFiniteGraphBlock["labels"][number];
+type FlatBlockWithLabel<L extends FlatFiniteGraphLabel> = Extract<FlatFiniteGraphBlock, { labels: readonly L[] }>;
+
+function selectFlatFiniteGraphBlocks<const L extends readonly FlatFiniteGraphLabel[]>(
+  labels: L,
+): { readonly [K in keyof L]: FlatBlockWithLabel<L[K]> } {
+  const selected = labels.map((label) => {
+    const matches = flatFiniteGraphTheory.filter((block) => block.labels.some((candidate) => candidate === label));
+    if (matches.length !== 1) throw new Error(`フラット化した有限グラフ理論ラベル ${label} の対応ブロック数が ${matches.length}`);
+    return matches[0]!;
+  });
+  return selected as { readonly [K in keyof L]: FlatBlockWithLabel<L[K]> };
+}
+
+const chapter = <const I extends string>(id: I, title: string) => ({
+  id,
+  kind: "heading" as const,
+  level: 1 as const,
+  title: { text: title },
+  labels: [] as const,
+});
+
+const section = <const I extends string>(id: I, title: string, input: string, output: string, main: string) => [
+  {
+    id: `${id}_heading`,
+    kind: "heading" as const,
+    level: 2 as const,
+    title: { text: title },
+    labels: [] as const,
+  },
+  {
+    id: `${id}_guide`,
+    kind: "remark" as const,
+    title: { text: `${title}の入出力` },
+    labels: [] as const,
+    habitat: "finite" as const,
+    statement: [paragraph<FlatFiniteGraphLabel>([`入力: ${input}。出力: ${output}。主定義・主定理・主張: ${main}。`])],
+  },
+] as const;
+
+export const finiteGraphTheory = defineBlocks([
+  chapter("mathematical_toolkit_heading", "数学的道具立て"),
+  ...section(
+    "finite_graph_input",
+    "有限グラフの入力",
+    "二つの辺端ラベルと有限な頂点集合・辺集合",
+    "ループを持たず多重辺を許す有限グラフ",
+    "有限グラフの入力",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "def_edge_endpoint_label_set",
+    "def_finite_graph_input",
+  ] as const),
+  ...section(
+    "even_edge_subsets",
+    "辺部分集合の偶奇と多項式",
+    "有限グラフ、その辺部分集合、独立な不定元 u,v",
+    "各頂点で偶次数となる辺部分集合とその二変数多項式",
+    "偶部分グラフ多項式",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "def_mod_two_boundary_parity",
+    "def_even_edge_subset",
+    "def_even_subgraph_polynomial",
+  ] as const),
+
+  chapter("finite_graph_ising_semantics_heading", "有限グラフ上の Ising 模型・分配多項式と Fisher 零点"),
+  ...section(
+    "spin_configurations",
+    "スピンと配位",
+    "有限グラフと二つの形式的スピンラベル",
+    "スピン配位と一頂点反転",
+    "一頂点での配位反転が不動点を持たない対合であること",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "def_spin_label_set",
+    "def_spin_integer_realization",
+    "def_spin_label_reversal",
+    "claim_spin_reversal_integer_realization",
+    "def_spin_configuration_set",
+    "def_single_vertex_spin_flip",
+    "claim_single_vertex_spin_flip_involution",
+  ] as const),
+  ...section(
+    "partition_polynomial",
+    "破れ辺と Ising 分配多項式",
+    "有限グラフ上のスピン配位と形式的不定元 x",
+    "破れ辺数の多重度と整数係数分配多項式",
+    "多重度による係数表示と全係数の偶数性",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "def_broken_edge_set",
+    "def_broken_edge_multiplicity",
+    "def_ising_partition_polynomial",
+    "claim_partition_polynomial_coefficient_expansion",
+    "theorem_partition_polynomial_coefficient_evenness",
+    "claim_partition_polynomial_value_at_one",
+  ] as const),
+  ...section(
+    "minus_one",
+    "特別値 −1 と奇接続辺数",
+    "Ising 分配多項式と頂点に接続する辺数の偶奇",
+    "−1 における評価と一次因子による同値条件",
+    "零点 −1 による奇接続辺数頂点の特徴付け",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "theorem_odd_incident_edge_count_root_minus_one",
+    "theorem_even_incident_edge_counts_evaluation_minus_one",
+    "theorem_root_minus_one_characterizes_odd_incident_edge_count",
+    "theorem_linear_factor_characterizes_odd_incident_edge_count",
+    "theorem_even_linear_factor_characterizes_odd_incident_edge_count",
+  ] as const),
+  ...section(
+    "degree_and_cut",
+    "次数とカット",
+    "破れ辺数と頂点二分割",
+    "分配多項式の次数の組合せ論的意味",
+    "分配多項式の次数が最大カット辺数に等しいこと",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "theorem_partition_polynomial_degree_maximum_broken_edge_count",
+    "theorem_partition_polynomial_degree_maximum_cut_size",
+  ] as const),
+  ...section(
+    "fisher_zero_coefficients",
+    "Fisher 零点と係数",
+    "正の両端係数を持つ Ising 分配多項式",
+    "零点の積・対称式・冪和と係数比",
+    "Fisher 零点冪和と逆数冪和の Newton 漸化式",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "theorem_fisher_zero_product_coefficient_ratio",
+    "theorem_fisher_zeros_nonzero",
+    "theorem_fisher_zero_reciprocal_sum_coefficient_ratio",
+    "theorem_fisher_zero_sum_coefficient_ratio",
+    "theorem_fisher_zero_elementary_symmetric_coefficient_ratio",
+    "theorem_fisher_zero_power_sum_newton_recurrence",
+    "theorem_fisher_zero_square_sum_coefficient_ratio",
+    "theorem_fisher_zero_cube_sum_coefficient_ratio",
+    "theorem_fisher_zero_fourth_power_sum_coefficient_ratio",
+    "theorem_reciprocal_fisher_zero_elementary_symmetric_coefficient_ratio",
+    "theorem_reciprocal_fisher_zero_power_sum_newton_recurrence",
+    "theorem_reciprocal_fisher_zero_square_sum_coefficient_ratio",
+    "theorem_reciprocal_fisher_zero_cube_sum_coefficient_ratio",
+    "theorem_reciprocal_fisher_zero_fourth_power_sum_coefficient_ratio",
+  ] as const),
+  ...section(
+    "full_cut_reciprocity",
+    "全辺を横切る二分割と逆数対称性",
+    "有限グラフと、全辺二分割・係数対称性・多項式逆数対称性のいずれかの条件",
+    "係数・多項式・Fisher 零点の逆数対称性",
+    "多項式逆数対称性による全辺二分割の特徴付け",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "theorem_full_cut_coefficient_symmetry",
+    "theorem_coefficient_symmetry_characterizes_full_cut",
+    "theorem_full_cut_positive_rational_evaluation_reciprocity",
+    "theorem_partition_polynomial_reciprocity_characterizes_full_cut",
+    "theorem_full_cut_fisher_zero_reciprocal_multiplicity",
+    "theorem_full_cut_fisher_zero_product",
+    "theorem_full_cut_fisher_zero_minus_one_multiplicity_parity",
+    "theorem_full_cut_fisher_zero_product_away_from_minus_one",
+    "theorem_full_cut_fisher_zero_support_parity_characterization",
+    "theorem_full_cut_distinct_fisher_zero_product",
+    "theorem_full_cut_distinct_fisher_zero_product_support_parity",
+  ] as const),
+  ...section(
+    "shifted_fisher_zeros",
+    "評価点から見た Fisher 零点",
+    "一つまたは二つの代数的評価点と分配多項式の係数（商の分母側と逆数冪和では零点でない評価点）",
+    "零点差の積、商、逆数冪和の有限係数表示",
+    "代数的評価点における零点差の逆三乗和の係数表示",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "theorem_fisher_zero_shifted_product_configuration_count",
+    "theorem_fisher_zero_algebraic_shifted_product_coefficient_ratio",
+    "theorem_fisher_zero_algebraic_shifted_product_evaluation_quotient",
+    "def_fisher_zero_algebraic_shifted_reciprocal_sum",
+    "theorem_fisher_zero_algebraic_shifted_reciprocal_sum_coefficient_ratio",
+    "theorem_fisher_zero_algebraic_shifted_reciprocal_square_sum_coefficient_ratio",
+    "theorem_fisher_zero_algebraic_shifted_reciprocal_cube_sum_coefficient_ratio",
+    "theorem_fisher_zero_rational_shifted_product_coefficient_ratio",
+  ] as const),
+  ...section(
+    "positive_rational_evaluations",
+    "正の有理評価の順序",
+    "正の有理数と Ising 分配多項式",
+    "非零性、零点差積、単調性、順序反映、全配位数との比較、一次多項式 x−1 の非整除",
+    "辺を持つ有限グラフでの正の有理評価の厳密単調性",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "theorem_no_positive_rational_root",
+    "theorem_fisher_zero_positive_rational_shifted_product_coefficient_ratio",
+    "theorem_partition_polynomial_positive_rational_evaluation_monotonicity",
+    "theorem_partition_polynomial_positive_rational_evaluation_strict_monotonicity",
+    "theorem_partition_polynomial_positive_rational_evaluation_injectivity",
+    "theorem_partition_polynomial_positive_rational_evaluation_order_reflection",
+    "theorem_partition_polynomial_positive_rational_evaluation_weak_order_reflection",
+    "theorem_partition_polynomial_positive_rational_evaluation_at_most_configuration_count",
+    "theorem_partition_polynomial_positive_rational_evaluation_at_least_configuration_count",
+    "theorem_partition_polynomial_positive_rational_evaluation_equal_configuration_count",
+    "theorem_partition_polynomial_positive_rational_evaluation_strictly_below_configuration_count",
+    "theorem_partition_polynomial_positive_rational_evaluation_strictly_above_configuration_count",
+    "theorem_no_linear_factor_x_minus_one",
+  ] as const),
+  ...section(
+    "formal_high_temperature_expansion",
+    "形式的高温展開",
+    "有限グラフ、独立な不定元 u,v、スピン配位、数学的道具立ての偶部分グラフ多項式",
+    "整数係数二変数多項式としての有限和恒等式",
+    "形式的高温展開の有限和恒等式",
+  ),
+  ...selectFlatFiniteGraphBlocks([
+    "def_edge_spin_sign",
+    "def_formal_edge_weight_sum",
+    "theorem_formal_high_temperature_expansion",
+  ] as const),
 ]);
 
 type FiniteGraphBlock = (typeof finiteGraphTheory)[number];

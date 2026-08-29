@@ -70,7 +70,7 @@ PROMPT='[[AI_AGENT_MESSAGE]]
 
 リポジトリ直下の AGENTS.md、CLAUDE.md、docs/context/ の全ファイルを読み、続いて finite-graph-ising-partition-polynomial-and-fisher-zeros/README.md、MEMORY.md、docs/tasks/auto-loop-runbook.md、docs/tasks/auto-loop-state.md、docs/tasks/task-dependency-graph.md、今回の個別タスク文書を読んでください。.codex/skills/math-prover/SKILL.md も完全に読み、その skill を使うことを commentary で宣言してください。
 
-runbook に厳密に従い、既存成果のレビュー後、実行待ちの最初の一件から構造化本文の一つの定義・主張・定理だけを前進させてください。必要な SageMath 検算、全検証、台帳と MEMORY の更新、コミット、origin の remote default branch への push、包含確認、Slack 通知まで行ってください。Slack は --topic "有限グラフのイジング分配多項式とFisher零点" --artifact-url "https://hexcomp-artifacts.web.app/math/finite-graph-ising-partition-polynomial/" を指定し、commit URL を人間へ本文を見せる URL として使わないでください。一 tick 一主張を超えて次へ進まないでください。'
+runbook の停止条件に厳密に従ってください。上位の研究ゴールと次の具体的な研究対象が台帳に明記されるまで、新しい定義・主張・定理、既存証明の細分化、SageMath 検算を追加してはなりません。停止条件を確認したら、作業ツリーを変更せず終了してください。'
 
 log "=== tick 開始"
 set +e
