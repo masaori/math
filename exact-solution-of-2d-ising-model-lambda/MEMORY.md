@@ -2,9 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 6 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 7 回目の tick 時点）
 
-**接続の組み替えの回転差が −4, 0, 4 に限ること（平滑化帰納の局所補題）を四層で証明した。** 共通の頂点への二入辺 $\vec e,\vec e'$ と二出辺 $\vec f,\vec f'$ の四つの非後退接続について、二通りの対応の一歩の回転数の和 $S_1,S_2$ が、一歩の更新（`claim_step_advances_direction`）の二箇所同時適用と左簡約により $\pi_4$ で合同になり、差 $D=S_1-S_2$ は 4 の倍数、かつ回転数が $\{0,1,-1\}$ の元なので $-4\le D\le4$、よって $D\in\{-4,0,4\}$（`claim_reconnection_turning_difference`）。閉歩道を共有頂点で組み替えると循環総回転数はちょうど $D$ だけ変わるので、回転数の変化は高々 1 である。SageMath `reconnection-turning-difference` は $L=1,2,3$ の組み替え四つ組 1,176 件を `ZZ` と `Integers(4)` で厳密検査し、三値すべての出現も確認した。Lean は `KacWard/ReconnectionTurningDifference.lean`（ℤ/4ℤ の方向番号を仮定に取る具体版）と `NecSuf/KacWard/ReconnectionTurningDifference.lean`（4 の整除と範囲 $-4\le D\le4$ だけが仮定）を通した。次は自己交差（頂点の二回通過が横断するか接するか）の定義と、平滑化による自己交差偶奇の同定へ進む。
+**格子頂点で横断する二つの通過を定義し、その関係が通過の順序に依らないことを四層で証明した。** 方向番号の軸 $\operatorname{ax}:\mathbb Z/4\mathbb Z\to\mathbb Z/2\mathbb Z$ を水平・垂直の別として定め、共通頂点の二つの通過がともに直進（各一歩の回転数が 0）し、軸が異なることを横断と定めた（`def_transverse_crossing`）。対称性（`claim_transverse_crossing_symmetric`）により、閉歩道の順序なし二通過を横断点として数えられる。SageMath `transverse-crossing-symmetry` は局所通過 144 組を `ZZ` で厳密検査し、Lean は `KacWard/TransverseCrossing.lean` と必要十分版を通した。必要十分版に残る仮定は軸の相違関係の対称性だけである。次は閉歩道の横断数を有限な順序なし二通過の個数として定義し、平滑化による偶奇更新を示す。
+
+前進前レビューでは、前 tick の接続の組み替えの回転差（コミット `b8d7f67c`）の四層は一致したが、証明末尾に未証明の「閉歩道の組み替えで循環総回転数がちょうど局所差だけ変わる」という帰結が混入していたため削除し、コミット `764c5836` を先行して push した。
+
+並列の式変形統一は、姉妹側の「V̌′ の固有値」の Step 3′ まで進んだ。右から掛ける形の冪の帰納法・部分和・極限を、省略のない一行一等号・行末根拠つきへ開いた。次は同じ証明の Step 4 を見る。
+
+## ひとつ前の到達点（2026-08-30 の 6 回目の tick 時点）
+
+**接続の組み替えの回転差が −4, 0, 4 に限ること（平滑化帰納の局所補題）を四層で証明した。** 共通の頂点への二入辺 $\vec e,\vec e'$ と二出辺 $\vec f,\vec f'$ の四つの非後退接続について、二通りの対応の一歩の回転数の和 $S_1,S_2$ が、一歩の更新（`claim_step_advances_direction`）の二箇所同時適用と左簡約により $\pi_4$ で合同になり、差 $D=S_1-S_2$ は 4 の倍数、かつ回転数が $\{0,1,-1\}$ の元なので $-4\le D\le4$、よって $D\in\{-4,0,4\}$（`claim_reconnection_turning_difference`）。SageMath `reconnection-turning-difference` は $L=1,2,3$ の組み替え四つ組 1,176 件を `ZZ` と `Integers(4)` で厳密検査し、三値すべての出現も確認した。Lean は `KacWard/ReconnectionTurningDifference.lean`（ℤ/4ℤ の方向番号を仮定に取る具体版）と `NecSuf/KacWard/ReconnectionTurningDifference.lean`（4 の整除と範囲 $-4\le D\le4$ だけが仮定）を通した。次は自己交差（頂点の二回通過が横断するか接するか）の定義と、平滑化による自己交差偶奇の同定へ進む。
 
 次 tick の前進前レビューでは、この局所補題（コミット `b8d7f67c`）の四層が一致することを確認した一方、証明末尾に未証明の「閉歩道の組み替えで循環総回転数がちょうど局所差だけ変わる」という主張が説明文として混入していたため削除した。局所補題は後続の平滑化で反復利用するため「何も言っていない主張」ではない。
 
