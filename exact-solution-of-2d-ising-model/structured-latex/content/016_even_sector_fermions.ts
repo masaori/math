@@ -1925,24 +1925,48 @@ Y_m = \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{im\tilde\theta_\mu}`,
       paragraph([
         "である。",
         math(String.raw`e^{im\tilde\theta_\mu}/M \in \mathbb{C}`),
-        " はスカラーなので、Step 1 の線型性と ",
+        " はスカラーなので、この復元公式と、Step 1 の線型性と、",
         ref("T_V_plus_eq_T_check_Vprime_on_check_Z_Y"),
-        " より",
+        "（以下「",
+        math(String.raw`\check{Z},\check{Y}`),
+        " 上の一致」と呼ぶ）より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 T_{(V^{(+)})}(Z_m)
+&= T_{(V^{(+)})}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{im\tilde\theta_\mu}\right)
+   \quad (\because \text{復元公式}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
-   \quad (\because \text{線型性}) \\
+   \quad (\because \text{Step 1 の線型性}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(\check{V}')}\!\left(\check{Z}_\mu\right)
-   \quad (\because \text{T\_V\_plus\_eq\_T\_check\_Vprime\_on\_check\_Z\_Y}) \\
+   \quad (\because \check{Z},\check{Y}\text{ 上の一致}) \\
+&= T_{(\check{V}')}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{im\tilde\theta_\mu}\right)
+   \quad (\because \text{Step 1 の線型性}) \\
 &= T_{(\check{V}')}(Z_m)
-   \quad (\because \text{線型性})
+   \quad (\because \text{復元公式})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`Y_m`),
-        " についても同じ計算で ",
+        " についても",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}(Y_m)
+&= T_{(V^{(+)})}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{im\tilde\theta_\mu}\right)
+   \quad (\because \text{復元公式}) \\
+&= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(V^{(+)})}\!\left(\check{Y}_\mu\right)
+   \quad (\because \text{Step 1 の線型性}) \\
+&= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(\check{V}')}\!\left(\check{Y}_\mu\right)
+   \quad (\because \check{Z},\check{Y}\text{ 上の一致}) \\
+&= T_{(\check{V}')}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{im\tilde\theta_\mu}\right)
+   \quad (\because \text{Step 1 の線型性}) \\
+&= T_{(\check{V}')}(Y_m)
+   \quad (\because \text{復元公式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから ",
         math(String.raw`T_{(V^{(+)})}(Y_m) = T_{(\check{V}')}(Y_m)`),
         "。",
       ]),
@@ -1980,11 +2004,11 @@ T_{(V^{(+)})}(\alpha x + \beta y)
         String.raw`\begin{aligned}
 T_{(V^{(+)})}(xy)
 &= T_{(V^{(+)})}(x)\,T_{(V^{(+)})}(y)
-   \quad (\because \text{conjugation\_is\_ring\_homomorphism}) \\
+   \quad (\because \text{共役は環準同型（乗法的）}) \\
 &= T_{(\check{V}')}(x)\,T_{(\check{V}')}(y)
    \quad (\because x, y \in \mathcal{E}) \\
 &= T_{(\check{V}')}(xy)
-   \quad (\because \text{conjugation\_is\_ring\_homomorphism})
+   \quad (\because \text{共役は環準同型（乗法的）})
 \end{aligned}`,
       ),
       paragraph([
