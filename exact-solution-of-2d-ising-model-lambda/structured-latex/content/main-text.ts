@@ -48087,6 +48087,409 @@ Y
   ],
 });
 
+const chapter_kac_ward = defineSection({
+  kind: "section",
+  id: "kac_ward_heading_chapter",
+  labels: [],
+  title: { text: "トーラス上の Kac--Ward 行列式" },
+  children: [
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_oriented_edges",
+        labels: [],
+        title: { text: "トーラスの向き付き辺と反転写像" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_reversal_has_no_fixed_point",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "kac_ward_definition_oriented_edges",
+                      kind: "definition",
+                      title: { text: "向き付き辺の集合" },
+                      labels: ["def_oriented_edges"],
+                      habitat: "N",
+                      statement: [
+                        paragraph([
+                          math(String.raw`L\ge1`), " とする。向き付き辺の集合を、辺の番号の集合 ",
+                          math(String.raw`E_L`), "（", ref("def_lattice"), "）と 2 元集合 ",
+                          math(String.raw`\{0,1\}\subset\mathbb{N}`), " の直積",
+                        ]),
+                        displayMath(String.raw`\vec{E}_L:=E_L\times\{0,1\}`),
+                        paragraph([
+                          "で定める。元 ", math(String.raw`(e,d)\in\vec{E}_L`), " の第 1 成分 ",
+                          math(String.raw`e\in E_L`), " を台の辺、第 2 成分 ",
+                          math(String.raw`d\in\{0,1\}`), " を向きと呼ぶ。",
+                          math(String.raw`d=0`), " は辺 ", math(String.raw`e`), " を ",
+                          math(String.raw`\partial_0(e)`), " から ", math(String.raw`\partial_1(e)`),
+                          " へ向かって通ること、", math(String.raw`d=1`), " はその逆向きに通ることを表す（端点写像 ",
+                          math(String.raw`\partial_0,\partial_1`), " は ", ref("def_boundary_maps"), "）。",
+                        ]),
+                        paragraph([
+                          math(String.raw`E_L`), " と ", math(String.raw`\{0,1\}`),
+                          " はどちらも有限集合なので、直積 ", math(String.raw`\vec{E}_L`),
+                          " も有限集合であり、その元の個数は（記法は ", ref("def_cardinality_notation"), "）",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\bigl|\vec{E}_L\bigr|
+&=|E_L|\cdot|\{0,1\}|
+&&\bigl(\because\ \text{有限集合の直積の濃度}\bigr)\\
+&=2L^2\cdot2
+&&\bigl(\because\ |E_L|=2L^2,\ |\{0,1\}|=2\bigr)\\
+&=4L^2
+&&\bigl(\because\ \mathbb N\text{ の乗法}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "である。ここで ", math(String.raw`|E_L|=2L^2`), " は ", ref("def_lattice"),
+                          " で示した個数である。全過程は有限集合と自然数だけで閉じ、実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "kac_ward_definition_oriented_edge_endpoints",
+                      kind: "definition",
+                      title: { text: "向き付き辺の始点写像と終点写像" },
+                      labels: ["def_oriented_edge_endpoints"],
+                      habitat: "N",
+                      statement: [
+                        paragraph([
+                          "始点写像 ", math(String.raw`\operatorname{src}:\vec{E}_L\to V_L`),
+                          " と終点写像 ", math(String.raw`\operatorname{tgt}:\vec{E}_L\to V_L`),
+                          "（", math(String.raw`\vec{E}_L`), " は ", ref("def_oriented_edges"),
+                          "、頂点集合 ", math(String.raw`V_L`), " は ", ref("def_lattice"), "）を、向き ",
+                          math(String.raw`d`), " の値による場合分けで",
+                        ]),
+                        displayMath(String.raw`\operatorname{src}(e,0):=\partial_0(e),\qquad
+\operatorname{tgt}(e,0):=\partial_1(e),\qquad
+\operatorname{src}(e,1):=\partial_1(e),\qquad
+\operatorname{tgt}(e,1):=\partial_0(e)`),
+                        paragraph([
+                          "で定める（", math(String.raw`\partial_0,\partial_1`), " は ",
+                          ref("def_boundary_maps"), "）。第 2 成分は ", math(String.raw`\{0,1\}`),
+                          " の元なので、この 2 つの場合で ", math(String.raw`\vec{E}_L`),
+                          " の全部の元が尽くされ、しかも重ならない。したがって ",
+                          math(String.raw`\operatorname{src}`), " と ", math(String.raw`\operatorname{tgt}`),
+                          " はどちらも ", math(String.raw`\vec{E}_L`), " の全体で定義された写像である。",
+                          "値はいずれも有限集合 ", math(String.raw`V_L`),
+                          " に属し、実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element:
+                    {
+                      id: "kac_ward_definition_edge_reversal",
+                      kind: "definition",
+                      title: { text: "向き付き辺の反転写像" },
+                      labels: ["def_edge_reversal"],
+                      habitat: "N",
+                      statement: [
+                        paragraph([
+                          "反転写像 ",
+                          math(String.raw`\iota:\vec{E}_L\to\vec{E}_L`),
+                          "（", math(String.raw`\vec{E}_L`), " は ", ref("def_oriented_edges"), "）を",
+                        ]),
+                        displayMath(String.raw`\iota(e,d):=(e,\,1-d)`),
+                        paragraph([
+                          "で定める。右辺の ", math(String.raw`1-d`), " は ",
+                          math(String.raw`\mathbb{Z}`), " の中の引き算であり、",
+                          math(String.raw`d=0`), " のとき ", math(String.raw`1-d=1`), "、",
+                          math(String.raw`d=1`), " のとき ", math(String.raw`1-d=0`),
+                          " なので、どちらの場合も ", math(String.raw`1-d\in\{0,1\}`), " である。したがって ",
+                          math(String.raw`\iota(e,d)\in\vec{E}_L`), " であり、",
+                          math(String.raw`\iota`), " は ", math(String.raw`\vec{E}_L`), " から ",
+                          math(String.raw`\vec{E}_L`), " への写像として定まる。",
+                          "全過程は有限集合と整数の引き算だけで閉じ、実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "kac_ward_claim_reversal_is_involution",
+                      kind: "claim",
+                      title: { text: "反転写像は対合である" },
+                      labels: ["claim_reversal_is_involution"],
+                      habitat: "N",
+                      verification: ["sagemath/check/torus-kac-ward-data"],
+                      lean: ["Ising2DLambda.KacWard.reversal_involutive"],
+                      statement: [
+                        paragraph([
+                          "任意の ", math(String.raw`(e,d)\in\vec{E}_L`), "（",
+                          ref("def_oriented_edges"), "）について",
+                        ]),
+                        displayMath(String.raw`\iota(\iota(e,d))=(e,d)`),
+                        paragraph([
+                          "が成り立つ（", math(String.raw`\iota`), " は ", ref("def_edge_reversal"), "）。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          math(String.raw`(e,d)\in\vec{E}_L`), " を取る。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\iota(\iota(e,d))
+&=\iota(e,\,1-d)
+&&\bigl(\because\ \blkref{def_edge_reversal}\bigr)\\
+&=(e,\,1-(1-d))
+&&\bigl(\because\ \blkref{def_edge_reversal}\bigr)\\
+&=(e,\,d)
+&&\bigl(\because\ \mathbb{Z}\text{ の加法と減法: }1-(1-d)=d\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "全過程は有限集合と整数の加法・減法だけで閉じ、実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+              ],
+              focus:
+                {
+                  id: "kac_ward_claim_reversal_has_no_fixed_point",
+                  kind: "claim",
+                  title: { text: "反転写像は固定点を持たない" },
+                  labels: ["claim_reversal_has_no_fixed_point"],
+                  habitat: "N",
+                  verification: ["sagemath/check/torus-kac-ward-data"],
+                  lean: ["Ising2DLambda.KacWard.reversal_ne"],
+                  statement: [
+                    paragraph([
+                      "任意の ", math(String.raw`(e,d)\in\vec{E}_L`), "（",
+                      ref("def_oriented_edges"), "）について",
+                    ]),
+                    displayMath(String.raw`\iota(e,d)\ne(e,d)`),
+                    paragraph([
+                      "が成り立つ（", math(String.raw`\iota`), " は ", ref("def_edge_reversal"), "）。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      math(String.raw`(e,d)\in\vec{E}_L`), " を取る。",
+                      ref("def_edge_reversal"), " により ",
+                      math(String.raw`\iota(e,d)=(e,\,1-d)`),
+                      " である。対の相等は成分ごとの相等なので、",
+                      math(String.raw`\iota(e,d)=(e,d)`), " と ",
+                      math(String.raw`1-d=d`), " は同値である。",
+                      math(String.raw`d\in\{0,1\}`), " による場合分けで ",
+                      math(String.raw`1-d\ne d`), " を示す。",
+                    ]),
+                    paragraph([
+                      math(String.raw`d=0`), " の場合。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+1-d
+&=1-0
+&&\bigl(\because\ d=0\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)\\
+&\ne0
+&&\bigl(\because\ 1\ne0\bigr)\\
+&=d
+&&\bigl(\because\ d=0\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`d=1`), " の場合。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+1-d
+&=1-1
+&&\bigl(\because\ d=1\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)\\
+&\ne1
+&&\bigl(\because\ 0\ne1\bigr)\\
+&=d
+&&\bigl(\because\ d=1\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "どちらの場合も ", math(String.raw`1-d\ne d`), " なので ",
+                      math(String.raw`\iota(e,d)\ne(e,d)`),
+                      " である。全過程は有限集合と整数の減法だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_rotation_and_spin_structures",
+        labels: [],
+        title: { text: "回転位相と四つのスピン構造" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_definition_spin_structures",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_oriented_edge_direction",
+                    kind: "definition",
+                    title: { text: "向き付き辺の方向番号" },
+                    labels: ["def_oriented_edge_direction"],
+                    habitat: "Z",
+                    statement: [
+                      paragraph([
+                        "四つの方向を、右・下・左・上の順に ",
+                        math(String.raw`0,1,2,3\in\mathbb Z/4\mathbb Z`),
+                        " で表す。向き付き辺 ", math(String.raw`\vec e=(e,d)\in\vec E_L`),
+                        " の方向番号 ", math(String.raw`\operatorname{dir}(\vec e)\in\mathbb Z/4\mathbb Z`), " を",
+                      ]),
+                      displayMath(String.raw`\operatorname{dir}(e,d):=
+\begin{cases}
+0,&e\in E_{L,\mathrm h},\ d=0,\\
+1,&e\in E_{L,\mathrm v},\ d=0,\\
+2,&e\in E_{L,\mathrm h},\ d=1,\\
+3,&e\in E_{L,\mathrm v},\ d=1
+\end{cases}`),
+                      paragraph([
+                        "で定める。", ref("def_lattice"), " により横向きと縦向きの辺集合は互いに素であり、",
+                        ref("def_oriented_edges"), " により ", math(String.raw`d\in\{0,1\}`),
+                        " なので、四つの場合は重ならず全ての向き付き辺を尽くす。方向番号は端点の差ではなく辺の種類と向きから定めるため、",
+                        math(String.raw`L=1,2`), " の多重辺でも区別を失わない。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_nonbacktracking_successors",
+                    kind: "definition",
+                    title: { text: "直ちに引き返さない接続" },
+                    labels: ["def_nonbacktracking_successors"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        "向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " の直ちに引き返さない後続辺の集合を",
+                      ]),
+                      displayMath(String.raw`\operatorname{Next}(\vec e):=
+\{\vec f\in\vec E_L\mid
+\operatorname{tgt}(\vec e)=\operatorname{src}(\vec f),\ \vec f\ne\iota(\vec e)\}`),
+                      paragraph([
+                        "で定める。始点・終点は ", ref("def_oriented_edge_endpoints"), "、反転は ",
+                        ref("def_edge_reversal"), " で定めた。これは有限集合 ", math(String.raw`\vec E_L`),
+                        " の部分集合であり、実数体も複素数体も現れない。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_rotation_phase",
+                    kind: "definition",
+                    title: { text: "回転位相" },
+                    labels: ["def_rotation_phase"],
+                    habitat: "Qbar",
+                    statement: [
+                      paragraph([
+                        math(String.raw`\zeta_8\in\overline{\mathbb Q}`), " を ",
+                        math(String.raw`\zeta_8^4=-1`), " を満たす固定済みの原始 8 乗根とする。",
+                        math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " に対する回転位相を",
+                      ]),
+                      displayMath(String.raw`\rho(\vec e,\vec f):=
+\begin{cases}
+1,&\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e),\\
+\zeta_8,&\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)+1,\\
+\zeta_8^{-1},&\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)-1
+\end{cases}
+\quad\text{in }\overline{\mathbb Q}`),
+                      paragraph([
+                        "で定める。方向番号の加減は ", math(String.raw`\mathbb Z/4\mathbb Z`),
+                        " の中で行う。直進・左回転・右回転にそれぞれ半角の位相 ",
+                        math(String.raw`1,\zeta_8,\zeta_8^{-1}`),
+                        " を与える定義である。直ちに反転する場合は ", ref("def_nonbacktracking_successors"),
+                        " で除いてあるので、この三つの場合で後続辺を尽くす。値は代数的数の中に留まる。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_seam_parities",
+                    kind: "definition",
+                    title: { text: "二つの切断線を横切る偶奇" },
+                    labels: ["def_seam_parities"],
+                    habitat: "N",
+                    statement: [
+                      paragraph([
+                        math(String.raw`\vec e=(e,d)\in\vec E_L`), " に対し、横周期と縦周期の切断線を横切る偶奇 ",
+                        math(String.raw`c_{\mathrm h}(\vec e),c_{\mathrm v}(\vec e)\in\{0,1\}`), " を次で定める。",
+                      ]),
+                      displayMath(String.raw`c_{\mathrm h}(e,d):=
+\begin{cases}1,&e=n_{\mathrm h}(i,j)\text{ かつ }s(j)=L-1,\\0,&\text{それ以外},\end{cases}
+\qquad
+c_{\mathrm v}(e,d):=
+\begin{cases}1,&e=n_{\mathrm v}(i,j)\text{ かつ }s(i)=L-1,\\0,&\text{それ以外}.\end{cases}`),
+                      paragraph([
+                        "ここで ", math(String.raw`n_{\mathrm h},n_{\mathrm v}`), " は ", ref("def_edge_numbering"),
+                        "、代表元写像 ", math(String.raw`s`), " は ", ref("def_residue_maps"),
+                        " である。値は向き ", math(String.raw`d`), " によらないため、辺を反転しても切断線を横切る偶奇は変わらない。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_definition_spin_structures",
+                kind: "definition",
+                title: { text: "四つのスピン構造とねじれ符号" },
+                labels: ["def_spin_structures"],
+                habitat: "Z",
+                verification: ["sagemath/check/torus-kac-ward-data"],
+                lean: ["Ising2DLambda.KacWard.spinStructures_card"],
+                statement: [
+                  paragraph([
+                    "トーラス上のスピン構造の添字集合を",
+                  ]),
+                  displayMath(String.raw`\mathcal S:=\{0,1\}\times\{0,1\}`),
+                  paragraph([
+                    "と定める。したがって ", math(String.raw`|\mathcal S|=4`),
+                    " である。", math(String.raw`(a,b)\in\mathcal S`), " と向き付き辺 ",
+                    math(String.raw`\vec e\in\vec E_L`), " に対するねじれ符号を",
+                  ]),
+                  displayMath(String.raw`\varepsilon_{a,b}(\vec e):=
+(-1)^{a\,c_{\mathrm h}(\vec e)+b\,c_{\mathrm v}(\vec e)}\in\{-1,1\}\subset\mathbb Z`),
+                  paragraph([
+                    "で定める（切断線の偶奇は ", ref("def_seam_parities"), "）。",
+                    math(String.raw`(a,b)=(0,0),(1,0),(0,1),(1,1)`),
+                    " が、横周期・縦周期の符号を独立に反転する四つの場合を尽くす。",
+                    "この添字とねじれ符号を、後続の四つの Kac--Ward 行列で固定して使う。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+});
+
 const chapter_real_escape = defineSection({
   kind: "section",
   id: "real_escape_heading_chapter",
@@ -54081,6 +54484,7 @@ const chapters = [
   chapter_fisher_zero,
   chapter_zero_pinching,
   chapter_thermodynamic_limit,
+  chapter_kac_ward,
   chapter_real_escape,
   chapter_fisher_zero_density,
   chapter_critical_exponent,

@@ -2,7 +2,9 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-22 時点）
+## 現在の到達点（2026-08-29 時点）
+
+**Kac--Ward 接続の最初のセクションを四層で作成し、全体 Lean 検証待ちまで進めた。** 向き付き辺・反転・非後退接続・方向番号・8 乗根による回転位相・二切断線の偶奇・四つのスピン構造とねじれ符号を本文へ追加し、SageMath の有限トーラス検査と Lean の具体版・必要十分版を通した。全体 `lake build` は締切時点で未完走なので、次 tick はこの全体検証から再開し、完走後にだけセクションを完了へ移す。
 
 **最終ゴールを Onsager 閉形式による厳密解へ復帰させた。** README の完了条件を、有限トーラスの分配多項式から四つのスピン構造の Kac--Ward 行列式、有限 Fourier 分解、分散因子、熱力学極限、Onsager 積分へ到達することとして明記した。実行順序の正本は
 [`docs/tasks/onsager-closed-form-connection/task-dependency-graph.md`](docs/tasks/onsager-closed-form-connection/task-dependency-graph.md) である。

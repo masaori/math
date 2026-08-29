@@ -52,6 +52,15 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.NecSuf.KacWard.reverseBool_involutive
+  Ising2DLambda.NecSuf.KacWard.reverseBool_ne
+  Ising2DLambda.NecSuf.KacWard.card_bool_product
+  Ising2DLambda.KacWard.reversal_involutive
+  Ising2DLambda.KacWard.reversal_ne
+  Ising2DLambda.KacWard.spinStructures_card
+  Ising2DLambda.KacWard.reversal_involutive_from_necSuf
+  Ising2DLambda.KacWard.reversal_ne_from_necSuf
+  Ising2DLambda.KacWard.spinStructures_card_from_necSuf
   Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow
   Ising2DLambda.PartitionPolynomial.multiplicity_sum_eq_two_pow_from_necSuf
   Ising2DLambda.NecSuf.PartitionPolynomial.sum_card_fiber_eq_card
