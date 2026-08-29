@@ -5324,13 +5324,21 @@ g=\sum_{j=0}^{m}b_j x^j
       displayMath(String.raw`
         D(fg)
         =
+        \sum_{i=0}^{n}\sum_{j=0}^{m}
+        D\!\left(a_i b_jx^{i+j}\right)
+        \quad
+        \bigl(\because\ \text{形式微分の線形性}\bigr).
+      `),
+      displayMath(String.raw`
+        D(fg)
+        =
         \sum_{\substack{0\le i\le n,\ 0\le j\le m\\i+j>0}}
         a_i b_j\,
         \iota_{\mathbb Q,\overline{\mathbb Q}}
         \!\left(\eta_{\mathbb N,\mathbb Q}(i+j)\right)
         x^{i+j-1}
         \quad
-        \bigl(\because\ \text{形式微分の線形性、定数則、正次数単項式則}\bigr).
+        \bigl(\because\ \text{形式微分の定数則および正次数単項式則}\bigr).
       `),
       displayMath(String.raw`
         D(fg)
