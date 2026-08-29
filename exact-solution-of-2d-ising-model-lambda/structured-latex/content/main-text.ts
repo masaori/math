@@ -49335,6 +49335,115 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_reversal_direction_shift",
+        labels: [],
+        title: { text: "反転と方向番号" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_reversal_direction_shift",
+              beforeFocus: [],
+              focus: {
+                id: "kac_ward_claim_reversal_direction_shift",
+                kind: "claim",
+                title: { text: "反転は方向番号を二だけ進める" },
+                labels: ["claim_reversal_direction_shift"],
+                habitat: "Z",
+                verification: ["sagemath/check/reversal-direction-shift"],
+                lean: [
+                  "Ising2DLambda.KacWard.directionNumber_reversal",
+                  "Ising2DLambda.NecSuf.KacWard.offset_reverse_necSuf",
+                  "Ising2DLambda.KacWard.directionNumber_reversal_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`),
+                    "（", ref("def_oriented_edges"), "）について、",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " の等式",
+                  ]),
+                  displayMath(String.raw`\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`),
+                  paragraph([
+                    "が成り立つ。方向番号 ", math(String.raw`\operatorname{dir}`), " は ",
+                    ref("def_oriented_edge_direction"), "、反転写像 ", math(String.raw`\iota`),
+                    " は ", ref("def_edge_reversal"), " で定めた。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`\vec e=(e,d)`), " と書く。", ref("def_oriented_edge_direction"),
+                    " の四つの場合は重ならず全ての向き付き辺を尽くすので、場合ごとに示す。",
+                    "まず ", math(String.raw`e\in E_{L,\mathrm h}`), " かつ ",
+                    math(String.raw`d=0`), " の場合は",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\iota(e,0))
+&=\operatorname{dir}(e,1)
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }1-0=1\bigr)\\
+&=2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm h},\ d=1\text{ の場合}\bigr)\\
+&=0+2
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の零元の加法}\bigr)\\
+&=\operatorname{dir}(e,0)+2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm h},\ d=0\text{ の場合}\bigr)
+\end{aligned}`),
+                  paragraph(["である。次に ", math(String.raw`e\in E_{L,\mathrm v}`),
+                    " かつ ", math(String.raw`d=0`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\iota(e,0))
+&=\operatorname{dir}(e,1)
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }1-0=1\bigr)\\
+&=3
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm v},\ d=1\text{ の場合}\bigr)\\
+&=1+2
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ で }1+2=3\bigr)\\
+&=\operatorname{dir}(e,0)+2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm v},\ d=0\text{ の場合}\bigr)
+\end{aligned}`),
+                  paragraph(["である。次に ", math(String.raw`e\in E_{L,\mathrm h}`),
+                    " かつ ", math(String.raw`d=1`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\iota(e,1))
+&=\operatorname{dir}(e,0)
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }1-1=0\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm h},\ d=0\text{ の場合}\bigr)\\
+&=2+2
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ で }2+2=4=0\bigr)\\
+&=\operatorname{dir}(e,1)+2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm h},\ d=1\text{ の場合}\bigr)
+\end{aligned}`),
+                  paragraph(["である。最後に ", math(String.raw`e\in E_{L,\mathrm v}`),
+                    " かつ ", math(String.raw`d=1`), " の場合は"]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{dir}(\iota(e,1))
+&=\operatorname{dir}(e,0)
+&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と }1-1=0\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm v},\ d=0\text{ の場合}\bigr)\\
+&=3+2
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ で }3+2=5=1\bigr)\\
+&=\operatorname{dir}(e,1)+2
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の }e\in E_{L,\mathrm v},\ d=1\text{ の場合}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。四つの場合を合わせて主張を得る。",
+                    "後続の歩道と逆歩道の対称性（逆歩道の回転位相の積が元の積の逆数になること）は、",
+                    "この等式を繰り返し引く。全過程は有限集合の場合分けと ",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " の加法だけで閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 

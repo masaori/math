@@ -283,6 +283,7 @@ export const ALL_LABELS = [
   "claim_real_closed_sum_of_two_squares_zero",
   "claim_real_logarithm_int_power",
   "claim_restriction_family_gluing",
+  "claim_reversal_direction_shift",
   "claim_reversal_has_no_fixed_point",
   "claim_reversal_is_involution",
   "claim_root_factor_quotient_value_ne_zero",
