@@ -1275,6 +1275,32 @@ theorem three_pairings_of_four_distinct
       simp only [Finset.mem_insert, Finset.mem_singleton] at ha
       exact ha.elim hab (fun hac' ↦ hac hac')
 
+/-- 相異なる四端子 `a,b,c,d` の全体に含まれる二元集合が `a` を含むなら、それは
+`{a,b}`、`{a,c}`、`{a,d}` のいずれかである。四端子の対分けが三候補に尽きることを
+示す段の先頭であり、`a` を含む組の形を決める部分である。 -/
+theorem pair_containing_first_of_four
+    {α : Type} [DecidableEq α] {a b c d : α} {s : Finset α}
+    (hcard : s.card = 2) (hmem : a ∈ s) (hsub : s ⊆ ({a, b, c, d} : Finset α)) :
+    s = ({a, b} : Finset α) ∨ s = ({a, c} : Finset α) ∨ s = ({a, d} : Finset α) := by
+  classical
+  have herase : (s.erase a).card = 1 := by
+    rw [Finset.card_erase_of_mem hmem, hcard]
+  obtain ⟨x, hx⟩ := Finset.card_eq_one.mp herase
+  have hxmem : x ∈ s.erase a := by rw [hx]; simp
+  have hxs : x ∈ s := Finset.mem_of_mem_erase hxmem
+  have hseq : s = ({a, x} : Finset α) := by
+    have := Finset.insert_erase hmem
+    rw [hx] at this
+    exact this.symm
+  have hxsub : x ∈ ({a, b, c, d} : Finset α) := hsub hxs
+  have hxa : x ≠ a := Finset.ne_of_mem_erase hxmem
+  simp only [Finset.mem_insert, Finset.mem_singleton] at hxsub
+  rcases hxsub with h | h | h | h
+  · exact absurd h hxa
+  · exact Or.inl (by rw [hseq, h])
+  · exact Or.inr (Or.inl (by rw [hseq, h]))
+  · exact Or.inr (Or.inr (by rw [hseq, h]))
+
 /-- 復号繊維の完全マッチングを city `v` へ制限したものは、その city の対分けの
 全体に属する。`periodicSquareFiberInternalEdgesAt_isPairing` の三条件を、
 対分けの全体の定義へそのまま移したものである。 -/

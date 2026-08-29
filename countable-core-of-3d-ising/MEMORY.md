@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 14:03（並行）: `pair_containing_first_of_four` を追加し、四端子の全体に含まれる二元集合が一つ目の端子を含むならその組は三通りに限られることを閉じた。四端子の対分けが三候補に尽きることを示す段の先頭である。次は残りの組が補集合として決まることを示し、任意の対分けが三候補のいずれかであることへ束ねる。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
 - 2026-08-29 12:34（並行）: `periodicSquarePairingsAt_eq_singleton_of_card_eq_two` と `card_periodicSquarePairingsAt_of_card_eq_two` を追加し、残存端子が二個の city の対分けは二端子全体を一組にするものだけで、個数が一であることを閉じた。次は残存端子が四個の場合の対分け数が三であることを示す。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
 - 2026-08-29 11:04（並行）: `periodicSquareFiberToPairingsProduct_bijective` と `card_periodicSquareDecodingFiber` を追加し、復号繊維から city ごとの対分けの直積への写像の全単射性と、そこから復号繊維の個数が city ごとの対分けの個数の積に等しいことを閉じた。次は city ごとの対分けの個数を残存端子の個数から決める。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
 - 2026-08-29 10:33（並行）: `fiberInternalEdgesAt_pairingsProductMatching` と `periodicSquareFiberToPairingsProduct_surjective` を追加し、構成した完全マッチングの city 制限が指定対分けへ戻る等式と、復号繊維から city ごとの対分け直積への写像の全射性を閉じた。既存の単射性と合わせて全単射の二方向が揃ったので、次は復号繊維の個数を city ごとの対分け数の積へ移す。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
