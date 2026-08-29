@@ -194,6 +194,7 @@ export const ALL_LABELS = [
   "theorem_product_difference_one_hundred_twenty_four_hyperbolic_types",
   "theorem_product_difference_one_hundred_twenty_hyperbolic_types",
   "theorem_product_difference_one_hundred_twenty_one_hyperbolic_types",
+  "theorem_product_difference_one_hundred_twenty_six_hyperbolic_types",
   "theorem_product_difference_one_hundred_twenty_three_hyperbolic_types",
   "theorem_product_difference_one_hundred_twenty_two_hyperbolic_types",
   "theorem_product_difference_one_hundred_two_hyperbolic_types",
