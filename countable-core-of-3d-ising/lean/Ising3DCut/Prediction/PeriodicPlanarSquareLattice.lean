@@ -1551,4 +1551,29 @@ theorem encodedEvenSubgraph_periodicSquarePairingsProductMatching
   · exact encodedEvenSubgraph_periodicSquarePairingsProductMatching_subset subgraph pairings
   · exact subset_encodedEvenSubgraph_periodicSquarePairingsProductMatching hn subgraph pairings
 
+/-- 指定した city の対分けは、指定対分け族から構成した完全マッチングを
+同じ city へ制限した内部辺集合に含まれる。city ごとの制限が指定値へ戻ることを
+二つの包含へ分けたうち、指定値から制限への包含である。 -/
+theorem periodicSquarePairing_subset_fiberInternalEdgesAt_pairingsProductMatching
+    {n : ℕ} [NeZero n] (subgraph : PeriodicSquareEvenSubgraph n)
+    (pairings : (v : LatticeVertex n) →
+      {pairing // pairing ∈ periodicSquarePairingsAt subgraph v})
+    (v : LatticeVertex n) :
+    (pairings v).1 ⊆ periodicSquareFiberInternalEdgesAt
+      (periodicSquarePairingsProductMatching subgraph pairings) v := by
+  intro s hs
+  rw [mem_periodicSquareFiberInternalEdgesAt_iff]
+  refine ⟨?_, ?_⟩
+  · rw [periodicSquarePairingsProductMatching, Finset.mem_union]
+    exact Or.inl (Finset.mem_biUnion.mpr ⟨v, Finset.mem_univ v, hs⟩)
+  · rw [mem_internalEdgesAt_iff]
+    have hv := (mem_periodicSquarePairingsAt_iff subgraph v (pairings v).1).mp
+      (pairings v).2
+    refine ⟨?_, hv.1 s hs⟩
+    intro t hts
+    have ht : t ∈ (pairings v).1.biUnion id :=
+      Finset.mem_biUnion.mpr ⟨s, hs, hts⟩
+    rw [hv.2.2] at ht
+    exact (mem_encodePeriodicSquareRemainingTerminalsAt_iff subgraph v t).mp ht |>.1
+
 end Ising3DCut.Prediction

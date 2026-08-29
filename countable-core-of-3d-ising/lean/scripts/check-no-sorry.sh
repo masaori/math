@@ -773,6 +773,7 @@ targets=(
   Ising3DCut.Prediction.encodedEvenSubgraph_periodicSquarePairingsProductMatching_subset
   Ising3DCut.Prediction.subset_encodedEvenSubgraph_periodicSquarePairingsProductMatching
   Ising3DCut.Prediction.encodedEvenSubgraph_periodicSquarePairingsProductMatching
+  Ising3DCut.Prediction.periodicSquarePairing_subset_fiberInternalEdgesAt_pairingsProductMatching
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then

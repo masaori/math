@@ -1,4 +1,5 @@
 # MEMORY — 3 次元 Ising の可算コアを同定する
+- 2026-08-29 09:35（並行）: `periodicSquarePairing_subset_fiberInternalEdgesAt_pairingsProductMatching` を追加し、構成した完全マッチングの city 制限が指定対分けに戻る等式のうち、指定対分けから制限への包含を閉じた。次は逆包含を示して等式と全射性を閉じる。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
 - 2026-08-29 09:04（並行）: `encodedEvenSubgraph_periodicSquarePairingsProductMatching` を追加し、指定対分けから構成した完全マッチングの復号値が元の偶部分グラフに戻ることを閉じた。次は city ごとの制限が指定対分けに戻ることを示し、全射性を閉じる。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
 - 2026-08-29 08:38（並行）: `periodicSquarePairingsProductMatching_isPerfectMatching` を追加し、city ごとの指定対分けと外部辺から構成した候補が terminal graph の全端子をちょうど一度ずつ覆う完全マッチングであることを閉じた。次は復号値と指定対分けへの戻りを示し、全射性を閉じる。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
 - 2026-08-29 08:04（並行）: `periodicSquarePairingsProductMatching` を定義し、`periodicSquarePairingsProductMatching_subset_terminalEdges` で候補の辺がすべて terminal graph の辺であることを閉じた。全射性の第二段であり、次はこの候補が端子をちょうど一度ずつ覆う完全マッチングであることを示す。レビューで前 tick の内部辺包含定理が sorry 非依存検査へ未登録だったのを見つけて登録した（登録 710 件）。本流は第二の正の有理点で極限量の存在を閉じる模型固有定理が無いため判断待ち。
