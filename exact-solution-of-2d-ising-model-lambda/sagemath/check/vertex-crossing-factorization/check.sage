@@ -33,6 +33,20 @@ def straight(edge, successor):
     return (direction_number(successor) - direction_number(edge)) % 4 == 0
 
 
+def crossing(L, walk, k, l):
+    """添字 k, l の通過が横断するか（def_index_pair_crossing）。"""
+    m = len(walk)
+    vertex_k = endpoints(L, walk[k])[1]
+    vertex_l = endpoints(L, walk[l])[1]
+    if vertex_k != vertex_l:
+        return False
+    straight_k = straight(walk[k], walk[(k + 1) % m])
+    straight_l = straight(walk[l], walk[(l + 1) % m])
+    axis_k = direction_number(walk[k]) % 2
+    axis_l = direction_number(walk[l]) % 2
+    return straight_k and straight_l and axis_k != axis_l
+
+
 closed_walk_total = 0
 vertex_checks = 0
 multiple_visit_checks = 0
@@ -54,9 +68,12 @@ for L in range(1, 4):
                             if endpoints(L, walk[k])[1] == vertex
                             and straight(walk[k], walk[(k + 1) % m])
                             and direction_number(walk[k]) % 2 == 1]
-                crossing_pairs = [(k, l) for k in horizontal for l in vertical]
-                unordered_pairs = {tuple(sorted((k, l))) for k, l in crossing_pairs}
-                assert len(unordered_pairs) == ZZ(len(horizontal)) * ZZ(len(vertical))
+                # 左辺 c_v(γ): 横断の定義（def_index_pair_crossing）から独立に数える
+                vertexwise_crossing = ZZ(sum(
+                    1 for k in range(m) for l in range(k + 1, m)
+                    if crossing(L, walk, k, l)
+                    and endpoints(L, walk[k])[1] == vertex))
+                assert vertexwise_crossing == ZZ(len(horizontal)) * ZZ(len(vertical))
                 vertex_checks += 1
                 if len(horizontal) + len(vertical) >= 3:
                     multiple_visit_checks += 1
