@@ -49027,8 +49027,11 @@ c_{\mathrm v}(e,d):=
                         " と ", math(String.raw`E(x)=\sum_n e_nx^n`), " の積は Cauchy 積",
                       ]),
                       displayMath(String.raw`C(x)E(x):=\sum_{n\in\mathbb N}\left(\sum_{j=0}^{n}c_je_{n-j}\right)x^n`),
+                      paragraph(["で、和と加法逆元は係数ごとに"]),
+                      displayMath(String.raw`C(x)+E(x):=\sum_{n\in\mathbb N}(c_n+e_n)x^n,\qquad -C(x):=\sum_{n\in\mathbb N}(-c_n)x^n`),
                       paragraph([
-                        "で定める。各係数に現れる和は有限である。定数項を ",
+                        "で定める。差は ", math(String.raw`C(x)-E(x):=C(x)+\bigl(-E(x)\bigr)`),
+                        " と書く。各係数に現れる和は有限である。定数項を ",
                         math(String.raw`\mathrm{ac}_0(C):=c_0`), " と書く。これは可算集合 ",
                         math(String.raw`\overline{\mathbb Q}^{\mathbb N}`),
                         " と代数的数の有限和・有限積だけで定まり、実数体も複素数体も現れない。",
@@ -49074,7 +49077,16 @@ c_{\mathrm v}(e,d):=
                     math(String.raw`S(x)-T(x)=0`), " または ", math(String.raw`S(x)+T(x)=0`),
                     " である。後者なら定数項を取って",
                   ]),
-                  displayMath(String.raw`0=\mathrm{ac}_0\bigl(S(x)+T(x)\bigr)=1+1=2`),
+                  displayMath(String.raw`\begin{aligned}
+0&=\mathrm{ac}_0\bigl(S(x)+T(x)\bigr)
+&&\bigl(\because\ S(x)+T(x)=0\text{ と }\mathrm{ac}_0(0)=0.\ \blkref{def_qbar_formal_power_series}\bigr)\\
+&=\mathrm{ac}_0(S)+\mathrm{ac}_0(T)
+&&\bigl(\because\ \text{和は係数ごとの和である。}\blkref{def_qbar_formal_power_series}\bigr)\\
+&=1+1
+&&\bigl(\because\ \mathrm{ac}_0(S)=\mathrm{ac}_0(T)=1\text{（仮定）}\bigr)\\
+&=2
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)
+\end{aligned}`),
                   paragraph([
                     "となるが、", math(String.raw`2\ne0`), " は ", math(String.raw`\overline{\mathbb Q}`),
                     " の標数が零であることに反する。ゆえに ", math(String.raw`S(x)-T(x)=0`),
