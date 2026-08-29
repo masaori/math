@@ -48804,9 +48804,14 @@ c_{\mathrm v}(e,d):=
 \prod_{j\in\mathcal J}B_{j,\varphi(j)}
 \in\overline{\mathbb Q}[x]`),
                   paragraph([
-                    "で定める。置換と符号は ", ref("def_permutation_sign"), "、代数的数を定数多項式へ送る写像 ",
-                    math(String.raw`z\mapsto\widehat z`), " は ", ref("def_qbar_constant_embedding"),
-                    " で定めた。和と積は有限であり、積の値は可換環 ",
+                    "で定める。置換と符号は ", ref("def_permutation_sign"),
+                    " で定めた。整数の符号 ", math(String.raw`\operatorname{sgn}(\varphi)\in\mathbb Z`),
+                    " は部分集合の鎖 ",
+                    math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
+                    " により ", math(String.raw`\overline{\mathbb Q}`),
+                    " の元として扱い、代数的数を定数多項式へ送る写像 ",
+                    math(String.raw`z\mapsto\widehat z`), "（", ref("def_qbar_constant_embedding"),
+                    "）で定数多項式へ送る。和と積は有限であり、積の値は可換環 ",
                     math(String.raw`\overline{\mathbb Q}[x]`), " の中で順序によらない。",
                   ]),
                 ],
@@ -48829,15 +48834,23 @@ c_{\mathrm v}(e,d):=
                     "スピン構造 ", math(String.raw`(a,b)\in\mathcal S`), " ごとに、",
                     ref("def_kac_ward_transition_matrices"), " の各成分を ",
                     ref("def_qbar_constant_embedding"), " で定数多項式へ送った行列を ",
-                    math(String.raw`\widehat{M}^{a,b}`), " と書く。Kac--Ward 多項式行列を",
+                    math(String.raw`\widehat{M}^{a,b}`), " と書く。また、対角成分が ",
+                    math(String.raw`\overline{\mathbb Q}[x]`), " の単位元 ",
+                    math(String.raw`1`), "、非対角成分が零元 ",
+                    math(String.raw`0`), " である行列を ",
+                    math(String.raw`I_{\vec E_L}\in\mathrm{Mat}_{\vec E_L}\bigl(\overline{\mathbb Q}[x]\bigr)`),
+                    " と書く（", ref("def_qbar_polynomial_matrix"), "）。Kac--Ward 多項式行列 ",
+                    math(String.raw`K^{a,b}(x)\in\mathrm{Mat}_{\vec E_L}\bigl(\overline{\mathbb Q}[x]\bigr)`),
+                    " を、成分ごとに",
                   ]),
-                  displayMath(String.raw`K^{a,b}(x):=I_{\vec E_L}-x\widehat M^{a,b}
-\in\mathrm{Mat}_{\vec E_L}\bigl(\overline{\mathbb Q}[x]\bigr)`),
+                  displayMath(String.raw`K^{a,b}_{\vec e,\vec f}(x):=\bigl(I_{\vec E_L}\bigr)_{\vec e,\vec f}-x\,\widehat{M^{a,b}_{\vec e,\vec f}}
+\qquad(\vec e,\vec f\in\vec E_L)`),
                   paragraph([
-                    "で定める。成分ごとには ",
-                    math(String.raw`K^{a,b}_{\vec e,\vec f}(x)=\delta_{\vec e,\vec f}-x\widehat{M^{a,b}_{\vec e,\vec f}}`),
-                    " である。", math(String.raw`I_{\vec E_L}`), " は対角成分が定数多項式 ",
-                    math(String.raw`1`), "、非対角成分が零多項式の単位行列である。",
+                    "で定める。右辺の差と積は ", ref("def_qbar_polynomial_ring"),
+                    " の ", math(String.raw`\overline{\mathbb Q}[x]`),
+                    " のものである。この成分ごとの定義を ",
+                    math(String.raw`K^{a,b}(x)=I_{\vec E_L}-x\widehat M^{a,b}`),
+                    " とも書く。",
                   ]),
                 ],
               },
@@ -48897,27 +48910,82 @@ c_{\mathrm v}(e,d):=
                 ],
                 proof: [
                   paragraph([
-                    "多項式を ", math(String.raw`x=0`), " で評価する写像を ",
-                    math(String.raw`\operatorname{ev}_0:\overline{\mathbb Q}[x]\to\overline{\mathbb Q}`),
-                    " と書く。定数項の定義により ",
-                    math(String.raw`\mathrm{ac}_0(f)=\operatorname{ev}_0(f)`), " であり、",
-                    math(String.raw`\operatorname{ev}_0`), " は有限和と有限積を保つ。したがって ",
-                    ref("def_qbar_polynomial_determinant"), " の有限な置換展開へ項ごとに適用できる。",
+                    math(String.raw`\mathrm{aev}_0`), " は ", ref("def_qbar_poly_evaluation"),
+                    " の評価写像で ", math(String.raw`w=0`), " と置いたものである（この節では ",
+                    ref("def_qbar_polynomial_matrix"), " のとおり不定元を ",
+                    math(String.raw`x`), " と書く）。整数の符号 ",
+                    math(String.raw`\operatorname{sgn}(\varphi)\in\mathbb Z`), "（",
+                    ref("def_permutation_sign"), "）は、", ref("def_qbar_polynomial_determinant"),
+                    " のとおり部分集合の鎖 ",
+                    math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
+                    " により ", math(String.raw`\overline{\mathbb Q}`), " の元として扱う。",
+                  ]),
+                  paragraph([
+                    "まず、任意の成分の ", math(String.raw`x=0`), " での値を求める。任意の ",
+                    math(String.raw`\vec e,\vec f\in\vec E_L`), " について",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\mathrm{aev}_0\bigl(K^{a,b}_{\vec e,\vec f}(x)\bigr)
+&=\mathrm{aev}_0\bigl(\bigl(I_{\vec E_L}\bigr)_{\vec e,\vec f}\bigr)-\mathrm{aev}_0(x)\cdot\mathrm{aev}_0\bigl(\widehat{M^{a,b}_{\vec e,\vec f}}\bigr)
+&&\bigl(\because\ \blkref{def_kac_ward_polynomial_matrices}\text{ の成分の定義と、}\mathrm{aev}_0\text{ が和・加法逆元・積を保つこと（}\blkref{def_qbar_poly_evaluation}\text{）}\bigr)\\
+&=\mathrm{aev}_0\bigl(\bigl(I_{\vec E_L}\bigr)_{\vec e,\vec f}\bigr)-0\cdot M^{a,b}_{\vec e,\vec f}
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\text{ の }\mathrm{aev}_w(x)=w\text{ と }\mathrm{aev}_w(\widehat z)=z\bigr)\\
+&=\mathrm{aev}_0\bigl(\bigl(I_{\vec E_L}\bigr)_{\vec e,\vec f}\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。", math(String.raw`I_{\vec E_L}`), " の成分は対角で ",
+                    math(String.raw`\overline{\mathbb Q}[x]`), " の単位元、非対角で零元であり（",
+                    ref("def_kac_ward_polynomial_matrices"), "）、",
+                    math(String.raw`\mathrm{aev}_0`), " は単位元を ", math(String.raw`1`),
+                    " へ、零元を ", math(String.raw`0`), " へ送る（",
+                    ref("def_qbar_poly_evaluation"), "）から、この値は ",
+                    math(String.raw`\vec e=\vec f`), " のとき ", math(String.raw`1`), "、",
+                    math(String.raw`\vec e\ne\vec f`), " のとき ", math(String.raw`0`), " である。",
+                  ]),
+                  paragraph([
+                    "次に ", math(String.raw`n\in\mathbb N`), " を、",
+                    math(String.raw`k>n`), " ならば ",
+                    math(String.raw`\mathrm{ac}_k\bigl(D^{a,b}_L(x)\bigr)=0`),
+                    " を満たすように取る（", ref("claim_qbar_evaluation_coefficient_sum"),
+                    " と同じ取り方である）。求めたい定数項から始めて",
                   ]),
                   displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_0\bigl(D^{a,b}_L(x)\bigr)
-&=\operatorname{ev}_0\!\left(\det_x\bigl(K^{a,b}(x)\bigr)\right)
-&&\bigl(\because\ \blkref{def_kac_ward_determinants}\text{ と定数項の定義}\bigr)\\
-&=\det\!\left(\operatorname{ev}_0\bigl(K^{a,b}(x)\bigr)\right)
-&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\text{ の有限和・有限積へ }\operatorname{ev}_0\text{ を適用}\bigr)\\
-&=\det\!\left(I_{\vec E_L}\right)
-&&\bigl(\because\ \blkref{def_kac_ward_polynomial_matrices}\text{ と }\operatorname{ev}_0(x)=0\bigr)\\
-&=1
-&&\bigl(\because\ \text{単位行列の行列式}\bigr)
+&=\sum_{k=0}^{n}\mathrm{ac}_k\bigl(D^{a,b}_L(x)\bigr)\cdot 0^{\,k}
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\text{ の約束 }0^{0}=1\text{ と、}k\ge1\text{ での }0^{k}=0^{k-1}\cdot0=0\text{（}\overline{\mathbb Q}\text{ の四則）により }k=0\text{ の項だけが残る}\bigr)\\
+&=\mathrm{aev}_0\bigl(D^{a,b}_L(x)\bigr)
+&&\bigl(\because\ \blkref{claim_qbar_evaluation_coefficient_sum}\text{ を }w=0\text{ で当てる}\bigr)\\
+&=\mathrm{aev}_0\!\Bigl(\sum_{\varphi\in\operatorname{Perm}(\vec E_L)}\widehat{\operatorname{sgn}(\varphi)}\prod_{\vec e\in\vec E_L}K^{a,b}_{\vec e,\varphi(\vec e)}(x)\Bigr)
+&&\bigl(\because\ \blkref{def_kac_ward_determinants}\text{ と }\blkref{def_qbar_polynomial_determinant}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}(\vec E_L)}\mathrm{aev}_0\!\Bigl(\widehat{\operatorname{sgn}(\varphi)}\prod_{\vec e\in\vec E_L}K^{a,b}_{\vec e,\varphi(\vec e)}(x)\Bigr)
+&&\bigl(\because\ \mathrm{aev}_0\text{ は和を保つ（}\blkref{def_qbar_poly_evaluation}\text{）。有限和へ繰り返し当てる}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}(\vec E_L)}\mathrm{aev}_0\bigl(\widehat{\operatorname{sgn}(\varphi)}\bigr)\prod_{\vec e\in\vec E_L}\mathrm{aev}_0\bigl(K^{a,b}_{\vec e,\varphi(\vec e)}(x)\bigr)
+&&\bigl(\because\ \mathrm{aev}_0\text{ は積を保つ（}\blkref{def_qbar_poly_evaluation}\text{）。各項の有限積へ繰り返し当てる}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}(\vec E_L)}\operatorname{sgn}(\varphi)\prod_{\vec e\in\vec E_L}\mathrm{aev}_0\bigl(K^{a,b}_{\vec e,\varphi(\vec e)}(x)\bigr)
+&&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\text{ の }\mathrm{aev}_w(\widehat z)=z\text{ を各項へ同時に当てる}\bigr)
 \end{aligned}`),
                   paragraph([
-                    "よって四つの行列式はいずれも定数項が 1 である。これは後で定数項 1 の平方根を選ぶための基点を与える。",
-                    "議論は代数的数係数多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
+                    "と変形する。冒頭の成分の値により、恒等写像でない置換 ",
+                    math(String.raw`\varphi`), " は ",
+                    math(String.raw`\varphi(\vec e)\ne\vec e`), " となる ",
+                    math(String.raw`\vec e\in\vec E_L`),
+                    " を持ち（恒等写像の定義）、その項の因子 ",
+                    math(String.raw`\mathrm{aev}_0\bigl(K^{a,b}_{\vec e,\varphi(\vec e)}(x)\bigr)`),
+                    " が ", math(String.raw`0`), " なので項全体が ",
+                    math(String.raw`0`), " になる（",
+                    math(String.raw`\overline{\mathbb Q}`), " の四則）。恒等置換 ",
+                    math(String.raw`\mathrm{id}_{\vec E_L}`),
+                    " の項は、全因子が ", math(String.raw`1`), " で ",
+                    math(String.raw`\operatorname{sgn}(\mathrm{id}_{\vec E_L})=(-1)^{\mathrm{inv}(\mathrm{id}_{\vec E_L})}=(-1)^{0}=1`),
+                    "（転倒数 ", math(String.raw`0`), "。",
+                    ref("def_permutation_sign"), "）だから ",
+                    math(String.raw`1`), " である。よって",
+                  ]),
+                  displayMath(String.raw`\sum_{\varphi\in\operatorname{Perm}(\vec E_L)}\operatorname{sgn}(\varphi)\prod_{\vec e\in\vec E_L}\mathrm{aev}_0\bigl(K^{a,b}_{\vec e,\varphi(\vec e)}(x)\bigr)=1`),
+                  paragraph([
+                    "であり、四つの行列式はいずれも定数項が 1 である。これは後で定数項 1 の平方根を選ぶための基点を与える。",
+                    "議論は代数的数と代数的数係数多項式の有限和・有限積だけで閉じ、実数体も複素数体も現れない。",
                   ]),
                 ],
               },
