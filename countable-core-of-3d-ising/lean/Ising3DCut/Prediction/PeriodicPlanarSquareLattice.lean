@@ -2088,4 +2088,18 @@ theorem card_periodicSquareDecodingFiber
     Fintype.card_of_bijective (periodicSquareFiberToPairingsProduct_bijective hn subgraph)
   simpa [Fintype.card_coe, Fintype.card_pi] using hcard
 
+/-- 一辺が二以上なら、各 city の対分けの個数は一か三のいずれかである。
+残存端子数が零・二・四の三通りに限られること（`card_encodePeriodicSquareRemainingTerminalsAt_eq_zero_or_two_or_four`）に、
+それぞれの場合の対分けの個数（零なら一、二なら一、四なら三）を当てはめて束ねたものである。 -/
+theorem card_periodicSquarePairingsAt_eq_one_or_three
+    {n : ℕ} [NeZero n] (hn : 2 ≤ n) (subgraph : PeriodicSquareEvenSubgraph n)
+    (v : LatticeVertex n) :
+    (periodicSquarePairingsAt subgraph v).card = 1 ∨
+      (periodicSquarePairingsAt subgraph v).card = 3 := by
+  rcases card_encodePeriodicSquareRemainingTerminalsAt_eq_zero_or_two_or_four hn subgraph v with
+    hzero | htwo | hfour
+  · exact Or.inl (card_periodicSquarePairingsAt_of_card_eq_zero subgraph v hzero)
+  · exact Or.inl (card_periodicSquarePairingsAt_of_card_eq_two subgraph v htwo)
+  · exact Or.inr (card_periodicSquarePairingsAt_of_card_eq_four subgraph v hfour)
+
 end Ising3DCut.Prediction

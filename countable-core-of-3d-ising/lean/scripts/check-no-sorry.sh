@@ -791,6 +791,7 @@ targets=(
   Ising3DCut.Prediction.pairing_with_first_pair_of_four
   Ising3DCut.Prediction.pairing_of_four_eq_one_of_three
   Ising3DCut.Prediction.card_periodicSquarePairingsAt_of_card_eq_four
+  Ising3DCut.Prediction.card_periodicSquarePairingsAt_eq_one_or_three
 )
 
 if [ "${#targets[@]}" -eq 0 ]; then
