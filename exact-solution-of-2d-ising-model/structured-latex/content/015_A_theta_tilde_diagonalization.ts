@@ -1663,6 +1663,7 @@ t^2
 &= \left(1 + r^2\right) - 1
    \quad (\because \text{det\_A\_theta\_tilde}\ (g_1^2 = 1 + r^2)) \\
 &= r^2
+   \quad (\because \mathbb{R} \text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
@@ -1716,10 +1717,24 @@ e^{-\gamma}
       paragraph([
         "Step 3（分離）。",
         math(String.raw`\gamma > 0`),
-        " と実指数関数の狭義単調増加性より ",
-        math(String.raw`e^{\gamma} > e^{0} = 1 > e^{-\gamma} > 0`),
-        "。",
+        " と実指数関数の狭義単調増加性より",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{\gamma}
+&> e^0
+   \quad (\because \gamma>0 \text{ と実指数関数の狭義単調増加性}) \\
+e^0
+&= 1
+   \quad (\because e^0=1) \\
+1=e^0
+&> e^{-\gamma}
+   \quad (\because 0>-\gamma \text{ と実指数関数の狭義単調増加性}) \\
+e^{-\gamma}
+&> 0
+   \quad (\because \text{実指数関数の正値性})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
