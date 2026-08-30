@@ -50296,6 +50296,112 @@ D^{a,b}_L(x)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_signed_even_subgraph_polynomial",
+        labels: [],
+        title: { text: "符号付き偶部分グラフ多項式" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_signed_even_subgraph_sector_sum",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_signed_even_subgraph_polynomial",
+                kind: "definition",
+                title: { text: "符号付き偶部分グラフ多項式" },
+                labels: ["def_signed_even_subgraph_polynomial"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    math(String.raw`L\ge1`), " とし、", math(String.raw`(a,b)\in\mathcal S`),
+                    "（", ref("def_spin_structures"), "）を取る。符号付き偶部分グラフ多項式を",
+                  ]),
+                  displayMath(String.raw`Q^{a,b}_L:=\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
+(-1)^{(1+a)\,\varepsilon_{L,\mathrm{h}}(A)+(1+b)\,\varepsilon_{L,\mathrm{v}}(A)+\varepsilon_{L,\mathrm{h}}(A)\,\varepsilon_{L,\mathrm{v}}(A)}\,x^{\,|A|}\ \in\ \mathbb{Z}[x]`),
+                  paragraph([
+                    "で定める。偶部分グラフの述語 ", math(String.raw`\operatorname{Even}_L`),
+                    " は ", ref("def_even_edge_subset"), "、二つの巻き付き偶奇 ",
+                    math(String.raw`\varepsilon_{L,\mathrm{h}},\varepsilon_{L,\mathrm{v}}`),
+                    " は ", ref("def_torus_winding_parities"), " で定めた。冪の指数 ",
+                    math(String.raw`(1+a)\,\varepsilon_{L,\mathrm{h}}(A)+(1+b)\,\varepsilon_{L,\mathrm{v}}(A)+\varepsilon_{L,\mathrm{h}}(A)\,\varepsilon_{L,\mathrm{v}}(A)`),
+                    " は自然数の和と積であり ", math(String.raw`\mathbb N`), " に属し、",
+                    math(String.raw`(-1)^{n}\in\{-1,1\}\subset\mathbb Z`),
+                    " である。和は有限集合 ", math(String.raw`E_L`),
+                    " の部分集合にわたる有限和なので ", math(String.raw`\mathbb{Z}[x]`),
+                    " に属する。実数体も複素数体も現れない。上付きの ", math(String.raw`a,b`),
+                    " は冪ではなく、スピン構造を記録する添字である。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_signed_even_subgraph_sector_sum",
+              kind: "claim",
+              title: { text: "符号付き偶部分グラフ多項式はセクター生成多項式の符号付き和である" },
+              labels: ["claim_signed_even_subgraph_sector_sum"],
+              habitat: "Z",
+              verification: ["sagemath/check/signed-even-subgraph-sector-sum"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), " とし、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）を取る。このとき ",
+                  math(String.raw`\mathbb{Z}[x]`), " の等式",
+                ]),
+                displayMath(String.raw`Q^{a,b}_L=\sum_{(c,d)\in\{0,1\}\times\{0,1\}}
+(-1)^{(1+a)c+(1+b)d+cd}\cdot G^{c,d}_L`),
+                paragraph([
+                  "が成り立つ。左辺は ", ref("def_signed_even_subgraph_polynomial"),
+                  "、右辺の ", math(String.raw`G^{c,d}_L`), " は ",
+                  ref("def_sector_generating_polynomial"),
+                  " で定めたセクターごとの生成多項式である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "偶部分グラフの全体を ",
+                  math(String.raw`\mathcal W_L:=\{A\subseteq E_L\mid\operatorname{Even}_L(A)\}`),
+                  " と置く（この証明の中だけで使う略記）。",
+                  ref("claim_torus_homology_sector_partition"), " により、",
+                  math(String.raw`\mathcal W_L`), " は四つのセクター ",
+                  math(String.raw`\mathcal E^{c,d}_L`), "（",
+                  math(String.raw`(c,d)\in\{0,1\}\times\{0,1\}`), "、",
+                  ref("def_torus_homology_sector"),
+                  "）の互いに素な合併である。求めたい多項式から始める。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+Q^{a,b}_L
+&=\sum_{A\in\mathcal W_L}
+(-1)^{(1+a)\,\varepsilon_{L,\mathrm{h}}(A)+(1+b)\,\varepsilon_{L,\mathrm{v}}(A)+\varepsilon_{L,\mathrm{h}}(A)\,\varepsilon_{L,\mathrm{v}}(A)}\,x^{\,|A|}
+&&\bigl(\because\ \blkref{def_signed_even_subgraph_polynomial}\text{ と略記 }\mathcal W_L\bigr)\\
+&=\sum_{(c,d)\in\{0,1\}\times\{0,1\}}\ \sum_{A\in\mathcal E^{c,d}_L}
+(-1)^{(1+a)\,\varepsilon_{L,\mathrm{h}}(A)+(1+b)\,\varepsilon_{L,\mathrm{v}}(A)+\varepsilon_{L,\mathrm{h}}(A)\,\varepsilon_{L,\mathrm{v}}(A)}\,x^{\,|A|}
+&&\bigl(\because\ \text{冒頭の互いに素な合併で有限和が分かれる}\bigr)\\
+&=\sum_{(c,d)\in\{0,1\}\times\{0,1\}}\ \sum_{A\in\mathcal E^{c,d}_L}
+(-1)^{(1+a)c+(1+b)d+cd}\,x^{\,|A|}
+&&\bigl(\because\ \blkref{def_torus_homology_sector}\text{ により }A\in\mathcal E^{c,d}_L\text{ なら }\varepsilon_{L,\mathrm{h}}(A)=c,\ \varepsilon_{L,\mathrm{v}}(A)=d\bigr)\\
+&=\sum_{(c,d)\in\{0,1\}\times\{0,1\}}
+(-1)^{(1+a)c+(1+b)d+cd}\sum_{A\in\mathcal E^{c,d}_L}x^{\,|A|}
+&&\bigl(\because\ \mathbb{Z}[x]\text{ の分配則。係数は }A\text{ に依らない}\bigr)\\
+&=\sum_{(c,d)\in\{0,1\}\times\{0,1\}}
+(-1)^{(1+a)c+(1+b)d+cd}\cdot G^{c,d}_L
+&&\bigl(\because\ \blkref{def_sector_generating_polynomial}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "全ての和は有限集合の上の有限和であり ",
+                  math(String.raw`\mathbb{Z}[x]`),
+                  " の中で閉じる。実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },

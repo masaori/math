@@ -1584,9 +1584,19 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
       ]),
       paragraph([
         math(String.raw`\theta-2n\pi = 0`),
-        " のとき。このとき ",
-        math(String.raw`-\theta-2(-n)\pi = -(\theta-2n\pi) = 0`),
-        " であり ",
+        " のとき。このとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+-\theta-2(-n)\pi
+&= -(\theta-2n\pi)
+&&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
+&= 0
+&&(\because\ \theta-2n\pi = 0\ \text{という、この場合の条件})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり ",
         math(String.raw`0 \leq 0 < 2\pi`),
         " なので、",
         ref("angle_section_existence_uniqueness"),

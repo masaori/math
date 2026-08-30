@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 12 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 13 回目の tick 時点）
+
+**符号付き偶部分グラフ多項式を定義し、セクター生成多項式の符号付き和との一致を本文と SageMath で固定した（`claim_signed_even_subgraph_sector_sum`。Lean 未着手）。** 平方恒等式の右辺となる $Q^{a,b}_L:=\sum_{A\subseteq E_L,\ \operatorname{Even}_L(A)}(-1)^{(1+a)\varepsilon_{L,\mathrm h}(A)+(1+b)\varepsilon_{L,\mathrm v}(A)+\varepsilon_{L,\mathrm h}(A)\varepsilon_{L,\mathrm v}(A)}x^{|A|}\in\mathbb Z[x]$（`def_signed_even_subgraph_polynomial`。符号は 2026-08-30 の $L=2,3$ 厳密観察で特定した候補）を定義し、偶部分グラフの四セクター分割 `claim_torus_homology_sector_partition` で有限和を分け、各セクター上で巻き付き偶奇が定数になることと $\mathbb Z[x]$ の分配則で $Q^{a,b}_L=\sum_{(c,d)\in\{0,1\}^2}(-1)^{(1+a)c+(1+b)d+cd}G^{c,d}_L$ を得た。SageMath `signed-even-subgraph-sector-sum` は $L=1,2,3$ の偶部分グラフ全列挙（4・32・1,024 個）と四スピン構造で両辺を $\mathbb Z[x]$ で比較した。本文 722 ブロック・検算対応 330 件・PDF 328 ページを通した。次はこの主張の Lean 具体版・必要十分版を書き、その後に非後退置換和と横断消去・接触点分割を結んで平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ へ向かう。
+
+前進前レビューでは前 tick の Lean 二版（置換和展開・転倒数符号と `Equiv.Perm.sign` の一致・許容添字への有限和制限）を人手証明の五段と照合し、sorry 検査の登録も確認して修正対象は無かった。並列の式変形統一は、姉妹側の複素数の逆数の偏角の証明にあった一行二等号 $-\theta-2(-n)\pi=-(\theta-2n\pi)=0$ を二段の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 348 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 12 回目の tick 時点）
 
 **行列式の非後退置換和 `claim_kac_ward_determinant_nonbacktracking_phase_sum` を Lean 二版へ配線し、四層検証を完了した。** 具体版 `KacWard.kacWardDeterminant_nonbacktracking_phase_sum` は、Mathlib の行列式を符号付き置換項の有限和へ開き、非後退条件を満たさない項を既存の非零判定の対偶で零にし、許容項へ既存の軌道位相表示を代入した。転倒数で定義した本文側の符号と `Equiv.Perm.sign` の一致も `KacWard.inversionSign_eq_mathlibSign` で証明した。必要十分版 `NecSuf.KacWard.restrictedSum_replace_necSuf` は可換加法モノイド上の有限和、補集合での零、許容添字での値の一致だけを残した。SageMath の非後退置換 30,784 件・四スピン構造、検算対応 329 件、Lean 9,608 jobs・sorry 検査 1,627 件、本文 check・PDF 327 ページを通した。次は横断消去・接触点分割を結び、符号付き偶部分グラフ多項式の平方恒等式へまとめる。
 
