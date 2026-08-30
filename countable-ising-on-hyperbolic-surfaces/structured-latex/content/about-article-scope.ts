@@ -16,7 +16,7 @@ export default defineBlocks([
     labels: ["def_size_universe"],
     habitat: "mixed",
     realEscape: "後続の位相的・計量的入力を一つの集合内に置くための集合論的な大きさの固定だけであり、物理的実数演算は行わない。",
-    statement: [paragraph([ref("def_natural_numbers"), " の ", math(String.raw`\mathbb N`), " と後続の全ての位相的・計量的入力を含み、元を取る操作、冪集合、添字集合も属する族の和集合について閉じた Grothendieck 宇宙 ", math(String.raw`\mathscr U`), " を一つ固定する。以下の集合は ", math(String.raw`\mathscr U`), " の元に限る。"])],
+    statement: [paragraph([ref("def_natural_numbers"), " の ", math(String.raw`\mathbb N`), " と後続の全ての位相的・計量的入力を含み、元を取る操作、冪集合、添字集合も属する族の和集合について閉じた Grothendieck 宇宙 ", math(String.raw`\mathcal U`), " を一つ固定する。以下の集合は ", math(String.raw`\mathcal U`), " の元に限る。"])],
   },
   {
     id: "foundations_definition_finite_subset_constructor",
@@ -25,7 +25,7 @@ export default defineBlocks([
     labels: ["def_finite_subset_constructor"],
     habitat: "finite",
     statement: [
-      paragraph([ref("def_size_universe"), " の集合 ", math(String.raw`A\in\mathscr U`), " に対し、その有限部分集合全体を"]),
+      paragraph([ref("def_size_universe"), " の集合 ", math(String.raw`A\in\mathcal U`), " に対し、その有限部分集合全体を"]),
       displayMath(String.raw`\mathcal P_{\mathrm{fin}}(A):=\{B\subseteq A\mid B\text{ は有限集合}\}`),
       paragraph(["と定める。"])],
   },
@@ -78,7 +78,7 @@ export default defineBlocks([
     labels: ["def_finite_group_notation"],
     habitat: "finite",
     statement: [
-      paragraph(["有限群 ", math(String.raw`(G,\cdot,1_G,(-)^{-1})`), " に対し、部分集合 ", math(String.raw`H\subseteq G`), " が積、逆元、単位元で閉じるとき ", math(String.raw`H\leq G`), " と書く。有限集合 ", math(String.raw`S\subseteq G`), " を含む最小の部分群を ", math(String.raw`\langle S\rangle`), " とし、略記 ", math(String.raw`\langle g_1,\ldots,g_m\rangle:=\langle\{g_1,\ldots,g_m\}\rangle`), " を用いる。", math(String.raw`g^0:=1_G`), "、", math(String.raw`g^{n+1}:=g\cdot g^n`), " とし、"]),
+      paragraph([ref("def_natural_numbers"), " の自然数を冪の添字に用い、", ref("def_base_sets_and_finite_constructors"), " の順序付き組として有限群 ", math(String.raw`(G,\cdot,1_G,(-)^{-1})`), " に対し、部分集合 ", math(String.raw`H\subseteq G`), " が積、逆元、単位元で閉じるとき ", math(String.raw`H\leq G`), " と書く。有限集合 ", math(String.raw`S\subseteq G`), " を含む最小の部分群を ", math(String.raw`\langle S\rangle`), " とし、略記 ", math(String.raw`\langle g_1,\ldots,g_m\rangle:=\langle\{g_1,\ldots,g_m\}\rangle`), " を用いる。", math(String.raw`g^0:=1_G`), "、", math(String.raw`g^{n+1}:=g\cdot g^n`), " とし、"]),
       displayMath(String.raw`\operatorname{ord}_G(g):=\min\{n\in\mathbb N_{>0}\mid g^n=1_G\}`),
       paragraph(["と定める。群が文脈から一意なとき添字 ", math("G"), " を省く。"])],
   },
@@ -120,12 +120,11 @@ export default defineBlocks([
     labels: ["def_finite_quotient_cellulation_candidate"],
     habitat: "finite",
     statement: [
-      paragraph([ref("def_hyperbolic_triangle_permutation_quotient_input"), " の有限置換商入力 ", math(String.raw`\mathcal Q_{p,q}`), " と、", ref("def_finite_quotient_oriented_coset_edge_endpoint_data"), " の辺剰余類代表元選択 ", math(String.raw`\eta_E`), " を入力とする。", ref("def_finite_quotient_role_stabilizers_and_coset_cell_sets"), " のセル集合、", ref("def_finite_quotient_coset_cell_incidence_relation"), " の incidence、", ref("def_finite_quotient_oriented_coset_edge_endpoint_data"), " の端点写像、", ref("def_finite_quotient_face_cyclic_position_system"), " の巡回位置系、", ref("def_finite_quotient_oriented_coset_face_boundary_word"), " の境界語を一つにまとめた有限データを"]),
+      paragraph([ref("def_hyperbolic_triangle_permutation_quotient_input"), " の有限置換商入力 ", math(String.raw`\mathcal Q_{p,q}`), " と、", ref("def_finite_quotient_oriented_coset_edge_endpoint_data"), " の辺剰余類代表元選択 ", math(String.raw`\eta_E`), " を入力とする。", ref("def_finite_quotient_role_stabilizers_and_coset_cell_sets"), " のセル集合、", ref("def_finite_quotient_oriented_coset_edge_endpoint_data"), " の端点写像、", ref("def_finite_quotient_face_cyclic_position_system"), " の巡回位置系、", ref("def_finite_quotient_oriented_coset_face_boundary_word"), " の境界語を、一般セル分割データと同じ型の一つの有限データにまとめて"]),
       displayMath(String.raw`\mathcal C(\mathcal Q_{p,q},\eta_E):=\left(
 (\mathcal V_Q,\mathcal E_Q,\partial_{Q,\eta_E}),
 (\mathcal V_Q,\mathcal E_Q,\mathcal F_Q),
-\left(\mathcal P_f^Q,\partial_{\mathrm{word}}^{Q,\eta_E}f\right)_{f\in\mathcal F_Q},
-\mathcal I_Q
+\left(P_f^Q,s_f^Q,\partial_{\mathrm{word}}^{Q,\eta_E}f\right)_{f\in\mathcal F_Q}
 \right)`),
       paragraph(["と定め、有限置換商から得るセル分割候補と呼ぶ。これが向き付き閉曲面セル分割であるとは、", ref("def_oriented_closed_surface_cellulation"), " の有限述語が真であることを意味する。この定義だけでは、その述語が真であるとは主張しない。"])],
   },
@@ -137,7 +136,7 @@ export default defineBlocks([
     habitat: "mixed",
     realEscape: "有限セルデータから位相空間を作る商位相だけを用いる。計量、曲率、極限、積分は用いない。",
     statement: [
-      paragraph([ref("def_oriented_closed_surface_cellulation"), " の有限述語を満たすセル分割データ ", math(String.raw`\mathcal C=(G,\mathcal C_{\mathrm{cell}},(P_f,s_f,\partial_{\mathrm{word}}f)_{f\in F_{\mathrm{cell}}})`), " に対する位相的実現データを ", math(String.raw`\mathcal R=(S,\phi_V,(\phi_e)_{e\in E_{\mathrm{cell}}},(D_f,\phi_f)_{f\in F_{\mathrm{cell}}})`), " と定める。ここで ", math("S"), " は連結な向き付き閉滑らか二次元多様体、", math(String.raw`\phi_V:V_{\mathrm{cell}}\to S`), " は単射、", math(String.raw`\phi_e:[0,1]\to S`), " は端点が ", math(String.raw`\phi_V(\partial_G(e,\mathsf{source}))`), " と ", math(String.raw`\phi_V(\partial_G(e,\mathsf{target}))`), " である埋込みとする。異なる辺の内部像は互いに素とする。各 ", math("D_f"), " は境界辺が ", math("P_f"), " で添字付けられ、向き付き境界順が ", math("s_f"), " である閉多角形円板とし、", math(String.raw`\phi_f:D_f\to S`), " は内部で埋込み、各境界辺では ", math(String.raw`\partial_{\mathrm{word}}f`), " が指定する ", math(String.raw`\phi_e`), " またはその逆向きと一致する連続写像とする。面内部像は互いに素で、頂点像・辺像・面内部像の和が ", math("S"), " 全体であることを要求する。"])],
+      paragraph([ref("def_oriented_closed_surface_cellulation"), " の有限述語を満たすセル分割データ ", math(String.raw`\mathcal C=(G,\mathcal C_{\mathrm{cell}},(P_f,s_f,\partial_{\mathrm{word}}f)_{f\in F_{\mathrm{cell}}})`), " に対する位相的実現データを ", math(String.raw`\mathcal R=(S,\phi_V,(\phi_e)_{e\in E_{\mathrm{cell}}},(D_f,\phi_f)_{f\in F_{\mathrm{cell}}})`), " と定める。ここで ", math("S"), " は連結な向き付き閉滑らか二次元多様体、", math(String.raw`\phi_V:V_{\mathrm{cell}}\to S`), " は単射、", math(String.raw`\phi_e:[0,1]\to S`), " は端点が ", math(String.raw`\phi_V(\partial_G(e,\mathsf{source}))`), " と ", math(String.raw`\phi_V(\partial_G(e,\mathsf{target}))`), " である埋込みとする。各 ", math("D_f"), " は境界辺が ", math("P_f"), " で添字付けられ、向き付き境界順が ", math("s_f"), " である閉多角形円板とし、", math(String.raw`\phi_f:D_f\to S`), " は内部で埋込み、各境界辺では ", math(String.raw`\partial_{\mathrm{word}}f`), " が指定する ", math(String.raw`\phi_e`), " またはその逆向きと一致する連続写像とする。開セル像 ", math(String.raw`(\{\phi_V(v)\})_{v\in V_{\mathrm{cell}}}`), "、", math(String.raw`\{\phi_e((0,1))\}_{e\in E_{\mathrm{cell}}}`), "、", math(String.raw`\{\phi_f(\operatorname{int}D_f)\}_{f\in F_{\mathrm{cell}}}`), " は異なる添字・異なる次元を含めて対ごとに互いに素であり、それらの和が ", math("S"), " 全体であることを要求する。"])],
   },
   {
     id: "article_scope_definition_regular_hyperbolic_metric_realization",
@@ -160,7 +159,7 @@ export default defineBlocks([
     statement: [
       paragraph([ref("def_hyperbolic_triangle_permutation_quotient_input"), " の有限置換商入力 ", math(String.raw`\mathcal Q_{p,q}`), "、辺剰余類代表元選択 ", math(String.raw`\eta_E`), "、", ref("def_finite_quotient_cellulation_candidate"), " のセル分割候補 ", math(String.raw`\mathcal C(\mathcal Q_{p,q},\eta_E)`), "、および ", ref("def_regular_hyperbolic_metric_realization"), " の正則双曲計量実現 ", math(String.raw`(\mathcal R,h)`), " を用いる。有限商正則セル分割付き閉双曲曲面を"]),
       displayMath(String.raw`\left(\mathcal Q_{p,q},\eta_E,\mathcal C(\mathcal Q_{p,q},\eta_E),\mathcal R,h\right)`),
-      paragraph(["であって、全成分が固定した宇宙 ", math(String.raw`\mathscr U`), " に属し、セル分割候補が向き付き閉曲面セル分割の有限述語を満たし、", math(String.raw`(\mathcal R,h)`), " がその ", math(String.raw`(p,q)`), " 型正則双曲計量実現であるものと定める。このような組全体は ", math(String.raw`\mathscr U`), " の部分集合なので集合をなし、これを ", math(String.raw`\mathcal H_{\mathrm{fq}}`), " と書く。本論文で有限双曲曲面といった場合は ", math(String.raw`\mathcal H_{\mathrm{fq}}`), " の元を意味する。"]),
+      paragraph(["であって、全成分が固定した宇宙 ", math(String.raw`\mathcal U`), " に属し、セル分割候補が向き付き閉曲面セル分割の有限述語を満たし、", math(String.raw`(\mathcal R,h)`), " がその ", math(String.raw`(p,q)`), " 型正則双曲計量実現であるものと定める。このような組全体は ", math(String.raw`\mathcal U`), " の部分集合なので集合をなし、これを ", math(String.raw`\mathcal H_{\mathrm{fq}}`), " と書く。本論文で有限双曲曲面といった場合は ", math(String.raw`\mathcal H_{\mathrm{fq}}`), " の元を意味する。"]),
     ],
   },
 ]);

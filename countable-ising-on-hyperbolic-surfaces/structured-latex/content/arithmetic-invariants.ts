@@ -843,20 +843,20 @@ Q_Q(\sigma(\alpha))
       displayMath(String.raw`\sigma^{-1}(\alpha)\in A_Q
 \qquad(\alpha\in A_Q).`),
       paragraph(["したがって ", math(String.raw`\sigma|_{A_Q}`), " は逆写像 ", math(String.raw`\sigma^{-1}|_{A_Q}`), " をもつ置換である。ゆえに根集合への制限により写像"]),
-      displayMath(String.raw`\rho:\operatorname{Gal}(K_Q/\mathbb Q)\longrightarrow\operatorname{Sym}(A_Q),
+      displayMath(String.raw`\operatorname{res}_{A_Q}:\operatorname{Gal}(K_Q/\mathbb Q)\longrightarrow\operatorname{Sym}(A_Q),
 \qquad
-\rho(\sigma):=\sigma|_{A_Q}`),
+\operatorname{res}_{A_Q}(\sigma):=\sigma|_{A_Q}`),
       paragraph(["が定まる。任意の ", math(String.raw`\sigma,\tau\in\operatorname{Gal}(K_Q/\mathbb Q)`), " と ", math(String.raw`\alpha\in A_Q`), " に対して"]),
       displayMath(String.raw`\begin{aligned}
-\rho(\sigma\circ\tau)(\alpha)
+\operatorname{res}_{A_Q}(\sigma\circ\tau)(\alpha)
 &=(\sigma\circ\tau)(\alpha)
-&&\bigl(\because\ \rho\text{ の定義}\bigr)\\
+&&\bigl(\because\ \operatorname{res}_{A_Q}\text{ の定義}\bigr)\\
 &=\sigma(\tau(\alpha))
 &&\bigl(\because\ \text{写像の合成の定義}\bigr)\\
-&=(\rho(\sigma)\circ\rho(\tau))(\alpha)
-&&\bigl(\because\ \rho\text{ の定義}\bigr).
+&=(\operatorname{res}_{A_Q}(\sigma)\circ\operatorname{res}_{A_Q}(\tau))(\alpha)
+&&\bigl(\because\ \operatorname{res}_{A_Q}\text{ の定義}\bigr).
 \end{aligned}`),
-      paragraph(["したがって ", math(String.raw`\rho`), " は群準同型である。次に ", math(String.raw`\rho(\sigma)=\operatorname{id}_{A_Q}`), " と仮定する。すると"]),
+      paragraph(["したがって ", math(String.raw`\operatorname{res}_{A_Q}`), " は群準同型である。次に ", math(String.raw`\operatorname{res}_{A_Q}(\sigma)=\operatorname{id}_{A_Q}`), " と仮定する。すると"]),
       displayMath(String.raw`\sigma(\alpha)=\alpha
 \qquad(\alpha\in A_Q).`),
       paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"), " より、"]),
@@ -870,13 +870,13 @@ Q_Q(\sigma(\alpha))
         " を固定するので、",
       ]),
       displayMath(String.raw`\sigma=\operatorname{id}_{K_Q}.`),
-      paragraph(["よって ", math(String.raw`\ker\rho=\{\operatorname{id}_{K_Q}\}`), " であり、", math(String.raw`\rho`), " は単射である。したがって"]),
+      paragraph(["よって ", math(String.raw`\ker\operatorname{res}_{A_Q}=\{\operatorname{id}_{K_Q}\}`), " であり、", math(String.raw`\operatorname{res}_{A_Q}`), " は単射である。したがって"]),
       displayMath(String.raw`\left|\operatorname{Gal}(K_Q/\mathbb Q)\right|
-=|\rho(\operatorname{Gal}(K_Q/\mathbb Q))|.`),
-      displayMath(String.raw`\rho(\operatorname{Gal}(K_Q/\mathbb Q))
+=|\operatorname{res}_{A_Q}(\operatorname{Gal}(K_Q/\mathbb Q))|.`),
+      displayMath(String.raw`\operatorname{res}_{A_Q}(\operatorname{Gal}(K_Q/\mathbb Q))
 \le\operatorname{Sym}(A_Q).`),
       paragraph(["Lagrange の定理により、"]),
-      displayMath(String.raw`|\rho(\operatorname{Gal}(K_Q/\mathbb Q))|
+      displayMath(String.raw`|\operatorname{res}_{A_Q}(\operatorname{Gal}(K_Q/\mathbb Q))|
 \mid|\operatorname{Sym}(A_Q)|.`),
       displayMath(String.raw`|\operatorname{Sym}(A_Q)|=|A_Q|!=44!.`),
       paragraph(["有限 Galois 拡大の次数公式により、"]),
@@ -2449,6 +2449,19 @@ d\in\mathbb N_{>0}`),
     ],
   },
   {
+    id: "arithmetic_invariants_theorem_fixed_quotient_galois_restriction_is_injective",
+    kind: "theorem",
+    title: { text: "固定剰余類格子の Galois 制限表現は単射である" },
+    labels: ["theorem_fixed_quotient_galois_restriction_is_injective"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([ref("def_fixed_quotient_galois_restriction_representation"), " の制限表現 ", math(String.raw`\rho_Q`), " は単射である。"]),
+    ],
+    proof: [
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"), " の分解体は ", ref("def_fixed_quotient_fisher_root_set"), " の根を添加して得られ、", math(String.raw`K_Q=\mathbb Q(\mathcal R_Q)`), " である。", math(String.raw`\sigma\in\ker(\rho_Q)`), " とすると、", math(String.raw`\sigma(\alpha)=\alpha`), " が全ての ", math(String.raw`\alpha\in\mathcal R_Q`), " について成り立つ。体自己同型 ", math(String.raw`\sigma`), " は ", math(String.raw`\mathbb Q`), " を点ごとに固定し、体演算を保つので、", math(String.raw`\mathbb Q(\mathcal R_Q)`), " の全ての元を固定する。したがって ", math(String.raw`\sigma=\operatorname{id}_{K_Q}`), " であり、核は自明である。"]),
+    ],
+  },
+  {
     id: "arithmetic_invariants_definition_fixed_quotient_galois_permutation_image",
     kind: "definition",
     title: { text: "固定剰余類格子の Galois 置換像" },
@@ -2640,7 +2653,7 @@ d\in\mathbb N_{>0}`),
       ]),
       displayMath(String.raw`[K_Q:\mathbb Q]
 =\left|\operatorname{Gal}(K_Q/\mathbb Q)\right|.`),
-      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_full_symmetric_galois_group"), " より、"]),
+      paragraph([ref("theorem_fixed_quotient_galois_restriction_is_injective"), " により Galois 群とその置換像は同じ有限位数をもち、", ref("theorem_fixed_quotient_fisher_splitting_field_full_symmetric_galois_group"), " によりその像は全対称群なので、"]),
       displayMath(String.raw`\left|\operatorname{Gal}(K_Q/\mathbb Q)\right|
 =\left|\operatorname{Sym}(\mathcal R_Q)\right|.`),
       paragraph(["有限集合上の全対称群の位数公式により、"]),
@@ -2661,8 +2674,8 @@ d\in\mathbb N_{>0}`),
     verification: ["sagemath/check/fixed-quotient-fisher-splitting-field-galois-group-nonsolvable"],
     statement: [
       paragraph([
-        ref("theorem_fixed_quotient_fisher_splitting_field_full_symmetric_galois_group"),
-        " で定めた忠実置換表現の像 ",
+        ref("theorem_fixed_quotient_galois_restriction_is_injective"),
+        " の単射な制限表現と ", ref("theorem_fixed_quotient_fisher_splitting_field_full_symmetric_galois_group"), " で同定した像 ",
         math(String.raw`\Gamma_Q=\rho_Q(\operatorname{Gal}(K_Q/\mathbb Q))`),
         " を用いる。交換子部分群を用いて導来列を",
       ]),

@@ -137,15 +137,15 @@ aN_{\mathrm{fine}}=bN_{\mathrm{fine}}
         " と、",
         ref("def_hyperbolic_triangle_permutation_quotient_input"),
         " で用いた面・頂点・辺に対応する相異なる形式的役割ラベルの有限集合 ",
-        math(String.raw`\mathcal R:=\{F,V,E\}`),
+        math(String.raw`\mathsf{RoleIndex}:=\{F,V,E\}`),
         " を取る。共通有限群の元の族 ",
-        math(String.raw`s=(s_R)_{R\in\mathcal R}\in A^{\mathcal R}`),
+        math(String.raw`s=(s_R)_{R\in\mathsf{RoleIndex}}\in A^{\mathsf{RoleIndex}}`),
         " が",
       ]),
       displayMath(String.raw`A=\langle s_F,s_V,s_E\rangle`),
       paragraph([
         "を満たすとする。各役割 ",
-        math(String.raw`R\in\mathcal R`),
+        math(String.raw`R\in\mathsf{RoleIndex}`),
         " について、細段と粗段の役割生成元を",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -160,7 +160,7 @@ r_R^{\mathrm{coarse}}
 \end{aligned}`),
       paragraph([
         "で定める。この六元を伴う塔が役割生成元について整合するとは、各 ",
-        math(String.raw`R\in\mathcal R`),
+        math(String.raw`R\in\mathsf{RoleIndex}`),
         " に対して",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -223,7 +223,7 @@ r_F^{\mathrm{coarse}}r_V^{\mathrm{coarse}}r_E^{\mathrm{coarse}}&=1_{\mathrm{coar
         " の役割生成元について整合する二段の有限商の塔と、",
         ref("def_finite_quotient_role_stabilizers_and_coset_cell_sets"),
         " の役割安定化部分群と剰余類セル集合の構成を取る。各形式的役割ラベル ",
-        math(String.raw`R\in\mathcal R=\{F,V,E\}`),
+        math(String.raw`R\in\mathsf{RoleIndex}=\{F,V,E\}`),
         " について、両段の役割安定化部分群を",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -1831,48 +1831,48 @@ a(C_F)
   \right)
 \right)(D_E)
 &=
-\sum_{D_F\in\mathcal C_F^{\mathrm{coarse}}}
+\sum_{f_{\mathrm{coarse}}\in\mathcal C_F^{\mathrm{coarse}}}
 \left(
   \sum_{\substack{
-    j\in P_{D_F}^{\mathrm{coarse}}\\
-    e_{D_F,j}=D_E
+    j\in P_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}\\
+    e_{f_{\mathrm{coarse}},j}=D_E
   }}
   1_{\mathbb F_2}
 \right)
 \left(
   \sum_{\substack{
-    C_F\in\mathcal C_F^{\mathrm{fine}}\\
-    \overline\kappa_F(C_F)=D_F
+    f_{\mathrm{fine}}\in\mathcal C_F^{\mathrm{fine}}\\
+    \overline\kappa_F(f_{\mathrm{fine}})=f_{\mathrm{coarse}}
   }}
-  a(C_F)
+  a(f_{\mathrm{fine}})
 \right).
 \end{aligned}`),
       paragraph(["有限和を誘導面セル写像のファイバーごとにまとめ直すと、"]),
       displayMath(String.raw`\begin{aligned}
-&\sum_{D_F\in\mathcal C_F^{\mathrm{coarse}}}
+&\sum_{f_{\mathrm{coarse}}\in\mathcal C_F^{\mathrm{coarse}}}
 \left(
   \sum_{\substack{
-    j\in P_{D_F}^{\mathrm{coarse}}\\
-    e_{D_F,j}=D_E
+    j\in P_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}\\
+    e_{f_{\mathrm{coarse}},j}=D_E
   }}
   1_{\mathbb F_2}
 \right)
 \left(
   \sum_{\substack{
-    C_F\in\mathcal C_F^{\mathrm{fine}}\\
-    \overline\kappa_F(C_F)=D_F
+    f_{\mathrm{fine}}\in\mathcal C_F^{\mathrm{fine}}\\
+    \overline\kappa_F(f_{\mathrm{fine}})=f_{\mathrm{coarse}}
   }}
-  a(C_F)
+  a(f_{\mathrm{fine}})
 \right)\\
 &=
-\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\sum_{f_{\mathrm{fine}}\in\mathcal C_F^{\mathrm{fine}}}
 \left(
   \sum_{\substack{
-    j\in P_{\overline\kappa_F(C_F)}^{\mathrm{coarse}}\\
-    e_{\overline\kappa_F(C_F),j}=D_E
+    j\in P_{\overline\kappa_F(f_{\mathrm{fine}})}^{Q_{\mathrm{coarse}}}\\
+    e_{\overline\kappa_F(f_{\mathrm{fine}}),j}=D_E
   }}
   1_{\mathbb F_2}
-\right)a(C_F)
+\right)a(f_{\mathrm{fine}})
 \qquad
 \bigl(\because\ \text{有限和の添字付け替え}\bigr).
 \end{aligned}`),
@@ -1881,49 +1881,49 @@ a(C_F)
         " と位置写像の奇数ファイバー条件より、",
       ]),
       displayMath(String.raw`\begin{aligned}
-&\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+&\sum_{f_{\mathrm{fine}}\in\mathcal C_F^{\mathrm{fine}}}
 \left(
   \sum_{\substack{
-    j\in P_{\overline\kappa_F(C_F)}^{\mathrm{coarse}}\\
-    e_{\overline\kappa_F(C_F),j}=D_E
+    j\in P_{\overline\kappa_F(f_{\mathrm{fine}})}^{Q_{\mathrm{coarse}}}\\
+    e_{\overline\kappa_F(f_{\mathrm{fine}}),j}=D_E
   }}
   1_{\mathbb F_2}
-\right)a(C_F)\\
+\right)a(f_{\mathrm{fine}})\\
 &=
-\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\sum_{f_{\mathrm{fine}}\in\mathcal C_F^{\mathrm{fine}}}
 \left(
   \sum_{\substack{
-    i\in P_{C_F}^{\mathrm{fine}}\\
-    \overline\kappa_E(e_{C_F,i})=D_E
+    i\in P_{f_{\mathrm{fine}}}^{Q_{\mathrm{fine}}}\\
+    \overline\kappa_E(e_{f_{\mathrm{fine}},i})=D_E
   }}
   1_{\mathbb F_2}
-\right)a(C_F)
+\right)a(f_{\mathrm{fine}})
 \qquad
 \bigl(\because\ \text{向き付き境界語の辺成分保存と奇数ファイバー条件}\bigr).
 \end{aligned}`),
       paragraph(["有限和を誘導辺セル写像のファイバーごとにまとめ直すと、"]),
       displayMath(String.raw`\begin{aligned}
-&\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+&\sum_{f_{\mathrm{fine}}\in\mathcal C_F^{\mathrm{fine}}}
 \left(
   \sum_{\substack{
-    i\in P_{C_F}^{\mathrm{fine}}\\
-    \overline\kappa_E(e_{C_F,i})=D_E
+    i\in P_{f_{\mathrm{fine}}}^{Q_{\mathrm{fine}}}\\
+    \overline\kappa_E(e_{f_{\mathrm{fine}},i})=D_E
   }}
   1_{\mathbb F_2}
-\right)a(C_F)\\
+\right)a(f_{\mathrm{fine}})\\
 &=
 \sum_{\substack{
   C_E\in\mathcal C_E^{\mathrm{fine}}\\
   \overline\kappa_E(C_E)=D_E
 }}
-\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\sum_{f_{\mathrm{fine}}\in\mathcal C_F^{\mathrm{fine}}}
 \left(
   \sum_{\substack{
-    i\in P_{C_F}^{\mathrm{fine}}\\
-    e_{C_F,i}=C_E
+    i\in P_{f_{\mathrm{fine}}}^{Q_{\mathrm{fine}}}\\
+    e_{f_{\mathrm{fine}},i}=C_E
   }}
   1_{\mathbb F_2}
-\right)a(C_F)
+\right)a(f_{\mathrm{fine}})
 \qquad
 \bigl(\because\ \text{有限集合のファイバー分割と有限和の交換}\bigr).
 \end{aligned}`),
@@ -1936,14 +1936,14 @@ a(C_F)
   C_E\in\mathcal C_E^{\mathrm{fine}}\\
   \overline\kappa_E(C_E)=D_E
 }}
-\sum_{C_F\in\mathcal C_F^{\mathrm{fine}}}
+\sum_{f_{\mathrm{fine}}\in\mathcal C_F^{\mathrm{fine}}}
 \left(
   \sum_{\substack{
-    i\in P_{C_F}^{\mathrm{fine}}\\
-    e_{C_F,i}=C_E
+    i\in P_{f_{\mathrm{fine}}}^{Q_{\mathrm{fine}}}\\
+    e_{f_{\mathrm{fine}},i}=C_E
   }}
   1_{\mathbb F_2}
-\right)a(C_F)\\
+\right)a(f_{\mathrm{fine}})\\
 &=
 \sum_{\substack{
   C_E\in\mathcal C_E^{\mathrm{fine}}\\
@@ -2671,8 +2671,8 @@ A_h
         " と書く。",
       ]),
       paragraph([
-        ref("theorem_finite_fourier_inverse_transform"),
-        " に含まれる有限 Fourier 変換の定義と ",
+        ref("def_finite_fourier_transform"),
+        " の有限 Fourier 変換の定義と ",
         ref("def_quotient_tower_homology_polynomial_family_pushforward_map"),
         " より",
       ]),
@@ -2712,8 +2712,8 @@ A_h
 \varepsilon_{\overline\kappa^{\ast}(\psi)}(h)A_h
 \quad\bigl(\because\ \text{整数符号文字評価と引き戻しの整合性}\bigr).`),
       paragraph([
-        ref("theorem_finite_fourier_inverse_transform"),
-        " に含まれる有限 Fourier 変換の定義より",
+        ref("def_finite_fourier_transform"),
+        " の有限 Fourier 変換の定義より",
       ]),
       displayMath(String.raw`\sum_{h\in H_{\mathrm{fine}}}
 \varepsilon_{\overline\kappa^{\ast}(\psi)}(h)A_h

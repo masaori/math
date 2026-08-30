@@ -26,7 +26,7 @@ export default defineBlocks([
   heading("two_stage_group_quotient_input", 2, "二段有限群商の代数的入力"),
   goal("two_stage_group_quotient_input", "この節の入出力と主張", "入力は空でない有限集合上の有限置換群と、その置換群に含まれる入れ子の正規部分群である。出力は二段の有限商群と段間全射群準同型である。この節は後のセル写像に必要な代数的入力だけを定義し、曲面性や被覆性を主張しない。"),
   heading("finite_cell_complex_data", 2, "有限セル複体の組合せデータ"),
-  goal("finite_cell_complex_data", "この節の入出力と主定理", "入力は有限の頂点・辺・面と incidence データである。出力は向き付け閉曲面セル分割の有限判定、正則型、Euler 標数、および incidence 等式である。主定理は正則セル分割の Euler 標数を有限個の incidence 数だけで表す等式である。ここでは双曲型やスピンを仮定しない。"),
+  goal("finite_cell_complex_data", "この節の入出力と主定理", "入力は有限の頂点・辺・面と incidence データである。出力はセルの役割ラベル、向き付け閉曲面セル分割の有限判定、正則型、Euler 標数、incidence 等式、および有限セル分割の位相的実現データである。主定理は正則セル分割の Euler 標数を有限個の incidence 数だけで表す等式である。ここでは双曲型やスピンを仮定しない。"),
   heading("f2_chain_homology", 2, "F_2 セル鎖と第一ホモロジー"),
   goal("f2_chain_homology", "この節の入出力と主定理", "入力は有限セル複体の境界 incidence である。出力は一次・二次境界写像、一次サイクル空間、面境界空間、および第一ホモロジー群である。主定理は二つの境界写像の合成が零であることであり、これが第一ホモロジー群の定義を正当化する。", "F2"),
   heading("homology_class_even_subgraph_polynomials", 2, "ホモロジー類別の偶部分グラフ多項式"),
@@ -40,7 +40,7 @@ export default defineBlocks([
 
   heading("hyperbolic_ising_semantics", 1, "有限双曲曲面上のイジング模型のセマンティクスを持つもの"),
   heading("paper_scope_and_quotient_input", 2, "本論文の対象と有限置換商セル分割"),
-  goal("paper_scope_and_quotient_input", "この節の入出力と主定義", "入力は有限置換商と辺剰余類代表元である。出力は型付きの剰余類セル分割候補、位相的実現データ、正則双曲計量実現、および本論文で有限双曲曲面と呼ぶ対象集合である。主定義は有限構成条件と計量的実現条件を別層に保ち、一般の入力に対する存在は主張しない。", "Q"),
+  goal("paper_scope_and_quotient_input", "この節の入出力と主定義", "本論文で有限双曲曲面と呼ぶのは、有限置換商から得た向き付き閉曲面セル分割が曲率マイナス一の正則双曲計量で実現される組に限る。厳密な集合とその記号は、必要な各層を先に定義した後に与える。入力は有限置換商、辺剰余類代表元、先行節で定義した位相的実現データ、および所定条件を満たす計量候補である。出力は型付きの剰余類セル分割候補、正則双曲計量実現の条件、および全条件を満たす組からなる本論文の対象集合である。有限データだけから位相的実現や計量が存在または一意に定まるとは主張しない。", "Q"),
   heading("hyperbolic_regular_types", 2, "双曲正則型と Euler 標数"),
   goal("hyperbolic_regular_types", "この節の入出力と主定理", "入力は向き付け閉曲面の正則セル分割型である。出力は双曲正則型の有限不等式判定と次数下界である。主定理は双曲正則型であることと負の Euler 標数を持つことの同値である。曲率 -1 計量の存在や構成は主張しない。", "Q"),
   heading("product_difference_classification", 2, "積差ごとの双曲正則型分類"),

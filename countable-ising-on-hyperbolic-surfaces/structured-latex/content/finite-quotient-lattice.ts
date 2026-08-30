@@ -82,10 +82,8 @@ g(\alpha)
         " の恒等置換、置換積は右側の写像から順に作用する合成、",
         math(String.raw`\langle r_F,r_V,r_E\rangle`),
         " は三置換を含む最小の部分群である。",
-        math(String.raw`\iota_{\mathbb N,\mathbb Q}:\mathbb N\to\mathbb Q`),
-        " は ",
-        math(String.raw`n\mapsto n/1`),
-        " で与えられる標準単射である。最初の六条件は有限置換の合成と等号、推移性の有限探索で判定でき、最後の条件は有理数の厳密比較で判定できる。",
+        ref("def_natural_rational_embedding"),
+        " の標準単射を用いる。最初の六条件は有限置換の合成と等号、推移性の有限探索で判定でき、最後の条件は有理数の厳密比較で判定できる。",
       ]),
       paragraph([
         math(String.raw`r_F,r_V,r_E`),
@@ -96,7 +94,7 @@ g(\alpha)
   {
     id: "finite_quotient_lattice_definition_cell_role_label_set",
     kind: "definition",
-    title: { text: "有限商セルの役割ラベル集合" },
+    title: { text: "セルの役割ラベル集合" },
     labels: ["def_finite_quotient_cell_role_label_set"],
     habitat: "finite",
     statement: [
@@ -474,7 +472,7 @@ r_E
         " を取る。各 ",
         math(String.raw`g\in Q`),
         " に対して ",
-        math(String.raw`\kappa(g):=(g(1),g(2),\ldots,g(8))\in\Omega^8`),
+        math(String.raw`\operatorname{code}(g):=(g(1),g(2),\ldots,g(8))\in\Omega^8`),
         " と置き、",
         math(String.raw`\Omega^8`),
         " の辞書式順序に関する各辺剰余類の最小元を選ぶ代表元選択写像を ",

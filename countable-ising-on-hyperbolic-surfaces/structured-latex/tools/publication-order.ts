@@ -84,6 +84,7 @@ const genericFourierIds = new Set([
   "finite_fourier_definition_f2_linear_character_space",
   "finite_fourier_definition_integer_sign_character_realization",
   "finite_fourier_claim_integer_sign_character_multiplicativity",
+  "finite_fourier_theorem_f2_character_separates_nonzero_vector",
   "finite_fourier_theorem_character_orthogonality",
   "finite_fourier_definition_transform",
   "finite_fourier_definition_integer_polynomial_rational_embedding",
@@ -94,6 +95,7 @@ const genericFourierIds = new Set([
 function classify(block: ConvertedBlock, file: string): Section {
   if (file === "about-article-scope.ts" && block.id.startsWith("foundations_definition_")) return "finite-data-group-foundations";
   if (block.id === "article_scope_definition_topological_realization_of_cellulation") return "finite-cell-complex-data";
+  if (block.id === "finite_quotient_lattice_definition_cell_role_label_set") return "finite-cell-complex-data";
   if (genericCellulationIds.has(block.id)) return "finite-cell-complex-data";
   if ([
     "finite_graph_definition_endpoint_labels",
@@ -187,10 +189,10 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
   const content = all.filter(({ file, block }) => file !== "publication-structure.ts" && block.kind !== "heading");
   const expectedIdDigests = new Map<string, string>([
     ["about-article-scope.ts", "8340207201a5ca2d39d3dde65c6064a79d73d66fdbea63bb4d21ef91619b84d9"],
-    ["arithmetic-invariants.ts", "73862b199b4602946be345219ac18ab6642f2ff0fb4f8fb680ff6e349e53caa6"],
+    ["arithmetic-invariants.ts", "da0bcd7e0394862904f6a20cc9df0d4377a94f3190c5ff2ccb5c807d6684daca"],
     ["arithmetic-tools.ts", "cafe20754d06ecb0b246b66effbcae672dc3bd928370dd991dc18d1112c522c0"],
     ["finite-cellulation.ts", "cfff3fa6d456242279b044556bffcce96c68fe912b4fadf6a45ea1424c47259c"],
-    ["finite-fourier-duality.ts", "99063829cc235ba48d5d7e80dcf0486aaea3cd5b1c0e60293213b8073bf8398b"],
+    ["finite-fourier-duality.ts", "5e7e1c320950d97d6d7823bac862c83dfb3bf0a903163de6f3c8eb7947d08d01"],
     ["finite-quotient-lattice.ts", "ec0b37b3444fc6b590cce23af66953493dbed947b7fde4e7589d09634a885269"],
     ["homology-sector-expansion.ts", "4ca22cc43e6820be8df6f2a9dca2820fd56bf5f8032c663bfdace44f40c70b98"],
     ["main-text.ts", "86f1872004ff2ba2312525592346506a8f4f2dca95c0b0f04f9a88e703141e2c"],

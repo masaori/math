@@ -96,7 +96,7 @@ export default defineBlocks([
     labels: ["def_finite_cellulation_orientation_reversal"],
     habitat: "finite",
     statement: [
-      paragraph(["向きラベルを反転する写像を"]),
+      paragraph([ref("def_finite_cellulation_orientation_label_set"), " の向きラベルを反転する写像を"]),
       displayMath(String.raw`\rho:\mathsf{Ori}\to\mathsf{Ori},\qquad
 \rho(\mathsf{forward})=\mathsf{reverse},\qquad
 \rho(\mathsf{reverse})=\mathsf{forward}`),
@@ -113,7 +113,7 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        "各面 ",
+        ref("def_finite_cellulation_cell_sets"), " の各面 ",
         math(String.raw`f\in F_{\mathrm{cell}}`),
         " に対し、空でない有限集合 ",
         math(String.raw`P_f`),
