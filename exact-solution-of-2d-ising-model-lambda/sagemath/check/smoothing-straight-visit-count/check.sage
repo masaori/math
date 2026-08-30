@@ -79,6 +79,7 @@ interval_invariance_checks = 0
 closed_walk_split_checks = 0
 split_turning_sum_checks = 0
 split_seam_parity_checks = 0
+split_crossing_partition_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -234,6 +235,25 @@ for L in range(1, 4):
                 assert sum(split_horizontal) % 2 == before_seam_parity[0]
                 assert sum(split_vertical) % 2 == before_seam_parity[1]
                 split_seam_parity_checks += 1
+                # 二本の閉歩道の横断数をそれぞれの辺列から独立に数え、
+                # 混合横断数（A×B の対で三条件を満たすもの）と合わせると、
+                # 平滑化後の横断数に等しい
+                # （claim_smoothing_split_crossing_partition）。
+                walk_a = [walk[r] for r in indices_a]
+                walk_b = [walk[r] for r in indices_b]
+                split_crossings = ZZ(sum(
+                    1 for part in (walk_a, walk_b)
+                    for i in range(len(part)) for j in range(len(part))
+                    if i < j and crossing(L, part, i, j)))
+                mutual_crossings = ZZ(sum(
+                    1 for r in indices_a for s in indices_b
+                    if endpoints(L, walk[r])[1] == endpoints(L, walk[s])[1]
+                    and straight(walk[r], out_edge[r])
+                    and straight(walk[s], out_edge[s])
+                    and direction_number(walk[r]) % 2
+                    != direction_number(walk[s]) % 2))
+                assert split_crossings + mutual_crossings == after_total
+                split_crossing_partition_checks += 1
                 for vertex in vertices:
                     if vertex == cross_vertex:
                         continue
@@ -277,6 +297,7 @@ assert interval_invariance_checks == crossing_pair_total
 assert closed_walk_split_checks == crossing_pair_total
 assert split_turning_sum_checks == crossing_pair_total
 assert split_seam_parity_checks == crossing_pair_total
+assert split_crossing_partition_checks == crossing_pair_total
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
       f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
@@ -288,4 +309,5 @@ print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing p
       f"and {closed_walk_split_checks} closed-walk split checks "
       f"and {split_turning_sum_checks} split turning sum checks "
       f"and {split_seam_parity_checks} split seam-parity checks "
+      f"and {split_crossing_partition_checks} split crossing partition checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")

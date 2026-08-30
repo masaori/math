@@ -2227,7 +2227,16 @@ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^M},\ \|x\| = 1 \,\right\}`,
         " より",
       ]),
       displayMath(
-        String.raw`Wx = WP^{(+)}x = V^{(+)}P^{(+)}x = V^{(+)}x
+        String.raw`\begin{aligned}
+Wx
+&= WP^{(+)}x
+   \quad (\because \text{直前の } P^{(+)}x = x) \\
+&= V^{(+)}P^{(+)}x
+   \quad (\because \text{sector\_decomposition\_of\_rayleigh\_sup (2) の }
+   WP^{(+)} = V^{(+)}P^{(+)}) \\
+&= V^{(+)}x
+   \quad (\because \text{直前の } P^{(+)}x = x)
+\end{aligned}
 \qquad \left(x \in \mathcal{F}^{(+)}\right)`,
       ),
       paragraph([

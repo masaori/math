@@ -942,3 +942,5 @@ import Ising2DLambda.NecSuf.KacWard.SmoothingSplitTurningSum
 import Ising2DLambda.KacWard.SmoothingSplitTurningSum
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitSeamParity
 import Ising2DLambda.KacWard.SmoothingSplitSeamParity
+import Ising2DLambda.NecSuf.KacWard.SmoothingSplitCrossingPartition
+import Ising2DLambda.KacWard.SmoothingSplitCrossingPartition
