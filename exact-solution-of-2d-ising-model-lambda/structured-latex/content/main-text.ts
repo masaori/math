@@ -49964,6 +49964,11 @@ T^{a,b}_{\varphi}(x)
               labels: ["claim_moved_orbit_weight_phase_twist"],
               habitat: "Qbar",
               verification: ["sagemath/check/moved-orbit-weight-phase-twist"],
+              lean: [
+                "Ising2DLambda.KacWard.movedOrbitWeight_phase_twist",
+                "Ising2DLambda.NecSuf.KacWard.orbitEntryProduct_phase_twist_necSuf",
+                "Ising2DLambda.KacWard.movedOrbitWeight_phase_twist_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),

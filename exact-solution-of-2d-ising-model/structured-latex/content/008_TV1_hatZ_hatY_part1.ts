@@ -943,8 +943,10 @@ C_{n+1}
 &&(\because\ \text{(B)}) \\
 &= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\,e^{-i\theta}e^{i\theta}\,\hat{Z}_\mu^{(\pm)}
 &&(\because\ 2K_1\cdot(2K_1)^{n}=(2K_1)^{n+1}\ \text{とスカラーの積の可換性}) \\
+&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}e^{0}\hat{Z}_\mu^{(\pm)}
+&&(\because\ \text{複素指数関数の積公式と}\ -i\theta+i\theta=0) \\
 &= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}
-&&(\because\ e^{-i\theta}e^{i\theta}=e^{0}=1) \\
+&&(\because\ e^{0}=1) \\
 &= (-1)^{(n-1)/2+1}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}
 &&(\because\ (-1)\cdot(-1)^{k}=(-1)^{k+1}) \\
 &= (-1)^{(n+1)/2}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}
