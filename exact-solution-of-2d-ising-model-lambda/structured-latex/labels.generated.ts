@@ -171,6 +171,7 @@ export const ALL_LABELS = [
   "claim_periodic_open_boundary_comparison_log_le_one",
   "claim_periodic_open_boundary_comparison_rational",
   "claim_permutation_power_return",
+  "claim_permutation_sign_moved_orbit_product",
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
   "claim_positive_rational_in_positive_cone",

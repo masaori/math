@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 36 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 37 回目の tick 時点）
+
+**置換符号を動く軌道ごとの因子の積として書く人手証明と SageMath 検証を固定した（`claim_permutation_sign_moved_orbit_product`）。** 各軌道 $C$ の巡回置換を $\lvert C\rvert-1$ 個の互換の合成へ開き、その符号が $(-1)^{\lvert C\rvert-1}$ であることを示した。動く軌道族が互いに素に動く辺集合を覆うことから、軌道上の巡回置換を軌道外で恒等写像として延長したものの合成は元の置換へ戻り、符号の乗法性で軌道積表示を得る。SageMath `permutation-sign-moved-orbits` は六元集合の全置換 $6!=720$ 個を転倒数と軌道分解から独立に計算して一致を確認した。Lean 具体版・必要十分版は未着手なので四層完了ではない。次はこの同じ証明手順を Lean 二版へ配線する。
+
+前進前レビューでは、前 tick の置換項の軌道重み分解（コミット `a74ef0a2`）を四層で照合した。独立ブロックは有限積の分割または値の住処を担うため、「何も言っていない主張」を含む修正対象は無かった。並列の式変形統一は、姉妹側の「半整数運動量での $A(\tilde\theta_\mu)$ の固有値・固有ベクトル」の複素平方根の証明末尾に重複していた $e^{i\pi/2}=\cos(\pi/2)+i\sin(\pi/2)=i$ の補足を削除し、直前の一続きの式変形だけを残した。
+
+## ひとつ前の到達点（2026-08-30 の 36 回目の tick 時点）
 
 **Kac--Ward 行列式の置換項が、固定辺の因子と軌道ごとの重みの積に分解することを四層で証明した（`claim_kac_ward_term_orbit_weight_factorization`）。** 置換項 $T^{a,b}_{\varphi}(x)$ は、符号の定数多項式、固定辺 $\vec E_L\setminus M(\varphi)$ の因子 $K^{a,b}_{\vec e,\vec e}(x)$ の積、軌道族 $\mathcal C(\varphi)$ の各軌道 $C$ の重み $(-x)^{\lvert C\rvert}\prod_{\vec e\in C}\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}$ の積に等しい。証明は、固定辺と動く辺への分割、前 tick の軌道族分割（`claim_moved_orbit_partition`）、動く辺の因子の $-x\widehat M$ への書き換え、$-x$ の括り出しの一続きの式変形である。SageMath `kac-ward-term-orbit-weight` は先頭六辺の全置換 $6!$ 個・四つのスピン構造の $2{,}880$ 項を $\mathbb Q(\zeta_8)[x]$ で全数検査した。Lean は具体版 `kacWardEntryProduct_orbit_factorization`、可換モノイドの有限積の分割だけを残した必要十分版 `prod_fixed_orbit_factorization`、導出版を通した。次は置換符号 $\operatorname{sgn}(\varphi)$ を軌道ごとの符号の積へ分解する。
 

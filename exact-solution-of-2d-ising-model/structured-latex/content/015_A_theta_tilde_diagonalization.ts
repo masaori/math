@@ -636,11 +636,7 @@ s_1c_2
 \end{aligned}`,
       ),
       paragraph([
-        "（",
-        ref("euler_formula_cos_sin"),
-        " より ",
-        math(String.raw`e^{i\pi/2} = \cos\frac{\pi}{2} + i\sin\frac{\pi}{2} = i`),
-        "、非負平方根は ",
+        "（非負平方根は ",
         ref("sqrt_nonnegative_existence_uniqueness"),
         " による。）",
       ]),

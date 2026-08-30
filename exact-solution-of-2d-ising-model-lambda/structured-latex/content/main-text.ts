@@ -49653,6 +49653,89 @@ T^{a,b}_{\varphi}(x)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_permutation_sign_moved_orbits",
+        labels: [],
+        title: { text: "置換符号の動く軌道ごとの分解" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_permutation_sign_moved_orbit_product",
+            focus: {
+              id: "kac_ward_claim_permutation_sign_moved_orbit_product",
+              kind: "claim",
+              title: { text: "置換符号は動く軌道の符号因子の積である" },
+              labels: ["claim_permutation_sign_moved_orbit_product"],
+              habitat: "Z",
+              verification: ["sagemath/check/permutation-sign-moved-orbits"],
+              statement: [
+                paragraph(["任意の ", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " について、"]),
+                displayMath(String.raw`\operatorname{sgn}(\varphi)
+=\prod_{C\in\mathcal C(\varphi)}(-1)^{\lvert C\rvert-1}\in\mathbb Z`),
+                paragraph([
+                  "である。軌道族 ", math(String.raw`\mathcal C(\varphi)`), " は ", ref("def_moved_orbit_family"),
+                  "、有限集合の元の個数 ", math(String.raw`\lvert C\rvert\in\mathbb N`), " は ",
+                  ref("def_cardinality_notation"), " で定めた。各軌道は空でなく固定点を含まないので ",
+                  math(String.raw`2\le\lvert C\rvert`), " であり、指数 ",
+                  math(String.raw`\lvert C\rvert-1\in\mathbb N`), " が定まる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`C\in\mathcal C(\varphi)`), " ごとに ", math(String.raw`\vec e_C\in C`),
+                  " を一つ取り、", math(String.raw`m_C:=\lvert C\rvert`), " と置く。",
+                  "また、", math(String.raw`\varphi_C:\vec E_L\to\vec E_L`), " を",
+                ]),
+                displayMath(String.raw`\varphi_C(\vec e):=
+\begin{cases}
+\varphi(\vec e)&(\vec e\in C),\\
+\vec e&(\vec e\notin C)
+\end{cases}`),
+                paragraph([
+                  "で定める。軌道集合の定義により ", math(String.raw`\varphi(C)=C`),
+                  " であり、", math(String.raw`\varphi`), " は全単射なので ", math(String.raw`\varphi_C`),
+                  " も全単射である。", ref("claim_moved_orbit_partition"), " と置換の単射性により、",
+                ]),
+                displayMath(String.raw`C=\{\vec e_C,\varphi(\vec e_C),\ldots,
+\varphi^{\circ(m_C-1)}(\vec e_C)\}`),
+                paragraph([
+                  "であり、右辺の向き付き辺は相異なり、",
+                  math(String.raw`\varphi^{\circ m_C}(\vec e_C)=\vec e_C`), " である（",
+                  ref("claim_moved_orbit_closed_nonbacktracking"), "）。したがって ",
+                  math(String.raw`\varphi_C`), " は",
+                ]),
+                displayMath(String.raw`(\vec e_C\ \varphi^{\circ(m_C-1)}(\vec e_C))\circ\cdots\circ
+(\vec e_C\ \varphi^{\circ2}(\vec e_C))\circ(\vec e_C\ \varphi(\vec e_C))`),
+                paragraph([
+                  "という ", math(String.raw`m_C-1`), " 個の互換の合成に等しい。各互換の符号は ",
+                  math(String.raw`-1`), " で、符号は合成を積へ送る（", ref("claim_permutation_sign_mul"),
+                  "）から、この巡回置換の符号は ", math(String.raw`(-1)^{m_C-1}`), " である。",
+                ]),
+                paragraph([
+                  ref("claim_moved_orbit_partition"), " により相異なる軌道は互いに素である。各軌道上の巡回置換を",
+                  "軌道外では恒等写像として延長したものの合成は ", math(String.raw`\varphi`),
+                  " に等しく、固定辺上では両者とも恒等写像である。符号の乗法性を軌道の有限族へ繰り返し適用すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\varphi)
+&=\prod_{C\in\mathcal C(\varphi)}\operatorname{sgn}(\varphi_C)
+&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ と }\blkref{claim_permutation_sign_mul}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}(-1)^{m_C-1}
+&&\bigl(\because\ C\text{ 上の巡回置換は }m_C-1\text{ 個の互換の合成}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}(-1)^{\lvert C\rvert-1}
+&&\bigl(\because\ m_C=\lvert C\rvert\bigr)
+\end{aligned}`),
+                paragraph(["全過程は有限集合の置換、自然数、整数の積だけで閉じ、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },
