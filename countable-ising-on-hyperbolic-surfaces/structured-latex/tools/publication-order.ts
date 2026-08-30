@@ -4,6 +4,7 @@ import type { ConvertedBlock, Node } from "../schema.ts";
 export type ContentFile = { file: string; blocks: ConvertedBlock[] };
 
 const sectionOrder = [
+  "finite-data-group-foundations",
   "finite-graph-even-subgraphs",
   "two-stage-group-quotient-input",
   "finite-cell-complex-data",
@@ -12,6 +13,7 @@ const sectionOrder = [
   "finite-fourier-analysis",
   "primal-dual-homology",
   "prime-exponent-encoding",
+  "paper-scope-and-quotient-input",
   "hyperbolic-regular-types",
   "product-difference-classification",
   "finite-quotient-hyperbolic-lattice",
@@ -23,7 +25,8 @@ const sectionOrder = [
 type Section = (typeof sectionOrder)[number];
 
 const structureIds: Record<Section, readonly string[]> = {
-  "finite-graph-even-subgraphs": ["publication_heading_mathematical_tools", "publication_heading_finite_graph_even_subgraphs", "publication_goal_finite_graph_even_subgraphs"],
+  "finite-data-group-foundations": ["publication_goal_paper_subject_preface", "publication_heading_mathematical_tools", "publication_heading_finite_data_group_foundations", "publication_goal_finite_data_group_foundations"],
+  "finite-graph-even-subgraphs": ["publication_heading_finite_graph_even_subgraphs", "publication_goal_finite_graph_even_subgraphs"],
   "two-stage-group-quotient-input": ["publication_heading_two_stage_group_quotient_input", "publication_goal_two_stage_group_quotient_input"],
   "finite-cell-complex-data": ["publication_heading_finite_cell_complex_data", "publication_goal_finite_cell_complex_data"],
   "f2-chain-homology": ["publication_heading_f2_chain_homology", "publication_goal_f2_chain_homology"],
@@ -31,7 +34,8 @@ const structureIds: Record<Section, readonly string[]> = {
   "finite-fourier-analysis": ["publication_heading_finite_fourier_analysis", "publication_goal_finite_fourier_analysis"],
   "primal-dual-homology": ["publication_heading_primal_dual_fourier", "publication_goal_primal_dual_fourier"],
   "prime-exponent-encoding": ["publication_heading_prime_exponent_encoding", "publication_goal_prime_exponent_encoding"],
-  "hyperbolic-regular-types": ["publication_heading_hyperbolic_ising_semantics", "publication_heading_hyperbolic_regular_types", "publication_goal_hyperbolic_regular_types"],
+  "paper-scope-and-quotient-input": ["publication_heading_hyperbolic_ising_semantics", "publication_heading_paper_scope_and_quotient_input", "publication_goal_paper_scope_and_quotient_input"],
+  "hyperbolic-regular-types": ["publication_heading_hyperbolic_regular_types", "publication_goal_hyperbolic_regular_types"],
   "product-difference-classification": ["publication_heading_product_difference_classification", "publication_goal_product_difference_classification"],
   "finite-quotient-hyperbolic-lattice": ["publication_heading_finite_quotient_hyperbolic_lattice", "publication_goal_finite_quotient_hyperbolic_lattice"],
   "ising-partition-polynomial": ["publication_heading_ising_partition_polynomial", "publication_goal_ising_partition_polynomial"],
@@ -80,11 +84,18 @@ const genericFourierIds = new Set([
   "finite_fourier_definition_f2_linear_character_space",
   "finite_fourier_definition_integer_sign_character_realization",
   "finite_fourier_claim_integer_sign_character_multiplicativity",
+  "finite_fourier_theorem_f2_character_separates_nonzero_vector",
   "finite_fourier_theorem_character_orthogonality",
+  "finite_fourier_definition_transform",
+  "finite_fourier_definition_integer_polynomial_rational_embedding",
+  "finite_fourier_definition_natural_rational_embedding",
   "finite_fourier_theorem_inverse_transform",
 ]);
 
 function classify(block: ConvertedBlock, file: string): Section {
+  if (file === "about-article-scope.ts" && block.id.startsWith("foundations_definition_")) return "finite-data-group-foundations";
+  if (block.id === "article_scope_definition_topological_realization_of_cellulation") return "finite-cell-complex-data";
+  if (block.id === "finite_quotient_lattice_definition_cell_role_label_set") return "finite-cell-complex-data";
   if (genericCellulationIds.has(block.id)) return "finite-cell-complex-data";
   if ([
     "finite_graph_definition_endpoint_labels",
@@ -100,11 +111,12 @@ function classify(block: ConvertedBlock, file: string): Section {
   if (file === "finite-fourier-duality.ts") return "primal-dual-homology";
   if (block.id === "arithmetic_tools_definition_prime_exponent_logarithmic_group") return "prime-exponent-encoding";
   if (block.id === "quotient_tower_definition_positive_rational_logarithmic_value_map") return "prime-exponent-encoding";
-  if (file === "about-article-scope.ts") return "hyperbolic-regular-types";
+  if (file === "about-article-scope.ts") return "paper-scope-and-quotient-input";
   if (file === "finite-cellulation.ts" && block.id === "finite_cellulation_definition_hyperbolic_regular_type_set") return "hyperbolic-regular-types";
   if (file === "finite-cellulation.ts" && block.id.startsWith("finite_cellulation_theorem_hyperbolic_regular_type_")) return "hyperbolic-regular-types";
   if (file === "finite-cellulation.ts" && block.id.includes("product_difference_")) return "product-difference-classification";
-  if (file === "finite-quotient-lattice.ts" && block.id !== "finite_quotient_lattice_theorem_fixed_quotient_ising_partition_polynomial") return "finite-quotient-hyperbolic-lattice";
+  if (file === "finite-quotient-lattice.ts" && block.id === "finite_quotient_lattice_theorem_generated_cellulation_is_hyperbolic_regular") return "finite-quotient-hyperbolic-lattice";
+  if (file === "finite-quotient-lattice.ts" && block.id !== "finite_quotient_lattice_theorem_fixed_quotient_ising_partition_polynomial") return "paper-scope-and-quotient-input";
   if (block.id === "finite_quotient_lattice_theorem_fixed_quotient_ising_partition_polynomial") return "ising-partition-polynomial";
   if (file === "main-text.ts") return "ising-partition-polynomial";
   if (file === "arithmetic-invariants.ts") return "fixed-lattice-arithmetic";
@@ -122,6 +134,15 @@ function nodeReferences(node: Node): string[] {
       .filter((target): target is string => target !== undefined);
   }
   return [];
+}
+
+function nodeText(node: Node): string {
+  if (node.type === "text") return node.value;
+  if (node.type === "paragraph") return node.children.map(nodeText).join("");
+  if (node.type === "list") return node.items.flat().map(nodeText).join("");
+  if (node.type === "math" || node.type === "displayMath") return node.tex;
+  if (node.type === "ref") return "";
+  return "";
 }
 
 function dependencies(block: ConvertedBlock, labelOwner: Map<string, string>): Set<string> {
@@ -164,18 +185,18 @@ function topologicalSort(blocks: ConvertedBlock[], labelOwner: Map<string, strin
 export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
   const all = rawFiles.flatMap(({ file, blocks }) => blocks.map((block) => ({ file, block })));
   const byId = new Map(all.map(({ block }) => [block.id, block]));
-  const labelOwner = new Map(all.flatMap(({ block }) => block.labels.map((label) => [label, block.id] as const)));
+  const labelOwner = new Map<string, string>(all.flatMap(({ block }) => block.labels.map((label) => [label, block.id] as const)));
   const content = all.filter(({ file, block }) => file !== "publication-structure.ts" && block.kind !== "heading");
   const expectedIdDigests = new Map<string, string>([
-    ["about-article-scope.ts", "2385be547690edfaab9bd458fd0aec851bb3149a649886db47bb57ce27533419"],
-    ["arithmetic-invariants.ts", "6103d558036852103be49ebc56d5d646bee632e3138cb5f83bc0e16f4bc66027"],
+    ["about-article-scope.ts", "8340207201a5ca2d39d3dde65c6064a79d73d66fdbea63bb4d21ef91619b84d9"],
+    ["arithmetic-invariants.ts", "da0bcd7e0394862904f6a20cc9df0d4377a94f3190c5ff2ccb5c807d6684daca"],
     ["arithmetic-tools.ts", "cafe20754d06ecb0b246b66effbcae672dc3bd928370dd991dc18d1112c522c0"],
     ["finite-cellulation.ts", "cfff3fa6d456242279b044556bffcce96c68fe912b4fadf6a45ea1424c47259c"],
-    ["finite-fourier-duality.ts", "be9e8ad799f3e204f41d15cf0cf48ddd5c1566060767231f53f149a0b14a7737"],
-    ["finite-quotient-lattice.ts", "ddb785f46921b5aa5563e671dfb73bcf5a621e0ac59d80d3afeb3377080715fc"],
+    ["finite-fourier-duality.ts", "5e7e1c320950d97d6d7823bac862c83dfb3bf0a903163de6f3c8eb7947d08d01"],
+    ["finite-quotient-lattice.ts", "ec0b37b3444fc6b590cce23af66953493dbed947b7fde4e7589d09634a885269"],
     ["homology-sector-expansion.ts", "4ca22cc43e6820be8df6f2a9dca2820fd56bf5f8032c663bfdace44f40c70b98"],
     ["main-text.ts", "86f1872004ff2ba2312525592346506a8f4f2dca95c0b0f04f9a88e703141e2c"],
-    ["quotient-tower.ts", "5a4d172961818ee149dda139b6046a49b50b8dbc2d8f2ab009b43e20815b8048"],
+    ["quotient-tower.ts", "577d8aaad9a00ee8e8e0cad17b198e3f3921931c44896e48a1fa2c7a61f97346"],
   ]);
   for (const [file, expected] of expectedIdDigests) {
     const ids = content.filter((entry) => entry.file === file).map(({ block }) => block.id).sort();
@@ -185,9 +206,8 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
   const unexpectedFiles = new Set(content.map((entry) => entry.file).filter((file) => !expectedIdDigests.has(file)));
   if (unexpectedFiles.size > 0) throw new Error(`出版分類されていない本文ファイル: ${[...unexpectedFiles].join(", ")}`);
   const classified = new Map<Section, ConvertedBlock[]>(sectionOrder.map((section) => [section, []]));
-  const prefaceIds = content.filter(({ file }) => file === "about-article-scope.ts").map(({ block }) => block.id);
   for (const { file, block } of content) {
-    if (!prefaceIds.includes(block.id)) classified.get(classify(block, file))!.push(block);
+    classified.get(classify(block, file))!.push(block);
   }
 
   const rank = new Map(sectionOrder.map((section, index) => [section, index]));
@@ -202,9 +222,7 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
     }
   }
 
-  const preface = prefaceIds.map((id) => byId.get(id)).filter((block): block is ConvertedBlock => block !== undefined);
-  if (preface.length !== prefaceIds.length) throw new Error("論文対象の冒頭定義群が見つからない");
-  const blocks: ConvertedBlock[] = topologicalSort(preface, labelOwner);
+  const blocks: ConvertedBlock[] = [];
   for (const section of sectionOrder) {
     for (const id of structureIds[section]) {
       const block = byId.get(id);
@@ -216,6 +234,35 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
   const expected = content.length + Object.values(structureIds).flat().length;
   if (blocks.length !== expected || new Set(blocks.map((block) => block.id)).size !== expected) {
     throw new Error(`出版分類が全単射でない: expected=${expected}, actual=${blocks.length}`);
+  }
+
+  const position = new Map<string, number>(blocks.map((block, index) => [block.id, index]));
+  for (const block of blocks) {
+    for (const label of [...(block.statement ?? []), ...(block.proof ?? [])].flatMap(nodeReferences)) {
+      const owner = labelOwner.get(label);
+      if (owner !== undefined && position.get(owner)! >= position.get(block.id)!) {
+        throw new Error(`本文に前方参照がある: ${block.id} -> ${owner} (${label})`);
+      }
+    }
+  }
+
+  const notationIntroducers = new Map<RegExp, string>([
+    [/\\operatorname\{HF\}/, "foundations_definition_hereditarily_finite_data_over_naturals"],
+    [/\\mathbb F_2/, "foundations_definition_field_with_two_elements"],
+    [/\\operatorname\{Sym\}/, "foundations_definition_finite_permutation_group_notation"],
+    [/\\operatorname\{ord\}/, "foundations_definition_finite_group_notation"],
+    [/\\curvearrowright/, "foundations_definition_finite_group_action_and_transitivity"],
+    [/Q\/H/, "foundations_definition_left_coset_set"],
+    [/\\mathsf\{source\}/, "finite_graph_definition_endpoint_labels"],
+    [/\\mathsf\{forward\}/, "finite_cellulation_definition_orientation_labels"],
+    [/\\operatorname\{OrientedClosedSurfaceCellulation\}/, "finite_cellulation_definition_oriented_closed_surface_cellulation"],
+    [/K_h/, "article_scope_definition_regular_hyperbolic_metric_realization"],
+  ]);
+  for (const [pattern, expectedOwner] of notationIntroducers) {
+    const first = blocks.find((block) => pattern.test([...(block.statement ?? []), ...(block.proof ?? [])].map(nodeText).join("")));
+    if (first?.id !== expectedOwner) {
+      throw new Error(`大域記法が定義前に使われた: ${pattern} first=${first?.id ?? "none"}, expected=${expectedOwner}`);
+    }
   }
   return [{ file: "publication-order", blocks }];
 }

@@ -17,9 +17,18 @@ face_stabilizer = quotient_group.subgroup([face_rotation])
 vertex_stabilizer = quotient_group.subgroup([vertex_rotation])
 edge_stabilizer = quotient_group.subgroup([edge_half_turn])
 
-face_cosets = [frozenset(coset) for coset in quotient_group.cosets(face_stabilizer, side="left")]
-vertex_cosets = [frozenset(coset) for coset in quotient_group.cosets(vertex_stabilizer, side="left")]
-edge_cosets = [frozenset(coset) for coset in quotient_group.cosets(edge_stabilizer, side="left")]
+def left_coset(group_element, subgroup):
+    # 本文の積 (gk)(alpha)=g(k(alpha)) は Sage の積順序と逆である。
+    return frozenset(member * group_element for member in subgroup)
+
+
+def all_left_cosets(subgroup):
+    return list({left_coset(group_element, subgroup) for group_element in quotient_group})
+
+
+face_cosets = all_left_cosets(face_stabilizer)
+vertex_cosets = all_left_cosets(vertex_stabilizer)
+edge_cosets = all_left_cosets(edge_stabilizer)
 
 
 def permutation_key(permutation):
@@ -30,25 +39,21 @@ def representative_selector(edge_coset):
     return min(edge_coset, key=permutation_key)
 
 
-def left_coset(group_element, subgroup):
-    return frozenset(group_element * member for member in subgroup)
-
-
 def boundary_entry(group_element):
     edge_coset = left_coset(group_element, edge_stabilizer)
     selected = representative_selector(edge_coset)
     if selected == group_element:
-        orientation = "reverse"
-    else:
-        assert selected == group_element * edge_half_turn
         orientation = "forward"
+    else:
+        assert selected == edge_half_turn * group_element
+        orientation = "reverse"
     return edge_coset, orientation
 
 
 def traversal_endpoints(group_element, edge_coset, orientation):
     selected = representative_selector(edge_coset)
     source = left_coset(selected, vertex_stabilizer)
-    target = left_coset(selected * edge_half_turn, vertex_stabilizer)
+    target = left_coset(edge_half_turn * selected, vertex_stabilizer)
     if orientation == "forward":
         return source, target
     assert orientation == "reverse"
@@ -66,12 +71,12 @@ for face_coset in face_cosets:
         assert edge_coset in edge_cosets
 
         start_vertex, end_vertex = traversal_endpoints(group_element, edge_coset, orientation)
-        assert start_vertex == left_coset(group_element * edge_half_turn, vertex_stabilizer)
-        assert end_vertex == left_coset(group_element, vertex_stabilizer)
+        assert start_vertex == left_coset(group_element, vertex_stabilizer)
+        assert end_vertex == left_coset(edge_half_turn * group_element, vertex_stabilizer)
         assert start_vertex in vertex_cosets
         assert end_vertex in vertex_cosets
 
-        next_group_element = group_element * face_rotation
+        next_group_element = face_rotation * group_element
         next_edge_coset, next_orientation = boundary_entry(next_group_element)
         next_start_vertex, _ = traversal_endpoints(
             next_group_element,

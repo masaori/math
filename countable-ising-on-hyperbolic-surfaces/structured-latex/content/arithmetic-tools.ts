@@ -4,7 +4,7 @@ export default defineBlocks([
   {
     id: "arithmetic_tools_definition_prime_exponent_logarithmic_group",
     kind: "definition",
-    title: { text: "有限台素指数写像の対数順序群" },
+    title: { text: "有限台素指数写像の素指数加法群" },
     labels: ["def_prime_exponent_logarithmic_group"],
     habitat: "Lambda",
     statement: [
@@ -15,7 +15,7 @@ export default defineBlocks([
         math(String.raw`p\in\mathcal P`),
         " に形式的生成元 ",
         math(String.raw`\ell_p`),
-        " を割り当てる。有限台をもつ整数係数写像全体からなる対数順序群を",
+        " を割り当てる。有限台をもつ整数係数写像全体からなる素指数加法群を",
       ]),
       displayMath(String.raw`\Lambda:=\bigoplus_{p\in\mathcal P}\mathbb Z\,\ell_p`),
       paragraph([
