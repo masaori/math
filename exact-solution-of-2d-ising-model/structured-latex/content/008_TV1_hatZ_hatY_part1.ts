@@ -3594,9 +3594,24 @@ C := \cosh 2K_2^* = c_2^* \in \mathbb{R},\quad S := \sinh 2K_2^* = s_2^* \in \ma
         " の記号）。倍角公式",
       ]),
       displayMath(
-        String.raw`a^2 + b^2 = \cosh^2 K_1 + \sinh^2 K_1 = \cosh 2K_1 = c_1, \qquad
-2ab = 2\sinh K_1\cosh K_1 = \sinh 2K_1 = s_1, \qquad
-a^2 - b^2 = \cosh^2 K_1 - \sinh^2 K_1 = 1`,
+        String.raw`\begin{aligned}
+a^2 + b^2 &= \cosh^2 K_1 + \sinh^2 K_1
+        &&(\because a = \cosh K_1,\ b = \sinh K_1\ \text{の略記}) \\
+&= \cosh 2K_1
+        &&(\because \text{双曲線関数の倍角公式}) \\
+&= c_1
+        &&(\because c_1 = \cosh 2K_1\ \text{の定義}) \\
+2ab &= 2\sinh K_1 \cosh K_1
+        &&(\because a = \cosh K_1,\ b = \sinh K_1\ \text{の略記}) \\
+&= \sinh 2K_1
+        &&(\because \text{双曲線関数の倍角公式}) \\
+&= s_1
+        &&(\because s_1 = \sinh 2K_1\ \text{の定義}) \\
+a^2 - b^2 &= \cosh^2 K_1 - \sinh^2 K_1
+        &&(\because a = \cosh K_1,\ b = \sinh K_1\ \text{の略記}) \\
+&= 1
+        &&(\because \cosh^2 K_1 - \sinh^2 K_1 = 1)
+\end{aligned}`,
       ),
       paragraph([
         "を後で用いる。この記号で ",

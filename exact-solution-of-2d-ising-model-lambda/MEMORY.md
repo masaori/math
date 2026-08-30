@@ -2,7 +2,19 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 9 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 11 回目の tick 時点）
+
+**四つの Kac--Ward 行列式が非後退置換の位相表示の和に等しいことを、本文と SageMath で固定した（`claim_kac_ward_determinant_nonbacktracking_phase_sum`。Lean 未着手）。** 非後退置換の集合 $\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)$（`def_nonbacktracking_permutations`）を定義し、行列式の置換展開をこの集合と補集合へ分け、補集合の項は非零判定 `claim_kac_ward_determinant_term_nonzero_iff` の対偶で零、残った各項へ位相表示 `claim_kac_ward_term_orbit_phase_twist_product` を代入して $D^{a,b}_L(x)=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}}\prod_{C\in\mathcal C(\varphi)}\bigl(-x^{\lvert C\rvert}\widehat{(-1)^{a\,h(\gamma^\varphi_C)+b\,v(\gamma^\varphi_C)}\zeta_8^{\,t_\circ(\gamma^\varphi_C)}}\bigr)$ を得た。SageMath `kac-ward-nonbacktracking-sum` は一辺二のトーラスの非後退置換 30,784 件を全列挙し、四つのスピン構造で $\det(I-xM^{a,b})$ の直接計算と $\mathbb Q(\zeta_8)[x]$ で一致を検査した（行列式は全置換の和なので、非後退でない項が零であることも同時に確かめた）。本文 719 ブロック・検算対応 329 件・PDF 327 ページを通した。次はこの主張の Lean 具体版・必要十分版を書き、その後に横断消去・接触点分割を結んで符号付き偶部分グラフ多項式の平方恒等式へまとめる。
+
+前進前レビューでは前 tick の Lean 二版を人手証明の三段と照合し、sorry 検査の登録も確認して修正対象は無かった。並列の式変形統一は、姉妹側の「$T_{(V)}$ の $\hat Z,\hat Y$ への作用」の準備にあった倍角公式の一行複数等号三本を、略記の定義・双曲線関数の倍角公式・記号の定義を根拠とする一行一等号の鎖へ開いた（姉妹側 check・PDF 347 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 10 回目の tick 時点）
+
+**非後退置換の置換項の位相表示 `claim_kac_ward_term_orbit_phase_twist_product` を Lean 二版へ配線し、四層検証を完了した。** 具体版 `KacWard.kacWardSignedPermutationTerm_orbit_phase_twist` は既存の閉路軌道表示から始め、定数多項式埋め込みの乗法性を各軌道の有限積へ繰り返して、軌道成分積の既知の位相・ねじれ値を代入した。必要十分版 `NecSuf.KacWard.termOrbitPhaseTwist_necSuf` は有限積、単位元と積を保つ写像、各軌道の成分積の値だけを残した。具体版を呼ぶだけの別名定理は内容を持たないため除いた。SageMath 53,248 件、検算対応 328 件、Lean 9,606 jobs・sorry 検査 1,623 件、本文 check・PDF 326 ページを通した。次はこの位相表示と横断消去・接触点分割を結び、偶部分グラフ多項式の平方恒等式へまとめる。
+
+前進前レビューでは前 tick の本文三段と SageMath を照合し、「何も言っていない主張」や不一致は無かった。並列の式変形統一は、姉妹側の「数演算子積のトレース」の基底段階にあった $\mathrm{tr}(I)=2^M=2^{M-0}$ を根拠と参照つきの二段へ開いた（姉妹側 check・PDF 347 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 9 回目の tick 時点）
 
 **非後退置換の置換項が軌道ごとの切断線偶奇の符号と回転位相の冪の積に等しいことを、本文と SageMath で固定した（`claim_kac_ward_term_orbit_phase_twist_product`。Lean 未着手）。** 閉路軌道表示 `claim_kac_ward_signed_orbit_term_product` の各軌道重みへ前 tick の位相・ねじれ分解 `claim_moved_orbit_weight_phase_twist` を代入し、定数多項式埋め込み（`def_qbar_constant_embedding`）の乗法性で $T^{a,b}_{\varphi}(x)=\prod_{C\in\mathcal C(\varphi)}\bigl(-x^{\lvert C\rvert}\cdot\widehat{(-1)^{a\,h(\gamma_C)+b\,v(\gamma_C)}\zeta_8^{\,t_\circ(\gamma_C)}}\bigr)$ を得た。基点の写像 $\vec e_\ast$ を明示して選び、右辺が選び方に依存しないことは左辺経由で述べた。SageMath `kac-ward-term-orbit-phase-twist` は一辺二のトーラスで単一軌道（閉歩道 3,856 件）と台が交わらない二軌道（9,456 件）、四スピン構造の計 53,248 件を $\mathbb Q(\zeta_8)[x]$ で検査した。構造化本文 716 ブロック・検算対応 328 件・PDF 326 ページ通過。次はこの主張の Lean 具体版・必要十分版を書き、その後に偶部分グラフ多項式の平方恒等式へまとめる。
 

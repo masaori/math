@@ -721,10 +721,18 @@ A\,\check{n}_\nu
       paragraph([
         "基底段階（",
         math(String.raw`k = 0`),
-        "）：",
-        math(String.raw`\mathrm{tr}(I) = 2^M = 2^{M-0}`),
-        " で成立。",
+        "）では、空の積が単位行列であることから",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}(I)
+&= 2^M
+   \quad (\because \text{トレースの基本性質 (3)}) \\
+&= 2^{M-0}
+   \quad (\because \mathbb C\text{ の四則})
+\end{aligned}`,
+      ),
+      paragraph(["最初の等号では ", ref("trace_basic_properties"), " (3) を使った。したがって主張が成立する。"]),
       paragraph([
         "帰納段階：",
         math(String.raw`k \geq 1`),
