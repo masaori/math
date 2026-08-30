@@ -1,6 +1,6 @@
 # 横断の平滑化と直進通過数
 
-**対象ラベル**: `claim_smoothing_straight_visit_count_update`, `claim_smoothing_vertex_crossing_number_update`, `claim_smoothing_other_vertex_crossing_invariance`, `claim_smoothing_crossing_number_update`, `claim_smoothing_cyclic_turning_invariance`, `claim_smoothing_seam_parity_invariance`, `claim_smoothing_interval_invariance`, `claim_smoothing_splits_closed_walk`, `claim_smoothing_split_turning_sum`
+**対象ラベル**: `claim_smoothing_straight_visit_count_update`, `claim_smoothing_vertex_crossing_number_update`, `claim_smoothing_other_vertex_crossing_invariance`, `claim_smoothing_crossing_number_update`, `claim_smoothing_cyclic_turning_invariance`, `claim_smoothing_seam_parity_invariance`, `claim_smoothing_interval_invariance`, `claim_smoothing_splits_closed_walk`, `claim_smoothing_split_turning_sum`, `claim_smoothing_split_seam_parity`
 - 実行: `sage sagemath/check/smoothing-straight-visit-count/check.sage`
 - 状態: PASS（2026-08-30、閉じた非後退辺列 24,628 件・横断対 3,584 対・他頂点の横断数不変検査 11,904 件）
 - 使用する環: `ZZ` と有限集合だけ。浮動小数点は使わない。
@@ -45,3 +45,7 @@ $c(\gamma)+1=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)$ を 3,
 同じ全横断対について、二本の辺列それぞれの循環総回転数を辺列から独立に
 計算し、その和が元の閉歩道の循環総回転数に等しいことを 3,584 対すべてで
 検査する（`claim_smoothing_split_turning_sum`）。
+
+同じ全横断対について、二本の辺列それぞれの横・縦の切断線偶奇を
+辺列から独立に計算し、成分ごとの和の偶奇が元の閉歩道の偶奇に等しいことを
+3,584 対すべてで検査する（`claim_smoothing_split_seam_parity`）。

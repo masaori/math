@@ -1612,6 +1612,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.interval_split_sum_necSuf
   Ising2DLambda.KacWard.smoothing_split_turning_sum
   Ising2DLambda.KacWard.smoothing_split_turning_sum_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.interval_split_parity_pair_necSuf
+  Ising2DLambda.KacWard.smoothing_split_seam_parity
+  Ising2DLambda.KacWard.smoothing_split_seam_parity_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

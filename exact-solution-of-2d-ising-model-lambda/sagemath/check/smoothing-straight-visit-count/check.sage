@@ -78,6 +78,7 @@ seam_parity_invariance_checks = 0
 interval_invariance_checks = 0
 closed_walk_split_checks = 0
 split_turning_sum_checks = 0
+split_seam_parity_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -223,6 +224,16 @@ for L in range(1, 4):
                         split_turning += turn(walk[r], walk[next_index])
                 assert split_turning == before_turning
                 split_turning_sum_checks += 1
+                # 二本の辺列の切断線偶奇を成分ごとに加えると、
+                # 元の閉歩道の切断線偶奇に等しい
+                # （claim_smoothing_split_seam_parity）。
+                split_horizontal = [sum(horizontal_seam(L, walk[r]) for r in indices) % 2
+                                    for indices in (indices_a, indices_b)]
+                split_vertical = [sum(vertical_seam(L, walk[r]) for r in indices) % 2
+                                  for indices in (indices_a, indices_b)]
+                assert sum(split_horizontal) % 2 == before_seam_parity[0]
+                assert sum(split_vertical) % 2 == before_seam_parity[1]
+                split_seam_parity_checks += 1
                 for vertex in vertices:
                     if vertex == cross_vertex:
                         continue
@@ -265,6 +276,7 @@ assert seam_parity_invariance_checks == crossing_pair_total
 assert interval_invariance_checks == crossing_pair_total
 assert closed_walk_split_checks == crossing_pair_total
 assert split_turning_sum_checks == crossing_pair_total
+assert split_seam_parity_checks == crossing_pair_total
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
       f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
@@ -275,4 +287,5 @@ print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing p
       f"and {interval_invariance_checks} index-interval invariance checks "
       f"and {closed_walk_split_checks} closed-walk split checks "
       f"and {split_turning_sum_checks} split turning sum checks "
+      f"and {split_seam_parity_checks} split seam-parity checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")

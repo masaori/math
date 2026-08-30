@@ -1829,10 +1829,20 @@ i\,H_1^{(+)}
       paragraph([
         "(4) ",
         math(String.raw`|(1,\dots,1)| = M`),
-        " なので (2) より ",
-        math(String.raw`\varepsilon\check{Q}_{(1,\dots,1)} = (-1)^{2M}\check{Q}_{(1,\dots,1)}
-= \check{Q}_{(1,\dots,1)}`),
-        "。",
+        " なので (2) を一段ずつ適用すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\check{Q}_{(1,\dots,1)}
+&= (-1)^{M+|(1,\dots,1)|}\check{Q}_{(1,\dots,1)}
+   \quad (\because \text{(2)}) \\
+&= (-1)^{2M}\check{Q}_{(1,\dots,1)}
+   \quad (\because |(1,\dots,1)|=M) \\
+&= \check{Q}_{(1,\dots,1)}
+   \quad (\because (-1)^{2M}=1)
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`y \in \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
         " を取ると、",
         ref("check_joint_eigenspace_decomposition"),
@@ -1841,9 +1851,15 @@ i\,H_1^{(+)}
         " であり",
       ]),
       displayMath(
-        String.raw`\varepsilon y = \varepsilon\check{Q}_{(1,\dots,1)}y
-= \check{Q}_{(1,\dots,1)}y = y
-\quad \left(\because \text{(2) と } |(1,\dots,1)| = M\right)`,
+        String.raw`\begin{aligned}
+\varepsilon y
+&= \varepsilon\check{Q}_{(1,\dots,1)}y
+   \quad (\because y=\check{Q}_{(1,\dots,1)}y) \\
+&= \check{Q}_{(1,\dots,1)}y
+   \quad (\because \text{直前の }\varepsilon\check{Q}_{(1,\dots,1)}=\check{Q}_{(1,\dots,1)}) \\
+&= y
+   \quad (\because y=\check{Q}_{(1,\dots,1)}y)
+\end{aligned}`,
       ),
       paragraph([
         "したがって ",

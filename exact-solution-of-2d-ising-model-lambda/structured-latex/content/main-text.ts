@@ -52179,6 +52179,73 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_split_seam_parity",
+        labels: [],
+        title: { text: "二本の閉歩道の切断線偶奇" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_smoothing_split_seam_parity",
+            focus: {
+              id: "kac_ward_claim_smoothing_split_seam_parity",
+              kind: "claim",
+              title: { text: "二本の閉歩道の切断線偶奇の和は元の切断線偶奇に等しい" },
+              labels: ["claim_smoothing_split_seam_parity"],
+              habitat: "N",
+              verification: ["sagemath/check/smoothing-straight-visit-count"],
+              lean: [
+                "Ising2DLambda.KacWard.smoothing_split_seam_parity",
+                "Ising2DLambda.NecSuf.KacWard.interval_split_parity_pair_necSuf",
+                "Ising2DLambda.KacWard.smoothing_split_seam_parity_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  " と横断する添字 ", math(String.raw`k<l`), " について、",
+                  ref("def_smoothed_split_edge_sequences"), " の二本の閉歩道 ",
+                  math(String.raw`\gamma_A,\gamma_B`), " は切断線偶奇（",
+                  ref("def_edge_sequence_seam_parities"), "）を持つ。このとき自然数の偶奇の組の等式",
+                ]),
+                displayMath(String.raw`\left(
+\bigl(h(\gamma_A)+h(\gamma_B)\bigr)\bmod2,
+\bigl(v(\gamma_A)+v(\gamma_B)\bigr)\bmod2
+\right)=\bigl(h(\gamma),v(\gamma)\bigr)`),
+                paragraph(["が成り立つ。"]) ,
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`c`), " を ", math(String.raw`c_{\mathrm h}`), " または ",
+                  math(String.raw`c_{\mathrm v}`), " のどちらか一方とする。",
+                  ref("def_smoothed_split_edge_sequences"), " により、",
+                  math(String.raw`\gamma_A`), " の辺添字は ", math(String.raw`A=\{r\in I_m:k<r\le l\}`),
+                  "、", math(String.raw`\gamma_B`), " の辺添字は補集合 ",
+                  math(String.raw`B=I_m\setminus A`), " を一度ずつ尽くす。従って",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{\vec e\in\gamma_A}c(\vec e)+\sum_{\vec e\in\gamma_B}c(\vec e)
+&=\sum_{r\in A}c(\vec e_r)+\sum_{r\in B}c(\vec e_r)
+&&\bigl(\because\ \blkref{def_smoothed_split_edge_sequences}\text{ の二本の辺の並び}\bigr)\\
+&=\sum_{r\in I_m}c(\vec e_r)
+&&\bigl(\because\ \blkref{def_smoothing_index_blocks}\text{ の }B=I_m\setminus A\text{ と互いに素な有限和の分割}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "等しい自然数を二で割った余りは等しい。", math(String.raw`c=c_{\mathrm h}`),
+                  " と ", math(String.raw`c=c_{\mathrm v}`), " の二回適用と ",
+                  ref("def_edge_sequence_seam_parities"), " により、組の両成分について主張を得る。",
+                  "全過程は自然数の有限和と偶奇だけで閉じ、実数体も複素数体も現れない。",
+                  "この等式により、平滑化の帰納で閉歩道を二本に分けたとき、切断線偶奇も二本の和として追跡できる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
