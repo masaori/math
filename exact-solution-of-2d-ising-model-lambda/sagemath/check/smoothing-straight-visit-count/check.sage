@@ -40,6 +40,18 @@ def turn(edge, successor):
     return ZZ(0) if difference == 0 else (ZZ(1) if difference == 1 else ZZ(-1))
 
 
+def horizontal_seam(L, edge):
+    """横周期の切断線偶奇 c_h（def_seam_parities）。"""
+    kind, _, j, _ = edge
+    return ZZ(1) if kind == "h" and j == L - 1 else ZZ(0)
+
+
+def vertical_seam(L, edge):
+    """縦周期の切断線偶奇 c_v（def_seam_parities）。"""
+    kind, i, _, _ = edge
+    return ZZ(1) if kind == "v" and i == L - 1 else ZZ(0)
+
+
 def crossing(L, walk, k, l):
     """添字 k, l の通過が横断するか（def_index_pair_crossing）。"""
     m = len(walk)
@@ -62,6 +74,7 @@ smoothed_crossing_checks = 0
 other_vertex_crossing_checks = 0
 global_crossing_update_checks = 0
 turning_invariance_checks = 0
+seam_parity_invariance_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -161,6 +174,18 @@ for L in range(1, 4):
                     turn(walk[r], out_edge[r]) for r in range(m)))
                 assert after_turning == before_turning
                 turning_invariance_checks += 1
+                # 平滑化後の出辺族は巡回後続族の二点交換なので、二つの
+                # 切断線偶奇を保つ（claim_smoothing_seam_parity_invariance）。
+                before_seam_parity = (
+                    sum(horizontal_seam(L, edge) for edge in walk) % 2,
+                    sum(vertical_seam(L, edge) for edge in walk) % 2,
+                )
+                after_seam_parity = (
+                    sum(horizontal_seam(L, out_edge[r]) for r in range(m)) % 2,
+                    sum(vertical_seam(L, out_edge[r]) for r in range(m)) % 2,
+                )
+                assert after_seam_parity == before_seam_parity
+                seam_parity_invariance_checks += 1
                 for vertex in vertices:
                     if vertex == cross_vertex:
                         continue
@@ -199,10 +224,12 @@ assert smoothed_crossing_checks == crossing_pair_total
 assert other_vertex_crossing_checks > 0
 assert global_crossing_update_checks == crossing_pair_total
 assert turning_invariance_checks == crossing_pair_total
+assert seam_parity_invariance_checks == crossing_pair_total
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
       f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
       f"{other_vertex_crossing_checks} other-vertex crossing invariance checks "
       f"and {global_crossing_update_checks} global crossing update checks "
       f"and {turning_invariance_checks} turning invariance checks "
+      f"and {seam_parity_invariance_checks} seam-parity invariance checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")

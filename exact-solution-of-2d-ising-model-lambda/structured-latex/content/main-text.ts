@@ -51673,6 +51673,101 @@ t_{\mathrm{sm}}(\gamma;k,l)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_seam_parity",
+        labels: [],
+        title: { text: "平滑化と切断線偶奇" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_smoothing_seam_parity_invariance",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_smoothed_seam_parity_pair",
+                kind: "definition",
+                title: { text: "平滑化後の二つの切断線偶奇" },
+                labels: ["def_smoothed_seam_parity_pair"],
+                habitat: "N",
+                statement: [
+                  paragraph([
+                    ref("def_smoothing_straight_visit_count"), " の閉じた非後退辺列 ",
+                    math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "、横断する添字 ",
+                    math(String.raw`k<l`), "、平滑化後の出辺の族 ",
+                    math(String.raw`(\vec f_r)_{r\in I_m}`), " を取る。平滑化後の二つの切断線偶奇の組 ",
+                    math(String.raw`w_{\mathrm{sm}}(\gamma;k,l)\in\{0,1\}\times\{0,1\}`), " を",
+                  ]),
+                  displayMath(String.raw`w_{\mathrm{sm}}(\gamma;k,l):=
+\left(
+\left(\sum_{r\in I_m}c_{\mathrm h}(\vec f_r)\right)\bmod2,
+\left(\sum_{r\in I_m}c_{\mathrm v}(\vec f_r)\right)\bmod2
+\right)`),
+                  paragraph([
+                    "で定める。", math(String.raw`c_{\mathrm h},c_{\mathrm v}`), " は ",
+                    ref("def_seam_parities"), " の辺ごとの切断線偶奇である。有限和と二で割った余りだけで定まり、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_smoothing_seam_parity_invariance",
+              kind: "claim",
+              title: { text: "横断の平滑化は二つの切断線偶奇を保つ" },
+              labels: ["claim_smoothing_seam_parity_invariance"],
+              habitat: "N",
+              verification: ["sagemath/check/smoothing-straight-visit-count"],
+              lean: [
+                "Ising2DLambda.KacWard.smoothing_seam_parity_invariance",
+                "Ising2DLambda.NecSuf.KacWard.two_point_swap_reindex_sum_necSuf",
+                "Ising2DLambda.KacWard.smoothing_seam_parity_invariance_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma`), " と横断する添字 ",
+                  math(String.raw`k<l`), " について、二つの偶奇の組の等式",
+                ]),
+                displayMath(String.raw`w_{\mathrm{sm}}(\gamma;k,l)=\bigl(h(\gamma),v(\gamma)\bigr)`),
+                paragraph([
+                  "が成り立つ。左辺は ", ref("def_smoothed_seam_parity_pair"),
+                  "、右辺は ", ref("def_edge_sequence_seam_parities"), " で定めた。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`c`), " を ", math(String.raw`c_{\mathrm h}`), " または ",
+                  math(String.raw`c_{\mathrm v}`), " のどちらか一方とする。巡回後続写像 ",
+                  math(String.raw`\sigma:I_m\to I_m`), " は全単射である（",
+                  ref("def_closed_walk_passes"), "）。求める有限和から始めると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{r\in I_m}c(\vec f_r)
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}c(\vec f_r)+c(\vec f_k)+c(\vec f_l)
+&&\bigl(\because\ \text{有限和から }k,l\text{ の二項を分ける}\bigr)\\
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}c(\vec e_{\sigma(r)})+c(\vec e_{\sigma(l)})+c(\vec e_{\sigma(k)})
+&&\bigl(\because\ \blkref{def_smoothing_straight_visit_count}\text{ の }\vec f_r\text{ の定義}\bigr)\\
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}c(\vec e_{\sigma(r)})+c(\vec e_{\sigma(k)})+c(\vec e_{\sigma(l)})
+&&\bigl(\because\ \mathbb N\text{ の加法の可換則}\bigr)\\
+&=\sum_{r\in I_m}c(\vec e_{\sigma(r)})
+&&\bigl(\because\ \text{分けた二項を戻す}\bigr)\\
+&=\sum_{r\in I_m}c(\vec e_r)
+&&\bigl(\because\ \sigma\text{ は }I_m\text{ の全単射}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "この等式を二で割った余りは等しく、", math(String.raw`c=c_{\mathrm h}`),
+                  " と ", math(String.raw`c=c_{\mathrm v}`), " の二回適用により組の両成分が一致する。",
+                  ref("def_edge_sequence_seam_parities"), " と ", ref("def_smoothed_seam_parity_pair"),
+                  " を戻せば主張を得る。全過程は自然数の有限和と偶奇だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 16 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 17 回目の tick 時点）
+
+**横断の平滑化が二つの切断線偶奇を保つことを四層で証明した。** 平滑化後の出辺族 $(\vec f_r)$ は元の巡回後続族 $(\vec e_{\sigma(r)})$ の二点交換であり、巡回後続写像 $\sigma:I_m\to I_m$ は全単射なので、横周期・縦周期それぞれの切断線指示値の有限和とその偶奇は変わらない（`claim_smoothing_seam_parity_invariance`）。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対で二成分を定義から独立に計算した。Lean は具体版 `KacWard/SmoothingSeamParity.lean` と、加法可換モノイド上で全単射による添字の取り替えと二点交換だけを残した必要十分版 `two_point_swap_reindex_sum_necSuf` を通した。次は回転数・横断数・巻き付き偶奇の更新式を結び、トーラス上の回転位相の符号表示へ進む。
+
+前進前レビューでは、前 tick の循環総回転数の平滑化不変性の本文末尾にあった、証明済みの「新しい二項の回転数の和は 0」より強い「左回転と右回転が一つずつ」という未証明の帰結を削除した。独立ブロックには「何も言っていない主張」は無かった（先行コミット `339909f6`）。
+
+並列の式変形統一は、姉妹側の偶数セクター終結章の「$\varepsilon\check Q_\epsilon=\eta_\epsilon\check Q_\epsilon$ と符号の反転則」の (2) と (4) に残る複数等号を、一行一等号・行末根拠つきの四つの鎖へ開いた。次は後続の証明を見る。
+
+## ひとつ前の到達点（2026-08-30 の 16 回目の tick 時点）
 
 **横断の平滑化が循環総回転数を保つことを四層で証明した。** 平滑化後の出辺の族 $(\vec f_r)$ がすべて非後退後続に属すること（反転なら軸が一致して横断の軸相違に反する背理法）を確認して、平滑化後の循環総回転数 $t_{\mathrm{sm}}(\gamma;k,l):=\sum_r\tau(\vec e_r,\vec f_r)\in\mathbb Z$（`def_smoothed_cyclic_total_turning`）を定義した。横断の直進性で旧二項は 0、`claim_reconnection_turning_difference` で新二項の和は $\{-4,0,4\}$、一歩の回転数の値域で $[-2,2]$、交わりは 0 なので、$t_{\mathrm{sm}}(\gamma;k,l)=t_{\circ}(\gamma)$（`claim_smoothing_cyclic_turning_invariance`）。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対で前後の循環総回転数を独立に計算して一致を検査した。Lean は具体版 `KacWard/SmoothingTurningInvariance.lean` と、加法可換モノイド上の二点更新の有限和保存だけを仮定する必要十分版 `two_point_preserved_sum_necSuf` を通した。次は平滑化が切断線偶奇（巻き付き偶奇）を保つことを確認し、回転数と横断数の偶奇関係の帰納へ進む。
 

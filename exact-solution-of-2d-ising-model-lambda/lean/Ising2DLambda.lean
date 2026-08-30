@@ -932,3 +932,5 @@ import Ising2DLambda.NecSuf.KacWard.SmoothingCrossingNumberUpdate
 import Ising2DLambda.KacWard.SmoothingCrossingNumberUpdate
 import Ising2DLambda.NecSuf.KacWard.SmoothingTurningInvariance
 import Ising2DLambda.KacWard.SmoothingTurningInvariance
+import Ising2DLambda.NecSuf.KacWard.SmoothingSeamParity
+import Ising2DLambda.KacWard.SmoothingSeamParity

@@ -552,10 +552,21 @@ export default defineBlocks([
         ref("check_joint_eigenspace_decomposition"),
         " (1) の冪等性より ",
         math(String.raw`\check{Q}_\epsilon q = q`),
-        " であり、(1) より ",
-        math(String.raw`\varepsilon q = \varepsilon\check{Q}_\epsilon q
-= \eta_\epsilon\check{Q}_\epsilon q = \eta_\epsilon q`),
-        " である。**以下で使うのは ",
+        " である。(1) より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon q
+&= \varepsilon\check{Q}_\epsilon q
+   \quad (\because \check{Q}_\epsilon q=q) \\
+&= \eta_\epsilon\check{Q}_\epsilon q
+   \quad (\because \text{(1)}) \\
+&= \eta_\epsilon q
+   \quad (\because \check{Q}_\epsilon q=q)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。**以下で使うのは ",
         math(String.raw`q \neq 0`),
         " と ",
         math(String.raw`\check{Q}_\epsilon q = q`),
@@ -586,10 +597,15 @@ export default defineBlocks([
         " に施すと",
       ]),
       displayMath(
-        String.raw`\check\psi_{M+1-\mu}\left(\check\psi_\mu^\dagger q\right)
-= \left(I - \check{n}_\mu\right)q
-= q - 0 = q
-\quad (\because \text{check\_number\_operator\_idempotent (2)})`,
+        String.raw`\begin{aligned}
+\check\psi_{M+1-\mu}\left(\check\psi_\mu^\dagger q\right)
+&= \left(I - \check{n}_\mu\right)q
+   \quad (\because \text{check\_number\_operator\_idempotent (2)}) \\
+&= q-0
+   \quad (\because \check n_\mu q=0) \\
+&= q
+   \quad (\because \text{零ベクトルの減法})
+\end{aligned}`,
       ),
       paragraph([
         "したがって ",
@@ -726,20 +742,29 @@ export default defineBlocks([
         " なので",
       ]),
       displayMath(
-        String.raw`\left(\prod_{\mu=1}^{M}\left(I - 2\check{n}_\mu\right)\right)\check{Q}_\epsilon
-= \left(\prod_{\mu=1}^{M}\left(1 - 2\epsilon_\mu\right)\right)\check{Q}_\epsilon
-= (-1)^{|\epsilon|}\,\check{Q}_\epsilon
-\quad \left(\because 1 - 2\epsilon_\mu = \begin{cases}-1 & (\epsilon_\mu = 1) \\
-+1 & (\epsilon_\mu = 0)\end{cases}\right)`,
+        String.raw`\begin{aligned}
+\left(\prod_{\mu=1}^{M}\left(I - 2\check{n}_\mu\right)\right)\check{Q}_\epsilon
+&= \left(\prod_{\mu=1}^{M}\left(1 - 2\epsilon_\mu\right)\right)\check{Q}_\epsilon
+   \quad (\because \text{check\_joint\_eigenspace\_decomposition (3)}) \\
+&= (-1)^{|\epsilon|}\,\check{Q}_\epsilon
+   \quad \left(\because 1 - 2\epsilon_\mu = \begin{cases}-1 & (\epsilon_\mu = 1) \\
++1 & (\epsilon_\mu = 0)\end{cases}\right)
+\end{aligned}`,
       ),
       paragraph([
-        "一方 (1)(3) より ",
-        math(String.raw`\varepsilon\check{Q}_\epsilon
-= \eta_{(1,\dots,1)}(-1)^{M-|\epsilon|}\check{Q}_\epsilon
-= \eta_{(1,\dots,1)}(-1)^{M}(-1)^{|\epsilon|}\check{Q}_\epsilon`),
-        "（",
-        math(String.raw`(-1)^{-|\epsilon|} = (-1)^{|\epsilon|}`),
-        "）である。したがって 2 つの行列 ",
+        "一方 (1)(3) より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\check{Q}_\epsilon
+&= \eta_{(1,\dots,1)}(-1)^{M-|\epsilon|}\check{Q}_\epsilon
+   \quad (\because \text{(1) と (3)}) \\
+&= \eta_{(1,\dots,1)}(-1)^{M}(-1)^{|\epsilon|}\check{Q}_\epsilon
+   \quad (\because (-1)^{-|\epsilon|}=(-1)^{|\epsilon|})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって 2 つの行列 ",
         math(String.raw`\varepsilon`),
         " と ",
         math(String.raw`\eta_{(1,\dots,1)}(-1)^M\prod_\mu(I-2\check{n}_\mu)`),
