@@ -509,9 +509,17 @@ e^{-i\frac{\pi k}{M}}
     ],
     proof: [
       paragraph([
-        "(1) ",
-        math(String.raw`M\tilde\theta_\mu = 2\pi\left(\mu-\tfrac12\right) = 2\pi\mu - \pi`),
-        " なので、",
+        "(1) まず指数の角度を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+M\tilde\theta_\mu
+&=2\pi\left(\mu-\tfrac12\right)
+&&\bigl(\because\ \tilde\theta_\mu=\tfrac{2\pi}{M}(\mu-\tfrac12)\bigr)\\
+&=2\pi\mu-\pi
+&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "この等式と ",
         ref("euler_formula_cos_sin"),
         " より",
       ]),
