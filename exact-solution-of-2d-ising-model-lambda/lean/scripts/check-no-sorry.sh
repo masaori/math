@@ -55,6 +55,8 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.orbitEntryProduct_phase_twist_necSuf
   Ising2DLambda.KacWard.movedOrbitWeight_phase_twist
   Ising2DLambda.KacWard.movedOrbitWeight_phase_twist_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.termOrbitPhaseTwist_necSuf
+  Ising2DLambda.KacWard.kacWardSignedPermutationTerm_orbit_phase_twist
   Ising2DLambda.NecSuf.KacWard.arfFourierSignProjection_necSuf
   Ising2DLambda.KacWard.arfFourierSignProjection
   Ising2DLambda.KacWard.arfFourierSignProjection_from_necSuf

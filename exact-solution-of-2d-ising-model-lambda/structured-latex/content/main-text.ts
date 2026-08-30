@@ -50075,6 +50075,10 @@ T^{a,b}_{\varphi}(x)
               labels: ["claim_kac_ward_term_orbit_phase_twist_product"],
               habitat: "Qbar",
               verification: ["sagemath/check/kac-ward-term-orbit-phase-twist"],
+              lean: [
+                "Ising2DLambda.KacWard.kacWardSignedPermutationTerm_orbit_phase_twist",
+                "Ising2DLambda.NecSuf.KacWard.termOrbitPhaseTwist_necSuf",
+              ],
               statement: [
                 paragraph([
                   math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),
