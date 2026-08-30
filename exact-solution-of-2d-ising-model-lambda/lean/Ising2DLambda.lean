@@ -962,3 +962,5 @@ import Ising2DLambda.NecSuf.KacWard.ContactSplitPairDescent
 import Ising2DLambda.KacWard.ContactSplitPairDescent
 import Ising2DLambda.NecSuf.KacWard.ContactEliminationBySplitting
 import Ising2DLambda.KacWard.ContactEliminationBySplitting
+import Ising2DLambda.NecSuf.KacWard.MovedOrbitClosedWalk
+import Ising2DLambda.KacWard.MovedOrbitClosedWalk

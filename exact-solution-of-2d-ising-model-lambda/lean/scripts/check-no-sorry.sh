@@ -1642,6 +1642,15 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.contact_elimination_by_splitting_necSuf
   Ising2DLambda.KacWard.contact_elimination_by_splitting
   Ising2DLambda.KacWard.contact_elimination_by_splitting_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.determinantEntryProduct_ne_zero_iff
+  Ising2DLambda.KacWard.kacWardDeterminantEntryProduct_ne_zero_iff
+  Ising2DLambda.KacWard.kacWardDeterminantEntryProduct_ne_zero_from_necSuf
+  Ising2DLambda.KacWard.permutation_power_return
+  Ising2DLambda.NecSuf.KacWard.moved_iterate_ne
+  Ising2DLambda.NecSuf.KacWard.orbit_relation_chain
+  Ising2DLambda.NecSuf.KacWard.orbit_iterates_distinct
+  Ising2DLambda.KacWard.movedOrbit_closed_nonbacktracking
+  Ising2DLambda.KacWard.movedOrbit_closed_nonbacktracking_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
