@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 35 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 36 回目の tick 時点）
+
+**Kac--Ward 行列式の置換項が、固定辺の因子と軌道ごとの重みの積に分解することを四層で証明した（`claim_kac_ward_term_orbit_weight_factorization`）。** 置換項 $T^{a,b}_{\varphi}(x)$ は、符号の定数多項式、固定辺 $\vec E_L\setminus M(\varphi)$ の因子 $K^{a,b}_{\vec e,\vec e}(x)$ の積、軌道族 $\mathcal C(\varphi)$ の各軌道 $C$ の重み $(-x)^{\lvert C\rvert}\prod_{\vec e\in C}\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}$ の積に等しい。証明は、固定辺と動く辺への分割、前 tick の軌道族分割（`claim_moved_orbit_partition`）、動く辺の因子の $-x\widehat M$ への書き換え、$-x$ の括り出しの一続きの式変形である。SageMath `kac-ward-term-orbit-weight` は先頭六辺の全置換 $6!$ 個・四つのスピン構造の $2{,}880$ 項を $\mathbb Q(\zeta_8)[x]$ で全数検査した。Lean は具体版 `kacWardEntryProduct_orbit_factorization`、可換モノイドの有限積の分割だけを残した必要十分版 `prod_fixed_orbit_factorization`、導出版を通した。次は置換符号 $\operatorname{sgn}(\varphi)$ を軌道ごとの符号の積へ分解する。
+
+前進前レビューでは、前 tick の軌道族による分割（コミット `5257d71e`）を四層で照合して内容の一致を確認し、Lean 定理 3 件の sorry 検査の登録漏れを登録した（コミット `c928148b`）。並列の式変形統一は、姉妹側の「$\gamma_2(\tilde\theta_\mu)\ne0$」の証明 Step 4 の一行二等号 $s_1c_2=c_1\cdot(-1)=-c_1$ を二段の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 345 ページ通過）。
+
+## ひとつ前の到達点（2026-08-30 の 35 回目の tick 時点）
 
 **同じ軌道集合を重複排除した動く辺の軌道族が、動く辺集合を互いに素に分割することを四層で証明した（`claim_moved_orbit_partition`）。** 動く辺集合 $E_{\mathrm{mov}}(\varphi)$（`def_moved_edge_set`）、軌道集合 $O_\varphi(\vec e)$（`def_permutation_orbit_set`）、同じ集合を一度だけ残す軌道族 $\mathcal O_{\mathrm{mov}}(\varphi)$（`def_moved_orbit_family`）を定義した。軌道集合そのものを代表として採用し、各軌道が始点を含むこと、交点を持つ二軌道は回帰と単射性から同じ集合になること、族の合併が動く辺集合に一致することを示した。SageMath `permutation-moved-orbit-partition` は先頭六辺の全置換 $6!$ 個・動く辺 3,600 件について同値関係・重複排除・非空性・互いに素・被覆を全数検査した。Lean は具体版 `movedEdgeOrbitSet_partition`、有限性・相等判定・単射性・各点の回帰だけを残した必要十分版 `movedOrbitSet_partition`、導出版を通した。次は非零置換項をこの閉路族で書き、置換符号と重みを軌道ごとの積へ分解する。
 

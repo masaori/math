@@ -336,8 +336,10 @@ c_2 = \cosh 2K_2 > 0,\quad s_2^* = \sinh 2K_2^* > 0`,
 s_1c_2
 &= c_1\cos\tilde\theta_\mu
    \quad (\because \text{Step 1 の連立条件の第 2 式}) \\
-&= c_1\cdot(-1) = -c_1
-   \quad (\because \text{Step 3})
+&= c_1\cdot(-1)
+   \quad (\because \text{Step 3 の } \cos\tilde\theta_\mu = -1) \\
+&= -c_1
+   \quad (\because \mathbb{R} \text{ の積の符号規則 } a\cdot(-1) = -a)
 \end{aligned}`,
       ),
       paragraph([

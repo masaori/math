@@ -78,6 +78,7 @@ export const ALL_LABELS = [
   "claim_isolated_smoothing_crossing_number_update",
   "claim_kac_ward_determinant_constant_term_one",
   "claim_kac_ward_determinant_term_nonzero_iff",
+  "claim_kac_ward_term_orbit_weight_factorization",
   "claim_kw_dual_preserves_unit_interval",
   "claim_kw_dual_transform_domain",
   "claim_kw_dual_transform_involution",

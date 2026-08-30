@@ -1654,6 +1654,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.movedOrbitSet_partition
   Ising2DLambda.KacWard.movedEdgeOrbitSet_partition
   Ising2DLambda.KacWard.movedEdgeOrbitSet_partition_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.prod_fixed_orbit_factorization
+  Ising2DLambda.KacWard.kacWardEntryProduct_orbit_factorization
+  Ising2DLambda.KacWard.kacWardEntryProduct_orbit_factorization_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -49551,6 +49551,108 @@ O_{\varphi}(\vec e_1)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_term_orbit_weight",
+        labels: [],
+        title: { text: "置換項の重みの軌道ごとの分解" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_term_orbit_weight_factorization",
+              focus: {
+                id: "kac_ward_claim_term_orbit_weight_factorization",
+                kind: "claim",
+                title: { text: "置換項は固定辺の因子と軌道ごとの重みの積である" },
+                labels: ["claim_kac_ward_term_orbit_weight_factorization"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/kac-ward-term-orbit-weight"],
+                lean: [
+                  "Ising2DLambda.KacWard.kacWardEntryProduct_orbit_factorization",
+                  "Ising2DLambda.NecSuf.KacWard.prod_fixed_orbit_factorization",
+                  "Ising2DLambda.KacWard.kacWardEntryProduct_orbit_factorization_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`(a,b)\in\mathcal S`), " と ",
+                    math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " について、置換項（",
+                    ref("def_kac_ward_determinant_permutation_term"), "）は",
+                  ]),
+                  displayMath(String.raw`T^{a,b}_{\varphi}(x)
+=\widehat{\operatorname{sgn}(\varphi)}\cdot
+\Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\vec e}(x)\Bigr)\cdot
+\prod_{C\in\mathcal C(\varphi)}\Bigl((-x)^{\lvert C\rvert}
+\prod_{\vec e\in C}\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\Bigr)`),
+                  paragraph([
+                    "と分解する。ここで ", math(String.raw`M(\varphi)`), " は ",
+                    ref("def_moved_edge_set"), "、", math(String.raw`\mathcal C(\varphi)`), " は ",
+                    ref("def_moved_orbit_family"), "、", math(String.raw`\lvert C\rvert\in\mathbb N`),
+                    " は有限集合 ", math(String.raw`C`), " の元の個数（",
+                    ref("def_cardinality_notation"), "）である。両辺は ",
+                    math(String.raw`\overline{\mathbb Q}[x]`),
+                    " の元であり、実数体も複素数体も現れない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "有限個の互いに素な部分集合への添字集合の分割で可換環の有限積が部分ごとの積の積に分かれることは、",
+                    "部分の個数についての帰納法で積の結合則と可換則から出る（空の積は ",
+                    math(String.raw`1`), "）。以下でこれを二度使う。求めたい値から始める。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+T^{a,b}_{\varphi}(x)
+&=\widehat{\operatorname{sgn}(\varphi)}
+\prod_{\vec e\in\vec E_L}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
+&&\bigl(\because\ \blkref{def_kac_ward_determinant_permutation_term}\bigr)\\
+&=\widehat{\operatorname{sgn}(\varphi)}\cdot
+\Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\varphi(\vec e)}(x)\Bigr)\cdot
+\prod_{\vec e\in M(\varphi)}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
+&&\bigl(\because\ \vec E_L\setminus M(\varphi)\text{ と }M(\varphi)\text{ は }\vec E_L\text{ を互いに素に覆う}\bigr)\\
+&=\widehat{\operatorname{sgn}(\varphi)}\cdot
+\Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\vec e}(x)\Bigr)\cdot
+\prod_{\vec e\in M(\varphi)}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
+&&\bigl(\because\ \blkref{def_moved_edge_set}\text{ により }\vec e\notin M(\varphi)\text{ では }\varphi(\vec e)=\vec e\bigr)\\
+&=\widehat{\operatorname{sgn}(\varphi)}\cdot
+\Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\vec e}(x)\Bigr)\cdot
+\prod_{C\in\mathcal C(\varphi)}\prod_{\vec e\in C}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
+&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\bigr)\\
+&=\widehat{\operatorname{sgn}(\varphi)}\cdot
+\Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\vec e}(x)\Bigr)\cdot
+\prod_{C\in\mathcal C(\varphi)}\prod_{\vec e\in C}
+\bigl(-x\,\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\bigr)
+&&\bigl(\because\ \blkref{def_kac_ward_polynomial_matrices}\text{ と }\vec e\in C\subset M(\varphi)\text{ では }\varphi(\vec e)\ne\vec e\bigr)\\
+&=\widehat{\operatorname{sgn}(\varphi)}\cdot
+\Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\vec e}(x)\Bigr)\cdot
+\prod_{C\in\mathcal C(\varphi)}\Bigl((-x)^{\lvert C\rvert}
+\prod_{\vec e\in C}\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\Bigr)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の積の可換則と結合則}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "第二の等号は ", ref("def_moved_edge_set"), " の分割、第四の等号は ",
+                    ref("claim_moved_orbit_partition"), " が与える ",
+                    math(String.raw`M(\varphi)`), " の軌道族への互いに素な分割に、冒頭の分割積の事実を適用したものである。",
+                    "第五の等号では、", math(String.raw`\vec e\in C\subset M(\varphi)`), " なら ",
+                    ref("def_kac_ward_polynomial_matrices"), " の恒等行列の成分が零なので ",
+                    math(String.raw`K^{a,b}_{\vec e,\varphi(\vec e)}(x)
+=0-x\,\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}
+=-x\,\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}`),
+                    "（", math(String.raw`\overline{\mathbb Q}[x]`), " の四則）を各因子へ同時に適用した。",
+                    "最後の等号では、", math(String.raw`C`), " の各元が因子 ",
+                    math(String.raw`-x`), " を一つずつ与えるので、括り出した個数は ",
+                    ref("def_cardinality_notation"), " の ", math(String.raw`\lvert C\rvert`),
+                    " である。全過程は有限集合と代数的数係数多項式の四則だけで閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },
