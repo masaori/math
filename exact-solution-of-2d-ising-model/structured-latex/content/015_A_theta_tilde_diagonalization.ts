@@ -1216,17 +1216,27 @@ A(\tilde\theta_\mu)
       ),
       paragraph([
         math(String.raw`i\cdot i = -1`),
-        "、",
-        math(String.raw`e^{i\theta}e^{-i\theta} = e^0 = 1`),
-        "（",
+        " である。また、",
         ref("theorem_exp_product"),
-        " を ",
+        "（",
         math(String.raw`n=1`),
-        " に適用し、",
+        " に適用する）と ",
         ref("theorem_exp_zero"),
-        " の ",
-        math(String.raw`e^0 = 1`),
-        " を使う）、",
+        " により",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{i\theta}e^{-i\theta}
+&= e^{i\theta + (-i\theta)}
+   \quad (\because \text{可換な指数の積公式を } n=1 \text{ に適用}) \\
+&= e^{0}
+   \quad (\because \mathbb{C} \text{ の加法 } i\theta + (-i\theta) = 0) \\
+&= 1
+   \quad (\because e^0 = 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。さらに ",
         math(String.raw`(a_0 - iv)(a_0 + iv) = a_0^2 + v^2`),
         "（",
         math(String.raw`a_0 := c_1u - s_1c_2 \in \mathbb{R}`),
@@ -1239,7 +1249,7 @@ A(\tilde\theta_\mu)
    \bigl(a_0 - iv\bigr)\bigl(a_0 + iv\bigr)
    \quad (\because \text{直前の 2 式と } \mathbb{C} \text{ の積の可換性}) \\
 &= (-1)\cdot 1\cdot (s_2^*)^2\bigl(a_0 - iv\bigr)\bigl(a_0 + iv\bigr)
-   \quad (\because i\cdot i = -1,\ e^{i\theta}e^{-i\theta} = e^0 = 1) \\
+   \quad (\because i\cdot i = -1 \text{ と直前の式変形 } e^{i\theta}e^{-i\theta} = 1) \\
 &= -(s_2^*)^2\Bigl(a_0^2 + v^2\Bigr)
    \quad (\because (a_0-iv)(a_0+iv) = a_0^2 + v^2) \\
 &= -(s_2^*)^2\Bigl((c_1u - s_1c_2)^2 + v^2\Bigr)
