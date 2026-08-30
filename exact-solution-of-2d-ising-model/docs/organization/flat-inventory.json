@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "scope": "exact-solution-of-2d-ising-model/structured-latex/content の全 definition・claim・theorem",
   "organizingTheme": "高校生でも読める具体的な複素数・行列計算として2次元イジング模型の厳密解を積み上げる",
   "withdrawnBoundaryAxes": [
@@ -210,6 +210,48 @@
         "critical_010_claim_sine_integral_two_sided",
         "freeenergy_004_theorem_riemann_sum_to_integral"
       ]
+    }
+  ],
+  "mathematicalToolSectionBoundaries": [
+    {
+      "name": "行列指数関数による共役の級数公式",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+        "exp_conjugation_proof_008_theorem_exp_ad_series"
+      ],
+      "input": [
+        "複素数と有限複素行列の四則演算、交換子作用とその二項展開",
+        "行列ノルムと完備性",
+        "実数・行列・行列作用の指数級数、その収束、可換行列の指数関数の積公式"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "exp_conjugation_proof_004_theorem_ad_binomial",
+        "exp_linear_map_000a_claim_real_exp_series_converges",
+        "linear_space_general_002b_definition_matrix_norm",
+        "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
+        "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+        "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+        "linear_space_general_003d_claim_matrix_completeness",
+        "exp_linear_map_000b_claim_matrix_exp_series_converges",
+        "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+        "exp_linear_map_004_theorem_exp_zero_is_identity"
+      ],
+      "output": [
+        "行列指数関数による共役を反復交換子の指数級数で表す主定理",
+        "主定理の右辺を項ごとに明示する系"
+      ],
+      "mainTheorem": "行列版の指数関数による共役公式",
+      "mainTheoremEntryId": "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+      "concludingCorollary": "主定理の反復交換子級数を項ごとに明示する系",
+      "concludingCorollaryEntryId": "exp_conjugation_proof_008_theorem_exp_ad_series",
+      "boundaryEvidence": "章内依存順の連続する二項であり、行列版の共役公式を主定理とし、その右辺を項ごとに明示する系で節を閉じる。外部入力・内部依存辺・本文 fingerprint・連続性・節末の一意性を生成時に固定検査する。",
+      "readabilityStatus": "二項とも具体的な行列計算への展開またはブロック分割を要するため、節境界だけを確定し、本文完成とは扱わない。"
     }
   ],
   "explanationGranularityReview": {
@@ -4280,6 +4322,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 345,
+        "inspectedContentSha256": "e884934c5a35ebb1daa4e665eb779f623f99cffba33fe779cf01ee52518a6d3a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4333,6 +4376,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2885,
+        "inspectedContentSha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4384,6 +4428,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1915,
+        "inspectedContentSha256": "c916e2baf545257119ffa219622c4acbefa34dc87a4ddc0a5481ee95f6ab04ec",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4439,6 +4484,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6100,
+        "inspectedContentSha256": "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4494,6 +4540,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 10113,
+        "inspectedContentSha256": "675f527aa21e072519c02be72d5c65bba2dfbd262aa9dbc94a32fbb6857fd65f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4549,6 +4596,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 906,
+        "inspectedContentSha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4604,6 +4652,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2300,
+        "inspectedContentSha256": "f99db604e19af3beb980f2c0225e318f0b912d78150b9d00a2ef3be3175404ce",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4661,6 +4710,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 219,
+        "inspectedContentSha256": "a97a47798c1376adfb7b1536fdbb7d39f2a0953080fdf0177149de1f7ba89200",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4712,6 +4762,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 203,
+        "inspectedContentSha256": "d75c516ec39c361c617c19883fc94d4e9d4e42fad60bfff00eb83952369591dd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4767,6 +4818,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 1928,
+        "inspectedContentSha256": "442d9a2d8bc141ec7b0bf20eff61a6cfe1900e557b328bd47177679d59a81af5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4820,6 +4872,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1240,
+        "inspectedContentSha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4882,6 +4935,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 805,
+        "inspectedContentSha256": "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4938,6 +4992,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 215,
+        "inspectedContentSha256": "40554c5b165be91970ade721cd63dcef585c555302fe0ff68642327b66571844",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -4989,6 +5044,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 112,
+        "inspectedContentSha256": "dcf04a9c240ca474a4abfc6213e37a6c7b10f2f313b12f460c05fcd4a3c5c303",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5042,6 +5098,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 552,
+        "inspectedContentSha256": "6e080bfb6c5694b115f4761c5d2db993b1d5c315a4e36f7389774cfd711a07bd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5098,6 +5155,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 355,
+        "inspectedContentSha256": "0f0fa73628443bdff271ad3b3dfe9ec8ab947902b46503d6a5822b6925177765",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5151,6 +5209,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 454,
+        "inspectedContentSha256": "f6df94720c8d99c3fc6bf1618a9a348cc682b41ffe02275f8d3abe80c878d9b9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5202,6 +5261,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1787,
+        "inspectedContentSha256": "83e0173980ec5b2269a4e5428c1277ccba953371b02da84a55263a1768f30ec9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5259,6 +5319,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 837,
+        "inspectedContentSha256": "2a9a710aa09edac48ef85c2fdc3d9a033b615f80a815264dceb2773a031e77ce",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5317,6 +5378,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1338,
+        "inspectedContentSha256": "b3a21e2102af9b25c3ba9f787c8f037b17e6e688071689a00df1c6a1aea3fca3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5379,6 +5441,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 444,
+        "inspectedContentSha256": "2a7bfb0570e3135f4eb879131abe4e889a9fe8fe580eddc05ec5f6d093fc06f1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5430,6 +5493,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 326,
+        "inspectedContentSha256": "6a8ea2317a4ee4a034fe63a9f7371bb06cc429b38cc136c4059b9b1c28983b54",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5483,6 +5547,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 789,
+        "inspectedContentSha256": "539e91c0e3b53ca59d2af72eea773461b43418d4e65b31135086e85f1aba12ff",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5538,6 +5603,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 575,
+        "inspectedContentSha256": "d7d6ac6e18ecfbb96c7bc7ebe9b89c874e6004df8b114a08b95b9c4568d140a2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5597,6 +5663,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 476,
+        "inspectedContentSha256": "cf32ed2ef717d12941d16958599fccde9b93fe4dc82a7a97b5e4188e35960205",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5654,6 +5721,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2200,
+        "inspectedContentSha256": "5177dcaafa369b566afd3537d407850317e741146ba2615bc1f1d3f5a1e1f6e8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5715,6 +5783,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1040,
+        "inspectedContentSha256": "f5300fd54e60f601a4db6afe271b4f3c72ef16ff4baf25f5e3d03488a2f5286d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5768,6 +5837,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5845,
+        "inspectedContentSha256": "872f1af8eb8b84e0cfddfb30aeedfee8ccd4d131838f9875853cbd54ed5a5843",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5821,6 +5891,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 947,
+        "inspectedContentSha256": "eaf728ec8f49c83d0648b474a7922b4d8b061641dd12d7df2c43efe057cbb02b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5876,6 +5947,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 955,
+        "inspectedContentSha256": "9f3f324b1ecb644669243212a3cb4d8f32501459b619880ca9655a5728f547b6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5929,6 +6001,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1133,
+        "inspectedContentSha256": "507d9ce6c362617034987e4a9eef4d2cb35a5087777db56628b629e26a9f7f82",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5982,6 +6055,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 707,
+        "inspectedContentSha256": "18bb86df2ce5e3927d3ef02a1fdaa1b569765ffb590d884265d5554827ca871e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6037,6 +6111,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 14587,
+        "inspectedContentSha256": "a2f0942eaca2c3852591ec022bfb793463a32d510110f579e43ad76da7b5bd51",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6098,6 +6173,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 12996,
+        "inspectedContentSha256": "bd4b1ebeede09bd6ebe666ce9e6007c3399351f81939f0a1e89dbe4ef2ec82a7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6158,6 +6234,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 8092,
+        "inspectedContentSha256": "316670a867f1bc6da94520d84c3c276fb8212c902ae383dd8c2205c398bc6203",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6220,6 +6297,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 792,
+        "inspectedContentSha256": "26468a1fc644f2ad89263cf9cf00971e08228a4cebb25f6e5f0292d9f1230053",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6276,6 +6354,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 780,
+        "inspectedContentSha256": "45094414e3433fd45a6039bb98ff5ecf3bfcfafa9e5af8de1c0c662eba71bfb4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6332,6 +6411,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 14238,
+        "inspectedContentSha256": "aae6d06271cd77cac45e78e72bb077fdc036c5988f52cab3223337fb568d0ff5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6402,6 +6482,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 561,
+        "inspectedContentSha256": "500720618a5720301921f7f78c8bdb37b511200e7cde6dbb54d41672e86e79b4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6455,6 +6536,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 888,
+        "inspectedContentSha256": "ac7be029a78faef91bcac6ef14661a7ecf0d6e6f137a8ae22b0f80b43a5a4592",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6513,6 +6595,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 14945,
+        "inspectedContentSha256": "b4e198549ba1d7b1452fe4650837a325244f089149b147b0e8f802a72731588e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6585,6 +6668,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7165,
+        "inspectedContentSha256": "74736717633fb9259f09b874cf9323b63f155020b31d9bb5996ffb464a9cb9e2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6655,6 +6739,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 10008,
+        "inspectedContentSha256": "c4acb819f5069e7b00f91148c40955c58e461918d2a8c4664d3ad5b044e17e79",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6727,6 +6812,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4977,
+        "inspectedContentSha256": "507b18abb9b9bbe699f64a564de769a373e299c374df307d2442ebe4fb0ffb39",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6787,6 +6873,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 10078,
+        "inspectedContentSha256": "557f365dac54fd966ef49abcc25e90b8bcd39ae3c416d591dc9c107a5037fcfd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6857,6 +6944,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 8892,
+        "inspectedContentSha256": "aa850099fc12268924cb36d81e87fb346b913e4cf9d065af3fa394322d8aa7c1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6927,6 +7015,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 623,
+        "inspectedContentSha256": "40207c6ca577c4bd0b459305d5074996d938410b81781dc11c0dc6f0f9f37f16",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6983,6 +7072,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 11343,
+        "inspectedContentSha256": "94bae4f1c406ad930dd03ef6a607a9e0bde05de4a2b9c90b3d752550f52d307a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7057,6 +7147,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 18945,
+        "inspectedContentSha256": "b42df3d4472c432338babc67819a3c2c41bf03f66f58c3cd220a8736be469bc8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7133,6 +7224,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4434,
+        "inspectedContentSha256": "07dc15f6f5d8f33ba3780a382bc2ccff8b8a0b0c9a2452e9a5cd7902d9b85861",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7203,6 +7295,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2640,
+        "inspectedContentSha256": "a8838afe0280978be870ec36814669aab82ae7553d622abb3360e9d29089c053",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7267,6 +7360,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 9524,
+        "inspectedContentSha256": "22d82b78477ef400d278be65f8921c39b45c4fdb296f30e0b509afe04608bdc0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7349,6 +7443,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 2227,
+        "inspectedContentSha256": "fb4fbd22531fb2e83616dcd129278cfee0ed057bef2199642d8c1beca41faa66",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7406,6 +7501,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1924,
+        "inspectedContentSha256": "bd5135e23f5397202f69ea706e934d140866214ef2dee2aeaa179b12910f3dcf",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7459,6 +7555,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4505,
+        "inspectedContentSha256": "4fb76d613b09b8774fee0feb9d17c62613fbb4a5f5e8c8c47050d8f5bc2e9e12",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7517,6 +7614,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 954,
+        "inspectedContentSha256": "d73e0c6185c08a0aaa083883b925d22404e8ab127e753a4b5e30cad55d2ac3fa",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7573,6 +7671,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 159,
+        "inspectedContentSha256": "a5a7b89d63ad624d691d4049ba3412ce5cd79a9c173c39c219d32e9ec09d8da6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7628,6 +7727,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1764,
+        "inspectedContentSha256": "0992f3c11e0da4b69ede814a73ec11ffca27a77492cb7bb616b8651407aea2a7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7683,6 +7783,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2622,
+        "inspectedContentSha256": "ea21495695f2bbb60ba2f814485213383d93796f5637029aec2014db36d7e8ce",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7743,6 +7844,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 14315,
+        "inspectedContentSha256": "09ff609da5bc0dff7250b8a388f3767665de26329bd564487141a64128a08fa5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7805,6 +7907,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8880,
+        "inspectedContentSha256": "cb60348ee4a6bdfc5b4d4e4dc7124aed4f3a9f4e4c5593c03ad6511884cc55f8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7864,6 +7967,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7271,
+        "inspectedContentSha256": "59404eda021b5d904e2248530a586d168aea7d32d03451a45a17bb2f8b583a21",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7922,6 +8026,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3411,
+        "inspectedContentSha256": "e06631c60e429b8e755520b8069138cab273e66c4946ec5a46c83dc4293738a7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7980,6 +8085,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2049,
+        "inspectedContentSha256": "2de286be459e84ccfaa252c55232ccf87e1a732aadae4bd02241821cd4b03e85",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8035,6 +8141,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 11103,
+        "inspectedContentSha256": "59e2b9e24e79916e00dfe666d29bdee556ea3479b16e89d9912457ff3bea0609",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8095,6 +8202,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 806,
+        "inspectedContentSha256": "dac86df17efd7a9fb3cc6421cdb38343493e285c3b2ff479207ad72e26fba1d5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8148,6 +8256,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9631,
+        "inspectedContentSha256": "a1e7706dec1460c8b6da421c8f57cd5e62eb65328f76a3320022d946f3e39573",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8214,6 +8323,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 3115,
+        "inspectedContentSha256": "9122c9f6d4657b83c31aa6262aacf1dbaa17eea942ac352d98473083510fd647",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8276,6 +8386,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 13791,
+        "inspectedContentSha256": "2b38a715778d5e8f0e2d4b1736eaa2f665aa5b791adb57f65e0af19d8bc420be",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8344,6 +8455,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 4751,
+        "inspectedContentSha256": "0a7e2af1805d8537d1b0f958fa71af6cba34f14ec749a2bdb4e3d0f446ba7dc1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8406,6 +8518,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 4038,
+        "inspectedContentSha256": "4fa44eaecd2cb1985eed9b46e733647899fd6734f951b9548db1d466290658f3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8470,6 +8583,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 8447,
+        "inspectedContentSha256": "575494eded5353cfc462d791de791c8abab48203b1ce2b2844975a6df25120c3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8536,6 +8650,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 978,
+        "inspectedContentSha256": "38ea4eead984a8a947b23553e9fec695419a772f872d64c4894ae08116ccbaf8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8594,6 +8709,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5200,
+        "inspectedContentSha256": "23b32729c264057d48a0ed8887f614269014d1583ca4848ed7a6629e1f49574c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8649,6 +8765,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 4950,
+        "inspectedContentSha256": "a7f80f02931e53766981c60a43c9954fe8b911e22ef4f5190ca51a3a72457845",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8718,6 +8835,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 18221,
+        "inspectedContentSha256": "2edea69b2935e8d7678d2b7d4b34edbfcb0faa8ccaff86cea76d70a57d2ed814",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8789,6 +8907,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 2536,
+        "inspectedContentSha256": "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8855,6 +8974,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 14152,
+        "inspectedContentSha256": "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8925,6 +9045,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 1437,
+        "inspectedContentSha256": "cd6f641666073a7e118dfad89898575b72fab87fe804f5e45cc4ec71fd28bf49",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8976,6 +9097,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4294,
+        "inspectedContentSha256": "674b1e05ce04378873cc8a013b5c3ffbf34444c85b856742514dbbfe40ed608f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9038,6 +9160,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 14038,
+        "inspectedContentSha256": "055135423df717956c7526408d0b0f3ac97c5427fe6f1575a92737865ab6a38c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9102,6 +9225,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 19874,
+        "inspectedContentSha256": "f074bafd5a57141a7a3427fca36a4a43531e33c87a7bad7afc5b03660077f6e5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9172,6 +9296,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 4099,
+        "inspectedContentSha256": "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9234,6 +9359,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 12792,
+        "inspectedContentSha256": "ebc65ed3c7281256fca59a32a3d0293c0aa537a5d440cbcea6bf12e70f210faf",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9295,6 +9421,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 863,
+        "inspectedContentSha256": "d36b150026d945d12c89ea1f7151fb8ca071f74e2442f74340f03fbc73d21753",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9358,6 +9485,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 1139,
+        "inspectedContentSha256": "625aa21f69aa73fcf3e7f955ed87e59306a704737074a15c0acdd7b47fd758e7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9417,6 +9545,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2304,
+        "inspectedContentSha256": "ad281f267cb0888388ee60bddcf95a15c37c4008071586c427fa5f6e322d09f0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9484,6 +9613,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 19186,
+        "inspectedContentSha256": "0b3c3557d1682546d853173c878fa610218c49d7dc1339090d27c239abe3fa23",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9558,6 +9688,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 680,
+        "inspectedContentSha256": "e586cdb2f041e6ae556232eb721644bd2eed914b6da41256b167e66a334d3dd8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9618,6 +9749,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 238,
+        "inspectedContentSha256": "178e7d3326f0f7c38343766bba02889ec5611ede8b2a032a91e531b1e0ffcafc",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9665,6 +9797,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3017,
+        "inspectedContentSha256": "5f76ed3261a457f1d70a72b5b21cd4281cd46f0e6236a4531eaffce3bdb38909",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9725,6 +9858,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 750,
+        "inspectedContentSha256": "86f6d94505c346c29c7a18e95f61a62dbf389df64574403eeac9a44670188085",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9770,6 +9904,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 434,
+        "inspectedContentSha256": "7831c8c47118b664c5afe02dcd501ee1701b6d441328c46189a7b5aafe779be7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9817,6 +9952,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6819,
+        "inspectedContentSha256": "78273ee807423b1da5f1adb0f91170f411f339534ddaeb7198be04cc3b22f8ae",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9870,6 +10006,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2239,
+        "inspectedContentSha256": "1a479016a870d83a80b1aa0fe413c3d516b25a9e6fd0537a97fbef3fe4bf5551",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9927,6 +10064,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 6173,
+        "inspectedContentSha256": "b2fd03c65487e2a9dfe6c84fec9ed33abb2120de7aeaa4c653751fc89b758bc5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9989,6 +10127,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 15883,
+        "inspectedContentSha256": "a29eff59a7a842246d5879d10ca5ed6a9d9a884e652bab779e99aad7fb4bea5e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10050,6 +10189,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 456,
+        "inspectedContentSha256": "69fd82e2a5857d7844277a0dffbd61a33f0c61050aea4abeb87340c5e1fae879",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10103,6 +10243,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1476,
+        "inspectedContentSha256": "b746ebeac8b97214c24b629134c024c2a24e83c0dba299041f8b3f1eddbd2d7b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10168,6 +10309,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 22523,
+        "inspectedContentSha256": "3d243bb9c57c1d034e93eaf4715643946a490b0d6147f9efd81834837698f282",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10246,6 +10388,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 9427,
+        "inspectedContentSha256": "1189ebfc4acfbd008bae561121cac2508419b50ec024620615f25520109c7b9e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10304,6 +10447,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 3292,
+        "inspectedContentSha256": "930af3abd137c24cd733790389e704b29fc6806d67db2ab194870211238a0dfd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10366,6 +10510,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 25641,
+        "inspectedContentSha256": "64229f938d8d19d12dd93c396ec488b8f44803a7f0f9d00b6c4b3ce8a115a867",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10449,6 +10594,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 5610,
+        "inspectedContentSha256": "c9e30902311cd76998b6716da76e040f081a0b4dcad42a5f1ad6d99331ab999b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10525,6 +10671,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6034,
+        "inspectedContentSha256": "ab5911db8fb6a45aa867b393ea6ca15fc940c988a13e4f86a8678d1c8ed2111d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10583,6 +10730,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4026,
+        "inspectedContentSha256": "f42f08b0069e29f6a2d4f3bab84d74e99a05fff95103e09a81d06a1581c8a27b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10645,6 +10793,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 50848,
+        "inspectedContentSha256": "6211f41a13f3ac165cb8599e22d89a36e7df1cd7c74e2e6370d9b8cb800a2e4a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10712,6 +10861,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8943,
+        "inspectedContentSha256": "2cc13f5da9275cd18896e56e9ba87bafa2c87cbe9f2374ce89770c4e24b23252",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10781,6 +10931,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 33189,
+        "inspectedContentSha256": "0fa5d399f3e79f850a45687973e853c9b43af094ccecced4ce6274c854d5955b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10853,6 +11004,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 20375,
+        "inspectedContentSha256": "f742300a5919319fcc8ce2e1aebd0be32f248d925ee9135578c431ace75526e9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10919,6 +11071,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 13690,
+        "inspectedContentSha256": "134fa4b21ca0502d036d2d567a366c3dd4574929dcb68951a49a06d7206a37a4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10975,6 +11128,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 258,
+        "inspectedContentSha256": "929b7f4274884c864bb5d7706d7ba96dec8891c5db71ebded8ea524ac5ad2ebd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11022,6 +11176,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7685,
+        "inspectedContentSha256": "274036c54a43a622130e04f5092cc0e9d03875f24ec169fa92fe2fdddc87f3c9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11078,6 +11233,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 4839,
+        "inspectedContentSha256": "2d2fb01f1a7ff53896f168a57e6367541529be98a12dc6587120c53ce1811002",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11150,6 +11306,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5215,
+        "inspectedContentSha256": "31432b10d571100575fc2bddf157032908bf0996d21d3f77860b0dc613fd7533",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11208,6 +11365,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 4560,
+        "inspectedContentSha256": "4a2036ef682a54f265f5695dda3a70dc0d6a06aed1a2810287e69ea87b40dd28",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11276,6 +11434,7 @@
           "群の一般論"
         ],
         "inspectedCharacterCount": 9193,
+        "inspectedContentSha256": "3e663f5e1ce500abe026033a85fa2cb3ae85187d3390b13c03a03a1a4b6b1b20",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11357,6 +11516,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 337,
+        "inspectedContentSha256": "8f2fef5f00cf9cb255d2e8271252e91f92e971c2cebdfc2442e505a4520aaf64",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11411,6 +11571,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 15832,
+        "inspectedContentSha256": "bc04cae1496a7c74f16832d8ea618ea69d2fe94da958bd9a9fce16923a9edef7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11472,6 +11633,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8378,
+        "inspectedContentSha256": "a141367fe6ad75a334e9a572fd08515e79c77bfc84edaf8e1b8c725085e5d0e5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11529,6 +11691,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 336,
+        "inspectedContentSha256": "b2b8369c880c49d62391eac428f8111fa422bee42696b9b0caaed878e7bc3464",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11576,6 +11739,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3141,
+        "inspectedContentSha256": "435e416ff2860b54f4a976af5840b15d1ec3bfa5c43b2db18fc5b38152039663",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11627,6 +11791,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 580,
+        "inspectedContentSha256": "116adb8c8cea0ecbf8514f758276e3a87b6090a012602d18778da0e25c78d1e1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11680,6 +11845,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 332,
+        "inspectedContentSha256": "dffe86e7f6aa04941ab36d18fe58bc5c3037449edb4006ef279a2f9892a7f963",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11735,6 +11901,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3911,
+        "inspectedContentSha256": "5701b614fc53febda29c4e3b2edb18e8bced852585afee6ceaa6b69d2e1ca3ff",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11790,6 +11957,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 463,
+        "inspectedContentSha256": "cb7727bb35482e0e99e707c37f53f6493af21c3eab4ec9823f779426d0630964",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11845,6 +12013,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 16606,
+        "inspectedContentSha256": "8f52eca49b0dd18b744a5931b648132cceedb474e765534b649567254aa83cb0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11914,6 +12083,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1467,
+        "inspectedContentSha256": "63ba9f2af425358c0cad81be3986e04ba832a7ca59bc328f26710697b5cfb78e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11967,6 +12137,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 241,
+        "inspectedContentSha256": "391dd2d74652720501dee1434d88327751f5779931362c95448d5c70e6e83f13",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12012,6 +12183,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 620,
+        "inspectedContentSha256": "59ad4e92c86a0598c3174d76891099c77843252be4147b3c4b5fddd3cb3f7ccf",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12068,6 +12240,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 11635,
+        "inspectedContentSha256": "dab0e1821cb3baf3ba276c1b107b5ecf4b8182f631514bbeb3f4c34e04aca76b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12140,6 +12313,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 17455,
+        "inspectedContentSha256": "bcbbd42c869679adf2b1e3397b382ca9e6ec8c2f7121128983be583301686561",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12206,6 +12380,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1899,
+        "inspectedContentSha256": "3bfa6ac3f0c02fd13b093d41e919f919779574ddb1819c3753e9c5146db8cbef",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12263,6 +12438,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4357,
+        "inspectedContentSha256": "2b1b98f5d6bfa1bb898a51534cbf43c23e9ac4f6f4939aa7deba191bdf6fd3ad",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12318,6 +12494,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1674,
+        "inspectedContentSha256": "6e0e37cb7f0264943f9f6dc77784bafe3511a92114a1d15eadc196455b3d5a81",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12377,6 +12554,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 16414,
+        "inspectedContentSha256": "72b290ecdbd9163bad4b45d19bfb112ec4580901b622f7db37be3f0b460bd8f6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12457,6 +12635,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 14183,
+        "inspectedContentSha256": "7bae16b0a2ee2c2e1822c14e28bbcd5b4e43d6a30de352a2f65b2af21d9c29c4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12520,6 +12699,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7987,
+        "inspectedContentSha256": "12a78f74834ec9b7c5f259391b194af0e816f86cb7edbbfbcbf14fbe07737df1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12584,6 +12764,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 28872,
+        "inspectedContentSha256": "0ce1ed49e1d2466990401d314dfb265bd0825e6bb8891bf064b8315b67d01230",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12653,6 +12834,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3679,
+        "inspectedContentSha256": "fcf803b3c3c9f52a82f6ebbd6ed5d1a3a09844ca2b1b33c303cadcf3d53d1e8e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12728,6 +12910,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 3853,
+        "inspectedContentSha256": "8a4e3d6c213f145d31a9bbde0b532ff9238fb7978cc3b6be1ba8d934df523940",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12789,6 +12972,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 19123,
+        "inspectedContentSha256": "70b4ac2a15f58c0ea6bc75fddfb6d455bd1d65925e7454faac1c5ac26bfe46e4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12857,6 +13041,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 11502,
+        "inspectedContentSha256": "6ba455193d054da422512145b3e2a4adf9a8dbbb5935389731a84657a7c966fe",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12922,6 +13107,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1836,
+        "inspectedContentSha256": "4a7ac471ba87385bdf5da5f06512260e54d09ed9a25b3979bf031734c81d422b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12975,6 +13161,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 423,
+        "inspectedContentSha256": "ab3d05325d2accc3d699e5a1dfb999fc4ee8ab38e2967480364036ede823e6fb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13028,6 +13215,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1862,
+        "inspectedContentSha256": "4078e69d4309734ec827a1bd738b2dc446c44e79cdca6880789341fa74e745ae",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13085,6 +13273,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1126,
+        "inspectedContentSha256": "aa22e15685f4c5b5e28286e72521f12394defd7353cccdc9b525cbd29ac19641",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13138,6 +13327,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 21115,
+        "inspectedContentSha256": "824b10833ce85ffac970c33d4fe1d193fbbc018d80b9b37a190ff0365ab56435",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13209,6 +13399,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3286,
+        "inspectedContentSha256": "20f52683e3d37d2b01044ef53f3e419307273b21bfc07315308a8565729baae6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13268,6 +13459,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 14522,
+        "inspectedContentSha256": "f8745f25aec8c1301dee33410e18ec8d133de6e76f53e988fe976f52f397ae1f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13360,6 +13552,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 11622,
+        "inspectedContentSha256": "a708eb1a764ad40c87a4abc726b3984c705d8b6c02161137e88131f795b25c9d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13441,6 +13634,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 12247,
+        "inspectedContentSha256": "1e7fc0b05e79d91a7501cbfe81b33a88f2143d31daa572f97867d9a047ec4115",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13510,6 +13704,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8905,
+        "inspectedContentSha256": "6d165511a2a5193a52dbcfa84bf9f2b8496b9fe5d722ea55fff4a25a4fef0454",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13575,6 +13770,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2192,
+        "inspectedContentSha256": "b5da5eee051026aa3c661ae1817a4557296694f70a61a603ad1c6c5c182c26cf",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13628,6 +13824,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9044,
+        "inspectedContentSha256": "d98fcb934916c5e20d2cde360ce64815a59bbd189e02201dc96a99d2014a1990",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13691,6 +13888,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 486,
+        "inspectedContentSha256": "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13747,6 +13945,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2852,
+        "inspectedContentSha256": "93df4cac57894b68d57c2eb9759e701189dc1673bfe4758a1fc3a39124645672",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13803,6 +14002,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4575,
+        "inspectedContentSha256": "45eae737ca4fc2aeafa601a1d3689697aba4badda9250218f1da823d396de967",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13863,6 +14063,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4196,
+        "inspectedContentSha256": "c7073c298eb07ee2c5e5828cb8b5d467a5dfb8a2085c187f184c9328f52e9426",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13930,6 +14131,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4831,
+        "inspectedContentSha256": "9fc5622a06b4f4bf4b01fcdd70e8f1b64e7840216c40ed7d90d790e7a8877523",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13991,6 +14193,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4856,
+        "inspectedContentSha256": "4de8097ee95ce95fa34579c7b7b39c900704f8c2e5574b254a9e4ba8f7e2c7d1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14046,6 +14249,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6603,
+        "inspectedContentSha256": "cb0585c9051a59235972b52d7722f5a3a70ff98629e1efb834d3e93a7a298f39",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14108,6 +14312,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 14690,
+        "inspectedContentSha256": "9db51077ba72f9428eb3aebf77dcf7f42e8369c2c775dbe510a75723d4abf979",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14173,6 +14378,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 7129,
+        "inspectedContentSha256": "6765f0071cacc90ba486ca95e77ed3090501575ac625329af843dcbf2f68f385",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14245,6 +14451,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5848,
+        "inspectedContentSha256": "7e4c4ed32fc63af22a98533dd2813a7d6ee920c4863b987574a604cf0a5f322e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14312,6 +14519,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1771,
+        "inspectedContentSha256": "d0d5706bfc9866ba851d979c14387aa1c99cf67bdf434f453699a1fa91d4f22c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14370,6 +14578,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3083,
+        "inspectedContentSha256": "d6559f9f8498bcfee88826cde327c1bd93eef29b1501fec56133c28351b9215b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14434,6 +14643,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 8007,
+        "inspectedContentSha256": "1db946266e8e182faa5d239bcfa5b571c33fc3a776577343cf44a02f060a7db3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14502,6 +14712,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9729,
+        "inspectedContentSha256": "58f128326d7105d0494ee2849438389cb2a90991f8d960809e161001bd22e89d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14574,6 +14785,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9714,
+        "inspectedContentSha256": "7edf68ac5ff584e7065f0241a1b8614cbef92260bbca148f2612e00220374cd2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14645,6 +14857,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 11707,
+        "inspectedContentSha256": "bf0cc5752d2a2ff61c7528355e825e7a2f1be3a0a7f5d21d43928553fc3bfe64",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14711,6 +14924,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 11268,
+        "inspectedContentSha256": "592169926fa559fce682226bcdc8ef540e9706b66950dd36f974cafc20ad3f4d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14785,6 +14999,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6232,
+        "inspectedContentSha256": "a010ce7d00beac2ce4ad2eb845b6ac7712c74ab7584d5387a0ad97af3173cff3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14848,6 +15063,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2136,
+        "inspectedContentSha256": "dd324f04ef4a65c30855af4014313717fda3b83546808eadb4f84b0a16481b70",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14910,6 +15126,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5238,
+        "inspectedContentSha256": "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -14977,6 +15194,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 4204,
+        "inspectedContentSha256": "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15043,6 +15261,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3787,
+        "inspectedContentSha256": "27c40774ddb9148306ecb8307c284fff72808984bcae179f09c25be8514740e8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15108,6 +15327,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 11033,
+        "inspectedContentSha256": "7488a4fdc7984a8ad7c60219a39eca26d92d3230df4c5c43d320c7931df8d8ee",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15180,6 +15400,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7536,
+        "inspectedContentSha256": "02f2eb834d7e16abf67232ac9a868ee14eec22cf56c1a5a34294d71ec51f65c1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15253,6 +15474,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3554,
+        "inspectedContentSha256": "33cd6cefa483928ac5bb3e3c71983a82af17222c9030b9596522b8ef575e219a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15327,6 +15549,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 635,
+        "inspectedContentSha256": "be5003446b4cb92b2911fb88cee1a7cc85dd13f412c3207866e1f70d987c4890",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15382,6 +15605,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7788,
+        "inspectedContentSha256": "9b8a97873e1210e03a0a3c6472852230f7bdc75f22c5183c8341ed052b3b601e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15441,6 +15665,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 10471,
+        "inspectedContentSha256": "a1509e865a048a63aff80c3b49610515c6b52fb1b1b881a042d8ea266f479277",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15512,6 +15737,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4193,
+        "inspectedContentSha256": "584c4a07c89666d26be26a6762a730562dc770fe486cb1aaeb5b5bc580ee13c7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15578,6 +15804,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7582,
+        "inspectedContentSha256": "9f3c3e281ea02131130bd122f102052050392c0cb6a91f75859e2dc96fbb0b6c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15651,6 +15878,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1044,
+        "inspectedContentSha256": "283cfe7ca21f59fcd026567e6c76ffad08f1ae9912092f3691fc9571c01d40e2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15710,6 +15938,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2063,
+        "inspectedContentSha256": "498e5bb8b0b5117cb55e8791e72d116d8ff6beed09540a3922ef1650a0cd9a35",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15771,6 +16000,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4386,
+        "inspectedContentSha256": "2128db72f00940764cc204da35a680c9f3b7184154e4a1abc8413b7592f523a7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15832,6 +16062,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2550,
+        "inspectedContentSha256": "b7bd72fac2192f7b204ee120f35ddfd2e1d72d56144847044cb77a259ed3503b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15889,6 +16120,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3950,
+        "inspectedContentSha256": "c8af6710ab475469d4eb860c7ba8d3a0b305ab19a17065c84ee4fcf2cb5774cf",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15942,6 +16174,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1882,
+        "inspectedContentSha256": "c35e3dffde79bf60cc97ba369facf88e9bcf8b4242dcdbe4fccf586133881543",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16001,6 +16234,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2969,
+        "inspectedContentSha256": "681401c7a21ad8d522e0bc5fd6db5bf7c6bc74ca2923638a4bec349b51b89e63",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16062,6 +16296,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 14539,
+        "inspectedContentSha256": "e23116fac19239b3b29ad62e32906e7815cabfa3a00f85fac75d99dd7e49ada3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16121,6 +16356,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 778,
+        "inspectedContentSha256": "0a2537eb2cb15322d877239898b7f7615bb1dad5a7e68643de2f14a8e3e5ec85",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16182,6 +16418,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 14864,
+        "inspectedContentSha256": "815e59cbcea53209264b1c7c4a7cba10e9cfff5c47342da55c3d05e3530b9dd9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16262,6 +16499,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3027,
+        "inspectedContentSha256": "10febbd974845682bdaa1873757de7e1fee267f8ab6e905cf9971d738154a353",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16325,6 +16563,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4498,
+        "inspectedContentSha256": "3cff896aa3cc8a4221981a08980bc5f924f8ca851ef200d56d33f94778716928",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16389,6 +16628,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3382,
+        "inspectedContentSha256": "18d486e1284ff9b69a4b1b839c9203015d046d6536df36f9363283acd75fab77",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16448,6 +16688,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9479,
+        "inspectedContentSha256": "8cf89b52786140b56bb208c5faba9cfa606f7b27fbf67385653f5b31146be322",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16502,6 +16743,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8230,
+        "inspectedContentSha256": "a8843e59d67e91352aa94be2a3d421355b6d9ab8ec12ed3b57053506c92bb27e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16567,6 +16809,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7958,
+        "inspectedContentSha256": "94f1ac9d16e69ac3cfcabb20e6e82ed02cfe51785533db4e4e435835e71fa0d9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16634,6 +16877,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4449,
+        "inspectedContentSha256": "3f66eabaa540d01d2b74575c544f7ae97ba2c2d62babecd4cb4bcaf989dd9bbb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16706,6 +16950,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6351,
+        "inspectedContentSha256": "23baab0fab467a407f0b3f3e5e3689ca758233fb9e7011b62aac81f5910a4ab4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16783,6 +17028,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 10120,
+        "inspectedContentSha256": "5bae15ee3fe8af52daa9167f022bc3f600d70e664166156683ec8a4603c84fde",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16853,6 +17099,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4815,
+        "inspectedContentSha256": "d353ec615218a69a0cacef6b8e916fb64d0c5f0b517d731c2ecc11ede124c698",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16921,6 +17168,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 19218,
+        "inspectedContentSha256": "50c4d284e1625281f82b3e3d987396e8f75d6562fb8188a1cc97ec5261159184",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16990,6 +17238,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7344,
+        "inspectedContentSha256": "899092861ce565591300bf4b002a73406cfa82d538fd503c207430c0903f7da2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17059,6 +17308,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4954,
+        "inspectedContentSha256": "529d28bf81d775f3ebd392988c3683b26a5252044e730bc6b543abaac51bcd9c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17122,6 +17372,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6546,
+        "inspectedContentSha256": "319ea971c8fc2d962501c78a16019b7b90fc6410ef2d1bd34c1a3a8415fb1d05",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17189,6 +17440,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7029,
+        "inspectedContentSha256": "2b98815ef0d80cf308e5c5da336e44c224de79b555bd635cbcdb46f83ea286ef",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17256,6 +17508,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 18452,
+        "inspectedContentSha256": "802213b6d4050baf8c57320b019751b1a68d8419066a18b07f89197939dc9f1b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17328,6 +17581,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 14531,
+        "inspectedContentSha256": "84b16591287c75d561ee05f2f9f7c0982826ea3a4996f7aa9d4ed3b97f941cdf",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17390,6 +17644,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8607,
+        "inspectedContentSha256": "d4692d1b5d557804415fa42ae77f11fee135e21c76d75a99917ee73642deaa10",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17451,6 +17706,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9085,
+        "inspectedContentSha256": "7f5a9c617c3eb17d2d96cdefb145502fbeaa3f6811c585e3c5d6331063321e6c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17522,6 +17778,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2226,
+        "inspectedContentSha256": "263f254d607467b2cdac51616c4d5007ceb10dc137b0ecb2c793d286dbc20b3d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17587,6 +17844,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1117,
+        "inspectedContentSha256": "33630bab40b62d926b9a17dc43ec18a489415044ef6320cf7c0ec050fc74a6ac",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17647,6 +17905,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4233,
+        "inspectedContentSha256": "5d2749ff9a66ad1bdaa0dea0ae7fda3ea6a60f1dd8945b4d248fe883b5683d17",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17704,6 +17963,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 13474,
+        "inspectedContentSha256": "0a01ea2b2cf6b7e979227d9e573869e3336fbe550aa285b0c1a95f6d09229543",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17777,6 +18037,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6567,
+        "inspectedContentSha256": "3878637298ee5cec6da4dd02205e6c2a416bd22b66ca9ffa83d6a7093db8e094",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17851,6 +18112,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2784,
+        "inspectedContentSha256": "6eb9e177a61435ebba1fbb0bf034616bbb8e52a159e050c2b229a5325939650d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17913,6 +18175,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7946,
+        "inspectedContentSha256": "481a3ac5e47723f687f60b47ebb5695d7ec66ced7e905bb97492b159bfa80342",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17987,6 +18250,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 10647,
+        "inspectedContentSha256": "75bab6b536af2e915e2470bcaf415a79af3566376e9f7308d487e70e701b58a5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18066,6 +18330,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9749,
+        "inspectedContentSha256": "6c2388e9055af935de0cf5894da4ff0af56456795097bddfe3387238ded494ef",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18134,6 +18399,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6616,
+        "inspectedContentSha256": "a4669d0f7c59bf689f37bd1baf022e8c2b680c8c54124d940c878f19ea61c63c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18206,6 +18472,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 10355,
+        "inspectedContentSha256": "b6568259ba2319787a4bbbfe4bd2362dd6a612b711e33fd38c1970d18a3ec157",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18284,6 +18551,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4172,
+        "inspectedContentSha256": "d9465d2d2e6cef1a8f735e2075637f5f447c47400b62ed8a5cf34f413fde5245",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18351,6 +18619,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2065,
+        "inspectedContentSha256": "9c8dd66a69c7a8f86bab93e613e45e257101ba44b6858d7efdaf915cc9ef2504",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18412,6 +18681,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4702,
+        "inspectedContentSha256": "08ac3b12bb920c31f8e4866260b97922fb0fc0dc1e01826532eb5475f2875b74",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18481,6 +18751,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3324,
+        "inspectedContentSha256": "480e6403f2badeb1e596a1f698d10f5940433dc67fd3f766197975007b019089",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18551,6 +18822,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9395,
+        "inspectedContentSha256": "678c07e27c7a4845317ce853f6e657866ca57194d02305c740df8f9253c2b99b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18620,6 +18892,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 15807,
+        "inspectedContentSha256": "0974a5bcdea0dc09c4bbdfd7e1adb9a460c7d504c394cccb125715df2061d2b9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18694,6 +18967,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7368,
+        "inspectedContentSha256": "d7050c4b624146054b442577bb2b9fe1e4548e1524c1a3f9651037b485825517",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18770,6 +19044,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4059,
+        "inspectedContentSha256": "c1b01c8a3a094406e7fa7e7a6cebb6f7c38bfbd45f1a0409edfe2457491c9c22",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18840,6 +19115,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 22306,
+        "inspectedContentSha256": "9d6f85d1809e307f4465280c034cc57c37bc3621bb85d1b1a394c24e621337d5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18918,6 +19194,7 @@
           "抽象線型写像"
         ],
         "inspectedCharacterCount": 6691,
+        "inspectedContentSha256": "60ecad737f85eefe2d4f14b6bfaad736a6db3a4cec90426a6d84e7cccded7ebd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18992,6 +19269,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6995,
+        "inspectedContentSha256": "f15e405d7b1f1f3dc59f17362205dd0bca5b27a4eca31b19603650b11d3dd279",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19064,6 +19342,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5771,
+        "inspectedContentSha256": "cf91d63e031fabc88665984536cc26d1249d60ee5f6eb05771465e33b30a1fdc",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19136,6 +19415,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4389,
+        "inspectedContentSha256": "19cb37e8e2ac0a5c27523a7c3b2594896efc85a02826240755fb62bf543ec15c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19202,6 +19482,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5557,
+        "inspectedContentSha256": "8b758975840e5d49b79d00c8c2386583f08f8b80cc88cc09317d2525a6c9a91f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19259,6 +19540,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6194,
+        "inspectedContentSha256": "ccf06135fbdbe7677ce77ad871fc0802ca6f405f6d6c74aedc194db06b13122f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19314,6 +19596,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8979,
+        "inspectedContentSha256": "e7728fa7fc06ac7bc603f16c8f287a3d995d86abfcad754762a5dd2ee7cccd4e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19390,6 +19673,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 16846,
+        "inspectedContentSha256": "dfbe383c1ba42212ce96a5798bea42bdfc176fad519a142c9658dad7ce627646",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19459,6 +19743,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 13431,
+        "inspectedContentSha256": "157e9cd9e277cfcb28335224fa5381d52bec2e198ca13588f25e9c6dd9471002",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19539,6 +19824,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5800,
+        "inspectedContentSha256": "4946b3b9c398104e41b017e7e0eb8dcf24020d5fdadb26e4d1515571ad38d039",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19608,6 +19894,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6137,
+        "inspectedContentSha256": "a85200d2a2921e62a8124c3bce29aed79a3f43d0a3302c653234175bd13ba1ac",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19677,6 +19964,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9264,
+        "inspectedContentSha256": "b6e44c8bb4aa551be203c91bf984570f4dbac6c6fe8c86350076744b6b46ac09",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19753,6 +20041,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6163,
+        "inspectedContentSha256": "d495b036a34c6c03ff559d71ba187dd91add9d9ab5a930b7d5cc27dea6913f2f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19818,6 +20107,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 10652,
+        "inspectedContentSha256": "a1566eb4bf9a84a0c43ce928b4600532c6319fb1aaf9fd971176bbe2dcbcd15f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19894,6 +20184,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8730,
+        "inspectedContentSha256": "4679a892abffa3f64c269171404d76d040c47b0b658637ab17a1ecdc6eda5461",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19968,6 +20259,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 14915,
+        "inspectedContentSha256": "fa427b6728df9270c3b454fdfa2245dbba5c88f14d4b68e5c1ffa8cedb6aa723",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20040,6 +20332,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6849,
+        "inspectedContentSha256": "0429b41877c82364ce39be2bc987852d15e1c4378c4ab46dcbfe8b0432051324",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20109,6 +20402,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 10245,
+        "inspectedContentSha256": "75b0f80ac512fb82f05a56d92dff1b33a28df8d7743b07dec842a2cdde25e23a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20187,6 +20481,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5169,
+        "inspectedContentSha256": "fa25952649649cac642415c984d93d8b0b20fb29fc5d6d02fbe9f62ad2d52046",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20247,7 +20542,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 13195,
+        "inspectedCharacterCount": 13322,
+        "inspectedContentSha256": "667ffdbe3575afa598123b808c9e24fb909fa1e0c69767589e01bd6060c184b8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20335,6 +20631,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4444,
+        "inspectedContentSha256": "4e04b65a3d44230eac66991bd126111800877420f09c5dd8bf53d20fc7142cfc",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20402,6 +20699,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 11276,
+        "inspectedContentSha256": "2975c3713a212c9b986a0c421f8ea0de0df9e38941f6c4ec3658203d02c9271f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20484,6 +20782,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9963,
+        "inspectedContentSha256": "f1e61b8302e4d7ba5935c9a0af3fc934b358d493bf161ce0a5f94efc5c40f47e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20569,7 +20868,8 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 8331,
+        "inspectedCharacterCount": 9080,
+        "inspectedContentSha256": "1d8aec1177f5e49a6df819825cfd45998b0b2d60faa128d530441d1d61f0f57e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20647,6 +20947,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7047,
+        "inspectedContentSha256": "2bc149d77ef935c07227842f6e177eff0e83d796213f7952f3e20f27c9739392",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20717,6 +21018,7 @@
           "一般の体・環"
         ],
         "inspectedCharacterCount": 5332,
+        "inspectedContentSha256": "b3760cfeae4a4236c8b782f220924b7e63f411fc4452e5f1bf01a3e7bf36eebb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20782,6 +21084,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5790,
+        "inspectedContentSha256": "3a9a8e496a3e8af41e543d2da758ce8260c841c0c67f2a66cab0cdfcb6a9da2a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20845,6 +21148,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3429,
+        "inspectedContentSha256": "c1b527ac36f896ee3fdae2bb33469d3ce2c6177f4fb16a4ee64d01850f82df98",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20912,6 +21216,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7927,
+        "inspectedContentSha256": "a9c294dab296aebd3ca157d324b7b4f7700f38112034ecc059f1ca78f43efdc0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20969,6 +21274,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 959,
+        "inspectedContentSha256": "88603f7e0f47159a401dbc878bd2862237bf85332936bc95aae705948a4fbe49",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21026,6 +21332,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5687,
+        "inspectedContentSha256": "d93e65e3267cabb93559c7794d1d5c3b2b1544803f0fe921cb5701a08a846566",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21093,6 +21400,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2325,
+        "inspectedContentSha256": "3fe216efd2b765c2bf4e9eec95d7140f9b2a6628f8a4c413863895d7fa01170a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21156,6 +21464,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1838,
+        "inspectedContentSha256": "3f03e591b18d8719c3cd5557e9d40ada083497a15d4b4d0dd0a780f57b3f60a7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21217,6 +21526,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9692,
+        "inspectedContentSha256": "361db9d5e57ff987da4b16ab240cdc9f8cac6c081c93064821ab9c74a678f21b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21280,6 +21590,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8277,
+        "inspectedContentSha256": "afd09789e15d71460ea51702c7d58735ee9e4e3d8243fbf3a0edb22328c93377",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21339,6 +21650,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3631,
+        "inspectedContentSha256": "fedaf639d15b0aebb82098b943d634d4ed5c2c15678c722fc0dc12a0b78d5206",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21386,6 +21698,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5799,
+        "inspectedContentSha256": "e281351e25dc824e0b3fdbd1e713ca9da103d79ef4926b72e541382ef25d72b6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21441,6 +21754,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5985,
+        "inspectedContentSha256": "8e1bebc173af92eea9c98e27d36802398c8fc2b7484876cf656aafa7f9b6713a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21498,6 +21812,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 16948,
+        "inspectedContentSha256": "2e27bddc6b1e4b38cc0d8c990ec53a43f0cf4dde5f334432ad28209619fad271",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21563,6 +21878,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9571,
+        "inspectedContentSha256": "e19bbd1dbf8eae3ed1a33228b1e5819820c8d9edc999c9460f0400dabc5db178",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

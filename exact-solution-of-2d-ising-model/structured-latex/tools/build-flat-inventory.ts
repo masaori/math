@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -38,6 +39,36 @@ const mathematicalToolEntryIdsOutsideToolFiles = new Set([
   "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
   "TV1_hatZ_hatY_010_definition_clifford_group",
 ]);
+const matrixExponentialConjugationSectionEntryIds = [
+  "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+  "exp_conjugation_proof_008_theorem_exp_ad_series",
+] as const;
+const matrixExponentialConjugationExpectedInternalDependencies = new Map<string, string[]>([
+  ["exp_conjugation_proof_010_theorem_matrix_exp_conjugation", []],
+  ["exp_conjugation_proof_008_theorem_exp_ad_series", [
+    "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+  ]],
+]);
+const matrixExponentialConjugationExpectedContentSha256 = new Map<string, string>([
+  ["exp_conjugation_proof_010_theorem_matrix_exp_conjugation", "64229f938d8d19d12dd93c396ec488b8f44803a7f0f9d00b6c4b3ce8a115a867"],
+  ["exp_conjugation_proof_008_theorem_exp_ad_series", "c9e30902311cd76998b6716da76e040f081a0b4dcad42a5f1ad6d99331ab999b"],
+]);
+const matrixExponentialConjugationExpectedExternalInputEntryIds = [
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "exp_conjugation_proof_004_theorem_ad_binomial",
+  "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
+  "exp_linear_map_000a_claim_real_exp_series_converges",
+  "exp_linear_map_000b_claim_matrix_exp_series_converges",
+  "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+  "exp_linear_map_002_definition_exp_of_endomorphism",
+  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+  "exp_linear_map_004_theorem_exp_zero_is_identity",
+  "linear_space_general_002b_definition_matrix_norm",
+  "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+  "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+  "linear_space_general_003d_claim_matrix_completeness",
+].sort();
 const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_006_definition_of_cc", new Set(["abs_basic_properties", "matrix_exp_series_converges"])],
   ["linear_space_general_000_definition_kronecker_product", new Set(["kronecker_product_rule", "tensor_basis"])],
@@ -161,6 +192,7 @@ for (const { block } of allBlocks) for (const target of collectTargets(block)) i
 const baseEntries = targetBlocks.map(({ file, block }) => {
   const record = block as unknown as Record<string, unknown>;
   const inspected = JSON.stringify({ title: record.title, statement: record.statement, proof: record.proof });
+  const inspectedContentSha256 = createHash("sha256").update(inspected).digest("hex");
   const isingSemanticMatches = [...new Set(inspected.match(isingPattern) ?? [])].sort();
   const abstractVocabularyMatches = abstractPatterns.filter(({ pattern }) => pattern.test(inspected)).map(({ name }) => name);
   const toolCandidate = mathematicalToolFiles.has(file) || mathematicalToolEntryIdsOutsideToolFiles.has(block.id);
@@ -211,6 +243,7 @@ const baseEntries = targetBlocks.map(({ file, block }) => {
       criterion: "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
       abstractVocabularyMatches,
       inspectedCharacterCount: inspected.length,
+      inspectedContentSha256,
       forwardNavigationMixedIntoStatement: forwardStatementReferenceLabels.length > 0 && !forwardReviewMatches,
       inspectedFields: ["title", "statement", "proof"],
       manualReview: manualGranularityReviewById.get(block.id) ?? null,
@@ -248,6 +281,69 @@ const unresolvedBlockSplits = entries.filter((entry) => entry.blockSplitRequired
 if (unresolvedBlockSplits.length > 0) {
   throw new Error(`未レビューの前方参照が残っています: ${unresolvedBlockSplits.map(({ id }) => id).join(", ")}`);
 }
+const matrixExponentialConjugationSectionIdSet = new Set<string>(matrixExponentialConjugationSectionEntryIds);
+const matrixExponentialConjugationSectionEntries = matrixExponentialConjugationSectionEntryIds.map((id) => {
+  const entry = entries.find((candidate) => candidate.id === id);
+  if (entry === undefined) throw new Error(`行列指数関数による共役の節候補に必要な項目がありません: ${id}`);
+  if (entry.provisionalFinalChapter !== "数学的道具立て") {
+    throw new Error(`行列指数関数による共役の節候補が数学的道具立てにありません: ${id}`);
+  }
+  const actualInternalDependencies = entry.dependsOnEntryIds
+    .filter((dependencyId) => matrixExponentialConjugationSectionIdSet.has(dependencyId))
+    .sort();
+  const expectedInternalDependencies = [...matrixExponentialConjugationExpectedInternalDependencies.get(id)!].sort();
+  if (JSON.stringify(actualInternalDependencies) !== JSON.stringify(expectedInternalDependencies)) {
+    throw new Error(`行列指数関数による共役の節候補の内部依存辺が変わりました: ${id}: ${JSON.stringify(actualInternalDependencies)}`);
+  }
+  if (entry.explanationGranularityReview.inspectedContentSha256 !== matrixExponentialConjugationExpectedContentSha256.get(id)) {
+    throw new Error(`行列指数関数による共役の節候補のレビュー済み本文が変わりました: ${id}`);
+  }
+  return entry;
+});
+const matrixExponentialConjugationSectionOrders = matrixExponentialConjugationSectionEntries
+  .map((entry) => entry.dependencyPlacement!.chapterOrder);
+if (!matrixExponentialConjugationSectionOrders.every((chapterOrder, index) =>
+  index === 0 || chapterOrder === matrixExponentialConjugationSectionOrders[index - 1]! + 1)) {
+  throw new Error(`行列指数関数による共役の節候補が章内依存順の連続区間ではありません: ${JSON.stringify(matrixExponentialConjugationSectionOrders)}`);
+}
+const matrixExponentialConjugationInternalDependencyTargets = new Set(
+  [...matrixExponentialConjugationExpectedInternalDependencies.values()].flat(),
+);
+const matrixExponentialConjugationTerminalEntryIds = matrixExponentialConjugationSectionEntryIds
+  .filter((id) => !matrixExponentialConjugationInternalDependencyTargets.has(id));
+if (JSON.stringify(matrixExponentialConjugationTerminalEntryIds) !== JSON.stringify(["exp_conjugation_proof_008_theorem_exp_ad_series"])) {
+  throw new Error(`行列指数関数による共役の節候補が節末の系へ閉じていません: ${JSON.stringify(matrixExponentialConjugationTerminalEntryIds)}`);
+}
+const matrixExponentialConjugationExternalInputEntryIds = [...new Set(
+  matrixExponentialConjugationSectionEntries.flatMap((entry) => entry.dependsOnEntryIds)
+    .filter((id) => !matrixExponentialConjugationSectionIdSet.has(id)),
+)].sort((a, b) => order.get(a)!.chapterOrder - order.get(b)!.chapterOrder);
+if (JSON.stringify([...matrixExponentialConjugationExternalInputEntryIds].sort())
+  !== JSON.stringify(matrixExponentialConjugationExpectedExternalInputEntryIds)) {
+  throw new Error(`行列指数関数による共役の節候補の外部入力が変わりました: ${JSON.stringify(matrixExponentialConjugationExternalInputEntryIds)}`);
+}
+const mathematicalToolSectionBoundaries = [{
+  name: "行列指数関数による共役の級数公式",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度未解決",
+  entryIds: matrixExponentialConjugationSectionEntryIds,
+  input: [
+    "複素数と有限複素行列の四則演算、交換子作用とその二項展開",
+    "行列ノルムと完備性",
+    "実数・行列・行列作用の指数級数、その収束、可換行列の指数関数の積公式",
+  ],
+  externalInputEntryIds: matrixExponentialConjugationExternalInputEntryIds,
+  output: [
+    "行列指数関数による共役を反復交換子の指数級数で表す主定理",
+    "主定理の右辺を項ごとに明示する系",
+  ],
+  mainTheorem: "行列版の指数関数による共役公式",
+  mainTheoremEntryId: "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+  concludingCorollary: "主定理の反復交換子級数を項ごとに明示する系",
+  concludingCorollaryEntryId: "exp_conjugation_proof_008_theorem_exp_ad_series",
+  boundaryEvidence: "章内依存順の連続する二項であり、行列版の共役公式を主定理とし、その右辺を項ごとに明示する系で節を閉じる。外部入力・内部依存辺・本文 fingerprint・連続性・節末の一意性を生成時に固定検査する。",
+  readabilityStatus: "二項とも具体的な行列計算への展開またはブロック分割を要するため、節境界だけを確定し、本文完成とは扱わない。",
+}];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
   ["三角関数の評価・有限和・積分", /^(critical_008|critical_009|critical_010|freeenergy_004)/],
@@ -294,7 +390,7 @@ const dependencySupportNodes = allBlocks.filter(({ block }) => !targetIds.has(bl
   dependsOnLabels: [...collectTargets(block)].sort(),
 }));
 const inventory = {
-  schemaVersion: 2,
+  schemaVersion: 3,
   scope: "exact-solution-of-2d-ising-model/structured-latex/content の全 definition・claim・theorem",
   organizingTheme: "高校生でも読める具体的な複素数・行列計算として2次元イジング模型の厳密解を積み上げる",
   withdrawnBoundaryAxes: ["実数解析への脱出を伴う道具／有限複素行列だけで閉じる道具", "可算／非可算"],
@@ -304,6 +400,7 @@ const inventory = {
   entryCount: entries.length,
   chapterEntryCounts: Object.fromEntries(finalChapters.map((chapter) => [chapter, entries.filter((entry) => entry.provisionalFinalChapter === chapter).length])),
   mathematicalToolGroups,
+  mathematicalToolSectionBoundaries,
   explanationGranularityReview: {
     reviewedEntryCount: entries.length,
     criterion: "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
