@@ -1630,6 +1630,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.reversal_avoidance_necSuf
   Ising2DLambda.KacWard.edgeSimpleReconnectionNonbacktracking
   Ising2DLambda.KacWard.edgeSimpleReconnectionNonbacktracking_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.contactSplitConnections_necSuf
+  Ising2DLambda.KacWard.edgeSimpleContactSplitConnections
+  Ising2DLambda.KacWard.edgeSimpleContactSplitConnections_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

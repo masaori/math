@@ -1475,9 +1475,11 @@ i\,H_1^{(+)}
    A = B,\ B' = \varepsilon V_2B \text{ に適用}) \\
 &= \mathrm{tr}\!\left(\varepsilon\,V_2\,V_1^{(+)}\right)
    \quad \left(\because \text{theorem\_exp\_product より } BB = V_1^{(+)}\right) \\
+&= \mathrm{tr}\!\left(V_1^{(+)}\,\varepsilon\,V_2\right)
+   \quad (\because \text{trace\_basic\_properties (2) の巡回性}) \\
 &= \mathrm{tr}\!\left(\varepsilon\,V_1^{(+)}\,V_2\right)
    \quad (\because \text{epsilon\_commutes\_with\_transfer\_matrices より }
-   V_1^{(+)} \text{ と } \varepsilon \text{ は可換、および巡回性})
+   V_1^{(+)}\varepsilon=\varepsilon V_1^{(+)})
 \end{aligned}`,
       ),
       paragraph([

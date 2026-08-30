@@ -1,6 +1,6 @@
 # 台の辺が相異なる閉歩道の出辺交換は非後退接続を与える
 
-**対象ラベル**: `claim_edge_simple_reconnection_nonbacktracking`
+**対象ラベル**: `claim_edge_simple_contact_split`
 
 - 実行: `sage sagemath/check/edge-simple-reconnection-nonbacktracking/check.sage`
 - 状態: PASS（2026-08-30）

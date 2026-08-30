@@ -52723,25 +52723,31 @@ t_{\circ}(\gamma_{\mathrm c})
       role: "subsection",
       element: {
         kind: "section",
-        id: "kac_ward_heading_edge_simple_reconnection",
+        id: "kac_ward_heading_edge_simple_contact_split",
         labels: [],
-        title: { text: "台の辺が相異なる閉歩道では再接続が後退しない" },
+        title: { text: "台の辺が相異なる閉歩道の接触点での分割" },
         children: [{
           role: "primary",
           element: {
             kind: "elementGroup",
-            id: "group_of_kac_ward_claim_edge_simple_reconnection_nonbacktracking",
+            id: "group_of_kac_ward_claim_edge_simple_contact_split",
             focus: {
-              id: "kac_ward_claim_edge_simple_reconnection_nonbacktracking",
+              id: "kac_ward_claim_edge_simple_contact_split",
               kind: "claim",
-              title: { text: "台の辺が相異なる閉歩道の出辺交換は非後退接続を与える" },
-              labels: ["claim_edge_simple_reconnection_nonbacktracking"],
+              title: { text: "台の辺が相異なる閉歩道は接触点で二本の短い閉歩道に分かれる" },
+              labels: ["claim_edge_simple_contact_split"],
               habitat: "N",
-              verification: ["sagemath/check/edge-simple-reconnection-nonbacktracking"],
+              verification: [
+                "sagemath/check/edge-simple-reconnection-nonbacktracking",
+                "sagemath/check/edge-simple-contact-split",
+              ],
               lean: [
                 "Ising2DLambda.KacWard.edgeSimpleReconnectionNonbacktracking",
                 "Ising2DLambda.NecSuf.KacWard.reversal_avoidance_necSuf",
                 "Ising2DLambda.KacWard.edgeSimpleReconnectionNonbacktracking_from_necSuf",
+                "Ising2DLambda.KacWard.edgeSimpleContactSplitConnections",
+                "Ising2DLambda.NecSuf.KacWard.contactSplitConnections_necSuf",
+                "Ising2DLambda.KacWard.edgeSimpleContactSplitConnections_from_necSuf",
               ],
               statement: [
                 paragraph([
@@ -52755,16 +52761,20 @@ t_{\circ}(\gamma_{\mathrm c})
                   math(String.raw`k\ne l`), " が通過の頂点を共有する（",
                   math(String.raw`\operatorname{tgt}(\vec e_k)=\operatorname{tgt}(\vec e_l)`),
                   "、通過と巡回後続写像 ", math(String.raw`\sigma`), " は ",
-                  ref("def_closed_walk_passes"), "）とする。このとき出辺を交換した二つの再接続について",
-                ]),
-                displayMath(String.raw`\vec e_{\sigma(l)}\in\operatorname{Next}(\vec e_k)
-\quad\text{かつ}\quad
-\vec e_{\sigma(k)}\in\operatorname{Next}(\vec e_l)`),
-                paragraph([
-                  "が成り立つ（", ref("def_nonbacktracking_successors"),
-                  "）。前節の反例の辺列は三番目と六番目の項が台の辺 ",
+                  ref("def_closed_walk_passes"), "）とする。前節の反例の辺列は三番目と六番目の項が台の辺 ",
                   math(String.raw`n_{\mathrm v}(0,0)`),
                   " を共有するので、この主張の仮定を満たさない。",
+                ]),
+                paragraph([
+                  "さらに添字を入れ替えて ", math(String.raw`k<l`), " とし、二本の辺列を",
+                ]),
+                displayMath(String.raw`\gamma_A:=(\vec e_{k+1},\ldots,\vec e_l),\qquad
+\gamma_B:=\begin{cases}(\vec e_{l+1},\ldots,\vec e_m,\vec e_1,\ldots,\vec e_k),&l<m,\\
+(\vec e_1,\ldots,\vec e_k),&l=m\end{cases}`),
+                paragraph([
+                  "と置くと、両方とも空でない閉じた非後退辺列で、各々の長さは ", math(String.raw`m`),
+                  " より小さい。二本に現れる台の辺の集合は互いに交わらず、合併が ",
+                  math(String.raw`\gamma`), " の台の辺の集合に等しい。",
                 ]),
               ],
               proof: [
@@ -52804,6 +52814,20 @@ t_{\circ}(\gamma_{\mathrm c})
                   " である。以上二条件より ",
                   math(String.raw`\vec e_{\sigma(l)}\in\operatorname{Next}(\vec e_k)`),
                   " が成り立つ。全過程は有限集合と整数の演算だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+                paragraph([
+                  "二本の辺列の内部の隣接と、", math(String.raw`\gamma_B`),
+                  " が添字 ", math(String.raw`m`), " から添字 1 へ移る隣接は、もとの閉歩道の隣接である（",
+                  ref("def_closed_walk_passes"), "）。残る閉じる接続は上で示した二つの再接続なので、",
+                  ref("claim_smoothing_splits_closed_walk"), " と同じ添字区間の論法により、二本は閉じた非後退辺列である。",
+                ]),
+                paragraph([
+                  math(String.raw`k<l`), " かつ ", math(String.raw`k\in I_m`),
+                  " なので、二本の長さ ", math(String.raw`l-k`), " と ", math(String.raw`m-(l-k)`),
+                  " はともに 1 以上 ", math(String.raw`m-1`),
+                  " 以下である。添字区間 ", math(String.raw`\{k+1,\ldots,l\}`),
+                  " とその補集合は ", math(String.raw`I_m`),
+                  " を互いに交わらず覆う。台の辺は元の辺列の中で相異なるので、この添字の分割を台の辺へ移せば、台の辺集合についての分割も従う。",
                 ]),
               ],
             },

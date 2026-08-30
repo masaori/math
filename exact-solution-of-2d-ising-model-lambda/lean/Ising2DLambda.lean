@@ -952,3 +952,5 @@ import Ising2DLambda.NecSuf.KacWard.CrossingFreeSignCounterexample
 import Ising2DLambda.KacWard.CrossingFreeSignCounterexample
 import Ising2DLambda.NecSuf.KacWard.EdgeSimpleReconnection
 import Ising2DLambda.KacWard.EdgeSimpleReconnection
+import Ising2DLambda.NecSuf.KacWard.ContactSplitConnections
+import Ising2DLambda.KacWard.EdgeSimpleContactSplit
