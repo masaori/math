@@ -34,3 +34,23 @@
   **その旨を `overview.md` に種類つきで明記する。**
 - 結果は `overview.md` に、実行ステータス・入力・出力・結論の順で記録する。
 - 仮説が**否定された場合も必ず記録する**（種の「潰れ方」の欄を更新する）。
+
+## 全数掃引の回し方
+
+`sagemath/check/` 配下の `.sage` を 1 本ずつ別の `sage` プロセスで起動すると、起動そのものが
+1 本あたり約 24 秒かかり、掃引全体が検算の計算量ではなく起動時間で律速される。そのため全数掃引は
+[`../tools/sweep_all_checks.py`](../tools/sweep_all_checks.py) を使う。ワーカー 1 プロセスの中で
+各検算を隔離した名前空間へ `load` し、次に実行する 1 本を共有カウンタから取り出す。
+
+```sh
+sage -python sagemath/tools/sweep_all_checks.py driver --jobs 12 --timeout 420 --outdir /tmp/ca-sage-sweep
+```
+
+結果は `--outdir` の `result-<ワーカー番号>.jsonl` に 1 本 1 行で残る（`file` / `status` / `seconds`）。
+`status` は `PASS` / `FAIL` / `TIMEOUT` のいずれかで、`--timeout` を超えた検算は握り潰さず
+`TIMEOUT` として記録する。
+
+この経路が満たしている条件は二つある。**隔離名前空間**: 検算ファイル内の相対 `load` も同じ
+名前空間へ入れる（名前空間を指定しないと Sage の利用者名前空間へ入り、`_common.sage` で定義した
+関数が検算から見えない）。**動的キュー**: 分割を静的に決めると計算量の重い検算が特定のワーカーへ
+偏り、他のワーカーが空いたまま掃引が終わらない。
