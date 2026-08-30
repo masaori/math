@@ -1740,7 +1740,7 @@ V' y
         "で定める（",
         math(String.raw`\overline{\phantom{z}}`),
         " は ",
-        ref("definition_of_cc"),
+        ref("def_complex_conjugate"),
         " の複素共役）。",
         math(String.raw`x = (x_1,\dots,x_n) \in \mathbb{C}^n`),
         " を ",

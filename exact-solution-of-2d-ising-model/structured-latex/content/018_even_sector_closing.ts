@@ -171,7 +171,7 @@ export default defineBlocks([
         ref("riemann_sum_to_integral"),
         " を引く最後の主張だけで、そこが ",
         ref("remark_real_analysis_escape_point"),
-        " の宣言どおり唯一の実数解析への移行点である。",
+        " を使って有限和の極限を積分として計算する。",
       ]),
     ],
     conversion: { status: "added" },

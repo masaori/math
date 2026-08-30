@@ -457,7 +457,7 @@ u
     id: "freeenergy_004_theorem_riemann_sum_to_integral",
     kind: "theorem",
     origin: { path: SRC, ordinal: 6 },
-    title: { text: "等間隔点の平均は積分に収束する（★実数解析への移行点）" },
+    title: { text: "等間隔点の平均は積分に収束する" },
     labels: ["riemann_sum_to_integral"],
     statement: [
       paragraph([
