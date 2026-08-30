@@ -2235,13 +2235,26 @@ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^M},\ \|x\| = 1 \,\right\}`,
         math(String.raw`V^{(+)}`),
         " が一致すること）。",
         math(String.raw`x \in \mathcal{F}^{(+)}`),
-        " なら ",
+        " なら、",
         ref("epsilon_projector_properties"),
         " (4) と ",
         ref("def_epsilon_projectors"),
-        " より ",
-        math(String.raw`P^{(+)}x = \tfrac12(x + \varepsilon x) = x`),
-        " なので、",
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+P^{(+)}x
+&= \tfrac12(x + \varepsilon x)
+   \quad (\because \text{def\_epsilon\_projectors の } P^{(+)} \text{ の定義}) \\
+&= \tfrac12(x + x)
+   \quad (\because x \in \mathcal{F}^{(+)} \text{ より } \varepsilon x = x
+   \text{（def\_eigenspaces\_of\_epsilon の固有空間）}) \\
+&= x
+   \quad (\because \text{スカラー倍を整理する})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。したがって ",
         ref("sector_decomposition_of_rayleigh_sup"),
         " (2) の ",
         math(String.raw`WP^{(+)} = V^{(+)}P^{(+)}`),
