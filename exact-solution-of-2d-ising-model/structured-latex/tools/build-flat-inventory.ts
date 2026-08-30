@@ -420,6 +420,14 @@ const expConjugationToolBoundaryById = new Map<string, ExpConjugationToolBoundar
   }],
 ]);
 
+const expConjugationTopologyReviewedContentFingerprintById = new Map<string, string>([
+  ["exp_conjugation_proof_003_definition_M_n_C_convergence", "491cfaa6e64bf02edbbf1981e85da9c26842fe35b840e329dbc9b63a38b4d8ed"],
+  ["exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms", "01f1fd118fe322f17aebad727a8c671fd4e9c88b9d0a1cee144779ee7d0c17c7"],
+  ["exp_conjugation_proof_004_theorem_ad_binomial", "1189ebfc4acfbd008bae561121cac2508419b50ec024620615f25520109c7b9e"],
+  ["exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix", "930af3abd137c24cd733790389e704b29fc6806d67db2ab194870211238a0dfd"],
+  ["exp_conjugation_proof_010_theorem_matrix_exp_conjugation", "64229f938d8d19d12dd93c396ec488b8f44803a7f0f9d00b6c4b3ce8a115a867"],
+]);
+
 const directRealAnalysisInputsById = new Map<string, string[]>(
   [
     ...calculationFormulaBoundaryById,
@@ -695,6 +703,24 @@ for (const [id, fingerprint] of configuredExpConjugationFingerprints) {
 const reviewedExpConjugationToolEntries = [...configuredExpConjugationToolIds]
   .map((id) => baseEntryById.get(id)!)
   .sort((left, right) => left.id.localeCompare(right.id));
+const topologyFingerprintIds = [...expConjugationTopologyReviewedContentFingerprintById.keys()].sort();
+const reviewedExpConjugationIds = reviewedExpConjugationToolEntries.map(({ id }) => id).sort();
+if (JSON.stringify(topologyFingerprintIds) !== JSON.stringify(reviewedExpConjugationIds)) {
+  throw new Error(
+    `共役道具のトポロジー用 fingerprint がレビュー対象5件と一致しません: fingerprint=${topologyFingerprintIds.join(",")}: レビュー=${reviewedExpConjugationIds.join(",")}`,
+  );
+}
+for (const [id, configuredFingerprint] of expConjugationTopologyReviewedContentFingerprintById) {
+  if (!/^[0-9a-f]{64}$/.test(configuredFingerprint)) {
+    throw new Error(`共役道具のトポロジー用 fingerprint が小文字 SHA-256 ではありません: ${id}: ${configuredFingerprint}`);
+  }
+  const actualFingerprint = reviewContentFingerprintById.get(id);
+  if (actualFingerprint !== configuredFingerprint) {
+    throw new Error(
+      `共役道具のトポロジー確定後に本文が変化しました: ${id}: 設定=${configuredFingerprint}: 現在=${actualFingerprint ?? "対象なし"}`,
+    );
+  }
+}
 const reviewedExpConjugationToolLabels = new Set<string>(
   reviewedExpConjugationToolEntries.flatMap(({ labels }) => labels),
 );
@@ -796,6 +822,99 @@ if (
 ) {
   throw new Error("Frobenius 内積の定義と性質が、意味的にも相互依存する同一節単位になっていません");
 }
+const expConjugationContractedVertices = [
+  {
+    name: "Frobenius 内積の定義と性質からなる不可分な依存単位",
+    entryIds: [frobeniusDefinitionId, frobeniusPropertiesId],
+  },
+  {
+    name: "交換子の二項展開",
+    entryIds: ["exp_conjugation_proof_004_theorem_ad_binomial"],
+  },
+  {
+    name: "交換子作用・共役作用の定義",
+    entryIds: ["exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"],
+  },
+  {
+    name: "行列指数共役公式",
+    entryIds: ["exp_conjugation_proof_010_theorem_matrix_exp_conjugation"],
+  },
+] as const;
+const expConjugationContractedVertexByEntryId = new Map<string, string>();
+for (const vertex of expConjugationContractedVertices) {
+  for (const entryId of vertex.entryIds) {
+    if (expConjugationContractedVertexByEntryId.has(entryId)) {
+      throw new Error(`共役道具の縮約頂点に重複したブロックがあります: ${entryId}`);
+    }
+    expConjugationContractedVertexByEntryId.set(entryId, vertex.name);
+  }
+}
+const contractedExpConjugationEntryIds = [...expConjugationContractedVertexByEntryId.keys()].sort();
+const reviewedExpConjugationEntryIds = reviewedExpConjugationToolEntries.map(({ id }) => id).sort();
+if (JSON.stringify(contractedExpConjugationEntryIds) !== JSON.stringify(reviewedExpConjugationEntryIds)) {
+  throw new Error(
+    `共役道具の縮約対象がレビュー対象5件と一致しません: 縮約=${contractedExpConjugationEntryIds.join(",")}: レビュー=${reviewedExpConjugationEntryIds.join(",")}`,
+  );
+}
+const expConjugationContractedEdgeKeys = new Set<string>();
+for (const dependentEntry of reviewedExpConjugationToolEntries) {
+  const dependentVertex = expConjugationContractedVertexByEntryId.get(dependentEntry.id)!;
+  for (const prerequisiteLabel of semanticPrerequisiteLabelsById.get(dependentEntry.id) ?? []) {
+    const prerequisiteEntryId = labelOwners.get(prerequisiteLabel);
+    if (prerequisiteEntryId === undefined || !expConjugationContractedVertexByEntryId.has(prerequisiteEntryId)) {
+      continue;
+    }
+    const prerequisiteVertex = expConjugationContractedVertexByEntryId.get(prerequisiteEntryId)!;
+    if (prerequisiteVertex !== dependentVertex) {
+      expConjugationContractedEdgeKeys.add(`${prerequisiteVertex}\u0000${dependentVertex}`);
+    }
+  }
+}
+const expectedExpConjugationContractedEdgeKeys = new Set([
+  "Frobenius 内積の定義と性質からなる不可分な依存単位\u0000交換子作用・共役作用の定義",
+  "交換子の二項展開\u0000交換子作用・共役作用の定義",
+  "交換子の二項展開\u0000行列指数共役公式",
+  "交換子作用・共役作用の定義\u0000行列指数共役公式",
+]);
+const missingExpConjugationContractedEdges = [...expectedExpConjugationContractedEdgeKeys]
+  .filter((edgeKey) => !expConjugationContractedEdgeKeys.has(edgeKey));
+const unexpectedExpConjugationContractedEdges = [...expConjugationContractedEdgeKeys]
+  .filter((edgeKey) => !expectedExpConjugationContractedEdgeKeys.has(edgeKey));
+if (missingExpConjugationContractedEdges.length > 0 || unexpectedExpConjugationContractedEdges.length > 0) {
+  throw new Error(
+    `共役道具の縮約後の意味的依存辺がレビュー確定時から変化しました: 欠落=${missingExpConjugationContractedEdges.join(",") || "なし"}: 追加=${unexpectedExpConjugationContractedEdges.join(",") || "なし"}`,
+  );
+}
+const expConjugationContractedTopologicalOrder = expConjugationContractedVertices.map(({ name }) => name);
+const expConjugationContractedTopologicalIndex = new Map<string, number>(
+  expConjugationContractedTopologicalOrder.map((name, index) => [name, index]),
+);
+for (const edgeKey of expConjugationContractedEdgeKeys) {
+  const [prerequisiteVertex, dependentVertex] = edgeKey.split("\u0000");
+  if (prerequisiteVertex === undefined || dependentVertex === undefined) {
+    throw new Error(`共役道具の縮約辺キーが不正です: ${edgeKey}`);
+  }
+  if (
+    expConjugationContractedTopologicalIndex.get(prerequisiteVertex)! >=
+    expConjugationContractedTopologicalIndex.get(dependentVertex)!
+  ) {
+    throw new Error(`共役道具の縮約後トポロジカル順が意味的前提に反します: ${prerequisiteVertex} -> ${dependentVertex}`);
+  }
+}
+const expConjugationContractedEdges = [...expConjugationContractedEdgeKeys]
+  .map((edgeKey) => {
+    const [prerequisite, dependent] = edgeKey.split("\u0000");
+    if (prerequisite === undefined || dependent === undefined) {
+      throw new Error(`共役道具の縮約辺キーが不正です: ${edgeKey}`);
+    }
+    return { prerequisite, dependent };
+  })
+  .sort((left, right) =>
+    expConjugationContractedTopologicalIndex.get(left.prerequisite)! -
+      expConjugationContractedTopologicalIndex.get(right.prerequisite)! ||
+    expConjugationContractedTopologicalIndex.get(left.dependent)! -
+      expConjugationContractedTopologicalIndex.get(right.dependent)!
+  );
 for (const [entryId, boundary] of [
   ...matrixExponentialToolBoundaryById,
   ...expConjugationToolBoundaryById,
@@ -1117,6 +1236,8 @@ const entries = baseEntries.map((entry) => {
           rationale: expConjugationBoundary.highSchoolReadabilityRationale,
         },
         reviewedContentFingerprint: expConjugationBoundary.reviewedContentFingerprint ?? null,
+        topologyReviewedContentFingerprint:
+          expConjugationTopologyReviewedContentFingerprintById.get(entry.id)!,
         directRealAnalysisInputs,
         transitiveRealAnalysisDependencies: transitiveDependencies,
         finalChapter: "数学的道具立て",
@@ -1264,13 +1385,23 @@ const inventory = {
     reviewedEntryIds: reviewedMatrixExponentialToolEntries.map(({ id }) => id),
   },
   expConjugationToolBoundaryReview: {
-    status: "行列空間のノルムと収束、Frobenius 内積の性質、交換子の二項展開、交換子作用・共役作用、行列指数共役公式について、実数解析への脱出、依存境界、二章配置、高校生可読性をブロック単位で確定した。Frobenius 内積の定義と性質は意味的にも相互依存するため、同一節の不可分な依存単位として確定した。",
+    status: "行列空間のノルムと収束、Frobenius 内積の性質、交換子の二項展開、交換子作用・共役作用、行列指数共役公式について、実数解析への脱出、依存境界、二章配置、高校生可読性をブロック単位で確定した。Frobenius 内積の定義と性質を一頂点へ縮約し、意味的前提だけによるトポロジカル順を確定した。",
     frobeniusMutualReferenceBoundary: {
       rawMutualReferencePreserved: true,
       semanticMutualPrerequisitePreserved: true,
       stronglyConnectedEntryIds: [frobeniusDefinitionId, frobeniusPropertiesId],
       placement: "同じ節の不可分な依存単位として扱う",
       rationale: "性質命題は内積の定義を前提にし、定義ブロックはノルムが非負実数値として定まることを性質命題の正定値性に依存する。",
+    },
+    contractedSemanticDependencyOrder: {
+      direction: "prerequisite から dependent へ",
+      vertices: expConjugationContractedVertices.map(({ name, entryIds }) => ({
+        name,
+        entryIds: [...entryIds],
+      })),
+      edges: expConjugationContractedEdges,
+      topologicalOrder: expConjugationContractedTopologicalOrder,
+      rationale: "Frobenius 内積の不可分単位と交換子の二項展開を先に置き、両方を使う交換子作用・共役作用の定義、その定義と二項展開を使う行列指数共役公式の順に読む。外部入力は各頂点の依存境界に記録し、この5件内部の順序には意味的前提だけを使う。",
     },
     reviewedEntryCount: reviewedExpConjugationToolEntries.length,
     realAnalysisEscapeEntryCount: reviewedExpConjugationToolEntries.filter(
@@ -1286,6 +1417,8 @@ const inventory = {
     mathematicalToolsFirstIncompatibleDependencies: expConjugationLaterChapterDependencies,
     highSchoolReadableEntryCount: reviewedExpConjugationToolEntries.length,
     semanticExclusionFingerprintCount: configuredExpConjugationFingerprints.size,
+    topologyReviewedContentFingerprintCount:
+      expConjugationTopologyReviewedContentFingerprintById.size,
     classificationRule: "交換子と共役の有限代数だけで閉じるものと、実数値ノルム・極限・完備性・指数級数を直接または依存先経由で使うものを分ける。イジング固有語彙を含まないものを数学的道具立てに置き、数学的道具立てから後章への意味的前提依存が0件であることを二章配置の適合条件として検査する。",
     reviewedEntryIds: reviewedExpConjugationToolEntries.map(({ id }) => id),
   },

@@ -126,7 +126,7 @@
     ]
   },
   "expConjugationToolBoundaryReview": {
-    "status": "行列空間のノルムと収束、Frobenius 内積の性質、交換子の二項展開、交換子作用・共役作用、行列指数共役公式について、実数解析への脱出、依存境界、二章配置、高校生可読性をブロック単位で確定した。Frobenius 内積の定義と性質は意味的にも相互依存するため、同一節の不可分な依存単位として確定した。",
+    "status": "行列空間のノルムと収束、Frobenius 内積の性質、交換子の二項展開、交換子作用・共役作用、行列指数共役公式について、実数解析への脱出、依存境界、二章配置、高校生可読性をブロック単位で確定した。Frobenius 内積の定義と性質を一頂点へ縮約し、意味的前提だけによるトポロジカル順を確定した。",
     "frobeniusMutualReferenceBoundary": {
       "rawMutualReferencePreserved": true,
       "semanticMutualPrerequisitePreserved": true,
@@ -137,6 +137,61 @@
       "placement": "同じ節の不可分な依存単位として扱う",
       "rationale": "性質命題は内積の定義を前提にし、定義ブロックはノルムが非負実数値として定まることを性質命題の正定値性に依存する。"
     },
+    "contractedSemanticDependencyOrder": {
+      "direction": "prerequisite から dependent へ",
+      "vertices": [
+        {
+          "name": "Frobenius 内積の定義と性質からなる不可分な依存単位",
+          "entryIds": [
+            "exp_conjugation_proof_003_definition_M_n_C_convergence",
+            "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
+          ]
+        },
+        {
+          "name": "交換子の二項展開",
+          "entryIds": [
+            "exp_conjugation_proof_004_theorem_ad_binomial"
+          ]
+        },
+        {
+          "name": "交換子作用・共役作用の定義",
+          "entryIds": [
+            "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
+          ]
+        },
+        {
+          "name": "行列指数共役公式",
+          "entryIds": [
+            "exp_conjugation_proof_010_theorem_matrix_exp_conjugation"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "prerequisite": "Frobenius 内積の定義と性質からなる不可分な依存単位",
+          "dependent": "交換子作用・共役作用の定義"
+        },
+        {
+          "prerequisite": "交換子の二項展開",
+          "dependent": "交換子作用・共役作用の定義"
+        },
+        {
+          "prerequisite": "交換子の二項展開",
+          "dependent": "行列指数共役公式"
+        },
+        {
+          "prerequisite": "交換子作用・共役作用の定義",
+          "dependent": "行列指数共役公式"
+        }
+      ],
+      "topologicalOrder": [
+        "Frobenius 内積の定義と性質からなる不可分な依存単位",
+        "交換子の二項展開",
+        "交換子作用・共役作用の定義",
+        "行列指数共役公式"
+      ],
+      "rationale": "Frobenius 内積の不可分単位と交換子の二項展開を先に置き、両方を使う交換子作用・共役作用の定義、その定義と二項展開を使う行列指数共役公式の順に読む。外部入力は各頂点の依存境界に記録し、この5件内部の順序には意味的前提だけを使う。"
+    },
     "reviewedEntryCount": 5,
     "realAnalysisEscapeEntryCount": 3,
     "finiteComplexMatrixEntryCount": 2,
@@ -145,6 +200,7 @@
     "mathematicalToolsFirstIncompatibleDependencies": [],
     "highSchoolReadableEntryCount": 5,
     "semanticExclusionFingerprintCount": 3,
+    "topologyReviewedContentFingerprintCount": 5,
     "classificationRule": "交換子と共役の有限代数だけで閉じるものと、実数値ノルム・極限・完備性・指数級数を直接または依存先経由で使うものを分ける。イジング固有語彙を含まないものを数学的道具立てに置き、数学的道具立てから後章への意味的前提依存が0件であることを二章配置の適合条件として検査する。",
     "reviewedEntryIds": [
       "exp_conjugation_proof_003_definition_M_n_C_convergence",
@@ -4902,6 +4958,7 @@
           "rationale": "複素共役、随伴、トレース、内積、ノルム、収束を成分表示から順に定義し、解析へ移る箇所を本文中で明示している。"
         },
         "reviewedContentFingerprint": "491cfaa6e64bf02edbbf1981e85da9c26842fe35b840e329dbc9b63a38b4d8ed",
+        "topologyReviewedContentFingerprint": "491cfaa6e64bf02edbbf1981e85da9c26842fe35b840e329dbc9b63a38b4d8ed",
         "directRealAnalysisInputs": [],
         "transitiveRealAnalysisDependencies": [
           {
@@ -5060,6 +5117,7 @@
           "rationale": "複素共役と有限和を成分ごとに展開し、Cauchy--Schwarz を非負なノルム平方の評価へ帰着しているため、参照先の絶対値・平方根・実数順序から順に追跡できる。"
         },
         "reviewedContentFingerprint": "01f1fd118fe322f17aebad727a8c671fd4e9c88b9d0a1cee144779ee7d0c17c7",
+        "topologyReviewedContentFingerprint": "01f1fd118fe322f17aebad727a8c671fd4e9c88b9d0a1cee144779ee7d0c17c7",
         "directRealAnalysisInputs": [],
         "transitiveRealAnalysisDependencies": [
           {
@@ -5184,6 +5242,7 @@
           "rationale": "交換子と反復を具体的に定義し、基底段階と帰納段階を有限和の添字変換まで一段ずつ展開している。"
         },
         "reviewedContentFingerprint": null,
+        "topologyReviewedContentFingerprint": "1189ebfc4acfbd008bae561121cac2508419b50ec024620615f25520109c7b9e",
         "directRealAnalysisInputs": [],
         "transitiveRealAnalysisDependencies": [],
         "finalChapter": "数学的道具立て",
@@ -5240,6 +5299,7 @@
           "rationale": "抽象的な Lie 群・Lie 環を導入せず、行列の積・差・逆行列だけで写像と逆写像を具体的に確かめている。"
         },
         "reviewedContentFingerprint": "930af3abd137c24cd733790389e704b29fc6806d67db2ab194870211238a0dfd",
+        "topologyReviewedContentFingerprint": "930af3abd137c24cd733790389e704b29fc6806d67db2ab194870211238a0dfd",
         "directRealAnalysisInputs": [],
         "transitiveRealAnalysisDependencies": [],
         "finalChapter": "数学的道具立て",
@@ -5318,6 +5378,7 @@
           "rationale": "Lie 理論を経由せず、部分和 P_N・Q_N と有限な添字集合をその場で定義し、差のノルムを実指数級数の剰余で抑える過程を順に示す。本文冒頭で後段の極限則と参照先も明示している。"
         },
         "reviewedContentFingerprint": null,
+        "topologyReviewedContentFingerprint": "64229f938d8d19d12dd93c396ec488b8f44803a7f0f9d00b6c4b3ce8a115a867",
         "directRealAnalysisInputs": [
           "収束する実数列は有界であること",
           "有界な実数列と 0 に収束する実数列の積は 0 に収束すること",
