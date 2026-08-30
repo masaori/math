@@ -980,3 +980,5 @@ import Ising2DLambda.NecSuf.KacWard.DeterminantNonbacktrackingPhaseSum
 import Ising2DLambda.KacWard.DeterminantNonbacktrackingPhaseSum
 import Ising2DLambda.NecSuf.KacWard.SignedEvenSubgraphSectorSum
 import Ising2DLambda.KacWard.SignedEvenSubgraphSectorSum
+import Ising2DLambda.NecSuf.KacWard.ReversalFreeMovedSupportEven
+import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven

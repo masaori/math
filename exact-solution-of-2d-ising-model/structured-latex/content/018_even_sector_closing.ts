@@ -2683,13 +2683,19 @@ x^\top Wx
         math(String.raw`c(M) \geq \Lambda^{(1/2)}_M`),
         "）。",
         ref("sector_decomposition_of_rayleigh_sup"),
-        " (3) の ",
-        math(String.raw`c(M) = \max(c_+(M), c_-(M)) \geq c_+(M)`),
-        " と ",
+        " (3) と ",
         ref("c_plus_equals_Lambda_half_integer"),
         " より",
       ]),
-      displayMath(String.raw`c(M) \geq c_+(M) = \Lambda^{(1/2)}_M`),
+      displayMath(String.raw`\begin{aligned}
+c(M)
+&= \max\bigl(c_+(M),c_-(M)\bigr)
+&&\left(\because\ \text{\cref{lab:sector_decomposition_of_rayleigh_sup} (3)}\right)\\
+&\geq c_+(M)
+&&\left(\because\ \text{二つの実数の最大値の定義}\right)\\
+&= \Lambda^{(1/2)}_M
+&&\left(\because\ \text{\cref{lab:c_plus_equals_Lambda_half_integer}}\right)
+\end{aligned}`),
       paragraph([
         "Step 3（上からの評価 ",
         math(String.raw`c(M) \leq 2\Lambda^{(1/2)}_M`),

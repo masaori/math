@@ -50449,6 +50449,10 @@ Q^{a,b}_L
               labels: ["claim_reversal_free_moved_support_even"],
               habitat: "N",
               verification: ["sagemath/check/reversal-free-moved-support-even"],
+              lean: [
+                "Ising2DLambda.KacWard.reversalFreeMovedSupport_even",
+                "Ising2DLambda.NecSuf.KacWard.supportIncidence_even_necSuf",
+              ],
               statement: [
                 paragraph([
                   math(String.raw`L\ge1`), " とし、非後退置換 ",

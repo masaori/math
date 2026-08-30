@@ -6,11 +6,11 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-31 の 16 回目の tick で、反転対を含まない非後退置換の台の偶部分グラフ性を Lean 二版へ配線し、四層検証を完了した。** 具体版 `reversalFreeMovedSupport_even` は動く向き付き辺から台の辺への全単射と、置換による入辺・出辺の全単射を人手証明どおり構成した。必要十分版 `supportIncidence_even_necSuf` は有限な無向辺族と向き付き代表の全単射、二端点、向き付き代表上の閉じた置換だけを残した。SageMath の一辺二の非後退置換 30,784 件、本文 check、検算対応、Lean と sorry 検査を通した。次は非後退置換和と横断消去・接触点分割を結んで平方恒等式へ進む。前進前レビューでは前 tick の本文と SageMath を照合し、「何も言っていない主張」や不一致が無いことを確認した。並列の式変形統一は、姉妹側の熱力学極限の下からの評価にあった一行三関係を三段の行末根拠つきの鎖へ開いた。
 - **2026-08-31 の 15 回目の tick で、反転対を含まない非後退置換の動く辺の台が偶部分グラフであることを本文と SageMath で固定した。** 動く辺の台の辺集合 $E_{\mathrm{supp}}(\varphi)\subseteq E_L$（`def_moved_edge_support_set`）を定義し、動く辺の集合が反転対 $\{(e,0),(e,1)\}$ を含まない非後退置換について $\operatorname{Even}_L(E_{\mathrm{supp}}(\varphi))$ を証明した（`claim_reversal_free_moved_support_even`）。証明は、台の各辺の上の動く向き付き辺の一意性（写像 $\ell$ の全単射性）、非後退性 $\operatorname{src}(\varphi(\vec e))=\operatorname{tgt}(\vec e)$ による「$v$ を終点とする動く辺」と「$v$ を始点とする動く辺」の全単射、端点の個数の指示値による数え上げの一つの鎖である。SageMath `reversal-free-moved-support-even` は $L=2$ の非後退置換 $30{,}784$ 件を全列挙し、反転対なし $497$ 件の台がすべて偶部分グラフであることと $\ell$ の全単射性を検査した。Lean は未着手（記述と SageMath まで）。検算対応 331 件、本文 check・PDF 329 ページを通した。この主張は、平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ で非後退置換和の項を偶部分グラフ側の項へ対応させる橋の部品である。次はこの主張の Lean 二版を書く。前進前レビューでは前 tick の Lean 二版（セクターへのファイバー分割と係数の括り出し）を人手証明と照合し、修正対象が無いことを確認した。並列の式変形統一は、姉妹側の熱力学極限の証明にあった一行二等号 $\|\varepsilon u\|=\|u\|=1$ を三段の行末根拠つきの鎖へ開いた。
 - **2026-08-31 の 14 回目の tick で、符号付き偶部分グラフ多項式のセクター和表示を Lean 二版へ配線し、四層検証を完了した。** 具体版 `signedEvenSubgraphPolynomial_eq_sectorSum` は、偶部分グラフの有限和を二つの巻き付き偶奇の値で四セクターへ分け、セクター上で一定の符号を外へ出した。必要十分版 `weightedSum_eq_sum_label_fibers_necSuf` は有限なラベル型、有限和、ラベルだけで決まる係数、分配則だけを残した。SageMath の $L=1,2,3$ 全列挙、検算対応 330 件、Lean 9,610 jobs・sorry 検査 1,629 件、本文 check・PDF 328 ページを通した。次は非後退置換和と横断消去・接触点分割を結び、平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ へ向かう。前進前レビューでは前 tick の本文と SageMath を照合し、「何も言っていない主張」や不一致が無いことを確認した。並列の式変形統一は、姉妹側の「sqrt と積が可換になる条件」の零因子の場合にあった二つの一行複数等号を、四つの一行一等号・行末根拠つきの鎖へ開いた。
 - **2026-08-31 の 13 回目の tick で、符号付き偶部分グラフ多項式を定義し、それがセクター生成多項式の符号付き和に等しいことを本文と SageMath で固定した。** 平方恒等式の右辺となる多項式 $Q^{a,b}_L:=\sum_{A}(-1)^{(1+a)\varepsilon_{L,\mathrm h}(A)+(1+b)\varepsilon_{L,\mathrm v}(A)+\varepsilon_{L,\mathrm h}(A)\varepsilon_{L,\mathrm v}(A)}x^{|A|}\in\mathbb Z[x]$（`def_signed_even_subgraph_polynomial`。符号候補は 2026-08-30 の $L=2,3$ 厳密観察で特定済みのもの）を定義し、偶部分グラフの四セクター分割（`claim_torus_homology_sector_partition`）で有限和を分け、セクター上で巻き付き偶奇が定数であることから $Q^{a,b}_L=\sum_{(c,d)}(-1)^{(1+a)c+(1+b)d+cd}G^{c,d}_L$ を得た（`claim_signed_even_subgraph_sector_sum`）。SageMath は $L=1,2,3$ の偶部分グラフ全列挙（4・32・1,024 個）と四つのスピン構造で両辺を $\mathbb Z[x]$ で比較した。Lean は未着手（記述と SageMath まで）。検算対応 330 件、本文 check・PDF 328 ページを通した。次はこの主張の Lean 二版を書き、その後に非後退置換和と横断消去・接触点分割を結んで平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ へ向かう。前進前レビューでは前 tick の Lean 二版（行列式の置換和展開・転倒数符号と `Equiv.Perm.sign` の一致・許容添字への有限和制限）を人手証明の五段と照合し、sorry 検査の登録も確認して修正対象が無いことを確認した。並列の式変形統一は、姉妹側の複素数の逆数の偏角の証明にあった一行二等号 $-\theta-2(-n)\pi=-(\theta-2n\pi)=0$ を二段の行末根拠つきの鎖へ開いた。
 - **2026-08-31 の 12 回目の tick で、行列式の非後退置換和を Lean 二版へ配線し、四層検証を完了した。** 具体版 `kacWardDeterminant_nonbacktracking_phase_sum` は、行列式を符号付き置換項の有限和へ開き、非後退条件を満たさない項を非零判定の対偶で零にし、残った各項へ軌道位相表示を代入した。行列式ライブラリとの接続に必要な転倒数符号と `Equiv.Perm.sign` の一致も `inversionSign_eq_mathlibSign` で証明した。必要十分版 `restrictedSum_replace_necSuf` は可換加法モノイド上の有限和、補集合での零、許容添字での値の一致だけを残した。SageMath の非後退置換 30,784 件・四スピン構造、検算対応 329 件、Lean 9,608 jobs・sorry 検査 1,627 件、本文 check・PDF 327 ページを通した。次は横断消去・接触点分割を結び、符号付き偶部分グラフ多項式の平方恒等式へまとめる。前進前レビューでは前 tick の本文・SageMath を照合し、「何も言っていない主張」や不一致が無いことを確認した。並列の式変形統一は、姉妹側のパリティ固有値の証明にあった三項の等号を、恒等行列・パリティの平方・結合則・固有値式を一行ずつ引く七段の鎖へ開いた。
-- **2026-08-31 の 11 回目の tick で、四つの Kac--Ward 行列式が非後退置換の位相表示の和に等しいことを本文と SageMath で固定した。** 行列式の置換展開を非後退置換の集合（`def_nonbacktracking_permutations`）とその補集合へ分け、補集合の項は非零判定（`claim_kac_ward_determinant_term_nonzero_iff`）の対偶で零になることを示し、残った各項へ前 tick の位相表示（`claim_kac_ward_term_orbit_phase_twist_product`）を代入して $D^{a,b}_L(x)=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}}\prod_{C}\bigl(-x^{\lvert C\rvert}\widehat{(-1)^{a h+b v}\zeta_8^{t_\circ}}\bigr)$ を得た（`claim_kac_ward_determinant_nonbacktracking_phase_sum`）。SageMath は一辺二のトーラスの非後退置換 30,784 件を全列挙し、四つのスピン構造で $\det(I-xM^{a,b})$ の直接計算と $\mathbb Q(\zeta_8)[x]$ で一致を検査した（行列式は全置換の和なので、非後退でない項が零であることも同時に確かめた）。Lean は未着手（記述と SageMath まで）。本文 719 ブロック・検算対応 329 件・PDF 327 ページを通した。次はこの主張の Lean 二版を書き、その後に符号付き偶部分グラフ多項式の平方恒等式へまとめる。前進前レビューでは前 tick の Lean 二版（閉路軌道表示から始めて埋め込みの乗法性と位相値の代入を結ぶ具体版、有限積と乗法的写像だけの必要十分版）を人手証明の三段と照合し、sorry 検査の登録も確認して修正対象が無いことを確認した。並列の式変形統一は、姉妹側の「$T_{(V)}$ の $\hat Z,\hat Y$ への作用」の準備にあった倍角公式の一行複数等号三本（$a^2+b^2=\cosh^2K_1+\sinh^2K_1=\cosh 2K_1=c_1$ 等）を、略記の定義・倍角公式・記号の定義を根拠とする一行一等号の鎖へ開き、姉妹側 check・PDF 347 ページを通した。
 - Onsager 閉形式への接続（トーラスの向き付き辺・回転位相・四つのスピン構造の定義）: 1 セクション
 - 全章（何も言っていない主張の一掃）: 1 セクション
 - 零点の詰め寄り・固有値の代数性（本文の lean: から引かれていない Lean の配線）: 1 セクション
@@ -25,7 +25,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 四つの Kac--Ward 行列式による有限トーラス公式 | 台の偶部分グラフ性は記述と SageMath まで | `claim_reversal_free_moved_support_even`（反転対を含まない非後退置換の台は偶部分グラフ）を本文と SageMath で固定した。次はこの主張の Lean 二版を書き、その後に非後退置換和と横断消去・接触点分割を結んで平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ へまとめる。 |
+| Onsager 閉形式への接続 | 四つの Kac--Ward 行列式による有限トーラス公式 | 台の偶部分グラフ性まで四層完了 | `claim_reversal_free_moved_support_even` の Lean 二版まで配線した。次は非後退置換和と横断消去・接触点分割を結んで平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ へまとめる。 |
 | Onsager 閉形式への接続 | ねじれた有限 Fourier 分解と正方格子の分散因子 | 未着手 | 円分体上の有限代数計算として閉じ、SageMath と二本の Lean 証明を付ける。 |
 | Onsager 閉形式への接続 | 有限体積の積公式と四ねじれの共通極限 | 未着手 | 平方根分岐・前因子を固定し、境界ねじれの密度差が消えることを証明する。 |
 | Onsager 閉形式への接続 | Riemann 和から Onsager 閉形式と臨界点へ接続する | 未着手 | ここで初めて実対数・極限・積分へ脱出し、既存の自由エントロピー密度と同定する。 |
@@ -37,11 +37,11 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-31（16 回目）: `claim_reversal_free_moved_support_even` の Lean 具体版 `reversalFreeMovedSupport_even` と、有限な辺族・向き付き代表との全単射・閉じた置換だけを残した必要十分版 `supportIncidence_even_necSuf` を書き、本文の `lean:` と sorry 検査へ登録した。
 - 2026-08-31（15 回目）: 動く辺の台の辺集合の定義 `def_moved_edge_support_set` と、反転対を含まない非後退置換の台の偶部分グラフ性 `claim_reversal_free_moved_support_even` を本文へ追加し、SageMath（$L=2$ の非後退置換 $30{,}784$ 件の全列挙。反転対なし 497 件）で固定した。Lean 二版は次 tick に回したので、セクションは完了扱いにしていない。
 - 2026-08-31（14 回目）: `claim_signed_even_subgraph_sector_sum` の Lean 具体版 `signedEvenSubgraphPolynomial_eq_sectorSum` と、有限なラベルのファイバー分割・係数の括り出しだけを残した必要十分版 `weightedSum_eq_sum_label_fibers_necSuf` を書き、本文の `lean:` と sorry 検査へ登録した。
 - 2026-08-31（13 回目）: 符号付き偶部分グラフ多項式の定義 `def_signed_even_subgraph_polynomial` と、セクター生成多項式の符号付き和との一致 `claim_signed_even_subgraph_sector_sum` を本文へ追加し、SageMath（$L=1,2,3$ の偶部分グラフ全列挙 × 四スピン構造）で固定した。Lean 二版は次 tick に回したので、セクションは完了扱いにしていない。
 - 2026-08-31（12 回目）: `claim_kac_ward_determinant_nonbacktracking_phase_sum` の Lean 具体版 `kacWardDeterminant_nonbacktracking_phase_sum`、転倒数符号と行列式ライブラリの符号を結ぶ `inversionSign_eq_mathlibSign`、許容添字への有限和制限だけを残した必要十分版 `restrictedSum_replace_necSuf` を書き、本文の `lean:` と sorry 検査へ登録した。
-- 2026-08-31（11 回目）: 行列式の非後退置換和 `claim_kac_ward_determinant_nonbacktracking_phase_sum` と非後退置換の集合の定義 `def_nonbacktracking_permutations` を本文へ追加し、SageMath（非後退置換 30,784 件の全列挙と四つの行列式の直接計算の比較）で固定した。Lean 二版は次 tick に回したので、セクションは完了扱いにしていない。
 
 ## 式変形の書き方の統一（並列の作業ストリーム。毎 tick 1 件）
 
@@ -72,11 +72,11 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-31（16 回目）: 前 tick の `def_moved_edge_support_set` と `claim_reversal_free_moved_support_even` を、本文の台上の一意な向き付き代表・入辺と出辺の全単射・端点数の鎖、および SageMath の非後退置換 30,784 件の全列挙へ照合した。定義は有限集合内の住処を確定し、主張は後続の平方恒等式が直接引くため、「何も言っていない主張」・内容の不一致・未定義記法は無かった。
 - 2026-08-31（15 回目）: 前 tick の Lean 具体版 `signedEvenSubgraphPolynomial_eq_sectorSum` と必要十分版 `weightedSum_eq_sum_label_fibers_necSuf` を人手証明のセクター分割・係数の括り出しと照合した。必要十分版は有限ラベル型と分配則だけを仮定し、sorry 検査と本文の `lean:` への登録も揃っており、「何も言っていない主張」・内容の不一致は無かった。
 - 2026-08-31（14 回目）: 前 tick の `def_signed_even_subgraph_polynomial` と `claim_signed_even_subgraph_sector_sum` を、本文の四セクターへの有限和分割、SageMath の $L=1,2,3$ 全列挙、既存の巻き付き偶奇の定義へ照合した。定義の帰属説明は可算側で閉じる根拠であり、主張は後続の平方恒等式が直接引くため、「何も言っていない主張」・内容の不一致・未定義記法は無かった。
 - 2026-08-31（13 回目）: 前 tick の Lean 具体版 `kacWardDeterminant_nonbacktracking_phase_sum`・符号の一致 `inversionSign_eq_mathlibSign`・必要十分版 `restrictedSum_replace_necSuf` を人手証明の五段（置換和展開・互いに素な覆いの分割・対偶による零化・零項の除去・位相表示の代入）と照合した。必要十分版は有限和と補集合での零だけを仮定し、sorry 検査への登録も揃っており、「何も言っていない主張」・内容の不一致は無かった。
 - 2026-08-31（12 回目）: 前 tick の `claim_kac_ward_determinant_nonbacktracking_phase_sum` を、本文の五段、SageMath の非後退置換 30,784 件・四スピン構造、既存の非零判定と軌道位相表示へ照合した。非後退置換の定義は後続の和の添字集合を定め、主張は平方恒等式が直接引く内容なので、「何も言っていない主張」・内容の不一致・未定義記法は無かった。
-- 2026-08-31（11 回目）: 前 tick の Lean 具体版 `kacWardSignedPermutationTerm_orbit_phase_twist`・必要十分版 `termOrbitPhaseTwist_necSuf` を人手証明の三段（閉路軌道表示・定数埋め込みの乗法性の有限積への適用・軌道成分積の位相値の代入）と照合した。必要十分版は有限積と単位元・積を保つ写像だけを仮定し、sorry 検査への登録・姉妹側の書き換え（トレース基底段階の二段化）も揃っており、「何も言っていない主張」・内容の不一致は無かった。
 
 ## 判断待ち（人間に問うべき論点）
 
@@ -107,3 +107,4 @@
 
 停止・再開・頻度変更は、**自分で `launchctl` を叩かず** tmux セッション `local-pc-management` の
 ウィンドウ `tick窓口` へ依頼する（2026-08-16 に経路が固定された。`launchd-tick-loop` skill）。
+- 2026-08-31（16 回目）: 姉妹側の熱力学極限の証明（下からの評価）にあった $c(M)=\max(c_+(M),c_-(M))\ge c_+(M)=\Lambda^{(1/2)}_M$ を、セクター分解・最大値の定義・半整数運動量の固有値をそれぞれ根拠とする三段の一行一関係の鎖へ開いた。内容と参照は不変。
