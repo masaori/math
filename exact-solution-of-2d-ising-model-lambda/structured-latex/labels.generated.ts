@@ -98,6 +98,7 @@ export const ALL_LABELS = [
   "claim_matrix_pow_entry",
   "claim_moved_orbit_closed_nonbacktracking",
   "claim_moved_orbit_partition",
+  "claim_moved_orbit_weight_phase_twist",
   "claim_neg_one_not_square",
   "claim_no_rational_square_two",
   "claim_non_orbit_preserving_term_zero",

@@ -122,13 +122,33 @@ export default defineBlocks([
         math(String.raw`[\hat{Z}_\mu^{(\pm)}, \hat{Z}_\nu^{(\mp)}]_+`),
         " の計算に入る前に、2 つの符号の積の値を求めておく。",
         math(String.raw`j=1`),
-        " のとき ",
-        math(String.raw`\varepsilon^{(\pm)}_1\varepsilon^{(\mp)}_1 = (\mp 1)(\pm 1) = -1`),
-        "（複合同順）であり、",
+        " のとき（複合同順）",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon^{(\pm)}_1\varepsilon^{(\mp)}_1
+&= (\mp 1)(\pm 1)
+&&(\because\ \varepsilon^{(\pm)}_j\ \text{の定義の}\ j=1\ \text{の場合を 2 つの符号へ当てた}) \\
+&= -1
+&&(\because\ \text{実数の積}\ (-1)(+1) = (+1)(-1) = -1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
         math(String.raw`j\neq 1`),
-        " のとき ",
-        math(String.raw`\varepsilon^{(\pm)}_j\varepsilon^{(\mp)}_j = (+1)(+1) = +1`),
-        " である。すなわち ",
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon^{(\pm)}_j\varepsilon^{(\mp)}_j
+&= (+1)(+1)
+&&(\because\ \varepsilon^{(\pm)}_j\ \text{の定義の}\ j\neq 1\ \text{の場合を 2 つの符号へ当てた}) \\
+&= +1
+&&(\because\ \text{実数の積}\ 1\cdot 1 = 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。すなわち ",
         math(String.raw`j=1`),
         " の項だけ符号が反転する。",
       ]),

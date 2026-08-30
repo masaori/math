@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 6 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 7 回目の tick 時点）
+
+**動く軌道の遷移成分積が切断線偶奇の符号と回転位相の冪に分かれることを、本文と SageMath で固定した（`claim_moved_orbit_weight_phase_twist`。Lean 未着手）。** 軌道列 $\gamma=\gamma_\varphi(\vec e_0)$ の全単射 $k\mapsto\vec\gamma_k$ による添字の付け替えで、ねじれ符号の積を `claim_walk_twist_sign_product` へ、回転位相の積を `claim_closed_walk_rotation_phase` へ結び、$\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}=(-1)^{a\,h(\gamma)+b\,v(\gamma)}\zeta_8^{\,t_{\circ}(\gamma)}$ を得た。SageMath `moved-orbit-weight-phase-twist` は一辺二の向き付き辺が相異なる閉じた非後退辺列 $3{,}856$ 件（長さ 8 まで）から台上の巡回置換を組み、四つのスピン構造の $15{,}424$ 件を $\mathbb Q(\zeta_8)$ で検査した。構造化本文 714 ブロック・検算対応 327 件・PDF 325 ページ通過。次はこの主張の Lean 具体版・必要十分版を書き、その後に閉路軌道表示（`claim_kac_ward_signed_orbit_term_product`）の各軌道重みへ代入して偶部分グラフ多項式の平方恒等式へ向かう。
+
+前進前レビューでは、前 tick の閉路軌道表示を人手証明・Lean・SageMath で照合し、修正対象は無かった。並列の式変形統一は、姉妹側の「$\hat Z$ の反交換関係」の証明にあった符号の積の一行二等号二箇所を、定義と実数の積を根拠とする二段の鎖へ開いた（姉妹側 check・PDF 通過）。
+
+## ひとつ前の到達点（2026-08-31 の 6 回目の tick 時点）
 
 **Kac--Ward 行列式の置換展開を、閉路軌道ごとの符号付き重みの積の和として四層で固定した（`claim_kac_ward_signed_orbit_term_product`）。** 置換項の軌道重み分解と置換符号の軌道積を結び、各軌道で $(-1)^{|C|-1}(-x)^{|C|}=-x^{|C|}$ と整理した。SageMath `kac-ward-signed-orbit-term` は四つのスピン構造と六辺の全置換 $2{,}880$ 項・全置換和を $\mathbb Q(\zeta_8)[x]$ で検査した。Lean は具体版 `kacWardSignedPermutationTerm_orbit_product`、全置換和の導出、可換環の有限積だけを残した必要十分版 `signedOrbitWeights_combine` を通した。構造化本文 712 ブロック・検算対応 326 件・Lean 9,602 jobs・sorry 検査 1,618 件が通過。次は閉路軌道表示に既証の回転位相・横断消去・接触点分割を結び、偶部分グラフ多項式の平方恒等式へまとめる。
 
