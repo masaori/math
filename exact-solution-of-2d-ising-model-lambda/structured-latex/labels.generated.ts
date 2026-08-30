@@ -36,6 +36,7 @@ export const ALL_LABELS = [
   "claim_cross_orbit_inversion_pairs_union",
   "claim_cross_orbit_inversions_even",
   "claim_cross_orbit_ordered_card",
+  "claim_crossing_elimination_by_smoothing",
   "claim_crossing_number_vertex_decomposition",
   "claim_cyclic_total_turning_multiple_of_four",
   "claim_distance_positive_on_fisher_zeros",

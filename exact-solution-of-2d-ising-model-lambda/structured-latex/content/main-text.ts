@@ -52474,6 +52474,150 @@ c(\gamma_A)+c(\gamma_B)+2
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_crossing_elimination",
+        labels: [],
+        title: { text: "横断消去の整礎帰納" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_crossing_elimination_by_smoothing",
+            focus: {
+              id: "kac_ward_claim_crossing_elimination_by_smoothing",
+              kind: "claim",
+              title: { text: "横断数の整礎帰納は閉歩道を横断のない有限族へ分ける" },
+              labels: ["claim_crossing_elimination_by_smoothing"],
+              habitat: "Z",
+              verification: ["sagemath/check/smoothing-straight-visit-count"],
+              lean: [
+                "Ising2DLambda.KacWard.crossing_elimination_by_smoothing",
+                "Ising2DLambda.NecSuf.KacWard.crossing_elimination_by_smoothing_necSuf",
+                "Ising2DLambda.KacWard.crossing_elimination_by_smoothing_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）について、ある自然数 ",
+                  math(String.raw`n\in\mathbb N`), "、", math(String.raw`1\le n`),
+                  " と、閉じた非後退辺列の有限列 ",
+                  math(String.raw`(\delta_1,\ldots,\delta_n)`),
+                  " が存在して、次の三つが成り立つ。",
+                ]),
+                list([
+                  [
+                    "任意の ", math(String.raw`i\in\{1,\ldots,n\}`), " について ",
+                    math(String.raw`c(\delta_i)=0`),
+                    "（横断数は ", ref("def_closed_walk_crossing_number"), "）。",
+                  ],
+                  [
+                    "整数の等式 ",
+                    math(String.raw`\sum_{i=1}^{n}t_{\circ}(\delta_i)=t_{\circ}(\gamma)`),
+                    "（循環総回転数は ", ref("def_cyclic_total_turning"), "）。",
+                  ],
+                  [
+                    "自然数の偶奇の組の等式 ",
+                    math(String.raw`\left(\left(\sum_{i=1}^{n}h(\delta_i)\right)\bmod2,
+\left(\sum_{i=1}^{n}v(\delta_i)\right)\bmod2\right)=\bigl(h(\gamma),v(\gamma)\bigr)`),
+                    "（切断線偶奇は ", ref("def_edge_sequence_seam_parities"), "）。",
+                  ],
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "横断数 ", math(String.raw`c(\gamma)\in\mathbb N`),
+                  " についての累積帰納で示す。すなわち、横断数が ",
+                  math(String.raw`c(\gamma)`),
+                  " より小さいすべての閉じた非後退辺列で主張が成り立つと仮定して、",
+                  math(String.raw`\gamma`),
+                  " で主張を示す。自然数の全順序は整礎なので、この帰納ですべての閉じた非後退辺列が尽くされる。",
+                ]),
+                paragraph([
+                  "場合分けの第一は ", math(String.raw`c(\gamma)=0`), " のときである。",
+                  math(String.raw`n:=1`), "、", math(String.raw`\delta_1:=\gamma`),
+                  " と取る。第一の条件は ", math(String.raw`c(\delta_1)=c(\gamma)=0`),
+                  " である。第二・第三の条件の左辺は一項の和なので、それぞれ ",
+                  math(String.raw`t_{\circ}(\gamma)`), " と ",
+                  math(String.raw`\bigl(h(\gamma)\bmod2,\ v(\gamma)\bmod2\bigr)`),
+                  " に等しく、", math(String.raw`h(\gamma),v(\gamma)\in\{0,1\}`),
+                  " により二で割った余りは自身に等しい（",
+                  ref("def_edge_sequence_seam_parities"), "）。",
+                ]),
+                paragraph([
+                  "場合分けの第二は ", math(String.raw`1\le c(\gamma)`), " のときである。",
+                  ref("def_closed_walk_crossing_number"),
+                  " により横断する添字対の有限集合の元の個数が ",
+                  math(String.raw`1`), " 以上なので、この集合は空でなく、横断する添字 ",
+                  math(String.raw`k<l`), " が取れる。", ref("def_smoothed_split_edge_sequences"),
+                  " の二本の辺列 ", math(String.raw`\gamma_A,\gamma_B`),
+                  " は閉じた非後退辺列である（", ref("claim_smoothing_splits_closed_walk"),
+                  "）。横断数について",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+c(\gamma_A)
+&\le c(\gamma_A)+c(\gamma_B)
+&&\bigl(\because\ c(\gamma_B)\in\mathbb N\text{ と自然数の加法の単調性}\bigr)\\
+&<c(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_split_crossing_descent}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "であり、同じ二行の鎖で ", math(String.raw`c(\gamma_B)<c(\gamma)`),
+                  " も成り立つ。従って帰納法の仮定を ", math(String.raw`\gamma_A`),
+                  " と ", math(String.raw`\gamma_B`), " のそれぞれに適用でき、有限列 ",
+                  math(String.raw`(\alpha_1,\ldots,\alpha_p)`), " と ",
+                  math(String.raw`(\beta_1,\ldots,\beta_q)`),
+                  " で、各成員の横断数が ", math(String.raw`0`),
+                  " であり、三つの条件を ", math(String.raw`\gamma_A`), " と ",
+                  math(String.raw`\gamma_B`), " について満たすものを得る。連結した有限列",
+                ]),
+                displayMath(String.raw`(\delta_1,\ldots,\delta_{p+q})
+:=(\alpha_1,\ldots,\alpha_p,\beta_1,\ldots,\beta_q)`),
+                paragraph([
+                  "を取る。", math(String.raw`1\le p`), " と ", math(String.raw`1\le q`),
+                  " により ", math(String.raw`1\le p+q`),
+                  " であり、各成員の横断数は ", math(String.raw`0`),
+                  " である。第二の条件は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{i=1}^{p+q}t_{\circ}(\delta_i)
+&=\sum_{i=1}^{p}t_{\circ}(\alpha_i)+\sum_{j=1}^{q}t_{\circ}(\beta_j)
+&&\bigl(\because\ \text{互いに素な有限和の分割}\bigr)\\
+&=t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
+&&\bigl(\because\ \text{帰納法の仮定の二式}\bigr)\\
+&=t_{\circ}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_split_turning_sum}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "で従う。第三の条件は、横の成分について",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\left(\sum_{i=1}^{p+q}h(\delta_i)\right)\bmod2
+&=\left(\sum_{i=1}^{p}h(\alpha_i)+\sum_{j=1}^{q}h(\beta_j)\right)\bmod2
+&&\bigl(\because\ \text{互いに素な有限和の分割}\bigr)\\
+&=\left(\left(\sum_{i=1}^{p}h(\alpha_i)\right)\bmod2
+  +\left(\sum_{j=1}^{q}h(\beta_j)\right)\bmod2\right)\bmod2
+&&\bigl(\because\ \text{法 }2\text{ の加法の合同}\bigr)\\
+&=\bigl(h(\gamma_A)+h(\gamma_B)\bigr)\bmod2
+&&\bigl(\because\ \text{帰納法の仮定の二式}\bigr)\\
+&=h(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_split_seam_parity}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "で従い、縦の成分 ", math(String.raw`v`),
+                  " についても同じ四行の鎖が成り立つ。以上で両方の場合が尽くされた。",
+                  "全過程は自然数の順序についての累積帰納と、整数の有限和、二で割った余りだけで閉じ、",
+                  "実数体も複素数体も現れない。この分解により、閉歩道の循環総回転数と切断線偶奇の追跡は、",
+                  "横断のない閉歩道の有限族の上の和へ帰着される。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

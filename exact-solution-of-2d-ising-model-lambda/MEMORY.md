@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 23 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 24 回目の tick 時点）
+
+**横断数の整礎帰納により閉歩道が横断のない有限族へ分かれることを四層で証明した。** 横断数 $c(\gamma)$ についての累積帰納で、$c(\gamma)=0$ なら族は一本、$1\le c(\gamma)$ なら横断を選んで平滑化し、狭義減少 `claim_smoothing_split_crossing_descent` により帰納法の仮定を二本へ適用して族を連結する。族の各成員は横断数 $0$ で、循環総回転数の総和は `claim_smoothing_split_turning_sum`、切断線偶奇の総和の法 $2$ は `claim_smoothing_split_seam_parity` で元と一致する（`claim_crossing_elimination_by_smoothing`）。SageMath `smoothing-straight-visit-count` は横断対とは独立の全閉歩道 24,628 件で分解を実際に実行し（平滑化の回数が元の横断数以下で停止）、三つの保存を検査した。Lean は具体版 `KacWard/CrossingEliminationBySmoothing.lean` と、測度つき二分割の整礎帰納だけを残した必要十分版 `crossing_elimination_by_smoothing_necSuf` を通した。次は横断のない閉歩道の回転位相の符号を確定し、三つの保存則を回転位相の符号表示へ結合する。
+
+前進前レビューでは、前 tick の狭義減少（コミット `3bb5c315`）を四層で照合して一致を確認し、Lean 定理 3 件の sorry 検査未登録を発見して登録した（コミット `6b19708c`）。
+
+並列の式変形統一は、姉妹側の偶数セクター終結章の最終定理で、$\|v\|^2$ の一行三関係（二等号と不等号）を三段の一行一関係・行末根拠つきの鎖へ開いた（check・PDF 342 ページ通過）。次は同じ章に残る複数関係の走査を続ける。
+
+## ひとつ前の到達点（2026-08-30 の 23 回目の tick 時点）
 
 **平滑化で分けた二本の閉歩道の横断数の和が元の閉歩道より真に小さいことを四層で証明した。** 選んだ横断は異なる二軸を直進するので $1\le n_{v,0}(\gamma),n_{v,1}(\gamma)$ であり、横断数の分割等式 `claim_smoothing_split_crossing_partition` と全体更新式 `claim_smoothing_crossing_number_update` を結んで $c(\gamma_A)+c(\gamma_B)+2\le c(\gamma)+1$、従って `claim_smoothing_split_crossing_descent` の $c(\gamma_A)+c(\gamma_B)<c(\gamma)$ を得た。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対で二本の横断数を独立に数えて狭義減少を検査した。Lean は具体版 `KacWard/SmoothingSplitCrossingDescent.lean` と、二本の自然数等式・各軸の下界だけを残した必要十分版を通した。次はこの狭義減少による横断数の整礎帰納を明記し、回転数・切断線偶奇・横断数の保存則を回転位相の符号表示へ結合する。
 

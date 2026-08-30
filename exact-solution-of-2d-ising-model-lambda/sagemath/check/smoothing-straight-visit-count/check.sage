@@ -81,6 +81,7 @@ split_turning_sum_checks = 0
 split_seam_parity_checks = 0
 split_crossing_partition_checks = 0
 split_crossing_descent_checks = 0
+crossing_elimination_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -286,6 +287,54 @@ for L in range(1, 4):
                     assert after_w == before_w
                     other_vertex_crossing_checks += 1
                 crossing_pair_total += 1
+            # 横断数の整礎帰納: 横断が残る限り最初の横断を平滑化で二本に
+            # 分けると、有限回（平滑化の回数は元の横断数以下）で横断のない
+            # 閉じた非後退辺列の空でない族に達し、循環総回転数の総和と
+            # 二つの切断線偶奇の総和の法 2 が保たれる
+            # （claim_crossing_elimination_by_smoothing）。
+            initial_crossings = ZZ(sum(
+                1 for r in range(m) for s in range(m)
+                if r < s and crossing(L, walk, r, s)))
+            stack = [walk]
+            family = []
+            smoothing_steps = 0
+            while stack:
+                current = stack.pop()
+                mc = len(current)
+                cpairs = [(a, b) for a in range(mc) for b in range(mc)
+                          if a < b and crossing(L, current, a, b)]
+                if not cpairs:
+                    family.append(current)
+                    continue
+                a, b = cpairs[0]
+                part_a = [current[r] for r in range(a + 1, b + 1)]
+                part_b = ([current[r] for r in range(b + 1, mc)]
+                          + [current[r] for r in range(0, a + 1)])
+                stack.append(part_a)
+                stack.append(part_b)
+                smoothing_steps += 1
+                assert smoothing_steps <= initial_crossings
+            assert family
+            for part in family:
+                mp = len(part)
+                assert part[0] in successors(L, oriented, part[-1])
+                for pos in range(mp - 1):
+                    assert part[pos + 1] in successors(L, oriented, part[pos])
+                assert not any(crossing(L, part, a, b)
+                               for a in range(mp) for b in range(mp) if a < b)
+            family_turning = ZZ(sum(
+                turn(part[r], part[(r + 1) % len(part)])
+                for part in family for r in range(len(part))))
+            walk_turning = ZZ(sum(
+                turn(walk[r], walk[(r + 1) % m]) for r in range(m)))
+            assert family_turning == walk_turning
+            assert (sum(horizontal_seam(L, edge) for part in family
+                        for edge in part) % 2
+                    == sum(horizontal_seam(L, edge) for edge in walk) % 2)
+            assert (sum(vertical_seam(L, edge) for part in family
+                        for edge in part) % 2
+                    == sum(vertical_seam(L, edge) for edge in walk) % 2)
+            crossing_elimination_checks += 1
             closed_walk_total += 1
         if length < max_length[L]:
             frontier = [walk + [nxt] for walk in frontier
@@ -307,6 +356,7 @@ assert split_turning_sum_checks == crossing_pair_total
 assert split_seam_parity_checks == crossing_pair_total
 assert split_crossing_partition_checks == crossing_pair_total
 assert split_crossing_descent_checks == crossing_pair_total
+assert crossing_elimination_checks == closed_walk_total
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
       f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
@@ -320,4 +370,5 @@ print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing p
       f"and {split_seam_parity_checks} split seam-parity checks "
       f"and {split_crossing_partition_checks} split crossing partition checks "
       f"and {split_crossing_descent_checks} split crossing descent checks "
+      f"and {crossing_elimination_checks} crossing elimination checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")

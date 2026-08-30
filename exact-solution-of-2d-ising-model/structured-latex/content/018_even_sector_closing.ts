@@ -2597,11 +2597,15 @@ x^\top W x
           "。",
         ],
         [
-          math(String.raw`\|v\|^2 = \|u\|^2 + 2u^\top\varepsilon u + \|\varepsilon u\|^2
-= 2 + 2u^\top\varepsilon u \leq 4`),
-          "（Cauchy–Schwarz より ",
-          math(String.raw`u^\top\varepsilon u \leq \|u\|\|\varepsilon u\| = 1`),
-          "）。",
+          displayMath(String.raw`\begin{aligned}
+\|v\|^2
+&= \|u\|^2 + 2u^\top\varepsilon u + \|\varepsilon u\|^2
+&&\left(\because\ v=u+\varepsilon u\text{ の展開と }\varepsilon^\top=\varepsilon\right)\\
+&= 2 + 2u^\top\varepsilon u
+&&\left(\because\ \|u\| = \|\varepsilon u\| = 1\right)\\
+&\leq 4
+&&\left(\because\ \text{Cauchy–Schwarz より } u^\top\varepsilon u \leq \|u\|\|\varepsilon u\| = 1\right)
+\end{aligned}`),
         ],
         [
           math(String.raw`v^\top Wv = u^\top Wu + 2u^\top W\varepsilon u
