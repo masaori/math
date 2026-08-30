@@ -48,14 +48,16 @@ add() { problems+=("$1"); log "NG: $1"; }
 # 打ち切り・異常終了は tick 自身が Slack へ通知しない（通知はセクション完了と停止時だけ）。
 # 直近 3 時間ぶんを見る。
 since="$(date -v-3H '+%Y-%m-%d %H:%M:%S' 2>/dev/null || date -d '3 hours ago' '+%Y-%m-%d %H:%M:%S')"
-if [ -f "$LOG_DIR/auto-loop.log" ]; then
+TICK_STATUS_LOG="$LOG_DIR/auto-loop-status.log"
+[ -f "$TICK_STATUS_LOG" ] || TICK_STATUS_LOG="$LOG_DIR/auto-loop.log"
+if [ -f "$TICK_STATUS_LOG" ]; then
   # **このスクリプトが書いた行だけを見る。** ログには tick（Claude セッション）の説明文も
   # そのまま流れ込むので、「打ち切り」の語を含む地の文が混ざる。
   # 語で数えると、SageMath の絞り込みを「打ち切りとして記録した」と書いた文まで
   # 打ち切りに数えてしまう（実測: 実際の打ち切り 0 回のところを 7 回と誤報した）。
   # 目印は行頭の日時と `=== tick <結果>` の形に限る。
   recent="$(awk -v since="$since" '/^20[0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9] === / && $0 >= since' \
-    "$LOG_DIR/auto-loop.log" 2>/dev/null || true)"
+    "$TICK_STATUS_LOG" 2>/dev/null || true)"
   cut_count="$(printf '%s\n' "$recent" | grep -c '=== tick 打ち切り' || true)"
   err_count="$(printf '%s\n' "$recent" | grep -c '=== tick 異常終了' || true)"
   cap_minutes="$(( $(grep -m1 '^TICK_TIMEOUT_SECONDS=' "$PROJECT_DIR/scripts/auto-loop-tick.sh" | cut -d= -f2) / 60 ))"

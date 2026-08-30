@@ -60,6 +60,30 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_relation_reachability_and_transitive_closure",
+        title: "有限関係の到達関係と推移閉包",
+        input: "有限集合、その上の一段二項関係、自然数の有限初期区間を入力とする。",
+        output: "有限長の道、到達関係、反射的到達関係と、到達関係が推移的かつ一段関係を最小に含むことを得る。",
+        main: "主定理は、到達関係が一段関係の推移閉包であること、すなわち推移的であり、一段関係を含む推移的関係のうち最小であることである。",
+        mainLabels: [
+          "claim_reachability_transitive",
+          "claim_reachability_minimal",
+        ],
+      },
+      {
+        id: "finite_poset_convex_subsets_and_antichains",
+        title: "有限半順序の凸部分集合と反鎖",
+        input: "有限集合上の部分順序を入力とする。",
+        output: "順序凸部分集合、下方集合、上方集合、非比較関係、反鎖と、それらの凸性・有限性・交叉の閉性を得る。",
+        main: "主定理は、下方集合・上方集合・反鎖がいずれも順序凸であり、順序凸部分集合の交叉が順序凸であることである。",
+        mainLabels: [
+          "claim_order_convex_intersection",
+          "claim_antichain_order_convex",
+          "claim_down_set_order_convex",
+          "claim_up_set_order_convex",
+        ],
+      },
+      {
         id: "finite_self_map_dynamics",
         title: "有限自己写像の軌道と安定構造",
         input: "有限集合と、その集合から自身への写像だけを入力とする。",
