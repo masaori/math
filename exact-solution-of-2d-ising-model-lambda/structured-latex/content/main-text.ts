@@ -53104,6 +53104,113 @@ n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)
             },
           },
         },
+        {
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_contact_elimination_by_splitting",
+            focus: {
+              id: "kac_ward_claim_contact_elimination_by_splitting",
+              kind: "claim",
+              title: { text: "接触対数の整礎帰納は台の辺が相異なる閉歩道を頂点単純な閉路族へ分ける" },
+              labels: ["claim_contact_elimination_by_splitting"],
+              habitat: "N",
+              verification: ["sagemath/check/edge-simple-contact-split"],
+              lean: [
+                "Ising2DLambda.KacWard.contact_elimination_by_splitting",
+                "Ising2DLambda.NecSuf.KacWard.contact_elimination_by_splitting_necSuf",
+                "Ising2DLambda.KacWard.contact_elimination_by_splitting_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "台の辺が相異なる任意の閉じた非後退辺列 ",
+                  math(String.raw`\gamma`), "（", ref("claim_edge_simple_contact_split"),
+                  " の仮定）について、ある自然数 ", math(String.raw`n\in\mathbb N`), "、",
+                  math(String.raw`1\le n`), " と、台の辺が相異なる閉じた非後退辺列の有限列 ",
+                  math(String.raw`(\delta_1,\ldots,\delta_n)`), " が存在して、次の三つが成り立つ。",
+                ]),
+                list([
+                  [
+                    "任意の ", math(String.raw`i\in\{1,\ldots,n\}`), " について ",
+                    math(String.raw`n_{\mathrm{ct}}(\delta_i)=0`),
+                    "、すなわち通過の頂点は相異なる（接触対数は ", ref("def_contact_pair_count"), "）。",
+                  ],
+                  [
+                    "各 ", math(String.raw`\delta_i`), " の台の辺集合は互いに交わらず、それらの合併は ",
+                    math(String.raw`\gamma`), " の台の辺集合に等しい。",
+                  ],
+                  [
+                    "切断線偶奇について自然数の偶奇の組の等式 ",
+                    math(String.raw`\left(\left(\sum_{i=1}^{n}h(\delta_i)\right)\bmod2,
+\left(\sum_{i=1}^{n}v(\delta_i)\right)\bmod2\right)=\bigl(h(\gamma),v(\gamma)\bigr)`),
+                    " が成り立つ。",
+                  ],
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "接触対数 ", math(String.raw`n_{\mathrm{ct}}(\gamma)\in\mathbb N`),
+                  " についての累積帰納で示す。接触対数がこれより小さいすべての台の辺が相異なる閉歩道で主張が成り立つと仮定する。自然数の全順序は整礎なので、この帰納ですべての場合が尽くされる。",
+                ]),
+                paragraph([
+                  "第一に ", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), " なら、",
+                  math(String.raw`n:=1`), "、", math(String.raw`\delta_1:=\gamma`),
+                  " と取る。三条件はいずれも一項だけの族についての等式である。接触対が無いことは、異なる二添字の通過の頂点が一致しないことそのものである（",
+                  ref("def_contact_pair_count"), "）。",
+                ]),
+                paragraph([
+                  "第二に ", math(String.raw`1\le n_{\mathrm{ct}}(\gamma)`),
+                  " なら、接触対の有限集合は空でないので、通過の頂点を共有する添字 ",
+                  math(String.raw`k<l`), " を取れる。", ref("claim_edge_simple_contact_split"),
+                  " により二本の台の辺が相異なる閉じた非後退辺列 ",
+                  math(String.raw`\gamma_A,\gamma_B`), " を得る。接触対数について",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+n_{\mathrm{ct}}(\gamma_A)
+&\le n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)
+&&\bigl(\because\ n_{\mathrm{ct}}(\gamma_B)\in\mathbb N\text{ と自然数の加法の単調性}\bigr)\\
+&<n_{\mathrm{ct}}(\gamma)
+&&\bigl(\because\ \blkref{claim_contact_split_pair_descent}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "であり、同じ二行の鎖で ", math(String.raw`n_{\mathrm{ct}}(\gamma_B)<n_{\mathrm{ct}}(\gamma)`),
+                  " も成り立つ。帰納法の仮定から ", math(String.raw`\gamma_A`), " を分ける族 ",
+                  math(String.raw`(\alpha_1,\ldots,\alpha_p)`), " と ", math(String.raw`\gamma_B`),
+                  " を分ける族 ", math(String.raw`(\beta_1,\ldots,\beta_q)`),
+                  " を得る。この二列を順に連結して ",
+                  math(String.raw`(\delta_1,\ldots,\delta_{p+q}):=(\alpha_1,\ldots,\alpha_p,\beta_1,\ldots,\beta_q)`),
+                  " と置く。", math(String.raw`1\le p`), " と ", math(String.raw`1\le q`),
+                  " なので空でなく、各成員の接触対数は零である。",
+                ]),
+                paragraph([
+                  "台の辺集合について、帰納法の仮定により ", math(String.raw`\alpha`),
+                  " 族は ", math(String.raw`\gamma_A`), " の集合を、", math(String.raw`\beta`),
+                  " 族は ", math(String.raw`\gamma_B`), " の集合をそれぞれ互いに交わらず分ける。さらに ",
+                  ref("claim_edge_simple_contact_split"), " により ", math(String.raw`\gamma_A`),
+                  " と ", math(String.raw`\gamma_B`), " の台の辺集合は互いに交わらず、合併が ",
+                  math(String.raw`\gamma`), " の台の辺集合である。従って連結した族も ",
+                  math(String.raw`\gamma`), " の台の辺集合を互いに交わらず分ける。",
+                ]),
+                paragraph(["横の切断線偶奇は"]),
+                displayMath(String.raw`\begin{aligned}
+\left(\sum_{i=1}^{p+q}h(\delta_i)\right)\bmod2
+&=\left(\sum_{i=1}^{p}h(\alpha_i)+\sum_{j=1}^{q}h(\beta_j)\right)\bmod2
+&&\bigl(\because\ \text{互いに素な有限和の分割}\bigr)\\
+&=\left(\left(\sum_{i=1}^{p}h(\alpha_i)\right)\bmod2
++\left(\sum_{j=1}^{q}h(\beta_j)\right)\bmod2\right)\bmod2
+&&\bigl(\because\ \text{法 }2\text{ の加法の合同}\bigr)\\
+&=\bigl(h(\gamma_A)+h(\gamma_B)\bigr)\bmod2
+&&\bigl(\because\ \text{帰納法の仮定の二式}\bigr)\\
+&=h(\gamma)
+&&\bigl(\because\ \blkref{claim_contact_split_seam_parity}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "であり、縦の切断線偶奇にも同じ四行の鎖を適用する。以上で帰納が閉じた。全過程は有限集合、自然数の整礎順序、有限和、二で割った余りだけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        },
         ],
       },
     },

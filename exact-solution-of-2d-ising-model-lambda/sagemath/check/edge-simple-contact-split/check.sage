@@ -109,6 +109,7 @@ checked_contacts = ZZ(0)
 seam_parity_checks = ZZ(0)
 turning_nonzero_shift_contacts = ZZ(0)
 pair_descent_checks = ZZ(0)
+contact_elimination_checks = ZZ(0)
 for walk in edge_simple_walks:
     m = len(walk)
     for k in range(m):
@@ -163,15 +164,52 @@ for walk in edge_simple_walks:
             assert contact_pair_count(walk_a) + contact_pair_count(walk_b) \
                 < contact_pair_count(walk)
             pair_descent_checks += 1
+    # claim_contact_elimination_by_splitting: 接触対が残る限り最初の接触点で
+    # 二分する。狭義減少により停止し、台の辺集合の分割と切断線偶奇を保つ。
+    stack = [walk]
+    family = []
+    split_steps = ZZ(0)
+    while stack:
+        current = stack.pop()
+        mc = len(current)
+        cpairs = [(a, b) for a in range(mc) for b in range(a + 1, mc)
+                  if tgt(current[a]) == tgt(current[b])]
+        if not cpairs:
+            family.append(current)
+            continue
+        a, b = cpairs[0]
+        part_a = current[a + 1:b + 1]
+        part_b = current[b + 1:] + current[:a + 1]
+        assert is_closed_nonbacktracking(part_a)
+        assert is_closed_nonbacktracking(part_b)
+        assert contact_pair_count(part_a) + contact_pair_count(part_b) \
+            < contact_pair_count(current)
+        stack.append(part_a)
+        stack.append(part_b)
+        split_steps += 1
+        assert split_steps <= contact_pair_count(walk)
+    assert family
+    assert all(contact_pair_count(part) == 0 for part in family)
+    family_bases = [set(base_edge(edge) for edge in part) for part in family]
+    assert all(family_bases[i].isdisjoint(family_bases[j])
+               for i in range(len(family_bases)) for j in range(i + 1, len(family_bases)))
+    assert set().union(*family_bases) == set(base_edge(edge) for edge in walk)
+    assert (sum(horizontal_seam(edge) for part in family for edge in part) % 2
+            == sum(horizontal_seam(edge) for edge in walk) % 2)
+    assert (sum(vertical_seam(edge) for part in family for edge in part) % 2
+            == sum(vertical_seam(edge) for edge in walk) % 2)
+    contact_elimination_checks += 1
 
 assert 0 < len(edge_simple_walks)
 assert 0 < checked_contacts
 assert 0 < turning_nonzero_shift_contacts
 assert pair_descent_checks == checked_contacts
+assert contact_elimination_checks == len(edge_simple_walks)
 
 print("PASS: closed walks (L=%d, length <= %d): %d; base-edge-simple: %d; "
       "contact splits checked: %d; seam parity checks: %d; "
-      "contacts with nonzero turning shift: %d; pair descent checks: %d"
+      "contacts with nonzero turning shift: %d; pair descent checks: %d; "
+      "contact eliminations: %d"
       % (L, MAX_LENGTH, len(closed_walks), len(edge_simple_walks),
          checked_contacts, seam_parity_checks, turning_nonzero_shift_contacts,
-         pair_descent_checks))
+         pair_descent_checks, contact_elimination_checks))

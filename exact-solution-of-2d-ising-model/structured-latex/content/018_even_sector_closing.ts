@@ -2313,17 +2313,27 @@ x^\top W x
         " なので",
       ]),
       displayMath(
-        String.raw`x^\top Wx \leq \check\Lambda_{\max}
-\sum_{\epsilon}\left\|\check{Q}_\epsilon x\right\|^2
-= \check\Lambda_{\max}\sum_{\epsilon}x^*\check{Q}_\epsilon x
-= \check\Lambda_{\max}\,x^*\!\left(\sum_{\epsilon}\check{Q}_\epsilon\right)\!x
-= \check\Lambda_{\max}\,\|x\|^2
-= \check\Lambda_{\max}`,
+        String.raw`\begin{aligned}
+x^\top Wx
+&\leq \check\Lambda_{\max}
+ \sum_{\epsilon}\left\|\check{Q}_\epsilon x\right\|^2
+ &&\left(\because\ 0<\check\Lambda_\epsilon\leq\check\Lambda_{\max}
+ \text{ と }\left\|\check{Q}_\epsilon x\right\|^2\geq0\right)\\
+&= \check\Lambda_{\max}\sum_{\epsilon}x^*\check{Q}_\epsilon x
+ &&\left(\because\ \check Q_\epsilon\text{ はエルミートな冪等行列}
+ \text{（check\_number\_operator\_is\_hermitian (4)）}\right)\\
+&= \check\Lambda_{\max}\,x^*\!\left(\sum_{\epsilon}\check{Q}_\epsilon\right)\!x
+ &&\left(\because\ \text{有限和に対する行列積の分配則}\right)\\
+&= \check\Lambda_{\max}\,x^*x
+ &&\left(\because\ \sum_\epsilon\check Q_\epsilon=I
+ \text{（check\_joint\_eigenspace\_decomposition (2)）}\right)\\
+&= \check\Lambda_{\max}\,\|x\|^2
+ &&\left(\because\ \text{複素ベクトルのノルムの定義}\right)\\
+&= \check\Lambda_{\max}
+ &&\left(\because\ \|x\|=1\right)
+\end{aligned}`,
       ),
       paragraph([
-        "（",
-        ref("check_joint_eigenspace_decomposition"),
-        " (2) を再び使った。）",
         math(String.raw`x`),
         " は任意だったので ",
         math(String.raw`c_+(M) \leq \check\Lambda_{\max}`),
