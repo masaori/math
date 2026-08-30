@@ -52618,6 +52618,105 @@ c(\gamma_A)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_crossing_free_sign_counterexample",
+        labels: [],
+        title: { text: "横断がないだけでは回転位相の符号は決まらない" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_crossing_free_sign_counterexample",
+            focus: {
+              id: "kac_ward_claim_crossing_free_sign_counterexample",
+              kind: "claim",
+              title: { text: "横断のない辺重複なし閉歩道にも単純閉路の符号公式への反例がある" },
+              labels: ["claim_crossing_free_sign_counterexample"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/crossing-free-sign-counterexample"],
+              lean: [
+                "Ising2DLambda.KacWard.crossingFreeSignCounterexample",
+                "Ising2DLambda.NecSuf.KacWard.crossingFreeSignCounterexample_necSuf",
+                "Ising2DLambda.KacWard.crossingFreeSignCounterexample_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  math(String.raw`L=2`), " とする。向き付き辺を ",
+                  math(String.raw`n_{\mathrm h}(i,j,+),n_{\mathrm v}(i,j,+)`),
+                  " とその反転 ", math(String.raw`n_{\mathrm h}(i,j,-),n_{\mathrm v}(i,j,-)`),
+                  " で書く（", ref("def_oriented_edges"), "、", ref("def_edge_reversal"), "）。辺列",
+                ]),
+                displayMath(String.raw`\gamma_{\mathrm c}:=\bigl(
+n_{\mathrm h}(0,0,+),n_{\mathrm h}(0,1,+),n_{\mathrm v}(0,0,+),
+n_{\mathrm h}(1,0,+),n_{\mathrm h}(1,1,+),n_{\mathrm v}(0,0,-)
+\bigr)`),
+                paragraph([
+                  "は辺の重複を持たない閉じた非後退辺列であり、横断数は ",
+                  math(String.raw`c(\gamma_{\mathrm c})=0`), "、切断線偶奇は ",
+                  math(String.raw`(h(\gamma_{\mathrm c}),v(\gamma_{\mathrm c}))=(0,0)`),
+                  "、回転数は ", math(String.raw`\operatorname{rot}(\gamma_{\mathrm c})=0`), " である。したがって",
+                ]),
+                displayMath(String.raw`\left(\prod_{k=1}^{5}\rho(\vec e_k,\vec e_{k+1})\right)
+\rho(\vec e_6,\vec e_1)=1\ne-1=(-1)^{1+h(\gamma_{\mathrm c})+v(\gamma_{\mathrm c})+h(\gamma_{\mathrm c})v(\gamma_{\mathrm c})}`),
+                paragraph([
+                  "である。ゆえに横断数が零であることだけから、単純閉路に成り立つ回転位相の符号表示を導いてはならない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "始点を順に書くと ",
+                  math(String.raw`(0,0),(0,1),(0,0),(1,0),(1,1),(1,0)`),
+                  " であり、最後の辺の終点は ", math(String.raw`(0,0)`),
+                  " である。隣り合う辺は同じ番号付き辺の反転対ではないので、",
+                  ref("def_closed_nonbacktracking_walk"), " により閉じた非後退辺列である。六つの番号付き辺は相異なる。",
+                ]),
+                paragraph([
+                  "同じ頂点を二度通る二箇所では、いずれの通過も少なくとも一方が曲がる。したがって ",
+                  ref("def_index_pair_crossing"), " の『二つの通過がともに直進する』という条件を満たす添字対はなく、",
+                  math(String.raw`c(\gamma_{\mathrm c})=0`), " である（", ref("def_closed_walk_crossing_number"), "）。",
+                ]),
+                paragraph(["六つの接続の一歩の回転数は順に ", math(String.raw`0,1,-1,0,-1,1`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_{\mathrm c})
+&=0+1+(-1)+0+(-1)+1
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と }\blkref{def_step_turning}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr),\\
+\operatorname{rot}(\gamma_{\mathrm c})
+&=t_{\circ}(\gamma_{\mathrm c})/4
+&&\bigl(\because\ \blkref{def_closed_walk_rotation_number}\bigr)\\
+&=0
+&&\bigl(\because\ 0/4=0\text{ in }\mathbb Z\bigr).
+\end{aligned}`),
+                paragraph([
+                  "横の切断線を横切るのは二番目と五番目、縦の切断線を横切るのは三番目と六番目の辺だけなので、",
+                  ref("def_edge_sequence_seam_parities"), " より二つの偶奇はいずれも ", math(String.raw`0`), " である。従って",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\left(\prod_{k=1}^{5}\rho(\vec e_k,\vec e_{k+1})\right)\rho(\vec e_6,\vec e_1)
+&=(-1)^{\operatorname{rot}(\gamma_{\mathrm c})}
+&&\bigl(\because\ \blkref{claim_closed_walk_rotation_phase_sign}\bigr)\\
+&=(-1)^0
+&&\bigl(\because\ \operatorname{rot}(\gamma_{\mathrm c})=0\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零乗}\bigr)\\
+&\ne-1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の標数は }0\bigr)\\
+&=(-1)^{1+0+0+0\cdot0}
+&&\bigl(\because\ (-1)^1=-1\bigr).
+\end{aligned}`),
+                paragraph([
+                  "となる。反例の原因は横断ではなく、二つの頂点で曲がる通過どうしが接していることである。全計算は有限トーラス、整数、代数的数だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

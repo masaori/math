@@ -2608,26 +2608,19 @@ x^\top W x
 \end{aligned}`),
         ],
         [
-          math(String.raw`v^\top Wv = u^\top Wu + 2u^\top W\varepsilon u
-+ (\varepsilon u)^\top W(\varepsilon u) \geq 2\,u^\top Wu`),
-          "。ここで ",
-          math(String.raw`u, \varepsilon u \geq 0`),
-          " と ",
-          math(String.raw`W_{kl} > 0`),
-          " より ",
-          math(String.raw`u^\top W\varepsilon u \geq 0`),
-          "、",
-          ref("sector_decomposition_of_rayleigh_sup"),
-          " (1) の ",
-          math(String.raw`\varepsilon W = W\varepsilon`),
-          " と ",
-          math(String.raw`\varepsilon^\top = \varepsilon`),
-          "、",
-          math(String.raw`\varepsilon^2 = I`),
-          " より ",
-          math(String.raw`(\varepsilon u)^\top W(\varepsilon u)
-= u^\top\varepsilon W\varepsilon u = u^\top Wu`),
-          " を使った。",
+          displayMath(String.raw`\begin{aligned}
+v^\top Wv
+&=u^\top Wu+2u^\top W\varepsilon u+(\varepsilon u)^\top W(\varepsilon u)
+&&\left(\because\ v=u+\varepsilon u\text{ の展開と }W^\top=W\right)\\
+&=u^\top Wu+2u^\top W\varepsilon u+u^\top\varepsilon W\varepsilon u
+&&\left(\because\ \varepsilon^\top=\varepsilon\right)\\
+&=u^\top Wu+2u^\top W\varepsilon u+u^\top W\varepsilon^2u
+&&\left(\because\ \varepsilon W=W\varepsilon.\ \text{\cref{lab:sector_decomposition_of_rayleigh_sup}}\right)\\
+&=2u^\top Wu+2u^\top W\varepsilon u
+&&\left(\because\ \varepsilon^2=I\right)\\
+&\geq2u^\top Wu
+&&\left(\because\ u,\varepsilon u\geq0\text{ と }W_{kl}>0\text{ より }u^\top W\varepsilon u\geq0\right)
+\end{aligned}`),
         ],
       ]),
       paragraph([
