@@ -460,22 +460,47 @@ export default defineBlocks([
         " なる ",
         math(String.raw`q \neq 0`),
         " が取れる。",
+        math(String.raw`q \in \mathrm{im}\,\check{Q}_\epsilon`),
+        " なので ",
+        math(String.raw`q = \check{Q}_\epsilon x`),
+        " なる ",
+        math(String.raw`x`),
+        " が取れる。まず ",
+        math(String.raw`\check{Q}_\epsilon q = q`),
+        " を確かめる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon q
+&= \check{Q}_\epsilon\left(\check{Q}_\epsilon x\right)
+   \quad (\because q = \check{Q}_\epsilon x \text{ の置き方}) \\
+&= \check{Q}_\epsilon^{2}\,x
+   \quad (\because \text{行列積の結合則}) \\
+&= \check{Q}_\epsilon x
+   \quad (\because \text{check\_joint\_eigenspace\_decomposition (1) の冪等性 }
+   \check{Q}_\epsilon^2 = \check{Q}_\epsilon) \\
+&= q
+   \quad (\because q = \check{Q}_\epsilon x \text{ の置き方})
+\end{aligned}`,
+      ),
+      paragraph([
+        "次に ",
         ref("epsilon_anticommutes_with_check_Z_Y"),
         " (4) より ",
         math(String.raw`\varepsilon\check{Q}_\epsilon = \check{Q}_\epsilon\varepsilon`),
         " だから",
       ]),
       displayMath(
-        String.raw`\check{Q}_\epsilon\left(\varepsilon q\right)
-= \varepsilon\left(\check{Q}_\epsilon q\right)
-= \varepsilon q
-\quad \left(\because \text{check\_joint\_eigenspace\_decomposition (1) より }
-\check{Q}_\epsilon q = \check{Q}_\epsilon^2 x = \check{Q}_\epsilon x = q\right)`,
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon\left(\varepsilon q\right)
+&= \varepsilon\left(\check{Q}_\epsilon q\right)
+   \quad (\because \text{epsilon\_anticommutes\_with\_check\_Z\_Y (4) と行列積の結合則}) \\
+&= \varepsilon q
+   \quad (\because \text{上で示した } \check{Q}_\epsilon q = q)
+\end{aligned}`,
       ),
       paragraph([
-        "（",
-        math(String.raw`q = \check{Q}_\epsilon x`),
-        " と書いた。）よって ",
+        "よって ",
         math(String.raw`\varepsilon q \in \mathrm{im}\,\check{Q}_\epsilon = \mathbb{C}q`),
         " であり、",
         math(String.raw`\varepsilon q = \eta q`),

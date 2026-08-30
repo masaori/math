@@ -33,6 +33,13 @@ def straight(edge, successor):
     return (direction_number(successor) - direction_number(edge)) % 4 == 0
 
 
+def turn(edge, successor):
+    """一歩の回転数 τ（def_step_turning）。非後退接続だけに定義される。"""
+    difference = (direction_number(successor) - direction_number(edge)) % 4
+    assert difference in (0, 1, 3)
+    return ZZ(0) if difference == 0 else (ZZ(1) if difference == 1 else ZZ(-1))
+
+
 def crossing(L, walk, k, l):
     """添字 k, l の通過が横断するか（def_index_pair_crossing）。"""
     m = len(walk)
@@ -54,6 +61,7 @@ other_vertex_checks = 0
 smoothed_crossing_checks = 0
 other_vertex_crossing_checks = 0
 global_crossing_update_checks = 0
+turning_invariance_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -141,6 +149,18 @@ for L in range(1, 4):
                 assert (before_total + 1
                         == after_total + before_axis[0] + before_axis[1])
                 global_crossing_update_checks += 1
+                # 平滑化後の各出辺は非後退後続に属し τ が定義される
+                # （def_smoothed_cyclic_total_turning の確認）。
+                # 循環総回転数は平滑化で不変
+                # （claim_smoothing_cyclic_turning_invariance）。
+                for r in range(m):
+                    assert out_edge[r] in successors(L, oriented, walk[r])
+                before_turning = ZZ(sum(
+                    turn(walk[r], walk[(r + 1) % m]) for r in range(m)))
+                after_turning = ZZ(sum(
+                    turn(walk[r], out_edge[r]) for r in range(m)))
+                assert after_turning == before_turning
+                turning_invariance_checks += 1
                 for vertex in vertices:
                     if vertex == cross_vertex:
                         continue
@@ -178,9 +198,11 @@ assert non_isolated_pairs > 0
 assert smoothed_crossing_checks == crossing_pair_total
 assert other_vertex_crossing_checks > 0
 assert global_crossing_update_checks == crossing_pair_total
+assert turning_invariance_checks == crossing_pair_total
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
       f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
       f"{other_vertex_crossing_checks} other-vertex crossing invariance checks "
       f"and {global_crossing_update_checks} global crossing update checks "
+      f"and {turning_invariance_checks} turning invariance checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")

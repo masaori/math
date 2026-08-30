@@ -51496,6 +51496,183 @@ c(\gamma)+1
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_turning_invariance",
+        labels: [],
+        title: { text: "平滑化と循環総回転数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_smoothing_cyclic_turning_invariance",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_smoothed_cyclic_total_turning",
+                kind: "definition",
+                title: { text: "平滑化後の循環総回転数" },
+                labels: ["def_smoothed_cyclic_total_turning"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    ref("def_smoothing_straight_visit_count"), " の閉じた非後退辺列 ",
+                    math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "、横断する添字 ", math(String.raw`k<l`),
+                    "、平滑化後の出辺の族 ", math(String.raw`(\vec f_r)_{r\in I_m}`),
+                    " を取る。まず、任意の添字 ", math(String.raw`r\in I_m`), " について ",
+                    math(String.raw`\vec f_r\in\operatorname{Next}(\vec e_r)`),
+                    " であることを確認する（これにより各項の一歩の回転数 ",
+                    math(String.raw`\tau(\vec e_r,\vec f_r)`), " が定義される。",
+                    ref("def_step_turning"), "）。",
+                  ]),
+                  paragraph([
+                    math(String.raw`r`), " が ", math(String.raw`k`), " とも ",
+                    math(String.raw`l`), " とも異なる場合。",
+                    math(String.raw`\vec f_r=\vec e_{\sigma(r)}`), " であり、閉じた非後退辺列の通過は非後退接続なので ",
+                    math(String.raw`\vec e_{\sigma(r)}\in\operatorname{Next}(\vec e_r)`),
+                    "（", ref("def_closed_walk_passes"), "）。",
+                  ]),
+                  paragraph([
+                    math(String.raw`r=k`), " の場合。", math(String.raw`\vec f_k=\vec e_{\sigma(l)}`),
+                    " である。始点の条件は、",
+                    math(String.raw`\vec e_{\sigma(l)}\in\operatorname{Next}(\vec e_l)`),
+                    "（", ref("def_closed_walk_passes"), "）から ",
+                    math(String.raw`\operatorname{src}(\vec e_{\sigma(l)})=\operatorname{tgt}(\vec e_l)`),
+                    " であり、横断の頂点の一致 ",
+                    math(String.raw`\operatorname{tgt}(\vec e_l)=\operatorname{tgt}(\vec e_k)`),
+                    "（", ref("def_index_pair_crossing"), "）と合わせて ",
+                    math(String.raw`\operatorname{src}(\vec e_{\sigma(l)})=\operatorname{tgt}(\vec e_k)`),
+                    " が成り立つ。反転でないことは背理法で示す。もし ",
+                    math(String.raw`\vec e_{\sigma(l)}=\iota(\vec e_k)`), " ならば、",
+                    ref("claim_reversal_direction_shift"), " により ",
+                    math(String.raw`\operatorname{dir}(\vec e_{\sigma(l)})=\operatorname{dir}(\vec e_k)+2`),
+                    " であり、", ref("def_direction_axis"),
+                    " の四つの値の表から任意の方向番号 ", math(String.raw`d`), " について ",
+                    math(String.raw`\operatorname{ax}(d+2)=\operatorname{ax}(d)`), " なので ",
+                    math(String.raw`\operatorname{ax}(\operatorname{dir}(\vec e_{\sigma(l)}))=\operatorname{ax}(\operatorname{dir}(\vec e_k))`),
+                    "。一方、横断の直進性 ",
+                    math(String.raw`\tau(\vec e_l,\vec e_{\sigma(l)})=0`),
+                    "（", ref("def_transverse_crossing"), "）と ", ref("def_step_turning"),
+                    " から ",
+                    math(String.raw`\operatorname{dir}(\vec e_{\sigma(l)})=\operatorname{dir}(\vec e_l)`),
+                    " なので、",
+                    math(String.raw`\operatorname{ax}(\operatorname{dir}(\vec e_l))=\operatorname{ax}(\operatorname{dir}(\vec e_k))`),
+                    " となり、横断の軸の相違（", ref("def_transverse_crossing"),
+                    "）に反する。よって ",
+                    math(String.raw`\vec e_{\sigma(l)}\ne\iota(\vec e_k)`), " であり、",
+                    ref("def_nonbacktracking_successors"), " の二条件がそろって ",
+                    math(String.raw`\vec f_k\in\operatorname{Next}(\vec e_k)`), "。",
+                    math(String.raw`r=l`), " の場合も ", math(String.raw`k`), " と ",
+                    math(String.raw`l`), " を入れ替えて同様である。",
+                  ]),
+                  paragraph([
+                    "そこで、平滑化後の循環総回転数 ",
+                    math(String.raw`t_{\mathrm{sm}}(\gamma;k,l)\in\mathbb Z`), " を",
+                  ]),
+                  displayMath(String.raw`t_{\mathrm{sm}}(\gamma;k,l):=\sum_{r\in I_m}\tau(\vec e_r,\vec f_r)`),
+                  paragraph([
+                    "で定める。有限集合 ", math(String.raw`I_m`),
+                    " の上の整数の有限和なので、値は整数として定まる。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_smoothing_cyclic_turning_invariance",
+              kind: "claim",
+              title: { text: "横断の平滑化は循環総回転数を保つ" },
+              labels: ["claim_smoothing_cyclic_turning_invariance"],
+              habitat: "Z",
+              verification: ["sagemath/check/smoothing-straight-visit-count"],
+              lean: [
+                "Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance",
+                "Ising2DLambda.NecSuf.KacWard.two_point_preserved_sum_necSuf",
+                "Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                  "、横断する添字 ", math(String.raw`k<l`), " について、整数の等式",
+                ]),
+                displayMath(String.raw`t_{\mathrm{sm}}(\gamma;k,l)=t_{\circ}(\gamma)`),
+                paragraph([
+                  "が成り立つ（左辺は ", ref("def_smoothed_cyclic_total_turning"),
+                  "、右辺は ", ref("def_cyclic_total_turning"), "）。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "二つの準備をする。第一に、横断の直進性（",
+                  ref("def_index_pair_crossing"), " と ", ref("def_transverse_crossing"),
+                  " の最初の二条件）により ",
+                  math(String.raw`\tau(\vec e_k,\vec e_{\sigma(k)})=0`), " かつ ",
+                  math(String.raw`\tau(\vec e_l,\vec e_{\sigma(l)})=0`), " である。",
+                ]),
+                paragraph([
+                  "第二に、証明の中だけで使う略記 ",
+                  math(String.raw`S:=\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\in\mathbb Z`),
+                  " を置き、", math(String.raw`S=0`), " を示す。四つの接続 ",
+                  math(String.raw`\vec e_{\sigma(k)}\in\operatorname{Next}(\vec e_k)`), "、",
+                  math(String.raw`\vec e_{\sigma(l)}\in\operatorname{Next}(\vec e_k)`), "、",
+                  math(String.raw`\vec e_{\sigma(k)}\in\operatorname{Next}(\vec e_l)`), "、",
+                  math(String.raw`\vec e_{\sigma(l)}\in\operatorname{Next}(\vec e_l)`),
+                  " はすべて成り立つ（前二者と後二者の交換分は ",
+                  ref("def_smoothed_cyclic_total_turning"),
+                  " の確認、残りは ", ref("def_closed_walk_passes"), "）。そこで ",
+                  ref("claim_reconnection_turning_difference"), " を ",
+                  math(String.raw`\vec e=\vec e_k`), "、",
+                  math(String.raw`\vec e'=\vec e_l`), "、",
+                  math(String.raw`\vec f=\vec e_{\sigma(k)}`), "、",
+                  math(String.raw`\vec f'=\vec e_{\sigma(l)}`), " に適用すると",
+                ]),
+                displayMath(String.raw`\bigl(\tau(\vec e_k,\vec e_{\sigma(k)})+\tau(\vec e_l,\vec e_{\sigma(l)})\bigr)
+-\bigl(\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\bigr)\in\{-4,0,4\}`),
+                paragraph([
+                  "であり、第一の準備により最初の括弧は ", math(String.raw`0`),
+                  " なので ", math(String.raw`-S\in\{-4,0,4\}`), "、よって ",
+                  math(String.raw`S\in\{-4,0,4\}`),
+                  "（整数の符号反転はこの三元集合を保つ）。一方、一歩の回転数の値は ",
+                  math(String.raw`\{0,1,-1\}\subset\mathbb Z`), " の元なので（",
+                  ref("def_step_turning"), "）、二項の和として ",
+                  math(String.raw`-2\le S\le2`), " である。両者を満たす整数は ",
+                  math(String.raw`S=0`), " だけである。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\mathrm{sm}}(\gamma;k,l)
+&=\sum_{r\in I_m}\tau(\vec e_r,\vec f_r)
+&&\bigl(\because\ \blkref{def_smoothed_cyclic_total_turning}\bigr)\\
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}\tau(\vec e_r,\vec f_r)
+  +\bigl(\tau(\vec e_k,\vec f_k)+\tau(\vec e_l,\vec f_l)\bigr)
+&&\bigl(\because\ \text{有限和から }k,l\text{ の二項を分ける}\bigr)\\
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}\tau(\vec e_r,\vec e_{\sigma(r)})
+  +\bigl(\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\bigr)
+&&\bigl(\because\ \blkref{def_smoothing_straight_visit_count}\text{ の }\vec f_r\text{ の定義}\bigr)\\
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}\tau(\vec e_r,\vec e_{\sigma(r)})
+&&\bigl(\because\ \text{第二の準備 }S=0\text{ と整数の加法の単位元}\bigr)\\
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}\tau(\vec e_r,\vec e_{\sigma(r)})
+  +\bigl(\tau(\vec e_k,\vec e_{\sigma(k)})+\tau(\vec e_l,\vec e_{\sigma(l)})\bigr)
+&&\bigl(\because\ \text{第一の準備と整数の加法の単位元}\bigr)\\
+&=\sum_{r\in I_m}\tau(\vec e_r,\vec e_{\sigma(r)})
+&&\bigl(\because\ \text{分けた二項を戻す}\bigr)\\
+&=\sum_{r=1}^{m-1}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_m,\vec e_1)
+&&\bigl(\because\ \blkref{def_closed_walk_passes}\text{ の }\sigma\text{ の定義}\bigr)\\
+&=t(\gamma)+\tau(\vec e_m,\vec e_1)
+&&\bigl(\because\ \blkref{def_total_turning}\bigr)\\
+&=t_{\circ}(\gamma)
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "全過程は整数の加法だけで閉じ、実数体も複素数体も現れない。平滑化で失われる二つの直進の代わりに現れる二つの曲がりは、左回転と右回転が一つずつであり、打ち消し合う。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
