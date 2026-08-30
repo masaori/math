@@ -2,7 +2,7 @@
 
 **対象ラベル**: `claim_edge_simple_contact_split`
 
-追加の対象ラベル: `claim_contact_split_seam_parity`
+追加の対象ラベル: `claim_contact_split_seam_parity`, `claim_contact_split_turning_update`
 
 - 実行: `sage sagemath/check/edge-simple-contact-split/check.sage`
 - 状態: PASS（2026-08-30）
@@ -14,5 +14,6 @@
 
 さらに各接触点分割について、横・縦の切断線指示値の和が二本の閉歩道へ厳密に分かれること
 （偶奇の組の保存、`claim_contact_split_seam_parity`）と、循環総回転数のずれが
-$\{-4,0,4\}$ に収まりつつ零でない接触点が実在すること（回転数はこの分割で保存されない）を
-検査する。
+$\{-4,0,4\}$ に収まりつつ零でない接触点が実在すること（回転数はこの分割で保存されない）を検査する。
+ずれそのものは、元の二接続を再接続後の二接続へ置き換えた回転数差と一致すること
+（`claim_contact_split_turning_update`）も各接触点で検査する。

@@ -2120,12 +2120,17 @@ Z_j^*
         " である。よって",
       ]),
       displayMath(
-        String.raw`\check{n}_\mu^*
-= \left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)^*
-= \left(\check\psi_{M+1-\mu}\right)^*\left(\check\psi_\mu^\dagger\right)^*
-= \check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}
-= \check{n}_\mu
-\quad \left(\because (XW)^* = W^*X^* \text{ と (3)}\right)`,
+        String.raw`\begin{aligned}
+\check{n}_\mu^*
+&= \left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)^*
+&&\left(\because\ \text{def\_check\_fermi}\right)\\
+&= \left(\check\psi_{M+1-\mu}\right)^*\left(\check\psi_\mu^\dagger\right)^*
+&&\left(\because\ (XW)^*=W^*X^*\right)\\
+&= \check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}
+&&\left(\because\ \text{(3) とその転置共役}\right)\\
+&= \check{n}_\mu
+&&\left(\because\ \text{def\_check\_fermi}\right)
+\end{aligned}`,
       ),
       paragraph([
         ref("check_joint_eigenspace_decomposition"),
@@ -2142,25 +2147,39 @@ Z_j^*
         " (2) より互いに可換なので",
       ]),
       displayMath(
-        String.raw`\check{Q}_\epsilon^*
-= \left(R_1^{(\epsilon_1)}\cdots R_M^{(\epsilon_M)}\right)^*
-= \left(R_M^{(\epsilon_M)}\right)^*\cdots\left(R_1^{(\epsilon_1)}\right)^*
-= R_M^{(\epsilon_M)}\cdots R_1^{(\epsilon_1)}
-= R_1^{(\epsilon_1)}\cdots R_M^{(\epsilon_M)}
-= \check{Q}_\epsilon`,
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon^*
+&= \left(R_1^{(\epsilon_1)}\cdots R_M^{(\epsilon_M)}\right)^*
+&&\left(\because\ \text{check\_joint\_eigenspace\_decomposition}\right)\\
+&= \left(R_M^{(\epsilon_M)}\right)^*\cdots\left(R_1^{(\epsilon_1)}\right)^*
+&&\left(\because\ (XW)^*=W^*X^*\text{ の反復適用}\right)\\
+&= R_M^{(\epsilon_M)}\cdots R_1^{(\epsilon_1)}
+&&\left(\because\ \check n_\mu^*=\check n_\mu\text{ と }I^*=I\right)\\
+&= R_1^{(\epsilon_1)}\cdots R_M^{(\epsilon_M)}
+&&\left(\because\ \text{因子の可換性。check\_number\_operators\_commute (2)}\right)\\
+&= \check{Q}_\epsilon
+&&\left(\because\ \text{check\_joint\_eigenspace\_decomposition}\right)
+\end{aligned}`,
       ),
       paragraph([
-        "最後の等号で因子の可換性を使った。",
         ref("check_joint_eigenspace_decomposition"),
         " (1) の ",
         math(String.raw`\check{Q}_\epsilon^2 = \check{Q}_\epsilon`),
-        " と合わせて ",
-        math(String.raw`x^*\check{Q}_\epsilon x
-= x^*\check{Q}_\epsilon^*\check{Q}_\epsilon x
-= \left(\check{Q}_\epsilon x\right)^*\left(\check{Q}_\epsilon x\right)
-= \left\|\check{Q}_\epsilon x\right\|^2 \geq 0`),
-        "。",
+        " と合わせると",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+x^*\check{Q}_\epsilon x
+&=x^*\check{Q}_\epsilon^*\check{Q}_\epsilon x
+&&\left(\because\ \check{Q}_\epsilon^*=\check{Q}_\epsilon\text{ と }\check{Q}_\epsilon^2=\check{Q}_\epsilon\right)\\
+&=\left(\check{Q}_\epsilon x\right)^*\left(\check{Q}_\epsilon x\right)
+&&\left(\because\ (XW)^*=W^*X^*\right)\\
+&=\left\|\check{Q}_\epsilon x\right\|^2
+&&\left(\because\ \text{複素ベクトルのノルムの定義}\right)\\
+&\geq0
+&&\left(\because\ \text{実数の平方和は非負}\right)
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",

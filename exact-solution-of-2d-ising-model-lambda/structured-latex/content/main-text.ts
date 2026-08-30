@@ -52900,6 +52900,73 @@ t_{\circ}(\gamma_{\mathrm c})
             },
           },
         },
+        {
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_contact_split_turning_update",
+            focus: {
+              id: "kac_ward_claim_contact_split_turning_update",
+              kind: "claim",
+              title: { text: "接触点分割の循環総回転数のずれは交換した二接続の回転数差に等しい" },
+              labels: ["claim_contact_split_turning_update"],
+              habitat: "Z",
+              verification: ["sagemath/check/edge-simple-contact-split"],
+              lean: [
+                "Ising2DLambda.KacWard.contact_split_turning_update",
+                "Ising2DLambda.NecSuf.KacWard.two_point_sum_difference_necSuf",
+                "Ising2DLambda.KacWard.contact_split_turning_update_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  ref("claim_edge_simple_contact_split"), " と同じ仮定の下で、巡回後続写像を ",
+                  math(String.raw`\sigma`), " とすると、整数の等式",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
+={}&\bigl(\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\bigr)\\
+&-\bigl(\tau(\vec e_k,\vec e_{\sigma(k)})+\tau(\vec e_l,\vec e_{\sigma(l)})\bigr)
+\end{aligned}`),
+                paragraph([
+                  "が成り立つ（循環総回転数は ", ref("def_cyclic_total_turning"),
+                  "、一歩の回転数は ", ref("def_step_turning"), "）。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "証明の中だけで使う添字後続写像 ", math(String.raw`\nu:I_m\to I_m`), " を",
+                ]),
+                displayMath(String.raw`\nu(r):=\begin{cases}
+\sigma(l),&r=k,\\
+\sigma(k),&r=l,\\
+\sigma(r),&r\ne k,l
+\end{cases}`),
+                paragraph([
+                  "で置く。", ref("claim_edge_simple_contact_split"),
+                  " の二本の辺列は、添字区間 ", math(String.raw`(k,l]`),
+                  " とその補集合を、この後続写像で閉じたものである。従って",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
+&=\sum_{r\in I_m}\tau(\vec e_r,\vec e_{\nu(r)})
+  -\sum_{r\in I_m}\tau(\vec e_r,\vec e_{\sigma(r)})
+&&\bigl(\because\ \blkref{claim_smoothing_split_turning_sum}\text{ と同じ添字区間の有限和分割、}\blkref{def_cyclic_total_turning}\bigr)\\
+&=\left(\sum_{\substack{r\in I_m\\r\ne k,l}}\tau(\vec e_r,\vec e_{\sigma(r)})
+  +\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\right)\\
+&\quad-\left(\sum_{\substack{r\in I_m\\r\ne k,l}}\tau(\vec e_r,\vec e_{\sigma(r)})
+  +\tau(\vec e_k,\vec e_{\sigma(k)})+\tau(\vec e_l,\vec e_{\sigma(l)})\right)
+&&\bigl(\because\ \nu\text{ の置き方と有限和から }k,l\text{ の二項を分ける操作}\bigr)\\
+&=\bigl(\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\bigr)
+ -\bigl(\tau(\vec e_k,\vec e_{\sigma(k)})+\tau(\vec e_l,\vec e_{\sigma(l)})\bigr)
+&&\bigl(\because\ \mathbb Z\text{ の加法と減法}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        },
         ],
       },
     },

@@ -1633,6 +1633,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.contactSplitConnections_necSuf
   Ising2DLambda.KacWard.edgeSimpleContactSplitConnections
   Ising2DLambda.KacWard.edgeSimpleContactSplitConnections_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.two_point_sum_difference_necSuf
+  Ising2DLambda.KacWard.contact_split_turning_update
+  Ising2DLambda.KacWard.contact_split_turning_update_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

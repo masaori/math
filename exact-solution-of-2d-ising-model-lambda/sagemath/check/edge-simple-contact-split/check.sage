@@ -130,6 +130,9 @@ for walk in edge_simple_walks:
             # 循環総回転数は保存されない: ずれは claim_reconnection_turning_difference
             # の値域 {-4, 0, 4} を走り、零でない接触点が実在する。
             shift = total_turning(walk_a) + total_turning(walk_b) - total_turning(walk)
+            original_pair = turn(walk[k], walk[(k + 1) % m]) + turn(walk[l], walk[(l + 1) % m])
+            reconnected_pair = turn(walk[k], walk[(l + 1) % m]) + turn(walk[l], walk[(k + 1) % m])
+            assert shift == reconnected_pair - original_pair
             assert shift in (-4, 0, 4)
             if shift != 0:
                 turning_nonzero_shift_contacts += 1

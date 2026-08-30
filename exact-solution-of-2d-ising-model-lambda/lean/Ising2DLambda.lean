@@ -954,3 +954,5 @@ import Ising2DLambda.NecSuf.KacWard.EdgeSimpleReconnection
 import Ising2DLambda.KacWard.EdgeSimpleReconnection
 import Ising2DLambda.NecSuf.KacWard.ContactSplitConnections
 import Ising2DLambda.KacWard.EdgeSimpleContactSplit
+import Ising2DLambda.NecSuf.KacWard.ContactSplitTurningUpdate
+import Ising2DLambda.KacWard.ContactSplitTurningUpdate

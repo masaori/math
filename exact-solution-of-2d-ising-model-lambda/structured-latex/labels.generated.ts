@@ -25,6 +25,7 @@ export const ALL_LABELS = [
   "claim_const_embedding_prod",
   "claim_constant_plus_breaks_no_bond",
   "claim_contact_split_seam_parity",
+  "claim_contact_split_turning_update",
   "claim_critical_distance_squared_zero_iff_equal",
   "claim_critical_partition_value_mem_positive_cone",
   "claim_critical_point_lt_one",
