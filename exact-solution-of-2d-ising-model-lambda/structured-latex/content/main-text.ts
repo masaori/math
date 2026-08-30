@@ -49788,6 +49788,11 @@ C:=\{(a,b)\}
               labels: ["claim_permutation_sign_moved_orbit_product"],
               habitat: "Z",
               verification: ["sagemath/check/permutation-sign-moved-orbits"],
+              lean: [
+                "Ising2DLambda.KacWard.sign_movedEdgeOrbit_product",
+                "Ising2DLambda.NecSuf.KacWard.sign_eq_prod_of_disjoint_supports",
+                "Ising2DLambda.KacWard.sign_movedEdgeOrbit_product_from_necSuf",
+              ],
               statement: [
                 paragraph(["任意の ", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " について、"]),
                 displayMath(String.raw`\operatorname{sgn}(\varphi)
