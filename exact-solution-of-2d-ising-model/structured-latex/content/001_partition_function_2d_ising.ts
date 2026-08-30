@@ -14,9 +14,16 @@ export default defineBlocks([
     kind: "definition",
     origin: { path: "_old/typst/parts/001_2次元ising模型の分配関数/000_definition_格子サイズ.typ", ordinal: 1 },
     title: { text: "格子サイズ" },
-    labels: [],
+    labels: ["def_lattice_size"],
     statement: [
-      paragraph([math(String.raw`M, N \in \mathbb{N}`), " を格子のサイズとする。"]),
+      paragraph([
+        math(String.raw`M, N \in \mathbb{N}`),
+        " かつ ",
+        math(String.raw`M \geq 1,\ N \geq 1`),
+        " とし、",
+        math(String.raw`M, N`),
+        " を格子のサイズとする。",
+      ]),
     ],
     conversion: { status: "converted" },
   },
@@ -31,6 +38,10 @@ export default defineBlocks([
     labels: ["def_partition_function_2d_ising"],
     statement: [
       paragraph([
+        ref("def_lattice_size"),
+        " の格子サイズ ",
+        math(String.raw`M, N`),
+        " を固定する。",
         math(String.raw`Z : \mathbb{R}_{>0} \times \mathbb{R}_{>0} \to \mathbb{R}_{>0}`),
         " を以下のように定める。",
       ]),
@@ -90,6 +101,8 @@ export default defineBlocks([
     labels: ["def_transfer_matrix"],
     statement: [
       paragraph([
+        math(String.raw`J, J' \in \mathbb{R}_{>0}`),
+        " を固定し、",
         math(String.raw`V_1, V_2 \in \mathrm{Mat}(2^N, \mathbb{C})`),
         " を以下のように定める。",
       ]),

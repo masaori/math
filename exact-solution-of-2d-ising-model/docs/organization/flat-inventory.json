@@ -12,9 +12,9 @@
     "2次元イジングモデル"
   ],
   "classificationStatus": "全項目の分類・説明粒度・ブロック境界を再検証し、章内依存順と数学的道具立ての分類群を確定済み。",
-  "entryCount": 276,
+  "entryCount": 277,
   "chapterEntryCounts": {
-    "数学的道具立て": 107,
+    "数学的道具立て": 108,
     "2次元イジングモデル": 169
   },
   "mathematicalToolGroups": [
@@ -181,6 +181,7 @@
         "TV1_hatZ_hatY_011_definition_T_g",
         "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar",
         "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
+        "TV1_hatZ_hatY_definition_pauli_group",
         "TV1_hatZ_hatY_010_definition_clifford_group"
       ]
     },
@@ -327,10 +328,99 @@
       "mainTheoremEntryId": "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
       "boundaryEvidence": "章内依存順の連続する四項であり、可逆元の定義から共役写像の定義と可逆行列全体の可換元の特徴付けへ進み、両者を使う定数倍を除いた単射性の主定理で節を閉じる。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末出力の一意性を生成時に固定検査する。",
       "readabilityStatus": "四項とも複素数と有限行列の具体的な計算で書かれ、現行の説明粒度検査に合格している。未定義だった特性多項式・固有値・行列式による可逆化を削除し、明示的な逆行列をもつ行列単位の摂動だけを使う証明へ置き換えた。"
+    },
+    {
+      "name": "Pauli 行列と共役で保たれる行列群",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+        "TV1_hatZ_hatY_definition_pauli_group",
+        "TV1_hatZ_hatY_010_definition_clifford_group"
+      ],
+      "input": [
+        "複素数と二次の複素行列の成分表示および行列積",
+        "具体的なクロネッカー積の積と多重線型性",
+        "有限複素行列の可逆元と逆行列"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_003_matrix_decomposition",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000c_claim_kronecker_multilinear",
+        "TV1_hatZ_hatY_009_definition_invertible_elements"
+      ],
+      "output": [
+        "三つの Pauli 行列の平方と相互の反可換性を成分で確かめる積公式",
+        "Pauli 行列のクロネッカー積と四乗根の係数からなる有限な行列群の定義",
+        "その行列群を共役で保つ可逆行列全体の定義"
+      ],
+      "mainTheorem": null,
+      "mainTheoremEntryId": null,
+      "concludingDefinition": "Pauli 行列群を共役で保つ可逆行列全体",
+      "concludingDefinitionEntryId": "TV1_hatZ_hatY_010_definition_clifford_group",
+      "boundaryEvidence": "章内依存順の連続する三項であり、Pauli 行列の積公式から多因子の Pauli 行列群を定め、その行列群を共役で保つ可逆行列全体の定義へ閉じる。直後の一因子反可換性はこの行列群を使わず、外部入力も可逆元を含まない独立した帰結なので別節とする。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末定義の一意性を生成時に固定検査する。",
+      "readabilityStatus": "Pauli 行列群とクリフォード行列群を別ブロックへ分け、後者からイジング模型固有の V_2 による導入理由を除いた。二つの行列群について群の閉性を具体的な行列計算へさらに展開する余地があるため、本文完成とは扱わない。"
+    },
+    {
+      "name": "一因子の反可換性から得るクロネッカー積の反交換",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
+      ],
+      "input": [
+        "複素数と二次の複素行列",
+        "具体的なクロネッカー積の積と各因子についての多重線型性",
+        "一つの因子での反可換性と残りの因子での可換性"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000c_claim_kronecker_multilinear"
+      ],
+      "output": [
+        "一因子だけの負号がクロネッカー積全体の負号となり、二つの多因子行列が反交換する公式"
+      ],
+      "mainTheorem": "一因子だけ反可換で他の因子が可換なら、二つのクロネッカー積は反交換する",
+      "mainTheoremEntryId": "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
+      "boundaryEvidence": "直前の行列群の定義に依存せず、クロネッカー積の積と多重線型性だけを外部入力として一つの主張へ閉じる独立した葉である。したがって行列群の節へ混ぜず、一項の節として確定する。外部入力とその本文 fingerprint、本文 fingerprint、節末出力の一意性を生成時に固定検査する。",
+      "readabilityStatus": "二次の複素行列とクロネッカー積の積を一因子ずつ書いた具体的な計算であり、現行の説明粒度検査に合格している。"
+    }
+  ],
+  "isingModelSectionBoundaries": [
+    {
+      "name": "格子と転送行列の定義",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "partition_function_2d_ising_001_definition_lattice_size",
+        "partition_function_2d_ising_002_definition_partition_function",
+        "partition_function_2d_ising_003_definition_transfer_matrix"
+      ],
+      "input": [
+        "自然数と実数・複素数の集合記号",
+        "有限複素行列の成分表示"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc"
+      ],
+      "output": [
+        "格子の縦横の大きさ",
+        "周期境界条件をもつ2次元イジング模型の分配関数",
+        "一行分のスピン配置を添え字とする二つの転送行列"
+      ],
+      "concludingDefinition": "2次元イジング模型の分配関数を行列積へ移すための転送行列",
+      "concludingDefinitionEntryId": "partition_function_2d_ising_003_definition_transfer_matrix",
+      "boundaryEvidence": "章内依存順の連続する三項であり、格子サイズを分配関数が意味的前提として明示し、分配関数を転送行列が周期境界条件の参照先として使う。格子サイズから転送行列までが模型の有限サイズ表現を定め、次の転送行列による分配関数の表式へ入力を渡すため、三つの定義で最初の節を閉じる。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末定義の一意性を生成時に固定検査する。",
+      "readabilityStatus": "三項とも有限集合、有限和、有限複素行列の成分として具体的に定義され、現行の説明粒度検査に合格している。"
     }
   ],
   "explanationGranularityReview": {
-    "reviewedEntryCount": 276,
+    "reviewedEntryCount": 277,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
       "calc_formulae_005_matrix_conjugation",
@@ -366,6 +456,7 @@
       "TV1_hatZ_hatY_002_claim_nesting_commutator",
       "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion",
       "TV1_hatZ_hatY_006_claim_exp_conjugation",
+      "TV1_hatZ_hatY_definition_pauli_group",
       "TV1_hatZ_hatY_010_definition_clifford_group",
       "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group",
       "TV1_hatZ_hatY_031_claim_V_psi_commutator",
@@ -383,13 +474,13 @@
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
-    "inspectedEntryCount": 107,
+    "inspectedEntryCount": 108,
     "contaminatedEntryIds": []
   },
   "chapterStructures": [
     {
       "chapter": "数学的道具立て",
-      "entryCount": 107,
+      "entryCount": 108,
       "dependencyDirection": "prerequisite から dependent へ",
       "topologicalOrder": [
         {
@@ -1130,12 +1221,19 @@
         {
           "order": 106,
           "entryIds": [
-            "TV1_hatZ_hatY_010_definition_clifford_group"
+            "TV1_hatZ_hatY_definition_pauli_group"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 107,
+          "entryIds": [
+            "TV1_hatZ_hatY_010_definition_clifford_group"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 108,
           "entryIds": [
             "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
           ],
@@ -4373,7 +4471,6 @@
     "calc_formulae_000_cosh_sinh_product",
     "calc_formulae_004_action_on_matrix_pair",
     "calc_formulae_009_sqrt_minus_one",
-    "partition_function_2d_ising_001_definition_lattice_size",
     "transfer_matrix_011_definition_H1_H2",
     "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor",
     "TV1_hatZ_hatY_013_definition_product_maps",
@@ -7737,14 +7834,16 @@
       "kind": "definition",
       "title": "格子サイズ",
       "titleFormat": "text",
-      "labels": [],
+      "labels": [
+        "def_lattice_size"
+      ],
       "sourceFile": "001_partition_function_2d_ising.ts",
       "sourceOrdinal": 1,
       "provisionalFinalChapter": "2次元イジングモデル",
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 0,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [
           "格子"
         ],
@@ -7755,8 +7854,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 159,
-        "inspectedContentSha256": "a5a7b89d63ad624d691d4049ba3412ce5cd79a9c173c39c219d32e9ec09d8da6",
+        "inspectedCharacterCount": 297,
+        "inspectedContentSha256": "14296f06180cee80476d2042b80f8f3a4b68121b3e8e19b8adf0b2eb6193189a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7811,8 +7910,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1764,
-        "inspectedContentSha256": "0992f3c11e0da4b69ede814a73ec11ffca27a77492cb7bb616b8651407aea2a7",
+        "inspectedCharacterCount": 1905,
+        "inspectedContentSha256": "74bec1b8de279c13b6254833510bea1c16ba66f36a13323c7c2e75cbc97cfbcb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7822,10 +7921,12 @@
         "manualReview": null
       },
       "dependsOnLabels": [
+        "def_lattice_size",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation"
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "partition_function_2d_ising_001_definition_lattice_size"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation"
@@ -7867,8 +7968,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2622,
-        "inspectedContentSha256": "ea21495695f2bbb60ba2f814485213383d93796f5637029aec2014db36d7e8ce",
+        "inspectedCharacterCount": 2707,
+        "inspectedContentSha256": "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10910,7 +11011,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 107,
+        "chapterOrder": 108,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
         ]
@@ -11488,12 +11589,76 @@
       }
     },
     {
-      "id": "TV1_hatZ_hatY_010_definition_clifford_group",
+      "id": "TV1_hatZ_hatY_definition_pauli_group",
       "kind": "definition",
-      "title": "パウリ群・クリフォード群",
+      "title": "パウリ行列群",
       "titleFormat": "text",
       "labels": [
-        "def_pauli_group",
+        "def_pauli_group"
+      ],
+      "sourceFile": "008_TV1_hatZ_hatY_part1.ts",
+      "sourceOrdinal": 10,
+      "provisionalFinalChapter": "数学的道具立て",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": true,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
+      },
+      "explanationGranularityReview": {
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [
+          "群の一般論"
+        ],
+        "inspectedCharacterCount": 1686,
+        "inspectedContentSha256": "251f5e6d1a38e2b6eaf8eae4413d9b498ca0857207dc8918481a680a38064c7b",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "definition_of_cc",
+        "kronecker_multilinear",
+        "kronecker_product_rule",
+        "pauli_matrix_products",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000c_claim_kronecker_multilinear"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "dependencyPlacement": {
+        "chapterOrder": 106,
+        "dependencyUnitEntryIds": [
+          "TV1_hatZ_hatY_definition_pauli_group"
+        ]
+      }
+    },
+    {
+      "id": "TV1_hatZ_hatY_010_definition_clifford_group",
+      "kind": "definition",
+      "title": "クリフォード行列群",
+      "titleFormat": "text",
+      "labels": [
         "def_clifford_group"
       ],
       "sourceFile": "008_TV1_hatZ_hatY_part1.ts",
@@ -11513,8 +11678,8 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 4560,
-        "inspectedContentSha256": "4a2036ef682a54f265f5695dda3a70dc0d6a06aed1a2810287e69ea87b40dd28",
+        "inspectedCharacterCount": 2470,
+        "inspectedContentSha256": "1196412a13aedcd3b42b2e18886fabb2e4cbe482e6bc9a8beb78c0bfa5d18c92",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11525,19 +11690,15 @@
       },
       "dependsOnLabels": [
         "def_invertible_elements_of_R",
+        "def_pauli_group",
         "definition_of_cc",
-        "kronecker_multilinear",
-        "kronecker_product_rule",
-        "pauli_matrix_products",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "TV1_hatZ_hatY_009_definition_invertible_elements",
-        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+        "TV1_hatZ_hatY_definition_pauli_group",
         "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "linear_space_general_000b_claim_kronecker_product_rule",
-        "linear_space_general_000c_claim_kronecker_multilinear"
+        "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
@@ -11549,7 +11710,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 106,
+        "chapterOrder": 107,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_010_definition_clifford_group"
         ]
@@ -18688,8 +18849,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10355,
-        "inspectedContentSha256": "b6568259ba2319787a4bbbfe4bd2362dd6a612b711e33fd38c1970d18a3ec157",
+        "inspectedCharacterCount": 10711,
+        "inspectedContentSha256": "21183a87f47eb205ebf1ec1bc328179dad968843eb8bdc1b79a8c67b86ccc202",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18897,8 +19058,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4702,
-        "inspectedContentSha256": "08ac3b12bb920c31f8e4866260b97922fb0fc0dc1e01826532eb5475f2875b74",
+        "inspectedCharacterCount": 4994,
+        "inspectedContentSha256": "397bce8b37357e99f68f91e4629b72336006eb22ed47e1876e3ffd6ed8b57757",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

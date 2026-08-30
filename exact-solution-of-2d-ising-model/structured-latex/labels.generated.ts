@@ -122,6 +122,7 @@ export const ALL_LABELS = [
   "def_invertible_elements_of_R",
   "def_kappa_and_A",
   "def_kronecker",
+  "def_lattice_size",
   "def_matrix_norm",
   "def_number_operator",
   "def_partition_function_2d_ising",

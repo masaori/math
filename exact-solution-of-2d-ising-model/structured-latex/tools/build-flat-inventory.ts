@@ -35,6 +35,7 @@ const mathematicalToolEntryIdsOutsideToolFiles = new Set([
   "TV1_hatZ_hatY_011_definition_T_g",
   "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar",
   "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
+  "TV1_hatZ_hatY_definition_pauli_group",
   "transfer_matrix_005_definition_end_isomorphism",
   "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
   "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
@@ -157,6 +158,89 @@ const invertibleMatrixConjugationExpectedExternalInputContentSha256 = new Map<st
   ["linear_space_general_001_theorem_tensor_product_basis", "59e2b9e24e79916e00dfe666d29bdee556ea3479b16e89d9912457ff3bea0609"],
   ["linear_space_general_002_claim_scalar_identity_commutes", "dac86df17efd7a9fb3cc6421cdb38343493e285c3b2ff479207ad72e26fba1d5"],
   ["linear_space_general_004_lemma_centralizer_is_scalar", "a1e7706dec1460c8b6da421c8f57cd5e62eb65328f76a3320022d946f3e39573"],
+]);
+const pauliAndCliffordMatrixGroupsSectionEntryIds = [
+  "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+  "TV1_hatZ_hatY_definition_pauli_group",
+  "TV1_hatZ_hatY_010_definition_clifford_group",
+] as const;
+const pauliAndCliffordMatrixGroupsExpectedInternalDependencies = new Map<string, string[]>([
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", []],
+  ["TV1_hatZ_hatY_definition_pauli_group", [
+    "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+  ]],
+  ["TV1_hatZ_hatY_010_definition_clifford_group", [
+    "TV1_hatZ_hatY_definition_pauli_group",
+  ]],
+]);
+const pauliAndCliffordMatrixGroupsExpectedContentSha256 = new Map<string, string>([
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "ab5911db8fb6a45aa867b393ea6ca15fc940c988a13e4f86a8678d1c8ed2111d"],
+  ["TV1_hatZ_hatY_definition_pauli_group", "251f5e6d1a38e2b6eaf8eae4413d9b498ca0857207dc8918481a680a38064c7b"],
+  ["TV1_hatZ_hatY_010_definition_clifford_group", "1196412a13aedcd3b42b2e18886fabb2e4cbe482e6bc9a8beb78c0bfa5d18c92"],
+]);
+const pauliAndCliffordMatrixGroupsExpectedExternalInputEntryIds = [
+  "TV1_hatZ_hatY_009_definition_invertible_elements",
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_000b_claim_kronecker_product_rule",
+  "linear_space_general_000c_claim_kronecker_multilinear",
+].sort();
+const pauliAndCliffordMatrixGroupsExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["calc_formulae_003_matrix_decomposition", "a97a47798c1376adfb7b1536fdbb7d39f2a0953080fdf0177149de1f7ba89200"],
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["linear_space_general_000b_claim_kronecker_product_rule", "59404eda021b5d904e2248530a586d168aea7d32d03451a45a17bb2f8b583a21"],
+  ["linear_space_general_000c_claim_kronecker_multilinear", "e06631c60e429b8e755520b8069138cab273e66c4946ec5a46c83dc4293738a7"],
+  ["TV1_hatZ_hatY_009_definition_invertible_elements", "31432b10d571100575fc2bddf157032908bf0996d21d3f77860b0dc613fd7533"],
+]);
+const singleFactorAnticommutationSectionEntryIds = [
+  "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
+] as const;
+const singleFactorAnticommutationExpectedInternalDependencies = new Map<string, string[]>([
+  ["Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site", []],
+]);
+const singleFactorAnticommutationExpectedContentSha256 = new Map<string, string>([
+  ["Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site", "f42f08b0069e29f6a2d4f3bab84d74e99a05fff95103e09a81d06a1581c8a27b"],
+]);
+const singleFactorAnticommutationExpectedExternalInputEntryIds = [
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_000b_claim_kronecker_product_rule",
+  "linear_space_general_000c_claim_kronecker_multilinear",
+].sort();
+const singleFactorAnticommutationExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["linear_space_general_000b_claim_kronecker_product_rule", "59404eda021b5d904e2248530a586d168aea7d32d03451a45a17bb2f8b583a21"],
+  ["linear_space_general_000c_claim_kronecker_multilinear", "e06631c60e429b8e755520b8069138cab273e66c4946ec5a46c83dc4293738a7"],
+]);
+const isingModelDefinitionSectionEntryIds = [
+  "partition_function_2d_ising_001_definition_lattice_size",
+  "partition_function_2d_ising_002_definition_partition_function",
+  "partition_function_2d_ising_003_definition_transfer_matrix",
+] as const;
+const isingModelDefinitionExpectedInternalDependencies = new Map<string, string[]>([
+  ["partition_function_2d_ising_001_definition_lattice_size", []],
+  ["partition_function_2d_ising_002_definition_partition_function", [
+    "partition_function_2d_ising_001_definition_lattice_size",
+  ]],
+  ["partition_function_2d_ising_003_definition_transfer_matrix", [
+    "partition_function_2d_ising_002_definition_partition_function",
+  ]],
+]);
+const isingModelDefinitionExpectedContentSha256 = new Map<string, string>([
+  ["partition_function_2d_ising_001_definition_lattice_size", "14296f06180cee80476d2042b80f8f3a4b68121b3e8e19b8adf0b2eb6193189a"],
+  ["partition_function_2d_ising_002_definition_partition_function", "74bec1b8de279c13b6254833510bea1c16ba66f36a13323c7c2e75cbc97cfbcb"],
+  ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
+]);
+const isingModelDefinitionExpectedExternalInputEntryIds = [
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+].sort();
+const isingModelDefinitionExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
 ]);
 const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_006_definition_of_cc", new Set(["abs_basic_properties", "matrix_exp_series_converges"])],
@@ -512,6 +596,102 @@ for (const id of invertibleMatrixConjugationExternalInputEntryIds) {
     throw new Error(`可逆行列と共役写像の節候補の外部入力本文が変わりました: ${id}`);
   }
 }
+function validateReviewedSection(
+  sectionName: string,
+  expectedChapter: FinalChapter,
+  sectionEntryIds: readonly string[],
+  expectedInternalDependencies: Map<string, string[]>,
+  expectedContentSha256: Map<string, string>,
+  expectedExternalInputEntryIds: string[],
+  expectedExternalInputContentSha256: Map<string, string>,
+  expectedTerminalEntryIds: string[],
+) {
+  const sectionIdSet = new Set(sectionEntryIds);
+  const sectionEntries = sectionEntryIds.map((id) => {
+    const entry = entries.find((candidate) => candidate.id === id);
+    if (entry === undefined) throw new Error(`${sectionName}の節候補に必要な項目がありません: ${id}`);
+    if (entry.provisionalFinalChapter !== expectedChapter) {
+      throw new Error(`${sectionName}の節候補が${expectedChapter}にありません: ${id}`);
+    }
+    const actualInternalDependencies = entry.dependsOnEntryIds
+      .filter((dependencyId) => sectionIdSet.has(dependencyId))
+      .sort();
+    const expected = [...expectedInternalDependencies.get(id)!].sort();
+    if (JSON.stringify(actualInternalDependencies) !== JSON.stringify(expected)) {
+      throw new Error(`${sectionName}の節候補の内部依存辺が変わりました: ${id}: ${JSON.stringify(actualInternalDependencies)}`);
+    }
+    if (entry.explanationGranularityReview.inspectedContentSha256 !== expectedContentSha256.get(id)) {
+      throw new Error(`${sectionName}の節候補のレビュー済み本文が変わりました: ${id}`);
+    }
+    return entry;
+  });
+  const sectionOrders = sectionEntries.map((entry) => entry.dependencyPlacement!.chapterOrder);
+  if (!sectionOrders.every((chapterOrder, index) =>
+    index === 0 || chapterOrder === sectionOrders[index - 1]! + 1)) {
+    throw new Error(`${sectionName}の節候補が章内依存順の連続区間ではありません: ${JSON.stringify(sectionOrders)}`);
+  }
+  const internalDependencyTargets = new Set([...expectedInternalDependencies.values()].flat());
+  const terminalEntryIds = sectionEntryIds.filter((id) => !internalDependencyTargets.has(id));
+  if (JSON.stringify(terminalEntryIds) !== JSON.stringify(expectedTerminalEntryIds)) {
+    throw new Error(`${sectionName}の節候補が期待する節末出力へ閉じていません: ${JSON.stringify(terminalEntryIds)}`);
+  }
+  const externalInputEntryIds = [...new Set(
+    sectionEntries.flatMap((entry) => entry.dependsOnEntryIds)
+      .filter((id) => !sectionIdSet.has(id)),
+  )].sort((a, b) => order.get(a)!.chapterOrder - order.get(b)!.chapterOrder);
+  if (JSON.stringify([...externalInputEntryIds].sort()) !== JSON.stringify(expectedExternalInputEntryIds)) {
+    throw new Error(`${sectionName}の節候補の外部入力が変わりました: ${JSON.stringify(externalInputEntryIds)}`);
+  }
+  for (const id of externalInputEntryIds) {
+    const entry = entries.find((candidate) => candidate.id === id)!;
+    if (entry.explanationGranularityReview.inspectedContentSha256 !== expectedExternalInputContentSha256.get(id)) {
+      throw new Error(`${sectionName}の節候補の外部入力本文が変わりました: ${id}`);
+    }
+  }
+  return { sectionEntries, externalInputEntryIds };
+}
+const pauliAndCliffordMatrixGroupsSection = validateReviewedSection(
+  "Pauli 行列と共役で保たれる行列群",
+  "数学的道具立て",
+  pauliAndCliffordMatrixGroupsSectionEntryIds,
+  pauliAndCliffordMatrixGroupsExpectedInternalDependencies,
+  pauliAndCliffordMatrixGroupsExpectedContentSha256,
+  pauliAndCliffordMatrixGroupsExpectedExternalInputEntryIds,
+  pauliAndCliffordMatrixGroupsExpectedExternalInputContentSha256,
+  ["TV1_hatZ_hatY_010_definition_clifford_group"],
+);
+const singleFactorAnticommutationSection = validateReviewedSection(
+  "一因子の反可換性から得るクロネッカー積の反交換",
+  "数学的道具立て",
+  singleFactorAnticommutationSectionEntryIds,
+  singleFactorAnticommutationExpectedInternalDependencies,
+  singleFactorAnticommutationExpectedContentSha256,
+  singleFactorAnticommutationExpectedExternalInputEntryIds,
+  singleFactorAnticommutationExpectedExternalInputContentSha256,
+  ["Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"],
+);
+const isingModelDefinitionSection = validateReviewedSection(
+  "格子と転送行列の定義",
+  "2次元イジングモデル",
+  isingModelDefinitionSectionEntryIds,
+  isingModelDefinitionExpectedInternalDependencies,
+  isingModelDefinitionExpectedContentSha256,
+  isingModelDefinitionExpectedExternalInputEntryIds,
+  isingModelDefinitionExpectedExternalInputContentSha256,
+  ["partition_function_2d_ising_003_definition_transfer_matrix"],
+);
+const isingModelDefinitionExpectedChapterOrders = [1, 2, 3];
+const isingModelDefinitionActualChapterOrders = isingModelDefinitionSection.sectionEntries
+  .map((entry) => entry.dependencyPlacement!.chapterOrder);
+if (JSON.stringify(isingModelDefinitionActualChapterOrders) !== JSON.stringify(isingModelDefinitionExpectedChapterOrders)) {
+  throw new Error(`格子と転送行列の定義が章内依存順1–3ではありません: ${JSON.stringify(isingModelDefinitionActualChapterOrders)}`);
+}
+const isingModelDefinitionUnexpectedGranularity = isingModelDefinitionSection.sectionEntries
+  .filter((entry) => entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  .map(({ id }) => id);
+if (isingModelDefinitionUnexpectedGranularity.length > 0) {
+  throw new Error(`格子と転送行列の定義に説明粒度未確認の項目があります: ${isingModelDefinitionUnexpectedGranularity.join(", ")}`);
+}
 const mathematicalToolSectionBoundaries = [{
   name: "行列指数関数による共役の級数公式",
   chapter: "数学的道具立て",
@@ -578,12 +758,72 @@ const mathematicalToolSectionBoundaries = [{
   mainTheoremEntryId: "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
   boundaryEvidence: "章内依存順の連続する四項であり、可逆元の定義から共役写像の定義と可逆行列全体の可換元の特徴付けへ進み、両者を使う定数倍を除いた単射性の主定理で節を閉じる。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末出力の一意性を生成時に固定検査する。",
   readabilityStatus: "四項とも複素数と有限行列の具体的な計算で書かれ、現行の説明粒度検査に合格している。未定義だった特性多項式・固有値・行列式による可逆化を削除し、明示的な逆行列をもつ行列単位の摂動だけを使う証明へ置き換えた。",
+}, {
+  name: "Pauli 行列と共役で保たれる行列群",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度未解決",
+  entryIds: pauliAndCliffordMatrixGroupsSectionEntryIds,
+  input: [
+    "複素数と二次の複素行列の成分表示および行列積",
+    "具体的なクロネッカー積の積と多重線型性",
+    "有限複素行列の可逆元と逆行列",
+  ],
+  externalInputEntryIds: pauliAndCliffordMatrixGroupsSection.externalInputEntryIds,
+  output: [
+    "三つの Pauli 行列の平方と相互の反可換性を成分で確かめる積公式",
+    "Pauli 行列のクロネッカー積と四乗根の係数からなる有限な行列群の定義",
+    "その行列群を共役で保つ可逆行列全体の定義",
+  ],
+  mainTheorem: null,
+  mainTheoremEntryId: null,
+  concludingDefinition: "Pauli 行列群を共役で保つ可逆行列全体",
+  concludingDefinitionEntryId: "TV1_hatZ_hatY_010_definition_clifford_group",
+  boundaryEvidence: "章内依存順の連続する三項であり、Pauli 行列の積公式から多因子の Pauli 行列群を定め、その行列群を共役で保つ可逆行列全体の定義へ閉じる。直後の一因子反可換性はこの行列群を使わず、外部入力も可逆元を含まない独立した帰結なので別節とする。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末定義の一意性を生成時に固定検査する。",
+  readabilityStatus: "Pauli 行列群とクリフォード行列群を別ブロックへ分け、後者からイジング模型固有の V_2 による導入理由を除いた。二つの行列群について群の閉性を具体的な行列計算へさらに展開する余地があるため、本文完成とは扱わない。",
+}, {
+  name: "一因子の反可換性から得るクロネッカー積の反交換",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: singleFactorAnticommutationSectionEntryIds,
+  input: [
+    "複素数と二次の複素行列",
+    "具体的なクロネッカー積の積と各因子についての多重線型性",
+    "一つの因子での反可換性と残りの因子での可換性",
+  ],
+  externalInputEntryIds: singleFactorAnticommutationSection.externalInputEntryIds,
+  output: [
+    "一因子だけの負号がクロネッカー積全体の負号となり、二つの多因子行列が反交換する公式",
+  ],
+  mainTheorem: "一因子だけ反可換で他の因子が可換なら、二つのクロネッカー積は反交換する",
+  mainTheoremEntryId: "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
+  boundaryEvidence: "直前の行列群の定義に依存せず、クロネッカー積の積と多重線型性だけを外部入力として一つの主張へ閉じる独立した葉である。したがって行列群の節へ混ぜず、一項の節として確定する。外部入力とその本文 fingerprint、本文 fingerprint、節末出力の一意性を生成時に固定検査する。",
+  readabilityStatus: "二次の複素行列とクロネッカー積の積を一因子ずつ書いた具体的な計算であり、現行の説明粒度検査に合格している。",
+}];
+const isingModelSectionBoundaries = [{
+  name: "格子と転送行列の定義",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: isingModelDefinitionSectionEntryIds,
+  input: [
+    "自然数と実数・複素数の集合記号",
+    "有限複素行列の成分表示",
+  ],
+  externalInputEntryIds: isingModelDefinitionSection.externalInputEntryIds,
+  output: [
+    "格子の縦横の大きさ",
+    "周期境界条件をもつ2次元イジング模型の分配関数",
+    "一行分のスピン配置を添え字とする二つの転送行列",
+  ],
+  concludingDefinition: "2次元イジング模型の分配関数を行列積へ移すための転送行列",
+  concludingDefinitionEntryId: "partition_function_2d_ising_003_definition_transfer_matrix",
+  boundaryEvidence: "章内依存順の連続する三項であり、格子サイズを分配関数が意味的前提として明示し、分配関数を転送行列が周期境界条件の参照先として使う。格子サイズから転送行列までが模型の有限サイズ表現を定め、次の転送行列による分配関数の表式へ入力を渡すため、三つの定義で最初の節を閉じる。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末定義の一意性を生成時に固定検査する。",
+  readabilityStatus: "三項とも有限集合、有限和、有限複素行列の成分として具体的に定義され、現行の説明粒度検査に合格している。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
   ["三角関数の評価・有限和・積分", /^(critical_008|critical_009|critical_010|freeenergy_004)/],
   ["トレース・共役転置・正定値性", /^eigenvalues_of_V_|^maxeig_005|frobenius|exp_conjugation_proof_003/],
-  ["可逆行列・線型写像との対応・共役変換", /^transfer_matrix_005|^transfer_matrix_claim_end_|^TV1_hatZ_hatY_011|^TV1_hatZ_hatY_009|^TV1_hatZ_hatY_010|exp_conjugation_proof_005|^calculation_formulae_046/],
+  ["可逆行列・線型写像との対応・共役変換", /^transfer_matrix_005|^transfer_matrix_claim_end_|^TV1_hatZ_hatY_011|^TV1_hatZ_hatY_009|^TV1_hatZ_hatY_010|^TV1_hatZ_hatY_definition_pauli_group|exp_conjugation_proof_005|^calculation_formulae_046/],
   ["行列指数関数と交換子計算", /^exp_linear_map_|exp_conjugation_proof_(004|008|010)|^bridge_003|^TV1_hatZ_hatY_004/],
   ["数ベクトル・行列の長さと収束", /^linear_space_general_00(2b|2c|3|3b|3c|3d)/],
   ["クロネッカー積と多因子基底", /^linear_space_general_000|^linear_space_general_001/],
@@ -636,6 +876,7 @@ const inventory = {
   chapterEntryCounts: Object.fromEntries(finalChapters.map((chapter) => [chapter, entries.filter((entry) => entry.provisionalFinalChapter === chapter).length])),
   mathematicalToolGroups,
   mathematicalToolSectionBoundaries,
+  isingModelSectionBoundaries,
   explanationGranularityReview: {
     reviewedEntryCount: entries.length,
     criterion: "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
