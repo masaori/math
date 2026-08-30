@@ -252,7 +252,8 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\,Z_j
-&= \varepsilon\,\sigma_1^x\cdots\sigma_{j-1}^x\,\sigma_j^z \\
+&= \varepsilon\,\sigma_1^x\cdots\sigma_{j-1}^x\,\sigma_j^z
+   \quad (\because \text{def\_transfer\_matrix\_symbols}) \\
 &= \sigma_1^x\cdots\sigma_{j-1}^x\,\varepsilon\,\sigma_j^z
    \quad (\because \text{epsilon\_commutes\_with\_transfer\_matrices の Step 1 の }
    \varepsilon\sigma_k^x = \sigma_k^x\varepsilon \text{ を } j-1 \text{ 箇所へ同時適用}) \\
@@ -324,11 +325,15 @@ export default defineBlocks([
         "）と書くと",
       ]),
       displayMath(
-        String.raw`\varepsilon\,\check\psi_\mu^\dagger
-= p\left(\varepsilon\check{Z}_\mu\right) + q\left(\varepsilon\check{Y}_\mu\right)
-= -p\check{Z}_\mu\varepsilon - q\check{Y}_\mu\varepsilon
-= -\check\psi_\mu^\dagger\,\varepsilon
-\quad (\because \text{(2) を 2 箇所へ同時適用})`,
+        String.raw`\begin{aligned}
+\varepsilon\,\check\psi_\mu^\dagger
+&= p\left(\varepsilon\check{Z}_\mu\right) + q\left(\varepsilon\check{Y}_\mu\right)
+   \quad (\because \text{def\_check\_fermi と積の }\mathbb C\text{ 線型性}) \\
+&= -p\check{Z}_\mu\varepsilon - q\check{Y}_\mu\varepsilon
+   \quad (\because \text{(2) を 2 箇所へ同時適用}) \\
+&= -\check\psi_\mu^\dagger\,\varepsilon
+   \quad (\because \text{def\_check\_fermi と積の }\mathbb C\text{ 線型性})
+\end{aligned}`,
       ),
       paragraph([
         "(4) ",

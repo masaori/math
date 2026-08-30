@@ -51389,6 +51389,98 @@ c_w^{\mathrm{sm}}(\gamma;k,l)
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_crossing_number_update",
+        labels: [],
+        title: { text: "平滑化後の横断数の全体更新" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_smoothing_crossing_number_update",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_smoothed_crossing_number",
+                kind: "definition",
+                title: { text: "平滑化後の横断数" },
+                labels: ["def_smoothed_crossing_number"],
+                habitat: "N",
+                statement: [
+                  paragraph([
+                    ref("def_smoothing_straight_visit_count"), " の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                    "、横断する添字 ", math(String.raw`k<l`), "、平滑化後の通過族 ",
+                    math(String.raw`(u_r^{\mathrm{sm}})_{r\in I_m}`), " を取る。平滑化後に横断する添字対の個数 ",
+                    math(String.raw`c_{\mathrm{sm}}(\gamma;k,l)\in\mathbb N`), " を",
+                  ]),
+                  displayMath(String.raw`c_{\mathrm{sm}}(\gamma;k,l):=\bigl|\{(r,s)\in I_m\times I_m\mid
+r<s,\ \operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s),\
+\tau(\vec e_r,\vec f_r)=\tau(\vec e_s,\vec f_s)=0,\
+\operatorname{ax}(\operatorname{dir}(\vec e_r))\ne\operatorname{ax}(\operatorname{dir}(\vec e_s))\}\bigr|`),
+                  paragraph(["有限な添字対の集合の元の個数なので、この値は自然数として定まる。"]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_smoothing_crossing_number_update",
+              kind: "claim",
+              title: { text: "平滑化後の横断数は二軸の直進通過数によって更新される" },
+              labels: ["claim_smoothing_crossing_number_update"],
+              habitat: "N",
+              verification: ["sagemath/check/smoothing-straight-visit-count"],
+              lean: [
+                "Ising2DLambda.KacWard.smoothing_crossing_number_update",
+                "Ising2DLambda.NecSuf.KacWard.single_fiber_update_sum_necSuf",
+                "Ising2DLambda.KacWard.smoothing_crossing_number_update_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma`), "、横断する添字 ", math(String.raw`k<l`),
+                  "、その共通の通過頂点 ", math(String.raw`v\in V_L`), " について",
+                ]),
+                displayMath(String.raw`c(\gamma)+1=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)`),
+                paragraph([
+                  "が成り立つ（左辺は ", ref("def_closed_walk_crossing_number"), "、右辺は ",
+                  ref("def_smoothed_crossing_number"), " と ", ref("def_vertex_axis_straight_visit_count"), "）。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  ref("claim_crossing_number_vertex_decomposition"), " のファイバー分解と同じ論法を平滑化後の通過族へ適用すると、",
+                  math(String.raw`c_{\mathrm{sm}}(\gamma;k,l)=\sum_{w\in V_L}c_w^{\mathrm{sm}}(\gamma;k,l)`),
+                  " である。横断の頂点 ", math(String.raw`v`), " の項とそれ以外の項に分ける。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+c(\gamma)+1
+&=\sum_{w\in V_L}c_w(\gamma)+1
+&&\bigl(\because\ \blkref{claim_crossing_number_vertex_decomposition}\bigr)\\
+&=\sum_{\substack{w\in V_L\\w\ne v}}c_w(\gamma)+c_v(\gamma)+1
+&&\bigl(\because\ \text{有限和から }v\text{ の項を分ける}\bigr)\\
+&=\sum_{\substack{w\in V_L\\w\ne v}}c_w(\gamma)+n_{v,0}(\gamma)n_{v,1}(\gamma)+1
+&&\bigl(\because\ \blkref{claim_vertex_crossing_number_factorization}\bigr)\\
+&=\sum_{\substack{w\in V_L\\w\ne v}}c_w(\gamma)
++\bigl(n_{v,0}(\gamma)-1\bigr)\bigl(n_{v,1}(\gamma)-1\bigr)+n_{v,0}(\gamma)+n_{v,1}(\gamma)
+&&\bigl(\because\ n_{v,0}(\gamma),n_{v,1}(\gamma)\ge1\text{ と }\mathbb N\text{ の分配法則}\bigr)\\
+&=\sum_{\substack{w\in V_L\\w\ne v}}c_w(\gamma)+c_v^{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_vertex_crossing_number_update}\bigr)\\
+&=\sum_{w\in V_L}c_w^{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_other_vertex_crossing_invariance}\bigr)\\
+&=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)
+&&\bigl(\because\ \text{平滑化後の横断対のファイバー分解}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "各軸の直進通過数が 1 以上であることは ", ref("claim_smoothing_straight_visit_count_update"),
+                  " の証明で確定済みである。全過程は有限集合の数え上げと自然数の算術だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

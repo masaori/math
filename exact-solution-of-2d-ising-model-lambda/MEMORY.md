@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 14 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 15 回目の tick 時点）
+
+**一つの横断を平滑化した前後の閉歩道全体の横断数の更新式を四層で証明した。** 平滑化後の横断数 $c_{\mathrm{sm}}(\gamma;k,l)\in\mathbb N$（`def_smoothed_crossing_number`）を定め、頂点ごとの分解・横断の頂点での積表示・他頂点の不変性を結合して $c(\gamma)+1=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)$（`claim_smoothing_crossing_number_update`）を得た。SageMath `smoothing-straight-visit-count` は非孤立横断 1,248 対を含む全横断対 3,584 対で前後の横断数を横断の定義から独立に数えた。Lean は具体版と、有限和の一項更新だけを残した必要十分版 `single_fiber_update_sum_necSuf` を通した。次は平滑化による回転数・横断数・巻き付き偶奇の同時更新を結び、トーラス上の回転位相の符号を横断数と巻き付き偶奇で表す。
+
+前進前レビューでは、前 tick の他頂点不変性にあった「四つの等式を代入するだけ」の Lean 独立定理を「何も言っていない主張」として削除し、具体版の鎖に代入を戻した。
+
+並列の式変形統一は、姉妹側の偶数セクター終結章の「$\varepsilon$ は $\check Z,\check Y,\check\psi$ と反可換」で、$\check\psi_\mu^\dagger$ の一行三等号を三段へ開いた。次は同じ章の後続証明を見る。
+
+## ひとつ前の到達点（2026-08-30 の 14 回目の tick 時点）
 
 **横断の平滑化が横断の頂点以外の頂点の横断数を変えないことを四層で証明した。** 横断の頂点 $v$ と異なる任意の格子頂点 $w$ について $c_w^{\mathrm{sm}}(\gamma;k,l)=c_w(\gamma)$（`claim_smoothing_other_vertex_crossing_invariance`）を、平滑化後の積表示（`claim_vertex_crossing_number_factorization` の全単射を平滑化後の通過族に適用）・各軸の直進通過数の不変性（`claim_smoothing_straight_visit_count_update` の $w\ne v$ の場合）・平滑化前の積表示を結ぶ等式の鎖一本で示した。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対の他頂点の横断数を平滑化の前後で独立に数えて一致を 11,904 件検査した。Lean は具体版と、既存の「二軸の直進通過の直積」「一元だけ帰属が変わる」の必要十分版の組合せを通した。次は横断の頂点での平滑化前後の横断数の差 $c_v-c_v^{\mathrm{sm}}=n_{v,0}+n_{v,1}-1$ を求め、頂点分解（`claim_crossing_number_vertex_decomposition`）と結合して閉歩道全体の横断数の更新式を得る。
 

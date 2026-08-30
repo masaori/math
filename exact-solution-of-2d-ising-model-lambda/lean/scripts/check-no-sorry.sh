@@ -1594,6 +1594,9 @@ targets=(
   Ising2DLambda.KacWard.smoothing_vertex_crossing_number_update
   Ising2DLambda.KacWard.smoothing_vertex_crossing_number_update_from_necSuf
   Ising2DLambda.KacWard.smoothing_other_vertex_crossing_invariance
+  Ising2DLambda.NecSuf.KacWard.single_fiber_update_sum_necSuf
+  Ising2DLambda.KacWard.smoothing_crossing_number_update
+  Ising2DLambda.KacWard.smoothing_crossing_number_update_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

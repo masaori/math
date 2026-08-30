@@ -1,6 +1,6 @@
 # 横断の平滑化と直進通過数
 
-**対象ラベル**: `claim_smoothing_straight_visit_count_update`, `claim_smoothing_vertex_crossing_number_update`, `claim_smoothing_other_vertex_crossing_invariance`
+**対象ラベル**: `claim_smoothing_straight_visit_count_update`, `claim_smoothing_vertex_crossing_number_update`, `claim_smoothing_other_vertex_crossing_invariance`, `claim_smoothing_crossing_number_update`
 - 実行: `sage sagemath/check/smoothing-straight-visit-count/check.sage`
 - 状態: PASS（2026-08-30、閉じた非後退辺列 24,628 件・横断対 3,584 対・他頂点の横断数不変検査 11,904 件）
 - 使用する環: `ZZ` と有限集合だけ。浮動小数点は使わない。
@@ -19,3 +19,7 @@ $L=1$（辺 1〜5 本）と $L=2,3$（辺 1〜8 本）の全閉じた非後退�
 同じ全横断対について、横断の頂点と異なる各格子頂点 $w$ での横断数を、平滑化の前後で
 横断の定義から独立に数えて一致することを 11,904 件で検査する
 （`claim_smoothing_other_vertex_crossing_invariance`）。
+
+同じ全横断対について、平滑化前後の横断数を横断述語からそれぞれ直接数え、
+$c(\gamma)+1=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)$ を 3,584 対すべてで検査する
+（`claim_smoothing_crossing_number_update`）。

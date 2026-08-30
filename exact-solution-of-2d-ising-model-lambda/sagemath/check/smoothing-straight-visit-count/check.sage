@@ -53,6 +53,7 @@ same_vertex_checks = 0
 other_vertex_checks = 0
 smoothed_crossing_checks = 0
 other_vertex_crossing_checks = 0
+global_crossing_update_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -126,6 +127,20 @@ for L in range(1, 4):
                 assert after_crossings == ((before_axis[0] - 1)
                                            * (before_axis[1] - 1))
                 smoothed_crossing_checks += 1
+                before_total = ZZ(sum(
+                    1 for r in range(m) for s in range(m)
+                    if r < s and crossing(L, walk, r, s)))
+                after_total = ZZ(sum(
+                    1 for r in range(m) for s in range(m)
+                    if r < s
+                    and endpoints(L, walk[r])[1] == endpoints(L, walk[s])[1]
+                    and straight(walk[r], out_edge[r])
+                    and straight(walk[s], out_edge[s])
+                    and direction_number(walk[r]) % 2
+                    != direction_number(walk[s]) % 2))
+                assert (before_total + 1
+                        == after_total + before_axis[0] + before_axis[1])
+                global_crossing_update_checks += 1
                 for vertex in vertices:
                     if vertex == cross_vertex:
                         continue
@@ -162,8 +177,10 @@ assert other_vertex_checks > 0
 assert non_isolated_pairs > 0
 assert smoothed_crossing_checks == crossing_pair_total
 assert other_vertex_crossing_checks > 0
+assert global_crossing_update_checks == crossing_pair_total
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
       f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
       f"{other_vertex_crossing_checks} other-vertex crossing invariance checks "
+      f"and {global_crossing_update_checks} global crossing update checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")
