@@ -1771,11 +1771,21 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
         ref("antiperiodic_exp_sum"),
         " を指数の整数 ",
         math(String.raw`j-k`),
-        " に適用すると（",
+        " に適用する。まず ",
         math(String.raw`j = k`),
-        " のときは ",
-        math(String.raw`j-k = 0 = 0 \cdot M`),
-        " で ",
+        " のときは",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+j-k
+&=0
+  \quad(\because\ j=k\text{ と }\mathbb Z\text{ の減法})\\
+&=0\cdot M
+  \quad(\because\ \mathbb Z\text{ の乗法})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
         math(String.raw`(-1)^0 = 1`),
         "、",
         math(String.raw`j \neq k`),
@@ -1785,7 +1795,7 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
         math(String.raw`j-k \neq 0`),
         " なので ",
         math(String.raw`j-k \not\equiv 0 \pmod M`),
-        "）",
+        " である。したがって",
       ]),
       displayMath(
         String.raw`\sum_{\mu=1}^{M} e^{i(j-k)\tilde\theta_\mu}
@@ -1865,6 +1875,7 @@ M & (j = k) \\
       notes: [
         "2026-08-15 の式変形統一で、復元式の鎖の最終行へスカラー 1/M と M の相殺という行末根拠を補った。内容は変えていない。",
         "2026-08-19 の式変形統一で、二つの displayMath と間の散文に分かれていた復元式の導出を、準備の指数和等式と一続き六段の鎖へまとめ、「Y_j についても同じ計算」と畳まれていた第 2 式を同じ形の鎖へ開いた。内容・参照は変えていない。",
+        "2026-08-31 の式変形統一で、準備の散文に埋まっていた j-k=0=0M を、整数の減法と乗法を一つずつ適用する二段の鎖へ開いた。内容・参照は変えていない。",
       ],
     },
   },

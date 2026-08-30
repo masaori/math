@@ -1687,6 +1687,8 @@ targets=(
   Ising2DLambda.KacWard.signedEvenSubgraphPolynomial_eq_sectorSum
   Ising2DLambda.NecSuf.KacWard.supportIncidence_even_necSuf
   Ising2DLambda.KacWard.reversalFreeMovedSupport_even
+  Ising2DLambda.NecSuf.KacWard.reversalFreeProjectedSequence_distinct_necSuf
+  Ising2DLambda.KacWard.reversalFreeOrbitSupportEdges_distinct
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

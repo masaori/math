@@ -50607,6 +50607,10 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
               labels: ["claim_reversal_free_orbit_support_edges_distinct"],
               habitat: "N",
               verification: ["sagemath/check/reversal-free-orbit-support-distinct"],
+              lean: [
+                "Ising2DLambda.KacWard.reversalFreeOrbitSupportEdges_distinct",
+                "Ising2DLambda.NecSuf.KacWard.reversalFreeProjectedSequence_distinct_necSuf",
+              ],
               statement: [
                 paragraph([
                   math(String.raw`L\ge1`), " とし、非後退置換 ",

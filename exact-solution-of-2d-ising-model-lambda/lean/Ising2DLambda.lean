@@ -982,3 +982,5 @@ import Ising2DLambda.NecSuf.KacWard.SignedEvenSubgraphSectorSum
 import Ising2DLambda.KacWard.SignedEvenSubgraphSectorSum
 import Ising2DLambda.NecSuf.KacWard.ReversalFreeMovedSupportEven
 import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven
+import Ising2DLambda.NecSuf.KacWard.ReversalFreeOrbitSupportDistinct
+import Ising2DLambda.KacWard.ReversalFreeOrbitSupportDistinct

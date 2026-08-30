@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 17 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 18 回目の tick 時点）
+
+**反転対を含まない非後退置換の軌道列の台の辺の相異なりを Lean 二版へ配線し、四層検証を完了した。** 具体版 `KacWard.reversalFreeOrbitSupportEdges_distinct` は、各軌道項が動くことと向き付き辺として相異なることを既存の軌道定理から取り出し、台が一致する二項を同一項と反転対へ分ける人手証明どおりに示した。必要十分版 `NecSuf.KacWard.reversalFreeProjectedSequence_distinct_necSuf` は、台写像・反転写像・列の相異性・同じ台を持つ二項の二分法・反転対の不在だけを残した。具体版を呼ぶだけの別名定理は何も言わないため置かなかった。SageMath の全軌道列 3,376 本、検算対応 332 件、本文 726 ブロック、Lean 9,614 jobs・sorry 検査 1,633 件を通した。次は軌道列へ接触点分割を適用し、平方恒等式へまとめる。
+
+前進前レビューでは前 tick の本文と SageMath を照合し、後続が直接使う内容を持つことと不一致が無いことを確認した。並列の式変形統一は、姉妹側の半整数運動量から $Z_j,Y_j$ を復元する証明の準備にあった $j-k=0=0\cdot M$ を、整数の減法と乗法を一つずつ使う二段の鎖へ開いた。
+
+## ひとつ前の到達点（2026-08-31 の 17 回目の tick 時点）
 
 **反転対を含まない非後退置換の軌道列の台の辺が相異なることを、本文と SageMath で固定した（`claim_reversal_free_orbit_support_edges_distinct`。Lean 未着手）。** 軌道列 $\gamma_{\varphi}(\vec e)$ の第 $k$ 項を $(e_k,d_k)$ と書き、$e_j=e_k$ ならば $j=k$ を証明した。証明は、軌道列の各項が動く辺であり向き付き辺として相異なること（既証 `claim_moved_orbit_closed_nonbacktracking`）を準備に置き、台の辺が一致する二項は向きが等しければ同一項（相異性に矛盾）、向きが異なれば反転対（反転対を含まない仮定に矛盾）とする場合分けである。この主張は、軌道列が接触点分割（`claim_edge_simple_contact_split`・`claim_contact_elimination_by_splitting`）の「台の辺が相異なる」仮定を満たすことを与える、非後退置換和と偶部分グラフ側を結ぶ橋の部品である。SageMath `reversal-free-orbit-support-distinct` は $L=2$ の反転対なし非後退置換 $497$ 件の全軌道列 $3{,}376$ 本を検査した。検算対応 332 件、本文 726 ブロック・PDF 330 ページを通した。次はこの主張の Lean 具体版・必要十分版を書く。
 

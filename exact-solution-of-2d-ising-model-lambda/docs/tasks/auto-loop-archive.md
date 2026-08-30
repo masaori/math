@@ -13741,3 +13741,10 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 前進記録: `claim_kac_ward_term_orbit_phase_twist_product` の Lean 具体版 `kacWardSignedPermutationTerm_orbit_phase_twist` と必要十分版 `termOrbitPhaseTwist_necSuf` を書き、本文の `lean:` と sorry 検査へ登録した。具体版を呼ぶだけの別名定理は内容を持たないためレビューで除いた。
 - 式変形の統一: 姉妹側の数演算子積のトレース証明の基底段階にあった $\mathrm{tr}(I)=2^M=2^{M-0}$ を、根拠と参照つきの二段へ開いた。
 - レビュー記録: 前 tick の本文三段と SageMath を照合し、「何も言っていない主張」や不一致が無いことを確認した。
+
+## 2026-08-31 の 18 回目の tick で台帳から移した記録（2026-08-31 の 13 回目）
+
+- 現在地: 符号付き偶部分グラフ多項式を定義し、セクター生成多項式の符号付き和との一致を本文と SageMath で固定した。
+- 前進記録: `def_signed_even_subgraph_polynomial` と `claim_signed_even_subgraph_sector_sum` を追加し、$L=1,2,3$ の偶部分グラフを全列挙した。
+- 式変形の統一: 姉妹側の複素数の逆数の偏角の証明にあった一行二等号を二段の鎖へ開いた。
+- レビュー記録: 前 tick の行列式の非後退置換和の Lean 二版を人手証明と照合し、「何も言っていない主張」・不一致・sorry 検査の登録漏れが無いことを確認した。
