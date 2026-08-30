@@ -33,6 +33,36 @@ def tgt(edge):
     return endpoints(edge)[1]
 
 
+def direction_number(edge):
+    kind, _, _, d = edge
+    return {("h", 0): 0, ("v", 0): 1, ("h", 1): 2, ("v", 1): 3}[(kind, d)]
+
+
+def turn(edge, following):
+    """一歩の回転数 τ（def_step_turning）。非後退接続だけに定義される。"""
+    difference = (direction_number(following) - direction_number(edge)) % 4
+    assert difference in (0, 1, 3)
+    return ZZ(0) if difference == 0 else (ZZ(1) if difference == 1 else ZZ(-1))
+
+
+def horizontal_seam(edge):
+    """横周期の切断線指示値（def_seam_parities）。"""
+    kind, _, j, _ = edge
+    return ZZ(1) if kind == "h" and j == L - 1 else ZZ(0)
+
+
+def vertical_seam(edge):
+    """縦周期の切断線指示値（def_seam_parities）。"""
+    kind, i, _, _ = edge
+    return ZZ(1) if kind == "v" and i == L - 1 else ZZ(0)
+
+
+def total_turning(walk):
+    """循環総回転数（def_cyclic_total_turning）。"""
+    m = len(walk)
+    return sum(turn(walk[r], walk[(r + 1) % m]) for r in range(m))
+
+
 def is_nonbacktracking_connection(edge, following):
     return src(following) == tgt(edge) and following != reversal(edge)
 
@@ -69,6 +99,8 @@ edge_simple_walks = [walk for walk in closed_walks
                      if len(set(base_edge(edge) for edge in walk)) == len(walk)]
 
 checked_contacts = ZZ(0)
+seam_parity_checks = ZZ(0)
+turning_nonzero_shift_contacts = ZZ(0)
 for walk in edge_simple_walks:
     m = len(walk)
     for k in range(m):
@@ -87,10 +119,27 @@ for walk in edge_simple_walks:
             assert bases_a.isdisjoint(bases_b)
             assert bases_a.union(bases_b) == bases
             checked_contacts += 1
+            # claim_contact_split_seam_parity: 切断線偶奇の組が保存される。
+            for seam in (horizontal_seam, vertical_seam):
+                sum_a = sum(seam(edge) for edge in walk_a)
+                sum_b = sum(seam(edge) for edge in walk_b)
+                total = sum(seam(edge) for edge in walk)
+                assert sum_a + sum_b == total
+                assert (sum_a + sum_b) % 2 == total % 2
+                seam_parity_checks += 1
+            # 循環総回転数は保存されない: ずれは claim_reconnection_turning_difference
+            # の値域 {-4, 0, 4} を走り、零でない接触点が実在する。
+            shift = total_turning(walk_a) + total_turning(walk_b) - total_turning(walk)
+            assert shift in (-4, 0, 4)
+            if shift != 0:
+                turning_nonzero_shift_contacts += 1
 
 assert 0 < len(edge_simple_walks)
 assert 0 < checked_contacts
+assert 0 < turning_nonzero_shift_contacts
 
 print("PASS: closed walks (L=%d, length <= %d): %d; base-edge-simple: %d; "
-      "contact splits checked: %d"
-      % (L, MAX_LENGTH, len(closed_walks), len(edge_simple_walks), checked_contacts))
+      "contact splits checked: %d; seam parity checks: %d; "
+      "contacts with nonzero turning shift: %d"
+      % (L, MAX_LENGTH, len(closed_walks), len(edge_simple_walks),
+         checked_contacts, seam_parity_checks, turning_nonzero_shift_contacts))

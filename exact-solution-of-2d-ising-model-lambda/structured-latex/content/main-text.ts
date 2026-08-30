@@ -52832,7 +52832,75 @@ t_{\circ}(\gamma_{\mathrm c})
               ],
             },
           },
-        }],
+        },
+        {
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_contact_split_seam_parity",
+            focus: {
+              id: "kac_ward_claim_contact_split_seam_parity",
+              kind: "claim",
+              title: { text: "接触点で分けた二本の閉歩道の切断線偶奇の和は元の切断線偶奇に等しい" },
+              labels: ["claim_contact_split_seam_parity"],
+              habitat: "N",
+              verification: ["sagemath/check/edge-simple-contact-split"],
+              lean: [
+                "Ising2DLambda.KacWard.smoothing_split_seam_parity",
+                "Ising2DLambda.NecSuf.KacWard.interval_split_parity_pair_necSuf",
+                "Ising2DLambda.KacWard.smoothing_split_seam_parity_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  ref("claim_edge_simple_contact_split"), " と同じ仮定の下で（台の辺が相異なる閉じた非後退辺列 ",
+                  math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "、通過の頂点を共有する添字 ", math(String.raw`k<l`),
+                  "、そこで分けた二本の閉歩道 ", math(String.raw`\gamma_A,\gamma_B`),
+                  "）、切断線偶奇（", ref("def_edge_sequence_seam_parities"),
+                  "）について自然数の偶奇の組の等式",
+                ]),
+                displayMath(String.raw`\left(
+\bigl(h(\gamma_A)+h(\gamma_B)\bigr)\bmod2,
+\bigl(v(\gamma_A)+v(\gamma_B)\bigr)\bmod2
+\right)=\bigl(h(\gamma),v(\gamma)\bigr)`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`c`), " を ", math(String.raw`c_{\mathrm h}`), " または ",
+                  math(String.raw`c_{\mathrm v}`),
+                  " のどちらか一方とする。切断線指示値は向き付き辺だけの関数であり、接続には依存しない（",
+                  ref("def_seam_parities"), "）。",
+                  ref("claim_edge_simple_contact_split"), " の二本の辺列の定義により、",
+                  math(String.raw`\gamma_A`), " の辺添字は ",
+                  math(String.raw`A=\{r\in I_m:k<r\le l\}`), "、",
+                  math(String.raw`\gamma_B`), " の辺添字は補集合 ",
+                  math(String.raw`B=I_m\setminus A`), " を一度ずつ尽くす。従って",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{\vec e\in\gamma_A}c(\vec e)+\sum_{\vec e\in\gamma_B}c(\vec e)
+&=\sum_{r\in A}c(\vec e_r)+\sum_{r\in B}c(\vec e_r)
+&&\bigl(\because\ \blkref{claim_edge_simple_contact_split}\text{ の二本の辺の並び}\bigr)\\
+&=\sum_{r\in I_m}c(\vec e_r)
+&&\bigl(\because\ B=I_m\setminus A\text{ と互いに素な有限和の分割}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "等しい自然数を二で割った余りは等しい。", math(String.raw`c=c_{\mathrm h}`),
+                  " と ", math(String.raw`c=c_{\mathrm v}`), " の二回適用と ",
+                  ref("def_edge_sequence_seam_parities"),
+                  " により、組の両成分について主張を得る。全過程は自然数の有限和と偶奇だけで閉じ、実数体も複素数体も現れない。",
+                  "添字区間は ", ref("claim_smoothing_split_seam_parity"),
+                  " の平滑化分割と同一（", math(String.raw`(k,l]`), " とその補集合）なので、Lean の具体版・必要十分版はあちらと同じ区間和の定理を引く。",
+                  "一方、循環総回転数はこの分割で保存されない。交換した二接続の回転数の差は ",
+                  ref("claim_reconnection_turning_difference"), " により ",
+                  math(String.raw`\{-4,0,4\}`),
+                  " を走り、実際に零でない接触点がある（検証が全数で確認した）。回転数の追跡はこの差の更新式として別に固定する。",
+                ]),
+              ],
+            },
+          },
+        },
+        ],
       },
     },
   ],

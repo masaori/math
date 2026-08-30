@@ -114,14 +114,17 @@ export type DocumentStructureError =
   | { code: 'duplicate_structure_id'; id: string }
   | { code: 'duplicate_block_membership'; blockId: string }
 
-type BlocksOfGroupMembers<T extends readonly GroupMember[]> =
-  T extends readonly [infer Head, ...infer Tail]
-    ? Head extends GroupMember
-      ? Tail extends readonly GroupMember[]
-        ? [...BlocksOfGroupMember<Head>, ...BlocksOfGroupMembers<Tail>]
-        : []
-      : []
-    : []
+/** 末尾再帰（uniqueness.ts の要点と同じ。素朴なスプレッド連結は数百要素で TS2589 になる）。 */
+type BlocksOfGroupMembers<
+  T extends readonly GroupMember[],
+  Acc extends readonly unknown[] = [],
+> = T extends readonly [infer Head, ...infer Tail]
+  ? Head extends GroupMember
+    ? Tail extends readonly GroupMember[]
+      ? BlocksOfGroupMembers<Tail, [...Acc, ...BlocksOfGroupMember<Head>]>
+      : Acc
+    : Acc
+  : Acc
 
 type BlocksOfGroupMember<T extends GroupMember> =
   T extends { role: 'subgroup'; element: infer Group extends ElementGroup }
@@ -158,14 +161,17 @@ type BlocksOfSectionMember<T extends SectionMember> =
         ? [Element]
         : []
 
-type BlocksOfSectionMembers<T extends readonly SectionMember[]> =
-  T extends readonly [infer Head, ...infer Tail]
-    ? Head extends SectionMember
-      ? Tail extends readonly SectionMember[]
-        ? [...BlocksOfSectionMember<Head>, ...BlocksOfSectionMembers<Tail>]
-        : []
-      : []
-    : []
+/** 末尾再帰（uniqueness.ts の要点と同じ。素朴なスプレッド連結は数百要素で TS2589 になる）。 */
+type BlocksOfSectionMembers<
+  T extends readonly SectionMember[],
+  Acc extends readonly unknown[] = [],
+> = T extends readonly [infer Head, ...infer Tail]
+  ? Head extends SectionMember
+    ? Tail extends readonly SectionMember[]
+      ? BlocksOfSectionMembers<Tail, [...Acc, ...BlocksOfSectionMember<Head>]>
+      : Acc
+    : Acc
+  : Acc
 
 /** 1章を平坦化したときのブロックタプル。章単位なら巨大文書でも TypeScript の予算を超えない。 */
 export type BlocksOfSection<T extends Section> = [
@@ -173,15 +179,17 @@ export type BlocksOfSection<T extends Section> = [
   ...BlocksOfSectionMembers<T['children']>,
 ]
 
-/** 章ごとに `defineSection` したタプルを、生成物側で文書全体へ連結する。 */
-export type BlocksOfSections<T extends readonly Section[]> =
-  T extends readonly [infer Head, ...infer Tail]
-    ? Head extends Section
-      ? Tail extends readonly Section[]
-        ? [...BlocksOfSection<Head>, ...BlocksOfSections<Tail>]
-        : []
-      : []
-    : []
+/** 章ごとに `defineSection` したタプルを、生成物側で文書全体へ連結する（末尾再帰）。 */
+export type BlocksOfSections<
+  T extends readonly Section[],
+  Acc extends readonly unknown[] = [],
+> = T extends readonly [infer Head, ...infer Tail]
+  ? Head extends Section
+    ? Tail extends readonly Section[]
+      ? BlocksOfSections<Tail, [...Acc, ...BlocksOfSection<Head>]>
+      : Acc
+    : Acc
+  : Acc
 
 export type BlocksOfDocumentStructure<T extends DocumentStructure> = BlocksOfSections<T['sections']>
 
