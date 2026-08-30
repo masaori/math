@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 19 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 20 回目の tick 時点）
+
+**平滑化で分かれた二本の閉歩道の循環総回転数の和が元の循環総回転数に等しいことを四層で証明した。** 二本の辺列 $\gamma_A,\gamma_B$（`def_smoothed_split_edge_sequences`）それぞれの循環総回転数を、添字区間 $A=\{r:k<r\le l\}$ と補集合 $B$ の上の和 $\sum_r\tau(\vec e_r,\vec f_r)$ として表し（`claim_smoothing_splits_closed_walk` の各接続の同定）、互いに素な有限和の分割で合併して $t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)=t_{\mathrm{sm}}(\gamma;k,l)=t_{\circ}(\gamma)$（`claim_smoothing_split_turning_sum`）を得た。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対で二本の回転数を各辺列から独立に計算して和を照合した。Lean は具体版 `KacWard/SmoothingSplitTurningSum.lean` と、自然数の三区間 $(k,l]$・$(l,m]$・$(0,k]$ が $(0,m]$ を互いに素に覆うことによる和の分割だけを残した必要十分版 `interval_split_sum_necSuf` を通した。次は横断数と切断線偶奇についても二本の閉歩道の量と平滑化後の量を結び、横断数の帰納で回転位相の符号表示へ進む。
+
+前進前レビューでは、前 tick の二本の閉歩道への分解（コミット `40305798`）を四層で照合し、修正対象が無いことを確認した。
+
+## ひとつ前の到達点（2026-08-30 の 19 回目の tick 時点）
 
 **横断の平滑化が元の閉歩道を二本の閉じた非後退辺列に分けることを四層で証明した。** 二つの添字区間を $\gamma_A=(\vec e_{k+1},\ldots,\vec e_l)$ と $\gamma_B=(\vec e_{l+1},\ldots,\vec e_m,\vec e_1,\ldots,\vec e_k)$（$l=m$ では前半を除く）と並べた（`def_smoothed_split_edge_sequences`）。内部では $\vec f_r=\vec e_{r+1}$、閉じる接続は $\vec f_l=\vec e_{k+1}$ と $\vec f_k=\vec e_{l+1}$（$l=m$ では $\vec e_1$）であり、すべて平滑化後の非後退接続なので二本は閉歩道になる（`claim_smoothing_splits_closed_walk`）。SageMath は全横断対 3,584 対で検査し、Lean 必要十分版には巡回後続の式・二点の行き先交換・各接続の非後退性だけが残った。次は二本の回転数・横断数・巻き付き偶奇と平滑化前の更新式を結ぶ帰納に進む。
 

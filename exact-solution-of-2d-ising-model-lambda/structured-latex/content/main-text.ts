@@ -52070,6 +52070,115 @@ B:=I_m\setminus A=\{r\in I_m:\ r\le k\}\cup\{r\in I_m:\ l<r\}`),
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_split_turning",
+        labels: [],
+        title: { text: "二本の閉歩道の循環総回転数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_smoothing_split_turning_sum",
+            focus: {
+              id: "kac_ward_claim_smoothing_split_turning_sum",
+              kind: "claim",
+              title: { text: "二本の閉歩道の循環総回転数の和は元の循環総回転数に等しい" },
+              labels: ["claim_smoothing_split_turning_sum"],
+              habitat: "Z",
+              verification: ["sagemath/check/smoothing-straight-visit-count"],
+              lean: [
+                "Ising2DLambda.KacWard.smoothing_split_turning_sum",
+                "Ising2DLambda.NecSuf.KacWard.interval_split_sum_necSuf",
+                "Ising2DLambda.KacWard.smoothing_split_turning_sum_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "、横断する添字 ", math(String.raw`k<l`), " について、",
+                  ref("def_smoothed_split_edge_sequences"), " の二本の辺列 ",
+                  math(String.raw`\gamma_A,\gamma_B`),
+                  " は閉じた非後退辺列なので（", ref("claim_smoothing_splits_closed_walk"),
+                  "）、それぞれの循環総回転数（", ref("def_cyclic_total_turning"),
+                  "）が定義される。このとき整数の等式",
+                ]),
+                displayMath(String.raw`t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)=t_{\circ}(\gamma)`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph([
+                  "二つの準備をする。第一に、", math(String.raw`t_{\circ}(\gamma_A)`),
+                  " を添字区間 ", math(String.raw`A=\{r\in I_m:\ k<r\le l\}`),
+                  "（", ref("def_smoothing_index_blocks"), "）の上の和として表す。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_A)
+&=t(\gamma_A)+\tau(\vec e_l,\vec e_{k+1})
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と }\blkref{def_smoothed_split_edge_sequences}\text{ の末辺・先頭辺}\bigr)\\
+&=\sum_{s=1}^{l-k-1}\tau(\vec e_{k+s},\vec e_{k+s+1})+\tau(\vec e_l,\vec e_{k+1})
+&&\bigl(\because\ \blkref{def_total_turning}\text{ と }\blkref{def_smoothed_split_edge_sequences}\text{ の位置 }s\text{ の辺}\bigr)\\
+&=\sum_{\substack{r\in I_m\\k<r<l}}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_l,\vec e_{k+1})
+&&\bigl(\because\ \text{添字の置換 }r=k+s\text{。有限和の並べ替え}\bigr)\\
+&=\sum_{\substack{r\in I_m\\k<r<l}}\tau(\vec e_r,\vec f_r)+\tau(\vec e_l,\vec f_l)
+&&\bigl(\because\ \blkref{claim_smoothing_splits_closed_walk}\text{ の各接続}\bigr)\\
+&=\sum_{r\in A}\tau(\vec e_r,\vec f_r)
+&&\bigl(\because\ \blkref{def_smoothing_index_blocks}\text{ の }A\text{ と有限和の項の合併}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "第二に、", math(String.raw`t_{\circ}(\gamma_B)`), " を補集合 ",
+                  math(String.raw`B=I_m\setminus A`), " の上の和として表す。まず ",
+                  math(String.raw`l<m`), " の場合。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_B)
+&=t(\gamma_B)+\tau(\vec e_k,\vec e_{l+1})
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と }\blkref{def_smoothed_split_edge_sequences}\text{ の末辺・先頭辺}\bigr)\\
+&=\sum_{\substack{r\in I_m\\l<r<m}}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_m,\vec e_1)
+  +\sum_{\substack{r\in I_m\\r<k}}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_k,\vec e_{l+1})
+&&\bigl(\because\ \blkref{def_total_turning}\text{ と }\blkref{def_smoothed_split_edge_sequences}\text{ の並び}\bigr)\\
+&=\sum_{\substack{r\in B\\r\ne k}}\tau(\vec e_r,\vec f_r)+\tau(\vec e_k,\vec f_k)
+&&\bigl(\because\ \blkref{claim_smoothing_splits_closed_walk}\text{ の各接続}\bigr)\\
+&=\sum_{r\in B}\tau(\vec e_r,\vec f_r)
+&&\bigl(\because\ \text{有限和の項の合併}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "次に ", math(String.raw`l=m`), " の場合。",
+                  math(String.raw`\gamma_B=(\vec e_1,\ldots,\vec e_k)`), " かつ ",
+                  math(String.raw`B=\{r\in I_m:\ r\le k\}`), " であり、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_B)
+&=\sum_{\substack{r\in I_m\\r<k}}\tau(\vec e_r,\vec e_{r+1})+\tau(\vec e_k,\vec e_1)
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と }\blkref{def_total_turning}\text{ と }\blkref{def_smoothed_split_edge_sequences}\text{ の並び}\bigr)\\
+&=\sum_{\substack{r\in B\\r\ne k}}\tau(\vec e_r,\vec f_r)+\tau(\vec e_k,\vec f_k)
+&&\bigl(\because\ \blkref{claim_smoothing_splits_closed_walk}\text{ の各接続}\bigr)\\
+&=\sum_{r\in B}\tau(\vec e_r,\vec f_r)
+&&\bigl(\because\ \text{有限和の項の合併}\bigr).
+\end{aligned}`),
+                paragraph(["どちらの場合も同じ形に着く。二つの準備を合わせて"]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
+&=\sum_{r\in A}\tau(\vec e_r,\vec f_r)+\sum_{r\in B}\tau(\vec e_r,\vec f_r)
+&&\bigl(\because\ \text{準備の二式}\bigr)\\
+&=\sum_{r\in I_m}\tau(\vec e_r,\vec f_r)
+&&\bigl(\because\ \blkref{def_smoothing_index_blocks}\text{ の }B=I_m\setminus A\text{ と互いに素な有限和の分割}\bigr)\\
+&=t_{\mathrm{sm}}(\gamma;k,l)
+&&\bigl(\because\ \blkref{def_smoothed_cyclic_total_turning}\bigr)\\
+&=t_{\circ}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_cyclic_turning_invariance}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "となる。全過程は自然数の添字と整数の有限和だけで閉じ、実数体も複素数体も現れない。",
+                  "この等式により、平滑化の帰納で閉歩道を二本に分けたとき、循環総回転数は分けた二本の和として追跡できる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

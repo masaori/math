@@ -77,6 +77,7 @@ turning_invariance_checks = 0
 seam_parity_invariance_checks = 0
 interval_invariance_checks = 0
 closed_walk_split_checks = 0
+split_turning_sum_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -212,6 +213,16 @@ for L in range(1, 4):
                         assert out_edge[r] == walk[next_index]
                         assert out_edge[r] in successors(L, oriented, walk[r])
                 closed_walk_split_checks += 1
+                # 二本の閉歩道の循環総回転数を各辺列から独立に計算すると、
+                # その和は元の循環総回転数に等しい
+                # （claim_smoothing_split_turning_sum）。
+                split_turning = ZZ(0)
+                for indices in (indices_a, indices_b):
+                    for position, r in enumerate(indices):
+                        next_index = indices[(position + 1) % len(indices)]
+                        split_turning += turn(walk[r], walk[next_index])
+                assert split_turning == before_turning
+                split_turning_sum_checks += 1
                 for vertex in vertices:
                     if vertex == cross_vertex:
                         continue
@@ -253,6 +264,7 @@ assert turning_invariance_checks == crossing_pair_total
 assert seam_parity_invariance_checks == crossing_pair_total
 assert interval_invariance_checks == crossing_pair_total
 assert closed_walk_split_checks == crossing_pair_total
+assert split_turning_sum_checks == crossing_pair_total
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
       f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
@@ -262,4 +274,5 @@ print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing p
       f"and {seam_parity_invariance_checks} seam-parity invariance checks "
       f"and {interval_invariance_checks} index-interval invariance checks "
       f"and {closed_walk_split_checks} closed-walk split checks "
+      f"and {split_turning_sum_checks} split turning sum checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")
