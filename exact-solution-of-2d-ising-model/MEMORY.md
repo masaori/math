@@ -1,5 +1,18 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 2026-08-31: 1次元開鎖のスピン和を四項の節として確定
+
+2次元イジングモデル章の章内依存順5–8を「1次元開鎖のスピン和」として一つの節へ閉じた。
+別エージェントとの反復レビューで、転送行列定義の行長 `N` を `M` へ付け替える説明、双曲線関数の定義への
+参照、三つの主張の分割、正値性に実際に使う根拠、外部入力の粒度状態の区別、前節境界の回帰検査、下流文書と
+SageMath生成物の四項分割への追随が欠けていることを検出し、すべて修正した。
+共通記法、端点因子のない和、両端のスピンの積を掛けた和、正値性の四項へ分け、二つの和が共通記法から
+並行して導かれ、正値性へ閉じる依存構造にした。章内依存順9–10の二項はこの節へ依存せず、節末を含む
+三項の外部入力集合も異なるため、順8の後が次の節境界になる。生成時に章内順、内部依存辺、次の二項からの
+非依存、本文と全外部入力本文、節末出力の一意性、対象四項の粒度合格を固定検査し、外部入力の粒度は
+未解決として明示し、最終再レビューで指摘なしを確認した。次は章内依存順9–11の転送行列による分配関数の表式、記号の定義、σzの基底作用を
+本文と照合し、次の節境界を判定する。
+
 ## 2026-08-31: スピン配置と標準基底の対応を一項節として確定
 
 2次元イジングモデル章の章内依存順4を「スピン配置と標準基底の対応」として一項の節へ閉じた。
@@ -1378,11 +1391,11 @@ lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1
 `c(M) ≤ 2c_+(M)` を出す（`u := |x|` の成分絶対値、`v := u + εu ∈ F^{(+)}`）。
 係数 2 は最良でない（数値では `c(M) = c_+(M)`、相対差 ≤ 1.9e-15）が `(1/M)log2 → 0` で消える。
 
-### 新設ラベル（018 章、11 ブロック）
+### 新設ラベル（018章、ラベル付き13ブロック）
 
 `epsilon_anticommutes_with_check_Z_Y` / `epsilon_eigenvalue_on_check_Q` /
 `trace_of_epsilon_V_plus_via_check_eigenvalues` / `H1_plus_in_sigma_z_form` /
-`open_chain_spin_sums` / `trace_of_epsilon_V_plus` / `max_eigenvector_in_even_sector` /
+`def_open_chain_spin_energy` / `open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `open_chain_spin_sums_positive` / `trace_of_epsilon_V_plus` / `max_eigenvector_in_even_sector` /
 `check_number_operator_is_hermitian` / `c_plus_equals_Lambda_half_integer` /
 `onsager_exact_solution`
 

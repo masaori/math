@@ -263,28 +263,59 @@ const spinConfigurationBasisExpectedExternalInputContentSha256 = new Map<string,
   ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
   ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
 ]);
+const openChainSpinSumsSectionEntryIds = [
+  "closing_005_definition_open_chain_spin_energy",
+  "closing_005_claim_open_chain_endpoint_product_sum",
+  "closing_005_claim_open_chain_partition_sum",
+  "closing_005_claim_open_chain_spin_sums_positive",
+] as const;
+const openChainSpinSumsExpectedInternalDependencies = new Map<string, string[]>([
+  ["closing_005_definition_open_chain_spin_energy", []],
+  ["closing_005_claim_open_chain_endpoint_product_sum", ["closing_005_definition_open_chain_spin_energy"]],
+  ["closing_005_claim_open_chain_partition_sum", ["closing_005_definition_open_chain_spin_energy"]],
+  ["closing_005_claim_open_chain_spin_sums_positive", [
+    "closing_005_claim_open_chain_endpoint_product_sum",
+    "closing_005_claim_open_chain_partition_sum",
+    "closing_005_definition_open_chain_spin_energy",
+  ]],
+]);
+const openChainSpinSumsExpectedContentSha256 = new Map<string, string>([
+  ["closing_005_definition_open_chain_spin_energy", "2062fa60483069fd13042b3bf943fdfaf32a14ae598f523f41b8b97380cc8f8d"],
+  ["closing_005_claim_open_chain_endpoint_product_sum", "002ddb1410f5983a61e4df1c0cf886c47a43ca9825c9dc2563aa9bda84029d89"],
+  ["closing_005_claim_open_chain_partition_sum", "97a1758b41d17a52343ba1188eecf112d46ba48112797988021d8d20669a19fc"],
+  ["closing_005_claim_open_chain_spin_sums_positive", "c7a0451efa605dd17821efc7a433df7f151dee481ae5c7bb88f3003e2356da9b"],
+]);
+const openChainSpinSumsExpectedExternalInputEntryIds = [
+  "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+  "calc_formulae_definition_cosh_sinh",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+  "partition_function_2d_ising_003_definition_transfer_matrix",
+].sort();
+const openChainSpinSumsExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed"],
+  ["calc_formulae_definition_cosh_sinh", "e884934c5a35ebb1daa4e665eb779f623f99cffba33fe779cf01ee52518a6d3a"],
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
+  ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
+]);
 const nextIsingBoundaryComparisonEntryIds = [
-  "bridge_001_definition_config_basis",
-  "closing_005_claim_open_chain_spin_sums",
+  "closing_005_claim_open_chain_spin_sums_positive",
   "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+  "transfer_matrix_001_definition_symbols",
 ] as const;
 const nextIsingBoundaryComparisonExpectedChapterOrders = new Map<string, number>([
-  ["bridge_001_definition_config_basis", 4],
-  ["closing_005_claim_open_chain_spin_sums", 5],
-  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", 6],
+  ["closing_005_claim_open_chain_spin_sums_positive", 8],
+  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", 9],
+  ["transfer_matrix_001_definition_symbols", 10],
 ]);
 const nextIsingBoundaryComparisonExpectedDependencies = new Map<string, string[]>([
-  ["bridge_001_definition_config_basis", [
-    "calc_formulae_006_definition_of_cc",
-    "calculation_formulae_definition_set_and_algebra_notation",
-    "partition_function_2d_ising_003_definition_transfer_matrix",
-    "transfer_matrix_005_definition_end_isomorphism",
-  ]],
-  ["closing_005_claim_open_chain_spin_sums", [
+  ["closing_005_claim_open_chain_spin_sums_positive", [
     "calc_formulae_000b_claim_cosh_sinh_basic_properties",
     "calculation_formulae_definition_set_and_algebra_notation",
-    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-    "partition_function_2d_ising_003_definition_transfer_matrix",
+    "closing_005_claim_open_chain_endpoint_product_sum",
+    "closing_005_claim_open_chain_partition_sum",
+    "closing_005_definition_open_chain_spin_energy",
   ]],
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", [
     "calc_formulae_006_definition_of_cc",
@@ -293,20 +324,30 @@ const nextIsingBoundaryComparisonExpectedDependencies = new Map<string, string[]
     "partition_function_2d_ising_002_definition_partition_function",
     "partition_function_2d_ising_003_definition_transfer_matrix",
   ]],
+  ["transfer_matrix_001_definition_symbols", [
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "exp_linear_map_002_definition_exp_of_endomorphism",
+    "linear_space_general_000_definition_kronecker_product",
+  ]],
 ]);
 const nextIsingBoundaryComparisonExpectedContentSha256 = new Map<string, string>([
-  ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
-  ["closing_005_claim_open_chain_spin_sums", "fa25952649649cac642415c984d93d8b0b20fb29fc5d6d02fbe9f62ad2d52046"],
+  ["closing_005_claim_open_chain_spin_sums_positive", "c7a0451efa605dd17821efc7a433df7f151dee481ae5c7bb88f3003e2356da9b"],
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", "67871612ac34889fb795f93a8909458399d6d096098996921c63f7a1fa2aa008"],
+  ["transfer_matrix_001_definition_symbols", "674b1e05ce04378873cc8a013b5c3ffbf34444c85b856742514dbbfe40ed608f"],
 ]);
 const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, string>([
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed"],
+  ["closing_005_claim_open_chain_endpoint_product_sum", "002ddb1410f5983a61e4df1c0cf886c47a43ca9825c9dc2563aa9bda84029d89"],
+  ["closing_005_claim_open_chain_partition_sum", "97a1758b41d17a52343ba1188eecf112d46ba48112797988021d8d20669a19fc"],
+  ["closing_005_definition_open_chain_spin_energy", "2062fa60483069fd13042b3bf943fdfaf32a14ae598f523f41b8b97380cc8f8d"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
+  ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
+  ["linear_space_general_000_definition_kronecker_product", "cb60348ee4a6bdfc5b4d4e4dc7124aed4f3a9f4e4c5593c03ad6511884cc55f8"],
   ["partition_function_2d_ising_002_definition_partition_function", "74bec1b8de279c13b6254833510bea1c16ba66f36a13323c7c2e75cbc97cfbcb"],
   ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
-  ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
 ]);
 const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_006_definition_of_cc", new Set(["abs_basic_properties", "matrix_exp_series_converges"])],
@@ -817,6 +858,56 @@ const spinConfigurationBasisUnexpectedGranularity = spinConfigurationBasisSectio
 if (spinConfigurationBasisUnexpectedGranularity.length > 0) {
   throw new Error(`スピン配置と標準基底の対応に説明粒度未確認の項目があります: ${spinConfigurationBasisUnexpectedGranularity.join(", ")}`);
 }
+const firstOpenChainEntry = entries.find((entry) => entry.id === "closing_005_definition_open_chain_spin_energy")!;
+if (firstOpenChainEntry.dependencyPlacement!.chapterOrder !== 5) {
+  throw new Error(`スピン配置と標準基底の対応の次項が章内依存順5ではありません: ${firstOpenChainEntry.dependencyPlacement!.chapterOrder}`);
+}
+if (JSON.stringify([...firstOpenChainEntry.dependsOnEntryIds].sort()) !== JSON.stringify([
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "partition_function_2d_ising_003_definition_transfer_matrix",
+])) {
+  throw new Error(`スピン配置と標準基底の対応の次項の直接依存が変わりました: ${JSON.stringify(firstOpenChainEntry.dependsOnEntryIds)}`);
+}
+if (firstOpenChainEntry.dependsOnEntryIds.includes("bridge_001_definition_config_basis")) {
+  throw new Error("スピン配置と標準基底の対応の次項から前節への依存が生じました");
+}
+if (firstOpenChainEntry.explanationGranularityReview.inspectedContentSha256
+  !== openChainSpinSumsExpectedContentSha256.get("closing_005_definition_open_chain_spin_energy")) {
+  throw new Error("スピン配置と標準基底の対応の次項本文が変わりました");
+}
+const openChainSpinSumsSection = validateReviewedSection(
+  "1次元開鎖のスピン和",
+  "2次元イジングモデル",
+  openChainSpinSumsSectionEntryIds,
+  openChainSpinSumsExpectedInternalDependencies,
+  openChainSpinSumsExpectedContentSha256,
+  openChainSpinSumsExpectedExternalInputEntryIds,
+  openChainSpinSumsExpectedExternalInputContentSha256,
+  ["closing_005_claim_open_chain_spin_sums_positive"],
+);
+const openChainSpinSumsActualChapterOrders = openChainSpinSumsSection.sectionEntries
+  .map((entry) => entry.dependencyPlacement!.chapterOrder);
+if (JSON.stringify(openChainSpinSumsActualChapterOrders) !== JSON.stringify([5, 6, 7, 8])) {
+  throw new Error(`1次元開鎖のスピン和が章内依存順5–8ではありません: ${JSON.stringify(openChainSpinSumsActualChapterOrders)}`);
+}
+const openChainSpinSumsUnexpectedGranularity = openChainSpinSumsSection.sectionEntries
+  .filter((entry) => entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  .map(({ id }) => id);
+if (openChainSpinSumsUnexpectedGranularity.length > 0) {
+  throw new Error(`1次元開鎖のスピン和に説明粒度未確認の項目があります: ${openChainSpinSumsUnexpectedGranularity.join(", ")}`);
+}
+const openChainSpinSumsSectionIdSet = new Set<string>(openChainSpinSumsSectionEntryIds);
+for (const nextEntryId of [
+  "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+  "transfer_matrix_001_definition_symbols",
+]) {
+  const nextEntry = entries.find((entry) => entry.id === nextEntryId)!;
+  const dependenciesOnOpenChainSection = nextEntry.dependsOnEntryIds
+    .filter((dependencyId) => openChainSpinSumsSectionIdSet.has(dependencyId));
+  if (dependenciesOnOpenChainSection.length > 0) {
+    throw new Error(`1次元開鎖のスピン和の次の項目から節内への依存が生じました: ${nextEntryId}: ${JSON.stringify(dependenciesOnOpenChainSection)}`);
+  }
+}
 const mathematicalToolSectionBoundaries = [{
   name: "行列指数関数による共役の級数公式",
   chapter: "数学的道具立て",
@@ -959,8 +1050,33 @@ const isingModelSectionBoundaries = [{
   ],
   concludingDefinition: "スピン配置からクロネッカー積の標準基底の多重添字への全単射",
   concludingDefinitionEntryId: "bridge_001_definition_config_basis",
-  boundaryEvidence: "章内依存順4の一項は、最初の節で定めた転送行列と、数学的道具立ての標準基底・行列表示の対応を入力として、スピン配置から多重添字への全単射を定める。章内依存順5の1次元開鎖のスピン和と章内依存順6の転送行列による分配関数の表式との間に相互依存はなく、三項の外部入力集合もそれぞれ異なる。したがって外部入力集合が変わる章内依存順4の後でこの一項の節を閉じる。外部入力とその本文 fingerprint、本文 fingerprint、章内依存順、節末定義の一意性を生成時に固定検査する。",
+  boundaryEvidence: "章内依存順4の一項は、最初の節で定めた転送行列と、数学的道具立ての標準基底・行列表示の対応を入力として、スピン配置から多重添字への全単射を定める。次の章内依存順5は、転送行列定義のスピン配置集合を別の行長記号で読み替えて開鎖エネルギーを定めるが、順4の標準基底との対応には依存せず、外部入力集合も異なる。したがって外部入力集合が変わる章内依存順4の後でこの一項の節を閉じる。外部入力とその本文 fingerprint、本文 fingerprint、章内依存順、節末定義の一意性に加え、次項の章内順・直接依存・本文 fingerprint・前節からの非依存を生成時に固定検査する。",
   readabilityStatus: "対象定義は有限集合の各成分について二通りの値を対応させ、転送行列の行・列を具体的に読み替えるため、現行の説明粒度検査に合格している。外部入力である行列と線型写像の対応の節には、具体的な行列計算への展開またはブロック分割が残る。",
+}, {
+  name: "1次元開鎖のスピン和",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  entryIds: openChainSpinSumsSectionEntryIds,
+  input: [
+    "最初の節で定めた一行分のスピン配置",
+    "双曲線関数の定義・基本性質と指数関数の積公式",
+    "有限集合と有限和の記号",
+  ],
+  externalInputEntryIds: openChainSpinSumsSection.externalInputEntryIds,
+  output: [
+    "1次元開鎖のスピン配置集合と開鎖エネルギー",
+    "端点因子を持たない1次元開鎖のスピン和と、両端のスピンの積を掛けたスピン和の閉じた式",
+    "正の結合定数に対する二つのスピン和の正値性",
+  ],
+  mainTheorem: "端点因子のないスピン和と両端のスピンの積を掛けたスピン和を双曲線関数で表す二公式",
+  mainTheoremEntryIds: [
+    "closing_005_claim_open_chain_partition_sum",
+    "closing_005_claim_open_chain_endpoint_product_sum",
+  ],
+  concludingClaim: "正の結合定数に対する二つの1次元開鎖のスピン和の正値性",
+  concludingClaimEntryId: "closing_005_claim_open_chain_spin_sums_positive",
+  boundaryEvidence: "旧来一ブロックだった内容を、共通記法、端点因子のない和、両端積付きの和、正値性の四項へ分けた章内依存順5–8の連続区間である。二つの和は共通記法だけに依存し、正値性が二公式を受け取って節末を閉じる。章内依存順9の転送行列による分配関数の表式および章内依存順10の記号の定義はこの節へ依存せず、節末を含む三項の外部入力集合もそれぞれ異なる。したがって外部入力集合が切り替わる章内依存順8の後で節を閉じる。外部入力とその本文 fingerprint、四項の本文 fingerprint、内部依存辺、章内依存順、節末出力の一意性を生成時に固定検査する。",
+  readabilityStatus: "共通記法と三つの主張を分離し、二公式は初期スピンと隣接スピンの積への具体的な全単射で有限和を計算しているため、対象四項は現行の説明粒度検査に合格している。外部入力である集合と代数構造の記号、双曲線関数の基本性質、可換行列の指数積公式には、複数の定義・主張の分割または具体的な行列計算への展開が残る。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

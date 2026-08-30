@@ -12,7 +12,8 @@
 ## 仮定として残っているもの（一次情報）
 
 人手証明 (1) は `trace_of_epsilon_V_plus`（`tr(εV^{(+)}) > 0` の**直接計算**）を使う。
-その直接計算は「1 次元開鎖のスピン和」（原文 `open_chain_spin_sums` と
+その直接計算は「1次元開鎖の二つのスピン和」（原文 `def_open_chain_spin_energy`、`open_chain_partition_sum`、
+`open_chain_endpoint_product_sum`、`open_chain_spin_sums_positive` と
 `H1_plus_in_sigma_z_form`）を要し、本セッションでは形式化していない
 （理由は `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md`）。
 したがって本ファイルの定理は **`0 < (tr(εV^{(+)})).re` を仮定として受け取る**。

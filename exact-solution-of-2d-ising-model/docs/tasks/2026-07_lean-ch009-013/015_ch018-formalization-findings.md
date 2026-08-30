@@ -51,7 +51,7 @@ tr(εV^{(+)}) = (2e^{-K_2} cosh K_1)^M + (2e^{K_2} sinh K_1)^M > 0
 を**直接計算**で出すもので、その計算は
 
 - `closing_004_claim_H1_plus_in_sigma_z_form`（`iH_1^{(+)} = D_0 + εG`、`σ^z` 表示）
-- `closing_005_claim_open_chain_spin_sums`（1 次元開鎖のスピン和
+- `closing_005_definition_open_chain_spin_energy`・`closing_005_claim_open_chain_partition_sum`・`closing_005_claim_open_chain_endpoint_product_sum`・`closing_005_claim_open_chain_spin_sums_positive`（1次元開鎖のエネルギー定義、二つのスピン和と正値性
   `∑_s e^{KE(s)} = 2(2\cosh K)^{M-1}` ほか）
 
 を要する。原文自身が「**この計算には `Ž, Y̌, ψ̌` も半整数運動量も現れない**」と述べている

@@ -1,5 +1,5 @@
 # =========================================================================
-# check_03: H1_plus_in_sigma_z_form / open_chain_spin_sums / trace_of_epsilon_V_plus
+# check_03: H1_plus_in_sigma_z_form / def_open_chain_spin_energy / open_chain_partition_sum / open_chain_endpoint_product_sum / open_chain_spin_sums_positive / trace_of_epsilon_V_plus
 #            / trace_of_epsilon_V_plus_via_check_eigenvalues
 #   (1) i Y_m Z_{m+1} = σ^z_m σ^z_{m+1}  (m ≤ M−1),  −i Y_M Z_1 = ε σ^z_M σ^z_1
 #   (2) i H_1^{(+)} = D_0 + ε G,  および ε・D_0・G の可換性と (εG)^2 = I

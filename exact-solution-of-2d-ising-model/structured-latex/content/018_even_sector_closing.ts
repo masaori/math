@@ -1243,41 +1243,56 @@ i\,H_1^{(+)}
   },
 
   {
-    id: "closing_005_claim_open_chain_spin_sums",
-    kind: "claim",
+    id: "closing_005_definition_open_chain_spin_energy",
+    kind: "definition",
     origin: { path: SRC, ordinal: 7 },
-    title: { text: "1 次元開鎖のスピン和" },
-    labels: ["open_chain_spin_sums"],
+    title: { text: "1 次元開鎖のスピン配置とエネルギー" },
+    labels: ["def_open_chain_spin_energy"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
-        "、",
-        math(String.raw`K \in \mathbb{R}`),
-        " とし、",
+        " とする。",
         ref("def_transfer_matrix"),
-        " の ",
+        " で行の長さに使った ",
+        math(String.raw`N`),
+        " をここでは ",
+        math(String.raw`M`),
+        " と書き替え、",
         math(String.raw`\mathfrak{M} = \mathrm{Map}(\{1,\dots,M\},\{-1,1\})`),
-        " について",
+        " とする。各 ",
+        math(String.raw`s\in\mathfrak M`),
+        " に対して、1次元開鎖のエネルギーを",
       ]),
       displayMath(
         String.raw`E(s) := \sum_{m=1}^{M-1}s(m)\,s(m+1) \in \mathbb{Z}
 \qquad (s \in \mathfrak{M})`,
       ),
-      paragraph(["とおく。このとき"]),
-      list([
-        [
-          math(String.raw`\text{(1)}\quad \sum_{s\in\mathfrak{M}}e^{K E(s)}
-= 2\left(2\cosh K\right)^{M-1}`),
-        ],
-        [
-          math(String.raw`\text{(2)}\quad \sum_{s\in\mathfrak{M}}s(M)\,s(1)\,e^{K E(s)}
-= 2\left(2\sinh K\right)^{M-1}`),
-        ],
-      ]),
+      paragraph(["と定める。"])],
+    conversion: {
+      status: "added",
+      notes: ["転送行列の行長 N を M と読み替えることと、開鎖エネルギーの共通記法を独立した定義にした。"],
+    },
+  },
+
+  {
+    id: "closing_005_claim_open_chain_partition_sum",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 7 },
+    title: { text: "端点因子のない1次元開鎖のスピン和" },
+    labels: ["open_chain_partition_sum"],
+    statement: [
       paragraph([
-        "が成り立つ。とくに ",
-        math(String.raw`K \in \mathbb{R}_{>0}`),
-        " のとき、(1) と (2) の値は**ともに正**である。",
+        ref("def_open_chain_spin_energy"),
+        " の記号を用い、",
+        math(String.raw`K\in\mathbb R`),
+        " とする。このとき",
+      ]),
+      displayMath(String.raw`\sum_{s\in\mathfrak M}e^{K E(s)}
+=2\left(2\cosh K\right)^{M-1}`),
+      paragraph([
+        "が成り立つ。（指数評価による ",
+        math(String.raw`\mathbb R`),
+        " 脱出）ここでは実数値の指数関数を用いる。",
       ]),
     ],
     proof: [
@@ -1309,7 +1324,7 @@ i\,H_1^{(+)}
         " 個の元をもつ。",
       ]),
       paragraph([
-        "Step 2（(1) の計算）。",
+        "Step 2（スピン和の計算）。",
         math(String.raw`E(s) = \sum_{m=1}^{M-1}t_m`),
         " なので、",
         ref("theorem_exp_product"),
@@ -1319,6 +1334,7 @@ i\,H_1^{(+)}
         math(String.raw`e^{KE(s)} = \prod_{m=1}^{M-1}e^{Kt_m}`),
         " である。Step 1 の全単射で和を書き換えると",
       ]),
+      paragraph([ref("def_cosh_sinh"), " より、最後から二つ目の等号が成り立つ。"]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{s\in\mathfrak{M}}e^{KE(s)}
@@ -1331,13 +1347,61 @@ i\,H_1^{(+)}
 &= 2\prod_{m=1}^{M-1}\left(e^{K}+e^{-K}\right)
    \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
 &= 2\prod_{m=1}^{M-1}\left(2\cosh K\right)
-   \quad \left(\because \cosh K = \frac{e^{K}+e^{-K}}{2}\right) \\
+   \quad \left(\because \text{双曲線余弦の定義}\right) \\
 &= 2\left(2\cosh K\right)^{M-1}
    \quad (\because \text{同じ因子 }2\cosh K\text{ の }M-1\text{ 個の積})
 \end{aligned}`,
       ),
+    ],
+    conversion: {
+      status: "added",
+      notes: ["数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,…,8 の全配置を直接列挙）。"],
+    },
+  },
+
+  {
+    id: "closing_005_claim_open_chain_endpoint_product_sum",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 7 },
+    title: { text: "両端のスピンの積を掛けた1次元開鎖のスピン和" },
+    labels: ["open_chain_endpoint_product_sum"],
+    statement: [
       paragraph([
-        "Step 3（(2) の計算）。",
+        ref("def_open_chain_spin_energy"),
+        " の記号を用い、",
+        math(String.raw`K\in\mathbb R`),
+        " とする。このとき",
+      ]),
+      displayMath(String.raw`\sum_{s\in\mathfrak M}s(M)s(1)e^{K E(s)}
+=2\left(2\sinh K\right)^{M-1}`),
+      paragraph([
+        "が成り立つ。（指数評価による ",
+        math(String.raw`\mathbb R`),
+        " 脱出）ここでは実数値の指数関数を用いる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 1（変数変換）。写像",
+      ]),
+      displayMath(
+        String.raw`\Phi : \mathfrak{M} \longrightarrow \{-1,1\}\times\{-1,1\}^{M-1},
+\qquad
+\Phi(s) := \left(s(1);\ t_1,\dots,t_{M-1}\right), \quad t_m := s(m)s(m+1)`,
+      ),
+      paragraph([
+        "は全単射である。実際、",
+        math(String.raw`(s(1);t_1,\dots,t_{M-1})`),
+        " から漸化式 ",
+        math(String.raw`s(m+1)=s(m)t_m`),
+        " によって ",
+        math(String.raw`s(2),\dots,s(M)`),
+        " が一意に復元され、この復元は ",
+        math(String.raw`t_m=s(m)s(m+1)`),
+        " の逆写像になる。",
+      ]),
+      paragraph([
+        "Step 2（端点因子の書き替え）。",
         math(String.raw`s(m)s(m) = 1`),
         " を繰り返し使うと",
       ]),
@@ -1357,12 +1421,19 @@ i\,H_1^{(+)}
       paragraph([
         "である（隣接する因子が対になって ",
         math(String.raw`1`),
-        " になる）。したがって",
+        " になる）。また ",
+        ref("theorem_exp_product"),
+        "（",
+        math(String.raw`n=1`),
+        "、実数の指数法則）より ",
+        math(String.raw`e^{KE(s)}=\prod_{m=1}^{M-1}e^{Kt_m}`),
+        " である。したがって",
       ]),
+      paragraph([ref("def_cosh_sinh"), " より、最後から二つ目の等号が成り立つ。"]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{s\in\mathfrak{M}}s(M)s(1)e^{KE(s)}
-&= \sum_{s(1)}\ \sum_{t_1,\dots,t_{M-1}}
+&= \sum_{s(1)\in\{-1,1\}}\ \sum_{t_1,\dots,t_{M-1}\in\{-1,1\}}
    \left(\prod_{m=1}^{M-1}t_m\right)\prod_{m=1}^{M-1}e^{Kt_m}
    \quad (\because \text{Step 1 の全単射と直前の等式}) \\
 &= \left(\sum_{s(1)\in\{-1,1\}}1\right)
@@ -1371,27 +1442,54 @@ i\,H_1^{(+)}
 &= 2\prod_{m=1}^{M-1}\left(e^{K}-e^{-K}\right)
    \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
 &= 2\prod_{m=1}^{M-1}\left(2\sinh K\right)
-   \quad \left(\because \sinh K = \frac{e^{K}-e^{-K}}{2}\right) \\
+   \quad \left(\because \text{双曲線正弦の定義}\right) \\
 &= 2\left(2\sinh K\right)^{M-1}
    \quad (\because \text{同じ因子 }2\sinh K\text{ の }M-1\text{ 個の積})
 \end{aligned}`,
       ),
+    ],
+    conversion: {
+      status: "added",
+      notes: ["数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,…,8 の全配置を直接列挙）。"],
+    },
+  },
+
+  {
+    id: "closing_005_claim_open_chain_spin_sums_positive",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 7 },
+    title: { text: "1次元開鎖の二つのスピン和の正値性" },
+    labels: ["open_chain_spin_sums_positive"],
+    statement: [
       paragraph([
-        "正値性：",
-        math(String.raw`K > 0`),
-        " なら ",
+        ref("def_open_chain_spin_energy"),
+        " の ",
+        math(String.raw`M\in\mathbb Z_{\geq2}`),
+        " を用い、",
+        math(String.raw`K\in\mathbb R_{>0}`),
+        " とする。このとき ",
+        ref("open_chain_partition_sum"),
+        " と ",
+        ref("open_chain_endpoint_product_sum"),
+        " の二つのスピン和は、ともに正の実数である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
         ref("cosh_sinh_basic_properties"),
         " より ",
-        math(String.raw`\cosh K \geq 1 > 0`),
+        math(String.raw`\cosh K > 0`),
         " かつ ",
         math(String.raw`\sinh K > 0`),
-        " なので、(1)(2) の右辺はいずれも正の実数の積である。",
+        " である。また ",
+        math(String.raw`M-1\in\mathbb Z_{>0}`),
+        " だから、二つの公式の右辺はいずれも正の実数である。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
-        "1 次元 Ising 開鎖の分配関数（境界に相関を挿入したものを含む）である。ここで必要なのは値そのものではなく「K > 0 のとき両方とも正」という点だけで、それが trace_of_epsilon_V_plus の符号を決める。",
+        "1次元 Ising 開鎖の分配関数と両端相関を挿入した和の正値性であり、trace_of_epsilon_V_plus の符号を決める。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,…,8 の全配置を直接列挙）。",
       ],
     },
@@ -1429,7 +1527,9 @@ i\,H_1^{(+)}
         " も半整数運動量も現れない。** 転送行列を配置の基底（",
         ref("def_config_basis_iso"),
         "）で見て、1 次元開鎖のスピン和（",
-        ref("open_chain_spin_sums"),
+        ref("open_chain_partition_sum"),
+        "、",
+        ref("open_chain_endpoint_product_sum"),
         "）を実行するだけである。",
       ]),
     ],
@@ -1588,7 +1688,7 @@ i\,H_1^{(+)}
           "（",
           math(String.raw`E(s) = \sum_{m=1}^{M-1}s(m)s(m+1)`),
           " は ",
-          ref("open_chain_spin_sums"),
+          ref("def_open_chain_spin_energy"),
           " のもの）。同じく ",
           math(String.raw`G`),
           " は対角行列で ",
@@ -1697,7 +1797,9 @@ i\,H_1^{(+)}
       paragraph([
         math(String.raw`s \in \mathfrak{M}`),
         " について足し、",
-        ref("open_chain_spin_sums"),
+        ref("open_chain_partition_sum"),
+        " と ",
+        ref("open_chain_endpoint_product_sum"),
         " を ",
         math(String.raw`K = K_1`),
         " として適用すると",
@@ -1710,7 +1812,7 @@ i\,H_1^{(+)}
    \quad (\because \text{def\_trace と直前の 2 式}) \\
 &= \cosh(K_1)\,e^{-MK_2}\cdot 2\left(2\cosh K_1\right)^{M-1}
  + \sinh(K_1)\,e^{MK_2}\cdot 2\left(2\sinh K_1\right)^{M-1}
-   \quad (\because \text{open\_chain\_spin\_sums (1)(2)}) \\
+   \quad (\because \text{二つの1次元開鎖のスピン和公式}) \\
 &= 2^{M}e^{-MK_2}\left(\cosh K_1\right)^{M}
  + 2^{M}e^{MK_2}\left(\sinh K_1\right)^{M}
    \quad \left(\because 2\cdot 2^{M-1} = 2^{M}\right) \\
@@ -1720,18 +1822,18 @@ i\,H_1^{(+)}
       ),
       paragraph([
         "Step 5（正値性）。",
-        math(String.raw`K_1 > 0`),
-        " より ",
+        ref("open_chain_spin_sums_positive"),
+        " を ",
+        math(String.raw`K=K_1`),
+        " として適用すると、Step 4 の最初の等号に現れる二つのスピン和はともに正である。また ",
         ref("cosh_sinh_basic_properties"),
         " から ",
-        math(String.raw`\cosh K_1 \geq 1 > 0`),
+        math(String.raw`\cosh K_1 > 0`),
         "、",
         math(String.raw`\sinh K_1 > 0`),
         "。また ",
         math(String.raw`e^{\pm K_2} > 0`),
-        "。よって 2 項ともに正の実数の ",
-        math(String.raw`M`),
-        " 乗であり、和も正である。",
+        "。したがって、その等号の二項はともに正であり、和も正である。",
       ]),
     ],
     conversion: {

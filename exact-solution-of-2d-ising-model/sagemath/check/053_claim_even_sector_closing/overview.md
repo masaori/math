@@ -13,7 +13,10 @@
   - `trace_of_epsilon_V_plus_via_check_eigenvalues`
     （`tr(εV^{(+)}) = η_{(1,…,1)}(2 sinh 2K_2)^{M/2} Π_μ 2 sinh(γ(θ~_μ)/2)`）
   - `H1_plus_in_sigma_z_form`（`iH_1^{(+)} = Σ_{m<M} σ^z_m σ^z_{m+1} + ε σ^z_M σ^z_1`）
-  - `open_chain_spin_sums`（1 次元開鎖のスピン和。`K > 0` で 2 つとも正）
+  - `def_open_chain_spin_energy`（1次元開鎖のスピン配置集合と開鎖エネルギー）
+  - `open_chain_partition_sum`（端点因子のない1次元開鎖のスピン和）
+  - `open_chain_endpoint_product_sum`（両端のスピンの積を掛けた1次元開鎖のスピン和）
+  - `open_chain_spin_sums_positive`（`K > 0` で2つの和がともに正）
   - `trace_of_epsilon_V_plus`
     （**`tr(εV^{(+)}) = (2e^{−K_2} cosh K_1)^M + (2e^{K_2} sinh K_1)^M > 0`**）
   - `max_eigenvector_in_even_sector`（**`η_{(1,…,1)} = +1`**、`ε = (−1)^M Π_μ(I − 2ň_μ)`、
@@ -85,7 +88,7 @@ P^{(±)}  := (I ± ε)/2
 |---|---------|---------|-----------|------|
 | 01 | check_01_epsilon_anticommutation.sage | `epsilon_anticommutes_with_check_Z_Y` の (1)〜(4)。あわせて 010 章 Step 1 の `εσ^x_k = σ^x_kε`, `εσ^{y,z}_k = −σ^{y,z}_kε` | PASS | 残差 ≤ 1.3e-15（(1)(2)(3) は 0.0） |
 | 02 | check_02_epsilon_parity.sage | `epsilon_eigenvalue_on_check_Q` (1)〜(4) と `max_eigenvector_in_even_sector` (1)〜(4)。`{0,1}^M` を全列挙し、`η_ε ∈ {±1}`、反転則、`ψ̌_μ^† Q̌_ε ≠ 0`、`η_ε = (−1)^{M+|ε|}`、`ε = (−1)^M Π(I−2ň_μ)`、`εQ̌_max = +Q̌_max` | PASS | 残差 ≤ 1.2e-14、反転則・予測式の違反 0 件、`‖ψ̌_μ^†Q̌_ε‖` の最小 6.58e-1 |
-| 03 | check_03_trace_epsilon_V_plus.sage | `H1_plus_in_sigma_z_form` (1)〜(4)、`open_chain_spin_sums` (1)(2)、`trace_of_epsilon_V_plus`、`trace_of_epsilon_V_plus_via_check_eigenvalues` | PASS | Pauli 恒等式の残差 0.0、開鎖和 1.4e-52（200 bit）、トレースの閉じた式の相対差 ≤ 5.2e-15、`tr(εV^{(+)})` の最小 3.30 > 0 |
+| 03 | check_03_trace_epsilon_V_plus.sage | `H1_plus_in_sigma_z_form` (1)〜(4)、`def_open_chain_spin_energy`、`open_chain_partition_sum`、`open_chain_endpoint_product_sum`、`open_chain_spin_sums_positive`、`trace_of_epsilon_V_plus`、`trace_of_epsilon_V_plus_via_check_eigenvalues` | PASS | Pauli 恒等式の残差 0.0、開鎖和 1.4e-52（200 bit）、トレースの閉じた式の相対差 ≤ 5.2e-15、`tr(εV^{(+)})` の最小 3.30 > 0 |
 | 04 | check_04_hermitian_and_c_plus.sage | `check_number_operator_is_hermitian` (1)〜(4)（`conj(α_μ) = −α_{M+1−μ}` を含む）、`V^{(+)}, W` の実対称性、`W` の成分の正値性、`WP^{(+)} = V^{(+)}P^{(+)}`、**`c_+(M) = Λ^{(1/2)}_M`**、最大固有ベクトルが実で `εq = q` | PASS | 残差 ≤ 5.2e-12、`c_+(M) = Λ^{(1/2)}_M` の相対差 ≤ 1.7e-15 |
 | 05 | check_05_free_energy_limit.sage | `onsager_exact_solution`。`c(M) = max(c_+,c_−)`、挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`、`|(1/(MN))log tr(W^N) − (1/M)log c(M)| ≤ log2/N`、`(1/M)log Λ^{(δ)}_M` の Onsager 積分への収束（`δ = 0, 1/2` の両方） | PASS | `c(M) = max(c_+,c_−)` の相対差 ≤ 1.9e-15、挟み撃ちの違反 0 件、`M=4096` で Onsager との差 ≤ 1.6e-8（臨界点） |
 
