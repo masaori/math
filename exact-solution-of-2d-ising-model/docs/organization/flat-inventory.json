@@ -12498,8 +12498,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 16606,
-        "inspectedContentSha256": "8f52eca49b0dd18b744a5931b648132cceedb474e765534b649567254aa83cb0",
+        "inspectedCharacterCount": 17130,
+        "inspectedContentSha256": "9eca35e35a602a64c7d3cc0809ed05f1ec342065d5c7a9fb193108abd9f532b1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20081,8 +20081,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 8979,
-        "inspectedContentSha256": "e7728fa7fc06ac7bc603f16c8f287a3d995d86abfcad754762a5dd2ee7cccd4e",
+        "inspectedCharacterCount": 9273,
+        "inspectedContentSha256": "0b1cd926fe152e7eefb805fcbc81fa6471e2aeb6e9ddbfcd5a617007d4fd867f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
