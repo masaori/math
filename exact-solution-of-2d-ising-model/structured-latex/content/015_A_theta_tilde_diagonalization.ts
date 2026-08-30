@@ -869,10 +869,19 @@ s_1c_2
         math(String.raw`v_\pm \neq 0`),
         " であり、これは固有ベクトルである。",
         math(String.raw`c \in \mathbb{C}^\times`),
-        " 倍しても固有ベクトルであることは ",
-        math(String.raw`A(\theta)(cv) = c\,A(\theta)v = c\lambda v = \lambda(cv)`),
-        " による。",
+        " 倍しても固有ベクトルであることは次による。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+A(\theta)(cv)
+&= c\,A(\theta)v
+   \quad (\because \text{行列とベクトルの積の各成分の分配則（スカラー倍は積の外へ出る）}) \\
+&= c(\lambda v)
+   \quad (\because \text{上で示した } A(\theta)v = \lambda v \text{ の代入}) \\
+&= \lambda(cv)
+   \quad (\because \text{複素数の積の可換性と、ベクトルのスカラー倍の結合})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 3（固有空間がこれで尽きること）。",
         math(String.raw`\lambda_{+,\mu} \neq \lambda_{-,\mu}`),
