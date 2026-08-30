@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 14 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 15 回目の tick 時点）
+
+**反転対を含まない非後退置換の動く辺の台が偶部分グラフであることを、本文と SageMath で固定した（`claim_reversal_free_moved_support_even`。Lean 未着手）。** 動く辺の台の辺集合 $E_{\mathrm{supp}}(\varphi):=\{e\in E_L\mid(e,0)\in M(\varphi)\ \text{または}\ (e,1)\in M(\varphi)\}$（`def_moved_edge_support_set`）を定義し、動く辺の集合が反転対 $\{(e,0),(e,1)\}$ を含まない非後退置換 $\varphi$ について $\operatorname{Even}_L(E_{\mathrm{supp}}(\varphi))$ を証明した。証明は、台の各辺の上の動く向き付き辺の一意性（写像 $\ell$ の全単射性）、非後退性 $\operatorname{src}(\varphi(\vec e))=\operatorname{tgt}(\vec e)$ による「$v$ を終点とする動く辺」と「$v$ を始点とする動く辺」の全単射、端点の個数の指示値による数え上げの一つの鎖である。SageMath `reversal-free-moved-support-even` は $L=2$ の非後退置換 $30{,}784$ 件を全列挙し、反転対なし $497$ 件の台がすべて偶部分グラフであることを検査した。検算対応 331 件、本文 725 ブロック・PDF 329 ページを通した。この主張は平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ で非後退置換和の項を偶部分グラフ側へ対応させる橋の部品である。次はこの主張の Lean 具体版・必要十分版を書く。
+
+前進前レビューでは前 tick の Lean 二版（セクターへのファイバー分割と係数の括り出し）を人手証明と照合し、修正対象は無かった。並列の式変形統一は、姉妹側の熱力学極限の証明にあった一行二等号 $\|\varepsilon u\|=\|u\|=1$ を三段の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 348 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 14 回目の tick 時点）
 
 **符号付き偶部分グラフ多項式のセクター和表示 `claim_signed_even_subgraph_sector_sum` を Lean 二版へ配線し、四層検証を完了した。** 具体版 `KacWard.signedEvenSubgraphPolynomial_eq_sectorSum` は、偶部分グラフの有限和を巻き付き偶奇の四セクターへ分け、セクター上で一定の符号を外へ出した。必要十分版 `NecSuf.KacWard.weightedSum_eq_sum_label_fibers_necSuf` は有限なラベル型、有限和、ラベルだけで決まる係数、分配則だけを残した。SageMath の $L=1,2,3$ 全列挙、検算対応 330 件、Lean 9,610 jobs・sorry 検査 1,629 件、本文 check・PDF 328 ページを通した。次は非後退置換和と横断消去・接触点分割を結び、平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ へ向かう。
 

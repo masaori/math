@@ -2726,9 +2726,19 @@ x^\top Wx
         math(String.raw`u \geq 0`),
         " なら ",
         math(String.raw`\varepsilon u \geq 0`),
-        " であり ",
-        math(String.raw`\|\varepsilon u\| = \|u\| = 1`),
-        "、さらに ",
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|\varepsilon u\|
+&= \|u\|
+&&\left(\because\ \varepsilon\ \text{は置換行列であり、成分の並べ替えは二乗和を変えない}\right)\\
+&= \|x\|
+&&\left(\because\ u_k=|x_k|\ \text{であり、ノルムは成分の絶対値だけで決まる}\right)\\
+&= 1
+&&\left(\because\ \|x\|=1\ \text{（Step 3 の }x\text{ の取り方）}\right)
+\end{aligned}`),
+      paragraph([
+        "である。さらに ",
         math(String.raw`\varepsilon^\top = \varepsilon`),
         "（",
         ref("sector_decomposition_of_rayleigh_sup"),
