@@ -75,10 +75,28 @@ export default defineBlocks([
     proof: [
       paragraph([math(String.raw`(x,y)\ne(0,0)`), " なので ", math(String.raw`x\ne0`), " または ", math(String.raw`y\ne0`), " である。実数の平方は非負で、非零実数の平方は正だから ", math(String.raw`x^2+y^2>0`), "。よって"]),
       displayMath(String.raw`r:=\sqrt{x^2+y^2}^{(\mathbb R_{\ge0})}>0,\qquad x_c:=\frac{x}{r},\qquad y_c:=\frac{y}{r}`),
-      paragraph(["と定められる。このとき"]),
-      displayMath(String.raw`rx_c=x,\qquad ry_c=y,\qquad x_c^2+y_c^2=\frac{x^2+y^2}{r^2}=1`),
+      paragraph(["と定められる。このとき ", math(String.raw`rx_c=x`), " と ", math(String.raw`ry_c=y`), " は ", math(String.raw`x_c,y_c`), " の定義の両辺に ", math(String.raw`r`), " を掛けて得られ、"]),
+      displayMath(String.raw`\begin{aligned}
+x_c^2+y_c^2
+&=\left(\frac{x}{r}\right)^2+\left(\frac{y}{r}\right)^2
+ &&\left(\because\ x_c,y_c\text{ の定義}\right)\\
+&=\frac{x^2+y^2}{r^2}
+ &&\left(\because\ \mathbb R\text{ の四則}\right)\\
+&=\frac{x^2+y^2}{x^2+y^2}
+ &&\left(\because\ r\text{ の定義と正の平方根の平方（}\text{定義: }\sqrt{\ }^{(\mathbb R_{\ge0})}\text{）}\right)\\
+&=1
+ &&\left(\because\ x^2+y^2>0\text{ なので約分できる}\right)
+\end{aligned}`),
       paragraph(["だから存在する。別の ", math(String.raw`r'>0,(x_c',y_c')\in C_{\mathrm{unit}}`), " が条件を満たすなら"]),
-      displayMath(String.raw`x^2+y^2=(r'x_c')^2+(r'y_c')^2=(r')^2\bigl((x_c')^2+(y_c')^2\bigr)=(r')^2`),
+      displayMath(String.raw`\begin{aligned}
+x^2+y^2
+&=(r'x_c')^2+(r'y_c')^2
+ &&\left(\because\ \text{条件 }r'x_c'=x,\ r'y_c'=y\right)\\
+&=(r')^2\bigl((x_c')^2+(y_c')^2\bigr)
+ &&\left(\because\ \mathbb R\text{ の四則}\right)\\
+&=(r')^2
+ &&\left(\because\ (x_c',y_c')\in C_{\mathrm{unit}}\text{ の定義式 }(x_c')^2+(y_c')^2=1\right)
+\end{aligned}`),
       paragraph(["である。正の平方根の一意性より ", math(String.raw`r'=r`), "。したがって ", math(String.raw`x_c'=x/r=x_c`), "、", math(String.raw`y_c'=y/r=y_c`), " であり一意である。"]),
     ],
     conversion: { status: "added", notes: ["写像定義に混在していた存在一意性を独立させた。"] },
