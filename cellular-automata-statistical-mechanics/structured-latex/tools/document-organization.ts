@@ -157,6 +157,17 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "full_neighborhood_realization",
+        title: "全近傍 2 値セルオートマトンによる有限自己写像の実現",
+        input: "有限舞台、2 値の状態集合、有限自己写像の共役分類と巡回型を入力とする。",
+        output: "有限舞台上の 2 値セルオートマトンが定める有限自己写像と、各セルの近傍を舞台全体に取ったときに実現できる大域写像の範囲を得る。",
+        main: "全近傍 2 値セルオートマトンの大域写像が配位空間上の全ての自己写像を実現することを土台にし、主張はその帰結として、配位空間の元数の任意の分割が可逆な大域写像の巡回型として実現すること、および同じ数値プロファイルをもつ非共役な二つの自己写像が三セルの 2 値セルオートマトンとして実現することである。",
+        mainLabels: [
+          "claim_binary_ca_reversible_cycle_type_realizes_every_partition",
+          "claim_iterate_monoid_conjugacy_numerical_profile_counterexample_ca_specialization",
+        ],
+      },
+      {
         id: "conjugacy_and_locality_classification",
         title: "共役分類と局所性による制限",
         input: "有限自己写像の共役分類と、2 値 CA の局所表現を入力とする。",

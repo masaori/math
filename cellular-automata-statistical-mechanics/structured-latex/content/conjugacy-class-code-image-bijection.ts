@@ -60,7 +60,8 @@ export default defineBlocks([
     statement: [
       paragraph([
         "有限舞台 ", math(String.raw`V`), " の二値配位空間を ", math(String.raw`X:=A^V`),
-        " とする。各 ", math(String.raw`F\in\operatorname{End}(X)`), " は、全ての ",
+        " とする。各 ", math(String.raw`F\in\operatorname{End}(X)`), "（",
+        ref("def_conjugacy_class_all_self_maps"), "）は、全ての ",
         math(String.raw`v\in V`), " で ", math(String.raw`N(v):=V`),
         " とする二値セルオートマトンの大域写像として実現できる。",
       ]),
