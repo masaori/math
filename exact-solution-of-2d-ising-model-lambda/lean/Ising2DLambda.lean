@@ -969,3 +969,4 @@ import Ising2DLambda.KacWard.MovedOrbitPartition
 import Ising2DLambda.NecSuf.KacWard.TermOrbitWeightFactorization
 import Ising2DLambda.KacWard.TermOrbitWeightFactorization
 import Ising2DLambda.NecSuf.KacWard.PermutationSignOrbitProduct
+import Ising2DLambda.KacWard.PermutationSignOrbitProduct

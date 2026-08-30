@@ -474,10 +474,18 @@ s(i,j) := \mu^{(i)}(j) \quad (i\in\{1,\dots,M\},\ j\in\{1,\dots,N\})`,
       paragraph([
         "よって ",
         math(String.raw`\Phi`),
-        " は全単射である（両辺の濃度も ",
-        math(String.raw`|\mathfrak{M}^{M}| = (2^N)^M = 2^{MN} = |\mathfrak{S}|`),
-        " で整合する）。",
+        " は全単射である。両辺の濃度も",
       ]),
+      displayMath(String.raw`\begin{aligned}
+|\mathfrak{M}^{M}|
+&= (2^N)^M
+&&\bigl(\because\ \mathfrak{M}^{M}\text{ は }M\text{ 個の直積で、}|\mathfrak{M}|=2^N\text{（}\{1,\dots,N\}\text{ から }\{-1,1\}\text{ への写像の総数）}\bigr)\\
+&= 2^{MN}
+&&\bigl(\because\ \text{指数法則 }(a^m)^n=a^{mn}\bigr)\\
+&= |\mathfrak{S}|
+&&\bigl(\because\ \mathfrak{S}\text{ は }\{1,\dots,M\}\times\{1,\dots,N\}\text{ から }\{-1,1\}\text{ への写像全体で、その総数は }2^{MN}\bigr)
+\end{aligned}`),
+      paragraph(["で整合する。"]),
       paragraph([
         "（周期規約の整合）",
         math(String.raw`s = \Phi(\mu^{(1)},\dots,\mu^{(M)})`),
