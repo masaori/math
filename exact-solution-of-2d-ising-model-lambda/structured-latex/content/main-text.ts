@@ -51449,9 +51449,24 @@ r<s,\ \operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s),\
               ],
               proof: [
                 paragraph([
-                  ref("claim_crossing_number_vertex_decomposition"), " のファイバー分解と同じ論法を平滑化後の通過族へ適用すると、",
+                  "準備として、平滑化後の横断数の頂点ごとの分解を示す。",
+                  ref("def_smoothed_crossing_number"), " の添字対の集合を ",
+                  math(String.raw`C^{\mathrm{sm}}`), "、",
+                  ref("def_smoothed_vertexwise_crossing_number"), " の添字対の集合を ",
+                  math(String.raw`C^{\mathrm{sm}}_w`), "（", math(String.raw`w\in V_L`),
+                  "）と置く。任意の ", math(String.raw`(r,s)\in C^{\mathrm{sm}}`),
+                  " について、その頂点 ", math(String.raw`\operatorname{tgt}(\vec e_r)`),
+                  " は ", math(String.raw`V_L`), " の元であり（", ref("def_closed_walk_passes"),
+                  "）、", math(String.raw`(r,s)`), " はちょうど一つの ",
+                  math(String.raw`w=\operatorname{tgt}(\vec e_r)`), " について ",
+                  math(String.raw`C^{\mathrm{sm}}_w`), " に属する（二つの定義は条件 ",
+                  math(String.raw`\operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s)=w`),
+                  " の有無だけが異なるため）。よって ", math(String.raw`C^{\mathrm{sm}}`),
+                  " は互いに交わらない有限集合の族 ",
+                  math(String.raw`(C^{\mathrm{sm}}_w)_{w\in V_L}`),
+                  " の合併であり、個数の和として ",
                   math(String.raw`c_{\mathrm{sm}}(\gamma;k,l)=\sum_{w\in V_L}c_w^{\mathrm{sm}}(\gamma;k,l)`),
-                  " である。横断の頂点 ", math(String.raw`v`), " の項とそれ以外の項に分ける。",
+                  " を得る。横断の頂点 ", math(String.raw`v`), " の項とそれ以外の項に分ける。",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 c(\gamma)+1
