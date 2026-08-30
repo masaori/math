@@ -20,6 +20,13 @@ import time
 import traceback
 
 
+def positive_int(raw):
+    value = int(raw)
+    if value <= 0:
+        raise argparse.ArgumentTypeError('must be a positive integer')
+    return value
+
+
 def check_root():
     here = os.path.dirname(os.path.abspath(__file__))
     return os.path.normpath(os.path.join(here, '..', 'check'))
@@ -119,6 +126,78 @@ def worker_main(args):
     out.close()
 
 
+def summarize_results(files, outdir, jobs, codes):
+    records = []
+    malformed = []
+    for w in range(jobs):
+        result_path = os.path.join(outdir, 'result-{}.jsonl'.format(w))
+        with open(result_path) as fh:
+            for line_number, line in enumerate(fh, 1):
+                try:
+                    record = json.loads(line)
+                except (TypeError, ValueError) as exc:
+                    malformed.append('{}:{}: {}'.format(result_path, line_number, exc))
+                    continue
+                if not isinstance(record, dict):
+                    malformed.append('{}:{}: result is not an object'.format(
+                        result_path, line_number))
+                    continue
+                records.append(record)
+
+    by_index = {}
+    invalid_records = []
+    for record in records:
+        idx = record.get('index')
+        if not isinstance(idx, int) or idx < 0 or idx >= len(files):
+            invalid_records.append(record)
+            continue
+        expected_file = os.path.relpath(files[idx], check_root())
+        if record.get('file') != expected_file:
+            invalid_records.append(record)
+            continue
+        if record.get('status') not in {'PASS', 'FAIL', 'TIMEOUT'}:
+            invalid_records.append(record)
+            continue
+        by_index.setdefault(idx, []).append(record)
+
+    missing = [idx for idx in range(len(files)) if idx not in by_index]
+    duplicates = {idx: found for idx, found in by_index.items() if len(found) != 1}
+    non_pass = [
+        found[0] for found in by_index.values()
+        if len(found) == 1 and found[0]['status'] != 'PASS'
+    ]
+    counts = {}
+    for record in records:
+        status = record.get('status')
+        if status not in {'PASS', 'FAIL', 'TIMEOUT'}:
+            status = 'INVALID'
+        counts[status] = counts.get(status, 0) + 1
+
+    print('status counts: {}'.format(counts), flush=True)
+    print('completed unique files: {}/{}'.format(len(by_index), len(files)), flush=True)
+    for record in sorted(non_pass, key=lambda item: item['index']):
+        print('{}: {} ({})'.format(
+            record['status'], record['file'], record.get('detail', '')), flush=True)
+    for message in malformed:
+        print('MALFORMED: {}'.format(message), flush=True)
+    for record in invalid_records:
+        print('INVALID RECORD: {}'.format(record), flush=True)
+    for idx in missing:
+        print('MISSING: {}'.format(os.path.relpath(files[idx], check_root())), flush=True)
+    for idx, found in sorted(duplicates.items()):
+        print('DUPLICATE: {} ({} records)'.format(
+            os.path.relpath(files[idx], check_root()), len(found)), flush=True)
+
+    return not (
+        any(code != 0 for code in codes)
+        or bool(malformed)
+        or bool(invalid_records)
+        or bool(missing)
+        or bool(duplicates)
+        or bool(non_pass)
+    )
+
+
 def driver_main(args):
     files = collect_files()
     outdir = os.path.abspath(args.outdir)
@@ -144,25 +223,31 @@ def driver_main(args):
             '--result', result_path, '--worker', str(w),
             '--timeout', str(args.timeout),
         ]
-        procs.append(subprocess.Popen(cmd, stdout=open(log_path, 'w'),
-                                      stderr=subprocess.STDOUT))
-    codes = [p.wait() for p in procs]
+        log = open(log_path, 'w')
+        procs.append((subprocess.Popen(cmd, stdout=log,
+                                       stderr=subprocess.STDOUT), log))
+    codes = []
+    for proc, log in procs:
+        codes.append(proc.wait())
+        log.close()
     print('worker exit codes: {}'.format(codes), flush=True)
+    if not summarize_results(files, outdir, args.jobs, codes):
+        raise SystemExit(1)
 
 
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest='mode', required=True)
     d = sub.add_parser('driver')
-    d.add_argument('--jobs', type=int, default=12)
-    d.add_argument('--timeout', type=int, default=600)
+    d.add_argument('--jobs', type=positive_int, default=12)
+    d.add_argument('--timeout', type=positive_int, default=600)
     d.add_argument('--outdir', default='/tmp/ca-sage-sweep')
     w = sub.add_parser('worker')
     w.add_argument('--list', required=True)
     w.add_argument('--counter', required=True)
     w.add_argument('--result', required=True)
     w.add_argument('--worker', type=int, required=True)
-    w.add_argument('--timeout', type=int, default=600)
+    w.add_argument('--timeout', type=positive_int, default=600)
     args = ap.parse_args()
     if args.mode == 'driver':
         driver_main(args)

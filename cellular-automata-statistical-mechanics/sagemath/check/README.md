@@ -43,12 +43,13 @@
 各検算を隔離した名前空間へ `load` し、次に実行する 1 本を共有カウンタから取り出す。
 
 ```sh
-sage -python sagemath/tools/sweep_all_checks.py driver --jobs 12 --timeout 420 --outdir /tmp/ca-sage-sweep
+sage -python sagemath/tools/sweep_all_checks.py driver --jobs 12 --timeout 600 --outdir /tmp/ca-sage-sweep
 ```
 
 結果は `--outdir` の `result-<ワーカー番号>.jsonl` に 1 本 1 行で残る（`file` / `status` / `seconds`）。
 `status` は `PASS` / `FAIL` / `TIMEOUT` のいずれかで、`--timeout` を超えた検算は握り潰さず
-`TIMEOUT` として記録する。
+`TIMEOUT` として記録する。driver は全ファイルが重複なく一度ずつ `PASS` したことまで集計し、
+`FAIL` / `TIMEOUT`、ワーカーの異常終了、結果の欠落・重複・破損が一つでもあれば終了コード 1 を返す。
 
 この経路が満たしている条件は二つある。**隔離名前空間**: 検算ファイル内の相対 `load` も同じ
 名前空間へ入れる（名前空間を指定しないと Sage の利用者名前空間へ入り、`_common.sage` で定義した
