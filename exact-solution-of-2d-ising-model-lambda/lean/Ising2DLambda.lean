@@ -950,3 +950,5 @@ import Ising2DLambda.NecSuf.KacWard.CrossingEliminationBySmoothing
 import Ising2DLambda.KacWard.CrossingEliminationBySmoothing
 import Ising2DLambda.NecSuf.KacWard.CrossingFreeSignCounterexample
 import Ising2DLambda.KacWard.CrossingFreeSignCounterexample
+import Ising2DLambda.NecSuf.KacWard.EdgeSimpleReconnection
+import Ising2DLambda.KacWard.EdgeSimpleReconnection

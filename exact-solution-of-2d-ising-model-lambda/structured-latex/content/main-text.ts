@@ -52719,6 +52719,98 @@ t_{\circ}(\gamma_{\mathrm c})
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_edge_simple_reconnection",
+        labels: [],
+        title: { text: "台の辺が相異なる閉歩道では再接続が後退しない" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_edge_simple_reconnection_nonbacktracking",
+            focus: {
+              id: "kac_ward_claim_edge_simple_reconnection_nonbacktracking",
+              kind: "claim",
+              title: { text: "台の辺が相異なる閉歩道の出辺交換は非後退接続を与える" },
+              labels: ["claim_edge_simple_reconnection_nonbacktracking"],
+              habitat: "N",
+              verification: ["sagemath/check/edge-simple-reconnection-nonbacktracking"],
+              lean: [
+                "Ising2DLambda.KacWard.edgeSimpleReconnectionNonbacktracking",
+                "Ising2DLambda.NecSuf.KacWard.reversal_avoidance_necSuf",
+                "Ising2DLambda.KacWard.edgeSimpleReconnectionNonbacktracking_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）の各項を ",
+                  math(String.raw`\vec e_a=(e_a,d_a)\in\vec E_L`),
+                  " と書き（", ref("def_oriented_edges"), "）、台の辺が相異なるとする。すなわち、任意の ",
+                  math(String.raw`a,b\in I_m`), " について ",
+                  math(String.raw`e_a=e_b`), " ならば ", math(String.raw`a=b`),
+                  " とする。二つの添字 ", math(String.raw`k,l\in I_m`), "、",
+                  math(String.raw`k\ne l`), " が通過の頂点を共有する（",
+                  math(String.raw`\operatorname{tgt}(\vec e_k)=\operatorname{tgt}(\vec e_l)`),
+                  "、通過と巡回後続写像 ", math(String.raw`\sigma`), " は ",
+                  ref("def_closed_walk_passes"), "）とする。このとき出辺を交換した二つの再接続について",
+                ]),
+                displayMath(String.raw`\vec e_{\sigma(l)}\in\operatorname{Next}(\vec e_k)
+\quad\text{かつ}\quad
+\vec e_{\sigma(k)}\in\operatorname{Next}(\vec e_l)`),
+                paragraph([
+                  "が成り立つ（", ref("def_nonbacktracking_successors"),
+                  "）。前節の反例の辺列は三番目と六番目の項が台の辺 ",
+                  math(String.raw`n_{\mathrm v}(0,0)`),
+                  " を共有するので、この主張の仮定を満たさない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "反転写像は台の辺を変えない: ", math(String.raw`\iota(e,d)=(e,1-d)`),
+                  " の第 1 成分は ", math(String.raw`e`), " のままである（",
+                  ref("def_edge_reversal"), "）。二つの再接続は ",
+                  math(String.raw`k`), " と ", math(String.raw`l`),
+                  " を入れ替えて対称なので、", math(String.raw`\vec e_{\sigma(l)}\in\operatorname{Next}(\vec e_k)`),
+                  " を示せば足りる。", ref("def_nonbacktracking_successors"),
+                  " の二条件を順に確かめる。第一に、始点と終点の一致は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{src}(\vec e_{\sigma(l)})
+&=\operatorname{tgt}(\vec e_l)
+&&\bigl(\because\ \text{添字 }l\text{ の通過は非後退接続である: }\blkref{def_closed_walk_passes}\text{ と }\blkref{def_nonbacktracking_successors}\bigr)\\
+&=\operatorname{tgt}(\vec e_k)
+&&\bigl(\because\ \text{仮定: 通過の頂点の共有}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。第二に、", math(String.raw`\vec e_{\sigma(l)}\ne\iota(\vec e_k)`),
+                  " を背理法で示す。", math(String.raw`\vec e_{\sigma(l)}=\iota(\vec e_k)`),
+                  " と仮定すると、両辺の第 1 成分を取って ",
+                  math(String.raw`e_{\sigma(l)}=e_k`),
+                  " を得る（反転写像は台の辺を変えないため）。台の辺が相異なるという仮定により ",
+                  math(String.raw`\sigma(l)=k`), "、したがって ",
+                  math(String.raw`\vec e_{\sigma(l)}=\vec e_k`),
+                  " である。背理法の仮定と合わせると ",
+                  math(String.raw`\vec e_k=\iota(\vec e_k)`), "、第 2 成分を読んで ",
+                  math(String.raw`d_k=1-d_k`), "、すなわち ",
+                  math(String.raw`2d_k=1`), " となるが、これは ",
+                  math(String.raw`d_k\in\{0,1\}\subset\mathbb Z`),
+                  " のどちらの値でも成り立たない（", math(String.raw`\mathbb Z`),
+                  " の乗法で ", math(String.raw`2\cdot0=0\ne1`), "、",
+                  math(String.raw`2\cdot1=2\ne1`), " のため）。矛盾したので ",
+                  math(String.raw`\vec e_{\sigma(l)}\ne\iota(\vec e_k)`),
+                  " である。以上二条件より ",
+                  math(String.raw`\vec e_{\sigma(l)}\in\operatorname{Next}(\vec e_k)`),
+                  " が成り立つ。全過程は有限集合と整数の演算だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

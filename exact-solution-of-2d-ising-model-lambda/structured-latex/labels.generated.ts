@@ -46,6 +46,7 @@ export const ALL_LABELS = [
   "claim_dual_broken_edges_winding_zero",
   "claim_dual_edge_map_bijective",
   "claim_edge_row_partition",
+  "claim_edge_simple_reconnection_nonbacktracking",
   "claim_even_subgraph_spin_sum",
   "claim_finite_free_entropy_density_nonnegative",
   "claim_finite_free_entropy_density_upper_bound",

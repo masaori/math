@@ -1627,6 +1627,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.crossingFreeSignCounterexample_necSuf
   Ising2DLambda.KacWard.crossingFreeSignCounterexample
   Ising2DLambda.KacWard.crossingFreeSignCounterexample_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.reversal_avoidance_necSuf
+  Ising2DLambda.KacWard.edgeSimpleReconnectionNonbacktracking
+  Ising2DLambda.KacWard.edgeSimpleReconnectionNonbacktracking_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
