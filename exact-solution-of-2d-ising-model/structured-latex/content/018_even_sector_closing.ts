@@ -2569,7 +2569,17 @@ x^\top W x
       ]),
       list([
         [
-          math(String.raw`\varepsilon v = \varepsilon u + \varepsilon^2 u = \varepsilon u + u = v`),
+          displayMath(String.raw`\begin{aligned}
+\varepsilon v
+&= \varepsilon\left(u+\varepsilon u\right)
+&&\left(\because\ v=u+\varepsilon u\right)\\
+&= \varepsilon u+\varepsilon^2u
+&&\left(\because\ \text{行列の分配則}\right)\\
+&= \varepsilon u+u
+&&\left(\because\ \varepsilon^2=I\right)\\
+&=v
+&&\left(\because\ v=u+\varepsilon u\right)
+\end{aligned}`),
           " より ",
           math(String.raw`v \in \mathcal{F}^{(+)}`),
           "（",

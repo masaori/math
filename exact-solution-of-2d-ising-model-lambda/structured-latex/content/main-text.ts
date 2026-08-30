@@ -52411,6 +52411,69 @@ c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_split_crossing_descent",
+        labels: [],
+        title: { text: "平滑化による横断数の真の減少" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_smoothing_split_crossing_descent",
+            focus: {
+              id: "kac_ward_claim_smoothing_split_crossing_descent",
+              kind: "claim",
+              title: { text: "平滑化で分けた二本の横断数の和は元より小さい" },
+              labels: ["claim_smoothing_split_crossing_descent"],
+              habitat: "N",
+              verification: ["sagemath/check/smoothing-straight-visit-count"],
+              lean: [
+                "Ising2DLambda.KacWard.smoothing_split_crossing_descent",
+                "Ising2DLambda.NecSuf.KacWard.smoothing_split_crossing_descent_necSuf",
+                "Ising2DLambda.KacWard.smoothing_split_crossing_descent_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  ref("claim_smoothing_split_crossing_partition"), " と同じ閉じた非後退辺列 ",
+                  math(String.raw`\gamma`), " と横断する添字 ", math(String.raw`k<l`),
+                  " を取り、平滑化で得る二本の閉歩道を ",
+                  math(String.raw`\gamma_A,\gamma_B`), " とする。このとき自然数の狭義不等式",
+                ]),
+                displayMath(String.raw`c(\gamma_A)+c(\gamma_B)<c(\gamma)`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph([
+                  "選んだ二つの通過は横断するので（", ref("def_index_pair_crossing"), "）、横断頂点 ",
+                  math(String.raw`v`), " で互いに異なる二軸を直進する。従って ",
+                  ref("def_smoothing_straight_visit_count"), " の平滑化前の直進通過数は ",
+                  math(String.raw`1\le n_{v,0}(\gamma)`), "、",
+                  math(String.raw`1\le n_{v,1}(\gamma)`), " を満たす。混合横断数は自然数なので、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+c(\gamma_A)+c(\gamma_B)+2
+&\le c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)
+  +n_{v,0}(\gamma)+n_{v,1}(\gamma)
+&&\bigl(\because\ c_{\times}\in\mathbb N,\ 1\le n_{v,0},\ 1\le n_{v,1}\bigr)\\
+&=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_split_crossing_partition}\bigr)\\
+&=c(\gamma)+1
+&&\bigl(\because\ \blkref{claim_smoothing_crossing_number_update}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "自然数の順序でこの不等式から ",
+                  math(String.raw`c(\gamma_A)+c(\gamma_B)<c(\gamma)`),
+                  " を得る。全過程は自然数の加法と順序だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

@@ -362,6 +362,7 @@ export const ALL_LABELS = [
   "claim_smoothing_interval_invariance",
   "claim_smoothing_other_vertex_crossing_invariance",
   "claim_smoothing_seam_parity_invariance",
+  "claim_smoothing_split_crossing_descent",
   "claim_smoothing_split_crossing_partition",
   "claim_smoothing_split_seam_parity",
   "claim_smoothing_split_turning_sum",

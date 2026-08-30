@@ -80,6 +80,7 @@ closed_walk_split_checks = 0
 split_turning_sum_checks = 0
 split_seam_parity_checks = 0
 split_crossing_partition_checks = 0
+split_crossing_descent_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -254,6 +255,13 @@ for L in range(1, 4):
                     != direction_number(walk[s]) % 2))
                 assert split_crossings + mutual_crossings == after_total
                 split_crossing_partition_checks += 1
+                # 選んだ横断は二軸の直進通過を一つずつ含む。分割等式と
+                # 全体更新式を合わせると、二本の横断数の和は元より真に小さい
+                # （claim_smoothing_split_crossing_descent）。
+                assert before_axis[0] >= 1
+                assert before_axis[1] >= 1
+                assert split_crossings < before_total
+                split_crossing_descent_checks += 1
                 for vertex in vertices:
                     if vertex == cross_vertex:
                         continue
@@ -298,6 +306,7 @@ assert closed_walk_split_checks == crossing_pair_total
 assert split_turning_sum_checks == crossing_pair_total
 assert split_seam_parity_checks == crossing_pair_total
 assert split_crossing_partition_checks == crossing_pair_total
+assert split_crossing_descent_checks == crossing_pair_total
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
       f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
@@ -310,4 +319,5 @@ print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing p
       f"and {split_turning_sum_checks} split turning sum checks "
       f"and {split_seam_parity_checks} split seam-parity checks "
       f"and {split_crossing_partition_checks} split crossing partition checks "
+      f"and {split_crossing_descent_checks} split crossing descent checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")

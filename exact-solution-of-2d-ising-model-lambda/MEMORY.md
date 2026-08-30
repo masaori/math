@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 22 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 23 回目の tick 時点）
+
+**平滑化で分けた二本の閉歩道の横断数の和が元の閉歩道より真に小さいことを四層で証明した。** 選んだ横断は異なる二軸を直進するので $1\le n_{v,0}(\gamma),n_{v,1}(\gamma)$ であり、横断数の分割等式 `claim_smoothing_split_crossing_partition` と全体更新式 `claim_smoothing_crossing_number_update` を結んで $c(\gamma_A)+c(\gamma_B)+2\le c(\gamma)+1$、従って `claim_smoothing_split_crossing_descent` の $c(\gamma_A)+c(\gamma_B)<c(\gamma)$ を得た。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対で二本の横断数を独立に数えて狭義減少を検査した。Lean は具体版 `KacWard/SmoothingSplitCrossingDescent.lean` と、二本の自然数等式・各軸の下界だけを残した必要十分版を通した。次はこの狭義減少による横断数の整礎帰納を明記し、回転数・切断線偶奇・横断数の保存則を回転位相の符号表示へ結合する。
+
+前進前レビューでは、前 tick の横断数の三分割（コミット `9c02acbe`）を四層で照合し、今回の狭義減少が直接引く内容を担うため「何も言っていない主張」ではなく、修正対象も無いことを確認した。
+
+並列の式変形統一は、姉妹側の偶数セクター終結章の最終定理で、$v=u+\varepsilon u$ に対する $\varepsilon v$ の一行三等号を、四段の一行一等号・行末根拠つきの鎖へ開いた（check・PDF 342 ページ通過）。次は同じ最終定理に残る $\|v\|^2$ の一行三等号を見る。
+
+## ひとつ前の到達点（2026-08-30 の 22 回目の tick 時点）
 
 **平滑化後の横断数が二本の閉歩道の横断数と混合横断数の和に分かれることを四層で証明した。** 混合横断数 $c_{\times}(\gamma;k,l)\in\mathbb N$（`def_split_mutual_crossing_number`。$A\times B$ の対で横断の三条件を満たすものの個数）を定義し、平滑化後の横断対の集合を帰属で三つへ互いに素に分割して、位置写像の全単射と横断の三条件の対称性（`claim_transverse_crossing_symmetric`）により $c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)=c_{\mathrm{sm}}(\gamma;k,l)$（`claim_smoothing_split_crossing_partition`）を得た。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対で二本の横断数を各辺列の巡回構造から独立に数えて照合した。Lean は具体版 `KacWard/SmoothingSplitCrossingPartition.lean` と、排他的な二述語による有限集合の三分割だけを残した必要十分版 `three_way_filter_card_necSuf` を通した。次は横断数の帰納の骨格（横断が残る限り平滑化を繰り返す）を立て、回転位相の符号表示へ進む。
 

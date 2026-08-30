@@ -944,3 +944,5 @@ import Ising2DLambda.NecSuf.KacWard.SmoothingSplitSeamParity
 import Ising2DLambda.KacWard.SmoothingSplitSeamParity
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitCrossingPartition
 import Ising2DLambda.KacWard.SmoothingSplitCrossingPartition
+import Ising2DLambda.NecSuf.KacWard.SmoothingSplitCrossingDescent
+import Ising2DLambda.KacWard.SmoothingSplitCrossingDescent
