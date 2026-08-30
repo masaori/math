@@ -51665,7 +51665,7 @@ t_{\mathrm{sm}}(\gamma;k,l)
 &&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)
 \end{aligned}`),
                 paragraph([
-                  "全過程は整数の加法だけで閉じ、実数体も複素数体も現れない。平滑化で失われる二つの直進の代わりに現れる二つの曲がりは、左回転と右回転が一つずつであり、打ち消し合う。",
+                  "全過程は整数の加法だけで閉じ、実数体も複素数体も現れない。",
                 ]),
               ],
             },
