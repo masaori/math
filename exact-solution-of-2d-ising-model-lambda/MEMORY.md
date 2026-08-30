@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 13 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 14 回目の tick 時点）
+
+**符号付き偶部分グラフ多項式のセクター和表示 `claim_signed_even_subgraph_sector_sum` を Lean 二版へ配線し、四層検証を完了した。** 具体版 `KacWard.signedEvenSubgraphPolynomial_eq_sectorSum` は、偶部分グラフの有限和を巻き付き偶奇の四セクターへ分け、セクター上で一定の符号を外へ出した。必要十分版 `NecSuf.KacWard.weightedSum_eq_sum_label_fibers_necSuf` は有限なラベル型、有限和、ラベルだけで決まる係数、分配則だけを残した。SageMath の $L=1,2,3$ 全列挙、検算対応 330 件、Lean 9,610 jobs・sorry 検査 1,629 件、本文 check・PDF 328 ページを通した。次は非後退置換和と横断消去・接触点分割を結び、平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ へ向かう。
+
+前進前レビューでは前 tick の本文と SageMath を照合し、「何も言っていない主張」や不一致は無かった。並列の式変形統一は、姉妹側の「sqrt と積が可換になる条件」の零因子の場合にあった二つの一行複数等号を、四つの一行一等号・行末根拠つきの鎖へ開いた（姉妹側 check・PDF 348 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 13 回目の tick 時点）
 
 **符号付き偶部分グラフ多項式を定義し、セクター生成多項式の符号付き和との一致を本文と SageMath で固定した（`claim_signed_even_subgraph_sector_sum`。Lean 未着手）。** 平方恒等式の右辺となる $Q^{a,b}_L:=\sum_{A\subseteq E_L,\ \operatorname{Even}_L(A)}(-1)^{(1+a)\varepsilon_{L,\mathrm h}(A)+(1+b)\varepsilon_{L,\mathrm v}(A)+\varepsilon_{L,\mathrm h}(A)\varepsilon_{L,\mathrm v}(A)}x^{|A|}\in\mathbb Z[x]$（`def_signed_even_subgraph_polynomial`。符号は 2026-08-30 の $L=2,3$ 厳密観察で特定した候補）を定義し、偶部分グラフの四セクター分割 `claim_torus_homology_sector_partition` で有限和を分け、各セクター上で巻き付き偶奇が定数になることと $\mathbb Z[x]$ の分配則で $Q^{a,b}_L=\sum_{(c,d)\in\{0,1\}^2}(-1)^{(1+a)c+(1+b)d+cd}G^{c,d}_L$ を得た。SageMath `signed-even-subgraph-sector-sum` は $L=1,2,3$ の偶部分グラフ全列挙（4・32・1,024 個）と四スピン構造で両辺を $\mathbb Z[x]$ で比較した。本文 722 ブロック・検算対応 330 件・PDF 328 ページを通した。次はこの主張の Lean 具体版・必要十分版を書き、その後に非後退置換和と横断消去・接触点分割を結んで平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ へ向かう。
 

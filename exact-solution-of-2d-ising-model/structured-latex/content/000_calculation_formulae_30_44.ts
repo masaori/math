@@ -2130,18 +2130,30 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ 0\ \text{を因子にもつ積は}\ 0)
 \end{aligned}`),
       paragraph([
-        "となり、",
-        math(String.raw`\sqrt{z_1}\sqrt{z_2}=(0,0)\cdot\sqrt{z_2}=(0,0)`),
-        " である（",
+        "となる。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{z_1}\sqrt{z_2}
+&= (0,0)\cdot\sqrt{z_2}
+&&(\because\ \sqrt{z_1}=(0,0)\ \text{という直前の計算})\\
+&= (0,0)
+&&(\because\ \mathbb{C}\ \text{の零元を因子にもつ積は零元})
+\end{aligned}`),
+      paragraph([
         math(String.raw`(0,0)`),
         " は ",
         math(String.raw`\mathbb{C}`),
-        " の零元であり、零元を因子にもつ積は零元である）。",
+        " の零元である。",
         math(String.raw`r_2=0`),
         " の場合も第 2 因子について同じ計算になる。したがってこの場合",
-        math(String.raw`\sqrt{z_1 z_2}=(0,0)=\sqrt{z_1}\sqrt{z_2}`),
-        " である。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{z_1 z_2}
+&= (0,0)
+&&(\because\ \text{上で計算した左辺})\\
+&= \sqrt{z_1}\sqrt{z_2}
+&&(\because\ r_1=0\ \text{または}\ r_2=0\ \text{のときの直前の計算})
+\end{aligned}`),
       paragraph([
         "この場合が主張のどちらの場合にあたるかも見ておく。",
         math(String.raw`r_1=0`),

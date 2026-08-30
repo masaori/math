@@ -50342,6 +50342,10 @@ D^{a,b}_L(x)
               labels: ["claim_signed_even_subgraph_sector_sum"],
               habitat: "Z",
               verification: ["sagemath/check/signed-even-subgraph-sector-sum"],
+              lean: [
+                "Ising2DLambda.KacWard.signedEvenSubgraphPolynomial_eq_sectorSum",
+                "Ising2DLambda.NecSuf.KacWard.weightedSum_eq_sum_label_fibers_necSuf",
+              ],
               statement: [
                 paragraph([
                   math(String.raw`L\ge1`), " とし、", math(String.raw`(a,b)\in\mathcal S`),
