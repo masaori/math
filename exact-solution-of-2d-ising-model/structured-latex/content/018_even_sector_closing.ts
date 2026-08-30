@@ -2631,13 +2631,23 @@ v^\top Wv
         ref("c_plus_equals_Lambda_half_integer"),
         " より",
       ]),
-      displayMath(
-        String.raw`\Lambda^{(1/2)}_M = c_+(M) \geq \hat{v}^\top W\hat{v}
-= \frac{v^\top Wv}{\|v\|^2}
-\geq \frac{2\,u^\top Wu}{4}
-= \frac{u^\top Wu}{2}
-\geq \frac{x^\top Wx}{2}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\Lambda^{(1/2)}_M
+&= c_+(M)
+&&\left(\because\ \text{\cref{lab:c_plus_equals_Lambda_half_integer}}\right)\\
+&\geq \hat{v}^\top W\hat{v}
+&&\left(\because\ c_+(M)\text{ は }\mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}\text{ の単位ベクトル上の上限. \cref{lab:sector_decomposition_of_rayleigh_sup}}\right)\\
+&= \frac{v^\top Wv}{\|v\|^2}
+&&\left(\because\ \hat{v}=v/\|v\|\text{ の代入と二次形式の斉次性}\right)\\
+&\geq \frac{2\,u^\top Wu}{\|v\|^2}
+&&\left(\because\ v^\top Wv\geq2u^\top Wu\text{（上の式変形）と }\|v\|^2>0\right)\\
+&\geq \frac{2\,u^\top Wu}{4}
+&&\left(\because\ \|v\|^2\leq4\text{（上の式変形）と }u^\top Wu\geq0\text{（}u\geq0,\ W_{kl}>0\text{）}\right)\\
+&= \frac{u^\top Wu}{2}
+&&\left(\because\ \mathbb{R}\text{ の約分}\right)\\
+&\geq \frac{x^\top Wx}{2}
+&&\left(\because\ u^\top Wu\geq x^\top Wx\text{（上の三角不等式）}\right)
+\end{aligned}`),
       paragraph([
         math(String.raw`x`),
         " は任意だったので、上限を取って ",
