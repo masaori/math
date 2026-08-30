@@ -1618,6 +1618,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.three_way_filter_card_necSuf
   Ising2DLambda.KacWard.smoothing_split_crossing_partition
   Ising2DLambda.KacWard.smoothing_split_crossing_partition_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.smoothing_split_crossing_descent_necSuf
+  Ising2DLambda.KacWard.smoothing_split_crossing_descent
+  Ising2DLambda.KacWard.smoothing_split_crossing_descent_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
