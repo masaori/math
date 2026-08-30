@@ -1651,6 +1651,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.orbit_iterates_distinct
   Ising2DLambda.KacWard.movedOrbit_closed_nonbacktracking
   Ising2DLambda.KacWard.movedOrbit_closed_nonbacktracking_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.movedOrbitSet_partition
+  Ising2DLambda.KacWard.movedEdgeOrbitSet_partition
+  Ising2DLambda.KacWard.movedEdgeOrbitSet_partition_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
