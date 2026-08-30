@@ -20,7 +20,7 @@ const heading = <const Id extends string>(id: Id, level: 1 | 2, text: string) =>
 export default defineBlocks([
   heading("mathematical_tools", 1, "数学的道具立て"),
   heading("finite_data_group_foundations", 2, "有限データ・有限置換群・剰余類"),
-  goal("finite_data_group_foundations", "この節の入出力と主定義", "入力は自然数と有限集合である。出力は自然数上の遺伝的有限データ、二元体、有限置換群、有限群作用、推移性、および左剰余類集合である。主定義は循環を含まない段階的な遺伝的有限データの構成であり、後続の有限商・セル分割・二元体上の線形代数が使う基礎型を確定する。"),
+  goal("finite_data_group_foundations", "この節の入出力と主定義", "入力は空集合と集合演算である。出力は自然数、集合の大きさを固定する宇宙、有限部分集合、順序対と直積、二元体、自然数上の遺伝的有限データ、有限群と有限置換群の記法、有限群作用、推移性、および左剰余類集合である。主定義はこれらを使用前に一意に導入し、後続の有限商・セル分割・二元体上の線形代数が使う基礎型を確定する。"),
   heading("finite_graph_even_subgraphs", 2, "有限グラフと偶部分グラフ"),
   goal("finite_graph_even_subgraphs", "この節の入出力と主張", "入力は有限の頂点集合・辺集合と各辺の二端点である。出力は辺部分集合の境界偶奇、偶辺部分集合、および偶部分グラフ多項式である。この節はこれらの有限組合せデータを定義し、双曲曲面・格子・スピンを仮定しない。"),
   heading("two_stage_group_quotient_input", 2, "二段有限群商の代数的入力"),
@@ -46,7 +46,7 @@ export default defineBlocks([
   heading("product_difference_classification", 2, "積差ごとの双曲正則型分類"),
   goal("product_difference_classification", "この節の入出力と主張", "入力は積差を五から百三十二までの一つに固定した有限整数方程式である。出力はその積差を持つ双曲正則型の有限列挙である。各定理は固定した積差についての必要十分分類であり、百三十二を超える積差の一般分類は主張しない。", "finite"),
   heading("finite_quotient_hyperbolic_lattice", 2, "有限置換商からの双曲格子生成"),
-  goal("finite_quotient_hyperbolic_lattice", "この節の入出力と主定理", "入力は有限置換商と役割安定化部分群である。一般の入力について剰余類セル分割候補を定義し、向き付き閉曲面性と正則双曲計量実現を別条件として区別する。本論文の対象は両条件を満たす組である。有限証明書を与える主定理は八点上の固定した Q_{3,7} 入力の組合せ的セル分割に限り、一般の有限置換商に対する閉曲面性や曲率 -1 計量の存在を主張しない。", "Q"),
+  goal("finite_quotient_hyperbolic_lattice", "この節の入出力と主定理", "入力は八点上の固定した Q_{3,7} 置換商と辞書式最小辺代表元である。出力はその入力から得る有限セルデータの組合せ的検査証明書である。主定理はこの固定例に限り、一般の有限置換商に対する閉曲面性や曲率 -1 計量の存在を主張しない。", "Q"),
   heading("ising_partition_polynomial", 2, "有限グラフ Ising 分配多項式"),
   goal("ising_partition_polynomial", "この節の入出力と主定理", "入力は有限双曲セル分割の一次骨格と二値スピンである。出力は破れ辺数の多重度と Ising 分配多項式である。主張の到達点は、固定した有限商格子の分配多項式を整係数多項式として得ることである。偶部分グラフ多項式との恒等式は主張しない。", "ZPolynomial"),
   heading("fixed_lattice_arithmetic", 2, "固定格子の算術的不変量と Fisher 零点"),

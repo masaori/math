@@ -217,6 +217,8 @@ r_F^{\mathrm{coarse}}r_V^{\mathrm{coarse}}r_E^{\mathrm{coarse}}&=1_{\mathrm{coar
     verification: ["sagemath/check/two-stage-quotient-tower-coset-cell-maps"],
     statement: [
       paragraph([
+        ref("def_finite_quotient_cell_role_label_set"),
+        " の実データ役割タグと ",
         ref("def_quotient_tower_role_generator_compatibility"),
         " の役割生成元について整合する二段の有限商の塔と、",
         ref("def_finite_quotient_role_stabilizers_and_coset_cell_sets"),
@@ -397,8 +399,8 @@ c_S:=
         " と細段で incident なセル ",
         math(String.raw`c_R,c_S`),
         " を固定する。",
-        ref("def_finite_quotient_coset_cell_incidence_relation"),
-        " の incidence の定義より、ある ",
+        ref("def_quotient_tower_stage_coset_cell_incidence_relations"),
+        " の細段 incidence の定義より、ある ",
         math(String.raw`x\in Q_{\mathrm{fine}}`),
         "、",
         math(String.raw`h_R\in H_R^{\mathrm{fine}}`),
@@ -482,8 +484,8 @@ kh_S.`),
 \kappa(k)H_S^{\mathrm{coarse}}
 \ne\varnothing.`),
       paragraph([
-        ref("def_finite_quotient_coset_cell_incidence_relation"),
-        " の incidence の定義と、",
+        ref("def_quotient_tower_stage_coset_cell_incidence_relations"),
+        " の粗段 incidence の定義と、",
         ref("def_quotient_tower_induced_coset_cell_maps"),
         " の誘導写像の定義より、",
       ]),
@@ -563,8 +565,8 @@ kh_S.`),
       paragraph([ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"), " の代表元選択に対し、各 ", math(String.raw`T\in\{\mathrm{fine},\mathrm{coarse}\}`), " の辺端点写像を"]),
       displayMath(String.raw`\begin{aligned}
 \partial_G^T:\mathcal C_E^T\times\mathsf{End}&\longrightarrow\mathcal C_V^T,\\
-\partial_G^T((\mathtt T,E,C_E),\mathsf{source})&:=(\mathtt T,V,\eta_E^T(C_E)H_V^T),\\
-\partial_G^T((\mathtt T,E,C_E),\mathsf{target})&:=(\mathtt T,V,\eta_E^T(C_E)r_E^T H_V^T)
+\partial_G^T((\mathtt T,\mathsf{EdgeRole},C_E),\mathsf{source})&:=(\mathtt T,\mathsf{VertexRole},\eta_E^T(C_E)H_V^T),\\
+\partial_G^T((\mathtt T,\mathsf{EdgeRole},C_E),\mathsf{target})&:=(\mathtt T,\mathsf{VertexRole},\eta_E^T(C_E)r_E^T H_V^T)
 \end{aligned}`),
       paragraph(["で定める。", math(String.raw`\mathtt T`), " は段ラベルである。始域と終域はいずれも三重タグ付きセル集合であり、一般の二重タグ付き端点写像とは型を混同しない。"])],
   },
@@ -930,7 +932,9 @@ s_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}
     statement: [
       paragraph([
         ref("def_quotient_tower_stage_oriented_cellulation_data"),
-        " の段別境界語と面位置写像、",
+        " の段別境界語と ",
+        ref("def_quotient_tower_induced_face_position_map"),
+        " の面位置写像、",
         ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
         " の整合する辺代表元選択写像、および ",
         ref("def_finite_quotient_oriented_coset_face_boundary_word"),
@@ -956,7 +960,7 @@ s_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}
   \operatorname{id}_{\mathsf{Ori}}
 \right)
 \left(
-  \partial_{\mathrm{word}}^{Q_{\mathrm{fine}},\eta_E^{\mathrm{fine}}}
+  \partial_{\mathrm{word}}^{\mathrm{fine}}
   f_{\mathrm{fine}}
   \left(
     \mathtt{position},
@@ -964,7 +968,7 @@ s_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}
   \right)
 \right)
 =
-\partial_{\mathrm{word}}^{Q_{\mathrm{coarse}},\eta_E^{\mathrm{coarse}}}
+\partial_{\mathrm{word}}^{\mathrm{coarse}}
 f_{\mathrm{coarse}}
 \left(
   \overline\kappa_{P,C_F}
@@ -1030,7 +1034,7 @@ D_E\left(\kappa(a)\right):=
         " の二段の境界語の定義より、",
       ]),
       displayMath(String.raw`\begin{aligned}
-\partial_{\mathrm{word}}^{Q_{\mathrm{fine}},\eta_E^{\mathrm{fine}}}
+\partial_{\mathrm{word}}^{\mathrm{fine}}
 f_{\mathrm{fine}}
 \left(
   \mathtt{position},
@@ -1042,7 +1046,7 @@ f_{\mathrm{fine}}
   \mathsf{forward}
 \right)
 &&\bigl(\because\ \text{細段境界語の定義}\bigr),\\
-\partial_{\mathrm{word}}^{Q_{\mathrm{coarse}},\eta_E^{\mathrm{coarse}}}
+\partial_{\mathrm{word}}^{\mathrm{coarse}}
 f_{\mathrm{coarse}}
 \left(
   \mathtt{position},
@@ -1095,7 +1099,7 @@ f_{\mathrm{coarse}}
         " の二段の境界語の定義より、",
       ]),
       displayMath(String.raw`\begin{aligned}
-\partial_{\mathrm{word}}^{Q_{\mathrm{fine}},\eta_E^{\mathrm{fine}}}
+\partial_{\mathrm{word}}^{\mathrm{fine}}
 f_{\mathrm{fine}}
 \left(
   \mathtt{position},
@@ -1107,7 +1111,7 @@ f_{\mathrm{fine}}
   \mathsf{reverse}
 \right)
 &&\bigl(\because\ \text{細段境界語の定義}\bigr),\\
-\partial_{\mathrm{word}}^{Q_{\mathrm{coarse}},\eta_E^{\mathrm{coarse}}}
+\partial_{\mathrm{word}}^{\mathrm{coarse}}
 f_{\mathrm{coarse}}
 \left(
   \mathtt{position},
@@ -1773,17 +1777,17 @@ a(C_F)
         "、",
         math(String.raw`\overline\kappa_E`),
         " とする。さらに、各細段面 ",
-        math(String.raw`C_F\in\mathcal C_F^{\mathrm{fine}}`),
+        math(String.raw`f=(\mathtt{fine},\mathsf{FaceRole},C_F)\in\mathcal C_F^{\mathrm{fine}}`),
         " と、その像である粗段面 ",
-        math(String.raw`D_F=\overline\kappa_F(C_F)`),
+        math(String.raw`f'=\overline\kappa_F(f)=(\mathtt{coarse},\mathsf{FaceRole},D_F)`),
         " に対し、",
         ref("def_quotient_tower_induced_face_position_map"),
         " の位置写像の各ファイバーの元数が奇数であると仮定する。すなわち、全ての ",
-        math(String.raw`j\in P_{D_F}^{\mathrm{coarse}}`),
+        math(String.raw`j\in P_{f'}^{Q_{\mathrm{coarse}}}`),
         " について",
       ]),
       displayMath(String.raw`\sum_{\substack{
-  i\in P_{C_F}^{\mathrm{fine}}\\
+  i\in P_f^{Q_{\mathrm{fine}}}\\
   \overline\kappa_{P,C_F}(i)=j
 }}
 1_{\mathbb F_2}
@@ -2739,6 +2743,12 @@ A_h
         ref("def_two_stage_finite_quotient_tower_input"),
         " と ",
         ref("def_quotient_tower_induced_coset_cell_maps"),
+        "、",
+        ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
+        "、",
+        ref("def_quotient_tower_stage_oriented_edge_endpoint_maps"),
+        "、",
+        ref("def_quotient_tower_stage_oriented_cellulation_data"),
         " を固定し、両段のセルデータが ",
         ref("def_oriented_closed_surface_cellulation"),
         " の有限述語を満たすと仮定する。細段と粗段の一次骨格を、それぞれ有限グラフ ",

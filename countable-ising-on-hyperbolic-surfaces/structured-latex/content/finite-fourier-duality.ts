@@ -453,6 +453,34 @@ S_x
     ],
   },
   {
+    id: "finite_fourier_definition_transform",
+    kind: "definition",
+    title: { text: "有限第一ホモロジー群上の Fourier 変換" },
+    labels: ["def_finite_fourier_transform"],
+    habitat: "ZPolynomial",
+    statement: [
+      paragraph([ref("def_f2_linear_character_space"), " の有限群 ", math("H"), " と文字空間 ", math(String.raw`H^\vee`), " に対し、多項式族の有限 Fourier 変換を"]),
+      displayMath(String.raw`\mathcal F_H:(\mathbb Z[u,v])^H\to(\mathbb Z[u,v])^{H^\vee},\qquad (\mathcal F_H(A))_\varphi:=\sum_{k\in H}(\operatorname{sgn}_H(\varphi))(k)A_k`),
+      paragraph(["で定める。全ての和は有限和である。"]),
+    ],
+  },
+  {
+    id: "finite_fourier_definition_integer_polynomial_rational_embedding",
+    kind: "definition",
+    title: { text: "整数係数多項式の有理係数への標準単射" },
+    labels: ["def_integer_polynomial_rational_embedding"],
+    habitat: "QPolynomial",
+    statement: [paragraph([math(String.raw`\jmath:\mathbb Z[u,v]\to\mathbb Q[u,v]`), " を各整数係数を同じ有理数係数へ送る標準単射と定める。"])],
+  },
+  {
+    id: "finite_fourier_definition_natural_rational_embedding",
+    kind: "definition",
+    title: { text: "自然数の有理数への標準単射" },
+    labels: ["def_natural_rational_embedding"],
+    habitat: "Q",
+    statement: [paragraph([ref("def_natural_numbers"), " の自然数に対し、", math(String.raw`\iota_{\mathbb N,\mathbb Q}:\mathbb N\to\mathbb Q`), " を ", math(String.raw`n\mapsto n/1`), " で定める。"])],
+  },
+  {
     id: "finite_fourier_theorem_inverse_transform",
     kind: "theorem",
     standing: "mainTheorem",
@@ -462,39 +490,14 @@ S_x
     verification: ["sagemath/check/finite-fourier-inverse-transform"],
     statement: [
       paragraph([
-        ref("def_f2_linear_character_space"),
-        " の有限第一ホモロジー群 ",
+        ref("def_finite_fourier_transform"),
+        " の Fourier 変換を取る。有限第一ホモロジー群 ",
         math(String.raw`H`),
         " と文字空間 ",
         math(String.raw`H^\vee`),
-        " に対し、独立な不定元 ",
-        math(String.raw`u,v`),
-        " を取る。任意の多項式族 ",
+        " に対し、任意の多項式族 ",
         math(String.raw`A=(A_k)_{k\in H}\in\bigl(\mathbb Z[u,v]\bigr)^H`),
-        " の有限 Fourier 変換を、始域と終域を明示した写像",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\mathcal F_H:\bigl(\mathbb Z[u,v]\bigr)^H
-&\longrightarrow
-\bigl(\mathbb Z[u,v]\bigr)^{H^\vee},\\
-A
-&\longmapsto
-\widehat A:=\mathcal F_H(A),\\
-\widehat A_{\varphi}
-&:=
-\sum_{k\in H}
-\bigl(\operatorname{sgn}_H(\varphi)\bigr)(k)A_k
-\in\mathbb Z[u,v]
-\qquad(\varphi\in H^\vee)
-\end{aligned}`),
-      paragraph([
-        "で定める。また、",
-        math(String.raw`\jmath:\mathbb Z[u,v]\to\mathbb Q[u,v]`),
-        " を整数係数を有理係数へ送る係数ごとの標準単射、",
-        math(String.raw`\iota_{\mathbb N,\mathbb Q}:\mathbb N\to\mathbb Q`),
-        " を ",
-        math(String.raw`n\mapsto n/1`),
-        " で与えられる標準単射とする。このとき、任意の ",
+        " とその変換 ", math(String.raw`\widehat A:=\mathcal F_H(A)`), " を取る。", ref("def_integer_polynomial_rational_embedding"), " と ", ref("def_natural_rational_embedding"), " の標準単射を用いる。このとき、任意の ",
         math(String.raw`h\in H`),
         " について",
       ]),
@@ -917,6 +920,30 @@ c\!\left(d_1^{-1}(e^\ast)\right)
     ],
   },
   {
+    id: "finite_fourier_definition_dual_first_boundary_matrix",
+    kind: "definition",
+    title: { text: "双対一次境界行列" },
+    labels: ["def_dual_first_boundary_matrix"],
+    habitat: "F2",
+    statement: [
+      paragraph([ref("def_dual_edge_endpoint_map"), " の双対辺端点写像に対し、双対一次境界行列を"]),
+      displayMath(String.raw`\partial_1^\ast:=\left[\sum_{\substack{a\in\mathsf{End}\\\partial_G^\ast(e^\ast,a)=v^\ast}}1_{\mathbb F_2}\right]_{v^\ast\in V_{\mathrm{cell}}^\ast,\ e^\ast\in E_{\mathrm{cell}}^\ast}`),
+      paragraph(["と定める。同じ双対頂点を二端にもつ双対辺では、その列の当該成分は二元体で零になる。"]),
+    ],
+  },
+  {
+    id: "finite_fourier_definition_dual_first_cycle_space",
+    kind: "definition",
+    title: { text: "双対一次サイクル空間" },
+    labels: ["def_dual_first_cycle_space"],
+    habitat: "F2",
+    statement: [
+      paragraph([ref("def_dual_first_boundary_matrix"), " の核を双対一次サイクル空間と呼び、"]),
+      displayMath(String.raw`\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2):=\ker(\partial_1^\ast)`),
+      paragraph(["と定める。"]),
+    ],
+  },
+  {
     id: "finite_fourier_theorem_primal_cocycle_transport_is_dual_cycle",
     kind: "theorem",
     title: { text: "主一次コサイクルの係数移送は双対一次サイクルである" },
@@ -925,27 +952,8 @@ c\!\left(d_1^{-1}(e^\ast)\right)
     verification: ["sagemath/check/primal-cocycle-transport-is-dual-cycle"],
     statement: [
       paragraph([
-        ref("def_dual_edge_endpoint_map"),
-        " の双対辺端点写像に対し、",
-        ref("def_first_boundary_matrix_over_f2"),
-        " と同じ端点出現数の式で双対一次境界行列を",
-      ]),
-      displayMath(String.raw`\partial_1^\ast
-:=
-\left[
-  \sum_{\substack{
-    a\in\mathsf{End}\\
-    \partial_G^\ast(e^\ast,a)=v^\ast
-  }}1_{\mathbb F_2}
-\right]_{v^\ast\in V_{\mathrm{cell}}^\ast,\ e^\ast\in E_{\mathrm{cell}}^\ast}
-\in
-\operatorname{Mat}_{V_{\mathrm{cell}}^\ast\times E_{\mathrm{cell}}^\ast}(\mathbb F_2)`),
-      paragraph([
-        "と書く。同じ双対頂点を二端にもつ双対辺では、その列の当該成分は ",
-        math(String.raw`1_{\mathbb F_2}+1_{\mathbb F_2}=0_{\mathbb F_2}`),
-        " である。双対一次サイクル空間を ",
-        math(String.raw`\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2):=\ker(\partial_1^\ast)`),
-        " と書く。このとき、",
+        ref("def_dual_first_cycle_space"),
+        " の双対一次サイクル空間と ", ref("def_primal_first_cocycle_space_over_f2"), " の主一次コサイクル空間を取る。このとき、",
       ]),
       displayMath(String.raw`\mathsf D_1\!\left(
   \operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
@@ -1085,6 +1093,42 @@ c
     ],
   },
   {
+    id: "finite_fourier_definition_primal_first_coboundary_space",
+    kind: "definition",
+    title: { text: "主一次余境界空間" },
+    labels: ["def_primal_first_coboundary_space"],
+    habitat: "F2",
+    statement: [
+      paragraph([ref("def_first_boundary_matrix_over_f2"), " の主一次境界行列と ", ref("def_primal_first_cocycle_space_over_f2"), " の主一次コサイクル空間に対し、主一次余境界空間を"]),
+      displayMath(String.raw`\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2):=\operatorname{im}(\partial_1^{\mathsf T})=\left\{\partial_1^{\mathsf T}a\ \middle|\ a\in\mathbb F_2^{V_{\mathrm{cell}}}\right\}`),
+      paragraph(["と定める。", ref("theorem_boundary_of_boundary_is_zero_over_f2"), " の転置により、これは主一次コサイクル空間の部分空間である。"]),
+    ],
+  },
+  {
+    id: "finite_fourier_definition_dual_second_boundary_matrix",
+    kind: "definition",
+    title: { text: "双対二次境界行列" },
+    labels: ["def_dual_second_boundary_matrix"],
+    habitat: "F2",
+    statement: [
+      paragraph([ref("def_dual_face_boundary_word"), " の双対面境界語に対し、双対二次境界行列を"]),
+      displayMath(String.raw`\partial_2^\ast:=\left[\sum_{\substack{c\in C_v\\\partial_{\mathrm{word}}^\ast d_2(v)(c)=(e^\ast,\omega)\text{ for some }\omega\in\mathsf{Ori}}}1_{\mathbb F_2}\right]_{e^\ast\in E_{\mathrm{cell}}^\ast,\ d_2(v)\in F_{\mathrm{cell}}^\ast}`),
+      paragraph(["と定める。行は双対辺、列は双対面で添字付けられる。"]),
+    ],
+  },
+  {
+    id: "finite_fourier_definition_dual_first_boundary_space",
+    kind: "definition",
+    title: { text: "双対一次境界空間" },
+    labels: ["def_dual_first_boundary_space"],
+    habitat: "F2",
+    statement: [
+      paragraph([ref("def_dual_second_boundary_matrix"), " の像を双対一次境界空間と呼び、"]),
+      displayMath(String.raw`\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2):=\operatorname{im}(\partial_2^\ast)`),
+      paragraph(["と定める。"]),
+    ],
+  },
+  {
     id: "finite_fourier_theorem_primal_coboundary_transport_is_dual_boundary",
     kind: "theorem",
     title: { text: "主一次余境界の係数移送は双対面境界空間である" },
@@ -1093,45 +1137,7 @@ c
     verification: ["sagemath/check/primal-coboundary-transport-is-dual-boundary"],
     statement: [
       paragraph([
-        ref("def_first_boundary_matrix_over_f2"),
-        " の主一次境界行列に対し、主一次余境界空間を",
-      ]),
-      displayMath(String.raw`\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
-:=
-\operatorname{im}(\partial_1^{\mathsf T})
-=
-\left\{
-  \partial_1^{\mathsf T}a
-  \ \middle|\
-  \ a\in\mathbb F_2^{V_{\mathrm{cell}}}
-\right\}
-\subseteq
-\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)`),
-      paragraph([
-        "と書く。包含は ",
-        ref("theorem_boundary_of_boundary_is_zero_over_f2"),
-        " の転置から従う。",
-        ref("def_dual_face_boundary_word"),
-        " の双対面境界語に対し、双対二次境界行列を",
-      ]),
-      displayMath(String.raw`\partial_2^\ast
-:=
-\left[
-  \sum_{\substack{
-    c\in C_v\\
-    \partial_{\mathrm{word}}^\ast d_2(v)(c)
-    =(e^\ast,\omega)\text{ for some }\omega\in\mathsf{Ori}
-  }}1_{\mathbb F_2}
-\right]_{
-  e^\ast\in E_{\mathrm{cell}}^\ast,
-  \ d_2(v)\in F_{\mathrm{cell}}^\ast
-}
-\in
-\operatorname{Mat}_{E_{\mathrm{cell}}^\ast\times F_{\mathrm{cell}}^\ast}(\mathbb F_2)`),
-      paragraph([
-        "と定め、双対面境界空間を ",
-        math(String.raw`\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2):=\operatorname{im}(\partial_2^\ast)`),
-        " と書く。このとき、",
+        ref("def_primal_first_coboundary_space"), " の主一次余境界空間、", ref("def_dual_first_boundary_space"), " の双対一次境界空間、および ", ref("def_primal_to_dual_edge_coefficient_transport"), " の係数移送を取る。このとき、",
       ]),
       displayMath(String.raw`\mathsf D_1\!\left(
   \operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
@@ -1300,6 +1306,30 @@ b^\ast(f^\ast)
     ],
   },
   {
+    id: "finite_fourier_definition_primal_first_cohomology",
+    kind: "definition",
+    title: { text: "主第一コホモロジー" },
+    labels: ["def_primal_first_cohomology"],
+    habitat: "F2",
+    statement: [
+      paragraph([ref("def_primal_first_cocycle_space_over_f2"), " の主一次コサイクル空間を ", ref("def_primal_first_coboundary_space"), " の主一次余境界空間で割った有限剰余集合を"]),
+      displayMath(String.raw`H^1(\mathcal C_{\mathrm{cell}};\mathbb F_2):=\left\{\left\{c+a\ \middle|\ a\in\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)\right\}\ \middle|\ c\in\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)\right\}`),
+      paragraph(["と定める。"]),
+    ],
+  },
+  {
+    id: "finite_fourier_definition_dual_first_homology",
+    kind: "definition",
+    title: { text: "双対第一ホモロジー" },
+    labels: ["def_dual_first_homology"],
+    habitat: "F2",
+    statement: [
+      paragraph([ref("theorem_primal_cocycle_transport_is_dual_cycle"), " の双対一次サイクル空間と ", ref("def_dual_first_boundary_space"), " の双対一次境界空間を取る。", ref("theorem_primal_coboundary_transport_is_dual_boundary"), " により後者は前者に含まれる。その剰余集合を"]),
+      displayMath(String.raw`H_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2):=\left\{\left\{z^\ast+b^\ast\ \middle|\ b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)\right\}\ \middle|\ z^\ast\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)\right\}`),
+      paragraph(["と定める。"]),
+    ],
+  },
+  {
     id: "finite_fourier_definition_primal_cohomology_to_dual_homology_transport",
     kind: "definition",
     title: { text: "主第一コホモロジーから双対第一ホモロジーへの誘導写像" },
@@ -1308,44 +1338,7 @@ b^\ast(f^\ast)
     verification: ["sagemath/check/primal-cohomology-to-dual-homology-transport"],
     statement: [
       paragraph([
-        ref("def_primal_first_cocycle_space_over_f2"),
-        " の主一次コサイクル空間と、",
-        ref("theorem_primal_coboundary_transport_is_dual_boundary"),
-        " の主一次余境界空間に対し、主第一コホモロジーを有限な剰余集合",
-      ]),
-      displayMath(String.raw`H^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
-:=
-\left\{
-  \left\{
-    c+a
-    \ \middle|\
-    \ a\in\operatorname{Coboundary}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
-  \right\}
-  \ \middle|\
-  \ c\in\operatorname{Cocycle}^1(\mathcal C_{\mathrm{cell}};\mathbb F_2)
-\right\}`),
-      paragraph([
-        "で定める。主一次余境界空間が主一次コサイクル空間に含まれることは、",
-        ref("theorem_primal_coboundary_transport_is_dual_boundary"),
-        " で確かめてある。また、",
-        ref("theorem_primal_cocycle_transport_is_dual_cycle"),
-        " の双対一次サイクル空間と、",
-        ref("theorem_primal_coboundary_transport_is_dual_boundary"),
-        " の双対面境界空間に対し、双対第一ホモロジーを有限な剰余集合",
-      ]),
-      displayMath(String.raw`H_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
-:=
-\left\{
-  \left\{
-    z^\ast+b^\ast
-    \ \middle|\
-    \ b^\ast\in\operatorname{Boundary}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
-  \right\}
-  \ \middle|\
-  \ z^\ast\in\operatorname{Cycle}_1(\mathcal C_{\mathrm{cell}}^\ast;\mathbb F_2)
-\right\}`),
-      paragraph([
-        "で定める。",
+        ref("def_primal_first_cohomology"), " の主第一コホモロジーと ", ref("def_dual_first_homology"), " の双対第一ホモロジーを取る。",
         ref("theorem_primal_coboundary_transport_is_dual_boundary"),
         " と ",
         ref("theorem_primal_cocycle_transport_is_dual_cycle"),

@@ -7,7 +7,7 @@ export default defineBlocks([
     title: { text: "自然数と正整数" },
     labels: ["def_natural_numbers"],
     habitat: "finite",
-    statement: [paragraph([math(String.raw`0:=\varnothing`), "、", math(String.raw`\operatorname{succ}(n):=n\cup\{n\}`), " とする。", math(String.raw`\mathbb N`), " を ", math("0"), " を含み後者の写像で閉じる最小の集合とし、", math(String.raw`\mathbb N_{>0}:=\mathbb N\setminus\{0\}`), " と定める。"])],
+    statement: [paragraph([math(String.raw`0:=\varnothing`), "、", math(String.raw`\operatorname{succ}(n):=n\cup\{n\}`), " とする。", math(String.raw`\mathbb N`), " を ", math("0"), " を含み後者の写像で閉じる最小の集合とし、", math(String.raw`1:=\operatorname{succ}(0)`), "、", math(String.raw`\mathbb N_{>0}:=\mathbb N\setminus\{0\}`), "、", math(String.raw`\mathbb N_{>1}:=\mathbb N\setminus\{0,1\}`), " と定める。"])],
   },
   {
     id: "foundations_definition_size_universe",

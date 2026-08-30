@@ -85,11 +85,15 @@ const genericFourierIds = new Set([
   "finite_fourier_definition_integer_sign_character_realization",
   "finite_fourier_claim_integer_sign_character_multiplicativity",
   "finite_fourier_theorem_character_orthogonality",
+  "finite_fourier_definition_transform",
+  "finite_fourier_definition_integer_polynomial_rational_embedding",
+  "finite_fourier_definition_natural_rational_embedding",
   "finite_fourier_theorem_inverse_transform",
 ]);
 
 function classify(block: ConvertedBlock, file: string): Section {
   if (file === "about-article-scope.ts" && block.id.startsWith("foundations_definition_")) return "finite-data-group-foundations";
+  if (block.id === "article_scope_definition_topological_realization_of_cellulation") return "finite-cell-complex-data";
   if (genericCellulationIds.has(block.id)) return "finite-cell-complex-data";
   if ([
     "finite_graph_definition_endpoint_labels",
@@ -182,15 +186,15 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
   const labelOwner = new Map<string, string>(all.flatMap(({ block }) => block.labels.map((label) => [label, block.id] as const)));
   const content = all.filter(({ file, block }) => file !== "publication-structure.ts" && block.kind !== "heading");
   const expectedIdDigests = new Map<string, string>([
-    ["about-article-scope.ts", "2f519b6728e0c6bf4ce652b38cfc427d97cdfd52383708a2915af7459c872ed2"],
-    ["arithmetic-invariants.ts", "6103d558036852103be49ebc56d5d646bee632e3138cb5f83bc0e16f4bc66027"],
+    ["about-article-scope.ts", "8340207201a5ca2d39d3dde65c6064a79d73d66fdbea63bb4d21ef91619b84d9"],
+    ["arithmetic-invariants.ts", "73862b199b4602946be345219ac18ab6642f2ff0fb4f8fb680ff6e349e53caa6"],
     ["arithmetic-tools.ts", "cafe20754d06ecb0b246b66effbcae672dc3bd928370dd991dc18d1112c522c0"],
     ["finite-cellulation.ts", "cfff3fa6d456242279b044556bffcce96c68fe912b4fadf6a45ea1424c47259c"],
-    ["finite-fourier-duality.ts", "be9e8ad799f3e204f41d15cf0cf48ddd5c1566060767231f53f149a0b14a7737"],
-    ["finite-quotient-lattice.ts", "9d354a2b32e30015221b5697ca640ac428798663a424c13461c5f53e5e311471"],
+    ["finite-fourier-duality.ts", "99063829cc235ba48d5d7e80dcf0486aaea3cd5b1c0e60293213b8073bf8398b"],
+    ["finite-quotient-lattice.ts", "ec0b37b3444fc6b590cce23af66953493dbed947b7fde4e7589d09634a885269"],
     ["homology-sector-expansion.ts", "4ca22cc43e6820be8df6f2a9dca2820fd56bf5f8032c663bfdace44f40c70b98"],
     ["main-text.ts", "86f1872004ff2ba2312525592346506a8f4f2dca95c0b0f04f9a88e703141e2c"],
-    ["quotient-tower.ts", "5a4d172961818ee149dda139b6046a49b50b8dbc2d8f2ab009b43e20815b8048"],
+    ["quotient-tower.ts", "577d8aaad9a00ee8e8e0cad17b198e3f3921931c44896e48a1fa2c7a61f97346"],
   ]);
   for (const [file, expected] of expectedIdDigests) {
     const ids = content.filter((entry) => entry.file === file).map(({ block }) => block.id).sort();
@@ -244,7 +248,7 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
     [/\\operatorname\{HF\}/, "foundations_definition_hereditarily_finite_data_over_naturals"],
     [/\\mathbb F_2/, "foundations_definition_field_with_two_elements"],
     [/\\operatorname\{Sym\}/, "foundations_definition_finite_permutation_group_notation"],
-    [/\\operatorname\{ord\}/, "foundations_definition_finite_permutation_group_notation"],
+    [/\\operatorname\{ord\}/, "foundations_definition_finite_group_notation"],
     [/\\curvearrowright/, "foundations_definition_finite_group_action_and_transitivity"],
     [/Q\/H/, "foundations_definition_left_coset_set"],
     [/\\mathsf\{source\}/, "finite_graph_definition_endpoint_labels"],

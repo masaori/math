@@ -2425,6 +2425,42 @@ d\in\mathbb N_{>0}`),
     ],
   },
   {
+    id: "arithmetic_invariants_definition_fixed_quotient_fisher_root_set",
+    kind: "definition",
+    title: { text: "固定剰余類格子の次数四十四因子の根集合" },
+    labels: ["def_fixed_quotient_fisher_root_set"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"), " の既約因子 ", math(String.raw`Q_Q\in\mathbb Z[x]`), " の根集合を"]),
+      displayMath(String.raw`\mathcal R_Q:=\{\alpha\in\overline{\mathbb Q}\mid Q_Q(\alpha)=0\}`),
+      paragraph(["と定める。"]),
+    ],
+  },
+  {
+    id: "arithmetic_invariants_definition_fixed_quotient_galois_restriction_representation",
+    kind: "definition",
+    title: { text: "固定剰余類格子の Galois 制限表現" },
+    labels: ["def_fixed_quotient_galois_restriction_representation"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"), " の分解体 ", math(String.raw`K_Q`), " と ", ref("def_fixed_quotient_fisher_root_set"), " の根集合に対し、体自己同型の制限表現を"]),
+      displayMath(String.raw`\rho_Q:\operatorname{Gal}(K_Q/\mathbb Q)\longrightarrow\operatorname{Sym}(\mathcal R_Q),\qquad \rho_Q(\sigma):=\sigma|_{\mathcal R_Q}`),
+      paragraph(["と定める。分解体の自己同型は根集合を保つため well-defined である。"]),
+    ],
+  },
+  {
+    id: "arithmetic_invariants_definition_fixed_quotient_galois_permutation_image",
+    kind: "definition",
+    title: { text: "固定剰余類格子の Galois 置換像" },
+    labels: ["def_fixed_quotient_galois_permutation_image"],
+    habitat: "Qbar",
+    statement: [
+      paragraph([ref("def_fixed_quotient_galois_restriction_representation"), " の像を"]),
+      displayMath(String.raw`\Gamma_Q:=\rho_Q(\operatorname{Gal}(K_Q/\mathbb Q))\leq\operatorname{Sym}(\mathcal R_Q)`),
+      paragraph(["と定める。"]),
+    ],
+  },
+  {
     id: "arithmetic_invariants_theorem_fixed_quotient_fisher_splitting_field_full_symmetric_galois_group",
     kind: "theorem",
     standing: "mainTheorem",
@@ -2434,25 +2470,8 @@ d\in\mathbb N_{>0}`),
     verification: ["sagemath/check/fixed-quotient-fisher-splitting-field-full-symmetric-galois-group"],
     statement: [
       paragraph([
-        ref("theorem_fixed_quotient_fisher_splitting_field_finite_degree"),
-        " で構成した分解体を ",
-        math(String.raw`K_Q\subset\overline{\mathbb Q}`),
-        " とし、",
-        ref("theorem_fixed_quotient_fisher_zero_multiplicity_data"),
-        " の次数四十四の既約因子を ",
-        math(String.raw`Q_Q\in\mathbb Z[x]`),
-        " とする。その根集合を",
+        ref("def_fixed_quotient_galois_permutation_image"), " の Galois 置換像を取る。このとき",
       ]),
-      displayMath(String.raw`\mathcal R_Q:=
-\left\{
-  \alpha\in\overline{\mathbb Q}
-  \;\middle|\;
-  Q_Q(\alpha)=0
-\right\}`),
-      paragraph(["と置く。各体自己同型を根集合へ制限する忠実な置換表現とその像を"]),
-      displayMath(String.raw`\rho_Q:\operatorname{Gal}(K_Q/\mathbb Q)\longrightarrow\operatorname{Sym}(\mathcal R_Q),\qquad
-\Gamma_Q:=\rho_Q\!\left(\operatorname{Gal}(K_Q/\mathbb Q)\right)`),
-      paragraph(["と定める。このとき"]),
       displayMath(String.raw`\Gamma_Q=\operatorname{Sym}(\mathcal R_Q)`),
       paragraph(["である。複素平面への埋め込み、数値近似、距離、偏角、実数、極限、積分を用いない。"]),
     ],
