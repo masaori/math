@@ -536,11 +536,15 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
 {\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+} &= 0
    \quad (\because \text{$\check\psi$ の反交換関係の第 1 式}), \\
 {\left[\check\psi_\mu^\dagger, \check\psi_{M+1-\nu}\right]_+}
-  &= \delta_{M+1-\nu,\,M+1-\mu}\,I = 0
-   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式と直前の }\delta\text{ の計算}), \\
+  &= \delta_{M+1-\nu,\,M+1-\mu}\,I
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式}) \\
+  &= 0
+   \quad (\because \text{直前の }\delta\text{ の計算 }\delta_{M+1-\nu,\,M+1-\mu}=0), \\
 {\left[\check\psi_{M+1-\mu}, \check\psi_\nu^\dagger\right]_+}
-  &= \delta_{M+1-\mu,\,M+1-\nu}\,I = 0
-   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式を } (\nu, M+1-\mu) \text{ へ適用し、反交換子の対称性}), \\
+  &= \delta_{M+1-\mu,\,M+1-\nu}\,I
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式を } (\nu, M+1-\mu) \text{ へ適用し、反交換子の対称性}) \\
+  &= 0
+   \quad (\because \text{直前の }\delta\text{ の計算と }\delta_{M+1-\mu,\,M+1-\nu}=\delta_{M+1-\nu,\,M+1-\mu}\text{（対の条件の対称性）}), \\
 {\left[\check\psi_{M+1-\mu}, \check\psi_{M+1-\nu}\right]_+} &= 0
    \quad (\because \text{$\check\psi$ の反交換関係の第 3 式})
 \end{aligned}`,

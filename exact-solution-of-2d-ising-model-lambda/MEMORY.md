@@ -2,13 +2,19 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 8 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 9 回目の tick 時点）
+
+**非後退置換の置換項が軌道ごとの切断線偶奇の符号と回転位相の冪の積に等しいことを、本文と SageMath で固定した（`claim_kac_ward_term_orbit_phase_twist_product`。Lean 未着手）。** 閉路軌道表示 `claim_kac_ward_signed_orbit_term_product` の各軌道重みへ前 tick の位相・ねじれ分解 `claim_moved_orbit_weight_phase_twist` を代入し、定数多項式埋め込み（`def_qbar_constant_embedding`）の乗法性で $T^{a,b}_{\varphi}(x)=\prod_{C\in\mathcal C(\varphi)}\bigl(-x^{\lvert C\rvert}\cdot\widehat{(-1)^{a\,h(\gamma_C)+b\,v(\gamma_C)}\zeta_8^{\,t_\circ(\gamma_C)}}\bigr)$ を得た。基点の写像 $\vec e_\ast$ を明示して選び、右辺が選び方に依存しないことは左辺経由で述べた。SageMath `kac-ward-term-orbit-phase-twist` は一辺二のトーラスで単一軌道（閉歩道 3,856 件）と台が交わらない二軌道（9,456 件）、四スピン構造の計 53,248 件を $\mathbb Q(\zeta_8)[x]$ で検査した。構造化本文 716 ブロック・検算対応 328 件・PDF 326 ページ通過。次はこの主張の Lean 具体版・必要十分版を書き、その後に偶部分グラフ多項式の平方恒等式へまとめる。
+
+前進前レビューでは、前 tick の Lean 二版・sorry 登録・SageMath の対応を人手証明と照合し、修正対象は無かった。並列の式変形統一は、姉妹側の偶セクター固有値の「$\check\psi$ の反交換関係」の一行二等号二箇所を二段の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 347 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 8 回目の tick 時点）
 
 **動く軌道の遷移成分積の位相・ねじれ分解 `claim_moved_orbit_weight_phase_twist` を Lean 二版へ配線し、四層検証を完了した。** 具体版 `KacWard.movedOrbitWeight_phase_twist` は向き付き辺と代数的数へ固定し、軌道列を一つ進める写像による添字替え、遷移成分のねじれ因子・位相因子への分離、既存の辺列ねじれ符号積、閉歩道回転位相を人手証明の順に結んだ。必要十分版 `NecSuf.KacWard.orbitEntryProduct_phase_twist_necSuf` は可換モノイド、各成分の因子分解、軌道列の置換だけを残した。対象 SageMath 15,424 件、検算対応 327 件、Lean 9,604 jobs・sorry 検査 1,621 件、本文 check・PDF 325 ページが通過。次は閉路軌道表示の各軌道重みへこの分解を代入する。
 
 前進前レビューでは前 tick の本文と SageMath を照合し、「何も言っていない主張」や不一致は無かった。並列の式変形統一は、姉妹側の重交換子 $(h1.z)$ の帰納段階にあった $e^{-i\theta}e^{i\theta}=e^0=1$ を二段へ開いた。
 
-## 現在の到達点（2026-08-31 の 7 回目の tick 時点）
+## ひとつ前の到達点（2026-08-31 の 7 回目の tick 時点）
 
 **動く軌道の遷移成分積が切断線偶奇の符号と回転位相の冪に分かれることを、本文と SageMath で固定した（`claim_moved_orbit_weight_phase_twist`。Lean 未着手）。** 軌道列 $\gamma=\gamma_\varphi(\vec e_0)$ の全単射 $k\mapsto\vec\gamma_k$ による添字の付け替えで、ねじれ符号の積を `claim_walk_twist_sign_product` へ、回転位相の積を `claim_closed_walk_rotation_phase` へ結び、$\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}=(-1)^{a\,h(\gamma)+b\,v(\gamma)}\zeta_8^{\,t_{\circ}(\gamma)}$ を得た。SageMath `moved-orbit-weight-phase-twist` は一辺二の向き付き辺が相異なる閉じた非後退辺列 $3{,}856$ 件（長さ 8 まで）から台上の巡回置換を組み、四つのスピン構造の $15{,}424$ 件を $\mathbb Q(\zeta_8)$ で検査した。構造化本文 714 ブロック・検算対応 327 件・PDF 325 ページ通過。次はこの主張の Lean 具体版・必要十分版を書き、その後に閉路軌道表示（`claim_kac_ward_signed_orbit_term_product`）の各軌道重みへ代入して偶部分グラフ多項式の平方恒等式へ向かう。
 
