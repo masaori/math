@@ -50406,6 +50406,198 @@ Q^{a,b}_L
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_moved_edge_support",
+        labels: [],
+        title: { text: "動く辺の台と偶部分グラフ" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_reversal_free_moved_support_even",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_moved_edge_support_set",
+                kind: "definition",
+                title: { text: "動く辺の台の辺集合" },
+                labels: ["def_moved_edge_support_set"],
+                habitat: "N",
+                statement: [
+                  paragraph([
+                    math(String.raw`L\ge1`), " とし、",
+                    math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+                    " を取る。動く辺の台の辺集合を",
+                  ]),
+                  displayMath(String.raw`E_{\mathrm{supp}}(\varphi):=
+\bigl\{\,e\in E_L\ \bigm|\ (e,0)\in M(\varphi)\ \text{または}\ (e,1)\in M(\varphi)\,\bigr\}
+\ \subseteq\ E_L`),
+                  paragraph([
+                    "で定める。動く辺の集合 ", math(String.raw`M(\varphi)`), " は ",
+                    ref("def_moved_edge_set"), "、向き付き辺が台の辺と向きの対 ",
+                    math(String.raw`(e,d)`), " であることは ", ref("def_oriented_edges"),
+                    " で定めた。有限集合 ", math(String.raw`E_L`),
+                    " の部分集合であり、所属の判定は有限個の向き付き辺の比較で決まる。",
+                    "実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_reversal_free_moved_support_even",
+              kind: "claim",
+              title: { text: "反転対を含まない非後退置換の台は偶部分グラフである" },
+              labels: ["claim_reversal_free_moved_support_even"],
+              habitat: "N",
+              verification: ["sagemath/check/reversal-free-moved-support-even"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), " とし、非後退置換 ",
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                  "（", ref("def_nonbacktracking_permutations"),
+                  "）を取る。任意の ", math(String.raw`\vec e\in M(\varphi)`),
+                  " について ", math(String.raw`\iota(\vec e)\notin M(\varphi)`),
+                  " が成り立つ（動く辺の集合が反転対を含まない。反転写像 ",
+                  math(String.raw`\iota`), " は ", ref("def_edge_reversal"),
+                  "）と仮定する。このとき",
+                ]),
+                displayMath(String.raw`\operatorname{Even}_L\bigl(E_{\mathrm{supp}}(\varphi)\bigr)`),
+                paragraph([
+                  "である。台の辺集合 ", math(String.raw`E_{\mathrm{supp}}(\varphi)`), " は ",
+                  ref("def_moved_edge_support_set"), "、偶部分グラフの述語 ",
+                  math(String.raw`\operatorname{Even}_L`), " は ", ref("def_even_edge_subset"),
+                  " で定めた。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "頂点 ", math(String.raw`v\in V_L`), " を任意に取る。頂点 ",
+                  math(String.raw`w\in V_L`), " に対する指示値 ",
+                  math(String.raw`\chi_v(w)\in\mathbb N`), " を、",
+                  math(String.raw`w=v`), " ならば ", math(String.raw`\chi_v(w):=1`),
+                  "、そうでなければ ", math(String.raw`\chi_v(w):=0`), " と定める。",
+                ]),
+                paragraph([
+                  "まず、台の各辺の上にある動く向き付き辺が一意であることを示す。",
+                  math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`), " を取る。",
+                  ref("def_moved_edge_support_set"), " により ",
+                  math(String.raw`(e,0)\in M(\varphi)`), " または ",
+                  math(String.raw`(e,1)\in M(\varphi)`),
+                  " である。両方が成り立つと仮定すると、", ref("def_edge_reversal"),
+                  " により ", math(String.raw`\iota(e,0)=(e,1)`), " なので ",
+                  math(String.raw`(e,0)\in M(\varphi)`), " かつ ",
+                  math(String.raw`\iota(e,0)\in M(\varphi)`),
+                  " となり、反転対を含まないという仮定に反する。したがってちょうど一つの ",
+                  math(String.raw`d_e\in\{0,1\}`), " が ",
+                  math(String.raw`(e,d_e)\in M(\varphi)`), " を満たす。写像 ",
+                  math(String.raw`\ell:E_{\mathrm{supp}}(\varphi)\to M(\varphi)`), " を ",
+                  math(String.raw`\ell(e):=(e,d_e)`), " で定め、写像 ",
+                  math(String.raw`p:M(\varphi)\to E_{\mathrm{supp}}(\varphi)`), " を ",
+                  math(String.raw`p(e,d):=e`), " で定める（",
+                  math(String.raw`(e,d)\in M(\varphi)`), " ならば ",
+                  ref("def_moved_edge_support_set"), " により ",
+                  math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`),
+                  " なので、値は終域に属する）。任意の ",
+                  math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`), " について ",
+                  math(String.raw`p(\ell(e))=e`), " が ", math(String.raw`\ell`),
+                  " の定義から、任意の ", math(String.raw`(e,d)\in M(\varphi)`),
+                  " について ", math(String.raw`\ell(p(e,d))=(e,d_e)=(e,d)`), " が ",
+                  math(String.raw`d_e`), " の一意性から成り立つので、",
+                  math(String.raw`\ell`), " は全単射である。",
+                ]),
+                paragraph([
+                  "次に、", math(String.raw`v`),
+                  " を終点とする動く辺の集合と ", math(String.raw`v`),
+                  " を始点とする動く辺の集合",
+                ]),
+                displayMath(String.raw`S_{\mathrm{tgt}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{tgt}(\vec e)=v\,\},\qquad
+S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`),
+                paragraph([
+                  "の間の全単射を作る（始点・終点は ", ref("def_oriented_edge_endpoints"),
+                  "）。", math(String.raw`\vec e\in M(\varphi)`), " を取る。",
+                  math(String.raw`\varphi(\varphi(\vec e))=\varphi(\vec e)`),
+                  " と仮定すると置換の単射性（", ref("def_row_permutation"),
+                  "）により ", math(String.raw`\varphi(\vec e)=\vec e`), " となり ",
+                  math(String.raw`\vec e\in M(\varphi)`), "（",
+                  ref("def_moved_edge_set"), "）に反するので、",
+                  math(String.raw`\varphi(\vec e)\in M(\varphi)`), " である。また ",
+                  math(String.raw`\vec e\in M(\varphi)`), " では ",
+                  math(String.raw`\varphi(\vec e)\ne\vec e`), " なので ",
+                  ref("def_nonbacktracking_permutations"), " により ",
+                  math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`),
+                  " であり、", ref("def_nonbacktracking_successors"), " により ",
+                  math(String.raw`\operatorname{src}(\varphi(\vec e))=\operatorname{tgt}(\vec e)`),
+                  " である。したがって ", math(String.raw`\vec e\in S_{\mathrm{tgt}}`),
+                  " ならば ", math(String.raw`\varphi(\vec e)\in S_{\mathrm{src}}`),
+                  " なので、写像 ", math(String.raw`\Phi:S_{\mathrm{tgt}}\to S_{\mathrm{src}}`),
+                  " を ", math(String.raw`\Phi(\vec e):=\varphi(\vec e)`),
+                  " で定められる。", math(String.raw`\Phi`),
+                  " は置換の単射性により単射である。全射であることを示す。",
+                  math(String.raw`\vec f\in S_{\mathrm{src}}`), " を取る。",
+                  math(String.raw`\varphi`), " は ", math(String.raw`\vec E_L`),
+                  " の置換なので、", math(String.raw`\varphi(\vec e)=\vec f`),
+                  " を満たす ", math(String.raw`\vec e\in\vec E_L`),
+                  " がただ一つ存在する。", math(String.raw`\varphi(\vec e)=\vec e`),
+                  " と仮定すると ", math(String.raw`\vec e=\vec f`), " かつ ",
+                  math(String.raw`\varphi(\vec f)=\vec f`), " となり ",
+                  math(String.raw`\vec f\in M(\varphi)`), " に反するから ",
+                  math(String.raw`\vec e\in M(\varphi)`),
+                  " であり、上と同じ理由で ",
+                  math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{src}(\varphi(\vec e))=\operatorname{src}(\vec f)=v`),
+                  " である。したがって ", math(String.raw`\vec e\in S_{\mathrm{tgt}}`),
+                  " かつ ", math(String.raw`\Phi(\vec e)=\vec f`), " なので ",
+                  math(String.raw`\Phi`), " は全単射であり、有限集合の個数（",
+                  ref("def_cardinality_notation"), "）について ",
+                  math(String.raw`\lvert S_{\mathrm{tgt}}\rvert=\lvert S_{\mathrm{src}}\rvert`),
+                  " である。",
+                ]),
+                paragraph([
+                  "また、任意の ", math(String.raw`\vec e=(e,d)\in\vec E_L`), " について",
+                ]),
+                displayMath(String.raw`\chi_v\bigl(\partial_0(e)\bigr)+\chi_v\bigl(\partial_1(e)\bigr)
+=\chi_v\bigl(\operatorname{src}(\vec e)\bigr)+\chi_v\bigl(\operatorname{tgt}(\vec e)\bigr)
+\quad\bigl(\because\ \blkref{def_oriented_edge_endpoints}\text{ の場合分け。}d=0\text{ なら両辺の二項が一致し、}d=1\text{ なら二項の入れ替えなので }\mathbb N\text{ の加法の交換律}\bigr)`),
+                paragraph(["である。端点の個数を数えると"]),
+                displayMath(String.raw`\begin{aligned}
+d_{E_{\mathrm{supp}}(\varphi)}(v)
+&=\Bigl|\Bigl\{\,(e,a)\in E_{\mathrm{supp}}(\varphi)\times I\ \Bigm|\ \partial_a(e)=v\,\Bigr\}\Bigr|
+&&\bigl(\because\ \blkref{def_edge_subset_incidence_count}\bigr)\\
+&=\sum_{e\in E_{\mathrm{supp}}(\varphi)}\ \sum_{a\in I}\chi_v\bigl(\partial_a(e)\bigr)
+&&\bigl(\because\ \text{第一成分ごとの互いに素な分割と指示値 }\chi_v\text{ の定義}\bigr)\\
+&=\sum_{e\in E_{\mathrm{supp}}(\varphi)}\Bigl(\chi_v\bigl(\partial_0(e)\bigr)+\chi_v\bigl(\partial_1(e)\bigr)\Bigr)
+&&\bigl(\because\ I=\{0,1\}\bigr)\\
+&=\sum_{\vec e\in M(\varphi)}\Bigl(\chi_v\bigl(\partial_0(p(\vec e))\bigr)+\chi_v\bigl(\partial_1(p(\vec e))\bigr)\Bigr)
+&&\bigl(\because\ \text{全単射 }\ell\text{ による有限和の添字の付け替え。}p\text{ は }\ell\text{ の逆写像}\bigr)\\
+&=\sum_{\vec e\in M(\varphi)}\Bigl(\chi_v\bigl(\operatorname{src}(\vec e)\bigr)+\chi_v\bigl(\operatorname{tgt}(\vec e)\bigr)\Bigr)
+&&\bigl(\because\ \text{直前の等式を各 }\vec e=(p(\vec e),d)\text{ へ適用}\bigr)\\
+&=\sum_{\vec e\in M(\varphi)}\chi_v\bigl(\operatorname{src}(\vec e)\bigr)
+ +\sum_{\vec e\in M(\varphi)}\chi_v\bigl(\operatorname{tgt}(\vec e)\bigr)
+&&\bigl(\because\ \mathbb N\text{ の加法の結合律・交換律}\bigr)\\
+&=\lvert S_{\mathrm{src}}\rvert+\lvert S_{\mathrm{tgt}}\rvert
+&&\bigl(\because\ \text{指示値の総和は条件を満たす元の個数}\bigr)\\
+&=\lvert S_{\mathrm{tgt}}\rvert+\lvert S_{\mathrm{tgt}}\rvert
+&&\bigl(\because\ \lvert S_{\mathrm{tgt}}\rvert=\lvert S_{\mathrm{src}}\rvert\text{（上の全単射）}\bigr)\\
+&=2\,\lvert S_{\mathrm{tgt}}\rvert
+&&\bigl(\because\ \mathbb N\text{ の加法}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "となる。したがって ",
+                  math(String.raw`k_v:=\lvert S_{\mathrm{tgt}}\rvert\in\mathbb N`), " が ",
+                  math(String.raw`d_{E_{\mathrm{supp}}(\varphi)}(v)=2k_v`),
+                  " を満たす。頂点 ", math(String.raw`v`), " は任意だったから ",
+                  ref("def_even_edge_subset"), " より ",
+                  math(String.raw`\operatorname{Even}_L\bigl(E_{\mathrm{supp}}(\varphi)\bigr)`),
+                  " である。全過程は有限集合と自然数の加法だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },
