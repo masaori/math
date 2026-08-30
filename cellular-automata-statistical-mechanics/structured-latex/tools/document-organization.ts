@@ -168,6 +168,18 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "self_neighborhood_reversible_maps",
+        title: "自己近傍舞台の可逆大域写像の分類と合成",
+        input: "有限舞台、各セルが自分自身だけを見る近傍割り当て、2 元状態集合と有限局所真理値表を入力とする。",
+        output: "大域写像の点ごとの表現、反転集合による可逆写像の分類、合成群と巡回型を得る。",
+        main: "主定理は、可逆大域写像が反転集合と全単射に対応し、合成について舞台の冪集合と同じ元数の有限可換群をなし、恒等写像以外は固定点を持たない対合になることである。",
+        mainLabels: [
+          "claim_self_neighborhood_reversible_maps_classified_by_flip_sets",
+          "claim_self_neighborhood_reversible_maps_finite_commutative_group",
+          "claim_self_neighborhood_reversible_map_cycle_types_general",
+        ],
+      },
+      {
         id: "conjugacy_and_locality_classification",
         title: "共役分類と局所性による制限",
         input: "有限自己写像の共役分類と、2 値 CA の局所表現を入力とする。",

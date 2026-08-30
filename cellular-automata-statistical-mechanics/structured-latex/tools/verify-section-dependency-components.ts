@@ -25,9 +25,7 @@ const STATEMENT_KINDS = new Set(["claim", "theorem"]);
  * 主張を含むのに主定理を宣言していない既知の成分。キーは「節 id ＋ タブ ＋ 成分の member id を
  * 昇順で改行連結したもの」。成分の中身が一つでも変われば鍵が外れて失敗する。
  */
-const KNOWN_UNDECLARED_COMPONENTS: readonly string[] = [
-  "conjugacy_and_locality_classification\tself_neighborhood_reversible_map_group_claim_binary_bijection\nself_neighborhood_reversible_map_group_claim_classification\nself_neighborhood_reversible_map_group_claim_composition\nself_neighborhood_reversible_map_group_claim_cycle_type\nself_neighborhood_reversible_map_group_claim_group\nself_neighborhood_reversible_map_group_claim_pointwise_form\nself_neighborhood_reversible_map_group_claim_reversible_pointwise_bijective\nself_neighborhood_reversible_map_group_definition_stage",
-];
+const KNOWN_UNDECLARED_COMPONENTS: readonly string[] = [];
 
 const files = await loadContentFiles();
 
