@@ -1193,6 +1193,7 @@ A(\tilde\theta_\mu)
 &= \gamma_1(\theta)\gamma_1(\theta) - \gamma_2(\theta)\bigl(-\gamma_2(-\theta)\bigr)
    \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
+   \quad (\because \mathbb{C} \text{ の積と加法逆元})
 \end{aligned}`,
       ),
       paragraph([
@@ -1344,7 +1345,8 @@ s_1^2c_2^2(s_2^*)^2
 \lambda_{+,\mu}\lambda_{-,\mu}
 &= \left(\gamma_1(\theta) + r\right)\left(\gamma_1(\theta) - r\right)
    \quad (\because \text{eigenvector\_of\_A\_theta\_tilde}) \\
-&= \gamma_1(\theta)^2 - r^2 \\
+&= \gamma_1(\theta)^2 - r^2
+   \quad (\because \mathbb{R} \text{ の分配則による平方差}) \\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
    \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (2)}) \\
 &= 1

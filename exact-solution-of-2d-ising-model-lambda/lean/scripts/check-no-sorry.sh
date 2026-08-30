@@ -1657,6 +1657,7 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.prod_fixed_orbit_factorization
   Ising2DLambda.KacWard.kacWardEntryProduct_orbit_factorization
   Ising2DLambda.KacWard.kacWardEntryProduct_orbit_factorization_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.sign_transposition
   Ising2DLambda.NecSuf.KacWard.sign_noncommProd
 )
 
