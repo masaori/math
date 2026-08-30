@@ -237,4 +237,115 @@ theorem sign_transpositionChain [LinearOrder α] (a : α) (l : List α) (hal : a
     rw [sign_comp (fun x y : α => x < y) trichotomous_of_linearOrder,
       sign_transposition a b hab, ih hat, List.length_cons, pow_succ]
 
+/-- 互いに素な台の外を動かさず、それぞれの台を保つ置換は互いに可換である。
+人手証明の「相異なる軌道は互いに素」を、合成の可換性に書き下した部分である。 -/
+theorem commute_of_disjoint_supports { β : Type* } [DecidableEq α] [DecidableEq β]
+    (support : β → Finset α) (f : β → Equiv.Perm α)
+    {b c : β} (hdisj : Disjoint (support b) (support c))
+    (hstay : ∀ d ∈ ({b, c} : Finset β), ∀ x, x ∈ support d → f d x ∈ support d)
+    (hout : ∀ d ∈ ({b, c} : Finset β), ∀ x, x ∉ support d → f d x = x) :
+    Commute (f b) (f c) := by
+  classical
+  apply Equiv.ext
+  intro x
+  simp only [Equiv.Perm.mul_apply]
+  by_cases hxb : x ∈ support b
+  · have hxc : x ∉ support c := fun h => Finset.disjoint_left.mp hdisj hxb h
+    have hfb : f b x ∈ support b := hstay b (by simp) x hxb
+    have hfbc : f b x ∉ support c := fun h => Finset.disjoint_left.mp hdisj hfb h
+    rw [hout c (by simp) x hxc, hout c (by simp) (f b x) hfbc]
+  · by_cases hxc : x ∈ support c
+    · have hfc : f c x ∈ support c := hstay c (by simp) x hxc
+      have hfcb : f c x ∉ support b := fun h => Finset.disjoint_left.mp hdisj h hfc
+      rw [hout b (by simp) x hxb, hout b (by simp) (f c x) hfcb]
+    · simp only [hout b (by simp) x hxb, hout c (by simp) x hxc]
+
+/-- 互いに素な台上の局所置換の合成は、各台上で元の置換と一致し、
+すべての台の外では恒等置換である。したがって、台の合併が元の置換の
+動く点を覆えば、合成は元の置換に戻る。 -/
+theorem noncommProd_eq_of_disjoint_supports { β : Type* } [DecidableEq α] [DecidableEq β]
+    (s : Finset β) (support : β → Finset α) (f : β → Equiv.Perm α)
+    (comm : (s : Set β).Pairwise fun b c => Commute (f b) (f c))
+    (hdisj : ∀ b ∈ s, ∀ c ∈ s, b ≠ c → Disjoint (support b) (support c))
+    (hlocal : ∀ b ∈ s, ∀ x, x ∈ support b → f b x = σ x)
+    (hout : ∀ b ∈ s, ∀ x, x ∉ support b → f b x = x)
+    (hcover : ∀ x, σ x ≠ x ↔ ∃ b ∈ s, x ∈ support b) :
+    s.noncommProd f comm = σ := by
+  classical
+  apply Equiv.ext
+  intro x
+  by_cases hx : σ x = x
+  · have hfix : ∀ b ∈ s, f b x = x := by
+      intro b hb
+      apply hout b hb x
+      intro hxb
+      exact ((hcover x).mpr ⟨b, hb, hxb⟩) hx
+    exact Finset.noncommProd_induction s f comm
+      (fun g => g x = x)
+      (fun g h hg hh => by simp only [Equiv.Perm.mul_apply, hh, hg])
+      rfl hfix |>.trans hx.symm
+  · obtain ⟨b, hb, hxb⟩ := (hcover x).mp hx
+    let commErase : ((s.erase b : Finset β) : Set β).Pairwise
+        (Function.onFun Commute f) :=
+      fun _ hy _ hz hne => comm (s.mem_of_mem_erase hy) (s.mem_of_mem_erase hz) hne
+    have herase : ((s.erase b).noncommProd f commErase) x = x := by
+      apply Finset.noncommProd_induction (s.erase b) f commErase (fun g => g x = x)
+      · intro g h hg hh
+        simp only [Equiv.Perm.mul_apply, hh, hg]
+      · rfl
+      · intro c hc
+        apply hout c (s.mem_of_mem_erase hc) x
+        intro hxc
+        have hcb : c ≠ b := (Finset.mem_erase.mp hc).1
+        exact Finset.disjoint_left.mp (hdisj c (s.mem_of_mem_erase hc) b hb hcb) hxc hxb
+    rw [← Finset.mul_noncommProd_erase s hb f comm]
+    simp only [Equiv.Perm.mul_apply, herase]
+    exact hlocal b hb x hxb
+
+/-- 上の合成同定と符号の乗法性を結合する。軌道ごとの符号が既に
+`(-1)^(n b - 1)` と固定されていれば、全置換の符号はその有限積である。 -/
+theorem sign_eq_prod_of_noncommProd (htri : Trichotomous lt) { β : Type* }
+    (s : Finset β) (f : β → Equiv.Perm α)
+    (comm : (s : Set β).Pairwise fun b c => Commute (f b) (f c))
+    (σ : Equiv.Perm α) (hprod : s.noncommProd f comm = σ)
+    (n : β → ℕ) (hsign : ∀ b ∈ s, sign lt (f b) = (-1) ^ (n b - 1)) :
+    sign lt σ = ∏ b ∈ s, (-1) ^ (n b - 1) := by
+  rw [← hprod, sign_noncommProd lt htri s f comm]
+  exact Finset.prod_congr rfl hsign
+
+/-- 互いに素な台の局所置換を合成し、元の置換との一致、符号の乗法性、
+局所符号の式をこの順に結ぶ。人手証明の最後の三つの等号に対応する。 -/
+theorem sign_eq_prod_of_disjoint_supports (htri : Trichotomous lt)
+    { β : Type* } [DecidableEq α] [DecidableEq β]
+    (s : Finset β) (support : β → Finset α) (f : β → Equiv.Perm α)
+    (σ : Equiv.Perm α) (n : β → ℕ)
+    (hdisj : ∀ b ∈ s, ∀ c ∈ s, b ≠ c → Disjoint (support b) (support c))
+    (hstay : ∀ b ∈ s, ∀ x, x ∈ support b → f b x ∈ support b)
+    (hlocal : ∀ b ∈ s, ∀ x, x ∈ support b → f b x = σ x)
+    (hout : ∀ b ∈ s, ∀ x, x ∉ support b → f b x = x)
+    (hcover : ∀ x, σ x ≠ x ↔ ∃ b ∈ s, x ∈ support b)
+    (hsign : ∀ b ∈ s, sign lt (f b) = (-1) ^ (n b - 1)) :
+    sign lt σ = ∏ b ∈ s, (-1) ^ (n b - 1) := by
+  classical
+  let comm : (s : Set β).Pairwise fun b c => Commute (f b) (f c) := by
+    intro b hb c hc hbc
+    apply commute_of_disjoint_supports support f (hdisj b hb c hc hbc)
+    · intro d hd x hxd
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hd
+      rcases hd with hd | hd
+      · subst d
+        exact hstay b hb x hxd
+      · subst d
+        exact hstay c hc x hxd
+    · intro d hd x hxd
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hd
+      rcases hd with hd | hd
+      · subst d
+        exact hout b hb x hxd
+      · subst d
+        exact hout c hc x hxd
+  have hprod : s.noncommProd f comm = σ :=
+    noncommProd_eq_of_disjoint_supports s support f comm hdisj hlocal hout hcover
+  exact sign_eq_prod_of_noncommProd lt htri s f comm σ hprod n hsign
+
 end Ising2DLambda.NecSuf.KacWard

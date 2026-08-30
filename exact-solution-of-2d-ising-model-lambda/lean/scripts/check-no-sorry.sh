@@ -1664,6 +1664,10 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.transpositionChain_apply_getElem
   Ising2DLambda.NecSuf.KacWard.transpositionChain_apply_getLast
   Ising2DLambda.NecSuf.KacWard.sign_transpositionChain
+  Ising2DLambda.NecSuf.KacWard.commute_of_disjoint_supports
+  Ising2DLambda.NecSuf.KacWard.noncommProd_eq_of_disjoint_supports
+  Ising2DLambda.NecSuf.KacWard.sign_eq_prod_of_noncommProd
+  Ising2DLambda.NecSuf.KacWard.sign_eq_prod_of_disjoint_supports
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
