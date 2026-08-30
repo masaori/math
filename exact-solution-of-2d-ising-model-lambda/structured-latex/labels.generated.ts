@@ -390,6 +390,7 @@ export const ALL_LABELS = [
   "claim_transfer_matrix_shift_invariant",
   "claim_transfer_weight_product",
   "claim_transition_entries_in_mu8",
+  "claim_transposition_sign_on_finite_ordered_set",
   "claim_transverse_crossing_symmetric",
   "claim_trivial_sector_configuration_reconstruction",
   "claim_two_is_square_in_real_closed",

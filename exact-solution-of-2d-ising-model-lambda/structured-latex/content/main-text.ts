@@ -49661,6 +49661,126 @@ T^{a,b}_{\varphi}(x)
           element: {
             kind: "elementGroup",
             id: "group_of_kac_ward_claim_permutation_sign_moved_orbit_product",
+            beforeFocus: [{
+              role: "supportingClaim",
+              element: {
+                id: "kac_ward_claim_transposition_sign_on_finite_ordered_set",
+                kind: "claim",
+                title: { text: "有限線型順序集合の相異なる二点の互換の符号は -1 である" },
+                labels: ["claim_transposition_sign_on_finite_ordered_set"],
+                habitat: "Z",
+                verification: ["sagemath/check/transposition-sign-finite-ordered-set"],
+                lean: [
+                  "Ising2DLambda.NecSuf.KacWard.sign_transposition",
+                ],
+                statement: [
+                  paragraph([
+                    "線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), " と、相異なる二点 ",
+                    math(String.raw`a,b\in\mathcal J`), " を任意に取る。写像 ",
+                    math(String.raw`t_{a,b}:\mathcal J\to\mathcal J`), " を",
+                  ]),
+                  displayMath(String.raw`t_{a,b}(u):=
+\begin{cases}
+b&(u=a),\\
+a&(u=b),\\
+u&(u\ne a\ \text{かつ}\ u\ne b)
+\end{cases}`),
+                  paragraph([
+                    "で定めると、", math(String.raw`t_{a,b}`), " は ", math(String.raw`a`), " と ",
+                    math(String.raw`b`), " だけを入れ替える置換であり、その符号（",
+                    ref("def_permutation_sign"), "）は",
+                  ]),
+                  displayMath(String.raw`\operatorname{sgn}(t_{a,b})=-1\in\mathbb Z`),
+                  paragraph(["である。有限集合の数え上げと整数の冪だけで閉じ、実数体も複素数体も現れない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "互換は二回合成すると各元を元へ戻すので全単射である。線型順序の三分律により、",
+                    math(String.raw`a\prec b`), " と ", math(String.raw`b\prec a`),
+                    " の一方だけが成り立つ。互換は二点の名前を交換しても同じ写像なので、以下 ",
+                    math(String.raw`a\prec b`), " とする。中間にある点の集合を",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+P&:=\{\,(u,v)\in\mathcal J\times\mathcal J\mid u\prec v\,\},\\
+M&:=\{\,u\in\mathcal J\mid a\prec u\ \text{かつ}\ u\prec b\,\},\\
+I&:=\{\,(u,v)\in P\mid t_{a,b}(v)\prec t_{a,b}(u)\,\},\\
+A&:=\{\,(a,u)\mid u\in M\,\},\qquad
+B:=\{\,(u,b)\mid u\in M\,\},\qquad
+C:=\{(a,b)\}
+\end{aligned}`),
+                  paragraph([
+                    "と置く。転倒対の集合が ", math(String.raw`I=A\cup B\cup C`),
+                    " であることを、任意の ", math(String.raw`(u,v)\in P`),
+                    " について場合分けして示す。",
+                  ]),
+                  list([
+                    [
+                      math(String.raw`u=a`), " の場合。", math(String.raw`v=b`),
+                      " なら互換後は ", math(String.raw`a\prec b`), " の逆順なので ",
+                      math(String.raw`(u,v)=(a,b)\in I\cap C`), " である。",
+                      math(String.raw`a\prec v\prec b`), " なら ", math(String.raw`t_{a,b}(v)=v\prec b=t_{a,b}(a)`),
+                      " なので ", math(String.raw`(u,v)\in I\cap A`), " である。",
+                      math(String.raw`b\prec v`), " なら ", math(String.raw`t_{a,b}(a)=b\prec v=t_{a,b}(v)`),
+                      " なので転倒ではない。三分律によりこの三場合が尽くす。",
+                    ],
+                    [
+                      math(String.raw`v=b`), " かつ ", math(String.raw`u\ne a`), " の場合。",
+                      math(String.raw`a\prec u\prec b`), " なら ", math(String.raw`t_{a,b}(b)=a\prec u=t_{a,b}(u)`),
+                      " なので ", math(String.raw`(u,v)\in I\cap B`), " である。",
+                      math(String.raw`u\prec a`), " なら ", math(String.raw`t_{a,b}(u)=u\prec a=t_{a,b}(b)`),
+                      " なので転倒ではない。", math(String.raw`u\prec b`),
+                      " と三分律によりこの二場合が尽くす。",
+                    ],
+                    [
+                      math(String.raw`v=a`), " なら ", math(String.raw`u\prec a`),
+                      " であり、", math(String.raw`t_{a,b}(u)=u\prec b=t_{a,b}(a)`),
+                      " なので転倒ではない。",
+                    ],
+                    [
+                      math(String.raw`u=b`), " なら ", math(String.raw`b\prec v`),
+                      " であり、", math(String.raw`t_{a,b}(b)=a\prec v=t_{a,b}(v)`),
+                      " なので転倒ではない。",
+                    ],
+                    [
+                      math(String.raw`u,v\notin\{a,b\}`), " なら互換は両方を動かさず、",
+                      math(String.raw`t_{a,b}(u)=u\prec v=t_{a,b}(v)`), " なので転倒ではない。",
+                    ],
+                  ]),
+                  paragraph([
+                    "以上は ", math(String.raw`(u,v)\in I`), " となる場合がちょうど ",
+                    math(String.raw`A\cup B\cup C`), " であることを示すので、",
+                    math(String.raw`I=A\cup B\cup C`), " である。さらに ",
+                    math(String.raw`a\prec u\prec b`), " から ", math(String.raw`u\ne a`),
+                    "、", math(String.raw`u\ne b`), " が従うため、", math(String.raw`A,B,C`),
+                    " は互いに素である。写像 ", math(String.raw`u\mapsto(a,u)`), " と ",
+                    math(String.raw`u\mapsto(u,b)`), " はそれぞれ ", math(String.raw`M`),
+                    " から ", math(String.raw`A`), "、", math(String.raw`B`),
+                    " への全単射なので ", math(String.raw`\lvert A\rvert=\lvert B\rvert=\lvert M\rvert`),
+                    " であり、", math(String.raw`\lvert C\rvert=1`), " である。よって転倒数は",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\mathrm{inv}(t_{a,b})
+&=\lvert M\rvert+\lvert M\rvert+1
+&&\bigl(\because\ \text{転倒対の上の三種類への互いに素な分割}\bigr)\\
+&=2\lvert M\rvert+1
+&&\bigl(\because\ \mathbb N\text{ の四則}\bigr)
+\end{aligned}`),
+                  paragraph(["である。したがって、求めたい符号から始めると"]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(t_{a,b})
+&=(-1)^{\mathrm{inv}(t_{a,b})}
+&&\bigl(\because\ \blkref{def_permutation_sign}\bigr)\\
+&=(-1)^{2\lvert M\rvert+1}
+&&\bigl(\because\ \mathrm{inv}(t_{a,b})=2\lvert M\rvert+1\bigr)\\
+&=\bigl((-1)^2\bigr)^{\lvert M\rvert}(-1)
+&&\bigl(\because\ \mathbb Z\text{ の指数法則}\bigr)\\
+&=-1
+&&\bigl(\because\ (-1)^2=1\text{ と }1^{\lvert M\rvert}=1\bigr)
+\end{aligned}`),
+                  paragraph(["を得る。"]),
+                ],
+              },
+            }],
             focus: {
               id: "kac_ward_claim_permutation_sign_moved_orbit_product",
               kind: "claim",
@@ -49708,7 +49828,8 @@ T^{a,b}_{\varphi}(x)
 (\vec e_C\ \varphi^{\circ2}(\vec e_C))\circ(\vec e_C\ \varphi(\vec e_C))`),
                 paragraph([
                   "という ", math(String.raw`m_C-1`), " 個の互換の合成に等しい。各互換の符号は ",
-                  math(String.raw`-1`), " で、符号は合成を積へ送る（", ref("claim_permutation_sign_mul"),
+                  math(String.raw`-1`), " であり（", ref("claim_transposition_sign_on_finite_ordered_set"),
+                  "）、符号は合成を積へ送る（", ref("claim_permutation_sign_mul"),
                   "）から、この巡回置換の符号は ", math(String.raw`(-1)^{m_C-1}`), " である。",
                 ]),
                 paragraph([
@@ -49721,7 +49842,7 @@ T^{a,b}_{\varphi}(x)
 &=\prod_{C\in\mathcal C(\varphi)}\operatorname{sgn}(\varphi_C)
 &&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ と }\blkref{claim_permutation_sign_mul}\bigr)\\
 &=\prod_{C\in\mathcal C(\varphi)}(-1)^{m_C-1}
-&&\bigl(\because\ C\text{ 上の巡回置換は }m_C-1\text{ 個の互換の合成}\bigr)\\
+&&\bigl(\because\ C\text{ 上の巡回置換は }m_C-1\text{ 個の互換の合成。}\blkref{claim_transposition_sign_on_finite_ordered_set}\bigr)\\
 &=\prod_{C\in\mathcal C(\varphi)}(-1)^{\lvert C\rvert-1}
 &&\bigl(\because\ m_C=\lvert C\rvert\bigr)
 \end{aligned}`),
