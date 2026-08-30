@@ -46,7 +46,8 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台 ", math(String.raw`(V,N)`), " 上の局所規則の族 ",
+        "有限舞台 ", math(String.raw`(V,N)`), " 上の大域写像全体 ",
+        math(String.raw`\mathcal M(V,N)`), "（", ref("def_stage_global_maps"), "）について、局所規則の族 ",
         math(String.raw`(f_v)_{v\in V}`), " に大域写像 ", math(String.raw`F`),
         " を対応させる写像は単射である。したがって",
       ]),

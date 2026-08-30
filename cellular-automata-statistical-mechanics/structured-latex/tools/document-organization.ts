@@ -137,6 +137,14 @@ export const documentOrganization = [
         mainLabels: ["claim_reachability_partial_order", "claim_finite_propagation_boundary", "claim_event_order_locally_finite"],
       },
       {
+        id: "finite_stage_global_maps",
+        title: "有限舞台上の大域写像の列挙と可逆部分",
+        input: "有限舞台と、各セルの有限局所真理値表を入力とする。",
+        output: "局所規則族から得られる大域写像全体、その元数、可逆な大域写像全体を得る。",
+        main: "主張は、局所規則族から大域写像への対応が単射であり、大域写像全体の元数が局所規則の個数の積になることである。",
+        mainLabels: ["claim_stage_global_maps_count"],
+      },
+      {
         id: "local_representation_and_composition",
         title: "局所表現・逆写像・大域写像の合成",
         input: "本質的依存台、有限大域写像の可逆性、近傍割り当ての合成を入力とする。",
