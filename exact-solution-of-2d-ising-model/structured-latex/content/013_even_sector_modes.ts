@@ -556,9 +556,20 @@ e^{-iM\tilde\theta_\mu}
         "。）",
       ]),
       paragraph([
-        "(2) ",
-        math(String.raw`\tilde\theta_{\mu+M} = \dfrac{2\pi(\mu+M-\frac12)}{M} = \tilde\theta_\mu + 2\pi`),
-        " である。",
+        "(2) まず添字をずらした角度を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tilde\theta_{\mu+M}
+&=\frac{2\pi\left(\mu+M-\tfrac12\right)}{M}
+&&\bigl(\because\ \tilde\theta_\mu\text{ の定義に }\mu+M\text{ を代入}\bigr)\\
+&=\frac{2\pi\left(\mu-\tfrac12\right)+2\pi M}{M}
+&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)\\
+&=\frac{2\pi\left(\mu-\tfrac12\right)}{M}+2\pi
+&&\bigl(\because\ \mathbb R\text{ の分数の加法と }\tfrac{2\pi M}{M}=2\pi\bigr)\\
+&=\tilde\theta_\mu+2\pi
+&&\bigl(\because\ \tilde\theta_\mu\text{ の定義}\bigr)
+\end{aligned}`),
+      paragraph([
         math(String.raw`j \in \mathbb{Z}`),
         " について",
       ]),

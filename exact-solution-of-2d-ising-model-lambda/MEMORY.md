@@ -6,7 +6,7 @@
 
 **置換の動く辺の軌道列が向き付き辺の相異なる閉じた非後退辺列になることを四層で証明した（`claim_moved_orbit_closed_nonbacktracking`）。** 反復合成 $\varphi^{\circ k}$（`def_permutation_iterate`）、鳩の巣原理による回帰の存在（`claim_permutation_power_return`）、最小回帰時刻 $r_\varphi(\vec e)$（`def_permutation_minimal_return`）、軌道列 $\gamma_\varphi(\vec e)$（`def_permutation_orbit_sequence`）を定義し、単射性の移送で各項が動く辺であること、動く辺への仮定で隣接接続と閉じる接続、最小性で相異性を示した。SageMath `permutation-orbit-closed-walk` は先頭六辺の全置換 $6!$ 個で回帰・最小性・軌道の閉路性を全数検査した。Lean は具体版 `movedOrbit_closed_nonbacktracking`、単射性・反復合成・自然数の比較だけを残した必要十分版 `moved_iterate_ne` / `orbit_relation_chain` / `orbit_iterates_distinct`、導出版を通した。次は軌道族が動く辺の集合を互いに素に分割することを固定する。
 
-前進前レビューでは、前 tick の非零条件の statement にあった未証明の軌道帰結の先取りを削除し、他主張の「証明により」を根拠に引いていた箇所を遷移行列の定義からの直接導出へ直し（コミット `9d95e579`）、前 tick の Lean 定理 3 件の sorry 検査登録漏れを登録した。並列の式変形統一は締切のためこの tick は見送った。
+前進前レビューでは、前 tick の非零条件の statement にあった未証明の軌道帰結の先取りを削除し、他主張の「証明により」を根拠に引いていた箇所を遷移行列の定義からの直接導出へ直し（コミット `9d95e579`）、前 tick の Lean 定理 3 件の sorry 検査登録漏れを登録した。並列の式変形統一は、姉妹側の添字の周期性の証明 (2) にあった角度の一行二等号を四段の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 345 ページ通過）。
 
 ## ひとつ前の到達点（2026-08-30 の 33 回目の tick 時点）
 
