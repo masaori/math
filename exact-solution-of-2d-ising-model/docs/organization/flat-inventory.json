@@ -480,6 +480,34 @@
       "concludingClaimEntryId": "closing_005_claim_open_chain_spin_sums_positive",
       "boundaryEvidence": "旧来一ブロックだった内容を、共通記法、端点因子のない和、両端積付きの和、正値性の四項へ分けた章内依存順5–8の連続区間である。二つの和は共通記法だけに依存し、正値性が二公式を受け取って節末を閉じる。章内依存順9の転送行列による分配関数の表式および章内依存順10の記号の定義はこの節へ依存せず、節末を含む三項の外部入力集合もそれぞれ異なる。したがって外部入力集合が切り替わる章内依存順8の後で節を閉じる。外部入力とその本文 fingerprint、四項の本文 fingerprint、内部依存辺、章内依存順、節末出力の一意性を生成時に固定検査する。",
       "readabilityStatus": "共通記法と三つの主張を分離し、二公式は初期スピンと隣接スピンの積への具体的な全単射で有限和を計算しているため、対象四項は現行の説明粒度検査に合格している。外部入力である集合と代数構造の記号、双曲線関数の基本性質、可換行列の指数積公式には、複数の定義・主張の分割または具体的な行列計算への展開が残る。"
+    },
+    {
+      "name": "分配関数の転送行列表示",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+      "entryIds": [
+        "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix"
+      ],
+      "input": [
+        "最初の節で定めた周期境界条件つき分配関数と二つの転送行列",
+        "有限複素行列の積・冪・トレース",
+        "可換な指数関数の積公式と有限和・有限積の計算規則"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "partition_function_2d_ising_002_definition_partition_function",
+        "partition_function_2d_ising_003_definition_transfer_matrix",
+        "eigenvalues_of_V_001_definition_trace",
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
+      ],
+      "output": [
+        "2次元イジング模型の分配関数を転送行列の積の冪のトレースとして表す公式"
+      ],
+      "mainTheorem": "2次元イジング模型の分配関数は二つの転送行列の積の冪のトレースに等しい",
+      "mainTheoremEntryId": "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+      "boundaryEvidence": "章内依存順9の一項は、最初の節で定めた分配関数と転送行列を入力として、有限行列の成分・冪・トレースを展開し、分配関数の転送行列表示という一つの主張へ閉じる。章内依存順10の記号の定義と順11のσzの基底作用はこの主張へ依存せず、順10は別の行列指数関数とクロネッカー積を入力とし、順11は順10とスピン配置・標準基底の対応を入力とする。したがって外部入力集合が切り替わる章内依存順9の後で一項の節を閉じる。外部入力とその本文 fingerprint、対象本文 fingerprint、章内依存順、節末出力の一意性に加え、次の二項の章内順・直接依存・本文 fingerprint・本節からの非依存を生成時に固定検査する。",
+      "readabilityStatus": "対象主張は有限集合上の和、有限複素行列の積と冪、トレースを一段ずつ展開しているため、現行の説明粒度検査に合格している。外部入力である集合と代数構造の記号、複素数の定義、可換行列の指数積公式には、複数の定義・主張の分割または具体的な行列計算への展開が残る。"
     }
   ],
   "explanationGranularityReview": {
@@ -2539,6 +2567,10 @@
         {
           "dependentId": "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+          "prerequisiteId": "eigenvalues_of_V_001_definition_trace"
         },
         {
           "dependentId": "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
@@ -7233,8 +7265,8 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 8892,
-        "inspectedContentSha256": "aa850099fc12268924cb36d81e87fb346b913e4cf9d065af3fa394322d8aa7c1",
+        "inspectedCharacterCount": 9086,
+        "inspectedContentSha256": "36089afc37477d16de5253b8329cc777265e8db9dfc2cddf75531a3d6ff49c99",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7436,8 +7468,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 18945,
-        "inspectedContentSha256": "b42df3d4472c432338babc67819a3c2c41bf03f66f58c3cd220a8736be469bc8",
+        "inspectedCharacterCount": 19215,
+        "inspectedContentSha256": "3b4cf573e01e910ea221f2e1959cb447c78e4e3df21b658ed6b16cd07c27f1d7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8137,8 +8169,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 15070,
-        "inspectedContentSha256": "67871612ac34889fb795f93a8909458399d6d096098996921c63f7a1fa2aa008",
+        "inspectedCharacterCount": 15176,
+        "inspectedContentSha256": "f6a05c056f412bfa8b66d46ae8886cf2b931afb8cd09ba2e0bb42681e0bfecc5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8149,6 +8181,7 @@
       },
       "dependsOnLabels": [
         "def_partition_function_2d_ising",
+        "def_trace",
         "def_transfer_matrix",
         "definition_of_cc",
         "set_and_algebra_notation",
@@ -8157,6 +8190,7 @@
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_001_definition_trace",
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
         "partition_function_2d_ising_002_definition_partition_function",
         "partition_function_2d_ising_003_definition_transfer_matrix"
@@ -14364,7 +14398,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -20744,8 +20778,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 14915,
-        "inspectedContentSha256": "fa427b6728df9270c3b454fdfa2245dbba5c88f14d4b68e5c1ffa8cedb6aa723",
+        "inspectedCharacterCount": 15632,
+        "inspectedContentSha256": "8cc17dbbe142428515b05d59139dde2f1f9d6c69fe47a74120742cc2d8e9759c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

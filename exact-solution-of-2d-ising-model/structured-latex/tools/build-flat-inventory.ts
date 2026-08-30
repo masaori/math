@@ -299,28 +299,47 @@ const openChainSpinSumsExpectedExternalInputContentSha256 = new Map<string, stri
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
   ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
 ]);
+const partitionFunctionTraceSectionEntryIds = [
+  "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+] as const;
+const partitionFunctionTraceExpectedInternalDependencies = new Map<string, string[]>([
+  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", []],
+]);
+const partitionFunctionTraceExpectedContentSha256 = new Map<string, string>([
+  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", "f6a05c056f412bfa8b66d46ae8886cf2b931afb8cd09ba2e0bb42681e0bfecc5"],
+]);
+const partitionFunctionTraceExpectedExternalInputEntryIds = [
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+  "eigenvalues_of_V_001_definition_trace",
+  "partition_function_2d_ising_002_definition_partition_function",
+  "partition_function_2d_ising_003_definition_transfer_matrix",
+].sort();
+const partitionFunctionTraceExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
+  ["eigenvalues_of_V_001_definition_trace", "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d"],
+  ["partition_function_2d_ising_002_definition_partition_function", "74bec1b8de279c13b6254833510bea1c16ba66f36a13323c7c2e75cbc97cfbcb"],
+  ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
+]);
 const nextIsingBoundaryComparisonEntryIds = [
-  "closing_005_claim_open_chain_spin_sums_positive",
   "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
   "transfer_matrix_001_definition_symbols",
+  "bridge_002_claim_sigma_z_diagonal_action",
 ] as const;
 const nextIsingBoundaryComparisonExpectedChapterOrders = new Map<string, number>([
-  ["closing_005_claim_open_chain_spin_sums_positive", 8],
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", 9],
   ["transfer_matrix_001_definition_symbols", 10],
+  ["bridge_002_claim_sigma_z_diagonal_action", 11],
 ]);
 const nextIsingBoundaryComparisonExpectedDependencies = new Map<string, string[]>([
-  ["closing_005_claim_open_chain_spin_sums_positive", [
-    "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-    "calculation_formulae_definition_set_and_algebra_notation",
-    "closing_005_claim_open_chain_endpoint_product_sum",
-    "closing_005_claim_open_chain_partition_sum",
-    "closing_005_definition_open_chain_spin_energy",
-  ]],
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", [
     "calc_formulae_006_definition_of_cc",
     "calculation_formulae_definition_set_and_algebra_notation",
     "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+    "eigenvalues_of_V_001_definition_trace",
     "partition_function_2d_ising_002_definition_partition_function",
     "partition_function_2d_ising_003_definition_transfer_matrix",
   ]],
@@ -330,11 +349,20 @@ const nextIsingBoundaryComparisonExpectedDependencies = new Map<string, string[]
     "exp_linear_map_002_definition_exp_of_endomorphism",
     "linear_space_general_000_definition_kronecker_product",
   ]],
+  ["bridge_002_claim_sigma_z_diagonal_action", [
+    "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+    "bridge_001_definition_config_basis",
+    "calc_formulae_006_definition_of_cc",
+    "linear_space_general_000b_claim_kronecker_product_rule",
+    "linear_space_general_000c_claim_kronecker_multilinear",
+    "transfer_matrix_001_definition_symbols",
+    "transfer_matrix_005_definition_end_isomorphism",
+  ]],
 ]);
 const nextIsingBoundaryComparisonExpectedContentSha256 = new Map<string, string>([
-  ["closing_005_claim_open_chain_spin_sums_positive", "c7a0451efa605dd17821efc7a433df7f151dee481ae5c7bb88f3003e2356da9b"],
-  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", "67871612ac34889fb795f93a8909458399d6d096098996921c63f7a1fa2aa008"],
+  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", "f6a05c056f412bfa8b66d46ae8886cf2b931afb8cd09ba2e0bb42681e0bfecc5"],
   ["transfer_matrix_001_definition_symbols", "674b1e05ce04378873cc8a013b5c3ffbf34444c85b856742514dbbfe40ed608f"],
+  ["bridge_002_claim_sigma_z_diagonal_action", "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232"],
 ]);
 const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, string>([
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
@@ -344,10 +372,17 @@ const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, st
   ["closing_005_definition_open_chain_spin_energy", "2062fa60483069fd13042b3bf943fdfaf32a14ae598f523f41b8b97380cc8f8d"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
+  ["eigenvalues_of_V_001_definition_trace", "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
   ["linear_space_general_000_definition_kronecker_product", "cb60348ee4a6bdfc5b4d4e4dc7124aed4f3a9f4e4c5593c03ad6511884cc55f8"],
   ["partition_function_2d_ising_002_definition_partition_function", "74bec1b8de279c13b6254833510bea1c16ba66f36a13323c7c2e75cbc97cfbcb"],
   ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "ab5911db8fb6a45aa867b393ea6ca15fc940c988a13e4f86a8678d1c8ed2111d"],
+  ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
+  ["linear_space_general_000b_claim_kronecker_product_rule", "59404eda021b5d904e2248530a586d168aea7d32d03451a45a17bb2f8b583a21"],
+  ["linear_space_general_000c_claim_kronecker_multilinear", "e06631c60e429b8e755520b8069138cab273e66c4946ec5a46c83dc4293738a7"],
+  ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
+  ["transfer_matrix_001_definition_symbols", "674b1e05ce04378873cc8a013b5c3ffbf34444c85b856742514dbbfe40ed608f"],
 ]);
 const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_006_definition_of_cc", new Set(["abs_basic_properties", "matrix_exp_series_converges"])],
@@ -758,7 +793,6 @@ function validateReviewedSection(
   return { sectionEntries, externalInputEntryIds };
 }
 function validateNextIsingBoundaryComparison() {
-  const comparisonIdSet = new Set<string>(nextIsingBoundaryComparisonEntryIds);
   for (const id of nextIsingBoundaryComparisonEntryIds) {
     const entry = entries.find((candidate) => candidate.id === id);
     if (entry === undefined) throw new Error(`次のイジング節境界の比較対象がありません: ${id}`);
@@ -772,10 +806,6 @@ function validateNextIsingBoundaryComparison() {
     const expectedDependencies = [...nextIsingBoundaryComparisonExpectedDependencies.get(id)!].sort();
     if (JSON.stringify(actualDependencies) !== JSON.stringify(expectedDependencies)) {
       throw new Error(`次のイジング節境界の比較対象の直接依存が変わりました: ${id}: ${JSON.stringify(actualDependencies)}`);
-    }
-    const internalDependencies = actualDependencies.filter((dependencyId) => comparisonIdSet.has(dependencyId));
-    if (internalDependencies.length > 0) {
-      throw new Error(`次のイジング節境界の比較対象三項に相互依存が生じました: ${id}: ${JSON.stringify(internalDependencies)}`);
     }
     if (entry.explanationGranularityReview.inspectedContentSha256
       !== nextIsingBoundaryComparisonExpectedContentSha256.get(id)) {
@@ -906,6 +936,39 @@ for (const nextEntryId of [
     .filter((dependencyId) => openChainSpinSumsSectionIdSet.has(dependencyId));
   if (dependenciesOnOpenChainSection.length > 0) {
     throw new Error(`1次元開鎖のスピン和の次の項目から節内への依存が生じました: ${nextEntryId}: ${JSON.stringify(dependenciesOnOpenChainSection)}`);
+  }
+}
+const partitionFunctionTraceSection = validateReviewedSection(
+  "分配関数の転送行列表示",
+  "2次元イジングモデル",
+  partitionFunctionTraceSectionEntryIds,
+  partitionFunctionTraceExpectedInternalDependencies,
+  partitionFunctionTraceExpectedContentSha256,
+  partitionFunctionTraceExpectedExternalInputEntryIds,
+  partitionFunctionTraceExpectedExternalInputContentSha256,
+  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix"],
+);
+const partitionFunctionTraceActualChapterOrders = partitionFunctionTraceSection.sectionEntries
+  .map((entry) => entry.dependencyPlacement!.chapterOrder);
+if (JSON.stringify(partitionFunctionTraceActualChapterOrders) !== JSON.stringify([9])) {
+  throw new Error(`分配関数の転送行列表示が章内依存順9ではありません: ${JSON.stringify(partitionFunctionTraceActualChapterOrders)}`);
+}
+const partitionFunctionTraceUnexpectedGranularity = partitionFunctionTraceSection.sectionEntries
+  .filter((entry) => entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  .map(({ id }) => id);
+if (partitionFunctionTraceUnexpectedGranularity.length > 0) {
+  throw new Error(`分配関数の転送行列表示に説明粒度未確認の項目があります: ${partitionFunctionTraceUnexpectedGranularity.join(", ")}`);
+}
+const partitionFunctionTraceSectionIdSet = new Set<string>(partitionFunctionTraceSectionEntryIds);
+for (const nextEntryId of [
+  "transfer_matrix_001_definition_symbols",
+  "bridge_002_claim_sigma_z_diagonal_action",
+]) {
+  const nextEntry = entries.find((entry) => entry.id === nextEntryId)!;
+  const dependenciesOnPartitionFunctionTrace = nextEntry.dependsOnEntryIds
+    .filter((dependencyId) => partitionFunctionTraceSectionIdSet.has(dependencyId));
+  if (dependenciesOnPartitionFunctionTrace.length > 0) {
+    throw new Error(`分配関数の転送行列表示の次の項目から節内への依存が生じました: ${nextEntryId}: ${JSON.stringify(dependenciesOnPartitionFunctionTrace)}`);
   }
 }
 const mathematicalToolSectionBoundaries = [{
@@ -1077,6 +1140,24 @@ const isingModelSectionBoundaries = [{
   concludingClaimEntryId: "closing_005_claim_open_chain_spin_sums_positive",
   boundaryEvidence: "旧来一ブロックだった内容を、共通記法、端点因子のない和、両端積付きの和、正値性の四項へ分けた章内依存順5–8の連続区間である。二つの和は共通記法だけに依存し、正値性が二公式を受け取って節末を閉じる。章内依存順9の転送行列による分配関数の表式および章内依存順10の記号の定義はこの節へ依存せず、節末を含む三項の外部入力集合もそれぞれ異なる。したがって外部入力集合が切り替わる章内依存順8の後で節を閉じる。外部入力とその本文 fingerprint、四項の本文 fingerprint、内部依存辺、章内依存順、節末出力の一意性を生成時に固定検査する。",
   readabilityStatus: "共通記法と三つの主張を分離し、二公式は初期スピンと隣接スピンの積への具体的な全単射で有限和を計算しているため、対象四項は現行の説明粒度検査に合格している。外部入力である集合と代数構造の記号、双曲線関数の基本性質、可換行列の指数積公式には、複数の定義・主張の分割または具体的な行列計算への展開が残る。",
+}, {
+  name: "分配関数の転送行列表示",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  entryIds: partitionFunctionTraceSectionEntryIds,
+  input: [
+    "最初の節で定めた周期境界条件つき分配関数と二つの転送行列",
+    "有限複素行列の積・冪・トレース",
+    "可換な指数関数の積公式と有限和・有限積の計算規則",
+  ],
+  externalInputEntryIds: partitionFunctionTraceSection.externalInputEntryIds,
+  output: [
+    "2次元イジング模型の分配関数を転送行列の積の冪のトレースとして表す公式",
+  ],
+  mainTheorem: "2次元イジング模型の分配関数は二つの転送行列の積の冪のトレースに等しい",
+  mainTheoremEntryId: "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+  boundaryEvidence: "章内依存順9の一項は、最初の節で定めた分配関数と転送行列を入力として、有限行列の成分・冪・トレースを展開し、分配関数の転送行列表示という一つの主張へ閉じる。章内依存順10の記号の定義と順11のσzの基底作用はこの主張へ依存せず、順10は別の行列指数関数とクロネッカー積を入力とし、順11は順10とスピン配置・標準基底の対応を入力とする。したがって外部入力集合が切り替わる章内依存順9の後で一項の節を閉じる。外部入力とその本文 fingerprint、対象本文 fingerprint、章内依存順、節末出力の一意性に加え、次の二項の章内順・直接依存・本文 fingerprint・本節からの非依存を生成時に固定検査する。",
+  readabilityStatus: "対象主張は有限集合上の和、有限複素行列の積と冪、トレースを一段ずつ展開しているため、現行の説明粒度検査に合格している。外部入力である集合と代数構造の記号、複素数の定義、可換行列の指数積公式には、複数の定義・主張の分割または具体的な行列計算への展開が残る。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

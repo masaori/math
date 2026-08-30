@@ -231,6 +231,9 @@ export default defineBlocks([
         " の元である。したがって和の順序交換・結合・分配は ",
         math(String.raw`\mathbb{C}`),
         " の可換環の公理から有限帰納法で従い、収束や極限の議論を一切要しない。",
+        "トレースには ",
+        ref("def_trace"),
+        " の定義を用いる。",
       ]),
 
       paragraph(["中間目標: 転送行列の積の成分。"]),
