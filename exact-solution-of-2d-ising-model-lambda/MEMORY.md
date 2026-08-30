@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 4 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 5 回目の tick 時点）
+
+**置換符号の軌道分解の Lean 具体版を閉じ、`claim_permutation_sign_moved_orbit_product` の四層検証を完了した（`Ising2DLambda.KacWard.sign_movedEdgeOrbit_product` と導出版）。** 各軌道の基点からの反復列 `orbitTail`（人手証明の $\varphi(e_C),\ldots,\varphi^{\circ(m_C-1)}(e_C)$）を定義し、互換の鎖 `transpositionChain` が軌道上で置換と一致し軌道外を固定すること、鎖の符号が $(-1)^{m-1}$ になること、軌道の元の個数が最小周期に等しいこと（`card_orbit`）を結び、必要十分版 `sign_eq_prod_of_disjoint_supports` へ渡して積表示を得た。`lake build`（9,600 jobs）・sorry 検査（1,614 件）・check・PDF 324 ページを通し、本文の主張へ Lean 参照（具体版・必要十分版・導出版）を配線した。次は置換項の符号と軌道重み（`claim_kac_ward_term_orbit_weight_factorization`）を結合し、行列式の置換展開を閉路族の符号付き和として書く。
+
+前進前レビューでは、前 tick の必要十分版の四定理を人手証明の最終三段と照合し、修正対象なしを確認した。並列の式変形統一は、姉妹側の「配位空間の全単射」の証明の濃度の一行三等号 $|\mathfrak M^M|=(2^N)^M=2^{MN}=|\mathfrak S|$ を三段の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 347 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 4 回目の tick 時点）
 
 **互いに素な軌道延長の合成と符号積を Lean 必要十分版で結合した。** `commute_of_disjoint_supports` で互いに素な台を保つ局所置換の可換性を、`noncommProd_eq_of_disjoint_supports` でそれらの有限合成が元の置換へ戻ることを、`sign_eq_prod_of_noncommProd` で符号の乗法性と局所符号積を結び、`sign_eq_prod_of_disjoint_supports` で人手証明の最後の三段を一本にまとめた。動く辺の軌道への特殊化と `transpositionChain` の局所符号との結合は未了であり、四層完了とはしていない。
 
