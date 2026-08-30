@@ -1636,6 +1636,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.two_point_sum_difference_necSuf
   Ising2DLambda.KacWard.contact_split_turning_update
   Ising2DLambda.KacWard.contact_split_turning_update_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.exclusive_split_witness_descent_necSuf
+  Ising2DLambda.KacWard.contact_split_pair_descent
+  Ising2DLambda.KacWard.contact_split_pair_descent_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

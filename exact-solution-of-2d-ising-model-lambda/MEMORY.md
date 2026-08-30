@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 29 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 30 回目の tick 時点）
+
+**接触点分割が接触対の個数を真に減らすことを四層で証明した（`claim_contact_split_pair_descent`）。** 接触対の個数 $n_{\mathrm{ct}}(\gamma)\in\mathbb N$（`def_contact_pair_count`。通過の頂点が一致する添字対 $a<b$ の個数）を定義し、$\gamma$ の接触対集合を「両方が区間 $(k,l]$」「両方が補集合」「混合」へ互いに素に三分割した。接触の条件は通過の頂点（向き付き辺だけの関数）で決まり接続に依存しないので、二本の閉歩道の接触対数は前二者の個数に一致し、選んだ接触点 $(k,l)$ 自身が混合部分に属するので和は元より真に小さい。SageMath `edge-simple-contact-split` は接触点 3,008 個で三分割と狭義減少を全数検査した。Lean は具体版 `contact_split_pair_descent` と、排他的二述語の三分割にどちらも満たさない証人を足しただけの必要十分版 `exclusive_split_witness_descent_necSuf`、導出版を通した。この狭義減少を測度として、次は接触対数の整礎帰納で台の辺が相異なる閉歩道を接触対の無い（＝通過の頂点が相異なる）閉歩道の有限族へ反復分解し、台の辺集合の分割と切断線偶奇の総和の保存を族へ持ち上げる。
+
+前進前レビューでは、前 tick の接触点分割の回転数更新式（コミット `5aea7009`）を四層で照合し、修正対象なしを確認した。
+
+## ひとつ前の到達点（2026-08-30 の 29 回目の tick 時点）
 
 **接触点分割の循環総回転数の更新式を四層で証明した（`claim_contact_split_turning_update`）。** 二本の閉歩道の回転数和から元の回転数を引いた値は、交換後の二接続の回転数和から元の二接続の回転数和を引いた値に等しい。SageMath `edge-simple-contact-split` は一辺二のトーラスの接触点 3,008 個でこの等式を全数検査した。Lean は具体版 `contact_split_turning_update`、有限和の二点更新だけを残した必要十分版 `two_point_sum_difference_necSuf`、導出版を通した。既存の `claim_reconnection_turning_difference` と結合すると、ずれは $\{-4,0,4\}$ に属する。次は台の辺が相異なる閉歩道を頂点単純な閉路族へ反復分解する。
 

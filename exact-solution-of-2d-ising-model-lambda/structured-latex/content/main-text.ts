@@ -52967,6 +52967,143 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
             },
           },
         },
+        {
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_contact_split_pair_descent",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_contact_pair_count",
+                  kind: "definition",
+                  title: { text: "閉歩道の接触対の個数" },
+                  labels: ["def_contact_pair_count"],
+                  habitat: "N",
+                  statement: [
+                    paragraph([
+                      "閉じた非後退辺列 ",
+                      math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                      "（", ref("def_closed_nonbacktracking_walk"),
+                      "）の接触対の個数 ",
+                      math(String.raw`n_{\mathrm{ct}}(\gamma)\in\mathbb N`), " を",
+                    ]),
+                    displayMath(String.raw`n_{\mathrm{ct}}(\gamma):=\bigl|\,\{(a,b)\in I_m\times I_m
+\mid a<b,\ \operatorname{tgt}(\vec e_a)=\operatorname{tgt}(\vec e_b)\}\,\bigr|`),
+                    paragraph([
+                      "で定める（通過の頂点 ",
+                      math(String.raw`\operatorname{tgt}(\vec e_a)`), " は ",
+                      ref("def_closed_walk_passes"),
+                      "、順序は自然数の全順序）。有限集合 ",
+                      math(String.raw`I_m\times I_m`),
+                      " の部分集合の元の個数なので、値は自然数として定まる。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_contact_split_pair_descent",
+              kind: "claim",
+              title: { text: "接触点で分けた二本の閉歩道の接触対の個数の和は元より真に小さい" },
+              labels: ["claim_contact_split_pair_descent"],
+              habitat: "N",
+              verification: ["sagemath/check/edge-simple-contact-split"],
+              lean: [
+                "Ising2DLambda.KacWard.contact_split_pair_descent",
+                "Ising2DLambda.NecSuf.KacWard.exclusive_split_witness_descent_necSuf",
+                "Ising2DLambda.KacWard.contact_split_pair_descent_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  ref("claim_edge_simple_contact_split"), " と同じ仮定の下で、自然数の不等式",
+                ]),
+                displayMath(String.raw`n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)<n_{\mathrm{ct}}(\gamma)`),
+                paragraph([
+                  "が成り立つ（二本の辺列は ", ref("claim_edge_simple_contact_split"),
+                  "、接触対の個数は ", ref("def_contact_pair_count"),
+                  "）。この狭義減少が、接触点分割を繰り返す整礎帰納の測度を与える。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "証明の中だけで使う記号を置く。", math(String.raw`\gamma`),
+                  " の接触対の集合を ",
+                  math(String.raw`S:=\{(a,b)\in I_m\times I_m\mid a<b,\ \operatorname{tgt}(\vec e_a)=\operatorname{tgt}(\vec e_b)\}`),
+                  " と置く（", ref("def_contact_pair_count"), " により ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=|S|`),
+                  "）。添字の二集合を ",
+                  math(String.raw`A:=\{r\in I_m\mid k<r\le l\}`), "、",
+                  math(String.raw`B:=I_m\setminus A`), " と置き、", math(String.raw`S`),
+                  " の三つの部分を",
+                ]),
+                displayMath(String.raw`S_A:=\{(a,b)\in S\mid a\in A\text{ かつ }b\in A\},\qquad
+S_B:=\{(a,b)\in S\mid a\in B\text{ かつ }b\in B\},\qquad
+S_{\times}:=S\setminus(S_A\cup S_B)`),
+                paragraph([
+                  "と置く。", math(String.raw`A`), " と ", math(String.raw`B`),
+                  " は互いに交わらないので、対 ", math(String.raw`(a,b)`),
+                  " が ", math(String.raw`S_A`), " と ", math(String.raw`S_B`),
+                  " の両方に属することはない（属せば ", math(String.raw`a\in A\cap B`),
+                  " となり矛盾する）。したがって ", math(String.raw`S`),
+                  " は互いに交わらない ", math(String.raw`S_A,S_B,S_{\times}`),
+                  " の合併であり、互いに交わらない有限集合の合併の元の個数は個数の和なので ",
+                  math(String.raw`|S|=|S_A|+|S_B|+|S_{\times}|`), " である。",
+                ]),
+                paragraph([
+                  math(String.raw`\gamma_A`), " の項の並びは ",
+                  math(String.raw`(\vec e_{k+1},\ldots,\vec e_l)`), " なので、",
+                  math(String.raw`\gamma_A`), " の添字 ", math(String.raw`i`),
+                  " と元の添字 ", math(String.raw`k+i\in A`),
+                  " の対応は ", math(String.raw`A`), " への 1 対 1 対応である（",
+                  ref("claim_edge_simple_contact_split"),
+                  "）。接触の条件は二つの項の通過の頂点の一致だけで決まり、項の間の接続に依存しない（",
+                  ref("def_closed_walk_passes"), " の ",
+                  math(String.raw`\operatorname{tgt}`),
+                  " は向き付き辺だけの関数である）。さらに接触の条件は二つの添字について対称なので、",
+                  "接触対は添字の順序なし二元集合として数えられる。したがって ",
+                  math(String.raw`\gamma_A`), " の接触対は ", math(String.raw`S_A`),
+                  " の元と 1 対 1 に対応し、",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma_A)=|S_A|`), " である。",
+                  math(String.raw`\gamma_B`), " の項の並びも ", math(String.raw`B`),
+                  " の添字の項を並べたものなので、同じ理由で ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma_B)=|S_B|`), " である。",
+                ]),
+                paragraph([
+                  "選んだ接触点の添字対 ", math(String.raw`(k,l)`), " は、",
+                  math(String.raw`k<k`), " が成り立たないので ", math(String.raw`k\notin A`),
+                  "、", math(String.raw`k<l\le l`), " なので ", math(String.raw`l\in A`),
+                  " である。したがって ", math(String.raw`(k,l)`), " は ",
+                  math(String.raw`S_A`), " にも ", math(String.raw`S_B`),
+                  " にも属さない。一方、仮定の通過の頂点の共有 ",
+                  math(String.raw`\operatorname{tgt}(\vec e_k)=\operatorname{tgt}(\vec e_l)`),
+                  " と ", math(String.raw`k<l`), " により ", math(String.raw`(k,l)\in S`),
+                  " なので、", math(String.raw`(k,l)\in S_{\times}`), "、したがって ",
+                  math(String.raw`1\le|S_{\times}|`), " である。従って",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)
+&=|S_A|+|S_B|
+&&\bigl(\because\ \text{上の 1 対 1 対応}\bigr)\\
+&\le|S_A|+|S_B|+(|S_{\times}|-1)
+&&\bigl(\because\ 1\le|S_{\times}|\text{ と }\mathbb N\text{ の加法の順序}\bigr)\\
+&=\bigl(|S_A|+|S_B|+|S_{\times}|\bigr)-1
+&&\bigl(\because\ \mathbb N\text{ の加法の結合}\bigr)\\
+&=|S|-1
+&&\bigl(\because\ \text{互いに交わらない三分割の個数の和}\bigr)\\
+&=n_{\mathrm{ct}}(\gamma)-1
+&&\bigl(\because\ \blkref{def_contact_pair_count}\bigr)\\
+&<n_{\mathrm{ct}}(\gamma)
+&&\bigl(\because\ \mathbb N\text{ の順序}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "全過程は有限集合の数え上げだけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        },
         ],
       },
     },

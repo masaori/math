@@ -956,3 +956,5 @@ import Ising2DLambda.NecSuf.KacWard.ContactSplitConnections
 import Ising2DLambda.KacWard.EdgeSimpleContactSplit
 import Ising2DLambda.NecSuf.KacWard.ContactSplitTurningUpdate
 import Ising2DLambda.KacWard.ContactSplitTurningUpdate
+import Ising2DLambda.NecSuf.KacWard.ContactSplitPairDescent
+import Ising2DLambda.KacWard.ContactSplitPairDescent

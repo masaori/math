@@ -2,7 +2,8 @@
 
 **対象ラベル**: `claim_edge_simple_contact_split`
 
-追加の対象ラベル: `claim_contact_split_seam_parity`, `claim_contact_split_turning_update`
+追加の対象ラベル: `claim_contact_split_seam_parity`, `claim_contact_split_turning_update`,
+`claim_contact_split_pair_descent`
 
 - 実行: `sage sagemath/check/edge-simple-contact-split/check.sage`
 - 状態: PASS（2026-08-30）
@@ -17,3 +18,7 @@
 $\{-4,0,4\}$ に収まりつつ零でない接触点が実在すること（回転数はこの分割で保存されない）を検査する。
 ずれそのものは、元の二接続を再接続後の二接続へ置き換えた回転数差と一致すること
 （`claim_contact_split_turning_update`）も各接触点で検査する。
+接触対の個数については、元の接触対集合を「両方が区間 $(k,l]$」「両方が補集合」「混合」へ
+三分割し、二本の接触対数が前二者の個数と一致すること、選んだ接触点が混合部分に属して
+混合部分が 1 以上であること、そして和の狭義減少（`claim_contact_split_pair_descent`）を
+各接触点で検査する。

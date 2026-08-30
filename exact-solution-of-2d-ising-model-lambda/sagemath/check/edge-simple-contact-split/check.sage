@@ -63,6 +63,13 @@ def total_turning(walk):
     return sum(turn(walk[r], walk[(r + 1) % m]) for r in range(m))
 
 
+def contact_pair_count(walk):
+    """接触対の個数（def_contact_pair_count）。"""
+    m = len(walk)
+    return ZZ(sum(1 for a in range(m) for b in range(a + 1, m)
+                  if tgt(walk[a]) == tgt(walk[b])))
+
+
 def is_nonbacktracking_connection(edge, following):
     return src(following) == tgt(edge) and following != reversal(edge)
 
@@ -101,6 +108,7 @@ edge_simple_walks = [walk for walk in closed_walks
 checked_contacts = ZZ(0)
 seam_parity_checks = ZZ(0)
 turning_nonzero_shift_contacts = ZZ(0)
+pair_descent_checks = ZZ(0)
 for walk in edge_simple_walks:
     m = len(walk)
     for k in range(m):
@@ -136,13 +144,34 @@ for walk in edge_simple_walks:
             assert shift in (-4, 0, 4)
             if shift != 0:
                 turning_nonzero_shift_contacts += 1
+            # claim_contact_split_pair_descent: 接触対の個数は真に減る。
+            # 元の接触対集合を「両方が A = {k+1,...,l}」「両方が補集合」
+            # 「混合」の三つへ分け、二本の接触対数が前二者と一致すること、
+            # 混合部分に (k, l) が属して 1 以上であることを検査する。
+            contact_pairs = [(a, b) for a in range(m) for b in range(a + 1, m)
+                             if tgt(walk[a]) == tgt(walk[b])]
+            both_a = ZZ(sum(1 for (a, b) in contact_pairs
+                            if k < a <= l and k < b <= l))
+            both_b = ZZ(sum(1 for (a, b) in contact_pairs
+                            if not (k < a <= l) and not (k < b <= l)))
+            mixed = ZZ(len(contact_pairs)) - both_a - both_b
+            assert (k, l) in contact_pairs
+            assert not (k < k <= l) and (k < l <= l)
+            assert 1 <= mixed
+            assert contact_pair_count(walk_a) == both_a
+            assert contact_pair_count(walk_b) == both_b
+            assert contact_pair_count(walk_a) + contact_pair_count(walk_b) \
+                < contact_pair_count(walk)
+            pair_descent_checks += 1
 
 assert 0 < len(edge_simple_walks)
 assert 0 < checked_contacts
 assert 0 < turning_nonzero_shift_contacts
+assert pair_descent_checks == checked_contacts
 
 print("PASS: closed walks (L=%d, length <= %d): %d; base-edge-simple: %d; "
       "contact splits checked: %d; seam parity checks: %d; "
-      "contacts with nonzero turning shift: %d"
+      "contacts with nonzero turning shift: %d; pair descent checks: %d"
       % (L, MAX_LENGTH, len(closed_walks), len(edge_simple_walks),
-         checked_contacts, seam_parity_checks, turning_nonzero_shift_contacts))
+         checked_contacts, seam_parity_checks, turning_nonzero_shift_contacts,
+         pair_descent_checks))
