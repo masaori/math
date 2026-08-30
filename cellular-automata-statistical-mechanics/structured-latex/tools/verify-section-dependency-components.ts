@@ -26,7 +26,6 @@ const STATEMENT_KINDS = new Set(["claim", "theorem"]);
  * 昇順で改行連結したもの」。成分の中身が一つでも変われば鍵が外れて失敗する。
  */
 const KNOWN_UNDECLARED_COMPONENTS: readonly string[] = [
-  "reachability_and_finite_orders\tfinite_poset_locally_finite_claim_finite_partial_order_locally_finite\nfinite_poset_locally_finite_definition_locally_finite_partial_order",
   "finite_self_map_conjugacy\tbijective_self_map_cycle_type_claim_partitions_finite",
   "finite_self_map_conjugacy\titerate_monoid_conjugacy_claim_invariant_family_finite_decidability",
   "local_representation_and_composition\tlocality_restricts_cycle_type_claim_stage_global_maps_count",

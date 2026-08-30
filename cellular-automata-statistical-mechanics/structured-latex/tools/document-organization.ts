@@ -84,6 +84,14 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_poset_interval_finiteness",
+        title: "有限半順序の局所有限性",
+        input: "有限集合と、その上の部分順序を入力とする。",
+        output: "順序区間が有限であるという局所有限性を得る。",
+        main: "主張は、有限集合上の任意の部分順序が局所有限であることである。",
+        mainLabels: ["claim_finite_partial_order_locally_finite"],
+      },
+      {
         id: "finite_self_map_dynamics",
         title: "有限自己写像の軌道と安定構造",
         input: "有限集合と、その集合から自身への写像だけを入力とする。",

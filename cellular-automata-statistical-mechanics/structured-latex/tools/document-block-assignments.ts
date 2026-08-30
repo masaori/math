@@ -1,8 +1,8 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
   "causal_set_primary_literature_claim_event_order_locally_finite": "time_expansion_and_dependency_order",
-  "finite_poset_locally_finite_claim_finite_partial_order_locally_finite": "reachability_and_finite_orders",
-  "finite_poset_locally_finite_definition_locally_finite_partial_order": "reachability_and_finite_orders",
+  "finite_poset_locally_finite_claim_finite_partial_order_locally_finite": "finite_poset_interval_finiteness",
+  "finite_poset_locally_finite_definition_locally_finite_partial_order": "finite_poset_interval_finiteness",
   "causal_set_primary_literature_remark_not_claimed": "time_expansion_and_dependency_order",
   "causal_set_primary_literature_remark_source": "time_expansion_and_dependency_order",
   "causal_structure_comparison_claim_covering_subset_one_step": "time_expansion_and_dependency_order",
