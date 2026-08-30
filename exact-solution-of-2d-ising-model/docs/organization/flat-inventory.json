@@ -126,25 +126,29 @@
     ]
   },
   "expConjugationToolBoundaryReview": {
-    "status": "行列空間のノルムと収束、交換子の二項展開、交換子作用・共役作用、行列指数共役公式について、実数解析への脱出、依存境界、二章配置、高校生可読性をブロック単位で確定した。後章に仮分類された Frobenius 内積の性質への依存は次の独立レビュー単位として明示した。",
-    "reviewedEntryCount": 4,
-    "realAnalysisEscapeEntryCount": 2,
+    "status": "行列空間のノルムと収束、Frobenius 内積の性質、交換子の二項展開、交換子作用・共役作用、行列指数共役公式について、実数解析への脱出、依存境界、二章配置、高校生可読性をブロック単位で確定した。Frobenius 内積の定義と性質は意味的にも相互依存するため、同一節の不可分な依存単位として確定した。",
+    "frobeniusMutualReferenceBoundary": {
+      "rawMutualReferencePreserved": true,
+      "semanticMutualPrerequisitePreserved": true,
+      "stronglyConnectedEntryIds": [
+        "exp_conjugation_proof_003_definition_M_n_C_convergence",
+        "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
+      ],
+      "placement": "同じ節の不可分な依存単位として扱う",
+      "rationale": "性質命題は内積の定義を前提にし、定義ブロックはノルムが非負実数値として定まることを性質命題の正定値性に依存する。"
+    },
+    "reviewedEntryCount": 5,
+    "realAnalysisEscapeEntryCount": 3,
     "finiteComplexMatrixEntryCount": 2,
     "isingContaminatedEntryCount": 0,
-    "mathematicalToolsFirstIncompatibleDependencyCount": 1,
-    "mathematicalToolsFirstIncompatibleDependencies": [
-      {
-        "entryId": "exp_conjugation_proof_003_definition_M_n_C_convergence",
-        "label": "frobenius_inner_product_axioms",
-        "ownerId": "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
-        "provisionalFinalChapter": "2次元イジングモデル"
-      }
-    ],
-    "highSchoolReadableEntryCount": 4,
-    "semanticExclusionFingerprintCount": 2,
-    "classificationRule": "交換子と共役の有限代数だけで閉じるものと、実数値ノルム・極限・完備性・指数級数を直接または依存先経由で使うものを分ける。イジング固有語彙を含まないものを数学的道具立てに置き、後章への前提依存は解消済みとみなさず明示する。",
+    "mathematicalToolsFirstIncompatibleDependencyCount": 0,
+    "mathematicalToolsFirstIncompatibleDependencies": [],
+    "highSchoolReadableEntryCount": 5,
+    "semanticExclusionFingerprintCount": 3,
+    "classificationRule": "交換子と共役の有限代数だけで閉じるものと、実数値ノルム・極限・完備性・指数級数を直接または依存先経由で使うものを分ける。イジング固有語彙を含まないものを数学的道具立てに置き、数学的道具立てから後章への意味的前提依存が0件であることを二章配置の適合条件として検査する。",
     "reviewedEntryIds": [
       "exp_conjugation_proof_003_definition_M_n_C_convergence",
+      "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
       "exp_conjugation_proof_004_theorem_ad_binomial",
       "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
       "exp_conjugation_proof_010_theorem_matrix_exp_conjugation"
@@ -4892,7 +4896,7 @@
       "expConjugationToolBoundaryReview": {
         "closure": "実数解析への脱出を伴う",
         "statementDomain": "有限複素正方行列、その Frobenius 内積・実数値ノルム・行列列と行列級数",
-        "rationale": "内積と随伴は有限複素行列の代数で定まるが、ノルムの平方根、実数列で定める収束、行列空間の完備性へ依存する。ノルムの基本性質から使うのは正定値性・斉次性・三角不等式であり、同じ参照先にある極限一意性は使わない。Frobenius 内積の性質から使う絶対値は大きさだけで、偏角・逆三角関数へは進まない。",
+        "rationale": "内積と随伴は有限複素行列の代数で定まるが、ノルムの平方根、実数列で定める収束、行列空間の完備性へ依存する。ノルムの基本性質から使うのは正定値性・斉次性・三角不等式であり、同じ参照先にある極限一意性は使わない。Frobenius 内積の性質は、内積の定義を前提にする一方、ノルムを非負実数値として定義できることの証明を担うため、両ブロックを同一節の不可分な依存単位として扱う。Frobenius 内積の性質から使う絶対値は大きさだけで、偏角・逆三角関数へは進まない。",
         "highSchoolReadability": {
           "status": "依存先から順に読めば高校生が追跡可能",
           "rationale": "複素共役、随伴、トレース、内積、ノルム、収束を成分表示から順に定義し、解析へ移る箇所を本文中で明示している。"
@@ -4944,22 +4948,17 @@
         ],
         "finalChapter": "数学的道具立て",
         "twoChapterPlacement": {
-          "mathematicalToolsFirstCompatible": false,
-          "laterChapterPrerequisites": [
-            {
-              "label": "frobenius_inner_product_axioms",
-              "ownerId": "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
-              "provisionalFinalChapter": "2次元イジングモデル"
-            }
-          ]
+          "mathematicalToolsFirstCompatible": true,
+          "laterChapterPrerequisites": []
         },
         "dependencyBoundary": {
-          "insideReviewedExpConjugationToolLabels": [],
+          "insideReviewedExpConjugationToolLabels": [
+            "frobenius_inner_product_axioms"
+          ],
           "outsideReviewedExpConjugationToolLabels": [
             "def_matrix_norm",
             "definition_of_cc",
             "definition_of_sqrt_r_positive",
-            "frobenius_inner_product_axioms",
             "inclusion_rr_to_cc",
             "matrix_completeness",
             "matrix_norm_submultiplicativity",
@@ -4990,11 +4989,6 @@
               "label": "definition_of_sqrt_r_positive",
               "ownerId": "calc_formulae_001_sqrt_nonnegative_real",
               "provisionalFinalChapter": "数学的道具立て"
-            },
-            {
-              "label": "frobenius_inner_product_axioms",
-              "ownerId": "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
-              "provisionalFinalChapter": "2次元イジングモデル"
             },
             {
               "label": "inclusion_rr_to_cc",
@@ -5038,12 +5032,13 @@
       ],
       "sourceFile": "005_exp_conjugation_proof.ts",
       "sourceOrdinal": 3,
-      "provisionalFinalChapter": "2次元イジングモデル",
+      "provisionalFinalChapter": "数学的道具立て",
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
-        "rule": "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし"
+        "semanticBoundaryReviewOverride": true,
+        "rule": "イジング固有語彙がなく、確定済みの数学的道具立てブロックの意味的前提となるため、参照利用が1件でも本文レビューを優先"
       },
       "dependsOnLabels": [
         "abs_basic_properties",
@@ -5055,7 +5050,113 @@
         "definition_of_sqrt_r_positive",
         "inclusion_rr_to_cc",
         "matrix_norm_triangle_inequality"
-      ]
+      ],
+      "expConjugationToolBoundaryReview": {
+        "closure": "実数解析への脱出を伴う",
+        "statementDomain": "有限複素正方行列、その Frobenius 内積と実数値ノルム",
+        "rationale": "共役対称性・線型性と、内積の自己評価を絶対値平方の有限和へ書き直す成分恒等式までは有限複素行列の代数で閉じる。正定値性の零判定・ノルムとの一致、および Cauchy--Schwarz と三角不等式は複素絶対値、非負実数の平方根、実数の順序を使うため、ブロック全体は実数解析への脱出を伴う。絶対値から偏角へは進まず、内積・ノルムの定義と基本性質に同居する収束概念・完備性・極限則も使わない。",
+        "highSchoolReadability": {
+          "status": "依存先から順に読めば高校生が追跡可能",
+          "rationale": "複素共役と有限和を成分ごとに展開し、Cauchy--Schwarz を非負なノルム平方の評価へ帰着しているため、参照先の絶対値・平方根・実数順序から順に追跡できる。"
+        },
+        "reviewedContentFingerprint": "01f1fd118fe322f17aebad727a8c671fd4e9c88b9d0a1cee144779ee7d0c17c7",
+        "directRealAnalysisInputs": [],
+        "transitiveRealAnalysisDependencies": [
+          {
+            "sourceId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+            "sourceLabels": [
+              "sqrt_nonnegative_existence_uniqueness"
+            ],
+            "directInputs": [
+              "実数の完備性（上限性質）"
+            ],
+            "pathLabels": [
+              "definition_of_sqrt_r_positive",
+              "sqrt_nonnegative_existence_uniqueness"
+            ]
+          }
+        ],
+        "finalChapter": "数学的道具立て",
+        "twoChapterPlacement": {
+          "mathematicalToolsFirstCompatible": true,
+          "laterChapterPrerequisites": []
+        },
+        "dependencyBoundary": {
+          "insideReviewedExpConjugationToolLabels": [
+            "def_frobenius_inner_product"
+          ],
+          "outsideReviewedExpConjugationToolLabels": [
+            "abs_basic_properties",
+            "complex_numbers_form_a_field",
+            "def_abs_arg",
+            "def_matrix_norm",
+            "definition_of_cc",
+            "definition_of_sqrt_r_positive",
+            "inclusion_rr_to_cc",
+            "matrix_norm_triangle_inequality"
+          ],
+          "realAnalysisPropagationExcludedLabels": [
+            "def_abs_arg",
+            "def_frobenius_inner_product"
+          ],
+          "directRealAnalysisInputExcludedLabels": [
+            "def_matrix_norm",
+            "matrix_norm_triangle_inequality"
+          ],
+          "realAnalysisPropagationExcludedPaths": [],
+          "outsideReviewedExpConjugationToolOwners": [
+            {
+              "label": "abs_basic_properties",
+              "ownerId": "calculation_formulae_031b_claim_abs_basic_properties",
+              "provisionalFinalChapter": "数学的道具立て"
+            },
+            {
+              "label": "complex_numbers_form_a_field",
+              "ownerId": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+              "provisionalFinalChapter": "数学的道具立て"
+            },
+            {
+              "label": "def_abs_arg",
+              "ownerId": "calculation_formulae_031_definition_abs_arg",
+              "provisionalFinalChapter": "数学的道具立て"
+            },
+            {
+              "label": "def_matrix_norm",
+              "ownerId": "linear_space_general_002b_definition_matrix_norm",
+              "provisionalFinalChapter": "数学的道具立て"
+            },
+            {
+              "label": "definition_of_cc",
+              "ownerId": "calc_formulae_006_definition_of_cc",
+              "provisionalFinalChapter": "数学的道具立て"
+            },
+            {
+              "label": "definition_of_sqrt_r_positive",
+              "ownerId": "calc_formulae_001_sqrt_nonnegative_real",
+              "provisionalFinalChapter": "数学的道具立て"
+            },
+            {
+              "label": "inclusion_rr_to_cc",
+              "ownerId": "calc_formulae_007_inclusion_rr_to_cc",
+              "provisionalFinalChapter": "数学的道具立て"
+            },
+            {
+              "label": "matrix_norm_triangle_inequality",
+              "ownerId": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+              "provisionalFinalChapter": "数学的道具立て"
+            }
+          ]
+        },
+        "isingSemanticVocabulary": {
+          "matches": [],
+          "contaminated": false,
+          "inspectedFields": [
+            "title",
+            "statement",
+            "proof"
+          ]
+        }
+      }
     },
     {
       "id": "exp_conjugation_proof_004_theorem_ad_binomial",

@@ -370,8 +370,24 @@ const expConjugationToolBoundaryById = new Map<string, ExpConjugationToolBoundar
     realAnalysisPropagationExcludedPaths: [["frobenius_inner_product_axioms", "def_abs_arg"]],
     reviewedContentFingerprint: "491cfaa6e64bf02edbbf1981e85da9c26842fe35b840e329dbc9b63a38b4d8ed",
     statementDomain: "有限複素正方行列、その Frobenius 内積・実数値ノルム・行列列と行列級数",
-    rationale: "内積と随伴は有限複素行列の代数で定まるが、ノルムの平方根、実数列で定める収束、行列空間の完備性へ依存する。ノルムの基本性質から使うのは正定値性・斉次性・三角不等式であり、同じ参照先にある極限一意性は使わない。Frobenius 内積の性質から使う絶対値は大きさだけで、偏角・逆三角関数へは進まない。",
+    rationale: "内積と随伴は有限複素行列の代数で定まるが、ノルムの平方根、実数列で定める収束、行列空間の完備性へ依存する。ノルムの基本性質から使うのは正定値性・斉次性・三角不等式であり、同じ参照先にある極限一意性は使わない。Frobenius 内積の性質は、内積の定義を前提にする一方、ノルムを非負実数値として定義できることの証明を担うため、両ブロックを同一節の不可分な依存単位として扱う。Frobenius 内積の性質から使う絶対値は大きさだけで、偏角・逆三角関数へは進まない。",
     highSchoolReadabilityRationale: "複素共役、随伴、トレース、内積、ノルム、収束を成分表示から順に定義し、解析へ移る箇所を本文中で明示している。",
+  }],
+  ["exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms", {
+    closure: "実数解析への脱出を伴う",
+    directRealAnalysisInputs: [],
+    directRealAnalysisInputExcludedLabels: [
+      "def_matrix_norm",
+      "matrix_norm_triangle_inequality",
+    ],
+    realAnalysisPropagationExcludedLabels: [
+      "def_abs_arg",
+      "def_frobenius_inner_product",
+    ],
+    reviewedContentFingerprint: "01f1fd118fe322f17aebad727a8c671fd4e9c88b9d0a1cee144779ee7d0c17c7",
+    statementDomain: "有限複素正方行列、その Frobenius 内積と実数値ノルム",
+    rationale: "共役対称性・線型性と、内積の自己評価を絶対値平方の有限和へ書き直す成分恒等式までは有限複素行列の代数で閉じる。正定値性の零判定・ノルムとの一致、および Cauchy--Schwarz と三角不等式は複素絶対値、非負実数の平方根、実数の順序を使うため、ブロック全体は実数解析への脱出を伴う。絶対値から偏角へは進まず、内積・ノルムの定義と基本性質に同居する収束概念・完備性・極限則も使わない。",
+    highSchoolReadabilityRationale: "複素共役と有限和を成分ごとに展開し、Cauchy--Schwarz を非負なノルム平方の評価へ帰着しているため、参照先の絶対値・平方根・実数順序から順に追跡できる。",
   }],
   ["exp_conjugation_proof_004_theorem_ad_binomial", {
     closure: "有限複素行列だけで閉じる",
@@ -478,7 +494,12 @@ const baseEntries = files.flatMap(({ file, blocks }) =>
         0,
       );
       const isingSemanticMatches = [...new Set(serialized.match(isingSemanticPattern) ?? [])].sort();
-      const mathematicalTool = mathematicalToolFiles.has(file) && reuseCount >= 2 && isingSemanticMatches.length === 0;
+      const heuristicMathematicalTool = mathematicalToolFiles.has(file) && reuseCount >= 2 && isingSemanticMatches.length === 0;
+      const semanticBoundaryReviewOverride =
+        expConjugationToolBoundaryById.has(block.id) &&
+        !heuristicMathematicalTool &&
+        isingSemanticMatches.length === 0;
+      const mathematicalTool = heuristicMathematicalTool || semanticBoundaryReviewOverride;
       return {
         id: block.id,
         kind: block.kind,
@@ -491,7 +512,10 @@ const baseEntries = files.flatMap(({ file, blocks }) =>
           mathematicalToolCandidateFile: mathematicalToolFiles.has(file),
           incomingReferenceCount: reuseCount,
           isingSemanticMatches,
-          rule: "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし",
+          ...(semanticBoundaryReviewOverride ? { semanticBoundaryReviewOverride: true } : {}),
+          rule: semanticBoundaryReviewOverride
+            ? "イジング固有語彙がなく、確定済みの数学的道具立てブロックの意味的前提となるため、参照利用が1件でも本文レビューを優先"
+            : "道具候補ファイルかつ参照利用が2件以上かつイジング固有語彙なし",
         },
         dependsOnLabels: [...collectTargets(block)].sort(),
       };
@@ -751,6 +775,26 @@ for (const entry of baseEntries) {
     }
   }
   semanticPrerequisiteLabelsById.set(entry.id, semanticPrerequisiteLabels);
+}
+const frobeniusDefinitionId = "exp_conjugation_proof_003_definition_M_n_C_convergence";
+const frobeniusPropertiesId = "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms";
+const frobeniusDefinitionLabel = "def_frobenius_inner_product";
+const frobeniusPropertiesLabel = "frobenius_inner_product_axioms";
+const frobeniusDefinitionRawDependencies = baseEntryById.get(frobeniusDefinitionId)?.dependsOnLabels ?? [];
+const frobeniusPropertiesRawDependencies = baseEntryById.get(frobeniusPropertiesId)?.dependsOnLabels ?? [];
+const frobeniusDefinitionSemanticPrerequisites = semanticPrerequisiteLabelsById.get(frobeniusDefinitionId) ?? [];
+const frobeniusPropertiesSemanticPrerequisites = semanticPrerequisiteLabelsById.get(frobeniusPropertiesId) ?? [];
+if (
+  !frobeniusDefinitionRawDependencies.includes(frobeniusPropertiesLabel) ||
+  !frobeniusPropertiesRawDependencies.includes(frobeniusDefinitionLabel)
+) {
+  throw new Error("Frobenius 内積の定義と性質の raw 相互参照が本文から失われています");
+}
+if (
+  !frobeniusDefinitionSemanticPrerequisites.includes(frobeniusPropertiesLabel) ||
+  !frobeniusPropertiesSemanticPrerequisites.includes(frobeniusDefinitionLabel)
+) {
+  throw new Error("Frobenius 内積の定義と性質が、意味的にも相互依存する同一節単位になっていません");
 }
 for (const [entryId, boundary] of [
   ...matrixExponentialToolBoundaryById,
@@ -1220,7 +1264,14 @@ const inventory = {
     reviewedEntryIds: reviewedMatrixExponentialToolEntries.map(({ id }) => id),
   },
   expConjugationToolBoundaryReview: {
-    status: "行列空間のノルムと収束、交換子の二項展開、交換子作用・共役作用、行列指数共役公式について、実数解析への脱出、依存境界、二章配置、高校生可読性をブロック単位で確定した。後章に仮分類された Frobenius 内積の性質への依存は次の独立レビュー単位として明示した。",
+    status: "行列空間のノルムと収束、Frobenius 内積の性質、交換子の二項展開、交換子作用・共役作用、行列指数共役公式について、実数解析への脱出、依存境界、二章配置、高校生可読性をブロック単位で確定した。Frobenius 内積の定義と性質は意味的にも相互依存するため、同一節の不可分な依存単位として確定した。",
+    frobeniusMutualReferenceBoundary: {
+      rawMutualReferencePreserved: true,
+      semanticMutualPrerequisitePreserved: true,
+      stronglyConnectedEntryIds: [frobeniusDefinitionId, frobeniusPropertiesId],
+      placement: "同じ節の不可分な依存単位として扱う",
+      rationale: "性質命題は内積の定義を前提にし、定義ブロックはノルムが非負実数値として定まることを性質命題の正定値性に依存する。",
+    },
     reviewedEntryCount: reviewedExpConjugationToolEntries.length,
     realAnalysisEscapeEntryCount: reviewedExpConjugationToolEntries.filter(
       ({ id }) => expConjugationToolBoundaryById.get(id)?.closure === "実数解析への脱出を伴う",
@@ -1235,7 +1286,7 @@ const inventory = {
     mathematicalToolsFirstIncompatibleDependencies: expConjugationLaterChapterDependencies,
     highSchoolReadableEntryCount: reviewedExpConjugationToolEntries.length,
     semanticExclusionFingerprintCount: configuredExpConjugationFingerprints.size,
-    classificationRule: "交換子と共役の有限代数だけで閉じるものと、実数値ノルム・極限・完備性・指数級数を直接または依存先経由で使うものを分ける。イジング固有語彙を含まないものを数学的道具立てに置き、後章への前提依存は解消済みとみなさず明示する。",
+    classificationRule: "交換子と共役の有限代数だけで閉じるものと、実数値ノルム・極限・完備性・指数級数を直接または依存先経由で使うものを分ける。イジング固有語彙を含まないものを数学的道具立てに置き、数学的道具立てから後章への意味的前提依存が0件であることを二章配置の適合条件として検査する。",
     reviewedEntryIds: reviewedExpConjugationToolEntries.map(({ id }) => id),
   },
   realAnalysisDependencySources: [...directRealAnalysisInputsById]
