@@ -417,6 +417,32 @@
       "concludingDefinitionEntryId": "partition_function_2d_ising_003_definition_transfer_matrix",
       "boundaryEvidence": "章内依存順の連続する三項であり、格子サイズを分配関数が意味的前提として明示し、分配関数を転送行列が周期境界条件の参照先として使う。格子サイズから転送行列までが模型の有限サイズ表現を定め、次の転送行列による分配関数の表式へ入力を渡すため、三つの定義で最初の節を閉じる。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末定義の一意性を生成時に固定検査する。",
       "readabilityStatus": "三項とも有限集合、有限和、有限複素行列の成分として具体的に定義され、現行の説明粒度検査に合格している。"
+    },
+    {
+      "name": "スピン配置と標準基底の対応",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+      "entryIds": [
+        "bridge_001_definition_config_basis"
+      ],
+      "input": [
+        "最初の節で定めた一行分のスピン配置と転送行列",
+        "クロネッカー積の標準基底を番号づける多重添字と、その多重添字による行列成分の表示"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "partition_function_2d_ising_003_definition_transfer_matrix",
+        "transfer_matrix_005_definition_end_isomorphism"
+      ],
+      "output": [
+        "一行分のスピン配置から多重添字への全単射",
+        "スピン配置を添え字として転送行列の成分を読むための具体的な対応"
+      ],
+      "concludingDefinition": "スピン配置からクロネッカー積の標準基底の多重添字への全単射",
+      "concludingDefinitionEntryId": "bridge_001_definition_config_basis",
+      "boundaryEvidence": "章内依存順4の一項は、最初の節で定めた転送行列と、数学的道具立ての標準基底・行列表示の対応を入力として、スピン配置から多重添字への全単射を定める。章内依存順5の1次元開鎖のスピン和と章内依存順6の転送行列による分配関数の表式との間に相互依存はなく、三項の外部入力集合もそれぞれ異なる。したがって外部入力集合が変わる章内依存順4の後でこの一項の節を閉じる。外部入力とその本文 fingerprint、本文 fingerprint、章内依存順、節末定義の一意性を生成時に固定検査する。",
+      "readabilityStatus": "対象定義は有限集合の各成分について二通りの値を対応させ、転送行列の行・列を具体的に読み替えるため、現行の説明粒度検査に合格している。外部入力である行列と線型写像の対応の節には、具体的な行列計算への展開またはブロック分割が残る。"
     }
   ],
   "explanationGranularityReview": {
@@ -8029,8 +8055,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 14315,
-        "inspectedContentSha256": "09ff609da5bc0dff7250b8a388f3767665de26329bd564487141a64128a08fa5",
+        "inspectedCharacterCount": 15070,
+        "inspectedContentSha256": "67871612ac34889fb795f93a8909458399d6d096098996921c63f7a1fa2aa008",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15440,8 +15466,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2136,
-        "inspectedContentSha256": "dd324f04ef4a65c30855af4014313717fda3b83546808eadb4f84b0a16481b70",
+        "inspectedCharacterCount": 2296,
+        "inspectedContentSha256": "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
