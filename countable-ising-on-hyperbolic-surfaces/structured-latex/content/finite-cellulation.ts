@@ -269,6 +269,10 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
+        ref("def_finite_cellulation_face_boundary_word"),
+        " の境界語と ",
+        ref("def_finite_cellulation_corner_side_label_set"),
+        " の角側ラベルを用いる。",
         "各 ",
         math(String.raw`f\in F_{\mathrm{cell}}`),
         " と ",
@@ -7091,8 +7095,8 @@ q\nleq2
       displayMath(String.raw`\left(\bar p-2\right)\left(\bar q-2\right)=98
 \quad\Longleftrightarrow\quad
 \begin{aligned}
-(p,q)={}&(3,100)\ \text{または}\ (4,51)\ \text{または}\ (9,16)\ \text{または}\\
-        &(16,9)\ \text{または}\ (51,4)\ \text{または}\ (100,3)
+(p,q)={}&(3,100)\ \text{または}\ (p,q)=(4,51)\ \text{または}\ (p,q)=(9,16)\ \text{または}\\
+        &(p,q)=(16,9)\ \text{または}\ (p,q)=(51,4)\ \text{または}\ (p,q)=(100,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7156,8 +7160,8 @@ q\nleq2
       displayMath(String.raw`\left(\bar p-2\right)\left(\bar q-2\right)=99
 \quad\Longleftrightarrow\quad
 \begin{aligned}
-(p,q)={}&(3,101)\ \text{または}\ (5,35)\ \text{または}\ (11,13)\ \text{または}\\
-        &(13,11)\ \text{または}\ (35,5)\ \text{または}\ (101,3)
+(p,q)={}&(3,101)\ \text{または}\ (p,q)=(5,35)\ \text{または}\ (p,q)=(11,13)\ \text{または}\\
+        &(p,q)=(13,11)\ \text{または}\ (p,q)=(35,5)\ \text{または}\ (p,q)=(101,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7221,9 +7225,9 @@ q\nleq2
       displayMath(String.raw`\left(\bar p-2\right)\left(\bar q-2\right)=100
 \quad\Longleftrightarrow\quad
 \begin{aligned}
-(p,q)={}&(3,102)\ \text{または}\ (4,52)\ \text{または}\ (6,27)\ \text{または}\\
-        &(7,22)\ \text{または}\ (12,12)\ \text{または}\ (22,7)\ \text{または}\\
-        &(27,6)\ \text{または}\ (52,4)\ \text{または}\ (102,3)
+(p,q)={}&(3,102)\ \text{または}\ (p,q)=(4,52)\ \text{または}\ (p,q)=(6,27)\ \text{または}\\
+        &(p,q)=(7,22)\ \text{または}\ (p,q)=(12,12)\ \text{または}\ (p,q)=(22,7)\ \text{または}\\
+        &(p,q)=(27,6)\ \text{または}\ (p,q)=(52,4)\ \text{または}\ (p,q)=(102,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7349,9 +7353,9 @@ q\nleq2
       displayMath(String.raw`\left(\bar p-2\right)\left(\bar q-2\right)=102
 \quad\Longleftrightarrow\quad
 \begin{aligned}
-(p,q)={}&(3,104)\ \text{または}\ (4,53)\ \text{または}\ (5,36)\ \text{または}\\
-        &(8,19)\ \text{または}\ (19,8)\ \text{または}\ (36,5)\ \text{または}\\
-        &(53,4)\ \text{または}\ (104,3)
+(p,q)={}&(3,104)\ \text{または}\ (p,q)=(4,53)\ \text{または}\ (p,q)=(5,36)\ \text{または}\\
+        &(p,q)=(8,19)\ \text{または}\ (p,q)=(19,8)\ \text{または}\ (p,q)=(36,5)\ \text{または}\\
+        &(p,q)=(53,4)\ \text{または}\ (p,q)=(104,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7475,9 +7479,9 @@ q\nleq2
       displayMath(String.raw`\left(\bar p-2\right)\left(\bar q-2\right)=104
 \quad\Longleftrightarrow\quad
 \begin{aligned}
-(p,q)={}&(3,106)\ \text{または}\ (4,54)\ \text{または}\ (6,28)\ \text{または}\\
-        &(10,15)\ \text{または}\ (15,10)\ \text{または}\ (28,6)\ \text{または}\\
-        &(54,4)\ \text{または}\ (106,3)
+(p,q)={}&(3,106)\ \text{または}\ (p,q)=(4,54)\ \text{または}\ (p,q)=(6,28)\ \text{または}\\
+        &(p,q)=(10,15)\ \text{または}\ (p,q)=(15,10)\ \text{または}\ (p,q)=(28,6)\ \text{または}\\
+        &(p,q)=(54,4)\ \text{または}\ (p,q)=(106,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7543,9 +7547,9 @@ q\nleq2
       displayMath(String.raw`\left(\bar p-2\right)\left(\bar q-2\right)=105
 \quad\Longleftrightarrow\quad
 \begin{aligned}
-(p,q)={}&(3,107)\ \text{または}\ (5,37)\ \text{または}\ (7,23)\ \text{または}\\
-        &(9,17)\ \text{または}\ (17,9)\ \text{または}\ (23,7)\ \text{または}\\
-        &(37,5)\ \text{または}\ (107,3)
+(p,q)={}&(3,107)\ \text{または}\ (p,q)=(5,37)\ \text{または}\ (p,q)=(7,23)\ \text{または}\\
+        &(p,q)=(9,17)\ \text{または}\ (p,q)=(17,9)\ \text{または}\ (p,q)=(23,7)\ \text{または}\\
+        &(p,q)=(37,5)\ \text{または}\ (p,q)=(107,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7611,8 +7615,8 @@ q\nleq2
       displayMath(String.raw`\left(\bar p-2\right)\left(\bar q-2\right)=106
 \quad\Longleftrightarrow\quad
 \begin{aligned}
-(p,q)={}&(3,108)\ \text{または}\ (4,55)\ \text{または}\\
-        &(55,4)\ \text{または}\ (108,3)
+(p,q)={}&(3,108)\ \text{または}\ (p,q)=(4,55)\ \text{または}\\
+        &(p,q)=(55,4)\ \text{または}\ (p,q)=(108,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7730,10 +7734,10 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=108
 \quad\Longleftrightarrow\quad
-(p,q)={}&(3,110)\ \text{または}\ (4,56)\ \text{または}\ (5,38)\ \text{または}\\
-&(6,29)\ \text{または}\ (8,20)\ \text{または}\ (11,14)\ \text{または}\\
-&(14,11)\ \text{または}\ (20,8)\ \text{または}\ (29,6)\ \text{または}\\
-&(38,5)\ \text{または}\ (56,4)\ \text{または}\ (110,3)
+(p,q)={}&(3,110)\ \text{または}\ (p,q)=(4,56)\ \text{または}\ (p,q)=(5,38)\ \text{または}\\
+&(p,q)=(6,29)\ \text{または}\ (p,q)=(8,20)\ \text{または}\ (p,q)=(11,14)\ \text{または}\\
+&(p,q)=(14,11)\ \text{または}\ (p,q)=(20,8)\ \text{または}\ (p,q)=(29,6)\ \text{または}\\
+&(p,q)=(38,5)\ \text{または}\ (p,q)=(56,4)\ \text{または}\ (p,q)=(110,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7859,8 +7863,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=110
 \quad\Longleftrightarrow\quad
-(p,q)={}&(3,112)\ \text{または}\ (4,57)\ \text{または}\ (7,24)\ \text{または}\ (12,13)\ \text{または}\\
-&(13,12)\ \text{または}\ (24,7)\ \text{または}\ (57,4)\ \text{または}\ (112,3)
+(p,q)={}&(3,112)\ \text{または}\ (p,q)=(4,57)\ \text{または}\ (p,q)=(7,24)\ \text{または}\ (p,q)=(12,13)\ \text{または}\\
+&(p,q)=(13,12)\ \text{または}\ (p,q)=(24,7)\ \text{または}\ (p,q)=(57,4)\ \text{または}\ (p,q)=(112,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7926,8 +7930,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=111
 \quad\Longleftrightarrow\quad
-(p,q)={}&(3,113)\ \text{または}\ (5,39)\ \text{または}\\
-&(39,5)\ \text{または}\ (113,3)
+(p,q)={}&(3,113)\ \text{または}\ (p,q)=(5,39)\ \text{または}\\
+&(p,q)=(39,5)\ \text{または}\ (p,q)=(113,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -7989,8 +7993,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=112
 \quad\Longleftrightarrow\quad
-(p,q)={}&(3,114)\ \text{または}\ (4,58)\ \text{または}\ (6,30)\ \text{または}\ (9,18)\ \text{または}\ (10,16)\ \text{または}\\
-&(16,10)\ \text{または}\ (18,9)\ \text{または}\ (30,6)\ \text{または}\ (58,4)\ \text{または}\ (114,3)
+(p,q)={}&(3,114)\ \text{または}\ (p,q)=(4,58)\ \text{または}\ (p,q)=(6,30)\ \text{または}\ (p,q)=(9,18)\ \text{または}\ (p,q)=(10,16)\ \text{または}\\
+&(p,q)=(16,10)\ \text{または}\ (p,q)=(18,9)\ \text{または}\ (p,q)=(30,6)\ \text{または}\ (p,q)=(58,4)\ \text{または}\ (p,q)=(114,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8116,8 +8120,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=114
 \quad\Longleftrightarrow\quad
-(p,q)={}&(3,116)\ \text{または}\ (4,59)\ \text{または}\ (5,40)\ \text{または}\ (8,21)\ \text{または}\\
-&(21,8)\ \text{または}\ (40,5)\ \text{または}\ (59,4)\ \text{または}\ (116,3)
+(p,q)={}&(3,116)\ \text{または}\ (p,q)=(4,59)\ \text{または}\ (p,q)=(5,40)\ \text{または}\ (p,q)=(8,21)\ \text{または}\\
+&(p,q)=(21,8)\ \text{または}\ (p,q)=(40,5)\ \text{または}\ (p,q)=(59,4)\ \text{または}\ (p,q)=(116,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8183,7 +8187,7 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=115
 \quad\Longleftrightarrow\quad
-(p,q)=(3,117)\ \text{または}\ (7,25)\ \text{または}\ (25,7)\ \text{または}\ (117,3)
+(p,q)=(3,117)\ \text{または}\ (p,q)=(7,25)\ \text{または}\ (p,q)=(25,7)\ \text{または}\ (p,q)=(117,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8245,8 +8249,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=116
 \quad\Longleftrightarrow\quad
-(p,q)=(3,118)\ \text{または}\ (4,60)\ \text{または}\ (6,31)\ \text{または}\\
-\hspace{8.6em}(31,6)\ \text{または}\ (60,4)\ \text{または}\ (118,3)
+(p,q)=(3,118)\ \text{または}\ (p,q)=(4,60)\ \text{または}\ (p,q)=(6,31)\ \text{または}\\
+\hspace{8.6em}(31,6)\ \text{または}\ (p,q)=(60,4)\ \text{または}\ (p,q)=(118,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8310,8 +8314,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=117
 \quad\Longleftrightarrow\quad
-(p,q)=(3,119)\ \text{または}\ (5,41)\ \text{または}\ (11,15)\ \text{または}\\
-\hspace{8.6em}(15,11)\ \text{または}\ (41,5)\ \text{または}\ (119,3)
+(p,q)=(3,119)\ \text{または}\ (p,q)=(5,41)\ \text{または}\ (p,q)=(11,15)\ \text{または}\\
+\hspace{8.6em}(15,11)\ \text{または}\ (p,q)=(41,5)\ \text{または}\ (p,q)=(119,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8375,7 +8379,7 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=118
 \quad\Longleftrightarrow\quad
-(p,q)=(3,120)\ \text{または}\ (4,61)\ \text{または}\ (61,4)\ \text{または}\ (120,3)
+(p,q)=(3,120)\ \text{または}\ (p,q)=(4,61)\ \text{または}\ (p,q)=(61,4)\ \text{または}\ (p,q)=(120,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8437,7 +8441,7 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=119
 \quad\Longleftrightarrow\quad
-(p,q)=(3,121)\ \text{または}\ (9,19)\ \text{または}\ (19,9)\ \text{または}\ (121,3)
+(p,q)=(3,121)\ \text{または}\ (p,q)=(9,19)\ \text{または}\ (p,q)=(19,9)\ \text{または}\ (p,q)=(121,3)
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8499,10 +8503,10 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=120
 \quad\Longleftrightarrow\quad
-&(p,q)=(3,122)\ \text{または}\ (4,62)\ \text{または}\ (5,42)\ \text{または}\ (6,32)\ \text{または}\\
-&(7,26)\ \text{または}\ (8,22)\ \text{または}\ (10,17)\ \text{または}\ (12,14)\ \text{または}\\
-&(14,12)\ \text{または}\ (17,10)\ \text{または}\ (22,8)\ \text{または}\ (26,7)\ \text{または}\\
-&(32,6)\ \text{または}\ (42,5)\ \text{または}\ (62,4)\ \text{または}\ (122,3).
+&(p,q)=(3,122)\ \text{または}\ (p,q)=(4,62)\ \text{または}\ (p,q)=(5,42)\ \text{または}\ (p,q)=(6,32)\ \text{または}\\
+&(p,q)=(7,26)\ \text{または}\ (p,q)=(8,22)\ \text{または}\ (p,q)=(10,17)\ \text{または}\ (p,q)=(12,14)\ \text{または}\\
+&(p,q)=(14,12)\ \text{または}\ (p,q)=(17,10)\ \text{または}\ (p,q)=(22,8)\ \text{または}\ (p,q)=(26,7)\ \text{または}\\
+&(p,q)=(32,6)\ \text{または}\ (p,q)=(42,5)\ \text{または}\ (p,q)=(62,4)\ \text{または}\ (p,q)=(122,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8530,16 +8534,16 @@ q\nleq2
 &\Longleftrightarrow ab=120
 &&\bigl(\because\ \text{標準単射は加法・乗法・等号を保存し反映する}\bigr)\\
 &\Longleftrightarrow
-(a,b)=(1,120)\ \text{または}\ (2,60)\ \text{または}\ (3,40)\ \text{または}\ (4,30)\ \text{または}\\
-&\hspace{5.7em}(5,24)\ \text{または}\ (6,20)\ \text{または}\ (8,15)\ \text{または}\ (10,12)\ \text{または}\\
-&\hspace{5.7em}(12,10)\ \text{または}\ (15,8)\ \text{または}\ (20,6)\ \text{または}\ (24,5)\ \text{または}\\
-&\hspace{5.7em}(30,4)\ \text{または}\ (40,3)\ \text{または}\ (60,2)\ \text{または}\ (120,1)
+(a,b)=(1,120)\ \text{または}\ (p,q)=(2,60)\ \text{または}\ (p,q)=(3,40)\ \text{または}\ (p,q)=(4,30)\ \text{または}\\
+&\hspace{5.7em}(5,24)\ \text{または}\ (p,q)=(6,20)\ \text{または}\ (p,q)=(8,15)\ \text{または}\ (p,q)=(10,12)\ \text{または}\\
+&\hspace{5.7em}(12,10)\ \text{または}\ (p,q)=(15,8)\ \text{または}\ (p,q)=(20,6)\ \text{または}\ (p,q)=(24,5)\ \text{または}\\
+&\hspace{5.7em}(30,4)\ \text{または}\ (p,q)=(40,3)\ \text{または}\ (p,q)=(60,2)\ \text{または}\ (p,q)=(120,1)
 &&\bigl(\because\ 120\text{ の正の因子対の全体}\bigr)\\
 &\Longleftrightarrow
-(p,q)=(3,122)\ \text{または}\ (4,62)\ \text{または}\ (5,42)\ \text{または}\ (6,32)\ \text{または}\\
-&\hspace{5.7em}(7,26)\ \text{または}\ (8,22)\ \text{または}\ (10,17)\ \text{または}\ (12,14)\ \text{または}\\
-&\hspace{5.7em}(14,12)\ \text{または}\ (17,10)\ \text{または}\ (22,8)\ \text{または}\ (26,7)\ \text{または}\\
-&\hspace{5.7em}(32,6)\ \text{または}\ (42,5)\ \text{または}\ (62,4)\ \text{または}\ (122,3)
+(p,q)=(3,122)\ \text{または}\ (p,q)=(4,62)\ \text{または}\ (p,q)=(5,42)\ \text{または}\ (p,q)=(6,32)\ \text{または}\\
+&\hspace{5.7em}(7,26)\ \text{または}\ (p,q)=(8,22)\ \text{または}\ (p,q)=(10,17)\ \text{または}\ (p,q)=(12,14)\ \text{または}\\
+&\hspace{5.7em}(14,12)\ \text{または}\ (p,q)=(17,10)\ \text{または}\ (p,q)=(22,8)\ \text{または}\ (p,q)=(26,7)\ \text{または}\\
+&\hspace{5.7em}(32,6)\ \text{または}\ (p,q)=(42,5)\ \text{または}\ (p,q)=(62,4)\ \text{または}\ (p,q)=(122,3)
 &&\bigl(\because\ p=a+2\text{ および }q=b+2\bigr).
 \end{aligned}`),
     ],
@@ -8568,7 +8572,7 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=121
 \quad\Longleftrightarrow\quad
-(p,q)=(3,123)\ \text{または}\ (13,13)\ \text{または}\ (123,3).
+(p,q)=(3,123)\ \text{または}\ (p,q)=(13,13)\ \text{または}\ (p,q)=(123,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8628,7 +8632,7 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=122
 \quad\Longleftrightarrow\quad
-(p,q)=(3,124)\ \text{または}\ (4,63)\ \text{または}\ (63,4)\ \text{または}\ (124,3).
+(p,q)=(3,124)\ \text{または}\ (p,q)=(4,63)\ \text{または}\ (p,q)=(63,4)\ \text{または}\ (p,q)=(124,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8690,7 +8694,7 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=123
 \quad\Longleftrightarrow\quad
-(p,q)=(3,125)\ \text{または}\ (5,43)\ \text{または}\ (43,5)\ \text{または}\ (125,3).
+(p,q)=(3,125)\ \text{または}\ (p,q)=(5,43)\ \text{または}\ (p,q)=(43,5)\ \text{または}\ (p,q)=(125,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8752,8 +8756,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=124
 \quad\Longleftrightarrow\quad
-&(p,q)=(3,126)\ \text{または}\ (4,64)\ \text{または}\ (6,33)\ \text{または}\\
-&(33,6)\ \text{または}\ (64,4)\ \text{または}\ (126,3).
+&(p,q)=(3,126)\ \text{または}\ (p,q)=(4,64)\ \text{または}\ (p,q)=(6,33)\ \text{または}\\
+&(p,q)=(33,6)\ \text{または}\ (p,q)=(64,4)\ \text{または}\ (p,q)=(126,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8817,8 +8821,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=125
 \quad\Longleftrightarrow\quad
-&(p,q)=(3,127)\ \text{または}\ (7,27)\ \text{または}\\
-&(27,7)\ \text{または}\ (127,3).
+&(p,q)=(3,127)\ \text{または}\ (p,q)=(7,27)\ \text{または}\\
+&(p,q)=(27,7)\ \text{または}\ (p,q)=(127,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8880,10 +8884,10 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=126
 \quad\Longleftrightarrow\quad
-&(p,q)=(3,128)\ \text{または}\ (4,65)\ \text{または}\ (5,44)\ \text{または}\\
-&(8,23)\ \text{または}\ (9,20)\ \text{または}\ (11,16)\ \text{または}\\
-&(16,11)\ \text{または}\ (20,9)\ \text{または}\ (23,8)\ \text{または}\\
-&(44,5)\ \text{または}\ (65,4)\ \text{または}\ (128,3).
+&(p,q)=(3,128)\ \text{または}\ (p,q)=(4,65)\ \text{または}\ (p,q)=(5,44)\ \text{または}\\
+&(p,q)=(8,23)\ \text{または}\ (p,q)=(9,20)\ \text{または}\ (p,q)=(11,16)\ \text{または}\\
+&(p,q)=(16,11)\ \text{または}\ (p,q)=(20,9)\ \text{または}\ (p,q)=(23,8)\ \text{または}\\
+&(p,q)=(44,5)\ \text{または}\ (p,q)=(65,4)\ \text{または}\ (p,q)=(128,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -8911,10 +8915,10 @@ q\nleq2
 &\Longleftrightarrow ab=126
 &&\bigl(\because\ \text{標準単射は加法・乗法・等号を保存し反映する}\bigr)\\
 &\Longleftrightarrow
-(a,b)=(1,126)\ \text{または}\ (2,63)\ \text{または}\ (3,42)\ \text{または}\\
-&\hspace{5.7em}(a,b)=(6,21)\ \text{または}\ (7,18)\ \text{または}\ (9,14)\ \text{または}\\
-&\hspace{5.7em}(a,b)=(14,9)\ \text{または}\ (18,7)\ \text{または}\ (21,6)\ \text{または}\\
-&\hspace{5.7em}(a,b)=(42,3)\ \text{または}\ (63,2)\ \text{または}\ (126,1)
+(a,b)=(1,126)\ \text{または}\ (p,q)=(2,63)\ \text{または}\ (p,q)=(3,42)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(6,21)\ \text{または}\ (p,q)=(7,18)\ \text{または}\ (p,q)=(9,14)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(14,9)\ \text{または}\ (p,q)=(18,7)\ \text{または}\ (p,q)=(21,6)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(42,3)\ \text{または}\ (p,q)=(63,2)\ \text{または}\ (p,q)=(126,1)
 &&\bigl(\because\ 126\text{ の正の因子対の全体}\bigr)\\
 &\Longleftrightarrow
 (p,q)=(3,128)\ \text{または}\ (p,q)=(4,65)\ \text{または}\\
@@ -9009,8 +9013,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=128
 \quad\Longleftrightarrow\quad
-&(p,q)=(3,130)\ \text{または}\ (4,66)\ \text{または}\ (6,34)\ \text{または}\ (10,18)\ \text{または}\\
-&(18,10)\ \text{または}\ (34,6)\ \text{または}\ (66,4)\ \text{または}\ (130,3).
+&(p,q)=(3,130)\ \text{または}\ (p,q)=(4,66)\ \text{または}\ (p,q)=(6,34)\ \text{または}\ (p,q)=(10,18)\ \text{または}\\
+&(p,q)=(18,10)\ \text{または}\ (p,q)=(34,6)\ \text{または}\ (p,q)=(66,4)\ \text{または}\ (p,q)=(130,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -9038,9 +9042,9 @@ q\nleq2
 &\Longleftrightarrow ab=128
 &&\bigl(\because\ \text{標準単射は加法・乗法・等号を保存し反映する}\bigr)\\
 &\Longleftrightarrow
-(a,b)=(1,128)\ \text{または}\ (2,64)\ \text{または}\ (4,32)\ \text{または}\\
-&\hspace{5.7em}(a,b)=(8,16)\ \text{または}\ (16,8)\ \text{または}\ (32,4)\ \text{または}\\
-&\hspace{5.7em}(a,b)=(64,2)\ \text{または}\ (128,1)
+(a,b)=(1,128)\ \text{または}\ (p,q)=(2,64)\ \text{または}\ (p,q)=(4,32)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(8,16)\ \text{または}\ (p,q)=(16,8)\ \text{または}\ (p,q)=(32,4)\ \text{または}\\
+&\hspace{5.7em}(a,b)=(64,2)\ \text{または}\ (p,q)=(128,1)
 &&\bigl(\because\ 128\text{ の正の因子対の全体}\bigr)\\
 &\Longleftrightarrow
 (p,q)=(3,130)\ \text{または}\ (p,q)=(4,66)\ \text{または}\\
@@ -9075,8 +9079,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=129
 \quad\Longleftrightarrow\quad
-&(p,q)=(3,131)\ \text{または}\ (5,45)\ \text{または}\\
-&(45,5)\ \text{または}\ (131,3).
+&(p,q)=(3,131)\ \text{または}\ (p,q)=(5,45)\ \text{または}\\
+&(p,q)=(45,5)\ \text{または}\ (p,q)=(131,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -9138,8 +9142,8 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=130
 \quad\Longleftrightarrow\quad
-&(p,q)=(3,132)\ \text{または}\ (4,67)\ \text{または}\ (7,28)\ \text{または}\ (12,15)\ \text{または}\\
-&(15,12)\ \text{または}\ (28,7)\ \text{または}\ (67,4)\ \text{または}\ (132,3).
+&(p,q)=(3,132)\ \text{または}\ (p,q)=(4,67)\ \text{または}\ (p,q)=(7,28)\ \text{または}\ (p,q)=(12,15)\ \text{または}\\
+&(p,q)=(15,12)\ \text{または}\ (p,q)=(28,7)\ \text{または}\ (p,q)=(67,4)\ \text{または}\ (p,q)=(132,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),
@@ -9263,9 +9267,9 @@ q\nleq2
       displayMath(String.raw`\begin{aligned}
 \left(\bar p-2\right)\left(\bar q-2\right)=132
 \quad\Longleftrightarrow\quad
-&(p,q)=(3,134)\ \text{または}\ (4,68)\ \text{または}\ (5,46)\ \text{または}\ (6,35)\ \text{または}\\
-&(8,24)\ \text{または}\ (13,14)\ \text{または}\ (14,13)\ \text{または}\ (24,8)\ \text{または}\\
-&(35,6)\ \text{または}\ (46,5)\ \text{または}\ (68,4)\ \text{または}\ (134,3).
+&(p,q)=(3,134)\ \text{または}\ (p,q)=(4,68)\ \text{または}\ (p,q)=(5,46)\ \text{または}\ (p,q)=(6,35)\ \text{または}\\
+&(p,q)=(8,24)\ \text{または}\ (p,q)=(13,14)\ \text{または}\ (p,q)=(14,13)\ \text{または}\ (p,q)=(24,8)\ \text{または}\\
+&(p,q)=(35,6)\ \text{または}\ (p,q)=(46,5)\ \text{または}\ (p,q)=(68,4)\ \text{または}\ (p,q)=(134,3).
 \end{aligned}`),
       paragraph([
         math(String.raw`p,q\in\mathbb N_{>0}`),

@@ -17,9 +17,12 @@ export default defineBlocks([
     verification: ["sagemath/check/two-stage-finite-quotient-tower-input"],
     statement: [
       paragraph([
-        "空でない有限集合 ",
-        math(String.raw`\Omega`),
-        " と有限置換群 ",
+        ref("def_hereditarily_finite_data_over_naturals"),
+        " に属する空でない有限集合 ",
+        math(String.raw`\Omega\in\mathcal P_{\mathrm{fin}}(\operatorname{HF}(\mathbb N))`),
+        " と ",
+        ref("def_finite_permutation_group_notation"),
+        " の有限置換群 ",
         math(String.raw`A\leq\operatorname{Sym}(\Omega)`),
         " に対し、二段の有限商の塔の入力を順序付き組",
       ]),
@@ -87,14 +90,19 @@ a
 \kappa\circ\pi_{\mathrm{fine}}
 &=\pi_{\mathrm{coarse}}.
 \end{aligned}`),
+      paragraph(["タグ付き商集合上の群演算を、", math(String.raw`R\in\{\mathrm{fine},\mathrm{coarse}\}`), " と対応する正規部分群 ", math(String.raw`N_R`), " に対して"]),
+      displayMath(String.raw`\begin{aligned}
+(\mathtt R,aN_R)\cdot_R(\mathtt R,bN_R)&:=(\mathtt R,(ab)N_R),\\
+1_R&:=(\mathtt R,N_R),\\
+(\mathtt R,aN_R)^{-1_R}&:=(\mathtt R,a^{-1}N_R)
+\end{aligned}`),
+      paragraph(["で定める。ここで ", math(String.raw`\mathtt R`), " は ", math(String.raw`R=\mathrm{fine}`), " なら ", math(String.raw`\mathtt{fine}`), "、", math(String.raw`R=\mathrm{coarse}`), " なら ", math(String.raw`\mathtt{coarse}`), " である。"]),
       paragraph([
         "ここで ",
         math(String.raw`A/N_{\mathrm{fine}}`),
         " と ",
         math(String.raw`A/N_{\mathrm{coarse}}`),
-        " は左剰余類集合であり、各商の積は ",
-        math(String.raw`(aN)(bN):=(ab)N`),
-        " で定める。二つの部分群が正規であるため、この積は代表元に依存せず、それぞれ有限群をなす。段ラベルにより二つの商群を同一視しない。",
+        " は ", ref("def_left_coset_set"), " の左剰余類集合である。二つの部分群が正規であるため、上の積と逆元は代表元に依存せず、タグ付き集合はそれぞれ有限群をなす。段ラベルにより二つの商群を同一視しない。",
       ]),
       displayMath(String.raw`\begin{aligned}
 aN_{\mathrm{fine}}=bN_{\mathrm{fine}}
@@ -186,10 +194,17 @@ Q_{\mathrm{coarse}}
   r_E^{\mathrm{coarse}}
 \right\rangle.
 \end{aligned}`),
+      paragraph(["さらに、両段で辺役割生成元と三角関係が退化しないことを入力条件として要求する。"]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{ord}(r_E^{\mathrm{fine}})&=2,&
+r_F^{\mathrm{fine}}r_V^{\mathrm{fine}}r_E^{\mathrm{fine}}&=1_{\mathrm{fine}},\\
+\operatorname{ord}(r_E^{\mathrm{coarse}})&=2,&
+r_F^{\mathrm{coarse}}r_V^{\mathrm{coarse}}r_E^{\mathrm{coarse}}&=1_{\mathrm{coarse}}.
+\end{aligned}`),
       paragraph([
         "ここでは役割名の一致を、名前の使い回しではなく始域と終域をもつ ",
         math(String.raw`\kappa`),
-        " による三つの等式として固定する。商で元の位数が小さくなることは許し、各段が双曲型正則セル分割を生成することはこの定義から結論しない。全ての群、元、写像は有限であり、実数、複素数、極限、積分を用いない。",
+        " による三つの等式として固定する。面・頂点役割生成元の位数が小さくなることは許すが、辺役割生成元の位数二と三角関係は両段で保持する。各段が双曲型正則セル分割を生成することはこの定義から結論しない。全ての群、元、写像は有限であり、実数、複素数、極限、積分を用いない。",
       ]),
     ],
   },
@@ -255,11 +270,11 @@ H_R^{\mathrm{coarse}}.
       displayMath(String.raw`\begin{aligned}
 \mathcal C_R^{\mathrm{fine}}
 &:=
-\{\mathtt{fine}\}\times\{R\}\times
+\{\mathtt{fine}\}\times\{\mathsf{role}(R)\}\times
 \left(Q_{\mathrm{fine}}/H_R^{\mathrm{fine}}\right),\\
 \mathcal C_R^{\mathrm{coarse}}
 &:=
-\{\mathtt{coarse}\}\times\{R\}\times
+\{\mathtt{coarse}\}\times\{\mathsf{role}(R)\}\times
 \left(Q_{\mathrm{coarse}}/H_R^{\mathrm{coarse}}\right)
 \end{aligned}`),
       paragraph([
@@ -274,13 +289,13 @@ H_R^{\mathrm{coarse}}.
 \mathcal C_R^{\mathrm{coarse}},\\
 \left(
   \mathtt{fine},
-  R,
+  \mathsf{role}(R),
   gH_R^{\mathrm{fine}}
 \right)
 &\longmapsto
 \left(
   \mathtt{coarse},
-  R,
+  \mathsf{role}(R),
   \kappa(g)H_R^{\mathrm{coarse}}
 \right)
 \qquad
@@ -319,6 +334,21 @@ H_R^{\mathrm{coarse}}
     ],
   },
   {
+    id: "quotient_tower_definition_stage_coset_cell_incidence_relations",
+    kind: "definition",
+    title: { text: "商の各段における剰余類セル incidence" },
+    labels: ["def_quotient_tower_stage_coset_cell_incidence_relations"],
+    habitat: "finite",
+    statement: [
+      paragraph([ref("def_quotient_tower_induced_coset_cell_maps"), " の段ラベル付き剰余類セル集合に対し、各 ", math(String.raw`T\in\{\mathrm{fine},\mathrm{coarse}\}`), " の incidence 関係を"]),
+      displayMath(String.raw`\mathcal I_{Q_T}:=\left\{
+\bigl((\mathtt T,\mathsf{role}(R),C_R),(\mathtt T,\mathsf{role}(S),C_S)\bigr)
+\ \middle|\
+(R,S)\in\{(F,V),(F,E),(V,E)\},\ C_R\in Q_T/H_R^T,\ C_S\in Q_T/H_S^T,\ C_R\cap C_S\ne\varnothing
+\right\}`),
+      paragraph(["と定める。ここで ", math(String.raw`\mathtt T`), " は段 ", math("T"), " の形式的ラベルである。この関係は三重タグ付きセル上に定義され、タグを持たない一般の剰余類セル関係とは型を混同しない。"])],
+  },
+  {
     id: "quotient_tower_theorem_coset_cell_incidence_forward_preservation",
     kind: "theorem",
     title: { text: "商の塔における剰余類セル incidence の順方向保存" },
@@ -328,7 +358,7 @@ H_R^{\mathrm{coarse}}
     statement: [
       paragraph([
         ref("def_quotient_tower_induced_coset_cell_maps"),
-        " の誘導剰余類セル写像を取る。役割対 ",
+        " の誘導剰余類セル写像と ", ref("def_quotient_tower_stage_coset_cell_incidence_relations"), " の段別 incidence を取る。役割対 ",
         math(String.raw`(R,S)\in\{(F,V),(F,E),(V,E)\}`),
         "、元 ",
         math(String.raw`g,k\in Q_{\mathrm{fine}}`),
@@ -337,7 +367,7 @@ H_R^{\mathrm{coarse}}
       displayMath(String.raw`c_R:=
 \left(
   \mathtt{fine},
-  R,
+  \mathsf{role}(R),
   gH_R^{\mathrm{fine}}
 \right)
 \in\mathcal C_R^{\mathrm{fine}},
@@ -345,7 +375,7 @@ H_R^{\mathrm{coarse}}
 c_S:=
 \left(
   \mathtt{fine},
-  S,
+  \mathsf{role}(S),
   kH_S^{\mathrm{fine}}
 \right)
 \in\mathcal C_S^{\mathrm{fine}}`),
@@ -503,13 +533,13 @@ kh_S.`),
       displayMath(String.raw`\overline\kappa_E
 \left(
   \mathtt{fine},
-  E,
+  \mathsf{EdgeRole},
   C_E
 \right)
 =
 \left(
   \mathtt{coarse},
-  E,
+  \mathsf{EdgeRole},
   D_E
 \right)
 \quad\Longrightarrow\quad
@@ -524,6 +554,21 @@ kh_S.`),
     ],
   },
   {
+    id: "quotient_tower_definition_stage_oriented_edge_endpoint_maps",
+    kind: "definition",
+    title: { text: "商の各段における向き付き辺端点写像" },
+    labels: ["def_quotient_tower_stage_oriented_edge_endpoint_maps"],
+    habitat: "finite",
+    statement: [
+      paragraph([ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"), " の代表元選択に対し、各 ", math(String.raw`T\in\{\mathrm{fine},\mathrm{coarse}\}`), " の辺端点写像を"]),
+      displayMath(String.raw`\begin{aligned}
+\partial_G^T:\mathcal C_E^T\times\mathsf{End}&\longrightarrow\mathcal C_V^T,\\
+\partial_G^T((\mathtt T,E,C_E),\mathsf{source})&:=(\mathtt T,V,\eta_E^T(C_E)H_V^T),\\
+\partial_G^T((\mathtt T,E,C_E),\mathsf{target})&:=(\mathtt T,V,\eta_E^T(C_E)r_E^T H_V^T)
+\end{aligned}`),
+      paragraph(["で定める。", math(String.raw`\mathtt T`), " は段ラベルである。始域と終域はいずれも三重タグ付きセル集合であり、一般の二重タグ付き端点写像とは型を混同しない。"])],
+  },
+  {
     id: "quotient_tower_theorem_oriented_edge_endpoint_map_preservation",
     kind: "theorem",
     title: { text: "商の塔における向き付き辺端点写像の保存" },
@@ -532,8 +577,8 @@ kh_S.`),
     verification: ["sagemath/check/two-stage-quotient-tower-oriented-edge-endpoint-preservation"],
     statement: [
       paragraph([
-        ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
-        " の整合する代表元選択写像を取る。細段辺剰余類 ",
+        ref("def_quotient_tower_stage_oriented_edge_endpoint_maps"),
+        " の端点写像を、整合する代表元選択について取る。細段辺剰余類 ",
         math(String.raw`C_E\in Q_{\mathrm{fine}}/H_E^{\mathrm{fine}}`),
         " と粗段辺剰余類 ",
         math(String.raw`D_E\in Q_{\mathrm{coarse}}/H_E^{\mathrm{coarse}}`),
@@ -542,13 +587,13 @@ kh_S.`),
       displayMath(String.raw`\overline\kappa_E
 \left(
   \mathtt{fine},
-  E,
+  \mathsf{EdgeRole},
   C_E
 \right)
 =
 \left(
   \mathtt{coarse},
-  E,
+  \mathsf{EdgeRole},
   D_E
 \right)`),
       paragraph([
@@ -558,25 +603,25 @@ kh_S.`),
 \overline\kappa_V
 \left(
   \mathtt{fine},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{fine}}(C_E)H_V^{\mathrm{fine}}
 \right)
 &=
 \left(
   \mathtt{coarse},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{coarse}}(D_E)H_V^{\mathrm{coarse}}
 \right),\\
 \overline\kappa_V
 \left(
   \mathtt{fine},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{fine}}(C_E)r_E^{\mathrm{fine}}H_V^{\mathrm{fine}}
 \right)
 &=
 \left(
   \mathtt{coarse},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{coarse}}(D_E)r_E^{\mathrm{coarse}}H_V^{\mathrm{coarse}}
 \right).
 \end{aligned}`),
@@ -589,13 +634,13 @@ kh_S.`),
       displayMath(String.raw`\overline\kappa_V
 \left(
   \mathtt{fine},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{fine}}(C_E)H_V^{\mathrm{fine}}
 \right)
 =
 \left(
   \mathtt{coarse},
-  V,
+  \mathsf{VertexRole},
   \kappa\left(\eta_E^{\mathrm{fine}}(C_E)\right)H_V^{\mathrm{coarse}}
 \right).`),
       paragraph([
@@ -609,13 +654,13 @@ kh_S.`),
       displayMath(String.raw`\overline\kappa_V
 \left(
   \mathtt{fine},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{fine}}(C_E)H_V^{\mathrm{fine}}
 \right)
 =
 \left(
   \mathtt{coarse},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{coarse}}(D_E)H_V^{\mathrm{coarse}}
 \right).`),
       paragraph([
@@ -625,13 +670,13 @@ kh_S.`),
       displayMath(String.raw`\overline\kappa_V
 \left(
   \mathtt{fine},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{fine}}(C_E)r_E^{\mathrm{fine}}H_V^{\mathrm{fine}}
 \right)
 =
 \left(
   \mathtt{coarse},
-  V,
+  \mathsf{VertexRole},
   \kappa\left(\eta_E^{\mathrm{fine}}(C_E)r_E^{\mathrm{fine}}\right)H_V^{\mathrm{coarse}}
 \right).`),
       paragraph([
@@ -665,19 +710,31 @@ kh_S.`),
       displayMath(String.raw`\overline\kappa_V
 \left(
   \mathtt{fine},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{fine}}(C_E)r_E^{\mathrm{fine}}H_V^{\mathrm{fine}}
 \right)
 =
 \left(
   \mathtt{coarse},
-  V,
+  \mathsf{VertexRole},
   \eta_E^{\mathrm{coarse}}(D_E)r_E^{\mathrm{coarse}}H_V^{\mathrm{coarse}}
 \right).`),
       paragraph([
         "したがって始点と終点はそれぞれ保存される。全ての群、部分群、剰余類、写像、量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
       ]),
     ],
+  },
+  {
+    id: "quotient_tower_definition_stage_face_cyclic_position_systems",
+    kind: "definition",
+    title: { text: "商の各段における面の巡回位置系" },
+    labels: ["def_quotient_tower_stage_face_cyclic_position_systems"],
+    habitat: "finite",
+    statement: [
+      paragraph([ref("def_quotient_tower_induced_coset_cell_maps"), " の各段 ", math(String.raw`T\in\{\mathrm{fine},\mathrm{coarse}\}`), " と三重タグ付き面 ", math(String.raw`f=(\mathtt T,\mathsf{FaceRole},C_F)\in\mathcal C_F^T`), " に対し、位置集合と次位置写像を"]),
+      displayMath(String.raw`P_f^{Q_T}:=\{\mathtt{position}\}\times C_F,\qquad
+s_f^{Q_T}:P_f^{Q_T}\to P_f^{Q_T},\quad s_f^{Q_T}(\mathtt{position},a):=(\mathtt{position},ar_F^T)`),
+      paragraph(["で定める。", math(String.raw`C_F`), " は ", math(String.raw`H_F^T=\langle r_F^T\rangle`), " の左剰余類なので、", math(String.raw`s_f^{Q_T}`), " は一つの巡回列をなす全単射である。"])],
   },
   {
     id: "quotient_tower_definition_induced_face_position_map",
@@ -690,8 +747,8 @@ kh_S.`),
       paragraph([
         ref("def_quotient_tower_induced_coset_cell_maps"),
         " の面セル写像と、",
-        ref("def_finite_quotient_face_cyclic_position_system"),
-        " の剰余類面の巡回位置系を取る。細段面剰余類 ",
+        ref("def_quotient_tower_stage_face_cyclic_position_systems"),
+        " の段別巡回位置系を取る。細段面剰余類 ",
         math(String.raw`C_F\in Q_{\mathrm{fine}}/H_F^{\mathrm{fine}}`),
         " と粗段面剰余類 ",
         math(String.raw`D_F\in Q_{\mathrm{coarse}}/H_F^{\mathrm{coarse}}`),
@@ -700,13 +757,13 @@ kh_S.`),
       displayMath(String.raw`\overline\kappa_F
 \left(
   \mathtt{fine},
-  F,
+  \mathsf{FaceRole},
   C_F
 \right)
 =
 \left(
   \mathtt{coarse},
-  F,
+  \mathsf{FaceRole},
   D_F
 \right)`),
       paragraph([
@@ -833,6 +890,37 @@ s_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}
     ],
   },
   {
+    id: "quotient_tower_definition_stage_oriented_face_boundary_words",
+    kind: "definition",
+    title: { text: "商の各段における向き付き面境界語" },
+    labels: ["def_quotient_tower_stage_oriented_face_boundary_words"],
+    habitat: "finite",
+    statement: [
+      paragraph([ref("def_quotient_tower_stage_oriented_edge_endpoint_maps"), " の端点写像と ", ref("def_quotient_tower_stage_face_cyclic_position_systems"), " の巡回位置系を取る。各 ", math(String.raw`T\in\{\mathrm{fine},\mathrm{coarse}\}`), "、面 ", math(String.raw`f=(\mathtt T,\mathsf{FaceRole},C_F)\in\mathcal C_F^T`), " に対し段別境界語を写像 ", math(String.raw`\partial_{\mathrm{word}}^T f:P_f^{Q_T}\to\mathcal C_E^T\times\mathsf{Ori}`), " であって"]),
+      displayMath(String.raw`\partial_{\mathrm{word}}^T f(\mathtt{position},a):=
+\begin{cases}
+((\mathtt T,\mathsf{EdgeRole},aH_E^T),\mathsf{forward}),&\eta_E^T(aH_E^T)=a,\\
+((\mathtt T,\mathsf{EdgeRole},aH_E^T),\mathsf{reverse}),&\eta_E^T(aH_E^T)=ar_E^T
+\end{cases}`),
+      paragraph([ref("def_quotient_tower_role_generator_compatibility"), " の位数二条件により二場合のちょうど一方が成立し、三角関係により次位置との端点が接続する。"])],
+  },
+  {
+    id: "quotient_tower_definition_stage_oriented_cellulation_data",
+    kind: "definition",
+    title: { text: "商の各段における向き付きセル分割データ" },
+    labels: ["def_quotient_tower_stage_oriented_cellulation_data"],
+    habitat: "finite",
+    statement: [
+      paragraph([ref("def_quotient_tower_stage_oriented_edge_endpoint_maps"), " の端点写像、", ref("def_quotient_tower_stage_face_cyclic_position_systems"), " の巡回位置系、", ref("def_quotient_tower_stage_oriented_face_boundary_words"), " の境界語、および ", ref("def_quotient_tower_stage_coset_cell_incidence_relations"), " の incidence を一つの型付き構造にまとめる。各 ", math(String.raw`T\in\{\mathrm{fine},\mathrm{coarse}\}`), " に対し"]),
+      displayMath(String.raw`\mathcal C^T:=\left(
+(\mathcal C_V^T,\mathcal C_E^T,\partial_G^T),
+(\mathcal C_V^T,\mathcal C_E^T,\mathcal C_F^T),
+\left(P_f^{Q_T},s_f^{Q_T},\partial_{\mathrm{word}}^T f\right)_{f\in\mathcal C_F^T},
+\mathcal I_{Q_T}
+\right)`),
+      paragraph(["と定める。これにより後続の境界行列、サイクル空間、面境界空間で使う ", math(String.raw`\mathcal C^{\mathrm{fine}},\mathcal C^{\mathrm{coarse}}`), " の全成分と型が確定する。この定義は閉曲面性を主張しない。"])],
+  },
+  {
     id: "quotient_tower_theorem_oriented_face_boundary_word_preservation",
     kind: "theorem",
     title: { text: "商の塔における剰余類面の向き付き境界語の保存" },
@@ -841,8 +929,8 @@ s_{f_{\mathrm{coarse}}}^{Q_{\mathrm{coarse}}}
     verification: ["sagemath/check/two-stage-quotient-tower-oriented-face-boundary-word-preservation"],
     statement: [
       paragraph([
-        ref("def_quotient_tower_induced_face_position_map"),
-        " の面位置写像と、",
+        ref("def_quotient_tower_stage_oriented_cellulation_data"),
+        " の段別境界語と面位置写像、",
         ref("def_quotient_tower_oriented_edge_representative_selector_compatibility"),
         " の整合する辺代表元選択写像、および ",
         ref("def_finite_quotient_oriented_coset_face_boundary_word"),
@@ -904,13 +992,13 @@ D_E\left(\kappa(a)\right):=
       displayMath(String.raw`\overline\kappa_E
 \left(
   \mathtt{fine},
-  E,
+  \mathsf{EdgeRole},
   C_E(a)
 \right)
 =
 \left(
   \mathtt{coarse},
-  E,
+  \mathsf{EdgeRole},
   D_E\left(\kappa(a)\right)
 \right).`),
       paragraph([
@@ -950,8 +1038,8 @@ f_{\mathrm{fine}}
 \right)
 &=
 \left(
-  (\mathtt{fine},E,C_E(a)),
-  \mathsf{reverse}
+  (\mathtt{fine},\mathsf{EdgeRole},C_E(a)),
+  \mathsf{forward}
 \right)
 &&\bigl(\because\ \text{細段境界語の定義}\bigr),\\
 \partial_{\mathrm{word}}^{Q_{\mathrm{coarse}},\eta_E^{\mathrm{coarse}}}
@@ -962,14 +1050,14 @@ f_{\mathrm{coarse}}
 \right)
 &=
 \left(
-  (\mathtt{coarse},E,D_E(\kappa(a))),
-  \mathsf{reverse}
+  (\mathtt{coarse},\mathsf{EdgeRole},D_E(\kappa(a))),
+  \mathsf{forward}
 \right)
 &&\bigl(\because\ \text{粗段境界語の定義}\bigr).
 \end{aligned}`),
       paragraph([
         "誘導辺セル写像の等式と、形式的向きラベル ",
-        math(String.raw`\mathsf{reverse}`),
+        math(String.raw`\mathsf{forward}`),
         " の一致より、主張の等式が成り立つ。次に ",
         math(String.raw`\eta_E^{\mathrm{fine}}(C_E(a))=ar_E^{\mathrm{fine}}`),
         " の場合を取る。",
@@ -1015,8 +1103,8 @@ f_{\mathrm{fine}}
 \right)
 &=
 \left(
-  (\mathtt{fine},E,C_E(a)),
-  \mathsf{forward}
+  (\mathtt{fine},\mathsf{EdgeRole},C_E(a)),
+  \mathsf{reverse}
 \right)
 &&\bigl(\because\ \text{細段境界語の定義}\bigr),\\
 \partial_{\mathrm{word}}^{Q_{\mathrm{coarse}},\eta_E^{\mathrm{coarse}}}
@@ -1027,14 +1115,14 @@ f_{\mathrm{coarse}}
 \right)
 &=
 \left(
-  (\mathtt{coarse},E,D_E(\kappa(a))),
-  \mathsf{forward}
+  (\mathtt{coarse},\mathsf{EdgeRole},D_E(\kappa(a))),
+  \mathsf{reverse}
 \right)
 &&\bigl(\because\ \text{粗段境界語の定義}\bigr).
 \end{aligned}`),
       paragraph([
         "誘導辺セル写像の等式と、形式的向きラベル ",
-        math(String.raw`\mathsf{forward}`),
+        math(String.raw`\mathsf{reverse}`),
         " の一致より、この場合にも主張の等式が成り立つ。最後に ",
         ref("def_quotient_tower_induced_face_position_map"),
         " の位置写像の定義より、",
@@ -1177,7 +1265,8 @@ b(C_V)
     verification: ["sagemath/check/two-stage-quotient-tower-first-boundary-pushforward-commutativity-over-f2"],
     statement: [
       paragraph([
-        "細段と粗段の有限頂点セル集合をそれぞれ ",
+        ref("def_quotient_tower_stage_oriented_cellulation_data"),
+        " の細段と粗段の有限頂点セル集合をそれぞれ ",
         math(String.raw`\mathcal C_V^{\mathrm{fine}}`),
         " と ",
         math(String.raw`\mathcal C_V^{\mathrm{coarse}}`),
@@ -1185,7 +1274,7 @@ b(C_V)
         math(String.raw`\mathcal C_E^{\mathrm{fine}}`),
         " と ",
         math(String.raw`\mathcal C_E^{\mathrm{coarse}}`),
-        " とする。二段の辺端写像を",
+        " とする。同じ段別セル分割データの辺端写像は",
       ]),
       displayMath(String.raw`\partial_G^{\mathrm{fine}}:
 \mathcal C_E^{\mathrm{fine}}\times\mathsf{End}
@@ -1197,7 +1286,7 @@ b(C_V)
 \longrightarrow
 \mathcal C_V^{\mathrm{coarse}}`),
       paragraph([
-        "とし、これらから ",
+        "であり、これらから ",
         ref("def_first_boundary_matrix_over_f2"),
         " により定まる ",
         math(String.raw`\mathbb F_2`),
@@ -1662,7 +1751,8 @@ a(C_F)
     verification: ["sagemath/check/two-stage-quotient-tower-second-boundary-pushforward-commutativity-over-f2"],
     statement: [
       paragraph([
-        "細段と粗段の有限面セル集合をそれぞれ ",
+        ref("def_quotient_tower_stage_oriented_cellulation_data"),
+        " の細段と粗段の有限面セル集合をそれぞれ ",
         math(String.raw`\mathcal C_F^{\mathrm{fine}}`),
         " と ",
         math(String.raw`\mathcal C_F^{\mathrm{coarse}}`),
@@ -1670,7 +1760,7 @@ a(C_F)
         math(String.raw`\mathcal C_E^{\mathrm{fine}}`),
         " と ",
         math(String.raw`\mathcal C_E^{\mathrm{coarse}}`),
-        " とする。二段の向き付き面境界語から ",
+        " とする。同じ段別セル分割データの向き付き面境界語から ",
         ref("def_second_boundary_matrix_over_f2"),
         " により定まる二次境界写像を ",
         math(String.raw`\partial_2^{\mathrm{fine}}`),
@@ -2915,7 +3005,7 @@ p\nmid a\ \text{かつ}\ p\nmid b
   {
     id: "quotient_tower_definition_two_stage_ising_coefficient_valuation_difference_logarithmic_value",
     kind: "definition",
-    title: { text: "固定次数における二段 Ising 係数付値差の対数順序群値" },
+    title: { text: "固定次数における二段 Ising 係数付値差の素指数加法群値" },
     labels: ["def_quotient_tower_two_stage_ising_coefficient_valuation_difference_logarithmic_value"],
     habitat: "Lambda",
     verification: ["sagemath/check/two-stage-quotient-tower-ising-coefficient-valuation-difference-logarithmic-value"],
@@ -2926,13 +3016,13 @@ p\nmid a\ \text{かつ}\ p\nmid b
         math(String.raw`\mathcal P`),
         "、形式的生成元 ",
         math(String.raw`\ell_p`),
-        "、対数順序群 ",
+        "、素指数加法群 ",
         math(String.raw`\Lambda`),
         " を用いる。",
         ref("theorem_quotient_tower_two_stage_ising_coefficient_valuation_difference_finite_support"),
         " の次数 ",
         math(String.raw`m\in\mathbb N`),
-        " を固定する。この次数における二段 Ising 係数付値差の対数順序群値を",
+        " を固定する。この次数における二段 Ising 係数付値差の素指数加法群値を",
       ]),
       displayMath(String.raw`\Delta\mathcal L_{\mathcal T}(m)
 :=
@@ -2950,14 +3040,14 @@ p\nmid a\ \text{かつ}\ p\nmid b
         math(String.raw`\Lambda`),
         " に属する。台が空のときは ",
         math(String.raw`\Lambda`),
-        " の零元とする。この定義は対数順序群の順序、実対数、完全因数分解、実数、複素数、極限、積分を用いない。",
+        " の零元とする。この定義は実対数、完全因数分解、実数、複素数、極限、積分を用いない。",
       ]),
     ],
   },
   {
     id: "quotient_tower_definition_positive_rational_logarithmic_value_map",
     kind: "definition",
-    title: { text: "正有理数の素指数データを対数順序群へ送る写像" },
+    title: { text: "正有理数の素指数データを素指数加法群へ送る写像" },
     labels: ["def_quotient_tower_positive_rational_logarithmic_value_map"],
     habitat: "Lambda",
     verification: ["sagemath/check/positive-rational-logarithmic-value-map"],
@@ -2968,7 +3058,7 @@ p\nmid a\ \text{かつ}\ p\nmid b
         math(String.raw`\mathcal P`),
         "、形式的生成元 ",
         math(String.raw`\ell_p`),
-        "、対数順序群 ",
+        "、素指数加法群 ",
         math(String.raw`\Lambda`),
         " を用いる。各 ",
         math(String.raw`q\in\mathbb Q_{>0}`),
@@ -3013,7 +3103,7 @@ p\nmid a\ \text{かつ}\ p\nmid b
         math(String.raw`a_qb_q`),
         " の素数約数は有限個なので、",
         math(String.raw`\operatorname{Supp}_v(q)`),
-        " は有限集合である。正有理数の素指数データを対数順序群へ送る写像を",
+        " は有限集合である。正有理数の素指数データを素指数加法群へ送る写像を",
       ]),
       displayMath(String.raw`\begin{aligned}
 \log_{\Lambda}:\mathbb Q_{>0}
@@ -3040,7 +3130,7 @@ v_p(q)\,\ell_p
   {
     id: "quotient_tower_theorem_two_stage_ising_coefficient_ratio_logarithmic_value_compatibility",
     kind: "theorem",
-    title: { text: "二段 Ising 係数比と付値差の対数順序群値の一致" },
+    title: { text: "二段 Ising 係数比と付値差の素指数加法群値の一致" },
     labels: ["theorem_quotient_tower_two_stage_ising_coefficient_ratio_logarithmic_value_compatibility"],
     habitat: "Lambda",
     verification: ["sagemath/check/two-stage-quotient-tower-ising-coefficient-ratio-logarithmic-value-compatibility"],
@@ -3053,7 +3143,7 @@ v_p(q)\,\ell_p
         math(String.raw`\widehat\Omega_{\mathrm{fine}}(m)>0`),
         " かつ ",
         math(String.raw`\widehat\Omega_{\mathrm{coarse}}(m)>0`),
-        " を満たすと仮定する。このとき正有理係数比の対数順序群値は、同じ次数の付値差の対数順序群値に一致する。",
+        " を満たすと仮定する。このとき正有理係数比の素指数加法群値は、同じ次数の付値差の素指数加法群値に一致する。",
       ]),
       displayMath(String.raw`\log_{\Lambda}
 \left(
@@ -3134,7 +3224,7 @@ v_p
 \left(
   \frac{a}{b}
 \right)\ell_p
-\quad\bigl(\because\ \text{正有理数の対数順序群値写像の定義}\bigr).`),
+\quad\bigl(\because\ \text{正有理数の素指数加法群値写像の定義}\bigr).`),
       displayMath(String.raw`\sum_{p\in\operatorname{Supp}_v(a/b)}
 v_p
 \left(
@@ -3152,7 +3242,7 @@ v_p
 \Delta\nu_{\mathcal T}(m,p)\ell_p
 =
 \Delta\mathcal L_{\mathcal T}(m)
-\quad\bigl(\because\ \text{付値差の対数順序群値の定義}\bigr).`),
+\quad\bigl(\because\ \text{付値差の素指数加法群値の定義}\bigr).`),
       paragraph([
         math(String.raw`a=\widehat\Omega_{\mathrm{fine}}(m)`),
         " と ",

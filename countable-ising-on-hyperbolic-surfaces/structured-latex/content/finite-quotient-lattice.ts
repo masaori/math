@@ -20,12 +20,12 @@ export default defineBlocks([
         "正整数 ",
         math(String.raw`p,q\in\mathbb N_{>0}`),
         " と空でない有限集合 ",
-        math(String.raw`\Omega`),
+        math(String.raw`\Omega\in\mathcal P_{\mathrm{fin}}(\operatorname{HF}(\mathbb N))`),
         " に対し、",
-        math(String.raw`\operatorname{Sym}(\Omega)`),
-        " を ",
-        math(String.raw`\Omega`),
-        " からそれ自身への全単射全体が写像の合成でなす有限群とする。双曲三角群の有限置換商入力を、順序付き組",
+        ref("def_finite_permutation_group_notation"),
+        " の有限置換群の記法と ",
+        ref("def_finite_group_action_and_transitivity"),
+        " の群作用を用いる。双曲三角群の有限置換商入力を、順序付き組",
       ]),
       displayMath(String.raw`\mathcal Q_{p,q}:=
 \left(
@@ -94,91 +94,52 @@ g(\alpha)
     ],
   },
   {
+    id: "finite_quotient_lattice_definition_cell_role_label_set",
+    kind: "definition",
+    title: { text: "有限商セルの役割ラベル集合" },
+    labels: ["def_finite_quotient_cell_role_label_set"],
+    habitat: "finite",
+    statement: [
+      paragraph(["面、頂点、辺の役割を表す互いに異なる形式的ラベルを ", math(String.raw`\mathsf{FaceRole},\mathsf{VertexRole},\mathsf{EdgeRole}`), " とし、役割ラベル集合を"]),
+      displayMath(String.raw`\mathsf{CellRole}:=\{\mathsf{FaceRole},\mathsf{VertexRole},\mathsf{EdgeRole}\}`),
+      paragraph(["と定める。添字の略記 ", math(String.raw`R\in\{F,V,E\}`), " に対する実データのタグを写像"]),
+      displayMath(String.raw`\mathsf{role}:\{F,V,E\}\to\mathsf{CellRole},\qquad
+\mathsf{role}(F)=\mathsf{FaceRole},\quad\mathsf{role}(V)=\mathsf{VertexRole},\quad\mathsf{role}(E)=\mathsf{EdgeRole}`),
+      paragraph(["で定める。", math("R"), " はメタ添字、", math(String.raw`\mathsf{role}(R)`), " は集合の元として使える形式的ラベルであり、頂点集合や辺集合と同一視しない。"])],
+  },
+  {
+    id: "finite_quotient_lattice_definition_role_stabilizers",
+    kind: "definition",
+    title: { text: "役割安定化部分群" },
+    labels: ["def_finite_quotient_role_stabilizers"],
+    habitat: "finite",
+    statement: [
+      paragraph([ref("def_hyperbolic_triangle_permutation_quotient_input"), " の入力 ", math(String.raw`\mathcal Q_{p,q}=(\Omega,Q,r_F,r_V,r_E)`), " と ", ref("def_finite_quotient_cell_role_label_set"), " の役割メタ添字に対し、役割安定化部分群の族を"]),
+      displayMath(String.raw`(H_R)_{R\in\{F,V,E\}}:=\bigl(\langle r_F\rangle,\langle r_V\rangle,\langle r_E\rangle\bigr)`),
+      paragraph(["と定める。すなわち ", math(String.raw`H_F=\langle r_F\rangle`), "、", math(String.raw`H_V=\langle r_V\rangle`), "、", math(String.raw`H_E=\langle r_E\rangle`), " であり、いずれも ", math("Q"), " の部分群である。"])],
+  },
+  {
+    id: "finite_quotient_lattice_definition_role_coset_sets",
+    kind: "definition",
+    title: { text: "役割別の左剰余類集合" },
+    labels: ["def_finite_quotient_role_coset_sets"],
+    habitat: "finite",
+    statement: [
+      paragraph([ref("def_finite_quotient_role_stabilizers"), " の部分群族に対し、", ref("def_left_coset_set"), " の左剰余類集合の族を"]),
+      displayMath(String.raw`(Q/H_R)_{R\in\{F,V,E\}}:=\bigl(Q/H_F,Q/H_V,Q/H_E\bigr)`),
+      paragraph(["と定める。各元 ", math(String.raw`gH_R\in Q/H_R`), " は代表元 ", math("g"), " ではなく ", math("Q"), " の部分集合である。"])],
+  },
+  {
     id: "finite_quotient_lattice_definition_role_stabilizers_and_coset_cell_sets",
     kind: "definition",
-    title: { text: "役割安定化部分群と剰余類セル集合" },
+    title: { text: "剰余類セルラベル集合" },
     labels: ["def_finite_quotient_role_stabilizers_and_coset_cell_sets"],
     habitat: "finite",
     verification: ["sagemath/check/finite-quotient-coset-cell-sets"],
     statement: [
-      paragraph([
-        ref("def_hyperbolic_triangle_permutation_quotient_input"),
-        " の双曲三角群の有限置換商入力 ",
-        math(String.raw`\mathcal Q_{p,q}=(\Omega,Q,r_F,r_V,r_E)`),
-        " に対し、面、頂点、辺の役割安定化部分群をそれぞれ",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-H_F
-&:=
-\langle r_F\rangle
-\leq Q,\\
-H_V
-&:=
-\langle r_V\rangle
-\leq Q,\\
-H_E
-&:=
-\langle r_E\rangle
-\leq Q
-\end{aligned}`),
-      paragraph([
-        "と定める。ここで ",
-        math(String.raw`\langle r_R\rangle`),
-        " は ",
-        math(String.raw`r_R`),
-        " を含む最小の部分群であり、",
-        math(String.raw`R\in\{F,V,E\}`),
-        " は三つの役割を表す形式的ラベルである。各部分群に対する左剰余類集合を",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-Q/H_F
-&:=
-\left\{
-  gH_F
-  \middle|
-  g\in Q
-\right\},\\
-Q/H_V
-&:=
-\left\{
-  gH_V
-  \middle|
-  g\in Q
-\right\},\\
-Q/H_E
-&:=
-\left\{
-  gH_E
-  \middle|
-  g\in Q
-\right\}
-\end{aligned}`),
-      paragraph([
-        "と定める。さらに、互いに異なる形式的ラベル ",
-        math(String.raw`\mathtt{face},\mathtt{vertex},\mathtt{edge}`),
-        " を用いて、面、頂点、辺のセルラベル集合をそれぞれ",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\mathcal F_Q
-&:=
-\{\mathtt{face}\}\times(Q/H_F),\\
-\mathcal V_Q
-&:=
-\{\mathtt{vertex}\}\times(Q/H_V),\\
-\mathcal E_Q
-&:=
-\{\mathtt{edge}\}\times(Q/H_E)
-\end{aligned}`),
-      paragraph([
-        "と定める。各セルラベルの第二成分は剰余類そのものであり、代表元 ",
-        math(String.raw`g\in Q`),
-        " ではない。第一成分の形式的ラベルにより、三つのセルラベル集合を互いに同一視しない。また、置換台 ",
-        math(String.raw`\Omega`),
-        "、有限群 ",
-        math(String.raw`Q`),
-        "、剰余類セル集合も互いに同一視しない。この定義はセルラベルだけを与え、端点写像、面境界語、閉曲面性、正則性、向き付けを結論しない。全ての対象は有限集合であり、実数、複素数、極限、積分を用いない。",
-      ]),
-    ],
+      paragraph([ref("def_finite_quotient_role_coset_sets"), " の三つの剰余類集合と、互いに異なる形式的ラベル ", math(String.raw`\mathtt{face},\mathtt{vertex},\mathtt{edge}`), " を用いる。剰余類セルラベル集合の族を"]),
+      displayMath(String.raw`(\mathcal F_Q,\mathcal V_Q,\mathcal E_Q):=\left(\{\mathtt{face}\}\times(Q/H_F),\{\mathtt{vertex}\}\times(Q/H_V),\{\mathtt{edge}\}\times(Q/H_E)\right)`),
+      paragraph(["と定める。第一成分の役割ラベルにより三集合を同一視しない。この定義は端点写像、面境界語、閉曲面性、正則性、向き付けを結論しない。"])],
   },
   {
     id: "finite_quotient_lattice_definition_coset_cell_incidence_relation",
@@ -444,14 +405,14 @@ P_f^Q\longrightarrow\mathcal E_Q\times\mathsf{Ori}`),
 \left(\mathtt{position},a\right)
 :=
 \begin{cases}
-\left(
-  (\mathtt{edge},C_E(a)),
-  \mathsf{reverse}
-\right),
+  \left(
+    (\mathtt{edge},C_E(a)),
+  \mathsf{forward}
+  \right),
 &\eta_E(C_E(a))=a,\\[6pt]
 \left(
   (\mathtt{edge},C_E(a)),
-  \mathsf{forward}
+  \mathsf{reverse}
 \right),
 &\eta_E(C_E(a))=ar_E
 \end{cases}`),
@@ -465,17 +426,17 @@ P_f^Q\longrightarrow\mathcal E_Q\times\mathsf{Ori}`),
         " の端点選択写像を用いると、どちらの場合も位置 ",
         math(String.raw`(\mathtt{position},a)`),
         " の向き付き辺は頂点 ",
-        math(String.raw`(\mathtt{vertex},ar_EH_V)`),
-        " から頂点 ",
         math(String.raw`(\mathtt{vertex},aH_V)`),
+        " から頂点 ",
+        math(String.raw`(\mathtt{vertex},ar_EH_V)`),
         " へ進む。さらに三角群関係 ",
         math(String.raw`r_F\circ r_V\circ r_E=\operatorname{id}_{\Omega}`),
         " から ",
-        math(String.raw`r_EH_V=r_F^{-1}H_V`),
+        math(String.raw`r_EH_V=r_FH_V`),
         " が従うので、次位置 ",
         math(String.raw`s_f^Q(\mathtt{position},a)=(\mathtt{position},ar_F)`),
         " の始点は ",
-        math(String.raw`(\mathtt{vertex},ar_Fr_EH_V)=(\mathtt{vertex},aH_V)`),
+        math(String.raw`(\mathtt{vertex},ar_FH_V)=(\mathtt{vertex},ar_EH_V)`),
         " である。したがって ",
         ref("def_finite_cellulation_face_boundary_word"),
         " の端点接続条件を満たす。辺の向きは代表元選択写像に依存するが、各位置で実際に進む二頂点と辺剰余類は変わらない。閉曲面性、正則性、向き付けはこの定義から結論せず、生成後の有限セル分割述語で検査する。全ての対象と量化範囲は有限であり、実数、複素数、極限、積分を用いない。",
