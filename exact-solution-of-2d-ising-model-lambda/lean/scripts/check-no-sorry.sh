@@ -1624,6 +1624,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.crossing_elimination_by_smoothing_necSuf
   Ising2DLambda.KacWard.crossing_elimination_by_smoothing
   Ising2DLambda.KacWard.crossing_elimination_by_smoothing_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.crossingFreeSignCounterexample_necSuf
+  Ising2DLambda.KacWard.crossingFreeSignCounterexample
+  Ising2DLambda.KacWard.crossingFreeSignCounterexample_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
