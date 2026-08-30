@@ -11,19 +11,19 @@ namespace Ising2DLambda.KacWard
 theorem crossingFreeSignCounterexample :
     ([0, 1, -1, 0, -1, 1] : List ℤ).sum = 0 ∧
       ([0, 1, 0, 0, 1, 0] : List ℕ).sum % 2 = 0 ∧
-      ([0, 0, 1, 0, 0, 1] : List ℕ).sum % 2 = 0 ∧
+      ([0, 0, 0, 0, 0, 0] : List ℕ).sum % 2 = 0 ∧
       (List.replicate 15 false).all (fun value => !value) = true ∧
       ((-1 : ℤ) ^ 0) ≠ ((-1 : ℤ) ^ 1) :=
   Ising2DLambda.NecSuf.KacWard.crossingFreeSignCounterexample_necSuf
     [0, 1, -1, 0, -1, 1]
     [0, 1, 0, 0, 1, 0]
-    [0, 0, 1, 0, 0, 1]
+    [0, 0, 0, 0, 0, 0]
     (List.replicate 15 false) rfl rfl rfl rfl
 
 theorem crossingFreeSignCounterexample_from_necSuf :
     ([0, 1, -1, 0, -1, 1] : List ℤ).sum = 0 ∧
       ([0, 1, 0, 0, 1, 0] : List ℕ).sum % 2 = 0 ∧
-      ([0, 0, 1, 0, 0, 1] : List ℕ).sum % 2 = 0 ∧
+      ([0, 0, 0, 0, 0, 0] : List ℕ).sum % 2 = 0 ∧
       (List.replicate 15 false).all (fun value => !value) = true ∧
       ((-1 : ℤ) ^ 0) ≠ ((-1 : ℤ) ^ 1) :=
   crossingFreeSignCounterexample

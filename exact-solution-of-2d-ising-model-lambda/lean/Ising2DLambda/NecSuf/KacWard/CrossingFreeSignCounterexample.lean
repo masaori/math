@@ -12,7 +12,7 @@ theorem crossingFreeSignCounterexample_necSuf
     (turns : List ℤ) (horizontal vertical : List ℕ) (crossings : List Bool)
     (ht : turns = [0, 1, -1, 0, -1, 1])
     (hh : horizontal = [0, 1, 0, 0, 1, 0])
-    (hv : vertical = [0, 0, 1, 0, 0, 1])
+    (hv : vertical = [0, 0, 0, 0, 0, 0])
     (hc : crossings = List.replicate 15 false) :
     turns.sum = 0 ∧
       horizontal.sum % 2 = 0 ∧

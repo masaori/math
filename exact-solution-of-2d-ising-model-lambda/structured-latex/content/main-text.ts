@@ -52692,8 +52692,10 @@ t_{\circ}(\gamma_{\mathrm c})
 &&\bigl(\because\ 0/4=0\text{ in }\mathbb Z\bigr).
 \end{aligned}`),
                 paragraph([
-                  "横の切断線を横切るのは二番目と五番目、縦の切断線を横切るのは三番目と六番目の辺だけなので、",
-                  ref("def_edge_sequence_seam_parities"), " より二つの偶奇はいずれも ", math(String.raw`0`), " である。従って",
+                  "横の切断線を横切るのは二番目と五番目の辺だけであり（", math(String.raw`s(j)=1=L-1`),
+                  " の横辺）、縦の切断線を横切る辺は無い（二つの縦辺はいずれも ", math(String.raw`s(i)=0\ne L-1`),
+                  "）。よって ", ref("def_edge_sequence_seam_parities"),
+                  " より二つの偶奇はいずれも ", math(String.raw`0`), " である。従って",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 \left(\prod_{k=1}^{5}\rho(\vec e_k,\vec e_{k+1})\right)\rho(\vec e_6,\vec e_1)

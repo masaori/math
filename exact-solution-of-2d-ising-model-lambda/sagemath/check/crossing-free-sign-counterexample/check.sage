@@ -57,12 +57,18 @@ turns = [turn(walk[k], walk[(k + 1) % len(walk)]) for k in range(len(walk))]
 cyclic_turning = ZZ(sum(turns))
 assert cyclic_turning % 4 == 0
 rotation_number = cyclic_turning // 4
-horizontal_parity = ZZ(sum(1 for kind, _, j, _ in walk if kind == "h" and j == L - 1) % 2)
-vertical_parity = ZZ(sum(1 for kind, i, _, _ in walk if kind == "v" and i == L - 1) % 2)
+horizontal_indicators = [
+    ZZ(1) if kind == "h" and j == L - 1 else ZZ(0) for kind, _, j, _ in walk]
+vertical_indicators = [
+    ZZ(1) if kind == "v" and i == L - 1 else ZZ(0) for kind, i, _, _ in walk]
+horizontal_parity = ZZ(sum(horizontal_indicators) % 2)
+vertical_parity = ZZ(sum(vertical_indicators) % 2)
 
 assert crossing_number == 0
 assert turns == [0, 1, -1, 0, -1, 1]
 assert rotation_number == 0
+assert horizontal_indicators == [0, 1, 0, 0, 1, 0]
+assert vertical_indicators == [0, 0, 0, 0, 0, 0]
 assert (horizontal_parity, vertical_parity) == (0, 0)
 phase_sign = ZZ(-1) ** rotation_number
 simple_loop_candidate = ZZ(-1) ** (
