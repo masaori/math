@@ -2168,7 +2168,7 @@ h(g_1g_2)
       ]),
       paragraph([
         math(String.raw`M`),
-        " サイトの Pauli 群を",
+        " 因子の Pauli 群を",
       ]),
       displayMath(
         String.raw`\mathcal{P}_M := \left\{\,i^{k}\,\sigma^{a_1}\boxtimes\sigma^{a_2}\boxtimes\cdots\boxtimes\sigma^{a_M}
@@ -2183,7 +2183,7 @@ h(g_1g_2)
         math(String.raw`\sigma^a\sigma^b`),
         " は ",
         math(String.raw`i^k\sigma^c`),
-        " の形になり、クロネッカー積どうしの積は各サイトごとの ",
+        " の形になり、クロネッカー積どうしの積は各因子ごとの ",
         math(String.raw`2`),
         " 次の行列の積になる：",
         ref("kronecker_product_rule"),

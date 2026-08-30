@@ -17,12 +17,6 @@ export default defineBlocks([
     labels: ["pauli_matrix_products"],
     statement: [
       paragraph([
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`\sigma_k^x,\sigma_k^y,\sigma_k^z`),
-        " をクロネッカー積（",
-        ref("def_kronecker"),
-        "）で書いたときの各因子に現れる ",
         math(String.raw`2`),
         " 次の複素行列を",
       ]),
@@ -200,7 +194,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
     id: "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
     kind: "claim",
     origin: { path: "structured-latex/content/006_Z_Y_anticommutation.ts", ordinal: 2 },
-    title: { text: "1 サイトだけ反可換ならクロネッカー積は反交換する" },
+    title: { text: "1 因子だけ反可換ならクロネッカー積は反交換する" },
     labels: ["tensor_anticommutation_from_single_site"],
     statement: [
       paragraph([
@@ -219,10 +213,10 @@ Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
         " が存在して",
       ]),
       list([
-        [math(String.raw`y_j x_j = -\,(x_j y_j)`), "（第 ", math(String.raw`j`), " サイトでは反可換）"],
+        [math(String.raw`y_j x_j = -\,(x_j y_j)`), "（第 ", math(String.raw`j`), " 因子では反可換）"],
         [
           math(String.raw`i \in \{1,\dots,M\},\ i \neq j \implies y_i x_i = x_i y_i`),
-          "（他のサイトでは可換）",
+          "（他の因子では可換）",
         ],
       ]),
       paragraph(["が成り立つならば、"]),
@@ -232,7 +226,7 @@ Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
     proof: [
       paragraph([
         math(String.raw`2^M`),
-        " 次の複素行列としての積は、クロネッカー積で書かれた行列どうしでは各サイトごとの ",
+        " 次の複素行列としての積は、クロネッカー積で書かれた行列どうしでは各因子ごとの ",
         math(String.raw`2`),
         " 次の行列の積になる。すなわち ",
         math(String.raw`A_1,\dots,A_M,B_1,\dots,B_M \in \mathrm{Mat}(2,\mathbb{C})`),
@@ -316,7 +310,7 @@ YX
       status: "converted",
       notes: [
         "原文（Typst）に対応ブロックは無い。原文が [Z_μ,Z_ν]_+ の μ<ν の場合に行っている" +
-          "「食い違うのは 1 サイトだけで、そこの符号が全体の符号になる」という計算を、" +
+          "「食い違うのは 1 因子だけで、そこの符号が全体の符号になる」という計算を、" +
           "3 式すべてで共通に使えるよう主張として切り出した（lean/Ising2D/Part006 の " +
           "siteProd_anticomm_of_single_site に対応する）。",
       ],
