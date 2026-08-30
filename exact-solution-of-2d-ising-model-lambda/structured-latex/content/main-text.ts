@@ -51955,6 +51955,121 @@ B:=I_m\setminus A=\{r\in I_m:\ r\le k\}\cup\{r\in I_m:\ l<r\}`),
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_closed_walk_split",
+        labels: [],
+        title: { text: "平滑化後の二つの閉歩道" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_smoothing_splits_closed_walk",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_smoothed_split_edge_sequences",
+                kind: "definition",
+                title: { text: "平滑化で分かれる二本の辺列" },
+                labels: ["def_smoothed_split_edge_sequences"],
+                habitat: "N",
+                statement: [
+                  paragraph([
+                    ref("def_smoothed_successor_map"), " と同じ閉じた非後退辺列 ",
+                    math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " と横断する添字 ",
+                    math(String.raw`k<l`), " に対し、二本の辺列を",
+                  ]),
+                  displayMath(String.raw`\gamma_A:=(\vec e_{k+1},\vec e_{k+2},\ldots,\vec e_l),`),
+                  displayMath(String.raw`\gamma_B:=
+\begin{cases}
+(\vec e_{l+1},\ldots,\vec e_m,\vec e_1,\ldots,\vec e_k),&l<m,\\
+(\vec e_1,\ldots,\vec e_k),&l=m
+\end{cases}`),
+                  paragraph([
+                    "と定める。", math(String.raw`k<l`), " により ", math(String.raw`\gamma_A`),
+                    " は空でなく、", math(String.raw`k\in I_m`), " により ",
+                    math(String.raw`\gamma_B`), " も空でない。二本の辺の添字はそれぞれ ",
+                    ref("def_smoothing_index_blocks"), " の ", math(String.raw`A`), " と ", math(String.raw`B`),
+                    " を一度ずつ尽くす。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_smoothing_splits_closed_walk",
+              kind: "claim",
+              title: { text: "横断の平滑化は二本の閉じた非後退辺列に分ける" },
+              labels: ["claim_smoothing_splits_closed_walk"],
+              habitat: "N",
+              verification: ["sagemath/check/smoothing-straight-visit-count"],
+              lean: [
+                "Ising2DLambda.KacWard.smoothing_split_closed_connections",
+                "Ising2DLambda.NecSuf.KacWard.smoothing_split_closed_connections_necSuf",
+                "Ising2DLambda.KacWard.smoothing_split_closed_connections_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  ref("def_smoothed_split_edge_sequences"), " の二本の辺列 ",
+                  math(String.raw`\gamma_A,\gamma_B`), " は、どちらも閉じた非後退辺列である。",
+                  "それぞれの終辺から始辺への接続は、平滑化で交換した二つの接続である。",
+                ]),
+              ],
+              proof: [
+                paragraph([math(String.raw`\gamma_A`), " を考える。", math(String.raw`k<r<l`), " ならば"]),
+                displayMath(String.raw`\begin{aligned}
+\vec f_r
+&=\vec e_{\nu(r)}
+&&\bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)\\
+&=\vec e_{\sigma(r)}
+&&\bigl(\because\ r\ne k,l\text{ と }\blkref{def_smoothed_successor_map}\bigr)\\
+&=\vec e_{r+1}
+&&\bigl(\because\ r<l\le m\text{ と }\blkref{def_closed_walk_passes}\bigr).
+\end{aligned}`),
+                paragraph(["従って内部の連続は元の非後退接続である。終辺では"]),
+                displayMath(String.raw`\begin{aligned}
+\vec f_l
+&=\vec e_{\nu(l)}
+&&\bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)\\
+&=\vec e_{\sigma(k)}
+&&\bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)\\
+&=\vec e_{k+1}
+&&\bigl(\because\ k<l\le m\text{ と }\blkref{def_closed_walk_passes}\bigr),
+\end{aligned}`),
+                paragraph(["なので、", math(String.raw`\gamma_A`), " は閉じる。"]),
+                paragraph(["次に ", math(String.raw`\gamma_B`), " を考える。", math(String.raw`l<r<m`), " または ", math(String.raw`1\le r<k`), " なら、上と同じ三段の鎖で ", math(String.raw`\vec f_r=\vec e_{r+1}`), " である。", math(String.raw`l<m`), " のときはさらに"]),
+                displayMath(String.raw`\begin{aligned}
+\vec f_m
+&=\vec e_{\nu(m)}
+&&\bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)\\
+&=\vec e_{\sigma(m)}
+&&\bigl(\because\ m\ne k,l\text{ と }\blkref{def_smoothed_successor_map}\bigr)\\
+&=\vec e_1
+&&\bigl(\because\ \blkref{def_closed_walk_passes}\bigr).
+\end{aligned}`),
+                paragraph(["最後に、", math(String.raw`\gamma_B`), " の終辺の出辺は"]),
+                displayMath(String.raw`\begin{aligned}
+\vec f_k
+&=\vec e_{\nu(k)}
+&&\bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)\\
+&=\vec e_{\sigma(l)}
+&&\bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)\\
+&=\begin{cases}\vec e_{l+1},&l<m,\\\vec e_1,&l=m\end{cases}
+&&\bigl(\because\ \blkref{def_closed_walk_passes}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "なので、", math(String.raw`\gamma_B`), " も閉じる。ここで現れたすべての接続 ",
+                  math(String.raw`\vec e_r\to\vec f_r`), " は非後退接続である（",
+                  ref("def_smoothed_cyclic_total_turning"), "）。よって二本はいずれも閉じた非後退辺列である。",
+                  "有限な辺列と自然数添字だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

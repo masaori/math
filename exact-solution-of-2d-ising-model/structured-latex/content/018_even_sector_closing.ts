@@ -1328,9 +1328,12 @@ i\,H_1^{(+)}
 &= \left(\sum_{s(1)\in\{-1,1\}}1\right)
    \prod_{m=1}^{M-1}\left(\sum_{t_m\in\{-1,1\}}e^{Kt_m}\right)
    \quad (\because \text{有限個の因子の積の展開（各 } t_m \text{ は独立に走る）}) \\
-&= 2\prod_{m=1}^{M-1}\left(e^{K}+e^{-K}\right) \\
+&= 2\prod_{m=1}^{M-1}\left(e^{K}+e^{-K}\right)
+   \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
+&= 2\prod_{m=1}^{M-1}\left(2\cosh K\right)
+   \quad \left(\because \cosh K = \frac{e^{K}+e^{-K}}{2}\right) \\
 &= 2\left(2\cosh K\right)^{M-1}
-   \quad \left(\because \cosh K = \frac{e^{K}+e^{-K}}{2}\right)
+   \quad (\because \text{同じ因子 }2\cosh K\text{ の }M-1\text{ 個の積})
 \end{aligned}`,
       ),
       paragraph([
@@ -1339,10 +1342,17 @@ i\,H_1^{(+)}
         " を繰り返し使うと",
       ]),
       displayMath(
-        String.raw`\prod_{m=1}^{M-1}t_m
-= \prod_{m=1}^{M-1}s(m)s(m+1)
-= s(1)\left(\prod_{m=2}^{M-1}s(m)s(m)\right)s(M)
-= s(1)s(M)`,
+        String.raw`\begin{aligned}
+\prod_{m=1}^{M-1}t_m
+&= \prod_{m=1}^{M-1}s(m)s(m+1)
+&&\bigl(\because\ t_m:=s(m)s(m+1)\bigr)\\
+&= s(1)\left(\prod_{m=2}^{M-1}s(m)s(m)\right)s(M)
+&&\bigl(\because\ \mathbb R\text{ の乗法の可換性と結合性}\bigr)\\
+&= s(1)\left(\prod_{m=2}^{M-1}1\right)s(M)
+&&\bigl(\because\ s(m)s(m)=1\text{ を各 }m\text{ へ同時適用}\bigr)\\
+&= s(1)s(M)
+&&\bigl(\because\ \text{有限積の単位元}\bigr)
+\end{aligned}`,
       ),
       paragraph([
         "である（隣接する因子が対になって ",
@@ -1358,9 +1368,12 @@ i\,H_1^{(+)}
 &= \left(\sum_{s(1)\in\{-1,1\}}1\right)
    \prod_{m=1}^{M-1}\left(\sum_{t_m\in\{-1,1\}}t_m\,e^{Kt_m}\right)
    \quad (\because \text{有限個の因子の積の展開}) \\
-&= 2\prod_{m=1}^{M-1}\left(e^{K}-e^{-K}\right) \\
+&= 2\prod_{m=1}^{M-1}\left(e^{K}-e^{-K}\right)
+   \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
+&= 2\prod_{m=1}^{M-1}\left(2\sinh K\right)
+   \quad \left(\because \sinh K = \frac{e^{K}-e^{-K}}{2}\right) \\
 &= 2\left(2\sinh K\right)^{M-1}
-   \quad \left(\because \sinh K = \frac{e^{K}-e^{-K}}{2}\right)
+   \quad (\because \text{同じ因子 }2\sinh K\text{ の }M-1\text{ 個の積})
 \end{aligned}`,
       ),
       paragraph([

@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 18 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 19 回目の tick 時点）
+
+**横断の平滑化が元の閉歩道を二本の閉じた非後退辺列に分けることを四層で証明した。** 二つの添字区間を $\gamma_A=(\vec e_{k+1},\ldots,\vec e_l)$ と $\gamma_B=(\vec e_{l+1},\ldots,\vec e_m,\vec e_1,\ldots,\vec e_k)$（$l=m$ では前半を除く）と並べた（`def_smoothed_split_edge_sequences`）。内部では $\vec f_r=\vec e_{r+1}$、閉じる接続は $\vec f_l=\vec e_{k+1}$ と $\vec f_k=\vec e_{l+1}$（$l=m$ では $\vec e_1$）であり、すべて平滑化後の非後退接続なので二本は閉歩道になる（`claim_smoothing_splits_closed_walk`）。SageMath は全横断対 3,584 対で検査し、Lean 必要十分版には巡回後続の式・二点の行き先交換・各接続の非後退性だけが残った。次は二本の回転数・横断数・巻き付き偶奇と平滑化前の更新式を結ぶ帰納に進む。
+
+前進前レビュでは、前 tick の添字区間不変性（コミット `2342dd3f`）を四層で照合し、修正対象が無いことを確認した。定義二件と主張は今回の閉歩道分解が直接引くため「何も言っていない主張」ではない。
+
+並列の式変形統一は、姉妹側の偶数セクター終結章の「1 次元開鎖のスピン和」で、スピン積の伸縮の一行三等号を四段の鎖へ開き、二つの有限積の計算に行末根拠を補った。次は同じ章の後続の証明を見る。
+
+## ひとつ前の到達点（2026-08-30 の 18 回目の tick 時点）
 
 **横断の平滑化後の添字後続写像が二つの添字区間を渡らないことを四層で証明した。** 平滑化後の添字後続写像 $\nu:I_m\to I_m$（`def_smoothed_successor_map`。巡回後続写像 $\sigma$ の二点交換で、$\vec f_r=\vec e_{\nu(r)}$）と、横断する添字 $k<l$ が分ける区間 $A=\{r\in I_m:k<r\le l\}$ と補集合 $B$（`def_smoothing_index_blocks`）を定義し、$\nu(r)\in A\iff r\in A$（`claim_smoothing_interval_invariance`）を、A の内部・$r=l$・B の内部・$r=k$ の四つの閉包の場合分けで示した。これは平滑化が閉歩道を二つの閉じた後続構造へ分けることの添字レベルの基盤である。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対の全添字で帰属の同値を検査した。Lean は具体版 `KacWard/SmoothingIndexInterval.lean` と、二点交換先の帰属と残りの閉包だけを仮定する必要十分版 `swap_redirect_invariant_necSuf` を通した（順序・有限性・全単射性は不要と分かった）。次は各区間上の後続構造を閉歩道として読み替え、回転数・横断数・巻き付き偶奇の更新式を結ぶ帰納でトーラス上の回転位相の符号表示へ進む。
 
