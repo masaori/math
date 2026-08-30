@@ -120,16 +120,8 @@ export default defineBlocks([
         " に現れる ",
         math(String.raw`\exp`),
         " は、",
-        ref("def_end_iso"),
-        " の同型 ",
-        math(String.raw`\mathbf{end}`),
-        " による同一視 ",
-        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \cong \mathrm{End}(\mathcal{F})`),
-        " のもとでの ",
         ref("def_exp"),
-        " の ",
-        math(String.raw`\exp`),
-        " である。",
+        " で成分級数として定義した行列の指数関数である。",
       ]),
     ],
     conversion: {
@@ -1132,10 +1124,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
       ),
       paragraph([
         "とおく（",
-        ref("end_is_algebra_isomorphism"),
-        " より、これは単位的 ",
-        math(String.raw`\mathbb{C}`),
-        "-代数の同型である）。",
+        "この写像が積と単位行列を保つ全単射であることは、直後の主張で成分計算から示す）。",
         math(String.raw`A \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " の ",
         math(String.raw`\mathcal{F}`),
@@ -1146,47 +1135,6 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         "）は、以後つねに ",
         math(String.raw`(\mathbf{end}(A))(f)`),
         " を意味する。",
-      ]),
-      paragraph([
-        math(String.raw`\mathcal{F}`),
-        " は基底 ",
-        math(String.raw`(f_I)_{I\in\mathcal{I}}`),
-        " による座標表示で ",
-        math(String.raw`\mathbb{C}^{2^M}`),
-        " と同一視され、",
-        ref("def_matrix_norm"),
-        " のノルムにより有限次元 ",
-        math(String.raw`\mathbb{C}`),
-        "-ノルム線型空間となる。この同一視のもとで ",
-        math(String.raw`\mathrm{End}(\mathcal{F})`),
-        " は ",
-        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
-        " と同一視され、",
-        ref("def_exp"),
-        " の ",
-        math(String.raw`\exp : \mathrm{End}(\mathcal{F}) \to \mathrm{End}(\mathcal{F})`),
-        " が定まる。そこで ",
-        math(String.raw`A \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        " に対する ",
-        math(String.raw`\exp(A)`),
-        " を、この同型による移送で",
-      ]),
-      displayMath(
-        String.raw`\exp(A) := \mathbf{end}^{-1}\!\left(\exp(\mathbf{end}(A))\right)
-\in \mathrm{Mat}(2^M,\mathbb{C})`,
-      ),
-      paragraph([
-        "と定める。定義から直ちに",
-      ]),
-      displayMath(
-        String.raw`\mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A)) \qquad (A \in \mathrm{Mat}(2^M,\mathbb{C}))`,
-      ),
-      paragraph([
-        "が成り立つ（",
-        math(String.raw`\mathbf{end}`),
-        " は単位的代数の同型なので、部分和も ",
-        math(String.raw`\mathbf{end}\!\left(\sum_{n=0}^{N}\frac{1}{n!}A^n\right) = \sum_{n=0}^{N}\frac{1}{n!}(\mathbf{end}(A))^n`),
-        " と対応する）。",
       ]),
     ],
     conversion: {
@@ -1535,6 +1483,25 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
     },
   },
   {
+    id: "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 5 },
+    title: { text: "行列表示と線型写像表示は指数関数を保つ" },
+    labels: ["end_preserves_matrix_exponential"],
+    statement: [
+      paragraph([
+        ref("def_end_iso"), " の写像について、", ref("def_exp"), " の行列級数は",
+      ]),
+      displayMath(String.raw`\mathbf{end}(\exp(A))=\exp(\mathbf{end}(A))\qquad(A\in\mathrm{Mat}(2^M,\mathbb{C}))`),
+      paragraph(["を満たす。"])],
+    proof: [
+      paragraph([ref("end_is_algebra_isomorphism"), " の乗法性と単位元保存より、各部分和について"]),
+      displayMath(String.raw`\mathbf{end}\!\left(\sum_{n=0}^{N}\frac{A^n}{n!}\right)=\sum_{n=0}^{N}\frac{\mathbf{end}(A)^n}{n!}`),
+      paragraph(["である。", ref("def_exp"), " の成分ごとの極限を取ると、両辺の各成分が一致するため結論を得る。"]),
+    ],
+    conversion: { status: "added", notes: ["代数同型の有限積に関する主張と、級数極限を使う指数関数保存を依存境界で分離した。"] },
+  },
+  {
     id: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/003_definition_epsilonの固有空間.typ", ordinal: 4 },
@@ -1570,8 +1537,24 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         math(String.raw`\mathbb{C}`),
         "-部分線型空間である。",
       ]),
-      paragraph([
-        "なお ",
+    ],
+    conversion: {
+      status: "converted",
+      notes: ["抽象テンソル積を使わず、具体的な数ベクトル空間と行列作用で固有空間だけを定義した。"],
+    },
+  },
+  {
+    id: "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { tex: String.raw`\varepsilon\text{ の二乗と固有値}` },
+    labels: ["epsilon_square_and_eigenvalues"],
+    statement: [paragraph([
+        ref("def_eigenspaces_of_epsilon"), " の作用は ",
+        math(String.raw`\varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        " を満たし、固有値は ", math(String.raw`\pm1`), " に限る。",
+      ])],
+    proof: [paragraph([
         ref("def_transfer_matrix_symbols"),
         " の ",
         math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
@@ -1617,15 +1600,8 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
       ]),
     ],
     conversion: {
-      status: "converted",
-      notes: [
-        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
-        "原文は εf の意味（ε は Mat(2,C)^{⊗M} の元であって F の自己準同型ではない）を書いていないため、" +
-          "<def_end_iso> の end による作用であることを明示した。あわせて、原文が「ε² = 1 より固有値は ±1」と" +
-          "根拠なしに述べていた部分に、ε² = I の因子ごとの計算と固有値が ±1 に限る理由を補った。",
-        "本ブロックは原文では end の定義より前に置かれていたが、εf の意味が end を要するため、" +
-          "<def_end_iso> の後ろへ移した（内容は変えていない）。",
-      ],
+      status: "added",
+      notes: ["固有空間の定義と、クロネッカー積を使う固有値計算を依存境界で分離した。"],
     },
   },
   {
@@ -1662,11 +1638,9 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         math(String.raw`\mathcal{F}`),
         " への写像として一致する、という意味である（右辺の ",
         math(String.raw`\exp(\cdots)`),
-        " は ",
-        ref("def_V1_pm"),
-        " の ",
+        " をこの証明内で ",
         math(String.raw`V_1^{(\pm)}`),
-        " に他ならない）。",
+        " と略記する）。",
       ]),
     ],
     proof: [
@@ -1675,9 +1649,7 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         ref("V1_V2_in_Z_Y_epsilon"),
         " より ",
         math(String.raw`V_1 = \exp(G)`),
-        "、また ",
-        ref("def_V1_pm"),
-        " より ",
+        "、また上の略記より ",
         math(String.raw`V_1^{(\pm)} = \exp(G^{(\pm)})`),
         "。ここで",
       ]),

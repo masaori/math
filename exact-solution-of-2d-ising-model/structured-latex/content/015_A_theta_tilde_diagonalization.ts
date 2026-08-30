@@ -190,13 +190,7 @@ export default defineBlocks([
         " を含む）について**",
       ]),
       displayMath(String.raw`\gamma_2(\tilde\theta_\mu) \neq 0_{\mathbb{C}}`),
-      paragraph([
-        "が成り立つ。したがって ",
-        ref("relation_of_gamma_2_theta_tilde"),
-        " より ",
-        math(String.raw`\gamma_2(-\tilde\theta_\mu) \neq 0`),
-        " でもある。",
-      ]),
+      paragraph(["が成り立つ。負の運動量側の非零性は、後で共役関係から導く。"]),
       paragraph([
         "これは整数運動量との決定的な違いである。",
         ref("gamma_2_theta_is_0"),

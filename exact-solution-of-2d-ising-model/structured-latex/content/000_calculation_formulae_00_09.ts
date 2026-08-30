@@ -10,12 +10,97 @@ export default defineBlocks([
     labels: [],
   },
   {
+    id: "calc_formulae_definition_cosh_sinh",
+    kind: "definition",
+    origin: { path: "structured-latex/content/000_calculation_formulae_00_09.ts", ordinal: 1 },
+    title: { text: "双曲線余弦と双曲線正弦" },
+    labels: ["def_cosh_sinh"],
+    statement: [
+      paragraph([math(String.raw`x\in\mathbb R`), " に対して、実数値の指数関数を使い"]),
+      displayMath(String.raw`\cosh x:=\frac{\exp(x)+\exp(-x)}2,\qquad \sinh x:=\frac{\exp(x)-\exp(-x)}2`),
+      paragraph(["と定める。"]),
+    ],
+    conversion: { status: "added", notes: ["双曲線関数の定義と、その性質を依存境界で分離した。"] },
+  },
+  {
+    id: "calculation_formulae_definition_set_and_algebra_notation",
+    kind: "definition",
+    origin: { path: "exact-solution-of-2d-ising-model/main.md", ordinal: 1 },
+    title: { text: "集合と代数構造の記号" },
+    labels: ["set_and_algebra_notation"],
+    statement: [
+      paragraph([
+        "自然数・整数・実数の集合そのものはこの論文では構成せず、既知の集合としてそれぞれ ",
+        math(String.raw`\mathbf{N},\ \mathbf{Z},\ \mathbf{R}`),
+        " と書く。演算を持たない集合の記号と、演算を持つ代数構造の記号を区別する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathbb{N}&:=\left(\mathbf{N},+_{\mathbb{N}},\cdot_{\mathbb{N}},0_{\mathbb{N}},1_{\mathbb{N}},\le_{\mathbb{N}}\right),\\
+\mathbb{Z}&:=\left(\mathbf{Z},+_{\mathbb{Z}},\cdot_{\mathbb{Z}},0_{\mathbb{Z}},1_{\mathbb{Z}},\le_{\mathbb{Z}}\right),\\
+\mathbb{R}&:=\left(\mathbf{R},+_{\mathbb{R}},\cdot_{\mathbb{R}},0_{\mathbb{R}},1_{\mathbb{R}},\le_{\mathbb{R}}\right).
+\end{aligned}`),
+      paragraph(["各演算と順序の所属は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
++_{\mathbb{N}},\cdot_{\mathbb{N}}&:\mathbf{N}\times\mathbf{N}\to\mathbf{N},\\
++_{\mathbb{Z}},\cdot_{\mathbb{Z}}&:\mathbf{Z}\times\mathbf{Z}\to\mathbf{Z},\\
++_{\mathbb{R}},\cdot_{\mathbb{R}}&:\mathbf{R}\times\mathbf{R}\to\mathbf{R},\\
+\le_{\mathbb{N}}&\subset\mathbf{N}\times\mathbf{N},\qquad
+\le_{\mathbb{Z}}\subset\mathbf{Z}\times\mathbf{Z},\qquad
+\le_{\mathbb{R}}\subset\mathbf{R}\times\mathbf{R}.
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mathbb{N}`),
+        " は自然数の半環、",
+        math(String.raw`\mathbb{Z}`),
+        " は整数環、",
+        math(String.raw`\mathbb{R}`),
+        " は順序体を表す。たとえば ",
+        math(String.raw`n\in\mathbb{Z}`),
+        " は厳密には ",
+        math(String.raw`n\in\mathbf{Z}`),
+        " の略記であり、計算式中の ",
+        math(String.raw`a+b`),
+        " は所属が ",
+        math(String.raw`a,b\in\mathbf{Z}`),
+        " なら ",
+        math(String.raw`a+_{\mathbb{Z}}b`),
+        "、所属が ",
+        math(String.raw`a,b\in\mathbf{R}`),
+        " なら ",
+        math(String.raw`a+_{\mathbb{R}}b`),
+        " の略記とする。積、零元、単位元についても同様に、所属する代数構造の添字を省略した略記である。",
+      ]),
+      paragraph([
+        math(String.raw`\mathbb{Z}_{\ge k}`),
+        "、",
+        math(String.raw`\mathbb{R}_{\ge 0}`),
+        " などは代数構造そのものではなく、その台集合から順序条件で切り出した部分集合の略記とする。たとえば",
+      ]),
+      displayMath(String.raw`\mathbb{Z}_{\ge k}:=\{n\in\mathbf{Z}\mid k\le_{\mathbb{Z}}n\},\qquad
+\mathbb{R}_{\ge 0}:=\{x\in\mathbf{R}\mid 0_{\mathbb{R}}\le_{\mathbb{R}}x\}.`),
+      paragraph([
+        "複素数の台集合と演算を持つ構造 ",
+        math(String.raw`\mathbb{C}`),
+        " はここでは定義せず、後の ",
+        ref("definition_of_cc"),
+        " で ",
+        math(String.raw`\mathbf{R}^{2}`),
+        " に加法と乗法を入れて定義する。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: ["main.md 冒頭の記号方針を、集合と代数構造を混同しない本文定義として追加した。複素数は既存定義と重複させていない。"],
+    },
+  },
+  {
     id: "calc_formulae_000_cosh_sinh_product",
     kind: "theorem",
     origin: { path: "_old/typst/parts/000_計算公式/000_theorem_cosh_sinhの掛け算.typ", ordinal: 1 },
     title: { tex: "\\cosh,\\sinh\\text{の掛け算}" },
     labels: [],
     statement: [
+      paragraph([ref("def_cosh_sinh"), " の記号を用いる。"]),
       displayMath("\\forall a,b\\in\\mathbb{R}"),
       displayMath(String.raw`\begin{aligned}
 \cosh(a)\sinh(b) &= \frac{1}{2}\left(\sinh(a+b)-\sinh(a-b)\right) \\
@@ -99,16 +184,8 @@ export default defineBlocks([
     labels: ["cosh_sinh_basic_properties"],
     statement: [
       paragraph([
-        math(String.raw`x \in \mathbb{R}`),
-        " について、実数値の指数関数 ",
-        math(String.raw`\exp : \mathbb{R} \to \mathbb{R}_{>0}`),
-        " を用いて",
+        ref("def_cosh_sinh"), " の ", math(String.raw`x\in\mathbb R`), " における値について、次が成り立つ。",
       ]),
-      displayMath(
-        String.raw`\cosh x := \frac{\exp(x) + \exp(-x)}{2} \in \mathbb{R}, \qquad
-\sinh x := \frac{\exp(x) - \exp(-x)}{2} \in \mathbb{R}`,
-      ),
-      paragraph(["と定める（", math(String.raw`\exp(x) := e^x`), " とも書く）。このとき次が成り立つ。"]),
       list([
         [
           "(1) ",
@@ -880,11 +957,12 @@ T_B(\alpha A)
     title: { tex: "\\mathbb{C}\\text{の定義}" },
     labels: ["definition_of_cc"],
     statement: [
-      paragraph([math("\\mathbb{C}:=\\mathbb{R}^2"), " に、以下の演算を入れたもの。"]),
+      paragraph([ref("set_and_algebra_notation"), " の実数の台集合と演算を使う。"]),
+      paragraph([math(String.raw`\mathbf{C}:=\mathbf{R}^2`), " を複素数の台集合とし、その上に以下の演算を入れた構造を ", math(String.raw`\mathbb C`), " と書く。"]),
       paragraph(["和（成分ごと）"]),
-      displayMath("(a,b)+(c,d):=(a+c,\\; b+d)"),
+      displayMath(String.raw`+_{\mathbb C}:\mathbf C\times\mathbf C\to\mathbf C,\qquad(a,b)+_{\mathbb C}(c,d):=(a+_{\mathbb R}c,\ b+_{\mathbb R}d)`),
       paragraph(["積"]),
-      displayMath("(a,b)\\cdot(c,d):=(ac-bd,ad+bc)"),
+      displayMath(String.raw`\cdot_{\mathbb C}:\mathbf C\times\mathbf C\to\mathbf C,\qquad(a,b)\cdot_{\mathbb C}(c,d):=(a\cdot_{\mathbb R}c-b\cdot_{\mathbb R}d,\ a\cdot_{\mathbb R}d+b\cdot_{\mathbb R}c)`),
       paragraph([
         "本論文で ",
         math("\\mathbb{C}"),

@@ -1,30 +1,41 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const projectDir = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
-const inventoryPath = join(projectDir, "docs", "organization", "flat-inventory.json");
-const outputPath = resolve(process.argv[2] ?? join(projectDir, "build", "paper-organization", "index.html"));
-const inventory = JSON.parse(readFileSync(inventoryPath, "utf8"));
-const pendingSplitCount = inventory.entries.filter((entry: any) => entry.blockSplitRequiredBeforeFinalOrdering).length;
+const inventory = JSON.parse(readFileSync(join(projectDir, "docs", "organization", "flat-inventory.json"), "utf8"));
+const outputPath = resolve(process.argv[2] ?? join(projectDir, "structured-latex", "build", "paper-organization", "index.html"));
+const require = createRequire(import.meta.url);
+const katexDist = dirname(require.resolve("katex/dist/katex.min.css"));
+const katex = require("katex");
 const escape = (value: unknown) => String(value ?? "名称未設定")
   .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 const entryById = new Map(inventory.entries.map((entry: any) => [entry.id, entry]));
-const chapters = inventory.chapterStructures.map((chapter: any) => {
-  const units = chapter.topologicalOrder.map((unit: any) => {
-    const items = unit.entryIds.map((id: string) => {
-      const entry: any = entryById.get(id);
-      const pending = entry.blockSplitRequiredBeforeFinalOrdering ? " · ブロック分割または案内参照の判定が未確定" : "";
-      return `<li><span class="kind">${escape(entry.kind)}</span> ${escape(entry.title)}<small>${escape(entry.sourceFile)} · 直接の前提 ${entry.dependsOnEntryIds.length}件${pending}</small></li>`;
-    }).join("");
-    const firstEntry: any = entryById.get(unit.entryIds[0]);
-    return `<section><h3>${escape(firstEntry?.title)}から始まる依存単位${unit.inseparableDependencyUnit ? "（相互依存）" : ""}</h3><ul>${items}</ul></section>`;
-  }).join("");
-  return `<article><h2>${escape(chapter.chapter)} <span>${chapter.entryCount}件</span></h2>${units}</article>`;
+const title = (entry: any) => entry.title === null ? "名称未設定"
+  : entry.titleFormat === "tex" ? katex.renderToString(entry.title, { throwOnError: true, strict: "error", displayMode: false, output: "html" })
+  : escape(entry.title);
+
+function katexCss(): string {
+  const css = readFileSync(join(katexDist, "katex.min.css"), "utf8");
+  const cache = new Map<string, string>();
+  return css.replace(/url\(([^)]+)\)\s*format\("([^"]+)"\)(,)?/g, (_all, rawPath: string, format: string) => {
+    if (format !== "woff2") return "";
+    const file = rawPath.replace(/["']/g, "").replace(/^fonts\//, "");
+    let data = cache.get(file);
+    if (data === undefined) { data = readFileSync(join(katexDist, "fonts", file)).toString("base64"); cache.set(file, data); }
+    return `url(data:font/woff2;base64,${data}) format("woff2")`;
+  }).replace(/,\s*;/g, ";");
+}
+
+const groups = inventory.mathematicalToolGroups.map((group: any) => {
+  const items = group.entryIds.map((id: string) => `<li>${title(entryById.get(id))}</li>`).join("");
+  return `<section><h3>${escape(group.name)} <span>${group.entryIds.length}件</span></h3><dl><dt>主要な定義・定理・計算道具</dt><dd><details><summary>この分類に属する全項目を表示</summary><ul>${items}</ul></details></dd><dt>入力</dt><dd>${escape(group.input)}</dd><dt>出力</dt><dd>${escape(group.output)}</dd><dt>この論文に必要な理由</dt><dd>${escape(group.reason)}</dd></dl></section>`;
 }).join("");
-const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>複素行列版2次元イジング模型 論文構成</title><style>
-:root{color-scheme:light;--ink:#18202a;--sub:#64707d;--line:#d9dfe6;--accent:#7b2d26;--paper:#fbfaf6}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;line-height:1.7}main{max-width:1080px;margin:auto;padding:48px 24px}h1{font-family:serif;font-size:clamp(2rem,5vw,3.6rem);line-height:1.2;margin:0 0 16px}h2{border-bottom:2px solid var(--ink);padding-bottom:8px;margin-top:56px}h2 span{font:normal .55em sans-serif;color:var(--sub)}h3{font-size:1rem;margin:0;color:var(--accent)}.lead{font-size:1.15rem;max-width:780px}.notice{border-left:5px solid var(--accent);padding:12px 18px;background:#fff;margin:28px 0}.stats{display:flex;gap:16px;flex-wrap:wrap}.stats div{background:#fff;border:1px solid var(--line);padding:12px 18px}.stats strong{display:block;font-size:1.7rem}section{background:#fff;border:1px solid var(--line);padding:16px 20px;margin:12px 0}ul{margin:8px 0 0;padding-left:22px}.kind{color:var(--accent);font-size:.78rem;border:1px solid #d9aaa5;border-radius:3px;padding:1px 5px}small{display:block;color:var(--sub)}footer{margin-top:48px;color:var(--sub);font-size:.85rem}@media(max-width:600px){main{padding:28px 16px}section{padding:12px}}
-</style></head><body><main><h1>複素行列版2次元イジング模型<br>論文構成</h1><p class="lead">${escape(inventory.organizingTheme)}</p><div class="notice"><strong>分類境界</strong><br>${escape(inventory.boundaryRule)}<br>解析・可算性による旧分類は撤回済みです。説明の具体化またはブロック分割を要する候補は${inventory.explanationGranularityReview.flaggedEntryIds.length}件です。</div><div class="stats"><div><strong>${inventory.entryCount}</strong>全定義・主張・定理</div><div><strong>${inventory.chapterEntryCounts["数学的道具立て"]}</strong>数学的道具立て</div><div><strong>${inventory.chapterEntryCounts["2次元イジングモデル"]}</strong>2次元イジングモデル</div></div>${chapters}<footer>機械可読棚卸し schema ${inventory.schemaVersion} から生成。表示順は意味的前提から帰結への暫定トポロジカル順であり、ブロック分割候補${pendingSplitCount}件の確定後に最終化する。</footer></main></body></html>`;
+
+const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>複素行列版2次元イジング模型 論文構成</title><style>${katexCss()}</style><style>
+:root{color-scheme:light;--ink:#18202a;--sub:#64707d;--line:#d9dfe6;--accent:#7b2d26;--paper:#fbfaf6}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;line-height:1.7;overflow-wrap:anywhere}main{max-width:960px;margin:auto;padding:48px 24px}h1{font-family:serif;font-size:clamp(2rem,5vw,3.4rem);line-height:1.2;margin:0 0 16px}h2{border-bottom:2px solid var(--ink);padding-bottom:8px;margin-top:52px}h3{color:var(--accent);margin:0}h3 span{font:normal .75rem sans-serif;color:var(--sub)}.lead{font-size:1.12rem;max-width:760px}.notice{border-left:5px solid var(--accent);padding:12px 18px;background:#fff;margin:28px 0}.stats{display:flex;gap:16px;flex-wrap:wrap}.stats div,section{background:#fff;border:1px solid var(--line)}.stats div{padding:12px 18px}.stats strong{display:block;font-size:1.7rem}section{padding:18px 22px;margin:14px 0}dl{margin:8px 0 0}dt{font-weight:700;margin-top:8px}dd{margin-left:0;color:#35404b}summary{cursor:pointer}ul{padding-left:1.4rem}.katex-display{overflow-x:auto;overflow-y:hidden}footer{margin-top:44px;color:var(--sub);font-size:.85rem}@media(max-width:600px){main{padding:28px 14px}section{padding:14px}.stats{display:grid;grid-template-columns:1fr 1fr}.stats div:first-child{grid-column:1/-1}}
+</style></head><body><main><h1>複素行列版2次元イジング模型<br>論文構成</h1><p class="lead">${escape(inventory.organizingTheme)}</p><div class="notice"><strong>分類境界は確定済み</strong><br>${escape(inventory.boundaryRule)} 未確定のブロック分割判定は0件です。</div><div class="stats"><div><strong>${inventory.entryCount}</strong>全定義・主張・定理</div><div><strong>${inventory.chapterEntryCounts["数学的道具立て"]}</strong>数学的道具立て</div><div><strong>${inventory.chapterEntryCounts["2次元イジングモデル"]}</strong>2次元イジングモデル</div></div><h2>数学的道具立ての分類</h2>${groups}<h2>2次元イジングモデル</h2><p>${inventory.chapterEntryCounts["2次元イジングモデル"]}件を、上の道具だけを前提として依存順に配置しています。各定義・定理と証明を読む本文は、別の「論文本文」アーティファクトで公開します。</p><footer>機械可読棚卸しから生成。数学的道具立て${inventory.chapterEntryCounts["数学的道具立て"]}件は、上の分類群のいずれか一つに重複なく所属します。</footer></main></body></html>`;
 mkdirSync(dirname(outputPath), { recursive: true });
 writeFileSync(outputPath, html);
 console.log(`wrote organization artifact to ${outputPath}`);
