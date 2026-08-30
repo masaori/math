@@ -491,9 +491,19 @@ s(i,j) := \mu^{(i)}(j) \quad (i\in\{1,\dots,M\},\ j\in\{1,\dots,N\})`,
         math(String.raw`s = \Phi(\mu^{(1)},\dots,\mu^{(M)})`),
         " とおくと、冒頭で置いた規約 ",
         math(String.raw`\mu^{(M+1)} = \mu^{(1)}`),
-        " は ",
-        math(String.raw`s(M+1,j) = \mu^{(M+1)}(j) = \mu^{(1)}(j) = s(1,j)`),
-        " を、",
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s(M+1,j)
+&=\mu^{(M+1)}(j)
+&&\bigl(\because\ s(i,j)=\mu^{(i)}(j)\text{（}\Phi\text{ の定義）}\bigr)\\
+&=\mu^{(1)}(j)
+&&\bigl(\because\ \mu^{(M+1)}=\mu^{(1)}\text{（周期規約）}\bigr)\\
+&=s(1,j)
+&&\bigl(\because\ s(i,j)=\mu^{(i)}(j)\text{（}\Phi\text{ の定義）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "を得る。また、",
         ref("def_transfer_matrix"),
         " の規約 ",
         math(String.raw`\mu^{(i)}(N+1) = \mu^{(i)}(1)`),

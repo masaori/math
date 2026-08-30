@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 5 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 6 回目の tick 時点）
+
+**Kac--Ward 行列式の置換展開を、閉路軌道ごとの符号付き重みの積の和として四層で固定した（`claim_kac_ward_signed_orbit_term_product`）。** 置換項の軌道重み分解と置換符号の軌道積を結び、各軌道で $(-1)^{|C|-1}(-x)^{|C|}=-x^{|C|}$ と整理した。SageMath `kac-ward-signed-orbit-term` は四つのスピン構造と六辺の全置換 $2{,}880$ 項・全置換和を $\mathbb Q(\zeta_8)[x]$ で検査した。Lean は具体版 `kacWardSignedPermutationTerm_orbit_product`、全置換和の導出、可換環の有限積だけを残した必要十分版 `signedOrbitWeights_combine` を通した。構造化本文 712 ブロック・検算対応 326 件・Lean 9,602 jobs・sorry 検査 1,618 件が通過。次は閉路軌道表示に既証の回転位相・横断消去・接触点分割を結び、偶部分グラフ多項式の平方恒等式へまとめる。
+
+前進前レビューでは、前 tick の軌道反復列・互換の鎖・必要十分版の合成を人手証明と照合し、「何も言っていない主張」や修正対象は無かった。並列の式変形統一は、姉妹側の「配位空間の全単射」の証明で周期規約の一行三等号を三段の行末根拠つきの鎖へ開いた。
+
+## ひとつ前の到達点（2026-08-31 の 5 回目の tick 時点）
 
 **置換符号の軌道分解の Lean 具体版を閉じ、`claim_permutation_sign_moved_orbit_product` の四層検証を完了した（`Ising2DLambda.KacWard.sign_movedEdgeOrbit_product` と導出版）。** 各軌道の基点からの反復列 `orbitTail`（人手証明の $\varphi(e_C),\ldots,\varphi^{\circ(m_C-1)}(e_C)$）を定義し、互換の鎖 `transpositionChain` が軌道上で置換と一致し軌道外を固定すること、鎖の符号が $(-1)^{m-1}$ になること、軌道の元の個数が最小周期に等しいこと（`card_orbit`）を結び、必要十分版 `sign_eq_prod_of_disjoint_supports` へ渡して積表示を得た。`lake build`（9,600 jobs）・sorry 検査（1,614 件）・check・PDF 324 ページを通し、本文の主張へ Lean 参照（具体版・必要十分版・導出版）を配線した。次は置換項の符号と軌道重み（`claim_kac_ward_term_orbit_weight_factorization`）を結合し、行列式の置換展開を閉路族の符号付き和として書く。
 

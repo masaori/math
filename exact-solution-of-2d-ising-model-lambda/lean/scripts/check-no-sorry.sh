@@ -1670,6 +1670,10 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.sign_eq_prod_of_disjoint_supports
   Ising2DLambda.KacWard.sign_movedEdgeOrbit_product
   Ising2DLambda.KacWard.sign_movedEdgeOrbit_product_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.signedOrbitWeights_combine
+  Ising2DLambda.KacWard.kacWardSignedPermutationTerm_orbit_product
+  Ising2DLambda.KacWard.kacWardSignedPermutationSum_orbit_product
+  Ising2DLambda.KacWard.kacWardSignedPermutationTerm_orbit_product_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
