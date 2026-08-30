@@ -20,7 +20,7 @@
 
 ## 備考
 
-253 は同じブロックのもう 1 つのラベル <injectivity_of_T_up_to_scalar> を対象にしている。
+253 は独立した直後の主張 <injectivity_of_T_up_to_scalar> を対象にしている。
 
 ## 実行時に出力された観測値
 

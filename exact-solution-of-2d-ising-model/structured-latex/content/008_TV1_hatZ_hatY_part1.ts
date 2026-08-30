@@ -2271,7 +2271,7 @@ h(g_1g_2)
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文（parts/008/009）は definition の体裁だが中身は著者の検討メモであり、箇条書き 3 項目（クリフォード群の定義／T_g の定義をクリフォード群へ狭める／T の定数倍を除いた単射性を示す）と、3 つ目に付随する『3 つのアプローチ』が書かれていた。原文の 3 つのアプローチは次のとおり（原文の文言）: 試す1「V を具体的な行列として書く、がゴールなので T_((V)) からその表式を見つけられないか？」／試す2「T の（定数倍除いた）単射性を（Cl に触れずに）示す」／だめだったら3「Cl と行列環の同型を認め、T の（定数倍除いた）単射性も認め、計算を先に進める」。",
-        "本作業でこの検討は決着した。(a) T の（定数倍を除いた）単射性は Clifford 代数と行列環の同型を経由せず、すべての元と可換な元がスカラー倍の単位行列に限ること（centralizer_is_scalar）から直接示せる（injectivity_of_T_up_to_scalar）。すなわち原文の『試す2』が成立し、『試す1』『だめだったら3』は不要である。(b) 一方『T_g の定義をクリフォード群の元に狭める』は採れない。V_2 がクリフォード群に属さないためで、これは V2_not_in_clifford_group で証明した。したがって本文では T_g の定義域を R^× のままとし（def_T_g）、クリフォード群は本証明では使わない。",
+        "本作業でこの検討は決着した。(a) T の（定数倍を除いた）単射性は Clifford 代数と行列環の同型を経由せず、すべての元と可換な元がスカラー倍の単位行列に限ること（centralizer_is_scalar）から直接示せる（injectivity_of_T_up_to_scalar）。すなわち原文の『試す2』が成立し、『試す1』『だめだったら3』は不要である。(b) 一方『T_g を定める g をクリフォード群の元に狭める』という方針は採れない。V_2 がクリフォード群に属さないためで、これは V2_not_in_clifford_group で証明した。したがって本文では g の許容範囲を R^× のままとし（def_T_g）、各 T_g の定義域は R とする。クリフォード群は本証明では使わない。",
         "クリフォード群の定義そのものは、上記 (b) の主張（V_2 ∉ C_M）を述べるために必要なので本文に残した。標準的な定義がユニタリ群上で与えられるのに対しここでは R^× 上の正規化群としたのは、V_2 がユニタリでないため（statement 内に理由を明記）。",
       ],
     },
@@ -2531,6 +2531,8 @@ h(g_1g_2)
     labels: ["def_T_g"],
     statement: [
       paragraph([
+        ref("def_invertible_elements_of_R"),
+        " の記号を使い、",
         math(String.raw`g \in (\mathrm{Mat}(2^M,\mathbb{C}))^\times`),
         " について、",
       ]),
@@ -2546,11 +2548,14 @@ h(g_1g_2)
     },
   },
   {
-    id: "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
+    id: "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar",
     kind: "claim",
     origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 11 },
-    title: { tex: String.raw`T \text{ の（定数倍を除いた）単射性}` },
-    labels: ["injectivity_of_T_up_to_scalar", "center_of_multiplicative_group_is_scalar"],
+    title: { tex: String.raw`\mathrm{Mat}(2^M,\mathbb{C})^\times \text{ の全元と可換する可逆行列}` },
+    labels: [
+      "center_of_multiplicative_group_is_scalar",
+      "invertible_matrix_centralizer_is_nonzero_scalar_identity",
+    ],
     statement: [
       paragraph([
         math(String.raw`R := \mathrm{Mat}(2^M,\mathbb{C})`),
@@ -2560,11 +2565,7 @@ h(g_1g_2)
         math(String.raw`R^\times`),
         " を ",
         ref("def_invertible_elements_of_R"),
-        " の可逆元全体（",
-        ref("def_T_g"),
-        " の ",
-        math(String.raw`T_g`),
-        " の定義域）とする。さらに、",
+        " の可逆行列全体とする。さらに、",
         math(String.raw`R^\times`),
         " のすべての元と可換な ",
         math(String.raw`R^\times`),
@@ -2573,420 +2574,407 @@ h(g_1g_2)
       displayMath(
         String.raw`C(R^\times) := \left\{\, W \in R^\times \;\middle|\; \forall h \in R^\times,\ W h = h W \,\right\}`,
       ),
+      paragraph(["と書く。このとき"]),
+      displayMath(
+        String.raw`C(R^\times) = \{\, cI \mid c \in \mathbb{C}\setminus\{0\} \,\}`,
+      ),
       paragraph([
-        "と書く（記号の省略であって、新しい概念を導入しているのではない）。このとき次が成り立つ。",
-      ]),
-      list([
-        [
-          "(i) ",
-          math(String.raw`C(R^\times) = \{\, c\,I \mid c \in \mathbb{C}\setminus\{0\} \,\}`),
-          "。すなわち ",
-          math(String.raw`R^\times`),
-          " のすべての元と可換な ",
-          math(String.raw`R^\times`),
-          " の元は、",
-          math(String.raw`0`),
-          " でない複素数倍の単位行列に限る。",
-        ],
-        [
-          "(ii)（",
-          math(String.raw`T`),
-          " の定数倍を除いた単射性）",
-          math(String.raw`g, g' \in R^\times`),
-          " について",
-          math(String.raw`\quad T_g = T_{g'} \iff \exists c \in \mathbb{C}\setminus\{0\},\ g' = c\,g`),
-          "。",
-        ],
+        "である。すなわち、すべての可逆行列と可換する可逆行列は、非零複素数倍の単位行列に限る。",
       ]),
     ],
     proof: [
       paragraph([
-        "(i) の証明。まず ",
-        math(String.raw`\supseteq`),
-        "：",
-        math(String.raw`c \neq 0`),
-        " なら ",
+        "まず右辺が左辺に含まれることを示す。",
+        math(String.raw`c \in \mathbb{C}\setminus\{0\}`),
+        " とする。",
         ref("def_invertible_elements_of_R"),
         " (iv) より ",
         math(String.raw`cI \in R^\times`),
-        "、また ",
+        " であり、",
         ref("scalar_identity_commutes"),
         " より ",
         math(String.raw`cI`),
-        " は ",
-        math(String.raw`R`),
-        " のすべての元と可換なので、とくに ",
-        math(String.raw`R^\times`),
-        " のすべての元と可換であり ",
+        " はすべての ",
+        math(String.raw`h \in R^\times`),
+        " と可換する。したがって ",
         math(String.raw`cI \in C(R^\times)`),
-        "。",
-      ]),
-      paragraph([
-        "次に ",
-        math(String.raw`\subseteq`),
-        "：",
-        math(String.raw`W \in C(R^\times)`),
-        " とする。任意の ",
-        math(String.raw`x \in R`),
-        " をとる。",
-        math(String.raw`x`),
-        " は ",
-        math(String.raw`\mathbb{C}`),
-        " 上の有限次元線型空間 ",
-        math(String.raw`\mathbb{C}^{2^M}`),
-        " の自己準同型を表す行列であり、その固有値の集合 ",
-        math(String.raw`\Lambda(x) \subseteq \mathbb{C}`),
-        " は特性多項式（",
-        math(String.raw`2^M`),
-        " 次）の根全体なので高々 ",
-        math(String.raw`2^M`),
-        " 個の有限集合である。よって ",
-        math(String.raw`t \in \mathbb{C}`),
-        " で ",
-        math(String.raw`-t \notin \Lambda(x)`),
-        " なるものが（実際には ",
-        math(String.raw`\mathbb{C}`),
-        " の無限個の元が）存在し、そのような ",
-        math(String.raw`t`),
-        " について ",
-        math(String.raw`\det(x + tI) \neq 0`),
-        " すなわち ",
-        math(String.raw`x + tI \in R^\times`),
         " である。",
       ]),
       paragraph([
+        "次に左辺が右辺に含まれることを示す。",
         math(String.raw`W \in C(R^\times)`),
-        " より ",
-        math(String.raw`W(x+tI) = (x+tI)W`),
-        " であり、また ",
-        math(String.raw`tI \in R^\times`),
-        "（",
-        math(String.raw`t \neq 0`),
-        " のとき、",
+        " とする。",
+        ref("tensor_basis"),
+        " (1) の多重添字を使い、",
+        math(String.raw`P,Q \in \mathcal{I}_M`),
+        " に対応する行列単位を ",
+        math(String.raw`E_{P,Q}`),
+        " と書く。まず、この行列単位の積を確認する。",
+      ]),
+      paragraph([
+        math(String.raw`P=(p_1,\dots,p_M)`),
+        "、",
+        math(String.raw`Q=(q_1,\dots,q_M)`),
+        "、",
+        math(String.raw`K=(k_1,\dots,k_M)`),
+        "、",
+        math(String.raw`L=(l_1,\dots,l_M)`),
+        " とする。また、",
+        math(String.raw`q,k\in\{1,2\}`),
+        " に対して ",
+        math(String.raw`\delta_{qk}`),
+        " を次のように定める。",
+      ]),
+      displayMath(String.raw`\delta_{qk}:=
+\begin{cases}
+  1 & (q=k),\\
+  0 & (q\neq k).
+\end{cases}`),
+      paragraph([
+        ref("kronecker_product_rule"),
+        " (1) と ",
+        ref("kronecker_multilinear"),
+        " を使うと、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+E_{P,Q}E_{K,L}
+&= (E_{p_1q_1}E_{k_1l_1})\boxtimes\cdots\boxtimes(E_{p_Mq_M}E_{k_Ml_M})
+&&\left(\because\ \text{クロネッカー積の積の規則}\right)\\
+&= (\delta_{q_1k_1}E_{p_1l_1})\boxtimes\cdots\boxtimes(\delta_{q_Mk_M}E_{p_Ml_M})
+&&\left(\because\ E_{pq}E_{kl}=\delta_{qk}E_{pl}\ \text{という }2\text{ 次行列の成分計算}\right)\\
+&= \left(\prod_{r=1}^{M}\delta_{q_rk_r}\right)E_{P,L}
+&&\left(\because\ \text{各因子についての複素スカラー倍の線型性}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\delta_{Q,K}:=\prod_{r=1}^{M}\delta_{q_rk_r}`),
+        " と書けば、",
+        math(String.raw`E_{P,Q}E_{K,L}=\delta_{Q,K}E_{P,L}`),
+        " である。特に ",
+        math(String.raw`E:=E_{P,Q}`),
+        " とおくと、",
+        math(String.raw`P\neq Q`),
+        " なら ",
+        math(String.raw`E^2=O`),
+        "、",
+        math(String.raw`P=Q`),
+        " なら ",
+        math(String.raw`E^2=E`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`P\neq Q`),
+        " の場合は ",
+        math(String.raw`I+E`),
+        " の逆行列が ",
+        math(String.raw`I-E`),
+        " である。実際、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(I+E)(I-E)
+&= I-E+E-E^2&&\left(\because\ \text{行列積の分配律}\right)\\
+&= I&&\left(\because\ E^2=O\right),\\
+(I-E)(I+E)
+&= I+E-E-E^2&&\left(\because\ \text{行列積の分配律}\right)\\
+&= I&&\left(\because\ E^2=O\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`P=Q`),
+        " の場合は ",
+        math(String.raw`I-2E`),
+        " が自分自身を逆行列にもつ。実際、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(I-2E)(I-2E)
+&= I-2E-2E+4E^2&&\left(\because\ \text{行列積の分配律}\right)\\
+&= I-4E+4E&&\left(\because\ E^2=E\right)\\
+&= I&&\left(\because\ \text{同じ行列の差は零行列}\right).
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        math(String.raw`P\neq Q`),
+        " なら ",
+        math(String.raw`U_{P,Q}:=I+E_{P,Q}`),
+        "、",
+        math(String.raw`P=Q`),
+        " なら ",
+        math(String.raw`U_{P,P}:=I-2E_{P,P}`),
+        " とおけば、どちらも ",
         ref("def_invertible_elements_of_R"),
-        " (iv)）あるいは ",
-        ref("scalar_identity_commutes"),
-        " より ",
-        math(String.raw`W(tI) = (tI)W`),
-        " が常に成り立つ。両者を引くと",
+        " の定義により ",
+        math(String.raw`R^\times`),
+        " に属する。",
+      ]),
+      paragraph([
+        math(String.raw`P\neq Q`),
+        " なら、",
+        math(String.raw`WU_{P,Q}=U_{P,Q}W`),
+        " を分配して両辺から ",
+        math(String.raw`W`),
+        " を引くと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+W+WE_{P,Q}
+&= WU_{P,Q}&&\left(\because\ U_{P,Q}=I+E_{P,Q}\right)\\
+&= U_{P,Q}W&&\left(\because\ W\in C(R^\times),\ U_{P,Q}\in R^\times\right)\\
+&= W+E_{P,Q}W&&\left(\because\ U_{P,Q}=I+E_{P,Q}\right),
+\end{aligned}`),
+      paragraph([
+        "したがって ",
+        math(String.raw`WE_{P,Q}=E_{P,Q}W`),
+        " である。",
+        math(String.raw`P=Q`),
+        " なら同様に ",
+        math(String.raw`WU_{P,P}=U_{P,P}W`),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+W-2WE_{P,P}
+&= WU_{P,P}&&\left(\because\ U_{P,P}=I-2E_{P,P}\right)\\
+&= U_{P,P}W&&\left(\because\ W\in C(R^\times),\ U_{P,P}\in R^\times\right)\\
+&= W-2E_{P,P}W&&\left(\because\ U_{P,P}=I-2E_{P,P}\right),
+\end{aligned}`),
+      paragraph([
+        "を得る。両辺から ",
+        math(String.raw`W`),
+        " を引き、非零複素数 ",
+        math(String.raw`-2`),
+        " を消去すると ",
+        math(String.raw`WE_{P,P}=E_{P,P}W`),
+        " である。ゆえにすべての ",
+        math(String.raw`P,Q\in\mathcal I_M`),
+        " について ",
+        math(String.raw`WE_{P,Q}=E_{P,Q}W`),
+        " が成り立つ。",
+      ]),
+      paragraph([
+        ref("tensor_basis"),
+        " (1) より、任意の ",
+        math(String.raw`x\in R`),
+        " は一意に ",
+        math(String.raw`x=\sum_{P,Q\in\mathcal I_M}x_{P,Q}E_{P,Q}`),
+        "（",
+        math(String.raw`x_{P,Q}\in\mathbb C`),
+        "）と書ける。したがって",
       ]),
       displayMath(String.raw`\begin{aligned}
 Wx
-&= W(x + tI) - W(tI)&&(\because\ \text{行列の積の分配律}\ W(x+tI)=Wx+W(tI))\\
-&= (x+tI)W - (tI)W&&(\because\ W(x+tI)=(x+tI)W\ \text{と}\ W(tI)=(tI)W)\\
-&= xW&&(\because\ \text{行列の積の分配律}\ (x+tI)W=xW+(tI)W)
+&= \sum_{P,Q}x_{P,Q}\,WE_{P,Q}
+&&\left(\because\ x\ \text{の基底展開と行列積の分配律}\right)\\
+&= \sum_{P,Q}x_{P,Q}\,E_{P,Q}W
+&&\left(\because\ WE_{P,Q}=E_{P,Q}W\right)\\
+&= xW
+&&\left(\because\ x\ \text{の基底展開と行列積の分配律}\right).
 \end{aligned}`),
       paragraph([
-        "を得る。",
-        math(String.raw`x \in R`),
-        " は任意だったので ",
-        math(String.raw`W`),
-        " は ",
-        math(String.raw`R`),
-        " のすべての元と可換であり、",
+        math(String.raw`x\in R`),
+        " は任意だったので、",
         ref("centralizer_is_scalar"),
-        " より ",
-        math(String.raw`W = cI`),
-        " なる ",
-        math(String.raw`c \in \mathbb{C}`),
-        " が存在する。",
-        math(String.raw`W \in R^\times`),
-        " より ",
+        " より、ある ",
+        math(String.raw`c\in\mathbb C`),
+        " が存在して ",
+        math(String.raw`W=cI`),
+        " である。もし ",
+        math(String.raw`c=0`),
+        " なら、どの行列 ",
+        math(String.raw`B`),
+        " に対しても ",
+        math(String.raw`WB=OB=O\neq I`),
+        " となり ",
         math(String.raw`W`),
-        " は可逆なので ",
-        math(String.raw`c \neq 0`),
-        "（",
-        math(String.raw`c = 0`),
-        " なら ",
-        math(String.raw`W = O`),
-        " で非可逆）。よって ",
-        math(String.raw`C(R^\times) \subseteq \{cI \mid c \in \mathbb{C}\setminus\{0\}\}`),
-        "。",
+        " は可逆でない。ところが ",
+        math(String.raw`W\in R^\times`),
+        " なので ",
+        math(String.raw`c\neq0`),
+        " である。以上より ",
+        math(String.raw`W\in\{cI\mid c\in\mathbb C\setminus\{0\}\}`),
+        " を得た。",
       ]),
-
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "もとの injectivity_of_T_up_to_scalar ブロックに (i) として同居していた主張を、1 ブロック 1 主張になるよう独立させた。既存参照を保つためラベル center_of_multiplicative_group_is_scalar はこのブロックへ移した。",
+        "もとの証明が使っていた x+tI の可逆化は、本文に定義のない特性多項式・固有値と根の同値・行列式による可逆性判定に依存していた。本文全体を検索して既存の具体的補題が無いことを確認し、その経路を採用せず、クロネッカー積で作る行列単位 E_{P,Q} と明示的に逆行列を書ける I+E_{P,Q} または I-2E_{P,P} だけを使う有限行列計算へ置き換えた。",
+      ],
+    },
+  },
+  {
+    id: "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
+    kind: "claim",
+    origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 11 },
+    title: { tex: String.raw`T \text{ の（定数倍を除いた）単射性}` },
+    labels: ["injectivity_of_T_up_to_scalar"],
+    statement: [
       paragraph([
-        "(ii) の証明。まず ",
-        math(String.raw`g \in R^\times`),
-        " について、",
-        math(String.raw`T_g`),
-        " は ",
+        math(String.raw`R := \mathrm{Mat}(2^M,\mathbb{C})`),
+        "、",
+        math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        " とし、",
         math(String.raw`R^\times`),
         " を ",
-        math(String.raw`R^\times`),
-        " へ写す。実際 ",
-        math(String.raw`h \in R^\times`),
-        " なら",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-T_g(h)\,T_g(h^{-1})
-&= \left(g h g^{-1}\right)\left(g h^{-1} g^{-1}\right)&&(\because\ T_g\ \text{の定め方})\\
-&= g h \left(g^{-1} g\right) h^{-1} g^{-1}&&(\because\ \text{行列の積の結合律})\\
-&= g h h^{-1} g^{-1}&&(\because\ g^{-1}g = I\ \text{と積の単位元})\\
-&= g g^{-1} = I&&(\because\ h h^{-1} = I,\ g g^{-1} = I\ \text{と積の単位元})
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-T_g(h^{-1})\,T_g(h)
-&= \left(g h^{-1} g^{-1}\right)\left(g h g^{-1}\right)&&(\because\ T_g\ \text{の定め方})\\
-&= g h^{-1} \left(g^{-1} g\right) h g^{-1}&&(\because\ \text{行列の積の結合律})\\
-&= g h^{-1} h g^{-1}&&(\because\ g^{-1}g = I\ \text{と積の単位元})\\
-&= g g^{-1} = I&&(\because\ h^{-1} h = I,\ g g^{-1} = I\ \text{と積の単位元})
-\end{aligned}`),
-      paragraph([
-        "であるから（可逆元の逆元の性質は def_invertible_elements_of_R による）、",
         ref("def_invertible_elements_of_R"),
-        " の可逆性の定義より ",
-        math(String.raw`T_g(h) \in R^\times`),
-        " である。そこで ",
+        " の可逆行列全体とする。これは ",
+        ref("def_T_g"),
+        " で共役写像を定める行列 ",
+        math(String.raw`g`),
+        " の許容範囲であり、各 ",
         math(String.raw`T_g`),
-        " の ",
-        math(String.raw`R^\times`),
-        " への制限を ",
-        math(String.raw`T_g|_{R^\times}`),
-        " と書く。",
+        " 自身の定義域は ",
+        math(String.raw`R`),
+        " である。このとき、",
       ]),
+      paragraph([
+        math(String.raw`g,g'\in R^\times`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`T_g=T_{g'}\iff \exists c\in\mathbb C\setminus\{0\},\quad g'=c\,g`,
+      ),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
       paragraph([
         "Step 1: ",
-        math(String.raw`T_g = T_{g'}`),
-        "（",
-        math(String.raw`R`),
-        " 上の写像として）と ",
-        math(String.raw`T_g|_{R^\times} = T_{g'}|_{R^\times}`),
-        " は同値である。",
-      ]),
-      paragraph([
-        "（",
-        math(String.raw`\Rightarrow`),
-        "）は制限をとるだけである。（",
-        math(String.raw`\Leftarrow`),
-        "）は次による。",
-        math(String.raw`x \in R`),
-        " を任意にとり、(i) の証明と同様に ",
-        math(String.raw`x + tI \in R^\times`),
-        " なる ",
-        math(String.raw`t \in \mathbb{C}\setminus\{0\}`),
-        " をとる（除外すべき ",
-        math(String.raw`t`),
-        " は有限個なので ",
-        math(String.raw`0`),
-        " 以外に選べる）。このとき ",
-        math(String.raw`tI \in R^\times`),
-        " でもあり（",
-        ref("def_invertible_elements_of_R"),
-        " (iv)）、",
-        math(String.raw`T_g`),
-        " は ",
-        math(String.raw`R`),
-        " 上加法的（",
-        math(String.raw`g(x+y)g^{-1} = gxg^{-1} + gyg^{-1}`),
-        "、分配法則）なので",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-T_g(x)
-&= T_g(x + tI) - T_g(tI)
-&&(\because\ T_g\ \text{の}\ R\ \text{上の加法性})\\
-&= T_{g'}(x + tI) - T_{g'}(tI)
-&&(\because\ x+tI,\ tI\in R^\times\ \text{上で}\ T_g|_{R^\times}=T_{g'}|_{R^\times}\ \text{（仮定）})\\
-&= T_{g'}(x)
-&&(\because\ T_{g'}\ \text{の}\ R\ \text{上の加法性})
-\end{aligned}`),
-      paragraph([
-        "Step 2: ",
-        math(String.raw`u := g^{-1}g'`),
-        " とおくと ",
-        math(String.raw`u \in R^\times`),
+        math(String.raw`u:=g^{-1}g'`),
+        " とおくと、",
+        math(String.raw`u\in R^\times`),
+        " かつ ",
+        math(String.raw`gu=g'`),
         " である。",
       ]),
       paragraph([
         ref("def_invertible_elements_of_R"),
         " (iii) より ",
-        math(String.raw`g^{-1} \in R^\times`),
+        math(String.raw`g^{-1}\in R^\times`),
         " であり、同 (ii) より ",
-        math(String.raw`u = g^{-1}g' \in R^\times`),
-        "。また ",
-        math(String.raw`g\,u = g'`),
-        " である。実際、",
+        math(String.raw`u=g^{-1}g'\in R^\times`),
+        " である。また、",
       ]),
       displayMath(String.raw`\begin{aligned}
-g\,u
-&= g\left(g^{-1}g'\right)
-&&(\because\ u\ \text{の定め方})\\
-&= \left(gg^{-1}\right)g'
-&&(\because\ R\ \text{の積の結合則})\\
-&= I\,g'
-&&(\because\ \text{def\_invertible\_elements\_of\_R (iii)}\ \text{の}\ gg^{-1}=I)\\
-&= g'
-&&(\because\ R\ \text{の積の単位元})
+gu
+&=g\left(g^{-1}g'\right)
+&&\left(\because\ u=g^{-1}g'\right)\\
+&=\left(gg^{-1}\right)g'
+&&\left(\because\ \text{行列積の結合律}\right)\\
+&=Ig'
+&&\left(\because\ gg^{-1}=I\right)\\
+&=g'
+&&\left(\because\ I\ \text{は積の単位元}\right).
 \end{aligned}`),
       paragraph([
-        "である。",
-      ]),
-      paragraph([
-        "Step 3: 各 ",
-        math(String.raw`h \in R^\times`),
-        " について ",
-        math(String.raw`T_g(h) = T_{g'}(h)`),
+        "Step 2: 任意の ",
+        math(String.raw`h\in R`),
+        " について、",
+        math(String.raw`T_g(h)=T_{g'}(h)`),
         " と ",
-        math(String.raw`u h = h u`),
+        math(String.raw`hu=uh`),
         " は同値である。",
       ]),
       paragraph([
-        math(String.raw`h \in R^\times`),
+        math(String.raw`h\in R`),
         " を固定する。",
-        math(String.raw`T_g(h) = T_{g'}(h)`),
-        " は ",
         ref("def_T_g"),
-        " により ",
-        math(String.raw`g h g^{-1} = g' h g'^{-1}`),
-        " と書ける。この等式の両辺に左から ",
-        math(String.raw`g^{-1}`),
-        " を掛けると",
+        " と、可逆行列を左または右から掛ける操作が逆行列によって戻せることから、",
       ]),
       displayMath(String.raw`\begin{aligned}
-g^{-1}\left(g h g^{-1}\right) = g^{-1}\left(g' h g'^{-1}\right)
-&\iff \left(g^{-1}g\right)h g^{-1}=\left(g^{-1}g'\right)h g'^{-1}
-&&\left(\because\ R\ \text{の積の結合律}\right)\\
-&\iff h g^{-1}=\left(g^{-1}g'\right)h g'^{-1}
-&&\left(\because\ g^{-1}g=I\ \text{と積の単位元}\right)
-\end{aligned}`),
-      paragraph([
-        "を得る（左辺は結合律と ",
-        math(String.raw`g^{-1}g = I`),
-        " による）。さらに両辺に右から ",
-        math(String.raw`g'`),
-        " を掛けると",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-h g^{-1} g'=\left(g^{-1}g'\right)h g'^{-1}g'
+T_g(h)=T_{g'}(h)
+&\iff ghg^{-1}=g'hg'^{-1}
+&&\left(\because\ T_g,T_{g'}\ \text{の定め方}\right)\\
+&\iff g^{-1}\left(ghg^{-1}\right)=g^{-1}\left(g'hg'^{-1}\right)
+&&\left(\because\ \text{両辺に左から可逆行列 }g^{-1}\text{ を掛ける同値変形}\right)\\
+&\iff \left(g^{-1}g\right)hg^{-1}=\left(g^{-1}g'\right)hg'^{-1}
+&&\left(\because\ \text{行列積の結合律}\right)\\
+&\iff Ihg^{-1}=\left(g^{-1}g'\right)hg'^{-1}
+&&\left(\because\ g^{-1}g=I\right)\\
+&\iff hg^{-1}=\left(g^{-1}g'\right)hg'^{-1}
+&&\left(\because\ I\ \text{は積の単位元}\right)\\
+&\iff \left(hg^{-1}\right)g'=\left(\left(g^{-1}g'\right)hg'^{-1}\right)g'
+&&\left(\because\ \text{両辺に右から可逆行列 }g'\text{ を掛ける同値変形}\right)\\
 &\iff h\left(g^{-1}g'\right)=\left(g^{-1}g'\right)h\left(g'^{-1}g'\right)
-&&\left(\because\ R\ \text{の積の結合律}\right)\\
-&\iff h\,u=u\,h
-&&\left(\because\ u=g^{-1}g',\ g'^{-1}g'=I\ \text{と積の単位元}\right)
+&&\left(\because\ \text{行列積の結合律}\right)\\
+&\iff h\left(g^{-1}g'\right)=\left(g^{-1}g'\right)hI
+&&\left(\because\ g'^{-1}g'=I\right)\\
+&\iff h\left(g^{-1}g'\right)=\left(g^{-1}g'\right)h
+&&\left(\because\ I\ \text{は積の単位元}\right)\\
+&\iff hu=uh
+&&\left(\because\ u=g^{-1}g'\right).
 \end{aligned}`),
       paragraph([
-        "を得る（右辺は結合律と ",
-        math(String.raw`g'^{-1}g' = I`),
-        "、および ",
-        math(String.raw`u = g^{-1}g'`),
-        " による）。逆向きは、",
-        math(String.raw`h u = u h`),
-        " の両辺に左から ",
-        math(String.raw`g`),
-        "、右から ",
-        math(String.raw`g'^{-1}`),
-        " を掛けて同じ変形を逆にたどればよい。実際",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-g\left(h\,u\right)g'^{-1}
-&=g h\left(g^{-1}g'\right)g'^{-1}
-&&(\because\ u\ \text{の定め方})\\
-&=g h g^{-1}\left(g'g'^{-1}\right)
-&&(\because\ R\ \text{の積の結合則})\\
-&=g h g^{-1}\,I
-&&(\because\ \text{def\_invertible\_elements\_of\_R (iii)}\ \text{の}\ g'g'^{-1}=I)\\
-&=g h g^{-1}
-&&(\because\ R\ \text{の積の単位元})
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-g\left(u\,h\right)g'^{-1}
-&=g\left(g^{-1}g'\right)h\,g'^{-1}
-&&(\because\ u\ \text{の定め方})\\
-&=\left(gg^{-1}\right)g' h\,g'^{-1}
-&&(\because\ R\ \text{の積の結合則})\\
-&=I\,g' h\,g'^{-1}
-&&(\because\ \text{def\_invertible\_elements\_of\_R (iii)}\ \text{の}\ gg^{-1}=I)\\
-&=g' h\,g'^{-1}
-&&(\because\ R\ \text{の積の単位元})
-\end{aligned}`),
-      paragraph([
-        "であるから、",
-        math(String.raw`hu = uh`),
-        " ならば ",
-        math(String.raw`g h g^{-1} = g' h g'^{-1}`),
-        "、すなわち ",
-        math(String.raw`T_g(h) = T_{g'}(h)`),
-        " である。掛ける行列 ",
-        math(String.raw`g, g^{-1}, g', g'^{-1}`),
-        " はいずれも可逆なので、以上の各変形は同値変形である。",
+        "Step 3: ",
+        math(String.raw`T_g=T_{g'}`),
+        " ならば、ある ",
+        math(String.raw`c\in\mathbb C\setminus\{0\}`),
+        " が存在して ",
+        math(String.raw`g'=cg`),
+        " である。",
       ]),
       paragraph([
-        "Step 4: ",
-        math(String.raw`T_g|_{R^\times} = T_{g'}|_{R^\times} \iff \exists c \in \mathbb{C}\setminus\{0\},\ g' = cg`),
-        "。",
-      ]),
-      paragraph([
-        "Step 3 の同値をすべての ",
-        math(String.raw`h \in R^\times`),
-        " について合わせると",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-T_g|_{R^\times}=T_{g'}|_{R^\times}
-&\iff \forall h\in R^\times,\ uh=hu
-&&\left(\because\ \text{Step 3 の同値をすべての}\ h\in R^\times\ \text{へ適用}\right)\\
-&\iff u\in C(R^\times)
-&&\left(\because\ u\in R^\times\ \text{と}\ C(R^\times)\ \text{の定義}\right)
-\end{aligned}`),
-      paragraph([
-        "（最後は ",
-        math(String.raw`u \in R^\times`),
-        "（Step 2）と ",
-        math(String.raw`C(R^\times)`),
-        " の定義による）。ここで (i) より ",
-        math(String.raw`C(R^\times) = \{cI \mid c \in \mathbb{C}\setminus\{0\}\}`),
-        " であるから",
-      ]),
-      displayMath(
-        String.raw`T_g|_{R^\times} = T_{g'}|_{R^\times}
-\iff \exists c \in \mathbb{C}\setminus\{0\},\ g^{-1}g' = cI`,
-      ),
-      paragraph([
-        "を得る。最後に ",
-        math(String.raw`g^{-1}g' = cI`),
-        " と ",
-        math(String.raw`g' = cg`),
-        " が同値であることを見る。（",
-        math(String.raw`\Rightarrow`),
-        "）",
-        math(String.raw`g^{-1}g' = cI`),
-        " を仮定する。",
+        math(String.raw`T_g=T_{g'}`),
+        " とする。すべての ",
+        math(String.raw`h\in R^\times`),
+        " について ",
+        math(String.raw`T_g(h)=T_{g'}(h)`),
+        " なので、Step 2 より ",
+        math(String.raw`uh=hu`),
+        " である。Step 1 の ",
+        math(String.raw`u\in R^\times`),
+        " と合わせると、",
+        ref("invertible_matrix_centralizer_is_nonzero_scalar_identity"),
+        " より、ある ",
+        math(String.raw`c\in\mathbb C\setminus\{0\}`),
+        " が存在して ",
+        math(String.raw`u=cI`),
+        " である。したがって、",
       ]),
       displayMath(String.raw`\begin{aligned}
 g'
-&= g\left(g^{-1}g'\right)
-&&(\because\ \text{Step 2 の}\ g\left(g^{-1}g'\right)=g')\\
-&= g(cI)
-&&(\because\ \text{仮定}\ g^{-1}g'=cI)\\
-&= c\,g
-&&(\because\ c\cdot I\ \text{は全行列と可換})
+&=gu
+&&\left(\because\ \text{Step 1}\right)\\
+&=g(cI)
+&&\left(\because\ u=cI\right)\\
+&=c(gI)
+&&\left(\because\ \text{複素スカラー倍と行列積の結合律}\right)\\
+&=cg
+&&\left(\because\ gI=g\right).
 \end{aligned}`),
       paragraph([
-        "（最後の等号は ",
-        ref("scalar_identity_commutes"),
-        " による）。以上で ",
-        math(String.raw`g' = cg`),
-        " を得る。（",
-        math(String.raw`\Leftarrow`),
-        "）",
-        math(String.raw`g' = cg`),
-        " を仮定する。",
+        "Step 4: ある ",
+        math(String.raw`c\in\mathbb C\setminus\{0\}`),
+        " について ",
+        math(String.raw`g'=cg`),
+        " ならば、",
+        math(String.raw`T_g=T_{g'}`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`g'=cg`),
+        " とする。すると",
       ]),
       displayMath(String.raw`\begin{aligned}
-g^{-1}g'
-&= g^{-1}(cg)
-&&(\because\ \text{仮定}\ g'=cg)\\
-&= c\left(g^{-1}g\right)
-&&(\because\ c\cdot I\ \text{は全行列と可換})\\
-&= cI
-&&(\because\ \text{def\_invertible\_elements\_of\_R (iii)}\ \text{の}\ g^{-1}g=I)
+u
+&=g^{-1}g'
+&&\left(\because\ u=g^{-1}g'\right)\\
+&=g^{-1}(cg)
+&&\left(\because\ g'=cg\right)\\
+&=c\left(g^{-1}g\right)
+&&\left(\because\ \text{複素スカラー倍と行列積の結合律}\right)\\
+&=cI
+&&\left(\because\ g^{-1}g=I\right).
 \end{aligned}`),
       paragraph([
-        "（2 段目の等号は ",
+        "任意の ",
+        math(String.raw`h\in R`),
+        " に対し、",
         ref("scalar_identity_commutes"),
-        " による）。以上で ",
-        math(String.raw`g^{-1}g' = cI`),
-        " を得る。以上で同値が示された。",
-      ]),
-      paragraph([
-        "Step 1 と Step 4 を合わせて (ii) を得る。",
+        " より ",
+        math(String.raw`uh=(cI)h=h(cI)=hu`),
+        " である。Step 2 の逆向きにより ",
+        math(String.raw`T_g(h)=T_{g'}(h)`),
+        " であり、",
+        math(String.raw`h\in R`),
+        " は任意なので ",
+        math(String.raw`T_g=T_{g'}`),
+        " を得る。Step 3 と Step 4 を合わせて主張が成り立つ。",
       ]),
     ],
     conversion: {
@@ -2994,8 +2982,9 @@ g^{-1}g'
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文の検討メモ（parts/008/009）にあった『T の（定数倍を除いた）単射性が大事そうなので示す』を、メモの『試す2』の方針（Clifford 代数と行列環の同型に触れずに示す）で実際に証明したもの。",
-        "当初は自己同型群・核・中心・完全列という群の一般論を経由していたが、README のゴール設定（環・体などの一般論に持ち上げない／脇道の一般論は具体的な形に落とす）に従い、群論の語彙を一切使わない形へ書き直した。要点は Step 3 の同値『g h g^{-1} = g' h g'^{-1} ⟺ (g^{-1}g') h = h (g^{-1}g')』で、これにより centralizer_is_scalar を直接当てられる。退避した群論の記述は notes/008_group_theory_general.ts にある。",
-        "R^× のすべての元と可換な元が R 全体のすべての元と可換であることは自明ではないため、x + tI が可逆になる t を選ぶ議論で明示的に示した（(i) および Step 1）。",
+        "当初は自己同型群・核・中心・完全列という一般論を経由していたが、README のゴール設定（環・体などの一般論に持ち上げない／脇道の一般論は具体的な形に落とす）に従い、一般論の語彙を使わない有限複素行列の計算へ書き直した。要点は Step 2 の同値 g h g^{-1} = g' h g'^{-1} ⟺ (g^{-1}g') h = h (g^{-1}g') である。退避した記述は notes/008_group_theory_general.ts にある。",
+        "center_of_multiplicative_group_is_scalar を独立した直前の主張へ分け、このブロックは共役写像の非零スカラー倍を除く単射性だけを述べる。もとの x+tI による制限写像から全行列への延長は、未定義の特性多項式と行列式を使うため削除した。順方向は全行列上の写像の一致を可逆行列へ制限し、逆方向は u=cI が全行列と可換することを直接使うので、この延長自体が不要である。",
+        "R^× は T_g の定義域ではなく、T_g を定める g の許容範囲である。各 T_g の定義域は R であることを statement に明記した。",
       ],
     },
   },

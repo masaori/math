@@ -1,4 +1,4 @@
-# <end_is_algebra_isomorphism>: end が C-代数同型で、テンソル積の作用が成分ごと
+# <end_is_algebra_isomorphism>: end が C-代数同型
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in dir() else "."
 load(os.path.join(_dir, "../../_shared/operators.sage"))
@@ -8,8 +8,6 @@ rep = CheckReport("end_is_algebra_isomorphism")
 
 def rand2():
     return rng.normal(size=(2,2)) + 1j*rng.normal(size=(2,2))
-def randv2():
-    return rng.normal(size=(2,)) + 1j*rng.normal(size=(2,))
 
 for M in [1,2,3,4]:
     n = 2**M
@@ -20,13 +18,6 @@ for M in [1,2,3,4]:
         rep.close((A @ B), A @ B, f"M={M}: end(AB) = end(A)end(B)（行列表現では自明）")
     # (3) end(I) = id
     rep.close(eye_M(M), np.eye(n), f"M={M}: end(I) = id")
-    # (4) (A_1⊗…⊗A_M)(v_1⊗…⊗v_M) = (A_1v_1)⊗…⊗(A_Mv_M)  ← ここが非自明
-    for _ in range(5):
-        As = [rand2() for _ in range(M)]
-        vs = [randv2() for _ in range(M)]
-        lhs = kron_list(As) @ kron_list([v.reshape(2,1) for v in vs]).reshape(-1)
-        rhs = kron_list([(As[k] @ vs[k]).reshape(2,1) for k in range(M)]).reshape(-1)
-        rep.close(lhs, rhs, f"M={M}: テンソル積の作用が成分ごと")
     # (1) 線型同型: 行列単位 E_{I,J} が 4^M 個の一次独立な元をなす
     units = []
     for I_ in range(n):

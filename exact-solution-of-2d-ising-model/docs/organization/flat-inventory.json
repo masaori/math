@@ -12,9 +12,9 @@
     "2次元イジングモデル"
   ],
   "classificationStatus": "全項目の分類・説明粒度・ブロック境界を再検証し、章内依存順と数学的道具立ての分類群を確定済み。",
-  "entryCount": 274,
+  "entryCount": 276,
   "chapterEntryCounts": {
-    "数学的道具立て": 105,
+    "数学的道具立て": 107,
     "2次元イジングモデル": 169
   },
   "mathematicalToolGroups": [
@@ -176,8 +176,10 @@
         "transfer_matrix_005_definition_end_isomorphism",
         "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
         "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
+        "transfer_matrix_claim_end_acts_on_kronecker_products",
         "TV1_hatZ_hatY_009_definition_invertible_elements",
         "TV1_hatZ_hatY_011_definition_T_g",
+        "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar",
         "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
         "TV1_hatZ_hatY_010_definition_clifford_group"
       ]
@@ -252,10 +254,83 @@
       "concludingCorollaryEntryId": "exp_conjugation_proof_008_theorem_exp_ad_series",
       "boundaryEvidence": "章内依存順の連続する二項であり、行列版の共役公式を主定理とし、その右辺を項ごとに明示する系で節を閉じる。外部入力・内部依存辺・本文 fingerprint・連続性・節末の一意性を生成時に固定検査する。",
       "readabilityStatus": "二項とも具体的な行列計算への展開またはブロック分割を要するため、節境界だけを確定し、本文完成とは扱わない。"
+    },
+    {
+      "name": "行列と線型写像の対応",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "transfer_matrix_005_definition_end_isomorphism",
+        "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
+        "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
+        "transfer_matrix_claim_end_acts_on_kronecker_products"
+      ],
+      "input": [
+        "複素数、有限複素行列、数ベクトル、線型写像",
+        "具体的なクロネッカー積、その積と多重線型性、クロネッカー積で作る行列単位と数ベクトルの基底",
+        "行列と線型写像の指数級数"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000c_claim_kronecker_multilinear",
+        "linear_space_general_001_theorem_tensor_product_basis",
+        "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+        "exp_linear_map_002_definition_exp_of_endomorphism"
+      ],
+      "output": [
+        "行列単位を基底上の線型写像へ送る写像の具体的な定義",
+        "その写像が積と単位元を保つ全単射であるという主定理",
+        "クロネッカー積で作る行列が各因子の数ベクトルへ成分ごとに作用する公式",
+        "行列表示と線型写像表示の間で指数関数が保たれる系"
+      ],
+      "mainTheorem": "行列表示から線型写像表示への写像は単位的な複素代数の同型である",
+      "mainTheoremEntryId": "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
+      "concludingCorollary": "行列表示と線型写像表示の間で指数関数が保たれる系",
+      "concludingCorollaryEntryId": "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
+      "boundaryEvidence": "章内依存順の連続する四項であり、対応の定義から積と単位元を保つ全単射という主定理へ進み、クロネッカー積の作用公式と指数関数保存の系という二つの出力で節を閉じる。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、二つの節末出力を生成時に固定検査する。",
+      "readabilityStatus": "四項とも線型写像の抽象語彙を含むため、節境界だけを確定し、定義内の基底・基底作用・対応の分割を含む本文完成とは扱わない。"
+    },
+    {
+      "name": "可逆行列と共役写像",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "TV1_hatZ_hatY_009_definition_invertible_elements",
+        "TV1_hatZ_hatY_011_definition_T_g",
+        "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar",
+        "TV1_hatZ_hatY_011a_claim_injectivity_of_T"
+      ],
+      "input": [
+        "複素数と有限複素行列の和・積・単位行列",
+        "具体的なクロネッカー積の積と多重線型性、およびクロネッカー積で作る行列単位の基底",
+        "スカラー倍した単位行列が全行列と可換すること",
+        "全行列と可換する複素行列がスカラー倍した単位行列に限ること"
+      ],
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000c_claim_kronecker_multilinear",
+        "linear_space_general_001_theorem_tensor_product_basis",
+        "linear_space_general_002_claim_scalar_identity_commutes",
+        "linear_space_general_004_lemma_centralizer_is_scalar"
+      ],
+      "output": [
+        "可逆行列と逆行列の具体的な定義および積・逆元・スカラー単位行列に関する基本性質",
+        "可逆行列による共役写像の定義",
+        "可逆行列全体の中で全可逆行列と可換する元が非零スカラー倍の単位行列に限ること",
+        "二つの共役写像が等しいことと、それらを定める可逆行列が非零スカラー倍だけ異なることの同値"
+      ],
+      "mainTheorem": "可逆行列による共役写像は、それを定める行列の非零スカラー倍を除いて単射である",
+      "mainTheoremEntryId": "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
+      "boundaryEvidence": "章内依存順の連続する四項であり、可逆元の定義から共役写像の定義と可逆行列全体の可換元の特徴付けへ進み、両者を使う定数倍を除いた単射性の主定理で節を閉じる。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末出力の一意性を生成時に固定検査する。",
+      "readabilityStatus": "四項とも複素数と有限行列の具体的な計算で書かれ、現行の説明粒度検査に合格している。未定義だった特性多項式・固有値・行列式による可逆化を削除し、明示的な逆行列をもつ行列単位の摂動だけを使う証明へ置き換えた。"
     }
   ],
   "explanationGranularityReview": {
-    "reviewedEntryCount": 274,
+    "reviewedEntryCount": 276,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
       "calc_formulae_005_matrix_conjugation",
@@ -308,13 +383,13 @@
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
-    "inspectedEntryCount": 105,
+    "inspectedEntryCount": 107,
     "contaminatedEntryIds": []
   },
   "chapterStructures": [
     {
       "chapter": "数学的道具立て",
-      "entryCount": 105,
+      "entryCount": 107,
       "dependencyDirection": "prerequisite から dependent へ",
       "topologicalOrder": [
         {
@@ -1006,47 +1081,61 @@
         {
           "order": 99,
           "entryIds": [
-            "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
+            "transfer_matrix_claim_end_acts_on_kronecker_products"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 100,
           "entryIds": [
-            "TV1_hatZ_hatY_009_definition_invertible_elements"
+            "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 101,
           "entryIds": [
-            "TV1_hatZ_hatY_011_definition_T_g"
+            "TV1_hatZ_hatY_009_definition_invertible_elements"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 102,
           "entryIds": [
-            "TV1_hatZ_hatY_011a_claim_injectivity_of_T"
+            "TV1_hatZ_hatY_011_definition_T_g"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 103,
           "entryIds": [
-            "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+            "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 104,
           "entryIds": [
-            "TV1_hatZ_hatY_010_definition_clifford_group"
+            "TV1_hatZ_hatY_011a_claim_injectivity_of_T"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 105,
+          "entryIds": [
+            "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 106,
+          "entryIds": [
+            "TV1_hatZ_hatY_010_definition_clifford_group"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 107,
           "entryIds": [
             "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
           ],
@@ -2375,19 +2464,15 @@
         },
         {
           "dependentId": "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
-          "prerequisiteId": "exp_linear_map_001_theorem_exp_series_pointwise_converges"
-        },
-        {
-          "dependentId": "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
-          "prerequisiteId": "exp_linear_map_002_definition_exp_of_endomorphism"
-        },
-        {
-          "dependentId": "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
           "prerequisiteId": "transfer_matrix_005_definition_end_isomorphism"
         },
         {
           "dependentId": "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
           "prerequisiteId": "transfer_matrix_005b_claim_end_is_algebra_isomorphism"
+        },
+        {
+          "dependentId": "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
+          "prerequisiteId": "transfer_matrix_005c_claim_end_preserves_matrix_exponential"
         },
         {
           "dependentId": "transfer_matrix_007_definition_V1_pm",
@@ -5260,8 +5345,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1787,
-        "inspectedContentSha256": "83e0173980ec5b2269a4e5428c1277ccba953371b02da84a55263a1768f30ec9",
+        "inspectedCharacterCount": 2693,
+        "inspectedContentSha256": "04f567b47243f0caa0fefcdcca59d28a4c715e425053613b62da00936f784560",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7957,7 +8042,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 20,
+        "incomingReferenceCount": 21,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8016,7 +8101,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8131,7 +8216,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8192,7 +8277,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 20,
+        "incomingReferenceCount": 21,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8894,7 +8979,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 24,
+        "incomingReferenceCount": 23,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9284,7 +9369,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9358,8 +9443,8 @@
         "abstractVocabularyMatches": [
           "抽象線型写像"
         ],
-        "inspectedCharacterCount": 12792,
-        "inspectedContentSha256": "ebc65ed3c7281256fca59a32a3d0293c0aa537a5d440cbcea6bf12e70f210faf",
+        "inspectedCharacterCount": 10762,
+        "inspectedContentSha256": "1a9ecef9cd59f12d82071b4c248e4319f7c9be8e3f42cf1bc9289737d9e5d033",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9396,12 +9481,12 @@
       }
     },
     {
-      "id": "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
+      "id": "transfer_matrix_claim_end_acts_on_kronecker_products",
       "kind": "claim",
-      "title": "行列表示と線型写像表示は指数関数を保つ",
+      "title": "クロネッカー積で作る行列の作用",
       "titleFormat": "text",
       "labels": [
-        "end_preserves_matrix_exponential"
+        "end_acts_on_kronecker_products"
       ],
       "sourceFile": "004_transfer_matrix.ts",
       "sourceOrdinal": 5,
@@ -9415,13 +9500,74 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 2328,
+        "inspectedContentSha256": "1a2d1ad2a81a5e00bb14c44c0527fe6bd668077325112d62a4a0e4278960c019",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_end_iso",
+        "definition_of_cc",
+        "kronecker_multilinear",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_000c_claim_kronecker_multilinear",
+        "transfer_matrix_005_definition_end_isomorphism"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "dependencyPlacement": {
+        "chapterOrder": 99,
+        "dependencyUnitEntryIds": [
+          "transfer_matrix_claim_end_acts_on_kronecker_products"
+        ]
+      }
+    },
+    {
+      "id": "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
+      "kind": "claim",
+      "title": "行列表示と線型写像表示は指数関数を保つ",
+      "titleFormat": "text",
+      "labels": [
+        "end_preserves_matrix_exponential"
+      ],
+      "sourceFile": "004_transfer_matrix.ts",
+      "sourceOrdinal": 5,
+      "provisionalFinalChapter": "数学的道具立て",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": true,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
+      },
+      "explanationGranularityReview": {
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [
           "抽象線型写像"
         ],
-        "inspectedCharacterCount": 863,
-        "inspectedContentSha256": "d36b150026d945d12c89ea1f7151fb8ca071f74e2442f74340f03fbc73d21753",
+        "inspectedCharacterCount": 4306,
+        "inspectedContentSha256": "6b163e3b366800fd0dcda4eec827fa428e8721922ff5b3e064127c321b4d62c0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9434,15 +9580,20 @@
         "def_end_iso",
         "def_exp",
         "definition_of_cc",
-        "end_is_algebra_isomorphism"
+        "end_is_algebra_isomorphism",
+        "exp_converges",
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "exp_linear_map_001_theorem_exp_series_pointwise_converges",
         "exp_linear_map_002_definition_exp_of_endomorphism",
         "transfer_matrix_005_definition_end_isomorphism",
         "transfer_matrix_005b_claim_end_is_algebra_isomorphism"
       ],
       "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
         "definition_of_cc"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
@@ -9612,8 +9763,8 @@
         "abstractVocabularyMatches": [
           "抽象線型写像"
         ],
-        "inspectedCharacterCount": 19186,
-        "inspectedContentSha256": "0b3c3557d1682546d853173c878fa610218c49d7dc1339090d27c239abe3fa23",
+        "inspectedCharacterCount": 18189,
+        "inspectedContentSha256": "42e2d01af906f483cc83a316c8daeb53b8d7f323f0c3a9374d61c4ed5d2d227e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9626,11 +9777,10 @@
         "V1_V2_in_Z_Y_epsilon",
         "def_eigenspaces_of_epsilon",
         "def_end_iso",
-        "def_exp",
         "def_transfer_matrix_symbols",
         "definition_of_cc",
         "end_is_algebra_isomorphism",
-        "exp_converges",
+        "end_preserves_matrix_exponential",
         "pauli_matrix_products",
         "set_and_algebra_notation",
         "tensor_anticommutation_from_single_site"
@@ -9640,13 +9790,12 @@
         "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
-        "exp_linear_map_001_theorem_exp_series_pointwise_converges",
-        "exp_linear_map_002_definition_exp_of_endomorphism",
         "transfer_matrix_001_definition_symbols",
         "transfer_matrix_003_claim_V1_V2_in_Z_Y_epsilon",
         "transfer_matrix_004_definition_eigenspaces_of_epsilon",
         "transfer_matrix_005_definition_end_isomorphism",
-        "transfer_matrix_005b_claim_end_is_algebra_isomorphism"
+        "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
+        "transfer_matrix_005c_claim_end_preserves_matrix_exponential"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
@@ -10700,7 +10849,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 103,
+        "chapterOrder": 105,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
         ]
@@ -10761,7 +10910,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 105,
+        "chapterOrder": 107,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
         ]
@@ -11146,7 +11295,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 99,
+        "chapterOrder": 100,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
         ]
@@ -11296,7 +11445,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11332,7 +11481,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 100,
+        "chapterOrder": 101,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_009_definition_invertible_elements"
         ]
@@ -11400,7 +11549,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 104,
+        "chapterOrder": 106,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_010_definition_clifford_group"
         ]
@@ -11515,8 +11664,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 337,
-        "inspectedContentSha256": "8f2fef5f00cf9cb255d2e8271252e91f92e971c2cebdfc2442e505a4520aaf64",
+        "inspectedCharacterCount": 427,
+        "inspectedContentSha256": "5f2b17e53697b3403829f55a1b07c6c85da5db2f0683d5e0d821ac74ac5baeb4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11526,9 +11675,11 @@
         "manualReview": null
       },
       "dependsOnLabels": [
+        "def_invertible_elements_of_R",
         "definition_of_cc"
       ],
       "dependsOnEntryIds": [
+        "TV1_hatZ_hatY_009_definition_invertible_elements",
         "calc_formulae_006_definition_of_cc"
       ],
       "semanticPrerequisiteLabels": [
@@ -11540,9 +11691,76 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 101,
+        "chapterOrder": 102,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_011_definition_T_g"
+        ]
+      }
+    },
+    {
+      "id": "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar",
+      "kind": "claim",
+      "title": "\\mathrm{Mat}(2^M,\\mathbb{C})^\\times \\text{ の全元と可換する可逆行列}",
+      "titleFormat": "tex",
+      "labels": [
+        "center_of_multiplicative_group_is_scalar",
+        "invertible_matrix_centralizer_is_nonzero_scalar_identity"
+      ],
+      "sourceFile": "008_TV1_hatZ_hatY_part1.ts",
+      "sourceOrdinal": 11,
+      "provisionalFinalChapter": "数学的道具立て",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": true,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 8399,
+        "inspectedContentSha256": "36a619c070399daf4e9acddd4cc7c0b7c1b285ba09e5abd36ecc9f4d23bcafaa",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "centralizer_is_scalar",
+        "def_invertible_elements_of_R",
+        "definition_of_cc",
+        "kronecker_multilinear",
+        "kronecker_product_rule",
+        "scalar_identity_commutes",
+        "tensor_basis"
+      ],
+      "dependsOnEntryIds": [
+        "TV1_hatZ_hatY_009_definition_invertible_elements",
+        "calc_formulae_006_definition_of_cc",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000c_claim_kronecker_multilinear",
+        "linear_space_general_001_theorem_tensor_product_basis",
+        "linear_space_general_002_claim_scalar_identity_commutes",
+        "linear_space_general_004_lemma_centralizer_is_scalar"
+      ],
+      "semanticPrerequisiteLabels": [
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "dependencyPlacement": {
+        "chapterOrder": 103,
+        "dependencyUnitEntryIds": [
+          "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar"
         ]
       }
     },
@@ -11552,8 +11770,7 @@
       "title": "T \\text{ の（定数倍を除いた）単射性}",
       "titleFormat": "tex",
       "labels": [
-        "injectivity_of_T_up_to_scalar",
-        "center_of_multiplicative_group_is_scalar"
+        "injectivity_of_T_up_to_scalar"
       ],
       "sourceFile": "008_TV1_hatZ_hatY_part1.ts",
       "sourceOrdinal": 11,
@@ -11570,8 +11787,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 15832,
-        "inspectedContentSha256": "bc04cae1496a7c74f16832d8ea618ea69d2fe94da958bd9a9fce16923a9edef7",
+        "inspectedCharacterCount": 6040,
+        "inspectedContentSha256": "31eb30aa17a1240d5b78d3f1ccddc35af6843ad3b1be767250f2496e8620cb67",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11581,18 +11798,18 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "centralizer_is_scalar",
         "def_T_g",
         "def_invertible_elements_of_R",
         "definition_of_cc",
+        "invertible_matrix_centralizer_is_nonzero_scalar_identity",
         "scalar_identity_commutes"
       ],
       "dependsOnEntryIds": [
         "TV1_hatZ_hatY_009_definition_invertible_elements",
         "TV1_hatZ_hatY_011_definition_T_g",
+        "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar",
         "calc_formulae_006_definition_of_cc",
-        "linear_space_general_002_claim_scalar_identity_commutes",
-        "linear_space_general_004_lemma_centralizer_is_scalar"
+        "linear_space_general_002_claim_scalar_identity_commutes"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc"
@@ -11603,7 +11820,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 102,
+        "chapterOrder": 104,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_011a_claim_injectivity_of_T"
         ]
@@ -16949,8 +17166,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6351,
-        "inspectedContentSha256": "23baab0fab467a407f0b3f3e5e3689ca758233fb9e7011b62aac81f5910a4ab4",
+        "inspectedCharacterCount": 7054,
+        "inspectedContentSha256": "0e9c53869ba279b64ca1107af94192fc7a2a0258ef504be593f6fe10928d4bed",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17027,8 +17244,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10120,
-        "inspectedContentSha256": "5bae15ee3fe8af52daa9167f022bc3f600d70e664166156683ec8a4603c84fde",
+        "inspectedCharacterCount": 10662,
+        "inspectedContentSha256": "6d98ea7847a65c50ed293e10691b908a8492ca27a18f16702b24479c17897d8b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18174,8 +18391,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7946,
-        "inspectedContentSha256": "481a3ac5e47723f687f60b47ebb5695d7ec66ced7e905bb97492b159bfa80342",
+        "inspectedCharacterCount": 8056,
+        "inspectedContentSha256": "10a923d0901323a3be19b872b6b0758f9dc7cd8ecbe5f3359fc3cc64e41567dd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18249,8 +18466,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10647,
-        "inspectedContentSha256": "75bab6b536af2e915e2470bcaf415a79af3566376e9f7308d487e70e701b58a5",
+        "inspectedCharacterCount": 10453,
+        "inspectedContentSha256": "d7fc09e58b8b17625fd4c897a37aa29d0a03a2dcc49d7fde2b6c6abe4ccb8d8e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18329,8 +18546,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9749,
-        "inspectedContentSha256": "6c2388e9055af935de0cf5894da4ff0af56456795097bddfe3387238ded494ef",
+        "inspectedCharacterCount": 9975,
+        "inspectedContentSha256": "abea41676f09e73c46371d845f857df74838f30d79a9c04d038521c5ecd7da08",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20698,8 +20915,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 11276,
-        "inspectedContentSha256": "2975c3713a212c9b986a0c421f8ea0de0df9e38941f6c4ec3658203d02c9271f",
+        "inspectedCharacterCount": 12165,
+        "inspectedContentSha256": "f6814d62a768c8103b4b76e3650fa46c9cb0e98117d4f32395d05214c1f6c472",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20781,8 +20998,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9963,
-        "inspectedContentSha256": "f1e61b8302e4d7ba5935c9a0af3fc934b358d493bf161ce0a5f94efc5c40f47e",
+        "inspectedCharacterCount": 10855,
+        "inspectedContentSha256": "dc7e2f5904eb757583244f6cd03458ad5ef4717c2c46e8bd01319321f4b1cf3c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

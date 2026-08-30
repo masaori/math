@@ -1186,18 +1186,6 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
           math(String.raw`\mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) = \mathrm{id}_{\mathcal{F}}`),
           "。",
         ],
-        [
-          "(4) ",
-          math(String.raw`A_1,\dots,A_M \in \mathrm{Mat}(2,\mathbb{C})`),
-          " と ",
-          math(String.raw`v_1,\dots,v_M \in \mathbb{C}^2`),
-          " について ",
-          math(
-            String.raw`\left(\mathbf{end}(A_1\boxtimes\cdots\boxtimes A_M)\right)(v_1\boxtimes\cdots\boxtimes v_M)
-= (A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)`,
-          ),
-          "。",
-        ],
       ]),
     ],
     proof: [
@@ -1433,8 +1421,45 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
 &&(\because\ \sum_{I\in\mathcal I}\Theta_{I,I}=\mathrm{id}_{\mathcal F}\ \text{を上で示した})
 \end{aligned}`,
       ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "原文（Typst）に対応ブロックは無い。原文が「線型同型を一つ取る」で済ませていた end を" +
+          "正準な単位的代数同型として構成したため、その性質（<V1_restriction_to_eigenspaces> の証明で" +
+          "実際に使うのは線型性・乗法性・単位元の保存）をここで証明した。",
+        "クロネッカー積で作る行列の作用公式は代数同型性とは独立した出力なので、別の主張へ分離した。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_claim_end_acts_on_kronecker_products",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 5 },
+    title: { text: "クロネッカー積で作る行列の作用" },
+    labels: ["end_acts_on_kronecker_products"],
+    statement: [
       paragraph([
-        "Step 5: (4)。両辺は ",
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A_1,\dots,A_M \in \mathrm{Mat}(2,\mathbb{C})`),
+        "、",
+        math(String.raw`v_1,\dots,v_M \in \mathbb{C}^2`),
+        " とする。",
+        ref("def_end_iso"),
+        " の写像について",
+      ]),
+      displayMath(
+        String.raw`\left(\mathbf{end}(A_1\boxtimes\cdots\boxtimes A_M)\right)(v_1\boxtimes\cdots\boxtimes v_M)
+= (A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)`,
+      ),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("kronecker_multilinear"),
+        " より、両辺は ",
         math(String.raw`A_1,\dots,A_M,v_1,\dots,v_M`),
         " の各々について ",
         math(String.raw`\mathbb{C}`),
@@ -1475,10 +1500,8 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
     conversion: {
       status: "added",
       notes: [
-        "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
-        "原文（Typst）に対応ブロックは無い。原文が「線型同型を一つ取る」で済ませていた end を" +
-          "正準な単位的代数同型として構成したため、その性質（<V1_restriction_to_eigenspaces> の証明で" +
-          "実際に使うのは線型性・乗法性・単位元の保存）をここで証明した。",
+        "単位的代数同型の主張に混在していた独立した作用公式を、一ブロック一主張にするため分離した。",
+        "抽象テンソル積を使わず、具体的なクロネッカー積と基底上の成分計算だけで示す。",
       ],
     },
   },
@@ -1490,16 +1513,121 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
     labels: ["end_preserves_matrix_exponential"],
     statement: [
       paragraph([
-        ref("def_end_iso"), " の写像について、", ref("def_exp"), " の行列級数は",
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        "、",
+        math(String.raw`f\in\mathcal{F}=\mathbb{C}^{2^M}`),
+        " とする。",
+        ref("def_end_iso"),
+        " の写像と ",
+        ref("def_exp"),
+        " の行列指数関数について",
       ]),
-      displayMath(String.raw`\mathbf{end}(\exp(A))=\exp(\mathbf{end}(A))\qquad(A\in\mathrm{Mat}(2^M,\mathbb{C}))`),
-      paragraph(["を満たす。"])],
-    proof: [
-      paragraph([ref("end_is_algebra_isomorphism"), " の乗法性と単位元保存より、各部分和について"]),
-      displayMath(String.raw`\mathbf{end}\!\left(\sum_{n=0}^{N}\frac{A^n}{n!}\right)=\sum_{n=0}^{N}\frac{\mathbf{end}(A)^n}{n!}`),
-      paragraph(["である。", ref("def_exp"), " の成分ごとの極限を取ると、両辺の各成分が一致するため結論を得る。"]),
+      paragraph([
+        math(String.raw`\mathbf{end}(A)^0:=\mathrm{id}_{\mathcal{F}}`),
+        "、",
+        math(String.raw`\mathbf{end}(A)^{n+1}:=\mathbf{end}(A)^n\circ\mathbf{end}(A)`),
+        "（",
+        math(String.raw`n\in\mathbb{Z}_{\geq 0}`),
+        "）と定める。このとき",
+      ]),
+      displayMath(
+        String.raw`\left(\mathbf{end}(\exp(A))\right)(f)
+= \lim_{N\to\infty}\sum_{n=0}^{N}\frac{1}{n!}\left(\mathbf{end}(A)^{n}\right)(f)
+\qquad\left(\mathcal{F}\ \text{のノルムに関する収束}\right)`,
+      ),
+      paragraph(["が成り立つ。右辺は線型写像の指数関数という未定義の記号を使わず、数ベクトルの極限として定める。"]),
     ],
-    conversion: { status: "added", notes: ["代数同型の有限積に関する主張と、級数極限を使う指数関数保存を依存境界で分離した。"] },
+    proof: [
+      paragraph([
+        "Step 1: すべての ",
+        math(String.raw`n\in\mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`\mathbf{end}(A^n)=\mathbf{end}(A)^n`),
+        "。",
+        ref("end_is_algebra_isomorphism"),
+        " の単位元保存より、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathbf{end}(A^0)
+&= \mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&&\left(\because\ A^0=I_{\mathrm{Mat}(2^M,\mathbb{C})}\ \text{という行列の零乗の定義}\right)\\
+&= \mathrm{id}_{\mathcal{F}}
+&&\left(\because\ \mathbf{end}\ \text{の単位元保存}\right)\\
+&= \mathbf{end}(A)^0
+&&\left(\because\ \text{線型写像の零乗の定義}\right).
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`n`),
+        " で成り立つと仮定する。",
+        ref("end_is_algebra_isomorphism"),
+        " の乗法性より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathbf{end}(A^{n+1})
+&= \mathbf{end}(A^nA)
+&&\left(\because\ \text{行列の冪の定義}\right)\\
+&= \mathbf{end}(A^n)\circ\mathbf{end}(A)
+&&\left(\because\ \mathbf{end}\ \text{の乗法性}\right)\\
+&= \mathbf{end}(A)^n\circ\mathbf{end}(A)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&= \mathbf{end}(A)^{n+1}
+&&\left(\because\ \text{線型写像の冪の定義}\right).
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`S_N:=\sum_{n=0}^{N}\frac{1}{n!}A^n`),
+        "、",
+        math(String.raw`S:=\exp(A)`),
+        " とおく。",
+        ref("def_exp"),
+        " と ",
+        ref("exp_converges"),
+        " の数ベクトルへの作用の各点収束より、",
+      ]),
+      displayMath(String.raw`S_Nf\longrightarrow Sf\qquad\left(\mathcal{F}\ \text{のノルムに関する収束}\right)`),
+      paragraph([
+        "が成り立つ。",
+        ref("def_end_iso"),
+        " の作用の記法と ",
+        ref("end_is_algebra_isomorphism"),
+        " の線型性、および Step 1 より、各 ",
+        math(String.raw`N\in\mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_Nf
+&= \left(\mathbf{end}(S_N)\right)(f)
+&&\left(\because\ \text{行列の作用の記法}\right)\\
+&= \left(\mathbf{end}\!\left(\sum_{n=0}^{N}\frac{1}{n!}A^n\right)\right)(f)
+&&\left(\because\ S_N\ \text{の定義}\right)\\
+&= \left(\sum_{n=0}^{N}\frac{1}{n!}\mathbf{end}(A^n)\right)(f)
+&&\left(\because\ \mathbf{end}\ \text{の}\ \mathbb{C}\text{-線型性}\right)\\
+&= \left(\sum_{n=0}^{N}\frac{1}{n!}\mathbf{end}(A)^n\right)(f)
+&&\left(\because\ \text{Step 1 を各}\ n\in\{0,\dots,N\}\ \text{へ適用}\right)\\
+&= \sum_{n=0}^{N}\frac{1}{n!}\left(\mathbf{end}(A)^n\right)(f)
+&&\left(\because\ \text{線型写像の有限和とスカラー倍の値の定義}\right).
+\end{aligned}`,
+      ),
+      paragraph([
+        "また ",
+        math(String.raw`Sf=\left(\mathbf{end}(\exp(A))\right)(f)`),
+        " である。Step 2 の収束でこの部分和表示を用いれば、主張の極限等式を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "代数同型の有限積に関する主張と、級数極限を使う指数関数保存を依存境界で分離した。",
+        "End(F) 上の指数関数は現行本文で定義していないため、数ベクトルごとの具体的な部分和の極限として記述した。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
@@ -1985,58 +2113,36 @@ G-G^{(\pm)}
         "Step 6: ",
         math(String.raw`\exp`),
         " への持ち上げ。",
-        ref("def_end_iso"),
-        " の ",
-        math(String.raw`\mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A))`),
-        " より",
+        ref("end_preserves_matrix_exponential"),
+        " を ",
+        math(String.raw`A=G`),
+        " と ",
+        math(String.raw`A=G^{(\pm)}`),
+        " に適用する。任意の ",
+        math(String.raw`f\in\mathcal{F}`),
+        " について、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\mathbf{end}(V_1)
-&= \mathbf{end}(\exp(G))
-&&(\because\ V_1 = \exp(G))\\
-&= \exp\!\left(\hat{G}\right)
-&&(\because\ \mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A))\ \text{と}\ \hat{G} = \mathbf{end}(G))
+\left(\mathbf{end}(V_1)\right)(f)
+&= \left(\mathbf{end}(\exp(G))\right)(f)
+&&\left(\because\ V_1=\exp(G)\right)\\
+&= \lim_{N\to\infty}\sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
+&&\left(\because\ \text{行列表示と線型写像表示の間の指数関数保存}\right),
 \end{aligned}`,
       ),
       paragraph(["および"]),
       displayMath(
         String.raw`\begin{aligned}
-\mathbf{end}\!\left(V_1^{(\pm)}\right)
-&= \mathbf{end}\!\left(\exp\!\left(G^{(\pm)}\right)\right)
-&&(\because\ V_1^{(\pm)} = \exp(G^{(\pm)}))\\
-&= \exp\!\left(\hat{G}^{(\pm)}\right)
-&&(\because\ \mathbf{end}(\exp(A)) = \exp(\mathbf{end}(A))\ \text{と}\ \hat{G}^{(\pm)} = \mathbf{end}(G^{(\pm)}))
+\left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)(f)
+&= \left(\mathbf{end}\!\left(\exp\!\left(G^{(\pm)}\right)\right)\right)(f)
+&&\left(\because\ V_1^{(\pm)}=\exp(G^{(\pm)})\right)\\
+&= \lim_{N\to\infty}\sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(\pm)}\right)^{n}f
+&&\left(\because\ \text{行列表示と線型写像表示の間の指数関数保存}\right)
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\mathcal{F}`),
-        " は有限次元 ",
-        math(String.raw`\mathbb{C}`),
-        "-ノルム線型空間（",
-        ref("def_end_iso"),
-        "）であるから、",
-        ref("def_exp"),
-        " と ",
-        ref("exp_converges"),
-        " により、任意の ",
-        math(String.raw`X\in\mathrm{End}(\mathcal{F})`),
-        " と ",
-        math(String.raw`f\in\mathcal{F}`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\left(\exp(X)\right)f = \lim_{N\to\infty} \sum_{n=0}^{N}\frac{1}{n!}X^{n}f
-\qquad (\mathcal{F} \text{ のノルムに関する収束})`,
-      ),
-      paragraph([
-        "が成り立つ（",
-        ref("exp_converges"),
-        " は級数の各点収束を主張し、",
-        ref("def_exp"),
-        " の ",
-        math(String.raw`\exp(X)`),
-        " はその極限として定まる線型写像である）。ここで解析的操作（",
+        "が成り立つ。ここで解析的操作（",
         math(String.raw`\mathbb{C}`),
         " 上の無限級数の極限）へ移行するのはこの箇所だけであり、Step 1〜5 はすべて有限個の元の" +
           "代数的な等式である。",
@@ -2059,9 +2165,9 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
       ),
       paragraph([
         "と一致する。上の各点収束より ",
-        math(String.raw`S_N \to \left(\exp(\hat{G})\right)f`),
+        math(String.raw`S_N \to \left(\mathbf{end}(V_1)\right)(f)`),
         " かつ ",
-        math(String.raw`S_N^{(\pm)} = S_N \to \left(\exp(\hat{G}^{(\pm)})\right)f`),
+        math(String.raw`S_N^{(\pm)} = S_N \to \left(\mathbf{end}(V_1^{(\pm)})\right)(f)`),
         " であり、同一の点列が 2 つの極限 ",
         math(String.raw`\alpha,\beta`),
         " を持てば、ノルムの三角不等式と極限の定義から次の鎖を得る。",
@@ -2092,12 +2198,8 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
       displayMath(
         String.raw`\begin{aligned}
 \left(\mathbf{end}(V_1)\right)f
-&= \left(\exp(\hat{G})\right)f
-&&(\because\ \text{Step 6 の}\ \mathbf{end}(V_1) = \exp(\hat{G}))\\
-&= \left(\exp(\hat{G}^{(\pm)})\right)f
-&&(\because\ \text{同一の点列}\ S_N = S_N^{(\pm)}\ \text{の極限の一意性})\\
 &= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)f
-&&(\because\ \text{Step 6 の}\ \mathbf{end}(V_1^{(\pm)}) = \exp(\hat{G}^{(\pm)}))
+&&(\because\ \text{同一の点列}\ S_N = S_N^{(\pm)}\ \text{の極限の一意性})
 \end{aligned}`,
       ),
       paragraph([
