@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 21 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 22 回目の tick 時点）
+
+**平滑化後の横断数が二本の閉歩道の横断数と混合横断数の和に分かれることを四層で証明した。** 混合横断数 $c_{\times}(\gamma;k,l)\in\mathbb N$（`def_split_mutual_crossing_number`。$A\times B$ の対で横断の三条件を満たすものの個数）を定義し、平滑化後の横断対の集合を帰属で三つへ互いに素に分割して、位置写像の全単射と横断の三条件の対称性（`claim_transverse_crossing_symmetric`）により $c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)=c_{\mathrm{sm}}(\gamma;k,l)$（`claim_smoothing_split_crossing_partition`）を得た。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対で二本の横断数を各辺列の巡回構造から独立に数えて照合した。Lean は具体版 `KacWard/SmoothingSplitCrossingPartition.lean` と、排他的な二述語による有限集合の三分割だけを残した必要十分版 `three_way_filter_card_necSuf` を通した。次は横断数の帰納の骨格（横断が残る限り平滑化を繰り返す）を立て、回転位相の符号表示へ進む。
+
+前進前レビューでは、前 tick の二本の閉歩道の切断線偶奇の和（コミット `683c0ac0`）を四層で照合し、修正対象が無いことを確認した。台帳末尾に誤って追記されていた式変形統一の記録（21 回目）を正しい節へ移した。
+
+## ひとつ前の到達点（2026-08-30 の 21 回目の tick 時点）
 
 **平滑化で分かれた二本の閉歩道の切断線偶奇の和が元の切断線偶奇に等しいことを四層で証明した。** 二本の辺添字集合 $A,B$ が $I_m$ の互いに素な分割なので、横・縦の切断線指示値の有限和を成分ごとに合併し、二で割った余りを読んで `claim_smoothing_split_seam_parity` を得た。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対で二本の偶奇を各辺列から独立に計算した。Lean は具体版 `KacWard/SmoothingSplitSeamParity.lean` と、自然数の三区間の有限和分割と法 $2$ だけを残した必要十分版 `interval_split_parity_pair_necSuf` を通した。次は二本の横断数と平滑化前後の横断数の関係を固定し、横断数の帰納で回転位相の符号表示へ進む。
 

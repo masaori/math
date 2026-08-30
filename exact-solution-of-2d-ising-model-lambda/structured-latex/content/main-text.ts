@@ -52246,6 +52246,171 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_smoothing_split_crossing",
+        labels: [],
+        title: { text: "二本の閉歩道の横断数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_smoothing_split_crossing_partition",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_split_mutual_crossing_number",
+                kind: "definition",
+                title: { text: "二本の閉歩道の間の混合横断数" },
+                labels: ["def_split_mutual_crossing_number"],
+                habitat: "N",
+                statement: [
+                  paragraph([
+                    ref("def_smoothed_crossing_number"), " と同じ閉じた非後退辺列 ",
+                    math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "、横断する添字 ",
+                    math(String.raw`k<l`), "、平滑化後の出辺族 ",
+                    math(String.raw`(\vec f_r)_{r\in I_m}`), " を取り、",
+                    ref("def_smoothing_index_blocks"), " の分割 ", math(String.raw`A,B`),
+                    " を用いて、混合横断数 ",
+                    math(String.raw`c_{\times}(\gamma;k,l)\in\mathbb N`), " を",
+                  ]),
+                  displayMath(String.raw`c_{\times}(\gamma;k,l):=\bigl|\{(r,s)\in A\times B\mid
+\operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s),\
+\tau(\vec e_r,\vec f_r)=\tau(\vec e_s,\vec f_s)=0,\
+\operatorname{ax}(\operatorname{dir}(\vec e_r))\ne\operatorname{ax}(\operatorname{dir}(\vec e_s))\}\bigr|`),
+                  paragraph([
+                    "で定める。有限な添字対の集合の元の個数なので、この値は自然数として定まる。",
+                    math(String.raw`A`), " と ", math(String.raw`B`),
+                    " は互いに素なので、どの順序なし二元集合 ",
+                    math(String.raw`\{r,s\}`), "（", math(String.raw`r\in A`), "、",
+                    math(String.raw`s\in B`), "）もちょうど一つの対 ",
+                    math(String.raw`(r,s)\in A\times B`), " として数えられる。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_smoothing_split_crossing_partition",
+              kind: "claim",
+              title: { text: "平滑化後の横断数は二本の閉歩道の横断数と混合横断数の和である" },
+              labels: ["claim_smoothing_split_crossing_partition"],
+              habitat: "N",
+              verification: ["sagemath/check/smoothing-straight-visit-count"],
+              lean: [
+                "Ising2DLambda.KacWard.smoothing_split_crossing_partition",
+                "Ising2DLambda.NecSuf.KacWard.three_way_filter_card_necSuf",
+                "Ising2DLambda.KacWard.smoothing_split_crossing_partition_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  " と横断する添字 ", math(String.raw`k<l`), " について、",
+                  ref("def_smoothed_split_edge_sequences"), " の二本の閉歩道 ",
+                  math(String.raw`\gamma_A,\gamma_B`), " は閉じた非後退辺列なので（",
+                  ref("claim_smoothing_splits_closed_walk"),
+                  "）、それぞれの横断数（", ref("def_closed_walk_crossing_number"),
+                  "）が定義される。このとき自然数の等式",
+                ]),
+                displayMath(String.raw`c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)=c_{\mathrm{sm}}(\gamma;k,l)`),
+                paragraph([
+                  "が成り立つ（右辺は ", ref("def_smoothed_crossing_number"),
+                  "、混合横断数は ", ref("def_split_mutual_crossing_number"), "）。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "三つの準備をする。第一に、",
+                  ref("def_smoothed_crossing_number"), " の添字対の集合を ",
+                  math(String.raw`C^{\mathrm{sm}}:=\{(r,s)\in I_m\times I_m\mid
+r<s,\ \operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s),\
+\tau(\vec e_r,\vec f_r)=\tau(\vec e_s,\vec f_s)=0,\
+\operatorname{ax}(\operatorname{dir}(\vec e_r))\ne\operatorname{ax}(\operatorname{dir}(\vec e_s))\}`),
+                  " と置き、帰属で三つに分ける。",
+                  math(String.raw`C_{AA}:=\{(r,s)\in C^{\mathrm{sm}}\mid r\in A,\ s\in A\}`), "、",
+                  math(String.raw`C_{BB}:=\{(r,s)\in C^{\mathrm{sm}}\mid r\in B,\ s\in B\}`), "、",
+                  math(String.raw`C_{\times}:=\{(r,s)\in C^{\mathrm{sm}}\mid r,s\text{ の一方が }A\text{、他方が }B\text{ の元}\}`),
+                  "。", ref("def_smoothing_index_blocks"), " により ",
+                  math(String.raw`I_m`), " の各元は ", math(String.raw`A`), " と ",
+                  math(String.raw`B`), " のちょうど一方に属するから、",
+                  math(String.raw`C^{\mathrm{sm}}`),
+                  " の各対は三つの集合のちょうど一つに属する。互いに素な有限集合の分割により",
+                ]),
+                displayMath(String.raw`|C^{\mathrm{sm}}|=|C_{AA}|+|C_{BB}|+|C_{\times}|.`),
+                paragraph([
+                  "第二に、二本の閉歩道の横断の判定を平滑化後の出辺族の言葉に直す。",
+                  ref("claim_smoothing_splits_closed_walk"), " により、",
+                  math(String.raw`\gamma_A`), " の位置 ", math(String.raw`i`),
+                  " の通過（", ref("def_closed_walk_passes"), "）は非後退接続 ",
+                  math(String.raw`\vec e_{p_A(i)}\to\vec f_{p_A(i)}`), " である。ここで ",
+                  math(String.raw`p_A(i):=k+i`), " は位置の集合 ",
+                  math(String.raw`\{1,\ldots,l-k\}`), " から ", math(String.raw`A`),
+                  " への狭義単調増加な全単射である（", ref("def_smoothed_split_edge_sequences"),
+                  " の並び）。よって ", ref("def_index_pair_crossing"), " と ",
+                  ref("def_transverse_crossing"), " により、位置対 ",
+                  math(String.raw`i<j`), " が ", math(String.raw`\gamma_A`),
+                  " で横断することは、対 ", math(String.raw`(p_A(i),p_A(j))`),
+                  " が ", math(String.raw`C_{AA}`), " の三条件を満たすことと同値であり、",
+                  math(String.raw`p_A`), " の単調性から ",
+                  math(String.raw`p_A(i)<p_A(j)`), " である。位置対と ",
+                  math(String.raw`C_{AA}`), " の対は一対一に対応するから",
+                ]),
+                displayMath(String.raw`c(\gamma_A)=|C_{AA}|.`),
+                paragraph([
+                  "同様に ", ref("claim_smoothing_splits_closed_walk"), " により、",
+                  math(String.raw`\gamma_B`), " の位置 ", math(String.raw`i`),
+                  " の通過は非後退接続 ", math(String.raw`\vec e_{p_B(i)}\to\vec f_{p_B(i)}`),
+                  " である。ここで ", math(String.raw`p_B`), " は位置の集合から ",
+                  math(String.raw`B`), " への全単射で、", math(String.raw`l<m`),
+                  " のときは先頭の ", math(String.raw`m-l`), " 個を ",
+                  math(String.raw`l+1,\ldots,m`), " へ、残りを ",
+                  math(String.raw`1,\ldots,k`), " へ順に送る（", math(String.raw`l=m`),
+                  " のときは ", math(String.raw`1,\ldots,k`), " へ順に送る。",
+                  ref("def_smoothed_split_edge_sequences"), " の並び）。",
+                  math(String.raw`p_B`), " は狭義単調増加とは限らないが、横断の三条件は二つの添字の交換で対称である（",
+                  ref("claim_transverse_crossing_symmetric"),
+                  "）。よって位置の順序なし二元集合 ", math(String.raw`\{i,j\}`),
+                  " が ", math(String.raw`\gamma_B`), " で横断することは、順序なし二元集合 ",
+                  math(String.raw`\{p_B(i),p_B(j)\}`),
+                  " が三条件を満たすことと同値である。横断数は順序なし二元集合の個数であり（",
+                  ref("def_closed_walk_crossing_number"),
+                  " の ", math(String.raw`r<s`), " は各二元集合の代表を一つ選ぶ）、",
+                  math(String.raw`p_B`), " は順序なし二元集合の間の全単射を与えるから",
+                ]),
+                displayMath(String.raw`c(\gamma_B)=|C_{BB}|.`),
+                paragraph([
+                  "第三に、", math(String.raw`C_{\times}`), " の対 ",
+                  math(String.raw`(r,s)`), " を、", math(String.raw`A`),
+                  " に属する側を第一成分に置き直す写像を考える。",
+                  math(String.raw`A`), " と ", math(String.raw`B`),
+                  " は互いに素なので置き直しは一意に定まり、三条件は交換で対称なので（",
+                  ref("claim_transverse_crossing_symmetric"), "）、これは ",
+                  math(String.raw`C_{\times}`), " から ",
+                  ref("def_split_mutual_crossing_number"), " の添字対の集合への全単射である（",
+                  math(String.raw`r<s`), " の代表と順序なし二元集合の一対一対応）。よって ",
+                  math(String.raw`c_{\times}(\gamma;k,l)=|C_{\times}|`),
+                  " である。三つの準備を合わせて",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)
+&=|C_{AA}|+|C_{BB}|+|C_{\times}|
+&&\bigl(\because\ \text{準備の三つの等式}\bigr)\\
+&=|C^{\mathrm{sm}}|
+&&\bigl(\because\ \text{準備の互いに素な有限集合の分割}\bigr)\\
+&=c_{\mathrm{sm}}(\gamma;k,l)
+&&\bigl(\because\ \blkref{def_smoothed_crossing_number}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "となる。全過程は有限集合の数え上げだけで閉じ、実数体も複素数体も現れない。",
+                  "この分割により、平滑化の帰納で閉歩道を二本に分けたとき、横断数は二本の横断数と混合横断数の和として追跡できる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

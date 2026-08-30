@@ -1615,6 +1615,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.interval_split_parity_pair_necSuf
   Ising2DLambda.KacWard.smoothing_split_seam_parity
   Ising2DLambda.KacWard.smoothing_split_seam_parity_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.three_way_filter_card_necSuf
+  Ising2DLambda.KacWard.smoothing_split_crossing_partition
+  Ising2DLambda.KacWard.smoothing_split_crossing_partition_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
