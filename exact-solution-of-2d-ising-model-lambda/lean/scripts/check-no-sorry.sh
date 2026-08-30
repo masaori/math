@@ -1659,6 +1659,11 @@ targets=(
   Ising2DLambda.KacWard.kacWardEntryProduct_orbit_factorization_from_necSuf
   Ising2DLambda.NecSuf.KacWard.sign_transposition
   Ising2DLambda.NecSuf.KacWard.sign_noncommProd
+  Ising2DLambda.NecSuf.KacWard.transpositionChain_apply_of_notMem
+  Ising2DLambda.NecSuf.KacWard.transpositionChain_apply_head
+  Ising2DLambda.NecSuf.KacWard.transpositionChain_apply_getElem
+  Ising2DLambda.NecSuf.KacWard.transpositionChain_apply_getLast
+  Ising2DLambda.NecSuf.KacWard.sign_transpositionChain
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
