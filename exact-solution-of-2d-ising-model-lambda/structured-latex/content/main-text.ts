@@ -49355,6 +49355,202 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_moved_orbit_partition",
+        labels: [],
+        title: { text: "動く辺の軌道族による分割" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_kac_ward_claim_moved_orbit_partition",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_moved_edge_set",
+                    kind: "definition",
+                    title: { text: "置換が動かす向き付き辺の集合" },
+                    labels: ["def_moved_edge_set"],
+                    habitat: "N",
+                    lean: ["Ising2DLambda.KacWard.movedEdgeSet"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " に対し、",
+                        math(String.raw`\varphi`), " が動かす向き付き辺の集合を",
+                      ]),
+                      displayMath(String.raw`M(\varphi):=\{\,\vec e\in\vec E_L\mid
+\varphi(\vec e)\ne\vec e\,\}`),
+                      paragraph([
+                        "で定める。", math(String.raw`\vec E_L`), " は有限集合（",
+                        ref("def_oriented_edges"), "）なので、", math(String.raw`M(\varphi)`),
+                        " も有限集合である。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_permutation_orbit_set",
+                    kind: "definition",
+                    title: { text: "置換の軌道集合" },
+                    labels: ["def_permutation_orbit_set"],
+                    habitat: "N",
+                    lean: ["Ising2DLambda.KacWard.movedOrbit"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " と ",
+                        math(String.raw`\vec e\in\vec E_L`), " に対し、軌道集合を",
+                      ]),
+                      displayMath(String.raw`O_{\varphi}(\vec e):=
+\{\,\varphi^{\circ k}(\vec e)\mid k\in\mathbb N\,\}\subset\vec E_L`),
+                      paragraph([
+                        "で定める（反復合成は ", ref("def_permutation_iterate"), "）。",
+                        ref("def_permutation_minimal_return"), " により、これは軌道列 ",
+                        math(String.raw`\gamma_{\varphi}(\vec e)`), "（",
+                        ref("def_permutation_orbit_sequence"), "）に現れる ",
+                        math(String.raw`r_{\varphi}(\vec e)`), " 個の向き付き辺の集合に等しい。",
+                      ]),
+                    ],
+                  },
+                },
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "kac_ward_definition_moved_orbit_family",
+                    kind: "definition",
+                    title: { text: "動く辺の相異なる軌道の族" },
+                    labels: ["def_moved_orbit_family"],
+                    habitat: "N",
+                    lean: ["Ising2DLambda.KacWard.movedEdgeOrbitSet"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`\vec e,\vec f\in M(\varphi)`), " に対して、",
+                        math(String.raw`\vec e\sim_{\varphi}\vec f`), " を ",
+                        math(String.raw`\vec f\in O_{\varphi}(\vec e)`),
+                        " で定める。同じ軌道集合を重複して数えない軌道族を",
+                      ]),
+                      displayMath(String.raw`\mathcal C(\varphi):=
+\{\,O_{\varphi}(\vec e)\mid \vec e\in M(\varphi)\,\}`),
+                      paragraph([
+                        "で定める。右辺は軌道集合を元とする集合なので、相異なる始点が同じ軌道を与える場合も、",
+                        "その軌道集合自身を同値類の代表として一度だけ含める。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "kac_ward_claim_moved_orbit_partition",
+                kind: "claim",
+                title: { text: "動く辺の軌道族は動く辺集合を互いに素に分割する" },
+                labels: ["claim_moved_orbit_partition"],
+                habitat: "N",
+                verification: ["sagemath/check/permutation-moved-orbit-partition"],
+                lean: [
+                  "Ising2DLambda.KacWard.movedEdgeOrbitSet_partition",
+                  "Ising2DLambda.NecSuf.KacWard.movedOrbitSet_partition",
+                  "Ising2DLambda.KacWard.movedEdgeOrbitSet_partition_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " とする。軌道族 ",
+                    math(String.raw`\mathcal C(\varphi)`), "（", ref("def_moved_orbit_family"),
+                    "）は次を満たす。",
+                  ]),
+                  list([
+                    [math(String.raw`\mathcal C(\varphi)`), " の各元は空でない。"],
+                    [
+                      math(String.raw`C_1,C_2\in\mathcal C(\varphi)`), " かつ ",
+                      math(String.raw`C_1\ne C_2`), " ならば ",
+                      math(String.raw`C_1\cap C_2=\emptyset`), " である。",
+                    ],
+                    [math(String.raw`\bigcup_{C\in\mathcal C(\varphi)}C=M(\varphi)`), " である。"],
+                  ]),
+                  paragraph([
+                    "したがって ", math(String.raw`\sim_{\varphi}`), " は ",
+                    math(String.raw`M(\varphi)`), " 上の同値関係であり、",
+                    math(String.raw`\mathcal C(\varphi)`), " はその同値類の集合である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "まず、", math(String.raw`\vec f\in O_{\varphi}(\vec e)`), " ならば ",
+                    math(String.raw`O_{\varphi}(\vec f)=O_{\varphi}(\vec e)`), " であることを示す。",
+                    ref("def_permutation_orbit_set"), " により、ある ",
+                    math(String.raw`j\in\mathbb N`), " が存在して ",
+                    math(String.raw`\vec f=\varphi^{\circ j}(\vec e)`), " である。任意の ",
+                    math(String.raw`k\in\mathbb N`), " について",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\varphi^{\circ k}(\vec f)
+&=\varphi^{\circ k}\bigl(\varphi^{\circ j}(\vec e)\bigr)
+&&\bigl(\because\ \vec f=\varphi^{\circ j}(\vec e)\bigr)\\
+&=\varphi^{\circ(k+j)}(\vec e)
+&&\bigl(\because\ \blkref{def_permutation_iterate}\text{ の再帰}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "なので ", math(String.raw`O_{\varphi}(\vec f)\subset O_{\varphi}(\vec e)`),
+                    " である。", math(String.raw`j`), " は ",
+                    math(String.raw`0\le j<r_{\varphi}(\vec e)`), " の代表へ取り直せる。",
+                    ref("def_permutation_minimal_return"), " により",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\varphi^{\circ(r_{\varphi}(\vec e)-j)}(\vec f)
+&=\varphi^{\circ r_{\varphi}(\vec e)}(\vec e)
+&&\bigl(\because\ \vec f=\varphi^{\circ j}(\vec e)\text{ と }\blkref{def_permutation_iterate}\bigr)\\
+&=\vec e
+&&\bigl(\because\ \blkref{def_permutation_minimal_return}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "なので、同じ包含を ", math(String.raw`(\vec f,\vec e)`),
+                    " に適用して逆包含を得る。よって二つの軌道集合は等しい。",
+                  ]),
+                  paragraph([
+                    "各軌道が空でないこと。", math(String.raw`O_{\varphi}(\vec e)\in\mathcal C(\varphi)`),
+                    " とすると、", ref("def_permutation_iterate"), " の ",
+                    math(String.raw`\varphi^{\circ0}=\mathrm{id}_{\vec E_L}`), " により ",
+                    math(String.raw`\vec e\in O_{\varphi}(\vec e)`), " である。",
+                  ]),
+                  paragraph([
+                    "相異なる二軌道が互いに素であること。二軌道が ",
+                    math(String.raw`\vec f`), " を共有すると仮定する。直前に示した等式を二度使うと",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+O_{\varphi}(\vec e_1)
+&=O_{\varphi}(\vec f)
+&&\bigl(\because\ \vec f\in O_{\varphi}(\vec e_1)\bigr)\\
+&=O_{\varphi}(\vec e_2)
+&&\bigl(\because\ \vec f\in O_{\varphi}(\vec e_2)\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となる。したがって相異なる二軌道は交わらない。",
+                  ]),
+                  paragraph([
+                    "合併の等式を両包含で示す。", math(String.raw`\vec f\in O_{\varphi}(\vec e)`),
+                    "、", math(String.raw`\vec e\in M(\varphi)`), " とする。",
+                    ref("claim_moved_orbit_closed_nonbacktracking"), " の第一の主張により、軌道の各項は動くので ",
+                    math(String.raw`\vec f\in M(\varphi)`), " である。よって左辺は右辺に含まれる。逆に ",
+                    math(String.raw`\vec e\in M(\varphi)`), " ならば ",
+                    math(String.raw`O_{\varphi}(\vec e)\in\mathcal C(\varphi)`), " かつ ",
+                    math(String.raw`\vec e\in O_{\varphi}(\vec e)`),
+                    " なので右辺は左辺に含まれる。以上で三条件を得る。反射律は ",
+                    math(String.raw`\vec e\in O_{\varphi}(\vec e)`),
+                    "、対称律と推移律は軌道集合の等式から従うので、",
+                    math(String.raw`\sim_{\varphi}`), " は同値関係である。全過程は有限集合の写像と自然数の加法だけで閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },

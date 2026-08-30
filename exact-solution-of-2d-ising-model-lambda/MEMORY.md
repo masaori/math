@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 34 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 35 回目の tick 時点）
+
+**同じ軌道集合を重複排除した動く辺の軌道族が、動く辺集合を互いに素に分割することを四層で証明した（`claim_moved_orbit_partition`）。** 動く辺集合 $E_{\mathrm{mov}}(\varphi)$（`def_moved_edge_set`）、軌道集合 $O_\varphi(\vec e)$（`def_permutation_orbit_set`）、同じ集合を一度だけ残す軌道族 $\mathcal O_{\mathrm{mov}}(\varphi)$（`def_moved_orbit_family`）を定義した。軌道集合そのものを代表として採用し、各軌道が始点を含むこと、交点を持つ二軌道は回帰と単射性から同じ集合になること、族の合併が動く辺集合に一致することを示した。SageMath `permutation-moved-orbit-partition` は先頭六辺の全置換 $6!$ 個・動く辺 3,600 件について同値関係・重複排除・非空性・互いに素・被覆を全数検査した。Lean は具体版 `movedEdgeOrbitSet_partition`、有限性・相等判定・単射性・各点の回帰だけを残した必要十分版 `movedOrbitSet_partition`、導出版を通した。次は非零置換項をこの閉路族で書き、置換符号と重みを軌道ごとの積へ分解する。
+
+前進前レビューでは、前 tick の動く辺の軌道の閉路性（コミット `89b16707`）を四層で照合した。回帰時刻・軌道列の定義と閉路性の主張は今回の分割が直接引き、各ブロックは値の帰属・閉路構成・相異性を担うため、「何も言っていない主張」を含む修正対象は無かった。並列の式変形統一は、姉妹側の半整数運動量の範囲 $\tilde\theta_1\leq\tilde\theta_\mu\leq\tilde\theta_M$ の一行六関係を、定義・実数の四則・単調増加を根拠とする六段の一行一関係へ開いた（姉妹側 check・PDF 345 ページ通過）。
+
+## ひとつ前の到達点（2026-08-30 の 34 回目の tick 時点）
 
 **置換の動く辺の軌道列が向き付き辺の相異なる閉じた非後退辺列になることを四層で証明した（`claim_moved_orbit_closed_nonbacktracking`）。** 反復合成 $\varphi^{\circ k}$（`def_permutation_iterate`）、鳩の巣原理による回帰の存在（`claim_permutation_power_return`）、最小回帰時刻 $r_\varphi(\vec e)$（`def_permutation_minimal_return`）、軌道列 $\gamma_\varphi(\vec e)$（`def_permutation_orbit_sequence`）を定義し、単射性の移送で各項が動く辺であること、動く辺への仮定で隣接接続と閉じる接続、最小性で相異性を示した。SageMath `permutation-orbit-closed-walk` は先頭六辺の全置換 $6!$ 個で回帰・最小性・軌道の閉路性を全数検査した。Lean は具体版 `movedOrbit_closed_nonbacktracking`、単射性・反復合成・自然数の比較だけを残した必要十分版 `moved_iterate_ne` / `orbit_relation_chain` / `orbit_iterates_distinct`、導出版を通した。次は軌道族が動く辺の集合を互いに素に分割することを固定する。
 

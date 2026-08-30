@@ -770,9 +770,21 @@ e^{-ij\tilde\theta_{\mu+M}}
         " では",
       ]),
       displayMath(
-        String.raw`\tilde\theta_1 = \frac{2\pi\cdot\frac12}{M} = \frac{\pi}{M}
-\ \leq\ \tilde\theta_\mu \ \leq\
-\tilde\theta_M = \frac{2\pi\left(M-\frac12\right)}{M} = 2\pi - \frac{\pi}{M}`,
+        String.raw`\begin{aligned}
+\tilde\theta_1
+&=\frac{2\pi\left(1-\frac12\right)}{M}
+&&\left(\because\ \text{antiperiodic\_exp\_sum の }\tilde\theta\text{ の定義}\right)\\
+&=\frac{\pi}{M}
+&&\left(\because\ \mathbb R\text{ の四則}\right)\\
+&\leq\tilde\theta_\mu
+&&\left(\because\ 1\leq\mu\text{ と }\mu\mapsto\tilde\theta_\mu\text{ の単調増加}\right)\\
+&\leq\tilde\theta_M
+&&\left(\because\ \mu\leq M\text{ と }\mu\mapsto\tilde\theta_\mu\text{ の単調増加}\right)\\
+&=\frac{2\pi\left(M-\frac12\right)}{M}
+&&\left(\because\ \text{antiperiodic\_exp\_sum の }\tilde\theta\text{ の定義}\right)\\
+&=2\pi-\frac{\pi}{M}
+&&\left(\because\ \mathbb R\text{ の四則}\right)
+\end{aligned}`,
       ),
       paragraph([
         "であり、",
