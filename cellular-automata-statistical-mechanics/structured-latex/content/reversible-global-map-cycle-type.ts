@@ -388,8 +388,8 @@ h(F(y))
     ],
     proof: [
       paragraph([
-        "各分割の要素は ", math(String.raw`1`), " 以上 ", math(String.raw`|X|`),
-        " 以下であり、要素数も ", math(String.raw`|X|`),
+        ref("def_carrier_cardinality_partitions"), " により各分割の要素は ", math(String.raw`1`),
+        " 以上 ", math(String.raw`|X|`), " 以下であり、要素数も ", math(String.raw`|X|`),
         " 以下である。したがって、長さ ", math(String.raw`|X|`),
         " 以下の有限列を有限集合 ", math(String.raw`\{1,\ldots,|X|\}`),
         " から作る有限個の候補のうち、和が ", math(String.raw`|X|`),

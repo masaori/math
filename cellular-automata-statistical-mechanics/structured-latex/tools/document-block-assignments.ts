@@ -94,7 +94,7 @@ export const blockSectionAssignments = {
   "iterate_monoid_claim_finite_commutative_monoid": "finite_self_map_dynamics",
   "iterate_monoid_claim_finite_decidability": "finite_self_map_dynamics",
   "iterate_monoid_claim_power_collision": "finite_self_map_dynamics",
-  "iterate_monoid_conjugacy_claim_invariant_family_finite_decidability": "finite_self_map_conjugacy",
+  "iterate_monoid_conjugacy_claim_invariant_family_finite_decidability": "finite_self_map_dynamics",
   "iterate_monoid_conjugacy_claim_one_period_iterate_power": "finite_self_map_conjugacy",
   "iterate_monoid_conjugacy_claim_preserves_collision_start": "finite_self_map_conjugacy",
   "iterate_monoid_conjugacy_claim_preserves_minimal_period": "finite_self_map_conjugacy",

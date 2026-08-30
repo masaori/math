@@ -517,7 +517,7 @@ F^{d\lambda_F}(y)=q
   {
     id: "iterate_monoid_conjugacy_claim_invariant_family_finite_decidability",
     kind: "claim",
-    title: { text: "共役不変な根付き木族は有限決定できる" },
+    title: { text: "軌道と安定構造の有限決定" },
     labels: ["claim_iterate_monoid_conjugacy_invariant_family_finite_decidability"],
     habitat: "finite",
     statement: [
