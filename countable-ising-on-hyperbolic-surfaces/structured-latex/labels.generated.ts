@@ -145,6 +145,7 @@ export const ALL_LABELS = [
   "remark_goal_hyperbolic_regular_types",
   "remark_goal_ising_partition_polynomial",
   "remark_goal_paper_scope_and_quotient_input",
+  "remark_goal_paper_subject_preface",
   "remark_goal_primal_dual_fourier",
   "remark_goal_prime_exponent_encoding",
   "remark_goal_product_difference_classification",

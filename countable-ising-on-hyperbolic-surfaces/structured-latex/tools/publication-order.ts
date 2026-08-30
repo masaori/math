@@ -25,7 +25,7 @@ const sectionOrder = [
 type Section = (typeof sectionOrder)[number];
 
 const structureIds: Record<Section, readonly string[]> = {
-  "finite-data-group-foundations": ["publication_heading_mathematical_tools", "publication_heading_finite_data_group_foundations", "publication_goal_finite_data_group_foundations"],
+  "finite-data-group-foundations": ["publication_goal_paper_subject_preface", "publication_heading_mathematical_tools", "publication_heading_finite_data_group_foundations", "publication_goal_finite_data_group_foundations"],
   "finite-graph-even-subgraphs": ["publication_heading_finite_graph_even_subgraphs", "publication_goal_finite_graph_even_subgraphs"],
   "two-stage-group-quotient-input": ["publication_heading_two_stage_group_quotient_input", "publication_goal_two_stage_group_quotient_input"],
   "finite-cell-complex-data": ["publication_heading_finite_cell_complex_data", "publication_goal_finite_cell_complex_data"],
