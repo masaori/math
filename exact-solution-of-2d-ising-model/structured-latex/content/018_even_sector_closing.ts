@@ -1198,13 +1198,21 @@ i\,H_1^{(+)}
         " である。最後に",
       ]),
       displayMath(
-        String.raw`\left(\varepsilon G\right)^2
-= \varepsilon G\varepsilon G
-= \varepsilon^2G^2
-= I\cdot I = I
-\quad \left(\because \varepsilon G = G\varepsilon,\
-\text{epsilon\_projector\_properties (1) の } \varepsilon^2 = I,\
-G^2 = \left(\sigma_M^z\right)^2\left(\sigma_1^z\right)^2 = I\right)`,
+        String.raw`\begin{aligned}
+\left(\varepsilon G\right)^2
+&= \varepsilon G\varepsilon G
+&&\bigl(\because\ \text{二乗の定義}\bigr)\\
+&= \varepsilon^2G^2
+&&\bigl(\because\ \varepsilon G = G\varepsilon\text{（上の (4)}\text{）}\bigr)\\
+&= I\,G^2
+&&\bigl(\because\ \text{epsilon\_projector\_properties (1) の }\varepsilon^2 = I\bigr)\\
+&= I\left(\sigma_M^z\right)^2\left(\sigma_1^z\right)^2
+&&\bigl(\because\ G:=\sigma_M^z\sigma_1^z\text{（上の (3)）と、相異なるサイトの因子の可換性}\bigr)\\
+&= I\cdot I\cdot I
+&&\bigl(\because\ (\sigma_k^z)^2 = I\text{（直後の段落）}\bigr)\\
+&= I
+&&\bigl(\because\ \text{単位行列の積}\bigr)
+\end{aligned}`,
       ),
       paragraph([
         "（",

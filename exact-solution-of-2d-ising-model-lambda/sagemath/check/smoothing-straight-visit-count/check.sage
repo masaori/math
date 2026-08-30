@@ -75,6 +75,7 @@ other_vertex_crossing_checks = 0
 global_crossing_update_checks = 0
 turning_invariance_checks = 0
 seam_parity_invariance_checks = 0
+interval_invariance_checks = 0
 non_isolated_pairs = 0
 max_length = {1: 5, 2: 8, 3: 8}
 for L in range(1, 4):
@@ -186,6 +187,16 @@ for L in range(1, 4):
                 )
                 assert after_seam_parity == before_seam_parity
                 seam_parity_invariance_checks += 1
+                # 平滑化後の添字後続写像 ν は二つの添字区間を渡らない
+                # （claim_smoothing_interval_invariance）。このスクリプトの添字は
+                # 0 始まりだが、k < l の区間 A = {r : k < r <= l} の帰属の同値は
+                # 1 始まりの本文と同じ形である。ν は帰属の同値を全添字で満たす。
+                nu = {r: (r + 1) % m for r in range(m)}
+                nu[k] = (l + 1) % m
+                nu[l] = (k + 1) % m
+                for r in range(m):
+                    assert (k < nu[r] <= l) == (k < r <= l)
+                interval_invariance_checks += 1
                 for vertex in vertices:
                     if vertex == cross_vertex:
                         continue
@@ -225,6 +236,7 @@ assert other_vertex_crossing_checks > 0
 assert global_crossing_update_checks == crossing_pair_total
 assert turning_invariance_checks == crossing_pair_total
 assert seam_parity_invariance_checks == crossing_pair_total
+assert interval_invariance_checks == crossing_pair_total
 print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing pairs, "
       f"{same_vertex_checks} same-vertex and {other_vertex_checks} other-vertex "
       f"count checks, {smoothed_crossing_checks} smoothed vertex-crossing checks, "
@@ -232,4 +244,5 @@ print(f"PASS: {closed_walk_total} closed walks, {crossing_pair_total} crossing p
       f"and {global_crossing_update_checks} global crossing update checks "
       f"and {turning_invariance_checks} turning invariance checks "
       f"and {seam_parity_invariance_checks} seam-parity invariance checks "
+      f"and {interval_invariance_checks} index-interval invariance checks "
       f"({non_isolated_pairs} non-isolated pairs) verified over ZZ")

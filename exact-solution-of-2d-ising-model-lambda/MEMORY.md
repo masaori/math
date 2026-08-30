@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-30 の 17 回目の tick 時点）
+## 現在の到達点（2026-08-30 の 18 回目の tick 時点）
+
+**横断の平滑化後の添字後続写像が二つの添字区間を渡らないことを四層で証明した。** 平滑化後の添字後続写像 $\nu:I_m\to I_m$（`def_smoothed_successor_map`。巡回後続写像 $\sigma$ の二点交換で、$\vec f_r=\vec e_{\nu(r)}$）と、横断する添字 $k<l$ が分ける区間 $A=\{r\in I_m:k<r\le l\}$ と補集合 $B$（`def_smoothing_index_blocks`）を定義し、$\nu(r)\in A\iff r\in A$（`claim_smoothing_interval_invariance`）を、A の内部・$r=l$・B の内部・$r=k$ の四つの閉包の場合分けで示した。これは平滑化が閉歩道を二つの閉じた後続構造へ分けることの添字レベルの基盤である。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対の全添字で帰属の同値を検査した。Lean は具体版 `KacWard/SmoothingIndexInterval.lean` と、二点交換先の帰属と残りの閉包だけを仮定する必要十分版 `swap_redirect_invariant_necSuf` を通した（順序・有限性・全単射性は不要と分かった）。次は各区間上の後続構造を閉歩道として読み替え、回転数・横断数・巻き付き偶奇の更新式を結ぶ帰納でトーラス上の回転位相の符号表示へ進む。
+
+前進前レビューでは、前 tick の切断線偶奇の平滑化不変性（コミット `1269f555`）を四層で照合し、一致を確認した。修正対象は無かった。
+
+並列の式変形統一は、姉妹側の偶数セクター終結章の「$iH_1^{(+)}$ の $\sigma^z$ 表示」で、$(\varepsilon G)^2=I$ の一行四等号（根拠内に一行二等号を含む）を六段の一行一等号・行末根拠つきの鎖へ開いた。次は同じ章の後続の証明を見る。
+
+## ひとつ前の到達点（2026-08-30 の 17 回目の tick 時点）
 
 **横断の平滑化が二つの切断線偶奇を保つことを四層で証明した。** 平滑化後の出辺族 $(\vec f_r)$ は元の巡回後続族 $(\vec e_{\sigma(r)})$ の二点交換であり、巡回後続写像 $\sigma:I_m\to I_m$ は全単射なので、横周期・縦周期それぞれの切断線指示値の有限和とその偶奇は変わらない（`claim_smoothing_seam_parity_invariance`）。SageMath `smoothing-straight-visit-count` は全横断対 3,584 対で二成分を定義から独立に計算した。Lean は具体版 `KacWard/SmoothingSeamParity.lean` と、加法可換モノイド上で全単射による添字の取り替えと二点交換だけを残した必要十分版 `two_point_swap_reindex_sum_necSuf` を通した。次は回転数・横断数・巻き付き偶奇の更新式を結び、トーラス上の回転位相の符号表示へ進む。
 

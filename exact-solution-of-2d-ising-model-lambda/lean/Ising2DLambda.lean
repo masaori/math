@@ -934,3 +934,5 @@ import Ising2DLambda.NecSuf.KacWard.SmoothingTurningInvariance
 import Ising2DLambda.KacWard.SmoothingTurningInvariance
 import Ising2DLambda.NecSuf.KacWard.SmoothingSeamParity
 import Ising2DLambda.KacWard.SmoothingSeamParity
+import Ising2DLambda.NecSuf.KacWard.SmoothingIndexInterval
+import Ising2DLambda.KacWard.SmoothingIndexInterval
