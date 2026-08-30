@@ -508,15 +508,36 @@ export default defineBlocks([
         math(String.raw`\eta \in \mathbb{C}`),
         " が一意に定まる（",
         math(String.raw`q \neq 0`),
-        "）。",
-        ref("epsilon_projector_properties"),
-        " (1) の ",
-        math(String.raw`\varepsilon^2 = I`),
-        " より ",
-        math(String.raw`q = \varepsilon^2q = \eta^2q`),
-        " なので ",
+        "）。次の式変形で ",
         math(String.raw`\eta^2 = 1`),
-        "、すなわち ",
+        " を示す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+q
+&= Iq
+   \quad (\because \text{恒等行列の定義}) \\
+&= \varepsilon^2q
+   \quad (\because \text{epsilon\_projector\_properties (1) の }\varepsilon^2=I) \\
+&= \varepsilon\left(\varepsilon q\right)
+   \quad (\because \text{行列積の結合則}) \\
+&= \varepsilon\left(\eta q\right)
+   \quad (\because \varepsilon q=\eta q\text{ の置き方}) \\
+&= \eta\left(\varepsilon q\right)
+   \quad (\because \eta\in\mathbb C\text{ と行列のスカラー倍の定義}) \\
+&= \eta\left(\eta q\right)
+   \quad (\because \varepsilon q=\eta q\text{ の置き方}) \\
+&= \eta^2q
+   \quad (\because \mathbb C\text{ の積と行列のスカラー倍の結合則})
+\end{aligned}`,
+      ),
+      paragraph([
+        ref("epsilon_projector_properties"),
+        " (1) と上の式変形、および ",
+        math(String.raw`q\neq0`),
+        " より ",
+        math(String.raw`\eta^2=1`),
+        "。したがって ",
         math(String.raw`\eta \in \{+1,-1\}`),
         "（",
         math(String.raw`\mathbb{C}`),

@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 11 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 12 回目の tick 時点）
+
+**行列式の非後退置換和 `claim_kac_ward_determinant_nonbacktracking_phase_sum` を Lean 二版へ配線し、四層検証を完了した。** 具体版 `KacWard.kacWardDeterminant_nonbacktracking_phase_sum` は、Mathlib の行列式を符号付き置換項の有限和へ開き、非後退条件を満たさない項を既存の非零判定の対偶で零にし、許容項へ既存の軌道位相表示を代入した。転倒数で定義した本文側の符号と `Equiv.Perm.sign` の一致も `KacWard.inversionSign_eq_mathlibSign` で証明した。必要十分版 `NecSuf.KacWard.restrictedSum_replace_necSuf` は可換加法モノイド上の有限和、補集合での零、許容添字での値の一致だけを残した。SageMath の非後退置換 30,784 件・四スピン構造、検算対応 329 件、Lean 9,608 jobs・sorry 検査 1,627 件、本文 check・PDF 327 ページを通した。次は横断消去・接触点分割を結び、符号付き偶部分グラフ多項式の平方恒等式へまとめる。
+
+前進前レビューでは前 tick の本文五段と SageMath を照合し、「何も言っていない主張」や不一致は無かった。並列の式変形統一は、姉妹側のパリティ固有値の証明にあった三項の等号を、恒等行列・パリティの平方・結合則・固有値式を一行ずつ引く七段の鎖へ開いた（姉妹側 check・PDF 348 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 11 回目の tick 時点）
 
 **四つの Kac--Ward 行列式が非後退置換の位相表示の和に等しいことを、本文と SageMath で固定した（`claim_kac_ward_determinant_nonbacktracking_phase_sum`。Lean 未着手）。** 非後退置換の集合 $\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)$（`def_nonbacktracking_permutations`）を定義し、行列式の置換展開をこの集合と補集合へ分け、補集合の項は非零判定 `claim_kac_ward_determinant_term_nonzero_iff` の対偶で零、残った各項へ位相表示 `claim_kac_ward_term_orbit_phase_twist_product` を代入して $D^{a,b}_L(x)=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}}\prod_{C\in\mathcal C(\varphi)}\bigl(-x^{\lvert C\rvert}\widehat{(-1)^{a\,h(\gamma^\varphi_C)+b\,v(\gamma^\varphi_C)}\zeta_8^{\,t_\circ(\gamma^\varphi_C)}}\bigr)$ を得た。SageMath `kac-ward-nonbacktracking-sum` は一辺二のトーラスの非後退置換 30,784 件を全列挙し、四つのスピン構造で $\det(I-xM^{a,b})$ の直接計算と $\mathbb Q(\zeta_8)[x]$ で一致を検査した（行列式は全置換の和なので、非後退でない項が零であることも同時に確かめた）。本文 719 ブロック・検算対応 329 件・PDF 327 ページを通した。次はこの主張の Lean 具体版・必要十分版を書き、その後に横断消去・接触点分割を結んで符号付き偶部分グラフ多項式の平方恒等式へまとめる。
 

@@ -50209,6 +50209,10 @@ T^{a,b}_{\varphi}(x)
               labels: ["claim_kac_ward_determinant_nonbacktracking_phase_sum"],
               habitat: "Qbar",
               verification: ["sagemath/check/kac-ward-nonbacktracking-sum"],
+              lean: [
+                "Ising2DLambda.KacWard.kacWardDeterminant_nonbacktracking_phase_sum",
+                "Ising2DLambda.NecSuf.KacWard.restrictedSum_replace_necSuf",
+              ],
               statement: [
                 paragraph([
                   math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),

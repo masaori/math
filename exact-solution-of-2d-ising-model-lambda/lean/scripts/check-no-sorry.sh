@@ -57,6 +57,10 @@ targets=(
   Ising2DLambda.KacWard.movedOrbitWeight_phase_twist_from_necSuf
   Ising2DLambda.NecSuf.KacWard.termOrbitPhaseTwist_necSuf
   Ising2DLambda.KacWard.kacWardSignedPermutationTerm_orbit_phase_twist
+  Ising2DLambda.NecSuf.KacWard.restrictedSum_replace_necSuf
+  Ising2DLambda.KacWard.inversionSign_eq_mathlibSign
+  Ising2DLambda.KacWard.kacWardDeterminant_eq_signedPermutationSum
+  Ising2DLambda.KacWard.kacWardDeterminant_nonbacktracking_phase_sum
   Ising2DLambda.NecSuf.KacWard.arfFourierSignProjection_necSuf
   Ising2DLambda.KacWard.arfFourierSignProjection
   Ising2DLambda.KacWard.arfFourierSignProjection_from_necSuf
