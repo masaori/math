@@ -1,5 +1,12 @@
 # 自動ループ 記録の保管庫
 
+## 2026-08-31 の 17 回目の tick で台帳から移した記録（2026-08-31 の 12 回目）
+
+- 現在地: 行列式の非後退置換和を Lean 二版へ配線し、四層検証を完了した。具体版は行列式を符号付き置換項の有限和へ開いて非後退でない項を零にし、転倒数符号と `Equiv.Perm.sign` の一致も証明した。必要十分版は有限和・補集合での零・許容添字での一致だけを残した。SageMath 30,784 件・四スピン構造、検算対応 329 件、Lean 9,608 jobs・sorry 検査 1,627 件、本文 check・PDF 327 ページを通した。
+- 前進記録: `claim_kac_ward_determinant_nonbacktracking_phase_sum` の Lean 具体版 `kacWardDeterminant_nonbacktracking_phase_sum`、`inversionSign_eq_mathlibSign`、必要十分版 `restrictedSum_replace_necSuf` を書き、本文の `lean:` と sorry 検査へ登録した。
+- 式変形の統一: 姉妹側のパリティ固有値の証明にあった三項の等号を、恒等行列・パリティの平方・結合則・固有値式を一行ずつ引く七段の鎖へ開いた。
+- レビュー記録: 前 tick の本文・SageMath を照合し、「何も言っていない主張」や不一致が無いことを確認した。
+
 ## 2026-08-31 の 16 回目の tick で台帳から移した記録（2026-08-31 の 11 回目）
 
 - 現在地: 四つの Kac--Ward 行列式を非後退置換の位相表示の和として本文と SageMath で固定した。非後退置換 30,784 件と四スピン構造で行列式の直接計算に一致した。Lean は次 tick へ回した。

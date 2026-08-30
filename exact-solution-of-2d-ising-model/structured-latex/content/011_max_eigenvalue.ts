@@ -851,20 +851,46 @@ m_k^{\,2}
 &=m_{k-1}\,m_{k+1}
 &&(\because\ k=2p+2)
 \end{aligned}`),
+      paragraph(["（添字の確認。奇数の場合は"]),
+      displayMath(String.raw`\begin{aligned}
+a+b &= p+(p+1)
+&&(\because\ a=p,\ b=p+1)\\
+&= 2p+1
+&&(\because\ \mathbb{Z}\text{ の加法})\\
+&= k
+&&(\because\ k=2p+1)\\
+2a &= 2p
+&&(\because\ a=p)\\
+&= k-1
+&&(\because\ k=2p+1\ \text{の両辺から }1\text{ を引く})\\
+2b &= 2(p+1)
+&&(\because\ b=p+1)\\
+&= 2p+2
+&&(\because\ \mathbb{Z}\text{ の分配則})\\
+&= k+1
+&&(\because\ k=2p+1\ \text{の両辺へ }1\text{ を足す})
+\end{aligned}`),
+      paragraph(["であり、偶数の場合は"]),
+      displayMath(String.raw`\begin{aligned}
+a+b+1 &= p+(p+1)+1
+&&(\because\ a=p,\ b=p+1)\\
+&= 2p+2
+&&(\because\ \mathbb{Z}\text{ の加法})\\
+&= k
+&&(\because\ k=2p+2)\\
+2a+1 &= 2p+1
+&&(\because\ a=p)\\
+&= k-1
+&&(\because\ k=2p+2\ \text{の両辺から }1\text{ を引く})\\
+2b+1 &= 2(p+1)+1
+&&(\because\ b=p+1)\\
+&= 2p+3
+&&(\because\ \mathbb{Z}\text{ の分配則と加法})\\
+&= k+1
+&&(\because\ k=2p+2\ \text{の両辺へ }1\text{ を足す})
+\end{aligned}`),
       paragraph([
-        "（添字の確認。奇数の場合は ",
-        math(String.raw`a+b = p+(p+1) = 2p+1 = k`),
-        "、",
-        math(String.raw`2a = 2p = k-1`),
-        "、",
-        math(String.raw`2b = 2p+2 = k+1`),
-        "。偶数の場合は ",
-        math(String.raw`a+b+1 = p+(p+1)+1 = 2p+2 = k`),
-        "、",
-        math(String.raw`2a+1 = 2p+1 = k-1`),
-        "、",
-        math(String.raw`2b+1 = 2p+3 = k+1`),
-        "。また ",
+        "である。また ",
         math(String.raw`k \geq 1`),
         " より奇数の場合 ",
         math(String.raw`p = (k-1)/2 \in \mathbb{Z}_{\geq 0}`),
