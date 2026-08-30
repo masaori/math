@@ -1545,12 +1545,24 @@ i\,H_1^{(+)}
         "、よって級数の部分和とも可換、極限とも可換）であることを使うと",
       ]),
       displayMath(
-        String.raw`\varepsilon\,V_1^{(+)}
-= \exp\!\left(K_1D_0\right)
-\left(\cosh(K_1)\,\varepsilon + \sinh(K_1)\,\varepsilon^2 G\right)
-= \exp\!\left(K_1D_0\right)
-\left(\cosh(K_1)\,\varepsilon + \sinh(K_1)\,G\right)
-\quad \left(\because \varepsilon^2 = I\right)`,
+        String.raw`\begin{aligned}
+\varepsilon\,V_1^{(+)}
+&= \varepsilon\,\exp\!\left(K_1D_0\right)\exp\!\left(K_1\varepsilon G\right)
+   \quad (\because \text{この Step の最初の式 }
+   V_1^{(+)} = \exp(K_1D_0)\exp(K_1\varepsilon G)) \\
+&= \exp\!\left(K_1D_0\right)\varepsilon\,\exp\!\left(K_1\varepsilon G\right)
+   \quad (\because \text{直前の可換性 }
+   \varepsilon\exp(K_1D_0) = \exp(K_1D_0)\varepsilon) \\
+&= \exp\!\left(K_1D_0\right)\varepsilon
+   \left(\cosh(K_1)\,I + \sinh(K_1)\,\varepsilon G\right)
+   \quad (\because \text{直前の } \exp(K_1\varepsilon G) \text{ の表示}) \\
+&= \exp\!\left(K_1D_0\right)
+   \left(\cosh(K_1)\,\varepsilon + \sinh(K_1)\,\varepsilon^2 G\right)
+   \quad (\because \text{行列の積の分配則}) \\
+&= \exp\!\left(K_1D_0\right)
+   \left(\cosh(K_1)\,\varepsilon + \sinh(K_1)\,G\right)
+   \quad \left(\because \varepsilon^2 = I\right)
+\end{aligned}`,
       ),
       paragraph([
         "Step 3（成分の読み取り）。",
@@ -1670,10 +1682,15 @@ i\,H_1^{(+)}
       ),
       paragraph(["第 2 項の対角成分は同様に"]),
       displayMath(
-        String.raw`\left(\exp(K_1D_0)\,G\,V_2\right)_{\iota(s),\iota(s)}
-= e^{K_1E(s)}\,s(M)s(1)\,\left(V_2\right)_{\iota(s),\iota(s)}
-= e^{K_1E(s)}\,s(M)s(1)\,e^{MK_2}
-\quad (\because \text{(a) の対角性と (c)})`,
+        String.raw`\begin{aligned}
+\left(\exp(K_1D_0)\,G\,V_2\right)_{\iota(s),\iota(s)}
+&= e^{K_1E(s)}\left(G\,V_2\right)_{\iota(s),\iota(s)}
+   \quad (\because \text{(a) の } \exp(K_1D_0) \text{ の対角性}) \\
+&= e^{K_1E(s)}\,s(M)s(1)\,\left(V_2\right)_{\iota(s),\iota(s)}
+   \quad (\because \text{(a) の } G \text{ の対角性}) \\
+&= e^{K_1E(s)}\,s(M)s(1)\,e^{MK_2}
+   \quad (\because \text{(c)})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`s \in \mathfrak{M}`),
