@@ -406,21 +406,30 @@ e^{-u}
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         " に対して",
       ]),
-      displayMath(String.raw`A := s_1 s_2^* = \sinh 2K_1\,\sinh 2K_2^* \in \mathbb{R}_{>0}`),
+      displayMath(String.raw`A := s_1 s_2^*`),
       paragraph([
-        "と定める。",
-        math(String.raw`A > 0`),
-        " であることは ",
+        "と定める。記号の定義を代入すれば一続きである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A &= s_1 s_2^*
+   \quad (\because A \text{ の定義}) \\
+  &= \sinh 2K_1\,\sinh 2K_2^*
+   \quad (\because \text{def\_transfer\_matrix\_symbols の } s_1 = \sinh 2K_1,\ s_2^* = \sinh 2K_2^*)
+\end{aligned}`),
+      paragraph([
+        "さらに ",
+        math(String.raw`A \in \mathbb{R}_{>0}`),
+        " である。",
         ref("def_transfer_matrix_symbols"),
         " の ",
         math(String.raw`K_1, K_2^* > 0`),
         " と ",
         ref("cosh_sinh_basic_properties"),
-        " (3) から従う（",
+        " (3) から ",
         math(String.raw`s_1 > 0`),
-        "、",
+        " かつ ",
         math(String.raw`s_2^* > 0`),
-        "）。",
+        " であり、正の実数の積は正だからである。",
       ]),
     ],
     conversion: { status: "added" },
