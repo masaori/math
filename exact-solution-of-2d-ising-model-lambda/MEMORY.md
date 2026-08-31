@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 27 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 28 回目の tick 時点）
+
+**頂点単純閉路の一周期の平面持ち上げ点が二つずつ相異なることを本文と SageMath で固定した（Lean 未着手）。** $P_j(\gamma)=P_k(\gamma)$ を仮定すると、前 tick の座標式により対応するトーラス頂点の各代表座標の差が $L$ の整数倍になる。代表は $0$ 以上 $L-1$ 以下なので差は零であり、二つの通過頂点が一致して頂点単純性 $n_{\mathrm{ct}}(\gamma)=0$ に反する（`claim_vertex_simple_plane_lift_points_distinct`）。終点 $P_m$ は巻き付きが零なら始点 $P_0$ に一致し得るため、一周期は $P_0,\ldots,P_{m-1}$ とした。SageMath `vertex-simple-plane-lift-distinct` は $L=1,2,3$ の頂点単純な閉じた非後退辺列 4,504 本・一周期の持ち上げ点 32,264 個を `ZZ` で検査した。検算対応 341 件、本文 748 ブロック・PDF 338 ページ、Lean 9,616 jobs・sorry なしを通した。次は平面格子の単純閉路・周期単純路の回転数を示す。
+
+前進前レビューでは前 tick の `def_plane_lift`・`claim_plane_lift_coordinates` を本文・SageMath（20,384 本・112,280 点）・台帳で照合した。座標式は今回の相異なりの証明が直接引くため「何も言っていない主張」ではなく、記号の濫用・件数の不一致も無かった。並列の式変形統一は、姉妹側の線型写像の指数級数の評価で帰納法の底にあった一行三等号 $\|\Phi^0(Y)\|=\|Y\|=c_{\Phi}^{0}\|Y\|$ を二段の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 349 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 27 回目の tick 時点）
 
 **非後退辺列の平面持ち上げを定義し、持ち上げ点の座標式を本文と SageMath で固定した（Lean 未着手）。** 平面持ち上げ $P_k(\gamma)\in\mathbb Z\times\mathbb Z$ を「始点の代表座標から各歩の行変位・列変位を積む」有限漸化式で定義し（`def_plane_lift`）、すべての時点 $k$ で $P_k(\gamma)=\bigl(s(i'_k)+L\sum_{t\le k}c_{\mathrm v}(\vec e_t)(1-2d_t),\ s(j'_k)+L\sum_{t\le k}c_{\mathrm h}(\vec e_t)(1-2d_t)\bigr)$（$(i'_k,j'_k)=\operatorname{tgt}(\vec e_k)$）が成り立つことを、辺ごとの代表座標の差 `claim_edge_representative_displacement` の移項と帰納法一本で証明した（`claim_plane_lift_coordinates`）。持ち上げ点の各座標はその時点の頂点の代表座標と $L$ の整数倍しか違わないので、後続で持ち上げ点の相異なりを頂点の相異なり（頂点単純性）へ読み戻せる。SageMath `plane-lift-coordinates` は $L=1,2,3$・長さ 6 までの全非後退辺列 20,384 本・持ち上げ点 112,280 個を `ZZ` で検査した。検算対応 340 件、本文 746 ブロック・PDF 337 ページ、Lean 9,616 jobs・sorry なしを通した。次は頂点単純閉路の持ち上げ点の相異なり、続いて平面の単純閉路・周期単純路の回転数を示す。
 

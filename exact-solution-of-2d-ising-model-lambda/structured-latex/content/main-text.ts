@@ -55844,6 +55844,82 @@ P_{k+1}(\gamma)_{\mathrm{row}}
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_vertex_simple_plane_lift_distinct",
+        labels: [],
+        title: { text: "頂点単純閉路の平面持ち上げ" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_vertex_simple_plane_lift_points_distinct",
+            focus: {
+              id: "kac_ward_claim_vertex_simple_plane_lift_points_distinct",
+              kind: "claim",
+              title: { text: "頂点単純閉路の一周期の持ち上げ点は相異なる" },
+              labels: ["claim_vertex_simple_plane_lift_points_distinct"],
+              habitat: "Z",
+              verification: ["sagemath/check/vertex-simple-plane-lift-distinct"],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）について、通過の頂点が相異なる、すなわち ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
+                  "）ならば、一周期の始点を含み終点を除いた持ち上げ点",
+                ]),
+                displayMath(String.raw`P_0(\gamma),P_1(\gamma),\ldots,P_{m-1}(\gamma)\in\mathbb Z\times\mathbb Z`),
+                paragraph([
+                  "は二つずつ相異なる。持ち上げ点は ", ref("def_plane_lift"),
+                  " のものである。終点 ", math(String.raw`P_m(\gamma)`),
+                  " は巻き付きが零なら始点に一致し得るので、この列には含めない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`0\le j<k\le m-1`), " とし、背理法で ",
+                  math(String.raw`P_j(\gamma)=P_k(\gamma)`), " と仮定する。各時点に対応するトーラスの頂点を",
+                ]),
+                displayMath(String.raw`v_0:=\operatorname{src}(\vec e_1)=\operatorname{tgt}(\vec e_m),
+\qquad v_r:=\operatorname{tgt}(\vec e_r)\quad(1\le r\le m-1)`),
+                paragraph([
+                  "と置く。最初の等号は閉じていること（", ref("def_closed_nonbacktracking_walk"),
+                  "）から従う。", math(String.raw`v_r=(i_r,j_r)`), " と書く。",
+                  ref("def_plane_lift"), " と ", ref("claim_plane_lift_coordinates"),
+                  " により、各 ", math(String.raw`r\in\{0,1,\ldots,m-1\}`),
+                  " について、ある ", math(String.raw`a_r,b_r\in\mathbb Z`), " があり",
+                ]),
+                displayMath(String.raw`P_r(\gamma)=\bigl(s(i_r)+La_r,\ s(j_r)+Lb_r\bigr)`),
+                paragraph(["と書ける。したがって第 1 成分について"]),
+                displayMath(String.raw`\begin{aligned}
+s(i_j)-s(i_k)
+&=L(a_k-a_j)
+&&\bigl(\because\ P_j(\gamma)=P_k(\gamma)\text{ の第 1 成分と }\mathbb Z\text{ の四則}\bigr).
+\end{aligned}`),
+                paragraph([
+                  ref("def_residue_maps"), " により ", math(String.raw`0\le s(i_j),s(i_k)\le L-1`),
+                  " なので、左辺の絶対値は ", math(String.raw`L`), " より小さい。右辺は ",
+                  math(String.raw`L`), " の整数倍だから、両辺は ", math(String.raw`0`),
+                  " であり、", math(String.raw`s(i_j)=s(i_k)`), " となる。代表写像 ", math(String.raw`s`),
+                  " は剰余類ごとにただ一つの代表を取るので ", math(String.raw`i_j=i_k`), " である。第 2 成分にも同じ計算を適用して ",
+                  math(String.raw`j_j=j_k`), " を得る。従って ", math(String.raw`v_j=v_k`), " である。",
+                ]),
+                paragraph([
+                  math(String.raw`v_0`), " は第 ", math(String.raw`m`), " 項の通過の頂点、",
+                  math(String.raw`v_r`), "（", math(String.raw`1\le r\le m-1`),
+                  "）は第 ", math(String.raw`r`), " 項の通過の頂点である（", ref("def_closed_walk_passes"),
+                  "）。", math(String.raw`0\le j<k\le m-1`), " なら対応する二つの通過添字は相異なるので、",
+                  math(String.raw`v_j=v_k`), " は ", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
+                  " に反する。ゆえに一周期の持ち上げ点は二つずつ相異なる。全過程は整数の剰余と有限集合の相異なりだけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

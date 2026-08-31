@@ -691,9 +691,18 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         math(String.raw`m=0`),
         " のとき ",
         math(String.raw`\Phi^0=\mathrm{id}_{\mathrm{Mat}(n,K)}`),
-        " は線型であり ",
-        math(String.raw`\left\|\Phi^0(Y)\right\|=\|Y\|=c_{\Phi}^{\,0}\|Y\|`),
-        "。",
+        " は線型である。ノルムについては",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|\Phi^0(Y)\right\|
+&=\|Y\|
+&&(\because\ \Phi^0=\mathrm{id}_{\mathrm{Mat}(n,K)})\\
+&=c_{\Phi}^{\,0}\|Y\|
+&&(\because\ \text{非負実数の零乗は }1)
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`m`),
         " で成り立つとすると、",
         math(String.raw`Y,Z\in\mathrm{Mat}(n,K)`),
