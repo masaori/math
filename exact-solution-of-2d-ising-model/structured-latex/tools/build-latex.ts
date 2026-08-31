@@ -245,6 +245,9 @@ function renderDocument(inner: string): string {
 \\renewcommand{\\partname}{部}
 \\renewcommand{\\proofname}{証明}
 
+% 数式の中からブロックを引く（HTML 側 build-html.ts と同じ記法。lambda 側と同一の定義）
+\\newcommand{\\blkref}[1]{\\text{\\cref{lab:#1}}}
+
 % 版面より広い別行立て数式を、はみ出す分だけ自動で縮める。
 % 縮めないと紙の外へ出て**内容が読めなくなる**（実測で 22 箇所）。
 \\newsavebox{\\displaymathbox}

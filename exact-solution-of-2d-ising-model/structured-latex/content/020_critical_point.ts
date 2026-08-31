@@ -702,10 +702,17 @@ s_1 s_2 = 1
         math(String.raw`\sinh(2K)\sinh(2K^*) = 1`),
         " である。よって",
       ]),
-      displayMath(
-        String.raw`A = s_1 s_2^* = \sinh 2K_1 \sinh 2K_2^* = \sinh 2K\,\sinh 2K^* = 1
-\quad (\because \text{def\_transfer\_matrix\_symbols の } K^* \text{ の定義})`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+A
+&=s_1s_2^*
+&&\bigl(\because\ \blkref{def_critical_sinh_product_A}\bigr)\\
+&=\sinh 2K_1\,\sinh 2K_2^*
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の記号の定義}\bigr)\\
+&=\sinh 2K\,\sinh 2K^*
+&&\bigl(\because\ K_1=K_2=K\text{、}K_2^*=K^*\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の }K^*\text{ の定義}\bigr)
+\end{aligned}`),
       paragraph([
         "これを ",
         ref("gamma_kappa_identity"),

@@ -56225,6 +56225,160 @@ P_m(\gamma)_{\mathrm{row}}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_odd_ray_interior_cells",
+        labels: [],
+        title: { text: "閉格子路の右半直線交差と内側セル" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_odd_ray_interior_cells_bounded",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_right_ray_vertical_crossing_count",
+                  kind: "definition",
+                  title: { text: "単位正方形から右へ延びる半直線との交差数" },
+                  labels: ["def_right_ray_vertical_crossing_count"],
+                  habitat: "N",
+                  statement: [
+                    paragraph([
+                      "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                      "（", ref("def_closed_nonbacktracking_walk"), "）の平面持ち上げを ",
+                      math(String.raw`P_k(\gamma)=(p_k^{\mathrm{row}},p_k^{\mathrm{col}})\in\mathbb Z\times\mathbb Z`),
+                      "（", math(String.raw`k\in\{0,\ldots,m\}`), "）と書く（", ref("def_plane_lift"), "）。",
+                      "整数 ", math(String.raw`r,c\in\mathbb Z`), " に対し、単位正方形 ",
+                      math(String.raw`[r,r+1]\times[c,c+1]`), " の中心から右へ延びる半直線と、",
+                      "持ち上げた格子路の縦辺との交差数 ", math(String.raw`N_{r,c}^{\rightarrow}(\gamma)\in\mathbb N`), " を",
+                    ]),
+                    displayMath(String.raw`N_{r,c}^{\rightarrow}(\gamma):=
+\left|
+\left\{
+k\in\{1,\ldots,m\}\ \middle|\
+\begin{array}{l}
+\text{ある }j\in\mathbb Z\text{ が存在して }c<j\text{ かつ}\\
+\{P_{k-1}(\gamma),P_k(\gamma)\}=\{(r,j),(r+1,j)\}
+\end{array}
+\right\}
+\right|`),
+                    paragraph([
+                      "で定める。右辺は有限集合の元の個数なので自然数である。",
+                      "中心の第 2 座標は ", math(String.raw`c+\tfrac12`), " だが、交差条件は整数の不等式 ",
+                      math(String.raw`c<j`), " だけで書けるため、有理数体や実数体へ持ち上げる必要はない。",
+                    ]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_odd_ray_interior_cells",
+                  kind: "definition",
+                  title: { text: "右半直線との交差奇偶で定める内側セル" },
+                  labels: ["def_odd_ray_interior_cells"],
+                  habitat: "Z",
+                  statement: [
+                    paragraph([
+                      "整数巻き付き数が ", math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
+                      " である閉じた非後退辺列 ", math(String.raw`\gamma`), " に対し、内側セルの添字集合 ",
+                      math(String.raw`\mathcal F_{\rightarrow}(\gamma)\subset\mathbb Z\times\mathbb Z`), " を",
+                    ]),
+                    displayMath(String.raw`\mathcal F_{\rightarrow}(\gamma):=
+\left\{
+(r,c)\in\mathbb Z\times\mathbb Z
+\ \middle|\
+N_{r,c}^{\rightarrow}(\gamma)\equiv1\pmod 2
+\right\}`),
+                    paragraph([
+                      "で定める（", ref("def_right_ray_vertical_crossing_count"), "）。これは交差数の整数としての奇偶だけを使う定義である。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_odd_ray_interior_cells_bounded",
+              kind: "claim",
+              title: { text: "右半直線との交差奇偶で定めた内側セルは有限個である" },
+              labels: ["claim_odd_ray_interior_cells_bounded"],
+              habitat: "Z",
+              verification: ["sagemath/check/odd-ray-interior-cells-bounded"],
+              statement: [
+                paragraph([
+                  "整数巻き付き数が零である閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  " の平面持ち上げを ", math(String.raw`P_k(\gamma)=(p_k^{\mathrm{row}},p_k^{\mathrm{col}})`), " と書き、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+r_{\min}&:=\min_{0\le k\le m}p_k^{\mathrm{row}},&
+r_{\max}&:=\max_{0\le k\le m}p_k^{\mathrm{row}},\\
+c_{\min}&:=\min_{0\le k\le m}p_k^{\mathrm{col}},&
+c_{\max}&:=\max_{0\le k\le m}p_k^{\mathrm{col}}
+\end{aligned}`),
+                paragraph(["と置く。このとき"]),
+                displayMath(String.raw`\mathcal F_{\rightarrow}(\gamma)\subset
+\{r_{\min},\ldots,r_{\max}-1\}\times
+\{c_{\min},\ldots,c_{\max}-1\}`),
+                paragraph([
+                  "である（", ref("def_odd_ray_interior_cells"), "）。右辺は有限集合なので、",
+                  math(String.raw`\mathcal F_{\rightarrow}(\gamma)`), " も有限集合である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "巻き付き数が零なので、持ち上げの終点は始点に一致する（", ref("claim_plane_lift_endpoint_winding"), "）。",
+                  "したがって整数列 ", math(String.raw`a=(p_0^{\mathrm{row}},\ldots,p_m^{\mathrm{row}})`),
+                  " は ", math(String.raw`a_1=a_{m+1}`), " を満たし、隣接差は持ち上げの単位格子歩なので ",
+                  math(String.raw`\{-1,0,1\}`), " に属する（", ref("def_plane_lift"), "、", ref("claim_displacement_is_direction_unit"), "）。",
+                  "任意の ", math(String.raw`r\in\mathbb Z`), " に水準横断数の恒等式を適用すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+U_r(a)-D_r(a)
+&=0
+&&\bigl(\because\ \blkref{claim_integer_sequence_level_crossing}\text{ と }a_1=a_{m+1}\bigr),\\
+U_r(a)
+&=D_r(a)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr),\\
+U_r(a)+D_r(a)
+&=2U_r(a)
+&&\bigl(\because\ U_r(a)=D_r(a)\text{ と }\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "となる。", math(String.raw`U_r(a)+D_r(a)`), " は、行座標 ", math(String.raw`r`), " と ",
+                  math(String.raw`r+1`), " を結ぶ持ち上げの縦辺の総数である。",
+                  math(String.raw`c<c_{\min}`), " なら、そのような縦辺の列座標 ", math(String.raw`j`),
+                  " はすべて ", math(String.raw`c<j`), " を満たすので",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+N_{r,c}^{\rightarrow}(\gamma)
+&=U_r(a)+D_r(a)
+&&\bigl(\because\ \blkref{def_right_ray_vertical_crossing_count}\text{ と }c<c_{\min}\bigr)\\
+&=2U_r(a)
+&&\bigl(\because\ \text{上で示した等式}\bigr)\\
+&\equiv0\pmod2
+&&\bigl(\because\ \mathbb Z\text{ の偶奇}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "一方、", math(String.raw`c_{\max}\le c`), " なら ", math(String.raw`c<j`),
+                  " を満たす縦辺の列座標は無いので ", math(String.raw`N_{r,c}^{\rightarrow}(\gamma)=0`), " である。",
+                  "また、", math(String.raw`r<r_{\min}`), " または ", math(String.raw`r_{\max}\le r`),
+                  " なら行座標 ", math(String.raw`r`), " と ", math(String.raw`r+1`),
+                  " を結ぶ持ち上げの縦辺が無いので、任意の ", math(String.raw`c\in\mathbb Z`),
+                  " について交差数は零である。よって交差数が奇数になり得るのは ",
+                  math(String.raw`r_{\min}\le r<r_{\max}`), " かつ ",
+                  math(String.raw`c_{\min}\le c<c_{\max}`), " の場合だけであり、主張の包含が従う。",
+                  "使ったのは整数の比較・有限の数え上げ・奇偶だけであり、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_plane_simple_polygon_turning",
         labels: [],
         title: { text: "平面の単純閉多角形の回転数" },
@@ -56282,8 +56436,10 @@ P_m(\gamma)
                   "したがって、これらの線分は平面の単純閉格子多角形を作る。",
                 ]),
                 paragraph([
-                  "この多角形の内側にある単位正方形の有限集合を ", math(String.raw`\mathcal F`),
-                  " とする。単純閉多角形についての有限格子版 Jordan の性質により、",
+                  "右半直線との交差奇偶で定めた内側セルの有限集合を ",
+                  math(String.raw`\mathcal F:=\mathcal F_{\rightarrow}(\gamma)`),
+                  " とする（", ref("def_odd_ray_interior_cells"), "、", ref("claim_odd_ray_interior_cells_bounded"), "）。",
+                  "単純閉多角形についての有限格子版 Jordan の性質により、",
                   math(String.raw`\mathcal F`), " とその辺・頂点からなる有限セル複体は円板であり、Euler の等式 ",
                   math(String.raw`V-E+F=1`), " を満たす。ここで ", math(String.raw`F:=|\mathcal F|`),
                   "、", math(String.raw`E`), " は辺数、", math(String.raw`V`), " は頂点数である。",
