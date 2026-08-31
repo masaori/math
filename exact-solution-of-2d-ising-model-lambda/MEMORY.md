@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 61 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 62 回目の tick 時点）
+
+**逆向きの周期持ち上げを部分として含まない一側閉包を定義し、閉じた単位格子路であることを本文と SageMath で固定した（Lean 未着手）。** 台帳の「一側閉包の構成と単純性」を、一側閉包の定義と閉性・一側閉包の頂点単純性の二部品へ割り直し（閉性は端点一致の一論法、単純性は四部分の交差排除の複数論法で分かれるため）、最初の部品を進めた。最大横断水準の基点 $\widetilde P_{k_0}$（$\kappa_\gamma(\widetilde P_{k_0})=K_{\max}$）から、周期持ち上げを $c$ 周期分進み、反復横断階段（反復回数 $t$ は $tW_{\perp}+\min\{0,Lw_{\mathrm h}w_{\mathrm v}\}\ge1$）で帯外へ上がり、平行階段の逆向きを $c$ 本つないで一周期の並進 $cB_\gamma$ を打ち消しながら戻り、反復横断階段の逆向きで始点へ降りる有限列 $F^{\gamma,k_0,t,c}_0,\ldots,F^{\gamma,k_0,t,c}_N$（$N=cm+2tn_{\perp}+cn_{\parallel}$）を定義した（`def_one_sided_periodic_lift_closure`）。四部分の境界の二重表示の一致（$Q_1=S+cB_\gamma$、$Q_1+td_{\perp}$、$S+td_{\perp}$、$S$）と、各部分の連続差が周期持ち上げ・反復横断階段・平行階段の一歩またはその逆向きであることから、閉性と全連続差の単位性を証明した（`claim_one_sided_periodic_lift_closure_closed_unit_steps`）。SageMath `one-sided-periodic-lift-closure` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・一側閉包 30,144 本（基点は最大水準の持ち上げ点すべて、$c=1,2$、$t$ は条件を満たす最小値とその次）・単位歩の検査 656,048 件を `ZZ` で全検査した。次は一側閉包の頂点単純性（四部分の交差排除）を示す。
+
+前進前レビューでは前 tick の平行階段の横断幅評価と帯外条件を本文・SageMath・今回の反復回数条件で照合した。二場合の横断座標表示と帯外条件は今回の定義が直接引く非自明な内容で、「何も言っていない主張」や修正対象は無かった。
+
+## ひとつ前の到達点（2026-09-01 の 61 回目の tick 時点）
 
 **巻き付きベクトルの平行階段の横断座標が両端の水準 $0$ と $Lw_{\mathrm h}w_{\mathrm v}$ の間に収まり、基点の下端水準を周期持ち上げの有限帯より上へ置けば階段全体が持ち上げと交わらないことを本文と SageMath で固定した（Lean 未着手）。** $A:=w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)$ と置き、平行階段の縦部分と横部分を横断座標 $\kappa_\gamma$ で読み、任意の基点 $Q$ と全添字 $s$ について $\min\{0,LA\}\le\kappa_\gamma(Q+G_s^\gamma)-\kappa_\gamma(Q)\le\max\{0,LA\}$ を示した。従って $\kappa_\gamma(Q)+\min\{0,LA\}>K_{\max}(\gamma)$ なら全頂点の横断座標は周期持ち上げの全水準より大きい（`claim_parallel_staircase_transverse_width_bound`）。SageMath `parallel-staircase-transverse-width` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・平行階段の頂点 18,336 個・帯の水準との比較 133,560 件を `ZZ` で全検査した。次は横断階段と平行階段を組み合わせ、逆向き周期を含まない一側閉包を構成して単純性を示す。
 

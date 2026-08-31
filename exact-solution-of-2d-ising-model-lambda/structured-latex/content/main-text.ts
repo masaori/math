@@ -59689,6 +59689,185 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_one_sided_periodic_lift_closure",
+        labels: [],
+        title: { text: "一側閉包の定義と閉性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_periodic_lift_closure_closed_unit_steps",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_one_sided_periodic_lift_closure",
+                kind: "definition",
+                title: { text: "逆向きの周期持ち上げを使わない一側閉包" },
+                labels: ["def_one_sided_periodic_lift_closure"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                    ref("def_directed_winding_numbers"), "）が ",
+                    math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                    " を満たすとする。周期延長した平面持ち上げ ", math(String.raw`\widetilde P_k(\gamma)`),
+                    "（", ref("def_periodic_plane_lift"), "）、一周期の並進ベクトル ",
+                    math(String.raw`B_{\gamma}`), "（", ref("def_periodic_lift_closure_cycle"),
+                    "）、横断移動ベクトル ", math(String.raw`d_{\perp}(\gamma)`), "・横断幅 ",
+                    math(String.raw`W_{\perp}(\gamma)`), "・最大水準 ", math(String.raw`K_{\max}(\gamma)`),
+                    "（", ref("def_transverse_translate_of_periodic_plane_lift"),
+                    "）、反復横断階段 ", math(String.raw`D^{\gamma,Q,t}`), " とその一周期の歩数 ",
+                    math(String.raw`n_{\perp}`), "（", ref("def_iterated_transverse_staircase"), "、",
+                    ref("def_winding_transverse_staircase"), "）、正の平行階段 ",
+                    math(String.raw`G^{\gamma}`), " とその歩数 ", math(String.raw`n_{\parallel}`),
+                    "（", ref("def_winding_parallel_staircase"), "）を使う。基点の添字 ",
+                    math(String.raw`k_0\in\mathbb Z`), " は",
+                  ]),
+                  displayMath(String.raw`\kappa_{\gamma}\!\left(\widetilde P_{k_0}(\gamma)\right)=K_{\max}(\gamma)`),
+                  paragraph([
+                    "を満たすものとし、周期数 ", math(String.raw`c\in\mathbb N`), "、",
+                    math(String.raw`c\ge1`), " と反復回数 ", math(String.raw`t\in\mathbb N`), "、",
+                    math(String.raw`t\ge1`), " は",
+                  ]),
+                  displayMath(String.raw`t\,W_{\perp}(\gamma)+\min\{0,\ L\,w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\}\ \ge\ 1`),
+                  paragraph([
+                    "を満たすものとする。始点 ",
+                    math(String.raw`S:=\widetilde P_{k_0}(\gamma)`), "、",
+                    math(String.raw`Q_1:=\widetilde P_{k_0+cm}(\gamma)=S+c\,B_{\gamma}`),
+                    "（等式は ", ref("def_periodic_plane_lift"),
+                    " の商の読み替えによる）、全歩数 ",
+                    math(String.raw`N:=cm+2t\,n_{\perp}+c\,n_{\parallel}\in\mathbb N`),
+                    " と置き、有限列 ",
+                    math(String.raw`F^{\gamma,k_0,t,c}_0,\ldots,F^{\gamma,k_0,t,c}_N\in\mathbb Z\times\mathbb Z`),
+                    " を次の四部分で定める。第三部分では ",
+                    math(String.raw`i:=j-cm-t\,n_{\perp}`), " を整数の除法で ",
+                    math(String.raw`i=a\,n_{\parallel}+b`), "（", math(String.raw`a\in\mathbb N`), "、",
+                    math(String.raw`b\in\{0,\ldots,n_{\parallel}-1\}`), "）とただ一通りに書く。",
+                  ]),
+                  displayMath(String.raw`F^{\gamma,k_0,t,c}_j:=
+\begin{cases}
+\widetilde P_{k_0+j}(\gamma),&0\le j\le cm,\\
+D^{\gamma,Q_1,t}_{j-cm},&cm\le j\le cm+t\,n_{\perp},\\
+S+t\,d_{\perp}(\gamma)+(c-a)\,B_{\gamma}-G^{\gamma}_b,&cm+t\,n_{\perp}\le j\le cm+t\,n_{\perp}+c\,n_{\parallel},\\
+D^{\gamma,S,t}_{N-j},&cm+t\,n_{\perp}+c\,n_{\parallel}\le j\le N.
+\end{cases}`),
+                  paragraph([
+                    "これを一側閉包と呼ぶ。元の周期持ち上げを ", math(String.raw`c`),
+                    " 周期分だけ順向きに進み、反復横断階段で帯外へ上がり、平行階段の逆向きを ",
+                    math(String.raw`c`), " 本つないで一周期の並進を打ち消しながら戻り、",
+                    "反復横断階段の逆向きで始点へ降りる有限列であり、逆向きの周期持ち上げを部分として含まない。",
+                    "全ての添字・点・演算は整数の除法・四則と有限列だけで定まり、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_one_sided_periodic_lift_closure_closed_unit_steps",
+              kind: "claim",
+              title: { text: "一側閉包は閉じた単位格子路である" },
+              labels: ["claim_one_sided_periodic_lift_closure_closed_unit_steps"],
+              habitat: "Z",
+              verification: ["sagemath/check/one-sided-periodic-lift-closure"],
+              statement: [
+                paragraph([
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）は",
+                ]),
+                displayMath(String.raw`F^{\gamma,k_0,t,c}_0=F^{\gamma,k_0,t,c}_N=\widetilde P_{k_0}(\gamma)`),
+                paragraph([
+                  "を満たし、任意の ", math(String.raw`j\in\{0,\ldots,N-1\}`),
+                  " について差 ", math(String.raw`F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j`),
+                  " は ", math(String.raw`(1,0),(-1,0),(0,1),(0,-1)`),
+                  " のいずれかである。すなわち一側閉包は閉じた単位格子路である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず四部分の境界で二つの表示が一致することを確かめる。",
+                  math(String.raw`j=cm`), " では第一部分が ",
+                  math(String.raw`\widetilde P_{k_0+cm}(\gamma)=Q_1`),
+                  "、第二部分が ", math(String.raw`D^{\gamma,Q_1,t}_0=Q_1`),
+                  "（", ref("def_iterated_transverse_staircase"), "）である。",
+                  math(String.raw`j=cm+t\,n_{\perp}`), " では第二部分が ",
+                  math(String.raw`D^{\gamma,Q_1,t}_{t n_{\perp}}=Q_1+t\,d_{\perp}(\gamma)=S+c\,B_{\gamma}+t\,d_{\perp}(\gamma)`),
+                  "（", ref("def_iterated_transverse_staircase"), "、",
+                  ref("def_one_sided_periodic_lift_closure"), " の ",
+                  math(String.raw`Q_1`), " の等式）、第三部分が ",
+                  math(String.raw`i=0`), " すなわち ", math(String.raw`a=0`), "、",
+                  math(String.raw`b=0`), "、", math(String.raw`G^{\gamma}_0=(0,0)`), " なので ",
+                  math(String.raw`S+t\,d_{\perp}(\gamma)+c\,B_{\gamma}`),
+                  "（", ref("def_winding_parallel_staircase"), "）で一致する。",
+                  math(String.raw`j=cm+t\,n_{\perp}+c\,n_{\parallel}`), " では第三部分が ",
+                  math(String.raw`i=c\,n_{\parallel}`), " すなわち ", math(String.raw`a=c`), "、",
+                  math(String.raw`b=0`), " なので ", math(String.raw`S+t\,d_{\perp}(\gamma)`),
+                  "、第四部分が ", math(String.raw`N-j=t\,n_{\perp}`), " なので ",
+                  math(String.raw`D^{\gamma,S,t}_{t n_{\perp}}=S+t\,d_{\perp}(\gamma)`),
+                  "（", ref("def_iterated_transverse_staircase"), "）で一致する。",
+                  math(String.raw`j=0`), " と ", math(String.raw`j=N`), " では ",
+                  math(String.raw`F^{\gamma,k_0,t,c}_0=\widetilde P_{k_0}(\gamma)=S=D^{\gamma,S,t}_0=F^{\gamma,k_0,t,c}_N`),
+                  "（", ref("def_iterated_transverse_staircase"), "）なので閉じている。",
+                ]),
+                paragraph([
+                  "次に各部分の連続差が単位格子ベクトルであることを確かめる。第一部分の ",
+                  math(String.raw`0\le j<cm`), " では、", math(String.raw`k_0+j=qm+r`),
+                  " を整数の除法の表示とすると、",
+                  math(String.raw`r\le m-2`), " なら",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\widetilde P_{k_0+j+1}(\gamma)-\widetilde P_{k_0+j}(\gamma)
+&=P_{r+1}(\gamma)-P_{r}(\gamma)
+&&\bigl(\because\ \blkref{def_periodic_plane_lift}\text{ の商と余りの読み替え}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "であり、", math(String.raw`r=m-1`), " なら",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\widetilde P_{k_0+j+1}(\gamma)-\widetilde P_{k_0+j}(\gamma)
+&=P_{0}(\gamma)+B_{\gamma}-P_{m-1}(\gamma)
+&&\bigl(\because\ \blkref{def_periodic_plane_lift}\text{ の商と余りの読み替え}\bigr)\\
+&=P_{m}(\gamma)-P_{m-1}(\gamma)
+&&\bigl(\because\ \blkref{claim_plane_lift_endpoint_winding}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。いずれも平面持ち上げの一歩なので、四つの単位格子ベクトルのいずれかである（",
+                  ref("def_plane_lift"), " の漸化式）。第二部分と第四部分の連続差は、反復横断階段の一歩",
+                  "またはその逆向きなので単位格子ベクトルである（",
+                  ref("claim_iterated_transverse_staircase_lower_bound"), "）。第三部分の ",
+                  math(String.raw`i=a\,n_{\parallel}+b`), " から ", math(String.raw`i+1`),
+                  " への連続差は、", math(String.raw`b\le n_{\parallel}-2`), " なら",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
+&=-\bigl(G^{\gamma}_{b+1}-G^{\gamma}_b\bigr)
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の第三部分と }\mathbb Z\times\mathbb Z\text{ の成分ごとの加減}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "であり、", math(String.raw`b=n_{\parallel}-1`), " なら ",
+                  math(String.raw`i+1=(a+1)n_{\parallel}+0`), " なので",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
+&=-B_{\gamma}+G^{\gamma}_{n_{\parallel}-1}
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の第三部分と }G^{\gamma}_0=(0,0)\bigr)\\
+&=-\bigl(G^{\gamma}_{n_{\parallel}}-G^{\gamma}_{n_{\parallel}-1}\bigr)
+&&\bigl(\because\ G^{\gamma}_{n_{\parallel}}=B_{\gamma}\ \text{（}\blkref{def_winding_parallel_staircase}\text{）}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。いずれも平行階段の一歩の逆向きなので、四つの単位格子ベクトルのいずれかである（",
+                  ref("claim_winding_parallel_staircase_step_increase"),
+                  "）。以上で全ての連続差が単位格子ベクトルであることが確かめられた。",
+                  "全過程は整数の除法・四則と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
