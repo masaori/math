@@ -6,7 +6,7 @@
 
 **閉歩道の平面持ち上げの終点が始点と巻き付きベクトルの $L$ 倍だけ違うことを本文と SageMath で固定した（Lean 未着手）。** 座標式 `claim_plane_lift_coordinates` の $k=m$ の場合と閉性 $\operatorname{tgt}(\vec e_m)=\operatorname{src}(\vec e_1)$ から、$P_m(\gamma)=P_0(\gamma)+(L\,w_{\mathrm v}(\gamma),\ L\,w_{\mathrm h}(\gamma))$ を四段の行末根拠つきの鎖で示した（`claim_plane_lift_endpoint_winding`）。これにより、巻き付きが零の頂点単純閉路の持ち上げは平面の単純閉多角形になり、原始的な巻き付きの持ち上げは周期 $(L w_{\mathrm v}, L w_{\mathrm h})$ の周期単純路になる（離散 Whitney の回転数の議論の舞台）。SageMath `plane-lift-endpoint-winding` は $L=1,2,3$・長さ 6 までの閉じた非後退辺列 4,128 本を `ZZ` で検査した。検算対応 342 件、本文 750 ブロック・PDF 338 ページ、Lean 9,616 jobs・sorry なしを通した。次は平面の単純閉多角形の回転数（離散 Whitney の本体）を示す。
 
-前進前レビューでは前 tick の `claim_vertex_simple_plane_lift_points_distinct` を本文・SageMath（4,504 本・32,264 点）・台帳で照合した。主張は持ち上げの単射性を述べ、今回の終点の等式と合わせて離散 Whitney の舞台を与えるため「何も言っていない主張」ではなく、修正対象なし。並列の式変形統一は、姉妹側の行列ノルムの劣乗法性の証明にあった一行複数関係を行末根拠つきの鎖へ開いた。
+前進前レビューでは前 tick の `claim_vertex_simple_plane_lift_points_distinct` を本文・SageMath（4,504 本・32,264 点）・台帳で照合した。主張は持ち上げの単射性を述べ、今回の終点の等式と合わせて離散 Whitney の舞台を与えるため「何も言っていない主張」ではなく、修正対象なし。並列の式変形統一は、姉妹側の行列ノルムの劣乗法性の証明で根拠の無かった四行（末項の吸収・行列の積の定義・ノルムの定義・積の平方）へ行末根拠を付けた（姉妹側 check・PDF 349 ページ通過）。
 
 ## ひとつ前の到達点（2026-08-31 の 28 回目の tick 時点）
 
