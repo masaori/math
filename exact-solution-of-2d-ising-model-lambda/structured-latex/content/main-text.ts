@@ -57624,6 +57624,99 @@ e_x(S):=\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_hole_free_cell_set_euler_number",
+        labels: [],
+        title: { text: "辺連結なセル集合と補集合から決まる Euler 数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_hole_free_cell_set_euler_number_one",
+            focus: {
+              id: "kac_ward_claim_hole_free_cell_set_euler_number_one",
+              kind: "claim",
+              title: { text: "有限な辺連結セル集合の補集合も辺連結なら Euler 数は 1 である" },
+              labels: ["claim_hole_free_cell_set_euler_number_one"],
+              habitat: "Z",
+              verification: ["sagemath/check/hole-free-cell-set-euler-number"],
+              statement: [
+                paragraph([
+                  "空でない有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                  "（セルの集合）が辺連結であり（", ref("def_edge_connected_cell_set"), "）、補集合 ",
+                  math(String.raw`(\mathbb Z\times\mathbb Z)\setminus S`),
+                  " も辺連結であるとする。このとき、セル集合の Euler 数（",
+                  ref("def_cell_euler_number"), "）は",
+                ]),
+                displayMath(String.raw`\chi_{\square}(S)=1`),
+                paragraph([
+                  "を満たす。とくに、零巻き付きの頂点単純閉路の内側セル集合 ",
+                  math(String.raw`\mathcal F_{\rightarrow}(\gamma)`), " はこの仮定を満たす。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "頂点集合 ", math(String.raw`\mathcal V_{\square}(S)`), " と辺集合 ",
+                  math(String.raw`\mathcal E_{\square}(S)`), " をそれぞれ ",
+                  ref("def_cell_vertex_set"), " と ", ref("def_cell_edge_set"),
+                  " のものとし、その元を頂点と辺とする有限平面グラフを ", math(String.raw`G_S`),
+                  " と書く。セルの辺隣接列では、隣り合う二セルが共有する辺の端点を通って両セルの四隅を結べる。",
+                  math(String.raw`S`), " は空でなく辺連結なので、", math(String.raw`G_S`),
+                  " は空でない連結グラフである。格子辺は端点以外では交わらないので、これは交差のない平面グラフである。",
+                ]),
+                paragraph([
+                  math(String.raw`G_S`), " の面の個数を ", math(String.raw`R_S\in\mathbb N`),
+                  " と書く。各セル ", math(String.raw`x\in S`),
+                  " の四辺はすべて ", math(String.raw`\mathcal E_{\square}(S)`),
+                  " に属するため、その四辺で囲まれた内部は一つの面であり、異なるセルは異なる面を与える。",
+                  "それ以外の面は外側セルからなる。辺隣接する二外側セルの共有辺は ",
+                  math(String.raw`S`), " のどのセルの辺でもないので ",
+                  math(String.raw`\mathcal E_{\square}(S)`),
+                  " に属さず、二セルは同じ面に入る。補集合は辺連結なので、すべての外側セルは一つの面に入り、",
+                  "この面はセル座標を任意に遠くまで進められる外側の面である。したがって",
+                ]),
+                displayMath(String.raw`R_S=|S|+1`),
+                paragraph([
+                  "である。ここで有限連結平面グラフの Euler の数え上げを ", math(String.raw`G_S`),
+                  " に適用する。その頂点数と辺数を ", math(String.raw`V_S,E_S\in\mathbb N`),
+                  " と書く。連結有限グラフから、閉路を作らない辺だけを残して全頂点を結ぶ木を取る。",
+                  "木は一頂点から始めて新しい頂点を一つ結ぶ辺を一つずつ加えて作れるので、辺数は ",
+                  math(String.raw`V_S-1`), "、面は外側の一つだけである。残りの辺を平面上の格子辺として一つずつ戻すと、",
+                  "各辺は既存の一つの面の内部を二つに分けるので、辺数と面数が同時に一つずつ増える。ゆえに ",
+                  math(String.raw`V_S-E_S+R_S`), " は変わらず、木の場合の値 ", math(String.raw`2`), " に等しい。すなわち",
+                ]),
+                displayMath(String.raw`V_S-E_S+R_S=2`),
+                paragraph(["である。以上を合わせると"]),
+                displayMath(String.raw`\begin{aligned}
+\chi_{\square}(S)
+&=\bigl|\mathcal V_{\square}(S)\bigr|-\bigl|\mathcal E_{\square}(S)\bigr|+|S|
+&&\bigl(\because\ \blkref{def_cell_euler_number}\bigr)\\
+&=V_S-E_S+(R_S-1)
+&&\bigl(\because\ R_S=|S|+1\bigr)\\
+&=(V_S-E_S+R_S)-1
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=2-1
+&&\bigl(\because\ V_S-E_S+R_S=2\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "最後に、零巻き付きで通過の頂点が相異なる閉じた非後退辺列 ", math(String.raw`\gamma`),
+                  " では、内側セル集合は空でなく有限かつ辺連結（",
+                  ref("claim_odd_ray_interior_cells_bounded"), "、", ref("claim_interior_cell_set_edge_connected"),
+                  "）、その補集合も辺連結（", ref("claim_exterior_cell_set_edge_connected"),
+                  "）なので、この主張を ", math(String.raw`S:=\mathcal F_{\rightarrow}(\gamma)`),
+                  " へ適用できる。使った量は有限な頂点・辺・面の個数と整数の四則だけであり、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_plane_simple_polygon_turning",
         labels: [],
         title: { text: "平面の単純閉多角形の回転数" },
@@ -57684,9 +57777,10 @@ P_m(\gamma)
                   "右半直線との交差奇偶で定めた内側セルの有限集合を ",
                   math(String.raw`\mathcal F:=\mathcal F_{\rightarrow}(\gamma)`),
                   " とする（", ref("def_odd_ray_interior_cells"), "、", ref("claim_odd_ray_interior_cells_bounded"), "）。",
-                  "単純閉多角形についての有限格子版 Jordan の性質により、",
-                  math(String.raw`\mathcal F`), " とその辺・頂点からなる有限セル複体は円板であり、Euler の等式 ",
-                  math(String.raw`V-E+F=1`), " を満たす。ここで ", math(String.raw`F:=|\mathcal F|`),
+                  "内側セル集合は空でなく有限かつ辺連結で、その補集合も辺連結なので（",
+                  ref("claim_odd_ray_interior_cells_bounded"), "、", ref("claim_interior_cell_set_edge_connected"), "、",
+                  ref("claim_exterior_cell_set_edge_connected"), "）、", ref("claim_hole_free_cell_set_euler_number_one"),
+                  " により Euler の等式 ", math(String.raw`V-E+F=1`), " を満たす。ここで ", math(String.raw`F:=|\mathcal F|`),
                   "、", math(String.raw`E`), " は辺数、", math(String.raw`V`), " は頂点数である。",
                   "一つ、二つ、三つ、四つの正方形に接する頂点の個数をそれぞれ ",
                   math(String.raw`v_1,v_2,v_3,v_4\in\mathbb N`), " と置く。境界が単純なので、",

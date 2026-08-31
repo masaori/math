@@ -1248,11 +1248,11 @@ c_0\,\frac{\theta}{2} \ \leq\ \sin\frac{\theta}{2} \ &\leq\ \frac{\theta}{2}
         String.raw`\begin{aligned}
 t-\sin t
 &=\int_0^t(1-\cos v)\,dv
-  \quad (\because \text{(R4) を }F(t)=t-\sin t\text{ に適用}) \\
+&& (\because \text{(R4) を }F(t)=t-\sin t\text{ に適用}) \\
 &\geq\int_0^t0\,dv
-  \quad (\because 1-\cos v\geq0\text{ と (R3) の単調性}) \\
+&& (\because 1-\cos v\geq0\text{ と (R3) の単調性}) \\
 &=0
-  \quad (\because \text{零関数の積分})
+&& (\because \text{零関数の積分})
 \end{aligned}`,
       ),
       paragraph([
@@ -1270,11 +1270,11 @@ t-\sin t
         String.raw`\begin{aligned}
 \cos t-1+\frac{t^2}{2}
 &=\int_0^t(u-\sin u)\,du
-  \quad (\because \text{(R4) と }(\cos t-1+t^2/2)'=t-\sin t) \\
+&& (\because \text{(R4) と }(\cos t-1+t^2/2)'=t-\sin t) \\
 &\geq\int_0^t0\,du
-  \quad (\because \text{Step 1 と (R3) の単調性}) \\
+&& (\because \text{Step 1 と (R3) の単調性}) \\
 &=0
-  \quad (\because \text{零関数の積分})
+&& (\because \text{零関数の積分})
 \end{aligned}
 \qquad (t\geq0)`,
       ),
@@ -1283,11 +1283,11 @@ t-\sin t
         String.raw`\begin{aligned}
 \sin t-t+\frac{t^3}{6}
 &=\int_0^t\left(\cos v-1+\frac{v^2}{2}\right)dv
-  \quad (\because \text{(R4) と }(\sin t-t+t^3/6)'=\cos t-1+t^2/2) \\
+&& (\because \text{(R4) と }(\sin t-t+t^3/6)'=\cos t-1+t^2/2) \\
 &\geq\int_0^t0\,dv
-  \quad (\because \text{直前の非負性と (R3) の単調性}) \\
+&& (\because \text{直前の非負性と (R3) の単調性}) \\
 &=0
-  \quad (\because \text{零関数の積分})
+&& (\because \text{零関数の積分})
 \end{aligned}
 \qquad (t\geq0)`,
       ),
@@ -1311,11 +1311,11 @@ t-\sin t
         String.raw`\begin{aligned}
 0
 &\leq\frac{\theta}{2}-\sin\frac{\theta}{2}
-  \quad (\because \text{Step 1 を }t=\theta/2\text{ に適用}) \\
+&& (\because \text{Step 1 を }t=\theta/2\text{ に適用}) \\
 &\leq\frac{1}{6}\left(\frac{\theta}{2}\right)^3
-  \quad (\because \text{Step 2 を }t=\theta/2\text{ に適用}) \\
+&& (\because \text{Step 2 を }t=\theta/2\text{ に適用}) \\
 &=\frac{\theta^3}{48}
-  \quad (\because \mathbb R\text{ の四則})
+&& (\because \mathbb R\text{ の四則})
 \end{aligned}`,
       ),
       paragraph(["また"]),
@@ -1323,13 +1323,13 @@ t-\sin t
         String.raw`\begin{aligned}
 \sin\frac{\theta}{2}
 &\geq \frac{\theta}{2} - \frac{1}{6}\left(\frac{\theta}{2}\right)^3
-   \quad (\because \text{Step 2}) \\
+&& (\because \text{Step 2}) \\
 &= \frac{\theta}{2}\left(1 - \frac{1}{6}\left(\frac{\theta}{2}\right)^2\right)
-   \quad (\because \mathbb R\text{ の分配則}) \\
+&& (\because \mathbb R\text{ の分配則}) \\
 &\geq \frac{\theta}{2}\left(1 - \frac{1}{6}\cdot\frac{\pi^2}{4}\right)
-   \quad (\because 0 \leq \tfrac{\theta}{2} \leq \tfrac{\pi}{2}) \\
+&& (\because 0 \leq \tfrac{\theta}{2} \leq \tfrac{\pi}{2}) \\
 &= c_0\,\frac{\theta}{2}
-   \quad (\because c_0=1-\pi^2/24\text{ の定義と }\mathbb R\text{ の四則})
+&& (\because c_0=1-\pi^2/24\text{ の定義と }\mathbb R\text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
