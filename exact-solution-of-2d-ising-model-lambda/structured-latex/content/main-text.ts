@@ -58242,6 +58242,100 @@ s(i_r)-s(i_{r'})
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_periodic_plane_lift_transverse_coordinate",
+        labels: [],
+        title: { text: "周期延長した平面持ち上げの横断座標" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_periodic_plane_lift_transverse_bounded",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_winding_transverse_coordinate",
+                kind: "definition",
+                title: { text: "巻き付きベクトルに直交する整数横断座標" },
+                labels: ["def_winding_transverse_coordinate"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数を ",
+                    math(String.raw`w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)\in\mathbb Z`),
+                    "（", ref("def_directed_winding_numbers"), "）とする。写像 ",
+                    math(String.raw`\kappa_{\gamma}:\mathbb Z\times\mathbb Z\to\mathbb Z`), " を",
+                  ]),
+                  displayMath(String.raw`\kappa_{\gamma}(a,b):=w_{\mathrm h}(\gamma)a-w_{\mathrm v}(\gamma)b`),
+                  paragraph([
+                    "で定め、これを巻き付きベクトルに直交する整数横断座標と呼ぶ。右辺は整数の積と差なので整数に属する。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_periodic_plane_lift_transverse_bounded",
+              kind: "claim",
+              title: { text: "周期延長した持ち上げは有限幅の整数帯に入る" },
+              labels: ["claim_periodic_plane_lift_transverse_bounded"],
+              habitat: "Z",
+              verification: ["sagemath/check/periodic-plane-lift-transverse-bounded"],
+              statement: [
+                paragraph([
+                  "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）について、任意の ",
+                  math(String.raw`k\in\mathbb Z`), " を ", math(String.raw`k=qm+r`), "（",
+                  math(String.raw`q\in\mathbb Z`), "、", math(String.raw`r\in\{0,\ldots,m-1\}`),
+                  "）と書く。このとき",
+                ]),
+                displayMath(String.raw`\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)
+=\kappa_{\gamma}\!\left(P_r(\gamma)\right)`),
+                paragraph([
+                  "が成り立つ（", ref("def_winding_transverse_coordinate"), "、",
+                  ref("def_periodic_plane_lift"), "）。したがって周期延長した持ち上げの横断座標の値全体は",
+                ]),
+                displayMath(String.raw`\left\{\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)\ \middle|\ k\in\mathbb Z\right\}
+=\left\{\kappa_{\gamma}\!\left(P_r(\gamma)\right)\ \middle|\ r\in\{0,\ldots,m-1\}\right\}`),
+                paragraph([
+                  "という有限集合に等しい。とくに左辺は整数の最小元と最大元を持ち、周期延長した持ち上げはその二つの横断水準に挟まれた有限幅の整数帯に入る。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`P_r(\gamma)=(a_r,b_r)\in\mathbb Z\times\mathbb Z`),
+                  " と書く（", ref("def_plane_lift"), "）。横断座標を計算すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)
+&=\kappa_{\gamma}\!\left(
+  (a_r,b_r)+q\cdot\bigl(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma)\bigr)
+\right)
+&&\bigl(\because\ \blkref{def_periodic_plane_lift}\bigr)\\
+&=w_{\mathrm h}(\gamma)\bigl(a_r+qLw_{\mathrm v}(\gamma)\bigr)
+  -w_{\mathrm v}(\gamma)\bigl(b_r+qLw_{\mathrm h}(\gamma)\bigr)
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と }\mathbb Z\times\mathbb Z\text{ の成分ごとの演算}\bigr)\\
+&=w_{\mathrm h}(\gamma)a_r-w_{\mathrm v}(\gamma)b_r
+&&\bigl(\because\ \mathbb Z\text{ の分配法則と加法の可換則}\bigr)\\
+&=\kappa_{\gamma}\!\left(P_r(\gamma)\right)
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "よって左辺の各値は右辺の有限集合に属する。逆に任意の ",
+                  math(String.raw`r\in\{0,\ldots,m-1\}`), " について ",
+                  math(String.raw`k=r`), "、", math(String.raw`q=0`),
+                  " と取れば同じ等式により右辺の値が左辺にも現れるので、二集合は等しい。",
+                  "右辺は有限で空でない整数集合だから最小元と最大元を持つ。全過程は整数の有限集合と四則だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

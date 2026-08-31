@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 46 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 47 回目の tick 時点）
+
+**非零巻き付きの周期延長した平面持ち上げが有限幅の整数帯に入ることを本文と SageMath で固定した（Lean 未着手）。** 「周期単純路の回転数零」を論法単位（有限幅の整数帯／帯の外側での有限閉包／二つの閉包の回転数比較）へ割り直し、最初の部品を進めた。巻き付きベクトルに直交する整数横断座標 $\kappa_{\gamma}(a,b):=w_{\mathrm h}(\gamma)a-w_{\mathrm v}(\gamma)b$ を定義した（`def_winding_transverse_coordinate`）。周期並進ベクトル $(Lw_{\mathrm v},Lw_{\mathrm h})$ の横断座標は $0$ なので、$k=qm+r$ に対して $\kappa_{\gamma}(\widetilde P_k)=\kappa_{\gamma}(P_r)$ となる。従って周期延長した持ち上げの横断座標の値全体は一周期の有限集合に等しく、整数の最小水準と最大水準に挟まれる（`claim_periodic_plane_lift_transverse_bounded`）。SageMath `periodic-plane-lift-transverse-bounded` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・商 $-2..2$ にわたる周期延長した持ち上げ点 123,960 個を `ZZ` で検査した。次は整数帯の外側を通る単純な閉路への有限閉包を構成する。
+
+前進前レビューでは前 tick の周期延長した平面持ち上げの単射性を本文・SageMath・次の横断座標の論法で照合し、「何も言っていない主張」や不一致は無かった。並列の式変形統一は、姉妹側の「交換子と反交換子の関係」の五段の鎖にある根拠を行末の根拠列へ揃えた。
+
+## ひとつ前の到達点（2026-08-31 の 46 回目の tick 時点）
 
 **非零巻き付きの頂点単純閉路の周期延長した平面持ち上げ点が相異なることを本文と SageMath で固定した（Lean 未着手）。** 台帳の「周期単純路の回転数零」を論法単位（周期延長した持ち上げの単射性／回転数零の本体）へ割り直し、最初の部品を進めた。整数の除法で $k=qm+r$（$q\in\mathbb Z$、$r\in\{0,\ldots,m-1\}$）とただ一通りに書き、周期延長した平面持ち上げ $\widetilde P_k(\gamma):=P_r(\gamma)+q\cdot(L\,w_{\mathrm v}(\gamma),L\,w_{\mathrm h}(\gamma))$ を定義した（`def_periodic_plane_lift`）。$n_{\mathrm{ct}}(\gamma)=0$ かつ $(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)$ なら $\widetilde P$ は単射である。証明は二段で、まず持ち上げ点の座標が代表座標と $L$ の整数倍しか違わないことから余りの一致 $r=r'$ を（相異なる通過添字なら接触対が生じ頂点単純性に反する）、次に $(q-q')\cdot(L\,w_{\mathrm v},L\,w_{\mathrm h})=(0,0)$ と巻き付きベクトルの非零性・$\mathbb Z$ が零因子を持たないことから商の一致 $q=q'$ を得た（`claim_periodic_plane_lift_points_distinct`）。SageMath `periodic-plane-lift-distinct` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・商 $-2..2$ にわたる周期延長した持ち上げ点 123,960 個を `ZZ` で検査した。次は周期単純路の回転数零の本体（周期単純な平面路の循環総回転数が $0$ であること）へ進む。
 
