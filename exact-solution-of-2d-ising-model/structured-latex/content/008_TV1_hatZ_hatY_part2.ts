@@ -3451,13 +3451,12 @@ s_1^2 c_2^2 (s_2^*)^2
       displayMath(String.raw`\begin{aligned}
 \gamma_1(\theta_\mu)^2
 &= 1 - \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
-&& (\because\ \det A(\theta_\mu)=1)\\
+&& (\because\ \blkref{det_A_theta})\\
 &= 1 + |\gamma_2(\theta_\mu)|^2
-&& (\because\ \gamma_2(-\theta_\mu)=-\overline{\gamma_2(\theta_\mu)})\\
+&& (\because\ \blkref{relation_of_gamma_2})\\
 &\geq 1
 && (\because\ |\gamma_2(\theta_\mu)|^2\geq 0)
 \end{aligned}`),
-      paragraph(["最初の二つの等号では ", ref("det_A_theta"), " と ", ref("relation_of_gamma_2"), " を順に引いた。"]),
       paragraph(["また、"]),
       displayMath(String.raw`\begin{aligned}
 \gamma_1(\theta_\mu)
@@ -3469,13 +3468,17 @@ s_1^2 c_2^2 (s_2^*)^2
 && (\because\ \cosh>\sinh\ \text{より}\ c_1c_2^*>s_1s_2^*)
 \end{aligned}`),
       paragraph(["したがって、"]),
-      displayMath(String.raw`\gamma_1(\theta_\mu)\geq1
-\quad(\because\ \gamma_1(\theta_\mu)^2\geq1\ \text{かつ}\ \gamma_1(\theta_\mu)>0)`),
+      displayMath(String.raw`\begin{aligned}
+\gamma_1(\theta_\mu)
+&\geq1
+&& (\because\ \gamma_1(\theta_\mu)^2\geq1\ \text{かつ}\ \gamma_1(\theta_\mu)>0)
+\end{aligned}`),
     ],
     conversion: {
       status: "converted",
       notes: [
         "2026-08-12 の式変形統一で、二乗の下界と正値性をそれぞれ一続きの鎖へ開き、全行へ根拠を付けた。内容は変えていない。",
+        "2026-08-31 の式変形統一で、二つの既証明への参照を各等号の行末へ移し、結論の根拠も同じ行末の列へ揃えた。内容は変えていない。",
       ],
     },
   },

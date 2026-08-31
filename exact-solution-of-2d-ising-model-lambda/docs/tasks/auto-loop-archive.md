@@ -1,5 +1,12 @@
 # 自動ループ 記録の保管庫
 
+## 2026-08-31 の 39 回目の tick で台帳から移した記録（2026-08-31 の 34 回目）
+
+- 現在地: 上下に隣り合うセルの交差奇偶の差が共有横辺の通過奇偶で決まることを本文と SageMath で固定した（`claim_vertically_adjacent_cells_boundary_parity`）。SageMath は閉歩道 5,340 本・上下隣接セル対 166,232 組を検査した。Lean は未着手だった。
+- 前進記録: 横辺の通過回数を定義し、半直線上の頂点に接する端点の偶奇から $N_{r,c}^{\rightarrow}+N_{r+1,c}^{\rightarrow}\equiv H_{r+1,c}\pmod2$ を証明した。
+- 式変形の統一: 姉妹側の $B_1(\theta)B_2B_1(\theta)=A(\theta)$ の証明で、$N=B_2B_1(\theta)$ の四成分を四本の一続きの鎖へ分け、全行へ根拠を付けた。
+- レビュー記録: 前 tick の `claim_adjacent_cells_ray_crossing_difference` を本文・SageMath・台帳で照合し、後続が直接引く非自明な有限集合の分割なので「何も言っていない主張」ではなく、修正対象なしとした。
+
 ## 2026-08-31 の 38 回目の tick で台帳から移した記録（2026-08-31 の 33 回目）
 
 - 現在地: 打ち切られた前 tick の成果（内側セルの定義と有限性）を回収して push し、横に隣り合うセルの右半直線交差数の差が共有する縦辺の通過回数に等しい恒等式 $N^{\rightarrow}_{r,c}=N^{\rightarrow}_{r,c+1}+V_{r,c+1}$ を本文と SageMath で固定した（`claim_adjacent_cells_ray_crossing_difference`）。姉妹側の LaTeX 生成器に `\blkref` の定義を追加して PDF の失敗を直した。SageMath は閉歩道 5,340 本・隣接セル対 166,232 組を検査した。Lean は未着手だった。
