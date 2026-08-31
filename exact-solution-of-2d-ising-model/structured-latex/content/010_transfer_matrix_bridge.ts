@@ -562,22 +562,37 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         "Step 1。",
         math(String.raw`D := \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z`),
         " とおく。",
+        math(String.raw`\sigma_{M+1}^z=\sigma_1^z`),
+        " なので、周期端を分けると ",
+        math(String.raw`D=\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z+\sigma_M^z\sigma_1^z`),
+        " である。",
         ref("sigma_z_diagonal_action"),
-        " より各 ",
+        " を、前半の和では ",
+        math(String.raw`1\leq m\leq M-1`),
+        " の ",
+        math(String.raw`(m,m+1)`),
+        " に、周期端では ",
+        math(String.raw`(M,1)`),
+        " に適用できる。したがって各 ",
         math(String.raw`\mu \in \mathfrak{M}`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 D\, f_{\iota(\mu)}
-&= \left(\sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right) f_{\iota(\mu)}
-   \quad (\because D\text{ の定義の代入}) \\
-&= \sum_{m=1}^{M}\left(\sigma_m^z\sigma_{m+1}^z f_{\iota(\mu)}\right)
+&= \left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z+\sigma_M^z\sigma_1^z\right)f_{\iota(\mu)}
+   \quad (\because D\text{ の定義と }\sigma_{M+1}^z=\sigma_1^z) \\
+&= \sum_{m=1}^{M-1}\left(\sigma_m^z\sigma_{m+1}^z f_{\iota(\mu)}\right)
+   +\sigma_M^z\sigma_1^z f_{\iota(\mu)}
    \quad (\because \text{行列の有限和とベクトルの積の分配則}) \\
-&= \sum_{m=1}^{M}\Bigl(\mu(m)\mu(m+1)\, f_{\iota(\mu)}\Bigr)
-   \quad (\because \sigma_m^z\sigma_{m+1}^z f_{\iota(\mu)} = \mu(m)\mu(m+1) f_{\iota(\mu)}\text{ を全項へ同時適用}) \\
-&= \left(\sum_{m=1}^{M}\mu(m)\mu(m+1)\right) f_{\iota(\mu)}
+&= \sum_{m=1}^{M-1}\Bigl(\mu(m)\mu(m+1)\,f_{\iota(\mu)}\Bigr)
+   +\mu(M)\mu(1)\,f_{\iota(\mu)}
+   \quad (\because \text{前半には }(m,m+1),\text{周期端には }(M,1)\text{ の }\sigma^z\text{ 作用公式}) \\
+&= \left(\sum_{m=1}^{M-1}\mu(m)\mu(m+1)+\mu(M)\mu(1)\right)f_{\iota(\mu)}
    \quad (\because \text{スカラー倍の有限和の括り出し（分配則）})
+\\
+&= \left(\sum_{m=1}^{M}\mu(m)\mu(m+1)\right) f_{\iota(\mu)}
+   \quad (\because \mu(M+1)=\mu(1))
 \end{aligned}`,
       ),
       paragraph([

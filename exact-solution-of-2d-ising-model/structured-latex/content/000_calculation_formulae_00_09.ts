@@ -501,8 +501,16 @@ x
         " についても同じ議論で ",
         math(String.raw`y_2>0`),
         " である。",
-        math(String.raw`y_1^2=x=y_2^2`),
-        " と ",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y_1^2
+&= x
+&&(\because\ y_1\ \text{の仮定})\\
+&= y_2^2
+&&(\because\ y_2\ \text{の仮定})
+\end{aligned}`),
+      paragraph([
+        "と ",
         ref("cosh_sinh_basic_properties"),
         " (4)（",
         math(String.raw`a,b\in\mathbb{R}_{>0}`),
