@@ -2973,10 +2973,20 @@ u
         "任意の ",
         math(String.raw`h\in R`),
         " に対し、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+uh
+&=(cI)h
+&&\left(\because\ u=cI\right)\\
+&=h(cI)
+&&\left(\because\ \blkref{scalar_identity_commutes}\right)\\
+&=hu
+&&\left(\because\ u=cI\right)
+\end{aligned}`),
+      paragraph([
+        "である（",
         ref("scalar_identity_commutes"),
-        " より ",
-        math(String.raw`uh=(cI)h=h(cI)=hu`),
-        " である。Step 2 の逆向きにより ",
+        "）。Step 2 の逆向きにより ",
         math(String.raw`T_g(h)=T_{g'}(h)`),
         " であり、",
         math(String.raw`h\in R`),
@@ -2993,6 +3003,7 @@ u
         "当初は自己同型群・核・中心・完全列という一般論を経由していたが、README のゴール設定（環・体などの一般論に持ち上げない／脇道の一般論は具体的な形に落とす）に従い、一般論の語彙を使わない有限複素行列の計算へ書き直した。要点は Step 2 の同値 g h g^{-1} = g' h g'^{-1} ⟺ (g^{-1}g') h = h (g^{-1}g') である。退避した記述は notes/008_group_theory_general.ts にある。",
         "center_of_multiplicative_group_is_scalar を独立した直前の主張へ分け、このブロックは共役写像の非零スカラー倍を除く単射性だけを述べる。もとの x+tI による制限写像から全行列への延長は、未定義の特性多項式と行列式を使うため削除した。順方向は全行列上の写像の一致を可逆行列へ制限し、逆方向は u=cI が全行列と可換することを直接使うので、この延長自体が不要である。",
         "R^× は T_g の定義域ではなく、T_g を定める g の許容範囲である。各 T_g の定義域は R であることを statement に明記した。",
+        "2026-09-01 の式変形統一で、Step 4 の uh=(cI)h=h(cI)=hu（一行三等号・根拠は文中参照のみ）を 3 段の行末根拠つきの鎖へ開いた。内容・参照は変えていない。",
       ],
     },
   },
