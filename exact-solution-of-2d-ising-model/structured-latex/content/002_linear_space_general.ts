@@ -562,15 +562,15 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left(A_1\boxtimes\cdots\boxtimes\left(\sum_{a=1}^{r}c_aB_a\right)\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
 &= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_aB_a\right)_{i_jj_j}
-\quad (\because \boxtimes \text{ の定義}) \\
+&&(\because \boxtimes \text{ の定義}) \\
 &= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}\right)
-\quad (\because \text{行列の和・スカラー倍は成分ごとの演算}) \\
+&&(\because \text{行列の和・スカラー倍は成分ごとの演算}) \\
 &= \sum_{a=1}^{r}c_a\left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)(B_a)_{i_jj_j}
-\quad (\because \text{複素数の分配律}) \\
+&&(\because \text{複素数の分配律}) \\
 &= \sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
-\quad (\because \boxtimes \text{ の定義}) \\
+&&(\because \boxtimes \text{ の定義}) \\
 &= \left(\sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)\right)_{\nu(I),\nu(J)}
-\quad (\because \text{行列の和・スカラー倍は成分ごとの演算})
+&&(\because \text{行列の和・スカラー倍は成分ごとの演算})
 \end{aligned}`,
       ),
       paragraph([
