@@ -5391,6 +5391,232 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_integer_sequence_crossings",
+        labels: [],
+        title: { text: "整数列の水準横断数" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_tools_claim_integer_sequence_level_crossing",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "tools_definition_level_crossing_counts",
+                    kind: "definition",
+                    title: { text: "整数列の水準横断数" },
+                    labels: ["def_integer_sequence_level_crossing_counts"],
+                    habitat: "Z",
+                    statement: [
+                      paragraph([
+                        math(String.raw`n\in\mathbb N`), "、",
+                        math(String.raw`n\ge1`), " とし、",
+                        math(String.raw`a=(a_1,\ldots,a_n)`),
+                        " を整数の有限列（各 ", math(String.raw`a_k\in\mathbb Z`),
+                        "）とする。任意の ", math(String.raw`c\in\mathbb Z`),
+                        " に対し、水準 ", math(String.raw`c`), " の上横断数 ",
+                        math(String.raw`U_c(a)\in\mathbb N`), " と下横断数 ",
+                        math(String.raw`D_c(a)\in\mathbb N`), " を",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+U_c(a)&:=\bigl(a_k=c\ \text{かつ}\ a_{k+1}=c+1\ \text{を満たす}\ k\in\{1,\ldots,n-1\}\ \text{の個数}\bigr),\\
+D_c(a)&:=\bigl(a_k=c+1\ \text{かつ}\ a_{k+1}=c\ \text{を満たす}\ k\in\{1,\ldots,n-1\}\ \text{の個数}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "で定める。どちらも有限集合の元の個数なので自然数であり、",
+                        "この定義は整数の比較と有限の数え上げだけで閉じる。",
+                        math(String.raw`n=1`), " のときは条件を課す ",
+                        math(String.raw`k`), " が無いのでどちらも ",
+                        math(String.raw`0`), " である。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "tools_claim_integer_sequence_level_crossing",
+                kind: "claim",
+                title: { text: "隣接差が高々 1 の整数列の水準横断数の恒等式" },
+                labels: ["claim_integer_sequence_level_crossing"],
+                habitat: "Z",
+                verification: ["sagemath/check/integer-sequence-level-crossing"],
+                statement: [
+                  paragraph([
+                    math(String.raw`n\in\mathbb N`), "、",
+                    math(String.raw`n\ge1`), " とし、整数の有限列 ",
+                    math(String.raw`a=(a_1,\ldots,a_n)`),
+                    " が、すべての ", math(String.raw`k\in\{1,\ldots,n-1\}`),
+                    " について隣接差条件",
+                  ]),
+                  displayMath(String.raw`a_{k+1}-a_k\in\{-1,0,1\}`),
+                  paragraph([
+                    "を満たすとする。任意の ", math(String.raw`c\in\mathbb Z`),
+                    " について、整数の等式",
+                  ]),
+                  displayMath(String.raw`U_c(a)-D_c(a)=
+\begin{cases}
+1,&a_1\le c\ \text{かつ}\ c<a_n,\\
+-1,&a_n\le c\ \text{かつ}\ c<a_1,\\
+0,&\text{それ以外}
+\end{cases}`),
+                  paragraph([
+                    "が成り立つ（", ref("def_integer_sequence_level_crossing_counts"),
+                    "。", math(String.raw`\le,<`), " は ", math(String.raw`\mathbb Z`),
+                    " の順序）。第一と第二の場合は同時に成り立たない（",
+                    math(String.raw`c<a_n`), " と ", math(String.raw`a_n\le c`),
+                    " が矛盾するため）。後続の章では、この恒等式を、隣接差が一歩ごとに ",
+                    math(String.raw`-1,0,1`),
+                    " しか変わらない累積回転数の列へ適用する。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`c\in\mathbb Z`), " を固定する。写像 ",
+                    math(String.raw`g_c:\mathbb Z\to\mathbb Z`), " を",
+                  ]),
+                  displayMath(String.raw`g_c(x):=
+\begin{cases}
+1,&c<x,\\
+0,&x\le c
+\end{cases}`),
+                  paragraph([
+                    "で定める。", math(String.raw`c<x`), " と ",
+                    math(String.raw`x\le c`),
+                    " は排反かつすべての場合を尽くすので、この定義は well-defined である。",
+                    "また、各 ", math(String.raw`k\in\{1,\ldots,n-1\}`),
+                    " に対し上横断の指示値 ", math(String.raw`\chi^{+}_c(k)\in\{0,1\}`),
+                    " を「", math(String.raw`a_k=c`), " かつ ",
+                    math(String.raw`a_{k+1}=c+1`), " のとき ", math(String.raw`1`),
+                    "、それ以外のとき ", math(String.raw`0`),
+                    "」、下横断の指示値 ", math(String.raw`\chi^{-}_c(k)\in\{0,1\}`),
+                    " を「", math(String.raw`a_k=c+1`), " かつ ",
+                    math(String.raw`a_{k+1}=c`), " のとき ", math(String.raw`1`),
+                    "、それ以外のとき ", math(String.raw`0`), "」と定める。",
+                  ]),
+                  paragraph([
+                    "まず、各 ", math(String.raw`k\in\{1,\ldots,n-1\}`), " について",
+                  ]),
+                  displayMath(String.raw`g_c(a_{k+1})-g_c(a_k)=\chi^{+}_c(k)-\chi^{-}_c(k)`),
+                  paragraph([
+                    "を示す。", math(String.raw`g_c`), " の値は ",
+                    math(String.raw`0`), " と ", math(String.raw`1`),
+                    " に限るので、左辺は ", math(String.raw`-1,0,1`),
+                    " のいずれかである。三つの場合に分ける。",
+                  ]),
+                  paragraph([
+                    "左辺が ", math(String.raw`1`), " の場合。値の組で差が ",
+                    math(String.raw`1`), " になるのは ",
+                    math(String.raw`g_c(a_k)=0`), " かつ ",
+                    math(String.raw`g_c(a_{k+1})=1`), " だけである。このとき",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+a_k&\le c
+&&\bigl(\because\ g_c(a_k)=0\text{ と }g_c\text{ の定義}\bigr)\\
+c+1&\le a_{k+1}
+&&\bigl(\because\ g_c(a_{k+1})=1\text{ と }g_c\text{ の定義、整数では }c<x\iff c+1\le x\bigr)\\
+a_{k+1}&\le a_k+1
+&&\bigl(\because\ \text{隣接差条件 }a_{k+1}-a_k\le1\text{ の移項}\bigr)\\
+a_{k+1}&=c+1
+&&\bigl(\because\ c+1\le a_{k+1}\le a_k+1\le c+1\text{ と順序の反対称性}\bigr)\\
+a_k&=c
+&&\bigl(\because\ c+1=a_{k+1}\le a_k+1\text{ の移項で }c\le a_k\text{、これと }a_k\le c\text{ と順序の反対称性}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となるので ", math(String.raw`\chi^{+}_c(k)=1`),
+                    " である。また ", math(String.raw`a_k=c\ne c+1`),
+                    " なので ", math(String.raw`\chi^{-}_c(k)=0`),
+                    " であり、右辺も ", math(String.raw`1`), " である。",
+                  ]),
+                  paragraph([
+                    "左辺が ", math(String.raw`-1`), " の場合。差が ",
+                    math(String.raw`-1`), " になるのは ",
+                    math(String.raw`g_c(a_k)=1`), " かつ ",
+                    math(String.raw`g_c(a_{k+1})=0`),
+                    " だけである。このとき、直前の場合と ",
+                    math(String.raw`a_k`), " と ", math(String.raw`a_{k+1}`),
+                    " の役割を入れ替えた同じ鎖（隣接差条件は ",
+                    math(String.raw`a_k-a_{k+1}\le1`), " の側を使う）により ",
+                    math(String.raw`a_k=c+1`), " かつ ",
+                    math(String.raw`a_{k+1}=c`), " となるので ",
+                    math(String.raw`\chi^{-}_c(k)=1`), "、",
+                    math(String.raw`\chi^{+}_c(k)=0`),
+                    " であり、右辺も ", math(String.raw`-1`), " である。",
+                  ]),
+                  paragraph([
+                    "左辺が ", math(String.raw`0`), " の場合。もし ",
+                    math(String.raw`\chi^{+}_c(k)=1`), " なら ",
+                    math(String.raw`a_k=c`), " かつ ",
+                    math(String.raw`a_{k+1}=c+1`), " なので",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+g_c(a_{k+1})-g_c(a_k)
+&=g_c(c+1)-g_c(c)
+&&\bigl(\because\ a_k=c,\ a_{k+1}=c+1\bigr)\\
+&=1-0
+&&\bigl(\because\ c<c+1\text{、}c\le c\text{ と }g_c\text{ の定義}\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となり左辺が ", math(String.raw`0`),
+                    " であることに矛盾する。よって ",
+                    math(String.raw`\chi^{+}_c(k)=0`),
+                    " である。同様に ", math(String.raw`\chi^{-}_c(k)=1`),
+                    " なら左辺が ", math(String.raw`-1`),
+                    " となり矛盾するので ", math(String.raw`\chi^{-}_c(k)=0`),
+                    " である。右辺も ", math(String.raw`0`), " である。",
+                  ]),
+                  paragraph([
+                    "三つの場合は左辺の取りうる値を尽くす。次に、主張の左辺を一続きに変形する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+U_c(a)-D_c(a)
+&=\sum_{k=1}^{n-1}\chi^{+}_c(k)-\sum_{k=1}^{n-1}\chi^{-}_c(k)
+&&\bigl(\because\ \text{指示値の総和は条件を満たす元の個数。}\blkref{def_integer_sequence_level_crossing_counts}\bigr)\\
+&=\sum_{k=1}^{n-1}\bigl(\chi^{+}_c(k)-\chi^{-}_c(k)\bigr)
+&&\bigl(\because\ \mathbb Z\text{ の有限和の差の分配}\bigr)\\
+&=\sum_{k=1}^{n-1}\bigl(g_c(a_{k+1})-g_c(a_k)\bigr)
+&&\bigl(\because\ \text{上で示した各 }k\text{ の等式}\bigr)\\
+&=g_c(a_n)-g_c(a_1)
+&&\bigl(\because\ \text{望遠鏡和}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "最後に右辺を場合分けで確定する。",
+                    math(String.raw`a_1\le c`), " かつ ",
+                    math(String.raw`c<a_n`), " のときは ",
+                    math(String.raw`g_c(a_1)=0`), "、",
+                    math(String.raw`g_c(a_n)=1`), " なので ",
+                    math(String.raw`g_c(a_n)-g_c(a_1)=1`), " である。",
+                    math(String.raw`a_n\le c`), " かつ ",
+                    math(String.raw`c<a_1`), " のときは ",
+                    math(String.raw`g_c(a_1)=1`), "、",
+                    math(String.raw`g_c(a_n)=0`), " なので ",
+                    math(String.raw`g_c(a_n)-g_c(a_1)=-1`), " である。それ以外は、",
+                    math(String.raw`c<a_1`), " かつ ",
+                    math(String.raw`c<a_n`), " の場合が ",
+                    math(String.raw`1-1=0`), "、",
+                    math(String.raw`a_1\le c`), " かつ ",
+                    math(String.raw`a_n\le c`), " の場合が ",
+                    math(String.raw`0-0=0`),
+                    " であり（この二つで「それ以外」を尽くす。各端点について ",
+                    math(String.raw`x\le c`), " と ", math(String.raw`c<x`),
+                    " が排反かつ網羅のため）、いずれも ",
+                    math(String.raw`0`), " である。",
+                    "全過程は整数の比較・加法・有限和だけで閉じ、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
   ],
 });
 
