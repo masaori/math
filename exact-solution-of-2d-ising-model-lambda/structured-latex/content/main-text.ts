@@ -59461,6 +59461,132 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_winding_parallel_staircase",
+        labels: [],
+        title: { text: "巻き付きベクトルの平行階段" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_winding_parallel_staircase_step_increase",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_winding_parallel_staircase",
+                kind: "definition",
+                title: { text: "巻き付きベクトルに平行な整数格子の階段" },
+                labels: ["def_winding_parallel_staircase"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                    ref("def_directed_winding_numbers"), "）が ",
+                    math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                    " を満たすとする。符号 ", math(String.raw`\varepsilon`), " と ",
+                    math(String.raw`H=|w_{\mathrm h}(\gamma)|`), "、",
+                    math(String.raw`V=|w_{\mathrm v}(\gamma)|`), " は横断階段の定義（",
+                    ref("def_winding_transverse_staircase"), "）のものを使い、",
+                    math(String.raw`n_{\parallel}:=L(V+H)\in\mathbb N`),
+                    " と置く。巻き付きベクトルが零でなく ", math(String.raw`L\ge1`), "（",
+                    ref("def_residue_maps"), "）なので ",
+                    math(String.raw`n_{\parallel}\ge1`), " である。有限列 ",
+                    math(String.raw`G^{\gamma}_0,\ldots,G^{\gamma}_{n_{\parallel}}\in\mathbb Z\times\mathbb Z`), " を",
+                  ]),
+                  displayMath(String.raw`G^{\gamma}_s:=
+\begin{cases}
+\bigl(\varepsilon(w_{\mathrm v}(\gamma))s,0\bigr),
+&0\le s\le LV,\\
+\bigl(L\,w_{\mathrm v}(\gamma),\,\varepsilon(w_{\mathrm h}(\gamma))(s-LV)\bigr),
+&LV<s\le n_{\parallel}
+\end{cases}`),
+                  paragraph([
+                    "で定め、これを巻き付きベクトルの正の平行階段と呼ぶ。とくに ",
+                    math(String.raw`G^{\gamma}_0=(0,0)`), " かつ ",
+                    math(String.raw`G^{\gamma}_{n_{\parallel}}
+=\bigl(L\,w_{\mathrm v}(\gamma),L\,w_{\mathrm h}(\gamma)\bigr)=B_{\gamma}`),
+                    "（一周期の並進ベクトルは ", ref("def_periodic_lift_closure_cycle"),
+                    "）である。絶対値・場合分け・有限列はいずれも整数と自然数の中で定まる。",
+                    "逆向きに読めば一周期の並進を打ち消す整数格子路になるので、",
+                    "逆向きの周期持ち上げを使わずに周期持ち上げの有限部分を閉じる一側閉包の接続路の素材である。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_winding_parallel_staircase_step_increase",
+              kind: "claim",
+              title: { text: "平行階段の各歩は平行座標を増やす単位歩である" },
+              labels: ["claim_winding_parallel_staircase_step_increase"],
+              habitat: "Z",
+              verification: ["sagemath/check/winding-parallel-staircase"],
+              statement: [
+                paragraph([
+                  "正の平行階段（", ref("def_winding_parallel_staircase"), "）について、任意の ",
+                  math(String.raw`s\in\{0,\ldots,n_{\parallel}-1\}`), " に対し差 ",
+                  math(String.raw`G^{\gamma}_{s+1}-G^{\gamma}_s`), " は ",
+                  math(String.raw`(1,0),(-1,0),(0,1),(0,-1)`),
+                  " のいずれかであり、平行座標（", ref("def_winding_parallel_coordinate"), "）は",
+                ]),
+                displayMath(String.raw`\pi_{\gamma}(G^{\gamma}_{s+1})>
+\pi_{\gamma}(G^{\gamma}_s)`),
+                paragraph([
+                  "を満たす。したがってこの階段の頂点はすべて相異なり、平面格子上の単純な辺列になる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`0\le s<LV`), " の場合、定義から",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+G^{\gamma}_{s+1}-G^{\gamma}_s
+&=\bigl(\varepsilon(w_{\mathrm v}(\gamma)),0\bigr)
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\bigr),\\
+\pi_{\gamma}(G^{\gamma}_{s+1})-\pi_{\gamma}(G^{\gamma}_s)
+&=w_{\mathrm v}(\gamma)\varepsilon(w_{\mathrm v}(\gamma))
+&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\text{ と直前の差}\bigr)\\
+&=|w_{\mathrm v}(\gamma)|
+&&\bigl(\because\ \varepsilon\text{ の三場合の定義}\bigr)\\
+&>0
+&&\bigl(\because\ s<LV\text{ なので }V=|w_{\mathrm v}(\gamma)|\ge1\bigr).
+\end{aligned}`),
+                paragraph([
+                  "この場合は ", math(String.raw`V>0`), " なので ",
+                  math(String.raw`\varepsilon(w_{\mathrm v}(\gamma))\in\{-1,1\}`),
+                  " であり、差は縦方向の単位歩である。次に ",
+                  math(String.raw`LV\le s<n_{\parallel}`), " の場合、",
+                  math(String.raw`s=LV`), " では二つの場合の式が同じ点 ",
+                  math(String.raw`(L\,w_{\mathrm v}(\gamma),0)`),
+                  " を与えることに注意して、定義から",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+G^{\gamma}_{s+1}-G^{\gamma}_s
+&=\bigl(0,\varepsilon(w_{\mathrm h}(\gamma))\bigr)
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\bigr),\\
+\pi_{\gamma}(G^{\gamma}_{s+1})-\pi_{\gamma}(G^{\gamma}_s)
+&=w_{\mathrm h}(\gamma)\varepsilon(w_{\mathrm h}(\gamma))
+&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\text{ と直前の差}\bigr)\\
+&=|w_{\mathrm h}(\gamma)|
+&&\bigl(\because\ \varepsilon\text{ の三場合の定義}\bigr)\\
+&>0
+&&\bigl(\because\ s<n_{\parallel}=LV+LH\text{ なので }H=|w_{\mathrm h}(\gamma)|\ge1\bigr).
+\end{aligned}`),
+                paragraph([
+                  "この場合は ", math(String.raw`H>0`), " なので差は横方向の単位歩である。",
+                  "二場合は ", math(String.raw`s\in\{0,\ldots,n_{\parallel}-1\}`),
+                  " を尽くす。平行座標が各歩で真に増えるため、異なる二頂点の平行座標は異なり、",
+                  "頂点どうしも相異なる。全過程は整数の絶対値・四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
