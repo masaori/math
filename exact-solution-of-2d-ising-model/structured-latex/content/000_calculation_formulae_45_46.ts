@@ -28,13 +28,20 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 T_B(AC)
-&= B(AC)B^{-1} \quad (\because T_B \text{ の定義}) \\
-&= BACB^{-1} \quad (\because \text{行列の積の結合法則}) \\
-&= BAICB^{-1} \quad (\because \text{単位元の性質 } IC = C) \\
-&= BA(B^{-1}B)CB^{-1} \quad (\because B^{-1}B = I) \\
-&= (BAB^{-1})(BCB^{-1}) \quad (\because \text{行列の積の結合法則}) \\
-&= T_B(A)(BCB^{-1}) \quad (\because T_B \text{ の定義}) \\
-&= T_B(A) T_B(C) \quad (\because T_B \text{ の定義})
+&= B(AC)B^{-1}
+&&\bigl(\because\ T_B\text{ の定義}\bigr)\\
+&= BACB^{-1}
+&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
+&= BAICB^{-1}
+&&\bigl(\because\ \text{単位元の性質 }IC = C\bigr)\\
+&= BA(B^{-1}B)CB^{-1}
+&&\bigl(\because\ B^{-1}B = I\bigr)\\
+&= (BAB^{-1})(BCB^{-1})
+&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
+&= T_B(A)(BCB^{-1})
+&&\bigl(\because\ T_B\text{ の定義}\bigr)\\
+&= T_B(A) T_B(C)
+&&\bigl(\because\ T_B\text{ の定義}\bigr)
 \end{aligned}`,
       ),
       paragraph(["（引いたブロック: ", ref("mat_conj"), "）"]),
@@ -42,9 +49,12 @@ T_B(AC)
       displayMath(
         String.raw`\begin{aligned}
 T_B(I)
-&= BIB^{-1} \quad (\because T_B \text{ の定義}) \\
-&= BB^{-1} \quad (\because \text{単位元の性質 } BI = B) \\
-&= I \quad (\because BB^{-1} = I)
+&= BIB^{-1}
+&&\bigl(\because\ T_B\text{ の定義}\bigr)\\
+&= BB^{-1}
+&&\bigl(\because\ \text{単位元の性質 }BI = B\bigr)\\
+&= I
+&&\bigl(\because\ BB^{-1} = I\bigr)
 \end{aligned}`,
       ),
       paragraph(["（引いたブロック: ", ref("mat_conj"), "）"]),
@@ -62,19 +72,27 @@ T_B(I)
       displayMath(
         String.raw`\begin{aligned}
 (AB)(B^{-1}A^{-1})
-&= A(BB^{-1})A^{-1} \quad (\because \text{行列の積の結合法則}) \\
-&= AIA^{-1} \quad (\because BB^{-1} = I) \\
-&= AA^{-1} \quad (\because \text{単位元の性質 } AI = A) \\
-&= I \quad (\because AA^{-1} = I)
+&= A(BB^{-1})A^{-1}
+&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
+&= AIA^{-1}
+&&\bigl(\because\ BB^{-1} = I\bigr)\\
+&= AA^{-1}
+&&\bigl(\because\ \text{単位元の性質 }AI = A\bigr)\\
+&= I
+&&\bigl(\because\ AA^{-1} = I\bigr)
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 (B^{-1}A^{-1})(AB)
-&= B^{-1}(A^{-1}A)B \quad (\because \text{行列の積の結合法則}) \\
-&= B^{-1}IB \quad (\because A^{-1}A = I) \\
-&= B^{-1}B \quad (\because \text{単位元の性質 } IB = B) \\
-&= I \quad (\because B^{-1}B = I)
+&= B^{-1}(A^{-1}A)B
+&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
+&= B^{-1}IB
+&&\bigl(\because\ A^{-1}A = I\bigr)\\
+&= B^{-1}B
+&&\bigl(\because\ \text{単位元の性質 }IB = B\bigr)\\
+&= I
+&&\bigl(\because\ B^{-1}B = I\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -91,12 +109,18 @@ T_B(I)
       displayMath(
         String.raw`\begin{aligned}
 (T_A \circ T_B)(M)
-&= T_A(T_B(M)) \quad (\because \text{写像の合成の定義}) \\
-&= T_A(BMB^{-1}) \quad (\because T_B \text{ の定義}) \\
-&= A(BMB^{-1})A^{-1} \quad (\because T_A \text{ の定義}) \\
-&= (AB)M(B^{-1}A^{-1}) \quad (\because \text{行列の積の結合法則}) \\
-&= (AB)M(AB)^{-1} \quad (\because (AB)^{-1} = B^{-1}A^{-1}) \\
-&= T_{AB}(M) \quad (\because T_{AB} \text{ の定義})
+&= T_A(T_B(M))
+&&\bigl(\because\ \text{写像の合成の定義}\bigr)\\
+&= T_A(BMB^{-1})
+&&\bigl(\because\ T_B\text{ の定義}\bigr)\\
+&= A(BMB^{-1})A^{-1}
+&&\bigl(\because\ T_A\text{ の定義}\bigr)\\
+&= (AB)M(B^{-1}A^{-1})
+&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
+&= (AB)M(AB)^{-1}
+&&\bigl(\because\ (AB)^{-1} = B^{-1}A^{-1}\bigr)\\
+&= T_{AB}(M)
+&&\bigl(\because\ T_{AB}\text{ の定義}\bigr)
 \end{aligned}`,
       ),
       paragraph(["（引いたブロック: ", ref("mat_conj"), "）"]),
@@ -114,6 +138,7 @@ T_B(I)
       status: "converted",
       notes: [
         "式変形の書き方の統一（2026-08-09）。Step 1 / Step 2 / Step 3 という番号での区切りを、それぞれの中間目標の名前（乗法性・単位性・合成則）へ変えた。合成則の中の逆元の公式は式変形ではなく準備なので、そう呼び直した。証明の冒頭に置かれていた共役写像の定義への参照を、それを使った各鎖の直後へ移した（この生成器は \\blkref を定義していないので、(∵ …) の中には題を書き、ラベル参照は式の直後に置く）。式変形の段は 1 つも増減していない。",
+        "2026-08-31 の式変形統一で、五本の鎖に行中の \\quad(\\because …) で置かれていた根拠 20 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・参照は変えていない。",
       ],
     },
   },
