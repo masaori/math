@@ -169,7 +169,7 @@ Y_m = \sigma_1^x \cdots \sigma_{m-1}^x\, \sigma_m^y`,
   },
   {
     id: "note_clifford_003_quadratic_exponential_acts_orthogonally",
-    targets: ["T_V_hatZ_hatY", "def_T_V", "V1_V2_in_Z_Y_epsilon"],
+    targets: ["T_V_hatZ_hatY", "def_T_V", "V1_in_Z_Y_epsilon", "V2_in_Z_Y"],
     title: { text: "読み物：二次形式の指数関数による共役が、生成元の空間の直交変換になること" },
     body: [
       paragraph([
@@ -225,7 +225,9 @@ Y_m = \sigma_1^x \cdots \sigma_{m-1}^x\, \sigma_m^y`,
         math(String.raw`2M`),
         " 次元空間の直交変換という有限次元の線型代数に化ける。",
         "しかも「二次式の指数関数」という条件は本文の主役たちが実際に満たしている：",
-        ref("V1_V2_in_Z_Y_epsilon"),
+        ref("V1_in_Z_Y_epsilon"),
+        " と ",
+        ref("V2_in_Z_Y"),
         " が示すとおり、",
       ]),
       displayMath(

@@ -1321,12 +1321,17 @@ Z(J,J')
     title: { tex: String.raw`P^{(\pm)} \text{ の性質}` },
     labels: ["epsilon_projector_properties"],
     statement: [
+      paragraph([
+        ref("def_epsilon_projectors"),
+        " の二つの行列は、互いに補い合い、",
+        ref("def_eigenspaces_of_epsilon"),
+        " の二つの固有空間へそれぞれ写す行列である。すなわち、次の三組の等式が成り立つ。",
+      ]),
       list([
-        [math(String.raw`\text{(1)}\quad \varepsilon^2 = I`)],
-        [math(String.raw`\text{(2)}\quad \left(P^{(\pm)}\right)^2 = P^{(\pm)}, \qquad P^{(+)}P^{(-)} = P^{(-)}P^{(+)} = 0`)],
-        [math(String.raw`\text{(3)}\quad P^{(+)} + P^{(-)} = I`)],
+        [math(String.raw`\text{(1)}\quad \left(P^{(\pm)}\right)^2 = P^{(\pm)}, \qquad P^{(+)}P^{(-)} = P^{(-)}P^{(+)} = 0`)],
+        [math(String.raw`\text{(2)}\quad P^{(+)} + P^{(-)} = I`)],
         [
-          math(String.raw`\text{(4)}\quad \mathrm{im}\,P^{(\pm)} = \mathcal{F}^{(\pm)}`),
+          math(String.raw`\text{(3)}\quad \mathrm{im}\,P^{(\pm)} = \mathcal{F}^{(\pm)}`),
           "（",
           ref("def_eigenspaces_of_epsilon"),
           " の ",
@@ -1338,14 +1343,13 @@ Z(J,J')
     proof: [
       paragraph([
         "(1) ",
-        ref("def_eigenspaces_of_epsilon"),
-        " の中で既に示されている（",
-        ref("pauli_matrix_products"),
+        ref("epsilon_square_and_eigenvalues"),
         " の ",
-        math(String.raw`\sigma^x\sigma^x = I`),
-        " から因子ごとに計算する）。",
+        math(String.raw`\varepsilon^2=I`),
+        " と ",
+        ref("def_epsilon_projectors"),
+        " を使う。まず、",
       ]),
-      paragraph(["(2) (1) より"]),
       displayMath(
         String.raw`\begin{aligned}
 \left(P^{(\pm)}\right)^2
@@ -1389,10 +1393,10 @@ P^{(-)}P^{(+)}
         "この計算では ",
         ref("def_epsilon_projectors"),
         " と ",
-        ref("def_eigenspaces_of_epsilon"),
+        ref("epsilon_square_and_eigenvalues"),
         " を用いた。",
       ]),
-      paragraph(["(3)"]),
+      paragraph(["(2)"]),
       displayMath(
         String.raw`\begin{aligned}
 P^{(+)} + P^{(-)}
@@ -1408,7 +1412,7 @@ P^{(+)} + P^{(-)}
       ),
       paragraph(["この計算では ", ref("def_epsilon_projectors"), " を用いた。"]),
       paragraph([
-        "(4) ",
+        "(3) ",
         ref("def_eigenspaces_of_epsilon"),
         " より ",
         math(String.raw`\mathcal{F}^{(\pm)} = \{f \in \mathcal{F} \mid \varepsilon f = \pm f\}`),
@@ -1423,7 +1427,7 @@ P^{(+)} + P^{(-)}
         " ",
         math(String.raw`y \in \mathrm{im}\,P^{(\pm)}`),
         " とすると、ある ",
-        math(String.raw`x`),
+        math(String.raw`x\in\mathcal{F}`),
         " について ",
         math(String.raw`y = P^{(\pm)}x`),
         " と書ける。まず",
@@ -1436,12 +1440,12 @@ P^{(\pm)}y
 &= \left(P^{(\pm)}\right)^2x
    \quad (\because \text{積の冪の表記}) \\
 &= P^{(\pm)}x
-   \quad (\because \text{(2) の冪等性}) \\
+   \quad (\because \text{(1) の冪等性}) \\
 &= y
    \quad (\because y = P^{(\pm)}x)
 \end{aligned}`,
       ),
-      paragraph(["この計算では (2) の冪等性を用いた。"]),
+      paragraph(["この計算では (1) の冪等性を用いた。"]),
       paragraph(["である。よって（複号同順）"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1455,7 +1459,7 @@ P^{(\pm)}y
 &= \tfrac{1}{2}\left(\varepsilon \pm \varepsilon^2\right) y
    \quad (\because \varepsilon I=\varepsilon) \\
 &= \tfrac{1}{2}\left(\varepsilon \pm I\right) y
-   \quad (\because \text{(1) } \varepsilon^2=I) \\
+   \quad (\because \varepsilon^2=I) \\
 &= \pm\,\tfrac{1}{2}\left(I \pm \varepsilon\right) y
    \quad (\because \text{複号同順の符号の整理。上の符号では }
      \tfrac12(\varepsilon+I)=+\tfrac12(I+\varepsilon)
@@ -1469,6 +1473,8 @@ P^{(\pm)}y
       paragraph([
         "この計算では ",
         ref("def_epsilon_projectors"),
+        " と ",
+        ref("epsilon_square_and_eigenvalues"),
         " と ",
         ref("def_eigenspaces_of_epsilon"),
         " を用いた。",

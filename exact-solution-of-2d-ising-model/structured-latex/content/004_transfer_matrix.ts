@@ -138,8 +138,8 @@ export default defineBlocks([
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文（および本ブロックの旧版）の V_1 の定義は exp(√-1 K_1 (σ^z_1σ^z_2 + ⋯ + σ^z_Mσ^z_1)) と" +
           "虚数単位を含んでいたが、これは誤りなので K_1 に訂正した。根拠: Y_m Z_{m+1} = -√-1 σ^z_mσ^z_{m+1} " +
-          "（<V1_V2_in_Z_Y_epsilon> の証明 Step 2）であるから、定義を原文どおり √-1 K_1 とすると " +
-          "V_1 = exp(-K_1(Y_1Z_2+⋯)) となり、原文の主張 <V1_V2_in_Z_Y_epsilon>（V_1 = exp(√-1 K_1(Y_1Z_2+⋯)））と" +
+          "（<V1_in_Z_Y_epsilon> の証明 Step 2）であるから、定義を原文どおり √-1 K_1 とすると " +
+          "V_1 = exp(-K_1(Y_1Z_2+⋯)) となり、原文の主張 <V1_in_Z_Y_epsilon>（V_1 = exp(√-1 K_1(Y_1Z_2+⋯)））と" +
           "矛盾する。さらに 004 章以降（H_1^{(±)} の定義ブロック、V_1^{(±)} の定義、008 章）はすべて " +
           "V_1 = exp(√-1 K_1 H_1) 側と整合しており、虚数単位は Jordan--Wigner 置換 σ^z_mσ^z_{m+1} = √-1 Y_mZ_{m+1} " +
           "から生じるものである。V_2 の定義（虚数単位なし）とその主張（√-1 K_2^* が付く）も同じ理由で整合している。" +
@@ -562,27 +562,24 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
     },
   },
   {
-    id: "transfer_matrix_003_claim_V1_V2_in_Z_Y_epsilon",
+    id: "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
     kind: "claim",
     origin: { path: "_old/typst/parts/004_転送行列/002_claim_V1V2をZYepsilonで表す.typ", ordinal: 3 },
-    title: { tex: String.raw`V_1, V_2 \text{ を } Z, Y, \varepsilon \text{ で表す}` },
-    labels: ["V1_V2_in_Z_Y_epsilon"],
+    title: { tex: String.raw`V_1 \text{ を } Z, Y, \varepsilon \text{ で表す}` },
+    labels: ["V1_in_Z_Y_epsilon"],
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         " とし、",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`V_1, V_2, Z_m, Y_m, \varepsilon, K_1, K_2^*, s_2 \;(= \sinh 2K_2)`),
+        math(String.raw`V_1, Z_m, Y_m, \varepsilon, K_1`),
         " を考える。このとき ",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の中で",
       ]),
       displayMath(
-        String.raw`\begin{aligned}
-V_1 &= \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M - \varepsilon Y_M Z_1)\right) \\
-V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\right)
-\end{aligned}`,
+        String.raw`V_1 = \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M - \varepsilon Y_M Z_1)\right)`,
       ),
       paragraph([
         "が成り立つ（",
@@ -640,9 +637,7 @@ V_2 &= (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\r
         math(String.raw`\sigma^x\sigma^x = I`),
         " に加えて、以下の 3 式を ",
         math(String.raw`2\times 2`),
-        " 行列の積の成分計算（",
-        ref("mat_mult"),
-        "）で確かめる。",
+        " 行列の積の成分計算で確かめる。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -888,46 +883,6 @@ Y_m Z_{m+1}
       ),
       paragraph([
         "Step 4: ",
-        math(String.raw`1\le m\le M`),
-        " について ",
-        math(String.raw`Z_m Y_m = -i\,\sigma_m^x`),
-        "。Step 1 の表示を用いて因子ごとに計算する。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-Z_m Y_m
-&= \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^z}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
-   \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^y}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
-\quad (\because \text{Step 1}) \\
-&= \overbrace{(\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)}^{m-1}\boxtimes\overbrace{(\sigma^z\sigma^y)}^{m\text{th}}\boxtimes(II)\boxtimes\cdots\boxtimes(II)
-\quad (\because \text{クロネッカー積の積の規則}) \\
-&= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{(-i\,\sigma^x)}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I
-\quad (\because \sigma^x\sigma^x = I,\ \sigma^z\sigma^y = -i\,\sigma^x \text{（Step 0）}) \\
-&= (-i)\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{\sigma^x}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
-\quad (\because \text{第 } m \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
-&= -i\,\sigma_m^x \quad (\because \text{Step 1 の } \sigma_m^x \text{ の表示})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（これは ",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`\varepsilon`),
-        " の項に書かれている等式 ",
-        math(String.raw`Z_m Y_m = -i\,\sigma_m^x`),
-        " の証明でもある。）",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\sigma_m^x
-&=\bigl(i\cdot(-i)\bigr)\sigma_m^x
-&& (\because\ i\cdot(-i)=1\text{（複素数の四則）})\\
-&=i\bigl((-i)\sigma_m^x\bigr)
-&& (\because\ \text{複素数倍の結合則})\\
-&=i\,Z_mY_m
-&& (\because\ \text{上の Step 4 の等式})
-\end{aligned}`),
-      paragraph([
-        "Step 5: ",
         math(String.raw`V_1`),
         " の表式。",
         ref("def_transfer_matrix_symbols"),
@@ -968,51 +923,7 @@ V_1
 \quad (\because\ \text{直前の指数の等式})
 \end{aligned}`,
       ),
-      paragraph([
-        "Step 6: ",
-        math(String.raw`V_2`),
-        " の表式。",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`V_2`),
-        " の指数の中身を書き直すと、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
-&= K_2^*\sum_{m=1}^{M} \sigma_m^x
-\quad (\because\ \text{有限和を }\textstyle\sum\text{ 記法で書く}) \\
-&= K_2^*\sum_{m=1}^{M} i\,Z_m Y_m
-\quad (\because\ \text{Step 4 の直後に得た } \sigma_m^x = i\,Z_m Y_m \text{ を各項へ適用}) \\
-&= i K_2^*\left(Z_1Y_1 + Z_2Y_2 + \cdots + Z_MY_M\right)
-\quad (\because\ \text{スカラー倍の分配律と有限和を項ごとに書く})
-\end{aligned}`,
-      ),
-      paragraph([
-        "である。両辺は ",
-        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
-        " の同一の元であるから、",
-        math(String.raw`\exp`),
-        " の値も等しく、",
-        math(String.raw`V_2`),
-        " と ",
-        math(String.raw`s_2 = \sinh 2K_2`),
-        " の定義（",
-        ref("def_transfer_matrix_symbols"),
-        "）を用いて",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-V_2
-&= (2\sinh 2K_2)^{M/2}\exp\!\left(K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right)
-\quad (\because\ V_2\ \text{の定義}) \\
-&= (2s_2)^{M/2}\exp\!\left(K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right)
-\quad (\because\ s_2 = \sinh 2K_2\ \text{の定義}) \\
-&= (2s_2)^{M/2}\exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\right)
-\quad (\because\ \text{直前の指数の等式})
-\end{aligned}`,
-      ),
-      paragraph(["以上で 2 式が示された。"]),
+      paragraph(["以上で主張が示された。"]),
     ],
     conversion: {
       status: "converted",
@@ -1023,6 +934,200 @@ V_2
           "<def_transfer_matrix_symbols> 側を訂正した（理由はそちらの conversion.notes を参照）。",
         "原文の statement は式のみで M の範囲・記号の出典が書かれていなかったため、M ≥ 2 と" +
           "参照先（<def_transfer_matrix_symbols>）を明示した（主張の内容自体は変えていない）。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_003a_claim_V2_in_Z_Y",
+    kind: "claim",
+    origin: { path: "_old/typst/parts/004_転送行列/002_claim_V1V2をZYepsilonで表す.typ", ordinal: 3 },
+    title: { tex: String.raw`V_2 \text{ を } Z, Y \text{ で表す}` },
+    labels: ["V2_in_Z_Y"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`V_2, Z_m, Y_m, K_2^*, s_2 \;(= \sinh 2K_2)`),
+        " を考える。このとき ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " の中で",
+      ]),
+      displayMath(
+        String.raw`V_2 = (2s_2)^{M/2} \exp\!\left(i K_2^* (Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M)\right)`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`i \in \mathbb{C}`),
+        " は虚数単位）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の方針: ",
+        math(String.raw`\exp`),
+        " の中身どうしが ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " の元として等しいことを示す。以下、",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z, I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " は ",
+        ref("pauli_matrix_products"),
+        " の Pauli 行列とする。クロネッカー積の積の規則（",
+        ref("kronecker_product_rule"),
+        " (1)）と各因子についての ",
+        math(String.raw`\mathbb{C}`),
+        "-線型性（",
+        ref("kronecker_multilinear"),
+        "）を用いる。",
+      ]),
+      paragraph([
+        "Step 0: 単一サイトの積 ",
+        math(String.raw`\sigma^z\sigma^y=-i\,\sigma^x`),
+        " を成分計算で確かめる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z\sigma^y
+&= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&& (\because \text{Pauli 行列の定義}) \\
+&= \begin{pmatrix}1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0 \\ 0\cdot0+(-1)\cdot i & 0\cdot(-i)+(-1)\cdot0\end{pmatrix}
+&& (\because 2\times2 \text{ 行列の積の成分計算}) \\
+&= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
+&& (\because \mathbb{C} \text{ の四則}) \\
+&= -i\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&& (\because \text{行列のスカラー倍の定義}) \\
+&= -i\,\sigma^x
+&& (\because \text{Pauli 行列の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 1: ",
+        math(String.raw`Z_m,Y_m,\sigma_m^x`),
+        " のクロネッカー積表示。まず ",
+        math(String.raw`1\le r\le M`),
+        " と ",
+        math(String.raw`a_1,\dots,a_r\in\{x,y,z\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\sigma_1^{a_1}\cdots\sigma_r^{a_r}
+= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes
+\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r}`,
+      ),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`r=1`),
+        " は ",
+        ref("def_transfer_matrix_symbols"),
+        " の定義である。",
+        math(String.raw`r`),
+        " で成り立つと仮定して ",
+        math(String.raw`\sigma_{r+1}^{a_{r+1}}`),
+        " を右から掛けると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_1^{a_1}\cdots\sigma_r^{a_r}\sigma_{r+1}^{a_{r+1}}
+&= \left(\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes I\boxtimes\cdots\boxtimes I\right)
+   \left(I\boxtimes\cdots\boxtimes I\boxtimes\overbrace{\sigma^{a_{r+1}}}^{(r+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
+&& (\because \text{帰納法の仮定とサイト作用素の定義}) \\
+&= (\sigma^{a_1}I)\boxtimes\cdots\boxtimes(\sigma^{a_r}I)\boxtimes(I\sigma^{a_{r+1}})\boxtimes(II)\boxtimes\cdots\boxtimes(II)
+&& (\because \text{クロネッカー積の積の規則}) \\
+&= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_{r+1}}\boxtimes
+   \overbrace{I\boxtimes\cdots\boxtimes I}^{M-(r+1)}
+&& (\because AI=IA=A)
+\end{aligned}`,
+      ),
+      paragraph(["よって帰納法により一般式が成り立つ。定義へ適用すると"]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{\sigma^z}^{m\text{th}}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}, \\
+Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{\sigma^y}^{m\text{th}}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}, \\
+\sigma_m^x &= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes\overbrace{\sigma^x}^{m\text{th}}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+\end{aligned}
+\quad (\because \text{一般式とサイト作用素の定義})`,
+      ),
+      paragraph([
+        "Step 2: ",
+        math(String.raw`1\le m\le M`),
+        " について ",
+        math(String.raw`Z_mY_m=-i\,\sigma_m^x`),
+        "。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_mY_m
+&= \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^z\boxtimes I\boxtimes\cdots\boxtimes I\right)
+   \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^y\boxtimes I\boxtimes\cdots\boxtimes I\right)
+&& (\because \text{Step 1}) \\
+&= \overbrace{(\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)}^{m-1}\boxtimes(\sigma^z\sigma^y)\boxtimes(II)\boxtimes\cdots\boxtimes(II)
+&& (\because \text{クロネッカー積の積の規則}) \\
+&= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes(-i\,\sigma^x)\boxtimes I\boxtimes\cdots\boxtimes I
+&& (\because \sigma^x\sigma^x=I\ \text{と Step 0}) \\
+&= -i\,\sigma_m^x
+&& (\because \text{第 }m\text{ 因子についての複素線型性と Step 1})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_m^x
+&= \bigl(i\cdot(-i)\bigr)\sigma_m^x
+&& (\because i\cdot(-i)=1) \\
+&= i\bigl((-i)\sigma_m^x\bigr)
+&& (\because \text{複素数倍の結合則}) \\
+&= i\,Z_mY_m
+&& (\because \text{Step 2})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 3: ",
+        math(String.raw`V_2`),
+        " の表式。指数の中身は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+K_2^*\left(\sigma_1^x+\cdots+\sigma_M^x\right)
+&= K_2^*\sum_{m=1}^{M}\sigma_m^x
+&& (\because \text{有限和を}\ \textstyle\sum\ \text{記法で書く}) \\
+&= K_2^*\sum_{m=1}^{M}i\,Z_mY_m
+&& (\because \text{Step 2 の直後の等式を各項へ適用}) \\
+&= iK_2^*\left(Z_1Y_1+\cdots+Z_MY_M\right)
+&& (\because \text{スカラー倍の分配律と有限和を項ごとに書く})
+\end{aligned}`,
+      ),
+      paragraph([
+        "両辺へ行列指数関数を適用し、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`V_2`),
+        " と ",
+        math(String.raw`s_2=\sinh 2K_2`),
+        " の定義を使うと",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+V_2
+&= (2\sinh 2K_2)^{M/2}\exp\!\left(K_2^*(\sigma_1^x+\cdots+\sigma_M^x)\right)
+&& (\because V_2\ \text{の定義}) \\
+&= (2s_2)^{M/2}\exp\!\left(K_2^*(\sigma_1^x+\cdots+\sigma_M^x)\right)
+&& (\because s_2=\sinh 2K_2) \\
+&= (2s_2)^{M/2}\exp\!\left(iK_2^*(Z_1Y_1+\cdots+Z_MY_M)\right)
+&& (\because \text{直前の指数の等式})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "旧ブロックは独立した V1 と V2 の二等式を一つの主張へ束ねていたため、一ブロック一主張の規約に従って V2 の等式を分離した。",
+        "抽象テンソル積を使わず、具体的なクロネッカー積と二次 Pauli 行列の成分計算だけで証明した。",
       ],
     },
   },
@@ -1685,16 +1790,99 @@ S_Nf
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
     title: { tex: String.raw`\varepsilon\text{ の二乗と固有値}` },
     labels: ["epsilon_square_and_eigenvalues"],
-    statement: [paragraph([
-        ref("def_eigenspaces_of_epsilon"), " の作用は ",
-        math(String.raw`\varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
-        " を満たし、固有値は ", math(String.raw`\pm1`), " に限る。",
-      ])],
-    proof: [paragraph([
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
+        math(String.raw`\varepsilon\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を考える。",
+        ref("def_end_iso"),
+        " の ",
+        math(String.raw`\mathcal{F}=\mathbb{C}^{2^M}`),
+        " 上で、",
+      ]),
+      displayMath(String.raw`\varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+      paragraph([
+        "が成り立ち、",
+        math(String.raw`\mathcal{F}`),
+        " 上の作用 ",
+        math(String.raw`\mathbf{end}(\varepsilon)`),
+        " の固有値は ",
+        math(String.raw`1`),
+        " または ",
+        math(String.raw`-1`),
+        " に限る。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "まず ",
+        math(String.raw`I:=I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と略記する。各 ",
+        math(String.raw`r\in\{1,\dots,M\}`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\sigma_1^x\cdots\sigma_r^x
+=\underbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}_{r}
+ \boxtimes
+ \underbrace{I\boxtimes\cdots\boxtimes I}_{M-r}`,
+      ),
+      paragraph([
+        "を示す。ただし ",
+        math(String.raw`r=M`),
+        " のとき、右辺末尾の ",
+        math(String.raw`M-r=0`),
+        " 個の ",
+        math(String.raw`I`),
+        " は書かない。",
+        math(String.raw`r=1`),
+        " の場合は ",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\sigma_1^x`),
+        " の定義そのものである。ある ",
+        math(String.raw`r\in\{1,\dots,M-1\}`),
+        " についてこの式が成り立つと仮定する。サイト作用素の定義と ",
+        ref("kronecker_product_rule"),
+        " (1)(2) より、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_1^x\cdots\sigma_r^x\sigma_{r+1}^x
+&=\left(
+   \underbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}_{r}
+   \boxtimes
+   \underbrace{I\boxtimes\cdots\boxtimes I}_{M-r}
+  \right)
+  \left(
+   \underbrace{I\boxtimes\cdots\boxtimes I}_{r}
+   \boxtimes\sigma^x\boxtimes
+   \underbrace{I\boxtimes\cdots\boxtimes I}_{M-r-1}
+  \right)
+&&(\because\ \text{帰納法の仮定と}\ \sigma_{r+1}^x\ \text{の定義})\\
+&=\underbrace{(\sigma^x I)\boxtimes\cdots\boxtimes(\sigma^x I)}_{r}
+  \boxtimes(I\sigma^x)\boxtimes
+  \underbrace{(II)\boxtimes\cdots\boxtimes(II)}_{M-r-1}
+&&(\because\ \text{クロネッカー積の積の規則})\\
+&=\underbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}_{r+1}
+  \boxtimes
+  \underbrace{I\boxtimes\cdots\boxtimes I}_{M-r-1}
+&&(\because\ \sigma^x I=I\sigma^x=\sigma^x\ \text{と}\ II=I).
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって有限帰納法により一般式が成り立つ。",
+        math(String.raw`r=M`),
         " と ",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\varepsilon=\sigma_1^x\cdots\sigma_M^x`),
+        " の定義から ",
+        math(String.raw`\varepsilon=\sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
+        " を得る。したがって、",
         ref("pauli_matrix_products"),
         " の ",
         math(String.raw`\sigma^x\sigma^x = I_{\mathrm{Mat}(2,\mathbb{C})}`),
@@ -1716,24 +1904,80 @@ S_Nf
 \end{aligned}`,
       ),
       paragraph([
-        "であるから、",
+        "次に、",
         ref("end_is_algebra_isomorphism"),
-        " (2)(3) より ",
-        math(String.raw`(\mathbf{end}(\varepsilon))^2 = \mathrm{id}_{\mathcal{F}}`),
-        " であり、",
-        math(String.raw`\mathbf{end}(\varepsilon)`),
-        " の固有値は ",
-        math(String.raw`\pm 1`),
-        " に限る（固有値 ",
-        math(String.raw`\lambda`),
-        " と固有ベクトル ",
-        math(String.raw`f\neq 0`),
-        " について ",
-        math(String.raw`f = (\mathbf{end}(\varepsilon))^2 f = \lambda^2 f`),
-        " より ",
-        math(String.raw`\lambda^2=1`),
-        "）。",
+        " (2)(3) を一段ずつ適用すると、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\mathbf{end}(\varepsilon))^2
+&=\mathbf{end}(\varepsilon)\circ\mathbf{end}(\varepsilon)
+&&(\because\ \text{作用の二乗の定義})\\
+&=\mathbf{end}(\varepsilon^2)
+&&(\because\ \mathbf{end}\ \text{は行列積を写像の合成へ移す})\\
+&=\mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&&(\because\ \varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})})\\
+&=\mathrm{id}_{\mathcal{F}}
+&&(\because\ \mathbf{end}\ \text{は単位行列を恒等写像へ移す}).
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " を ",
+        math(String.raw`\mathbf{end}(\varepsilon)`),
+        " の固有値とし、対応する固有ベクトルを ",
+        math(String.raw`f\in\mathcal{F}\setminus\{0\}`),
+        " とする。すなわち ",
+        math(String.raw`\mathbf{end}(\varepsilon)(f)=\lambda f`),
+        " である。このとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+f
+&=\mathrm{id}_{\mathcal{F}}(f)
+&&(\because\ \text{恒等写像の定義})\\
+&=(\mathbf{end}(\varepsilon))^2(f)
+&&(\because\ (\mathbf{end}(\varepsilon))^2=\mathrm{id}_{\mathcal{F}})\\
+&=\mathbf{end}(\varepsilon)(\mathbf{end}(\varepsilon)(f))
+&&(\because\ \text{写像の合成の定義})\\
+&=\mathbf{end}(\varepsilon)(\lambda f)
+&&(\because\ \mathbf{end}(\varepsilon)(f)=\lambda f)\\
+&=\lambda\,\mathbf{end}(\varepsilon)(f)
+&&(\because\ \mathbf{end}(\varepsilon)\ \text{の}\ \mathbb{C}\text{-線型性})\\
+&=\lambda(\lambda f)
+&&(\because\ \mathbf{end}(\varepsilon)(f)=\lambda f)\\
+&=\lambda^2f
+&&(\because\ \text{複素数倍の結合則}).
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`f\neq 0`),
+        " だから、ある ",
+        math(String.raw`j\in\{1,\dots,2^M\}`),
+        " について ",
+        math(String.raw`f_j\neq 0`),
+        " である。等式 ",
+        math(String.raw`f=\lambda^2f`),
+        " の第 ",
+        math(String.raw`j`),
+        " 成分を比べると ",
+        math(String.raw`f_j=\lambda^2f_j`),
+        " だから、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\lambda^2-1)f_j&=0
+&&(\because\ f_j=\lambda^2f_j)\\
+\lambda^2-1&=0
+&&(\because\ f_j\neq0\ \text{と複素数の零積則})\\
+(\lambda-1)(\lambda+1)&=0
+&&(\because\ \lambda^2-1=(\lambda-1)(\lambda+1))\\
+\lambda-1=0\quad\text{または}\quad\lambda+1&=0
+&&(\because\ \text{複素数の零積則})\\
+\lambda=1\quad\text{または}\quad\lambda&=-1
+&&(\because\ \text{複素数の加法}).
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
@@ -1782,7 +2026,7 @@ S_Nf
     proof: [
       paragraph([
         "記号を固定する。",
-        ref("V1_V2_in_Z_Y_epsilon"),
+        ref("V1_in_Z_Y_epsilon"),
         " より ",
         math(String.raw`V_1 = \exp(G)`),
         "、また上の略記より ",
@@ -1824,7 +2068,7 @@ G^{(\pm)} &:= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} \mp W\right) \ \in \mathrm
         String.raw`\varepsilon Z_m = -\,Z_m\varepsilon, \qquad \varepsilon Y_m = -\,Y_m\varepsilon`,
       ),
       paragraph([
-        ref("V1_V2_in_Z_Y_epsilon"),
+        ref("V1_in_Z_Y_epsilon"),
         " の証明 Step 1 と同じクロネッカー積による表示",
       ]),
       displayMath(
