@@ -59587,6 +59587,108 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_parallel_staircase_transverse_width",
+        labels: [],
+        title: { text: "平行階段の横断座標の幅と帯外条件" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_parallel_staircase_transverse_width_bound",
+            focus: {
+              id: "kac_ward_claim_parallel_staircase_transverse_width_bound",
+              kind: "claim",
+              title: { text: "平行階段の横断座標は両端の水準の間に収まる" },
+              labels: ["claim_parallel_staircase_transverse_width_bound"],
+              habitat: "Z",
+              verification: ["sagemath/check/parallel-staircase-transverse-width"],
+              statement: [
+                paragraph([
+                  "正の平行階段（", ref("def_winding_parallel_staircase"), "）について ",
+                  math(String.raw`A:=w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\in\mathbb Z`),
+                  " と置く。任意の基点 ", math(String.raw`Q\in\mathbb Z\times\mathbb Z`),
+                  " と任意の ", math(String.raw`s\in\{0,\ldots,n_{\parallel}\}`), " に対し、横断座標（",
+                  ref("def_winding_transverse_coordinate"), "）は",
+                ]),
+                displayMath(String.raw`\min\{0,LA\}\ \le\ \kappa_{\gamma}(Q+G^{\gamma}_s)-\kappa_{\gamma}(Q)\ \le\ \max\{0,LA\}`),
+                paragraph([
+                  "を満たす。したがって基点が",
+                ]),
+                displayMath(String.raw`\kappa_{\gamma}(Q)+\min\{0,LA\}>K_{\max}(\gamma)`),
+                paragraph([
+                  "を満たすなら、平行階段の全頂点は周期延長した平面持ち上げ（",
+                  ref("def_periodic_plane_lift"), "）の整数帯より上にあり、任意の ",
+                  math(String.raw`s\in\{0,\ldots,n_{\parallel}\}`), " と任意の ",
+                  math(String.raw`k\in\mathbb Z`), " について",
+                ]),
+                displayMath(String.raw`Q+G^{\gamma}_s\ne\widetilde P_k(\gamma)`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`s\in\{0,\ldots,n_{\parallel}\}`), " を任意に取る。まず ",
+                  math(String.raw`0\le s\le LV`), " の場合、定義から",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}(Q+G^{\gamma}_s)-\kappa_{\gamma}(Q)
+&=\kappa_{\gamma}(G^{\gamma}_s)
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と整数の分配則}\bigr)\\
+&=w_{\mathrm h}(\gamma)\varepsilon(w_{\mathrm v}(\gamma))s
+&&\bigl(\because\ 0\le s\le LV\text{ と }\blkref{def_winding_parallel_staircase}\text{、}\blkref{def_winding_transverse_coordinate}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "この整数列は ", math(String.raw`s=0`), " で ", math(String.raw`0`), "、",
+                  math(String.raw`s=LV`), " で ", math(String.raw`LA`),
+                  " となり、その間を一定符号の整数増分で進む。次に ",
+                  math(String.raw`LV<s\le n_{\parallel}=LV+LH`), " の場合、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}(Q+G^{\gamma}_s)-\kappa_{\gamma}(Q)
+&=\kappa_{\gamma}(G^{\gamma}_s)
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と整数の分配則}\bigr)\\
+&=LA-w_{\mathrm v}(\gamma)\varepsilon(w_{\mathrm h}(\gamma))(s-LV)
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\text{ と }\blkref{def_winding_transverse_coordinate}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "この整数列は ", math(String.raw`s=LV`), " の値 ", math(String.raw`LA`), " から始まり、",
+                  math(String.raw`s=LV+LH=n_{\parallel}`), " で ", math(String.raw`0`),
+                  " となり、その間を一定符号の整数増分で進む。したがって二場合のいずれでも",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\min\{0,LA\}
+&\le\kappa_{\gamma}(Q+G^{\gamma}_s)-\kappa_{\gamma}(Q)
+&&\bigl(\because\ \text{直前の二表示と }\varepsilon\text{ の三場合の定義、}\mathbb Z\text{ の順序}\bigr)\\
+&\le\max\{0,LA\}
+&&\bigl(\because\ \text{同じ二表示と }\mathbb Z\text{ の順序}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "を得る。最後に基点について帯外条件を仮定し、",
+                  math(String.raw`k\in\mathbb Z`), " を任意に取る。横断座標を比較すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}(Q+G^{\gamma}_s)
+&\ge\kappa_{\gamma}(Q)+\min\{0,LA\}
+&&\bigl(\because\ \text{上で示した幅の下界}\bigr)\\
+&>K_{\max}(\gamma)
+&&\bigl(\because\ \text{基点についての仮定}\bigr)\\
+&\ge\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)
+&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と }K_{\max}(\gamma)\text{ の定義（}\blkref{def_transverse_translate_of_periodic_plane_lift}\text{）}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "横断座標の値が異なるので二点は異なる。",
+                  math(String.raw`s,k`), " は任意だったから、平行階段の全頂点は周期持ち上げの点集合と交わらない。",
+                  "全過程は整数の絶対値・四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

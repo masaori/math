@@ -184,6 +184,7 @@ export const ALL_LABELS = [
   "claim_ordered_crossing_pairs_double",
   "claim_oriented_orbit_pairs_cross_disjoint",
   "claim_parallel_separated_staircases_disjoint",
+  "claim_parallel_staircase_transverse_width_bound",
   "claim_partition_polynomial_qbar_lift_nonzero_coeff_bound",
   "claim_partition_value_dual_factorization",
   "claim_partition_value_ge_one_at_positive_rational",
