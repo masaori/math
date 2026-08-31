@@ -59346,6 +59346,247 @@ B
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_periodic_lift_closure_cycle",
+        labels: [],
+        title: { text: "接続階段の周期並進による単純閉路" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_periodic_lift_closure_is_simple_cycle",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_periodic_lift_closure_cycle",
+                kind: "definition",
+                title: { text: "接続階段と二つの周期持ち上げから作る閉路" },
+                labels: ["def_periodic_lift_closure_cycle"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "接続階段（", ref("def_first_hit_connecting_staircase"), "）の終点を ",
+                    math(String.raw`E^{\gamma,k_0,u}_{h}=\widetilde P^{[u]}_{k_1}(\gamma)`),
+                    " と書く。ただし ", math(String.raw`h:=s_{\mathrm{hit}}(\gamma,k_0,u)`),
+                    " であり、", math(String.raw`k_1\in\mathbb Z`), " はこの等式を満たす唯一の整数である。",
+                    "存在は接続階段の端点の主張（", ref("claim_first_hit_connecting_staircase_meets_lifts_only_at_ends"),
+                    "）、一意性は周期延長した持ち上げの点の相異なり（",
+                    ref("claim_periodic_plane_lift_points_distinct"), "）による。一周期の並進ベクトルを",
+                  ]),
+                  displayMath(String.raw`B_{\gamma}:=\bigl(L\,w_{\mathrm v}(\gamma),L\,w_{\mathrm h}(\gamma)\bigr)\in\mathbb Z\times\mathbb Z`),
+                  paragraph([
+                    "と書く。周期数 ", math(String.raw`c\in\mathbb N`), "、",
+                    math(String.raw`c\ge1`), " を任意に取り、",
+                    math(String.raw`N:=2h+2cm`), " と置き、有限列 ",
+                    math(String.raw`C^{\gamma,k_0,u,c}_0,\ldots,C^{\gamma,k_0,u,c}_N\in\mathbb Z\times\mathbb Z`),
+                    " を次の四部分で定める。境界の値は周期延長した持ち上げの定義（",
+                    ref("def_periodic_plane_lift"), "）により一致する。",
+                  ]),
+                  displayMath(String.raw`C^{\gamma,k_0,u,c}_j:=
+\begin{cases}
+E^{\gamma,k_0,u}_j,&0\le j\le h,\\
+\widetilde P^{[u]}_{k_1+j-h}(\gamma),&h\le j\le h+cm,\\
+E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
+\widetilde P_{k_0+2h+2cm-j}(\gamma),&2h+cm\le j\le 2h+2cm.
+\end{cases}`),
+                  paragraph([
+                    "これは接続階段を進み、移動後の周期持ち上げを ", math(String.raw`c`),
+                    " 周期分進み、接続階段の ", math(String.raw`c`),
+                    " 周期並進を逆向きに戻り、元の周期持ち上げを ", math(String.raw`c`),
+                    " 周期分だけ逆向きに戻る有限列である。全ての添字、点、演算は整数と有限列だけで定まり、",
+                    "実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_periodic_lift_closure_is_simple_cycle",
+              kind: "claim",
+              title: { text: "接続階段とその周期並進は二つの持ち上げを単純閉路へ閉じる" },
+              labels: ["claim_periodic_lift_closure_is_simple_cycle"],
+              habitat: "Z",
+              verification: ["sagemath/check/periodic-lift-closure-cycle"],
+              statement: [
+                paragraph([
+                  "任意の周期数 ", math(String.raw`c\in\mathbb N`), "、", math(String.raw`c\ge1`),
+                  " について、有限列 ", math(String.raw`C^{\gamma,k_0,u,c}`), "（", ref("def_periodic_lift_closure_cycle"),
+                  "）は閉じた単位格子路である。すなわち ",
+                  math(String.raw`C^{\gamma,k_0,u,c}_0=C^{\gamma,k_0,u,c}_N`),
+                  " であり、各連続差は四つの単位格子ベクトルのいずれかである。さらに ",
+                  math(String.raw`C^{\gamma,k_0,u,c}_0,\ldots,C^{\gamma,k_0,u,c}_{N-1}`),
+                  " は二つずつ相異なる。従ってこの有限列は頂点単純な閉路である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "各部分の連続差は、順に接続階段、移動後の周期持ち上げ、接続階段の ",
+                  math(String.raw`c`), " 周期並進の逆向き、",
+                  "元の周期持ち上げの逆向きの一歩である。各境界の二つの表示は、周期延長した持ち上げが ",
+                  math(String.raw`\widetilde P_{k+m}(\gamma)=\widetilde P_{k}(\gamma)+B_{\gamma}`),
+                  " を満たすことから同じ点を与え、",
+                  math(String.raw`C^{\gamma,k_0,u,c}_0=\widetilde P_{k_0}(\gamma)=C^{\gamma,k_0,u,c}_N`),
+                  " なので閉じた単位格子路である（", ref("def_first_hit_connecting_staircase"), "、",
+                  ref("def_periodic_plane_lift"), "、", ref("def_periodic_lift_closure_cycle"), "）。",
+                ]),
+                paragraph([
+                  "頂点の相異なりを示す。各接続階段の内部では頂点が相異なり、接続階段は元の持ち上げと始点でのみ、",
+                  "移動後の持ち上げと終点でのみ交わる（",
+                  ref("claim_first_hit_connecting_staircase_meets_lifts_only_at_ends"),
+                  "）。二つの周期持ち上げはいずれも ", math(String.raw`B_{\gamma}`),
+                  " の整数倍の並進で点集合として不変である（", ref("def_periodic_plane_lift"),
+                  "。添字を ", math(String.raw`m`), " ずらす読み替え）。従って同じ主張を ",
+                  math(String.raw`c\,B_{\gamma}`), " だけ並進すれば、並進した接続階段についても、",
+                  "二つの持ち上げとの交点は表示された二端点だけである。",
+                  math(String.raw`c\ge1`), " なので ", math(String.raw`c\,B_{\gamma}`),
+                  " は非零の周期並進であり、元の接続階段とその ", math(String.raw`c`),
+                  " 周期並進は交わらない（",
+                  ref("claim_period_translates_of_iterated_staircase_disjoint"), "）。",
+                ]),
+                paragraph([
+                  "各周期持ち上げの ", math(String.raw`c`), " 周期分の内部頂点は相異なる（",
+                  ref("claim_periodic_plane_lift_points_distinct"), "）。元の周期持ち上げと移動後の周期持ち上げは、",
+                  "横断幅の分離条件により交わらない（",
+                  ref("claim_transverse_translates_of_periodic_plane_lift_disjoint"), "）。",
+                  "従って四部分のうち同じ部分に属する二頂点も、異なる部分に属する二頂点も、",
+                  "隣接する部分が共有する表示済みの端点を除いて一致しない。始点と終点の重複を終点側だけ除けば、",
+                  math(String.raw`C^{\gamma,k_0,u,c}_0,\ldots,C^{\gamma,k_0,u,c}_{N-1}`),
+                  " は二つずつ相異なる。全過程は整数の除法・四則・順序と有限列だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_winding_parallel_staircase",
+        labels: [],
+        title: { text: "巻き付きベクトルの平行階段" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_winding_parallel_staircase_step_increase",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_winding_parallel_staircase",
+                kind: "definition",
+                title: { text: "巻き付きベクトルに平行な整数格子の階段" },
+                labels: ["def_winding_parallel_staircase"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                    ref("def_directed_winding_numbers"), "）が ",
+                    math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                    " を満たすとする。符号 ", math(String.raw`\varepsilon`), " と ",
+                    math(String.raw`H=|w_{\mathrm h}(\gamma)|`), "、",
+                    math(String.raw`V=|w_{\mathrm v}(\gamma)|`), " は横断階段の定義（",
+                    ref("def_winding_transverse_staircase"), "）のものを使い、",
+                    math(String.raw`n_{\parallel}:=L(V+H)\in\mathbb N`),
+                    " と置く。巻き付きベクトルが零でなく ", math(String.raw`L\ge1`), "（",
+                    ref("def_residue_maps"), "）なので ",
+                    math(String.raw`n_{\parallel}\ge1`), " である。有限列 ",
+                    math(String.raw`G^{\gamma}_0,\ldots,G^{\gamma}_{n_{\parallel}}\in\mathbb Z\times\mathbb Z`), " を",
+                  ]),
+                  displayMath(String.raw`G^{\gamma}_s:=
+\begin{cases}
+\bigl(\varepsilon(w_{\mathrm v}(\gamma))s,0\bigr),
+&0\le s\le LV,\\
+\bigl(L\,w_{\mathrm v}(\gamma),\,\varepsilon(w_{\mathrm h}(\gamma))(s-LV)\bigr),
+&LV<s\le n_{\parallel}
+\end{cases}`),
+                  paragraph([
+                    "で定め、これを巻き付きベクトルの正の平行階段と呼ぶ。とくに ",
+                    math(String.raw`G^{\gamma}_0=(0,0)`), " かつ ",
+                    math(String.raw`G^{\gamma}_{n_{\parallel}}
+=\bigl(L\,w_{\mathrm v}(\gamma),L\,w_{\mathrm h}(\gamma)\bigr)=B_{\gamma}`),
+                    "（一周期の並進ベクトルは ", ref("def_periodic_lift_closure_cycle"),
+                    "）である。絶対値・場合分け・有限列はいずれも整数と自然数の中で定まる。",
+                    "逆向きに読めば一周期の並進を打ち消す整数格子路になるので、",
+                    "逆向きの周期持ち上げを使わずに周期持ち上げの有限部分を閉じる一側閉包の接続路の素材である。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_winding_parallel_staircase_step_increase",
+              kind: "claim",
+              title: { text: "平行階段の各歩は平行座標を増やす単位歩である" },
+              labels: ["claim_winding_parallel_staircase_step_increase"],
+              habitat: "Z",
+              verification: ["sagemath/check/winding-parallel-staircase"],
+              statement: [
+                paragraph([
+                  "正の平行階段（", ref("def_winding_parallel_staircase"), "）について、任意の ",
+                  math(String.raw`s\in\{0,\ldots,n_{\parallel}-1\}`), " に対し差 ",
+                  math(String.raw`G^{\gamma}_{s+1}-G^{\gamma}_s`), " は ",
+                  math(String.raw`(1,0),(-1,0),(0,1),(0,-1)`),
+                  " のいずれかであり、平行座標（", ref("def_winding_parallel_coordinate"), "）は",
+                ]),
+                displayMath(String.raw`\pi_{\gamma}(G^{\gamma}_{s+1})>
+\pi_{\gamma}(G^{\gamma}_s)`),
+                paragraph([
+                  "を満たす。したがってこの階段の頂点はすべて相異なり、平面格子上の単純な辺列になる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`0\le s<LV`), " の場合、定義から",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+G^{\gamma}_{s+1}-G^{\gamma}_s
+&=\bigl(\varepsilon(w_{\mathrm v}(\gamma)),0\bigr)
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\bigr),\\
+\pi_{\gamma}(G^{\gamma}_{s+1})-\pi_{\gamma}(G^{\gamma}_s)
+&=w_{\mathrm v}(\gamma)\varepsilon(w_{\mathrm v}(\gamma))
+&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\text{ と直前の差}\bigr)\\
+&=|w_{\mathrm v}(\gamma)|
+&&\bigl(\because\ \varepsilon\text{ の三場合の定義}\bigr)\\
+&>0
+&&\bigl(\because\ s<LV\text{ なので }V=|w_{\mathrm v}(\gamma)|\ge1\bigr).
+\end{aligned}`),
+                paragraph([
+                  "この場合は ", math(String.raw`V>0`), " なので ",
+                  math(String.raw`\varepsilon(w_{\mathrm v}(\gamma))\in\{-1,1\}`),
+                  " であり、差は縦方向の単位歩である。次に ",
+                  math(String.raw`LV\le s<n_{\parallel}`), " の場合、",
+                  math(String.raw`s=LV`), " では二つの場合の式が同じ点 ",
+                  math(String.raw`(L\,w_{\mathrm v}(\gamma),0)`),
+                  " を与えることに注意して、定義から",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+G^{\gamma}_{s+1}-G^{\gamma}_s
+&=\bigl(0,\varepsilon(w_{\mathrm h}(\gamma))\bigr)
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\bigr),\\
+\pi_{\gamma}(G^{\gamma}_{s+1})-\pi_{\gamma}(G^{\gamma}_s)
+&=w_{\mathrm h}(\gamma)\varepsilon(w_{\mathrm h}(\gamma))
+&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\text{ と直前の差}\bigr)\\
+&=|w_{\mathrm h}(\gamma)|
+&&\bigl(\because\ \varepsilon\text{ の三場合の定義}\bigr)\\
+&>0
+&&\bigl(\because\ s<n_{\parallel}=LV+LH\text{ なので }H=|w_{\mathrm h}(\gamma)|\ge1\bigr).
+\end{aligned}`),
+                paragraph([
+                  "この場合は ", math(String.raw`H>0`), " なので差は横方向の単位歩である。",
+                  "二場合は ", math(String.raw`s\in\{0,\ldots,n_{\parallel}-1\}`),
+                  " を尽くす。平行座標が各歩で真に増えるため、異なる二頂点の平行座標は異なり、",
+                  "頂点どうしも相異なる。全過程は整数の絶対値・四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
