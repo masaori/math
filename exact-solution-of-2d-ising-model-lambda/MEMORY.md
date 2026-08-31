@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 22 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 23 回目の tick 時点）
+
+**閉歩道の平面変位を定義し、その総和が巻き付き数の $L$ 倍に等しいことを本文と SageMath で固定した（Lean 未着手）。** 向き付き辺ごとの行変位・列変位 $\delta_{\mathrm{row}},\delta_{\mathrm{col}}\in\{0,\pm1\}$（`def_plane_displacement`）を定め、剰余類を一つ進めたときの代表の値（`claim_representative_increment`）から辺ごとの恒等式 $s(i')-s(i)=\delta_{\mathrm{row}}-L\,c_{\mathrm v}(1-2d)$・$s(j')-s(j)=\delta_{\mathrm{col}}-L\,c_{\mathrm h}(1-2d)$（`claim_edge_representative_displacement`）を示し、閉歩道の巡回望遠鏡和で $\sum_k\delta_{\mathrm{row}}(\vec e_k)=L\,w_{\mathrm v}(\gamma)$、$\sum_k\delta_{\mathrm{col}}(\vec e_k)=L\,w_{\mathrm h}(\gamma)$ を得た（`claim_closed_walk_plane_displacement`。始点を固定すれば平面格子 $\mathbb Z\times\mathbb Z$ への持ち上げの終点変位がこの値になる）。SageMath `closed-walk-plane-displacement` は代表の増分 21 件・全向き付き辺 120 件（$L\le4$）・閉じた非後退辺列 34,112 本（$L=1,2,3$、長さ 8 まで）を `ZZ` で検査した。検算対応 336 件、本文 735 ブロック・check・PDF 333 ページを通した。離散 Whitney の残りは、頂点単純性から巻き付きベクトルが零または原始的であること／平面格子の単純閉路・周期単純路の回転数／候補への合成で、tick 22〜23 の Lean 二版もこの列で一件ずつ配線する。次は頂点単純性から巻き付きベクトルが零または原始的であることを示す。
+
+前進前レビューでは前 tick の整数巻き付き数の定義・偶奇の主張・SageMath・台帳を照合し、修正対象が無いことを確認した。並列の式変形統一は、姉妹側の非負平方根の一意性の証明にあった散文中の一行二等号 $y_1^2=x=y_2^2$ を二段の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 349 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 22 回目の tick 時点）
 
 **離散 Whitney 証明の入口として整数巻き付き数を定義し、その偶奇が既存の切断線偶奇に等しいことを本文と SageMath で固定した（Lean 未着手）。** 閉歩道の切断線横断へ向きに応じて $+1$ または $-1$ を与える $w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)\in\mathbb Z$ を置き、$1-2d\equiv1\pmod2$ を項ごとに有限和へ適用して $(w_{\mathrm h}\bmod2,w_{\mathrm v}\bmod2)=(h,v)$ を示した（`def_directed_winding_numbers`、`claim_directed_winding_parity`、`sagemath/check/directed-winding-parity`）。離散 Whitney は論法で、平面への持ち上げと終点変位／頂点単純性から巻き付きベクトルが零または原始的であること／平面格子の単純閉路・周期単純路の回転数／候補への合成、の順へ割った。次は平面への持ち上げを定め、終点変位を整数巻き付き数で表す。
 
