@@ -58855,6 +58855,80 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_staircase_from_band_top",
+        labels: [],
+        title: { text: "整数帯の上端からの反復横断階段と周期持ち上げの分離" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_staircase_from_band_top_meets_lift_only_at_base",
+            focus: {
+              id: "kac_ward_claim_staircase_from_band_top_meets_lift_only_at_base",
+              kind: "claim",
+              title: { text: "整数帯の上端以上の基点からの反復横断階段は基点以外で周期持ち上げと交わらない" },
+              labels: ["claim_staircase_from_band_top_meets_lift_only_at_base"],
+              habitat: "Z",
+              verification: ["sagemath/check/staircase-from-band-top-avoids-lift"],
+              statement: [
+                paragraph([
+                  "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                  ref("def_directed_winding_numbers"), "）が ",
+                  math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                  " を満たすとする。基点 ", math(String.raw`Q\in\mathbb Z\times\mathbb Z`),
+                  " が整数帯の上端以上、すなわち ",
+                  math(String.raw`K_{\max}(\gamma)\le\kappa_{\gamma}(Q)`), "（",
+                  ref("def_transverse_translate_of_periodic_plane_lift"), "、",
+                  ref("def_winding_transverse_coordinate"),
+                  "）を満たすとし、反復回数 ", math(String.raw`t\in\mathbb N`), "、",
+                  math(String.raw`t\ge1`), " を任意に取る。このとき、任意の ",
+                  math(String.raw`s\in\{1,\ldots,t\,n_{\perp}\}`), " と任意の ",
+                  math(String.raw`k\in\mathbb Z`), " について、反復横断階段（",
+                  ref("def_iterated_transverse_staircase"), "）の頂点と周期延長した平面持ち上げ（",
+                  ref("def_periodic_plane_lift"), "）の点は",
+                ]),
+                displayMath(String.raw`D^{\gamma,Q,t}_s\ \ne\ \widetilde P_k(\gamma)`),
+                paragraph([
+                  "を満たす。すなわち反復横断階段は、基点 ",
+                  math(String.raw`D^{\gamma,Q,t}_0=Q`),
+                  " を除いて、周期延長した持ち上げの点集合と交わらない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`s\in\{1,\ldots,t\,n_{\perp}\}`), " と ",
+                  math(String.raw`k\in\mathbb Z`), " を任意に取る。横断座標を比較すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}(D^{\gamma,Q,t}_s)
+&\ge\kappa_{\gamma}(Q)+s
+&&\bigl(\because\ \blkref{claim_iterated_transverse_staircase_lower_bound}\bigr)\\
+&\ge K_{\max}(\gamma)+s
+&&\bigl(\because\ \text{仮定 }K_{\max}(\gamma)\le\kappa_{\gamma}(Q)\text{ と整数の順序の加法性}\bigr)\\
+&>K_{\max}(\gamma)
+&&\bigl(\because\ s\ge1\text{ と整数の順序}\bigr)\\
+&\ge\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)
+&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と }K_{\max}(\gamma)\text{ の定義（}\blkref{def_transverse_translate_of_periodic_plane_lift}\text{）}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "横断座標 ", math(String.raw`\kappa_{\gamma}`),
+                  " は ", math(String.raw`\mathbb Z\times\mathbb Z`),
+                  " から ", math(String.raw`\mathbb Z`),
+                  " への写像なので、値が異なる二点は異なる。よって ",
+                  math(String.raw`D^{\gamma,Q,t}_s\ne\widetilde P_k(\gamma)`),
+                  " である。全過程は整数の四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 51 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 52 回目の tick 時点）
+
+**整数帯の上端以上の基点から出した反復横断階段が、基点以外で周期延長した持ち上げと交わらないことを本文と SageMath で固定した（Lean 未着手）。** 台帳の「帯外で二つの反復横断階段と二つの周期持ち上げを合成する単純閉路」の最初の部品である。基点 $Q\in\mathbb Z\times\mathbb Z$ が $K_{\max}(\gamma)\le\kappa_{\gamma}(Q)$ を満たすとき、任意の $s\in\{1,\ldots,t\,n_{\perp}\}$ と $k\in\mathbb Z$ について $\kappa_{\gamma}(D^{\gamma,Q,t}_s)\ge\kappa_{\gamma}(Q)+s\ge K_{\max}(\gamma)+s>K_{\max}(\gamma)\ge\kappa_{\gamma}(\widetilde P_k(\gamma))$ の不等式の鎖一本で $D^{\gamma,Q,t}_s\ne\widetilde P_k(\gamma)$ を証明した（`claim_staircase_from_band_top_meets_lift_only_at_base`。新しい定義は置かず、反復横断階段の歩数下界・有限幅整数帯・$K_{\max}$ の定義だけを引いた）。SageMath `staircase-from-band-top-avoids-lift` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本について、$\kappa=K_{\max}$ の持ち上げ点（商 $-2..2$）を全て基点に取り、$t=1,2$ の帯を超えた階段頂点 155,040 個・頂点と持ち上げ点の比較 5,727,600 件を `ZZ` で検査した。次は横断平行移動した二つの周期持ち上げと、それぞれの極大水準点から出した反復横断階段を帯外で合流させ、単純閉路へ合成する。
+
+前進前レビューでは前 tick の横断平行移動の定義・分離の主張と SageMath（等式 520,632 件・点対 21,566,088 組）を照合した。横断座標の平行移動則と幅超え分離は今回の主張と後続の閉路合成が直接引く非自明な内容で、「何も言っていない主張」・記号・住処・参照・検算の不一致は無かった。
+
+## ひとつ前の到達点（2026-09-01 の 51 回目の tick 時点）
 
 **周期延長した平面持ち上げを整数横断方向へ平行移動し、元の横断幅を超えて離した二コピーが交わらないことを本文と SageMath で固定した（Lean 未着手）。** 「帯外の二路と周期持ち上げを合成する単純閉路」を、周期持ち上げの横断平行移動と分離／極大横断水準からの二路と単純閉路の合成へ割り直した。横断移動ベクトル $d_{\perp}(\gamma)=(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))$、正整数 $W_{\perp}(\gamma)=w_{\mathrm h}(\gamma)^2+w_{\mathrm v}(\gamma)^2$、移動した周期持ち上げ $\widetilde P_k^{[u]}(\gamma)=\widetilde P_k(\gamma)+u d_{\perp}(\gamma)$ を定義した（`def_transverse_translate_of_periodic_plane_lift`）。横断座標は $\kappa_\gamma(\widetilde P_k^{[u]})=\kappa_\gamma(\widetilde P_k)+uW_{\perp}$ を満たすので、一周期の最小・最大横断水準を $K_{\min},K_{\max}$ とすると、$u<v$ かつ $(v-u)W_{\perp}>K_{\max}-K_{\min}$ なら任意の $k,k'$ で $\kappa_\gamma(\widetilde P_k^{[u]})<\kappa_\gamma(\widetilde P_{k'}^{[v]})$ となり、二コピーは交わらない（`claim_transverse_translates_of_periodic_plane_lift_disjoint`）。SageMath `transverse-translates-of-periodic-plane-lift` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・横断座標の等式 520,632 件・分離した点対 21,566,088 組を `ZZ` で検査した。次は極大横断水準の周期持ち上げ点から反復横断階段を出し、分離した二つの周期持ち上げと合成する単純閉路を構成する。
 
