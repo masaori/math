@@ -58573,6 +58573,171 @@ C^{\gamma}_{s+1}-C^{\gamma}_s
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_iterated_transverse_staircase",
+        labels: [],
+        title: { text: "横断階段の反復による整数帯の外への単純路" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_iterated_transverse_staircase_lower_bound",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_iterated_transverse_staircase",
+                kind: "definition",
+                title: { text: "基点と反復回数を持つ反復横断階段" },
+                labels: ["def_iterated_transverse_staircase"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                    ref("def_directed_winding_numbers"), "）が ",
+                    math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                    " を満たすとし、正の横断階段 ",
+                    math(String.raw`C^{\gamma}_0,\ldots,C^{\gamma}_{n_{\perp}}`),
+                    " とその歩数 ", math(String.raw`n_{\perp}=H+V\ge1`), "（",
+                    ref("def_winding_transverse_staircase"),
+                    "）を取る。基点 ", math(String.raw`Q\in\mathbb Z\times\mathbb Z`),
+                    " と反復回数 ", math(String.raw`t\in\mathbb N`), "、",
+                    math(String.raw`t\ge1`), " を任意に取る。各 ",
+                    math(String.raw`s\in\{0,\ldots,t\,n_{\perp}\}`),
+                    " について、整数の除法で ",
+                    math(String.raw`s=q\,n_{\perp}+r`), "（",
+                    math(String.raw`q\in\mathbb N`), "、",
+                    math(String.raw`r\in\{0,\ldots,n_{\perp}-1\}`),
+                    "）とただ一通りに書き、",
+                  ]),
+                  displayMath(String.raw`D^{\gamma,Q,t}_s:=Q+q\cdot\bigl(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma)\bigr)+C^{\gamma}_r\in\mathbb Z\times\mathbb Z`),
+                  paragraph([
+                    "で有限列 ", math(String.raw`D^{\gamma,Q,t}_0,\ldots,D^{\gamma,Q,t}_{t\,n_{\perp}}`),
+                    " を定め、これを基点 ", math(String.raw`Q`), "・反復回数 ",
+                    math(String.raw`t`), " の反復横断階段と呼ぶ。ここでスカラー倍と和は ",
+                    math(String.raw`\mathbb Z\times\mathbb Z`), " の成分ごとの整数演算である。とくに ",
+                    math(String.raw`s=0`), " では ", math(String.raw`q=0,\ r=0,\ C^{\gamma}_0=(0,0)`),
+                    " なので ", math(String.raw`D^{\gamma,Q,t}_0=Q`), " であり、",
+                    math(String.raw`s=t\,n_{\perp}`), " では ",
+                    math(String.raw`q=t,\ r=0`), " なので ",
+                    math(String.raw`D^{\gamma,Q,t}_{t\,n_{\perp}}=Q+t\cdot(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))`),
+                    " である。全過程は整数の除法・四則と有限列だけで定まる。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_iterated_transverse_staircase_lower_bound",
+              kind: "claim",
+              title: { text: "反復横断階段は各歩で横断座標を増やし基点より歩数以上高くなる" },
+              labels: ["claim_iterated_transverse_staircase_lower_bound"],
+              habitat: "Z",
+              verification: ["sagemath/check/iterated-transverse-staircase"],
+              statement: [
+                paragraph([
+                  "反復横断階段（", ref("def_iterated_transverse_staircase"),
+                  "）について、任意の ",
+                  math(String.raw`s\in\{0,\ldots,t\,n_{\perp}-1\}`),
+                  " に対し、", math(String.raw`s=q\,n_{\perp}+r`),
+                  " を整数の除法の表示とすると差は",
+                ]),
+                displayMath(String.raw`D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s=C^{\gamma}_{r+1}-C^{\gamma}_r`),
+                paragraph([
+                  "に等しく、したがって ",
+                  math(String.raw`(1,0),(-1,0),(0,1),(0,-1)`),
+                  " のいずれかであり、整数横断座標（", ref("def_winding_transverse_coordinate"),
+                  "）は ",
+                  math(String.raw`\kappa_{\gamma}(D^{\gamma,Q,t}_{s+1})>\kappa_{\gamma}(D^{\gamma,Q,t}_s)`),
+                  " を満たす。さらに任意の ",
+                  math(String.raw`s\in\{0,\ldots,t\,n_{\perp}\}`), " について",
+                ]),
+                displayMath(String.raw`\kappa_{\gamma}(D^{\gamma,Q,t}_s)\ \ge\ \kappa_{\gamma}(Q)+s`),
+                paragraph([
+                  "が成り立つ。とくにこの列の頂点はすべて相異なり、平面格子上の単純な辺列になる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`s\in\{0,\ldots,t\,n_{\perp}-1\}`), " を取り、整数の除法で ",
+                  math(String.raw`s=q\,n_{\perp}+r`), "（",
+                  math(String.raw`q\in\mathbb N`), "、",
+                  math(String.raw`r\in\{0,\ldots,n_{\perp}-1\}`),
+                  "）と書く。まず一歩の差を二場合で求める。",
+                  math(String.raw`r\le n_{\perp}-2`), " の場合、",
+                  math(String.raw`s+1=q\,n_{\perp}+(r+1)`), " かつ ",
+                  math(String.raw`r+1\in\{0,\ldots,n_{\perp}-1\}`),
+                  " なのでこれが ", math(String.raw`s+1`), " の除法の表示であり、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s
+&=\bigl(Q+q\cdot(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))+C^{\gamma}_{r+1}\bigr)-\bigl(Q+q\cdot(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))+C^{\gamma}_r\bigr)
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)\\
+&=C^{\gamma}_{r+1}-C^{\gamma}_r
+&&\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の成分ごとの整数の加減}\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`r=n_{\perp}-1`), " の場合、",
+                  math(String.raw`s+1=(q+1)\,n_{\perp}+0`), " が ",
+                  math(String.raw`s+1`), " の除法の表示であり、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+D^{\gamma,Q,t}_{s+1}
+&=Q+(q+1)\cdot\bigl(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma)\bigr)+C^{\gamma}_0
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)\\
+&=Q+q\cdot\bigl(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma)\bigr)+C^{\gamma}_{n_{\perp}}
+&&\bigl(\because\ C^{\gamma}_0=(0,0),\ C^{\gamma}_{n_{\perp}}=(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))\ \text{（}\blkref{def_winding_transverse_staircase}\text{）}\bigr),\\
+D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s
+&=C^{\gamma}_{n_{\perp}}-C^{\gamma}_{n_{\perp}-1}
+&&\bigl(\because\ \text{直前の表示と }\blkref{def_iterated_transverse_staircase}\text{、成分ごとの整数の加減}\bigr)\\
+&=C^{\gamma}_{r+1}-C^{\gamma}_r
+&&\bigl(\because\ r=n_{\perp}-1\bigr).
+\end{aligned}`),
+                paragraph([
+                  "二場合は ", math(String.raw`r\in\{0,\ldots,n_{\perp}-1\}`),
+                  " を尽くすので、いずれの ", math(String.raw`s`), " でも差は ",
+                  math(String.raw`C^{\gamma}_{r+1}-C^{\gamma}_r`), " に等しい。この差は ",
+                  math(String.raw`(1,0),(-1,0),(0,1),(0,-1)`), " のいずれかである（",
+                  ref("claim_winding_transverse_staircase_step_increase"), "）。次に横断座標の増分を求める。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}(D^{\gamma,Q,t}_{s+1})-\kappa_{\gamma}(D^{\gamma,Q,t}_s)
+&=w_{\mathrm h}(\gamma)\bigl((D^{\gamma,Q,t}_{s+1})_1-(D^{\gamma,Q,t}_s)_1\bigr)-w_{\mathrm v}(\gamma)\bigl((D^{\gamma,Q,t}_{s+1})_2-(D^{\gamma,Q,t}_s)_2\bigr)
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と整数の分配則}\bigr)\\
+&=w_{\mathrm h}(\gamma)\bigl((C^{\gamma}_{r+1})_1-(C^{\gamma}_r)_1\bigr)-w_{\mathrm v}(\gamma)\bigl((C^{\gamma}_{r+1})_2-(C^{\gamma}_r)_2\bigr)
+&&\bigl(\because\ \text{上で示した差の等式}\bigr)\\
+&=\kappa_{\gamma}(C^{\gamma}_{r+1})-\kappa_{\gamma}(C^{\gamma}_r)
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と整数の分配則}\bigr)\\
+&\ge1
+&&\bigl(\because\ \blkref{claim_winding_transverse_staircase_step_increase}\text{ の真の増加と、整数で }>0\text{ は }\ge1\bigr).
+\end{aligned}`),
+                paragraph([
+                  "ここで ", math(String.raw`(\cdot)_1,(\cdot)_2`), " は ",
+                  math(String.raw`\mathbb Z\times\mathbb Z`),
+                  " の第一・第二成分である。最後に下界を望遠和で得る。任意の ",
+                  math(String.raw`s\in\{0,\ldots,t\,n_{\perp}\}`), " について",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}(D^{\gamma,Q,t}_s)
+&=\kappa_{\gamma}(D^{\gamma,Q,t}_0)+\sum_{u=0}^{s-1}\bigl(\kappa_{\gamma}(D^{\gamma,Q,t}_{u+1})-\kappa_{\gamma}(D^{\gamma,Q,t}_u)\bigr)
+&&\bigl(\because\ \text{整数の有限和の望遠和}\bigr)\\
+&\ge\kappa_{\gamma}(D^{\gamma,Q,t}_0)+s
+&&\bigl(\because\ \text{各増分が }\ge1\text{（上で示した）と順序の加法性}\bigr)\\
+&=\kappa_{\gamma}(Q)+s
+&&\bigl(\because\ D^{\gamma,Q,t}_0=Q\ \text{（}\blkref{def_iterated_transverse_staircase}\text{）}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "横断座標が各歩で真に増えるため、添字の異なる二頂点の横断座標は異なり、頂点どうしも相異なる。",
+                  "全過程は整数の除法・四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

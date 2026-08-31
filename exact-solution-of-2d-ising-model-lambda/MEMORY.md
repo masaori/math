@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 49 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 50 回目の tick 時点）
+
+**横断階段を反復して基点から横断座標を歩数以上引き上げる単純路を本文と SageMath で固定した（Lean 未着手）。** 台帳の「横断階段を反復して整数帯の外へ運ぶ単純路」を進めた。基点 $Q\in\mathbb Z\times\mathbb Z$ と反復回数 $t\in\mathbb N$、$t\ge1$ に対し、整数の除法 $s=q\,n_{\perp}+r$ で反復横断階段 $D^{\gamma,Q,t}_s:=Q+q\cdot(w_{\mathrm h},-w_{\mathrm v})+C^{\gamma}_r$ を定義した（`def_iterated_transverse_staircase`）。各差は除法の場合分け（$r\le n_{\perp}-2$／$r=n_{\perp}-1$。後者は $C^{\gamma}_0=(0,0)$ と $C^{\gamma}_{n_{\perp}}=(w_{\mathrm h},-w_{\mathrm v})$ の読み替え）で横断階段の一歩 $C^{\gamma}_{r+1}-C^{\gamma}_r$ に等しく、単位格子ベクトルで横断座標を $1$ 以上増やす。望遠和で $\kappa_{\gamma}(D^{\gamma,Q,t}_s)\ge\kappa_{\gamma}(Q)+s$ を得て、頂点がすべて相異なる単純路であることを証明した（`claim_iterated_transverse_staircase_lower_bound`）。SageMath `iterated-transverse-staircase` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・反復階段 30,048 歩（基点 2 通り × 反復回数 2 通り）を `ZZ` で全検査した。次は帯外の二路と周期持ち上げを合成する単純閉路の構成へ進む。
+
+前進前レビューでは前 tick の横断階段の定義・主張と SageMath 5,008 歩、縦横の呼び分け（横辺・縦辺の規約との整合）を照合し、「何も言っていない主張」・記号・住処・参照の不一致は無かった。
+
+## ひとつ前の到達点（2026-09-01 の 49 回目の tick 時点）
 
 **巻き付きベクトルを正に横切る単純な整数格子階段を本文と SageMath で固定した（Lean 未着手）。** 「閉包路の構成と単純性」を、横断方向へ帯外まで運ぶ階段と、その階段を使う閉包の合成へ割り直した。非零巻き付き $(w_{\mathrm h},w_{\mathrm v})$ に対し、まず行方向へ $|w_{\mathrm h}|$ 歩、次に列方向へ $|w_{\mathrm v}|$ 歩進む有限列 $C^\gamma$ を定義した（`def_winding_transverse_staircase`）。各差は四つの単位格子ベクトルのいずれかで、横断座標 $\kappa_\gamma$ は各歩で真に増えるため全頂点が相異なる（`claim_winding_transverse_staircase_step_increase`）。SageMath `winding-transverse-staircase` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本に対する横断階段 5,008 歩を `ZZ` で全検査した。次はこの階段の平行移動を反復し、周期持ち上げの有限幅整数帯の外へ到達する単純路を構成する。
 
