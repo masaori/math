@@ -412,9 +412,9 @@ e^{-u}
       ]),
       displayMath(String.raw`\begin{aligned}
 A &= s_1 s_2^*
-   \quad (\because A \text{ の定義}) \\
+&&(\because\ A \text{ の定義}) \\
   &= \sinh 2K_1\,\sinh 2K_2^*
-   \quad (\because \text{def\_transfer\_matrix\_symbols の } s_1 = \sinh 2K_1,\ s_2^* = \sinh 2K_2^*)
+&&(\because\ \text{def\_transfer\_matrix\_symbols の } s_1 = \sinh 2K_1,\ s_2^* = \sinh 2K_2^*)
 \end{aligned}`),
       paragraph([
         "さらに ",

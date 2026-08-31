@@ -6,7 +6,7 @@
 
 **セル集合の複体量（頂点集合・辺集合・Euler 数）を定義し、一セルを追加したときの Euler 数の増分等式を本文と SageMath で固定した（Lean 未着手）。** 台帳の「セル複体の Euler の等式」を論法単位（複体量の定義と一セル追加の増分等式／内側セル複体の Euler 数が 1 に等しいこと）へ割り直し、最初の部品として、有限セル集合 $S\subset\mathbb Z\times\mathbb Z$ の頂点集合 $\mathcal V_{\square}(S)$（各セルの単位正方形の四隅の合併）・辺集合 $\mathcal E_{\square}(S)$（各セルの四辺＝格子点の二元集合の合併）・Euler 数 $\chi_{\square}(S)=|\mathcal V_{\square}(S)|-|\mathcal E_{\square}(S)|+|S|\in\mathbb Z$ を定義した（`def_cell_vertex_set`、`def_cell_edge_set`、`def_cell_euler_number`）。$S$ に属さないセル $x$ について、共有頂点数 $v_x(S)$・共有辺数 $e_x(S)$ と置くと $\chi_{\square}(S\cup\{x\})=\chi_{\square}(S)+1+e_x(S)-v_x(S)$ が成り立つことを、単一セルの頂点数・辺数が $4$ であること、頂点集合・辺集合が合併で分配すること、有限集合の包除の三段で証明した（`claim_cell_complex_one_cell_increment`）。内側セル複体の Euler 数を一セルずつの追加で計算する後続の帰納の部品である。SageMath `cell-complex-one-cell-increment` は $3\times3$ と $2\times4$ の窓の全部分集合にわたる増分等式 3,328 件・単一セルの頂点数・辺数 17 件を `ZZ` で検査した。次は内側セル複体の Euler 数が 1 に等しいことへ進む。
 
-前進前レビューでは、前 tick の外側セル補集合の辺連結性を本文・SageMath・台帳で照合し、外接長方形外と外側帯を共通到達先とする行方向の到達の合成は後続の Euler 等式が直接引く非自明な主張なので「何も言っていない主張」ではなく、修正対象なしとした。
+前進前レビューでは、前 tick の外側セル補集合の辺連結性を本文・SageMath・台帳で照合し、外接長方形外と外側帯を共通到達先とする行方向の到達の合成は後続の Euler 等式が直接引く非自明な主張なので「何も言っていない主張」ではなく、修正対象なしとした。並列の式変形統一は、姉妹側の臨界点の章の定義 $A:=s_1s_2^*$ の二段の鎖に行中の $\quad(\because\ \dots)$ で置かれていた根拠 2 行を、行末の根拠列（`aligned` の `&&`）へ揃えた。
 
 ## ひとつ前の到達点（2026-08-31 の 41 回目の tick 時点）
 
