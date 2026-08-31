@@ -18,17 +18,22 @@ for (M, K1v, K2v) in BRIDGE_CASES:
     r_eq = opnorm(Vc - Vp)
     # sigma^z_m f_{iota(mu)} = mu(m) f_{iota(mu)}
     r_diag = 0.0
+    # V_1 の証明で周期端へ実際に用いる
+    # sigma^z_M sigma^z_1 f_{iota(mu)} = mu(M) mu(1) f_{iota(mu)}
+    r_boundary = 0.0
     for mu in all_configs(M):
         v = vector(CDF, [0] * O.d)
         v[config_index(mu)] = 1
         for m in range(1, M + 1):
             w = O.SZ[m] * v
             r_diag = max(r_diag, (w - mu[m - 1] * v).norm())
+        w_boundary = O.SZ[M] * O.SZ[1] * v
+        r_boundary = max(r_boundary, (w_boundary - mu[M - 1] * mu[0] * v).norm())
     # V_1 が対角行列であること
     r_offdiag = max([abs(Vp[k, l]) for k in range(O.d) for l in range(O.d) if k != l])
-    ok = max(r_eq, r_diag, r_offdiag) <= TOL
+    ok = max(r_eq, r_diag, r_boundary, r_offdiag) <= TOL
     print(f"  M={M}, K1={K1v}: |Vc - Vp| = {r_eq:.2e}, sigma^z 作用 = {r_diag:.2e}, "
-          f"非対角成分 = {r_offdiag:.2e}  -> {'PASS' if ok else 'FAIL'}")
+          f"周期端 = {r_boundary:.2e}, 非対角成分 = {r_offdiag:.2e}  -> {'PASS' if ok else 'FAIL'}")
     all_ok = ok and all_ok
 
 print("RESULT: PASS" if all_ok else "RESULT: FAIL")

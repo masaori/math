@@ -110,11 +110,11 @@ const matrixLinearMapCorrespondenceExpectedExternalInputEntryIds = [
 const matrixLinearMapCorrespondenceExpectedExternalInputContentSha256 = new Map<string, string>([
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
-  ["linear_space_general_000_definition_kronecker_product", "cb60348ee4a6bdfc5b4d4e4dc7124aed4f3a9f4e4c5593c03ad6511884cc55f8"],
+  ["linear_space_general_000_definition_kronecker_product", "ce874671d3aca02c94e412408651b1c6a7a38d1e24c5d26ba1d3869134ce7385"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "59404eda021b5d904e2248530a586d168aea7d32d03451a45a17bb2f8b583a21"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "e06631c60e429b8e755520b8069138cab273e66c4946ec5a46c83dc4293738a7"],
   ["linear_space_general_001_theorem_tensor_product_basis", "59e2b9e24e79916e00dfe666d29bdee556ea3479b16e89d9912457ff3bea0609"],
-  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "2edea69b2935e8d7678d2b7d4b34edbfcb0faa8ccaff86cea76d70a57d2ed814"],
+  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "bb38af42bab7abae83f28d4e2a37018e3ca1792a8baa5c9b9a8eeb649a4f52c3"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
 ]);
 const invertibleMatrixConjugationSectionEntryIds = [
@@ -324,27 +324,27 @@ const partitionFunctionTraceExpectedExternalInputContentSha256 = new Map<string,
   ["partition_function_2d_ising_002_definition_partition_function", "74bec1b8de279c13b6254833510bea1c16ba66f36a13323c7c2e75cbc97cfbcb"],
   ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
 ]);
-const nextIsingBoundaryComparisonEntryIds = [
-  "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+const v1PauliRepresentationSectionEntryIds = [
   "transfer_matrix_001_definition_symbols",
   "bridge_002_claim_sigma_z_diagonal_action",
+  "bridge_004_claim_V1_component_equals_pauli",
 ] as const;
-const nextIsingBoundaryComparisonExpectedChapterOrders = new Map<string, number>([
-  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", 9],
-  ["transfer_matrix_001_definition_symbols", 10],
-  ["bridge_002_claim_sigma_z_diagonal_action", 11],
-]);
-const nextIsingBoundaryComparisonExpectedDependencies = new Map<string, string[]>([
-  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", [
-    "calc_formulae_006_definition_of_cc",
-    "calculation_formulae_definition_set_and_algebra_notation",
-    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-    "eigenvalues_of_V_001_definition_trace",
-    "partition_function_2d_ising_002_definition_partition_function",
-    "partition_function_2d_ising_003_definition_transfer_matrix",
+const v1PauliRepresentationExpectedInternalDependencies = new Map<string, string[]>([
+  ["transfer_matrix_001_definition_symbols", []],
+  ["bridge_002_claim_sigma_z_diagonal_action", [
+    "transfer_matrix_001_definition_symbols",
   ]],
+  ["bridge_004_claim_V1_component_equals_pauli", [
+    "bridge_002_claim_sigma_z_diagonal_action",
+    "transfer_matrix_001_definition_symbols",
+  ]],
+]);
+const v1PauliRepresentationExpectedDirectDependencies = new Map<string, string[]>([
   ["transfer_matrix_001_definition_symbols", [
+    "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+    "calc_formulae_000b_claim_cosh_sinh_basic_properties",
     "calc_formulae_006_definition_of_cc",
+    "calc_formulae_definition_cosh_sinh",
     "calculation_formulae_definition_set_and_algebra_notation",
     "exp_linear_map_002_definition_exp_of_endomorphism",
     "linear_space_general_000_definition_kronecker_product",
@@ -358,32 +358,174 @@ const nextIsingBoundaryComparisonExpectedDependencies = new Map<string, string[]
     "transfer_matrix_001_definition_symbols",
     "transfer_matrix_005_definition_end_isomorphism",
   ]],
+  ["bridge_004_claim_V1_component_equals_pauli", [
+    "bridge_001_definition_config_basis",
+    "bridge_002_claim_sigma_z_diagonal_action",
+    "bridge_003_claim_exp_of_diagonal",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "partition_function_2d_ising_003_definition_transfer_matrix",
+    "transfer_matrix_001_definition_symbols",
+  ]],
 ]);
-const nextIsingBoundaryComparisonExpectedContentSha256 = new Map<string, string>([
-  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", "f6a05c056f412bfa8b66d46ae8886cf2b931afb8cd09ba2e0bb42681e0bfecc5"],
-  ["transfer_matrix_001_definition_symbols", "674b1e05ce04378873cc8a013b5c3ffbf34444c85b856742514dbbfe40ed608f"],
+const v1PauliRepresentationExpectedContentSha256 = new Map<string, string>([
+  ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["bridge_002_claim_sigma_z_diagonal_action", "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232"],
+  ["bridge_004_claim_V1_component_equals_pauli", "542e930937951f970b4795cbc171117a849f0b5b3e6eae1da351f9970c0c8c0b"],
 ]);
-const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, string>([
-  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
-  ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed"],
-  ["closing_005_claim_open_chain_endpoint_product_sum", "002ddb1410f5983a61e4df1c0cf886c47a43ca9825c9dc2563aa9bda84029d89"],
-  ["closing_005_claim_open_chain_partition_sum", "97a1758b41d17a52343ba1188eecf112d46ba48112797988021d8d20669a19fc"],
-  ["closing_005_definition_open_chain_spin_energy", "2062fa60483069fd13042b3bf943fdfaf32a14ae598f523f41b8b97380cc8f8d"],
-  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
-  ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
-  ["eigenvalues_of_V_001_definition_trace", "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d"],
-  ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
-  ["linear_space_general_000_definition_kronecker_product", "cb60348ee4a6bdfc5b4d4e4dc7124aed4f3a9f4e4c5593c03ad6511884cc55f8"],
-  ["partition_function_2d_ising_002_definition_partition_function", "74bec1b8de279c13b6254833510bea1c16ba66f36a13323c7c2e75cbc97cfbcb"],
-  ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
+const v1PauliRepresentationExpectedExternalInputEntryIds = [
+  "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+  "bridge_001_definition_config_basis",
+  "bridge_003_claim_exp_of_diagonal",
+  "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_definition_cosh_sinh",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "exp_linear_map_002_definition_exp_of_endomorphism",
+  "linear_space_general_000_definition_kronecker_product",
+  "linear_space_general_000b_claim_kronecker_product_rule",
+  "linear_space_general_000c_claim_kronecker_multilinear",
+  "partition_function_2d_ising_003_definition_transfer_matrix",
+  "transfer_matrix_005_definition_end_isomorphism",
+].sort();
+const v1PauliRepresentationExpectedExternalInputContentSha256 = new Map<string, string>([
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "ab5911db8fb6a45aa867b393ea6ca15fc940c988a13e4f86a8678d1c8ed2111d"],
   ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
+  ["bridge_003_claim_exp_of_diagonal", "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747"],
+  ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed"],
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["calc_formulae_definition_cosh_sinh", "e884934c5a35ebb1daa4e665eb779f623f99cffba33fe779cf01ee52518a6d3a"],
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
+  ["linear_space_general_000_definition_kronecker_product", "ce874671d3aca02c94e412408651b1c6a7a38d1e24c5d26ba1d3869134ce7385"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "59404eda021b5d904e2248530a586d168aea7d32d03451a45a17bb2f8b583a21"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "e06631c60e429b8e755520b8069138cab273e66c4946ec5a46c83dc4293738a7"],
+  ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
   ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
-  ["transfer_matrix_001_definition_symbols", "674b1e05ce04378873cc8a013b5c3ffbf34444c85b856742514dbbfe40ed608f"],
 ]);
+const nextIsingBoundaryComparisonEntryIds = [
+  "bridge_004_claim_V1_component_equals_pauli",
+  "bridge_005_claim_two_by_two_transfer_identity",
+  "bridge_006_claim_V2_component_equals_pauli",
+  "bridge_007_claim_partition_function_in_pauli_form",
+] as const;
+const nextIsingBoundaryComparisonExpectedChapterOrders = new Map<string, number>([
+  ["bridge_004_claim_V1_component_equals_pauli", 12],
+  ["bridge_005_claim_two_by_two_transfer_identity", 13],
+  ["bridge_006_claim_V2_component_equals_pauli", 14],
+  ["bridge_007_claim_partition_function_in_pauli_form", 15],
+]);
+const nextIsingBoundaryComparisonExpectedDependencies = new Map<string, string[]>([
+  ["bridge_004_claim_V1_component_equals_pauli", [
+    "bridge_001_definition_config_basis",
+    "bridge_002_claim_sigma_z_diagonal_action",
+    "bridge_003_claim_exp_of_diagonal",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "partition_function_2d_ising_003_definition_transfer_matrix",
+    "transfer_matrix_001_definition_symbols",
+  ]],
+  ["bridge_005_claim_two_by_two_transfer_identity", [
+    "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+    "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "exp_linear_map_000a_claim_real_exp_series_converges",
+    "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+    "exp_linear_map_002_definition_exp_of_endomorphism",
+    "transfer_matrix_001_definition_symbols",
+  ]],
+  ["bridge_006_claim_V2_component_equals_pauli", [
+    "bridge_001_definition_config_basis",
+    "bridge_003_claim_exp_of_diagonal",
+    "bridge_005_claim_two_by_two_transfer_identity",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+    "linear_space_general_000_definition_kronecker_product",
+    "linear_space_general_000b_claim_kronecker_product_rule",
+    "linear_space_general_000c_claim_kronecker_multilinear",
+    "partition_function_2d_ising_003_definition_transfer_matrix",
+    "transfer_matrix_001_definition_symbols",
+  ]],
+  ["bridge_007_claim_partition_function_in_pauli_form", [
+    "bridge_001_definition_config_basis",
+    "bridge_004_claim_V1_component_equals_pauli",
+    "bridge_006_claim_V2_component_equals_pauli",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "eigenvalues_of_V_002_claim_trace_properties",
+    "partition_function_2d_ising_002_definition_partition_function",
+    "partition_function_2d_ising_003_definition_transfer_matrix",
+    "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+    "transfer_matrix_001_definition_symbols",
+  ]],
+]);
+const nextIsingBoundaryComparisonExpectedContentSha256 = new Map<string, string>([
+  ["bridge_004_claim_V1_component_equals_pauli", "542e930937951f970b4795cbc171117a849f0b5b3e6eae1da351f9970c0c8c0b"],
+  ["bridge_005_claim_two_by_two_transfer_identity", "7488a4fdc7984a8ad7c60219a39eca26d92d3230df4c5c43d320c7931df8d8ee"],
+  ["bridge_006_claim_V2_component_equals_pauli", "02f2eb834d7e16abf67232ac9a868ee14eec22cf56c1a5a34294d71ec51f65c1"],
+  ["bridge_007_claim_partition_function_in_pauli_form", "33cd6cefa483928ac5bb3e3c71983a82af17222c9030b9596522b8ef575e219a"],
+]);
+const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, string>([
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "ab5911db8fb6a45aa867b393ea6ca15fc940c988a13e4f86a8678d1c8ed2111d"],
+  ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
+  ["bridge_002_claim_sigma_z_diagonal_action", "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232"],
+  ["bridge_003_claim_exp_of_diagonal", "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747"],
+  ["bridge_004_claim_V1_component_equals_pauli", "542e930937951f970b4795cbc171117a849f0b5b3e6eae1da351f9970c0c8c0b"],
+  ["bridge_005_claim_two_by_two_transfer_identity", "7488a4fdc7984a8ad7c60219a39eca26d92d3230df4c5c43d320c7931df8d8ee"],
+  ["bridge_006_claim_V2_component_equals_pauli", "02f2eb834d7e16abf67232ac9a868ee14eec22cf56c1a5a34294d71ec51f65c1"],
+  ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed"],
+  ["calc_formulae_001_sqrt_nonnegative_real", "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d"],
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["exp_linear_map_000a_claim_real_exp_series_converges", "23b32729c264057d48a0ed8887f614269014d1583ca4848ed7a6629e1f49574c"],
+  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "bb38af42bab7abae83f28d4e2a37018e3ca1792a8baa5c9b9a8eeb649a4f52c3"],
+  ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
+  ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
+  ["eigenvalues_of_V_002_claim_trace_properties", "93df4cac57894b68d57c2eb9759e701189dc1673bfe4758a1fc3a39124645672"],
+  ["linear_space_general_000_definition_kronecker_product", "ce874671d3aca02c94e412408651b1c6a7a38d1e24c5d26ba1d3869134ce7385"],
+  ["linear_space_general_000b_claim_kronecker_product_rule", "59404eda021b5d904e2248530a586d168aea7d32d03451a45a17bb2f8b583a21"],
+  ["linear_space_general_000c_claim_kronecker_multilinear", "e06631c60e429b8e755520b8069138cab273e66c4946ec5a46c83dc4293738a7"],
+  ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
+  ["partition_function_2d_ising_002_definition_partition_function", "74bec1b8de279c13b6254833510bea1c16ba66f36a13323c7c2e75cbc97cfbcb"],
+  ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", "f6a05c056f412bfa8b66d46ae8886cf2b931afb8cd09ba2e0bb42681e0bfecc5"],
+  ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
+]);
+const v2PauliPartitionFunctionSectionEntryIds = [
+  "bridge_005_claim_two_by_two_transfer_identity",
+  "bridge_006_claim_V2_component_equals_pauli",
+  "bridge_007_claim_partition_function_in_pauli_form",
+] as const;
+const v2PauliPartitionFunctionExpectedInternalDependencies = new Map<string, string[]>([
+  ["bridge_005_claim_two_by_two_transfer_identity", []],
+  ["bridge_006_claim_V2_component_equals_pauli", [
+    "bridge_005_claim_two_by_two_transfer_identity",
+  ]],
+  ["bridge_007_claim_partition_function_in_pauli_form", [
+    "bridge_006_claim_V2_component_equals_pauli",
+  ]],
+]);
+const v2PauliPartitionFunctionExpectedExternalInputEntryIds = [
+  "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+  "bridge_001_definition_config_basis",
+  "bridge_003_claim_exp_of_diagonal",
+  "bridge_004_claim_V1_component_equals_pauli",
+  "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+  "calc_formulae_001_sqrt_nonnegative_real",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "eigenvalues_of_V_002_claim_trace_properties",
+  "exp_linear_map_000a_claim_real_exp_series_converges",
+  "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+  "exp_linear_map_002_definition_exp_of_endomorphism",
+  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+  "linear_space_general_000_definition_kronecker_product",
+  "linear_space_general_000b_claim_kronecker_product_rule",
+  "linear_space_general_000c_claim_kronecker_multilinear",
+  "partition_function_2d_ising_002_definition_partition_function",
+  "partition_function_2d_ising_003_definition_transfer_matrix",
+  "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+  "transfer_matrix_001_definition_symbols",
+].sort();
 const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_006_definition_of_cc", new Set(["abs_basic_properties", "matrix_exp_series_converges"])],
   ["linear_space_general_000_definition_kronecker_product", new Set(["kronecker_product_rule", "tensor_basis"])],
@@ -405,9 +547,11 @@ const forwardNavigationReviewById = new Map<string, Map<string, string>>([
 ]);
 const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["exp_conjugation_proof_003_definition_M_n_C_convergence", new Set(["def_hermitian_positive_definite", "def_trace"])],
+  ["transfer_matrix_001_definition_symbols", new Set(["pauli_matrix_products"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
+  ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
 ]);
 const isingPattern = /Ising|イジング|spin|スピン|lattice|格子|site|サイト|transfer|転送|sector|セクター|momentum|運動量|fermion|フェルミオン/i;
 const abstractPatterns = [
@@ -971,6 +1115,103 @@ for (const nextEntryId of [
     throw new Error(`分配関数の転送行列表示の次の項目から節内への依存が生じました: ${nextEntryId}: ${JSON.stringify(dependenciesOnPartitionFunctionTrace)}`);
   }
 }
+const v1PauliRepresentationSection = validateReviewedSection(
+  "V1 のパウリ行列表示",
+  "2次元イジングモデル",
+  v1PauliRepresentationSectionEntryIds,
+  v1PauliRepresentationExpectedInternalDependencies,
+  v1PauliRepresentationExpectedContentSha256,
+  v1PauliRepresentationExpectedExternalInputEntryIds,
+  v1PauliRepresentationExpectedExternalInputContentSha256,
+  ["bridge_004_claim_V1_component_equals_pauli"],
+);
+const v1PauliRepresentationActualChapterOrders = v1PauliRepresentationSection.sectionEntries
+  .map((entry) => entry.dependencyPlacement!.chapterOrder);
+if (JSON.stringify(v1PauliRepresentationActualChapterOrders) !== JSON.stringify([10, 11, 12])) {
+  throw new Error(`V1 のパウリ行列表示が章内依存順10–12ではありません: ${JSON.stringify(v1PauliRepresentationActualChapterOrders)}`);
+}
+for (const entry of v1PauliRepresentationSection.sectionEntries) {
+  const actualDependencies = [...entry.dependsOnEntryIds].sort();
+  const expectedDependencies = [...v1PauliRepresentationExpectedDirectDependencies.get(entry.id)!].sort();
+  if (JSON.stringify(actualDependencies) !== JSON.stringify(expectedDependencies)) {
+    throw new Error(`V1 のパウリ行列表示の直接依存が変わりました: ${entry.id}: ${JSON.stringify(actualDependencies)}`);
+  }
+}
+const v1PauliRepresentationUnresolvedGranularity = v1PauliRepresentationSection.sectionEntries
+  .filter((entry) => entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  .map(({ id }) => id);
+if (JSON.stringify(v1PauliRepresentationUnresolvedGranularity)
+  !== JSON.stringify(["transfer_matrix_001_definition_symbols"])) {
+  throw new Error(`V1 のパウリ行列表示の説明粒度判定が変わりました: ${JSON.stringify(v1PauliRepresentationUnresolvedGranularity)}`);
+}
+const v1PauliRepresentationUnresolvedExternalInputGranularity = v1PauliRepresentationSection.externalInputEntryIds
+  .map((id) => entries.find((entry) => entry.id === id)!)
+  .filter((entry) => entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  .map(({ id }) => id);
+if (JSON.stringify(v1PauliRepresentationUnresolvedExternalInputGranularity) !== JSON.stringify([
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "calc_formulae_006_definition_of_cc",
+  "exp_linear_map_002_definition_exp_of_endomorphism",
+  "bridge_003_claim_exp_of_diagonal",
+  "transfer_matrix_005_definition_end_isomorphism",
+])) {
+  throw new Error(`V1 のパウリ行列表示の外部入力の説明粒度判定が変わりました: ${JSON.stringify(v1PauliRepresentationUnresolvedExternalInputGranularity)}`);
+}
+const v1PauliRepresentationSectionIdSet = new Set<string>(v1PauliRepresentationSectionEntryIds);
+for (const [nextEntryId, expectedDependenciesOnSection] of [
+  ["bridge_005_claim_two_by_two_transfer_identity", ["transfer_matrix_001_definition_symbols"]],
+  ["bridge_006_claim_V2_component_equals_pauli", ["transfer_matrix_001_definition_symbols"]],
+  ["bridge_007_claim_partition_function_in_pauli_form", ["bridge_004_claim_V1_component_equals_pauli", "transfer_matrix_001_definition_symbols"]],
+] as const) {
+  const nextEntry = entries.find((entry) => entry.id === nextEntryId)!;
+  const dependenciesOnV1PauliRepresentation = nextEntry.dependsOnEntryIds
+    .filter((dependencyId) => v1PauliRepresentationSectionIdSet.has(dependencyId));
+  if (JSON.stringify(dependenciesOnV1PauliRepresentation) !== JSON.stringify(expectedDependenciesOnSection)) {
+    throw new Error(`V1 のパウリ行列表示の次の項目から節内への依存が変わりました: ${nextEntryId}: ${JSON.stringify(dependenciesOnV1PauliRepresentation)}`);
+  }
+}
+const v2PauliPartitionFunctionSection = validateReviewedSection(
+  "V2 のパウリ行列表示と分配関数への接続",
+  "2次元イジングモデル",
+  v2PauliPartitionFunctionSectionEntryIds,
+  v2PauliPartitionFunctionExpectedInternalDependencies,
+  nextIsingBoundaryComparisonExpectedContentSha256,
+  v2PauliPartitionFunctionExpectedExternalInputEntryIds,
+  nextIsingBoundaryComparisonExpectedInputContentSha256,
+  ["bridge_007_claim_partition_function_in_pauli_form"],
+);
+const v2PauliPartitionFunctionActualChapterOrders = v2PauliPartitionFunctionSection.sectionEntries
+  .map((entry) => entry.dependencyPlacement!.chapterOrder);
+if (JSON.stringify(v2PauliPartitionFunctionActualChapterOrders) !== JSON.stringify([13, 14, 15])) {
+  throw new Error(`V2 のパウリ行列表示と分配関数への接続が章内依存順13–15ではありません: ${JSON.stringify(v2PauliPartitionFunctionActualChapterOrders)}`);
+}
+const v2PauliPartitionFunctionUnexpectedGranularity = v2PauliPartitionFunctionSection.sectionEntries
+  .filter((entry) => entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  .map(({ id }) => id);
+if (v2PauliPartitionFunctionUnexpectedGranularity.length > 0) {
+  throw new Error(`V2 のパウリ行列表示と分配関数への接続に説明粒度未確認の項目があります: ${v2PauliPartitionFunctionUnexpectedGranularity.join(", ")}`);
+}
+const epsilonProjectorsEntry = entries.find((entry) => entry.id === "bridge_008_definition_epsilon_projectors")!;
+if (epsilonProjectorsEntry.dependencyPlacement!.chapterOrder !== 16
+  || JSON.stringify([...epsilonProjectorsEntry.dependsOnEntryIds].sort()) !== JSON.stringify([
+    "calc_formulae_006_definition_of_cc",
+    "transfer_matrix_001_definition_symbols",
+  ])) {
+  throw new Error(`V2 のパウリ行列表示と分配関数への接続の次項が変わりました: ${JSON.stringify({
+    chapterOrder: epsilonProjectorsEntry.dependencyPlacement!.chapterOrder,
+    dependencies: epsilonProjectorsEntry.dependsOnEntryIds,
+  })}`);
+}
+if (epsilonProjectorsEntry.explanationGranularityReview.inspectedContentSha256
+  !== "be5003446b4cb92b2911fb88cee1a7cc85dd13f412c3207866e1f70d987c4890") {
+  throw new Error("V2 のパウリ行列表示と分配関数への接続の次項本文が変わりました");
+}
+const v2PauliPartitionFunctionSectionIdSet = new Set<string>(v2PauliPartitionFunctionSectionEntryIds);
+const epsilonProjectorDependenciesOnPreviousSection = epsilonProjectorsEntry.dependsOnEntryIds
+  .filter((id) => v2PauliPartitionFunctionSectionIdSet.has(id));
+if (epsilonProjectorDependenciesOnPreviousSection.length > 0) {
+  throw new Error(`射影子の定義から直前節への依存が生じました: ${JSON.stringify(epsilonProjectorDependenciesOnPreviousSection)}`);
+}
 const mathematicalToolSectionBoundaries = [{
   name: "行列指数関数による共役の級数公式",
   chapter: "数学的道具立て",
@@ -1158,6 +1399,49 @@ const isingModelSectionBoundaries = [{
   mainTheoremEntryId: "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
   boundaryEvidence: "章内依存順9の一項は、最初の節で定めた分配関数と転送行列を入力として、有限行列の成分・冪・トレースを展開し、分配関数の転送行列表示という一つの主張へ閉じる。章内依存順10の記号の定義と順11のσzの基底作用はこの主張へ依存せず、順10は別の行列指数関数とクロネッカー積を入力とし、順11は順10とスピン配置・標準基底の対応を入力とする。したがって外部入力集合が切り替わる章内依存順9の後で一項の節を閉じる。外部入力とその本文 fingerprint、対象本文 fingerprint、章内依存順、節末出力の一意性に加え、次の二項の章内順・直接依存・本文 fingerprint・本節からの非依存を生成時に固定検査する。",
   readabilityStatus: "対象主張は有限集合上の和、有限複素行列の積と冪、トレースを一段ずつ展開しているため、現行の説明粒度検査に合格している。外部入力である集合と代数構造の記号、複素数の定義、可換行列の指数積公式には、複数の定義・主張の分割または具体的な行列計算への展開が残る。",
+}, {
+  name: "V1 のパウリ行列表示",
+  chapter: "2次元イジングモデル",
+  status: "境界候補・対象本文粒度未解決・外部入力粒度未解決",
+  entryIds: v1PauliRepresentationSectionEntryIds,
+  input: [
+    "最初の節で成分表示により定めた転送行列 V1",
+    "スピン配置とクロネッカー積の標準基底の多重添字との対応",
+    "二次の Pauli 行列、サイトごとのクロネッカー積、その積・多重線型性・基底作用",
+    "実数の双曲線余弦・双曲線正弦の定義と正値性",
+    "有限複素行列の指数関数と対角行列の指数関数",
+  ],
+  externalInputEntryIds: v1PauliRepresentationSection.externalInputEntryIds,
+  output: [
+    "サイトごとの Pauli 行列と V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数の記号",
+    "サイトごとの σz とその二つの積がスピン配置基底へ対角に作用する公式",
+    "成分で定義した V1 と Pauli 行列の指数関数で表した V1 が同じ行列であること",
+  ],
+  mainTheorem: "成分定義の V1 と Pauli 行列による指数表示の一致",
+  mainTheoremEntryId: "bridge_004_claim_V1_component_equals_pauli",
+  boundaryEvidence: "現行の未分割グラフでは章内依存順10–12が連続し、順10のサイト作用素の記号を順11のσzの基底作用が受け取り、順12がその作用と対角行列の指数関数を用いて、成分定義とPauli行列表示のV1が同じ行列であるという主定理へ閉じるため、順12の後は節境界の候補となる。ただし順10はV1だけでなくV2とJordan–Wigner変換の記号も束ね、順13・14は順10を再利用し、順15は順10と順12を受け取る。順10を一ブロック一定義へ分割すると依存辺と境界が変わりうるため、最終的な節構造は確定しない。生成時には、この暫定評価の前提として、外部入力とその本文 fingerprint、三項の本文 fingerprint、内部依存辺、章内依存順、現行グラフ上の節末出力に加え、章内依存順13–15の章内順・直接依存・本文 fingerprint、および順15がこの候補から順10・12を受け取ることを固定検査する。",
+  readabilityStatus: "対象三項のうち、σzの基底作用とV1の二表示の一致は、二次行列の基底作用、クロネッカー積、周期端を分けた対角成分を一段ずつ計算しており、現行の説明粒度検査に合格している。先頭の「記号の定義」は、単位行列、サイトごとの三つのPauli行列、V1・V2、Jordan–Wigner行列、全スピン反転行列、双対結合定数、双曲線関数の略記を一ブロックへ束ねているため未解決である。Pauli行列、cosh・sinh、その正値性は先行項へ明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の証明は本項を入力とする後続主張なので循環参照を避けた。さらに外部入力では、集合と代数構造の記号、複素数、行列指数関数、対角行列の指数関数、行列と線型写像の対応に説明粒度の未解決が残る。対象側と外部入力側を区別して、境界候補・本文未完成として扱う。",
+}, {
+  name: "V2 のパウリ行列表示と分配関数への接続",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  entryIds: v2PauliPartitionFunctionSectionEntryIds,
+  input: [
+    "双対結合定数 K2* と双曲線関数の略記、およびサイトごとの Pauli 行列と V2 の定義",
+    "二次の Pauli 行列、非負実数の平方根、指数関数・双曲線関数の級数と基本性質",
+    "スピン配置とクロネッカー積の標準基底の対応、およびクロネッカー積の成分・積・多重線型性",
+    "成分表示で定めた転送行列 V2 と、確定済みの V1 の二表示の一致・分配関数の転送行列表示",
+  ],
+  externalInputEntryIds: v2PauliPartitionFunctionSection.externalInputEntryIds,
+  output: [
+    "一サイトの二次転送行列を Pauli 行列の指数関数で表す恒等式",
+    "成分で定義した V2 と Pauli 行列の指数関数で表した V2 が同じ行列であること",
+    "2次元イジング模型の分配関数を Pauli 行列表示の転送行列の積の冪のトレースで表す公式",
+  ],
+  mainTheorem: "分配関数を Pauli 行列表示の二つの転送行列で表す公式",
+  mainTheoremEntryId: "bridge_007_claim_partition_function_in_pauli_form",
+  boundaryEvidence: "章内依存順13–15は連続し、二次転送行列の恒等式からV2の二表示の一致へ進み、確定済みのV1の二表示の一致と分配関数の転送行列表示を合わせて、分配関数のPauli行列表示へ一方向に閉じる。次の章内依存順16の射影子定義は全スピン反転行列だけを使い、この三項へ依存しないため、外部入力集合が切り替わる順15の後で節を閉じる。順10の混在した記号定義を分割した後は、順13が双対結合定数と双曲線関数の略記、順14がサイトごとのσxとV2、順15がV1・V2の定義片へ依存することを再判定する。分割によりこれらの意味的依存、三項の連続性、順15への一意な閉包、または順16からの非依存が変わった場合は境界を再確定する。",
+  readabilityStatus: "対象三項は、二次行列の指数級数、クロネッカー積の成分と積、二つの転送行列表示の置換を一段ずつ計算しており、現行の説明粒度検査に合格している。外部入力では、混在した記号定義、集合と代数構造の記号、複素数、行列指数関数とその収束・可換積公式、対角行列の指数関数に説明粒度の未解決が残る。とくにtanhと実対数の独立した先行定義は未整備であり、順10の分割時に補う必要がある。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

@@ -508,6 +508,94 @@
       "mainTheoremEntryId": "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
       "boundaryEvidence": "章内依存順9の一項は、最初の節で定めた分配関数と転送行列を入力として、有限行列の成分・冪・トレースを展開し、分配関数の転送行列表示という一つの主張へ閉じる。章内依存順10の記号の定義と順11のσzの基底作用はこの主張へ依存せず、順10は別の行列指数関数とクロネッカー積を入力とし、順11は順10とスピン配置・標準基底の対応を入力とする。したがって外部入力集合が切り替わる章内依存順9の後で一項の節を閉じる。外部入力とその本文 fingerprint、対象本文 fingerprint、章内依存順、節末出力の一意性に加え、次の二項の章内順・直接依存・本文 fingerprint・本節からの非依存を生成時に固定検査する。",
       "readabilityStatus": "対象主張は有限集合上の和、有限複素行列の積と冪、トレースを一段ずつ展開しているため、現行の説明粒度検査に合格している。外部入力である集合と代数構造の記号、複素数の定義、可換行列の指数積公式には、複数の定義・主張の分割または具体的な行列計算への展開が残る。"
+    },
+    {
+      "name": "V1 のパウリ行列表示",
+      "chapter": "2次元イジングモデル",
+      "status": "境界候補・対象本文粒度未解決・外部入力粒度未解決",
+      "entryIds": [
+        "transfer_matrix_001_definition_symbols",
+        "bridge_002_claim_sigma_z_diagonal_action",
+        "bridge_004_claim_V1_component_equals_pauli"
+      ],
+      "input": [
+        "最初の節で成分表示により定めた転送行列 V1",
+        "スピン配置とクロネッカー積の標準基底の多重添字との対応",
+        "二次の Pauli 行列、サイトごとのクロネッカー積、その積・多重線型性・基底作用",
+        "実数の双曲線余弦・双曲線正弦の定義と正値性",
+        "有限複素行列の指数関数と対角行列の指数関数"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "partition_function_2d_ising_003_definition_transfer_matrix",
+        "bridge_001_definition_config_basis",
+        "calc_formulae_definition_cosh_sinh",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000c_claim_kronecker_multilinear",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "bridge_003_claim_exp_of_diagonal",
+        "transfer_matrix_005_definition_end_isomorphism",
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+      ],
+      "output": [
+        "サイトごとの Pauli 行列と V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数の記号",
+        "サイトごとの σz とその二つの積がスピン配置基底へ対角に作用する公式",
+        "成分で定義した V1 と Pauli 行列の指数関数で表した V1 が同じ行列であること"
+      ],
+      "mainTheorem": "成分定義の V1 と Pauli 行列による指数表示の一致",
+      "mainTheoremEntryId": "bridge_004_claim_V1_component_equals_pauli",
+      "boundaryEvidence": "現行の未分割グラフでは章内依存順10–12が連続し、順10のサイト作用素の記号を順11のσzの基底作用が受け取り、順12がその作用と対角行列の指数関数を用いて、成分定義とPauli行列表示のV1が同じ行列であるという主定理へ閉じるため、順12の後は節境界の候補となる。ただし順10はV1だけでなくV2とJordan–Wigner変換の記号も束ね、順13・14は順10を再利用し、順15は順10と順12を受け取る。順10を一ブロック一定義へ分割すると依存辺と境界が変わりうるため、最終的な節構造は確定しない。生成時には、この暫定評価の前提として、外部入力とその本文 fingerprint、三項の本文 fingerprint、内部依存辺、章内依存順、現行グラフ上の節末出力に加え、章内依存順13–15の章内順・直接依存・本文 fingerprint、および順15がこの候補から順10・12を受け取ることを固定検査する。",
+      "readabilityStatus": "対象三項のうち、σzの基底作用とV1の二表示の一致は、二次行列の基底作用、クロネッカー積、周期端を分けた対角成分を一段ずつ計算しており、現行の説明粒度検査に合格している。先頭の「記号の定義」は、単位行列、サイトごとの三つのPauli行列、V1・V2、Jordan–Wigner行列、全スピン反転行列、双対結合定数、双曲線関数の略記を一ブロックへ束ねているため未解決である。Pauli行列、cosh・sinh、その正値性は先行項へ明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の証明は本項を入力とする後続主張なので循環参照を避けた。さらに外部入力では、集合と代数構造の記号、複素数、行列指数関数、対角行列の指数関数、行列と線型写像の対応に説明粒度の未解決が残る。対象側と外部入力側を区別して、境界候補・本文未完成として扱う。"
+    },
+    {
+      "name": "V2 のパウリ行列表示と分配関数への接続",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+      "entryIds": [
+        "bridge_005_claim_two_by_two_transfer_identity",
+        "bridge_006_claim_V2_component_equals_pauli",
+        "bridge_007_claim_partition_function_in_pauli_form"
+      ],
+      "input": [
+        "双対結合定数 K2* と双曲線関数の略記、およびサイトごとの Pauli 行列と V2 の定義",
+        "二次の Pauli 行列、非負実数の平方根、指数関数・双曲線関数の級数と基本性質",
+        "スピン配置とクロネッカー積の標準基底の対応、およびクロネッカー積の成分・積・多重線型性",
+        "成分表示で定めた転送行列 V2 と、確定済みの V1 の二表示の一致・分配関数の転送行列表示"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "partition_function_2d_ising_002_definition_partition_function",
+        "partition_function_2d_ising_003_definition_transfer_matrix",
+        "bridge_001_definition_config_basis",
+        "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+        "transfer_matrix_001_definition_symbols",
+        "bridge_004_claim_V1_component_equals_pauli",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "eigenvalues_of_V_002_claim_trace_properties",
+        "exp_linear_map_000a_claim_real_exp_series_converges",
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000c_claim_kronecker_multilinear",
+        "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "bridge_003_claim_exp_of_diagonal",
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+      ],
+      "output": [
+        "一サイトの二次転送行列を Pauli 行列の指数関数で表す恒等式",
+        "成分で定義した V2 と Pauli 行列の指数関数で表した V2 が同じ行列であること",
+        "2次元イジング模型の分配関数を Pauli 行列表示の転送行列の積の冪のトレースで表す公式"
+      ],
+      "mainTheorem": "分配関数を Pauli 行列表示の二つの転送行列で表す公式",
+      "mainTheoremEntryId": "bridge_007_claim_partition_function_in_pauli_form",
+      "boundaryEvidence": "章内依存順13–15は連続し、二次転送行列の恒等式からV2の二表示の一致へ進み、確定済みのV1の二表示の一致と分配関数の転送行列表示を合わせて、分配関数のPauli行列表示へ一方向に閉じる。次の章内依存順16の射影子定義は全スピン反転行列だけを使い、この三項へ依存しないため、外部入力集合が切り替わる順15の後で節を閉じる。順10の混在した記号定義を分割した後は、順13が双対結合定数と双曲線関数の略記、順14がサイトごとのσxとV2、順15がV1・V2の定義片へ依存することを再判定する。分割によりこれらの意味的依存、三項の連続性、順15への一意な閉包、または順16からの非依存が変わった場合は境界を再確定する。",
+      "readabilityStatus": "対象三項は、二次行列の指数級数、クロネッカー積の成分と積、二つの転送行列表示の置換を一段ずつ計算しており、現行の説明粒度検査に合格している。外部入力では、混在した記号定義、集合と代数構造の記号、複素数、行列指数関数とその収束・可換積公式、対角行列の指数関数に説明粒度の未解決が残る。とくにtanhと実対数の独立した先行定義は未整備であり、順10の分割時に補う必要がある。"
     }
   ],
   "explanationGranularityReview": {
@@ -534,6 +622,7 @@
       "exp_linear_map_002_definition_exp_of_endomorphism",
       "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
       "exp_linear_map_004_theorem_exp_zero_is_identity",
+      "transfer_matrix_001_definition_symbols",
       "transfer_matrix_005_definition_end_isomorphism",
       "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
       "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
@@ -2578,7 +2667,19 @@
         },
         {
           "dependentId": "transfer_matrix_001_definition_symbols",
+          "prerequisiteId": "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+        },
+        {
+          "dependentId": "transfer_matrix_001_definition_symbols",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "transfer_matrix_001_definition_symbols",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "transfer_matrix_001_definition_symbols",
+          "prerequisiteId": "calc_formulae_definition_cosh_sinh"
         },
         {
           "dependentId": "transfer_matrix_001_definition_symbols",
@@ -3782,6 +3883,10 @@
         },
         {
           "dependentId": "evensector_006_claim_recover_Z_Y",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "evensector_006_claim_recover_Z_Y",
           "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
         },
         {
@@ -4634,7 +4739,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -4796,7 +4901,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 20,
+        "incomingReferenceCount": 21,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -5582,8 +5687,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2693,
-        "inspectedContentSha256": "04f567b47243f0caa0fefcdcca59d28a4c715e425053613b62da00936f784560",
+        "inspectedCharacterCount": 3187,
+        "inspectedContentSha256": "9caaed727e3cc6211199fcabb9aac1d890013f0199037ab571fcd3dd5a6e8cd3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8234,8 +8339,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 8880,
-        "inspectedContentSha256": "cb60348ee4a6bdfc5b4d4e4dc7124aed4f3a9f4e4c5593c03ad6511884cc55f8",
+        "inspectedCharacterCount": 9238,
+        "inspectedContentSha256": "ce874671d3aca02c94e412408651b1c6a7a38d1e24c5d26ba1d3869134ce7385",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9162,8 +9267,8 @@
           "一般の体・環",
           "抽象線型写像"
         ],
-        "inspectedCharacterCount": 18221,
-        "inspectedContentSha256": "2edea69b2935e8d7678d2b7d4b34edbfcb0faa8ccaff86cea76d70a57d2ed814",
+        "inspectedCharacterCount": 18397,
+        "inspectedContentSha256": "bb38af42bab7abae83f28d4e2a37018e3ca1792a8baa5c9b9a8eeb649a4f52c3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9421,27 +9526,33 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4294,
-        "inspectedContentSha256": "674b1e05ce04378873cc8a013b5c3ffbf34444c85b856742514dbbfe40ed608f",
+        "inspectedCharacterCount": 4613,
+        "inspectedContentSha256": "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"
       },
       "dependsOnLabels": [
+        "cosh_sinh_basic_properties",
+        "def_cosh_sinh",
         "def_exp",
         "def_kronecker",
         "definition_of_cc",
+        "pauli_matrix_products",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_definition_cosh_sinh",
         "calculation_formulae_definition_set_and_algebra_notation",
         "exp_linear_map_002_definition_exp_of_endomorphism",
         "linear_space_general_000_definition_kronecker_product"
@@ -9452,7 +9563,9 @@
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [
+        "pauli_matrix_products"
+      ],
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
@@ -11053,7 +11166,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 15,
+        "incomingReferenceCount": 16,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11184,8 +11297,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 50848,
-        "inspectedContentSha256": "6211f41a13f3ac165cb8599e22d89a36e7df1cd7c74e2e6370d9b8cb800a2e4a",
+        "inspectedCharacterCount": 51181,
+        "inspectedContentSha256": "9c7b76e4f5ee8357aed5ed8bbd206d670cbd16a2d853021d76ad35b157f9b9fd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15780,8 +15893,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3787,
-        "inspectedContentSha256": "27c40774ddb9148306ecb8307c284fff72808984bcae179f09c25be8514740e8",
+        "inspectedCharacterCount": 4467,
+        "inspectedContentSha256": "542e930937951f970b4795cbc171117a849f0b5b3e6eae1da351f9970c0c8c0b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16815,8 +16928,8 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 14539,
-        "inspectedContentSha256": "e23116fac19239b3b29ad62e32906e7815cabfa3a00f85fac75d99dd7e49ada3",
+        "inspectedCharacterCount": 15170,
+        "inspectedContentSha256": "be8863af040718244347af7fab2c603d67dd2b71cc013423d34ac3edb188f18e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17827,8 +17940,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4954,
-        "inspectedContentSha256": "529d28bf81d775f3ebd392988c3683b26a5252044e730bc6b543abaac51bcd9c",
+        "inspectedCharacterCount": 5151,
+        "inspectedContentSha256": "7af5ce113df91bc89deceb866479a551438bed166a0ddf27a8e1f0f0b3729fda",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17842,16 +17955,19 @@
         "antiperiodic_exp_sum",
         "def_half_integer_modes",
         "definition_of_cc",
+        "set_and_algebra_notation",
         "theorem_exp_product"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
         "evensector_002_claim_antiperiodic_exp_sum",
         "evensector_003_definition_half_integer_modes",
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
         "transfer_matrix_015_claim_Z_Y_generate_algebra"
       ],
       "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
         "definition_of_cc"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
@@ -21578,8 +21694,8 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 9080,
-        "inspectedContentSha256": "1d8aec1177f5e49a6df819825cfd45998b0b2d60faa128d530441d1d61f0f57e",
+        "inspectedCharacterCount": 9621,
+        "inspectedContentSha256": "894e3a2b9819649f40d3f02dce143fc20e5082881e8532478f11a13ad83d94b2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

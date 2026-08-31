@@ -24,6 +24,14 @@ export default defineBlocks([
     title: { text: "記号の定義" },
     labels: ["def_transfer_matrix_symbols"],
     statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " で定めた二次の Pauli 行列と単位行列、および ",
+        ref("def_cosh_sinh"),
+        " で定めた双曲線余弦・双曲線正弦を用いる。後者の正値性には ",
+        ref("cosh_sinh_basic_properties"),
+        " を用いる。",
+      ]),
       list([
         [
           math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
