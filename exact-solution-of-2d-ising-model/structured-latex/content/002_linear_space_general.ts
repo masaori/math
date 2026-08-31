@@ -145,11 +145,11 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \#\mathcal{I}_{M+1}
 &=\#\mathcal{I}_M\cdot 2
-   \quad (\because \text{一対一対応で }I\text{ が }\#\mathcal{I}_M\text{ 通り、}i_{M+1}\text{ が }2\text{ 通り}) \\
+   &&(\because \text{一対一対応で }I\text{ が }\#\mathcal{I}_M\text{ 通り、}i_{M+1}\text{ が }2\text{ 通り}) \\
 &=2^M\cdot 2
-   \quad (\because \text{帰納法の仮定}\ \#\mathcal{I}_M=2^M) \\
+   &&(\because \text{帰納法の仮定}\ \#\mathcal{I}_M=2^M) \\
 &=2^{M+1}
-   \quad (\because \text{指数法則}\ 2^M\cdot 2=2^{M+1})
+   &&(\because \text{指数法則}\ 2^M\cdot 2=2^{M+1})
 \end{aligned}`,
       ),
       paragraph([
@@ -171,13 +171,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \sum_{t=0}^{n}2^t
 &=\sum_{t=0}^{n-1}2^t+2^n
-   \quad (\because \text{有限和の最後の項を分ける}) \\
+   &&(\because \text{有限和の最後の項を分ける}) \\
 &=(2^n-1)+2^n
-   \quad (\because \text{帰納法の仮定}\ \textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1) \\
+   &&(\because \text{帰納法の仮定}\ \textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1) \\
 &=2\cdot 2^n-1
-   \quad (\because \text{加法の結合則と }2^n+2^n=2\cdot 2^n) \\
+   &&(\because \text{加法の結合則と }2^n+2^n=2\cdot 2^n) \\
 &=2^{n+1}-1
-   \quad (\because \text{指数法則}\ 2\cdot 2^n=2^{n+1})
+   &&(\because \text{指数法則}\ 2\cdot 2^n=2^{n+1})
 \end{aligned}`,
       ),
       paragraph([
@@ -191,13 +191,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 0
 &\le \sum_{k=1}^{M}(i_k-1)2^{M-k}
-   \quad (\because \text{各項は }0\le i_k-1\text{ と }2^{M-k}>0\text{ の積で非負}) \\
+   &&(\because \text{各項は }0\le i_k-1\text{ と }2^{M-k}>0\text{ の積で非負}) \\
 &\le \sum_{k=1}^{M}2^{M-k}
-   \quad (\because \text{各項で }i_k-1\le 1\text{ かつ }2^{M-k}>0) \\
+   &&(\because \text{各項で }i_k-1\le 1\text{ かつ }2^{M-k}>0) \\
 &= \sum_{t=0}^{M-1}2^{t}
-   \quad (\because \text{添字の置き換え }t:=M-k) \\
+   &&(\because \text{添字の置き換え }t:=M-k) \\
 &= 2^{M}-1
-   \quad (\because \text{上の }\textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1\text{ を }n:=M\text{ で})
+   &&(\because \text{上の }\textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1\text{ を }n:=M\text{ で})
 \end{aligned}`,
       ),
       paragraph([
@@ -234,13 +234,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \nu(I)-\nu(J)
 &= \Bigl(1+\sum_{l=1}^{M}(i_l-1)2^{M-l}\Bigr)-\Bigl(1+\sum_{l=1}^{M}(j_l-1)2^{M-l}\Bigr)
-   \quad (\because \nu\text{ の定義}) \\
+   &&(\because \nu\text{ の定義}) \\
 &= \sum_{l=1}^{M}(i_l-j_l)2^{M-l}
-   \quad (\because \text{和の差を項ごとに取る。}(i_l-1)-(j_l-1)=i_l-j_l) \\
+   &&(\because \text{和の差を項ごとに取る。}(i_l-1)-(j_l-1)=i_l-j_l) \\
 &= \sum_{l=k}^{M}(i_l-j_l)2^{M-l}
-   \quad (\because l<k\text{ では }i_l=j_l\text{ で項が }0) \\
+   &&(\because l<k\text{ では }i_l=j_l\text{ で項が }0) \\
 &= 2^{M-k} + \sum_{l=k+1}^{M}(i_l-j_l)2^{M-l}
-   \quad (\because l=k\text{ の項を分ける。}i_k-j_k=2-1=1)
+   &&(\because l=k\text{ の項を分ける。}i_k-j_k=2-1=1)
 \end{aligned}`,
       ),
       paragraph([
@@ -252,15 +252,15 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left|\sum_{l=k+1}^{M}(i_l-j_l)2^{M-l}\right|
 &\le \sum_{l=k+1}^{M}\left|i_l-j_l\right|2^{M-l}
-   \quad (\because \text{三角不等式と }2^{M-l}>0) \\
+   &&(\because \text{三角不等式と }2^{M-l}>0) \\
 &\le \sum_{l=k+1}^{M}2^{M-l}
-   \quad (\because \text{各項で }|i_l-j_l|\le 1\text{ かつ }2^{M-l}>0) \\
+   &&(\because \text{各項で }|i_l-j_l|\le 1\text{ かつ }2^{M-l}>0) \\
 &= \sum_{t=0}^{M-k-1}2^{t}
-   \quad (\because \text{添字の置き換え }t:=M-l) \\
+   &&(\because \text{添字の置き換え }t:=M-l) \\
 &= 2^{M-k}-1
-   \quad (\because \text{Step 2 の }\textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1\text{ を }n:=M-k\text{ で}) \\
+   &&(\because \text{Step 2 の }\textstyle\sum_{t=0}^{n-1}2^{t}=2^{n}-1\text{ を }n:=M-k\text{ で}) \\
 &< 2^{M-k}
-   \quad (\because 2^{M-k}-1<2^{M-k})
+   &&(\because 2^{M-k}-1<2^{M-k})
 \end{aligned}`,
       ),
       paragraph([
@@ -283,6 +283,9 @@ export default defineBlocks([
       status: "added",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "2026-09-01 の式変形統一で、全五本の aligned 鎖にある根拠 20 行を" +
+          "行中の \\quad (\\because …) から行末の根拠列（aligned の &&）へ揃えた。" +
+          "式変形・根拠・段数・参照は変えていない。",
         "2026-08-17: 式変形の書き方の統一。Step 3（単射性）の二つの式（ν(I)−ν(J) の分解と、残りの和の絶対値の評価）を、" +
           "1 行 1 等号の一続きの鎖と行末の (∵ …) へ揃えた（ν の定義から始め、和の差・l<k の項の消去・l=k の項の分離、" +
           "三角不等式・各項の評価・添字の置き換え・Step 2 の等比和・最後の狭義不等号）。内容は不変で、段は増えており減った段は無い。",
