@@ -7,7 +7,7 @@
 - ファイル: `structured-latex/content/020_critical_point.ts`（章 E: 臨界点と比熱の対数発散）
 - 併せて検証:
   - `cosh_addition_and_half_angle`（加法定理・半角公式・`arcsinh`）
-  - `def_kappa_and_A` / `gamma_kappa_identity`（鍵の恒等式）
+  - `def_kappa` / `def_critical_sinh_product_A` / `gamma_kappa_identity`（鍵の恒等式）
   - `critical_point_iff_kappa_zero`（臨界条件の同値。008 章 `critical_condition_c1_eq_s1_c2` とも突き合わせ）
   - `isotropic_A_equals_one` / `kappa_of_K_basic`（等方な場合の設定と定数）
   - `gamma_derivatives_in_kappa`（`κ` についての 1 階・2 階導関数）

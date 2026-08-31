@@ -114,7 +114,7 @@ const matrixLinearMapCorrespondenceExpectedExternalInputContentSha256 = new Map<
   ["linear_space_general_000b_claim_kronecker_product_rule", "59404eda021b5d904e2248530a586d168aea7d32d03451a45a17bb2f8b583a21"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "e06631c60e429b8e755520b8069138cab273e66c4946ec5a46c83dc4293738a7"],
   ["linear_space_general_001_theorem_tensor_product_basis", "59e2b9e24e79916e00dfe666d29bdee556ea3479b16e89d9912457ff3bea0609"],
-  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "bb38af42bab7abae83f28d4e2a37018e3ca1792a8baa5c9b9a8eeb649a4f52c3"],
+  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "d4685720ab86b3cf07ecc5e19564d9c7e6467c8b488671eb775095e4b8ef8366"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
 ]);
 const invertibleMatrixConjugationSectionEntryIds = [
@@ -478,7 +478,7 @@ const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, st
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["exp_linear_map_000a_claim_real_exp_series_converges", "23b32729c264057d48a0ed8887f614269014d1583ca4848ed7a6629e1f49574c"],
-  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "bb38af42bab7abae83f28d4e2a37018e3ca1792a8baa5c9b9a8eeb649a4f52c3"],
+  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "d4685720ab86b3cf07ecc5e19564d9c7e6467c8b488671eb775095e4b8ef8366"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
   ["eigenvalues_of_V_002_claim_trace_properties", "93df4cac57894b68d57c2eb9759e701189dc1673bfe4758a1fc3a39124645672"],
@@ -543,15 +543,34 @@ const epsilonProjectorDefinitionExpectedExternalInputContentSha256 = new Map<str
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
 ]);
-const criticalParametersDefinitionExpectedContentSha256 = new Map<string, string>([
-  ["critical_002_definition_kappa_and_A", "88603f7e0f47159a401dbc878bd2862237bf85332936bc95aae705948a4fbe49"],
+const kappaDefinitionSectionEntryIds = ["critical_002_definition_kappa"] as const;
+const kappaDefinitionExpectedInternalDependencies = new Map<string, string[]>([
+  ["critical_002_definition_kappa", []],
 ]);
-const criticalParametersDefinitionExpectedExternalInputEntryIds = [
+const kappaDefinitionExpectedContentSha256 = new Map<string, string>([
+  ["critical_002_definition_kappa", "acd5ce9a1658584ca9ece23706585a304c38ac9e05fdd1474805b4cd4dd2a556"],
+]);
+const kappaDefinitionExpectedExternalInputEntryIds = [
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "transfer_matrix_001_definition_symbols",
+].sort();
+const kappaDefinitionExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
+]);
+const criticalSinhProductDefinitionSectionEntryIds = ["critical_002a_definition_critical_sinh_product_A"] as const;
+const criticalSinhProductDefinitionExpectedInternalDependencies = new Map<string, string[]>([
+  ["critical_002a_definition_critical_sinh_product_A", []],
+]);
+const criticalSinhProductDefinitionExpectedContentSha256 = new Map<string, string>([
+  ["critical_002a_definition_critical_sinh_product_A", "689b4ecec986b56c91068263f15b1040aa6c8ef957e855678ca67710aa8587bf"],
+]);
+const criticalSinhProductDefinitionExpectedExternalInputEntryIds = [
   "calc_formulae_000b_claim_cosh_sinh_basic_properties",
   "calculation_formulae_definition_set_and_algebra_notation",
   "transfer_matrix_001_definition_symbols",
 ].sort();
-const criticalParametersDefinitionExpectedExternalInputContentSha256 = new Map<string, string>([
+const criticalSinhProductDefinitionExpectedExternalInputContentSha256 = new Map<string, string>([
   ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
@@ -592,7 +611,6 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
 ]);
 const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
-  ["critical_002_definition_kappa_and_A", "臨界条件からの差を表す実数 κ と双曲線正弦の積 A という二つの定義を一ブロックへ束ねている。分割後に章内順と節境界を再判定する必要がある。"],
   ["maxeig_001_definition_symmetrized_transfer_matrix", "V1 の平方根として使う行列と対称化転送行列 W という二つの定義を一ブロックへ束ねている。分割後に W から始まる依存鎖の節境界を再判定する必要がある。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
 ]);
@@ -1268,30 +1286,50 @@ const epsilonProjectorDefinitionSection = validateReviewedSection(
 if (epsilonProjectorDefinitionSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 16) {
   throw new Error("全スピン反転行列から定める二つの行列が章内依存順16ではありません");
 }
-const criticalParametersDefinitionEntry = entries.find((entry) => entry.id === "critical_002_definition_kappa_and_A")!;
+const kappaDefinitionSection = validateReviewedSection(
+  "臨界条件からの差を表す実数",
+  "2次元イジングモデル",
+  kappaDefinitionSectionEntryIds,
+  kappaDefinitionExpectedInternalDependencies,
+  kappaDefinitionExpectedContentSha256,
+  kappaDefinitionExpectedExternalInputEntryIds,
+  kappaDefinitionExpectedExternalInputContentSha256,
+  ["critical_002_definition_kappa"],
+);
+const criticalSinhProductDefinitionSection = validateReviewedSection(
+  "二つの双曲線正弦の積",
+  "2次元イジングモデル",
+  criticalSinhProductDefinitionSectionEntryIds,
+  criticalSinhProductDefinitionExpectedInternalDependencies,
+  criticalSinhProductDefinitionExpectedContentSha256,
+  criticalSinhProductDefinitionExpectedExternalInputEntryIds,
+  criticalSinhProductDefinitionExpectedExternalInputContentSha256,
+  ["critical_002a_definition_critical_sinh_product_A"],
+);
+const kappaDefinitionEntry = kappaDefinitionSection.sectionEntries[0]!;
+const criticalSinhProductDefinitionEntry = criticalSinhProductDefinitionSection.sectionEntries[0]!;
 const symmetrizedTransferMatrixEntry = entries.find((entry) => entry.id === "maxeig_001_definition_symmetrized_transfer_matrix")!;
 const traceOfSymmetrizedTransferMatrixEntry = entries.find((entry) => entry.id === "maxeig_002_claim_Z_equals_trace_of_W")!;
-if (criticalParametersDefinitionEntry.dependencyPlacement!.chapterOrder !== 17
-  || symmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder !== 18
-  || traceOfSymmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder !== 19
+if (kappaDefinitionEntry.dependencyPlacement!.chapterOrder !== 17
+  || criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder !== 18
+  || symmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder !== 19
+  || traceOfSymmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder !== 20
   || !traceOfSymmetrizedTransferMatrixEntry.dependsOnEntryIds.includes(symmetrizedTransferMatrixEntry.id)) {
   throw new Error(`臨界条件用実数から対称化転送行列とトレース公式までの章内順が変わりました: ${JSON.stringify({
-    criticalParametersOrder: criticalParametersDefinitionEntry.dependencyPlacement!.chapterOrder,
+    kappaOrder: kappaDefinitionEntry.dependencyPlacement!.chapterOrder,
+    criticalSinhProductOrder: criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder,
     definitionOrder: symmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder,
     traceFormulaOrder: traceOfSymmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder,
     traceFormulaDependencies: traceOfSymmetrizedTransferMatrixEntry.dependsOnEntryIds,
   })}`);
 }
-if (criticalParametersDefinitionEntry.explanationGranularityReview.inspectedContentSha256
-    !== criticalParametersDefinitionExpectedContentSha256.get("critical_002_definition_kappa_and_A")
-  || symmetrizedTransferMatrixEntry.explanationGranularityReview.inspectedContentSha256
+if (symmetrizedTransferMatrixEntry.explanationGranularityReview.inspectedContentSha256
     !== "283cfe7ca21f59fcd026567e6c76ffad08f1ae9912092f3691fc9571c01d40e2"
   || traceOfSymmetrizedTransferMatrixEntry.explanationGranularityReview.inspectedContentSha256
     !== "498e5bb8b0b5117cb55e8791e72d116d8ff6beed09540a3922ef1650a0cd9a35") {
   throw new Error("臨界条件用実数、対称化転送行列、または直後のトレース公式の本文が変わりました");
 }
 for (const [entry, expectedDependencies, description] of [
-  [criticalParametersDefinitionEntry, criticalParametersDefinitionExpectedExternalInputEntryIds, "臨界条件用実数"],
   [symmetrizedTransferMatrixEntry, symmetrizedTransferMatrixExpectedDirectDependencies, "対称化転送行列"],
   [traceOfSymmetrizedTransferMatrixEntry, traceOfSymmetrizedTransferMatrixExpectedDirectDependencies, "対称化転送行列のトレース公式"],
 ] as const) {
@@ -1300,18 +1338,12 @@ for (const [entry, expectedDependencies, description] of [
     throw new Error(`${description}の直接依存が変わりました: ${JSON.stringify(actualDependencies)}`);
   }
 }
-for (const id of criticalParametersDefinitionExpectedExternalInputEntryIds) {
-  const entry = entries.find((candidate) => candidate.id === id)!;
-  if (entry.explanationGranularityReview.inspectedContentSha256
-    !== criticalParametersDefinitionExpectedExternalInputContentSha256.get(id)) {
-    throw new Error(`臨界条件用実数の外部入力本文が変わりました: ${id}`);
-  }
-}
-if (criticalParametersDefinitionEntry.explanationGranularityReview.status !== "具体的な行列計算への展開またはブロック分割を要する"
+if (kappaDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || criticalSinhProductDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || symmetrizedTransferMatrixEntry.explanationGranularityReview.status !== "具体的な行列計算への展開またはブロック分割を要する"
   || epsilonProjectorDefinitionSection.sectionEntries[0]!.explanationGranularityReview.status !== "自動検査で主題に適合"
   || traceOfSymmetrizedTransferMatrixEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
-  throw new Error("章内依存順16–19の説明粒度判定が変わりました");
+  throw new Error("章内依存順16–20の説明粒度判定が変わりました");
 }
 const mathematicalToolSectionBoundaries = [{
   name: "行列指数関数による共役の級数公式",
@@ -1560,6 +1592,36 @@ const isingModelSectionBoundaries = [{
   concludingDefinitionEntryId: "bridge_008_definition_epsilon_projectors",
   boundaryEvidence: "章内依存順16の一項は全スピン反転行列だけをイジング固有の入力として二つの行列を定める。次の章内依存順17は双対結合定数と双曲線関数の略記だけを使い、本項へ依存しない。外部入力集合が切り替わるため、順16の後で一項の節を閉じる。これらが固有空間への射影子であることは後続主張で証明するため、本節の出力には含めない。生成時に対象と全外部入力の本文 fingerprint、章内順、節末出力の一意性、次項の直接依存、および次項からの非依存を固定検査する。",
   readabilityStatus: "対象定義は単位行列と全スピン反転行列の和・差とスカラー倍として具体的に書かれ、現行の説明粒度検査に合格している。外部入力では、混在した記号定義と複素数の定義に説明粒度の未解決が残る。射影子性は章内依存順24の後続主張で証明される。",
+}, {
+  name: "臨界条件からの差を表す実数",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  entryIds: kappaDefinitionSectionEntryIds,
+  input: [
+    "混在した記号定義に含まれる二つの正の結合定数と双対結合定数",
+    "実数の差とスカラー倍",
+  ],
+  externalInputEntryIds: kappaDefinitionSection.externalInputEntryIds,
+  output: ["二つの結合定数の差を二倍した実数 κ"],
+  concludingDefinition: "臨界条件からの差を表す実数 κ",
+  concludingDefinitionEntryId: "critical_002_definition_kappa",
+  boundaryEvidence: "章内依存順17の一項は結合定数と双対結合定数の差だけから κ を定める。次の章内依存順18は双曲線正弦の積を定めるため基本性質を追加で入力し、κ へ依存しない。外部入力集合が切り替わるため、順17の後で一項の節を閉じる。生成時に対象と全外部入力の本文 fingerprint、章内順、節末定義の一意性、次項からの非依存を固定検査する。",
+  readabilityStatus: "対象定義は二つの正の実数の差と二倍だけで具体的に書かれ、現行の説明粒度検査に合格している。外部入力である混在した記号定義には分割が残る。",
+}, {
+  name: "二つの双曲線正弦の積",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  entryIds: criticalSinhProductDefinitionSectionEntryIds,
+  input: [
+    "混在した記号定義に含まれる二つの正の結合定数と双対結合定数",
+    "実数の双曲線正弦の定義と正値性",
+  ],
+  externalInputEntryIds: criticalSinhProductDefinitionSection.externalInputEntryIds,
+  output: ["二つの正の双曲線正弦の積 A"],
+  concludingDefinition: "二つの双曲線正弦の積 A",
+  concludingDefinitionEntryId: "critical_002a_definition_critical_sinh_product_A",
+  boundaryEvidence: "章内依存順18の一項は二つの正の双曲線正弦の積 A を定め、その正値性までを同じ定義の well-defined 性として確認する。順17の κ へ依存せず、次の章内依存順19は対称化転送行列を別の行列指数関数入力から定めるため外部入力集合が切り替わる。したがって順18の後で一項の節を閉じる。生成時に対象と全外部入力の本文 fingerprint、章内順、節末定義の一意性、前後項からの非依存を固定検査する。",
+  readabilityStatus: "対象定義は二つの正の実数へ双曲線正弦を適用して積を取る具体的な計算であり、正値性の根拠も明示しているため、現行の説明粒度検査に合格している。外部入力である混在した記号定義と双曲線関数の基本性質には分割が残る。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

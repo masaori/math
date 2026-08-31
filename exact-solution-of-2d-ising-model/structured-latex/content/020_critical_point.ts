@@ -375,11 +375,11 @@ e^{-u}
   },
 
   {
-    id: "critical_002_definition_kappa_and_A",
+    id: "critical_002_definition_kappa",
     kind: "definition",
     origin: { path: SRC, ordinal: 4 },
-    title: { tex: String.raw`\kappa := 2K_1 - 2K_2^* \text{ と } A := \sinh 2K_1\sinh 2K_2^*` },
-    labels: ["def_kappa_and_A"],
+    title: { tex: String.raw`\kappa := 2K_1 - 2K_2^*` },
+    labels: ["def_kappa"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -387,11 +387,26 @@ e^{-u}
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         " に対して",
       ]),
-      displayMath(
-        String.raw`\kappa := 2K_1 - 2K_2^* \in \mathbb{R},
-\qquad
-A := s_1 s_2^* = \sinh 2K_1\,\sinh 2K_2^* \in \mathbb{R}_{>0}`,
-      ),
+      displayMath(String.raw`\kappa := 2K_1 - 2K_2^* \in \mathbb{R}`),
+      paragraph(["と定める。"]),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "critical_002a_definition_critical_sinh_product_A",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 4 },
+    title: { tex: String.raw`A := \sinh 2K_1\sinh 2K_2^*` },
+    labels: ["def_critical_sinh_product_A"],
+    statement: [
+      paragraph([
+        ref("def_transfer_matrix_symbols"),
+        " の記号のもとで、",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`A := s_1 s_2^* = \sinh 2K_1\,\sinh 2K_2^* \in \mathbb{R}_{>0}`),
       paragraph([
         "と定める。",
         math(String.raw`A > 0`),
@@ -419,9 +434,13 @@ A := s_1 s_2^* = \sinh 2K_1\,\sinh 2K_2^* \in \mathbb{R}_{>0}`,
     labels: ["gamma_kappa_identity"],
     statement: [
       paragraph([
-        ref("def_kappa_and_A"),
+        ref("def_kappa"),
         " の ",
-        math(String.raw`\kappa, A`),
+        math(String.raw`\kappa`),
+        "、",
+        ref("def_critical_sinh_product_A"),
+        " の ",
+        math(String.raw`A`),
         " と ",
         ref("gamma1_lower_bound_all_theta"),
         " の ",
@@ -571,7 +590,7 @@ A := s_1 s_2^* = \sinh 2K_1\,\sinh 2K_2^* \in \mathbb{R}_{>0}`,
       list([
         ["(1) ", math(String.raw`s_1 s_2 = \sinh 2K_1\,\sinh 2K_2 = 1`), "（Ising 模型の臨界条件）"],
         ["(2) ", math(String.raw`K_1 = K_2^*`)],
-        ["(3) ", ref("def_kappa_and_A"), " の ", math(String.raw`\kappa = 2K_1 - 2K_2^*`), " が ", math(String.raw`0`), " に等しい"],
+        ["(3) ", ref("def_kappa"), " の ", math(String.raw`\kappa = 2K_1 - 2K_2^*`), " が ", math(String.raw`0`), " に等しい"],
       ]),
       paragraph([
         ref("critical_condition_c1_eq_s1_c2"),
@@ -635,7 +654,7 @@ s_1 s_2 = 1
         "以下、**等方な場合** ",
         math(String.raw`K_1 = K_2 = K \in \mathbb{R}_{>0}`),
         " を考える。このとき ",
-        ref("def_kappa_and_A"),
+        ref("def_critical_sinh_product_A"),
         " の ",
         math(String.raw`A`),
         " について",

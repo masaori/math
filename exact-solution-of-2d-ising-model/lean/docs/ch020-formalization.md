@@ -1,6 +1,6 @@
 # 章 020「臨界点と比熱の対数発散」の Lean 形式化
 
-正本: `structured-latex/content/020_critical_point.ts`（14 ブロック）
+正本: `structured-latex/content/020_critical_point.ts`（15 ブロック）
 
 この文書は `lean/README.md` への統合前の記録である（統合は呼び出し元が行う）。
 
@@ -50,12 +50,12 @@
 | `Ising2D.sinh_le_mul_cosh_of_nonneg` | **`sinh t ≤ t cosh t`**（`t ≥ 0`） | (5) 後半 |
 | `Ising2D.cosh_addition_and_half_angle_five` | (1)〜(5) をまとめた形 | 主張全体 |
 
-### 1.2 `Definition002_KappaAndCritical.lean`（ラベル `def_kappa_and_A`, `gamma_kappa_identity`, `critical_point_iff_kappa_zero`, `isotropic_A_equals_one`）
+### 1.2 `Definition002_KappaAndCritical.lean`（ラベル `def_kappa`, `def_critical_sinh_product_A`, `gamma_kappa_identity`, `critical_point_iff_kappa_zero`, `isotropic_A_equals_one`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.kappaP` | **`κ := 2K_1 - 2K_2^*`** | `def_kappa_and_A` |
-| `Ising2D.AP` / `AP_pos` | **`A := sinh 2K_1 sinh 2K_2^*`**、`A > 0` | `def_kappa_and_A` |
+| `Ising2D.kappaP` | **`κ := 2K_1 - 2K_2^*`** | `def_kappa` |
+| `Ising2D.AP` / `AP_pos` | **`A := sinh 2K_1 sinh 2K_2^*`**、`A > 0` | `def_critical_sinh_product_A` |
 | `Ising2D.one_sub_cos_eq` | `1 - cos θ = 2 sin²(θ/2)` | `gamma_kappa_identity` の途中 |
 | `Ising2D.gamma1R_eq_cosh_kappa_add` | **`γ_1(θ) = cosh κ + 2A sin²(θ/2)`** | `gamma_kappa_identity` (1) |
 | `Ising2D.Sparam` / `Sparam_nonneg` / `Sparam_even` | `S(θ) := sinh²(κ/2) + A sin²(θ/2)` | `gamma_kappa_identity` |

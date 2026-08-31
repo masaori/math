@@ -38,12 +38,12 @@ def K_star(K):
 
 
 def kappa_of(K1, K2):
-    """def_kappa_and_A: kappa = 2K1 - 2K2*"""
+    """def_kappa: kappa = 2K1 - 2K2*"""
     return 2 * F(K1) - 2 * K_star(K2)
 
 
 def A_of(K1, K2):
-    """def_kappa_and_A: A = sinh(2K1) sinh(2K2*)"""
+    """def_critical_sinh_product_A: A = sinh(2K1) sinh(2K2*)"""
     return mp.sinh(2 * F(K1)) * mp.sinh(2 * K_star(K2))
 
 

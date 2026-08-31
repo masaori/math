@@ -2,7 +2,8 @@
 # `κ := 2K_1 - 2K_2^*`、`A := sinh 2K_1 sinh 2K_2^*` と臨界条件
 
 人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
-- `critical_002_definition_kappa_and_A`（ラベル `def_kappa_and_A`）
+- `critical_002_definition_kappa`（ラベル `def_kappa`）
+- `critical_002a_definition_critical_sinh_product_A`（ラベル `def_critical_sinh_product_A`）
 - `critical_003_claim_gamma_kappa_identity`（ラベル `gamma_kappa_identity`）
 - `critical_004_claim_critical_point_iff_kappa_zero`（ラベル `critical_point_iff_kappa_zero`）
 - `critical_005_claim_isotropic_setting`（ラベル `isotropic_A_equals_one`）
@@ -25,14 +26,14 @@ namespace Ising2D
 
 open Real
 
-/-- 原文 `def_kappa_and_A` の `κ := 2K_1 - 2K_2^*`。 -/
+/-- 原文 `def_kappa` の `κ := 2K_1 - 2K_2^*`。 -/
 noncomputable def kappaP (P : IsingParam) : ℝ := 2 * P.K1 - 2 * P.K2star
 
-/-- 原文 `def_kappa_and_A` の `A := s_1 s_2^* = sinh 2K_1 sinh 2K_2^*`。 -/
+/-- 原文 `def_critical_sinh_product_A` の `A := s_1 s_2^* = sinh 2K_1 sinh 2K_2^*`。 -/
 noncomputable def AP (P : IsingParam) : ℝ :=
   Real.sinh (2 * P.K1) * Real.sinh (2 * P.K2star)
 
-/-- 原文 `def_kappa_and_A`: `A > 0`。 -/
+/-- 原文 `def_critical_sinh_product_A`: `A > 0`。 -/
 theorem AP_pos (P : IsingParam) : 0 < AP P :=
   mul_pos P.s1_pos P.s2star_pos
 
