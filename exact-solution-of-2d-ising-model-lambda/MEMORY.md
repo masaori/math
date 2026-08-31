@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 33 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 34 回目の tick 時点）
+
+**上下に隣り合うセルの右半直線交差数の奇偶差が共有横辺の通過回数の奇偶に等しいことを本文と SageMath で固定した（Lean 未着手）。** 横辺 $\{(i,c),(i,c+1)\}$ の通過回数 $H_{i,c}(\gamma)\in\mathbb N$ を定義し（`def_horizontal_edge_traversal_count`）、零巻き付きの閉格子路について $N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)\equiv H_{r+1,c}(\gamma)\pmod2$ を示した（`claim_vertically_adjacent_cells_boundary_parity`）。証明は行 $r+1$ の右半直線上の格子頂点に接する端点の総数が偶数であることと、境界を横切る辺を上下の縦辺と共有横辺の三種類へ互いに素に分ける有限数え上げで閉じる。前 tick の左右隣接セルの恒等式と合わせ、内側セルと外側セルの共有辺を閉格子路の通過奇偶で全方向に判定できるようになった。SageMath `adjacent-cells-boundary-parity` は閉歩道 5,340 本・上下隣接セル対 166,232 組を `ZZ` で検査した。次はこの局所境界則を使って内側セルの辺連結性を示す。
+
+前進前レビューでは、前 tick の隣接セルの交差数の恒等式を本文・SageMath・台帳で照合し、有限集合の非自明な分割で後続が直接引くため「何も言っていない主張」ではなく、修正対象なしとした。並列の式変形統一は、姉妹側の $B_1(\theta)B_2B_1(\theta)=A(\theta)$ の証明で $N=B_2B_1(\theta)$ の四成分を四本の一続きの鎖へ分け、全行へ根拠を付けた。
+
+## ひとつ前の到達点（2026-08-31 の 33 回目の tick 時点）
 
 **打ち切られた前 tick の成果を回収して push し、横に隣り合うセルの右半直線交差数の差が共有する縦辺の通過回数に等しい恒等式を本文と SageMath で固定した（Lean 未着手）。** 前 tick（32 回目）は push 前に打ち切られていたので、残っていた本文・SageMath・台帳を全検証にかけて `origin/main` へ入れた。その際、姉妹側の書き換えが使った `\blkref` が姉妹側 LaTeX 生成器に未定義で PDF が落ちることを見つけ、lambda 側と同一の定義を生成器へ追加した。前進では、縦辺の通過回数 $V_{r,j}(\gamma)$ を定義し（`def_vertical_edge_traversal_count`）、任意の閉じた非後退辺列と任意のセルについて $N^{\rightarrow}_{r,c}=N^{\rightarrow}_{r,c+1}+V_{r,c+1}$ を交差集合の列座標による分割一本で証明した（`claim_adjacent_cells_ray_crossing_difference`）。とくに横に隣り合う二セルの交差数の奇偶が異なることと共有縦辺の通過回数が奇数であることは同値で、内側セルの境界が歩道の辺に限られること（辺連結性・Euler 等式の部品）へつながる。SageMath `adjacent-cells-ray-crossing-difference` は閉歩道 5,340 本・隣接セル対 166,232 組を `ZZ` で検査した。検算対応 345 件、本文 761 ブロック・PDF 342 ページを通した。次は内側セルの辺連結性を示す。
 

@@ -1848,29 +1848,34 @@ a^2 - b^2
         ref("mat_mult"),
         "）。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-N_{11} &= C\cdot a + (iS)\cdot\left(i e^{-i\theta} b\right)
-   \quad (\because \text{mat\_mult}) \\
-       &= Ca - S b\, e^{-i\theta}
-   \quad (\because i\cdot i = -1) \\
-N_{12} &= C\cdot\left(-i e^{i\theta} b\right) + (iS)\cdot a
-   \quad (\because \text{mat\_mult}) \\
-       &= i\left(Sa - C b\, e^{i\theta}\right) \\
-N_{21} &= (-iS)\cdot a + C\cdot\left(i e^{-i\theta} b\right)
-   \quad (\because \text{mat\_mult}) \\
-       &= i\left(C b\, e^{-i\theta} - Sa\right) \\
-N_{22} &= (-iS)\cdot\left(-i e^{i\theta} b\right) + C\cdot a
-   \quad (\because \text{mat\_mult}) \\
-       &= Ca - S b\, e^{i\theta}
-   \quad (\because (-i)\cdot(-i) = -1)
-\end{aligned}`,
-      ),
-      paragraph([
-        "（",
-        math(String.raw`i\cdot i = -1`),
-        " を使った。）",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+N_{11}
+&= C\cdot a + (iS)\cdot\left(i e^{-i\theta} b\right)
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&= Ca - S b\, e^{-i\theta}
+&&\bigl(\because\ i\cdot i=-1\text{ と複素数の四則}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+N_{12}
+&= C\cdot\left(-i e^{i\theta} b\right) + (iS)\cdot a
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&= i\left(Sa-Cb\,e^{i\theta}\right)
+&&\bigl(\because\ \mathbb C\text{ の分配則と四則}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+N_{21}
+&=(-iS)\cdot a+C\cdot\left(i e^{-i\theta}b\right)
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&=i\left(Cb\,e^{-i\theta}-Sa\right)
+&&\bigl(\because\ \mathbb C\text{ の分配則と四則}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+N_{22}
+&=(-iS)\cdot\left(-i e^{i\theta}b\right)+C\cdot a
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&=Ca-Sb\,e^{i\theta}
+&&\bigl(\because\ (-i)\cdot(-i)=-1\text{ と複素数の四則}\bigr)
+\end{aligned}`),
       paragraph([
         "Step 2: ",
         math(String.raw`P := B_1(\theta)\, N = B_1(\theta)\, B_2\, B_1(\theta)`),

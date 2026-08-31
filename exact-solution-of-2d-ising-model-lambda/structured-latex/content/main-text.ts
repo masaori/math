@@ -56458,6 +56458,96 @@ N_{r,c}^{\rightarrow}(\gamma)
               ],
             },
           },
+        }, {
+          role: "supporting",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_vertically_adjacent_cells_boundary_parity",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_horizontal_edge_traversal_count",
+                kind: "definition",
+                title: { text: "持ち上げた横辺の通過回数" },
+                labels: ["def_horizontal_edge_traversal_count"],
+                habitat: "N",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の平面持ち上げを ",
+                    math(String.raw`P_k(\gamma)\in\mathbb Z\times\mathbb Z`),
+                    "（", ref("def_plane_lift"), "）と書く。整数 ", math(String.raw`i,c\in\mathbb Z`),
+                    " に対し、平面の横辺 ", math(String.raw`\{(i,c),(i,c+1)\}`),
+                    " の通過回数 ", math(String.raw`H_{i,c}(\gamma)\in\mathbb N`), " を",
+                  ]),
+                  displayMath(String.raw`H_{i,c}(\gamma):=
+\left|\left\{k\in\{1,\ldots,m\}\ \middle|\
+\{P_{k-1}(\gamma),P_k(\gamma)\}=\{(i,c),(i,c+1)\}\right\}\right|`),
+                  paragraph(["で定める。右辺は有限集合の元の個数なので自然数である。"]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_vertically_adjacent_cells_boundary_parity",
+              kind: "claim",
+              title: { text: "上下に隣り合うセルの交差奇偶の差は間の横辺の通過奇偶で決まる" },
+              labels: ["claim_vertically_adjacent_cells_boundary_parity"],
+              habitat: "Z",
+              verification: ["sagemath/check/adjacent-cells-boundary-parity"],
+              statement: [
+                paragraph([
+                  "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
+                  math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
+                  " である任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）と任意の整数 ",
+                  math(String.raw`r,c\in\mathbb Z`), " について",
+                ]),
+                displayMath(String.raw`N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
+\equiv H_{r+1,c}(\gamma)\pmod 2`),
+                paragraph([
+                  "が成り立つ（", ref("def_right_ray_vertical_crossing_count"), "、",
+                  ref("def_horizontal_edge_traversal_count"), "）。したがって、上下に隣り合う二つの単位正方形の",
+                  "交差数の奇偶が異なることと、二つの正方形が共有する横辺の通過回数が奇数であることは同値である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "行 ", math(String.raw`r+1`), " の半直線上にある格子頂点の集合を ",
+                  math(String.raw`S:=\{(r+1,j)\in\mathbb Z\times\mathbb Z\mid c<j\}`),
+                  " とする。零巻き付きなので持ち上げの終点は始点に一致する（",
+                  ref("claim_plane_lift_endpoint_winding"), "）。したがって各持ち上げ点が一本の入辺と一本の出辺に接するので、",
+                  "辺列の各項について両端のうち ", math(String.raw`S`),
+                  " に属する端点の個数を足した総和は偶数である。両端が ", math(String.raw`S`),
+                  " に属する辺はこの総和へ二回、どちらも属さない辺は零回、ちょうど一端だけが属する辺は一回寄与する。",
+                ]),
+                paragraph([
+                  "持ち上げの各歩は縦または横の単位辺である（", ref("def_plane_lift"), "、",
+                  ref("claim_displacement_is_direction_unit"), "）。したがって、ちょうど一端だけが ",
+                  math(String.raw`S`), " に属する項は、互いに重ならない次の三種類に尽きる。",
+                  "行 ", math(String.raw`r`), " と ", math(String.raw`r+1`), " を列 ",
+                  math(String.raw`j>c`), " で結ぶ縦辺、行 ", math(String.raw`r+1`), " と ",
+                  math(String.raw`r+2`), " を列 ", math(String.raw`j>c`), " で結ぶ縦辺、共有横辺 ",
+                  math(String.raw`\{(r+1,c),(r+1,c+1)\}`), " である。それぞれの項数は定義により ",
+                  math(String.raw`N_{r,c}^{\rightarrow}(\gamma)`), "、",
+                  math(String.raw`N_{r+1,c}^{\rightarrow}(\gamma)`), "、",
+                  math(String.raw`H_{r+1,c}(\gamma)`), " である。ゆえに",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)+H_{r+1,c}(\gamma)
+&\equiv0\pmod2
+&&\bigl(\because\ \text{上の端点数の偶奇と三種類への互いに素な分割}\bigr),\\
+N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
+&\equiv H_{r+1,c}(\gamma)\pmod2
+&&\bigl(\because\ \mathbb Z\text{ の偶奇}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "後半の同値は最後の合同式を読むだけである。使ったのは有限な辺列の端点の数え上げと奇偶だけであり、",
+                  "実数体も複素数体も現れない。", ref("claim_adjacent_cells_ray_crossing_difference"),
+                  " と合わせると、内側セルと外側セルが辺を共有することは、その共有辺を閉格子路が奇数回通ることと全方向で同値になる。",
+                ]),
+              ],
+            },
+          },
         }],
       },
     },
