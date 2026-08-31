@@ -420,6 +420,7 @@ export const ALL_LABELS = [
   "claim_vertex_incident_edge_traversal_even",
   "claim_vertex_simple_plane_lift_points_distinct",
   "claim_vertex_simple_winding_zero_or_primitive",
+  "claim_vertex_surrounding_cells_form_parity_arcs",
   "claim_vertically_adjacent_cells_boundary_parity",
   "claim_walk_direction_difference",
   "claim_walk_rotation_phase_total_turning",

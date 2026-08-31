@@ -56716,6 +56716,80 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
               ],
             },
           },
+        }, {
+          role: "supporting",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_vertex_surrounding_cells_form_parity_arcs",
+            focus: {
+              id: "kac_ward_claim_vertex_surrounding_cells_form_parity_arcs",
+              kind: "claim",
+              title: { text: "頂点単純閉路の各訪問頂点で内側セルと外側セルはそれぞれ一つの弧をなす" },
+              labels: ["claim_vertex_surrounding_cells_form_parity_arcs"],
+              habitat: "N",
+              verification: ["sagemath/check/vertex-surrounding-cells-parity-arcs"],
+              statement: [
+                paragraph([
+                  "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
+                  math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
+                  " で、通過の頂点が相異なる、すなわち ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
+                  "）である任意の閉じた非後退辺列 ",
+                  math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "（",
+                  ref("def_closed_nonbacktracking_walk"), "）を取る。任意の ",
+                  math(String.raw`j\in\{0,\ldots,m-1\}`), " について ",
+                  math(String.raw`P_j(\gamma)=(a,b)\in\mathbb Z\times\mathbb Z`), " と書き、この頂点に接する四セルを巡回順に",
+                ]),
+                displayMath(String.raw`C_0:=(a-1,b-1),\qquad C_1:=(a-1,b),\qquad
+C_2:=(a,b),\qquad C_3:=(a,b-1)`),
+                paragraph([
+                  "と置く。この四セルのうち内側セル（", ref("def_odd_ray_interior_cells"),
+                  "）は空でなく、巡回順の一つの連続した弧をなす。すなわち、ある ",
+                  math(String.raw`s\in\{0,1,2,3\}`), " と ", math(String.raw`q\in\{1,2,3\}`),
+                  " が存在し、内側セルはちょうど ",
+                  math(String.raw`C_s,C_{s+1},\ldots,C_{s+q-1}`),
+                  " である（添字は ", math(String.raw`4`), " を法として読む）。外側セルも空でなく、残りの一つの連続した弧をなす。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "持ち上げ点 ", math(String.raw`P_0(\gamma),\ldots,P_{m-1}(\gamma)`),
+                  " は二つずつ相異なる（", ref("claim_vertex_simple_plane_lift_points_distinct"),
+                  "）ので、", math(String.raw`P_j(\gamma)=(a,b)`),
+                  " を満たす一周期の添字は ", math(String.raw`j`), " だけである。したがって ",
+                  ref("claim_vertex_incident_edge_traversal_even"), " の右辺は ", math(String.raw`2`), " であり、",
+                ]),
+                displayMath(String.raw`V_{a-1,b}(\gamma)+H_{a,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)=2`),
+                paragraph([
+                  "である。この総和に現れる四辺は、訪問 ", math(String.raw`P_j(\gamma)`),
+                  " へ入る辺とそこから出る辺を含む。二辺は非後退性（", ref("def_closed_nonbacktracking_walk"),
+                  "）により相異なり、それぞれ少なくとも一度通過される。四つの通過回数は自然数で総和が ",
+                  math(String.raw`2`), " なので、この二辺の通過回数が ", math(String.raw`1`),
+                  "、残る二辺の通過回数が ", math(String.raw`0`), " である。ゆえに巡回順に並べた四辺",
+                ]),
+                displayMath(String.raw`\{(a-1,b),(a,b)\},\quad
+\{(a,b),(a,b+1)\},\quad
+\{(a,b),(a+1,b)\},\quad
+\{(a,b-1),(a,b)\}`),
+                paragraph([
+                  "のうち、閉路が奇数回通るものはちょうど二本である。ここではセルをその左下隅の座標で書いたので、",
+                  "これらは順に ", math(String.raw`C_0,C_1`), " の共有縦辺、",
+                  math(String.raw`C_1,C_2`), " の共有横辺、",
+                  math(String.raw`C_2,C_3`), " の共有縦辺、",
+                  math(String.raw`C_3,C_0`), " の共有横辺を表す。",
+                ]),
+                paragraph([
+                  "横に隣り合うセルでは ", ref("claim_adjacent_cells_ray_crossing_difference"),
+                  "、上下に隣り合うセルでは ", ref("claim_vertically_adjacent_cells_boundary_parity"),
+                  " により、共有辺の通過回数が奇数であることと、一方だけが内側であることは同値である。",
+                  "したがって巡回列 ", math(String.raw`C_0,C_1,C_2,C_3,C_0`),
+                  " では、内外の別がちょうど二回だけ変わる。最初の変化から二回目の変化までが一方の非空な弧、",
+                  "二回目の変化から最初の変化までが他方の非空な弧なので、内側セルと外側セルはそれぞれ主張の形の一つの弧をなす。",
+                  "使ったのは有限な四セルの巡回順・自然数の和・奇偶だけであり、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
         }],
       },
     },

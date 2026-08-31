@@ -48,11 +48,11 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
         String.raw`\begin{aligned}
 (-i)\cdot i
 &= -(i\cdot i)
-   \quad (\because \mathbb{C} \text{ の乗法と符号の計算}) \\
+&&(\because \mathbb{C} \text{ の乗法と符号の計算}) \\
 &= -(-1)
-   \quad (\because i\cdot i=-1) \\
+&&(\because i\cdot i=-1) \\
 &= 1
-   \quad (\because \mathbb{R} \text{ の符号の計算})
+&&(\because \mathbb{R} \text{ の符号の計算})
 \end{aligned}`,
       ),
       paragraph([
@@ -67,35 +67,35 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
         String.raw`\begin{aligned}
 \sigma^x\sigma^x
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-   \quad (\because \sigma^x \text{ の定義}) \\
+&&(\because \sigma^x \text{ の定義}) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix}
-   \quad (\because \text{行列の分解}) \\
+&&(\because \text{行列の分解}) \\
 &= I
-   \quad (\because I \text{ の定義})
+&&(\because I \text{ の定義})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^y\sigma^y
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-   \quad (\because \sigma^y \text{ の定義}) \\
+&&(\because \sigma^y \text{ の定義}) \\
 &= \begin{pmatrix}(-i)\cdot i&0\\0&i\cdot(-i)\end{pmatrix}
-   \quad (\because \text{行列の分解}) \\
+&&(\because \text{行列の分解}) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix}
-   \quad (\because \text{上の準備}) \\
+&&(\because \text{上の準備}) \\
 &= I
-   \quad (\because I \text{ の定義})
+&&(\because I \text{ の定義})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^z\sigma^z
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-   \quad (\because \sigma^z \text{ の定義}) \\
+&&(\because \sigma^z \text{ の定義}) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix}
-   \quad (\because \text{行列の分解}\ \text{と}\ (-1)\cdot(-1)=1) \\
+&&(\because \text{行列の分解}\ \text{と}\ (-1)\cdot(-1)=1) \\
 &= I
-   \quad (\because I \text{ の定義})
+&&(\because I \text{ の定義})
 \end{aligned}`,
       ),
       paragraph(["次に反可換性の 3 式について、"]),
@@ -103,66 +103,66 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
         String.raw`\begin{aligned}
 \sigma^z\sigma^x
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-   \quad (\because \sigma^z,\ \sigma^x \text{ の定義}) \\
+&&(\because \sigma^z,\ \sigma^x \text{ の定義}) \\
 &= \begin{pmatrix}0&1\\-1&0\end{pmatrix}
-   \quad (\because \text{行列の分解})
+&&(\because \text{行列の分解})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x\sigma^z
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-   \quad (\because \sigma^x,\ \sigma^z \text{ の定義}) \\
+&&(\because \sigma^x,\ \sigma^z \text{ の定義}) \\
 &= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
-   \quad (\because \text{行列の分解}) \\
+&&(\because \text{行列の分解}) \\
 &= -\begin{pmatrix}0&1\\-1&0\end{pmatrix}
-   \quad (\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
+&&(\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
 &= -\,\sigma^z\sigma^x
-   \quad (\because \text{上で計算した}\ \sigma^z\sigma^x)
+&&(\because \text{上で計算した}\ \sigma^z\sigma^x)
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^y\sigma^x
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-   \quad (\because \sigma^y,\ \sigma^x \text{ の定義}) \\
+&&(\because \sigma^y,\ \sigma^x \text{ の定義}) \\
 &= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
-   \quad (\because \text{行列の分解})
+&&(\because \text{行列の分解})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x\sigma^y
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-   \quad (\because \sigma^x,\ \sigma^y \text{ の定義}) \\
+&&(\because \sigma^x,\ \sigma^y \text{ の定義}) \\
 &= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
-   \quad (\because \text{行列の分解}) \\
+&&(\because \text{行列の分解}) \\
 &= -\begin{pmatrix}-i&0\\0&i\end{pmatrix}
-   \quad (\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
+&&(\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
 &= -\,\sigma^y\sigma^x
-   \quad (\because \text{上で計算した}\ \sigma^y\sigma^x)
+&&(\because \text{上で計算した}\ \sigma^y\sigma^x)
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^y\sigma^z
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-   \quad (\because \sigma^y,\ \sigma^z \text{ の定義}) \\
+&&(\because \sigma^y,\ \sigma^z \text{ の定義}) \\
 &= \begin{pmatrix}0&i\\i&0\end{pmatrix}
-   \quad (\because \text{行列の分解}\ \text{と}\ (-i)\cdot(-1)=i)
+&&(\because \text{行列の分解}\ \text{と}\ (-i)\cdot(-1)=i)
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-   \quad (\because \sigma^z,\ \sigma^y \text{ の定義}) \\
+&&(\because \sigma^z,\ \sigma^y \text{ の定義}) \\
 &= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
-   \quad (\because \text{行列の分解}\ \text{と}\ (-1)\cdot i=-i) \\
+&&(\because \text{行列の分解}\ \text{と}\ (-1)\cdot i=-i) \\
 &= -\begin{pmatrix}0&i\\i&0\end{pmatrix}
-   \quad (\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
+&&(\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
 &= -\,\sigma^y\sigma^z
-   \quad (\because \text{上で計算した}\ \sigma^y\sigma^z)
+&&(\because \text{上で計算した}\ \sigma^y\sigma^z)
 \end{aligned}`,
       ),
       paragraph([
