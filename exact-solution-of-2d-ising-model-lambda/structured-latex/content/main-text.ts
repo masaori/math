@@ -58099,6 +58099,149 @@ t_{\circ}(\gamma)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_periodic_plane_lift",
+        labels: [],
+        title: { text: "周期延長した平面持ち上げ" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_periodic_plane_lift_points_distinct",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_periodic_plane_lift",
+                kind: "definition",
+                title: { text: "周期延長した平面持ち上げ" },
+                labels: ["def_periodic_plane_lift"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"),
+                    "）について、任意の整数 ", math(String.raw`k\in\mathbb Z`),
+                    " を、整数の除法（商と余りの存在と一意性）により ",
+                    math(String.raw`k=qm+r`), "、", math(String.raw`q\in\mathbb Z`), "、",
+                    math(String.raw`r\in\{0,\ldots,m-1\}`),
+                    " とただ一通りに書く。**周期延長した平面持ち上げ**とは、",
+                    math(String.raw`k\in\mathbb Z`), " に整数の組 ",
+                    math(String.raw`\widetilde P_k(\gamma)\in\mathbb Z\times\mathbb Z`),
+                    " を対応させる写像",
+                  ]),
+                  displayMath(String.raw`\widetilde P_k(\gamma):=P_r(\gamma)+q\cdot\bigl(L\,w_{\mathrm v}(\gamma),\ L\,w_{\mathrm h}(\gamma)\bigr)`),
+                  paragraph([
+                    "である。持ち上げ点 ", math(String.raw`P_r(\gamma)`), " は ", ref("def_plane_lift"),
+                    "、整数巻き付き数 ", math(String.raw`w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)`),
+                    " は ", ref("def_directed_winding_numbers"),
+                    "、和と整数倍は ", math(String.raw`\mathbb Z\times\mathbb Z`),
+                    " の成分ごとの演算である。商 ", math(String.raw`q`), " と余り ",
+                    math(String.raw`r`), " が ", math(String.raw`k`),
+                    " からただ一通りに定まるので、この定義は well-defined である。とくに ",
+                    math(String.raw`k\in\{0,\ldots,m-1\}`), " では ",
+                    math(String.raw`q=0`), "、", math(String.raw`r=k`), " なので ",
+                    math(String.raw`\widetilde P_k(\gamma)=P_k(\gamma)`),
+                    " である。整数の組だけで閉じ、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_periodic_plane_lift_points_distinct",
+              kind: "claim",
+              title: { text: "非零巻き付きの頂点単純閉路の周期延長した持ち上げ点は相異なる" },
+              labels: ["claim_periodic_plane_lift_points_distinct"],
+              habitat: "Z",
+              verification: ["sagemath/check/periodic-plane-lift-distinct"],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）について、通過の頂点が相異なる、すなわち ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
+                  "）であり、かつ整数巻き付き数（", ref("def_directed_winding_numbers"), "）が",
+                ]),
+                displayMath(String.raw`\bigl(w_{\mathrm h}(\gamma),\,w_{\mathrm v}(\gamma)\bigr)\ne(0,0)`),
+                paragraph([
+                  "を満たすならば、周期延長した平面持ち上げ（", ref("def_periodic_plane_lift"),
+                  "）は単射である。すなわち、任意の ", math(String.raw`k,k'\in\mathbb Z`),
+                  " について、", math(String.raw`\widetilde P_k(\gamma)=\widetilde P_{k'}(\gamma)`),
+                  " ならば ", math(String.raw`k=k'`), " である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "整数の除法（商と余りの存在と一意性）により ",
+                  math(String.raw`k=qm+r`), "、", math(String.raw`k'=q'm+r'`), "（",
+                  math(String.raw`q,q'\in\mathbb Z`), "、",
+                  math(String.raw`r,r'\in\{0,\ldots,m-1\}`),
+                  "）と書き、", math(String.raw`\widetilde P_k(\gamma)=\widetilde P_{k'}(\gamma)`),
+                  " と仮定する。各時点に対応するトーラスの頂点を",
+                ]),
+                displayMath(String.raw`v_0:=\operatorname{src}(\vec e_1)=\operatorname{tgt}(\vec e_m),
+\qquad v_t:=\operatorname{tgt}(\vec e_t)\quad(1\le t\le m-1)`),
+                paragraph([
+                  "と置く。最初の等号は閉じていること（", ref("def_closed_nonbacktracking_walk"),
+                  "）から従う。", math(String.raw`v_t=(i_t,j_t)`), " と書く。",
+                  ref("def_plane_lift"), " と ", ref("claim_plane_lift_coordinates"),
+                  " により、各 ", math(String.raw`t\in\{0,1,\ldots,m-1\}`),
+                  " について、ある ", math(String.raw`a_t,b_t\in\mathbb Z`), " があり",
+                ]),
+                displayMath(String.raw`P_t(\gamma)=\bigl(s(i_t)+La_t,\ s(j_t)+Lb_t\bigr)`),
+                paragraph(["と書ける。まず ", math(String.raw`r=r'`), " を示す。第 1 成分について"]),
+                displayMath(String.raw`\begin{aligned}
+s(i_r)-s(i_{r'})
+&=L\bigl(a_{r'}-a_r\bigr)+L\,w_{\mathrm v}(\gamma)\bigl(q'-q\bigr)
+&&\bigl(\because\ \widetilde P_k(\gamma)=\widetilde P_{k'}(\gamma)\text{ の第 1 成分（}\blkref{def_periodic_plane_lift}\text{）と }\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  ref("def_residue_maps"), " により ", math(String.raw`0\le s(i_r),s(i_{r'})\le L-1`),
+                  " なので、左辺の絶対値は ", math(String.raw`L`), " より小さい。右辺は ",
+                  math(String.raw`L`), " の整数倍だから、両辺は ", math(String.raw`0`),
+                  " であり、", math(String.raw`s(i_r)=s(i_{r'})`), " となる。代表写像 ", math(String.raw`s`),
+                  " は剰余類ごとにただ一つの代表を取るので ", math(String.raw`i_r=i_{r'}`),
+                  " である。第 2 成分にも同じ計算を適用して ", math(String.raw`j_r=j_{r'}`),
+                  " を得る。従って ", math(String.raw`v_r=v_{r'}`), " である。",
+                ]),
+                paragraph([
+                  math(String.raw`v_0`), " は第 ", math(String.raw`m`), " 項の通過の頂点、",
+                  math(String.raw`v_t`), "（", math(String.raw`1\le t\le m-1`),
+                  "）は第 ", math(String.raw`t`), " 項の通過の頂点である（", ref("def_closed_walk_passes"),
+                  "）。もし ", math(String.raw`r\ne r'`),
+                  " なら、対応する二つの通過添字は相異なるので、", math(String.raw`v_r=v_{r'}`),
+                  " は接触対を与え、", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
+                  "（", ref("def_contact_pair_count"), "）に反する。ゆえに ",
+                  math(String.raw`r=r'`), " である。次に ", math(String.raw`q=q'`),
+                  " を示す。", math(String.raw`r=r'`), " なので",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+(0,0)
+&=\widetilde P_k(\gamma)-\widetilde P_{k'}(\gamma)
+&&\bigl(\because\ \widetilde P_k(\gamma)=\widetilde P_{k'}(\gamma)\text{ と }\mathbb Z\times\mathbb Z\text{ の減法}\bigr)\\
+&=\bigl(q-q'\bigr)\cdot\bigl(L\,w_{\mathrm v}(\gamma),\ L\,w_{\mathrm h}(\gamma)\bigr)
+&&\bigl(\because\ \blkref{def_periodic_plane_lift}\text{ の }r=r'\text{ の項の打ち消しと }\mathbb Z\text{ の分配法則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。もし ", math(String.raw`q\ne q'`), " なら、",
+                  math(String.raw`(q-q')L\,w_{\mathrm v}(\gamma)=0`), " かつ ",
+                  math(String.raw`(q-q')L\,w_{\mathrm h}(\gamma)=0`), " で、",
+                  math(String.raw`q-q'\ne0`), " と ", math(String.raw`L\ge1`),
+                  "（", ref("def_residue_maps"), "）と整数の積が零因子を持たないことから ",
+                  math(String.raw`w_{\mathrm v}(\gamma)=0`), " かつ ",
+                  math(String.raw`w_{\mathrm h}(\gamma)=0`),
+                  " となり、仮定 ", math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                  " に反する。ゆえに ", math(String.raw`q=q'`), " であり、",
+                  math(String.raw`k=qm+r=q'm+r'=k'`),
+                  " である。全過程は整数の除法・有限集合の相異なり・整数の四則だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
