@@ -417,6 +417,7 @@ export const ALL_LABELS = [
   "claim_two_is_square_in_real_closed",
   "claim_value_at_rational_is_positive",
   "claim_vertex_crossing_number_factorization",
+  "claim_vertex_incident_edge_traversal_even",
   "claim_vertex_simple_plane_lift_points_distinct",
   "claim_vertex_simple_winding_zero_or_primitive",
   "claim_vertically_adjacent_cells_boundary_parity",

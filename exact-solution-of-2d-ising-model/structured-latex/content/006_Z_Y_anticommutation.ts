@@ -235,9 +235,11 @@ Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
         " (1) より",
       ]),
       displayMath(
-        String.raw`(A_1\boxtimes\cdots\boxtimes A_M)(B_1\boxtimes\cdots\boxtimes B_M)
-= (A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)
-\quad (\because \text{クロネッカー積の積の規則})`,
+        String.raw`\begin{aligned}
+(A_1\boxtimes\cdots\boxtimes A_M)(B_1\boxtimes\cdots\boxtimes B_M)
+&= (A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)
+&&(\because\ \text{クロネッカー積の積の規則})
+\end{aligned}`,
       ),
       paragraph([
         "また ",
@@ -253,9 +255,11 @@ Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
         " に対し",
       ]),
       displayMath(
-        String.raw`C_1\boxtimes\cdots\boxtimes\overbrace{(c\,C_j)}^{j\text{th}}\boxtimes\cdots\boxtimes C_M
-= c\,\left(C_1\boxtimes\cdots\boxtimes C_M\right)
-\quad (\because \text{クロネッカー積の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性})`,
+        String.raw`\begin{aligned}
+C_1\boxtimes\cdots\boxtimes\overbrace{(c\,C_j)}^{j\text{th}}\boxtimes\cdots\boxtimes C_M
+&= c\,\left(C_1\boxtimes\cdots\boxtimes C_M\right)
+&&(\because\ \text{クロネッカー積の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性})
+\end{aligned}`,
       ),
       paragraph([
         "が成り立つ。準備は以上である。以下、この 2 つを ",

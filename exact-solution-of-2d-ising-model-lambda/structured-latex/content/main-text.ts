@@ -56633,6 +56633,89 @@ V_{r,g}(\gamma)
               ],
             },
           },
+        }, {
+          role: "supporting",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_vertex_incident_edge_traversal_even",
+            focus: {
+              id: "kac_ward_claim_vertex_incident_edge_traversal_even",
+              kind: "claim",
+              title: { text: "格子頂点に接する四辺の通過回数の総和は頂点の通過数の二倍である" },
+              labels: ["claim_vertex_incident_edge_traversal_even"],
+              habitat: "N",
+              verification: ["sagemath/check/vertex-incident-edge-traversal-even"],
+              statement: [
+                paragraph([
+                  "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
+                  math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
+                  " である任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）と任意の格子点 ",
+                  math(String.raw`(a,b)\in\mathbb Z\times\mathbb Z`), " について、",
+                  math(String.raw`\mathbb N`), " の等式",
+                ]),
+                displayMath(String.raw`V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
+=2\cdot\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=(a,b)\right\}\right|`),
+                paragraph([
+                  "が成り立つ（縦辺の通過回数は ", ref("def_vertical_edge_traversal_count"),
+                  "、横辺の通過回数は ", ref("def_horizontal_edge_traversal_count"),
+                  "、持ち上げは ", ref("def_plane_lift"),
+                  "）。左辺は格子点 ", math(String.raw`(a,b)`),
+                  " を端点に持つ四本の単位辺の通過回数の総和である。とくに左辺は偶数なので、",
+                  math(String.raw`(a,b)`), " に接する四辺のうち通過回数が奇数のものの本数は偶数（",
+                  math(String.raw`0,2,4`), " のいずれか）である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "格子点を ", math(String.raw`Q:=(a,b)`), " と書き、",
+                  math(String.raw`Q`), " に触れる番号の集合を",
+                ]),
+                displayMath(String.raw`T:=\left\{k\in\{1,\ldots,m\}\ \middle|\ Q\in\{P_{k-1}(\gamma),P_k(\gamma)\}\right\}`),
+                paragraph([
+                  "と置く。準備として、各番号 ", math(String.raw`k\in\{1,\ldots,m\}`),
+                  " の変位 ", math(String.raw`P_k(\gamma)-P_{k-1}(\gamma)`),
+                  " は方向単位ベクトル、すなわち ",
+                  math(String.raw`(0,1),(0,-1),(1,0),(-1,0)`),
+                  " のいずれかである（", ref("def_plane_lift"), " の漸化式と ",
+                  ref("claim_displacement_is_direction_unit"), "）。したがって第一に ",
+                  math(String.raw`P_{k-1}(\gamma)\ne P_k(\gamma)`),
+                  " である。第二に ", math(String.raw`k\in T`),
+                  " なら、", math(String.raw`Q`), " でない側の端点は ", math(String.raw`Q`),
+                  " に変位を足すか引くかした点なので、二元集合 ",
+                  math(String.raw`\{P_{k-1}(\gamma),P_k(\gamma)\}`), " は四つの単位辺",
+                ]),
+                displayMath(String.raw`\{(a-1,b),(a,b)\},\qquad\{(a,b),(a+1,b)\},\qquad
+\{(a,b-1),(a,b)\},\qquad\{(a,b),(a,b+1)\}`),
+                paragraph([
+                  "のいずれか一つに一致する。この四つは二元集合として二つずつ相異なる（",
+                  math(String.raw`Q`), " でない側の端点が四つとも異なる）ので、",
+                  math(String.raw`T`), " は四つの単位辺への一致で互いに素な四つの部分集合に分割される。ゆえに",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
+&=|T|
+&&\bigl(\because\ \blkref{def_vertical_edge_traversal_count}\text{、}\blkref{def_horizontal_edge_traversal_count}\text{、上の互いに素な分割}\bigr)\\
+&=\left|\left\{k\in\{1,\ldots,m\}\ \middle|\ P_{k-1}(\gamma)=Q\right\}\right|
++\left|\left\{k\in\{1,\ldots,m\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
+&&\bigl(\because\ P_{k-1}(\gamma)\ne P_k(\gamma)\text{ なので }Q\text{ は高々一方の端点。二つの集合は互いに素に }T\text{ を覆う}\bigr)\\
+&=\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
++\left|\left\{k\in\{1,\ldots,m\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
+&&\bigl(\because\ \text{添字の置き換え }k\mapsto k-1\bigr)\\
+&=\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
++\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
+&&\bigl(\because\ P_m(\gamma)=P_0(\gamma)\text{（}\blkref{claim_plane_lift_endpoint_winding}\text{ と零巻き付き）による端の付け替え}\bigr)\\
+&=2\cdot\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。右辺は自然数の二倍なので偶数であり、四つの通過回数のうち奇数のものの本数は偶数である",
+                  "（奇数の項が奇数本なら総和が奇数になり矛盾する）。",
+                  "使ったのは有限集合の分割と数え上げ・整数の偶奇だけであり、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
         }],
       },
     },
