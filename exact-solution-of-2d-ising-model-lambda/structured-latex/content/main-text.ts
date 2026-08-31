@@ -58933,6 +58933,91 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_iterated_staircase_parallel_width",
+        labels: [],
+        title: { text: "反復横断階段の平行座標の幅" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_iterated_staircase_parallel_width_bound",
+            focus: {
+              id: "kac_ward_claim_iterated_staircase_parallel_width_bound",
+              kind: "claim",
+              title: { text: "反復横断階段の平行座標は基点から幅以内に収まる" },
+              labels: ["claim_iterated_staircase_parallel_width_bound"],
+              habitat: "Z",
+              verification: ["sagemath/check/iterated-staircase-parallel-width"],
+              statement: [
+                paragraph([
+                  "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                  ref("def_directed_winding_numbers"), "）が ",
+                  math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                  " を満たすとし、", math(String.raw`A:=w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\in\mathbb Z`),
+                  " と置く。基点 ", math(String.raw`Q\in\mathbb Z\times\mathbb Z`),
+                  "、反復回数 ", math(String.raw`t\in\mathbb N`), "、", math(String.raw`t\ge1`),
+                  " の反復横断階段（", ref("def_iterated_transverse_staircase"),
+                  "）について、任意の ", math(String.raw`s\in\{0,\ldots,t\,n_{\perp}\}`),
+                  " に対し平行座標（", ref("def_winding_parallel_coordinate"), "）は",
+                ]),
+                displayMath(String.raw`\min\{0,A\}\ \le\ \pi_{\gamma}(D^{\gamma,Q,t}_s)-\pi_{\gamma}(Q)\ \le\ \max\{0,A\}`),
+                paragraph(["を満たす。"]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`s=q\,n_{\perp}+r`), "（", math(String.raw`q\in\mathbb N`), "、",
+                  math(String.raw`r\in\{0,\ldots,n_{\perp}-1\}`), "）を整数の除法の表示とする。横断移動ベクトルの平行座標は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\pi_{\gamma}\bigl(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma)\bigr)
+&=w_{\mathrm v}(\gamma)w_{\mathrm h}(\gamma)-w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)
+&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+\end{aligned}`),
+                paragraph(["したがって反復横断階段の平行座標は"]),
+                displayMath(String.raw`\begin{aligned}
+\pi_{\gamma}(D^{\gamma,Q,t}_s)-\pi_{\gamma}(Q)
+&=\pi_{\gamma}(C^{\gamma}_r)
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\text{、直前の等式と }\blkref{def_winding_parallel_coordinate}\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`0\le r\le H`), " の場合と ", math(String.raw`H<r\le H+V=n_{\perp}`),
+                  " の場合に横断階段の定義を読むと、それぞれ",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\pi_{\gamma}(C^{\gamma}_r)
+&=w_{\mathrm v}(\gamma)\varepsilon(w_{\mathrm h}(\gamma))r
+&&\bigl(\because\ 0\le r\le H\text{ と }\blkref{def_winding_transverse_staircase}\text{、}\blkref{def_winding_parallel_coordinate}\bigr),\\
+\pi_{\gamma}(C^{\gamma}_r)
+&=A-w_{\mathrm h}(\gamma)\varepsilon(w_{\mathrm v}(\gamma))(r-H)
+&&\bigl(\because\ H<r\le H+V\text{ と }\blkref{def_winding_transverse_staircase}\text{、}\blkref{def_winding_parallel_coordinate}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "第一の列は ", math(String.raw`r=0`), " で ", math(String.raw`0`), "、",
+                  math(String.raw`r=H`), " で ", math(String.raw`A`), " となり、その間を整数の一定符号の増分で進む。",
+                  "第二の列は ", math(String.raw`r=H`), " で ", math(String.raw`A`), "、",
+                  math(String.raw`r=H+V`), " で ", math(String.raw`0`), " となり、その間を整数の一定符号の増分で進む。よって二場合のいずれでも",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\min\{0,A\}\ \le\ \pi_{\gamma}(C^{\gamma}_r)\ \le\ \max\{0,A\}
+&&\bigl(\because\ \text{直前の二表示と }\varepsilon\text{ の三場合の定義、}\mathbb Z\text{ の順序}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "であり、先の等式 ", math(String.raw`\pi_{\gamma}(D^{\gamma,Q,t}_s)-\pi_{\gamma}(Q)=\pi_{\gamma}(C^{\gamma}_r)`),
+                  " と合わせて主張の不等式を得る。全過程は整数の除法・四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_period_translates_of_iterated_staircase",
         labels: [],
         title: { text: "反復横断階段とその周期並進の分離" },
@@ -58965,50 +59050,18 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
               ],
               proof: [
                 paragraph([
-                  math(String.raw`s=q\,n_{\perp}+r`), "（", math(String.raw`q\in\mathbb N`), "、",
-                  math(String.raw`r\in\{0,\ldots,n_{\perp}-1\}`), "）を整数の除法の表示とする。横断移動ベクトルの平行座標は",
+                  math(String.raw`A:=w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\in\mathbb Z`),
+                  " と置く。任意の ", math(String.raw`s,s'\in\{0,\ldots,t\,n_{\perp}\}`),
+                  " について、平行座標の幅の上界（", ref("claim_iterated_staircase_parallel_width_bound"), "）から",
                 ]),
-                displayMath(String.raw`\begin{aligned}
-\pi_{\gamma}\bigl(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma)\bigr)
-&=w_{\mathrm v}(\gamma)w_{\mathrm h}(\gamma)-w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)
-&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\bigr)\\
-&=0
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
-\end{aligned}`),
-                paragraph(["したがって反復横断階段の平行座標は"]),
-                displayMath(String.raw`\begin{aligned}
-\pi_{\gamma}(D^{\gamma,Q,t}_s)-\pi_{\gamma}(Q)
-&=\pi_{\gamma}(C^{\gamma}_r)
-&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\text{、直前の等式と }\blkref{def_winding_parallel_coordinate}\bigr).
-\end{aligned}`),
-                paragraph([
-                  math(String.raw`A:=w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\in\mathbb Z`), " と置く。",
-                  math(String.raw`0\le r\le H`), " の場合と ", math(String.raw`H<r\le H+V=n_{\perp}`),
-                  " の場合に横断階段の定義を読むと、それぞれ",
-                ]),
-                displayMath(String.raw`\begin{aligned}
-\pi_{\gamma}(C^{\gamma}_r)
-&=w_{\mathrm v}(\gamma)\varepsilon(w_{\mathrm h}(\gamma))r
-&&\bigl(\because\ 0\le r\le H\text{ と }\blkref{def_winding_transverse_staircase}\text{、}\blkref{def_winding_parallel_coordinate}\bigr),\\
-\pi_{\gamma}(C^{\gamma}_r)
-&=A-w_{\mathrm h}(\gamma)\varepsilon(w_{\mathrm v}(\gamma))(r-H)
-&&\bigl(\because\ H<r\le H+V\text{ と }\blkref{def_winding_transverse_staircase}\text{、}\blkref{def_winding_parallel_coordinate}\bigr).
-\end{aligned}`),
-                paragraph([
-                  "第一の列は ", math(String.raw`r=0`), " で ", math(String.raw`0`), "、",
-                  math(String.raw`r=H`), " で ", math(String.raw`A`), " となり、その間を整数の一定符号の増分で進む。",
-                  "第二の列は ", math(String.raw`r=H`), " で ", math(String.raw`A`), "、",
-                  math(String.raw`r=H+V`), " で ", math(String.raw`0`), " となり、その間を整数の一定符号の増分で進む。よって二場合のいずれでも",
-                ]),
-                displayMath(String.raw`\begin{aligned}
-\min\{0,A\}\ \le\ \pi_{\gamma}(C^{\gamma}_r)\ \le\ \max\{0,A\}
-&&\bigl(\because\ \text{直前の二表示と }\varepsilon\text{ の三場合の定義、}\mathbb Z\text{ の順序}\bigr).
-\end{aligned}`),
-                paragraph(["であり、任意の ", math(String.raw`s,s'\in\{0,\ldots,t\,n_{\perp}\}`), " について"]),
                 displayMath(String.raw`\begin{aligned}
 \left|\pi_{\gamma}(D^{\gamma,Q,t}_s)-\pi_{\gamma}(D^{\gamma,Q,t}_{s'})\right|
-&\le |A|
-&&\bigl(\because\ \text{両値が }\min\{0,A\}\text{ と }\max\{0,A\}\text{ の間にある}\bigr).
+&=\left|\bigl(\pi_{\gamma}(D^{\gamma,Q,t}_s)-\pi_{\gamma}(Q)\bigr)-\bigl(\pi_{\gamma}(D^{\gamma,Q,t}_{s'})-\pi_{\gamma}(Q)\bigr)\right|
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&\le \max\{0,A\}-\min\{0,A\}
+&&\bigl(\because\ \blkref{claim_iterated_staircase_parallel_width_bound}\text{ の両値が同じ区間に入ることと }\mathbb Z\text{ の順序}\bigr)\\
+&=|A|
+&&\bigl(\because\ \mathbb Z\text{ の四則と絶対値の定義}\bigr).
 \end{aligned}`),
                 paragraph(["を得る。周期並進一回の平行座標の増分を"]),
                 displayMath(String.raw`B:=L\bigl(w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2\bigr)\in\mathbb N`),
@@ -59038,6 +59091,84 @@ B
                 paragraph([
                   "となり、先に得た上界に反する。したがって二点は異なる。",
                   "全過程は整数の除法・絶対値・四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_parallel_separated_staircases",
+        labels: [],
+        title: { text: "平行座標が離れた二つの反復横断階段の分離" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_parallel_separated_staircases_disjoint",
+            focus: {
+              id: "kac_ward_claim_parallel_separated_staircases_disjoint",
+              kind: "claim",
+              title: { text: "基点の平行座標が幅を超えて離れた二つの反復横断階段は交わらない" },
+              labels: ["claim_parallel_separated_staircases_disjoint"],
+              habitat: "Z",
+              verification: ["sagemath/check/parallel-separated-staircases"],
+              statement: [
+                paragraph([
+                  "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                  ref("def_directed_winding_numbers"), "）が ",
+                  math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                  " を満たすとし、", math(String.raw`A:=w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\in\mathbb Z`),
+                  " と置く。二つの基点 ", math(String.raw`Q,Q'\in\mathbb Z\times\mathbb Z`),
+                  " と二つの反復回数 ", math(String.raw`t,t'\in\mathbb N`), "、",
+                  math(String.raw`t\ge1`), "、", math(String.raw`t'\ge1`),
+                  " が、平行座標（", ref("def_winding_parallel_coordinate"), "）について",
+                ]),
+                displayMath(String.raw`\left|\pi_{\gamma}(Q)-\pi_{\gamma}(Q')\right|\ >\ |A|`),
+                paragraph([
+                  "を満たすとする。このとき、任意の ",
+                  math(String.raw`s\in\{0,\ldots,t\,n_{\perp}\}`), " と任意の ",
+                  math(String.raw`s'\in\{0,\ldots,t'\,n_{\perp}\}`), " について、二つの反復横断階段（",
+                  ref("def_iterated_transverse_staircase"), "）の頂点は",
+                ]),
+                displayMath(String.raw`D^{\gamma,Q,t}_s\ \ne\ D^{\gamma,Q',t'}_{s'}`),
+                paragraph(["を満たす。すなわち二つの反復横断階段の頂点集合は交わらない。"]),
+              ],
+              proof: [
+                paragraph([
+                  "ある ", math(String.raw`s\in\{0,\ldots,t\,n_{\perp}\}`), " と ",
+                  math(String.raw`s'\in\{0,\ldots,t'\,n_{\perp}\}`), " について ",
+                  math(String.raw`D^{\gamma,Q,t}_s=D^{\gamma,Q',t'}_{s'}`),
+                  " と仮定する。平行座標を取ると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\pi_{\gamma}(Q)-\pi_{\gamma}(Q')
+&=\bigl(\pi_{\gamma}(D^{\gamma,Q',t'}_{s'})-\pi_{\gamma}(Q')\bigr)-\bigl(\pi_{\gamma}(D^{\gamma,Q,t}_s)-\pi_{\gamma}(Q)\bigr)
+&&\bigl(\because\ \text{仮定した点の等式で }\pi_{\gamma}(D^{\gamma,Q,t}_s)=\pi_{\gamma}(D^{\gamma,Q',t'}_{s'})\text{、}\mathbb Z\text{ の四則}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "右辺の二つの括弧はいずれも平行座標の幅の上界（",
+                  ref("claim_iterated_staircase_parallel_width_bound"),
+                  "）により ", math(String.raw`\min\{0,A\}`), " と ", math(String.raw`\max\{0,A\}`),
+                  " の間に入るので、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\left|\pi_{\gamma}(Q)-\pi_{\gamma}(Q')\right|
+&\le \max\{0,A\}-\min\{0,A\}
+&&\bigl(\because\ \blkref{claim_iterated_staircase_parallel_width_bound}\text{ と }\mathbb Z\text{ の順序}\bigr)\\
+&=|A|
+&&\bigl(\because\ \mathbb Z\text{ の四則と絶対値の定義}\bigr),
+\end{aligned}`),
+                paragraph([
+                  "となり、仮定した分離 ",
+                  math(String.raw`\left|\pi_{\gamma}(Q)-\pi_{\gamma}(Q')\right|>|A|`),
+                  " に反する。したがって二点は異なる。",
+                  "全過程は整数の四則・絶対値・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
                 ]),
               ],
             },

@@ -1,5 +1,12 @@
 # 自動ループ 記録の保管庫
 
+## 2026-09-01 の 54 回目の tick で台帳から移した記録（2026-09-01 の 49 回目）
+
+- 現在地: 非零巻き付き $(w_{\mathrm h},w_{\mathrm v})$ を正に横切る単純な整数格子階段 $C^\gamma$（行方向へ $|w_{\mathrm h}|$ 歩、列方向へ $|w_{\mathrm v}|$ 歩）を定義し（`def_winding_transverse_staircase`）、各差が単位格子ベクトルで横断座標 $\kappa_\gamma$ を真に増やすため全頂点が相異なることを証明した（`claim_winding_transverse_staircase_step_increase`）。SageMath は非零巻き付きの頂点単純閉路 3,464 本・横断階段 5,008 歩を検査した。Lean は未着手だった。
+- 前進記録: 「閉包路の構成と単純性」を横断階段の構成／帯外への反復／単純閉路の合成へ割り直し、最初の部品を進めた。
+- 式変形の統一: 姉妹側の「クロネッカー積」の定義ブロックで、五本の鎖の根拠 20 行を行中の `\quad (\because …)` から行末の根拠列へ揃えた。
+- レビュー記録: 前 tick の `def_winding_parallel_coordinate` と `claim_periodic_plane_lift_parallel_period_increase` を本文・SageMath 123,960 比較・次の閉包の論法で照合し、姉妹側の「$c\cdot I$ は全行列と可換」の四段も差分で照合して不一致が無いことを確認した。
+
 ## 2026-09-01 の 53 回目の tick で台帳から移した記録（2026-09-01 の 48 回目）
 
 - 現在地: 巻き付きベクトルに平行な整数座標 $\pi_{\gamma}(a,b)=w_{\mathrm v}(\gamma)a+w_{\mathrm h}(\gamma)b$ を定義し、周期並進が平行座標を正の定数 $L(w_{\mathrm v}^2+w_{\mathrm h}^2)\ge1$ だけ増やすことを本文と SageMath で固定した（`claim_periodic_plane_lift_parallel_period_increase`）。SageMath は非零巻き付きの頂点単純閉路 3,464 本・一周期ずらし 123,960 比較を検査した。Lean は未着手だった。
