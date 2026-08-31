@@ -132,12 +132,16 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}(AB)
-&= \sum_{k=1}^{n} (AB)_{kk} \quad (\because \text{トレースの定義}) \\
-&= \sum_{k=1}^{n}\sum_{j=1}^{n} A_{kj}B_{jk} \quad (\because \text{積の定義}) \\
+&= \sum_{k=1}^{n} (AB)_{kk}
+&&(\because \text{トレースの定義}) \\
+&= \sum_{k=1}^{n}\sum_{j=1}^{n} A_{kj}B_{jk}
+&&(\because \text{積の定義}) \\
 &= \sum_{j=1}^{n}\sum_{k=1}^{n} B_{jk}A_{kj}
-   \quad (\because \text{有限和の順序交換と } \mathbb{C} \text{ の積の可換性}) \\
-&= \sum_{j=1}^{n} (BA)_{jj} \quad (\because \text{積の定義}) \\
-&= \mathrm{tr}(BA) \quad (\because \text{トレースの定義})
+&&(\because \text{有限和の順序交換と } \mathbb{C} \text{ の積の可換性}) \\
+&= \sum_{j=1}^{n} (BA)_{jj}
+&&(\because \text{積の定義}) \\
+&= \mathrm{tr}(BA)
+&&(\because \text{トレースの定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -164,11 +168,16 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}(PAP^{-1})
-&= \mathrm{tr}\bigl((PA)P^{-1}\bigr) \quad (\because \text{行列の積の結合法則}) \\
-&= \mathrm{tr}\bigl(P^{-1}(PA)\bigr) \quad (\because \text{(2) 巡回性}) \\
-&= \mathrm{tr}\bigl((P^{-1}P)A\bigr) \quad (\because \text{行列の積の結合法則}) \\
-&= \mathrm{tr}(I_n A) \quad (\because \text{逆行列の定義 } P^{-1}P = I_n) \\
-&= \mathrm{tr}(A) \quad (\because \text{単位行列との積})
+&= \mathrm{tr}\bigl((PA)P^{-1}\bigr)
+&&(\because \text{行列の積の結合法則}) \\
+&= \mathrm{tr}\bigl(P^{-1}(PA)\bigr)
+&&(\because \text{(2) 巡回性}) \\
+&= \mathrm{tr}\bigl((P^{-1}P)A\bigr)
+&&(\because \text{行列の積の結合法則}) \\
+&= \mathrm{tr}(I_n A)
+&&(\because \text{逆行列の定義 } P^{-1}P = I_n) \\
+&= \mathrm{tr}(A)
+&&(\because \text{単位行列との積})
 \end{aligned}`,
       ),
     ],
@@ -176,6 +185,7 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
       status: "added",
       notes: [
         "本文はこれまでトレースを定義せずに使っていなかった（008 章までに tr は現れない）。本章で初めて必要になるため、定義と必要な性質だけをここで書き下した。",
+        "2026-08-31 の式変形統一で、二本の鎖に行中の \\quad(\\because …) で置かれていた根拠 10 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・参照は変えていない。",
       ],
     },
   },
