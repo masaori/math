@@ -603,12 +603,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         math(String.raw`y_{kl}\cdot 0=0`),
         " であるから、和は ",
         math(String.raw`y_{ij}`),
-        " に等しい。また ",
-        ref("def_matrix_norm"),
-        " より ",
-        math(String.raw`\left\|E^{(k,l)}\right\|=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}=1`),
-        "。",
+        " に等しい。また ", ref("def_matrix_norm"), " より",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\left\|E^{(k,l)}\right\|
+&=\sqrt{1}^{\,(\mathbb{R}_{\ge 0})}
+&&\left(\because\ \text{行列ノルムの定義と }E^{(k,l)}\text{ の成分の定義}\right)\\
+&=1
+&&\left(\because\ \mathbb{R}_{\ge0}\text{ における }1\text{ の非負平方根}\right).
+\end{aligned}`),
       paragraph([
         "Step 5: (2a)。",
         math(String.raw`\Phi`),

@@ -55005,6 +55005,87 @@ n_{\mathrm{ct}}(\gamma_A)
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_directed_winding_numbers",
+        labels: [],
+        title: { text: "閉歩道の整数巻き付き数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_directed_winding_parity",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_directed_winding_numbers",
+                kind: "definition",
+                title: { text: "閉歩道の向き付き切断線横断数" },
+                labels: ["def_directed_winding_numbers"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    " の各項を ", math(String.raw`\vec e_k=(e_k,d_k)`), " と書く（",
+                    ref("def_closed_nonbacktracking_walk"), "、", ref("def_oriented_edges"), "）。",
+                    "横向き・縦向きの整数巻き付き数を",
+                  ]),
+                  displayMath(String.raw`w_{\mathrm h}(\gamma):=\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)(1-2d_k),
+\qquad
+w_{\mathrm v}(\gamma):=\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)(1-2d_k)\quad\text{in }\mathbb Z`),
+                  paragraph([
+                    "で定める。切断線指示値は ", ref("def_seam_parities"), " の ",
+                    math(String.raw`c_{\mathrm h},c_{\mathrm v}\in\{0,1\}`),
+                    " である。因子 ", math(String.raw`1-2d_k`), " は正向きなら ",
+                    math(String.raw`1`), "、反転した向きなら ", math(String.raw`-1`),
+                    " なので、値は正向きの横断回数から逆向きの横断回数を引いた整数である。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_directed_winding_parity",
+              kind: "claim",
+              title: { text: "整数巻き付き数の偶奇は切断線偶奇に等しい" },
+              labels: ["claim_directed_winding_parity"],
+              habitat: "Z",
+              verification: ["sagemath/check/directed-winding-parity"],
+              statement: [
+                displayMath(String.raw`w_{\mathrm h}(\gamma)\bmod2=h(\gamma),
+\qquad
+w_{\mathrm v}(\gamma)\bmod2=v(\gamma)`),
+                paragraph([
+                  "が任意の閉じた非後退辺列 ", math(String.raw`\gamma`), " について成り立つ。",
+                  "右辺は ", ref("def_edge_sequence_seam_parities"), " の切断線偶奇である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`d_k\in\{0,1\}`), " により ",
+                  math(String.raw`1-2d_k\equiv1\pmod2`), " である。従って横向きについて",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+w_{\mathrm h}(\gamma)\bmod2
+&=\left(\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)(1-2d_k)\right)\bmod2
+&&\bigl(\because\ \blkref{def_directed_winding_numbers}\bigr)\\
+&=\left(\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)\right)\bmod2
+&&\bigl(\because\ 1-2d_k\equiv1\pmod2\text{ と法 }2\text{ の有限和}\bigr)\\
+&=h(\gamma)
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "縦向きも ", math(String.raw`c_{\mathrm v}`), " を用いた同じ三行で従う。",
+                  "これは整数の合同と有限和だけの主張であり、実数体も複素数体も現れない。",
+                  "後続では平面への持ち上げの整数変位から既存の四つの巻き付きセクターを読み戻すために使う。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
