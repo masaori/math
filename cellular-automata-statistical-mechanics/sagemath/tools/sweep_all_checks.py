@@ -126,7 +126,7 @@ def worker_main(args):
     out.close()
 
 
-def summarize_results(files, outdir, jobs, codes):
+def summarize_results(files, outdir, jobs, codes, timeout):
     records = []
     malformed = []
     for w in range(jobs):
@@ -175,6 +175,20 @@ def summarize_results(files, outdir, jobs, codes):
 
     print('status counts: {}'.format(counts), flush=True)
     print('completed unique files: {}/{}'.format(len(by_index), len(files)), flush=True)
+
+    # 打ち切り時間に対する余裕を毎回残す。余裕が小さい検算は、機械の負荷が上がった回だけ
+    # TIMEOUT になり、掃引の結果が回ごとに揺れる。揺れを検算の失敗と読み違えないため、
+    # 上位の所要時間と余裕の倍率を常に出力する。
+    slowest = sorted(
+        (found[0] for found in by_index.values() if len(found) == 1),
+        key=lambda record: -record.get('seconds', 0),
+    )[:10]
+    print('slowest checks (limit {} s):'.format(timeout), flush=True)
+    for record in slowest:
+        seconds = record.get('seconds', 0)
+        margin = (timeout / seconds) if seconds > 0 else float('inf')
+        print('  {:8.2f} s  x{:5.2f} margin  {}  {}'.format(
+            seconds, margin, record['status'], record['file']), flush=True)
     for record in sorted(non_pass, key=lambda item: item['index']):
         print('{}: {} ({})'.format(
             record['status'], record['file'], record.get('detail', '')), flush=True)
@@ -231,7 +245,7 @@ def driver_main(args):
         codes.append(proc.wait())
         log.close()
     print('worker exit codes: {}'.format(codes), flush=True)
-    if not summarize_results(files, outdir, args.jobs, codes):
+    if not summarize_results(files, outdir, args.jobs, codes, args.timeout):
         raise SystemExit(1)
 
 
