@@ -386,13 +386,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \sum_{(t_1,\dots,t_{M+1})\in\mathcal{I}_{M+1}}\prod_{k=1}^{M+1}c_k(t_k)
 &= \sum_{t=1}^{2}\sum_{K\in\mathcal{I}_M}\left(\prod_{k=1}^{M}c_k(t_k)\right)c_{M+1}(t)
-\quad (\because \text{最後の成分 } t_{M+1}=t \text{ で場合分けした有限和の分割}) \\
+   &&(\because \text{最後の成分 } t_{M+1}=t \text{ で場合分けした有限和の分割}) \\
 &= \left(\sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}c_k(t_k)\right)\left(\sum_{t=1}^{2}c_{M+1}(t)\right)
-\quad (\because \text{分配律}) \\
+   &&(\because \text{分配律}) \\
 &= \left(\prod_{k=1}^{M}\left(\sum_{s=1}^{2}c_k(s)\right)\right)\left(\sum_{t=1}^{2}c_{M+1}(t)\right)
-\quad (\because \text{帰納法の仮定}) \\
+   &&(\because \text{帰納法の仮定}) \\
 &= \prod_{k=1}^{M+1}\left(\sum_{t=1}^{2}c_k(t)\right)
-\quad (\because \text{有限積の最後の因子を戻した（積の定義）})
+   &&(\because \text{有限積の最後の因子を戻した（積の定義）})
 \end{aligned}`,
       ),
       paragraph([
@@ -414,18 +414,18 @@ export default defineBlocks([
 &= \sum_{p=1}^{2^M}
 \left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),p}
 \left(B_1\boxtimes\cdots\boxtimes B_M\right)_{p,\nu(L)}
-\quad (\because \text{行列の積の定義}) \\
+   &&(\because \text{行列の積の定義}) \\
 &= \sum_{K\in\mathcal{I}_M}
 \left(\prod_{k=1}^{M}(A_k)_{i_kt_k}\right)\left(\prod_{k=1}^{M}(B_k)_{t_kl_k}\right)
-\quad (\because \nu \text{ は全単射、} \boxtimes \text{ の定義}) \\
+   &&(\because \nu \text{ は全単射、} \boxtimes \text{ の定義}) \\
 &= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(B_k)_{t_kl_k}\right)
-\quad (\because \text{複素数の積の可換律・結合律}) \\
+   &&(\because \text{複素数の積の可換律・結合律}) \\
 &= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(B_k)_{tl_k}\right)
-\quad (\because \text{多重添字の和を各因子ごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(B_k)_{tl_k} \text{ に適用}) \\
+   &&(\because \text{多重添字の和を各因子ごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(B_k)_{tl_k} \text{ に適用}) \\
 &= \prod_{k=1}^{M}(A_kB_k)_{i_kl_k}
-\quad (\because \text{行列の積の定義}) \\
+   &&(\because \text{行列の積の定義}) \\
 &= \left((A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)\right)_{\nu(I),\nu(L)}
-\quad (\because \boxtimes \text{ の定義})
+   &&(\because \boxtimes \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -449,11 +449,11 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left(I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}\right)_{\nu(I),\nu(J)}
 &= \prod_{k=1}^{M}\delta_{i_kj_k}
-\quad (\because \boxtimes \text{ の定義と単位行列の成分}) \\
+   &&(\because \boxtimes \text{ の定義と単位行列の成分}) \\
 &= \begin{cases}1 & (I=J)\\ 0 & (I\neq J)\end{cases}
-\quad (\because \text{積が } 1 \text{ になるのは全ての } k \text{ で } i_k=j_k \text{、すなわち } I=J \text{ のときに限り、そうでなければ因子に } 0 \text{ が現れる}) \\
+   &&(\because \text{積が } 1 \text{ になるのは全ての } k \text{ で } i_k=j_k \text{、すなわち } I=J \text{ のときに限り、そうでなければ因子に } 0 \text{ が現れる}) \\
 &= \left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)_{\nu(I),\nu(J)}
-\quad (\because \nu \text{ は単射なので } I=J \iff \nu(I)=\nu(J) \text{、および単位行列の成分})
+   &&(\because \nu \text{ は単射なので } I=J \iff \nu(I)=\nu(J) \text{、および単位行列の成分})
 \end{aligned}`,
       ),
       paragraph([
@@ -468,18 +468,18 @@ export default defineBlocks([
 \left(\left(A_1\boxtimes\cdots\boxtimes A_M\right)\left(v_1\boxtimes\cdots\boxtimes v_M\right)\right)_{\nu(I)}
 &= \sum_{p=1}^{2^M}\left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),p}
 \left(v_1\boxtimes\cdots\boxtimes v_M\right)_{p}
-\quad (\because \text{行列と数ベクトルの積の定義}) \\
+   &&(\because \text{行列と数ベクトルの積の定義}) \\
 &= \sum_{K\in\mathcal{I}_M}
 \left(\prod_{k=1}^{M}(A_k)_{i_kt_k}\right)\left(\prod_{k=1}^{M}(v_k)_{t_k}\right)
-\quad (\because \nu \text{ は全単射、} \boxtimes \text{ の定義}) \\
+   &&(\because \nu \text{ は全単射、} \boxtimes \text{ の定義}) \\
 &= \sum_{K\in\mathcal{I}_M}\prod_{k=1}^{M}\left((A_k)_{i_kt_k}(v_k)_{t_k}\right)
-\quad (\because \text{複素数の積の可換律・結合律}) \\
+   &&(\because \text{複素数の積の可換律・結合律}) \\
 &= \prod_{k=1}^{M}\left(\sum_{t=1}^{2}(A_k)_{i_kt}(v_k)_{t}\right)
-\quad (\because \text{多重添字の和を各因子ごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(v_k)_{t} \text{ に適用}) \\
+   &&(\because \text{多重添字の和を各因子ごとの和の積へ直す段を } c_k(t)=(A_k)_{i_kt}(v_k)_{t} \text{ に適用}) \\
 &= \prod_{k=1}^{M}(A_kv_k)_{i_k}
-\quad (\because \text{行列と数ベクトルの積の定義}) \\
+   &&(\because \text{行列と数ベクトルの積の定義}) \\
 &= \left((A_1v_1)\boxtimes\cdots\boxtimes(A_Mv_M)\right)_{\nu(I)}
-\quad (\because \boxtimes \text{ の定義})
+   &&(\because \boxtimes \text{ の定義})
 \end{aligned}`,
       ),
     ],
