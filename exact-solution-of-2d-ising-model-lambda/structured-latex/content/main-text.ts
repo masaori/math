@@ -59734,7 +59734,7 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
                     math(String.raw`c\ge1`), " と反復回数 ", math(String.raw`t\in\mathbb N`), "、",
                     math(String.raw`t\ge1`), " は",
                   ]),
-                  displayMath(String.raw`t\,W_{\perp}(\gamma)+\min\{0,\ L\,w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\}\ \ge\ 1`),
+                  displayMath(String.raw`t\,W_{\perp}(\gamma)-\max\{0,\ L\,w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\}\ \ge\ 1`),
                   paragraph([
                     "を満たすものとする。始点 ",
                     math(String.raw`S:=\widetilde P_{k_0}(\gamma)`), "、",

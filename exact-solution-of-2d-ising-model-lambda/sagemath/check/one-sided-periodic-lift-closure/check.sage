@@ -122,7 +122,7 @@ for L in range(1, 4):
                         n_perp = ZZ(len(c_stairs) - 1)
                         g_stairs = parallel_staircase(ZZ(L), w_h, w_v)
                         n_par = ZZ(len(g_stairs) - 1)
-                        floor_a = min(ZZ(0), ZZ(L) * w_h * w_v)
+                        reflected_floor = -max(ZZ(0), ZZ(L) * w_h * w_v)
 
                         def lift(k):
                             q, r = divmod(k, m)
@@ -133,7 +133,7 @@ for L in range(1, 4):
                             return add(add(base, scale(q, d_perp)), c_stairs[r])
 
                         t_min = ZZ(1)
-                        while t_min * w_perp + floor_a < 1:
+                        while t_min * w_perp + reflected_floor < 1:
                             t_min += 1
                         base_indices = [r for r in range(m)
                                         if levels[r] == k_max]
