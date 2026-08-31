@@ -2423,6 +2423,8 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
         " であり、同一の点列が 2 つの極限 ",
         math(String.raw`\alpha,\beta`),
         " を持てば、ノルムの三角不等式と極限の定義から次の鎖を得る。",
+        ref("matrix_norm_triangle_inequality"),
+        " のノルムの非負性・三角不等式・非退化性を用いる。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -2495,6 +2497,10 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         " とし（複号同順）、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`K_1,Y_m,Z_m`),
+        " を用いて",
       ]),
       displayMath(
         String.raw`V_1^{(\pm)} := \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1)\right)

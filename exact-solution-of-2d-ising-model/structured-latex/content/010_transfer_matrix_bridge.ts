@@ -1533,6 +1533,78 @@ P^{(\pm)} f
   },
 
   {
+    id: "bridge_definition_V1_pm_square_root",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 12 },
+    title: { tex: String.raw`V_1^{(\pm)} \text{ の平方根として用いる行列}` },
+    labels: ["def_V1_pm_square_root"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とし（複号同順）、",
+        ref("def_V1_pm"),
+        " の ",
+        math(String.raw`V_1^{(\pm)}`),
+        " に対して",
+      ]),
+      displayMath(
+        String.raw`\left(V_1^{(\pm)}\right)^{1/2}
+:= \exp\!\left(\frac12 i K_1
+\left(Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1\right)\right)
+\in \mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "もとの可換性の主張で未定義のまま使われていた (V_1^{(\pm)})^{1/2} を、1 ブロック 1 定義に従って独立させた。二乗が V_1^{(\pm)} に等しいことは後続の平方根の主張で証明する。",
+      ],
+    },
+  },
+
+  {
+    id: "bridge_claim_V1_pm_square_root_squares_to_V1_pm",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 12 },
+    title: { tex: String.raw`V_1^{(\pm)} \text{ の半指数行列の二乗}` },
+    labels: ["V1_pm_square_root_squares_to_V1_pm"],
+    statement: [
+      paragraph([ref("def_V1_pm_square_root"), " の行列について、"]),
+      displayMath(String.raw`\left(\left(V_1^{(\pm)}\right)^{1/2}\right)^2=V_1^{(\pm)}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`G^{(\pm)}:=Y_1 Z_2+Y_2 Z_3+\cdots+Y_{M-1}Z_M\mp Y_MZ_1`),
+        " とおく。次の計算では ",
+        ref("def_V1_pm"),
+        " と ",
+        ref("theorem_exp_product"),
+        " を用いる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\left(V_1^{(\pm)}\right)^{1/2}\right)^2
+&=\exp\!\left(\tfrac12 iK_1G^{(\pm)}\right)
+  \exp\!\left(\tfrac12 iK_1G^{(\pm)}\right)
+&&\left(\because\ \blkref{def_V1_pm_square_root}\right)\\
+&=\exp\!\left(iK_1G^{(\pm)}\right)
+&&\left(\because\ \blkref{theorem_exp_product}\ \text{と同じ行列どうしの可換性}\right)\\
+&=V_1^{(\pm)}
+&&\left(\because\ \blkref{def_V1_pm}\right).
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "平方根として用いる半指数行列の定義と、その二乗が V_1^{(\pm)} になる主張を 1 ブロック 1 主張に従って分離した。",
+      ],
+    },
+  },
+
+  {
     id: "bridge_010_claim_epsilon_commutes",
     kind: "claim",
     origin: { path: SRC, ordinal: 12 },
@@ -1550,12 +1622,12 @@ P^{(\pm)} f
         " の ",
         math(String.raw`V_1^{(\pm)}`),
         "、さらに ",
-        math(String.raw`(V_1^{(\pm)})^{1/2} = \exp\!\left(\tfrac12 iK_1H_1^{(\pm)}\right)`),
-        " と可換である。したがって ",
-        ref("def_epsilon_projectors"),
+        ref("def_V1_pm_square_root"),
         " の ",
-        math(String.raw`P^{(\pm)}`),
-        " もこれらすべてと可換である。",
+        math(String.raw`(V_1^{(\pm)})^{1/2}`),
+        " と可換である。この行列が実際に平方根であることは ",
+        ref("V1_pm_square_root_squares_to_V1_pm"),
+        " で示した。",
       ]),
     ],
     proof: [
@@ -1752,25 +1824,25 @@ P^{(\pm)} f
 \end{aligned}`,
       ),
       paragraph([
-        ref("def_V1_pm"),
-        " の",
+        math(String.raw`G^{(\pm)}`),
+        " を次のように定める。",
       ]),
       displayMath(
-        String.raw`H_1^{(\pm)} = Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M \mp Y_MZ_1`,
+        String.raw`G^{(\pm)} := Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M \mp Y_MZ_1`,
       ),
       paragraph([
-        "は各項が ",
+        "これは各項が ",
         math(String.raw`Y\cdot Z`),
         " の形なので、次の鎖を得る。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\varepsilon H_1^{(\pm)}
+\varepsilon G^{(\pm)}
 &= \sum_{m=1}^{M-1}\varepsilon\,(Y_mZ_{m+1}) \mp \varepsilon\,(Y_MZ_1)
    \quad (\because \text{行列積の有限和への分配}) \\
 &= \sum_{m=1}^{M-1}(Y_mZ_{m+1})\,\varepsilon \mp (Y_MZ_1)\,\varepsilon
    \quad (\because \text{上の }\varepsilon\,(Y_mZ_{m'})=(Y_mZ_{m'})\,\varepsilon\text{ を全項へ同時適用}) \\
-&= H_1^{(\pm)}\,\varepsilon
+&= G^{(\pm)}\,\varepsilon
    \quad (\because \text{行列積の有限和への分配})
 \end{aligned}`,
       ),
@@ -1778,19 +1850,47 @@ P^{(\pm)} f
         "Step 2 と同じ議論で ",
         math(String.raw`\varepsilon`),
         " は ",
-        math(String.raw`\exp(iK_1H_1^{(\pm)}) = V_1^{(\pm)}`),
+        math(String.raw`\exp(iK_1G^{(\pm)}) = V_1^{(\pm)}`),
         " とも ",
-        math(String.raw`\exp\!\left(\tfrac12 iK_1H_1^{(\pm)}\right) = (V_1^{(\pm)})^{1/2}`),
+        math(String.raw`\exp\!\left(\tfrac12 iK_1G^{(\pm)}\right) = (V_1^{(\pm)})^{1/2}`),
         " とも可換である。",
       ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "式変形の書き方の統一（2026-08-14）: Step 2 末尾の散文に埋まっていたスカラー因子の付加（εV₂=V₂ε の導出）を、一行一等号と行末根拠の鎖へ開いた。等式・根拠の内容は変えていない。",
+        "2026-09-01 の構成レビューで、後続の未ラベル定義にある H_1^{(\pm)} を先取りしていた箇所を、証明内の局所記号 G^{(\pm)} へ置き換えた。平方根の定義と射影の可換性は独立ブロックへ分けた。",
+      ],
+    },
+  },
+
+  {
+    id: "bridge_claim_epsilon_projectors_commute_with_transfer_matrices",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 12 },
+    title: { tex: String.raw`P^{(\pm)} \text{ は転送行列と可換}` },
+    labels: ["epsilon_projectors_commute_with_transfer_matrices"],
+    statement: [
       paragraph([
-        "Step 5（",
+        ref("def_epsilon_projectors"),
+        " の ",
         math(String.raw`P^{(\pm)}`),
-        "）。",
+        " は ",
+        ref("epsilon_commutes_with_transfer_matrices"),
+        " の ",
+        math(String.raw`V_1,V_2,V_1^{(\pm)},(V_1^{(\pm)})^{1/2}`),
+        " のすべてと可換である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
         math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " を ",
         math(String.raw`\varepsilon X = X\varepsilon`),
-        " を満たす行列とする（Step 2–4 より ",
+        " を満たす行列とする（",
+        ref("epsilon_commutes_with_transfer_matrices"),
+        " より ",
         math(String.raw`V_1, V_2, V_1^{(\pm)}, (V_1^{(\pm)})^{1/2}`),
         " がこれにあたる）。次の鎖を得る（複号同順）。",
       ]),
@@ -1826,7 +1926,7 @@ P^{(\pm)}X
     conversion: {
       status: "added",
       notes: [
-        "式変形の書き方の統一（2026-08-14）: Step 2 末尾の散文に埋まっていたスカラー因子の付加（εV₂=V₂ε の導出）と、Step 5 の散文に埋まっていた線型結合との可換の計算を、一行一等号と行末根拠の鎖へ開いた。等式・根拠の内容は変えていない。",
+        "もとの epsilon_commutes_with_transfer_matrices の Step 5 を、1 ブロック 1 主張に従って独立させた。",
       ],
     },
   },
@@ -1907,7 +2007,7 @@ P^{(\pm)}X
         "(2) ",
         math(String.raw`P := P^{(\pm)}`),
         " と略記する。",
-        ref("epsilon_commutes_with_transfer_matrices"),
+        ref("epsilon_projectors_commute_with_transfer_matrices"),
         " より ",
         math(String.raw`P`),
         " は ",
@@ -2104,7 +2204,7 @@ BB
         " をまとめた。）よって ",
         ref("trace_basic_properties"),
         " (2) の巡回性と、",
-        ref("epsilon_commutes_with_transfer_matrices"),
+        ref("epsilon_projectors_commute_with_transfer_matrices"),
         " による ",
         math(String.raw`P^{(\pm)}`),
         " と ",

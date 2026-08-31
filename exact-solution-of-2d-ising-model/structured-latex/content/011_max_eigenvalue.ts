@@ -1342,7 +1342,7 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
       paragraph([
         math(String.raw`P^{(\pm)}`),
         " は ",
-        ref("epsilon_commutes_with_transfer_matrices"),
+        ref("epsilon_projectors_commute_with_transfer_matrices"),
         " より ",
         math(String.raw`V_2`),
         " とも ",
