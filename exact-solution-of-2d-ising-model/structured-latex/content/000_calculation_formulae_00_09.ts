@@ -547,9 +547,17 @@ y^2
       paragraph([
         "とおく。",
         math(String.raw`0\in S`),
-        "（",
-        math(String.raw`0^2=0\le x`),
-        "）より ",
+        " を確かめると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0^2
+&=0
+&&(\because\ 0\ \text{の冪})\\
+&\le x
+&&(\because\ x\in\mathbb{R}_{\ge0})
+\end{aligned}`),
+      paragraph([
+        "より ",
         math(String.raw`S\neq\emptyset`),
         "。また ",
         math(String.raw`1+x`),

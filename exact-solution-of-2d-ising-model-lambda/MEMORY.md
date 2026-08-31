@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 23 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 24 回目の tick 時点）
+
+**頂点単純閉路の整数巻き付きベクトルが零または原始的であることを本文と SageMath で固定した（Lean 未着手）。** 原始的な整数の組を最大公約数と Bézout 条件で定義し、有限正方トーラス上の頂点単純閉路を分離・非分離に分けた。分離する場合は一方の正方形の境界で切断線横断が相殺して巻き付きが零になる。非分離の場合は、曲線を横断する双対辺を除いても連結な有限双対グラフから、曲線を一度だけ横断する閉じた双対辺列を構成する。その符号付き交点数が巻き付きベクトル二本の行列式であり $\pm1$ なので、元の巻き付きベクトルは Bézout 条件を満たす（`def_primitive_integer_pair`、`claim_vertex_simple_winding_zero_or_primitive`）。SageMath `vertex-simple-winding-primitive` は $L=1,2,3,4$ の頂点単純閉路 373,720 本を `ZZ` で全列挙し、零 73,616 本・非零原始 300,104 本を検査した。次は平面格子へ持ち上げた単純閉路・周期単純路の回転数を示し、離散 Whitney 候補へ合成する。離散 Whitney 系の Lean 二版は未着手で、一件ずつ配線する。
+
+前進前レビューでは前 tick の平面変位三主張と SageMath を照合し、剰余類の折り返し・辺ごとの切断線補正・閉歩道の望遠鏡和という後続が使う内容を持つため「何も言っていない主張」ではなく、修正対象なしとした。並列の式変形統一は、姉妹側の非負平方根の存在証明にあった $0^2=0\le x$ を二段の行末根拠つきの鎖へ開いた。
+
+## ひとつ前の到達点（2026-08-31 の 23 回目の tick 時点）
 
 **閉歩道の平面変位を定義し、その総和が巻き付き数の $L$ 倍に等しいことを本文と SageMath で固定した（Lean 未着手）。** 向き付き辺ごとの行変位・列変位 $\delta_{\mathrm{row}},\delta_{\mathrm{col}}\in\{0,\pm1\}$（`def_plane_displacement`）を定め、剰余類を一つ進めたときの代表の値（`claim_representative_increment`）から辺ごとの恒等式 $s(i')-s(i)=\delta_{\mathrm{row}}-L\,c_{\mathrm v}(1-2d)$・$s(j')-s(j)=\delta_{\mathrm{col}}-L\,c_{\mathrm h}(1-2d)$（`claim_edge_representative_displacement`）を示し、閉歩道の巡回望遠鏡和で $\sum_k\delta_{\mathrm{row}}(\vec e_k)=L\,w_{\mathrm v}(\gamma)$、$\sum_k\delta_{\mathrm{col}}(\vec e_k)=L\,w_{\mathrm h}(\gamma)$ を得た（`claim_closed_walk_plane_displacement`。始点を固定すれば平面格子 $\mathbb Z\times\mathbb Z$ への持ち上げの終点変位がこの値になる）。SageMath `closed-walk-plane-displacement` は代表の増分 21 件・全向き付き辺 120 件（$L\le4$）・閉じた非後退辺列 34,112 本（$L=1,2,3$、長さ 8 まで）を `ZZ` で検査した。検算対応 336 件、本文 735 ブロック・check・PDF 333 ページを通した。離散 Whitney の残りは、頂点単純性から巻き付きベクトルが零または原始的であること／平面格子の単純閉路・周期単純路の回転数／候補への合成で、tick 22〜23 の Lean 二版もこの列で一件ずつ配線する。次は頂点単純性から巻き付きベクトルが零または原始的であることを示す。
 
