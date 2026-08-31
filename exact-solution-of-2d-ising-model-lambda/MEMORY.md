@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 52 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 53 回目の tick 時点）
+
+**反復横断階段が、その任意の非零周期並進と交わらないことを本文と SageMath で固定した（Lean 未着手）。** 台帳の「帯外で二つの反復横断階段と二つの周期持ち上げを合成する単純閉路」を、階段どうしの分離と合成本体へ割り直した最初の部品である。平行座標 $\pi_{\gamma}$ は横断移動ベクトル $(w_{\mathrm h},-w_{\mathrm v})$ 上で零なので、反復階段の平行座標は一周期の階段 $C^{\gamma}$ と同じく $0$ と $A=w_{\mathrm h}w_{\mathrm v}$ の間に入る。一方、周期並進 $(Lw_{\mathrm v},Lw_{\mathrm h})$ の平行座標増分は $B=L(w_{\mathrm h}^2+w_{\mathrm v}^2)>|A|$ である。従って階段内の二頂点の平行座標差の絶対値は $|A|$ 以下だが、非零周期並進で一致すれば $|z|B>|A|$ となって矛盾する（`claim_period_translates_of_iterated_staircase_disjoint`）。SageMath `period-translates-of-iterated-staircase` は $L=1,\ldots,5$ の非零巻き付き対 280 組、二基点・三反復回数の階段頂点 16,800 個、周期並進 $z=-2,-1,1,2$ との比較 908,544 件を `ZZ` で検査した。次は、分離した二つの周期持ち上げの一周期分と、それらを結ぶ二本の反復横断階段を合成し、他の交点が無いことを固定する。
+
+前進前レビューでは前 tick の帯上端からの階段分離の本文と SageMath（閉路 3,464 本・階段頂点 155,040 個・比較 5,727,600 件）を照合した。元の周期持ち上げを基点以外で避けることは閉包路の合成が直接引く非自明な内容で、「何も言っていない主張」・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「負符号セクターの Rayleigh 上限は正符号セクター以下」の Step 2 にある二段の不等式の根拠を、行中の `\quad (\because\dots)` から `aligned` の行末根拠列へ揃えた。式変形・根拠・参照は不変である。
+
+## ひとつ前の到達点（2026-09-01 の 52 回目の tick 時点）
 
 **整数帯の上端以上の基点から出した反復横断階段が、基点以外で周期延長した持ち上げと交わらないことを本文と SageMath で固定した（Lean 未着手）。** 台帳の「帯外で二つの反復横断階段と二つの周期持ち上げを合成する単純閉路」の最初の部品である。基点 $Q\in\mathbb Z\times\mathbb Z$ が $K_{\max}(\gamma)\le\kappa_{\gamma}(Q)$ を満たすとき、任意の $s\in\{1,\ldots,t\,n_{\perp}\}$ と $k\in\mathbb Z$ について $\kappa_{\gamma}(D^{\gamma,Q,t}_s)\ge\kappa_{\gamma}(Q)+s\ge K_{\max}(\gamma)+s>K_{\max}(\gamma)\ge\kappa_{\gamma}(\widetilde P_k(\gamma))$ の不等式の鎖一本で $D^{\gamma,Q,t}_s\ne\widetilde P_k(\gamma)$ を証明した（`claim_staircase_from_band_top_meets_lift_only_at_base`。新しい定義は置かず、反復横断階段の歩数下界・有限幅整数帯・$K_{\max}$ の定義だけを引いた）。SageMath `staircase-from-band-top-avoids-lift` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本について、$\kappa=K_{\max}$ の持ち上げ点（商 $-2..2$）を全て基点に取り、$t=1,2$ の帯を超えた階段頂点 155,040 個・頂点と持ち上げ点の比較 5,727,600 件を `ZZ` で検査した。次は横断平行移動した二つの周期持ち上げと、それぞれの極大水準点から出した反復横断階段を帯外で合流させ、単純閉路へ合成する。
 

@@ -612,9 +612,9 @@ x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M},\ \|x\| = 1\right\}`),
         String.raw`\begin{aligned}
 x^\top W x
 &\leq u^\top W u
-   \quad (\because \text{abs\_vector\_moves\_to\_even\_sector (3)}) \\
+&& (\because \text{abs\_vector\_moves\_to\_even\_sector (3)}) \\
 &\leq c_+(M)
-   \quad \left(\because \text{abs\_vector\_moves\_to\_even\_sector (1)(2) より }
+&& \left(\because \text{abs\_vector\_moves\_to\_even\_sector (1)(2) より }
    u \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^M},\ \|u\| = \|x\| = 1
    \text{ なので } u^\top Wu \in \mathcal{R}_+\right)
 \end{aligned}`,

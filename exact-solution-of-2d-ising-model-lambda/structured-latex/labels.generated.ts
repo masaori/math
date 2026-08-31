@@ -185,6 +185,7 @@ export const ALL_LABELS = [
   "claim_partition_value_dual_factorization",
   "claim_partition_value_ge_one_at_positive_rational",
   "claim_partition_value_upper_bound_at_positive_rational",
+  "claim_period_translates_of_iterated_staircase_disjoint",
   "claim_periodic_density_lower_set_eq_open_square_le_one",
   "claim_periodic_density_lower_set_subset_open_square_le_one",
   "claim_periodic_open_boundary_comparison_density_le_one",
