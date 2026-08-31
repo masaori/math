@@ -1779,9 +1779,9 @@ Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
         String.raw`\begin{aligned}
 j-k
 &=0
-  \quad(\because\ j=k\text{ と }\mathbb Z\text{ の減法})\\
+&&(\because\ j=k\text{ と }\mathbb Z\text{ の減法})\\
 &=0\cdot M
-  \quad(\because\ \mathbb Z\text{ の乗法})
+&&(\because\ \mathbb Z\text{ の乗法})
 \end{aligned}`,
       ),
       paragraph([
@@ -1815,17 +1815,17 @@ M & (j = k) \\
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{ij\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_\mu}\right)e^{ij\tilde\theta_\mu}
-   \quad (\because \text{def\_half\_integer\_modes}) \\
+&&(\because \text{def\_half\_integer\_modes}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_\mu}\,e^{ij\tilde\theta_\mu}
-   \quad (\because \text{有限和への分配}) \\
+&&(\because \text{有限和への分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,e^{i(j-k)\tilde\theta_\mu}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&&(\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= \frac{1}{M}\sum_{k=1}^{M} Z_k \sum_{\mu=1}^{M} e^{i(j-k)\tilde\theta_\mu}
-   \quad (\because \text{有限和の順序交換}) \\
+&&(\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\cdot Z_j\cdot M
-   \quad (\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
+&&(\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
 &= Z_j
-   \quad (\because M\ne 0\text{ なのでスカラー }\tfrac{1}{M}\text{ と }M\text{ が相殺する})
+&&(\because M\ne 0\text{ なのでスカラー }\tfrac{1}{M}\text{ と }M\text{ が相殺する})
 \end{aligned}`,
       ),
       paragraph([
@@ -1839,17 +1839,17 @@ M & (j = k) \\
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{ij\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\right)e^{ij\tilde\theta_\mu}
-   \quad (\because \text{def\_half\_integer\_modes}) \\
+&&(\because \text{def\_half\_integer\_modes}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\,e^{ij\tilde\theta_\mu}
-   \quad (\because \text{有限和への分配}) \\
+&&(\because \text{有限和への分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{i(j-k)\tilde\theta_\mu}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&&(\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= \frac{1}{M}\sum_{k=1}^{M} Y_k \sum_{\mu=1}^{M} e^{i(j-k)\tilde\theta_\mu}
-   \quad (\because \text{有限和の順序交換}) \\
+&&(\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\cdot Y_j\cdot M
-   \quad (\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
+&&(\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
 &= Y_j
-   \quad (\because M\ne 0\text{ なのでスカラー }\tfrac{1}{M}\text{ と }M\text{ が相殺する})
+&&(\because M\ne 0\text{ なのでスカラー }\tfrac{1}{M}\text{ と }M\text{ が相殺する})
 \end{aligned}`,
       ),
       paragraph([
@@ -1876,6 +1876,7 @@ M & (j = k) \\
         "2026-08-15 の式変形統一で、復元式の鎖の最終行へスカラー 1/M と M の相殺という行末根拠を補った。内容は変えていない。",
         "2026-08-19 の式変形統一で、二つの displayMath と間の散文に分かれていた復元式の導出を、準備の指数和等式と一続き六段の鎖へまとめ、「Y_j についても同じ計算」と畳まれていた第 2 式を同じ形の鎖へ開いた。内容・参照は変えていない。",
         "2026-08-31 の式変形統一で、準備の散文に埋まっていた j-k=0=0M を、整数の減法と乗法を一つずつ適用する二段の鎖へ開いた。内容・参照は変えていない。",
+        "2026-08-31 の式変形統一で、三本の鎖に行中の \\quad(\\because …) で置かれていた根拠 14 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・参照は変えていない。",
       ],
     },
   },
