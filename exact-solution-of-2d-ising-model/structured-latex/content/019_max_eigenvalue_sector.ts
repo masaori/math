@@ -375,9 +375,16 @@ u_k := \left|x_k\right| \quad \left(k \in \{1,\dots,2^M\}\right)`,
         " 成分に適用すると",
       ]),
       displayMath(
-        String.raw`x_{\pi(k)} = \left(\varepsilon x\right)_k = \left(-x\right)_k = -\,x_k
+        String.raw`\begin{aligned}
+x_{\pi(k)}
+&= \left(\varepsilon x\right)_k
+&& (\because \text{epsilon\_is\_sign\_flip\_permutation (3)}) \\
+&= \left(-x\right)_k
+&& (\because \varepsilon x = -x) \\
+&= -\,x_k
 \qquad \left(k \in \{1,\dots,2^M\}\right)
-\quad (\because \text{epsilon\_is\_sign\_flip\_permutation (3)})`,
+&& (\because \text{スカラー倍の成分表示})
+\end{aligned}`,
       ),
       paragraph([
         "を得る。同じ ",
@@ -390,15 +397,15 @@ u_k := \left|x_k\right| \quad \left(k \in \{1,\dots,2^M\}\right)`,
         String.raw`\begin{aligned}
 \left(\varepsilon u\right)_k
 &= u_{\pi(k)}
-   \quad (\because \text{epsilon\_is\_sign\_flip\_permutation (3)}) \\
+&& (\because \text{epsilon\_is\_sign\_flip\_permutation (3)}) \\
 &= \left|x_{\pi(k)}\right|
-   \quad (\because u \text{ の定義}) \\
+&& (\because u \text{ の定義}) \\
 &= \left|-x_k\right|
-   \quad (\because \text{直前の } x_{\pi(k)} = -x_k) \\
+&& (\because \text{直前の } x_{\pi(k)} = -x_k) \\
 &= \left|x_k\right|
-   \quad (\because \text{実数の絶対値は符号を落とす}) \\
+&& (\because \text{実数の絶対値は符号を落とす}) \\
 &= u_k
-   \quad (\because u \text{ の定義})
+&& (\because u \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -418,12 +425,17 @@ u_k := \left|x_k\right| \quad \left(k \in \{1,\dots,2^M\}\right)`,
       ]),
       paragraph(["(2) ノルムの定義から成分ごとに計算する。"]),
       displayMath(
-        String.raw`\|u\|^2
-= \sum_{k=1}^{2^M}u_k^2
-= \sum_{k=1}^{2^M}\left|x_k\right|^2
-= \sum_{k=1}^{2^M}x_k^2
-= \|x\|^2
-\quad \left(\because |a|^2 = a^2 \ (a \in \mathbb{R})\right)`,
+        String.raw`\begin{aligned}
+\|u\|^2
+&= \sum_{k=1}^{2^M}u_k^2
+&& (\because \text{ノルムの定義}) \\
+&= \sum_{k=1}^{2^M}\left|x_k\right|^2
+&& (\because u \text{ の定義}) \\
+&= \sum_{k=1}^{2^M}x_k^2
+&& \left(\because |a|^2 = a^2 \ (a \in \mathbb{R})\right) \\
+&= \|x\|^2
+&& (\because \text{ノルムの定義})
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\|u\| \geq 0`),
@@ -454,18 +466,18 @@ u_k := \left|x_k\right| \quad \left(k \in \{1,\dots,2^M\}\right)`,
         String.raw`\begin{aligned}
 u^\top W u
 &= \sum_{k=1}^{2^M}\sum_{l=1}^{2^M}u_k\,u_l\,W_{kl}
-   \quad (\because \text{行列とベクトルの積と内積の成分表示}) \\
+&& (\because \text{行列とベクトルの積と内積の成分表示}) \\
 &= \sum_{k=1}^{2^M}\sum_{l=1}^{2^M}\left|x_k\right|\left|x_l\right|W_{kl}
-   \quad (\because u \text{ の定義}) \\
+&& (\because u \text{ の定義}) \\
 &= \sum_{k=1}^{2^M}\sum_{l=1}^{2^M}\left|x_k\,x_l\,W_{kl}\right|
-   \quad \left(\because W_{kl} \geq 0
+&& \left(\because W_{kl} \geq 0
    \text{ なので } |x_kx_lW_{kl}| = |x_k||x_l|W_{kl}\right) \\
 &\geq \left|\sum_{k=1}^{2^M}\sum_{l=1}^{2^M}x_k\,x_l\,W_{kl}\right|
-   \quad (\because \text{有限個の実数についての三角不等式}) \\
+&& (\because \text{有限個の実数についての三角不等式}) \\
 &= \left|x^\top W x\right|
-   \quad (\because \text{行列とベクトルの積と内積の成分表示}) \\
+&& (\because \text{行列とベクトルの積と内積の成分表示}) \\
 &\geq x^\top W x
-   \quad \left(\because |a| \geq a \ (a \in \mathbb{R})\right)
+&& \left(\because |a| \geq a \ (a \in \mathbb{R})\right)
 \end{aligned}`,
       ),
     ],
