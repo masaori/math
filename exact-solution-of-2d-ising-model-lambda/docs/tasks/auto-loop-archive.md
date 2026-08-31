@@ -13748,3 +13748,10 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 前進記録: `def_signed_even_subgraph_polynomial` と `claim_signed_even_subgraph_sector_sum` を追加し、$L=1,2,3$ の偶部分グラフを全列挙した。
 - 式変形の統一: 姉妹側の複素数の逆数の偏角の証明にあった一行二等号を二段の鎖へ開いた。
 - レビュー記録: 前 tick の行列式の非後退置換和の Lean 二版を人手証明と照合し、「何も言っていない主張」・不一致・sorry 検査の登録漏れが無いことを確認した。
+
+## 2026-08-31 の 19 回目の tick で台帳から移した記録（2026-08-31 の 14 回目）
+
+- 現在地: 符号付き偶部分グラフ多項式のセクター和表示を Lean 二版へ配線し、四層検証を完了した。具体版は偶部分グラフの有限和を巻き付き偶奇の四セクターへ分けて符号を外へ出し、必要十分版は有限なラベル型・有限和・ラベルだけで決まる係数・分配則だけを残した。SageMath の $L=1,2,3$ 全列挙、検算対応 330 件、Lean 9,610 jobs・sorry 検査 1,629 件、本文 check・PDF 328 ページを通した。
+- 前進記録: `claim_signed_even_subgraph_sector_sum` の Lean 具体版 `signedEvenSubgraphPolynomial_eq_sectorSum` と必要十分版 `weightedSum_eq_sum_label_fibers_necSuf` を書き、本文の `lean:` と sorry 検査へ登録した。
+- 式変形の統一: 姉妹側の「sqrt と積が可換になる条件」の零因子の場合にあった二つの一行複数等号を、直前の計算と複素数の零元の性質を根拠とする四つの一行一等号の鎖へ開いた。
+- レビュー記録: 前 tick の `def_signed_even_subgraph_polynomial` と `claim_signed_even_subgraph_sector_sum` を、本文の四セクターへの有限和分割、SageMath の $L=1,2,3$ 全列挙、既存の巻き付き偶奇の定義へ照合し、「何も言っていない主張」・内容の不一致・未定義記法が無いことを確認した。
