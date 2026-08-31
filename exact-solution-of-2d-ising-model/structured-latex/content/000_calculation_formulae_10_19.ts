@@ -97,7 +97,26 @@ x^2+y^2
 &=(r')^2
  &&\left(\because\ (x_c',y_c')\in C_{\mathrm{unit}}\text{ の定義式 }(x_c')^2+(y_c')^2=1\right)
 \end{aligned}`),
-      paragraph(["である。正の平方根の一意性より ", math(String.raw`r'=r`), "。したがって ", math(String.raw`x_c'=x/r=x_c`), "、", math(String.raw`y_c'=y/r=y_c`), " であり一意である。"]),
+      paragraph(["である。正の平方根の一意性より ", math(String.raw`r'=r`), "。したがって"]),
+      displayMath(String.raw`\begin{aligned}
+x_c'
+&=\frac{x}{r'}
+ &&\left(\because\ \text{条件 }r'x_c'=x\text{ の両辺を }r'>0\text{ で割る}\right)\\
+&=\frac{x}{r}
+ &&\left(\because\ r'=r\right)\\
+&=x_c
+ &&\left(\because\ x_c\text{ の定義}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+y_c'
+&=\frac{y}{r'}
+ &&\left(\because\ \text{条件 }r'y_c'=y\text{ の両辺を }r'>0\text{ で割る}\right)\\
+&=\frac{y}{r}
+ &&\left(\because\ r'=r\right)\\
+&=y_c
+ &&\left(\because\ y_c\text{ の定義}\right)
+\end{aligned}`),
+      paragraph(["であり一意である。"]),
     ],
     conversion: { status: "added", notes: ["写像定義に混在していた存在一意性を独立させた。"] },
   },
