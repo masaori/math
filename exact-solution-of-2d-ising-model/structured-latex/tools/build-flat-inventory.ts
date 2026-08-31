@@ -526,6 +526,47 @@ const v2PauliPartitionFunctionExpectedExternalInputEntryIds = [
   "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
   "transfer_matrix_001_definition_symbols",
 ].sort();
+const epsilonProjectorDefinitionSectionEntryIds = [
+  "bridge_008_definition_epsilon_projectors",
+] as const;
+const epsilonProjectorDefinitionExpectedInternalDependencies = new Map<string, string[]>([
+  ["bridge_008_definition_epsilon_projectors", []],
+]);
+const epsilonProjectorDefinitionExpectedContentSha256 = new Map<string, string>([
+  ["bridge_008_definition_epsilon_projectors", "be5003446b4cb92b2911fb88cee1a7cc85dd13f412c3207866e1f70d987c4890"],
+]);
+const epsilonProjectorDefinitionExpectedExternalInputEntryIds = [
+  "calc_formulae_006_definition_of_cc",
+  "transfer_matrix_001_definition_symbols",
+].sort();
+const epsilonProjectorDefinitionExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
+]);
+const criticalParametersDefinitionExpectedContentSha256 = new Map<string, string>([
+  ["critical_002_definition_kappa_and_A", "88603f7e0f47159a401dbc878bd2862237bf85332936bc95aae705948a4fbe49"],
+]);
+const criticalParametersDefinitionExpectedExternalInputEntryIds = [
+  "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "transfer_matrix_001_definition_symbols",
+].sort();
+const criticalParametersDefinitionExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed"],
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
+]);
+const symmetrizedTransferMatrixExpectedDirectDependencies = [
+  "calc_formulae_006_definition_of_cc",
+  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+  "transfer_matrix_001_definition_symbols",
+].sort();
+const traceOfSymmetrizedTransferMatrixExpectedDirectDependencies = [
+  "bridge_007_claim_partition_function_in_pauli_form",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "eigenvalues_of_V_002_claim_trace_properties",
+  "maxeig_001_definition_symmetrized_transfer_matrix",
+].sort();
 const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_006_definition_of_cc", new Set(["abs_basic_properties", "matrix_exp_series_converges"])],
   ["linear_space_general_000_definition_kronecker_product", new Set(["kronecker_product_rule", "tensor_basis"])],
@@ -551,6 +592,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
 ]);
 const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
+  ["critical_002_definition_kappa_and_A", "臨界条件からの差を表す実数 κ と双曲線正弦の積 A という二つの定義を一ブロックへ束ねている。分割後に章内順と節境界を再判定する必要がある。"],
+  ["maxeig_001_definition_symmetrized_transfer_matrix", "V1 の平方根として使う行列と対称化転送行列 W という二つの定義を一ブロックへ束ねている。分割後に W から始まる依存鎖の節境界を再判定する必要がある。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
 ]);
 const isingPattern = /Ising|イジング|spin|スピン|lattice|格子|site|サイト|transfer|転送|sector|セクター|momentum|運動量|fermion|フェルミオン/i;
@@ -1212,6 +1255,64 @@ const epsilonProjectorDependenciesOnPreviousSection = epsilonProjectorsEntry.dep
 if (epsilonProjectorDependenciesOnPreviousSection.length > 0) {
   throw new Error(`射影子の定義から直前節への依存が生じました: ${JSON.stringify(epsilonProjectorDependenciesOnPreviousSection)}`);
 }
+const epsilonProjectorDefinitionSection = validateReviewedSection(
+  "全スピン反転行列から定める二つの行列",
+  "2次元イジングモデル",
+  epsilonProjectorDefinitionSectionEntryIds,
+  epsilonProjectorDefinitionExpectedInternalDependencies,
+  epsilonProjectorDefinitionExpectedContentSha256,
+  epsilonProjectorDefinitionExpectedExternalInputEntryIds,
+  epsilonProjectorDefinitionExpectedExternalInputContentSha256,
+  ["bridge_008_definition_epsilon_projectors"],
+);
+if (epsilonProjectorDefinitionSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 16) {
+  throw new Error("全スピン反転行列から定める二つの行列が章内依存順16ではありません");
+}
+const criticalParametersDefinitionEntry = entries.find((entry) => entry.id === "critical_002_definition_kappa_and_A")!;
+const symmetrizedTransferMatrixEntry = entries.find((entry) => entry.id === "maxeig_001_definition_symmetrized_transfer_matrix")!;
+const traceOfSymmetrizedTransferMatrixEntry = entries.find((entry) => entry.id === "maxeig_002_claim_Z_equals_trace_of_W")!;
+if (criticalParametersDefinitionEntry.dependencyPlacement!.chapterOrder !== 17
+  || symmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder !== 18
+  || traceOfSymmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder !== 19
+  || !traceOfSymmetrizedTransferMatrixEntry.dependsOnEntryIds.includes(symmetrizedTransferMatrixEntry.id)) {
+  throw new Error(`臨界条件用実数から対称化転送行列とトレース公式までの章内順が変わりました: ${JSON.stringify({
+    criticalParametersOrder: criticalParametersDefinitionEntry.dependencyPlacement!.chapterOrder,
+    definitionOrder: symmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder,
+    traceFormulaOrder: traceOfSymmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder,
+    traceFormulaDependencies: traceOfSymmetrizedTransferMatrixEntry.dependsOnEntryIds,
+  })}`);
+}
+if (criticalParametersDefinitionEntry.explanationGranularityReview.inspectedContentSha256
+    !== criticalParametersDefinitionExpectedContentSha256.get("critical_002_definition_kappa_and_A")
+  || symmetrizedTransferMatrixEntry.explanationGranularityReview.inspectedContentSha256
+    !== "283cfe7ca21f59fcd026567e6c76ffad08f1ae9912092f3691fc9571c01d40e2"
+  || traceOfSymmetrizedTransferMatrixEntry.explanationGranularityReview.inspectedContentSha256
+    !== "498e5bb8b0b5117cb55e8791e72d116d8ff6beed09540a3922ef1650a0cd9a35") {
+  throw new Error("臨界条件用実数、対称化転送行列、または直後のトレース公式の本文が変わりました");
+}
+for (const [entry, expectedDependencies, description] of [
+  [criticalParametersDefinitionEntry, criticalParametersDefinitionExpectedExternalInputEntryIds, "臨界条件用実数"],
+  [symmetrizedTransferMatrixEntry, symmetrizedTransferMatrixExpectedDirectDependencies, "対称化転送行列"],
+  [traceOfSymmetrizedTransferMatrixEntry, traceOfSymmetrizedTransferMatrixExpectedDirectDependencies, "対称化転送行列のトレース公式"],
+] as const) {
+  const actualDependencies = [...entry.dependsOnEntryIds].sort();
+  if (JSON.stringify(actualDependencies) !== JSON.stringify(expectedDependencies)) {
+    throw new Error(`${description}の直接依存が変わりました: ${JSON.stringify(actualDependencies)}`);
+  }
+}
+for (const id of criticalParametersDefinitionExpectedExternalInputEntryIds) {
+  const entry = entries.find((candidate) => candidate.id === id)!;
+  if (entry.explanationGranularityReview.inspectedContentSha256
+    !== criticalParametersDefinitionExpectedExternalInputContentSha256.get(id)) {
+    throw new Error(`臨界条件用実数の外部入力本文が変わりました: ${id}`);
+  }
+}
+if (criticalParametersDefinitionEntry.explanationGranularityReview.status !== "具体的な行列計算への展開またはブロック分割を要する"
+  || symmetrizedTransferMatrixEntry.explanationGranularityReview.status !== "具体的な行列計算への展開またはブロック分割を要する"
+  || epsilonProjectorDefinitionSection.sectionEntries[0]!.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || traceOfSymmetrizedTransferMatrixEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
+  throw new Error("章内依存順16–19の説明粒度判定が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
   name: "行列指数関数による共役の級数公式",
   chapter: "数学的道具立て",
@@ -1442,6 +1543,23 @@ const isingModelSectionBoundaries = [{
   mainTheoremEntryId: "bridge_007_claim_partition_function_in_pauli_form",
   boundaryEvidence: "章内依存順13–15は連続し、二次転送行列の恒等式からV2の二表示の一致へ進み、確定済みのV1の二表示の一致と分配関数の転送行列表示を合わせて、分配関数のPauli行列表示へ一方向に閉じる。次の章内依存順16の射影子定義は全スピン反転行列だけを使い、この三項へ依存しないため、外部入力集合が切り替わる順15の後で節を閉じる。順10の混在した記号定義を分割した後は、順13が双対結合定数と双曲線関数の略記、順14がサイトごとのσxとV2、順15がV1・V2の定義片へ依存することを再判定する。分割によりこれらの意味的依存、三項の連続性、順15への一意な閉包、または順16からの非依存が変わった場合は境界を再確定する。",
   readabilityStatus: "対象三項は、二次行列の指数級数、クロネッカー積の成分と積、二つの転送行列表示の置換を一段ずつ計算しており、現行の説明粒度検査に合格している。外部入力では、混在した記号定義、集合と代数構造の記号、複素数、行列指数関数とその収束・可換積公式、対角行列の指数関数に説明粒度の未解決が残る。とくにtanhと実対数の独立した先行定義は未整備であり、順10の分割時に補う必要がある。",
+}, {
+  name: "全スピン反転行列から定める二つの行列",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  entryIds: epsilonProjectorDefinitionSectionEntryIds,
+  input: [
+    "混在した記号定義に含まれる全スピン反転行列",
+    "複素数と有限複素行列の単位行列・和・スカラー倍",
+  ],
+  externalInputEntryIds: epsilonProjectorDefinitionSection.externalInputEntryIds,
+  output: [
+    "全スピン反転行列と単位行列の和・差から定める二つの行列",
+  ],
+  concludingDefinition: "全スピン反転行列から作る二つの行列",
+  concludingDefinitionEntryId: "bridge_008_definition_epsilon_projectors",
+  boundaryEvidence: "章内依存順16の一項は全スピン反転行列だけをイジング固有の入力として二つの行列を定める。次の章内依存順17は双対結合定数と双曲線関数の略記だけを使い、本項へ依存しない。外部入力集合が切り替わるため、順16の後で一項の節を閉じる。これらが固有空間への射影子であることは後続主張で証明するため、本節の出力には含めない。生成時に対象と全外部入力の本文 fingerprint、章内順、節末出力の一意性、次項の直接依存、および次項からの非依存を固定検査する。",
+  readabilityStatus: "対象定義は単位行列と全スピン反転行列の和・差とスカラー倍として具体的に書かれ、現行の説明粒度検査に合格している。外部入力では、混在した記号定義と複素数の定義に説明粒度の未解決が残る。射影子性は章内依存順24の後続主張で証明される。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

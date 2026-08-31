@@ -596,6 +596,29 @@
       "mainTheoremEntryId": "bridge_007_claim_partition_function_in_pauli_form",
       "boundaryEvidence": "章内依存順13–15は連続し、二次転送行列の恒等式からV2の二表示の一致へ進み、確定済みのV1の二表示の一致と分配関数の転送行列表示を合わせて、分配関数のPauli行列表示へ一方向に閉じる。次の章内依存順16の射影子定義は全スピン反転行列だけを使い、この三項へ依存しないため、外部入力集合が切り替わる順15の後で節を閉じる。順10の混在した記号定義を分割した後は、順13が双対結合定数と双曲線関数の略記、順14がサイトごとのσxとV2、順15がV1・V2の定義片へ依存することを再判定する。分割によりこれらの意味的依存、三項の連続性、順15への一意な閉包、または順16からの非依存が変わった場合は境界を再確定する。",
       "readabilityStatus": "対象三項は、二次行列の指数級数、クロネッカー積の成分と積、二つの転送行列表示の置換を一段ずつ計算しており、現行の説明粒度検査に合格している。外部入力では、混在した記号定義、集合と代数構造の記号、複素数、行列指数関数とその収束・可換積公式、対角行列の指数関数に説明粒度の未解決が残る。とくにtanhと実対数の独立した先行定義は未整備であり、順10の分割時に補う必要がある。"
+    },
+    {
+      "name": "全スピン反転行列から定める二つの行列",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+      "entryIds": [
+        "bridge_008_definition_epsilon_projectors"
+      ],
+      "input": [
+        "混在した記号定義に含まれる全スピン反転行列",
+        "複素数と有限複素行列の単位行列・和・スカラー倍"
+      ],
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "output": [
+        "全スピン反転行列と単位行列の和・差から定める二つの行列"
+      ],
+      "concludingDefinition": "全スピン反転行列から作る二つの行列",
+      "concludingDefinitionEntryId": "bridge_008_definition_epsilon_projectors",
+      "boundaryEvidence": "章内依存順16の一項は全スピン反転行列だけをイジング固有の入力として二つの行列を定める。次の章内依存順17は双対結合定数と双曲線関数の略記だけを使い、本項へ依存しない。外部入力集合が切り替わるため、順16の後で一項の節を閉じる。これらが固有空間への射影子であることは後続主張で証明するため、本節の出力には含めない。生成時に対象と全外部入力の本文 fingerprint、章内順、節末出力の一意性、次項の直接依存、および次項からの非依存を固定検査する。",
+      "readabilityStatus": "対象定義は単位行列と全スピン反転行列の和・差とスカラー倍として具体的に書かれ、現行の説明粒度検査に合格している。外部入力では、混在した記号定義と複素数の定義に説明粒度の未解決が残る。射影子性は章内依存順24の後続主張で証明される。"
     }
   ],
   "explanationGranularityReview": {
@@ -645,12 +668,14 @@
       "eigenvalues_of_V_009_claim_eigenvalues_of_Vprime",
       "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
       "bridge_003_claim_exp_of_diagonal",
+      "maxeig_001_definition_symmetrized_transfer_matrix",
       "maxeig_008_claim_trace_power_sandwich",
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y",
       "evenEigen_006_claim_eigenvalues_of_check_Vprime",
       "closing_010_theorem_onsager_exact_solution",
-      "sector_002_claim_abs_vector_moves_to_even_sector"
+      "sector_002_claim_abs_vector_moves_to_even_sector",
+      "critical_002_definition_kappa_and_A"
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
@@ -4966,8 +4991,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10269,
-        "inspectedContentSha256": "7554c64d9c619488e2401a701e0a85525ecfc28a695b052fe4165858c5714a19",
+        "inspectedCharacterCount": 10434,
+        "inspectedContentSha256": "b5caa9043fea4de56aa3f21bffb18af37afb3907129f7fdd6cd598fb46645cbd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16507,7 +16532,7 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1044,
@@ -16518,7 +16543,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "V1 の平方根として使う行列と対称化転送行列 W という二つの定義を一ブロックへ束ねている。分割後に W から始まる依存鎖の節境界を再判定する必要がある。"
       },
       "dependsOnLabels": [
         "def_transfer_matrix_symbols",
@@ -22096,7 +22121,7 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 959,
@@ -22107,7 +22132,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "臨界条件からの差を表す実数 κ と双曲線正弦の積 A という二つの定義を一ブロックへ束ねている。分割後に章内順と節境界を再判定する必要がある。"
       },
       "dependsOnLabels": [
         "cosh_sinh_basic_properties",
@@ -22351,8 +22376,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9692,
-        "inspectedContentSha256": "361db9d5e57ff987da4b16ab240cdc9f8cac6c081c93064821ab9c74a678f21b",
+        "inspectedCharacterCount": 9999,
+        "inspectedContentSha256": "231a3cb9f371f73fe718f67cb72550c0b82f7b042721671c3d449f41288c1b20",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22475,8 +22500,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3631,
-        "inspectedContentSha256": "fedaf639d15b0aebb82098b943d634d4ed5c2c15678c722fc0dc12a0b78d5206",
+        "inspectedCharacterCount": 4550,
+        "inspectedContentSha256": "811791542afc2de0e01a4d32cf699c953eb996dc0aa51f4d7c08bca91a8b67ed",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22485,9 +22510,15 @@
         ],
         "manualReview": null
       },
-      "dependsOnLabels": [],
-      "dependsOnEntryIds": [],
-      "semanticPrerequisiteLabels": [],
+      "dependsOnLabels": [
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
