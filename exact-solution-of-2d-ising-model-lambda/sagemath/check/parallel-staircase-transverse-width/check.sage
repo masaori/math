@@ -50,6 +50,11 @@ def transverse(point, w_h, w_v):
 def parallel_staircase(L, w_h, w_v):
     height = L * abs(w_v)
     width = L * abs(w_h)
+    if w_h * w_v > 0:
+        points = [(ZZ(0), integer_sign(w_h) * t) for t in range(width + 1)]
+        points += [(integer_sign(w_v) * s, L * w_h)
+                   for s in range(1, height + 1)]
+        return points
     points = [(integer_sign(w_v) * s, ZZ(0)) for s in range(height + 1)]
     points += [(L * w_v, integer_sign(w_h) * t) for t in range(1, width + 1)]
     return points
@@ -88,16 +93,15 @@ for L in range(1, 4):
                         points = parallel_staircase(ZZ(L), w_h, w_v)
                         transverse_values = [transverse(point, w_h, w_v)
                                              for point in points]
-                        endpoint_level = ZZ(L) * w_h * w_v
-                        assert all(min(ZZ(0), endpoint_level) <= value
-                                   <= max(ZZ(0), endpoint_level)
+                        lower_level = -ZZ(L) * abs(w_h * w_v)
+                        assert all(lower_level <= value <= 0
                                    for value in transverse_values)
 
                         lifted = lifted_vertices(ZZ(L), walk)
                         band_levels = [transverse(point, w_h, w_v)
                                        for point in lifted[:-1]]
                         band_max = max(band_levels)
-                        base_level = band_max - min(ZZ(0), endpoint_level) + 1
+                        base_level = band_max - lower_level + 1
                         translated_levels = [base_level + value
                                              for value in transverse_values]
                         assert all(value > band_max for value in translated_levels)

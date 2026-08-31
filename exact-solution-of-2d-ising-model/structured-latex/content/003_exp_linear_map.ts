@@ -253,13 +253,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \|A^{m+1}\|
 &= \|A^m A\|
-\quad (\because A^{m+1}=A^m A) \\
+&&\bigl(\because\ A^{m+1}=A^m A\bigr) \\
 &\le \|A^m\|\cdot\|A\|
-\quad (\because \text{ノルムの劣乗法性}) \\
+&&\bigl(\because\ \text{ノルムの劣乗法性}\bigr) \\
 &\le \|A\|^m\cdot\|A\|
-\quad (\because \text{帰納法の仮定}) \\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr) \\
 &= \|A\|^{m+1}
-\quad (\because \text{冪の定義})
+&&\bigl(\because\ \text{冪の定義}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -279,13 +279,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|
 &= \|I\| + \sum_{m=1}^{N}\frac{\|A^m\|}{m!}
-\quad (\because m=0 \text{ の項は } \|A^0\|=\|I\| \text{、他の項は上の等式}) \\
+&&\bigl(\because\ m=0 \text{ の項は } \|A^0\|=\|I\| \text{、他の項は上の等式}\bigr) \\
 &\le \|I\| + \sum_{m=1}^{N}\frac{\|A\|^m}{m!}
-\quad (\because \text{Step 1}) \\
+&&\bigl(\because\ \text{Step 1}\bigr) \\
 &\le \|I\| + E(\|A\|)
-\quad (\because \text{非負実数の指数級数の収束 } (2)) \\
+&&\bigl(\because\ \text{非負実数の指数級数の収束 } (2)\bigr) \\
 &= M_A
-\quad (\because M_A \text{ の定義})
+&&\bigl(\because\ M_A \text{ の定義}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -313,9 +313,9 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \|S_N(A)\|
 &\le \sum_{m=0}^{N}\left\|\frac{1}{m!}A^m\right\|
-\quad (\because \text{ノルムの三角不等式 } (3) \text{ を繰り返し用いる}) \\
+&&\bigl(\because\ \text{ノルムの三角不等式 } (3) \text{ を繰り返し用いる}\bigr) \\
 &\le M_A
-\quad (\because \text{Step 2 の評価})
+&&\bigl(\because\ \text{Step 2 の評価}\bigr)
 \end{aligned}`,
       ),
       paragraph(["である。無限和については"]),
@@ -323,9 +323,9 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left\|\sum_{m=0}^{\infty}\frac{1}{m!}A^m\right\|
 &\le \sum_{m=0}^{\infty}\left\|\frac{1}{m!}A^m\right\|
-\quad (\because \text{Mat}(n,K) \text{ の完備性と絶対収束判定 } (2) \text{ の後半}) \\
+&&\bigl(\because\ \text{Mat}(n,K) \text{ の完備性と絶対収束判定 } (2) \text{ の後半}\bigr) \\
 &\le M_A
-\quad (\because \text{Step 2 の評価})
+&&\bigl(\because\ \text{Step 2 の評価}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -342,6 +342,8 @@ export default defineBlocks([
         "原文（Typst）に対応ブロックは無い。原文の exp 級数の収束（labels: exp_converges）は" +
           "「各点収束」だけを主張しているが、可換行列の exp 積公式（labels: theorem_exp_product）の証明は" +
           "Mat(n,K) におけるノルム収束を必要とするため、独立した主張として切り出した。",
+        "2026-09-01 の式変形統一で、四本の鎖に行中の \\quad (\\because …) で置かれていた根拠 12 行を、" +
+          "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
       ],
     },
   },

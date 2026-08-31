@@ -124,6 +124,7 @@ export const ALL_LABELS = [
   "claim_odd_ray_interior_cells_bounded",
   "claim_one_s_linearly_independent",
   "claim_one_sided_periodic_lift_closure_closed_unit_steps",
+  "claim_one_sided_periodic_lift_closure_simple",
   "claim_open_rectangle_constant_plus_breaks_no_bond",
   "claim_open_rectangle_gluing_inequality_log",
   "claim_open_rectangle_gluing_inequality_rational",

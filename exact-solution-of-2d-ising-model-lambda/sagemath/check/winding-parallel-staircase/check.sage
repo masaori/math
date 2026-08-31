@@ -56,6 +56,11 @@ def parallel(point, w_h, w_v):
 def parallel_staircase(L, w_h, w_v):
     height = L * abs(w_v)
     width = L * abs(w_h)
+    if w_h * w_v > 0:
+        points = [(ZZ(0), integer_sign(w_h) * t) for t in range(width + 1)]
+        points += [(integer_sign(w_v) * s, L * w_h)
+                   for s in range(1, height + 1)]
+        return points
     points = [(integer_sign(w_v) * s, ZZ(0)) for s in range(height + 1)]
     points += [(L * w_v, integer_sign(w_h) * t) for t in range(1, width + 1)]
     return points

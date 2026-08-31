@@ -70,6 +70,11 @@ def transverse_staircase(w_h, w_v):
 def parallel_staircase(L, w_h, w_v):
     height = L * abs(w_v)
     width = L * abs(w_h)
+    if w_h * w_v > 0:
+        points = [(ZZ(0), integer_sign(w_h) * t) for t in range(width + 1)]
+        points += [(integer_sign(w_v) * s, L * w_h)
+                   for s in range(1, height + 1)]
+        return points
     points = [(integer_sign(w_v) * s, ZZ(0)) for s in range(height + 1)]
     points += [(L * w_v, integer_sign(w_h) * t) for t in range(1, width + 1)]
     return points
@@ -92,6 +97,7 @@ UNIT_STEPS = {(ZZ(1), ZZ(0)), (ZZ(-1), ZZ(0)), (ZZ(0), ZZ(1)), (ZZ(0), ZZ(-1))}
 cycle_total = 0
 closure_total = 0
 step_total = 0
+distinct_vertex_total = 0
 for L in range(1, 4):
     oriented = edges(L)
     for first in oriented:
@@ -122,7 +128,6 @@ for L in range(1, 4):
                         n_perp = ZZ(len(c_stairs) - 1)
                         g_stairs = parallel_staircase(ZZ(L), w_h, w_v)
                         n_par = ZZ(len(g_stairs) - 1)
-                        reflected_floor = -max(ZZ(0), ZZ(L) * w_h * w_v)
 
                         def lift(k):
                             q, r = divmod(k, m)
@@ -133,8 +138,6 @@ for L in range(1, 4):
                             return add(add(base, scale(q, d_perp)), c_stairs[r])
 
                         t_min = ZZ(1)
-                        while t_min * w_perp + reflected_floor < 1:
-                            t_min += 1
                         base_indices = [r for r in range(m)
                                         if levels[r] == k_max]
                         for k0 in base_indices:
@@ -171,6 +174,8 @@ for L in range(1, 4):
                                         add(start, scale(c, big_b)),
                                         scale(t, d_perp))
                                     assert points[boundary3] == top
+                                    assert len(set(points[:-1])) == n_total
+                                    distinct_vertex_total += n_total
                                     for j in range(n_total):
                                         step = sub(points[j + 1], points[j])
                                         assert step in UNIT_STEPS
@@ -186,4 +191,5 @@ for L in range(1, 4):
 
 print(f"PASS: {cycle_total} vertex-simple nonzero-winding closed walks, "
       f"{closure_total} one-sided closures, "
-      f"{step_total} exact unit-step checks over L=1,2,3")
+      f"{step_total} exact unit-step checks, "
+      f"{distinct_vertex_total} vertices in distinctness checks over L=1,2,3")

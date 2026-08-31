@@ -59491,6 +59491,7 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
                     math(String.raw`H=|w_{\mathrm h}(\gamma)|`), "、",
                     math(String.raw`V=|w_{\mathrm v}(\gamma)|`), " は横断階段の定義（",
                     ref("def_winding_transverse_staircase"), "）のものを使い、",
+                    math(String.raw`A:=w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\in\mathbb Z`), "、",
                     math(String.raw`n_{\parallel}:=L(V+H)\in\mathbb N`),
                     " と置く。巻き付きベクトルが零でなく ", math(String.raw`L\ge1`), "（",
                     ref("def_residue_maps"), "）なので ",
@@ -59499,10 +59500,14 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
                   ]),
                   displayMath(String.raw`G^{\gamma}_s:=
 \begin{cases}
+\bigl(0,\varepsilon(w_{\mathrm h}(\gamma))s\bigr),
+&A>0,\ 0\le s\le LH,\\
+\bigl(\varepsilon(w_{\mathrm v}(\gamma))(s-LH),L\,w_{\mathrm h}(\gamma)\bigr),
+&A>0,\ LH<s\le n_{\parallel},\\
 \bigl(\varepsilon(w_{\mathrm v}(\gamma))s,0\bigr),
-&0\le s\le LV,\\
+&A\le0,\ 0\le s\le LV,\\
 \bigl(L\,w_{\mathrm v}(\gamma),\,\varepsilon(w_{\mathrm h}(\gamma))(s-LV)\bigr),
-&LV<s\le n_{\parallel}
+&A\le0,\ LV<s\le n_{\parallel}
 \end{cases}`),
                   paragraph([
                     "で定め、これを巻き付きベクトルの正の平行階段と呼ぶ。とくに ",
@@ -59511,6 +59516,7 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
 =\bigl(L\,w_{\mathrm v}(\gamma),L\,w_{\mathrm h}(\gamma)\bigr)=B_{\gamma}`),
                     "（一周期の並進ベクトルは ", ref("def_periodic_lift_closure_cycle"),
                     "）である。絶対値・場合分け・有限列はいずれも整数と自然数の中で定まる。",
+                    "二つの座標軸を進む順序は横断座標が正にならない向きに選んでいる。",
                     "逆向きに読めば一周期の並進を打ち消す整数格子路になるので、",
                     "逆向きの周期持ち上げを使わずに周期持ち上げの有限部分を閉じる一側閉包の接続路の素材である。",
                   ]),
@@ -59540,7 +59546,11 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
               ],
               proof: [
                 paragraph([
-                  math(String.raw`0\le s<LV`), " の場合、定義から",
+                  "定義の四つの場合を読むと、各連続差は縦方向の差 ",
+                  math(String.raw`(\varepsilon(w_{\mathrm v}(\gamma)),0)`),
+                  " または横方向の差 ", math(String.raw`(0,\varepsilon(w_{\mathrm h}(\gamma)))`),
+                  " のいずれかである。縦方向の差が現れる場合は ", math(String.raw`V\ge1`),
+                  "、横方向の差が現れる場合は ", math(String.raw`H\ge1`), " である。縦方向の場合、",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 G^{\gamma}_{s+1}-G^{\gamma}_s
@@ -59552,16 +59562,11 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
 &=|w_{\mathrm v}(\gamma)|
 &&\bigl(\because\ \varepsilon\text{ の三場合の定義}\bigr)\\
 &>0
-&&\bigl(\because\ s<LV\text{ なので }V=|w_{\mathrm v}(\gamma)|\ge1\bigr).
+&&\bigl(\because\ V=|w_{\mathrm v}(\gamma)|\ge1\bigr).
 \end{aligned}`),
                 paragraph([
-                  "この場合は ", math(String.raw`V>0`), " なので ",
-                  math(String.raw`\varepsilon(w_{\mathrm v}(\gamma))\in\{-1,1\}`),
-                  " であり、差は縦方向の単位歩である。次に ",
-                  math(String.raw`LV\le s<n_{\parallel}`), " の場合、",
-                  math(String.raw`s=LV`), " では二つの場合の式が同じ点 ",
-                  math(String.raw`(L\,w_{\mathrm v}(\gamma),0)`),
-                  " を与えることに注意して、定義から",
+                  "この場合は ", math(String.raw`\varepsilon(w_{\mathrm v}(\gamma))\in\{-1,1\}`),
+                  " なので縦方向の単位歩である。横方向の場合も同様に",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 G^{\gamma}_{s+1}-G^{\gamma}_s
@@ -59573,12 +59578,11 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
 &=|w_{\mathrm h}(\gamma)|
 &&\bigl(\because\ \varepsilon\text{ の三場合の定義}\bigr)\\
 &>0
-&&\bigl(\because\ s<n_{\parallel}=LV+LH\text{ なので }H=|w_{\mathrm h}(\gamma)|\ge1\bigr).
+&&\bigl(\because\ H=|w_{\mathrm h}(\gamma)|\ge1\bigr).
 \end{aligned}`),
                 paragraph([
-                  "この場合は ", math(String.raw`H>0`), " なので差は横方向の単位歩である。",
-                  "二場合は ", math(String.raw`s\in\{0,\ldots,n_{\parallel}-1\}`),
-                  " を尽くす。平行座標が各歩で真に増えるため、異なる二頂点の平行座標は異なり、",
+                  "となり、横方向の単位歩である。二種類は全ての連続差を尽くす。",
+                  "平行座標が各歩で真に増えるため、異なる二頂点の平行座標は異なり、",
                   "頂点どうしも相異なる。全過程は整数の絶対値・四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
                 ]),
               ],
@@ -59614,11 +59618,11 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
                   " と任意の ", math(String.raw`s\in\{0,\ldots,n_{\parallel}\}`), " に対し、横断座標（",
                   ref("def_winding_transverse_coordinate"), "）は",
                 ]),
-                displayMath(String.raw`\min\{0,LA\}\ \le\ \kappa_{\gamma}(Q+G^{\gamma}_s)-\kappa_{\gamma}(Q)\ \le\ \max\{0,LA\}`),
+                displayMath(String.raw`-L|A|\ \le\ \kappa_{\gamma}(Q+G^{\gamma}_s)-\kappa_{\gamma}(Q)\ \le\ 0`),
                 paragraph([
                   "を満たす。したがって基点が",
                 ]),
-                displayMath(String.raw`\kappa_{\gamma}(Q)+\min\{0,LA\}>K_{\max}(\gamma)`),
+                displayMath(String.raw`\kappa_{\gamma}(Q)-L|A|>K_{\max}(\gamma)`),
                 paragraph([
                   "を満たすなら、平行階段の全頂点は周期延長した平面持ち上げ（",
                   ref("def_periodic_plane_lift"), "）の整数帯より上にあり、任意の ",
@@ -59630,40 +59634,24 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
               ],
               proof: [
                 paragraph([
-                  math(String.raw`s\in\{0,\ldots,n_{\parallel}\}`), " を任意に取る。まず ",
-                  math(String.raw`0\le s\le LV`), " の場合、定義から",
+                  math(String.raw`s\in\{0,\ldots,n_{\parallel}\}`), " を任意に取る。",
+                  "横断座標の加法性と平行階段の四場合をそのまま代入すると",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 \kappa_{\gamma}(Q+G^{\gamma}_s)-\kappa_{\gamma}(Q)
 &=\kappa_{\gamma}(G^{\gamma}_s)
 &&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と整数の分配則}\bigr)\\
-&=w_{\mathrm h}(\gamma)\varepsilon(w_{\mathrm v}(\gamma))s
-&&\bigl(\because\ 0\le s\le LV\text{ と }\blkref{def_winding_parallel_staircase}\text{、}\blkref{def_winding_transverse_coordinate}\bigr).
-\end{aligned}`),
-                paragraph([
-                  "この整数列は ", math(String.raw`s=0`), " で ", math(String.raw`0`), "、",
-                  math(String.raw`s=LV`), " で ", math(String.raw`LA`),
-                  " となり、その間を一定符号の整数増分で進む。次に ",
-                  math(String.raw`LV<s\le n_{\parallel}=LV+LH`), " の場合、",
-                ]),
-                displayMath(String.raw`\begin{aligned}
-\kappa_{\gamma}(Q+G^{\gamma}_s)-\kappa_{\gamma}(Q)
-&=\kappa_{\gamma}(G^{\gamma}_s)
-&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と整数の分配則}\bigr)\\
-&=LA-w_{\mathrm v}(\gamma)\varepsilon(w_{\mathrm h}(\gamma))(s-LV)
-&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\text{ と }\blkref{def_winding_transverse_coordinate}\bigr).
-\end{aligned}`),
-                paragraph([
-                  "この整数列は ", math(String.raw`s=LV`), " の値 ", math(String.raw`LA`), " から始まり、",
-                  math(String.raw`s=LV+LH=n_{\parallel}`), " で ", math(String.raw`0`),
-                  " となり、その間を一定符号の整数増分で進む。したがって二場合のいずれでも",
-                ]),
-                displayMath(String.raw`\begin{aligned}
-\min\{0,LA\}
-&\le\kappa_{\gamma}(Q+G^{\gamma}_s)-\kappa_{\gamma}(Q)
-&&\bigl(\because\ \text{直前の二表示と }\varepsilon\text{ の三場合の定義、}\mathbb Z\text{ の順序}\bigr)\\
-&\le\max\{0,LA\}
-&&\bigl(\because\ \text{同じ二表示と }\mathbb Z\text{ の順序}\bigr).
+&=\begin{cases}
+-|w_{\mathrm v}(\gamma)|s,&A>0,\ 0\le s\le LH,\\
+-L|A|+|w_{\mathrm h}(\gamma)|(s-LH),&A>0,\ LH<s\le n_{\parallel},\\
+-|w_{\mathrm h}(\gamma)|s,&A<0,\ 0\le s\le LV,\\
+-L|A|+|w_{\mathrm v}(\gamma)|(s-LV),&A<0,\ LV<s\le n_{\parallel},\\
+0,&A=0
+\end{cases}
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\text{、}\blkref{def_winding_transverse_coordinate}\text{、}\varepsilon\text{ の三場合の定義}\bigr)\\
+&\in\{-L|A|,-L|A|+1,\ldots,0\}
+&&\bigl(\because\ 0\le s\le LH\text{ または }0\le s-LH\le LV\text{、}\
+0\le s\le LV\text{ または }0\le s-LV\le LH\text{ と }\mathbb Z\text{ の順序}\bigr).
 \end{aligned}`),
                 paragraph([
                   "を得る。最後に基点について帯外条件を仮定し、",
@@ -59671,7 +59659,7 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
                 ]),
                 displayMath(String.raw`\begin{aligned}
 \kappa_{\gamma}(Q+G^{\gamma}_s)
-&\ge\kappa_{\gamma}(Q)+\min\{0,LA\}
+&\ge\kappa_{\gamma}(Q)-L|A|
 &&\bigl(\because\ \text{上で示した幅の下界}\bigr)\\
 &>K_{\max}(\gamma)
 &&\bigl(\because\ \text{基点についての仮定}\bigr)\\
@@ -59732,11 +59720,7 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
                   paragraph([
                     "を満たすものとし、周期数 ", math(String.raw`c\in\mathbb N`), "、",
                     math(String.raw`c\ge1`), " と反復回数 ", math(String.raw`t\in\mathbb N`), "、",
-                    math(String.raw`t\ge1`), " は",
-                  ]),
-                  displayMath(String.raw`t\,W_{\perp}(\gamma)-\max\{0,\ L\,w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)\}\ \ge\ 1`),
-                  paragraph([
-                    "を満たすものとする。始点 ",
+                    math(String.raw`t\ge1`), " を取る。始点 ",
                     math(String.raw`S:=\widetilde P_{k_0}(\gamma)`), "、",
                     math(String.raw`Q_1:=\widetilde P_{k_0+cm}(\gamma)=S+c\,B_{\gamma}`),
                     "（等式は ", ref("def_periodic_plane_lift"),
@@ -59861,6 +59845,100 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
                   ref("claim_winding_parallel_staircase_step_increase"),
                   "）。以上で全ての連続差が単位格子ベクトルであることが確かめられた。",
                   "全過程は整数の除法・四則と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_one_sided_periodic_lift_closure_simple",
+        labels: [],
+        title: { text: "一側閉包の頂点単純性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_periodic_lift_closure_simple",
+            focus: {
+              id: "kac_ward_claim_one_sided_periodic_lift_closure_simple",
+              kind: "claim",
+              title: { text: "一側閉包は終点を除いて頂点を繰り返さない" },
+              labels: ["claim_one_sided_periodic_lift_closure_simple"],
+              habitat: "Z",
+              verification: ["sagemath/check/one-sided-periodic-lift-closure"],
+              statement: [
+                paragraph([
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）について、任意の ",
+                  math(String.raw`j,j'\in\{0,\ldots,N-1\}`), " が ", math(String.raw`j<j'`),
+                  " を満たすなら",
+                ]),
+                displayMath(String.raw`F^{\gamma,k_0,t,c}_j\ne F^{\gamma,k_0,t,c}_{j'}`),
+                paragraph([
+                  "である。したがって、閉性と単位歩（", ref("claim_one_sided_periodic_lift_closure_closed_unit_steps"),
+                  "）と合わせると、一側閉包は平面格子上の頂点単純な閉路である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "一側閉包の四部分を、順に周期持ち上げ部分、上り階段、反転平行階段、下り階段と呼ぶ。",
+                  "周期持ち上げ部分の頂点は相異なる（", ref("claim_periodic_plane_lift_points_distinct"),
+                  "）。二つの反復横断階段はそれぞれ頂点が相異なる（",
+                  ref("claim_iterated_transverse_staircase_lower_bound"), "）。反転平行階段では、",
+                  math(String.raw`i=a n_{\parallel}+b`), " に対して ",
+                  math(String.raw`aB_{\gamma}+G^{\gamma}_b`),
+                  " の平行座標が ", math(String.raw`i`), " とともに真に増える。実際、各一周期内では ",
+                  ref("claim_winding_parallel_staircase_step_increase"),
+                  "、周期の境界では ", math(String.raw`G^{\gamma}_{n_{\parallel}}=B_{\gamma}`),
+                  " を使う。よってこれを差し引く第三部分の平行座標は真に減り、その頂点も相異なる。",
+                ]),
+                paragraph([
+                  "次に異なる部分どうしの交点を調べる。上り階段は周期持ち上げと始点 ",
+                  math(String.raw`Q_1`), " だけで交わり、下り階段の頂点集合は周期持ち上げと ",
+                  math(String.raw`S`), " だけで交わる（", ref("claim_staircase_from_band_top_meets_lift_only_at_base"),
+                  "）。反転平行階段の任意の頂点は、ある ",
+                  math(String.raw`a\in\{0,\ldots,c\}`), " と ",
+                  math(String.raw`b\in\{0,\ldots,n_{\parallel}\}`), "（ただし ",
+                  math(String.raw`a=c`), " なら ", math(String.raw`b=0`), "）により ",
+                  math(String.raw`S+t d_{\perp}(\gamma)+(c-a)B_{\gamma}-G^{\gamma}_b`),
+                  " と書ける。横断座標を取ると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}\!\left(S+t d_{\perp}(\gamma)+(c-a)B_{\gamma}-G^{\gamma}_b\right)
+&=K_{\max}(\gamma)+tW_{\perp}(\gamma)-\kappa_{\gamma}(G^{\gamma}_b)
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{、}\kappa_{\gamma}(B_{\gamma})=0\text{、}\blkref{def_transverse_translate_of_periodic_plane_lift}\bigr)\\
+&\ge K_{\max}(\gamma)+tW_{\perp}(\gamma)
+&&\bigl(\because\ \blkref{claim_parallel_staircase_transverse_width_bound}\text{ により }\kappa_{\gamma}(G^{\gamma}_b)\le0\bigr)\\
+&>K_{\max}(\gamma)
+&&\bigl(\because\ t\ge1\text{ かつ }W_{\perp}(\gamma)\ge1\bigr).
+\end{aligned}`),
+                paragraph([
+                  "したがって反転平行階段は周期持ち上げと交わらない。",
+                ]),
+                paragraph([
+                  "上り階段の基点は ", math(String.raw`Q_1=S+cB_{\gamma}`),
+                  "、下り階段と同じ頂点集合を持つ順向きの階段の基点は ", math(String.raw`S`),
+                  " である。二基点の平行座標の差の絶対値は ",
+                  math(String.raw`cL W_{\perp}(\gamma)`), " であり、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+cL W_{\perp}(\gamma)
+&\ge W_{\perp}(\gamma)
+&&\bigl(\because\ c\ge1\text{、}L\ge1\bigr)\\
+&>|w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)|
+&&\bigl(\because\ (w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)\text{ と整数の平方の順序}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "よって二つの反復横断階段は交わらない（",
+                  ref("claim_parallel_separated_staircases_disjoint"), "）。最後に、上り階段の横断座標は終点まで真に増え、",
+                  "反転平行階段の横断座標はその終点の水準以上にあるため、両者の共有点は接合点だけである。",
+                  "同様に下り階段の頂点集合と反転平行階段の共有点も接合点だけである。",
+                  "各部分内部の相異性と以上の交差排除により、終点を除く全頂点が相異なる。",
+                  "全過程は整数の除法・絶対値・四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
                 ]),
               ],
             },
