@@ -57420,6 +57420,210 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_cell_complex_counts",
+        labels: [],
+        title: { text: "セル集合の複体量と一セル追加の増分" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_cell_complex_one_cell_increment",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_cell_vertex_set",
+                  kind: "definition",
+                  title: { text: "セル集合の頂点集合" },
+                  labels: ["def_cell_vertex_set"],
+                  habitat: "Z",
+                  statement: [
+                    paragraph([
+                      "有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                      "（セルの集合）に対し、その頂点集合を",
+                    ]),
+                    displayMath(String.raw`\mathcal V_{\square}(S):=\bigl\{(a,b)\in\mathbb Z\times\mathbb Z\ \bigm|\ \text{ある }(r,c)\in S\text{ が存在して }a\in\{r,r+1\}\text{ かつ }b\in\{c,c+1\}\bigr\}`),
+                    paragraph([
+                      "で定める。すなわち、セル ", math(String.raw`(r,c)`),
+                      " の単位正方形の四隅 ",
+                      math(String.raw`(r,c),(r,c+1),(r+1,c),(r+1,c+1)`),
+                      " を ", math(String.raw`S`), " の全セルにわたって集めた集合である。",
+                      math(String.raw`S`), " が有限なら、各セルが寄与する点は四つ以下なので ",
+                      math(String.raw`\mathcal V_{\square}(S)`),
+                      " は有限集合である（", ref("def_cardinality_notation"), "）。",
+                    ]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_cell_edge_set",
+                  kind: "definition",
+                  title: { text: "セル集合の辺集合" },
+                  labels: ["def_cell_edge_set"],
+                  habitat: "Z",
+                  statement: [
+                    paragraph([
+                      "セル ", math(String.raw`(r,c)\in\mathbb Z\times\mathbb Z`),
+                      " の四辺とは、次の四つの二元集合をいう。",
+                    ]),
+                    displayMath(String.raw`\bigl\{(r,c),(r,c+1)\bigr\},\qquad
+\bigl\{(r+1,c),(r+1,c+1)\bigr\},\qquad
+\bigl\{(r,c),(r+1,c)\bigr\},\qquad
+\bigl\{(r,c+1),(r+1,c+1)\bigr\}`),
+                    paragraph([
+                      "有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                      "（セルの集合）に対し、その辺集合 ",
+                      math(String.raw`\mathcal E_{\square}(S)`),
+                      " を、", math(String.raw`S`),
+                      " の各セルの四辺を全セルにわたって集めた集合として定める。元は格子点の二元集合であり、",
+                      math(String.raw`S`), " が有限なら、各セルが寄与する辺は四つ以下なので ",
+                      math(String.raw`\mathcal E_{\square}(S)`),
+                      " は有限集合である。",
+                    ]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_cell_euler_number",
+                  kind: "definition",
+                  title: { text: "セル集合の Euler 数" },
+                  labels: ["def_cell_euler_number"],
+                  habitat: "Z",
+                  statement: [
+                    paragraph([
+                      "有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                      "（セルの集合）に対し、その Euler 数を",
+                    ]),
+                    displayMath(String.raw`\chi_{\square}(S):=\bigl|\mathcal V_{\square}(S)\bigr|-\bigl|\mathcal E_{\square}(S)\bigr|+|S|\ \in\mathbb Z`),
+                    paragraph([
+                      "で定める（", ref("def_cell_vertex_set"), "、", ref("def_cell_edge_set"),
+                      "、", ref("def_cardinality_notation"),
+                      "）。三つの集合はいずれも有限なので、右辺は三つの自然数の整数としての和と差であり、",
+                      math(String.raw`\chi_{\square}(S)`),
+                      " は整数として確定する。とくに空集合では三つの個数がすべて零なので ",
+                      math(String.raw`\chi_{\square}(\varnothing)=0`), " である。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_cell_complex_one_cell_increment",
+              kind: "claim",
+              title: { text: "一セルを追加したときの Euler 数の増分" },
+              labels: ["claim_cell_complex_one_cell_increment"],
+              habitat: "Z",
+              verification: ["sagemath/check/cell-complex-one-cell-increment"],
+              statement: [
+                paragraph([
+                  "任意の有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
+                  "（セルの集合）と、", math(String.raw`S`), " に属さない任意のセル ",
+                  math(String.raw`x=(r,c)\in(\mathbb Z\times\mathbb Z)\setminus S`),
+                  " について、共有される頂点と辺の個数を",
+                ]),
+                displayMath(String.raw`v_x(S):=\bigl|\mathcal V_{\square}(S)\cap\mathcal V_{\square}(\{x\})\bigr|,\qquad
+e_x(S):=\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|`),
+                paragraph([
+                  "と置く（", ref("def_cell_vertex_set"), "、", ref("def_cell_edge_set"),
+                  "、", ref("def_cardinality_notation"), "）。このとき",
+                ]),
+                displayMath(String.raw`\chi_{\square}(S\cup\{x\})=\chi_{\square}(S)+1+e_x(S)-v_x(S)`),
+                paragraph([
+                  "が成り立つ（", ref("def_cell_euler_number"),
+                  "）。内側セル複体の Euler 数を一セルずつの追加で計算するとき、この等式を繰り返し引く。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず、セル ", math(String.raw`x=(r,c)`), " だけの集合の頂点集合は四点 ",
+                  math(String.raw`(r,c),(r,c+1),(r+1,c),(r+1,c+1)`),
+                  " からなる（", ref("def_cell_vertex_set"),
+                  "）。二点が一致するには第一成分どうしと第二成分どうしがともに一致する必要があるが、四点の成分の組は二つずつ異なる（第一成分は ",
+                  math(String.raw`r`), " か ", math(String.raw`r+1`), "、第二成分は ",
+                  math(String.raw`c`), " か ", math(String.raw`c+1`),
+                  " で、隣り合う二整数は相異なる）。ゆえに",
+                ]),
+                displayMath(String.raw`\bigl|\mathcal V_{\square}(\{x\})\bigr|=4`),
+                paragraph([
+                  "である。次に、", math(String.raw`x`),
+                  " の四辺は二元集合として二つずつ相異なる（", ref("def_cell_edge_set"),
+                  "）。実際、上辺 ", math(String.raw`\{(r,c),(r,c+1)\}`),
+                  " と下辺 ", math(String.raw`\{(r+1,c),(r+1,c+1)\}`),
+                  " は共有点を持たず、左辺 ", math(String.raw`\{(r,c),(r+1,c)\}`),
+                  " と右辺 ", math(String.raw`\{(r,c+1),(r+1,c+1)\}`),
+                  " も共有点を持たない。残る四組（上辺と左辺・上辺と右辺・下辺と左辺・下辺と右辺）はいずれも共有点を一つだけ持つので、二元集合として一致しない。ゆえに",
+                ]),
+                displayMath(String.raw`\bigl|\mathcal E_{\square}(\{x\})\bigr|=4`),
+                paragraph([
+                  "である。また、頂点集合と辺集合はどちらも「ある元のセルが存在する」という条件で定まるので、セル集合の合併で分配する。すなわち",
+                ]),
+                displayMath(String.raw`\mathcal V_{\square}(S\cup\{x\})=\mathcal V_{\square}(S)\cup\mathcal V_{\square}(\{x\}),\qquad
+\mathcal E_{\square}(S\cup\{x\})=\mathcal E_{\square}(S)\cup\mathcal E_{\square}(\{x\})`),
+                paragraph([
+                  "が成り立つ（", ref("def_cell_vertex_set"), "、", ref("def_cell_edge_set"),
+                  " の条件「ある ", math(String.raw`(r',c')\in S\cup\{x\}`),
+                  " が存在する」は「", math(String.raw`S`), " に存在する」と「",
+                  math(String.raw`\{x\}`),
+                  " に存在する」の少なくとも一方と同値だからである）。この三つの準備から、まず頂点の個数は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bigl|\mathcal V_{\square}(S\cup\{x\})\bigr|
+&=\bigl|\mathcal V_{\square}(S)\cup\mathcal V_{\square}(\{x\})\bigr|
+&&\bigl(\because\ \text{直前の合併の等式}\bigr)\\
+&=\bigl|\mathcal V_{\square}(S)\bigr|+\bigl|\mathcal V_{\square}(\{x\})\bigr|-\bigl|\mathcal V_{\square}(S)\cap\mathcal V_{\square}(\{x\})\bigr|
+&&\bigl(\because\ \text{有限集合の包除 }|A\cup B|=|A|+|B|-|A\cap B|\bigr)\\
+&=\bigl|\mathcal V_{\square}(S)\bigr|+4-v_x(S)
+&&\bigl(\because\ \bigl|\mathcal V_{\square}(\{x\})\bigr|=4\text{ と }v_x(S)\text{ の定義}\bigr)
+\end{aligned}`),
+                paragraph(["となり、同様に辺の個数は"]),
+                displayMath(String.raw`\begin{aligned}
+\bigl|\mathcal E_{\square}(S\cup\{x\})\bigr|
+&=\bigl|\mathcal E_{\square}(S)\cup\mathcal E_{\square}(\{x\})\bigr|
+&&\bigl(\because\ \text{直前の合併の等式}\bigr)\\
+&=\bigl|\mathcal E_{\square}(S)\bigr|+\bigl|\mathcal E_{\square}(\{x\})\bigr|-\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|
+&&\bigl(\because\ \text{有限集合の包除 }|A\cup B|=|A|+|B|-|A\cap B|\bigr)\\
+&=\bigl|\mathcal E_{\square}(S)\bigr|+4-e_x(S)
+&&\bigl(\because\ \bigl|\mathcal E_{\square}(\{x\})\bigr|=4\text{ と }e_x(S)\text{ の定義}\bigr)
+\end{aligned}`),
+                paragraph(["となり、セルの個数は"]),
+                displayMath(String.raw`\begin{aligned}
+\bigl|S\cup\{x\}\bigr|
+&=|S|+\bigl|\{x\}\bigr|-\bigl|S\cap\{x\}\bigr|
+&&\bigl(\because\ \text{有限集合の包除 }|A\cup B|=|A|+|B|-|A\cap B|\bigr)\\
+&=|S|+1-0
+&&\bigl(\because\ \bigl|\{x\}\bigr|=1\text{ と、}x\notin S\text{ なので }S\cap\{x\}=\varnothing\bigr)\\
+&=|S|+1
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph(["となる。以上を合わせて"]),
+                displayMath(String.raw`\begin{aligned}
+\chi_{\square}(S\cup\{x\})
+&=\bigl|\mathcal V_{\square}(S\cup\{x\})\bigr|-\bigl|\mathcal E_{\square}(S\cup\{x\})\bigr|+\bigl|S\cup\{x\}\bigr|
+&&\bigl(\because\ \blkref{def_cell_euler_number}\bigr)\\
+&=\Bigl(\bigl|\mathcal V_{\square}(S)\bigr|+4-v_x(S)\Bigr)-\Bigl(\bigl|\mathcal E_{\square}(S)\bigr|+4-e_x(S)\Bigr)+\bigl(|S|+1\bigr)
+&&\bigl(\because\ \text{直前の三つの個数の等式}\bigr)\\
+&=\Bigl(\bigl|\mathcal V_{\square}(S)\bigr|-\bigl|\mathcal E_{\square}(S)\bigr|+|S|\Bigr)+1+e_x(S)-v_x(S)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=\chi_{\square}(S)+1+e_x(S)-v_x(S)
+&&\bigl(\because\ \blkref{def_cell_euler_number}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "となる。全過程は有限集合の数え上げと整数の四則だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_plane_simple_polygon_turning",
         labels: [],
         title: { text: "平面の単純閉多角形の回転数" },
