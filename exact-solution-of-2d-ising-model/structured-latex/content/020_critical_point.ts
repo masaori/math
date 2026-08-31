@@ -942,9 +942,21 @@ s_1 s_2 = 1
       paragraph([
         "同様に (R4) を ",
         math(String.raw`F = \kappa'^2`),
-        " に適用し、",
-        math(String.raw`\kappa'(K_c) = 2 + \dfrac{2}{\sinh 2K_c} = 2+2 = 4`),
-        " に注意すると",
+        " に適用する。ここで",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\kappa'(K_c)
+&= 2 + \frac{2}{\sinh 2K_c}
+   \quad (\because \text{(1) の } \kappa' \text{ の表示を } K = K_c \text{ で読む}) \\
+&= 2 + \frac{2}{1}
+   \quad (\because \sinh 2K_c = 1\text{。本主張の } K_c \text{ の定義}) \\
+&= 4
+   \quad (\because \mathbb{R} \text{ の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "に注意すると",
       ]),
       displayMath(
         String.raw`\left|\kappa'(K)^2 - 16\right|
