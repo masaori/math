@@ -158,6 +158,12 @@ def summarize_results(files, outdir, jobs, codes, timeout):
         if record.get('status') not in {'PASS', 'FAIL', 'TIMEOUT'}:
             invalid_records.append(record)
             continue
+        seconds = record.get('seconds')
+        if (not isinstance(seconds, (int, float))
+                or isinstance(seconds, bool)
+                or seconds < 0):
+            invalid_records.append(record)
+            continue
         by_index.setdefault(idx, []).append(record)
 
     missing = [idx for idx in range(len(files)) if idx not in by_index]
