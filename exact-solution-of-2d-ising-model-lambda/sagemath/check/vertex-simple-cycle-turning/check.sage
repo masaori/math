@@ -1,6 +1,8 @@
 """頂点単純な閉じた非後退辺列の循環総回転数を全列挙で厳密観察する。
 
-対象: def_cyclic_total_turning（観察。証明すべき候補の確定）。
+対象:
+- def_cyclic_total_turning（観察。証明すべき候補の確定）
+- claim_plane_simple_polygon_cyclic_turning
 一辺 L=2,3,4 のトーラスで、通過の頂点が相異なる（接触対数零の）閉じた
 非後退辺列を、頂点の相異なりで刈り込む深さ優先探索で全列挙し、
 循環総回転数 t∘(γ) と切断線偶奇 (h(γ) mod 2, v(γ) mod 2) を突き合わせる。
@@ -41,18 +43,23 @@ def step_turning(edge, successor):
     return {0: ZZ(0), 1: ZZ(1), 3: ZZ(-1)}[turn]
 
 
-def seam_parities(edge, L):
-    kind, i, j, _ = edge
-    return (ZZ(kind == "h" and j == L - 1), ZZ(kind == "v" and i == L - 1))
+def directed_winding(edge, L):
+    kind, i, j, d = edge
+    sign = ZZ(1 - 2 * d)
+    return (ZZ(kind == "h" and j == L - 1) * sign,
+            ZZ(kind == "v" and i == L - 1) * sign)
 
 
 def check_candidate(L, walk):
     """1 本の頂点単純閉路について候補の言明を検査する。"""
     m = len(walk)
     turning = sum(step_turning(walk[r], walk[(r + 1) % m]) for r in range(m))
-    total_h = sum(seam_parities(edge, L)[0] for edge in walk) % 2
-    total_v = sum(seam_parities(edge, L)[1] for edge in walk) % 2
+    winding_h = ZZ(sum(directed_winding(edge, L)[0] for edge in walk))
+    winding_v = ZZ(sum(directed_winding(edge, L)[1] for edge in walk))
+    total_h = winding_h % 2
+    total_v = winding_v % 2
     if (total_h, total_v) == (0, 0):
+        assert (winding_h, winding_v) == (ZZ(0), ZZ(0)), (L, walk, winding_h, winding_v)
         assert turning in (ZZ(4), ZZ(-4)), (L, walk, turning)
         return ("trivial", turning)
     assert turning == ZZ(0), (L, walk, turning)

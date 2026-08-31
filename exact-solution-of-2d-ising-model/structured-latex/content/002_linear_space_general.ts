@@ -2198,8 +2198,13 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " について",
       ]),
       displayMath(
-        String.raw`|a_{ij}|^2\le\sum_{k=1}^{n}\sum_{l=1}^{n}|a_{kl}|^2=\|A\|^2
-\quad (\because \text{非負項の有限和は各項以上})`,
+        String.raw`\begin{aligned}
+|a_{ij}|^2
+&\le\sum_{k=1}^{n}\sum_{l=1}^{n}|a_{kl}|^2
+&& (\because \text{非負項の有限和は各項以上})\\
+&=\|A\|^2
+&& (\because \text{行列ノルムの定義})
+\end{aligned}`,
       ),
       paragraph([
         "であり、",
@@ -2209,9 +2214,10 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " であるから ",
         ref("matrix_norm_triangle_inequality"),
         " の Step 0 より ",
-        math(String.raw`|a_{ij}|\le\|A\|`),
-        "。",
+        "次の一段を得る。",
       ]),
+      displayMath(String.raw`|a_{ij}|\le\|A\|
+\quad (\because \text{直前の平方の評価と非負実数の平方の単調性})`),
       paragraph([
         "Step 2: ",
         math(String.raw`K`),
@@ -2225,11 +2231,21 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         math(String.raw`z=(x,y)\in\mathbb{C}`),
         " について ",
         ref("abs_basic_properties"),
-        " (2) より ",
-        math(String.raw`|z|^2=x^2+y^2\ge x^2=|x|^2`),
-        "（最後の等号は実数の絶対値の定義 ",
+        " (2) より、次の一続きの評価を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|z|^2
+&=x^2+y^2
+&& (\because \text{複素数の絶対値の平方})\\
+&\ge x^2
+&& (\because y^2\ge0)\\
+&=|x|^2
+&& (\because \text{実数の絶対値の定義})
+\end{aligned}`),
+      paragraph([
+        "最後の等号は実数の絶対値の定義 ",
         math(String.raw`|x|\in\{x,-x\}`),
-        " による）であり、",
+        " による。",
         ref("matrix_norm_triangle_inequality"),
         " の Step 0 より ",
         math(String.raw`|x|\le|z|`),
@@ -2239,15 +2255,20 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         ref("complex_numbers_form_a_field"),
         " より ",
         math(String.raw`\mathbb{C}`),
-        " の加法とその逆元は成分ごとであるから ",
-        math(String.raw`z_N-z_M=(x_N-x_M,\ y_N-y_M)`),
-        " であり、いま示した評価を ",
+        " の加法とその逆元は成分ごとである。いま示した評価を ",
         math(String.raw`z=z_N-z_M`),
-        " に適用すると ",
-        math(String.raw`|x_N-x_M|\le|z_N-z_M|`),
-        "、",
-        math(String.raw`|y_N-y_M|\le|z_N-z_M|`),
-        "。よって ",
+        " に適用すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z_N-z_M&=(x_N-x_M,\ y_N-y_M)
+&& (\because \mathbb C\text{ の減法は成分ごと})\\
+|x_N-x_M|&\le|z_N-z_M|
+&& (\because \text{直前の第 1 成分の評価})\\
+|y_N-y_M|&\le|z_N-z_M|
+&& (\because \text{同じ評価の第 2 成分版})
+\end{aligned}`),
+      paragraph([
+        "よって ",
         math(String.raw`\mathbb{C}`),
         " の Cauchy 列 ",
         math(String.raw`(z_N)=((x_N,y_N))`),
@@ -2268,7 +2289,13 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " (2) より",
       ]),
       displayMath(
-        String.raw`|z_N-(x,y)|^2=(x_N-x)^2+(y_N-y)^2\to 0`,
+        String.raw`\begin{aligned}
+|z_N-(x,y)|^2
+&=(x_N-x)^2+(y_N-y)^2
+&& (\because \text{複素数の絶対値の平方})\\
+&\longrightarrow 0
+&& (\because x_N\to x\text{ と }y_N\to y)
+\end{aligned}`,
       ),
       paragraph([
         "であるから ",
@@ -2313,8 +2340,13 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
         " とおくと",
       ]),
       displayMath(
-        String.raw`\|A_N-A\|^2=\sum_{i=1}^{n}\sum_{j=1}^{n}\left|(A_N)_{ij}-a_{ij}\right|^2\to 0
-\quad (\because \text{有限個の } 0 \text{ に収束する実数列の和})`,
+        String.raw`\begin{aligned}
+\|A_N-A\|^2
+&=\sum_{i=1}^{n}\sum_{j=1}^{n}\left|(A_N)_{ij}-a_{ij}\right|^2
+&& (\because \text{行列ノルムの定義})\\
+&\longrightarrow 0
+&& (\because \text{有限個の }0\text{ に収束する実数列の和})
+\end{aligned}`,
       ),
       paragraph([
         "であり、Step 2 末尾と同じ理由で ",
@@ -2359,13 +2391,21 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
       paragraph([
         "Step 5: ノルムの評価。",
         ref("matrix_norm_triangle_inequality"),
-        " (3) より ",
-        math(String.raw`\|S_N\|\le T_N\le T:=\sum_{m=0}^{\infty}\|B_m\|`),
-        "（",
+        " (3) より",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|S_N\|
+&\le T_N
+&& (\because \text{行列ノルムの三角不等式を有限回適用})\\
+&\le T
+&& (\because \text{非負項の級数の部分和はその極限以下})
+\end{aligned}`),
+      paragraph([
+        "ここで ", math(String.raw`T:=\sum_{m=0}^{\infty}\|B_m\|`), " である。",
         math(String.raw`(T_N)`),
         " は非負項の級数の部分和なので単調非減少であり ",
         math(String.raw`T_N\le T`),
-        "）。また ",
+        "。また ",
         ref("matrix_norm_triangle_inequality"),
         " (3) より",
       ]),
@@ -2402,7 +2442,10 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
           "根拠を 1 つも書いていなかった（Step 3 の成分の評価、Step 4 の部分和の差の評価、" +
           "Step 5 のノルムの評価）。どの関係がどの根拠によるのかが式から読み取れないので、" +
           "それぞれ 1 行 1 関係の鎖へ分け、各行の末尾に (∵ …) を置いた。" +
-          "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
+        "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
+        "2026-08-31: 完備性と絶対収束判定の証明に残っていた一行複数関係を開いた。" +
+          "成分平方の評価、複素数の成分評価、複素差の二成分評価、極限二箇所、部分和ノルムの二段を、" +
+          "一行一関係と行末根拠へ直した。既存の参照・段・主張・証明の筋は変えていない。",
       ],
     },
   },

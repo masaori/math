@@ -55995,6 +55995,134 @@ P_m(\gamma)_{\mathrm{row}}
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_plane_simple_polygon_turning",
+        labels: [],
+        title: { text: "平面の単純閉多角形の回転数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_plane_simple_polygon_cyclic_turning",
+            focus: {
+              id: "kac_ward_claim_plane_simple_polygon_cyclic_turning",
+              kind: "claim",
+              title: { text: "零巻き付きの頂点単純閉路の循環総回転数は正負 4 のいずれかである" },
+              labels: ["claim_plane_simple_polygon_cyclic_turning"],
+              habitat: "Z",
+              verification: ["sagemath/check/vertex-simple-cycle-turning"],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ",
+                  math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）について、通過の頂点が相異なる、すなわち ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
+                  "）とする。整数巻き付き数（",
+                  ref("def_directed_winding_numbers"), "）が",
+                ]),
+                displayMath(String.raw`w_{\mathrm h}(\gamma)=0,\qquad w_{\mathrm v}(\gamma)=0`),
+                paragraph([
+                  "を満たすならば、循環総回転数（", ref("def_cyclic_total_turning"), "）は",
+                ]),
+                displayMath(String.raw`t_{\circ}(\gamma)\in\{4,-4\}`),
+                paragraph([
+                  "を満たす。これは整数格子の有限な頂点・辺・単位正方形の数え上げだけで決まる言明である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "持ち上げ点を ", math(String.raw`P_0(\gamma),\ldots,P_m(\gamma)\in\mathbb Z\times\mathbb Z`),
+                  " と書く（", ref("def_plane_lift"), "）。巻き付き数が二つとも零なので",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+P_m(\gamma)
+&=P_0(\gamma)+\bigl(L\,w_{\mathrm v}(\gamma),L\,w_{\mathrm h}(\gamma)\bigr)
+&&\bigl(\because\ \blkref{claim_plane_lift_endpoint_winding}\bigr)\\
+&=P_0(\gamma)+(0,0)
+&&\bigl(\because\ w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0\bigr)\\
+&=P_0(\gamma)
+&&\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の加法}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。また、一周期の点 ", math(String.raw`P_0(\gamma),\ldots,P_{m-1}(\gamma)`),
+                  " は二つずつ相異なる（", ref("claim_vertex_simple_plane_lift_points_distinct"), "）。",
+                  "各辺は整数格子の隣り合う二点を結ぶ単位線分である（", ref("def_plane_lift"), "、",
+                  ref("claim_displacement_is_direction_unit"), "）。二本の単位格子線分が内部で交わるなら、",
+                  "横線分の内部に整数の列座標、または縦線分の内部に整数の行座標が必要になるが、隣り合う二整数の間に整数は無い。",
+                  "同一直線上で内部が重なるなら二本は同じ単位線分となり、端点の相異なりに反する。",
+                  "したがって、これらの線分は平面の単純閉格子多角形を作る。",
+                ]),
+                paragraph([
+                  "この多角形の内側にある単位正方形の有限集合を ", math(String.raw`\mathcal F`),
+                  " とする。単純閉多角形についての有限格子版 Jordan の性質により、",
+                  math(String.raw`\mathcal F`), " とその辺・頂点からなる有限セル複体は円板であり、Euler の等式 ",
+                  math(String.raw`V-E+F=1`), " を満たす。ここで ", math(String.raw`F:=|\mathcal F|`),
+                  "、", math(String.raw`E`), " は辺数、", math(String.raw`V`), " は頂点数である。",
+                  "一つ、二つ、三つ、四つの正方形に接する頂点の個数をそれぞれ ",
+                  math(String.raw`v_1,v_2,v_3,v_4\in\mathbb N`), " と置く。境界が単純なので、",
+                  "二つの正方形に接する境界頂点では二正方形は辺を共有し、対角だけで接する場合は無い。",
+                  "したがって、", math(String.raw`v_1,v_2,v_3`),
+                  " はそれぞれ凸頂点・直進頂点・凹頂点の個数であり、", math(String.raw`v_4`),
+                  " は内部頂点の個数である。境界辺数を ", math(String.raw`B`),
+                  "、内部辺数を ", math(String.raw`E_{\mathrm{int}}`), " と置くと",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+V&=v_1+v_2+v_3+v_4
+&&\bigl(\because\ \text{頂点を接する単位正方形の個数で分割}\bigr),\\
+B&=v_1+v_2+v_3
+&&\bigl(\because\ \text{境界は一つの単純閉路}\bigr),\\
+4F&=v_1+2v_2+3v_3+4v_4
+&&\bigl(\because\ \text{単位正方形とその頂点の接続を二通りに数える}\bigr),\\
+4F&=2E_{\mathrm{int}}+B
+&&\bigl(\because\ \text{単位正方形とその辺の接続を二通りに数える}\bigr),\\
+E&=E_{\mathrm{int}}+B
+&&\bigl(\because\ \text{辺を内部辺と境界辺に分割}\bigr),\\
+2E&=4F+B
+&&\bigl(\because\ \text{直前の二等式と }\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph(["である。よって"]),
+                displayMath(String.raw`\begin{aligned}
+4
+&=4(V-E+F)
+&&\bigl(\because\ V-E+F=1\bigr)\\
+&=4(v_1+v_2+v_3+v_4)-2(4F+B)+4F
+&&\bigl(\because\ V=v_1+v_2+v_3+v_4,\ 2E=4F+B\bigr)\\
+&=4(v_1+v_2+v_3+v_4)-(v_1+2v_2+3v_3+4v_4)-2B
+&&\bigl(\because\ 4F=v_1+2v_2+3v_3+4v_4\text{ と }\mathbb Z\text{ の四則}\bigr)\\
+&=4(v_1+v_2+v_3+v_4)-(v_1+2v_2+3v_3+4v_4)-2(v_1+v_2+v_3)
+&&\bigl(\because\ B=v_1+v_2+v_3\bigr)\\
+&=v_1-v_3
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "となる。多角形を一方の向きに巡ると凸頂点の一歩の回転数はすべて ", math(String.raw`1`),
+                  "、凹頂点では ", math(String.raw`-1`), "、直進頂点では ", math(String.raw`0`),
+                  " であり、逆向きに巡ると三つの符号が反転する（", ref("def_step_turning"), "）。したがって",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma)
+&=v_1-v_3=4
+&&\bigl(\because\ \text{一方の巡回方向と直前の等式}\bigr),
+\end{aligned}
+\qquad\text{または}\qquad
+\begin{aligned}
+t_{\circ}(\gamma)
+&=-(v_1-v_3)=-4
+&&\bigl(\because\ \text{逆の巡回方向と直前の等式}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "ゆえに ", math(String.raw`t_{\circ}(\gamma)\in\{4,-4\}`),
+                  " である。全過程は有限格子セルの個数と整数の四則だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
