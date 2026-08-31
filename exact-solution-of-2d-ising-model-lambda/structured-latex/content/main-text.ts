@@ -55086,6 +55086,319 @@ w_{\mathrm h}(\gamma)\bmod2
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_plane_displacement",
+        labels: [],
+        title: { text: "閉歩道の平面変位" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_closed_walk_plane_displacement",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_plane_displacement",
+                  kind: "definition",
+                  title: { text: "向き付き辺の行変位と列変位" },
+                  labels: ["def_plane_displacement"],
+                  habitat: "Z",
+                  statement: [
+                    paragraph([
+                      "向き付き辺 ", math(String.raw`\vec e=(e,d)\in\vec E_L`),
+                      "（", ref("def_oriented_edges"), "）の行変位 ",
+                      math(String.raw`\delta_{\mathrm{row}}(\vec e)\in\mathbb Z`),
+                      " と列変位 ", math(String.raw`\delta_{\mathrm{col}}(\vec e)\in\mathbb Z`),
+                      " を、台の辺の種類による場合分けで",
+                    ]),
+                    displayMath(String.raw`\delta_{\mathrm{row}}(e,d):=
+\begin{cases}0,&e\in E_{L,\mathrm h},\\1-2d,&e\in E_{L,\mathrm v},\end{cases}
+\qquad
+\delta_{\mathrm{col}}(e,d):=
+\begin{cases}1-2d,&e\in E_{L,\mathrm h},\\0,&e\in E_{L,\mathrm v}\end{cases}`),
+                    paragraph([
+                      "で定める。", ref("def_lattice"), " により ",
+                      math(String.raw`E_{L,\mathrm h}`), " と ", math(String.raw`E_{L,\mathrm v}`),
+                      " は互いに素で合併が ", math(String.raw`E_L`),
+                      " なので、どの向き付き辺にも二つの場合のちょうど一方が当たり、二つの写像は ",
+                      math(String.raw`\vec E_L`), " の全体で定まる。値は ",
+                      math(String.raw`1-2d\in\{1,-1\}`), " と ", math(String.raw`0`),
+                      " だけであり、正向きの横向き辺は列番号を ", math(String.raw`1`),
+                      " 進め、正向きの縦向き辺は行番号を ", math(String.raw`1`),
+                      " 進める平面の一歩を表す。整数だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+              },
+              {
+                role: "supportingClaim",
+                element: {
+                  id: "kac_ward_claim_representative_increment",
+                  kind: "claim",
+                  title: { text: "剰余類を一つ進めたときの代表" },
+                  labels: ["claim_representative_increment"],
+                  habitat: "Z",
+                  verification: ["sagemath/check/closed-walk-plane-displacement"],
+                  statement: [
+                    paragraph([
+                      "任意の ", math(String.raw`y\in\mathbb Z/L\mathbb Z`), " について",
+                    ]),
+                    displayMath(String.raw`s\bigl(y+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)=
+\begin{cases}s(y)+1,&s(y)\le L-2,\\0,&s(y)=L-1\end{cases}`),
+                    paragraph([
+                      "が成り立つ（代表 ", math(String.raw`s`), " は ", ref("def_residue_maps"),
+                      "、", math(String.raw`\bar1`), " と加法の記法は ",
+                      ref("def_residue_addition_notation"), "）。",
+                      math(String.raw`0\le s(y)\le L-1`),
+                      " なので二つの場合は重ならず全部を尽くす。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      ref("def_residue_maps"), " により、",
+                      math(String.raw`s\bigl(y+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)`),
+                      " は「", math(String.raw`0\le r\le L-1`), " かつ ",
+                      math(String.raw`\pi(r)=y+_{\mathbb{Z}/L\mathbb{Z}}\bar1`),
+                      "」を満たす唯一の整数 ", math(String.raw`r`),
+                      " である。各場合の右辺がこの二条件を満たすことを確かめる。",
+                    ]),
+                    paragraph([
+                      math(String.raw`s(y)\le L-2`), " の場合。",
+                      math(String.raw`r:=s(y)+1`), " と置くと、",
+                      math(String.raw`0\le s(y)`), " より ", math(String.raw`1\le r`),
+                      "、", math(String.raw`s(y)\le L-2`), " より ", math(String.raw`r\le L-1`),
+                      " である（", math(String.raw`\mathbb Z`), " の順序と加法）。また",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\pi(r)
+&=\pi(s(y)+1)
+&&\bigl(\because\ r\text{ の定義}\bigr)\\
+&=\pi(s(y))+_{\mathbb{Z}/L\mathbb{Z}}\pi(1)
+&&\bigl(\because\ \text{剰余類の加法の定義: }\pi(a)+_{\mathbb{Z}/L\mathbb{Z}}\pi(b)=\pi(a+b)\bigr)\\
+&=y+_{\mathbb{Z}/L\mathbb{Z}}\bar1
+&&\bigl(\because\ \pi(s(y))=y\ \text{（}\blkref{def_residue_maps}\text{）と}\ \bar1=\pi(1)\ \text{（}\blkref{def_residue_addition_notation}\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので二条件が成り立つ。",
+                    ]),
+                    paragraph([
+                      math(String.raw`s(y)=L-1`), " の場合。",
+                      math(String.raw`r:=0`), " と置くと ", math(String.raw`0\le r\le L-1`),
+                      " は ", math(String.raw`L\ge1`), " から従う。また",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+y+_{\mathbb{Z}/L\mathbb{Z}}\bar1
+&=\pi(s(y))+_{\mathbb{Z}/L\mathbb{Z}}\pi(1)
+&&\bigl(\because\ \pi(s(y))=y\ \text{（}\blkref{def_residue_maps}\text{）と}\ \bar1=\pi(1)\ \text{（}\blkref{def_residue_addition_notation}\text{）}\bigr)\\
+&=\pi(s(y)+1)
+&&\bigl(\because\ \text{剰余類の加法の定義}\bigr)\\
+&=\pi(L)
+&&\bigl(\because\ s(y)=L-1\text{ と }\mathbb Z\text{ の加法}\bigr)\\
+&=\pi(0)
+&&\bigl(\because\ L-0=L\in L\mathbb Z\text{ なので }L\text{ と }0\text{ は同じ剰余類に属する}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "なので ", math(String.raw`\pi(r)=y+_{\mathbb{Z}/L\mathbb{Z}}\bar1`),
+                      " が成り立つ。どちらの場合も全過程は整数と剰余類の加法だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+              },
+              {
+                role: "supportingClaim",
+                element: {
+                  id: "kac_ward_claim_edge_representative_displacement",
+                  kind: "claim",
+                  title: { text: "辺ごとの代表座標の差は変位と切断線補正の和である" },
+                  labels: ["claim_edge_representative_displacement"],
+                  habitat: "Z",
+                  verification: ["sagemath/check/closed-walk-plane-displacement"],
+                  statement: [
+                    paragraph([
+                      "任意の ", math(String.raw`\vec e=(e,d)\in\vec E_L`),
+                      " について、始点と終点を ",
+                      math(String.raw`\operatorname{src}(\vec e)=(i,j)`), "、",
+                      math(String.raw`\operatorname{tgt}(\vec e)=(i',j')`),
+                      " と書くと（", ref("def_oriented_edge_endpoints"), "）、", math(String.raw`\mathbb Z`), " の二つの等式",
+                    ]),
+                    displayMath(String.raw`s(i')-s(i)=\delta_{\mathrm{row}}(\vec e)-L\,c_{\mathrm v}(\vec e)(1-2d),
+\qquad
+s(j')-s(j)=\delta_{\mathrm{col}}(\vec e)-L\,c_{\mathrm h}(\vec e)(1-2d)`),
+                    paragraph([
+                      "が成り立つ。変位は ", ref("def_plane_displacement"),
+                      "、切断線指示値は ", ref("def_seam_parities"),
+                      "、代表 ", math(String.raw`s`), " は ", ref("def_residue_maps"), " である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      ref("def_lattice"), " により ", math(String.raw`e\in E_{L,\mathrm h}`),
+                      " か ", math(String.raw`e\in E_{L,\mathrm v}`),
+                      " のちょうど一方が成り立つ。横向きの場合を示し、縦向きの場合は行と列、",
+                      math(String.raw`c_{\mathrm h}`), " と ", math(String.raw`c_{\mathrm v}`),
+                      " を入れ替えた同じ計算で従う。",
+                    ]),
+                    paragraph([
+                      math(String.raw`e\in E_{L,\mathrm h}`), " とする。",
+                      ref("def_edge_numbering"), " の全単射性（", ref("claim_edge_row_partition"),
+                      "）により ", math(String.raw`e=n_{\mathrm h}(i_0,j_0)`),
+                      " を満たす ", math(String.raw`(i_0,j_0)\in V_L`),
+                      " がちょうど一つある。", ref("def_boundary_maps"), " により ",
+                      math(String.raw`\partial_0(e)=(i_0,j_0)`), "、",
+                      math(String.raw`\partial_1(e)=(i_0,\,j_0+_{\mathbb{Z}/L\mathbb{Z}}\bar1)`),
+                      " である。",
+                    ]),
+                    paragraph([
+                      "行の等式。", ref("def_oriented_edge_endpoints"),
+                      " により、", math(String.raw`d`), " の値によらず始点と終点はどちらも ",
+                      math(String.raw`\partial_0(e),\partial_1(e)`),
+                      " のいずれかなので、第 1 成分は ", math(String.raw`i=i'=i_0`),
+                      " である。左辺は ", math(String.raw`s(i_0)-s(i_0)=0`),
+                      "（", math(String.raw`\mathbb Z`), " の減法）。右辺は、",
+                      ref("def_plane_displacement"), " により ",
+                      math(String.raw`\delta_{\mathrm{row}}(\vec e)=0`),
+                      " であり、", ref("def_edge_numbering"), " により ",
+                      math(String.raw`n_{\mathrm v}`), " の値はすべて ",
+                      math(String.raw`E_{L,\mathrm v}`), " に属し ", ref("def_lattice"),
+                      " により ", math(String.raw`E_{L,\mathrm h}`),
+                      " と交わらないので、", math(String.raw`e`), " は ",
+                      math(String.raw`n_{\mathrm v}`), " の値ではなく、",
+                      ref("def_seam_parities"), " により ",
+                      math(String.raw`c_{\mathrm v}(\vec e)=0`),
+                      " である。したがって右辺も ",
+                      math(String.raw`0-L\cdot0\cdot(1-2d)=0`),
+                      "（", math(String.raw`\mathbb Z`), " の乗法と減法）で、等式が成り立つ。",
+                    ]),
+                    paragraph([
+                      "列の等式。", ref("def_seam_parities"), " と ",
+                      math(String.raw`n_{\mathrm h}`), " の全単射性により、",
+                      math(String.raw`c_{\mathrm h}(\vec e)=1`), " と ",
+                      math(String.raw`s(j_0)=L-1`), " は同値である。",
+                      math(String.raw`d=0`), " の場合、",
+                      ref("def_oriented_edge_endpoints"), " により ",
+                      math(String.raw`j=j_0`), "、",
+                      math(String.raw`j'=j_0+_{\mathbb{Z}/L\mathbb{Z}}\bar1`), " なので",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+s(j')-s(j)
+&=s\bigl(j_0+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)-s(j_0)
+&&\bigl(\because\ j,j'\text{ の値}\bigr)\\
+&=\begin{cases}
+\bigl(s(j_0)+1\bigr)-s(j_0)=1,&s(j_0)\le L-2\\
+0-(L-1)=1-L,&s(j_0)=L-1
+\end{cases}
+&&\bigl(\because\ \blkref{claim_representative_increment}\text{ と }\mathbb Z\text{ の減法}\bigr)\\
+&=1-L\,c_{\mathrm h}(\vec e)
+&&\bigl(\because\ c_{\mathrm h}(\vec e)=1\Leftrightarrow s(j_0)=L-1\text{ なので両場合を一つの式にまとめられる}\bigr)\\
+&=\delta_{\mathrm{col}}(\vec e)-L\,c_{\mathrm h}(\vec e)(1-2d)
+&&\bigl(\because\ d=0\text{ なので }\delta_{\mathrm{col}}(\vec e)=1,\ 1-2d=1\ \text{（}\blkref{def_plane_displacement}\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      math(String.raw`d=1`), " の場合、",
+                      ref("def_oriented_edge_endpoints"), " により ",
+                      math(String.raw`j=j_0+_{\mathbb{Z}/L\mathbb{Z}}\bar1`), "、",
+                      math(String.raw`j'=j_0`), " なので",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+s(j')-s(j)
+&=s(j_0)-s\bigl(j_0+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
+&&\bigl(\because\ j,j'\text{ の値}\bigr)\\
+&=-\bigl(1-L\,c_{\mathrm h}(\vec e)\bigr)
+&&\bigl(\because\ d=0\text{ の場合の二行目・三行目と同じ計算の符号を }\mathbb Z\text{ の減法で反転する}\bigr)\\
+&=(-1)-L\,c_{\mathrm h}(\vec e)\cdot(-1)
+&&\bigl(\because\ \mathbb Z\text{ の分配則}\bigr)\\
+&=\delta_{\mathrm{col}}(\vec e)-L\,c_{\mathrm h}(\vec e)(1-2d)
+&&\bigl(\because\ d=1\text{ なので }\delta_{\mathrm{col}}(\vec e)=-1,\ 1-2d=-1\ \text{（}\blkref{def_plane_displacement}\text{）}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "で、等式が成り立つ。全過程は有限集合の場合分けと整数の加減乗除だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_closed_walk_plane_displacement",
+              kind: "claim",
+              title: { text: "閉歩道の変位の総和は巻き付き数の L 倍である" },
+              labels: ["claim_closed_walk_plane_displacement"],
+              habitat: "Z",
+              verification: ["sagemath/check/closed-walk-plane-displacement"],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ",
+                  math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）について、",
+                  math(String.raw`\mathbb Z`), " の二つの等式",
+                ]),
+                displayMath(String.raw`\sum_{k=1}^{m}\delta_{\mathrm{row}}(\vec e_k)=L\,w_{\mathrm v}(\gamma),
+\qquad
+\sum_{k=1}^{m}\delta_{\mathrm{col}}(\vec e_k)=L\,w_{\mathrm h}(\gamma)`),
+                paragraph([
+                  "が成り立つ。変位は ", ref("def_plane_displacement"),
+                  "、整数巻き付き数は ", ref("def_directed_winding_numbers"), " である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "準備。巡回後続の写像 ",
+                  math(String.raw`\sigma:\{1,\ldots,m\}\to\{1,\ldots,m\}`),
+                  " を ", math(String.raw`\sigma(k):=k+1`), "（",
+                  math(String.raw`1\le k\le m-1`), "）、",
+                  math(String.raw`\sigma(m):=1`),
+                  " で定める。巡回前続（",
+                  math(String.raw`\sigma'(k):=k-1`), "（", math(String.raw`2\le k\le m`),
+                  "）、", math(String.raw`\sigma'(1):=m`),
+                  "）と合成すると両順とも恒等写像になるので、",
+                  math(String.raw`\sigma`), " は有限集合 ",
+                  math(String.raw`\{1,\ldots,m\}`), " の全単射である。各 ",
+                  math(String.raw`k`), " について ",
+                  math(String.raw`\operatorname{src}(\vec e_k)=(i_k,j_k)`),
+                  " と書く。", math(String.raw`1\le k\le m-1`), " では ",
+                  ref("def_nonbacktracking_edge_sequence"), " と ",
+                  ref("def_nonbacktracking_successors"), " により ",
+                  math(String.raw`\operatorname{tgt}(\vec e_k)=\operatorname{src}(\vec e_{k+1})`),
+                  "、", math(String.raw`k=m`), " では ",
+                  ref("def_closed_nonbacktracking_walk"), " により ",
+                  math(String.raw`\operatorname{tgt}(\vec e_m)=\operatorname{src}(\vec e_1)`),
+                  " なので、すべての ", math(String.raw`k`), " について ",
+                  math(String.raw`\operatorname{tgt}(\vec e_k)=\operatorname{src}(\vec e_{\sigma(k)})=(i_{\sigma(k)},j_{\sigma(k)})`),
+                  " である。行の等式を示す。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{m}\delta_{\mathrm{row}}(\vec e_k)
+&=\sum_{k=1}^{m}\Bigl(\bigl(s(i_{\sigma(k)})-s(i_k)\bigr)+L\,c_{\mathrm v}(\vec e_k)(1-2d_k)\Bigr)
+&&\bigl(\because\ \blkref{claim_edge_representative_displacement}\text{ を移項し、}\operatorname{tgt}(\vec e_k)=(i_{\sigma(k)},j_{\sigma(k)})\text{ を代入する}\bigr)\\
+&=\sum_{k=1}^{m}\bigl(s(i_{\sigma(k)})-s(i_k)\bigr)+\sum_{k=1}^{m}L\,c_{\mathrm v}(\vec e_k)(1-2d_k)
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=\sum_{k=1}^{m}s(i_{\sigma(k)})-\sum_{k=1}^{m}s(i_k)+L\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)(1-2d_k)
+&&\bigl(\because\ \text{有限和の分割と }\mathbb Z\text{ の分配則}\bigr)\\
+&=L\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)(1-2d_k)
+&&\bigl(\because\ \sigma\text{ は全単射なので添字の置換は有限和を変えず、二つの和が打ち消し合う}\bigr)\\
+&=L\,w_{\mathrm v}(\gamma)
+&&\bigl(\because\ \blkref{def_directed_winding_numbers}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "列の等式も、", math(String.raw`s(j_{\sigma(k)})-s(j_k)`), " と ",
+                  math(String.raw`c_{\mathrm h}`), "、",
+                  math(String.raw`\delta_{\mathrm{col}}`),
+                  " を用いた同じ五行で従う。全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",
+                  "始点を一つ固定して各歩の変位を積み上げれば閉歩道は平面格子 ",
+                  math(String.raw`\mathbb Z\times\mathbb Z`),
+                  " の道へ持ち上がり、この主張はその終点の変位が ",
+                  math(String.raw`(L\,w_{\mathrm v}(\gamma),\,L\,w_{\mathrm h}(\gamma))`),
+                  " であることを言っている。後続の離散 Whitney の議論はこの持ち上げの上で回転数を数える。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
