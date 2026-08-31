@@ -6,6 +6,7 @@
 - 1 tick = 既存出力のレビューと修正 → セクションを 1 つだけ前進 → 検証 → push → 停止
 
 ## 現在地
+- **2026-08-31 の 26 回目の tick で、平面へ持ち上げた隣接二歩が逆ベクトルにならないことを本文と SageMath で固定した。** 非後退接続では方向差が $0,1,-1$ のいずれかであり、方向単位ベクトルの四値が単射で $-u(q)=u(q+2)$ を満たすことから、$u(\operatorname{dir}(\vec f))\ne-u(\operatorname{dir}(\vec e))$ を示した（`claim_lifted_steps_do_not_reverse`）。SageMath `lifted-nonbacktracking` は $L=1,\dots,4$ の全非後退接続 360 組を `ZZ` で検査した。Lean は未着手（記述と SageMath まで）。検算対応 339 件、本文 743 ブロック・PDF 336 ページ、Lean 9,616 jobs・sorry なしを通した。次は平面格子の単純閉路・周期単純路の回転数を示す。前進前レビューでは前 tick の方向単位ベクトルの定義・対応主張・SageMath を照合し、後続が直接使うため「何も言っていない主張」ではなく修正対象なしとした。並列の式変形統一は、姉妹側の初等的な正弦評価の証明にあった四本の一行複数関係を一行一関係・行末根拠つきの鎖へ開いた。
 - **2026-08-31 の 25 回目の tick で、平面変位が方向番号の方向単位ベクトルに等しいことを本文と SageMath で固定した。** 台帳先頭の「平面格子へ持ち上げた単純閉路・周期単純路の回転数」を一論法ずつへ割り、その最初の橋として方向単位ベクトル写像 $u:\mathbb Z/4\mathbb Z\to\mathbb Z\times\mathbb Z$（右・下・左・上に $(0,1),(1,0),(0,-1),(-1,0)$）を定義し（`def_direction_unit_vector`）、すべての向き付き辺で $(\delta_{\mathrm{row}},\delta_{\mathrm{col}})=u(\operatorname{dir})$ を四つの場合の行末根拠つきの鎖で証明した（`claim_displacement_is_direction_unit`）。これにより平面へ持ち上げた各歩は方向番号が指す四方向の単位ベクトルとなり、後続の離散 Whitney の回転数の議論を平面の四方向の言葉で進められる。SageMath `direction-unit-displacement` は $L=1,\dots,4$ の全向き付き辺 120 本と $u$ の四値の相異なりを `ZZ` で検査した。Lean は未着手（記述と SageMath まで）。検算対応 338 件、本文 741 ブロック・check・PDF 335 ページを通した。次は持ち上げの隣接二歩が逆ベクトルにならないこと（平面の非後退性）を示す。前進前レビューでは前 tick の原始的な整数の組の定義と巻き付きベクトルの零または原始性の主張を SageMath・台帳と照合し、修正対象が無いことを確認した。並列の式変形統一は、姉妹側の臨界点の基本性質の証明にあった一行三等号 $\kappa'(K_c)=2+\frac{2}{\sinh 2K_c}=2+2=4$ を三段の行末根拠つきの鎖へ開いた。
 - **2026-08-31 の 24 回目の tick で、頂点単純閉路の整数巻き付きベクトルが零または原始的であることを本文と SageMath で固定した。** 有限正方トーラス上の単純閉曲線を分離・非分離に分け、非分離の場合は有限双対グラフで曲線を一度だけ横断する閉路を構成し、符号付き交点数の行列式が $\pm1$ になることから Bézout 条件を得た（`claim_vertex_simple_winding_zero_or_primitive`）。SageMath `vertex-simple-winding-primitive` は $L=1,2,3,4$ の頂点単純閉路 373,720 本を `ZZ` で全列挙し、零 73,616 本・非零原始 300,104 本を検査した。Lean は未着手（記述と SageMath まで）。次は平面格子へ持ち上げた単純閉路・周期単純路の回転数を示す。前進前レビューでは前 tick の平面変位三主張と SageMath を照合し、いずれも後続が使う剰余類の折り返し・切断線補正・望遠鏡和を述べているため「何も言っていない主張」ではなく、修正対象が無いことを確認した。並列の式変形統一は、姉妹側の非負平方根の存在証明に埋まっていた $0^2=0\le x$ を二段の行末根拠つきの鎖へ開いた。
 - **2026-08-31 の 23 回目の tick で、閉歩道の平面変位を定義し、その総和が巻き付き数の $L$ 倍に等しいことを本文と SageMath で固定した。** 向き付き辺ごとの行変位・列変位 $\delta_{\mathrm{row}},\delta_{\mathrm{col}}\in\{0,\pm1\}$（`def_plane_displacement`）を置き、剰余類を一つ進めたときの代表の値（`claim_representative_increment`）から辺ごとの恒等式 $s(i')-s(i)=\delta_{\mathrm{row}}-L\,c_{\mathrm v}(1-2d)$（`claim_edge_representative_displacement`）を示し、閉歩道での望遠鏡和で $\sum_k\delta_{\mathrm{row}}(\vec e_k)=L\,w_{\mathrm v}(\gamma)$、$\sum_k\delta_{\mathrm{col}}(\vec e_k)=L\,w_{\mathrm h}(\gamma)$ を得た（`claim_closed_walk_plane_displacement`。始点を固定すれば平面格子への持ち上げの終点変位がこの値になる）。SageMath `closed-walk-plane-displacement` は代表の増分 21 件・全向き付き辺 120 件（$L\le4$）・閉じた非後退辺列 34,112 本（$L=1,2,3$、長さ 8 まで）を `ZZ` で検査した。Lean は未着手（記述と SageMath まで。tick 22 の巻き付き数の偶奇も同様）。検算対応 336 件、本文 735 ブロック・check・PDF 333 ページを通した。次は頂点単純性から巻き付きベクトル $(w_{\mathrm v},w_{\mathrm h})$ が零または原始的であることを示す（Lean 二版の配線はその後まとめず一件ずつ）。前進前レビューでは前 tick の整数巻き付き数の定義・偶奇の主張・SageMath・台帳を照合し、修正対象が無いことを確認した。並列の式変形統一は、姉妹側の非負平方根の一意性の証明にあった散文中の一行二等号 $y_1^2=x=y_2^2$ を二段の行末根拠つきの鎖へ開いた。
@@ -25,7 +26,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 四つの Kac--Ward 行列式による有限トーラス公式 | 方向番号と平面変位の対応（方向単位ベクトル）まで記述・SageMath 完了（離散 Whitney 系の Lean は未着手） | 離散 Whitney を一論法ずつ進める: 持ち上げの隣接二歩が逆ベクトルにならないこと（平面の非後退性）／平面格子の単純閉路・周期単純路の回転数／候補への合成（未着手の Lean 二版もこの列で一件ずつ配線する）。その後、反転対を含む置換の項、軌道と偶部分グラフ対の数え上げ、平方恒等式への合成へ進む。 |
+| Onsager 閉形式への接続 | 四つの Kac--Ward 行列式による有限トーラス公式 | 持ち上げた隣接二歩の平面非後退性まで記述・SageMath 完了（離散 Whitney 系の Lean は未着手） | 離散 Whitney を一論法ずつ進める: 平面格子の単純閉路・周期単純路の回転数／候補への合成（未着手の Lean 二版もこの列で一件ずつ配線する）。その後、反転対を含む置換の項、軌道と偶部分グラフ対の数え上げ、平方恒等式への合成へ進む。 |
 | Onsager 閉形式への接続 | ねじれた有限 Fourier 分解と正方格子の分散因子 | 未着手 | 円分体上の有限代数計算として閉じ、SageMath と二本の Lean 証明を付ける。 |
 | Onsager 閉形式への接続 | 有限体積の積公式と四ねじれの共通極限 | 未着手 | 平方根分岐・前因子を固定し、境界ねじれの密度差が消えることを証明する。 |
 | Onsager 閉形式への接続 | Riemann 和から Onsager 閉形式と臨界点へ接続する | 未着手 | ここで初めて実対数・極限・積分へ脱出し、既存の自由エントロピー密度と同定する。 |
@@ -37,6 +38,7 @@
 割り直した理由は「前進の記録」へ 1 行で残す。
 
 ## 前進の記録
+- 2026-08-31（26 回目）: 非後退接続の方向差と方向単位ベクトルの四値から、平面へ持ち上げた隣接二歩が逆ベクトルにならないことを示した。SageMath `lifted-nonbacktracking` は $L=1,\dots,4$ の全非後退接続 360 組を検査した。Lean は未着手。
 - 2026-08-31（25 回目）: 「平面格子へ持ち上げた単純閉路・周期単純路の回転数」を一論法ずつへ割り、最初の橋として方向単位ベクトル $u$ を定義し、全向き付き辺で $(\delta_{\mathrm{row}},\delta_{\mathrm{col}})=u(\operatorname{dir})$ を四場合の鎖で証明した。SageMath `direction-unit-displacement` は $L=1,\dots,4$ の 120 本を検査した。Lean は未着手。
 - 2026-08-31（24 回目）: 原始的な整数の組を定義し、頂点単純閉路の巻き付きベクトルが零または原始的であることを有限双対グラフの一回交差と Bézout 条件で証明した。SageMath は $L=1,2,3,4$ の 373,720 本を全列挙した。Lean は未着手。
 - 2026-08-31（23 回目）: 閉歩道の平面変位 `def_plane_displacement` と、代表の増分 `claim_representative_increment`・辺ごとの恒等式 `claim_edge_representative_displacement`・総和＝巻き付き数の $L$ 倍 `claim_closed_walk_plane_displacement` を本文へ追加し、SageMath `closed-walk-plane-displacement`（34,112 本の閉歩道を含む三検査）で固定した。Lean は未着手。
@@ -48,6 +50,7 @@
 規則は両プロジェクトの README にある「式変形は一続きにする。根拠は行末に $(\because\ \dots)$ で書く」。
 **毎 tick 1 件だけ**書き換え、検証を通し、ここへ記録する。中身は変えない（書き方だけ）。
 
+- 2026-08-31（26 回目）: 姉妹側の初等的な正弦評価の証明にあった、積分表示・非負性・$t=\theta/2$ の代入の四本の一行複数関係を、一行一関係・行末根拠つきの鎖へ開いた。内容と参照は不変。
 - 2026-08-31（25 回目）: 姉妹側の臨界点の基本性質の証明 (5) にあった一行三等号 $\kappa'(K_c)=2+\frac{2}{\sinh 2K_c}=2+2=4$ を、(1) の表示の読み・$K_c$ の定義・$\mathbb R$ の四則をそれぞれ根拠とする三段の鎖へ開いた。内容と参照は不変。姉妹側 check・PDF 349 ページを通した。
 - 2026-08-31（24 回目）: 姉妹側の非負平方根の存在証明で、集合 $S$ の非空性に使う散文中の一行二関係 $0^2=0\le x$ を、零の冪と $x\ge0$ をそれぞれ根拠とする二段の鎖へ開いた。内容と参照は不変。姉妹側 check・PDF 349 ページを通した。
 - 2026-08-31（23 回目）: 姉妹側の非負平方根の一意性の証明で、散文に埋まっていた一行二等号 $y_1^2=x=y_2^2$ を、$y_1$ の仮定・$y_2$ の仮定をそれぞれ根拠とする二段の行末根拠つきの鎖へ開いた。内容と参照は不変。姉妹側 check・PDF 349 ページを通した。
@@ -69,6 +72,7 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-31（26 回目）: 前 tick の `def_direction_unit_vector`・`claim_displacement_is_direction_unit` を本文・SageMath `direction-unit-displacement`（120 本）・台帳で照合した。定義は値の住処と well-defined 性を確定し、主張は後続の平面回転数が直接引くため「何も言っていない主張」ではなく、記号の濫用・件数の不一致も無かった。修正対象なし。
 - 2026-08-31（25 回目）: 前 tick の `def_primitive_integer_pair`・`claim_vertex_simple_winding_zero_or_primitive` を本文・SageMath `vertex-simple-winding-primitive`（373,720 本、零 73,616・非零原始 300,104）・台帳で照合した。定義は Bézout 同値と判定可能性を確定し、主張は後続の離散 Whitney が引く分離・非分離の場合分けを与えるため「何も言っていない主張」ではなく、記号の濫用・件数の不一致も無かった。修正対象なし。
 - 2026-08-31（24 回目）: 前 tick の `def_plane_displacement`・`claim_representative_increment`・`claim_edge_representative_displacement`・`claim_closed_walk_plane_displacement` を本文・SageMath・台帳で照合した。剰余類の折り返し、辺ごとの切断線補正、閉歩道の望遠鏡和はいずれも後続の離散 Whitney が使う内容を持ち、「何も言っていない主張」・記号の濫用・不一致は無かった。修正対象なし。
 - 2026-08-31（23 回目）: 前 tick の `def_directed_winding_numbers`・`claim_directed_winding_parity` を SageMath `directed-winding-parity`・台帳・本文と照合した。定義は住処 $\mathbb Z$ を確定し、主張は平面変位から切断線偶奇を読み戻す橋として後続が引くため「何も言っていない主張」ではなく、記号の濫用・不一致も無かった。修正対象なし。

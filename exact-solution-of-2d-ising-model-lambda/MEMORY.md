@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 25 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 26 回目の tick 時点）
+
+**平面へ持ち上げた隣接二歩が逆ベクトルにならないことを本文と SageMath で固定した（Lean 未着手）。** 非後退接続 $\vec f\in\operatorname{Next}(\vec e)$ では方向差が $0,1,-1$ のいずれかであり、方向単位ベクトルの四値が単射で $-u(q)=u(q+2)$ を満たすことから、$u(\operatorname{dir}(\vec f))\ne-u(\operatorname{dir}(\vec e))$ を示した（`claim_lifted_steps_do_not_reverse`）。SageMath `lifted-nonbacktracking` は $L=1,\dots,4$ の全非後退接続 360 組を `ZZ` で検査した。検算対応 339 件、本文 743 ブロック・PDF 336 ページ、Lean 9,616 jobs・sorry なしを通した。次は平面格子の単純閉路・周期単純路の回転数を示す。
+
+前進前レビューでは前 tick の方向単位ベクトルの定義・平面変位との対応・SageMath 120 本を照合した。定義は住処と well-defined 性を確定し、対応主張は後続の平面回転数へ渡すため「何も言っていない主張」ではなく、修正対象なしとした。並列の式変形統一は、姉妹側の初等的な正弦評価の証明にあった四本の一行複数関係を、一行一関係・行末根拠つきの鎖へ開いた。
+
+## ひとつ前の到達点（2026-08-31 の 25 回目の tick 時点）
 
 **平面変位が方向番号の方向単位ベクトルに等しいことを本文と SageMath で固定した（Lean 未着手）。** 台帳先頭の「平面格子へ持ち上げた単純閉路・周期単純路の回転数」を一論法ずつへ割り、最初の橋として方向単位ベクトル写像 $u:\mathbb Z/4\mathbb Z\to\mathbb Z\times\mathbb Z$（右・下・左・上 $=0,1,2,3$ に $(0,1),(1,0),(0,-1),(-1,0)$）を定義し（`def_direction_unit_vector`）、すべての向き付き辺で $(\delta_{\mathrm{row}},\delta_{\mathrm{col}})=u(\operatorname{dir})$ を方向番号の四つの場合の行末根拠つきの鎖で証明した（`claim_displacement_is_direction_unit`）。これで平面へ持ち上げた各歩は方向番号が指す四方向の単位ベクトルになり、離散 Whitney の回転数の議論を平面の四方向の言葉で進められる。SageMath `direction-unit-displacement` は $L=1,\dots,4$ の全向き付き辺 120 本と $u$ の四値の相異なりを `ZZ` で検査した。検算対応 338 件、本文 741 ブロック・check・PDF 335 ページを通した。次は持ち上げの隣接二歩が逆ベクトルにならないこと（平面の非後退性）を示す。
 

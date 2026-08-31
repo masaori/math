@@ -55641,6 +55641,78 @@ u(\pi_4(3)):=(-1,0)`),
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_lifted_nonbacktracking",
+        labels: [],
+        title: { text: "平面へ持ち上げた隣接二歩の非後退性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_lifted_steps_do_not_reverse",
+            focus: {
+              id: "kac_ward_claim_lifted_steps_do_not_reverse",
+              kind: "claim",
+              title: { text: "持ち上げた隣接二歩は逆ベクトルにならない" },
+              labels: ["claim_lifted_steps_do_not_reverse"],
+              habitat: "Z",
+              verification: ["sagemath/check/lifted-nonbacktracking"],
+              statement: [
+                paragraph([
+                  "任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " と、その直ちに引き返さない後続辺 ",
+                  math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), "（",
+                  ref("def_nonbacktracking_successors"), "）について、", math(String.raw`\mathbb Z\times\mathbb Z`), " で",
+                ]),
+                displayMath(String.raw`u\bigl(\operatorname{dir}(\vec f)\bigr)\ne-u\bigl(\operatorname{dir}(\vec e)\bigr)`),
+                paragraph([
+                  "が成り立つ。", ref("claim_displacement_is_direction_unit"),
+                  " により、これは平面格子へ持ち上げた隣接二歩の変位が互いに逆ベクトルにならないことを述べる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "背理法で示す。", math(String.raw`u(\operatorname{dir}(\vec f))=-u(\operatorname{dir}(\vec e))`),
+                  " と仮定する。方向単位ベクトルの四つの値を読むと、任意の ",
+                  math(String.raw`q\in\mathbb Z/4\mathbb Z`), " について",
+                ]),
+                displayMath(String.raw`-u(q)=u(q+2)`),
+                paragraph([
+                  "である（", math(String.raw`q=\pi_4(0),\pi_4(1),\pi_4(2),\pi_4(3)`),
+                  " の順に、", math(String.raw`-(0,1)=(0,-1)`), "、",
+                  math(String.raw`-(1,0)=(-1,0)`), "、",
+                  math(String.raw`-(0,-1)=(0,1)`), "、",
+                  math(String.raw`-(-1,0)=(1,0)`), "。", ref("def_direction_unit_vector"), "）。したがって",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+u\bigl(\operatorname{dir}(\vec f)\bigr)
+&=-u\bigl(\operatorname{dir}(\vec e)\bigr)
+&&\bigl(\because\ \text{背理法の仮定}\bigr)\\
+&=u\bigl(\operatorname{dir}(\vec e)+2\bigr)
+&&\bigl(\because\ \text{上で確かめた }-u(q)=u(q+2)\bigr)
+\end{aligned}`),
+                paragraph([
+                  ref("def_direction_unit_vector"), " の四つの値は相異なるので ", math(String.raw`u`),
+                  " は単射であり、", math(String.raw`\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)+2`),
+                  " を得る。一方、", math(String.raw`\vec f\in\operatorname{Next}(\vec e)`),
+                  " に対する方向差は直進・左回転・右回転のいずれかなので（",
+                  ref("def_rotation_phase"), "）、",
+                ]),
+                displayMath(String.raw`\operatorname{dir}(\vec f)\in
+\bigl\{\operatorname{dir}(\vec e),\,\operatorname{dir}(\vec e)+1,\,\operatorname{dir}(\vec e)-1\bigr\}`),
+                paragraph([
+                  "である。", math(String.raw`\mathbb Z/4\mathbb Z`), " では ",
+                  math(String.raw`2\ne0,1,-1`), " なので矛盾する。ゆえに主張が成り立つ。",
+                  "全過程は四元集合の有限な場合分けと整数の組の符号反転だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
