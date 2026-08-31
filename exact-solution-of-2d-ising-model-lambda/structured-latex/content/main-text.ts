@@ -56620,10 +56620,8 @@ N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
 V_{r,g}(\gamma)
 &=N_{r,g-1}^{\rightarrow}(\gamma)-N_{r,g}^{\rightarrow}(\gamma)
 &&\bigl(\because\ \blkref{claim_adjacent_cells_ray_crossing_difference}\text{ と }\mathbb Z\text{ の四則}\bigr)\\
-&\equiv1-0\pmod2
-&&\bigl(\because\ \blkref{def_odd_ray_interior_cells}\text{：内側は奇数、外側は偶数}\bigr)\\
 &\equiv1\pmod2
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+&&\bigl(\because\ \blkref{def_odd_ray_interior_cells}\text{：内側は奇数、外側は偶数、および }\mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
                 paragraph([
                   "である。奇数の自然数は零でないので ", math(String.raw`V_{r,g}(\gamma)\ge1`),
