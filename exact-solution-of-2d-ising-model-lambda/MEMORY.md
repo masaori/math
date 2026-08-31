@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 19 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 20 回目の tick 時点）
+
+**反転対を含まない非後退置換の軌道列の頂点単純閉路分解を Lean 二版へ配線し、四層検証を完了した。** 具体版 `KacWard.reversalFreeOrbit_vertexSimpleDecomposition` は、反転対なしから既証 `reversalFreeOrbitSupportEdges_distinct` で得る軌道列の台の相異なりを初期不変条件とし、接触点分割が子の二本にも相異なりを保存することを使って接触対数零まで累積帰納した。必要十分版 `NecSuf.KacWard.invariant_elimination_by_splitting_necSuf` は、自然数値の測度、加法的な台の目録、二つの法 2 の量、分割で保存される不変条件だけを残した。SageMath の全軌道列 3,376 本、検算対応 333 件、Lean 9,616 jobs・sorry 検査 1,635 件、本文 check を通した。次は平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ へまとめる。
+
+前進前レビューでは前 tick の本文と SageMath を照合し、後続が直接使う三条件を持つため「何も言っていない主張」ではなく、不一致も無いことを確認した。並列の式変形統一は、姉妹側の $Z_1,Y_1$ のクロネッカー積表示にあった一行二等号二本を、一般表示の端の場合と定義を根拠とする二段ずつの鎖へ開いた。
+
+## ひとつ前の到達点（2026-08-31 の 19 回目の tick 時点）
 
 **反転対を含まない非後退置換の軌道列が頂点単純な閉路族へ分かれることを、本文と SageMath で固定した（`claim_reversal_free_orbit_vertex_simple_decomposition`。Lean 未着手）。** 前 tick までに示した軌道列の閉路性（`claim_moved_orbit_closed_nonbacktracking`）と台の辺の相異なり（`claim_reversal_free_orbit_support_edges_distinct`）により、軌道列 $\gamma_{\varphi}(\vec e)$ が接触点分割の整礎帰納 `claim_contact_elimination_by_splitting` の仮定を満たすことを確かめ、頂点単純（接触対数零）な閉路の有限族への分解、台の辺集合の互いに素な分割、切断線偶奇の保存を一つの主張にまとめた。この主張は、非後退置換和の各軌道を偶部分グラフ側の頂点単純な閉路の言葉へ渡す、平方恒等式 $D^{a,b}_L=(Q^{a,b}_L)^2$ への橋の部品である。SageMath `reversal-free-orbit-contact-decomposition` は $L=2$ の反転対なし非後退置換 $497$ 件の全軌道列 $3{,}376$ 本へ分割手続きを走らせ、頂点単純閉路 $6{,}768$ 本を得て三条件を検査した（実際に二本以上へ分かれた軌道列 $2{,}048$ 本）。検算対応 333 件、本文 727 ブロック・PDF 330 ページを通した。次はこの主張の Lean 具体版・必要十分版を書く。
 

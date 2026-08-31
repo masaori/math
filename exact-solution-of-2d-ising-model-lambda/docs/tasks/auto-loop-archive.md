@@ -13755,3 +13755,9 @@ sorry 非依存検査への登録（3 件）も揃っている。修正は無い
 - 前進記録: `claim_signed_even_subgraph_sector_sum` の Lean 具体版 `signedEvenSubgraphPolynomial_eq_sectorSum` と必要十分版 `weightedSum_eq_sum_label_fibers_necSuf` を書き、本文の `lean:` と sorry 検査へ登録した。
 - 式変形の統一: 姉妹側の「sqrt と積が可換になる条件」の零因子の場合にあった二つの一行複数等号を、直前の計算と複素数の零元の性質を根拠とする四つの一行一等号の鎖へ開いた。
 - レビュー記録: 前 tick の `def_signed_even_subgraph_polynomial` と `claim_signed_even_subgraph_sector_sum` を、本文の四セクターへの有限和分割、SageMath の $L=1,2,3$ 全列挙、既存の巻き付き偶奇の定義へ照合し、「何も言っていない主張」・内容の不一致・未定義記法が無いことを確認した。
+## 2026-08-31 の 20 回目の tick で台帳から移した記録（2026-08-31 の 15 回目）
+
+- 現在地: 反転対を含まない非後退置換の動く辺の台が偶部分グラフであることを本文と SageMath で固定した。台上の向き付き代表の一意性、置換による入辺と出辺の全単射、端点数の二倍表示を示した。
+- 前進記録: `def_moved_edge_support_set` と `claim_reversal_free_moved_support_even` を追加し、$L=2$ の非後退置換 30,784 件（反転対なし 497 件）を検査した。
+- 式変形の統一: 姉妹側の熱力学極限の上からの評価にあった $\|\varepsilon u\|=\|u\|=1$ を三段の根拠付きの鎖へ開いた。
+- レビュー記録: 前 tick のセクター和表示の Lean 二版を人手証明へ照合し、「何も言っていない主張」・不一致・sorry 検査登録漏れが無いことを確認した。

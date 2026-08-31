@@ -431,17 +431,29 @@ Y_\mu &= \overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\si
       paragraph([
         "（",
         math(String.raw`\mu = 1`),
-        " のときは第 1 因子の左に因子が無く、",
-        math(String.raw`Z_1 = \sigma^z\boxtimes I\boxtimes\cdots\boxtimes I = \sigma_1^z`),
-        "、",
-        math(String.raw`Y_1 = \sigma^y\boxtimes I\boxtimes\cdots\boxtimes I = \sigma_1^y`),
-        " で、定義の ",
-        math(String.raw`Z_1 := \sigma_1^z, Y_1 := \sigma_1^y`),
-        " と一致する。",
+        " のときは第 1 因子の左に因子が無い。この端の場合も次の一続きで定義と一致する。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_1
+&= \sigma^z\boxtimes I\boxtimes\cdots\boxtimes I
+&&\bigl(\because\ \text{上のクロネッカー積表示を }\mu=1\text{ で読む}\bigr)\\
+&= \sigma_1^z
+&&\bigl(\because\ \sigma_1^z\text{ の定義}\bigr)\\[2mm]
+Y_1
+&= \sigma^y\boxtimes I\boxtimes\cdots\boxtimes I
+&&\bigl(\because\ \text{上のクロネッカー積表示を }\mu=1\text{ で読む}\bigr)\\
+&= \sigma_1^y
+&&\bigl(\because\ \sigma_1^y\text{ の定義}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([ref("def_transfer_matrix_symbols"), " を引いた。"]),
+      paragraph([
+        "また ",
         math(String.raw`\mu = M`),
         " のときは第 ",
         math(String.raw`M`),
-        " 因子の右に因子が無い。）",
+        " 因子の右に因子が無い。",
       ]),
 
       paragraph([

@@ -50707,6 +50707,10 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
               labels: ["claim_reversal_free_orbit_vertex_simple_decomposition"],
               habitat: "N",
               verification: ["sagemath/check/reversal-free-orbit-contact-decomposition"],
+              lean: [
+                "Ising2DLambda.KacWard.reversalFreeOrbit_vertexSimpleDecomposition",
+                "Ising2DLambda.NecSuf.KacWard.invariant_elimination_by_splitting_necSuf",
+              ],
               statement: [
                 paragraph([
                   math(String.raw`L\ge1`), " とし、非後退置換 ",

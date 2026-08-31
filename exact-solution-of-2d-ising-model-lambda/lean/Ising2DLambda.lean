@@ -984,3 +984,5 @@ import Ising2DLambda.NecSuf.KacWard.ReversalFreeMovedSupportEven
 import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven
 import Ising2DLambda.NecSuf.KacWard.ReversalFreeOrbitSupportDistinct
 import Ising2DLambda.KacWard.ReversalFreeOrbitSupportDistinct
+import Ising2DLambda.NecSuf.KacWard.ReversalFreeOrbitVertexSimpleDecomposition
+import Ising2DLambda.KacWard.ReversalFreeOrbitVertexSimpleDecomposition
