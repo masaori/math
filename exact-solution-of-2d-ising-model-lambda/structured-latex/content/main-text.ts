@@ -59346,6 +59346,107 @@ B
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_periodic_lift_closure_cycle",
+        labels: [],
+        title: { text: "接続階段の周期並進による単純閉路" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_periodic_lift_closure_is_simple_cycle",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_periodic_lift_closure_cycle",
+                kind: "definition",
+                title: { text: "接続階段と二つの周期持ち上げから作る閉路" },
+                labels: ["def_periodic_lift_closure_cycle"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "接続階段（", ref("def_first_hit_connecting_staircase"), "）の終点を ",
+                    math(String.raw`E^{\gamma,k_0,u}_{h}=\widetilde P^{[u]}_{k_1}(\gamma)`),
+                    " と書く。ただし ", math(String.raw`h:=s_{\mathrm{hit}}(\gamma,k_0,u)`),
+                    " であり、", math(String.raw`k_1\in\mathbb Z`), " はこの等式を満たす唯一の整数である。",
+                    "存在は接続階段の端点の主張（", ref("claim_first_hit_connecting_staircase_meets_lifts_only_at_ends"),
+                    "）、一意性は周期延長した持ち上げの点の相異なり（",
+                    ref("claim_periodic_plane_lift_points_distinct"), "）による。一周期の並進ベクトルを",
+                  ]),
+                  displayMath(String.raw`B_{\gamma}:=\bigl(L\,w_{\mathrm v}(\gamma),L\,w_{\mathrm h}(\gamma)\bigr)\in\mathbb Z\times\mathbb Z`),
+                  paragraph([
+                    "と書く。", math(String.raw`N:=2h+2m`), " と置き、有限列 ",
+                    math(String.raw`C^{\gamma,k_0,u}_0,\ldots,C^{\gamma,k_0,u}_N\in\mathbb Z\times\mathbb Z`),
+                    " を次の四部分で定める。境界の値は周期延長した持ち上げの定義（",
+                    ref("def_periodic_plane_lift"), "）により一致する。",
+                  ]),
+                  displayMath(String.raw`C^{\gamma,k_0,u}_j:=
+\begin{cases}
+E^{\gamma,k_0,u}_j,&0\le j\le h,\\
+\widetilde P^{[u]}_{k_1+j-h}(\gamma),&h\le j\le h+m,\\
+E^{\gamma,k_0,u}_{2h+m-j}+B_{\gamma},&h+m\le j\le 2h+m,\\
+\widetilde P_{k_0+2h+2m-j}(\gamma),&2h+m\le j\le 2h+2m.
+\end{cases}`),
+                  paragraph([
+                    "これは接続階段を進み、移動後の周期持ち上げを一周期進み、接続階段の一周期並進を逆向きに戻り、",
+                    "元の周期持ち上げを一周期だけ逆向きに戻る有限列である。全ての添字、点、演算は整数と有限列だけで定まり、",
+                    "実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_periodic_lift_closure_is_simple_cycle",
+              kind: "claim",
+              title: { text: "接続階段とその周期並進は二つの持ち上げを単純閉路へ閉じる" },
+              labels: ["claim_periodic_lift_closure_is_simple_cycle"],
+              habitat: "Z",
+              verification: ["sagemath/check/periodic-lift-closure-cycle"],
+              statement: [
+                paragraph([
+                  "有限列 ", math(String.raw`C^{\gamma,k_0,u}`), "（", ref("def_periodic_lift_closure_cycle"),
+                  "）は閉じた単位格子路である。すなわち ",
+                  math(String.raw`C^{\gamma,k_0,u}_0=C^{\gamma,k_0,u}_N`),
+                  " であり、各連続差は四つの単位格子ベクトルのいずれかである。さらに ",
+                  math(String.raw`C^{\gamma,k_0,u}_0,\ldots,C^{\gamma,k_0,u}_{N-1}`),
+                  " は二つずつ相異なる。従ってこの有限列は頂点単純な閉路である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "各部分の連続差は、順に接続階段、移動後の周期持ち上げ、接続階段の周期並進の逆向き、",
+                  "元の周期持ち上げの逆向きの一歩である。各境界の二つの表示は定義どおり同じ点を与え、",
+                  math(String.raw`C^{\gamma,k_0,u}_0=\widetilde P_{k_0}(\gamma)=C^{\gamma,k_0,u}_N`),
+                  " なので閉じた単位格子路である（", ref("def_first_hit_connecting_staircase"), "、",
+                  ref("def_periodic_plane_lift"), "、", ref("def_periodic_lift_closure_cycle"), "）。",
+                ]),
+                paragraph([
+                  "頂点の相異なりを示す。各接続階段の内部では頂点が相異なり、接続階段は元の持ち上げと始点でのみ、",
+                  "移動後の持ち上げと終点でのみ交わる（",
+                  ref("claim_first_hit_connecting_staircase_meets_lifts_only_at_ends"), "）。同じ主張を ",
+                  math(String.raw`B_{\gamma}`), " だけ並進すれば、並進した接続階段についても、",
+                  "二つの持ち上げとの交点は表示された二端点だけである。元の接続階段とその非零周期並進は交わらない（",
+                  ref("claim_period_translates_of_iterated_staircase_disjoint"), "）。",
+                ]),
+                paragraph([
+                  "各周期持ち上げの一周期分の内部頂点は相異なる（",
+                  ref("claim_periodic_plane_lift_points_distinct"), "）。元の周期持ち上げと移動後の周期持ち上げは、",
+                  "横断幅の分離条件により交わらない（",
+                  ref("claim_transverse_translates_of_periodic_plane_lift_disjoint"), "）。",
+                  "従って四部分のうち同じ部分に属する二頂点も、異なる部分に属する二頂点も、",
+                  "隣接する部分が共有する表示済みの端点を除いて一致しない。始点と終点の重複を終点側だけ除けば、",
+                  math(String.raw`C^{\gamma,k_0,u}_0,\ldots,C^{\gamma,k_0,u}_{N-1}`),
+                  " は二つずつ相異なる。全過程は整数の除法・四則・順序と有限列だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

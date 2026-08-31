@@ -153,15 +153,15 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left(Z_mY_m\right)Z_j
 &= Z_m\left(Y_mZ_j\right)
-   \quad (\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合法則}) \\
 &= Z_m\left(-Z_jY_m\right)
-   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (m \neq j)) \\
+   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (m \neq j)) \\
 &= -\left(Z_mZ_j\right)Y_m
-   \quad (\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合法則とスカラー倍}) \\
 &= -\left(-Z_jZ_m\right)Y_m
-   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (m \neq j)) \\
+   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (m \neq j)) \\
 &= Z_j\left(Z_mY_m\right)
-   \quad (\because -(-1) = 1 \text{ の符号の消去と行列の積の結合法則})
+   &&(\because -(-1) = 1 \text{ の符号の消去と行列の積の結合法則})
 \end{aligned}`,
       ),
       paragraph([
@@ -185,17 +185,17 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left[Z_jY_j,\ Z_j\right]
 &= \left(Z_jY_j\right)Z_j - Z_j\left(Z_jY_j\right)
-   \quad (\because \text{交換子の定義}) \\
+   &&(\because \text{交換子の定義}) \\
 &= Z_j\left(Y_jZ_j\right) - \left(Z_jZ_j\right)Y_j
-   \quad (\because \text{行列の積の結合法則}) \\
+   &&(\because \text{行列の積の結合法則}) \\
 &= Z_j\left(-Z_jY_j\right) - \left(Z_jZ_j\right)Y_j
-   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_jZ_j = -Z_jY_j)) \\
+   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_jZ_j = -Z_jY_j)) \\
 &= -\left(Z_jZ_j\right)Y_j - \left(Z_jZ_j\right)Y_j
-   \quad (\because \text{結合法則とスカラー倍}) \\
+   &&(\because \text{結合法則とスカラー倍}) \\
 &= -I\,Y_j - I\,Y_j
-   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_jZ_j = I)) \\
+   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_jZ_j = I)) \\
 &= -2Y_j
-   \quad (\because I\,Y_j = Y_j \text{（単位行列）と同じ行列の和})
+   &&(\because I\,Y_j = Y_j \text{（単位行列）と同じ行列の和})
 \end{aligned}`,
       ),
       paragraph([
@@ -220,15 +220,15 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left[H_2,\ \hat{Z}_\mu^{(-)}\right]
 &= \left[H_2,\ \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}Z_j\right]
-   \quad (\because \text{def\_hatZ\_hatY}) \\
+   &&(\because \text{def\_hatZ\_hatY}) \\
 &= \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\left[H_2,\ Z_j\right]
-   \quad (\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
+   &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\left(-2Y_j\right)
-   \quad (\because \text{Step 1}) \\
+   &&(\because \text{Step 1}) \\
 &= -2\sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\,Y_j
-   \quad (\because \text{スカラー倍を有限和の外へ出す（分配律）}) \\
+   &&(\because \text{スカラー倍を有限和の外へ出す（分配律）}) \\
 &= -2\,\hat{Y}_\mu
-   \quad (\because \text{def\_hatZ\_hatY})
+   &&(\because \text{def\_hatZ\_hatY})
 \end{aligned}`,
       ),
       paragraph([
@@ -267,15 +267,15 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left[H_2,\ \hat{Z}_\mu^{(+)}\right]
 &= \left[H_2,\ \hat{Z}_\mu^{(-)} - 2e^{-i\frac{2\pi\mu}{M}}Z_1\right]
-   \quad (\because \text{直前の displayMath}) \\
+   &&(\because \text{直前の displayMath}) \\
 &= \left[H_2,\ \hat{Z}_\mu^{(-)}\right] - 2e^{-i\frac{2\pi\mu}{M}}\left[H_2,\ Z_1\right]
-   \quad (\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
+   &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= -2\hat{Y}_\mu - 2e^{-i\frac{2\pi\mu}{M}}\left[H_2,\ Z_1\right]
-   \quad (\because \text{Step 2}) \\
+   &&(\because \text{Step 2}) \\
 &= -2\hat{Y}_\mu - 2e^{-i\frac{2\pi\mu}{M}}\left(-2Y_1\right)
-   \quad (\because \text{Step 1 を } j = 1 \text{ に適用}) \\
+   &&(\because \text{Step 1 を } j = 1 \text{ に適用}) \\
 &= -2\hat{Y}_\mu + 4\,e^{-i\frac{2\pi\mu}{M}}\,Y_1
-   \quad (\because (-2)\cdot(-2) = 4 \text{ のスカラーの計算})
+   &&(\because (-2)\cdot(-2) = 4 \text{ のスカラーの計算})
 \end{aligned}`,
       ),
       paragraph([
