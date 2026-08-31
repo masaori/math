@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_intersection_nondistributivity_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "近傍割り当ての点ごとの積と合成の非分配性" },
-    labels: [],
-  },
-  {
     id: "neighborhood_assignment_intersection_nondistributivity_definition_intersection",
     kind: "definition",
     title: { text: "近傍割り当ての点ごとの積" },

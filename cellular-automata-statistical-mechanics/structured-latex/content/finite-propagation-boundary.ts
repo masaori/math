@@ -14,14 +14,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "finite_propagation_boundary_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "有限伝播境界" },
-    labels: [],
-  },
-
-  {
     id: "finite_propagation_boundary_claim_path_time_increment_exact",
     kind: "claim",
     title: { text: "依存経路に沿って時刻はちょうど 1 ずつ増える" },

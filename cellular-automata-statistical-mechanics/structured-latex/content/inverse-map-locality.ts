@@ -16,14 +16,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "inverse_map_locality_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "逆写像の局所性" },
-    labels: [],
-  },
-
-  {
     id: "inverse_map_locality_definition_inverse_map",
     kind: "definition",
     title: { text: "単射な大域写像の逆写像" },

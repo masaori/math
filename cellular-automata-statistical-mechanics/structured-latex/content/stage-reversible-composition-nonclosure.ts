@@ -8,14 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "fixed_neighborhood_composition_nonclosure_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "固定近傍による可逆大域写像族の合成非閉性" },
-    labels: [],
-  },
-
-  {
     id: "fixed_neighborhood_composition_nonclosure_definition_cyclic_dependency_stage",
     kind: "definition",
     title: { text: "3 セルの巡回依存舞台と座標送り写像" },

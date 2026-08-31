@@ -11,14 +11,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_principal_ideal_tail_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "反復モノイドの主イデアル列" },
-    labels: [],
-  },
-
-  {
     id: "iterate_monoid_principal_ideal_tail_definition",
     kind: "definition",
     title: { text: "反復写像の後尾集合" },

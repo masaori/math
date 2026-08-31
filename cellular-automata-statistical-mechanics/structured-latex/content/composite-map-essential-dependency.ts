@@ -9,14 +9,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "composite_map_essential_dependency_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "合成写像の本質的依存台" },
-    labels: [],
-  },
-
-  {
     id: "composite_map_essential_dependency_definition_cell_map",
     kind: "definition",
     title: { text: "有限配位写像の各セルの値写像" },

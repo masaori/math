@@ -11,14 +11,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_covering_relation_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "有限半順序の被覆関係と被覆近傍割り当てによる生成" },
-    labels: [],
-  },
-
-  {
     id: "neighborhood_covering_relation_definition_interval",
     kind: "definition",
     title: { text: "部分順序の区間" },

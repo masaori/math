@@ -8,14 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "self_neighborhood_reversible_map_group_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "自己近傍舞台の可逆大域写像群" },
-    labels: [],
-  },
-
-  {
     id: "self_neighborhood_reversible_map_group_definition_stage",
     kind: "definition",
     title: { text: "有限自己近傍舞台と反転集合が定める大域写像" },

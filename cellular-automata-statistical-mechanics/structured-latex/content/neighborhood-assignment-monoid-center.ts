@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_monoid_center_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "有限近傍割り当てモノイドの中心" },
-    labels: [],
-  },
-  {
     id: "neighborhood_assignment_monoid_center_definition_center",
     kind: "definition",
     title: { text: "近傍割り当てモノイドの中心" },

@@ -15,14 +15,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "essential_dependency_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "本質的依存台" },
-    labels: [],
-  },
-
-  {
     id: "essential_dependency_definition_cardinality_notation",
     kind: "definition",
     title: { text: "有限集合の元の個数の記法" },

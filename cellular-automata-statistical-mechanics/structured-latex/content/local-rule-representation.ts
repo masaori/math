@@ -15,14 +15,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "local_rule_representation_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "依存台による局所規則の表現" },
-    labels: [],
-  },
-
-  {
     id: "local_rule_representation_definition_representable",
     kind: "definition",
     title: { text: "部分集合上の局所規則による表現" },

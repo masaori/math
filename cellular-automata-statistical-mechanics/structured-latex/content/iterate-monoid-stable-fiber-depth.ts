@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_stable_fiber_depth_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "安定ファイバーの最小前周期層" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_stable_fiber_depth_definition",
     kind: "definition",
     title: { text: "安定ファイバーの最小前周期層" },

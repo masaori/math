@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_composition_idempotents_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "合成冪等な近傍割り当ての特徴づけ" },
-    labels: [],
-  },
-  {
     id: "neighborhood_assignment_composition_idempotents_definition_idempotent",
     kind: "definition",
     title: { text: "合成冪等な近傍割り当て" },

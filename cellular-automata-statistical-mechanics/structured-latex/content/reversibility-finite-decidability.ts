@@ -16,14 +16,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "reversibility_finite_decidability_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "自己写像の可逆性の有限決定" },
-    labels: [],
-  },
-
-  {
     id: "reversibility_finite_decidability_definition_injective_surjective",
     kind: "definition",
     title: { text: "自己写像の単射性・全射性・像" },

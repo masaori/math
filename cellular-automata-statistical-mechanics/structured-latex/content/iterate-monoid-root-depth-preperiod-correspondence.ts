@@ -9,13 +9,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_root_depth_preperiod_correspondence_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "根付き木の深さと最小前周期層の対応" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_root_depth_preperiod_correspondence_claim_global_period_at_point",
     kind: "claim",
     title: { text: "全写像の最小正周期は各元の最小前周期位置でも周期になる" },

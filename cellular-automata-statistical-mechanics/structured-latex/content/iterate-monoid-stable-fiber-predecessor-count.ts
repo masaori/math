@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_stable_fiber_branching_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "安定ファイバー間の分岐個数" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_stable_fiber_branching_definition_predecessor_set",
     kind: "definition",
     title: { text: "一段前像集合" },

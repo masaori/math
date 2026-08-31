@@ -8,14 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_minimal_period_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "反復モノイドの最小正周期" },
-    labels: [],
-  },
-
-  {
     id: "iterate_monoid_minimal_period_definition",
     kind: "definition",
     title: { text: "最小衝突開始位置での最小正周期" },

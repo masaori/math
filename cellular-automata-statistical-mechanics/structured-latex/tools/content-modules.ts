@@ -160,9 +160,16 @@ export async function loadContentFiles(): Promise<LoadedBlockFile[]> {
 
   const blockMap = new Map<string, ConvertedBlock>();
   const labelOwner = new Map<string, string>();
-  for (const { blocks } of raw) {
+  for (const { file, blocks } of raw) {
     for (const block of blocks) {
-      if (block.kind === "heading") continue;
+      // 章・節の見出しは document-organization.ts が正本であり、ここで組み立てる。
+      // content/ 側に見出しを書くと出版物へは出ないので、黙って落とさずエラーにする。
+      if (block.kind === "heading") {
+        throw new Error(
+          `content/${file} に見出しブロックがある: ${block.id}\n` +
+            "  章・節の見出しは tools/document-organization.ts に書く（content/ の見出しは出版物へ出ない）。",
+        );
+      }
       blockMap.set(block.id, block);
       for (const label of block.labels) labelOwner.set(label, block.id);
     }

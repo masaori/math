@@ -10,14 +10,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_reachability_preorder_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "到達前順序と相互到達成分" },
-    labels: [],
-  },
-
-  {
     id: "neighborhood_assignment_reachability_preorder_definition_relation",
     kind: "definition",
     title: { text: "近傍割り当てが定める到達関係" },

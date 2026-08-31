@@ -17,14 +17,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "global_map_iteration_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "自己写像の反復と軌道の最終周期性" },
-    labels: [],
-  },
-
-  {
     id: "finite_self_map_iteration_definition_finite_self_map",
     kind: "definition",
     title: { text: "有限集合上の自己写像" },

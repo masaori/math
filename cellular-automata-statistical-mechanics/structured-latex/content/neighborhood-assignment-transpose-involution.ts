@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_transpose_involution_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "近傍割り当ての転置対合" },
-    labels: [],
-  },
-  {
     id: "neighborhood_assignment_transpose_involution_definition_transpose",
     kind: "definition",
     title: { text: "近傍割り当ての転置" },

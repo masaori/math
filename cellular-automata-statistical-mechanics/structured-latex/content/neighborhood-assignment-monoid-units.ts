@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_monoid_units_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "有限近傍割り当てモノイドの可逆元" },
-    labels: [],
-  },
-  {
     id: "neighborhood_assignment_monoid_units_definition_unit",
     kind: "definition",
     title: { text: "合成近傍について可逆な近傍割り当て" },

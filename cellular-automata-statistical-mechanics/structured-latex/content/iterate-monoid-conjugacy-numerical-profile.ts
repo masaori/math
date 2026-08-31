@@ -9,13 +9,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_conjugacy_numerical_profile_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "安定ファイバー根付き木族の数値プロファイルは共役を決定しない" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_conjugacy_numerical_profile_definition",
     kind: "definition",
     title: { text: "安定ファイバー根付き木族の数値プロファイル" },

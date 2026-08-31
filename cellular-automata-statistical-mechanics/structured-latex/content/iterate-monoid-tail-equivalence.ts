@@ -10,14 +10,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_tail_equivalence_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "反復モノイドの主イデアル同値と有限鎖" },
-    labels: [],
-  },
-
-  {
     id: "iterate_monoid_tail_equivalence_definition_generated_ideal",
     kind: "definition",
     title: { text: "反復写像が生成する主イデアル" },

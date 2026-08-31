@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "self_transpose_composition_closure_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "自己転置な近傍割り当ての合成閉性" },
-    labels: [],
-  },
-  {
     id: "self_transpose_composition_closure_claim_iff_commute",
     kind: "claim",
     title: { text: "自己転置な二つの合成が自己転置であることと可換性は同値である" },

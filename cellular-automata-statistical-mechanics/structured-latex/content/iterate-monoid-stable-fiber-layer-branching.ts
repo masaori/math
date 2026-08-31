@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_stable_fiber_layer_branching_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "安定ファイバーの層別分岐個数" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_stable_fiber_layer_branching_claim_subset_preimage_decomposition",
     kind: "claim",
     title: { text: "有限元集合の完全逆像は一段前像集合へ分解される" },

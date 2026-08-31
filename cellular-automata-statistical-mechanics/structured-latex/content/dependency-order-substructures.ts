@@ -14,14 +14,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "dependency_order_substructures_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "依存順序から得る部分構造" },
-    labels: [],
-  },
-
-  {
     id: "dependency_order_substructures_definition_order_convex",
     kind: "definition",
     title: { text: "順序凸部分集合" },

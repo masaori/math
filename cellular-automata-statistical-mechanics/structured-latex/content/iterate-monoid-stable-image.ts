@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_stable_image_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "反復モノイドの冪等元が定める安定像" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_stable_image_definition",
     kind: "definition",
     title: { text: "安定像" },

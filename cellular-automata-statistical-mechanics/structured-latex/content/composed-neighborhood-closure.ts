@@ -9,14 +9,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "composed_neighborhood_closure_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "合成近傍による大域写像の合成表現" },
-    labels: [],
-  },
-
-  {
     id: "composed_neighborhood_closure_definition_composed_neighborhood",
     kind: "definition",
     title: { text: "二つの近傍割り当ての合成近傍" },

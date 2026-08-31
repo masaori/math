@@ -11,13 +11,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "recursive_preimage_tree_code_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "周期成分に付随する再帰的前像木符号" },
-    labels: [],
-  },
-  {
     id: "recursive_preimage_tree_code_multiset_hierarchy_definition",
     kind: "definition",
     title: { text: "入れ子有限多重集合の階層" },

@@ -9,14 +9,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_reachability_closure_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "近傍割り当ての反射推移閉包" },
-    labels: [],
-  },
-
-  {
     id: "neighborhood_assignment_reachability_closure_definition_power",
     kind: "definition",
     title: { text: "近傍割り当ての合成冪" },

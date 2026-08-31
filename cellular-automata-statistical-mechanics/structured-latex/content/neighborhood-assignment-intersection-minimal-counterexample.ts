@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_intersection_minimal_counterexample_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "点ごとの積に対する合成の非分配反例の最小舞台" },
-    labels: [],
-  },
-  {
     id: "neighborhood_assignment_intersection_minimal_counterexample_claim_subsingleton_composition",
     kind: "claim",
     title: { text: "一元以下の舞台では合成と点ごとの積が一致する" },
