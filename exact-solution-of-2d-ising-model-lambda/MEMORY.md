@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 47 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 48 回目の tick 時点）
+
+**巻き付きベクトルに平行な整数座標が周期並進で正の定数だけ増えることを本文と SageMath で固定した（Lean 未着手）。** 台帳の「整数帯の外側を通る単純な閉路への有限閉包」を論法単位（平行座標の一周期ごとの増加／閉包路の構成と単純性／回転数定理の適用）へ割り直し、最初の部品を進めた。平行座標 $\pi_{\gamma}(a,b):=w_{\mathrm v}(\gamma)a+w_{\mathrm h}(\gamma)b$ を定義した（`def_winding_parallel_coordinate`。横断座標 $\kappa_{\gamma}$ が周期並進で不変な向きの読みであるのに対し、こちらは進む向きの読みである）。整数の除法で $k=qm+r$ から $k+m=(q+1)m+r$ と読み替え、$\pi_{\gamma}(\widetilde P_{k+m})=\pi_{\gamma}(\widetilde P_{k})+L(w_{\mathrm v}^2+w_{\mathrm h}^2)$ を示し、非零巻き付きなら増分が $1$ 以上の正の整数であることを証明した（`claim_periodic_plane_lift_parallel_period_increase`）。周期延長した持ち上げの各周期複製を平行座標で順序づける後続の閉包構成の部品である。SageMath `periodic-plane-lift-parallel-increase` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・$q\in\{-2,\ldots,2\}$ にわたる一周期ずらしの比較 123,960 件を `ZZ` で検査した。次は整数帯の外側を通る単純な閉路への有限閉包（閉包路の構成と単純性）へ進む。
+
+前進前レビューでは前 tick の横断座標の定義と有限幅整数帯の主張を本文・SageMath・次の閉包の論法で照合し、「何も言っていない主張」や不一致は無かった。
+
+## ひとつ前の到達点（2026-09-01 の 47 回目の tick 時点）
 
 **非零巻き付きの周期延長した平面持ち上げが有限幅の整数帯に入ることを本文と SageMath で固定した（Lean 未着手）。** 「周期単純路の回転数零」を論法単位（有限幅の整数帯／帯の外側での有限閉包／二つの閉包の回転数比較）へ割り直し、最初の部品を進めた。巻き付きベクトルに直交する整数横断座標 $\kappa_{\gamma}(a,b):=w_{\mathrm h}(\gamma)a-w_{\mathrm v}(\gamma)b$ を定義した（`def_winding_transverse_coordinate`）。周期並進ベクトル $(Lw_{\mathrm v},Lw_{\mathrm h})$ の横断座標は $0$ なので、$k=qm+r$ に対して $\kappa_{\gamma}(\widetilde P_k)=\kappa_{\gamma}(P_r)$ となる。従って周期延長した持ち上げの横断座標の値全体は一周期の有限集合に等しく、整数の最小水準と最大水準に挟まれる（`claim_periodic_plane_lift_transverse_bounded`）。SageMath `periodic-plane-lift-transverse-bounded` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・商 $-2..2$ にわたる周期延長した持ち上げ点 123,960 個を `ZZ` で検査した。次は整数帯の外側を通る単純な閉路への有限閉包を構成する。
 

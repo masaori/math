@@ -58336,6 +58336,118 @@ s(i_r)-s(i_{r'})
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_periodic_plane_lift_parallel_coordinate",
+        labels: [],
+        title: { text: "周期延長した平面持ち上げの平行座標" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_periodic_plane_lift_parallel_period_increase",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_winding_parallel_coordinate",
+                kind: "definition",
+                title: { text: "巻き付きベクトルに平行な整数座標" },
+                labels: ["def_winding_parallel_coordinate"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数を ",
+                    math(String.raw`w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)\in\mathbb Z`),
+                    "（", ref("def_directed_winding_numbers"), "）とする。写像 ",
+                    math(String.raw`\pi_{\gamma}:\mathbb Z\times\mathbb Z\to\mathbb Z`), " を",
+                  ]),
+                  displayMath(String.raw`\pi_{\gamma}(a,b):=w_{\mathrm v}(\gamma)a+w_{\mathrm h}(\gamma)b`),
+                  paragraph([
+                    "で定め、これを巻き付きベクトルに平行な整数座標と呼ぶ。右辺は整数の積と和なので整数に属する。",
+                    "横断座標 ", math(String.raw`\kappa_{\gamma}`), "（",
+                    ref("def_winding_transverse_coordinate"),
+                    "）が周期並進で変わらない向きの読みであるのに対し、平行座標は周期並進の進む向きの読みである（次の主張）。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_periodic_plane_lift_parallel_period_increase",
+              kind: "claim",
+              title: { text: "周期並進は平行座標を正の定数だけ増やす" },
+              labels: ["claim_periodic_plane_lift_parallel_period_increase"],
+              habitat: "Z",
+              verification: ["sagemath/check/periodic-plane-lift-parallel-increase"],
+              statement: [
+                paragraph([
+                  "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                  ref("def_directed_winding_numbers"), "）が",
+                ]),
+                displayMath(String.raw`\bigl(w_{\mathrm h}(\gamma),\,w_{\mathrm v}(\gamma)\bigr)\ne(0,0)`),
+                paragraph([
+                  "を満たすとする。このとき任意の ", math(String.raw`k\in\mathbb Z`),
+                  " について、周期延長した平面持ち上げ（", ref("def_periodic_plane_lift"), "）は",
+                ]),
+                displayMath(String.raw`\pi_{\gamma}\!\left(\widetilde P_{k+m}(\gamma)\right)
+=\pi_{\gamma}\!\left(\widetilde P_{k}(\gamma)\right)+L\bigl(w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2\bigr)`),
+                paragraph([
+                  "を満たし、増分は ",
+                  math(String.raw`L\bigl(w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2\bigr)\ge1`),
+                  " を満たす正の整数である（平行座標は ", ref("def_winding_parallel_coordinate"), "）。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "整数の除法（商と余りの存在と一意性）により ",
+                  math(String.raw`k=qm+r`), "（", math(String.raw`q\in\mathbb Z`), "、",
+                  math(String.raw`r\in\{0,\ldots,m-1\}`),
+                  "）と書く。すると ", math(String.raw`k+m=(q+1)m+r`), " であり、",
+                  math(String.raw`q+1\in\mathbb Z`), " と ",
+                  math(String.raw`r\in\{0,\ldots,m-1\}`),
+                  " なので、除法の一意性によりこれが ", math(String.raw`k+m`),
+                  " の商と余りである。", math(String.raw`P_r(\gamma)=(a_r,b_r)\in\mathbb Z\times\mathbb Z`),
+                  " と書く（", ref("def_plane_lift"), "）。平行座標を計算すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\pi_{\gamma}\!\left(\widetilde P_{k+m}(\gamma)\right)
+&=\pi_{\gamma}\!\left(
+  (a_r,b_r)+(q+1)\cdot\bigl(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma)\bigr)
+\right)
+&&\bigl(\because\ \blkref{def_periodic_plane_lift}\text{ と }k+m=(q+1)m+r\bigr)\\
+&=w_{\mathrm v}(\gamma)\bigl(a_r+(q+1)Lw_{\mathrm v}(\gamma)\bigr)
+  +w_{\mathrm h}(\gamma)\bigl(b_r+(q+1)Lw_{\mathrm h}(\gamma)\bigr)
+&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\text{ と }\mathbb Z\times\mathbb Z\text{ の成分ごとの演算}\bigr)\\
+&=w_{\mathrm v}(\gamma)\bigl(a_r+qLw_{\mathrm v}(\gamma)\bigr)
+  +w_{\mathrm h}(\gamma)\bigl(b_r+qLw_{\mathrm h}(\gamma)\bigr)
+  +L\bigl(w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2\bigr)
+&&\bigl(\because\ \mathbb Z\text{ の分配法則と加法の可換則・結合則}\bigr)\\
+&=\pi_{\gamma}\!\left(\widetilde P_{k}(\gamma)\right)
+  +L\bigl(w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2\bigr)
+&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\text{ と }\blkref{def_periodic_plane_lift}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "増分の正値性を示す。仮定 ",
+                  math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                  " により ", math(String.raw`w_{\mathrm v}(\gamma)\ne0`), " または ",
+                  math(String.raw`w_{\mathrm h}(\gamma)\ne0`),
+                  " であり、零でない整数の平方は ", math(String.raw`1`),
+                  " 以上、整数の平方は ", math(String.raw`0`), " 以上なので ",
+                  math(String.raw`w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2\ge1`),
+                  " である。", math(String.raw`L\ge1`), "（", ref("def_residue_maps"),
+                  "）と ", math(String.raw`\mathbb Z`), " の積の順序保存により ",
+                  math(String.raw`L\bigl(w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2\bigr)\ge1`),
+                  " である。全過程は整数の除法と四則・順序だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
