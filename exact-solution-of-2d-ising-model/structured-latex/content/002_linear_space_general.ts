@@ -137,10 +137,21 @@ export default defineBlocks([
         math(String.raw`I\in\mathcal{I}_M`),
         "、",
         math(String.raw`i_{M+1}\in\{1,2\}`),
-        "）と一対一に対応するから ",
-        math(String.raw`\#\mathcal{I}_{M+1}=2\cdot 2^M=2^{M+1}`),
-        "。",
+        "）と一対一に対応するから、次の一続きで ",
+        math(String.raw`M+1`),
+        " でも成り立つ。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\#\mathcal{I}_{M+1}
+&=\#\mathcal{I}_M\cdot 2
+   \quad (\because \text{一対一対応で }I\text{ が }\#\mathcal{I}_M\text{ 通り、}i_{M+1}\text{ が }2\text{ 通り}) \\
+&=2^M\cdot 2
+   \quad (\because \text{帰納法の仮定}\ \#\mathcal{I}_M=2^M) \\
+&=2^{M+1}
+   \quad (\because \text{指数法則}\ 2^M\cdot 2=2^{M+1})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 2: 値域。まず ",
         math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
