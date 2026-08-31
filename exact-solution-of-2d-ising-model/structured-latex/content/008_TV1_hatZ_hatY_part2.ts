@@ -3527,34 +3527,35 @@ s_1^2 c_2^2 (s_2^*)^2
       displayMath(String.raw`\begin{aligned}
 \lambda_{+,\mu}\lambda_{-,\mu}
 &=\det A(\theta_\mu)
-&&\quad(\because\ \lambda_{+,\mu},\lambda_{-,\mu}\ \text{は}\ A(\theta_\mu)\ \text{の固有値})\\
+&&\bigl(\because\ \lambda_{+,\mu},\lambda_{-,\mu}\ \text{は}\ A(\theta_\mu)\ \text{の固有値}\bigr)\\
 &=1
-&&\quad(\because\ \det A(\theta_\mu)=1)
+&&\bigl(\because\ \det A(\theta_\mu)=1\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \lambda_{+,\mu}+\lambda_{-,\mu}
 &=2\gamma_1(\theta_\mu)
-&&\quad(\because\ \lambda_{\pm,\mu}=\gamma_1(\theta_\mu)\pm\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)})\\
+&&\bigl(\because\ \lambda_{\pm,\mu}=\gamma_1(\theta_\mu)\pm\sqrt{-\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)}\bigr)\\
 &\geq2
-&&\quad(\because\ \gamma_1(\theta_\mu)\geq1)\\
+&&\bigl(\because\ \gamma_1(\theta_\mu)\geq1\bigr)\\
 &>0
-&&\quad(\because\ 2>0)
+&&\bigl(\because\ 2>0\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \lambda_{+,\mu}&>0,\qquad \lambda_{-,\mu}>0
-&&\quad(\because\ \lambda_{+,\mu}\lambda_{-,\mu}>0\ \text{かつ}\ \lambda_{+,\mu}+\lambda_{-,\mu}>0)\\
+&&\bigl(\because\ \lambda_{+,\mu}\lambda_{-,\mu}>0\ \text{かつ}\ \lambda_{+,\mu}+\lambda_{-,\mu}>0\bigr)\\
 \gamma(\theta_\mu)&\geq0
-&&\quad(\because\ \gamma(\theta_\mu)=\operatorname{arccosh}(\gamma_1(\theta_\mu))\in\mathbb{R}_{\geq0})\\
+&&\bigl(\because\ \gamma(\theta_\mu)=\operatorname{arccosh}(\gamma_1(\theta_\mu))\in\mathbb{R}_{\geq0}\bigr)\\
 \lambda_{\pm,\mu}&=e^{\pm\gamma(\theta_\mu)}
-&&\quad(\because\ \text{正の二固有値を相反する指数として書く})\\
+&&\bigl(\because\ \text{正の二固有値を相反する指数として書く}\bigr)\\
 \cosh(\gamma(\theta_\mu))&=\gamma_1(\theta_\mu)
-&&\quad(\because\ \gamma(\theta_\mu)\ \text{の定義})
+&&\bigl(\because\ \gamma(\theta_\mu)\ \text{の定義}\bigr)
 \end{aligned}`),
     ],
     conversion: {
       status: "converted",
       notes: [
         "2026-08-12 の式変形統一で、固有値の積・和から指数表示と arccosh の整合性へ至る既存の内容を一続きの式へまとめ、全行へ根拠を付けた。内容は変えていない。",
+        "2026-08-31 の式変形統一で、三本の式変形にある根拠 9 行を他の証明と同じ行末の根拠列へ揃えた。内容・式変形・参照は変えていない。",
       ],
     },
   },

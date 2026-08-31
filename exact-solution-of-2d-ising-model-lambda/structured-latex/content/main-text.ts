@@ -57837,6 +57837,140 @@ I_{a,b}\ne\{C_1,C_3\}`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_direction_gate_crossing_turning",
+        labels: [],
+        title: { text: "方向番号の門の横断数と循環総回転数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_direction_gate_crossing_turning",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_direction_standard_representative",
+                  kind: "definition",
+                  title: { text: "方向番号の標準整数代表" },
+                  labels: ["def_direction_standard_representative"],
+                  habitat: "Z",
+                  statement: [
+                    paragraph([
+                      "方向番号の標準整数代表写像 ",
+                      math(String.raw`r_4:\mathbb Z/4\mathbb Z\longrightarrow\{0,1,2,3\}\subset\mathbb Z`), " を",
+                    ]),
+                    displayMath(String.raw`r_4(0):=0,\qquad r_4(1):=1,\qquad r_4(2):=2,\qquad r_4(3):=3`),
+                    paragraph(["で定める。値域の四元は整数であり、各剰余類をちょうど一度ずつ表すので写像は一意に定まる。"]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_positive_direction_gate_crossing_count",
+                  kind: "definition",
+                  title: { text: "方向番号の門の正横断数" },
+                  labels: ["def_positive_direction_gate_crossing_count"],
+                  habitat: "N",
+                  statement: [
+                    paragraph([
+                      "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                      "（", ref("def_closed_nonbacktracking_walk"), "）について ",
+                      math(String.raw`\vec e_{m+1}:=\vec e_1`), " と置く。方向番号の門 ",
+                      math(String.raw`3\mid0`), " を正向きに横断する番号の個数を",
+                    ]),
+                    displayMath(String.raw`g_+(\gamma):=\bigl|\{k\in\{1,\ldots,m\}\mid
+r_4(\operatorname{dir}(\vec e_k))=3,\ r_4(\operatorname{dir}(\vec e_{k+1}))=0\}\bigr|\in\mathbb N`),
+                    paragraph([
+                      "で定める。方向番号は ", ref("def_oriented_edge_direction"),
+                      "、標準整数代表は ", ref("def_direction_standard_representative"),
+                      " で定まり、添字集合は有限なので個数は自然数として定まる。",
+                    ]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_negative_direction_gate_crossing_count",
+                  kind: "definition",
+                  title: { text: "方向番号の門の負横断数" },
+                  labels: ["def_negative_direction_gate_crossing_count"],
+                  habitat: "N",
+                  statement: [
+                    paragraph([
+                      "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                      " について ", math(String.raw`\vec e_{m+1}:=\vec e_1`),
+                      " と置く。方向番号の門 ", math(String.raw`3\mid0`), " を負向きに横断する番号の個数を",
+                    ]),
+                    displayMath(String.raw`g_-(\gamma):=\bigl|\{k\in\{1,\ldots,m\}\mid
+r_4(\operatorname{dir}(\vec e_k))=0,\ r_4(\operatorname{dir}(\vec e_{k+1}))=3\}\bigr|\in\mathbb N`),
+                    paragraph(["で定める。有限集合の元の個数なので自然数として定まる。"]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_direction_gate_crossing_turning",
+              kind: "claim",
+              title: { text: "循環総回転数は方向番号の門の符号付き横断数の 4 倍である" },
+              labels: ["claim_direction_gate_crossing_turning"],
+              habitat: "Z",
+              verification: ["sagemath/check/direction-gate-crossing-turning"],
+              statement: [
+                paragraph(["任意の閉じた非後退辺列 ", math(String.raw`\gamma`), " について、整数の等式"]),
+                displayMath(String.raw`t_{\circ}(\gamma)=4\bigl(g_+(\gamma)-g_-(\gamma)\bigr)`),
+                paragraph([
+                  "が成り立つ。左辺は循環総回転数（", ref("def_cyclic_total_turning"),
+                  "）、右辺は方向番号の門の正横断数（", ref("def_positive_direction_gate_crossing_count"),
+                  "）と負横断数（", ref("def_negative_direction_gate_crossing_count"), "）である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`d_k:=r_4(\operatorname{dir}(\vec e_k))\in\{0,1,2,3\}`),
+                  " と置く。", math(String.raw`\vec e_{m+1}=\vec e_1`), " なので ",
+                  math(String.raw`d_{m+1}=d_1`), " である。非後退接続では反転方向への差 ",
+                  math(String.raw`2`), " は現れない（", ref("def_nonbacktracking_successors"), "）。",
+                  ref("def_step_turning"), " の三つの場合を標準整数代表で読むと、各 ",
+                  math(String.raw`k\in\{1,\ldots,m\}`), " について",
+                ]),
+                displayMath(String.raw`\tau(\vec e_k,\vec e_{k+1})=
+\begin{cases}
+d_{k+1}-d_k+4,&(d_k,d_{k+1})=(3,0),\\
+d_{k+1}-d_k-4,&(d_k,d_{k+1})=(0,3),\\
+d_{k+1}-d_k,&\text{それ以外}
+\end{cases}`),
+                paragraph([
+                  "である。第一の場合は ", math(String.raw`-3+4=1`),
+                  "、第二の場合は ", math(String.raw`3-4=-1`),
+                  " である。それ以外の許される組では標準整数代表の差がそのまま ",
+                  math(String.raw`0,1,-1`), " のいずれかである。従って有限和を取ると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma)
+&=\sum_{k=1}^{m}\tau(\vec e_k,\vec e_{k+1})
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と }\vec e_{m+1}=\vec e_1\bigr)\\
+&=\sum_{k=1}^{m}(d_{k+1}-d_k)+4g_+(\gamma)-4g_-(\gamma)
+&&\bigl(\because\ \text{直前の場合分けを各項へ適用}\bigr)\\
+&=d_{m+1}-d_1+4g_+(\gamma)-4g_-(\gamma)
+&&\bigl(\because\ \mathbb Z\text{ の有限和の望遠和}\bigr)\\
+&=4g_+(\gamma)-4g_-(\gamma)
+&&\bigl(\because\ d_{m+1}=d_1\text{ と }\mathbb Z\text{ の四則}\bigr)\\
+&=4\bigl(g_+(\gamma)-g_-(\gamma)\bigr)
+&&\bigl(\because\ \mathbb Z\text{ の分配法則}\bigr)
+\end{aligned}`),
+                paragraph(["使ったのは四つの方向番号、整数の有限和、有限集合の個数だけであり、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_plane_simple_polygon_turning",
         labels: [],
         title: { text: "平面の単純閉多角形の回転数" },
