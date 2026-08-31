@@ -1909,6 +1909,7 @@ W
 &\le \sum_{k=1}^{m}|z_k|+|z_{m+1}|
 \quad (\because \text{帰納法の仮定}) \\
 &= \sum_{k=1}^{m+1}|z_k|
+\quad (\because \text{有限和の末項の吸収})
 \end{aligned}`,
       ),
       paragraph([
@@ -1921,7 +1922,8 @@ W
       displayMath(
         String.raw`\begin{aligned}
 \left|(AB)_{ij}\right|
-&= \left|\sum_{k=1}^{n}a_{ik}b_{kj}\right| \\
+&= \left|\sum_{k=1}^{n}a_{ik}b_{kj}\right|
+\quad (\because \text{行列の積の定義}) \\
 &\le \sum_{k=1}^{n}\left|a_{ik}b_{kj}\right|
 \quad (\because \text{Step 1}) \\
 &= \sum_{k=1}^{n}|a_{ik}|\,|b_{kj}|
@@ -1964,8 +1966,10 @@ W
 &= \left(\sum_{i=1}^{n}\sum_{k=1}^{n}|a_{ik}|^2\right)
    \left(\sum_{j=1}^{n}\sum_{l=1}^{n}|b_{lj}|^2\right)
 \quad (\because \text{有限和の分配律}) \\
-&= \|A\|^2\,\|B\|^2 \\
+&= \|A\|^2\,\|B\|^2
+\quad (\because \|\cdot\| \text{ の定義と } \left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a) \\
 &= \left(\|A\|\cdot\|B\|\right)^2
+\quad (\because \text{非負実数の積の平方 } (xy)^2=x^2y^2)
 \end{aligned}`,
       ),
       paragraph([
@@ -1989,6 +1993,9 @@ W
           "（平方の単調性・Cauchy--Schwarz・和の添字の付け替えが別々の根拠であることが式の上に現れる）。" +
           "あわせて、鎖の第 1 段（絶対値を行列の積の定義で書き下す段）に根拠が無かったので付けた。" +
           "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
+        "2026-08-31: 根拠の無い行が四つ残っていた（Step 1 の末項の吸収の段、Step 2 の" +
+          "行列の積の定義で書き下す段、Step 3 のノルムの定義へ戻す段と積の平方へまとめる段）。" +
+          "それぞれの行末に (∵ …) を付けた。式・段数・主張・証明の筋は変えていない。",
         "原文の proof は TODO のみ。ここで証明を与えた。" +
           "原文にはノルムの定義そのものが無かったため、Frobenius ノルムを定義するブロック" +
           "（labels: def_matrix_norm）とその基本性質のブロック（labels: matrix_norm_triangle_inequality）を" +
