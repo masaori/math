@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 32 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 33 回目の tick 時点）
+
+**打ち切られた前 tick の成果を回収して push し、横に隣り合うセルの右半直線交差数の差が共有する縦辺の通過回数に等しい恒等式を本文と SageMath で固定した（Lean 未着手）。** 前 tick（32 回目）は push 前に打ち切られていたので、残っていた本文・SageMath・台帳を全検証にかけて `origin/main` へ入れた。その際、姉妹側の書き換えが使った `\blkref` が姉妹側 LaTeX 生成器に未定義で PDF が落ちることを見つけ、lambda 側と同一の定義を生成器へ追加した。前進では、縦辺の通過回数 $V_{r,j}(\gamma)$ を定義し（`def_vertical_edge_traversal_count`）、任意の閉じた非後退辺列と任意のセルについて $N^{\rightarrow}_{r,c}=N^{\rightarrow}_{r,c+1}+V_{r,c+1}$ を交差集合の列座標による分割一本で証明した（`claim_adjacent_cells_ray_crossing_difference`）。とくに横に隣り合う二セルの交差数の奇偶が異なることと共有縦辺の通過回数が奇数であることは同値で、内側セルの境界が歩道の辺に限られること（辺連結性・Euler 等式の部品）へつながる。SageMath `adjacent-cells-ray-crossing-difference` は閉歩道 5,340 本・隣接セル対 166,232 組を `ZZ` で検査した。検算対応 345 件、本文 761 ブロック・PDF 342 ページを通した。次は内側セルの辺連結性を示す。
+
+並列の式変形統一は、姉妹側の $B_1(\theta)B_2B_1(\theta)=A(\theta)$ の証明の準備にあった倍角公式の一行三等号三本束ねを、三本の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 350 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 32 回目の tick 時点）
 
 **右半直線との交差奇偶により内側セルを定義し、その集合が有限であることを本文と SageMath で固定した（Lean 未着手）。** 零巻き付きの閉格子路について、単位正方形の中心から右へ延びる半直線と持ち上げた縦辺との交差数 `def_right_ray_vertical_crossing_count`、その交差数が奇数のセル集合 `def_odd_ray_interior_cells` を整数の有限数え上げだけで定義した。直前 tick の水準横断数恒等式を閉じた行座標列へ適用すると、外接長方形の左側で数える全縦横断数は偶数になり、右側と上下では交差が無い。したがって内側セルは外接長方形内の有限集合である（`claim_odd_ray_interior_cells_bounded`）。SageMath `odd-ray-interior-cells-bounded` は長さ 8 以下の閉単位格子歩 5,340 本・セル 166,232 個を `ZZ` で検査した。
 

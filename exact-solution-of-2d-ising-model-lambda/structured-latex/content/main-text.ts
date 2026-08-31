@@ -56372,6 +56372,92 @@ N_{r,c}^{\rightarrow}(\gamma)
               ],
             },
           },
+        }, {
+          role: "supporting",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_adjacent_cells_ray_crossing_difference",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_vertical_edge_traversal_count",
+                  kind: "definition",
+                  title: { text: "持ち上げた縦辺の通過回数" },
+                  labels: ["def_vertical_edge_traversal_count"],
+                  habitat: "N",
+                  statement: [
+                    paragraph([
+                      "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                      "（", ref("def_closed_nonbacktracking_walk"), "）の平面持ち上げを ",
+                      math(String.raw`P_k(\gamma)\in\mathbb Z\times\mathbb Z`),
+                      "（", ref("def_plane_lift"), "）と書く。整数 ", math(String.raw`r,j\in\mathbb Z`),
+                      " に対し、平面の縦辺 ", math(String.raw`\{(r,j),(r+1,j)\}`),
+                      " の通過回数 ", math(String.raw`V_{r,j}(\gamma)\in\mathbb N`), " を",
+                    ]),
+                    displayMath(String.raw`V_{r,j}(\gamma):=
+\left|
+\left\{
+k\in\{1,\ldots,m\}\ \middle|\
+\{P_{k-1}(\gamma),P_k(\gamma)\}=\{(r,j),(r+1,j)\}
+\right\}
+\right|`),
+                    paragraph([
+                      "で定める。右辺は有限集合の元の個数なので自然数である。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_adjacent_cells_ray_crossing_difference",
+              kind: "claim",
+              title: { text: "横に隣り合うセルの交差数の差は間の縦辺の通過回数である" },
+              labels: ["claim_adjacent_cells_ray_crossing_difference"],
+              habitat: "N",
+              verification: ["sagemath/check/adjacent-cells-ray-crossing-difference"],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）と任意の整数 ",
+                  math(String.raw`r,c\in\mathbb Z`), " について",
+                ]),
+                displayMath(String.raw`N_{r,c}^{\rightarrow}(\gamma)
+=N_{r,c+1}^{\rightarrow}(\gamma)+V_{r,c+1}(\gamma)`),
+                paragraph([
+                  "が成り立つ（", ref("def_right_ray_vertical_crossing_count"), "、",
+                  ref("def_vertical_edge_traversal_count"), "）。とくに、横に隣り合う二つの単位正方形の",
+                  "交差数の奇偶が異なることと、二つの正方形が共有する縦辺の通過回数が奇数であることは同値である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "準備として、番号 ", math(String.raw`k\in\{1,\ldots,m\}`), " と整数 ",
+                  math(String.raw`j,j'\in\mathbb Z`), " が ",
+                  math(String.raw`\{P_{k-1}(\gamma),P_k(\gamma)\}=\{(r,j),(r+1,j)\}`), " かつ ",
+                  math(String.raw`\{P_{k-1}(\gamma),P_k(\gamma)\}=\{(r,j'),(r+1,j')\}`),
+                  " を満たすなら、二つの対の元の第 2 座標を比べて ", math(String.raw`j=j'`),
+                  " である。すなわち一つの ", math(String.raw`k`),
+                  " について交差条件を満たす列座標 ", math(String.raw`j`), " は高々一つに定まる。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+N_{r,c}^{\rightarrow}(\gamma)
+&=\left|\left\{k\ \middle|\ \exists j\in\mathbb Z:\ c<j\ \text{かつ}\ \{P_{k-1}(\gamma),P_k(\gamma)\}=\{(r,j),(r+1,j)\}\right\}\right|
+&&\bigl(\because\ \blkref{def_right_ray_vertical_crossing_count}\bigr)\\
+&=\left|\left\{k\ \middle|\ \{P_{k-1}(\gamma),P_k(\gamma)\}=\{(r,c+1),(r+1,c+1)\}\right\}\right|
++\left|\left\{k\ \middle|\ \exists j\in\mathbb Z:\ c+1<j\ \text{かつ}\ \{P_{k-1}(\gamma),P_k(\gamma)\}=\{(r,j),(r+1,j)\}\right\}\right|
+&&\bigl(\because\ c<j\Leftrightarrow(j=c+1\ \text{または}\ c+1<j)\text{（}\mathbb Z\text{ の順序）で、列座標は }k\text{ ごとに高々一つなので二つの集合は互いに素}\bigr)\\
+&=V_{r,c+1}(\gamma)+N_{r,c+1}^{\rightarrow}(\gamma)
+&&\bigl(\because\ \blkref{def_vertical_edge_traversal_count}\text{ と }\blkref{def_right_ray_vertical_crossing_count}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "後半は前半の等式の両辺の奇偶を比べれば従う（",
+                  math(String.raw`\mathbb Z`), " の偶奇）。",
+                  "使ったのは有限集合の分割と数え上げだけであり、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
         }],
       },
     },

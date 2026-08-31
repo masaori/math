@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_adjacent_cells_ray_crossing_difference",
   "claim_arf_fourier_sign_projection",
   "claim_attainable_dual_image_trivial_sector",
   "claim_broken_bond_row_decomposition",
@@ -634,6 +635,7 @@ export const ALL_LABELS = [
   "def_unit_interval_rationals",
   "def_vertex_axis_straight_visit_count",
   "def_vertexwise_crossing_number",
+  "def_vertical_edge_traversal_count",
   "def_walk_of_family",
   "def_walk_weight",
   "def_zero_pinching_predicate",

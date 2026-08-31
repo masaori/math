@@ -1801,13 +1801,33 @@ C := \cosh 2K_2^* = c_2^* \in \mathbb{R},\quad S := \sinh 2K_2^* = s_2^* \in \ma
         ref("def_transfer_matrix_symbols"),
         " の記号）。",
         ref("cosh_sinh_basic_properties"),
-        " による倍角公式",
+        " による倍角公式から従う次の三本の等式",
       ]),
-      displayMath(
-        String.raw`a^2 + b^2 = \cosh^2 K_1 + \sinh^2 K_1 = \cosh 2K_1 = c_1, \qquad
-2ab = \sinh 2K_1 = s_1, \qquad
-a^2 - b^2 = 1`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+a^2 + b^2
+&= \cosh^2 K_1 + \sinh^2 K_1
+&&\bigl(\because\ a, b\text{ の定義}\bigr)\\
+&= \cosh 2K_1
+&&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\text{ の倍角公式}\bigr)\\
+&= c_1
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の記号の定義}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+2ab
+&= 2\cosh K_1 \sinh K_1
+&&\bigl(\because\ a, b\text{ の定義}\bigr)\\
+&= \sinh 2K_1
+&&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\text{ の倍角公式}\bigr)\\
+&= s_1
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の記号の定義}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+a^2 - b^2
+&= \cosh^2 K_1 - \sinh^2 K_1
+&&\bigl(\because\ a, b\text{ の定義}\bigr)\\
+&= 1
+&&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\bigr)
+\end{aligned}`),
       paragraph([
         "を後で用いる。また複素指数の指数法則 ",
         math(String.raw`e^{z}e^{w} = e^{z+w}`),
