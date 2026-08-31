@@ -46,4 +46,37 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_definition_cyclic_total_turning_vertex_simple_observation",
+    targets: ["def_cyclic_total_turning"],
+    title: { text: "頂点単純閉路の循環総回転数（観察と証明すべき候補の確定）" },
+    body: [
+      paragraph([
+        "検証水準の計算として、一辺 ", math(String.raw`L=2,3,4`),
+        " の周期正方格子で、通過の頂点が相異なる（接触対数零の）閉じた非後退辺列を",
+        "全列挙し（基点と向きを区別した数え上げで全 ", math(String.raw`373{,}716`),
+        " 本）、循環総回転数 ", math(String.raw`t_{\circ}(\gamma)`),
+        " と切断線偶奇 ", math(String.raw`(h(\gamma)\bmod2,\ v(\gamma)\bmod2)`),
+        " を突き合わせた（sagemath/check/vertex-simple-cycle-turning）。",
+      ]),
+      paragraph([
+        "結果、次の候補（離散 Whitney の言明）が例外なく成り立った。切断線偶奇が ",
+        math(String.raw`(0,0)`), " の頂点単純閉路（", math(String.raw`73{,}616`),
+        " 本）は ", math(String.raw`t_{\circ}(\gamma)\in\{+4,-4\}`),
+        "。切断線偶奇が ", math(String.raw`(0,0)`), " 以外の頂点単純閉路（",
+        math(String.raw`300{,}100`), " 本）は ", math(String.raw`t_{\circ}(\gamma)=0`),
+        "。",
+      ]),
+      paragraph([
+        "帰結として、頂点単純閉路の回転位相は ",
+        math(String.raw`\zeta_8^{\,t_{\circ}(\gamma)}=-1`),
+        "（切断線偶奇 ", math(String.raw`(0,0)`), "）または ",
+        math(String.raw`+1`),
+        "（それ以外）であり、Kac--Ward 置換項の軌道因子の符号が切断線偶奇だけで決まる。",
+        "これが平方恒等式の証明で各閉路の符号を確定する次の主張の候補である。",
+        "これは有限標本（", math(String.raw`L=2,3,4`),
+        "）の観察であり、一般の ", math(String.raw`L`), " についてはまだ何も証明していない。",
+      ]),
+    ],
+  },
 ]);
