@@ -2,6 +2,8 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
+2026-08-31 の 30 回目の tick の前進前レビューで、前 tick の終点等式は後続が直接引くため「何も言っていない主張」ではなく、SageMath 4,128 本とも整合すると確認した。一方、証明末尾が未証明の単純閉多角形・周期単純路という結論を先取りしていたため、その断定を除いて後続で扱う二つの平面路を特定する記述へ直した。
+
 ## 現在の到達点（2026-08-31 の 29 回目の tick 時点）
 
 **閉歩道の平面持ち上げの終点が始点と巻き付きベクトルの $L$ 倍だけ違うことを本文と SageMath で固定した（Lean 未着手）。** 座標式 `claim_plane_lift_coordinates` の $k=m$ の場合と閉性 $\operatorname{tgt}(\vec e_m)=\operatorname{src}(\vec e_1)$ から、$P_m(\gamma)=P_0(\gamma)+(L\,w_{\mathrm v}(\gamma),\ L\,w_{\mathrm h}(\gamma))$ を四段の行末根拠つきの鎖で示した（`claim_plane_lift_endpoint_winding`）。これにより、巻き付きが零の頂点単純閉路の持ち上げは平面の単純閉多角形になり、原始的な巻き付きの持ち上げは周期 $(L w_{\mathrm v}, L w_{\mathrm h})$ の周期単純路になる（離散 Whitney の回転数の議論の舞台）。SageMath `plane-lift-endpoint-winding` は $L=1,2,3$・長さ 6 までの閉じた非後退辺列 4,128 本を `ZZ` で検査した。検算対応 342 件、本文 750 ブロック・PDF 338 ページ、Lean 9,616 jobs・sorry なしを通した。次は平面の単純閉多角形の回転数（離散 Whitney の本体）を示す。

@@ -1,5 +1,9 @@
 # 自動ループ 記録の保管庫
 
+## 2026-08-31 の 30 回目の tick で台帳から移したレビュー記録（2026-08-31 の 25 回目）
+
+- 前 tick の `def_primitive_integer_pair`・`claim_vertex_simple_winding_zero_or_primitive` を本文・SageMath `vertex-simple-winding-primitive`（373,720 本、零 73,616・非零原始 300,104）・台帳で照合した。定義は Bézout 同値と判定可能性を確定し、主張は後続の離散 Whitney が引く分離・非分離の場合分けを与えるため「何も言っていない主張」ではなく、記号の濫用・件数の不一致も無かった。修正対象なし。
+
 ## 2026-08-31 の 29 回目の tick で台帳から移した記録（2026-08-31 の 24 回目）
 
 - 現在地: 頂点単純閉路の整数巻き付きベクトルが零または原始的であることを本文と SageMath で固定した。有限正方トーラス上の単純閉曲線を分離・非分離に分け、非分離の場合は有限双対グラフで曲線を一度だけ横断する閉路を構成し、符号付き交点数の行列式が $\pm1$ になることから Bézout 条件を得た（`claim_vertex_simple_winding_zero_or_primitive`）。SageMath `vertex-simple-winding-primitive` は $L=1,2,3,4$ の頂点単純閉路 373,720 本を `ZZ` で全列挙し、零 73,616 本・非零原始 300,104 本を検査した。Lean は未着手だった。

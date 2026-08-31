@@ -69,11 +69,11 @@
 （済んだ分の一覧は [auto-loop-archive.md](auto-loop-archive.md)。）
 
 ## レビュー記録
+- 2026-08-31（30 回目）: 前 tick の `claim_plane_lift_endpoint_winding` を本文・SageMath `plane-lift-endpoint-winding`（閉じた非後退辺列 4,128 本）・台帳で照合した。終点等式は後続が直接引くため「何も言っていない主張」ではなく、検算との不一致も無かった。一方、証明末尾が未証明の「零巻き付きなら単純閉多角形、原始的巻き付きなら周期単純路になる」を先取りしていたため、その断定を除き、後続で扱う二つの平面路を特定する記述へ直した。
 - 2026-08-31（29 回目）: 前 tick の `claim_vertex_simple_plane_lift_points_distinct` を本文・SageMath `vertex-simple-plane-lift-distinct`（頂点単純な閉じた非後退辺列 4,504 本・一周期の持ち上げ点 32,264 個）・台帳で照合した。主張は持ち上げの単射性を述べ、今回の終点の等式と合わせて離散 Whitney の舞台（平面の単純閉多角形・周期単純路）を与えるため「何も言っていない主張」ではなく、記号の濫用・件数の不一致も無かった。修正対象なし。
 - 2026-08-31（28 回目）: 前 tick の `def_plane_lift`・`claim_plane_lift_coordinates` を本文・SageMath `plane-lift-coordinates`（20,384 本・112,280 点）・台帳で照合した。定義は整数格子への写像を定め、座標式は今回の持ち上げ点の相異なりが直接引く合同情報を与えるため「何も言っていない主張」ではなく、記号の濫用・件数の不一致も無かった。修正対象なし。
 - 2026-08-31（27 回目）: 前 tick の `claim_lifted_steps_do_not_reverse` を本文・SageMath `lifted-nonbacktracking`（$L=1,\dots,4$ の全非後退接続 360 組）・台帳で照合した。主張は非後退接続の平面像が引き返さないことを述べ、後続の平面回転数（一歩の回転数の三値と方向差の対応）が直接引くため「何も言っていない主張」ではなく、記号の濫用・件数の不一致も無かった。修正対象なし。
 - 2026-08-31（26 回目）: 前 tick の `def_direction_unit_vector`・`claim_displacement_is_direction_unit` を本文・SageMath `direction-unit-displacement`（120 本）・台帳で照合した。定義は値の住処と well-defined 性を確定し、主張は後続の平面回転数が直接引くため「何も言っていない主張」ではなく、記号の濫用・件数の不一致も無かった。修正対象なし。
-- 2026-08-31（25 回目）: 前 tick の `def_primitive_integer_pair`・`claim_vertex_simple_winding_zero_or_primitive` を本文・SageMath `vertex-simple-winding-primitive`（373,720 本、零 73,616・非零原始 300,104）・台帳で照合した。定義は Bézout 同値と判定可能性を確定し、主張は後続の離散 Whitney が引く分離・非分離の場合分けを与えるため「何も言っていない主張」ではなく、記号の濫用・件数の不一致も無かった。修正対象なし。
 
 ## 判断待ち（人間に問うべき論点）
 
