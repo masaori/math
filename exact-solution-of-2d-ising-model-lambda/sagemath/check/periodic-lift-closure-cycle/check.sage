@@ -4,9 +4,10 @@
 - def_periodic_lift_closure_cycle
 - claim_periodic_lift_closure_is_simple_cycle
 
-先行する接続階段の検査と同じ有限全列挙を使い、周期数 c = 1, 2 のそれぞれについて
+先行する接続階段の検査と同じ有限全列挙を使い、周期数 c = 1, 2, 3 のそれぞれについて
 四部分を定義どおりに合成する。閉性、全ての連続差が単位格子ベクトルであること、
-終点を除く頂点の相異なりを ZZ 上で検査する。
+終点を除く頂点の相異なりを ZZ 上で検査する。さらに、三つの閉包の循環総回転数が
+一致することと、順向き・逆向きの持ち上げ一周期分の循環回転数が相殺することを検査する。
 """
 
 load("sagemath/check/first-hit-connecting-staircase/check.sage")
@@ -36,9 +37,50 @@ def translated_lift_indices(point, base_points, period, shift):
     return indices
 
 
+def unit_step(left, right):
+    return (right[0] - left[0], right[1] - left[1])
+
+
+def step_turning(left_step, right_step):
+    direction = {
+        (ZZ(0), ZZ(1)): ZZ(0),
+        (ZZ(1), ZZ(0)): ZZ(1),
+        (ZZ(0), ZZ(-1)): ZZ(2),
+        (ZZ(-1), ZZ(0)): ZZ(3),
+    }
+    difference = (direction[right_step] - direction[left_step]) % 4
+    assert difference != 2
+    if difference == 3:
+        return ZZ(-1)
+    return ZZ(difference)
+
+
+def cyclic_total_turning(closed_points):
+    assert closed_points[0] == closed_points[-1]
+    steps = [unit_step(left, right)
+             for left, right in zip(closed_points, closed_points[1:])]
+    return sum(step_turning(steps[index], steps[(index + 1) % len(steps)])
+               for index in range(len(steps)))
+
+
+def periodic_direction_turning(start_index, base_points, period, reverse=False):
+    period_length = len(base_points)
+    if reverse:
+        steps = [unit_step(periodic_lift_point(start_index - index, base_points, period),
+                           periodic_lift_point(start_index - index - 1, base_points, period))
+                 for index in range(period_length)]
+    else:
+        steps = [unit_step(periodic_lift_point(start_index + index, base_points, period),
+                           periodic_lift_point(start_index + index + 1, base_points, period))
+                 for index in range(period_length)]
+    return sum(step_turning(steps[index], steps[(index + 1) % period_length])
+               for index in range(period_length))
+
+
 cycle_total = 0
 closure_total = 0
 closure_vertex_total = 0
+turning_comparison_total = 0
 for L in range(1, 4):
     oriented = edges(L)
     for first in oriented:
@@ -91,7 +133,8 @@ for L in range(1, 4):
                                     connecting[-1], reps, period, shift)
                                 assert len(hit_indices) == 1
                                 k_1 = hit_indices[0]
-                                for c in (ZZ(1), ZZ(2)):
+                                closure_turnings = []
+                                for c in (ZZ(1), ZZ(2), ZZ(3)):
                                     translated_segment = [
                                         (periodic_lift_point(k, reps, period)[0] + shift[0],
                                          periodic_lift_point(k, reps, period)[1] + shift[1])
@@ -119,8 +162,20 @@ for L in range(1, 4):
                                             (ZZ(0), ZZ(1)), (ZZ(0), ZZ(-1)),
                                         }
                                     assert len(set(closure[:-1])) == len(closure) - 1
+                                    closure_turnings.append(cyclic_total_turning(closure))
                                     closure_total += 1
                                     closure_vertex_total += len(closure)
+                                forward_turning = periodic_direction_turning(
+                                    k_1, reps, period)
+                                reverse_turning = periodic_direction_turning(
+                                    k_0, reps, period, reverse=True)
+                                assert reverse_turning == -forward_turning
+                                assert len(set(closure_turnings)) == 1
+                                assert closure_turnings[1] - closure_turnings[0] \
+                                    == forward_turning + reverse_turning
+                                assert closure_turnings[2] - closure_turnings[1] \
+                                    == forward_turning + reverse_turning
+                                turning_comparison_total += 1
                         cycle_total += 1
 
                 if length < L * L:
@@ -132,4 +187,5 @@ for L in range(1, 4):
 
 print(f"PASS: {cycle_total} vertex-simple nonzero-winding closed walks, "
       f"{closure_total} periodic-lift closures, {closure_vertex_total} closure "
-      f"vertices over L=1,2,3")
+      f"vertices, {turning_comparison_total} three-period turning comparisons "
+      f"over L=1,2,3")

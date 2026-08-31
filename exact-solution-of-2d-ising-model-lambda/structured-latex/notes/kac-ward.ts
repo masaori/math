@@ -107,4 +107,35 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_periodic_lift_closure_turning_difference_cancellation",
+    targets: ["def_periodic_lift_closure_cycle", "def_cyclic_total_turning"],
+    title: { text: "周期数を増やした閉包の回転数差では持ち上げの回転数を取り出せない" },
+    body: [
+      paragraph([
+        "周期数 ", math(String.raw`c`), " の閉包と周期数 ", math(String.raw`c+1`),
+        " の閉包の循環総回転数を比較する候補は採用しない。接続階段の向きの有限語を ",
+        math(String.raw`A`), "、周期持ち上げ一周期分の向きの巡回語を ", math(String.raw`P`),
+        " とし、向きを全て反転して順序を逆にした語をそれぞれ ",
+        math(String.raw`\overline A,\overline P`), " と書く。閉包の向きの巡回語は、",
+      ]),
+      displayMath(String.raw`A\,P^{c}\,\overline A\,\overline P^{c}`),
+      paragraph([
+        "の形である。周期数を一つ増やすと、順向きの周期語 ", math(String.raw`P`),
+        " と逆向きの周期語 ", math(String.raw`\overline P`),
+        " が一つずつ同時に挿入される。巡回語の回転数和を ", math(String.raw`T`),
+        " と書くと、巡回の開始位置をずらしても有限和は変わらず、逆向きでは各回転の符号が反転するので",
+      ]),
+      displayMath(String.raw`T(P)+T(\overline P)=T(P)-T(P)=0`),
+      paragraph([
+        "となる。したがって閉包の循環総回転数の差は、元の ", math(String.raw`T(P)`),
+        " の値にかかわらず零であり、この差から ", math(String.raw`T(P)=0`),
+        " を導くことはできない。SageMath の有限全列挙でも、一辺 ", math(String.raw`L=1,2,3`),
+        " の全対象について周期数 ", math(String.raw`c=1,2,3`),
+        " の閉包の循環総回転数が一致し、追加された順向き・逆向きの一周期の和が零になることを整数だけで確認した",
+        "（sagemath/check/periodic-lift-closure-cycle）。次は、逆向きの周期持ち上げを同時に追加しない一側閉包を構成し、",
+        "周期数の差に一周期分だけが残る形へ変える必要がある。",
+      ]),
+    ],
+  },
 ]);

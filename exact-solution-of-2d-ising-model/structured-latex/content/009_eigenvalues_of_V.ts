@@ -680,9 +680,19 @@ n_\mu^2
         ref("anticommutator_of_psi"),
         " の第 2 式を添字 ",
         math(String.raw`(\nu, -\mu)`),
-        " に適用し、反交換子が引数の順序に依らないこと ",
-        math(String.raw`[X,Y]_+ = XY + YX = [Y,X]_+`),
-        " を使った。）すなわち、",
+        " に適用し、次の反交換子の対称性を使った。）",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[X,Y]_+
+&=XY+YX
+&& (\because\ \text{反交換子の定義})\\
+&=YX+XY
+&& (\because\ \text{行列の加法の交換法則})\\
+&=[Y,X]_+
+&& (\because\ \text{反交換子の定義})
+\end{aligned}`),
+      paragraph([
+        "すなわち、",
         math(String.raw`A \in \{\psi_\mu^\dagger, \psi_{-\mu}\}`),
         " と ",
         math(String.raw`B \in \{\psi_\nu^\dagger, \psi_{-\nu}\}`),
@@ -746,6 +756,7 @@ n_\mu n_\nu
       status: "added",
       notes: [
         "2026-08-15 の式変形統一で、Step 1 の四つの反交換関係を根拠なしの並記から、一行一関係・行末根拠へ開いた。内容は変えていない。",
+        "2026-09-01 の式変形統一で、反交換子の対称性にあった一行三等号を、3 段の行末根拠つきの鎖へ開いた。内容・参照は変えていない。",
       ],
     },
   },
