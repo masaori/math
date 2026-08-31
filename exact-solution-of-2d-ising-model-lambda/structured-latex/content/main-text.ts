@@ -58738,6 +58738,123 @@ D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_transverse_translates_of_periodic_plane_lift",
+        labels: [],
+        title: { text: "周期延長した持ち上げの横断平行移動" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_transverse_translates_of_periodic_plane_lift_disjoint",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_transverse_translate_of_periodic_plane_lift",
+                kind: "definition",
+                title: { text: "周期延長した持ち上げの整数横断平行移動" },
+                labels: ["def_transverse_translate_of_periodic_plane_lift"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                    ref("def_directed_winding_numbers"), "）が ",
+                    math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                    " を満たすとする。整数横断移動ベクトルとその横断幅を",
+                  ]),
+                  displayMath(String.raw`d_{\perp}(\gamma):=\bigl(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma)\bigr)\in\mathbb Z\times\mathbb Z,\qquad
+W_{\perp}(\gamma):=w_{\mathrm h}(\gamma)^2+w_{\mathrm v}(\gamma)^2\in\mathbb N`),
+                  paragraph([
+                    "で定める。巻き付きベクトルが零でないので ",
+                    math(String.raw`W_{\perp}(\gamma)\ge1`), " である。周期延長した平面持ち上げ（",
+                    ref("def_periodic_plane_lift"), "）について、整数 ", math(String.raw`u\in\mathbb Z`),
+                    " と ", math(String.raw`k\in\mathbb Z`), " に対し",
+                  ]),
+                  displayMath(String.raw`\widetilde P^{[u]}_k(\gamma):=\widetilde P_k(\gamma)+u\,d_{\perp}(\gamma)\in\mathbb Z\times\mathbb Z`),
+                  paragraph([
+                    "と定め、これを ", math(String.raw`u`), " 回横断平行移動した周期持ち上げと呼ぶ。",
+                    "また、一周期の横断座標の有限集合（", ref("claim_periodic_plane_lift_transverse_bounded"), "）の最小元と最大元を",
+                  ]),
+                  displayMath(String.raw`K_{\min}(\gamma):=\min_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z,\qquad
+K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
+                  paragraph([
+                    "と書く。これらは空でない有限整数集合の最小元と最大元なので定まる。",
+                    "定義に現れる演算は整数の有限集合・四則・順序だけで閉じる。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_transverse_translates_of_periodic_plane_lift_disjoint",
+              kind: "claim",
+              title: { text: "横断幅を超えて離した周期持ち上げは交わらない" },
+              labels: ["claim_transverse_translates_of_periodic_plane_lift_disjoint"],
+              habitat: "Z",
+              verification: ["sagemath/check/transverse-translates-of-periodic-plane-lift"],
+              statement: [
+                paragraph([
+                  "整数 ", math(String.raw`u\in\mathbb Z`), " と ", math(String.raw`k\in\mathbb Z`),
+                  " に対し、横断平行移動した周期持ち上げ（",
+                  ref("def_transverse_translate_of_periodic_plane_lift"), "）の横断座標は",
+                ]),
+                displayMath(String.raw`\kappa_{\gamma}\!\left(\widetilde P^{[u]}_k(\gamma)\right)
+=\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)+uW_{\perp}(\gamma)`),
+                paragraph([
+                  "を満たす。したがって ", math(String.raw`u,v\in\mathbb Z`), " が ",
+                  math(String.raw`u<v`), " かつ",
+                ]),
+                displayMath(String.raw`(v-u)W_{\perp}(\gamma)>K_{\max}(\gamma)-K_{\min}(\gamma)`),
+                paragraph([
+                  "を満たすなら、二つの点集合 ",
+                  math(String.raw`\{\widetilde P^{[u]}_k(\gamma)\mid k\in\mathbb Z\}`), " と ",
+                  math(String.raw`\{\widetilde P^{[v]}_k(\gamma)\mid k\in\mathbb Z\}`),
+                  " は交わらない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`u,k\in\mathbb Z`), " を任意に取る。横断座標を定義どおりに計算すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}\!\left(\widetilde P^{[u]}_k(\gamma)\right)
+&=\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)+u\,d_{\perp}(\gamma)\right)
+&&\bigl(\because\ \blkref{def_transverse_translate_of_periodic_plane_lift}\bigr)\\
+&=\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)+u\,\kappa_{\gamma}\!\left(d_{\perp}(\gamma)\right)
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と整数の分配則}\bigr)\\
+&=\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)+u\bigl(w_{\mathrm h}(\gamma)^2+w_{\mathrm v}(\gamma)^2\bigr)
+&&\bigl(\because\ d_{\perp}(\gamma)=(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))\ \text{（}\blkref{def_transverse_translate_of_periodic_plane_lift}\text{）}\bigr)\\
+&=\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)+uW_{\perp}(\gamma)
+&&\bigl(\because\ \blkref{def_transverse_translate_of_periodic_plane_lift}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "次に ", math(String.raw`u<v`), " と幅の不等式を仮定する。任意の ",
+                  math(String.raw`k,k'\in\mathbb Z`), " について、周期持ち上げの有限幅（",
+                  ref("claim_periodic_plane_lift_transverse_bounded"), "）と直前の等式から",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}\!\left(\widetilde P^{[u]}_k(\gamma)\right)
+&\le K_{\max}(\gamma)+uW_{\perp}(\gamma)
+&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と直前の等式}\bigr)\\
+&<K_{\min}(\gamma)+vW_{\perp}(\gamma)
+&&\bigl(\because\ (v-u)W_{\perp}(\gamma)>K_{\max}(\gamma)-K_{\min}(\gamma)\text{ の整数の移項}\bigr)\\
+&\le\kappa_{\gamma}\!\left(\widetilde P^{[v]}_{k'}(\gamma)\right)
+&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と直前の等式}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "よって二つの点の横断座標は異なり、点そのものも異なる。",
+                  math(String.raw`k,k'`), " は任意だったので二つの点集合は交わらない。",
+                  "全過程は整数の四則・順序と有限集合だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

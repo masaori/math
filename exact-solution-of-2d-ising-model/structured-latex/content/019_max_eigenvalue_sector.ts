@@ -262,14 +262,14 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
         String.raw`\begin{aligned}
 \left(\varepsilon x\right)_k
 &= \sum_{l=1}^{2^M}\varepsilon_{k,l}\,x_l
-   \quad (\because \text{行列とベクトルの積の定義}) \\
+&& (\because \text{行列とベクトルの積の定義}) \\
 &= \sum_{l=1}^{2^M}\delta_{k,\pi(l)}\,x_l
-   \quad (\because \text{(1) の成分表示}) \\
+&& (\because \text{(1) の成分表示}) \\
 &= x_{\pi^{-1}(k)}
-   \quad (\because \pi \text{ は全単射なので } \pi(l) = k \text{ となる } l
+&& (\because \pi \text{ は全単射なので } \pi(l) = k \text{ となる } l
    \text{ がちょうど 1 つ}) \\
 &= x_{\pi(k)}
-   \quad (\because \text{(2) より } \pi\circ\pi = \mathrm{id} \text{、すなわち }
+&& (\because \text{(2) より } \pi\circ\pi = \mathrm{id} \text{、すなわち }
    \pi^{-1} = \pi)
 \end{aligned}`,
       ),
@@ -290,12 +290,13 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
         String.raw`\begin{aligned}
 \varepsilon\,x_0
 &= \frac{1}{\sqrt{2}}\left(\varepsilon e_1 - \varepsilon e_{\pi(1)}\right)
-   \quad (\because \text{行列の積の線型性}) \\
+&& (\because \text{行列の積の線型性}) \\
 &= \frac{1}{\sqrt{2}}\left(e_{\pi(1)} - e_{\pi(\pi(1))}\right)
-   \quad (\because \text{(1) を 2 箇所へ同時適用}) \\
+&& (\because \text{(1) を 2 箇所へ同時適用}) \\
 &= \frac{1}{\sqrt{2}}\left(e_{\pi(1)} - e_{1}\right)
-   \quad (\because \text{(2) の } \pi(\pi(1)) = 1) \\
+&& (\because \text{(2) の } \pi(\pi(1)) = 1) \\
 &= -\,x_0
+&& (\because x_0 \text{ の定義と実数の符号の分配})
 \end{aligned}`,
       ),
       paragraph([

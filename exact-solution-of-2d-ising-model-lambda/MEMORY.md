@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 50 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 51 回目の tick 時点）
+
+**周期延長した平面持ち上げを整数横断方向へ平行移動し、元の横断幅を超えて離した二コピーが交わらないことを本文と SageMath で固定した（Lean 未着手）。** 「帯外の二路と周期持ち上げを合成する単純閉路」を、周期持ち上げの横断平行移動と分離／極大横断水準からの二路と単純閉路の合成へ割り直した。横断移動ベクトル $d_{\perp}(\gamma)=(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))$、正整数 $W_{\perp}(\gamma)=w_{\mathrm h}(\gamma)^2+w_{\mathrm v}(\gamma)^2$、移動した周期持ち上げ $\widetilde P_k^{[u]}(\gamma)=\widetilde P_k(\gamma)+u d_{\perp}(\gamma)$ を定義した（`def_transverse_translate_of_periodic_plane_lift`）。横断座標は $\kappa_\gamma(\widetilde P_k^{[u]})=\kappa_\gamma(\widetilde P_k)+uW_{\perp}$ を満たすので、一周期の最小・最大横断水準を $K_{\min},K_{\max}$ とすると、$u<v$ かつ $(v-u)W_{\perp}>K_{\max}-K_{\min}$ なら任意の $k,k'$ で $\kappa_\gamma(\widetilde P_k^{[u]})<\kappa_\gamma(\widetilde P_{k'}^{[v]})$ となり、二コピーは交わらない（`claim_transverse_translates_of_periodic_plane_lift_disjoint`）。SageMath `transverse-translates-of-periodic-plane-lift` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・横断座標の等式 520,632 件・分離した点対 21,566,088 組を `ZZ` で検査した。次は極大横断水準の周期持ち上げ点から反復横断階段を出し、分離した二つの周期持ち上げと合成する単純閉路を構成する。
+
+前進前レビューでは前 tick の反復横断階段の定義・主張と SageMath 30,048 歩を照合した。各歩の等式、横断座標の真の増加、歩数下界は後続が直接引く非自明な内容であり、「何も言っていない主張」・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$\varepsilon$ は不動点をもたない対合の置換行列」の証明ブロックで、ベクトルへの作用と負固有空間の単位ベクトルの二本の鎖にある根拠 7 行を行末の根拠列へ揃え、末段にも定義による根拠を明記した。式変形・段数・参照は不変である。
+
+## ひとつ前の到達点（2026-09-01 の 50 回目の tick 時点）
 
 **横断階段を反復して基点から横断座標を歩数以上引き上げる単純路を本文と SageMath で固定した（Lean 未着手）。** 台帳の「横断階段を反復して整数帯の外へ運ぶ単純路」を進めた。基点 $Q\in\mathbb Z\times\mathbb Z$ と反復回数 $t\in\mathbb N$、$t\ge1$ に対し、整数の除法 $s=q\,n_{\perp}+r$ で反復横断階段 $D^{\gamma,Q,t}_s:=Q+q\cdot(w_{\mathrm h},-w_{\mathrm v})+C^{\gamma}_r$ を定義した（`def_iterated_transverse_staircase`）。各差は除法の場合分け（$r\le n_{\perp}-2$／$r=n_{\perp}-1$。後者は $C^{\gamma}_0=(0,0)$ と $C^{\gamma}_{n_{\perp}}=(w_{\mathrm h},-w_{\mathrm v})$ の読み替え）で横断階段の一歩 $C^{\gamma}_{r+1}-C^{\gamma}_r$ に等しく、単位格子ベクトルで横断座標を $1$ 以上増やす。望遠和で $\kappa_{\gamma}(D^{\gamma,Q,t}_s)\ge\kappa_{\gamma}(Q)+s$ を得て、頂点がすべて相異なる単純路であることを証明した（`claim_iterated_transverse_staircase_lower_bound`）。SageMath `iterated-transverse-staircase` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本・反復階段 30,048 歩（基点 2 通り × 反復回数 2 通り）を `ZZ` で全検査した。次は帯外の二路と周期持ち上げを合成する単純閉路の構成へ進む。
 
