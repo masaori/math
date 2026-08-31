@@ -4966,8 +4966,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10113,
-        "inspectedContentSha256": "675f527aa21e072519c02be72d5c65bba2dfbd262aa9dbc94a32fbb6857fd65f",
+        "inspectedCharacterCount": 10269,
+        "inspectedContentSha256": "7554c64d9c619488e2401a701e0a85525ecfc28a695b052fe4165858c5714a19",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
