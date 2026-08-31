@@ -479,7 +479,7 @@ S_x
     title: { text: "自然数の有理数への標準単射" },
     labels: ["def_natural_rational_embedding"],
     habitat: "Q",
-    statement: [paragraph([ref("def_natural_numbers"), " の自然数に対し、", math(String.raw`\iota_{\mathbb N,\mathbb Q}:\mathbb N\to\mathbb Q`), " を ", math(String.raw`n\mapsto n/1`), " で定める。"])],
+    statement: [paragraph(["自然数の有理数への標準単射 ", math(String.raw`\iota_{\mathbb N,\mathbb Q}:\mathbb N\to\mathbb Q`), " を ", math(String.raw`n\mapsto n/1`), " で定める。"])],
   },
   {
     id: "finite_fourier_theorem_inverse_transform",

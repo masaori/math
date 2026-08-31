@@ -18,16 +18,16 @@ const heading = <const Id extends string>(id: Id, level: 1 | 2, text: string) =>
 });
 
 export default defineBlocks([
-  goal("paper_subject_preface", "本論文の対象", "本論文で有限双曲曲面と呼ぶのは、有限置換商から得た向き付き閉曲面セル分割が曲率マイナス一の正則双曲計量で実現される組に限る。厳密な集合とその記号は、必要な基礎定義の後に与える。", "Q"),
+  goal("paper_subject_preface", "本論文の対象と到達点", "本論文の対象は、有限置換商から生成し、閉曲面性と型 {3,7} を有限検査した組合せ的セル分割、その一次骨格上の Ising 分配多項式、ホモロジー類別、有限 Fourier 変換、係数算術、および二段の商に沿う有限比較である。双曲性は正則型の自然数不等式と負の Euler 標数の同値性として証明する。曲率マイナス一の計量的実現は外部の幾何学的解釈であり、本文の入力・定義・定理には含めない。", "finite"),
   heading("mathematical_tools", 1, "数学的道具立て"),
-  heading("finite_data_group_foundations", 2, "有限データ・有限置換群・剰余類"),
-  goal("finite_data_group_foundations", "この節の入出力と主定義", "入力は空集合と集合演算である。出力は自然数、集合の大きさを固定する宇宙、有限部分集合、順序対と直積、二元体、自然数上の遺伝的有限データ、有限群と有限置換群の記法、有限群作用、推移性、および左剰余類集合である。主定義はこれらを使用前に一意に導入し、後続の有限商・セル分割・二元体上の線形代数が使う基礎型を確定する。"),
+  heading("finite_data_group_foundations", 2, "本文で用いる有限群と二元体の記法"),
+  goal("finite_data_group_foundations", "この節の入出力と主定義", "入力は空でない有限集合と有限群である。出力は二元体、有限群と有限置換群の記法、有限群作用、推移性、および左剰余類集合である。標準数学を集合論から再構成せず、後続の有限商と二元体上の線形代数で実際に使う記号だけを定義する。"),
   heading("finite_graph_even_subgraphs", 2, "有限グラフと偶部分グラフ"),
   goal("finite_graph_even_subgraphs", "この節の入出力と主張", "入力は有限の頂点集合・辺集合と各辺の二端点である。出力は辺部分集合の境界偶奇、偶辺部分集合、および偶部分グラフ多項式である。この節はこれらの有限組合せデータを定義し、双曲曲面・格子・スピンを仮定しない。"),
   heading("two_stage_group_quotient_input", 2, "二段有限群商の代数的入力"),
   goal("two_stage_group_quotient_input", "この節の入出力と主張", "入力は空でない有限集合上の有限置換群と、その置換群に含まれる入れ子の正規部分群である。出力は二段の有限商群と段間全射群準同型である。この節は後のセル写像に必要な代数的入力だけを定義し、曲面性や被覆性を主張しない。"),
   heading("finite_cell_complex_data", 2, "有限セル複体の組合せデータ"),
-  goal("finite_cell_complex_data", "この節の入出力と主定理", "入力は有限の頂点・辺・面と incidence データである。出力はセルの役割ラベル、向き付け閉曲面セル分割の有限判定、正則型、Euler 標数、incidence 等式、および有限セル分割の位相的実現データである。主定理は正則セル分割の Euler 標数を有限個の incidence 数だけで表す等式である。ここでは双曲型やスピンを仮定しない。"),
+  goal("finite_cell_complex_data", "この節の入出力と主定理", "入力は有限の頂点・辺・面と incidence データである。出力はセルの役割ラベル、向き付け閉曲面セル分割の有限判定、正則型、Euler 標数、および incidence 等式である。主定理は正則セル分割の Euler 標数を有限個の incidence 数だけで表す等式である。ここでは双曲型やスピンを仮定しない。"),
   heading("f2_chain_homology", 2, "F_2 セル鎖と第一ホモロジー"),
   goal("f2_chain_homology", "この節の入出力と主定理", "入力は有限セル複体の境界 incidence である。出力は一次・二次境界写像、一次サイクル空間、面境界空間、および第一ホモロジー群である。主定理は二つの境界写像の合成が零であることであり、これが第一ホモロジー群の定義を正当化する。", "F2"),
   heading("homology_class_even_subgraph_polynomials", 2, "ホモロジー類別の偶部分グラフ多項式"),
@@ -41,11 +41,9 @@ export default defineBlocks([
 
   heading("hyperbolic_ising_semantics", 1, "有限双曲曲面上のイジング模型のセマンティクスを持つもの"),
   heading("paper_scope_and_quotient_input", 2, "本論文の対象と有限置換商セル分割"),
-  goal("paper_scope_and_quotient_input", "この節の入出力と主定義", "入力は有限置換商、辺剰余類代表元、先行節で定義した位相的実現データ、および所定条件を満たす計量候補である。出力は型付きの剰余類セル分割候補、正則双曲計量実現の条件、および全条件を満たす組からなる本論文の対象集合である。有限データだけから位相的実現や計量が存在または一意に定まるとは主張しない。", "Q"),
+  goal("paper_scope_and_quotient_input", "この節の入出力と主定義", "入力は有限置換商と辺剰余類代表元である。出力は剰余類セル分割候補と、閉曲面性の有限述語および双曲正則型の自然数不等式を満たす組合せ的双曲セル分割である。滑らかな曲面、Riemann 計量、曲率、測地線は定義せず、本文の主張にも用いない。", "finite"),
   heading("hyperbolic_regular_types", 2, "双曲正則型と Euler 標数"),
   goal("hyperbolic_regular_types", "この節の入出力と主定理", "入力は向き付け閉曲面の正則セル分割型である。出力は双曲正則型の有限不等式判定と次数下界である。主定理は双曲正則型であることと負の Euler 標数を持つことの同値である。曲率 -1 計量の存在や構成は主張しない。", "Q"),
-  heading("product_difference_classification", 2, "積差ごとの双曲正則型分類"),
-  goal("product_difference_classification", "この節の入出力と主張", "入力は積差を五から百三十二までの一つに固定した有限整数方程式である。出力はその積差を持つ双曲正則型の有限列挙である。各定理は固定した積差についての必要十分分類であり、百三十二を超える積差の一般分類は主張しない。", "finite"),
   heading("finite_quotient_hyperbolic_lattice", 2, "有限置換商からの双曲格子生成"),
   goal("finite_quotient_hyperbolic_lattice", "この節の入出力と主定理", "入力は八点上の固定した Q_{3,7} 置換商と辞書式最小辺代表元である。出力はその入力から得る有限セルデータの組合せ的検査証明書である。主定理はこの固定例に限り、一般の有限置換商に対する閉曲面性や曲率 -1 計量の存在を主張しない。", "Q"),
   heading("ising_partition_polynomial", 2, "有限グラフ Ising 分配多項式"),

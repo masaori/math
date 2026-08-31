@@ -15,7 +15,6 @@ const sectionOrder = [
   "prime-exponent-encoding",
   "paper-scope-and-quotient-input",
   "hyperbolic-regular-types",
-  "product-difference-classification",
   "finite-quotient-hyperbolic-lattice",
   "ising-partition-polynomial",
   "fixed-lattice-arithmetic",
@@ -36,7 +35,6 @@ const structureIds: Record<Section, readonly string[]> = {
   "prime-exponent-encoding": ["publication_heading_prime_exponent_encoding", "publication_goal_prime_exponent_encoding"],
   "paper-scope-and-quotient-input": ["publication_heading_hyperbolic_ising_semantics", "publication_heading_paper_scope_and_quotient_input", "publication_goal_paper_scope_and_quotient_input"],
   "hyperbolic-regular-types": ["publication_heading_hyperbolic_regular_types", "publication_goal_hyperbolic_regular_types"],
-  "product-difference-classification": ["publication_heading_product_difference_classification", "publication_goal_product_difference_classification"],
   "finite-quotient-hyperbolic-lattice": ["publication_heading_finite_quotient_hyperbolic_lattice", "publication_goal_finite_quotient_hyperbolic_lattice"],
   "ising-partition-polynomial": ["publication_heading_ising_partition_polynomial", "publication_goal_ising_partition_polynomial"],
   "fixed-lattice-arithmetic": ["publication_heading_fixed_lattice_arithmetic", "publication_goal_fixed_lattice_arithmetic"],
@@ -94,7 +92,6 @@ const genericFourierIds = new Set([
 
 function classify(block: ConvertedBlock, file: string): Section {
   if (file === "about-article-scope.ts" && block.id.startsWith("foundations_definition_")) return "finite-data-group-foundations";
-  if (block.id === "article_scope_definition_topological_realization_of_cellulation") return "finite-cell-complex-data";
   if (block.id === "finite_quotient_lattice_definition_cell_role_label_set") return "finite-cell-complex-data";
   if (genericCellulationIds.has(block.id)) return "finite-cell-complex-data";
   if ([
@@ -114,7 +111,6 @@ function classify(block: ConvertedBlock, file: string): Section {
   if (file === "about-article-scope.ts") return "paper-scope-and-quotient-input";
   if (file === "finite-cellulation.ts" && block.id === "finite_cellulation_definition_hyperbolic_regular_type_set") return "hyperbolic-regular-types";
   if (file === "finite-cellulation.ts" && block.id.startsWith("finite_cellulation_theorem_hyperbolic_regular_type_")) return "hyperbolic-regular-types";
-  if (file === "finite-cellulation.ts" && block.id.includes("product_difference_")) return "product-difference-classification";
   if (file === "finite-quotient-lattice.ts" && block.id === "finite_quotient_lattice_theorem_generated_cellulation_is_hyperbolic_regular") return "finite-quotient-hyperbolic-lattice";
   if (file === "finite-quotient-lattice.ts" && block.id !== "finite_quotient_lattice_theorem_fixed_quotient_ising_partition_polynomial") return "paper-scope-and-quotient-input";
   if (block.id === "finite_quotient_lattice_theorem_fixed_quotient_ising_partition_polynomial") return "ising-partition-polynomial";
@@ -186,9 +182,16 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
   const all = rawFiles.flatMap(({ file, blocks }) => blocks.map((block) => ({ file, block })));
   const byId = new Map(all.map(({ block }) => [block.id, block]));
   const labelOwner = new Map<string, string>(all.flatMap(({ block }) => block.labels.map((label) => [label, block.id] as const)));
-  const content = all.filter(({ file, block }) => file !== "publication-structure.ts" && block.kind !== "heading");
+  const rawContent = all.filter(({ file, block }) => file !== "publication-structure.ts" && block.kind !== "heading");
+  const content = rawContent.filter(({ file, block }) => !(
+    file === "finite-cellulation.ts"
+    && (
+      block.id === "finite_cellulation_theorem_minimal_product_difference_hyperbolic_types"
+      || block.id.startsWith("finite_cellulation_theorem_product_difference_")
+    )
+  ));
   const expectedIdDigests = new Map<string, string>([
-    ["about-article-scope.ts", "8340207201a5ca2d39d3dde65c6064a79d73d66fdbea63bb4d21ef91619b84d9"],
+    ["about-article-scope.ts", "800a74a94ca5c6547ba80057ad8897dad38f60f585f33cd63f961ca88044d1e8"],
     ["arithmetic-invariants.ts", "da0bcd7e0394862904f6a20cc9df0d4377a94f3190c5ff2ccb5c807d6684daca"],
     ["arithmetic-tools.ts", "cafe20754d06ecb0b246b66effbcae672dc3bd928370dd991dc18d1112c522c0"],
     ["finite-cellulation.ts", "cfff3fa6d456242279b044556bffcce96c68fe912b4fadf6a45ea1424c47259c"],
@@ -199,11 +202,11 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
     ["quotient-tower.ts", "577d8aaad9a00ee8e8e0cad17b198e3f3921931c44896e48a1fa2c7a61f97346"],
   ]);
   for (const [file, expected] of expectedIdDigests) {
-    const ids = content.filter((entry) => entry.file === file).map(({ block }) => block.id).sort();
+    const ids = rawContent.filter((entry) => entry.file === file).map(({ block }) => block.id).sort();
     const actual = createHash("sha256").update(ids.join("\n")).digest("hex");
     if (actual !== expected) throw new Error(`出版分類境界の再レビューが必要: ${file}: ブロック ID 集合が変更された`);
   }
-  const unexpectedFiles = new Set(content.map((entry) => entry.file).filter((file) => !expectedIdDigests.has(file)));
+  const unexpectedFiles = new Set(rawContent.map((entry) => entry.file).filter((file) => !expectedIdDigests.has(file)));
   if (unexpectedFiles.size > 0) throw new Error(`出版分類されていない本文ファイル: ${[...unexpectedFiles].join(", ")}`);
   const classified = new Map<Section, ConvertedBlock[]>(sectionOrder.map((section) => [section, []]));
   for (const { file, block } of content) {
@@ -247,7 +250,6 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
   }
 
   const notationIntroducers = new Map<RegExp, string>([
-    [/\\operatorname\{HF\}/, "foundations_definition_hereditarily_finite_data_over_naturals"],
     [/\\mathbb F_2/, "foundations_definition_field_with_two_elements"],
     [/\\operatorname\{Sym\}/, "foundations_definition_finite_permutation_group_notation"],
     [/\\operatorname\{ord\}/, "foundations_definition_finite_group_notation"],
@@ -256,7 +258,6 @@ export function organizePublication(rawFiles: ContentFile[]): ContentFile[] {
     [/\\mathsf\{source\}/, "finite_graph_definition_endpoint_labels"],
     [/\\mathsf\{forward\}/, "finite_cellulation_definition_orientation_labels"],
     [/\\operatorname\{OrientedClosedSurfaceCellulation\}/, "finite_cellulation_definition_oriented_closed_surface_cellulation"],
-    [/K_h/, "article_scope_definition_regular_hyperbolic_metric_realization"],
   ]);
   for (const [pattern, expectedOwner] of notationIntroducers) {
     const first = blocks.find((block) => pattern.test([...(block.statement ?? []), ...(block.proof ?? [])].map(nodeText).join("")));

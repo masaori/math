@@ -20,7 +20,7 @@ export default defineBlocks([
         "正整数 ",
         math(String.raw`p,q\in\mathbb N_{>0}`),
         " と空でない有限集合 ",
-        math(String.raw`\Omega\in\mathcal P_{\mathrm{fin}}(\operatorname{HF}(\mathbb N))`),
+        math(String.raw`\Omega`),
         " に対し、",
         ref("def_finite_permutation_group_notation"),
         " の有限置換群の記法と ",
@@ -525,7 +525,9 @@ r_E
 \in
 \operatorname{HyperbolicRegularTypes}(\mathcal X_Q)`),
       paragraph([
-        "である。ここで ",
+        "であり、",
+        ref("def_finite_quotient_combinatorially_hyperbolic_cellulation"),
+        " の有限置換商由来の組合せ的双曲セル分割を与える。ここで ",
         math(String.raw`3,7\in\mathbb N_{>0}`),
         "、三つのセル集合、端点写像、位置集合、境界語は有限集合または有限集合間の写像である。双曲条件も自然数上で判定し、実数、複素数、極限、積分は用いない。",
       ]),
@@ -596,6 +598,11 @@ r_E
       displayMath(String.raw`(3,7)
 \in
 \operatorname{HyperbolicRegularTypes}(\mathcal X_Q).`),
+      paragraph([
+        "上で得た向き付け閉曲面セル分割述語とこの所属を合わせると、",
+        ref("def_finite_quotient_combinatorially_hyperbolic_cellulation"),
+        " より主張を得る。",
+      ]),
     ],
   },
   {

@@ -17,9 +17,8 @@ export default defineBlocks([
     verification: ["sagemath/check/two-stage-finite-quotient-tower-input"],
     statement: [
       paragraph([
-        ref("def_hereditarily_finite_data_over_naturals"),
-        " に属する空でない有限集合 ",
-        math(String.raw`\Omega\in\mathcal P_{\mathrm{fin}}(\operatorname{HF}(\mathbb N))`),
+        "空でない有限集合 ",
+        math(String.raw`\Omega`),
         " と ",
         ref("def_finite_permutation_group_notation"),
         " の有限置換群 ",
