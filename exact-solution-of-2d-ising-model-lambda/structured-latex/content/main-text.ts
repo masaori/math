@@ -59176,6 +59176,176 @@ B
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_first_hit_connecting_staircase",
+        labels: [],
+        title: { text: "移動後の持ち上げへ最初に当たる接続階段" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_first_hit_connecting_staircase_meets_lifts_only_at_ends",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_first_hit_connecting_staircase",
+                kind: "definition",
+                title: { text: "最初に当たる歩数で打ち切った接続階段" },
+                labels: ["def_first_hit_connecting_staircase"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                    ref("def_directed_winding_numbers"), "）が ",
+                    math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                    " を満たすとする。移動回数 ", math(String.raw`u\in\mathbb N`), "、",
+                    math(String.raw`u\ge1`), " は横断幅の分離条件",
+                  ]),
+                  displayMath(String.raw`u\,W_{\perp}(\gamma)\ >\ K_{\max}(\gamma)-K_{\min}(\gamma)`),
+                  paragraph([
+                    "（", ref("def_transverse_translate_of_periodic_plane_lift"),
+                    "）を満たすとする。基点の添字 ", math(String.raw`k_0\in\mathbb Z`), " は",
+                  ]),
+                  displayMath(String.raw`\kappa_{\gamma}\!\left(\widetilde P_{k_0}(\gamma)\right)=K_{\max}(\gamma)`),
+                  paragraph([
+                    "を満たすものとする（周期延長した持ち上げの横断座標の値全体は一周期の有限集合に等しいので（",
+                    ref("claim_periodic_plane_lift_transverse_bounded"),
+                    "）、その最大元 ", math(String.raw`K_{\max}(\gamma)`),
+                    " を取る添字 ", math(String.raw`k_0`), " が存在する）。",
+                    math(String.raw`Q:=\widetilde P_{k_0}(\gamma)\in\mathbb Z\times\mathbb Z`),
+                    " と置き、基点 ", math(String.raw`Q`), "・反復回数 ", math(String.raw`u`),
+                    " の反復横断階段 ",
+                    math(String.raw`D^{\gamma,Q,u}_0,\ldots,D^{\gamma,Q,u}_{u\,n_{\perp}}`),
+                    "（", ref("def_iterated_transverse_staircase"), "）を取る。当たり歩数の集合を",
+                  ]),
+                  displayMath(String.raw`S(\gamma,k_0,u):=\bigl\{\,s\in\{1,\ldots,u\,n_{\perp}\}\ \bigm|\ \text{ある }k\in\mathbb Z\text{ が存在して }D^{\gamma,Q,u}_s=\widetilde P^{[u]}_k(\gamma)\,\bigr\}`),
+                  paragraph([
+                    "で定める。終端では ",
+                    math(String.raw`D^{\gamma,Q,u}_{u\,n_{\perp}}=Q+u\cdot(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))=\widetilde P_{k_0}(\gamma)+u\,d_{\perp}(\gamma)=\widetilde P^{[u]}_{k_0}(\gamma)`),
+                    "（", ref("def_iterated_transverse_staircase"), "、",
+                    ref("def_transverse_translate_of_periodic_plane_lift"),
+                    "）なので ", math(String.raw`u\,n_{\perp}\in S(\gamma,k_0,u)`),
+                    " であり、", math(String.raw`S(\gamma,k_0,u)`),
+                    " は自然数の空でない有限部分集合である。その最小元を",
+                  ]),
+                  displayMath(String.raw`s_{\mathrm{hit}}(\gamma,k_0,u):=\min S(\gamma,k_0,u)\in\{1,\ldots,u\,n_{\perp}\}`),
+                  paragraph([
+                    "と書き、有限列 ",
+                    math(String.raw`E^{\gamma,k_0,u}_s:=D^{\gamma,Q,u}_s`),
+                    "（", math(String.raw`s\in\{0,\ldots,s_{\mathrm{hit}}(\gamma,k_0,u)\}`),
+                    "）を接続階段と呼ぶ。各 ", math(String.raw`s`), " が ",
+                    math(String.raw`S(\gamma,k_0,u)`), " に属するかは、",
+                    math(String.raw`k=qm+r`), " の整数の除法（",
+                    ref("def_periodic_plane_lift"), "）により、各 ",
+                    math(String.raw`r\in\{0,\ldots,m-1\}`), " について差 ",
+                    math(String.raw`D^{\gamma,Q,u}_s-P_r(\gamma)-u\,d_{\perp}(\gamma)`),
+                    " が零でない周期並進ベクトル ",
+                    math(String.raw`(L\,w_{\mathrm v}(\gamma),L\,w_{\mathrm h}(\gamma))`),
+                    " の整数倍かどうかを見る有限回の整数の割り算に帰着する。",
+                    "全過程は整数の除法・四則・順序と有限集合だけで定まり、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_first_hit_connecting_staircase_meets_lifts_only_at_ends",
+              kind: "claim",
+              title: { text: "接続階段は元の持ち上げと始点でのみ、移動後の持ち上げと終点でのみ交わる" },
+              labels: ["claim_first_hit_connecting_staircase_meets_lifts_only_at_ends"],
+              habitat: "Z",
+              verification: ["sagemath/check/first-hit-connecting-staircase"],
+              statement: [
+                paragraph([
+                  "接続階段 ",
+                  math(String.raw`E^{\gamma,k_0,u}_0,\ldots,E^{\gamma,k_0,u}_{s_{\mathrm{hit}}(\gamma,k_0,u)}`),
+                  "（", ref("def_first_hit_connecting_staircase"), "）は次を満たす。",
+                ]),
+                paragraph([
+                  "第一に、頂点はすべて相異なる。第二に、始点は ",
+                  math(String.raw`E^{\gamma,k_0,u}_0=\widetilde P_{k_0}(\gamma)`),
+                  " であり、任意の ",
+                  math(String.raw`s\in\{1,\ldots,s_{\mathrm{hit}}(\gamma,k_0,u)\}`),
+                  " と任意の ", math(String.raw`k\in\mathbb Z`), " について ",
+                  math(String.raw`E^{\gamma,k_0,u}_s\ne\widetilde P_k(\gamma)`),
+                  "（", ref("def_periodic_plane_lift"), "）。第三に、ある ",
+                  math(String.raw`k\in\mathbb Z`), " が存在して ",
+                  math(String.raw`E^{\gamma,k_0,u}_{s_{\mathrm{hit}}(\gamma,k_0,u)}=\widetilde P^{[u]}_k(\gamma)`),
+                  "（", ref("def_transverse_translate_of_periodic_plane_lift"),
+                  "）であり、任意の ",
+                  math(String.raw`s\in\{0,\ldots,s_{\mathrm{hit}}(\gamma,k_0,u)-1\}`),
+                  " と任意の ", math(String.raw`k\in\mathbb Z`), " について ",
+                  math(String.raw`E^{\gamma,k_0,u}_s\ne\widetilde P^{[u]}_k(\gamma)`),
+                  " である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "第一の主張を示す。接続階段の頂点は反復横断階段 ",
+                  math(String.raw`D^{\gamma,Q,u}`),
+                  " の先頭部分なので、その頂点がすべて相異なること（",
+                  ref("claim_iterated_transverse_staircase_lower_bound"),
+                  "）から相異なる。",
+                ]),
+                paragraph([
+                  "第二の主張を示す。始点は ",
+                  math(String.raw`E^{\gamma,k_0,u}_0=D^{\gamma,Q,u}_0=Q=\widetilde P_{k_0}(\gamma)`),
+                  "（", ref("def_iterated_transverse_staircase"), "、",
+                  ref("def_first_hit_connecting_staircase"), "）。基点は ",
+                  math(String.raw`K_{\max}(\gamma)\le\kappa_{\gamma}(Q)`),
+                  " を等号で満たす（", ref("def_first_hit_connecting_staircase"),
+                  " の ", math(String.raw`k_0`), " の取り方）ので、反復回数 ",
+                  math(String.raw`u`), " の反復横断階段の ",
+                  math(String.raw`s\ge1`),
+                  " の全頂点は周期延長した持ち上げのどの点とも異なる（",
+                  ref("claim_staircase_from_band_top_meets_lift_only_at_base"),
+                  "）。", math(String.raw`\{1,\ldots,s_{\mathrm{hit}}(\gamma,k_0,u)\}\subset\{1,\ldots,u\,n_{\perp}\}`),
+                  " なので第二の主張が従う。",
+                ]),
+                paragraph([
+                  "第三の主張を示す。",
+                  math(String.raw`s_{\mathrm{hit}}(\gamma,k_0,u)\in S(\gamma,k_0,u)`),
+                  "（空でない有限集合の最小元はその集合に属する）なので、当たり歩数の集合の定義（",
+                  ref("def_first_hit_connecting_staircase"), "）から、ある ",
+                  math(String.raw`k\in\mathbb Z`), " が存在して ",
+                  math(String.raw`E^{\gamma,k_0,u}_{s_{\mathrm{hit}}(\gamma,k_0,u)}=\widetilde P^{[u]}_k(\gamma)`),
+                  " である。次に ",
+                  math(String.raw`s\in\{1,\ldots,s_{\mathrm{hit}}(\gamma,k_0,u)-1\}`),
+                  " について、もしある ", math(String.raw`k\in\mathbb Z`), " で ",
+                  math(String.raw`E^{\gamma,k_0,u}_s=\widetilde P^{[u]}_k(\gamma)`),
+                  " なら ", math(String.raw`s\in S(\gamma,k_0,u)`),
+                  " かつ ", math(String.raw`s<s_{\mathrm{hit}}(\gamma,k_0,u)=\min S(\gamma,k_0,u)`),
+                  " となり、最小元の定義に反する。最後に ",
+                  math(String.raw`s=0`), " について、任意の ", math(String.raw`k\in\mathbb Z`),
+                  " に対し横断座標を比較すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{\gamma}\!\left(\widetilde P^{[u]}_k(\gamma)\right)
+&=\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)+u\,W_{\perp}(\gamma)
+&&\bigl(\because\ \blkref{claim_transverse_translates_of_periodic_plane_lift_disjoint}\text{ の横断座標の等式}\bigr)\\
+&\ge K_{\min}(\gamma)+u\,W_{\perp}(\gamma)
+&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と }K_{\min}(\gamma)\text{ の定義（}\blkref{def_transverse_translate_of_periodic_plane_lift}\text{）}\bigr)\\
+&>K_{\min}(\gamma)+K_{\max}(\gamma)-K_{\min}(\gamma)
+&&\bigl(\because\ u\,W_{\perp}(\gamma)>K_{\max}(\gamma)-K_{\min}(\gamma)\text{（}\blkref{def_first_hit_connecting_staircase}\text{ の分離条件）と整数の順序の加法性}\bigr)\\
+&=K_{\max}(\gamma)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=\kappa_{\gamma}\!\left(E^{\gamma,k_0,u}_0\right)
+&&\bigl(\because\ E^{\gamma,k_0,u}_0=\widetilde P_{k_0}(\gamma)\text{ と }k_0\text{ の取り方（}\blkref{def_first_hit_connecting_staircase}\text{）}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "横断座標の値が異なるので ",
+                  math(String.raw`E^{\gamma,k_0,u}_0\ne\widetilde P^{[u]}_k(\gamma)`),
+                  " である。全過程は整数の除法・四則・順序と有限集合だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

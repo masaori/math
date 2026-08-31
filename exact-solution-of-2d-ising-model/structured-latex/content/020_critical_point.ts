@@ -221,14 +221,14 @@ export default defineBlocks([
 \cosh x\cosh y + \sinh x\sinh y
 &= \frac{\left(e^{x}+e^{-x}\right)\left(e^{y}+e^{-y}\right)}{4}
  + \frac{\left(e^{x}-e^{-x}\right)\left(e^{y}-e^{-y}\right)}{4}
-   \quad (\because \text{cosh\_sinh\_basic\_properties の定義}) \\
+   &&(\because \text{cosh\_sinh\_basic\_properties の定義}) \\
 &= \frac{\left(e^{x+y}+e^{x-y}+e^{-x+y}+e^{-x-y}\right)
        + \left(e^{x+y}-e^{x-y}-e^{-x+y}+e^{-x-y}\right)}{4}
-   \quad (\because \exp(a)\exp(b)=\exp(a+b)) \\
+   &&(\because \exp(a)\exp(b)=\exp(a+b)) \\
 &= \frac{2e^{x+y}+2e^{-(x+y)}}{4} \\
 &= \frac{e^{x+y}+e^{-(x+y)}}{2} \\
 &= \cosh(x+y)
-   \quad (\because \text{cosh\_sinh\_basic\_properties の定義})
+   &&(\because \text{cosh\_sinh\_basic\_properties の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -254,9 +254,9 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \cosh x
 &= \cosh^2\!\left(\tfrac{x}{2}\right) + \sinh^2\!\left(\tfrac{x}{2}\right)
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (1)}) \\
+   &&(\because \text{cosh\_addition\_and\_half\_angle (1)}) \\
 &= \left(1 + \sinh^2\!\left(\tfrac{x}{2}\right)\right) + \sinh^2\!\left(\tfrac{x}{2}\right)
-   \quad (\because \text{cosh\_sinh\_basic\_properties (2)}) \\
+   &&(\because \text{cosh\_sinh\_basic\_properties (2)}) \\
 &= 1 + 2\sinh^2\!\left(\tfrac{x}{2}\right)
 \end{aligned}`,
       ),
@@ -298,7 +298,7 @@ export default defineBlocks([
 e^{-u}
 &= \frac{1}{y+\sqrt{y^2+1}} \\
 &= \frac{\sqrt{y^2+1}-y}{\left(\sqrt{y^2+1}+y\right)\left(\sqrt{y^2+1}-y\right)}
-   \quad (\because \text{分母の有理化}) \\
+   &&(\because \text{分母の有理化}) \\
 &= \frac{\sqrt{y^2+1}-y}{\left(y^2+1\right)-y^2} \\
 &= \sqrt{y^2+1}-y
 \end{aligned}`,
@@ -321,7 +321,7 @@ e^{-u}
         String.raw`\begin{aligned}
 \mathrm{arcsinh}'(y)
 &= \frac{1}{y+\sqrt{y^2+1}}\cdot\left(1 + \frac{y}{\sqrt{y^2+1}}\right)
-   \quad (\because \log \text{ と } \sqrt{\ } \text{ の微分・合成関数の微分}) \\
+   &&(\because \log \text{ と } \sqrt{\ } \text{ の微分・合成関数の微分}) \\
 &= \frac{1}{y+\sqrt{y^2+1}}\cdot\frac{\sqrt{y^2+1}+y}{\sqrt{y^2+1}} \\
 &= \frac{1}{\sqrt{y^2+1}}
 \end{aligned}`,
@@ -371,7 +371,13 @@ e^{-u}
 \ \leq\ \int_0^t \cosh t\,du = t\cosh t`,
       ),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-01 の式変形統一で、(1)(2)(4) の四本の鎖にあった根拠 7 行を行中の \\quad (\\because …) から" +
+          "行末の根拠列（aligned の &&）へ揃えた。式変形・根拠・段数・参照は変えていない。",
+      ],
+    },
   },
 
   {
