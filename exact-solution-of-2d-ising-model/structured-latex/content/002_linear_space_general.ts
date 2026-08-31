@@ -562,15 +562,15 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left(A_1\boxtimes\cdots\boxtimes\left(\sum_{a=1}^{r}c_aB_a\right)\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
 &= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_aB_a\right)_{i_jj_j}
-\quad (\because \boxtimes \text{ の定義}) \\
+&&(\because \boxtimes \text{ の定義}) \\
 &= \left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)\left(\sum_{a=1}^{r}c_a(B_a)_{i_jj_j}\right)
-\quad (\because \text{行列の和・スカラー倍は成分ごとの演算}) \\
+&&(\because \text{行列の和・スカラー倍は成分ごとの演算}) \\
 &= \sum_{a=1}^{r}c_a\left(\prod_{k\neq j}(A_k)_{i_kj_k}\right)(B_a)_{i_jj_j}
-\quad (\because \text{複素数の分配律}) \\
+&&(\because \text{複素数の分配律}) \\
 &= \sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)_{\nu(I),\nu(J)}
-\quad (\because \boxtimes \text{ の定義}) \\
+&&(\because \boxtimes \text{ の定義}) \\
 &= \left(\sum_{a=1}^{r}c_a\left(A_1\boxtimes\cdots\boxtimes B_a\boxtimes\cdots\boxtimes A_M\right)\right)_{\nu(I),\nu(J)}
-\quad (\because \text{行列の和・スカラー倍は成分ごとの演算})
+&&(\because \text{行列の和・スカラー倍は成分ごとの演算})
 \end{aligned}`,
       ),
       paragraph([
@@ -634,13 +634,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left(\left(A_1\boxtimes\cdots\boxtimes A_M\right)^\top\right)_{\nu(I),\nu(J)}
 &= \left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(J),\nu(I)}
-\quad (\because \text{転置の定義}) \\
+&&(\because \text{転置の定義}) \\
 &= \prod_{k=1}^{M}(A_k)_{j_ki_k}
-\quad (\because \boxtimes \text{ の定義}) \\
+&&(\because \boxtimes \text{ の定義}) \\
 &= \prod_{k=1}^{M}\left(A_k^\top\right)_{i_kj_k}
-\quad (\because 2 \text{ 次の行列の転置の定義}) \\
+&&(\because 2 \text{ 次の行列の転置の定義}) \\
 &= \left(A_1^\top\boxtimes\cdots\boxtimes A_M^\top\right)_{\nu(I),\nu(J)}
-\quad (\because \boxtimes \text{ の定義})
+&&(\because \boxtimes \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -671,6 +671,8 @@ export default defineBlocks([
           "あわせて、最後の段が「ν は全単射だから」とだけ述べていたところを、" +
           "全単射性がどこで定めたものかと、そこから成分の番号がすべて尽くされることを書いた。" +
           "式変形の段は 1 つも増減しておらず、主張と証明の中身は変えていない。",
+        "2026-09-01 の式変形統一で、四段の根拠を行中の \\quad (\\because …) から" +
+          "行末の根拠列（aligned の &&）へ揃えた。式変形・根拠・段数・参照は変えていない。",
       ],
     },
   },
