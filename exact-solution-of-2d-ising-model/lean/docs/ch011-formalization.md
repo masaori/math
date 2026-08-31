@@ -1,6 +1,6 @@
 # 章 011「転送行列の最大固有値と分配関数の挟み撃ち」の Lean 形式化
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`（11 ブロック）
+正本: `structured-latex/content/011_max_eigenvalue.ts`（12 ブロック）
 
 この文書は `lean/README.md` への統合前の記録である（統合は呼び出し元が行う）。
 
@@ -44,7 +44,7 @@
 | `Ising2D.symTransfer_isSymm` | `W` は実対称 | `W_is_real_symmetric_positive_definite` Step 3 |
 | `Ising2D.symTransfer_posDef` | `W` は正定値（合同変換） | 同上 |
 | `Ising2D.mulVec_eq_zero_iff_of_isUnit` | 可逆行列の `mulVec` は単射 | 同上「可逆性」 |
-| `Ising2D.diagExp` ほか（`diagExp_isSymm`, `diagExp_mul_self`, `diagExp_isUnit`, `diagExp_posDef`） | 正の対角行列としての `V₁^{1/2}` と `V₁^{1/2}V₁^{1/2} = V₁` | `def_symmetrized_transfer_matrix`, `W_has_positive_entries` Step 1 |
+| `Ising2D.diagExp` ほか（`diagExp_isSymm`, `diagExp_mul_self`, `diagExp_isUnit`, `diagExp_posDef`） | 正の対角行列としての `V₁^{1/2}` と `V₁^{1/2}V₁^{1/2} = V₁` | `def_transfer_matrix_square_root`, `W_has_positive_entries` Step 1 |
 | `Ising2D.matExp_isSymm` / `Ising2D.matExp_posDef` | 実対称行列の `exp` は実対称正定値 | `exp_hermitian_is_positive_definite` の実行列版（章 009 への接続点） |
 | **`Ising2D.symTransfer_entry_pos`** | `W` の成分はすべて正 | **`W_has_positive_entries`** |
 | **`Ising2D.partition_function_sandwich`** | `c(M)^{N_row} ≤ Z ≤ (dim) c(M)^{N_row}` | **`partition_function_sandwich`** |
@@ -144,7 +144,7 @@
 | `sector_decomposition_of_rayleigh_sup` の **(2)** `W P^{(±)} = V^{(±)}P^{(±)}` | **未形式化** | `V^{(±)}`, `V₁^{(±)}`, `sector_replacement_of_V1`, `V1_restriction_to_eigenspaces` に依存する。これらは章 004 / 010 の対象で、本タスクの担当範囲外（既存 `.lean` の編集も禁止）。記録は `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md` |
 | `maxeig_000_remark_overview` | 形式化対象外 | 章の目的を述べた注記であり数学的主張ではない |
 
-（上記以外の 9 ブロックはすべて形式化済み。`sorry` / `admit` はゼロ。）
+（上記以外の 10 ブロックはすべて形式化済み。`sorry` / `admit` はゼロ。）
 
 ## 5. 人手証明に見つけた問題
 

@@ -139,6 +139,7 @@ export const ALL_LABELS = [
   "def_theta_mu",
   "def_trace",
   "def_transfer_matrix",
+  "def_transfer_matrix_square_root",
   "def_transfer_matrix_symbols",
   "def_unit_circle",
   "definition_of_cc",

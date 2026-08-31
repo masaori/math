@@ -3,7 +3,8 @@
 
 正本: `structured-latex/content/011_max_eigenvalue.ts`
 
-* `maxeig_001_definition_symmetrized_transfer_matrix`（ラベル **`def_symmetrized_transfer_matrix`**）
+* `maxeig_001_definition_transfer_matrix_square_root`（ラベル **`def_transfer_matrix_square_root`**）
+* `maxeig_001a_definition_symmetrized_transfer_matrix`（ラベル **`def_symmetrized_transfer_matrix`**）
 * `maxeig_002_claim_Z_equals_trace_of_W`（ラベル **`Z_equals_trace_of_W`**）
 * `maxeig_003_claim_W_is_positive_definite`（ラベル **`W_is_real_symmetric_positive_definite`**）
 * `maxeig_004_claim_W_has_positive_entries`（ラベル **`W_has_positive_entries`**）
@@ -130,7 +131,7 @@ theorem diagExp_isSymm (d : n → ℝ) : (diagExp d).IsSymm := Matrix.isSymm_dia
 
 theorem diagExp_entry_pos (d : n → ℝ) (i : n) : 0 < Real.exp (d i) := Real.exp_pos _
 
-/-- **`V₁^{1/2} V₁^{1/2} = V₁`**（人手証明 `def_symmetrized_transfer_matrix` の平方根の意味）。 -/
+/-- **`V₁^{1/2} V₁^{1/2} = V₁`**（人手証明 `def_transfer_matrix_square_root` の平方根の意味）。 -/
 theorem diagExp_mul_self (d : n → ℝ) :
     diagExp d * diagExp d = diagExp (fun i => 2 * d i) := by
   simp only [diagExp, Matrix.diagonal_mul_diagonal]

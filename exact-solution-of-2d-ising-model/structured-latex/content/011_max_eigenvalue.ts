@@ -58,11 +58,11 @@ export default defineBlocks([
   },
 
   {
-    id: "maxeig_001_definition_symmetrized_transfer_matrix",
+    id: "maxeig_001_definition_transfer_matrix_square_root",
     kind: "definition",
     origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`\text{対称化転送行列 } W` },
-    labels: ["def_symmetrized_transfer_matrix"],
+    title: { tex: String.raw`V_1^{1/2} := \exp\!\left(\tfrac{1}{2}K_1D\right)` },
+    labels: ["def_transfer_matrix_square_root"],
     statement: [
       paragraph([
         ref("def_transfer_matrix_symbols"),
@@ -72,13 +72,11 @@ export default defineBlocks([
         math(String.raw`D := \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z`),
         "、",
         math(String.raw`\sigma_{M+1}^z := \sigma_1^z`),
-        "）と ",
-        math(String.raw`V_2`),
-        " について",
+        "）について",
       ]),
       displayMath(
-        String.raw`V_1^{1/2} := \exp\!\left(\tfrac{1}{2}K_1 D\right), \qquad
-W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
+        String.raw`V_1^{1/2} := \exp\!\left(\tfrac{1}{2}K_1 D\right)
+\in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
         "と定める。",
@@ -91,6 +89,32 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
         math(String.raw`\tfrac12 K_1D`),
         " は自分自身と可換）。",
       ]),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "maxeig_001a_definition_symmetrized_transfer_matrix",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 3 },
+    title: { tex: String.raw`\text{対称化転送行列 } W` },
+    labels: ["def_symmetrized_transfer_matrix"],
+    statement: [
+      paragraph([
+        ref("def_transfer_matrix_square_root"),
+        " の ",
+        math(String.raw`V_1^{1/2}`),
+        " と ",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`V_2`),
+        " を用いて",
+      ]),
+      displayMath(
+        String.raw`W := V_1^{1/2}\,V_2\,V_1^{1/2}
+\in \mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph(["と定める。"]),
     ],
     conversion: { status: "added" },
   },
@@ -119,10 +143,12 @@ W := V_1^{1/2}\,V_2\,V_1^{1/2} \in \mathrm{Mat}(2^M,\mathbb{C})`,
       paragraph([
         math(String.raw`B := V_1^{1/2}`),
         " と略記する。",
-        ref("def_symmetrized_transfer_matrix"),
+        ref("def_transfer_matrix_square_root"),
         " より ",
         math(String.raw`BB = V_1`),
-        "、",
+        " であり、",
+        ref("def_symmetrized_transfer_matrix"),
+        " より ",
         math(String.raw`W = BV_2B`),
         " である。トレースの巡回性は ",
         ref("trace_basic_properties"),
@@ -300,6 +326,8 @@ x^\top W x
       paragraph([
         ref("def_config_basis_iso"),
         " の同一視のもとで、",
+        ref("def_symmetrized_transfer_matrix"),
+        " で定めた ",
         math(String.raw`W`),
         " のすべての成分は正の実数である：",
       ]),
@@ -312,6 +340,8 @@ x^\top W x
         "Step 1（",
         math(String.raw`V_1^{1/2}`),
         " は正の対角行列）。",
+        ref("def_transfer_matrix_square_root"),
+        " の定義と ",
         ref("sigma_z_diagonal_action"),
         " より ",
         math(String.raw`D f_{\iota(\mu)} = \left(\sum_{m}\mu(m)\mu(m+1)\right)f_{\iota(\mu)}`),
