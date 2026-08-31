@@ -83,9 +83,9 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \frac{a^{m+1}}{(m+1)!}
 &= \frac{a}{m+1}\cdot\frac{a^m}{m!}
-\quad (\because\ (m+1)! = (m+1)\cdot m!) \\
+&&\bigl(\because\ (m+1)! = (m+1)\cdot m!\bigr)\\
 &\le \frac{1}{2}\cdot\frac{a^m}{m!}
-\quad (\because\ a/(m+1)\le 1/2 \text{ と } a^m/m!\ge 0)
+&&\bigl(\because\ a/(m+1)\le 1/2 \text{ と } a^m/m!\ge 0\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -115,11 +115,11 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \sum_{m=m_0}^{N}\frac{a^m}{m!}
 &\le \frac{a^{m_0}}{m_0!}\sum_{k=0}^{N-m_0}\left(\frac{1}{2}\right)^k
-\quad (\because \text{各項へ直前の評価 } a^{m_0+k}/(m_0+k)!\le (1/2)^k a^{m_0}/m_0! \text{ を適用した}) \\
+&&\bigl(\because\ \text{各項へ直前の評価 } a^{m_0+k}/(m_0+k)!\le (1/2)^k a^{m_0}/m_0! \text{ を適用した}\bigr)\\
 &= \frac{a^{m_0}}{m_0!}\left(2-\left(\frac{1}{2}\right)^{N-m_0}\right)
-\quad (\because \text{等比数列の和の公式}) \\
+&&\bigl(\because\ \text{等比数列の和の公式}\bigr)\\
 &\le \frac{2a^{m_0}}{m_0!}
-\quad (\because (1/2)^{N-m_0}\ge 0)
+&&\bigl(\because\ (1/2)^{N-m_0}\ge 0\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -166,11 +166,11 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \sum_{m=p}^{q}\frac{a^m}{m!}
 &= E_q(a)-E_{p-1}(a)
-\quad (\because E_N(a)=\sum_{m=0}^{N}a^m/m! \text{ の差}) \\
+&&\bigl(\because\ E_N(a)=\sum_{m=0}^{N}a^m/m! \text{ の差}\bigr)\\
 &\le E(a)-E_{p-1}(a)
-\quad (\because (2)) \\
+&&\bigl(\because\ (2)\bigr)\\
 &= R_{p-1}(a)
-\quad (\because R_N(a)=E(a)-E_N(a) \text{ の定義})
+&&\bigl(\because\ R_N(a)=E(a)-E_N(a) \text{ の定義}\bigr)
 \end{aligned}`,
       ),
     ],
@@ -180,6 +180,8 @@ export default defineBlocks([
         "原文（Typst）に対応ブロックは無い。exp 級数の収束（labels: exp_converges）と" +
           "可換行列の exp 積公式（labels: theorem_exp_product）の証明が土台として使う" +
           "実数の指数級数の収束と剰余評価を、章の冒頭に置いた。",
+        "2026-09-01 の式変形統一で、三本の鎖に行中の \\quad(\\because …) で置かれていた根拠 8 行を、" +
+          "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
       ],
     },
   },
