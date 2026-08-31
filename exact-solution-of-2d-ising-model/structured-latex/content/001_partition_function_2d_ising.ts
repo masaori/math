@@ -254,25 +254,11 @@ export default defineBlocks([
    \exp\!\left(\sum_{j\in\{1,\dots,N\}} J\,\mu(j)\mu'(j)\right)
 &&(\because\ \delta_{\mu=\nu}\ \text{は}\ \nu=\mu\ \text{のときだけ}\ 1\ \text{で他は}\ 0\ \text{である}) \\
 &= \exp\!\left(\sum_{j\in\{1,\dots,N\}} J'\,\mu(j)\mu(j+1) + \sum_{j\in\{1,\dots,N\}} J\,\mu(j)\mu'(j)\right)
-&&(\because\ \text{指数の積は指数の和である}\ (n=1,\ K=\mathbb{R})) \\
+&&(\because\ \blkref{theorem_exp_product}\ \text{を}\ n=1,\ K=\mathbb{R}\ \text{へ適用する}) \\
 &= \exp\!\left(\sum_{j\in\{1,\dots,N\}} \bigl(J'\,\mu(j)\mu(j+1) + J\,\mu(j)\mu'(j)\bigr)\right)
 &&(\because\ \mathbb{R}\ \text{の分配則と結合則による有限和の項別加法})
 \end{aligned}`,
       ),
-      paragraph([
-        "引いたのは ",
-        ref("def_transfer_matrix"),
-        " と ",
-        ref("theorem_exp_product"),
-        " である（後者は ",
-        math(String.raw`\mathrm{Mat}(1,\mathbb{R}) \cong \mathbb{R}`),
-        " と同一視すれば任意の ",
-        math(String.raw`a,b\in\mathbb{R}`),
-        " が ",
-        math(String.raw`ab=ba`),
-        " を満たすので、仮定は自動的に成り立つ）。",
-      ]),
-
       paragraph(["中間目標: 行列の冪の成分。"]),
       paragraph([
         "任意の ",
@@ -383,14 +369,9 @@ export default defineBlocks([
 &= \exp\!\left(\sum_{k=1}^{m} x_k\right)\exp(x_{m+1})
 &&(\because\ \text{帰納法の仮定}) \\
 &= \exp\!\left(\sum_{k=1}^{m+1} x_k\right)
-&&(\because\ \text{指数の積は指数の和である}\ (n=1,\ K=\mathbb{R}))
+&&(\because\ \blkref{theorem_exp_product}\ \text{を}\ n=1,\ K=\mathbb{R}\ \text{へ適用する})
 \end{aligned}`,
       ),
-      paragraph([
-        "最後の行で引いたのは ",
-        ref("theorem_exp_product"),
-        " である。",
-      ]),
       paragraph([
         math(String.raw`(\mu^{(1)},\dots,\mu^{(M)}) \in \mathfrak{M}^{M}`),
         "（および ",
@@ -531,14 +512,9 @@ s(M+1,j)
    \exp\!\left(\sum_{\substack{i\in\{1,\dots,M\}\\j\in\{1,\dots,N\}}} \bigl(J\,s(i,j)s(i+1,j) + J'\,s(i,j)s(i,j+1)\bigr)\right)
 &&(\because\ \mathbb{R}\ \text{の加法の交換律}) \\
 &= Z(J,J')
-&&(\because\ \text{分配関数の定義式そのもの})
+&&(\because\ \blkref{def_partition_function_2d_ising}\ \text{の定義式そのもの})
 \end{aligned}`,
       ),
-      paragraph([
-        "最後の行で引いたのは ",
-        ref("def_partition_function_2d_ising"),
-        " である。",
-      ]),
     ],
     conversion: {
       status: "converted",

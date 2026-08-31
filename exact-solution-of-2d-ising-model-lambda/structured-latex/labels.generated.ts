@@ -57,6 +57,7 @@ export const ALL_LABELS = [
   "claim_edge_row_partition",
   "claim_edge_simple_contact_split",
   "claim_even_subgraph_spin_sum",
+  "claim_exterior_cell_set_edge_connected",
   "claim_finite_free_entropy_density_nonnegative",
   "claim_finite_free_entropy_density_upper_bound",
   "claim_first_root_of_unity_set",
