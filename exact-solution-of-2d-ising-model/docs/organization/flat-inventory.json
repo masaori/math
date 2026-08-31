@@ -548,7 +548,7 @@
       "mainTheorem": "成分定義の V1 と Pauli 行列による指数表示の一致",
       "mainTheoremEntryId": "bridge_004_claim_V1_component_equals_pauli",
       "boundaryEvidence": "現行の未分割グラフでは章内依存順10–12が連続し、順10のサイト作用素の記号を順11のσzの基底作用が受け取り、順12がその作用と対角行列の指数関数を用いて、成分定義とPauli行列表示のV1が同じ行列であるという主定理へ閉じるため、順12の後は節境界の候補となる。ただし順10はV1だけでなくV2とJordan–Wigner変換の記号も束ね、順13・14は順10を再利用し、順15は順10と順12を受け取る。順10を一ブロック一定義へ分割すると依存辺と境界が変わりうるため、最終的な節構造は確定しない。生成時には、この暫定評価の前提として、外部入力とその本文 fingerprint、三項の本文 fingerprint、内部依存辺、章内依存順、現行グラフ上の節末出力に加え、章内依存順13–15の章内順・直接依存・本文 fingerprint、および順15がこの候補から順10・12を受け取ることを固定検査する。",
-      "readabilityStatus": "対象三項のうち、σzの基底作用とV1の二表示の一致は、二次行列の基底作用、クロネッカー積、周期端を分けた対角成分を一段ずつ計算しており、現行の説明粒度検査に合格している。先頭の「記号の定義」は、単位行列、サイトごとの三つのPauli行列、V1・V2、Jordan–Wigner行列、全スピン反転行列、双対結合定数、双曲線関数の略記を一ブロックへ束ねているため未解決である。Pauli行列、cosh・sinh、その正値性は先行項へ明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の証明は本項を入力とする後続主張なので循環参照を避けた。さらに外部入力では、集合と代数構造の記号、複素数、行列指数関数、対角行列の指数関数、行列と線型写像の対応に説明粒度の未解決が残る。対象側と外部入力側を区別して、境界候補・本文未完成として扱う。"
+      "readabilityStatus": "対象三項のうち、σzの基底作用とV1の二表示の一致は、二次行列の基底作用、クロネッカー積、周期端を分けた対角成分を一段ずつ計算しており、現行の説明粒度検査に合格している。先頭の「記号の定義」は、単位行列、サイトごとの三つのPauli行列、V1・V2、Jordan–Wigner行列、全スピン反転行列、双対結合定数、双曲線関数の略記を一ブロックへ束ねているため未解決である。Pauli行列、cosh・sinh、その正値性は先行項へ明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の証明は本項を入力とする後続主張なので循環参照を避けた。さらに外部入力では、集合と代数構造の記号、複素数、行列指数関数、行列と線型写像の対応に説明粒度の未解決が残る。対象側と外部入力側を区別して、境界候補・本文未完成として扱う。"
     },
     {
       "name": "V2 のパウリ行列表示と分配関数への接続",
@@ -595,7 +595,7 @@
       "mainTheorem": "分配関数を Pauli 行列表示の二つの転送行列で表す公式",
       "mainTheoremEntryId": "bridge_007_claim_partition_function_in_pauli_form",
       "boundaryEvidence": "章内依存順13–15は連続し、二次転送行列の恒等式からV2の二表示の一致へ進み、確定済みのV1の二表示の一致と分配関数の転送行列表示を合わせて、分配関数のPauli行列表示へ一方向に閉じる。次の章内依存順16の射影子定義は全スピン反転行列だけを使い、この三項へ依存しないため、外部入力集合が切り替わる順15の後で節を閉じる。順10の混在した記号定義を分割した後は、順13が双対結合定数と双曲線関数の略記、順14がサイトごとのσxとV2、順15がV1・V2の定義片へ依存することを再判定する。分割によりこれらの意味的依存、三項の連続性、順15への一意な閉包、または順16からの非依存が変わった場合は境界を再確定する。",
-      "readabilityStatus": "対象三項は、二次行列の指数級数、クロネッカー積の成分と積、二つの転送行列表示の置換を一段ずつ計算しており、現行の説明粒度検査に合格している。外部入力では、混在した記号定義、集合と代数構造の記号、複素数、行列指数関数とその収束・可換積公式、対角行列の指数関数に説明粒度の未解決が残る。とくにtanhと実対数の独立した先行定義は未整備であり、順10の分割時に補う必要がある。"
+      "readabilityStatus": "対象三項は、二次行列の指数級数、クロネッカー積の成分と積、二つの転送行列表示の置換を一段ずつ計算しており、現行の説明粒度検査に合格している。外部入力では、混在した記号定義、集合と代数構造の記号、複素数、行列指数関数とその収束・可換積公式に説明粒度の未解決が残る。とくにtanhと実対数の独立した先行定義は未整備であり、順10の分割時に補う必要がある。"
     },
     {
       "name": "全スピン反転行列から定める二つの行列",
@@ -698,6 +698,36 @@
       "mainTheoremEntryId": "maxeig_002_claim_Z_equals_trace_of_W",
       "boundaryEvidence": "章内依存順19で V1 の平方根として使う行列を定め、順20でその行列と V2 から W を定め、順21でトレースの巡回性により分配関数の表示へ閉じる。三項は一方向の依存鎖をなし、節末のトレース公式だけが三項をまとめた数学的帰結である。順22の W の成分正値性は二つの定義を再利用するがトレース公式へ依存せず、標準基底上の対角作用と V2 の成分表示という別の入力を追加するため、順21の後で節を閉じる。生成時に三項の連続性、内部依存辺、対象と全外部入力の本文 fingerprint、節末出力の一意性に加え、順22の本文・直接依存・トレース公式からの非依存を固定検査する。",
       "readabilityStatus": "二つの定義を別ブロックに分けたため、各ブロックは一つの行列だけを定める。平方根の意味は可換な行列指数関数の積公式で確認し、トレース公式は有限行列の積と巡回性だけで証明されており、対象三項は現行の説明粒度検査に合格している。外部入力である混在した記号定義には分割が残る。"
+    },
+    {
+      "name": "対称化転送行列の全成分正値性",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "maxeig_004_claim_W_has_positive_entries"
+      ],
+      "input": [
+        "スピン配置と標準基底の多重添字の対応",
+        "サイトごとの σz の対角作用、対角行列の指数関数、実指数関数の正値性",
+        "V2 の正の実数成分表示",
+        "V1 の平方根として使う正の対角行列と、それで V2 を挟んだ対称化転送行列 W"
+      ],
+      "externalInputEntryIds": [
+        "bridge_001_definition_config_basis",
+        "bridge_002_claim_sigma_z_diagonal_action",
+        "bridge_006_claim_V2_component_equals_pauli",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "maxeig_001_definition_transfer_matrix_square_root",
+        "maxeig_001a_definition_symmetrized_transfer_matrix",
+        "bridge_003_claim_exp_of_diagonal"
+      ],
+      "output": [
+        "対称化転送行列 W のすべての成分が正の実数であること"
+      ],
+      "mainTheorem": "対称化転送行列 W の全成分正値性",
+      "mainTheoremEntryId": "maxeig_004_claim_W_has_positive_entries",
+      "boundaryEvidence": "章内依存順22の一項は、V1 の平方根の正の対角成分と V2 の正の成分を、W の成分ごとの行列積へ代入して全成分正値性へ閉じる。直後の章内依存順23の Z_m,Y_m の線型独立性は、サイト作用素の記号、Pauli 行列から作るクロネッカー積基底とその積の規則だけを入力とし、本項との相互依存がない。直接入力集合が完全に切り替わるため、順22の後で一項の節を閉じる。生成時に対象と全外部入力の本文 fingerprint、章内順、節末出力の一意性、順23の直接依存・本文 fingerprint、および二項間の相互非依存を固定検査する。",
+      "readabilityStatus": "対象本文は、実指数関数の正値性を明示参照したうえで、正の対角行列と正の成分を持つ行列の積を成分ごとに有限和へ展開している。対象と外部入力はいずれも現行の説明粒度検査に合格している。"
     }
   ],
   "explanationGranularityReview": {
@@ -744,15 +774,8 @@
       "TV1_hatZ_hatY_031_claim_V_psi_commutator",
       "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY",
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
-      "eigenvalues_of_V_009_claim_eigenvalues_of_Vprime",
-      "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
-      "bridge_003_claim_exp_of_diagonal",
-      "maxeig_008_claim_trace_power_sandwich",
       "evensectorT_003_claim_coefficient_conversion",
-      "evenfermi_007_claim_T_eq_on_check_Z_Y",
-      "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-      "closing_010_theorem_onsager_exact_solution",
-      "sector_002_claim_abs_vector_moves_to_even_sector"
+      "evenfermi_007_claim_T_eq_on_check_Z_Y"
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
@@ -2106,238 +2129,238 @@
         {
           "order": 83,
           "entryIds": [
-            "TV1_hatZ_hatY_041_claim_gamma2_periodicity"
+            "TV1_hatZ_hatY_036_claim_gamma1_geq_1"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 84,
           "entryIds": [
-            "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y"
+            "freeenergy_001_claim_gamma1_lower_bound_all_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 85,
           "entryIds": [
-            "hatZ_hatY_anticommutation_001_claim_anticommutation_relations"
+            "critical_003_claim_gamma_kappa_identity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 86,
           "entryIds": [
-            "evensector_005_claim_anticommutator_check_Z_Y"
+            "critical_005_claim_isotropic_setting"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 87,
           "entryIds": [
-            "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y"
+            "critical_007_claim_gamma_derivatives_in_kappa"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 88,
           "entryIds": [
-            "TV1_hatZ_hatY_002_claim_nesting_commutator"
+            "freeenergy_002_claim_gamma_is_continuous"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 89,
           "entryIds": [
-            "evensector_001_claim_why_minus_only"
+            "TV1_hatZ_hatY_041_claim_gamma2_periodicity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 90,
           "entryIds": [
-            "evensector_004_claim_commutator_H_check_Z_Y"
+            "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 91,
           "entryIds": [
-            "evensectorT_002_claim_nesting_commutator"
+            "hatZ_hatY_anticommutation_001_claim_anticommutation_relations"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 92,
           "entryIds": [
-            "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion"
+            "evensector_005_claim_anticommutator_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 93,
           "entryIds": [
-            "evensectorT_003_claim_coefficient_conversion"
+            "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 94,
           "entryIds": [
-            "evensectorT_004_claim_extract_taylor"
+            "TV1_hatZ_hatY_002_claim_nesting_commutator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 95,
           "entryIds": [
-            "evensectorT_005_claim_T_actions"
+            "evensector_001_claim_why_minus_only"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 96,
           "entryIds": [
-            "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient"
+            "evensector_004_claim_commutator_H_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 97,
           "entryIds": [
-            "TV1_hatZ_hatY_012_claim_TV1_TV2_actions"
+            "evensectorT_002_claim_nesting_commutator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 98,
           "entryIds": [
-            "TV1_hatZ_hatY_014_claim_product_action_computation"
+            "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 99,
           "entryIds": [
-            "TV1_hatZ_hatY_018_claim_T_V_action"
+            "evensectorT_003_claim_coefficient_conversion"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 100,
           "entryIds": [
-            "TV1_hatZ_hatY_037_claim_factorization_A_theta"
+            "evensectorT_004_claim_extract_taylor"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 101,
           "entryIds": [
-            "evensectorT_007_definition_B1_B2"
+            "evensectorT_005_claim_T_actions"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 102,
           "entryIds": [
-            "evensectorT_008_claim_product_action"
+            "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 103,
           "entryIds": [
-            "evensectorT_009_claim_factorization_A_theta"
+            "TV1_hatZ_hatY_012_claim_TV1_TV2_actions"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 104,
           "entryIds": [
-            "evensectorT_010_claim_T_V_plus_action"
+            "TV1_hatZ_hatY_014_claim_product_action_computation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 105,
           "entryIds": [
-            "TV1_hatZ_hatY_035_claim_det_A_theta"
+            "TV1_hatZ_hatY_018_claim_T_V_action"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 106,
           "entryIds": [
-            "Athetatilde_006_claim_det_A"
+            "TV1_hatZ_hatY_037_claim_factorization_A_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 107,
           "entryIds": [
-            "TV1_hatZ_hatY_034b_claim_lambda_pm_exp_gamma"
+            "evensectorT_007_definition_B1_B2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 108,
           "entryIds": [
-            "TV1_hatZ_hatY_036_claim_gamma1_geq_1"
+            "evensectorT_008_claim_product_action"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 109,
           "entryIds": [
-            "Athetatilde_007_claim_gamma1_gt_1"
+            "evensectorT_009_claim_factorization_A_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 110,
           "entryIds": [
-            "Athetatilde_008_definition_gamma_theta_tilde"
+            "evensectorT_010_claim_T_V_plus_action"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 111,
           "entryIds": [
-            "Athetatilde_009_claim_lambda_eq_exp_gamma"
+            "TV1_hatZ_hatY_035_claim_det_A_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 112,
           "entryIds": [
-            "freeenergy_001_claim_gamma1_lower_bound_all_theta"
+            "Athetatilde_006_claim_det_A"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 113,
           "entryIds": [
-            "critical_003_claim_gamma_kappa_identity"
+            "Athetatilde_007_claim_gamma1_gt_1"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 114,
           "entryIds": [
-            "critical_005_claim_isotropic_setting"
+            "Athetatilde_008_definition_gamma_theta_tilde"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 115,
           "entryIds": [
-            "critical_007_claim_gamma_derivatives_in_kappa"
+            "TV1_hatZ_hatY_034b_claim_lambda_pm_exp_gamma"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 116,
           "entryIds": [
-            "freeenergy_002_claim_gamma_is_continuous"
+            "Athetatilde_009_claim_lambda_eq_exp_gamma"
           ],
           "inseparableDependencyUnit": false
         },
@@ -3846,6 +3869,10 @@
           "prerequisiteId": "bridge_003_claim_exp_of_diagonal"
         },
         {
+          "dependentId": "maxeig_004_claim_W_has_positive_entries",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
           "dependentId": "maxeig_006_definition_rayleigh_sup",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
@@ -5029,7 +5056,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 21,
+        "incomingReferenceCount": 22,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8109,8 +8136,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4505,
-        "inspectedContentSha256": "4fb76d613b09b8774fee0feb9d17c62613fbb4a5f5e8c8c47050d8f5bc2e9e12",
+        "inspectedCharacterCount": 4715,
+        "inspectedContentSha256": "5f3c6ac5c3bfa898bea8382a6f3dfdb4e72d4c57928d3e19a05e17bd7bf14c0f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11223,6 +11250,7 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [
+          "一般の体・環",
           "抽象線型写像",
           "群の一般論"
         ],
@@ -11303,8 +11331,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6034,
-        "inspectedContentSha256": "ab5911db8fb6a45aa867b393ea6ca15fc940c988a13e4f86a8678d1c8ed2111d",
+        "inspectedCharacterCount": 5786,
+        "inspectedContentSha256": "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11362,8 +11390,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4026,
-        "inspectedContentSha256": "f42f08b0069e29f6a2d4f3bab84d74e99a05fff95103e09a81d06a1581c8a27b",
+        "inspectedCharacterCount": 4090,
+        "inspectedContentSha256": "95d5468bee33981a077bfcd1c67e1bfc7eb0f5e11007fcb3602ef07137ba9343",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11462,7 +11490,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 84,
+        "chapterOrder": 90,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y"
         ]
@@ -11532,7 +11560,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 85,
+        "chapterOrder": 91,
         "dependencyUnitEntryIds": [
           "hatZ_hatY_anticommutation_001_claim_anticommutation_relations"
         ]
@@ -11605,7 +11633,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 87,
+        "chapterOrder": 93,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y"
         ]
@@ -11672,7 +11700,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 88,
+        "chapterOrder": 94,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_002_claim_nesting_commutator"
         ]
@@ -11733,7 +11761,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 92,
+        "chapterOrder": 98,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion"
         ]
@@ -11833,7 +11861,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 96,
+        "chapterOrder": 102,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient"
         ]
@@ -11862,6 +11890,7 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [
+          "一般の体・環",
           "抽象線型写像",
           "群の一般論"
         ],
@@ -12424,7 +12453,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 97,
+        "chapterOrder": 103,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_012_claim_TV1_TV2_actions"
         ]
@@ -12522,7 +12551,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 98,
+        "chapterOrder": 104,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_014_claim_product_action_computation"
         ]
@@ -12814,7 +12843,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 99,
+        "chapterOrder": 105,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_018_claim_T_V_action"
         ]
@@ -12868,7 +12897,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 100,
+        "chapterOrder": 106,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_037_claim_factorization_A_theta"
         ]
@@ -13790,7 +13819,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -13838,7 +13867,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 105,
+        "chapterOrder": 111,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_035_claim_det_A_theta"
         ]
@@ -13867,8 +13896,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1836,
-        "inspectedContentSha256": "4a7ac471ba87385bdf5da5f06512260e54d09ed9a25b3979bf031734c81d422b",
+        "inspectedCharacterCount": 1615,
+        "inspectedContentSha256": "99da89e23a89dd700c07d0663e239ea2a3161935392afc66de1613b3827a3f96",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13878,12 +13907,10 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "det_A_theta",
         "relation_of_gamma_2"
       ],
       "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_023_claim_relation_of_gamma2",
-        "TV1_hatZ_hatY_035_claim_det_A_theta"
+        "TV1_hatZ_hatY_023_claim_relation_of_gamma2"
       ],
       "semanticPrerequisiteLabels": [],
       "referenceLabelsNotUsedAsPrerequisites": [],
@@ -13892,7 +13919,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 108,
+        "chapterOrder": 83,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_036_claim_gamma1_geq_1"
         ]
@@ -14004,7 +14031,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 107,
+        "chapterOrder": 115,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_034b_claim_lambda_pm_exp_gamma"
         ]
@@ -14553,7 +14580,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 83,
+        "chapterOrder": 89,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_041_claim_gamma2_periodicity"
         ]
@@ -15133,11 +15160,9 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [
-          "一般の体・環"
-        ],
+        "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 7129,
         "inspectedContentSha256": "6765f0071cacc90ba486ca95e77ed3090501575ac625329af843dcbf2f68f385",
         "forwardNavigationMixedIntoStatement": false,
@@ -15398,11 +15423,9 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [
-          "一般の体・環"
-        ],
+        "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 8007,
         "inspectedContentSha256": "1db946266e8e182faa5d239bcfa5b571c33fc3a776577343cf44a02f060a7db3",
         "forwardNavigationMixedIntoStatement": false,
@@ -15949,11 +15972,9 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [
-          "一般の体・環"
-        ],
+        "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 4204,
         "inspectedContentSha256": "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747",
         "forwardNavigationMixedIntoStatement": false,
@@ -16886,8 +16907,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2732,
-        "inspectedContentSha256": "a9af4cdb3cbd0f95e04d285f5763952cf13b517816c8985106fd8548f1091ad0",
+        "inspectedCharacterCount": 3014,
+        "inspectedContentSha256": "8805015267676caca2c8413fa9ed82050cb43311032c106d1295037289185a0e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16898,6 +16919,7 @@
       },
       "dependsOnLabels": [
         "V2_component_equals_pauli",
+        "cosh_sinh_basic_properties",
         "def_config_basis_iso",
         "def_symmetrized_transfer_matrix",
         "def_transfer_matrix_square_root",
@@ -16909,6 +16931,7 @@
         "bridge_002_claim_sigma_z_diagonal_action",
         "bridge_003_claim_exp_of_diagonal",
         "bridge_006_claim_V2_component_equals_pauli",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
         "maxeig_001_definition_transfer_matrix_square_root",
         "maxeig_001a_definition_symmetrized_transfer_matrix"
       ],
@@ -17119,11 +17142,9 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [
-          "一般の体・環"
-        ],
+        "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 15170,
         "inspectedContentSha256": "be8863af040718244347af7fab2c603d67dd2b71cc013423d34ac3edb188f18e",
         "forwardNavigationMixedIntoStatement": false,
@@ -17362,7 +17383,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 112,
+        "chapterOrder": 84,
         "dependencyUnitEntryIds": [
           "freeenergy_001_claim_gamma1_lower_bound_all_theta"
         ]
@@ -17425,7 +17446,7 @@
       },
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 116,
+        "chapterOrder": 88,
         "dependencyUnitEntryIds": [
           "freeenergy_002_claim_gamma_is_continuous"
         ]
@@ -17674,7 +17695,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 89,
+        "chapterOrder": 95,
         "dependencyUnitEntryIds": [
           "evensector_001_claim_why_minus_only"
         ]
@@ -18037,7 +18058,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 90,
+        "chapterOrder": 96,
         "dependencyUnitEntryIds": [
           "evensector_004_claim_commutator_H_check_Z_Y"
         ]
@@ -18107,7 +18128,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 86,
+        "chapterOrder": 92,
         "dependencyUnitEntryIds": [
           "evensector_005_claim_anticommutator_check_Z_Y"
         ]
@@ -18136,8 +18157,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5151,
-        "inspectedContentSha256": "7af5ce113df91bc89deceb866479a551438bed166a0ddf27a8e1f0f0b3729fda",
+        "inspectedCharacterCount": 5043,
+        "inspectedContentSha256": "f95cd0cc381d8e1e4abae98a2c4250429d293050eaee94c671b63abe285ada60",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18381,7 +18402,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 91,
+        "chapterOrder": 97,
         "dependencyUnitEntryIds": [
           "evensectorT_002_claim_nesting_commutator"
         ]
@@ -18446,7 +18467,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 93,
+        "chapterOrder": 99,
         "dependencyUnitEntryIds": [
           "evensectorT_003_claim_coefficient_conversion"
         ]
@@ -18506,7 +18527,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 94,
+        "chapterOrder": 100,
         "dependencyUnitEntryIds": [
           "evensectorT_004_claim_extract_taylor"
         ]
@@ -18580,7 +18601,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 95,
+        "chapterOrder": 101,
         "dependencyUnitEntryIds": [
           "evensectorT_005_claim_T_actions"
         ]
@@ -18707,7 +18728,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 101,
+        "chapterOrder": 107,
         "dependencyUnitEntryIds": [
           "evensectorT_007_definition_B1_B2"
         ]
@@ -18763,7 +18784,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 102,
+        "chapterOrder": 108,
         "dependencyUnitEntryIds": [
           "evensectorT_008_claim_product_action"
         ]
@@ -18842,7 +18863,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 103,
+        "chapterOrder": 109,
         "dependencyUnitEntryIds": [
           "evensectorT_009_claim_factorization_A_theta"
         ]
@@ -18915,7 +18936,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 104,
+        "chapterOrder": 110,
         "dependencyUnitEntryIds": [
           "evensectorT_010_claim_T_V_plus_action"
         ]
@@ -19354,7 +19375,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 106,
+        "chapterOrder": 112,
         "dependencyUnitEntryIds": [
           "Athetatilde_006_claim_det_A"
         ]
@@ -19422,7 +19443,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 109,
+        "chapterOrder": 113,
         "dependencyUnitEntryIds": [
           "Athetatilde_007_claim_gamma1_gt_1"
         ]
@@ -19484,7 +19505,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 110,
+        "chapterOrder": 114,
         "dependencyUnitEntryIds": [
           "Athetatilde_008_definition_gamma_theta_tilde"
         ]
@@ -19554,7 +19575,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 111,
+        "chapterOrder": 116,
         "dependencyUnitEntryIds": [
           "Athetatilde_009_claim_lambda_eq_exp_gamma"
         ]
@@ -20574,9 +20595,7 @@
       "explanationGranularityReview": {
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [
-          "一般の体・環"
-        ],
+        "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 13431,
         "inspectedContentSha256": "157e9cd9e277cfcb28335224fa5381d52bec2e198ca13588f25e9c6dd9471002",
         "forwardNavigationMixedIntoStatement": false,
@@ -21888,11 +21907,9 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [
-          "一般の体・環"
-        ],
+        "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9621,
         "inspectedContentSha256": "894e3a2b9819649f40d3f02dce143fc20e5082881e8532478f11a13ad83d94b2",
         "forwardNavigationMixedIntoStatement": false,
@@ -22037,11 +22054,9 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [
-          "一般の体・環"
-        ],
+        "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5332,
         "inspectedContentSha256": "b3760cfeae4a4236c8b782f220924b7e63f411fc4452e5f1bf01a3e7bf36eebb",
         "forwardNavigationMixedIntoStatement": false,
@@ -22453,7 +22468,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 113,
+        "chapterOrder": 85,
         "dependencyUnitEntryIds": [
           "critical_003_claim_gamma_kappa_identity"
         ]
@@ -22579,7 +22594,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 114,
+        "chapterOrder": 86,
         "dependencyUnitEntryIds": [
           "critical_005_claim_isotropic_setting"
         ]
@@ -22705,7 +22720,7 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "dependencyPlacement": {
-        "chapterOrder": 115,
+        "chapterOrder": 87,
         "dependencyUnitEntryIds": [
           "critical_007_claim_gamma_derivatives_in_kappa"
         ]

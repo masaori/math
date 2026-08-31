@@ -339,7 +339,9 @@ x^\top W x
       paragraph([
         "Step 1（",
         math(String.raw`V_1^{1/2}`),
-        " は正の対角行列）。",
+        " は正の対角行列）。以下、周期端では ",
+        math(String.raw`\mu(M+1):=\mu(1)`),
+        " と書く。",
         ref("def_transfer_matrix_square_root"),
         " の定義と ",
         ref("sigma_z_diagonal_action"),
@@ -349,7 +351,9 @@ x^\top W x
         math(String.raw`\tfrac12 K_1 D`),
         " は対角行列である。",
         ref("exp_of_diagonal_matrix"),
-        " より",
+        " と ",
+        ref("cosh_sinh_basic_properties"),
+        " に記録した実指数関数の正値性より",
       ]),
       displayMath(
         String.raw`\left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu')}
@@ -365,7 +369,9 @@ x^\top W x
         ref("V2_component_equals_pauli"),
         " より ",
         math(String.raw`(V_2)_{\iota(\mu),\iota(\mu')} = \exp\!\left(\sum_{m}K_2\,\mu(m)\mu'(m)\right)`),
-        " であり、指数は実数なので値は正である。",
+        " である。指数は実数なので、",
+        ref("cosh_sinh_basic_properties"),
+        " に記録した実指数関数の正値性より、この値は正である。",
       ]),
       paragraph(["Step 3。"]),
       displayMath(
