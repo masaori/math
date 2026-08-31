@@ -55499,6 +55499,148 @@ s(j')-s(j)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_direction_unit_vector",
+        labels: [],
+        title: { text: "方向番号と平面変位の対応" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_displacement_is_direction_unit",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_direction_unit_vector",
+                kind: "definition",
+                title: { text: "方向単位ベクトル" },
+                labels: ["def_direction_unit_vector"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "写像 ", math(String.raw`u:\mathbb Z/4\mathbb Z\to\mathbb Z\times\mathbb Z`),
+                    " を",
+                  ]),
+                  displayMath(String.raw`u(\pi_4(0)):=(0,1),\qquad
+u(\pi_4(1)):=(1,0),\qquad
+u(\pi_4(2)):=(0,-1),\qquad
+u(\pi_4(3)):=(-1,0)`),
+                  paragraph([
+                    "で定める（射影 ", math(String.raw`\pi_4`), " は ",
+                    ref("def_direction_residue_projection"), "）。",
+                    math(String.raw`\mathbb Z/4\mathbb Z`), " の元は ",
+                    math(String.raw`\pi_4(0),\pi_4(1),\pi_4(2),\pi_4(3)`),
+                    " で尽くされ、これらは相異なる（整数 ", math(String.raw`0,1,2,3`),
+                    " の差はどれも ", math(String.raw`4`),
+                    " の倍数でない）ので、", math(String.raw`u`),
+                    " は ", math(String.raw`\mathbb Z/4\mathbb Z`),
+                    " の全体で定まり、各元に値をちょうど一つ与える。",
+                    "組の第一成分を行番号の増分、第二成分を列番号の増分と読み、",
+                    "四つの値は右・下・左・上への平面の一歩を表す（行番号は下向きに増える）。",
+                    "値は整数の組だけであり、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_displacement_is_direction_unit",
+              kind: "claim",
+              title: { text: "平面変位は方向番号の方向単位ベクトルである" },
+              labels: ["claim_displacement_is_direction_unit"],
+              habitat: "Z",
+              verification: ["sagemath/check/direction-unit-displacement"],
+              statement: [
+                paragraph([
+                  "任意の向き付き辺 ", math(String.raw`\vec e=(e,d)\in\vec E_L`),
+                  "（", ref("def_oriented_edges"), "）について、",
+                  math(String.raw`\mathbb Z\times\mathbb Z`), " の等式",
+                ]),
+                displayMath(String.raw`\bigl(\delta_{\mathrm{row}}(\vec e),\,\delta_{\mathrm{col}}(\vec e)\bigr)=u\bigl(\operatorname{dir}(\vec e)\bigr)`),
+                paragraph([
+                  "が成り立つ。変位は ", ref("def_plane_displacement"),
+                  "、方向番号は ", ref("def_oriented_edge_direction"),
+                  "、方向単位ベクトルは ", ref("def_direction_unit_vector"),
+                  " である。すなわち、平面へ持ち上げた一歩の変位は方向番号だけで決まる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "方向番号の定義（", ref("def_oriented_edge_direction"),
+                  "）の四つの場合で確かめる。横向き正向きの場合（",
+                  math(String.raw`e\in E_{L,\mathrm h}`), "、", math(String.raw`d=0`), "）は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bigl(\delta_{\mathrm{row}}(e,0),\,\delta_{\mathrm{col}}(e,0)\bigr)
+&=(0,\,1-2\cdot0)
+&&\bigl(\because\ \blkref{def_plane_displacement}\text{ の横向きの場合}\bigr)\\
+&=(0,1)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=u(\pi_4(0))
+&&\bigl(\because\ \blkref{def_direction_unit_vector}\text{ の右の場合}\bigr)\\
+&=u\bigl(\operatorname{dir}(e,0)\bigr)
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の横向き正向きの場合}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。縦向き正向きの場合（",
+                  math(String.raw`e\in E_{L,\mathrm v}`), "、", math(String.raw`d=0`), "）は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bigl(\delta_{\mathrm{row}}(e,0),\,\delta_{\mathrm{col}}(e,0)\bigr)
+&=(1-2\cdot0,\,0)
+&&\bigl(\because\ \blkref{def_plane_displacement}\text{ の縦向きの場合}\bigr)\\
+&=(1,0)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=u(\pi_4(1))
+&&\bigl(\because\ \blkref{def_direction_unit_vector}\text{ の下の場合}\bigr)\\
+&=u\bigl(\operatorname{dir}(e,0)\bigr)
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の縦向き正向きの場合}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。横向き逆向きの場合（",
+                  math(String.raw`e\in E_{L,\mathrm h}`), "、", math(String.raw`d=1`), "）は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bigl(\delta_{\mathrm{row}}(e,1),\,\delta_{\mathrm{col}}(e,1)\bigr)
+&=(0,\,1-2\cdot1)
+&&\bigl(\because\ \blkref{def_plane_displacement}\text{ の横向きの場合}\bigr)\\
+&=(0,-1)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=u(\pi_4(2))
+&&\bigl(\because\ \blkref{def_direction_unit_vector}\text{ の左の場合}\bigr)\\
+&=u\bigl(\operatorname{dir}(e,1)\bigr)
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の横向き逆向きの場合}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。縦向き逆向きの場合（",
+                  math(String.raw`e\in E_{L,\mathrm v}`), "、", math(String.raw`d=1`), "）は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bigl(\delta_{\mathrm{row}}(e,1),\,\delta_{\mathrm{col}}(e,1)\bigr)
+&=(1-2\cdot1,\,0)
+&&\bigl(\because\ \blkref{def_plane_displacement}\text{ の縦向きの場合}\bigr)\\
+&=(-1,0)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=u(\pi_4(3))
+&&\bigl(\because\ \blkref{def_direction_unit_vector}\text{ の上の場合}\bigr)\\
+&=u\bigl(\operatorname{dir}(e,1)\bigr)
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の縦向き逆向きの場合}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。四つの場合は ", ref("def_oriented_edge_direction"),
+                  " により重ならず、すべての向き付き辺を尽くす。全過程は整数の組の等式だけで閉じ、実数体も複素数体も現れない。",
+                  "この対応により、閉歩道を平面格子 ",
+                  math(String.raw`\mathbb Z\times\mathbb Z`),
+                  " へ持ち上げた各歩は方向番号が指す四方向の単位ベクトルであり、後続の離散 Whitney の回転数の議論は平面の四方向の言葉で進められる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

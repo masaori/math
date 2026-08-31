@@ -1,5 +1,12 @@
 # 自動ループ 記録の保管庫
 
+## 2026-08-31 の 25 回目の tick で台帳から移した記録（2026-08-31 の 20 回目）
+
+- 現在地: 軌道列の頂点単純閉路分解を Lean 二版へ配線し、四層検証を完了した。具体版 `reversalFreeOrbit_vertexSimpleDecomposition` は反転対なしから得る軌道列の台の相異なりを初期不変条件とし、接触点分割がその不変条件を二本へ保存することを使って接触対数零まで累積帰納した。必要十分版 `invariant_elimination_by_splitting_necSuf` は自然数値の測度・加法的な台の目録・二つの法 2 の量・分割で保存される不変条件だけを残した。SageMath の全軌道列 3,376 本、検算対応 333 件、本文 check、Lean 9,616 jobs・sorry 検査 1,635 件を通した。
+- 前進記録: `claim_reversal_free_orbit_vertex_simple_decomposition` の Lean 具体版と必要十分版を書き、本文の `lean:` と sorry 検査へ登録した。
+- 式変形の統一: 姉妹側のクロネッカー積表示の端の場合にあった一行二等号二本を、定義参照つきの二段ずつの鎖へ開いた。
+- レビュー記録: 前 tick の `claim_reversal_free_orbit_vertex_simple_decomposition` を、本文の既証二主張から接触点分割への適用と、SageMath の全軌道列 3,376 本の三条件へ照合し、修正対象なしとした。
+
 ## 2026-08-31 の 24 回目の tick で台帳から移した記録（2026-08-31 の 19 回目）
 
 - 現在地: 反転対を含まない非後退置換の軌道列を頂点単純閉路族へ分解し、本文と SageMath で固定した。Lean は未着手だった。
