@@ -1034,13 +1034,13 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         String.raw`\begin{aligned}
 [c \cdot I,\, A]
 &= (c \cdot I)A - A(c \cdot I)
-\quad (\because \text{交換子の定義}) \\
+&&(\because \text{交換子の定義}) \\
 &= c(IA) - c(AI)
-\quad (\because \text{スカラー倍は行列の積の外へ出せる}) \\
+&&(\because \text{スカラー倍は行列の積の外へ出せる}) \\
 &= cA - cA
-\quad (\because \text{単位行列の性質}\ IA=A,\ AI=A) \\
+&&(\because \text{単位行列の性質}\ IA=A,\ AI=A) \\
 &= 0
-\quad (\because \text{同じ元の差は零行列})
+&&(\because \text{同じ元の差は零行列})
 \end{aligned}`,
       ),
     ],
@@ -1052,6 +1052,8 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
           "（スカラー倍を積の外へ出すことと、単位行列を消すこと）。" +
           "この 2 つを別々の段に割り、全 4 段のそれぞれに行末の (∵ …) を付けた。" +
           "段は増えており、減った段は無い。主張と証明の中身は変えていない。",
+        "2026-09-01 の式変形統一で、四段の根拠を行中の \\quad (\\because …) から" +
+          "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
       ],
     },
   },
