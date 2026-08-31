@@ -58448,6 +58448,131 @@ s(i_r)-s(i_{r'})
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_winding_transverse_staircase",
+        labels: [],
+        title: { text: "巻き付きベクトルの横断階段" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_winding_transverse_staircase_step_increase",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_winding_transverse_staircase",
+                kind: "definition",
+                title: { text: "巻き付きベクトルを横切る整数格子の階段" },
+                labels: ["def_winding_transverse_staircase"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_closed_nonbacktracking_walk"), "）の整数巻き付き数（",
+                    ref("def_directed_winding_numbers"), "）が ",
+                    math(String.raw`(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma))\ne(0,0)`),
+                    " を満たすとする。整数 ", math(String.raw`z\in\mathbb Z`), " に対し",
+                  ]),
+                  displayMath(String.raw`\varepsilon(z):=
+\begin{cases}
+-1,&z<0,\\
+0,&z=0,\\
+1,&z>0
+\end{cases}
+\in\mathbb Z`),
+                  paragraph([
+                    "と置く。また ", math(String.raw`H:=|w_{\mathrm h}(\gamma)|`), "、",
+                    math(String.raw`V:=|w_{\mathrm v}(\gamma)|`), "、",
+                    math(String.raw`n_{\perp}:=H+V\in\mathbb N`), " と置く。巻き付きベクトルが零でないので ",
+                    math(String.raw`n_{\perp}\ge1`), " である。有限列 ",
+                    math(String.raw`C^{\gamma}_0,\ldots,C^{\gamma}_{n_{\perp}}\in\mathbb Z\times\mathbb Z`), " を",
+                  ]),
+                  displayMath(String.raw`C^{\gamma}_s:=
+\begin{cases}
+\bigl(\varepsilon(w_{\mathrm h}(\gamma))s,0\bigr),
+&0\le s\le H,\\
+\bigl(w_{\mathrm h}(\gamma),-\varepsilon(w_{\mathrm v}(\gamma))(s-H)\bigr),
+&H<s\le n_{\perp}
+\end{cases}`),
+                  paragraph([
+                    "で定め、これを巻き付きベクトルの正の横断階段と呼ぶ。とくに ",
+                    math(String.raw`C^{\gamma}_0=(0,0)`), " かつ ",
+                    math(String.raw`C^{\gamma}_{n_{\perp}}=(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))`),
+                    " である。絶対値・場合分け・有限列はいずれも整数と自然数の中で定まる。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_winding_transverse_staircase_step_increase",
+              kind: "claim",
+              title: { text: "横断階段の各歩は横断水準を増やす単位歩である" },
+              labels: ["claim_winding_transverse_staircase_step_increase"],
+              habitat: "Z",
+              verification: ["sagemath/check/winding-transverse-staircase"],
+              statement: [
+                paragraph([
+                  "正の横断階段（", ref("def_winding_transverse_staircase"), "）について、任意の ",
+                  math(String.raw`s\in\{0,\ldots,n_{\perp}-1\}`), " に対し差 ",
+                  math(String.raw`C^{\gamma}_{s+1}-C^{\gamma}_s`), " は ",
+                  math(String.raw`(1,0),(-1,0),(0,1),(0,-1)`),
+                  " のいずれかであり、整数横断座標（", ref("def_winding_transverse_coordinate"), "）は",
+                ]),
+                displayMath(String.raw`\kappa_{\gamma}(C^{\gamma}_{s+1})>
+\kappa_{\gamma}(C^{\gamma}_s)`),
+                paragraph([
+                  "を満たす。したがってこの階段の頂点はすべて相異なり、平面格子上の単純な辺列になる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`0\le s<H`), " の場合、定義から",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+C^{\gamma}_{s+1}-C^{\gamma}_s
+&=\bigl(\varepsilon(w_{\mathrm h}(\gamma)),0\bigr)
+&&\bigl(\because\ \blkref{def_winding_transverse_staircase}\bigr),\\
+\kappa_{\gamma}(C^{\gamma}_{s+1})-\kappa_{\gamma}(C^{\gamma}_s)
+&=w_{\mathrm h}(\gamma)\varepsilon(w_{\mathrm h}(\gamma))
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と直前の差}\bigr)\\
+&=|w_{\mathrm h}(\gamma)|
+&&\bigl(\because\ \varepsilon\text{ の三場合の定義}\bigr)\\
+&>0
+&&\bigl(\because\ s<H=|w_{\mathrm h}(\gamma)|\bigr).
+\end{aligned}`),
+                paragraph([
+                  "この場合は ", math(String.raw`H>0`), " なので ",
+                  math(String.raw`\varepsilon(w_{\mathrm h}(\gamma))\in\{-1,1\}`),
+                  " であり、差は縦方向の単位歩である。次に ",
+                  math(String.raw`H\le s<n_{\perp}`), " の場合、定義から",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+C^{\gamma}_{s+1}-C^{\gamma}_s
+&=\bigl(0,-\varepsilon(w_{\mathrm v}(\gamma))\bigr)
+&&\bigl(\because\ \blkref{def_winding_transverse_staircase}\bigr),\\
+\kappa_{\gamma}(C^{\gamma}_{s+1})-\kappa_{\gamma}(C^{\gamma}_s)
+&=w_{\mathrm v}(\gamma)\varepsilon(w_{\mathrm v}(\gamma))
+&&\bigl(\because\ \blkref{def_winding_transverse_coordinate}\text{ と直前の差}\bigr)\\
+&=|w_{\mathrm v}(\gamma)|
+&&\bigl(\because\ \varepsilon\text{ の三場合の定義}\bigr)\\
+&>0
+&&\bigl(\because\ s<n_{\perp}=H+|w_{\mathrm v}(\gamma)|\bigr).
+\end{aligned}`),
+                paragraph([
+                  "この場合は ", math(String.raw`V>0`), " なので差は横方向の単位歩である。",
+                  "二場合は ", math(String.raw`s\in\{0,\ldots,n_{\perp}-1\}`),
+                  " を尽くす。横断座標が各歩で真に増えるため、異なる二頂点の横断座標は異なり、",
+                  "頂点どうしも相異なる。全過程は整数の絶対値・四則・順序と有限列だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
