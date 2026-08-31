@@ -4,9 +4,9 @@
 - def_periodic_lift_closure_cycle
 - claim_periodic_lift_closure_is_simple_cycle
 
-先行する接続階段の検査と同じ有限全列挙を使い、四部分を定義どおりに合成する。
-閉性、全ての連続差が単位格子ベクトルであること、終点を除く頂点の相異なりを
-ZZ 上で検査する。
+先行する接続階段の検査と同じ有限全列挙を使い、周期数 c = 1, 2 のそれぞれについて
+四部分を定義どおりに合成する。閉性、全ての連続差が単位格子ベクトルであること、
+終点を除く頂点の相異なりを ZZ 上で検査する。
 """
 
 load("sagemath/check/first-hit-connecting-staircase/check.sage")
@@ -91,34 +91,36 @@ for L in range(1, 4):
                                     connecting[-1], reps, period, shift)
                                 assert len(hit_indices) == 1
                                 k_1 = hit_indices[0]
-                                translated_segment = [
-                                    (periodic_lift_point(k, reps, period)[0] + shift[0],
-                                     periodic_lift_point(k, reps, period)[1] + shift[1])
-                                    for k in range(k_1 + 1, k_1 + len(reps) + 1)
-                                ]
-                                reversed_connector_translate = [
-                                    (connecting[s][0] + period[0], connecting[s][1] + period[1])
-                                    for s in range(h - 1, -1, -1)
-                                ]
-                                reversed_original_segment = [
-                                    periodic_lift_point(k, reps, period)
-                                    for k in range(k_0 + len(reps) - 1, k_0 - 1, -1)
-                                ]
-                                closure = (connecting + translated_segment
-                                           + reversed_connector_translate
-                                           + reversed_original_segment)
-                                expected_length = 2 * h + 2 * len(reps) + 1
-                                assert len(closure) == expected_length
-                                assert closure[0] == closure[-1]
-                                for left, right in zip(closure, closure[1:]):
-                                    difference = (right[0] - left[0], right[1] - left[1])
-                                    assert difference in {
-                                        (ZZ(1), ZZ(0)), (ZZ(-1), ZZ(0)),
-                                        (ZZ(0), ZZ(1)), (ZZ(0), ZZ(-1)),
-                                    }
-                                assert len(set(closure[:-1])) == len(closure) - 1
-                                closure_total += 1
-                                closure_vertex_total += len(closure)
+                                for c in (ZZ(1), ZZ(2)):
+                                    translated_segment = [
+                                        (periodic_lift_point(k, reps, period)[0] + shift[0],
+                                         periodic_lift_point(k, reps, period)[1] + shift[1])
+                                        for k in range(k_1 + 1, k_1 + c * len(reps) + 1)
+                                    ]
+                                    reversed_connector_translate = [
+                                        (connecting[s][0] + c * period[0],
+                                         connecting[s][1] + c * period[1])
+                                        for s in range(h - 1, -1, -1)
+                                    ]
+                                    reversed_original_segment = [
+                                        periodic_lift_point(k, reps, period)
+                                        for k in range(k_0 + c * len(reps) - 1, k_0 - 1, -1)
+                                    ]
+                                    closure = (connecting + translated_segment
+                                               + reversed_connector_translate
+                                               + reversed_original_segment)
+                                    expected_length = 2 * h + 2 * c * len(reps) + 1
+                                    assert len(closure) == expected_length
+                                    assert closure[0] == closure[-1]
+                                    for left, right in zip(closure, closure[1:]):
+                                        difference = (right[0] - left[0], right[1] - left[1])
+                                        assert difference in {
+                                            (ZZ(1), ZZ(0)), (ZZ(-1), ZZ(0)),
+                                            (ZZ(0), ZZ(1)), (ZZ(0), ZZ(-1)),
+                                        }
+                                    assert len(set(closure[:-1])) == len(closure) - 1
+                                    closure_total += 1
+                                    closure_vertex_total += len(closure)
                         cycle_total += 1
 
                 if length < L * L:

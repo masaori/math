@@ -2776,9 +2776,21 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
         math(String.raw`\nu = -\mu + kM`),
         " なる ",
         math(String.raw`k \in \mathbb{Z}`),
-        " が存在する。このとき ",
-        math(String.raw`\theta_\nu = \dfrac{2\pi\nu}{M} = -\dfrac{2\pi\mu}{M} + 2k\pi = -\theta_\mu + 2k\pi`),
-        " であるから、Step 0-1 より",
+        " が存在する。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\theta_\nu
+&=\dfrac{2\pi\nu}{M}
+&& (\because\ \theta_\nu\ \text{の定義})\\
+&=\dfrac{2\pi(-\mu+kM)}{M}
+&& (\because\ \nu=-\mu+kM)\\
+&=-\dfrac{2\pi\mu}{M}+2k\pi
+&& (\because\ \mathbb{R}\ \text{の分配則と約分})\\
+&=-\theta_\mu+2k\pi
+&& (\because\ \theta_\mu\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "であるから、Step 0-1 より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3095,6 +3107,7 @@ c_\mu c_\nu
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(C^2)^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "現行ソースに再同期（定義域を γ2(θμ),γ2(θν)≠0 に限定）し、三つの反交換子の計算を全展開。",
+        "2026-09-01 の式変形統一で、Step 0-2 の θ_ν の書き換え（1 行に等号 3 つ・根拠なし）を 4 段の行末根拠つきの鎖へ開いた。内容・参照は変えていない。",
         "原文（および本ブロックの旧版）は δ^M_{μ+ν,0} ≠ 0 のとき『θ_ν = -θ_μ』と書いて根号の中身を置き換えていたが、" +
           "μ+ν ≡ 0 (mod M) から従うのは θ_ν = -θ_μ + 2kπ（k ∈ Z）までであり、また根号の中身が等しいことだけからは " +
           "t_ν = ±t_μ しか従わない。Lean 側の形式化（Part008/Claim032_AnticommutatorPsiAbstract.lean）で、" +
