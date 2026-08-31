@@ -14,14 +14,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_idempotents_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "反復モノイドの冪等元" },
-    labels: [],
-  },
-
-  {
     id: "iterate_monoid_idempotents_definition",
     kind: "definition",
     title: { text: "反復モノイドの冪等元" },

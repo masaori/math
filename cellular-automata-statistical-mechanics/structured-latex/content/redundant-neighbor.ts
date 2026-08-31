@@ -14,14 +14,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "redundant_neighbor_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "冗長近傍からの独立性" },
-    labels: [],
-  },
-
-  {
     id: "redundant_neighbor_definition_restriction_map",
     kind: "definition",
     title: { text: "制限写像" },

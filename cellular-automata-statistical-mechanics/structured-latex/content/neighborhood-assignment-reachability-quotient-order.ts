@@ -10,14 +10,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_reachability_quotient_order_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "相互到達成分の商が定める有限半順序" },
-    labels: [],
-  },
-
-  {
     id: "neighborhood_assignment_reachability_quotient_order_definition_component_set",
     kind: "definition",
     title: { text: "相互到達成分の全体" },

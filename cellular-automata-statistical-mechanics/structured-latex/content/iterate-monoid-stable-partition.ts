@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_stable_fibers_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "反復モノイドの安定像による元集合の分割" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_stable_fibers_definition",
     kind: "definition",
     title: { text: "安定像の元のファイバー" },

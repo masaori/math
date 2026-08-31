@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_stable_fiber_dynamics_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "安定ファイバー間の一段発展" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_stable_fiber_dynamics_definition_index_map",
     kind: "definition",
     title: { text: "安定像上の添字写像" },

@@ -10,14 +10,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "conjugacy_class_code_image_bijection_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "共役類の集合と写像符号の像の全単射" },
-    labels: [],
-  },
-
-  {
     id: "conjugacy_class_code_image_bijection_definition_all_self_maps",
     kind: "definition",
     title: { text: "一つの有限集合上の自己写像全体" },

@@ -18,14 +18,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "causal_set_primary_literature_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "因果集合の一次文献との照合" },
-    labels: [],
-  },
-
-  {
     id: "causal_set_primary_literature_remark_source",
     kind: "remark",
     title: { text: "照合する一次文献とこの章の範囲" },

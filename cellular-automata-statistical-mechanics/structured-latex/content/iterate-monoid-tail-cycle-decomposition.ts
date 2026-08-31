@@ -9,13 +9,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_tail_cycle_decomposition_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "反復モノイドの過渡部と巡回部への分解" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_tail_cycle_decomposition_definition",
     kind: "definition",
     title: { text: "過渡部と巡回部" },

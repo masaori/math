@@ -17,14 +17,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "periodic_point_count_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "周期点の個数" },
-    labels: [],
-  },
-
-  {
     id: "periodic_point_count_definition_fixed_points_of_iterate",
     kind: "definition",
     title: { text: "反復の不動点集合とその個数" },

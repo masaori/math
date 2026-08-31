@@ -9,14 +9,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_union_preserving_image_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "合併作用の像は合併保存写像の全体である" },
-    labels: [],
-  },
-
-  {
     id: "neighborhood_assignment_union_preserving_image_definition_union_preserving",
     kind: "definition",
     title: { text: "部分集合上の合併保存写像" },

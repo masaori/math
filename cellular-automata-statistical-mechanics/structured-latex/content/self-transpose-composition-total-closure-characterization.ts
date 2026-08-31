@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "self_transpose_composition_total_closure_characterization_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "自己転置な近傍割り当て全体の合成閉性の特徴づけ" },
-    labels: [],
-  },
-  {
     id: "self_transpose_composition_total_closure_definition",
     kind: "definition",
     title: { text: "自己転置な近傍割り当て全体の合成閉性" },

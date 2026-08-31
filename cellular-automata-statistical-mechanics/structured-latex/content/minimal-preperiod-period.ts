@@ -17,14 +17,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "minimal_preperiod_period_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "最小前周期と最小周期" },
-    labels: [],
-  },
-
-  {
     id: "minimal_preperiod_period_definition_periodicity_pairs",
     kind: "definition",
     title: { text: "前周期・周期の組の集合" },

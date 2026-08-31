@@ -10,14 +10,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "reversible_global_map_cycle_type_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "可逆な自己写像の巡回型" },
-    labels: [],
-  },
-
-  {
     id: "bijective_self_map_cycle_type_definition_bijective_maps",
     kind: "definition",
     title: { text: "一つの有限集合上の可逆な自己写像全体" },

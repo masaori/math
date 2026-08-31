@@ -8,14 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_union_distributivity_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "近傍割り当ての点ごとの和と合成の分配性" },
-    labels: [],
-  },
-
-  {
     id: "neighborhood_assignment_union_distributivity_definition_empty",
     kind: "definition",
     title: { text: "空近傍割り当て" },

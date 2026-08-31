@@ -17,14 +17,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "causal_structure_comparison_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "既存因果構造との比較" },
-    labels: [],
-  },
-
-  {
     id: "causal_structure_comparison_remark_scope",
     kind: "remark",
     title: { text: "この章の範囲" },

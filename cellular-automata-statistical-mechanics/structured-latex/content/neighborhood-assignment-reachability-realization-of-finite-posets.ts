@@ -9,14 +9,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_reachability_realization_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "有限半順序の相互到達成分商としての実現" },
-    labels: [],
-  },
-
-  {
     id: "neighborhood_assignment_reachability_realization_definition_assignment",
     kind: "definition",
     title: { text: "部分順序が定める近傍割り当て" },

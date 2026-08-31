@@ -8,14 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "finite_neighborhood_assignment_monoid_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "有限近傍割り当ての合成モノイド" },
-    labels: [],
-  },
-
-  {
     id: "finite_neighborhood_assignment_monoid_definition_assignment_space",
     kind: "definition",
     title: { text: "有限舞台上の近傍割り当て全体" },

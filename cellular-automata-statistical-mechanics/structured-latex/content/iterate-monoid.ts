@@ -15,14 +15,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "自己写像の反復が生成する有限可換モノイド" },
-    labels: [],
-  },
-
-  {
     id: "iterate_monoid_definition_power_set",
     kind: "definition",
     title: { text: "反復写像の集合" },

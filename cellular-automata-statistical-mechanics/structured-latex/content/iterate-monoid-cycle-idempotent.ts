@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_cycle_idempotent_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "反復モノイドの巡回部にある唯一の冪等元" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_cycle_idempotent_definition_admissible_exponents",
     kind: "definition",
     title: { text: "安定後の周期倍数指数" },

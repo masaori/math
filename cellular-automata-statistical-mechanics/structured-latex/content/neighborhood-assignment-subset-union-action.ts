@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "neighborhood_assignment_subset_union_action_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "近傍割り当てが部分集合に定める合併作用" },
-    labels: [],
-  },
-  {
     id: "neighborhood_assignment_subset_union_action_definition_subset_space",
     kind: "definition",
     title: { text: "有限舞台の部分集合全体" },

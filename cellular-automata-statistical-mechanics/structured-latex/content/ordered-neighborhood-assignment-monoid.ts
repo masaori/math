@@ -8,14 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "ordered_neighborhood_assignment_monoid_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "近傍割り当ての包含順序と合成の単調性" },
-    labels: [],
-  },
-
-  {
     id: "ordered_neighborhood_assignment_monoid_definition_refinement",
     kind: "definition",
     title: { text: "近傍割り当ての点ごとの包含順序" },

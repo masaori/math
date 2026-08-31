@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_stable_fiber_layer_preimage_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "安定ファイバーの層別完全逆像" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_stable_fiber_zero_layer_forward_claim",
     kind: "claim",
     title: { text: "一段発展は最小前周期が零の層を零の層へ写す" },

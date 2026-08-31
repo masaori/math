@@ -10,14 +10,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "locality_restricts_cycle_type_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "局所性による巡回型の制限" },
-    labels: [],
-  },
-
-  {
     id: "locality_restricts_cycle_type_definition_stage_global_maps",
     kind: "definition",
     title: { text: "近傍を制限した有限舞台上の大域写像全体" },

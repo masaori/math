@@ -10,13 +10,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_conjugacy_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "有限自己写像の共役による安定ファイバー根付き木族の不変性" },
-    labels: [],
-  },
-  {
     id: "iterate_monoid_conjugacy_definition_conjugacy",
     kind: "definition",
     title: { text: "自己写像の共役全単射" },

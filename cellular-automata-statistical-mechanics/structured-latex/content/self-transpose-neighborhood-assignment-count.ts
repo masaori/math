@@ -8,13 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "self_transpose_neighborhood_assignment_count_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "自己転置な近傍割り当ての個数" },
-    labels: [],
-  },
-  {
     id: "self_transpose_neighborhood_assignment_count_definition_self_transpose",
     kind: "definition",
     title: { text: "自己転置な近傍割り当て" },

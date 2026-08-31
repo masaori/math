@@ -13,14 +13,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "transitive_closure_antisymmetry_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "依存の推移閉包の反対称性" },
-    labels: [],
-  },
-
-  {
     id: "transitive_closure_antisymmetry_definition_dependency_path",
     kind: "definition",
     title: { text: "有限関係の経路" },

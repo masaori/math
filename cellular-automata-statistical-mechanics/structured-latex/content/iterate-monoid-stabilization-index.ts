@@ -8,14 +8,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "iterate_monoid_stabilization_index_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "反復モノイドの衝突開始位置と主イデアル列の安定位置" },
-    labels: [],
-  },
-
-  {
     id: "iterate_monoid_stabilization_index_definition_collision_start",
     kind: "definition",
     title: { text: "衝突開始位置" },

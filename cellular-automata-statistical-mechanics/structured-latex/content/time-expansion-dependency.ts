@@ -15,14 +15,6 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "time_expansion_dependency_heading",
-    kind: "heading",
-    level: 1,
-    title: { text: "時間展開上の直接依存" },
-    labels: [],
-  },
-
-  {
     id: "finite_layered_relation_definition_finite_stage",
     kind: "definition",
     title: { text: "有限舞台" },
