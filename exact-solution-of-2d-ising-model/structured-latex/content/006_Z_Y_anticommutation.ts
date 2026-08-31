@@ -426,10 +426,12 @@ YX
         String.raw`\begin{aligned}
 Z_\mu &= \overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
-\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}} \\
+\boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の }Z_\mu\text{ の定義と、直前の表示を }a=z\text{ で読む}\bigr)\\
 Y_\mu &= \overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
 \boxtimes\overbrace{I}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{I}^{M\text{th}}
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の }Y_\mu\text{ の定義と、直前の表示を }a=y\text{ で読む}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1411,6 +1413,8 @@ Y_\nu Y_\mu
     conversion: {
       status: "converted",
       notes: [
+        "2026-08-31 の式変形統一で、Z_μ・Y_μ のクロネッカー積表示の二行の根拠（定義の適用と直前の表示の読み）を、" +
+          "前置の日本語文だけに置かず、他の証明と同じ行末の根拠列（aligned の &&）へも明記した。内容・式・参照は変えていない。",
         "原文の μ<ν のテンソル積展開を全ステップ忠実に再現した（σ^x σ^z = -σ^z σ^x による相殺）。",
         "原文が TODO のまま残していた [Z_μ,Y_ν]_+ = 0 と [Y_μ,Y_ν]_+ = 2Iδ^M を、" +
           "原文と同じ「テンソル因子を並べて書く」書式で場合分けごとに証明した。" +
