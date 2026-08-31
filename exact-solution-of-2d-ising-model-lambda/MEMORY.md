@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 26 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 27 回目の tick 時点）
+
+**非後退辺列の平面持ち上げを定義し、持ち上げ点の座標式を本文と SageMath で固定した（Lean 未着手）。** 平面持ち上げ $P_k(\gamma)\in\mathbb Z\times\mathbb Z$ を「始点の代表座標から各歩の行変位・列変位を積む」有限漸化式で定義し（`def_plane_lift`）、すべての時点 $k$ で $P_k(\gamma)=\bigl(s(i'_k)+L\sum_{t\le k}c_{\mathrm v}(\vec e_t)(1-2d_t),\ s(j'_k)+L\sum_{t\le k}c_{\mathrm h}(\vec e_t)(1-2d_t)\bigr)$（$(i'_k,j'_k)=\operatorname{tgt}(\vec e_k)$）が成り立つことを、辺ごとの代表座標の差 `claim_edge_representative_displacement` の移項と帰納法一本で証明した（`claim_plane_lift_coordinates`）。持ち上げ点の各座標はその時点の頂点の代表座標と $L$ の整数倍しか違わないので、後続で持ち上げ点の相異なりを頂点の相異なり（頂点単純性）へ読み戻せる。SageMath `plane-lift-coordinates` は $L=1,2,3$・長さ 6 までの全非後退辺列 20,384 本・持ち上げ点 112,280 個を `ZZ` で検査した。検算対応 340 件、本文 746 ブロック・PDF 337 ページ、Lean 9,616 jobs・sorry なしを通した。次は頂点単純閉路の持ち上げ点の相異なり、続いて平面の単純閉路・周期単純路の回転数を示す。
+
+前進前レビューでは前 tick の持ち上げた隣接二歩の非後退性の主張・証明・SageMath 360 組・台帳を照合し、後続の平面回転数が直接引くため「何も言っていない主張」ではなく修正対象なしとした。並列の式変形統一は、姉妹側の行列指数の成分収束の証明 Step 1 にあった一行複数関係 $|b_{ij}|^2\le\sum\sum|b_{kl}|^2=\|B\|^2$（等号の根拠が後置の散文）を二段の行末根拠つきの鎖へ開いた（姉妹側 check・PDF 349 ページ通過）。
+
+## ひとつ前の到達点（2026-08-31 の 26 回目の tick 時点）
 
 **平面へ持ち上げた隣接二歩が逆ベクトルにならないことを本文と SageMath で固定した（Lean 未着手）。** 非後退接続 $\vec f\in\operatorname{Next}(\vec e)$ では方向差が $0,1,-1$ のいずれかであり、方向単位ベクトルの四値が単射で $-u(q)=u(q+2)$ を満たすことから、$u(\operatorname{dir}(\vec f))\ne-u(\operatorname{dir}(\vec e))$ を示した（`claim_lifted_steps_do_not_reverse`）。SageMath `lifted-nonbacktracking` は $L=1,\dots,4$ の全非後退接続 360 組を `ZZ` で検査した。検算対応 339 件、本文 743 ブロック・PDF 336 ページ、Lean 9,616 jobs・sorry なしを通した。次は平面格子の単純閉路・周期単純路の回転数を示す。
 

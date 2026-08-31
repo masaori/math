@@ -501,12 +501,15 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         " はその項の 1 つであるから",
       ]),
       displayMath(
-        String.raw`|b_{ij}|^2 \le \sum_{k=1}^{n}\sum_{l=1}^{n}|b_{kl}|^2 = \|B\|^2`,
+        String.raw`\begin{aligned}
+|b_{ij}|^2
+&\le \sum_{k=1}^{n}\sum_{l=1}^{n}|b_{kl}|^2
+&&(\because\ \text{非負項の有限和は各項以上である})\\
+&= \|B\|^2
+&&(\because\ \text{ノルムの定義と}\ \left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a)
+\end{aligned}`,
       ),
       paragraph([
-        "（最後の等号は ",
-        math(String.raw`\left(\sqrt{a}^{(\mathbb{R}_{\ge 0})}\right)^2=a`),
-        " による）。",
         math(String.raw`|b_{ij}|\ge 0`),
         " かつ ",
         math(String.raw`\|B\|\ge 0`),

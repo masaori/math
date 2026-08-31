@@ -55713,6 +55713,137 @@ u\bigl(\operatorname{dir}(\vec f)\bigr)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_plane_lift",
+        labels: [],
+        title: { text: "非後退辺列の平面持ち上げ" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_plane_lift_coordinates",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_plane_lift",
+                kind: "definition",
+                title: { text: "非後退辺列の平面持ち上げ" },
+                labels: ["def_plane_lift"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                    "（", ref("def_nonbacktracking_edge_sequence"), "）の始点を ",
+                    math(String.raw`\operatorname{src}(\vec e_1)=(i_1,j_1)`),
+                    " と書く（", ref("def_oriented_edge_endpoints"),
+                    "）。**平面持ち上げ**とは、",
+                    math(String.raw`k\in\{0,1,\ldots,m\}`), " に整数の組 ",
+                    math(String.raw`P_k(\gamma)\in\mathbb Z\times\mathbb Z`),
+                    " を対応させる、次の有限漸化式で定まる写像である。",
+                  ]),
+                  displayMath(String.raw`P_0(\gamma):=\bigl(s(i_1),\,s(j_1)\bigr),
+\qquad
+P_k(\gamma):=P_{k-1}(\gamma)+\bigl(\delta_{\mathrm{row}}(\vec e_k),\,\delta_{\mathrm{col}}(\vec e_k)\bigr)
+\quad(1\le k\le m)`),
+                  paragraph([
+                    "代表 ", math(String.raw`s`), " は ", ref("def_residue_maps"),
+                    "、変位は ", ref("def_plane_displacement"),
+                    "、和は ", math(String.raw`\mathbb Z\times\mathbb Z`),
+                    " の成分ごとの加法である。各 ", math(String.raw`P_k(\gamma)`),
+                    " は ", math(String.raw`P_{k-1}(\gamma)`),
+                    " と第 ", math(String.raw`k`),
+                    " 項だけから定まるので、この有限漸化式は ",
+                    math(String.raw`k`), " についての帰納法で一意に値を定める。",
+                    "整数の組だけで閉じ、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_plane_lift_coordinates",
+              kind: "claim",
+              title: { text: "持ち上げ点の座標は終点の代表座標と切断線の部分和で書ける" },
+              labels: ["claim_plane_lift_coordinates"],
+              habitat: "Z",
+              verification: ["sagemath/check/plane-lift-coordinates"],
+              statement: [
+                paragraph([
+                  "任意の非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_nonbacktracking_edge_sequence"),
+                  "、各項を ", math(String.raw`\vec e_t=(e_t,d_t)`),
+                  " と書く）と任意の ", math(String.raw`k\in\{1,\ldots,m\}`),
+                  " について、第 ", math(String.raw`k`), " 項の終点を ",
+                  math(String.raw`\operatorname{tgt}(\vec e_k)=(i'_k,j'_k)`),
+                  " と書くと（", ref("def_oriented_edge_endpoints"), "）、",
+                  math(String.raw`\mathbb Z\times\mathbb Z`), " で",
+                ]),
+                displayMath(String.raw`P_k(\gamma)=\Bigl(s(i'_k)+L\sum_{t=1}^{k}c_{\mathrm v}(\vec e_t)(1-2d_t),\ \ s(j'_k)+L\sum_{t=1}^{k}c_{\mathrm h}(\vec e_t)(1-2d_t)\Bigr)`),
+                paragraph([
+                  "が成り立つ。持ち上げは ", ref("def_plane_lift"),
+                  "、切断線指示値は ", ref("def_seam_parities"),
+                  " である。すなわち、持ち上げ点の各座標は、その時点の頂点の代表座標と ",
+                  math(String.raw`L`), " の整数倍だけしか違わない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "第 1 成分の等式を ", math(String.raw`k`),
+                  " についての帰納法で示す。第 2 成分は行を列、",
+                  math(String.raw`c_{\mathrm v}`), " を ", math(String.raw`c_{\mathrm h}`),
+                  " に置き換えた同じ計算で従う。各 ", math(String.raw`t`),
+                  " について ", math(String.raw`\operatorname{src}(\vec e_t)=(i_t,j_t)`),
+                  " と書く。",
+                ]),
+                paragraph(["底 ", math(String.raw`k=1`), " の場合。第 1 成分は"]),
+                displayMath(String.raw`\begin{aligned}
+P_1(\gamma)_{\mathrm{row}}
+&=s(i_1)+\delta_{\mathrm{row}}(\vec e_1)
+&&\bigl(\because\ \blkref{def_plane_lift}\text{ の }P_0\text{ と漸化式}\bigr)\\
+&=s(i_1)+\bigl(s(i'_1)-s(i_1)\bigr)+L\,c_{\mathrm v}(\vec e_1)(1-2d_1)
+&&\bigl(\because\ \blkref{claim_edge_representative_displacement}\text{ を移項する}\bigr)\\
+&=s(i'_1)+L\sum_{t=1}^{1}c_{\mathrm v}(\vec e_t)(1-2d_t)
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合則と打ち消し、一項の和の読み}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。帰納段。", math(String.raw`1\le k\le m-1`),
+                  " とし、第 ", math(String.raw`k`),
+                  " で等式が成り立つと仮定する。",
+                  ref("def_nonbacktracking_edge_sequence"), " により ",
+                  math(String.raw`\vec e_{k+1}\in\operatorname{Next}(\vec e_k)`),
+                  " なので、", ref("def_nonbacktracking_successors"), " により ",
+                  math(String.raw`\operatorname{tgt}(\vec e_k)=\operatorname{src}(\vec e_{k+1})`),
+                  "、とくに第 1 成分は ", math(String.raw`i'_k=i_{k+1}`),
+                  " である。したがって",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+P_{k+1}(\gamma)_{\mathrm{row}}
+&=P_k(\gamma)_{\mathrm{row}}+\delta_{\mathrm{row}}(\vec e_{k+1})
+&&\bigl(\because\ \blkref{def_plane_lift}\text{ の漸化式}\bigr)\\
+&=s(i'_k)+L\sum_{t=1}^{k}c_{\mathrm v}(\vec e_t)(1-2d_t)+\delta_{\mathrm{row}}(\vec e_{k+1})
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=s(i_{k+1})+L\sum_{t=1}^{k}c_{\mathrm v}(\vec e_t)(1-2d_t)+\delta_{\mathrm{row}}(\vec e_{k+1})
+&&\bigl(\because\ i'_k=i_{k+1}\bigr)\\
+&=s(i_{k+1})+L\sum_{t=1}^{k}c_{\mathrm v}(\vec e_t)(1-2d_t)+\bigl(s(i'_{k+1})-s(i_{k+1})\bigr)+L\,c_{\mathrm v}(\vec e_{k+1})(1-2d_{k+1})
+&&\bigl(\because\ \blkref{claim_edge_representative_displacement}\text{ を移項する}\bigr)\\
+&=s(i'_{k+1})+L\sum_{t=1}^{k+1}c_{\mathrm v}(\vec e_t)(1-2d_t)
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合則と打ち消し、}L\text{ の分配則と有限和の末項の吸収}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "で、第 ", math(String.raw`k+1`),
+                  " でも等式が成り立つ。ゆえにすべての ",
+                  math(String.raw`k\in\{1,\ldots,m\}`),
+                  " で主張が成り立つ。全過程は整数の有限和と帰納法だけで閉じ、実数体も複素数体も現れない。",
+                  "後続の離散 Whitney の議論では、この式から持ち上げ点の相異なりを頂点の相異なりへ読み戻す。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
