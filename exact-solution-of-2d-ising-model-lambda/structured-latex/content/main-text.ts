@@ -56548,6 +56548,93 @@ N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
               ],
             },
           },
+        }, {
+          role: "supporting",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_interior_cells_reach_odd_vertical_edge",
+            focus: {
+              id: "kac_ward_claim_interior_cells_reach_odd_vertical_edge",
+              kind: "claim",
+              title: { text: "内側セルは行に沿って奇数回通過の縦辺まで届く" },
+              labels: ["claim_interior_cells_reach_odd_vertical_edge"],
+              habitat: "Z",
+              verification: ["sagemath/check/interior-cells-reach-odd-vertical-edge"],
+              statement: [
+                paragraph([
+                  "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
+                  math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
+                  " である任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）と任意の内側セル ",
+                  math(String.raw`(r,c)\in\mathcal F_{\rightarrow}(\gamma)`),
+                  "（", ref("def_odd_ray_interior_cells"), "）について、ある整数 ",
+                  math(String.raw`g\in\mathbb Z`), " が存在して次の三つを満たす。",
+                ]),
+                displayMath(String.raw`c<g,\qquad
+\{(r,c),(r,c+1),\ldots,(r,g-1)\}\subset\mathcal F_{\rightarrow}(\gamma),\qquad
+(r,g)\notin\mathcal F_{\rightarrow}(\gamma),`),
+                displayMath(String.raw`V_{r,g}(\gamma)\equiv1\pmod2`),
+                paragraph([
+                  "（", ref("def_vertical_edge_traversal_count"), "）。とくに ",
+                  math(String.raw`V_{r,g}(\gamma)\ge1`), " なので、内側セル ",
+                  math(String.raw`(r,g-1)`), " は、閉格子路の持ち上げが少なくとも一度通過する縦辺 ",
+                  math(String.raw`\{(r,g),(r+1,g)\}`), " を右隣の外側セルとの境に持つ。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "外接長方形の列座標の最大値を ",
+                  math(String.raw`c_{\max}:=\max_{0\le k\le m}p_k^{\mathrm{col}}`),
+                  " と書き（", ref("claim_odd_ray_interior_cells_bounded"), "）、右側にある外側セルの列座標の集合を",
+                ]),
+                displayMath(String.raw`J:=\left\{j\in\mathbb Z\ \middle|\ c<j\ \text{かつ}\ (r,j)\notin\mathcal F_{\rightarrow}(\gamma)\right\}`),
+                paragraph([
+                  "と置く。", math(String.raw`\mathcal F_{\rightarrow}(\gamma)`),
+                  " の元の列座標はすべて ", math(String.raw`c_{\max}`), " より小さい（",
+                  ref("claim_odd_ray_interior_cells_bounded"), "）ので、",
+                  math(String.raw`c<j`), " かつ ", math(String.raw`c_{\max}\le j`),
+                  " を満たす任意の整数 ", math(String.raw`j`), " は ", math(String.raw`J`),
+                  " に属し、", math(String.raw`J`), " は空でない。", math(String.raw`J`),
+                  " は下界 ", math(String.raw`c`), " を持つ空でない整数の集合なので最小元を持つ（",
+                  math(String.raw`\mathbb Z`), " の下に有界な空でない部分集合の最小元の存在）。その最小元を ",
+                  math(String.raw`g:=\min J`), " と置く。",
+                ]),
+                paragraph([
+                  "一つ目は ", math(String.raw`g\in J`), " の定義から ", math(String.raw`c<g`),
+                  " である。二つ目を示す。列座標 ", math(String.raw`j`), " が ",
+                  math(String.raw`c\le j\le g-1`), " を満たすとする。",
+                  math(String.raw`j=c`), " なら ", math(String.raw`(r,j)=(r,c)\in\mathcal F_{\rightarrow}(\gamma)`),
+                  " は仮定である。", math(String.raw`c<j`), " なら、",
+                  math(String.raw`j<g=\min J`), " により ", math(String.raw`j\notin J`),
+                  " なので、", math(String.raw`J`), " の定義の二条件のうち ",
+                  math(String.raw`(r,j)\notin\mathcal F_{\rightarrow}(\gamma)`),
+                  " が偽、すなわち ", math(String.raw`(r,j)\in\mathcal F_{\rightarrow}(\gamma)`),
+                  " である。三つ目の外側は ", math(String.raw`g\in J`), " の定義そのものである。",
+                ]),
+                paragraph([
+                  "最後に共有縦辺の通過回数の奇偶を求める。二つ目で示したとおり ",
+                  math(String.raw`(r,g-1)\in\mathcal F_{\rightarrow}(\gamma)`),
+                  " であり、", math(String.raw`(r,g)\notin\mathcal F_{\rightarrow}(\gamma)`), " なので",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+V_{r,g}(\gamma)
+&=N_{r,g-1}^{\rightarrow}(\gamma)-N_{r,g}^{\rightarrow}(\gamma)
+&&\bigl(\because\ \blkref{claim_adjacent_cells_ray_crossing_difference}\text{ と }\mathbb Z\text{ の四則}\bigr)\\
+&\equiv1-0\pmod2
+&&\bigl(\because\ \blkref{def_odd_ray_interior_cells}\text{：内側は奇数、外側は偶数}\bigr)\\
+&\equiv1\pmod2
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。奇数の自然数は零でないので ", math(String.raw`V_{r,g}(\gamma)\ge1`),
+                  " であり、通過回数の定義（", ref("def_vertical_edge_traversal_count"),
+                  "）から、縦辺 ", math(String.raw`\{(r,g),(r+1,g)\}`),
+                  " を通過する番号 ", math(String.raw`k`), " が少なくとも一つ存在する。",
+                  "使ったのは整数の順序・最小元・有限の数え上げ・奇偶だけであり、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
         }],
       },
     },

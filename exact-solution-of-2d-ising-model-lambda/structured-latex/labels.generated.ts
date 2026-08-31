@@ -79,6 +79,7 @@ export const ALL_LABELS = [
   "claim_integer_polynomial_qbar_lift_evaluation",
   "claim_integer_sequence_level_crossing",
   "claim_inter_row_shift_invariant",
+  "claim_interior_cells_reach_odd_vertical_edge",
   "claim_intra_row_shift_invariant",
   "claim_inversion_count_orbit_decomposition",
   "claim_isolated_smoothing_crossing_number_update",

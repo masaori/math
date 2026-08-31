@@ -3666,13 +3666,13 @@ P_{11}
    &&(\because \text{Step 1 の }N_{11},N_{21}\text{ の表示}) \\
 &= Ca^2 - S ab\, e^{-i\theta}
    + e^{i\theta} b\left(C b\, e^{-i\theta} - Sa\right)
-   \quad (\because -i\cdot i = 1) \\
+   &&(\because -i\cdot i = 1) \\
 &= Ca^2 - S ab\, e^{-i\theta} + C b^2 - S ab\, e^{i\theta}
-   \quad (\because e^{i\theta}e^{-i\theta} = 1) \\
+   &&(\because e^{i\theta}e^{-i\theta} = 1) \\
 &= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right)
    &&(\because \text{分配則による括り出し}) \\
 &= C\, c_1 - S\cdot\frac{s_1}{2}\cdot 2\cos\theta
-   \quad (\because a^2+b^2 = c_1,\ 2ab = s_1,\ e^{i\theta}+e^{-i\theta} = 2\cos\theta) \\
+   &&(\because a^2+b^2 = c_1,\ 2ab = s_1,\ e^{i\theta}+e^{-i\theta} = 2\cos\theta) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
    &&(\because C=c_2^*,\ S=s_2^*\ \text{の略記})
 \end{aligned}`,
@@ -3700,7 +3700,7 @@ P_{22}
    + a\left(Ca - S b\, e^{i\theta}\right)
    &&(\because \text{Step 1 の }N_{12},N_{22}\text{ の表示}) \\
 &= -e^{-i\theta} b\left(Sa - C b\, e^{i\theta}\right) + Ca^2 - S ab\, e^{i\theta}
-   \quad (\because i\cdot i = -1) \\
+   &&(\because i\cdot i = -1) \\
 &= -S ab\, e^{-i\theta} + C b^2 + Ca^2 - S ab\, e^{i\theta}
    &&(\because \text{分配則と }e^{-i\theta}e^{i\theta}=1) \\
 &= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right)
@@ -3743,11 +3743,11 @@ a^2 + b^2 e^{2i\theta}
 &= e^{i\theta}\left(a^2 e^{-i\theta} + b^2 e^{i\theta}\right)
    &&(\because e^{i\theta}e^{-i\theta}=1\ \text{と指数法則}) \\
 &= e^{i\theta}\left(a^2(\cos\theta - i\sin\theta) + b^2(\cos\theta + i\sin\theta)\right)
-   \quad (\because \text{Euler の公式}) \\
+   &&(\because \text{Euler の公式}) \\
 &= e^{i\theta}\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right)
    &&(\because \text{分配則による整理}) \\
 &= e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right)
-   \quad (\because a^2+b^2 = c_1,\ a^2-b^2 = 1)
+   &&(\because a^2+b^2 = c_1,\ a^2-b^2 = 1)
 \end{aligned}`,
       ),
       paragraph(["また ", math(String.raw`2ab = s_1`), " なので、"]),
@@ -3761,7 +3761,7 @@ P_{12}
 &= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
    &&(\because S=s_2^*,\ C=c_2^*\ \text{の略記}) \\
 &= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
-   \quad (\because c_2^* = s_2^* c_2) \\
+   &&(\because c_2^* = s_2^* c_2) \\
 &= i e^{i\theta} s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
    &&(\because \text{分配則による }s_2^*\text{ の括り出し})
 \end{aligned}`,
