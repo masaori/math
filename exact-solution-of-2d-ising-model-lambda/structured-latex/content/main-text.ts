@@ -59946,6 +59946,201 @@ cL W_{\perp}(\gamma)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_plane_cycle_torus_projection",
+        labels: [],
+        title: { text: "平面単純閉路のトーラス射影" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_plane_simple_cycle_projection_closed_nonbacktracking",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_plane_unit_path_torus_projection",
+                kind: "definition",
+                title: { text: "平面の単位格子路のトーラス射影" },
+                labels: ["def_plane_unit_path_torus_projection"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    "頂点射影 ", math(String.raw`\operatorname{vt}:\mathbb Z\times\mathbb Z\to V_L`),
+                    " を、成分ごとの自然な射影 ", math(String.raw`\pi`),
+                    "（", ref("def_residue_maps"), "）で",
+                  ]),
+                  displayMath(String.raw`\operatorname{vt}(a,b):=\bigl(\pi(a),\,\pi(b)\bigr)`),
+                  paragraph([
+                    "と定める（頂点集合 ", math(String.raw`V_L`), " は ", ref("def_lattice"),
+                    "）。次に、", math(String.raw`n\in\mathbb N`), "、", math(String.raw`n\ge1`),
+                    " と、有限列 ", math(String.raw`W_0,\ldots,W_n\in\mathbb Z\times\mathbb Z`),
+                    " で、任意の ", math(String.raw`j\in\{0,\ldots,n-1\}`), " について差 ",
+                    math(String.raw`W_{j+1}-W_j`), " が ",
+                    math(String.raw`(0,1),(1,0),(0,-1),(-1,0)`),
+                    " のいずれかであるものを取る（第一成分を行番号の増分、第二成分を列番号の増分と読む）。各 ",
+                    math(String.raw`j\in\{0,\ldots,n-1\}`), " に対し向き付き辺 ",
+                    math(String.raw`p_j(W)\in\vec E_L`), "（", ref("def_oriented_edges"),
+                    "）を、差の値による場合分けで",
+                  ]),
+                  displayMath(String.raw`p_j(W):=
+\begin{cases}
+\bigl(n_{\mathrm h}(\operatorname{vt}(W_j)),\,0\bigr),&W_{j+1}-W_j=(0,1),\\
+\bigl(n_{\mathrm v}(\operatorname{vt}(W_j)),\,0\bigr),&W_{j+1}-W_j=(1,0),\\
+\bigl(n_{\mathrm h}(\operatorname{vt}(W_{j+1})),\,1\bigr),&W_{j+1}-W_j=(0,-1),\\
+\bigl(n_{\mathrm v}(\operatorname{vt}(W_{j+1})),\,1\bigr),&W_{j+1}-W_j=(-1,0)
+\end{cases}`),
+                  paragraph([
+                    "で定める（番号写像 ", math(String.raw`n_{\mathrm h},n_{\mathrm v}`),
+                    " は ", ref("def_edge_numbering"),
+                    "）。四つの場合は差の値で重ならず、仮定により全ての ",
+                    math(String.raw`j`), " を尽くすので、", math(String.raw`p_j(W)`),
+                    " は写像として定まる。有限列 ",
+                    math(String.raw`\Pi(W):=\bigl(p_0(W),\ldots,p_{n-1}(W)\bigr)`),
+                    " をこの単位格子路のトーラス射影と呼ぶ。全ての値は有限集合 ",
+                    math(String.raw`\vec E_L`),
+                    " に属し、使うのは剰余類への射影と場合分けだけである。実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_plane_simple_cycle_projection_closed_nonbacktracking",
+              kind: "claim",
+              title: { text: "頂点単純な閉単位格子路のトーラス射影は閉じた非後退辺列である" },
+              labels: ["claim_plane_simple_cycle_projection_closed_nonbacktracking"],
+              habitat: "Z",
+              verification: ["sagemath/check/plane-cycle-torus-projection"],
+              statement: [
+                paragraph([
+                  ref("def_plane_unit_path_torus_projection"), " の有限列 ",
+                  math(String.raw`W_0,\ldots,W_n`), " が、さらに ",
+                  math(String.raw`n\ge3`), "、",
+                  math(String.raw`W_n=W_0`), "、および任意の ",
+                  math(String.raw`j,j'\in\{0,\ldots,n-1\}`), "、",
+                  math(String.raw`j<j'`), " について ",
+                  math(String.raw`W_j\ne W_{j'}`),
+                  " を満たすとする。このときトーラス射影 ",
+                  math(String.raw`\Pi(W)`), " は閉じた非後退辺列（",
+                  ref("def_closed_nonbacktracking_walk"), "）であり、任意の ",
+                  math(String.raw`j\in\{0,\ldots,n-1\}`), " について",
+                ]),
+                displayMath(String.raw`\operatorname{src}\bigl(p_j(W)\bigr)=\operatorname{vt}(W_j),\qquad
+\operatorname{tgt}\bigl(p_j(W)\bigr)=\operatorname{vt}(W_{j+1})`),
+                paragraph([
+                  "が成り立つ（始点・終点写像は ", ref("def_oriented_edge_endpoints"), "）。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず端点の等式を四つの場合で確かめる。差が ",
+                  math(String.raw`(0,1)`), " の場合、", math(String.raw`\operatorname{vt}(W_j)=(i,k)`),
+                  " と書くと、一続きである。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{src}\bigl(p_j(W)\bigr)
+&=\partial_0\bigl(n_{\mathrm h}(i,k)\bigr)
+&&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=0\text{ の場合}\bigr)\\
+&=(i,k)=\operatorname{vt}(W_j)
+&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr),\\
+\operatorname{tgt}\bigl(p_j(W)\bigr)
+&=\partial_1\bigl(n_{\mathrm h}(i,k)\bigr)
+&&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=0\text{ の場合}\bigr)\\
+&=\bigl(i,\ k+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
+&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr)\\
+&=\operatorname{vt}(W_{j+1})
+&&\bigl(\because\ W_{j+1}=W_j+(0,1)\text{ と }\pi(b+1)=\pi(b)+_{\mathbb{Z}/L\mathbb{Z}}\bar1\text{（}\blkref{def_residue_maps}\text{ の射影と剰余類の加法）}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "差が ", math(String.raw`(1,0)`), " の場合は縦向きの番号 ",
+                  math(String.raw`n_{\mathrm v}`), " と ", ref("def_boundary_maps"),
+                  " の縦向きの場合で同じ計算になる。差が ", math(String.raw`(0,-1)`),
+                  " の場合、", math(String.raw`\operatorname{vt}(W_{j+1})=(i,k)`), " と書くと、一続きである。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{src}\bigl(p_j(W)\bigr)
+&=\partial_1\bigl(n_{\mathrm h}(i,k)\bigr)
+&&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=1\text{ の場合}\bigr)\\
+&=\bigl(i,\ k+_{\mathbb{Z}/L\mathbb{Z}}\bar1\bigr)
+&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr)\\
+&=\operatorname{vt}(W_j)
+&&\bigl(\because\ W_j=W_{j+1}+(0,1)\text{ と }\pi(b+1)=\pi(b)+_{\mathbb{Z}/L\mathbb{Z}}\bar1\text{（}\blkref{def_residue_maps}\text{）}\bigr),\\
+\operatorname{tgt}\bigl(p_j(W)\bigr)
+&=\partial_0\bigl(n_{\mathrm h}(i,k)\bigr)
+&&\bigl(\because\ \blkref{def_plane_unit_path_torus_projection}\text{ と }\blkref{def_oriented_edge_endpoints}\text{ の }d=1\text{ の場合}\bigr)\\
+&=(i,k)=\operatorname{vt}(W_{j+1})
+&&\bigl(\because\ \blkref{def_boundary_maps}\text{ の横向きの場合}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "差が ", math(String.raw`(-1,0)`), " の場合も縦向きの番号で同じ計算になる。",
+                  "以上で端点の等式が四つの場合すべてで成り立つ。",
+                ]),
+                paragraph([
+                  "次に接続を確かめる。任意の ", math(String.raw`j\in\{0,\ldots,n-2\}`), " について ",
+                  math(String.raw`\operatorname{tgt}(p_j(W))=\operatorname{vt}(W_{j+1})=\operatorname{src}(p_{j+1}(W))`),
+                  "（端点の等式）であり、末尾では ",
+                  math(String.raw`\operatorname{tgt}(p_{n-1}(W))=\operatorname{vt}(W_n)=\operatorname{vt}(W_0)=\operatorname{src}(p_0(W))`),
+                  "（", math(String.raw`W_n=W_0`), " の仮定）である。",
+                ]),
+                paragraph([
+                  "次に、固定した ", math(String.raw`j`), " について、射影の辺が始点側の平面点と差を決めることを見る。",
+                  ref("def_plane_unit_path_torus_projection"), " の四つの場合の値は、台の辺の属す集合（",
+                  math(String.raw`E_{L,\mathrm h}`), " か ", math(String.raw`E_{L,\mathrm v}`),
+                  " か。", ref("def_lattice"), " により互いに素）と向き ", math(String.raw`d`),
+                  " の組が順に ", math(String.raw`(\mathrm h,0),(\mathrm v,0),(\mathrm h,1),(\mathrm v,1)`),
+                  " であり、四つの組は相異なる。したがって、同じ平面点 ", math(String.raw`X\in\mathbb Z\times\mathbb Z`),
+                  " から出る四種類の単位格子の一歩は、相異なる場合の値に射影される。すなわち、",
+                  math(String.raw`X`), " を始点とする一歩の射影から差が復元でき、終点 ",
+                  math(String.raw`X+\text{（差）}`), " も復元できる。",
+                ]),
+                paragraph([
+                  "また、一歩の逆向きの射影は反転である。実際、差が ", math(String.raw`(0,1)`),
+                  " の一歩 ", math(String.raw`X\to X+(0,1)`), " の射影は ",
+                  math(String.raw`(n_{\mathrm h}(\operatorname{vt}(X)),0)`),
+                  "、逆向きの一歩 ", math(String.raw`X+(0,1)\to X`), " の差は ",
+                  math(String.raw`(0,-1)`), " でその射影は ",
+                  math(String.raw`(n_{\mathrm h}(\operatorname{vt}(X)),1)`),
+                  " であり、反転写像 ", math(String.raw`\iota`), "（", ref("def_edge_reversal"),
+                  "）で移り合う。残る三つの場合も ", ref("def_plane_unit_path_torus_projection"),
+                  " の対になる場合どうしで同じ計算になる。",
+                ]),
+                paragraph([
+                  "最後に非後退性を示す。", math(String.raw`p_n(W):=p_0(W)`),
+                  " と置き、ある ", math(String.raw`j\in\{0,\ldots,n-1\}`), " で ",
+                  math(String.raw`p_{j+1}(W)=\iota(p_j(W))`),
+                  " と仮定する。", math(String.raw`W_{n+1}:=W_1`), " と読むと、直前の二段落により ",
+                  math(String.raw`\iota(p_j(W))`), " は ", math(String.raw`W_{j+1}`),
+                  " から ", math(String.raw`W_j`), " への一歩の射影であり、",
+                  math(String.raw`p_{j+1}(W)`), " は ", math(String.raw`W_{j+1}`),
+                  " から ", math(String.raw`W_{j+2}`),
+                  " への一歩の射影である。同じ点から出る一歩の射影は差を復元するので ",
+                  math(String.raw`W_{j+2}=W_j`), " を得る。",
+                  math(String.raw`j\le n-3`), " なら添字 ", math(String.raw`j,j+2\in\{0,\ldots,n-1\}`),
+                  " は相異なるので頂点の相異性に反する。",
+                  math(String.raw`j=n-2`), " なら ", math(String.raw`W_n=W_0`), " により ",
+                  math(String.raw`W_0=W_{n-2}`), " となり、", math(String.raw`n\ge3`),
+                  " から添字 ", math(String.raw`0\ne n-2`), " なので相異性に反する。",
+                  math(String.raw`j=n-1`), " なら ", math(String.raw`W_{n+1}=W_1`), " により ",
+                  math(String.raw`W_1=W_{n-1}`), " となり、", math(String.raw`n\ge3`),
+                  " から添字 ", math(String.raw`1\ne n-1`), " なので相異性に反する。",
+                  "いずれの場合も矛盾するので、任意の ", math(String.raw`j`), " で ",
+                  math(String.raw`p_{j+1}(W)\ne\iota(p_j(W))`),
+                  " である。接続と合わせて ",
+                  math(String.raw`p_{j+1}(W)\in\operatorname{Next}(p_j(W))`),
+                  "（", ref("def_nonbacktracking_successors"),
+                  "）が全ての ", math(String.raw`j\in\{0,\ldots,n-1\}`),
+                  " で成り立ち、", math(String.raw`\Pi(W)`),
+                  " は閉じた非後退辺列である（", ref("def_closed_nonbacktracking_walk"),
+                  "）。全過程は有限集合・剰余類の加法・場合分けだけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

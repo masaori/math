@@ -1160,9 +1160,12 @@ E_{22}=\begin{pmatrix}0&0\\0&1\end{pmatrix}`,
         String.raw`\begin{aligned}
 E_{IJ} E_{KL}
 &= (E_{i_1 j_1}\boxtimes\cdots\boxtimes E_{i_M j_M})(E_{k_1 l_1}\boxtimes\cdots\boxtimes E_{k_M l_M}) \\
-&= (E_{i_1 j_1}E_{k_1 l_1})\boxtimes\cdots\boxtimes(E_{i_M j_M}E_{k_M l_M}) \quad (\because \text{クロネッカー積の積の規則}) \\
-&= (\delta_{j_1 k_1}E_{i_1 l_1})\boxtimes\cdots\boxtimes(\delta_{j_M k_M}E_{i_M l_M}) \quad (\because E_{ij}E_{kl}=\delta_{jk}E_{il}) \\
-&= \left(\prod_{r=1}^M \delta_{j_r k_r}\right)E_{IL} \quad (\because \text{各因子についての線型性を } M \text{ 回})
+&= (E_{i_1 j_1}E_{k_1 l_1})\boxtimes\cdots\boxtimes(E_{i_M j_M}E_{k_M l_M})
+&&(\because \text{クロネッカー積の積の規則}) \\
+&= (\delta_{j_1 k_1}E_{i_1 l_1})\boxtimes\cdots\boxtimes(\delta_{j_M k_M}E_{i_M l_M})
+&&(\because E_{ij}E_{kl}=\delta_{jk}E_{il}) \\
+&= \left(\prod_{r=1}^M \delta_{j_r k_r}\right)E_{IL}
+&&(\because \text{各因子についての線型性を } M \text{ 回})
 \end{aligned}`,
       ),
       paragraph([
