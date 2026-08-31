@@ -55920,6 +55920,81 @@ s(i_j)-s(i_k)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_plane_lift_endpoint_winding",
+        labels: [],
+        title: { text: "持ち上げの終点と巻き付きベクトル" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_plane_lift_endpoint_winding",
+            focus: {
+              id: "kac_ward_claim_plane_lift_endpoint_winding",
+              kind: "claim",
+              title: { text: "持ち上げの終点は始点と巻き付きベクトルの L 倍だけ違う" },
+              labels: ["claim_plane_lift_endpoint_winding"],
+              habitat: "Z",
+              verification: ["sagemath/check/plane-lift-endpoint-winding"],
+              statement: [
+                paragraph([
+                  "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）について、",
+                  math(String.raw`\mathbb Z\times\mathbb Z`), " の等式",
+                ]),
+                displayMath(String.raw`P_m(\gamma)=P_0(\gamma)+\bigl(L\,w_{\mathrm v}(\gamma),\ L\,w_{\mathrm h}(\gamma)\bigr)`),
+                paragraph([
+                  "が成り立つ。持ち上げは ", ref("def_plane_lift"),
+                  "、整数巻き付き数は ", ref("def_directed_winding_numbers"),
+                  " である。すなわち、閉歩道の平面持ち上げが平面で閉じる（",
+                  math(String.raw`P_m(\gamma)=P_0(\gamma)`),
+                  "）ことと、巻き付きベクトルが零であることのずれは、巻き付きベクトルの ",
+                  math(String.raw`L`), " 倍という一つの整数の組で書ける。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "第 1 成分の等式を示す。第 2 成分は行を列、",
+                  math(String.raw`c_{\mathrm v}`), " を ", math(String.raw`c_{\mathrm h}`),
+                  "、", math(String.raw`w_{\mathrm v}`), " を ", math(String.raw`w_{\mathrm h}`),
+                  " に置き換えた同じ計算で従う。各項を ",
+                  math(String.raw`\vec e_t=(e_t,d_t)`), " と書き、始点を ",
+                  math(String.raw`\operatorname{src}(\vec e_1)=(i_1,j_1)`),
+                  "、第 ", math(String.raw`m`), " 項の終点を ",
+                  math(String.raw`\operatorname{tgt}(\vec e_m)=(i'_m,j'_m)`),
+                  " と書く（", ref("def_oriented_edge_endpoints"), "）。",
+                  ref("def_closed_nonbacktracking_walk"), " により ",
+                  math(String.raw`\vec e_1\in\operatorname{Next}(\vec e_m)`),
+                  " なので、", ref("def_nonbacktracking_successors"), " により ",
+                  math(String.raw`\operatorname{tgt}(\vec e_m)=\operatorname{src}(\vec e_1)`),
+                  "、とくに第 1 成分は ", math(String.raw`i'_m=i_1`), " である。したがって",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+P_m(\gamma)_{\mathrm{row}}
+&=s(i'_m)+L\sum_{t=1}^{m}c_{\mathrm v}(\vec e_t)(1-2d_t)
+&&\bigl(\because\ \blkref{claim_plane_lift_coordinates}\text{ の }k=m\text{ の場合}\bigr)\\
+&=s(i_1)+L\sum_{t=1}^{m}c_{\mathrm v}(\vec e_t)(1-2d_t)
+&&\bigl(\because\ i'_m=i_1\bigr)\\
+&=s(i_1)+L\,w_{\mathrm v}(\gamma)
+&&\bigl(\because\ \blkref{def_directed_winding_numbers}\bigr)\\
+&=P_0(\gamma)_{\mathrm{row}}+L\,w_{\mathrm v}(\gamma)
+&&\bigl(\because\ \blkref{def_plane_lift}\text{ の }P_0(\gamma)=(s(i_1),s(j_1))\bigr)
+\end{aligned}`),
+                paragraph([
+                  "で、第 1 成分の等式が成り立つ。全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",
+                  "後続の離散 Whitney の議論では、この等式により、巻き付きベクトルが零の頂点単純閉路の持ち上げは平面の単純閉多角形になり、零でない（原始的な）巻き付きベクトルの持ち上げは周期 ",
+                  math(String.raw`(L\,w_{\mathrm v}(\gamma),\,L\,w_{\mathrm h}(\gamma))`),
+                  " の周期単純路になる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

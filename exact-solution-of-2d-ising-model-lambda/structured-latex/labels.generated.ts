@@ -184,6 +184,7 @@ export const ALL_LABELS = [
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
   "claim_plane_lift_coordinates",
+  "claim_plane_lift_endpoint_winding",
   "claim_positive_rational_in_positive_cone",
   "claim_positive_rational_mesh_width",
   "claim_positive_rational_not_fisher_zero",

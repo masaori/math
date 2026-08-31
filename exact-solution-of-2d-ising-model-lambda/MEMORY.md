@@ -2,7 +2,13 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-08-31 の 28 回目の tick 時点）
+## 現在の到達点（2026-08-31 の 29 回目の tick 時点）
+
+**閉歩道の平面持ち上げの終点が始点と巻き付きベクトルの $L$ 倍だけ違うことを本文と SageMath で固定した（Lean 未着手）。** 座標式 `claim_plane_lift_coordinates` の $k=m$ の場合と閉性 $\operatorname{tgt}(\vec e_m)=\operatorname{src}(\vec e_1)$ から、$P_m(\gamma)=P_0(\gamma)+(L\,w_{\mathrm v}(\gamma),\ L\,w_{\mathrm h}(\gamma))$ を四段の行末根拠つきの鎖で示した（`claim_plane_lift_endpoint_winding`）。これにより、巻き付きが零の頂点単純閉路の持ち上げは平面の単純閉多角形になり、原始的な巻き付きの持ち上げは周期 $(L w_{\mathrm v}, L w_{\mathrm h})$ の周期単純路になる（離散 Whitney の回転数の議論の舞台）。SageMath `plane-lift-endpoint-winding` は $L=1,2,3$・長さ 6 までの閉じた非後退辺列 4,128 本を `ZZ` で検査した。検算対応 342 件、本文 750 ブロック・PDF 338 ページ、Lean 9,616 jobs・sorry なしを通した。次は平面の単純閉多角形の回転数（離散 Whitney の本体）を示す。
+
+前進前レビューでは前 tick の `claim_vertex_simple_plane_lift_points_distinct` を本文・SageMath（4,504 本・32,264 点）・台帳で照合した。主張は持ち上げの単射性を述べ、今回の終点の等式と合わせて離散 Whitney の舞台を与えるため「何も言っていない主張」ではなく、修正対象なし。並列の式変形統一は、姉妹側の行列ノルムの劣乗法性の証明にあった一行複数関係を行末根拠つきの鎖へ開いた。
+
+## ひとつ前の到達点（2026-08-31 の 28 回目の tick 時点）
 
 **頂点単純閉路の一周期の平面持ち上げ点が二つずつ相異なることを本文と SageMath で固定した（Lean 未着手）。** $P_j(\gamma)=P_k(\gamma)$ を仮定すると、前 tick の座標式により対応するトーラス頂点の各代表座標の差が $L$ の整数倍になる。代表は $0$ 以上 $L-1$ 以下なので差は零であり、二つの通過頂点が一致して頂点単純性 $n_{\mathrm{ct}}(\gamma)=0$ に反する（`claim_vertex_simple_plane_lift_points_distinct`）。終点 $P_m$ は巻き付きが零なら始点 $P_0$ に一致し得るため、一周期は $P_0,\ldots,P_{m-1}$ とした。SageMath `vertex-simple-plane-lift-distinct` は $L=1,2,3$ の頂点単純な閉じた非後退辺列 4,504 本・一周期の持ち上げ点 32,264 個を `ZZ` で検査した。検算対応 341 件、本文 748 ブロック・PDF 338 ページ、Lean 9,616 jobs・sorry なしを通した。次は平面格子の単純閉路・周期単純路の回転数を示す。
 
