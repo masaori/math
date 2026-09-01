@@ -1,5 +1,7 @@
 # 平面の頂点単純な閉単位格子路のトーラス射影が閉じた非後退辺列であることの全数検査
-# 対象: claim_plane_simple_cycle_projection_closed_nonbacktracking
+# 対象:
+# - claim_plane_simple_cycle_projection_closed_nonbacktracking
+# - claim_projected_plane_cycle_lift_translation
 # すべて ZZ の中の有限列挙・場合分け・剰余演算だけで行う。浮動小数点は使わない。
 
 STEPS = [(0, 1), (1, 0), (0, -1), (-1, 0)]
@@ -47,6 +49,15 @@ def check_for_L(L, paths):
         b0, b1 = boundary(e)
         return (b0, b1) if d == 0 else (b1, b0)
 
+    def displacement(e, d):
+        sign = ZZ(1 - 2 * d)
+        return (ZZ(0), sign) if e <= L2 else (sign, ZZ(0))
+
+    def seam_crossings(e):
+        if e <= L2:
+            return (ZZ(1) if (e - 1) % L == L - 1 else ZZ(0), ZZ(0))
+        return (ZZ(0), ZZ(1) if (e - L2 - 1) // L == L - 1 else ZZ(0))
+
     def vt(p):
         return (p[0] % L, p[1] % L)
 
@@ -67,9 +78,13 @@ def check_for_L(L, paths):
         raise AssertionError("単位格子の一歩でない: %s -> %s" % (a, b))
 
     step_checks = 0
+    lift_checks = 0
     for W in paths:
         n = len(W) - 1
         edges = [project_step(W[j], W[j + 1]) for j in range(n)]
+        lifted = [(ZZ(vt(W[0])[0]), ZZ(vt(W[0])[1]))]
+        winding_h = ZZ(0)
+        winding_v = ZZ(0)
         for j in range(n):
             e, d = edges[j]
             assert 1 <= e <= 2 * L2, "辺番号が E_L の外: %s" % ((e, d),)
@@ -81,15 +96,31 @@ def check_for_L(L, paths):
             s2, _ = src_tgt(e2, d2)
             assert t == s2, "接続が切れている (L=%d, j=%d)" % (L, j)
             assert (e2, d2) != (e, 1 - d), "反転が現れた (L=%d, j=%d)" % (L, j)
+            dr, dc = displacement(e, d)
+            lifted.append((lifted[-1][0] + dr, lifted[-1][1] + dc))
+            c_h, c_v = seam_crossings(e)
+            sign = ZZ(1 - 2 * d)
+            winding_h += c_h * sign
+            winding_v += c_v * sign
             step_checks += 1
-    return step_checks
+        for k in range(n + 1):
+            expected = (lifted[0][0] + ZZ(W[k][0] - W[0][0]),
+                        lifted[0][1] + ZZ(W[k][1] - W[0][1]))
+            assert lifted[k] == expected, "持ち上げが平行移動と不一致 (L=%d, k=%d)" % (L, k)
+            lift_checks += 1
+        assert lifted[-1] == lifted[0], "閉平面路の持ち上げが閉じない (L=%d)" % L
+        assert (winding_h, winding_v) == (ZZ(0), ZZ(0)), "巻き付きが零でない (L=%d)" % L
+    return step_checks, lift_checks
 
 
 paths = enumerate_simple_closed_paths(10)
 assert len(paths) > 0
 total = 0
+lift_total = 0
 for L in [1, 2, 3]:
-    total += check_for_L(L, paths)
+    step_count, lift_count = check_for_L(L, paths)
+    total += step_count
+    lift_total += lift_count
 
-print("PASS: 頂点単純な閉単位格子路 %d 本（長さ 10 以下・始点固定）、L=1,2,3 の射影の歩の検査 %d 件"
-      % (len(paths), total))
+print("PASS: 頂点単純な閉単位格子路 %d 本（長さ 10 以下・始点固定）、L=1,2,3 の射影の歩 %d 件、持ち上げ点 %d 件を検査"
+      % (len(paths), total, lift_total))

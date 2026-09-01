@@ -60141,6 +60141,118 @@ cL W_{\perp}(\gamma)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_projected_plane_cycle_lift",
+        labels: [],
+        title: { text: "射影した平面閉路の持ち上げ" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_projected_plane_cycle_lift_translation",
+            focus: {
+              id: "kac_ward_claim_projected_plane_cycle_lift_translation",
+              kind: "claim",
+              title: { text: "射影の平面持ち上げは元の平面閉路の平行移動で巻き付きは零である" },
+              labels: ["claim_projected_plane_cycle_lift_translation"],
+              habitat: "Z",
+              verification: ["sagemath/check/plane-cycle-torus-projection"],
+              statement: [
+                paragraph([
+                  ref("claim_plane_simple_cycle_projection_closed_nonbacktracking"), " の仮定を満たす閉単位格子路 ",
+                  math(String.raw`W_0,\ldots,W_n`), " と、そのトーラス射影 ",
+                  math(String.raw`\gamma:=\Pi(W)=\bigl(p_0(W),\ldots,p_{n-1}(W)\bigr)`),
+                  " を取る。射影の平面持ち上げ（", ref("def_plane_lift"), "）について、任意の ",
+                  math(String.raw`k\in\{0,\ldots,n\}`), " で",
+                ]),
+                displayMath(String.raw`P_k(\gamma)=P_0(\gamma)+W_k-W_0`),
+                paragraph([
+                  "が成り立つ。従って ", math(String.raw`P_n(\gamma)=P_0(\gamma)`), " であり、整数巻き付き数（",
+                  ref("def_directed_winding_numbers"), "）は",
+                ]),
+                displayMath(String.raw`w_{\mathrm h}(\gamma)=0,\qquad w_{\mathrm v}(\gamma)=0`),
+                paragraph([
+                  "である。すなわち、トーラスへの射影から再び平面へ持ち上げると、始点の代表を選び直す平行移動だけを除いて元の平面閉路を復元する。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず各歩の変位を確かめる。", math(String.raw`j\in\{0,\ldots,n-1\}`),
+                  " を固定する。射影の定義（", ref("def_plane_unit_path_torus_projection"),
+                  "）と平面変位の定義（", ref("def_plane_displacement"), "）を四つの場合で読むと、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bigl(\delta_{\mathrm{row}}(p_j(W)),\delta_{\mathrm{col}}(p_j(W))\bigr)
+&=(0,1)=W_{j+1}-W_j
+&&\bigl(\because\ W_{j+1}-W_j=(0,1)\text{ の場合}\bigr),\\
+\bigl(\delta_{\mathrm{row}}(p_j(W)),\delta_{\mathrm{col}}(p_j(W))\bigr)
+&=(1,0)=W_{j+1}-W_j
+&&\bigl(\because\ W_{j+1}-W_j=(1,0)\text{ の場合}\bigr),\\
+\bigl(\delta_{\mathrm{row}}(p_j(W)),\delta_{\mathrm{col}}(p_j(W))\bigr)
+&=(0,-1)=W_{j+1}-W_j
+&&\bigl(\because\ W_{j+1}-W_j=(0,-1)\text{ の場合}\bigr),\\
+\bigl(\delta_{\mathrm{row}}(p_j(W)),\delta_{\mathrm{col}}(p_j(W))\bigr)
+&=(-1,0)=W_{j+1}-W_j
+&&\bigl(\because\ W_{j+1}-W_j=(-1,0)\text{ の場合}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "ここで各行の最初の等号は、正向きなら ", math(String.raw`d=0`),
+                  "、逆向きなら ", math(String.raw`d=1`), " を ", ref("def_plane_displacement"),
+                  " の横向きまたは縦向きの場合へ代入したものである。",
+                ]),
+                paragraph([
+                  "次に ", math(String.raw`k`), " について帰納法を行う。", math(String.raw`k=0`),
+                  " では ", math(String.raw`P_0(\gamma)=P_0(\gamma)+W_0-W_0`),
+                  " が整数の組の四則から成り立つ。ある ", math(String.raw`k\in\{0,\ldots,n-1\}`),
+                  " で等式が成り立つと仮定すると、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+P_{k+1}(\gamma)
+&=P_k(\gamma)+\bigl(\delta_{\mathrm{row}}(p_k(W)),\delta_{\mathrm{col}}(p_k(W))\bigr)
+&&\bigl(\because\ \blkref{def_plane_lift}\text{ の漸化式}\bigr)\\
+&=P_k(\gamma)+W_{k+1}-W_k
+&&\bigl(\because\ \text{上で確かめた各歩の変位}\bigr)\\
+&=P_0(\gamma)+W_k-W_0+W_{k+1}-W_k
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=P_0(\gamma)+W_{k+1}-W_0
+&&\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の成分ごとの四則}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "従って全ての ", math(String.raw`k\in\{0,\ldots,n\}`), " で持ち上げの等式が成り立つ。特に",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+P_n(\gamma)
+&=P_0(\gamma)+W_n-W_0
+&&\bigl(\because\ \text{上で示した等式の }k=n\text{ の場合}\bigr)\\
+&=P_0(\gamma)
+&&\bigl(\because\ W_n=W_0\bigr).
+\end{aligned}`),
+                paragraph([
+                  ref("claim_plane_lift_endpoint_winding"), " とこの等式を合わせると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bigl(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma)\bigr)
+&=P_n(\gamma)-P_0(\gamma)
+&&\bigl(\because\ \blkref{claim_plane_lift_endpoint_winding}\text{ と }\mathbb Z\times\mathbb Z\text{ の四則}\bigr)\\
+&=(0,0)
+&&\bigl(\because\ P_n(\gamma)=P_0(\gamma)\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`L\ge1`), " なので ", math(String.raw`L\ne0`),
+                  " であり、整数は零因子を持たない。従って二成分から ",
+                  math(String.raw`w_{\mathrm v}(\gamma)=0`), " と ",
+                  math(String.raw`w_{\mathrm h}(\gamma)=0`),
+                  " を得る。全過程は整数の組・有限列・帰納法だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

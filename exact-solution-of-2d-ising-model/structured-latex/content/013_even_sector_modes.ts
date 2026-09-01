@@ -387,11 +387,11 @@ M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
         String.raw`\begin{aligned}
 \sum_{\mu=1}^{M} e^{ik\tilde\theta_\mu}
 &= \sum_{\mu=1}^{M} e^{i k\left(\frac{2\pi\mu}{M} - \frac{\pi}{M}\right)}
-   \quad (\because \tilde\theta_\mu = \tfrac{2\pi\mu}{M} - \tfrac{\pi}{M}) \\
+&&\bigl(\because\ \tilde\theta_\mu = \tfrac{2\pi\mu}{M} - \tfrac{\pi}{M}\bigr) \\
 &= \sum_{\mu=1}^{M} e^{i\frac{2\pi\mu k}{M}}\,e^{-i\frac{\pi k}{M}}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&&\bigl(\because\ \text{theorem\_exp\_product}\ (n=1)\bigr) \\
 &= e^{-i\frac{\pi k}{M}}\sum_{\mu=1}^{M} e^{\frac{2\pi i \mu k}{M}}
-   \quad (\because \text{有限和から }\mu\text{ に依らない因子をくくり出す（分配律）})
+&&\bigl(\because\ \text{有限和から }\mu\text{ に依らない因子をくくり出す（分配律）}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -422,13 +422,13 @@ M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
         String.raw`\begin{aligned}
 e^{-i\frac{\pi k}{M}}
 &= e^{-i\frac{\pi l M}{M}}
-   \quad (\because k = lM) \\
+&&\bigl(\because\ k = lM\bigr) \\
 &= e^{-i\pi l}
-   \quad (\because M\ge 2\text{ なので }M\ne0\text{、分数の約分}) \\
+&&\bigl(\because\ M\ge 2\text{ なので }M\ne0\text{、分数の約分}\bigr) \\
 &= \cos(\pi l) - i\sin(\pi l)
-   \quad (\because \text{euler\_formula\_cos\_sin}) \\
+&&\bigl(\because\ \text{euler\_formula\_cos\_sin}\bigr) \\
 &= (-1)^{l}
-   \quad (\because l \in \mathbb{Z} \text{ に対し } \cos(\pi l) = (-1)^l,\ \sin(\pi l) = 0)
+&&\bigl(\because\ l \in \mathbb{Z} \text{ に対し } \cos(\pi l) = (-1)^l,\ \sin(\pi l) = 0\bigr)
 \end{aligned}`,
       ),
       paragraph([
