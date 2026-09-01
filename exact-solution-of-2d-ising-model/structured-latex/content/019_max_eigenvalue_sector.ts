@@ -717,9 +717,9 @@ x^\top W x
         String.raw`\begin{aligned}
 c(M)
 &= \max\left(c_+(M),\, c_-(M)\right)
-   \quad (\because \text{sector\_decomposition\_of\_rayleigh\_sup (3)}) \\
+&&(\because \text{sector\_decomposition\_of\_rayleigh\_sup (3)}) \\
 &= c_+(M)
-   \quad (\because \text{c\_minus\_le\_c\_plus の } c_-(M) \leq c_+(M))
+&&(\because \text{c\_minus\_le\_c\_plus の } c_-(M) \leq c_+(M))
 \end{aligned}`,
       ),
       paragraph([
