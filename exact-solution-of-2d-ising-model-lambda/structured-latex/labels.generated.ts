@@ -459,6 +459,7 @@ export const ALL_LABELS = [
   "claim_transverse_translates_of_periodic_plane_lift_disjoint",
   "claim_trivial_sector_configuration_reconstruction",
   "claim_two_is_square_in_real_closed",
+  "claim_unswitchable_standard_pair_forces_doubled_edge",
   "claim_value_at_rational_is_positive",
   "claim_vertex_crossing_number_factorization",
   "claim_vertex_incident_edge_traversal_even",
