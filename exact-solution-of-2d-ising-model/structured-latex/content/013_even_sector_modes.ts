@@ -1937,9 +1937,9 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
         String.raw`\begin{aligned}
 \check{Z}_{M+1-\mu}
 &= \sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_{M+1-\mu}}
-   \quad (\because \text{def\_half\_integer\_modes}) \\
+&& (\because \text{def\_half\_integer\_modes}) \\
 &= \sum_{k=1}^{M} Z_k\,e^{ik\tilde\theta_\mu}
-   \quad (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)})
+&& (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)})
 \end{aligned}`,
       ),
       paragraph([
@@ -1968,22 +1968,22 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{M+1-\mu}\check{Y}_\mu
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right)
    \left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
-   \quad (\because \text{準備した }\check Z_{M+1-\mu}\text{ の表示と def\_half\_integer\_modes}) \\
+&& (\because \text{準備した }\check Z_{M+1-\mu}\text{ の表示と def\_half\_integer\_modes}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
    e^{ik\tilde\theta_\mu}e^{-ij\tilde\theta_\mu}
-   \quad (\because \text{積を二重和へ分配}) \\
+&& (\because \text{積を二重和へ分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
    e^{i(k-j)\tilde\theta_\mu}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&& (\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= \frac{1}{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j
    \sum_{\mu=1}^{M} e^{i(k-j)\tilde\theta_\mu}
-   \quad (\because \text{有限和の順序交換}) \\
+&& (\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\sum_{j=1}^{M} Z_jY_j\cdot M
-   \quad (\because \text{antiperiodic\_exp\_sum}) \\
+&& (\because \text{antiperiodic\_exp\_sum}) \\
 &= \sum_{j=1}^{M} Z_jY_j
-   \quad (\because \text{スカラー } \tfrac{1}{M} \text{ と } M \text{ の相殺}) \\
+&& (\because \text{スカラー } \tfrac{1}{M} \text{ と } M \text{ の相殺}) \\
 &= H_2
-   \quad (\because \text{def\_transfer\_matrix\_symbols})
+&& (\because \text{def\_transfer\_matrix\_symbols})
 \end{aligned}`,
       ),
       paragraph([
@@ -2047,22 +2047,22 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{M+1-\mu}e^{-i\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
    \left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right) e^{-i\tilde\theta_\mu}
-   \quad (\because \text{def\_half\_integer\_modes と準備した } \check{Z}_{M+1-\mu} \text{ の表示}) \\
+&& (\because \text{def\_half\_integer\_modes と準備した } \check{Z}_{M+1-\mu} \text{ の表示}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
    e^{-ij\tilde\theta_\mu}e^{ik\tilde\theta_\mu}e^{-i\tilde\theta_\mu}
-   \quad (\because \text{積を二重和へ分配}) \\
+&& (\because \text{積を二重和へ分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
    e^{-i(j-k+1)\tilde\theta_\mu}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&& (\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= \frac{1}{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k
    \sum_{\mu=1}^{M} e^{-i(j-k+1)\tilde\theta_\mu}
-   \quad (\because \text{有限和の順序交換}) \\
+&& (\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\left(\sum_{j=1}^{M-1} Y_jZ_{j+1}\cdot M + Y_MZ_1\cdot(-M)\right)
-   \quad (\because \text{antiperiodic\_exp\_sum と直上の 2 つの場合分け}) \\
+&& (\because \text{antiperiodic\_exp\_sum と直上の 2 つの場合分け}) \\
 &= \sum_{j=1}^{M-1} Y_jZ_{j+1} - Y_MZ_1
-   \quad (\because \text{スカラー } \tfrac{1}{M} \text{ の分配と } \tfrac{1}{M}\cdot M = 1,\ \tfrac{1}{M}\cdot(-M) = -1 \text{ の相殺}) \\
+&& (\because \text{スカラー } \tfrac{1}{M} \text{ の分配と } \tfrac{1}{M}\cdot M = 1,\ \tfrac{1}{M}\cdot(-M) = -1 \text{ の相殺}) \\
 &= H_1^{(+)}
-   \quad (\because \text{def\_V1\_pm})
+&& (\because \text{def\_V1\_pm})
 \end{aligned}`,
       ),
     ],
@@ -2071,6 +2071,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
       notes: [
         "境界項 -Y_M Z_1 の符号が、antiperiodic_exp_sum の l=1 の因子 (-1)^1 として自動的に出てくる。整数運動量版 H1_H2_via_hatZ_hatY で hat(Z)^{(±)} の第 1 項の符号が担っていた役割を、ここでは指数和の符号が担っている。",
         "2026-08-19 の式変形統一で、H_2 と H_1^{(+)} の導出を分断していた説明・重複した参照を準備へ移し、それぞれ主張の右辺から H_2・H_1^{(+)} へ至る一続きの鎖へまとめた。内容・参照は変えていない。",
+        "2026-09-01 の式変形統一で、三本の鎖に行中の \\quad(\\because …) で置かれていた根拠 16 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠・参照は変えていない。",
       ],
     },
   },

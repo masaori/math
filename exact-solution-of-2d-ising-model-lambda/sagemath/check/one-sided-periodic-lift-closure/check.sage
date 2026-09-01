@@ -160,10 +160,12 @@ for L in range(1, 4):
                         t_min = ZZ(1)
                         base_indices = [r for r in range(m)
                                         if levels[r] == k_max]
+                        cycle_turning = cyclic_total_turning(lifted)
                         for k0 in base_indices:
                             start = lift(ZZ(k0))
-                            for c in (ZZ(1), ZZ(2)):
-                                for t in (t_min, t_min + 1):
+                            for t in (t_min, t_min + 1):
+                                closure_turnings = {}
+                                for c in (ZZ(1), ZZ(2), ZZ(3)):
                                     n_total = c * m + 2 * t * n_perp + c * n_par
                                     q1 = lift(ZZ(k0) + c * m)
                                     assert q1 == add(start, scale(c, big_b))
@@ -205,6 +207,9 @@ for L in range(1, 4):
                                     turning_values.add(turning)
                                     turning_total += 1
                                     closure_total += 1
+                                    closure_turnings[c] = turning
+                                assert closure_turnings[ZZ(2)] - closure_turnings[ZZ(1)] == cycle_turning
+                                assert closure_turnings[ZZ(3)] - closure_turnings[ZZ(2)] == cycle_turning
 
                 if length < L * L:
                     for nxt in successors(L, oriented, walk[-1]):

@@ -1,14 +1,16 @@
 # SageMath Check: 一側閉包の定義と閉性
 
-**対象ラベル**: `claim_one_sided_periodic_lift_closure_closed_unit_steps`, `claim_one_sided_periodic_lift_closure_simple`, `claim_one_sided_closure_projection_cyclic_turning`
+**対象ラベル**: `claim_one_sided_periodic_lift_closure_closed_unit_steps`, `claim_one_sided_periodic_lift_closure_simple`, `claim_one_sided_closure_projection_cyclic_turning`, `claim_one_sided_closure_period_difference_turning`
 
 $L=1,2,3$ の非零巻き付きの頂点単純な閉じた非後退辺列について、一側閉包
 （周期持ち上げの $c$ 周期分・反復横断階段・逆向き平行階段 $c$ 本・逆向き反復横断階段）が
 閉じた単位格子路であることを `ZZ` で検査する。基点は一周期の最大横断水準の持ち上げ点すべて、
-周期数は $c=1,2$、反復回数は $t=1,2$。閉性・四部分の境界の二重表示の一致・
+周期数は $c=1,2,3$、反復回数は $t=1,2$。閉性・四部分の境界の二重表示の一致・
 全連続差の単位性・終点を除く全頂点の相異性を全数比較する。さらに、各一側閉包をトーラスへ
 射影した辺列の方向番号から循環総回転数を整数として計算し、正負 $4$ のいずれかであることを検査する。
+同じ閉歩道・基点・反復回数について隣接する周期数の循環総回転数の差が、元の閉歩道の
+循環総回転数に等しいことも `ZZ` で検査する。
 
 - 実行: `sage sagemath/check/one-sided-periodic-lift-closure/check.sage`
-- 状態: PASS（2026-09-01）。非零巻き付きの頂点単純閉路 3,464 本、一側閉包 30,144 本について、単位歩 636,240 件、終点を除く頂点の相異性 636,240 件、射影後の循環総回転数 30,144 件を全列挙した。循環総回転数は全て $\{+4,-4\}$ に属した（この構成・列挙順では全例が $+4$ だった）。
+- 状態: PASS（2026-09-01）。非零巻き付きの頂点単純閉路 3,464 本、一側閉包 45,216 本について、単位歩 1,210,464 件、終点を除く頂点の相異性 1,210,464 件、射影後の循環総回転数 45,216 件を全列挙した。循環総回転数は全て $\{+4,-4\}$ に属し（この構成・列挙順では全例が $+4$）、周期数 $1,2,3$ の二つの隣接差も全て元の閉歩道の循環総回転数に一致した。
 - 計算: 有限列挙、整数の除法・絶対値・場合分け・四則と順序だけ。浮動小数点は使わない。

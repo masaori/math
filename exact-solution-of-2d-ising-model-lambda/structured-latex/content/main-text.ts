@@ -60335,6 +60335,95 @@ P_j(\Gamma)=P_{j'}(\Gamma)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_one_sided_closure_period_difference_turning",
+        labels: [],
+        title: { text: "一側閉包の周期数差と循環総回転数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_closure_period_difference_turning",
+            focus: {
+              id: "kac_ward_claim_one_sided_closure_period_difference_turning",
+              kind: "claim",
+              title: { text: "一側閉包の周期数を一つ増やすと元の閉歩道の循環総回転数だけ増える" },
+              labels: ["claim_one_sided_closure_period_difference_turning"],
+              habitat: "Z",
+              verification: ["sagemath/check/one-sided-periodic-lift-closure"],
+              statement: [
+                paragraph([
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）で閉歩道 ",
+                  math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "、基点添字 ",
+                  math(String.raw`k_0\in\mathbb Z`), "、反復回数 ",
+                  math(String.raw`t\in\mathbb N`), "、", math(String.raw`t\ge1`),
+                  " を固定する。周期数 ", math(String.raw`c\in\mathbb N`), "、",
+                  math(String.raw`c\ge1`), " の一側閉包を ",
+                  math(String.raw`W_c:=\bigl(F^{\gamma,k_0,t,c}_0,\ldots,F^{\gamma,k_0,t,c}_{N_c}\bigr)`),
+                  "、そのトーラス射影（", ref("def_plane_unit_path_torus_projection"), "）を ",
+                  math(String.raw`\Gamma_c:=\Pi(W_c)`), " と書く。このとき循環総回転数（",
+                  ref("def_cyclic_total_turning"), "）について",
+                ]),
+                displayMath(String.raw`t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)=t_{\circ}(\gamma)`),
+                paragraph([
+                  "が成り立つ。従って ", math(String.raw`\bigl(t_{\circ}(\Gamma_c)\bigr)_{c\ge1}`),
+                  " は初項 ", math(String.raw`t_{\circ}(\Gamma_1)`), "、公差 ",
+                  math(String.raw`t_{\circ}(\gamma)`), " の整数の等差数列である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "周期延長した持ち上げの一周期分の射影辺列を ",
+                  math(String.raw`U=(\vec u_1,\ldots,\vec u_m)`), " と書く。周期延長の定義（",
+                  ref("def_periodic_plane_lift"), "）により、周期持ち上げ部分の射影は ",
+                  math(String.raw`U`), " を ", math(String.raw`c`), " 回連結した列である。",
+                  math(String.raw`U`), " は ", math(String.raw`\gamma`),
+                  " の始点を ", math(String.raw`k_0`), " だけ巡回移動した列なので、有限和の添字を巡回移動すると",
+                ]),
+                displayMath(String.raw`\sum_{j=1}^{m-1}\tau(\vec u_j,\vec u_{j+1})+\tau(\vec u_m,\vec u_1)
+=t_{\circ}(\gamma)
+\qquad\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と有限和の添字の全単射による取り替え}\bigr)`),
+                paragraph([
+                  "次に正の平行階段（", ref("def_winding_parallel_staircase"), "）の一周期を逆向きに進む射影辺列を ",
+                  math(String.raw`R=(\vec r_1,\ldots,\vec r_{n_{\parallel}})`), " と書く。",
+                  ref("def_winding_parallel_staircase"), " の場合分けにより、", math(String.raw`R`),
+                  " は一方向だけの辺列か、一定方向の二つの空でない辺列を一度だけ曲がって連結した列である。",
+                  "一方向だけなら全ての一歩の回転数は零である。二方向なら内部の唯一の曲がりを ",
+                  math(String.raw`\varepsilon\in\{1,-1\}`), " と書くと、末辺から始辺への曲がりは ",
+                  math(String.raw`-\varepsilon`), " である。従って二場合とも",
+                ]),
+                displayMath(String.raw`\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)=0
+\qquad\bigl(\because\ \blkref{def_winding_parallel_staircase}\text{ と }\blkref{def_step_turning}\text{ の方向の有限な場合分け}\bigr)`),
+                paragraph([
+                  "最後に ", math(String.raw`\Gamma_c`), " と ", math(String.raw`\Gamma_{c+1}`),
+                  " の方向列を比較する。一側閉包の定義（", ref("def_one_sided_periodic_lift_closure"),
+                  "）から、周期数を一つ増やすと、周期持ち上げ部分へ ", math(String.raw`U`),
+                  " が一組、反転平行階段へ ", math(String.raw`R`),
+                  " が一組増える。二つの反復横断階段と、四部分の接合部の先頭・末尾方向は変わらない。",
+                  "循環総回転数の有限和を四部分と接合部へ分け、両辺の共通項を整数の加法で消すと、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
+&=\left(\sum_{j=1}^{m-1}\tau(\vec u_j,\vec u_{j+1})+\tau(\vec u_m,\vec u_1)\right)
++\left(\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)\right)
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ と }\blkref{def_cyclic_total_turning}\text{ の有限和分割}\bigr)\\
+&=t_{\circ}(\gamma)+0
+&&\bigl(\because\ \text{上で示した }U\text{ と }R\text{ の二等式}\bigr)\\
+&=t_{\circ}(\gamma)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "これで差の等式を得る。全過程は有限列・有限和・整数の四則だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_three_period_comparison_lemma",
         labels: [],
         title: { text: "三周期比較の整数補題" },
