@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 78 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 79 回目の tick 時点）
+
+**置換の軌道の長さの総和が反転対と単純通過で数えられる $\mathbb N$ の等式を本文と SageMath で固定した（Lean 未着手）。** `claim_moved_orbit_length_sum_stratified` は、任意の置換 $\varphi\in\operatorname{Perm}(\vec E_L)$ について $\sum_{C\in\mathcal C(\varphi)}|C|=|M(\varphi)|=2|D(\varphi)|+|E_1(\varphi)|$ を主張する。これは非後退置換の置換項の $x$ の冪の指数（軌道の長さの総和）を、偶部分グラフ順序対の層別 `claim_even_subgraph_pair_stratified_count` の指数 $2|D|+|E|$ と同じ形に揃える橋渡しである。証明は、軌道族の互いに素な分割（`claim_moved_orbit_partition`）と、動く辺集合の台の辺ごとの互いに素な合併・ファイバーの二場合（$D$ の上で 2、$E_1$ の上で 1）による個数の加法性の合成である。SageMath `moved-orbit-length-sum-stratified` は $L=1$ の任意置換 24 個（主張の全称の範囲をこの大きさで尽くす）と $L=2$ の非後退置換 30,784 個で証明の各段と結論を全数検査した。次は非後退置換をその対 $(D(\varphi),E_1(\varphi))$ で層別する数え上げへ進む。
+
+Lambda 側 check（856 ブロック）・linkage（380 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存検査・PDF 378 ページを通した。
+
+前進前レビューでは、前 tick の層別数え上げを本文・SageMath・台帳・本文末尾「この先に書くこと」と照合した。「何も言っていない主張」や仮定・住処・参照の不一致は無かった。
+
+## ひとつ前の到達点（2026-09-01 の 78 回目の tick 時点）
 
 **偶部分グラフ順序対の母関数を、添字 $(D,E)$ ごとの選択集合の個数で層別する $\mathbb{Z}[x]$ の等式を本文と SageMath で固定した（Lean 未着手）。** `claim_even_subgraph_pair_stratified_count` は $\sum_{A,B\ \text{偶}}x^{|A|+|B|}=\sum_{D\cap E=\varnothing,\ \operatorname{Even}_L(E)}|\mathcal C_L(D,E)|\,x^{2|D|+|E|}$ を主張する。証明は、像 $(A\cap B,\ A\mathbin\triangle B)$ が互いに素で第 2 成分が偶部分グラフの添字集合に入ること（対称差の端点数の法 2 の消え方）、添字ごとのファイバーが $\mathcal P_L(D,E)$ で順序対全体を互いに素に覆うこと、位数の和の等式 $|A|+|B|=2|D|+|E|$、前 tick のファイバー全単射 `claim_even_subgraph_pair_fiber_bijection` による $|\mathcal P|=|\mathcal C|$ の置換の合成である。SageMath `even-subgraph-pair-stratified-count` は $L=2$ の順序対 1,024 件・添字 881 組で証明の各段と両辺の多項式一致（$x^{16}+8x^{14}+\cdots+1$）を全数検査した。次は非後退置換の軌道とこの層別を対応づける数え上げへ進む。
 

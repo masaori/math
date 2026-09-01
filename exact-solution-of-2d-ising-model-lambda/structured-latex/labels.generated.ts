@@ -118,6 +118,7 @@ export const ALL_LABELS = [
   "claim_low_temperature_trivial_sector_expression",
   "claim_matrix_pow_entry",
   "claim_moved_orbit_closed_nonbacktracking",
+  "claim_moved_orbit_length_sum_stratified",
   "claim_moved_orbit_partition",
   "claim_moved_orbit_weight_phase_twist",
   "claim_neg_one_not_square",

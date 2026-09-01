@@ -51448,6 +51448,109 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_moved_edge_count_stratification",
+        labels: [],
+        title: { text: "動く辺の個数の層別" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_moved_orbit_length_sum_stratified",
+            focus: {
+              id: "kac_ward_claim_moved_orbit_length_sum_stratified",
+              kind: "claim",
+              title: { text: "軌道の長さの総和は反転対と単純通過で数えられる" },
+              labels: ["claim_moved_orbit_length_sum_stratified"],
+              habitat: "N",
+              verification: ["sagemath/check/moved-orbit-length-sum-stratified"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), " とし、置換 ",
+                  math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+                  "（", ref("def_row_permutation"), " を有限集合 ",
+                  math(String.raw`\vec E_L`), " に適用したもの）を取る。このとき ",
+                  math(String.raw`\mathbb N`), " の等式",
+                ]),
+                displayMath(String.raw`\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert
+=\lvert M(\varphi)\rvert
+=2\,\lvert D(\varphi)\rvert+\lvert E_1(\varphi)\rvert`),
+                paragraph([
+                  "が成り立つ。軌道族 ", math(String.raw`\mathcal C(\varphi)`), " は ",
+                  ref("def_moved_orbit_family"), "、動く辺の集合 ",
+                  math(String.raw`M(\varphi)`), " は ", ref("def_moved_edge_set"),
+                  "、反転対の辺集合 ", math(String.raw`D(\varphi)`), " は ",
+                  ref("def_doubled_edge_set"), "、単純通過の辺集合 ",
+                  math(String.raw`E_1(\varphi)`), " は ",
+                  ref("def_single_traversal_edge_set"), "、有限集合の個数 ",
+                  math(String.raw`\lvert X\rvert\in\mathbb N`), " は ",
+                  ref("def_cardinality_notation"),
+                  " で定めた。三つの量はいずれも有限集合の個数であり、",
+                  "実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "準備。台の辺 ", math(String.raw`e\in E_L`), " に対して",
+                ]),
+                displayMath(String.raw`M_e(\varphi):=\{\,d\in I\ \mid\ (e,d)\in M(\varphi)\,\}\qquad(I=\{0,1\})`),
+                paragraph([
+                  "と置く（向き付き辺が台の辺と向きの対 ", math(String.raw`(e,d)`),
+                  " であることは ", ref("def_oriented_edges"), "）。",
+                  ref("def_moved_edge_support_set"), " により、",
+                  math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`), " と ",
+                  math(String.raw`M_e(\varphi)\ne\varnothing`), " は同値である。任意の ",
+                  math(String.raw`(e,d)\in M(\varphi)`), " は ",
+                  math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`), " かつ ",
+                  math(String.raw`d\in M_e(\varphi)`),
+                  " を満たし、逆も定義から従う。第 1 成分が相異なる二つの部分集合 ",
+                  math(String.raw`\{e\}\times M_e(\varphi)`),
+                  " は交わらないので、",
+                ]),
+                displayMath(String.raw`M(\varphi)=\bigcup_{e\in E_{\mathrm{supp}}(\varphi)}\{e\}\times M_e(\varphi)`),
+                paragraph([
+                  "は互いに素な合併である。さらに ", ref("def_doubled_edge_set"),
+                  " により ", math(String.raw`e\in D(\varphi)`), " と ",
+                  math(String.raw`M_e(\varphi)=I`), " は同値であり、",
+                  ref("def_single_traversal_edge_set"), " により ",
+                  math(String.raw`e\in E_1(\varphi)`), " ならば ",
+                  math(String.raw`M_e(\varphi)`),
+                  " はちょうど一つの元を持つ。したがって",
+                ]),
+                displayMath(String.raw`\lvert M_e(\varphi)\rvert=
+\begin{cases}
+2,&e\in D(\varphi),\\
+1,&e\in E_1(\varphi)
+\end{cases}`),
+                paragraph(["である。求めたい軌道の長さの総和から始める。"]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert
+&=\lvert M(\varphi)\rvert
+&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ の互いに素な分割。個数の加法性}\bigr)\\
+&=\sum_{e\in E_{\mathrm{supp}}(\varphi)}\lvert M_e(\varphi)\rvert
+&&\bigl(\because\ \text{準備の台の辺ごとの互いに素な合併。個数の加法性と }\lvert\{e\}\times M_e(\varphi)\rvert=\lvert M_e(\varphi)\rvert\bigr)\\
+&=\sum_{e\in D(\varphi)}\lvert M_e(\varphi)\rvert
+ +\sum_{e\in E_1(\varphi)}\lvert M_e(\varphi)\rvert
+&&\bigl(\because\ E_{\mathrm{supp}}(\varphi)=D(\varphi)\sqcup E_1(\varphi)\text{（\blkref{def_single_traversal_edge_set}）で有限和が分かれる}\bigr)\\
+&=\sum_{e\in D(\varphi)}2+\sum_{e\in E_1(\varphi)}1
+&&\bigl(\because\ \text{準備の }\lvert M_e(\varphi)\rvert\text{ の二場合}\bigr)\\
+&=2\,\lvert D(\varphi)\rvert+\lvert E_1(\varphi)\rvert
+&&\bigl(\because\ \text{定数の総和は個数との積（\blkref{def_cardinality_notation}）。}\mathbb N\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "第 1 行の等式が主張の第 1 の等号、残りの行の合成が第 2 の等号である。",
+                  "全過程は有限集合の数え上げと自然数の加法・乗法だけで閉じ、",
+                  "実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },
