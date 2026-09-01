@@ -58,6 +58,7 @@ export const ALL_LABELS = [
   "claim_displacement_is_direction_unit",
   "claim_distance_positive_on_fisher_zeros",
   "claim_distance_squared_zero_iff_equal",
+  "claim_doubled_edge_free_fiber_phase_reduction",
   "claim_dual_broken_edges_even",
   "claim_dual_broken_edges_winding_zero",
   "claim_dual_edge_map_bijective",

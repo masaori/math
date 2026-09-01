@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 95 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 96 回目の tick 時点）
+
+**反転対の無いファイバーでは位相反転部分集合が相殺し、位相寄与が接触の無い置換と回転差正負 $4$ の置換の和へ簡約されることを本文と SageMath で固定した（Lean 未着手）。** $D=\varnothing$ では `claim_unswitchable_standard_pair_forces_doubled_edge` の対偶により、接触を持つ置換の標準対は必ず切り替え可能である。したがってファイバーは、接触の無い部分、位相反転部分集合 $\mathcal B_L$、回転差 $-4$ と $4$ の部分集合の非交和になる。$\mathcal B_L$ 上では標準対平滑化が位相寄与の符号を反転する不動点の無い対合なので、その有限和は零である（`claim_doubled_edge_free_fiber_phase_reduction`）。SageMath `doubled-edge-free-fiber-phase-reduction` は $L=2$ の反転対の無い $32$ ファイバー、置換 $497$ 個を四集合へ分類し、四スピン構造で零和と簡約等式 $128$ 件を検査した。次は $D\ne\varnothing$ のファイバーに残る位相寄与を分類する。
+
+前進前レビューでは、前 tick の切り替え不能な標準対が反転対を強制する主張を本文・全数検算・今回の対偶による直接利用と照合した。反転対の無いファイバーで切り替え可能性を保証する非自明な内容を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「複素数の商の偏角」（`arg_of_quotient_of_complex_numbers`）で、証明末尾の参照一覧を各根拠行の行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変であり、姉妹側 check・linkage 118 検算・PDF 359 ページを通した。
+
+Lambda 側 check（900 ブロック）・linkage（397 検算）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 391 ページを通した。
+
+## ひとつ前の到達点（2026-09-02 の 95 回目の tick 時点）
 
 **切り替え不能な標準接触対が反転対の辺を強制することを本文と SageMath で固定した（Lean 未着手）。** $L\ge2$ では、端点写像の定義（列または行だけを $\bar1$ 進める）と $\bar1\ne\bar0$ から全向き付き辺の始点と終点が相異なる。標準接触対 $\{\vec e,\vec f\}$ が切り替え不能なとき、四不等式判定（`claim_contact_pair_switchability_criterion`）の破れのうち像が他方自身になる二等式は、非後退性 $\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)$ と接触から始点と終点の一致を強いて起こらない。よって反転像の障害だけが残り、`claim_standard_contact_obstruction_witnesses_doubled_edge` により $p(\vec e)\in D(\varphi)$ または $p(\vec f)\in D(\varphi)$、とくに $D(\varphi)\ne\varnothing$ である（`claim_unswitchable_standard_pair_forces_doubled_edge`）。対偶として、反転対の無いファイバーでは接触対を持つ置換の標準対は常に切り替え可能で $\varphi\in\mathcal A_L$ である。SageMath `unswitchable-standard-pair-forces-doubled-edge` は $L=2$ の全向き付き辺の端点相異と、切り替え不能な標準対を持つ置換 $18{,}755$ 個の全数で反転対の強制を検査した。次は反転対の無いファイバーの位相寄与 $\mathcal K^{a,b}_L(\varnothing,E)$ を、接触の無い置換と回転差正負 4 の置換の和へ簡約する。
 
