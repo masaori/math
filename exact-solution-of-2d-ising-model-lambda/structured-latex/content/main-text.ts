@@ -52595,6 +52595,142 @@ S(S(\varphi))
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_phase_reversing_contact_smoothing",
+        labels: [],
+        title: { text: "位相寄与の符号を反転する接触平滑化" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_contact_smoothing_phase_reversal_iff",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_nonbacktracking_permutation_phase_contribution",
+                  kind: "definition",
+                  title: { text: "非後退置換一つの位相寄与" },
+                  labels: ["def_nonbacktracking_permutation_phase_contribution"],
+                  habitat: "Qbar",
+                  statement: [
+                    paragraph([
+                      math(String.raw`(a,b)\in\mathcal S`), " と ",
+                      math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " に対し、",
+                    ]),
+                    displayMath(String.raw`\mathcal W^{a,b}_L(\varphi):=
+\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}\right)
+\in\overline{\mathbb Q}`),
+                    paragraph([
+                      "と定める。軌道族は ", ref("def_moved_orbit_family"), "、遷移成分は ",
+                      ref("def_kac_ward_transition_matrices"), " である。有限積だけで定まり、",
+                      ref("def_fiber_phase_weight"), " の各加数として繰り返し引く。実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_phase_reversing_contact_pair",
+                  kind: "definition",
+                  title: { text: "位相反転接触対" },
+                  labels: ["def_phase_reversing_contact_pair"],
+                  habitat: "Z",
+                  statement: [
+                    paragraph([
+                      math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " の切り替え可能な接触対 ",
+                      math(String.raw`\{\vec e,\vec f\}`), "（", ref("def_switchable_permutation_contact_pair"),
+                      "）が位相反転接触対であるとは、整数の等式",
+                    ]),
+                    displayMath(String.raw`\tau\bigl(\vec e,\varphi(\vec e)\bigr)
++\tau\bigl(\vec f,\varphi(\vec f)\bigr)
+=\tau\bigl(\vec e,\varphi(\vec f)\bigr)
++\tau\bigl(\vec f,\varphi(\vec e)\bigr)`),
+                    paragraph([
+                      "が成り立つことと定める。一歩の回転数は ", ref("def_step_turning"), " である。",
+                      "二辺を交換しても両辺が同時に入れ替わるので、二元部分集合の元の並べ方に依らない。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_contact_smoothing_phase_reversal_iff",
+              kind: "claim",
+              title: { text: "接触平滑化が位相寄与の符号を反転するための必要十分条件" },
+              labels: ["claim_contact_smoothing_phase_reversal_iff"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/contact-smoothing-phase-reversal"],
+              statement: [
+                paragraph([
+                  math(String.raw`(a,b)\in\mathcal S`), "、",
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " と、その切り替え可能な接触対 ",
+                  math(String.raw`\{\vec e,\vec f\}`), " を取り、",
+                  math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
+                  "（", ref("def_permutation_contact_smoothing"), "）と置く。このとき",
+                ]),
+                displayMath(String.raw`\mathcal W^{a,b}_L(\psi)=-\mathcal W^{a,b}_L(\varphi)`),
+                paragraph([
+                  "が成り立つことと、", math(String.raw`\{\vec e,\vec f\}`), " が位相反転接触対（",
+                  ref("def_phase_reversing_contact_pair"), "）であることは同値である。",
+                  "この条件はスピン構造に依らない。したがって、切り替え可能性だけから符号反転を結論してはならない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`m:=\lvert M(\varphi)\rvert=\lvert M(\psi)\rvert\in\mathbb N`),
+                  " と置く（", ref("claim_switchable_contact_smoothing_preserves_fiber"), "）。",
+                  math(String.raw`t_{\vec e,\vec f}`), " を二辺だけの互換とすると、平滑化の定義から ",
+                  math(String.raw`\psi=\varphi\circ t_{\vec e,\vec f}`), " である。ゆえに",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\psi)
+&=\operatorname{sgn}(\varphi)\operatorname{sgn}(t_{\vec e,\vec f})
+&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
+&=-\operatorname{sgn}(\varphi)
+&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。さらに ", ref("claim_permutation_sign_moved_orbit_product"),
+                  " と有限積の並べ替えから、任意の非後退置換 ", math(String.raw`\eta`), " について",
+                ]),
+                displayMath(String.raw`\mathcal W^{a,b}_L(\eta)
+=(-1)^{\lvert M(\eta)\rvert}\operatorname{sgn}(\eta)
+\prod_{\vec g\in M(\eta)}M^{a,b}_{\vec g,\eta(\vec g)}`),
+                paragraph([
+                  "となる。平滑化で変わる二因子だけを取り出す。整数",
+                ]),
+                displayMath(String.raw`\Delta:=
+\tau(\vec e,\varphi(\vec e))+\tau(\vec f,\varphi(\vec f))
+-\tau(\vec e,\varphi(\vec f))-\tau(\vec f,\varphi(\vec e))`),
+                paragraph(["と置くと、"]),
+                displayMath(String.raw`\begin{aligned}
+M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
+&=M^{a,b}_{\vec e,\varphi(\vec e)}M^{a,b}_{\vec f,\varphi(\vec f)}\,\zeta_8^{-\Delta}
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices}\text{、ねじれ符号の二因子の交換、代数的数の指数法則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。", ref("claim_reconnection_turning_difference"), " により ",
+                  math(String.raw`\Delta\in\{-4,0,4\}`), " である。", ref("def_rotation_phase"),
+                  " の ", math(String.raw`\zeta_8^4=-1`), " から、",
+                  math(String.raw`\Delta=0`), " のときだけ ", math(String.raw`\zeta_8^{-\Delta}=1`),
+                  " であり、", math(String.raw`\Delta=\pm4`), " では ",
+                  math(String.raw`\zeta_8^{-\Delta}=-1`), " である。置換符号の反転とこの二因子の変化を上の ",
+                  math(String.raw`\mathcal W`), " の表示へ代入すると、",
+                  math(String.raw`\Delta=0`), " のときだけ位相寄与の符号が反転する。これは ",
+                  ref("def_phase_reversing_contact_pair"), " の等式そのものである。全過程は整数と代数的数の有限演算だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_signed_selection_stratification",
         labels: [],
         title: { text: "符号付き偶部分グラフ多項式の平方の選択集合による層別" },

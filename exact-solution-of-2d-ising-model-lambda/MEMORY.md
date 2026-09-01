@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 89 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 90 回目の tick 時点）
+
+**接触平滑化が非後退置換一つの位相寄与を符号反転するための必要十分条件を、本文と SageMath で固定した（Lean 未着手）。** 非後退置換一つの位相寄与 $\mathcal W^{a,b}_L(\varphi)$ と、二接続の平滑化前後の回転数和が等しい位相反転接触対を定義した（`def_nonbacktracking_permutation_phase_contribution`・`def_phase_reversing_contact_pair`）。`claim_contact_smoothing_phase_reversal_iff` は、像の交換で置換符号が反転する一方、二つの遷移成分の積には局所回転差 $\Delta\in\{-4,0,4\}$ に応じて $\zeta_8^{-\Delta}$ が掛かることから、$\Delta=0$ の場合だけ位相寄与が符号反転し、$\Delta=\pm4$ では位相寄与が不変であることを示す。SageMath `contact-smoothing-phase-reversal` は $L=2$ の切り替え可能接触対 $192{,}896$ 件×四スピン構造を厳密検査し、回転差零 $140{,}416$ 件、回転差 $-4,4$ 各 $26{,}240$ 件を得た。前 tick の標準対が切り替え可能な置換 $11{,}980$ 個では、符号反転するものは $4{,}748$ 個だけで、残りは回転差 $-4,4$ 各 $3{,}616$ 個だった。次は平滑化で不変な規則により位相反転接触対を選べる部分集合を切り出す。
+
+前進前レビューでは、前 tick の標準接触対・その平滑化不変性・ファイバー保存対合を本文・SageMath・今回の位相寄与の直接計算と照合した。有限集合上の標準対と対合という実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「フーリエ変換した $Z,Y$ の反交換関係」で、二本の式変形鎖が引く四つの既証明を証明末尾の参照一覧から各行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変である。
+
+Lambda 側 check（886 ブロック）・linkage（391 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 387 ページを通した。姉妹側 check・linkage（118 検算）・PDF 358 ページも通した。
+
+## ひとつ前の到達点（2026-09-02 の 89 回目の tick 時点）
 
 **切り替え可能に限らない全接触対の辞書式最小を標準接触対と定め、標準対での平滑化が不動点の無いファイバー保存対合であることを本文と SageMath で固定した（Lean 未着手）。** 接触対の集合 $\operatorname{Ct}(\varphi)$ は動かす辺集合 $M(\varphi)$ と置換に依らない終点写像だけで書かれるため、切り替え可能な接触対での平滑化（$M$ を保つ）で不変であり、辞書式最小 $\operatorname{ct}_{\min}(\varphi)$ も不変である（`def_standard_contact_pair`・`claim_contact_pair_set_smoothing_invariant`）。前 tick の反例（切り替え可能な対に限った最小化は保存されない）は、最小を取る範囲を全接触対へ広げることで回避された。標準対が切り替え可能な置換の集合 $\mathcal A_L$ の上で、$S(\varphi)=\operatorname{Sm}_{\operatorname{ct}_{\min}(\varphi)}(\varphi)$ は $\mathcal A_L$ に留まり、二回適用で元へ戻り、不動点を持たず、各ファイバー $\mathcal N_L(D,E)$ を保つ（`claim_standard_contact_smoothing_involution`）。SageMath `standard-contact-smoothing-involution` は $L=2$ の接触対を持つ置換 $30{,}735$ 個で不変性 $192{,}896$ 件と $\mathcal A_L$ の $11{,}980$ 個の対合・不動点なし・ファイバー保存を全数検査した。接触対を持つが標準対が切り替え可能でない置換が $18{,}755$ 個残る。次は平滑化が位相付き寄与の符号を反転することを示し、この残りの扱いを決めて、各添字の $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ と平方恒等式へ合成する。
 

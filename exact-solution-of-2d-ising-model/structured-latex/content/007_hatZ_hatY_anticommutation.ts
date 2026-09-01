@@ -81,7 +81,7 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 [\hat{Z}_\mu^{(\pm)}, \hat{Z}_\nu^{(\pm)}]_+
 &= \left[\sum_{j=1}^M \varepsilon^{(\pm)}_j Z_j\exp\!\left(-i \frac{2\pi j\mu}{M}\right),\ \sum_{k=1}^M \varepsilon^{(\pm)}_k Z_k\exp\!\left(-i \frac{2\pi k\nu}{M}\right)\right]_+
-&&(\because\ \hat{Z}^{(\pm)}_\mu\ \text{の定義、および上で置いた記号}) \\
+&&(\because\ \blkref{def_hatZ_hatY}\ \text{と上で置いた記号}) \\
 &= \left(\sum_{j=1}^M \varepsilon^{(\pm)}_j Z_j\exp\!\left(-i \frac{2\pi j\mu}{M}\right)\right)\left(\sum_{k=1}^M \varepsilon^{(\pm)}_k Z_k\exp\!\left(-i \frac{2\pi k\nu}{M}\right)\right) \\
 &\quad + \left(\sum_{k=1}^M \varepsilon^{(\pm)}_k Z_k\exp\!\left(-i \frac{2\pi k\nu}{M}\right)\right)\left(\sum_{j=1}^M \varepsilon^{(\pm)}_j Z_j\exp\!\left(-i \frac{2\pi j\mu}{M}\right)\right)
 &&(\because\ \text{反交換子の定義}) \\
@@ -93,31 +93,17 @@ export default defineBlocks([
 &= \sum_{j,k=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_k\exp\!\left(-i\frac{2\pi}{M}(j\mu+k\nu)\right)[Z_j, Z_k]_+
 &&(\because\ \text{反交換子の定義}) \\
 &= \sum_{j,k=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_k\exp\!\left(-i\frac{2\pi}{M}(j\mu+k\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\,\delta^M_{(j,k)}
-&&(\because\ Z\ \text{と}\ Y\ \text{の反交換関係の第 1 式}) \\
+&&(\because\ \blkref{anticommutator_of_Z_and_Y}\ \text{の第 1 式}) \\
 &= \sum_{j=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_j\exp\!\left(-i\frac{2\pi}{M}(j\mu+j\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
-&&(\because\ \text{クロネッカーのデルタの定義により}\ k\neq j\ \text{の項が消える}) \\
+&&(\because\ \blkref{def_delta_M}\ \text{により}\ k\neq j\ \text{の項が消える}) \\
 &= \sum_{j=1}^M \exp\!\left(-i\frac{2\pi}{M}(j\mu+j\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
 &&(\because\ \varepsilon^{(\pm)}_j \in \{+1,-1\}\ \text{なので}\ \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_j = 1) \\
 &= \sum_{j=1}^M \exp\!\left(-i\frac{2\pi j}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}
 &&(\because\ j\mu+j\nu = j(\mu+\nu)) \\
 &= 2M\,\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
-&&(\because\ \text{1 の冪根の総和の公式を}\ k=-(\mu+\nu)\ \text{で使った})
+&&(\because\ \blkref{exp_sum}\ \text{を}\ k=-(\mu+\nu)\ \text{で使った})
 \end{aligned}`,
       ),
-      paragraph([
-        "この鎖で引いたブロックは ",
-        ref("def_hatZ_hatY"),
-        "（第 1 段）、",
-        ref("anticommutator_of_Z_and_Y"),
-        "（第 6 段）、",
-        ref("def_delta_M"),
-        "（第 7 段）、",
-        ref("exp_sum"),
-        "（第 10 段）である",
-        "（この生成器は数式の中からブロックを引く手段を持たないので、行末の ",
-        math(String.raw`(\because\ \dots)`),
-        " には題を書き、参照をここに置いた）。",
-      ]),
       paragraph([
         math(String.raw`[\hat{Z}_\mu^{(\pm)}, \hat{Z}_\nu^{(\mp)}]_+`),
         " の計算に入る前に、2 つの符号の積の値を求めておく。",
@@ -175,17 +161,9 @@ export default defineBlocks([
 &&(\because\ j\mu+j\nu = j(\mu+\nu)) \\
 &= 2M\,\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
  + \left(-2\exp\!\left(-i\frac{2\pi}{M}(\mu+\nu)\right)\cdot 2I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
-&&(\because\ \text{1 の冪根の総和の公式を}\ k=-(\mu+\nu)\ \text{で使った})
+&&(\because\ \blkref{exp_sum}\ \text{を}\ k=-(\mu+\nu)\ \text{で使い、}\blkref{def_delta_M}\text{ で書いた})
 \end{aligned}`,
       ),
-      paragraph([
-        "この鎖で引いたブロックは ",
-        ref("def_delta_M"),
-        "（第 7 段）、",
-        ref("exp_sum"),
-        "（第 7 段）である",
-        "（第 1 段が引くブロックは第 1 式の鎖と同じである）。",
-      ]),
       paragraph([
         math(String.raw`[\hat{Z}_\mu^{(\pm)}, \hat{Y}_\nu]_+`),
         "、",
