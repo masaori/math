@@ -1,6 +1,6 @@
-# SageMath Check: 頂点単純閉路の循環総回転数（観察）
+# SageMath Check: 頂点単純閉路の循環総回転数と切断線偶奇
 
-**対象ラベル**: `def_cyclic_total_turning`, `claim_plane_simple_polygon_cyclic_turning`
+**対象ラベル**: `claim_vertex_simple_cycle_turning_by_seam_parity`, `claim_plane_simple_polygon_cyclic_turning`
 
 一辺 $L=2,3,4$ の周期正方格子で、通過の頂点が相異なる（接触対数零の）閉じた
 非後退辺列を、頂点の相異なりで刈り込む深さ優先探索で全列挙し（基点と向きを
@@ -8,8 +8,8 @@
 $(h(\gamma)\bmod2,\ v(\gamma)\bmod2)$ を突き合わせた。
 
 - 実行: `sage sagemath/check/vertex-simple-cycle-turning/check.sage`
-- 状態: PASS（2026-08-31）
-- 結果: 全 $373{,}716$ 本（基点・向きを区別）で、次の候補（離散 Whitney の言明）が
+- 状態: PASS（2026-09-01）
+- 結果: 全 $373{,}716$ 本（基点・向きを区別）で、次の離散 Whitney の言明が
   例外なく成り立った。
   - 切断線偶奇が $(0,0)$ の頂点単純閉路（$73{,}616$ 本）は
     整数巻き付きベクトルそのものが $(0,0)$ であり、
@@ -22,6 +22,8 @@ $(h(\gamma)\bmod2,\ v(\gamma)\bmod2)$ を突き合わせた。
   $-x^{|C|}\zeta_8^{\,t_{\circ}}$ の符号が切断線偶奇だけで決まる。
   整数巻き付きベクトルが零の場合は本文の
   `claim_plane_simple_polygon_cyclic_turning` で一般の $L$ について証明済みである。
-  零でない原始的巻き付きの場合は、周期単純路についての後続の証明候補である。
+  零でない原始的巻き付きの場合は本文の
+  `claim_nonzero_winding_simple_cycle_turning_zero` で一般の $L$ について証明済みであり、
+  二場合の合成が `claim_vertex_simple_cycle_turning_by_seam_parity` である。
 
 すべて整数の加法と有限集合の数え上げの厳密計算であり、浮動小数点は使っていない。

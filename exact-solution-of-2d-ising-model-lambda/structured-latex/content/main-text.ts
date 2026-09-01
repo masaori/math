@@ -60642,6 +60642,97 @@ a+3\cdot b&=t_{\circ}(\Gamma_2)+t_{\circ}(\gamma)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_vertex_simple_cycle_turning_by_seam_parity",
+        labels: [],
+        title: { text: "頂点単純閉路の循環総回転数と切断線偶奇" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_vertex_simple_cycle_turning_by_seam_parity",
+            focus: {
+              id: "kac_ward_claim_vertex_simple_cycle_turning_by_seam_parity",
+              kind: "claim",
+              title: { text: "頂点単純閉路の循環総回転数は切断線偶奇で決まる" },
+              labels: ["claim_vertex_simple_cycle_turning_by_seam_parity"],
+              habitat: "Z",
+              verification: ["sagemath/check/vertex-simple-cycle-turning"],
+              statement: [
+                paragraph([
+                  "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）が、通過の頂点が相異なる、すなわち ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
+                  "）を満たすとする。切断線偶奇（", ref("def_edge_sequence_seam_parities"),
+                  "）と循環総回転数（", ref("def_cyclic_total_turning"), "）について",
+                ]),
+                displayMath(String.raw`\begin{cases}
+t_{\circ}(\gamma)\in\{4,-4\},&\bigl(h(\gamma),v(\gamma)\bigr)=(0,0),\\
+t_{\circ}(\gamma)=0,&\bigl(h(\gamma),v(\gamma)\bigr)\ne(0,0)
+\end{cases}`),
+                paragraph([
+                  "が成り立つ。従って、頂点単純閉路の循環総回転数は二つの切断線偶奇だけで上の二場合に分かれる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず ", math(String.raw`\bigl(h(\gamma),v(\gamma)\bigr)=(0,0)`),
+                  " とする。整数巻き付き数の偶奇（", ref("claim_directed_winding_parity"), "）により、",
+                  math(String.raw`w_{\mathrm h}(\gamma)`), " と ", math(String.raw`w_{\mathrm v}(\gamma)`),
+                  " はともに偶数である。一方、頂点単純閉路の巻き付きベクトル（",
+                  ref("claim_vertex_simple_winding_zero_or_primitive"), "）により、巻き付きベクトルは零または原始的である。",
+                ]),
+                paragraph([
+                  "零でない原始的な場合を仮定する。二つの巻き付き数は偶数なので、整数 ",
+                  math(String.raw`r,s\in\mathbb Z`), " を",
+                ]),
+                displayMath(String.raw`w_{\mathrm h}(\gamma)=2r,\qquad w_{\mathrm v}(\gamma)=2s`),
+                paragraph([
+                  "で取る。原始性の Bézout 条件（", ref("def_primitive_integer_pair"), "）により、ある ",
+                  math(String.raw`a,b\in\mathbb Z`), " について",
+                ]),
+                displayMath(String.raw`w_{\mathrm h}(\gamma)b-w_{\mathrm v}(\gamma)a\in\{1,-1\}`),
+                paragraph(["となる。しかし左辺は"]),
+                displayMath(String.raw`\begin{aligned}
+w_{\mathrm h}(\gamma)b-w_{\mathrm v}(\gamma)a
+&=2rb-2sa
+&&\bigl(\because\ w_{\mathrm h}(\gamma)=2r,\ w_{\mathrm v}(\gamma)=2s\bigr)\\
+&=2(rb-sa)
+&&\bigl(\because\ \mathbb Z\text{ の分配則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "で偶数であり、", math(String.raw`1`), " または ", math(String.raw`-1`),
+                  " にはならない。従って原始的な場合は排除され、",
+                  math(String.raw`\bigl(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)\bigr)=(0,0)`),
+                  " である。さらに ", ref("claim_vertex_simple_plane_lift_points_distinct"),
+                  " により一周期の持ち上げ点は二つずつ相異なるので、",
+                  ref("claim_plane_simple_polygon_cyclic_turning"), " を適用して",
+                ]),
+                displayMath(String.raw`t_{\circ}(\gamma)\in\{4,-4\}`),
+                paragraph([
+                  "を得る。次に ", math(String.raw`\bigl(h(\gamma),v(\gamma)\bigr)\ne(0,0)`),
+                  " とする。巻き付きベクトルが零なら、", ref("claim_directed_winding_parity"), " により",
+                ]),
+                displayMath(String.raw`\bigl(h(\gamma),v(\gamma)\bigr)
+=\bigl(w_{\mathrm h}(\gamma)\bmod2,w_{\mathrm v}(\gamma)\bmod2\bigr)
+=(0,0)`),
+                paragraph([
+                  "となって仮定に反する。従って巻き付きベクトルは零でない。",
+                  ref("claim_nonzero_winding_simple_cycle_turning_zero"), " を適用して",
+                ]),
+                displayMath(String.raw`t_{\circ}(\gamma)=0`),
+                paragraph([
+                  "を得る。二場合を合わせて主張が従う。全過程は有限列・整数の偶奇・Bézout の整数等式だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

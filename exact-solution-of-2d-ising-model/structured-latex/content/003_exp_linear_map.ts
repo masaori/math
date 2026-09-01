@@ -1058,9 +1058,18 @@ C_N := \sum_{k=0}^{N}\frac{1}{k!}(A+B)^k`,
         math(String.raw`m`),
         " に関する帰納法で示す。",
         math(String.raw`m=0`),
-        " のときは ",
-        math(String.raw`AI=A=IA`),
-        "。",
+        " のときは",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+AI
+&= A
+&&(\because\ I\ \text{は単位行列である})\\
+&= IA
+&&(\because\ I\ \text{は単位行列である})
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`m`),
         " で成り立つとすると、",
       ]),
@@ -1399,6 +1408,9 @@ S_NT_N
         "部分和の差の評価では、実数の指数関数の加法定理 e^a e^b = e^(a+b) を使わずに済むよう、" +
           "j+l>N かつ j,l<=N なら j または l が N/2 より大きいことを用いて剰余の積で抑える経路をとった" +
           "（labels: real_exp_series_converges の剰余評価のみで完結する）。",
+        "2026-09-01 の式変形統一で、Step 1 の帰納法の初期値にあった一行三等号 " +
+          "AI=A=IA を、単位行列を根拠とする二段の行末根拠つきの鎖へ開いた。" +
+          "内容・式変形・根拠・ラベル参照は変えていない。",
       ],
     },
   },

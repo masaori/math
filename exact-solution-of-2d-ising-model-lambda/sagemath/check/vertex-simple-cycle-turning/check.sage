@@ -1,13 +1,13 @@
 """頂点単純な閉じた非後退辺列の循環総回転数を全列挙で厳密観察する。
 
 対象:
-- def_cyclic_total_turning（観察。証明すべき候補の確定）
+- claim_vertex_simple_cycle_turning_by_seam_parity
 - claim_plane_simple_polygon_cyclic_turning
 一辺 L=2,3,4 のトーラスで、通過の頂点が相異なる（接触対数零の）閉じた
 非後退辺列を、頂点の相異なりで刈り込む深さ優先探索で全列挙し、
 循環総回転数 t∘(γ) と切断線偶奇 (h(γ) mod 2, v(γ) mod 2) を突き合わせる。
 
-観察する候補（離散 Whitney の言明）:
+検査する離散 Whitney の言明:
 - 切断線偶奇が (0,0) の頂点単純閉路は t∘(γ) ∈ {+4, -4}
 - 切断線偶奇が (0,0) 以外の頂点単純閉路は t∘(γ) = 0
 

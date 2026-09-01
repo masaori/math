@@ -49,7 +49,7 @@ export default defineNotes([
   {
     id: "note_kac_ward_definition_cyclic_total_turning_vertex_simple_observation",
     targets: ["def_cyclic_total_turning"],
-    title: { text: "頂点単純閉路の循環総回転数（観察と証明すべき候補の確定）" },
+    title: { text: "頂点単純閉路の循環総回転数（証明前の有限標本観察）" },
     body: [
       paragraph([
         "検証水準の計算として、一辺 ", math(String.raw`L=2,3,4`),
@@ -60,12 +60,13 @@ export default defineNotes([
         " を突き合わせた（sagemath/check/vertex-simple-cycle-turning）。",
       ]),
       paragraph([
-        "結果、次の候補（離散 Whitney の言明）が例外なく成り立った。切断線偶奇が ",
+        "結果、次の離散 Whitney の言明が例外なく成り立った。切断線偶奇が ",
         math(String.raw`(0,0)`), " の頂点単純閉路（", math(String.raw`73{,}616`),
         " 本）は ", math(String.raw`t_{\circ}(\gamma)\in\{+4,-4\}`),
         "。切断線偶奇が ", math(String.raw`(0,0)`), " 以外の頂点単純閉路（",
         math(String.raw`300{,}100`), " 本）は ", math(String.raw`t_{\circ}(\gamma)=0`),
-        "。",
+        "。この観察は本文の「頂点単純閉路の循環総回転数は切断線偶奇で決まる」で",
+        "一般の一辺長について証明済みである。",
       ]),
       paragraph([
         "整数巻き付きベクトルが零の場合は、本文の平面持ち上げと有限セルの二重計数により一般の ",
@@ -75,8 +76,8 @@ export default defineNotes([
         " である。零でない原始的巻き付きの場合の ",
         math(String.raw`t_{\circ}(\gamma)=0`), " と回転位相 ",
         math(String.raw`+1`),
-        " は、周期単純路について次に証明する候補として残る。有限標本（",
-        math(String.raw`L=2,3,4`), "）の観察はこの両方を検査している。",
+        " も周期単純路の一側閉包と三周期比較により証明済みである。有限標本（",
+        math(String.raw`L=2,3,4`), "）の観察は証明された二場合の両方を検査している。",
       ]),
     ],
   },
