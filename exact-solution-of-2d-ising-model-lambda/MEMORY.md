@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 88 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 89 回目の tick 時点）
+
+**切り替え可能に限らない全接触対の辞書式最小を標準接触対と定め、標準対での平滑化が不動点の無いファイバー保存対合であることを本文と SageMath で固定した（Lean 未着手）。** 接触対の集合 $\operatorname{Ct}(\varphi)$ は動かす辺集合 $M(\varphi)$ と置換に依らない終点写像だけで書かれるため、切り替え可能な接触対での平滑化（$M$ を保つ）で不変であり、辞書式最小 $\operatorname{ct}_{\min}(\varphi)$ も不変である（`def_standard_contact_pair`・`claim_contact_pair_set_smoothing_invariant`）。前 tick の反例（切り替え可能な対に限った最小化は保存されない）は、最小を取る範囲を全接触対へ広げることで回避された。標準対が切り替え可能な置換の集合 $\mathcal A_L$ の上で、$S(\varphi)=\operatorname{Sm}_{\operatorname{ct}_{\min}(\varphi)}(\varphi)$ は $\mathcal A_L$ に留まり、二回適用で元へ戻り、不動点を持たず、各ファイバー $\mathcal N_L(D,E)$ を保つ（`claim_standard_contact_smoothing_involution`）。SageMath `standard-contact-smoothing-involution` は $L=2$ の接触対を持つ置換 $30{,}735$ 個で不変性 $192{,}896$ 件と $\mathcal A_L$ の $11{,}980$ 個の対合・不動点なし・ファイバー保存を全数検査した。接触対を持つが標準対が切り替え可能でない置換が $18{,}755$ 個残る。次は平滑化が位相付き寄与の符号を反転することを示し、この残りの扱いを決めて、各添字の $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ と平方恒等式へ合成する。
+
+Lambda 側 check（882 ブロック）・linkage（390 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 386 ページを通した。
+
+前進前レビューでは、前 tick の反例ノートと検算 `lexicographic-switchable-contact-choice-counterexample` を本文の対合性の主張・台帳・本文末尾と照合した。不採用経路の理由の記録という実質を持ち、「何も言っていない主張」や記号・住処・参照・検算の不一致は無かった。
+
+## ひとつ前の到達点（2026-09-02 の 88 回目の tick 時点）
 
 **辞書式最小の切り替え可能接触対を標準対とする候補は、平滑化の前後で選択結果が保存されないため採用しないことを固定した。** 同じ対での平滑化は `claim_contact_smoothing_same_pair_involution` により対合だが、その対と一辺を共有する別の接触対の切り替え可能性が変わり得る。SageMath `lexicographic-switchable-contact-choice-counterexample` は $L=2$ の切り替え可能な接触対を持つ非後退置換 $29{,}905$ 個を全数検査し、$7{,}935$ 個で辞書式最小対が変わることを確認した。不採用理由は `notes/kac-ward.ts` に残した。次は単なる最小化を使わず、平滑化で不変な局所データから標準対を選ぶ規則を構成する。
 
