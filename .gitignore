@@ -31,3 +31,6 @@ countable-core-of-3d-ising/logs/
 
 # セルオートマトン研究: 生成成果物
 cellular-automata-statistical-mechanics/structured-latex/build/
+
+# Python の実行時キャッシュ（sagemath/tools の単体試験が生成する）
+__pycache__/

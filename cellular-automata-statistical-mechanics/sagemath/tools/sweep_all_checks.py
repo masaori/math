@@ -13,6 +13,7 @@
 import argparse
 import fcntl
 import json
+import math
 import os
 import subprocess
 import sys
@@ -159,8 +160,12 @@ def summarize_results(files, outdir, jobs, codes, timeout):
             invalid_records.append(record)
             continue
         seconds = record.get('seconds')
+        # NaN と Infinity は JSON の既定の構文で書けるうえ、NaN はどの比較も偽になるため
+        # 所要時間の並べ替えを静かに壊し、余裕の倍率も無限大として印字されてしまう。
+        # 所要時間として意味を持つのは有限で非負の数だけなので、ここで弾く。
         if (not isinstance(seconds, (int, float))
                 or isinstance(seconds, bool)
+                or not math.isfinite(seconds)
                 or seconds < 0):
             invalid_records.append(record)
             continue
