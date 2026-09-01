@@ -56724,7 +56724,7 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
             focus: {
               id: "kac_ward_claim_vertex_surrounding_cells_form_parity_arcs",
               kind: "claim",
-              title: { text: "頂点単純閉路の各訪問頂点で内側セルと外側セルはそれぞれ一つの弧をなす" },
+              title: { text: "持ち上げ点が相異なる閉路の各訪問頂点で内側セルと外側セルはそれぞれ一つの弧をなす" },
               labels: ["claim_vertex_surrounding_cells_form_parity_arcs"],
               habitat: "N",
               verification: ["sagemath/check/vertex-surrounding-cells-parity-arcs"],
