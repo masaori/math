@@ -1,6 +1,6 @@
 # 対象ラベル: claim_walk_side_interior_band_edge_connected
 #
-# 頂点単純な閉じた非後退単位格子歩について、歩道沿いの内側帯
+# 一周期の持ち上げ点が二つずつ相異なる零巻き付きの閉じた非後退辺列について、歩道沿いの内側帯
 # （訪問頂点を四隅に持つ内側セルの集合）が空でなく辺連結であることを
 # ZZ の有限数え上げで検査する。あわせて証明の部品である
 # 各訪問頂点の内側セル集合 A_j の非空性と、隣り合う訪問頂点の
@@ -14,6 +14,8 @@ max_length = 10
 checked_walks = 0
 checked_bridges = 0
 checked_band_cells = 0
+torus_sizes = (ZZ(1), ZZ(2), ZZ(3))
+contact_walks = {size: 0 for size in torus_sizes}
 
 
 def add(point, step):
@@ -123,7 +125,23 @@ for length in range(4, max_length + 1):
 
         checked_walks += 1
 
+        for size in torus_sizes:
+            torus_vertices = [(point[0] % size, point[1] % size) for point in points[:-1]]
+            contact_pairs = ZZ(sum(
+                1
+                for first in range(len(torus_vertices))
+                for second in range(first + 1, len(torus_vertices))
+                if torus_vertices[first] == torus_vertices[second]
+            ))
+            if contact_pairs > 0:
+                contact_walks[size] += 1
+
+for size in torus_sizes:
+    assert contact_walks[size] > 0
+
 print(
-    f"PASS: vertex-simple closed nonbacktracking walks={checked_walks}, "
-    f"bridges={checked_bridges}, band cells={checked_band_cells}, length<=%d" % max_length
+    f"PASS: lift-point-distinct closed nonbacktracking walks={checked_walks}, "
+    f"bridges={checked_bridges}, band cells={checked_band_cells}, length<=%d, " % max_length
+    + "walks with n_ct>0 after projection: "
+    + ", ".join("L=%s: %s" % (size, contact_walks[size]) for size in torus_sizes)
 )
