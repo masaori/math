@@ -1029,6 +1029,58 @@
       "mainTheoremEntryId": "evensectorT_claim_V1_plus_square_root",
       "boundaryEvidence": "章内依存順54で偶セクター生成子 H1^{(+)} から半指数行列を定義し、順55で可換な行列指数関数の積公式と V1^{(+)} の定義を使って、その二乗が V1^{(+)} に等しいことを示す。二項は一方向の依存鎖をなし、平方根性で閉じる。直後の順56は半指数行列の定義だけを再利用して V2 と挟み、偶セクター転送行列 V^{(+)} を定義するが、順55の平方根性には依存しない。順56では転送行列の記号を入力へ追加し、偶セクター生成子、指数関数の積公式、V1^{(±)} の一般定義を直接入力から外すため、順55の後で節を閉じる。生成時に二項の連続性、全直接依存、対象と全外部入力の本文 fingerprint、順55への一意な閉包、順56の直接依存・本文・順55からの非依存、および入力集合の切り替わりを固定検査する。",
       "readabilityStatus": "定義は一つの有限複素行列だけを定め、平方根性は同じ行列指数関数を二回掛ける計算を一段ずつ示しているため、対象二項は現行の説明粒度検査に合格している。外部入力では複素数、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
+    },
+    {
+      "name": "偶セクター転送行列と符号付きトレースの正値公式",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・対象本文粒度合格・外部入力粒度未解決",
+      "entryIds": [
+        "evensectorT_definition_V_plus",
+        "closing_006_theorem_trace_of_epsilon_V_plus"
+      ],
+      "input": [
+        "V1^{(+)} の半指数行列と V2",
+        "全スピン反転行列、開鎖項、周期境界項の配置基底上の作用と可換性",
+        "配置基底上の対角指数、有限行列のトレース、および開鎖イジング模型の有限和公式"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "bridge_001_definition_config_basis",
+        "closing_005_definition_open_chain_spin_energy",
+        "closing_005_claim_open_chain_endpoint_product_sum",
+        "closing_005_claim_open_chain_partition_sum",
+        "closing_005_claim_open_chain_spin_sums_positive",
+        "transfer_matrix_001_definition_symbols",
+        "bridge_006_claim_V2_component_equals_pauli",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "transfer_matrix_007_definition_V1_pm",
+        "bridge_010_claim_epsilon_commutes",
+        "transfer_matrix_011_definition_H1_H2",
+        "closing_definition_D0_open_chain_operator",
+        "closing_definition_G_boundary_operator",
+        "closing_004_claim_H1_plus_in_sigma_z_form",
+        "closing_claim_D0_G_diagonal_action",
+        "closing_claim_epsilon_D0_G_pairwise_commute",
+        "closing_claim_epsilon_G_is_involution",
+        "evensectorT_definition_V1_plus_square_root",
+        "eigenvalues_of_V_001_definition_trace",
+        "eigenvalues_of_V_002_claim_trace_properties",
+        "exp_linear_map_000a_claim_real_exp_series_converges",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "bridge_003_claim_exp_of_diagonal",
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+        "transfer_matrix_005_definition_end_isomorphism"
+      ],
+      "output": [
+        "偶セクター転送行列 V^{(+)} の定義",
+        "符号付きトレース tr(εV^{(+)}) の厳密な正値公式"
+      ],
+      "mainTheorem": "偶セクター転送行列の符号付きトレースの正値公式",
+      "mainTheoremEntryId": "closing_006_theorem_trace_of_epsilon_V_plus",
+      "boundaryEvidence": "章内依存順56で V1^{(+)} の半指数行列と V2 を掛け合わせて偶セクター転送行列 V^{(+)} を定義し、順57で配置基底上の対角作用、全スピン反転行列との可換性、開鎖イジング模型の有限和を使って tr(εV^{(+)}) を明示的な正の実数へ計算する。二項は定義から正値公式へ進む一方向の依存鎖をなす。直後の順58は V^{(+)} の定義を再利用するが、エルミート正定値行列の指数関数と実対称生成子を入力に正定値性を示す別枝であり、順57のトレース公式には依存しない。順57も順58に依存せず、両者の全直接依存集合は異なるため、順57の後で節を閉じる。生成時に二項の連続性と全直接依存、対象と全外部入力の本文 fingerprint、順57への一意な閉包、順58の直接依存・本文、順57と順58の相互非依存、および対象三項の説明粒度を固定検査する。",
+      "readabilityStatus": "順56は一つの有限複素行列だけを定義する。順57は符号付きトレースを配置基底和へ直し、開鎖スピン配置の有限和を因数分解して正の閉形式へ至る一つの計算鎖であり、対象二項は現行の説明粒度検査に合格している。三項以上の本文分割または形式化同期は不要だった。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義、行列指数関数の定義と可換積公式、および行列と線型写像の対応に説明粒度の未解決が残る。"
     }
   ],
   "explanationGranularityReview": {
@@ -9465,8 +9517,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9619,
-        "inspectedContentSha256": "61eabacf4ca1ec8f4921ba9d1506c22c94d255c83570d284e5a02297087161a4",
+        "inspectedCharacterCount": 9567,
+        "inspectedContentSha256": "d03bd0c088226927a708a10b1c3f6e037146f036d433019bf0b651e9bf52c201",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10205,8 +10257,8 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 14152,
-        "inspectedContentSha256": "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a",
+        "inspectedCharacterCount": 14286,
+        "inspectedContentSha256": "de25a7cfd8a1fd81d0d86ca48b4d3a85550853b4857925dd6768c842c31cdeb0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
