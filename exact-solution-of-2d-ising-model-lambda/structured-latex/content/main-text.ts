@@ -59874,7 +59874,10 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
               verification: ["sagemath/check/one-sided-periodic-lift-closure"],
               statement: [
                 paragraph([
-                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）について、任意の ",
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）で、元の閉歩道 ",
+                  math(String.raw`\gamma`), " は通過の頂点が相異なる、すなわち ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
+                  "）を満たすとする。このとき任意の ",
                   math(String.raw`j,j'\in\{0,\ldots,N-1\}`), " が ", math(String.raw`j<j'`),
                   " を満たすなら",
                 ]),
@@ -60275,7 +60278,10 @@ P_n(\gamma)
               verification: ["sagemath/check/one-sided-periodic-lift-closure"],
               statement: [
                 paragraph([
-                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）を ",
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）で、元の閉歩道 ",
+                  math(String.raw`\gamma`), " は ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
+                  "）を満たすとする。一側閉包を ",
                   math(String.raw`W:=\bigl(F^{\gamma,k_0,t,c}_0,\ldots,F^{\gamma,k_0,t,c}_N\bigr)`),
                   " と書き、そのトーラス射影（", ref("def_plane_unit_path_torus_projection"), "）を ",
                   math(String.raw`\Gamma:=\Pi(W)`), " と置く。このとき ",
