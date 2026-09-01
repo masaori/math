@@ -104,6 +104,7 @@ const PHYSICS_IDENTIFIER_TERMS = [
   "relativity",
   "particle",
   "physical",
+  "lorentz",
 ];
 
 /**
@@ -151,9 +152,16 @@ function caTermsIn(block: unknown): string[] {
   return CA_TERMS.filter((term) => text.includes(term));
 }
 
+/**
+ * 既存物理由来語の照合は大文字小文字を区別しない。
+ *
+ * `PHYSICS_TERMS` には日本語の語に混じってラテン文字の語（`Lorentz`）が入っている。
+ * 区別したままだと、同じ概念を `lorentz` や `LORENTZ` と綴った瞬間に検査が空振りする。
+ * 日本語の語は `toLowerCase` で変わらないため、この正規化で失われる識別力はない。
+ */
 function physicsTermsIn(block: unknown): string[] {
-  const text = normalizedTextOf(block);
-  return PHYSICS_TERMS.filter((term) => text.includes(term));
+  const text = normalizedTextOf(block).toLowerCase();
+  return PHYSICS_TERMS.filter((term) => text.includes(term.toLowerCase()));
 }
 
 const files = await loadContentFiles();
