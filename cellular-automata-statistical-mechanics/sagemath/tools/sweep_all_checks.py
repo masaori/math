@@ -149,7 +149,10 @@ def summarize_results(files, outdir, jobs, codes, timeout):
     invalid_records = []
     for record in records:
         idx = record.get('index')
-        if not isinstance(idx, int) or idx < 0 or idx >= len(files):
+        if (not isinstance(idx, int)
+                or isinstance(idx, bool)
+                or idx < 0
+                or idx >= len(files)):
             invalid_records.append(record)
             continue
         expected_file = os.path.relpath(files[idx], check_root())
@@ -162,13 +165,21 @@ def summarize_results(files, outdir, jobs, codes, timeout):
         seconds = record.get('seconds')
         # NaN と Infinity は JSON の既定の構文で書けるうえ、NaN はどの比較も偽になるため
         # 所要時間の並べ替えを静かに壊し、余裕の倍率も無限大として印字されてしまう。
-        # 所要時間として意味を持つのは有限で非負の数だけなので、ここで弾く。
+        # 巨大な整数も float への暗黙変換で OverflowError を起こす。後段の除算と書式化まで
+        # 安全に行える、有限で非負の浮動小数点数へ正規化できる値だけを受理する。
         if (not isinstance(seconds, (int, float))
-                or isinstance(seconds, bool)
-                or not math.isfinite(seconds)
-                or seconds < 0):
+                or isinstance(seconds, bool)):
             invalid_records.append(record)
             continue
+        try:
+            normalized_seconds = float(seconds)
+        except (OverflowError, ValueError):
+            invalid_records.append(record)
+            continue
+        if not math.isfinite(normalized_seconds) or normalized_seconds < 0:
+            invalid_records.append(record)
+            continue
+        record['seconds'] = normalized_seconds
         by_index.setdefault(idx, []).append(record)
 
     missing = [idx for idx in range(len(files)) if idx not in by_index]
