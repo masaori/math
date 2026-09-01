@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 83 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 84 回目の tick 時点）
+
+**頂点単純な置換軌道の位相因子が、トーラスの巻き付き二次符号に等しいことを本文と SageMath で固定した（Lean 未着手）。** `claim_vertex_simple_orbit_quadratic_sign` は、切断線偶奇 $(h,v)$ が $(0,0)$ なら $t_\circ=\pm4$ と $\zeta_8^{t_\circ}=-1$、非零なら $t_\circ=0$ と $h+v+hv=1\pmod2$ を使い、四つのスピン構造について $-(-1)^{ah+bv}\zeta_8^{t_\circ}=\chi_{a,b}(h,v)$ を得る。SageMath `vertex-simple-orbit-quadratic-sign` は $L=2,3,4$ の頂点単純な閉じた非後退辺列 $373{,}716$ 本と四つのスピン構造、計 $1{,}494{,}864$ 件を円分体で厳密検査した。次は接触を持つ軌道を平滑化で対にして相殺し、各添字の $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ へ合成する。
+
+Lambda 側 check（869 ブロック）・linkage（385 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 382 ページを通した。姉妹側 check・linkage（118 検算）・PDF 356 ページも通した。
+
+前進前レビューでは、前 tick の `claim_fiber_phase_weight_topological_form` を本文・SageMath・今回の直接利用と照合した。位相形への書き換えという実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「フェルミオン数演算子の冪等性」（`number_operator_idempotent`）の (1)(3) の二本の鎖で、行中にあった根拠 11 行を行末の根拠列へ揃えた。内容・式変形・根拠・参照は不変である。
+
+## ひとつ前の到達点（2026-09-02 の 83 回目の tick 時点）
 
 **ファイバーの位相付き寄与を、切断線偶奇の符号と回転位相の冪だけで書く位相形へ書き換える $\overline{\mathbb Q}$ の等式を本文と SageMath で固定した（Lean 未着手）。** 残っていた「各添字で $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$」を、遷移成分から位相形への書き換え（今回）と、その後の位相の符号読み・相殺論法へ割り直した。`claim_fiber_phase_weight_topological_form` は、ファイバーの各置換の各軌道へ `claim_moved_orbit_weight_phase_twist` を基点 $\vec e_{\ast}^{\,\varphi}(C)$ で適用し、
 $\mathcal K^{a,b}_L(D,E)=\sum_{\varphi\in\mathcal N_L(D,E)}\prod_{C\in\mathcal C(\varphi)}\bigl(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\bigr)$

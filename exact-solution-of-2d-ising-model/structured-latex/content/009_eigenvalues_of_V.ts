@@ -515,11 +515,11 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)`,
         String.raw`\begin{aligned}
 0
 &= [\psi_\mu^\dagger, \psi_\mu^\dagger]_+
-   \quad (\because \text{反交換関係の第 1 式}) \\
+&&\bigl(\because\ \text{反交換関係の第 1 式}\bigr)\\
 &= \psi_\mu^\dagger\psi_\mu^\dagger + \psi_\mu^\dagger\psi_\mu^\dagger
-   \quad (\because \text{反交換子の定義}) \\
+&&\bigl(\because\ \text{反交換子の定義}\bigr)\\
 &= 2(\psi_\mu^\dagger)^2
-   \quad (\because \text{同じ項の和})
+&&\bigl(\because\ \text{同じ項の和}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -580,21 +580,21 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)`,
         String.raw`\begin{aligned}
 n_\mu^2
 &= (\psi_\mu^\dagger\psi_{-\mu})(\psi_\mu^\dagger\psi_{-\mu})
-   \quad (\because \text{フェルミオン数演算子 } n_\mu \text{ の定義}) \\
+&&\bigl(\because\ \text{フェルミオン数演算子 } n_\mu \text{ の定義}\bigr)\\
 &= \psi_\mu^\dagger\left(\psi_{-\mu}\psi_\mu^\dagger\right)\psi_{-\mu}
-   \quad (\because \text{行列の積の結合法則}) \\
+&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
 &= \psi_\mu^\dagger\left(I - n_\mu\right)\psi_{-\mu}
-   \quad (\because \text{(2)}) \\
+&&\bigl(\because\ \text{(2)}\bigr)\\
 &= \psi_\mu^\dagger\psi_{-\mu} - \psi_\mu^\dagger n_\mu \psi_{-\mu}
-   \quad (\because \text{行列の積の分配法則}) \\
+&&\bigl(\because\ \text{行列の積の分配法則}\bigr)\\
 &= n_\mu - \psi_\mu^\dagger\left(\psi_\mu^\dagger\psi_{-\mu}\right)\psi_{-\mu}
-   \quad (\because n_\mu = \psi_\mu^\dagger\psi_{-\mu}) \\
+&&\bigl(\because\ n_\mu = \psi_\mu^\dagger\psi_{-\mu}\bigr)\\
 &= n_\mu - (\psi_\mu^\dagger)^2\,(\psi_{-\mu})^2
-   \quad (\because \text{結合法則}) \\
+&&\bigl(\because\ \text{結合法則}\bigr)\\
 &= n_\mu - 0 \cdot 0
-   \quad (\because \text{(1)}) \\
+&&\bigl(\because\ \text{(1)}\bigr)\\
 &= n_\mu
-   \quad (\because \text{零行列との積と差})
+&&\bigl(\because\ \text{零行列との積と差}\bigr)
 \end{aligned}`,
       ),
     ],
@@ -604,6 +604,7 @@ n_\mu^2
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "2026-08-15 の式変形統一で、(3) の鎖の先頭行（フェルミオン数演算子の定義の適用）に欠けていた行末根拠を補った。内容は変えていない。",
         "2026-08-18 の式変形統一で、(2) の反交換関係からの移項を散文で済ませず、一続き二段の式変形と行末根拠へ揃えた。内容は変えていない。",
+        "2026-09-02 の式変形統一で、(1)(3) の式変形の行末根拠を aligned の独立列へ揃えた。内容は変えていない。",
       ],
     },
   },

@@ -51911,6 +51911,101 @@ x^{\,2\lvert D\rvert+\lvert E\rvert}\cdot
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_vertex_simple_orbit_quadratic_sign",
+        labels: [],
+        title: { text: "頂点単純な置換軌道の二次符号" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_vertex_simple_orbit_quadratic_sign",
+            focus: {
+              id: "kac_ward_claim_vertex_simple_orbit_quadratic_sign",
+              kind: "claim",
+              title: { text: "頂点単純な置換軌道の位相因子はトーラスの巻き付き二次符号に等しい" },
+              labels: ["claim_vertex_simple_orbit_quadratic_sign"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/vertex-simple-orbit-quadratic-sign"],
+              statement: [
+                paragraph([
+                  math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）とし、閉じた非後退辺列 ",
+                  math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "（", ref("def_closed_nonbacktracking_walk"), "）が ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"), "）を満たすとする。このとき ",
+                  math(String.raw`\overline{\mathbb Q}`), " の等式",
+                ]),
+                displayMath(String.raw`-(-1)^{a\,h(\gamma)+b\,v(\gamma)}\,\zeta_8^{\,t_{\circ}(\gamma)}
+=\chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)`),
+                paragraph([
+                  "が成り立つ。左辺はファイバーの位相形（", ref("claim_fiber_phase_weight_topological_form"),
+                  "）で一つの置換軌道が与える因子であり、右辺は ", ref("def_torus_quadratic_sign"),
+                  " の巻き付き二次符号である。符号は部分集合の鎖 ",
+                  math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
+                  " により代数的数として掛ける。実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`h:=h(\gamma)\in\{0,1\}`), "、", math(String.raw`v:=v(\gamma)\in\{0,1\}`),
+                  " と略記する。まず ", math(String.raw`(h,v)=(0,0)`), " とする。",
+                  ref("claim_vertex_simple_cycle_turning_by_seam_parity"), " により ",
+                  math(String.raw`t_{\circ}(\gamma)\in\{4,-4\}`), " であり、",
+                  ref("claim_closed_walk_rotation_phase_sign"), " と ", ref("def_closed_walk_rotation_number"),
+                  " により ", math(String.raw`\zeta_8^{\,t_{\circ}(\gamma)}=-1`), " である。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+-(-1)^{a h+b v}\,\zeta_8^{\,t_{\circ}(\gamma)}
+&=-(-1)^0(-1)
+&&\bigl(\because\ (h,v)=(0,0),\ \zeta_8^{\,t_{\circ}(\gamma)}=-1\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=\chi_{a,b}(0,0)
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\text{ で }q_{a,b}(0,0)=0\bigr)
+\end{aligned}`),
+                paragraph([
+                  "次に ", math(String.raw`(h,v)\ne(0,0)`), " とする。二元集合の三場合 ",
+                  math(String.raw`(h,v)=(1,0),(0,1),(1,1)`), " のいずれでも",
+                ]),
+                displayMath(String.raw`h+v+hv=1\pmod2`),
+                paragraph([ref("def_torus_quadratic_sign"), " の指数は"]),
+                displayMath(String.raw`\begin{aligned}
+q_{a,b}(h,v)
+&=hv+(1-a)h+(1-b)v
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)\\
+&=ah+bv+(h+v+hv)\pmod2
+&&\bigl(\because\ \mathbb Z\text{ の分配則と }-r=r\pmod2\bigr)\\
+&=ah+bv+1\pmod2
+&&\bigl(\because\ h+v+hv=1\pmod2\bigr)
+\end{aligned}`),
+                paragraph([
+                  ref("claim_vertex_simple_cycle_turning_by_seam_parity"), " により ",
+                  math(String.raw`t_{\circ}(\gamma)=0`), " である。従って",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+-(-1)^{a h+b v}\,\zeta_8^{\,t_{\circ}(\gamma)}
+&=-(-1)^{a h+b v}
+&&\bigl(\because\ t_{\circ}(\gamma)=0,\ \zeta_8^0=1\bigr)\\
+&=(-1)^{a h+b v+1}
+&&\bigl(\because\ -1=(-1)^1\text{ と整数指数の積の法則}\bigr)\\
+&=(-1)^{q_{a,b}(h,v)}
+&&\bigl(\because\ q_{a,b}(h,v)=ah+bv+1\pmod2\bigr)\\
+&=\chi_{a,b}(h,v)
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "二場合で全ての切断線偶奇が尽くされる。全過程は二元集合の場合分け、整数の偶奇、",
+                  math(String.raw`\zeta_8\in\overline{\mathbb Q}`),
+                  " の整数冪だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_signed_selection_stratification",
         labels: [],
         title: { text: "符号付き偶部分グラフ多項式の平方の選択集合による層別" },
