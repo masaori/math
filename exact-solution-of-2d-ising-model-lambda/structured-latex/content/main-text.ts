@@ -60331,6 +60331,128 @@ P_j(\Gamma)=P_{j'}(\Gamma)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_three_period_comparison_lemma",
+        labels: [],
+        title: { text: "三周期比較の整数補題" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_three_term_pm_four_difference_zero",
+            focus: {
+              id: "kac_ward_claim_three_term_pm_four_difference_zero",
+              kind: "claim",
+              title: { text: "三つの等差項が正負 4 に収まるなら公差は零である" },
+              labels: ["claim_three_term_pm_four_difference_zero"],
+              habitat: "Z",
+              verification: ["sagemath/check/three-term-pm-four-difference-zero"],
+              statement: [
+                paragraph([
+                  math(String.raw`a\in\mathbb Z`), " と ", math(String.raw`b\in\mathbb Z`),
+                  " が、", math(String.raw`c=1,2,3`), " のすべてについて",
+                ]),
+                displayMath(String.raw`a+cb\in\{4,-4\}`),
+                paragraph([
+                  "を満たすとする。このとき ", math(String.raw`b=0`),
+                  " であり、従って ",
+                  math(String.raw`a+b=a+2b=a+3b`),
+                  " である。ここで ", math(String.raw`+`), " と積 ", math(String.raw`cb`),
+                  " は ", math(String.raw`\mathbb Z`), " の加法と乗法である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "仮定から ", math(String.raw`a+b,\ a+2b,\ a+3b\in\{4,-4\}`),
+                  " である。まず公差を隣接二項の差として表す。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+b&=(a+2b)-(a+b)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&\in\{4-4,\ 4-(-4),\ (-4)-4,\ (-4)-(-4)\}
+&&\bigl(\because\ a+2b\in\{4,-4\},\ a+b\in\{4,-4\}\text{ の有限な全列挙}\bigr)\\
+&=\{0,\ 8,\ -8\}
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "残る二候補 ", math(String.raw`b=8`), " と ", math(String.raw`b=-8`),
+                  " を場合分けで除く。",
+                ]),
+                paragraph([
+                  math(String.raw`b=8`), " の場合。", math(String.raw`a+b\in\{4,-4\}`),
+                  " で場合を分ける。", math(String.raw`a+b=4`), " ならば",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+a+2b&=(a+b)+b
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=4+8
+&&\bigl(\because\ a+b=4,\ b=8\bigr)\\
+&=12
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "であり、", math(String.raw`12\notin\{4,-4\}`),
+                  " なので仮定に反する。", math(String.raw`a+b=-4`), " ならば",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+a+3b&=(a+b)+2b
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=-4+16
+&&\bigl(\because\ a+b=-4,\ b=8\bigr)\\
+&=12
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "であり、", math(String.raw`12\notin\{4,-4\}`),
+                  " なので仮定に反する。従って ", math(String.raw`b=8`), " は起こらない。",
+                ]),
+                paragraph([
+                  math(String.raw`b=-8`), " の場合。", math(String.raw`a+b\in\{4,-4\}`),
+                  " で場合を分ける。", math(String.raw`a+b=4`), " ならば",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+a+3b&=(a+b)+2b
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=4-16
+&&\bigl(\because\ a+b=4,\ b=-8\bigr)\\
+&=-12
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "であり、", math(String.raw`-12\notin\{4,-4\}`),
+                  " なので仮定に反する。", math(String.raw`a+b=-4`), " ならば",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+a+2b&=(a+b)+b
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
+&=-4-8
+&&\bigl(\because\ a+b=-4,\ b=-8\bigr)\\
+&=-12
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "であり、", math(String.raw`-12\notin\{4,-4\}`),
+                  " なので仮定に反する。従って ", math(String.raw`b=-8`), " も起こらない。",
+                ]),
+                paragraph([
+                  "以上により ", math(String.raw`b=0`), " である。このとき ",
+                  math(String.raw`a+2b=(a+b)+b=a+b`), " と ",
+                  math(String.raw`a+3b=(a+2b)+b=a+2b`),
+                  "（いずれも ", math(String.raw`\mathbb Z`),
+                  " の四則）から三項は一致する。全過程は整数の四則と有限集合の全列挙だけで閉じ、",
+                  "実数体も複素数体も現れない。この補題は、周期数 ",
+                  math(String.raw`c=1,2,3`),
+                  " の一側閉包の循環総回転数（正負 4）を比較して、一周期あたりの回転の寄与が零であることを取り出すために引く。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

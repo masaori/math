@@ -429,6 +429,7 @@ export const ALL_LABELS = [
   "claim_square_of_sum_le_twice_sum_of_squares",
   "claim_staircase_from_band_top_meets_lift_only_at_base",
   "claim_step_advances_direction",
+  "claim_three_term_pm_four_difference_zero",
   "claim_torus_homology_sector_partition",
   "claim_transfer_matrix_shift_invariant",
   "claim_transfer_weight_product",
