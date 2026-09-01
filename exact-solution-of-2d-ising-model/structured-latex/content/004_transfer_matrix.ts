@@ -858,16 +858,17 @@ Y_m Z_{m+1}
 &= \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M}\right)
    \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-1}\boxtimes\overbrace{\sigma^y}^{M\text{th}}\right)
    \left(\overbrace{\sigma^z}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-1}\right)
-\quad (\because \text{Step 1}) \\
+&& (\because \text{Step 1}) \\
 &= \overbrace{(\sigma^x\sigma^x\sigma^z)}^{1\text{st}}
    \boxtimes\overbrace{(\sigma^x\sigma^x I)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x I)}^{2\text{nd},\dots,(M-1)\text{th}}
    \boxtimes\overbrace{(\sigma^x\sigma^y I)}^{M\text{th}}
-\quad (\because \text{クロネッカー積の積の規則}) \\
+&& (\because \text{クロネッカー積の積の規則}) \\
 &= \overbrace{\sigma^z}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\overbrace{(i\,\sigma^z)}^{M\text{th}}
-\quad (\because \sigma^x\sigma^x = I,\ AI=A,\ \sigma^x\sigma^y = i\,\sigma^z \text{（Step 0）}) \\
+&& (\because \sigma^x\sigma^x = I,\ AI=A,\ \sigma^x\sigma^y = i\,\sigma^z \text{（Step 0）}) \\
 &= i\left(\overbrace{\sigma^z}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\overbrace{\sigma^z}^{M\text{th}}\right)
-\quad (\because \text{第 } M \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
-&= i\,\sigma_M^z\sigma_1^z \quad (\because \text{Step 1 の最後の式})
+&& (\because \text{第 } M \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
+&= i\,\sigma_M^z\sigma_1^z
+&& (\because \text{Step 1 の最後の式})
 \end{aligned}`,
       ),
       paragraph([
@@ -939,6 +940,9 @@ V_1
           "参照先（<def_transfer_matrix_symbols>）を明示した（主張の内容自体は変えていない）。",
         "2026-09-02 の式変形統一で、Step 1 の帰納法と Z_m・Y_m・ε の三本の表示に行中の " +
           "\\quad (\\because …) で置かれていた根拠 6 行を、aligned の行末の根拠列へ揃えた。" +
+          "内容・式変形・根拠・参照は変えていない。",
+        "2026-09-02 の式変形統一で、Step 3 の境界項 εY_MZ_1 の鎖に行中の " +
+          "\\quad (\\because …) で置かれていた根拠 5 行を、aligned の行末の根拠列へ揃えた。" +
           "内容・式変形・根拠・参照は変えていない。",
       ],
     },

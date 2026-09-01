@@ -139,4 +139,25 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_contact_smoothing_same_pair_involution_lexicographic_choice_counterexample",
+    targets: ["claim_contact_smoothing_same_pair_involution"],
+    title: { text: "辞書式最小の切り替え可能接触対は平滑化で保たれない" },
+    body: [
+      paragraph([
+        "切り替え可能な接触対全体を向き付き辺の固定した辞書式順序で並べ、最小の対を選ぶ規則は、",
+        "符号反転対合の標準対として採用しない。同じ対での平滑化は対合であるが、平滑化によって",
+        "その対と一辺だけを共有する別の接触対の切り替え可能性が変わり得るため、最小の対そのものは保存されない。",
+      ]),
+      paragraph([
+        "一辺 ", math(String.raw`L=2`), " の全非後退置換 ", math(String.raw`30{,}784`),
+        " 個を厳密に列挙したところ、切り替え可能な接触対を持つ置換は ", math(String.raw`29{,}905`),
+        " 個あり、そのうち ", math(String.raw`7{,}935`),
+        " 個で、辞書式最小対による平滑化の前後に選ばれる対が異なった",
+        "（sagemath/check/lexicographic-switchable-contact-choice-counterexample）。",
+        "したがって、次に定める標準対は単なる最小化ではなく、平滑化の前後で同じ局所データを選ぶ規則でなければならない。",
+        "この検算は有限集合の比較だけで完結し、実数体も複素数体も用いない。",
+      ]),
+    ],
+  },
 ]);
