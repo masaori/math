@@ -923,7 +923,7 @@ c_2 s_1 = c_1\cos\theta_\mu
         String.raw`\begin{aligned}
 \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
 &= \left(i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,e^{-i\theta_\mu}s_2^*(c_1\cos(-\theta_\mu) - i\sin(-\theta_\mu) - s_1 c_2)\right)
-&&(\because\ \gamma_2\ \text{の定義})\\
+&&(\because\ \blkref{def_A_theta}\ \text{の}\ \gamma_2\ \text{の定義})\\
 &= \left(i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,e^{-i\theta_\mu}s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)\right)
 &&(\because\ \cos\ \text{は偶関数、}\sin\ \text{は奇関数})\\
 &= (i\cdot i)\left(e^{i\theta_\mu}e^{-i\theta_\mu}\right)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
@@ -941,10 +941,7 @@ c_2 s_1 = c_1\cos\theta_\mu
 \end{aligned}`,
       ),
       paragraph([
-        ref("def_A_theta"),
-        " の ",
-        math(String.raw`\gamma_2`),
-        " の定義を引いた。ここで ",
+        "ここで ",
         math(String.raw`s_2^* > 0`),
         "（",
         ref("def_transfer_matrix_symbols"),
@@ -956,7 +953,7 @@ c_2 s_1 = c_1\cos\theta_\mu
         String.raw`\begin{aligned}
 |\gamma_2(\theta_\mu)|^2
 &= \left|i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right|^2
-&&(\because\ \gamma_2\ \text{の定義})\\
+&&(\because\ \blkref{def_A_theta}\ \text{の}\ \gamma_2\ \text{の定義})\\
 &= (s_2^*)^2\left((c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2\right)
 &&(\because\ |i| = |e^{i\theta_\mu}| = 1\ \text{と、絶対値は積を保つこと})
 \end{aligned}`,
@@ -992,7 +989,12 @@ c_2 s_1 = c_1\cos\theta_\mu
         "。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-09-02 の式変形統一で、鎖の後ろに置いていた def_A_theta の参照を、gamma_2 の定義を引く二つの行末の blkref へ移した。内容・式変形・根拠・参照は変えていない。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_025_claim_arg_gamma2_sum",

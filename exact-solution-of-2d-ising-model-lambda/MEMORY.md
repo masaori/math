@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 91 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 92 回目の tick 時点）
+
+**標準対の回転差が正負 4 である二つの部分集合を標準対平滑化が交換し、位相寄与を保存することを、本文と SageMath で固定した（Lean 未着手）。** $\delta\in\{-4,4\}$ に対し $\mathcal A_L^{(\delta)}$ を定義した（`def_standard_turning_difference_subsets`）。`claim_non_phase_reversing_standard_smoothing_involution` は、標準対の不変性から平滑化後の回転差が $-\delta$ になることを示し、$\mathcal A_L^{(-4)}$ と $\mathcal A_L^{(4)}$ を全単射で交換する不動点の無いファイバー保存対合を得る。一方、置換符号へ掛かる $-1$ と遷移成分へ掛かる $\zeta_8^{-\delta}=-1$ が相殺するため、四つのスピン構造の位相寄与は保存され、両集合は相殺しない。SageMath `non-phase-reversing-standard-smoothing-involution` は $L=2$ の各 $3{,}616$ 個で交換・対合・不動点なし・ファイバー保存・位相寄与保存を全数検査した（$28{,}928$ 件）。残るのは標準対が切り替え可能でない $18{,}755$ 個で、次はこれらを分類し、相殺または寄与の扱いを決める。
+
+前進前レビューでは、前 tick の位相反転部分集合とその符号反転対合、および姉妹側の参照移動を本文・全数検算・今回の正負 4 の残余分類と照合した。有限集合上の符号反転対合という実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)$ の偏角」（`arg_of_gamma_2_mu`）で、二本の鎖の後ろに置いていた `def_A_theta` の参照を、$\gamma_2$ の定義を引く二つの行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変である。
+
+Lambda 側 check（892 ブロック）・linkage（393 検算）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 388 ページを通した。姉妹側 check・linkage（118 検算）・PDF 358 ページも通した。
+
+## ひとつ前の到達点（2026-09-02 の 91 回目の tick 時点）
 
 **標準対が位相反転する置換の部分集合の上で、標準対平滑化が位相寄与の符号を反転する不動点の無いファイバー保存対合であることを、本文と SageMath で固定した（Lean 未着手）。** 標準接触対 $\operatorname{ct}_{\min}(\varphi)$ が位相反転接触対である置換の集合 $\mathcal B_L\subseteq\mathcal A_L$ を定義した（`def_phase_reversing_standard_subset`）。`claim_phase_reversing_standard_smoothing_involution` は、標準対の平滑化不変性（`claim_contact_pair_set_smoothing_invariant`）と、位相反転の等式が両辺の入れ替えで保たれること（平滑化で回転数和の二辺が入れ替わるだけなので $\Delta$ が符号反転し、$\Delta=0$ が保存される）から $S(\mathcal B_L)\subseteq\mathcal B_L$ を導き、`claim_standard_contact_smoothing_involution` の対合性・不動点なし・ファイバー保存と、`claim_contact_smoothing_phase_reversal_iff` の十分の向きによる符号反転を合成する。SageMath `phase-reversing-standard-smoothing-involution` は $L=2$ の $\mathcal B_L$ $4{,}748$ 個の全数で符号反転対合・不動点なし・ファイバー保存を検査した（符号反転 $18{,}992$ 件）。残るのは $\mathcal A_L$ の回転差 $\pm4$ の各 $3{,}616$ 個と、標準対が切り替え可能でない $18{,}755$ 個で、次はこれらの相殺または寄与の扱いを決めて、各添字の $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ と平方恒等式へ合成する。
 

@@ -52858,6 +52858,124 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_non_phase_reversing_standard_smoothing",
+        labels: [],
+        title: { text: "標準対平滑化の非位相反転部分集合への制限" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_non_phase_reversing_standard_smoothing_involution",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_standard_turning_difference_subsets",
+                  kind: "definition",
+                  title: { text: "標準対の回転差が正負四である置換の集合" },
+                  labels: ["def_standard_turning_difference_subsets"],
+                  habitat: "N",
+                  statement: [
+                    paragraph([
+                      math(String.raw`\delta\in\{-4,4\}`), " に対して、有限集合 ",
+                      math(String.raw`\mathcal A_L^{(\delta)}`), " を",
+                    ]),
+                    displayMath(String.raw`\mathcal A_L^{(\delta)}:=\left\{\,\varphi\in\mathcal A_L\ \middle|\
+\begin{aligned}
+&\tau\bigl(\vec e,\varphi(\vec e)\bigr)+\tau\bigl(\vec f,\varphi(\vec f)\bigr)\\
+&\quad-\tau\bigl(\vec e,\varphi(\vec f)\bigr)-\tau\bigl(\vec f,\varphi(\vec e)\bigr)=\delta,\\
+&\{\vec e,\vec f\}=\operatorname{ct}_{\min}(\varphi)
+\end{aligned}\right\}`),
+                    paragraph([
+                      "と定める。", math(String.raw`\mathcal A_L`), " と標準接触対は ",
+                      ref("claim_standard_contact_smoothing_involution"), " と ",
+                      ref("def_standard_contact_pair"), "、一歩の回転数は ",
+                      ref("def_step_turning"), " で定めた。所属は有限集合の元と整数の等式だけで判定される。",
+                      ref("claim_reconnection_turning_difference"), " により、",
+                      math(String.raw`\mathcal A_L`), " は ",
+                      math(String.raw`\mathcal B_L`), "（", ref("def_phase_reversing_standard_subset"), "）と ",
+                      math(String.raw`\mathcal A_L^{(-4)}`), " と ",
+                      math(String.raw`\mathcal A_L^{(4)}`), " の互いに素な和に分かれる。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_non_phase_reversing_standard_smoothing_involution",
+              kind: "claim",
+              title: { text: "標準対平滑化は正負四の部分集合を交換して位相寄与を保つ" },
+              labels: ["claim_non_phase_reversing_standard_smoothing_involution"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/non-phase-reversing-standard-smoothing-involution"],
+              statement: [
+                paragraph([
+                  math(String.raw`\delta\in\{-4,4\}`), " とし、任意の ",
+                  math(String.raw`\varphi\in\mathcal A_L^{(\delta)}`),
+                  "（", ref("def_standard_turning_difference_subsets"), "）を取る。このとき",
+                ]),
+                list([
+                  [math(String.raw`S(\varphi)\in\mathcal A_L^{(-\delta)}`), " である。"],
+                  ["任意の ", math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）について、",
+                    math(String.raw`\mathcal W^{a,b}_L(S(\varphi))=\mathcal W^{a,b}_L(\varphi)`), " である。"],
+                ]),
+                paragraph([
+                  "したがって標準対平滑化 ", math(String.raw`S`), " は、各ファイバーを保つ不動点の無い対合として ",
+                  math(String.raw`\mathcal A_L^{(-4)}`), " と ", math(String.raw`\mathcal A_L^{(4)}`),
+                  " を全単射で交換するが、この二集合の位相寄与を相殺しない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`), "、",
+                  math(String.raw`\psi:=S(\varphi)=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`), " と置く。",
+                  ref("claim_standard_contact_smoothing_involution"), " により ", math(String.raw`\psi\in\mathcal A_L`),
+                  " であり、", ref("claim_contact_pair_set_smoothing_invariant"), " により ",
+                  math(String.raw`\operatorname{ct}_{\min}(\psi)=\{\vec e,\vec f\}`), " である。標準対の回転差は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+&\tau\bigl(\vec e,\psi(\vec e)\bigr)+\tau\bigl(\vec f,\psi(\vec f)\bigr)
+-\tau\bigl(\vec e,\psi(\vec f)\bigr)-\tau\bigl(\vec f,\psi(\vec e)\bigr)\\
+&=\tau\bigl(\vec e,\varphi(\vec f)\bigr)+\tau\bigl(\vec f,\varphi(\vec e)\bigr)
+-\tau\bigl(\vec e,\varphi(\vec e)\bigr)-\tau\bigl(\vec f,\varphi(\vec f)\bigr)
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
+&=-\delta
+&&\bigl(\because\ \blkref{def_standard_turning_difference_subsets}\text{ と整数の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "なので、", math(String.raw`\psi\in\mathcal A_L^{(-\delta)}`), " である。",
+                ]),
+                paragraph([
+                  "位相寄与を比較する。", ref("claim_contact_smoothing_phase_reversal_iff"), " の証明で得た表示において、",
+                  "平滑化は置換符号へ ", math(String.raw`-1`), " を掛け、変わる二つの遷移成分の積へ ",
+                  math(String.raw`\zeta_8^{-\delta}`), " を掛ける。", math(String.raw`\delta\in\{-4,4\}`), " と ",
+                  ref("def_rotation_phase"), " の ", math(String.raw`\zeta_8^4=-1`), " により ",
+                  math(String.raw`\zeta_8^{-\delta}=-1`), " なので、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\psi)
+&=(-1)\,\zeta_8^{-\delta}\,\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_contact_smoothing_phase_reversal_iff}\text{ の位相寄与の比較}\bigr)\\
+&=(-1)(-1)\,\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \delta\in\{-4,4\},\ \blkref{def_rotation_phase}\bigr)\\
+&=\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。対合性・不動点なし・ファイバー保存は ",
+                  ref("claim_standard_contact_smoothing_involution"), " から従い、第一の主張から二集合を交換する。",
+                  "全過程は有限集合の元の比較、整数と代数的数の有限演算だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_signed_selection_stratification",
         labels: [],
         title: { text: "符号付き偶部分グラフ多項式の平方の選択集合による層別" },
