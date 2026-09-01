@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 77 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 78 回目の tick 時点）
+
+**偶部分グラフ順序対の母関数を、添字 $(D,E)$ ごとの選択集合の個数で層別する $\mathbb{Z}[x]$ の等式を本文と SageMath で固定した（Lean 未着手）。** `claim_even_subgraph_pair_stratified_count` は $\sum_{A,B\ \text{偶}}x^{|A|+|B|}=\sum_{D\cap E=\varnothing,\ \operatorname{Even}_L(E)}|\mathcal C_L(D,E)|\,x^{2|D|+|E|}$ を主張する。証明は、像 $(A\cap B,\ A\mathbin\triangle B)$ が互いに素で第 2 成分が偶部分グラフの添字集合に入ること（対称差の端点数の法 2 の消え方）、添字ごとのファイバーが $\mathcal P_L(D,E)$ で順序対全体を互いに素に覆うこと、位数の和の等式 $|A|+|B|=2|D|+|E|$、前 tick のファイバー全単射 `claim_even_subgraph_pair_fiber_bijection` による $|\mathcal P|=|\mathcal C|$ の置換の合成である。SageMath `even-subgraph-pair-stratified-count` は $L=2$ の順序対 1,024 件・添字 881 組で証明の各段と両辺の多項式一致（$x^{16}+8x^{14}+\cdots+1$）を全数検査した。次は非後退置換の軌道とこの層別を対応づける数え上げへ進む。
+
+Lambda 側 check（854 ブロック）・linkage（379 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存検査・PDF 377 ページを通した。
+
+前進前レビューでは、前 tick のファイバー全単射を本文・SageMath・仮定 $\operatorname{Even}_L(E)$ の使用箇所と照合した。「何も言っていない主張」や仮定・住処・参照の不一致は無かった。
+
+並列の式変形統一は、PLACEHOLDER_PARALLEL
+
+## ひとつ前の到達点（2026-09-01 の 77 回目の tick 時点）
 
 **固定した反転対集合と単純通過集合に対応する偶部分グラフ順序対を、単純通過辺の選択集合で数える全単射を本文と SageMath で固定した（Lean 未着手）。** 互いに素な辺集合 $D,E$ に対し、偶部分グラフ $A,B$ で $A\cap B=D$・$A\mathbin{\triangle}B=E$ を満たす順序対のファイバー $\mathcal P_L(D,E)$ と、$C\subseteq E$ で $D\cup C$ が偶部分グラフとなる選択集合 $\mathcal C_L(D,E)$ を定義した（`def_even_subgraph_pair_fiber`）。`claim_even_subgraph_pair_fiber_bijection` は $\Theta(A,B)=A\setminus D$ の逆写像が $C\mapsto(D\cup C,D\cup(E\setminus C))$ であることを、対称差の偶数性と集合恒等式から示す。SageMath `even-subgraph-pair-fiber` は $L=2$ の互いに素な $(D,E)$ 881 件、順序対 1,024 件、選択集合 1,024 件で全単射を全数検査した。次は非後退置換の軌道とこのファイバーを対応づける数え上げへ進む。
 

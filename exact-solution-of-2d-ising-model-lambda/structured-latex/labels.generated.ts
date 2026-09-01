@@ -60,6 +60,7 @@ export const ALL_LABELS = [
   "claim_edge_row_partition",
   "claim_edge_simple_contact_split",
   "claim_even_subgraph_pair_fiber_bijection",
+  "claim_even_subgraph_pair_stratified_count",
   "claim_even_subgraph_spin_sum",
   "claim_exterior_cell_set_edge_connected",
   "claim_finite_free_entropy_density_nonnegative",
