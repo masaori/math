@@ -811,12 +811,12 @@ A
         String.raw`\begin{aligned}
 \frac{dK^*}{dK}
 &= -\frac{1}{2}\cdot\frac{1}{\tanh K}\cdot\frac{d}{dK}\tanh K
-   \quad (\because \log \text{ の微分と合成関数の微分}) \\
+&&\bigl(\because\ \log \text{ の微分と合成関数の微分}\bigr) \\
 &= -\frac{1}{2}\cdot\frac{\cosh K}{\sinh K}\cdot\frac{1}{\cosh^2 K}
-   \quad (\because (\tanh)' = 1/\cosh^2) \\
+&&\bigl(\because\ (\tanh)' = 1/\cosh^2\bigr) \\
 &= -\frac{1}{2\sinh K\cosh K} \\
 &= -\frac{1}{\sinh 2K}
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (2) を } x = 2K \text{ に適用})
+&&\bigl(\because\ \text{cosh\_addition\_and\_half\_angle (2) を }x=2K\text{ に適用}\bigr)
 \end{aligned}`,
       ),
       paragraph([

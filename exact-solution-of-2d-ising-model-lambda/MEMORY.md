@@ -2,7 +2,19 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 81 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 82 回目の tick 時点）
+
+**符号付き偶部分グラフ多項式の平方を、共通辺・対称差・選択集合ごとの符号付き和で層別する $\mathbb Z[x]$ の等式を本文と SageMath で固定した（Lean 未着手）。** 互いに素な辺集合 $D,E$ とスピン構造 $(a,b)$ に対し、選択 $C\in\mathcal C_L(D,E)$ から復元する二つの偶部分グラフ $D\cup C$ と $D\cup(E\setminus C)$ の符号積を足した $\mathcal U^{a,b}_L(D,E)\in\mathbb Z$ を定義した（`def_signed_selection_sum`）。`claim_signed_even_subgraph_square_stratified` は、偶部分グラフ順序対の互いに素なファイバー分割、位数の和 $|A|+|B|=2|D|+|E|$、選択集合との全単射を合成して
+$(Q^{a,b}_L)^2=\sum_{D,E}\mathcal U^{a,b}_L(D,E)x^{2|D|+|E|}$
+を得る。SageMath `signed-even-subgraph-square-stratification` は $L=2$ の偶部分グラフ順序対 $1{,}024$ 件を四つのスピン構造すべてで厳密検査した。次は、同じ添字ごとに $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ を示す。
+
+Lambda 側 check（865 ブロック）・linkage（383 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 381 ページを通した。姉妹側 check・linkage（118 検算）・PDF 356 ページも通した。
+
+前進前レビューでは、前 tick の `def_fiber_phase_weight`・`claim_kac_ward_determinant_fiber_stratified_phase_sum` を本文・SageMath・台帳・今回の直接比較対象と照合した。位相付き係数による行列式の層別という実質を持ち、「何も言っていない主張」や記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$\kappa(K)$ の基本性質と臨界点 $K_c$」（`kappa_of_K_basic`）の微分計算の鎖で、行中にあった根拠 3 行を行末の根拠列へ揃えた。内容・式変形・根拠・参照は不変である。
+
+## ひとつ前の到達点（2026-09-02 の 81 回目の tick 時点）
 
 **四つの Kac--Ward 行列式の位相和を、反転対と単純通過のファイバーで層別する $\overline{\mathbb Q}[x]$ の等式を本文と SageMath で固定した（Lean 未着手）。** ファイバーの位相付き寄与
 $\mathcal K^{a,b}_L(D,E):=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}\bigl(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\bigr)\in\overline{\mathbb Q}$

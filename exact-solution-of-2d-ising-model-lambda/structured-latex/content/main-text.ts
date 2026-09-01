@@ -51817,6 +51817,115 @@ x^{\,2\lvert D\rvert+\lvert E\rvert}\cdot
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_signed_selection_stratification",
+        labels: [],
+        title: { text: "符号付き偶部分グラフ多項式の平方の選択集合による層別" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_signed_even_subgraph_square_stratified",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_signed_selection_sum",
+                kind: "definition",
+                title: { text: "共通辺と単純通過辺を固定した符号付き選択和" },
+                labels: ["def_signed_selection_sum"],
+                habitat: "Z",
+                statement: [
+                  paragraph([
+                    math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                    "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+                    math(String.raw`D,E\subseteq E_L`), " が ",
+                    math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。符号付き選択和を",
+                  ]),
+                  displayMath(String.raw`\mathcal U^{a,b}_L(D,E):=
+\sum_{C\in\mathcal C_L(D,E)}
+(-1)^{\begin{aligned}
+&(1+a)\varepsilon_{L,\mathrm h}(D\cup C)+(1+b)\varepsilon_{L,\mathrm v}(D\cup C)
++\varepsilon_{L,\mathrm h}(D\cup C)\varepsilon_{L,\mathrm v}(D\cup C)\\
+&+(1+a)\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))+(1+b)\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))\\
+&+\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))
+\end{aligned}}\ \in\ \mathbb Z`),
+                  paragraph([
+                    "で定める。選択集合 ", math(String.raw`\mathcal C_L(D,E)`), " は ",
+                    ref("def_even_subgraph_pair_fiber"), "、巻き付き偶奇は ",
+                    ref("def_torus_winding_parities"), " で定めた。",
+                    math(String.raw`C\in\mathcal C_L(D,E)`), " なら ",
+                    math(String.raw`D\cup C`), " は偶部分グラフであり、",
+                    ref("claim_even_subgraph_pair_fiber_bijection"), " の逆写像により ",
+                    math(String.raw`D\cup(E\setminus C)`), " も偶部分グラフである。したがって二つの巻き付き偶奇は定まり、各被加数は ",
+                    math(String.raw`\{-1,1\}\subset\mathbb Z`), " に属する。有限和なので値は ",
+                    math(String.raw`\mathbb Z`), " に属し、実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_signed_even_subgraph_square_stratified",
+              kind: "claim",
+              title: { text: "符号付き偶部分グラフ多項式の平方は選択集合の符号付き和で層別される" },
+              labels: ["claim_signed_even_subgraph_square_stratified"],
+              habitat: "Z",
+              verification: ["sagemath/check/signed-even-subgraph-square-stratification"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とする。このとき ", math(String.raw`\mathbb Z[x]`), " の等式",
+                ]),
+                displayMath(String.raw`\bigl(Q^{a,b}_L\bigr)^2
+=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\mathcal U^{a,b}_L(D,E)\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}`),
+                paragraph([
+                  "が成り立つ。符号付き偶部分グラフ多項式は ", ref("def_signed_even_subgraph_polynomial"),
+                  "、符号付き選択和は ", ref("def_signed_selection_sum"), " で定めた。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "この証明の中だけで、", math(String.raw`\operatorname{Even}_L(A)`), " を満たす ",
+                  math(String.raw`A\subseteq E_L`), " に対する符号の指数を ",
+                  math(String.raw`\vartheta_{a,b}(A)`), " と略記する。偶部分グラフの順序対 ",
+                  math(String.raw`(A,B)`), " に ", math(String.raw`D:=A\cap B`), "、",
+                  math(String.raw`E:=A\mathbin\triangle B`), " を対応させると、",
+                  ref("claim_even_subgraph_pair_stratified_count"), " の証明冒頭により、順序対全体は添字 ",
+                  math(String.raw`D\cap E=\varnothing`), "、", math(String.raw`\operatorname{Even}_L(E)`),
+                  " ごとの ", math(String.raw`\mathcal P_L(D,E)`), " の互いに素な合併である。同じ証明の位数計算により、各ファイバー上で ",
+                  math(String.raw`\lvert A\rvert+\lvert B\rvert=2\lvert D\rvert+\lvert E\rvert`), " である。求めたい左辺から始める。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bigl(Q^{a,b}_L\bigr)^2
+&=\sum_{\substack{A\subseteq E_L,\ B\subseteq E_L\\
+\operatorname{Even}_L(A),\ \operatorname{Even}_L(B)}}
+(-1)^{\vartheta_{a,b}(A)+\vartheta_{a,b}(B)}x^{\,\lvert A\rvert+\lvert B\rvert}
+&&\bigl(\because\ \blkref{def_signed_even_subgraph_polynomial}\text{ と }\mathbb Z[x]\text{ の分配則}\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\ \sum_{(A,B)\in\mathcal P_L(D,E)}
+(-1)^{\vartheta_{a,b}(A)+\vartheta_{a,b}(B)}x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ \text{冒頭の互いに素な合併と位数の等式}\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\ \sum_{C\in\mathcal C_L(D,E)}
+(-1)^{\vartheta_{a,b}(D\cup C)+\vartheta_{a,b}(D\cup(E\setminus C))}x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ \blkref{claim_even_subgraph_pair_fiber_bijection}\text{ の逆写像 }C\mapsto(D\cup C,D\cup(E\setminus C))\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\mathcal U^{a,b}_L(D,E)\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ \blkref{def_signed_selection_sum}\text{ と }\mathbb Z[x]\text{ の分配則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "全ての和は有限集合の上の有限和であり、", math(String.raw`\mathbb Z[x]`),
+                  " の四則だけで閉じる。実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },
