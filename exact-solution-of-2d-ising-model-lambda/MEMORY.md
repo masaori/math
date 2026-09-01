@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 92 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 93 回目の tick 時点）
+
+**接触対の切り替え可能性が四つの不等式で判定されることを、本文と SageMath で固定した（Lean 未着手）。** 非後退置換 $\varphi$ の動く辺の像の始点は元の辺の終点なので、接触対 $\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)$ では後続所属 $\varphi(\vec f)\in\operatorname{Next}(\vec e)$ の終点条件が自動で満たされる。したがって切り替え可能性（`def_switchable_permutation_contact_pair` の三条件）は、四つの不等式 $\varphi(\vec f)\ne\iota(\vec e)$、$\varphi(\vec e)\ne\iota(\vec f)$、$\varphi(\vec f)\ne\vec e$、$\varphi(\vec e)\ne\vec f$ の連言と同値である（`claim_contact_pair_switchability_criterion`）。SageMath `contact-pair-switchability-criterion` は $L=2$ の接触対 $470{,}336$ 件の全数で判定の一致を検査し、標準対が切り替え可能でない $18{,}755$ 個はすべて反転像による失敗（像が他方自身になる失敗は $0$ 個）であることを数えた。次はこの反転像の場合を分類し、相殺または寄与の扱いを決めて、各添字の $\mathcal K=\mathcal U$ と平方恒等式へ合成する。
+
+前進前レビューでは、前 tick の回転差正負 4 の部分集合とその位相保存対合、および姉妹側の参照移動を本文・全数検算・今回の局所判定と照合した。交換対合が位相寄与を保存するという実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$Z$ と $Y$ の反交換関係」（`anticommutator_of_Z_and_Y`）で、$\mu=1$ の端の場合の鎖の直後に置いていた `def_transfer_matrix_symbols` の参照を、$\sigma_1^z$・$\sigma_1^y$ の定義を引く二つの行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変である。
+
+Lambda 側 check（894 ブロック）・linkage（394 検算）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 389 ページを通した。姉妹側 check・linkage（118 検算）・PDF 358 ページも通した。
+
+## ひとつ前の到達点（2026-09-02 の 92 回目の tick 時点）
 
 **標準対の回転差が正負 4 である二つの部分集合を標準対平滑化が交換し、位相寄与を保存することを、本文と SageMath で固定した（Lean 未着手）。** $\delta\in\{-4,4\}$ に対し $\mathcal A_L^{(\delta)}$ を定義した（`def_standard_turning_difference_subsets`）。`claim_non_phase_reversing_standard_smoothing_involution` は、標準対の不変性から平滑化後の回転差が $-\delta$ になることを示し、$\mathcal A_L^{(-4)}$ と $\mathcal A_L^{(4)}$ を全単射で交換する不動点の無いファイバー保存対合を得る。一方、置換符号へ掛かる $-1$ と遷移成分へ掛かる $\zeta_8^{-\delta}=-1$ が相殺するため、四つのスピン構造の位相寄与は保存され、両集合は相殺しない。SageMath `non-phase-reversing-standard-smoothing-involution` は $L=2$ の各 $3{,}616$ 個で交換・対合・不動点なし・ファイバー保存・位相寄与保存を全数検査した（$28{,}928$ 件）。残るのは標準対が切り替え可能でない $18{,}755$ 個で、次はこれらを分類し、相殺または寄与の扱いを決める。
 

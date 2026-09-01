@@ -52976,6 +52976,94 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_contact_pair_switchability_criterion",
+        labels: [],
+        title: { text: "接触対の切り替え可能性の局所判定" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_contact_pair_switchability_criterion",
+            beforeFocus: [],
+            focus: {
+              id: "kac_ward_claim_contact_pair_switchability_criterion",
+              kind: "claim",
+              title: { text: "接触対の切り替え可能性は四つの不等式で判定される" },
+              labels: ["claim_contact_pair_switchability_criterion"],
+              habitat: "N",
+              verification: ["sagemath/check/contact-pair-switchability-criterion"],
+              statement: [
+                paragraph([
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                  "（", ref("def_nonbacktracking_permutations"), "）と、接触対 ",
+                  math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
+                  "（", ref("def_standard_contact_pair"), "）を取る。このとき ",
+                  math(String.raw`\{\vec e,\vec f\}`), " が切り替え可能な接触対（",
+                  ref("def_switchable_permutation_contact_pair"), "）であることと、四つの不等式",
+                ]),
+                displayMath(String.raw`\varphi(\vec f)\ne\iota(\vec e),\qquad
+\varphi(\vec e)\ne\iota(\vec f),\qquad
+\varphi(\vec f)\ne\vec e,\qquad
+\varphi(\vec e)\ne\vec f`),
+                paragraph([
+                  "がすべて成り立つことは同値である（", math(String.raw`\iota`), " は ",
+                  ref("def_edge_reversal"), "）。とくに、接触対が切り替え可能でないのは、",
+                  "一方の辺の像が他方の辺の反転辺または他方の辺自身に一致する場合に限る。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  ref("def_standard_contact_pair"), " により ",
+                  math(String.raw`\vec e,\vec f\in M(\varphi)`), "、",
+                  math(String.raw`\vec e\ne\vec f`), "、",
+                  math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
+                  " である。", math(String.raw`\vec e\in M(\varphi)`), " すなわち ",
+                  math(String.raw`\varphi(\vec e)\ne\vec e`),
+                  "（", ref("def_moved_edge_set"), "）なので、",
+                  ref("def_nonbacktracking_permutations"), " により ",
+                  math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`), " であり、",
+                  ref("def_nonbacktracking_successors"), " により ",
+                  math(String.raw`\operatorname{src}(\varphi(\vec e))=\operatorname{tgt}(\vec e)`),
+                  " である。同様に ",
+                  math(String.raw`\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)`),
+                  " である。",
+                ]),
+                paragraph([
+                  ref("def_switchable_permutation_contact_pair"), " の三つの条件を順に見る。",
+                  "第一の条件 ",
+                  math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
+                  " は仮定の接触そのものなので、常に成り立つ。第二の条件の一方の所属を同値変形する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\varphi(\vec f)\in\operatorname{Next}(\vec e)
+&\Longleftrightarrow
+\operatorname{tgt}(\vec e)=\operatorname{src}(\varphi(\vec f))
+\ \text{かつ}\ \varphi(\vec f)\ne\iota(\vec e)
+&&\bigl(\because\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&\Longleftrightarrow
+\varphi(\vec f)\ne\iota(\vec e)
+&&\bigl(\because\ \operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)=\operatorname{tgt}(\vec e)\text{（冒頭の等式と仮定の接触）}\bigr)
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`\vec e`), " と ", math(String.raw`\vec f`),
+                  " を入れ替えて同じ変形を行うと、",
+                  math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec f)
+\Longleftrightarrow\varphi(\vec e)\ne\iota(\vec f)`),
+                  " である。第三の条件は ", math(String.raw`\varphi(\vec f)\ne\vec e`),
+                  " かつ ", math(String.raw`\varphi(\vec e)\ne\vec f`),
+                  " そのものである。したがって三つの条件の連言は四つの不等式の連言と同値である。",
+                  "全過程は有限集合の元の比較だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_signed_selection_stratification",
         labels: [],
         title: { text: "符号付き偶部分グラフ多項式の平方の選択集合による層別" },

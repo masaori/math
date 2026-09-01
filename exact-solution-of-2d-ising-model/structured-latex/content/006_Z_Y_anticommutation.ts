@@ -445,15 +445,14 @@ Z_1
 &= \sigma^z\boxtimes I\boxtimes\cdots\boxtimes I
 &&\bigl(\because\ \text{上のクロネッカー積表示を }\mu=1\text{ で読む}\bigr)\\
 &= \sigma_1^z
-&&\bigl(\because\ \sigma_1^z\text{ の定義}\bigr)\\[2mm]
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の }\sigma_1^z\text{ の定義}\bigr)\\[2mm]
 Y_1
 &= \sigma^y\boxtimes I\boxtimes\cdots\boxtimes I
 &&\bigl(\because\ \text{上のクロネッカー積表示を }\mu=1\text{ で読む}\bigr)\\
 &= \sigma_1^y
-&&\bigl(\because\ \sigma_1^y\text{ の定義}\bigr)
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の }\sigma_1^y\text{ の定義}\bigr)
 \end{aligned}`,
       ),
-      paragraph([ref("def_transfer_matrix_symbols"), " を引いた。"]),
       paragraph([
         "また ",
         math(String.raw`\mu = M`),
