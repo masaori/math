@@ -25,7 +25,7 @@
 
 ## 仮定について
 
-原文が Step 2 で使う `sector_replacement_of_V1` (1) は 004 章の
+人手本文が Step 2 で使う `sector_replacement_of_V1` は 004 章の
 `V1_restriction_to_eigenspaces` に依存しており、それは Lean 未形式化である。
 そのため本ファイルの最終定理も `RestrictsOnSector`（`Claim011` 参照）を仮定に持つ。
 これは**未形式化に由来する仮定**であって、数学的な穴ではない。

@@ -1314,7 +1314,7 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
       paragraph([
         "(2) ",
         ref("sector_replacement_of_V1"),
-        " (1) の ",
+        " の ",
         math(String.raw`V_1P^{(\pm)} = V_1^{(\pm)}P^{(\pm)}`),
         " と同じ議論を半分の冪について行う。",
         ref("V1_restriction_to_eigenspaces"),

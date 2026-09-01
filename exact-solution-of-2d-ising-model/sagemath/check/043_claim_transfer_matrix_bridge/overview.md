@@ -8,7 +8,7 @@
 - 併せて検証:
   - `sigma_z_diagonal_action` / `exp_of_diagonal_matrix` / `V1_component_equals_pauli`
   - `two_by_two_transfer_identity` / `V2_component_equals_pauli`
-  - `epsilon_projector_properties` / `epsilon_commutes_with_transfer_matrices` / `sector_replacement_of_V1`
+  - `epsilon_projector_properties` / `epsilon_commutes_with_transfer_matrices` / `sector_replacement_of_V1` / `sector_replacement_pow`
   - `partition_function_sector_decomposition`
 
 ### 何を確定させるための検証か
@@ -84,7 +84,7 @@ A ⊗ ⋯ ⊗ A (M 個) = V_2（成分定義）
 V_2（成分定義） = (2 sinh 2K_2)^{M/2} exp(K_2^* Σ_m σ^x_m)
 ```
 
-check_03（`sector_replacement_of_V1` ほか）:
+check_03（`sector_replacement_of_V1` / `sector_replacement_pow` ほか）:
 
 ```
 ε² = I,  (P^{(±)})² = P^{(±)},  P^{(+)}P^{(-)} = 0,  P^{(+)} + P^{(-)} = I,  ε P^{(±)} = ± P^{(±)}

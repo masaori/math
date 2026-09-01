@@ -4,15 +4,15 @@
 対応する人手証明（正本は `structured-latex/content/010_transfer_matrix_bridge.ts`）:
 
 * `bridge_011_claim_sector_replacement`（ラベル **`sector_replacement_of_V1`**）
+* `bridge_011a_claim_sector_replacement_pow`（ラベル **`sector_replacement_pow`**）
 
-原文の主張（複号同順）:
+人手本文の二つの主張（複号同順）は、`sector_replacement_of_V1` の
+`V_1 P^{(±)} = V_1^{(±)} P^{(±)}` と、`sector_replacement_pow` の
+`(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}` である。
 
-1. `V_1 P^{(±)} = V_1^{(±)} P^{(±)}`
-2. `(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`
+## `sector_replacement_of_V1` の根拠にしている命題は未形式化である
 
-## 原文が (1) の根拠にしている命題は未形式化である
-
-原文は (1) を **004 章の `V1_restriction_to_eigenspaces`**
+人手本文は `sector_replacement_of_V1` を **004 章の `V1_restriction_to_eigenspaces`**
 （`structured-latex/content/004_transfer_matrix.ts` の
 `transfer_matrix_006_claim_V1_restriction_to_eigenspaces`）から導いている。
 この命題は本リポジトリの Lean 側にまだ無い（004 章の形式化は
@@ -22,13 +22,13 @@
 そこで本ファイルでは、その主張を**仮定として明示的に受け取る**形にした
 （`hres`）。仮定の内容は原文の主張そのもの
 「`ε f = ±f` なる `f` については `V_1 f = V_1^{(±)} f`」である。
-(2) は (1) から純代数的に従い、そこは無条件に証明してある
+`sector_replacement_pow` は `sector_replacement_of_V1` から純代数的に従い、そこは無条件に証明してある
 （必要十分版 `Ising2D.NecSuf.pow_mul_proj`）。
 
 ## 必要十分版
 
-`Ising2D/NecSuf/Projector.lean`（同じラベル `sector_replacement_of_V1`）。
-(2) に効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」
+`Ising2D/NecSuf/Projector.lean`（人手本文のラベル `sector_replacement_pow` に対応）。
+冪の置き換えに効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」
 「`V_1 P = V_1^{(±)} P`」の 3 点だけで、`P` が射影子の形をしていることすら
 使わないことを確認した。
 -/
@@ -46,7 +46,7 @@ def RestrictsOnSector (M : ℕ) (K1 ηsign η : ℂ) : Prop :=
   ∀ f : Conf M → ℂ, epsilon M *ᵥ f = η • f →
     V1pauli M K1 *ᵥ f = V1 M K1 ηsign *ᵥ f
 
-/-- **原文 (1) `V_1 P^{(±)} = V_1^{(±)} P^{(±)}`。** -/
+/-- **人手本文 `sector_replacement_of_V1`: `V_1 P^{(±)} = V_1^{(±)} P^{(±)}`。** -/
 theorem sector_replacement_of_V1 {K1 ηsign η : ℂ} (hη : η * η = 1)
     (hres : RestrictsOnSector M K1 ηsign η) :
     V1pauli M K1 * epsProj M η = V1 M K1 ηsign * epsProj M η := by
@@ -54,7 +54,7 @@ theorem sector_replacement_of_V1 {K1 ηsign η : ℂ} (hη : η * η = 1)
   rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
   exact hres _ (epsProj_mulVec_mem hη _)
 
-/-- **原文 (2) `(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`**
+/-- **人手本文 `sector_replacement_pow`: `(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`**
 （必要十分版 `Ising2D.NecSuf.pow_mul_proj` の系）。 -/
 theorem sector_replacement_pow {K1 ηsign η : ℂ} {s2 : ℝ} {K2star : ℂ} (hη : η * η = 1)
     (hres : RestrictsOnSector M K1 ηsign η) (n : ℕ) :
