@@ -201,7 +201,7 @@ A(θ~_μ) = B_1(θ~_μ) B_2 B_1(θ~_μ)
 
 | # | 命題 | ラベル | 状態 |
 |---|---|---|---|
-| — | `V^{(+)} := (V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}`、`T_{(V^{(+)})}`。可逆性・平方根であること・合成 = 共役 | `def_V_plus_and_T_V_plus` | 完了 |
+| — | `V^{(+)} := (V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}`、`T_{(V^{(+)})}`。可逆性・平方根であること・合成 = 共役 | `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | 完了 |
 | C′-8 | (A)〜(D) の n 重交換子（4 式、`n` に関する帰納法） | `nesting_of_commutator_of_H_and_check_Z` | 完了 |
 | C′-9 | 生成子のスケール `(i/2)K_1H_1^{(+)}, iK_2^*H_2` / テイラー係数の抽出 | `cosh_sinh_coefficient_conversion_for_check` / `extract_taylor_coefficient_of_check_Z_Y` | 完了 |
 | C′-10 | `T_{(V_1^{(+)})^{1/2}}, T_{V_2}` の作用と `B_1(θ~_μ), B_2` による右乗 | `T_actions_on_check_Z_Y` / `linearity_of_T_on_check_Z_Y` / `def_B1_theta_B2` / `calc_of_TxT_check_Z_Y` | 完了 |
@@ -236,7 +236,7 @@ A(θ~_μ) = B_1(θ~_μ) B_2 B_1(θ~_μ)
 | C′-8 | `nesting_of_commutator_of_H_and_Z` | (A)〜(D) の n 重交換子。**完了**（`content/014_even_sector_T_action.ts`、`nesting_of_commutator_of_H_and_check_Z`） |
 | C′-9 | `cosh_sinh_coefficient_conversion` / `extract_taylor_coefficient_of_Z_Y` | 生成子のスケールとテイラー係数の抽出。**完了**（014 章、`cosh_sinh_coefficient_conversion_for_check` / `extract_taylor_coefficient_of_check_Z_Y`） |
 | C′-10 | `ホロノミック量子場_p142下段_1` / `calc_of_TxT_hatZxhatY` | `T_{(V_1^{(+)})^{1/2}}, T_{V_2}` の作用と `B_1(θ~), B_2`。**完了**（014 章、`T_actions_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` / `def_B1_theta_B2`） |
-| C′-11 | `T_V_hatZ_hatY` / `factorization_of_A_theta` | `B_1B_2B_1 = A(θ~)` と `T_{(V^{(+)})}(Ž,Y̌) = (Ž,Y̌)A(θ~_μ)`。**完了**（014 章、`factorization_of_A_theta_general` / `T_V_plus_check_Z_Y` / `def_V_plus_and_T_V_plus`）。既存 `factorization_of_A_theta` は `μ ∈ calM` で量化されていて再利用できず、θ ∈ R 一般へ立て直した |
+| C′-11 | `T_V_hatZ_hatY` / `factorization_of_A_theta` | `B_1B_2B_1 = A(θ~)` と `T_{(V^{(+)})}(Ž,Y̌) = (Ž,Y̌)A(θ~_μ)`。**完了**（014 章、`factorization_of_A_theta_general` / `T_V_plus_check_Z_Y` / `def_T_V_plus` / `T_V_plus_is_conjugation`）。既存 `factorization_of_A_theta` は `μ ∈ calM` で量化されていて再利用できず、θ ∈ R 一般へ立て直した |
 | C′-12 | `eigenvector_of_A_theta` / `diagonalization_P_D` / `det_A_theta` / `gamma1_geq_1` / `lambda_eq_exp_gamma` | `A(θ~)` の対角化。**完了**（`structured-latex/content/015_A_theta_tilde_diagonalization.ts`、9 ブロック。下記） |
 | C′-13 | `def_fermi` / `anticommutator_of_psi` | 半整数運動量のフェルミオン `checkψ_μ`（対は `μ+ν ≡ 1`）。**完了**（`structured-latex/content/016_even_sector_fermions.ts`、`def_check_fermi` / `periodicity_of_check_fermi` / `anticommutator_of_check_psi`。下記） |
 | C′-14 | `commutation_V_psi` / `action_of_T_Vprime_on_psi` / `T_V_eq_T_Vprime` / `V_eq_Vprime` | `V^{(+)} = c checkV'`。**完了**（016 章、`commutation_V_plus_check_psi` / `def_check_Vprime` / `action_of_T_check_Vprime_on_check_psi` / `T_V_plus_eq_T_check_Vprime` / `V_plus_eq_c_check_Vprime`。下記） |

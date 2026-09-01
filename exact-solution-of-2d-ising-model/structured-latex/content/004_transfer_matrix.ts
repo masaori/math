@@ -2663,15 +2663,25 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
     title: null,
-    labels: [],
+    labels: ["def_H1_H2"],
     statement: [
+      paragraph([
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`Y_m,Z_m,K_1,K_2^*,s_2,V_2`),
+        " と ",
+        ref("def_V1_pm"),
+        " の ",
+        math(String.raw`V_1^{(\pm)}`),
+        " を用いる。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 H_1^{(\pm)} &:= Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1 \\
 H_2 &:= Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M
 \end{aligned}`,
       ),
-      paragraph(["よって、"]),
+      paragraph(["すると、", ref("def_V1_pm"), " と ", ref("V2_in_Z_Y"), " より"]),
       displayMath(
         String.raw`V_1^{(\pm)} = \exp\!\left(i K_1 H_1^{(\pm)}\right), \qquad
 V_2 = (2s_2)^{M/2} \exp\!\left(i K_2^* H_2\right)`,

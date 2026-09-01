@@ -204,9 +204,9 @@
 
 | 人手証明（ブロック） | 状況 | 理由 |
 | --- | --- | --- |
-| `closing_004_claim_H1_plus_in_sigma_z_form`（`iH_1^{(+)} = D_0 + εG`） | **未形式化** | `tr(εV^{(+)})` の直接計算の枝。配置基底での `σ^z` 表示を要し、章 018 の主鎖（`ε` の固有値 → `c_+(M) = Λ̌_max` → Onsager）とは独立 |
+| `closing_definition_D0_open_chain_operator`・`closing_definition_G_boundary_operator`・`closing_004_claim_H1_plus_in_sigma_z_form`・`closing_claim_D0_G_diagonal_action`・`closing_claim_epsilon_D0_G_pairwise_commute`・`closing_claim_epsilon_G_is_involution`（`D_0,G` の定義から `iH_1^{(+)} = D_0 + εG`、対角作用、可換性、`(εG)^2=I` まで） | **未形式化** | `tr(εV^{(+)})` の直接計算の枝。配置基底での `σ^z` 表示を要し、章 018 の主鎖（`ε` の固有値 → `c_+(M) = Λ̌_max` → Onsager）とは独立 |
 | `closing_005_definition_open_chain_spin_energy`・`closing_005_claim_open_chain_partition_sum`・`closing_005_claim_open_chain_endpoint_product_sum`・`closing_005_claim_open_chain_spin_sums_positive`（1次元開鎖の記法、二つのスピン和、正値性） | **未形式化** | 同上。原文自身が「この計算には `Ž, Y̌, ψ̌` も半整数運動量も現れない」と述べる独立の組合せ論的計算 |
-| `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 上記5ブロックに依存する。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
+| `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 上記10ブロックに依存する。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
 | `def_check_fermi` / `anticommutator_of_check_psi`（章 016） | **`CheckFermi` の仮定** | 本章の形式化時点で Lean 側に `Part016` が無かった |
 | `eigenvalues_of_V_plus`（章 017） | **`VPlusData` の仮定** | 本章の形式化時点で Lean 側に `Part017` が無かった |
 | `W P^{(+)} = V^{(+)} P^{(+)}`（章 011 の `sector_decomposition_of_rayleigh_sup` (2)） | **`EvenSectorBridge` の仮定** | 章 011 の Lean 形式化も (2) を形式化していない（`lean/docs/ch011-formalization.md`: 「`V^{(±)}`, `V_1^{(±)}` は章 004/010 の対象で、本タスクの担当範囲外の定義に依存する」）。章 019 も同じ扱い |

@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
+import { defineBlocks, paragraph, math, displayMath, ref } from "../schema.ts";
 
 const SRC = "structured-latex/content/014_even_sector_T_action.ts";
 
@@ -113,33 +113,59 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
   },
 
   {
-    id: "evensectorT_001_definition_V_plus",
+    id: "evensectorT_definition_H1_plus",
     kind: "definition",
     origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`V^{(+)} \text{ と } T_{(V^{(+)})} \text{ の定義}` },
-    labels: ["def_V_plus_and_T_V_plus"],
+    title: { tex: String.raw`\text{偶セクターの生成子 } H_1^{(+)}` },
+    labels: ["def_H1_plus"],
     statement: [
       paragraph([
-        ref("def_V1_pm"),
-        " の ",
-        math(String.raw`V_1^{(\pm)}`),
-        " で上の符号を取ったもの、すなわち",
+        ref("def_H1_H2"),
+        " の生成子で上の符号を取ったものを",
       ]),
       displayMath(
-        String.raw`V_1^{(+)} := \exp\!\left(i K_1 H_1^{(+)}\right),
-\qquad H_1^{(+)} = Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M - Y_MZ_1`,
+        String.raw`H_1^{(+)} := Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M - Y_MZ_1`,
       ),
+      paragraph(["と書く。"]),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "evensectorT_definition_V1_plus_square_root",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 3 },
+    title: { tex: String.raw`V_1^{(+)} \text{ の平方根として用いる行列}` },
+    labels: ["def_V1_plus_square_root"],
+    statement: [
       paragraph([
-        "について、その ",
+        ref("def_H1_plus"),
+        " の ",
+        math(String.raw`H_1^{(+)}`),
+        " を用い、",
         math(String.raw`1/2`),
-        " 乗を",
+        " 乗として用いる行列を",
       ]),
       displayMath(
         String.raw`\left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
 \ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "evensectorT_definition_V_plus",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 3 },
+    title: { tex: String.raw`\text{偶セクターの転送行列 } V^{(+)}` },
+    labels: ["def_V_plus"],
+    statement: [
       paragraph([
-        "と定める。さらに ",
+        ref("def_V1_plus_square_root"),
+        " の ",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        " と ",
         ref("def_transfer_matrix_symbols"),
         " の ",
         math(String.raw`V_2 = (2s_2)^{M/2}\exp\!\left(iK_2^* H_2\right)`),
@@ -149,60 +175,36 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         String.raw`V^{(+)} := \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}
 \ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "evensectorT_claim_V_plus_factors_invertible",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 3 },
+    title: { tex: String.raw`V^{(+)} \text{ を作る行列の可逆性}` },
+    labels: ["V_plus_factors_invertible"],
+    statement: [
       paragraph([
-        "と定め、",
-        ref("def_T_g"),
+        ref("def_V1_plus_square_root"),
+        " と ",
+        ref("def_V_plus"),
+        " で定めた ",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        "、",
+        math(String.raw`V_2`),
+        "、",
+        math(String.raw`V^{(+)}`),
+        " はいずれも可逆である。すなわち、",
+        ref("def_invertible_elements_of_R"),
         " の ",
-        math(String.raw`T_g(X) = gXg^{-1}`),
-        " を用いて",
-      ]),
-      displayMath(
-        String.raw`T_{(V^{(+)})}(X) := T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
-T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
-\qquad \left(X \in \mathrm{Mat}(2^M,\mathbb{C})\right)`,
-      ),
-      paragraph([
-        "と定める。この定義が意味をもつために必要な事実として、次が成り立つ。",
-      ]),
-      list([
-        [
-          "(1) ",
-          math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
-          "、",
-          math(String.raw`V_2`),
-          "、",
-          math(String.raw`V^{(+)}`),
-          " はいずれも可逆（",
-          ref("def_invertible_elements_of_R"),
-          " の意味で ",
-          math(String.raw`R^\times`),
-          " の元）であり、したがって ",
-          math(String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}, T_{V_2}, T_{V^{(+)}}`),
-          " が定義できる。",
-        ],
-        [
-          "(2) ",
-          math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
-          " は名前のとおり ",
-          math(String.raw`V_1^{(+)}`),
-          " の平方根である：",
-          math(String.raw`\left(\left(V_1^{(+)}\right)^{1/2}\right)^2 = V_1^{(+)}`),
-          "。",
-        ],
-        [
-          "(3) 合成として定めた ",
-          math(String.raw`T_{(V^{(+)})}`),
-          " は、",
-          math(String.raw`V^{(+)}`),
-          " による共役そのものに一致する：",
-          math(String.raw`T_{(V^{(+)})} = T_{V^{(+)}}`),
-          "。",
-        ],
+        math(String.raw`R^\times`),
+        " の元である。",
       ]),
     ],
     proof: [
       paragraph([
-        "(1) ",
         ref("matrix_exp_conjugation"),
         " (3) より、任意の ",
         math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
@@ -228,28 +230,108 @@ T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
         math(String.raw`V^{(+)}`),
         " も可逆である。",
       ]),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "evensectorT_definition_T_V_plus",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 3 },
+    title: { tex: String.raw`\text{偶セクターの共役写像 } T_{(V^{(+)})}` },
+    labels: ["def_T_V_plus"],
+    statement: [
       paragraph([
-        "(2) ",
+        ref("def_V_plus"),
+        " で ",
+        math(String.raw`V^{(+)}`),
+        " を作る三つの因子は、",
+        ref("V_plus_factors_invertible"),
+        " により可逆である。そこで ",
+        ref("def_T_g"),
+        " の ",
+        math(String.raw`T_g(X) = gXg^{-1}`),
+        " を用いて",
+      ]),
+      displayMath(
+        String.raw`T_{(V^{(+)})}(X) := T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
+T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
+\qquad \left(X \in \mathrm{Mat}(2^M,\mathbb{C})\right)`,
+      ),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "evensectorT_claim_V1_plus_square_root",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 3 },
+    title: { tex: String.raw`\left(V_1^{(+)}\right)^{1/2} \text{ の平方根性}` },
+    labels: ["V1_plus_square_root_property"],
+    statement: [
+      paragraph([
+        ref("def_V1_plus_square_root"),
+        " で定めた ",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        " は ",
+        math(String.raw`V_1^{(+)}`),
+        " の平方根である。",
+      ]),
+      displayMath(
+        String.raw`\left(\left(V_1^{(+)}\right)^{1/2}\right)^2 = V_1^{(+)}`,
+      ),
+    ],
+    proof: [
+      paragraph([
         ref("theorem_exp_product"),
         " を ",
         math(String.raw`X = Y = \tfrac{i}{2}K_1H_1^{(+)}`),
         " に適用する（",
         math(String.raw`X`),
         " は自分自身と可換）。すると",
+        ref("def_V1_pm"),
+        " の上符号の定義と合わせて",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^2
+\left(\left(V_1^{(+)}\right)^{1/2}\right)^2
+&= \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^2
+   \quad (\because\ \text{def\_V1\_plus\_square\_root}) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)} + \tfrac{i}{2}K_1H_1^{(+)}\right)
    \quad (\because\ \text{可換な指数行列の積の定理}) \\
 &= \exp\!\left(iK_1H_1^{(+)}\right)
    \quad (\because \text{同類項 } \tfrac{i}{2}K_1H_1^{(+)} \text{ の加法}) \\
 &= V_1^{(+)}
-   \quad (\because\ V_1^{(+)}\ \text{の定義})
+   \quad (\because\ \text{def\_V1\_pm の上符号の定義})
 \end{aligned}`,
       ),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "evensectorT_claim_T_V_plus_is_conjugation",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 3 },
+    title: { tex: String.raw`T_{(V^{(+)})} = T_{V^{(+)}}` },
+    labels: ["T_V_plus_is_conjugation"],
+    statement: [
       paragraph([
-        "(3) ",
+        ref("def_T_V_plus"),
+        " で合成として定めた ",
+        math(String.raw`T_{(V^{(+)})}`),
+        " は、",
+        ref("def_V_plus"),
+        " の ",
+        math(String.raw`V^{(+)}`),
+        " による共役そのものに一致する。",
+      ]),
+      displayMath(String.raw`T_{(V^{(+)})} = T_{V^{(+)}}`),
+    ],
+    proof: [
+      paragraph([
+        ref("V_plus_factors_invertible"),
+        " より、以下で使う行列はすべて可逆である。",
         math(String.raw`g, h \in R^\times`),
         " と ",
         math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
@@ -289,13 +371,15 @@ T_g\!\left(T_h(X)\right)
       ]),
       displayMath(
         String.raw`\begin{aligned}
-T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
+T_{(V^{(+)})}
+&=T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
+   \quad \left(\because \text{def\_T\_V\_plus}\right) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
    \quad \left(\because \text{直前の } T_g \circ T_h = T_{gh}\ \text{を左の 2 つに適用}\right) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}}
    \quad \left(\because \text{同じ } T_g \circ T_h = T_{gh}\ \text{をその結果と残りの 1 つに適用}\right) \\
 &= T_{V^{(+)}}
-   \quad \left(\because V^{(+)} := \left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}\right)
+   \quad \left(\because \text{def\_V\_plus}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -1398,7 +1482,7 @@ T_{V_2}(\check{Y}_\mu)
         " について、",
         ref("def_T_g"),
         "、",
-        ref("def_V_plus_and_T_V_plus"),
+        ref("def_V1_plus_square_root"),
         " の定義、",
         ref("matrix_exp_conjugation"),
         " (3) の ",
@@ -1416,7 +1500,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)
    \quad (\because \text{def\_T\_g}) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Z}_\mu\,
    \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^{-1}
-   \quad \left(\because \text{def\_V\_plus\_and\_T\_V\_plus}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
+   \quad \left(\because \text{def\_V1\_plus\_square\_root}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Z}_\mu\,
    \exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
    \quad \left(\because \text{matrix\_exp\_conjugation (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
@@ -1444,7 +1528,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
    \quad (\because \text{def\_T\_g}) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Y}_\mu\,
    \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^{-1}
-   \quad \left(\because \text{def\_V\_plus\_and\_T\_V\_plus}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
+   \quad \left(\because \text{def\_V1\_plus\_square\_root}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Y}_\mu\,
    \exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
    \quad \left(\because \text{matrix\_exp\_conjugation (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
@@ -1590,8 +1674,8 @@ T_g(aX + bW)
 \end{aligned}`,
       ),
       paragraph([
-        ref("def_V_plus_and_T_V_plus"),
-        " (1) より ",
+        ref("V_plus_factors_invertible"),
+        " より ",
         math(String.raw`\left(V_1^{(+)}\right)^{1/2}, V_2 \in R^\times`),
         " なので、後半はこの一般形の特別な場合である。",
       ]),
@@ -2112,7 +2196,7 @@ P_{21}
         "が成り立つ（",
         math(String.raw`T_{(V^{(+)})}`),
         " は ",
-        ref("def_V_plus_and_T_V_plus"),
+        ref("def_T_V_plus"),
         "、",
         math(String.raw`A(\theta)`),
         " は ",
@@ -2134,7 +2218,7 @@ P_{21}
         "(z) ",
         math(String.raw`T_{(V^{(+)})}(\check{Z}_\mu)`),
         " について、",
-        ref("def_V_plus_and_T_V_plus"),
+        ref("def_T_V_plus"),
         " の定義、",
         ref("T_actions_on_check_Z_Y"),
         "、",
@@ -2148,7 +2232,7 @@ P_{21}
 T_{(V^{(+)})}(\check{Z}_\mu)
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)\right)\right)
-   \quad (\because \text{def\_V\_plus\_and\_T\_V\_plus}) \\
+   \quad (\because \text{def\_T\_V\_plus}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
    \cosh(K_1)\check{Z}_\mu + i e^{-i\tilde\theta}\sinh(K_1)\check{Y}_\mu\right)\right)
    \quad (\because \text{T\_actions\_on\_check\_Z\_Y}) \\
@@ -2191,7 +2275,7 @@ T_{(V^{(+)})}(\check{Z}_\mu)
 T_{(V^{(+)})}(\check{Y}_\mu)
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right)\right)
-   \quad (\because \text{def\_V\_plus\_and\_T\_V\_plus}) \\
+   \quad (\because \text{def\_T\_V\_plus}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
    -i e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu\right)\right)
    \quad (\because \text{T\_actions\_on\_check\_Z\_Y}) \\
