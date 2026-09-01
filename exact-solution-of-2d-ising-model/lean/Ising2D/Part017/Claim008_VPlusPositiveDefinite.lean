@@ -37,7 +37,7 @@ section VPlus
 
 variable {M : ℕ}
 
-/-- **原文 `def_V_plus_and_T_V_plus` の `V^{(+)}`は章 014 の
+/-- **原文 `def_V_plus` の `V^{(+)}`は章 014 の
 `Ising2D.VPlus`（`Part014/Definition001_VPlus.lean`）をそのまま使う。**
 `H_1^{(+)} = Ising2D.H1 M (-1)` なので、これは章 009 の `Vmat` に `η = -1` を
 代入したものに等しい（両者とも `V1half M K1 (-1) * V2 M s2 K2star * V1half M K1 (-1)` に

@@ -6,7 +6,9 @@
 
 - ファイル: `structured-latex/content/014_even_sector_T_action.ts`
 - 併せて検証:
-  - `def_V_plus_and_T_V_plus`（`T_{(V^{(+)})}` が `V^{(+)}` による共役に一致すること）
+  - `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` /
+    `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation`
+    （偶セクターの生成子から `V^{(+)}` とその共役写像までの定義・性質）
   - `nesting_of_commutator_of_H_and_check_Z`（n 重交換子の閉じ方）
   - `cosh_sinh_coefficient_conversion_for_check`（生成子のスケール後の形）
   - `extract_taylor_coefficient_of_check_Z_Y`（テイラー係数の抽出）
@@ -104,7 +106,7 @@ T_{V2}(checkY)               = i sinh(2K2*) checkZ + cosh(2K2*) checkY
 (T(checkZ), T(checkY)) = (checkZ, checkY) B_2          （V_2 分）
 ```
 
-check_04（`factorization_of_A_theta_general` / `def_V_plus_and_T_V_plus` / `T_V_plus_check_Z_Y`）:
+check_04（`factorization_of_A_theta_general` / `def_T_V_plus` / `T_V_plus_is_conjugation` / `T_V_plus_check_Z_Y`）:
 
 ```
 (1) B_1(θ) B_2 B_1(θ) = A(θ)                        （θ = 2πk/60, k = 0..59）

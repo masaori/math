@@ -2,7 +2,8 @@
 # SageMath: T_{(V^{(+)})} の作用と A(theta) の行列分解
 #
 # 対象: structured-latex T_V_plus_check_Z_Y
-#       （併せて factorization_of_A_theta_general, def_V_plus_and_T_V_plus）
+#       （併せて factorization_of_A_theta_general, def_T_V_plus,
+#        T_V_plus_is_conjugation）
 #
 # (1) 分解:   B_1(theta) B_2 B_1(theta) = A(theta)   （任意の theta ∈ R）
 # (2) 合成:   T_{(V^{(+)})}(X) = V^{(+)} X (V^{(+)})^{-1}

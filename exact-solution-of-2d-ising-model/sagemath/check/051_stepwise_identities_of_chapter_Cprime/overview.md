@@ -11,7 +11,9 @@
   - 013 章: `why_008_applies_only_to_minus_sector` / `antiperiodic_exp_sum` /
     `def_half_integer_modes` / `commutator_of_H_and_check_Z_Y` /
     `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y` / `H1_H2_via_check_Z_Y`
-  - 014 章: `def_V_plus_and_T_V_plus` / `nesting_of_commutator_of_H_and_check_Z` /
+  - 014 章: `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` /
+    `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` /
+    `nesting_of_commutator_of_H_and_check_Z` /
     `cosh_sinh_coefficient_conversion_for_check` / `extract_taylor_coefficient_of_check_Z_Y` /
     `T_actions_on_check_Z_Y` / `linearity_of_T_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` /
     `factorization_of_A_theta_general` / `T_V_plus_check_Z_Y`
@@ -119,12 +121,12 @@ sage check_04_016_steps.sage
 
 | ファイル | 対象 | 区別された段の種類 | 最大残差 | 判定 |
 | --- | --- | --- | --- | --- |
-| `check_01_013_steps.sage` | 013 章の各段 | 92 | 2.3e-14 | PASS |
+| `check_01_013_steps.sage` | 013 章の各段 | 105 | 2.3e-14 | PASS |
 | `check_02_015_steps.sage` | 015 章の各段 | 66 | 1.7e-13 | PASS |
 | `check_03_014_steps.sage` | 014 章の各段 | 100 | 9.5e-11 | PASS |
-| `check_04_016_steps.sage` | 016 章の各段 | 58 | 5.8e-12 | PASS |
+| `check_04_016_steps.sage` | 016 章の各段 | 62 | 5.8e-12 | PASS |
 
-**章 C′ の 4 章あわせて 316 種類の段がすべて成り立っている。**
+**章 C′ の 4 章あわせて 333 種類の段がすべて成り立っている。**
 
 副産物として、次の 3 つの狭義不等号も再確認した（本文が半整数運動量に固有の帰結として
 主張しているもの。整数運動量では臨界点で等号が起こる）。
@@ -135,7 +137,7 @@ sage check_04_016_steps.sage
 
 ### 数値的な注意（証明の内容とは無関係）
 
-`check_03` の `def_V_plus (3-3)` は `(gh)^{-1} = h^{-1}g^{-1}` の検証だが、
+`check_03` の `T_V_plus_is_conjugation (3)(4)` は `(gh)^{-1} = h^{-1}g^{-1}` の検証だが、
 これを `(gh).inverse()` と `h^{-1}g^{-1}` の直接比較で書くと残差 4e-8 になり閾値を割る。
 `V_2` の前因子 `(2 s_2)^{M/2}` と `exp((i/2)K_1H_1^{(+)})` によって `gh` の条件数が
 悪くなるためで、主張が偽なのではない。**「`h^{-1}g^{-1}` が `gh` の逆元である」という

@@ -866,6 +866,7 @@ const realSymmetricGeneratorsExpectedDirectDependencies = [
   "linear_space_general_000d_claim_kronecker_transpose",
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_007_definition_V1_pm",
+  "transfer_matrix_011_definition_H1_H2",
 ].sort();
 const realSymmetricGeneratorsExpectedContentSha256 = "58f128326d7105d0494ee2849438389cb2a90991f8d960809e161001bd22e89d";
 const realSymmetricGeneratorsAndSignFlipSectionEntryIds = [
@@ -890,6 +891,7 @@ const signFlipConjugationExpectedDirectDependencies = [
   "linear_space_general_000b_claim_kronecker_product_rule",
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_007_definition_V1_pm",
+  "transfer_matrix_011_definition_H1_H2",
 ].sort();
 const realSymmetricGeneratorsAndSignFlipExpectedExternalInputEntryIds = [
   "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
@@ -901,6 +903,7 @@ const realSymmetricGeneratorsAndSignFlipExpectedExternalInputEntryIds = [
   "linear_space_general_000d_claim_kronecker_transpose",
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_007_definition_V1_pm",
+  "transfer_matrix_011_definition_H1_H2",
 ].sort();
 const realSymmetricGeneratorsAndSignFlipExpectedExternalInputContentSha256 = new Map<string, string>([
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
@@ -912,17 +915,128 @@ const realSymmetricGeneratorsAndSignFlipExpectedExternalInputContentSha256 = new
   ["linear_space_general_000d_claim_kronecker_transpose", "cecdd6fa3fb66f3aa75d8982f92e7290719c0960058ffb0caafe68dfa9e9b4d5"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["transfer_matrix_007_definition_V1_pm", "7a63f3a02db439552636cb7cd8ac32f348c82f85830614ed5fc94c80b3698264"],
+  ["transfer_matrix_011_definition_H1_H2", "19baa8255a664202439efe07a7c18f770902aa68a0d3ce553a650712c8a23413"],
 ]);
-const evenSectorTransferDefinitionExpectedDirectDependencies = [
-  "TV1_hatZ_hatY_009_definition_invertible_elements",
-  "TV1_hatZ_hatY_011_definition_T_g",
+const evenSectorGeneratorSectionEntryIds = [
+  "evensectorT_definition_H1_plus",
+  "closing_definition_D0_open_chain_operator",
+  "closing_definition_G_boundary_operator",
+  "closing_004_claim_H1_plus_in_sigma_z_form",
+  "closing_claim_D0_G_diagonal_action",
+  "closing_claim_epsilon_D0_G_pairwise_commute",
+  "closing_claim_epsilon_G_is_involution",
+];
+const evenSectorGeneratorExpectedInternalDependencies = new Map<string, string[]>([
+  ["evensectorT_definition_H1_plus", []],
+  ["closing_definition_D0_open_chain_operator", []],
+  ["closing_definition_G_boundary_operator", []],
+  ["closing_004_claim_H1_plus_in_sigma_z_form", [
+    "closing_definition_D0_open_chain_operator",
+    "closing_definition_G_boundary_operator",
+    "evensectorT_definition_H1_plus",
+  ]],
+  ["closing_claim_D0_G_diagonal_action", [
+    "closing_definition_D0_open_chain_operator",
+    "closing_definition_G_boundary_operator",
+  ]],
+  ["closing_claim_epsilon_D0_G_pairwise_commute", [
+    "closing_definition_D0_open_chain_operator",
+    "closing_definition_G_boundary_operator",
+  ]],
+  ["closing_claim_epsilon_G_is_involution", [
+    "closing_definition_G_boundary_operator",
+    "closing_claim_epsilon_D0_G_pairwise_commute",
+  ]],
+]);
+const evenSectorGeneratorExpectedContentSha256 = new Map<string, string>([
+  ["evensectorT_definition_H1_plus", "fff8d040f78e719bed462ae839eed9542927f1ae1f0e76c854a28333215ef6be"],
+  ["closing_definition_D0_open_chain_operator", "b8dfa77a5b2a5ba4e505e614623f3f6ae1dcf44c6e9838b3c4bbe2f130ad42a4"],
+  ["closing_definition_G_boundary_operator", "4705a5620e827e2607b1331c0eb24030b96fc0fd668ce9a405fa55dbdd009d22"],
+  ["closing_004_claim_H1_plus_in_sigma_z_form", "df178854a0b0ce220da19a1eb0311b2eb72ed64947d617ef661c418d262323f6"],
+  ["closing_claim_D0_G_diagonal_action", "12905cb05af762c01ca2a4f2806fce4b410fbacf1ce911a9379ea0ced226980c"],
+  ["closing_claim_epsilon_D0_G_pairwise_commute", "54783919677061229c561142a92459a128bc9cc6e25ba1db0a1e1adde2bed343"],
+  ["closing_claim_epsilon_G_is_involution", "3abbe537ba7e33208c63d767d66918eb8dd03ec8acc5fda3aea31fa82078bb9a"],
+]);
+const evenSectorGeneratorExpectedDirectDependencies = new Map<string, string[]>([
+  ["evensectorT_definition_H1_plus", [
+    "transfer_matrix_011_definition_H1_H2",
+  ]],
+  ["closing_definition_D0_open_chain_operator", [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "transfer_matrix_001_definition_symbols",
+  ]],
+  ["closing_definition_G_boundary_operator", [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "transfer_matrix_001_definition_symbols",
+  ]],
+  ["closing_004_claim_H1_plus_in_sigma_z_form", [
+    "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "closing_definition_D0_open_chain_operator",
+    "closing_definition_G_boundary_operator",
+    "evensectorT_definition_H1_plus",
+    "linear_space_general_000b_claim_kronecker_product_rule",
+    "transfer_matrix_001_definition_symbols",
+    "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
+    "transfer_matrix_011_definition_H1_H2",
+  ]],
+  ["closing_claim_D0_G_diagonal_action", [
+    "bridge_001_definition_config_basis",
+    "bridge_002_claim_sigma_z_diagonal_action",
+    "closing_definition_D0_open_chain_operator",
+    "closing_definition_G_boundary_operator",
+  ]],
+  ["closing_claim_epsilon_D0_G_pairwise_commute", [
+    "bridge_010_claim_epsilon_commutes",
+    "closing_definition_D0_open_chain_operator",
+    "closing_definition_G_boundary_operator",
+    "linear_space_general_000b_claim_kronecker_product_rule",
+  ]],
+  ["closing_claim_epsilon_G_is_involution", [
+    "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+    "bridge_009_claim_epsilon_projector_properties",
+    "closing_claim_epsilon_D0_G_pairwise_commute",
+    "closing_definition_G_boundary_operator",
+    "linear_space_general_000b_claim_kronecker_product_rule",
+  ]],
+]);
+const evenSectorGeneratorExpectedExternalInputEntryIds = [
+  "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+  "bridge_001_definition_config_basis",
+  "bridge_002_claim_sigma_z_diagonal_action",
+  "bridge_009_claim_epsilon_projector_properties",
+  "bridge_010_claim_epsilon_commutes",
+  "calc_formulae_003_matrix_decomposition",
   "calc_formulae_006_definition_of_cc",
-  "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
-  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_000b_claim_kronecker_product_rule",
   "transfer_matrix_001_definition_symbols",
-  "transfer_matrix_007_definition_V1_pm",
+  "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
+  "transfer_matrix_011_definition_H1_H2",
 ].sort();
-const evenSectorTransferDefinitionExpectedContentSha256 = "2b98815ef0d80cf308e5c5da336e44c224de79b555bd635cbcdb46f83ea286ef";
+const evenSectorGeneratorExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
+  ["bridge_002_claim_sigma_z_diagonal_action", "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232"],
+  ["bridge_009_claim_epsilon_projector_properties", "2f2e4f7f0c04a1e0ece43bba53e0d13ef242f7110768e9dd2315a28d6c33d32e"],
+  ["bridge_010_claim_epsilon_commutes", "225512460e5993591f6025bf01e9757753f1b3fc7d65cb02bfd86ee5a82a1735"],
+  ["calc_formulae_003_matrix_decomposition", "a97a47798c1376adfb7b1536fdbb7d39f2a0953080fdf0177149de1f7ba89200"],
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
+  ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
+  ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
+  ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "f0ad8e71b43e0eecee546bbbb1fb8da8e5e955bd1cdd4c87258c1d89e79bf843"],
+  ["transfer_matrix_011_definition_H1_H2", "19baa8255a664202439efe07a7c18f770902aa68a0d3ce553a650712c8a23413"],
+]);
+const v1PlusSquareRootDefinitionExpectedDirectDependencies = [
+  "calc_formulae_006_definition_of_cc",
+  "evensectorT_definition_H1_plus",
+  "transfer_matrix_011_definition_H1_H2",
+].sort();
+const v1PlusSquareRootDefinitionExpectedContentSha256 = "33659011599514363340a770866a6757ab8b49d6b7259f1c8fc777da7aea773a";
 const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_006_definition_of_cc", new Set(["abs_basic_properties", "matrix_exp_series_converges"])],
   ["linear_space_general_000_definition_kronecker_product", new Set(["kronecker_product_rule", "tensor_basis"])],
@@ -953,6 +1067,17 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
 const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
+  ["transfer_matrix_011_definition_H1_H2", "一般の生成子 H1^{(±)} と H2 の二定義に加え、既存の V1^{(±)} と V2 の指数表示を同じブロックへ束ねている。今回確定する節では外部入力として扱い、将来一ブロック一定義へ分割した後に依存順と節境界を再判定する必要がある。"],
+]);
+const futureBlockSplitRecommendedById = new Set([
+  "transfer_matrix_001_definition_symbols",
+  "transfer_matrix_011_definition_H1_H2",
+]);
+const presentationPredecessorEntryIdsById = new Map<string, string[]>([
+  ["closing_definition_D0_open_chain_operator", ["evensectorT_definition_H1_plus"]],
+  ["closing_definition_G_boundary_operator", ["closing_definition_D0_open_chain_operator"]],
+  ["closing_claim_D0_G_diagonal_action", ["closing_004_claim_H1_plus_in_sigma_z_form"]],
+  ["closing_claim_epsilon_D0_G_pairwise_commute", ["closing_claim_D0_G_diagonal_action"]],
 ]);
 const isingPattern = /Ising|イジング|spin|スピン|lattice|格子|site|サイト|transfer|転送|sector|セクター|momentum|運動量|fermion|フェルミオン/i;
 const abstractPatterns = [
@@ -1063,6 +1188,9 @@ const baseEntries = targetBlocks.map(({ file, block }) => {
   const semanticPrerequisiteLabels: string[] = [];
   if (block.id !== "calculation_formulae_definition_set_and_algebra_notation" && /\\mathbb\s*(?:\{[NZR]\}|[NZR])/.test(inspected)) semanticPrerequisiteLabels.push("set_and_algebra_notation");
   if (!["calculation_formulae_definition_set_and_algebra_notation", "calc_formulae_006_definition_of_cc"].includes(block.id) && /\\mathbb\s*\{?C\}?/.test(inspected)) semanticPrerequisiteLabels.push("definition_of_cc");
+  if (block.id !== "transfer_matrix_011_definition_H1_H2" && /H_[12]/.test(inspected)) {
+    semanticPrerequisiteLabels.push("def_H1_H2");
+  }
   semanticPrerequisiteLabels.push(...(explicitSemanticPrerequisiteLabelsById.get(block.id) ?? []));
   const rawReferenceLabels = [...new Set([...statementReferenceLabels, ...proofReferenceLabels, ...semanticPrerequisiteLabels])].sort();
   const configuredExclusions = nonPrerequisiteReferenceLabelsById.get(block.id) ?? new Set<string>();
@@ -1115,13 +1243,18 @@ const baseEntries = targetBlocks.map(({ file, block }) => {
     forwardStatementReferenceLabelsUsedAsPrerequisites: [...forwardPrerequisites].sort(),
     forwardStatementReferenceReview,
     blockSplitRequiredBeforeFinalOrdering: forwardStatementReferenceLabels.length > 0 && !forwardReviewMatches,
+    futureBlockSplitRecommended: futureBlockSplitRecommendedById.has(block.id),
+    presentationPredecessorEntryIds: presentationPredecessorEntryIdsById.get(block.id) ?? [],
   };
 });
 const entryById = new Map(baseEntries.map((entry) => [entry.id, entry]));
 const chapterStructures = finalChapters.map((chapter) => {
   const chapterEntries = baseEntries.filter((entry) => entry.provisionalFinalChapter === chapter);
   const chapterIds = new Set(chapterEntries.map(({ id }) => id));
-  const dependencies = new Map(chapterEntries.map(({ id, dependsOnEntryIds }) => [id, dependsOnEntryIds.filter((x) => chapterIds.has(x))]));
+  const dependencies = new Map(chapterEntries.map(({ id, dependsOnEntryIds, presentationPredecessorEntryIds }) => [
+    id,
+    [...new Set([...dependsOnEntryIds, ...presentationPredecessorEntryIds])].filter((x) => chapterIds.has(x)),
+  ]));
   const ordered = topologicalComponents(stronglyConnectedComponents([...chapterIds], dependencies), dependencies);
   return {
     chapter, entryCount: chapterEntries.length, dependencyDirection: "prerequisite から dependent へ",
@@ -1315,7 +1448,10 @@ function validateReviewedSection(
       throw new Error(`${sectionName}の節候補の内部依存辺が変わりました: ${id}: ${JSON.stringify(actualInternalDependencies)}`);
     }
     if (entry.explanationGranularityReview.inspectedContentSha256 !== expectedContentSha256.get(id)) {
-      throw new Error(`${sectionName}の節候補のレビュー済み本文が変わりました: ${id}`);
+      throw new Error(`${sectionName}の節候補のレビュー済み本文が変わりました: ${id}: ${JSON.stringify({
+        actual: entry.explanationGranularityReview.inspectedContentSha256,
+        expected: expectedContentSha256.get(id),
+      })}`);
     }
     return entry;
   });
@@ -1339,7 +1475,10 @@ function validateReviewedSection(
   for (const id of externalInputEntryIds) {
     const entry = entries.find((candidate) => candidate.id === id)!;
     if (entry.explanationGranularityReview.inspectedContentSha256 !== expectedExternalInputContentSha256.get(id)) {
-      throw new Error(`${sectionName}の節候補の外部入力本文が変わりました: ${id}`);
+      throw new Error(`${sectionName}の節候補の外部入力本文が変わりました: ${id}: ${JSON.stringify({
+        actual: entry.explanationGranularityReview.inspectedContentSha256,
+        expected: expectedExternalInputContentSha256.get(id),
+      })}`);
     }
   }
   return { sectionEntries, externalInputEntryIds };
@@ -1734,6 +1873,20 @@ const realSymmetricGeneratorsAndSignFlipSection = validateReviewedSection(
   realSymmetricGeneratorsAndSignFlipExpectedExternalInputContentSha256,
   ["eigenvalues_of_V_016_claim_sign_flip_conjugation"],
 );
+const evenSectorGeneratorSection = validateReviewedSection(
+  "偶セクター生成子のスピン作用素表示",
+  "2次元イジングモデル",
+  evenSectorGeneratorSectionEntryIds,
+  evenSectorGeneratorExpectedInternalDependencies,
+  evenSectorGeneratorExpectedContentSha256,
+  evenSectorGeneratorExpectedExternalInputEntryIds,
+  evenSectorGeneratorExpectedExternalInputContentSha256,
+  [
+    "closing_004_claim_H1_plus_in_sigma_z_form",
+    "closing_claim_D0_G_diagonal_action",
+    "closing_claim_epsilon_G_is_involution",
+  ],
+);
 const positiveSymmetrizedTransferMatrixEntriesEntry = positiveSymmetrizedTransferMatrixEntriesSection.sectionEntries[0]!;
 const zYLinearIndependenceEntry = zYLinearIndependenceSection.sectionEntries[0]!;
 const epsilonEigenspacesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[0]!;
@@ -1749,8 +1902,17 @@ const epsilonProjectorCommutationEntry = v1PlusMinusAndCommutationSection.sectio
 const sectorReplacementPowerEntry = v1PlusMinusAndCommutationSection.sectionEntries[6]!;
 const realSymmetricGeneratorsEntry = realSymmetricGeneratorsAndSignFlipSection.sectionEntries[0]!;
 const signFlipConjugationEntry = realSymmetricGeneratorsAndSignFlipSection.sectionEntries[1]!;
-const evenSectorTransferDefinitionEntry = entries.find((entry) =>
-  entry.id === "evensectorT_001_definition_V_plus")!;
+const evenSectorGeneratorDefinitionEntry = evenSectorGeneratorSection.sectionEntries[0]!;
+const positiveDefiniteSymmetrizedTransferMatrixEntry = entries.find((entry) =>
+  entry.id === "maxeig_003_claim_W_is_positive_definite")!;
+const evenSectorOpenChainDefinitionEntry = evenSectorGeneratorSection.sectionEntries[1]!;
+const evenSectorBoundaryDefinitionEntry = evenSectorGeneratorSection.sectionEntries[2]!;
+const evenSectorGeneratorSpinFormEntry = evenSectorGeneratorSection.sectionEntries[3]!;
+const evenSectorGeneratorDiagonalActionEntry = evenSectorGeneratorSection.sectionEntries[4]!;
+const evenSectorGeneratorPairwiseCommutationEntry = evenSectorGeneratorSection.sectionEntries[5]!;
+const evenSectorGeneratorInvolutionEntry = evenSectorGeneratorSection.sectionEntries[6]!;
+const v1PlusSquareRootDefinitionEntry = entries.find((entry) =>
+  entry.id === "evensectorT_definition_V1_plus_square_root")!;
 if (kappaDefinitionEntry.dependencyPlacement!.chapterOrder !== 17
   || criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder !== 18
   || symmetrizedTransferMatrixSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 19
@@ -1927,7 +2089,8 @@ if (v1PlusMinusDefinitionEntry.dependencyPlacement!.chapterOrder !== 30
     sectorReplacementPowerDependencies: sectorReplacementPowerEntry.dependsOnEntryIds,
   })}`);
 }
-if (realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder !== 37
+if (realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder
+    <= sectorReplacementPowerEntry.dependencyPlacement!.chapterOrder
   || JSON.stringify([...realSymmetricGeneratorsEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(realSymmetricGeneratorsExpectedDirectDependencies)
   || realSymmetricGeneratorsEntry.explanationGranularityReview.inspectedContentSha256
@@ -1936,7 +2099,10 @@ if (realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder !== 37
     realSymmetricGeneratorsEntry.dependsOnEntryIds.includes(entry.id))
   || v1PlusMinusAndCommutationSection.sectionEntries.some((entry) =>
     entry.dependsOnEntryIds.includes(realSymmetricGeneratorsEntry.id))) {
-  throw new Error("セクター上での V1 の置き換えと二つの生成子の実対称性との節境界が変わりました");
+  throw new Error(`セクター上での V1 の置き換えと二つの生成子の実対称性との節境界が変わりました: ${JSON.stringify({
+    order: realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder,
+    dependencies: realSymmetricGeneratorsEntry.dependsOnEntryIds,
+  })}`);
 }
 const sectorReplacementExternalInputSet = new Set(v1PlusMinusAndCommutationSection.externalInputEntryIds);
 const inputsAddedForRealSymmetricGenerators = realSymmetricGeneratorsEntry.dependsOnEntryIds
@@ -1948,6 +2114,7 @@ if (JSON.stringify(inputsAddedForRealSymmetricGenerators.sort()) !== JSON.string
   "linear_space_general_000_definition_kronecker_product",
   "linear_space_general_000d_claim_kronecker_transpose",
   "transfer_matrix_007_definition_V1_pm",
+  "transfer_matrix_011_definition_H1_H2",
 ].sort())
   || JSON.stringify(inputsDroppedAfterSectorReplacement.sort()) !== JSON.stringify([
     "bridge_008_definition_epsilon_projectors",
@@ -1964,44 +2131,104 @@ if (JSON.stringify(inputsAddedForRealSymmetricGenerators.sort()) !== JSON.string
     dropped: inputsDroppedAfterSectorReplacement,
   })}`);
 }
-if (signFlipConjugationEntry.dependencyPlacement!.chapterOrder !== 38
+if (signFlipConjugationEntry.dependencyPlacement!.chapterOrder
+    !== realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder + 1
   || JSON.stringify([...signFlipConjugationEntry.dependsOnEntryIds].sort())
-    !== JSON.stringify(signFlipConjugationExpectedDirectDependencies)
-  || evenSectorTransferDefinitionEntry.dependencyPlacement!.chapterOrder !== 39
-  || JSON.stringify([...evenSectorTransferDefinitionEntry.dependsOnEntryIds].sort())
-    !== JSON.stringify(evenSectorTransferDefinitionExpectedDirectDependencies)
-  || evenSectorTransferDefinitionEntry.explanationGranularityReview.inspectedContentSha256
-    !== evenSectorTransferDefinitionExpectedContentSha256
-  || evenSectorTransferDefinitionEntry.dependsOnEntryIds.includes(realSymmetricGeneratorsEntry.id)
-  || evenSectorTransferDefinitionEntry.dependsOnEntryIds.includes(signFlipConjugationEntry.id)
-  || realSymmetricGeneratorsAndSignFlipSection.sectionEntries.some((entry) =>
-    entry.dependsOnEntryIds.includes(evenSectorTransferDefinitionEntry.id))) {
-  throw new Error("実対称な生成子と符号反転共役の節末、および偶セクター転送行列の定義との節境界が変わりました");
+    !== JSON.stringify(signFlipConjugationExpectedDirectDependencies)) {
+  throw new Error("実対称な生成子と符号反転共役の節末が変わりました");
 }
-const realSymmetricGeneratorsAndSignFlipExternalInputSet = new Set(
-  realSymmetricGeneratorsAndSignFlipSection.externalInputEntryIds,
-);
-const inputsAddedForEvenSectorTransferDefinition = evenSectorTransferDefinitionEntry.dependsOnEntryIds
-  .filter((id) => !realSymmetricGeneratorsAndSignFlipExternalInputSet.has(id));
-const inputsDroppedAfterSignFlipConjugation = realSymmetricGeneratorsAndSignFlipSection.externalInputEntryIds
-  .filter((id) => !evenSectorTransferDefinitionEntry.dependsOnEntryIds.includes(id));
-if (JSON.stringify(inputsAddedForEvenSectorTransferDefinition.sort()) !== JSON.stringify([
-  "TV1_hatZ_hatY_009_definition_invertible_elements",
-  "TV1_hatZ_hatY_011_definition_T_g",
-  "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
-  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+if (!positiveDefiniteSymmetrizedTransferMatrixEntry.dependsOnEntryIds.includes(realSymmetricGeneratorsEntry.id)
+  || positiveDefiniteSymmetrizedTransferMatrixEntry.dependsOnEntryIds.includes(signFlipConjugationEntry.id)
+  || positiveDefiniteSymmetrizedTransferMatrixEntry.dependencyPlacement!.chapterOrder
+    <= signFlipConjugationEntry.dependencyPlacement!.chapterOrder) {
+  throw new Error("実対称性から対称化転送行列の正定値性へ分岐する節境界が変わりました");
+}
+if (JSON.stringify([...evenSectorGeneratorDefinitionEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify([
+      "transfer_matrix_011_definition_H1_H2",
+    ].sort())
+  || evenSectorGeneratorDefinitionEntry.dependsOnEntryIds.includes(realSymmetricGeneratorsEntry.id)
+  || evenSectorGeneratorDefinitionEntry.dependsOnEntryIds.includes(signFlipConjugationEntry.id)
+  || realSymmetricGeneratorsAndSignFlipSection.sectionEntries.some((entry) =>
+    entry.dependsOnEntryIds.includes(evenSectorGeneratorDefinitionEntry.id))) {
+  throw new Error(`実対称な生成子と符号反転共役の節末、および偶セクター生成子の定義との節境界が変わりました: ${JSON.stringify({
+    evenSectorGeneratorDependencies: evenSectorGeneratorDefinitionEntry.dependsOnEntryIds,
+    realSymmetricDependsOnGenerator: realSymmetricGeneratorsEntry.dependsOnEntryIds.includes(evenSectorGeneratorDefinitionEntry.id),
+    signFlipDependsOnGenerator: signFlipConjugationEntry.dependsOnEntryIds.includes(evenSectorGeneratorDefinitionEntry.id),
+  })}`);
+}
+if (evenSectorOpenChainDefinitionEntry.dependencyPlacement!.chapterOrder
+    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 1
+  || evenSectorBoundaryDefinitionEntry.dependencyPlacement!.chapterOrder
+    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 2
+  || evenSectorGeneratorSpinFormEntry.dependencyPlacement!.chapterOrder
+    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 3
+  || evenSectorGeneratorDiagonalActionEntry.dependencyPlacement!.chapterOrder
+    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 4
+  || evenSectorGeneratorPairwiseCommutationEntry.dependencyPlacement!.chapterOrder
+    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 5
+  || evenSectorGeneratorInvolutionEntry.dependencyPlacement!.chapterOrder
+    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 6
+  || v1PlusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder
+    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 7
+  || JSON.stringify([...v1PlusSquareRootDefinitionEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(v1PlusSquareRootDefinitionExpectedDirectDependencies)
+  || v1PlusSquareRootDefinitionEntry.explanationGranularityReview.inspectedContentSha256
+    !== v1PlusSquareRootDefinitionExpectedContentSha256
+  || v1PlusSquareRootDefinitionEntry.dependsOnEntryIds.includes(evenSectorGeneratorSpinFormEntry.id)
+  || evenSectorGeneratorSection.sectionEntries.some((entry) =>
+    entry.dependsOnEntryIds.includes(v1PlusSquareRootDefinitionEntry.id))) {
+  throw new Error(`偶セクター生成子のスピン作用素表示と半指数行列の定義との節境界が変わりました: ${JSON.stringify({
+    orders: evenSectorGeneratorSection.sectionEntries.map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
+    nextOrder: v1PlusSquareRootDefinitionEntry.dependencyPlacement?.chapterOrder,
+    nextDependencies: v1PlusSquareRootDefinitionEntry.dependsOnEntryIds,
+    nextContentSha256: v1PlusSquareRootDefinitionEntry.explanationGranularityReview.inspectedContentSha256,
+    expectedNextContentSha256: v1PlusSquareRootDefinitionExpectedContentSha256,
+    interveningEntries: entries
+      .filter((entry) => entry.provisionalFinalChapter === "2次元イジングモデル"
+        && entry.dependencyPlacement!.chapterOrder >= 37
+        && entry.dependencyPlacement!.chapterOrder <= 60)
+      .map((entry) => [entry.dependencyPlacement!.chapterOrder, entry.id]),
+  })}`);
+}
+for (const entry of evenSectorGeneratorSection.sectionEntries) {
+  const expectedDependencies = [...evenSectorGeneratorExpectedDirectDependencies.get(entry.id)!].sort();
+  if (JSON.stringify([...entry.dependsOnEntryIds].sort()) !== JSON.stringify(expectedDependencies)) {
+    throw new Error(`偶セクター生成子のスピン作用素表示の直接依存が変わりました: ${entry.id}: ${JSON.stringify(entry.dependsOnEntryIds)}`);
+  }
+}
+if (evenSectorGeneratorDefinitionEntry.kind !== "definition"
+  || evenSectorOpenChainDefinitionEntry.kind !== "definition"
+  || evenSectorBoundaryDefinitionEntry.kind !== "definition"
+  || evenSectorGeneratorSpinFormEntry.kind !== "claim"
+  || evenSectorGeneratorDiagonalActionEntry.kind !== "claim"
+  || evenSectorGeneratorPairwiseCommutationEntry.kind !== "claim"
+  || evenSectorGeneratorInvolutionEntry.kind !== "claim") {
+  throw new Error("偶セクター生成子の定義とスピン作用素表示が一ブロック一定義・一主張の構造ではありません");
+}
+const evenSectorGeneratorExternalInputSet = new Set(evenSectorGeneratorSection.externalInputEntryIds);
+const inputsAddedForV1PlusSquareRootDefinition = v1PlusSquareRootDefinitionEntry.dependsOnEntryIds
+  .filter((id) => !evenSectorGeneratorExternalInputSet.has(id));
+const inputsDroppedAfterEvenSectorGenerator = evenSectorGeneratorSection.externalInputEntryIds
+  .filter((id) => !v1PlusSquareRootDefinitionEntry.dependsOnEntryIds.includes(id));
+if (JSON.stringify(inputsAddedForV1PlusSquareRootDefinition.sort()) !== JSON.stringify([
+  "evensectorT_definition_H1_plus",
 ].sort())
-  || JSON.stringify(inputsDroppedAfterSignFlipConjugation.sort()) !== JSON.stringify([
+  || JSON.stringify(inputsDroppedAfterEvenSectorGenerator.sort()) !== JSON.stringify([
     "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+    "bridge_001_definition_config_basis",
+    "bridge_002_claim_sigma_z_diagonal_action",
+    "bridge_009_claim_epsilon_projector_properties",
+    "bridge_010_claim_epsilon_commutes",
+    "calc_formulae_003_matrix_decomposition",
     "calculation_formulae_definition_set_and_algebra_notation",
-    "eigenvalues_of_V_011_definition_hermitian_positive_definite",
-    "linear_space_general_000_definition_kronecker_product",
     "linear_space_general_000b_claim_kronecker_product_rule",
-    "linear_space_general_000d_claim_kronecker_transpose",
+    "transfer_matrix_001_definition_symbols",
+    "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
   ].sort())) {
-  throw new Error(`符号反転共役の直後で入力集合の切り替わり方が変わりました: ${JSON.stringify({
-    added: inputsAddedForEvenSectorTransferDefinition,
-    dropped: inputsDroppedAfterSignFlipConjugation,
+  throw new Error(`偶セクター生成子のスピン作用素表示の直後で入力集合の切り替わり方が変わりました: ${JSON.stringify({
+    added: inputsAddedForV1PlusSquareRootDefinition,
+    dropped: inputsDroppedAfterEvenSectorGenerator,
   })}`);
 }
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
@@ -2013,6 +2240,11 @@ if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   ].every((id) => entries.find((entry) => entry.id === id)!.explanationGranularityReview.status
     === "具体的な行列計算への展開またはブロック分割を要する")) {
   throw new Error("実対称な生成子と符号反転共役の対象本文または外部入力の説明粒度判定が変わりました");
+}
+if (!evenSectorGeneratorSection.sectionEntries.every((entry) =>
+  entry.explanationGranularityReview.status === "自動検査で主題に適合")
+  || v1PlusSquareRootDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
+  throw new Error("偶セクター生成子のスピン作用素表示または直後の半指数行列の説明粒度判定が変わりました");
 }
 if (kappaDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || criticalSinhProductDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
@@ -2476,8 +2708,36 @@ const isingModelSectionBoundaries = [{
     "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
     "eigenvalues_of_V_016_claim_sign_flip_conjugation",
   ],
-  boundaryEvidence: "章内依存順37は Pauli 行列の積とクロネッカー積の転置を使い、iK1H1^{(±)} と iK2*H2 を実係数の Pauli 行列積として表して実対称性を示す。順38は同じ Pauli 行列積の入力に加えて順37で得た H2 の表示を直接用い、両方の生成子を同時に負号へ移す可逆行列による共役へ進むため、二項は一方向の内部依存で連続する。直後の順39は偶セクターの転送行列とその共役写像を定義するが、順37・38のどちらにも依存しない。順39では可逆元・共役写像・行列指数関数による共役・可換行列の指数積公式を追加し、Pauli 行列の積、クロネッカー積の成分と転置、エルミート性を入力から外すため、順38の符号反転共役で節を閉じる。生成時に二項の連続性、内部依存辺、対象と全外部入力の本文 fingerprint、順38への一意な閉包、順39との相互非依存、順39の本文・直接依存、および入力集合の追加・除外を固定検査する。",
+  boundaryEvidence: "章内依存順44で一般の H1^{(±)},H2 を定義する。順45は Pauli 行列の積とクロネッカー積の転置を使い、iK1H1^{(±)} と iK2*H2 を実係数の Pauli 行列積として表して実対称性を示す。順46は順45で得た H2 の表示を直接用い、両方の生成子を同時に負号へ移す可逆行列による共役へ進むため、二項は一方向の内部依存で連続する。後続の正定値性は順45の実対称性だけを再利用して順46には依存せず、順47の偶セクター生成子は一般定義から上符号を選ぶ別枝である。したがって実対称性と符号反転共役を二出力として順46で節を閉じる。生成時に二項の連続性、全直接依存、本文 fingerprint、後続二枝の依存差、および入力集合の切り替わりを固定検査する。",
   readabilityStatus: "実対称性は二次の Pauli 行列の積、サイトごとの積、クロネッカー積の転置を一段ずつ計算し、符号反転共役は各サイトの共役から生成子の各項へ進むため、対象二項は現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号に説明粒度の未解決が残る。",
+}, {
+  name: "偶セクター生成子のスピン作用素表示",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
+  entryIds: evenSectorGeneratorSectionEntryIds,
+  input: [
+    "一般の生成子 H1^{(±)}, H2 と境界項の符号を固定した指数行列 V1^{(±)}, V2 の複合定義",
+    "Jordan–Wigner 行列と全スピン反転行列のサイトごとの Pauli 行列表示",
+    "クロネッカー積の積の規則と、スピン配置に対応する標準基底上の σz の作用",
+  ],
+  externalInputEntryIds: evenSectorGeneratorSection.externalInputEntryIds,
+  output: [
+    "偶セクターの生成子 H1^{(+)} の定義",
+    "開鎖項 D0 と周期境界項 G の定義",
+    "iH1^{(+)} を隣接する σz の積と周期境界項で表す等式",
+    "開鎖項と境界項の対角作用、全スピン反転行列との可換性、および境界項を含む行列の二乗",
+  ],
+  mainTheorems: [
+    "偶セクターの生成子のスピン作用素表示と配置基底上の対角作用",
+    "全スピン反転行列・開鎖項・境界項の可換性と境界項を含む行列の二乗",
+  ],
+  mainTheoremEntryIds: [
+    "closing_004_claim_H1_plus_in_sigma_z_form",
+    "closing_claim_D0_G_diagonal_action",
+    "closing_claim_epsilon_G_is_involution",
+  ],
+  boundaryEvidence: "章内依存順47で一般の H1^{(±)} の定義から上符号を選び、偶セクターの生成子 H1^{(+)} を一対象だけ定める。順48–49の開鎖項 D0 と周期境界項 G は H1^{(+)} に意味的依存しない並行定義であり、読み順だけを提示順制約で固定する。順50はこの三定義を受け取り、Jordan–Wigner 行列をサイトごとの Pauli 行列積へ展開して iH1^{(+)}=D0+εG を示す。順51の対角作用と順52の可換性も相互に意味的依存しない出力で、提示順だけを固定する。順53は順52の可換性を使った (εG)^2=I を示す。直後の順54は順47だけを再利用して V1^{(+)} の半指数行列を定義し、順48–53の出力を使わない。順54では Pauli 行列積、配置基底、クロネッカー積、全スピン反転行列を入力から外すため、順53で節を閉じる。生成時に七項の連続性、項目ごとの全直接依存、意味的依存とは分離した提示順、対象と全外部入力の本文 fingerprint、三つの節末出力、順54の直接依存・本文・順48–53からの非依存、および入力集合の切り替わりを固定検査する。",
+  readabilityStatus: "生成子、半指数行列、転送行列、共役写像、可逆性、平方根性、共役合成一致を束ねていた旧定義ブロックを一ブロック一定義または一主張へ分割した。さらに、局所積、境界項、生成子表示、可換性、二乗、対角作用を束ねていた旧主張を、D0 の定義、G の定義、生成子表示、対角作用、二つずつの可換性、二乗へ分割した。対象七項は生成子の定義から二次の Pauli 行列積とクロネッカー積の有限計算を経て三つの節末出力へ進み、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号に加え、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義に説明粒度の未解決と将来の分割が残る。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
@@ -2531,7 +2791,7 @@ const inventory = {
   withdrawnBoundaryAxes: ["実数解析への脱出を伴う道具／有限複素行列だけで閉じる道具", "可算／非可算"],
   boundaryRule: "章境界は対象の意味がイジング模型に依存するかだけで定め、解析や集合の濃度は章・節境界に使わない。",
   finalChapters,
-  classificationStatus: "全項目の分類・説明粒度・ブロック境界を再検証し、章内依存順と数学的道具立ての分類群を確定済み。",
+  classificationStatus: "全項目の分類・説明粒度・ブロック境界を再検証し、章内依存順と数学的道具立ての分類群を確定済み。説明粒度の手動レビューで将来の分割対象とした複合定義は各項目に明記する。",
   entryCount: entries.length,
   chapterEntryCounts: Object.fromEntries(finalChapters.map((chapter) => [chapter, entries.filter((entry) => entry.provisionalFinalChapter === chapter).length])),
   mathematicalToolGroups,

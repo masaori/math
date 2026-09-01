@@ -1,6 +1,6 @@
 # 章 014「偶セクターでの `T` の作用」の Lean 形式化
 
-対象: `structured-latex/content/014_even_sector_T_action.ts`（10 主張）
+対象: `structured-latex/content/014_even_sector_T_action.ts`（定義・主張 16 本）
 
 新規ファイル:
 
@@ -17,11 +17,12 @@
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.VPlus` / `VPlusUnits` | `V^{(+)} := (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}` とその単元版 | `def_V_plus_and_T_V_plus` |
-| `Ising2D.isUnit_V1halfPlus` / `isUnit_VPlus` | (1) `(V_1^{(+)})^{1/2}`, `V^{(+)}` の可逆性 | 同上 (1) |
-| `Ising2D.V1halfPlus_sq` | (2) `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | 同上 (2) |
-| `Ising2D.TVPlus` | `T_{(V^{(+)})}` を ℂ-代数自己同型として | 同上 |
-| `Ising2D.TVPlus_eq_TConj` / `TVPlus_apply_eq_conj` | (3) `T_{(V^{(+)})} = T_{V^{(+)}}` | 同上 (3) |
+| `Ising2D.H1 M (-1)` / `V1half M K1 (-1)` | `H_1^{(+)}` と `(V_1^{(+)})^{1/2}` | `def_H1_plus` / `def_V1_plus_square_root` |
+| `Ising2D.VPlus` / `VPlusUnits` | `V^{(+)} := (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}` とその単元版 | `def_V_plus` |
+| `Ising2D.isUnit_V1halfPlus` / `isUnit_VPlus` | `(V_1^{(+)})^{1/2}`, `V^{(+)}` の可逆性 | `V_plus_factors_invertible` |
+| `Ising2D.V1halfPlus_sq` | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
+| `Ising2D.TVPlus` | `T_{(V^{(+)})}` を ℂ-代数自己同型として | `def_T_V_plus` |
+| `Ising2D.TVPlus_eq_TConj` / `TVPlus_apply_eq_conj` | `T_{(V^{(+)})} = T_{V^{(+)}}` | `T_V_plus_is_conjugation` |
 | `Ising2D.checkPhase_mul_neg` | `e^{-iθ~_μ} e^{iθ~_μ} = 1`（帰納段階で使う唯一の位相の性質） | `nesting_of_commutator_of_H_and_check_Z` の proof |
 | `Ising2D.ad_K1H1Plus_checkZ` / `ad_K1H1Plus_checkY` | `ad(K_1H_1^{(+)})` が `span{Ž_μ, Y̌_μ}` を保つこと | 同上（(A)(B) の `K_1` 倍） |
 | `Ising2D.ad_K2H2_checkZ` / `ad_K2H2_checkY` | `ad(K_2^*H_2)` が同じ空間を保つこと | 同上（(C)(D) の `K_2^*` 倍） |
@@ -67,7 +68,7 @@
 
 | 人手証明のラベル（章 014） | 具体版 | 必要十分版 |
 | --- | --- | --- |
-| `def_V_plus_and_T_V_plus` | `Ising2D.VPlus` / `TVPlus` / `TVPlus_eq_TConj` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Part008/Definition016_TV.lean`） |
+| `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1` / `V1half` / `V1halfPlus_sq` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Part008/Definition016_TV.lean`） |
 | `nesting_of_commutator_of_H_and_check_Z` | `Ising2D.nesting_H1Plus_checkZ_even` ほか 8 本 | 既存の `NecSuf.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y` |
 | `cosh_sinh_coefficient_conversion_for_check` | `Ising2D.conversion_H1Plus_checkZ_even` ほか 8 本 | 同上（`(α, β, s)` を付け替えただけ） |
 | `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本 | 既存の `NecSuf.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
@@ -122,7 +123,7 @@ Lean での機械的裏づけである。
 
 ## 3. 形式化できなかった主張とその理由
 
-無し。章 014 の 10 主張はすべて形式化した（`sorry` / `admit` はゼロ）。
+無し。章 014 の 11 主張はすべて形式化した（`sorry` / `admit` はゼロ）。
 
 ただし次の 2 点は**仮定として残している**。いずれも 008 章と同じもので、
 未形式化に由来する穴ではなく**数学的に必要な前提**である。
@@ -157,7 +158,7 @@ Lean では `n = 2k` / `n = 2k+1` と書き分けた 2 本ずつの定理にし�
 
 ## 4. 人手証明に見つかった誤り・穴
 
-**無し。** 章 014 の 10 主張はすべて、係数まで含めて原文どおりに形式化できた。
+**無し。** 章 014 の 11 主張はすべて、係数まで含めて原文どおりに形式化できた。
 とくに次の 2 点は原文が 008 章より改善している。
 
 - 008 章が `B_1B_2B_1 = A(θ)` に必要な双対関係 `c_2^* = s_2^* c_2` を明示していなかったのに対し、

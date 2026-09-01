@@ -1845,7 +1845,7 @@ E_K \check{Q}_\epsilon
         " について、**上の符号を取ったもの ",
         math(String.raw`S_1^{(+)}`),
         " を使う**。",
-        ref("def_V_plus_and_T_V_plus"),
+        ref("def_V_plus"),
         " の ",
         math(String.raw`V^{(+)} = \left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}`),
         " は",
@@ -1881,7 +1881,9 @@ E_K \check{Q}_\epsilon
     proof: [
       paragraph([
         "Step 1（表示）。二つの因子を順に書き直す（",
-        ref("def_V_plus_and_T_V_plus"),
+        ref("def_V_plus"),
+        "、",
+        ref("def_V1_plus_square_root"),
         "、",
         ref("def_transfer_matrix_symbols"),
         "、",

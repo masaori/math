@@ -1,9 +1,11 @@
 /-
 # 具体版: `V^{(+)}` と `T_{(V^{(+)})}` の定義
 
-対応する人手証明のラベル: **`def_V_plus_and_T_V_plus`**
+対応する人手証明のラベル: **`def_H1_plus` / `def_V1_plus_square_root` /
+`V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` /
+`T_V_plus_is_conjugation`**
 （`structured-latex/content/014_even_sector_T_action.ts` の
-`evensectorT_001_definition_V_plus`）
+`evensectorT_definition_H1_plus` から `evensectorT_claim_T_V_plus_is_conjugation` まで）
 
 **必要十分版**は `Ising2D/NecSuf/TVActionSandwich.lean`（`Ising2D.NecSuf.expUnits` /
 `smulUnitsAlg` / `TV_sandwich_actsBy`）。本ファイルの内容のうち
@@ -18,7 +20,7 @@
   `V^{(+)} := (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}`
   `T_{(V^{(+)})}(X) := T_{(V_1^{(+)})^{1/2}}(T_{V_2}(T_{(V_1^{(+)})^{1/2}}(X)))`
 
-および原文が「定義が意味をもつために必要な事実」として挙げる 3 点
+および原文が独立した主張として挙げる 3 点
 
   (1) `(V_1^{(+)})^{1/2}`, `V_2`, `V^{(+)}` は可逆
   (2) `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}`
@@ -56,15 +58,15 @@ noncomputable def VPlusUnits (M : ℕ) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : �
 theorem VPlusUnits_val {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
     ((VPlusUnits M hs2 K1 K2star : (TensorPow M)ˣ) : TensorPow M) = VPlus M s2 K1 K2star := rfl
 
-/-- **原文 (1)**: `(V_1^{(+)})^{1/2}` は可逆。 -/
+/-- **原文 `V_plus_factors_invertible`**: `(V_1^{(+)})^{1/2}` は可逆。 -/
 theorem isUnit_V1halfPlus (K1 : ℂ) : IsUnit (V1half M K1 (-1)) := isUnit_V1half K1 (-1)
 
-/-- **原文 (1)**: `V^{(+)}` は可逆。 -/
+/-- **原文 `V_plus_factors_invertible`**: `V^{(+)}` は可逆。 -/
 theorem isUnit_VPlus {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
     IsUnit (VPlus M s2 K1 K2star) :=
   ⟨VPlusUnits M hs2 K1 K2star, rfl⟩
 
-/-- **原文 (2)**: `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}`。 -/
+/-- **原文 `V1_plus_square_root_property`**: `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}`。 -/
 theorem V1halfPlus_sq (K1 : ℂ) :
     V1half M K1 (-1) * V1half M K1 (-1) = V1 M K1 (-1) :=
   V1half_sq K1 (-1)
@@ -82,12 +84,12 @@ theorem TVPlus_apply {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) (x : TensorPow 
       TConj (V1halfUnits M K1 (-1))
         (TConj (V2Units M hs2 K2star) (TConj (V1halfUnits M K1 (-1)) x)) := rfl
 
-/-- **原文 (3)**: 合成として定めた `T_{(V^{(+)})}` は `V^{(+)}` による共役そのものに一致する。 -/
+/-- **原文 `T_V_plus_is_conjugation`**: 合成として定めた `T_{(V^{(+)})}` は `V^{(+)}` による共役そのものに一致する。 -/
 theorem TVPlus_eq_TConj {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
     TVPlus M hs2 K1 K2star = TConj (VPlusUnits M hs2 K1 K2star) :=
   TV_eq_TConj _ _
 
-/-- 原文 (3) を「値」で書いた版: `T_{(V^{(+)})}(X) = V^{(+)} X (V^{(+)})^{-1}`。 -/
+/-- 原文 `T_V_plus_is_conjugation` を「値」で書いた版: `T_{(V^{(+)})}(X) = V^{(+)} X (V^{(+)})^{-1}`。 -/
 theorem TVPlus_apply_eq_conj {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) (x : TensorPow M) :
     TVPlus M hs2 K1 K2star x =
       VPlus M s2 K1 K2star * x *

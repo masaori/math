@@ -983,6 +983,44 @@ q
   },
 
   {
+    id: "closing_definition_D0_open_chain_operator",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 6 },
+    title: { tex: String.raw`\text{開鎖項 } D_0` },
+    labels: ["def_D0_open_chain_operator"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とする。",
+        ref("def_transfer_matrix_symbols"),
+        " のサイト作用素を用いて、開鎖項を",
+      ]),
+      displayMath(String.raw`D_0 := \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z`),
+      paragraph(["と定める。"]),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "closing_definition_G_boundary_operator",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 6 },
+    title: { tex: String.raw`\text{周期境界項 } G` },
+    labels: ["def_G_boundary_operator"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        " とする。",
+        ref("def_transfer_matrix_symbols"),
+        " のサイト作用素を用いて、周期境界項を",
+      ]),
+      displayMath(String.raw`G := \sigma_M^z\sigma_1^z`),
+      paragraph(["と定める。"]),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
     id: "closing_004_claim_H1_plus_in_sigma_z_form",
     kind: "claim",
     origin: { path: SRC, ordinal: 6 },
@@ -995,63 +1033,20 @@ q
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         " とし、",
-        ref("def_V_plus_and_T_V_plus"),
+        ref("def_H1_plus"),
         " の ",
         math(String.raw`H_1^{(+)} = Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M - Y_MZ_1`),
-        " を考える。",
-      ]),
-      list([
-        [
-          math(String.raw`\text{(1)}\quad i\,Y_mZ_{m+1} = \sigma_m^z\sigma_{m+1}^z
-\qquad (m \in \{1,\dots,M-1\})`),
-        ],
-        [
-          math(String.raw`\text{(2)}\quad -i\,Y_MZ_1 = \varepsilon\,\sigma_M^z\sigma_1^z`),
-        ],
-        [
-          math(String.raw`\text{(3)}\quad i\,H_1^{(+)}
-= D_0 + \varepsilon\,G, \qquad
-D_0 := \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z, \quad
-G := \sigma_M^z\sigma_1^z`),
-        ],
-        [
-          math(String.raw`\text{(4)}\quad \varepsilon D_0 = D_0\varepsilon, \qquad
-\varepsilon G = G\varepsilon, \qquad D_0G = GD_0, \qquad
-\left(\varepsilon G\right)^2 = I`),
-        ],
-      ]),
-      paragraph([
-        "が成り立つ。とくに ",
+        "、",
+        ref("def_D0_open_chain_operator"),
+        " の開鎖項 ",
         math(String.raw`D_0`),
-        " と ",
+        "、",
+        ref("def_G_boundary_operator"),
+        " の周期境界項 ",
         math(String.raw`G`),
-        " は ",
-        ref("def_config_basis_iso"),
-        " の基底 ",
-        math(String.raw`f_{\iota(s)}`),
-        "（",
-        math(String.raw`s \in \mathfrak{M}`),
-        "）について対角であり、",
-        ref("sigma_z_diagonal_action"),
-        " より",
+        " について",
       ]),
-      displayMath(
-        String.raw`D_0 f_{\iota(s)} = \left(\sum_{m=1}^{M-1}s(m)s(m+1)\right)f_{\iota(s)},
-\qquad
-G f_{\iota(s)} = s(M)s(1)\,f_{\iota(s)}`,
-      ),
-      paragraph([
-        "である。",
-        "（**スピン配置を ",
-        math(String.raw`s`),
-        " と書くのは、",
-        math(String.raw`\mu`),
-        " を 013 章以降モードの添字に使っているためである。**",
-        ref("def_transfer_matrix"),
-        " の ",
-        math(String.raw`\mathfrak{M} = \mathrm{Map}(\{1,\dots,M\},\{-1,1\})`),
-        " の元を指す。）",
-      ]),
+      displayMath(String.raw`i\,H_1^{(+)} = D_0 + \varepsilon G`),
     ],
     proof: [
       paragraph([
@@ -1083,7 +1078,7 @@ G f_{\iota(s)} = s(M)s(1)\,f_{\iota(s)}`,
         " (1) より**相異なるサイトに置かれた因子どうしは可換**である。",
       ]),
       paragraph([
-        "(1) ",
+        "まず ",
         math(String.raw`1 \leq m \leq M-1`),
         " とする。",
         ref("def_transfer_matrix_symbols"),
@@ -1108,6 +1103,7 @@ Y_mZ_{m+1}
 &= \left(-i\,\sigma_m^z\right)\sigma_{m+1}^z
    \quad (\because \sigma^y\sigma^x = -i\sigma^z) \\
 &= -i\,\sigma_m^z\sigma_{m+1}^z
+   \quad (\because \text{スカラー倍と行列積の結合律})
 \end{aligned}`,
       ),
       paragraph([
@@ -1120,7 +1116,7 @@ Y_mZ_{m+1}
         "）。",
       ]),
       paragraph([
-        "(2) ",
+        "次に境界項を計算する。",
         math(String.raw`Y_M = \sigma_1^x\cdots\sigma_{M-1}^x\sigma_M^y`),
         "、",
         math(String.raw`Z_1 = \sigma_1^z`),
@@ -1136,6 +1132,7 @@ Y_MZ_1
 &= \left(-i\,\sigma_1^y\right)\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y
    \quad (\because \sigma^x\sigma^z = -i\sigma^y) \\
 &= -i\,\sigma_1^y\sigma_2^x\cdots\sigma_{M-1}^x\sigma_M^y
+   \quad (\because \text{スカラー倍と行列積の結合律})
 \end{aligned}`,
       ),
       paragraph(["次に右辺を計算する。"]),
@@ -1169,98 +1166,289 @@ Y_MZ_1
 \end{aligned}`,
       ),
       paragraph([
-        "(3) ",
-        ref("def_V_plus_and_T_V_plus"),
+        "最後に ",
+        ref("def_H1_plus"),
         " の ",
         math(String.raw`H_1^{(+)}`),
-        " に (1)(2) を適用する。",
+        " に直前の二つの計算を一つずつ適用する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 i\,H_1^{(+)}
 &= i\left(\sum_{m=1}^{M-1}Y_mZ_{m+1} - Y_MZ_1\right)
-   \quad (\because \text{def\_H1\_pm の上の符号}) \\
+   \quad (\because \text{def\_H1\_plus}) \\
 &= \sum_{m=1}^{M-1}\left(i\,Y_mZ_{m+1}\right) + \left(-i\,Y_MZ_1\right)
    \quad (\because \text{スカラー倍の分配法則}) \\
+&= \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z + \left(-i\,Y_MZ_1\right)
+   \quad (\because \text{直前に示した内部辺の等式を有限和へ適用}) \\
 &= \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z + \varepsilon\,\sigma_M^z\sigma_1^z
-   \quad (\because \text{(1) を } M-1 \text{ 箇所へ同時適用し、(2)}) \\
+   \quad (\because \text{直前に示した境界項の等式}) \\
+&= D_0 + \varepsilon\,\sigma_M^z\sigma_1^z
+   \quad (\because \text{def\_D0\_open\_chain\_operator}) \\
 &= D_0 + \varepsilon G
+   \quad (\because \text{def\_G\_boundary\_operator})
 \end{aligned}`,
       ),
-      paragraph([
-        "(4) ",
-        ref("epsilon_commutes_with_transfer_matrices"),
-        " の Step 1 より ",
-        math(String.raw`\varepsilon\sigma_k^z = -\sigma_k^z\varepsilon`),
-        " なので、",
-        math(String.raw`\sigma^z`),
-        " を 2 個含む積 ",
-        math(String.raw`\sigma_m^z\sigma_{m+1}^z`),
-        " や ",
-        math(String.raw`\sigma_M^z\sigma_1^z`),
-        " については符号が 2 回反転して ",
-        math(String.raw`(-1)^2 = 1`),
-        " となり、",
-        math(String.raw`\varepsilon`),
-        " と可換である。したがって ",
-        math(String.raw`\varepsilon D_0 = D_0\varepsilon`),
-        "、",
-        math(String.raw`\varepsilon G = G\varepsilon`),
-        "。",
-        math(String.raw`D_0`),
-        " と ",
-        math(String.raw`G`),
-        " はどちらも ",
-        math(String.raw`\sigma_k^z`),
-        " たちの積の和であり、相異なるサイトの因子は可換、同一サイトでは ",
-        math(String.raw`\sigma^z\sigma^z`),
-        " どうしなので、",
-        math(String.raw`D_0G = GD_0`),
-        " である。最後に",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(\varepsilon G\right)^2
-&= \varepsilon G\varepsilon G
-&&\bigl(\because\ \text{二乗の定義}\bigr)\\
-&= \varepsilon^2G^2
-&&\bigl(\because\ \varepsilon G = G\varepsilon\text{（上の (4)}\text{）}\bigr)\\
-&= I\,G^2
-&&\bigl(\because\ \text{epsilon\_projector\_properties (1) の }\varepsilon^2 = I\bigr)\\
-&= I\left(\sigma_M^z\right)^2\left(\sigma_1^z\right)^2
-&&\bigl(\because\ G:=\sigma_M^z\sigma_1^z\text{（上の (3)）と、相異なるサイトの因子の可換性}\bigr)\\
-&= I\cdot I\cdot I
-&&\bigl(\because\ (\sigma_k^z)^2 = I\text{（直後の段落）}\bigr)\\
-&= I
-&&\bigl(\because\ \text{単位行列の積}\bigr)
-\end{aligned}`,
-      ),
-      paragraph([
-        "（",
-        math(String.raw`(\sigma_k^z)^2 = I`),
-        " は ",
-        ref("pauli_matrix_products"),
-        " の ",
-        math(String.raw`\sigma^z\sigma^z = I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        " と ",
-        ref("kronecker_product_rule"),
-        " (1)(2) による。）",
-      ]),
-      paragraph([
-        "対角性は ",
-        ref("sigma_z_diagonal_action"),
-        " の ",
-        math(String.raw`\sigma_m^z\sigma_{m'}^zf_{\iota(s)} = s(m)s(m')f_{\iota(s)}`),
-        " をそのまま有限和に適用すればよい。",
-      ]),
     ],
     conversion: {
       status: "added",
       notes: [
-        "V1_in_Z_Y_epsilon は V_1 = exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M − εY_MZ_1)) を主張しており、この (3) はその指数の中身を σ^z の言葉へ戻したものにあたる。(3) の右辺は F^{(+)} 上（ε = +1）で K_1 D の 1/K_1 倍に一致し、F^{(-)} 上では最後の項の符号が反転する。これが V^{(+)} が「周期境界」、V^{(-)} が「反周期境界」に対応する具体的な形である。",
+        "V1_in_Z_Y_epsilon は V_1 = exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M − εY_MZ_1)) を主張しており、この表示はその指数の中身を σ^z の言葉へ戻したものにあたる。右辺は F^{(+)} 上（ε = +1）で K_1 D の 1/K_1 倍に一致し、F^{(-)} 上では最後の項の符号が反転する。これが V^{(+)} が「周期境界」、V^{(-)} が「反周期境界」に対応する具体的な形である。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,3,4,5 で残差 0.0）。",
       ],
     },
+  },
+
+  {
+    id: "closing_claim_epsilon_D0_G_pairwise_commute",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 6 },
+    title: { tex: String.raw`\varepsilon, D_0, G \text{ の二つずつの可換性}` },
+    labels: ["epsilon_D0_G_pairwise_commute"],
+    statement: [
+      paragraph([
+        ref("def_D0_open_chain_operator"),
+        " の ",
+        math(String.raw`D_0`),
+        " と ",
+        ref("def_G_boundary_operator"),
+        " の ",
+        math(String.raw`G`),
+        " は ",
+        math(String.raw`\varepsilon`),
+        " と二つずつ可換である。すなわち",
+      ]),
+      displayMath(String.raw`\varepsilon D_0 = D_0\varepsilon, \qquad
+\varepsilon G = G\varepsilon, \qquad D_0G = GD_0`),
+    ],
+    proof: [
+      paragraph([
+        ref("epsilon_commutes_with_transfer_matrices"),
+        " の Step 1 より、各 ",
+        math(String.raw`k \in \{1,\dots,M\}`),
+        " について ",
+        math(String.raw`\varepsilon\sigma_k^z=-\sigma_k^z\varepsilon`),
+        " である。各 ",
+        math(String.raw`m\in\{1,\dots,M-1\}`),
+        " に対して二回の反可換移動を一回ずつ行うと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon(\sigma_m^z\sigma_{m+1}^z)
+&=(\varepsilon\sigma_m^z)\sigma_{m+1}^z
+&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
+&=(-\sigma_m^z\varepsilon)\sigma_{m+1}^z
+&&\bigl(\because\ \varepsilon\sigma_m^z=-\sigma_m^z\varepsilon\bigr)\\
+&=-\sigma_m^z(\varepsilon\sigma_{m+1}^z)
+&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
+&=-\sigma_m^z(-\sigma_{m+1}^z\varepsilon)
+&&\bigl(\because\ \varepsilon\sigma_{m+1}^z=-\sigma_{m+1}^z\varepsilon\bigr)\\
+&=\sigma_m^z(\sigma_{m+1}^z\varepsilon)
+&&\bigl(\because\ (-1)(-1)=1\bigr)\\
+&=(\sigma_m^z\sigma_{m+1}^z)\varepsilon
+&&\bigl(\because\ \text{行列の積の結合律}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon D_0
+&=\varepsilon\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)
+&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr)\\
+&=\sum_{m=1}^{M-1}\varepsilon(\sigma_m^z\sigma_{m+1}^z)
+&&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
+&=\sum_{m=1}^{M-1}(\sigma_m^z\sigma_{m+1}^z)\varepsilon
+&&\bigl(\because\ \text{直前の各 }m\text{ の等式}\bigr)\\
+&=\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)\varepsilon
+&&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
+&=D_0\varepsilon
+&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr).
+\end{aligned}`),
+      paragraph(["境界の二サイトについても同じ二回の反可換移動を行う。"]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon G
+&=\varepsilon(\sigma_M^z\sigma_1^z)
+&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr)\\
+&=(\varepsilon\sigma_M^z)\sigma_1^z
+&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
+&=(-\sigma_M^z\varepsilon)\sigma_1^z
+&&\bigl(\because\ \varepsilon\sigma_M^z=-\sigma_M^z\varepsilon\bigr)\\
+&=-\sigma_M^z(\varepsilon\sigma_1^z)
+&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
+&=-\sigma_M^z(-\sigma_1^z\varepsilon)
+&&\bigl(\because\ \varepsilon\sigma_1^z=-\sigma_1^z\varepsilon\bigr)\\
+&=\sigma_M^z(\sigma_1^z\varepsilon)
+&&\bigl(\because\ (-1)(-1)=1\bigr)\\
+&=(\sigma_M^z\sigma_1^z)\varepsilon
+&&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
+&=G\varepsilon
+&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("kronecker_product_rule"),
+        " (1) より、相異なるサイトの因子は可換し、同じサイトに現れる因子はいずれも ",
+        math(String.raw`\sigma^z`),
+        " なので、各サイトの因子を並べ替えると、各 ",
+        math(String.raw`m\in\{1,\dots,M-1\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\sigma_m^z\sigma_{m+1}^z)G
+&=(\sigma_m^z\sigma_{m+1}^z)(\sigma_M^z\sigma_1^z)
+&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr)\\
+&=(\sigma_M^z\sigma_1^z)(\sigma_m^z\sigma_{m+1}^z)
+&&\bigl(\because\ \text{kronecker\_product\_rule (1) を各サイトへ適用}\bigr)\\
+&=G(\sigma_m^z\sigma_{m+1}^z)
+&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+D_0G
+&=\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)G
+&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr)\\
+&=\sum_{m=1}^{M-1}(\sigma_m^z\sigma_{m+1}^z)G
+&&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
+&=\sum_{m=1}^{M-1}G(\sigma_m^z\sigma_{m+1}^z)
+&&\bigl(\because\ \text{直前の各 }m\text{ の等式}\bigr)\\
+&=G\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)
+&&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
+&=GD_0
+&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr).
+\end{aligned}`),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "closing_claim_epsilon_G_is_involution",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 6 },
+    title: { tex: String.raw`\varepsilon G \text{ の二乗}` },
+    labels: ["epsilon_G_is_involution"],
+    statement: [
+      paragraph([
+        ref("def_G_boundary_operator"),
+        " で定めた ",
+        math(String.raw`G`),
+        " について",
+      ]),
+      displayMath(String.raw`(\varepsilon G)^2=I`),
+    ],
+    proof: [
+      paragraph([
+        ref("epsilon_D0_G_pairwise_commute"),
+        " の ",
+        math(String.raw`\varepsilon G=G\varepsilon`),
+        "、",
+        ref("epsilon_projector_properties"),
+        " (1) の ",
+        math(String.raw`\varepsilon^2=I`),
+        "、および ",
+        ref("pauli_matrix_products"),
+        " と ",
+        ref("kronecker_product_rule"),
+        " による ",
+        math(String.raw`(\sigma_k^z)^2=I`),
+        " を一行ずつ用いる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\varepsilon G)^2
+&= \varepsilon G\varepsilon G
+&&\bigl(\because\ \text{二乗の定義}\bigr)\\
+&= \varepsilon^2G^2
+&&\bigl(\because\ \text{epsilon\_D0\_G\_pairwise\_commute の }\varepsilon G=G\varepsilon\bigr)\\
+&= I\,G^2
+&&\bigl(\because\ \text{epsilon\_projector\_properties (1) の }\varepsilon^2=I\bigr)\\
+&= I(\sigma_M^z)^2(\sigma_1^z)^2
+&&\bigl(\because\ G=\sigma_M^z\sigma_1^z\text{ と相異なるサイトの因子の可換性}\bigr)\\
+&= I\cdot I\cdot I
+&&\bigl(\because\ \text{pauli\_matrix\_products の }(\sigma^z)^2=I\bigr)\\
+&= I
+&&\bigl(\because\ \text{単位行列の積}\bigr)
+\end{aligned}`),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "closing_claim_D0_G_diagonal_action",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 6 },
+    title: { tex: String.raw`D_0, G \text{ の配置基底上の対角作用}` },
+    labels: ["D0_G_diagonal_action"],
+    statement: [
+      paragraph([
+        ref("def_config_basis_iso"),
+        " の基底 ",
+        math(String.raw`f_{\iota(s)}`),
+        "（",
+        math(String.raw`s\in\mathfrak M`),
+        "）に対し、",
+        ref("def_D0_open_chain_operator"),
+        " の ",
+        math(String.raw`D_0`),
+        " と ",
+        ref("def_G_boundary_operator"),
+        " の ",
+        math(String.raw`G`),
+        " は次のように作用する。",
+      ]),
+      displayMath(String.raw`D_0 f_{\iota(s)}
+=\left(\sum_{m=1}^{M-1}s(m)s(m+1)\right)f_{\iota(s)},
+\qquad
+G f_{\iota(s)}=s(M)s(1)f_{\iota(s)}`),
+      paragraph([
+        "ここでスピン配置を ",
+        math(String.raw`s`),
+        " と書くのは、",
+        math(String.raw`\mu`),
+        " をモードの添字に使うためである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("sigma_z_diagonal_action"),
+        " より、各 ",
+        math(String.raw`m\in\{1,\dots,M-1\}`),
+        " について一サイトずつ作用させると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\sigma_m^z\sigma_{m+1}^z)f_{\iota(s)}
+&=\sigma_m^z\bigl(s(m+1)f_{\iota(s)}\bigr)
+&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }m+1\text{ に適用}\bigr)\\
+&=s(m+1)\sigma_m^zf_{\iota(s)}
+&&\bigl(\because\ \text{行列作用の複素線型性}\bigr)\\
+&=s(m+1)\bigl(s(m)f_{\iota(s)}\bigr)
+&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }m\text{ に適用}\bigr)\\
+&=\bigl(s(m+1)s(m)\bigr)f_{\iota(s)}
+&&\bigl(\because\ \text{スカラー倍の結合律}\bigr)\\
+&=s(m)s(m+1)f_{\iota(s)}
+&&\bigl(\because\ \text{実数の積の交換律}\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+D_0f_{\iota(s)}
+&=\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)f_{\iota(s)}
+&&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr)\\
+&=\sum_{m=1}^{M-1}(\sigma_m^z\sigma_{m+1}^z)f_{\iota(s)}
+&&\bigl(\because\ \text{行列作用の有限和への分配法則}\bigr)\\
+&=\sum_{m=1}^{M-1}s(m)s(m+1)f_{\iota(s)}
+&&\bigl(\because\ \text{直前の各 }m\text{ の等式}\bigr)\\
+&=\left(\sum_{m=1}^{M-1}s(m)s(m+1)\right)f_{\iota(s)}
+&&\bigl(\because\ \text{ベクトルの有限和の分配法則}\bigr).
+\end{aligned}`),
+      paragraph(["境界項にも同じ一サイト作用を二回適用する。"]),
+      displayMath(String.raw`\begin{aligned}
+Gf_{\iota(s)}
+&=(\sigma_M^z\sigma_1^z)f_{\iota(s)}
+&&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr)\\
+&=\sigma_M^z\bigl(s(1)f_{\iota(s)}\bigr)
+&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }1\text{ に適用}\bigr)\\
+&=s(1)\sigma_M^zf_{\iota(s)}
+&&\bigl(\because\ \text{行列作用の複素線型性}\bigr)\\
+&=s(1)\bigl(s(M)f_{\iota(s)}\bigr)
+&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }M\text{ に適用}\bigr)\\
+&=\bigl(s(1)s(M)\bigr)f_{\iota(s)}
+&&\bigl(\because\ \text{スカラー倍の結合律}\bigr)\\
+&=s(M)s(1)f_{\iota(s)}
+&&\bigl(\because\ \text{実数の積の交換律}\bigr).
+\end{aligned}`),
+    ],
+    conversion: { status: "added" },
   },
 
   {
@@ -1531,7 +1719,7 @@ i\,H_1^{(+)}
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         " とする。",
-        ref("def_V_plus_and_T_V_plus"),
+        ref("def_V_plus"),
         " の ",
         math(String.raw`V^{(+)} = \left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}`),
         " について",
@@ -1559,12 +1747,20 @@ i\,H_1^{(+)}
         "以下 ",
         math(String.raw`B := \left(V_1^{(+)}\right)^{1/2} = \exp\!\left(\tfrac12 iK_1H_1^{(+)}\right)`),
         "（",
-        ref("def_V_plus_and_T_V_plus"),
+        ref("def_V1_plus_square_root"),
         "）と略記し、",
+        ref("def_D0_open_chain_operator"),
+        " の ",
+        math(String.raw`D_0`),
+        " と ",
+        ref("def_G_boundary_operator"),
+        " の ",
+        math(String.raw`G`),
+        " を用い、両者と ",
         ref("H1_plus_in_sigma_z_form"),
-        " (3) の ",
-        math(String.raw`D_0, G`),
-        " を用いる。",
+        " の等式で ",
+        math(String.raw`iH_1^{(+)}=D_0+\varepsilon G`),
+        " へ書き換える。",
       ]),
       paragraph([
         "Step 1（",
@@ -1587,7 +1783,7 @@ i\,H_1^{(+)}
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
 &= \mathrm{tr}\!\left(\varepsilon\,B\,V_2\,B\right)
-   \quad (\because \text{def\_V\_plus\_and\_T\_V\_plus}) \\
+   \quad (\because \text{def\_V\_plus}) \\
 &= \mathrm{tr}\!\left(B\,\varepsilon\,V_2\,B\right)
    \quad (\because \text{epsilon\_commutes\_with\_transfer\_matrices の }
    \varepsilon B = B\varepsilon) \\
@@ -1614,9 +1810,11 @@ i\,H_1^{(+)}
         math(String.raw`V_1^{(+)} = \exp\!\left(iK_1H_1^{(+)}\right)`),
         " であり、",
         ref("H1_plus_in_sigma_z_form"),
-        " (3) より ",
+        " より ",
         math(String.raw`iK_1H_1^{(+)} = K_1D_0 + K_1\varepsilon G`),
-        " である。同 (4) より ",
+        " である。",
+        ref("epsilon_D0_G_pairwise_commute"),
+        " より ",
         math(String.raw`K_1D_0`),
         " と ",
         math(String.raw`K_1\varepsilon G`),
@@ -1629,8 +1827,8 @@ i\,H_1^{(+)}
 \quad (\because \text{theorem\_exp\_product})`,
       ),
       paragraph([
-        ref("H1_plus_in_sigma_z_form"),
-        " (4) の ",
+        ref("epsilon_G_is_involution"),
+        " の ",
         math(String.raw`(\varepsilon G)^2 = I`),
         " より、",
         ref("def_exp"),
@@ -1662,8 +1860,8 @@ i\,H_1^{(+)}
         " が ",
         math(String.raw`\exp(K_1D_0)`),
         " と可換（",
-        ref("H1_plus_in_sigma_z_form"),
-        " (4) より ",
+        ref("epsilon_D0_G_pairwise_commute"),
+        " より ",
         math(String.raw`\varepsilon D_0 = D_0\varepsilon`),
         "、よって級数の部分和とも可換、極限とも可換）であることを使うと",
       ]),
@@ -1699,7 +1897,7 @@ i\,H_1^{(+)}
       list([
         [
           "(a) ",
-          ref("H1_plus_in_sigma_z_form"),
+          ref("D0_G_diagonal_action"),
           " と ",
           ref("exp_of_diagonal_matrix"),
           " より ",

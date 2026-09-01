@@ -53,17 +53,25 @@ case "$default_ref" in
   *) log "ERROR: origin/HEADがremote branchを指していない"; exit 1 ;;
 esac
 test -n "$default_branch"
-if [ -z "$(git -C "$REPO_DIR" status --porcelain)" ]; then
-  git -C "$REPO_DIR" merge --ff-only "origin/$default_branch"
+continuation_mode=0
+if "$PROJECT_DIR/scripts/paper-organization-has-pending-work.sh" "$REPO_DIR" "origin/$default_branch"; then
+  continuation_mode=1
+  log "INFO: 前回tickの未コミット成果またはremote default未包含コミットを保持して続行"
 else
-  log "INFO: 前回tickの未コミット成果を保持して続行"
+  git -C "$REPO_DIR" merge --ff-only "origin/$default_branch"
 fi
 start_default_commit="$(git -C "$REPO_DIR" rev-parse "origin/$default_branch")"
 run_id="$(date '+%Y%m%dT%H%M%S')-$$"
 success_prefix="TICK_RESULT_SUCCESS:$run_id:"
 run_output="$LOG_DIR/tick-run-$run_id.log"
 
-PROMPT="[[AI_AGENT_MESSAGE]] 複素行列版2次元イジング模型の論文構成再編を1 tickだけ進める。AGENTS.md、CLAUDE.md、docs/context/全ファイル、exact-solution-of-2d-ising-model/README.md、paper-organization-runbook.md、paper-organization-state.md、MEMORY.mdを全文読む。状態台帳の『次の一歩』だけを実施し、別エージェントによるレビューと指摘修正を同じ単位で反復する。共有main作業ツリー、lambda版、既存tick、docs/contextは変更しない。棚卸し再生成は必ず '$PROJECT_DIR/structured-latex' で npm run inventory:organization を実行する。全検証、状態とMEMORY更新、コミットまで行う。launchd由来のtmux外実行ではGitHub CLIのkeyringを読めないため gh は一切実行しない。反映はSSHのGitだけを使い、120秒上限付きでfetchしたremote defaultを取り込み、検証後の成果コミットを git push origin HEAD:$default_branch で直接反映する。non-fast-forwardなら別手段へ切り替えず、同じGit経路でfetch・merge・再検証してから同じpushを行う。最後にfetchし、成果コミットのremote default包含を確認する。失敗時は別手段へフォールバックせず、一次情報をログへ残して停止し、成功マーカーを出力しない。全作業が成功し、今回の成果コミットがremote defaultの祖先であることをfetch後に確認した場合だけ、最終行へ '${success_prefix}<成果コミットの40桁小文字SHA>' を正確に1行出力する。"
+if [ "$continuation_mode" -eq 1 ]; then
+  mode_instruction="継続モードである。未コミット差分またはremote default未包含コミット以外の新しい分類・依存境界へ着手せず、既存差分または未包含コミットの内容と前回ログを一度だけ確認し、未完のレビュー、指摘修正、全検証、状態とMEMORYの整合、必要なコミット、remote default反映を完了する。既に成功を確認できる工程を理由なく反復せず、巨大なdiffや全文を出力へ貼らない。"
+else
+  mode_instruction="新規モードである。状態台帳の『次の一歩』から、既存棚卸し項目を最大二項だけ扱う。三項以上の本文分割・形式化同期が必要と判明した場合は本文を大規模改変せず、その境界候補と次回の一単位を状態台帳へ記録するところまでを成果とする。独立した別境界へ進まない。"
+fi
+
+PROMPT="[[AI_AGENT_MESSAGE]] 複素行列版2次元イジング模型の論文構成再編を1 tickだけ進める。AGENTS.md、CLAUDE.md、docs/context/全ファイル、exact-solution-of-2d-ising-model/README.md、paper-organization-runbook.md、paper-organization-state.md、MEMORY.mdを全文読む。$mode_instruction 別エージェントによるレビューと指摘修正を同じ単位で反復する。共有main作業ツリー、lambda版、既存tick、docs/contextは変更しない。棚卸し再生成は必ず '$PROJECT_DIR/structured-latex' で npm run inventory:organization を実行する。全検証、状態とMEMORY更新、コミットまで行う。launchd由来のtmux外実行ではGitHub CLIのkeyringを読めないため gh は一切実行しない。反映はSSHのGitだけを使い、120秒上限付きでfetchしたremote defaultを取り込み、検証後の成果コミットを git push origin HEAD:$default_branch で直接反映する。non-fast-forwardなら別手段へ切り替えず、同じGit経路でfetch・merge・再検証してから同じpushを行う。最後にfetchし、成果コミットのremote default包含を確認する。失敗時は別手段へフォールバックせず、一次情報をログへ残して停止し、成功マーカーを出力しない。全作業が成功し、今回の成果コミットがremote defaultの祖先であることをfetch後に確認した場合だけ、最終行へ '${success_prefix}<成果コミットの40桁小文字SHA>' を正確に1行出力する。"
 
 log "START: 論文構成tick"
 set +e
@@ -77,6 +85,15 @@ set -e
 if [ "$tee_status" -ne 0 ]; then
   status="$tee_status"
   log "ERROR: tick出力の記録に失敗（exit $tee_status）"
+fi
+has_pending_work=0
+if "$PROJECT_DIR/scripts/paper-organization-has-pending-work.sh" "$REPO_DIR" "origin/$default_branch"; then
+  has_pending_work=1
+fi
+timeout_disposition="$("$PROJECT_DIR/scripts/paper-organization-timeout-disposition.sh" "$status" "$has_pending_work")"
+if [ "$timeout_disposition" = checkpoint ]; then
+  log "CHECKPOINT: 有限上限までの成果をworktreeへ保持し、次回は継続モードで完了工程だけを行う（exit $status）"
+  exit 0
 fi
 if [ "$status" -eq 0 ]; then
   if ! result_commit="$("$PROJECT_DIR/scripts/verify-paper-organization-tick-result.sh" "$run_output" "$success_prefix")"; then

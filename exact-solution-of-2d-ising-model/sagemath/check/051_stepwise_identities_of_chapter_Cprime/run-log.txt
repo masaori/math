@@ -1,9 +1,3 @@
-# 実行ログ — sagemath/check/051_stepwise_identities_of_chapter_Cprime
-# 実行日: 2026-07-27 / SageMath version 10.6, Release Date: 2025-03-31 / macOS (Darwin 25.4.0)
-# 実行コマンド: for f in sagemath/check/051_stepwise_identities_of_chapter_Cprime/check_*.sage; do sage "$f"; done
-# 注: μ の量化範囲を ℤ から 𝓜̌ = {1,…,M} へ絞り、共役添字を 1−μ から M+1−μ へ書き換えた版で再実行したもの。
-
-##### check_01_013_steps.sage
 === check_01: 013 章の各段の等式 ===
   why_008 Step1 (1) (Z_mY_m)Z_j = Z_m(Y_mZ_j): max residual = 0.000e+00  ->  PASS
   why_008 Step1 (2) Y_mZ_j = -Z_jY_m  [anticommutator_of_Z_and_Y]: max residual = 0.000e+00  ->  PASS
@@ -112,7 +106,6 @@
   def_check_index_set (4) そのとき theta~_mu = pi: max residual = 0.000e+00  ->  PASS
   段数（区別された等式の種類）: 105
 check_01: PASS
-##### check_02_015_steps.sage
 === check_02: 015 章の各段の等式 ===
   def_gamma1_gamma2 (1) gamma_2 の定義に theta -> -theta: max residual = 0.000e+00  ->  PASS
   def_gamma1_gamma2 (2) cos(-theta) = cos theta: max residual = 0.000e+00  ->  PASS
@@ -185,18 +178,17 @@ check_01: PASS
   def_gamma_theta_tilde_mu:   min gamma(theta~_mu) = 3.448e-01 -> 狭義に正
   段数（区別された等式の種類）: 66
 check_02: PASS
-##### check_03_014_steps.sage
 === check_03: 014 章の各段の等式 ===
-  def_V_plus (2-1) exp(X)exp(X) = exp(2X)  [theorem_exp_product]: max residual = 1.457e-13  ->  PASS
-  def_V_plus (2-2) = V_1^{(+)}  [def_V1_pm]: max residual = 1.457e-13  ->  PASS
-  def_V_plus (1) exp(X)^{-1} = exp(-X): max residual = 3.174e-15  ->  PASS
-  def_V_plus (1') V_2 V_2^{-1} = I: max residual = 1.841e-11  ->  PASS
-  def_V_plus (1'') V^{(+)} V^{(+)-1} = I: max residual = 1.889e-11  ->  PASS
-  def_V_plus (3-1) T_g(T_h(X)) = g(hXh^{-1})g^{-1}: max residual = 0.000e+00  ->  PASS
-  def_V_plus (3-2) = (gh)X(h^{-1}g^{-1})  [結合律]: max residual = 6.896e-12  ->  PASS
-  def_V_plus (3-3) (gh)(h^{-1}g^{-1}) = I  すなわち (gh)^{-1} = h^{-1}g^{-1}: max residual = 1.711e-11  ->  PASS
-  def_V_plus (3-3') (h^{-1}g^{-1})(gh) = I: max residual = 1.950e-11  ->  PASS
-  def_V_plus (3-4) T_{(V^{(+)})} = T_{V^{(+)}}: max residual = 8.195e-12  ->  PASS
+  V1_plus_square_root_property (1) exp(X)exp(X) = exp(2X)  [theorem_exp_product]: max residual = 1.457e-13  ->  PASS
+  V1_plus_square_root_property (2) = V_1^{(+)}  [def_V1_pm]: max residual = 1.457e-13  ->  PASS
+  V_plus_factors_invertible (V1half) exp(X)^{-1} = exp(-X): max residual = 3.174e-15  ->  PASS
+  V_plus_factors_invertible (V2) V_2 V_2^{-1} = I: max residual = 1.841e-11  ->  PASS
+  V_plus_factors_invertible (Vplus) V^{(+)} V^{(+)-1} = I: max residual = 1.889e-11  ->  PASS
+  T_V_plus_is_conjugation (1) T_g(T_h(X)) = g(hXh^{-1})g^{-1}: max residual = 0.000e+00  ->  PASS
+  T_V_plus_is_conjugation (2) = (gh)X(h^{-1}g^{-1})  [結合律]: max residual = 6.896e-12  ->  PASS
+  T_V_plus_is_conjugation (3) (gh)(h^{-1}g^{-1}) = I: max residual = 1.711e-11  ->  PASS
+  T_V_plus_is_conjugation (4) (h^{-1}g^{-1})(gh) = I: max residual = 1.950e-11  ->  PASS
+  T_V_plus_is_conjugation (5) T_{(V^{(+)})} = T_{V^{(+)}}: max residual = 8.195e-12  ->  PASS
   nesting (h1.z) n 偶数: max residual = 4.120e-12  ->  PASS
   nesting (h1.y) n 偶数: max residual = 3.638e-12  ->  PASS
   nesting (h2.z) n 偶数: max residual = 6.734e-11  ->  PASS
@@ -289,7 +281,6 @@ check_02: PASS
   factorization Step6 B_1 B_2 B_1 = A(theta): max residual = 1.352e-14  ->  PASS
   段数（区別された等式の種類）: 100
 check_03: PASS
-##### check_04_016_steps.sage
 === check_04: 016 章の各段の等式 ===
   def_check_fermi (psi^dagger) = P^ の第 1 列: max residual = 0.000e+00  ->  PASS
   def_check_fermi (psi) = P^ の第 2 列: max residual = 0.000e+00  ->  PASS
