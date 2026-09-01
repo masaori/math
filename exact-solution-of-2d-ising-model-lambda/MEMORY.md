@@ -10,6 +10,8 @@ Lambda 側 check（856 ブロック）・linkage（380 検算）・Lean 9,616 �
 
 前進前レビューでは、前 tick の層別数え上げを本文・SageMath・台帳・本文末尾「この先に書くこと」と照合した。「何も言っていない主張」や仮定・住処・参照の不一致は無かった。
 
+並列の式変形統一は、姉妹側の「ノルムの乗法性」（`matrix_norm_submultiplicativity`）の四本の鎖で、行中にあった根拠 14 行を行末の根拠列（`aligned` の `&&`）へ揃えた。内容・式変形・根拠・参照は不変で、姉妹側 check・PDF 356 ページを通した。
+
 ## ひとつ前の到達点（2026-09-01 の 78 回目の tick 時点）
 
 **偶部分グラフ順序対の母関数を、添字 $(D,E)$ ごとの選択集合の個数で層別する $\mathbb{Z}[x]$ の等式を本文と SageMath で固定した（Lean 未着手）。** `claim_even_subgraph_pair_stratified_count` は $\sum_{A,B\ \text{偶}}x^{|A|+|B|}=\sum_{D\cap E=\varnothing,\ \operatorname{Even}_L(E)}|\mathcal C_L(D,E)|\,x^{2|D|+|E|}$ を主張する。証明は、像 $(A\cap B,\ A\mathbin\triangle B)$ が互いに素で第 2 成分が偶部分グラフの添字集合に入ること（対称差の端点数の法 2 の消え方）、添字ごとのファイバーが $\mathcal P_L(D,E)$ で順序対全体を互いに素に覆うこと、位数の和の等式 $|A|+|B|=2|D|+|E|$、前 tick のファイバー全単射 `claim_even_subgraph_pair_fiber_bijection` による $|\mathcal P|=|\mathcal C|$ の置換の合成である。SageMath `even-subgraph-pair-stratified-count` は $L=2$ の順序対 1,024 件・添字 881 組で証明の各段と両辺の多項式一致（$x^{16}+8x^{14}+\cdots+1$）を全数検査した。次は非後退置換の軌道とこの層別を対応づける数え上げへ進む。
