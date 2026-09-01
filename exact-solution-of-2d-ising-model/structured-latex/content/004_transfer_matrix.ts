@@ -2707,35 +2707,35 @@ H_2 &= \frac{1}{M} \sum_{j=1}^{M} \hat{Z}_{-j}^{(-)}\, \hat{Y}_j
       displayMath(
         String.raw`\begin{aligned}
 (\text{右辺})
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,\exp\!\left(-i\frac{2\pi j}{M}\right) \quad (\because \text{主張の右辺を書き下したもの}) \\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,\exp\!\left(-i\frac{2\pi j}{M}\right) &&(\because\ \text{主張の右辺を書き下したもの}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}
 \overbrace{\left(\sum_{k_1=1}^M Y_{k_1}\exp\!\left(-i k_1\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j}\,
 \overbrace{\left(\sum_{k_2=1}^M\begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}Z_{k_2}\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\right)}^{\hat{Z}_{-j}^{(\pm)}}\,
-\exp\!\left(-i\frac{2\pi j}{M}\right) \quad (\because \hat{Y}_j,\ \hat{Z}_{-j}^{(\pm)}\ \text{の定義の展開}) \\
+\exp\!\left(-i\frac{2\pi j}{M}\right) &&(\because\ \hat{Y}_j,\ \hat{Z}_{-j}^{(\pm)}\ \text{の定義の展開}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \left(Y_{k_1}\exp\!\left(-i k_1\frac{2\pi j}{M}\right)\right)
 \left(\begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}Z_{k_2}\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\right)
-\exp\!\left(-i\frac{2\pi j}{M}\right) \quad (\because \text{有限和どうしの積は二重和である（分配則）}) \\
+\exp\!\left(-i\frac{2\pi j}{M}\right) &&(\because\ \text{有限和どうしの積は二重和である（分配則）}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
 \exp\!\left(-i k_1\frac{2\pi j}{M}\right)\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\exp\!\left(-i\frac{2\pi j}{M}\right)
-(Y_{k_1}Z_{k_2}) \quad (\because \text{複素数の積の可換性と結合則（符号と exp を前へ、}YZ\text{ を後ろへ移した）}) \\
+(Y_{k_1}Z_{k_2}) &&(\because\ \text{複素数の積の可換性と結合則（符号と exp を前へ、}YZ\text{ を後ろへ移した）}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
-\exp\!\left(-i\frac{2\pi j}{M}(k_1-k_2+1)\right)(Y_{k_1}Z_{k_2}) \quad (\because \exp a\cdot\exp b=\exp(a+b)) \\
+\exp\!\left(-i\frac{2\pi j}{M}(k_1-k_2+1)\right)(Y_{k_1}Z_{k_2}) &&(\because\ \exp a\cdot\exp b=\exp(a+b)) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
-\left(\sum_{j\in\{1,\dots,M\}}\exp\!\left(-(k_1-k_2+1)\,i\frac{2\pi j}{M}\right)\right)(Y_{k_1}Z_{k_2}) \quad (\because \text{有限和の順序交換と、}j\text{ に依らない因子を和の外へ出すこと}) \\
+\left(\sum_{j\in\{1,\dots,M\}}\exp\!\left(-(k_1-k_2+1)\,i\frac{2\pi j}{M}\right)\right)(Y_{k_1}Z_{k_2}) &&(\because\ \text{有限和の順序交換と、}j\text{ に依らない因子を和の外へ出すこと}) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
-M\,\delta^M_{-(k_1-k_2+1),\,0}(Y_{k_1}Z_{k_2}) \quad (\because \text{exp\_sum}) \\
+M\,\delta^M_{-(k_1-k_2+1),\,0}(Y_{k_1}Z_{k_2}) &&(\because\ \text{exp\_sum}) \\
 &= \frac{1}{M}\sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ -(k_1-k_2+1)\equiv 0 \pmod{M}}}
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
-M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) \\
+M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) \\
 &= \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ k_2\in\{2,\dots,M\}\\ -(k_1-k_2+1)\equiv 0 \pmod{M}}} M(Y_{k_1}Z_{k_2})
-+ \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ -k_1\equiv 0 \pmod{M}}} \mp M(Y_{k_1}Z_1) \quad (\because k_2=1\ \text{の項とそれ以外（}k_2\in\{2,\dots,M\}\text{）の項へ和を分けた}) \\
-&= (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1}Z_M) + (\mp Y_M Z_1) \quad (\because \text{下記のとおり第 1 項は } k_1=k_2-1\text{、第 2 項は } k_1=M \text{ に限ること、および } \tfrac{1}{M}\cdot M=1) \\
-&= H_1^{(\pm)} \quad (\because H_1^{(\pm)}\ \text{の定義})
++ \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ -k_1\equiv 0 \pmod{M}}} \mp M(Y_{k_1}Z_1) &&(\because\ k_2=1\ \text{の項とそれ以外（}k_2\in\{2,\dots,M\}\text{）の項へ和を分けた}) \\
+&= (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1}Z_M) + (\mp Y_M Z_1) &&(\because\ \text{下記のとおり第 1 項は } k_1=k_2-1\text{、第 2 項は } k_1=M \text{ に限ること、および } \tfrac{1}{M}\cdot M=1) \\
+&= H_1^{(\pm)} &&(\because\ H_1^{(\pm)}\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -2767,22 +2767,22 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
       displayMath(
         String.raw`\begin{aligned}
 (\text{右辺})
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\,\hat{Y}_j \quad (\because \text{主張の右辺を書き下したもの}) \\
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\,\hat{Y}_j &&(\because\ \text{主張の右辺を書き下したもの}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}
 \overbrace{\left(\sum_{k_1=1}^M\begin{cases}1 & (k_1\neq 1)\\ +1 & (k_1=1)\end{cases}Z_{k_1}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)\right)}^{\hat{Z}_{-j}^{(-)}}\,
-\overbrace{\left(\sum_{k_2=1}^M Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j} \quad (\because \hat{Z}_{-j}^{(-)},\ \hat{Y}_j\ \text{の定義の展開}) \\
+\overbrace{\left(\sum_{k_2=1}^M Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j} &&(\because\ \hat{Z}_{-j}^{(-)},\ \hat{Y}_j\ \text{の定義の展開}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
-\left(Z_{k_1}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)\right)\left(Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right) \quad (\because \text{有限和どうしの積は二重和である（分配則）。}k_1=1\ \text{の場合の係数も }+1\text{ である}) \\
+\left(Z_{k_1}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)\right)\left(Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right) &&(\because\ \text{有限和どうしの積は二重和である（分配則）。}k_1=1\ \text{の場合の係数も }+1\text{ である}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
-\exp\!\left(-i k_1\frac{2\pi(-j)}{M}-i k_2\frac{2\pi j}{M}\right)Z_{k_1}Y_{k_2} \quad (\because \text{複素数の積の可換性と結合則、および }\exp a\cdot\exp b=\exp(a+b)) \\
+\exp\!\left(-i k_1\frac{2\pi(-j)}{M}-i k_2\frac{2\pi j}{M}\right)Z_{k_1}Y_{k_2} &&(\because\ \text{複素数の積の可換性と結合則、および }\exp a\cdot\exp b=\exp(a+b)) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
-\left(\sum_{j\in\{1,\dots,M\}}\exp\!\left((k_1-k_2)\,i\frac{2\pi j}{M}\right)\right)Z_{k_1}Y_{k_2} \quad (\because \text{有限和の順序交換と、}j\text{ に依らない因子を和の外へ出すこと}) \\
-&= \frac{1}{M}\sum_{k_1,k_2=1}^M M\,\delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} \quad (\because \text{exp\_sum}) \\
-&= \sum_{k_1,k_2=1}^M \delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} \quad (\because \tfrac{1}{M}\cdot M=1) \\
-&= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1-k_2\equiv 0 \pmod{M}}} Z_{k_1}Y_{k_2} \quad (\because \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) \\
-&= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1=k_2}} Z_{k_1}Y_{k_2} \quad (\because k_1,k_2\in\{1,\dots,M\}\ \text{では } k_1-k_2\equiv 0 \pmod{M} \text{ と } k_1=k_2 \text{ が同値}) \\
-&= Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M \quad (\because \text{和の添字を } k_1=k_2 \text{ で走らせて書き下したもの}) \\
-&= H_2 \quad (\because H_2\ \text{の定義})
+\left(\sum_{j\in\{1,\dots,M\}}\exp\!\left((k_1-k_2)\,i\frac{2\pi j}{M}\right)\right)Z_{k_1}Y_{k_2} &&(\because\ \text{有限和の順序交換と、}j\text{ に依らない因子を和の外へ出すこと}) \\
+&= \frac{1}{M}\sum_{k_1,k_2=1}^M M\,\delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} &&(\because\ \text{exp\_sum}) \\
+&= \sum_{k_1,k_2=1}^M \delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} &&(\because\ \tfrac{1}{M}\cdot M=1) \\
+&= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1-k_2\equiv 0 \pmod{M}}} Z_{k_1}Y_{k_2} &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) \\
+&= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1=k_2}} Z_{k_1}Y_{k_2} &&(\because\ k_1,k_2\in\{1,\dots,M\}\ \text{では } k_1-k_2\equiv 0 \pmod{M} \text{ と } k_1=k_2 \text{ が同値}) \\
+&= Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M &&(\because\ \text{和の添字を } k_1=k_2 \text{ で走らせて書き下したもの}) \\
+&= H_2 &&(\because\ H_2\ \text{の定義})
 \end{aligned}`,
       ),
     ],
@@ -2795,6 +2795,8 @@ M(Y_{k_1}Z_{k_2}) \quad (\because \delta^M\ \text{が } 0 \text{ を与える項
           "(∵ k_2=1 の項とそれ以外の項へ和を分けた) を置いた。あわせて両方の鎖の先頭行" +
           "（(右辺) = …）に根拠 (∵ 主張の右辺を書き下したもの) を足した。段は増えており、" +
           "減った段は無い。主張も証明の筋も変えていない。",
+        "2026-09-01 の式変形統一で、二本の鎖に行中の \\quad (\\because …) で置かれていた根拠 22 行を、" +
+          "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
       ],
     },
   },
