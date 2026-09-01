@@ -1,6 +1,6 @@
 # 対象ラベル: claim_interior_cell_set_edge_connected
 #
-# 頂点単純な閉じた非後退単位格子歩について、右半直線交差が奇数の
+# 一周期の持ち上げ点が二つずつ相異なる零巻き付きの閉じた非後退辺列について、右半直線交差が奇数の
 # 内側セル全体が空でなく辺連結であることを ZZ の有限数え上げで検査する。
 # 各内側セルから右へ進んだ最初の外側セルとの境界辺が歩道に属し、
 # その直前の内側セルが歩道沿いの内側帯に属することも検査する。
@@ -12,6 +12,8 @@ max_length = 10
 checked_walks = 0
 checked_interior_cells = 0
 checked_row_anchors = 0
+torus_sizes = (ZZ(1), ZZ(2), ZZ(3))
+contact_walks = {size: 0 for size in torus_sizes}
 
 
 def add(point, step):
@@ -112,7 +114,23 @@ for length in range(4, max_length + 1):
         checked_walks += 1
         checked_interior_cells += len(interior)
 
+        for size in torus_sizes:
+            torus_vertices = [(point[0] % size, point[1] % size) for point in points[:-1]]
+            contact_pairs = ZZ(sum(
+                1
+                for first in range(len(torus_vertices))
+                for second in range(first + 1, len(torus_vertices))
+                if torus_vertices[first] == torus_vertices[second]
+            ))
+            if contact_pairs > 0:
+                contact_walks[size] += 1
+
+for size in torus_sizes:
+    assert contact_walks[size] > 0
+
 print(
-    f"PASS: vertex-simple closed nonbacktracking walks={checked_walks}, "
-    f"interior cells={checked_interior_cells}, row anchors={checked_row_anchors}, length<=%d" % max_length
+    f"PASS: lift-point-distinct closed nonbacktracking walks={checked_walks}, "
+    f"interior cells={checked_interior_cells}, row anchors={checked_row_anchors}, length<=%d, " % max_length
+    + "walks with n_ct>0 after projection: "
+    + ", ".join("L=%s: %s" % (size, contact_walks[size]) for size in torus_sizes)
 )

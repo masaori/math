@@ -527,17 +527,17 @@ M\tilde\theta_\mu
         String.raw`\begin{aligned}
 e^{-iM\tilde\theta_\mu}
 &= e^{-i(2\pi\mu - \pi)}
-   \quad (\because M\tilde\theta_\mu = 2\pi\mu - \pi) \\
+&&\bigl(\because M\tilde\theta_\mu = 2\pi\mu - \pi\bigr) \\
 &= e^{-2\pi i\mu}\,e^{i\pi}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
 &= \left(\cos(2\pi\mu) - i\sin(2\pi\mu)\right)\left(\cos\pi + i\sin\pi\right)
-   \quad (\because \text{euler\_formula\_cos\_sin}\ \text{を 2 箇所へ同時適用}) \\
+&&\bigl(\because \text{euler\_formula\_cos\_sin}\ \text{を 2 箇所へ同時適用}\bigr) \\
 &= \left(1 - i\cdot 0\right)\left(-1 + i\cdot 0\right)
-   \quad (\because \cos(2\pi\mu)=1,\ \sin(2\pi\mu)=0,\ \cos\pi=-1,\ \sin\pi=0\ (\mu\in\mathbb{Z})) \\
+&&\bigl(\because \cos(2\pi\mu)=1,\ \sin(2\pi\mu)=0,\ \cos\pi=-1,\ \sin\pi=0\ (\mu\in\mathbb{Z})\bigr) \\
 &= 1\cdot(-1)
-   \quad (\because i\cdot 0 = 0\ \text{と加法の単位元}) \\
+&&\bigl(\because i\cdot 0 = 0\ \text{と加法の単位元}\bigr) \\
 &= -1
-   \quad (\because \text{積の単位元})
+&&\bigl(\because \text{積の単位元}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -577,13 +577,13 @@ e^{-iM\tilde\theta_\mu}
         String.raw`\begin{aligned}
 e^{-ij\tilde\theta_{\mu+M}}
 &= e^{-ij\left(\tilde\theta_\mu + 2\pi\right)}
-   \quad (\because \tilde\theta_{\mu+M}=\tilde\theta_\mu+2\pi) \\
+&&\bigl(\because \tilde\theta_{\mu+M}=\tilde\theta_\mu+2\pi\bigr) \\
 &= e^{-ij\tilde\theta_\mu}\,e^{-2\pi i j}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
 &= e^{-ij\tilde\theta_\mu}\left(\cos(2\pi j) - i\sin(2\pi j)\right)
-   \quad (\because \text{euler\_formula\_cos\_sin}) \\
+&&\bigl(\because \text{euler\_formula\_cos\_sin}\bigr) \\
 &= e^{-ij\tilde\theta_\mu}
-   \quad (\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0)
+&&\bigl(\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0\bigr)
 \end{aligned}`,
       ),
       paragraph([
