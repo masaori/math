@@ -751,9 +751,9 @@ e^{-ij\tilde\theta_{\mu+M}}
         String.raw`\begin{aligned}
 \tilde\theta_\nu - \tilde\theta_\mu
 &= \frac{2\pi\left(\nu-\frac12\right)}{M} - \frac{2\pi\left(\mu-\frac12\right)}{M}
-   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
+&&\bigl(\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}\bigr) \\
 &= \frac{2\pi}{M}\left(\nu - \mu\right)
-   \quad (\because \text{通分と分配法則})
+&&\bigl(\because \text{通分と分配法則}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -856,11 +856,11 @@ e^{-ij\tilde\theta_{\mu+M}}
         String.raw`\begin{aligned}
 \tilde\theta_{\frac{M+1}{2}}
 &= \frac{2\pi\left(\frac{M+1}{2}-\frac12\right)}{M}
-   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
+&&\bigl(\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}\bigr) \\
 &= \frac{2\pi\cdot\frac{M}{2}}{M}
-   \quad \left(\because \tfrac{M+1}{2}-\tfrac12 = \tfrac{M}{2}\right) \\
+&&\bigl(\because \tfrac{M+1}{2}-\tfrac12 = \tfrac{M}{2}\bigr) \\
 &= \pi
-   \quad (\because \text{約分})
+&&\bigl(\because \text{約分}\bigr)
 \end{aligned}`,
       ),
       paragraph([
