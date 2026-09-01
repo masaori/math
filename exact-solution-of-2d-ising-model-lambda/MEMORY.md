@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 93 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 94 回目の tick 時点）
+
+**標準接触対の反転像による障害が、反転対の辺集合の非空性を強制することを本文と SageMath で固定した（Lean 未着手）。** 標準接触対 $\{\vec e,\vec f\}$ で $\varphi(\vec f)=\iota(\vec e)$ なら、$\iota(\vec e)$ が固定されると $\varphi(\iota(\vec e))=\varphi(\vec f)$ なので置換の単射性から $\iota(\vec e)=\vec f$、さらに $\varphi(\vec f)=\vec f$ となって $\vec f\in M(\varphi)$ に反する。したがって $\vec e,\iota(\vec e)\in M(\varphi)$ であり $p(\vec e)\in D(\varphi)$ である（反対側も同様。`claim_standard_contact_obstruction_witnesses_doubled_edge`）。SageMath `standard-contact-obstruction-doubled-edge` は $L=2$ の反転像の障害 $22{,}068$ 件を全数検査し、標準接触対が切り替え不能な置換 $18{,}755$ 個の全てがこの障害に覆われて $D(\varphi)\ne\varnothing$ となることを確認した。次は各 $D\ne\varnothing$ のファイバー内で残る位相寄与を分類し、$\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ へ合成する。
+
+前進前レビューでは、前 tick の切り替え可能性の四不等式判定を本文・接触対 $470{,}336$ 件の全数検算・今回の直接利用と照合した。有限集合上の必要十分条件という実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+Lambda 側 check（896 ブロック）・linkage（395 検算）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 389 ページを通した。
+
+## ひとつ前の到達点（2026-09-02 の 93 回目の tick 時点）
 
 **接触対の切り替え可能性が四つの不等式で判定されることを、本文と SageMath で固定した（Lean 未着手）。** 非後退置換 $\varphi$ の動く辺の像の始点は元の辺の終点なので、接触対 $\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)$ では後続所属 $\varphi(\vec f)\in\operatorname{Next}(\vec e)$ の終点条件が自動で満たされる。したがって切り替え可能性（`def_switchable_permutation_contact_pair` の三条件）は、四つの不等式 $\varphi(\vec f)\ne\iota(\vec e)$、$\varphi(\vec e)\ne\iota(\vec f)$、$\varphi(\vec f)\ne\vec e$、$\varphi(\vec e)\ne\vec f$ の連言と同値である（`claim_contact_pair_switchability_criterion`）。SageMath `contact-pair-switchability-criterion` は $L=2$ の接触対 $470{,}336$ 件の全数で判定の一致を検査し、標準対が切り替え可能でない $18{,}755$ 個はすべて反転像による失敗（像が他方自身になる失敗は $0$ 個）であることを数えた。次はこの反転像の場合を分類し、相殺または寄与の扱いを決めて、各添字の $\mathcal K=\mathcal U$ と平方恒等式へ合成する。
 
