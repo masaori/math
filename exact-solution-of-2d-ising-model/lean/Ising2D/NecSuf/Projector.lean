@@ -1,7 +1,7 @@
 /-
 # 必要十分版: 対合から作る射影子と、セクター上での因子の置き換え
 
-対応する人手証明のラベル: **`epsilon_projector_properties`** / **`sector_replacement_of_V1`**
+対応する人手証明のラベル: **`epsilon_projector_properties`** / **`sector_replacement_of_V1`** / **`sector_replacement_pow`**
 （具体版は `Ising2D/Part010/Claim009_EpsilonProjectors.lean` と
 `Ising2D/Part010/Claim011_SectorReplacement.lean`）
 
@@ -15,7 +15,7 @@ Lean で抽象化してみると、効いているのは次だけである。
   `e * e = 1` と、係数環で `2` が可逆であることだけ。`ε` が Pauli 行列の積であることも、
   行列であることも、複素数であることも、環が可換であることも効いていない
   （**任意の環 + `Invertible 2`**）。
-* **セクター上の置き換え（`sector_replacement_of_V1` (2)）**: 効いているのは
+* **セクター上の置き換えの冪（`sector_replacement_pow`）**: 効いているのは
   「`P` が冪等」「`P` が `a, b, a'` と可換」「`a P = a' P`」の 3 点だけで、
   `P` が `(1 ± e)/2` の形であることすら使わない。つまり「偶奇セクター」という言葉が
   持つ情報のうち、この段で実際に使われているのは**冪等元と可換性**だけである。
@@ -91,7 +91,7 @@ end Projector
 
 /-! ## セクター上での因子の置き換え -/
 
-/-- **原文 `sector_replacement_of_V1` (2) の必要十分版。**
+/-- **人手本文 `sector_replacement_pow` の必要十分版。**
 
 冪等元 `P` が `a, b, a'` と可換で `a P = a' P` なら `(a b)^n P = (a' b)^n P`。 -/
 theorem pow_mul_proj {P a b a' : R} (hP : P * P = P)

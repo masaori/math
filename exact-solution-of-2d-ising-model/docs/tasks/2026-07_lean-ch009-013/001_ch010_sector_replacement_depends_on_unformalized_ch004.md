@@ -1,11 +1,11 @@
-# 章 010 の `sector_replacement_of_V1` (1) は未形式化の 004 章命題に依存している
+# 章 010 の `sector_replacement_of_V1` は未形式化の 004 章命題に依存している
 
 対象: `structured-latex/content/010_transfer_matrix_bridge.ts` の
-`bridge_011_claim_sector_replacement`（ラベル `sector_replacement_of_V1`）の (1)
+`bridge_011_claim_sector_replacement`（ラベル `sector_replacement_of_V1`）
 
 ## 何が問題か（人手証明側の誤りではない）
 
-原文 (1) `V_1 P^{(±)} = V_1^{(±)} P^{(±)}` の証明は、
+人手本文 `sector_replacement_of_V1` の `V_1 P^{(±)} = V_1^{(±)} P^{(±)}` の証明は、
 **004 章の `V1_restriction_to_eigenspaces`**
 （`structured-latex/content/004_transfer_matrix.ts` の
 `transfer_matrix_006_claim_V1_restriction_to_eigenspaces`、
@@ -30,13 +30,13 @@ def RestrictsOnSector (M : ℕ) (K1 ηsign η : ℂ) : Prop :=
 
 この仮定のもとで
 
-* `Ising2D.sector_replacement_of_V1`（原文 (1)）
-* `Ising2D.sector_replacement_pow`（原文 (2)。抽象版 `Abstract.pow_mul_proj` の系）
+* `Ising2D.sector_replacement_of_V1`（人手本文 `sector_replacement_of_V1`）
+* `Ising2D.sector_replacement_pow`（人手本文 `sector_replacement_pow`。抽象版 `Ising2D.NecSuf.pow_mul_proj` の系）
 * `Ising2D.partition_function_sector_decomposition`（原文 `bridge_012` の最終式）
 
 を証明した（`sorry` なし。`scripts/check-no-sorry.sh` は exit 0）。
 
-(2) 以降は (1) から**純代数的に**従うので、この仮定は (1) の 1 点にだけ効いている。
+`sector_replacement_pow` 以降は `sector_replacement_of_V1` から**純代数的に**従うので、この仮定は `sector_replacement_of_V1` の 1 点にだけ効いている。
 
 ## 残作業（本タスクの範囲外）
 

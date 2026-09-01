@@ -81,9 +81,9 @@
 | `Ising2D.epsilon_commute_H1` | `ε H_1^{(±)} = H_1^{(±)} ε` | 同 Step 4 |
 | `Ising2D.epsilon_commute_V1` / `epsilon_commute_V1half` | **`ε V_1^{(±)} = V_1^{(±)}ε`, `ε (V_1^{(±)})^{1/2} = ⋯`** | 同 Step 4 |
 | `Ising2D.commute_epsProj_of_commute_epsilon` ほか 5 本 | `P^{(±)}` との可換性 | 同 Step 5 |
-| `Ising2D.RestrictsOnSector` | 004 章 `V1_restriction_to_eigenspaces` を仮定として述べた述語 | `sector_replacement_of_V1` (1) の前提 |
-| `Ising2D.sector_replacement_of_V1` | **`V_1 P^{(±)} = V_1^{(±)} P^{(±)}`** | `sector_replacement_of_V1` (1) |
-| `Ising2D.sector_replacement_pow` | **`(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`** | 同 (2) |
+| `Ising2D.RestrictsOnSector` | 004 章 `V1_restriction_to_eigenspaces` を仮定として述べた述語 | `sector_replacement_of_V1` の前提 |
+| `Ising2D.sector_replacement_of_V1` | **`V_1 P^{(±)} = V_1^{(±)} P^{(±)}`** | `sector_replacement_of_V1` |
+| `Ising2D.sector_replacement_pow` | **`(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`** | `sector_replacement_pow` |
 | `Ising2D.Vsym` | `V^{(±)} = (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}` | `V_eq_Vprime` |
 | `Ising2D.trace_eq_sector_sum` | `tr X = tr(P^{(+)}X) + tr(P^{(-)}X)` | `partition_function_sector_decomposition` Step 1 |
 | `Ising2D.trace_epsProj_sym_pow` | 対称形の解消（Step 3） | 同 Step 3 |
@@ -113,7 +113,7 @@
 | `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply`（必要十分版からの導出は `exp_pi_apply`） | `Ising2D.NecSuf.map_exp_of_continuous`（`NecSuf/ExpDiagonal.lean`） | 原文の「冪 → 部分和 → 成分ごとの収束」の 3 段は、**「連続な環準同型は `exp` と可換」1 本**に集約される。対角行列であることも行列であることも本質ではない |
 | `epsilon_projector_properties` (1)(2)(3) | `Ising2D.epsProj_sq` / `epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg`（**必要十分版の系として導出済み**） | `Ising2D.NecSuf.invProj_sq` ほか（`NecSuf/Projector.lean`） | 効いているのは **`ε² = I` と `2` が可逆であること**だけ。`ε` が Jordan–Wigner 文字列の積であることも、行列であることも、環が可換であることも効いていない |
 | `epsilon_commutes_with_transfer_matrices` Step 5 | `Ising2D.commute_epsProj_of_commute_epsilon`（**必要十分版の系**） | `Ising2D.NecSuf.commute_invProj` | 「`ε` と可換なら `P^{(±)}` とも可換」に効いているのはスカラー作用と加法の両立則だけ |
-| `sector_replacement_of_V1` (2) | `Ising2D.sector_replacement_pow`（**必要十分版の系**） | `Ising2D.NecSuf.pow_mul_proj` | 効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」「`V_1P = V_1^{(±)}P`」の 3 点だけ。**`P` が `(I±ε)/2` の形であることすら使わない**。すなわち「偶奇セクター」という言葉のうちこの段で使われている情報は冪等元と可換性だけである |
+| `sector_replacement_pow` | `Ising2D.sector_replacement_pow`（**必要十分版の系**） | `Ising2D.NecSuf.pow_mul_proj` | 効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」「`V_1P = V_1^{(±)}P`」の 3 点だけ。**`P` が `(I±ε)/2` の形であることすら使わない**。すなわち「偶奇セクター」という言葉のうちこの段で使われている情報は冪等元と可換性だけである |
 | `partition_function_sector_decomposition` Step 3 | `Ising2D.trace_epsProj_sym_pow` | `Ising2D.NecSuf.mul_pow_conj_left` | 対称形 `(BV_2B)^n` の解消は**結合法則だけ**（原文の「結合法則で括り直すだけ」が文字どおり正しい）。トレース側で追加に要るのは巡回性と `P` と `B` の可換性のみで、`B` が `exp` であることは効いていない |
 | `partition_function_via_transfer_matrix`（001 章 Step 2, 3） | `Ising2D.partitionFunctionC_eq_trace`（**必要十分版の系**） | `Ising2D.NecSuf.trace_pow_succ`（`NecSuf/TracePathSum.lean`） | 「トレースは閉じた道の重みの総和」に効いているのは**有限添字集合と可換半環**だけ。Ising 模型であることも、成分が `exp` の形であることも、複素数であることも、可逆性・ノルム・位相も効いていない |
 
@@ -134,7 +134,7 @@
 
 | 主張 | 状況 | 記録 |
 | --- | --- | --- |
-| `sector_replacement_of_V1` (1) と、それに依存する `partition_function_sector_decomposition` | **仮定 `RestrictsOnSector` つきで形式化**。仮定の中身は 004 章の `V1_restriction_to_eigenspaces`（Lean 未形式化） | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
+| `sector_replacement_of_V1` と、それに依存する `partition_function_sector_decomposition` | **仮定 `RestrictsOnSector` つきで形式化**。仮定の中身は 004 章の `V1_restriction_to_eigenspaces`（Lean 未形式化） | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
 | `epsilon_projector_properties` (4) の「`im P^{(±)} = 𝓕^{(±)}`」 | 部分空間の等式としてではなく、**2 つの包含をベクトルの言葉で**述べた（`epsProj_mulVec_mem` / `epsProj_mulVec_eq_self`）。`𝓕^{(±)}` を `Submodule` として導入すると 004 章の `def_eigenspaces_of_epsilon` の形式化が要り、本タスクの範囲外になるため | 本ファイル |
 | `bridge_000_remark_overview`（記号の対応の説明） | 主張ではなく記号の宣言なので、定理としては形式化していない。内容（`K_1 = J'`, `K_2 = J`）は `partitionFunctionC_eq_trace` が実際に成り立つことで裏づけた | `docs/tasks/2026-07_lean-ch009-013/002_ch010_Nrow_positive_is_necessary.md` |
 

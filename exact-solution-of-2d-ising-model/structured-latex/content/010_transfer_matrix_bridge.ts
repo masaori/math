@@ -1938,17 +1938,11 @@ P^{(\pm)}X
     title: { tex: String.raw`\text{セクター上での } V_1 \text{ の置き換え}` },
     labels: ["sector_replacement_of_V1"],
     statement: [
-      paragraph(["（複号同順）"]),
-      list([
-        [math(String.raw`\text{(1)}\quad V_1\,P^{(\pm)} = V_1^{(\pm)}\,P^{(\pm)}`)],
-        [
-          math(String.raw`\text{(2)}\quad n \in \mathbb{Z}_{\geq 0} \text{ について } (V_1V_2)^{n}\,P^{(\pm)} = \left(V_1^{(\pm)}V_2\right)^{n}P^{(\pm)}`),
-        ],
-      ]),
+      paragraph([ref("def_V1_pm"), " の記号のもとで（複号同順）"]),
+      displayMath(String.raw`V_1\,P^{(\pm)} = V_1^{(\pm)}\,P^{(\pm)}`),
     ],
     proof: [
       paragraph([
-        "(1) ",
         ref("V1_restriction_to_eigenspaces"),
         " は、",
         ref("def_end_iso"),
@@ -2003,8 +1997,24 @@ P^{(\pm)}X
       paragraph([
         "である。",
       ]),
+    ],
+    conversion: { status: "added" },
+  },
+
+  {
+    id: "bridge_011a_claim_sector_replacement_pow",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 13 },
+    title: { text: "セクター上での置き換えを転送行列の積の冪へ反復" },
+    labels: ["sector_replacement_pow"],
+    statement: [
+      paragraph(["（複号同順）"]),
+      displayMath(
+        String.raw`n \in \mathbb{Z}_{\geq 0} \text{ について } (V_1V_2)^{n}\,P^{(\pm)} = \left(V_1^{(\pm)}V_2\right)^{n}P^{(\pm)}`,
+      ),
+    ],
+    proof: [
       paragraph([
-        "(2) ",
         math(String.raw`P := P^{(\pm)}`),
         " と略記する。",
         ref("epsilon_projectors_commute_with_transfer_matrices"),
@@ -2026,7 +2036,9 @@ P^{(\pm)}X
         math(String.raw`P`),
         " で成立。",
         math(String.raw`(V_1V_2)^{n}P = (V_1^{(\pm)}V_2)^{n}P`),
-        " を仮定すると、",
+        " を仮定する。",
+        ref("sector_replacement_of_V1"),
+        " と合わせると、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -2040,7 +2052,7 @@ P^{(\pm)}X
 &= V_1\,P\,V_2\,(V_1V_2)^{n}P
    \quad (\because P \text{ は } V_2 \text{ と可換}) \\
 &= V_1^{(\pm)}\,P\,V_2\,(V_1V_2)^{n}P
-   \quad (\because \text{(1)}) \\
+   \quad (\because \text{セクター上での } V_1 \text{ の置き換え}) \\
 &= V_1^{(\pm)}\,V_2\,P\,(V_1V_2)^{n}P
    \quad (\because P \text{ は } V_2 \text{ と可換}) \\
 &= V_1^{(\pm)}\,V_2\,(V_1V_2)^{n}P\,P
@@ -2145,8 +2157,8 @@ P^{(\pm)}X
         " を ",
         math(String.raw`V_1^{(\pm)}`),
         " に置き換える）。",
-        ref("sector_replacement_of_V1"),
-        " (2) より（複号同順）",
+        ref("sector_replacement_pow"),
+        " より（複号同順）",
       ]),
       displayMath(
         String.raw`\mathrm{tr}\!\left(P^{(\pm)}(V_1V_2)^{N_{\mathrm{row}}}\right)
@@ -2161,8 +2173,8 @@ P^{(\pm)}X
         " と可換なので ",
         math(String.raw`P^{(\pm)}(V_1V_2)^n = (V_1V_2)^nP^{(\pm)}`),
         " であり、",
-        ref("sector_replacement_of_V1"),
-        " (2) をそのまま使える。）",
+        ref("sector_replacement_pow"),
+        " をそのまま使える。）",
       ]),
       paragraph([
         "Step 3（対称化）。",

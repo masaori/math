@@ -262,6 +262,7 @@ export const ALL_LABELS = [
   "section_of_angle_representation",
   "sector_decomposition_of_rayleigh_sup",
   "sector_replacement_of_V1",
+  "sector_replacement_pow",
   "set_and_algebra_notation",
   "sigma_z_diagonal_action",
   "sign_flip_conjugation",

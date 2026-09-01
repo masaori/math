@@ -4,7 +4,7 @@
 #   [eps, V_1] = [eps, V_2] = [eps, V_1^{(pm)}] = 0,
 #   V_1 P^{(pm)} = V_1^{(pm)} P^{(pm)},
 #   (V_1V_2)^n P^{(pm)} = (V_1^{(pm)} V_2)^n P^{(pm)}
-# 対象: structured-latex sector_replacement_of_V1
+# 対象: structured-latex sector_replacement_of_V1 / sector_replacement_pow
 #   （epsilon_projector_properties / epsilon_commutes_with_transfer_matrices も検証）
 # ---------------------------------------------------------
 import os
