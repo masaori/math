@@ -51653,6 +51653,170 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_determinant_fiber_stratified_phase_sum",
+        labels: [],
+        title: { text: "行列式の位相和の反転対と単純通過による層別" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_determinant_fiber_stratified_phase_sum",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_fiber_phase_weight",
+                kind: "definition",
+                title: { text: "ファイバーの位相付き寄与" },
+                labels: ["def_fiber_phase_weight"],
+                habitat: "Qbar",
+                statement: [
+                  paragraph([
+                    math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                    "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                    math(String.raw`D,E\subseteq E_L`), " は ",
+                    math(String.raw`D\cap E=\varnothing`), " かつ ",
+                    math(String.raw`\operatorname{Even}_L(E)`),
+                    "（", ref("def_even_edge_subset"), "）を満たすとする。",
+                    "ファイバーの位相付き寄与を",
+                  ]),
+                  displayMath(String.raw`\mathcal K^{a,b}_L(D,E):=
+\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)\ \in\ \overline{\mathbb Q}`),
+                  paragraph([
+                    "で定める。ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は ",
+                    ref("def_nonbacktracking_permutation_fiber"),
+                    "、軌道族 ", math(String.raw`\mathcal C(\varphi)`), " は ",
+                    ref("def_moved_orbit_family"),
+                    "、遷移行列の成分 ", math(String.raw`M^{a,b}_{\vec e,\vec f}`), " は ",
+                    ref("def_kac_ward_transition_matrices"),
+                    " で定めた。全ての和と積は有限集合の上の有限和・有限積であり、各成分は ",
+                    math(String.raw`\overline{\mathbb Q}`), " の元なので、値は ",
+                    math(String.raw`\overline{\mathbb Q}`),
+                    " に属する。基点や順序の選択を含まない式なので、値は ",
+                    math(String.raw`(a,b,L,D,E)`),
+                    " だけで定まる。実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_determinant_fiber_stratified_phase_sum",
+              kind: "claim",
+              title: { text: "行列式の位相和は反転対と単純通過で層別される" },
+              labels: ["claim_kac_ward_determinant_fiber_stratified_phase_sum"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/kac-ward-determinant-fiber-stratification"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とする。このとき ",
+                  math(String.raw`\overline{\mathbb Q}[x]`), " の等式",
+                ]),
+                displayMath(String.raw`D^{a,b}_L(x)
+=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\widehat{\mathcal K^{a,b}_L(D,E)}\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}`),
+                paragraph([
+                  "が成り立つ。行列式は ", ref("def_kac_ward_determinants"),
+                  "、ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
+                  "、定数多項式への埋め込みは ", ref("def_qbar_constant_embedding"),
+                  " である。両辺は有限和なので ", math(String.raw`\overline{\mathbb Q}[x]`),
+                  " の元である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                  " を取る。", ref("def_single_traversal_edge_set"), " により ",
+                  math(String.raw`D(\varphi)\cap E_1(\varphi)=\varnothing`), " であり、",
+                  ref("claim_single_traversal_edge_set_even"), " により ",
+                  math(String.raw`\operatorname{Even}_L(E_1(\varphi))`), " である。したがって ",
+                  math(String.raw`\bigl(D(\varphi),E_1(\varphi)\bigr)`),
+                  " は右辺の添字集合に属し、", ref("def_nonbacktracking_permutation_fiber"),
+                  " により ",
+                  math(String.raw`\varphi\in\mathcal N_L\bigl(D(\varphi),E_1(\varphi)\bigr)`),
+                  " である。逆に、右辺の添字 ", math(String.raw`(D,E)`), " と ",
+                  math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取れば、",
+                  ref("def_nonbacktracking_permutation_fiber"), " により ",
+                  math(String.raw`D(\varphi)=D`), " かつ ", math(String.raw`E_1(\varphi)=E`),
+                  " である。相異なる添字のファイバーは、この二つの値の少なくとも一方が異なるので交わらない。よって非後退置換の全体は、右辺の添字ごとの ",
+                  math(String.raw`\mathcal N_L(D,E)`), " の互いに素な合併である。",
+                ]),
+                paragraph([
+                  "また、各 ", math(String.raw`\varphi`), " について写像 ",
+                  math(String.raw`\vec e_{\ast}^{\,\varphi}:\mathcal C(\varphi)\to\vec E_L`),
+                  " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`), " について ",
+                  math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
+                  " となるように一つ選び（各 ", math(String.raw`C`), " は ",
+                  ref("claim_moved_orbit_partition"), " により空でない）、",
+                  math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
+                  "（", ref("def_permutation_orbit_sequence"), "）と置く。",
+                  ref("def_nonbacktracking_permutations"), " により ",
+                  math(String.raw`\varphi`), " は、動く辺を直ちに引き返さない後続へ写すので、",
+                  ref("claim_moved_orbit_weight_phase_twist"), " の仮定を満たす。さらに ",
+                  ref("claim_moved_orbit_partition"), " により ",
+                  math(String.raw`\mathcal C(\varphi)`), " は同値関係 ",
+                  math(String.raw`\sim_{\varphi}`), " の同値類の集合なので、",
+                  math(String.raw`O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C`),
+                  " である。求めたい行列式から始める。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+D^{a,b}_L(x)
+&=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}\
+\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\cdot
+\widehat{(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}}\right)
+&&\bigl(\because\ \blkref{claim_kac_ward_determinant_nonbacktracking_phase_sum}\text{ を写像 }\vec e_{\ast}^{\,\varphi}\text{ へ適用}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}\
+\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\cdot
+\widehat{\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}
+\left(\prod_{C\in\mathcal C(\varphi)}x^{\lvert C\rvert}\right)\cdot
+\prod_{C\in\mathcal C(\varphi)}\left(
+-\widehat{\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の乗法の可換性と結合則で因子を並べ替える}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}
+x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}\cdot
+\prod_{C\in\mathcal C(\varphi)}\left(
+-\widehat{\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \text{冪の積の法則 }x^{m}x^{n}=x^{m+n}\text{ を有限積へ繰り返す}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}
+x^{\,2\lvert D(\varphi)\rvert+\lvert E_1(\varphi)\rvert}\cdot
+\prod_{C\in\mathcal C(\varphi)}\left(
+-\widehat{\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \blkref{claim_moved_orbit_length_sum_stratified}\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\ \sum_{\varphi\in\mathcal N_L(D,E)}
+x^{\,2\lvert D\rvert+\lvert E\rvert}\cdot
+\prod_{C\in\mathcal C(\varphi)}\left(
+-\widehat{\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \text{冒頭の互いに素な合併で有限和が分かれ、各ファイバー上で }D(\varphi)=D,\ E_1(\varphi)=E\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\left(\sum_{\varphi\in\mathcal N_L(D,E)}\
+\prod_{C\in\mathcal C(\varphi)}\left(
+-\widehat{\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}}\right)\right)
+\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配則}\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\widehat{\mathcal K^{a,b}_L(D,E)}\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の }\widehat{a+b}=\widehat{a}+\widehat{b},\ \widehat{a\,b}=\widehat{a}\,\widehat{b}\text{ を有限和・有限積へ繰り返し、}\blkref{def_fiber_phase_weight}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "全ての和と積は有限集合の上の有限和・有限積であり ",
+                  math(String.raw`\overline{\mathbb Q}[x]`),
+                  " の中で閉じる。実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },

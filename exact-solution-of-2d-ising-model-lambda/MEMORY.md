@@ -2,7 +2,34 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 80 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 81 回目の tick 時点）
+
+**四つの Kac--Ward 行列式の位相和を、反転対と単純通過のファイバーで層別する $\overline{\mathbb Q}[x]$ の等式を本文と SageMath で固定した（Lean 未着手）。** ファイバーの位相付き寄与
+$\mathcal K^{a,b}_L(D,E):=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}\bigl(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\bigr)\in\overline{\mathbb Q}$
+を定義した（`def_fiber_phase_weight`。基点や順序の選択を含まない式なので well-defined）。
+`claim_kac_ward_determinant_fiber_stratified_phase_sum` は、`claim_kac_ward_determinant_nonbacktracking_phase_sum`
+による非後退置換の位相和、`claim_moved_orbit_weight_phase_twist` による位相の軌道積への置換、
+`claim_moved_orbit_length_sum_stratified` による指数の層別、ファイバーによる互いに素な分割、
+定数埋め込みの加法性・乗法性を合成し、
+$D^{a,b}_L(x)=\sum_{D\cap E=\varnothing,\ \operatorname{Even}_L(E)}\widehat{\mathcal K^{a,b}_L(D,E)}\,x^{2|D|+|E|}$
+を得る。SageMath `kac-ward-determinant-fiber-stratification` は $L=2$ の四つのスピン構造で、
+行列式の直接計算と層別和の一致、各軌道の遷移成分積と位相分解
+$(-1)^{ah+bv}\zeta_8^{t_\circ}$ の一致を、非後退置換 $30{,}784$ 個・非空ファイバー $609$ 個の
+全数で厳密検査した。次は $\mathcal K^{a,b}_L(D,E)$ を偶部分グラフ対の選択集合
+$\mathcal C_L(D,E)$ の符号付き数え上げと対応づけ、その後に平方恒等式へ合成する。
+
+Lambda 側 check（862 ブロック）・linkage（382 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存検査・
+PDF 380 ページを通した。
+
+前進前レビューでは、前 tick の `claim_nonbacktracking_permutation_stratified_count` を本文・
+SageMath・今回の直接利用と照合した。母関数の層別という実質を持ち、「何も言っていない主張」や
+仮定・住処・参照の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「クロネッカー積がつくる基底」（`tensor_basis`）の Step 1・Step 2 の
+二本の鎖で、行中にあった根拠 6 行を行末の根拠列（`aligned` の `&&`）へ揃えた。
+内容・式変形・根拠・参照は不変である。姉妹側 check・linkage（118 検算）・PDF 356 ページを通した。
+
+## ひとつ前の到達点（2026-09-02 の 80 回目の tick 時点）
 
 **非後退置換の母関数を、反転対と単純通過の対ごとのファイバーで層別する $\mathbb Z[x]$ の等式を本文と SageMath で固定した（Lean 未着手）。** ファイバー
 $\mathcal N_L(D,E):=\{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\mid D(\varphi)=D,\ E_1(\varphi)=E\}$
