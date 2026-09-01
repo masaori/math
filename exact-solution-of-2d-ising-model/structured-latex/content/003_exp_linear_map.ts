@@ -718,22 +718,22 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
         String.raw`\begin{aligned}
 \Phi^{m+1}(Y+Z)
 &= \Phi\!\left(\Phi^m(Y+Z)\right)
-\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m) \\
+&&(\because\ \Phi^{m+1}=\Phi\circ\Phi^m) \\
 &= \Phi\!\left(\Phi^m(Y)+\Phi^m(Z)\right)
-\quad (\because \Phi^m \text{ の線型性}) \\
+&&(\because\ \Phi^m \text{ の線型性}) \\
 &= \Phi\!\left(\Phi^m(Y)\right)+\Phi\!\left(\Phi^m(Z)\right)
-\quad (\because \Phi \text{ の線型性}) \\
+&&(\because\ \Phi \text{ の線型性}) \\
 &= \Phi^{m+1}(Y)+\Phi^{m+1}(Z)
-\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m) \\
+&&(\because\ \Phi^{m+1}=\Phi\circ\Phi^m) \\
 \Phi^{m+1}(cY)
 &= \Phi\!\left(\Phi^m(cY)\right)
-\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m) \\
+&&(\because\ \Phi^{m+1}=\Phi\circ\Phi^m) \\
 &= \Phi\!\left(c\,\Phi^m(Y)\right)
-\quad (\because \Phi^m \text{ の線型性}) \\
+&&(\because\ \Phi^m \text{ の線型性}) \\
 &= c\,\Phi\!\left(\Phi^m(Y)\right)
-\quad (\because \Phi \text{ の線型性}) \\
+&&(\because\ \Phi \text{ の線型性}) \\
 &= c\,\Phi^{m+1}(Y)
-\quad (\because \Phi^{m+1}=\Phi\circ\Phi^m)
+&&(\because\ \Phi^{m+1}=\Phi\circ\Phi^m)
 \end{aligned}`,
       ),
       paragraph([
@@ -899,6 +899,8 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
           "行列の成分の定義からその場で確かめられる等式である。" +
           "抽象的な一般化（任意の有限次元ノルム線型空間で同じ結論が成り立つこと）は " +
           "notes/003_exp_abstract_normed_space.ts へ退避した。",
+        "2026-09-01 の式変形統一で、Step 6 の線型性の鎖に行中の \\quad (\\because …) で置かれていた" +
+          "根拠 8 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
       ],
     },
   },
