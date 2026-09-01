@@ -902,13 +902,13 @@ Y_m Z_{m+1}
         String.raw`\begin{aligned}
 K_1\sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z
 &= K_1\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right) + K_1\,\sigma_M^z\sigma_1^z
-\quad (\because\ \sigma_{M+1}^z=\sigma_1^z\ \text{として有限和の最後の項を分ける}) \\
+&&(\because\ \sigma_{M+1}^z=\sigma_1^z\ \text{として有限和の最後の項を分ける}) \\
 &= K_1\left(\sum_{m=1}^{M-1} i\,Y_m Z_{m+1}\right) + K_1\left(-i\,\varepsilon\,Y_M Z_1\right)
-\quad (\because \text{Step 2, Step 3}) \\
+&&(\because \text{Step 2, Step 3}) \\
 &= i K_1\left(\sum_{m=1}^{M-1} Y_m Z_{m+1} - \varepsilon\, Y_M Z_1\right)
-\quad (\because \mathbb{C}\text{-線型空間 } \mathrm{Mat}(2^M,\mathbb{C}) \text{ でのスカラー倍の分配律}) \\
+&&(\because \mathbb{C}\text{-線型空間 } \mathrm{Mat}(2^M,\mathbb{C}) \text{ でのスカラー倍の分配律}) \\
 &= i K_1\left(Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M - \varepsilon\,Y_M Z_1\right)
-\quad (\because\ \text{有限和を項ごとに書く})
+&&(\because\ \text{有限和を項ごとに書く})
 \end{aligned}`,
       ),
       paragraph([
@@ -922,9 +922,9 @@ K_1\sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z
         String.raw`\begin{aligned}
 V_1
 &= \exp\!\left(K_1\sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right)
-\quad (\because\ V_1\ \text{の定義}) \\
+&&(\because\ V_1\ \text{の定義}) \\
 &= \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M - \varepsilon Y_M Z_1)\right)
-\quad (\because\ \text{直前の指数の等式})
+&&(\because\ \text{直前の指数の等式})
 \end{aligned}`,
       ),
       paragraph(["以上で主張が示された。"]),
