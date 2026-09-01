@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 73 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 74 回目の tick 時点）
+
+**非零巻き付きの頂点単純な閉路（周期単純路）の循環総回転数が零であることを本文と SageMath で固定した（Lean 未着手）。** `claim_nonzero_winding_simple_cycle_turning_zero` は、$n_{\mathrm{ct}}(\gamma)=0$ と非零巻き付きを満たす閉じた非後退辺列 $\gamma$ について $t_{\circ}(\gamma)=0$ を主張する。証明は、最大横断水準を達成する基点添字 $k_0$（有限集合の最大元の達成点）と反復回数 $t=1$ を取り、周期数 $c=1,2,3$ の一側閉包のトーラス射影 $\Gamma_c$ を作る。$a:=t_{\circ}(\Gamma_1)-t_{\circ}(\gamma)$、$b:=t_{\circ}(\gamma)$ と置くと、周期数差の回転数等式（$c=1,2$ の二回適用）から $a+cb=t_{\circ}(\Gamma_c)$、射影回転数の主張から $t_{\circ}(\Gamma_c)\in\{4,-4\}$（$c=1,2,3$）となり、三周期比較の整数補題で $b=t_{\circ}(\gamma)=0$ を得る。SageMath `nonzero-winding-simple-cycle-turning-zero` は $L=1,2,3$ の非零巻き付きの頂点単純閉路 3,464 本について、合成の等式と帰属 10,392 件・結論零 3,464 件を `ZZ` で全数検査した。次は候補への合成へ進む（未着手の Lean 二版も離散 Whitney の列で一件ずつ配線する）。
+
+Lambda 側 check（843 ブロック）・linkage（376 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 373 ページを通した。
+
+前進前レビューでは、一側閉包の頂点単純性（`claim_one_sided_periodic_lift_closure_simple`）と射影回転数（`claim_one_sided_closure_projection_cyclic_turning`）の statement に、証明が `claim_periodic_plane_lift_points_distinct` 経由で実際に使う仮定 $n_{\mathrm{ct}}(\gamma)=0$ が明示されていなかったため、両 statement へ仮定を追記し、前進前に独立コミット（707693716）として push した。
+
+## ひとつ前の到達点（2026-09-01 の 73 回目の tick 時点）
 
 **一側閉包の周期数を一つ増やすと、循環総回転数が元の閉歩道の循環総回転数だけ増えることを本文と SageMath で固定した（Lean 未着手）。** `claim_one_sided_closure_period_difference_turning` は、一側閉包の方向列を周期持ち上げ・上り横断階段・反転平行階段・下り横断階段へ分ける。周期数を一つ増やすと、周期持ち上げの一周期分と反転平行階段の一周期分が増える。前者の循環寄与は、元の閉歩道の巡回移動にすぎないため $t_{\circ}(\gamma)$ であり、後者の循環寄与は平行階段が一方向または二方向の一定方向列からなり、内部の曲がりと末辺から始辺への曲がりが相殺するため零である。従って $t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)=t_{\circ}(\gamma)$ となり、一側閉包の循環総回転数は周期数 $c$ に対して公差 $t_{\circ}(\gamma)$ の整数の等差数列をなす。SageMath `one-sided-periodic-lift-closure` は $L=1,2,3$ の一側閉包 45,216 本について、周期数 $c=1,2,3$ の二つの隣接差が元の閉歩道の循環総回転数に一致することを `ZZ` で検査した。次は三周期比較の整数補題とこの等差数列を合成し、周期単純路の循環総回転数が零であることを示す。
 

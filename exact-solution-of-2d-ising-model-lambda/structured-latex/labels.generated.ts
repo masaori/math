@@ -121,6 +121,7 @@ export const ALL_LABELS = [
   "claim_neg_one_not_square",
   "claim_no_rational_square_two",
   "claim_non_orbit_preserving_term_zero",
+  "claim_nonzero_winding_simple_cycle_turning_zero",
   "claim_odd_ray_interior_cells_bounded",
   "claim_one_s_linearly_independent",
   "claim_one_sided_closure_period_difference_turning",

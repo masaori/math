@@ -60548,6 +60548,100 @@ a+2b&=(a+b)+b
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_nonzero_winding_simple_cycle_turning_zero",
+        labels: [],
+        title: { text: "周期単純路の循環総回転数は零" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_nonzero_winding_simple_cycle_turning_zero",
+            focus: {
+              id: "kac_ward_claim_nonzero_winding_simple_cycle_turning_zero",
+              kind: "claim",
+              title: { text: "非零巻き付きの頂点単純な閉路の循環総回転数は零である" },
+              labels: ["claim_nonzero_winding_simple_cycle_turning_zero"],
+              habitat: "Z",
+              verification: ["sagemath/check/nonzero-winding-simple-cycle-turning-zero"],
+              statement: [
+                paragraph([
+                  "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                  "（", ref("def_closed_nonbacktracking_walk"), "）が、通過の頂点が相異なる、すなわち ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
+                  "）を満たし、かつ整数巻き付き数（", ref("def_directed_winding_numbers"), "）が",
+                ]),
+                displayMath(String.raw`\bigl(w_{\mathrm h}(\gamma),\,w_{\mathrm v}(\gamma)\bigr)\ne(0,0)`),
+                paragraph([
+                  "を満たすならば、循環総回転数（", ref("def_cyclic_total_turning"), "）は",
+                ]),
+                displayMath(String.raw`t_{\circ}(\gamma)=0`),
+                paragraph([
+                  "である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず一側閉包の入力を用意する。一周期の横断座標の有限集合は空でない有限整数集合なので最大元 ",
+                  math(String.raw`K_{\max}(\gamma)`), " を持ち（",
+                  ref("def_transverse_translate_of_periodic_plane_lift"), "）、それを達成する添字 ",
+                  math(String.raw`k_0\in\{0,\ldots,m-1\}`), " が取れる。",
+                  math(String.raw`0\le k_0\le m-1`), " では ",
+                  math(String.raw`\widetilde P_{k_0}(\gamma)=P_{k_0}(\gamma)`),
+                  "（", ref("def_periodic_plane_lift"), " の商と余りの読み替え）なので、この ",
+                  math(String.raw`k_0`), " は一側閉包の基点の条件 ",
+                  math(String.raw`\kappa_{\gamma}(\widetilde P_{k_0}(\gamma))=K_{\max}(\gamma)`),
+                  " を満たす。反復回数は ", math(String.raw`t:=1`), " と取る。周期数 ",
+                  math(String.raw`c\in\{1,2,3\}`), " のそれぞれについて一側閉包 ",
+                  math(String.raw`W_c:=\bigl(F^{\gamma,k_0,1,c}_0,\ldots,F^{\gamma,k_0,1,c}_{N_c}\bigr)`),
+                  "（", ref("def_one_sided_periodic_lift_closure"), "）とそのトーラス射影 ",
+                  math(String.raw`\Gamma_c:=\Pi(W_c)`),
+                  "（", ref("def_plane_unit_path_torus_projection"), "）を作る。",
+                ]),
+                paragraph([
+                  "次に整数 ", math(String.raw`a:=t_{\circ}(\Gamma_1)-t_{\circ}(\gamma)\in\mathbb Z`),
+                  " と ", math(String.raw`b:=t_{\circ}(\gamma)\in\mathbb Z`),
+                  " を置き、", math(String.raw`c=1,2,3`), " のそれぞれで ",
+                  math(String.raw`a+cb`), " を計算する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+a+1\cdot b&=t_{\circ}(\Gamma_1)-t_{\circ}(\gamma)+t_{\circ}(\gamma)
+&&\bigl(\because\ a,b\text{ の定義}\bigr)\\
+&=t_{\circ}(\Gamma_1)
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr),\\
+a+2\cdot b&=t_{\circ}(\Gamma_1)+t_{\circ}(\gamma)
+&&\bigl(\because\ a,b\text{ の定義と }\mathbb Z\text{ の四則}\bigr)\\
+&=t_{\circ}(\Gamma_2)
+&&\bigl(\because\ \blkref{claim_one_sided_closure_period_difference_turning}\text{ の }c=1\text{ の差の等式}\bigr),\\
+a+3\cdot b&=t_{\circ}(\Gamma_2)+t_{\circ}(\gamma)
+&&\bigl(\because\ a,b\text{ の定義、上の }a+2b=t_{\circ}(\Gamma_2)\text{、}\mathbb Z\text{ の四則}\bigr)\\
+&=t_{\circ}(\Gamma_3)
+&&\bigl(\because\ \blkref{claim_one_sided_closure_period_difference_turning}\text{ の }c=2\text{ の差の等式}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "一方、", math(String.raw`\gamma`), " は ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
+                  " と非零巻き付きを満たすので、", math(String.raw`c=1,2,3`),
+                  " のそれぞれについて ",
+                  ref("claim_one_sided_closure_projection_cyclic_turning"), " により",
+                ]),
+                displayMath(String.raw`a+cb=t_{\circ}(\Gamma_c)\in\{4,-4\}\qquad(c=1,2,3)`),
+                paragraph([
+                  "である。従って ", ref("claim_three_term_pm_four_difference_zero"),
+                  " を ", math(String.raw`a,b`), " へ適用して ",
+                  math(String.raw`b=0`), "、すなわち ",
+                  math(String.raw`t_{\circ}(\gamma)=0`),
+                  " を得る。全過程は有限列・有限集合の最大元・整数の四則だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
