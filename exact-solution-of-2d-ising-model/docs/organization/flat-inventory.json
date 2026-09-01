@@ -909,6 +909,46 @@
       "concludingCorollaryEntryId": "bridge_011a_claim_sector_replacement_pow",
       "boundaryEvidence": "章内依存順30で V1^{(±)} を定義する。順31はこの定義と既に閉じた V1 の固有空間への制限・相補射影の像から、射影後の V1 を V1^{(±)} へ置き換える主定理へ進む。並行して順32–35は半指数行列とその平方根性、全スピン反転行列との可換性、相補射影との可換性へ進む。順36は順31の置換等式、相補射影の冪等性、順35の可換性を合流させ、置き換えを転送行列の積の任意の非負整数冪へ反復する系で節を閉じる。直後の順37は V1^{(±)} の定義を再利用するが、順31–36の主張には依存せず、Pauli 行列の積とクロネッカー積の転置から iK1H1^{(±)} と iK2*H2 の実対称性を示す。生成時に七項の連続性と内部依存、対象と全外部入力の本文 fingerprint、順36への一意な閉包、順37の直接依存・本文 fingerprint、順31–36からの非依存、および入力集合の追加・除外を固定検査する。",
       "readabilityStatus": "未定義だった H1^{(±)} を使わず、半指数行列の定義・平方根性・二種類の可換性を別ブロックにした。さらに、射影後の V1 の置き換えと、その置き換えを積の冪へ反復する系を別ブロックへ分けた。対象七項は一ブロック一主張で依存順に読め、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、行列指数関数、固有空間への制限、行列と線型写像の対応に説明粒度の未解決が残る。"
+    },
+    {
+      "name": "実対称な生成子と符号反転共役",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+      "entryIds": [
+        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+        "eigenvalues_of_V_016_claim_sign_flip_conjugation"
+      ],
+      "input": [
+        "転送行列・サイト作用素と境界項の符号を固定した二つの生成子",
+        "Pauli 行列の積と、相異なるサイトに置いた因子の積の規則",
+        "具体的なクロネッカー積の成分と転置",
+        "有限複素行列のエルミート性の定義"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "transfer_matrix_001_definition_symbols",
+        "transfer_matrix_007_definition_V1_pm",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000d_claim_kronecker_transpose",
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+      ],
+      "output": [
+        "二つの生成子を実係数の Pauli 行列積として表し、実対称性を示すこと",
+        "両方の生成子の符号を同時に反転する可逆行列による共役"
+      ],
+      "mainTheorems": [
+        "境界項の符号を固定した生成子と双対結合の生成子が実対称であること",
+        "二つの生成子を同時に符号反転する共役"
+      ],
+      "mainTheoremEntryIds": [
+        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+        "eigenvalues_of_V_016_claim_sign_flip_conjugation"
+      ],
+      "boundaryEvidence": "章内依存順37は Pauli 行列の積とクロネッカー積の転置を使い、iK1H1^{(±)} と iK2*H2 を実係数の Pauli 行列積として表して実対称性を示す。順38は同じ Pauli 行列積の入力に加えて順37で得た H2 の表示を直接用い、両方の生成子を同時に負号へ移す可逆行列による共役へ進むため、二項は一方向の内部依存で連続する。直後の順39は偶セクターの転送行列とその共役写像を定義するが、順37・38のどちらにも依存しない。順39では可逆元・共役写像・行列指数関数による共役・可換行列の指数積公式を追加し、Pauli 行列の積、クロネッカー積の成分と転置、エルミート性を入力から外すため、順38の符号反転共役で節を閉じる。生成時に二項の連続性、内部依存辺、対象と全外部入力の本文 fingerprint、順38への一意な閉包、順39との相互非依存、順39の本文・直接依存、および入力集合の追加・除外を固定検査する。",
+      "readabilityStatus": "実対称性は二次の Pauli 行列の積、サイトごとの積、クロネッカー積の転置を一段ずつ計算し、符号反転共役は各サイトの共役から生成子の各項へ進むため、対象二項は現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号に説明粒度の未解決が残る。"
     }
   ],
   "explanationGranularityReview": {
@@ -10934,8 +10974,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6819,
-        "inspectedContentSha256": "78273ee807423b1da5f1adb0f91170f411f339534ddaeb7198be04cc3b22f8ae",
+        "inspectedCharacterCount": 6753,
+        "inspectedContentSha256": "6f3858025c49df33a2e2789f4bb2c4d3ae8a7042b04d50bf22be06dc021989cb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

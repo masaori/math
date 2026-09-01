@@ -868,6 +868,61 @@ const realSymmetricGeneratorsExpectedDirectDependencies = [
   "transfer_matrix_007_definition_V1_pm",
 ].sort();
 const realSymmetricGeneratorsExpectedContentSha256 = "58f128326d7105d0494ee2849438389cb2a90991f8d960809e161001bd22e89d";
+const realSymmetricGeneratorsAndSignFlipSectionEntryIds = [
+  "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+  "eigenvalues_of_V_016_claim_sign_flip_conjugation",
+] as const;
+const realSymmetricGeneratorsAndSignFlipExpectedInternalDependencies = new Map<string, string[]>([
+  ["eigenvalues_of_V_014_claim_iH_is_real_symmetric", []],
+  ["eigenvalues_of_V_016_claim_sign_flip_conjugation", [
+    "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+  ]],
+]);
+const realSymmetricGeneratorsAndSignFlipExpectedContentSha256 = new Map<string, string>([
+  ["eigenvalues_of_V_014_claim_iH_is_real_symmetric", realSymmetricGeneratorsExpectedContentSha256],
+  ["eigenvalues_of_V_016_claim_sign_flip_conjugation", "bf0cc5752d2a2ff61c7528355e825e7a2f1be3a0a7f5d21d43928553fc3bfe64"],
+]);
+const signFlipConjugationExpectedDirectDependencies = [
+  "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+  "linear_space_general_000b_claim_kronecker_product_rule",
+  "transfer_matrix_001_definition_symbols",
+  "transfer_matrix_007_definition_V1_pm",
+].sort();
+const realSymmetricGeneratorsAndSignFlipExpectedExternalInputEntryIds = [
+  "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+  "linear_space_general_000_definition_kronecker_product",
+  "linear_space_general_000b_claim_kronecker_product_rule",
+  "linear_space_general_000d_claim_kronecker_transpose",
+  "transfer_matrix_001_definition_symbols",
+  "transfer_matrix_007_definition_V1_pm",
+].sort();
+const realSymmetricGeneratorsAndSignFlipExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "d0d5706bfc9866ba851d979c14387aa1c99cf67bdf434f453699a1fa91d4f22c"],
+  ["linear_space_general_000_definition_kronecker_product", "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40"],
+  ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
+  ["linear_space_general_000d_claim_kronecker_transpose", "cecdd6fa3fb66f3aa75d8982f92e7290719c0960058ffb0caafe68dfa9e9b4d5"],
+  ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
+  ["transfer_matrix_007_definition_V1_pm", "7a63f3a02db439552636cb7cd8ac32f348c82f85830614ed5fc94c80b3698264"],
+]);
+const evenSectorTransferDefinitionExpectedDirectDependencies = [
+  "TV1_hatZ_hatY_009_definition_invertible_elements",
+  "TV1_hatZ_hatY_011_definition_T_g",
+  "calc_formulae_006_definition_of_cc",
+  "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+  "transfer_matrix_001_definition_symbols",
+  "transfer_matrix_007_definition_V1_pm",
+].sort();
+const evenSectorTransferDefinitionExpectedContentSha256 = "2b98815ef0d80cf308e5c5da336e44c224de79b555bd635cbcdb46f83ea286ef";
 const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_006_definition_of_cc", new Set(["abs_basic_properties", "matrix_exp_series_converges"])],
   ["linear_space_general_000_definition_kronecker_product", new Set(["kronecker_product_rule", "tensor_basis"])],
@@ -1669,6 +1724,16 @@ const v1PlusMinusAndCommutationSection = validateReviewedSection(
   v1PlusMinusAndCommutationExpectedExternalInputContentSha256,
   ["bridge_011a_claim_sector_replacement_pow"],
 );
+const realSymmetricGeneratorsAndSignFlipSection = validateReviewedSection(
+  "実対称な生成子と符号反転共役",
+  "2次元イジングモデル",
+  realSymmetricGeneratorsAndSignFlipSectionEntryIds,
+  realSymmetricGeneratorsAndSignFlipExpectedInternalDependencies,
+  realSymmetricGeneratorsAndSignFlipExpectedContentSha256,
+  realSymmetricGeneratorsAndSignFlipExpectedExternalInputEntryIds,
+  realSymmetricGeneratorsAndSignFlipExpectedExternalInputContentSha256,
+  ["eigenvalues_of_V_016_claim_sign_flip_conjugation"],
+);
 const positiveSymmetrizedTransferMatrixEntriesEntry = positiveSymmetrizedTransferMatrixEntriesSection.sectionEntries[0]!;
 const zYLinearIndependenceEntry = zYLinearIndependenceSection.sectionEntries[0]!;
 const epsilonEigenspacesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[0]!;
@@ -1682,8 +1747,10 @@ const v1PlusMinusSquareRootClaimEntry = v1PlusMinusAndCommutationSection.section
 const epsilonCommutationEntry = v1PlusMinusAndCommutationSection.sectionEntries[4]!;
 const epsilonProjectorCommutationEntry = v1PlusMinusAndCommutationSection.sectionEntries[5]!;
 const sectorReplacementPowerEntry = v1PlusMinusAndCommutationSection.sectionEntries[6]!;
-const realSymmetricGeneratorsEntry = entries.find((entry) =>
-  entry.id === "eigenvalues_of_V_014_claim_iH_is_real_symmetric")!;
+const realSymmetricGeneratorsEntry = realSymmetricGeneratorsAndSignFlipSection.sectionEntries[0]!;
+const signFlipConjugationEntry = realSymmetricGeneratorsAndSignFlipSection.sectionEntries[1]!;
+const evenSectorTransferDefinitionEntry = entries.find((entry) =>
+  entry.id === "evensectorT_001_definition_V_plus")!;
 if (kappaDefinitionEntry.dependencyPlacement!.chapterOrder !== 17
   || criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder !== 18
   || symmetrizedTransferMatrixSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 19
@@ -1896,6 +1963,56 @@ if (JSON.stringify(inputsAddedForRealSymmetricGenerators.sort()) !== JSON.string
     added: inputsAddedForRealSymmetricGenerators,
     dropped: inputsDroppedAfterSectorReplacement,
   })}`);
+}
+if (signFlipConjugationEntry.dependencyPlacement!.chapterOrder !== 38
+  || JSON.stringify([...signFlipConjugationEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(signFlipConjugationExpectedDirectDependencies)
+  || evenSectorTransferDefinitionEntry.dependencyPlacement!.chapterOrder !== 39
+  || JSON.stringify([...evenSectorTransferDefinitionEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(evenSectorTransferDefinitionExpectedDirectDependencies)
+  || evenSectorTransferDefinitionEntry.explanationGranularityReview.inspectedContentSha256
+    !== evenSectorTransferDefinitionExpectedContentSha256
+  || evenSectorTransferDefinitionEntry.dependsOnEntryIds.includes(realSymmetricGeneratorsEntry.id)
+  || evenSectorTransferDefinitionEntry.dependsOnEntryIds.includes(signFlipConjugationEntry.id)
+  || realSymmetricGeneratorsAndSignFlipSection.sectionEntries.some((entry) =>
+    entry.dependsOnEntryIds.includes(evenSectorTransferDefinitionEntry.id))) {
+  throw new Error("実対称な生成子と符号反転共役の節末、および偶セクター転送行列の定義との節境界が変わりました");
+}
+const realSymmetricGeneratorsAndSignFlipExternalInputSet = new Set(
+  realSymmetricGeneratorsAndSignFlipSection.externalInputEntryIds,
+);
+const inputsAddedForEvenSectorTransferDefinition = evenSectorTransferDefinitionEntry.dependsOnEntryIds
+  .filter((id) => !realSymmetricGeneratorsAndSignFlipExternalInputSet.has(id));
+const inputsDroppedAfterSignFlipConjugation = realSymmetricGeneratorsAndSignFlipSection.externalInputEntryIds
+  .filter((id) => !evenSectorTransferDefinitionEntry.dependsOnEntryIds.includes(id));
+if (JSON.stringify(inputsAddedForEvenSectorTransferDefinition.sort()) !== JSON.stringify([
+  "TV1_hatZ_hatY_009_definition_invertible_elements",
+  "TV1_hatZ_hatY_011_definition_T_g",
+  "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+].sort())
+  || JSON.stringify(inputsDroppedAfterSignFlipConjugation.sort()) !== JSON.stringify([
+    "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    "linear_space_general_000_definition_kronecker_product",
+    "linear_space_general_000b_claim_kronecker_product_rule",
+    "linear_space_general_000d_claim_kronecker_transpose",
+  ].sort())) {
+  throw new Error(`符号反転共役の直後で入力集合の切り替わり方が変わりました: ${JSON.stringify({
+    added: inputsAddedForEvenSectorTransferDefinition,
+    dropped: inputsDroppedAfterSignFlipConjugation,
+  })}`);
+}
+if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
+  entry.explanationGranularityReview.status === "自動検査で主題に適合")
+  || ![
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "calc_formulae_006_definition_of_cc",
+    "transfer_matrix_001_definition_symbols",
+  ].every((id) => entries.find((entry) => entry.id === id)!.explanationGranularityReview.status
+    === "具体的な行列計算への展開またはブロック分割を要する")) {
+  throw new Error("実対称な生成子と符号反転共役の対象本文または外部入力の説明粒度判定が変わりました");
 }
 if (kappaDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || criticalSinhProductDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
@@ -2335,6 +2452,32 @@ const isingModelSectionBoundaries = [{
   concludingCorollaryEntryId: "bridge_011a_claim_sector_replacement_pow",
   boundaryEvidence: "章内依存順30で V1^{(±)} を定義する。順31はこの定義と既に閉じた V1 の固有空間への制限・相補射影の像から、射影後の V1 を V1^{(±)} へ置き換える主定理へ進む。並行して順32–35は半指数行列とその平方根性、全スピン反転行列との可換性、相補射影との可換性へ進む。順36は順31の置換等式、相補射影の冪等性、順35の可換性を合流させ、置き換えを転送行列の積の任意の非負整数冪へ反復する系で節を閉じる。直後の順37は V1^{(±)} の定義を再利用するが、順31–36の主張には依存せず、Pauli 行列の積とクロネッカー積の転置から iK1H1^{(±)} と iK2*H2 の実対称性を示す。生成時に七項の連続性と内部依存、対象と全外部入力の本文 fingerprint、順36への一意な閉包、順37の直接依存・本文 fingerprint、順31–36からの非依存、および入力集合の追加・除外を固定検査する。",
   readabilityStatus: "未定義だった H1^{(±)} を使わず、半指数行列の定義・平方根性・二種類の可換性を別ブロックにした。さらに、射影後の V1 の置き換えと、その置き換えを積の冪へ反復する系を別ブロックへ分けた。対象七項は一ブロック一主張で依存順に読め、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、行列指数関数、固有空間への制限、行列と線型写像の対応に説明粒度の未解決が残る。",
+}, {
+  name: "実対称な生成子と符号反転共役",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  entryIds: realSymmetricGeneratorsAndSignFlipSectionEntryIds,
+  input: [
+    "転送行列・サイト作用素と境界項の符号を固定した二つの生成子",
+    "Pauli 行列の積と、相異なるサイトに置いた因子の積の規則",
+    "具体的なクロネッカー積の成分と転置",
+    "有限複素行列のエルミート性の定義",
+  ],
+  externalInputEntryIds: realSymmetricGeneratorsAndSignFlipSection.externalInputEntryIds,
+  output: [
+    "二つの生成子を実係数の Pauli 行列積として表し、実対称性を示すこと",
+    "両方の生成子の符号を同時に反転する可逆行列による共役",
+  ],
+  mainTheorems: [
+    "境界項の符号を固定した生成子と双対結合の生成子が実対称であること",
+    "二つの生成子を同時に符号反転する共役",
+  ],
+  mainTheoremEntryIds: [
+    "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+    "eigenvalues_of_V_016_claim_sign_flip_conjugation",
+  ],
+  boundaryEvidence: "章内依存順37は Pauli 行列の積とクロネッカー積の転置を使い、iK1H1^{(±)} と iK2*H2 を実係数の Pauli 行列積として表して実対称性を示す。順38は同じ Pauli 行列積の入力に加えて順37で得た H2 の表示を直接用い、両方の生成子を同時に負号へ移す可逆行列による共役へ進むため、二項は一方向の内部依存で連続する。直後の順39は偶セクターの転送行列とその共役写像を定義するが、順37・38のどちらにも依存しない。順39では可逆元・共役写像・行列指数関数による共役・可換行列の指数積公式を追加し、Pauli 行列の積、クロネッカー積の成分と転置、エルミート性を入力から外すため、順38の符号反転共役で節を閉じる。生成時に二項の連続性、内部依存辺、対象と全外部入力の本文 fingerprint、順38への一意な閉包、順39との相互非依存、順39の本文・直接依存、および入力集合の追加・除外を固定検査する。",
+  readabilityStatus: "実対称性は二次の Pauli 行列の積、サイトごとの積、クロネッカー積の転置を一段ずつ計算し、符号反転共役は各サイトの共役から生成子の各項へ進むため、対象二項は現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号に説明粒度の未解決が残る。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
