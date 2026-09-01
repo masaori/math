@@ -1081,6 +1081,41 @@
       "mainTheoremEntryId": "closing_006_theorem_trace_of_epsilon_V_plus",
       "boundaryEvidence": "章内依存順56で V1^{(+)} の半指数行列と V2 を掛け合わせて偶セクター転送行列 V^{(+)} を定義し、順57で配置基底上の対角作用、全スピン反転行列との可換性、開鎖イジング模型の有限和を使って tr(εV^{(+)}) を明示的な正の実数へ計算する。二項は定義から正値公式へ進む一方向の依存鎖をなす。直後の順58は V^{(+)} の定義を再利用するが、エルミート正定値行列の指数関数と実対称生成子を入力に正定値性を示す別枝であり、順57のトレース公式には依存しない。順57も順58に依存せず、両者の全直接依存集合は異なるため、順57の後で節を閉じる。生成時に二項の連続性と全直接依存、対象と全外部入力の本文 fingerprint、順57への一意な閉包、順58の直接依存・本文、順57と順58の相互非依存、および対象三項の説明粒度を固定検査する。",
       "readabilityStatus": "順56は一つの有限複素行列だけを定義する。順57は符号付きトレースを配置基底和へ直し、開鎖スピン配置の有限和を因数分解して正の閉形式へ至る一つの計算鎖であり、対象二項は現行の説明粒度検査に合格している。三項以上の本文分割または形式化同期は不要だった。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義、行列指数関数の定義と可換積公式、および行列と線型写像の対応に説明粒度の未解決が残る。"
+    },
+    {
+      "name": "偶セクター転送行列の正定値性",
+      "chapter": "2次元イジングモデル",
+      "status": "境界候補・対象本文粒度未解決・外部入力粒度未解決",
+      "entryIds": [
+        "evenEigen_008_claim_V_plus_is_positive_definite"
+      ],
+      "input": [
+        "偶セクター転送行列 V^{(+)} とその半指数行列",
+        "二つの生成子の実対称性",
+        "エルミート正定値行列と行列指数関数の正定値性",
+        "可換な有限複素行列の指数関数の積公式と零行列の指数関数"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "transfer_matrix_001_definition_symbols",
+        "transfer_matrix_011_definition_H1_H2",
+        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+        "evensectorT_definition_V1_plus_square_root",
+        "evensectorT_definition_V_plus",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "linear_space_general_002_claim_scalar_identity_commutes",
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+        "exp_linear_map_004_theorem_exp_zero_is_identity",
+        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+      ],
+      "output": [
+        "V^{(+)} とその逆行列の正定値性・可逆性",
+        "両行列のトレースが正の実数であること"
+      ],
+      "mainTheorem": "偶セクター転送行列とその逆行列の正定値性",
+      "mainTheoremEntryId": "evenEigen_008_claim_V_plus_is_positive_definite",
+      "boundaryEvidence": "現行の未分割グラフでは、章内依存順58が順56の V^{(+)} の定義と順45の生成子の実対称性を受け、V^{(+)} とその逆行列の正定値性および二つのトレース正値性を出力する。直後の順59は同じ V^{(+)} と半指数行列を再利用するが、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示し、順58とは相互に依存しない。順59は転送行列記号を引き続き入力とし、順60の共役写像 T_g の線型性へ直接入力を渡す一方、順60は順58に依存しない。このため順58の後は節境界の候補となる。ただし順58は正定値性・可逆性・逆行列の正定値性・二つのトレース正値性を一ブロックへ束ね、Lean では対応内容が複数定理へ分かれている。順59も三つの行列の可逆性を束ね、順60も一般の線型性と特殊例を同居させている。三項以上の本文分割と形式化対応の再点検後に依存順が変わりうるため、最終的な節構造は確定しない。生成時には、この暫定評価の前提として順58の全直接依存、対象と全外部入力の本文 fingerprint、順59–60の全直接依存と本文、順58・59の相互非依存、順59から順60への依存、および二箇所の入力集合の切り替わりを固定検査する。",
+      "readabilityStatus": "順58の証明計算自体は具体的な三因子積を B^*AB として追えるが、一つの主張ブロックが正定値性・可逆性・逆行列・二つのトレースという複数出力を束ねている。Lean は対応内容を複数の定理へ分けているため、次回は順58だけを一単位として人手本文を一ブロック一主張へ分割し、SageMath・Lean 対応と節境界を再判定する。順59の三つの可逆性と順60の一般形・特殊例にも後続の分割候補がある。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
     }
   ],
   "explanationGranularityReview": {
@@ -1128,8 +1163,10 @@
       "TV1_hatZ_hatY_031_claim_V_psi_commutator",
       "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY",
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
+      "evensectorT_claim_V_plus_factors_invertible",
       "evensectorT_003_claim_coefficient_conversion",
-      "evenfermi_007_claim_T_eq_on_check_Z_Y"
+      "evenfermi_007_claim_T_eq_on_check_Z_Y",
+      "evenEigen_008_claim_V_plus_is_positive_definite"
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
@@ -9651,8 +9688,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 13791,
-        "inspectedContentSha256": "2b38a715778d5e8f0e2d4b1736eaa2f665aa5b791adb57f65e0af19d8bc420be",
+        "inspectedCharacterCount": 14156,
+        "inspectedContentSha256": "66177abbef1f6ea86dba8b3e62b43da74b9e257d0909ed7eeee9d75aa4cac141",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9722,8 +9759,8 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 4980,
-        "inspectedContentSha256": "e0bc8744eb1aee4db32e916ea770e971d4d9e672be0ebeb5d0a7fcc70b9b448e",
+        "inspectedCharacterCount": 4924,
+        "inspectedContentSha256": "de0aff8af067b4ef89f30c668cfdec203e30681e878a736a0a7e0c636ee4f2e3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10375,7 +10412,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 59,
+        "incomingReferenceCount": 60,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -19813,29 +19850,32 @@
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
         "incomingReferenceCount": 7,
-        "isingSemanticMatches": [],
+        "isingSemanticMatches": [
+          "transfer"
+        ],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1756,
-        "inspectedContentSha256": "cf0726412478b0f8d72d6280920c643c8ea4fe6092111f6db753ebf7a153d34f",
+        "inspectedCharacterCount": 1841,
+        "inspectedContentSha256": "8cd8d24bbde47b20c3179c80808415516a56f8a06c6159ef9f4188bd30ee9a81",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "V1^{(+)} の半指数行列、V2、V^{(+)} という三つの行列の可逆性を一ブロックへ束ねている。各出力の後続利用を照合して一ブロック一主張へ分割し、共役写像の線型性との節境界を再判定する必要がある。"
       },
       "dependsOnLabels": [
         "def_H1_H2",
         "def_V1_plus_square_root",
         "def_V_plus",
         "def_invertible_elements_of_R",
+        "def_transfer_matrix_symbols",
         "definition_of_cc",
         "matrix_exp_conjugation"
       ],
@@ -19845,6 +19885,7 @@
         "evensectorT_definition_V1_plus_square_root",
         "evensectorT_definition_V_plus",
         "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+        "transfer_matrix_001_definition_symbols",
         "transfer_matrix_011_definition_H1_H2"
       ],
       "semanticPrerequisiteLabels": [
@@ -19856,7 +19897,7 @@
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
+      "futureBlockSplitRecommended": true,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
         "chapterOrder": 59,
@@ -22558,7 +22599,7 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 6189,
@@ -22569,7 +22610,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "V^{(+)} の正定値性と可逆性、逆行列の正定値性、二つのトレース正値性を一ブロックへ束ねている。Lean では対応内容が複数の定理へ分かれているため、人手本文も一ブロック一主張へ分割し、SageMath・Lean 対応と節境界を再判定する必要がある。"
       },
       "dependsOnLabels": [
         "def_H1_H2",
@@ -22606,7 +22647,7 @@
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
+      "futureBlockSplitRecommended": true,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
         "chapterOrder": 58,
@@ -24379,8 +24420,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3429,
-        "inspectedContentSha256": "c1b527ac36f896ee3fdae2bb33469d3ce2c6177f4fb16a4ee64d01850f82df98",
+        "inspectedCharacterCount": 3413,
+        "inspectedContentSha256": "cf63701b726e4a5a8ef0552fc486928892eb683182ce96bf122cd21d7eed94f7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

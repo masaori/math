@@ -217,6 +217,8 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         " と ",
         math(String.raw`\exp\!\left(iK_2^*H_2\right)`),
         " は可逆。",
+        ref("def_transfer_matrix_symbols"),
+        " より ",
         math(String.raw`K_2 > 0`),
         " より ",
         math(String.raw`s_2 = \sinh 2K_2 > 0`),
