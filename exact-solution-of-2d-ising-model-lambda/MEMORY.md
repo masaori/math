@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 84 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 85 回目の tick 時点）
+
+**接触の無い非後退置換の位相積が、軌道ごとの巻き付き二次符号の積に等しいことを本文と SageMath で固定した（Lean 未着手）。** 置換の接触対の個数 $N_{\mathrm{ct}}(\varphi)$（動かす辺集合 $M(\varphi)$ の二元部分集合で終点が一致するものの個数）を定義した（`def_permutation_contact_pair_count`）。`claim_contact_free_permutation_phase_product` は、$N_{\mathrm{ct}}(\varphi)=0$ なら各軌道列の項が相異なる $M(\varphi)$ の元であることから通過の頂点が相異なる（$n_{\mathrm{ct}}(\gamma^\varphi_C)=0$）ことを導き、`claim_moved_orbit_weight_phase_twist` と `claim_vertex_simple_orbit_quadratic_sign` を合成して $\prod_C(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)})=\prod_C\chi_{a,b}(h(\gamma^\varphi_C),v(\gamma^\varphi_C))$ を得る。SageMath `contact-free-permutation-phase-product` は $L=2$ の非後退置換 $30{,}784$ 個中の接触の無い置換 $49$ 個・四つのスピン構造（検査 $196$ 件）で、中間段の頂点相異と基点独立性も含め円分体で厳密検査した。次は接触を持つ置換を平滑化で対にして相殺し、各添字の $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ へ合成する。
+
+Lambda 側 check（872 ブロック）・linkage（386 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 383 ページを通した。
+
+前進前レビューでは、前 tick の `claim_vertex_simple_orbit_quadratic_sign` を本文・SageMath・今回の直接利用と照合した。位相因子を二次符号へ読み替える実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$Z_m,Y_m$ は線型独立」（`Z_Y_linearly_independent`）の Step 3 の二本の鎖で、行中にあった根拠 5 行を行末の根拠列へ揃えた。内容・式変形・根拠・参照は不変である。
+
+## ひとつ前の到達点（2026-09-02 の 84 回目の tick 時点）
 
 **頂点単純な置換軌道の位相因子が、トーラスの巻き付き二次符号に等しいことを本文と SageMath で固定した（Lean 未着手）。** `claim_vertex_simple_orbit_quadratic_sign` は、切断線偶奇 $(h,v)$ が $(0,0)$ なら $t_\circ=\pm4$ と $\zeta_8^{t_\circ}=-1$、非零なら $t_\circ=0$ と $h+v+hv=1\pmod2$ を使い、四つのスピン構造について $-(-1)^{ah+bv}\zeta_8^{t_\circ}=\chi_{a,b}(h,v)$ を得る。SageMath `vertex-simple-orbit-quadratic-sign` は $L=2,3,4$ の頂点単純な閉じた非後退辺列 $373{,}716$ 本と四つのスピン構造、計 $1{,}494{,}864$ 件を円分体で厳密検査した。次は接触を持つ軌道を平滑化で対にして相殺し、各添字の $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ へ合成する。
 

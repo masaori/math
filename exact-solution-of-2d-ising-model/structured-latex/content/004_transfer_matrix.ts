@@ -360,12 +360,12 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
 \sigma_1^{a_1}\cdots\sigma_r^{a_r}\sigma_{r+1}^{a_{r+1}}
 &= \left(\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes I\boxtimes I\boxtimes\cdots\boxtimes I\right)
    \left(I\boxtimes\cdots\boxtimes I\boxtimes\overbrace{\sigma^{a_{r+1}}}^{(r+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
-\quad (\because \text{帰納法の仮定}) \\
+&&(\because\ \text{帰納法の仮定}) \\
 &= (\sigma^{a_1}I)\boxtimes\cdots\boxtimes(\sigma^{a_r}I)\boxtimes(I\sigma^{a_{r+1}})\boxtimes(II)\boxtimes\cdots\boxtimes(II)
-\quad (\because \text{クロネッカー積の積の規則}) \\
+&&(\because\ \text{クロネッカー積の積の規則}) \\
 &= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes\sigma^{a_{r+1}}\boxtimes
    \overbrace{I\boxtimes\cdots\boxtimes I}^{M-(r+1)}
-\quad (\because AI=IA=A)
+&&(\because\ AI=IA=A)
 \end{aligned}`,
       ),
       paragraph([
@@ -391,11 +391,11 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
 Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^z}^{m\text{th}}
 \boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
-\quad (\because \text{Step 3 の帰納法と }Z_m\text{ の定義}) \\
+&&(\because\ \text{Step 3 の帰納法と }Z_m\text{ の定義}) \\
 Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^y}^{m\text{th}}
 \boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
-\quad (\because \text{Step 3 の帰納法と }Y_m\text{ の定義})
+&&(\because\ \text{Step 3 の帰納法と }Y_m\text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -558,6 +558,8 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
         "記号の定義（labels: def_transfer_matrix_symbols）は sigma^x, sigma^y, sigma^z を" +
           "定義せずに sigma_k^x 等を導入している。本証明では標準的な Pauli 行列として明示した" +
           "（Z_Y_generate_algebra の証明も同じ扱いをしている）。",
+        "2026-09-02 の式変形統一で、Step 3 の二本の鎖に行中の \\quad (\\because …) で置かれていた根拠 5 行を、" +
+          "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
       ],
     },
   },

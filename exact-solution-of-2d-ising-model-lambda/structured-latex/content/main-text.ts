@@ -52006,6 +52006,152 @@ q_{a,b}(h,v)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_contact_free_permutation_phase_product",
+        labels: [],
+        title: { text: "接触の無い置換の位相積" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_contact_free_permutation_phase_product",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_permutation_contact_pair_count",
+                kind: "definition",
+                title: { text: "置換の接触対の個数" },
+                labels: ["def_permutation_contact_pair_count"],
+                habitat: "N",
+                statement: [
+                  paragraph([
+                    math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+                    " に対し、置換の接触対の個数 ",
+                    math(String.raw`N_{\mathrm{ct}}(\varphi)\in\mathbb N`), " を",
+                  ]),
+                  displayMath(String.raw`N_{\mathrm{ct}}(\varphi):=\bigl|\,\bigl\{\,\{\vec e,\vec f\}\ \bigm|\
+\vec e,\vec f\in M(\varphi),\ \vec e\ne\vec f,\
+\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)\,\bigr\}\,\bigr|`),
+                  paragraph([
+                    "で定める。動かす向き付き辺の集合 ", math(String.raw`M(\varphi)`), " は ",
+                    ref("def_moved_edge_set"), "、終点写像 ",
+                    math(String.raw`\operatorname{tgt}`), " は ",
+                    ref("def_oriented_edge_endpoints"),
+                    " で定めた。右辺は有限集合 ", math(String.raw`M(\varphi)`),
+                    " の二元部分集合のなす有限集合の部分集合の元の個数なので、値は自然数として定まる。",
+                    "閉歩道の接触対の個数 ", math(String.raw`n_{\mathrm{ct}}`),
+                    "（", ref("def_contact_pair_count"),
+                    "）は一本の辺列の添字対を数えるのに対し、こちらは置換が動かす辺の全体から終点の一致する対を数える。実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_contact_free_permutation_phase_product",
+              kind: "claim",
+              title: { text: "接触の無い置換の位相積は軌道ごとの二次符号の積に等しい" },
+              labels: ["claim_contact_free_permutation_phase_product"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/contact-free-permutation-phase-product"],
+              statement: [
+                paragraph([
+                  math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）とし、",
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                  "（", ref("def_nonbacktracking_permutations"), "）は ",
+                  math(String.raw`N_{\mathrm{ct}}(\varphi)=0`),
+                  "（", ref("def_permutation_contact_pair_count"), "）を満たすとする。各 ",
+                  math(String.raw`C\in\mathcal C(\varphi)`), "（", ref("def_moved_orbit_family"),
+                  "）について ", math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
+                  " を一つ選び（各 ", math(String.raw`C`), " は ", ref("claim_moved_orbit_partition"),
+                  " により空でない）、",
+                  math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
+                  "（", ref("def_permutation_orbit_sequence"), "）と置く。このとき ",
+                  math(String.raw`\overline{\mathbb Q}`), " の等式",
+                ]),
+                displayMath(String.raw`\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
+=\prod_{C\in\mathcal C(\varphi)}
+\chi_{a,b}\bigl(h(\gamma^{\varphi}_C),v(\gamma^{\varphi}_C)\bigr)`),
+                paragraph([
+                  "が成り立つ。遷移行列の成分は ", ref("def_kac_ward_transition_matrices"),
+                  "、切断線偶奇は ", ref("def_edge_sequence_seam_parities"),
+                  "、巻き付き二次符号は ", ref("def_torus_quadratic_sign"),
+                  " で定めた。符号は部分集合の鎖 ",
+                  math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
+                  " により代数的数として掛ける。左辺は基点の選択を含まないので、この等式により右辺の値も写像の族 ",
+                  math(String.raw`\vec e_{\ast}^{\,\varphi}`),
+                  " の選び方に依らない。実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず、任意の ", math(String.raw`C\in\mathcal C(\varphi)`), " について ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma^{\varphi}_C)=0`),
+                  "（", ref("def_contact_pair_count"), "）を示す。",
+                  math(String.raw`\vec e_0:=\vec e_{\ast}^{\,\varphi}(C)`), "、",
+                  math(String.raw`r:=r_{\varphi}(\vec e_0)`),
+                  "（", ref("def_permutation_minimal_return"), "）と置き、",
+                  math(String.raw`\gamma^{\varphi}_C`), " の第 ", math(String.raw`k`), " 項を ",
+                  math(String.raw`\vec\gamma_k:=\varphi^{\circ(k-1)}(\vec e_0)`),
+                  "（", math(String.raw`1\le k\le r`), "、", ref("def_permutation_orbit_sequence"),
+                  "）と書く。", ref("claim_moved_orbit_closed_nonbacktracking"), " により ",
+                  math(String.raw`\gamma^{\varphi}_C`), " は閉じた非後退辺列であり、その ",
+                  math(String.raw`r`), " 個の項は相異なる。", ref("def_permutation_orbit_set"),
+                  " により各項 ", math(String.raw`\vec\gamma_k`), " は ", math(String.raw`C`),
+                  " の元であり、", ref("claim_moved_orbit_partition"), " により ",
+                  math(String.raw`C\subseteq M(\varphi)`), " なので、各項は ",
+                  math(String.raw`M(\varphi)`), " の元である。",
+                ]),
+                paragraph([
+                  "添字 ", math(String.raw`j,k\in\{1,\ldots,r\}`), " が ",
+                  math(String.raw`j<k`), " かつ ",
+                  math(String.raw`\operatorname{tgt}(\vec\gamma_j)=\operatorname{tgt}(\vec\gamma_k)`),
+                  " を満たすと仮定して矛盾を導く。前段により ",
+                  math(String.raw`\vec\gamma_j`), " と ", math(String.raw`\vec\gamma_k`),
+                  " は相異なる ", math(String.raw`M(\varphi)`),
+                  " の元なので、二元部分集合 ",
+                  math(String.raw`\{\vec\gamma_j,\vec\gamma_k\}`), " は ",
+                  ref("def_permutation_contact_pair_count"),
+                  " の右辺の集合の元であり、その個数について ",
+                  math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`),
+                  " が従う。これは仮定 ", math(String.raw`N_{\mathrm{ct}}(\varphi)=0`),
+                  " に反する。よってそのような添字対は存在せず、",
+                  ref("def_contact_pair_count"), " の添字対の集合は空なので ",
+                  math(String.raw`n_{\mathrm{ct}}(\gamma^{\varphi}_C)=0`), " である。",
+                ]),
+                paragraph([
+                  "次に位相積を計算する。各 ", math(String.raw`C\in\mathcal C(\varphi)`),
+                  " について、", math(String.raw`\vec e_0\in C\subseteq M(\varphi)`), " なので ",
+                  ref("def_moved_edge_set"), " により ",
+                  math(String.raw`\varphi(\vec e_0)\ne\vec e_0`), " であり、",
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                  " なので ", ref("claim_moved_orbit_weight_phase_twist"),
+                  " の仮定を満たす。求めたい左辺から始める。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
+&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を各軌道へ基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ で適用}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}
+\chi_{a,b}\bigl(h(\gamma^{\varphi}_C),v(\gamma^{\varphi}_C)\bigr)
+&&\bigl(\because\ n_{\mathrm{ct}}(\gamma^{\varphi}_C)=0\text{ と }\blkref{claim_vertex_simple_orbit_quadratic_sign}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "全ての積は有限集合の上の有限積であり ",
+                  math(String.raw`\overline{\mathbb Q}`),
+                  " の中で閉じる。実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_signed_selection_stratification",
         labels: [],
         title: { text: "符号付き偶部分グラフ多項式の平方の選択集合による層別" },
