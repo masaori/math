@@ -2,7 +2,19 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 82 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 83 回目の tick 時点）
+
+**ファイバーの位相付き寄与を、切断線偶奇の符号と回転位相の冪だけで書く位相形へ書き換える $\overline{\mathbb Q}$ の等式を本文と SageMath で固定した（Lean 未着手）。** 残っていた「各添字で $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$」を、遷移成分から位相形への書き換え（今回）と、その後の位相の符号読み・相殺論法へ割り直した。`claim_fiber_phase_weight_topological_form` は、ファイバーの各置換の各軌道へ `claim_moved_orbit_weight_phase_twist` を基点 $\vec e_{\ast}^{\,\varphi}(C)$ で適用し、
+$\mathcal K^{a,b}_L(D,E)=\sum_{\varphi\in\mathcal N_L(D,E)}\prod_{C\in\mathcal C(\varphi)}\bigl(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\bigr)$
+を得る。左辺が基点の選択を含まないので、右辺の値も写像の族の選び方に依らない。SageMath `fiber-phase-weight-topological-form` は $L=2$ の全非空ファイバー $609$ 個・四つのスピン構造（検査 $2{,}436$ 件）で、遷移成分の定義との一致と、基点を一つ回した再計算による基点独立性を厳密検査した。次は各添字での $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ へ向けて、位相形の符号読みと相殺論法を進める。
+
+Lambda 側 check（867 ブロック）・linkage（384 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 381 ページを通した。姉妹側 check・linkage（118 検算）・PDF 356 ページも通した。
+
+前進前レビューでは、前 tick の `def_signed_selection_sum`・`claim_signed_even_subgraph_square_stratified` を本文・SageMath・台帳・セクション表と照合した。平方の層別という実質を持ち、「何も言っていない主張」や記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$\kappa(K)$ の基本性質と臨界点 $K_c$」（`kappa_of_K_basic`）の (4)(5) の三本の鎖で、行中にあった根拠 7 行を行末の根拠列へ揃えた。これでこの証明ブロックの行中根拠は尽きた。内容・式変形・根拠・参照は不変である。
+
+## ひとつ前の到達点（2026-09-02 の 82 回目の tick 時点）
 
 **符号付き偶部分グラフ多項式の平方を、共通辺・対称差・選択集合ごとの符号付き和で層別する $\mathbb Z[x]$ の等式を本文と SageMath で固定した（Lean 未着手）。** 互いに素な辺集合 $D,E$ とスピン構造 $(a,b)$ に対し、選択 $C\in\mathcal C_L(D,E)$ から復元する二つの偶部分グラフ $D\cup C$ と $D\cup(E\setminus C)$ の符号積を足した $\mathcal U^{a,b}_L(D,E)\in\mathbb Z$ を定義した（`def_signed_selection_sum`）。`claim_signed_even_subgraph_square_stratified` は、偶部分グラフ順序対の互いに素なファイバー分割、位数の和 $|A|+|B|=2|D|+|E|$、選択集合との全単射を合成して
 $(Q^{a,b}_L)^2=\sum_{D,E}\mathcal U^{a,b}_L(D,E)x^{2|D|+|E|}$

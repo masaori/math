@@ -888,9 +888,9 @@ A
 \sinh 2K
 &= \sinh\left(2K_c + 2(K-K_c)\right) \\
 &= \sinh 2K_c\cosh\left(2(K-K_c)\right) + \cosh 2K_c\sinh\left(2(K-K_c)\right)
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (1)}) \\
+&&(\because \text{cosh\_addition\_and\_half\_angle (1)}) \\
 &= \cosh\left(2(K-K_c)\right) + \sqrt2\,\sinh\left(2(K-K_c)\right)
-   \quad (\because \sinh 2K_c = 1,\ \cosh 2K_c = \sqrt2)
+&&(\because \sinh 2K_c = 1,\ \cosh 2K_c = \sqrt2)
 \end{aligned}`,
       ),
       paragraph([
@@ -920,9 +920,9 @@ A
       displayMath(
         String.raw`\begin{aligned}
 \sinh 2K &\geq \cosh 0.2 - \sqrt2\sinh 0.2 \geq 1.02006 - 1.414214\cdot 0.201337 \geq 0.7353
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (3)：} \sinh \text{ の単調性と上の数値評価}) \\
+&&(\because \text{cosh\_addition\_and\_half\_angle (3)：} \sinh \text{ の単調性と上の数値評価}) \\
 \sinh 2K &\leq \cosh 0.2 + \sqrt2\sinh 0.2 \leq 1.02007 + 1.414214\cdot 0.201337 \leq 1.3048
-   \quad (\because \text{同上})
+&&(\because \text{同上})
 \end{aligned}`,
       ),
       paragraph([
@@ -989,11 +989,11 @@ A
         String.raw`\begin{aligned}
 \kappa'(K_c)
 &= 2 + \frac{2}{\sinh 2K_c}
-   \quad (\because \text{(1) の } \kappa' \text{ の表示を } K = K_c \text{ で読む}) \\
+&&(\because \text{(1) の } \kappa' \text{ の表示を } K = K_c \text{ で読む}) \\
 &= 2 + \frac{2}{1}
-   \quad (\because \sinh 2K_c = 1\text{。本主張の } K_c \text{ の定義}) \\
+&&(\because \sinh 2K_c = 1\text{。本主張の } K_c \text{ の定義}) \\
 &= 4
-   \quad (\because \mathbb{R} \text{ の四則})
+&&(\because \mathbb{R} \text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
@@ -1007,7 +1007,13 @@ A
 \leq 24.7\,|\kappa(K)|`,
       ),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-02 の式変形統一で、(4)(5) の三本の鎖に行中の \\quad (\\because …) で置かれていた根拠 7 行を、" +
+          "行末の根拠列（aligned の &&）へ揃えた。式変形・根拠・段数・参照は変えていない。",
+      ],
+    },
   },
 
   {
