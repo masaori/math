@@ -59,9 +59,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
         math(String.raw`i\cdot(-i)=1`),
         " も同じ計算で得られる（",
         math(String.raw`\mathbb{C}`),
-        " の乗法は可換）。以下、行列の積の成分計算はすべて ",
-        ref("mat_mult"),
-        " による。",
+        " の乗法は可換）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -69,7 +67,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
 &&(\because \sigma^x \text{ の定義}) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix}
-&&(\because \text{行列の分解}) \\
+&&(\because \text{行列の積の定義。}\blkref{mat_mult}) \\
 &= I
 &&(\because I \text{ の定義})
 \end{aligned}`,
@@ -80,7 +78,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
 &&(\because \sigma^y \text{ の定義}) \\
 &= \begin{pmatrix}(-i)\cdot i&0\\0&i\cdot(-i)\end{pmatrix}
-&&(\because \text{行列の分解}) \\
+&&(\because \text{行列の積の定義。}\blkref{mat_mult}) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix}
 &&(\because \text{上の準備}) \\
 &= I
@@ -93,7 +91,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
 &&(\because \sigma^z \text{ の定義}) \\
 &= \begin{pmatrix}1&0\\0&1\end{pmatrix}
-&&(\because \text{行列の分解}\ \text{と}\ (-1)\cdot(-1)=1) \\
+&&(\because \text{行列の積の定義。}\blkref{mat_mult}\text{ と }(-1)\cdot(-1)=1) \\
 &= I
 &&(\because I \text{ の定義})
 \end{aligned}`,
@@ -105,7 +103,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
 &&(\because \sigma^z,\ \sigma^x \text{ の定義}) \\
 &= \begin{pmatrix}0&1\\-1&0\end{pmatrix}
-&&(\because \text{行列の分解})
+&&(\because \text{行列の積の定義。}\blkref{mat_mult})
 \end{aligned}`,
       ),
       displayMath(
@@ -114,7 +112,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
 &&(\because \sigma^x,\ \sigma^z \text{ の定義}) \\
 &= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
-&&(\because \text{行列の分解}) \\
+&&(\because \text{行列の積の定義。}\blkref{mat_mult}) \\
 &= -\begin{pmatrix}0&1\\-1&0\end{pmatrix}
 &&(\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
 &= -\,\sigma^z\sigma^x
@@ -127,7 +125,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
 &&(\because \sigma^y,\ \sigma^x \text{ の定義}) \\
 &= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
-&&(\because \text{行列の分解})
+&&(\because \text{行列の積の定義。}\blkref{mat_mult})
 \end{aligned}`,
       ),
       displayMath(
@@ -136,7 +134,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
 &&(\because \sigma^x,\ \sigma^y \text{ の定義}) \\
 &= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
-&&(\because \text{行列の分解}) \\
+&&(\because \text{行列の積の定義。}\blkref{mat_mult}) \\
 &= -\begin{pmatrix}-i&0\\0&i\end{pmatrix}
 &&(\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
 &= -\,\sigma^y\sigma^x
@@ -149,7 +147,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
 &&(\because \sigma^y,\ \sigma^z \text{ の定義}) \\
 &= \begin{pmatrix}0&i\\i&0\end{pmatrix}
-&&(\because \text{行列の分解}\ \text{と}\ (-i)\cdot(-1)=i)
+&&(\because \text{行列の積の定義。}\blkref{mat_mult}\text{ と }(-i)\cdot(-1)=i)
 \end{aligned}`,
       ),
       displayMath(
@@ -158,7 +156,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
 &&(\because \sigma^z,\ \sigma^y \text{ の定義}) \\
 &= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
-&&(\because \text{行列の分解}\ \text{と}\ (-1)\cdot i=-i) \\
+&&(\because \text{行列の積の定義。}\blkref{mat_mult}\text{ と }(-1)\cdot i=-i) \\
 &= -\begin{pmatrix}0&i\\i&0\end{pmatrix}
 &&(\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
 &= -\,\sigma^y\sigma^z
