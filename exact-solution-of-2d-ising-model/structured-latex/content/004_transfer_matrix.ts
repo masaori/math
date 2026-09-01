@@ -815,15 +815,16 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 Y_m Z_{m+1}
 &= \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^y}^{m\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
    \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^x}^{m\text{th}}\boxtimes\overbrace{\sigma^z}^{(m+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
-\quad (\because \text{Step 1}) \\
+&& (\because \text{Step 1}) \\
 &= \overbrace{(\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)}^{m-1}
    \boxtimes\overbrace{(\sigma^y\sigma^x)}^{m\text{th}}\boxtimes\overbrace{(I\sigma^z)}^{(m+1)\text{th}}\boxtimes(II)\boxtimes\cdots\boxtimes(II)
-\quad (\because \text{クロネッカー積の積の規則}) \\
+&& (\because \text{クロネッカー積の積の規則}) \\
 &= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{(-i\,\sigma^z)}^{m\text{th}}\boxtimes\overbrace{\sigma^z}^{(m+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I
-\quad (\because \sigma^x\sigma^x = I,\ \sigma^y\sigma^x = -i\,\sigma^z \text{（Step 0）}) \\
+&& (\because \sigma^x\sigma^x = I,\ \sigma^y\sigma^x = -i\,\sigma^z \text{（Step 0）}) \\
 &= (-i)\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\overbrace{\sigma^z}^{m\text{th}}\boxtimes\overbrace{\sigma^z}^{(m+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
-\quad (\because \text{第 } m \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
-&= -i\,\sigma_m^z\sigma_{m+1}^z \quad (\because \text{Step 1}) \\
+&& (\because \text{第 } m \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
+&= -i\,\sigma_m^z\sigma_{m+1}^z
+&& (\because \text{Step 1}) \\
 \sigma_m^z\sigma_{m+1}^z
 &= \bigl(i\cdot(-i)\bigr)\sigma_m^z\sigma_{m+1}^z
 && (\because\ i\cdot(-i)=1\text{（複素数の四則）})\\

@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 86 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 87 回目の tick 時点）
+
+**同じ接触対が平滑化後も切り替え可能なまま残り、同じ対での平滑化が対合であることを本文と SageMath で固定した（Lean 未着手）。** `claim_contact_smoothing_same_pair_involution` は、前 tick のファイバー保存（`claim_switchable_contact_smoothing_preserves_fiber`）から $\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)$ が非後退置換で $M(\psi)=M(\varphi)$ であることを使い、終点の等式が置換に依らないこと、非後退性 $\varphi(\vec e)\in\operatorname{Next}(\vec e)$・$\varphi(\vec f)\in\operatorname{Next}(\vec f)$、$\vec e,\vec f\in M(\varphi)$ から `def_switchable_permutation_contact_pair` の三条件を $\psi$ について確かめ、場合分けの二回適用で $\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi$ を得る。これで固定した対に対する平滑化が、その対が切り替え可能な置換の集合の上の対合になった。SageMath `contact-smoothing-same-pair-involution` は $L=2$ の非後退置換 $30{,}784$ 個中、切り替え可能な接触対 $192{,}896$ 件で、三条件の保存・証明が使う等式・対合の等式を全数検査した。次は相殺対象の置換に標準的な切り替え可能接触対を選ぶ規則を定め、選んだ対が平滑化で保たれることを示して符号反転対合へ組み上げる。
+
+Lambda 側 check（878 ブロック）・linkage（388 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 385 ページを通した。姉妹側 check・linkage（118 検算）・PDF 356 ページも通した。
+
+前進前レビューでは、前 tick の `def_switchable_permutation_contact_pair`・`def_permutation_contact_smoothing`・`claim_switchable_contact_smoothing_preserves_fiber` を本文・SageMath・今回の対合性の主張との接続で照合した。ファイバー保存という実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$V_1$ を $Z,Y,\varepsilon$ で表す」（`V1_in_Z_Y_epsilon`）の Step 2 の鎖で、行中にあった根拠 5 行を行末の根拠列へ揃えた。内容・式変形・根拠・参照は不変である。
+
+## ひとつ前の到達点（2026-09-02 の 86 回目の tick 時点）
 
 **切り替え可能な接触の二辺の像を交換しても、非後退置換の同じファイバーに留まることを本文と SageMath で固定した（Lean 未着手）。** 接触する二辺について、交換後の二遷移も非後退で交換後の像が固定点にならない条件を `def_switchable_permutation_contact_pair` で定義し、像を交換する写像を `def_permutation_contact_smoothing` とした。`claim_switchable_contact_smoothing_preserves_fiber` は、像の交換が置換性を保ち、切り替え可能性が非後退性を与え、動く辺集合 $M$ が不変なので反転対 $D$ と単純通過集合 $E_1$ も不変であることから、接触平滑化後も同じ $\mathcal N_L(D,E)$ に属することを示す。SageMath `switchable-contact-smoothing` は $L=2$ の非後退置換 $30{,}784$ 個中、切り替え可能な接触対を持つ $29{,}905$ 個・接触対 $192{,}896$ 件で、置換性・非後退性・$M,D,E_1$ の保存と二回交換で元へ戻ることを全数検査した。次は相殺対象に標準的な切り替え可能接触対を選び、平滑化が符号反転対合になることを示す。
 
