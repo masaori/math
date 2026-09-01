@@ -1660,24 +1660,24 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu, \check{Z}_\nu\right]_+
 &= \left[\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j,\ \sum_{k=1}^{M} e^{-ik\tilde\theta_\nu}Z_k\right]_+
-   \quad (\because \text{def\_half\_integer\_modes}) \\
+   &&\bigl(\because \text{def\_half\_integer\_modes}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ik\tilde\theta_\nu}
    \left[Z_j, Z_k\right]_+
-   \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性}) \\
+   &&\bigl(\because \text{反交換子の } \mathbb{C} \text{ 双線型性}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ik\tilde\theta_\nu}\cdot 2I\,\delta^M_{(j,k)}
-   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}) \\
+   &&\bigl(\because \text{anticommutator\_of\_Z\_and\_Y}\bigr) \\
 &= 2I\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ij\tilde\theta_\nu}
-   \quad (\because 1 \leq j,k \leq M \text{ では } \delta^M_{(j,k)} = 1 \iff j = k) \\
+   &&\bigl(\because 1 \leq j,k \leq M \text{ では } \delta^M_{(j,k)} = 1 \iff j = k\bigr) \\
 &= 2I\sum_{j=1}^{M} e^{-ij\left(\tilde\theta_\mu + \tilde\theta_\nu\right)}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+   &&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
 &= 2I\sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j\left(-(\mu+\nu-1)\right)}{M}\right)
-   \quad \left(\because \tilde\theta_\mu + \tilde\theta_\nu = \tfrac{2\pi(\mu+\nu-1)}{M}\right) \\
+   &&\bigl(\because \tilde\theta_\mu + \tilde\theta_\nu = \tfrac{2\pi(\mu+\nu-1)}{M}\bigr) \\
 &= 2M I\,\delta^M_{(-(\mu+\nu-1),\,0)}
-   \quad (\because \text{exp\_sum}) \\
+   &&\bigl(\because \text{exp\_sum}\bigr) \\
 &= 2M I\,\delta^M_{(\mu+\nu,\,1)}
-   \quad (\because \text{def\_delta\_M}) \\
+   &&\bigl(\because \text{def\_delta\_M}\bigr) \\
 &= 2M\,\delta_{\nu,\,M+1-\mu}\,I
-   \quad (\because \text{def\_check\_index\_set (5)}\ (\mu,\nu \in \check{\mathcal{M}}))
+   &&\bigl(\because \text{def\_check\_index\_set (5)}\ (\mu,\nu \in \check{\mathcal{M}})\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1693,13 +1693,13 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu,\check{Y}_\nu\right]_+
 &= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Z_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
-   \quad (\because \text{def\_half\_integer\_modes}) \\
+   &&\bigl(\because \text{def\_half\_integer\_modes}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Z_j,Y_k]_+
-   \quad (\because \text{反交換子の }\mathbb{C}\text{ 双線型性}) \\
+   &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 0
-   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}) \\
+   &&\bigl(\because \text{anticommutator\_of\_Z\_and\_Y}\bigr) \\
 &= 0
-   \quad (\because \mathbb{C}\text{ の四則})
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1723,23 +1723,23 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[\check{Y}_\mu,\check{Y}_\nu\right]_+
 &= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Y_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
-   \quad (\because \text{def\_half\_integer\_modes}) \\
+   &&\bigl(\because \text{def\_half\_integer\_modes}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Y_j,Y_k]_+
-   \quad (\because \text{反交換子の }\mathbb{C}\text{ 双線型性}) \\
+   &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 2I\,\delta^M_{(j,k)}
-   \quad (\because \text{anticommutator\_of\_Z\_and\_Y}) \\
+   &&\bigl(\because \text{anticommutator\_of\_Z\_and\_Y}\bigr) \\
 &= 2I\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ij\tilde\theta_\nu}
-   \quad (\because 1\le j,k\le M\text{ では }\delta^M_{(j,k)}=1\iff j=k) \\
+   &&\bigl(\because 1\le j,k\le M\text{ では }\delta^M_{(j,k)}=1\iff j=k\bigr) \\
 &= 2I\sum_{j=1}^{M}e^{-ij(\tilde\theta_\mu+\tilde\theta_\nu)}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+   &&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
 &= 2I\sum_{j=1}^{M}\exp\!\left(\frac{2\pi i j\left(-(\mu+\nu-1)\right)}{M}\right)
-   \quad \left(\because \tilde\theta_\mu+\tilde\theta_\nu=\tfrac{2\pi(\mu+\nu-1)}{M}\right) \\
+   &&\bigl(\because \tilde\theta_\mu+\tilde\theta_\nu=\tfrac{2\pi(\mu+\nu-1)}{M}\bigr) \\
 &= 2M I\,\delta^M_{(-(\mu+\nu-1),\,0)}
-   \quad (\because \text{exp\_sum}) \\
+   &&\bigl(\because \text{exp\_sum}\bigr) \\
 &= 2M I\,\delta^M_{(\mu+\nu,\,1)}
-   \quad (\because \text{def\_delta\_M}) \\
+   &&\bigl(\because \text{def\_delta\_M}\bigr) \\
 &= 2M\,\delta_{\nu,\,M+1-\mu}\,I
-   \quad (\because \text{def\_check\_index\_set (5)}\ (\mu,\nu\in\check{\mathcal M}))
+   &&\bigl(\because \text{def\_check\_index\_set (5)}\ (\mu,\nu\in\check{\mathcal M})\bigr)
 \end{aligned}`,
       ),
     ],

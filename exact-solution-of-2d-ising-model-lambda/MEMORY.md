@@ -2,7 +2,34 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 79 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 80 回目の tick 時点）
+
+**非後退置換の母関数を、反転対と単純通過の対ごとのファイバーで層別する $\mathbb Z[x]$ の等式を本文と SageMath で固定した（Lean 未着手）。** ファイバー
+$\mathcal N_L(D,E):=\{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\mid D(\varphi)=D,\ E_1(\varphi)=E\}$
+を定義した。`claim_nonbacktracking_permutation_stratified_count` は、`claim_single_traversal_edge_set_even`
+による添字 $D\cap E=\varnothing$・$\operatorname{Even}_L(E)$ への帰属、像ごとのファイバーによる
+非後退置換全体の互いに素な分割、`claim_moved_orbit_length_sum_stratified` による軌道長総和
+$2|D|+|E|$ を合成し、
+$\sum_{\varphi}x^{\sum_C|C|}=\sum_{D,E}|\mathcal N_L(D,E)|x^{2|D|+|E|}$
+を得る。SageMath `nonbacktracking-permutation-stratified-count` は $L=2$ の非後退置換 $30{,}784$ 個を
+非空ファイバー $609$ 個へ分け、証明の各段と両辺の多項式
+$6561x^{16}+8424x^{14}+9164x^{12}+4536x^{10}+1670x^8+344x^6+76x^4+8x^2+1$
+の一致を厳密検査した。次は各ファイバーの位相付き寄与を偶部分グラフ対の選択集合
+$\mathcal C_L(D,E)$ と対応づけ、その後に平方恒等式へ合成する。
+
+Lambda 側 check（859 ブロック）・linkage（381 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存検査・
+PDF 379 ページを通した。
+
+前進前レビューでは、前 tick の `claim_moved_orbit_length_sum_stratified` を本文・SageMath・今回の
+直接利用と照合した。軌道長総和と指数を結ぶ実質を持ち、「何も言っていない主張」や仮定・住処・
+参照の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$\check Z,\check Y$ の反交換関係」
+（`anticommutator_of_check_Z_Y`）の三本の鎖で、行中にあった根拠 22 行を行末の根拠列へ揃えた。
+内容・式変形・根拠・参照は不変である。
+姉妹側 check・linkage（118 検算）・PDF 356 ページを通した。
+
+## ひとつ前の到達点（2026-09-02 の 79 回目の tick 時点）
 
 **置換の軌道の長さの総和が反転対と単純通過で数えられる $\mathbb N$ の等式を本文と SageMath で固定した（Lean 未着手）。** `claim_moved_orbit_length_sum_stratified` は、任意の置換 $\varphi\in\operatorname{Perm}(\vec E_L)$ について $\sum_{C\in\mathcal C(\varphi)}|C|=|M(\varphi)|=2|D(\varphi)|+|E_1(\varphi)|$ を主張する。これは非後退置換の置換項の $x$ の冪の指数（軌道の長さの総和）を、偶部分グラフ順序対の層別 `claim_even_subgraph_pair_stratified_count` の指数 $2|D|+|E|$ と同じ形に揃える橋渡しである。証明は、軌道族の互いに素な分割（`claim_moved_orbit_partition`）と、動く辺集合の台の辺ごとの互いに素な合併・ファイバーの二場合（$D$ の上で 2、$E_1$ の上で 1）による個数の加法性の合成である。SageMath `moved-orbit-length-sum-stratified` は $L=1$ の任意置換 24 個（主張の全称の範囲をこの大きさで尽くす）と $L=2$ の非後退置換 30,784 個で証明の各段と結論を全数検査した。次は非後退置換をその対 $(D(\varphi),E_1(\varphi))$ で層別する数え上げへ進む。
 
