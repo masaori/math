@@ -118,7 +118,7 @@ const matrixLinearMapCorrespondenceExpectedExternalInputContentSha256 = new Map<
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "e644e2525aecd17cc1b8c439db76c6c4b94348dd1fe9c63405c5c8b6077f068d"],
   ["linear_space_general_001_theorem_tensor_product_basis", "59e2b9e24e79916e00dfe666d29bdee556ea3479b16e89d9912457ff3bea0609"],
-  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "d4685720ab86b3cf07ecc5e19564d9c7e6467c8b488671eb775095e4b8ef8366"],
+  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "af6e085d614179050c2b2cfc62548b146f41083dbe158453221af092d9796239"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
 ]);
 const invertibleMatrixConjugationSectionEntryIds = [
@@ -482,7 +482,7 @@ const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, st
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["exp_linear_map_000a_claim_real_exp_series_converges", "1065e4f465b1b0b49eae7d16f9d734421f472beec053c3effaff63127eecf077"],
-  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "d4685720ab86b3cf07ecc5e19564d9c7e6467c8b488671eb775095e4b8ef8366"],
+  ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "af6e085d614179050c2b2cfc62548b146f41083dbe158453221af092d9796239"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
   ["eigenvalues_of_V_002_claim_trace_properties", "60f5d19acef69e141508635a57c36920bef3d1fdd9f2813bb30cb92ca808105a"],
@@ -1037,6 +1037,54 @@ const v1PlusSquareRootDefinitionExpectedDirectDependencies = [
   "transfer_matrix_011_definition_H1_H2",
 ].sort();
 const v1PlusSquareRootDefinitionExpectedContentSha256 = "33659011599514363340a770866a6757ab8b49d6b7259f1c8fc777da7aea773a";
+const v1PlusHalfExponentAndSquareRootSectionEntryIds = [
+  "evensectorT_definition_V1_plus_square_root",
+  "evensectorT_claim_V1_plus_square_root",
+];
+const v1PlusHalfExponentAndSquareRootExpectedInternalDependencies = new Map<string, string[]>([
+  ["evensectorT_definition_V1_plus_square_root", []],
+  ["evensectorT_claim_V1_plus_square_root", [
+    "evensectorT_definition_V1_plus_square_root",
+  ]],
+]);
+const v1PlusHalfExponentAndSquareRootExpectedContentSha256 = new Map<string, string>([
+  ["evensectorT_definition_V1_plus_square_root", "33659011599514363340a770866a6757ab8b49d6b7259f1c8fc777da7aea773a"],
+  ["evensectorT_claim_V1_plus_square_root", "351a0b91806367f7c9509c7a852a8315242a25ae34e763e00848b3bdff78a620"],
+]);
+const v1PlusHalfExponentAndSquareRootExpectedDirectDependencies = new Map<string, string[]>([
+  ["evensectorT_definition_V1_plus_square_root", [
+    "calc_formulae_006_definition_of_cc",
+    "evensectorT_definition_H1_plus",
+    "transfer_matrix_011_definition_H1_H2",
+  ]],
+  ["evensectorT_claim_V1_plus_square_root", [
+    "evensectorT_definition_V1_plus_square_root",
+    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+    "transfer_matrix_007_definition_V1_pm",
+    "transfer_matrix_011_definition_H1_H2",
+  ]],
+]);
+const v1PlusHalfExponentAndSquareRootExpectedExternalInputEntryIds = [
+  "calc_formulae_006_definition_of_cc",
+  "evensectorT_definition_H1_plus",
+  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+  "transfer_matrix_007_definition_V1_pm",
+  "transfer_matrix_011_definition_H1_H2",
+].sort();
+const v1PlusHalfExponentAndSquareRootExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["evensectorT_definition_H1_plus", "fff8d040f78e719bed462ae839eed9542927f1ae1f0e76c854a28333215ef6be"],
+  ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "a44423114f5dedf73c32f9319292e546e0bf14bb7167812f3ad58fc220eacc6a"],
+  ["transfer_matrix_007_definition_V1_pm", "7a63f3a02db439552636cb7cd8ac32f348c82f85830614ed5fc94c80b3698264"],
+  ["transfer_matrix_011_definition_H1_H2", "19baa8255a664202439efe07a7c18f770902aa68a0d3ce553a650712c8a23413"],
+]);
+const vPlusDefinitionExpectedDirectDependencies = [
+  "calc_formulae_006_definition_of_cc",
+  "evensectorT_definition_V1_plus_square_root",
+  "transfer_matrix_001_definition_symbols",
+  "transfer_matrix_011_definition_H1_H2",
+].sort();
+const vPlusDefinitionExpectedContentSha256 = "25224f1a0789bbff2c99b11323319f0e297bd6a0f68c213757097e35957e37ef";
 const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_006_definition_of_cc", new Set(["abs_basic_properties", "matrix_exp_series_converges"])],
   ["linear_space_general_000_definition_kronecker_product", new Set(["kronecker_product_rule", "tensor_basis"])],
@@ -1887,6 +1935,16 @@ const evenSectorGeneratorSection = validateReviewedSection(
     "closing_claim_epsilon_G_is_involution",
   ],
 );
+const v1PlusHalfExponentAndSquareRootSection = validateReviewedSection(
+  "偶セクターの半指数行列と平方根性",
+  "2次元イジングモデル",
+  v1PlusHalfExponentAndSquareRootSectionEntryIds,
+  v1PlusHalfExponentAndSquareRootExpectedInternalDependencies,
+  v1PlusHalfExponentAndSquareRootExpectedContentSha256,
+  v1PlusHalfExponentAndSquareRootExpectedExternalInputEntryIds,
+  v1PlusHalfExponentAndSquareRootExpectedExternalInputContentSha256,
+  ["evensectorT_claim_V1_plus_square_root"],
+);
 const positiveSymmetrizedTransferMatrixEntriesEntry = positiveSymmetrizedTransferMatrixEntriesSection.sectionEntries[0]!;
 const zYLinearIndependenceEntry = zYLinearIndependenceSection.sectionEntries[0]!;
 const epsilonEigenspacesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[0]!;
@@ -1913,6 +1971,9 @@ const evenSectorGeneratorPairwiseCommutationEntry = evenSectorGeneratorSection.s
 const evenSectorGeneratorInvolutionEntry = evenSectorGeneratorSection.sectionEntries[6]!;
 const v1PlusSquareRootDefinitionEntry = entries.find((entry) =>
   entry.id === "evensectorT_definition_V1_plus_square_root")!;
+const v1PlusSquareRootClaimEntry = v1PlusHalfExponentAndSquareRootSection.sectionEntries[1]!;
+const vPlusDefinitionEntry = entries.find((entry) =>
+  entry.id === "evensectorT_definition_V_plus")!;
 if (kappaDefinitionEntry.dependencyPlacement!.chapterOrder !== 17
   || criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder !== 18
   || symmetrizedTransferMatrixSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 19
@@ -2230,6 +2291,62 @@ if (JSON.stringify(inputsAddedForV1PlusSquareRootDefinition.sort()) !== JSON.str
     added: inputsAddedForV1PlusSquareRootDefinition,
     dropped: inputsDroppedAfterEvenSectorGenerator,
   })}`);
+}
+for (const entry of v1PlusHalfExponentAndSquareRootSection.sectionEntries) {
+  const expectedDependencies = [
+    ...v1PlusHalfExponentAndSquareRootExpectedDirectDependencies.get(entry.id)!,
+  ].sort();
+  if (JSON.stringify([...entry.dependsOnEntryIds].sort()) !== JSON.stringify(expectedDependencies)) {
+    throw new Error(`偶セクターの半指数行列と平方根性の直接依存が変わりました: ${entry.id}: ${JSON.stringify(entry.dependsOnEntryIds)}`);
+  }
+}
+if (v1PlusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 54
+  || v1PlusSquareRootClaimEntry.dependencyPlacement!.chapterOrder !== 55
+  || vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 56
+  || v1PlusSquareRootDefinitionEntry.kind !== "definition"
+  || v1PlusSquareRootClaimEntry.kind !== "claim"
+  || vPlusDefinitionEntry.kind !== "definition"
+  || JSON.stringify([...vPlusDefinitionEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(vPlusDefinitionExpectedDirectDependencies)
+  || vPlusDefinitionEntry.explanationGranularityReview.inspectedContentSha256
+    !== vPlusDefinitionExpectedContentSha256
+  || !vPlusDefinitionEntry.dependsOnEntryIds.includes(v1PlusSquareRootDefinitionEntry.id)
+  || vPlusDefinitionEntry.dependsOnEntryIds.includes(v1PlusSquareRootClaimEntry.id)
+  || v1PlusSquareRootClaimEntry.dependsOnEntryIds.includes(vPlusDefinitionEntry.id)) {
+  throw new Error(`偶セクターの半指数行列と平方根性、および V^{(+)} の定義との節境界が変わりました: ${JSON.stringify({
+    sectionOrders: v1PlusHalfExponentAndSquareRootSection.sectionEntries.map(
+      (entry) => [entry.id, entry.dependencyPlacement?.chapterOrder],
+    ),
+    nextOrder: vPlusDefinitionEntry.dependencyPlacement?.chapterOrder,
+    nextDependencies: vPlusDefinitionEntry.dependsOnEntryIds,
+  })}`);
+}
+const v1PlusHalfExponentExternalInputSet = new Set(
+  v1PlusHalfExponentAndSquareRootSection.externalInputEntryIds,
+);
+const vPlusDefinitionExternalInputEntryIds = vPlusDefinitionEntry.dependsOnEntryIds
+  .filter((id) => !v1PlusHalfExponentAndSquareRootSectionEntryIds.includes(id));
+const inputsAddedForVPlusDefinition = vPlusDefinitionExternalInputEntryIds
+  .filter((id) => !v1PlusHalfExponentExternalInputSet.has(id));
+const inputsDroppedAfterV1PlusSquareRoot = v1PlusHalfExponentAndSquareRootSection.externalInputEntryIds
+  .filter((id) => !vPlusDefinitionExternalInputEntryIds.includes(id));
+if (JSON.stringify(inputsAddedForVPlusDefinition.sort()) !== JSON.stringify([
+  "transfer_matrix_001_definition_symbols",
+].sort())
+  || JSON.stringify(inputsDroppedAfterV1PlusSquareRoot.sort()) !== JSON.stringify([
+    "evensectorT_definition_H1_plus",
+    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+    "transfer_matrix_007_definition_V1_pm",
+  ].sort())) {
+  throw new Error(`偶セクターの平方根性の直後で入力集合の切り替わり方が変わりました: ${JSON.stringify({
+    added: inputsAddedForVPlusDefinition,
+    dropped: inputsDroppedAfterV1PlusSquareRoot,
+  })}`);
+}
+if (!v1PlusHalfExponentAndSquareRootSection.sectionEntries.every((entry) =>
+  entry.explanationGranularityReview.status === "自動検査で主題に適合")
+  || vPlusDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
+  throw new Error("偶セクターの半指数行列・平方根性または直後の V^{(+)} 定義の説明粒度判定が変わりました");
 }
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
@@ -2738,6 +2855,25 @@ const isingModelSectionBoundaries = [{
   ],
   boundaryEvidence: "章内依存順47で一般の H1^{(±)} の定義から上符号を選び、偶セクターの生成子 H1^{(+)} を一対象だけ定める。順48–49の開鎖項 D0 と周期境界項 G は H1^{(+)} に意味的依存しない並行定義であり、読み順だけを提示順制約で固定する。順50はこの三定義を受け取り、Jordan–Wigner 行列をサイトごとの Pauli 行列積へ展開して iH1^{(+)}=D0+εG を示す。順51の対角作用と順52の可換性も相互に意味的依存しない出力で、提示順だけを固定する。順53は順52の可換性を使った (εG)^2=I を示す。直後の順54は順47だけを再利用して V1^{(+)} の半指数行列を定義し、順48–53の出力を使わない。順54では Pauli 行列積、配置基底、クロネッカー積、全スピン反転行列を入力から外すため、順53で節を閉じる。生成時に七項の連続性、項目ごとの全直接依存、意味的依存とは分離した提示順、対象と全外部入力の本文 fingerprint、三つの節末出力、順54の直接依存・本文・順48–53からの非依存、および入力集合の切り替わりを固定検査する。",
   readabilityStatus: "生成子、半指数行列、転送行列、共役写像、可逆性、平方根性、共役合成一致を束ねていた旧定義ブロックを一ブロック一定義または一主張へ分割した。さらに、局所積、境界項、生成子表示、可換性、二乗、対角作用を束ねていた旧主張を、D0 の定義、G の定義、生成子表示、対角作用、二つずつの可換性、二乗へ分割した。対象七項は生成子の定義から二次の Pauli 行列積とクロネッカー積の有限計算を経て三つの節末出力へ進み、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号に加え、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義に説明粒度の未解決と将来の分割が残る。",
+}, {
+  name: "偶セクターの半指数行列と平方根性",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
+  entryIds: v1PlusHalfExponentAndSquareRootSectionEntryIds,
+  input: [
+    "一般の生成子から上符号を選んだ偶セクター生成子 H1^{(+)}",
+    "境界項の符号を固定した指数行列 V1^{(+)} の定義",
+    "可換な有限複素行列の指数関数の積公式",
+  ],
+  externalInputEntryIds: v1PlusHalfExponentAndSquareRootSection.externalInputEntryIds,
+  output: [
+    "V1^{(+)} の半指数行列として用いる具体的な行列",
+    "その行列の二乗が V1^{(+)} に等しいこと",
+  ],
+  mainTheorem: "偶セクターの半指数行列の平方根性",
+  mainTheoremEntryId: "evensectorT_claim_V1_plus_square_root",
+  boundaryEvidence: "章内依存順54で偶セクター生成子 H1^{(+)} から半指数行列を定義し、順55で可換な行列指数関数の積公式と V1^{(+)} の定義を使って、その二乗が V1^{(+)} に等しいことを示す。二項は一方向の依存鎖をなし、平方根性で閉じる。直後の順56は半指数行列の定義だけを再利用して V2 と挟み、偶セクター転送行列 V^{(+)} を定義するが、順55の平方根性には依存しない。順56では転送行列の記号を入力へ追加し、偶セクター生成子、指数関数の積公式、V1^{(±)} の一般定義を直接入力から外すため、順55の後で節を閉じる。生成時に二項の連続性、全直接依存、対象と全外部入力の本文 fingerprint、順55への一意な閉包、順56の直接依存・本文・順55からの非依存、および入力集合の切り替わりを固定検査する。",
+  readabilityStatus: "定義は一つの有限複素行列だけを定め、平方根性は同じ行列指数関数を二回掛ける計算を一段ずつ示しているため、対象二項は現行の説明粒度検査に合格している。外部入力では複素数、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
