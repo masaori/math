@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 69 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 70 回目の tick 時点）
+
+**平面閉多角形の回転数定理の仮定を、$n_{\mathrm{ct}}=0$ から持ち上げ一周期点の相異性へ緩和した（Lean 未着手）。** `claim_plane_simple_polygon_cyclic_turning` の主張・題名・証明冒頭を実際に使う仮定へ揃え、証明内の `claim_vertex_simple_plane_lift_points_distinct` 経由の相異性の導出を仮定の直接使用へ置き換えた。証明が引く内側・外側の連結性・Euler 等式・対角接触排除は前 tick までに同じ仮定へ緩和済みなので、論証本体は不変である。Euler 等式（`claim_hole_free_cell_set_euler_number_one`）の「とくに」の尾部と証明末尾の適用文も同じ仮定へ書き直した。これで離散 Whitney 系の仮定緩和の五部品がすべて済み、緩和後の定理は持ち上げ点相異の零巻き付き辺列（トーラス上で頂点を繰り返してよい）に正負 4 を与える。新設の SageMath `lift-point-distinct-cycle-turning` は、長さ 10 以下の持ち上げ点相異の閉歩道 704 本の循環総回転数が全て $\{+4,-4\}$（両値とも出現）であることと、$L=1,2,3$ への射影後に $n_{\mathrm{ct}}>0$ となる歩がそれぞれ 704・696・592 本存在することを検査した。次は一側閉包の循環総回転数が正負 4 であることを、緩和した定理をトーラス射影へ適用して示す。
+
+Lambda 側 check（835 ブロック）・linkage（374 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 369 ページを通した。
+
+前進前レビューでは、前 tick の対角接触排除の仮定緩和を本文・呼び出し側（回転数定理）・SageMath（PASS）で照合した。仮定の連鎖に飛びはなく、「何も言っていない主張」も無かった。
+
+## ひとつ前の到達点（2026-09-01 の 69 回目の tick 時点）
 
 **境界頂点の対角接触排除の仮定を、$n_{\mathrm{ct}}=0$ から持ち上げ一周期点の相異性へ緩和した（Lean 未着手）。** `claim_boundary_vertex_diagonal_contact_excluded` の主張・題名・証明冒頭を実際に使う仮定へ揃えた。後続の平面閉多角形の回転数定理は、既に $n_{\mathrm{ct}}=0$ から `claim_vertex_simple_plane_lift_points_distinct` で相異性を導いており、呼び出しの論理は不変である。SageMath `no-diagonal-only-contact` は持ち上げ点相異の閉歩道 704 本・格子点 20,096 個を検査し、$L=1,2,3$ への射影後に $n_{\mathrm{ct}}>0$ となる歩も 704・696・592 本確認した。次は平面閉多角形の回転数定理の仮定を同じ形へ緩和する。
 
