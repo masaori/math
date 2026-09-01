@@ -505,14 +505,14 @@ A &= s_1 s_2^*
         String.raw`\begin{aligned}
 \gamma_1(\theta)
 &= c_1c_2^* - s_1s_2^*\cos\theta
-   \quad (\because \text{def\_A\_theta}) \\
+   &&(\because \text{def\_A\_theta}) \\
 &= \left(c_1c_2^* - s_1s_2^*\right) + s_1s_2^*\left(1 - \cos\theta\right) \\
 &= \cosh\left(2K_1 - 2K_2^*\right) + s_1s_2^*\left(1-\cos\theta\right)
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (1) を } x = 2K_1,\ y = 2K_2^* \text{ に適用}) \\
+   &&(\because \text{cosh\_addition\_and\_half\_angle (1) を } x = 2K_1,\ y = 2K_2^* \text{ に適用}) \\
 &= \cosh\kappa + A\left(1-\cos\theta\right)
-   \quad (\because \text{def\_kappa\_and\_A}) \\
+   &&(\because \text{def\_kappa\_and\_A}) \\
 &= \cosh\kappa + 2A\sin^2\!\left(\frac{\theta}{2}\right)
-   \quad (\because \text{倍角公式 } \cos 2t = 1 - 2\sin^2 t \text{ を } t = \tfrac{\theta}{2} \text{ に適用})
+   &&(\because \text{倍角公式 } \cos 2t = 1 - 2\sin^2 t \text{ を } t = \tfrac{\theta}{2} \text{ に適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -536,11 +536,11 @@ A &= s_1 s_2^*
         String.raw`\begin{aligned}
 1 + 2\sinh^2\!\left(\frac{\gamma(\theta)}{2}\right)
 &= \cosh\gamma(\theta)
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (2)}) \\
+   &&(\because \text{cosh\_addition\_and\_half\_angle (2)}) \\
 &= \cosh\kappa + 2A\sin^2\!\left(\frac{\theta}{2}\right)
-   \quad (\because \text{Step 1}) \\
+   &&(\because \text{Step 1}) \\
 &= 1 + 2\sinh^2\!\left(\frac{\kappa}{2}\right) + 2A\sin^2\!\left(\frac{\theta}{2}\right)
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (2)})
+   &&(\because \text{cosh\_addition\_and\_half\_angle (2)})
 \end{aligned}`,
       ),
       paragraph([
