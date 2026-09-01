@@ -135,8 +135,9 @@ const PHYSICS_COMPARISON_BLOCK_IDS = [
  * 族で宣言するのは、照合の所有者が `causal_structure_comparison_` と
  * `causal_set_primary_literature_` の二つの原本ファイルに対応しており、そこに属するブロックの
  * id とラベルが `causal` を持つためである。接頭辞だけを許可すると、同じ識別子へ `quantum` や
- * `hilbert` を足しても通るので、許す語も `causal` に限定する。宣言は fail-closed に扱う
- * （下の検査を参照）。
+ * `hilbert` を足しても通るので、許す語も `causal` に限定する。宣言は fail-closed に扱い、
+ * **許可語を一語ずつ**検査する（下の検査を参照）。既存物理由来語でない語、および族の識別子が
+ * 実際には使っていない語を許可することも違反にする。
  */
 const PHYSICS_COMPARISON_IDENTIFIER_FAMILIES = new Map<string, readonly string[]>([
   ["causal_structure_comparison_", ["causal"]],
@@ -366,17 +367,30 @@ for (const [prefix, owners] of comparisonPrefixOwners) {
     continue;
   }
   const allowedPhysicsTerms = PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.get(prefix) ?? [];
-  const carriesDeclaredPhysics = owners.some((blockId) => {
+  if (allowedPhysicsTerms.length === 0) {
+    identifierViolations.push(`照合として宣言した識別子の族に許可語が一つも無い: ${prefix}`);
+    continue;
+  }
+  // 許可語は一語ずつ検査する。族の中で一語でも使われていれば宣言全体を通す作りにすると、
+  // 実際には使っていない語（`quantum` など）を同じ宣言へ足すだけで許可が広がり、
+  // 族の識別子へその語を書けてしまう。許可は「いま実在する語」だけに閉じる。
+  const familyIdentifierValues = owners.flatMap((blockId) => {
     const block = files.flatMap((file) => file.blocks).find((candidate) => candidate.id === blockId);
-    if (block === undefined || block.kind === "heading") return false;
-    return [blockId, ...block.labels].some((value) =>
-      allowedPhysicsTerms.some((term) => value.includes(term)),
-    );
+    if (block === undefined || block.kind === "heading") return [];
+    return [blockId, ...block.labels];
   });
-  if (!carriesDeclaredPhysics) {
-    identifierViolations.push(
-      `照合として宣言した識別子の族に許可した既存物理由来語が一つも無い: ${prefix}`,
-    );
+  for (const term of allowedPhysicsTerms) {
+    if (!PHYSICS_IDENTIFIER_TERMS.includes(term)) {
+      identifierViolations.push(
+        `照合として宣言した識別子の族が既存物理由来語でない語を許可している: ${prefix}（${term}）`,
+      );
+      continue;
+    }
+    if (!familyIdentifierValues.some((value) => value.includes(term))) {
+      identifierViolations.push(
+        `照合として宣言した識別子の族が使っていない語を許可している: ${prefix}（${term}）`,
+      );
+    }
   }
 }
 violations.push(...identifierViolations);
