@@ -605,25 +605,19 @@ x^2+y^2
         String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z_1 z_2)
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2))\right)
-&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義。}\blkref{def_abs_arg})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2))\right)
 &&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim})\right)
 &&(\because\ r_i,\theta_i\ \text{の取り方})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r_1 r_2,\theta_1+\theta_2)]_{\sim})\right)
-&&(\because\ \text{極座標表現の演算})\\
+&&(\because\ \text{極座標表現の演算。}\blkref{operations_on_polar_representation})\\
 &= s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
-&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合と}\ r_1 r_2\neq0)
+&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合（}\blkref{first_and_second_projections}\text{）と}\ r_1 r_2\neq0)
 \end{aligned}`,
       ),
       paragraph([
         "である。",
-        ref("def_abs_arg"),
-        "、",
-        ref("operations_on_polar_representation"),
-        "、",
-        ref("first_and_second_projections"),
-        " を引いた。",
       ]),
       paragraph([
         "ここから先は ",
@@ -642,7 +636,7 @@ x^2+y^2
         String.raw`\begin{aligned}
 s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &= \theta_1+\theta_2-2(n_1+n_2)\pi
-&&(\because\ \text{角度表現の切断 の定義と、この場合の不等式})\\
+&&(\because\ \text{角度表現の切断 の定義（}\blkref{section_of_angle_representation}\text{）と、この場合の不等式（}\blkref{angle_section_existence_uniqueness}\text{）})\\
 &= (\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)
 &&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
 &= \arg^{[0,2\pi)}(z_1)+(\theta_2-2n_2\pi)
@@ -653,10 +647,6 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
       ),
       paragraph([
         "である。",
-        ref("section_of_angle_representation"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        " を引いた。",
       ]),
       paragraph([
         math(String.raw`2\pi \leq \theta_1+\theta_2-2(n_1+n_2)\pi < 4\pi`),
@@ -674,7 +664,7 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &= \theta_1+\theta_2-2(n_1+n_2+1)\pi
-&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&&(\because\ \text{角度表現の切断 の定義（}\blkref{section_of_angle_representation}\text{）と、いま見た不等式（}\blkref{angle_section_existence_uniqueness}\text{）})\\
 &= (\theta_1+\theta_2-2(n_1+n_2)\pi)-2\pi
 &&(\because\ 2(n_1+n_2+1)\pi=2(n_1+n_2)\pi+2\pi)\\
 &= (\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)-2\pi
@@ -687,10 +677,6 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
       ),
       paragraph([
         "である。",
-        ref("section_of_angle_representation"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        " を引いた。",
       ]),
     ],
     conversion: {
