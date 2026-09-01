@@ -149,16 +149,32 @@ for (const file of files) {
   }
 }
 
+const toolBlockIds = new Set<string>();
 const caBlockIds = new Set<string>();
+const unclassifiedBlockIds = new Set<string>();
 for (const file of files) {
-  if (!file.file.startsWith(CA_CHAPTER_PREFIX)) continue;
+  const inTools = file.file.startsWith(TOOL_CHAPTER_PREFIX);
+  const inCa = file.file.startsWith(CA_CHAPTER_PREFIX);
   for (const block of file.blocks) {
     if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
-    caBlockIds.add(block.id);
+    if (inTools) toolBlockIds.add(block.id);
+    else if (inCa) caBlockIds.add(block.id);
+    else unclassifiedBlockIds.add(block.id);
   }
 }
 
 const violations: string[] = [];
+if (toolBlockIds.size === 0) {
+  violations.push("数学的道具立て章の走査対象が 0 件である");
+}
+if (caBlockIds.size === 0) {
+  violations.push("2 値セルオートマトンのセマンティクス章の走査対象が 0 件である");
+}
+if (unclassifiedBlockIds.size > 0) {
+  violations.push(
+    `二章のどちらにも属さない走査対象がある: ${[...unclassifiedBlockIds].sort().join(", ")}`,
+  );
+}
 for (const file of files) {
   const inTools = file.file.startsWith(TOOL_CHAPTER_PREFIX);
   const inCa = file.file.startsWith(CA_CHAPTER_PREFIX);
@@ -324,7 +340,8 @@ if (violations.length > 0) {
 }
 console.log(
   `章の意味境界の語彙検査 OK（本文の CA 固有語 ${CA_TERMS.length} 件、` +
-    `本文の既存物理由来語 ${PHYSICS_TERMS.length} 件、CA 章 ${caBlockIds.size} 件、` +
+    `本文の既存物理由来語 ${PHYSICS_TERMS.length} 件、走査対象は数学的道具立て章 ${toolBlockIds.size} 件・` +
+    `CA 章 ${caBlockIds.size} 件・未分類 ${unclassifiedBlockIds.size} 件、` +
     "数学的道具立て章に残る CA 由来識別子 0 件、既存物理由来識別子 0 件、本文の既存物理由来語 0 件、" +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
