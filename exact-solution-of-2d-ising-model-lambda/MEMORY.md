@@ -2,7 +2,15 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 90 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 91 回目の tick 時点）
+
+**標準対が位相反転する置換の部分集合の上で、標準対平滑化が位相寄与の符号を反転する不動点の無いファイバー保存対合であることを、本文と SageMath で固定した（Lean 未着手）。** 標準接触対 $\operatorname{ct}_{\min}(\varphi)$ が位相反転接触対である置換の集合 $\mathcal B_L\subseteq\mathcal A_L$ を定義した（`def_phase_reversing_standard_subset`）。`claim_phase_reversing_standard_smoothing_involution` は、標準対の平滑化不変性（`claim_contact_pair_set_smoothing_invariant`）と、位相反転の等式が両辺の入れ替えで保たれること（平滑化で回転数和の二辺が入れ替わるだけなので $\Delta$ が符号反転し、$\Delta=0$ が保存される）から $S(\mathcal B_L)\subseteq\mathcal B_L$ を導き、`claim_standard_contact_smoothing_involution` の対合性・不動点なし・ファイバー保存と、`claim_contact_smoothing_phase_reversal_iff` の十分の向きによる符号反転を合成する。SageMath `phase-reversing-standard-smoothing-involution` は $L=2$ の $\mathcal B_L$ $4{,}748$ 個の全数で符号反転対合・不動点なし・ファイバー保存を検査した（符号反転 $18{,}992$ 件）。残るのは $\mathcal A_L$ の回転差 $\pm4$ の各 $3{,}616$ 個と、標準対が切り替え可能でない $18{,}755$ 個で、次はこれらの相殺または寄与の扱いを決めて、各添字の $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ と平方恒等式へ合成する。
+
+前進前レビューでは、前 tick の位相寄与・位相反転接触対・符号反転の必要十分条件を本文・SageMath・今回の直接利用と照合した。符号反転の必要十分条件という実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。証明が引く「接続の組み替えの回転差」への前方参照は、文書全体に 48 件ある慣習の範囲とした。
+
+Lambda 側 check（889 ブロック）・linkage（392 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 388 ページを通した。
+
+## ひとつ前の到達点（2026-09-02 の 90 回目の tick 時点）
 
 **接触平滑化が非後退置換一つの位相寄与を符号反転するための必要十分条件を、本文と SageMath で固定した（Lean 未着手）。** 非後退置換一つの位相寄与 $\mathcal W^{a,b}_L(\varphi)$ と、二接続の平滑化前後の回転数和が等しい位相反転接触対を定義した（`def_nonbacktracking_permutation_phase_contribution`・`def_phase_reversing_contact_pair`）。`claim_contact_smoothing_phase_reversal_iff` は、像の交換で置換符号が反転する一方、二つの遷移成分の積には局所回転差 $\Delta\in\{-4,0,4\}$ に応じて $\zeta_8^{-\Delta}$ が掛かることから、$\Delta=0$ の場合だけ位相寄与が符号反転し、$\Delta=\pm4$ では位相寄与が不変であることを示す。SageMath `contact-smoothing-phase-reversal` は $L=2$ の切り替え可能接触対 $192{,}896$ 件×四スピン構造を厳密検査し、回転差零 $140{,}416$ 件、回転差 $-4,4$ 各 $26{,}240$ 件を得た。前 tick の標準対が切り替え可能な置換 $11{,}980$ 個では、符号反転するものは $4{,}748$ 個だけで、残りは回転差 $-4,4$ 各 $3{,}616$ 個だった。次は平滑化で不変な規則により位相反転接触対を選べる部分集合を切り出す。
 
