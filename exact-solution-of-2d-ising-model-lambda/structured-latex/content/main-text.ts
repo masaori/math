@@ -60254,6 +60254,83 @@ P_n(\gamma)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_one_sided_closure_cyclic_turning",
+        labels: [],
+        title: { text: "一側閉包の循環総回転数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_closure_projection_cyclic_turning",
+            focus: {
+              id: "kac_ward_claim_one_sided_closure_projection_cyclic_turning",
+              kind: "claim",
+              title: { text: "一側閉包のトーラス射影の循環総回転数は正負 4 のいずれかである" },
+              labels: ["claim_one_sided_closure_projection_cyclic_turning"],
+              habitat: "Z",
+              verification: ["sagemath/check/one-sided-periodic-lift-closure"],
+              statement: [
+                paragraph([
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）を ",
+                  math(String.raw`W:=\bigl(F^{\gamma,k_0,t,c}_0,\ldots,F^{\gamma,k_0,t,c}_N\bigr)`),
+                  " と書き、そのトーラス射影（", ref("def_plane_unit_path_torus_projection"), "）を ",
+                  math(String.raw`\Gamma:=\Pi(W)`), " と置く。このとき ",
+                  math(String.raw`\Gamma`), " の循環総回転数（", ref("def_cyclic_total_turning"), "）は",
+                ]),
+                displayMath(String.raw`t_{\circ}(\Gamma)\in\{4,-4\}`),
+                paragraph([
+                  "を満たす。すなわち、非零巻き付きの周期持ち上げを一側で閉じた平面単純閉路は、",
+                  "トーラスへ射影しても離散 Whitney の正負 4 の結論を受ける。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  ref("claim_one_sided_periodic_lift_closure_closed_unit_steps"), " と ",
+                  ref("claim_one_sided_periodic_lift_closure_simple"), " により、",
+                  math(String.raw`W_0,\ldots,W_N`), " は終点を除く頂点が二つずつ相異なる閉単位格子路である。",
+                  "また非零巻き付きの仮定から ",
+                  math(String.raw`W_{\perp}(\gamma)=w_{\mathrm h}(\gamma)^2+w_{\mathrm v}(\gamma)^2\ge1`),
+                  " であり、", math(String.raw`c,t,L\ge1`), " なので、",
+                  ref("def_one_sided_periodic_lift_closure"), " の長さ表示から ",
+                  math(String.raw`N\ge4`), "、特に ", math(String.raw`N\ge3`), " である。従って ",
+                  ref("claim_plane_simple_cycle_projection_closed_nonbacktracking"), " により ",
+                  math(String.raw`\Gamma=\Pi(W)`), " は閉じた非後退辺列である。",
+                ]),
+                paragraph([
+                  ref("claim_projected_plane_cycle_lift_translation"), " をこの ", math(String.raw`W`),
+                  " に適用すると、任意の ", math(String.raw`j\in\{0,\ldots,N\}`), " について",
+                ]),
+                displayMath(String.raw`P_j(\Gamma)=P_0(\Gamma)+W_j-W_0`),
+                paragraph([
+                  "であり、", math(String.raw`w_{\mathrm h}(\Gamma)=w_{\mathrm v}(\Gamma)=0`), " である。さらに任意の ",
+                  math(String.raw`j,j'\in\{0,\ldots,N-1\}`), " が ", math(String.raw`j<j'`), " を満たすとき、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+P_j(\Gamma)=P_{j'}(\Gamma)
+&\Longrightarrow P_0(\Gamma)+W_j-W_0=P_0(\Gamma)+W_{j'}-W_0
+&&\bigl(\because\ \blkref{claim_projected_plane_cycle_lift_translation}\bigr)\\
+&\Longrightarrow W_j=W_{j'}
+&&\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の四則}\bigr),
+\end{aligned}`),
+                paragraph([
+                  "となり、", ref("claim_one_sided_periodic_lift_closure_simple"), " に反する。従って一周期の持ち上げ点 ",
+                  math(String.raw`P_0(\Gamma),\ldots,P_{N-1}(\Gamma)`), " は二つずつ相異なる。以上の相異性と巻き付き零を ",
+                  ref("claim_plane_simple_polygon_cyclic_turning"), " へ適用すると",
+                ]),
+                displayMath(String.raw`t_{\circ}(\Gamma)\in\{4,-4\}`),
+                paragraph([
+                  "を得る。全過程は有限列と整数の四則・順序だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

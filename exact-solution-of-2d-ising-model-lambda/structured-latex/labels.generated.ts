@@ -123,6 +123,7 @@ export const ALL_LABELS = [
   "claim_non_orbit_preserving_term_zero",
   "claim_odd_ray_interior_cells_bounded",
   "claim_one_s_linearly_independent",
+  "claim_one_sided_closure_projection_cyclic_turning",
   "claim_one_sided_periodic_lift_closure_closed_unit_steps",
   "claim_one_sided_periodic_lift_closure_simple",
   "claim_open_rectangle_constant_plus_breaks_no_bond",

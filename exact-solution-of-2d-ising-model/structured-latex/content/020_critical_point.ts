@@ -640,10 +640,10 @@ A &= s_1 s_2^*
         String.raw`\begin{aligned}
 s_1 s_2 = 1
 &\iff \sinh 2K_1 = \frac{1}{s_2}
-   \quad (\because s_2 > 0 \text{ で両辺を割る}) \\
+&&\bigl(\because\ s_2 > 0 \text{ で両辺を割る}\bigr) \\
 &\iff \sinh 2K_1 = \sinh 2K_2^* \\
 &\iff 2K_1 = 2K_2^*
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (3)：} \sinh \text{ は狭義単調増加ゆえ単射}) \\
+&&\bigl(\because\ \text{cosh\_addition\_and\_half\_angle (3)：} \sinh \text{ は狭義単調増加ゆえ単射}\bigr) \\
 &\iff K_1 = K_2^*
 \end{aligned}`,
       ),

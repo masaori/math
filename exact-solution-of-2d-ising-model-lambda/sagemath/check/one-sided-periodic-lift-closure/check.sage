@@ -94,10 +94,30 @@ def scale(z, p):
 
 UNIT_STEPS = {(ZZ(1), ZZ(0)), (ZZ(-1), ZZ(0)), (ZZ(0), ZZ(1)), (ZZ(0), ZZ(-1))}
 
+
+def cyclic_total_turning(points):
+    directions = {
+        (ZZ(0), ZZ(1)): ZZ(0),
+        (ZZ(1), ZZ(0)): ZZ(1),
+        (ZZ(0), ZZ(-1)): ZZ(2),
+        (ZZ(-1), ZZ(0)): ZZ(3),
+    }
+    edge_directions = [directions[sub(points[j + 1], points[j])]
+                       for j in range(len(points) - 1)]
+    total = ZZ(0)
+    for j in range(len(edge_directions)):
+        difference = (edge_directions[(j + 1) % len(edge_directions)]
+                      - edge_directions[j]) % 4
+        assert difference != 2
+        total += ZZ(1) if difference == 1 else ZZ(-1) if difference == 3 else ZZ(0)
+    return total
+
 cycle_total = 0
 closure_total = 0
 step_total = 0
 distinct_vertex_total = 0
+turning_total = 0
+turning_values = set()
 for L in range(1, 4):
     oriented = edges(L)
     for first in oriented:
@@ -180,6 +200,10 @@ for L in range(1, 4):
                                         step = sub(points[j + 1], points[j])
                                         assert step in UNIT_STEPS
                                         step_total += 1
+                                    turning = cyclic_total_turning(points)
+                                    assert turning in (ZZ(4), ZZ(-4))
+                                    turning_values.add(turning)
+                                    turning_total += 1
                                     closure_total += 1
 
                 if length < L * L:
@@ -192,4 +216,6 @@ for L in range(1, 4):
 print(f"PASS: {cycle_total} vertex-simple nonzero-winding closed walks, "
       f"{closure_total} one-sided closures, "
       f"{step_total} exact unit-step checks, "
-      f"{distinct_vertex_total} vertices in distinctness checks over L=1,2,3")
+      f"{distinct_vertex_total} vertices in distinctness checks, "
+      f"{turning_total} projected cyclic-turning checks in {{+4,-4}} "
+      f"(values={sorted(turning_values)}) over L=1,2,3")
