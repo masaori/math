@@ -2130,67 +2130,207 @@ R^{(+)}V^{(+)}
   },
 
   {
-    id: "evenEigen_claim_V_plus_inverse_positive_and_traces",
+    id: "evenEigen_claim_V_plus_inverse_is_positive_definite",
     kind: "claim",
     origin: { path: SRC, ordinal: 10 },
     title: {
-      tex: String.raw`\left(V^{(+)}\right)^{-1}\text{ の正定値性と二つのトレース正値性}`,
+      tex: String.raw`\left(V^{(+)}\right)^{-1}\text{ は正定値}`,
     },
-    labels: ["V_plus_inverse_positive_and_trace_positivity"],
+    labels: ["V_plus_inverse_is_positive_definite"],
     statement: [
       paragraph([
         ref("V_plus_is_invertible"),
         " で明示した ",
         math(String.raw`\left(V^{(+)}\right)^{-1}`),
-        " は正定値である。さらに",
+        " は正定値（",
+        ref("def_hermitian_positive_definite"),
+        " の意味）である。",
       ]),
-      displayMath(
-        String.raw`\mathrm{tr}\!\left(V^{(+)}\right) \in \mathbb{R}_{>0},
-\qquad
-\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right) \in \mathbb{R}_{>0}.`,
-      ),
     ],
     proof: [
       paragraph([
-        "Step 1（逆行列の正定値性）。",
         ref("iH_is_real_symmetric"),
         " より ",
         math(String.raw`-\tfrac12S_1^{(+)}`),
         " と ",
         math(String.raw`-S_2`),
-        " はエルミートである。したがって ",
+        " は実対称、したがってエルミートである。",
         ref("exp_hermitian_is_positive_definite"),
-        " (1)〜(3) を ",
-        ref("V_plus_is_positive_definite"),
-        " の Step 2〜3 と同じ順に適用すると、",
-        math(String.raw`\exp(-\tfrac12S_1^{(+)})\exp(-S_2)\exp(-\tfrac12S_1^{(+)})`),
+        " (1) より",
+      ]),
+      list([
+        [
+          math(String.raw`B_- := \exp(-\tfrac12S_1^{(+)})`),
+          " はエルミートかつ正定値",
+        ],
+        [math(String.raw`A_- := \exp(-S_2)`), " は正定値"],
+      ]),
+      paragraph([
+        math(String.raw`C_-:=\exp(\tfrac12S_1^{(+)})`),
+        " と置く。二つの指数の中の行列は、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(-\tfrac12S_1^{(+)})(\tfrac12S_1^{(+)})
+&= -\tfrac14(S_1^{(+)})^2
+   \quad (\because \text{スカラー倍と行列積の結合則}) \\
+&= (\tfrac12S_1^{(+)})(-\tfrac12S_1^{(+)})
+   \quad (\because \text{スカラーの積は可換})
+\end{aligned}`,
+      ),
+      paragraph([
+        "のように可換である。したがって ",
+        ref("theorem_exp_product"),
+        " と ",
+        ref("theorem_exp_zero"),
+        " より、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+B_-C_-
+&= \exp(-\tfrac12S_1^{(+)})\exp(\tfrac12S_1^{(+)})
+   \quad (\because B_-,\ C_- \text{ の定義}) \\
+&= \exp\!\left((-\tfrac12S_1^{(+)})+(\tfrac12S_1^{(+)})\right)
+   \quad (\because \text{可換な行列の指数関数の積公式}) \\
+&= \exp(0)
+   \quad (\because (-\tfrac12+\tfrac12)S_1^{(+)}=0) \\
+&= I
+   \quad (\because \exp(0)=I), \\
+C_-B_-
+&= \exp(\tfrac12S_1^{(+)})\exp(-\tfrac12S_1^{(+)})
+   \quad (\because C_-,\ B_- \text{ の定義}) \\
+&= \exp\!\left((\tfrac12S_1^{(+)})+(-\tfrac12S_1^{(+)})\right)
+   \quad (\because \text{可換な行列の指数関数の積公式}) \\
+&= \exp(0)
+   \quad (\because (\tfrac12-\tfrac12)S_1^{(+)}=0) \\
+&= I
+   \quad (\because \exp(0)=I).
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって ",
+        math(String.raw`B_-`),
+        " は可逆であり、その逆行列は ",
+        math(String.raw`C_-`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`B_-`),
+        " がエルミートなので ",
+        math(String.raw`B_-^*=B_-`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-\tfrac12S_1^{(+)})\exp(-S_2)\exp(-\tfrac12S_1^{(+)})
+&= B_-A_-B_-
+   \quad (\because B_-,\ A_- \text{ の定義}) \\
+&= B_-^*A_-B_-
+   \quad (\because B_-^*=B_-)
+\end{aligned}`,
+      ),
+      paragraph([
+        ref("exp_hermitian_is_positive_definite"),
+        " (2) より ",
+        math(String.raw`B_-^*A_-B_-`),
         " は正定値である。",
         math(String.raw`s_2>0`),
         " より ",
         math(String.raw`(2s_2)^{-M/2}>0`),
-        " なので、",
-        ref("V_plus_is_invertible"),
-        " の明示式から ",
-        math(String.raw`\left(V^{(+)}\right)^{-1}`),
-        " も正定値である。",
+        " であるから、同 (3) より ",
+        math(String.raw`(2s_2)^{-M/2}B_-^*A_-B_-`),
+        " は正定値である。",
       ]),
       paragraph([
-        "Step 2（トレース）。",
-        ref("V_plus_is_positive_definite"),
-        " と Step 1 で得た二つの正定値性に ",
-        ref("exp_hermitian_is_positive_definite"),
-        " (4) をそれぞれ適用すると、",
-        math(String.raw`\mathrm{tr}(V^{(+)})>0`),
-        " と ",
-        math(String.raw`\mathrm{tr}((V^{(+)})^{-1})>0`),
-        " を得る。",
+        ref("V_plus_is_invertible"),
+        " の明示式と ",
+        math(String.raw`B_-^*=B_-`),
+        " より、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(V^{(+)}\right)^{-1}
+&= (2s_2)^{-M/2}\exp(-\tfrac12S_1^{(+)})\exp(-S_2)\exp(-\tfrac12S_1^{(+)})
+   \quad (\because \text{逆行列の明示式}) \\
+&= (2s_2)^{-M/2}B_-A_-B_-
+   \quad (\because B_-,\ A_- \text{ の定義}) \\
+&= (2s_2)^{-M/2}B_-^*A_-B_-
+   \quad (\because B_-^*=B_-).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`\left(V^{(+)}\right)^{-1}`),
+        " も正定値である。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
-        "旧 V_plus_is_positive_definite の Step 4 後半と Step 5 を移した。今回の単位では、逆行列の正定値性と二つのトレース正値性という残る三候補の内部分割には進んでいない。",
-        "Lean の対応定理は Ising2D.VPlusInv_posDef、Ising2D.trace_VPlus_pos、Ising2D.trace_VPlusInv_pos。SageMath の check_05 は候補逆行列のエルミート性と二つのトレース正値性を確認するが、候補逆行列の全固有値正値性は独立検査していない。",
+        "旧 V_plus_inverse_positive_and_trace_positivity の Step 1 を、一ブロック一主張として分離した。Lean の対応定理は Ising2D.VPlusInv_posDef。",
+        "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_V_plus_inverse_positive_definite.sage。候補逆行列の全固有値が正であることを独立に検査する。",
+      ],
+    },
+  },
+
+  {
+    id: "evenEigen_claim_trace_V_plus_is_positive",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 10 },
+    title: {
+      tex: String.raw`\mathrm{tr}\!\left(V^{(+)}\right)\text{ は正}`,
+    },
+    labels: ["trace_V_plus_is_positive"],
+    statement: [
+      displayMath(String.raw`\mathrm{tr}\!\left(V^{(+)}\right) \in \mathbb{R}_{>0}.`),
+    ],
+    proof: [
+      paragraph([
+        ref("V_plus_is_positive_definite"),
+        " と ",
+        ref("exp_hermitian_is_positive_definite"),
+        " (4) より ",
+        math(String.raw`\mathrm{tr}(V^{(+)})>0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧 V_plus_inverse_positive_and_trace_positivity の Step 2 から、V^{(+)} 自身のトレース正値性だけを一主張として分離した。Lean の対応定理は Ising2D.trace_VPlus_pos。",
+        "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_05_positive_definite_and_c.sage のトレース最小値による正値性検査。",
+      ],
+    },
+  },
+
+  {
+    id: "evenEigen_claim_V_plus_inverse_positive_and_traces",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 10 },
+    title: {
+      tex: String.raw`\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)\text{ は正}`,
+    },
+    labels: ["V_plus_inverse_positive_and_trace_positivity"],
+    statement: [
+      displayMath(
+        String.raw`\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right) \in \mathbb{R}_{>0}.`,
+      ),
+    ],
+    proof: [
+      paragraph([
+        ref("V_plus_inverse_is_positive_definite"),
+        " と ",
+        ref("exp_hermitian_is_positive_definite"),
+        " (4) より ",
+        math(String.raw`\mathrm{tr}((V^{(+)})^{-1})>0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧複合ブロックのうち、今回の二項単位に含めない逆行列のトレース正値性を残した。ラベルは後続参照の互換性のため維持している。Lean の対応定理は Ising2D.trace_VPlusInv_pos。",
+        "数値検証は既存の sagemath/check/050_claim_even_sector_eigenvalues/check_05_positive_definite_and_c.sage に対応する。本文の推論粒度と形式化対応のレビューは次回の単位で扱う。",
       ],
     },
   },
@@ -2361,7 +2501,7 @@ R^{(+)}V^{(+)}
       ),
       paragraph([
         "一方 Step 1・Step 2 より（",
-        ref("V_plus_inverse_positive_and_trace_positivity"),
+        ref("trace_V_plus_is_positive"),
         " より ",
         math(String.raw`\mathrm{tr}\!\left(V^{(+)}\right) > 0`),
         " なので ",
@@ -2383,7 +2523,7 @@ R^{(+)}V^{(+)}
         "Step 4（符号の確定）。Step 3 の第 1 式より ",
         math(String.raw`c = \mathrm{tr}\!\left(V^{(+)}\right)/\mathrm{tr}\!\left(\check{V}'\right)`),
         " であり、",
-        ref("V_plus_inverse_positive_and_trace_positivity"),
+        ref("trace_V_plus_is_positive"),
         " より ",
         math(String.raw`\mathrm{tr}\!\left(V^{(+)}\right) \in \mathbb{R}_{>0}`),
         "、",

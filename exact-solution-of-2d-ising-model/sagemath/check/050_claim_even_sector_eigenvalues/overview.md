@@ -15,7 +15,9 @@
   - `trace_of_check_Vprime`（`tr(V̌') = tr((V̌')^{−1}) = Π_μ 2cosh(γ(θ~_μ)/2) > 0`）
   - `V_plus_is_positive_definite`（`V^{(+)}` は正定値）
   - `V_plus_is_invertible`（明示した候補が `V^{(+)}` の右逆かつ左逆）
-  - `V_plus_inverse_positive_and_trace_positivity`（`(V^{(+)})^{-1}` の正定値性と二つのトレース正値性）
+  - `V_plus_inverse_is_positive_definite`（`(V^{(+)})^{-1}` の正定値性）
+  - `trace_V_plus_is_positive`（`tr(V^{(+)})` の正値性）
+  - `V_plus_inverse_positive_and_trace_positivity`（次回へ残す `tr((V^{(+)})^{-1})` の正値性）
   - `constant_c_value_even_sector`（**`c = (2 sinh 2K_2)^{M/2}`**）
   - `eigenvalues_of_V_plus`（`Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ε_μ − 1/2))`）
   - `max_eigenvalue_of_V_plus_simple`（`Λ̌_max = Λ^{(1/2)}_M` であり**単純固有値**）
@@ -87,10 +89,11 @@ U        := E F,  E = Π_{m 奇数} σ_m^x,  F = Π_{m=1}^{M} σ_m^z
 | 02 | check_02_joint_eigenspace.sage | `check_joint_eigenspace_decomposition` の (1)〜(5)。`tr(Q̌_ε) = 1`、**特異値で `rank Q̌_ε = 1` を判定**、`Σ_ε Q̌_ε = I`、個数 `2^M` | PASS | 残差 ≤ 2.6e-15、rank 違反 0 件 |
 | 03 | check_03_Vprime_eigenvalues.sage | `eigenvalues_of_check_Vprime`。`X̌ Q̌_ε = ǧ(ε)Q̌_ε`、`V̌'Q̌_ε = e^{ǧ(ε)}Q̌_ε`、Sage の固有値集合（`2^M` 個）との一致、正値性。**縮退ペアの実在も記録** | PASS | 残差 ≤ 8.0e-12、固有値最小 `9.4e-4 > 0`、縮退ペア 144 件（正常） |
 | 04 | check_04_trace_Vprime.sage | `trace_of_check_Vprime`。`V̌'(V̌')^{−1} = I`、`tr(V̌') = Π_μ 2cosh(γ/2)`、`tr((V̌')^{−1}) = tr(V̌')`、正値性 | PASS | 残差 ≤ 6.9e-12、`min tr(V̌') = 4.90e0` |
-| 05 | check_05_positive_definite_and_c.sage | `V_plus_is_positive_definite` / `V_plus_inverse_positive_and_trace_positivity` / `constant_c_value_even_sector`。(a) `S_1^{(+)}, S_2` が実対称（`iH_is_real_symmetric` の **(+) 側**）、(b) `V^{(+)} = (2s_2)^{M/2}exp(S_1/2)exp(S_2)exp(S_1/2)`、(c) `V^{(+)}` のエルミート性と固有値の正値性、候補逆行列のエルミート性、二つのトレース正値性、(d) `U S_1^{(+)}U^{−1} = −S_1^{(+)}`（`sign_flip_conjugation` の **(+) 側**）、(e) `tr(exp(−S_1)exp(−S_2)) = τ`、(f) `tr(V^{(+)})/tr((V^{(+)})^{−1}) = (2s_2)^M`、(g) `c = (2 sinh 2K_2)^{M/2}` と `V^{(+)} = cV̌'`。候補逆行列の全固有値正値性は未検査 | PASS | 実対称性の残差 `0.0`、`U` 共役の残差 `0.0`、`c` の相対差 ≤ 4.3e-15、`V^{(+)}` の固有値最小 `3.2e-4 > 0` |
+| 05 | check_05_positive_definite_and_c.sage | `V_plus_is_positive_definite` / `trace_V_plus_is_positive` / `V_plus_inverse_positive_and_trace_positivity` / `constant_c_value_even_sector`。(a) `S_1^{(+)}, S_2` が実対称（`iH_is_real_symmetric` の **(+) 側**）、(b) `V^{(+)} = (2s_2)^{M/2}exp(S_1/2)exp(S_2)exp(S_1/2)`、(c) `V^{(+)}` のエルミート性と固有値の正値性、候補逆行列のエルミート性、二つのトレース正値性、(d) `U S_1^{(+)}U^{−1} = −S_1^{(+)}`（`sign_flip_conjugation` の **(+) 側**）、(e) `tr(exp(−S_1)exp(−S_2)) = τ`、(f) `tr(V^{(+)})/tr((V^{(+)})^{-1}) = (2s_2)^M`、(g) `c = (2 sinh 2K_2)^{M/2}` と `V^{(+)} = cV̌'` | PASS | 実対称性の残差 `0.0`、`U` 共役の残差 `0.0`、`c` の相対差 ≤ 4.3e-15、`V^{(+)}` の固有値最小 `3.2e-4 > 0` |
 | 06 | check_06_eigenvalues_V_plus.sage | `eigenvalues_of_V_plus` / `max_eigenvalue_of_V_plus_simple`。`V^{(+)}Q̌_ε = Λ̌_εQ̌_ε`、**`V^{(+)}` の `2^M` 個の固有値全体が `{Λ̌_ε}` に相対誤差 1e-8 以下で一致**、`Λ̌_max = Λ^{(1/2)}_M`、`γ(θ~_μ) > 0`、**最大固有値の単純性**。対照として `Λ^{(0)}_M`（整数運動量）とは一致しないこと | PASS | 固有値一致の相対差 ≤ 9.0e-12、`Λ̌_max = Λ^{(1/2)}_M` の相対差 `0.0`、`min γ = 5.4e-1`、単純性の相対差 ≥ 4.17e-1 |
 | 07 | check_07_V_plus_mul_inverse.sage | `V_plus_is_invertible` の右逆検査。本文と同じ明示式で作った `R^{(+)}` について `V^{(+)}R^{(+)} = I` | PASS | 相対残差 ≤ 1.889e-11 |
 | 08 | check_08_inverse_mul_V_plus.sage | `V_plus_is_invertible` の左逆検査。本文と同じ明示式で作った `R^{(+)}` について `R^{(+)}V^{(+)} = I` | PASS | 相対残差 ≤ 2.197e-11 |
+| 逆行列の正定値性 | check_V_plus_inverse_positive_definite.sage | `V_plus_inverse_is_positive_definite`。本文の候補逆行列について全固有値の虚部が許容誤差以下で、実部がすべて正であることを独立検査 | PASS | 虚部の最大絶対値 `1.732e-14`、実部の最小値 `5.145e-4 > 0` |
 
 ## 結論
 
@@ -107,6 +110,8 @@ U        := E F,  E = Π_{m 奇数} σ_m^x,  F = Π_{m=1}^{M} σ_m^z
 - 本文で明示した候補 `R^{(+)}` が `V^{(+)}` の右逆かつ左逆であることを別々に検査し、
   右積は相対残差 `1.889e-11` 以下、左積は `2.197e-11` 以下で単位行列に一致した
   （check_07、check_08）。
+- 候補逆行列の全固有値を独立に検査し、虚部の最大絶対値は `1.732e-14`、実部の最小値は
+  `5.145e-4 > 0` だった（check_V_plus_inverse_positive_definite）。
 - `Λ̌_max = Λ̌_{(1,…,1)} = Λ^{(1/2)}_M` が相対差 `0.0` で成立し、`γ(θ~_μ) > 0` により
   2 番目の固有値との相対差は `4.17e-1` 以上ある（＝**最大固有値は単純**、check_06）。
   これで `c_+(M) = Λ^{(1/2)}_M` を示す準備が整う。

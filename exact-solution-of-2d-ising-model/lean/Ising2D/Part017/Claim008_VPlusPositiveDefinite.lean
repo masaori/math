@@ -3,6 +3,7 @@
 
 対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
 `V_plus_is_positive_definite`、`V_plus_is_invertible`、
+`V_plus_inverse_is_positive_definite`、`trace_V_plus_is_positive`、
 `V_plus_inverse_positive_and_trace_positivity`。
 
 **必要十分版は置かない。** この主張は `S_1^{(+)}, S_2` というこの模型の具体的な対象についての
@@ -69,7 +70,7 @@ theorem VPlusInv_mul_VPlus {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
     VPlusInv M K1 s2 K2star * VPlus M s2 K1 K2star = 1 :=
   VmatInv_mul_Vmat K1 (-1) hs2 K2star
 
-/-- **原文 `V_plus_inverse_positive_and_trace_positivity` Step 1**:
+/-- **原文 `V_plus_inverse_is_positive_definite`**:
 `(V^{(+)})^{-1}` も正定値。
 
 章 009 では述べられていない（章 009 は `V^{-1}` の明示形までしか出していない）。
@@ -113,13 +114,13 @@ theorem VPlusInv_posDef {K1 K2star : ℂ} {s2 : ℝ}
   have : (0 : ℝ) < 2 * s2 := by linarith
   exact inv_pos.2 (Real.rpow_pos_of_pos this _)
 
-/-- **原文 `V_plus_inverse_positive_and_trace_positivity` Step 2**: `tr(V^{(+)}) > 0`。 -/
+/-- **原文 `trace_V_plus_is_positive`**: `tr(V^{(+)}) > 0`。 -/
 theorem trace_VPlus_pos {K1 K2star : ℂ} {s2 : ℝ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
     0 < (VPlus M s2 K1 K2star).trace :=
   (VPlus_posDef hK1 hK2 hs2).trace_pos
 
-/-- **原文 `V_plus_inverse_positive_and_trace_positivity` Step 2**:
+/-- **原文 `V_plus_inverse_positive_and_trace_positivity`**:
 `tr((V^{(+)})^{-1}) > 0`。 -/
 theorem trace_VPlusInv_pos {K1 K2star : ℂ} {s2 : ℝ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :

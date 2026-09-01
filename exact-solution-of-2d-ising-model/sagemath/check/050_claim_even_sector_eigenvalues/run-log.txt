@@ -99,3 +99,10 @@ check_07: PASS
 === check_08: R^{(+)} V^{(+)} = I ===
   R^{(+)} V^{(+)} = I（相対差）: max residual = 2.197e-11  ->  PASS
 check_08: PASS
+
+##### 2026-09-02 に追加した逆行列の正定値性の独立検査
+# 実行コマンド: sage check_V_plus_inverse_positive_definite.sage
+=== (V^{(+)})^{-1} の全固有値正値性 ===
+  (V^{(+)})^{-1} の固有値の虚部の最大絶対値: max residual = 1.732e-14  ->  PASS
+  (V^{(+)})^{-1} の固有値の実部の全体最小 = 5.145e-04  ->  PASS（正）
+RESULT: PASS
