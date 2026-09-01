@@ -1504,19 +1504,26 @@ W
       ]),
       displayMath(String.raw`u\le v \iff u^2\le v^2`),
       paragraph([
-        "が成り立つ。実際、",
-        math(String.raw`u\le v`),
-        " ならば ",
-        math(String.raw`u^2=u\cdot u\le v\cdot u\le v\cdot v=v^2`),
-        "（",
-        math(String.raw`u\ge 0,\ v\ge 0`),
-        " による）。逆に ",
-        math(String.raw`u>v\ (\ge 0)`),
-        " ならば ",
-        math(String.raw`u>0`),
-        " より ",
-        math(String.raw`u^2=u\cdot u>v\cdot u\ge v\cdot v=v^2`),
-        " であるから、対偶により ",
+        "が成り立つ。実際、", math(String.raw`u\le v`), " ならば",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u^2&=u\cdot u &&(\because\ \text{平方の定義})\\
+&\le v\cdot u &&(\because\ u\le v,\ u\ge0)\\
+&\le v\cdot v &&(\because\ u\le v,\ v\ge0)\\
+&=v^2 &&(\because\ \text{平方の定義})
+\end{aligned}`),
+      paragraph([
+        "である。逆に ", math(String.raw`u>v\ (\ge 0)`), " ならば ",
+        math(String.raw`u>0`), " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+u^2&=u\cdot u &&(\because\ \text{平方の定義})\\
+&>v\cdot u &&(\because\ u>v,\ u>0)\\
+&\ge v\cdot v &&(\because\ u>v,\ v\ge0)\\
+&=v^2 &&(\because\ \text{平方の定義})
+\end{aligned}`),
+      paragraph([
+        "であるから、対偶により ",
         math(String.raw`u^2\le v^2\Rightarrow u\le v`),
         "。特に ",
         math(String.raw`u^2=v^2\Rightarrow u=v`),

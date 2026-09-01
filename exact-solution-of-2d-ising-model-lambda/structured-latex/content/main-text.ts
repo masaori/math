@@ -51261,6 +51261,95 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_even_subgraph_pair_fiber",
+        labels: [],
+        title: { text: "反転対と単純通過を固定した偶部分グラフ対の数え上げ" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_even_subgraph_pair_fiber_bijection",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_even_subgraph_pair_fiber",
+                kind: "definition",
+                title: { text: "共通辺と単純通過辺を固定した偶部分グラフ対" },
+                labels: ["def_even_subgraph_pair_fiber"],
+                habitat: "N",
+                statement: [
+                  paragraph([
+                    math(String.raw`L\ge1`), " とし、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`),
+                    " を取る。共通辺が ", math(String.raw`D`), "、一方だけに属する辺が ", math(String.raw`E`),
+                    " である偶部分グラフの順序対と、その第 1 成分へ入れる単純通過辺の選び方を",
+                  ]),
+                  displayMath(String.raw`\mathcal P_L(D,E):=\bigl\{(A,B)\mid \operatorname{Even}_L(A),\operatorname{Even}_L(B),\ A\cap B=D,\ A\mathbin\triangle B=E\bigr\}`),
+                  displayMath(String.raw`\mathcal C_L(D,E):=\bigl\{C\subseteq E\mid \operatorname{Even}_L(D\cup C)\bigr\}`),
+                  paragraph([
+                    "で定める。ここで ", math(String.raw`A,B\subseteq E_L`), " であり、",
+                    math(String.raw`A\mathbin\triangle B:=(A\setminus B)\cup(B\setminus A)`),
+                    " である。偶部分グラフの述語は ", ref("def_even_edge_subset"),
+                    " で定めた。いずれも有限集合なので所属と個数は決定できる。実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_even_subgraph_pair_fiber_bijection",
+              kind: "claim",
+              title: { text: "偶部分グラフ対は一方へ入れる単純通過辺の選び方で数えられる" },
+              labels: ["claim_even_subgraph_pair_fiber_bijection"],
+              habitat: "N",
+              verification: ["sagemath/check/even-subgraph-pair-fiber"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), " とし、互いに素な ", math(String.raw`D,E\subseteq E_L`),
+                  " が ", math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。このとき",
+                ]),
+                displayMath(String.raw`\Theta:\mathcal P_L(D,E)\longrightarrow\mathcal C_L(D,E),\qquad\Theta(A,B):=A\setminus D`),
+                paragraph(["は全単射であり、したがって"]),
+                displayMath(String.raw`|\mathcal P_L(D,E)|=|\mathcal C_L(D,E)|`),
+                paragraph(["である。二つの有限集合は ", ref("def_even_subgraph_pair_fiber"), " で定めた。"]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`(A,B)\in\mathcal P_L(D,E)`), " に対し ", math(String.raw`C:=A\setminus D`),
+                  " と置く。", math(String.raw`A\cap B=D`), " と ", math(String.raw`A\mathbin\triangle B=E`),
+                  " から ", math(String.raw`C\subseteq E`), " かつ ", math(String.raw`A=D\cup C`),
+                  " であり、", math(String.raw`\operatorname{Even}_L(A)`), " だから ",
+                  math(String.raw`C\in\mathcal C_L(D,E)`), " である。よって ", math(String.raw`\Theta`), " は定義できる。",
+                ]),
+                paragraph(["逆に ", math(String.raw`C\in\mathcal C_L(D,E)`), " に対し"]),
+                displayMath(String.raw`A_C:=D\cup C,\qquad B_C:=D\cup(E\setminus C)`),
+                paragraph([
+                  "と置く。定義から ", math(String.raw`\operatorname{Even}_L(A_C)`), " である。互いに素な ",
+                  math(String.raw`D,E`), " と ", math(String.raw`C\subseteq E`), " により ",
+                  math(String.raw`B_C=A_C\mathbin\triangle E`), " である。頂点 ", math(String.raw`v\in V_L`),
+                  " ごとに、対称差では共通辺の端点寄与が二度現れて法 2 で消えるので",
+                ]),
+                displayMath(String.raw`d_{B_C}(v)\bmod2=\bigl(d_{A_C}(v)+d_E(v)\bigr)\bmod2=0\quad\bigl(\because\ \blkref{def_edge_subset_incidence_count},\ \blkref{def_even_edge_subset}\bigr)`),
+                paragraph([
+                  "となり ", math(String.raw`\operatorname{Even}_L(B_C)`), " である。また辺ごとの所属を ",
+                  math(String.raw`D,C,E\setminus C`), " の三場合に分けると",
+                ]),
+                displayMath(String.raw`A_C\cap B_C=D,\qquad A_C\mathbin\triangle B_C=E`),
+                paragraph(["なので ", math(String.raw`(A_C,B_C)\in\mathcal P_L(D,E)`), " である。"]),
+                displayMath(String.raw`\Theta(A_C,B_C)=(D\cup C)\setminus D=C\quad\bigl(\because\ D\cap C=\varnothing\bigr)`),
+                paragraph([
+                  "であり、逆に ", math(String.raw`(A,B)\in\mathcal P_L(D,E)`), " から得た ",
+                  math(String.raw`C=A\setminus D`), " については ", math(String.raw`A_C=A`), " かつ ",
+                  math(String.raw`B_C=B`), " である。よって二つの構成は互いに逆であり、全単射と個数の等式を得る。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },

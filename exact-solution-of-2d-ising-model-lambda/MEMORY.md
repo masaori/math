@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-01 の 76 回目の tick 時点）
+## 現在の到達点（2026-09-01 の 77 回目の tick 時点）
+
+**固定した反転対集合と単純通過集合に対応する偶部分グラフ順序対を、単純通過辺の選択集合で数える全単射を本文と SageMath で固定した（Lean 未着手）。** 互いに素な辺集合 $D,E$ に対し、偶部分グラフ $A,B$ で $A\cap B=D$・$A\mathbin{\triangle}B=E$ を満たす順序対のファイバー $\mathcal P_L(D,E)$ と、$C\subseteq E$ で $D\cup C$ が偶部分グラフとなる選択集合 $\mathcal C_L(D,E)$ を定義した（`def_even_subgraph_pair_fiber`）。`claim_even_subgraph_pair_fiber_bijection` は $\Theta(A,B)=A\setminus D$ の逆写像が $C\mapsto(D\cup C,D\cup(E\setminus C))$ であることを、対称差の偶数性と集合恒等式から示す。SageMath `even-subgraph-pair-fiber` は $L=2$ の互いに素な $(D,E)$ 881 件、順序対 1,024 件、選択集合 1,024 件で全単射を全数検査した。次は非後退置換の軌道とこのファイバーを対応づける数え上げへ進む。
+
+Lambda 側 check（852 ブロック）・linkage（378 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存検査・PDF 377 ページを通した。
+
+前進前レビューでは、前 tick の反転対集合・単純通過集合・その偶数性を本文、SageMath の非後退置換 30,784 件、今回の直接利用と照合した。値の集合への帰属と可算側の閉性を与える非自明な主張であり、「何も言っていない主張」や仮定・住処・参照の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「ノルムの基本性質」の平方単調性を示す二本の鎖を、一行一関係・行末根拠つきの `aligned` へ開いた。内容・式変形・根拠・参照は不変で、姉妹側 check・PDF 356 ページを通した。
+
+## ひとつ前の到達点（2026-09-01 の 76 回目の tick 時点）
 
 **非後退置換の単純通過の辺集合が偶部分グラフであることを、反転対の有無にかかわらず本文と SageMath で固定した（Lean 未着手）。** 反転対の辺集合 $D(\varphi)$（台の辺の両向きが動く辺の全体）と単純通過の辺集合 $E_1(\varphi)=E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)$ を定義し（`def_doubled_edge_set`・`def_single_traversal_edge_set`）、`claim_single_traversal_edge_set_even` を示した。証明は、頂点ごとに終点側と始点側の動く辺の間の全単射 $\Phi(\vec e)=\varphi(\vec e)$（反転対の有無を使わない）と、動く辺の全体にわたる指示値総和の二通りの計算（一方は $2\lvert S_{\mathrm{tgt}}\rvert$、他方は台の辺ごとの分割から $d_{E_1(\varphi)}(v)+2a$）から $d_{E_1(\varphi)}(v)+2a=2b$ を得て、法 2 で偶数性を取り出す。反転対を含まない場合は $E_1=E_{\mathrm{supp}}$ となり既存の `claim_reversal_free_moved_support_even` を特別な場合として含む。SageMath `single-traversal-support-even` は $L=2$ の非後退置換 30,784 件（反転対を含む 30,287 件・含まない 497 件）の全件・全頂点で、互いに素な分割・入出の一致・二通りの総和の一致・結論の偶数性を `ZZ` で検査した。次は反転対の辺と単純通過の辺から偶部分グラフ対を対応づける数え上げ（軌道と偶部分グラフ対の数え上げ）へ進む。
 
