@@ -96,9 +96,10 @@
 | `CheckFermiSetup.sum_exp_gval` | `∑_ε e^{ǧ(ε)} = ∏_μ 2cosh(γ(θ~_μ)/2)` | `trace_of_check_Vprime` Step 2 |
 | `CheckFermiSetup.trace_Vprime` | **`tr(V̌') = ∏_μ 2cosh(γ/2)`（前因子なし）** | 同 Step 1〜2 |
 | `CheckFermiSetup.trace_Vprime_inv` / `trace_Vprime_pos` | `tr((V̌')^{-1}) = tr(V̌') > 0` | 同 Step 3〜4 |
-| `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_Vmat` / `VPlusInv` | `V^{(+)}` は章 014 `Part014/Definition001_VPlus.lean` のものを使う。章 009 の `Vmat M K1 (-1) s2 K2star` と `rfl` で一致することを `VPlus_eq_Vmat` で明示し、その逆行列を `VPlusInv` とした | `def_V_plus` |
-| `VPlus_posDef` / `trace_VPlus_pos` | `V^{(+)}` は正定値、`tr(V^{(+)}) > 0` | `V_plus_is_positive_definite` |
-| `VPlusInv_posDef` / `trace_VPlusInv_pos` | `(V^{(+)})^{-1}` も正定値 | 同 Step 4 後半（章 009 には無い） |
+| `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_Vmat` | `V^{(+)}` は章 014 `Part014/Definition001_VPlus.lean` のものを使う。章 009 の `Vmat M K1 (-1) s2 K2star` と `rfl` で一致することを `VPlus_eq_Vmat` で明示した | `def_V_plus` |
+| `VPlus_posDef` | `V^{(+)}` は正定値 | `V_plus_is_positive_definite` |
+| `VPlusInv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | 明示した候補が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` |
+| `VPlusInv_posDef` / `trace_VPlus_pos` / `trace_VPlusInv_pos` | `(V^{(+)})^{-1}` の正定値性と二つのトレース正値性 | `V_plus_inverse_positive_and_trace_positivity`（今回の分割単位では残る三主張を一ブロックに保留） |
 | `trace_VPlus` / `trace_VPlusInv` | `tr(V^{(+)}) = (2s_2)^{M/2}τ`, `tr((V^{(+)})^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value_even_sector` Step 1〜2 |
 | `VPlusInv_eq` | `V^{(+)} = cV̌' ⇒ (V^{(+)})^{-1} = c⁻¹(V̌')^{-1}` | 同 Step 3（逆元の一意性） |
 | `constant_c_value_even_sector` | **`c = (2 sinh 2K_2)^{M/2}`** | `constant_c_value_even_sector` |
@@ -201,6 +202,6 @@
 2. `max_eigenvalue_of_V_plus_simple` (3) の証明が引用している
    `check_joint_eigenspace_decomposition` (5)（直和分解）は**不要**。
    `∑_ε Q̌_ε = I` と固有関係だけで固有空間が同定できる。
-3. `V_plus_is_positive_definite` の statement は `(V^{(+)})^{-1}` も正定値だと述べるが、
+3. `V_plus_inverse_positive_and_trace_positivity` の statement は `(V^{(+)})^{-1}` も正定値だと述べるが、
    章 009 の `V_is_positive_definite` には対応する主張が無い
    （章 009 は `V^{-1}` の明示形までしか出していない）。本章で `VPlusInv_posDef` として補った。

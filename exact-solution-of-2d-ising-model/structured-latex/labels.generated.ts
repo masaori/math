@@ -32,6 +32,8 @@ export const ALL_LABELS = [
   "V_is_positive_definite",
   "V_plus_eq_c_check_Vprime",
   "V_plus_factors_invertible",
+  "V_plus_inverse_positive_and_trace_positivity",
+  "V_plus_is_invertible",
   "V_plus_is_positive_definite",
   "W_has_positive_entries",
   "W_is_real_symmetric_positive_definite",

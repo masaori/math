@@ -2,7 +2,8 @@
 # `V^{(+)}` は正定値（**具体版**）
 
 対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
-`V_plus_is_positive_definite`（`evenEigen_008_claim_...`）。
+`V_plus_is_positive_definite`、`V_plus_is_invertible`、
+`V_plus_inverse_positive_and_trace_positivity`。
 
 **必要十分版は置かない。** この主張は `S_1^{(+)}, S_2` というこの模型の具体的な対象についての
 主張であり、取り払える一般構造が無い。使っている一般論（エルミート行列の `exp` が正定値、
@@ -45,7 +46,8 @@ variable {M : ℕ}
 theorem VPlus_eq_Vmat (M : ℕ) (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) :
     VPlus M s2 K1 K2star = Vmat M K1 (-1) s2 K2star := rfl
 
-/-- `(V^{(+)})^{-1}` の明示形（章 009 の `VmatInv` に `η = -1` を代入したもの）。 -/
+/-- **原文 `V_plus_is_invertible`**: `(V^{(+)})^{-1}` の明示候補
+（章 009 の `VmatInv` に `η = -1` を代入したもの）。 -/
 noncomputable def VPlusInv (M : ℕ) (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
   VmatInv M K1 (-1) s2 K2star
 
@@ -57,16 +59,18 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
     (VPlus M s2 K1 K2star).PosDef :=
   Vmat_posDef hK1 star_neg_one hK2 hs2
 
-/-- **原文 `V_plus_is_positive_definite` Step 4**: `V^{(+)}` は可逆で逆行列は `VPlusInv`。 -/
+/-- **原文 `V_plus_is_invertible` Step 2**: `VPlusInv` は `V^{(+)}` の右逆。 -/
 theorem VPlus_mul_VPlusInv {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
     VPlus M s2 K1 K2star * VPlusInv M K1 s2 K2star = 1 :=
   Vmat_mul_VmatInv K1 (-1) hs2 K2star
 
+/-- **原文 `V_plus_is_invertible` Step 3**: `VPlusInv` は `V^{(+)}` の左逆。 -/
 theorem VPlusInv_mul_VPlus {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
     VPlusInv M K1 s2 K2star * VPlus M s2 K1 K2star = 1 :=
   VmatInv_mul_Vmat K1 (-1) hs2 K2star
 
-/-- **原文 `V_plus_is_positive_definite` Step 4 後半**: `(V^{(+)})^{-1}` も正定値。
+/-- **原文 `V_plus_inverse_positive_and_trace_positivity` Step 1**:
+`(V^{(+)})^{-1}` も正定値。
 
 章 009 では述べられていない（章 009 は `V^{-1}` の明示形までしか出していない）。
 証明は Step 2〜3 をそのまま `-\tfrac12 S_1^{(+)}`, `-S_2` に適用するだけである。 -/
@@ -109,13 +113,14 @@ theorem VPlusInv_posDef {K1 K2star : ℂ} {s2 : ℝ}
   have : (0 : ℝ) < 2 * s2 := by linarith
   exact inv_pos.2 (Real.rpow_pos_of_pos this _)
 
-/-- **原文 `V_plus_is_positive_definite` Step 5**: `tr(V^{(+)}) > 0`。 -/
+/-- **原文 `V_plus_inverse_positive_and_trace_positivity` Step 2**: `tr(V^{(+)}) > 0`。 -/
 theorem trace_VPlus_pos {K1 K2star : ℂ} {s2 : ℝ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
     0 < (VPlus M s2 K1 K2star).trace :=
   (VPlus_posDef hK1 hK2 hs2).trace_pos
 
-/-- **原文 `V_plus_is_positive_definite` Step 5**: `tr((V^{(+)})^{-1}) > 0`。 -/
+/-- **原文 `V_plus_inverse_positive_and_trace_positivity` Step 2**:
+`tr((V^{(+)})^{-1}) > 0`。 -/
 theorem trace_VPlusInv_pos {K1 K2star : ℂ} {s2 : ℝ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
     0 < (VPlusInv M K1 s2 K2star).trace :=

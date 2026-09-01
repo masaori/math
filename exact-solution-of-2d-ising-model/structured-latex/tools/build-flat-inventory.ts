@@ -654,7 +654,7 @@ const zYLinearIndependenceExpectedExternalInputEntryIds = [
   "transfer_matrix_001_definition_symbols",
 ].sort();
 const zYLinearIndependenceExpectedContentSha256 = new Map<string, string>([
-  ["transfer_matrix_002_claim_Z_Y_linearly_independent", "055135423df717956c7526408d0b0f3ac97c5427fe6f1575a92737865ab6a38c"],
+  ["transfer_matrix_002_claim_Z_Y_linearly_independent", "dc3f82ca88ba10cb9112634967abe52d16a45fa1227df98c40b0b32778e5fecb"],
 ]);
 const zYLinearIndependenceExpectedExternalInputContentSha256 = new Map<string, string>([
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
@@ -680,7 +680,7 @@ const v1V2JordanWignerExpectedExternalInputEntryIds = [
   "transfer_matrix_001_definition_symbols",
 ].sort();
 const v1V2JordanWignerExpectedContentSha256 = new Map<string, string>([
-  ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "f0ad8e71b43e0eecee546bbbb1fb8da8e5e955bd1cdd4c87258c1d89e79bf843"],
+  ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "81e8943e63a08c66cf386327af850af907b332c366431782bff3f4b1dd7092f2"],
   ["transfer_matrix_003a_claim_V2_in_Z_Y", "fc763130d21136cb0d786867675f31b2cf54912611f737c05b342b7fb60532c2"],
 ]);
 const v1V2JordanWignerExpectedExternalInputContentSha256 = new Map<string, string>([
@@ -765,7 +765,7 @@ const v1RestrictionToEigenspacesExpectedExternalInputContentSha256 = new Map<str
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_002c_claim_matrix_norm_triangle_inequality", "66177abbef1f6ea86dba8b3e62b43da74b9e257d0909ed7eeee9d75aa4cac141"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
-  ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "f0ad8e71b43e0eecee546bbbb1fb8da8e5e955bd1cdd4c87258c1d89e79bf843"],
+  ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "81e8943e63a08c66cf386327af850af907b332c366431782bff3f4b1dd7092f2"],
   ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "625aa21f69aa73fcf3e7f955ed87e59306a704737074a15c0acdd7b47fd758e7"],
   ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
   ["transfer_matrix_005b_claim_end_is_algebra_isomorphism", "1a9ecef9cd59f12d82071b4c248e4319f7c9be8e3f42cf1bc9289737d9e5d033"],
@@ -1028,7 +1028,7 @@ const evenSectorGeneratorExpectedExternalInputContentSha256 = new Map<string, st
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
   ["partition_function_2d_ising_003_definition_transfer_matrix", "48b09c189776f6550beac7306cbb8ee033259dfc84221059a44ed3c5672f607d"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
-  ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "f0ad8e71b43e0eecee546bbbb1fb8da8e5e955bd1cdd4c87258c1d89e79bf843"],
+  ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "81e8943e63a08c66cf386327af850af907b332c366431782bff3f4b1dd7092f2"],
   ["transfer_matrix_011_definition_H1_H2", "19baa8255a664202439efe07a7c18f770902aa68a0d3ce553a650712c8a23413"],
 ]);
 const v1PlusSquareRootDefinitionExpectedDirectDependencies = [
@@ -1201,23 +1201,48 @@ const vPlusPositiveDefiniteExpectedDirectDependencies = [
   "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
   "evensectorT_definition_V1_plus_square_root",
   "evensectorT_definition_V_plus",
+  "linear_space_general_002_claim_scalar_identity_commutes",
+  "transfer_matrix_001_definition_symbols",
+  "transfer_matrix_011_definition_H1_H2",
+].sort();
+const vPlusPositiveDefiniteSectionEntryIds = [
+  "evenEigen_008_claim_V_plus_is_positive_definite",
+  "evenEigen_claim_V_plus_is_invertible",
+  "evenEigen_claim_V_plus_inverse_positive_and_traces",
+] as const;
+const vPlusPositiveDefiniteExpectedInternalDependencies = new Map<string, string[]>([
+  ["evenEigen_008_claim_V_plus_is_positive_definite", []],
+  ["evenEigen_claim_V_plus_is_invertible", [
+    "evenEigen_008_claim_V_plus_is_positive_definite",
+  ]],
+  ["evenEigen_claim_V_plus_inverse_positive_and_traces", [
+    "evenEigen_008_claim_V_plus_is_positive_definite",
+    "evenEigen_claim_V_plus_is_invertible",
+  ]],
+]);
+const vPlusPositiveDefiniteSectionExpectedContentSha256 = new Map<string, string>([
+  ["evenEigen_008_claim_V_plus_is_positive_definite", "f24523708646634691ca594190862d9add2ea1adfd52be33b462cc66916628f0"],
+  ["evenEigen_claim_V_plus_is_invertible", "63efd7b51b2689f7c7d312b4644fa72aa684f300e7164e22d085dee321a5dfb9"],
+  ["evenEigen_claim_V_plus_inverse_positive_and_traces", "97f494c9464d5e0565e951e049b90c90eaa458d904a051b25bf886ce86f528e2"],
+]);
+const vPlusPositiveDefiniteExpectedContentSha256 =
+  vPlusPositiveDefiniteSectionExpectedContentSha256.get("evenEigen_008_claim_V_plus_is_positive_definite")!;
+const vPlusPositiveDefiniteExpectedExternalInputEntryIds = [
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+  "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+  "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+  "evensectorT_definition_V1_plus_square_root",
+  "evensectorT_definition_V_plus",
   "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
   "exp_linear_map_004_theorem_exp_zero_is_identity",
   "linear_space_general_002_claim_scalar_identity_commutes",
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_011_definition_H1_H2",
 ].sort();
-const vPlusPositiveDefiniteExpectedContentSha256 = "a93fd9ed84a07556b438f0ef041bd871cd3012981fa2cb15820c0e3c024165d0";
-const vPlusPositiveDefiniteSectionEntryIds = [
-  "evenEigen_008_claim_V_plus_is_positive_definite",
-] as const;
-const vPlusPositiveDefiniteExpectedInternalDependencies = new Map<string, string[]>([
-  ["evenEigen_008_claim_V_plus_is_positive_definite", []],
-]);
-const vPlusPositiveDefiniteSectionExpectedContentSha256 = new Map<string, string>([
-  ["evenEigen_008_claim_V_plus_is_positive_definite", vPlusPositiveDefiniteExpectedContentSha256],
-]);
 const vPlusPositiveDefiniteExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "d0d5706bfc9866ba851d979c14387aa1c99cf67bdf434f453699a1fa91d4f22c"],
   ["eigenvalues_of_V_013_claim_exp_hermitian_positive_definite", "1db946266e8e182faa5d239bcfa5b571c33fc3a776577343cf44a02f060a7db3"],
@@ -1231,16 +1256,6 @@ const vPlusPositiveDefiniteExpectedExternalInputContentSha256 = new Map<string, 
   ["transfer_matrix_011_definition_H1_H2", "19baa8255a664202439efe07a7c18f770902aa68a0d3ce553a650712c8a23413"],
 ]);
 const vPlusPositiveDefiniteBoundaryCandidates = [
-  {
-    claim: "V^{(+)} の正定値性",
-    leanTheorems: ["VPlus_posDef"],
-    sageMathCoverage: "check_05 の固有値最小値による正定値性検査",
-  },
-  {
-    claim: "V^{(+)} の可逆性（左右逆と逆行列の明示式）",
-    leanTheorems: ["VPlus_mul_VPlusInv", "VPlusInv_mul_VPlus"],
-    sageMathCoverage: "check_05 は V^{(+)} と候補逆行列を構成するが、左右逆を独立項としては検査していない",
-  },
   {
     claim: "(V^{(+)})^{-1} の正定値性",
     leanTheorems: ["VPlusInv_posDef"],
@@ -1258,16 +1273,6 @@ const vPlusPositiveDefiniteBoundaryCandidates = [
   },
 ] as const;
 const vPlusPositiveDefiniteExpectedBoundaryCandidates = [
-  {
-    claim: "V^{(+)} の正定値性",
-    leanTheorems: ["VPlus_posDef"],
-    sageMathCoverage: "check_05 の固有値最小値による正定値性検査",
-  },
-  {
-    claim: "V^{(+)} の可逆性（左右逆と逆行列の明示式）",
-    leanTheorems: ["VPlus_mul_VPlusInv", "VPlusInv_mul_VPlus"],
-    sageMathCoverage: "check_05 は V^{(+)} と候補逆行列を構成するが、左右逆を独立項としては検査していない",
-  },
   {
     claim: "(V^{(+)})^{-1} の正定値性",
     leanTheorems: ["VPlusInv_posDef"],
@@ -1287,14 +1292,14 @@ const vPlusPositiveDefiniteExpectedBoundaryCandidates = [
 const vPlusPositiveDefiniteNextTickUnit = vPlusPositiveDefiniteBoundaryCandidates.slice(0, 2);
 const vPlusPositiveDefiniteExpectedNextTickUnit = [
   {
-    claim: "V^{(+)} の正定値性",
-    leanTheorems: ["VPlus_posDef"],
-    sageMathCoverage: "check_05 の固有値最小値による正定値性検査",
+    claim: "(V^{(+)})^{-1} の正定値性",
+    leanTheorems: ["VPlusInv_posDef"],
+    sageMathCoverage: "check_05 は候補逆行列のエルミート性とトレース正値性だけを確認し、全固有値の正値性を独立には検査していない",
   },
   {
-    claim: "V^{(+)} の可逆性（左右逆と逆行列の明示式）",
-    leanTheorems: ["VPlus_mul_VPlusInv", "VPlusInv_mul_VPlus"],
-    sageMathCoverage: "check_05 は V^{(+)} と候補逆行列を構成するが、左右逆を独立項としては検査していない",
+    claim: "tr(V^{(+)}) の正値性",
+    leanTheorems: ["trace_VPlus_pos"],
+    sageMathCoverage: "check_05 のトレース最小値による正値性検査",
   },
 ] as const;
 if (JSON.stringify(vPlusPositiveDefiniteBoundaryCandidates)
@@ -1306,9 +1311,21 @@ if (JSON.stringify(vPlusPositiveDefiniteBoundaryCandidates)
 const vPlusPositiveDefiniteLeanFile = "lean/Ising2D/Part017/Claim008_VPlusPositiveDefinite.lean";
 const vPlusPositiveDefiniteSageMathFile =
   "sagemath/check/050_claim_even_sector_eigenvalues/check_05_positive_definite_and_c.sage";
+const vPlusRightInverseSageMathFile =
+  "sagemath/check/050_claim_even_sector_eigenvalues/check_07_V_plus_mul_inverse.sage";
+const vPlusLeftInverseSageMathFile =
+  "sagemath/check/050_claim_even_sector_eigenvalues/check_08_inverse_mul_V_plus.sage";
 const vPlusPositiveDefiniteLeanSource = readFileSync(join(projectDir, vPlusPositiveDefiniteLeanFile), "utf8");
 const vPlusPositiveDefiniteSageMathSource = readFileSync(
   join(projectDir, vPlusPositiveDefiniteSageMathFile),
+  "utf8",
+);
+const vPlusRightInverseSageMathSource = readFileSync(
+  join(projectDir, vPlusRightInverseSageMathFile),
+  "utf8",
+);
+const vPlusLeftInverseSageMathSource = readFileSync(
+  join(projectDir, vPlusLeftInverseSageMathFile),
   "utf8",
 );
 const vPlusPositiveDefiniteExpectedLeanDeclarationFragments = new Map<string, string>([
@@ -1333,7 +1350,10 @@ const vPlusPositiveDefiniteExpectedLeanDeclarationFragments = new Map<string, st
 ]);
 const vPlusPositiveDefiniteExpectedLeanTargets = [
   "VPlusInv",
-  ...vPlusPositiveDefiniteExpectedBoundaryCandidates.flatMap(({ leanTheorems }) => leanTheorems),
+  "VPlus_posDef",
+  "VPlus_mul_VPlusInv",
+  "VPlusInv_mul_VPlus",
+  ...vPlusPositiveDefiniteBoundaryCandidates.flatMap(({ leanTheorems }) => leanTheorems),
 ];
 for (const target of vPlusPositiveDefiniteExpectedLeanTargets) {
   const declarationFragment = vPlusPositiveDefiniteExpectedLeanDeclarationFragments.get(target);
@@ -1364,18 +1384,26 @@ for (const executionFragment of vPlusPositiveDefiniteExpectedSageMathExecutionFr
     throw new Error(`偶セクター転送行列の正定値性の SageMath 実検査行が変わりました: ${executionFragment}`);
   }
 }
+const vPlusRightInverseSageMathExecutableSource = vPlusRightInverseSageMathSource
+  .split("\n")
+  .filter((line) => !line.trimStart().startsWith("#"))
+  .join("\n");
+const vPlusLeftInverseSageMathExecutableSource = vPlusLeftInverseSageMathSource
+  .split("\n")
+  .filter((line) => !line.trimStart().startsWith("#"))
+  .join("\n");
+if (!vPlusRightInverseSageMathExecutableSource.includes("opnorm(Vp * Rplus - Id) / opnorm(Id)")
+  || vPlusRightInverseSageMathExecutableSource.includes("opnorm(Rplus * Vp - Id) / opnorm(Id)")) {
+  throw new Error("偶セクター転送行列の右逆 SageMath 独立検査が変わりました");
+}
+if (!vPlusLeftInverseSageMathExecutableSource.includes("opnorm(Rplus * Vp - Id) / opnorm(Id)")
+  || vPlusLeftInverseSageMathExecutableSource.includes("opnorm(Vp * Rplus - Id) / opnorm(Id)")) {
+  throw new Error("偶セクター転送行列の左逆 SageMath 独立検査が変わりました");
+}
 const vPlusPositiveDefiniteMissingSageMathCoveragePatterns = [
   {
     coverage: "候補逆行列 Vpi の全固有値正値性",
     pattern: /Vpi\s*\.\s*eigenvalues\s*\(/,
-  },
-  {
-    coverage: "V^{(+)} と候補逆行列の右積 Vp * Vpi",
-    pattern: /\bVp\s*\*\s*Vpi\b/,
-  },
-  {
-    coverage: "候補逆行列と V^{(+)} の左積 Vpi * Vp",
-    pattern: /\bVpi\s*\*\s*Vp\b/,
   },
 ] as const;
 for (const { coverage, pattern } of vPlusPositiveDefiniteMissingSageMathCoveragePatterns) {
@@ -1433,13 +1461,13 @@ const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
   ["transfer_matrix_011_definition_H1_H2", "一般の生成子 H1^{(±)} と H2 の二定義に加え、既存の V1^{(±)} と V2 の指数表示を同じブロックへ束ねている。今回確定する節では外部入力として扱い、将来一ブロック一定義へ分割した後に依存順と節境界を再判定する必要がある。"],
-  ["evenEigen_008_claim_V_plus_is_positive_definite", "V^{(+)} の正定値性と可逆性、逆行列の正定値性、二つのトレース正値性を一ブロックへ束ねている。Lean では対応内容が複数の定理へ分かれているため、人手本文も一ブロック一主張へ分割し、SageMath・Lean 対応と節境界を再判定する必要がある。"],
+  ["evenEigen_claim_V_plus_inverse_positive_and_traces", "(V^{(+)})^{-1} の正定値性、tr(V^{(+)}) の正値性、tr((V^{(+)})^{-1}) の正値性という残る三主張を一ブロックへ束ねている。今回確定した正定値性・可逆性の二ブロックとは分離したが、残る三主張の内部分割と SageMath・Lean 対応の再点検後に節境界を再判定する必要がある。"],
   ["evensectorT_claim_V_plus_factors_invertible", "V1^{(+)} の半指数行列、V2、V^{(+)} という三つの行列の可逆性を一ブロックへ束ねている。各出力の後続利用を照合して一ブロック一主張へ分割し、共役写像の線型性との節境界を再判定する必要がある。"],
 ]);
 const futureBlockSplitRecommendedById = new Set([
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_011_definition_H1_H2",
-  "evenEigen_008_claim_V_plus_is_positive_definite",
+  "evenEigen_claim_V_plus_inverse_positive_and_traces",
   "evensectorT_claim_V_plus_factors_invertible",
 ]);
 const presentationPredecessorEntryIdsById = new Map<string, string[]>([
@@ -2277,14 +2305,14 @@ const vPlusDefinitionAndSignedTraceSection = validateReviewedSection(
   ["closing_006_theorem_trace_of_epsilon_V_plus"],
 );
 const vPlusPositiveDefiniteSection = validateReviewedSection(
-  "偶セクター転送行列の正定値性の境界候補",
+  "偶セクター転送行列の正定値性・可逆性と残余境界候補",
   "2次元イジングモデル",
   vPlusPositiveDefiniteSectionEntryIds,
   vPlusPositiveDefiniteExpectedInternalDependencies,
   vPlusPositiveDefiniteSectionExpectedContentSha256,
-  vPlusPositiveDefiniteExpectedDirectDependencies,
+  vPlusPositiveDefiniteExpectedExternalInputEntryIds,
   vPlusPositiveDefiniteExpectedExternalInputContentSha256,
-  ["evenEigen_008_claim_V_plus_is_positive_definite"],
+  ["evenEigen_claim_V_plus_inverse_positive_and_traces"],
 );
 const positiveSymmetrizedTransferMatrixEntriesEntry = positiveSymmetrizedTransferMatrixEntriesSection.sectionEntries[0]!;
 const zYLinearIndependenceEntry = zYLinearIndependenceSection.sectionEntries[0]!;
@@ -2316,6 +2344,8 @@ const v1PlusSquareRootClaimEntry = v1PlusHalfExponentAndSquareRootSection.sectio
 const vPlusDefinitionEntry = vPlusDefinitionAndSignedTraceSection.sectionEntries[0]!;
 const signedTraceOfVPlusEntry = vPlusDefinitionAndSignedTraceSection.sectionEntries[1]!;
 const vPlusPositiveDefiniteEntry = vPlusPositiveDefiniteSection.sectionEntries[0]!;
+const vPlusInvertibleEntry = vPlusPositiveDefiniteSection.sectionEntries[1]!;
+const vPlusInversePositiveAndTracesEntry = vPlusPositiveDefiniteSection.sectionEntries[2]!;
 const vPlusFactorsInvertibleEntry = entries.find((entry) =>
   entry.id === "evensectorT_claim_V_plus_factors_invertible")!;
 const conjugationLinearityEntry = entries.find((entry) =>
@@ -2594,7 +2624,7 @@ if (evenSectorOpenChainDefinitionEntry.dependencyPlacement!.chapterOrder
     interveningEntries: entries
       .filter((entry) => entry.provisionalFinalChapter === "2次元イジングモデル"
         && entry.dependencyPlacement!.chapterOrder >= 37
-        && entry.dependencyPlacement!.chapterOrder <= 60)
+        && entry.dependencyPlacement!.chapterOrder <= 62)
       .map((entry) => [entry.dependencyPlacement!.chapterOrder, entry.id]),
   })}`);
 }
@@ -2727,14 +2757,24 @@ if (vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 56
 if (!vPlusDefinitionAndSignedTraceSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || vPlusPositiveDefiniteEntry.explanationGranularityReview.status
-    !== "具体的な行列計算への展開またはブロック分割を要する") {
+    !== "自動検査で主題に適合") {
   throw new Error("偶セクター転送行列・符号付きトレースまたは直後の正定値性の説明粒度判定が変わりました");
 }
 if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 58
-  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 59
-  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 60
+  || vPlusInvertibleEntry.dependencyPlacement!.chapterOrder !== 59
+  || vPlusInversePositiveAndTracesEntry.dependencyPlacement!.chapterOrder !== 60
+  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 61
+  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 62
+  || vPlusInvertibleEntry.kind !== "claim"
+  || vPlusInversePositiveAndTracesEntry.kind !== "claim"
   || vPlusFactorsInvertibleEntry.kind !== "claim"
   || conjugationLinearityEntry.kind !== "claim"
+  || JSON.stringify(vPlusInvertibleEntry.dependsOnEntryIds
+    .filter((id) => vPlusPositiveDefiniteSectionEntryIds.includes(id as typeof vPlusPositiveDefiniteSectionEntryIds[number])))
+    !== JSON.stringify(vPlusPositiveDefiniteExpectedInternalDependencies.get(vPlusInvertibleEntry.id))
+  || JSON.stringify(vPlusInversePositiveAndTracesEntry.dependsOnEntryIds
+    .filter((id) => vPlusPositiveDefiniteSectionEntryIds.includes(id as typeof vPlusPositiveDefiniteSectionEntryIds[number])))
+    !== JSON.stringify(vPlusPositiveDefiniteExpectedInternalDependencies.get(vPlusInversePositiveAndTracesEntry.id))
   || JSON.stringify([...vPlusFactorsInvertibleEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(vPlusFactorsInvertibleExpectedDirectDependencies)
   || JSON.stringify([...conjugationLinearityEntry.dependsOnEntryIds].sort())
@@ -2743,15 +2783,22 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 58
     !== vPlusFactorsInvertibleExpectedContentSha256
   || conjugationLinearityEntry.explanationGranularityReview.inspectedContentSha256
     !== conjugationLinearityExpectedContentSha256
-  || vPlusPositiveDefiniteEntry.dependsOnEntryIds.includes(vPlusFactorsInvertibleEntry.id)
-  || vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes(vPlusPositiveDefiniteEntry.id)
+  || vPlusPositiveDefiniteSection.sectionEntries.some((entry) =>
+    entry.dependsOnEntryIds.includes(vPlusFactorsInvertibleEntry.id))
+  || vPlusPositiveDefiniteSection.sectionEntries.some((entry) =>
+    vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes(entry.id))
   || !conjugationLinearityEntry.dependsOnEntryIds.includes(vPlusFactorsInvertibleEntry.id)
-  || conjugationLinearityEntry.dependsOnEntryIds.includes(vPlusPositiveDefiniteEntry.id)
-  || vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes(conjugationLinearityEntry.id)) {
-  throw new Error(`偶セクター転送行列の正定値性、構成因子の可逆性、共役写像の線型性の節境界が変わりました: ${JSON.stringify({
-    orders: [vPlusPositiveDefiniteEntry, vPlusFactorsInvertibleEntry, conjugationLinearityEntry]
+  || vPlusPositiveDefiniteSection.sectionEntries.some((entry) =>
+    conjugationLinearityEntry.dependsOnEntryIds.includes(entry.id))
+  || vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes(conjugationLinearityEntry.id)
+  || vPlusInvertibleEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || vPlusInversePositiveAndTracesEntry.explanationGranularityReview.status
+    !== "具体的な行列計算への展開またはブロック分割を要する") {
+  throw new Error(`偶セクター転送行列の正定値性・可逆性・残余候補、構成因子の可逆性、共役写像の線型性の節境界が変わりました: ${JSON.stringify({
+    orders: [...vPlusPositiveDefiniteSection.sectionEntries, vPlusFactorsInvertibleEntry, conjugationLinearityEntry]
       .map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
-    positiveDefiniteDependencies: vPlusPositiveDefiniteEntry.dependsOnEntryIds,
+    reviewedSectionDependencies: vPlusPositiveDefiniteSection.sectionEntries
+      .map((entry) => [entry.id, entry.dependsOnEntryIds]),
     invertibilityDependencies: vPlusFactorsInvertibleEntry.dependsOnEntryIds,
     linearityDependencies: conjugationLinearityEntry.dependsOnEntryIds,
   })}`);
@@ -2763,7 +2810,6 @@ const inputsDroppedAfterVPlusPositiveDefiniteness = vPlusPositiveDefiniteSection
   .filter((id) => !vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes(id));
 if (JSON.stringify(inputsAddedForVPlusFactorsInvertibility.sort()) !== JSON.stringify([
   "TV1_hatZ_hatY_009_definition_invertible_elements",
-  "calc_formulae_006_definition_of_cc",
   "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
 ].sort())
   || JSON.stringify(inputsDroppedAfterVPlusPositiveDefiniteness.sort()) !== JSON.stringify([
@@ -3352,9 +3398,9 @@ const isingModelSectionBoundaries = [{
   boundaryEvidence: "章内依存順56で V1^{(+)} の半指数行列と V2 を掛け合わせて偶セクター転送行列 V^{(+)} を定義し、順57で配置基底上の対角作用、全スピン反転行列との可換性、開鎖イジング模型の有限和を使って tr(εV^{(+)}) を明示的な正の実数へ計算する。二項は定義から正値公式へ進む一方向の依存鎖をなす。直後の順58は V^{(+)} の定義を再利用するが、エルミート正定値行列の指数関数と実対称生成子を入力に正定値性を示す別枝であり、順57のトレース公式には依存しない。順57も順58に依存せず、両者の全直接依存集合は異なるため、順57の後で節を閉じる。生成時に二項の連続性と全直接依存、対象と全外部入力の本文 fingerprint、順57への一意な閉包、順58の直接依存・本文、順57と順58の相互非依存、および対象三項の説明粒度を固定検査する。",
   readabilityStatus: "順56は一つの有限複素行列だけを定義する。順57は符号付きトレースを配置基底和へ直し、開鎖スピン配置の有限和を因数分解して正の閉形式へ至る一つの計算鎖であり、対象二項は現行の説明粒度検査に合格している。三項以上の本文分割または形式化同期は不要だった。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義、行列指数関数の定義と可換積公式、および行列と線型写像の対応に説明粒度の未解決が残る。",
 }, {
-  name: "偶セクター転送行列の正定値性",
+  name: "偶セクター転送行列の正定値性と可逆性",
   chapter: "2次元イジングモデル",
-  status: "境界候補・対象本文粒度未解決・外部入力粒度未解決",
+  status: "境界候補・先頭二項分割済み・残余本文粒度未解決・外部入力粒度未解決",
   entryIds: vPlusPositiveDefiniteSectionEntryIds,
   input: [
     "偶セクター転送行列 V^{(+)} とその半指数行列",
@@ -3364,20 +3410,25 @@ const isingModelSectionBoundaries = [{
   ],
   externalInputEntryIds: vPlusPositiveDefiniteSection.externalInputEntryIds,
   output: [
-    "V^{(+)} とその逆行列の正定値性・可逆性",
-    "両行列のトレースが正の実数であること",
+    "V^{(+)} の正定値性",
+    "V^{(+)} の左右逆と逆行列の明示式",
+    "残余候補である逆行列の正定値性と二つのトレース正値性",
   ],
   boundaryCandidates: vPlusPositiveDefiniteBoundaryCandidates,
   nextTickUnit: vPlusPositiveDefiniteNextTickUnit,
   formalizationEvidence: {
     leanFile: vPlusPositiveDefiniteLeanFile,
-    sageMathFile: vPlusPositiveDefiniteSageMathFile,
-    currentStatus: "本文は五候補を一ブロックへ束ね、Lean は候補ごとの定理へ分離済みである。SageMath は定数 c の決定と同じ check_05 へ束ね、左右逆と候補逆行列の全固有値正値性を独立には検査していない。",
+    sageMathFiles: [
+      vPlusPositiveDefiniteSageMathFile,
+      vPlusRightInverseSageMathFile,
+      vPlusLeftInverseSageMathFile,
+    ],
+    currentStatus: "本文は V^{(+)} の正定値性と可逆性を二つの主張へ分割し、Lean の VPlus_posDef、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus との対応を記録した。SageMath は check_07 と check_08 で右積・左積を独立に検査する。残る三候補は一ブロックのままであり、check_05 は候補逆行列の全固有値正値性を独立には検査していない。",
   },
-  mainTheorem: "偶セクター転送行列とその逆行列の正定値性",
-  mainTheoremEntryId: "evenEigen_008_claim_V_plus_is_positive_definite",
-  boundaryEvidence: "現行の未分割グラフでは、章内依存順58が順56の V^{(+)} の定義と順45の生成子の実対称性を受け、V^{(+)} の正定値性、可逆性、逆行列の正定値性、二つのトレース正値性という五候補を出力する。Lean は VPlus_posDef、左右逆の二定理、VPlusInv_posDef、二つの trace 定理へ分離済みだが、SageMath はこれらを定数 c の決定と同じ check_05 で検査しており、左右逆と候補逆行列の全固有値正値性には独立した検査項がない。直後の順59は同じ V^{(+)} と半指数行列を再利用するが、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示し、順58とは相互に依存しない。順59は転送行列記号を引き続き入力とし、順60の共役写像 T_g の線型性へ直接入力を渡す一方、順60は順58に依存しない。このため順58の後は節境界の候補となる。ただし五候補の本文分割と形式化対応の再点検後に依存順が変わりうるため、最終的な節構造は確定しない。生成時には、この暫定評価の前提として順58の全直接依存、対象と全外部入力の本文 fingerprint、五候補と次回二項単位、Lean・SageMath の対応、順59–60の全直接依存と本文、順58・59の相互非依存、順59から順60への依存、および二箇所の入力集合の切り替わりを固定検査する。",
-  readabilityStatus: "順58の証明計算自体は具体的な三因子積を B^*AB として追えるが、一つの主張ブロックが五候補を束ねている。三項以上の本文分割と形式化同期が必要なので今回は本文を変更しない。次回は順58の先頭二候補である V^{(+)} の正定値性と可逆性だけを一単位として分割し、左右逆の SageMath 独立検査と Lean 対応を同期する。残る逆行列の正定値性と二つのトレース正値性、および順59以降の別境界へは進まない。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。",
+  mainTheorem: "逆行列の正定値性と二つのトレース正値性（残余境界候補）",
+  mainTheoremEntryId: "evenEigen_claim_V_plus_inverse_positive_and_traces",
+  boundaryEvidence: "章内依存順58は順56の V^{(+)} の定義と順45の生成子の実対称性を受けて V^{(+)} の正定値性を示し、順59は順58を受けて明示候補が左右逆であることから可逆性と逆行列の式を示す。二項は一方向の依存鎖であり、一ブロック一主張へ分割済みである。Lean は順58を VPlus_posDef、順59を VPlus_mul_VPlusInv と VPlusInv_mul_VPlus で検証し、SageMath は check_07 と check_08 で右積と左積を別々に検査する。順60は順58・59を受けるが、逆行列の正定値性と二つのトレース正値性という三候補をなお一ブロックへ束ねる。直後の順61は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順58〜60とは相互に依存しない。順62は順61へ依存するが順58〜60には依存しない。このため順60の後は節境界候補のままとし、残余三候補の分割後に最終確定する。生成時には順58〜60の全直接依存・一方向の内部依存・本文 fingerprint、残余三候補と次回二項単位、Lean 宣言、SageMath の左右逆独立検査、順61〜62の全直接依存と本文、両枝の相互非依存、および入力集合の切り替わりを固定検査する。",
+  readabilityStatus: "順58の正定値性と順59の可逆性はそれぞれ一つの主張に分かれ、順59では指数行列の左右逆から V^{(+)}R^{(+)}=I と R^{(+)}V^{(+)}=I を別々に計算する。残る順60は逆行列の正定値性と二つのトレース正値性という三主張を束ねているため、次回は先頭二候補である逆行列の正定値性と tr(V^{(+)}) の正値性だけを一単位として分割する。tr((V^{(+)})^{-1}) の正値性、順61以降の別境界へは進まない。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

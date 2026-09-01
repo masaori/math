@@ -88,3 +88,14 @@ check_05: PASS
     M=3 K1=0.44, K2=0.4413747 (s1*s2=1.0000012): Lambda^_max = 17.87357866, Lambda^(1/2)_M = 17.87357866, Lambda^(0)_M = 13.5568713, 単純性の相対差 = 6.174e-01
     M=3 K1=0.4, K2=0.8 (s1*s2=2.1097561): Lambda^_max = 38.63058686, Lambda^(1/2)_M = 38.63058686, Lambda^(0)_M = 36.95513116, 単純性の相対差 = 5.092e-01
 check_06: PASS
+
+##### 2026-09-02 に追加した左右逆の独立検査
+# 実行コマンド: sage check_07_V_plus_mul_inverse.sage && sage check_08_inverse_mul_V_plus.sage
+##### check_07_V_plus_mul_inverse.sage
+=== check_07: V^{(+)} R^{(+)} = I ===
+  V^{(+)} R^{(+)} = I（相対差）: max residual = 1.889e-11  ->  PASS
+check_07: PASS
+##### check_08_inverse_mul_V_plus.sage
+=== check_08: R^{(+)} V^{(+)} = I ===
+  R^{(+)} V^{(+)} = I（相対差）: max residual = 2.197e-11  ->  PASS
+check_08: PASS
