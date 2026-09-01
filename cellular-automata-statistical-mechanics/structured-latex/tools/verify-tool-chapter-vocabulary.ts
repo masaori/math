@@ -37,6 +37,32 @@ const NEUTRAL_PHRASES = [
 ];
 
 /**
+ * 本文側の既存物理由来語。数学的道具立て章は「2 値 CA を仮定せずに述べられるもの」であり、
+ * 既存物理との比較は CA 章の照合節だけが持つ。ところが物理由来語の検査は識別子だけに掛かっており、
+ * **読者が実際に読む散文**には一件も掛かっていなかった。CA 固有語は散文と識別子の両方を見るのに、
+ * 物理由来語は識別子しか見ないという非対称は、比較章の所有物である文（「物理的な意味を要求しない」等）が
+ * 数学的道具立て章の定義の中に残ることを許す。同じ境界を散文にも課す。
+ *
+ * 「否定形なら安全」とはしない。物理の語をどう扱うかを述べること自体が比較章の役目であり、
+ * 数学的道具立て章の定義・主張・証明はその語に言及する必要がない。
+ *
+ * 一般数学で常用され、物理を先取りしない語（場・作用素・体・空間など）は含めない。
+ */
+const PHYSICS_TERMS = [
+  "物理",
+  "因果集合",
+  "時空",
+  "光円錐",
+  "量子",
+  "ヒルベルト",
+  "多様体",
+  "相対論",
+  "粒子",
+  "場の量子論",
+  "作用素代数",
+];
+
+/**
  * 識別子側の CA 由来語。block id と label は出版本文に出ないが、整理前のファイル名を
  * 引き継いでいるため「章の分類を id から読むと誤読する」状態が残っている。
  * 本文（散文・数式）の語彙検査とは独立の軸なので、ここで別に検査する。
@@ -94,12 +120,22 @@ function collectText(node: unknown, out: string[]): void {
   for (const value of Object.values(node as Record<string, unknown>)) collectText(value, out);
 }
 
-function caTermsIn(block: unknown): string[] {
+function normalizedTextOf(block: unknown): string {
   const parts: string[] = [];
   collectText(block, parts);
   let text = parts.join(" ");
   for (const phrase of NEUTRAL_PHRASES) text = text.split(phrase).join(" ");
+  return text;
+}
+
+function caTermsIn(block: unknown): string[] {
+  const text = normalizedTextOf(block);
   return CA_TERMS.filter((term) => text.includes(term));
+}
+
+function physicsTermsIn(block: unknown): string[] {
+  const text = normalizedTextOf(block);
+  return PHYSICS_TERMS.filter((term) => text.includes(term));
 }
 
 const files = await loadContentFiles();
@@ -130,6 +166,14 @@ for (const file of files) {
   for (const block of file.blocks) {
     if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
     const hits = caTermsIn(block);
+    if (inTools) {
+      const bodyPhysicsHits = physicsTermsIn(block);
+      if (bodyPhysicsHits.length > 0) {
+        violations.push(
+          `数学的道具立て章の本文に既存物理由来語がある: ${block.id}（${bodyPhysicsHits.join("、")}）`,
+        );
+      }
+    }
     if (inTools && hits.length > 0) {
       violations.push(`数学的道具立て章に CA 固有語がある: ${block.id}（${hits.join("、")}）`);
       continue;
@@ -213,6 +257,14 @@ for (const chapter of documentOrganization) {
     organizationViolations.push(`CA 章の章タイトルに CA 固有語が無い: ${chapterId}`);
   }
   if (inTools) {
+    const chapterTitlePhysicsHits = physicsTermsIn(chapter.title);
+    if (chapterTitlePhysicsHits.length > 0) {
+      organizationViolations.push(
+        `数学的道具立て章の章タイトルに既存物理由来語がある: ${chapterId}（${chapterTitlePhysicsHits.join("、")}）`,
+      );
+    }
+  }
+  if (inTools) {
     const caHits = CA_IDENTIFIER_TERMS.filter((term) => chapterId.includes(term));
     if (caHits.length > 0) {
       organizationViolations.push(
@@ -232,6 +284,14 @@ for (const chapter of documentOrganization) {
       organizationViolations.push(
         `数学的道具立て章の節の記述に CA 固有語がある: ${chapterId}/${section.id}（${hits.join("、")}）`,
       );
+    }
+    if (inTools) {
+      const sectionPhysicsHits = physicsTermsIn([section.title, section.input, section.output, section.main]);
+      if (sectionPhysicsHits.length > 0) {
+        organizationViolations.push(
+          `数学的道具立て章の節の記述に既存物理由来語がある: ${chapterId}/${section.id}（${sectionPhysicsHits.join("、")}）`,
+        );
+      }
     }
     if (inCa && hits.length === 0) {
       organizationViolations.push(
@@ -263,8 +323,9 @@ if (violations.length > 0) {
   process.exit(1);
 }
 console.log(
-  `章の意味境界の語彙検査 OK（本文の CA 固有語 ${CA_TERMS.length} 件、CA 章 ${caBlockIds.size} 件、` +
-    "数学的道具立て章に残る CA 由来識別子 0 件、既存物理由来識別子 0 件、" +
+  `章の意味境界の語彙検査 OK（本文の CA 固有語 ${CA_TERMS.length} 件、` +
+    `本文の既存物理由来語 ${PHYSICS_TERMS.length} 件、CA 章 ${caBlockIds.size} 件、` +
+    "数学的道具立て章に残る CA 由来識別子 0 件、既存物理由来識別子 0 件、本文の既存物理由来語 0 件、" +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
