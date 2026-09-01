@@ -1,5 +1,12 @@
 # 自動ループ 記録の保管庫
 
+## 2026-09-02 の 86 回目の tick で台帳から移した記録（2026-09-02 の 81 回目）
+
+- 現在地: 四つの Kac--Ward 行列式の位相和を反転対と単純通過のファイバーで層別する $\overline{\mathbb Q}[x]$ の等式を示した（`claim_kac_ward_determinant_fiber_stratified_phase_sum`）。SageMath は $L=2$ の非後退置換 $30{,}784$ 個・非空ファイバー $609$ 個で全数検査した。Lean は未着手だった。
+- 前進記録: ファイバーの位相付き寄与 $\mathcal K^{a,b}_L(D,E)$ を定義し、非後退置換の位相和・軌道重みの位相分解・軌道長総和の層別・ファイバー分割を合成した。
+- 式変形の統一: 姉妹側の「クロネッカー積がつくる基底」（`tensor_basis`）の Step 1・Step 2 の二本の鎖で、行中にあった根拠 6 行を行末の根拠列へ揃えた。内容・式変形・根拠・参照は不変。
+- レビュー記録: 前 tick の `def_nonbacktracking_permutation_fiber`・`claim_nonbacktracking_permutation_stratified_count` を本文・SageMath・後続用途と照合し、母関数の層別という実質を持ち、「何も言っていない主張」や不一致は無いため修正対象なしと判断した。
+
 ## 2026-09-02 の 85 回目の tick で台帳から移した記録（2026-09-02 の 80 回目）
 
 - 現在地: 非後退置換の母関数を反転対と単純通過の対ごとのファイバー $\mathcal N_L(D,E)$ で層別する $\mathbb Z[x]$ の等式を示した（`claim_nonbacktracking_permutation_stratified_count`）。SageMath は $L=2$ の非後退置換 30,784 個を非空ファイバー 609 個へ分け、両辺の多項式一致を検査した。Lean は未着手だった。

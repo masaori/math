@@ -718,12 +718,12 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \sigma_1^{a_1}\cdots\sigma_r^{a_r}\sigma_{r+1}^{a_{r+1}}
 &= \left(\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes I\boxtimes\cdots\boxtimes I\right)
    \left(I\boxtimes\cdots\boxtimes I\boxtimes\overbrace{\sigma^{a_{r+1}}}^{(r+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\right)
-\quad (\because \text{帰納法の仮定}) \\
+&&(\because \text{帰納法の仮定}) \\
 &= (\sigma^{a_1}I)\boxtimes\cdots\boxtimes(\sigma^{a_r}I)\boxtimes(I\sigma^{a_{r+1}})\boxtimes(II)\boxtimes\cdots\boxtimes(II)
-\quad (\because \text{クロネッカー積の積の規則}) \\
+&&(\because \text{クロネッカー積の積の規則}) \\
 &= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_{r+1}}\boxtimes
    \overbrace{I\boxtimes\cdots\boxtimes I}^{M-(r+1)}
-\quad (\because AI=IA=A)
+&&(\because AI=IA=A)
 \end{aligned}`,
       ),
       paragraph([
@@ -752,13 +752,13 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^z}^{m\text{th}}
 \boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
-\quad (\because \text{上の一般式と } Z_m \text{ の定義}) \\
+&&(\because \text{上の一般式と } Z_m \text{ の定義}) \\
 Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^y}^{m\text{th}}
 \boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
-\quad (\because \text{上の一般式と } Y_m \text{ の定義}) \\
+&&(\because \text{上の一般式と } Y_m \text{ の定義}) \\
 \varepsilon &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M}
-\quad (\because \text{上の一般式（} r=M \text{）と } \varepsilon \text{ の定義})
+&&(\because \text{上の一般式（} r=M \text{）と } \varepsilon \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -936,6 +936,9 @@ V_1
           "<def_transfer_matrix_symbols> 側を訂正した（理由はそちらの conversion.notes を参照）。",
         "原文の statement は式のみで M の範囲・記号の出典が書かれていなかったため、M ≥ 2 と" +
           "参照先（<def_transfer_matrix_symbols>）を明示した（主張の内容自体は変えていない）。",
+        "2026-09-02 の式変形統一で、Step 1 の帰納法と Z_m・Y_m・ε の三本の表示に行中の " +
+          "\\quad (\\because …) で置かれていた根拠 6 行を、aligned の行末の根拠列へ揃えた。" +
+          "内容・式変形・根拠・参照は変えていない。",
       ],
     },
   },

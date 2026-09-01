@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 85 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 86 回目の tick 時点）
+
+**切り替え可能な接触の二辺の像を交換しても、非後退置換の同じファイバーに留まることを本文と SageMath で固定した（Lean 未着手）。** 接触する二辺について、交換後の二遷移も非後退で交換後の像が固定点にならない条件を `def_switchable_permutation_contact_pair` で定義し、像を交換する写像を `def_permutation_contact_smoothing` とした。`claim_switchable_contact_smoothing_preserves_fiber` は、像の交換が置換性を保ち、切り替え可能性が非後退性を与え、動く辺集合 $M$ が不変なので反転対 $D$ と単純通過集合 $E_1$ も不変であることから、接触平滑化後も同じ $\mathcal N_L(D,E)$ に属することを示す。SageMath `switchable-contact-smoothing` は $L=2$ の非後退置換 $30{,}784$ 個中、切り替え可能な接触対を持つ $29{,}905$ 個・接触対 $192{,}896$ 件で、置換性・非後退性・$M,D,E_1$ の保存と二回交換で元へ戻ることを全数検査した。次は相殺対象に標準的な切り替え可能接触対を選び、平滑化が符号反転対合になることを示す。
+
+Lambda 側 check（876 ブロック）・linkage（387 検算）・Lean 9,616 ジョブ・`sorryAx` 非依存 1,635 件・PDF 384 ページを通した。姉妹側 check・linkage（118 検算）・PDF 356 ページも通した。
+
+前進前レビューでは、前 tick の `def_permutation_contact_pair_count`・`claim_contact_free_permutation_phase_product` を本文・SageMath・今回の接触平滑化との接続で照合した。接触の無い部分の位相を二次符号へ移す実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$V_1$ を $Z,Y,\varepsilon$ で表す」（`V1_in_Z_Y_epsilon`）の Step 1 で、帰納法と $Z_m,Y_m,\varepsilon$ の表示に行中で付いていた根拠 6 行を行末の根拠列へ揃えた。内容・式変形・根拠・参照は不変である。
+
+## ひとつ前の到達点（2026-09-02 の 85 回目の tick 時点）
 
 **接触の無い非後退置換の位相積が、軌道ごとの巻き付き二次符号の積に等しいことを本文と SageMath で固定した（Lean 未着手）。** 置換の接触対の個数 $N_{\mathrm{ct}}(\varphi)$（動かす辺集合 $M(\varphi)$ の二元部分集合で終点が一致するものの個数）を定義した（`def_permutation_contact_pair_count`）。`claim_contact_free_permutation_phase_product` は、$N_{\mathrm{ct}}(\varphi)=0$ なら各軌道列の項が相異なる $M(\varphi)$ の元であることから通過の頂点が相異なる（$n_{\mathrm{ct}}(\gamma^\varphi_C)=0$）ことを導き、`claim_moved_orbit_weight_phase_twist` と `claim_vertex_simple_orbit_quadratic_sign` を合成して $\prod_C(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)})=\prod_C\chi_{a,b}(h(\gamma^\varphi_C),v(\gamma^\varphi_C))$ を得る。SageMath `contact-free-permutation-phase-product` は $L=2$ の非後退置換 $30{,}784$ 個中の接触の無い置換 $49$ 個・四つのスピン構造（検査 $196$ 件）で、中間段の頂点相異と基点独立性も含め円分体で厳密検査した。次は接触を持つ置換を平滑化で対にして相殺し、各添字の $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ へ合成する。
 

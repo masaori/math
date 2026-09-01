@@ -52152,6 +52152,138 @@ q_{a,b}(h,v)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_switchable_contact_smoothing",
+        labels: [],
+        title: { text: "切り替え可能な接触の平滑化" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_switchable_contact_smoothing_preserves_fiber",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_switchable_permutation_contact_pair",
+                  kind: "definition",
+                  title: { text: "切り替え可能な置換の接触対" },
+                  labels: ["def_switchable_permutation_contact_pair"],
+                  habitat: "N",
+                  statement: [
+                    paragraph([
+                      math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                      "（", ref("def_nonbacktracking_permutations"), "）を取る。相異なる二辺 ",
+                      math(String.raw`\vec e,\vec f\in M(\varphi)`), " の二元部分集合 ",
+                      math(String.raw`\{\vec e,\vec f\}`), " が切り替え可能な接触対であるとは、",
+                    ]),
+                    list([
+                      [math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`) ],
+                      [math(String.raw`\varphi(\vec f)\in\operatorname{Next}(\vec e)`), " かつ ", math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec f)`) ],
+                      [math(String.raw`\varphi(\vec f)\ne\vec e`), " かつ ", math(String.raw`\varphi(\vec e)\ne\vec f`) ],
+                    ]),
+                    paragraph([
+                      "の全てが成り立つことと定める。第一の条件は ", ref("def_permutation_contact_pair_count"),
+                      " が数える接触、第二の条件は二つの後続を交換しても非後退接続であること、",
+                      "第三の条件は交換後も二辺が動くことを表す。全て有限集合の元の比較で判定できる。",
+                      "実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_permutation_contact_smoothing",
+                  kind: "definition",
+                  title: { text: "置換の接触平滑化" },
+                  labels: ["def_permutation_contact_smoothing"],
+                  habitat: "N",
+                  statement: [
+                    paragraph([
+                      math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " と、その切り替え可能な接触対 ",
+                      math(String.raw`\{\vec e,\vec f\}`), "（", ref("def_switchable_permutation_contact_pair"), "）に対し、写像 ",
+                      math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\varphi):\vec E_L\to\vec E_L`), " を",
+                    ]),
+                    displayMath(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\varphi)(\vec g):=
+\begin{cases}
+\varphi(\vec f),&\vec g=\vec e,\\
+\varphi(\vec e),&\vec g=\vec f,\\
+\varphi(\vec g),&\vec g\notin\{\vec e,\vec f\}
+\end{cases}`),
+                    paragraph([
+                      "で定める。これは二つの入力で像を交換し、他の入力では ", math(String.raw`\varphi`),
+                      " を変えない有限写像である。この段では置換であることを仮定せず、次の主張で示す。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_switchable_contact_smoothing_preserves_fiber",
+              kind: "claim",
+              title: { text: "切り替え可能な接触の平滑化は非後退置換のファイバーを保つ" },
+              labels: ["claim_switchable_contact_smoothing_preserves_fiber"],
+              habitat: "N",
+              verification: ["sagemath/check/switchable-contact-smoothing"],
+              statement: [
+                paragraph([
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " と、その切り替え可能な接触対 ",
+                  math(String.raw`\{\vec e,\vec f\}`), " を取る。接触平滑化 ",
+                  math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
+                  "（", ref("def_permutation_contact_smoothing"), "）は ",
+                  math(String.raw`\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " の元であり、",
+                ]),
+                displayMath(String.raw`M(\psi)=M(\varphi),\qquad D(\psi)=D(\varphi),\qquad E_1(\psi)=E_1(\varphi)`),
+                paragraph([
+                  "を満たす。したがって ", ref("def_nonbacktracking_permutation_fiber"), " の任意の添字 ",
+                  math(String.raw`(D,E)`), " について、", math(String.raw`\varphi\in\mathcal N_L(D,E)`),
+                  " ならば ", math(String.raw`\psi\in\mathcal N_L(D,E)`), " である。全て有限集合の写像と部分集合の等式であり、",
+                  "実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず ", math(String.raw`\psi`), " が全単射であることを示す。", math(String.raw`\varphi`),
+                  " は全単射なので像 ", math(String.raw`\varphi(\vec e),\varphi(\vec f)`), " は相異なる。",
+                  math(String.raw`\psi`), " の像の族は ", math(String.raw`\varphi`),
+                  " の像の族の二項を交換しただけなので、各値の原像の個数は変わらず一つである。",
+                  "有限集合 ", math(String.raw`\vec E_L`), " の自己写像として ", math(String.raw`\psi`), " は全単射、従って置換である。",
+                ]),
+                paragraph([
+                  "次に非後退性を見る。", math(String.raw`\vec g\notin\{\vec e,\vec f\}`),
+                  " ならば ", math(String.raw`\psi(\vec g)=\varphi(\vec g)`),
+                  " なので ", ref("def_nonbacktracking_permutations"), " の条件は変わらない。",
+                  math(String.raw`\vec g=\vec e`), " ならば切り替え可能性から ",
+                  math(String.raw`\psi(\vec e)=\varphi(\vec f)\in\operatorname{Next}(\vec e)`),
+                  "、", math(String.raw`\vec g=\vec f`), " でも同様に ",
+                  math(String.raw`\psi(\vec f)=\varphi(\vec e)\in\operatorname{Next}(\vec f)`),
+                  " である。よって ", math(String.raw`\psi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " である。",
+                ]),
+                paragraph([
+                  "動く辺の集合を比べる。", math(String.raw`\vec g\notin\{\vec e,\vec f\}`),
+                  " では ", math(String.raw`\psi(\vec g)=\varphi(\vec g)`), " なので所属は一致する。",
+                  math(String.raw`\vec e,\vec f\in M(\varphi)`), " であり、切り替え可能性の第三条件により ",
+                  math(String.raw`\psi(\vec e)=\varphi(\vec f)\ne\vec e`), " と ",
+                  math(String.raw`\psi(\vec f)=\varphi(\vec e)\ne\vec f`), " なので、両辺は ",
+                  math(String.raw`M(\psi)`), " にも属する。従って ", math(String.raw`M(\psi)=M(\varphi)`), " である。",
+                ]),
+                paragraph([
+                  ref("def_doubled_edge_set"), " と ", ref("def_single_traversal_edge_set"),
+                  " は動く辺の集合だけから定まるので、直前の集合の等式をそれぞれの定義へ代入して ",
+                  math(String.raw`D(\psi)=D(\varphi)`), " と ", math(String.raw`E_1(\psi)=E_1(\varphi)`),
+                  " を得る。最後のファイバーへの帰属は ", ref("def_nonbacktracking_permutation_fiber"),
+                  " の二つの等式へこれらを代入したものである。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_signed_selection_stratification",
         labels: [],
         title: { text: "符号付き偶部分グラフ多項式の平方の選択集合による層別" },
