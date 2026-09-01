@@ -104,6 +104,22 @@ const PHYSICS_IDENTIFIER_TERMS = [
   "physical",
 ];
 
+/**
+ * CA 章で既存物理由来語を持ってよいブロック（＝既存理論との照合の所有者）の宣言。
+ *
+ * 既存物理由来語の検査は数学的道具立て章にしか掛かっておらず、CA 章の内部は無制約だった。
+ * ところがマニフェストは「物理的意味を局所規則へ入れない」「対応は後から写像として書く」を要求する。
+ * 無制約のままだと、照合節の所有物である既存物理の語が、CA 章の定義・主張・証明へ後から染み出しても
+ * 検査は 0 件で通る。CA 章の内部にも同じ境界を課し、照合を持つブロックだけを宣言で許す。
+ *
+ * 宣言は fail-closed に扱う。ここに挙げた id が実在しない、CA 章に無い、あるいは既存物理由来語を
+ * 一つも持たなくなった場合も違反にする（役目を終えた宣言が許可だけ残るのを防ぐ）。
+ */
+const PHYSICS_COMPARISON_BLOCK_IDS = [
+  "causal_set_primary_literature_remark_not_claimed",
+  "causal_set_primary_literature_remark_source",
+];
+
 const TOOL_CHAPTER_PREFIX = "organization/mathematical_tools/";
 const CA_CHAPTER_PREFIX = "organization/binary_cellular_automaton_semantics/";
 
@@ -152,15 +168,25 @@ for (const file of files) {
 const toolBlockIds = new Set<string>();
 const caBlockIds = new Set<string>();
 const unclassifiedBlockIds = new Set<string>();
+/** CA 章のブロック id → それを含む節 id。照合の所在を節まで特定するために引く。 */
+const caSectionOfBlock = new Map<string, string>();
 for (const file of files) {
   const inTools = file.file.startsWith(TOOL_CHAPTER_PREFIX);
   const inCa = file.file.startsWith(CA_CHAPTER_PREFIX);
   for (const block of file.blocks) {
     if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
     if (inTools) toolBlockIds.add(block.id);
-    else if (inCa) caBlockIds.add(block.id);
-    else unclassifiedBlockIds.add(block.id);
+    else if (inCa) {
+      caBlockIds.add(block.id);
+      caSectionOfBlock.set(block.id, file.file.slice(CA_CHAPTER_PREFIX.length));
+    } else unclassifiedBlockIds.add(block.id);
   }
+}
+/** 照合を許した節。CA 章の節の記述に既存物理由来語を認めるのは、この節だけ。 */
+const caComparisonSections = new Set<string>();
+for (const blockId of PHYSICS_COMPARISON_BLOCK_IDS) {
+  const section = caSectionOfBlock.get(blockId);
+  if (section !== undefined) caComparisonSections.add(section);
 }
 
 const violations: string[] = [];
@@ -190,6 +216,15 @@ for (const file of files) {
         );
       }
     }
+    if (inCa) {
+      const bodyPhysicsHits = physicsTermsIn(block);
+      const allowed = PHYSICS_COMPARISON_BLOCK_IDS.includes(block.id);
+      if (bodyPhysicsHits.length > 0 && !allowed) {
+        violations.push(
+          `CA 章の照合以外の本文に既存物理由来語がある: ${block.id}（${bodyPhysicsHits.join("、")}）`,
+        );
+      }
+    }
     if (inTools && hits.length > 0) {
       violations.push(`数学的道具立て章に CA 固有語がある: ${block.id}（${hits.join("、")}）`);
       continue;
@@ -208,6 +243,26 @@ for (const file of files) {
   }
 }
 
+
+/** 照合宣言そのものの検査。許可だけが残って空振りするのを防ぐため fail-closed に扱う。 */
+const blockById = new Map<string, unknown>();
+for (const file of files) {
+  for (const block of file.blocks) blockById.set(block.id, block);
+}
+for (const blockId of PHYSICS_COMPARISON_BLOCK_IDS) {
+  const block = blockById.get(blockId);
+  if (block === undefined) {
+    violations.push(`照合として宣言したブロックが本文に無い: ${blockId}`);
+    continue;
+  }
+  if (!caBlockIds.has(blockId)) {
+    violations.push(`照合として宣言したブロックが CA 章に無い: ${blockId}`);
+    continue;
+  }
+  if (physicsTermsIn(block).length === 0) {
+    violations.push(`照合として宣言したブロックに既存物理由来語が無い: ${blockId}`);
+  }
+}
 
 /** 識別子側の検査。本文の語彙とは独立に、機械識別子へ CA 語が新たに入るのを止める。 */
 const identifierViolations: string[] = [];
@@ -314,6 +369,16 @@ for (const chapter of documentOrganization) {
         `CA 章の節の記述に CA 固有語が無い: ${chapterId}/${section.id}`,
       );
     }
+    if (inCa) {
+      // 節の入力・出力・主定理は出版本文に出る。既存物理の語を書いてよいのは、
+      // 照合ブロックを実際に持つ節だけに限る（照合を持たない節が物理を語り始めるのを止める）。
+      const sectionPhysicsHits = physicsTermsIn([section.title, section.input, section.output, section.main]);
+      if (sectionPhysicsHits.length > 0 && !caComparisonSections.has(String(section.id))) {
+        organizationViolations.push(
+          `照合を持たない CA 章の節の記述に既存物理由来語がある: ${chapterId}/${section.id}（${sectionPhysicsHits.join("、")}）`,
+        );
+      }
+    }
     if (!inTools) continue;
     for (const identifier of [{ key: `section:${section.id}`, value: String(section.id) }]) {
       const caHits = CA_IDENTIFIER_TERMS.filter((term) => identifier.value.includes(term));
@@ -343,6 +408,8 @@ console.log(
     `本文の既存物理由来語 ${PHYSICS_TERMS.length} 件、走査対象は数学的道具立て章 ${toolBlockIds.size} 件・` +
     `CA 章 ${caBlockIds.size} 件・未分類 ${unclassifiedBlockIds.size} 件、` +
     "数学的道具立て章に残る CA 由来識別子 0 件、既存物理由来識別子 0 件、本文の既存物理由来語 0 件、" +
+    `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件、` +
+    "CA 章の照合以外の本文の既存物理由来語 0 件、" +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
