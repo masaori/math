@@ -1016,12 +1016,13 @@ e^{-ij\tilde\theta_{\mu+M}}
         String.raw`\begin{aligned}
 \tilde\theta_{M+1-\mu}
 &= \frac{2\pi\left(M+1-\mu-\frac12\right)}{M}
-   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
+   &&(\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
 &= \frac{2\pi\left(M - \left(\mu-\frac12\right)\right)}{M}
-   \quad \left(\because M+1-\mu-\tfrac12 = M - \left(\mu-\tfrac12\right)\right) \\
-&= 2\pi - \frac{2\pi\left(\mu-\frac12\right)}{M} \\
+   &&\left(\because M+1-\mu-\tfrac12 = M - \left(\mu-\tfrac12\right)\right) \\
+&= 2\pi - \frac{2\pi\left(\mu-\frac12\right)}{M}
+   &&(\because \mathbb C \text{ の四則}) \\
 &= 2\pi - \tilde\theta_\mu
-   \quad (\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義})
+   &&(\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -1033,13 +1034,13 @@ e^{-ij\tilde\theta_{\mu+M}}
         String.raw`\begin{aligned}
 e^{-ij\tilde\theta_{M+1-\mu}}
 &= e^{-ij\left(2\pi - \tilde\theta_\mu\right)}
-   \quad (\because \text{直前の (1)}) \\
+   &&(\because \text{直前の (1)}) \\
 &= e^{-2\pi i j}\,e^{ij\tilde\theta_\mu}
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+   &&(\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= \left(\cos(2\pi j) - i\sin(2\pi j)\right)e^{ij\tilde\theta_\mu}
-   \quad (\because \text{euler\_formula\_cos\_sin}) \\
+   &&(\because \text{euler\_formula\_cos\_sin}) \\
 &= e^{ij\tilde\theta_\mu}
-   \quad (\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0)
+   &&(\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0)
 \end{aligned}`,
       ),
       paragraph([
@@ -1058,16 +1059,22 @@ e^{-ij\tilde\theta_{M+1-\mu}}
         ref("def_half_integer_modes"),
         " (2)（添字の周期性）を添字 ",
         math(String.raw`1-\mu \in \mathbb{Z}`),
-        " に適用すると ",
-        math(String.raw`\check{Z}_{(1-\mu)+M} = \check{Z}_{1-\mu}`),
-        " であり、",
-        math(String.raw`(1-\mu)+M = M+1-\mu`),
-        " なので ",
-        math(String.raw`\check{Z}_{M+1-\mu} = \check{Z}_{1-\mu}`),
-        "。",
-        math(String.raw`\check{Y}`),
-        " についても同じである。",
+        " に適用すると",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Z}_{M+1-\mu}
+&=\check{Z}_{(1-\mu)+M}
+&&\bigl(\because (1-\mu)+M=M+1-\mu\bigr)\\
+&=\check{Z}_{1-\mu}
+&&\bigl(\because \blkref{def_half_integer_modes}\text{ (2)}\bigr),\\[2pt]
+\check{Y}_{M+1-\mu}
+&=\check{Y}_{(1-\mu)+M}
+&&\bigl(\because (1-\mu)+M=M+1-\mu\bigr)\\
+&=\check{Y}_{1-\mu}
+&&\bigl(\because \blkref{def_half_integer_modes}\text{ (2)}\bigr).
+\end{aligned}`,
+      ),
       paragraph([
         "（ここで ",
         ref("def_half_integer_modes"),
@@ -1082,7 +1089,12 @@ e^{-ij\tilde\theta_{M+1-\mu}}
         " で残してあるのはまさにこの橋渡しのためである。）",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-01 の式変形統一で、二本の式変形鎖の行中にあった根拠 7 行を行末の根拠列（aligned の &&）へ揃え、添字の周期性の二本の等式を同じ形へ開いた。内容・式変形・根拠・ラベル参照は不変である。",
+      ],
+    },
   },
 
   {
