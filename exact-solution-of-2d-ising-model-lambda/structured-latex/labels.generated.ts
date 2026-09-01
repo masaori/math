@@ -63,6 +63,7 @@ export const ALL_LABELS = [
   "claim_even_subgraph_pair_stratified_count",
   "claim_even_subgraph_spin_sum",
   "claim_exterior_cell_set_edge_connected",
+  "claim_fiber_phase_weight_topological_form",
   "claim_finite_free_entropy_density_nonnegative",
   "claim_finite_free_entropy_density_upper_bound",
   "claim_first_hit_connecting_staircase_meets_lifts_only_at_ends",
