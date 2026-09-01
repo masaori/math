@@ -22,7 +22,7 @@ export default defineBlocks([
       displayMath(String.raw`N^{\mathsf T}(w):=\{v\in V\mid w\in N(v)\}\qquad(w\in V)`),
       paragraph([
         "で定める。", math(String.raw`V`), " は有限なので右辺は有限部分集合であり、",
-        math(String.raw`N^{\mathsf T}`), " は有限舞台上の近傍割り当てである。",
+        math(String.raw`N^{\mathsf T}`), " は有限集合上の近傍割り当てである。",
       ]),
     ],
   },

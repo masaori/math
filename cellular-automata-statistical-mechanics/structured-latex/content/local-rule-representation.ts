@@ -375,7 +375,7 @@ g(y)
         "（",
         math(String.raw`(V,N')`),
         " は有限舞台 ",
-        ref("def_finite_stage"),
+        ref("def_finite_neighborhood_system"),
         "）について、次の二つは同値である。",
       ]),
       paragraph([

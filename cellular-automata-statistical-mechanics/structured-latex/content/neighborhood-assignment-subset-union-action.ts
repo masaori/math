@@ -10,8 +10,8 @@ export default defineBlocks([
   {
     id: "neighborhood_assignment_subset_union_action_definition_subset_space",
     kind: "definition",
-    title: { text: "有限舞台の部分集合全体" },
-    labels: ["def_finite_stage_subset_space"],
+    title: { text: "有限基礎集合の部分集合全体" },
+    labels: ["def_finite_carrier_subset_space"],
     habitat: "finite",
     statement: [
       paragraph(["有限集合 ", math(String.raw`V`), " に対し、その部分集合全体を"]),
@@ -236,7 +236,7 @@ U_{N\star N}
     ],
     proof: [
       paragraph([
-        ref("def_finite_stage_subset_space"), " より入力集合は ",
+        ref("def_finite_carrier_subset_space"), " より入力集合は ",
         math(String.raw`2^{|V|}\in\mathbb N`), " 個である。各入力 ",
         math(String.raw`S\in\operatorname{Sub}(V)`), " に対する ",
         math(String.raw`U_N(S)`), " は、", ref("def_neighborhood_assignment_subset_union_map"),

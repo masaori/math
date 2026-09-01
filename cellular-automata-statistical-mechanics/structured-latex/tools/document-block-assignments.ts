@@ -447,7 +447,7 @@ export const blockSectionAssignments = {
   "time_expansion_dependency_claim_time_strictly_increases": "time_expansion_and_dependency_order",
   "time_expansion_dependency_definition_event_set": "time_expansion_and_dependency_order",
   "time_expansion_dependency_definition_finite_ca": "time_expansion_and_dependency_order",
-  "finite_layered_relation_definition_finite_stage": "neighborhood_assignment_algebra",
+  "finite_neighborhood_system_definition": "neighborhood_assignment_algebra",
   "time_expansion_dependency_definition_global_map": "time_expansion_and_dependency_order",
   "time_expansion_dependency_definition_one_step_dependency": "time_expansion_and_dependency_order",
   "finite_layered_relation_definition_index_interval": "finite_relation_reachability_and_transitive_closure",

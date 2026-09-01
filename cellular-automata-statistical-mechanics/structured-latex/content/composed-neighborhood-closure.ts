@@ -18,7 +18,7 @@ export default defineBlocks([
       paragraph([
         "有限集合 ", math(String.raw`V`), " と二つの近傍割り当て ",
         math(String.raw`N,M:V\to\{V\text{ の部分集合}\}`), " を取る（",
-        ref("def_finite_stage"), "）。各 ", math(String.raw`v\in V`), " に対し、",
+        ref("def_finite_neighborhood_system"), "）。各 ", math(String.raw`v\in V`), " に対し、",
       ]),
       displayMath(String.raw`(N\star M)(v):=\bigcup_{u\in N(v)}M(u)\subseteq V`),
       paragraph([

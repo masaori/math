@@ -1,8 +1,8 @@
 /**
  * 章「到達前順序と相互到達成分」。
  * 近傍割り当ての反射推移閉包が定める二項関係が前順序であること、それが一般には
- * 反対称でないこと（二元舞台の反例）、相互到達関係が同値関係をなし、その類が
- * 閉包と閉包の転置の点ごとの積として書けて舞台を分割することを示す。
+ * 反対称でないこと（二元集合上の反例）、相互到達関係が同値関係をなし、その類が
+ * 閉包と閉包の転置の点ごとの積として書けて基礎集合を分割することを示す。
  * 有限集合、写像、自然数だけを使い、R / C は現れない。
  */
 
@@ -96,7 +96,7 @@ w&\in N^{*}(v)
   {
     id: "neighborhood_assignment_reachability_preorder_definition_witness",
     kind: "definition",
-    title: { text: "反対称性が破れる二元舞台の近傍割り当て" },
+    title: { text: "反対称性が破れる二元集合上の近傍割り当て" },
     labels: ["def_reachability_preorder_antisymmetry_counterexample"],
     habitat: "finite",
     statement: [
@@ -362,7 +362,7 @@ C_N^{\mathsf T}
   {
     id: "neighborhood_assignment_reachability_preorder_claim_partition",
     kind: "claim",
-    title: { text: "相互到達成分は舞台を分割する" },
+    title: { text: "相互到達成分は基礎集合を分割する" },
     labels: ["claim_neighborhood_mutual_reachability_components_partition"],
     habitat: "finite",
     statement: [

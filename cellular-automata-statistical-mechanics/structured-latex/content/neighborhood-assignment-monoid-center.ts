@@ -57,7 +57,8 @@ export default defineBlocks([
       paragraph(["任意の有限集合 ", math(String.raw`V`), " について"]),
       displayMath(String.raw`Z_{\star}(V)=\{O_V,I_V\}`),
       paragraph([
-        "が成り立つ。空舞台では ", math(String.raw`O_V=I_V`), " なので右辺は一元集合である。",
+        "が成り立つ。空集合 ", math(String.raw`V=\varnothing`), " では ",
+        math(String.raw`O_V=I_V`), " なので右辺は一元集合である。",
       ]),
     ],
     proof: [
@@ -133,7 +134,7 @@ b\in(N\star E_{p,b})(p)
     habitat: "N",
     statement: [
       paragraph([
-        "有限舞台 ", math(String.raw`V`), " では ", math(String.raw`Z_{\star}(V)`),
+        "有限集合 ", math(String.raw`V`), " では ", math(String.raw`Z_{\star}(V)`),
         " と、任意の ", math(String.raw`N\in\mathcal N(V)`), " に対する ",
         math(String.raw`N\in Z_{\star}(V)`), " の真偽を有限決定できる。",
       ]),

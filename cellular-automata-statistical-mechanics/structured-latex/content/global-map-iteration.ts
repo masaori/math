@@ -48,7 +48,7 @@ export default defineBlocks([
     proof: [
       paragraph([
         math(String.raw`A`), " と ", math(String.raw`V`), " は有限集合（",
-        ref("def_state_set"), "、", ref("def_finite_stage"), "）なので、写像集合 ",
+        ref("def_state_set"), "、", ref("def_finite_neighborhood_system"), "）なので、写像集合 ",
         math(String.raw`X=A^V`), " は有限集合である。大域写像の始域と終域はともに ",
         math(String.raw`A^V=X`), " である。元数は",
       ]),

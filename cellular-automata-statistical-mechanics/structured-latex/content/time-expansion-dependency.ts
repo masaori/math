@@ -15,10 +15,10 @@ import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
-    id: "finite_layered_relation_definition_finite_stage",
+    id: "finite_neighborhood_system_definition",
     kind: "definition",
-    title: { text: "有限舞台" },
-    labels: ["def_finite_stage"],
+    title: { text: "有限近傍系" },
+    labels: ["def_finite_neighborhood_system"],
     habitat: "finite",
     statement: [
       paragraph([
@@ -33,7 +33,7 @@ export default defineBlocks([
         " の組 ",
         math(String.raw`(V,N)`),
         " を",
-        "有限舞台",
+        "有限近傍系",
         "と呼ぶ。",
         math(String.raw`N(v)`),
         " を ",
@@ -55,11 +55,11 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台 ",
+        "有限近傍系 ",
         math(String.raw`(V,N)`),
         "（",
-        ref("def_finite_stage"),
-        "）と、各 ",
+        ref("def_finite_neighborhood_system"),
+        "）を有限舞台と呼ぶ。有限舞台と、各 ",
         math(String.raw`v\in V`),
         " に与えた写像 ",
         math(String.raw`f_v:A^{N(v)}\to A`),
@@ -111,7 +111,7 @@ export default defineBlocks([
         "。",
         math(String.raw`N(v)\subseteq V`),
         " は ",
-        ref("def_finite_stage"),
+        ref("def_finite_neighborhood_system"),
         " による）。各 ",
         math(String.raw`v\in V`),
         " について、写像 ",
@@ -315,7 +315,7 @@ export default defineBlocks([
         " はいずれも有限集合（",
         ref("def_finite_index_interval"),
         " と ",
-        ref("def_finite_stage"),
+        ref("def_finite_neighborhood_system"),
         "）なので、その直積 ",
         math(String.raw`E_\tau`),
         " も有限集合であり、上の個数は ",

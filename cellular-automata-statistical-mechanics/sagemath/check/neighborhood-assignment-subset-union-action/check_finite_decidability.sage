@@ -1,5 +1,5 @@
 # 対象ラベル: claim_neighborhood_assignment_subset_union_map_finite_decidable
-# 併せて検査するラベル: def_finite_stage_subset_space
+# 併せて検査するラベル: def_finite_carrier_subset_space
 # 本文の有限決定の論証を段ごとに分けて検査する。
 #   (z1) 入力集合 Sub(V) の元数は 2^{|V|} であり、全表を列挙できる
 #   (z2) 各 U_N(S) は有限個の N(v) の有限合併として、セルごとの所属判定だけで決まる

@@ -1,6 +1,6 @@
 /**
- * 章「点ごとの積に対する合成の非分配反例の最小舞台」。
- * 空舞台と一元舞台では反例が存在しないことと、二元舞台で左右の
+ * 章「点ごとの積に対する合成の非分配反例の最小基礎集合」。
+ * 空集合と一元集合では反例が存在しないことと、二元集合で左右の
  * 非分配反例が存在することを、有限集合と所属判定だけから示す。R / C は現れない。
  */
 
@@ -10,7 +10,7 @@ export default defineBlocks([
   {
     id: "neighborhood_assignment_intersection_minimal_counterexample_claim_subsingleton_composition",
     kind: "claim",
-    title: { text: "一元以下の舞台では合成と点ごとの積が一致する" },
+    title: { text: "一元以下の基礎集合では合成と点ごとの積が一致する" },
     labels: ["claim_subsingleton_neighborhood_composition_equals_intersection"],
     habitat: "finite",
     statement: [
@@ -54,7 +54,7 @@ w\in(N\star M)(v)
   {
     id: "neighborhood_assignment_intersection_minimal_counterexample_claim_subsingleton_distributive",
     kind: "claim",
-    title: { text: "一元以下の舞台では左右の分配律が成り立つ" },
+    title: { text: "一元以下の基礎集合では左右の分配律が成り立つ" },
     labels: ["claim_subsingleton_neighborhood_composition_distributes_over_intersection"],
     habitat: "finite",
     statement: [
@@ -90,7 +90,7 @@ L\star(N\sqcap M)
   {
     id: "neighborhood_assignment_intersection_minimal_counterexample_definition_two_element_witnesses",
     kind: "definition",
-    title: { text: "二元舞台の左右の非分配証人" },
+    title: { text: "二元基礎集合上の左右の非分配証人" },
     labels: ["def_two_element_intersection_nondistributivity_witnesses"],
     habitat: "finite",
     statement: [
@@ -108,7 +108,7 @@ L'(a):=\varnothing,\quad L'(b):=\{a,b\}`),
   {
     id: "neighborhood_assignment_intersection_minimal_counterexample_claim_two_element_failures",
     kind: "claim",
-    title: { text: "二元舞台で左右の分配律はともに破れる" },
+    title: { text: "二元基礎集合で左右の分配律はともに破れる" },
     labels: ["claim_two_element_composition_intersection_nondistributivity"],
     habitat: "finite",
     statement: [
@@ -156,24 +156,24 @@ L'\star(N'\sqcap M')\neq(L'\star N')\sqcap(L'\star M')`),
   {
     id: "neighborhood_assignment_intersection_minimal_counterexample_theorem_minimal_size",
     kind: "theorem",
-    title: { text: "非分配反例の最小舞台は二元である" },
+    title: { text: "非分配反例の最小基礎集合は二元である" },
     labels: ["theorem_minimal_carrier_size_for_composition_intersection_nondistributivity"],
     habitat: "N",
     statement: [
       paragraph([
-        "合成近傍が点ごとの積に左から分配しない反例、および右から分配しない反例の最小舞台元数は、どちらも ",
+        "合成近傍が点ごとの積に左から分配しない反例、および右から分配しない反例の最小基礎集合の元数は、どちらも ",
         math(String.raw`2\in\mathbb N`), " である。",
       ]),
     ],
     proof: [
       paragraph([
         ref("claim_subsingleton_neighborhood_composition_distributes_over_intersection"),
-        " により、舞台元数が ", math(String.raw`0`), " または ", math(String.raw`1`),
+        " により、基礎集合の元数が ", math(String.raw`0`), " または ", math(String.raw`1`),
         " ならば左右の反例は存在しない。",
       ]),
       paragraph([
         ref("claim_two_element_composition_intersection_nondistributivity"),
-        " により、舞台元数 ", math(String.raw`2`), " で左右それぞれの反例が存在する。したがって最小舞台元数はどちらも ",
+        " により、基礎集合の元数 ", math(String.raw`2`), " で左右それぞれの反例が存在する。したがって最小の元数はどちらも ",
         math(String.raw`2`), " である。",
       ]),
     ],

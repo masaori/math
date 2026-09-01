@@ -1,6 +1,6 @@
 /**
  * 章「自己転置な近傍割り当て全体の合成閉性の特徴づけ」。
- * 前章で得た非閉性の向きへ逆向きを加え、閉性を舞台の元数だけで特徴づける。
+ * 前章で得た非閉性の向きへ逆向きを加え、閉性を基礎集合の元数だけで特徴づける。
  * 有限集合と有限部分集合だけを使う。R / C は現れない。
  */
 
@@ -28,7 +28,7 @@ N^{\mathsf T}=N\ \land\ M^{\mathsf T}=M
   {
     id: "self_transpose_composition_total_closure_characterization_claim",
     kind: "claim",
-    title: { text: "全ての自己転置な割り当てが合成で閉じる舞台の特徴づけ" },
+    title: { text: "全ての自己転置な割り当てが合成で閉じる基礎集合の特徴づけ" },
     labels: ["claim_all_self_transpose_assignments_composition_closed_iff_subsingleton"],
     habitat: "finite",
     statement: [

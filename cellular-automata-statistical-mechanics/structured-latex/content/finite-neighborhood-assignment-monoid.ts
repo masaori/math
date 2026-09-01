@@ -1,6 +1,6 @@
 /**
  * 章「有限近傍割り当ての合成モノイド」。
- * 有限舞台上の近傍割り当て全体が、合成近傍と自己近傍について有限モノイドをなし、
+ * 有限集合上の近傍割り当て全体が、合成近傍と自己近傍について有限モノイドをなし、
  * 一般には可換でないことを示す。有限集合、写像、自然数だけを使う。R / C は現れない。
  */
 
@@ -10,7 +10,7 @@ export default defineBlocks([
   {
     id: "finite_neighborhood_assignment_monoid_definition_assignment_space",
     kind: "definition",
-    title: { text: "有限舞台上の近傍割り当て全体" },
+    title: { text: "有限集合上の近傍割り当て全体" },
     labels: ["def_finite_neighborhood_assignment_space"],
     habitat: "finite",
     statement: [
@@ -21,7 +21,7 @@ export default defineBlocks([
       paragraph([
         "と定める。", math(String.raw`V`), " が有限なので、各 ", math(String.raw`N(v)`),
         " は有限集合であり、", math(String.raw`N\in\mathcal N(V)`), " は ",
-        ref("def_finite_stage"), " の近傍割り当てである。",
+        ref("def_finite_neighborhood_system"), " を定める。",
       ]),
     ],
   },
@@ -165,7 +165,7 @@ w\in((N\star M)\star L)(v)
   {
     id: "finite_neighborhood_assignment_monoid_definition_noncommutative_witness",
     kind: "definition",
-    title: { text: "合成近傍の非可換性を示す有限舞台" },
+    title: { text: "合成近傍の非可換性を示す有限集合上の証人" },
     labels: ["def_noncommutative_neighborhood_assignment_witness"],
     habitat: "finite",
     statement: [
@@ -190,7 +190,7 @@ w\in((N\star M)\star L)(v)
     habitat: "finite",
     statement: [
       paragraph([
-        ref("def_noncommutative_neighborhood_assignment_witness"), " の有限舞台で ",
+        ref("def_noncommutative_neighborhood_assignment_witness"), " の有限集合上の証人で ",
         math(String.raw`N\star M\neq M\star N`), " である。したがって有限モノイド ",
         math(String.raw`(\mathcal N(V),\star,I_V)`), " は一般には可換でない。",
       ]),

@@ -175,7 +175,7 @@ N^{\leq k+m+1}
   {
     id: "neighborhood_assignment_reachability_closure_claim_stabilizes",
     kind: "claim",
-    title: { text: "有限近似は舞台元数の二乗までに安定する" },
+    title: { text: "有限近似は基礎集合の元数の二乗までに安定する" },
     labels: ["claim_reachability_approximation_stabilizes"],
     habitat: "N",
     statement: [

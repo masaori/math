@@ -142,7 +142,7 @@ w\in L(v)
   {
     id: "neighborhood_assignment_intersection_nondistributivity_definition_left_witness",
     kind: "definition",
-    title: { text: "合成が左側の点ごとの積を保存しない舞台" },
+    title: { text: "合成が左側の点ごとの積を保存しない有限集合上の証人" },
     labels: ["def_composition_left_intersection_nondistributivity_witness"],
     habitat: "finite",
     statement: [
@@ -158,7 +158,7 @@ w\in L(v)
     labels: ["claim_composition_not_left_distributive_over_pointwise_intersection"],
     habitat: "finite",
     statement: [
-      paragraph([ref("def_composition_left_intersection_nondistributivity_witness"), " の舞台で"]),
+      paragraph([ref("def_composition_left_intersection_nondistributivity_witness"), " の証人で"]),
       displayMath(String.raw`(N\sqcap M)\star L\neq(N\star L)\sqcap(M\star L)`),
       paragraph(["である。"]),
     ],
@@ -183,7 +183,7 @@ w\in L(v)
   {
     id: "neighborhood_assignment_intersection_nondistributivity_definition_right_witness",
     kind: "definition",
-    title: { text: "合成が右側の点ごとの積を保存しない舞台" },
+    title: { text: "合成が右側の点ごとの積を保存しない有限集合上の証人" },
     labels: ["def_composition_right_intersection_nondistributivity_witness"],
     habitat: "finite",
     statement: [
@@ -199,7 +199,7 @@ w\in L(v)
     labels: ["claim_composition_not_right_distributive_over_pointwise_intersection"],
     habitat: "finite",
     statement: [
-      paragraph([ref("def_composition_right_intersection_nondistributivity_witness"), " の舞台で"]),
+      paragraph([ref("def_composition_right_intersection_nondistributivity_witness"), " の証人で"]),
       displayMath(String.raw`L'\star(N'\sqcap M')\neq(L'\star N')\sqcap(L'\star M')`),
       paragraph(["である。したがって、合成近傍は点ごとの和には両側から分配するが、点ごとの積にはどちら側からも一般には分配しない。"]),
     ],

@@ -228,7 +228,7 @@ t_n&=t_{n-1}+1\qquad(\because\ \blkref{def_one_step_dependency}\ \text{の条件
         "、",
         math(String.raw`N(v)`),
         " の有限性は ",
-        ref("def_finite_stage"),
+        ref("def_finite_neighborhood_system"),
         "）。個数の等式 ",
         math(String.raw`|B_1(v)|=|\operatorname{supp}(f_v)|`),
         " は定義の等号による。",

@@ -510,7 +510,7 @@ export default defineBlocks([
         " と置くと ",
         math(String.raw`(V,N)`),
         " は有限舞台である（",
-        ref("def_finite_stage"),
+        ref("def_finite_neighborhood_system"),
         "）。",
         math(String.raw`f_v:A^{N(v)}\to A`),
         " を、すべての ",

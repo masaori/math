@@ -6,7 +6,7 @@
 合成冪等性と写像冪等性の同値、有限表現と決定可能性を示す。
 
 必要な構造の検査結果:
-  - **合成・恒等作用・復元・単射性・冪等性の同値のいずれにも、舞台の有限性も等号判定も
+  - **合成・恒等作用・復元・単射性・冪等性の同値のいずれにも、基礎集合の有限性も等号判定も
     要らない。** 部分集合を `Set` で表せば、これらは型にインスタンスを一つも要求せずに
     成り立つ。使うのは合併の所属条件（証人の存在）と集合・写像の外延性だけである。
   - **合成の始域と終域が同じ型である必要もない。** 合併写像を型をまたぐ
@@ -161,11 +161,11 @@ theorem hetComp_idempotent_iff_hetUnionMap_idempotent {V : Type} [DecidableEq V]
 
 /-! ### 元数と決定可能性（有限性が要る段） -/
 
-/-- `def_finite_stage_subset_space` の元数。舞台の有限性と等号判定が要る。 -/
+/-- `def_finite_carrier_subset_space` の元数。基礎集合の有限性と等号判定が要る。 -/
 theorem card_finset {V : Type} [Fintype V] [DecidableEq V] :
     Fintype.card (Finset V) = 2 ^ Fintype.card V := Fintype.card_finset
 
-/-- 有限表現版の全表。舞台の有限性が要る。 -/
+/-- 有限表現版の全表。基礎集合の有限性が要る。 -/
 def hetUnionMapTable {V W : Type} [Fintype V] [DecidableEq V] [DecidableEq W]
     (N : V → Finset W) : Finset (Finset V × Finset W) :=
   Finset.univ.image (fun S => (S, hetUnionMap N S))
@@ -175,7 +175,7 @@ theorem mem_hetUnionMapTable {V W : Type} [Fintype V] [DecidableEq V] [Decidable
     (S, hetUnionMap N S) ∈ hetUnionMapTable N := by
   simp [hetUnionMapTable]
 
-/-- 写像冪等性の決定可能性。入力の全列挙に舞台の有限性が要る。 -/
+/-- 写像冪等性の決定可能性。入力の全列挙に基礎集合の有限性が要る。 -/
 instance instDecidableHetUnionMapIdempotent {V : Type} [Fintype V] [DecidableEq V]
     (N : V → Finset V) :
     Decidable (hetUnionMap N ∘ hetUnionMap N = hetUnionMap N) :=

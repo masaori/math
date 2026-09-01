@@ -4,7 +4,7 @@
 
 人手証明のブロックとこのファイルの対応:
 
-  有限舞台 (V, N)（`def_finite_stage`）          `V` は `Fintype`・`DecidableEq` を持つ型、
+  有限近傍系 (V, N)（`def_finite_neighborhood_system`）        `V` は `Fintype`・`DecidableEq` を持つ型、
                                                 `N : V → Finset V`（順序のない有限集合。番号付けを仮定しない）
   有限舞台上の 2 値 CA（`def_finite_ca`）        `f : (v : V) → (↥(N v) → State) → State`（局所真理値表の族）
   大域写像 F（`def_global_map`）                 `globalMap`（(F y)(v) := f_v(ρ^V_{N(v)} y)）と
@@ -46,7 +46,7 @@ open CellularAutomata.EssentialDependency
 open CellularAutomata.RedundantNeighbor
 
 /-
-有限舞台 (V, N)（`def_finite_stage`）。V は有限型、N(v) ⊆ V は順序のない有限部分集合。
+有限近傍系 (V, N)（`def_finite_neighborhood_system`）。V は有限型、N(v) ⊆ V は順序のない有限部分集合。
 V の有限性から各 N(v) の有限性が従うことは、`Finset V` の型がそのまま表している。
 -/
 variable {V : Type} [Fintype V] [DecidableEq V]

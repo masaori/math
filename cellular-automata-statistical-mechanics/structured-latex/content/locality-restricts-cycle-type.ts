@@ -17,7 +17,7 @@ export default defineBlocks([
     habitat: "finite",
     statement: [
       paragraph([
-        "有限舞台 ", math(String.raw`(V,N)`), "（", ref("def_finite_stage"), "）に対し、",
+        "有限舞台 ", math(String.raw`(V,N)`), "（", ref("def_finite_neighborhood_system"), "）に対し、",
       ]),
       displayMath(String.raw`\mathcal M(V,N):=\{\,F\ :\ F\ \text{は}\ (V,N)\ \text{上のある}\ 2\ \text{値セルオートマトンの大域写像}\,\}`),
       paragraph([
@@ -166,7 +166,7 @@ f_v(z)
         " と、各 ", math(String.raw`v\in V_{\bullet}`), " に対する ",
         math(String.raw`N_{\bullet}(v):=\{v\}`),
         " の組 ", math(String.raw`(V_{\bullet},N_{\bullet})`),
-        " を考える。これは ", ref("def_finite_stage"), " の有限舞台であり、",
+        " を考える。これは ", ref("def_finite_neighborhood_system"), " の有限舞台であり、",
         math(String.raw`|V_{\bullet}|=3`), "・",
         math(String.raw`|A^{V_{\bullet}}|=2^{3}=8`), " である。",
       ]),

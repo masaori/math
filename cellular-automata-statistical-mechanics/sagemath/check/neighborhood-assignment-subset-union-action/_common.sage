@@ -6,7 +6,7 @@ from itertools import combinations, product
 
 
 def subsets(cells):
-    """def_finite_stage_subset_space の Sub(V) を全列挙する。"""
+    """def_finite_carrier_subset_space の Sub(V) を全列挙する。"""
     for size in range(len(cells) + 1):
         for combination in combinations(cells, size):
             yield frozenset(combination)

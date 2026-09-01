@@ -3,7 +3,7 @@
 人手証明の正本は
 structured-latex/content/neighborhood-assignment-subset-union-action.ts。
 
-有限舞台、有限近傍割り当て、有限部分集合だけを使う。ℝ / ℂ は現れない。
+有限基礎集合、有限近傍割り当て、有限部分集合だけを使う。ℝ / ℂ は現れない。
 -/
 import CellularAutomata.FiniteNeighborhoodAssignmentMonoid
 
@@ -14,7 +14,7 @@ open CellularAutomata.FiniteNeighborhoodAssignmentMonoid
 
 variable {V : Type} [Fintype V] [DecidableEq V]
 
-/-- `def_finite_stage_subset_space` の有限舞台の部分集合全体。 -/
+/-- `def_finite_carrier_subset_space` の有限基礎集合の部分集合全体。 -/
 abbrev SubsetSpace (V : Type) [DecidableEq V] := Finset V
 
 /-- `def_neighborhood_assignment_subset_union_map` の
@@ -75,7 +75,7 @@ theorem composedNeighborhood_idempotent_iff_subsetUnionMap_idempotent
     rw [subsetUnionMap_composedNeighborhood]
     exact h
 
-/-- `def_finite_stage_subset_space` の元数 |Sub(V)| = 2^|V|。 -/
+/-- `def_finite_carrier_subset_space` の元数 |Sub(V)| = 2^|V|。 -/
 theorem card_subsetSpace :
     Fintype.card (SubsetSpace V) = 2 ^ Fintype.card V := by
   exact Fintype.card_finset
@@ -90,7 +90,7 @@ theorem mem_subsetUnionMapTable (N : NeighborhoodAssignment V) (S : SubsetSpace 
     (S, subsetUnionMap N S) ∈ subsetUnionMapTable N := by
   simp [subsetUnionMapTable]
 
-/-- 合併写像の冪等性は有限舞台上で決定可能である。 -/
+/-- 合併写像の冪等性は有限基礎集合上で決定可能である。 -/
 instance instDecidableSubsetUnionMapIdempotent (N : NeighborhoodAssignment V) :
     Decidable (subsetUnionMap N ∘ subsetUnionMap N = subsetUnionMap N) :=
   inferInstance

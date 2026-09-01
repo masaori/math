@@ -13,6 +13,7 @@ import { documentOrganization } from "./document-organization.ts";
 
 const CA_TERMS = [
   "セルオートマトン",
+  "舞台",
   "セル",
   "局所規則",
   "局所表現",
@@ -35,7 +36,6 @@ const NEUTRAL_PHRASES = [
   "周期の伝播", // 有限自己写像の周期が反復で保たれることを指し、空間的伝播ではない
 ];
 
-
 /**
  * 識別子側の CA 由来語。block id と label は出版本文に出ないが、整理前のファイル名を
  * 引き継いでいるため「章の分類を id から読むと誤読する」状態が残っている。
@@ -57,6 +57,7 @@ const CA_IDENTIFIER_TERMS = [
   "event",
   "state_set",
   "local_",
+  "stage",
 ];
 
 /**
@@ -255,8 +256,6 @@ for (const chapter of documentOrganization) {
   }
 }
 violations.push(...organizationViolations);
-
-
 
 if (violations.length > 0) {
   console.error("章の意味境界に違反がある:");

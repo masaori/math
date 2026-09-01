@@ -187,7 +187,7 @@ export default defineBlocks([
         "で定め、近傍を ",
         math(String.raw`N(v):=\{\ell(v),v,r(v)\}`),
         " とする（",
-        ref("def_finite_stage"),
+        ref("def_finite_neighborhood_system"),
         "）。写像 ",
         math(String.raw`g:A\times A\times A\to A`),
         " を表",

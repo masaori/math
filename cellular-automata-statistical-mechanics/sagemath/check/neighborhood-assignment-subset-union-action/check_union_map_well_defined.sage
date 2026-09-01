@@ -1,5 +1,5 @@
 # 対象ラベル: def_neighborhood_assignment_subset_union_map
-# 併せて検査するラベル: def_finite_stage_subset_space
+# 併せて検査するラベル: def_finite_carrier_subset_space
 # 本文の定義そのものを段ごとに検査する。
 #   (a) Sub(V) の元数が 2^{|V|} である
 #   (b) U_N(S) は V の部分集合であり、Sub(V) の元である（U_N が Sub(V) の自己写像である）

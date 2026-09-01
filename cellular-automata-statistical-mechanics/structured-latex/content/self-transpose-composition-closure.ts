@@ -1,7 +1,7 @@
 /**
  * 章「自己転置な近傍割り当ての合成閉性」。
  * 自己転置な二つの近傍割り当ての合成が自己転置であることと可換性の同値を示し、
- * 二元舞台で合成閉性が破れる反例を与える。有限集合と有限部分集合だけを使う。R / C は現れない。
+ * 二元集合で合成閉性が破れる反例を与える。有限集合と有限部分集合だけを使う。R / C は現れない。
  */
 
 import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
@@ -40,7 +40,7 @@ N\star M=M\star N`),
   {
     id: "self_transpose_composition_closure_definition_two_element_witness",
     kind: "definition",
-    title: { text: "合成閉性を破る二元舞台" },
+    title: { text: "合成閉性を破る二元集合上の証人" },
     labels: ["def_self_transpose_composition_nonclosure_witness"],
     habitat: "finite",
     statement: [
@@ -155,7 +155,7 @@ w\in M(v)&\Longleftrightarrow \{v,w\}=\{a,b\}
     habitat: "N",
     statement: [
       paragraph([
-        "有限舞台 ", math(String.raw`V`), " では、自己転置な近傍割り当ての各順序対について、",
+        "有限集合 ", math(String.raw`V`), " では、自己転置な近傍割り当ての各順序対について、",
         "合成が自己転置か否かを有限決定できる。",
       ]),
     ],

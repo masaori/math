@@ -202,7 +202,7 @@ w\in\rho_V(\varepsilon_V(N))(v)
     labels: ["claim_self_transpose_neighborhood_assignments_finitely_decidable"],
     habitat: "N",
     statement: [
-      paragraph(["自己転置な近傍割り当て全体とその個数は、有限舞台 ", math(String.raw`V`), " から有限決定できる。"]),
+      paragraph(["自己転置な近傍割り当て全体とその個数は、有限集合 ", math(String.raw`V`), " から有限決定できる。"]),
     ],
     proof: [
       paragraph([

@@ -18,7 +18,7 @@ export default defineBlocks([
       paragraph([
         "有限集合 ", math(String.raw`V`), " について、写像 ",
         math(String.raw`\Phi:\operatorname{Sub}(V)\to\operatorname{Sub}(V)`),
-        "（", ref("def_finite_stage_subset_space"), " の部分集合全体の上の写像）が",
+        "（", ref("def_finite_carrier_subset_space"), " の部分集合全体の上の写像）が",
         "次の二条件をともに満たすとき、", math(String.raw`\Phi`), " は",
         "合併保存であるという。",
       ]),
@@ -332,7 +332,7 @@ w\in U_N(S\cup T)
     ],
     proof: [
       paragraph([
-        ref("def_finite_stage_subset_space"), " より ",
+        ref("def_finite_carrier_subset_space"), " より ",
         math(String.raw`\operatorname{Sub}(V)`), " の元数は ",
         math(String.raw`2^{|V|}\in\mathbb N`), " である。",
       ]),
