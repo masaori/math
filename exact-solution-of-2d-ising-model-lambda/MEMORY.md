@@ -10,6 +10,8 @@ Lambda 側 check（835 ブロック）・linkage（374 検算）・Lean 9,616 �
 
 前進前レビューでは、前 tick の対角接触排除の仮定緩和を本文・呼び出し側（回転数定理）・SageMath（PASS）で照合した。仮定の連鎖に飛びはなく、「何も言っていない主張」も無かった。
 
+並列の式変形統一は、姉妹側の「$\gamma(\theta)$ と $\kappa$ の恒等式」（`gamma_kappa_identity`）の Step 1・Step 2 の二本の鎖で、行中の根拠 7 行を行末の根拠列（`aligned` の `&&`）へ揃えた。内容・式変形・根拠・ラベル参照は不変で、姉妹側 check・PDF 353 ページを通した。
+
 ## ひとつ前の到達点（2026-09-01 の 69 回目の tick 時点）
 
 **境界頂点の対角接触排除の仮定を、$n_{\mathrm{ct}}=0$ から持ち上げ一周期点の相異性へ緩和した（Lean 未着手）。** `claim_boundary_vertex_diagonal_contact_excluded` の主張・題名・証明冒頭を実際に使う仮定へ揃えた。後続の平面閉多角形の回転数定理は、既に $n_{\mathrm{ct}}=0$ から `claim_vertex_simple_plane_lift_points_distinct` で相異性を導いており、呼び出しの論理は不変である。SageMath `no-diagonal-only-contact` は持ち上げ点相異の閉歩道 704 本・格子点 20,096 個を検査し、$L=1,2,3$ への射影後に $n_{\mathrm{ct}}>0$ となる歩も 704・696・592 本確認した。次は平面閉多角形の回転数定理の仮定を同じ形へ緩和する。
