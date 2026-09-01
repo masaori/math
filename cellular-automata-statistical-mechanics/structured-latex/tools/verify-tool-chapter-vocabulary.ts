@@ -124,7 +124,8 @@ const PHYSICS_COMPARISON_BLOCK_IDS = [
 ];
 
 /**
- * CA 章で既存物理由来語を識別子へ持ってよいブロックの族（id の接頭辞）の宣言。
+ * CA 章で既存物理由来語を識別子へ持ってよいブロックの族（id の接頭辞）と、
+ * その族が実際に必要とする語の宣言。
  *
  * 既存物理由来語は本文の軸と識別子の軸の二本で対称に止める設計だが、識別子の軸は
  * 数学的道具立て章にしか掛かっておらず、CA 章の識別子は無制約だった。本文の軸は
@@ -133,12 +134,14 @@ const PHYSICS_COMPARISON_BLOCK_IDS = [
  *
  * 族で宣言するのは、照合の所有者が `causal_structure_comparison_` と
  * `causal_set_primary_literature_` の二つの原本ファイルに対応しており、そこに属するブロックの
- * id とラベルが `causal` を持つためである。宣言は fail-closed に扱う（下の検査を参照）。
+ * id とラベルが `causal` を持つためである。接頭辞だけを許可すると、同じ識別子へ `quantum` や
+ * `hilbert` を足しても通るので、許す語も `causal` に限定する。宣言は fail-closed に扱う
+ * （下の検査を参照）。
  */
-const PHYSICS_COMPARISON_IDENTIFIER_PREFIXES = [
-  "causal_structure_comparison_",
-  "causal_set_primary_literature_",
-];
+const PHYSICS_COMPARISON_IDENTIFIER_FAMILIES = new Map<string, readonly string[]>([
+  ["causal_structure_comparison_", ["causal"]],
+  ["causal_set_primary_literature_", ["causal"]],
+]);
 
 const TOOL_CHAPTER_PREFIX = "organization/mathematical_tools/";
 const CA_CHAPTER_PREFIX = "organization/binary_cellular_automaton_semantics/";
@@ -294,7 +297,7 @@ for (const blockId of PHYSICS_COMPARISON_BLOCK_IDS) {
 /** 識別子側の検査。本文の語彙とは独立に、機械識別子へ CA 語が新たに入るのを止める。 */
 const identifierViolations: string[] = [];
 const comparisonPrefixOwners = new Map<string, string[]>(
-  PHYSICS_COMPARISON_IDENTIFIER_PREFIXES.map((prefix) => [prefix, []]),
+  [...PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.keys()].map((prefix) => [prefix, []]),
 );
 for (const file of files) {
   const inTools = file.file.startsWith(TOOL_CHAPTER_PREFIX);
@@ -309,7 +312,7 @@ for (const file of files) {
     // CA 由来語は CA 章の識別子では当然のものなので、数学的道具立て章にだけ掛ける。
     // 既存物理由来語は両章で止め、CA 章では照合として宣言した族だけを許す。
     const comparisonPrefix = inCa
-      ? PHYSICS_COMPARISON_IDENTIFIER_PREFIXES.find((prefix) => block.id.startsWith(prefix))
+      ? [...PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.keys()].find((prefix) => block.id.startsWith(prefix))
       : undefined;
     if (comparisonPrefix !== undefined) comparisonPrefixOwners.get(comparisonPrefix)?.push(block.id);
     for (const identifier of identifiers) {
@@ -338,6 +341,14 @@ for (const file of files) {
         );
         continue;
       }
+      const allowedPhysicsTerms = PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.get(comparisonPrefix) ?? [];
+      const unexpectedPhysicsHits = physicsHits.filter((term) => !allowedPhysicsTerms.includes(term));
+      if (unexpectedPhysicsHits.length > 0) {
+        identifierViolations.push(
+          `照合として宣言した族の識別子に未許可の既存物理由来語がある: ${identifier.key}` +
+            `（所有ブロック ${block.id}、${unexpectedPhysicsHits.join("、")}）`,
+        );
+      }
       const section = caSectionOfBlock.get(block.id);
       if (section === undefined || !caComparisonSections.has(section)) {
         identifierViolations.push(
@@ -354,16 +365,17 @@ for (const [prefix, owners] of comparisonPrefixOwners) {
     identifierViolations.push(`照合として宣言した識別子の族に属するブロックが CA 章に無い: ${prefix}`);
     continue;
   }
-  const carriesPhysics = owners.some((blockId) => {
+  const allowedPhysicsTerms = PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.get(prefix) ?? [];
+  const carriesDeclaredPhysics = owners.some((blockId) => {
     const block = files.flatMap((file) => file.blocks).find((candidate) => candidate.id === blockId);
     if (block === undefined || block.kind === "heading") return false;
     return [blockId, ...block.labels].some((value) =>
-      PHYSICS_IDENTIFIER_TERMS.some((term) => value.includes(term)),
+      allowedPhysicsTerms.some((term) => value.includes(term)),
     );
   });
-  if (!carriesPhysics) {
+  if (!carriesDeclaredPhysics) {
     identifierViolations.push(
-      `照合として宣言した識別子の族に既存物理由来語が一つも無い: ${prefix}`,
+      `照合として宣言した識別子の族に許可した既存物理由来語が一つも無い: ${prefix}`,
     );
   }
 }
@@ -455,13 +467,14 @@ for (const chapter of documentOrganization) {
       }
     }
     if (inCa) {
-      // 節の識別子にも本文と同じ境界を課す。照合を持たない節の id が既存物理を名乗るのを止める。
+      // 現在の照合節の id は CA 内在的な依存順序を表し、既存物理由来語を必要としない。
+      // 照合節であることだけを理由に任意の物理語を許すと、quantum 等への先取りを止められない。
       const sectionPhysicsIdentifierHits = PHYSICS_IDENTIFIER_TERMS.filter((term) =>
         String(section.id).includes(term),
       );
-      if (sectionPhysicsIdentifierHits.length > 0 && !caComparisonSections.has(String(section.id))) {
+      if (sectionPhysicsIdentifierHits.length > 0) {
         organizationViolations.push(
-          `照合を持たない CA 章の節の識別子に既存物理由来語がある: section:${section.id}` +
+          `CA 章の節の識別子に既存物理由来語がある: section:${section.id}` +
             `（${sectionPhysicsIdentifierHits.join("、")}）`,
         );
       }
@@ -496,7 +509,7 @@ console.log(
     `CA 章 ${caBlockIds.size} 件・未分類 ${unclassifiedBlockIds.size} 件、` +
     "数学的道具立て章に残る CA 由来識別子 0 件、既存物理由来識別子 0 件、本文の既存物理由来語 0 件、" +
     `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件・` +
-    `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_PREFIXES.length} 件、` +
+    `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.size} 件、` +
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
