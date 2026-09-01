@@ -1223,20 +1223,28 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
       displayMath(
         String.raw`\begin{aligned}
 W E_{KL}
-&= \left(\sum_{I,J} w_{IJ}E_{IJ}\right)E_{KL} \quad (\because W \text{ の基底 } \mathcal{E} \text{ による展開}) \\
-&= \sum_{I,J} w_{IJ}(E_{IJ}E_{KL}) \quad (\because \text{積の双線型性}) \\
-&= \sum_{I,J} w_{IJ}\delta_{JK}E_{IL} \quad (\because \text{Step 2 の積公式}) \\
-&= \sum_{I\in\{1,2\}^M} w_{IK}E_{IL} \quad (\because \delta_{JK} \text{ は } J=K \text{ でのみ非零})
+&= \left(\sum_{I,J} w_{IJ}E_{IJ}\right)E_{KL}
+&&(\because W \text{ の基底 } \mathcal{E} \text{ による展開}) \\
+&= \sum_{I,J} w_{IJ}(E_{IJ}E_{KL})
+&&(\because \text{積の双線型性}) \\
+&= \sum_{I,J} w_{IJ}\delta_{JK}E_{IL}
+&&(\because \text{Step 2 の積公式}) \\
+&= \sum_{I\in\{1,2\}^M} w_{IK}E_{IL}
+&&(\because \delta_{JK} \text{ は } J=K \text{ でのみ非零})
 \end{aligned}`,
       ),
       paragraph(["右辺は"]),
       displayMath(
         String.raw`\begin{aligned}
 E_{KL} W
-&= E_{KL}\left(\sum_{I,J} w_{IJ}E_{IJ}\right) \quad (\because W \text{ の基底 } \mathcal{E} \text{ による展開}) \\
-&= \sum_{I,J} w_{IJ}(E_{KL}E_{IJ}) \quad (\because \text{積の双線型性}) \\
-&= \sum_{I,J} w_{IJ}\delta_{LI}E_{KJ} \quad (\because \text{Step 2 の積公式}) \\
-&= \sum_{J\in\{1,2\}^M} w_{LJ}E_{KJ} \quad (\because \delta_{LI} \text{ は } I=L \text{ でのみ非零})
+&= E_{KL}\left(\sum_{I,J} w_{IJ}E_{IJ}\right)
+&&(\because W \text{ の基底 } \mathcal{E} \text{ による展開}) \\
+&= \sum_{I,J} w_{IJ}(E_{KL}E_{IJ})
+&&(\because \text{積の双線型性}) \\
+&= \sum_{I,J} w_{IJ}\delta_{LI}E_{KJ}
+&&(\because \text{Step 2 の積公式}) \\
+&= \sum_{J\in\{1,2\}^M} w_{LJ}E_{KJ}
+&&(\because \delta_{LI} \text{ は } I=L \text{ でのみ非零})
 \end{aligned}`,
       ),
       paragraph([
@@ -1301,11 +1309,16 @@ E_{KL} W
       displayMath(
         String.raw`\begin{aligned}
 W
-&= \sum_{I,J\in\{1,2\}^M} w_{IJ}E_{IJ} \quad (\because \text{Step 3 の } W \text{ の基底 } \mathcal{E} \text{ による展開}) \\
-&= \sum_{P\in\{1,2\}^M} w_{PP}E_{PP} \quad (\because \text{Step 3: 非対角係数は } 0) \\
-&= \sum_{P\in\{1,2\}^M} c\,E_{PP} \quad (\because \text{Step 3: 対角係数は共通の } c) \\
-&= c\sum_{P\in\{1,2\}^M} E_{PP} \quad (\because \text{和のスカラー倍}) \\
-&= c\cdot I_{\mathrm{Mat}(2^M,\mathbb{C})} \quad (\because I_{\mathrm{Mat}(2^M,\mathbb{C})}=\sum_{P\in\{1,2\}^M} E_{PP})
+&= \sum_{I,J\in\{1,2\}^M} w_{IJ}E_{IJ}
+&&(\because \text{Step 3 の } W \text{ の基底 } \mathcal{E} \text{ による展開}) \\
+&= \sum_{P\in\{1,2\}^M} w_{PP}E_{PP}
+&&(\because \text{Step 3: 非対角係数は } 0) \\
+&= \sum_{P\in\{1,2\}^M} c\,E_{PP}
+&&(\because \text{Step 3: 対角係数は共通の } c) \\
+&= c\sum_{P\in\{1,2\}^M} E_{PP}
+&&(\because \text{和のスカラー倍}) \\
+&= c\cdot I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&&(\because I_{\mathrm{Mat}(2^M,\mathbb{C})}=\sum_{P\in\{1,2\}^M} E_{PP})
 \end{aligned}`,
       ),
     ],
@@ -1319,6 +1332,9 @@ W
         "2026-08-17: 式変形の書き方の統一。Step 3 の二本の鎖の第 1 段（W E_{KL}・E_{KL} W を展開で書く行）と" +
           "Step 4 の鎖の第 1 段（W の展開）に根拠が無かったので、行末に (∵ W の基底 𝓔 による展開) を置いた。" +
           "段は増減せず、主張も証明の筋も変えていない。",
+        "2026-09-01 の式変形統一で、Step 3 の二本の鎖と Step 4 の鎖に行中の \\quad(\\because …) で" +
+          "置かれていた根拠 13 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。" +
+          "内容・式変形・根拠・参照は変えていない。",
       ],
     },
   },
