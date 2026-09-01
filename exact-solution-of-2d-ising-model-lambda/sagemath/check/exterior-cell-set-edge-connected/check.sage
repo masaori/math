@@ -1,6 +1,6 @@
 # 対象ラベル: claim_exterior_cell_set_edge_connected
 #
-# 頂点単純な閉じた非後退単位格子歩について、外接長方形内の各外側セルが
+# 一周期の持ち上げ点が二つずつ相異なる零巻き付きの閉じた非後退辺列について、外接長方形内の各外側セルが
 # 行方向に外側セルだけを通って歩道沿いの外側帯または長方形の外側へ届くこと、
 # および有限な検査窓内の外側セルが一つの辺連結成分になることを ZZ で検査する。
 
@@ -12,6 +12,8 @@ checked_walks = 0
 checked_exterior_cells = 0
 checked_reaches_band = 0
 checked_reaches_outside = 0
+torus_sizes = (ZZ(1), ZZ(2), ZZ(3))
+contact_walks = {size: 0 for size in torus_sizes}
 
 
 def add(point, step):
@@ -136,8 +138,24 @@ for length in range(4, max_length + 1):
 
         checked_walks += 1
 
+        for size in torus_sizes:
+            torus_vertices = [(point[0] % size, point[1] % size) for point in points[:-1]]
+            contact_pairs = ZZ(sum(
+                1
+                for first in range(len(torus_vertices))
+                for second in range(first + 1, len(torus_vertices))
+                if torus_vertices[first] == torus_vertices[second]
+            ))
+            if contact_pairs > 0:
+                contact_walks[size] += 1
+
+for size in torus_sizes:
+    assert contact_walks[size] > 0
+
 print(
-    f"PASS: vertex-simple closed nonbacktracking walks={checked_walks}, "
+    f"PASS: lift-point-distinct closed nonbacktracking walks={checked_walks}, "
     f"exterior cells={checked_exterior_cells}, reaches band={checked_reaches_band}, "
-    f"reaches outside={checked_reaches_outside}, length<=%d" % max_length
+    f"reaches outside={checked_reaches_outside}, length<=%d, " % max_length
+    + "walks with n_ct>0 after projection: "
+    + ", ".join("L=%s: %s" % (size, contact_walks[size]) for size in torus_sizes)
 )

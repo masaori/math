@@ -57140,7 +57140,7 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
             focus: {
               id: "kac_ward_claim_walk_side_exterior_band_edge_connected",
               kind: "claim",
-              title: { text: "頂点単純閉路の歩道沿いの外側帯は空でなく辺連結である" },
+              title: { text: "持ち上げ点が相異なる閉路の歩道沿いの外側帯は空でなく辺連結である" },
               labels: ["claim_walk_side_exterior_band_edge_connected"],
               habitat: "Z",
               verification: ["sagemath/check/walk-side-exterior-band-connected"],
@@ -57148,9 +57148,9 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
                 paragraph([
                   "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
                   math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
-                  " で、通過の頂点が相異なる、すなわち ",
-                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
-                  "）である任意の閉じた非後退辺列 ",
+                  " で、一周期の持ち上げ点 ",
+                  math(String.raw`P_0(\gamma),\ldots,P_{m-1}(\gamma)`), "（", ref("def_plane_lift"),
+                  "）が二つずつ相異なる任意の閉じた非後退辺列 ",
                   math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "（",
                   ref("def_closed_nonbacktracking_walk"), "）について、歩道沿いの外側帯 ",
                   math(String.raw`\mathcal O(\gamma)`), "（", ref("def_walk_side_exterior_band"),
@@ -57193,9 +57193,7 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                 ]),
                 paragraph([
                   "次に、各 ", math(String.raw`A'_j`), " が空でなく、その任意の二元が ",
-                  math(String.raw`A'_j`), " 内の辺隣接の列で結ばれることを見る。仮定の ",
-                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), " により一周期の持ち上げ点は二つずつ相異なる（",
-                  ref("claim_vertex_simple_plane_lift_points_distinct"), "）ので、零巻き付きと合わせて ",
+                  math(String.raw`A'_j`), " 内の辺隣接の列で結ばれることを見る。持ち上げ点の相異性と零巻き付きから ",
                   ref("claim_vertex_surrounding_cells_form_parity_arcs"),
                   " が適用でき、外側セルは空でなく巡回順の一つの連続した弧をなす。すなわち、ある ",
                   math(String.raw`s\in\{0,1,2,3\}`), " と ", math(String.raw`q\in\{1,2,3\}`),
@@ -57220,15 +57218,15 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                   " と置く。変位が方向単位ベクトルなので、これは平面の隣り合う二格子点を結ぶ単位辺である（",
                   ref("def_plane_lift"), "、", ref("claim_displacement_is_direction_unit"),
                   "）。頂点 ", math(String.raw`Q:=P_j(\gamma)`),
-                  " は一周期にちょうど一度現れる（", ref("claim_vertex_simple_plane_lift_points_distinct"),
-                  "）ので、", math(String.raw`Q=(a_j,b_j)`), " に接する四辺の通過回数について",
+                  " は一周期にちょうど一度現れる（仮定）ので、", math(String.raw`Q=(a_j,b_j)`),
+                  " に接する四辺の通過回数について",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gamma)
 &=2\cdot\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=Q\right\}\right|
 &&\bigl(\because\ \blkref{claim_vertex_incident_edge_traversal_even}\bigr)\\
 &=2\cdot1
-&&\bigl(\because\ \blkref{claim_vertex_simple_plane_lift_points_distinct}\text{ による一意性}\bigr)\\
+&&\bigl(\because\ \text{仮定の持ち上げ点の相異性}\bigr)\\
 &=2
 &&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
 \end{aligned}`),
@@ -57301,7 +57299,7 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
             focus: {
               id: "kac_ward_claim_exterior_cell_set_edge_connected",
               kind: "claim",
-              title: { text: "頂点単純閉路の内側セル集合の補集合は辺連結である" },
+              title: { text: "持ち上げ点が相異なる閉路の内側セル集合の補集合は辺連結である" },
               labels: ["claim_exterior_cell_set_edge_connected"],
               habitat: "Z",
               verification: ["sagemath/check/exterior-cell-set-edge-connected"],
@@ -57309,9 +57307,9 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                 paragraph([
                   "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
                   math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
-                  " で、通過の頂点が相異なる、すなわち ",
-                  math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), "（", ref("def_contact_pair_count"),
-                  "）である任意の閉じた非後退辺列 ", math(String.raw`\gamma`), "（",
+                  " で、一周期の持ち上げ点 ",
+                  math(String.raw`P_0(\gamma),\ldots,P_{m-1}(\gamma)`), "（", ref("def_plane_lift"),
+                  "）が二つずつ相異なる任意の閉じた非後退辺列 ", math(String.raw`\gamma`), "（",
                   ref("def_closed_nonbacktracking_walk"), "）について、内側セル集合の補集合 ",
                   math(String.raw`(\mathbb Z\times\mathbb Z)\setminus\mathcal F_{\rightarrow}(\gamma)`),
                   "（", ref("def_odd_ray_interior_cells"), "）は空でなく、辺連結（",
