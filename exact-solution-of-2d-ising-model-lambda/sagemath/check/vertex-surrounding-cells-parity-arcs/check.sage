@@ -1,8 +1,11 @@
 # 対象ラベル: claim_vertex_surrounding_cells_form_parity_arcs
 #
-# 頂点単純な閉じた非後退単位格子歩の各訪問頂点について、接する四セルの
-# 右半直線交差奇偶が巡回順にちょうど二回変わり、内側と外側がそれぞれ
-# 一つの非空な弧をなすことを ZZ の有限数え上げで検査する。
+# 一周期の持ち上げ点が二つずつ相異なる零巻き付きの閉じた非後退辺列について、
+# 各持ち上げ点に接する四セルの右半直線交差奇偶が巡回順にちょうど二回変わり、
+# 内側と外側がそれぞれ一つの非空な弧をなすことを ZZ の有限数え上げで検査する。
+# 検査対象の平面歩は持ち上げ点の列そのものであり、主張に現れる量は全て持ち上げ
+# 点の列だけから定まる。さらに、L=1,2,3 のトーラスへ射影すると接触対数
+# n_ct > 0 となる歩（旧仮定 n_ct = 0 では扱えなかった対象）が実在することを数えて確認する。
 
 from itertools import product
 
@@ -10,6 +13,8 @@ steps = ((ZZ(1), ZZ(0)), (ZZ(-1), ZZ(0)), (ZZ(0), ZZ(1)), (ZZ(0), ZZ(-1)))
 max_length = 10
 checked_walks = 0
 checked_vertices = 0
+torus_sizes = (ZZ(1), ZZ(2), ZZ(3))
+contact_walks = {size: 0 for size in torus_sizes}
 
 
 def add(point, step):
@@ -87,7 +92,25 @@ for length in range(4, max_length + 1):
 
         checked_walks += 1
 
+        for size in torus_sizes:
+            torus_vertices = [(point[0] % size, point[1] % size) for point in points[:-1]]
+            contact_pairs = ZZ(sum(
+                1
+                for first in range(len(torus_vertices))
+                for second in range(first + 1, len(torus_vertices))
+                if torus_vertices[first] == torus_vertices[second]
+            ))
+            if contact_pairs > 0:
+                contact_walks[size] += 1
+
+for size in torus_sizes:
+    assert contact_walks[size] > 0, (
+        "expected walks with torus contact pairs (n_ct > 0) for L=%s" % size
+    )
+
 print(
-    f"PASS: vertex-simple closed nonbacktracking walks={checked_walks}, "
-    f"visited vertices={checked_vertices}, length<=%d" % max_length
+    f"PASS: lift-point-distinct closed nonbacktracking walks={checked_walks}, "
+    f"visited vertices={checked_vertices}, length<=%d, " % max_length
+    + "walks with n_ct>0 after projection: "
+    + ", ".join("L=%s: %s" % (size, contact_walks[size]) for size in torus_sizes)
 )
