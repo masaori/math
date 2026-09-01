@@ -1112,10 +1112,70 @@
         "V^{(+)} とその逆行列の正定値性・可逆性",
         "両行列のトレースが正の実数であること"
       ],
+      "boundaryCandidates": [
+        {
+          "claim": "V^{(+)} の正定値性",
+          "leanTheorems": [
+            "VPlus_posDef"
+          ],
+          "sageMathCoverage": "check_05 の固有値最小値による正定値性検査"
+        },
+        {
+          "claim": "V^{(+)} の可逆性（左右逆と逆行列の明示式）",
+          "leanTheorems": [
+            "VPlus_mul_VPlusInv",
+            "VPlusInv_mul_VPlus"
+          ],
+          "sageMathCoverage": "check_05 は V^{(+)} と候補逆行列を構成するが、左右逆を独立項としては検査していない"
+        },
+        {
+          "claim": "(V^{(+)})^{-1} の正定値性",
+          "leanTheorems": [
+            "VPlusInv_posDef"
+          ],
+          "sageMathCoverage": "check_05 は候補逆行列のエルミート性とトレース正値性だけを確認し、全固有値の正値性を独立には検査していない"
+        },
+        {
+          "claim": "tr(V^{(+)}) の正値性",
+          "leanTheorems": [
+            "trace_VPlus_pos"
+          ],
+          "sageMathCoverage": "check_05 のトレース最小値による正値性検査"
+        },
+        {
+          "claim": "tr((V^{(+)})^{-1}) の正値性",
+          "leanTheorems": [
+            "trace_VPlusInv_pos"
+          ],
+          "sageMathCoverage": "check_05 の候補逆行列のトレース最小値による正値性検査"
+        }
+      ],
+      "nextTickUnit": [
+        {
+          "claim": "V^{(+)} の正定値性",
+          "leanTheorems": [
+            "VPlus_posDef"
+          ],
+          "sageMathCoverage": "check_05 の固有値最小値による正定値性検査"
+        },
+        {
+          "claim": "V^{(+)} の可逆性（左右逆と逆行列の明示式）",
+          "leanTheorems": [
+            "VPlus_mul_VPlusInv",
+            "VPlusInv_mul_VPlus"
+          ],
+          "sageMathCoverage": "check_05 は V^{(+)} と候補逆行列を構成するが、左右逆を独立項としては検査していない"
+        }
+      ],
+      "formalizationEvidence": {
+        "leanFile": "lean/Ising2D/Part017/Claim008_VPlusPositiveDefinite.lean",
+        "sageMathFile": "sagemath/check/050_claim_even_sector_eigenvalues/check_05_positive_definite_and_c.sage",
+        "currentStatus": "本文は五候補を一ブロックへ束ね、Lean は候補ごとの定理へ分離済みである。SageMath は定数 c の決定と同じ check_05 へ束ね、左右逆と候補逆行列の全固有値正値性を独立には検査していない。"
+      },
       "mainTheorem": "偶セクター転送行列とその逆行列の正定値性",
       "mainTheoremEntryId": "evenEigen_008_claim_V_plus_is_positive_definite",
-      "boundaryEvidence": "現行の未分割グラフでは、章内依存順58が順56の V^{(+)} の定義と順45の生成子の実対称性を受け、V^{(+)} とその逆行列の正定値性および二つのトレース正値性を出力する。直後の順59は同じ V^{(+)} と半指数行列を再利用するが、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示し、順58とは相互に依存しない。順59は転送行列記号を引き続き入力とし、順60の共役写像 T_g の線型性へ直接入力を渡す一方、順60は順58に依存しない。このため順58の後は節境界の候補となる。ただし順58は正定値性・可逆性・逆行列の正定値性・二つのトレース正値性を一ブロックへ束ね、Lean では対応内容が複数定理へ分かれている。順59も三つの行列の可逆性を束ね、順60も一般の線型性と特殊例を同居させている。三項以上の本文分割と形式化対応の再点検後に依存順が変わりうるため、最終的な節構造は確定しない。生成時には、この暫定評価の前提として順58の全直接依存、対象と全外部入力の本文 fingerprint、順59–60の全直接依存と本文、順58・59の相互非依存、順59から順60への依存、および二箇所の入力集合の切り替わりを固定検査する。",
-      "readabilityStatus": "順58の証明計算自体は具体的な三因子積を B^*AB として追えるが、一つの主張ブロックが正定値性・可逆性・逆行列・二つのトレースという複数出力を束ねている。Lean は対応内容を複数の定理へ分けているため、次回は順58だけを一単位として人手本文を一ブロック一主張へ分割し、SageMath・Lean 対応と節境界を再判定する。順59の三つの可逆性と順60の一般形・特殊例にも後続の分割候補がある。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
+      "boundaryEvidence": "現行の未分割グラフでは、章内依存順58が順56の V^{(+)} の定義と順45の生成子の実対称性を受け、V^{(+)} の正定値性、可逆性、逆行列の正定値性、二つのトレース正値性という五候補を出力する。Lean は VPlus_posDef、左右逆の二定理、VPlusInv_posDef、二つの trace 定理へ分離済みだが、SageMath はこれらを定数 c の決定と同じ check_05 で検査しており、左右逆と候補逆行列の全固有値正値性には独立した検査項がない。直後の順59は同じ V^{(+)} と半指数行列を再利用するが、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示し、順58とは相互に依存しない。順59は転送行列記号を引き続き入力とし、順60の共役写像 T_g の線型性へ直接入力を渡す一方、順60は順58に依存しない。このため順58の後は節境界の候補となる。ただし五候補の本文分割と形式化対応の再点検後に依存順が変わりうるため、最終的な節構造は確定しない。生成時には、この暫定評価の前提として順58の全直接依存、対象と全外部入力の本文 fingerprint、五候補と次回二項単位、Lean・SageMath の対応、順59–60の全直接依存と本文、順58・59の相互非依存、順59から順60への依存、および二箇所の入力集合の切り替わりを固定検査する。",
+      "readabilityStatus": "順58の証明計算自体は具体的な三因子積を B^*AB として追えるが、一つの主張ブロックが五候補を束ねている。三項以上の本文分割と形式化同期が必要なので今回は本文を変更しない。次回は順58の先頭二候補である V^{(+)} の正定値性と可逆性だけを一単位として分割し、左右逆の SageMath 独立検査と Lean 対応を同期する。残る逆行列の正定値性と二つのトレース正値性、および順59以降の別境界へは進まない。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
     }
   ],
   "explanationGranularityReview": {
@@ -9435,8 +9495,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 11103,
-        "inspectedContentSha256": "59e2b9e24e79916e00dfe666d29bdee556ea3479b16e89d9912457ff3bea0609",
+        "inspectedCharacterCount": 11073,
+        "inspectedContentSha256": "c257a4a58107579de48a064c4d124f5608f95fab64bdcd1c4dbd76f2b3c6c1a3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15929,8 +15989,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4831,
-        "inspectedContentSha256": "9fc5622a06b4f4bf4b01fcdd70e8f1b64e7840216c40ed7d90d790e7a8877523",
+        "inspectedCharacterCount": 4888,
+        "inspectedContentSha256": "5f6b5787093c788f3ce3dc90bdcd74cf39f581006b97869e5bc07bb6a79b1aad",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19461,8 +19521,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7344,
-        "inspectedContentSha256": "899092861ce565591300bf4b002a73406cfa82d538fd503c207430c0903f7da2",
+        "inspectedCharacterCount": 7472,
+        "inspectedContentSha256": "e9b44b31453da94554f0528485a4951a35dd5a830af2ca6c200db902f4daeb04",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -24872,8 +24932,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9999,
-        "inspectedContentSha256": "231a3cb9f371f73fe718f67cb72550c0b82f7b042721671c3d449f41288c1b20",
+        "inspectedCharacterCount": 9957,
+        "inspectedContentSha256": "82cc1dbbec3434bcd0949f89e2bdc44045d03b8719fb27fd31b16e0a0d273927",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
