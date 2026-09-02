@@ -1264,14 +1264,13 @@ R_\mu^{(1)} + R_\mu^{(0)}
         String.raw`\begin{aligned}
 \dim_{\mathbb{C}}\mathrm{im}\,\check{Q}_\epsilon
 &= \mathrm{tr}\!\left(\check{Q}_\epsilon\right)
-  \quad (\because \text{冪等行列のトレースは像の次元。}\check{Q}_\epsilon\text{ は Step 1 より冪等}) \\
+  \quad (\because \text{冪等行列のトレースは像の次元（}\blkref{trace_of_idempotent}\text{）。}\check{Q}_\epsilon\text{ は Step 1 より冪等}) \\
 &= 1
   \quad (\because \text{上で計算した } \mathrm{tr}(\check{Q}_\epsilon))
 \end{aligned}`,
       ),
       paragraph([
-        ref("trace_of_idempotent"),
-        " を引いた。009 章の同じ計算が ",
+        "009 章の同じ計算が ",
         math(String.raw`2^{M-m}`),
         " を与えるところで、",
         math(String.raw`m = M`),
