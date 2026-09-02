@@ -220,7 +220,13 @@ function toEntries(dirents: ReadonlyArray<Dirent>): ReadonlyArray<Entry> {
 
 const labels = new Set<string>(ALL_LABELS);
 const rootEntries = toEntries(await readdir(checkRoot, { withFileTypes: true }));
-const problems: string[] = [...checkRootShape(rootEntries)];
+const rootShapeProblems = checkRootShape(rootEntries);
+if (rootShapeProblems.length > 0) {
+  console.error("検算と構造化記述の対応が壊れている:");
+  for (const problem of rootShapeProblems) console.error(`  - ${problem}`);
+  process.exit(1);
+}
+const problems: string[] = [];
 const directories = rootEntries.filter((entry) => entry.kind === "directory").map((entry) => entry.name);
 let linked = 0;
 let unpromoted = 0;
@@ -229,7 +235,12 @@ const accounted = new Set<string>();
 
 for (const directory of directories) {
   const directoryEntries = toEntries(await readdir(join(checkRoot, directory), { withFileTypes: true }));
-  problems.push(...checkDirectoryShape(directory, directoryEntries));
+  const directoryShapeProblems = checkDirectoryShape(directory, directoryEntries);
+  if (directoryShapeProblems.length > 0) {
+    problems.push(...directoryShapeProblems);
+    accounted.add(directory);
+    continue;
+  }
   const overview = join(checkRoot, directory, "overview.md");
   if (!existsSync(overview)) {
     problems.push(`${directory}: overview.md が無い`);
