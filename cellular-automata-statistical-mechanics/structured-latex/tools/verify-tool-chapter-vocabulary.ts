@@ -119,16 +119,16 @@ const PHYSICS_IDENTIFIER_TERMS = [
  *
  * 本文の軸は大文字小文字を区別せずに照合する（`physicsTermsIn`）が、識別子の軸は
  * リポジトリの小文字命名規約に合わせて区別したまま照合する。したがって対応語が
- * 小文字でなければ識別子の軸は静かに空振りするので、ここで拒否する。
+ * 小文字 snake_case でなければ識別子の軸は静かに空振りするので、ここで拒否する。
  */
 const correspondenceViolations: string[] = [];
 for (const entry of PHYSICS_TERM_CORRESPONDENCE) {
-  if (entry.body.length === 0) {
+  if (entry.body.trim().length === 0) {
     correspondenceViolations.push("既存物理由来語の対応表に空の本文語がある");
     continue;
   }
   if (entry.identifier === null) {
-    if ((entry.reasonWhenNoIdentifier ?? "").length === 0) {
+    if ((entry.reasonWhenNoIdentifier ?? "").trim().length === 0) {
       correspondenceViolations.push(
         `既存物理由来語に識別子の対応語が無いのに理由が宣言されていない: ${entry.body}`,
       );
@@ -139,9 +139,9 @@ for (const entry of PHYSICS_TERM_CORRESPONDENCE) {
     correspondenceViolations.push(`既存物理由来語の識別子の対応語が空である: ${entry.body}`);
     continue;
   }
-  if (entry.identifier !== entry.identifier.toLowerCase()) {
+  if (!/^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$/.test(entry.identifier)) {
     correspondenceViolations.push(
-      `既存物理由来語の識別子の対応語が小文字でない: ${entry.body}（${entry.identifier}）`,
+      `既存物理由来語の識別子の対応語が小文字 snake_case でない: ${entry.body}（${entry.identifier}）`,
     );
   }
 }
