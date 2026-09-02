@@ -332,22 +332,60 @@ violations.push(...correspondenceViolations);
  * 除外句で覆うとどの検査にも現れない永久の穴になる。
  * (3) 数学的道具立て章の本文に実際に現れること——CA 章だけで使う句を登録しても、
  * 数学的道具立て章に対する許可だけが残るためである。
+ *
+ * (1) と (2) は**句の内側だけを見ても足りない**。除外は本文から句を取り除く操作なので、
+ * 句の端が本文の語の途中で切れていると、句の内側に無い語まで一緒に消える（またぎ）。
+ * 実測: 除外句 `有限舞台の物` は CA 固有語 `舞台` を含むので空振りにならず、句の内側に
+ * 既存物理由来語を含まないので (2) を通るが、数学的道具立て章の本文に `有限舞台の物理` と
+ * 書くと `物理` ごと消える。したがって覆い隠す語は、句の内側と**実本文への作用**の
+ * 両方から求める。
  */
 const toolChapterRawTexts: string[] = [];
+/** 既存物理由来語の検査が掛かる本文すべて（二章の本文ブロックと、全章の章タイトル・節の記述）。 */
+const allScannedRawTexts: string[] = [];
 for (const file of files) {
-  if (!file.file.startsWith(TOOL_CHAPTER_PREFIX)) continue;
+  const inTools = file.file.startsWith(TOOL_CHAPTER_PREFIX);
+  const inCa = file.file.startsWith(CA_CHAPTER_PREFIX);
+  if (!inTools && !inCa) continue;
   for (const block of file.blocks) {
     if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
     const parts: string[] = [];
     collectText(block, parts);
-    toolChapterRawTexts.push(parts.join(" "));
+    const raw = parts.join(" ");
+    allScannedRawTexts.push(raw);
+    if (inTools) toolChapterRawTexts.push(raw);
   }
 }
 for (const chapter of documentOrganization) {
-  if (String(chapter.id) !== "mathematical_tools") continue;
   const parts: string[] = [];
   collectText([chapter.title, ...chapter.sections.map((section) => [section.title, section.input, section.output, section.main])], parts);
-  toolChapterRawTexts.push(parts.join(" "));
+  const raw = parts.join(" ");
+  allScannedRawTexts.push(raw);
+  if (String(chapter.id) === "mathematical_tools") toolChapterRawTexts.push(raw);
+}
+
+/**
+ * 句を取り除いたことで実本文から消える語を求める。またぎで消える語をここで捕まえる。
+ *
+ * 照合は語彙検査の本体と同じ規則にそろえる（既存物理由来語は大文字小文字を区別しない）。
+ */
+function termsMaskedFromTexts(
+  phrase: string,
+  terms: readonly string[],
+  texts: readonly string[],
+  ignoreCase: boolean,
+): string[] {
+  const masked = new Set<string>();
+  for (const raw of texts) {
+    const stripped = raw.split(phrase).join(" ");
+    const before = ignoreCase ? raw.toLowerCase() : raw;
+    const after = ignoreCase ? stripped.toLowerCase() : stripped;
+    for (const term of terms) {
+      const needle = ignoreCase ? term.toLowerCase() : term;
+      if (before.includes(needle) && !after.includes(needle)) masked.add(term);
+    }
+  }
+  return [...masked];
 }
 for (const entry of NEUTRAL_PHRASE_ENTRIES) {
   if (entry.phrase.trim().length === 0) {
@@ -357,7 +395,12 @@ for (const entry of NEUTRAL_PHRASE_ENTRIES) {
   if (entry.reason.trim().length === 0) {
     violations.push(`除外句の理由が宣言されていない: ${entry.phrase}`);
   }
-  const actuallyMasked = CA_TERMS.filter((term) => entry.phrase.includes(term));
+  const actuallyMasked = [
+    ...new Set([
+      ...CA_TERMS.filter((term) => entry.phrase.includes(term)),
+      ...termsMaskedFromTexts(entry.phrase, CA_TERMS, toolChapterRawTexts, false),
+    ]),
+  ];
   const declared = [...entry.masks].sort().join("、");
   const actual = [...actuallyMasked].sort().join("、");
   if (actuallyMasked.length === 0) {
@@ -367,9 +410,12 @@ for (const entry of NEUTRAL_PHRASE_ENTRIES) {
       `除外句が覆い隠す CA 固有語の宣言が実際と食い違う: ${entry.phrase}（宣言 ${declared || "なし"}、実際 ${actual}）`,
     );
   }
-  const maskedPhysics = PHYSICS_TERMS.filter((term) =>
-    entry.phrase.toLowerCase().includes(term.toLowerCase()),
-  );
+  const maskedPhysics = [
+    ...new Set([
+      ...PHYSICS_TERMS.filter((term) => entry.phrase.toLowerCase().includes(term.toLowerCase())),
+      ...termsMaskedFromTexts(entry.phrase, PHYSICS_TERMS, allScannedRawTexts, true),
+    ]),
+  ];
   if (maskedPhysics.length > 0) {
     violations.push(
       `除外句が既存物理由来語を覆い隠している: ${entry.phrase}（${maskedPhysics.join("、")}）`,
@@ -759,7 +805,7 @@ console.log(
     `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件・` +
     `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.size} 件、` +
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
-    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用をすべて確認）、` +
+    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用を、句の内側と実本文への作用の両方で確認）、` +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
