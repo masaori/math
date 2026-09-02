@@ -382,10 +382,49 @@ function termsMaskedFromTexts(
     const after = ignoreCase ? stripped.toLowerCase() : stripped;
     for (const term of terms) {
       const needle = ignoreCase ? term.toLowerCase() : term;
-      if (before.includes(needle) && !after.includes(needle)) masked.add(term);
+      const beforeCount = before.split(needle).length - 1;
+      const afterCount = after.split(needle).length - 1;
+      if (afterCount < beforeCount) masked.add(term);
     }
   }
   return [...masked];
+}
+
+/**
+ * 同じ本文断片に同じ語が複数回ある負例を固定する。
+ *
+ * `includes` だけで除外前後を比べると、句が一箇所の語を消しても別の一箇所が残るため、
+ * 隠蔽を見落とす。CA 固有語と大文字小文字を区別しない既存物理由来語の両方で、
+ * 一回でも出現数が減れば検出することを常時確認する。
+ */
+const duplicateTermMaskingRegressions = [
+  {
+    name: "CA 固有語の一箇所だけを消す除外句",
+    actual: termsMaskedFromTexts(
+      "有限舞台の状態",
+      ["状態集合"],
+      ["有限舞台の状態集合と別の状態集合"],
+      false,
+    ),
+    expected: "状態集合",
+  },
+  {
+    name: "既存物理由来語の一箇所だけを消す除外句",
+    actual: termsMaskedFromTexts(
+      "有限舞台のPHYS",
+      ["physics"],
+      ["有限舞台のPHYSics と physics"],
+      true,
+    ),
+    expected: "physics",
+  },
+] as const;
+for (const regression of duplicateTermMaskingRegressions) {
+  if (!regression.actual.includes(regression.expected)) {
+    throw new Error(
+      `除外句の重複語回帰検査が失敗した: ${regression.name}（検出 ${regression.actual.join("、") || "なし"}）`,
+    );
+  }
 }
 for (const entry of NEUTRAL_PHRASE_ENTRIES) {
   if (entry.phrase.trim().length === 0) {
@@ -805,7 +844,7 @@ console.log(
     `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件・` +
     `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.size} 件、` +
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
-    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用を、句の内側と実本文への作用の両方で確認）、` +
+    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用を、句の内側と実本文への作用の両方で確認、重複語回帰 ${duplicateTermMaskingRegressions.length} 件）、` +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
