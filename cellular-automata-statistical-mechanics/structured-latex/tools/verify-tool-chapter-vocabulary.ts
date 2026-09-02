@@ -11,24 +11,103 @@
 import { collectRefTargets, loadContentFiles } from "./content-modules.ts";
 import { documentOrganization } from "./document-organization.ts";
 
-const CA_TERMS = [
-  "セルオートマトン",
-  "舞台",
-  "セル",
-  "局所規則",
-  "局所表現",
-  "真理値表",
-  "大域写像",
-  "時間発展",
-  "時刻",
-  "配位",
-  "一点反転",
-  "伝播",
-  "イベント",
-  "状態集合",
-  "2 値",
-  "二値",
+/**
+ * 語の対応表の一件。本文の軸で使う語と、識別子の軸で使う対応語をここで結ぶ。
+ *
+ * `identifiers` は複数を許す（同じ本文語が `cell_` と `_cell` のように複数の断片で現れる）。
+ * 対応語を持たない場合は `null` と理由の宣言を必須にする。
+ */
+type TermCorrespondenceEntry = {
+  readonly body: string;
+  readonly identifiers: readonly string[] | null;
+  readonly reasonWhenNoIdentifier?: string;
+};
+
+/**
+ * 識別子の対応語として認める綴り。
+ *
+ * 本文の軸は大文字小文字を区別せずに照合するが、識別子の軸はリポジトリの小文字命名規約に
+ * 合わせて区別したまま照合する。したがって対応語が小文字 snake_case でなければ識別子の軸は
+ * 静かに空振りする。前後の下線は語境界を示す断片（`cell_` / `_cell`）として認める。
+ */
+const IDENTIFIER_TERM_PATTERN = /^_?[a-z][a-z0-9]*(?:_[a-z0-9]+)*_?$/;
+
+/**
+ * 対応表そのものの検査。片肺の宣言と、識別子の軸で空振りする綴りを起票時に止める。
+ *
+ * 本文の軸だけに語を足しても、対応語を大文字混じりで綴っても、検査は 0 件で通ってしまう。
+ * どちらも「検査した」という記録だけが残り、実際には何も止めていない状態になる。
+ */
+function correspondenceTableViolations(
+  tableName: string,
+  entries: readonly TermCorrespondenceEntry[],
+): string[] {
+  const found: string[] = [];
+  for (const entry of entries) {
+    if (entry.body.trim().length === 0) {
+      found.push(`${tableName}の対応表に空の本文語がある`);
+      continue;
+    }
+    if (entry.identifiers === null) {
+      if ((entry.reasonWhenNoIdentifier ?? "").trim().length === 0) {
+        found.push(`${tableName}に識別子の対応語が無いのに理由が宣言されていない: ${entry.body}`);
+      }
+      continue;
+    }
+    if (entry.identifiers.length === 0) {
+      found.push(`${tableName}の識別子の対応語が空である: ${entry.body}`);
+      continue;
+    }
+    for (const identifier of entry.identifiers) {
+      if (identifier.length === 0) {
+        found.push(`${tableName}の識別子の対応語が空である: ${entry.body}`);
+        continue;
+      }
+      if (!IDENTIFIER_TERM_PATTERN.test(identifier)) {
+        found.push(
+          `${tableName}の識別子の対応語が小文字 snake_case でない: ${entry.body}（${identifier}）`,
+        );
+      }
+    }
+  }
+  return found;
+}
+
+/**
+ * 2 値セルオートマトン固有語の対応表。**本文の軸と識別子の軸をここ一箇所から導出する。**
+ *
+ * CA 固有語も既存物理由来語と同じく、読者が読む散文（本文の軸）と、章の分類を id から読むときに
+ * 効く機械識別子（識別子の軸）の二本で対称に止める。既存物理由来語では二つの軸を別々の配列で
+ * 持っていたために片方だけへ語を足すと対称が静かに崩れ、対応表へ集約して塞いだ。CA 固有語には
+ * 同じ形が残っており、実測で識別子の軸の語を `Automaton` と綴っても検査が 0 件で通ることを
+ * 確認した（識別子は小文字なので一致せず、その語の識別子側の検査だけが静かに失われる）。
+ * そこで CA 固有語も語の追加点を対応表の一箇所に閉じ、二つの軸をここから導出する。
+ *
+ * 識別子の対応語は接頭辞・接尾辞の断片でよい（`cell_` / `_cell` のように、一般英単語
+ * `cellular` 以外の綴りへ巻き込まれないよう区切り文字を含める）。対応語を持たない語は
+ * `identifiers: null` と持たない理由の宣言を必須にし、黙って片肺になることを不可能にする。
+ */
+const CA_TERM_CORRESPONDENCE: readonly TermCorrespondenceEntry[] = [
+  { body: "セルオートマトン", identifiers: ["automaton", "cellular"] },
+  { body: "舞台", identifiers: ["stage"] },
+  { body: "セル", identifiers: ["cell_", "_cell"] },
+  { body: "局所規則", identifiers: ["local_"] },
+  { body: "局所表現", identifiers: ["local_"] },
+  { body: "真理値表", identifiers: ["truth_table"] },
+  { body: "大域写像", identifiers: ["global_map"] },
+  { body: "時間発展", identifiers: ["time_", "_time"] },
+  { body: "時刻", identifiers: ["time_", "_time"] },
+  { body: "配位", identifiers: ["configuration"] },
+  { body: "一点反転", identifiers: ["flip"] },
+  { body: "伝播", identifiers: ["propagation"] },
+  { body: "イベント", identifiers: ["event"] },
+  { body: "状態集合", identifiers: ["state_set"] },
+  { body: "2 値", identifiers: ["binary"] },
+  { body: "二値", identifiers: ["binary"] },
 ];
+
+/** 本文側の CA 固有語。対応表から導出するので、ここへ直接足すことはできない。 */
+const CA_TERMS = CA_TERM_CORRESPONDENCE.map((entry) => entry.body);
 
 /** CA を仮定せずに定義された語。字句検査の前に取り除く。 */
 const NEUTRAL_PHRASES = [
@@ -42,22 +121,7 @@ const NEUTRAL_PHRASES = [
  * 本文（散文・数式）の語彙検査とは独立の軸なので、ここで別に検査する。
  */
 const CA_IDENTIFIER_TERMS = [
-  "automaton",
-  "cellular",
-  "cell_",
-  "_cell",
-  "binary",
-  "truth_table",
-  "global_map",
-  "configuration",
-  "flip",
-  "time_",
-  "_time",
-  "propagation",
-  "event",
-  "state_set",
-  "local_",
-  "stage",
+  ...new Set(CA_TERM_CORRESPONDENCE.flatMap((entry) => entry.identifiers ?? [])),
 ];
 
 /**
@@ -82,24 +146,20 @@ const CA_IDENTIFIER_TERMS = [
  * 識別子の対応語も一般数学の語と衝突しないものに限る（`作用素` 単独ではなく `作用素代数` に
  * 対して `operator_algebra` を対応させるのはこのためである）。
  */
-const PHYSICS_TERM_CORRESPONDENCE: readonly {
-  readonly body: string;
-  readonly identifier: string | null;
-  readonly reasonWhenNoIdentifier?: string;
-}[] = [
-  { body: "物理", identifier: "physical" },
-  { body: "因果集合", identifier: "causal" },
-  { body: "時空", identifier: "spacetime" },
-  { body: "光円錐", identifier: "lightcone" },
-  { body: "量子", identifier: "quantum" },
-  { body: "ヒルベルト", identifier: "hilbert" },
-  { body: "多様体", identifier: "manifold" },
-  { body: "相対論", identifier: "relativity" },
-  { body: "粒子", identifier: "particle" },
-  { body: "場の量子論", identifier: "quantum" },
-  { body: "作用素代数", identifier: "operator_algebra" },
-  { body: "Lorentz", identifier: "lorentz" },
-  { body: "ローレンツ", identifier: "lorentz" },
+const PHYSICS_TERM_CORRESPONDENCE: readonly TermCorrespondenceEntry[] = [
+  { body: "物理", identifiers: ["physical"] },
+  { body: "因果集合", identifiers: ["causal"] },
+  { body: "時空", identifiers: ["spacetime"] },
+  { body: "光円錐", identifiers: ["lightcone"] },
+  { body: "量子", identifiers: ["quantum"] },
+  { body: "ヒルベルト", identifiers: ["hilbert"] },
+  { body: "多様体", identifiers: ["manifold"] },
+  { body: "相対論", identifiers: ["relativity"] },
+  { body: "粒子", identifiers: ["particle"] },
+  { body: "場の量子論", identifiers: ["quantum"] },
+  { body: "作用素代数", identifiers: ["operator_algebra"] },
+  { body: "Lorentz", identifiers: ["lorentz"] },
+  { body: "ローレンツ", identifiers: ["lorentz"] },
 ];
 
 /** 本文側の既存物理由来語。対応表から導出するので、ここへ直接足すことはできない。 */
@@ -107,44 +167,14 @@ const PHYSICS_TERMS = PHYSICS_TERM_CORRESPONDENCE.map((entry) => entry.body);
 
 /** 識別子側の既存物理由来語。対応表から導出する（同じ対応語を複数の本文語が指すので重複を除く）。 */
 const PHYSICS_IDENTIFIER_TERMS = [
-  ...new Set(
-    PHYSICS_TERM_CORRESPONDENCE.flatMap((entry) =>
-      entry.identifier === null ? [] : [entry.identifier],
-    ),
-  ),
+  ...new Set(PHYSICS_TERM_CORRESPONDENCE.flatMap((entry) => entry.identifiers ?? [])),
 ];
 
-/**
- * 対応表そのものの検査。片肺の宣言と、識別子の軸で空振りする綴りを起票時に止める。
- *
- * 本文の軸は大文字小文字を区別せずに照合する（`physicsTermsIn`）が、識別子の軸は
- * リポジトリの小文字命名規約に合わせて区別したまま照合する。したがって対応語が
- * 小文字 snake_case でなければ識別子の軸は静かに空振りするので、ここで拒否する。
- */
-const correspondenceViolations: string[] = [];
-for (const entry of PHYSICS_TERM_CORRESPONDENCE) {
-  if (entry.body.trim().length === 0) {
-    correspondenceViolations.push("既存物理由来語の対応表に空の本文語がある");
-    continue;
-  }
-  if (entry.identifier === null) {
-    if ((entry.reasonWhenNoIdentifier ?? "").trim().length === 0) {
-      correspondenceViolations.push(
-        `既存物理由来語に識別子の対応語が無いのに理由が宣言されていない: ${entry.body}`,
-      );
-    }
-    continue;
-  }
-  if (entry.identifier.length === 0) {
-    correspondenceViolations.push(`既存物理由来語の識別子の対応語が空である: ${entry.body}`);
-    continue;
-  }
-  if (!/^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$/.test(entry.identifier)) {
-    correspondenceViolations.push(
-      `既存物理由来語の識別子の対応語が小文字 snake_case でない: ${entry.body}（${entry.identifier}）`,
-    );
-  }
-}
+/** 二つの対応表を同じ規則で検査する。CA 固有語と既存物理由来語で規律が食い違わないようにする。 */
+const correspondenceViolations: string[] = [
+  ...correspondenceTableViolations("CA 固有語", CA_TERM_CORRESPONDENCE),
+  ...correspondenceTableViolations("既存物理由来語", PHYSICS_TERM_CORRESPONDENCE),
+];
 
 /**
  * CA 章で既存物理由来語を持ってよいブロック（＝既存理論との照合の所有者）の宣言。
@@ -558,7 +588,8 @@ if (violations.length > 0) {
   process.exit(1);
 }
 console.log(
-  `章の意味境界の語彙検査 OK（本文の CA 固有語 ${CA_TERMS.length} 件、` +
+  `章の意味境界の語彙検査 OK（本文の CA 固有語 ${CA_TERMS.length} 件` +
+    `（識別子の対応語 ${CA_IDENTIFIER_TERMS.length} 件、対応表 ${CA_TERM_CORRESPONDENCE.length} 件）、` +
     `本文の既存物理由来語 ${PHYSICS_TERMS.length} 件（識別子の対応語 ${PHYSICS_IDENTIFIER_TERMS.length} 件、対応表 ${PHYSICS_TERM_CORRESPONDENCE.length} 件）、` +
     `走査対象は数学的道具立て章 ${toolBlockIds.size} 件・` +
     `CA 章 ${caBlockIds.size} 件・未分類 ${unclassifiedBlockIds.size} 件、` +
