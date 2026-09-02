@@ -53743,6 +53743,165 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_residual_fiber_phase_signed_count",
+        labels: [],
+        title: { text: "残余の位相和の符号付き数え上げ" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_residual_fiber_phase_signed_count",
+            beforeFocus: [{
+              role: "supportingClaim",
+              element: {
+                id: "kac_ward_claim_phase_contribution_sign_value",
+                kind: "claim",
+                title: { text: "位相寄与は 1 か −1 である" },
+                labels: ["claim_phase_contribution_sign_value"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/residual-fiber-phase-signed-count"],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`(a,b)\in\mathcal S`),
+                    "（", ref("def_spin_structures"), "）と ",
+                    math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                    "（", ref("def_nonbacktracking_permutations"), "）について、",
+                  ]),
+                  displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}`),
+                  paragraph([
+                    "が成り立つ。位相寄与は ",
+                    ref("def_nonbacktracking_permutation_phase_contribution"),
+                    " で定めた。とくに、任意の部分集合にわたる位相寄与の有限和は、",
+                    "値が 1 の元の個数から値が −1 の元の個数を引いた整数に等しい。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "各 ", math(String.raw`C\in\mathcal C(\varphi)`),
+                    "（", ref("def_moved_orbit_family"), "）は ",
+                    ref("claim_moved_orbit_partition"), " により空でないので、基点 ",
+                    math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`), " を一つ選び、",
+                    math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
+                    "（", ref("def_permutation_orbit_sequence"), "）と置く。",
+                    ref("claim_moved_orbit_partition"), " により ",
+                    math(String.raw`C\subseteq M(\varphi)`), " なので ",
+                    ref("def_moved_edge_set"), " により ",
+                    math(String.raw`\varphi\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)\ne\vec e_{\ast}^{\,\varphi}(C)`),
+                    " であり、", ref("claim_moved_orbit_weight_phase_twist"),
+                    " の仮定を満たす。また ", ref("claim_moved_orbit_closed_nonbacktracking"),
+                    " により ", math(String.raw`\gamma^{\varphi}_C`),
+                    " は閉じた非後退辺列なので、回転数 ",
+                    math(String.raw`\operatorname{rot}(\gamma^{\varphi}_C)\in\mathbb Z`),
+                    "（", ref("def_closed_walk_rotation_number"), "）が定まり ",
+                    math(String.raw`t_{\circ}(\gamma^{\varphi}_C)=4\operatorname{rot}(\gamma^{\varphi}_C)`),
+                    " である。求めたい位相寄与から始める。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\varphi)
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
+&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,
+\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
+&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を各軌道へ基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ で適用}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,
+\bigl(\zeta_8^{4}\bigr)^{\operatorname{rot}(\gamma^{\varphi}_C)}\right)
+&&\bigl(\because\ \blkref{def_closed_walk_rotation_number}\text{ と }\overline{\mathbb Q}^{\times}\text{ の整数指数の積の法則}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,
+(-1)^{\operatorname{rot}(\gamma^{\varphi}_C)}\right)
+&&\bigl(\because\ \zeta_8^4=-1\text{。}\blkref{def_rotation_phase}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "最終行の各因子は ", math(String.raw`\{-1,1\}`),
+                    " の元の三つの積なので ", math(String.raw`\{-1,1\}`),
+                    " に属する（", math(String.raw`\{-1,1\}`),
+                    " は積で閉じる）。有限積も同じ理由で ", math(String.raw`\{-1,1\}`),
+                    " に属する（軌道族が空なら空積は 1 である）。したがって ",
+                    math(String.raw`\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}`),
+                    " である。「とくに」の部分は、部分集合を値が 1 の元と −1 の元へ非交和分割し、",
+                    "有限和を定数和の差として数えれば従う。全過程は有限集合上の有限積と代数的数の整数冪だけで閉じ、",
+                    "実数体も複素数体も現れない。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_residual_fiber_phase_signed_count",
+              kind: "claim",
+              title: { text: "残余の位相和は整数の符号付き数え上げである" },
+              labels: ["claim_residual_fiber_phase_signed_count"],
+              habitat: "Z",
+              verification: ["sagemath/check/residual-fiber-phase-signed-count"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                  math(String.raw`D,E\subseteq E_L`), " は ",
+                  math(String.raw`D\cap E=\varnothing`), " かつ ",
+                  math(String.raw`\operatorname{Even}_L(E)`),
+                  "（", ref("def_even_edge_subset"), "）を満たすとする。有限集合",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal N^{\mathcal R,+}_L(D,E;a,b)
+&:=\bigl\{\,\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L\ \bigm|\
+\mathcal W^{a,b}_L(\varphi)=1\,\bigr\},\\
+\mathcal N^{\mathcal R,-}_L(D,E;a,b)
+&:=\bigl\{\,\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L\ \bigm|\
+\mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
+\end{aligned}`),
+                paragraph([
+                  "を定めると、", math(String.raw`\overline{\mathbb Q}`), " の等式",
+                ]),
+                displayMath(String.raw`\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L}
+\mathcal W^{a,b}_L(\varphi)
+=\bigl\lvert\mathcal N^{\mathcal R,+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal N^{\mathcal R,-}_L(D,E;a,b)\bigr\rvert
+\in\mathbb Z`),
+                paragraph([
+                  "が成り立つ。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
+                  "、標準対が切り替え不能な置換の集合 ", math(String.raw`\mathcal R_L`), " は ",
+                  ref("def_unswitchable_standard_pair_subset"),
+                  "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                  " で定めた。右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "任意の ", math(String.raw`\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L`),
+                  " について、", ref("claim_phase_contribution_sign_value"), " により ",
+                  math(String.raw`\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}`),
+                  " である。したがって ",
+                  math(String.raw`\mathcal N_L(D,E)\cap\mathcal R_L`), " は ",
+                  math(String.raw`\mathcal N^{\mathcal R,+}_L(D,E;a,b)`), " と ",
+                  math(String.raw`\mathcal N^{\mathcal R,-}_L(D,E;a,b)`),
+                  " の互いに素な合併である。この非交和で有限和を分けると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L}
+\mathcal W^{a,b}_L(\varphi)
+&=\sum_{\varphi\in\mathcal N^{\mathcal R,+}_L(D,E;a,b)}1
++\sum_{\varphi\in\mathcal N^{\mathcal R,-}_L(D,E;a,b)}(-1)
+&&\bigl(\because\ \text{上の非交和と二集合の定義}\bigr)\\
+&=\bigl\lvert\mathcal N^{\mathcal R,+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal N^{\mathcal R,-}_L(D,E;a,b)\bigr\rvert
+&&\bigl(\because\ \text{有限集合上の定数和と }\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "を得る。全過程は有限集合の分割と整数の有限和だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_contact_pair_switchability_criterion",
         labels: [],
         title: { text: "接触対の切り替え可能性の局所判定" },
