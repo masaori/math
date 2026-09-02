@@ -1875,7 +1875,7 @@ P^{(\pm)} f
         String.raw`\begin{aligned}
 P^{(\pm)}X
 &= \tfrac12\left(I \pm \varepsilon\right)X
-   \quad (\because P^{(\pm)}\text{ の定義}) \\
+   \quad (\because \blkref{def_epsilon_projectors}\ \text{の }P^{(\pm)}\text{ の定義}) \\
 &= \tfrac12\left(IX \pm \varepsilon X\right)
    \quad (\because \text{分配法則}) \\
 &= \tfrac12\left(X \pm \varepsilon X\right)
@@ -1887,7 +1887,7 @@ P^{(\pm)}X
 &= X\cdot\tfrac12\left(I \pm \varepsilon\right)
    \quad (\because \text{分配法則とスカラー倍との可換性}) \\
 &= X\,P^{(\pm)}
-   \quad (\because P^{(\pm)}\text{ の定義})
+   \quad (\because \blkref{def_epsilon_projectors}\ \text{の }P^{(\pm)}\text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -1895,9 +1895,7 @@ P^{(\pm)}X
         math(String.raw`\varepsilon`),
         " と可換な行列は ",
         math(String.raw`P^{(\pm)}`),
-        " とも可換である。この計算では ",
-        ref("def_epsilon_projectors"),
-        " を用いた。",
+        " とも可換である。",
       ]),
     ],
     conversion: {
