@@ -529,9 +529,9 @@ e^{-iM\tilde\theta_\mu}
 &= e^{-i(2\pi\mu - \pi)}
 &&\bigl(\because M\tilde\theta_\mu = 2\pi\mu - \pi\bigr) \\
 &= e^{-2\pi i\mu}\,e^{i\pi}
-&&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
+&&\bigl(\because \blkref{theorem_exp_product}\ (n=1)\bigr) \\
 &= \left(\cos(2\pi\mu) - i\sin(2\pi\mu)\right)\left(\cos\pi + i\sin\pi\right)
-&&\bigl(\because \text{euler\_formula\_cos\_sin}\ \text{を 2 箇所へ同時適用}\bigr) \\
+&&\bigl(\because \blkref{euler_formula_cos_sin}\ \text{を 2 箇所へ同時適用}\bigr) \\
 &= \left(1 - i\cdot 0\right)\left(-1 + i\cdot 0\right)
 &&\bigl(\because \cos(2\pi\mu)=1,\ \sin(2\pi\mu)=0,\ \cos\pi=-1,\ \sin\pi=0\ (\mu\in\mathbb{Z})\bigr) \\
 &= 1\cdot(-1)
@@ -540,21 +540,6 @@ e^{-iM\tilde\theta_\mu}
 &&\bigl(\because \text{積の単位元}\bigr)
 \end{aligned}`,
       ),
-      paragraph([
-        "（指数法則は ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " に、三角関数への書き換えは ",
-        ref("euler_formula_cos_sin"),
-        " による。",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " なので ",
-        math(String.raw`\cos(2\pi\mu) = 1`),
-        "、",
-        math(String.raw`\sin(2\pi\mu) = 0`),
-        "。）",
-      ]),
       paragraph([
         "(2) まず添字をずらした角度を計算する。",
       ]),
@@ -579,19 +564,15 @@ e^{-ij\tilde\theta_{\mu+M}}
 &= e^{-ij\left(\tilde\theta_\mu + 2\pi\right)}
 &&\bigl(\because \tilde\theta_{\mu+M}=\tilde\theta_\mu+2\pi\bigr) \\
 &= e^{-ij\tilde\theta_\mu}\,e^{-2\pi i j}
-&&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
+&&\bigl(\because \blkref{theorem_exp_product}\ (n=1)\bigr) \\
 &= e^{-ij\tilde\theta_\mu}\left(\cos(2\pi j) - i\sin(2\pi j)\right)
-&&\bigl(\because \text{euler\_formula\_cos\_sin}\bigr) \\
+&&\bigl(\because \blkref{euler_formula_cos_sin}\bigr) \\
 &= e^{-ij\tilde\theta_\mu}
 &&\bigl(\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "（ここでも ",
-        ref("theorem_exp_product"),
-        " と ",
-        ref("euler_formula_cos_sin"),
-        " を使った。）係数がすべて一致するので、一続きに",
+        "係数がすべて一致するので、一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
