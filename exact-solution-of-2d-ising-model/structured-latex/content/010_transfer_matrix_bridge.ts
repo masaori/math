@@ -1354,54 +1354,47 @@ Z(J,J')
         String.raw`\begin{aligned}
 \left(P^{(\pm)}\right)^2
 &= \tfrac{1}{4}\left(I \pm \varepsilon\right)\left(I \pm \varepsilon\right)
-   \quad (\because P^{(\pm)} \text{ の定義}) \\
+   \quad (\because \blkref{def_epsilon_projectors}) \\
 &= \tfrac{1}{4}\left(I \pm \varepsilon \pm \varepsilon + \varepsilon^2\right)
    \quad (\because \text{分配法則と } I\varepsilon=\varepsilon I=\varepsilon) \\
 &= \tfrac{1}{4}\left(I \pm 2\varepsilon + \varepsilon^2\right)
    \quad (\because \text{同類項をまとめる}) \\
 &= \tfrac{1}{4}\left(2I \pm 2\varepsilon\right)
-   \quad (\because \varepsilon^2=I) \\
+   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の } \varepsilon^2=I) \\
 &= \tfrac{1}{2}\left(I \pm \varepsilon\right)
    \quad (\because \text{スカラー倍を整理する}) \\
 &= P^{(\pm)}
-   \quad (\because P^{(\pm)} \text{ の定義}), \\
+   \quad (\because \blkref{def_epsilon_projectors}), \\
 P^{(+)}P^{(-)}
 &= \tfrac{1}{4}\left(I + \varepsilon\right)\left(I - \varepsilon\right)
-   \quad (\because P^{(+)} \text{ と } P^{(-)} \text{ の定義}) \\
+   \quad (\because \blkref{def_epsilon_projectors}) \\
 &= \tfrac{1}{4}\left(I-I\varepsilon+\varepsilon I-\varepsilon^2\right)
    \quad (\because \text{分配法則}) \\
 &= \tfrac{1}{4}\left(I-\varepsilon^2\right)
    \quad (\because I\varepsilon=\varepsilon I=\varepsilon) \\
 &= \tfrac{1}{4}\left(I-I\right)
-   \quad (\because \varepsilon^2=I) \\
+   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の } \varepsilon^2=I) \\
 &= 0
    \quad (\because I-I=0), \\
 P^{(-)}P^{(+)}
 &= \tfrac{1}{4}\left(I - \varepsilon\right)\left(I + \varepsilon\right)
-   \quad (\because P^{(-)} \text{ と } P^{(+)} \text{ の定義}) \\
+   \quad (\because \blkref{def_epsilon_projectors}) \\
 &= \tfrac{1}{4}\left(I+I\varepsilon-\varepsilon I-\varepsilon^2\right)
    \quad (\because \text{分配法則}) \\
 &= \tfrac{1}{4}\left(I-\varepsilon^2\right)
    \quad (\because I\varepsilon=\varepsilon I=\varepsilon) \\
 &= \tfrac{1}{4}\left(I-I\right)
-   \quad (\because \varepsilon^2=I) \\
+   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の } \varepsilon^2=I) \\
 &= 0
    \quad (\because I-I=0)
 \end{aligned}`,
       ),
-      paragraph([
-        "この計算では ",
-        ref("def_epsilon_projectors"),
-        " と ",
-        ref("epsilon_square_and_eigenvalues"),
-        " を用いた。",
-      ]),
       paragraph(["(2)"]),
       displayMath(
         String.raw`\begin{aligned}
 P^{(+)} + P^{(-)}
 &= \tfrac12\left(I+\varepsilon\right) + \tfrac12\left(I-\varepsilon\right)
-   \quad (\because P^{(+)} \text{ と } P^{(-)} \text{ の定義}) \\
+   \quad (\because \blkref{def_epsilon_projectors}) \\
 &= \tfrac12\left(I+\varepsilon+I-\varepsilon\right)
    \quad (\because \text{スカラー倍の分配法則}) \\
 &= \tfrac12\left(2I\right)
@@ -1410,7 +1403,6 @@ P^{(+)} + P^{(-)}
    \quad (\because \text{スカラー倍を整理する})
 \end{aligned}`,
       ),
-      paragraph(["この計算では ", ref("def_epsilon_projectors"), " を用いた。"]),
       paragraph([
         "(3) ",
         ref("def_eigenspaces_of_epsilon"),
@@ -1445,7 +1437,6 @@ P^{(\pm)}y
    \quad (\because y = P^{(\pm)}x)
 \end{aligned}`,
       ),
-      paragraph(["この計算では (1) の冪等性を用いた。"]),
       paragraph(["である。よって（複号同順）"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1453,34 +1444,27 @@ P^{(\pm)}y
 &= \varepsilon P^{(\pm)} y
    \quad (\because \text{上の等式 } y = P^{(\pm)}y) \\
 &= \varepsilon\cdot\tfrac{1}{2}\left(I \pm \varepsilon\right) y
-   \quad (\because P^{(\pm)} \text{ の定義}) \\
+   \quad (\because \blkref{def_epsilon_projectors}) \\
 &= \tfrac{1}{2}\left(\varepsilon I \pm \varepsilon^2\right) y
    \quad (\because \text{分配法則}) \\
 &= \tfrac{1}{2}\left(\varepsilon \pm \varepsilon^2\right) y
    \quad (\because \varepsilon I=\varepsilon) \\
 &= \tfrac{1}{2}\left(\varepsilon \pm I\right) y
-   \quad (\because \varepsilon^2=I) \\
+   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の } \varepsilon^2=I) \\
 &= \pm\,\tfrac{1}{2}\left(I \pm \varepsilon\right) y
    \quad (\because \text{複号同順の符号の整理。上の符号では }
      \tfrac12(\varepsilon+I)=+\tfrac12(I+\varepsilon)
      \text{、下の符号では } \tfrac12(\varepsilon-I)=-\tfrac12(I-\varepsilon)) \\
 &= \pm\,P^{(\pm)}y
-   \quad (\because P^{(\pm)} \text{ の定義}) \\
+   \quad (\because \blkref{def_epsilon_projectors}) \\
 &= \pm\,y
    \quad (\because \text{上の等式 } y = P^{(\pm)}y)
 \end{aligned}`,
       ),
       paragraph([
-        "この計算では ",
-        ref("def_epsilon_projectors"),
-        " と ",
-        ref("epsilon_square_and_eigenvalues"),
-        " と ",
-        ref("def_eigenspaces_of_epsilon"),
-        " を用いた。",
-      ]),
-      paragraph([
         "よって ",
+        ref("def_eigenspaces_of_epsilon"),
+        " により ",
         math(String.raw`y \in \mathcal{F}^{(\pm)}`),
         "。",
       ]),
@@ -1488,7 +1472,9 @@ P^{(\pm)}y
         math(String.raw`(\supseteq)`),
         " ",
         math(String.raw`f \in \mathcal{F}^{(\pm)}`),
-        " すなわち ",
+        " すなわち（",
+        ref("def_eigenspaces_of_epsilon"),
+        " により）",
         math(String.raw`\varepsilon f = \pm f`),
         " とすると",
       ]),
@@ -1496,7 +1482,7 @@ P^{(\pm)}y
         String.raw`\begin{aligned}
 P^{(\pm)} f
 &= \tfrac{1}{2}\left(I \pm \varepsilon\right) f
-   \quad (\because P^{(\pm)} \text{ の定義}) \\
+   \quad (\because \blkref{def_epsilon_projectors}) \\
 &= \tfrac{1}{2}\left(If \pm \varepsilon f\right)
    \quad (\because \text{分配法則}) \\
 &= \tfrac{1}{2}\left(f \pm \varepsilon f\right)
@@ -1512,13 +1498,6 @@ P^{(\pm)} f
 \end{aligned}`,
       ),
       paragraph([
-        "この計算では ",
-        ref("def_epsilon_projectors"),
-        " と ",
-        ref("def_eigenspaces_of_epsilon"),
-        " を用いた。",
-      ]),
-      paragraph([
         "よって ",
         math(String.raw`f = P^{(\pm)}f \in \mathrm{im}\,P^{(\pm)}`),
         "。",
@@ -1528,6 +1507,7 @@ P^{(\pm)} f
       status: "added",
       notes: [
         "式変形の書き方の統一（2026-08-14）: 各式変形の行末に残っていた根拠に対応するラベル参照を、各鎖の直後へ追加した。等式・不等式・場合分け・使用する根拠の内容は変えていない。",
+        "式変形の書き方の統一（2026-09-03）: 各鎖の直後に置かれた参照段落を削り、参照を実際に使う各式変形行の行末の \\blkref へ移した。内容・式変形・根拠・参照は不変である。",
       ],
     },
   },
