@@ -68,8 +68,11 @@ for fiber_key, edges in sorted(phase_edges_by_fiber.items()):
             fiber_key, len(fiber), len(edges), positive_count, negative_count, matching_size
         )
 
-assert checked_fibers > 0
-assert perfect_fibers <= checked_fibers
+assert checked_fibers == 64
+assert perfect_fibers == checked_fibers
+assert total_vertices == 5248
+assert matched_pairs == 2624
+assert first_failure is None
 print(f"checked nontrivial-character fibers: {checked_fibers}")
 print(f"fibers with perfect global matching: {perfect_fibers}")
 print(f"vertices in checked fibers: {total_vertices}")
