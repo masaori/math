@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 114 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 115 回目の tick 時点）
+
+**接触対の順序に依らず経路反転で保たれる三分類を構成した。** 切り替え可能な接触対の集合 $\operatorname{Ct}_{\mathrm{sw}}(\varphi)\subseteq\operatorname{Ct}(\varphi)$ とその個数 $N_{\mathrm{sw}}(\varphi)\in\mathbb N$ を定義し、非後退置換の全体を、接触の無い部分 $\mathcal Z_L$（$N_{\mathrm{ct}}=0$）・切り替え可能対を持つ部分 $\mathcal X_L$（$N_{\mathrm{sw}}\ge1$）・接触対を持つが全対切り替え不能な部分 $\mathcal Y_L$（$N_{\mathrm{ct}}\ge1$ かつ $N_{\mathrm{sw}}=0$）の互いに素な三集合へ分けた（`def_switchable_contact_count_classification`。標準接触対の辞書式順序を用いない）。接触対対応 $\Psi_\varphi$ の制限が $\operatorname{Ct}_{\mathrm{sw}}(\varphi)$ から $\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))$ への全単射で $N_{\mathrm{sw}}$ を保つこと、経路反転が三集合のそれぞれを保つこと、各「ファイバー×分類×位相符号 $\epsilon\in\{-1,1\}$」の集合の上の対合であることを一般の $L$ で示した（`claim_path_reversal_switchable_classification_preservation`）。SageMath `path-reversal-switchable-count-classification` は一辺二の非後退置換 $30{,}784$ 個（接触なし $49$・切り替え可能対あり $29{,}905$・全対切り替え不能 $830$）、切り替え可能対の全単射 $192{,}896$ 件、位相寄与 $123{,}136$ 件を全数検査した（実行 2 分 28 秒）。Lean 二版は未着手である。
+
+次 tick は、この三分類の経路反転軌道（一元または二元）を重み付き軌道族へまとめ、選択補集合軌道との符号を保つ対応の構成へ進む。
+
+前進前レビューでは、前 tick の標準対分類の反転反例（ノートと検算）を statement・overview・台帳・MEMORY で照合した。遷移数は検算の assert と一致し、対象ラベルは実在し、「何も言っていない主張」や不一致は無かった。
+
+Lambda 側 check（936 ブロック・相互参照 $3{,}928$ 件すべて解決）・linkage（415 検算）・対象 SageMath（全数）・Lean $9{,}616$ ジョブ・`sorry` / `admit` 無し・PDF 407 ページを通した。新主張の Lean 二版は未着手であり、このセクションは四層完了とはしていない。
+
+## ひとつ前の到達点（2026-09-02 の 114 回目の tick 時点）
 
 **標準接触対に依存する四部分が経路反転で保たれないことを、一辺二の有限反例で確定した。** 接触の無い $49$ 個は全て保たれたが、残余から位相反転部分へ $1{,}416$ 個、残余から回転差 $-4$ と $4$ の部分へそれぞれ $384$ 個と $520$ 個が移った。位相反転部分から回転差 $-4$ へ移るものも $136$ 個、回転差 $-4$ から $4$ へ移るものも $1{,}548$ 個あった。接触対の全単射 $\Psi_\varphi$ は切り替え可能性を保つが、固定した辞書式順序を保たないためである。不採用経路を `note_kac_ward_claim_path_reversal_contact_pair_preservation_standard_classification_counterexample` と SageMath `path-reversal-standard-classification-counterexample` に固定した。これは一般の非保存定理ではなく、候補経路を排除する有限反例である。Lean の対象ではない。
 
