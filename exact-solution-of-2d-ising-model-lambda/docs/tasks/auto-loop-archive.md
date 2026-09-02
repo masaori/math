@@ -1,5 +1,12 @@
 # 自動ループ 記録の保管庫
 
+## 2026-09-02 の 97 回目の tick で台帳から移した記録（2026-09-02 の 92 回目）
+
+- 現在地: 標準対の回転差が正負 4 である二つの部分集合 $\mathcal A_L^{(-4)}$・$\mathcal A_L^{(4)}$ を定義し（`def_standard_turning_difference_subsets`）、標準対平滑化が両者を全単射で交換する不動点の無いファイバー保存対合である一方、置換符号と回転位相の二つの $-1$ が相殺して位相寄与を保存することを示した（`claim_non_phase_reversing_standard_smoothing_involution`）。SageMath は $L=2$ の各 $3{,}616$ 個を全数検査した（位相寄与保存 $28{,}928$ 件）。Lean は未着手だった。
+- 前進記録: 回転差正負 4 の二集合の定義と、標準対平滑化がそれらを交換して位相寄与を保存することを固定した。
+- 式変形の統一: 姉妹側の「$\gamma_2(\theta_\mu)\gamma_2(-\theta_\mu)$ の偏角」（`arg_of_gamma_2_mu`）で、二本の鎖の後ろに置いていた `def_A_theta` の参照を、$\gamma_2$ の定義を引く二つの行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変。
+- レビュー記録: 前 tick の `def_phase_reversing_standard_subset`・`claim_phase_reversing_standard_smoothing_involution` と姉妹側 `relation_of_gamma_2` の参照移動を、本文・全数検算・正負 4 の残余分類と照合し、修正対象なしと判断した。
+
 ## 2026-09-02 の 95 回目の tick で台帳から移した記録（2026-09-02 の 90 回目）
 
 - 現在地: 接触平滑化が位相寄与の符号を反転するための必要十分条件を固定した。二接続の平滑化前後の回転数和が等しい位相反転接触対を定義し（`def_phase_reversing_contact_pair`）、位相寄与が符号反転することとの同値を示した（`claim_contact_smoothing_phase_reversal_iff`）。SageMath は $L=2$ の切り替え可能接触対 $192{,}896$ 件×四スピン構造を検査し、符号反転する回転差零は $140{,}416$ 件、位相寄与が不変な回転差 $\pm4$ は各 $26{,}240$ 件だった。Lean は未着手だった。

@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 96 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 97 回目の tick 時点）
+
+**反転対を持つファイバーでも位相反転部分集合が相殺し、位相寄与が接触の無い置換・回転差正負 $4$ の置換・切り替え不能な残余の和へ簡約されることを本文と SageMath で固定した（Lean 未着手）。** 標準対が切り替え不能な置換の集合 $\mathcal R_L:=\{\varphi\mid N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\}$ を定義した（`def_unswitchable_standard_pair_subset`）。$D\ne\varnothing$ のファイバーは、接触の無い部分、$\mathcal B_L$、$\mathcal A_L^{(-4)}$、$\mathcal A_L^{(4)}$、$\mathcal R_L$ の非交和であり、$\mathcal B_L$ 上では標準対平滑化が位相寄与の符号を反転する不動点の無いファイバー保存対合なので、その有限和は零である。よって $\mathcal K^{a,b}_L(D,E)$ は残る四部分の和へ簡約される（`claim_doubled_edge_fiber_phase_reduction`。仮定 $D\ne\varnothing$ は証明では使わず、$D=\varnothing$ は前 tick の主張が残余の無い形で扱うことを証明冒頭に明記した）。SageMath `doubled-edge-fiber-phase-reduction` は $L=2$ の反転対を持つ $577$ ファイバー、置換 $30{,}287$ 個を五集合へ分類し、四スピン構造で零和と簡約等式 $2{,}308$ 件を検査した（切り替え不能な残余 $18{,}755$ 個）。次は残余 $\mathcal R_L$ の位相寄与の相殺または寄与の扱いを分類する。
+
+前進前レビューでは、前 tick の反転対の無いファイバーの簡約を本文・$32$ ファイバーの全数検算・今回の一般化との接続と照合した。三分割の根拠と $\mathcal B_L$ の零和の引用先は実在し、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「積の偏角が $\pi$ のときの二偏角の和」（`range_of_args_of_multiple_of_complex_numbers`）で、証明末尾の「…を引いた」の参照を、二本の鎖でその主張を使う各行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変であり、姉妹側 check・linkage 118 検算・PDF 359 ページを通した。
+
+Lambda 側 check（903 ブロック）・linkage（398 検算）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 391 ページを通した。
+
+## ひとつ前の到達点（2026-09-02 の 96 回目の tick 時点）
 
 **反転対の無いファイバーでは位相反転部分集合が相殺し、位相寄与が接触の無い置換と回転差正負 $4$ の置換の和へ簡約されることを本文と SageMath で固定した（Lean 未着手）。** $D=\varnothing$ では `claim_unswitchable_standard_pair_forces_doubled_edge` の対偶により、接触を持つ置換の標準対は必ず切り替え可能である。したがってファイバーは、接触の無い部分、位相反転部分集合 $\mathcal B_L$、回転差 $-4$ と $4$ の部分集合の非交和になる。$\mathcal B_L$ 上では標準対平滑化が位相寄与の符号を反転する不動点の無い対合なので、その有限和は零である（`claim_doubled_edge_free_fiber_phase_reduction`）。SageMath `doubled-edge-free-fiber-phase-reduction` は $L=2$ の反転対の無い $32$ ファイバー、置換 $497$ 個を四集合へ分類し、四スピン構造で零和と簡約等式 $128$ 件を検査した。次は $D\ne\varnothing$ のファイバーに残る位相寄与を分類する。
 

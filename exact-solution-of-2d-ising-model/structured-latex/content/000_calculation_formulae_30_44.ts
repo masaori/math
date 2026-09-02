@@ -1032,7 +1032,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)
 &= \arg^{[0,2\pi)}(z_1 z_2)
-&&(\because\ \text{この場合の不等式と 複素数の積の}\ \arg\ \text{の主張})\\
+&&(\because\ \text{この場合の不等式と 複素数の積の}\ \arg\ \text{の主張（}\blkref{arg_of_product_of_complex_numbers}\text{）})\\
 &= \pi
 &&(\because\ \arg^{[0,2\pi)}(z_1 z_2)=\pi\ \text{という仮定})
 \end{aligned}`,
@@ -1065,7 +1065,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &= \left(\arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)-2\pi\right)+2\pi
 &&(\because\ \mathbb{R}\ \text{の加法の逆元と単位元})\\
 &= \arg^{[0,2\pi)}(z_1 z_2)+2\pi
-&&(\because\ \text{この場合の不等式と 複素数の積の}\ \arg\ \text{の主張})\\
+&&(\because\ \text{この場合の不等式と 複素数の積の}\ \arg\ \text{の主張（}\blkref{arg_of_product_of_complex_numbers}\text{）})\\
 &= \pi+2\pi
 &&(\because\ \arg^{[0,2\pi)}(z_1 z_2)=\pi\ \text{という仮定})
 \end{aligned}`,
@@ -1090,10 +1090,6 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{いま示したこと})
 \end{aligned}`,
       ),
-      paragraph([
-        ref("arg_of_product_of_complex_numbers"),
-        " を引いた。",
-      ]),
     ],
     conversion: {
       status: "converted",
@@ -1102,7 +1098,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
           "各場合について「θ_1+θ_2-2(n_1+n_2)π = π ゆえ」という日本語 1 行だけだった。" +
           "各場合を一続きの鎖へ書き下し、各行の末尾へ (∵ …) を付けた。" +
           "「ゆえ」が隠していたのは積の arg の主張そのものなので、" +
-          "そこを (∵ …) で題を挙げ、式の直後にラベル参照（arg_of_product_of_complex_numbers）を並べる形にした（この生成器は \\blkref を定義していないため）。" +
+          "そこを (∵ …) で題を挙げ、行末の \\blkref（arg_of_product_of_complex_numbers）で引く形にした。" +
           "原文が書いていた等式 θ_1+θ_2-2(n_1+n_2)π = π（第 2 の場合は θ_1+θ_2-2(n_1+n_2+1)π = π）も" +
           "鎖として残してある。段は増えており、減った段は無い。" +
           "あわせて、原文の statement が場合分けの条件を「∃m ∈ Z s.t. 0 ≤ θ_1+θ_2-2mπ < 2π」" +
