@@ -599,14 +599,14 @@ a_\nu
 &= \gamma_2(\tilde\theta_{M+1-\mu})
    \quad (\because a_\nu := \gamma_2(\tilde\theta_\nu),\ \nu = M+1-\mu) \\
 &= \gamma_2(-\tilde\theta_\mu)
-   \quad (\because \gamma_1, \gamma_2 \text{ の周期性と共役添字 (3)}) \\
+   \quad (\because \blkref{periodicity_of_check_fermi}\ (3)) \\
 &= b_\mu
    \quad (\because b_\mu \text{ の略記}),\\[4pt]
 b_\nu
 &= \gamma_2(-\tilde\theta_{M+1-\mu})
    \quad (\because b_\nu := \gamma_2(-\tilde\theta_\nu),\ \nu = M+1-\mu) \\
 &= \gamma_2(\tilde\theta_\mu)
-   \quad (\because \gamma_1, \gamma_2 \text{ の周期性と共役添字 (3)}) \\
+   \quad (\because \blkref{periodicity_of_check_fermi}\ (3)) \\
 &= a_\mu
    \quad (\because a_\mu \text{ の略記})
 \end{aligned}`,
@@ -630,11 +630,11 @@ r_\nu
 &= |b_\mu|
    \quad (\because \text{上の } a_\nu = b_\mu) \\
 &= \left|-\overline{a_\mu}\right|
-   \quad (\because \gamma_2(-\tilde\theta_\mu) = -\overline{\gamma_2(\tilde\theta_\mu)}\text{ とその帰結 (1)}\ (b_\mu = -\overline{a_\mu})) \\
+   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (1)) \\
 &= \left|\overline{a_\mu}\right|
-   \quad (\because \text{絶対値の基本性質}\ (|-z| = |z|)) \\
+   \quad (\because \blkref{abs_basic_properties}\ (|-z| = |z|)) \\
 &= |a_\mu|
-   \quad (\because \text{絶対値の基本性質}\ (|\bar z| = |z|)) \\
+   \quad (\because \blkref{abs_basic_properties}\ (|\bar z| = |z|)) \\
 &= r_\mu
    \quad (\because r_\mu := |a_\mu|)
 \end{aligned}`,
@@ -654,7 +654,7 @@ b_\mu b_\nu
 &= a_\mu b_\mu
    \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
 &= -r^2
-   \quad (\because \gamma_2(-\tilde\theta_\mu) = -\overline{\gamma_2(\tilde\theta_\mu)}\text{ とその帰結 (2)}),\\[4pt]
+   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (2)),\\[4pt]
 c_\mu c_\nu
 &= \frac{1}{2\sqrt{M}\,b_\mu}\cdot\frac{1}{2\sqrt{M}\,b_\nu}
    \quad (\because c_\mu := \tfrac{1}{2\sqrt{M}\,b_\mu}) \\
@@ -699,7 +699,7 @@ c_\mu c_\nu
 &= (\alpha X)(\beta W) + (\beta W)(\alpha X)
    \quad (\because \text{反交換子の定義}) \\
 &= \alpha\beta\,XW + \beta\alpha\,WX
-   \quad (\because \text{スカラー倍は行列の積と可換（2 箇所へ同時適用）}) \\
+   \quad (\because \blkref{scalar_identity_commutes}\text{ を 2 箇所へ同時適用}) \\
 &= \alpha\beta\,XW + \alpha\beta\,WX
    \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
 &= \alpha\beta\left(XW + WX\right)
@@ -707,16 +707,14 @@ c_\mu c_\nu
 \end{aligned}`,
       ),
       paragraph([
-        "であり、スカラー倍が行列の積と可換であることは ",
-        ref("scalar_identity_commutes"),
-        " による。和についての加法性も行列の積の分配法則から従う。これを使って",
+        "であり、和についての加法性も行列の積の分配法則から従う。これを使って",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+
 &= \left[c_\mu\left(-r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
    c_\nu\left(-r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
-   \quad (\because \check\psi_\mu, \check\psi_\mu^\dagger \text{ の定義}) \\
+   \quad (\because \blkref{def_check_fermi}) \\
 &= c_\mu c_\nu\Bigl(
 \left(-r_\mu\right)\left(-r_\nu\right)\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
 + \left(-r_\mu\right)b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
@@ -732,7 +730,7 @@ c_\mu c_\nu
 + b_\mu\left(-r_\nu\right)\cdot 0
 + b_\mu b_\nu\cdot 2M\,\delta\,I
 \Bigr)
-   \quad (\because \check{Z}, \check{Y} \text{ の反交換関係を 4 箇所へ同時適用}) \\
+   \quad (\because \blkref{anticommutator_of_check_Z_Y}\text{ を 4 箇所へ同時適用}) \\
 &= c_\mu c_\nu\left(
 \left(-r_\mu\right)\left(-r_\nu\right)\cdot 2M\,\delta\,I
 + b_\mu b_\nu\cdot 2M\,\delta\,I
@@ -748,11 +746,6 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
 \end{aligned}`,
       ),
       paragraph([
-        "上の鎖では ",
-        ref("def_check_fermi"),
-        " と ",
-        ref("anticommutator_of_check_Z_Y"),
-        " を引いた。",
         math(String.raw`\delta = 0`),
         " なら全体が ",
         math(String.raw`0`),
@@ -777,7 +770,7 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
 \left[\check\psi_\mu, \check\psi_\nu\right]_+
 &= \left[c_\mu\left(r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
    c_\nu\left(r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
-   \quad (\because \check\psi_\mu, \check\psi_\nu \text{ の定義}) \\
+   \quad (\because \blkref{def_check_fermi}) \\
 &= c_\mu c_\nu\Bigl(
 r_\mu r_\nu\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
 + r_\mu b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
@@ -792,7 +785,7 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
 + b_\mu r_\nu\cdot 0
 + b_\mu b_\nu\cdot 2M\,\delta\,I
 \Bigr)
-   \quad (\because \check{Z}, \check{Y} \text{ の反交換関係を 4 箇所へ同時適用}) \\
+   \quad (\because \blkref{anticommutator_of_check_Z_Y}\text{ を 4 箇所へ同時適用}) \\
 &= c_\mu c_\nu\left(
 r_\mu r_\nu\cdot 2M\,\delta\,I
 + b_\mu b_\nu\cdot 2M\,\delta\,I
@@ -822,7 +815,7 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
 \left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+
 &= \left[c_\mu\left(-r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
    c_\nu\left(r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
-   \quad (\because \check\psi_\mu^\dagger, \check\psi_\nu \text{ の定義}) \\
+   \quad (\because \blkref{def_check_fermi}) \\
 &= c_\mu c_\nu\Bigl(
 \left(-r_\mu\right)r_\nu\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
 + \left(-r_\mu\right)b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
@@ -837,7 +830,7 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
 + b_\mu r_\nu\cdot 0
 + b_\mu b_\nu\cdot 2M\,\delta\,I
 \Bigr)
-   \quad (\because \check{Z}, \check{Y} \text{ の反交換関係を 4 箇所へ同時適用}) \\
+   \quad (\because \blkref{anticommutator_of_check_Z_Y}\text{ を 4 箇所へ同時適用}) \\
 &= c_\mu c_\nu\left(
 \left(-r_\mu\right)r_\nu\cdot 2M\,\delta\,I
 + b_\mu b_\nu\cdot 2M\,\delta\,I
