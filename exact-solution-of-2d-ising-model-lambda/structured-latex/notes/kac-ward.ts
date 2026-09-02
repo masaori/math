@@ -569,4 +569,25 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_selection_even_subgraph_action_character_uncovered_fiber_structure",
+    targets: [
+      "claim_selection_even_subgraph_action_character",
+      "claim_selection_sum_character_evaluation",
+    ],
+    title: { text: "単一の偶部分グラフで覆えないファイバーでは軌道分解が必ず変わる（一辺二の全数観察）" },
+    body: [
+      paragraph([
+        "単一の偶部分グラフでは覆えない一辺 ", math(String.raw`L=2`), " の ",
+        math(String.raw`16`), " ファイバーで、置換ごとに偶部分グラフを変える頂点組み替え候補が",
+        "従う構造を調べた（sagemath/check/even-subgraph-uncovered-fiber-structure）。対象となる ",
+        math(String.raw`2{,}816`), " 置換の符号反転候補を、元と像の軌道長の多重集合が一致する辺へ",
+        "制限すると、辺は一つも残らなかった。従って検査した候補族による大域対応は軌道分解を",
+        "保存する規則にはできない。接触対が属する二軌道の長さの組と、切り替え可能接触対が属する",
+        "二軌道の長さの組をさらに固定しても同じであり、接触対配置を同じ軌道長の組の間で保つ規則にも",
+        "できない。次は、候補が軌道をどのように分裂・合併するかを調べる。検算は有限集合・有限写像と ",
+        math(String.raw`\mathbb Q(\zeta_8)`), " の等号だけで完結し、浮動小数点は使わない。",
+      ]),
+    ],
+  },
 ]);

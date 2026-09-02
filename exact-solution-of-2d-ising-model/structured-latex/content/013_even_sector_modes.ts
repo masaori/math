@@ -990,13 +990,13 @@ e^{-ij\tilde\theta_{\mu+M}}
         String.raw`\begin{aligned}
 \tilde\theta_{M+1-\mu}
 &= \frac{2\pi\left(M+1-\mu-\frac12\right)}{M}
-   &&(\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}) \\
+   &&(\because \blkref{antiperiodic_exp_sum}\text{ の } \tilde\theta \text{ の定義}) \\
 &= \frac{2\pi\left(M - \left(\mu-\frac12\right)\right)}{M}
    &&\left(\because M+1-\mu-\tfrac12 = M - \left(\mu-\tfrac12\right)\right) \\
 &= 2\pi - \frac{2\pi\left(\mu-\frac12\right)}{M}
    &&(\because \mathbb C \text{ の四則}) \\
 &= 2\pi - \tilde\theta_\mu
-   &&(\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義})
+   &&(\because \blkref{antiperiodic_exp_sum}\text{ の } \tilde\theta \text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
@@ -1010,23 +1010,17 @@ e^{-ij\tilde\theta_{M+1-\mu}}
 &= e^{-ij\left(2\pi - \tilde\theta_\mu\right)}
    &&(\because \text{直前の (1)}) \\
 &= e^{-2\pi i j}\,e^{ij\tilde\theta_\mu}
-   &&(\because \text{theorem\_exp\_product}\ (n=1)) \\
+   &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= \left(\cos(2\pi j) - i\sin(2\pi j)\right)e^{ij\tilde\theta_\mu}
-   &&(\because \text{euler\_formula\_cos\_sin}) \\
+   &&(\because \blkref{euler_formula_cos_sin}) \\
 &= e^{ij\tilde\theta_\mu}
    &&(\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0)
 \end{aligned}`,
       ),
       paragraph([
-        "（指数法則は ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " すなわち ",
+        "ここで指数法則の ", math(String.raw`n=1`), " は ",
         math(String.raw`\mathrm{Mat}(1,\mathbb{C}) = \mathbb{C}`),
-        " に適用したもの、三角関数への書き換えは ",
-        ref("euler_formula_cos_sin"),
-        " による。）",
+        " における適用である。",
       ]),
       paragraph([
         "(3) ",
@@ -1050,17 +1044,10 @@ e^{-ij\tilde\theta_{M+1-\mu}}
 \end{aligned}`,
       ),
       paragraph([
-        "（ここで ",
-        ref("def_half_integer_modes"),
-        " (2) を ",
-        math(String.raw`\check{\mathcal{M}}`),
-        " の外の添字 ",
-        math(String.raw`1-\mu`),
-        " に適用している。",
-        ref("def_check_index_set"),
-        " が述べたとおり、この主張を ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " で残してあるのはまさにこの橋渡しのためである。）",
+        "この適用では、添字の周期性を ", math(String.raw`\check{\mathcal{M}}`),
+        " の外の添字 ", math(String.raw`1-\mu`),
+        " に用いている。添字の周期性を ", math(String.raw`\mu\in\mathbb Z`),
+        " で述べたことが、この橋渡しを可能にする。",
       ]),
     ],
     conversion: {
