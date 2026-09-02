@@ -732,7 +732,7 @@ e^{-ij\tilde\theta_{\mu+M}}
         String.raw`\begin{aligned}
 \tilde\theta_\nu - \tilde\theta_\mu
 &= \frac{2\pi\left(\nu-\frac12\right)}{M} - \frac{2\pi\left(\mu-\frac12\right)}{M}
-&&\bigl(\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}\bigr) \\
+&&\bigl(\because \blkref{antiperiodic_exp_sum}\text{ の } \tilde\theta \text{ の定義}\bigr) \\
 &= \frac{2\pi}{M}\left(\nu - \mu\right)
 &&\bigl(\because \text{通分と分配法則}\bigr)
 \end{aligned}`,
@@ -754,7 +754,7 @@ e^{-ij\tilde\theta_{\mu+M}}
         String.raw`\begin{aligned}
 \tilde\theta_1
 &=\frac{2\pi\left(1-\frac12\right)}{M}
-&&\left(\because\ \text{antiperiodic\_exp\_sum の }\tilde\theta\text{ の定義}\right)\\
+&&\left(\because\ \blkref{antiperiodic_exp_sum}\text{ の }\tilde\theta\text{ の定義}\right)\\
 &=\frac{\pi}{M}
 &&\left(\because\ \mathbb R\text{ の四則}\right)\\
 &\leq\tilde\theta_\mu
@@ -762,7 +762,7 @@ e^{-ij\tilde\theta_{\mu+M}}
 &\leq\tilde\theta_M
 &&\left(\because\ \mu\leq M\text{ と }\mu\mapsto\tilde\theta_\mu\text{ の単調増加}\right)\\
 &=\frac{2\pi\left(M-\frac12\right)}{M}
-&&\left(\because\ \text{antiperiodic\_exp\_sum の }\tilde\theta\text{ の定義}\right)\\
+&&\left(\because\ \blkref{antiperiodic_exp_sum}\text{ の }\tilde\theta\text{ の定義}\right)\\
 &=2\pi-\frac{\pi}{M}
 &&\left(\because\ \mathbb R\text{ の四則}\right)
 \end{aligned}`,
@@ -837,20 +837,13 @@ e^{-ij\tilde\theta_{\mu+M}}
         String.raw`\begin{aligned}
 \tilde\theta_{\frac{M+1}{2}}
 &= \frac{2\pi\left(\frac{M+1}{2}-\frac12\right)}{M}
-&&\bigl(\because \text{antiperiodic\_exp\_sum の } \tilde\theta \text{ の定義}\bigr) \\
+&&\bigl(\because \blkref{antiperiodic_exp_sum}\text{ の } \tilde\theta \text{ の定義}\bigr) \\
 &= \frac{2\pi\cdot\frac{M}{2}}{M}
 &&\bigl(\because \tfrac{M+1}{2}-\tfrac12 = \tfrac{M}{2}\bigr) \\
 &= \pi
 &&\bigl(\because \text{約分}\bigr)
 \end{aligned}`,
       ),
-      paragraph([
-        "（",
-        math(String.raw`\tilde\theta`),
-        " の定義は ",
-        ref("antiperiodic_exp_sum"),
-        " による。）",
-      ]),
       paragraph([
         "(5) ",
         math(String.raw`(\Leftarrow)`),
