@@ -19,6 +19,7 @@ LOG_FILE="$LOG_DIR/audit.log"
 LOCK_DIR="$LOG_DIR/audit.lock"
 WORKTREE="$LOG_DIR/audit-worktree"
 PROJECT_NAME="$(basename "$PROJECT_DIR")"
+source "$PROJECT_DIR/scripts/audit-common.sh"
 
 mkdir -p "$LOG_DIR"
 
@@ -131,11 +132,11 @@ if [ -f "$ledger" ]; then
 
   # 本文末尾の「この先に書くこと」と台帳のセクション表の突き合わせ。
   # 本文のリストにしか無い項目は実行の列に並ばないので永久に落ちる（実測で 1 件落ちていた）。
-  remark_items="$(grep -c 'todo("残り")\|todo("未着手")' "$AUDIT_PROJECT/structured-latex/content/main-text.ts" 2>/dev/null || echo 0)"
-  ledger_todo="$(grep -c '| todo |' "$ledger" 2>/dev/null || echo 0)"
-  log "本文の「この先に書くこと」: ${remark_items} 項目 / 台帳の todo: ${ledger_todo} 件"
-  if [ "${remark_items:-0}" -gt "${ledger_todo:-0}" ]; then
-    add "本文の「この先に書くこと」が ${remark_items} 項目あるのに台帳の todo は ${ledger_todo} 件（台帳に無い項目は実行されない）"
+  remark_items="$(count_matches 'todo("残り")\|todo("未着手")' "$AUDIT_PROJECT/structured-latex/content/main-text.ts")"
+  ledger_items="$(count_remaining_ledger_rows "$ledger")"
+  log "本文の「この先に書くこと」: ${remark_items} 項目 / 台帳の残作業表: ${ledger_items} 件"
+  if [ "${remark_items:-0}" -gt "${ledger_items:-0}" ]; then
+    add "本文の「この先に書くこと」が ${remark_items} 項目あるのに台帳の残作業表は ${ledger_items} 件（台帳に無い項目は実行されない）"
   fi
 fi
 
