@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 102 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 103 回目の tick 時点）
+
+**経路反転が非後退置換のファイバーを保つ対合であることを一般の $L$ で示した。** 経路反転 $\mathcal T(\varphi):=\iota\circ\varphi^{-1}\circ\iota$ を定義し（`def_permutation_path_reversal`）、動く辺の集合が反転像 $\iota(M(\varphi))$ に等しいこと、非後退置換を非後退置換へ写すこと、二回適用で元へ戻ること、反転対の辺集合 $D$ と単純通過の辺集合 $E_1$ を保つこと（したがって各ファイバー $\mathcal N_L(D,E)$ からそれ自身への全単射であること）を証明した（`claim_path_reversal_fiber_preserving_involution`）。SageMath 検算 `path-reversal-fiber-preserving-involution` は一辺 $L=2$ の非後退置換 $30{,}784$ 個の全数で検査した（実行 27 秒）。
+
+これは位相和の整数性へ向けた道具である。次 tick は、経路反転が位相寄与の回転位相の指数を反転すること（動く辺の一歩の回転数の総和 $T(\varphi)$ を使い $\mathcal W^{a,b}_L(\mathcal T(\varphi))=\zeta_8^{-2T(\varphi)}\,\mathcal W^{a,b}_L(\varphi)$。ねじれ符号は向きに依らないので保存され、軌道数も保存される）を示し、ファイバー位相和 $\mathcal K^{a,b}_L(D,E)$ が $\mathbb Z+\mathbb Z(\zeta_8-\zeta_8^3)$（$\zeta_8-\zeta_8^3$ は $\sqrt2$ の代数的表示）に落ちることを導く。
+
+前進前レビューでは、前 tick が拡張した回転差二部分の相等の statement・proof・検算 overview・台帳を照合し、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。並列の式変形統一は締切のため見送った。
+
+Lambda 側 check（909 ブロック）・linkage（403 検算）・対象 SageMath（全数 $30{,}784$）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 394 ページを通した。
+
+## ひとつ前の到達点（2026-09-02 の 102 回目の tick 時点）
 
 **回転差が正負 $4$ の二部分の位相和が、一般の辺長でもファイバーごとに等しいことを示した。** 標準対平滑化 $S$ は各 $(D,E)$ ファイバーを保ち、$\mathcal A_L^{(-4)}$ と $\mathcal A_L^{(4)}$ を位相寄与を保って全単射で交換する。したがって有限和を $S$ で添字変換すれば、任意のスピン構造について両部分和は等しい。既存主張 `claim_non_phase_reversing_standard_smoothing_involution` の statement と proof へこの有限和の帰結を加え、SageMath は一辺二の $129$ ファイバー×四スピン構造の相等 $516$ 件を検査した。簡約四部分の回転差二部分は一般に一方の二倍へまとめられる。次は接触の無い部分と残余の位相和を整数値の符号付き数え上げとして構成する。
 

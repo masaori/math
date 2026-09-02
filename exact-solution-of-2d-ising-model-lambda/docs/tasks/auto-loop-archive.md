@@ -1,5 +1,12 @@
 # 自動ループ 記録の保管庫
 
+## 2026-09-02 の 103 回目の tick で台帳から移した記録（2026-09-02 の 98 回目）
+
+- 現在地: 全接触対が切り替え不能な残余の集合 $\mathcal R_L^{\mathrm{lock}}$ を定義し（`def_fully_unswitchable_residual_subset`）、その各接触対の少なくとも一方の台の辺が反転対の辺集合 $D(\varphi)$ に属することを示した（`claim_fully_unswitchable_contacts_witness_doubled_edges`）。SageMath は $L=2$ の残余 $18{,}755$ 個を、別の切り替え可能な接触対を持つ $17{,}925$ 個と完全に切り替え不能な $830$ 個へ分類し、後者の接触対 $5{,}216$ 件で反転対の辺の存在を検査した。Lean は未着手だった。
+- 前進記録: 切り替え不能な残余を二部分へ分類し、完全に切り替え不能な接触対が反転対の辺を指すことを固定した。
+- 式変形の統一: 姉妹側の「複素数の自乗の偏角」（`range_of_args_of_square_of_complex_numbers`）で、証明末尾の二つの参照一覧を削り、偏角・射影・極座標表現の演算・角度切断を実際に使う各行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変だった。
+- レビュー記録: 前 tick の `def_unswitchable_standard_pair_subset`・`claim_doubled_edge_fiber_phase_reduction` を本文・五集合分類の全数検算・残余分類と照合し、「何も言っていない主張」や不一致は無いと判断した。
+
 ## 2026-09-02 の 100 回目の tick で台帳から移した記録（2026-09-02 の 95 回目）
 
 - 現在地: 切り替え不能な標準接触対が反転対の辺を強制することを示した（`claim_unswitchable_standard_pair_forces_doubled_edge`）。SageMath は一辺二の切り替え不能な置換 $18{,}755$ 個を全数検査した。Lean は未着手だった。
