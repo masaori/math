@@ -644,44 +644,9 @@ n_\mu^2
         ref("def_delta_M"),
         " より ",
         math(String.raw`\delta^M_{\mu-\nu,0} = \delta^M_{-\mu+\nu,0} = 0`),
-        " である。",
-        ref("anticommutator_of_psi"),
-        " を ",
-        math(String.raw`(\mu,\nu)`),
-        "、",
-        math(String.raw`(\mu,-\nu)`),
-        "、",
-        math(String.raw`(-\mu,\nu)`),
-        "、",
-        math(String.raw`(-\mu,-\nu)`),
-        " に適用すると",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-{[\psi_\mu^\dagger, \psi_\nu^\dagger]_+}
-&= 0
-   \quad (\because \text{反交換関係の第 1 式}) \\
-{[\psi_\mu^\dagger, \psi_{-\nu}]_+}
-&= \delta^M_{\mu-\nu,0}\,I
-   \quad (\because \text{反交換関係の第 2 式}) \\
-&= 0
-   \quad (\because \delta^M_{\mu-\nu,0}=0) \\
-{[\psi_{-\mu}, \psi_\nu^\dagger]_+}
-&= \delta^M_{-\mu+\nu,0}\,I
-   \quad (\because \text{反交換関係の第 2 式と反交換子の対称性}) \\
-&= 0
-   \quad (\because \delta^M_{-\mu+\nu,0}=0) \\
-{[\psi_{-\mu}, \psi_{-\nu}]_+}
-&= 0
-   \quad (\because \text{反交換関係の第 3 式})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（第 3 式は ",
-        ref("anticommutator_of_psi"),
-        " の第 2 式を添字 ",
-        math(String.raw`(\nu, -\mu)`),
-        " に適用し、次の反交換子の対称性を使った。）",
+        " である。準備として、同じ次数の正方行列 ",
+        math(String.raw`X, Y`),
+        " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 [X,Y]_+
@@ -692,6 +657,39 @@ n_\mu^2
 &=[Y,X]_+
 && (\because\ \text{反交換子の定義})
 \end{aligned}`),
+      paragraph([
+        "が成り立つ（反交換子の対称性）。",
+        ref("anticommutator_of_psi"),
+        " を ",
+        math(String.raw`(\mu,\nu)`),
+        "、",
+        math(String.raw`(\mu,-\nu)`),
+        "、",
+        math(String.raw`(\nu,-\mu)`),
+        "、",
+        math(String.raw`(-\mu,-\nu)`),
+        " に適用すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+{[\psi_\mu^\dagger, \psi_\nu^\dagger]_+}
+&= 0
+   \quad (\because \blkref{anticommutator_of_psi}\text{ の第 1 式}) \\
+{[\psi_\mu^\dagger, \psi_{-\nu}]_+}
+&= \delta^M_{\mu-\nu,0}\,I
+   \quad (\because \blkref{anticommutator_of_psi}\text{ の第 2 式}) \\
+&= 0
+   \quad (\because \delta^M_{\mu-\nu,0}=0) \\
+{[\psi_{-\mu}, \psi_\nu^\dagger]_+}
+&= \delta^M_{-\mu+\nu,0}\,I
+   \quad (\because \blkref{anticommutator_of_psi}\text{ の第 2 式を }(\nu,-\mu)\text{ へ適用し、上の反交換子の対称性}) \\
+&= 0
+   \quad (\because \delta^M_{-\mu+\nu,0}=0) \\
+{[\psi_{-\mu}, \psi_{-\nu}]_+}
+&= 0
+   \quad (\because \blkref{anticommutator_of_psi}\text{ の第 3 式})
+\end{aligned}`,
+      ),
       paragraph([
         "すなわち、",
         math(String.raw`A \in \{\psi_\mu^\dagger, \psi_{-\mu}\}`),
@@ -758,6 +756,7 @@ n_\mu n_\nu
       notes: [
         "2026-08-15 の式変形統一で、Step 1 の四つの反交換関係を根拠なしの並記から、一行一関係・行末根拠へ開いた。内容は変えていない。",
         "2026-09-01 の式変形統一で、反交換子の対称性にあった一行三等号を、3 段の行末根拠つきの鎖へ開いた。内容・参照は変えていない。",
+        "2026-09-03 の式変形統一で、Step 1 の鎖の直後に置かれた参照説明（第 3 の関係の添字適用）を削り、反交換子の対称性の鎖を準備として鎖の前へ移し、反交換関係への参照を実際に使う各行末の blkref へ移した。適用する添字の列も実際に使う (ν,−μ) へ揃えた。内容・式変形・根拠・参照は不変である。",
       ],
     },
   },
