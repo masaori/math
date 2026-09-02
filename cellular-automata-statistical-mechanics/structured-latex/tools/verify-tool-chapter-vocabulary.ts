@@ -330,22 +330,24 @@ violations.push(...correspondenceViolations);
  * ——空振りの除外（何も覆い隠さない句）と、宣言から漏れた語の両方を止める。
  * (2) 既存物理由来語を覆い隠さないこと——あちらは使用箇所を要求しない禁止語なので、
  * 除外句で覆うとどの検査にも現れない永久の穴になる。
- * (3) 走査対象の本文に実際に現れること——役目を終えた除外が許可だけ残るのを防ぐ。
+ * (3) 数学的道具立て章の本文に実際に現れること——CA 章だけで使う句を登録しても、
+ * 数学的道具立て章に対する許可だけが残るためである。
  */
-const scannedRawTexts: string[] = [];
+const toolChapterRawTexts: string[] = [];
 for (const file of files) {
-  if (!file.file.startsWith(TOOL_CHAPTER_PREFIX) && !file.file.startsWith(CA_CHAPTER_PREFIX)) continue;
+  if (!file.file.startsWith(TOOL_CHAPTER_PREFIX)) continue;
   for (const block of file.blocks) {
     if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
     const parts: string[] = [];
     collectText(block, parts);
-    scannedRawTexts.push(parts.join(" "));
+    toolChapterRawTexts.push(parts.join(" "));
   }
 }
 for (const chapter of documentOrganization) {
+  if (String(chapter.id) !== "mathematical_tools") continue;
   const parts: string[] = [];
   collectText([chapter.title, ...chapter.sections.map((section) => [section.title, section.input, section.output, section.main])], parts);
-  scannedRawTexts.push(parts.join(" "));
+  toolChapterRawTexts.push(parts.join(" "));
 }
 for (const entry of NEUTRAL_PHRASE_ENTRIES) {
   if (entry.phrase.trim().length === 0) {
@@ -373,8 +375,8 @@ for (const entry of NEUTRAL_PHRASE_ENTRIES) {
       `除外句が既存物理由来語を覆い隠している: ${entry.phrase}（${maskedPhysics.join("、")}）`,
     );
   }
-  if (!scannedRawTexts.some((text) => text.includes(entry.phrase))) {
-    violations.push(`除外句が走査対象の本文で使われていない: ${entry.phrase}`);
+  if (!toolChapterRawTexts.some((text) => text.includes(entry.phrase))) {
+    violations.push(`除外句が数学的道具立て章の本文で使われていない: ${entry.phrase}`);
   }
 }
 
@@ -757,7 +759,7 @@ console.log(
     `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件・` +
     `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.size} 件、` +
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
-    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・実使用をすべて確認）、` +
+    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用をすべて確認）、` +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
