@@ -619,4 +619,27 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_selection_even_subgraph_action_character_local_cut_join",
+    targets: [
+      "claim_selection_even_subgraph_action_character",
+      "claim_selection_sum_character_evaluation",
+    ],
+    title: { text: "軌道の分裂・合併で変わる後続遷移は一つまたは二つの頂点に局在する（一辺二の全数観察）" },
+    body: [
+      paragraph([
+        "単一の偶部分グラフでは覆えない一辺 ", math(String.raw`L=2`), " の ",
+        math(String.raw`16`), " ファイバーで、像の置換を元の置換の動く向き付き辺集合へ",
+        "引き戻して後続辺の違いを調べた（sagemath/check/even-subgraph-orbit-local-cut-join）。",
+        "全 ", math(String.raw`4{,}608`), " 候補辺のうち ", math(String.raw`2{,}816`),
+        " 本は一つの頂点で二本の後続遷移を変更し、", math(String.raw`1{,}792`),
+        " 本は二つの頂点でそれぞれ二本の後続遷移を変更する。それ以外の頂点から出る遷移は",
+        "変わらない。元の一軌道の中だけで変更する ",
+        math(String.raw`4{,}096`), " 本が二分裂を、異なる二軌道にまたがる交換を含む ",
+        math(String.raw`512`), " 本が合併を起こす。従って一般の辺長へ持ち上げる候補は、",
+        "一つまたは二つの頂点で二本ずつの後続遷移を変更する局所操作として探せる。検算は有限集合と",
+        "有限写像の等号だけで完結し、浮動小数点は使わない。",
+      ]),
+    ],
+  },
 ]);
