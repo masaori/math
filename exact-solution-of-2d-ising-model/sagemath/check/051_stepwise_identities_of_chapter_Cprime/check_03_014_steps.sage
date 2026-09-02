@@ -17,6 +17,7 @@
 #    T_V_plus_check_Z_Y
 # =========================================================================
 import os
+import numpy as np
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
 load(os.path.join(_dir, '_prelude.sage'))
 
@@ -26,8 +27,19 @@ S = Steps()
 NMAX = 8         # n 重交換子の検証範囲
 NTAYLOR = 40     # 級数の打ち切り次数
 
+def act_on_all_matrix_units(left, units, right):
+    """X -> left*X*right を全行列単位へ同時に作用させる。"""
+    return np.einsum(
+        'ij,bjk,kl->bil',
+        np.asarray(left, dtype=np.complex128),
+        units,
+        np.asarray(right, dtype=np.complex128),
+        optimize=True,
+    )
+
 for M in STEP_M:
     O = SpinOps(M)
+    matrix_units = np.eye(O.d * O.d, dtype=np.complex128).reshape(O.d * O.d, O.d, O.d)
     Id = identity_matrix(CDF, O.d)
     H2 = O.H2
     H1p = O.H1(+1)
@@ -49,21 +61,30 @@ for M in STEP_M:
         S.add("V1_plus_half_invertible exp(X)^{-1} = exp(-X)", Vh * Vhi, Id)
         S.add("V2_invertible V_2 V_2^{-1} = I", V2 * V2i, Id)
         S.add("V_plus_factors_invertible (Vplus) V^{(+)} V^{(+)-1} = I", Vp * Vpi, Id)
-        # T_V_plus_is_conjugation: T_g(T_h(X)) = T_{gh}(X) の各段
-        Xt = checkZ(O, 1)
-        S.add("T_V_plus_is_conjugation (1) T_g(T_h(X)) = g(hXh^{-1})g^{-1}",
-              Vh * (V2 * Xt * V2i) * Vhi, Vh * (V2 * Xt * V2i) * Vhi)
-        S.add("T_V_plus_is_conjugation (2) = (gh)X(h^{-1}g^{-1})  [結合律]",
-              Vh * (V2 * Xt * V2i) * Vhi, (Vh * V2) * Xt * (V2i * Vhi))
-        # (gh)^{-1} = h^{-1}g^{-1} は「h^{-1}g^{-1} が gh の逆元である」ことの主張なので、
-        # 数値的に不安定な inverse() ではなく積が I になることで確かめる
-        # （V_2 の前因子 (2s_2)^{M/2} と exp(K_1 ...) のせいで inverse() の条件数が悪い）。
-        S.add("T_V_plus_is_conjugation (3) (gh)(h^{-1}g^{-1}) = I",
+        # T_V_plus_is_conjugation: 合成則を二回適用した写像等式を、
+        # Mat(2^M,C) の全行列単位上で検査する。
+        S.add("T_V_plus_is_conjugation (1) (gh)(h^{-1}g^{-1}) = I",
               (Vh * V2) * (V2i * Vhi), Id)
-        S.add("T_V_plus_is_conjugation (4) (h^{-1}g^{-1})(gh) = I",
+        S.add("T_V_plus_is_conjugation (2) (h^{-1}g^{-1})(gh) = I",
               (V2i * Vhi) * (Vh * V2), Id)
-        S.add("T_V_plus_is_conjugation (5) T_{(V^{(+)})} = T_{V^{(+)}}",
-              Vh * (V2 * (Vh * Xt * Vhi) * V2i) * Vhi, Vp * Xt * Vpi)
+        first_composite = act_on_all_matrix_units(
+            Vh, act_on_all_matrix_units(V2, matrix_units, V2i), Vhi)
+        first_single = act_on_all_matrix_units(Vh * V2, matrix_units, V2i * Vhi)
+        S.add("T_V_plus_is_conjugation (3) T_g o T_h = T_{gh} on all matrix units",
+              RDF(float(np.max(np.abs(first_composite - first_single)))), RDF(0))
+        second_composite = act_on_all_matrix_units(
+            Vh * V2, act_on_all_matrix_units(Vh, matrix_units, Vhi), V2i * Vhi)
+        single_vplus = act_on_all_matrix_units(Vp, matrix_units, Vpi)
+        S.add("T_V_plus_is_conjugation (4) T_{gh} o T_g = T_{ghg} on all matrix units",
+              RDF(float(np.max(np.abs(second_composite - single_vplus)))), RDF(0))
+        triple_composite = act_on_all_matrix_units(
+            Vh,
+            act_on_all_matrix_units(
+                V2, act_on_all_matrix_units(Vh, matrix_units, Vhi), V2i),
+            Vhi,
+        )
+        S.add("T_V_plus_is_conjugation (5) T_{(V^{(+)})} = T_{V^{(+)}} on all matrix units",
+              RDF(float(np.max(np.abs(triple_composite - single_vplus)))), RDF(0))
 
         for mu in list(range(1, M + 1)) + [0, -1]:
             t = th_tilde(M, mu)

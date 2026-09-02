@@ -1235,6 +1235,42 @@
       ],
       "boundaryEvidence": "一般形はイジング模型を仮定せず有限複素行列だけで意味が定まるため数学的道具立てに置く。二つの特殊化は、それぞれ対応する行列の可逆性と半整数運動量の checkZ, checkY を直接入力に持つため2次元イジングモデルに置く。各特殊化は一ブロック一主張であり、半指数行列の可逆性から V_2 の可逆性へ入力を一つだけ切り替える。直後では偶セクターの合成共役写像を定義するため入力集合が切り替わるので、この二項で節を閉じる。",
       "readabilityStatus": "一般形は一ブロック一主張で、定義、左右の分配、スカラー移動、結合を一段ずつ示す。二つの特殊化も一ブロック一主張で、先行する各可逆性と一般形への代入だけを用いる。本文、Lean、SageMath の推論粒度が対応している。"
+    },
+    {
+      "name": "偶セクターの合成共役写像と単一共役との一致",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "evensectorT_definition_T_V_plus",
+        "evensectorT_claim_T_V_plus_is_conjugation"
+      ],
+      "input": [
+        "偶セクター転送行列 V^{(+)} と、その三つの構成因子",
+        "半指数行列と第二の転送行列 V_2 の可逆性",
+        "一般の可逆な有限複素行列による共役写像と、可逆行列の積の逆行列"
+      ],
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+        "evensectorT_definition_V_plus",
+        "evensectorT_claim_V1_plus_half_invertible",
+        "evensectorT_claim_V2_invertible",
+        "TV1_hatZ_hatY_009_definition_invertible_elements",
+        "TV1_hatZ_hatY_011_definition_T_g"
+      ],
+      "output": [
+        "三つの構成因子による共役の合成として定めた T_{(V^{(+)})}",
+        "T_{(V^{(+)})} が V^{(+)} による一つの共役写像と一致すること"
+      ],
+      "formalizationEvidence": {
+        "leanFile": "lean/Ising2D/Part014/Definition001_VPlus.lean",
+        "sageMathFile": "sagemath/check/051_stepwise_identities_of_chapter_Cprime/check_03_014_steps.sage",
+        "currentStatus": "本文は合成写像の定義と単一共役との一致を一ブロック一主張へ分け、既存の一般合成則を二回適用する。Lean の TVPlus・TVPlus_apply と TVPlus_eq_TConj・TVPlus_apply_eq_conj が二項へ対応し、SageMath は積の左右逆と二回の合成則を全行列単位上で検査する。"
+      },
+      "concludingClaim": "偶セクターの合成共役写像は V^{(+)} による共役写像そのものである",
+      "concludingClaimEntryId": "evensectorT_claim_T_V_plus_is_conjugation",
+      "boundaryEvidence": "章内依存順69で、半指数行列と V_2 の可逆性、一般の T_g、V^{(+)} の三因子表示から、三つの共役の合成 T_{(V^{(+)})} を定義する。順70はこの定義と既存の一般合成則を直接入力に、半指数行列と V_2 の可逆性から積も可逆であることを確認し、一般合成則を二回適用して T_{(V^{(+)})}=T_{V^{(+)}} へ閉じる。Lean の TVPlus・TVPlus_eq_TConj と SageMath の全行列単位上の合成共役検査が同じ二項へ対応する。直後の順71は実対称生成子と正定値行列の指数関数から正定値行列 W を扱う別枝で、この二項と相互に依存せず、外部入力集合もすべて切り替わるため、順70の後で節を閉じる。生成時に二項の章配置と連続性、全直接依存、本文 fingerprint、Lean の証明本体、SageMath の実検査本体、順71との相互非依存と入力集合の切り替わりを固定検査する。",
+      "readabilityStatus": "順69は一つの合成写像だけを定義する。順70は構成因子と途中積の可逆性を確認した後、既に証明済みの一般合成則を二回適用して三重共役を一つの共役へまとめる。一つの主張内で一般則を重複証明せず、本文、Lean、SageMath の対応も一意なので、対象二項の説明粒度は合格である。"
     }
   ],
   "explanationGranularityReview": {
@@ -4787,11 +4823,7 @@
         },
         {
           "dependentId": "evensectorT_claim_T_V_plus_is_conjugation",
-          "prerequisiteId": "TV1_hatZ_hatY_011_definition_T_g"
-        },
-        {
-          "dependentId": "evensectorT_claim_T_V_plus_is_conjugation",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+          "prerequisiteId": "calculation_formulae_046_claim_conjugation_is_ring_homomorphism"
         },
         {
           "dependentId": "evensectorT_002_claim_nesting_commutator",
@@ -8998,7 +9030,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -13326,7 +13358,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 11,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -19419,8 +19451,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10669,
-        "inspectedContentSha256": "4934666008a69fac6098f89426c5339af45e4de05c8f45281e5c274dddf24aa1",
+        "inspectedCharacterCount": 10479,
+        "inspectedContentSha256": "4c43b0117c30870239e14227f74de648bf6b432821eeaee464e91feb5282d1f0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20024,7 +20056,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -20092,7 +20124,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -20161,7 +20193,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -20364,8 +20396,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2905,
-        "inspectedContentSha256": "8ec68ac072c613ec7c2d86523942d4094e1bd246119b618c4e331dbbcc341167",
+        "inspectedCharacterCount": 2445,
+        "inspectedContentSha256": "6e3f79505b6371a79a1a2ca52f478f87e3798089d7df53bd0e6870dcc9a816e7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20375,24 +20407,22 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "V_plus_factors_invertible",
+        "V1_plus_half_invertible",
+        "V2_invertible",
+        "conjugation_is_ring_homomorphism",
         "def_T_V_plus",
-        "def_T_g",
         "def_V_plus",
-        "def_invertible_elements_of_R",
-        "definition_of_cc"
+        "def_invertible_elements_of_R"
       ],
       "dependsOnEntryIds": [
         "TV1_hatZ_hatY_009_definition_invertible_elements",
-        "TV1_hatZ_hatY_011_definition_T_g",
-        "calc_formulae_006_definition_of_cc",
-        "evensectorT_claim_V_plus_factors_invertible",
+        "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+        "evensectorT_claim_V1_plus_half_invertible",
+        "evensectorT_claim_V2_invertible",
         "evensectorT_definition_T_V_plus",
         "evensectorT_definition_V_plus"
       ],
-      "semanticPrerequisiteLabels": [
-        "definition_of_cc"
-      ],
+      "semanticPrerequisiteLabels": [],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
