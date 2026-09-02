@@ -53212,6 +53212,152 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_path_reversal_phase_conjugation",
+        labels: [],
+        title: { text: "経路反転による位相寄与の共役" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_path_reversal_phase_conjugation",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_permutation_total_turning",
+                  kind: "definition",
+                  title: { text: "非後退置換の一歩回転数の総和" },
+                  labels: ["def_permutation_total_turning"],
+                  habitat: "Z",
+                  statement: [
+                    paragraph([
+                      math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                      "（", ref("def_nonbacktracking_permutations"), "）に対し、一歩回転数の総和を",
+                    ]),
+                    displayMath(String.raw`\Theta(\varphi):=
+\sum_{\vec g\in M(\varphi)}\tau\bigl(\vec g,\varphi(\vec g)\bigr)\in\mathbb Z`),
+                    paragraph([
+                      "で定める。動く辺の集合は ", ref("def_moved_edge_set"), "、一歩の回転数は ",
+                      ref("def_step_turning"), " で定めた。", math(String.raw`\vec g\in M(\varphi)`),
+                      " なら非後退置換の定義により ",
+                      math(String.raw`\varphi(\vec g)\in\operatorname{Next}(\vec g)`),
+                      " なので各加数は定まり、有限集合上の整数の有限和だから値は整数に属する。実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_path_reversal_phase_conjugation",
+              kind: "claim",
+              title: { text: "経路反転は位相寄与の回転位相指数を反転する" },
+              labels: ["claim_path_reversal_phase_conjugation"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/path-reversal-phase-conjugation"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、",
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                  " を取る。このとき ", math(String.raw`\overline{\mathbb Q}`), " の等式",
+                ]),
+                displayMath(String.raw`\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
+=\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)`),
+                paragraph([
+                  "が成り立つ。経路反転は ", ref("def_permutation_path_reversal"),
+                  "、一歩回転数の総和は ", ref("def_permutation_total_turning"),
+                  "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                  " で定めた。全て有限集合上の有限積・有限和と代数的数の整数冪だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`C\in\mathcal C(\varphi)`), " を取る。写像 ",
+                  math(String.raw`\vec h\mapsto\iota(\vec h)`), " は ",
+                  ref("claim_reversal_is_involution"), " により ", math(String.raw`C`), " から ",
+                  math(String.raw`\iota(C):=\{\iota(\vec h)\mid\vec h\in C\}`),
+                  " への全単射である。任意の ", math(String.raw`\vec h\in C`), " について",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal T(\varphi)\bigl(\iota(\varphi(\vec h))\bigr)
+&=\iota\Bigl(\varphi^{-1}\bigl(\iota(\iota(\varphi(\vec h)))\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
+&=\iota\bigl(\varphi^{-1}(\varphi(\vec h))\bigr)
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=\iota(\vec h)
+&&\bigl(\because\ \varphi^{-1}\circ\varphi\text{ は恒等写像}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。", math(String.raw`\varphi`), " は ", math(String.raw`C`),
+                  " をそれ自身へ全単射で写すので、これは ", math(String.raw`\mathcal T(\varphi)`),
+                  " が ", math(String.raw`\iota(C)`), " を逆順に巡回することを示す。",
+                  ref("claim_moved_orbit_partition"), " と ", ref("claim_path_reversal_fiber_preserving_involution"),
+                  " により、", math(String.raw`C\mapsto\iota(C)`), " は ",
+                  math(String.raw`\mathcal C(\varphi)`), " から ",
+                  math(String.raw`\mathcal C(\mathcal T(\varphi))`), " への全単射である。",
+                ]),
+                paragraph([
+                  "次に一つの軌道の遷移成分の積を比較する。有限積の添字を ",
+                  math(String.raw`\vec g=\iota(\varphi(\vec h))`), " で付け替える。",
+                  ref("claim_reversal_direction_shift"), " と ", ref("def_step_turning"), " の三つの場合から",
+                ]),
+                displayMath(String.raw`\tau\bigl(\iota(\varphi(\vec h)),\iota(\vec h)\bigr)
+=-\tau\bigl(\vec h,\varphi(\vec h)\bigr)`),
+                paragraph([
+                  "である。また切断線偶奇は向きに依らない（", ref("def_seam_parities"),
+                  "）ので ", math(String.raw`\varepsilon_{a,b}(\iota(\vec h))=\varepsilon_{a,b}(\vec h)`),
+                  " である。したがって、求めたい積から始めると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{\vec g\in\iota(C)}M^{a,b}_{\vec g,\mathcal T(\varphi)(\vec g)}
+&=\prod_{\vec h\in C}M^{a,b}_{\iota(\varphi(\vec h)),\iota(\vec h)}
+&&\bigl(\because\ \vec h\mapsto\iota(\varphi(\vec h))\text{ による有限積の添字の付け替え}\bigr)\\
+&=\prod_{\vec h\in C}\varepsilon_{a,b}(\iota(\vec h))\,
+\zeta_8^{\,\tau(\iota(\varphi(\vec h)),\iota(\vec h))}
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices},\ \blkref{claim_rotation_phase_as_turning_power}\bigr)\\
+&=\prod_{\vec h\in C}\varepsilon_{a,b}(\vec h)\,
+\zeta_8^{-\tau(\vec h,\varphi(\vec h))}
+&&\bigl(\because\ \text{上のねじれ符号の不変性と一歩回転数の反転}\bigr)\\
+&=\zeta_8^{-2\sum_{\vec h\in C}\tau(\vec h,\varphi(\vec h))}
+\prod_{\vec h\in C}\varepsilon_{a,b}(\varphi(\vec h))\,
+\zeta_8^{\,\tau(\vec h,\varphi(\vec h))}
+&&\bigl(\because\ \varphi:C\to C\text{ によるねじれ符号の有限積の添字の付け替えと指数法則}\bigr)\\
+&=\zeta_8^{-2\sum_{\vec h\in C}\tau(\vec h,\varphi(\vec h))}
+\prod_{\vec h\in C}M^{a,b}_{\vec h,\varphi(\vec h)}
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices},\ \blkref{claim_rotation_phase_as_turning_power}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "最後に軌道全体の有限積を取る。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec g\in\iota(C)}M^{a,b}_{\vec g,\mathcal T(\varphi)(\vec g)}\right)
+&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\text{ と上の軌道族の全単射}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-\zeta_8^{-2\sum_{\vec h\in C}\tau(\vec h,\varphi(\vec h))}
+\prod_{\vec h\in C}M^{a,b}_{\vec h,\varphi(\vec h)}\right)
+&&\bigl(\because\ \text{一つの軌道について示した積の等式}\bigr)\\
+&=\zeta_8^{-2\sum_{\vec h\in M(\varphi)}\tau(\vec h,\varphi(\vec h))}
+\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec h\in C}M^{a,b}_{\vec h,\varphi(\vec h)}\right)
+&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ と有限積の指数法則}\bigr)\\
+&=\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{def_permutation_total_turning},\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "全過程は有限集合上の添字の全単射、整数の有限和、代数的数の有限積と整数冪だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_contact_pair_switchability_criterion",
         labels: [],
         title: { text: "接触対の切り替え可能性の局所判定" },

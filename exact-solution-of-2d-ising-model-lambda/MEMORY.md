@@ -2,7 +2,24 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 103 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 104 回目の tick 時点）
+
+**経路反転が位相寄与の回転位相指数を反転することを一般の $L$ で示した。** 動く辺上の一歩回転数の総和 $\Theta(\varphi)$ を定義し（`def_permutation_total_turning`）、経路反転が各置換軌道 $C$ を反転辺からなる逆順の軌道 $\iota(C)$ へ写すこと、切断線のねじれ符号を保つこと、一歩回転数を反転することを有限積で合成して
+
+$$
+\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
+=\zeta_8^{-2\Theta(\varphi)}\mathcal W^{a,b}_L(\varphi)
+$$
+
+を証明した（`claim_path_reversal_phase_conjugation`）。SageMath 検算 `path-reversal-phase-conjugation` は一辺 $L=2$ の非後退置換 $30{,}784$ 個と四つのスピン構造の全 $123{,}136$ 件で検査した。
+
+次 tick は、経路反転のファイバー保存対合とこの位相共役を有限和へ適用し、ファイバー位相和 $\mathcal K^{a,b}_L(D,E)$ が $\mathbb Z+\mathbb Z(\zeta_8-\zeta_8^3)$ に属することを導く。
+
+前進前レビューでは、前 tick の経路反転の定義・四つの帰結・SageMath 検算を照合した。四つの帰結はいずれも今回の位相共役で使う実質を持ち、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+Lambda 側 check（912 ブロック）・linkage（404 検算）・対象 SageMath（全 $123{,}136$ 件）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 395 ページを通した。位相共役の Lean 二版は未着手であり、このセクションは四層完了とはしていない。
+
+## ひとつ前の到達点（2026-09-02 の 103 回目の tick 時点）
 
 **経路反転が非後退置換のファイバーを保つ対合であることを一般の $L$ で示した。** 経路反転 $\mathcal T(\varphi):=\iota\circ\varphi^{-1}\circ\iota$ を定義し（`def_permutation_path_reversal`）、動く辺の集合が反転像 $\iota(M(\varphi))$ に等しいこと、非後退置換を非後退置換へ写すこと、二回適用で元へ戻ること、反転対の辺集合 $D$ と単純通過の辺集合 $E_1$ を保つこと（したがって各ファイバー $\mathcal N_L(D,E)$ からそれ自身への全単射であること）を証明した（`claim_path_reversal_fiber_preserving_involution`）。SageMath 検算 `path-reversal-fiber-preserving-involution` は一辺 $L=2$ の非後退置換 $30{,}784$ 個の全数で検査した（実行 27 秒）。
 
