@@ -515,4 +515,26 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_selection_even_subgraph_action_character_global_rewiring_matching",
+    targets: [
+      "claim_selection_even_subgraph_action_character",
+      "claim_selection_sum_character_evaluation",
+    ],
+    title: { text: "置換ごとに偶部分グラフを選ぶ大域的組み替えは完全マッチングを持つ（一辺二の全数観察）" },
+    body: [
+      paragraph([
+        "固定した偶部分グラフに対する一様な頂点組み替えは全置換で位相を反転しなかったが、",
+        "置換ごとに使う偶部分グラフを変えてよい大域的な対応を一辺 ", math(String.raw`L=2`),
+        " で調べた（sagemath/check/even-subgraph-global-rewiring-matching）。巻き付き文字が非自明な各ファイバーで、",
+        "四スピン構造すべての位相寄与を反転する頂点組み替え候補を辺とする二部グラフを作った。",
+        "全 ", math(String.raw`64`), " ファイバー、置換 ", math(String.raw`5{,}248`),
+        " 個の全てで完全マッチングが存在し、合計 ", math(String.raw`2{,}624`), " 対を得た。",
+        "従って一辺二では、置換ごとに偶部分グラフと組み替えを選べば、四スピン構造に共通する",
+        "符号反転対合を構成できる。次はこの有限マッチングが選ぶ偶部分グラフと局所接続の規則を抽出し、",
+        "一般の辺長で定義できる大域対応へ持ち上げる。検算は有限集合・有限写像と ",
+        math(String.raw`\mathbb Q(\zeta_8)`), " の等号だけで完結し、浮動小数点は使わない。",
+      ]),
+    ],
+  },
 ]);

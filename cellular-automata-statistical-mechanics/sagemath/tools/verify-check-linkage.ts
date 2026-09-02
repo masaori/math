@@ -19,9 +19,10 @@ const here = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(here, "../..");
 const checkRoot = join(projectRoot, "sagemath", "check");
 
-const declarationPattern = /^\*\*対象ラベル\*\*:[ \t]*(.*)$/gm;
-const labelValuePattern = /^`([^`]+)`/;
-const unpromotedValuePattern = /^未昇格/;
+const declarationMarkerPattern = /^[ \t]*\*\*対象ラベル\*\*.*$/gm;
+const declarationPattern = /^[ \t]*\*\*対象ラベル\*\*:[ \t]*(.*)$/;
+const labelValuePattern = /^`([^`]+)`$/;
+const unpromotedValuePattern = /^未昇格(?:（[^\r\n]*）)?$/;
 
 type Declaration =
   | { readonly kind: "label"; readonly label: string }
@@ -29,12 +30,16 @@ type Declaration =
 
 /** overview.md の本文から対象ラベル宣言を一つだけ取り出す。取り出せない理由は文字列で返す。 */
 function readDeclaration(text: string): Declaration | { readonly error: string } {
-  const values = [...text.matchAll(declarationPattern)].map((match) => match[1].trim());
-  if (values.length === 0) return { error: "対象ラベル宣言が無い" };
-  if (values.length > 1) {
-    return { error: `対象ラベル宣言が ${values.length} 個ある（ちょうど一つでなければならない）` };
+  const declarationLines = [...text.matchAll(declarationMarkerPattern)].map((match) => match[0]);
+  if (declarationLines.length === 0) return { error: "対象ラベル宣言が無い" };
+  if (declarationLines.length > 1) {
+    return { error: `対象ラベル宣言が ${declarationLines.length} 個ある（ちょうど一つでなければならない）` };
   }
-  const value = values[0];
+  const match = declarationLines[0].match(declarationPattern);
+  if (match === null) {
+    return { error: `対象ラベル宣言の行 "${declarationLines[0].trim()}" が正規の書式でない` };
+  }
+  const value = match[1].trim();
   if (unpromotedValuePattern.test(value)) return { kind: "unpromoted" };
   const label = value.match(labelValuePattern)?.[1];
   if (label === undefined) {
@@ -61,6 +66,21 @@ function runDeclarationRegression(): void {
     },
     { name: "負例: 宣言が無い", text: "# 検算\n\n本文\n", expectError: true },
     { name: "負例: 値が書式に合わない", text: "**対象ラベル**: claim_example\n", expectError: true },
+    {
+      name: "負例: ラベルの後ろに別の値が続く",
+      text: "**対象ラベル**: `claim_example` と `claim_other`\n",
+      expectError: true,
+    },
+    {
+      name: "負例: 未昇格の後ろに正規でない注記が続く",
+      text: "**対象ラベル**: 未昇格 arbitrary suffix\n",
+      expectError: true,
+    },
+    {
+      name: "負例: コロンを欠く宣言行",
+      text: "**対象ラベル** `claim_example`\n",
+      expectError: true,
+    },
   ];
   const failures: string[] = [];
   for (const testCase of cases) {

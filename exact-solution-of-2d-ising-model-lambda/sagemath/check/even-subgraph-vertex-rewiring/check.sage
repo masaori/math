@@ -103,6 +103,7 @@ with_candidate = 0
 with_phase_matching_candidate = 0
 total_candidates = 0
 first_failure = None
+phase_edges_by_fiber = {}
 for (doubled, single), fiber in sorted(all_fibers.items()):
     translations = sorted(
         (subset for subset in selection_subsets
@@ -135,6 +136,9 @@ for (doubled, single), fiber in sorted(all_fibers.items()):
                     for a in (0, 1) for b in (0, 1)
                 ):
                     found = True
+                    phase_edges_by_fiber.setdefault((doubled, single), set()).add(
+                        (permutation_key(phi), permutation_key(candidate))
+                    )
                     break
             if found:
                 with_phase_matching_candidate += 1
