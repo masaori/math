@@ -37,34 +37,6 @@ const NEUTRAL_PHRASES = [
 ];
 
 /**
- * 本文側の既存物理由来語。数学的道具立て章は「2 値 CA を仮定せずに述べられるもの」であり、
- * 既存物理との比較は CA 章の照合節だけが持つ。ところが物理由来語の検査は識別子だけに掛かっており、
- * **読者が実際に読む散文**には一件も掛かっていなかった。CA 固有語は散文と識別子の両方を見るのに、
- * 物理由来語は識別子しか見ないという非対称は、比較章の所有物である文（「物理的な意味を要求しない」等）が
- * 数学的道具立て章の定義の中に残ることを許す。同じ境界を散文にも課す。
- *
- * 「否定形なら安全」とはしない。物理の語をどう扱うかを述べること自体が比較章の役目であり、
- * 数学的道具立て章の定義・主張・証明はその語に言及する必要がない。
- *
- * 一般数学で常用され、物理を先取りしない語（場・作用素・体・空間など）は含めない。
- */
-const PHYSICS_TERMS = [
-  "物理",
-  "因果集合",
-  "時空",
-  "光円錐",
-  "量子",
-  "ヒルベルト",
-  "多様体",
-  "相対論",
-  "粒子",
-  "場の量子論",
-  "作用素代数",
-  "Lorentz",
-  "ローレンツ",
-];
-
-/**
  * 識別子側の CA 由来語。block id と label は出版本文に出ないが、整理前のファイル名を
  * 引き継いでいるため「章の分類を id から読むと誤読する」状態が残っている。
  * 本文（散文・数式）の語彙検査とは独立の軸なので、ここで別に検査する。
@@ -89,23 +61,90 @@ const CA_IDENTIFIER_TERMS = [
 ];
 
 /**
- * 識別子側の既存物理由来語。数学的道具立て章は「2 値 CA を仮定せずに述べられるもの」だが、
- * 既存物理の名前を機械識別子へ残すと、章の分類を id から読んだときに比較章の所有物だと誤読する。
- * CA 由来語と同じ性質の欠陥なので、同じ軸で無条件に止める。
- * 一般数学の語と衝突しないもの（作用素・体・場のように数学側で常用される語を含めない）に限る。
+ * 既存物理由来語の対応表。**本文の軸と識別子の軸をここ一箇所から導出する。**
+ *
+ * 数学的道具立て章は「2 値 CA を仮定せずに述べられるもの」であり、既存物理との比較は
+ * CA 章の照合節だけが持つ。この境界は、読者が読む散文（本文の軸）と、章の分類を id から
+ * 読むときに効く機械識別子（識別子の軸）の二本で対称に止める設計になっている。
+ *
+ * ところが二つの軸を別々の配列で持っていたため、片方だけへ語を足すと対称が静かに崩れた。
+ * 実際に `Lorentz` が本文の軸だけに入って識別子の軸を素通りする欠陥が起き、その場の一語を
+ * 足して直したが、**次に足す語で同じことが起きる形は残っていた**。実測でも `作用素代数` が
+ * 本文の軸だけにあり、`operator_algebra` を id へ書くと識別子の軸を素通りしていた。
+ *
+ * そこで語の追加点を対応表の一箇所に閉じ、二つの軸を導出する。識別子の対応語を持たない語は
+ * `identifier: null` と持たない理由の宣言を必須にし、黙って片肺になることを不可能にする。
+ *
+ * 「否定形なら安全」とはしない。物理の語をどう扱うかを述べること自体が比較章の役目であり、
+ * 数学的道具立て章の定義・主張・証明はその語に言及する必要がない。
+ *
+ * 一般数学で常用され、物理を先取りしない語（場・作用素・体・空間など）は含めない。
+ * 識別子の対応語も一般数学の語と衝突しないものに限る（`作用素` 単独ではなく `作用素代数` に
+ * 対して `operator_algebra` を対応させるのはこのためである）。
  */
-const PHYSICS_IDENTIFIER_TERMS = [
-  "causal",
-  "spacetime",
-  "lightcone",
-  "quantum",
-  "hilbert",
-  "manifold",
-  "relativity",
-  "particle",
-  "physical",
-  "lorentz",
+const PHYSICS_TERM_CORRESPONDENCE: readonly {
+  readonly body: string;
+  readonly identifier: string | null;
+  readonly reasonWhenNoIdentifier?: string;
+}[] = [
+  { body: "物理", identifier: "physical" },
+  { body: "因果集合", identifier: "causal" },
+  { body: "時空", identifier: "spacetime" },
+  { body: "光円錐", identifier: "lightcone" },
+  { body: "量子", identifier: "quantum" },
+  { body: "ヒルベルト", identifier: "hilbert" },
+  { body: "多様体", identifier: "manifold" },
+  { body: "相対論", identifier: "relativity" },
+  { body: "粒子", identifier: "particle" },
+  { body: "場の量子論", identifier: "quantum" },
+  { body: "作用素代数", identifier: "operator_algebra" },
+  { body: "Lorentz", identifier: "lorentz" },
+  { body: "ローレンツ", identifier: "lorentz" },
 ];
+
+/** 本文側の既存物理由来語。対応表から導出するので、ここへ直接足すことはできない。 */
+const PHYSICS_TERMS = PHYSICS_TERM_CORRESPONDENCE.map((entry) => entry.body);
+
+/** 識別子側の既存物理由来語。対応表から導出する（同じ対応語を複数の本文語が指すので重複を除く）。 */
+const PHYSICS_IDENTIFIER_TERMS = [
+  ...new Set(
+    PHYSICS_TERM_CORRESPONDENCE.flatMap((entry) =>
+      entry.identifier === null ? [] : [entry.identifier],
+    ),
+  ),
+];
+
+/**
+ * 対応表そのものの検査。片肺の宣言と、識別子の軸で空振りする綴りを起票時に止める。
+ *
+ * 本文の軸は大文字小文字を区別せずに照合する（`physicsTermsIn`）が、識別子の軸は
+ * リポジトリの小文字命名規約に合わせて区別したまま照合する。したがって対応語が
+ * 小文字でなければ識別子の軸は静かに空振りするので、ここで拒否する。
+ */
+const correspondenceViolations: string[] = [];
+for (const entry of PHYSICS_TERM_CORRESPONDENCE) {
+  if (entry.body.length === 0) {
+    correspondenceViolations.push("既存物理由来語の対応表に空の本文語がある");
+    continue;
+  }
+  if (entry.identifier === null) {
+    if ((entry.reasonWhenNoIdentifier ?? "").length === 0) {
+      correspondenceViolations.push(
+        `既存物理由来語に識別子の対応語が無いのに理由が宣言されていない: ${entry.body}`,
+      );
+    }
+    continue;
+  }
+  if (entry.identifier.length === 0) {
+    correspondenceViolations.push(`既存物理由来語の識別子の対応語が空である: ${entry.body}`);
+    continue;
+  }
+  if (entry.identifier !== entry.identifier.toLowerCase()) {
+    correspondenceViolations.push(
+      `既存物理由来語の識別子の対応語が小文字でない: ${entry.body}（${entry.identifier}）`,
+    );
+  }
+}
 
 /**
  * CA 章で既存物理由来語を持ってよいブロック（＝既存理論との照合の所有者）の宣言。
@@ -221,6 +260,7 @@ for (const blockId of PHYSICS_COMPARISON_BLOCK_IDS) {
 }
 
 const violations: string[] = [];
+violations.push(...correspondenceViolations);
 if (toolBlockIds.size === 0) {
   violations.push("数学的道具立て章の走査対象が 0 件である");
 }
@@ -519,7 +559,8 @@ if (violations.length > 0) {
 }
 console.log(
   `章の意味境界の語彙検査 OK（本文の CA 固有語 ${CA_TERMS.length} 件、` +
-    `本文の既存物理由来語 ${PHYSICS_TERMS.length} 件、走査対象は数学的道具立て章 ${toolBlockIds.size} 件・` +
+    `本文の既存物理由来語 ${PHYSICS_TERMS.length} 件（識別子の対応語 ${PHYSICS_IDENTIFIER_TERMS.length} 件、対応表 ${PHYSICS_TERM_CORRESPONDENCE.length} 件）、` +
+    `走査対象は数学的道具立て章 ${toolBlockIds.size} 件・` +
     `CA 章 ${caBlockIds.size} 件・未分類 ${unclassifiedBlockIds.size} 件、` +
     "数学的道具立て章に残る CA 由来識別子 0 件、既存物理由来識別子 0 件、本文の既存物理由来語 0 件、" +
     `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件・` +
