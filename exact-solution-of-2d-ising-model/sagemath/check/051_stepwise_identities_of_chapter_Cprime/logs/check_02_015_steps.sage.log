@@ -1,0 +1,72 @@
+=== check_02: 015 章の各段の等式 ===
+  def_gamma1_gamma2 (1) gamma_2 の定義に theta -> -theta: max residual = 0.000e+00  ->  PASS
+  def_gamma1_gamma2 (2) cos(-theta) = cos theta: max residual = 0.000e+00  ->  PASS
+  def_gamma1_gamma2 (3) sin(-theta) = -sin theta: max residual = 0.000e+00  ->  PASS
+  def_gamma1_gamma2 (4) A(theta) の (2,1) 成分 = -gamma_2(-theta): max residual = 0.000e+00  ->  PASS
+  def_gamma1_gamma2 (5) A(theta) の (1,1)(2,2) 成分 = gamma_1(theta): max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (1) conj(gamma_2) を定義式で書く: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (2) 積の共役 conj(zw)=conj z conj w: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (3) conj(i) = -i: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (4) conj(e^{i theta}) = e^{-i theta}  [theta 実数]: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (5) s_2* は実数: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (6) 和・差の共役: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (7) c_1 cos t, sin t, s_1 c_2 は実数: max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (8) = -gamma_2(-theta): max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (1式) gamma_2(-theta) = -conj(gamma_2(theta)): max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (2式-a) gamma_2 gamma_2(-) = gamma_2 (-conj gamma_2): max residual = 0.000e+00  ->  PASS
+  relation_of_gamma_2 (2式-b) = -|gamma_2|^2  [abs_basic_properties]: max residual = 5.704e-14  ->  PASS
+  relation_of_gamma_2 (4式) sqrt(-gamma_2 gamma_2(-)) = |gamma_2|: max residual = 1.776e-15  ->  PASS
+  relation_of_gamma_2 (5式) sqrt(gamma_2 gamma_2(-)) = i|gamma_2|: max residual = 1.158e-15  ->  PASS
+  eigenvector (det 1) det(A - lambda I) の 2x2 定義: max residual = 5.605e-14  ->  PASS
+  eigenvector (det 2) = lambda^2 - 2 g_1 lambda + (g_1^2 + ab): max residual = 1.705e-13  ->  PASS
+  eigenvector (det 3) 因数分解で det = 0: max residual = 1.465e-13  ->  PASS
+  eigenvector (v 1-1) (A v)_1 = g_1(-/+ r) + ab: max residual = 1.139e-13  ->  PASS
+  eigenvector (v 1-2) b = -conj(a): max residual = 0.000e+00  ->  PASS
+  eigenvector (v 1-3) a conj(a) = r^2: max residual = 5.704e-14  ->  PASS
+  eigenvector (v 1-4) = (g_1 +/- r)(-/+ r): max residual = 5.684e-14  ->  PASS
+  eigenvector (v 1-5) = lambda (v)_1: max residual = 0.000e+00  ->  PASS
+  eigenvector (v 2-1) (A v)_2 = (-b)(-/+ r) + g_1 b: max residual = 1.137e-13  ->  PASS
+  eigenvector (v 2-2) -b = conj(a) を 2 箇所へ同時適用: max residual = 0.000e+00  ->  PASS
+  eigenvector (v 2-3) 整理: max residual = 1.172e-13  ->  PASS
+  eigenvector (v 2-4) -/+r - g_1 = -(g_1 +/- r): max residual = 0.000e+00  ->  PASS
+  eigenvector (v 2-5) = lambda (v)_2: max residual = 0.000e+00  ->  PASS
+  eigenvector (固有ベクトル) A v = lambda v: max residual = 1.137e-13  ->  PASS
+  diagonalization (det 1) 2x2 行列式の定義: max residual = 5.594e-17  ->  PASS
+  diagonalization (det 2) (2 sqrt M)^2 = 4M: max residual = 1.388e-16  ->  PASS
+  diagonalization (det 3) = -r/(2Mb): max residual = 0.000e+00  ->  PASS
+  diagonalization (Step2 1) A P^ の列 = (A v_+, A v_-): max residual = 3.838e-16  ->  PASS
+  diagonalization (Step2 2) = P^ D^: max residual = 3.553e-15  ->  PASS
+  diagonalization (Step4) A = P^ D^ P^{-1}: max residual = 1.088e-14  ->  PASS
+  det_A (Step1 1) det の 2x2 定義: max residual = 4.276e-14  ->  PASS
+  det_A (Step1 2) = g_1^2 + gamma_2 gamma_2(-): max residual = 0.000e+00  ->  PASS
+  det_A (Step2 1) gamma_2 gamma_2(-) を積の形へ: max residual = 1.140e-13  ->  PASS
+  det_A (Step2 2) i*i = -1, e^{it}e^{-it} = 1: max residual = 5.765e-14  ->  PASS
+  det_A (Step2 3) (a_0-iv)(a_0+iv) = a_0^2+v^2: max residual = 5.685e-14  ->  PASS
+  det_A (Step2 4) a_0 = c_1 u - s_1 c_2: max residual = 0.000e+00  ->  PASS
+  det_A (Step2 5) u^2+v^2 = 1: max residual = 1.066e-14  ->  PASS
+  det_A (Step4 1) (iii) 2c_1s_1c_2 s_2*^2 u = 2c_1s_1c_2* s_2* u: max residual = 2.842e-14  ->  PASS
+  det_A (Step4 2) (iii) s_1^2 c_2^2 s_2*^2 = s_1^2 c_2*^2: max residual = 1.421e-14  ->  PASS
+  det_A (Step5 1) (i) s_1^2 - c_1^2 + 1 = 0: max residual = 1.066e-14  ->  PASS
+  det_A (Step5 2) (i) c_1^2 - s_1^2 = 1: max residual = 1.066e-14  ->  PASS
+  det_A (Step5 3) (ii) c_2*^2 - s_2*^2 = 1: max residual = 4.441e-16  ->  PASS
+  det_A (Step5 4) g_1^2 + gamma_2 gamma_2(-) = 1: max residual = 1.138e-13  ->  PASS
+  det_A (Step6 1) lambda_+ lambda_- = g_1^2 - r^2: max residual = 4.230e-14  ->  PASS
+  det_A (Step6 2) = 1: max residual = 1.090e-13  ->  PASS
+  det_A (最後) g_1^2 = 1 + r^2: max residual = 1.137e-13  ->  PASS
+  gamma1_gt_1 (Step1 1) gamma_1 の定義: max residual = 0.000e+00  ->  PASS
+  lambda_eq_exp (Step1 1) cosh gamma = g_1: max residual = 3.553e-15  ->  PASS
+  lambda_eq_exp (Step1 2) (sinh gamma)^2 = (cosh gamma)^2 - 1: max residual = 1.137e-13  ->  PASS
+  lambda_eq_exp (Step1 3) = g_1^2 - 1: max residual = 1.705e-13  ->  PASS
+  lambda_eq_exp (Step1 4) = r^2 (det_A_theta_tilde): max residual = 1.137e-13  ->  PASS
+  lambda_eq_exp (Step1 5) sinh gamma = r: max residual = 7.105e-15  ->  PASS
+  lambda_eq_exp (Step2 1) e^{+gamma} = cosh + sinh: max residual = 4.441e-16  ->  PASS
+  lambda_eq_exp (Step2 2) e^{+gamma} = g_1 + r: max residual = 1.066e-14  ->  PASS
+  lambda_eq_exp (Step2 3) = lambda_+: max residual = 1.066e-14  ->  PASS
+  lambda_eq_exp (Step2 4) e^{-gamma} = cosh - sinh: max residual = 2.550e-15  ->  PASS
+  lambda_eq_exp (Step2 5) e^{-gamma} = g_1 - r: max residual = 4.247e-15  ->  PASS
+  lambda_eq_exp (Step2 6) = lambda_-: max residual = 4.247e-15  ->  PASS
+  gamma_2_theta_tilde_nonzero: min |gamma_2(theta~_mu)| = 3.517e-01 -> 0 から離れている
+  gamma1_gt_1_theta_tilde:    min (gamma_1 - 1) = 6.004e-02 -> 狭義に正
+  def_gamma_theta_tilde_mu:   min gamma(theta~_mu) = 3.448e-01 -> 狭義に正
+  段数（区別された等式の種類）: 66
+check_02: PASS

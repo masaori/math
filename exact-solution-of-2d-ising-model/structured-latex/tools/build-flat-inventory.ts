@@ -39,6 +39,7 @@ const mathematicalToolEntryIdsOutsideToolFiles = new Set([
   "TV1_hatZ_hatY_011_definition_T_g",
   "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar",
   "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
+  "TV1_hatZ_hatY_015_claim_linearity_of_T",
   "TV1_hatZ_hatY_definition_pauli_group",
   "transfer_matrix_005_definition_end_isomorphism",
   "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
@@ -1407,7 +1408,7 @@ const vPlusFactorsInvertibleExpectedDirectDependencies = [
   "evensectorT_claim_V2_invertible",
   "evensectorT_definition_V_plus",
 ].sort();
-const v1PlusHalfInvertibleExpectedContentSha256 = "7ddf2ffcfb7f8d60b2fde61783ddc4dd251dfb8e197f8bbb4eb27b244a874dc7";
+const v1PlusHalfInvertibleExpectedContentSha256 = "9673ccc699a872424d8f3464e516dda61983f6cd416d6be7924c63d862a6aafa";
 const vTwoInvertibleExpectedContentSha256 = "eabadeb2353bdb7cd8c2ff1014e2c3d6f42e52901fb3cdb657f753382ef97992";
 const vPlusFactorsInvertibleExpectedContentSha256 = "bfb1bb937c796f71881bf9bbd1609a6c1338227b8facc90df00b2fc880d4d0f8";
 const vPlusFactorsInvertibilityBoundaryCandidates = [] as const;
@@ -1465,43 +1466,25 @@ for (const executionFragment of vPlusFactorsInvertibilityExpectedSageMathExecuti
   }
 }
 const conjugationLinearityExpectedDirectDependencies = [
+  "TV1_hatZ_hatY_015_claim_linearity_of_T",
+  "calc_formulae_006_definition_of_cc",
+  "evensectorT_claim_V1_plus_half_invertible",
+  "evensector_003_definition_half_integer_modes",
+  "evensector_003a_definition_check_index_set",
+].sort();
+const conjugationLinearityExpectedContentSha256 = "efa1813659a4a355bd87dc8ef865bf4f6628972fe0cd6645ee2a8e011f2b44cc";
+const genericConjugationLinearityExpectedDirectDependencies = [
   "TV1_hatZ_hatY_009_definition_invertible_elements",
   "TV1_hatZ_hatY_011_definition_T_g",
   "calc_formulae_006_definition_of_cc",
-  "evensectorT_claim_V_plus_factors_invertible",
-  "evensector_003a_definition_check_index_set",
-  "linear_space_general_002_claim_scalar_identity_commutes",
+  "calculation_formulae_definition_set_and_algebra_notation",
 ].sort();
-const conjugationLinearityExpectedContentSha256 = "edde665026f94ea622d8b11770a963ac959e09de0a3c44426d56c097be3b54eb";
+const genericConjugationLinearityExpectedContentSha256 = "99ac6ebf22a0cc2df0c9ba8afa947765649a68a5937ca171ae13fcfdea571495";
 const conjugationLinearityBoundaryCandidates = [
-  {
-    output: "一般の可逆な有限複素行列 g による共役写像 T_g が複素線型であること",
-    provisionalFinalChapterAfterSplit: "数学的道具立て",
-    currentEntryId: "evensectorT_006_claim_linearity_of_T",
-    requiredDirectInputsAfterSplit: [
-      "def_T_g",
-      "def_invertible_elements_of_R",
-      "definition_of_cc",
-      "scalar_identity_commutes",
-    ],
-    formalizationTarget: "Lean の TConj_linear・linearity_of_T_on_check と SageMath の一般行列 X,W に対する線型性検査",
-  },
-  {
-    output: "偶セクターの半指数行列による共役写像が checkZ, checkY の線型結合上で複素線型であること",
-    provisionalFinalChapterAfterSplit: "2次元イジングモデル",
-    currentEntryId: "evensectorT_006_claim_linearity_of_T",
-    requiredDirectInputsAfterSplit: [
-      "一般の T_g の複素線型性",
-      "V1_plus_half_invertible",
-      "def_half_integer_modes",
-      "def_check_index_set",
-    ],
-    formalizationTarget: "Lean の linearity_of_T_V1halfPlus と SageMath の半指数行列による共役の線型性検査",
-  },
   {
     output: "第二の転送行列 V_2 による共役写像が checkZ, checkY の線型結合上で複素線型であること",
     provisionalFinalChapterAfterSplit: "2次元イジングモデル",
-    currentEntryId: "evensectorT_006_claim_linearity_of_T",
+    currentEntryId: "evensectorT_006a_claim_linearity_of_T_V2",
     requiredDirectInputsAfterSplit: [
       "一般の T_g の複素線型性",
       "V2_invertible",
@@ -1513,33 +1496,9 @@ const conjugationLinearityBoundaryCandidates = [
 ] as const;
 const conjugationLinearityExpectedBoundaryCandidates = [
   {
-    output: "一般の可逆な有限複素行列 g による共役写像 T_g が複素線型であること",
-    provisionalFinalChapterAfterSplit: "数学的道具立て",
-    currentEntryId: "evensectorT_006_claim_linearity_of_T",
-    requiredDirectInputsAfterSplit: [
-      "def_T_g",
-      "def_invertible_elements_of_R",
-      "definition_of_cc",
-      "scalar_identity_commutes",
-    ],
-    formalizationTarget: "Lean の TConj_linear・linearity_of_T_on_check と SageMath の一般行列 X,W に対する線型性検査",
-  },
-  {
-    output: "偶セクターの半指数行列による共役写像が checkZ, checkY の線型結合上で複素線型であること",
-    provisionalFinalChapterAfterSplit: "2次元イジングモデル",
-    currentEntryId: "evensectorT_006_claim_linearity_of_T",
-    requiredDirectInputsAfterSplit: [
-      "一般の T_g の複素線型性",
-      "V1_plus_half_invertible",
-      "def_half_integer_modes",
-      "def_check_index_set",
-    ],
-    formalizationTarget: "Lean の linearity_of_T_V1halfPlus と SageMath の半指数行列による共役の線型性検査",
-  },
-  {
     output: "第二の転送行列 V_2 による共役写像が checkZ, checkY の線型結合上で複素線型であること",
     provisionalFinalChapterAfterSplit: "2次元イジングモデル",
-    currentEntryId: "evensectorT_006_claim_linearity_of_T",
+    currentEntryId: "evensectorT_006a_claim_linearity_of_T_V2",
     requiredDirectInputsAfterSplit: [
       "一般の T_g の複素線型性",
       "V2_invertible",
@@ -1549,13 +1508,13 @@ const conjugationLinearityExpectedBoundaryCandidates = [
     formalizationTarget: "Lean の linearity_of_T_V2 と SageMath の V_2 による共役の線型性検査",
   },
 ] as const;
-const conjugationLinearityNextTickUnit = conjugationLinearityBoundaryCandidates.slice(0, 2);
-const conjugationLinearityExpectedNextTickUnit = conjugationLinearityExpectedBoundaryCandidates.slice(0, 2);
+const conjugationLinearityNextTickUnit = conjugationLinearityBoundaryCandidates.slice(0, 1);
+const conjugationLinearityExpectedNextTickUnit = conjugationLinearityExpectedBoundaryCandidates.slice(0, 1);
 if (JSON.stringify(conjugationLinearityBoundaryCandidates)
     !== JSON.stringify(conjugationLinearityExpectedBoundaryCandidates)
   || JSON.stringify(conjugationLinearityNextTickUnit)
     !== JSON.stringify(conjugationLinearityExpectedNextTickUnit)) {
-  throw new Error("共役写像の線型性について、境界候補または次回二項単位が変わりました");
+  throw new Error("共役写像の線型性について、境界候補または次回一項単位が変わりました");
 }
 const conjugationLinearityLeanFile = "lean/Ising2D/Part014/Claim005_TActionsOnCheck.lean";
 const genericConjugationLinearityLeanFile = "lean/Ising2D/Part008/Definition016_TV.lean";
@@ -1578,6 +1537,7 @@ const conjugationLinearitySageMathExecutableSource = readFileSync(
 ).split("\n").filter((line) => !line.trimStart().startsWith("#")).join("\n");
 for (const declarationFragment of [
   "theorem linearity_of_T_on_check",
+  "theorem linearity_of_T_on_check_from_general",
   "theorem linearity_of_T_V1halfPlus",
   "theorem linearity_of_T_V2",
 ]) {
@@ -1591,15 +1551,12 @@ for (const declarationFragment of ["theorem TConj_linear"]) {
   }
 }
 if (!genericConjugationLinearitySageMathExecutableSource.includes(
-  "rep.close(T_conj(g, a*Xr + b*Yr), a*T_conj(g,Xr) + b*T_conj(g,Yr)",
+  "rep.truth(right_scalar_compatible == rhs, f\"{prefix}: T_g の定義へ戻す\")",
 )) {
   throw new Error("一般の共役写像の線型性に対応する SageMath 実検査行が変わりました");
 }
 for (const executionFragment of [
-  '(Vh, Vhi, "V1^{1/2}")',
-  '(V2, V2i, "V2")',
-  '(Vp, Vpi, "V^{(+)}")',
-  'S.add(f"linearity_of_T ({nm}) T_g(aX+bW) = aT_g(X)+bT_g(W)"',
+  'S.add("linearity_of_T_on_check_Z_Y (V1^{1/2}) T_g(aX+bW) = aT_g(X)+bT_g(W)"',
 ]) {
   if (!conjugationLinearitySageMathExecutableSource.includes(executionFragment)) {
     throw new Error(`共役写像の線型性に対応する SageMath 実検査行が変わりました: ${executionFragment}`);
@@ -1616,6 +1573,7 @@ const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", new Set(["theorem_exp_product"])],
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", new Set(["mat_mult"])],
   ["eigenvalues_of_V_008_claim_joint_eigenspace_decomposition", new Set(["trace_of_idempotent"])],
+  ["evensectorT_claim_V1_plus_half_invertible", new Set(["matrix_exp_conjugation"])],
 ]);
 const forwardNavigationReviewById = new Map<string, Map<string, string>>([
   ["calculation_formulae_definition_set_and_algebra_notation", new Map([["definition_of_cc", "既存の複素数定義への案内"]])],
@@ -1638,12 +1596,11 @@ const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
   ["transfer_matrix_011_definition_H1_H2", "一般の生成子 H1^{(±)} と H2 の二定義に加え、既存の V1^{(±)} と V2 の指数表示を同じブロックへ束ねている。今回確定する節では外部入力として扱い、将来一ブロック一定義へ分割した後に依存順と節境界を再判定する必要がある。"],
-  ["evensectorT_006_claim_linearity_of_T", "一般の T_g の複素線型性と、偶セクターの半指数行列・V2 による二つの特殊化を一ブロックへ束ねている。一般形を数学的道具立てへ移し、二つのイジング固有特殊化を一ブロック一主張へ分け、誤って V^{(+)} 自体の可逆性へ向いた依存を各構成因子の可逆性と半整数運動量モードへ直して形式化ラベルを同期した後、節境界を再判定する必要がある。"],
+  ["evensectorT_006a_claim_linearity_of_T_V2", "V_2 による特殊化は独立ブロックへ分離済みだが、依存関係の章配置と Lean・SageMath の形式化対応の再確認を次回行う。"],
 ]);
 const futureBlockSplitRecommendedById = new Set([
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_011_definition_H1_H2",
-  "evensectorT_006_claim_linearity_of_T",
 ]);
 const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["closing_definition_D0_open_chain_operator", ["evensectorT_definition_H1_plus"]],
@@ -1653,6 +1610,8 @@ const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["evensectorT_claim_V1_plus_half_invertible", ["evenEigen_claim_V_plus_inverse_positive_and_traces"]],
   ["evensectorT_claim_V2_invertible", ["evensectorT_claim_V1_plus_half_invertible"]],
   ["evensectorT_claim_V_plus_factors_invertible", ["evensectorT_claim_V2_invertible"]],
+  ["evensectorT_006_claim_linearity_of_T", ["evensectorT_claim_V_plus_factors_invertible"]],
+  ["evensectorT_006a_claim_linearity_of_T_V2", ["evensectorT_006_claim_linearity_of_T"]],
 ]);
 const isingPattern = /Ising|イジング|spin|スピン|lattice|格子|site|サイト|transfer|転送|sector|セクター|momentum|運動量|fermion|フェルミオン/i;
 const abstractPatterns = [
@@ -2535,8 +2494,12 @@ const vTwoInvertibleEntry = entries.find((entry) =>
   entry.id === "evensectorT_claim_V2_invertible")!;
 const vPlusFactorsInvertibleEntry = entries.find((entry) =>
   entry.id === "evensectorT_claim_V_plus_factors_invertible")!;
+const genericConjugationLinearityEntry = entries.find((entry) =>
+  entry.id === "TV1_hatZ_hatY_015_claim_linearity_of_T")!;
 const conjugationLinearityEntry = entries.find((entry) =>
   entry.id === "evensectorT_006_claim_linearity_of_T")!;
+const vTwoConjugationLinearityEntry = entries.find((entry) =>
+  entry.id === "evensectorT_006a_claim_linearity_of_T_V2")!;
 if (kappaDefinitionEntry.dependencyPlacement!.chapterOrder !== 17
   || criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder !== 18
   || symmetrizedTransferMatrixSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 19
@@ -2956,6 +2919,7 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
   || vTwoInvertibleEntry.dependencyPlacement!.chapterOrder !== 65
   || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 66
   || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 67
+  || vTwoConjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 68
   || vPlusInvertibleEntry.kind !== "claim"
   || vPlusInversePositiveDefiniteEntry.kind !== "claim"
   || traceVPlusPositiveEntry.kind !== "claim"
@@ -2963,6 +2927,7 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
   || v1PlusHalfInvertibleEntry.kind !== "claim"
   || vTwoInvertibleEntry.kind !== "claim"
   || vPlusFactorsInvertibleEntry.kind !== "claim"
+  || genericConjugationLinearityEntry.kind !== "claim"
   || conjugationLinearityEntry.kind !== "claim"
   || JSON.stringify(vPlusInvertibleEntry.dependsOnEntryIds
     .filter((id) => vPlusPositiveDefiniteSectionEntryIds.includes(id as typeof vPlusPositiveDefiniteSectionEntryIds[number])))
@@ -2984,6 +2949,8 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
     !== JSON.stringify(vPlusFactorsInvertibleExpectedDirectDependencies)
   || JSON.stringify([...conjugationLinearityEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(conjugationLinearityExpectedDirectDependencies)
+  || JSON.stringify([...genericConjugationLinearityEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(genericConjugationLinearityExpectedDirectDependencies)
   || v1PlusHalfInvertibleEntry.explanationGranularityReview.inspectedContentSha256
     !== v1PlusHalfInvertibleExpectedContentSha256
   || vTwoInvertibleEntry.explanationGranularityReview.inspectedContentSha256
@@ -2992,11 +2959,14 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
     !== vPlusFactorsInvertibleExpectedContentSha256
   || conjugationLinearityEntry.explanationGranularityReview.inspectedContentSha256
     !== conjugationLinearityExpectedContentSha256
+  || genericConjugationLinearityEntry.explanationGranularityReview.inspectedContentSha256
+    !== genericConjugationLinearityExpectedContentSha256
   || vPlusPositiveDefiniteSection.sectionEntries.some((entry) =>
     entry.dependsOnEntryIds.includes(vPlusFactorsInvertibleEntry.id))
   || vPlusPositiveDefiniteSection.sectionEntries.some((entry) =>
     vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes(entry.id))
-  || !conjugationLinearityEntry.dependsOnEntryIds.includes(vPlusFactorsInvertibleEntry.id)
+  || !conjugationLinearityEntry.dependsOnEntryIds.includes(v1PlusHalfInvertibleEntry.id)
+  || !conjugationLinearityEntry.dependsOnEntryIds.includes(genericConjugationLinearityEntry.id)
   || vPlusPositiveDefiniteSection.sectionEntries.some((entry) =>
     conjugationLinearityEntry.dependsOnEntryIds.includes(entry.id))
   || vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes(conjugationLinearityEntry.id)
@@ -3008,7 +2978,8 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
   || vTwoInvertibleEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
   throw new Error(`偶セクター転送行列の正定値性・可逆性・残余候補、構成因子の可逆性、共役写像の線型性の節境界が変わりました: ${JSON.stringify({
     orders: [...vPlusPositiveDefiniteSection.sectionEntries, v1PlusHalfInvertibleEntry,
-      vTwoInvertibleEntry, vPlusFactorsInvertibleEntry, conjugationLinearityEntry]
+      vTwoInvertibleEntry, vPlusFactorsInvertibleEntry, conjugationLinearityEntry,
+      vTwoConjugationLinearityEntry]
       .map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
     reviewedSectionDependencies: vPlusPositiveDefiniteSection.sectionEntries
       .map((entry) => [entry.id, entry.dependsOnEntryIds]),
@@ -3063,20 +3034,19 @@ const inputsAddedForConjugationLinearity = conjugationLinearityEntry.dependsOnEn
 const inputsDroppedAfterVPlusFactorsInvertibility = vPlusFactorsInvertibleEntry.dependsOnEntryIds
   .filter((id) => !conjugationLinearityEntry.dependsOnEntryIds.includes(id));
 if (JSON.stringify(inputsAddedForConjugationLinearity.sort()) !== JSON.stringify([
-  "TV1_hatZ_hatY_011_definition_T_g",
-  "evensectorT_claim_V_plus_factors_invertible",
+  "TV1_hatZ_hatY_015_claim_linearity_of_T",
+  "evensector_003_definition_half_integer_modes",
   "evensector_003a_definition_check_index_set",
-  "linear_space_general_002_claim_scalar_identity_commutes",
 ].sort())
   || JSON.stringify(inputsDroppedAfterVPlusFactorsInvertibility.sort()) !== JSON.stringify([
-    "evensectorT_claim_V1_plus_half_invertible",
+    "TV1_hatZ_hatY_009_definition_invertible_elements",
     "evensectorT_claim_V2_invertible",
     "evensectorT_definition_V_plus",
   ].sort())
   || vPlusFactorsInvertibleEntry.explanationGranularityReview.status
     !== "自動検査で主題に適合"
   || conjugationLinearityEntry.explanationGranularityReview.status
-    !== "具体的な行列計算への展開またはブロック分割を要する") {
+    !== "自動検査で主題に適合") {
   throw new Error(`構成因子の可逆性から共役写像の線型性への入力集合が変わりました: ${JSON.stringify({
     added: inputsAddedForConjugationLinearity,
     dropped: inputsDroppedAfterVPlusFactorsInvertibility,
@@ -3180,6 +3150,22 @@ const mathematicalToolSectionBoundaries = [{
   mainTheoremEntryId: "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
   boundaryEvidence: "章内依存順の連続する四項であり、可逆元の定義から共役写像の定義と可逆行列全体の可換元の特徴付けへ進み、両者を使う定数倍を除いた単射性の主定理で節を閉じる。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末出力の一意性を生成時に固定検査する。",
   readabilityStatus: "四項とも複素数と有限行列の具体的な計算で書かれ、現行の説明粒度検査に合格している。未定義だった特性多項式・固有値・行列式による可逆化を削除し、明示的な逆行列をもつ行列単位の摂動だけを使う証明へ置き換えた。",
+}, {
+  name: "共役写像の複素線型性",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [genericConjugationLinearityEntry.id],
+  input: [
+    "正の自然数で指定した有限行列サイズ",
+    "複素数と有限複素行列の和・積・スカラー倍",
+    "可逆行列による共役写像",
+  ],
+  externalInputEntryIds: genericConjugationLinearityEntry.dependsOnEntryIds,
+  output: ["一般の可逆な有限複素行列による共役写像が複素線型であること"],
+  mainTheorem: "一般の可逆な有限複素行列による共役写像の複素線型性",
+  mainTheoremEntryId: genericConjugationLinearityEntry.id,
+  boundaryEvidence: "可逆行列と共役写像の定義を入力とし、イジング模型の記号を使わず複素線型性へ閉じる一項節である。章内依存順105に置き、直後の Pauli 行列群の節とは入力集合が切り替わる。",
+  readabilityStatus: "定義、左右の分配、左右の行列積と複素スカラー倍の両立を一行一根拠で示し、Lean と Gaussian 有理数上の SageMath 厳密検査が同じ段を追う。",
 }, {
   name: "Pauli 行列と共役で保たれる行列群",
   chapter: "数学的道具立て",
@@ -3689,36 +3675,37 @@ const isingModelSectionBoundaries = [{
     "第二の転送行列 V_2 が可逆であること",
     "偶セクター転送行列 V^{(+)} が可逆であること",
   ],
-  boundaryEvidence: "確定済みの正定値性・可逆性とトレース正値性の節に続き、順64は指数行列の逆行列公式だけから半指数行列の可逆性を示す。順65は同じ公式と正のスカラー倍の可逆性から V_2 の可逆性を示す。順66はこの二主張を直接入力として、可逆行列の積の閉性を二回適用し V^{(+)} の可逆性へ閉じる。直後の順67は順66を入力の一つに持つが、共役写像の定義、複素数、添字集合、スカラー倍した単位行列の可換性を追加し、二つの構成因子の可逆性と V^{(+)} の定義を直接入力から外す。この入力集合の切り替わりにより順66の後で節を閉じる。",
+  boundaryEvidence: "確定済みの正定値性・可逆性とトレース正値性の節に続き、順64は指数行列の逆行列公式だけから半指数行列の可逆性を示す。順65は同じ公式と正のスカラー倍の可逆性から V_2 の可逆性を示す。順66はこの二主張を直接入力として、可逆行列の積の閉性を二回適用し V^{(+)} の可逆性へ閉じる。提示順では順67の半指数行列による共役写像の線型性が続くが、意味的には順66へ依存せず、一般の共役写像の線型性、半指数行列の可逆性、半整数運動量と添字集合を入力にする。この入力集合の切り替わりにより順66の後で節を閉じる。",
   readabilityStatus: "三つの可逆性は一ブロック一主張へ分かれている。順66は先行する半指数行列と V_2 の可逆性を用い、最初の二因子の積、次に三因子の積が可逆であることを一段ずつ示す。Lean の isUnit_VPlus は同じ三単元の積を構成し、SageMath は明示逆との積が単位行列になることを検査するため、本文の推論粒度と形式化対応は合格である。",
 }, {
-  name: "共役写像の線型性と偶セクターでの特殊化",
-  chapter: "2次元イジングモデル（一般形は分割後に数学的道具立てへ移す）",
-  status: "境界候補・三主張への分割と形式化同期が必要",
-  entryIds: [conjugationLinearityEntry.id],
+  name: "半指数行列による共役写像の線型性",
+  chapter: "2次元イジングモデル",
+  status: "半指数行列への特殊化を確定、V_2 特殊化は次回再確認",
+  entryIds: [conjugationLinearityEntry.id, vTwoConjugationLinearityEntry.id],
   input: [
     "一般の可逆な有限複素行列による共役写像",
-    "複素行列の和・積・スカラー倍と分配法則",
     "偶セクターの半指数行列と第二の転送行列 V_2 の可逆性",
     "半整数運動量の checkZ, checkY",
   ],
-  output: conjugationLinearityBoundaryCandidates.map(({ output }) => output),
+  output: [
+    "偶セクターの半指数行列による共役写像が checkZ, checkY の線型結合上で複素線型であること",
+  ],
   boundaryCandidates: conjugationLinearityBoundaryCandidates,
   nextTickUnit: conjugationLinearityNextTickUnit,
   formalizationEvidence: {
     leanFiles: [genericConjugationLinearityLeanFile, conjugationLinearityLeanFile],
     sageMathFiles: [genericConjugationLinearitySageMathFile, conjugationLinearitySageMathFile],
-    currentStatus: "現行本文は一般の T_g の線型性と、半指数行列・V_2 による二つの特殊化を一主張へ束ねる。Lean は一般形と二つの特殊化を別定理にするが、いずれも抽象定理 TConj_linear の適用で、人手本文の具体的な三段の行列積計算とは一対一に対応しない。SageMath は一般行列 X,W の終端等式と、半指数行列・V_2 の特殊化を検査する一方、同じラベルへ対象外の V^{(+)} による単一共役も混在させている。",
+    currentStatus: "一般形は数学的道具立ての独立主張とし、左右の分配、スカラー移動、結合を一段ずつ示した。半指数行列への特殊化は独立主張とし、その可逆性と半整数運動量を直接入力にした。Lean は一般形の具体的な行列積計算、必要十分版からの特殊化関係、M と添字の本文仮定を持つ特殊化を別定理で追う。SageMath は Gaussian 有理数上で一般形の六段を厳密検査し、半指数行列への代入を検査する。V_2 特殊化は内容を失わない残余ブロックとして次回再確認する。",
   },
-  mainTheorems: conjugationLinearityBoundaryCandidates.map(({ output }) => output),
-  boundaryEvidence: "章内依存順67の現行ブロックの一般形は、イジング模型を仮定せず有限複素行列だけで意味が定まるため、分割後は数学的道具立てに置く。半指数行列と V_2 を checkZ, checkY へ適用する二つの特殊化はイジング固有である。現行本文は後半二主張の根拠として V^{(+)} 自体の可逆性だけを参照するが、分割後はそれぞれ半指数行列・V_2 の可逆性と半整数運動量モードを直接入力にする必要がある。状態台帳にあった T_{(V^{(+)})} は順68の定義と順69の単一共役との一致を要する後続対象であり、SageMath の V^{(+)} 行も合成写像ではなく単一共役 T_{V^{(+)}} を検査するため、本項の境界候補には含めない。",
-  readabilityStatus: "一般形の証明は一つの等号で左右の分配と二つのスカラー移動をまとめており、一ステップ一定理に未達である。さらに三主張を同じブロックと形式化ラベルへ束ねているため一ブロック一主張も満たさない。三項への本文分割と形式化同期が必要なので今回は本文を変更しない。次回は一般形を数学的道具立ての独立主張へ分け、具体的な行列積計算を一段ずつ示して Lean の具体版と同期し、半指数行列の特殊化だけを正しい直接入力とともに分ける。V_2 の特殊化、T_{(V^{(+)})} を扱う後続境界、章内依存順68以降へは進まない。",
+  mainTheorems: ["偶セクターの半指数行列による共役写像の複素線型性"],
+  boundaryEvidence: "一般形はイジング模型を仮定せず有限複素行列だけで意味が定まるため数学的道具立てに置く。半指数行列への特殊化は、その可逆性と半整数運動量の checkZ, checkY を直接入力に持つため2次元イジングモデルに置く。V_2 特殊化は独立ブロックへ分けたが、依存関係の章配置と形式化対応は次回の一項単位で再確認する。T_{V^{(+)}} の後続境界へは進まない。",
+  readabilityStatus: "一般形は一ブロック一主張で、定義、左右の分配、スカラー移動、結合を一段ずつ示す。半指数行列への特殊化も一ブロック一主張で、先行する可逆性と一般形への代入だけを用いる。本文、Lean、SageMath の推論粒度が対応している。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
   ["三角関数の評価・有限和・積分", /^(critical_008|critical_009|critical_010|freeenergy_004)/],
   ["トレース・共役転置・正定値性", /^eigenvalues_of_V_|^maxeig_005|frobenius|exp_conjugation_proof_003/],
-  ["可逆行列・線型写像との対応・共役変換", /^transfer_matrix_005|^transfer_matrix_claim_end_|^TV1_hatZ_hatY_011|^TV1_hatZ_hatY_009|^TV1_hatZ_hatY_010|^TV1_hatZ_hatY_definition_pauli_group|exp_conjugation_proof_005|^calculation_formulae_046/],
+  ["可逆行列・線型写像との対応・共役変換", /^transfer_matrix_005|^transfer_matrix_claim_end_|^TV1_hatZ_hatY_01[015]|^TV1_hatZ_hatY_009|^TV1_hatZ_hatY_010|^TV1_hatZ_hatY_definition_pauli_group|exp_conjugation_proof_005|^calculation_formulae_046/],
   ["行列指数関数と交換子計算", /^exp_linear_map_|exp_conjugation_proof_(004|008|010)|^bridge_003|^TV1_hatZ_hatY_004/],
   ["数ベクトル・行列の長さと収束", /^linear_space_general_00(2b|2c|3|3b|3c|3d)/],
   ["クロネッカー積と多因子基底", /^linear_space_general_000|^linear_space_general_001/],

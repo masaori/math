@@ -225,6 +225,7 @@ export const ALL_LABELS = [
   "lambda_eq_exp_gamma_theta_tilde",
   "limit_of_log_Z_in_N_row",
   "linearity_of_T",
+  "linearity_of_T_V2",
   "linearity_of_T_on_check_Z_Y",
   "mat_conj",
   "mat_mult",

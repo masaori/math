@@ -1,0 +1,66 @@
+=== check_04: 016 章の各段の等式 ===
+  def_check_fermi (psi^dagger) = P^ の第 1 列: max residual = 0.000e+00  ->  PASS
+  def_check_fermi (psi) = P^ の第 2 列: max residual = 0.000e+00  ->  PASS
+  def_check_fermi 略記形 psi^dagger = c(-r checkZ + b checkY): max residual = 4.794e-16  ->  PASS
+  def_check_fermi 略記形 psi = c(+r checkZ + b checkY): max residual = 4.794e-16  ->  PASS
+  periodicity (1) gamma_1(theta + 2k pi) = gamma_1(theta): max residual = 1.954e-14  ->  PASS
+  periodicity (1) gamma_2(theta + 2k pi) = gamma_2(theta): max residual = 2.809e-14  ->  PASS
+  periodicity (2) theta~_{mu+kM} = theta~_mu + 2k pi: max residual = 3.553e-15  ->  PASS
+  periodicity (2) gamma_1(theta~_{mu+kM}) = gamma_1(theta~_mu): max residual = 1.954e-14  ->  PASS
+  periodicity (2) gamma_2(+theta~_{mu+kM}) = gamma_2(+theta~_mu): max residual = 2.809e-14  ->  PASS
+  periodicity (2) gamma_2(-theta~_{mu+kM}) = gamma_2(-theta~_mu): max residual = 2.809e-14  ->  PASS
+  periodicity (3) gamma_2(theta~_{M+1-mu}) = gamma_2(-theta~_mu): max residual = 8.240e-15  ->  PASS
+  periodicity (3) gamma_2(-theta~_{M+1-mu}) = gamma_2(theta~_mu): max residual = 8.240e-15  ->  PASS
+  periodicity (3) gamma_1(theta~_{M+1-mu}) = gamma_1(theta~_mu): max residual = 7.105e-15  ->  PASS
+  periodicity (3) gamma(theta~_{M+1-mu}) = gamma(theta~_mu): max residual = 1.332e-15  ->  PASS
+  conjugate 書き換え psi_{M+1-mu} = psi_{1-mu}: max residual = 2.932e-15  ->  PASS
+  def_check_index_set (5) delta^M_{(mu+nu,1)} = delta_{nu,M+1-mu}: max residual = 0.000e+00  ->  PASS
+  anticommutator Step2 (1) 双線型性で 4 項へ展開: max residual = 4.916e-16  ->  PASS
+  anticommutator Step2 (2) 中間 2 項は [checkZ,checkY]_+ = 0 で消える: max residual = 1.950e-15  ->  PASS
+  anticommutator Step2 (3) = c_mu c_nu (r_mu r_nu + b_mu b_nu) 2M delta I: max residual = 1.052e-15  ->  PASS
+  anticommutator Step2 (4) 第 1 式 = 0: max residual = 1.061e-15  ->  PASS
+  anticommutator Step3 第 3 式 = 0: max residual = 1.062e-15  ->  PASS
+  anticommutator Step4 (1) 第 2 式の 4 項展開: max residual = 1.891e-15  ->  PASS
+  anticommutator Step4 (2) 第 2 式 = delta_{nu,M+1-mu} I: max residual = 1.981e-15  ->  PASS
+  anticommutator Step1 a_nu = gamma_2(theta~_{M+1-mu}) = b_mu: max residual = 8.240e-15  ->  PASS
+  anticommutator Step1 b_nu = gamma_2(-theta~_{M+1-mu}) = a_mu: max residual = 8.240e-15  ->  PASS
+  anticommutator Step1 r_nu = |b_mu| = |-conj(a_mu)|: max residual = 7.105e-15  ->  PASS
+  anticommutator Step1 r_nu = |a_mu| = r_mu: max residual = 7.105e-15  ->  PASS
+  anticommutator Step1 b_mu b_nu = a_mu b_mu = -r^2: max residual = 8.422e-14  ->  PASS
+  anticommutator Step1 c_mu c_nu = 1/(4M b_mu b_nu): max residual = 6.939e-17  ->  PASS
+  anticommutator Step1 c_mu c_nu = -1/(4Mr^2): max residual = 1.555e-16  ->  PASS
+  commutation_V_plus (行ベクトル×行列の結合律) ((A,B)G)H = (A,B)(GH): max residual = 0.000e+00  ->  PASS
+  commutation_V_plus T_{(V^{(+)})}(psi^dagger) = e^{+gamma} psi^dagger: max residual = 3.620e-11  ->  PASS
+  commutation_V_plus T_{(V^{(+)})}(psi) = e^{-gamma} psi: max residual = 2.508e-12  ->  PASS
+  action_of_T Step1 delta_{M+1-nu,M+1-mu} = delta_{mu,nu}: max residual = 0.000e+00  ->  PASS
+  action_of_T Step1' delta_{mu,M+1-nu} = delta^M_{(mu+nu,1)}: max residual = 0.000e+00  ->  PASS
+  action_of_T_check_Vprime Step1 [psi^d_nu psi_{M+1-nu}, psi^d_mu] = delta_{mu,nu} psi^d_nu: max residual = 3.022e-15  ->  PASS
+  action_of_T_check_Vprime Step1' [psi^d_nu psi_{M+1-nu}, psi_mu] = -delta psi_{M+1-nu}: max residual = 3.056e-15  ->  PASS
+  action_of_T_check_Vprime Step2 [X^, psi^dagger_mu] = gamma psi^dagger_mu: max residual = 7.782e-15  ->  PASS
+  action_of_T_check_Vprime Step2 X^ psi^d = psi^d (X^ + gamma I): max residual = 7.598e-15  ->  PASS
+  action_of_T_check_Vprime Step2' [X^, psi_mu] = -gamma psi_mu: max residual = 7.700e-15  ->  PASS
+  action_of_T_check_Vprime Step3 X^n psi^d = psi^d (X^+gamma I)^n: max residual = 7.008e-13  ->  PASS
+  action_of_T_check_Vprime Step4 exp(X^) psi^d = psi^d exp(X^+gamma I): max residual = 1.591e-11  ->  PASS
+  action_of_T_check_Vprime Step5 T_{(V^')}(psi^d) = e^{+gamma} psi^d: max residual = 1.289e-11  ->  PASS
+  action_of_T_check_Vprime Steps5' T_{(V^')}(psi) = e^{-gamma} psi: max residual = 1.591e-12  ->  PASS
+  T_eq_on_check_Z_Y Step1 (checkZ,checkY) = (psi^d,psi) P^{-1} の第 1 列: max residual = 1.109e-15  ->  PASS
+  T_eq_on_check_Z_Y Step1 第 2 列: max residual = 1.223e-15  ->  PASS
+  T_eq_on_check_Z_Y Step2 psi^d 上で一致: max residual = 4.596e-11  ->  PASS
+  T_eq_on_check_Z_Y Step2 psi 上で一致: max residual = 2.891e-12  ->  PASS
+  T_eq_on_check_Z_Y Step3 checkZ 上で一致: max residual = 1.035e-10  ->  PASS
+  T_eq_on_check_Z_Y Step3 checkY 上で一致: max residual = 1.108e-10  ->  PASS
+  T_V_plus_eq Step2 recover_Z_Y_from_check_Z_Y で Z_m を復元: max residual = 1.045e-15  ->  PASS
+  T_V_plus_eq Step2 T(Z_m) が一致: max residual = 3.114e-11  ->  PASS
+  T_V_plus_eq Step2 T(Y_m) が一致: max residual = 3.054e-11  ->  PASS
+  T_V_plus_eq Step3 T(I) = I: max residual = 1.889e-11  ->  PASS
+  T_V_plus_eq Step3 乗法性 T(xy) = T(x)T(y): max residual = 6.924e-11  ->  PASS
+  T_V_plus_eq Step4 行列単位 e_{ij} 全体で一致（代数全体で一致）: max residual = 4.975e-09  ->  PASS
+  V_plus_eq_c Step1 V^' W = V^{(+)}: max residual = 2.245e-11  ->  PASS
+  V_plus_eq_c Step1 V^'(V^'^{-1} V^{(+)}) = (V^' V^'^{-1}) V^{(+)}  [結合律]: max residual = 1.937e-11  ->  PASS
+  V_plus_eq_c Step1 V^' V^'^{-1} = I: max residual = 9.364e-12  ->  PASS
+  V_plus_eq_c Step2 W はすべての元と可換（行列単位で検査）: max residual = 7.695e-12  ->  PASS
+  V_plus_eq_c Step3 W = cI （centralizer_is_scalar）: max residual = 6.685e-12  ->  PASS
+  V_plus_eq_c Step5 V^{(+)} = c V^': max residual = 3.462e-11  ->  PASS
+  V_plus_eq_c: W = (V^')^{-1} V^{(+)} のスカラー行列からの最大ずれ = 6.685e-12
+  段数（区別された等式の種類）: 62
+check_04: PASS

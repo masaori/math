@@ -215,12 +215,19 @@ for M in STEP_M:
                   CDF(I) * CDF(sinh(2 * K2s)) * Zc + CDF(cosh(2 * K2s)) * Yc)
 
             # -------------------------------------------------------------
-            # linearity_of_T_on_check_Z_Y
+            # linearity_of_T_on_check_Z_Y（半指数行列への特殊化）
             # -------------------------------------------------------------
             aa, bb = CDF(0.3 + 0.7 * I), CDF(-1.1 + 0.2 * I)
-            for g, gi, nm in ((Vh, Vhi, "V1^{1/2}"), (V2, V2i, "V2"), (Vp, Vpi, "V^{(+)}")):
-                S.add(f"linearity_of_T ({nm}) T_g(aX+bW) = aT_g(X)+bT_g(W)",
-                      g * (aa * Zc + bb * Yc) * gi, aa * (g * Zc * gi) + bb * (g * Yc * gi))
+            S.add("linearity_of_T_on_check_Z_Y (V1^{1/2}) T_g(aX+bW) = aT_g(X)+bT_g(W)",
+                  Vh * (aa * Zc + bb * Yc) * Vhi,
+                  aa * (Vh * Zc * Vhi) + bb * (Vh * Yc * Vhi))
+            # 後続計算が用いる既存の特殊化も回帰検査として維持する。
+            S.add("linearity_of_T (V2) T_g(aX+bW) = aT_g(X)+bT_g(W)",
+                  V2 * (aa * Zc + bb * Yc) * V2i,
+                  aa * (V2 * Zc * V2i) + bb * (V2 * Yc * V2i))
+            S.add("linearity_of_T (V^{(+)}) T_g(aX+bW) = aT_g(X)+bT_g(W)",
+                  Vp * (aa * Zc + bb * Yc) * Vpi,
+                  aa * (Vp * Zc * Vpi) + bb * (Vp * Yc * Vpi))
 
             # -------------------------------------------------------------
             # calc_of_TxT_check_Z_Y: 2 列を並べると B_1(theta~), B_2 の右乗になること

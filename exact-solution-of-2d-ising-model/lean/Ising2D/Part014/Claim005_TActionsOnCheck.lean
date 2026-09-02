@@ -152,20 +152,32 @@ theorem TConj_V2_checkY (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) 
         + Complex.cosh (2 * K2star) • checkY M μ :=
   (actsBy_TConj_V2_check hM hs2 K2star μ).2
 
-/-! ## 原文 `linearity_of_T_on_check_Z_Y` -/
+/-! ## 共役写像の一般線型性と半指数行列への特殊化 -/
 
-/-- **原文 `linearity_of_T_on_check_Z_Y` の一般形**: `g` が可逆なら `T_g` は ℂ 線型。
-既存の `Ising2D.TConj_linear`（`Part008/Definition016_TV.lean`）そのもの。 -/
+/-- **本文 `linearity_of_T` の具体版**: 有限複素行列の積を一段ずつ分配して示す。 -/
 theorem linearity_of_T_on_check (g : (TensorPow M)ˣ) (a b : ℂ) (X W : TensorPow M) :
+    TConj g (a • X + b • W) = a • TConj g X + b • TConj g W := by
+  change (g : TensorPow M) * (a • X + b • W) * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+      = a • ((g : TensorPow M) * X * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M))
+        + b • ((g : TensorPow M) * W * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M))
+  rw [mul_add]
+  rw [add_mul]
+  rw [mul_smul_comm, mul_smul_comm]
+  rw [smul_mul_assoc, smul_mul_assoc]
+
+/-- 具体版が必要十分版 `TConj_linear` の有限複素行列への特殊化であることを記録する。 -/
+theorem linearity_of_T_on_check_from_general (g : (TensorPow M)ˣ)
+    (a b : ℂ) (X W : TensorPow M) :
     TConj g (a • X + b • W) = a • TConj g X + b • TConj g W :=
   TConj_linear g a b X W
 
-/-- **原文 `linearity_of_T_on_check_Z_Y` の「とくに」の部分**（`g = (V_1^{(+)})^{1/2}`）。 -/
-theorem linearity_of_T_V1halfPlus (K1 : ℂ) (a b : ℂ) (μ : ℤ) :
+/-- **本文 `linearity_of_T_on_check_Z_Y`**: `g = (V_1^{(+)})^{1/2}` への特殊化。 -/
+theorem linearity_of_T_V1halfPlus (_hM : 2 ≤ M) (K1 : ℂ) (a b : ℂ) (μ : ℤ)
+    (_hμ : CheckIndex M μ) :
     TConj (V1halfUnits M K1 (-1)) (a • checkZ M μ + b • checkY M μ)
       = a • TConj (V1halfUnits M K1 (-1)) (checkZ M μ)
         + b • TConj (V1halfUnits M K1 (-1)) (checkY M μ) :=
-  TConj_linear _ a b _ _
+  linearity_of_T_on_check _ a b _ _
 
 /-- **原文 `linearity_of_T_on_check_Z_Y` の「とくに」の部分**（`g = V_2`）。 -/
 theorem linearity_of_T_V2 {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (a b : ℂ) (μ : ℤ) :

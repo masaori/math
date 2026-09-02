@@ -102,7 +102,13 @@ theorem TConj_apply (g : Aˣ) (x : A) : TConj g x = (g : A) * x * ((g⁻¹ : Aˣ
 /-- **原文 `linearity_of_T`**: `T_g` は ℂ-線型。 -/
 theorem TConj_linear (g : Aˣ) (a b : ℂ) (z y : A) :
     TConj g (a • z + b • y) = a • TConj g z + b • TConj g y := by
-  rw [map_add, map_smul, map_smul]
+  change (g : A) * (a • z + b • y) * ((g⁻¹ : Aˣ) : A)
+      = a • ((g : A) * z * ((g⁻¹ : Aˣ) : A))
+        + b • ((g : A) * y * ((g⁻¹ : Aˣ) : A))
+  rw [mul_add]
+  rw [add_mul]
+  rw [mul_smul_comm, mul_smul_comm]
+  rw [smul_mul_assoc, smul_mul_assoc]
 
 /-- 合成則 `T_g ∘ T_h = T_{g h}`（原文 `conjugation_is_ring_homomorphism` (3) の言い換え）。 -/
 theorem TConj_trans (g h : Aˣ) : (TConj h).trans (TConj g) = TConj (g * h) := by

@@ -12,9 +12,9 @@
     "2次元イジングモデル"
   ],
   "classificationStatus": "全項目の分類・説明粒度・ブロック境界を再検証し、章内依存順と数学的道具立ての分類群を確定済み。説明粒度の手動レビューで将来の分割対象とした複合定義は各項目に明記する。",
-  "entryCount": 304,
+  "entryCount": 305,
   "chapterEntryCounts": {
-    "数学的道具立て": 108,
+    "数学的道具立て": 109,
     "2次元イジングモデル": 196
   },
   "mathematicalToolGroups": [
@@ -181,6 +181,7 @@
         "TV1_hatZ_hatY_011_definition_T_g",
         "TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar",
         "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
+        "TV1_hatZ_hatY_015_claim_linearity_of_T",
         "TV1_hatZ_hatY_definition_pauli_group",
         "TV1_hatZ_hatY_010_definition_clifford_group"
       ]
@@ -328,6 +329,32 @@
       "mainTheoremEntryId": "TV1_hatZ_hatY_011a_claim_injectivity_of_T",
       "boundaryEvidence": "章内依存順の連続する四項であり、可逆元の定義から共役写像の定義と可逆行列全体の可換元の特徴付けへ進み、両者を使う定数倍を除いた単射性の主定理で節を閉じる。外部入力とその本文 fingerprint、内部依存辺、節内本文 fingerprint、連続性、節末出力の一意性を生成時に固定検査する。",
       "readabilityStatus": "四項とも複素数と有限行列の具体的な計算で書かれ、現行の説明粒度検査に合格している。未定義だった特性多項式・固有値・行列式による可逆化を削除し、明示的な逆行列をもつ行列単位の摂動だけを使う証明へ置き換えた。"
+    },
+    {
+      "name": "共役写像の複素線型性",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "TV1_hatZ_hatY_015_claim_linearity_of_T"
+      ],
+      "input": [
+        "正の自然数で指定した有限行列サイズ",
+        "複素数と有限複素行列の和・積・スカラー倍",
+        "可逆行列による共役写像"
+      ],
+      "externalInputEntryIds": [
+        "TV1_hatZ_hatY_009_definition_invertible_elements",
+        "TV1_hatZ_hatY_011_definition_T_g",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ],
+      "output": [
+        "一般の可逆な有限複素行列による共役写像が複素線型であること"
+      ],
+      "mainTheorem": "一般の可逆な有限複素行列による共役写像の複素線型性",
+      "mainTheoremEntryId": "TV1_hatZ_hatY_015_claim_linearity_of_T",
+      "boundaryEvidence": "可逆行列と共役写像の定義を入力とし、イジング模型の記号を使わず複素線型性へ閉じる一項節である。章内依存順105に置き、直後の Pauli 行列群の節とは入力集合が切り替わる。",
+      "readabilityStatus": "定義、左右の分配、左右の行列積と複素スカラー倍の両立を一行一根拠で示し、Lean と Gaussian 有理数上の SageMath 厳密検査が同じ段を追う。"
     },
     {
       "name": "Pauli 行列と共役で保たれる行列群",
@@ -1171,56 +1198,30 @@
         "第二の転送行列 V_2 が可逆であること",
         "偶セクター転送行列 V^{(+)} が可逆であること"
       ],
-      "boundaryEvidence": "確定済みの正定値性・可逆性とトレース正値性の節に続き、順64は指数行列の逆行列公式だけから半指数行列の可逆性を示す。順65は同じ公式と正のスカラー倍の可逆性から V_2 の可逆性を示す。順66はこの二主張を直接入力として、可逆行列の積の閉性を二回適用し V^{(+)} の可逆性へ閉じる。直後の順67は順66を入力の一つに持つが、共役写像の定義、複素数、添字集合、スカラー倍した単位行列の可換性を追加し、二つの構成因子の可逆性と V^{(+)} の定義を直接入力から外す。この入力集合の切り替わりにより順66の後で節を閉じる。",
+      "boundaryEvidence": "確定済みの正定値性・可逆性とトレース正値性の節に続き、順64は指数行列の逆行列公式だけから半指数行列の可逆性を示す。順65は同じ公式と正のスカラー倍の可逆性から V_2 の可逆性を示す。順66はこの二主張を直接入力として、可逆行列の積の閉性を二回適用し V^{(+)} の可逆性へ閉じる。提示順では順67の半指数行列による共役写像の線型性が続くが、意味的には順66へ依存せず、一般の共役写像の線型性、半指数行列の可逆性、半整数運動量と添字集合を入力にする。この入力集合の切り替わりにより順66の後で節を閉じる。",
       "readabilityStatus": "三つの可逆性は一ブロック一主張へ分かれている。順66は先行する半指数行列と V_2 の可逆性を用い、最初の二因子の積、次に三因子の積が可逆であることを一段ずつ示す。Lean の isUnit_VPlus は同じ三単元の積を構成し、SageMath は明示逆との積が単位行列になることを検査するため、本文の推論粒度と形式化対応は合格である。"
     },
     {
-      "name": "共役写像の線型性と偶セクターでの特殊化",
-      "chapter": "2次元イジングモデル（一般形は分割後に数学的道具立てへ移す）",
-      "status": "境界候補・三主張への分割と形式化同期が必要",
+      "name": "半指数行列による共役写像の線型性",
+      "chapter": "2次元イジングモデル",
+      "status": "半指数行列への特殊化を確定、V_2 特殊化は次回再確認",
       "entryIds": [
-        "evensectorT_006_claim_linearity_of_T"
+        "evensectorT_006_claim_linearity_of_T",
+        "evensectorT_006a_claim_linearity_of_T_V2"
       ],
       "input": [
         "一般の可逆な有限複素行列による共役写像",
-        "複素行列の和・積・スカラー倍と分配法則",
         "偶セクターの半指数行列と第二の転送行列 V_2 の可逆性",
         "半整数運動量の checkZ, checkY"
       ],
       "output": [
-        "一般の可逆な有限複素行列 g による共役写像 T_g が複素線型であること",
-        "偶セクターの半指数行列による共役写像が checkZ, checkY の線型結合上で複素線型であること",
-        "第二の転送行列 V_2 による共役写像が checkZ, checkY の線型結合上で複素線型であること"
+        "偶セクターの半指数行列による共役写像が checkZ, checkY の線型結合上で複素線型であること"
       ],
       "boundaryCandidates": [
         {
-          "output": "一般の可逆な有限複素行列 g による共役写像 T_g が複素線型であること",
-          "provisionalFinalChapterAfterSplit": "数学的道具立て",
-          "currentEntryId": "evensectorT_006_claim_linearity_of_T",
-          "requiredDirectInputsAfterSplit": [
-            "def_T_g",
-            "def_invertible_elements_of_R",
-            "definition_of_cc",
-            "scalar_identity_commutes"
-          ],
-          "formalizationTarget": "Lean の TConj_linear・linearity_of_T_on_check と SageMath の一般行列 X,W に対する線型性検査"
-        },
-        {
-          "output": "偶セクターの半指数行列による共役写像が checkZ, checkY の線型結合上で複素線型であること",
-          "provisionalFinalChapterAfterSplit": "2次元イジングモデル",
-          "currentEntryId": "evensectorT_006_claim_linearity_of_T",
-          "requiredDirectInputsAfterSplit": [
-            "一般の T_g の複素線型性",
-            "V1_plus_half_invertible",
-            "def_half_integer_modes",
-            "def_check_index_set"
-          ],
-          "formalizationTarget": "Lean の linearity_of_T_V1halfPlus と SageMath の半指数行列による共役の線型性検査"
-        },
-        {
           "output": "第二の転送行列 V_2 による共役写像が checkZ, checkY の線型結合上で複素線型であること",
           "provisionalFinalChapterAfterSplit": "2次元イジングモデル",
-          "currentEntryId": "evensectorT_006_claim_linearity_of_T",
+          "currentEntryId": "evensectorT_006a_claim_linearity_of_T_V2",
           "requiredDirectInputsAfterSplit": [
             "一般の T_g の複素線型性",
             "V2_invertible",
@@ -1232,28 +1233,16 @@
       ],
       "nextTickUnit": [
         {
-          "output": "一般の可逆な有限複素行列 g による共役写像 T_g が複素線型であること",
-          "provisionalFinalChapterAfterSplit": "数学的道具立て",
-          "currentEntryId": "evensectorT_006_claim_linearity_of_T",
-          "requiredDirectInputsAfterSplit": [
-            "def_T_g",
-            "def_invertible_elements_of_R",
-            "definition_of_cc",
-            "scalar_identity_commutes"
-          ],
-          "formalizationTarget": "Lean の TConj_linear・linearity_of_T_on_check と SageMath の一般行列 X,W に対する線型性検査"
-        },
-        {
-          "output": "偶セクターの半指数行列による共役写像が checkZ, checkY の線型結合上で複素線型であること",
+          "output": "第二の転送行列 V_2 による共役写像が checkZ, checkY の線型結合上で複素線型であること",
           "provisionalFinalChapterAfterSplit": "2次元イジングモデル",
-          "currentEntryId": "evensectorT_006_claim_linearity_of_T",
+          "currentEntryId": "evensectorT_006a_claim_linearity_of_T_V2",
           "requiredDirectInputsAfterSplit": [
             "一般の T_g の複素線型性",
-            "V1_plus_half_invertible",
+            "V2_invertible",
             "def_half_integer_modes",
             "def_check_index_set"
           ],
-          "formalizationTarget": "Lean の linearity_of_T_V1halfPlus と SageMath の半指数行列による共役の線型性検査"
+          "formalizationTarget": "Lean の linearity_of_T_V2 と SageMath の V_2 による共役の線型性検査"
         }
       ],
       "formalizationEvidence": {
@@ -1265,19 +1254,17 @@
           "sagemath/check/200_linearity_of_T/check_01_linearity.sage",
           "sagemath/check/051_stepwise_identities_of_chapter_Cprime/check_03_014_steps.sage"
         ],
-        "currentStatus": "現行本文は一般の T_g の線型性と、半指数行列・V_2 による二つの特殊化を一主張へ束ねる。Lean は一般形と二つの特殊化を別定理にするが、いずれも抽象定理 TConj_linear の適用で、人手本文の具体的な三段の行列積計算とは一対一に対応しない。SageMath は一般行列 X,W の終端等式と、半指数行列・V_2 の特殊化を検査する一方、同じラベルへ対象外の V^{(+)} による単一共役も混在させている。"
+        "currentStatus": "一般形は数学的道具立ての独立主張とし、左右の分配、スカラー移動、結合を一段ずつ示した。半指数行列への特殊化は独立主張とし、その可逆性と半整数運動量を直接入力にした。Lean は一般形の具体的な行列積計算、必要十分版からの特殊化関係、M と添字の本文仮定を持つ特殊化を別定理で追う。SageMath は Gaussian 有理数上で一般形の六段を厳密検査し、半指数行列への代入を検査する。V_2 特殊化は内容を失わない残余ブロックとして次回再確認する。"
       },
       "mainTheorems": [
-        "一般の可逆な有限複素行列 g による共役写像 T_g が複素線型であること",
-        "偶セクターの半指数行列による共役写像が checkZ, checkY の線型結合上で複素線型であること",
-        "第二の転送行列 V_2 による共役写像が checkZ, checkY の線型結合上で複素線型であること"
+        "偶セクターの半指数行列による共役写像の複素線型性"
       ],
-      "boundaryEvidence": "章内依存順67の現行ブロックの一般形は、イジング模型を仮定せず有限複素行列だけで意味が定まるため、分割後は数学的道具立てに置く。半指数行列と V_2 を checkZ, checkY へ適用する二つの特殊化はイジング固有である。現行本文は後半二主張の根拠として V^{(+)} 自体の可逆性だけを参照するが、分割後はそれぞれ半指数行列・V_2 の可逆性と半整数運動量モードを直接入力にする必要がある。状態台帳にあった T_{(V^{(+)})} は順68の定義と順69の単一共役との一致を要する後続対象であり、SageMath の V^{(+)} 行も合成写像ではなく単一共役 T_{V^{(+)}} を検査するため、本項の境界候補には含めない。",
-      "readabilityStatus": "一般形の証明は一つの等号で左右の分配と二つのスカラー移動をまとめており、一ステップ一定理に未達である。さらに三主張を同じブロックと形式化ラベルへ束ねているため一ブロック一主張も満たさない。三項への本文分割と形式化同期が必要なので今回は本文を変更しない。次回は一般形を数学的道具立ての独立主張へ分け、具体的な行列積計算を一段ずつ示して Lean の具体版と同期し、半指数行列の特殊化だけを正しい直接入力とともに分ける。V_2 の特殊化、T_{(V^{(+)})} を扱う後続境界、章内依存順68以降へは進まない。"
+      "boundaryEvidence": "一般形はイジング模型を仮定せず有限複素行列だけで意味が定まるため数学的道具立てに置く。半指数行列への特殊化は、その可逆性と半整数運動量の checkZ, checkY を直接入力に持つため2次元イジングモデルに置く。V_2 特殊化は独立ブロックへ分けたが、依存関係の章配置と形式化対応は次回の一項単位で再確認する。T_{V^{(+)}} の後続境界へは進まない。",
+      "readabilityStatus": "一般形は一ブロック一主張で、定義、左右の分配、スカラー移動、結合を一段ずつ示す。半指数行列への特殊化も一ブロック一主張で、先行する可逆性と一般形への代入だけを用いる。本文、Lean、SageMath の推論粒度が対応している。"
     }
   ],
   "explanationGranularityReview": {
-    "reviewedEntryCount": 304,
+    "reviewedEntryCount": 305,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
       "calc_formulae_005_matrix_conjugation",
@@ -1322,18 +1309,18 @@
       "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY",
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
       "evensectorT_003_claim_coefficient_conversion",
-      "evensectorT_006_claim_linearity_of_T",
+      "evensectorT_006a_claim_linearity_of_T_V2",
       "evenfermi_007_claim_T_eq_on_check_Z_Y"
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
-    "inspectedEntryCount": 108,
+    "inspectedEntryCount": 109,
     "contaminatedEntryIds": []
   },
   "chapterStructures": [
     {
       "chapter": "数学的道具立て",
-      "entryCount": 108,
+      "entryCount": 109,
       "dependencyDirection": "prerequisite から dependent へ",
       "topologicalOrder": [
         {
@@ -2067,26 +2054,33 @@
         {
           "order": 105,
           "entryIds": [
-            "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+            "TV1_hatZ_hatY_015_claim_linearity_of_T"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 106,
           "entryIds": [
-            "TV1_hatZ_hatY_definition_pauli_group"
+            "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 107,
           "entryIds": [
-            "TV1_hatZ_hatY_010_definition_clifford_group"
+            "TV1_hatZ_hatY_definition_pauli_group"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 108,
+          "entryIds": [
+            "TV1_hatZ_hatY_010_definition_clifford_group"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 109,
           "entryIds": [
             "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
           ],
@@ -2572,182 +2566,182 @@
         {
           "order": 68,
           "entryIds": [
-            "evensectorT_definition_T_V_plus"
+            "evensectorT_006a_claim_linearity_of_T_V2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 69,
           "entryIds": [
-            "evensectorT_claim_T_V_plus_is_conjugation"
+            "evensectorT_definition_T_V_plus"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 70,
           "entryIds": [
-            "maxeig_003_claim_W_is_positive_definite"
+            "evensectorT_claim_T_V_plus_is_conjugation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 71,
           "entryIds": [
-            "maxeig_006_definition_rayleigh_sup"
+            "maxeig_003_claim_W_is_positive_definite"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 72,
           "entryIds": [
-            "maxeig_007_claim_operator_bound"
+            "maxeig_006_definition_rayleigh_sup"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 73,
           "entryIds": [
-            "maxeig_008_claim_trace_power_sandwich"
+            "maxeig_007_claim_operator_bound"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 74,
           "entryIds": [
-            "maxeig_009_claim_partition_function_sandwich"
+            "maxeig_008_claim_trace_power_sandwich"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 75,
           "entryIds": [
-            "freeenergy_003_claim_limit_in_N_row"
+            "maxeig_009_claim_partition_function_sandwich"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 76,
           "entryIds": [
-            "sector_001_claim_epsilon_is_permutation"
+            "freeenergy_003_claim_limit_in_N_row"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 77,
           "entryIds": [
-            "sector_002_claim_abs_vector_moves_to_even_sector"
+            "sector_001_claim_epsilon_is_permutation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 78,
           "entryIds": [
-            "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY"
+            "sector_002_claim_abs_vector_moves_to_even_sector"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 79,
           "entryIds": [
-            "evensector_007_claim_H1_H2_via_check_Z_Y"
+            "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 80,
           "entryIds": [
-            "transfer_matrix_013_claim_hatZ_hatY_M_periodicity"
+            "evensector_007_claim_H1_H2_via_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 81,
           "entryIds": [
-            "transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY"
+            "transfer_matrix_013_claim_hatZ_hatY_M_periodicity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 82,
           "entryIds": [
-            "transfer_matrix_015_claim_Z_Y_generate_algebra"
+            "transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 83,
           "entryIds": [
-            "evensector_006_claim_recover_Z_Y"
+            "transfer_matrix_015_claim_Z_Y_generate_algebra"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 84,
           "entryIds": [
-            "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y"
+            "evensector_006_claim_recover_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 85,
           "entryIds": [
-            "TV1_hatZ_hatY_002_claim_nesting_commutator"
+            "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 86,
           "entryIds": [
-            "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion"
+            "TV1_hatZ_hatY_002_claim_nesting_commutator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 87,
           "entryIds": [
-            "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient"
+            "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 88,
           "entryIds": [
-            "TV1_hatZ_hatY_006_claim_exp_conjugation"
+            "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 89,
           "entryIds": [
-            "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group"
+            "TV1_hatZ_hatY_006_claim_exp_conjugation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 90,
           "entryIds": [
-            "TV1_hatZ_hatY_012_claim_TV1_TV2_actions"
+            "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 91,
           "entryIds": [
-            "TV1_hatZ_hatY_013_definition_product_maps"
+            "TV1_hatZ_hatY_012_claim_TV1_TV2_actions"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 92,
           "entryIds": [
-            "TV1_hatZ_hatY_014_claim_product_action_computation"
+            "TV1_hatZ_hatY_013_definition_product_maps"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 93,
           "entryIds": [
-            "TV1_hatZ_hatY_015_claim_linearity_of_T"
+            "TV1_hatZ_hatY_014_claim_product_action_computation"
           ],
           "inseparableDependencyUnit": false
         },
@@ -3863,10 +3857,6 @@
           "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
         },
         {
-          "dependentId": "TV1_hatZ_hatY_015_claim_linearity_of_T",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
           "dependentId": "TV1_hatZ_hatY_016_definition_T_V",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
@@ -3877,6 +3867,10 @@
         {
           "dependentId": "TV1_hatZ_hatY_017_definition_A_theta",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "TV1_hatZ_hatY_018_claim_T_V_action",
+          "prerequisiteId": "TV1_hatZ_hatY_015_claim_linearity_of_T"
         },
         {
           "dependentId": "TV1_hatZ_hatY_018_claim_T_V_action",
@@ -4743,10 +4737,6 @@
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
         {
-          "dependentId": "evensector_004_claim_commutator_H_check_Z_Y",
-          "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
-        },
-        {
           "dependentId": "evensector_005_claim_anticommutator_check_Z_Y",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
@@ -4884,19 +4874,19 @@
         },
         {
           "dependentId": "evensectorT_006_claim_linearity_of_T",
-          "prerequisiteId": "TV1_hatZ_hatY_009_definition_invertible_elements"
-        },
-        {
-          "dependentId": "evensectorT_006_claim_linearity_of_T",
-          "prerequisiteId": "TV1_hatZ_hatY_011_definition_T_g"
+          "prerequisiteId": "TV1_hatZ_hatY_015_claim_linearity_of_T"
         },
         {
           "dependentId": "evensectorT_006_claim_linearity_of_T",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
         {
-          "dependentId": "evensectorT_006_claim_linearity_of_T",
-          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
+          "dependentId": "evensectorT_006a_claim_linearity_of_T_V2",
+          "prerequisiteId": "TV1_hatZ_hatY_015_claim_linearity_of_T"
+        },
+        {
+          "dependentId": "evensectorT_006a_claim_linearity_of_T_V2",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
         {
           "dependentId": "evensectorT_007_definition_B1_B2",
@@ -5096,6 +5086,10 @@
         },
         {
           "dependentId": "evenfermi_004_claim_commutation_V_plus_psi",
+          "prerequisiteId": "TV1_hatZ_hatY_015_claim_linearity_of_T"
+        },
+        {
+          "dependentId": "evenfermi_004_claim_commutation_V_plus_psi",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
         {
@@ -5233,10 +5227,6 @@
         {
           "dependentId": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-          "prerequisiteId": "eigenvalues_of_V_003_claim_trace_of_idempotent"
         },
         {
           "dependentId": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
@@ -5694,8 +5684,7 @@
     "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient",
     "TV1_hatZ_hatY_006_claim_exp_conjugation",
     "TV1_hatZ_hatY_013_definition_product_maps",
-    "TV1_hatZ_hatY_014_claim_product_action_computation",
-    "TV1_hatZ_hatY_015_claim_linearity_of_T"
+    "TV1_hatZ_hatY_014_claim_product_action_computation"
   ],
   "unlabeledEntryIds": [
     "calc_formulae_000_cosh_sinh_product",
@@ -9716,7 +9705,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 21,
+        "incomingReferenceCount": 20,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -10506,7 +10495,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 29,
+        "incomingReferenceCount": 28,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11720,7 +11709,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 78,
+        "chapterOrder": 79,
         "dependencyUnitEntryIds": [
           "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY"
         ]
@@ -11778,7 +11767,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 80,
+        "chapterOrder": 81,
         "dependencyUnitEntryIds": [
           "transfer_matrix_013_claim_hatZ_hatY_M_periodicity"
         ]
@@ -11843,7 +11832,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 81,
+        "chapterOrder": 82,
         "dependencyUnitEntryIds": [
           "transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY"
         ]
@@ -11909,7 +11898,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 82,
+        "chapterOrder": 83,
         "dependencyUnitEntryIds": [
           "transfer_matrix_015_claim_Z_Y_generate_algebra"
         ]
@@ -12258,7 +12247,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12468,7 +12457,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 105,
+        "chapterOrder": 106,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
         ]
@@ -12531,7 +12520,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 108,
+        "chapterOrder": 109,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
         ]
@@ -12745,7 +12734,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 84,
+        "chapterOrder": 85,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y"
         ]
@@ -12817,7 +12806,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 85,
+        "chapterOrder": 86,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_002_claim_nesting_commutator"
         ]
@@ -12883,7 +12872,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 86,
+        "chapterOrder": 87,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion"
         ]
@@ -12991,7 +12980,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 87,
+        "chapterOrder": 88,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient"
         ]
@@ -13070,7 +13059,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 88,
+        "chapterOrder": 89,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_006_claim_exp_conjugation"
         ]
@@ -13195,7 +13184,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 106,
+        "chapterOrder": 107,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_definition_pauli_group"
         ]
@@ -13260,7 +13249,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 107,
+        "chapterOrder": 108,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_010_definition_clifford_group"
         ]
@@ -13348,7 +13337,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 89,
+        "chapterOrder": 90,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group"
         ]
@@ -13604,7 +13593,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 90,
+        "chapterOrder": 91,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_012_claim_TV1_TV2_actions"
         ]
@@ -13652,7 +13641,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 91,
+        "chapterOrder": 92,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_013_definition_product_maps"
         ]
@@ -13706,7 +13695,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 92,
+        "chapterOrder": 93,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_014_claim_product_action_computation"
         ]
@@ -13715,28 +13704,28 @@
     {
       "id": "TV1_hatZ_hatY_015_claim_linearity_of_T",
       "kind": "claim",
-      "title": null,
-      "titleFormat": null,
+      "title": "T_g \\text{ の } \\mathbb{C} \\text{ 線型性}",
+      "titleFormat": "tex",
       "labels": [
         "linearity_of_T"
       ],
       "sourceFile": "008_TV1_hatZ_hatY_part1.ts",
       "sourceOrdinal": 15,
-      "provisionalFinalChapter": "2次元イジングモデル",
+      "provisionalFinalChapter": "数学的道具立て",
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "mathematicalToolCandidateEntry": true,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+        "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 580,
-        "inspectedContentSha256": "116adb8c8cea0ecbf8514f758276e3a87b6090a012602d18778da0e25c78d1e1",
+        "inspectedCharacterCount": 1447,
+        "inspectedContentSha256": "99ac6ebf22a0cc2df0c9ba8afa947765649a68a5937ca171ae13fcfdea571495",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13746,12 +13735,19 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "definition_of_cc"
+        "def_T_g",
+        "def_invertible_elements_of_R",
+        "definition_of_cc",
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "calc_formulae_006_definition_of_cc"
+        "TV1_hatZ_hatY_009_definition_invertible_elements",
+        "TV1_hatZ_hatY_011_definition_T_g",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
         "definition_of_cc"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
@@ -13762,7 +13758,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 93,
+        "chapterOrder": 105,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_015_claim_linearity_of_T"
         ]
@@ -16001,7 +15997,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -16393,8 +16389,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7129,
-        "inspectedContentSha256": "6765f0071cacc90ba486ca95e77ed3090501575ac625329af843dcbf2f68f385",
+        "inspectedCharacterCount": 7233,
+        "inspectedContentSha256": "dba9269bafb1dbf07dd7fe60e95e7b0751a39822418b32c5d2fb1cec2159767a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18414,7 +18410,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 70,
+        "chapterOrder": 71,
         "dependencyUnitEntryIds": [
           "maxeig_003_claim_W_is_positive_definite"
         ]
@@ -18600,7 +18596,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 71,
+        "chapterOrder": 72,
         "dependencyUnitEntryIds": [
           "maxeig_006_definition_rayleigh_sup"
         ]
@@ -18662,7 +18658,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 72,
+        "chapterOrder": 73,
         "dependencyUnitEntryIds": [
           "maxeig_007_claim_operator_bound"
         ]
@@ -18724,7 +18720,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 73,
+        "chapterOrder": 74,
         "dependencyUnitEntryIds": [
           "maxeig_008_claim_trace_power_sandwich"
         ]
@@ -18786,7 +18782,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 74,
+        "chapterOrder": 75,
         "dependencyUnitEntryIds": [
           "maxeig_009_claim_partition_function_sandwich"
         ]
@@ -19071,7 +19067,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 75,
+        "chapterOrder": 76,
         "dependencyUnitEntryIds": [
           "freeenergy_003_claim_limit_in_N_row"
         ]
@@ -19362,7 +19358,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 16,
+        "incomingReferenceCount": 18,
         "isingSemanticMatches": [
           "運動量"
         ],
@@ -19442,7 +19438,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 38,
+        "incomingReferenceCount": 39,
         "isingSemanticMatches": [
           "運動量"
         ],
@@ -19597,8 +19593,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 18803,
-        "inspectedContentSha256": "0fc1faad0794b3e2f774614d84deb5e203dcfcc6f21d07ef0e070c46f7eab1c5",
+        "inspectedCharacterCount": 18179,
+        "inspectedContentSha256": "8f79f322d67b170fb7346925a77c023a43d7b7b1f8215b600e1438cc9b03ceca",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19616,7 +19612,6 @@
         "def_half_integer_modes",
         "def_transfer_matrix_symbols",
         "definition_of_cc",
-        "theorem_exp_product",
         "why_008_applies_only_to_minus_sector"
       ],
       "dependsOnEntryIds": [
@@ -19626,7 +19621,6 @@
         "evensector_001_claim_why_minus_only",
         "evensector_003_definition_half_integer_modes",
         "evensector_003a_definition_check_index_set",
-        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
         "transfer_matrix_001_definition_symbols",
         "transfer_matrix_007_definition_V1_pm",
         "transfer_matrix_011_definition_H1_H2"
@@ -19782,7 +19776,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 83,
+        "chapterOrder": 84,
         "dependencyUnitEntryIds": [
           "evensector_006_claim_recover_Z_Y"
         ]
@@ -19856,7 +19850,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 79,
+        "chapterOrder": 80,
         "dependencyUnitEntryIds": [
           "evensector_007_claim_H1_H2_via_check_Z_Y"
         ]
@@ -20060,7 +20054,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -20069,8 +20063,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1109,
-        "inspectedContentSha256": "7ddf2ffcfb7f8d60b2fde61783ddc4dd251dfb8e197f8bbb4eb27b244a874dc7",
+        "inspectedCharacterCount": 1140,
+        "inspectedContentSha256": "9673ccc699a872424d8f3464e516dda61983f6cd416d6be7924c63d862a6aafa",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20095,7 +20089,8 @@
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_H2",
+        "matrix_exp_conjugation"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -20127,7 +20122,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -20196,7 +20191,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -20308,7 +20303,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 68,
+        "chapterOrder": 69,
         "dependencyUnitEntryIds": [
           "evensectorT_definition_T_V_plus"
         ]
@@ -20436,7 +20431,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 69,
+        "chapterOrder": 70,
         "dependencyUnitEntryIds": [
           "evensectorT_claim_T_V_plus_is_conjugation"
         ]
@@ -20737,7 +20732,7 @@
     {
       "id": "evensectorT_006_claim_linearity_of_T",
       "kind": "claim",
-      "title": "T_g \\text{ の } \\mathbb{C} \\text{ 線型性}",
+      "title": "\\left(V_1^{(+)}\\right)^{1/2} \\text{ による共役写像の } \\mathbb{C} \\text{ 線型性}",
       "titleFormat": "tex",
       "labels": [
         "linearity_of_T_on_check_Z_Y"
@@ -20748,40 +20743,38 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2224,
-        "inspectedContentSha256": "edde665026f94ea622d8b11770a963ac959e09de0a3c44426d56c097be3b54eb",
+        "inspectedCharacterCount": 1549,
+        "inspectedContentSha256": "efa1813659a4a355bd87dc8ef865bf4f6628972fe0cd6645ee2a8e011f2b44cc",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": "一般の T_g の複素線型性と、偶セクターの半指数行列・V2 による二つの特殊化を一ブロックへ束ねている。一般形を数学的道具立てへ移し、二つのイジング固有特殊化を一ブロック一主張へ分け、誤って V^{(+)} 自体の可逆性へ向いた依存を各構成因子の可逆性と半整数運動量モードへ直して形式化ラベルを同期した後、節境界を再判定する必要がある。"
+        "manualReview": null
       },
       "dependsOnLabels": [
-        "V_plus_factors_invertible",
-        "def_T_g",
+        "V1_plus_half_invertible",
         "def_check_index_set",
-        "def_invertible_elements_of_R",
+        "def_half_integer_modes",
         "definition_of_cc",
-        "scalar_identity_commutes"
+        "linearity_of_T"
       ],
       "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_009_definition_invertible_elements",
-        "TV1_hatZ_hatY_011_definition_T_g",
+        "TV1_hatZ_hatY_015_claim_linearity_of_T",
         "calc_formulae_006_definition_of_cc",
-        "evensectorT_claim_V_plus_factors_invertible",
-        "evensector_003a_definition_check_index_set",
-        "linear_space_general_002_claim_scalar_identity_commutes"
+        "evensectorT_claim_V1_plus_half_invertible",
+        "evensector_003_definition_half_integer_modes",
+        "evensector_003a_definition_check_index_set"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc"
@@ -20791,12 +20784,80 @@
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": true,
-      "presentationPredecessorEntryIds": [],
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [
+        "evensectorT_claim_V_plus_factors_invertible"
+      ],
       "dependencyPlacement": {
         "chapterOrder": 67,
         "dependencyUnitEntryIds": [
           "evensectorT_006_claim_linearity_of_T"
+        ]
+      }
+    },
+    {
+      "id": "evensectorT_006a_claim_linearity_of_T_V2",
+      "kind": "claim",
+      "title": "V_2 \\text{ による共役写像の } \\mathbb{C} \\text{ 線型性}",
+      "titleFormat": "tex",
+      "labels": [
+        "linearity_of_T_V2"
+      ],
+      "sourceFile": "014_even_sector_T_action.ts",
+      "sourceOrdinal": 9,
+      "provisionalFinalChapter": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 1052,
+        "inspectedContentSha256": "71fbb554701c8129d764e7dd97ad89c518a1b56850a9aa1a6f789593562ab7e7",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": "V_2 による特殊化は独立ブロックへ分離済みだが、依存関係の章配置と Lean・SageMath の形式化対応の再確認を次回行う。"
+      },
+      "dependsOnLabels": [
+        "V2_invertible",
+        "def_check_index_set",
+        "def_half_integer_modes",
+        "definition_of_cc",
+        "linearity_of_T"
+      ],
+      "dependsOnEntryIds": [
+        "TV1_hatZ_hatY_015_claim_linearity_of_T",
+        "calc_formulae_006_definition_of_cc",
+        "evensectorT_claim_V2_invertible",
+        "evensector_003_definition_half_integer_modes",
+        "evensector_003a_definition_check_index_set"
+      ],
+      "semanticPrerequisiteLabels": [
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [
+        "evensectorT_006_claim_linearity_of_T"
+      ],
+      "dependencyPlacement": {
+        "chapterOrder": 68,
+        "dependencyUnitEntryIds": [
+          "evensectorT_006a_claim_linearity_of_T_V2"
         ]
       }
     },
@@ -21027,8 +21088,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6511,
-        "inspectedContentSha256": "42c34660f430143bcae9144e02551d73af2e40772cd5ed2d6327f647231c5056",
+        "inspectedCharacterCount": 6523,
+        "inspectedContentSha256": "3776f95b2c9094b42c920b6f0f1e769b7572c33386402af748ba81a534304dc1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21046,6 +21107,7 @@
         "def_check_index_set",
         "definition_of_cc",
         "factorization_of_A_theta_general",
+        "linearity_of_T_V2",
         "linearity_of_T_on_check_Z_Y",
         "set_and_algebra_notation"
       ],
@@ -21055,6 +21117,7 @@
         "calculation_formulae_definition_set_and_algebra_notation",
         "evensectorT_005_claim_T_actions",
         "evensectorT_006_claim_linearity_of_T",
+        "evensectorT_006a_claim_linearity_of_T_V2",
         "evensectorT_007_definition_B1_B2",
         "evensectorT_008_claim_product_action",
         "evensectorT_009_claim_factorization_A_theta",
@@ -21979,8 +22042,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7432,
-        "inspectedContentSha256": "4a4b8bac308d4c0ca8fcd725edc0368dfabe6724cad3bae5ad348d73a970e85c",
+        "inspectedCharacterCount": 7419,
+        "inspectedContentSha256": "e31c2998cd0c2d3321ce59d3021d783d25ea73a2f5f9ad65e7dbf807b4a912d2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22002,18 +22065,18 @@
         "definition_of_cc",
         "diagonalization_check_P_D",
         "lambda_eq_exp_gamma_theta_tilde",
-        "linearity_of_T_on_check_Z_Y",
+        "linearity_of_T",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "Athetatilde_005_claim_diagonalization",
         "Athetatilde_008_definition_gamma_theta_tilde",
         "Athetatilde_009_claim_lambda_eq_exp_gamma",
+        "TV1_hatZ_hatY_015_claim_linearity_of_T",
         "TV1_hatZ_hatY_031_claim_V_psi_commutator",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "evenfermi_001_definition_check_fermi",
-        "evensectorT_006_claim_linearity_of_T",
         "evensectorT_008_claim_product_action",
         "evensectorT_010_claim_T_V_plus_action",
         "evensectorT_claim_T_V_plus_is_conjugation",
@@ -22580,8 +22643,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6412,
-        "inspectedContentSha256": "62dc987c1b56256ddae5f9229e8dbabacab303dbf9669b7903a9d8807a6bb850",
+        "inspectedCharacterCount": 6348,
+        "inspectedContentSha256": "8c6f6ca44bd1e7888c21aa7ad5abd41f643ad6b2036894406b69bf02dffce1b4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22638,8 +22701,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9273,
-        "inspectedContentSha256": "0b1cd926fe152e7eefb805fcbc81fa6471e2aeb6e9ddbfcd5a617007d4fd867f",
+        "inspectedCharacterCount": 9251,
+        "inspectedContentSha256": "05d7e80b77364530b0a2b1e56f2cebcbee54ea1399bf8274468d5a056834edfa",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22717,8 +22780,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 16846,
-        "inspectedContentSha256": "dfbe383c1ba42212ce96a5798bea42bdfc176fad519a142c9658dad7ce627646",
+        "inspectedCharacterCount": 16833,
+        "inspectedContentSha256": "e2158071539f48c5828ae99d90efc3f47ba6a09424b2d8ef93a4afb393dadbdb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22734,12 +22797,10 @@
         "definition_of_cc",
         "joint_eigenspace_decomposition",
         "scalar_identity_commutes",
-        "trace_of_check_number_operator_product",
-        "trace_of_idempotent"
+        "trace_of_check_number_operator_product"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
-        "eigenvalues_of_V_003_claim_trace_of_idempotent",
         "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
         "evenEigen_001_definition_check_number_operator",
         "evenEigen_002_claim_check_number_operator_idempotent",
@@ -23417,8 +23478,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10652,
-        "inspectedContentSha256": "a1566eb4bf9a84a0c43ce928b4600532c6319fb1aaf9fd971176bbe2dcbcd15f",
+        "inspectedCharacterCount": 10670,
+        "inspectedContentSha256": "5c35726629d9848afe136d15a9802ae62c8462a38d48d996447a334790f32d07",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -24843,7 +24904,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 76,
+        "chapterOrder": 77,
         "dependencyUnitEntryIds": [
           "sector_001_claim_epsilon_is_permutation"
         ]
@@ -24911,7 +24972,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 77,
+        "chapterOrder": 78,
         "dependencyUnitEntryIds": [
           "sector_002_claim_abs_vector_moves_to_even_sector"
         ]

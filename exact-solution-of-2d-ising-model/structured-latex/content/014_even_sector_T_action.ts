@@ -1713,70 +1713,96 @@ T_{V_2}(\check{Y}_\mu)
     id: "evensectorT_006_claim_linearity_of_T",
     kind: "claim",
     origin: { path: SRC, ordinal: 8 },
-    title: { tex: String.raw`T_g \text{ の } \mathbb{C} \text{ 線型性}` },
+    title: { tex: String.raw`\left(V_1^{(+)}\right)^{1/2} \text{ による共役写像の } \mathbb{C} \text{ 線型性}` },
     labels: ["linearity_of_T_on_check_Z_Y"],
     statement: [
       paragraph([
-        math(String.raw`g \in R^\times`),
-        "（",
-        ref("def_invertible_elements_of_R"),
-        "）と ",
-        math(String.raw`a, b \in \mathbb{C}`),
-        "、",
-        math(String.raw`X, W \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        " について",
-      ]),
-      displayMath(String.raw`T_g(aX + bW) = a\,T_g(X) + b\,T_g(W)`),
-      paragraph([
-        "が成り立つ。とくに ",
-        math(String.raw`g = \left(V_1^{(+)}\right)^{1/2}`),
-        "、",
-        math(String.raw`g = V_2`),
-        " について、",
-        math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
+        ref("def_half_integer_modes"),
         " と ",
-        math(String.raw`a, b \in \mathbb{C}`),
-        " に対し",
+        ref("def_check_index_set"),
+        " の記号を用いる。",
+        math(String.raw`\mu\in\check{\mathcal M}`),
+        " と ",
+        math(String.raw`a,b\in\mathbb C`),
+        " について、",
       ]),
       displayMath(
         String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(a\check{Z}_\mu + b\check{Y}_\mu\right)
-= a\,T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu) + b\,T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu),
-\qquad
-T_{V_2}\!\left(a\check{Z}_\mu + b\check{Y}_\mu\right)
-= a\,T_{V_2}(\check{Z}_\mu) + b\,T_{V_2}(\check{Y}_\mu)`,
+= a\,T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu) + b\,T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)`,
       ),
     ],
     proof: [
       paragraph([
-        ref("def_T_g"),
-        " の ",
-        math(String.raw`T_g(X) = gXg^{-1}`),
-        " と、行列の積が和について分配することおよびスカラー倍と可換であること（",
-        ref("scalar_identity_commutes"),
-        "）より",
+        ref("V1_plus_half_invertible"),
+        " より ",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}\in R^\times`),
+        " である。したがって ",
+        ref("linearity_of_T"),
+        " で ",
+        math(String.raw`g=\left(V_1^{(+)}\right)^{1/2}`),
+        "、",
+        math(String.raw`X=\check Z_\mu`),
+        "、",
+        math(String.raw`W=\check Y_\mu`),
+        " と置けば、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-T_g(aX + bW)
-&= g(aX + bW)g^{-1}
-   \quad (\because \text{def\_T\_g}) \\
-&= a\,gXg^{-1} + b\,gWg^{-1}
-   \quad (\because \text{行列の積の分配法則と scalar\_identity\_commutes}) \\
-&= a\,T_g(X) + b\,T_g(W)
-   \quad (\because \text{def\_T\_g})
+T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(a\check Z_\mu+b\check Y_\mu\right)
+&=a\,T_{\left(V_1^{(+)}\right)^{1/2}}(\check Z_\mu)
+ +b\,T_{\left(V_1^{(+)}\right)^{1/2}}(\check Y_\mu)
+&&\left(\because\ \blkref{linearity_of_T}\right).
 \end{aligned}`,
       ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-02 の論文構成再編で、一般の共役写像の線型性と二つのイジング固有特殊化を束ねた旧ブロックから、半指数行列による特殊化だけを独立させた。V_2 による特殊化は直後の残余ブロックに保留した。",
+      ],
+    },
+  },
+
+  {
+    id: "evensectorT_006a_claim_linearity_of_T_V2",
+    kind: "claim",
+    origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 9 },
+    title: { tex: String.raw`V_2 \text{ による共役写像の } \mathbb{C} \text{ 線型性}` },
+    labels: ["linearity_of_T_V2"],
+    statement: [
       paragraph([
-        ref("V_plus_factors_invertible"),
+        ref("def_half_integer_modes"),
+        " と ",
+        ref("def_check_index_set"),
+        " の記号を用いる。",
+        math(String.raw`\mu\in\check{\mathcal M}`),
+        " と ",
+        math(String.raw`a,b\in\mathbb C`),
+        " について、",
+      ]),
+      displayMath(String.raw`T_{V_2}\!\left(a\check Z_\mu+b\check Y_\mu\right)
+=a\,T_{V_2}(\check Z_\mu)+b\,T_{V_2}(\check Y_\mu)`),
+    ],
+    proof: [
+      paragraph([
+        ref("V2_invertible"),
         " より ",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2}, V_2 \in R^\times`),
-        " なので、後半はこの一般形の特別な場合である。",
+        math(String.raw`V_2\in R^\times`),
+        " である。したがって ",
+        ref("linearity_of_T"),
+        " で ",
+        math(String.raw`g=V_2`),
+        "、",
+        math(String.raw`X=\check Z_\mu`),
+        "、",
+        math(String.raw`W=\check Y_\mu`),
+        " と置けば主張を得る。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
-        "008 章の linearity_of_T は「表式よりただの 1 次関数なので自明」とだけ書かれていた。ここでは T_g の定義から分配法則で書き下し、g を可逆元一般に取った形で述べた（後で使うのは g = (V_1^{(+)})^{1/2}, V_2 の 2 つだけ）。",
+        "旧ブロックに含まれていた V_2 による特殊化を、既存の証明内容を失わず残余ブロックへ移した。今回の一単位では扱わないため、依存関係の章配置と形式化対応の再確認は次回へ保留する。",
       ],
     },
   },
@@ -2315,6 +2341,8 @@ P_{21}
         " の定義、",
         ref("T_actions_on_check_Z_Y"),
         "、",
+        ref("linearity_of_T_V2"),
+        "、",
         ref("linearity_of_T_on_check_Z_Y"),
         "、",
         ref("calc_of_TxT_check_Z_Y"),
@@ -2332,7 +2360,7 @@ T_{(V^{(+)})}(\check{Z}_\mu)
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
    \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix}\right)
-   \quad (\because \text{linearity\_of\_T\_on\_check\_Z\_Y}) \\
+   \quad (\because \blkref{linearity_of_T_V2}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
    \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix}\right)
@@ -2340,7 +2368,7 @@ T_{(V^{(+)})}(\check{Z}_\mu)
 &= \left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) B_2
    \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix}
-   \quad (\because \text{linearity\_of\_T\_on\_check\_Z\_Y}) \\
+   \quad (\because \blkref{linearity_of_T_on_check_Z_Y}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    B_1(\tilde\theta)\, B_2
    \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix}
@@ -2375,7 +2403,7 @@ T_{(V^{(+)})}(\check{Y}_\mu)
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
    \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
-   \quad (\because \text{linearity\_of\_T\_on\_check\_Z\_Y}) \\
+   \quad (\because \blkref{linearity_of_T_V2}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
    \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
@@ -2383,7 +2411,7 @@ T_{(V^{(+)})}(\check{Y}_\mu)
 &= \left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) B_2
    \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
-   \quad (\because \text{linearity\_of\_T\_on\_check\_Z\_Y}) \\
+   \quad (\because \blkref{linearity_of_T_on_check_Z_Y}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    B_1(\tilde\theta)\, B_2
    \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}

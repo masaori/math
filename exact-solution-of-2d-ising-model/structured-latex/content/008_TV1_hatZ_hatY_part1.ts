@@ -3308,24 +3308,57 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/014_claim_T_Vの線型性.typ",
       ordinal: 15,
     },
-    title: null,
+    title: { tex: String.raw`T_g \text{ の } \mathbb{C} \text{ 線型性}` },
     labels: ["linearity_of_T"],
     statement: [
       paragraph([
-        math(String.raw`\forall a, b \in \mathbb{C}`),
+        "任意の ",
+        math(String.raw`M\in\mathbb{N}_{>0}`),
+        " をとる。",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`R:=\mathrm{Mat}(2^M,\mathbb{C})`),
+        " と ",
+        math(String.raw`R^\times`),
+        " を用いる。任意の ",
+        math(String.raw`g\in R^\times`),
+        "、",
+        math(String.raw`a,b\in\mathbb{C}`),
+        "、",
+        math(String.raw`X,W\in R`),
         " について、",
       ]),
       displayMath(
-        String.raw`T_{(V_1^{(\pm)})^{1/2}}(a\hat{Z}_\mu^{(-)} + b\hat{Y}_\mu)
-= a\,T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)}) + b\,T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)`,
-      ),
-      displayMath(
-        String.raw`T_{V_2}(a\hat{Z}_\mu^{(-)} + b\hat{Y}_\mu)
-= a\,T_{V_2}(\hat{Z}_\mu^{(-)}) + b\,T_{V_2}(\hat{Y}_\mu)`,
+        String.raw`T_g(aX+bW)=a\,T_g(X)+b\,T_g(W)`,
       ),
     ],
-    proof: [paragraph(["表式より、それぞれただの1次関数なので自明。"])],
-    conversion: { status: "converted" },
+    proof: [
+      paragraph([
+        ref("def_T_g"),
+        " の定義を用い、行列積の左右の分配と、複素スカラー倍と行列積の両立を一回ずつ適用する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_g(aX+bW)
+&=g(aX+bW)g^{-1}
+&&\left(\because\ \blkref{def_T_g}\right)\\
+&=\bigl(g(aX)+g(bW)\bigr)g^{-1}
+&&\left(\because\ \text{左からの行列積の分配法則}\right)\\
+&=g(aX)g^{-1}+g(bW)g^{-1}
+&&\left(\because\ \text{右からの行列積の分配法則}\right)\\
+&=a(gX)g^{-1}+b(gW)g^{-1}
+&&\left(\because\ \text{左からの行列積と複素スカラー倍の両立}\right)\\
+&=a(gXg^{-1})+b(gWg^{-1})
+&&\left(\because\ \text{右からの行列積と複素スカラー倍の両立}\right)\\
+&=a\,T_g(X)+b\,T_g(W)
+&&\left(\because\ \blkref{def_T_g}\right).
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-09-02 の論文構成再編で、二つの転送行列に限った未証明の記述から、任意の可逆な有限複素行列による共役写像の線型性へ立て直した。イジング固有の特殊化は 014_even_sector_T_action.ts 側へ分離した。",
+      ],
+    },
   },
   {
     id: "TV1_hatZ_hatY_016_definition_T_V",

@@ -977,7 +977,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\che
         " かつ ",
         math(String.raw`T_{(V^{(+)})} = T_{V^{(+)}}`),
         " なので、",
-        ref("linearity_of_T_on_check_Z_Y"),
+        ref("linearity_of_T"),
         " の一般形（",
         math(String.raw`g \in R^\times`),
         " について ",
