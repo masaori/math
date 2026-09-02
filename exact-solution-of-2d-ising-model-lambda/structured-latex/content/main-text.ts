@@ -55076,6 +55076,212 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_selection_even_subgraph_simple_transitivity_and_sum",
+        labels: [],
+        title: { text: "偶部分グラフ作用の単純推移性と選択和の評価" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_selection_sum_character_evaluation",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_even_subgraphs_inside_edge_set",
+                  kind: "definition",
+                  title: { text: "辺集合に含まれる偶部分グラフの有限集合" },
+                  labels: ["def_even_subgraphs_inside_edge_set"],
+                  habitat: "N",
+                  statement: [
+                    paragraph([
+                      math(String.raw`L\ge1`), " と辺集合 ", math(String.raw`E\subseteq E_L`),
+                      " に対し、", math(String.raw`E`), " に含まれる偶部分グラフの有限集合を",
+                    ]),
+                    displayMath(String.raw`\mathcal H_L(E):=
+\bigl\{\,H\subseteq E\ \bigm|\ \operatorname{Even}_L(H)\,\bigr\}`),
+                    paragraph([
+                      "と定める。偶部分グラフは ", ref("def_even_edge_subset"),
+                      " で定めた。これは有限集合 ", math(String.raw`E`),
+                      " の部分集合だけからなるので有限であり、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+              },
+              {
+                role: "supportingClaim",
+                element: {
+                  id: "kac_ward_claim_selection_even_subgraph_action_simply_transitive",
+                  kind: "claim",
+                  title: { text: "非空な選択集合では偶部分グラフの対称差作用が単純推移的である" },
+                  labels: ["claim_selection_even_subgraph_action_simply_transitive"],
+                  habitat: "N",
+                  verification: ["sagemath/check/selection-sum-affine-character"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`L\ge1`), " とし、互いに素な辺集合 ",
+                      math(String.raw`D,E\subseteq E_L`), " は ",
+                      math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。選択 ",
+                      math(String.raw`C_0\in\mathcal C_L(D,E)`), " を任意に一つ固定すると、写像",
+                    ]),
+                    displayMath(String.raw`\tau_{C_0}:\mathcal H_L(E)\longrightarrow\mathcal C_L(D,E),
+\qquad \tau_{C_0}(H):=C_0\mathbin\triangle H`),
+                    paragraph([
+                      "は全単射である。したがって、選択集合が非空なら対称差作用は単純推移的である。",
+                      "選択集合は ", ref("def_even_subgraph_pair_fiber"), "、作用する有限集合は ",
+                      ref("def_even_subgraphs_inside_edge_set"), " で定めた。全て有限集合の演算と ",
+                      math(String.raw`\mathbb N`), " の偶奇だけで閉じる。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "まず任意の ", math(String.raw`H\in\mathcal H_L(E)`), " について ",
+                      math(String.raw`H\subseteq E`), " かつ ",
+                      math(String.raw`\operatorname{Even}_L(H)`), " なので、",
+                      ref("claim_selection_even_subgraph_action_character"), " の第一の主張から ",
+                      math(String.raw`C_0\mathbin\triangle H\in\mathcal C_L(D,E)`),
+                      " であり、写像は定まる。",
+                    ]),
+                    paragraph([
+                      "任意の ", math(String.raw`C\in\mathcal C_L(D,E)`), " を取り、",
+                      math(String.raw`H_C:=C_0\mathbin\triangle C`), " と置く。",
+                      math(String.raw`C_0,C\subseteq E`), " なので ", math(String.raw`H_C\subseteq E`),
+                      " である。また ", math(String.raw`D\cap E=\varnothing`), " なので、辺ごとの所属の場合分けにより",
+                    ]),
+                    displayMath(String.raw`H_C=
+\bigl(D\cup C_0\bigr)\mathbin\triangle\bigl(D\cup C\bigr)`),
+                    paragraph([
+                      "である。", math(String.raw`D\cup C_0`), " と ", math(String.raw`D\cup C`),
+                      " は選択集合の定義により偶部分グラフである。各頂点 ", math(String.raw`v\in V_L`),
+                      " で共通する接辺の寄与は二度現れて法二で消えるので",
+                    ]),
+                    displayMath(String.raw`d_{H_C}(v)\bmod2
+=\bigl(d_{D\cup C_0}(v)+d_{D\cup C}(v)\bigr)\bmod2
+=0\qquad\bigl(\because\ \blkref{def_edge_subset_incidence_count},\ \blkref{def_even_edge_subset}\bigr)`),
+                    paragraph([
+                      "となり ", math(String.raw`H_C\in\mathcal H_L(E)`), " である。対称差の結合則と ",
+                      math(String.raw`C_0\mathbin\triangle C_0=\varnothing`), " から",
+                    ]),
+                    displayMath(String.raw`\tau_{C_0}(H_C)
+=C_0\mathbin\triangle(C_0\mathbin\triangle C)
+=C\qquad\bigl(\because\ \text{対称差の結合則と同じ集合の相殺}\bigr)`),
+                    paragraph([
+                      "なので全射である。最後に ", math(String.raw`H_1,H_2\in\mathcal H_L(E)`),
+                      " が ", math(String.raw`\tau_{C_0}(H_1)=\tau_{C_0}(H_2)`), " を満たすなら、両辺と ",
+                      math(String.raw`C_0`), " の対称差を取り、同じ結合則と相殺を使って ",
+                      math(String.raw`H_1=H_2`), " を得る。よって単射でもあり、全単射である。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_selection_sum_character_evaluation",
+              kind: "claim",
+              title: { text: "選択和は空性と巻き付き文字によって評価できる" },
+              labels: ["claim_selection_sum_character_evaluation"],
+              habitat: "Z",
+              verification: ["sagemath/check/selection-sum-affine-character"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  " とし、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " は ",
+                  math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。選択集合が空なら",
+                ]),
+                displayMath(String.raw`\mathcal U^{a,b}_L(D,E)=0`),
+                paragraph([
+                  "である。選択集合が空でなく ", math(String.raw`C_0\in\mathcal C_L(D,E)`),
+                  " を一つ固定したとき、偶部分グラフ ", math(String.raw`H\in\mathcal H_L(E)`), " の符号を",
+                ]),
+                displayMath(String.raw`\chi_E(H):=(-1)^{
+\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(H)
++\varepsilon_{L,\mathrm v}(E)\varepsilon_{L,\mathrm h}(H)}`),
+                paragraph(["と置くと、", math(String.raw`\mathbb Z`), " の等式"]),
+                displayMath(String.raw`\mathcal U^{a,b}_L(D,E)=
+\begin{cases}
+0,
+&\exists H_0\in\mathcal H_L(E),\ \chi_E(H_0)=-1,\\[2mm]
+(-1)^{\vartheta^{a,b}_L(D,E;C_0)}\,\lvert\mathcal H_L(E)\rvert,
+&\forall H\in\mathcal H_L(E),\ \chi_E(H)=1
+\end{cases}`),
+                paragraph([
+                  "が成り立つ。選択和と符号指数は ", ref("def_signed_selection_sum"), " と ",
+                  ref("claim_selection_sum_signed_count"), " で定めた。したがって選択和は有限集合の空性、",
+                  "巻き付き偶奇、有限集合の元数だけで決まり、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "選択集合が空なら、選択和の定義の添字集合が空なので ",
+                  math(String.raw`\mathcal U^{a,b}_L(D,E)=0`), " である。以下、選択集合は空でなく ",
+                  math(String.raw`C_0`), " を固定する。", ref("claim_selection_even_subgraph_action_simply_transitive"),
+                  " の全単射で有限和の添字を取り替え、", ref("claim_selection_even_subgraph_action_character"),
+                  " の符号の等式を各項へ適用すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal U^{a,b}_L(D,E)
+&=\sum_{C\in\mathcal C_L(D,E)}(-1)^{\vartheta^{a,b}_L(D,E;C)}
+&&\bigl(\because\ \blkref{def_signed_selection_sum}\bigr)\\
+&=\sum_{H\in\mathcal H_L(E)}(-1)^{\vartheta^{a,b}_L(D,E;C_0\mathbin\triangle H)}
+&&\bigl(\because\ \blkref{claim_selection_even_subgraph_action_simply_transitive}\text{ による添字の取り替え}\bigr)\\
+&=(-1)^{\vartheta^{a,b}_L(D,E;C_0)}
+\sum_{H\in\mathcal H_L(E)}\chi_E(H)
+&&\bigl(\because\ \blkref{claim_selection_even_subgraph_action_character}\text{ の符号の等式}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "まず ", math(String.raw`H_0\in\mathcal H_L(E)`), " が ",
+                  math(String.raw`\chi_E(H_0)=-1`), " を満たすとする。任意の ",
+                  math(String.raw`H\in\mathcal H_L(E)`), " に対し ",
+                  math(String.raw`H\mathbin\triangle H_0`), " は ", math(String.raw`E`),
+                  " に含まれ、各頂点で二つの偶次数の和を法二で取るので再び ",
+                  math(String.raw`\mathcal H_L(E)`), " に属する。写像 ",
+                  math(String.raw`H\mapsto H\mathbin\triangle H_0`),
+                  " は同じ集合との対称差を二度取ると元へ戻るため全単射である。巻き付き偶奇の対称差加法性により",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\chi_E(H\mathbin\triangle H_0)
+&=\chi_E(H)\,\chi_E(H_0)
+&&\bigl(\because\ \text{巻き付き偶奇の対称差加法性と }(-1)^{r+s}=(-1)^r(-1)^s\bigr)\\
+&=-\chi_E(H)
+&&\bigl(\because\ \chi_E(H_0)=-1\bigr)
+\end{aligned}`),
+                paragraph(["である。よって添字をこの全単射で取り替えると"]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{H\in\mathcal H_L(E)}\chi_E(H)
+&=\sum_{H\in\mathcal H_L(E)}\chi_E(H\mathbin\triangle H_0)
+&&\bigl(\because\ \text{有限和の添字の全単射による取り替え}\bigr)\\
+&=-\sum_{H\in\mathcal H_L(E)}\chi_E(H)
+&&\bigl(\because\ \chi_E(H\mathbin\triangle H_0)=-\chi_E(H)\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "を得て、最初の鎖から選択和は零である。一方、全ての ",
+                  math(String.raw`H\in\mathcal H_L(E)`), " について ", math(String.raw`\chi_E(H)=1`),
+                  " なら、有限集合上の定数和により",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal U^{a,b}_L(D,E)
+&=(-1)^{\vartheta^{a,b}_L(D,E;C_0)}
+\sum_{H\in\mathcal H_L(E)}1
+&&\bigl(\because\ \chi_E(H)=1\bigr)\\
+&=(-1)^{\vartheta^{a,b}_L(D,E;C_0)}\,\lvert\mathcal H_L(E)\rvert
+&&\bigl(\because\ \text{有限集合上の定数和}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "となる。", math(String.raw`\chi_E(H)`), " は常に ", math(String.raw`\{-1,1\}`),
+                  " の一方なので、二つの場合は全てを尽くす。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_path_reversal_phase_preservation",
         labels: [],
         title: { text: "経路反転の位相寄与の保存" },

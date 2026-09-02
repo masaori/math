@@ -363,6 +363,8 @@ export default defineNotes([
       "def_signed_selection_sum",
       "claim_selection_sum_signed_count",
       "claim_selection_even_subgraph_action_character",
+      "claim_selection_even_subgraph_action_simply_transitive",
+      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "選択集合は偶部分グラフの作用による文字和として扱える" },
     body: [
@@ -388,7 +390,8 @@ export default defineNotes([
         " の有限和だけで完結し、浮動小数点は使わない。作用が選択集合を保つことと指数差の文字は、",
         "一般の ", math(String.raw`L`),
         " で本文の主張（偶部分グラフの対称差は選択集合を保ち符号指数を文字だけ動かす）として示した。",
-        "単純推移性の一般の記述、選択和の評価の命題化、Lean 二版は未着手である。",
+        "単純推移性と選択和の評価も一般の ", math(String.raw`L`),
+        " で本文へ命題化した。これらの Lean 二版は未着手である。",
       ]),
     ],
   },

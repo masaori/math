@@ -1,6 +1,8 @@
 """選択集合への偶部分グラフの作用と選択符号の文字を厳密検査する。
 
-対象: claim_selection_even_subgraph_action_character
+対象: claim_selection_even_subgraph_action_character,
+claim_selection_even_subgraph_action_simply_transitive,
+claim_selection_sum_character_evaluation
 （および def_signed_selection_sum, claim_selection_sum_signed_count）。
 
 一辺 L=2 の全ファイバー (D,E) について、E の偶部分グラフ H を対称差で

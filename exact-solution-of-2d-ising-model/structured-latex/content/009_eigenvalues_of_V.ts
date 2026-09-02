@@ -883,6 +883,8 @@ n_\mu n_\nu
    \quad (\because \psi_{-\mu_1} \text{ と } P \text{ が可換}) \\
 &= \mathrm{tr}\!\left(P\,(I - n_{\mu_1})\right)
    \quad (\because \text{数演算子の冪等性 (2)。}\blkref{number_operator_idempotent}) \\
+&= \mathrm{tr}\!\left(P-P\,n_{\mu_1}\right)
+   \quad (\because \text{分配法則と単位行列の性質}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}(P\,n_{\mu_1})
    \quad (\because \text{トレースの線型性。}\blkref{trace_basic_properties}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}(n_{\mu_1} P)
@@ -902,8 +904,10 @@ n_\mu n_\nu
    \quad (\because \text{両辺を }2\text{ で割る}) \\
 &= \frac{1}{2}\cdot 2^{M-(k-1)}
    \quad (\because \text{帰納法の仮定}) \\
+&= \frac{1}{2}\cdot 2^{M-k+1}
+   \quad (\because M-(k-1)=M-k+1) \\
 &= 2^{M-k}
-   \quad (\because M-(k-1)=M-k+1)
+   \quad (\because 2^{M-k+1}=2\cdot2^{M-k})
 \end{aligned}`,
       ),
       paragraph([
@@ -920,8 +924,10 @@ n_\mu n_\nu
    \quad (\because \text{直前に得た }\mathrm{tr}(n_{\mu_1}P)=\tfrac12\,\mathrm{tr}(P)) \\
 &= \frac{1}{2}\cdot 2^{M-(k-1)}
    \quad (\because \text{帰納法の仮定}) \\
+&= \frac{1}{2}\cdot 2^{M-k+1}
+   \quad (\because M-(k-1)=M-k+1) \\
 &= 2^{M-k}
-   \quad (\because M-(k-1)=M-k+1)
+   \quad (\because 2^{M-k+1}=2\cdot2^{M-k})
 \end{aligned}`,
       ),
       paragraph([
@@ -934,14 +940,20 @@ n_\mu n_\nu
 \mathrm{tr}\!\left(R_{\mu_1}^{(0)}P\right)
 &= \mathrm{tr}\!\left((I-n_{\mu_1})P\right)
    \quad (\because R_{\mu_1}^{(0)}=I-n_{\mu_1}) \\
+&= \mathrm{tr}\!\left(P-n_{\mu_1}P\right)
+   \quad (\because \text{分配法則と単位行列の性質}) \\
 &= \mathrm{tr}(P)-\mathrm{tr}(n_{\mu_1}P)
-   \quad (\because \text{分配法則とトレースの線型性}) \\
+   \quad (\because \text{トレースの線型性。}\blkref{trace_basic_properties}) \\
 &= \mathrm{tr}(P)-\frac{1}{2}\,\mathrm{tr}(P)
    \quad (\because \text{直前に得た }\mathrm{tr}(n_{\mu_1}P)=\tfrac12\,\mathrm{tr}(P)) \\
 &= \frac{1}{2}\,\mathrm{tr}(P)
    \quad (\because \text{複素数の四則演算}) \\
+&= \frac{1}{2}\cdot2^{M-(k-1)}
+   \quad (\because \text{帰納法の仮定}) \\
+&= \frac{1}{2}\cdot2^{M-k+1}
+   \quad (\because M-(k-1)=M-k+1) \\
 &= 2^{M-k}
-   \quad (\because \text{帰納法の仮定と上の冪の計算})
+   \quad (\because 2^{M-k+1}=2\cdot2^{M-k})
 \end{aligned}`,
       ),
       paragraph([
@@ -956,6 +968,7 @@ n_\mu n_\nu
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "2026-09-02 の式変形統一で、単位行列のトレース、数演算子の定義、トレースの巡回性・線型性、数演算子の関係を使う各式変形行の行末へ `\\blkref` を移した。内容・式変形・根拠・参照は変えていない。",
+        "2026-09-03 の式変形統一で、一行に併記していた分配法則とトレースの線型性を別行へ分け、帰納法の仮定の代入・指数の整数計算・二の冪の整理も一行一操作へ開いた。内容・根拠・参照は不変である。",
       ],
     },
   },

@@ -9,7 +9,19 @@
 台帳は既に `| todo |` 列を持たない形式へ変わっていたため、残作業表の行を数えるよう監査も
 現行形式へ揃えた。
 
-## 現在の到達点（2026-09-03 の 123 回目の tick 時点）
+## 現在の到達点（2026-09-03 の 124 回目の tick 時点）
+
+**非空な選択集合への偶部分グラフの対称差作用が単純推移的であり、選択和が空性と巻き付き文字で評価できることを一般の $L$ で示した。** $E$ に含まれる偶部分グラフの有限集合 $\mathcal H_L(E)$ を定め、任意に固定した $C_0\in\mathcal C_L(D,E)$ に対する $H\mapsto C_0\mathbin\triangle H$ が $\mathcal H_L(E)$ から選択集合への全単射であることを証明した（`claim_selection_even_subgraph_action_simply_transitive`）。この全単射で選択和の添字を替え、前 tick の符号変化式を適用すると、選択集合が空なら零、$\chi_E(H_0)=-1$ となる偶部分グラフがあれば符号反転全単射により零、全ての $H$ で $\chi_E(H)=1$ なら $(-1)^{\vartheta(C_0)}|\mathcal H_L(E)|$ となる（`claim_selection_sum_character_evaluation`）。SageMath `selection-sum-affine-character` は一辺二の全 $2{,}436$ 組で通した。Lean 二版は未着手である。
+
+次 tick は、ファイバー位相和全体に同じ偶部分グラフの文字和を構成し、選択和との一般の $L$ での一致へ接続する。
+
+前進前レビューでは、前 tick の対称差作用の証明で、固定した第二の集合等式を一般形として再適用したように読める説明を、実際の根拠である辺ごとの所属場合分けへ直した。主張・式・検算は不変で、「何も言っていない主張」は無かった。修正は前進前にコミット `52389bc8a` として `origin/main` へ反映した。
+
+並列の式変形統一は、姉妹側の「数演算子積のトレース」で、一行に併記していた分配法則とトレースの線型性を別行へ分け、帰納法の仮定の代入・指数の整数計算・二の冪の整理も一行一操作へ開いた。内容・根拠・参照は不変である。
+
+Lambda 側 check（946 ブロック・相互参照 $3{,}973$ 件すべて解決）・linkage（422 検算）・対象 SageMath（全 $2{,}436$ 組）・Lean $9{,}616$ ジョブ・`sorry` / `admit` 無し・PDF 411 ページを通した。姉妹側 check・PDF 360 ページも通した。
+
+## ひとつ前の到達点（2026-09-03 の 123 回目の tick 時点）
 
 **偶部分グラフの対称差が選択集合を保ち、符号指数を文字だけ動かすことを一般の $L$ の主張へ昇格した。** 互いに素な $D,E\subseteq E_L$（$E$ 偶）、任意の選択 $C\in\mathcal C_L(D,E)$、$\operatorname{Even}_L(H)$ を満たす任意の $H\subseteq E$ について、$C\mathbin\triangle H\in\mathcal C_L(D,E)$ であり、$\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)\equiv\vartheta^{a,b}_L(D,E;C)+\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(H)+\varepsilon_{L,\mathrm v}(E)\varepsilon_{L,\mathrm h}(H)\pmod2$ を示した（`claim_selection_even_subgraph_action_character`）。証明は、巻き付き偶奇の対称差加法性 $\varepsilon(X\mathbin\triangle Y)\equiv\varepsilon(X)+\varepsilon(Y)$ と、$B=A\mathbin\triangle E$ から従う $\beta\equiv\alpha+e$ の合同で、符号指数の六項を展開して二の倍数を消す一続きの合同鎖である。SageMath `selection-sum-affine-character` は任意の選択×任意の偶 $H$ の全対検査へ拡張して通した（全 $2{,}436$ 組、3 分 54 秒）。Lean 二版は未着手である。
 
