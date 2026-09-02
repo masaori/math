@@ -14,6 +14,7 @@
 
 - `AGENTS.md`、`CLAUDE.md`、`docs/context/` 全文、プロジェクト README、この Runbook、状態台帳、`MEMORY.md` を読む。
 - 120秒の上限付きで `origin` を fetch し、remote default branch は fetch 後のローカル `origin/HEAD` から取得する。専用worktreeが遅れていれば、未コミット成果を失わない方法で取り込む。通信処理の失敗時は別経路へ切り替えずエラーで終了し、共有main作業ツリー、lambda版、既存tickには触れない。
+- Codex 内のコマンドは `exec_command` の `login=false` を明示して実行する。tick 本体は `MISE_NO_CONFIG=1` を子プロセスへ継承し、誤って login shell が選ばれた場合も、本文コマンドより前の mise hook が設定探索で停滞しないようにする。`MISE_NO_CONFIG=1` ではmise shimが版を解決できないためshimはPATHへ入れず、Node 22.22.3の実体とSageMath・Lean・Gitをtickが組み立てた `PATH` から取得する。
 - `npm run inventory:organization` で機械可読棚卸しを再生成し、件数・依存ラベル・差分を確認する。
 - 前回成果が残る継続モードでは、状態台帳の次項へ進まず、前回ログと現在差分を一度だけ確認して完了工程へ進む。巨大な差分や既読全文を実行ログへ繰り返し貼らない。
 - 状態台帳の「次の一歩」だけを担当者が分析し、別のエージェントが、分類境界・依存方向・イジング固有セマンティクス混入・二章制約・高校生可読性をレビューする。指摘があれば同じ単位を修正して再レビューし、未解決のまま次へ進まない。

@@ -117,7 +117,7 @@ const matrixLinearMapCorrespondenceExpectedExternalInputContentSha256 = new Map<
   ["linear_space_general_000_definition_kronecker_product", "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "e644e2525aecd17cc1b8c439db76c6c4b94348dd1fe9c63405c5c8b6077f068d"],
-  ["linear_space_general_001_theorem_tensor_product_basis", "c257a4a58107579de48a064c4d124f5608f95fab64bdcd1c4dbd76f2b3c6c1a3"],
+  ["linear_space_general_001_theorem_tensor_product_basis", "b1d6fa5e021b9be178b745de740fe02f935e6e352a7fb758d4994f2eeb43cbc2"],
   ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "af6e085d614179050c2b2cfc62548b146f41083dbe158453221af092d9796239"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
 ]);
@@ -159,7 +159,7 @@ const invertibleMatrixConjugationExpectedExternalInputContentSha256 = new Map<st
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "e644e2525aecd17cc1b8c439db76c6c4b94348dd1fe9c63405c5c8b6077f068d"],
-  ["linear_space_general_001_theorem_tensor_product_basis", "c257a4a58107579de48a064c4d124f5608f95fab64bdcd1c4dbd76f2b3c6c1a3"],
+  ["linear_space_general_001_theorem_tensor_product_basis", "b1d6fa5e021b9be178b745de740fe02f935e6e352a7fb758d4994f2eeb43cbc2"],
   ["linear_space_general_002_claim_scalar_identity_commutes", "f8f5ddafc9ff868ec1ace87dae5f992b09aacc9063d84f3f432c8b3273ba873e"],
   ["linear_space_general_004_lemma_centralizer_is_scalar", centralizerIsScalarExpectedSha256],
 ]);
@@ -660,7 +660,7 @@ const zYLinearIndependenceExpectedExternalInputContentSha256 = new Map<string, s
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
-  ["linear_space_general_001_theorem_tensor_product_basis", "c257a4a58107579de48a064c4d124f5608f95fab64bdcd1c4dbd76f2b3c6c1a3"],
+  ["linear_space_general_001_theorem_tensor_product_basis", "b1d6fa5e021b9be178b745de740fe02f935e6e352a7fb758d4994f2eeb43cbc2"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
 ]);
 const v1V2JordanWignerSectionEntryIds = [
@@ -912,7 +912,7 @@ const realSymmetricGeneratorsAndSignFlipExpectedExternalInputContentSha256 = new
   ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "d0d5706bfc9866ba851d979c14387aa1c99cf67bdf434f453699a1fa91d4f22c"],
   ["linear_space_general_000_definition_kronecker_product", "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
-  ["linear_space_general_000d_claim_kronecker_transpose", "cecdd6fa3fb66f3aa75d8982f92e7290719c0960058ffb0caafe68dfa9e9b4d5"],
+  ["linear_space_general_000d_claim_kronecker_transpose", "c0014341f8b8968f27acf4793018d15312e7313acad2dccadd439617703c4cd4"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["transfer_matrix_007_definition_V1_pm", "7a63f3a02db439552636cb7cd8ac32f348c82f85830614ed5fc94c80b3698264"],
   ["transfer_matrix_011_definition_H1_H2", "19baa8255a664202439efe07a7c18f770902aa68a0d3ce553a650712c8a23413"],
