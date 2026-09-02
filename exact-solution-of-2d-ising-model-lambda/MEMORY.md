@@ -2,7 +2,19 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 116 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 117 回目の tick 時点）
+
+**経路反転の不動点が単純通過辺を持たないことを一般の $L$ で示した。** $\mathcal T(\varphi)=\varphi$ なら $M(\varphi)=\{\iota(\vec h)\mid\vec h\in M(\varphi)\}$（ファイバー保存対合の第一の主張）から全ての台辺が反転対になるため $E_1(\varphi)=\varnothing$ であり、したがって互いに素な $D,E$ が $\operatorname{Even}_L(E)$ と $E\ne\varnothing$ を満たすファイバー $\mathcal N_L(D,E)$ の上で経路反転は不動点を持たず、符号別軌道族 $\mathfrak O^{\mathcal N,s}_L(D,E;a,b)$ と三分類で細分した $\mathfrak O^{\mathcal P,s}_L(D,E;a,b)$ の全ての軌道の元の個数は二である（`claim_path_reversal_fixed_point_no_single_traversal`）。選択側の「$E\ne\varnothing$ なら軌道は全て二元」（`claim_path_reversal_selection_complement_orbits`）と対になり、符号と重みを保つ対応の両側の重みが二で揃った。SageMath `path-reversal-fixed-point-no-single-traversal` は一辺二の非後退置換 $30{,}784$ 個（不動点 $152$ 個は全て単純通過辺なし）と、$E$ 非空 $505$ ファイバー×四スピン構造・両符号の軌道 $40{,}768$ 個を全数検査した。Lean 二版は未着手である。
+
+次 tick は、両側の二元軌道の間に符号を保つ対応の構成へ進む。
+
+前進前レビューでは、前 tick の重み付き軌道和表示を statement・proof・検算 overview・台帳で照合した。参照は全て実在し、重みの定義と検算の直接和一致も整合していて、「何も言っていない主張」や不一致は無かったため、レビュー修正は無かった。
+
+並列の式変形統一は、姉妹側の「半整数運動量モードの交換関係」（`013_even_sector_modes`）の Step 3・Step 4 の二つの鎖で、鎖の直後に置かれた参照（`theorem_exp_product` と `def_half_integer_modes`）を削り、それらを実際に使う各式変形行の行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変である。
+
+Lambda 側 check（940 ブロック・相互参照 $3{,}955$ 件すべて解決）・linkage（417 検算）・対象 SageMath（全数）・Lean $9{,}616$ ジョブ・`sorry` / `admit` 無し・PDF 408 ページを通した。姉妹側 check・PDF 360 ページも通した。新主張の Lean 二版は未着手であり、このセクションは四層完了とはしていない。
+
+## ひとつ前の到達点（2026-09-02 の 116 回目の tick 時点）
 
 **経路反転軌道と選択補集合軌道を元数で重み付けした有限和へ二つの符号付き数え上げを移した。** 接触対の順序に依らない三分類で経路反転軌道を細分し、各軌道の重みを一元または二元の元数として、ファイバー位相和と選択和がそれぞれ正符号軌道の重み和から負符号軌道の重み和を引いた整数に等しいことを一般の $L$ で示した（`claim_weighted_path_reversal_selection_orbit_sums`）。SageMath `weighted-path-reversal-selection-orbit-sums` は一辺二の全 $609$ ファイバーと四スピン構造の $2{,}436$ 組で、定義による直接和との一致を検査した。Lean 二版は未着手である。
 

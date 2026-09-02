@@ -1466,7 +1466,7 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ \check{Z}_\mu\right]
 &= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j\right]
-   &&(\because \text{def\_half\_integer\_modes}) \\
+   &&(\because \blkref{def_half_integer_modes}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Z_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\cdot 2\,Y_{j-1}^{\flat}
@@ -1476,7 +1476,7 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
 &= 2\sum_{l=0}^{M-1} e^{-i(l+1)\tilde\theta_\mu}\,Y_l^{\flat}
    &&(\because \text{有限和の添字の付け替え } l=j-1) \\
 &= 2\sum_{l=0}^{M-1} e^{-i\tilde\theta_\mu}e^{-il\tilde\theta_\mu}\,Y_l^{\flat}
-   &&(\because \text{theorem\_exp\_product}\ (n=1)) \\
+   &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= 2\,e^{-i\tilde\theta_\mu}\sum_{l=0}^{M-1} e^{-il\tilde\theta_\mu}\,Y_l^{\flat}
    &&(\because \text{分配則}) \\
 &= 2\,e^{-i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Y_l^{\flat}
@@ -1484,18 +1484,9 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
 &= 2\,e^{-i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Y_l
    &&(\because 1 \leq l \leq M \text{ では } Y_l^{\flat} = Y_l) \\
 &= 2\,e^{-i\tilde\theta_\mu}\,\check{Y}_\mu
-   &&(\because \text{def\_half\_integer\_modes})
+   &&(\because \blkref{def_half_integer_modes})
 \end{aligned}`,
       ),
-      paragraph([
-        "ここで指数法則は ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " に適用し、最初と最後の等号は ",
-        ref("def_half_integer_modes"),
-        " の定義を使った。",
-      ]),
       paragraph([
         "Step 4（(B)）。主計算に先立ち、添字を ",
         math(String.raw`l := j+1`),
@@ -1533,7 +1524,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ \check{Y}_\mu\right]
 &= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
-   &&(\because \text{def\_half\_integer\_modes}) \\
+   &&(\because \blkref{def_half_integer_modes}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Y_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2\,Z_{j+1}^{\flat}\right)
@@ -1543,7 +1534,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
 &= -2\sum_{l=2}^{M+1} e^{-i(l-1)\tilde\theta_\mu}\,Z_{l}^{\flat}
    &&(\because \text{有限和の添字の付け替え } l = j+1) \\
 &= -2\sum_{l=2}^{M+1} e^{i\tilde\theta_\mu}e^{-il\tilde\theta_\mu}\,Z_{l}^{\flat}
-   &&(\because \text{theorem\_exp\_product}\ (n=1)) \\
+   &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= -2\,e^{i\tilde\theta_\mu}\sum_{l=2}^{M+1} e^{-il\tilde\theta_\mu}\,Z_l^{\flat}
    &&(\because \text{分配則}) \\
 &= -2\,e^{i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Z_l^{\flat}
@@ -1551,18 +1542,9 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
 &= -2\,e^{i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Z_l
    &&(\because 1 \leq l \leq M \text{ では } Z_l^{\flat} = Z_l) \\
 &= -2\,e^{i\tilde\theta_\mu}\,\check{Z}_\mu
-   &&(\because \text{def\_half\_integer\_modes})
+   &&(\because \blkref{def_half_integer_modes})
 \end{aligned}`,
       ),
-      paragraph([
-        "ここで指数法則は ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " に適用し、最初と最後の等号は ",
-        ref("def_half_integer_modes"),
-        " の定義を使った。",
-      ]),
     ],
     conversion: {
       status: "added",
