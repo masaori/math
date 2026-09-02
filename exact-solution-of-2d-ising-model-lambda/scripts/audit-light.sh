@@ -18,6 +18,7 @@ LOG_FILE="$LOG_DIR/audit.log"
 LOCK_DIR="$LOG_DIR/audit-light.lock"
 WORKTREE="$LOG_DIR/audit-light-worktree"
 PROJECT_NAME="$(basename "$PROJECT_DIR")"
+source "$PROJECT_DIR/scripts/audit-common.sh"
 
 mkdir -p "$LOG_DIR"
 log() { printf '%s [light] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"; }
@@ -92,10 +93,10 @@ fi
 # 4. 台帳と本文の突き合わせ。
 ledger="$AUDIT_PROJECT/docs/tasks/auto-loop-state.md"
 if [ -f "$ledger" ]; then
-  remark_items="$(grep -c 'todo("残り")\|todo("未着手")' "$AUDIT_PROJECT/structured-latex/content/main-text.ts" 2>/dev/null || echo 0)"
-  ledger_todo="$(grep -c '| todo |' "$ledger" 2>/dev/null || echo 0)"
-  [ "${remark_items:-0}" -gt "${ledger_todo:-0}" ] &&
-    add "本文の「この先に書くこと」が ${remark_items} 項目あるのに台帳の todo は ${ledger_todo} 件"
+  remark_items="$(count_matches 'todo("残り")\|todo("未着手")' "$AUDIT_PROJECT/structured-latex/content/main-text.ts")"
+  ledger_items="$(count_remaining_ledger_rows "$ledger")"
+  [ "${remark_items:-0}" -gt "${ledger_items:-0}" ] &&
+    add "本文の「この先に書くこと」が ${remark_items} 項目あるのに台帳の残作業表は ${ledger_items} 件"
 fi
 
 git -C "$REPO_DIR" worktree remove --force "$WORKTREE" >/dev/null 2>&1 || rm -rf "$WORKTREE"
