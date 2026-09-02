@@ -240,7 +240,7 @@ Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
         String.raw`\begin{aligned}
 (A_1\boxtimes\cdots\boxtimes A_M)(B_1\boxtimes\cdots\boxtimes B_M)
 &= (A_1B_1)\boxtimes\cdots\boxtimes(A_MB_M)
-&&(\because\ \text{クロネッカー積の積の規則})
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則})
 \end{aligned}`,
       ),
       paragraph([
@@ -260,25 +260,16 @@ Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
         String.raw`\begin{aligned}
 C_1\boxtimes\cdots\boxtimes\overbrace{(c\,C_j)}^{j\text{th}}\boxtimes\cdots\boxtimes C_M
 &= c\,\left(C_1\boxtimes\cdots\boxtimes C_M\right)
-&&(\because\ \text{クロネッカー積の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性})
+&&(\because\ \blkref{kronecker_multilinear}\text{ の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性})
 \end{aligned}`,
       ),
-      paragraph([
-        "が成り立つ。準備は以上である。以下、この 2 つを ",
-        math(String.raw`(\ast)`),
-        " (積の規則)・",
-        math(String.raw`(\ast\ast)`),
-        " (第 ",
-        math(String.raw`j`),
-        " 因子についての線型性) と呼ぶ。",
-      ]),
       displayMath(
         String.raw`\begin{aligned}
 XY
 &= (x_1\boxtimes\cdots\boxtimes x_M)(y_1\boxtimes\cdots\boxtimes y_M)
 &&(\because\ X, Y \text{ の定義}) \\
 &= (x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)
-&&(\because\ (\ast))
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則})
 \end{aligned}`,
       ),
       displayMath(
@@ -287,13 +278,13 @@ YX
 &= (y_1\boxtimes\cdots\boxtimes y_M)(x_1\boxtimes\cdots\boxtimes x_M)
 &&(\because\ X, Y \text{ の定義}) \\
 &= (y_1x_1)\boxtimes\cdots\boxtimes(y_Mx_M)
-&&(\because\ (\ast)) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= (x_1y_1)\boxtimes\cdots\boxtimes\overbrace{(y_jx_j)}^{j\text{th}}\boxtimes\cdots\boxtimes(x_My_M)
 &&(\because\ i\neq j \text{ では } y_ix_i = x_iy_i) \\
 &= (x_1y_1)\boxtimes\cdots\boxtimes\overbrace{\left((-1)\,(x_jy_j)\right)}^{j\text{th}}\boxtimes\cdots\boxtimes(x_My_M)
 &&(\because\ y_jx_j = -(x_jy_j)) \\
 &= (-1)\left((x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)\right)
-&&(\because\ (\ast\ast)) \\
+&&(\because\ \blkref{kronecker_multilinear}\text{ の第 } j \text{ 因子についての } \mathbb{C}\text{-線型性}) \\
 &= (-1)\,(XY)
 &&(\because\ \text{上の } XY \text{ の計算}) \\
 &= -\,XY

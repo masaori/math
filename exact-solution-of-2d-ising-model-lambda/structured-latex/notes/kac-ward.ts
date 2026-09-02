@@ -456,4 +456,30 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_selection_even_subgraph_action_character_oriented_edge_conjugation_counterexample",
+    targets: [
+      "claim_selection_even_subgraph_action_character",
+      "claim_path_reversal_fiber_preserving_involution",
+    ],
+    title: { text: "偶部分グラフ上の向き反転共役は置換側の文字作用にならない（一辺二の全数反例）" },
+    body: [
+      paragraph([
+        "単純通過辺集合 ", math(String.raw`E`), " に含まれる偶部分グラフ ",
+        math(String.raw`H`), " に対し、", math(String.raw`H`),
+        " の各辺で二つの向きだけを交換する対合を ", math(String.raw`\rho_H`),
+        " とする。選択側の対称差作用に対応する最も直接的な候補として、置換を ",
+        math(String.raw`\rho_H\circ\varphi\circ\rho_H`),
+        " へ送る共役を一辺二で全数検査した（sagemath/check/even-subgraph-oriented-edge-conjugation）。",
+        "全 ", math(String.raw`78{,}752`), " 組で反転対辺集合 ", math(String.raw`D`),
+        " と単純通過辺集合 ", math(String.raw`E`), " は保たれたが、",
+        math(String.raw`43{,}664`), " 組で非後退性が壊れた。非後退性を保った像でも、期待する文字と",
+        "位相寄与の比が一致しないものが四スピン構造を合わせて ", math(String.raw`7{,}680`),
+        " 件あった。従って、この共役は空・非自明文字のファイバー位相和を消す作用には使わない。",
+        "次は向き付き辺を個別に反転するのではなく、各頂点の入出接続を偶部分グラフに沿って",
+        "組み替える作用を調べる。検算は有限集合・有限写像と ",
+        math(String.raw`\mathbb Q(\zeta_8)`), " の等号だけで完結し、浮動小数点は使わない。",
+      ]),
+    ],
+  },
 ]);
