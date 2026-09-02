@@ -564,13 +564,20 @@ for (const chapter of documentOrganization) {
   if (inCa && chapterTitleHits.length === 0) {
     organizationViolations.push(`CA 章の章タイトルに CA 固有語が無い: ${chapterId}`);
   }
-  if (inTools) {
-    const chapterTitlePhysicsHits = physicsTermsIn(chapter.title);
-    if (chapterTitlePhysicsHits.length > 0) {
-      organizationViolations.push(
-        `数学的道具立て章の章タイトルに既存物理由来語がある: ${chapterId}（${chapterTitlePhysicsHits.join("、")}）`,
-      );
-    }
+  // 既存物理由来語の禁止は章タイトルでは両章に掛ける。
+  //
+  // 照合の所有は「ブロック」と「節」の粒度でしか宣言できない（PHYSICS_COMPARISON_BLOCK_IDS と、
+  // そこから導く照合節）。章タイトルはそのどちらにも属さないので、照合の所有者になりようがない。
+  // にもかかわらず CA 章のときだけ検査を掛けていなかったため、実測で章タイトルを
+  // 「2 値セルオートマトンの量子的セマンティクスを持つもの」へ書き換えても検査は 0 件で通った。
+  // 章タイトルは出版本文の最上位の見出しとして現れるので、宣言のないまま既存物理の語が
+  // 章全体の名前に入ることになる。CA 章の節の記述には照合節だけを許す制限が既に掛かっており、
+  // 章タイトルだけが無制約なのは同じ境界の片肺である。
+  const chapterTitlePhysicsHits = physicsTermsIn(chapter.title);
+  if (chapterTitlePhysicsHits.length > 0) {
+    organizationViolations.push(
+      `章タイトルに既存物理由来語がある: ${chapterId}（${chapterTitlePhysicsHits.join("、")}）`,
+    );
   }
   if (inTools) {
     const caHits = CA_IDENTIFIER_TERMS.filter((term) => chapterId.includes(term));
