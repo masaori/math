@@ -332,18 +332,18 @@ Qv_j
       displayMath(String.raw`\begin{aligned}
 \mathrm{tr}(Q)
 &= \mathrm{tr}(P^{-1}QP)
-&&(\because\ \text{トレースの基本性質 (4)：相似変換でトレースは不変})\\
+&&(\because\ \text{トレースの基本性質 (4)：相似変換でトレースは不変。}\blkref{trace_basic_properties})\\
 &= \mathrm{tr}(D)
 &&(\because\ D = P^{-1}QP)\\
 &= r
 &&(\because\ D\ \text{の対角成分は}\ 1\ \text{が}\ r\ \text{個、}\ 0\ \text{が}\ n-r\ \text{個})
 \end{aligned}`),
-      paragraph([ref("trace_basic_properties"), " (4) を引いた。"]),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-08-17 の式変形統一で、Step 1 の二つの計算（x−Qx∈ker Q、交わりが零）、Step 2 の Qv_j=v_j、Step 3 のトレースの計算を、一続きの等号と行末の根拠へ揃えた。内容は変えていない。",
+        "2026-09-02: Step 3 の鎖の直後に置いていた参照一覧を削り、相似変換でトレースが不変であることを使う行末の blkref へ移した。内容・式変形・根拠・参照は不変である。",
       ],
     },
   },

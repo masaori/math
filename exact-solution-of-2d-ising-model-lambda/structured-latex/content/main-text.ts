@@ -53902,6 +53902,140 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_fiber_phase_integer_decomposition",
+        labels: [],
+        title: { text: "ファイバー位相和の三つの符号付き数え上げへの分解" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_fiber_phase_integer_decomposition",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_positive_turning_fiber_sign_subsets",
+                kind: "definition",
+                title: { text: "回転差が四の部分の正負符号集合" },
+                labels: ["def_positive_turning_fiber_sign_subsets"],
+                habitat: "N",
+                statement: [
+                  paragraph([
+                    math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                    "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                    math(String.raw`D,E\subseteq E_L`), " は ",
+                    math(String.raw`D\cap E=\varnothing`), " かつ ",
+                    math(String.raw`\operatorname{Even}_L(E)`),
+                    "（", ref("def_even_edge_subset"), "）を満たすとする。有限集合",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\mathcal N^{4,+}_L(D,E;a,b)
+&:=\bigl\{\,\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}\ \bigm|\
+\mathcal W^{a,b}_L(\varphi)=1\,\bigr\},\\
+\mathcal N^{4,-}_L(D,E;a,b)
+&:=\bigl\{\,\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}\ \bigm|\
+\mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
+\end{aligned}`),
+                  paragraph([
+                    "を定める。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
+                    "、回転差が四である集合は ", ref("def_standard_turning_difference_subsets"),
+                    "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                    " で定めた。いずれも有限集合であり、所属は有限集合の元と代数的数の等号で判定できる。",
+                  ]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_fiber_phase_integer_decomposition",
+              kind: "claim",
+              title: { text: "ファイバー位相和は三つの整数の符号付き数え上げに分かれる" },
+              labels: ["claim_fiber_phase_integer_decomposition"],
+              habitat: "Z",
+              verification: ["sagemath/check/fiber-phase-integer-decomposition"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                  math(String.raw`D,E\subseteq E_L`), " は ",
+                  math(String.raw`D\cap E=\varnothing`), " かつ ",
+                  math(String.raw`\operatorname{Even}_L(E)`),
+                  "（", ref("def_even_edge_subset"), "）を満たすとする。このとき ",
+                  math(String.raw`\overline{\mathbb Q}`), " の等式",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal K^{a,b}_L(D,E)
+&=\Bigl(\bigl\lvert\mathcal N^{0,+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal N^{0,-}_L(D,E;a,b)\bigr\rvert\Bigr)\\
+&\quad+2\Bigl(\bigl\lvert\mathcal N^{4,+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal N^{4,-}_L(D,E;a,b)\bigr\rvert\Bigr)\\
+&\quad+\Bigl(\bigl\lvert\mathcal N^{\mathcal R,+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal N^{\mathcal R,-}_L(D,E;a,b)\bigr\rvert\Bigr)
+\in\mathbb Z
+\end{aligned}`),
+                paragraph([
+                  "が成り立つ。接触の無い部分の二集合は ",
+                  ref("claim_contact_free_fiber_phase_signed_count"),
+                  "、回転差が四の部分の二集合は ",
+                  ref("def_positive_turning_fiber_sign_subsets"),
+                  "、残余の二集合は ", ref("claim_residual_fiber_phase_signed_count"),
+                  " で定めた。右辺は有限集合の元の個数の整数係数線型結合なので整数であり、",
+                  "実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取る。",
+                  math(String.raw`N_{\mathrm{ct}}(\varphi)=0`), " でなければ ",
+                  math(String.raw`\varphi\in\mathcal A_L`), " と ",
+                  math(String.raw`\varphi\in\mathcal R_L`),
+                  "（", ref("def_unswitchable_standard_pair_subset"), "）のちょうど一方が成り立つ。さらに ",
+                  ref("def_standard_turning_difference_subsets"), " により ",
+                  math(String.raw`\mathcal A_L`), " は ", math(String.raw`\mathcal B_L`), "、",
+                  math(String.raw`\mathcal A_L^{(-4)}`), "、", math(String.raw`\mathcal A_L^{(4)}`),
+                  " の互いに素な合併である。したがってファイバーは、接触の無い部分、",
+                  math(String.raw`\mathcal B_L`), " との共通部分、回転差が負四の部分、回転差が四の部分、残余との共通部分の互いに素な合併である。",
+                ]),
+                paragraph([
+                  ref("claim_phase_reversing_standard_smoothing_involution"), " により ",
+                  math(String.raw`\mathcal N_L(D,E)\cap\mathcal B_L`),
+                  " の位相寄与の和は零である。この非交和で ",
+                  ref("def_fiber_phase_weight"), " の有限和を分け、零和を除くと",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal K^{a,b}_L(D,E)
+&=\sum_{\substack{\varphi\in\mathcal N_L(D,E)\\N_{\mathrm{ct}}(\varphi)=0}}
+\mathcal W^{a,b}_L(\varphi)
++\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}}
+\mathcal W^{a,b}_L(\varphi)\\
+&\quad+\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}}
+\mathcal W^{a,b}_L(\varphi)
++\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L}
+\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \text{上の非交和と }\blkref{claim_phase_reversing_standard_smoothing_involution}\bigr)\\
+&=\sum_{\substack{\varphi\in\mathcal N_L(D,E)\\N_{\mathrm{ct}}(\varphi)=0}}
+\mathcal W^{a,b}_L(\varphi)
++2\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}}
+\mathcal W^{a,b}_L(\varphi)
++\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L}
+\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_non_phase_reversing_standard_smoothing_involution}\text{ と }\overline{\mathbb Q}\text{ の分配則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  ref("claim_contact_free_fiber_phase_signed_count"), "、",
+                  ref("claim_phase_contribution_sign_value"), " を回転差が四の部分へ適用した符号別の非交和、",
+                  ref("claim_residual_fiber_phase_signed_count"),
+                  " を三つの有限和へ順に適用すると、主張の右辺を得る。",
+                  "全過程は有限集合の非交和、整数の有限和、代数的数の有限加法だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_contact_pair_switchability_criterion",
         labels: [],
         title: { text: "接触対の切り替え可能性の局所判定" },
