@@ -28,6 +28,7 @@ for phi in nonbacktracking_permutations:
         members[delta].append(phi)
 
 checked = 0
+fiber_members = {delta: {} for delta in (ZZ(-4), ZZ(4))}
 for delta in (ZZ(-4), ZZ(4)):
     for phi in members[delta]:
         pair = tuple(ct_min(phi))
@@ -39,6 +40,9 @@ for delta in (ZZ(-4), ZZ(4)):
         assert psi != phi
         assert moved_edges(psi) == moved_edges(phi)
         assert doubled_and_single_sets(psi) == doubled_and_single_sets(phi)
+        doubled, single = doubled_and_single_sets(phi)
+        fiber = (frozenset(doubled), frozenset(single))
+        fiber_members[delta].setdefault(fiber, []).append(phi)
 
         for a in (0, 1):
             for b in (0, 1):
@@ -48,9 +52,29 @@ for delta in (ZZ(-4), ZZ(4)):
                 assert after == before
                 checked += 1
 
+fiber_sum_equalities = 0
+all_fibers = set(fiber_members[-4]).union(fiber_members[4])
+for fiber in all_fibers:
+    for a in (0, 1):
+        for b in (0, 1):
+            negative_sum = sum(
+                (contributions[permutation_key(phi)][(a, b)]
+                 for phi in fiber_members[-4].get(fiber, [])),
+                K8(0),
+            )
+            positive_sum = sum(
+                (contributions[permutation_key(phi)][(a, b)]
+                 for phi in fiber_members[4].get(fiber, [])),
+                K8(0),
+            )
+            assert negative_sum == positive_sum
+            fiber_sum_equalities += 1
+
 assert len(members[-4]) > 0
 assert len(members[-4]) == len(members[4])
 assert checked == 4 * (len(members[-4]) + len(members[4]))
 print("PASS: L=%d で A_L^(-4) は %d 個、A_L^(4) は %d 個。"
-      "標準対平滑化による両集合の交換・対合・不動点なし・ファイバー保存・位相寄与保存を検査（%d 件）"
-      % (L, len(members[-4]), len(members[4]), checked))
+      "標準対平滑化による両集合の交換・対合・不動点なし・ファイバー保存・位相寄与保存を検査（%d 件）。"
+      "さらに %d ファイバー×四スピン構造で回転差二部分の位相和の相等を検査（%d 件）"
+      % (L, len(members[-4]), len(members[4]), checked,
+         len(all_fibers), fiber_sum_equalities))

@@ -52924,6 +52924,18 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                   math(String.raw`\mathcal A_L^{(-4)}`), " と ", math(String.raw`\mathcal A_L^{(4)}`),
                   " を全単射で交換するが、この二集合の位相寄与を相殺しない。",
                 ]),
+                paragraph([
+                  "とくに、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " が ",
+                  math(String.raw`\operatorname{Even}_L(E)`), "（", ref("def_even_edge_subset"),
+                  "）を満たすなら、任意の ", math(String.raw`(a,b)\in\mathcal S`), " について",
+                ]),
+                displayMath(String.raw`\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}}
+\mathcal W^{a,b}_L(\varphi)
+=\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}}
+\mathcal W^{a,b}_L(\varphi)`),
+                paragraph([
+                  "が成り立つ。したがってファイバー位相和の回転差二部分は、その一方の二倍として書ける。",
+                ]),
               ],
               proof: [
                 paragraph([
@@ -52964,7 +52976,11 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                 paragraph([
                   "である。対合性・不動点なし・ファイバー保存は ",
                   ref("claim_standard_contact_smoothing_involution"), " から従い、第一の主張から二集合を交換する。",
-                  "全過程は有限集合の元の比較、整数と代数的数の有限演算だけで閉じる。",
+                  "よって ", math(String.raw`S`), " は ",
+                  math(String.raw`\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}`), " から ",
+                  math(String.raw`\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}`),
+                  " への位相寄与を保つ全単射であり、左辺の有限和を ", math(String.raw`S`),
+                  " で添字変換すれば末尾の等式を得る。全過程は有限集合の元の比較、整数と代数的数の有限演算だけで閉じる。",
                 ]),
               ],
             },

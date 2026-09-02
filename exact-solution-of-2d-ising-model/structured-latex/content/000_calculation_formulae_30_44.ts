@@ -2007,19 +2007,19 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 \sqrt{z_1 z_2}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1 z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2)))\right)\right]_{\sim}\right)
-&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{def_sqrt_cc})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2)))\right)\right]_{\sim}\right)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと。}\blkref{isomorphism_of_phi_cartesian})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim}))\right)\right]_{\sim}\right)
 &&(\because\ r_1,r_2,\theta_1,\theta_2\ \text{の取り方})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1([(r_1 r_2,\theta_1+\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1 r_2,\theta_1+\theta_2)]_{\sim}))\right)\right]_{\sim}\right)
-&&(\because\ \text{準備の第二})\\
+&&(\because\ \text{極座標表現の積。}\blkref{operations_on_polar_representation})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)
-&&(\because\ \text{第1座標, 第2座標 の定義}\ \text{と}\ r_1 r_2=0)\\
+&&(\because\ \text{第1座標, 第2座標 の定義と}\ r_1 r_2=0\ \blkref{first_and_second_projections})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)
-&&(\because\ r_1 r_2=0\ \text{と}\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&&(\because\ r_1 r_2=0\ \text{と非負実数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{definition_of_sqrt_r_positive})\\
 &= \left(0\cdot\cos\tfrac{1}{2}s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}}),\ 0\cdot\sin\tfrac{1}{2}s_{[0,2\pi)}([0]_{\sim_{\mathrm{angle}}})\right)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (0,0)
 &&(\because\ 0\ \text{を因子にもつ積は}\ 0)
 \end{aligned}`),
@@ -2031,11 +2031,11 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 \sqrt{z_1}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta_1}{2}-n_1\pi\right)\right]_{\sim}\right)
-&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開})\\
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開。}\blkref{sqrt_expansion_via_polar})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{\theta_1}{2}-n_1\pi\right)\right]_{\sim}\right)
-&&(\because\ r_1=0\ \text{と}\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&&(\because\ r_1=0\ \text{と非負実数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{definition_of_sqrt_r_positive})\\
 &= \left(0\cdot\cos\left(\tfrac{\theta_1}{2}-n_1\pi\right),\ 0\cdot\sin\left(\tfrac{\theta_1}{2}-n_1\pi\right)\right)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (0,0)
 &&(\because\ 0\ \text{を因子にもつ積は}\ 0)
 \end{aligned}`),
@@ -2072,13 +2072,13 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z_1)
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1))\right)
-&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義。}\blkref{def_abs_arg})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(0,\theta_1)]_{\sim})\right)
 &&(\because\ r_1=0\ \text{という、この場合の仮定})\\
 &= s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
-&&(\because\ \text{第1座標, 第2座標 の定義})\\
+&&(\because\ \text{第1座標, 第2座標 の定義。}\blkref{first_and_second_projections})\\
 &= 0
-&&(\because\ \text{準備の第三を}\ \theta=0,\ n=0\ \text{へ当てた})
+&&(\because\ \text{角度切断の一意性を}\ \theta=0,\ n=0\ \text{へ当てた。}\blkref{angle_section_existence_uniqueness})
 \end{aligned}`),
       paragraph([
         "であり、",
@@ -2112,17 +2112,17 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 \sqrt{z_1 z_2}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1 z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1 z_2)))\right)\right]_{\sim}\right)
-&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{def_sqrt_cc})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2))}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1)\cdot\phi_{\mathrm{polar}}(z_2)))\right)\right]_{\sim}\right)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと。}\blkref{isomorphism_of_phi_cartesian})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim}))\right)\right]_{\sim}\right)
 &&(\because\ r_1,r_2,\theta_1,\theta_2\ \text{の取り方})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\mathrm{pr}_1([(r_1 r_2,\theta_1+\theta_2)]_{\sim})}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}(\mathrm{pr}_2([(r_1 r_2,\theta_1+\theta_2)]_{\sim}))\right)\right]_{\sim}\right)
-&&(\because\ \text{準備の第二})\\
+&&(\because\ \text{極座標表現の積。}\blkref{operations_on_polar_representation})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)
-&&(\because\ \text{第1座標, 第2座標 の定義}\ \text{と}\ r_1 r_2\neq 0)\\
+&&(\because\ \text{第1座標, 第2座標 の定義と}\ r_1 r_2\neq 0\ \blkref{first_and_second_projections})\\
 &= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})\right)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})
 \end{aligned}`),
       paragraph([
         "である。次に右辺は",
@@ -2131,10 +2131,10 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 \sqrt{z_1}\sqrt{z_2}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)\cdot
 \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)\right]_{\sim}\right)
-&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の定義}\ \text{と}\ \text{第1座標, 第2座標 の定義}\ \text{を}\ r_1,r_2\neq 0\ \text{へ当てた})\\
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{と第1座標, 第2座標 の定義を}\ r_1,r_2\neq 0\ \text{へ当てた。}\blkref{def_sqrt_cc}\blkref{first_and_second_projections})\\
 &= \left(\sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\right)\cdot
 \left(\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}}),\ \sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= \left(\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\!\left(\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})-\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right),\right.\\
 &\qquad\left.\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}}\!\left(\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})+\sin\tfrac{1}{2}s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})\cos\tfrac{1}{2}s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)\right)
 &&(\because\ \mathbb{C}\ \text{の積の定義と}\ \sqrt{r_1}^{\,\mathbb{R}_{\geq 0}}\sqrt{r_2}^{\,\mathbb{R}_{\geq 0}}=\sqrt{r_1 r_2}^{\,\mathbb{R}_{\geq 0}})\\
@@ -2147,7 +2147,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 \tfrac{1}{2}\!\left(s_{[0,2\pi)}([\theta_1]_{\sim_{\mathrm{angle}}})+s_{[0,2\pi)}([\theta_2]_{\sim_{\mathrm{angle}}})\right)
 &= \tfrac{1}{2}\!\left((\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)\right)
-&&(\because\ \text{準備の第三を}\ \theta_1,\theta_2\ \text{へ当てた})\\
+&&(\because\ \text{角度切断の一意性を}\ \theta_1,\theta_2\ \text{へ当てた。}\blkref{angle_section_existence_uniqueness})\\
 &= \tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2)\pi\right)
 &&(\because\ \text{実数の加法の交換則・結合則と分配則})\\
 &= \tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi
@@ -2169,7 +2169,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 \tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
 &= \tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2)\pi\right)
-&&(\because\ \text{準備の第三を}\ \theta=\theta_1+\theta_2,\ n=n_1+n_2\ \text{へ当てた。いまの場合分けがその範囲の条件である})\\
+&&(\because\ \text{角度切断の一意性を}\ \theta=\theta_1+\theta_2,\ n=n_1+n_2\ \text{へ当てた。いまの場合分けがその範囲の条件である。}\blkref{angle_section_existence_uniqueness})\\
 &= \tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi
 &&(\because\ \text{実数の分配則})
 \end{aligned}`),
@@ -2187,7 +2187,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 \tfrac{1}{2}s_{[0,2\pi)}([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}})
 &= \tfrac{1}{2}\!\left(\theta_1+\theta_2-2(n_1+n_2+1)\pi\right)
-&&(\because\ \text{準備の第三を}\ \theta=\theta_1+\theta_2,\ n=n_1+n_2+1\ \text{へ当てた})\\
+&&(\because\ \text{角度切断の一意性を}\ \theta=\theta_1+\theta_2,\ n=n_1+n_2+1\ \text{へ当てた。}\blkref{angle_section_existence_uniqueness})\\
 &= \tfrac{\theta_1+\theta_2}{2}-(n_1+n_2)\pi-\pi
 &&(\because\ \text{実数の分配則})
 \end{aligned}`),
@@ -2230,37 +2230,15 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
       displayMath(String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z_1)+\arg^{[0,2\pi)}(z_2)
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_1))\right)+s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z_2))\right)
-&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義。}\blkref{def_abs_arg})\\
 &= s_{[0,2\pi)}\!\left([\theta_1]_{\sim_{\mathrm{angle}}}\right)+s_{[0,2\pi)}\!\left([\theta_2]_{\sim_{\mathrm{angle}}}\right)
-&&(\because\ \text{第1座標, 第2座標 の定義}\ \text{と}\ r_1,r_2\neq 0)\\
+&&(\because\ \text{第1座標, 第2座標 の定義と}\ r_1,r_2\neq 0\ \blkref{first_and_second_projections})\\
 &= (\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)
-&&(\because\ \text{準備の第三})\\
+&&(\because\ \text{角度切断の一意性。}\blkref{angle_section_existence_uniqueness})\\
 &= \theta_1+\theta_2-2(n_1+n_2)\pi
 &&(\because\ \text{実数の加法の交換則・結合則と分配則})
 \end{aligned}`),
-      paragraph([
-        "なので、2 つの場合分けの条件は主張の 2 つの場合の条件と一致する。",
-        ref("def_abs_arg"),
-        "、",
-        ref("def_sqrt_cc"),
-        "、",
-        ref("sqrt_expansion_via_polar"),
-        "、",
-        ref("def_phi_cartesian"),
-        "、",
-        ref("definition_of_sqrt_r_positive"),
-        "、",
-        ref("first_and_second_projections"),
-        "、",
-        ref("operations_on_polar_representation"),
-        "、",
-        ref("section_of_angle_representation"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        "、",
-        ref("isomorphism_of_phi_cartesian"),
-        " を引いた。",
-      ]),
+      paragraph(["なので、2 つの場合分けの条件は主張の 2 つの場合の条件と一致する。"]),
     ],
     conversion: {
       status: "converted",
@@ -2284,8 +2262,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
           "cos(x-π) = -cos x、sin(x-π) = -sin x で書いた。原文は偶奇の場合分けを 2 度（右辺と左辺で）" +
           "行っており、同じ角の比較なら偶奇に踏み込む必要がないためである。" +
           "主張と仮定は変えていない。",
-        "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
-          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+        "引いた定義・主張の参照は、それを適用した各式変形行の行末へ置いた。",
       ],
     },
   },
