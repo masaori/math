@@ -423,64 +423,48 @@ T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
     ],
     proof: [
       paragraph([
-        ref("V_plus_factors_invertible"),
-        " より、以下で使う行列はすべて可逆である。",
-        math(String.raw`g, h \in R^\times`),
+        ref("V1_plus_half_invertible"),
         " と ",
-        math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        " について、",
-        ref("def_T_g"),
-        " の ",
-        math(String.raw`T_g(X) = gXg^{-1}`),
-        "、",
+        ref("V2_invertible"),
+        " により、",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        " と ",
+        math(String.raw`V_2`),
+        " は可逆である。また ",
         ref("def_invertible_elements_of_R"),
-        " (ii) の ",
-        math(String.raw`(gh)^{-1} = h^{-1}g^{-1}`),
-        "、および行列の積の結合律より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_g\!\left(T_h(X)\right)
-&= g\left(hXh^{-1}\right)g^{-1}
-   \quad (\because \text{def\_T\_g を 2 回適用}) \\
-&= (gh)X\left(h^{-1}g^{-1}\right)
-   \quad (\because \text{行列の積の結合律}) \\
-&= (gh)X(gh)^{-1}
-   \quad (\because\ \text{可逆元の積の逆元}) \\
-&= T_{gh}(X)
-   \quad (\because\ \text{共役写像の定義})
-\end{aligned}`,
-      ),
-      paragraph([
-        "これを ",
+        " (ii) より、",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}V_2`),
+        " も可逆である。したがって、",
+        ref("conjugation_is_ring_homomorphism"),
+        " の合成則 ",
+        math(String.raw`T_g \circ T_h = T_{gh}`),
+        " を、まず ",
         math(String.raw`g = \left(V_1^{(+)}\right)^{1/2}`),
         "、",
         math(String.raw`h = V_2`),
-        " に、次いで ",
+        " に、次に ",
         math(String.raw`g = \left(V_1^{(+)}\right)^{1/2}V_2`),
         "、",
         math(String.raw`h = \left(V_1^{(+)}\right)^{1/2}`),
-        " に適用すると",
+        " に適用できる。よって、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 T_{(V^{(+)})}
 &=T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
-   \quad \left(\because \text{def\_T\_V\_plus}\right) \\
+   \quad \left(\because \blkref{def_T_V_plus}\right) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
-   \quad \left(\because \text{直前の } T_g \circ T_h = T_{gh}\ \text{を左の 2 つに適用}\right) \\
+   \quad \left(\because \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\right) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}}
-   \quad \left(\because \text{同じ } T_g \circ T_h = T_{gh}\ \text{をその結果と残りの 1 つに適用}\right) \\
+   \quad \left(\because \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\right) \\
 &= T_{V^{(+)}}
-   \quad \left(\because \text{def\_V\_plus}\right)
+   \quad \left(\because \blkref{def_V_plus}\right)
 \end{aligned}`,
       ),
       paragraph([
-        "（1 つ目の等号で ",
-        math(String.raw`T_g \circ T_h = T_{gh}`),
-        " を左の 2 つに、2 つ目でその結果と残りの 1 つに使った。合成の順序は ",
+        "ここで合成則は最初に左の 2 つへ、次にその結果と残りの 1 つへ適用した。合成の順序は ",
         math(String.raw`T_{(V^{(+)})}(X) = T_{\left(V_1^{(+)}\right)^{1/2}}\left(T_{V_2}\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)`),
-        " の定義どおりである。）",
+        " の定義どおりである。",
       ]),
     ],
     conversion: {

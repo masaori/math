@@ -4,11 +4,11 @@
   V1_plus_half_invertible exp(X)^{-1} = exp(-X): max residual = 3.174e-15  ->  PASS
   V2_invertible V_2 V_2^{-1} = I: max residual = 1.841e-11  ->  PASS
   V_plus_factors_invertible (Vplus) V^{(+)} V^{(+)-1} = I: max residual = 1.889e-11  ->  PASS
-  T_V_plus_is_conjugation (1) T_g(T_h(X)) = g(hXh^{-1})g^{-1}: max residual = 0.000e+00  ->  PASS
-  T_V_plus_is_conjugation (2) = (gh)X(h^{-1}g^{-1})  [結合律]: max residual = 6.896e-12  ->  PASS
-  T_V_plus_is_conjugation (3) (gh)(h^{-1}g^{-1}) = I: max residual = 1.711e-11  ->  PASS
-  T_V_plus_is_conjugation (4) (h^{-1}g^{-1})(gh) = I: max residual = 1.950e-11  ->  PASS
-  T_V_plus_is_conjugation (5) T_{(V^{(+)})} = T_{V^{(+)}}: max residual = 8.195e-12  ->  PASS
+  T_V_plus_is_conjugation (1) (gh)(h^{-1}g^{-1}) = I: max residual = 1.711e-11  ->  PASS
+  T_V_plus_is_conjugation (2) (h^{-1}g^{-1})(gh) = I: max residual = 1.950e-11  ->  PASS
+  T_V_plus_is_conjugation (3) T_g o T_h = T_{gh} on all matrix units: max residual = 2.274e-13  ->  PASS
+  T_V_plus_is_conjugation (4) T_{gh} o T_g = T_{ghg} on all matrix units: max residual = 5.821e-11  ->  PASS
+  T_V_plus_is_conjugation (5) T_{(V^{(+)})} = T_{V^{(+)}} on all matrix units: max residual = 5.821e-11  ->  PASS
   nesting (h1.z) n 偶数: max residual = 4.120e-12  ->  PASS
   nesting (h1.y) n 偶数: max residual = 3.638e-12  ->  PASS
   nesting (h2.z) n 偶数: max residual = 6.734e-11  ->  PASS

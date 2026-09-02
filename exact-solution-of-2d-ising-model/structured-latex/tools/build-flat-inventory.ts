@@ -1481,6 +1481,95 @@ const vTwoConjugationLinearityExpectedDirectDependencies = [
   "evensector_003a_definition_check_index_set",
 ].sort();
 const vTwoConjugationLinearityExpectedContentSha256 = "71fbb554701c8129d764e7dd97ad89c518a1b56850a9aa1a6f789593562ab7e7";
+const vPlusCompositeConjugationDefinitionExpectedDirectDependencies = [
+  "TV1_hatZ_hatY_011_definition_T_g",
+  "calc_formulae_006_definition_of_cc",
+  "evensectorT_claim_V1_plus_half_invertible",
+  "evensectorT_claim_V2_invertible",
+  "evensectorT_definition_V_plus",
+].sort();
+const vPlusCompositeConjugationEqualityExpectedDirectDependencies = [
+  "TV1_hatZ_hatY_009_definition_invertible_elements",
+  "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+  "evensectorT_claim_V1_plus_half_invertible",
+  "evensectorT_claim_V2_invertible",
+  "evensectorT_definition_T_V_plus",
+  "evensectorT_definition_V_plus",
+].sort();
+const vPlusCompositeConjugationDefinitionExpectedContentSha256 =
+  "eb41f2e8ce21a2487c0544276bafbab27df2842396fcd99498cca9e476b28928";
+const vPlusCompositeConjugationEqualityExpectedContentSha256 =
+  "6e3f79505b6371a79a1a2ca52f478f87e3798089d7df53bd0e6870dcc9a816e7";
+const vPlusCompositeConjugationLeanFile = "lean/Ising2D/Part014/Definition001_VPlus.lean";
+const conjugationCompositionLeanFile = "lean/Ising2D/Part008/Definition016_TV.lean";
+const vPlusCompositeConjugationLeanExpectedSha256 =
+  "744ccebc8b077728c9f829a806a7d654e3fdb6c17a0f129ae47f5bac1254e802";
+const conjugationCompositionLeanExpectedSha256 =
+  "cf55243ca52bdf64af6925d236b360d14a65a621955e12551ea401c01ef4c356";
+const vPlusCompositeConjugationSageMathExpectedSha256 =
+  "79535651bb6d0883fe55e595e4bb862ca0d1edd6ead959e2ba6cd0253258fbcb";
+const vPlusCompositeConjugationSageMathFile =
+  "sagemath/check/051_stepwise_identities_of_chapter_Cprime/check_03_014_steps.sage";
+const vPlusCompositeConjugationLeanSource = readFileSync(
+  join(projectDir, vPlusCompositeConjugationLeanFile),
+  "utf8",
+);
+const conjugationCompositionLeanSource = readFileSync(
+  join(projectDir, conjugationCompositionLeanFile),
+  "utf8",
+);
+const vPlusCompositeConjugationSageMathExecutableSource = readFileSync(
+  join(projectDir, vPlusCompositeConjugationSageMathFile),
+  "utf8",
+).split("\n").filter((line) => !line.trimStart().startsWith("#")).join("\n");
+for (const [path, source, expectedSha256] of [
+  [vPlusCompositeConjugationLeanFile, vPlusCompositeConjugationLeanSource,
+    vPlusCompositeConjugationLeanExpectedSha256],
+  [conjugationCompositionLeanFile, conjugationCompositionLeanSource,
+    conjugationCompositionLeanExpectedSha256],
+  [vPlusCompositeConjugationSageMathFile,
+    readFileSync(join(projectDir, vPlusCompositeConjugationSageMathFile), "utf8"),
+    vPlusCompositeConjugationSageMathExpectedSha256],
+] as const) {
+  const actualSha256 = createHash("sha256").update(source).digest("hex");
+  if (actualSha256 !== expectedSha256) {
+    throw new Error(`偶セクターの合成共役写像に対応する形式化本体が変わりました: ${JSON.stringify({
+      path, expectedSha256, actualSha256,
+    })}`);
+  }
+}
+for (const declarationFragment of [
+  "TV (V1halfUnits M K1 (-1)) (V2Units M hs2 K2star)",
+  "TVPlus M hs2 K1 K2star x =\n      TConj (V1halfUnits M K1 (-1))\n        (TConj (V2Units M hs2 K2star) (TConj (V1halfUnits M K1 (-1)) x)) := rfl",
+  "TVPlus M hs2 K1 K2star = TConj (VPlusUnits M hs2 K1 K2star) :=\n  TV_eq_TConj _ _",
+  "rw [TVPlus_eq_TConj hs2, TConj_apply, VPlusUnits_val]",
+]) {
+  if (!vPlusCompositeConjugationLeanSource.includes(declarationFragment)) {
+    throw new Error(`偶セクターの合成共役写像に対応する Lean 宣言が変わりました: ${declarationFragment}`);
+  }
+}
+for (const proofFragment of [
+  "theorem TConj_trans (g h : Aˣ) : (TConj h).trans (TConj g) = TConj (g * h) := by",
+  "rw [show (g * h)⁻¹ = h⁻¹ * g⁻¹ by simp]",
+  "theorem TV_eq_TConj (g1 g2 : Aˣ) : TV g1 g2 = TConj (g1 * g2 * g1) := by\n  rw [TV, TConj_trans, TConj_trans]",
+]) {
+  if (!conjugationCompositionLeanSource.includes(proofFragment)) {
+    throw new Error(`合成共役則に対応する Lean 証明が変わりました: ${proofFragment}`);
+  }
+}
+for (const executionFragment of [
+  'S.add("T_V_plus_is_conjugation (1) (gh)(h^{-1}g^{-1}) = I"',
+  'S.add("T_V_plus_is_conjugation (2) (h^{-1}g^{-1})(gh) = I"',
+  "matrix_units = np.eye(O.d * O.d, dtype=np.complex128).reshape(O.d * O.d, O.d, O.d)",
+  "first_composite = act_on_all_matrix_units(\n            Vh, act_on_all_matrix_units(V2, matrix_units, V2i), Vhi)",
+  "second_composite = act_on_all_matrix_units(\n            Vh * V2, act_on_all_matrix_units(Vh, matrix_units, Vhi), V2i * Vhi)",
+  "triple_composite = act_on_all_matrix_units(\n            Vh,\n            act_on_all_matrix_units(\n                V2, act_on_all_matrix_units(Vh, matrix_units, Vhi), V2i),\n            Vhi,\n        )",
+  'S.add("T_V_plus_is_conjugation (5) T_{(V^{(+)})} = T_{V^{(+)}} on all matrix units"',
+]) {
+  if (!vPlusCompositeConjugationSageMathExecutableSource.includes(executionFragment)) {
+    throw new Error(`偶セクターの合成共役写像に対応する SageMath 実検査行が変わりました: ${executionFragment}`);
+  }
+}
 const checkNumberOperatorIdempotentExpectedDirectDependencies = [
   "calc_formulae_006_definition_of_cc",
   "evenfermi_003_claim_anticommutator",
@@ -2491,6 +2580,12 @@ const conjugationLinearityEntry = entries.find((entry) =>
   entry.id === "evensectorT_006_claim_linearity_of_T")!;
 const vTwoConjugationLinearityEntry = entries.find((entry) =>
   entry.id === "evensectorT_006a_claim_linearity_of_T_V2")!;
+const vPlusCompositeConjugationDefinitionEntry = entries.find((entry) =>
+  entry.id === "evensectorT_definition_T_V_plus")!;
+const vPlusCompositeConjugationEqualityEntry = entries.find((entry) =>
+  entry.id === "evensectorT_claim_T_V_plus_is_conjugation")!;
+const positiveDefiniteWEntry = entries.find((entry) =>
+  entry.id === "maxeig_003_claim_W_is_positive_definite")!;
 const checkNumberOperatorIdempotentEntry = entries.find((entry) =>
   entry.id === "evenEigen_002_claim_check_number_operator_idempotent")!;
 if (kappaDefinitionEntry.dependencyPlacement!.chapterOrder !== 17
@@ -3073,6 +3168,84 @@ if (JSON.stringify(inputsAddedForVTwoConjugationLinearity.sort()) !== JSON.strin
   throw new Error(`半指数行列から V_2 の共役写像の線型性への入力集合が変わりました: ${JSON.stringify({
     added: inputsAddedForVTwoConjugationLinearity,
     dropped: inputsDroppedAfterConjugationLinearity,
+  })}`);
+}
+const vPlusCompositeConjugationSectionEntryIds = [
+  vPlusCompositeConjugationDefinitionEntry.id,
+  vPlusCompositeConjugationEqualityEntry.id,
+];
+const vPlusCompositeConjugationSectionIdSet = new Set(vPlusCompositeConjugationSectionEntryIds);
+const vPlusCompositeConjugationExternalInputEntryIds = [...new Set(
+  [vPlusCompositeConjugationDefinitionEntry, vPlusCompositeConjugationEqualityEntry]
+    .flatMap((entry) => entry.dependsOnEntryIds)
+    .filter((id) => !vPlusCompositeConjugationSectionIdSet.has(id)),
+)].sort((a, b) => order.get(a)!.chapterOrder - order.get(b)!.chapterOrder);
+if (vPlusCompositeConjugationDefinitionEntry.dependencyPlacement!.chapterOrder !== 69
+  || vPlusCompositeConjugationEqualityEntry.dependencyPlacement!.chapterOrder !== 70
+  || positiveDefiniteWEntry.dependencyPlacement!.chapterOrder !== 71
+  || vPlusCompositeConjugationDefinitionEntry.provisionalFinalChapter !== "2次元イジングモデル"
+  || vPlusCompositeConjugationEqualityEntry.provisionalFinalChapter !== "2次元イジングモデル"
+  || positiveDefiniteWEntry.provisionalFinalChapter !== "2次元イジングモデル"
+  || vPlusCompositeConjugationDefinitionEntry.kind !== "definition"
+  || vPlusCompositeConjugationEqualityEntry.kind !== "claim"
+  || JSON.stringify([...vPlusCompositeConjugationDefinitionEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(vPlusCompositeConjugationDefinitionExpectedDirectDependencies)
+  || JSON.stringify([...vPlusCompositeConjugationEqualityEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(vPlusCompositeConjugationEqualityExpectedDirectDependencies)
+  || vPlusCompositeConjugationDefinitionEntry.explanationGranularityReview.inspectedContentSha256
+    !== vPlusCompositeConjugationDefinitionExpectedContentSha256
+  || vPlusCompositeConjugationEqualityEntry.explanationGranularityReview.inspectedContentSha256
+    !== vPlusCompositeConjugationEqualityExpectedContentSha256
+  || vPlusCompositeConjugationDefinitionEntry.explanationGranularityReview.status
+    !== "自動検査で主題に適合"
+  || vPlusCompositeConjugationEqualityEntry.explanationGranularityReview.status
+    !== "自動検査で主題に適合"
+  || !vPlusCompositeConjugationEqualityEntry.dependsOnEntryIds
+    .includes(vPlusCompositeConjugationDefinitionEntry.id)
+  || vPlusCompositeConjugationDefinitionEntry.dependsOnEntryIds
+    .includes(vPlusCompositeConjugationEqualityEntry.id)
+  || positiveDefiniteWEntry.dependsOnEntryIds.some((id) =>
+    vPlusCompositeConjugationSectionIdSet.has(id))
+  || [vPlusCompositeConjugationDefinitionEntry, vPlusCompositeConjugationEqualityEntry]
+    .some((entry) => entry.dependsOnEntryIds.includes(positiveDefiniteWEntry.id))) {
+  throw new Error(`偶セクターの合成共役写像の二項節が変わりました: ${JSON.stringify({
+    ordersAndChapters: [vPlusCompositeConjugationDefinitionEntry, vPlusCompositeConjugationEqualityEntry,
+      positiveDefiniteWEntry].map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder,
+        entry.provisionalFinalChapter]),
+    definitionDependencies: vPlusCompositeConjugationDefinitionEntry.dependsOnEntryIds,
+    equalityDependencies: vPlusCompositeConjugationEqualityEntry.dependsOnEntryIds,
+    nextDependencies: positiveDefiniteWEntry.dependsOnEntryIds,
+    contentSha256: [vPlusCompositeConjugationDefinitionEntry,
+      vPlusCompositeConjugationEqualityEntry]
+      .map((entry) => [entry.id, entry.explanationGranularityReview.inspectedContentSha256]),
+  })}`);
+}
+const vPlusCompositeConjugationInputSet = new Set(vPlusCompositeConjugationExternalInputEntryIds);
+const inputsAddedForPositiveDefiniteW = positiveDefiniteWEntry.dependsOnEntryIds
+  .filter((id) => !vPlusCompositeConjugationInputSet.has(id));
+const inputsDroppedAfterVPlusCompositeConjugation = vPlusCompositeConjugationExternalInputEntryIds
+  .filter((id) => !positiveDefiniteWEntry.dependsOnEntryIds.includes(id));
+if (JSON.stringify(inputsAddedForPositiveDefiniteW.sort()) !== JSON.stringify([
+  "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+  "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+  "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+  "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+  "exp_linear_map_002_definition_exp_of_endomorphism",
+  "transfer_matrix_001_definition_symbols",
+  "transfer_matrix_011_definition_H1_H2",
+].sort())
+  || JSON.stringify(inputsDroppedAfterVPlusCompositeConjugation.sort()) !== JSON.stringify([
+    "TV1_hatZ_hatY_009_definition_invertible_elements",
+    "TV1_hatZ_hatY_011_definition_T_g",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+    "evensectorT_claim_V1_plus_half_invertible",
+    "evensectorT_claim_V2_invertible",
+    "evensectorT_definition_V_plus",
+  ].sort())) {
+  throw new Error(`偶セクターの合成共役写像から正定値行列 W への入力集合が変わりました: ${JSON.stringify({
+    added: inputsAddedForPositiveDefiniteW,
+    dropped: inputsDroppedAfterVPlusCompositeConjugation,
   })}`);
 }
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
@@ -3725,6 +3898,30 @@ const isingModelSectionBoundaries = [{
   ],
   boundaryEvidence: "一般形はイジング模型を仮定せず有限複素行列だけで意味が定まるため数学的道具立てに置く。二つの特殊化は、それぞれ対応する行列の可逆性と半整数運動量の checkZ, checkY を直接入力に持つため2次元イジングモデルに置く。各特殊化は一ブロック一主張であり、半指数行列の可逆性から V_2 の可逆性へ入力を一つだけ切り替える。直後では偶セクターの合成共役写像を定義するため入力集合が切り替わるので、この二項で節を閉じる。",
   readabilityStatus: "一般形は一ブロック一主張で、定義、左右の分配、スカラー移動、結合を一段ずつ示す。二つの特殊化も一ブロック一主張で、先行する各可逆性と一般形への代入だけを用いる。本文、Lean、SageMath の推論粒度が対応している。",
+}, {
+  name: "偶セクターの合成共役写像と単一共役との一致",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: vPlusCompositeConjugationSectionEntryIds,
+  input: [
+    "偶セクター転送行列 V^{(+)} と、その三つの構成因子",
+    "半指数行列と第二の転送行列 V_2 の可逆性",
+    "一般の可逆な有限複素行列による共役写像と、可逆行列の積の逆行列",
+  ],
+  externalInputEntryIds: vPlusCompositeConjugationExternalInputEntryIds,
+  output: [
+    "三つの構成因子による共役の合成として定めた T_{(V^{(+)})}",
+    "T_{(V^{(+)})} が V^{(+)} による一つの共役写像と一致すること",
+  ],
+  formalizationEvidence: {
+    leanFile: vPlusCompositeConjugationLeanFile,
+    sageMathFile: vPlusCompositeConjugationSageMathFile,
+    currentStatus: "本文は合成写像の定義と単一共役との一致を一ブロック一主張へ分け、既存の一般合成則を二回適用する。Lean の TVPlus・TVPlus_apply と TVPlus_eq_TConj・TVPlus_apply_eq_conj が二項へ対応し、SageMath は積の左右逆と二回の合成則を全行列単位上で検査する。",
+  },
+  concludingClaim: "偶セクターの合成共役写像は V^{(+)} による共役写像そのものである",
+  concludingClaimEntryId: vPlusCompositeConjugationEqualityEntry.id,
+  boundaryEvidence: "章内依存順69で、半指数行列と V_2 の可逆性、一般の T_g、V^{(+)} の三因子表示から、三つの共役の合成 T_{(V^{(+)})} を定義する。順70はこの定義と既存の一般合成則を直接入力に、半指数行列と V_2 の可逆性から積も可逆であることを確認し、一般合成則を二回適用して T_{(V^{(+)})}=T_{V^{(+)}} へ閉じる。Lean の TVPlus・TVPlus_eq_TConj と SageMath の全行列単位上の合成共役検査が同じ二項へ対応する。直後の順71は実対称生成子と正定値行列の指数関数から正定値行列 W を扱う別枝で、この二項と相互に依存せず、外部入力集合もすべて切り替わるため、順70の後で節を閉じる。生成時に二項の章配置と連続性、全直接依存、本文 fingerprint、Lean の証明本体、SageMath の実検査本体、順71との相互非依存と入力集合の切り替わりを固定検査する。",
+  readabilityStatus: "順69は一つの合成写像だけを定義する。順70は構成因子と途中積の可逆性を確認した後、既に証明済みの一般合成則を二回適用して三重共役を一つの共役へまとめる。一つの主張内で一般則を重複証明せず、本文、Lean、SageMath の対応も一意なので、対象二項の説明粒度は合格である。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

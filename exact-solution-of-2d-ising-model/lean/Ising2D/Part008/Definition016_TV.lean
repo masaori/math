@@ -113,7 +113,11 @@ theorem TConj_linear (g : Aˣ) (a b : ℂ) (z y : A) :
 /-- 合成則 `T_g ∘ T_h = T_{g h}`（原文 `conjugation_is_ring_homomorphism` (3) の言い換え）。 -/
 theorem TConj_trans (g h : Aˣ) : (TConj h).trans (TConj g) = TConj (g * h) := by
   ext x
-  exact Conjugation.T_T g h x
+  change TConj g (TConj h x) = TConj (g * h) x
+  rw [TConj_apply, TConj_apply, TConj_apply]
+  rw [show (g * h)⁻¹ = h⁻¹ * g⁻¹ by simp]
+  simp only [Units.val_mul]
+  noncomm_ring
 
 /-- **原文 `def_T_V`**: `T_{(V)}(X) := T_{g_1}(T_{g_2}(T_{g_1}(X)))`
 （`g_1 = (V_1^{(±)})^{1/2}`, `g_2 = V_2`）。 -/
@@ -126,10 +130,7 @@ theorem TV_apply (g1 g2 : Aˣ) (x : A) :
 
 /-- `T_{(V)}` は単一の共役 `T_{g_1 g_2 g_1}` に等しい（合成則の帰結）。 -/
 theorem TV_eq_TConj (g1 g2 : Aˣ) : TV g1 g2 = TConj (g1 * g2 * g1) := by
-  ext x
-  show Conjugation.T g1 (Conjugation.T g2 (Conjugation.T g1 x))
-      = Conjugation.T (g1 * g2 * g1) x
-  rw [Conjugation.T_T, Conjugation.T_T, mul_assoc]
+  rw [TV, TConj_trans, TConj_trans]
 
 /-- **原文 `linearity_of_T`**（`T_{(V)}` 版）: ℂ-線型。 -/
 theorem TV_linear (g1 g2 : Aˣ) (a b : ℂ) (z y : A) :
