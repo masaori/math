@@ -19,7 +19,8 @@
 | --- | --- | --- |
 | `Ising2D.H1 M (-1)` / `V1half M K1 (-1)` | `H_1^{(+)}` と `(V_1^{(+)})^{1/2}` | `def_H1_plus` / `def_V1_plus_square_root` |
 | `Ising2D.VPlus` / `VPlusUnits` | `V^{(+)} := (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}` とその単元版 | `def_V_plus` |
-| `Ising2D.isUnit_V1halfPlus` / `isUnit_VPlus` | `(V_1^{(+)})^{1/2}`, `V^{(+)}` の可逆性 | `V_plus_factors_invertible` |
+| `Ising2D.isUnit_V1halfPlus` | `(V_1^{(+)})^{1/2}` の可逆性 | `V1_plus_half_invertible` |
+| `Ising2D.isUnit_VPlus` | `V^{(+)}` の可逆性 | `V_plus_factors_invertible` |
 | `Ising2D.V1halfPlus_sq` | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
 | `Ising2D.TVPlus` | `T_{(V^{(+)})}` を ℂ-代数自己同型として | `def_T_V_plus` |
 | `Ising2D.TVPlus_eq_TConj` / `TVPlus_apply_eq_conj` | `T_{(V^{(+)})} = T_{V^{(+)}}` | `T_V_plus_is_conjugation` |

@@ -1400,24 +1400,20 @@ const vTwoInvertibleExpectedDirectDependencies = [
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_011_definition_H1_H2",
 ].sort();
+const vPlusFactorsInvertibleExpectedDirectDependencies = [
+  "TV1_hatZ_hatY_009_definition_invertible_elements",
+  "calc_formulae_006_definition_of_cc",
+  "evensectorT_claim_V1_plus_half_invertible",
+  "evensectorT_claim_V2_invertible",
+  "evensectorT_definition_V_plus",
+].sort();
 const v1PlusHalfInvertibleExpectedContentSha256 = "7ddf2ffcfb7f8d60b2fde61783ddc4dd251dfb8e197f8bbb4eb27b244a874dc7";
 const vTwoInvertibleExpectedContentSha256 = "eabadeb2353bdb7cd8c2ff1014e2c3d6f42e52901fb3cdb657f753382ef97992";
-const vPlusFactorsInvertibilityBoundaryCandidates = [
-  {
-    output: "偶セクター転送行列 V^{(+)} が可逆であること",
-    currentEntryId: "evensectorT_claim_V_plus_factors_invertible",
-    formalizationTarget: "Lean の isUnit_VPlus と SageMath の V^{(+)} の逆行列検査",
-  },
-] as const;
-const vPlusFactorsInvertibilityExpectedBoundaryCandidates = [
-  {
-    output: "偶セクター転送行列 V^{(+)} が可逆であること",
-    currentEntryId: "evensectorT_claim_V_plus_factors_invertible",
-    formalizationTarget: "Lean の isUnit_VPlus と SageMath の V^{(+)} の逆行列検査",
-  },
-] as const;
-const vPlusFactorsInvertibilityNextTickUnit = vPlusFactorsInvertibilityBoundaryCandidates;
-const vPlusFactorsInvertibilityExpectedNextTickUnit = vPlusFactorsInvertibilityExpectedBoundaryCandidates;
+const vPlusFactorsInvertibleExpectedContentSha256 = "bfb1bb937c796f71881bf9bbd1609a6c1338227b8facc90df00b2fc880d4d0f8";
+const vPlusFactorsInvertibilityBoundaryCandidates = [] as const;
+const vPlusFactorsInvertibilityExpectedBoundaryCandidates = [] as const;
+const vPlusFactorsInvertibilityNextTickUnit = [] as const;
+const vPlusFactorsInvertibilityExpectedNextTickUnit = [] as const;
 if (JSON.stringify(vPlusFactorsInvertibilityBoundaryCandidates)
     !== JSON.stringify(vPlusFactorsInvertibilityExpectedBoundaryCandidates)
   || JSON.stringify(vPlusFactorsInvertibilityNextTickUnit)
@@ -1438,10 +1434,14 @@ const vPlusFactorsInvertibilitySageMathExecutableSource = readFileSync(
   "utf8",
 ).split("\n").filter((line) => !line.trimStart().startsWith("#")).join("\n");
 const vPlusFactorsInvertibilityExpectedLeanFragments = [
+  `noncomputable def VPlusUnits (M : ℕ) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
+    (TensorPow M)ˣ :=
+  V1halfUnits M K1 (-1) * V2Units M hs2 K2star * V1halfUnits M K1 (-1)`,
   `/-- **原文 \`V1_plus_half_invertible\`**: \`(V_1^{(+)})^{1/2}\` は可逆。 -/
 theorem isUnit_V1halfPlus (K1 : ℂ) : IsUnit (V1half M K1 (-1)) :=`,
   `theorem isUnit_VPlus {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
-    IsUnit (VPlus M s2 K1 K2star) :=`,
+    IsUnit (VPlus M s2 K1 K2star) :=
+  ⟨VPlusUnits M hs2 K1 K2star, rfl⟩`,
 ];
 for (const declarationFragment of vPlusFactorsInvertibilityExpectedLeanFragments) {
   if (!vPlusFactorsInvertibilityLeanSource.includes(declarationFragment)) {
@@ -1505,12 +1505,10 @@ const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
   ["transfer_matrix_011_definition_H1_H2", "一般の生成子 H1^{(±)} と H2 の二定義に加え、既存の V1^{(±)} と V2 の指数表示を同じブロックへ束ねている。今回確定する節では外部入力として扱い、将来一ブロック一定義へ分割した後に依存順と節境界を再判定する必要がある。"],
-  ["evensectorT_claim_V_plus_factors_invertible", "V^{(+)} の可逆性は先行する二つの構成因子の可逆性から機械的に分離した段階であり、内容と形式化同期のレビューは次回一項単位として残している。"],
 ]);
 const futureBlockSplitRecommendedById = new Set([
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_011_definition_H1_H2",
-  "evensectorT_claim_V_plus_factors_invertible",
 ]);
 const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["closing_definition_D0_open_chain_operator", ["evensectorT_definition_H1_plus"]],
@@ -2847,15 +2845,16 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
     !== JSON.stringify(v1PlusHalfInvertibleExpectedDirectDependencies)
   || JSON.stringify([...vTwoInvertibleEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(vTwoInvertibleExpectedDirectDependencies)
-  || !vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes("evensectorT_claim_V1_plus_half_invertible")
-  || !vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes("evensectorT_claim_V2_invertible")
-  || !vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes("evensectorT_definition_V_plus")
+  || JSON.stringify([...vPlusFactorsInvertibleEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(vPlusFactorsInvertibleExpectedDirectDependencies)
   || JSON.stringify([...conjugationLinearityEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(conjugationLinearityExpectedDirectDependencies)
   || v1PlusHalfInvertibleEntry.explanationGranularityReview.inspectedContentSha256
     !== v1PlusHalfInvertibleExpectedContentSha256
   || vTwoInvertibleEntry.explanationGranularityReview.inspectedContentSha256
     !== vTwoInvertibleExpectedContentSha256
+  || vPlusFactorsInvertibleEntry.explanationGranularityReview.inspectedContentSha256
+    !== vPlusFactorsInvertibleExpectedContentSha256
   || conjugationLinearityEntry.explanationGranularityReview.inspectedContentSha256
     !== conjugationLinearityExpectedContentSha256
   || vPlusPositiveDefiniteSection.sectionEntries.some((entry) =>
@@ -2930,7 +2929,6 @@ const inputsDroppedAfterVPlusFactorsInvertibility = vPlusFactorsInvertibleEntry.
   .filter((id) => !conjugationLinearityEntry.dependsOnEntryIds.includes(id));
 if (JSON.stringify(inputsAddedForConjugationLinearity.sort()) !== JSON.stringify([
   "TV1_hatZ_hatY_011_definition_T_g",
-  "calc_formulae_006_definition_of_cc",
   "evensectorT_claim_V_plus_factors_invertible",
   "evensector_003a_definition_check_index_set",
   "linear_space_general_002_claim_scalar_identity_commutes",
@@ -2941,7 +2939,7 @@ if (JSON.stringify(inputsAddedForConjugationLinearity.sort()) !== JSON.stringify
     "evensectorT_definition_V_plus",
   ].sort())
   || vPlusFactorsInvertibleEntry.explanationGranularityReview.status
-    !== "具体的な行列計算への展開またはブロック分割を要する"
+    !== "自動検査で主題に適合"
   || conjugationLinearityEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
   throw new Error(`構成因子の可逆性から共役写像の線型性への入力集合が変わりました: ${JSON.stringify({
     added: inputsAddedForConjugationLinearity,
@@ -3531,7 +3529,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "偶セクター転送行列の構成因子の可逆性",
   chapter: "2次元イジングモデル",
-  status: "先頭二主張を分割・同期済み、残る一主張が境界候補",
+  status: "構造確定",
   entryIds: [v1PlusHalfInvertibleEntry.id, vTwoInvertibleEntry.id, vPlusFactorsInvertibleEntry.id],
   input: [
     "偶セクターの半指数行列、第二の転送行列 V_2、および偶セクター転送行列 V^{(+)} の定義",
@@ -3541,21 +3539,22 @@ const isingModelSectionBoundaries = [{
   output: [
     "偶セクターの半指数行列が可逆であること",
     "第二の転送行列 V_2 が可逆であること",
-    ...vPlusFactorsInvertibilityBoundaryCandidates.map(({ output }) => output),
+    "偶セクター転送行列 V^{(+)} が可逆であること",
   ],
   boundaryCandidates: vPlusFactorsInvertibilityBoundaryCandidates,
   nextTickUnit: vPlusFactorsInvertibilityNextTickUnit,
   formalizationEvidence: {
     leanFiles: [vPlusFactorsInvertibilityLeanFile, vTwoInvertibilityLeanFile],
     sageMathFile: vPlusFactorsInvertibilitySageMathFile,
-    currentStatus: "本文は半指数行列と V_2 の可逆性を独立主張へ分け、Lean の isUnit_V1halfPlus・isUnit_V2 と SageMath の各逆行列積検査へ新ラベルを同期した。V^{(+)} の可逆性は両主張を直接入力とする一主張として残る。",
+    currentStatus: "本文は三つの可逆性を一ブロック一主張へ分けた。V^{(+)} の可逆性は先行する二主張を直接入力に、可逆行列の積の閉性を二回、一段ずつ適用する。Lean の isUnit_V1halfPlus・isUnit_V2・isUnit_VPlus と SageMath の三つの逆行列積検査が各主張へ対応する。",
   },
   mainTheorems: [
     "偶セクターの半指数行列が可逆であること",
     "第二の転送行列 V_2 が可逆であること",
+    "偶セクター転送行列 V^{(+)} が可逆であること",
   ],
-  boundaryEvidence: "確定済みの正定値性・可逆性とトレース正値性の節に続き、順64は指数行列の逆行列公式だけから半指数行列の可逆性を示す。順65は同じ公式と正のスカラー倍の可逆性から V_2 の可逆性を示す。順66はこの二主張を直接入力として V^{(+)} の可逆性へ進む。隣接する共役写像の線型性は順66を直接入力の一つに持ち、入力集合も共役写像の定義と添字集合へ切り替わる。今回は順64–65だけを分割・形式化同期し、順66は次回一項の境界候補として残す。",
-  readabilityStatus: "半指数行列と V_2 の可逆性は、一ブロック一主張としてそれぞれ指数行列の逆行列、正のスカラーと指数行列の積の逆行列だけを用いる形へ分離した。Lean と SageMath の対応も新ラベルへ同期済みで、対象二項は現行の説明粒度検査に合格する。V^{(+)} の可逆性と直後の共役写像の線型性には進まず、次回は V^{(+)} の可逆性一項だけをレビューする。",
+  boundaryEvidence: "確定済みの正定値性・可逆性とトレース正値性の節に続き、順64は指数行列の逆行列公式だけから半指数行列の可逆性を示す。順65は同じ公式と正のスカラー倍の可逆性から V_2 の可逆性を示す。順66はこの二主張を直接入力として、可逆行列の積の閉性を二回適用し V^{(+)} の可逆性へ閉じる。直後の順67は順66を入力の一つに持つが、共役写像の定義、複素数、添字集合、スカラー倍した単位行列の可換性を追加し、二つの構成因子の可逆性と V^{(+)} の定義を直接入力から外す。この入力集合の切り替わりにより順66の後で節を閉じる。",
+  readabilityStatus: "三つの可逆性は一ブロック一主張へ分かれている。順66は先行する半指数行列と V_2 の可逆性を用い、最初の二因子の積、次に三因子の積が可逆であることを一段ずつ示す。Lean の isUnit_VPlus は同じ三単元の積を構成し、SageMath は明示逆との積が単位行列になることを検査するため、本文の推論粒度と形式化対応は合格である。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

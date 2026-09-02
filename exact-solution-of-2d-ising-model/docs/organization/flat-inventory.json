@@ -1140,7 +1140,7 @@
     {
       "name": "偶セクター転送行列の構成因子の可逆性",
       "chapter": "2次元イジングモデル",
-      "status": "先頭二主張を分割・同期済み、残る一主張が境界候補",
+      "status": "構造確定",
       "entryIds": [
         "evensectorT_claim_V1_plus_half_invertible",
         "evensectorT_claim_V2_invertible",
@@ -1156,34 +1156,23 @@
         "第二の転送行列 V_2 が可逆であること",
         "偶セクター転送行列 V^{(+)} が可逆であること"
       ],
-      "boundaryCandidates": [
-        {
-          "output": "偶セクター転送行列 V^{(+)} が可逆であること",
-          "currentEntryId": "evensectorT_claim_V_plus_factors_invertible",
-          "formalizationTarget": "Lean の isUnit_VPlus と SageMath の V^{(+)} の逆行列検査"
-        }
-      ],
-      "nextTickUnit": [
-        {
-          "output": "偶セクター転送行列 V^{(+)} が可逆であること",
-          "currentEntryId": "evensectorT_claim_V_plus_factors_invertible",
-          "formalizationTarget": "Lean の isUnit_VPlus と SageMath の V^{(+)} の逆行列検査"
-        }
-      ],
+      "boundaryCandidates": [],
+      "nextTickUnit": [],
       "formalizationEvidence": {
         "leanFiles": [
           "lean/Ising2D/Part014/Definition001_VPlus.lean",
           "lean/Ising2D/Part004/Definition010_H1H2V1V2.lean"
         ],
         "sageMathFile": "sagemath/check/051_stepwise_identities_of_chapter_Cprime/check_03_014_steps.sage",
-        "currentStatus": "本文は半指数行列と V_2 の可逆性を独立主張へ分け、Lean の isUnit_V1halfPlus・isUnit_V2 と SageMath の各逆行列積検査へ新ラベルを同期した。V^{(+)} の可逆性は両主張を直接入力とする一主張として残る。"
+        "currentStatus": "本文は三つの可逆性を一ブロック一主張へ分けた。V^{(+)} の可逆性は先行する二主張を直接入力に、可逆行列の積の閉性を二回、一段ずつ適用する。Lean の isUnit_V1halfPlus・isUnit_V2・isUnit_VPlus と SageMath の三つの逆行列積検査が各主張へ対応する。"
       },
       "mainTheorems": [
         "偶セクターの半指数行列が可逆であること",
-        "第二の転送行列 V_2 が可逆であること"
+        "第二の転送行列 V_2 が可逆であること",
+        "偶セクター転送行列 V^{(+)} が可逆であること"
       ],
-      "boundaryEvidence": "確定済みの正定値性・可逆性とトレース正値性の節に続き、順64は指数行列の逆行列公式だけから半指数行列の可逆性を示す。順65は同じ公式と正のスカラー倍の可逆性から V_2 の可逆性を示す。順66はこの二主張を直接入力として V^{(+)} の可逆性へ進む。隣接する共役写像の線型性は順66を直接入力の一つに持ち、入力集合も共役写像の定義と添字集合へ切り替わる。今回は順64–65だけを分割・形式化同期し、順66は次回一項の境界候補として残す。",
-      "readabilityStatus": "半指数行列と V_2 の可逆性は、一ブロック一主張としてそれぞれ指数行列の逆行列、正のスカラーと指数行列の積の逆行列だけを用いる形へ分離した。Lean と SageMath の対応も新ラベルへ同期済みで、対象二項は現行の説明粒度検査に合格する。V^{(+)} の可逆性と直後の共役写像の線型性には進まず、次回は V^{(+)} の可逆性一項だけをレビューする。"
+      "boundaryEvidence": "確定済みの正定値性・可逆性とトレース正値性の節に続き、順64は指数行列の逆行列公式だけから半指数行列の可逆性を示す。順65は同じ公式と正のスカラー倍の可逆性から V_2 の可逆性を示す。順66はこの二主張を直接入力として、可逆行列の積の閉性を二回適用し V^{(+)} の可逆性へ閉じる。直後の順67は順66を入力の一つに持つが、共役写像の定義、複素数、添字集合、スカラー倍した単位行列の可換性を追加し、二つの構成因子の可逆性と V^{(+)} の定義を直接入力から外す。この入力集合の切り替わりにより順66の後で節を閉じる。",
+      "readabilityStatus": "三つの可逆性は一ブロック一主張へ分かれている。順66は先行する半指数行列と V_2 の可逆性を用い、最初の二因子の積、次に三因子の積が可逆であることを一段ずつ示す。Lean の isUnit_VPlus は同じ三単元の積を構成し、SageMath は明示逆との積が単位行列になることを検査するため、本文の推論粒度と形式化対応は合格である。"
     }
   ],
   "explanationGranularityReview": {
@@ -1231,7 +1220,6 @@
       "TV1_hatZ_hatY_031_claim_V_psi_commutator",
       "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY",
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
-      "evensectorT_claim_V_plus_factors_invertible",
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y"
     ]
@@ -4719,6 +4707,10 @@
         {
           "dependentId": "evensectorT_claim_V_plus_factors_invertible",
           "prerequisiteId": "TV1_hatZ_hatY_009_definition_invertible_elements"
+        },
+        {
+          "dependentId": "evensectorT_claim_V_plus_factors_invertible",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
         {
           "dependentId": "evensectorT_definition_T_V_plus",
@@ -16051,8 +16043,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4888,
-        "inspectedContentSha256": "5f6b5787093c788f3ce3dc90bdcd74cf39f581006b97869e5bc07bb6a79b1aad",
+        "inspectedCharacterCount": 4759,
+        "inspectedContentSha256": "82150d5bfd261ff642be281592344d20e8292c6ab6b361748c8dcd965e09a8b9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20113,38 +20105,42 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 881,
-        "inspectedContentSha256": "c68b661ed7cd239576e642b3744bab80297af15309ac553d3ce9f6bc216b5eb1",
+        "inspectedCharacterCount": 1443,
+        "inspectedContentSha256": "bfb1bb937c796f71881bf9bbd1609a6c1338227b8facc90df00b2fc880d4d0f8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": "V^{(+)} の可逆性は先行する二つの構成因子の可逆性から機械的に分離した段階であり、内容と形式化同期のレビューは次回一項単位として残している。"
+        "manualReview": null
       },
       "dependsOnLabels": [
         "V1_plus_half_invertible",
         "V2_invertible",
         "def_V_plus",
-        "def_invertible_elements_of_R"
+        "def_invertible_elements_of_R",
+        "definition_of_cc"
       ],
       "dependsOnEntryIds": [
         "TV1_hatZ_hatY_009_definition_invertible_elements",
+        "calc_formulae_006_definition_of_cc",
         "evensectorT_claim_V1_plus_half_invertible",
         "evensectorT_claim_V2_invertible",
         "evensectorT_definition_V_plus"
       ],
-      "semanticPrerequisiteLabels": [],
+      "semanticPrerequisiteLabels": [
+        "definition_of_cc"
+      ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": true,
+      "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [
         "evensectorT_claim_V2_invertible"
       ],
