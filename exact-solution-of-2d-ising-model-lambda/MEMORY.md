@@ -2,6 +2,10 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
+- 2026-09-02: tick のエージェント本体を打ち切った後、公開処理の `gcloud storage rsync` が
+  残存した事故を受け、HTML 生成・アップロード・配信確認を含む公開工程全体へ 10 分の有限上限を
+  設けた。30 秒後にも終了しない場合は独立プロセスグループの子孫を含めて回収する。
+
 ## 現在の到達点（2026-09-02 の 109 回目の tick 時点）
 
 **偶部分グラフ選択和を符号別の選択集合の元の個数の差として表示した。** 選択 $C\in\mathcal C_L(D,E)$ の符号指数 $\vartheta^{a,b}_L(D,E;C)\in\mathbb Z$（`def_signed_selection_sum` の被加数の指数）を明示し、選択集合を被加数の符号で $\mathcal C^{\pm}_L(D,E;a,b)$ へ二分して、$\mathcal U^{a,b}_L(D,E)=\lvert\mathcal C^{+}\rvert-\lvert\mathcal C^{-}\rvert$ を一般の $L$ で示した（`claim_selection_sum_signed_count`）。これで $\mathcal K=\mathcal U$ の同定は、置換側の三つの符号付き数え上げ（`claim_fiber_phase_integer_decomposition`）と選択側の個数差の比較に帰着した。SageMath `selection-sum-signed-count` は一辺二の互いに素な $(D,E)$（$E$ は偶部分グラフ）の全 $881$ 組×四スピン構造の $3{,}524$ 件を全数検査した（実行 6 秒）。Lean 二版は未着手である。

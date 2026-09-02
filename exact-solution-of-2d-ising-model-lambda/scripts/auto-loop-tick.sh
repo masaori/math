@@ -20,6 +20,10 @@ STATUS_FILE="$LOG_DIR/auto-loop-status.log"
 # 1 tick の上限。次の発火（60 分後）と、その前に走る監査（毎時 55 分）に食い込ませないため
 # 45 分で打ち切る。30 分間隔・25 分上限では四層まで終わらず 4 回打ち切られたので広げた。
 TICK_TIMEOUT_SECONDS=2700
+# エージェント本体が終わった後の公開工程にも独立した上限を置く。公開先 CLI が
+# 固まっても次の tick の発火を越えて子孫を残さない。
+PUBLISH_TIMEOUT_SECONDS="${ISING_LAMBDA_PUBLISH_TIMEOUT_SECONDS:-600}"
+PUBLISH_KILL_AFTER_SECONDS="${ISING_LAMBDA_PUBLISH_KILL_AFTER_SECONDS:-30}"
 
 mkdir -p "$LOG_DIR"
 
@@ -356,9 +360,19 @@ else
   record_leftover "正常終了したが未コミットの成果が残った"
 fi
 
-# 毎 tick の成果を HTML で公開する（ユーザー指示）。このプロジェクトの中身が動いていなければ
-# 中で何もせず終わる。失敗しても tick の結果は変えない。
-bash "$PROJECT_DIR/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1 || log "    アーティファクトの公開に失敗した"
+# 毎 tick の成果を HTML で公開する（ユーザー指示）。HTML 生成・アップロード・配信確認を
+# 一つの有限プロセスグループとして扱い、期限後も TERM を無視する子孫は KILL で回収する。
+set +e
+bash "$PROJECT_DIR/scripts/run-bounded-command.sh" \
+  "$PUBLISH_TIMEOUT_SECONDS" "$PUBLISH_KILL_AFTER_SECONDS" \
+  bash "$PROJECT_DIR/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1
+publish_status=$?
+set -e
+case "$publish_status" in
+  0) ;;
+  124|137) log "    アーティファクトの公開を ${PUBLISH_TIMEOUT_SECONDS} 秒で打ち切り、子孫を回収した (exit ${publish_status})" ;;
+  *) log "    アーティファクトの公開に失敗した (exit ${publish_status})" ;;
+esac
 
 # --- Slack への報告（1 tick 1 通。ここに一本化してある） ----------------------
 # **通知はこの 1 箇所だけで行う**（2026-08-15 のユーザー指示）。公開スクリプトも、
