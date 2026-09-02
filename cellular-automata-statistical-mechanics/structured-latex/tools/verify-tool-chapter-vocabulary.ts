@@ -108,11 +108,43 @@ const CA_TERM_CORRESPONDENCE: readonly TermCorrespondenceEntry[] = [
 /** 本文側の CA 固有語。対応表から導出するので、ここへ直接足すことはできない。 */
 const CA_TERMS = CA_TERM_CORRESPONDENCE.map((entry) => entry.body);
 
+/**
+ * 除外句の一件。取り除く句と、その句が実際に覆い隠す CA 固有語の宣言を対にする。
+ *
+ * 除外句は語彙検査の**唯一の抜け道**である。ここへ一行足すだけで、その綴りを含む本文は
+ * 二つの章のどちらでも無検査になる。ところがこのファイルの他の宣言
+ * （CA 固有語・既存物理由来語の対応表、照合ブロック、照合識別子の族）がいずれも
+ * fail-closed に検査されているのに対し、除外句だけは何一つ検査されていなかった。
+ *
+ * 実測: 除外句へ `量子` を一行足すと、数学的道具立て章の本文へ `量子` を書いても
+ * 検査が 0 件で通る（足す前は当該ブロックを指して失敗する）。既存物理由来語は
+ * 「本文に現れないこと」だけを要求する禁止語で使用箇所の要求が無いため、この抜け道は
+ * どの検査にも現れない。
+ *
+ * さらに、既存の除外句 `近傍割り当て` は CA 固有語をひとつも含まず、取り除いても
+ * 検査結果が変わらない**空振りの除外**だった（CA 固有語に `近傍` は無い）。
+ * 「除外した」という記録だけが残り、実際には何も除外していない状態である。
+ *
+ * そこで除外句にも同じ規律を課す。覆い隠す CA 固有語を宣言させ、宣言と実際が食い違えば違反、
+ * 既存物理由来語を覆い隠す除外句は禁止、走査対象の本文に一度も現れない除外句も違反とする。
+ */
+type NeutralPhraseEntry = {
+  readonly phrase: string;
+  /** この句が覆い隠す CA 固有語。実際に覆い隠す語の集合と完全に一致していなければ違反。 */
+  readonly masks: readonly string[];
+  readonly reason: string;
+};
+
 /** CA を仮定せずに定義された語。字句検査の前に取り除く。 */
-const NEUTRAL_PHRASES = [
-  "近傍割り当て", // 有限集合上の集合値写像として定義しており、CA の近傍を仮定しない
-  "周期の伝播", // 有限自己写像の周期が反復で保たれることを指し、空間的伝播ではない
+const NEUTRAL_PHRASE_ENTRIES: readonly NeutralPhraseEntry[] = [
+  {
+    phrase: "周期の伝播",
+    masks: ["伝播"],
+    reason: "有限自己写像の周期が反復で保たれることを指し、空間的伝播ではない",
+  },
 ];
+
+const NEUTRAL_PHRASES = NEUTRAL_PHRASE_ENTRIES.map((entry) => entry.phrase);
 
 /**
  * 識別子側の CA 由来語。block id と label は出版本文に出ないが、整理前のファイル名を
@@ -290,6 +322,61 @@ for (const blockId of PHYSICS_COMPARISON_BLOCK_IDS) {
 
 const violations: string[] = [];
 violations.push(...correspondenceViolations);
+
+/**
+ * 除外句そのものの検査。語彙検査で唯一の抜け道なので fail-closed に扱う。
+ *
+ * 三点を要求する。(1) 宣言した「覆い隠す CA 固有語」が実際に覆い隠す語と完全に一致すること
+ * ——空振りの除外（何も覆い隠さない句）と、宣言から漏れた語の両方を止める。
+ * (2) 既存物理由来語を覆い隠さないこと——あちらは使用箇所を要求しない禁止語なので、
+ * 除外句で覆うとどの検査にも現れない永久の穴になる。
+ * (3) 走査対象の本文に実際に現れること——役目を終えた除外が許可だけ残るのを防ぐ。
+ */
+const scannedRawTexts: string[] = [];
+for (const file of files) {
+  if (!file.file.startsWith(TOOL_CHAPTER_PREFIX) && !file.file.startsWith(CA_CHAPTER_PREFIX)) continue;
+  for (const block of file.blocks) {
+    if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
+    const parts: string[] = [];
+    collectText(block, parts);
+    scannedRawTexts.push(parts.join(" "));
+  }
+}
+for (const chapter of documentOrganization) {
+  const parts: string[] = [];
+  collectText([chapter.title, ...chapter.sections.map((section) => [section.title, section.input, section.output, section.main])], parts);
+  scannedRawTexts.push(parts.join(" "));
+}
+for (const entry of NEUTRAL_PHRASE_ENTRIES) {
+  if (entry.phrase.trim().length === 0) {
+    violations.push("除外句が空である");
+    continue;
+  }
+  if (entry.reason.trim().length === 0) {
+    violations.push(`除外句の理由が宣言されていない: ${entry.phrase}`);
+  }
+  const actuallyMasked = CA_TERMS.filter((term) => entry.phrase.includes(term));
+  const declared = [...entry.masks].sort().join("、");
+  const actual = [...actuallyMasked].sort().join("、");
+  if (actuallyMasked.length === 0) {
+    violations.push(`除外句が CA 固有語を一つも覆い隠していない（空振りの除外）: ${entry.phrase}`);
+  } else if (declared !== actual) {
+    violations.push(
+      `除外句が覆い隠す CA 固有語の宣言が実際と食い違う: ${entry.phrase}（宣言 ${declared || "なし"}、実際 ${actual}）`,
+    );
+  }
+  const maskedPhysics = PHYSICS_TERMS.filter((term) =>
+    entry.phrase.toLowerCase().includes(term.toLowerCase()),
+  );
+  if (maskedPhysics.length > 0) {
+    violations.push(
+      `除外句が既存物理由来語を覆い隠している: ${entry.phrase}（${maskedPhysics.join("、")}）`,
+    );
+  }
+  if (!scannedRawTexts.some((text) => text.includes(entry.phrase))) {
+    violations.push(`除外句が走査対象の本文で使われていない: ${entry.phrase}`);
+  }
+}
 
 /**
  * CA 対応語を CA 章の実識別子へ一語ずつ突き合わせる。
@@ -670,6 +757,7 @@ console.log(
     `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件・` +
     `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.size} 件、` +
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
+    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・実使用をすべて確認）、` +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
