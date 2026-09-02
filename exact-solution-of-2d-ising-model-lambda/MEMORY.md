@@ -2,7 +2,19 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 115 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 116 回目の tick 時点）
+
+**経路反転軌道と選択補集合軌道を元数で重み付けした有限和へ二つの符号付き数え上げを移した。** 接触対の順序に依らない三分類で経路反転軌道を細分し、各軌道の重みを一元または二元の元数として、ファイバー位相和と選択和がそれぞれ正符号軌道の重み和から負符号軌道の重み和を引いた整数に等しいことを一般の $L$ で示した（`claim_weighted_path_reversal_selection_orbit_sums`）。SageMath `weighted-path-reversal-selection-orbit-sums` は一辺二の全 $609$ ファイバーと四スピン構造の $2{,}436$ 組で、定義による直接和との一致を検査した。Lean 二版は未着手である。
+
+次 tick は、経路反転軌道と選択補集合軌道の間に符号と重みを保つ対応を構成する。
+
+前進前レビューでは、前 tick の切り替え可能対の個数による三分類を statement・proof・検算・台帳で照合した。分類と反転不変性は今回の分類別軌道和で直接使われ、体の四則だけの空疎な主張には該当せず、不一致も無かった。
+
+並列の式変形統一は、姉妹側の「冪等行列の積のトレース」の帰納段階で、数演算子の定義・トレースの巡回性と線型性・数演算子の関係を使う各式変形行へ `\blkref` を移し、鎖の後ろに重複していた分配則の説明を削除した。内容・式変形・根拠・参照は不変である。
+
+Lambda 側 check（938 ブロック・相互参照 $3{,}937$ 件すべて解決）・linkage（416 検算）・対象 SageMath（全 $2{,}436$ 組）・Lean $9{,}616$ ジョブ・`sorry` / `admit` 無し・PDF 407 ページを通した。姉妹側 check・linkage（118 検算）・PDF 360 ページも通した。新主張の Lean 二版は未着手であり、このセクションは四層完了とはしていない。
+
+## ひとつ前の到達点（2026-09-02 の 115 回目の tick 時点）
 
 **接触対の順序に依らず経路反転で保たれる三分類を構成した。** 切り替え可能な接触対の集合 $\operatorname{Ct}_{\mathrm{sw}}(\varphi)\subseteq\operatorname{Ct}(\varphi)$ とその個数 $N_{\mathrm{sw}}(\varphi)\in\mathbb N$ を定義し、非後退置換の全体を、接触の無い部分 $\mathcal Z_L$（$N_{\mathrm{ct}}=0$）・切り替え可能対を持つ部分 $\mathcal X_L$（$N_{\mathrm{sw}}\ge1$）・接触対を持つが全対切り替え不能な部分 $\mathcal Y_L$（$N_{\mathrm{ct}}\ge1$ かつ $N_{\mathrm{sw}}=0$）の互いに素な三集合へ分けた（`def_switchable_contact_count_classification`。標準接触対の辞書式順序を用いない）。接触対対応 $\Psi_\varphi$ の制限が $\operatorname{Ct}_{\mathrm{sw}}(\varphi)$ から $\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))$ への全単射で $N_{\mathrm{sw}}$ を保つこと、経路反転が三集合のそれぞれを保つこと、各「ファイバー×分類×位相符号 $\epsilon\in\{-1,1\}$」の集合の上の対合であることを一般の $L$ で示した（`claim_path_reversal_switchable_classification_preservation`）。SageMath `path-reversal-switchable-count-classification` は一辺二の非後退置換 $30{,}784$ 個（接触なし $49$・切り替え可能対あり $29{,}905$・全対切り替え不能 $830$）、切り替え可能対の全単射 $192{,}896$ 件、位相寄与 $123{,}136$ 件を全数検査した（実行 2 分 28 秒）。Lean 二版は未着手である。
 

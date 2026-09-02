@@ -491,6 +491,7 @@ export const ALL_LABELS = [
   "claim_walk_side_exterior_band_edge_connected",
   "claim_walk_side_interior_band_edge_connected",
   "claim_walk_twist_sign_product",
+  "claim_weighted_path_reversal_selection_orbit_sums",
   "claim_winding_parallel_staircase_step_increase",
   "claim_winding_transverse_staircase_step_increase",
   "def_algebraic_numbers",

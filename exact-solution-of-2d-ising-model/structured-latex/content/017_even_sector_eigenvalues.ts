@@ -789,16 +789,16 @@ A\,\check{n}_\nu
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
 &= \mathrm{tr}\!\left(\check\psi_{\mu_1}^\dagger\,\check\psi_{M+1-\mu_1}\,P\right)
-   \quad (\because \text{定義}) \\
+   \quad (\because \text{数演算子の定義。}\blkref{def_check_number_operator}) \\
 &= \mathrm{tr}\!\left(\check\psi_{M+1-\mu_1}\,P\,\check\psi_{\mu_1}^\dagger\right)
-   \quad (\because \text{巡回性を } A = \check\psi_{\mu_1}^\dagger,\
-       B = \check\psi_{M+1-\mu_1}P \text{ に適用}) \\
+   \quad (\because \text{トレースの巡回性を } A = \check\psi_{\mu_1}^\dagger,\
+       B = \check\psi_{M+1-\mu_1}P \text{ に適用。}\blkref{trace_basic_properties}) \\
 &= \mathrm{tr}\!\left(P\,\check\psi_{M+1-\mu_1}\,\check\psi_{\mu_1}^\dagger\right)
-   \quad (\because \check\psi_{M+1-\mu_1} \text{ と } P \text{ が可換}) \\
+   \quad (\because \check\psi_{M+1-\mu_1} \text{ と } P \text{ の可換性（上で確認）}) \\
 &= \mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_1}\right)\right)
-   \quad (\because \text{数演算子の冪等性の証明の第 2 式}) \\
+   \quad (\because \text{数演算子の冪等性の第 2 式。}\blkref{check_number_operator_idempotent}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\,\check{n}_{\mu_1}\right)
-   \quad (\because \text{トレースの線型性}) \\
+   \quad (\because \text{分配則とトレースの線型性。}\blkref{trace_basic_properties}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
    \quad (\because \check{n}_{\mu_1} \text{ と } P \text{ が可換})
 \end{aligned}`,
@@ -844,9 +844,7 @@ A\,\check{n}_\nu
 \end{aligned}`,
       ),
       paragraph([
-        "（第 2 式で ",
-        math(String.raw`(I - \check{n}_{\mu_1})P = P - \check{n}_{\mu_1}P`),
-        " は分配法則である。）帰納法の仮定から ",
+        "帰納法の仮定から ",
         math(String.raw`\mathrm{tr}(P) = 2^{M-(k-1)}`),
         " なので、いずれの場合も",
       ]),

@@ -55478,6 +55478,90 @@ P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_weighted_path_reversal_selection_orbits",
+        labels: [],
+        title: { text: "経路反転軌道と選択補集合軌道の重み付き和" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_weighted_path_reversal_selection_orbit_sums",
+            beforeFocus: [],
+            focus: {
+              id: "kac_ward_claim_weighted_path_reversal_selection_orbit_sums",
+              kind: "claim",
+              title: { text: "二つの符号付き数え上げは軌道の元数を重みとする和である" },
+              labels: ["claim_weighted_path_reversal_selection_orbit_sums"],
+              habitat: "Z",
+              verification: ["sagemath/check/weighted-path-reversal-selection-orbit-sums"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  " とし、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " は ",
+                  math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。",
+                  math(String.raw`s\in\{-1,1\}`), " と ",
+                  math(String.raw`\mathcal P\in\{\mathcal Z_L,\mathcal X_L,\mathcal Y_L\}`), " に対して",
+                ]),
+                displayMath(String.raw`\mathfrak O^{\mathcal P,s}_L(D,E;a,b)
+:=\Bigl\{\,O\in\mathfrak O^{\mathcal N,s}_L(D,E;a,b)\ \Bigm|\ O\subseteq\mathcal P\,\Bigr\}`),
+                paragraph([
+                  "と定める。各有限軌道 ", math(String.raw`O`), " の重みをその元の個数 ",
+                  math(String.raw`w(O):=\lvert O\rvert\in\{1,2\}`), " とする。このとき整数の等式",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal K^{a,b}_L(D,E)
+&=\sum_{\mathcal P\in\{\mathcal Z_L,\mathcal X_L,\mathcal Y_L\}}
+\left(\sum_{O\in\mathfrak O^{\mathcal P,1}_L(D,E;a,b)}w(O)
+-\sum_{O\in\mathfrak O^{\mathcal P,-1}_L(D,E;a,b)}w(O)\right),\\
+\mathcal U^{a,b}_L(D,E)
+&=\sum_{O\in\mathfrak O^{\mathcal C,1}_L(D,E;a,b)}w(O)
+-\sum_{O\in\mathfrak O^{\mathcal C,-1}_L(D,E;a,b)}w(O)
+\end{aligned}`),
+                paragraph([
+                  "が成り立つ。軌道族は ", ref("claim_path_reversal_selection_complement_orbits"),
+                  "、三分類とその反転不変性は ", ref("claim_path_reversal_switchable_classification_preservation"),
+                  "、二つの符号付き数え上げは ", ref("def_fiber_phase_weight"), " と ",
+                  ref("claim_selection_sum_signed_count"), " で与えられる。全て有限集合の元の個数と整数の有限和だけで閉じる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "置換側では、三分類が非後退置換全体を互いに素に覆い、経路反転が各分類を保つ（",
+                  ref("claim_path_reversal_switchable_classification_preservation"), "）。さらに符号 ",
+                  math(String.raw`s`), " の各部分集合は経路反転軌道に互いに素に分かれ、各軌道上の位相寄与は ",
+                  math(String.raw`s`), " に一定である（", ref("claim_path_reversal_selection_complement_orbits"),
+                  "）。したがって各分類と符号を固定した有限和は",
+                ]),
+                displayMath(String.raw`\sum_{\substack{\varphi\in\mathcal N_L(D,E)\cap\mathcal P\\
+\mathcal W^{a,b}_L(\varphi)=s}}\mathcal W^{a,b}_L(\varphi)
+=s\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\lvert O\rvert
+\qquad\bigl(\because\ \text{互いに素な軌道分割と軌道上の符号一定性}\bigr)`),
+                paragraph([
+                  "となる。", math(String.raw`s=1,-1`), " の二つを加え、さらに三分類について加えると、",
+                  ref("def_fiber_phase_weight"), " の有限和そのものになり、第一の等式を得る。",
+                ]),
+                paragraph([
+                  "選択側でも、各符号集合は選択補集合軌道に互いに素に分かれ、軌道上の符号は一定である（",
+                  ref("claim_path_reversal_selection_complement_orbits"), "）。ゆえに",
+                ]),
+                displayMath(String.raw`\bigl\lvert\mathcal C^s_L(D,E;a,b)\bigr\rvert
+=\sum_{O\in\mathfrak O^{\mathcal C,s}_L(D,E;a,b)}\lvert O\rvert
+\qquad\bigl(\because\ \text{有限集合の互いに素な軌道分割}\bigr)`),
+                paragraph([
+                  "である。", math(String.raw`s=1`), " の等式から ", math(String.raw`s=-1`),
+                  " の等式を引き、", ref("claim_selection_sum_signed_count"),
+                  " を適用すると第二の等式を得る。どちらの重みも軌道の有限な元数であり、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },
