@@ -338,4 +338,23 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges_splice_reduction_counterexample",
+    targets: ["claim_fully_unswitchable_contacts_witness_doubled_edges"],
+    title: { text: "反転対の二方向を巡回から抜く縮約候補は非後退性を保たない" },
+    body: [
+      paragraph([
+        "完全切り替え不能な残余の各接触が指す反転対の辺について、その二方向を置換の巡回から同時に抜き、",
+        "各方向の直前の辺を直後の辺へつないで、抜いた二方向を固定点へ戻す縮約候補を調べた。",
+        "一辺 ", math(String.raw`L=2`), " で、同じ置換と同じ反転対の重複を除いた ",
+        math(String.raw`2{,}912`), " 件の縮約後は全て置換だったが、非後退置換だったのは ",
+        math(String.raw`32`), " 件だけであり、反転対の辺集合 ", math(String.raw`D`),
+        " だけを一辺減らして単純通過の辺集合 ", math(String.raw`E`),
+        " を保つものは一件も無かった（sagemath/check/doubled-edge-splice-reduction）。",
+        "従ってこの直接除去は ", math(String.raw`|D|`),
+        " に関する一段の縮約には使えない。別の局所操作か、個々の置換ではなくファイバー位相和どうしを結ぶ関係が必要である。",
+        "検算は有限集合と有限写像の等号・所属判定だけで完結し、浮動小数点は使わない。",
+      ]),
+    ],
+  },
 ]);
