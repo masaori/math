@@ -291,6 +291,37 @@ for (const blockId of PHYSICS_COMPARISON_BLOCK_IDS) {
 
 const violations: string[] = [];
 violations.push(...correspondenceViolations);
+
+/**
+ * CA 対応語を CA 章の実識別子へ一語ずつ突き合わせる。
+ *
+ * 綴りだけを検査しても、`automaton` を有効な snake_case の `automata` へ変えると検査は成功し、
+ * 実在する識別子の `automaton` だけが静かに無検査になる。対応語は将来用の予約語ではなく、
+ * 現在の分類境界を二本の軸で検査するための語なので、実際に使われていない対応語を許さない。
+ */
+const caIdentifierValues = [
+  ...files
+    .filter((file) => file.file.startsWith(CA_CHAPTER_PREFIX))
+    .flatMap((file) =>
+      file.blocks.flatMap((block) =>
+        block.kind === "heading" || block.id.startsWith("organization_")
+          ? []
+          : [block.id, ...block.labels],
+      ),
+    ),
+  ...documentOrganization
+    .filter((chapter) => String(chapter.id) === "binary_cellular_automaton_semantics")
+    .flatMap((chapter) => [String(chapter.id), ...chapter.sections.map((section) => String(section.id))]),
+];
+for (const entry of CA_TERM_CORRESPONDENCE) {
+  for (const identifier of entry.identifiers ?? []) {
+    if (!caIdentifierValues.some((value) => value.includes(identifier))) {
+      violations.push(
+        `CA 固有語の識別子の対応語が CA 章の実識別子で使われていない: ${entry.body}（${identifier}）`,
+      );
+    }
+  }
+}
 if (toolBlockIds.size === 0) {
   violations.push("数学的道具立て章の走査対象が 0 件である");
 }
