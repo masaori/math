@@ -7,7 +7,8 @@
 - ファイル: `structured-latex/content/014_even_sector_T_action.ts`
 - 併せて検証:
   - `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` /
-    `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation`
+    `V1_plus_half_invertible` / `V2_invertible` / `V_plus_factors_invertible` /
+    `def_T_V_plus` / `T_V_plus_is_conjugation`
     （偶セクターの生成子から `V^{(+)}` とその共役写像までの定義・性質）
   - `nesting_of_commutator_of_H_and_check_Z`（n 重交換子の閉じ方）
   - `cosh_sinh_coefficient_conversion_for_check`（生成子のスケール後の形）

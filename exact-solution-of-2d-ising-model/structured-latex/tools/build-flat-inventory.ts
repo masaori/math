@@ -1386,27 +1386,23 @@ if (!vPlusInversePositiveDefiniteSageMathExecutableSource.includes("for eigenval
   || vPlusInversePositiveDefiniteSageMathExecutableSource.includes("Vp.eigenvalues()")) {
   throw new Error("偶セクター転送行列の逆行列の全固有値正値性の SageMath 独立検査が変わりました");
 }
-const vPlusFactorsInvertibleExpectedDirectDependencies = [
+const v1PlusHalfInvertibleExpectedDirectDependencies = [
   "TV1_hatZ_hatY_009_definition_invertible_elements",
   "calc_formulae_006_definition_of_cc",
   "evensectorT_definition_V1_plus_square_root",
-  "evensectorT_definition_V_plus",
+  "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+  "transfer_matrix_011_definition_H1_H2",
+].sort();
+const vTwoInvertibleExpectedDirectDependencies = [
+  "TV1_hatZ_hatY_009_definition_invertible_elements",
+  "calc_formulae_006_definition_of_cc",
   "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_011_definition_H1_H2",
 ].sort();
-const vPlusFactorsInvertibleExpectedContentSha256 = "8cd8d24bbde47b20c3179c80808415516a56f8a06c6159ef9f4188bd30ee9a81";
+const v1PlusHalfInvertibleExpectedContentSha256 = "7ddf2ffcfb7f8d60b2fde61783ddc4dd251dfb8e197f8bbb4eb27b244a874dc7";
+const vTwoInvertibleExpectedContentSha256 = "eabadeb2353bdb7cd8c2ff1014e2c3d6f42e52901fb3cdb657f753382ef97992";
 const vPlusFactorsInvertibilityBoundaryCandidates = [
-  {
-    output: "偶セクターの半指数行列が可逆であること",
-    currentEntryId: "evensectorT_claim_V_plus_factors_invertible",
-    formalizationTarget: "Lean の isUnit_V1halfPlus と SageMath の半指数行列の逆行列検査",
-  },
-  {
-    output: "第二の転送行列 V_2 が可逆であること",
-    currentEntryId: "evensectorT_claim_V_plus_factors_invertible",
-    formalizationTarget: "Lean の isUnit_V2 と SageMath の V_2 の逆行列検査",
-  },
   {
     output: "偶セクター転送行列 V^{(+)} が可逆であること",
     currentEntryId: "evensectorT_claim_V_plus_factors_invertible",
@@ -1415,30 +1411,18 @@ const vPlusFactorsInvertibilityBoundaryCandidates = [
 ] as const;
 const vPlusFactorsInvertibilityExpectedBoundaryCandidates = [
   {
-    output: "偶セクターの半指数行列が可逆であること",
-    currentEntryId: "evensectorT_claim_V_plus_factors_invertible",
-    formalizationTarget: "Lean の isUnit_V1halfPlus と SageMath の半指数行列の逆行列検査",
-  },
-  {
-    output: "第二の転送行列 V_2 が可逆であること",
-    currentEntryId: "evensectorT_claim_V_plus_factors_invertible",
-    formalizationTarget: "Lean の isUnit_V2 と SageMath の V_2 の逆行列検査",
-  },
-  {
     output: "偶セクター転送行列 V^{(+)} が可逆であること",
     currentEntryId: "evensectorT_claim_V_plus_factors_invertible",
     formalizationTarget: "Lean の isUnit_VPlus と SageMath の V^{(+)} の逆行列検査",
   },
 ] as const;
-const vPlusFactorsInvertibilityNextTickUnit =
-  vPlusFactorsInvertibilityBoundaryCandidates.slice(0, 2);
-const vPlusFactorsInvertibilityExpectedNextTickUnit =
-  vPlusFactorsInvertibilityExpectedBoundaryCandidates.slice(0, 2);
+const vPlusFactorsInvertibilityNextTickUnit = vPlusFactorsInvertibilityBoundaryCandidates;
+const vPlusFactorsInvertibilityExpectedNextTickUnit = vPlusFactorsInvertibilityExpectedBoundaryCandidates;
 if (JSON.stringify(vPlusFactorsInvertibilityBoundaryCandidates)
     !== JSON.stringify(vPlusFactorsInvertibilityExpectedBoundaryCandidates)
   || JSON.stringify(vPlusFactorsInvertibilityNextTickUnit)
     !== JSON.stringify(vPlusFactorsInvertibilityExpectedNextTickUnit)) {
-  throw new Error("偶セクター転送行列の構成因子の可逆性について、三つの境界候補または次回二項単位が変わりました");
+  throw new Error("偶セクター転送行列の可逆性について、残る境界候補または次回一項単位が変わりました");
 }
 const vPlusFactorsInvertibilityLeanFile = "lean/Ising2D/Part014/Definition001_VPlus.lean";
 const vTwoInvertibilityLeanFile = "lean/Ising2D/Part004/Definition010_H1H2V1V2.lean";
@@ -1454,7 +1438,8 @@ const vPlusFactorsInvertibilitySageMathExecutableSource = readFileSync(
   "utf8",
 ).split("\n").filter((line) => !line.trimStart().startsWith("#")).join("\n");
 const vPlusFactorsInvertibilityExpectedLeanFragments = [
-  "theorem isUnit_V1halfPlus (K1 : ℂ) : IsUnit (V1half M K1 (-1)) :=",
+  `/-- **原文 \`V1_plus_half_invertible\`**: \`(V_1^{(+)})^{1/2}\` は可逆。 -/
+theorem isUnit_V1halfPlus (K1 : ℂ) : IsUnit (V1half M K1 (-1)) :=`,
   `theorem isUnit_VPlus {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
     IsUnit (VPlus M s2 K1 K2star) :=`,
 ];
@@ -1464,13 +1449,14 @@ for (const declarationFragment of vPlusFactorsInvertibilityExpectedLeanFragments
   }
 }
 if (!vTwoInvertibilityLeanSource.includes(
-  "theorem isUnit_V2 {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) : IsUnit (V2 M s2 K2star) :=",
+  `/-- **原文 \`V2_invertible\`**: \`V_2\` は可逆。 -/
+theorem isUnit_V2 {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) : IsUnit (V2 M s2 K2star) :=`,
 )) {
   throw new Error("第二の転送行列の可逆性に対応する Lean 宣言が変わりました");
 }
 const vPlusFactorsInvertibilityExpectedSageMathExecutionFragments = [
-  'S.add("V_plus_factors_invertible (V1half) exp(X)^{-1} = exp(-X)", Vh * Vhi, Id)',
-  'S.add("V_plus_factors_invertible (V2) V_2 V_2^{-1} = I", V2 * V2i, Id)',
+  'S.add("V1_plus_half_invertible exp(X)^{-1} = exp(-X)", Vh * Vhi, Id)',
+  'S.add("V2_invertible V_2 V_2^{-1} = I", V2 * V2i, Id)',
   'S.add("V_plus_factors_invertible (Vplus) V^{(+)} V^{(+)-1} = I", Vp * Vpi, Id)',
 ];
 for (const executionFragment of vPlusFactorsInvertibilityExpectedSageMathExecutionFragments) {
@@ -1519,7 +1505,7 @@ const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
   ["transfer_matrix_011_definition_H1_H2", "一般の生成子 H1^{(±)} と H2 の二定義に加え、既存の V1^{(±)} と V2 の指数表示を同じブロックへ束ねている。今回確定する節では外部入力として扱い、将来一ブロック一定義へ分割した後に依存順と節境界を再判定する必要がある。"],
-  ["evensectorT_claim_V_plus_factors_invertible", "V1^{(+)} の半指数行列、V2、V^{(+)} という三つの行列の可逆性を一ブロックへ束ねている。各出力の後続利用を照合して一ブロック一主張へ分割し、共役写像の線型性との節境界を再判定する必要がある。"],
+  ["evensectorT_claim_V_plus_factors_invertible", "V^{(+)} の可逆性は先行する二つの構成因子の可逆性から機械的に分離した段階であり、内容と形式化同期のレビューは次回一項単位として残している。"],
 ]);
 const futureBlockSplitRecommendedById = new Set([
   "transfer_matrix_001_definition_symbols",
@@ -1531,6 +1517,9 @@ const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["closing_definition_G_boundary_operator", ["closing_definition_D0_open_chain_operator"]],
   ["closing_claim_D0_G_diagonal_action", ["closing_004_claim_H1_plus_in_sigma_z_form"]],
   ["closing_claim_epsilon_D0_G_pairwise_commute", ["closing_claim_D0_G_diagonal_action"]],
+  ["evensectorT_claim_V1_plus_half_invertible", ["evenEigen_claim_V_plus_inverse_positive_and_traces"]],
+  ["evensectorT_claim_V2_invertible", ["evensectorT_claim_V1_plus_half_invertible"]],
+  ["evensectorT_claim_V_plus_factors_invertible", ["evensectorT_claim_V2_invertible"]],
 ]);
 const isingPattern = /Ising|イジング|spin|スピン|lattice|格子|site|サイト|transfer|転送|sector|セクター|momentum|運動量|fermion|フェルミオン/i;
 const abstractPatterns = [
@@ -2407,6 +2396,10 @@ const traceVPlusPositiveEntry = vPlusPositiveDefiniteSection.sectionEntries[1]!;
 const vPlusInvertibleEntry = vPlusPositiveDefiniteSection.sectionEntries[2]!;
 const vPlusInversePositiveDefiniteEntry = vPlusPositiveDefiniteSection.sectionEntries[3]!;
 const vPlusInversePositiveAndTracesEntry = vPlusPositiveDefiniteSection.sectionEntries[4]!;
+const v1PlusHalfInvertibleEntry = entries.find((entry) =>
+  entry.id === "evensectorT_claim_V1_plus_half_invertible")!;
+const vTwoInvertibleEntry = entries.find((entry) =>
+  entry.id === "evensectorT_claim_V2_invertible")!;
 const vPlusFactorsInvertibleEntry = entries.find((entry) =>
   entry.id === "evensectorT_claim_V_plus_factors_invertible")!;
 const conjugationLinearityEntry = entries.find((entry) =>
@@ -2826,12 +2819,16 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
   || vPlusInvertibleEntry.dependencyPlacement!.chapterOrder !== 61
   || vPlusInversePositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 62
   || vPlusInversePositiveAndTracesEntry.dependencyPlacement!.chapterOrder !== 63
-  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 64
-  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 65
+  || v1PlusHalfInvertibleEntry.dependencyPlacement!.chapterOrder !== 64
+  || vTwoInvertibleEntry.dependencyPlacement!.chapterOrder !== 65
+  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 66
+  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 67
   || vPlusInvertibleEntry.kind !== "claim"
   || vPlusInversePositiveDefiniteEntry.kind !== "claim"
   || traceVPlusPositiveEntry.kind !== "claim"
   || vPlusInversePositiveAndTracesEntry.kind !== "claim"
+  || v1PlusHalfInvertibleEntry.kind !== "claim"
+  || vTwoInvertibleEntry.kind !== "claim"
   || vPlusFactorsInvertibleEntry.kind !== "claim"
   || conjugationLinearityEntry.kind !== "claim"
   || JSON.stringify(vPlusInvertibleEntry.dependsOnEntryIds
@@ -2846,12 +2843,19 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
   || JSON.stringify(traceVPlusPositiveEntry.dependsOnEntryIds
     .filter((id) => vPlusPositiveDefiniteSectionEntryIds.includes(id as typeof vPlusPositiveDefiniteSectionEntryIds[number])))
     !== JSON.stringify(vPlusPositiveDefiniteExpectedInternalDependencies.get(traceVPlusPositiveEntry.id))
-  || JSON.stringify([...vPlusFactorsInvertibleEntry.dependsOnEntryIds].sort())
-    !== JSON.stringify(vPlusFactorsInvertibleExpectedDirectDependencies)
+  || JSON.stringify([...v1PlusHalfInvertibleEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(v1PlusHalfInvertibleExpectedDirectDependencies)
+  || JSON.stringify([...vTwoInvertibleEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(vTwoInvertibleExpectedDirectDependencies)
+  || !vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes("evensectorT_claim_V1_plus_half_invertible")
+  || !vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes("evensectorT_claim_V2_invertible")
+  || !vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes("evensectorT_definition_V_plus")
   || JSON.stringify([...conjugationLinearityEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(conjugationLinearityExpectedDirectDependencies)
-  || vPlusFactorsInvertibleEntry.explanationGranularityReview.inspectedContentSha256
-    !== vPlusFactorsInvertibleExpectedContentSha256
+  || v1PlusHalfInvertibleEntry.explanationGranularityReview.inspectedContentSha256
+    !== v1PlusHalfInvertibleExpectedContentSha256
+  || vTwoInvertibleEntry.explanationGranularityReview.inspectedContentSha256
+    !== vTwoInvertibleExpectedContentSha256
   || conjugationLinearityEntry.explanationGranularityReview.inspectedContentSha256
     !== conjugationLinearityExpectedContentSha256
   || vPlusPositiveDefiniteSection.sectionEntries.some((entry) =>
@@ -2865,9 +2869,12 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
   || vPlusInvertibleEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || vPlusInversePositiveDefiniteEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || traceVPlusPositiveEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
-  || vPlusInversePositiveAndTracesEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
+  || vPlusInversePositiveAndTracesEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || v1PlusHalfInvertibleEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || vTwoInvertibleEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
   throw new Error(`偶セクター転送行列の正定値性・可逆性・残余候補、構成因子の可逆性、共役写像の線型性の節境界が変わりました: ${JSON.stringify({
-    orders: [...vPlusPositiveDefiniteSection.sectionEntries, vPlusFactorsInvertibleEntry, conjugationLinearityEntry]
+    orders: [...vPlusPositiveDefiniteSection.sectionEntries, v1PlusHalfInvertibleEntry,
+      vTwoInvertibleEntry, vPlusFactorsInvertibleEntry, conjugationLinearityEntry]
       .map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
     reviewedSectionDependencies: vPlusPositiveDefiniteSection.sectionEntries
       .map((entry) => [entry.id, entry.dependsOnEntryIds]),
@@ -2876,11 +2883,11 @@ if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 59
   })}`);
 }
 const vPlusPositiveDefiniteExternalInputSet = new Set(vPlusPositiveDefiniteSection.externalInputEntryIds);
-const inputsAddedForVPlusFactorsInvertibility = vPlusFactorsInvertibleEntry.dependsOnEntryIds
+const inputsAddedForV1PlusHalfInvertibility = v1PlusHalfInvertibleEntry.dependsOnEntryIds
   .filter((id) => !vPlusPositiveDefiniteExternalInputSet.has(id));
 const inputsDroppedAfterVPlusPositiveDefiniteness = vPlusPositiveDefiniteSection.externalInputEntryIds
-  .filter((id) => !vPlusFactorsInvertibleEntry.dependsOnEntryIds.includes(id));
-if (JSON.stringify(inputsAddedForVPlusFactorsInvertibility.sort()) !== JSON.stringify([
+  .filter((id) => !v1PlusHalfInvertibleEntry.dependsOnEntryIds.includes(id));
+if (JSON.stringify(inputsAddedForV1PlusHalfInvertibility.sort()) !== JSON.stringify([
   "TV1_hatZ_hatY_009_definition_invertible_elements",
   "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
 ].sort())
@@ -2891,11 +2898,29 @@ if (JSON.stringify(inputsAddedForVPlusFactorsInvertibility.sort()) !== JSON.stri
     "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
     "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
     "exp_linear_map_004_theorem_exp_zero_is_identity",
+    "evensectorT_definition_V_plus",
     "linear_space_general_002_claim_scalar_identity_commutes",
+    "transfer_matrix_001_definition_symbols",
   ].sort())) {
   throw new Error(`偶セクター転送行列の正定値性の直後で入力集合の切り替わり方が変わりました: ${JSON.stringify({
-    added: inputsAddedForVPlusFactorsInvertibility,
+    added: inputsAddedForV1PlusHalfInvertibility,
     dropped: inputsDroppedAfterVPlusPositiveDefiniteness,
+  })}`);
+}
+const v1PlusHalfInvertibilityInputSet = new Set(v1PlusHalfInvertibleEntry.dependsOnEntryIds);
+const inputsAddedForVTwoInvertibility = vTwoInvertibleEntry.dependsOnEntryIds
+  .filter((id) => !v1PlusHalfInvertibilityInputSet.has(id));
+const inputsDroppedAfterV1PlusHalfInvertibility = v1PlusHalfInvertibleEntry.dependsOnEntryIds
+  .filter((id) => !vTwoInvertibleEntry.dependsOnEntryIds.includes(id));
+if (JSON.stringify(inputsAddedForVTwoInvertibility.sort()) !== JSON.stringify([
+  "transfer_matrix_001_definition_symbols",
+].sort())
+  || JSON.stringify(inputsDroppedAfterV1PlusHalfInvertibility.sort()) !== JSON.stringify([
+    "evensectorT_definition_V1_plus_square_root",
+  ].sort())) {
+  throw new Error(`半指数行列の可逆性から V_2 の可逆性への入力集合が変わりました: ${JSON.stringify({
+    added: inputsAddedForVTwoInvertibility,
+    dropped: inputsDroppedAfterV1PlusHalfInvertibility,
   })}`);
 }
 const vPlusFactorsInvertibilityInputSet = new Set(vPlusFactorsInvertibleEntry.dependsOnEntryIds);
@@ -2905,16 +2930,15 @@ const inputsDroppedAfterVPlusFactorsInvertibility = vPlusFactorsInvertibleEntry.
   .filter((id) => !conjugationLinearityEntry.dependsOnEntryIds.includes(id));
 if (JSON.stringify(inputsAddedForConjugationLinearity.sort()) !== JSON.stringify([
   "TV1_hatZ_hatY_011_definition_T_g",
+  "calc_formulae_006_definition_of_cc",
   "evensectorT_claim_V_plus_factors_invertible",
   "evensector_003a_definition_check_index_set",
   "linear_space_general_002_claim_scalar_identity_commutes",
 ].sort())
   || JSON.stringify(inputsDroppedAfterVPlusFactorsInvertibility.sort()) !== JSON.stringify([
-    "evensectorT_definition_V1_plus_square_root",
+    "evensectorT_claim_V1_plus_half_invertible",
+    "evensectorT_claim_V2_invertible",
     "evensectorT_definition_V_plus",
-    "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
-    "transfer_matrix_001_definition_symbols",
-    "transfer_matrix_011_definition_H1_H2",
   ].sort())
   || vPlusFactorsInvertibleEntry.explanationGranularityReview.status
     !== "具体的な行列計算への展開またはブロック分割を要する"
@@ -3507,24 +3531,31 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "偶セクター転送行列の構成因子の可逆性",
   chapter: "2次元イジングモデル",
-  status: "境界候補・三主張への分割と形式化同期が必要",
-  entryIds: [vPlusFactorsInvertibleEntry.id],
+  status: "先頭二主張を分割・同期済み、残る一主張が境界候補",
+  entryIds: [v1PlusHalfInvertibleEntry.id, vTwoInvertibleEntry.id, vPlusFactorsInvertibleEntry.id],
   input: [
     "偶セクターの半指数行列、第二の転送行列 V_2、および偶セクター転送行列 V^{(+)} の定義",
     "有限複素行列の指数関数の逆行列公式",
     "可逆行列の積と非零スカラー倍の可逆性",
   ],
-  output: vPlusFactorsInvertibilityBoundaryCandidates.map(({ output }) => output),
+  output: [
+    "偶セクターの半指数行列が可逆であること",
+    "第二の転送行列 V_2 が可逆であること",
+    ...vPlusFactorsInvertibilityBoundaryCandidates.map(({ output }) => output),
+  ],
   boundaryCandidates: vPlusFactorsInvertibilityBoundaryCandidates,
   nextTickUnit: vPlusFactorsInvertibilityNextTickUnit,
   formalizationEvidence: {
     leanFiles: [vPlusFactorsInvertibilityLeanFile, vTwoInvertibilityLeanFile],
     sageMathFile: vPlusFactorsInvertibilitySageMathFile,
-    currentStatus: "現行本文の一主張は三つの可逆性を束ねる。Lean は半指数行列、V_2、V^{(+)} の可逆性を別の定理として持ち、SageMath も三つの逆行列積を別々の実検査行で確認する。",
+    currentStatus: "本文は半指数行列と V_2 の可逆性を独立主張へ分け、Lean の isUnit_V1halfPlus・isUnit_V2 と SageMath の各逆行列積検査へ新ラベルを同期した。V^{(+)} の可逆性は両主張を直接入力とする一主張として残る。",
   },
-  mainTheorems: vPlusFactorsInvertibilityBoundaryCandidates.map(({ output }) => output),
-  boundaryEvidence: "確定済みの正定値性・可逆性とトレース正値性の節に続く一項は、その節とは相互に依存せず、一般の指数行列の逆行列公式と可逆元の積を入力へ追加して、半指数行列、V_2、V^{(+)} の三つの可逆性を出力する。隣接する共役写像の線型性は本項を直接入力の一つに持ち、入力集合も共役写像の定義と添字集合へ切り替わる。しかし現行本文は三つの出力を一主張に束ね、Lean と SageMath は三対象を分離しているため、三つの境界候補として記録し、この時点では節境界を確定しない。",
-  readabilityStatus: "三つの可逆性はそれぞれ、指数行列の逆行列、正のスカラーと指数行列の積の逆行列、二つの可逆因子で挟んだ積の逆行列という別の推論である。一ブロック一主張にするには三分割と形式化ラベルの同期が必要なので、本文・Lean・SageMathは変更しない。次回は先頭二候補だけを分割・同期し、V^{(+)} の可逆性と直後の共役写像の線型性へは進まない。",
+  mainTheorems: [
+    "偶セクターの半指数行列が可逆であること",
+    "第二の転送行列 V_2 が可逆であること",
+  ],
+  boundaryEvidence: "確定済みの正定値性・可逆性とトレース正値性の節に続き、順64は指数行列の逆行列公式だけから半指数行列の可逆性を示す。順65は同じ公式と正のスカラー倍の可逆性から V_2 の可逆性を示す。順66はこの二主張を直接入力として V^{(+)} の可逆性へ進む。隣接する共役写像の線型性は順66を直接入力の一つに持ち、入力集合も共役写像の定義と添字集合へ切り替わる。今回は順64–65だけを分割・形式化同期し、順66は次回一項の境界候補として残す。",
+  readabilityStatus: "半指数行列と V_2 の可逆性は、一ブロック一主張としてそれぞれ指数行列の逆行列、正のスカラーと指数行列の積の逆行列だけを用いる形へ分離した。Lean と SageMath の対応も新ラベルへ同期済みで、対象二項は現行の説明粒度検査に合格する。V^{(+)} の可逆性と直後の共役写像の線型性には進まず、次回は V^{(+)} の可逆性一項だけをレビューする。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

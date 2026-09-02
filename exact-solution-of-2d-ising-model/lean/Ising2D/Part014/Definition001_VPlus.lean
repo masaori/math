@@ -2,7 +2,8 @@
 # 具体版: `V^{(+)}` と `T_{(V^{(+)})}` の定義
 
 対応する人手証明のラベル: **`def_H1_plus` / `def_V1_plus_square_root` /
-`V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` /
+`V1_plus_square_root_property` / `def_V_plus` / `V1_plus_half_invertible` /
+`V2_invertible` / `V_plus_factors_invertible` / `def_T_V_plus` /
 `T_V_plus_is_conjugation`**
 （`structured-latex/content/014_even_sector_T_action.ts` の
 `evensectorT_definition_H1_plus` から `evensectorT_claim_T_V_plus_is_conjugation` まで）
@@ -58,7 +59,7 @@ noncomputable def VPlusUnits (M : ℕ) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : �
 theorem VPlusUnits_val {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
     ((VPlusUnits M hs2 K1 K2star : (TensorPow M)ˣ) : TensorPow M) = VPlus M s2 K1 K2star := rfl
 
-/-- **原文 `V_plus_factors_invertible`**: `(V_1^{(+)})^{1/2}` は可逆。 -/
+/-- **原文 `V1_plus_half_invertible`**: `(V_1^{(+)})^{1/2}` は可逆。 -/
 theorem isUnit_V1halfPlus (K1 : ℂ) : IsUnit (V1half M K1 (-1)) := isUnit_V1half K1 (-1)
 
 /-- **原文 `V_plus_factors_invertible`**: `V^{(+)}` は可逆。 -/

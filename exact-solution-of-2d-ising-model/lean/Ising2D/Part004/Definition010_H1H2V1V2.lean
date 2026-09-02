@@ -218,6 +218,7 @@ noncomputable def V2Units (M : ℕ) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) : (
 theorem V2Units_val {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) :
     ((V2Units M hs2 K2star : (TensorPow M)ˣ) : TensorPow M) = V2 M s2 K2star := rfl
 
+/-- **原文 `V2_invertible`**: `V_2` は可逆。 -/
 theorem isUnit_V2 {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) : IsUnit (V2 M s2 K2star) :=
   ⟨V2Units M hs2 K2star, rfl⟩
 

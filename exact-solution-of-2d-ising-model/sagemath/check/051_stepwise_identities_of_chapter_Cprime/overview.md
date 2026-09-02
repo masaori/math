@@ -12,7 +12,8 @@
     `def_half_integer_modes` / `commutator_of_H_and_check_Z_Y` /
     `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y` / `H1_H2_via_check_Z_Y`
   - 014 章: `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` /
-    `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` /
+    `def_V_plus` / `V1_plus_half_invertible` / `V2_invertible` /
+    `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` /
     `nesting_of_commutator_of_H_and_check_Z` /
     `cosh_sinh_coefficient_conversion_for_check` / `extract_taylor_coefficient_of_check_Z_Y` /
     `T_actions_on_check_Z_Y` / `linearity_of_T_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` /
