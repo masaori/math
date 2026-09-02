@@ -2,7 +2,19 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 112 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 113 回目の tick 時点）
+
+**経路反転が接触対の全単射を誘導し切り替え可能性を保つことを一般の辺長で示した。** 接触対 $P=\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)$ を $\Psi_{\varphi}(P)=\{\iota(\varphi(\vec e)),\iota(\varphi(\vec f))\}$ へ写す対応が $\operatorname{Ct}(\varphi)$ から $\operatorname{Ct}(\mathcal T(\varphi))$ への全単射であり（逆写像は $\Psi_{\mathcal T(\varphi)}$）、接触対の個数 $N_{\mathrm{ct}}$ を保ち、各接触対の切り替え可能性を保つ（四不等式の判定 `claim_contact_pair_switchability_criterion` を両側へ適用すると同じ四条件になる）ことを示した（`claim_path_reversal_contact_pair_preservation`）。SageMath `path-reversal-contact-pair-preservation` は一辺二の非後退置換 $30{,}784$ 個・接触対 $470{,}336$ 件を全数検査した（実行 2 分 0 秒）。Lean 二版は未着手である。
+
+次 tick は、この接触対対応から置換側の三部分（接触の無い部分・回転差四の部分・残余）の経路反転での挙動を確定し（$N_{\mathrm{ct}}=0$ の保存は直ちに従う。標準接触対は $\preceq$ 最小元なので $\Psi_{\varphi}$ が標準対を標準対へ写すかは別に確かめる）、重み付き軌道族へまとめて選択補集合軌道との符号を保つ対応を構成する。
+
+前進前レビューでは、前 tick の符号別軌道分割を statement・proof・検算 overview・台帳で照合した。両対合の既証明を引く実質のある軌道分割であり、「何も言っていない主張」や記号・住処・参照・検算の不一致は無かった。
+
+並列の式変形統一は、姉妹側の「偶セクターの固有値」の Step 4 で、鎖の直後の参照（冪等行列のトレース `trace_of_idempotent` を引いた）を削り、それを実際に使う式変形行の行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変である。
+
+Lambda 側 check（933 ブロック・相互参照 $3{,}903$ 件すべて解決）・linkage（413 検算）・対象 SageMath（接触対 $470{,}336$ 件）・Lean $9{,}616$ ジョブ・`sorry` / `admit` 無し・PDF 405 ページを通した。姉妹側 check・linkage（118 検算）・PDF 360 ページも通した。新主張の Lean 二版は未着手であり、このセクションは四層完了とはしていない。
+
+## ひとつ前の到達点（2026-09-02 の 112 回目の tick 時点）
 
 **経路反転軌道と選択補集合軌道を符号別の有限集合として固定した。** 二つの符号保存対合が各符号集合を一元または二元の互いに素な軌道へ分け、単純通過辺集合が非空なら選択側の軌道は全て二元になることを一般の辺長で示した（`claim_path_reversal_selection_complement_orbits`）。SageMath は一辺二の符号別置換 $123{,}136$ 件と符号別選択 $4{,}096$ 件を全数検査した。Lean 二版は未着手である。
 
