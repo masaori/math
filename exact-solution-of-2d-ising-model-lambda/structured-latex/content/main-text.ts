@@ -53234,6 +53234,92 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_doubled_edge_free_fiber_phase_reduction",
+        labels: [],
+        title: { text: "反転対の無いファイバーの位相寄与の簡約" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_doubled_edge_free_fiber_phase_reduction",
+            beforeFocus: [],
+            focus: {
+              id: "kac_ward_claim_doubled_edge_free_fiber_phase_reduction",
+              kind: "claim",
+              title: { text: "反転対の無いファイバーでは位相反転部分集合が相殺する" },
+              labels: ["claim_doubled_edge_free_fiber_phase_reduction"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/doubled-edge-free-fiber-phase-reduction"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge2`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                  math(String.raw`E\subseteq E_L`), " は ", math(String.raw`\operatorname{Even}_L(E)`),
+                  "（", ref("def_even_edge_subset"), "）を満たすとする。このとき ",
+                  math(String.raw`\overline{\mathbb Q}`), " の等式",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal K^{a,b}_L(\varnothing,E)
+&=\sum_{\substack{\varphi\in\mathcal N_L(\varnothing,E)\\N_{\mathrm{ct}}(\varphi)=0}}
+\mathcal W^{a,b}_L(\varphi)
++\sum_{\varphi\in\mathcal N_L(\varnothing,E)\cap\mathcal A_L^{(-4)}}
+\mathcal W^{a,b}_L(\varphi)\\
+&\quad+\sum_{\varphi\in\mathcal N_L(\varnothing,E)\cap\mathcal A_L^{(4)}}
+\mathcal W^{a,b}_L(\varphi)
+\end{aligned}`),
+                paragraph([
+                  "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
+                  "、置換一つの位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                  "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
+                  "、回転差が正負四である二集合は ", ref("def_standard_turning_difference_subsets"),
+                  " で定めた。全て有限集合上の有限和であり、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`\varphi\in\mathcal N_L(\varnothing,E)`), " を取る。",
+                  math(String.raw`N_{\mathrm{ct}}(\varphi)=0`), " でなければ接触対を持つ。さらに ",
+                  math(String.raw`D(\varphi)=\varnothing`), " なので、",
+                  ref("claim_unswitchable_standard_pair_forces_doubled_edge"), " の対偶により標準接触対は切り替え可能であり、",
+                  math(String.raw`\varphi\in\mathcal A_L`), "（", ref("claim_standard_contact_smoothing_involution"),
+                  "）である。", ref("def_standard_turning_difference_subsets"), " により ",
+                  math(String.raw`\mathcal A_L`), " は ", math(String.raw`\mathcal B_L`),
+                  " と ", math(String.raw`\mathcal A_L^{(-4)}`), " と ",
+                  math(String.raw`\mathcal A_L^{(4)}`), " の互いに素な合併である。したがって ",
+                  math(String.raw`\mathcal N_L(\varnothing,E)`), " は、主張の右辺に現れる三集合と ",
+                  math(String.raw`\mathcal N_L(\varnothing,E)\cap\mathcal B_L`),
+                  " の互いに素な合併である。",
+                ]),
+                paragraph([
+                  ref("claim_phase_reversing_standard_smoothing_involution"), " により、標準対平滑化 ",
+                  math(String.raw`S`), " は ", math(String.raw`\mathcal B_L`),
+                  " 上の不動点の無い対合であり、各ファイバーを保ち、位相寄与の符号を反転する。ゆえに ",
+                  math(String.raw`\mathcal N_L(\varnothing,E)\cap\mathcal B_L`),
+                  " も ", math(String.raw`S`), " で保たれ、その元は二元軌道 ",
+                  math(String.raw`\{\varphi,S(\varphi)\}`), " に互いに素に分かれる。各二元軌道について",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\varphi)+\mathcal W^{a,b}_L(S(\varphi))
+&=\mathcal W^{a,b}_L(\varphi)-\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_phase_reversing_standard_smoothing_involution}\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "なので、この部分集合にわたる有限和は零である。", ref("def_fiber_phase_weight"),
+                  " の有限和を冒頭の互いに素な合併で分け、この零和を除けば主張の等式を得る。",
+                  "全過程は有限集合の分割と代数的数の有限加法だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_signed_selection_stratification",
         labels: [],
         title: { text: "符号付き偶部分グラフ多項式の平方の選択集合による層別" },
