@@ -50673,7 +50673,7 @@ Q^{a,b}_L
               kind: "claim",
               title: { text: "反転対を含まない非後退置換の台は偶部分グラフである" },
               labels: ["claim_reversal_free_moved_support_even"],
-              habitat: "N",
+              habitat: "Z",
               verification: ["sagemath/check/reversal-free-moved-support-even"],
               lean: [
                 "Ising2DLambda.KacWard.reversalFreeMovedSupport_even",
@@ -54813,6 +54813,83 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                   "を得る。これで ", ref("claim_fiber_phase_integer_decomposition"),
                   " の三つの符号付き数え上げと同じ形が選択和の側にも立ち、両者の同定は",
                   "有限集合の元の個数の比較に帰着する。全過程は有限集合の分割と整数の有限和だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_selection_complement_sign_preserving_involution",
+        labels: [],
+        title: { text: "選択補集合の符号保存対合" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_selection_complement_sign_preserving_involution",
+            beforeFocus: [],
+            focus: {
+              id: "kac_ward_claim_selection_complement_sign_preserving_involution",
+              kind: "claim",
+              title: { text: "単純通過辺の補集合は選択符号を保つ対合である" },
+              labels: ["claim_selection_complement_sign_preserving_involution"],
+              habitat: "N",
+              verification: ["sagemath/check/selection-complement-sign-preserving-involution"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+                  math(String.raw`D,E\subseteq E_L`), " は ", math(String.raw`\operatorname{Even}_L(E)`),
+                  "（", ref("def_even_edge_subset"), "）を満たすとする。写像",
+                ]),
+                displayMath(String.raw`\kappa_{D,E}:\mathcal C_L(D,E)\longrightarrow\mathcal C_L(D,E),\qquad
+\kappa_{D,E}(C):=E\setminus C`),
+                paragraph(["は対合であり、任意の ", math(String.raw`C\in\mathcal C_L(D,E)`), " について"]),
+                displayMath(String.raw`\vartheta^{a,b}_L\bigl(D,E;\kappa_{D,E}(C)\bigr)
+=\vartheta^{a,b}_L(D,E;C)`),
+                paragraph([
+                  "が成り立つ。したがって ", math(String.raw`\kappa_{D,E}`), " は二つの符号別選択集合 ",
+                  math(String.raw`\mathcal C^{+}_L(D,E;a,b)`), " と ", math(String.raw`\mathcal C^{-}_L(D,E;a,b)`),
+                  " をそれぞれ保つ。さらに ", math(String.raw`E\ne\varnothing`), " なら不動点を持たない。選択集合と符号指数は ",
+                  ref("claim_selection_sum_signed_count"), " で定めた。全て有限辺集合の差・等号と整数の有限演算だけで判定でき、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`C\in\mathcal C_L(D,E)`), " を取る。", ref("def_even_subgraph_pair_fiber"),
+                  " により ", math(String.raw`C\subseteq E`), " かつ ", math(String.raw`\operatorname{Even}_L(D\cup C)`),
+                  " である。さらに ", ref("claim_even_subgraph_pair_fiber_bijection"), " の逆写像により ",
+                  math(String.raw`\operatorname{Even}_L\bigl(D\cup(E\setminus C)\bigr)`), " である。したがって ",
+                  math(String.raw`E\setminus C\in\mathcal C_L(D,E)`), " であり、", math(String.raw`\kappa_{D,E}`),
+                  " は選択集合から自分自身への写像として定まる。",
+                ]),
+                paragraph(["補集合を二回取ると、"]),
+                displayMath(String.raw`\begin{aligned}
+\kappa_{D,E}\bigl(\kappa_{D,E}(C)\bigr)
+&=E\setminus(E\setminus C)
+&&\bigl(\because\ \kappa_{D,E}\text{ の定義}\bigr)\\
+&=C
+&&\bigl(\because\ C\subseteq E\text{ と有限集合の差の定義}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "なので対合である。符号指数では、", math(String.raw`C`), " を ", math(String.raw`E\setminus C`),
+                  " に替えると二つの偶部分グラフ ", math(String.raw`D\cup C`), " と ",
+                  math(String.raw`D\cup(E\setminus C)`), " が交換される。符号指数はこの二つに対する同じ三項の和なので、整数の加法の可換性により",
+                ]),
+                displayMath(String.raw`\vartheta^{a,b}_L\bigl(D,E;\kappa_{D,E}(C)\bigr)
+=\vartheta^{a,b}_L(D,E;C)
+\qquad\bigl(\because\ \blkref{claim_selection_sum_signed_count}\text{ の符号指数の定義と }\mathbb Z\text{ の加法の可換性}\bigr)`),
+                paragraph([
+                  "を得る。両辺を ", math(String.raw`(-1)`), " の指数に入れれば符号も等しいので、",
+                  math(String.raw`\kappa_{D,E}`), " は正符号集合と負符号集合をそれぞれ保つ。最後に ",
+                  math(String.raw`E\ne\varnothing`), " とし、もし ", math(String.raw`\kappa_{D,E}(C)=C`),
+                  " なら、", math(String.raw`e\in E`), " を一つ取る。", math(String.raw`e\in C`),
+                  " と ", math(String.raw`e\in E\setminus C`), " の一方だけが成り立つ一方、集合の等号から両者は同値となり矛盾する。よって不動点は無い。",
                 ]),
               ],
             },

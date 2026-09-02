@@ -816,8 +816,7 @@ n_\mu n_\nu
         " は ",
         math(String.raw`2^M`),
         " 次の単位行列なので、",
-        ref("trace_basic_properties"),
-        " (3) より ",
+        "トレースの基本性質より ",
         math(String.raw`\mathrm{tr}(I) = 2^M`),
         " である。",
         math(String.raw`k`),
@@ -832,7 +831,7 @@ n_\mu n_\nu
         String.raw`\begin{aligned}
 \mathrm{tr}(I)
 &= 2^M
-   \quad (\because \text{トレースの基本性質 (3)}) \\
+   \quad (\because \text{トレースの基本性質 (3)。}\blkref{trace_basic_properties}) \\
 &= 2^{M-0}
    \quad (\because M-0=M)
 \end{aligned}`,
@@ -878,15 +877,15 @@ n_\mu n_\nu
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(n_{\mu_1} P\right)
 &= \mathrm{tr}\!\left(\psi_{\mu_1}^\dagger \psi_{-\mu_1} P\right)
-   \quad (\because \text{フェルミオン数演算子 } n_{\mu_1} \text{ の定義}) \\
+   \quad (\because \text{フェルミオン数演算子 } n_{\mu_1} \text{ の定義。}\blkref{def_number_operator}) \\
 &= \mathrm{tr}\!\left(\psi_{-\mu_1} P\, \psi_{\mu_1}^\dagger\right)
-   \quad (\because \text{巡回性を } A = \psi_{\mu_1}^\dagger,\ B = \psi_{-\mu_1}P \text{ に適用}) \\
+   \quad (\because \text{巡回性を } A = \psi_{\mu_1}^\dagger,\ B = \psi_{-\mu_1}P \text{ に適用。}\blkref{trace_basic_properties}) \\
 &= \mathrm{tr}\!\left(P\, \psi_{-\mu_1}\psi_{\mu_1}^\dagger\right)
    \quad (\because \psi_{-\mu_1} \text{ と } P \text{ が可換}) \\
 &= \mathrm{tr}\!\left(P\,(I - n_{\mu_1})\right)
-   \quad (\because \text{数演算子の冪等性 (2)}) \\
+   \quad (\because \text{数演算子の冪等性 (2)。}\blkref{number_operator_idempotent}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}(P\,n_{\mu_1})
-   \quad (\because \text{トレースの線型性}) \\
+   \quad (\because \text{トレースの線型性。}\blkref{trace_basic_properties}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}(n_{\mu_1} P)
    \quad (\because n_{\mu_1} \text{ と } P \text{ が可換})
 \end{aligned}`,
@@ -957,6 +956,7 @@ n_\mu n_\nu
       status: "added",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
+        "2026-09-02 の式変形統一で、単位行列のトレース、数演算子の定義、トレースの巡回性・線型性、数演算子の関係を使う各式変形行の行末へ `\\blkref` を移した。内容・式変形・根拠・参照は変えていない。",
       ],
     },
   },

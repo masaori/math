@@ -2,7 +2,19 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 109 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 110 回目の tick 時点）
+
+**選択補集合が符号を保つ対合であることを示した。** $\kappa_{D,E}(C):=E\setminus C$ は選択集合 $\mathcal C_L(D,E)$ から自分自身への対合であり、選択符号指数 $\vartheta^{a,b}_L(D,E;C)$ を保つので、正符号・負符号の各選択集合をそれぞれ保つ。$E\ne\varnothing$ なら不動点を持たない（`claim_selection_complement_sign_preserving_involution`）。これにより、置換側の経路反転と比較する選択側の対称性が固定された。SageMath `selection-complement-sign-preserving-involution` は一辺二の全選択×四スピン構造 $4{,}096$ 件を全数検査した。Lean 二版は未着手である。
+
+次 tick は、経路反転が位相寄与の符号を保つことを既証明から合成し、経路反転軌道と選択補集合軌道の対応を構成する。
+
+前進前レビューでは、前 tick の選択和の符号付き数え上げ表示を statement・proof・定義・検算・後続の利用予定で照合した。整数への帰属を確定し、対応構成で直接使う符号別集合を与えているため空疎な四則ブロックには該当せず、記号・住処・参照・検算の不一致も無かった。
+
+並列の式変形統一は、姉妹側の「数演算子の積のトレース」（`trace_of_number_operator_product`）で、単位行列のトレース、数演算子の定義、トレースの巡回性・線型性、数演算子の関係を使う各式変形行の行末へ `\blkref` を移した。内容・式変形・根拠・参照は不変である。
+
+Lambda 側 check（927 ブロック）・linkage（410 検算）・対象 SageMath（全 $4{,}096$ 件）・Lean $9{,}616$ ジョブ・`sorry` / `admit` 無し・PDF 403 ページを通した。姉妹側 check・linkage（118 検算）・Lean $2{,}994$ ジョブ・`sorry` / `admit` 無し・PDF 359 ページも通した。新主張の Lean 二版は未着手であり、このセクションは四層完了とはしていない。
+
+## ひとつ前の到達点（2026-09-02 の 109 回目の tick 時点）
 
 **偶部分グラフ選択和を符号別の選択集合の元の個数の差として表示した。** 選択 $C\in\mathcal C_L(D,E)$ の符号指数 $\vartheta^{a,b}_L(D,E;C)\in\mathbb Z$（`def_signed_selection_sum` の被加数の指数）を明示し、選択集合を被加数の符号で $\mathcal C^{\pm}_L(D,E;a,b)$ へ二分して、$\mathcal U^{a,b}_L(D,E)=\lvert\mathcal C^{+}\rvert-\lvert\mathcal C^{-}\rvert$ を一般の $L$ で示した（`claim_selection_sum_signed_count`）。これで $\mathcal K=\mathcal U$ の同定は、置換側の三つの符号付き数え上げ（`claim_fiber_phase_integer_decomposition`）と選択側の個数差の比較に帰着した。SageMath `selection-sum-signed-count` は一辺二の互いに素な $(D,E)$（$E$ は偶部分グラフ）の全 $881$ 組×四スピン構造の $3{,}524$ 件を全数検査した（実行 6 秒）。Lean 二版は未着手である。
 
