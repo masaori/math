@@ -636,18 +636,13 @@ export default defineBlocks([
 &= \left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(J),\nu(I)}
 &&(\because \text{転置の定義}) \\
 &= \prod_{k=1}^{M}(A_k)_{j_ki_k}
-&&(\because \boxtimes \text{ の定義}) \\
+&&(\because \blkref{def_kronecker} \text{ のクロネッカー積の成分の定め方}) \\
 &= \prod_{k=1}^{M}\left(A_k^\top\right)_{i_kj_k}
 &&(\because 2 \text{ 次の行列の転置の定義}) \\
 &= \left(A_1^\top\boxtimes\cdots\boxtimes A_M^\top\right)_{\nu(I),\nu(J)}
-&&(\because \boxtimes \text{ の定義})
+&&(\because \blkref{def_kronecker} \text{ のクロネッカー積の成分の定め方})
 \end{aligned}`,
       ),
-      paragraph([
-        "第 2 の等号と第 4 の等号で ",
-        ref("def_kronecker"),
-        " のクロネッカー積の成分の定め方を引いた。",
-      ]),
       paragraph([
         math(String.raw`\nu`),
         " は ",
