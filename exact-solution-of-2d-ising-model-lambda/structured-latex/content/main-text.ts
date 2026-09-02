@@ -54901,6 +54901,110 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_path_reversal_phase_preservation",
+        labels: [],
+        title: { text: "経路反転の位相寄与の保存" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_path_reversal_phase_preservation",
+            beforeFocus: [],
+            focus: {
+              id: "kac_ward_claim_path_reversal_phase_preservation",
+              kind: "claim",
+              title: { text: "経路反転は位相寄与を保つ" },
+              labels: ["claim_path_reversal_phase_preservation"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/path-reversal-phase-preservation"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、",
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                  "（", ref("def_nonbacktracking_permutations"), "）を取る。このとき ",
+                  math(String.raw`\overline{\mathbb Q}`), " の等式",
+                ]),
+                displayMath(String.raw`\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
+=\mathcal W^{a,b}_L(\varphi)`),
+                paragraph([
+                  "が成り立つ。したがって、", math(String.raw`D\cap E=\varnothing`), " かつ ",
+                  math(String.raw`\operatorname{Even}_L(E)`), "（", ref("def_even_edge_subset"),
+                  "）を満たす任意の辺集合 ", math(String.raw`D,E\subseteq E_L`),
+                  " について、経路反転 ", math(String.raw`\mathcal T`), " は二つの有限集合",
+                ]),
+                displayMath(String.raw`\bigl\{\,\varphi\in\mathcal N_L(D,E)\ \bigm|\ \mathcal W^{a,b}_L(\varphi)=1\,\bigr\},\qquad
+\bigl\{\,\varphi\in\mathcal N_L(D,E)\ \bigm|\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}`),
+                paragraph([
+                  "をそれぞれ自分自身へ写す対合である。位相寄与は ",
+                  ref("def_nonbacktracking_permutation_phase_contribution"),
+                  "、経路反転は ", ref("def_permutation_path_reversal"),
+                  "、ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
+                  " で定めた。位相寄与の二つの値は ", ref("claim_phase_contribution_sign_value"),
+                  " により尽くされている。全て有限集合上の有限積と代数的数の四則だけで判定でき、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず回転位相の冪 ", math(String.raw`\zeta_8^{-\Theta(\varphi)}`),
+                  "（一歩回転数の総和は ", ref("def_permutation_total_turning"),
+                  "）が ", math(String.raw`\{-1,1\}`), " に属することを示す。",
+                  ref("claim_phase_contribution_signed_rotation_power"), " により ",
+                  math(String.raw`\mathcal W^{a,b}_L(\varphi)\ne0`), " なので、求めたい冪から始める。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\zeta_8^{-\Theta(\varphi)}
+&=\mathcal W^{a,b}_L(\varphi)^{-1}\cdot
+\Bigl(\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}\Bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の逆元と結合則。}\mathcal W^{a,b}_L(\varphi)\ne0\text{ は }\blkref{claim_phase_contribution_signed_rotation_power}\bigr)\\
+&=\mathcal W^{a,b}_L(\varphi)\cdot
+\Bigl(\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}\Bigr)
+&&\bigl(\because\ \mathcal W^{a,b}_L(\varphi)\in\{-1,1\}\text{（}\blkref{claim_phase_contribution_sign_value}\text{）と }1^{-1}=1,\ (-1)^{-1}=-1\bigr)
+\end{aligned}`),
+                paragraph([
+                  "右辺は ", math(String.raw`\{-1,1\}`), " の元（",
+                  ref("claim_phase_contribution_sign_value"), "）と ",
+                  math(String.raw`\{-1,1\}`), " の元（",
+                  ref("claim_phase_contribution_signed_rotation_power"),
+                  "）の積であり、", math(String.raw`\{-1,1\}`),
+                  " は積で閉じるので、", math(String.raw`\zeta_8^{-\Theta(\varphi)}\in\{-1,1\}`),
+                  " である。次に求めたい位相寄与から始める。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
+&=\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_path_reversal_phase_conjugation}\bigr)\\
+&=\bigl(\zeta_8^{-\Theta(\varphi)}\bigr)^2\,\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の指数法則}\bigr)\\
+&=1\cdot\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \zeta_8^{-\Theta(\varphi)}\in\{-1,1\}\text{（上で示した）と }1^2=1,\ (-1)^2=1\bigr)\\
+&=\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の単位元}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "最後に対合の主張を示す。", math(String.raw`D,E`), " を主張のとおり取る。",
+                  ref("claim_path_reversal_fiber_preserving_involution"), " により ",
+                  math(String.raw`\mathcal T`), " はファイバー ", math(String.raw`\mathcal N_L(D,E)`),
+                  " から自分自身への全単射であり、二回適用すると恒等写像である。上で示した位相寄与の保存により、",
+                  math(String.raw`\mathcal W^{a,b}_L(\varphi)=1`), " なら ",
+                  math(String.raw`\mathcal W^{a,b}_L(\mathcal T(\varphi))=1`), "、",
+                  math(String.raw`\mathcal W^{a,b}_L(\varphi)=-1`), " なら ",
+                  math(String.raw`\mathcal W^{a,b}_L(\mathcal T(\varphi))=-1`),
+                  " である。したがって ", math(String.raw`\mathcal T`),
+                  " は主張の二つの部分集合をそれぞれ自分自身へ写し、その各々の上で対合である。",
+                  "全過程は有限集合上の写像の合成と ", math(String.raw`\overline{\mathbb Q}`),
+                  " の四則だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },

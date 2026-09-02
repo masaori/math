@@ -1275,12 +1275,11 @@ Q_\epsilon
         String.raw`\begin{aligned}
 \dim_{\mathbb{C}}\mathrm{im}\,Q_\epsilon
 &= \mathrm{tr}(Q_\epsilon)
-   \quad (\because \text{冪等行列のトレースは像の次元。} Q_\epsilon \text{ は Step 1 より冪等}) \\
+   \quad (\because \text{冪等行列のトレースは像の次元（}\blkref{trace_of_idempotent}\text{）。} Q_\epsilon \text{ は Step 1 より冪等}) \\
 &= 2^{M-m}
    \quad (\because \text{上で計算した } \mathrm{tr}(Q_\epsilon))
 \end{aligned}`,
       ),
-      paragraph([ref("trace_of_idempotent"), " を引いた。"]),
       paragraph([
         "Step 5（(5) の証明）。(2) より任意の ",
         math(String.raw`x \in \mathbb{C}^{2^M}`),
