@@ -8,9 +8,11 @@
 
 これは位相和の整数性へ向けた道具である。次 tick は、経路反転が位相寄与の回転位相の指数を反転すること（動く辺の一歩の回転数の総和 $T(\varphi)$ を使い $\mathcal W^{a,b}_L(\mathcal T(\varphi))=\zeta_8^{-2T(\varphi)}\,\mathcal W^{a,b}_L(\varphi)$。ねじれ符号は向きに依らないので保存され、軌道数も保存される）を示し、ファイバー位相和 $\mathcal K^{a,b}_L(D,E)$ が $\mathbb Z+\mathbb Z(\zeta_8-\zeta_8^3)$（$\zeta_8-\zeta_8^3$ は $\sqrt2$ の代数的表示）に落ちることを導く。
 
-前進前レビューでは、前 tick が拡張した回転差二部分の相等の statement・proof・検算 overview・台帳を照合し、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。並列の式変形統一は締切のため見送った。
+前進前レビューでは、前 tick が拡張した回転差二部分の相等の statement・proof・検算 overview・台帳を照合し、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
 
-Lambda 側 check（909 ブロック）・linkage（403 検算）・対象 SageMath（全数 $30{,}784$）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 394 ページを通した。
+並列の式変形統一は、姉妹側の「$\gamma_1,\gamma_2$ の周期性と共役添字」（`periodicity_of_check_fermi`）で、共役添字の三本の鎖の後ろに置いていた二件の参照一覧（`conjugate_index_of_check_Z_Y`・`def_gamma1_gamma2_of_theta`）を削り、それらを実際に使う各行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変である。
+
+Lambda 側 check（909 ブロック）・linkage（403 検算）・対象 SageMath（全数 $30{,}784$）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 394 ページを通した。姉妹側 check・linkage（118 検算）・PDF 359 ページも通した。
 
 ## ひとつ前の到達点（2026-09-02 の 102 回目の tick 時点）
 

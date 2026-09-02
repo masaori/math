@@ -414,7 +414,7 @@ e^{i(t+2k\pi)}
         String.raw`\begin{aligned}
 \gamma_2(\tilde\theta_{M+1-\mu})
 &= \gamma_2\!\left(\left(-\tilde\theta_\mu\right) + 2\pi\right)
-   \quad (\because \text{共役添字の運動量}) \\
+   \quad (\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1)) \\
 &= \gamma_2(-\tilde\theta_\mu)
    \quad (\because \text{本ブロックの (1)}\ (k=1))
 \end{aligned}`,
@@ -423,7 +423,7 @@ e^{i(t+2k\pi)}
         String.raw`\begin{aligned}
 -\tilde\theta_{M+1-\mu}
 &= -(2\pi-\tilde\theta_\mu)
-   \quad (\because \text{共役添字の運動量}) \\
+   \quad (\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1)) \\
 &= -2\pi+\tilde\theta_\mu
    \quad (\because \mathbb{R}\text{ の分配則}) \\
 &= \tilde\theta_\mu+2(-1)\pi
@@ -435,20 +435,13 @@ e^{i(t+2k\pi)}
    \quad (\because \text{本ブロック }(1)),\\[4pt]
 \gamma_1(\tilde\theta_{M+1-\mu})
 &= \gamma_1((-\tilde\theta_\mu)+2\pi)
-   \quad (\because \text{共役添字の運動量}) \\
+   \quad (\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1)) \\
 &= \gamma_1(-\tilde\theta_\mu)
    \quad (\because \text{本ブロック }(1)) \\
 &= \gamma_1(\tilde\theta_\mu)
-   \quad (\because \cos(-t)=\cos t\text{ と }\gamma_1\text{ の定義})
+   \quad (\because \cos(-t)=\cos t\text{ と }\blkref{def_gamma1_gamma2_of_theta}\text{ の }\gamma_1\text{ の定義})
 \end{aligned}`,
       ),
-      paragraph([
-        "上の鎖では ",
-        ref("conjugate_index_of_check_Z_Y"),
-        "、",
-        ref("def_gamma1_gamma2_of_theta"),
-        " を引いた。",
-      ]),
       paragraph([
         ref("def_check_index_set"),
         " (2) より ",
