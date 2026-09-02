@@ -95,7 +95,6 @@ const CA_TERM_CORRESPONDENCE: readonly TermCorrespondenceEntry[] = [
   { body: "局所表現", identifiers: ["local_"] },
   { body: "真理値表", identifiers: ["truth_table"] },
   { body: "大域写像", identifiers: ["global_map"] },
-  { body: "時間発展", identifiers: ["time_", "_time"] },
   { body: "時刻", identifiers: ["time_", "_time"] },
   { body: "配位", identifiers: ["configuration"] },
   { body: "一点反転", identifiers: ["flip"] },
@@ -320,6 +319,42 @@ for (const entry of CA_TERM_CORRESPONDENCE) {
         `CA 固有語の識別子の対応語が CA 章の実識別子で使われていない: ${entry.body}（${identifier}）`,
       );
     }
+  }
+}
+
+/**
+ * CA 固有語の本文語を CA 章の実際の本文へ一語ずつ突き合わせる。
+ *
+ * 識別子の軸は前 tick で実識別子へ突き合わせるようにしたが、本文の軸には同じ穴が残っていた。
+ * 実測で `大域写像`（CA 章の本文 35 箇所で使う語）を `大城写像` と綴り替えても検査は 0 件で通り、
+ * 数学的道具立て章がその語を書けるようになることを確認した。綴り違いは本文の軸の役目を静かに
+ * 消すのに、どの検査にも現れない。
+ *
+ * 実際 `時間発展` は本文にも節の記述にも一度も現れておらず、本文の軸で何も検査していなかった
+ * （CA 章が時間の軸に使う語は `時刻` で、識別子の対応語 `time_` / `_time` も `時刻` が供給する）。
+ * 対応表の語は将来のための予約語ではなく現在の分類境界を検査する語なので、この一件は削除した。
+ * CA 章が新たにその語を使い始めた時点で対応表へ戻す。
+ *
+ * 既存物理由来語には同じ要求をしない。あちらは「本文に現れないこと」を要求する禁止語であり、
+ * 使用箇所を要求すると規律が反転する。
+ */
+const caBodyCorpus: string[] = [];
+for (const file of files) {
+  if (!file.file.startsWith(CA_CHAPTER_PREFIX)) continue;
+  for (const block of file.blocks) {
+    if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
+    caBodyCorpus.push(normalizedTextOf(block));
+  }
+}
+for (const chapter of documentOrganization) {
+  if (String(chapter.id) !== "binary_cellular_automaton_semantics") continue;
+  for (const section of chapter.sections) {
+    caBodyCorpus.push(normalizedTextOf([section.title, section.input, section.output, section.main]));
+  }
+}
+for (const entry of CA_TERM_CORRESPONDENCE) {
+  if (!caBodyCorpus.some((text) => text.includes(entry.body))) {
+    violations.push(`CA 固有語の本文語が CA 章の本文で使われていない: ${entry.body}`);
   }
 }
 if (toolBlockIds.size === 0) {
