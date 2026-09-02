@@ -54731,6 +54731,99 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_selection_sum_signed_count",
+        labels: [],
+        title: { text: "選択和の符号付き数え上げ表示" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_selection_sum_signed_count",
+            beforeFocus: [],
+            focus: {
+              id: "kac_ward_claim_selection_sum_signed_count",
+              kind: "claim",
+              title: { text: "選択和は二つの選択集合の元の個数の差である" },
+              labels: ["claim_selection_sum_signed_count"],
+              habitat: "Z",
+              verification: ["sagemath/check/selection-sum-signed-count"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+                  math(String.raw`D,E\subseteq E_L`), " は ",
+                  math(String.raw`\operatorname{Even}_L(E)`),
+                  "（", ref("def_even_edge_subset"), "）を満たすとする。選択 ",
+                  math(String.raw`C\in\mathcal C_L(D,E)`),
+                  "（", ref("def_even_subgraph_pair_fiber"), "）の符号指数を",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\vartheta^{a,b}_L(D,E;C)
+&:=(1+a)\varepsilon_{L,\mathrm h}(D\cup C)+(1+b)\varepsilon_{L,\mathrm v}(D\cup C)
++\varepsilon_{L,\mathrm h}(D\cup C)\varepsilon_{L,\mathrm v}(D\cup C)\\
+&\quad+(1+a)\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))+(1+b)\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))\\
+&\quad+\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))
+\ \in\ \mathbb Z
+\end{aligned}`),
+                paragraph([
+                  "と書き（", ref("def_signed_selection_sum"),
+                  " の被加数の指数そのものである。巻き付き偶奇は ",
+                  ref("def_torus_winding_parities"), "）、有限集合",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal C^{+}_L(D,E;a,b)
+&:=\bigl\{\,C\in\mathcal C_L(D,E)\ \bigm|\ (-1)^{\vartheta^{a,b}_L(D,E;C)}=1\,\bigr\},\\
+\mathcal C^{-}_L(D,E;a,b)
+&:=\bigl\{\,C\in\mathcal C_L(D,E)\ \bigm|\ (-1)^{\vartheta^{a,b}_L(D,E;C)}=-1\,\bigr\}
+\end{aligned}`),
+                paragraph(["を定める。このとき ", math(String.raw`\mathbb Z`), " の等式"]),
+                displayMath(String.raw`\mathcal U^{a,b}_L(D,E)
+=\bigl\lvert\mathcal C^{+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal C^{-}_L(D,E;a,b)\bigr\rvert`),
+                paragraph([
+                  "が成り立つ。選択和は ", ref("def_signed_selection_sum"),
+                  " で定めた。右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`C\in\mathcal C_L(D,E)`), " を取る。",
+                  ref("def_torus_winding_parities"), " により四つの巻き付き偶奇は ",
+                  math(String.raw`\{0,1\}\subset\mathbb N`), " に属するので、",
+                  math(String.raw`\vartheta^{a,b}_L(D,E;C)`), " は整数の有限和と有限積として ",
+                  math(String.raw`\mathbb Z`), " に属し、",
+                  math(String.raw`(-1)^{\vartheta^{a,b}_L(D,E;C)}\in\{-1,1\}`),
+                  " である。したがって ", math(String.raw`\mathcal C_L(D,E)`), " は ",
+                  math(String.raw`\mathcal C^{+}_L(D,E;a,b)`), " と ",
+                  math(String.raw`\mathcal C^{-}_L(D,E;a,b)`),
+                  " の互いに素な合併である。この非交和で有限和を分けると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal U^{a,b}_L(D,E)
+&=\sum_{C\in\mathcal C_L(D,E)}(-1)^{\vartheta^{a,b}_L(D,E;C)}
+&&\bigl(\because\ \blkref{def_signed_selection_sum}\text{ と指数の略記}\bigr)\\
+&=\sum_{C\in\mathcal C^{+}_L(D,E;a,b)}1
++\sum_{C\in\mathcal C^{-}_L(D,E;a,b)}(-1)
+&&\bigl(\because\ \text{上の非交和と二集合の定義}\bigr)\\
+&=\bigl\lvert\mathcal C^{+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal C^{-}_L(D,E;a,b)\bigr\rvert
+&&\bigl(\because\ \text{有限集合上の定数和と }\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "を得る。これで ", ref("claim_fiber_phase_integer_decomposition"),
+                  " の三つの符号付き数え上げと同じ形が選択和の側にも立ち、両者の同定は",
+                  "有限集合の元の個数の比較に帰着する。全過程は有限集合の分割と整数の有限和だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },

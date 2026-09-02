@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 108 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 109 回目の tick 時点）
+
+**偶部分グラフ選択和を符号別の選択集合の元の個数の差として表示した。** 選択 $C\in\mathcal C_L(D,E)$ の符号指数 $\vartheta^{a,b}_L(D,E;C)\in\mathbb Z$（`def_signed_selection_sum` の被加数の指数）を明示し、選択集合を被加数の符号で $\mathcal C^{\pm}_L(D,E;a,b)$ へ二分して、$\mathcal U^{a,b}_L(D,E)=\lvert\mathcal C^{+}\rvert-\lvert\mathcal C^{-}\rvert$ を一般の $L$ で示した（`claim_selection_sum_signed_count`）。これで $\mathcal K=\mathcal U$ の同定は、置換側の三つの符号付き数え上げ（`claim_fiber_phase_integer_decomposition`）と選択側の個数差の比較に帰着した。SageMath `selection-sum-signed-count` は一辺二の互いに素な $(D,E)$（$E$ は偶部分グラフ）の全 $881$ 組×四スピン構造の $3{,}524$ 件を全数検査した（実行 6 秒）。Lean 二版は未着手である。
+
+次段の「符号を保つ対応の構成」は一 tick に収まらないため、まず選択和側を置換側と同じ符号付き数え上げの形へ揃える一論法へ割り出した。次 tick は置換側の三つの符号付き数え上げと選択側の符号別選択集合の間の符号を保つ対応の構成に着手する。
+
+前進前レビューでは、前 tick のファイバー位相和の三つの符号付き数え上げへの分解を statement・proof・参照先・検算 overview・台帳で照合した。主張は住処の確定と後続の同定で直接使う実質を持ち、「何も言っていない主張」や不一致は無かった。
+
+Lambda 側 check（925 ブロック・相互参照 $3{,}862$ 件すべて解決）・linkage（409 検算）・対象 SageMath・Lean $9{,}616$ ジョブ・`sorry` / `admit` 無し・PDF 402 ページを通した。
+
+## ひとつ前の到達点（2026-09-02 の 108 回目の tick 時点）
 
 **ファイバー位相和を三つの整数の符号付き数え上げへ分解した。** 位相反転部分の零和と回転差 $-4,+4$ の部分和の相等を既証明から合成し、接触の無い部分、回転差 $4$ の部分の二倍、残余の各正負符号数の差として $\mathcal K^{a,b}_L(D,E)\in\mathbb Z$ を一般の $L$ で示した（`claim_fiber_phase_integer_decomposition`）。SageMath `fiber-phase-integer-decomposition` は一辺二の全 $609$ ファイバー×四スピン構造の $2{,}436$ 組を全数検査した。Lean 二版は未着手である。
 
