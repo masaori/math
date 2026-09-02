@@ -642,4 +642,28 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_selection_even_subgraph_action_character_swap_rule",
+    targets: [
+      "claim_selection_even_subgraph_action_character",
+      "claim_selection_sum_character_evaluation",
+    ],
+    title: { text: "局所変更の交換形だけでは候補を一意に選べない（一辺二の全数観察）" },
+    body: [
+      paragraph([
+        "単一の偶部分グラフでは覆えない一辺 ", math(String.raw`L=2`), " の ",
+        math(String.raw`16`), " ファイバーで、局所変更の交換形と置換ごとの候補数を調べた",
+        "（sagemath/check/even-subgraph-orbit-swap-rule）。一頂点で二本の後続遷移が変わる ",
+        math(String.raw`2{,}816`), " 本は、すべて二本の元の後続を交換する。二頂点で二本ずつ変わる ",
+        math(String.raw`1{,}792`), " 本は、各頂点の新しい後続対が他方の元の後続対に丸ごと一致する",
+        "交差交換ではない。すべての候補で、各頂点の新しい後続対は自身の元の後続を一本と",
+        "他方の元の後続を一本含む。候補元となる置換 ", math(String.raw`2{,}624`),
+        " 個のうち、候補が一本だけのものは ", math(String.raw`640`), " 個、二本あるものは ",
+        math(String.raw`1{,}984`), " 個だった。一頂点交換の候補数も零本・一本・二本に分かれる。",
+        "従って局所形だけでは置換ごとの候補を一意に選べない。次は二頂点変更で交換される",
+        "一本ずつを区別する配置と、二候補の間を分ける規則を調べる。検算は有限集合と有限写像の",
+        "等号だけで完結し、浮動小数点は使わない。",
+      ]),
+    ],
+  },
 ]);

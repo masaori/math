@@ -1918,15 +1918,12 @@ P^{(\pm)}X
     ],
     proof: [
       paragraph([
-        ref("V1_restriction_to_eigenspaces"),
-        " は、",
-        ref("def_end_iso"),
-        " の同一視のもとで",
+        "固有空間上では、",
       ]),
       displayMath(
         String.raw`\left(V_1\right)\big|_{\mathcal{F}^{(\pm)}}
 = \left(V_1^{(\pm)}\right)\big|_{\mathcal{F}^{(\pm)}}
-\quad (\because \text{固有空間上での }V_1\text{ の制限})`,
+\quad (\because \blkref{V1_restriction_to_eigenspaces}\ \text{と }\blkref{def_end_iso}\ \text{の同一視})`,
       ),
       paragraph([
         "すなわち任意の ",
@@ -1939,8 +1936,7 @@ P^{(\pm)}X
 \quad (\because \left.V_1\right|_{\mathcal{F}^{(\pm)}}=\left.V_1^{(\pm)}\right|_{\mathcal{F}^{(\pm)}})`,
       ),
       paragraph([
-        ref("epsilon_projector_properties"),
-        " (4) より、任意の ",
+        "任意の ",
         math(String.raw`x \in \mathcal{F}`),
         " について ",
         math(String.raw`P^{(\pm)}x \in \mathrm{im}\,P^{(\pm)} = \mathcal{F}^{(\pm)}`),
@@ -1952,7 +1948,7 @@ P^{(\pm)}X
 &=V_1\left(P^{(\pm)}x\right)
   \quad (\because \text{行列積の作用})\\
 &=V_1^{(\pm)}\left(P^{(\pm)}x\right)
-  \quad (\because P^{(\pm)}x\in\mathcal{F}^{(\pm)}\text{ と上の制限の等式})\\
+  \quad (\because \blkref{epsilon_projector_properties}\ \text{と上の制限の等式})\\
 &=\left(V_1^{(\pm)}P^{(\pm)}\right)x
   \quad (\because \text{行列積の作用})
 \end{aligned}`,
