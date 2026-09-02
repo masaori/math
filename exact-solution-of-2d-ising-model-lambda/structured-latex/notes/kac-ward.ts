@@ -358,6 +358,35 @@ export default defineNotes([
     ],
   },
   {
+    id: "note_kac_ward_selection_sum_affine_character",
+    targets: ["def_signed_selection_sum", "claim_selection_sum_signed_count"],
+    title: { text: "選択集合は偶部分グラフの作用による文字和として扱える" },
+    body: [
+      paragraph([
+        "互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " が ",
+        math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。",
+        "選択集合 ", math(String.raw`\mathcal C_L(D,E)`), " が空でなければ、",
+        math(String.raw`E`), " に含まれる偶部分グラフ ", math(String.raw`H`),
+        " は対称差 ", math(String.raw`C\mapsto C\mathbin\triangle H`),
+        " によりこの選択集合へ単純推移的に作用する。この作用による選択符号の指数差は",
+      ]),
+      displayMath(String.raw`\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)-\vartheta^{a,b}_L(D,E;C)
+\equiv \varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(H)
++\varepsilon_{L,\mathrm v}(E)\varepsilon_{L,\mathrm h}(H)\pmod 2`),
+      paragraph([
+        "であり、右辺は ", math(String.raw`H`), " の文字である。選択集合が空なら選択和は零である。",
+        "空でない場合、この文字が非自明なら選択和は零、",
+        "自明なら全ての選択が同じ符号を持ち、選択和はその符号と選択集合の元数の積になる。",
+        "一辺二の全ファイバーで、単純推移性・指数差・二場合の和を検査する",
+        "（sagemath/check/selection-sum-affine-character）。これは選択和を三分類と独立な一つの文字和へまとめ、",
+        "ファイバー位相和全体と直接比較する一般証明の部品になる。検算は有限集合、",
+        math(String.raw`\mathbb F_2`), " の算術、", math(String.raw`\mathbb Z`),
+        " の有限和だけで完結し、浮動小数点は使わない。一般の ", math(String.raw`L`),
+        " に対する記述と Lean 二版は未着手である。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges_same_support_aggregation",
     targets: ["claim_fully_unswitchable_contacts_witness_doubled_edges"],
     title: { text: "台固定の集約でも三分類の部分和は消えない（全分解の実現は成立）" },

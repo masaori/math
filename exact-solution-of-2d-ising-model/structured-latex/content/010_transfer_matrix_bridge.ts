@@ -1557,11 +1557,7 @@ P^{(\pm)} f
     proof: [
       paragraph([
         math(String.raw`G^{(\pm)}:=Y_1 Z_2+Y_2 Z_3+\cdots+Y_{M-1}Z_M\mp Y_MZ_1`),
-        " とおく。次の計算では ",
-        ref("def_V1_pm"),
-        " と ",
-        ref("theorem_exp_product"),
-        " を用いる。",
+        " とおく。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1580,6 +1576,7 @@ P^{(\pm)} f
       status: "added",
       notes: [
         "平方根として用いる半指数行列の定義と、その二乗が V_1^{(\pm)} になる主張を 1 ブロック 1 主張に従って分離した。",
+        "式変形の書き方の統一（2026-09-03）: 計算前の参照一覧を削り、既に各式変形行の行末にある \\blkref だけを残した。内容・式変形・根拠・参照は不変である。",
       ],
     },
   },
