@@ -534,29 +534,24 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       displayMath(
         String.raw`\begin{aligned}
 {\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+} &= 0
-   \quad (\because \text{$\check\psi$ の反交換関係の第 1 式}), \\
+   \quad (\because \text{$\check\psi$ の反交換関係の第 1 式。}\blkref{anticommutator_of_check_psi}), \\
 {\left[\check\psi_\mu^\dagger, \check\psi_{M+1-\nu}\right]_+}
   &= \delta_{M+1-\nu,\,M+1-\mu}\,I
-   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式}) \\
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式。}\blkref{anticommutator_of_check_psi}) \\
   &= 0
    \quad (\because \text{直前の }\delta\text{ の計算 }\delta_{M+1-\nu,\,M+1-\mu}=0), \\
 {\left[\check\psi_{M+1-\mu}, \check\psi_\nu^\dagger\right]_+}
   &= \delta_{M+1-\mu,\,M+1-\nu}\,I
-   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式を } (\nu, M+1-\mu) \text{ へ適用し、反交換子の対称性}) \\
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式を添字 } (\nu, M+1-\mu) \text{ へ適用し、}
+     \text{反交換子が引数の順序に依らないこと } [X,W]_+ = XW + WX = [W,X]_+\text{。}\blkref{anticommutator_of_check_psi}) \\
   &= 0
    \quad (\because \text{直前の }\delta\text{ の計算と }\delta_{M+1-\mu,\,M+1-\nu}=\delta_{M+1-\nu,\,M+1-\mu}\text{（対の条件の対称性）}), \\
 {\left[\check\psi_{M+1-\mu}, \check\psi_{M+1-\nu}\right]_+} &= 0
-   \quad (\because \text{$\check\psi$ の反交換関係の第 3 式})
+   \quad (\because \text{$\check\psi$ の反交換関係の第 3 式。}\blkref{anticommutator_of_check_psi})
 \end{aligned}`,
       ),
       paragraph([
-        "（第 3 式では ",
-        ref("anticommutator_of_check_psi"),
-        " の第 2 式を添字 ",
-        math(String.raw`(\nu, M+1-\mu)`),
-        " に適用し、反交換子が引数の順序に依らないこと ",
-        math(String.raw`[X,W]_+ = XW + WX = [W,X]_+`),
-        " を使った。）すなわち、",
+        "すなわち、",
         math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M+1-\mu}\}`),
         " と ",
         math(String.raw`B \in \{\check\psi_\nu^\dagger, \check\psi_{M+1-\nu}\}`),
