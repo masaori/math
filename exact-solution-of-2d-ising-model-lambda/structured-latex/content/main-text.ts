@@ -53358,6 +53358,303 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_fiber_phase_weight_real_quadratic_integrality",
+        labels: [],
+        title: { text: "ファイバー位相和の実二次整数への所属" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_fiber_phase_weight_real_quadratic_integrality",
+            beforeFocus: [
+              {
+                role: "supportingClaim",
+                element: {
+                  id: "kac_ward_claim_phase_contribution_signed_rotation_power",
+                  kind: "claim",
+                  title: { text: "位相寄与は符号と回転位相冪の積である" },
+                  labels: ["claim_phase_contribution_signed_rotation_power"],
+                  habitat: "Qbar",
+                  verification: ["sagemath/check/fiber-phase-weight-real-quadratic-integrality"],
+                  statement: [
+                    paragraph([
+                      "任意の ", math(String.raw`(a,b)\in\mathcal S`),
+                      "（", ref("def_spin_structures"), "）と ",
+                      math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                      "（", ref("def_nonbacktracking_permutations"), "）について、",
+                    ]),
+                    displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}
+\in\{-1,1\}`),
+                    paragraph([
+                      "が成り立つ。位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                      "、一歩回転数の総和は ", ref("def_permutation_total_turning"),
+                      " で定めた。", math(String.raw`\zeta_8^4=-1`), " から ",
+                      math(String.raw`\zeta_8\ne0`), " なので、負の指数の冪は体 ",
+                      math(String.raw`\overline{\mathbb Q}`), " の逆元により定まる。",
+                      "とくに ", math(String.raw`\mathcal W^{a,b}_L(\varphi)\ne0`), " である。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "位相寄与を回転位相の冪へ書き直す。求めたい積から始めると",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\varphi)
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}\right)
+&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)\\
+&=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\prod_{C\in\mathcal C(\varphi)}\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換性と結合性で }-1\text{ の因子をまとめた}\bigr)\\
+&=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\prod_{\vec g\in M(\varphi)}M^{a,b}_{\vec g,\varphi(\vec g)}
+&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ の非交和による有限積の分割}\bigr)\\
+&=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\prod_{\vec g\in M(\varphi)}\varepsilon_{a,b}\bigl(\varphi(\vec g)\bigr)\,
+\zeta_8^{\,\tau(\vec g,\varphi(\vec g))}
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices},\ \blkref{claim_rotation_phase_as_turning_power}\text{（}\vec g\in M(\varphi)\text{ なら }\varphi(\vec g)\in\operatorname{Next}(\vec g)\text{）}\bigr)\\
+&=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\left(\prod_{\vec g\in M(\varphi)}\varepsilon_{a,b}\bigl(\varphi(\vec g)\bigr)\right)
+\zeta_8^{\,\Theta(\varphi)}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の並べ替えと指数法則、}\blkref{def_permutation_total_turning}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "である。両辺に ", math(String.raw`\zeta_8^{-\Theta(\varphi)}`),
+                      " を掛けると（", math(String.raw`\zeta_8^4=-1`), " から ",
+                      math(String.raw`\zeta_8\ne0`), " なので逆元は存在する）、",
+                    ]),
+                    displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}
+=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\prod_{\vec g\in M(\varphi)}\varepsilon_{a,b}\bigl(\varphi(\vec g)\bigr)
+\qquad\bigl(\because\ \overline{\mathbb Q}\text{ の逆元と指数法則}\bigr)`),
+                    paragraph([
+                      "右辺は ", math(String.raw`(-1)^{\lvert\mathcal C(\varphi)\rvert}\in\{-1,1\}`),
+                      " と、", ref("def_spin_structures"), " による ",
+                      math(String.raw`\varepsilon_{a,b}(\varphi(\vec g))\in\{-1,1\}`),
+                      " の有限個の積である。", math(String.raw`\{-1,1\}`),
+                      " は整数の積で閉じるので、右辺は ", math(String.raw`\{-1,1\}`),
+                      " に属する。とくに零でないから ",
+                      math(String.raw`\mathcal W^{a,b}_L(\varphi)\ne0`),
+                      " である。全過程は有限集合上の有限積と ",
+                      math(String.raw`\overline{\mathbb Q}`),
+                      " の四則だけで閉じ、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_fiber_phase_weight_real_quadratic_integrality",
+              kind: "claim",
+              title: { text: "ファイバー位相和は実二次整数の格子に属する" },
+              labels: ["claim_fiber_phase_weight_real_quadratic_integrality"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/fiber-phase-weight-real-quadratic-integrality"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                  math(String.raw`D,E\subseteq E_L`), " は ",
+                  math(String.raw`D\cap E=\varnothing`), " かつ ",
+                  math(String.raw`\operatorname{Even}_L(E)`),
+                  "（", ref("def_even_edge_subset"), "）を満たすとする。このとき、ある整数 ",
+                  math(String.raw`u,v\in\mathbb Z`), " が存在して、",
+                  math(String.raw`\overline{\mathbb Q}`), " の等式",
+                ]),
+                displayMath(String.raw`\mathcal K^{a,b}_L(D,E)=u+v\,(\zeta_8-\zeta_8^3)`),
+                paragraph([
+                  "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
+                  "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
+                  " で定めた。全過程は有限集合上の有限和と代数的数の四則だけで閉じ、",
+                  "実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "準備として ", math(String.raw`\zeta_8`), " の冪の関係を確定する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\zeta_8^{8}
+&=\bigl(\zeta_8^{4}\bigr)^{2}
+&&\bigl(\because\ \text{指数法則 }y^{8}=(y^{4})^{2}\bigr)\\
+&=(-1)^{2}
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の約束 }\zeta_8^{4}=-1\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積 }(-1)\cdot(-1)=1\bigr)
+\end{aligned}`),
+                paragraph([
+                  "同じ約束 ", math(String.raw`\zeta_8^{4}=-1`), " と指数法則から ",
+                  math(String.raw`\zeta_8^{5}=-\zeta_8`), "、",
+                  math(String.raw`\zeta_8^{6}=-\zeta_8^{2}`), "、",
+                  math(String.raw`\zeta_8^{7}=-\zeta_8^{3}`), " である。また ",
+                  math(String.raw`\zeta_8^{2}\ne1`), " である（もし ",
+                  math(String.raw`\zeta_8^{2}=1`), " なら両辺を二乗して ",
+                  math(String.raw`\zeta_8^{4}=1`), " となるが、",
+                  math(String.raw`\zeta_8^{4}=-1`), " と体 ",
+                  math(String.raw`\overline{\mathbb Q}`), " の標数が ",
+                  math(String.raw`0`), " であることから ",
+                  math(String.raw`1\ne-1`), " なので矛盾する）。同様に ",
+                  math(String.raw`\zeta_8^{2}\ne-1`), " である（もし ",
+                  math(String.raw`\zeta_8^{2}=-1`), " なら両辺を二乗して ",
+                  math(String.raw`\zeta_8^{4}=1`), " となり同じ矛盾に至る）。",
+                ]),
+                paragraph([
+                  "経路反転 ", math(String.raw`\mathcal T`),
+                  "（", ref("def_permutation_path_reversal"), "）は ",
+                  ref("claim_path_reversal_fiber_preserving_involution"), " により、ファイバー ",
+                  math(String.raw`\mathcal N_L(D,E)`),
+                  "（", ref("def_nonbacktracking_permutation_fiber"),
+                  "）からそれ自身への全単射であり、二回適用すると元に戻る。不動点の集合を",
+                ]),
+                displayMath(String.raw`F:=\bigl\{\varphi\in\mathcal N_L(D,E)\ \bigm|\ \mathcal T(\varphi)=\varphi\bigr\}`),
+                paragraph([
+                  "と置く。", math(String.raw`\varphi\in\mathcal N_L(D,E)\setminus F`),
+                  " に対し二元集合 ", math(String.raw`\{\varphi,\mathcal T(\varphi)\}`),
+                  " を対応させる。", math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi\ne\mathcal T(\varphi)`),
+                  " なので ", math(String.raw`\mathcal T(\varphi)\notin F`),
+                  " であり、この二元集合は ", math(String.raw`\mathcal N_L(D,E)\setminus F`),
+                  " に含まれる。二つのこの形の集合が交われば、対合性により一致する（共有元 ",
+                  math(String.raw`\psi`), " から他方の元は ", math(String.raw`\mathcal T(\psi)`),
+                  " として定まるため）。したがって ",
+                  math(String.raw`\mathcal N_L(D,E)\setminus F`),
+                  " はこの形の二元集合の非交和であり、その族を ", math(String.raw`\mathcal P`),
+                  " と置く。有限和を非交和で分割すると",
+                ]),
+                displayMath(String.raw`\mathcal K^{a,b}_L(D,E)
+=\sum_{\varphi\in F}\mathcal W^{a,b}_L(\varphi)
++\sum_{P\in\mathcal P}\ \sum_{\varphi\in P}\mathcal W^{a,b}_L(\varphi)
+\qquad\bigl(\because\ \blkref{def_fiber_phase_weight},\ \blkref{def_nonbacktracking_permutation_phase_contribution}\text{ と有限和の非交和分割}\bigr)`),
+                paragraph([
+                  "不動点の加数を見る。", math(String.raw`\varphi\in F`), " を取り、",
+                  math(String.raw`s:=\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}`),
+                  " と置くと、", ref("claim_phase_contribution_signed_rotation_power"),
+                  " により ", math(String.raw`s\in\{-1,1\}`), " であり、両辺に ",
+                  math(String.raw`\zeta_8^{\Theta(\varphi)}`), " を掛けて ",
+                  math(String.raw`\mathcal W^{a,b}_L(\varphi)=s\,\zeta_8^{\Theta(\varphi)}`),
+                  " である。", math(String.raw`\mathcal T(\varphi)=\varphi`), " なので",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+s\,\zeta_8^{\Theta(\varphi)}
+&=\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
+&&\bigl(\because\ \mathcal T(\varphi)=\varphi\text{ と上の表示}\bigr)\\
+&=\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_path_reversal_phase_conjugation}\bigr)\\
+&=s\,\zeta_8^{-\Theta(\varphi)}
+&&\bigl(\because\ \text{上の表示と指数法則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "両辺に ", math(String.raw`s\,\zeta_8^{\Theta(\varphi)}`),
+                  " を掛けると、", math(String.raw`s^{2}=1`), " と指数法則から ",
+                  math(String.raw`\zeta_8^{2\Theta(\varphi)}=1`),
+                  " である。整数の除法で ",
+                  math(String.raw`\Theta(\varphi)=4q+r`), "（",
+                  math(String.raw`q\in\mathbb Z`), "、",
+                  math(String.raw`r\in\{0,1,2,3\}`), "）と書くと",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+1=\zeta_8^{2\Theta(\varphi)}
+&=\bigl(\zeta_8^{8}\bigr)^{q}\,\zeta_8^{2r}
+&&\bigl(\because\ \text{指数法則 }2\Theta(\varphi)=8q+2r\bigr)\\
+&=\zeta_8^{2r}
+&&\bigl(\because\ \text{準備の }\zeta_8^{8}=1\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。", math(String.raw`r=1`), " なら ",
+                  math(String.raw`\zeta_8^{2}=1`), " となり準備に矛盾、",
+                  math(String.raw`r=2`), " なら ", math(String.raw`\zeta_8^{4}=1`),
+                  " となり ", math(String.raw`\zeta_8^{4}=-1`), " と ",
+                  math(String.raw`1\ne-1`), " に矛盾、",
+                  math(String.raw`r=3`), " なら ",
+                  math(String.raw`\zeta_8^{6}=-\zeta_8^{2}=1`), " すなわち ",
+                  math(String.raw`\zeta_8^{2}=-1`), " となり準備に矛盾する。よって ",
+                  math(String.raw`r=0`), " であり、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\varphi)
+&=s\,\zeta_8^{4q}
+&&\bigl(\because\ \Theta(\varphi)=4q\text{ と上の表示}\bigr)\\
+&=s\,(-1)^{q}
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の約束 }\zeta_8^{4}=-1\text{ と指数法則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。したがって不動点の加数は ",
+                  math(String.raw`\{-1,1\}\subset\mathbb Z`), " に属する。",
+                ]),
+                paragraph([
+                  "二元軌道の加数を見る。", math(String.raw`P=\{\varphi,\mathcal T(\varphi)\}\in\mathcal P`),
+                  " を取り、上と同様に ",
+                  math(String.raw`s:=\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}\in\{-1,1\}`),
+                  "（", ref("claim_phase_contribution_signed_rotation_power"), "）と置く。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{\psi\in P}\mathcal W^{a,b}_L(\psi)
+&=\mathcal W^{a,b}_L(\varphi)+\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
+&&\bigl(\because\ P\text{ の二元の列挙}\bigr)\\
+&=s\,\zeta_8^{\Theta(\varphi)}+\zeta_8^{-2\Theta(\varphi)}\,s\,\zeta_8^{\Theta(\varphi)}
+&&\bigl(\because\ \text{上の表示と }\blkref{claim_path_reversal_phase_conjugation}\bigr)\\
+&=s\,\bigl(\zeta_8^{\Theta(\varphi)}+\zeta_8^{-\Theta(\varphi)}\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配則と指数法則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "整数の除法で ", math(String.raw`\Theta(\varphi)=8q'+r'`), "（",
+                  math(String.raw`q'\in\mathbb Z`), "、",
+                  math(String.raw`r'\in\{0,1,\ldots,7\}`), "）と書くと、準備の ",
+                  math(String.raw`\zeta_8^{8}=1`), " と指数法則から ",
+                  math(String.raw`\zeta_8^{\Theta(\varphi)}=\zeta_8^{r'}`), " かつ ",
+                  math(String.raw`\zeta_8^{-\Theta(\varphi)}=\zeta_8^{8-r'}\cdot\bigl(\zeta_8^{8}\bigr)^{-q'-1}=\zeta_8^{8-r'}`),
+                  " である。八つの場合を、準備の ",
+                  math(String.raw`\zeta_8^{5}=-\zeta_8`), "、",
+                  math(String.raw`\zeta_8^{6}=-\zeta_8^{2}`), "、",
+                  math(String.raw`\zeta_8^{7}=-\zeta_8^{3}`), "、",
+                  math(String.raw`\zeta_8^{8}=1`), " で順に評価する。",
+                ]),
+                displayMath(String.raw`\zeta_8^{r'}+\zeta_8^{8-r'}=
+\begin{cases}
+1+1=2,&r'=0,\\
+\zeta_8+(-\zeta_8^{3})=\zeta_8-\zeta_8^{3},&r'=1,\\
+\zeta_8^{2}+(-\zeta_8^{2})=0,&r'=2,\\
+\zeta_8^{3}+(-\zeta_8)=-(\zeta_8-\zeta_8^{3}),&r'=3,\\
+(-1)+(-1)=-2,&r'=4,\\
+(-\zeta_8)+\zeta_8^{3}=-(\zeta_8-\zeta_8^{3}),&r'=5,\\
+(-\zeta_8^{2})+\zeta_8^{2}=0,&r'=6,\\
+(-\zeta_8^{3})+\zeta_8=\zeta_8-\zeta_8^{3},&r'=7
+\end{cases}
+\qquad\bigl(\because\ \text{準備の冪の関係と }\overline{\mathbb Q}\text{ の加法}\bigr)`),
+                paragraph([
+                  "どの場合も ", math(String.raw`\zeta_8^{r'}+\zeta_8^{8-r'}`),
+                  " は ", math(String.raw`u_P+v_P\,(\zeta_8-\zeta_8^{3})`),
+                  "（", math(String.raw`u_P\in\{-2,0,2\}`), "、",
+                  math(String.raw`v_P\in\{-1,0,1\}`),
+                  "）の形である。", math(String.raw`s\in\{-1,1\}`),
+                  " を掛けても同じ形に留まる（", math(String.raw`\overline{\mathbb Q}`),
+                  " の分配則と整数の積）。",
+                ]),
+                paragraph([
+                  "最後に合成する。不動点の加数は整数、二元軌道の加数は ",
+                  math(String.raw`u_P+v_P\,(\zeta_8-\zeta_8^{3})`),
+                  "（", math(String.raw`u_P,v_P\in\mathbb Z`),
+                  "）の形なので、", math(String.raw`\overline{\mathbb Q}`),
+                  " の分配則で ", math(String.raw`\zeta_8-\zeta_8^{3}`),
+                  " の係数をまとめると、整数の有限和 ",
+                  math(String.raw`u,v\in\mathbb Z`), " により",
+                ]),
+                displayMath(String.raw`\mathcal K^{a,b}_L(D,E)=u+v\,(\zeta_8-\zeta_8^{3})
+\qquad\bigl(\because\ \text{非交和分割の和と }\overline{\mathbb Q}\text{ の分配則、整数の有限和は整数}\bigr)`),
+                paragraph([
+                  "が成り立つ。全過程は有限集合の分割、整数の除法と有限和、",
+                  math(String.raw`\overline{\mathbb Q}`),
+                  " の四則だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_contact_pair_switchability_criterion",
         labels: [],
         title: { text: "接触対の切り替え可能性の局所判定" },

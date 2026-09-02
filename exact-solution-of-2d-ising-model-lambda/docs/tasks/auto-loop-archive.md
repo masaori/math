@@ -1,5 +1,19 @@
 # 自動ループ 記録の保管庫
 
+## 2026-09-02 の 105 回目の tick で台帳から移した記録（2026-09-02 の 100 回目）
+
+- 現在地: 一辺 $L=2$ の全非後退置換を反転対の辺集合 $D$ と単純通過の辺集合 $E$ で層別し、全 $609$ ファイバーと四つのスピン構造、合計 $2{,}436$ 件で $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ を $\mathbb Q(\zeta_8)$ と $\mathbb Z$ の厳密計算で確認した（`kac-ward-fiber-signed-selection-equality`）。一般の $L$ の証明ではなく、構成すべきファイバーごとの符号付き数え上げの目標を固定した。
+- 前進記録: 置換ファイバー位相和と偶部分グラフ選択和の一辺二での添字ごとの一致を厳密観察で固定した。
+- 式変形の統一: 姉妹側の「複素数の平方根の極座標表示」（`sqrt_expansion_via_polar`）で、代表元によらないことと $r\ne0$・$r=0$ の場合の三つの参照一覧を削り、定義・射影・角度切断・非負平方根・直交座標写像を実際に使う各行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変だった。
+- レビュー記録: 前 tick の相殺不可能性の不採用ノートと `unlocked-residual-phase-noncancellation` を、置換 $17{,}925$ 個の選択規則検査・ファイバー別の非零位相和・全ファイバー比較と照合し、「何も言っていない主張」や不一致は無いと判断した。
+
+## 2026-09-02 の 105 回目の tick で台帳から移した記録（2026-09-02 の 99 回目）
+
+- 現在地: 切り替え可能な接触対を持つ残余は符号反転対合で相殺できないことを確定し、選択規則の探索を打ち切った。$L=2$ の $\mathbb Q(\zeta_8)$ の厳密和は、この部分が空でないファイバー×スピン構造 $1{,}288$ 組中 $380$ 組で非零、残余 $\mathcal R_L$ 全体でも $1{,}028$ 組で非零だった。辞書式最小の切り替え可能対での平滑化も両立しない。不採用ノート（`note_kac_ward_claim_doubled_edge_fiber_phase_reduction_unlocked_residual_noncancellation`）と検算 `unlocked-residual-phase-noncancellation` へ固定した。
+- 前進記録: 切り替え可能な接触対を持つ残余の相殺不可能性を不採用ノートと SageMath で固定した。本文の主張は変えなかった。
+- 式変形の統一: 姉妹側の「$\mathbb C$ の逆数の $\arg$」（`range_of_args_of_reciprocal_of_complex_numbers`）で、証明中の三つの参照一覧を各根拠行の行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変だった。
+- レビュー記録: 前 tick の `def_fully_unswitchable_residual_subset`・`claim_fully_unswitchable_contacts_witness_doubled_edges` を本文・残余分類の全数検算・相殺不可能性の検算と照合し、「何も言っていない主張」や不一致は無いと判断した。
+
 ## 2026-09-02 の 103 回目の tick で台帳から移した記録（2026-09-02 の 98 回目）
 
 - 現在地: 全接触対が切り替え不能な残余の集合 $\mathcal R_L^{\mathrm{lock}}$ を定義し（`def_fully_unswitchable_residual_subset`）、その各接触対の少なくとも一方の台の辺が反転対の辺集合 $D(\varphi)$ に属することを示した（`claim_fully_unswitchable_contacts_witness_doubled_edges`）。SageMath は $L=2$ の残余 $18{,}755$ 個を、別の切り替え可能な接触対を持つ $17{,}925$ 個と完全に切り替え不能な $830$ 個へ分類し、後者の接触対 $5{,}216$ 件で反転対の辺の存在を検査した。Lean は未着手だった。

@@ -2,7 +2,27 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 104 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 105 回目の tick 時点）
+
+**ファイバー位相和が実二次整数の格子 $\mathbb Z+\mathbb Z(\zeta_8-\zeta_8^3)$ に属することを一般の $L$ で証明した。** まず位相寄与が符号と回転位相冪の積であること
+
+$$
+\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}\in\{-1,1\}
+$$
+
+を補題として示した（`claim_phase_contribution_signed_rotation_power`。とくに $\mathcal W\ne0$）。次に経路反転 $\mathcal T$ のファイバー保存対合性と位相共役 $\mathcal W(\mathcal T(\varphi))=\zeta_8^{-2\Theta(\varphi)}\mathcal W(\varphi)$ を使い、ファイバー $\mathcal N_L(D,E)$ を不動点集合と二元軌道の非交和へ分割した。不動点では $\zeta_8^{2\Theta}=1$ から $4\mid\Theta$ となって寄与は $\{-1,1\}\subset\mathbb Z$、二元軌道の対和は $s(\zeta_8^{r}+\zeta_8^{8-r})$（$s\in\{-1,1\}$、$r\in\{0,\dots,7\}$）の八場合の評価で $\{\pm2,0,\pm(\zeta_8-\zeta_8^3)\}$ に落ちる。合成して $\mathcal K^{a,b}_L(D,E)=u+v(\zeta_8-\zeta_8^3)$（$u,v\in\mathbb Z$）を得た（`claim_fiber_phase_weight_real_quadratic_integrality`）。
+
+SageMath 検算 `fiber-phase-weight-real-quadratic-integrality` は一辺 $L=2$ で、符号付き冪を非後退置換 $30{,}784$ 個×四スピン構造の全 $123{,}136$ 件、格子所属を全 $609$ ファイバー×四スピン構造の $2{,}436$ 組で検査した（実行 61 秒）。観察として、一辺二では $\zeta_8-\zeta_8^3$ の係数が全組で零、すなわちファイバー位相和はすべて有理整数だった（一般の $L$ では未証明。overview に記録）。
+
+次 tick は、接触の無い部分と残余の位相和を一般の $L$ で整数値の符号付き数え上げとして構成し、「接触の無い部分 $+\,2\times$ 回転差 $4$ の部分 $+$ 残余 $=\mathcal U^{a,b}_L(D,E)$」と平方恒等式への合成へ進む。
+
+前進前レビューでは、前 tick の位相共役の主張・証明・検算を照合した。軌道の全単射・添字の付け替え・ねじれ符号の不変性の根拠はいずれも実在の参照で支えられ、「何も言っていない主張」や仮定・記号・住処・参照・検算の不一致は無かった。
+
+Lambda 側 check（915 ブロック・相互参照 3,814 件すべて解決）・linkage（405 検算）・対象 SageMath（全数）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 399 ページを通した。新二主張の Lean 二版は未着手であり、このセクションは四層完了とはしていない。
+
+並列の式変形統一は、この tick の記録を末尾へ足す（下記）。
+
+## ひとつ前の到達点（2026-09-02 の 104 回目の tick 時点）
 
 **経路反転が位相寄与の回転位相指数を反転することを一般の $L$ で示した。** 動く辺上の一歩回転数の総和 $\Theta(\varphi)$ を定義し（`def_permutation_total_turning`）、経路反転が各置換軌道 $C$ を反転辺からなる逆順の軌道 $\iota(C)$ へ写すこと、切断線のねじれ符号を保つこと、一歩回転数を反転することを有限積で合成して
 
