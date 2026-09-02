@@ -33,13 +33,48 @@ def check_root():
     return os.path.normpath(os.path.join(here, '..', 'check'))
 
 
-def collect_files():
-    root = check_root()
+class CollectionError(Exception):
+    """検算ファイルの収集が、掃引の対象を取りこぼしうる状態で行われたことを表す。"""
+
+
+def collect_files(root=None):
+    # 収集は fail-closed に行う。os.walk は既定で走査中のエラーを黙って捨て、
+    # symlink になったディレクトリへは降りない。さらにファイルの symlink は
+    # 検算木の外側を実行対象へ混入させる。取りこぼしや対象のすり替えを許さないため、
+    # 収集の段階で例外にする。0 本の収集も同じ理由で失敗とする。
+    if root is None:
+        root = check_root()
+    if os.path.islink(root):
+        raise CollectionError('検算の根 {} が symlink である'.format(root))
+    if not os.path.isdir(root):
+        raise CollectionError('検算の根 {} がディレクトリとして存在しない'.format(root))
+
+    def on_walk_error(error):
+        raise CollectionError('検算の走査が {} で失敗した: {}'.format(
+            getattr(error, 'filename', root), error))
+
     out = []
-    for dirpath, _dirnames, filenames in os.walk(root):
+    for dirpath, dirnames, filenames in os.walk(root, onerror=on_walk_error):
+        for name in sorted(dirnames):
+            path = os.path.join(dirpath, name)
+            if os.path.islink(path):
+                raise CollectionError(
+                    '{} は symlink のディレクトリで、走査が降りないまま読み飛ばされる'.format(
+                        os.path.relpath(path, root)))
         for name in sorted(filenames):
             if name.endswith('.sage'):
-                out.append(os.path.join(dirpath, name))
+                path = os.path.join(dirpath, name)
+                if os.path.islink(path):
+                    raise CollectionError(
+                        '{} は symlink の検算ファイルである'.format(
+                            os.path.relpath(path, root)))
+                if not os.path.isfile(path):
+                    raise CollectionError(
+                        '{} は通常の検算ファイルではない'.format(
+                            os.path.relpath(path, root)))
+                out.append(path)
+    if not out:
+        raise CollectionError('検算ファイルが一本も収集できなかった（掃引が空振りしている）')
     out.sort()
     return out
 
@@ -128,6 +163,10 @@ def worker_main(args):
 
 
 def summarize_results(files, outdir, jobs, codes, timeout):
+    # 対象が空の掃引は、全件成功と区別が付かないまま成功として通ってしまう。
+    if not files:
+        print('EMPTY SWEEP: 検算ファイルが一本も無い', flush=True)
+        return False
     records = []
     malformed = []
     for w in range(jobs):
@@ -235,7 +274,11 @@ def summarize_results(files, outdir, jobs, codes, timeout):
 
 
 def driver_main(args):
-    files = collect_files()
+    try:
+        files = collect_files()
+    except CollectionError as error:
+        print('COLLECTION FAILED: {}'.format(error), flush=True)
+        raise SystemExit(1)
     outdir = os.path.abspath(args.outdir)
     os.makedirs(outdir, exist_ok=True)
     list_path = os.path.join(outdir, 'files.txt')
