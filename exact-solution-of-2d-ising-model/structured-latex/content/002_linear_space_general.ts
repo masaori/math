@@ -2088,48 +2088,42 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
       displayMath(String.raw`\begin{aligned}
 \|AW\|
 &=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|(AW)_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
-&&(\because\ \text{ノルムの定義})\\
+&&(\because\ \text{ノルムの定義。}\blkref{def_matrix_norm})\\
 &=\sqrt{\sum_{i=1}^{n}\left|(AW)_{i1}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
-&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1）なので第 2 列以降は平方和に寄与しない})\\
+&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1。}\blkref{matrix_norm_triangle_inequality}\text{）なので第 2 列以降は平方和に寄与しない})\\
 &=\sqrt{\sum_{i=1}^{n}\left|(Aw)_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&(\because\ \text{上の第 1 列の成分の等式})\\
 &=\|Aw\|
-&&(\because\ \text{ノルムの定義})
+&&(\because\ \text{ノルムの定義。}\blkref{def_matrix_norm})
 \end{aligned}`),
       paragraph([
-        "（第 2 の等号で ",
-        ref("matrix_norm_triangle_inequality"),
-        " の Step 1、第 1・第 4 の等号で ",
-        ref("def_matrix_norm"),
-        " を引いた）、および",
+        "、および",
       ]),
       displayMath(String.raw`\begin{aligned}
 \|W\|
 &=\sqrt{\sum_{i=1}^{n}\sum_{j=1}^{n}\left|W_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
-&&(\because\ \text{ノルムの定義})\\
+&&(\because\ \text{ノルムの定義。}\blkref{def_matrix_norm})\\
 &=\sqrt{\sum_{i=1}^{n}\left|W_{i1}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
-&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1）なので第 2 列以降は平方和に寄与しない})\\
+&&(\because\ |0|=0\ \text{（ノルムの基本性質の Step 1。}\blkref{matrix_norm_triangle_inequality}\text{）なので第 2 列以降は平方和に寄与しない})\\
 &=\sqrt{\sum_{i=1}^{n}\left|w_i\right|^2}^{\,(\mathbb{R}_{\ge 0})}
 &&(\because\ W\ \text{の第 1 列の定め方})\\
 &=\|w\|
-&&(\because\ \text{ノルムの定義})
+&&(\because\ \text{ノルムの定義。}\blkref{def_matrix_norm})
 \end{aligned}`),
       paragraph([
-        "（引いたブロックは 1 つ前の式と同じである）を得る。したがって",
+        "を得る。したがって",
       ]),
       displayMath(String.raw`\begin{aligned}
 \|Aw\|
 &=\|AW\|
 &&(\because\ \text{上の第 1 の等式})\\
 &\le\|A\|\cdot\|W\|
-&&(\because\ \text{行列ノルムの劣乗法性})\\
+&&(\because\ \text{行列ノルムの劣乗法性。}\blkref{matrix_norm_submultiplicativity})\\
 &=\|A\|\cdot\|w\|
 &&(\because\ \text{上の第 2 の等式})
 \end{aligned}`),
       paragraph([
-        "である（不等号で ",
-        ref("matrix_norm_submultiplicativity"),
-        " を引いた）。",
+        "である。",
       ]),
     ],
     conversion: {
@@ -2146,6 +2140,9 @@ W_{ij} := 0 \quad (1\le i\le n,\ 2\le j\le n)`,
           "(∵ …) には引いたブロックの題を書き、ラベル参照は式の直後に置いた。" +
           "段は増えており、減った段は無い（‖W‖=‖w‖ の側はもとが 2 つの等号を 1 行に並べていたので" +
           "4 段へ開いた）。主張も証明の筋も変えていない。",
+        "2026-09-02: 三つの鎖の直後に置いていた参照一覧（ノルムの定義・ノルムの基本性質の Step 1・" +
+          "劣乗法性）を削り、それらを実際に使う各行末の (∵ …) の \\blkref へ移した" +
+          "（blkref が使えるようになったため）。内容・式変形・根拠・参照は不変である。",
       ],
     },
   },
