@@ -1789,7 +1789,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 \frac{\theta}{2}-n\pi
 &= \frac{\theta'+2k\pi}{2}-(n'+k)\pi
-&&(\because\ \theta=\theta'+2k\pi\ \text{と}\ n=n'+k)\\
+&&(\because\ \theta=\theta'+2k\pi\ \text{（}\blkref{angle_equivalence_class}\text{）と}\ n=n'+k\ \text{（}\blkref{angle_section_existence_uniqueness}\text{）})\\
 &= \frac{\theta'}{2}+k\pi-(n'+k)\pi
 &&(\because\ \mathbb{R}\ \text{の分配律})\\
 &= \frac{\theta'}{2}+k\pi-n'\pi-k\pi
@@ -1802,12 +1802,6 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         "であり、第 1 成分も ",
         math(String.raw`\sqrt{r}^{\,\mathbb{R}_{\ge 0}}=\sqrt{r'}^{\,\mathbb{R}_{\ge 0}}`),
         " で一致するから、両者は同じ対であり同じ同値類を定める。いずれの場合も右辺は代表元によらない。",
-        ref("polar_equivalence_class"),
-        "、",
-        ref("angle_equivalence_class"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        " を引いた。",
       ]),
       paragraph([
         "ここから先は ",
@@ -1822,25 +1816,19 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 \sqrt{z}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left(\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))\right)\right)\right]_{\sim}\right)
-&&(\because\ \mathbb{C}\ \text{の}\ \sqrt{\cdot}\ \text{の定義})\\
+&&(\because\ \mathbb{C}\ \text{の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{def_sqrt_cc})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left(\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))\right)\right)\right]_{\sim}\right)
-&&(\because\ \text{第1座標, 第2座標 の}\ \operatorname{pr}_1\ \text{と}\ \phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim})\\
+&&(\because\ \text{第1座標, 第2座標 の}\ \operatorname{pr}_1\ \text{と}\ \phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}\text{。}\blkref{first_and_second_projections})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([\theta]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
-&&(\because\ \text{第1座標, 第2座標 の}\ \operatorname{pr}_2\ \text{の}\ r\ne0\ \text{の場合})\\
+&&(\because\ \text{第1座標, 第2座標 の}\ \operatorname{pr}_2\ \text{の}\ r\ne0\ \text{の場合。}\blkref{first_and_second_projections})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}(\theta-2n\pi)\right)\right]_{\sim}\right)
-&&(\because\ \text{準備の第一})\\
+&&(\because\ \text{準備の第一。}\blkref{angle_section_existence_uniqueness})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
 &&(\because\ \mathbb{R}\ \text{の分配律})
 \end{aligned}`,
       ),
       paragraph([
         "であり、これは主張の右辺そのものである。",
-        ref("def_sqrt_cc"),
-        "、",
-        ref("first_and_second_projections"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        " を引いた。",
       ]),
       paragraph([
         math(String.raw`r=0`),
@@ -1850,17 +1838,17 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 \sqrt{z}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{\operatorname{pr}_1(\phi_{\mathrm{polar}}(z))}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left(\operatorname{pr}_2(\phi_{\mathrm{polar}}(z))\right)\right)\right]_{\sim}\right)
-&&(\because\ \mathbb{C}\ \text{の}\ \sqrt{\cdot}\ \text{の定義})\\
+&&(\because\ \mathbb{C}\ \text{の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{def_sqrt_cc})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{0}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
-&&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合})\\
+&&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合。}\blkref{first_and_second_projections})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)\right)\right]_{\sim}\right)
-&&(\because\ \text{準備の第二})\\
+&&(\because\ \text{準備の第二。}\blkref{definition_of_sqrt_r_positive})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{1}{2}\cdot 0\right)\right]_{\sim}\right)
 &&(\because\ 0\le 0-2\cdot0\cdot\pi<2\pi\ \text{と準備の第一})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[(0,0)\right]_{\sim}\right)
 &&(\because\ \mathbb{R}\ \text{で}\ a\cdot 0=0)\\
 &= (0\cdot\cos 0,\ 0\cdot\sin 0)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (0,0)=0_{\mathbb{C}}
 &&(\because\ \mathbb{R}\ \text{で}\ 0\cdot a=0)
 \end{aligned}`,
@@ -1872,9 +1860,9 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{0}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
 &&(\because\ r=0\ \text{という、この場合の条件})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(0,\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
-&&(\because\ \text{準備の第二})\\
+&&(\because\ \text{準備の第二。}\blkref{definition_of_sqrt_r_positive})\\
 &= \left(0\cdot\cos\!\left(\tfrac{\theta}{2}-n\pi\right),\ 0\cdot\sin\!\left(\tfrac{\theta}{2}-n\pi\right)\right)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (0,0)=0_{\mathbb{C}}
 &&(\because\ \mathbb{R}\ \text{で}\ 0\cdot a=0)
 \end{aligned}`,
@@ -1887,14 +1875,6 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         " の元なので、最後の段は ",
         math(String.raw`\mathbb{R}`),
         " の中の計算である。",
-        ref("def_sqrt_cc"),
-        "、",
-        ref("first_and_second_projections"),
-        "、",
-        ref("definition_of_sqrt_r_positive"),
-        "、",
-        ref("def_phi_cartesian"),
-        " を引いた。",
       ]),
       paragraph([
         "以上より、",

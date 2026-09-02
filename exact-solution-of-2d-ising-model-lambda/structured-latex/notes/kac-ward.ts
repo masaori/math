@@ -169,6 +169,32 @@ export default defineNotes([
     ],
   },
   {
+    id: "note_kac_ward_def_fiber_phase_weight_signed_selection_sum_fiberwise_equality",
+    targets: ["def_fiber_phase_weight", "def_signed_selection_sum"],
+    title: { text: "一辺二では置換ファイバー位相和と偶部分グラフ選択和が添字ごとに一致する" },
+    body: [
+      paragraph([
+        "一般の平方恒等式で目標にすべき対応を確定するため、一辺 ", math(String.raw`L=2`),
+        " の全非後退置換を反転対の辺集合 ", math(String.raw`D`), " と単純通過の辺集合 ",
+        math(String.raw`E`), " で層別し、置換側の位相和 ",
+        math(String.raw`\mathcal K^{a,b}_L(D,E)`), " と偶部分グラフ対側の符号付き選択和 ",
+        math(String.raw`\mathcal U^{a,b}_L(D,E)`), " を定義から直接比較した。全 ",
+        math(String.raw`609`), " ファイバーと四つのスピン構造、合計 ",
+        math(String.raw`2{,}436`), " 件で",
+      ]),
+      displayMath(String.raw`\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)`),
+      paragraph([
+        "が成立した（sagemath/check/kac-ward-fiber-signed-selection-equality）。したがって、",
+        "多項式全体の係数をまとめて比較するだけでなく、接触の無い置換、回転差が正負四の置換、",
+        "残余を合わせた位相和を、同じ ", math(String.raw`(D,E)`),
+        " の選択集合と数え上げで対応づければ平方恒等式へ合成できる。これは一般の ",
+        math(String.raw`L`), " に対する証明ではなく、次に構成すべきファイバーごとの全単射または",
+        "符号付き数え上げの目標を固定する厳密観察である。計算は有限集合、整数、円分体 ",
+        math(String.raw`\mathbb Q(\zeta_8)`), " だけで閉じ、実数体は用いない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_claim_contact_smoothing_same_pair_involution_lexicographic_choice_counterexample",
     targets: ["claim_contact_smoothing_same_pair_involution"],
     title: { text: "辞書式最小の切り替え可能接触対は平滑化で保たれない" },

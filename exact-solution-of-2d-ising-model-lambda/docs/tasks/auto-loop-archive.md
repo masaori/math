@@ -1,5 +1,12 @@
 # 自動ループ 記録の保管庫
 
+## 2026-09-02 の 100 回目の tick で台帳から移した記録（2026-09-02 の 95 回目）
+
+- 現在地: 切り替え不能な標準接触対が反転対の辺を強制することを示した（`claim_unswitchable_standard_pair_forces_doubled_edge`）。SageMath は一辺二の切り替え不能な置換 $18{,}755$ 個を全数検査した。Lean は未着手だった。
+- 前進記録: 端点相異により像が他方自身になる障害を排除し、反転像の障害から反転対の辺の存在を導いた。
+- 式変形の統一: 姉妹側の「複素数の積の偏角」（`arg_of_product_of_complex_numbers`）で、三本の鎖の後ろに置いていた参照一覧を各根拠行の行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変だった。
+- レビュー記録: 前 tick の `claim_standard_contact_obstruction_witnesses_doubled_edge` を本文・障害 $22{,}068$ 件の全数検算・直接利用と照合し、「何も言っていない主張」や不一致は無いと判断した。
+
 ## 2026-09-02 の 99 回目の tick で台帳から移した記録（2026-09-02 の 94 回目）
 
 - 現在地: 標準接触対の反転像による障害が反転対の辺を指し示すことを示した（`claim_standard_contact_obstruction_witnesses_doubled_edge`）。SageMath は $L=2$ の反転像の障害 $22{,}068$ 件を検査し、標準対が切り替え不能な $18{,}755$ 個の全てで $D(\varphi)\ne\varnothing$ を確認した。Lean は未着手だった。
