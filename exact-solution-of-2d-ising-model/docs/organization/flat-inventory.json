@@ -1136,6 +1136,68 @@
       "mainTheoremEntryId": "evenEigen_claim_V_plus_inverse_positive_and_traces",
       "boundaryEvidence": "章内依存順59は順57の V^{(+)} の定義と順46の生成子の実対称性を受けて V^{(+)} の正定値性を示す。順60の tr(V^{(+)}) の正値性は順59だけを直接使う並行出力である。順61は順59を受けて明示候補が左右逆であることから可逆性と逆行列の式を示し、順62は順61の明示式と順46の実対称性を使って (V^{(+)})^{-1} の正定値性を示す。順63は節内では順62だけを直接受け、外部入力の正定値行列の指数関数と集合・代数構造の記号も用いて tr((V^{(+)})^{-1}) の正値性を示す。Lean はこれらを VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos で検証する。SageMath は左右逆を別々に検査し、候補逆行列の全固有値について虚部の最大値が 1.732×10^{-14}、実部の最小値が 5.145×10^{-4}>0 であること、および tr((V^{(+)})^{-1}) の全体最小値が 1.032>0 であることを検査した。直後の順64は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順59〜63とは相互に依存しない。順65は順64だけへ依存する。この入力集合の切り替わりにより順63の後で節を閉じる。生成時には順59〜63の全直接依存、二つの節末出力、本文 fingerprint、Lean 宣言、SageMath の実検査、順64〜65との相互非依存、および入力集合の切り替わりを固定検査する。",
       "readabilityStatus": "順63は既に一ブロック一主張であり、直前に確定した (V^{(+)})^{-1} の正定値性から、正定値行列のトレースが正であることを一段だけ適用している。Lean の trace_VPlusInv_pos も VPlusInv_posDef に trace_pos を一段適用する同じ推論で、SageMath は候補逆行列のトレース正値性を直接検査する。したがって対象本文の推論粒度と形式化対応は合格であり、順63の後を節境界として確定する。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
+    },
+    {
+      "name": "偶セクター転送行列の構成因子の可逆性",
+      "chapter": "2次元イジングモデル",
+      "status": "境界候補・三主張への分割と形式化同期が必要",
+      "entryIds": [
+        "evensectorT_claim_V_plus_factors_invertible"
+      ],
+      "input": [
+        "偶セクターの半指数行列、第二の転送行列 V_2、および偶セクター転送行列 V^{(+)} の定義",
+        "有限複素行列の指数関数の逆行列公式",
+        "可逆行列の積と非零スカラー倍の可逆性"
+      ],
+      "output": [
+        "偶セクターの半指数行列が可逆であること",
+        "第二の転送行列 V_2 が可逆であること",
+        "偶セクター転送行列 V^{(+)} が可逆であること"
+      ],
+      "boundaryCandidates": [
+        {
+          "output": "偶セクターの半指数行列が可逆であること",
+          "currentEntryId": "evensectorT_claim_V_plus_factors_invertible",
+          "formalizationTarget": "Lean の isUnit_V1halfPlus と SageMath の半指数行列の逆行列検査"
+        },
+        {
+          "output": "第二の転送行列 V_2 が可逆であること",
+          "currentEntryId": "evensectorT_claim_V_plus_factors_invertible",
+          "formalizationTarget": "Lean の isUnit_V2 と SageMath の V_2 の逆行列検査"
+        },
+        {
+          "output": "偶セクター転送行列 V^{(+)} が可逆であること",
+          "currentEntryId": "evensectorT_claim_V_plus_factors_invertible",
+          "formalizationTarget": "Lean の isUnit_VPlus と SageMath の V^{(+)} の逆行列検査"
+        }
+      ],
+      "nextTickUnit": [
+        {
+          "output": "偶セクターの半指数行列が可逆であること",
+          "currentEntryId": "evensectorT_claim_V_plus_factors_invertible",
+          "formalizationTarget": "Lean の isUnit_V1halfPlus と SageMath の半指数行列の逆行列検査"
+        },
+        {
+          "output": "第二の転送行列 V_2 が可逆であること",
+          "currentEntryId": "evensectorT_claim_V_plus_factors_invertible",
+          "formalizationTarget": "Lean の isUnit_V2 と SageMath の V_2 の逆行列検査"
+        }
+      ],
+      "formalizationEvidence": {
+        "leanFiles": [
+          "lean/Ising2D/Part014/Definition001_VPlus.lean",
+          "lean/Ising2D/Part004/Definition010_H1H2V1V2.lean"
+        ],
+        "sageMathFile": "sagemath/check/051_stepwise_identities_of_chapter_Cprime/check_03_014_steps.sage",
+        "currentStatus": "現行本文の一主張は三つの可逆性を束ねる。Lean は半指数行列、V_2、V^{(+)} の可逆性を別の定理として持ち、SageMath も三つの逆行列積を別々の実検査行で確認する。"
+      },
+      "mainTheorems": [
+        "偶セクターの半指数行列が可逆であること",
+        "第二の転送行列 V_2 が可逆であること",
+        "偶セクター転送行列 V^{(+)} が可逆であること"
+      ],
+      "boundaryEvidence": "確定済みの正定値性・可逆性とトレース正値性の節に続く一項は、その節とは相互に依存せず、一般の指数行列の逆行列公式と可逆元の積を入力へ追加して、半指数行列、V_2、V^{(+)} の三つの可逆性を出力する。隣接する共役写像の線型性は本項を直接入力の一つに持ち、入力集合も共役写像の定義と添字集合へ切り替わる。しかし現行本文は三つの出力を一主張に束ね、Lean と SageMath は三対象を分離しているため、三つの境界候補として記録し、この時点では節境界を確定しない。",
+      "readabilityStatus": "三つの可逆性はそれぞれ、指数行列の逆行列、正のスカラーと指数行列の積の逆行列、二つの可逆因子で挟んだ積の逆行列という別の推論である。一ブロック一主張にするには三分割と形式化ラベルの同期が必要なので、本文・Lean・SageMathは変更しない。次回は先頭二候補だけを分割・同期し、V^{(+)} の可逆性と直後の共役写像の線型性へは進まない。"
     }
   ],
   "explanationGranularityReview": {
@@ -7184,7 +7246,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7354,7 +7416,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7795,7 +7857,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8136,8 +8198,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4977,
-        "inspectedContentSha256": "507b18abb9b9bbe699f64a564de769a373e299c374df307d2442ebe4fb0ffb39",
+        "inspectedCharacterCount": 4956,
+        "inspectedContentSha256": "301418ac10da6ede29f8a7114aec1f367191efd08fb1e2bab915fd7f54b622e3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8199,8 +8261,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10078,
-        "inspectedContentSha256": "557f365dac54fd966ef49abcc25e90b8bcd39ae3c416d591dc9c107a5037fcfd",
+        "inspectedCharacterCount": 9916,
+        "inspectedContentSha256": "77725e7733850ab58883c040b035b7ea3e9d22aa0bdac1e955a80defafbb57a8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8215,15 +8277,11 @@
         "definition_of_cc",
         "first_and_second_projections",
         "isomorphism_of_phi_cartesian",
-        "operations_on_polar_representation",
-        "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
-        "calc_formulae_017_definition_section_of_angle_representation",
-        "calculation_formulae_022_definition_operations_on_polar_representation",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
         "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_031_definition_abs_arg",
@@ -8272,8 +8330,8 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 9086,
-        "inspectedContentSha256": "36089afc37477d16de5253b8329cc777265e8db9dfc2cddf75531a3d6ff49c99",
+        "inspectedCharacterCount": 8783,
+        "inspectedContentSha256": "fce8842d259e99cbcc0811937e4be35b41a4be975496b399a09584f5c00b32b1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8290,13 +8348,11 @@
         "isomorphism_of_phi_cartesian",
         "multiplicative_group_of_cc",
         "multiplicative_group_of_polar_representation",
-        "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
-        "calc_formulae_017_definition_section_of_angle_representation",
         "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
         "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
@@ -8404,8 +8460,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 11343,
-        "inspectedContentSha256": "94bae4f1c406ad930dd03ef6a607a9e0bde05de4a2b9c90b3d752550f52d307a",
+        "inspectedCharacterCount": 10998,
+        "inspectedContentSha256": "0ca38e173124f37277cb1b27d8a18ec358098a50eb04efb64788fa82b1757316",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8422,7 +8478,6 @@
         "def_sqrt_cc",
         "definition_of_cc",
         "definition_of_sqrt_r_positive",
-        "first_and_second_projections",
         "polar_equivalence_class",
         "section_of_angle_representation",
         "set_and_algebra_notation"
@@ -8436,7 +8491,6 @@
         "calc_formulae_019_definition_polar_equivalence_class",
         "calculation_formulae_027_definition_phi_polar",
         "calculation_formulae_028_definition_phi_cartesian",
-        "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_038_definition_sqrt_of_complex_number",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
