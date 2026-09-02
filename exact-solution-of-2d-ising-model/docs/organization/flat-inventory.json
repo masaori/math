@@ -7184,7 +7184,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7354,7 +7354,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8065,8 +8065,8 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 10008,
-        "inspectedContentSha256": "c4acb819f5069e7b00f91148c40955c58e461918d2a8c4664d3ad5b044e17e79",
+        "inspectedCharacterCount": 9694,
+        "inspectedContentSha256": "9a214ade04011ca7035536a9bc6a863a63647fafa3e677cdd0ce1f61bae438f9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8083,15 +8083,11 @@
         "isomorphism_of_phi_cartesian",
         "multiplicative_group_of_cc",
         "multiplicative_group_of_polar_representation",
-        "operations_on_polar_representation",
-        "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
-        "calc_formulae_017_definition_section_of_angle_representation",
-        "calculation_formulae_022_definition_operations_on_polar_representation",
         "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
         "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
