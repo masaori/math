@@ -1426,10 +1426,10 @@ y_\epsilon, & \epsilon=\epsilon'
 X Q_\epsilon
 &= \sum_{\mu \in \mathcal{I}} \gamma(\theta_\mu)
    \left(n_\mu Q_\epsilon - \tfrac{1}{2} Q_\epsilon\right)
-   \quad (\because \text{行列の積の分配法則}) \\
+   \quad (\because \blkref{def_number_operator}\text{ と行列の積の分配法則}) \\
 &= \sum_{\mu \in \mathcal{I}} \gamma(\theta_\mu)
    \left(\epsilon_\mu Q_\epsilon - \tfrac{1}{2} Q_\epsilon\right)
-   \quad (\because \text{同時固有空間分解 (3)}) \\
+   \quad (\because \blkref{joint_eigenspace_decomposition}\text{ (3)}) \\
 &= \left(\sum_{\mu \in \mathcal{I}} \gamma(\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\right) Q_\epsilon
    \quad (\because \text{有限和の線型性で } Q_\epsilon \text{ を右へくくり出す}) \\
 &= g(\epsilon)\,Q_\epsilon
@@ -1512,7 +1512,7 @@ Q_\epsilon y
 &= Q_\epsilon^2 x
    \quad (\because y = Q_\epsilon x) \\
 &= Q_\epsilon x
-   \quad (\because \text{(1) の冪等性}) \\
+   \quad (\because \blkref{joint_eigenspace_decomposition}\text{ (1) の冪等性}) \\
 &= y
    \quad (\because y = Q_\epsilon x)
 \end{aligned}`,
@@ -1560,7 +1560,12 @@ V' y
         " である。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-02 の式変形統一で、数演算子の定義と同時固有空間分解を使う各式変形行の行末へ `\\blkref` を置いた。内容・式変形・根拠・参照は変えていない。",
+      ],
+    },
   },
 
   {

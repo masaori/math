@@ -215,6 +215,7 @@ export const ALL_LABELS = [
   "claim_path_reversal_fiber_preserving_involution",
   "claim_path_reversal_phase_conjugation",
   "claim_path_reversal_phase_preservation",
+  "claim_path_reversal_selection_complement_orbits",
   "claim_period_translates_of_iterated_staircase_disjoint",
   "claim_periodic_density_lower_set_eq_open_square_le_one",
   "claim_periodic_density_lower_set_subset_open_square_le_one",

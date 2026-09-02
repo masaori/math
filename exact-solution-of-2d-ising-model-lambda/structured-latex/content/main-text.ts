@@ -55005,6 +55005,81 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_path_reversal_selection_complement_orbits",
+        labels: [],
+        title: { text: "経路反転軌道と選択補集合軌道" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_path_reversal_selection_complement_orbits",
+            beforeFocus: [],
+            focus: {
+              id: "kac_ward_claim_path_reversal_selection_complement_orbits",
+              kind: "claim",
+              title: { text: "二つの符号保存対合は符号一定な軌道分割を与える" },
+              labels: ["claim_path_reversal_selection_complement_orbits"],
+              habitat: "N",
+              verification: ["sagemath/check/path-reversal-selection-complement-orbits"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+                  math(String.raw`D,E\subseteq E_L`), " は ", math(String.raw`\operatorname{Even}_L(E)`),
+                  "（", ref("def_even_edge_subset"), "）を満たすとする。", math(String.raw`s\in\{-1,1\}`),
+                  " に対し、有限集合",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathfrak O^{\mathcal N,s}_L(D,E;a,b)
+&:=\Bigl\{\,\{\varphi,\mathcal T(\varphi)\}\ \Bigm|\
+\varphi\in\mathcal N_L(D,E),\ \mathcal W^{a,b}_L(\varphi)=s\,\Bigr\},\\
+\mathfrak O^{\mathcal C,s}_L(D,E;a,b)
+&:=\Bigl\{\,\{C,E\setminus C\}\ \Bigm|\
+C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
+\end{aligned}`),
+                paragraph([
+                  "を定める。ここで ", math(String.raw`\mathcal C^1_L:=\mathcal C^+_L`), "、",
+                  math(String.raw`\mathcal C^{-1}_L:=\mathcal C^-_L`), " と書く。このとき各集合族は、",
+                  "それぞれ対応する符号 ", math(String.raw`s`), " の置換集合と選択集合を互いに素に覆う軌道分割である。",
+                  "置換側の各軌道の元の個数は一または二である。選択側の各軌道の元の個数は一または二であり、",
+                  math(String.raw`E\ne\varnothing`), " なら全て二である。各軌道上で符号は ", math(String.raw`s`),
+                  " に一定である。経路反転と位相寄与は ", ref("claim_path_reversal_phase_preservation"),
+                  "、選択補集合と選択符号は ", ref("claim_selection_complement_sign_preserving_involution"),
+                  " で与えられる。全て有限集合の像・等号・元の個数だけで判定できる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず置換側を示す。符号 ", math(String.raw`s`), " の置換 ", math(String.raw`\varphi`),
+                  " を取る。", ref("claim_path_reversal_phase_preservation"), " により ",
+                  math(String.raw`\mathcal T(\varphi)`), " も同じファイバーに属して符号 ", math(String.raw`s`),
+                  " を持ち、", math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`), " である。したがって ",
+                  math(String.raw`\{\varphi,\mathcal T(\varphi)\}`), " は符号 ", math(String.raw`s`),
+                  " の集合に含まれ、元の個数は一または二である。任意の二軌道が一つの元を共有するとき、",
+                  "その共有元に経路反転を適用すれば残る元も一致するので二軌道は等しい。ゆえに軌道族は互いに素で、",
+                  "各 ", math(String.raw`\varphi`), " は自分から作った軌道に属するので全体を覆う。",
+                ]),
+                paragraph([
+                  "選択側も同じ論法である。", math(String.raw`C\in\mathcal C^s_L(D,E;a,b)`), " を取る。",
+                  ref("claim_selection_complement_sign_preserving_involution"), " により ",
+                  math(String.raw`E\setminus C`), " は同じ符号集合に属し、",
+                  math(String.raw`E\setminus(E\setminus C)=C`), " である。従って ",
+                  math(String.raw`\{C,E\setminus C\}`), " は一元または二元で、上と同じ対合の論法により、",
+                  "これらは符号 ", math(String.raw`s`), " の選択集合を互いに素に覆う。さらに ",
+                  math(String.raw`E\ne\varnothing`), " なら同じ既証明により補集合対合は不動点を持たないので、",
+                  "各軌道の元の個数は二である。符号一定性は、どちらの軌道も最初から符号 ", math(String.raw`s`),
+                  " の集合の部分集合として構成したことによる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },

@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 111 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 112 回目の tick 時点）
+
+**経路反転軌道と選択補集合軌道を符号別の有限集合として固定した。** 二つの符号保存対合が各符号集合を一元または二元の互いに素な軌道へ分け、単純通過辺集合が非空なら選択側の軌道は全て二元になることを一般の辺長で示した（`claim_path_reversal_selection_complement_orbits`）。SageMath は一辺二の符号別置換 $123{,}136$ 件と符号別選択 $4{,}096$ 件を全数検査した。Lean 二版は未着手である。
+
+次 tick は、置換側の三部分を重み付き軌道族へまとめ、選択補集合軌道との符号を保つ対応を構成する。
+
+前進前レビューでは、前 tick の経路反転による位相寄与保存を statement・proof・定義・検算・後続利用と照合した。符号別軌道の構成に直接使う非自明な主張であり、「何も言っていない主張」や不一致は無かった。
+
+並列の式変形統一は、姉妹側の「$V'$ の固有値」（`eigenvalues_of_Vprime`）で、数演算子の定義と同時固有空間分解を使う式変形行の行末へ `\blkref` を置いた。内容・式変形・根拠・参照は不変である。
+
+## ひとつ前の到達点（2026-09-02 の 111 回目の tick 時点）
 
 **経路反転が位相寄与を保つことを示した。** 位相寄与の符号性 $\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}$（`claim_phase_contribution_sign_value`）と符号付き回転冪表示 $\mathcal W\cdot\zeta_8^{-\Theta}\in\{-1,1\}$（`claim_phase_contribution_signed_rotation_power`）から $\zeta_8^{-\Theta(\varphi)}\in\{-1,1\}$ を導き、位相共役 $\mathcal W(\mathcal T(\varphi))=\zeta_8^{-2\Theta(\varphi)}\mathcal W(\varphi)$（`claim_path_reversal_phase_conjugation`）と合成して $\mathcal W^{a,b}_L(\mathcal T(\varphi))=\mathcal W^{a,b}_L(\varphi)$ を一般の $L$ で示した（`claim_path_reversal_phase_preservation`）。したがって経路反転はファイバー保存対合（`claim_path_reversal_fiber_preserving_involution`）として、各ファイバーの位相寄与 $1$ の置換集合と $-1$ の置換集合それぞれの上の対合である。SageMath `path-reversal-phase-preservation` は一辺二の非後退置換 $30{,}784$ 個の冪の所属と、四スピン構造 $123{,}136$ 件の位相寄与の保存を全数検査した。Lean 二版は未着手である。
 
