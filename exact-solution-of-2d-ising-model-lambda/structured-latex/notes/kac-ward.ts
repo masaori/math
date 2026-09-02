@@ -245,4 +245,33 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_path_reversal_contact_pair_preservation_standard_classification_counterexample",
+    targets: [
+      "claim_path_reversal_contact_pair_preservation",
+      "def_standard_turning_difference_subsets",
+      "def_unswitchable_standard_pair_subset",
+    ],
+    title: { text: "標準接触対に依存する分類は経路反転で保たれない" },
+    body: [
+      paragraph([
+        "接触対全体の全単射と各接触対の切り替え可能性の保存から、固定した辞書式順序で選ぶ標準接触対に",
+        "依存する分類まで保存されるとは限らない。経路反転が誘導する全単射 ",
+        math(String.raw`\Psi_{\varphi}`),
+        " は接触対の辞書式順序を保たないからである。したがって、接触の無い部分・回転差が正負四の二部分・残余を",
+        "そのまま経路反転軌道の重みに使う経路は採用しない。",
+      ]),
+      paragraph([
+        "一辺 ", math(String.raw`L=2`), " の全非後退置換 ", math(String.raw`30{,}784`),
+        " 個を厳密に列挙すると、接触の無い ", math(String.raw`49`), " 個は全て保たれた。一方、残余から位相反転部分へ ",
+        math(String.raw`1{,}416`), " 個、残余から回転差 ", math(String.raw`-4`), " と ",
+        math(String.raw`4`), " の部分へそれぞれ ", math(String.raw`384`), " 個と ",
+        math(String.raw`520`), " 個が移った。位相反転部分から回転差 ", math(String.raw`-4`),
+        " へ移るものも ", math(String.raw`136`), " 個あり、回転差 ", math(String.raw`-4`),
+        " から ", math(String.raw`4`), " へ移るものは ", math(String.raw`1{,}548`),
+        " 個あった（sagemath/check/path-reversal-standard-classification-counterexample）。",
+        "これは一般の非保存定理ではなく、候補経路を排除する有限反例である。次は接触対の順序に依らない分類を構成する。",
+      ]),
+    ],
+  },
 ]);

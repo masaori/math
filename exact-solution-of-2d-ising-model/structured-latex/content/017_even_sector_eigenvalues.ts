@@ -2911,14 +2911,14 @@ V^{(+)}\check{Q}_\epsilon
 \check{g}(1,\dots,1) - \check{g}(\epsilon)
 &= \sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)
 \Bigl(1 - \epsilon_\mu\Bigr)
-   \quad (\because \text{eigenvalues\_of\_check\_Vprime の }\check{g}\text{ の定義と分配法則}) \\
+   \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義と分配法則}) \\
 &\geq \gamma(\tilde\theta_{\mu_0})\Bigl(1 - \epsilon_{\mu_0}\Bigr)
    \quad (\because \text{各項は }\gamma(\tilde\theta_\mu) > 0\text{ と }
 1 - \epsilon_\mu \in \{0,1\}\text{ より} \geq 0\text{。}\mu = \mu_0\text{ の項だけを残す}) \\
 &= \gamma(\tilde\theta_{\mu_0})
    \quad (\because \epsilon_{\mu_0} = 0) \\
 &> 0
-   \quad (\because \text{def\_gamma\_theta\_tilde\_mu})
+   \quad (\because \blkref{def_gamma_theta_tilde_mu})
 \end{aligned}`,
       ),
       paragraph([
@@ -2930,13 +2930,13 @@ V^{(+)}\check{Q}_\epsilon
         String.raw`\begin{aligned}
 \check\Lambda_\epsilon
 &= (2s_2)^{M/2}e^{\check{g}(\epsilon)}
-   \quad (\because \text{eigenvalues\_of\_V\_plus の }\check\Lambda_\epsilon\text{ の定義と }
-\text{eigenvalues\_of\_check\_Vprime の }\check{g}\text{ の定義}) \\
+   \quad (\because \blkref{eigenvalues_of_V_plus}\text{ の }\check\Lambda_\epsilon\text{ の定義と }
+\blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}) \\
 &< (2s_2)^{M/2}e^{\check{g}(1,\dots,1)}
    \quad (\because \check{g}(\epsilon) < \check{g}(1,\dots,1)\text{、}
 t \mapsto e^t\text{ は狭義単調増加、}(2s_2)^{M/2} > 0) \\
 &= \check\Lambda_{\max}
-   \quad (\because \text{eigenvalues\_of\_V\_plus (2)})
+   \quad (\because \blkref{eigenvalues_of_V_plus}\text{ (2)})
 \end{aligned}`,
       ),
       paragraph([
@@ -2965,7 +2965,7 @@ t \mapsto e^t\text{ は狭義単調増加、}(2s_2)^{M/2} > 0) \\
         String.raw`\begin{aligned}
 \check\Lambda_{\epsilon'}\left(\check{Q}_{\epsilon'}x\right)
 &= \left(\check{Q}_{\epsilon'}V^{(+)}\right)x
-   \quad (\because \text{eigenvalues\_of\_V\_plus (1)}) \\
+   \quad (\because \blkref{eigenvalues_of_V_plus}\text{ (1)}) \\
 &= \check{Q}_{\epsilon'}\left(V^{(+)}x\right)
    \quad (\because \text{行列の積の結合法則}) \\
 &= \check\Lambda_{\max}\left(\check{Q}_{\epsilon'}x\right)
@@ -2995,7 +2995,7 @@ t \mapsto e^t\text{ は狭義単調増加、}(2s_2)^{M/2} > 0) \\
       displayMath(
         String.raw`\begin{aligned}
 x &= \sum_{\epsilon}\check{Q}_\epsilon x
-   \quad (\because \text{check\_joint\_eigenspace\_decomposition (2)}) \\
+   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (2)}) \\
 &= \check{Q}_{(1,\dots,1)}x
    \quad (\because \epsilon \neq (1,\dots,1)\text{ の項は }\check{Q}_\epsilon x = 0)
 \end{aligned}`,

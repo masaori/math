@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 113 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 114 回目の tick 時点）
+
+**標準接触対に依存する四部分が経路反転で保たれないことを、一辺二の有限反例で確定した。** 接触の無い $49$ 個は全て保たれたが、残余から位相反転部分へ $1{,}416$ 個、残余から回転差 $-4$ と $4$ の部分へそれぞれ $384$ 個と $520$ 個が移った。位相反転部分から回転差 $-4$ へ移るものも $136$ 個、回転差 $-4$ から $4$ へ移るものも $1{,}548$ 個あった。接触対の全単射 $\Psi_\varphi$ は切り替え可能性を保つが、固定した辞書式順序を保たないためである。不採用経路を `note_kac_ward_claim_path_reversal_contact_pair_preservation_standard_classification_counterexample` と SageMath `path-reversal-standard-classification-counterexample` に固定した。これは一般の非保存定理ではなく、候補経路を排除する有限反例である。Lean の対象ではない。
+
+次 tick は、接触対の順序に依らず経路反転で保たれる分類を構成し、重み付き軌道族と選択補集合軌道の対応へ進む。
+
+前進前レビューでは、前 tick の接触対対応を statement・proof・検算・後続定義と照合した。接触対全体の全単射と個数・切り替え可能性の保存を与える実質的な主張であり、「何も言っていない主張」や不一致は無かった。
+
+並列の式変形統一は、姉妹側の「半整数運動量に対応する最大固有値の単純性」で、既存定理を使う式変形六行の根拠へ実在ラベルの `\blkref` を置いた。内容・式変形・根拠は不変である。
+
+## ひとつ前の到達点（2026-09-02 の 113 回目の tick 時点）
 
 **経路反転が接触対の全単射を誘導し切り替え可能性を保つことを一般の辺長で示した。** 接触対 $P=\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)$ を $\Psi_{\varphi}(P)=\{\iota(\varphi(\vec e)),\iota(\varphi(\vec f))\}$ へ写す対応が $\operatorname{Ct}(\varphi)$ から $\operatorname{Ct}(\mathcal T(\varphi))$ への全単射であり（逆写像は $\Psi_{\mathcal T(\varphi)}$）、接触対の個数 $N_{\mathrm{ct}}$ を保ち、各接触対の切り替え可能性を保つ（四不等式の判定 `claim_contact_pair_switchability_criterion` を両側へ適用すると同じ四条件になる）ことを示した（`claim_path_reversal_contact_pair_preservation`）。SageMath `path-reversal-contact-pair-preservation` は一辺二の非後退置換 $30{,}784$ 個・接触対 $470{,}336$ 件を全数検査した（実行 2 分 0 秒）。Lean 二版は未着手である。
 
