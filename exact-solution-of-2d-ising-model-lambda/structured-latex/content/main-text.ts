@@ -55080,6 +55080,196 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_path_reversal_contact_pair_preservation",
+        labels: [],
+        title: { text: "経路反転と接触対の対応" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_path_reversal_contact_pair_preservation",
+            beforeFocus: [],
+            focus: {
+              id: "kac_ward_claim_path_reversal_contact_pair_preservation",
+              kind: "claim",
+              title: { text: "経路反転は接触対の全単射を誘導し切り替え可能性を保つ" },
+              labels: ["claim_path_reversal_contact_pair_preservation"],
+              habitat: "N",
+              verification: ["sagemath/check/path-reversal-contact-pair-preservation"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), " とし、",
+                  math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                  "（", ref("def_nonbacktracking_permutations"), "）を取る。接触対 ",
+                  math(String.raw`P=\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
+                  "（", ref("def_standard_contact_pair"), "）に対し、二元部分集合",
+                ]),
+                displayMath(String.raw`\Psi_{\varphi}(P):=\bigl\{\,\iota\bigl(\varphi(\vec e)\bigr),\
+\iota\bigl(\varphi(\vec f)\bigr)\,\bigr\}`),
+                paragraph([
+                  "を定める（", math(String.raw`\iota`), " は ", ref("def_edge_reversal"),
+                  "、経路反転 ", math(String.raw`\mathcal T`), " は ",
+                  ref("def_permutation_path_reversal"), "）。このとき",
+                ]),
+                list([
+                  [math(String.raw`\Psi_{\varphi}`), " は ",
+                    math(String.raw`\operatorname{Ct}(\varphi)`), " から ",
+                    math(String.raw`\operatorname{Ct}(\mathcal T(\varphi))`),
+                    " への全単射であり、その逆写像は ",
+                    math(String.raw`\Psi_{\mathcal T(\varphi)}`), " である。"],
+                  [math(String.raw`N_{\mathrm{ct}}(\mathcal T(\varphi))=N_{\mathrm{ct}}(\varphi)`),
+                    " である（", ref("def_permutation_contact_pair_count"), "）。"],
+                  [math(String.raw`P`), " が ", math(String.raw`\varphi`),
+                    " の切り替え可能な接触対（", ref("def_switchable_permutation_contact_pair"),
+                    "）であることと、", math(String.raw`\Psi_{\varphi}(P)`), " が ",
+                    math(String.raw`\mathcal T(\varphi)`),
+                    " の切り替え可能な接触対であることは同値である。"],
+                ]),
+                paragraph([
+                  "全て有限集合の元の比較だけで判定でき、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "準備として三つの事実を置く。第一に、任意の ",
+                  math(String.raw`\vec g\in M(\varphi)`), "（", ref("def_moved_edge_set"),
+                  "）について ", math(String.raw`\varphi(\vec g)\in M(\varphi)`),
+                  " である。実際、もし ",
+                  math(String.raw`\varphi\bigl(\varphi(\vec g)\bigr)=\varphi(\vec g)`),
+                  " なら ", math(String.raw`\varphi`), " の単射性（", ref("def_row_permutation"),
+                  "）から ", math(String.raw`\varphi(\vec g)=\vec g`), " となり、",
+                  math(String.raw`\vec g\in M(\varphi)`), " に反する。第二に、任意の ",
+                  math(String.raw`\vec g\in\vec E_L`), " について、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal T(\varphi)\bigl(\iota(\varphi(\vec g))\bigr)
+&=\iota\Bigl(\varphi^{-1}\Bigl(\iota\bigl(\iota(\varphi(\vec g))\bigr)\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
+&=\iota\bigl(\varphi^{-1}\bigl(\varphi(\vec g)\bigr)\bigr)
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=\iota(\vec g)
+&&\bigl(\because\ \varphi^{-1}\circ\varphi\text{ は恒等写像（逆写像の定義）}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。第三に、任意の ", math(String.raw`\vec g\in\vec E_L`), " について ",
+                  math(String.raw`\operatorname{tgt}(\iota(\vec g))=\operatorname{src}(\vec g)`),
+                  " である（", ref("def_edge_reversal"), " と ",
+                  ref("def_oriented_edge_endpoints"),
+                  " により、反転は二つの端点写像の値を入れ替える）。",
+                ]),
+                paragraph([
+                  "第一の主張を示す。", math(String.raw`P=\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
+                  " を取る。", ref("def_standard_contact_pair"), " により ",
+                  math(String.raw`\vec e,\vec f\in M(\varphi)`), "、",
+                  math(String.raw`\vec e\ne\vec f`), "、",
+                  math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
+                  " である。準備の第一の事実により ",
+                  math(String.raw`\varphi(\vec e),\varphi(\vec f)\in M(\varphi)`), " なので、",
+                  ref("claim_path_reversal_fiber_preserving_involution"), " の第一の主張により ",
+                  math(String.raw`\iota(\varphi(\vec e)),\iota(\varphi(\vec f))\in M(\mathcal T(\varphi))`),
+                  " である。", math(String.raw`\iota`), " と ", math(String.raw`\varphi`),
+                  " はともに単射（", ref("claim_reversal_is_involution"), "、",
+                  ref("def_row_permutation"), "）なので ",
+                  math(String.raw`\iota(\varphi(\vec e))\ne\iota(\varphi(\vec f))`),
+                  " である。終点の一致を確かめる。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}\bigl(\iota(\varphi(\vec e))\bigr)
+&=\operatorname{src}\bigl(\varphi(\vec e)\bigr)
+&&\bigl(\because\ \text{準備の第三の事実}\bigr)\\
+&=\operatorname{tgt}(\vec e)
+&&\bigl(\because\ \vec e\in M(\varphi)\text{ と }\blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&=\operatorname{tgt}(\vec f)
+&&\bigl(\because\ \text{接触の仮定。}\blkref{def_standard_contact_pair}\bigr)\\
+&=\operatorname{src}\bigl(\varphi(\vec f)\bigr)
+&&\bigl(\because\ \vec f\in M(\varphi)\text{ と }\blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&=\operatorname{tgt}\bigl(\iota(\varphi(\vec f))\bigr)
+&&\bigl(\because\ \text{準備の第三の事実}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "したがって ", math(String.raw`\Psi_{\varphi}(P)\in\operatorname{Ct}(\mathcal T(\varphi))`),
+                  " であり、", math(String.raw`\Psi_{\varphi}`), " は ",
+                  math(String.raw`\operatorname{Ct}(\varphi)`), " から ",
+                  math(String.raw`\operatorname{Ct}(\mathcal T(\varphi))`),
+                  " への写像である。", ref("claim_path_reversal_fiber_preserving_involution"),
+                  " により ", math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                  " かつ ", math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`),
+                  " なので、同じ構成を ", math(String.raw`\mathcal T(\varphi)`), " へ適用すると ",
+                  math(String.raw`\Psi_{\mathcal T(\varphi)}`), " は ",
+                  math(String.raw`\operatorname{Ct}(\mathcal T(\varphi))`), " から ",
+                  math(String.raw`\operatorname{Ct}(\varphi)`), " への写像である。合成を計算する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\Psi_{\mathcal T(\varphi)}\bigl(\Psi_{\varphi}(P)\bigr)
+&=\bigl\{\,\iota\Bigl(\mathcal T(\varphi)\bigl(\iota(\varphi(\vec e))\bigr)\Bigr),\
+\iota\Bigl(\mathcal T(\varphi)\bigl(\iota(\varphi(\vec f))\bigr)\Bigr)\,\bigr\}
+&&\bigl(\because\ \Psi\text{ の定義の二回の適用}\bigr)\\
+&=\bigl\{\,\iota(\iota(\vec e)),\ \iota(\iota(\vec f))\,\bigr\}
+&&\bigl(\because\ \text{準備の第二の事実}\bigr)\\
+&=\{\vec e,\vec f\}=P
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "同じ計算を ", math(String.raw`\mathcal T(\varphi)`), " と ",
+                  math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`), " の順で行うと ",
+                  math(String.raw`\Psi_{\varphi}\circ\Psi_{\mathcal T(\varphi)}`), " も ",
+                  math(String.raw`\operatorname{Ct}(\mathcal T(\varphi))`),
+                  " の恒等写像である。互いに逆写像を持つ写像は全単射なので、第一の主張が従う。",
+                ]),
+                paragraph([
+                  "第二の主張は、二つの有限集合 ",
+                  math(String.raw`\operatorname{Ct}(\varphi)`), " と ",
+                  math(String.raw`\operatorname{Ct}(\mathcal T(\varphi))`),
+                  " の間に全単射があるので元の個数が等しいこと（",
+                  ref("def_permutation_contact_pair_count"), "）そのものである。",
+                ]),
+                paragraph([
+                  "第三の主張を示す。", ref("claim_contact_pair_switchability_criterion"),
+                  " を ", math(String.raw`\mathcal T(\varphi)`), " と接触対 ",
+                  math(String.raw`\Psi_{\varphi}(P)=\{\iota(\varphi(\vec e)),\iota(\varphi(\vec f))\}`),
+                  " へ適用すると、切り替え可能性は四つの不等式の連言と同値である。各不等式を同値変形する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal T(\varphi)\bigl(\iota(\varphi(\vec f))\bigr)\ne\iota\bigl(\iota(\varphi(\vec e))\bigr)
+&\Longleftrightarrow
+\iota(\vec f)\ne\varphi(\vec e)
+&&\bigl(\because\ \text{準備の第二の事実と }\blkref{claim_reversal_is_involution}\bigr)\\
+\mathcal T(\varphi)\bigl(\iota(\varphi(\vec e))\bigr)\ne\iota\bigl(\iota(\varphi(\vec f))\bigr)
+&\Longleftrightarrow
+\iota(\vec e)\ne\varphi(\vec f)
+&&\bigl(\because\ \text{準備の第二の事実と }\blkref{claim_reversal_is_involution}\bigr)\\
+\mathcal T(\varphi)\bigl(\iota(\varphi(\vec f))\bigr)\ne\iota(\varphi(\vec e))
+&\Longleftrightarrow
+\vec f\ne\varphi(\vec e)
+&&\bigl(\because\ \text{準備の第二の事実と }\iota\text{ の単射性（}\blkref{claim_reversal_is_involution}\text{）}\bigr)\\
+\mathcal T(\varphi)\bigl(\iota(\varphi(\vec e))\bigr)\ne\iota(\varphi(\vec f))
+&\Longleftrightarrow
+\vec e\ne\varphi(\vec f)
+&&\bigl(\because\ \text{準備の第二の事実と }\iota\text{ の単射性（}\blkref{claim_reversal_is_involution}\text{）}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "右側の四条件の連言は、", ref("claim_contact_pair_switchability_criterion"),
+                  " が ", math(String.raw`\varphi`), " と ", math(String.raw`P=\{\vec e,\vec f\}`),
+                  " について与える四つの不等式 ",
+                  math(String.raw`\varphi(\vec f)\ne\iota(\vec e)`), "、",
+                  math(String.raw`\varphi(\vec e)\ne\iota(\vec f)`), "、",
+                  math(String.raw`\varphi(\vec f)\ne\vec e`), "、",
+                  math(String.raw`\varphi(\vec e)\ne\vec f`),
+                  " の連言と、順序を入れ替えただけで一致する（等号の否定は両辺の入れ替えで不変である）。",
+                  "したがって ", math(String.raw`P`), " の切り替え可能性と ",
+                  math(String.raw`\Psi_{\varphi}(P)`),
+                  " の切り替え可能性は同値である。全過程は有限集合の写像の合成と元の比較だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_formal_square_root_uniqueness",
         labels: [],
         title: { text: "定数項一の形式的平方根の一意性" },
