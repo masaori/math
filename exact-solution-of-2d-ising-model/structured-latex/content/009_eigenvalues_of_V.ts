@@ -570,11 +570,10 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)`,
       displayMath(String.raw`\begin{aligned}
 \psi_{-\mu}\psi_\mu^\dagger
 &= I-\psi_\mu^\dagger\psi_{-\mu}
-&&\left(\because\ [\psi_\mu^\dagger,\psi_{-\mu}]_+=I\ \text{と行列の加法}\right)\\
+&&\left(\because\ [\psi_\mu^\dagger,\psi_{-\mu}]_+=I\ \text{と行列の加法。}\blkref{anticommutator_of_psi}\right)\\
 &= I-n_\mu
-&&\left(\because\ \text{フェルミオン数演算子 }n_\mu\text{ の定義}\right)
+&&\left(\because\ \text{フェルミオン数演算子 }n_\mu\text{ の定義。}\blkref{def_number_operator}\right)
 \end{aligned}`),
-      paragraph([ref("anticommutator_of_psi"), " と ", ref("def_number_operator"), " を引いた。"]),
       paragraph(["(3) (1)(2) を使って"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -605,6 +604,7 @@ n_\mu^2
         "2026-08-15 の式変形統一で、(3) の鎖の先頭行（フェルミオン数演算子の定義の適用）に欠けていた行末根拠を補った。内容は変えていない。",
         "2026-08-18 の式変形統一で、(2) の反交換関係からの移項を散文で済ませず、一続き二段の式変形と行末根拠へ揃えた。内容は変えていない。",
         "2026-09-02 の式変形統一で、(1)(3) の式変形の行末根拠を aligned の独立列へ揃えた。内容は変えていない。",
+        "2026-09-02: (2) の鎖の直後に置いていた参照一覧（反交換関係とフェルミオン数演算子の定義）を削り、それらを実際に使う各行末の blkref へ移した。内容・式変形・根拠・参照は不変である。",
       ],
     },
   },
