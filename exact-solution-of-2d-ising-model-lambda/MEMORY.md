@@ -2,7 +2,19 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 117 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 118 回目の tick 時点）
+
+**経路反転軌道全体と選択補集合軌道全体の間に符号と重みを保つ対応が存在しないことを、一辺二の有限反例で確定した。** 単純通過辺集合 $E$ が非空なら両側の軌道は全て二元だが、ファイバー・四スピン構造・二符号ごとの元数を比較すると $2{,}744$ 組で一致しなかった。最初の例は $D=\{h(1,1)\}$、$E=\{v(0,0),v(0,1),v(1,0),v(1,1)\}$、$(a,b)=(0,0)$、符号 $+1$ で、置換側が二元、選択側が空である。従って全軌道族を直接対応させる経路は採用しない。不採用経路を `note_kac_ward_claim_weighted_path_reversal_selection_orbit_sums_sign_bijection_counterexample` と SageMath `path-reversal-selection-sign-bijection-counterexample` に固定した。これは一般の不存在定理ではなく候補経路を排除する有限反例である。
+
+次 tick は、既存の接触平滑化による相殺を残し、完全切り替え不能な残余の各接触が反転対の辺を指すことから $D$ を縮約する帰納を構成する。
+
+前進前レビューでは、前 tick の経路反転の不動点排除を statement・proof・検算・今回の必要条件で照合した。この主張は対応候補の反証に直接使う実質を持ち、「何も言っていない主張」や不一致は無かった。
+
+並列の式変形統一は、姉妹側の「偶セクターの生成子の指数行列の可逆性」で、散文に埋まっていた逆行列の計算を二段の行末根拠つきの鎖へ書き換えた。内容・根拠・参照は不変である。
+
+Lambda 側 check（940 ブロック・相互参照 $3{,}955$ 件すべて解決）・linkage（418 検算）・対象 SageMath（符号別元数の不一致 $2{,}744$ 件）・Lean $9{,}616$ ジョブ・`sorry` / `admit` 無し・PDF 408 ページを通した。姉妹側 check・linkage（118 検算）・PDF 360 ページも通した。新しい本文主張は置かず、不採用の有限反例をノートへ記録したため、Lean の追加対象はない。
+
+## ひとつ前の到達点（2026-09-02 の 117 回目の tick 時点）
 
 **経路反転の不動点が単純通過辺を持たないことを一般の $L$ で示した。** $\mathcal T(\varphi)=\varphi$ なら $M(\varphi)=\{\iota(\vec h)\mid\vec h\in M(\varphi)\}$（ファイバー保存対合の第一の主張）から全ての台辺が反転対になるため $E_1(\varphi)=\varnothing$ であり、したがって互いに素な $D,E$ が $\operatorname{Even}_L(E)$ と $E\ne\varnothing$ を満たすファイバー $\mathcal N_L(D,E)$ の上で経路反転は不動点を持たず、符号別軌道族 $\mathfrak O^{\mathcal N,s}_L(D,E;a,b)$ と三分類で細分した $\mathfrak O^{\mathcal P,s}_L(D,E;a,b)$ の全ての軌道の元の個数は二である（`claim_path_reversal_fixed_point_no_single_traversal`）。選択側の「$E\ne\varnothing$ なら軌道は全て二元」（`claim_path_reversal_selection_complement_orbits`）と対になり、符号と重みを保つ対応の両側の重みが二で揃った。SageMath `path-reversal-fixed-point-no-single-traversal` は一辺二の非後退置換 $30{,}784$ 個（不動点 $152$ 個は全て単純通過辺なし）と、$E$ 非空 $505$ ファイバー×四スピン構造・両符号の軌道 $40{,}768$ 個を全数検査した。Lean 二版は未着手である。
 

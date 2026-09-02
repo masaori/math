@@ -274,4 +274,32 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_weighted_path_reversal_selection_orbit_sums_sign_bijection_counterexample",
+    targets: [
+      "claim_path_reversal_fixed_point_no_single_traversal",
+      "claim_weighted_path_reversal_selection_orbit_sums",
+    ],
+    title: { text: "経路反転軌道と選択補集合軌道の符号保存対応は存在しない" },
+    body: [
+      paragraph([
+        "単純通過辺集合 ", math(String.raw`E`), " が空でなければ、経路反転軌道と選択補集合軌道は",
+        "どちらも全て二元である。しかし、この元数の一致だけでは、両軌道族の間に符号を保つ全単射が存在するとは限らない。",
+        "そのような全単射が存在すれば、各ファイバー・スピン構造・符号について、両側の元数は一致しなければならない。",
+      ]),
+      paragraph([
+        "一辺 ", math(String.raw`L=2`), " の ", math(String.raw`E\ne\varnothing`),
+        " である全ファイバーを四つのスピン構造と二つの符号について厳密に列挙すると、符号別元数が一致しない組は ",
+        math(String.raw`2{,}744`), " 件あった。置換側が ", math(String.raw`2`), " 元、選択側が ",
+        math(String.raw`0`), " 元である最初の例は、反転対の辺集合 ",
+        math(String.raw`D=\{h(1,1)\}`), "、単純通過辺集合 ",
+        math(String.raw`E=\{v(0,0),v(0,1),v(1,0),v(1,1)\}`),
+        "、スピン構造 ", math(String.raw`(a,b)=(0,0)`), "、符号 ", math(String.raw`+1`), " であった",
+        "（sagemath/check/path-reversal-selection-sign-bijection-counterexample）。",
+        "従って経路反転軌道全体と選択補集合軌道全体の間に符号と重みを保つ全単射を構成する経路は採用しない。",
+        "符号付き総和の一致は、既存の切り替え平滑化による相殺を残したまま直接示す必要がある。",
+        "これは一般の不存在定理ではなく、候補経路を排除する有限反例である。",
+      ]),
+    ],
+  },
 ]);

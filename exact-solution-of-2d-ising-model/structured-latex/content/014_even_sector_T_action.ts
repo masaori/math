@@ -199,18 +199,18 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
     ],
     proof: [
       paragraph([
-        ref("matrix_exp_conjugation"),
-        " (3) より、任意の ",
-        math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        " について ",
-        math(String.raw`\exp(X)`),
-        " は可逆で ",
-        math(String.raw`\exp(X)^{-1} = \exp(-X)`),
-        " である。これを ",
-        math(String.raw`X=\tfrac{i}{2}K_1H_1^{(+)}`),
-        math(String.raw`\in\mathrm{Mat}(2^M,\mathbb{C})`),
-        " に適用すると、",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2} = \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)`),
+        math(String.raw`\tfrac{i}{2}K_1H_1^{(+)}\in\mathrm{Mat}(2^M,\mathbb C)`),
+        " である。逆行列を一続きに計算すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\left(V_1^{(+)}\right)^{1/2}\right)^{-1}
+&=\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)^{-1}
+&&\bigl(\because\ \blkref{def_V1_plus_square_root}\bigr)\\
+&=\exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
+&&\bigl(\because\ \blkref{matrix_exp_conjugation}\text{ (3)}\bigr)
+\end{aligned}`),
+      paragraph([
+        "したがって ", math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
         " は可逆である。",
       ]),
     ],
