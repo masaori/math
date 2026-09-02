@@ -1,5 +1,20 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 2026-09-02: login shell の mise hook を有限化
+
+Codex が `timeout 120 git fetch origin` を `/bin/bash -lc` で起動した際、本文の `timeout` より前に
+`.bashrc` の `mise activate` が `mise hook-env -s bash` を実行し、設定探索が停滞した。run8では
+本文のfetchへ到達するまで約43分を要し、外側tickは成功マーカーなしで異常終了した。作業差分はなく、
+専用worktreeをremote defaultへfast-forwardしてから恒久修正した。
+
+tick はmise shimをPATHから除いてNode 22.22.3の実体を固定し、Codex とその子シェルへ
+`MISE_NO_CONFIG=1` を継承する。さらに全 `exec_command` に `login=false` を明示する契約をプロンプトへ
+追加した。回帰テストはこの静的契約に加え、同じ隔離環境の `/bin/bash -lc` と `/bin/bash -c` が
+10秒上限内にNode・npm実行へ到達することを検査する。
+remote default取り込み後の全検証では、クロネッカー積基底の二本の計算鎖とクロネッカー積の転置で、
+参照一覧が根拠行末へ移った既存変更を検出した。内容・式変形・根拠・参照・依存が不変であることを
+履歴と本文で照合し、レビュー済み節が保持する外部入力fingerprintを現行本文へ同期した。
+
 ## 2026-09-02: 半指数行列と第二転送行列の可逆性を二主張へ分割
 
 状態台帳の次の一歩に従い、三つの可逆性境界候補のうち先頭二候補だけを扱った。偶セクターの

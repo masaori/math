@@ -9514,8 +9514,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2029,
-        "inspectedContentSha256": "cecdd6fa3fb66f3aa75d8982f92e7290719c0960058ffb0caafe68dfa9e9b4d5",
+        "inspectedCharacterCount": 1913,
+        "inspectedContentSha256": "c0014341f8b8968f27acf4793018d15312e7313acad2dccadd439617703c4cd4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9572,8 +9572,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 11073,
-        "inspectedContentSha256": "c257a4a58107579de48a064c4d124f5608f95fab64bdcd1c4dbd76f2b3c6c1a3",
+        "inspectedCharacterCount": 10807,
+        "inspectedContentSha256": "b1d6fa5e021b9be178b745de740fe02f935e6e352a7fb758d4994f2eeb43cbc2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9816,7 +9816,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 11,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9885,7 +9885,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9961,8 +9961,8 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 4038,
-        "inspectedContentSha256": "4fa44eaecd2cb1985eed9b46e733647899fd6734f951b9548db1d466290658f3",
+        "inspectedCharacterCount": 3971,
+        "inspectedContentSha256": "121c8f783c7fdb60e0308f1fd6ff7d90413589eab598a9d6594d256a5fe33264",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9974,16 +9974,12 @@
       "dependsOnLabels": [
         "def_matrix_norm",
         "definition_of_cc",
-        "matrix_norm_submultiplicativity",
-        "matrix_norm_triangle_inequality",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
-        "linear_space_general_002b_definition_matrix_norm",
-        "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
-        "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+        "linear_space_general_002b_definition_matrix_norm"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
@@ -15856,7 +15852,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 13,
+        "incomingReferenceCount": 12,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -15924,8 +15920,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4575,
-        "inspectedContentSha256": "45eae737ca4fc2aeafa601a1d3689697aba4badda9250218f1da823d396de967",
+        "inspectedCharacterCount": 4488,
+        "inspectedContentSha256": "a04cdda002bdc81c9a671a11bace00ac6c0d540b3b66a11d6a4ef772ba71c9f0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15936,13 +15932,11 @@
       },
       "dependsOnLabels": [
         "definition_of_cc",
-        "set_and_algebra_notation",
-        "trace_basic_properties"
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_002_claim_trace_properties"
+        "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",

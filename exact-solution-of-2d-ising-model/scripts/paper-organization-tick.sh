@@ -11,8 +11,17 @@ LOCK_DIR="$LOG_DIR/tick.lock"
 TIMEOUT_SECONDS=3300
 GIT_NETWORK_TIMEOUT_SECONDS=120
 
-PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:$HOME/.elan/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH
+NODE_BIN="$HOME/.local/share/mise/installs/node/22.22.3/bin"
+test -x "$NODE_BIN/node"
+test -x "$NODE_BIN/npm"
+PATH="$HOME/.local/bin:$NODE_BIN:$HOME/.elan/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# Codex の exec_command は既定で /bin/bash -lc を使う。bashrc の mise activate が
+# 本文コマンドより先に hook-env を実行するため、内側の timeout ではその停滞を
+# 打ち切れない。tick 内ではmise shimではなくNode実体を含む実行系をPATHで
+# 固定済みなので、子シェルの
+# mise 設定探索を止め、本文コマンドまで有限時間で到達させる。
+MISE_NO_CONFIG=1
+export PATH MISE_NO_CONFIG
 mkdir -p "$LOG_DIR"
 log() { printf '%s %s\n' "$(date '+%F %T')" "$1" | tee -a "$LOG_FILE"; }
 
@@ -71,7 +80,7 @@ else
   mode_instruction="新規モードである。状態台帳の『次の一歩』から、既存棚卸し項目を最大二項だけ扱う。三項以上の本文分割・形式化同期が必要と判明した場合は本文を大規模改変せず、その境界候補と次回の一単位を状態台帳へ記録するところまでを成果とする。独立した別境界へ進まない。"
 fi
 
-PROMPT="[[AI_AGENT_MESSAGE]] 複素行列版2次元イジング模型の論文構成再編を1 tickだけ進める。AGENTS.md、CLAUDE.md、docs/context/全ファイル、exact-solution-of-2d-ising-model/README.md、paper-organization-runbook.md、paper-organization-state.md、MEMORY.mdを全文読む。$mode_instruction 別エージェントによるレビューと指摘修正を同じ単位で反復する。共有main作業ツリー、lambda版、既存tick、docs/contextは変更しない。棚卸し再生成は必ず '$PROJECT_DIR/structured-latex' で npm run inventory:organization を実行する。全検証、状態とMEMORY更新、コミットまで行う。launchd由来のtmux外実行ではGitHub CLIのkeyringを読めないため gh は一切実行しない。反映はSSHのGitだけを使い、120秒上限付きでfetchしたremote defaultを取り込み、検証後の成果コミットを git push origin HEAD:$default_branch で直接反映する。non-fast-forwardなら別手段へ切り替えず、同じGit経路でfetch・merge・再検証してから同じpushを行う。最後にfetchし、成果コミットのremote default包含を確認する。失敗時は別手段へフォールバックせず、一次情報をログへ残して停止し、成功マーカーを出力しない。全作業が成功し、今回の成果コミットがremote defaultの祖先であることをfetch後に確認した場合だけ、最終行へ '${success_prefix}<成果コミットの40桁小文字SHA>' を正確に1行出力する。"
+PROMPT="[[AI_AGENT_MESSAGE]] 複素行列版2次元イジング模型の論文構成再編を1 tickだけ進める。AGENTS.md、CLAUDE.md、docs/context/全ファイル、exact-solution-of-2d-ising-model/README.md、paper-organization-runbook.md、paper-organization-state.md、MEMORY.mdを全文読む。$mode_instruction 別エージェントによるレビューと指摘修正を同じ単位で反復する。共有main作業ツリー、lambda版、既存tick、docs/contextは変更しない。全てのexec_commandはlogin=falseを明示し、/bin/bash -lcを使わない。棚卸し再生成は必ず '$PROJECT_DIR/structured-latex' で npm run inventory:organization を実行する。全検証、状態とMEMORY更新、コミットまで行う。launchd由来のtmux外実行ではGitHub CLIのkeyringを読めないため gh は一切実行しない。反映はSSHのGitだけを使い、120秒上限付きでfetchしたremote defaultを取り込み、検証後の成果コミットを git push origin HEAD:$default_branch で直接反映する。non-fast-forwardなら別手段へ切り替えず、同じGit経路でfetch・merge・再検証してから同じpushを行う。最後にfetchし、成果コミットのremote default包含を確認する。失敗時は別手段へフォールバックせず、一次情報をログへ残して停止し、成功マーカーを出力しない。全作業が成功し、今回の成果コミットがremote defaultの祖先であることをfetch後に確認した場合だけ、最終行へ '${success_prefix}<成果コミットの40桁小文字SHA>' を正確に1行出力する。"
 
 log "START: 論文構成tick"
 set +e

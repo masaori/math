@@ -51,7 +51,22 @@ fi
 grep -Fq "git push origin HEAD:\$default_branch" "$TICK"
 grep -Fq 'continuation_mode=1' "$TICK"
 grep -Fq '既存棚卸し項目を最大二項だけ扱う' "$TICK"
+grep -Fq 'MISE_NO_CONFIG=1' "$TICK"
+grep -Fq 'mise/installs/node/22.22.3/bin' "$TICK"
+if grep -Fq 'mise/shims' "$TICK"; then
+  printf 'MISE_NO_CONFIG環境へmise shimが残っている\n' >&2
+  exit 1
+fi
+grep -Fq '全てのexec_commandはlogin=falseを明示し、/bin/bash -lcを使わない' "$TICK"
 grep -Fq 'CHECKPOINT: 有限上限までの成果をworktreeへ保持し、次回は継続モードで完了工程だけを行う' "$TICK"
+
+# Codex が既定の login shell を選んでも、tick から継承した環境では mise の
+# 設定探索を行わず本文コマンドへ有限時間で到達することを実経路で確認する。
+tick_path="$HOME/.local/bin:$HOME/.local/share/mise/installs/node/22.22.3/bin:$HOME/.elan/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+env -i HOME="$HOME" PATH="$tick_path" MISE_NO_CONFIG=1 timeout -k 2 10 /bin/bash -lc \
+  'test "$MISE_NO_CONFIG" = 1; test "$(node --version)" = v22.22.3; npm --version >/dev/null'
+env -i HOME="$HOME" PATH="$tick_path" MISE_NO_CONFIG=1 timeout -k 2 10 /bin/bash -c \
+  'test "$MISE_NO_CONFIG" = 1; test "$(node --version)" = v22.22.3; npm --version >/dev/null'
 test "$("$TIMEOUT_DISPOSITION" 124 1)" = checkpoint
 test "$("$TIMEOUT_DISPOSITION" 137 1)" = checkpoint
 test "$("$TIMEOUT_DISPOSITION" 124 0)" = timeout
