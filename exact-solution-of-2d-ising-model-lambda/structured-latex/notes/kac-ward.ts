@@ -3,7 +3,7 @@
  * 検算は証明ではなく、一般化できない有限標本を本文へ混ぜない。
  */
 
-import { defineNotes, displayMath, math, paragraph } from "../schema.ts";
+import { defineNotes, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineNotes([
   {
@@ -328,10 +328,11 @@ export default defineNotes([
         math(String.raw`E=\{h(0,1),h(1,1),v(0,0),v(1,1)\}`), "、",
         math(String.raw`(a,b)=(0,0)`), " で ", math(String.raw`S_Y=-2`), " である",
         "（sagemath/check/fully-unswitchable-fiber-phase-sums）。",
-        "したがって、切り替え可能部分も全対切り替え不能な残余も、固定ファイバー内の符号反転対合だけでは消えない。",
-        "切り替え平滑化は反転対の辺集合 ", math(String.raw`D`),
-        " を変えてファイバーを移すので、縮約の帰納は ", math(String.raw`D`),
-        " の異なるファイバーの位相和を結ぶ形で構成しなければならない。",
+        "したがって、切り替え可能部分も全対切り替え不能な残余も、各部分を保つ固定ファイバー内の符号反転対合だけでは消えない。",
+        "ただし、切り替え可能な接触の平滑化は ",
+        ref("claim_switchable_contact_smoothing_preserves_fiber"), " により反転対の辺集合 ",
+        math(String.raw`D`), " と単純通過の辺集合 ", math(String.raw`E`),
+        " を保つ。この有限観察だけから、異なるファイバーを結ぶ縮約帰納の存在は従わない。",
         "この検算は有限集合の数え上げと ", math(String.raw`\mathbb Q(\zeta_8)`),
         " の等号だけで完結し、浮動小数点は使わない。",
       ]),
