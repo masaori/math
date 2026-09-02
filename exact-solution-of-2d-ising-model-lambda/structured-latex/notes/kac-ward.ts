@@ -359,7 +359,11 @@ export default defineNotes([
   },
   {
     id: "note_kac_ward_selection_sum_affine_character",
-    targets: ["def_signed_selection_sum", "claim_selection_sum_signed_count"],
+    targets: [
+      "def_signed_selection_sum",
+      "claim_selection_sum_signed_count",
+      "claim_selection_even_subgraph_action_character",
+    ],
     title: { text: "選択集合は偶部分グラフの作用による文字和として扱える" },
     body: [
       paragraph([
@@ -381,8 +385,10 @@ export default defineNotes([
         "（sagemath/check/selection-sum-affine-character）。これは選択和を三分類と独立な一つの文字和へまとめ、",
         "ファイバー位相和全体と直接比較する一般証明の部品になる。検算は有限集合、",
         math(String.raw`\mathbb F_2`), " の算術、", math(String.raw`\mathbb Z`),
-        " の有限和だけで完結し、浮動小数点は使わない。一般の ", math(String.raw`L`),
-        " に対する記述と Lean 二版は未着手である。",
+        " の有限和だけで完結し、浮動小数点は使わない。作用が選択集合を保つことと指数差の文字は、",
+        "一般の ", math(String.raw`L`),
+        " で本文の主張（偶部分グラフの対称差は選択集合を保ち符号指数を文字だけ動かす）として示した。",
+        "単純推移性の一般の記述、選択和の評価の命題化、Lean 二版は未着手である。",
       ]),
     ],
   },

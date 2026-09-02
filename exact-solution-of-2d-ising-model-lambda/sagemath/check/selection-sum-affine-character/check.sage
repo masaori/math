@@ -1,10 +1,13 @@
 """選択集合への偶部分グラフの作用と選択符号の文字を厳密検査する。
 
-対象: def_signed_selection_sum, claim_selection_sum_signed_count。
+対象: claim_selection_even_subgraph_action_character
+（および def_signed_selection_sum, claim_selection_sum_signed_count）。
 
 一辺 L=2 の全ファイバー (D,E) について、E の偶部分グラフ H を対称差で
-選択集合 C_L(D,E) に作用させる。この作用が単純推移的であり、選択符号の
-変化が (-1)^(eps_h(E) eps_v(H) + eps_v(E) eps_h(H)) に等しいことを調べる。
+選択集合 C_L(D,E) に作用させる。任意の選択 C と任意の偶 H⊆E について
+C△H が選択集合に属し、選択符号の指数差が
+eps_h(E) eps_v(H) + eps_v(E) eps_h(H) (mod 2) に等しいこと（全対検査）、
+この作用が単純推移的であることを調べる。
 従ってこの文字が非自明なら選択和は零、自明なら全項が同符号である。
 計算は有限集合、F_2 の算術、ZZ だけで行い、浮動小数点は使わない。
 """
@@ -47,16 +50,21 @@ for (doubled, single), fiber in sorted(all_fibers.items()):
 
     nontrivial_character = any(winding_pairing(single, translation) == 1
                                for translation in translations)
+    character = {translation: winding_pairing(single, translation)
+                 for translation in translations}
     for a in (0, 1):
         for b in (0, 1):
-            base_exponent = selection_exponent(a, b, doubled, single, base)
-            for translation in translations:
-                shifted = base.symmetric_difference(translation)
-                exponent_difference = (selection_exponent(a, b, doubled, single, shifted)
-                                       - base_exponent) % 2
-                assert exponent_difference == winding_pairing(single, translation)
+            exponents = {selected: selection_exponent(a, b, doubled, single, selected)
+                         for selected in selectors}
+            base_exponent = exponents[base]
+            for selected in selectors:
+                for translation in translations:
+                    shifted = selected.symmetric_difference(translation)
+                    assert shifted in selectors
+                    exponent_difference = (exponents[shifted] - exponents[selected]) % 2
+                    assert exponent_difference == character[translation]
 
-            value = sum((ZZ(-1) ** selection_exponent(a, b, doubled, single, selected)
+            value = sum((ZZ(-1) ** exponents[selected]
                          for selected in selectors), ZZ(0))
             if nontrivial_character:
                 assert value == 0

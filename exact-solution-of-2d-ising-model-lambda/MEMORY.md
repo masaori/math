@@ -9,7 +9,17 @@
 台帳は既に `| todo |` 列を持たない形式へ変わっていたため、残作業表の行を数えるよう監査も
 現行形式へ揃えた。
 
-## 現在の到達点（2026-09-03 の 122 回目の tick 時点）
+## 現在の到達点（2026-09-03 の 123 回目の tick 時点）
+
+**偶部分グラフの対称差が選択集合を保ち、符号指数を文字だけ動かすことを一般の $L$ の主張へ昇格した。** 互いに素な $D,E\subseteq E_L$（$E$ 偶）、任意の選択 $C\in\mathcal C_L(D,E)$、$\operatorname{Even}_L(H)$ を満たす任意の $H\subseteq E$ について、$C\mathbin\triangle H\in\mathcal C_L(D,E)$ であり、$\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)\equiv\vartheta^{a,b}_L(D,E;C)+\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(H)+\varepsilon_{L,\mathrm v}(E)\varepsilon_{L,\mathrm h}(H)\pmod2$ を示した（`claim_selection_even_subgraph_action_character`）。証明は、巻き付き偶奇の対称差加法性 $\varepsilon(X\mathbin\triangle Y)\equiv\varepsilon(X)+\varepsilon(Y)$ と、$B=A\mathbin\triangle E$ から従う $\beta\equiv\alpha+e$ の合同で、符号指数の六項を展開して二の倍数を消す一続きの合同鎖である。SageMath `selection-sum-affine-character` は任意の選択×任意の偶 $H$ の全対検査へ拡張して通した（全 $2{,}436$ 組、3 分 54 秒）。Lean 二版は未着手である。
+
+次 tick は、作用の単純推移性（非空なら $H\mapsto C_0\mathbin\triangle H$ が全単射）を一般の $L$ で示し、選択和の評価（空なら零・非自明文字なら零・自明なら定符号×元数）を命題化する。
+
+前進前レビューでは、前 tick の選択和の文字和の観察（ノート・overview・検算・本文の選択和の定義）を照合した。件数 $4\times192+192+1{,}476=2{,}436$ は検算の assert と一致し、対象ラベルは実在し、「何も言っていない主張」や不一致は無かったため、レビュー修正は無かった。
+
+Lambda 側 check（942 ブロック・相互参照 $3{,}965$ 件すべて解決）・linkage（422 検算）・対象 SageMath（全対検査）・Lean $1{,}635$ 定理の sorryAx 非依存・`sorry` / `admit` 無し・PDF 409 ページを通した。
+
+## ひとつ前の到達点（2026-09-03 の 122 回目の tick 時点）
 
 **選択和を、選択集合への偶部分グラフの単純推移作用が定める文字和へまとめた。** 選択集合が空なら選択和は零である。空でなければ、$E$ に含まれる偶部分グラフ $H$ の対称差作用は選択集合上で単純推移的であり、符号の指数差は $\varepsilon_{\mathrm h}(E)\varepsilon_{\mathrm v}(H)+\varepsilon_{\mathrm v}(E)\varepsilon_{\mathrm h}(H)$ である。従ってこの文字が非自明なら選択和は零、自明なら全項が同符号になる。一辺二の $609$ ファイバー×四スピン構造を検査し、空の選択集合 $192$ ファイバー、非自明文字による零和 $192$ 組、定符号和 $1{,}476$ 組を確認した。観察を `note_kac_ward_selection_sum_affine_character` と SageMath `selection-sum-affine-character` に固定した。一般の $L$ の記述と Lean 二版は未着手である。
 

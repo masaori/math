@@ -54901,6 +54901,181 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_selection_even_subgraph_action",
+        labels: [],
+        title: { text: "選択集合への偶部分グラフの対称差作用" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_selection_even_subgraph_action_character",
+            beforeFocus: [],
+            focus: {
+              id: "kac_ward_claim_selection_even_subgraph_action_character",
+              kind: "claim",
+              title: { text: "偶部分グラフの対称差は選択集合を保ち符号指数を文字だけ動かす" },
+              labels: ["claim_selection_even_subgraph_action_character"],
+              habitat: "N",
+              verification: ["sagemath/check/selection-sum-affine-character"],
+              statement: [
+                paragraph([
+                  math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                  "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+                  math(String.raw`D,E\subseteq E_L`), " は ", math(String.raw`\operatorname{Even}_L(E)`),
+                  "（", ref("def_even_edge_subset"), "）を満たすとする。任意の選択 ",
+                  math(String.raw`C\in\mathcal C_L(D,E)`),
+                  "（", ref("def_even_subgraph_pair_fiber"), "）と、",
+                  math(String.raw`\operatorname{Even}_L(H)`), " を満たす任意の部分集合 ",
+                  math(String.raw`H\subseteq E`), " について、",
+                ]),
+                displayMath(String.raw`C\mathbin\triangle H\in\mathcal C_L(D,E)`),
+                paragraph([
+                  "であり、符号指数（", ref("claim_selection_sum_signed_count"), "）は ",
+                  math(String.raw`\mathbb Z`), " の合同式",
+                ]),
+                displayMath(String.raw`\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)
+\equiv\vartheta^{a,b}_L(D,E;C)
++\varepsilon_{L,\mathrm h}(E)\,\varepsilon_{L,\mathrm v}(H)
++\varepsilon_{L,\mathrm v}(E)\,\varepsilon_{L,\mathrm h}(H)\pmod 2`),
+                paragraph(["を満たす。とくに符号について"]),
+                displayMath(String.raw`(-1)^{\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)}
+=(-1)^{\vartheta^{a,b}_L(D,E;C)}\cdot
+(-1)^{\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(H)
++\varepsilon_{L,\mathrm v}(E)\varepsilon_{L,\mathrm h}(H)}`),
+                paragraph([
+                  "が成り立ち、符号の変化は ", math(String.raw`C`), " に依らず ",
+                  math(String.raw`H`), " だけで決まる。巻き付き偶奇 ",
+                  math(String.raw`\varepsilon_{L,\mathrm h},\varepsilon_{L,\mathrm v}`), " は ",
+                  ref("def_torus_winding_parities"),
+                  " で定めた。全て有限集合の演算と整数の合同だけで判定でき、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "この証明の中だけで ", math(String.raw`A:=D\cup C`), "、",
+                  math(String.raw`B:=D\cup(E\setminus C)`), " と置き、",
+                  math(String.raw`\alpha_{\mathrm h}:=\varepsilon_{L,\mathrm h}(A)`), "、",
+                  math(String.raw`\alpha_{\mathrm v}:=\varepsilon_{L,\mathrm v}(A)`), "、",
+                  math(String.raw`\beta_{\mathrm h}:=\varepsilon_{L,\mathrm h}(B)`), "、",
+                  math(String.raw`\beta_{\mathrm v}:=\varepsilon_{L,\mathrm v}(B)`), "、",
+                  math(String.raw`h_{\mathrm h}:=\varepsilon_{L,\mathrm h}(H)`), "、",
+                  math(String.raw`h_{\mathrm v}:=\varepsilon_{L,\mathrm v}(H)`), "、",
+                  math(String.raw`e_{\mathrm h}:=\varepsilon_{L,\mathrm h}(E)`), "、",
+                  math(String.raw`e_{\mathrm v}:=\varepsilon_{L,\mathrm v}(E)`),
+                  " と略記する。いずれも ", math(String.raw`\{0,1\}\subset\mathbb N`),
+                  " に属する（", ref("def_torus_winding_parities"), "）。",
+                ]),
+                paragraph([
+                  "準備として集合の等式を三つ置く。", math(String.raw`C\subseteq E`), "、",
+                  math(String.raw`H\subseteq E`), "、", math(String.raw`D\cap E=\varnothing`),
+                  " なので、辺 ", math(String.raw`e\in E_L`), " ごとの所属の場合分けにより",
+                ]),
+                displayMath(String.raw`C\mathbin\triangle H\subseteq E,\qquad
+D\cup(C\mathbin\triangle H)=A\mathbin\triangle H,\qquad
+E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
+                paragraph([
+                  "が成り立つ（対称差・合併・差はいずれも辺ごとの所属だけで決まり、",
+                  math(String.raw`D`), " の辺は ", math(String.raw`C,H,E`),
+                  " のどれにも属さない）。第二の等式を ", math(String.raw`E\setminus C\subseteq E`),
+                  " へ適用すると ",
+                  math(String.raw`D\cup\bigl((E\setminus C)\mathbin\triangle H\bigr)=B\mathbin\triangle H`),
+                  " も従う。また ", math(String.raw`D`), " の辺は ", math(String.raw`E`),
+                  " に属さず所属が変わらない一方、", math(String.raw`E`), " の辺では ",
+                  math(String.raw`C`), " との所属が反転するので、同じ場合分けにより ",
+                  math(String.raw`A\mathbin\triangle E=D\cup(C\mathbin\triangle E)=D\cup(E\setminus C)=B`),
+                  " である。",
+                ]),
+                paragraph([
+                  "次に偶性の保存を置く。", math(String.raw`X\subseteq E_L`), " が ",
+                  math(String.raw`\operatorname{Even}_L(X)`),
+                  " を満たすなら、各頂点 ", math(String.raw`v\in V_L`),
+                  " で対称差では両方に属する辺の端点寄与が二度現れて法 2 で消えるので",
+                ]),
+                displayMath(String.raw`d_{X\mathbin\triangle H}(v)\bmod2
+=\bigl(d_X(v)+d_H(v)\bigr)\bmod2
+=0\quad\bigl(\because\ \blkref{def_edge_subset_incidence_count},\ \blkref{def_even_edge_subset}\text{ と }\operatorname{Even}_L(H)\bigr)`),
+                paragraph([
+                  "となり ", math(String.raw`\operatorname{Even}_L(X\mathbin\triangle H)`),
+                  " である。さらに巻き付き偶奇の加法性を置く。任意の ",
+                  math(String.raw`X,Y\subseteq E_L`), " と境界横断辺集合 ",
+                  math(String.raw`W\in\{C_{L,\mathrm h},C_{L,\mathrm v}\}`),
+                  "（", ref("def_torus_winding_parities"), "）について",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bigl\lvert(X\mathbin\triangle Y)\cap W\bigr\rvert
+&=\bigl\lvert(X\cap W)\mathbin\triangle(Y\cap W)\bigr\rvert
+&&\bigl(\because\ \text{対称差と共通部分の分配則}\bigr)\\
+&=\lvert X\cap W\rvert+\lvert Y\cap W\rvert-2\,\lvert X\cap Y\cap W\rvert
+&&\bigl(\because\ \text{互いに素な分割による個数の加法性と }\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "なので、", math(String.raw`\varepsilon_{L,\mathrm h}(X\mathbin\triangle Y)
+\equiv\varepsilon_{L,\mathrm h}(X)+\varepsilon_{L,\mathrm h}(Y)\pmod2`),
+                  " と ", math(String.raw`\varepsilon_{L,\mathrm v}(X\mathbin\triangle Y)
+\equiv\varepsilon_{L,\mathrm v}(X)+\varepsilon_{L,\mathrm v}(Y)\pmod2`),
+                  " が成り立つ（", ref("def_torus_winding_parities"),
+                  " の法 2 の値と、2 の倍数の消去）。とくに ",
+                  math(String.raw`B=A\mathbin\triangle E`), " へ適用して",
+                ]),
+                displayMath(String.raw`\beta_{\mathrm h}\equiv\alpha_{\mathrm h}+e_{\mathrm h}\pmod2,\qquad
+\beta_{\mathrm v}\equiv\alpha_{\mathrm v}+e_{\mathrm v}\pmod2`),
+                paragraph([
+                  "を得る。第一の主張を示す。", math(String.raw`C\in\mathcal C_L(D,E)`), " より ",
+                  math(String.raw`\operatorname{Even}_L(A)`),
+                  "（", ref("def_even_subgraph_pair_fiber"), "）なので、偶性の保存により ",
+                  math(String.raw`\operatorname{Even}_L(A\mathbin\triangle H)`),
+                  " である。準備の等式 ",
+                  math(String.raw`D\cup(C\mathbin\triangle H)=A\mathbin\triangle H`), " と ",
+                  math(String.raw`C\mathbin\triangle H\subseteq E`), " から ",
+                  math(String.raw`C\mathbin\triangle H\in\mathcal C_L(D,E)`),
+                  "（", ref("def_even_subgraph_pair_fiber"), "）である。",
+                ]),
+                paragraph(["第二の主張を示す。求めたい値から始める。"]),
+                displayMath(String.raw`\begin{aligned}
+\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)
+&=\begin{aligned}[t]
+&(1+a)\varepsilon_{L,\mathrm h}(A\mathbin\triangle H)+(1+b)\varepsilon_{L,\mathrm v}(A\mathbin\triangle H)
++\varepsilon_{L,\mathrm h}(A\mathbin\triangle H)\,\varepsilon_{L,\mathrm v}(A\mathbin\triangle H)\\
+&+(1+a)\varepsilon_{L,\mathrm h}(B\mathbin\triangle H)+(1+b)\varepsilon_{L,\mathrm v}(B\mathbin\triangle H)
++\varepsilon_{L,\mathrm h}(B\mathbin\triangle H)\,\varepsilon_{L,\mathrm v}(B\mathbin\triangle H)
+\end{aligned}
+&&\bigl(\because\ \blkref{claim_selection_sum_signed_count}\text{ の符号指数の定義と準備の二つの合併の等式}\bigr)\\
+&\equiv\begin{aligned}[t]
+&(1+a)(\alpha_{\mathrm h}+h_{\mathrm h})+(1+b)(\alpha_{\mathrm v}+h_{\mathrm v})
++(\alpha_{\mathrm h}+h_{\mathrm h})(\alpha_{\mathrm v}+h_{\mathrm v})\\
+&+(1+a)(\beta_{\mathrm h}+h_{\mathrm h})+(1+b)(\beta_{\mathrm v}+h_{\mathrm v})
++(\beta_{\mathrm h}+h_{\mathrm h})(\beta_{\mathrm v}+h_{\mathrm v})
+\end{aligned}\pmod2
+&&\bigl(\because\ \text{巻き付き偶奇の加法性。合同式は }\mathbb Z\text{ の加法・乗法と両立する}\bigr)\\
+&\equiv\vartheta^{a,b}_L(D,E;C)
++2\bigl((1+a)h_{\mathrm h}+(1+b)h_{\mathrm v}+h_{\mathrm h}h_{\mathrm v}\bigr)
++(\alpha_{\mathrm h}+\beta_{\mathrm h})h_{\mathrm v}+(\alpha_{\mathrm v}+\beta_{\mathrm v})h_{\mathrm h}\pmod2
+&&\bigl(\because\ \text{展開して }\blkref{claim_selection_sum_signed_count}\text{ の六項をまとめる。}\mathbb Z\text{ の分配則}\bigr)\\
+&\equiv\vartheta^{a,b}_L(D,E;C)
++(2\alpha_{\mathrm h}+e_{\mathrm h})h_{\mathrm v}+(2\alpha_{\mathrm v}+e_{\mathrm v})h_{\mathrm h}\pmod2
+&&\bigl(\because\ 2\text{ の倍数の消去と }\beta\equiv\alpha+e\text{ の二つの合同式}\bigr)\\
+&\equiv\vartheta^{a,b}_L(D,E;C)+e_{\mathrm h}h_{\mathrm v}+e_{\mathrm v}h_{\mathrm h}\pmod2
+&&\bigl(\because\ 2\text{ の倍数の消去}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "最後の右辺は略記を戻せば主張の合同式そのものである。符号の等式は、この合同式の両辺を ",
+                  math(String.raw`(-1)`), " の指数に入れると法 2 で等しい指数が同じ符号を与えることから従う。増分 ",
+                  math(String.raw`e_{\mathrm h}h_{\mathrm v}+e_{\mathrm v}h_{\mathrm h}`), " は ",
+                  math(String.raw`\alpha_{\mathrm h},\alpha_{\mathrm v}`),
+                  " を含まないので ", math(String.raw`C`),
+                  " に依らない。全過程は有限集合の演算と ", math(String.raw`\mathbb Z`),
+                  " の合同だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_path_reversal_phase_preservation",
         labels: [],
         title: { text: "経路反転の位相寄与の保存" },
