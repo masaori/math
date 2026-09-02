@@ -9,7 +9,19 @@
 台帳は既に `| todo |` 列を持たない形式へ変わっていたため、残作業表の行を数えるよう監査も
 現行形式へ揃えた。
 
-## 現在の到達点（2026-09-03 の 124 回目の tick 時点）
+## 現在の到達点（2026-09-03 の 125 回目の tick 時点）
+
+**文字による選択和の消滅が、ファイバー位相和の三分類の部分和でも個別に成立することを一辺二の全数計算で確定した。** 選択和の文字評価が与える三種別ごとに全 $2{,}436$ 組を分けると、空の選択集合 $768$ 組・非自明文字 $192$ 組・自明文字 $1{,}476$ 組であり、空と非自明文字の全 $960$ 組で三分類（接触なし・切り替え可能対あり・全対切り替え不能）の部分和 $S_Z,S_X,S_Y$ は全て個別に零だった。非零の部分和は自明文字の組にしか現れない（$S_Z\ne0$ が $92$ 組、$S_X\ne0$ が $736$ 組、$S_Y\ne0$ が $648$ 組。$S_Z=U$ は $1{,}384$ 組で破れる）。従って一辺二では、文字が強制する $\mathcal K^{a,b}_L(D,E)=0$ は三分類の各部分ごとに成立しており、一般の $L$ の構成は部分ごとの符号反転構造として探してよい。非零の値の同定は三分類を混ぜた全体で行う。観察を `note_kac_ward_claim_selection_sum_character_evaluation_fiber_phase_part_vanishing` と SageMath `fiber-phase-character-vanishing`（実行 4 分 32 秒）に固定した。
+
+次 tick は、空の選択集合または非自明文字のファイバーで $\mathcal K^{a,b}_L(D,E)=0$ を一般の $L$ で示す構成（部分ごとの符号反転対合または文字作用）に着手する。
+
+前進前レビューでは、二つの証明が散文で引いていた巻き付き偶奇の対称差加法性 $\varepsilon(X\mathbin\triangle Y)\equiv\varepsilon(X)+\varepsilon(Y)\pmod2$ を、独立主張 `claim_winding_parity_symmetric_difference_additivity` へ昇格し、両証明の引用を行末の blkref へ直した。SageMath `winding-parity-symmetric-difference-additivity`（一辺二の全 $65{,}536$ 対）を追加した。「何も言っていない主張」は無かった。修正は前進前にコミット `ecfa77948` として `origin/main` へ反映した。
+
+並列の式変形統一は、姉妹側の「$Z_\mu,Y_\mu$ の反交換関係」の準備で、散文へ畳まれていた $i\cdot(-i)=1$ の計算を、乗法の可換律と直前の鎖を行末根拠とする二段の鎖へ開いた。内容・根拠・参照は不変である。
+
+Lambda 側 check（948 ブロック・相互参照 $3{,}977$ 件すべて解決）・linkage（424 検算）・対象 SageMath（全 $2{,}436$ 組と加法性の全 $65{,}536$ 対）・PDF 411 ページを通した。姉妹側 check・PDF も通した。新しい本文主張は加法性の独立主張だけで、その Lean 二版は既存の列と同様に未着手である。
+
+## ひとつ前の到達点（2026-09-03 の 124 回目の tick 時点）
 
 **非空な選択集合への偶部分グラフの対称差作用が単純推移的であり、選択和が空性と巻き付き文字で評価できることを一般の $L$ で示した。** $E$ に含まれる偶部分グラフの有限集合 $\mathcal H_L(E)$ を定め、任意に固定した $C_0\in\mathcal C_L(D,E)$ に対する $H\mapsto C_0\mathbin\triangle H$ が $\mathcal H_L(E)$ から選択集合への全単射であることを証明した（`claim_selection_even_subgraph_action_simply_transitive`）。この全単射で選択和の添字を替え、前 tick の符号変化式を適用すると、選択集合が空なら零、$\chi_E(H_0)=-1$ となる偶部分グラフがあれば符号反転全単射により零、全ての $H$ で $\chi_E(H)=1$ なら $(-1)^{\vartheta(C_0)}|\mathcal H_L(E)|$ となる（`claim_selection_sum_character_evaluation`）。SageMath `selection-sum-affine-character` は一辺二の全 $2{,}436$ 組で通した。Lean 二版は未着手である。
 

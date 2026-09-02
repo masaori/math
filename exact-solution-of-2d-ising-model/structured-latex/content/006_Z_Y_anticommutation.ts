@@ -55,12 +55,16 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &&(\because \mathbb{R} \text{ の符号の計算})
 \end{aligned}`,
       ),
-      paragraph([
-        math(String.raw`i\cdot(-i)=1`),
-        " も同じ計算で得られる（",
-        math(String.raw`\mathbb{C}`),
-        " の乗法は可換）。",
-      ]),
+      paragraph(["続けて逆順の積を計算する。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+i\cdot(-i)
+&= (-i)\cdot i
+&&(\because \mathbb{C} \text{ の乗法の可換律}) \\
+&= 1
+&&(\because \text{直前の鎖})
+\end{aligned}`,
+      ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x\sigma^x
