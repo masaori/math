@@ -4129,10 +4129,6 @@
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
-          "dependentId": "eigenvalues_of_V_007_claim_trace_of_number_operator_product",
-          "prerequisiteId": "eigenvalues_of_V_002_claim_trace_properties"
-        },
-        {
           "dependentId": "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
@@ -15844,7 +15840,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 12,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -16165,8 +16161,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6603,
-        "inspectedContentSha256": "cb0585c9051a59235972b52d7722f5a3a70ff98629e1efb834d3e93a7a298f39",
+        "inspectedCharacterCount": 6724,
+        "inspectedContentSha256": "99eeb7abc2f0d7ac438f23588928887bf8ac265731f10ce19eaf686d6ff65e1d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16178,13 +16174,11 @@
       "dependsOnLabels": [
         "definition_of_cc",
         "number_operators_commute",
-        "set_and_algebra_notation",
-        "trace_basic_properties"
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_002_claim_trace_properties",
         "eigenvalues_of_V_006_claim_number_operators_commute"
       ],
       "semanticPrerequisiteLabels": [
