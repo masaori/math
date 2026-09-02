@@ -260,12 +260,23 @@ function collectText(node: unknown, out: string[]): void {
   for (const value of Object.values(node as Record<string, unknown>)) collectText(value, out);
 }
 
+/**
+ * 除外句を順に取り除く。**本文の走査と除外句の検査は、必ずこの一本を通す。**
+ *
+ * 走査は宣言された除外句を順に適用するのに、除外句の検査は句を一つずつ単独で適用していた。
+ * 取り除きは空白を残すので、先に取り除いた句の跡（空白）を含む句が次に一致しうる。すると、
+ * どの句も単独では語を消さないのに、合成では消える組み合わせが作れる。
+ */
+function strippedByPhrases(raw: string, phrases: readonly string[]): string {
+  let text = raw;
+  for (const phrase of phrases) text = text.split(phrase).join(" ");
+  return text;
+}
+
 function normalizedTextOf(block: unknown): string {
   const parts: string[] = [];
   collectText(block, parts);
-  let text = parts.join(" ");
-  for (const phrase of NEUTRAL_PHRASES) text = text.split(phrase).join(" ");
-  return text;
+  return strippedByPhrases(parts.join(" "), NEUTRAL_PHRASES);
 }
 
 function caTermsIn(block: unknown): string[] {
@@ -369,22 +380,69 @@ for (const chapter of documentOrganization) {
  *
  * 照合は語彙検査の本体と同じ規則にそろえる（既存物理由来語は大文字小文字を区別しない）。
  */
+function termsMaskedBetween(
+  beforeText: string,
+  afterText: string,
+  terms: readonly string[],
+  ignoreCase: boolean,
+): string[] {
+  const before = ignoreCase ? beforeText.toLowerCase() : beforeText;
+  const after = ignoreCase ? afterText.toLowerCase() : afterText;
+  const masked: string[] = [];
+  for (const term of terms) {
+    const needle = ignoreCase ? term.toLowerCase() : term;
+    const beforeCount = before.split(needle).length - 1;
+    const afterCount = after.split(needle).length - 1;
+    if (afterCount < beforeCount) masked.push(term);
+  }
+  return masked;
+}
+
+/**
+ * 一つの句が本文から実際に消す語を求める。単独で適用した場合と、宣言全体の中で
+ * **その句だけを外した場合**（差し引き）の両方を見る。
+ *
+ * 単独の適用だけでは、他の句が作った跡に乗って初めて語を消す句を捕まえられない。
+ * 差し引きだけでは、二つの句が同じ語を重複して消す場合にどちらも無罪になる。両方を採る。
+ */
 function termsMaskedFromTexts(
   phrase: string,
+  terms: readonly string[],
+  texts: readonly string[],
+  ignoreCase: boolean,
+  allPhrases: readonly string[] = [phrase],
+): string[] {
+  const others = allPhrases.filter((candidate) => candidate !== phrase);
+  const masked = new Set<string>();
+  for (const raw of texts) {
+    for (const term of termsMaskedBetween(raw, strippedByPhrases(raw, [phrase]), terms, ignoreCase)) {
+      masked.add(term);
+    }
+    const withoutPhrase = strippedByPhrases(raw, others);
+    const withAll = strippedByPhrases(raw, allPhrases);
+    for (const term of termsMaskedBetween(withoutPhrase, withAll, terms, ignoreCase)) {
+      masked.add(term);
+    }
+  }
+  return [...masked];
+}
+
+/**
+ * 宣言された除外句を**すべて適用した場合**に本文から消える語を求める。
+ *
+ * 句ごとの検査は、消えた語をどの句の責任にするかを決める作業でもある。決められない
+ * 組み合わせ（複数の句が同じ語を重複して消す等）が作れる以上、責任の割り当てとは別に、
+ * 走査が実際に見る文面そのもので消えた語を数える必要がある。
+ */
+function termsMaskedByAllPhrases(
   terms: readonly string[],
   texts: readonly string[],
   ignoreCase: boolean,
 ): string[] {
   const masked = new Set<string>();
   for (const raw of texts) {
-    const stripped = raw.split(phrase).join(" ");
-    const before = ignoreCase ? raw.toLowerCase() : raw;
-    const after = ignoreCase ? stripped.toLowerCase() : stripped;
-    for (const term of terms) {
-      const needle = ignoreCase ? term.toLowerCase() : term;
-      const beforeCount = before.split(needle).length - 1;
-      const afterCount = after.split(needle).length - 1;
-      if (afterCount < beforeCount) masked.add(term);
+    for (const term of termsMaskedBetween(raw, strippedByPhrases(raw, NEUTRAL_PHRASES), terms, ignoreCase)) {
+      masked.add(term);
     }
   }
   return [...masked];
@@ -397,7 +455,11 @@ function termsMaskedFromTexts(
  * 隠蔽を見落とす。CA 固有語と大文字小文字を区別しない既存物理由来語の両方で、
  * 一回でも出現数が減れば検出することを常時確認する。
  */
-const duplicateTermMaskingRegressions = [
+const duplicateTermMaskingRegressions: readonly {
+  readonly name: string;
+  readonly actual: readonly string[];
+  readonly expected: string;
+}[] = [
   {
     name: "CA 固有語の一箇所だけを消す除外句",
     actual: termsMaskedFromTexts(
@@ -418,6 +480,28 @@ const duplicateTermMaskingRegressions = [
     ),
     expected: "physics",
   },
+  {
+    name: "他の句の跡に乗って CA 固有語を消す除外句",
+    actual: termsMaskedFromTexts(
+      "限 状",
+      ["状態集合"],
+      ["有限舞台ABC状態集合"],
+      false,
+      ["舞台ABC", "限 状"],
+    ),
+    expected: "状態集合",
+  },
+  {
+    name: "他の句の跡に乗って既存物理由来語を消す除外句",
+    actual: termsMaskedFromTexts(
+      "限 物",
+      ["物理"],
+      ["有限舞台ABC物理"],
+      true,
+      ["舞台ABC", "限 物"],
+    ),
+    expected: "物理",
+  },
 ] as const;
 for (const regression of duplicateTermMaskingRegressions) {
   if (!regression.actual.includes(regression.expected)) {
@@ -437,7 +521,7 @@ for (const entry of NEUTRAL_PHRASE_ENTRIES) {
   const actuallyMasked = [
     ...new Set([
       ...CA_TERMS.filter((term) => entry.phrase.includes(term)),
-      ...termsMaskedFromTexts(entry.phrase, CA_TERMS, toolChapterRawTexts, false),
+      ...termsMaskedFromTexts(entry.phrase, CA_TERMS, toolChapterRawTexts, false, NEUTRAL_PHRASES),
     ]),
   ];
   const declared = [...entry.masks].sort().join("、");
@@ -452,7 +536,7 @@ for (const entry of NEUTRAL_PHRASE_ENTRIES) {
   const maskedPhysics = [
     ...new Set([
       ...PHYSICS_TERMS.filter((term) => entry.phrase.toLowerCase().includes(term.toLowerCase())),
-      ...termsMaskedFromTexts(entry.phrase, PHYSICS_TERMS, allScannedRawTexts, true),
+      ...termsMaskedFromTexts(entry.phrase, PHYSICS_TERMS, allScannedRawTexts, true, NEUTRAL_PHRASES),
     ]),
   ];
   if (maskedPhysics.length > 0) {
@@ -463,6 +547,30 @@ for (const entry of NEUTRAL_PHRASE_ENTRIES) {
   if (!toolChapterRawTexts.some((text) => text.includes(entry.phrase))) {
     violations.push(`除外句が数学的道具立て章の本文で使われていない: ${entry.phrase}`);
   }
+}
+
+/**
+ * 除外句の宣言全体を、走査が実際に見る文面で検査する。
+ *
+ * 上の検査は「消えた語をどの句の責任にするか」を割り当てる作業でもあり、割り当てが決まらない
+ * 組み合わせ（複数の句が同じ語を重複して消す等）を作れる。責任の割り当てとは別に、
+ * 宣言をすべて適用した後の文面そのもので消えた語を数え、既存物理由来語は一語も消えないこと、
+ * CA 固有語はどこかの句が宣言している語だけが消えることを要求する。
+ */
+const physicsMaskedByAllPhrases = termsMaskedByAllPhrases(PHYSICS_TERMS, allScannedRawTexts, true);
+if (physicsMaskedByAllPhrases.length > 0) {
+  violations.push(
+    `除外句をすべて適用すると既存物理由来語が本文から消える: ${physicsMaskedByAllPhrases.join("、")}`,
+  );
+}
+const declaredMasks = new Set(NEUTRAL_PHRASE_ENTRIES.flatMap((entry) => entry.masks));
+const undeclaredCaMasked = termsMaskedByAllPhrases(CA_TERMS, toolChapterRawTexts, false).filter(
+  (term) => !declaredMasks.has(term),
+);
+if (undeclaredCaMasked.length > 0) {
+  violations.push(
+    `除外句をすべて適用すると宣言に無い CA 固有語が本文から消える: ${undeclaredCaMasked.join("、")}`,
+  );
 }
 
 /**
@@ -844,7 +952,7 @@ console.log(
     `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件・` +
     `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.size} 件、` +
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
-    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用を、句の内側と実本文への作用の両方で確認、重複語回帰 ${duplicateTermMaskingRegressions.length} 件）、` +
+    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用を、句の内側・単独適用・宣言全体での差し引きの三面で確認し、全句適用後の本文でも既存物理由来語 0 件・宣言に無い CA 固有語 0 件、除外の回帰 ${duplicateTermMaskingRegressions.length} 件）、` +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
