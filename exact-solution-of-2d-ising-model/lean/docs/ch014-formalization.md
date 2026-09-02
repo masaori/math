@@ -1,6 +1,6 @@
 # 章 014「偶セクターでの `T` の作用」の Lean 形式化
 
-対象: `structured-latex/content/014_even_sector_T_action.ts`（定義・主張 16 本）
+対象: `structured-latex/content/014_even_sector_T_action.ts`（定義・主張 19 本）
 
 新規ファイル:
 
@@ -40,7 +40,9 @@
 | `Ising2D.checkPhase_one_eq_exp` / `checkPhase_neg_one_eq_exp` | `e^{∓iθ~_μ}` の指数表示との橋渡し | `T_actions_on_check_Z_Y` |
 | `Ising2D.TConj_V1halfPlus_checkZ` / `..._checkY` | 原文 第 1・第 2 式 | `T_actions_on_check_Z_Y` |
 | `Ising2D.TConj_V2_checkZ` / `..._checkY` | 原文 第 3・第 4 式（前因子 `(2s_2)^{M/2}` の相殺つき） | 同上 |
-| `Ising2D.linearity_of_T_on_check` / `linearity_of_T_V1halfPlus` / `linearity_of_T_V2` | `T_g` の ℂ 線型性（一般形と 2 つの特殊化） | `linearity_of_T_on_check_Z_Y` |
+| `Ising2D.linearity_of_T_on_check` | `T_g` の ℂ 線型性 | `linearity_of_T` |
+| `Ising2D.linearity_of_T_V1halfPlus` | `T_g` の ℂ 線型性の半指数行列への特殊化 | `linearity_of_T_on_check_Z_Y` |
+| `Ising2D.linearity_of_T_V2` | `T_g` の ℂ 線型性の `V_2` への特殊化 | `linearity_of_T_V2` |
 | `Ising2D.B1mat_zero_zero` ほか 8 本 | `B_1(θ), B_2` の 4 成分が原文の行列と一致すること | `def_B1_theta_B2` |
 | `Ising2D.actsBy_TConj_V1halfPlus` | `(T Ž, T Y̌) = (Ž, Y̌) B_1(θ~_μ)` | `calc_of_TxT_check_Z_Y` 第 1 式 |
 | `Ising2D.actsBy_TConj_V2_check` | `(T Ž, T Y̌) = (Ž, Y̌) B_2` | 同 第 2 式 |
@@ -54,7 +56,7 @@
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.NecSuf.actsBy_sandwich` | `T_1` が `B_1`、`T_2` が `B_2` で作用するなら `T_1∘T_2∘T_1` は `B_1B_2B_1` で作用する（ℂ 上の任意の加群・任意の ℂ 線型写像） | `T_V_plus_check_Z_Y` / `calc_of_TxT_check_Z_Y` / `linearity_of_T_on_check_Z_Y` |
+| `Ising2D.NecSuf.actsBy_sandwich` | `T_1` が `B_1`、`T_2` が `B_2` で作用するなら `T_1∘T_2∘T_1` は `B_1B_2B_1` で作用する（ℂ 上の任意の加群・任意の ℂ 線型写像） | `T_V_plus_check_Z_Y` / `calc_of_TxT_check_Z_Y` / `linearity_of_T_on_check_Z_Y` / `linearity_of_T_V2` |
 | `Ising2D.NecSuf.actsBy_TV_sandwich` | 上を `T_{(V)} = T_{g_1}∘T_{g_2}∘T_{g_1}` の形で述べた版（任意の ℂ-代数の単元） | 同上 |
 
 ---
@@ -74,7 +76,9 @@
 | `cosh_sinh_coefficient_conversion_for_check` | `Ising2D.conversion_H1Plus_checkZ_even` ほか 8 本 | 同上（`(α, β, s)` を付け替えただけ） |
 | `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本 | 既存の `NecSuf.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
 | `T_actions_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` | `Ising2D.actsBy_TConj_V1halfPlus` / `actsBy_TConj_V2_check` ほか | 既存の `NecSuf.twoDimConjMat` / `exp_conj_two_dim_actsBy` / `conj_smul_eq` |
-| `linearity_of_T_on_check_Z_Y` | `Ising2D.linearity_of_T_on_check` ほか | 既存の `Ising2D.TConj_linear`（任意の環 + ℂ-代数） |
+| `linearity_of_T` | `Ising2D.linearity_of_T_on_check` | 既存の `Ising2D.TConj_linear`（任意の環 + ℂ-代数） |
+| `linearity_of_T_on_check_Z_Y` | `Ising2D.linearity_of_T_V1halfPlus` | 既存の `Ising2D.TConj_linear` の半指数行列への特殊化 |
+| `linearity_of_T_V2` | `Ising2D.linearity_of_T_V2` | 既存の `Ising2D.TConj_linear` の `V_2` への特殊化 |
 | `def_B1_theta_B2` | 既存の `Ising2D.B1mat` / `B2mat`（最初から `θ : ℂ` 一般） | 既存の `NecSuf.twoDimConjMat` |
 | `factorization_of_A_theta_general` | 既存の `Ising2D.B1_mul_B2_mul_B1_eq_AMat`（最初から `θ : ℝ` 一般） | （2×2 行列の計算そのもので、取り払える構造が無い） |
 | **`T_V_plus_check_Z_Y`** | **`Ising2D.TVPlus_checkZ_checkY`** | **`NecSuf.actsBy_sandwich` / `actsBy_TV_sandwich`（新規）** |

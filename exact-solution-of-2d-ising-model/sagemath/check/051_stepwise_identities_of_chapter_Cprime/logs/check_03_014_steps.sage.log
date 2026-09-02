@@ -50,7 +50,7 @@
   T_actions (V2 Z 4) = cosh Z - i sinh Y: max residual = 2.155e-11  ->  PASS
   T_actions (V2 Y 4) = i sinh Z + cosh Y: max residual = 2.081e-11  ->  PASS
   linearity_of_T_on_check_Z_Y (V1^{1/2}) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 7.261e-15  ->  PASS
-  linearity_of_T (V2) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 6.408e-12  ->  PASS
+  linearity_of_T_V2 T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 6.408e-12  ->  PASS
   linearity_of_T (V^{(+)}) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 1.186e-11  ->  PASS
   calc_of_TxT (B1 第 1 列): max residual = 2.336e-14  ->  PASS
   calc_of_TxT (B1 第 2 列): max residual = 2.306e-14  ->  PASS

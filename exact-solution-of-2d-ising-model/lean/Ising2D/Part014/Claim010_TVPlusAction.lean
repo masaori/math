@@ -17,8 +17,9 @@
 
 ## 証明の骨格（原文との対応）
 
-原文は `T_actions_on_check_Z_Y` → `linearity_of_T_on_check_Z_Y` → `calc_of_TxT_check_Z_Y`
-を交互に使って `B_1(θ~) B_2` と掛け、最後に `factorization_of_A_theta_general` を当てている。
+原文は `T_actions_on_check_Z_Y` → `linearity_of_T_V2` → `calc_of_TxT_check_Z_Y`
+→ `linearity_of_T_on_check_Z_Y` → もう一度 `calc_of_TxT_check_Z_Y`
+の順で `B_1(θ~) B_2 B_1(θ~)` と掛け、最後に `factorization_of_A_theta_general` を当てている。
 Lean では行ベクトル記法の合成則 `Ising2D.ActsBy.comp`
 （`Part008/Definition016_TV.lean`。線型性はここに埋め込まれている）を 2 回使って
 `B_1(θ~_μ) B_2 B_1(θ~_μ)` を作り、`factorization_of_A_theta_general` で `A(θ~_μ)` へ移す。

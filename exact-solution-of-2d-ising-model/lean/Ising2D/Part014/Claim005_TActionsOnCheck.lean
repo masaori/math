@@ -5,6 +5,7 @@
 
 * **`T_actions_on_check_Z_Y`**（`evensectorT_005_claim_T_actions`）
 * **`linearity_of_T_on_check_Z_Y`**（`evensectorT_006_claim_linearity_of_T`）
+* **`linearity_of_T_V2`**（`evensectorT_006a_claim_linearity_of_T_V2`）
 * **`calc_of_TxT_check_Z_Y`**（`evensectorT_008_claim_product_action`）
 
 （いずれも `structured-latex/content/014_even_sector_T_action.ts`）
@@ -179,11 +180,12 @@ theorem linearity_of_T_V1halfPlus (_hM : 2 ≤ M) (K1 : ℂ) (a b : ℂ) (μ : �
         + b • TConj (V1halfUnits M K1 (-1)) (checkY M μ) :=
   linearity_of_T_on_check _ a b _ _
 
-/-- **原文 `linearity_of_T_on_check_Z_Y` の「とくに」の部分**（`g = V_2`）。 -/
-theorem linearity_of_T_V2 {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (a b : ℂ) (μ : ℤ) :
+/-- **本文 `linearity_of_T_V2`**: `g = V_2` への特殊化。 -/
+theorem linearity_of_T_V2 (_hM : 2 ≤ M) {s2 : ℝ} (hs2 : 0 < s2)
+    (K2star : ℂ) (a b : ℂ) (μ : ℤ) (_hμ : CheckIndex M μ) :
     TConj (V2Units M hs2 K2star) (a • checkZ M μ + b • checkY M μ)
       = a • TConj (V2Units M hs2 K2star) (checkZ M μ)
         + b • TConj (V2Units M hs2 K2star) (checkY M μ) :=
-  TConj_linear _ a b _ _
+  linearity_of_T_on_check _ a b _ _
 
 end Ising2D

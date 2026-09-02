@@ -7,6 +7,7 @@
   `evensectorT_010_claim_T_V_plus_action`）
 * **`calc_of_TxT_check_Z_Y`**（同 `evensectorT_008_claim_product_action`）
 * **`linearity_of_T_on_check_Z_Y`**（同 `evensectorT_006_claim_linearity_of_T`）
+* **`linearity_of_T_V2`**（同 `evensectorT_006a_claim_linearity_of_T_V2`）
 * 008 章の対応物 **`<T_V_hatZ_hatY>`**（`008_TV1_hatZ_hatY_part1.ts` の
   `TV1_hatZ_hatY_018_claim_T_V_action`）
 
@@ -23,8 +24,9 @@
 
 原文は `T_{(V^{(+)})}(check(Z)_μ)` を求めるのに
 
-  `T_actions_on_check_Z_Y` →（`linearity_of_T_on_check_Z_Y` で線型結合へ `T` を配る）
-  → `calc_of_TxT_check_Z_Y` → もう一度線型性 → もう一度 `calc_of_TxT`
+  `T_actions_on_check_Z_Y` → `linearity_of_T_V2`
+  → `calc_of_TxT_check_Z_Y` → `linearity_of_T_on_check_Z_Y`
+  → もう一度 `calc_of_TxT_check_Z_Y`
 
 という 4 段の往復を行っている。この往復に効いているのは
 

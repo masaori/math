@@ -16,7 +16,8 @@
     `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` /
     `nesting_of_commutator_of_H_and_check_Z` /
     `cosh_sinh_coefficient_conversion_for_check` / `extract_taylor_coefficient_of_check_Z_Y` /
-    `T_actions_on_check_Z_Y` / `linearity_of_T_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` /
+    `T_actions_on_check_Z_Y` / `linearity_of_T_on_check_Z_Y` / `linearity_of_T_V2` /
+    `calc_of_TxT_check_Z_Y` /
     `factorization_of_A_theta_general` / `T_V_plus_check_Z_Y`
   - 015 章: `def_gamma1_gamma2_of_theta` / `gamma_2_theta_tilde_nonzero` /
     `relation_of_gamma_2_theta_tilde` / `eigenvector_of_A_theta_tilde` /
