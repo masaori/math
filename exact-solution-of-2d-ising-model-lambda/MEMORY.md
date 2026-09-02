@@ -2,7 +2,17 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
-## 現在の到達点（2026-09-02 の 97 回目の tick 時点）
+## 現在の到達点（2026-09-02 の 98 回目の tick 時点）
+
+**切り替え不能な残余を、別の切り替え可能な接触対を持つ部分と完全に切り替え不能な部分へ分け、後者の各接触が反転対の辺を指すことを本文と SageMath で固定した（Lean 未着手）。** 全接触対が切り替え不能な残余 $\mathcal R_L^{\mathrm{lock}}$ を定義した（`def_fully_unswitchable_residual_subset`）。$L\ge2$ では向き付き辺の始点と終点が相異なるため、切り替え不能判定のうち像が他方自身になる二等式は起こらず、反転像の障害だけが残る。置換の単射性からその反転辺も動くので、各接触対の少なくとも一方の台の辺が $D(\varphi)$ に属する（`claim_fully_unswitchable_contacts_witness_doubled_edges`）。SageMath は $L=2$ の残余 $18{,}755$ 個を、別の切り替え可能な接触対を持つ $17{,}925$ 個と完全に切り替え不能な $830$ 個へ分類し、後者の接触対 $5{,}216$ 件を検査した。次は前者について平滑化で不変な接触対の選択規則を分類する。
+
+前進前レビューでは、前 tick の残余の定義とファイバー位相寄与の簡約を本文・五集合分類の全数検算・今回の分類との接続で照合した。有限集合の非交和と位相反転部分の零和という実質を持ち、「何も言っていない主張」や不一致は無かった。
+
+並列の式変形統一は、姉妹側の「複素数の自乗の偏角」（`range_of_args_of_square_of_complex_numbers`）で、証明末尾の二つの参照一覧を削り、偏角・射影・極座標表現の演算・角度切断を使う各行末の `\blkref` へ移した。内容・式変形・根拠・参照は不変である。
+
+Lambda 側 check（906 ブロック）・linkage（399 検算）・Lean 9,616 ジョブ・`sorry` / `admit` 無し・PDF 392 ページを通した。姉妹側 check・linkage（118 検算）・PDF 359 ページも通した。
+
+## ひとつ前の到達点（2026-09-02 の 97 回目の tick 時点）
 
 **反転対を持つファイバーでも位相反転部分集合が相殺し、位相寄与が接触の無い置換・回転差正負 $4$ の置換・切り替え不能な残余の和へ簡約されることを本文と SageMath で固定した（Lean 未着手）。** 標準対が切り替え不能な置換の集合 $\mathcal R_L:=\{\varphi\mid N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\}$ を定義した（`def_unswitchable_standard_pair_subset`）。$D\ne\varnothing$ のファイバーは、接触の無い部分、$\mathcal B_L$、$\mathcal A_L^{(-4)}$、$\mathcal A_L^{(4)}$、$\mathcal R_L$ の非交和であり、$\mathcal B_L$ 上では標準対平滑化が位相寄与の符号を反転する不動点の無いファイバー保存対合なので、その有限和は零である。よって $\mathcal K^{a,b}_L(D,E)$ は残る四部分の和へ簡約される（`claim_doubled_edge_fiber_phase_reduction`。仮定 $D\ne\varnothing$ は証明では使わず、$D=\varnothing$ は前 tick の主張が残余の無い形で扱うことを証明冒頭に明記した）。SageMath `doubled-edge-fiber-phase-reduction` は $L=2$ の反転対を持つ $577$ ファイバー、置換 $30{,}287$ 個を五集合へ分類し、四スピン構造で零和と簡約等式 $2{,}308$ 件を検査した（切り替え不能な残余 $18{,}755$ 個）。次は残余 $\mathcal R_L$ の位相寄与の相殺または寄与の扱いを分類する。
 

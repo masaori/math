@@ -1192,13 +1192,13 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z)
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z))\right)
-&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義（}\blkref{def_abs_arg}\text{）})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(0,\theta)]_{\sim})\right)
 &&(\because\ r=0\ \text{という、この場合の仮定})\\
 &= s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
-&&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合})\\
+&&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合（}\blkref{first_and_second_projections}\text{）})\\
 &= 0-2\cdot 0\cdot\pi
-&&(\because\ \text{角度表現の切断 の定義と}\ 0\leq 0-2\cdot0\cdot\pi<2\pi)\\
+&&(\because\ \text{角度表現の切断 の定義（}\blkref{section_of_angle_representation}\text{）と}\ 0\leq 0-2\cdot0\cdot\pi<2\pi)\\
 &= 0
 &&(\because\ 0\ \text{を因子にもつ積は}\ 0\ \text{であり、}\ 0\ \text{は和の単位元})
 \end{aligned}`,
@@ -1212,17 +1212,17 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z^2)
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z^2))\right)
-&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義（}\blkref{def_abs_arg}\text{）})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z)\cdot\phi_{\mathrm{polar}}(z))\right)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと（}\blkref{isomorphism_of_phi_cartesian}\text{）})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(0,\theta)]_{\sim}\cdot[(0,\theta)]_{\sim})\right)
 &&(\because\ r=0\ \text{という、この場合の仮定})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(0\cdot 0,\theta+\theta)]_{\sim})\right)
-&&(\because\ \text{極座標表現の演算})\\
+&&(\because\ \text{極座標表現の演算（}\blkref{operations_on_polar_representation}\text{）})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(0,\theta+\theta)]_{\sim})\right)
 &&(\because\ 0\ \text{を因子にもつ積は}\ 0)\\
 &= s_{[0,2\pi)}\!\left([0]_{\sim_{\mathrm{angle}}}\right)
-&&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合})\\
+&&(\because\ \text{第1座標, 第2座標 の}\ r=0\ \text{の場合（}\blkref{first_and_second_projections}\text{）})\\
 &= 0
 &&(\because\ \text{いま見た}\ \arg^{[0,2\pi)}(z)\ \text{の計算の最後の 2 段})\\
 &= 2\cdot 0
@@ -1233,14 +1233,6 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
       ),
       paragraph([
         "であり、主張の第 1 の場合の等式が成り立つ。",
-        ref("def_abs_arg"),
-        "、",
-        ref("first_and_second_projections"),
-        "、",
-        ref("operations_on_polar_representation"),
-        "、",
-        ref("section_of_angle_representation"),
-        " を引いた。",
       ]),
       paragraph([
         math(String.raw`r \neq 0`),
@@ -1258,15 +1250,15 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z^2)
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z^2))\right)
-&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義（}\blkref{def_abs_arg}\text{）})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z)\cdot\phi_{\mathrm{polar}}(z))\right)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと})\\
+&&(\because\ \phi_{\mathrm{polar}}\ \text{が積を保つこと（}\blkref{isomorphism_of_phi_cartesian}\text{）})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r,\theta)]_{\sim}\cdot[(r,\theta)]_{\sim})\right)
 &&(\because\ r,\theta\ \text{の取り方})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(r\cdot r,\theta+\theta)]_{\sim})\right)
-&&(\because\ \text{極座標表現の演算})\\
+&&(\because\ \text{極座標表現の演算（}\blkref{operations_on_polar_representation}\text{）})\\
 &= s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
-&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合と}\ r\cdot r\neq0)
+&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合（}\blkref{first_and_second_projections}\text{）と}\ r\cdot r\neq0)
 \end{aligned}`,
       ),
       paragraph([
@@ -1290,7 +1282,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
 &= (\theta+\theta)-2(2n)\pi
-&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&&(\because\ \text{角度表現の切断 の定義（}\blkref{section_of_angle_representation}\text{）と、いま見た不等式（}\blkref{angle_section_existence_uniqueness}\text{）})\\
 &= (\theta-2n\pi)+(\theta-2n\pi)
 &&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
 &= \arg^{[0,2\pi)}(z)+(\theta-2n\pi)
@@ -1330,7 +1322,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
 &= (\theta+\theta)-2(2n+1)\pi
-&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&&(\because\ \text{角度表現の切断 の定義（}\blkref{section_of_angle_representation}\text{）と、いま見た不等式（}\blkref{angle_section_existence_uniqueness}\text{）})\\
 &= \left((\theta+\theta)-2(2n)\pi\right)-2\pi
 &&(\because\ 2(2n+1)\pi=2(2n)\pi+2\pi)\\
 &= (\theta-2n\pi)+(\theta-2n\pi)-2\pi
@@ -1349,20 +1341,6 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
         " により主張の第 2 の場合の条件 ",
         math(String.raw`\pi \leq \arg^{[0,2\pi)}(z) < 2\pi`),
         " と同じである。",
-      ]),
-      paragraph([
-        ref("def_abs_arg"),
-        "、",
-        ref("first_and_second_projections"),
-        "、",
-        ref("operations_on_polar_representation"),
-        "、",
-        ref("section_of_angle_representation"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        "、",
-        ref("isomorphism_of_phi_cartesian"),
-        " を引いた。",
       ]),
     ],
     conversion: {
