@@ -11,7 +11,7 @@
 #    cosh_sinh_coefficient_conversion_for_check
 #    extract_taylor_coefficient_of_check_Z_Y
 #    T_actions_on_check_Z_Y
-#    linearity_of_T_on_check_Z_Y
+#    linearity_of_T_on_check_Z_Y / linearity_of_T_V2
 #    calc_of_TxT_check_Z_Y
 #    factorization_of_A_theta_general
 #    T_V_plus_check_Z_Y
@@ -221,10 +221,10 @@ for M in STEP_M:
             S.add("linearity_of_T_on_check_Z_Y (V1^{1/2}) T_g(aX+bW) = aT_g(X)+bT_g(W)",
                   Vh * (aa * Zc + bb * Yc) * Vhi,
                   aa * (Vh * Zc * Vhi) + bb * (Vh * Yc * Vhi))
-            # 後続計算が用いる既存の特殊化も回帰検査として維持する。
-            S.add("linearity_of_T (V2) T_g(aX+bW) = aT_g(X)+bT_g(W)",
+            S.add("linearity_of_T_V2 T_g(aX+bW) = aT_g(X)+bT_g(W)",
                   V2 * (aa * Zc + bb * Yc) * V2i,
                   aa * (V2 * Zc * V2i) + bb * (V2 * Yc * V2i))
+            # 後続計算が用いる V^{(+)} の特殊化も回帰検査として維持する。
             S.add("linearity_of_T (V^{(+)}) T_g(aX+bW) = aT_g(X)+bT_g(W)",
                   Vp * (aa * Zc + bb * Yc) * Vpi,
                   aa * (Vp * Zc * Vpi) + bb * (Vp * Yc * Vpi))
