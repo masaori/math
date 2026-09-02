@@ -785,7 +785,7 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
         String.raw`\begin{aligned}
 (f_I)_{\nu(K)}
 &= \prod_{k=1}^{M}(e_{i_k})_{k_k}
-&&(\because \boxtimes \text{ の定義}) \\
+&&(\because \blkref{def_kronecker} \text{ のクロネッカー積の成分の定め方}) \\
 &= \prod_{k=1}^{M}\delta_{i_kk_k}
 &&(\because (e_i)_t=\delta_{it}) \\
 &= \begin{cases}1 & (I=K)\\ 0 & (I\neq K)\end{cases}
@@ -793,11 +793,6 @@ f_I := e_{i_1}\boxtimes\cdots\boxtimes e_{i_M} \in \mathbb{C}^{2^M}`,
 I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があってその因子が } 0)
 \end{aligned}`,
       ),
-      paragraph([
-        "第 1 の等号で ",
-        ref("def_kronecker"),
-        " のクロネッカー積の成分の定め方を引いた。",
-      ]),
       paragraph([
         "すなわち ",
         math(String.raw`f_I`),
@@ -834,7 +829,7 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         String.raw`\begin{aligned}
 \left(E_{I,J}\right)_{\nu(K),\nu(L)}
 &= \prod_{k=1}^{M}(E_{i_kj_k})_{k_kl_k}
-&&(\because \boxtimes \text{ の定義}) \\
+&&(\because \blkref{def_kronecker} \text{ のクロネッカー積の成分の定め方}) \\
 &= \prod_{k=1}^{M}\delta_{i_kk_k}\delta_{j_kl_k}
 &&(\because (E_{ij})_{st}=\delta_{is}\delta_{jt}) \\
 &= \begin{cases}1 & (I=K \text{ かつ } J=L)\\ 0 & (\text{それ以外})\end{cases}
@@ -842,11 +837,6 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
 \text{そうでなければ } 0 \text{ となる因子がある})
 \end{aligned}`,
       ),
-      paragraph([
-        "第 1 の等号で ",
-        ref("def_kronecker"),
-        " のクロネッカー積の成分の定め方を引いた。",
-      ]),
       paragraph([
         "すなわち ",
         math(String.raw`E_{I,J}`),
