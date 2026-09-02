@@ -590,4 +590,33 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_selection_even_subgraph_action_character_orbit_splitting",
+    targets: [
+      "claim_selection_even_subgraph_action_character",
+      "claim_selection_sum_character_evaluation",
+    ],
+    title: { text: "覆えないファイバーの候補は一軌道の二分裂か二軌道の合併に限られる（一辺二の全数観察）" },
+    body: [
+      paragraph([
+        "単一の偶部分グラフでは覆えない一辺 ", math(String.raw`L=2`), " の ",
+        math(String.raw`16`), " ファイバーで、符号反転候補が軌道分解をどう変えるかを調べた",
+        "（sagemath/check/even-subgraph-orbit-splitting）。各候補辺（元の置換 ",
+        math(String.raw`\varphi`), " と像の置換 ", math(String.raw`\psi`), " の対）について、",
+        math(String.raw`\psi`), " の動く向き付き辺を（", math(String.raw`E`),
+        " 上で向きが反転した分は反転写像で）", math(String.raw`\varphi`),
+        " の動く向き付き辺集合へ全単射に引き戻し、二つの軌道分割の重なり二部グラフの連結成分を",
+        "分類した。全 ", math(String.raw`4{,}608`),
+        " 辺で非自明成分はちょうど一個であり、その形は一つの軌道が二つへ分裂するもの（",
+        math(String.raw`4{,}096`), " 辺）か、二つの軌道が一つへ合併するもの（",
+        math(String.raw`512`), " 辺）のどちらかに限られる。成分内で軌道長の総和は保存され、",
+        "他の軌道は全て不変である。分裂で生じる短い側の軌道長は ",
+        math(String.raw`2,4,6`), " のいずれかで、長さ ", math(String.raw`2`),
+        " の軌道が生じる分裂が ", math(String.raw`3{,}456`),
+        " 辺と大半を占める。従って覆えないファイバーの大域対応の規則は、軌道全体の組み替えでは",
+        "なく、一つの軌道の局所的な切断または二つの軌道の局所的な接合として探せる。",
+        "検算は有限集合の等号だけで完結し、浮動小数点は使わない。",
+      ]),
+    ],
+  },
 ]);
