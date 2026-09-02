@@ -201,8 +201,67 @@ y_c'
     title: { text: "arctan の引数は arcsin の定義域に入る" },
     labels: ["arctan_argument_in_unit_interval"],
     statement: [paragraph([ref("definition_of_sqrt_r_positive"), " を用いる。任意の ", math(String.raw`x\in\mathbb R`), " について"]), displayMath(String.raw`-1\le\frac{x}{\sqrt{1+x^2}^{(\mathbb R_{\ge0})}}\le1`), paragraph(["が成り立つ。"])],
-    proof: [paragraph([math(String.raw`1+x^2>0`), " なので分母は正である。また ", math(String.raw`x^2\le1+x^2`), " と非負平方根の単調性から ", math(String.raw`|x|\le\sqrt{1+x^2}`), "。正の分母で割って ", math(String.raw`|x|/\sqrt{1+x^2}\le1`), "、これは主張の二つの不等式と同値である。"])],
-    conversion: { status: "added" },
+    proof: [
+      paragraph([
+        "準備として ",
+        math(String.raw`s:=\sqrt{1+x^2}^{(\mathbb R_{\ge0})}`),
+        " と書く。非負平方根の定義（",
+        ref("definition_of_sqrt_r_positive"),
+        "）から ",
+        math(String.raw`s\ge0`),
+        " かつ次が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s^2
+&= 1+x^2
+&&(\because\ \text{非負平方根の定義。}\blkref{definition_of_sqrt_r_positive})\\
+&\ge 1
+&&(\because\ x^2\ge0\ \text{と両辺への}\ 1\ \text{の加法})\\
+&> 0
+&&(\because\ 0<1)
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        math(String.raw`s\ne0`),
+        "（",
+        math(String.raw`s=0`),
+        " なら ",
+        math(String.raw`s^2=0`),
+        "）であり、",
+        math(String.raw`s\ge0`),
+        " と合わせて ",
+        math(String.raw`s>0`),
+        "、すなわち分母は正である。また ",
+        math(String.raw`x^2\le1+x^2=s^2`),
+        " と非負平方根の単調性から ",
+        math(String.raw`|x|\le s`),
+        " である。以上を使って、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left|\frac{x}{s}\right|
+&= \frac{|x|}{s}
+&&(\because\ s>0\ \text{と絶対値の商})\\
+&\le \frac{s}{s}
+&&(\because\ |x|\le s\ \text{と正の分母}\ s\ \text{で割る単調性})\\
+&= 1
+&&(\because\ s\ne0\ \text{による約分})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\left|x/s\right|\le1`),
+        " は主張の二つの不等式 ",
+        math(String.raw`-1\le x/s\le1`),
+        " と同値である（絶対値の定義）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "式変形の書き方の統一（2026-09-03）。散文で述べていた証明を、分母の正値性の鎖と" +
+          "絶対値の商の鎖の 2 本＋行末の (∵ …) へ書き換えた。非負平方根の定義への参照は" +
+          "実際に使う行の行末 blkref へ置いた。根拠（分母の正値性・x²≤1+x² と単調性・" +
+          "正の分母で割る・二つの不等式との同値）は全て残し、中身は変えていない。",
+      ],
+    },
   },
   {
     id: "calc_formulae_014d_definition_arctan",
