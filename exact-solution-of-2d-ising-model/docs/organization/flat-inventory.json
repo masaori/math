@@ -19451,8 +19451,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10669,
-        "inspectedContentSha256": "4934666008a69fac6098f89426c5339af45e4de05c8f45281e5c274dddf24aa1",
+        "inspectedCharacterCount": 10479,
+        "inspectedContentSha256": "4c43b0117c30870239e14227f74de648bf6b432821eeaee464e91feb5282d1f0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
