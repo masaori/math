@@ -1499,23 +1499,17 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 \arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
 &= \arg^{[0,2\pi)}(z^{-1})
-&&(\because\ \mathbb{C}\text{の乗法群 の}\ z^{-1}=1/z)\\
+&&(\because\ \mathbb{C}\text{の乗法群 の}\ z^{-1}=1/z\text{。}\blkref{multiplicative_group_of_cc})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2(\phi_{\mathrm{polar}}(z^{-1}))\right)
-&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義})\\
+&&(\because\ \text{絶対値, 偏角 の}\ \arg^{[0,2\pi)}\ \text{の定義。}\blkref{def_abs_arg})\\
 &= s_{[0,2\pi)}\!\left(\mathrm{pr}_2([(1/r,-\theta)]_{\sim})\right)
 &&(\because\ \text{上で見た}\ \phi_{\mathrm{polar}}(z^{-1})\ \text{の形})\\
 &= s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
-&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合と}\ 1/r\neq0)
+&&(\because\ \text{第1座標, 第2座標 の}\ r\neq0\ \text{の場合と}\ 1/r\neq0\text{。}\blkref{first_and_second_projections})
 \end{aligned}`,
       ),
       paragraph([
         "である。",
-        ref("multiplicative_group_of_cc"),
-        "、",
-        ref("def_abs_arg"),
-        "、",
-        ref("first_and_second_projections"),
-        " を引いた。",
       ]),
       paragraph([
         "ここから先は ",
@@ -1552,7 +1546,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= -\theta-2(-n)\pi
-&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式。}\blkref{section_of_angle_representation}\ \blkref{angle_section_existence_uniqueness})\\
 &= -(\theta-2n\pi)
 &&(\because\ \mathbb{R}\ \text{の加法の結合律・交換律と分配律})\\
 &= -\arg^{[0,2\pi)}(z)
@@ -1571,10 +1565,6 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         " により主張の第 1 の場合の条件 ",
         math(String.raw`\arg^{[0,2\pi)}(z)=0`),
         " と同じである。",
-        ref("section_of_angle_representation"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        " を引いた。",
       ]),
       paragraph([
         math(String.raw`0 < \theta-2n\pi < 2\pi`),
@@ -1596,7 +1586,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         String.raw`\begin{aligned}
 s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &= -\theta-2(-n-1)\pi
-&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式})\\
+&&(\because\ \text{角度表現の切断 の定義と、いま見た不等式。}\blkref{section_of_angle_representation}\ \blkref{angle_section_existence_uniqueness})\\
 &= \left(-\theta-2(-n)\pi\right)+2\pi
 &&(\because\ 2(-n-1)\pi=2(-n)\pi-2\pi)\\
 &= -(\theta-2n\pi)+2\pi
@@ -1613,10 +1603,6 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         " により主張の第 2 の場合の条件 ",
         math(String.raw`0<\arg^{[0,2\pi)}(z)<2\pi`),
         " と同じである。",
-        ref("section_of_angle_representation"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        " を引いた。",
       ]),
     ],
     conversion: {
