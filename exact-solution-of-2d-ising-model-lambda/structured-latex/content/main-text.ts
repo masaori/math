@@ -54909,7 +54909,57 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
           element: {
             kind: "elementGroup",
             id: "group_of_kac_ward_claim_selection_even_subgraph_action_character",
-            beforeFocus: [],
+            beforeFocus: [
+              {
+                role: "supportingClaim",
+                element: {
+                  id: "kac_ward_claim_winding_parity_symmetric_difference_additivity",
+                  kind: "claim",
+                  title: { text: "巻き付き偶奇の対称差加法性" },
+                  labels: ["claim_winding_parity_symmetric_difference_additivity"],
+                  habitat: "N",
+                  verification: ["sagemath/check/winding-parity-symmetric-difference-additivity"],
+                  statement: [
+                    paragraph([
+                      math(String.raw`L\ge1`), " とする。任意の辺集合 ",
+                      math(String.raw`X,Y\subseteq E_L`), " について、",
+                      math(String.raw`\mathbb Z`), " の合同式",
+                    ]),
+                    displayMath(String.raw`\varepsilon_{L,\mathrm h}(X\mathbin\triangle Y)
+\equiv\varepsilon_{L,\mathrm h}(X)+\varepsilon_{L,\mathrm h}(Y)\pmod2,\qquad
+\varepsilon_{L,\mathrm v}(X\mathbin\triangle Y)
+\equiv\varepsilon_{L,\mathrm v}(X)+\varepsilon_{L,\mathrm v}(Y)\pmod2`),
+                    paragraph([
+                      "が成り立つ。巻き付き偶奇 ",
+                      math(String.raw`\varepsilon_{L,\mathrm h},\varepsilon_{L,\mathrm v}`), " は ",
+                      ref("def_torus_winding_parities"),
+                      " で定めた。全て有限集合の演算と整数の合同だけで判定でき、実数体も複素数体も現れない。",
+                    ]),
+                  ],
+                  proof: [
+                    paragraph([
+                      "境界横断辺集合 ",
+                      math(String.raw`W\in\{C_{L,\mathrm h},C_{L,\mathrm v}\}`),
+                      "（", ref("def_torus_winding_parities"), "）を一つ取る。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\bigl\lvert(X\mathbin\triangle Y)\cap W\bigr\rvert
+&=\bigl\lvert(X\cap W)\mathbin\triangle(Y\cap W)\bigr\rvert
+&&\bigl(\because\ \text{対称差と共通部分の分配則}\bigr)\\
+&=\lvert X\cap W\rvert+\lvert Y\cap W\rvert-2\,\lvert X\cap Y\cap W\rvert
+&&\bigl(\because\ \text{互いに素な分割による個数の加法性と }\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "両辺を法 2 で見ると 2 の倍数の項が消えるので、",
+                      ref("def_torus_winding_parities"), " の法 2 の値について、",
+                      math(String.raw`W=C_{L,\mathrm h}`), " の場合が横方向、",
+                      math(String.raw`W=C_{L,\mathrm v}`),
+                      " の場合が縦方向の主張の合同式を与える。",
+                    ]),
+                  ],
+                },
+              },
+            ],
             focus: {
               id: "kac_ward_claim_selection_even_subgraph_action_character",
               kind: "claim",
@@ -54996,26 +55046,9 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 =0\quad\bigl(\because\ \blkref{def_edge_subset_incidence_count},\ \blkref{def_even_edge_subset}\text{ と }\operatorname{Even}_L(H)\bigr)`),
                 paragraph([
                   "となり ", math(String.raw`\operatorname{Even}_L(X\mathbin\triangle H)`),
-                  " である。さらに巻き付き偶奇の加法性を置く。任意の ",
-                  math(String.raw`X,Y\subseteq E_L`), " と境界横断辺集合 ",
-                  math(String.raw`W\in\{C_{L,\mathrm h},C_{L,\mathrm v}\}`),
-                  "（", ref("def_torus_winding_parities"), "）について",
-                ]),
-                displayMath(String.raw`\begin{aligned}
-\bigl\lvert(X\mathbin\triangle Y)\cap W\bigr\rvert
-&=\bigl\lvert(X\cap W)\mathbin\triangle(Y\cap W)\bigr\rvert
-&&\bigl(\because\ \text{対称差と共通部分の分配則}\bigr)\\
-&=\lvert X\cap W\rvert+\lvert Y\cap W\rvert-2\,\lvert X\cap Y\cap W\rvert
-&&\bigl(\because\ \text{互いに素な分割による個数の加法性と }\mathbb Z\text{ の四則}\bigr)
-\end{aligned}`),
-                paragraph([
-                  "なので、", math(String.raw`\varepsilon_{L,\mathrm h}(X\mathbin\triangle Y)
-\equiv\varepsilon_{L,\mathrm h}(X)+\varepsilon_{L,\mathrm h}(Y)\pmod2`),
-                  " と ", math(String.raw`\varepsilon_{L,\mathrm v}(X\mathbin\triangle Y)
-\equiv\varepsilon_{L,\mathrm v}(X)+\varepsilon_{L,\mathrm v}(Y)\pmod2`),
-                  " が成り立つ（", ref("def_torus_winding_parities"),
-                  " の法 2 の値と、2 の倍数の消去）。とくに ",
-                  math(String.raw`B=A\mathbin\triangle E`), " へ適用して",
+                  " である。さらに、巻き付き偶奇の対称差加法性（",
+                  ref("claim_winding_parity_symmetric_difference_additivity"),
+                  "）を ", math(String.raw`B=A\mathbin\triangle E`), " へ適用して",
                 ]),
                 displayMath(String.raw`\beta_{\mathrm h}\equiv\alpha_{\mathrm h}+e_{\mathrm h}\pmod2,\qquad
 \beta_{\mathrm v}\equiv\alpha_{\mathrm v}+e_{\mathrm v}\pmod2`),
@@ -55046,7 +55079,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 &+(1+a)(\beta_{\mathrm h}+h_{\mathrm h})+(1+b)(\beta_{\mathrm v}+h_{\mathrm v})
 +(\beta_{\mathrm h}+h_{\mathrm h})(\beta_{\mathrm v}+h_{\mathrm v})
 \end{aligned}\pmod2
-&&\bigl(\because\ \text{巻き付き偶奇の加法性。合同式は }\mathbb Z\text{ の加法・乗法と両立する}\bigr)\\
+&&\bigl(\because\ \blkref{claim_winding_parity_symmetric_difference_additivity}\text{。合同式は }\mathbb Z\text{ の加法・乗法と両立する}\bigr)\\
 &\equiv\vartheta^{a,b}_L(D,E;C)
 +2\bigl((1+a)h_{\mathrm h}+(1+b)h_{\mathrm v}+h_{\mathrm h}h_{\mathrm v}\bigr)
 +(\alpha_{\mathrm h}+\beta_{\mathrm h})h_{\mathrm v}+(\alpha_{\mathrm v}+\beta_{\mathrm v})h_{\mathrm h}\pmod2
@@ -55236,12 +55269,13 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                   " に含まれ、各頂点で二つの偶次数の和を法二で取るので再び ",
                   math(String.raw`\mathcal H_L(E)`), " に属する。写像 ",
                   math(String.raw`H\mapsto H\mathbin\triangle H_0`),
-                  " は同じ集合との対称差を二度取ると元へ戻るため全単射である。巻き付き偶奇の対称差加法性により",
+                  " は同じ集合との対称差を二度取ると元へ戻るため全単射である。巻き付き偶奇の対称差加法性（",
+                  ref("claim_winding_parity_symmetric_difference_additivity"), "）により",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 \chi_E(H\mathbin\triangle H_0)
 &=\chi_E(H)\,\chi_E(H_0)
-&&\bigl(\because\ \text{巻き付き偶奇の対称差加法性と }(-1)^{r+s}=(-1)^r(-1)^s\bigr)\\
+&&\bigl(\because\ \blkref{claim_winding_parity_symmetric_difference_additivity}\text{ と }(-1)^{r+s}=(-1)^r(-1)^s\bigr)\\
 &=-\chi_E(H)
 &&\bigl(\because\ \chi_E(H_0)=-1\bigr)
 \end{aligned}`),
