@@ -178,7 +178,7 @@ const pauliAndCliffordMatrixGroupsExpectedInternalDependencies = new Map<string,
   ]],
 ]);
 const pauliAndCliffordMatrixGroupsExpectedContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc"],
   ["TV1_hatZ_hatY_definition_pauli_group", "251f5e6d1a38e2b6eaf8eae4413d9b498ca0857207dc8918481a680a38064c7b"],
   ["TV1_hatZ_hatY_010_definition_clifford_group", "1196412a13aedcd3b42b2e18886fabb2e4cbe482e6bc9a8beb78c0bfa5d18c92"],
 ]);
@@ -392,7 +392,7 @@ const v1PauliRepresentationExpectedExternalInputEntryIds = [
   "transfer_matrix_005_definition_end_isomorphism",
 ].sort();
 const v1PauliRepresentationExpectedExternalInputContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc"],
   ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
   ["bridge_003_claim_exp_of_diagonal", "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747"],
   ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed"],
@@ -470,7 +470,7 @@ const nextIsingBoundaryComparisonExpectedContentSha256 = new Map<string, string>
   ["bridge_007_claim_partition_function_in_pauli_form", "33cd6cefa483928ac5bb3e3c71983a82af17222c9030b9596522b8ef575e219a"],
 ]);
 const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc"],
   ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
   ["bridge_002_claim_sigma_z_diagonal_action", "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232"],
   ["bridge_003_claim_exp_of_diagonal", "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747"],
@@ -684,7 +684,7 @@ const v1V2JordanWignerExpectedContentSha256 = new Map<string, string>([
   ["transfer_matrix_003a_claim_V2_in_Z_Y", "fc763130d21136cb0d786867675f31b2cf54912611f737c05b342b7fb60532c2"],
 ]);
 const v1V2JordanWignerExpectedExternalInputContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
@@ -726,7 +726,7 @@ const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputEntryIds 
   "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
 ].sort();
 const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc"],
   ["bridge_008_definition_epsilon_projectors", "be5003446b4cb92b2911fb88cee1a7cc85dd13f412c3207866e1f70d987c4890"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
@@ -759,7 +759,7 @@ const v1RestrictionToEigenspacesSectionExpectedContentSha256 = new Map<string, s
   ["transfer_matrix_006_claim_V1_restriction_to_eigenspaces", v1RestrictionToEigenspacesExpectedContentSha256],
 ]);
 const v1RestrictionToEigenspacesExpectedExternalInputContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc"],
   ["Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site", "95d5468bee33981a077bfcd1c67e1bfc7eb0f5e11007fcb3602ef07137ba9343"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
@@ -834,7 +834,7 @@ const v1PlusMinusAndCommutationExpectedExternalInputEntryIds = [
   "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
 ].sort();
 const v1PlusMinusAndCommutationExpectedExternalInputContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc"],
   ["bridge_008_definition_epsilon_projectors", "be5003446b4cb92b2911fb88cee1a7cc85dd13f412c3207866e1f70d987c4890"],
   ["bridge_009_claim_epsilon_projector_properties", "2f2e4f7f0c04a1e0ece43bba53e0d13ef242f7110768e9dd2315a28d6c33d32e"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
@@ -906,7 +906,7 @@ const realSymmetricGeneratorsAndSignFlipExpectedExternalInputEntryIds = [
   "transfer_matrix_011_definition_H1_H2",
 ].sort();
 const realSymmetricGeneratorsAndSignFlipExpectedExternalInputContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "d0d5706bfc9866ba851d979c14387aa1c99cf67bdf434f453699a1fa91d4f22c"],
@@ -1017,7 +1017,7 @@ const evenSectorGeneratorExpectedExternalInputEntryIds = [
   "transfer_matrix_011_definition_H1_H2",
 ].sort();
 const evenSectorGeneratorExpectedExternalInputContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3"],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc"],
   ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
   ["bridge_002_claim_sigma_z_diagonal_action", "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232"],
   ["bridge_009_claim_epsilon_projector_properties", "2f2e4f7f0c04a1e0ece43bba53e0d13ef242f7110768e9dd2315a28d6c33d32e"],
@@ -1264,28 +1264,10 @@ const vPlusPositiveDefiniteExpectedExternalInputContentSha256 = new Map<string, 
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["transfer_matrix_011_definition_H1_H2", "19baa8255a664202439efe07a7c18f770902aa68a0d3ce553a650712c8a23413"],
 ]);
-const vPlusPositiveDefiniteBoundaryCandidates = [
-  {
-    claim: "tr((V^{(+)})^{-1}) の正値性",
-    leanTheorems: ["trace_VPlusInv_pos"],
-    sageMathCoverage: "check_05 の候補逆行列のトレース最小値による正値性検査",
-  },
-] as const;
-const vPlusPositiveDefiniteExpectedBoundaryCandidates = [
-  {
-    claim: "tr((V^{(+)})^{-1}) の正値性",
-    leanTheorems: ["trace_VPlusInv_pos"],
-    sageMathCoverage: "check_05 の候補逆行列のトレース最小値による正値性検査",
-  },
-] as const;
+const vPlusPositiveDefiniteBoundaryCandidates = [] as const;
+const vPlusPositiveDefiniteExpectedBoundaryCandidates = [] as const;
 const vPlusPositiveDefiniteNextTickUnit = vPlusPositiveDefiniteBoundaryCandidates.slice(0, 1);
-const vPlusPositiveDefiniteExpectedNextTickUnit = [
-  {
-    claim: "tr((V^{(+)})^{-1}) の正値性",
-    leanTheorems: ["trace_VPlusInv_pos"],
-    sageMathCoverage: "check_05 の候補逆行列のトレース最小値による正値性検査",
-  },
-] as const;
+const vPlusPositiveDefiniteExpectedNextTickUnit = [] as const;
 if (JSON.stringify(vPlusPositiveDefiniteBoundaryCandidates)
     !== JSON.stringify(vPlusPositiveDefiniteExpectedBoundaryCandidates)
   || JSON.stringify(vPlusPositiveDefiniteNextTickUnit)
@@ -1345,7 +1327,7 @@ const vPlusPositiveDefiniteExpectedLeanTargets = [
   "VPlusInv_mul_VPlus",
   "VPlusInv_posDef",
   "trace_VPlus_pos",
-  ...vPlusPositiveDefiniteBoundaryCandidates.flatMap(({ leanTheorems }) => leanTheorems),
+  "trace_VPlusInv_pos",
 ];
 for (const target of vPlusPositiveDefiniteExpectedLeanTargets) {
   const declarationFragment = vPlusPositiveDefiniteExpectedLeanDeclarationFragments.get(target);
@@ -1432,6 +1414,7 @@ const nonPrerequisiteReferenceLabelsById = new Map<string, Set<string>>([
 ]);
 const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", new Set(["theorem_exp_product"])],
+  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", new Set(["mat_mult"])],
 ]);
 const forwardNavigationReviewById = new Map<string, Map<string, string>>([
   ["calculation_formulae_definition_set_and_algebra_notation", new Map([["definition_of_cc", "既存の複素数定義への案内"]])],
@@ -2296,7 +2279,7 @@ const vPlusDefinitionAndSignedTraceSection = validateReviewedSection(
   ["closing_006_theorem_trace_of_epsilon_V_plus"],
 );
 const vPlusPositiveDefiniteSection = validateReviewedSection(
-  "偶セクター転送行列の正定値性・可逆性とトレース正値性の境界候補",
+  "偶セクター転送行列の正定値性・可逆性とトレース正値性",
   "2次元イジングモデル",
   vPlusPositiveDefiniteSectionEntryIds,
   vPlusPositiveDefiniteExpectedInternalDependencies,
@@ -3407,7 +3390,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "偶セクター転送行列の正定値性・可逆性とトレース正値性",
   chapter: "2次元イジングモデル",
-  status: "境界候補・今回二項分割済み・残余一項レビュー待ち・外部入力粒度未解決",
+  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
   entryIds: vPlusPositiveDefiniteSectionEntryIds,
   input: [
     "偶セクター転送行列 V^{(+)} とその半指数行列",
@@ -3421,7 +3404,7 @@ const isingModelSectionBoundaries = [{
     "tr(V^{(+)}) の正値性",
     "V^{(+)} の左右逆と逆行列の明示式",
     "(V^{(+)})^{-1} の正定値性",
-    "残余候補である tr((V^{(+)})^{-1}) の正値性",
+    "tr((V^{(+)})^{-1}) の正値性",
   ],
   boundaryCandidates: vPlusPositiveDefiniteBoundaryCandidates,
   nextTickUnit: vPlusPositiveDefiniteNextTickUnit,
@@ -3433,12 +3416,12 @@ const isingModelSectionBoundaries = [{
       vPlusLeftInverseSageMathFile,
       vPlusInversePositiveDefiniteSageMathFile,
     ],
-    currentStatus: "本文は V^{(+)} の正定値性、tr(V^{(+)}) の正値性、可逆性、(V^{(+)})^{-1} の正定値性を一主張ずつに分け、Lean の VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef との対応を記録した。SageMath は左右逆に加え、候補逆行列の全固有値の虚部が数値誤差内で零かつ実部が正であることを独立に検査する。残る tr((V^{(+)})^{-1}) の正値性は一主張の境界候補として次回へ送る。",
+    currentStatus: "本文は V^{(+)} の正定値性、tr(V^{(+)}) の正値性、可逆性、(V^{(+)})^{-1} の正定値性、tr((V^{(+)})^{-1}) の正値性を一主張ずつに分け、Lean の VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos との対応を記録した。SageMath は左右逆、候補逆行列の全固有値正値性、および二つのトレース正値性を検査する。",
   },
-  mainTheorem: "tr((V^{(+)})^{-1}) の正値性（残余境界候補）",
+  mainTheorem: "偶セクター転送行列の逆行列のトレース正値性",
   mainTheoremEntryId: "evenEigen_claim_V_plus_inverse_positive_and_traces",
-  boundaryEvidence: "章内依存順59は順57の V^{(+)} の定義と順46の生成子の実対称性を受けて V^{(+)} の正定値性を示す。順60の tr(V^{(+)}) の正値性は順59だけを直接使う並行出力である。順61は順59を受けて明示候補が左右逆であることから可逆性と逆行列の式を示し、順62は順61の明示式と順46の実対称性を使って (V^{(+)})^{-1} の正定値性を示す。順63は順62だけを直接受けて tr((V^{(+)})^{-1}) の正値性を示す残余境界候補である。Lean はこれらを VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos で検証する。SageMath は左右逆を別々に検査し、さらに候補逆行列の全固有値について虚部の最大値が 1.732×10^{-14}、実部の最小値が 5.145×10^{-4}>0 であることを独立に検査した。直後の順64は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順59〜63とは相互に依存しない。順65は順64だけへ依存する。このため順63の後を節境界候補のままとし、残余一項のレビュー後に最終確定する。生成時には順59〜63の全直接依存、二つの節末出力、本文 fingerprint、残余一候補と次回一項単位、Lean 宣言、SageMath の独立検査、順64〜65との相互非依存、および入力集合の切り替わりを固定検査する。",
-  readabilityStatus: "今回扱う二項である順60の tr(V^{(+)}) の正値性と順62の (V^{(+)})^{-1} の正定値性は、それぞれ一ブロック一主張へ分割した。順62は明示済みの逆行列、負号付き指数行列の正定値性、合同変換、正スカラー倍を一段ずつ示す推論鎖であり、独立した SageMath 検査も追加した。残る順63の tr((V^{(+)})^{-1}) の正値性は既に一主張のブロックだが、今回の上限外なので次回の一単位としてレビューする。順64以降の別境界へは進まない。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。",
+  boundaryEvidence: "章内依存順59は順57の V^{(+)} の定義と順46の生成子の実対称性を受けて V^{(+)} の正定値性を示す。順60の tr(V^{(+)}) の正値性は順59だけを直接使う並行出力である。順61は順59を受けて明示候補が左右逆であることから可逆性と逆行列の式を示し、順62は順61の明示式と順46の実対称性を使って (V^{(+)})^{-1} の正定値性を示す。順63は節内では順62だけを直接受け、外部入力の正定値行列の指数関数と集合・代数構造の記号も用いて tr((V^{(+)})^{-1}) の正値性を示す。Lean はこれらを VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos で検証する。SageMath は左右逆を別々に検査し、候補逆行列の全固有値について虚部の最大値が 1.732×10^{-14}、実部の最小値が 5.145×10^{-4}>0 であること、および tr((V^{(+)})^{-1}) の全体最小値が 1.032>0 であることを検査した。直後の順64は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順59〜63とは相互に依存しない。順65は順64だけへ依存する。この入力集合の切り替わりにより順63の後で節を閉じる。生成時には順59〜63の全直接依存、二つの節末出力、本文 fingerprint、Lean 宣言、SageMath の実検査、順64〜65との相互非依存、および入力集合の切り替わりを固定検査する。",
+  readabilityStatus: "順63は既に一ブロック一主張であり、直前に確定した (V^{(+)})^{-1} の正定値性から、正定値行列のトレースが正であることを一段だけ適用している。Lean の trace_VPlusInv_pos も VPlusInv_posDef に trace_pos を一段適用する同じ推論で、SageMath は候補逆行列のトレース正値性を直接検査する。したがって対象本文の推論粒度と形式化対応は合格であり、順63の後を節境界として確定する。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

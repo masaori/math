@@ -17,7 +17,7 @@
   - `V_plus_is_invertible`（明示した候補が `V^{(+)}` の右逆かつ左逆）
   - `V_plus_inverse_is_positive_definite`（`(V^{(+)})^{-1}` の正定値性）
   - `trace_V_plus_is_positive`（`tr(V^{(+)})` の正値性）
-  - `V_plus_inverse_positive_and_trace_positivity`（次回へ残す `tr((V^{(+)})^{-1})` の正値性）
+  - `V_plus_inverse_positive_and_trace_positivity`（`tr((V^{(+)})^{-1})` の正値性）
   - `constant_c_value_even_sector`（**`c = (2 sinh 2K_2)^{M/2}`**）
   - `eigenvalues_of_V_plus`（`Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ε_μ − 1/2))`）
   - `max_eigenvalue_of_V_plus_simple`（`Λ̌_max = Λ^{(1/2)}_M` であり**単純固有値**）

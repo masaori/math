@@ -2329,8 +2329,8 @@ C_-B_-
     conversion: {
       status: "added",
       notes: [
-        "旧複合ブロックのうち、今回の二項単位に含めない逆行列のトレース正値性を残した。ラベルは後続参照の互換性のため維持している。Lean の対応定理は Ising2D.trace_VPlusInv_pos。",
-        "数値検証は既存の sagemath/check/050_claim_even_sector_eigenvalues/check_05_positive_definite_and_c.sage に対応する。本文の推論粒度と形式化対応のレビューは次回の単位で扱う。",
+        "旧複合ブロックから逆行列のトレース正値性を一ブロック一主張として分離した。ラベルは後続参照の互換性のため維持している。Lean の対応定理は Ising2D.trace_VPlusInv_pos。",
+        "本文は直前の逆行列の正定値性から正定値行列のトレース正値性を一段で適用する。数値検証は sagemath/check/050_claim_even_sector_eigenvalues/check_05_positive_definite_and_c.sage の逆行列トレース最小値による正値性検査に対応する。",
       ],
     },
   },

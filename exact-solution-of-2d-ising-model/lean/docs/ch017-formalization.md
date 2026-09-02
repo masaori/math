@@ -101,7 +101,7 @@
 | `VPlusInv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | 明示した候補が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` |
 | `VPlusInv_posDef` | `(V^{(+)})^{-1}` の正定値性 | `V_plus_inverse_is_positive_definite` |
 | `trace_VPlus_pos` | `tr(V^{(+)})` の正値性 | `trace_V_plus_is_positive` |
-| `trace_VPlusInv_pos` | `tr((V^{(+)})^{-1})` の正値性 | `V_plus_inverse_positive_and_trace_positivity`（次回の一単位へ残す） |
+| `trace_VPlusInv_pos` | `tr((V^{(+)})^{-1})` の正値性 | `V_plus_inverse_positive_and_trace_positivity` |
 | `trace_VPlus` / `trace_VPlusInv` | `tr(V^{(+)}) = (2s_2)^{M/2}τ`, `tr((V^{(+)})^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value_even_sector` Step 1〜2 |
 | `VPlusInv_eq` | `V^{(+)} = cV̌' ⇒ (V^{(+)})^{-1} = c⁻¹(V̌')^{-1}` | 同 Step 3（逆元の一意性） |
 | `constant_c_value_even_sector` | **`c = (2 sinh 2K_2)^{M/2}`** | `constant_c_value_even_sector` |

@@ -1085,7 +1085,7 @@
     {
       "name": "偶セクター転送行列の正定値性・可逆性とトレース正値性",
       "chapter": "2次元イジングモデル",
-      "status": "境界候補・今回二項分割済み・残余一項レビュー待ち・外部入力粒度未解決",
+      "status": "構造確定・対象本文粒度合格・外部入力粒度未解決",
       "entryIds": [
         "evenEigen_008_claim_V_plus_is_positive_definite",
         "evenEigen_claim_trace_V_plus_is_positive",
@@ -1118,26 +1118,10 @@
         "tr(V^{(+)}) の正値性",
         "V^{(+)} の左右逆と逆行列の明示式",
         "(V^{(+)})^{-1} の正定値性",
-        "残余候補である tr((V^{(+)})^{-1}) の正値性"
+        "tr((V^{(+)})^{-1}) の正値性"
       ],
-      "boundaryCandidates": [
-        {
-          "claim": "tr((V^{(+)})^{-1}) の正値性",
-          "leanTheorems": [
-            "trace_VPlusInv_pos"
-          ],
-          "sageMathCoverage": "check_05 の候補逆行列のトレース最小値による正値性検査"
-        }
-      ],
-      "nextTickUnit": [
-        {
-          "claim": "tr((V^{(+)})^{-1}) の正値性",
-          "leanTheorems": [
-            "trace_VPlusInv_pos"
-          ],
-          "sageMathCoverage": "check_05 の候補逆行列のトレース最小値による正値性検査"
-        }
-      ],
+      "boundaryCandidates": [],
+      "nextTickUnit": [],
       "formalizationEvidence": {
         "leanFile": "lean/Ising2D/Part017/Claim008_VPlusPositiveDefinite.lean",
         "sageMathFiles": [
@@ -1146,12 +1130,12 @@
           "sagemath/check/050_claim_even_sector_eigenvalues/check_08_inverse_mul_V_plus.sage",
           "sagemath/check/050_claim_even_sector_eigenvalues/check_V_plus_inverse_positive_definite.sage"
         ],
-        "currentStatus": "本文は V^{(+)} の正定値性、tr(V^{(+)}) の正値性、可逆性、(V^{(+)})^{-1} の正定値性を一主張ずつに分け、Lean の VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef との対応を記録した。SageMath は左右逆に加え、候補逆行列の全固有値の虚部が数値誤差内で零かつ実部が正であることを独立に検査する。残る tr((V^{(+)})^{-1}) の正値性は一主張の境界候補として次回へ送る。"
+        "currentStatus": "本文は V^{(+)} の正定値性、tr(V^{(+)}) の正値性、可逆性、(V^{(+)})^{-1} の正定値性、tr((V^{(+)})^{-1}) の正値性を一主張ずつに分け、Lean の VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos との対応を記録した。SageMath は左右逆、候補逆行列の全固有値正値性、および二つのトレース正値性を検査する。"
       },
-      "mainTheorem": "tr((V^{(+)})^{-1}) の正値性（残余境界候補）",
+      "mainTheorem": "偶セクター転送行列の逆行列のトレース正値性",
       "mainTheoremEntryId": "evenEigen_claim_V_plus_inverse_positive_and_traces",
-      "boundaryEvidence": "章内依存順59は順57の V^{(+)} の定義と順46の生成子の実対称性を受けて V^{(+)} の正定値性を示す。順60の tr(V^{(+)}) の正値性は順59だけを直接使う並行出力である。順61は順59を受けて明示候補が左右逆であることから可逆性と逆行列の式を示し、順62は順61の明示式と順46の実対称性を使って (V^{(+)})^{-1} の正定値性を示す。順63は順62だけを直接受けて tr((V^{(+)})^{-1}) の正値性を示す残余境界候補である。Lean はこれらを VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos で検証する。SageMath は左右逆を別々に検査し、さらに候補逆行列の全固有値について虚部の最大値が 1.732×10^{-14}、実部の最小値が 5.145×10^{-4}>0 であることを独立に検査した。直後の順64は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順59〜63とは相互に依存しない。順65は順64だけへ依存する。このため順63の後を節境界候補のままとし、残余一項のレビュー後に最終確定する。生成時には順59〜63の全直接依存、二つの節末出力、本文 fingerprint、残余一候補と次回一項単位、Lean 宣言、SageMath の独立検査、順64〜65との相互非依存、および入力集合の切り替わりを固定検査する。",
-      "readabilityStatus": "今回扱う二項である順60の tr(V^{(+)}) の正値性と順62の (V^{(+)})^{-1} の正定値性は、それぞれ一ブロック一主張へ分割した。順62は明示済みの逆行列、負号付き指数行列の正定値性、合同変換、正スカラー倍を一段ずつ示す推論鎖であり、独立した SageMath 検査も追加した。残る順63の tr((V^{(+)})^{-1}) の正値性は既に一主張のブロックだが、今回の上限外なので次回の一単位としてレビューする。順64以降の別境界へは進まない。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
+      "boundaryEvidence": "章内依存順59は順57の V^{(+)} の定義と順46の生成子の実対称性を受けて V^{(+)} の正定値性を示す。順60の tr(V^{(+)}) の正値性は順59だけを直接使う並行出力である。順61は順59を受けて明示候補が左右逆であることから可逆性と逆行列の式を示し、順62は順61の明示式と順46の実対称性を使って (V^{(+)})^{-1} の正定値性を示す。順63は節内では順62だけを直接受け、外部入力の正定値行列の指数関数と集合・代数構造の記号も用いて tr((V^{(+)})^{-1}) の正値性を示す。Lean はこれらを VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos で検証する。SageMath は左右逆を別々に検査し、候補逆行列の全固有値について虚部の最大値が 1.732×10^{-14}、実部の最小値が 5.145×10^{-4}>0 であること、および tr((V^{(+)})^{-1}) の全体最小値が 1.032>0 であることを検査した。直後の順64は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順59〜63とは相互に依存しない。順65は順64だけへ依存する。この入力集合の切り替わりにより順63の後で節を閉じる。生成時には順59〜63の全直接依存、二つの節末出力、本文 fingerprint、Lean 宣言、SageMath の実検査、順64〜65との相互非依存、および入力集合の切り替わりを固定検査する。",
+      "readabilityStatus": "順63は既に一ブロック一主張であり、直前に確定した (V^{(+)})^{-1} の正定値性から、正定値行列のトレースが正であることを一段だけ適用している。Lean の trace_VPlusInv_pos も VPlusInv_posDef に trace_pos を一段適用する同じ推論で、SageMath は候補逆行列のトレース正値性を直接検査する。したがって対象本文の推論粒度と形式化対応は合格であり、順63の後を節境界として確定する。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
     }
   ],
   "explanationGranularityReview": {
@@ -5977,7 +5961,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7200,7 +7184,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7370,7 +7354,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8012,8 +7996,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7165,
-        "inspectedContentSha256": "74736717633fb9259f09b874cf9323b63f155020b31d9bb5996ffb464a9cb9e2",
+        "inspectedCharacterCount": 6887,
+        "inspectedContentSha256": "9de9aee8d8e9ea8a946a96d71823e5eff969f3b18a6a8ead5d5528988321cd92",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8028,15 +8012,11 @@
         "definition_of_cc",
         "first_and_second_projections",
         "isomorphism_of_phi_cartesian",
-        "operations_on_polar_representation",
-        "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
-        "calc_formulae_017_definition_section_of_angle_representation",
-        "calculation_formulae_022_definition_operations_on_polar_representation",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
         "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_031_definition_abs_arg",
@@ -12315,8 +12295,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5786,
-        "inspectedContentSha256": "4f29d0eacf99b1f5b3886865903501448f58cd3e7dd4956273f9f27b14e88bd3",
+        "inspectedCharacterCount": 5879,
+        "inspectedContentSha256": "f36fc233fa67016fa14bad33b5625da3eac50932ae426af52afb18674f9ff0dc",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12337,7 +12317,8 @@
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
-        "definition_of_cc"
+        "definition_of_cc",
+        "mat_mult"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
