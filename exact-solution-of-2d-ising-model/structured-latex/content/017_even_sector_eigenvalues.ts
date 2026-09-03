@@ -2722,15 +2722,15 @@ V^{(+)}\check{Q}_\epsilon
 &= (2s_2)^M
    \quad (\because \text{指数部分が互いに打ち消し合う}) \\
 &= c^2
-   \quad (\because \text{定数 }c\text{ の決定})
+   \quad (\because \text{定数 }c\text{ の決定。}\blkref{constant_c_value_even_sector})
 \end{aligned}`,
       ),
-      paragraph([ref("constant_c_value_even_sector"), " を第 2 行で用いた。"]),
     ],
     conversion: {
       status: "added",
       notes: [
         "009 章の eigenvalues_of_V の (+) セクター版。重複度が 2^{M-m} から 1 に、和の範囲が I から {1,…,M} に変わる。γ(θ~_μ) > 0 が狭義なので、大小比較も狭義になる（009 章では ≥ しか言えなかった）。",
+        "式変形の書き方の統一（2026-09-04）。式変形の直後に置いていた「第 2 行で用いた」の参照を、定数 c の決定を使う行末の (∵ …) の blkref へ移した。内容・式変形・根拠・参照は変えていない。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_06（M=2,3,4,5・6 組の (K_1,K_2) で、V^{(+)} の 2^M 個の固有値全体が {Λ̌_ε} と相対誤差 9.0e-12 以下で一致。V^{(+)} は行列指数関数から直接構成しており、証明の経路とは独立）。",
       ],
     },
