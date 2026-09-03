@@ -12,6 +12,7 @@
 
 import argparse
 import ast
+import builtins
 import fcntl
 import json
 import math
@@ -101,12 +102,78 @@ class AssertCounter(ast.NodeTransformer):
         return [ast.copy_location(hit, node), node]
 
 
+class SwallowedAssertionError(Exception):
+    """assert の失敗を検算ファイル自身が握り潰しうる書き方になっていることを表す。"""
+
+
+def _names_that_cannot_catch_assertion_error():
+    # 判定は「捕まえないと言い切れる名前」の側で持つ（fail-closed）。組み込みの例外クラスの
+    # うち AssertionError を捕まえないものだけを安全と認め、それ以外の名前——変数へ束ねた
+    # 例外型、属性参照、呼び出し、利用者定義の名前——はすべて捕まえうるものとして扱う。
+    safe = set()
+    for name in dir(builtins):
+        value = getattr(builtins, name)
+        if (isinstance(value, type)
+                and issubclass(value, BaseException)
+                and not issubclass(AssertionError, value)):
+            safe.add(name)
+    return frozenset(safe)
+
+
+ASSERTION_SAFE_HANDLER_NAMES = _names_that_cannot_catch_assertion_error()
+
+
+def _handler_can_swallow_assertion(handler):
+    # 型を書かない `except:` は AssertionError も捕まえる。
+    if handler.type is None:
+        return True
+    candidates = (handler.type.elts
+                  if isinstance(handler.type, ast.Tuple) else [handler.type])
+    for node in candidates:
+        # 名前で「捕まえない」と言い切れないもの（変数・属性・呼び出し・利用者定義の名前）は、
+        # 捕まえうるものとして扱う。
+        if not isinstance(node, ast.Name) or node.id not in ASSERTION_SAFE_HANDLER_NAMES:
+            return True
+    return False
+
+
+def _contains_assert(nodes):
+    for node in nodes:
+        for descendant in ast.walk(node):
+            if isinstance(descendant, ast.Assert):
+                return True
+    return False
+
+
+def reject_swallowed_assertions(tree, path):
+    # 実行された assert の件数を成功判定に使う以上、「実行はされたが失敗が握り潰される」
+    # 書き方を残してはならない。`try: assert ... except AssertionError: pass` と書けば、
+    # 件数は正のまま条件が偽でも PASS になる。したがって try の本体に assert を含み、
+    # その try の handler が AssertionError を捕まえうる場合を実行前に拒否する。
+    # 例外の送出を確かめる書き方（`try: f() except ValueError: pass else: assert False`）は、
+    # assert が try の本体に無いか handler が AssertionError を捕まえないので通る。
+    # Python 3.11 以降の `except*` も、素の例外を群へ包んで捕まえるため同じ扱いにする。
+    try_types = (ast.Try, ast.TryStar) if hasattr(ast, 'TryStar') else (ast.Try,)
+    for node in ast.walk(tree):
+        if not isinstance(node, try_types):
+            continue
+        if not _contains_assert(node.body):
+            continue
+        for handler in node.handlers:
+            if _handler_can_swallow_assertion(handler):
+                raise SwallowedAssertionError(
+                    '{} の {} 行目付近: try の本体にある assert の失敗を '
+                    'except が握り潰しうる'.format(path, getattr(handler, 'lineno', node.lineno)))
+
+
 def instrumented_code(path, preparse):
     # Sage の load と同じく .sage を前処理してから実行するが、実行前に構文木を書き換える。
     # 前処理の結果をそのまま exec する経路（sage.repl.load.load の既定）と同じ意味を保つ。
     with open(path) as fh:
         source = preparse(fh.read()) + '\n'
-    tree = AssertCounter(path).visit(ast.parse(source, filename=path))
+    parsed = ast.parse(source, filename=path)
+    reject_swallowed_assertions(parsed, path)
+    tree = AssertCounter(path).visit(parsed)
     ast.fix_missing_locations(tree)
     # optimize=0 を明示する。既定の -1 は起動した python の最適化水準を引き継ぐため、
     # 環境変数 PYTHONOPTIMIZE や -O のもとでは assert 文だけが実体を失う。差し込んだ

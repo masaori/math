@@ -1,3 +1,4 @@
+import ast
 import json
 import os
 import subprocess
@@ -237,6 +238,76 @@ class InstrumentedCodeTest(unittest.TestCase):
             exec(sweep_all_checks.instrumented_code(main_path, lambda text: text), namespace)
             self.assertEqual(hits.get(os.path.realpath(common_path)), 1)
             self.assertEqual(hits.get(os.path.realpath(main_path), 0), 0)
+
+
+class SwallowedAssertionTest(unittest.TestCase):
+    """assert の失敗を検算ファイル自身が握り潰す書き方を、実行前に拒むことを確かめる。"""
+
+    def instrument(self, source):
+        with tempfile.TemporaryDirectory() as workdir:
+            path = os.path.join(workdir, 'check_sample.sage')
+            with open(path, 'w') as fh:
+                fh.write(source)
+            return sweep_all_checks.instrumented_code(path, lambda text: text)
+
+    def assert_rejected(self, source):
+        with self.assertRaises(sweep_all_checks.SwallowedAssertionError):
+            self.instrument(source)
+
+    def assert_accepted(self, source):
+        self.instrument(source)
+
+    def test_rejects_assertion_error_handler(self):
+        # 件数だけを見る掃引では、この書き方は「assert を 1 回実行した PASS」になる。
+        self.assert_rejected('try:\n    assert False\nexcept AssertionError:\n    pass\n')
+
+    def test_rejects_broad_exception_handler(self):
+        self.assert_rejected('try:\n    assert False\nexcept Exception:\n    pass\n')
+
+    def test_rejects_base_exception_handler(self):
+        self.assert_rejected('try:\n    assert False\nexcept BaseException:\n    pass\n')
+
+    def test_rejects_bare_handler(self):
+        self.assert_rejected('try:\n    assert False\nexcept:\n    pass\n')
+
+    def test_rejects_handler_tuple_that_includes_assertion_error(self):
+        self.assert_rejected(
+            'try:\n    assert False\nexcept (ValueError, AssertionError):\n    pass\n')
+
+    def test_rejects_handler_that_cannot_be_judged_by_name(self):
+        # 変数・属性・呼び出しで指定された例外型は、捕まえうるものとして扱う（fail-closed）。
+        self.assert_rejected('E = Exception\ntry:\n    assert False\nexcept E:\n    pass\n')
+
+    def test_rejects_assertion_nested_deeper_in_the_try_body(self):
+        self.assert_rejected(
+            'try:\n    for i in range(3):\n        assert False\nexcept Exception:\n    pass\n')
+
+    def test_accepts_handler_that_cannot_catch_assertion_error(self):
+        self.assert_accepted('try:\n    assert True\nexcept ValueError:\n    pass\n')
+
+    def test_accepts_assertion_outside_the_try_body(self):
+        # 例外の送出を確かめる書き方は、assert が try の本体に無いので通る。
+        self.assert_accepted(
+            'def f():\n    raise ValueError\n'
+            'try:\n    f()\nexcept ValueError:\n    pass\nelse:\n    assert False\n')
+
+    def test_accepts_try_without_any_assertion(self):
+        self.assert_accepted('try:\n    x = 1\nexcept Exception:\n    pass\n')
+
+    def test_real_check_files_satisfy_the_rule(self):
+        # 実在の検算 336 本がこの規則に触れないこと（規則の導入が既存を壊さないこと）を、
+        # 掃引と同じ収集経路で確かめる。
+        checked = 0
+        for path in sweep_all_checks.collect_files():
+            with open(path) as fh:
+                source = fh.read()
+            try:
+                tree = ast.parse(source, filename=path)
+            except SyntaxError:
+                continue  # Sage の前処理を要する書き方は掃引の実行時に判定される
+            sweep_all_checks.reject_swallowed_assertions(tree, path)
+            checked += 1
+        self.assertGreater(checked, 0)
 
 
 class AssertionRequiredTest(unittest.TestCase):
