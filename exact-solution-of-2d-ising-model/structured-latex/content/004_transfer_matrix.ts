@@ -2660,13 +2660,20 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
   \begin{cases} \mp 1 & (j = 1) \\ 1 & (j \neq 1) \end{cases}
   Z_j \exp\!\left(-i \frac{2\pi j \mu}{M}\right) \\
 &= \mp Z_1 \exp\!\left(-i\frac{2\pi\mu}{M}\right)
-  + \sum_{j=2}^{M} Z_j \exp\!\left(-i\frac{2\pi j\mu}{M}\right) \\
+  + \sum_{j=2}^{M} Z_j \exp\!\left(-i\frac{2\pi j\mu}{M}\right)
+&&(\because\ \text{有限和の最初の項（}j=1\text{）を分け、場合分けの係数を代入した}) \\
 \hat{Y}_\mu
 &:= \sum_{j=1}^{M} Y_j \exp\!\left(-i\frac{2\pi j\mu}{M}\right)
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-09-04: 式変形の書き方の統一。定義の表示の中で j=1 の項を分ける等号の段に" +
+          "根拠が無かったので、行末に (∵ …) を付けた。式・定義の内容は変えていない。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_011_definition_H1_H2",
