@@ -20,7 +20,7 @@
  */
 
 import { spawnSync } from "node:child_process";
-import { readdirSync, lstatSync } from "node:fs";
+import { readdirSync, lstatSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -58,16 +58,28 @@ function collect(directory: string, prefix: string): void {
   for (const entry of localEntries.sort((a, b) => a.name.localeCompare(b.name))) {
     const path = join(directory, entry.name);
     const label = `${prefix}${entry.name}`;
+    if (entry.isSymbolicLink()) {
+      if (entry.name.startsWith("test_") && entry.name.endsWith(".py")) {
+        problems.push(`${label} は symlink の単体テストである`);
+        continue;
+      }
+      // Dirent#isDirectory は symlink に対して false を返す。先にリンク先を調べなければ、
+      // テストを含む symlink ディレクトリを通常の無関係な項目として黙って読み飛ばしてしまう。
+      try {
+        if (statSync(path).isDirectory()) {
+          problems.push(`${label} は symlink のディレクトリである`);
+        }
+      } catch (error) {
+        problems.push(`${label} の symlink のリンク先を検査できない: ${String(error)}`);
+      }
+      continue;
+    }
     if (entry.isDirectory()) {
       if (entry.name === "__pycache__") continue;
       collect(path, `${label}/`);
       continue;
     }
     if (!(entry.name.startsWith("test_") && entry.name.endsWith(".py"))) continue;
-    if (entry.isSymbolicLink()) {
-      problems.push(`${label} は symlink の単体テストである`);
-      continue;
-    }
     if (!entry.isFile()) {
       problems.push(`${label} は通常の単体テストファイルではない`);
       continue;
