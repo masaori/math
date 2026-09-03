@@ -1,4 +1,5 @@
 import ast
+import contextlib
 import json
 import os
 import subprocess
@@ -275,20 +276,35 @@ class InstrumentedCodeTest(unittest.TestCase):
         self.assertEqual(self.run_source_counts(source), (2, 1))
 
 
+@contextlib.contextmanager
+def recorder_names_patched(recorder_names):
+    """記録用の名前を一時的に差し替える。None なら既定の名前のまま走らせる。"""
+    original = (sweep_all_checks.ASSERT_HIT_NAME, sweep_all_checks.ASSERT_FAILURE_NAME)
+    if recorder_names is not None:
+        (sweep_all_checks.ASSERT_HIT_NAME,
+         sweep_all_checks.ASSERT_FAILURE_NAME) = recorder_names
+    try:
+        yield
+    finally:
+        (sweep_all_checks.ASSERT_HIT_NAME,
+         sweep_all_checks.ASSERT_FAILURE_NAME) = original
+
+
 class AssertionRecorderTest(unittest.TestCase):
     """記録の経路そのものを検算ファイルが改変できないことを確かめる。"""
 
-    def run_verdict(self, source):
+    def run_verdict(self, source, recorder_names=None):
         with tempfile.TemporaryDirectory() as workdir:
             path = os.path.join(workdir, 'check_sample.sage')
             with open(path, 'w') as fh:
                 fh.write(source)
-            recorder = sweep_all_checks.AssertionRecorder(
-                'token-for-the-test', os.path.join(workdir, 'failures.log'))
-            namespace = {'__file__': path}
-            namespace = recorder.install(namespace)
-            exec(sweep_all_checks.instrumented_code(path, lambda text: text, recorder.token),
-                 namespace)
+            with recorder_names_patched(recorder_names):
+                recorder = sweep_all_checks.AssertionRecorder(
+                    'token-for-the-test', os.path.join(workdir, 'failures.log'))
+                namespace = {'__file__': path}
+                namespace = recorder.install(namespace)
+                exec(sweep_all_checks.instrumented_code(
+                    path, lambda text: text, recorder.token), namespace)
             return recorder, recorder.verdict(namespace)
 
     def test_accepts_a_check_whose_assertions_all_hold(self):
@@ -345,21 +361,13 @@ class AssertionRecorderTest(unittest.TestCase):
             path = os.path.join(workdir, 'check_sample.sage')
             with open(path, 'w') as fh:
                 fh.write(source)
-            original_names = (sweep_all_checks.ASSERT_HIT_NAME,
-                              sweep_all_checks.ASSERT_FAILURE_NAME)
-            if recorder_names is not None:
-                sweep_all_checks.ASSERT_HIT_NAME = recorder_names[0]
-                sweep_all_checks.ASSERT_FAILURE_NAME = recorder_names[1]
-            try:
+            with recorder_names_patched(recorder_names):
                 recorder = sweep_all_checks.AssertionRecorder(
                     'token-for-the-test', os.path.join(workdir, 'failures.log'))
                 namespace = {'__file__': path}
                 namespace.update(recorder.installed)
                 exec(sweep_all_checks.instrumented_code(
                     path, lambda text: text, recorder.token), namespace)
-            finally:
-                (sweep_all_checks.ASSERT_HIT_NAME,
-                 sweep_all_checks.ASSERT_FAILURE_NAME) = original_names
             return recorder, recorder.verdict(namespace)
 
     def test_dropping_the_guard_reopens_rebinding_even_for_an_unwritable_name(self):
@@ -380,6 +388,23 @@ class AssertionRecorderTest(unittest.TestCase):
         self.assertTrue(recorded)
         self.assertEqual(reason, '')
         self.assertEqual(sum(recorder.failures.values()), 0)
+
+    def test_guard_rejects_the_same_attack_on_an_unwritable_name(self):
+        # 直前の負例と対にする。名前を識別子として不正な文字列へ変えても、束ね直しを拒むのは
+        # 名前の綴りではなく GuardedNamespace の __setitem__ なので、判定は落ちる。
+        # 守り無し側（負例）と同じ検算本文・同じ記録名で走らせ、差が守りだけであることを固定する。
+        recorder, (recorded, reason) = self.run_verdict(
+            'names = [k for k in list(globals()) if k.startswith("__sweep assertion")]\n'
+            'saved = {k: globals()[k] for k in names}\n'
+            'assert 1 == 1\n'
+            'for k in names:\n    globals()[k] = lambda *args: None\n'
+            'def check():\n    assert 1 == 2\n'
+            'try:\n    check()\nexcept Exception:\n    pass\n'
+            'for k in names:\n    globals()[k] = saved[k]\n',
+            recorder_names=('__sweep assertion hit__', '__sweep assertion failure__'))
+        self.assertFalse(recorded)
+        self.assertIn('rebound', reason)
+        self.assertEqual(sum(recorder.failures.values()), 1)
 
     def test_guard_rejects_rebinding_through_globals_subscript(self):
         # 同じ書き方を、現行の守りが入った名前空間で拒むこと。globals() は
