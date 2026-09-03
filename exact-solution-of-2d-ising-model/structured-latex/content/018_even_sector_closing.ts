@@ -1684,22 +1684,33 @@ Gf_{\iota(s)}
       ]),
     ],
     proof: [
-      paragraph([
-        ref("cosh_sinh_basic_properties"),
-        " より ",
-        math(String.raw`\cosh K > 0`),
-        " かつ ",
-        math(String.raw`\sinh K > 0`),
-        " である。また ",
-        math(String.raw`M-1\in\mathbb Z_{>0}`),
-        " だから、二つの公式の右辺はいずれも正の実数である。",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{s\in\mathfrak M}e^{K E(s)}
+&=2\left(2\cosh K\right)^{M-1}
+   \quad (\because \blkref{open_chain_partition_sum}) \\
+&>0
+   \quad (\because \blkref{cosh_sinh_basic_properties}\text{、}
+   \cosh K>0\text{、}M-1\in\mathbb Z_{>0})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{s\in\mathfrak M}s(M)s(1)e^{K E(s)}
+&=2\left(2\sinh K\right)^{M-1}
+   \quad (\because \blkref{open_chain_endpoint_product_sum}) \\
+&>0
+   \quad (\because \blkref{cosh_sinh_basic_properties}\text{、}
+   \sinh K>0\text{、}M-1\in\mathbb Z_{>0})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
       notes: [
         "1次元 Ising 開鎖の分配関数と両端相関を挿入した和の正値性であり、trace_of_epsilon_V_plus の符号を決める。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,…,8 の全配置を直接列挙）。",
+        "式変形の書き方の統一（2026-09-04）。二つの正値性を、それぞれ主張の左辺から既証明の公式を経て正値へ至る一続きの式変形にし、使用した公式と双曲線関数の正値性を各行末から参照した。内容と根拠は変えていない。",
       ],
     },
   },
