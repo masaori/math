@@ -720,4 +720,31 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_selection_even_subgraph_action_character_translation_stabilizer",
+    targets: [
+      "claim_selection_even_subgraph_action_character",
+      "claim_selection_sum_character_evaluation",
+    ],
+    title: { text: "二候補の選択に平行移動の対称性の障害は無い（一辺二の全数観察）" },
+    body: [
+      paragraph([
+        "単一の偶部分グラフでは覆えない一辺 ", math(String.raw`L=2`), " の ",
+        math(String.raw`16`), " ファイバーについて、非自明な平行移動（",
+        math(String.raw`3`), " 通り）が ", math(String.raw`(D,E)`),
+        " を固定するかを全数で調べた",
+        "（sagemath/check/even-subgraph-orbit-translation-stabilizer）。どのファイバーも",
+        "固定されず、従って ", math(String.raw`(D,E,\varphi)`),
+        " を固定する非自明な平行移動は存在せず、候補を二本持つ ", math(String.raw`1{,}984`),
+        " 置換のどれについても二候補を入れ替える平行移動はない。すなわち、平行移動と可換な",
+        "選択規則が二候補から一方を選ぶことを妨げる対称性の障害は無い。さらに覆えない ",
+        math(String.raw`16`), " ファイバーの集合は平行移動で閉じ、大きさ ",
+        math(String.raw`4`), " の軌道がちょうど ", math(String.raw`4`),
+        " 本に分かれるので、平行移動と可換な選択規則は軌道の代表 ", math(String.raw`4`),
+        " ファイバーで選択を決めれば残りへ一意に延長できる。次は代表ファイバーの上で",
+        "二候補から一方を選ぶ規則（切断・接合位置のデータから定まるもの）を調べる。",
+        "検算は有限集合と有限写像の等号だけで完結し、浮動小数点は使わない。",
+      ]),
+    ],
+  },
 ]);
