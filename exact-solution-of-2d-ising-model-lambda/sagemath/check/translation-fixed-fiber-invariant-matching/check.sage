@@ -115,6 +115,10 @@ fibers_with_uncovered_vertex = 0
 without_by_stabilizer_order = {}
 fibers_without_valid_translation = 0
 fibers_examined = 0
+quotient_isolated_positive_distribution = {}
+quotient_isolated_negative_distribution = {}
+quotient_orbit_count_distribution = {}
+scope_fixed_fibers = set()
 for fiber_key in nontrivially_stabilized:
     translations = valid_translations(fiber_key)
     if not translations:
@@ -122,6 +126,7 @@ for fiber_key in nontrivially_stabilized:
         fibers_without_valid_translation += 1
         continue
     fibers_examined += 1
+    scope_fixed_fibers.add(fiber_key)
     stabilizer = fiber_stabilizer(fiber_key)
     order = len(stabilizer)
     stabilizer_order_distribution[order] = (
@@ -187,6 +192,31 @@ for fiber_key in nontrivially_stabilized:
         pair = (orbit_of(u), orbit_of(v))
         adjacency[pair[0]].add(pair[1])
         witness.setdefault(pair, (u, v))
+    reverse_adjacency = {orb: set() for orb in negative_orbits}
+    for positive_orbit, neighbors in adjacency.items():
+        for negative_orbit in neighbors:
+            reverse_adjacency[negative_orbit].add(positive_orbit)
+    isolated_positive = sum(not neighbors for neighbors in adjacency.values())
+    isolated_negative = sum(not neighbors for neighbors in reverse_adjacency.values())
+    assert all(len(orbit) == 2 for orbit in positive_orbits)
+    assert {
+        orbit for orbit, neighbors in reverse_adjacency.items() if not neighbors
+    } == {orbit for orbit in negative_orbits if len(orbit) == 1}
+    if len(keys) == 32:
+        assert (isolated_positive, isolated_negative) == (4, 8)
+    else:
+        assert len(keys) == 288
+        assert (isolated_positive, isolated_negative) == (0, 24)
+    quotient_isolated_positive_distribution[isolated_positive] = (
+        quotient_isolated_positive_distribution.get(isolated_positive, 0) + 1
+    )
+    quotient_isolated_negative_distribution[isolated_negative] = (
+        quotient_isolated_negative_distribution.get(isolated_negative, 0) + 1
+    )
+    orbit_count = (len(positive_orbits), len(negative_orbits))
+    quotient_orbit_count_distribution[orbit_count] = (
+        quotient_orbit_count_distribution.get(orbit_count, 0) + 1
+    )
     perfect, matched_right = has_perfect_bipartite_matching(
         positive_orbits, negative_orbits, adjacency
     )
@@ -231,6 +261,19 @@ assert fibers_without_invariant == 8
 assert without_by_stabilizer_order == {2: 8}
 assert fibers_with_uncovered_vertex == 0
 assert unbalanced_total == 0
+assert quotient_orbit_count_distribution == {(8, 12): 4, (72, 84): 4}
+assert quotient_isolated_positive_distribution == {4: 4, 0: 4}
+assert quotient_isolated_negative_distribution == {8: 4, 24: 4}
+scope_fixed_counts_by_shift = {
+    shift: sum(
+        translate_fiber_key(shift[0], shift[1], fiber_key) == fiber_key
+        for fiber_key in scope_fixed_fibers
+    )
+    for shift in nontrivial_translations
+}
+assert fibers_checked == 64
+assert len(scope_fixed_fibers) == 8
+assert scope_fixed_counts_by_shift == {(0, 1): 4, (1, 0): 4, (1, 1): 0}
 print(f"fixed realized fibers by shift: {fixed_counts_by_shift}")
 print(f"fibers with nontrivial stabilizer: {len(nontrivially_stabilized)}")
 print(f"  without a valid even subgraph H: {fibers_without_valid_translation}")
@@ -242,6 +285,14 @@ print(f"fibers without stabilizer-invariant perfect matching: "
       f"{fibers_without_invariant}")
 print(f"fibers without invariant matching, by stabilizer order: "
       f"{without_by_stabilizer_order}")
+print(f"quotient positive/negative orbit counts: "
+      f"{quotient_orbit_count_distribution}")
+print(f"isolated positive quotient orbits: "
+      f"{quotient_isolated_positive_distribution}")
+print(f"isolated negative quotient orbits: "
+      f"{quotient_isolated_negative_distribution}")
+print(f"nontrivial-character scope fibers: {fibers_checked}")
+print(f"uniform-cover scope fixed fibers by shift: {scope_fixed_counts_by_shift}")
 print(f"fibers with a candidate-free permutation: {fibers_with_uncovered_vertex}")
 print(f"unbalanced (phi, H) pairs skipped: {unbalanced_total}")
 print("PASS: translation-fixed-fiber-invariant-matching")
