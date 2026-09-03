@@ -142,6 +142,17 @@ class AssertCounter(ast.NodeTransformer):
 # 名前空間の守りも同じ層にある（globals() は GuardedNamespace そのものなので、
 # そこから記録器へ辿れる）。守りが閉じるのは束ね直しと削除であって、記録器への到達ではない。
 # これらを本当に閉じるには記録を worker プロセスの外へ出す必要があり、まだ閉じていない。
+# 守りの費用と、守りを外す案を却下した根拠（2026-09-04 06:12 tick の実測）:
+#   合成コード（bench_namespace_guard.py）では守りは 3.90 倍だが、実際の検算 1 本の上では
+#   1.218 / 1.275 / 1.591 倍だった（bench_guard_on_check.py。assert 24 回の検算でも 1.275 倍なので、
+#   費用は assert の回数ではなく module 水準の代入の回数に比例するという読みと合う）。
+#   候補だった「記録用の名前を識別子として不正な文字列にして module code の STORE_NAME の
+#   対象から外し、名前空間を素の dict へ戻す」案は却下した。検算は名前を書けなくても
+#   globals() を走査して鍵を見つけ、添字代入で束ね直してから元へ戻せる。素の dict では
+#   この書き方が素通りする（test_dropping_the_guard_reopens_rebinding_even_for_an_unwritable_name で固定）。
+#   守りを入れたままなら globals() は GuardedNamespace そのものなので添字代入も拒む
+#   （test_guard_rejects_rebinding_through_globals_subscript）。したがって打ち切り時間の余裕は
+#   守りを外して作らず、打ち切り時間そのものと worker の競合の側で作る。
 class AssertionRecorder:
     """assert の実行と失敗を、検算ファイルから改変しにくい形で記録する。"""
 

@@ -339,6 +339,51 @@ class AssertionRecorderTest(unittest.TestCase):
         # 削除も拒むので、以後の assert も数え落とさない。
         self.assertEqual(sum(recorder.hits.values()), 2)
 
+    def run_verdict_without_guard(self, source):
+        """守りを外し、記録用の名前を素の dict へ置いただけの名前空間で走らせる。"""
+        with tempfile.TemporaryDirectory() as workdir:
+            path = os.path.join(workdir, 'check_sample.sage')
+            with open(path, 'w') as fh:
+                fh.write(source)
+            recorder = sweep_all_checks.AssertionRecorder(
+                'token-for-the-test', os.path.join(workdir, 'failures.log'))
+            namespace = {'__file__': path}
+            namespace.update(recorder.installed)
+            exec(sweep_all_checks.instrumented_code(path, lambda text: text, recorder.token),
+                 namespace)
+            return recorder, recorder.verdict(namespace)
+
+    def test_dropping_the_guard_reopens_rebinding_even_for_an_unwritable_name(self):
+        # 守りを外す案（記録用の名前を識別子として不正な文字列にして module code の
+        # STORE_NAME の対象から外し、名前空間を素の dict へ戻す）を却下した根拠を固定する。
+        # 検算は名前を書けなくても globals() を走査して鍵を見つけられるので、
+        # 束ね直して元へ戻す書き方は素の dict では素通りする。
+        recorder, (recorded, reason) = self.run_verdict_without_guard(
+            'names = [k for k in list(globals()) if k.startswith("__sweep_assert")]\n'
+            'saved = {k: globals()[k] for k in names}\n'
+            'assert 1 == 1\n'
+            'for k in names:\n    globals()[k] = lambda *args: None\n'
+            'def check():\n    assert 1 == 2\n'
+            'try:\n    check()\nexcept Exception:\n    pass\n'
+            'for k in names:\n    globals()[k] = saved[k]\n')
+        # 偽な assert は起きたのに、記録も残らず判定も通ってしまう（＝守りを外せない理由）。
+        self.assertTrue(recorded)
+        self.assertEqual(reason, '')
+        self.assertEqual(sum(recorder.failures.values()), 0)
+
+    def test_guard_rejects_rebinding_through_globals_subscript(self):
+        # 同じ書き方を、現行の守りが入った名前空間で拒むこと。globals() は
+        # GuardedNamespace そのものなので、添字代入も __setitem__ を通る。
+        recorder, (recorded, reason) = self.run_verdict(
+            'names = [k for k in list(globals()) if k.startswith("__sweep_assert")]\n'
+            'assert 1 == 1\n'
+            'for k in names:\n    globals()[k] = lambda *args: None\n'
+            'def check():\n    assert 1 == 2\n'
+            'try:\n    check()\nexcept Exception:\n    pass\n')
+        self.assertFalse(recorded)
+        self.assertIn('rebound', reason)
+        self.assertEqual(sum(recorder.failures.values()), 1)
+
     def test_namespace_guard_is_effective_on_this_python(self):
         # 守りは module code の STORE_NAME / DELETE_NAME が dict 派生の __setitem__ / __delitem__ を
         # 通ることに依存する。依存が崩れた処理系で黙って守りが外れないことを固定する。
