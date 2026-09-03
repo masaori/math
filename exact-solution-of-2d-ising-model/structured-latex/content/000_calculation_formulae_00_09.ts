@@ -308,13 +308,17 @@ export default defineBlocks([
 &&(\because\ \exp(0) = 1)
 \end{aligned}`,
       ),
-      paragraph([
-        "(3) の証明。",
-        math(String.raw`x > 0`),
-        " のとき ",
-        math(String.raw`-x < 0 < x`),
-        " である。",
-      ]),
+      paragraph(["(3) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+x>0
+&\Longrightarrow -x<0
+&&(\because\ \text{両辺に }-1<0\text{ を掛けると不等号の向きが反転する})\\
+x>0
+&\Longrightarrow 0<x
+&&(\because\ \text{同じ不等式の左右を入れ替える})
+\end{aligned}`,
+      ),
       displayMath(
         String.raw`\begin{aligned}
 \exp(-x)
@@ -333,11 +337,15 @@ export default defineBlocks([
 &&(\because\ \exp\ \text{が狭義単調増加で}\ 0 < x)
 \end{aligned}`,
       ),
-      paragraph([
-        "であるから ",
-        math(String.raw`\exp(x) - \exp(-x) > 0`),
-        " である。したがって",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-x)<1<\exp(x)
+&\Longrightarrow \exp(-x)<\exp(x)
+&&(\because\ \mathbb R\text{ の順序の推移律})\\
+&\Longrightarrow \exp(x)-\exp(-x)>0
+&&(\because\ \text{両辺に }-\exp(-x)\text{ を加える})
+\end{aligned}`,
+      ),
       displayMath(
         String.raw`\begin{aligned}
 \sinh x
@@ -347,22 +355,23 @@ export default defineBlocks([
 &&(\because\ \text{正の実数を}\ 2 > 0\ \text{で割った値は正})
 \end{aligned}`,
       ),
-      paragraph([
-        "である。(1) より ",
-        math(String.raw`\cosh x > \sinh x`),
-        " であるから ",
-        math(String.raw`\cosh x > \sinh x > 0`),
-        " を得る。",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh x>\sinh x\ \land\ \sinh x>0
+&\Longrightarrow \cosh x>\sinh x>0
+&&(\because\ \text{(1) と直前の不等式})
+\end{aligned}`,
+      ),
       paragraph([
         "(4) の証明。両方向を別々に示すので、ここは一続きの式にしない。",
       ]),
-      paragraph([
-        math(String.raw`a = b`),
-        " ならば、両辺を 2 乗して ",
-        math(String.raw`a^2 = b^2`),
-        " である。",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a=b
+&\Longrightarrow a^2=b^2
+&&(\because\ \text{等しい実数を二乗しても等しい})
+\end{aligned}`,
+      ),
       paragraph([
         "逆に ",
         math(String.raw`a^2 = b^2`),
@@ -377,23 +386,20 @@ export default defineBlocks([
 &&(\because\ a^2 = b^2)
 \end{aligned}`,
       ),
-      paragraph([
-        "である。",
-        math(String.raw`a > 0`),
-        " かつ ",
-        math(String.raw`b > 0`),
-        " より ",
-        math(String.raw`a + b > 0`),
-        " すなわち ",
-        math(String.raw`a + b \neq 0`),
-        " であり、",
-        math(String.raw`\mathbb{R}`),
-        " は整域であるから ",
-        math(String.raw`a - b = 0`),
-        " すなわち ",
-        math(String.raw`a = b`),
-        " を得る。",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a>0\ \land\ b>0
+&\Longrightarrow a+b>0
+&&(\because\ \text{正の実数の和は正})\\
+&\Longrightarrow a+b\ne0
+&&(\because\ \text{正の実数は }0\text{ でない})\\
+(a-b)(a+b)=0\ \land\ a+b\ne0
+&\Longrightarrow a-b=0
+&&(\because\ \mathbb R\text{ は整域})\\
+&\Longrightarrow a=b
+&&(\because\ \text{両辺に }b\text{ を加える})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
