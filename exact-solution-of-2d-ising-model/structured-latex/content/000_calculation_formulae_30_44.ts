@@ -2344,40 +2344,23 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 \sqrt{z}\sqrt{z}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
    \cdot\phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
-&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開})\\
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開。}\blkref{sqrt_expansion_via_polar})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}
    \cdot\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \tfrac{\theta}{2}-n\pi\right)\right]_{\sim}\right)
-&&(\because\ \text{準備の第二の}\ \phi_{\mathrm{cartesian}}\ \text{が積を保つこと})\\
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{が積を保つこと。}\blkref{isomorphism_of_phi_cartesian})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\geq 0}}\cdot\sqrt{r}^{\,\mathbb{R}_{\geq 0}},\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
-&&(\because\ \text{極座標表現の演算})\\
+&&(\because\ \text{極座標表現の演算。}\blkref{operations_on_polar_representation})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
-&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{definition_of_sqrt_r_positive})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \theta-2n\pi\right)\right]_{\sim}\right)
 &&(\because\ \text{実数の和の計算})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \theta\right)\right]_{\sim}\right)
-&&(\because\ \text{準備の第三})\\
+&&(\because\ \text{極座標表現の同値関係。}\blkref{polar_equivalence_class})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\phi_{\mathrm{polar}}(z)\right)
-&&(\because\ r,\theta\ \text{の取り方})\\
+&&(\because\ r,\theta\ \text{の取り方。}\blkref{def_phi_polar}\ \blkref{polar_equivalence_class})\\
 &= z
-&&(\because\ \text{準備の第二の}\ \phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}})
+&&(\because\ \phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}\ \blkref{isomorphism_of_phi_cartesian})
 \end{aligned}`),
-      paragraph([
-        "引いたブロックは ",
-        ref("sqrt_expansion_via_polar"),
-        "、",
-        ref("isomorphism_of_phi_cartesian"),
-        "、",
-        ref("operations_on_polar_representation"),
-        "、",
-        ref("definition_of_sqrt_r_positive"),
-        "、",
-        ref("polar_equivalence_class"),
-        "、",
-        ref("def_phi_polar"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        " である。",
-      ]),
     ],
     conversion: {
       status: "converted",
@@ -2392,7 +2375,9 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
           "原文の [sqrt(r), θ/2-nπ]_~ という書き方（同値類の中の対に括弧が無い）は、" +
           "同じファイルの他の証明と同じ [(r,θ)]_~ の形へ揃えた。" +
           "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
-          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。" +
+          "2026-09-03 の式変形統一で、現在は利用できる \\blkref を各適用行へ置き、" +
+          "証明末尾の参照一覧を削除した。式変形・根拠・内容は変えていない。",
       ],
     },
   },
