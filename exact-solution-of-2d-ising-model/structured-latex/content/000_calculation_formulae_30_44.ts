@@ -2545,11 +2545,11 @@ z
       displayMath(String.raw`\begin{aligned}
 z
 &= \sqrt{z}\sqrt{z}
-&&(\because\ \text{sqrt の2乗は元に戻る})\\
+&&(\because\ \text{sqrt の2乗は元に戻る。}\blkref{sqrt_squared_is_original})\\
 &= 0_{\mathbb{C}}\cdot 0_{\mathbb{C}}
 &&(\because\ \text{この場合の仮定を 2 箇所へ適用})\\
 &= 0_{\mathbb{C}}
-&&(\because\ \mathbb{C}\ \text{の積の定義})
+&&(\because\ \mathbb{C}\ \text{の積の定義。}\blkref{definition_of_cc})
 \end{aligned}`),
       paragraph([
         "となって ",
@@ -2570,13 +2570,13 @@ z
       displayMath(String.raw`\begin{aligned}
 \phi_{\mathrm{polar}}(1_{\mathbb{C}})
 &= \phi_{\mathrm{polar}}((1,0))
-&&(\because\ 1_{\mathbb{C}}=(1,0))\\
+&&(\because\ 1_{\mathbb{C}}=(1,0),\ \blkref{definition_of_cc}\ \blkref{inclusion_rr_to_cc})\\
 &= \left[\left(\sqrt{1^2+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
-&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x>0\ \text{の場合})\\
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x>0\ \text{の場合。}\blkref{def_phi_polar})\\
 &= \left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/1)\right)\right]_{\sim}
 &&(\because\ \mathbb{R}\ \text{の計算}\ 1^2+0^2=1)\\
 &= \left[\left(1,\ \arctan(0/1)\right)\right]_{\sim}
-&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{definition_of_sqrt_r_positive})\\
 &= \left[\left(1,\ \arctan 0\right)\right]_{\sim}
 &&(\because\ \mathbb{R}\ \text{の計算}\ 0/1=0)\\
 &= \left[\left(1,\ 0\right)\right]_{\sim}
@@ -2592,13 +2592,13 @@ z
       displayMath(String.raw`\begin{aligned}
 \sqrt{1_{\mathbb{C}}}
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{1}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
-&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開})\\
+&&(\because\ \text{複素数の}\ \sqrt{\cdot}\ \text{の極座標表現による展開。}\blkref{sqrt_expansion_via_polar})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
-&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義})\\
+&&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{definition_of_sqrt_r_positive})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(1,\ 0\right)\right]_{\sim}\right)
 &&(\because\ \mathbb{R}\ \text{の計算})\\
 &= (1\cdot\cos 0,\ 1\cdot\sin 0)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
 &= (1\cdot 1,\ 1\cdot\sin 0)
 &&(\because\ \cos 0=1)\\
 &= (1\cdot 1,\ 1\cdot 0)
@@ -2606,7 +2606,7 @@ z
 &= (1,\ 0)
 &&(\because\ \mathbb{R}\ \text{の積の計算を 2 箇所へ適用})\\
 &= 1_{\mathbb{C}}
-&&(\because\ 1_{\mathbb{C}}=(1,0))
+&&(\because\ 1_{\mathbb{C}}=(1,0),\ \blkref{definition_of_cc}\ \blkref{inclusion_rr_to_cc})
 \end{aligned}`),
       paragraph([
         "である。",
@@ -2620,7 +2620,7 @@ z
 &= 0+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
 &&(\because\ \text{この場合の仮定})\\
 &= 0+0
-&&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 1 の場合})\\
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 1 の場合。}\blkref{range_of_args_of_reciprocal_of_complex_numbers})\\
 &= 0
 &&(\because\ \mathbb{R}\ \text{の和の計算})
 \end{aligned}`),
@@ -2655,7 +2655,7 @@ z
       displayMath(String.raw`\begin{aligned}
 \arg^{[0,2\pi)}(z)+\arg^{[0,2\pi)}\!\left(\frac{1}{z}\right)
 &= \arg^{[0,2\pi)}(z)+\left(2\pi-\arg^{[0,2\pi)}(z)\right)
-&&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 2 の場合})\\
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \arg\ \text{の第 2 の場合。}\blkref{range_of_args_of_reciprocal_of_complex_numbers})\\
 &= 2\pi
 &&(\because\ \mathbb{R}\ \text{の和の計算})
 \end{aligned}`),
@@ -2687,35 +2687,6 @@ z
 &= -\frac{1}{\sqrt{z}}
 &&(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元})
 \end{aligned}`),
-      paragraph([
-        "引いたブロックは ",
-        ref("def_phi_polar"),
-        "、",
-        ref("polar_equivalence_class"),
-        "、",
-        ref("angle_section_existence_uniqueness"),
-        "、",
-        ref("def_abs_arg"),
-        "、",
-        ref("multiplicative_group_of_cc"),
-        "、",
-        ref("definition_of_cc"),
-        "、",
-        ref("inclusion_rr_to_cc"),
-        "、",
-        ref("def_phi_cartesian"),
-        "、",
-        ref("definition_of_sqrt_r_positive"),
-        "、",
-        ref("sqrt_expansion_via_polar"),
-        "、",
-        ref("sqrt_squared_is_original"),
-        "、",
-        ref("range_of_args_of_reciprocal_of_complex_numbers"),
-        "、",
-        ref("condition_of_commutativity_of_sqrt_and_product"),
-        " である。",
-      ]),
     ],
     conversion: {
       status: "converted",
@@ -2730,7 +2701,9 @@ z
           "第 2 の場合の符号は、可換条件が sqrt(z_1 z_2) = -sqrt(z_1)sqrt(z_2) の向きなので、" +
           "-(-w) = w を 1 段挟んで向きを合わせた。主張と仮定は変えていない。" +
           "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
-          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。" +
+          "式変形の書き方の統一（2026-09-03）。証明末尾の参照一覧を削除し、" +
+          "各参照を実際に使う準備または式変形の行末へ移した。内容・式変形・根拠・参照は不変である。",
       ],
     },
   },
