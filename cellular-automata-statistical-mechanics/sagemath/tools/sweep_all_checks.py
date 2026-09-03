@@ -223,7 +223,7 @@ class AssertionRecorder:
 class GuardedNamespace(dict):
     """記録用の名前への代入と削除を、実行の途中で拒んで記録する名前空間。
 
-    exec の globals に dict の派生クラスを渡すと、STORE_GLOBAL と DELETE_GLOBAL は
+    exec の globals に dict の派生クラスを渡すと、module code の STORE_NAME と DELETE_NAME は
     __setitem__ / __delitem__ を通る（読み出しは通常どおり dict の経路で速い）。
     この性質だけを使って、検算ファイルからの束ね直し・削除をその場で拒む。
     実際に通ることは worker の起動時に probe で確かめ、通らない Python では
@@ -233,7 +233,7 @@ class GuardedNamespace(dict):
     def __init__(self, base, recorder):
         super().__init__(base)
         self._recorder = recorder
-        # 検算は module 水準の script なので、その代入のすべてが STORE_GLOBAL として
+        # 検算は module 水準の script なので、その代入のすべてが STORE_NAME として
         # ここを通る。守る名前の判定は frozenset の1回の検索だけで済ませる。
         self._protected_names = frozenset(recorder.installed)
 
@@ -260,7 +260,7 @@ class GuardProbeError(Exception):
 
 
 def verify_namespace_guard():
-    # 名前空間の守りは CPython の STORE_GLOBAL / DELETE_GLOBAL が dict 派生クラスの
+    # 名前空間の守りは CPython の module code の STORE_NAME / DELETE_NAME が dict 派生クラスの
     # __setitem__ / __delitem__ を通ることに依存する。依存が崩れた処理系で黙って
     # 守りが外れないよう、掃引の実行前に実際に書き換えて確かめる。
     recorder = AssertionRecorder(secrets.token_hex(8))

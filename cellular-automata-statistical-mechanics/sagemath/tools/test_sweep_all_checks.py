@@ -340,7 +340,7 @@ class AssertionRecorderTest(unittest.TestCase):
         self.assertEqual(sum(recorder.hits.values()), 2)
 
     def test_namespace_guard_is_effective_on_this_python(self):
-        # 守りは STORE_GLOBAL / DELETE_GLOBAL が dict 派生の __setitem__ / __delitem__ を
+        # 守りは module code の STORE_NAME / DELETE_NAME が dict 派生の __setitem__ / __delitem__ を
         # 通ることに依存する。依存が崩れた処理系で黙って守りが外れないことを固定する。
         sweep_all_checks.verify_namespace_guard()
 

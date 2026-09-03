@@ -5,6 +5,16 @@
 > [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
 > [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
+## 自動ループ tick: module code の名前空間命令を実測に合わせて訂正（2026-09-04 05:12）
+
+前 tick の `dd4a23783` は `origin/main` に包含済み。費用切り分け用ベンチマークと名前空間の
+守りをバイトコードまで戻ってレビューした。module 水準の代入・削除は、前 tick の記録にある
+`STORE_GLOBAL` / `DELETE_GLOBAL` ではなく、実測で `STORE_NAME` / `DELETE_NAME` だった。
+実装コメント、テストコメント、ベンチマークの表示、台帳と本 MEMORY を訂正した。
+ベンチマークの比率と、Python 水準の `__setitem__` が費用の出所であるという結論は変わらない。
+
+数学本文と検算は不変。成果整理は全層 `done` で、先頭の未完了層はないため新規対象は起票していない。
+
 ## 自動ループ tick: 守りの費用が大域代入に比例することを切り分けて測った（2026-09-04 04:12）
 
 前 tick の `92e4b571b` は `origin/main` に包含済み。前 tick は記録だけの回で差分が無いため、
@@ -18,7 +28,7 @@
 守りの費用だけを測る `sagemath/tools/bench_namespace_guard.py` を置き、代入だけの module 水準の
 コードで比較した。`plain dict` 1.00 倍、`dict` の素の派生 1.05 倍、`GuardedNamespace` 3.90 倍。
 費用の出所は派生であること自体ではなく `__setitem__` が Python 水準の関数であることだけ、と確定した。
-次 tick の候補は、記録用の名前を識別子として不正な文字列にして `STORE_GLOBAL` の対象から外し、
+次 tick の候補は、記録用の名前を識別子として不正な文字列にして module code の `STORE_NAME` の対象から外し、
 名前空間を素の `dict` へ戻すこと。ただし `globals()[名前] = 偽物` 経由の束ね直しは塞げなくなるので、
 採否は掃引の余裕と守りの範囲を並べて次 tick で決める。決めるまで現行の守りは外さない。
 
@@ -50,7 +60,7 @@ assert の記録経路を「実行後の同一性照合で束ね直しを本当�
 
 **修正**: 検算を走らせる名前空間を `GuardedNamespace`（`dict` の派生）にし、記録用の二つの名前への
 代入と削除を**起きた瞬間に拒んで改変として記録する**。`exec` の globals に `dict` の派生を渡すと
-`STORE_GLOBAL` / `DELETE_GLOBAL` が `__setitem__` / `__delitem__` を通る性質だけを使う（読み出しは
+module code の `STORE_NAME` / `DELETE_NAME` が `__setitem__` / `__delitem__` を通る性質だけを使う（読み出しは
 通常の経路のままなので費用は増えない）。この性質に依存するため、worker の起動時に実際に書き換えを
 試す probe `verify_namespace_guard` を置き、守りが効かない処理系では掃引を始めない（fail-closed）。
 検算が自分の名前を束縛・削除することは従来どおり自由である。

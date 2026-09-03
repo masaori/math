@@ -2,7 +2,7 @@
 
 掃引 sweep_all_checks.py は、記録用の名前が実行の途中で束ね直されるのを拒むため、
 検算を GuardedNamespace（dict の派生）の上で exec する。検算は module 水準の script
-なので、その大域代入はすべて STORE_GLOBAL であり、dict の派生に対しては Python 水準の
+なので、その大域代入はすべて module code の STORE_NAME であり、dict の派生に対しては Python 水準の
 __setitem__ を通る。すなわち守りの費用は assert の回数ではなく**大域代入の回数**に比例する。
 
 このベンチマークは、代入だけを行う module 水準のコードを三つの名前空間で走らせ、
@@ -35,7 +35,7 @@ class PlainSubclass(dict):
 
 
 def module_level_stores(count):
-    # 検算と同じく module 水準の script。ループ変数も含め、代入はすべて STORE_GLOBAL になる。
+    # 検算と同じく module 水準の script。ループ変数も含め、代入はすべて STORE_NAME になる。
     return compile(
         'total = 0\n'
         'for i in range({}):\n'
@@ -68,7 +68,7 @@ def main():
         results[name] = min(timed(code, make()), timed(code, make()))
 
     base = results['plain dict']
-    print('module 水準の代入 {} 回（1 周あたり 3 回の STORE_GLOBAL）'.format(count))
+    print('module 水準の繰り返し {} 周（1 周あたり 3 回の STORE_NAME）'.format(count))
     for name, _ in cases:
         print('  {:<20} {:.3f} s  ({:.2f} 倍)'.format(name, results[name], results[name] / base))
 
