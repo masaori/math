@@ -15,7 +15,7 @@
 
 import { spawnSync } from "node:child_process";
 import { readdirSync, lstatSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -89,6 +89,15 @@ if (!Number.isInteger(ranCount) || ranCount <= 0) {
 }
 if (ranCount < testFiles.length) {
   fail(`単体テスト ${testFiles.length} ファイルに対し実行件数が ${ranCount} 件しかない`);
+}
+// 総実行件数だけでは、あるファイルが 0 件でも別ファイルの複数テストで穴埋めできる。
+// unittest の verbose 出力に各ファイル由来のモジュール名が現れることを一つずつ確かめる。
+for (const testFile of testFiles) {
+  const moduleName = basename(testFile, ".py");
+  const escapedModuleName = moduleName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  if (!new RegExp(`\\(${escapedModuleName}\\.`).test(output)) {
+    fail(`${basename(testFile)} から実行された単体テストが 1 件も無い`);
+  }
 }
 // skip・expected failure が混ざった回は「走らせたが確かめていない」状態なので成功にしない。
 if (!/^OK$/m.test(output)) {
