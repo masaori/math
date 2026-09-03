@@ -5,6 +5,25 @@
 > [`docs/discussion/対数順序群上の統計力学/`](../docs/discussion/対数順序群上の統計力学/) と
 > [`docs/discussion/可算性の効用/`](../docs/discussion/可算性の効用/)。
 
+## 自動ループ tick: 守りの費用が大域代入に比例することを切り分けて測った（2026-09-04 04:12）
+
+前 tick の `92e4b571b` は `origin/main` に包含済み。前 tick は記録だけの回で差分が無いため、
+単体テスト 79 件・構造化テキストの一括検査・本文と SageMath の対応検査を通し直した。不一致は無い。
+
+中断されていた `local-rule-representation/check_inverse_map_minimal_neighborhood.sage` を worker
+1 本・打ち切り 900 秒で単独実行し、`PASS`・623.01 秒・`assert` 2257 回だった（余裕 1.44 倍）。
+ただし実際の掃引は 12 worker が競合するので、この値を掃引の余裕として読んではならない。
+同じ検算は前 tick の 12 worker 掃引で 874.43 秒まで伸びている。
+
+守りの費用だけを測る `sagemath/tools/bench_namespace_guard.py` を置き、代入だけの module 水準の
+コードで比較した。`plain dict` 1.00 倍、`dict` の素の派生 1.05 倍、`GuardedNamespace` 3.90 倍。
+費用の出所は派生であること自体ではなく `__setitem__` が Python 水準の関数であることだけ、と確定した。
+次 tick の候補は、記録用の名前を識別子として不正な文字列にして `STORE_GLOBAL` の対象から外し、
+名前空間を素の `dict` へ戻すこと。ただし `globals()[名前] = 偽物` 経由の束ね直しは塞げなくなるので、
+採否は掃引の余裕と守りの範囲を並べて次 tick で決める。決めるまで現行の守りは外さない。
+
+数学本文・検算コードは不変、新規対象も起票していない。成果整理は全層 `done`。
+
 ## 自動ループ tick: 名前空間の守りを短縮した後の全数掃引を打ち切り直前まで実測（2026-09-04 03:12）
 
 前 tick の `c54e611a5` は `origin/main` に包含済み。前 tick の変更と時間切れ 3 本をレビューし、
