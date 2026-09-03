@@ -834,17 +834,9 @@ y^2>x\ \land\ x>0
       paragraph([
         "であり、とくに ",
         math(String.raw`-x\in\mathbb{R}_{\ge 0}`),
-        " である。また ",
+        " である。また、実数の平方は非負なので ",
         math(String.raw`(-x)^2\in\mathbb{R}_{\ge 0}`),
-        " であり、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-(-x)^2
-&=(-x)^2
-&&(\because\ \text{等号の反射律})
-\end{aligned}`),
-      paragraph([
-        "が成り立つ。したがって ",
+        " である。したがって ",
         math(String.raw`y=-x`),
         " は条件 ",
         math(String.raw`y\in\mathbb{R}_{\ge 0}\ \land\ y^2=(-x)^2`),
@@ -861,7 +853,8 @@ y^2>x\ \land\ x>0
       displayMath(String.raw`\begin{aligned}
 \sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}
 &=-x
-&&(\because\ \text{平方根の定義と、条件を満たす元の一意性})
+&&(\because\ \text{平方根の定義 }\blkref{definition_of_sqrt_r_positive}
+\text{ と条件を満たす元の一意性 }\blkref{sqrt_nonnegative_existence_uniqueness})
 \end{aligned}`),
       paragraph([
         "である。以上を使って主張を示す。",
@@ -877,13 +870,6 @@ y^2>x\ \land\ x>0
         "すなわち ",
         math(String.raw`x=-\sqrt{(-x)^2}^{(\mathbb{R}_{\ge 0})}`),
         " である。",
-      ]),
-      paragraph([
-        "引いたブロック: ",
-        ref("sqrt_nonnegative_existence_uniqueness"),
-        "、",
-        ref("definition_of_sqrt_r_positive"),
-        "。",
       ]),
     ],
     conversion: {
