@@ -1,0 +1,5 @@
+{
+  "_comment": "assert の実行を要求しない .sage の基底名。掃引 sweep_all_checks.py と verify-check-linkage.ts が同じこのファイルだけを読む。片方だけを書き換えると、昇格済みの対象が assert を一つも要求されない検算だけで対応済みに数えられる。",
+  "exactNames": ["_common.sage", "_prelude.sage"],
+  "namePrefixes": ["explore_"]
+}

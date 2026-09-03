@@ -115,16 +115,61 @@ def instrumented_code(path, preparse):
     return compile(tree, path, 'exec', dont_inherit=True, optimize=0)
 
 
-def assertion_required(relative_path):
+class ExemptSpecError(Exception):
+    """assert を要求しない .sage の宣言を読めなかったことを表す。"""
+
+
+EXEMPT_SPEC_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'assertion-exempt.json')
+
+
+def _string_list(data, key):
+    value = data.get(key)
+    if not isinstance(value, list):
+        raise ExemptSpecError('{} が文字列の配列でない'.format(key))
+    for item in value:
+        if not isinstance(item, str) or not item:
+            raise ExemptSpecError('{} に空でない文字列でない要素がある'.format(key))
+    return value
+
+
+def load_exempt_spec(path=None):
+    # 免除の宣言は掃引と verify-check-linkage.ts の二箇所から読まれる。片方だけを書き換えると、
+    # 昇格済みの対象が「assert を一つも要求されない検算」だけで対応済みに数えられるため、
+    # 宣言はこの一つのファイルに置き、双方がそれだけを読む。読めない・書式が違う・
+    # symlink である場合は、免除を空にして通すのではなく例外にする（fail-closed）。
+    if path is None:
+        path = EXEMPT_SPEC_PATH
+    if os.path.islink(path):
+        raise ExemptSpecError('免除の宣言 {} が symlink である'.format(path))
+    if not os.path.isfile(path):
+        raise ExemptSpecError('免除の宣言 {} が通常ファイルとして存在しない'.format(path))
+    try:
+        with open(path) as fh:
+            data = json.load(fh)
+    except ValueError as error:
+        raise ExemptSpecError('免除の宣言 {} を JSON として読めない: {}'.format(path, error))
+    if not isinstance(data, dict):
+        raise ExemptSpecError('免除の宣言 {} がオブジェクトでない'.format(path))
+    exact = _string_list(data, 'exactNames')
+    prefixes = _string_list(data, 'namePrefixes')
+    for name in exact:
+        if not name.endswith('.sage'):
+            raise ExemptSpecError('exactNames の {} が .sage で終わらない'.format(name))
+    return (frozenset(exact), tuple(prefixes))
+
+
+def assertion_required(relative_path, spec=None):
     # 対象外は二種類しかない。検算から load される共有定義（`_common.sage` /
     # `_prelude.sage`）と、まだ主張へ昇格していない探索用（`explore_*.sage`）である。
     # `check_` で始まらないというだけで免除すると、任意名の空ファイルが成功扱いになるため、
-    # 明示した三パターン以外の `.sage` はすべて assert を要求する。
+    # 宣言された名前以外の `.sage` はすべて assert を要求する。
     # 免除された本数と名前は毎回印字して、対象外が黙って増えないようにする。
+    exact, prefixes = load_exempt_spec() if spec is None else spec
     basename = os.path.basename(relative_path)
     return not (
-        basename in ('_common.sage', '_prelude.sage')
-        or basename.startswith('explore_')
+        basename in exact
+        or any(basename.startswith(prefix) for prefix in prefixes)
     )
 
 
@@ -226,6 +271,11 @@ def summarize_results(files, outdir, jobs, codes, timeout):
     if not files:
         print('EMPTY SWEEP: 検算ファイルが一本も無い', flush=True)
         return False
+    try:
+        exempt_spec = load_exempt_spec()
+    except ExemptSpecError as error:
+        print('EXEMPT SPEC FAILED: {}'.format(error), flush=True)
+        return False
     records = []
     malformed = []
     for w in range(jobs):
@@ -300,11 +350,11 @@ def summarize_results(files, outdir, jobs, codes, timeout):
         if (len(found) == 1
             and found[0]['status'] == 'PASS'
             and found[0]['assertions'] == 0
-            and assertion_required(found[0]['file']))
+            and assertion_required(found[0]['file'], exempt_spec))
     ]
     exempt = sorted(
         found[0]['file'] for found in by_index.values()
-        if len(found) == 1 and not assertion_required(found[0]['file'])
+        if len(found) == 1 and not assertion_required(found[0]['file'], exempt_spec)
     )
     counts = {}
     for record in records:

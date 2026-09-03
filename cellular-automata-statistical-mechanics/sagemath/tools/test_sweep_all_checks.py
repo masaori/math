@@ -254,6 +254,68 @@ class AssertionRequiredTest(unittest.TestCase):
     def test_requires_assertions_from_unknown_file_names(self):
         self.assertTrue(sweep_all_checks.assertion_required('dir/helper.sage'))
 
+    def test_uses_the_shared_specification_file(self):
+        # 免除の宣言は verify-check-linkage.ts と共有する一つのファイルだけから来る。
+        # 掃引の中に免除を書き写すと、片方だけが緩んだときに食い違いが黙って通る。
+        exact, prefixes = sweep_all_checks.load_exempt_spec()
+        self.assertEqual(exact, frozenset({'_common.sage', '_prelude.sage'}))
+        self.assertEqual(prefixes, ('explore_',))
+
+
+class ExemptSpecTest(unittest.TestCase):
+    """免除の宣言が読めないときに、免除を空にして通すのではなく失敗することを固定する。"""
+
+    def _load(self, text):
+        with tempfile.TemporaryDirectory() as root:
+            path = os.path.join(root, 'assertion-exempt.json')
+            with open(path, 'w') as fh:
+                fh.write(text)
+            return sweep_all_checks.load_exempt_spec(path)
+
+    def test_accepts_a_well_formed_specification(self):
+        exact, prefixes = self._load('{"exactNames": ["_common.sage"], "namePrefixes": ["explore_"]}')
+        self.assertEqual(exact, frozenset({'_common.sage'}))
+        self.assertEqual(prefixes, ('explore_',))
+
+    def test_rejects_broken_json(self):
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('{')
+
+    def test_rejects_non_object(self):
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('["_common.sage"]')
+
+    def test_rejects_missing_key(self):
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('{"exactNames": []}')
+
+    def test_rejects_non_string_element(self):
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('{"exactNames": [1], "namePrefixes": []}')
+
+    def test_rejects_empty_prefix_that_exempts_every_name(self):
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('{"exactNames": [], "namePrefixes": [""]}')
+
+    def test_rejects_exact_name_that_is_not_a_sage_file(self):
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('{"exactNames": ["_common"], "namePrefixes": []}')
+
+    def test_rejects_missing_specification_file(self):
+        with tempfile.TemporaryDirectory() as root:
+            with self.assertRaises(sweep_all_checks.ExemptSpecError):
+                sweep_all_checks.load_exempt_spec(os.path.join(root, 'absent.json'))
+
+    def test_rejects_specification_file_that_is_a_symlink(self):
+        with tempfile.TemporaryDirectory() as root:
+            real = os.path.join(root, 'real.json')
+            with open(real, 'w') as fh:
+                fh.write('{"exactNames": [], "namePrefixes": []}')
+            link = os.path.join(root, 'assertion-exempt.json')
+            os.symlink(real, link)
+            with self.assertRaises(sweep_all_checks.ExemptSpecError):
+                sweep_all_checks.load_exempt_spec(link)
+
 
 class CollectFilesTest(unittest.TestCase):
     """収集が「検算が存在するのに一度も実行されない」状態を黙って通さないことを固定する。"""

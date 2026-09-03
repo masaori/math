@@ -15,7 +15,7 @@
  */
 
 import type { Dirent } from "node:fs";
-import { existsSync } from "node:fs";
+import { existsSync, lstatSync, readFileSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,6 +25,74 @@ import { ALL_LABELS } from "../../structured-latex/labels.generated.ts";
 const here = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(here, "../..");
 const checkRoot = join(projectRoot, "sagemath", "check");
+const exemptSpecPath = join(projectRoot, "sagemath", "tools", "assertion-exempt.json");
+
+/**
+ * assert の実行を要求しない .sage の宣言。掃引 sweep_all_checks.py と同じファイルだけを読む。
+ * 二箇所へ書き写すと、片方だけが緩んだときに「昇格済みの対象が、assert を一つも要求されない
+ * 検算だけで対応済みに数えられる」状態が黙って通る。読めない・書式が違う場合は、免除を空にして
+ * 通すのではなく失敗にする（fail-closed）。
+ */
+type ExemptSpec = { readonly exactNames: ReadonlySet<string>; readonly namePrefixes: ReadonlyArray<string> };
+
+function parseExemptSpec(raw: string): ExemptSpec | { readonly error: string } {
+  let data: unknown;
+  try {
+    data = JSON.parse(raw);
+  } catch (error) {
+    return { error: `JSON として読めない: ${String(error)}` };
+  }
+  if (typeof data !== "object" || data === null || Array.isArray(data)) {
+    return { error: "オブジェクトでない" };
+  }
+  const record = data as Record<string, unknown>;
+  const lists: { exactNames?: string[]; namePrefixes?: string[] } = {};
+  for (const key of ["exactNames", "namePrefixes"] as const) {
+    const value = record[key];
+    if (!Array.isArray(value)) return { error: `${key} が文字列の配列でない` };
+    for (const item of value) {
+      if (typeof item !== "string" || item.length === 0) {
+        return { error: `${key} に空でない文字列でない要素がある` };
+      }
+    }
+    lists[key] = value as string[];
+  }
+  for (const name of lists.exactNames ?? []) {
+    if (!name.endsWith(".sage")) return { error: `exactNames の ${name} が .sage で終わらない` };
+  }
+  return {
+    exactNames: new Set(lists.exactNames ?? []),
+    namePrefixes: lists.namePrefixes ?? [],
+  };
+}
+
+function isAssertionExempt(basename: string, spec: ExemptSpec): boolean {
+  return spec.exactNames.has(basename) || spec.namePrefixes.some((prefix) => basename.startsWith(prefix));
+}
+
+function loadExemptSpec(): ExemptSpec {
+  let stat;
+  try {
+    stat = lstatSync(exemptSpecPath);
+  } catch (error) {
+    console.error(`免除の宣言 ${exemptSpecPath} を検査できない: ${String(error)}`);
+    process.exit(1);
+  }
+  if (stat.isSymbolicLink()) {
+    console.error(`免除の宣言 ${exemptSpecPath} が symlink である`);
+    process.exit(1);
+  }
+  if (!stat.isFile()) {
+    console.error(`免除の宣言 ${exemptSpecPath} が通常ファイルとして存在しない`);
+    process.exit(1);
+  }
+  const parsed = parseExemptSpec(readFileSync(exemptSpecPath, "utf8"));
+  if ("error" in parsed) {
+    console.error(`免除の宣言 ${exemptSpecPath} が読めない: ${parsed.error}`);
+    process.exit(1);
+  }
+  return parsed;
+}
 
 const declarationMarkerPattern = /^[ \t]*\*\*対象ラベル\*\*.*$/gm;
 const declarationPattern = /^[ \t]*\*\*対象ラベル\*\*:[ \t]*(.*)$/;
@@ -205,8 +273,45 @@ function runDeclarationRegression(): void {
   console.log(`verified ${cases.length} declaration regression case(s)`);
 }
 
+/** 免除の宣言の読み取りが fail-closed であることを、常時実行される負例で固定する。 */
+function runExemptSpecRegression(): void {
+  const cases: ReadonlyArray<{ readonly name: string; readonly text: string; readonly expectError: boolean }> = [
+    { name: "正例: 二つの配列を持つ宣言", text: '{"exactNames":["_common.sage"],"namePrefixes":["explore_"]}', expectError: false },
+    { name: "正例: 免除を一つも置かない宣言", text: '{"exactNames":[],"namePrefixes":[]}', expectError: false },
+    { name: "負例: JSON として壊れている", text: "{", expectError: true },
+    { name: "負例: オブジェクトでない", text: '["_common.sage"]', expectError: true },
+    { name: "負例: exactNames が無い", text: '{"namePrefixes":[]}', expectError: true },
+    { name: "負例: namePrefixes が無い", text: '{"exactNames":[]}', expectError: true },
+    { name: "負例: 配列の要素が文字列でない", text: '{"exactNames":[1],"namePrefixes":[]}', expectError: true },
+    { name: "負例: 空文字の接頭辞は全ての名前を免除する", text: '{"exactNames":[],"namePrefixes":[""]}', expectError: true },
+    { name: "負例: exactNames が .sage で終わらない", text: '{"exactNames":["_common"],"namePrefixes":[]}', expectError: true },
+  ];
+  const failures: string[] = [];
+  for (const testCase of cases) {
+    const parsed = parseExemptSpec(testCase.text);
+    if (("error" in parsed) !== testCase.expectError) {
+      failures.push(`${testCase.name}: 期待 ${testCase.expectError ? "失敗" : "成功"} に反した`);
+    }
+  }
+  const spec = parseExemptSpec('{"exactNames":["_common.sage"],"namePrefixes":["explore_"]}');
+  if ("error" in spec) {
+    failures.push("正例の宣言を読めない");
+  } else {
+    if (!isAssertionExempt("_common.sage", spec)) failures.push("宣言した基底名が免除されない");
+    if (!isAssertionExempt("explore_x.sage", spec)) failures.push("宣言した接頭辞が免除されない");
+    if (isAssertionExempt("check_x.sage", spec)) failures.push("宣言していない名前が免除された");
+  }
+  if (failures.length > 0) {
+    console.error("免除の宣言の読み取りが回帰検査に反している:");
+    for (const failure of failures) console.error(`  - ${failure}`);
+    process.exit(1);
+  }
+  console.log(`verified ${cases.length} exempt specification regression case(s)`);
+}
+
 runDeclarationRegression();
 runTreeShapeRegression();
+runExemptSpecRegression();
 
 /** readdir の結果を木の形の検査が扱う種類へ落とし、名前順に並べる。 */
 function toEntries(dirents: ReadonlyArray<Dirent>): ReadonlyArray<Entry> {
@@ -218,6 +323,7 @@ function toEntries(dirents: ReadonlyArray<Dirent>): ReadonlyArray<Entry> {
     .sort((left, right) => (left.name < right.name ? -1 : left.name > right.name ? 1 : 0));
 }
 
+const exemptSpec = loadExemptSpec();
 const labels = new Set<string>(ALL_LABELS);
 const rootEntries = toEntries(await readdir(checkRoot, { withFileTypes: true }));
 const rootShapeProblems = checkRootShape(rootEntries);
@@ -263,8 +369,20 @@ for (const directory of directories) {
     accounted.add(directory);
     continue;
   }
-  if (!directoryEntries.some((entry) => entry.name.endsWith(".sage"))) {
+  const sageNames = directoryEntries.filter((entry) => entry.name.endsWith(".sage")).map((entry) => entry.name);
+  if (sageNames.length === 0) {
     problems.push(`${directory}: 昇格済みの対象を宣言しているのに .sage の検算が無い`);
+    accounted.add(directory);
+    continue;
+  }
+  // .sage が一本でもあればよいことにすると、共有定義や探索用だけを置いた検算ディレクトリが
+  // 昇格済みの対象と対応済みに数えられる。それらの名前は掃引の側で assert の実行を免除される
+  // ため、対応済みの本文が「一つも検査されない検算」に支えられた状態が両方の入口を通ってしまう。
+  if (sageNames.every((name) => isAssertionExempt(name, exemptSpec))) {
+    problems.push(
+      `${directory}: 昇格済みの対象を宣言しているのに、.sage が ${sageNames.join(", ")} だけである` +
+        "（いずれも掃引で assert の実行を免除されるため、対応済みでありながら何も検査されない）",
+    );
     accounted.add(directory);
     continue;
   }
