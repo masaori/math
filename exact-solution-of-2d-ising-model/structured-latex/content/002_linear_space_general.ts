@@ -1758,15 +1758,21 @@ R^2
 &&(\because \text{積の平方は平方の積})
 \end{aligned}`,
       ),
-      paragraph([
-        "であり、",
-        math(String.raw`\sum_{i,j}|a_{ij}||b_{ij}|\ge 0`),
-        " かつ ",
-        math(String.raw`\|A\|\,\|B\|\ge 0`),
-        " であるから Step 0 より ",
-        math(String.raw`\sum_{i,j}|a_{ij}||b_{ij}|\le\|A\|\,\|B\|`),
-        "。よって",
-      ]),
+      paragraph(["である。また"]),
+      displayMath(
+        String.raw`\begin{aligned}
+0
+&\le \sum_{i,j}|a_{ij}||b_{ij}|
+&&(\because\ \text{非負実数の有限和は非負}) \\
+0
+&\le \|A\|\,\|B\|
+&&(\because\ \text{ノルムは非負であり、非負実数の積は非負}) \\
+\sum_{i,j}|a_{ij}||b_{ij}|
+&\le \|A\|\,\|B\|
+&&(\because\ \text{直前の平方の不等式と Step 0})
+\end{aligned}`,
+      ),
+      paragraph(["よって"]),
       displayMath(
         String.raw`\begin{aligned}
 \|A+B\|^2
@@ -1870,6 +1876,9 @@ R^2
         "2026-09-04: 式変形の書き方の統一。Cauchy--Schwarz の結びで散文に埋まっていた" +
           "「両辺に Q>0 を掛けて R^2≤PQ」を、R^2 から始まり PQ へ至る二段の式変形と" +
           "行末の根拠（移項と、正の数を掛けても順序が保たれること）へ開いた。内容と根拠は変えていない。",
+        "2026-09-04: 式変形の書き方の統一。Step 5 で平方の不等式から平方根側の" +
+          "不等式を得る推論が散文に埋まっていたので、両辺の非負性と Step 0 の適用を" +
+          "三行の表示へ開いた。内容と根拠は変えていない。",
       ],
     },
   },
