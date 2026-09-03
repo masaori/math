@@ -164,7 +164,7 @@ class InstrumentedCodeTest(unittest.TestCase):
                 fh.write(source)
             recorder = sweep_all_checks.AssertionRecorder('token-for-the-test')
             namespace = {'__file__': path}
-            recorder.install(namespace)
+            namespace = recorder.install(namespace)
             exec(sweep_all_checks.instrumented_code(path, preparse, recorder.token), namespace)
             return recorder, namespace, os.path.realpath(path)
 
@@ -219,7 +219,7 @@ class InstrumentedCodeTest(unittest.TestCase):
                 'import sweep_all_checks\n'
                 'recorder = sweep_all_checks.AssertionRecorder("token")\n'
                 'namespace = {{}}\n'
-                'recorder.install(namespace)\n'
+                'namespace = recorder.install(namespace)\n'
                 'try:\n'
                 '    exec(sweep_all_checks.instrumented_code({path!r}, lambda text: text,'
                 ' recorder.token), namespace)\n'
@@ -244,7 +244,7 @@ class InstrumentedCodeTest(unittest.TestCase):
                 fh.write('assert True\n')
             recorder = sweep_all_checks.AssertionRecorder('token-for-the-test')
             namespace = {}
-            recorder.install(namespace)
+            namespace = recorder.install(namespace)
             exec(sweep_all_checks.instrumented_code(
                 common_path, lambda text: text, recorder.token), namespace)
             exec(sweep_all_checks.instrumented_code(
@@ -286,7 +286,7 @@ class AssertionRecorderTest(unittest.TestCase):
             recorder = sweep_all_checks.AssertionRecorder(
                 'token-for-the-test', os.path.join(workdir, 'failures.log'))
             namespace = {'__file__': path}
-            recorder.install(namespace)
+            namespace = recorder.install(namespace)
             exec(sweep_all_checks.instrumented_code(path, lambda text: text, recorder.token),
                  namespace)
             return recorder, recorder.verdict(namespace)
@@ -305,9 +305,51 @@ class AssertionRecorderTest(unittest.TestCase):
             'def check():\n    assert False\n'
             'try:\n    check()\nexcept AssertionError:\n    pass\n'
             'assert True\n')
-        self.assertEqual(sum(recorder.failures.values()), 0)
+        # 守られた名前空間は束ね直しをその場で拒むので、記録器は本物のまま失敗も数える。
+        self.assertEqual(sum(recorder.failures.values()), 1)
         self.assertFalse(recorded)
         self.assertIn('rebound', reason)
+
+    def test_rejects_a_check_that_restores_the_recorder_after_rebinding_it(self):
+        # 実行の終わりに元へ戻せば、実行後の同一性照合だけでは束ね直しを検出できない。
+        # 実測でも、守りを入れる前の実装はこの検算を PASS・件数 1 で受理した。
+        recorder, (recorded, reason) = self.run_verdict(
+            'assert 1 == 1\n'
+            'saved_hit = __sweep_assert_hit__\n'
+            'saved_failure = __sweep_assert_failure__\n'
+            '__sweep_assert_hit__ = lambda *args: None\n'
+            '__sweep_assert_failure__ = lambda *args: None\n'
+            'def check():\n    assert 1 == 2\n'
+            'try:\n    check()\nexcept Exception:\n    pass\n'
+            '__sweep_assert_hit__ = saved_hit\n'
+            '__sweep_assert_failure__ = saved_failure\n')
+        self.assertFalse(recorded)
+        self.assertIn('rebound', reason)
+        self.assertEqual(sum(recorder.failures.values()), 1)
+
+    def test_rejects_a_check_that_deletes_and_restores_the_hit_recorder(self):
+        recorder, (recorded, reason) = self.run_verdict(
+            'assert 1 == 1\n'
+            'saved_hit = __sweep_assert_hit__\n'
+            'del __sweep_assert_hit__\n'
+            '__sweep_assert_hit__ = saved_hit\n'
+            'assert 2 == 2\n')
+        self.assertFalse(recorded)
+        self.assertIn('deleted', reason)
+        # 削除も拒むので、以後の assert も数え落とさない。
+        self.assertEqual(sum(recorder.hits.values()), 2)
+
+    def test_namespace_guard_is_effective_on_this_python(self):
+        # 守りは STORE_GLOBAL / DELETE_GLOBAL が dict 派生の __setitem__ / __delitem__ を
+        # 通ることに依存する。依存が崩れた処理系で黙って守りが外れないことを固定する。
+        sweep_all_checks.verify_namespace_guard()
+
+    def test_check_can_still_bind_its_own_names(self):
+        recorder, (recorded, reason) = self.run_verdict(
+            'value = 1\nassert value == 1\ndel value\n')
+        self.assertTrue(recorded)
+        self.assertEqual(reason, '')
+        self.assertEqual(sum(recorder.hits.values()), 1)
 
     def test_rejects_a_check_that_deletes_the_hit_recorder(self):
         _recorder, (recorded, reason) = self.run_verdict(

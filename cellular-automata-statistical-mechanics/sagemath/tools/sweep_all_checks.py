@@ -133,8 +133,14 @@ class AssertCounter(ast.NodeTransformer):
 # から記録器へ辿り、握り潰した失敗の記録を消して PASS にできた。失敗の記録だけは
 # プロセス外の追記ファイルへも書き、実行後の判定では記憶上と file 上の多い方を採る。
 # 失敗は稀なので、件数の計上（1 億回規模）と違い追記の費用が問題にならない。
+# さらに、実行の後だけの同一性照合は、束ね直してから元へ戻す書き方を検出できない
+# （真な assert を 1 本通してから記録器を偽物へ束ね直し、別関数の偽な assert を呼出側の
+# try で握り潰し、最後に元へ戻す。実測でこの検算は PASS・件数 1 で受理された）。
+# そこで名前空間そのものを GuardedNamespace にし、束ね直しと削除を起きた瞬間に拒む。
 # 残る限界: 合言葉は書き換え後の構文木の定数なので、検算ファイルが自分のフレームの
 # co_consts を覗けば読める。追記ファイルも、記録器へ辿れば経路ごと壊せる。
+# 名前空間の守りも同じ層にある（globals() は GuardedNamespace そのものなので、
+# そこから記録器へ辿れる）。守りが閉じるのは束ね直しと削除であって、記録器への到達ではない。
 # これらを本当に閉じるには記録を worker プロセスの外へ出す必要があり、まだ閉じていない。
 class AssertionRecorder:
     """assert の実行と失敗を、検算ファイルから改変しにくい形で記録する。"""
@@ -168,7 +174,19 @@ class AssertionRecorder:
                 log.write(source_path + '\n')
 
     def install(self, namespace):
-        namespace.update(self.installed)
+        """記録用の名前を置いた、書き換えを拒む名前空間を返す。
+
+        置いた名前が実行の途中で束ね直されても、実行の後に元へ戻されていれば
+        verdict の同一性照合は通ってしまう。実測でも、真な assert を 1 本実行してから
+        記録器を偽物へ束ね直し、別関数の偽な assert を呼出側の try で握り潰し、
+        最後に元へ戻した検算が PASS・件数 1 で受理された（呼出側の try は静的検査の
+        対象外である。try の本体に assert が無いため）。
+        したがって照合は実行の後だけでなく、束ね直しが起きた瞬間に行う。
+        """
+        guarded = GuardedNamespace(namespace, self)
+        for name, value in self.installed.items():
+            dict.__setitem__(guarded, name, value)
+        return guarded
 
     def verdict(self, namespace):
         """検算の実行後に、記録の経路が保たれていたかを (通ったか, 理由) で返す。"""
@@ -200,6 +218,62 @@ class AssertionRecorder:
             self.tampering.append('the failure log {} became unreadable'.format(
                 self.failure_log))
             return 1
+
+
+class GuardedNamespace(dict):
+    """記録用の名前への代入と削除を、実行の途中で拒んで記録する名前空間。
+
+    exec の globals に dict の派生クラスを渡すと、STORE_GLOBAL と DELETE_GLOBAL は
+    __setitem__ / __delitem__ を通る（読み出しは通常どおり dict の経路で速い）。
+    この性質だけを使って、検算ファイルからの束ね直し・削除をその場で拒む。
+    実際に通ることは worker の起動時に probe で確かめ、通らない Python では
+    掃引を成功させない（fail-closed）。
+    """
+
+    def __init__(self, base, recorder):
+        super().__init__(base)
+        self._recorder = recorder
+        # 検算は module 水準の script なので、その代入のすべてが STORE_GLOBAL として
+        # ここを通る。守る名前の判定は frozenset の1回の検索だけで済ませる。
+        self._protected_names = frozenset(recorder.installed)
+
+    def _protected(self, key):
+        return key in self._protected_names
+
+    def __setitem__(self, key, value):
+        if key in self._protected_names and dict.get(self, key) is not value:
+            self._recorder.tampering.append(
+                'the assertion recorder {} was rebound by the check itself'.format(key))
+            return
+        dict.__setitem__(self, key, value)
+
+    def __delitem__(self, key):
+        if key in self._protected_names:
+            self._recorder.tampering.append(
+                'the assertion recorder {} was deleted by the check itself'.format(key))
+            return
+        dict.__delitem__(self, key)
+
+
+class GuardProbeError(Exception):
+    """名前空間の書き換え拒否が、この Python では効いていないことを表す。"""
+
+
+def verify_namespace_guard():
+    # 名前空間の守りは CPython の STORE_GLOBAL / DELETE_GLOBAL が dict 派生クラスの
+    # __setitem__ / __delitem__ を通ることに依存する。依存が崩れた処理系で黙って
+    # 守りが外れないよう、掃引の実行前に実際に書き換えて確かめる。
+    recorder = AssertionRecorder(secrets.token_hex(8))
+    namespace = recorder.install({})
+    original = dict(namespace)
+    exec(compile('{} = None\ndel {}\n'.format(ASSERT_HIT_NAME, ASSERT_FAILURE_NAME),
+                 '<guard probe>', 'exec', dont_inherit=True, optimize=0), namespace)
+    for name in (ASSERT_HIT_NAME, ASSERT_FAILURE_NAME):
+        if namespace.get(name) is not original[name]:
+            raise GuardProbeError(
+                'この Python では名前空間の守りが効かない（{} を書き換えられた）'.format(name))
+    if len(recorder.tampering) != 2:
+        raise GuardProbeError('名前空間の守りが書き換えを記録しなかった')
 
 
 class SwallowedAssertionError(Exception):
@@ -387,6 +461,9 @@ def worker_main(args):
 
     signal.signal(signal.SIGALRM, on_alarm)
 
+    # 名前空間の守りが効かない処理系では、記録の経路が黙って外れる。掃引を始める前に確かめる。
+    verify_namespace_guard()
+
     sage_base = {k: v for k, v in vars(sage_all).items() if not k.startswith('__')}
 
     out = open(args.result, 'a', 1)
@@ -407,7 +484,7 @@ def worker_main(args):
         if os.path.exists(failure_log):
             os.remove(failure_log)
         recorder = AssertionRecorder(secrets.token_hex(16), failure_log)
-        recorder.install(ns)
+        ns = recorder.install(ns)
 
         def scoped_load(*names, **_kw):
             # 検算ファイル内の相対 load を、同じ隔離名前空間へ入れる。
