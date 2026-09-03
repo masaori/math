@@ -1906,20 +1906,12 @@ e^{\mathrm{ad}_X}(Y)
 &= \exp\!\left(\mathrm{ad}_X\right)(Y)
    &&(\because\ e^{\mathrm{ad}_X}:=\exp(\mathrm{ad}_X)\ \text{という本定理の主張での記号の定め方}) \\
 &= \lim_{N\to\infty}P_N
-   &&(\because\ \text{指数写像の定義}\ \text{と、その級数が収束すること。}\ P_N\ \text{は Step 2 の有限和}) \\
+   &&(\because\ \text{指数写像の定義}\ \blkref{def_exp}\ \text{と級数の収束}\ \blkref{exp_converges}\ \text{および}\ \blkref{matrix_exp_conjugation}\ \text{の (2) の第 2 の等号。}\ P_N\ \text{は Step 2 の有限和}) \\
 &= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)
    &&(\because\ \text{無限級数の値は部分和の列の極限であること})
 \end{aligned}`,
       ),
-      paragraph([
-        "が成り立つ（この式変形で引いたのは ",
-        ref("def_exp"),
-        "、",
-        ref("exp_converges"),
-        "、",
-        ref("matrix_exp_conjugation"),
-        " (2) の第 2 の等号である）。Step 1 の記号の一致と合わせて主張を得る。",
-      ]),
+      paragraph(["が成り立つ。Step 1 の記号の一致と合わせて主張を得る。"]),
       paragraph([
         "解析（非可算集合 ",
         math(String.raw`\mathbb{R}/\mathbb{C}`),
@@ -1937,10 +1929,12 @@ e^{\mathrm{ad}_X}(Y)
       notes: [
         "原文（Typst）の proof は Brian Hall Prop 3.35 への参照のみで、構造化側でも" +
           "「未証明につき使用禁止」の注記を置いていた。行列版 e^X Y e^{-X} = e^{ad_X}(Y)" +
-          "（labels: matrix_exp_conjugation）をこのファイルで完全に証明済みであり、" +
+        "（labels: matrix_exp_conjugation）をこのファイルで完全に証明済みであり、" +
           "本ブロックの主張はその (1)(2) の M(n,C) への特殊化にすぎないため、" +
           "証明を書いて使用禁止の注記を撤回した。statement 側にも、記号の所属集合" +
           "（ad_X の定義域・exp の適用先が有限次元線型空間の自己準同型であること）を明示した。",
+        "2026-09-04 の式変形統一で、指数写像の定義・級数の収束・共役公式への後置き参照を削り、" +
+          "それらを使う等号の行末の (∵ …) へ \\blkref を移した。内容・式変形・根拠は変えていない。",
       ],
     },
   },
