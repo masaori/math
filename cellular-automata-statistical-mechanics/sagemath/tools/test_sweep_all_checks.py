@@ -301,6 +301,26 @@ class ExemptSpecTest(unittest.TestCase):
         with self.assertRaises(sweep_all_checks.ExemptSpecError):
             self._load('{"exactNames": ["_common"], "namePrefixes": []}')
 
+    def test_rejects_exact_name_that_matches_the_check_convention(self):
+        # 検算本体の基底名は例外なく `check_` で始まる。そこへ一致する免除は、
+        # 覆われた検算が assert を一つも要求されない状態を作る。
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('{"exactNames": ["check_x.sage"], "namePrefixes": []}')
+
+    def test_rejects_prefix_that_covers_every_check_file(self):
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('{"exactNames": [], "namePrefixes": ["check_"]}')
+
+    def test_rejects_prefix_that_covers_some_check_files(self):
+        # ディレクトリごとの対応検査は「全ての .sage が免除」でしか落ちないため、
+        # 一部だけを覆う接頭辞は両方の入口を黙って通る。宣言だけで弾く。
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('{"exactNames": [], "namePrefixes": ["check_a"]}')
+
+    def test_rejects_prefix_that_is_a_proper_prefix_of_the_check_convention(self):
+        with self.assertRaises(sweep_all_checks.ExemptSpecError):
+            self._load('{"exactNames": [], "namePrefixes": ["ch"]}')
+
     def test_rejects_missing_specification_file(self):
         with tempfile.TemporaryDirectory() as root:
             with self.assertRaises(sweep_all_checks.ExemptSpecError):

@@ -33,6 +33,9 @@ const exemptSpecPath = join(projectRoot, "sagemath", "tools", "assertion-exempt.
  * 検算だけで対応済みに数えられる」状態が黙って通る。読めない・書式が違う場合は、免除を空にして
  * 通すのではなく失敗にする（fail-closed）。
  */
+/** 検算本体の基底名の規約。免除の宣言がこれに一致しうるかを、宣言だけから判定するために使う。 */
+const canonicalCheckPrefix = "check_";
+
 type ExemptSpec = { readonly exactNames: ReadonlySet<string>; readonly namePrefixes: ReadonlyArray<string> };
 
 function parseExemptSpec(raw: string): ExemptSpec | { readonly error: string } {
@@ -59,6 +62,20 @@ function parseExemptSpec(raw: string): ExemptSpec | { readonly error: string } {
   }
   for (const name of lists.exactNames ?? []) {
     if (!name.endsWith(".sage")) return { error: `exactNames の ${name} が .sage で終わらない` };
+  }
+  // 免除は「何を免除しないか」でも縛る。検算本体の基底名は例外なく `check_` で始まる規約なので、
+  // その規約に一致しうる宣言は受け付けない。空文字の接頭辞だけを弾いても、`check_a` のように
+  // 一部の検算だけを覆う宣言は両方の入口を通る（下の「全ての .sage が免除」の検査は、覆われた
+  // 検算しか置かないディレクトリしか捕まえられず、他のディレクトリでは掃引の assert 要求だけが黙って外れる）。
+  for (const name of lists.exactNames ?? []) {
+    if (name.startsWith(canonicalCheckPrefix)) {
+      return { error: `exactNames の ${name} が検算本体の規約 ${canonicalCheckPrefix} に一致する` };
+    }
+  }
+  for (const prefix of lists.namePrefixes ?? []) {
+    if (prefix.startsWith(canonicalCheckPrefix) || canonicalCheckPrefix.startsWith(prefix)) {
+      return { error: `namePrefixes の ${prefix} が検算本体の規約 ${canonicalCheckPrefix} に一致しうる` };
+    }
   }
   return {
     exactNames: new Set(lists.exactNames ?? []),
@@ -285,6 +302,10 @@ function runExemptSpecRegression(): void {
     { name: "負例: 配列の要素が文字列でない", text: '{"exactNames":[1],"namePrefixes":[]}', expectError: true },
     { name: "負例: 空文字の接頭辞は全ての名前を免除する", text: '{"exactNames":[],"namePrefixes":[""]}', expectError: true },
     { name: "負例: exactNames が .sage で終わらない", text: '{"exactNames":["_common"],"namePrefixes":[]}', expectError: true },
+    { name: "負例: exactNames が検算本体の規約に一致する", text: '{"exactNames":["check_x.sage"],"namePrefixes":[]}', expectError: true },
+    { name: "負例: 接頭辞が全ての検算本体を覆う", text: '{"exactNames":[],"namePrefixes":["check_"]}', expectError: true },
+    { name: "負例: 接頭辞が一部の検算本体を覆う", text: '{"exactNames":[],"namePrefixes":["check_a"]}', expectError: true },
+    { name: "負例: 接頭辞が規約の真の接頭辞である", text: '{"exactNames":[],"namePrefixes":["ch"]}', expectError: true },
   ];
   const failures: string[] = [];
   for (const testCase of cases) {

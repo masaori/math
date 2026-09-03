@@ -119,6 +119,9 @@ class ExemptSpecError(Exception):
     """assert を要求しない .sage の宣言を読めなかったことを表す。"""
 
 
+# 検算本体の基底名の規約。免除の宣言がこれに一致しうるかを、宣言だけから判定するために使う。
+CANONICAL_CHECK_PREFIX = 'check_'
+
 EXEMPT_SPEC_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'assertion-exempt.json')
 
@@ -156,6 +159,18 @@ def load_exempt_spec(path=None):
     for name in exact:
         if not name.endswith('.sage'):
             raise ExemptSpecError('exactNames の {} が .sage で終わらない'.format(name))
+    # 免除は「何を免除しないか」でも縛る。検算本体の基底名は例外なく `check_` で始まる規約なので、
+    # その規約に一致しうる宣言は受け付けない。空文字の接頭辞だけを弾いても、`check_a` のように
+    # 一部の検算だけを覆う宣言は両方の入口を通り、覆われた検算が assert を一つも要求されなくなる
+    # （その検算しか置かないディレクトリだけが対応検査に落ち、他は黙って緩む）。
+    for name in exact:
+        if name.startswith(CANONICAL_CHECK_PREFIX):
+            raise ExemptSpecError(
+                'exactNames の {} が検算本体の規約 {} に一致する'.format(name, CANONICAL_CHECK_PREFIX))
+    for prefix in prefixes:
+        if prefix.startswith(CANONICAL_CHECK_PREFIX) or CANONICAL_CHECK_PREFIX.startswith(prefix):
+            raise ExemptSpecError(
+                'namePrefixes の {!r} が検算本体の規約 {} に一致しうる'.format(prefix, CANONICAL_CHECK_PREFIX))
     return (frozenset(exact), tuple(prefixes))
 
 
