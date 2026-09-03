@@ -158,9 +158,9 @@ for fiber_key in uncovered:
                 len(translated_edges), len(destination_edges), missing_count,
             )
 
-assert translated_phase_edges_valid_count > 0
-assert translated_phase_edges_missing_count > 0
-assert covariant_phase_edge_set_count < len(uncovered) * len(nontrivial_translations)
+assert covariant_phase_edge_set_count == 20
+assert translated_phase_edges_valid_count == 13824
+assert translated_phase_edges_missing_count == 3584
 assert first_covariance_failure is not None
 
 print(f"fiber-stabilizing nontrivial translations: {fiber_stabilizer_count}")
