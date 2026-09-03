@@ -156,18 +156,26 @@ class ExecutedAssertionTest(unittest.TestCase):
 class InstrumentedCodeTest(unittest.TestCase):
     """assert の実行件数が、実際に実行された文だけを数えていることを確かめる。"""
 
-    def run_source(self, source, preparse=lambda text: text):
+    def run_source_counts(self, source, preparse=lambda text: text):
         with tempfile.TemporaryDirectory() as workdir:
             path = os.path.join(workdir, 'check_sample.sage')
             with open(path, 'w') as fh:
                 fh.write(source)
             hits = []
+            failures = []
             namespace = {
                 sweep_all_checks.ASSERT_HIT_NAME:
-                    lambda source_path: hits.append(source_path)
+                    lambda source_path: hits.append(source_path),
+                sweep_all_checks.ASSERT_FAILURE_NAME:
+                    lambda source_path: failures.append(source_path),
             }
             exec(sweep_all_checks.instrumented_code(path, preparse), namespace)
-            return len(hits)
+            return len(hits), len(failures)
+
+    def run_source(self, source, preparse=lambda text: text):
+        hits, failures = self.run_source_counts(source, preparse)
+        self.assertEqual(failures, 0)
+        return hits
 
     def test_counts_each_executed_assertion(self):
         self.assertEqual(self.run_source('assert 1 == 1\nassert 2 == 2\n'), 2)
@@ -205,7 +213,8 @@ class InstrumentedCodeTest(unittest.TestCase):
                 'import sys\n'
                 'sys.path.insert(0, {tools!r})\n'
                 'import sweep_all_checks\n'
-                'namespace = {{sweep_all_checks.ASSERT_HIT_NAME: lambda source_path: None}}\n'
+                'namespace = {{sweep_all_checks.ASSERT_HIT_NAME: lambda source_path: None, '
+                'sweep_all_checks.ASSERT_FAILURE_NAME: lambda source_path: None}}\n'
                 'try:\n'
                 '    exec(sweep_all_checks.instrumented_code({path!r}, lambda text: text),'
                 ' namespace)\n'
@@ -233,11 +242,36 @@ class InstrumentedCodeTest(unittest.TestCase):
             def hit(source_path):
                 hits[source_path] = hits.get(source_path, 0) + 1
 
-            namespace = {sweep_all_checks.ASSERT_HIT_NAME: hit}
+            namespace = {
+                sweep_all_checks.ASSERT_HIT_NAME: hit,
+                sweep_all_checks.ASSERT_FAILURE_NAME: lambda source_path: None,
+            }
             exec(sweep_all_checks.instrumented_code(common_path, lambda text: text), namespace)
             exec(sweep_all_checks.instrumented_code(main_path, lambda text: text), namespace)
             self.assertEqual(hits.get(os.path.realpath(common_path)), 1)
             self.assertEqual(hits.get(os.path.realpath(main_path), 0), 0)
+
+    def test_records_failure_swallowed_around_an_indirect_call(self):
+        source = (
+            'def check():\n    assert False\n'
+            'try:\n    check()\nexcept AssertionError:\n    pass\n'
+            'assert True\n')
+        self.assertEqual(self.run_source_counts(source), (2, 1))
+
+    def test_records_failure_swallowed_by_context_manager(self):
+        source = (
+            'from contextlib import suppress\n'
+            'with suppress(AssertionError):\n    assert False\n'
+            'assert True\n')
+        self.assertEqual(self.run_source_counts(source), (2, 1))
+
+    def test_records_failure_suppressed_by_finally_return(self):
+        source = (
+            'def check():\n'
+            '    try:\n        assert False\n'
+            '    finally:\n        return None\n'
+            'check()\nassert True\n')
+        self.assertEqual(self.run_source_counts(source), (2, 1))
 
 
 class SwallowedAssertionTest(unittest.TestCase):

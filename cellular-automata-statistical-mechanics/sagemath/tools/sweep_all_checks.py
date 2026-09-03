@@ -85,9 +85,11 @@ def collect_files(root=None):
 # 中身が空の検算ファイルや、assert を消してしまった検算ファイルも PASS にする。
 # 掃引は「一本も実行されていない」ことを収集の側では拒否できるようになったが、
 # 「実行はしたが何も確かめていない」ことは拒否できていなかった。
-# そこで .sage を前処理したあとの構文木で assert 文の直前に計数の呼び出しを差し込み、
-# 実際に実行された assert の件数を検算ごとに記録する。件数 0 の検算は PASS にしない。
+# そこで .sage を前処理したあとの構文木で assert 文を同値な条件分岐へ展開し、実行件数と
+# 条件が偽だった件数を検算ごとに記録する。件数 0 の検算も、例外が検算自身に握り潰されても
+# 条件が偽だった検算も PASS にしない。
 ASSERT_HIT_NAME = '__sweep_assert_hit__'
+ASSERT_FAILURE_NAME = '__sweep_assert_failure__'
 
 
 class AssertCounter(ast.NodeTransformer):
@@ -99,7 +101,18 @@ class AssertCounter(ast.NodeTransformer):
         hit = ast.Expr(value=ast.Call(
             func=ast.Name(id=ASSERT_HIT_NAME, ctx=ast.Load()),
             args=[ast.Constant(value=self.source_path)], keywords=[]))
-        return [ast.copy_location(hit, node), node]
+        failure = ast.Expr(value=ast.Call(
+            func=ast.Name(id=ASSERT_FAILURE_NAME, ctx=ast.Load()),
+            args=[ast.Constant(value=self.source_path)], keywords=[]))
+        raised = ast.Raise(
+            exc=ast.Call(
+                func=ast.Name(id='AssertionError', ctx=ast.Load()),
+                args=[] if node.msg is None else [node.msg], keywords=[]),
+            cause=None)
+        expanded = ast.If(
+            test=ast.UnaryOp(op=ast.Not(), operand=node.test),
+            body=[failure, raised], orelse=[])
+        return [ast.copy_location(hit, node), ast.copy_location(expanded, node)]
 
 
 class SwallowedAssertionError(Exception):
@@ -300,11 +313,17 @@ def worker_main(args):
         ns['__file__'] = path
 
         hits = {}
+        failures = {}
 
         def assert_hit(source_path):
             hits[source_path] = hits.get(source_path, 0) + 1
 
         ns[ASSERT_HIT_NAME] = assert_hit
+
+        def assert_failure(source_path):
+            failures[source_path] = failures.get(source_path, 0) + 1
+
+        ns[ASSERT_FAILURE_NAME] = assert_failure
 
         def scoped_load(*names, **_kw):
             # 検算ファイル内の相対 load を、同じ隔離名前空間へ入れる。
@@ -325,6 +344,10 @@ def worker_main(args):
             signal.alarm(args.timeout)
             exec(instrumented_code(path, preparse_file), ns)
             signal.alarm(0)
+            if failures:
+                status = 'FAIL'
+                detail = 'assert condition was false {} time(s), although its exception was swallowed'.format(
+                    sum(failures.values()))
         except Timeout:
             status = 'TIMEOUT'
             detail = 'exceeded {} s'.format(args.timeout)
