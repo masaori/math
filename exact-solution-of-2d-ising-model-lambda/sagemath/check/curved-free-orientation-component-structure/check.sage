@@ -124,6 +124,25 @@ def curved_free_orientations(component, incidence):
     return edge_order, found
 
 
+def winding(chosen, side):
+    """水平・垂直の切断線を横切る辺数の偶奇を返す。"""
+    return (
+        ZZ(sum(1 for i, j, d in chosen if d == 0 and j == side - 1)) % 2,
+        ZZ(sum(1 for i, j, d in chosen if d == 1 and i == side - 1)) % 2,
+    )
+
+
+def selection_character_is_nontrivial(chosen, all_even, side):
+    """E に含まれる偶部分グラフ上で巻き付き交代積が非零かを判定する。"""
+    chosen_h, chosen_v = winding(chosen, side)
+    for subgraph in all_even:
+        if subgraph <= chosen:
+            subgraph_h, subgraph_v = winding(subgraph, side)
+            if (chosen_h * subgraph_v + chosen_v * subgraph_h) % 2 == 1:
+                return True
+    return False
+
+
 for L_side in (2, 3):
     edge_list, incidence = build_torus(L_side)
     all_even = even_subgraphs(edge_list, incidence)
@@ -132,6 +151,7 @@ for L_side in (2, 3):
     component_cache = {}
     nonzero_count = ZZ(0)
     zero_count = ZZ(0)
+    nontrivial_character_count = ZZ(0)
     subgraph_checks = ZZ(0)
     for chosen in all_even:
         touched = [vertex for vertex, slots in incidence.items()
@@ -172,15 +192,21 @@ for L_side in (2, 3):
             assert indicator_rows.rank() == c_count
         elif chosen:
             zero_count += 1
+        if chosen and selection_character_is_nontrivial(chosen, all_even, L_side):
+            nontrivial_character_count += 1
+            # 「非自明文字なら曲がり型なし配向なし」の逆も、この有限範囲では直接照合する。
+            assert not all_pairs
+        elif chosen:
+            assert all_pairs
         subgraph_checks += 1
 
     if L_side == 2:
         assert nonzero_count == 23 and zero_count == 8
+        assert nontrivial_character_count == 8
     else:
-        # 一辺三で曲がり型なし配向を持たない非空偶部分グラフ 346 個は、
-        # 既に固定した非自明文字の偶部分グラフの個数 346 に一致する
-        # （translation-nontrivial-character-forces-curved-vertex の逆向きの観察）。
+        # 一辺三では個数だけでなく、各 E ごとに両条件が同値である。
         assert nonzero_count == 677 and zero_count == 346
+        assert nontrivial_character_count == 346
     print("PASS: L=%d の偶部分グラフ %d 個で、曲がり型なし均衡配向が成分ごとに"
           " 0 個または全反転の 2 個であること、|E|-|V(E)|=n4、階数 = c + n4、"
           "成分指示元の一次独立を検査（曲がり型なし配向を持つ非空 E は %d 個、"
