@@ -1364,6 +1364,24 @@ export default defineNotes([
         "次は曲がり型を持たない均衡配向の数え上げと符号を選択和の ",
         math(String.raw`\pm2^{|E|-|V(E)|+c(E)}`), " へ同定する。",
       ]),
+      paragraph([
+        "一辺二では、この同定に必要な重み付き数と符号を全ファイバーで固定した。",
+        "曲がり型頂点を持たない均衡配向 ", math(String.raw`o`), " に、局所行列式の",
+        "絶対値 ", math(String.raw`2^{s(o)}`), " を重みとして付けると、",
+      ]),
+      displayMath(String.raw`\sum_{o:\,\text{曲がり型なし}}2^{s(o)}
+=2^{\lvert E\rvert-\lvert V(E)\rvert+c(E)}
+=\lvert\mathcal C_L(D,E)\rvert`),
+      paragraph([
+        "となった。さらに四つのねじれそれぞれで、曲がり型を持たない全配向類の",
+        "位相和は同符号で、その符号は選択和 ",
+        math(String.raw`\mathcal U_L^{a,b}(D,E)`), " の符号と一致した。従って零和の",
+        "曲がり型類を除いた総和は選択和そのものになる",
+        "（sagemath/check/trivial-character-curved-free-orientation-weight）。",
+        "これは一辺二の有限観察であり、一般の辺長での重み付き全単射と符号の同定は",
+        "まだ証明していない。次は重み ", math(String.raw`2^{s(o)}`),
+        " を局所選択として展開し、選択集合との全単射を構成する。",
+      ]),
     ],
   },
 ]);

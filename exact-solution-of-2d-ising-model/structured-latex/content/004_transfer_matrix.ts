@@ -2862,12 +2862,6 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
 &&(\because\ M/M = 1)\\
 &= \cos(2\pi j) - i\sin(2\pi j)
 &&(\because\ \text{オイラーの公式})\\
-&= 1 - i\cdot 0
-&&(\because\ j \in \mathbb{Z}\ \text{での三角関数の値})\\
-&= 1
-&&(\because\ \text{複素数の四則})\\
-&= 1 + i\cdot 0
-&&(\because\ \text{複素数の四則})\\
 &= \cos(2\pi j) + i\sin(2\pi j)
 &&(\because\ j \in \mathbb{Z}\ \text{での三角関数の値})\\
 &= \exp(2\pi i j)
@@ -2881,31 +2875,31 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
         String.raw`\begin{aligned}
 \hat{Z}_M^{(-)}
 &= \sum_{j=1}^{M} Z_j \exp\!\left(-i \frac{2\pi j M}{M}\right)
-&&(\because\ \text{定義}\ \hat{Z}_\mu^{(\pm)}\ \text{で}\ \mu = M,\ \text{複号下では}\ j=1\ \text{の係数も}\ 1)\\
+&&(\because\ \text{定義}\ \hat{Z}_\mu^{(\pm)}\ \blkref{def_hatZ_hatY}\ \text{で}\ \mu = M,\ \text{複号下では}\ j=1\ \text{の係数も}\ 1)\\
 &= \sum_{j=1}^{M} Z_j \exp\!\left(-i \frac{2\pi j (-M)}{M}\right)
 &&(\because\ \text{上で示した各}\ j\ \text{についての係数の一致})\\
 &= \hat{Z}_{-M}^{(-)}
-&&(\because\ \text{定義}\ \hat{Z}_\mu^{(\pm)}\ \text{で}\ \mu = -M,\ \text{複号下では}\ j=1\ \text{の係数も}\ 1)
+&&(\because\ \text{定義}\ \hat{Z}_\mu^{(\pm)}\ \blkref{def_hatZ_hatY}\ \text{で}\ \mu = -M,\ \text{複号下では}\ j=1\ \text{の係数も}\ 1)
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \hat{Y}_M
 &= \sum_{j=1}^{M} Y_j \exp\!\left(-i \frac{2\pi j M}{M}\right)
-&&(\because\ \text{定義}\ \hat{Y}_\mu\ \text{で}\ \mu = M)\\
+&&(\because\ \text{定義}\ \hat{Y}_\mu\ \blkref{def_hatZ_hatY}\ \text{で}\ \mu = M)\\
 &= \sum_{j=1}^{M} Y_j \exp\!\left(-i \frac{2\pi j (-M)}{M}\right)
 &&(\because\ \text{上で示した各}\ j\ \text{についての係数の一致})\\
 &= \hat{Y}_{-M}
-&&(\because\ \text{定義}\ \hat{Y}_\mu\ \text{で}\ \mu = -M)
+&&(\because\ \text{定義}\ \hat{Y}_\mu\ \blkref{def_hatZ_hatY}\ \text{で}\ \mu = -M)
 \end{aligned}`,
       ),
-      paragraph([
-        "係数の一致と定義は ",
-        ref("def_hatZ_hatY"),
-        " による。",
-      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-09-04 の式変形統一で、複素数の四則だけを述べる三行を削り、三角関数の整数点での値から係数の一致へ直接進めた。末尾の参照一覧も削り、定義を使う四行の行末へ \\blkref{def_hatZ_hatY} を移した。主張・式変形の実質・根拠は変えていない。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY",
