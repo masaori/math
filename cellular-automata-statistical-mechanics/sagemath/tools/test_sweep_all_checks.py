@@ -156,21 +156,25 @@ class ExecutedAssertionTest(unittest.TestCase):
 class InstrumentedCodeTest(unittest.TestCase):
     """assert の実行件数が、実際に実行された文だけを数えていることを確かめる。"""
 
-    def run_source_counts(self, source, preparse=lambda text: text):
+    def run_with_recorder(self, source, preparse=lambda text: text):
+        # 掃引の worker と同じ記録経路（AssertionRecorder）で走らせる。
         with tempfile.TemporaryDirectory() as workdir:
             path = os.path.join(workdir, 'check_sample.sage')
             with open(path, 'w') as fh:
                 fh.write(source)
-            hits = []
-            failures = []
-            namespace = {
-                sweep_all_checks.ASSERT_HIT_NAME:
-                    lambda source_path: hits.append(source_path),
-                sweep_all_checks.ASSERT_FAILURE_NAME:
-                    lambda source_path: failures.append(source_path),
-            }
-            exec(sweep_all_checks.instrumented_code(path, preparse), namespace)
-            return len(hits), len(failures)
+            recorder = sweep_all_checks.AssertionRecorder('token-for-the-test')
+            namespace = {'__file__': path}
+            recorder.install(namespace)
+            exec(sweep_all_checks.instrumented_code(path, preparse, recorder.token), namespace)
+            return recorder, namespace, os.path.realpath(path)
+
+    def run_source_counts(self, source, preparse=lambda text: text):
+        recorder, _namespace, _path = self.run_with_recorder(source, preparse)
+        return sum(recorder.hits.values()), sum(recorder.failures.values())
+
+    def run_verdict(self, source):
+        recorder, namespace, _path = self.run_with_recorder(source)
+        return recorder.verdict(namespace)
 
     def run_source(self, source, preparse=lambda text: text):
         hits, failures = self.run_source_counts(source, preparse)
@@ -213,11 +217,12 @@ class InstrumentedCodeTest(unittest.TestCase):
                 'import sys\n'
                 'sys.path.insert(0, {tools!r})\n'
                 'import sweep_all_checks\n'
-                'namespace = {{sweep_all_checks.ASSERT_HIT_NAME: lambda source_path: None, '
-                'sweep_all_checks.ASSERT_FAILURE_NAME: lambda source_path: None}}\n'
+                'recorder = sweep_all_checks.AssertionRecorder("token")\n'
+                'namespace = {{}}\n'
+                'recorder.install(namespace)\n'
                 'try:\n'
-                '    exec(sweep_all_checks.instrumented_code({path!r}, lambda text: text),'
-                ' namespace)\n'
+                '    exec(sweep_all_checks.instrumented_code({path!r}, lambda text: text,'
+                ' recorder.token), namespace)\n'
                 'except AssertionError:\n'
                 '    print("RAISED")\n'
                 'else:\n'
@@ -237,19 +242,15 @@ class InstrumentedCodeTest(unittest.TestCase):
                 fh.write('value = 1\n')
             with open(common_path, 'w') as fh:
                 fh.write('assert True\n')
-            hits = {}
-
-            def hit(source_path):
-                hits[source_path] = hits.get(source_path, 0) + 1
-
-            namespace = {
-                sweep_all_checks.ASSERT_HIT_NAME: hit,
-                sweep_all_checks.ASSERT_FAILURE_NAME: lambda source_path: None,
-            }
-            exec(sweep_all_checks.instrumented_code(common_path, lambda text: text), namespace)
-            exec(sweep_all_checks.instrumented_code(main_path, lambda text: text), namespace)
-            self.assertEqual(hits.get(os.path.realpath(common_path)), 1)
-            self.assertEqual(hits.get(os.path.realpath(main_path), 0), 0)
+            recorder = sweep_all_checks.AssertionRecorder('token-for-the-test')
+            namespace = {}
+            recorder.install(namespace)
+            exec(sweep_all_checks.instrumented_code(
+                common_path, lambda text: text, recorder.token), namespace)
+            exec(sweep_all_checks.instrumented_code(
+                main_path, lambda text: text, recorder.token), namespace)
+            self.assertEqual(recorder.hits.get(os.path.realpath(common_path)), 1)
+            self.assertEqual(recorder.hits.get(os.path.realpath(main_path), 0), 0)
 
     def test_records_failure_swallowed_around_an_indirect_call(self):
         source = (
@@ -274,6 +275,98 @@ class InstrumentedCodeTest(unittest.TestCase):
         self.assertEqual(self.run_source_counts(source), (2, 1))
 
 
+class AssertionRecorderTest(unittest.TestCase):
+    """記録の経路そのものを検算ファイルが改変できないことを確かめる。"""
+
+    def run_verdict(self, source):
+        with tempfile.TemporaryDirectory() as workdir:
+            path = os.path.join(workdir, 'check_sample.sage')
+            with open(path, 'w') as fh:
+                fh.write(source)
+            recorder = sweep_all_checks.AssertionRecorder(
+                'token-for-the-test', os.path.join(workdir, 'failures.log'))
+            namespace = {'__file__': path}
+            recorder.install(namespace)
+            exec(sweep_all_checks.instrumented_code(path, lambda text: text, recorder.token),
+                 namespace)
+            return recorder, recorder.verdict(namespace)
+
+    def test_accepts_a_check_whose_assertions_all_hold(self):
+        recorder, (recorded, reason) = self.run_verdict('assert 1 == 1\n')
+        self.assertTrue(recorded)
+        self.assertEqual(reason, '')
+        self.assertEqual(sum(recorder.hits.values()), 1)
+
+    def test_rejects_a_check_that_rebinds_the_failure_recorder(self):
+        # 記録先を自分で束ね直せば、握り潰した失敗は記録されない。件数は正のままなので、
+        # 前 tick の実装ではこの検算が PASS になった（実測で件数 1・失敗 0）。
+        recorder, (recorded, reason) = self.run_verdict(
+            '__sweep_assert_failure__ = lambda *args: None\n'
+            'def check():\n    assert False\n'
+            'try:\n    check()\nexcept AssertionError:\n    pass\n'
+            'assert True\n')
+        self.assertEqual(sum(recorder.failures.values()), 0)
+        self.assertFalse(recorded)
+        self.assertIn('rebound', reason)
+
+    def test_rejects_a_check_that_deletes_the_hit_recorder(self):
+        _recorder, (recorded, reason) = self.run_verdict(
+            'assert True\ndel __sweep_assert_hit__\n')
+        self.assertFalse(recorded)
+        self.assertIn('deleted', reason)
+
+    def test_rejects_a_fabricated_hit_from_a_check_without_assertions(self):
+        # assert を一つも書かず、差し込んだ計数の関数を直接呼ぶだけで件数を正にできた。
+        recorder, (recorded, reason) = self.run_verdict(
+            'import os\n'
+            '__sweep_assert_hit__("guessed", os.path.realpath(__file__))\n')
+        self.assertEqual(sum(recorder.hits.values()), 0)
+        self.assertFalse(recorded)
+        self.assertIn('outside an assert statement', reason)
+
+    def test_rejects_a_fabricated_failure_call(self):
+        _recorder, (recorded, reason) = self.run_verdict(
+            'import os\n'
+            'assert True\n'
+            '__sweep_assert_failure__("guessed", os.path.realpath(__file__))\n')
+        self.assertFalse(recorded)
+        self.assertIn('outside an assert statement', reason)
+
+    def test_rejects_a_check_that_clears_the_failure_record_through_the_recorder(self):
+        # 名前空間へ置いた束縛メソッドの __self__ から記録器へ辿れる。実測では記憶上の
+        # 失敗を消すだけで PASS になった。追記ファイルに残った失敗で判定する。
+        recorder, (recorded, reason) = self.run_verdict(
+            'r = __sweep_assert_hit__.__self__\n'
+            'def check():\n    assert False\n'
+            'try:\n    check()\nexcept AssertionError:\n    pass\n'
+            'r.failures.clear()\nassert True\n')
+        # 記憶上の記録は消えている。判定は追記ファイルに残った 1 件だけを根拠にしている。
+        self.assertEqual(sum(recorder.failures.values()), 0)
+        self.assertFalse(recorded)
+        self.assertIn('false 1 time(s)', reason)
+        self.assertIn('swallowed', reason)
+
+    def test_instruments_every_real_check_file(self):
+        # 記録経路の変更が実在の検算 336 本の書き換えを壊していないことを、掃引と同じ
+        # 収集経路で確かめる（構文木の書き換えとコンパイルまで。実行はしない）。
+        instrumented = 0
+        for path in sweep_all_checks.collect_files():
+            try:
+                sweep_all_checks.instrumented_code(path, lambda text: text, 'token')
+            except SyntaxError:
+                continue  # Sage の前処理を要する書き方は掃引の実行時に判定される
+            instrumented += 1
+        self.assertGreater(instrumented, 0)
+
+    def test_reports_a_swallowed_failure_when_the_recorder_is_intact(self):
+        _recorder, (recorded, reason) = self.run_verdict(
+            'def check():\n    assert False\n'
+            'try:\n    check()\nexcept AssertionError:\n    pass\n'
+            'assert True\n')
+        self.assertFalse(recorded)
+        self.assertIn('swallowed', reason)
+
+
 class SwallowedAssertionTest(unittest.TestCase):
     """assert の失敗を検算ファイル自身が握り潰す書き方を、実行前に拒むことを確かめる。"""
 
@@ -282,7 +375,8 @@ class SwallowedAssertionTest(unittest.TestCase):
             path = os.path.join(workdir, 'check_sample.sage')
             with open(path, 'w') as fh:
                 fh.write(source)
-            return sweep_all_checks.instrumented_code(path, lambda text: text)
+            return sweep_all_checks.instrumented_code(
+                path, lambda text: text, 'token-for-the-test')
 
     def assert_rejected(self, source):
         with self.assertRaises(sweep_all_checks.SwallowedAssertionError):

@@ -17,6 +17,7 @@ import fcntl
 import json
 import math
 import os
+import secrets
 import subprocess
 import sys
 import time
@@ -93,17 +94,20 @@ ASSERT_FAILURE_NAME = '__sweep_assert_failure__'
 
 
 class AssertCounter(ast.NodeTransformer):
-    def __init__(self, source_path):
+    def __init__(self, source_path, token):
         self.source_path = os.path.realpath(source_path)
+        self.token = token
 
     def visit_Assert(self, node):
         self.generic_visit(node)
         hit = ast.Expr(value=ast.Call(
             func=ast.Name(id=ASSERT_HIT_NAME, ctx=ast.Load()),
-            args=[ast.Constant(value=self.source_path)], keywords=[]))
+            args=[ast.Constant(value=self.token),
+                  ast.Constant(value=self.source_path)], keywords=[]))
         failure = ast.Expr(value=ast.Call(
             func=ast.Name(id=ASSERT_FAILURE_NAME, ctx=ast.Load()),
-            args=[ast.Constant(value=self.source_path)], keywords=[]))
+            args=[ast.Constant(value=self.token),
+                  ast.Constant(value=self.source_path)], keywords=[]))
         raised = ast.Raise(
             exc=ast.Call(
                 func=ast.Name(id='AssertionError', ctx=ast.Load()),
@@ -113,6 +117,89 @@ class AssertCounter(ast.NodeTransformer):
             test=ast.UnaryOp(op=ast.Not(), operand=node.test),
             body=[failure, raised], orelse=[])
         return [ast.copy_location(hit, node), ast.copy_location(expanded, node)]
+
+
+# 前 tick の記録は、差し込んだ計数の呼び出しを検算ファイル自身の名前空間へ普通の名前として
+# 置いていた。そのため検算ファイルは (1) 失敗の記録先を自分で別の関数へ束ね直して失敗を消す、
+# (2) assert を一つも書かずに計数の関数を直接呼んで件数を正にする、のどちらもできた。
+# 実測でも、修正前の実装は (1) を PASS・件数 1、(2) を件数 1 として受理した。
+# そこで記録の経路を次のとおり固定する。
+#   - 呼び出しごとに、その掃引の実行でだけ有効な合言葉を要求する。合言葉の付かない呼び出しは
+#     件数に数えず、改変として記録する（fail-closed）。
+#   - 検算の実行後に、差し込んだ二つの名前が最初に置いた関数そのものであることを確かめる。
+#     束ね直しも削除も、この照合で FAIL になる。
+# さらに、名前空間へ置いた呼び出し可能オブジェクトは、そこから捕捉した状態へ辿れる
+# （束縛メソッドの `__self__`、関数の `__closure__`）。実測でも `__sweep_assert_hit__.__self__`
+# から記録器へ辿り、握り潰した失敗の記録を消して PASS にできた。失敗の記録だけは
+# プロセス外の追記ファイルへも書き、実行後の判定では記憶上と file 上の多い方を採る。
+# 失敗は稀なので、件数の計上（1 億回規模）と違い追記の費用が問題にならない。
+# 残る限界: 合言葉は書き換え後の構文木の定数なので、検算ファイルが自分のフレームの
+# co_consts を覗けば読める。追記ファイルも、記録器へ辿れば経路ごと壊せる。
+# これらを本当に閉じるには記録を worker プロセスの外へ出す必要があり、まだ閉じていない。
+class AssertionRecorder:
+    """assert の実行と失敗を、検算ファイルから改変しにくい形で記録する。"""
+
+    def __init__(self, token, failure_log=None):
+        self.token = token
+        self.failure_log = failure_log
+        self.hits = {}
+        self.failures = {}
+        self.tampering = []
+        # 束縛メソッドは参照するたび別の物になるため、同一性の照合用に一度だけ作って持つ。
+        self.installed = {ASSERT_HIT_NAME: self._hit, ASSERT_FAILURE_NAME: self._failure}
+
+    def _hit(self, call_token, source_path):
+        if call_token != self.token:
+            self.tampering.append(
+                'the assertion counter {} was called outside an assert statement'.format(
+                    ASSERT_HIT_NAME))
+            return
+        self.hits[source_path] = self.hits.get(source_path, 0) + 1
+
+    def _failure(self, call_token, source_path):
+        if call_token != self.token:
+            self.tampering.append(
+                'the assertion counter {} was called outside an assert statement'.format(
+                    ASSERT_FAILURE_NAME))
+            return
+        self.failures[source_path] = self.failures.get(source_path, 0) + 1
+        if self.failure_log is not None:
+            with open(self.failure_log, 'a') as log:
+                log.write(source_path + '\n')
+
+    def install(self, namespace):
+        namespace.update(self.installed)
+
+    def verdict(self, namespace):
+        """検算の実行後に、記録の経路が保たれていたかを (通ったか, 理由) で返す。"""
+        for name, expected in self.installed.items():
+            if name not in namespace:
+                return False, 'the assertion recorder {} was deleted by the check itself'.format(name)
+            if namespace[name] is not expected:
+                return False, 'the assertion recorder {} was rebound by the check itself'.format(name)
+        # 追記ファイルの読み取り自体が改変を検出しうるので、先に読んでから改変を見る。
+        recorded_failures = max(sum(self.failures.values()), self.logged_failures())
+        if self.tampering:
+            return False, self.tampering[0]
+        if recorded_failures:
+            return False, (
+                'assert condition was false {} time(s), although its exception was '
+                'swallowed'.format(recorded_failures))
+        return True, ''
+
+    def logged_failures(self):
+        """追記ファイルに残った失敗の件数。読めない場合は 0 を返さず失敗として扱う。"""
+        if self.failure_log is None:
+            return 0
+        if not os.path.exists(self.failure_log):
+            return 0
+        try:
+            with open(self.failure_log) as log:
+                return sum(1 for line in log if line.strip())
+        except OSError:
+            self.tampering.append('the failure log {} became unreadable'.format(
+                self.failure_log))
+            return 1
 
 
 class SwallowedAssertionError(Exception):
@@ -179,14 +266,14 @@ def reject_swallowed_assertions(tree, path):
                     'except が握り潰しうる'.format(path, getattr(handler, 'lineno', node.lineno)))
 
 
-def instrumented_code(path, preparse):
+def instrumented_code(path, preparse, token):
     # Sage の load と同じく .sage を前処理してから実行するが、実行前に構文木を書き換える。
     # 前処理の結果をそのまま exec する経路（sage.repl.load.load の既定）と同じ意味を保つ。
     with open(path) as fh:
         source = preparse(fh.read()) + '\n'
     parsed = ast.parse(source, filename=path)
     reject_swallowed_assertions(parsed, path)
-    tree = AssertCounter(path).visit(parsed)
+    tree = AssertCounter(path, token).visit(parsed)
     ast.fix_missing_locations(tree)
     # optimize=0 を明示する。既定の -1 は起動した python の最適化水準を引き継ぐため、
     # 環境変数 PYTHONOPTIMIZE や -O のもとでは assert 文だけが実体を失う。差し込んだ
@@ -312,18 +399,15 @@ def worker_main(args):
         ns['__name__'] = '__sweep__'
         ns['__file__'] = path
 
-        hits = {}
-        failures = {}
-
-        def assert_hit(source_path):
-            hits[source_path] = hits.get(source_path, 0) + 1
-
-        ns[ASSERT_HIT_NAME] = assert_hit
-
-        def assert_failure(source_path):
-            failures[source_path] = failures.get(source_path, 0) + 1
-
-        ns[ASSERT_FAILURE_NAME] = assert_failure
+        # 合言葉は検算 1 本ごとに作り直す。別の検算の書き換え後コードから漏れた値では、
+        # 次の検算の記録を偽装できない。
+        failure_log = os.path.join(
+            os.path.dirname(os.path.abspath(args.result)),
+            'failures-{}.log'.format(args.worker))
+        if os.path.exists(failure_log):
+            os.remove(failure_log)
+        recorder = AssertionRecorder(secrets.token_hex(16), failure_log)
+        recorder.install(ns)
 
         def scoped_load(*names, **_kw):
             # 検算ファイル内の相対 load を、同じ隔離名前空間へ入れる。
@@ -331,7 +415,7 @@ def worker_main(args):
             # 読み込んだ側も計数するが、出典別に分ける。共有定義の assert だけが動いても、
             # 検算本体が何も確かめていない事実を覆い隠してはならない。
             for name in names:
-                exec(instrumented_code(name, preparse_file), ns)
+                exec(instrumented_code(name, preparse_file, recorder.token), ns)
 
         ns['load'] = scoped_load
 
@@ -342,12 +426,12 @@ def worker_main(args):
         try:
             os.chdir(os.path.dirname(path))
             signal.alarm(args.timeout)
-            exec(instrumented_code(path, preparse_file), ns)
+            exec(instrumented_code(path, preparse_file, recorder.token), ns)
             signal.alarm(0)
-            if failures:
+            recorded, reason = recorder.verdict(ns)
+            if not recorded:
                 status = 'FAIL'
-                detail = 'assert condition was false {} time(s), although its exception was swallowed'.format(
-                    sum(failures.values()))
+                detail = reason
         except Timeout:
             status = 'TIMEOUT'
             detail = 'exceeded {} s'.format(args.timeout)
@@ -363,7 +447,7 @@ def worker_main(args):
             'file': os.path.relpath(path, check_root()),
             'status': status,
             'seconds': round(time.time() - started, 2),
-            'assertions': hits.get(os.path.realpath(path), 0),
+            'assertions': recorder.hits.get(os.path.realpath(path), 0),
             'detail': detail,
             'worker': args.worker,
         }
