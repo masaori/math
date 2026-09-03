@@ -90,11 +90,14 @@ ASSERT_HIT_NAME = '__sweep_assert_hit__'
 
 
 class AssertCounter(ast.NodeTransformer):
+    def __init__(self, source_path):
+        self.source_path = os.path.realpath(source_path)
+
     def visit_Assert(self, node):
         self.generic_visit(node)
         hit = ast.Expr(value=ast.Call(
             func=ast.Name(id=ASSERT_HIT_NAME, ctx=ast.Load()),
-            args=[], keywords=[]))
+            args=[ast.Constant(value=self.source_path)], keywords=[]))
         return [ast.copy_location(hit, node), node]
 
 
@@ -103,18 +106,22 @@ def instrumented_code(path, preparse):
     # 前処理の結果をそのまま exec する経路（sage.repl.load.load の既定）と同じ意味を保つ。
     with open(path) as fh:
         source = preparse(fh.read()) + '\n'
-    tree = AssertCounter().visit(ast.parse(source, filename=path))
+    tree = AssertCounter(path).visit(ast.parse(source, filename=path))
     ast.fix_missing_locations(tree)
     return compile(tree, path, 'exec')
 
 
 def assertion_required(relative_path):
-    # 主張を確かめる検算は `check_` で始まる名前を持つ。掃引はそれ以外の `.sage` も
-    # 1 本として load するため、assert の実行件数 0 を失敗にする対象を名前で限定する。
     # 対象外は二種類しかない。検算から load される共有定義（`_common.sage` /
     # `_prelude.sage`）と、まだ主張へ昇格していない探索用（`explore_*.sage`）である。
+    # `check_` で始まらないというだけで免除すると、任意名の空ファイルが成功扱いになるため、
+    # 明示した三パターン以外の `.sage` はすべて assert を要求する。
     # 免除された本数と名前は毎回印字して、対象外が黙って増えないようにする。
-    return os.path.basename(relative_path).startswith('check_')
+    basename = os.path.basename(relative_path)
+    return not (
+        basename in ('_common.sage', '_prelude.sage')
+        or basename.startswith('explore_')
+    )
 
 
 def next_index(counter_path):
@@ -161,17 +168,18 @@ def worker_main(args):
         ns['__name__'] = '__sweep__'
         ns['__file__'] = path
 
-        hits = [0]
+        hits = {}
 
-        def assert_hit():
-            hits[0] += 1
+        def assert_hit(source_path):
+            hits[source_path] = hits.get(source_path, 0) + 1
 
         ns[ASSERT_HIT_NAME] = assert_hit
 
         def scoped_load(*names, **_kw):
             # 検算ファイル内の相対 load を、同じ隔離名前空間へ入れる。
             # 名前空間を指定しないと Sage の利用者名前空間へ入り、定義が検算から見えなくなる。
-            # 読み込んだ側の assert も同じ計数へ入れるため、ここも計数付きで実行する。
+            # 読み込んだ側も計数するが、出典別に分ける。共有定義の assert だけが動いても、
+            # 検算本体が何も確かめていない事実を覆い隠してはならない。
             for name in names:
                 exec(instrumented_code(name, preparse_file), ns)
 
@@ -201,7 +209,7 @@ def worker_main(args):
             'file': os.path.relpath(path, check_root()),
             'status': status,
             'seconds': round(time.time() - started, 2),
-            'assertions': hits[0],
+            'assertions': hits.get(os.path.realpath(path), 0),
             'detail': detail,
             'worker': args.worker,
         }

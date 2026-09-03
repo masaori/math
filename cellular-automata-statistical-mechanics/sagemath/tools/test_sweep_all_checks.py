@@ -159,7 +159,10 @@ class InstrumentedCodeTest(unittest.TestCase):
             with open(path, 'w') as fh:
                 fh.write(source)
             hits = []
-            namespace = {sweep_all_checks.ASSERT_HIT_NAME: lambda: hits.append(1)}
+            namespace = {
+                sweep_all_checks.ASSERT_HIT_NAME:
+                    lambda source_path: hits.append(source_path)
+            }
             exec(sweep_all_checks.instrumented_code(path, preparse), namespace)
             return len(hits)
 
@@ -186,6 +189,25 @@ class InstrumentedCodeTest(unittest.TestCase):
             self.run_source('MARK\n', preparse=lambda text: text.replace('MARK', 'assert True')),
             1)
 
+    def test_attributes_loaded_assertions_to_the_loaded_file(self):
+        with tempfile.TemporaryDirectory() as workdir:
+            main_path = os.path.join(workdir, 'check_main.sage')
+            common_path = os.path.join(workdir, '_common.sage')
+            with open(main_path, 'w') as fh:
+                fh.write('value = 1\n')
+            with open(common_path, 'w') as fh:
+                fh.write('assert True\n')
+            hits = {}
+
+            def hit(source_path):
+                hits[source_path] = hits.get(source_path, 0) + 1
+
+            namespace = {sweep_all_checks.ASSERT_HIT_NAME: hit}
+            exec(sweep_all_checks.instrumented_code(common_path, lambda text: text), namespace)
+            exec(sweep_all_checks.instrumented_code(main_path, lambda text: text), namespace)
+            self.assertEqual(hits.get(os.path.realpath(common_path)), 1)
+            self.assertEqual(hits.get(os.path.realpath(main_path), 0), 0)
+
 
 class AssertionRequiredTest(unittest.TestCase):
     def test_requires_assertions_from_check_files(self):
@@ -198,6 +220,9 @@ class AssertionRequiredTest(unittest.TestCase):
 
     def test_exempts_exploratory_files(self):
         self.assertFalse(sweep_all_checks.assertion_required('dir/explore_support.sage'))
+
+    def test_requires_assertions_from_unknown_file_names(self):
+        self.assertTrue(sweep_all_checks.assertion_required('dir/helper.sage'))
 
 
 class CollectFilesTest(unittest.TestCase):
