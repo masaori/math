@@ -1443,7 +1443,7 @@ S_NT_N
         String.raw`\begin{aligned}
 \exp(O)
 &= \sum_{n=0}^{\infty} \frac{O^n}{n!}
-&&(\because\ \text{exp の定義（行列の場合と、行列への線型写像の場合）})\\
+&&(\because\ \text{exp の定義（行列の場合と、行列への線型写像の場合）。}\blkref{def_exp})\\
 &= \frac{O^0}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
 &&(\because\ \text{収束級数の第 0 項を分ける})\\
 &= \frac{I}{0!} + \sum_{n=1}^{\infty} \frac{O^n}{n!}
@@ -1460,12 +1460,12 @@ S_NT_N
 &&(\because\ \text{零行列は行列の加法の単位元である})
 \end{aligned}`,
       ),
-      paragraph([
-        "引いたブロックは ",
-        ref("def_exp"),
-        " である。",
-      ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-09-03 の式変形統一で、証明末尾の参照一覧を削除し、exp の定義を使う最初の等式行の行末へラベル参照を移した。内容・式変形・根拠は変えていない。",
+      ],
+    },
   },
 ]);
