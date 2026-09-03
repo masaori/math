@@ -144,7 +144,8 @@ class AssertCounter(ast.NodeTransformer):
 # これらを本当に閉じるには記録を worker プロセスの外へ出す必要があり、まだ閉じていない。
 # 守りの費用と、守りを外す案を却下した根拠（2026-09-04 06:12 tick の実測）:
 #   合成コード（bench_namespace_guard.py）では守りは 3.90 倍だが、実際の検算 1 本の上では
-#   1.218 / 1.275 / 1.591 倍だった（bench_guard_on_check.py。assert 24 回の検算でも 1.275 倍なので、
+#   暖機後の両順序の中央値で 1.436 / 1.610 / 1.611 倍だった（bench_guard_on_check.py。
+#   assert 24 回の検算でも 1.610 倍なので、
 #   費用は assert の回数ではなく module 水準の代入の回数に比例するという読みと合う）。
 #   候補だった「記録用の名前を識別子として不正な文字列にして module code の STORE_NAME の
 #   対象から外し、名前空間を素の dict へ戻す」案は却下した。検算は名前を書けなくても

@@ -12,6 +12,8 @@ bench_namespace_guard.py は代入だけを行う合成コードで 3.90 倍と�
 
 どちらも assert の計数は行うので、差は守りの分だけである。assert 件数が一致することを
 確かめ、一致しない場合は測定を失敗とする（計測の対象がずれたまま比だけ出さない）。
+両方を1回ずつ暖機し、「守りあり→素の辞書」と「素の辞書→守りあり」の両順序を
+同数ずつ走らせる。各条件の中央値を比べ、遅延初期化と実行順序の偏りを比へ混ぜない。
 
 使い方: sage -python sagemath/tools/bench_guard_on_check.py <検算ファイル> [繰り返し数]
 """
@@ -19,6 +21,7 @@ bench_namespace_guard.py は代入だけを行う合成コードで 3.90 倍と�
 import importlib.util
 import os
 import secrets
+import statistics
 import sys
 import time
 
@@ -75,28 +78,34 @@ def main():
     sweep = load_sweep()
     sage_base = {k: v for k, v in vars(sage_all).items() if not k.startswith('__')}
 
-    results = {}
+    results = {'GuardedNamespace': [], 'plain dict': []}
     counts = {}
-    for label, guarded in (('GuardedNamespace', True), ('plain dict', False)):
-        best = None
-        for _ in range(repeats):
-            elapsed, hits = run_once(sweep, path, guarded, sage_base)
-            best = elapsed if best is None else min(best, elapsed)
-            counts.setdefault(label, hits)
-            if counts[label] != hits:
-                raise SystemExit('同じ検算で assert 件数が揺れた: {} と {}'.format(
-                    counts[label], hits))
-        results[label] = best
+    modes = (('GuardedNamespace', True), ('plain dict', False))
+
+    # Sage 側の遅延初期化や OS のファイルキャッシュを片方だけが受けないよう、両方を一度ずつ
+    # 計測外で走らせる。その後は各組で順序を反転し、常に片方だけが先になる偏りも除く。
+    for label, guarded in modes:
+        _elapsed, hits = run_once(sweep, path, guarded, sage_base)
+        counts[label] = hits
+    for _ in range(repeats):
+        for ordered_modes in (modes, tuple(reversed(modes))):
+            for label, guarded in ordered_modes:
+                elapsed, hits = run_once(sweep, path, guarded, sage_base)
+                if counts[label] != hits:
+                    raise SystemExit('同じ検算で assert 件数が揺れた: {} と {}'.format(
+                        counts[label], hits))
+                results[label].append(elapsed)
 
     if counts['GuardedNamespace'] != counts['plain dict']:
         raise SystemExit('守りの有無で assert 件数が違う: {}'.format(counts))
 
-    base = results['plain dict']
-    print('{}  assert {} 回  各 {} 回測って速い方'.format(
-        os.path.relpath(path, sweep.check_root()), counts['plain dict'], repeats))
+    medians = {label: statistics.median(times) for label, times in results.items()}
+    base = medians['plain dict']
+    print('{}  assert {} 回  両方を1回ずつ暖機し、各 {} 回の中央値'.format(
+        os.path.relpath(path, sweep.check_root()), counts['plain dict'], 2 * repeats))
     for label in ('plain dict', 'GuardedNamespace'):
         print('  {:<18} {:8.2f} s  ({:.3f} 倍)'.format(
-            label, results[label], results[label] / base))
+            label, medians[label], medians[label] / base))
 
 
 if __name__ == '__main__':

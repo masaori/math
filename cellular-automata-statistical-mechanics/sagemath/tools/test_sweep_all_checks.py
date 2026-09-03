@@ -339,18 +339,27 @@ class AssertionRecorderTest(unittest.TestCase):
         # 削除も拒むので、以後の assert も数え落とさない。
         self.assertEqual(sum(recorder.hits.values()), 2)
 
-    def run_verdict_without_guard(self, source):
+    def run_verdict_without_guard(self, source, recorder_names=None):
         """守りを外し、記録用の名前を素の dict へ置いただけの名前空間で走らせる。"""
         with tempfile.TemporaryDirectory() as workdir:
             path = os.path.join(workdir, 'check_sample.sage')
             with open(path, 'w') as fh:
                 fh.write(source)
-            recorder = sweep_all_checks.AssertionRecorder(
-                'token-for-the-test', os.path.join(workdir, 'failures.log'))
-            namespace = {'__file__': path}
-            namespace.update(recorder.installed)
-            exec(sweep_all_checks.instrumented_code(path, lambda text: text, recorder.token),
-                 namespace)
+            original_names = (sweep_all_checks.ASSERT_HIT_NAME,
+                              sweep_all_checks.ASSERT_FAILURE_NAME)
+            if recorder_names is not None:
+                sweep_all_checks.ASSERT_HIT_NAME = recorder_names[0]
+                sweep_all_checks.ASSERT_FAILURE_NAME = recorder_names[1]
+            try:
+                recorder = sweep_all_checks.AssertionRecorder(
+                    'token-for-the-test', os.path.join(workdir, 'failures.log'))
+                namespace = {'__file__': path}
+                namespace.update(recorder.installed)
+                exec(sweep_all_checks.instrumented_code(
+                    path, lambda text: text, recorder.token), namespace)
+            finally:
+                (sweep_all_checks.ASSERT_HIT_NAME,
+                 sweep_all_checks.ASSERT_FAILURE_NAME) = original_names
             return recorder, recorder.verdict(namespace)
 
     def test_dropping_the_guard_reopens_rebinding_even_for_an_unwritable_name(self):
@@ -359,13 +368,14 @@ class AssertionRecorderTest(unittest.TestCase):
         # 検算は名前を書けなくても globals() を走査して鍵を見つけられるので、
         # 束ね直して元へ戻す書き方は素の dict では素通りする。
         recorder, (recorded, reason) = self.run_verdict_without_guard(
-            'names = [k for k in list(globals()) if k.startswith("__sweep_assert")]\n'
+            'names = [k for k in list(globals()) if k.startswith("__sweep assertion")]\n'
             'saved = {k: globals()[k] for k in names}\n'
             'assert 1 == 1\n'
             'for k in names:\n    globals()[k] = lambda *args: None\n'
             'def check():\n    assert 1 == 2\n'
             'try:\n    check()\nexcept Exception:\n    pass\n'
-            'for k in names:\n    globals()[k] = saved[k]\n')
+            'for k in names:\n    globals()[k] = saved[k]\n',
+            recorder_names=('__sweep assertion hit__', '__sweep assertion failure__'))
         # 偽な assert は起きたのに、記録も残らず判定も通ってしまう（＝守りを外せない理由）。
         self.assertTrue(recorded)
         self.assertEqual(reason, '')
