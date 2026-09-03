@@ -2426,6 +2426,11 @@ z
 &&(\because\ z\cdot z=z^{2})
 \end{aligned}`),
       paragraph([
+        "（第 1 の等号で引いたのは ",
+        ref("sqrt_squared_is_original"),
+        "。）",
+      ]),
+      paragraph([
         math(String.raw`\pi\leq\alpha<2\pi`),
         " の場合。このとき ",
         math(String.raw`2\pi\leq\alpha+\alpha<4\pi`),
@@ -2449,18 +2454,14 @@ z
 &&(\because\ z\cdot z=z^{2})
 \end{aligned}`),
       paragraph([
+        "（第 1 の等号で引いたのは ",
+        ref("sqrt_squared_is_original"),
+        "。）",
+      ]),
+      paragraph([
         "2 つの場合は ",
         math(String.raw`\alpha\in[0,2\pi)`),
         " を尽くしているので、主張を得る。",
-      ]),
-      paragraph([
-        "引いたブロックは ",
-        ref("condition_of_commutativity_of_sqrt_and_product"),
-        "、",
-        ref("sqrt_squared_is_original"),
-        "、",
-        ref("def_abs_arg"),
-        " である。",
       ]),
     ],
     conversion: {
@@ -2476,7 +2477,11 @@ z
           "引く先の「sqrt の2乗は元に戻る」はラベルを持っていなかったので、" +
           "ラベル参照で引けるように sqrt_squared_is_original を与えた。" +
           "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
-          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。" +
+          "式変形の書き方の統一（2026-09-03）。証明末尾の参照一覧を削除し、" +
+          "sqrt_squared_is_original は各式変形の直後へ移した。" +
+          "残る 2 件（可換条件と偏角の定義）は使用箇所の散文で既に引かれている。" +
+          "式変形・根拠・内容は変えていない。",
       ],
     },
   },
