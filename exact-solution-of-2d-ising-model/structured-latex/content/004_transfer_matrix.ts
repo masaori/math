@@ -2737,11 +2737,7 @@ H_2 &= \frac{1}{M} \sum_{j=1}^{M} \hat{Z}_{-j}^{(-)}\, \hat{Y}_j
     proof: [
       paragraph([
         math(String.raw`H_1^{(\pm)}`),
-        " について（以下 ",
-        ref("def_hatZ_hatY"),
-        " の展開と ",
-        ref("exp_sum"),
-        " を用いる）、",
+        " について、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -2750,7 +2746,7 @@ H_2 &= \frac{1}{M} \sum_{j=1}^{M} \hat{Z}_{-j}^{(-)}\, \hat{Y}_j
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}
 \overbrace{\left(\sum_{k_1=1}^M Y_{k_1}\exp\!\left(-i k_1\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j}\,
 \overbrace{\left(\sum_{k_2=1}^M\begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}Z_{k_2}\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\right)}^{\hat{Z}_{-j}^{(\pm)}}\,
-\exp\!\left(-i\frac{2\pi j}{M}\right) &&(\because\ \hat{Y}_j,\ \hat{Z}_{-j}^{(\pm)}\ \text{の定義の展開}) \\
+\exp\!\left(-i\frac{2\pi j}{M}\right) &&(\because\ \hat{Y}_j,\ \hat{Z}_{-j}^{(\pm)}\ \text{の定義 }\blkref{def_hatZ_hatY}\text{ の展開}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \left(Y_{k_1}\exp\!\left(-i k_1\frac{2\pi j}{M}\right)\right)
 \left(\begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}Z_{k_2}\exp\!\left(-i k_2\frac{2\pi(-j)}{M}\right)\right)
@@ -2767,7 +2763,7 @@ H_2 &= \frac{1}{M} \sum_{j=1}^{M} \hat{Z}_{-j}^{(-)}\, \hat{Y}_j
 \left(\sum_{j\in\{1,\dots,M\}}\exp\!\left(-(k_1-k_2+1)\,i\frac{2\pi j}{M}\right)\right)(Y_{k_1}Z_{k_2}) &&(\because\ \text{有限和の順序交換と、}j\text{ に依らない因子を和の外へ出すこと}) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
-M\,\delta^M_{-(k_1-k_2+1),\,0}(Y_{k_1}Z_{k_2}) &&(\because\ \text{exp\_sum}) \\
+M\,\delta^M_{-(k_1-k_2+1),\,0}(Y_{k_1}Z_{k_2}) &&(\because\ \blkref{exp_sum}) \\
 &= \frac{1}{M}\sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ -(k_1-k_2+1)\equiv 0 \pmod{M}}}
 \begin{cases}1 & (k_2\neq 1)\\ \mp 1 & (k_2=1)\end{cases}
 M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) \\
@@ -2809,14 +2805,14 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\,\hat{Y}_j &&(\because\ \text{主張の右辺を書き下したもの}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}
 \overbrace{\left(\sum_{k_1=1}^M\begin{cases}1 & (k_1\neq 1)\\ +1 & (k_1=1)\end{cases}Z_{k_1}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)\right)}^{\hat{Z}_{-j}^{(-)}}\,
-\overbrace{\left(\sum_{k_2=1}^M Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j} &&(\because\ \hat{Z}_{-j}^{(-)},\ \hat{Y}_j\ \text{の定義の展開}) \\
+\overbrace{\left(\sum_{k_2=1}^M Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right)}^{\hat{Y}_j} &&(\because\ \hat{Z}_{-j}^{(-)},\ \hat{Y}_j\ \text{の定義 }\blkref{def_hatZ_hatY}\text{ の展開}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \left(Z_{k_1}\exp\!\left(-i k_1\frac{2\pi(-j)}{M}\right)\right)\left(Y_{k_2}\exp\!\left(-i k_2\frac{2\pi j}{M}\right)\right) &&(\because\ \text{有限和どうしの積は二重和である（分配則）。}k_1=1\ \text{の場合の係数も }+1\text{ である}) \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\sum_{k_1,k_2=1}^M
 \exp\!\left(-i k_1\frac{2\pi(-j)}{M}-i k_2\frac{2\pi j}{M}\right)Z_{k_1}Y_{k_2} &&(\because\ \text{複素数の積の可換性と結合則、および }\exp a\cdot\exp b=\exp(a+b)) \\
 &= \frac{1}{M}\sum_{k_1,k_2=1}^M
 \left(\sum_{j\in\{1,\dots,M\}}\exp\!\left((k_1-k_2)\,i\frac{2\pi j}{M}\right)\right)Z_{k_1}Y_{k_2} &&(\because\ \text{有限和の順序交換と、}j\text{ に依らない因子を和の外へ出すこと}) \\
-&= \frac{1}{M}\sum_{k_1,k_2=1}^M M\,\delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} &&(\because\ \text{exp\_sum}) \\
+&= \frac{1}{M}\sum_{k_1,k_2=1}^M M\,\delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} &&(\because\ \blkref{exp_sum}) \\
 &= \sum_{k_1,k_2=1}^M \delta^M_{(k_1-k_2,\,0)}Z_{k_1}Y_{k_2} &&(\because\ \tfrac{1}{M}\cdot M=1) \\
 &= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1-k_2\equiv 0 \pmod{M}}} Z_{k_1}Y_{k_2} &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) \\
 &= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1=k_2}} Z_{k_1}Y_{k_2} &&(\because\ k_1,k_2\in\{1,\dots,M\}\ \text{では } k_1-k_2\equiv 0 \pmod{M} \text{ と } k_1=k_2 \text{ が同値}) \\
@@ -2836,6 +2832,9 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
           "減った段は無い。主張も証明の筋も変えていない。",
         "2026-09-01 の式変形統一で、二本の鎖に行中の \\quad (\\because …) で置かれていた根拠 22 行を、" +
           "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
+        "2026-09-04 の式変形統一で、証明冒頭の参照の前置き（以下 … を用いる）を削り、" +
+          "定義の展開の行末根拠へ \\blkref{def_hatZ_hatY} を、文字列 exp_sum で書かれていた" +
+          "二箇所の行末根拠へ \\blkref{exp_sum} を置いた。内容・式変形・根拠は変えていない。",
       ],
     },
   },
