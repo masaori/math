@@ -58,14 +58,17 @@
 
 **この tick で新たに出た失敗（未解決。次 tick の先頭で扱う）**: 守りを入れた掃引を 12 worker・
 打ち切り 900 秒で走らせたところ、`composed-neighborhood-closure/check_two_stage_restriction.sage` と
-`composed-neighborhood-closure/check_composed_local_rule_family.sage` の 2 本が `TIMEOUT` になった。
+`composed-neighborhood-closure/check_composed_local_rule_family.sage`、および
+`local-rule-representation/check_inverse_map_minimal_neighborhood.sage` の 3 本が `TIMEOUT` になった
+（掃引は 336/336 本を完走し、worker の終了コードは全て 0、内訳は 333 本 `PASS`・3 本 `TIMEOUT`、
+`assert` は 103,921,034 回だった）。3 本目は前 tick で 552.27 秒（余裕 1.63 倍）だったものが 900 秒を
+超えており、約 1.6 倍以上の減速に当たる。
 直近の tick では全 336 本が `PASS` で、900 秒に対する最小の余裕は 1.63 倍だった。検算の内容は
 一行も変えていないので、原因は**守りが加えた実行時の費用**である疑いが濃い。検算は module 水準の
 script なので、その大域代入のすべてが `GuardedNamespace.__setitem__` を通る。時間切れの確認後に、
 守る名前の判定を `frozenset` の 1 回の検索へ縮めたが、**この短縮の効果は掃引で確認していない**
 （tick の時間内に再掃引が終わらないため）。次 tick は、この 2 本が余裕を持って通るかを実測し、
-通らなければ守りの実装を代入ごとの費用が生じない形へ作り直す。掃引の残り 334 本の内訳は
-333 本 `PASS`・`assert` 103,919,033 回（打ち切り時点で 1 本が未完了）である。
+通らなければ守りの実装を代入ごとの費用が生じない形へ作り直す。掃引そのものは失敗（終了コード 1）である。
 
 数学本文・二章への分類・参照依存・節設計・SageMath 検算コードは一行も変更しておらず、
 新しい定義・定理・証明対象も起票していない。成果整理は全層 `done` で、先頭の未完了層はない。
