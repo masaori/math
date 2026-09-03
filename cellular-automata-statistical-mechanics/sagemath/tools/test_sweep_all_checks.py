@@ -6,6 +6,28 @@ import unittest
 import sweep_all_checks
 
 
+def summarize_records(files, records):
+    with tempfile.TemporaryDirectory() as outdir:
+        result_path = os.path.join(outdir, 'result-0.jsonl')
+        with open(result_path, 'w') as fh:
+            for record in records:
+                fh.write(json.dumps(record) + '\n')
+        return sweep_all_checks.summarize_results(
+            files, outdir, jobs=1, codes=[0], timeout=900)
+
+
+def pass_record(index, relative_path, assertions=1, seconds=1.0):
+    return {
+        'index': index,
+        'file': relative_path,
+        'status': 'PASS',
+        'seconds': seconds,
+        'assertions': assertions,
+        'detail': '',
+        'worker': 0,
+    }
+
+
 class SummarizeResultsTest(unittest.TestCase):
     def summarize_single_record(self, seconds):
         files = [os.path.join(sweep_all_checks.check_root(), 'fake.sage')]
@@ -14,6 +36,7 @@ class SummarizeResultsTest(unittest.TestCase):
             'file': 'fake.sage',
             'status': 'PASS',
             'seconds': seconds,
+            'assertions': 1,
             'detail': '',
             'worker': 0,
         }
@@ -80,6 +103,101 @@ class EmptySweepTest(unittest.TestCase):
             open(os.path.join(outdir, 'result-0.jsonl'), 'w').close()
             self.assertFalse(sweep_all_checks.summarize_results(
                 [], outdir, jobs=1, codes=[0], timeout=900))
+
+
+class ExecutedAssertionTest(unittest.TestCase):
+    """例外を出さずに終わっただけの検算を成功として通さないことを確かめる。"""
+
+    def summarize_one(self, relative_path, **kwargs):
+        files = [os.path.join(sweep_all_checks.check_root(), relative_path)]
+        return summarize_records(files, [pass_record(0, relative_path, **kwargs)])
+
+    def test_accepts_check_that_executed_an_assertion(self):
+        self.assertTrue(self.summarize_one('dir/check_x.sage', assertions=3))
+
+    def test_rejects_check_that_executed_no_assertion(self):
+        self.assertFalse(self.summarize_one('dir/check_x.sage', assertions=0))
+
+    def test_accepts_shared_definition_file_without_assertions(self):
+        self.assertTrue(self.summarize_one('dir/_common.sage', assertions=0))
+
+    def test_accepts_exploratory_file_without_assertions(self):
+        self.assertTrue(self.summarize_one('dir/explore_support.sage', assertions=0))
+
+    def test_rejects_missing_assertion_count(self):
+        files = [os.path.join(sweep_all_checks.check_root(), 'dir/check_x.sage')]
+        record = pass_record(0, 'dir/check_x.sage')
+        del record['assertions']
+        self.assertFalse(summarize_records(files, [record]))
+
+    def test_rejects_boolean_assertion_count(self):
+        self.assertFalse(self.summarize_one('dir/check_x.sage', assertions=True))
+
+    def test_rejects_negative_assertion_count(self):
+        self.assertFalse(self.summarize_one('dir/check_x.sage', assertions=-1))
+
+    def test_rejects_non_integer_assertion_count(self):
+        self.assertFalse(self.summarize_one('dir/check_x.sage', assertions=1.5))
+
+    def test_rejects_vacuous_check_even_when_other_checks_assert(self):
+        files = [
+            os.path.join(sweep_all_checks.check_root(), 'dir/check_x.sage'),
+            os.path.join(sweep_all_checks.check_root(), 'dir/check_y.sage'),
+        ]
+        self.assertFalse(summarize_records(files, [
+            pass_record(0, 'dir/check_x.sage', assertions=100),
+            pass_record(1, 'dir/check_y.sage', assertions=0),
+        ]))
+
+
+class InstrumentedCodeTest(unittest.TestCase):
+    """assert の実行件数が、実際に実行された文だけを数えていることを確かめる。"""
+
+    def run_source(self, source, preparse=lambda text: text):
+        with tempfile.TemporaryDirectory() as workdir:
+            path = os.path.join(workdir, 'check_sample.sage')
+            with open(path, 'w') as fh:
+                fh.write(source)
+            hits = []
+            namespace = {sweep_all_checks.ASSERT_HIT_NAME: lambda: hits.append(1)}
+            exec(sweep_all_checks.instrumented_code(path, preparse), namespace)
+            return len(hits)
+
+    def test_counts_each_executed_assertion(self):
+        self.assertEqual(self.run_source('assert 1 == 1\nassert 2 == 2\n'), 2)
+
+    def test_counts_assertions_executed_in_a_loop(self):
+        self.assertEqual(self.run_source('for i in range(5):\n    assert i >= 0\n'), 5)
+
+    def test_does_not_count_assertions_that_never_run(self):
+        self.assertEqual(
+            self.run_source('def unused():\n    assert False\nassert True\n'), 1)
+
+    def test_counts_nothing_for_a_file_without_assertions(self):
+        self.assertEqual(self.run_source('x = 1\n'), 0)
+
+    def test_failing_assertion_still_raises(self):
+        with self.assertRaises(AssertionError):
+            self.run_source('assert False\n')
+
+    def test_applies_the_given_preparser_before_parsing(self):
+        # Sage の前処理を通してから構文木を書き換えることを、置換で代用して確かめる。
+        self.assertEqual(
+            self.run_source('MARK\n', preparse=lambda text: text.replace('MARK', 'assert True')),
+            1)
+
+
+class AssertionRequiredTest(unittest.TestCase):
+    def test_requires_assertions_from_check_files(self):
+        self.assertTrue(sweep_all_checks.assertion_required('dir/check_x.sage'))
+        self.assertTrue(sweep_all_checks.assertion_required('_dir/check_x.sage'))
+
+    def test_exempts_shared_definition_files(self):
+        self.assertFalse(sweep_all_checks.assertion_required('dir/_common.sage'))
+        self.assertFalse(sweep_all_checks.assertion_required('dir/_prelude.sage'))
+
+    def test_exempts_exploratory_files(self):
+        self.assertFalse(sweep_all_checks.assertion_required('dir/explore_support.sage'))
 
 
 class CollectFilesTest(unittest.TestCase):

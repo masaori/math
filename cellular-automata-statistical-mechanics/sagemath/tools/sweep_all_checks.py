@@ -11,6 +11,7 @@
 #   （driver が同じスクリプトを worker として起動する）
 
 import argparse
+import ast
 import fcntl
 import json
 import math
@@ -79,6 +80,43 @@ def collect_files(root=None):
     return out
 
 
+# 検算の成功判定は「load が例外を出さなかったこと」だけで行われていた。この判定は、
+# 中身が空の検算ファイルや、assert を消してしまった検算ファイルも PASS にする。
+# 掃引は「一本も実行されていない」ことを収集の側では拒否できるようになったが、
+# 「実行はしたが何も確かめていない」ことは拒否できていなかった。
+# そこで .sage を前処理したあとの構文木で assert 文の直前に計数の呼び出しを差し込み、
+# 実際に実行された assert の件数を検算ごとに記録する。件数 0 の検算は PASS にしない。
+ASSERT_HIT_NAME = '__sweep_assert_hit__'
+
+
+class AssertCounter(ast.NodeTransformer):
+    def visit_Assert(self, node):
+        self.generic_visit(node)
+        hit = ast.Expr(value=ast.Call(
+            func=ast.Name(id=ASSERT_HIT_NAME, ctx=ast.Load()),
+            args=[], keywords=[]))
+        return [ast.copy_location(hit, node), node]
+
+
+def instrumented_code(path, preparse):
+    # Sage の load と同じく .sage を前処理してから実行するが、実行前に構文木を書き換える。
+    # 前処理の結果をそのまま exec する経路（sage.repl.load.load の既定）と同じ意味を保つ。
+    with open(path) as fh:
+        source = preparse(fh.read()) + '\n'
+    tree = AssertCounter().visit(ast.parse(source, filename=path))
+    ast.fix_missing_locations(tree)
+    return compile(tree, path, 'exec')
+
+
+def assertion_required(relative_path):
+    # 主張を確かめる検算は `check_` で始まる名前を持つ。掃引はそれ以外の `.sage` も
+    # 1 本として load するため、assert の実行件数 0 を失敗にする対象を名前で限定する。
+    # 対象外は二種類しかない。検算から load される共有定義（`_common.sage` /
+    # `_prelude.sage`）と、まだ主張へ昇格していない探索用（`explore_*.sage`）である。
+    # 免除された本数と名前は毎回印字して、対象外が黙って増えないようにする。
+    return os.path.basename(relative_path).startswith('check_')
+
+
 def next_index(counter_path):
     with open(counter_path, 'r+') as fh:
         fcntl.flock(fh, fcntl.LOCK_EX)
@@ -101,7 +139,7 @@ class Timeout(Exception):
 def worker_main(args):
     import signal
     import sage.all as sage_all
-    from sage.repl.load import load as sage_load
+    from sage.repl.preparse import preparse_file
 
     with open(args.list) as fh:
         files = [line.rstrip('\n') for line in fh if line.strip()]
@@ -123,11 +161,19 @@ def worker_main(args):
         ns['__name__'] = '__sweep__'
         ns['__file__'] = path
 
+        hits = [0]
+
+        def assert_hit():
+            hits[0] += 1
+
+        ns[ASSERT_HIT_NAME] = assert_hit
+
         def scoped_load(*names, **_kw):
             # 検算ファイル内の相対 load を、同じ隔離名前空間へ入れる。
             # 名前空間を指定しないと Sage の利用者名前空間へ入り、定義が検算から見えなくなる。
+            # 読み込んだ側の assert も同じ計数へ入れるため、ここも計数付きで実行する。
             for name in names:
-                sage_load(name, ns)
+                exec(instrumented_code(name, preparse_file), ns)
 
         ns['load'] = scoped_load
 
@@ -138,7 +184,7 @@ def worker_main(args):
         try:
             os.chdir(os.path.dirname(path))
             signal.alarm(args.timeout)
-            sage_load(path, ns)
+            exec(instrumented_code(path, preparse_file), ns)
             signal.alarm(0)
         except Timeout:
             status = 'TIMEOUT'
@@ -155,6 +201,7 @@ def worker_main(args):
             'file': os.path.relpath(path, check_root()),
             'status': status,
             'seconds': round(time.time() - started, 2),
+            'assertions': hits[0],
             'detail': detail,
             'worker': args.worker,
         }
@@ -219,6 +266,14 @@ def summarize_results(files, outdir, jobs, codes, timeout):
             invalid_records.append(record)
             continue
         record['seconds'] = normalized_seconds
+        # 実行された assert の件数を報告しないワーカーは、旧い実装か壊れた実装である。
+        # 件数を読めないまま PASS を受理すると、何も確かめていない検算を通してしまう。
+        assertions = record.get('assertions')
+        if (not isinstance(assertions, int)
+                or isinstance(assertions, bool)
+                or assertions < 0):
+            invalid_records.append(record)
+            continue
         by_index.setdefault(idx, []).append(record)
 
     missing = [idx for idx in range(len(files)) if idx not in by_index]
@@ -227,6 +282,18 @@ def summarize_results(files, outdir, jobs, codes, timeout):
         found[0] for found in by_index.values()
         if len(found) == 1 and found[0]['status'] != 'PASS'
     ]
+    # 例外を出さずに終わっただけの検算を成功と呼ばない。共有定義ファイルだけを除外する。
+    vacuous = [
+        found[0] for found in by_index.values()
+        if (len(found) == 1
+            and found[0]['status'] == 'PASS'
+            and found[0]['assertions'] == 0
+            and assertion_required(found[0]['file']))
+    ]
+    exempt = sorted(
+        found[0]['file'] for found in by_index.values()
+        if len(found) == 1 and not assertion_required(found[0]['file'])
+    )
     counts = {}
     for record in records:
         status = record.get('status')
@@ -236,6 +303,10 @@ def summarize_results(files, outdir, jobs, codes, timeout):
 
     print('status counts: {}'.format(counts), flush=True)
     print('completed unique files: {}/{}'.format(len(by_index), len(files)), flush=True)
+    print('assertion-exempt files ({}): {}'.format(
+        len(exempt), ', '.join(exempt)), flush=True)
+    print('executed assertions: {}'.format(sum(
+        found[0]['assertions'] for found in by_index.values() if len(found) == 1)), flush=True)
 
     # 打ち切り時間に対する余裕を毎回残す。余裕が小さい検算は、機械の負荷が上がった回だけ
     # TIMEOUT になり、掃引の結果が回ごとに揺れる。揺れを検算の失敗と読み違えないため、
@@ -253,6 +324,8 @@ def summarize_results(files, outdir, jobs, codes, timeout):
     for record in sorted(non_pass, key=lambda item: item['index']):
         print('{}: {} ({})'.format(
             record['status'], record['file'], record.get('detail', '')), flush=True)
+    for record in sorted(vacuous, key=lambda item: item['index']):
+        print('NO ASSERTION EXECUTED: {}'.format(record['file']), flush=True)
     for message in malformed:
         print('MALFORMED: {}'.format(message), flush=True)
     for record in invalid_records:
@@ -270,6 +343,7 @@ def summarize_results(files, outdir, jobs, codes, timeout):
         or bool(missing)
         or bool(duplicates)
         or bool(non_pass)
+        or bool(vacuous)
     )
 
 
