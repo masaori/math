@@ -3,7 +3,9 @@ set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 REPO_DIR="$(cd "$PROJECT_DIR/.." && pwd -P)"
-LOOP_WORKTREE="/Users/masaori/git/masaori/math-complex-matrix-ising-paper-loop"
+# 起動口が用意した専用 worktree の正規配置。所有リポジトリ配下に置くことで、
+# パスだけでどのリポジトリの何のための worktree かが分かる。
+LOOP_WORKTREE="$HOME/git/masaori/math/.codex/worktrees/tick/math-complex-matrix-ising-paper-organization-loop"
 LOOP_BRANCH="goal/complex-matrix-ising-paper-organization-loop"
 LOG_DIR="$HOME/Library/Logs/math-complex-matrix-ising-paper-organization"
 LOG_FILE="$LOG_DIR/tick.log"

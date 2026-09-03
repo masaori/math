@@ -24,7 +24,6 @@ if [ -f "$SCRIPT_DIR/../docs/tasks/auto-loop-paused.md" ]; then
 fi
 
 # このループ専用の作業ツリーと、その中のプロジェクト。
-LOOP_WORKTREE="$HOME/git/masaori/math-ising-3d-cut-loop"
 LOOP_BRANCH="ising-3d-cut-loop"
 PROJECT_NAME="countable-core-of-3d-ising"
 
@@ -37,6 +36,10 @@ if [ -n "$GIT_COMMON_DIR" ]; then
 else
   MAIN_REPO_DIR="$HOME/git/masaori/math"
 fi
+
+# 起動口が用意した専用 worktree をそのまま使う。ここから別の worktree を作ると、
+# パスから所有リポジトリを読めない置き場所へ成果が残り、tick ごとに worktree が 2 つできる。
+LOOP_WORKTREE="$MAIN_REPO_DIR/.codex/worktrees/tick/ising-3d-cut-auto-loop"
 
 # ログとロックはリポジトリの外に置く。作業ツリーはこのスクリプト自身が作ったり origin/main へ
 # 合わせ直したりするので、その中にログを置くと「まだ無い」「消える」が起きる。

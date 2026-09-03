@@ -4,7 +4,6 @@
 set -euo pipefail
 
 PROJECT_NAME="finite-graph-ising-partition-polynomial-and-fisher-zeros"
-LOOP_WORKTREE="$HOME/git/masaori/math-finite-graph-ising-loop"
 LOOP_BRANCH="finite-graph-ising-loop"
 LOG_DIR="$HOME/Library/Logs/finite-graph-ising-auto-loop"
 LOG_FILE="$LOG_DIR/auto-loop.log"
@@ -29,6 +28,10 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
   log "SKIP: 前の tick が動作中"
   exit 0
 fi
+
+# 起動口が用意した専用 worktree をそのまま使う。ここから別の worktree を作ると、
+# パスから所有リポジトリを読めない置き場所へ成果が残り、tick ごとに worktree が 2 つできる。
+LOOP_WORKTREE="$MAIN_REPO_DIR/.codex/worktrees/tick/finite-graph-ising-auto-loop"
 trap 'rmdir "$LOCK_DIR" 2>/dev/null || true' EXIT
 
 if ! command -v codex >/dev/null 2>&1; then
