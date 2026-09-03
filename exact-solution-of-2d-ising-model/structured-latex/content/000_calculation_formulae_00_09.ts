@@ -580,10 +580,14 @@ y^2
         " かつ ",
         math(String.raw`s>1+x`),
         " と仮定すると、",
-        math(String.raw`1+x>1>0`),
-        " より ",
-        math(String.raw`s>1`),
-        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s>1+x\ \land\ 1+x>1
+&\Longrightarrow s>1
+&&(\because\ \mathbb{R}\ \text{の順序の推移律。}\ 1+x>1\ \text{は}\ x>0\ \text{による})
+\end{aligned}`),
+      paragraph([
+        "であり、",
       ]),
       displayMath(String.raw`\begin{aligned}
 s^2
@@ -636,10 +640,18 @@ s^2
           " より ",
           math(String.raw`\varepsilon>0`),
           "）。",
-          math(String.raw`0<\varepsilon\le 1`),
-          " より ",
-        math(String.raw`\varepsilon^2\le\varepsilon`),
-        " であるから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon^2
+&= \varepsilon\cdot\varepsilon
+&&(\because\ \text{2 乗の定義})\\
+&\le 1\cdot\varepsilon
+&&(\because\ \varepsilon\le 1,\ \varepsilon>0\text{、順序体の乗法の単調性})\\
+&= \varepsilon
+&&(\because\ 1\ \text{は乗法の単位元})
+\end{aligned}`),
+      paragraph([
+        "であるから",
       ]),
       displayMath(
         String.raw`\begin{aligned}
