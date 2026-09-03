@@ -428,33 +428,19 @@ u
    \quad (\because \text{(2)})
 \end{aligned}`,
       ),
-      paragraph([
-        "ここで ",
-        math(String.raw`\langle A,B\rangle=u`),
-        "、",
-        math(String.raw`\langle B,A\rangle=\overline{u}`),
-        "（(1)）、",
-        math(String.raw`\langle B,B\rangle=\left(\|B\|^2\right)_{\mathbb{C}}`),
-        "（(3)）、",
-        math(String.raw`\overline{t}=u/\left(\|B\|^2\right)_{\mathbb{C}}`),
-        "（Step 0 と ",
-        math(String.raw`\overline{\left(\|B\|^2\right)_{\mathbb{C}}}=\left(\|B\|^2\right)_{\mathbb{C}}`),
-        "）であるから、",
-        math(String.raw`\overline{u}u=\left(|u|^2\right)_{\mathbb{C}}`),
-        "（Step 0）を使って",
-      ]),
+      paragraph(["三つの積の項を順に計算すると"]),
       displayMath(
         String.raw`\begin{aligned}
 -t\langle A,B\rangle
 &= -\frac{\overline{u}\,u}{\left(\|B\|^2\right)_{\mathbb{C}}}
-   \quad (\because t \text{ の定義と } \langle A,B\rangle=u \text{ の代入}) \\
+   \quad (\because t \text{ の定義と、} u \text{ の定義 } \langle A,B\rangle=u \text{ の代入}) \\
 &= -\frac{\left(|u|^2\right)_{\mathbb{C}}}{\left(\|B\|^2\right)_{\mathbb{C}}}
    \quad (\because \text{Step 0 の } \overline{u}u=\left(|u|^2\right)_{\mathbb{C}}) \\
 &= -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
    \quad (\because \iota_{\mathbb{R}\to\mathbb{C}} \text{ が積と逆元を保つこと}) \\
 -\overline{t}\langle B,A\rangle
 &= -\frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}}
-   \quad (\because \overline{t}=u/\left(\|B\|^2\right)_{\mathbb{C}} \text{ と } \langle B,A\rangle=\overline{u} \text{ の代入}) \\
+   \quad (\because \text{Step 0 と } \overline{\left(\|B\|^2\right)_{\mathbb{C}}}=\left(\|B\|^2\right)_{\mathbb{C}} \text{ による } \overline{t}=u/\left(\|B\|^2\right)_{\mathbb{C}} \text{ と、(1) の } \langle B,A\rangle=\overline{u} \text{ の代入}) \\
 &= -\frac{\left(|u|^2\right)_{\mathbb{C}}}{\left(\|B\|^2\right)_{\mathbb{C}}}
    \quad (\because \text{Step 0 の } \overline{u}u=\left(|u|^2\right)_{\mathbb{C}} \text{ と } \mathbb{C} \text{ の乗法の可換性}) \\
 &= -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
@@ -462,7 +448,7 @@ u
 \overline{t}\,t\,\langle B,B\rangle
 &= \frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}\left(\|B\|^2\right)_{\mathbb{C}}}
    \cdot\left(\|B\|^2\right)_{\mathbb{C}}
-   \quad (\because \overline{t},\ t \text{ の定義と } \langle B,B\rangle=\left(\|B\|^2\right)_{\mathbb{C}} \text{ の代入}) \\
+   \quad (\because \overline{t},\ t \text{ の定義と、(3) の } \langle B,B\rangle=\left(\|B\|^2\right)_{\mathbb{C}} \text{ の代入}) \\
 &= \frac{u\,\overline{u}}{\left(\|B\|^2\right)_{\mathbb{C}}}
    \quad (\because \left(\|B\|^2\right)_{\mathbb{C}}\ne 0_{\mathbb{C}} \text{ による約分}) \\
 &= \frac{\left(|u|^2\right)_{\mathbb{C}}}{\left(\|B\|^2\right)_{\mathbb{C}}}
@@ -479,7 +465,7 @@ u
    -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
    -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
    +\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
-   \quad (\because \text{直前の三つの計算を展開式へ代入}) \\
+   \quad (\because \text{(3) の } \langle A,A\rangle=\left(\|A\|^2\right)_{\mathbb{C}} \text{ と直前の三つの計算を展開式へ代入}) \\
 &= \left(\|A\|^2\right)_{\mathbb{C}}
    -\left(\frac{|u|^2}{\|B\|^2}\right)_{\mathbb{C}}
    \quad (\because \mathbb{C} \text{ の加法の結合律と加法逆元}) \\
@@ -630,6 +616,9 @@ u+\overline{u}
           "（labels: def_frobenius_inner_product）を定義した以上、それが Hermite 内積の公理を" +
           "満たすこと、および Cauchy--Schwarz からノルムの三角不等式が導かれることを" +
           "明示的に証明しておく必要があるため追加した。",
+        "2026-09-04 の式変形統一で、Step 5 場合 2 の三つの積の項の計算の前に散文でまとめて" +
+          "いた代入根拠（(1) の ⟨B,A⟩=ū、(3) の ⟨B,B⟩・⟨A,A⟩、Step 0 による t̄ の表示）を、" +
+          "それぞれを使う式変形行の行末の (∵ …) へ移した。内容・式変形・根拠は変えていない。",
       ],
     },
   },
