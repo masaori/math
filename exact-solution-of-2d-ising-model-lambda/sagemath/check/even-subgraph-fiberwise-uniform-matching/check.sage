@@ -63,6 +63,7 @@ pairs_checked = 0
 pairs_flipping = 0
 first_uncovered_fiber = None
 first_unmatched_fiber = None
+uncovered_fibers = []
 for (doubled, single), fiber in sorted(all_fibers.items()):
     translations = sorted(
         (subset for subset in selection_subsets
@@ -109,8 +110,10 @@ for (doubled, single), fiber in sorted(all_fibers.items()):
             break
     if covering_found:
         fibers_with_uniform_cover += 1
-    elif first_uncovered_fiber is None:
-        first_uncovered_fiber = (doubled, single)
+    else:
+        uncovered_fibers.append((doubled, single))
+        if first_uncovered_fiber is None:
+            first_uncovered_fiber = (doubled, single)
     if matching_found:
         fibers_with_uniform_matching += 1
     elif covering_found and first_unmatched_fiber is None:
@@ -121,6 +124,7 @@ assert pairs_checked == 9088
 assert pairs_flipping == 7872
 assert fibers_with_uniform_cover == 48
 assert fibers_with_uniform_matching == 48
+assert len(uncovered_fibers) == 16
 assert first_uncovered_fiber is not None
 assert first_unmatched_fiber is None
 print(f"checked nontrivial-character fibers: {fibers_checked}")

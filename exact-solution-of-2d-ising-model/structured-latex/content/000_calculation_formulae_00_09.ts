@@ -685,12 +685,15 @@ s^2
         "(b) ",
         math(String.raw`y^2>x`),
         " と仮定する。",
-          math(String.raw`x>0`),
-          " より ",
-          math(String.raw`y^2>0`),
-          " すなわち ",
-          math(String.raw`y>0`),
-          "。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y^2>x\ \land\ x>0
+&\Longrightarrow y^2>0
+&&(\because\ \mathbb{R}\ \text{の順序の推移律})\\
+&\Longrightarrow y>0
+&&(\because\ y\ge0\ \text{と正実数の二乗の単射性})
+\end{aligned}`),
+      paragraph([
           math(String.raw`\delta:=\dfrac{y^2-x}{2y}\in\mathbb{R}_{>0}`),
           " とおくと ",
           math(String.raw`\delta>0`),
