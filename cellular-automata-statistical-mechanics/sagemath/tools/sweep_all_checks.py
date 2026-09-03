@@ -108,7 +108,11 @@ def instrumented_code(path, preparse):
         source = preparse(fh.read()) + '\n'
     tree = AssertCounter(path).visit(ast.parse(source, filename=path))
     ast.fix_missing_locations(tree)
-    return compile(tree, path, 'exec')
+    # optimize=0 を明示する。既定の -1 は起動した python の最適化水準を引き継ぐため、
+    # 環境変数 PYTHONOPTIMIZE や -O のもとでは assert 文だけが実体を失う。差し込んだ
+    # 計数の呼び出しは通常の式なので残り、件数は正のまま一つも検査されない掃引が
+    # 全件 PASS になる。件数を成功判定に使う以上、assert が実行されることを固定する。
+    return compile(tree, path, 'exec', dont_inherit=True, optimize=0)
 
 
 def assertion_required(relative_path):

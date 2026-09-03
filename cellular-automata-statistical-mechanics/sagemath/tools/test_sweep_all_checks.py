@@ -1,5 +1,7 @@
 import json
 import os
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -188,6 +190,34 @@ class InstrumentedCodeTest(unittest.TestCase):
         self.assertEqual(
             self.run_source('MARK\n', preparse=lambda text: text.replace('MARK', 'assert True')),
             1)
+
+    def test_keeps_assertions_active_under_python_optimize(self):
+        # 起動した python が -O / PYTHONOPTIMIZE のとき、既定の compile は assert 文を
+        # 取り除く。差し込んだ計数の呼び出しは残るので、件数が正のまま何も検査しない掃引が
+        # 全件 PASS になる。掃引の worker は driver の環境をそのまま引き継ぐため、
+        # 最適化水準に依存せず assert が実行されることを別プロセスで固定する。
+        with tempfile.TemporaryDirectory() as workdir:
+            path = os.path.join(workdir, 'check_sample.sage')
+            with open(path, 'w') as fh:
+                fh.write('assert False\n')
+            program = (
+                'import sys\n'
+                'sys.path.insert(0, {tools!r})\n'
+                'import sweep_all_checks\n'
+                'namespace = {{sweep_all_checks.ASSERT_HIT_NAME: lambda source_path: None}}\n'
+                'try:\n'
+                '    exec(sweep_all_checks.instrumented_code({path!r}, lambda text: text),'
+                ' namespace)\n'
+                'except AssertionError:\n'
+                '    print("RAISED")\n'
+                'else:\n'
+                '    print("NOT RAISED")\n'
+            ).format(tools=os.path.dirname(os.path.abspath(sweep_all_checks.__file__)),
+                     path=path)
+            completed = subprocess.run(
+                [sys.executable, '-O', '-c', program],
+                capture_output=True, text=True, check=True)
+            self.assertEqual(completed.stdout.strip(), 'RAISED')
 
     def test_attributes_loaded_assertions_to_the_loaded_file(self):
         with tempfile.TemporaryDirectory() as workdir:
