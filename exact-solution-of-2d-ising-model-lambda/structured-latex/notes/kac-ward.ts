@@ -696,4 +696,28 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_kac_ward_claim_selection_even_subgraph_action_character_cut_location",
+    targets: [
+      "claim_selection_even_subgraph_action_character",
+      "claim_selection_sum_character_evaluation",
+    ],
+    title: { text: "二候補の大部分は切断・接合する頂点の位置で区別できる（一辺二の全数観察）" },
+    body: [
+      paragraph([
+        "単一の偶部分グラフでは覆えない一辺 ", math(String.raw`L=2`), " の ",
+        math(String.raw`16`), " ファイバーで、候補を二本持つ ", math(String.raw`1{,}984`),
+        " 置換の二候補を、変更頂点・変更到着辺・変更後続の順に比較した",
+        "（sagemath/check/even-subgraph-orbit-cut-location）。変更頂点集合が異なるものは ",
+        math(String.raw`1{,}792`), " 個であり、粗い軌道形では区別できなかった候補を含む大部分は、",
+        "切断・接合する頂点の位置まで見れば区別できる。残る ", math(String.raw`192`),
+        " 個では、変更する向き付き到着辺の集合、基底辺の多重集合、元の動く向き付き辺集合へ",
+        "引き戻した変更後続の対応まで二候補で全て一致した。従ってこの比較で捉える局所操作としては",
+        "二候補を区別できず、像側の向きを元側へ戻す前にだけ違いが残る。",
+        "次は、位置が異なる二候補から平行移動や回転に依存せず一方を選び、その選択が候補辺の",
+        "両端で一致する規則を調べる。検算は有限集合と有限写像の等号だけで完結し、",
+        "浮動小数点は使わない。",
+      ]),
+    ],
+  },
 ]);
