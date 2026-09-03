@@ -124,6 +124,45 @@ assert fixed_both_count == 0
 assert translated_uncovered == uncovered_set
 assert len(orbit_representatives) == 4
 
+covariant_phase_edge_set_count = 0
+translated_phase_edges_valid_count = 0
+translated_phase_edges_missing_count = 0
+first_covariance_failure = None
+for fiber_key in uncovered:
+    for a, b in nontrivial_translations:
+        translated_fiber_key = translate_fiber_key(a, b, fiber_key)
+        translated_edges = {
+            (permutation_key(translate_permutation(a, b, permutation_from_key(source_key))),
+             permutation_key(translate_permutation(a, b, permutation_from_key(target_key))))
+            for source_key, target_key in phase_edges_by_fiber[fiber_key]
+        }
+        destination_edges = phase_edges_by_fiber[translated_fiber_key]
+        for source_key, target_key in translated_edges:
+            source = permutation_from_key(source_key)
+            target = permutation_from_key(target_key)
+            assert doubled_and_single_sets(source) == translated_fiber_key
+            assert doubled_and_single_sets(target) == translated_fiber_key
+            assert all(
+                phase_contribution(target, spin_a, spin_b)
+                == -phase_contribution(source, spin_a, spin_b)
+                for spin_a in (0, 1) for spin_b in (0, 1)
+            )
+            translated_phase_edges_valid_count += 1
+        missing_count = len(translated_edges - destination_edges)
+        translated_phase_edges_missing_count += missing_count
+        if translated_edges == destination_edges:
+            covariant_phase_edge_set_count += 1
+        elif first_covariance_failure is None:
+            first_covariance_failure = (
+                fiber_key, (a, b), translated_fiber_key,
+                len(translated_edges), len(destination_edges), missing_count,
+            )
+
+assert translated_phase_edges_valid_count > 0
+assert translated_phase_edges_missing_count > 0
+assert covariant_phase_edge_set_count < len(uncovered) * len(nontrivial_translations)
+assert first_covariance_failure is not None
+
 print(f"fiber-stabilizing nontrivial translations: {fiber_stabilizer_count}")
 print(f"  of which preserve the phase-edge set: {phase_edge_set_preserved_count}")
 print(f"two-candidate sources: {two_candidate_count}")
@@ -132,4 +171,10 @@ print(f"  where some stabilizer swaps the two candidates: {swapped_count}")
 print(f"  where some stabilizer fixes both candidates: {fixed_both_count}")
 print(f"uncovered fibers closed under translation: {translated_uncovered == uncovered_set}")
 print(f"translation orbits of uncovered fibers: {len(orbit_representatives)}")
+print(f"covariant phase-edge sets: {covariant_phase_edge_set_count} / "
+      f"{len(uncovered) * len(nontrivial_translations)}")
+print(f"translated phase edges checked as valid: {translated_phase_edges_valid_count}")
+print(f"translated valid edges absent from the recorded destination set: "
+      f"{translated_phase_edges_missing_count}")
+print(f"first covariance failure: {first_covariance_failure}")
 print("PASS: even-subgraph-orbit-translation-stabilizer")
