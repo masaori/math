@@ -258,16 +258,22 @@ export default defineBlocks([
 &&(\because\ \text{約分})
 \end{aligned}`,
       ),
-      paragraph([
-        math(String.raw`\exp(-x) > 0`),
-        " かつ ",
-        math(String.raw`\exp(x) > 0`),
-        " なので、この 2 式から ",
-        math(String.raw`\cosh x - \sinh x > 0`),
-        " すなわち ",
-        math(String.raw`\cosh x > \sinh x`),
-        " が出る。また",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh x - \sinh x
+&= \exp(-x)
+&&(\because\ \text{上の第 1 式})\\
+&> 0
+&&(\because\ \exp\ \text{の正値性})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh x - \sinh x > 0
+&\Longrightarrow \cosh x > \sinh x
+&&(\because\ \text{両辺に}\ \sinh x\ \text{を加える})
+\end{aligned}`,
+      ),
       displayMath(
         String.raw`\begin{aligned}
 2\cosh x
@@ -279,13 +285,13 @@ export default defineBlocks([
 &&(\because\ \exp\ \text{の正値性})
 \end{aligned}`,
       ),
-      paragraph([
-        "であり、両辺を ",
-        math(String.raw`2 > 0`),
-        " で割って ",
-        math(String.raw`\cosh x > 0`),
-        " を得る。",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+2\cosh x > 0
+&\Longrightarrow \cosh x > 0
+&&(\because\ \text{両辺を}\ 2 > 0\ \text{で割る})
+\end{aligned}`,
+      ),
       paragraph(["(2) の証明。"]),
       displayMath(
         String.raw`\begin{aligned}
