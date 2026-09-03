@@ -1995,7 +1995,8 @@ R^2
         ref("matrix_norm_triangle_inequality"),
         " の Step 0 より",
       ]),
-      displayMath(String.raw`\|AB\|\le\|A\|\cdot\|B\|`),
+      displayMath(String.raw`\|AB\|\le\|A\|\cdot\|B\|
+\qquad(\because\ \text{Step 0 を Step 3 の平方の不等式へ適用})`),
     ],
     conversion: {
       status: "converted",
@@ -2012,6 +2013,9 @@ R^2
           "それぞれの行末に (∵ …) を付けた。式・段数・主張・証明の筋は変えていない。",
         "2026-09-02 の式変形統一で、四本の鎖の根拠 14 行を行中の \\quad (\\because …) から" +
           "行末の根拠列（aligned の &&）へ揃えた。式変形・根拠・段数・参照は変えていない。",
+        "2026-09-04: 式変形の書き方の統一。Step 4 の結論式の根拠が直前の散文だけに" +
+          "置かれていたので、式の行末へ Step 0 と Step 3 の平方の不等式を明記した。" +
+          "内容・式変形・根拠は変えていない。",
         "原文の proof は TODO のみ。ここで証明を与えた。" +
           "原文にはノルムの定義そのものが無かったため、Frobenius ノルムを定義するブロック" +
           "（labels: def_matrix_norm）とその基本性質のブロック（labels: matrix_norm_triangle_inequality）を" +

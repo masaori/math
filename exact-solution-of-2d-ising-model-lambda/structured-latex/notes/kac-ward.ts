@@ -1272,6 +1272,27 @@ export default defineNotes([
         "等号 assert した。これで平方恒等式の層別項のうち非自明文字の添字は一般の",
         "辺長で両側とも零になり、残るのは自明文字の添字の同定である。",
       ]),
+      paragraph([
+        "自明文字で選択集合が非空な添字では、選択和の絶対値をさらに有限グラフの",
+        "巡回階数まで具体化できる。", math(String.raw`E`), " の非孤立頂点集合を ",
+        math(String.raw`V(E)`), "、非空連結成分数を ", math(String.raw`c(E)`),
+        " とすると、", math(String.raw`E`), " に含まれる偶部分グラフは ",
+        math(String.raw`\mathbb F_2`), " 巡回空間なので",
+      ]),
+      displayMath(String.raw`\left|\mathcal U^{a,b}_L(D,E)\right|
+=2^{\lvert E\rvert-\lvert V(E)\rvert+c(E)}`),
+      paragraph([
+        "となる。一般のファイバー等式で同定すべき置換側の位相和も、同じ符号と",
+        "絶対値を持つ必要がある。一辺二では選択集合が非空で文字が自明な ",
+        math(String.raw`369`), " ファイバー、四ねじれを含む ",
+        math(String.raw`1{,}476`), " 件についてこの値を直接検査した",
+        "（sagemath/check/trivial-character-fiber-magnitude）。巡回階数 ",
+        math(String.raw`0,1,2,5`),
+        " のファイバーはそれぞれ ", math(String.raw`32,320,16,1`),
+        " 個で、絶対値は ", math(String.raw`1,2,4,32`),
+        " だった。これは一般証明ではなく、次に置換側で構成すべき符号付き数え上げの",
+        "値を固定する有限観察である。",
+      ]),
     ],
   },
 ]);
