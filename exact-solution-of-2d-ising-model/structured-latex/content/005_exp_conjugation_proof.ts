@@ -1723,31 +1723,24 @@ X(-X)
         String.raw`\begin{aligned}
 \exp(X)\exp(-X)
 &= \exp\!\left(X+(-X)\right)
-   &&(\because\ \text{可換な 2 つの行列の指数の積}\ \text{と、直前に示した}\ X(-X)=(-X)X) \\
+   &&(\because\ \text{可換な 2 つの行列の指数の積}\ \blkref{theorem_exp_product}\ \text{と、直前に示した}\ X(-X)=(-X)X) \\
 &= \exp(O)
    &&(\because\ \text{行列の加法についての逆元}\ X+(-X)=O) \\
 &= I
-   &&(\because\ \text{零行列の指数は単位行列であること})
+   &&(\because\ \text{零行列の指数は単位行列であること}\ \blkref{theorem_exp_zero})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \exp(-X)\exp(X)
 &= \exp\!\left((-X)+X\right)
-   &&(\because\ \text{可換な 2 つの行列の指数の積}\ \text{と、直前に示した}\ (-X)X=X(-X)) \\
+   &&(\because\ \text{可換な 2 つの行列の指数の積}\ \blkref{theorem_exp_product}\ \text{と、直前に示した}\ (-X)X=X(-X)) \\
 &= \exp(O)
    &&(\because\ \text{行列の加法についての逆元}\ (-X)+X=O) \\
 &= I
-   &&(\because\ \text{零行列の指数は単位行列であること})
+   &&(\because\ \text{零行列の指数は単位行列であること}\ \blkref{theorem_exp_zero})
 \end{aligned}`,
       ),
-      paragraph([
-        "（上の 2 つの式変形で引いたのは ",
-        ref("theorem_exp_product"),
-        " と ",
-        ref("theorem_exp_zero"),
-        "。）",
-      ]),
       paragraph([
         "2 つの積がどちらも ",
         math(String.raw`I`),
@@ -1765,14 +1758,9 @@ X(-X)
 &= \exp(X)\,Y\,\exp(-X)
    &&(\because\ \text{直前に示した}\ \exp(X)^{-1}=\exp(-X)) \\
 &= \exp(\mathrm{ad}_X)(Y)
-   &&(\because\ \text{Step 6 で示した (2)})
+   &&(\because\ \text{Step 6 で示した (2)。}\ \mathrm{ad}_X\ \text{の定義は}\ \blkref{def_ad_X_matrix})
 \end{aligned}`,
       ),
-      paragraph([
-        "（この式変形で引いたのは ",
-        ref("def_ad_X_matrix"),
-        "。）",
-      ]),
     ],
     conversion: {
       status: "added",
@@ -1785,6 +1773,7 @@ X(-X)
           "labels: real_exp_series_converges / matrix_exp_series_converges / exp_converges / def_exp（指数級数とその定義）、" +
           "labels: theorem_exp_product / theorem_exp_zero（可逆性）を使って完全に証明できるので、" +
           "Lie 群論を経由せずここで証明した。",
+        "2026-09-04 の式変形統一で、指数の積・零行列の指数・ad_X の定義への後置き参照を削り、それぞれを使う行末の (∵ …) へ \\blkref を移した。内容・式変形・根拠は変えていない。",
       ],
     },
   },
