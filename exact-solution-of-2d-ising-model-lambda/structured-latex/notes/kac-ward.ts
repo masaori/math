@@ -908,7 +908,7 @@ export default defineNotes([
         "一般の辺長へ規則を延長することはできない。次は固定鍵の候補グラフを直接調べる。",
       ]),
       paragraph([
-        "固定部分群が非自明な鍵の候補グラフには、固定部分群不変な完全マッチングが無い",
+        "固定部分群が非自明で一様被覆検査の対象になる鍵の候補グラフには、固定部分群不変な完全マッチングが無い",
         "（sagemath/check/translation-fixed-fiber-invariant-matching）。一辺 ",
         math(String.raw`L=2`), " で固定部分群が非自明な鍵は ", math(String.raw`89`),
         " 個あり、うち ", math(String.raw`81`),
