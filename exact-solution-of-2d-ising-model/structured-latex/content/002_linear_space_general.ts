@@ -2482,12 +2482,11 @@ z_N-z_M&=(x_N-x_M,\ y_N-y_M)
 &= \|(A_N - A)B\|
 &&(\because\ \text{行列の積の右分配則})\\
 &\leq \|A_N - A\| \cdot \|B\|
-&&(\because\ \text{行列ノルムの劣乗法性})\\
+&&(\because\ \text{行列ノルムの劣乗法性。}\blkref{matrix_norm_submultiplicativity})\\
 &\to 0
 &&(\because\ \|A_N - A\| \to 0\ \text{と、収束する実数列に定数を掛けた列の極限})
 \end{aligned}`,
       ),
-      paragraph(["（", ref("matrix_norm_submultiplicativity"), " を使用）"]),
     ],
     conversion: {
       status: "converted",
@@ -2497,6 +2496,8 @@ z_N-z_M&=(x_N-x_M,\ y_N-y_M)
           "1 つだけ置かれていた。各行の末尾に (∵ …) を置いた（右分配則・劣乗法性・" +
           "収束する実数列に定数を掛けた列の極限が別々の根拠であることが、これで式の上に現れる）。" +
           "段は増えておらず減ってもおらず、主張も証明の筋も変えていない。",
+        "2026-09-03 の式変形統一で、証明末尾の参照一覧を削除し、行列ノルムの劣乗法性を" +
+          "使う不等式行の行末へラベル参照を移した。内容・式変形・根拠は変えていない。",
       ],
     },
   },
