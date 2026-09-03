@@ -2170,14 +2170,16 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{実数の分配則})
 \end{aligned}`),
       paragraph([
-        "また ",
-        math(String.raw`0\leq\theta_1-2n_1\pi<2\pi`),
-        " と ",
-        math(String.raw`0\leq\theta_2-2n_2\pi<2\pi`),
-        " を足して ",
-        math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<4\pi`),
-        " であるから、ここで場合を 2 つに分ける。",
+        "また、",
       ]),
+      displayMath(String.raw`\begin{aligned}
+&0\leq\theta_1-2n_1\pi<2\pi,\qquad 0\leq\theta_2-2n_2\pi<2\pi\\
+\Longrightarrow\ &0\leq(\theta_1-2n_1\pi)+(\theta_2-2n_2\pi)<4\pi
+&&(\because\ \text{二つの不等式の辺々を加えた})\\
+\Longrightarrow\ &0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<4\pi
+&&(\because\ \mathbb{R}\ \text{の加法の交換則・結合則と分配則})
+\end{aligned}`),
+      paragraph(["であるから、ここで場合を 2 つに分ける。"]),
       paragraph([
         math(String.raw`0\leq\theta_1+\theta_2-2(n_1+n_2)\pi<2\pi`),
         " の場合。左辺に現れる角は",
@@ -2259,6 +2261,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     conversion: {
       status: "converted",
       notes: [
+        "式変形の書き方の統一（2026-09-03）: 二つの角度切断の不等式を足して場合分けの範囲を得る操作を、散文から二段の含意の鎖へ開いた。内容・根拠・参照は変えていない。",
         "式変形を一続きにし、根拠を行末の (∵ …) へ移した。原文は 2 つの長い式変形の間と " +
           "場合分けの間に日本語の説明が挟まっており、各行の根拠（φ_polar が積を保つこと・" +
           "極座標表現の演算・pr_1 と pr_2 の適用・φ_cartesian の定義・三角関数の加法定理・" +
