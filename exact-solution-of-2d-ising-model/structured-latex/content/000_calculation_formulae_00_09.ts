@@ -766,11 +766,6 @@ y^2>x\ \land\ x>0
         math(String.raw`y\in\mathbb{R}_{\ge 0}`),
         " なので存在が示された。一意性と合わせて主張を得る。",
       ]),
-      paragraph([
-        "引いたブロック: ",
-        ref("cosh_sinh_basic_properties"),
-        "。",
-      ]),
     ],
     conversion: {
       status: "added",
