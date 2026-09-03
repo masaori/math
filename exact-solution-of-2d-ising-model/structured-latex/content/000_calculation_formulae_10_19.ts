@@ -221,21 +221,24 @@ s^2
 &&(\because\ 0<1)
 \end{aligned}`),
       paragraph([
-        "よって ",
-        math(String.raw`s\ne0`),
-        "（",
-        math(String.raw`s=0`),
-        " なら ",
-        math(String.raw`s^2=0`),
-        "）であり、",
-        math(String.raw`s\ge0`),
-        " と合わせて ",
-        math(String.raw`s>0`),
-        "、すなわち分母は正である。また ",
-        math(String.raw`x^2\le1+x^2=s^2`),
-        " と非負平方根の単調性から ",
-        math(String.raw`|x|\le s`),
-        " である。以上を使って、",
+        "従って次の二つの不等式が成り立つ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s
+&>0
+&&(\because\ s\ge0\ \text{かつ}\ s^2>0)\\
+|x|^2
+&=x^2
+&&(\because\ \text{絶対値の二乗})\\
+&\le 1+x^2
+&&(\because\ 0\le1\ \text{と両辺への}\ x^2\ \text{の加法})\\
+&=s^2
+&&(\because\ \text{非負平方根の定義。}\blkref{definition_of_sqrt_r_positive})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`|x|\ge0`), "、", math(String.raw`s\ge0`),
+        " なので、最後の二行と非負数上での二乗の単調性から ", math(String.raw`|x|\le s`),
+        " を得る。以上を使って、",
       ]),
       displayMath(String.raw`\begin{aligned}
 \left|\frac{x}{s}\right|
@@ -244,7 +247,7 @@ s^2
 &\le \frac{s}{s}
 &&(\because\ |x|\le s\ \text{と正の分母}\ s\ \text{で割る単調性})\\
 &= 1
-&&(\because\ s\ne0\ \text{による約分})
+&&(\because\ s>0\ \text{による約分})
 \end{aligned}`),
       paragraph([
         math(String.raw`\left|x/s\right|\le1`),
@@ -260,6 +263,8 @@ s^2
           "絶対値の商の鎖の 2 本＋行末の (∵ …) へ書き換えた。非負平方根の定義への参照は" +
           "実際に使う行の行末 blkref へ置いた。根拠（分母の正値性・x²≤1+x² と単調性・" +
           "正の分母で割る・二つの不等式との同値）は全て残し、中身は変えていない。",
+        "2026-09-03 の次 tick の前進前レビューで、x²≤1+x²=s² と分母の非零性を散文の中で" +
+          "まとめていた箇所を、一行一操作の鎖へ開いた。s>0 を直接得て後続の約分根拠も揃えた。",
       ],
     },
   },
