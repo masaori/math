@@ -108,8 +108,14 @@ Claude 回は専用アカウントの `claude-opus-5`、effort `medium` に固�
 (cd cellular-automata-statistical-mechanics/structured-latex && pnpm run build:pdf)
 sage cellular-automata-statistical-mechanics/sagemath/check/<対象名>/check.sage
 node cellular-automata-statistical-mechanics/sagemath/tools/verify-check-linkage.ts
+node cellular-automata-statistical-mechanics/sagemath/tools/verify-tooling-tests.ts
 (cd cellular-automata-statistical-mechanics/lean && lake build && bash scripts/check-no-sorry.sh)
 ```
+
+掃引 `sweep_all_checks.py` の収集・集計の fail-closed 性を守っているのは、その単体テスト
+`test_sweep_all_checks.py` だけである。`verify-tooling-tests.ts` はその単体テストを fail-closed に
+走らせる入口であり、テストファイル 0 本・実行件数 0 件・skip 混入を成功として通さない。
+掃引の実装を触った tick は必ずこれを通す。
 
 初回に検証基盤を作る場合は、リポジトリ内の既存 structured-latex / SageMath / Lean 基盤を参照し、
 語彙を複製せず共通の構造化テキストシステムを利用する。
