@@ -1693,10 +1693,18 @@ u^2&=u\cdot u &&(\because\ \text{平方の定義})\\
 &&(\because \text{同類項をまとめた})
 \end{aligned}`,
       ),
+      paragraph(["となる。したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+R^2
+&= \frac{R^2}{Q}\cdot Q
+&&(\because Q>0 \text{ と } \mathbb{R} \text{ の四則}) \\
+&\le P\cdot Q
+&&(\because \text{直前の } 0\le P-R^2/Q \text{ の移項による } R^2/Q\le P \text{ と、両辺に正の数 } Q \text{ を掛けても順序が保たれること})
+\end{aligned}`,
+      ),
       paragraph([
-        "となり、両辺に ",
-        math(String.raw`Q>0`),
-        " を掛けて ",
+        "を得る。すなわち ",
         math(String.raw`R^2\le PQ`),
         "。",
       ]),
@@ -1859,6 +1867,9 @@ u^2&=u\cdot u &&(\because\ \text{平方の定義})\\
           "対象は、実数を複素数へ送る写像が和と積を保つことの 2 式、斉次性の式、" +
           "Cauchy--Schwarz の証明の 2 式、三角不等式の 4 式、極限の一意性の式である。" +
           "段は増えており、減った段は無い。主張も証明の筋も変えていない。",
+        "2026-09-04: 式変形の書き方の統一。Cauchy--Schwarz の結びで散文に埋まっていた" +
+          "「両辺に Q>0 を掛けて R^2≤PQ」を、R^2 から始まり PQ へ至る二段の式変形と" +
+          "行末の根拠（移項と、正の数を掛けても順序が保たれること）へ開いた。内容と根拠は変えていない。",
       ],
     },
   },
