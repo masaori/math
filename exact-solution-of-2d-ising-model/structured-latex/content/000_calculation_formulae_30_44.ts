@@ -1268,11 +1268,19 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
       ]),
       paragraph([
         math(String.raw`0 \leq \theta-2n\pi < \pi`),
-        " のとき。両辺を ",
-        math(String.raw`2`),
-        " 倍すると ",
-        math(String.raw`0 \leq (\theta+\theta)-2(2n)\pi < 2\pi`),
-        " なので、",
+        " のとき。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&0 \leq \theta-2n\pi < \pi\\
+\Longrightarrow\ &0 \leq 2(\theta-2n\pi) < 2\pi
+&&(\because\ \text{各辺に正の数 }2\text{ を掛けても不等号は保たれる})\\
+\Longrightarrow\ &0 \leq (\theta+\theta)-2(2n)\pi < 2\pi
+&&(\because\ \mathbb{R}\ \text{の分配律})
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので、",
         ref("angle_section_existence_uniqueness"),
         " が一意に定める整数は ",
         math(String.raw`2n`),
@@ -1304,15 +1312,23 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
       ]),
       paragraph([
         math(String.raw`\pi \leq \theta-2n\pi < 2\pi`),
-        " のとき。両辺を ",
-        math(String.raw`2`),
-        " 倍すると ",
-        math(String.raw`2\pi \leq (\theta+\theta)-2(2n)\pi < 4\pi`),
-        " であり、さらに各辺から ",
-        math(String.raw`2\pi`),
-        " を引けば ",
-        math(String.raw`0 \leq (\theta+\theta)-2(2n+1)\pi < 2\pi`),
-        " なので、",
+        " のとき。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\pi \leq \theta-2n\pi < 2\pi\\
+\Longrightarrow\ &2\pi \leq 2(\theta-2n\pi) < 4\pi
+&&(\because\ \text{各辺に正の数 }2\text{ を掛けても不等号は保たれる})\\
+\Longrightarrow\ &2\pi \leq (\theta+\theta)-2(2n)\pi < 4\pi
+&&(\because\ \mathbb{R}\ \text{の分配律})\\
+\Longrightarrow\ &0 \leq (\theta+\theta)-2(2n)\pi-2\pi < 2\pi
+&&(\because\ \text{各辺から }2\pi\text{ を引いても不等号は保たれる})\\
+\Longrightarrow\ &0 \leq (\theta+\theta)-2(2n+1)\pi < 2\pi
+&&(\because\ 2(2n)\pi+2\pi=2(2n+1)\pi)
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので、",
         ref("angle_section_existence_uniqueness"),
         " が一意に定める整数は ",
         math(String.raw`2n+1`),
