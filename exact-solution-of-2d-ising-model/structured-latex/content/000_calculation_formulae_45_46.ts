@@ -169,7 +169,8 @@ T_B(I)
 &= (ab)c - c(ab) &&\bigl(\because \text{交換子の定義}\bigr) \\
 &= abc - cab &&\bigl(\because \text{行列の積の結合法則}\bigr) \\
 &= abc + acb - acb - cab &&\bigl(\because\ acb - acb = O\bigr) \\
-&= a(bc + cb) - (ac + ca)b &&\bigl(\because \text{行列の積の分配法則と結合法則}\bigr) \\
+&= a(bc + cb) - acb - cab &&\bigl(\because \text{行列の積の分配法則}\bigr) \\
+&= a(bc + cb) - (ac + ca)b &&\bigl(\because \text{行列の積の分配法則}\bigr) \\
 &= a[b, c]_+ - [a, c]_+ b &&\bigl(\because \text{反交換子の定義}\bigr)
 \end{aligned}`,
       ),
@@ -179,6 +180,7 @@ T_B(I)
       notes: [
         "式変形の書き方の統一（2026-08-09）。原文は右辺から始めて左辺へ着く鎖だったので、主張の左辺 [ab, c] から始める向きへ書き直した。原文が黙って使っていた「acb - acb = O を足す」段を 1 行として明示し、原文が 1 行にまとめていた結合法則と分配法則の適用を分けた。段は増えており、減った段は無い。",
         "2026-09-01 の式変形統一で、五段の根拠を行中の \\quad(\\because …) から他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
+        "2026-09-03 の式変形統一で、二箇所への分配法則を一行にまとめていた段を、左の括り出しと右の括り出しの二段へ分けた。内容・根拠は変えていない。",
       ],
     },
   },
