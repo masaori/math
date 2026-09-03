@@ -5,7 +5,6 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 PROJECT_NAME="cellular-automata-statistical-mechanics"
-LOOP_WORKTREE="$HOME/git/masaori/math-cellular-automata-loop"
 LOOP_BRANCH="cellular-automata-loop"
 
 GIT_COMMON_DIR="$(git -C "$SCRIPT_DIR" rev-parse --path-format=absolute --git-common-dir 2>/dev/null || true)"
@@ -14,6 +13,10 @@ if [ -n "$GIT_COMMON_DIR" ]; then
 else
   MAIN_REPO_DIR="$HOME/git/masaori/math"
 fi
+
+# 起動口が用意した専用 worktree をそのまま使う。ここから別の worktree を作ると、
+# パスから所有リポジトリを読めない置き場所へ成果が残り、tick ごとに worktree が 2 つできる。
+LOOP_WORKTREE="$MAIN_REPO_DIR/.codex/worktrees/tick/cellular-automata-auto-loop"
 
 LOG_DIR="$HOME/Library/Logs/cellular-automata-auto-loop"
 LOG_FILE="$LOG_DIR/auto-loop.log"
