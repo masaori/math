@@ -2755,7 +2755,7 @@ z
 &= \frac{1}{\sqrt{z}}
 &&(\because\ 1/\sqrt{z}\ \text{は逆元}\ (\sqrt{z})^{-1}\ \text{の別の書き方である})\\
 &= \sqrt{\frac{1}{z}}
-&&(\because\ \mathbb{C}\ \text{の逆数の}\ \sqrt{\cdot}\ \text{の第 1 の場合})
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \sqrt{\cdot}\ \text{の第 1 の場合。}\blkref{inverse_of_sqrt_cc})
 \end{aligned}`),
       paragraph([
         math(String.raw`0 < \arg^{[0,2\pi)}(z) < 2\pi`),
@@ -2768,15 +2768,8 @@ z
 &= -\left(-\frac{1}{\sqrt{z}}\right)
 &&(\because\ -(-w)=w)\\
 &= -\sqrt{\frac{1}{z}}
-&&(\because\ \mathbb{C}\ \text{の逆数の}\ \sqrt{\cdot}\ \text{の第 2 の場合})
+&&(\because\ \mathbb{C}\ \text{の逆数の}\ \sqrt{\cdot}\ \text{の第 2 の場合。}\blkref{inverse_of_sqrt_cc})
 \end{aligned}`),
-      paragraph([
-        "引いたブロックは ",
-        ref("multiplicative_group_of_cc"),
-        "、",
-        ref("inverse_of_sqrt_cc"),
-        " である。",
-      ]),
     ],
     conversion: {
       status: "converted",
@@ -2790,8 +2783,10 @@ z
           "仮定を 1 つ足した。原文の主張には z ≠ 0 が無かったが、(sqrt(z))^{-1} が定まるためにも、" +
           "引く先の主張（ℂ の逆数の sqrt）の仮定を満たすためにも要る。" +
           "これは書き方の統一ではなく、原文に欠けていた仮定の補いである。" +
-          "この生成器は \\blkref を定義していないので、(∵ …) の中には引いたブロックの題を書き、" +
-          "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。",
+          "式変形の書き方の統一（2026-09-04）。証明末尾の参照一覧を削除し、" +
+          "inverse_of_sqrt_cc は実際に使う二つの式変形行の行末へ移した。" +
+          "multiplicative_group_of_cc は逆元を取る準備で既に引かれている。" +
+          "式変形・根拠・内容は変えていない。",
       ],
     },
   },
