@@ -1812,24 +1812,9 @@ R^2
 &\le\|A-A_N\|+\|A_N-A'\|
 &&(\because \text{Step 5 を } A-A'=(A-A_N)+(A_N-A') \text{ に当てた}) \\
 &= \|A_N-A\|+\|A_N-A'\|
-&&(\because \|A-A_N\|=\|A_N-A\|)
+&&(\because\ A-A_N=(-1)(A_N-A) \text{ と Step 3（} c=-1 \text{）、および } |-1|=1 \text{（} K=\mathbb{C} \text{ のときは } \blkref{abs_basic_properties} \text{ (6) より } |-1_{\mathbb{C}}|=|-1|=1 \text{）})
 \end{aligned}`,
       ),
-      paragraph([
-        "最後の等号は ",
-        math(String.raw`A-A_N=(-1)(A_N-A)`),
-        " と Step 3（",
-        math(String.raw`c=-1`),
-        "）、および ",
-        math(String.raw`|-1|=1`),
-        "（",
-        math(String.raw`K=\mathbb{C}`),
-        " のときは ",
-        ref("abs_basic_properties"),
-        " (6) より ",
-        math(String.raw`|-1_{\mathbb{C}}|=|-1|=1`),
-        "）による。",
-      ]),
       paragraph([
         "右辺は ",
         math(String.raw`N\to\infty`),
@@ -1879,6 +1864,9 @@ R^2
         "2026-09-04: 式変形の書き方の統一。Step 5 で平方の不等式から平方根側の" +
           "不等式を得る推論が散文に埋まっていたので、両辺の非負性と Step 0 の適用を" +
           "三行の表示へ開いた。内容と根拠は変えていない。",
+        "2026-09-04: 式変形の書き方の統一。Step 6 の最後の等号の根拠が式変形の後の" +
+          "散文段落に置かれていたので、その行の末尾の (∵ …) へ移した" +
+          "（Step 3 の c=-1 と |-1|=1 の参照を含む）。内容と根拠は変えていない。",
       ],
     },
   },
