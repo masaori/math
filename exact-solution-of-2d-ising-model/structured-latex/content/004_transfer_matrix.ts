@@ -2700,11 +2700,23 @@ H_2 &:= Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M
       ),
       paragraph(["すると、", ref("def_V1_pm"), " と ", ref("V2_in_Z_Y"), " より"]),
       displayMath(
-        String.raw`V_1^{(\pm)} = \exp\!\left(i K_1 H_1^{(\pm)}\right), \qquad
-V_2 = (2s_2)^{M/2} \exp\!\left(i K_2^* H_2\right)`,
+        String.raw`\begin{aligned}
+V_1^{(\pm)}
+&= \exp\!\left(i K_1 H_1^{(\pm)}\right)
+&&\left(\because\ \blkref{def_V1_pm}\right) \\
+V_2
+&= (2s_2)^{M/2} \exp\!\left(i K_2^* H_2\right)
+&&\left(\because\ \blkref{V2_in_Z_Y}\right)
+\end{aligned}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-09-04: 式変形の書き方の統一。H1, H2 を用いた V1, V2 の二つの等号を分け、" +
+          "各行末に参照先の根拠を付けた。式・定義の内容は変えていない。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY",
