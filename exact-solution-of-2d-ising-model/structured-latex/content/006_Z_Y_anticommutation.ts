@@ -365,8 +365,7 @@ YX
         " にとってよい。この範囲では ",
         math(String.raw`\mu \equiv \nu \pmod M \iff \mu = \nu`),
         " であるから、",
-        ref("def_delta_M"),
-        " より",
+        " であるから",
       ]),
       displayMath(
         String.raw`\delta^M_{(\mu,\nu)} =
@@ -374,7 +373,8 @@ YX
 1 & (\mu = \nu) \\
 0 & (\mu \neq \nu)
 \end{cases}
-\qquad (\mu,\nu \in \{1,\dots,M\})`,
+\qquad (\mu,\nu \in \{1,\dots,M\})
+\qquad\bigl(\because\ \blkref{def_delta_M}\text{ の定義}\bigr)`,
       ),
       paragraph([
         "クロネッカー積による表示。",
