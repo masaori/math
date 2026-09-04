@@ -1670,6 +1670,32 @@ w^{a,b}_L(A)\,w^{a,b}_L(A\mathbin\triangle E)
         "（sagemath/check/parity-identity-doubled-edge-crossing）。次はこの偶奇恒等式を、",
         "辺ごとの寄与とトーラスの二つの切断線の寄与へ分けて一般に証明する。",
       ]),
+      paragraph([
+        "二つの並べ替え符号は、有向辺対ごとの反転指示値へ展開できる。動辺の固定順序を ",
+        math(String.raw`\vec e_1<\cdots<\vec e_m`), "、終点別の行順序の鍵を ",
+        math(String.raw`R(\vec e):=(\operatorname{tgt}(\vec e),\vec e)`),
+        "、始点別の列順序の鍵を ",
+        math(String.raw`C(\vec e):=(\operatorname{src}(\vec e),\vec e)`), " と置けば、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+r(o)
+&\equiv\sum_{1\le i<j\le m}[R(\vec e_i)>R(\vec e_j)]\pmod 2
+&&\bigl(\because\ \text{反転数の定義}\bigr)\\
+c(o)
+&\equiv\sum_{1\le i<j\le m}[C(\vec e_i)>C(\vec e_j)]\pmod 2
+&&\bigl(\because\ \text{反転数の定義}\bigr)
+\end{aligned}`),
+      paragraph([
+        "となる。各和を、少なくとも一方の辺が基本領域の水平または垂直の切断線を通る辺対と、",
+        "どちらも切断線を通らない内部辺対へ分ける。また ", math(String.raw`q(o)`),
+        " は、全頂点の局所行列式の積から従来どおり求める。従って左辺は、動辺数、内部辺対、",
+        "切断線辺対、局所位相の四寄与へ分かれる。この分解前後の一致と標的の巻き付き・交差対の式との一致を、",
+        "一辺二の全対象、一辺三の ", math(String.raw`D=\varnothing`),
+        " の自明文字対象、二重辺を持つ一辺三の対象で検査する",
+        "（sagemath/check/parity-identity-pair-and-seam-decomposition）。残る一般証明は、",
+        "内部辺対と局所位相の合成、および二本の切断線に触れる辺対の和が",
+        "巻き付き偶奇と交差対を与えることの二つに分かれる。",
+      ]),
     ],
   },
 ]);
