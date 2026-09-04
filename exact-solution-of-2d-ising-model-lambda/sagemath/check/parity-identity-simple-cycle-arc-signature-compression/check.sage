@@ -7,11 +7,11 @@ parity-identity-simple-cycle-boundary-arc-decomposition では、弧ごとの
 弧型ごとの値の和として書けることを確定した。ここではその弧型を粗い
 統計へ圧縮しても分解が保たれるかを、三段の圧縮水準で判定する。
 
-(1) counts: 弧の長さ・曲がり型頂点の個数・切断旗の総数・両端頂点の
+counts: 弧の長さ・曲がり型頂点の個数・切断旗の総数・両端頂点の
     完全署名の対。
-(2) turnword: 曲がり/直進の型を閉路順に並べた列（反転同一視）・
+turnword: 曲がり/直進の型を閉路順に並べた列（反転同一視）・
     切断旗の総数・両端頂点の完全署名の対。
-(3) turnwrapword: 型と切断旗を頂点ごとに並べた列（反転同一視）・
+turnwrapword: 型と切断旗を頂点ごとに並べた列（反転同一視）・
     両端頂点の完全署名の対。
 
 各水準で、直接衝突（圧縮弧型の多重集合の偶奇が等しく頂点項が異なる
@@ -134,6 +134,13 @@ for level_name, compressor in COMPRESSIONS:
           % (level_name, len(all_types), rank, conflicts, solvable))
 
 assert len(joint_keys) == 7085
+assert results == {
+    "counts": (8890, 5898, 243, False),
+    "turnword": (9225, 6198, 160, False),
+    "turnwrapword": (9998, 6708, 65, False),
+}
 print("OBSERVED: %s" % {name: tuple(int(v) if v in (True, False) else int(v)
                                     for v in values)
                         for name, values in sorted(results.items())})
+print("PASS: 三水準の圧縮はいずれも直接衝突を持ち、頂点項を弧型ごとの"
+      "値の和として書く合同線型系も解を持たない")
