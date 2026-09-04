@@ -12,6 +12,14 @@
  *   - 主定理ラベルの所有ブロックが主張（claim / theorem）である。
  *   - 主定理ラベルの所有ブロックが、同じ節の中の別ブロックへ少なくとも一つ依存する。
  *     節の中身が主定理を支えていることを、参照依存の一次情報で要求する。
+ *   - 入力・出力・主定理の三文が、節の中で互いに異なり、かつ節をまたいでも重複しない。
+ *
+ * 最後の一つは本 tick で足した。それまでの検査は三文について**空でないこと**しか要求しておらず、
+ * 同じ一文を入力・出力・主定理の三つへ、あるいは全 15 節へ貼っても違反にならなかった
+ * （宣言の文どうしを比較する経路がこのファイルにも他のツールにも無い）。節ごとの入力・出力・
+ * 主定理を本文に明示することは成果整理の一層そのものなので、区別が付かない宣言は「明示した」
+ * という記録だけを残して層の目的を空にする。宣言の重複を fail-closed に止める。
+ * 現在の 15 節の三文はいずれも重複していないため、この検査は本文を変えずに掛かる。
  */
 import { collectRefTargets, isGeneratedOrganizationBlock, loadContentFiles } from "./content-modules.ts";
 import { documentOrganization } from "./document-organization.ts";
@@ -30,6 +38,12 @@ for (const file of files) {
 }
 
 const violations: string[] = [];
+/** 宣言の文 → 最初にその文を持った節。節をまたいだ重複を検出するために引く。 */
+const declarationOwners = new Map<string, Map<string, string>>([
+  ["入力", new Map()],
+  ["出力", new Map()],
+  ["主定理", new Map()],
+]);
 let checkedSections = 0;
 let checkedMainLabels = 0;
 
@@ -37,12 +51,36 @@ for (const chapter of documentOrganization) {
   for (const section of chapter.sections) {
     checkedSections += 1;
     const where = `${chapter.id}/${section.id}`;
-    for (const [name, text] of [
+    const declarations = [
       ["入力", section.input],
       ["出力", section.output],
       ["主定理", section.main],
-    ] as const) {
+    ] as const;
+    for (const [name, text] of declarations) {
       if (text.trim().length === 0) violations.push(`節の${name}の文が空: ${where}`);
+    }
+    // 節の中で三文が区別できることを要求する。入力と出力が同じ文なら、節が何を受け取り
+    // 何を出すのかを一つも述べていない。
+    for (let i = 0; i < declarations.length; i += 1) {
+      for (let j = i + 1; j < declarations.length; j += 1) {
+        const [nameA, textA] = declarations[i]!;
+        const [nameB, textB] = declarations[j]!;
+        if (textA.trim().length > 0 && textA.trim() === textB.trim()) {
+          violations.push(`節の${nameA}と${nameB}の文が同一: ${where}`);
+        }
+      }
+    }
+    // 節をまたいだ重複も止める。同じ文を複数の節が持つと、節の設計がその文で区別されていない。
+    for (const [name, text] of declarations) {
+      const key = text.trim();
+      if (key.length === 0) continue;
+      const seen = declarationOwners.get(name)!;
+      const previous = seen.get(key);
+      if (previous !== undefined) {
+        violations.push(`節の${name}の文が別の節と同一: ${where} と ${previous}`);
+      } else {
+        seen.set(key, where);
+      }
     }
     // mainLabels は as const で長さが literal 型になるため、比較が never へ潰れないよう広げてから見る。
     const mainLabels: readonly string[] = section.mainLabels;
@@ -97,5 +135,6 @@ if (violations.length > 0) {
 }
 console.log(
   `節の入力・出力・主定理の検査 OK（節 ${checkedSections} 件、主定理ラベル ${checkedMainLabels} 件、` +
-    "空の宣言 0 件、主張でない主定理 0 件、節内依存を持たない主定理 0 件）",
+    "空の宣言 0 件、主張でない主定理 0 件、節内依存を持たない主定理 0 件、" +
+    "節内で同一の宣言 0 件、節をまたいで同一の宣言 0 件）",
 );
