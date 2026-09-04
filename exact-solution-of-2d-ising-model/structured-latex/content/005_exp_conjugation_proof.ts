@@ -1208,11 +1208,7 @@ P_N := \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
         math(String.raw`D_N\to D`),
         " ならば ",
         math(String.raw`C_N D_N\to CD`),
-        "。実際 ",
-        ref("matrix_norm_triangle_inequality"),
-        " (3) と ",
-        ref("matrix_norm_submultiplicativity"),
-        " より",
+        "。実際",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1222,9 +1218,9 @@ P_N := \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
 &= \left\|C_N(D_N-D)+(C_N-C)D\right\|
    \quad (\because \text{行列の積の分配律}) \\
 &\le \left\|C_N(D_N-D)\right\|+\left\|(C_N-C)D\right\|
-   \quad (\because \text{三角不等式}) \\
+   \quad (\because \text{三角不等式。}\blkref{matrix_norm_triangle_inequality}) \\
 &\le \left\|C_N\right\|\left\|D_N-D\right\|+\left\|C_N-C\right\|\left\|D\right\|
-   \quad (\because \text{劣乗法性})
+   \quad (\because \text{行列ノルムの劣乗法性。}\blkref{matrix_norm_submultiplicativity})
 \end{aligned}`,
       ),
       paragraph([
@@ -1236,7 +1232,7 @@ P_N := \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
 &= \left\|C+(C_N-C)\right\|
    \quad (\because C_N=C+(C_N-C)) \\
 &\le \left\|C\right\|+\left\|C_N-C\right\|
-   \quad (\because \text{三角不等式})
+   \quad (\because \text{三角不等式。}\blkref{matrix_norm_triangle_inequality})
 \end{aligned}`,
       ),
       paragraph([

@@ -1543,6 +1543,45 @@ export default defineNotes([
         "共通符号に一致することの証明が残る。次はこの同定を、局所行列式の因子と",
         "継ぎ目符号・並べ替え符号の積として一般の辺長で証明する。",
       ]),
+      paragraph([
+        "この同定のうち、四つのねじれへの依存は一般の辺長で分離できる。",
+        math(String.raw`A:=D\cup C`), "、",
+        math(String.raw`B:=D\cup(E\setminus C)`), " と置くと ",
+        math(String.raw`A\mathbin\triangle B=E`), " なので、巻き付き偶奇の対称差加法性により、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{w^{a,b}_L(A)w^{a,b}_L(B)}{w^{0,0}_L(A)w^{0,0}_L(B)}
+&=(-1)^{a(\varepsilon_{L,\mathrm h}(A)+\varepsilon_{L,\mathrm h}(B))
++b(\varepsilon_{L,\mathrm v}(A)+\varepsilon_{L,\mathrm v}(B))}
+&&\bigl(\because\ \text{符号重みの定義と }\mathbb Z\text{ の四則}\bigr)\\
+&=(-1)^{a\varepsilon_{L,\mathrm h}(E)+b\varepsilon_{L,\mathrm v}(E)}
+&&\bigl(\because\ \blkref{claim_winding_parity_symmetric_difference_additivity}\bigr).
+\end{aligned}`),
+      paragraph([
+        "一方、配向類の局所遷移行列では、スピン構造 ", math(String.raw`(a,b)`),
+        " の継ぎ目符号は出る動辺の列全体へ掛かる。各局所行列式から列ごとに括り出すと、",
+        "全動辺集合 ", math(String.raw`2D\sqcup o(E)`), " にわたる積になる。",
+        math(String.raw`D`), " の各辺は二つの向きで現れ、反転しても切断線偶奇は変わらないため、",
+        "その寄与は二乗されて ", math(String.raw`1`), " になる。",
+        math(String.raw`E`), " の各辺は配向 ", math(String.raw`o`),
+        " が選んだ一方向だけで現れ、反転によらない切断線偶奇の和は ",
+        math(String.raw`\varepsilon_{L,\mathrm h}(E),\varepsilon_{L,\mathrm v}(E)`), " である。従って",
+      ]),
+      displayMath(String.raw`\mathcal L^{a,b}_L(D,E,o)
+=(-1)^{a\varepsilon_{L,\mathrm h}(E)+b\varepsilon_{L,\mathrm v}(E)}
+\mathcal L^{0,0}_L(D,E,o)
+\qquad\bigl(\because\ \text{局所行列式の列ごとの継ぎ目符号の括り出し}\bigr)`),
+      paragraph([
+        "となる。ここで ", math(String.raw`\mathcal L^{a,b}_L(D,E,o)`),
+        " は配向類の局所行列式和である。動辺の並べ替え符号と ",
+        math(String.raw`(-1)^{\lvert2D\sqcup E\rvert}`),
+        " はスピン構造に依らないので比から消える。よって配向類の和と選択項は同じ継ぎ目文字を受け、",
+        "符号同定は未ねじれ ", math(String.raw`(a,b)=(0,0)`),
+        " の場合だけを証明すれば四つ全てへ移る。有限検算では一辺二の全対象と一辺三の ",
+        math(String.raw`D=\varnothing`), " の対象でこの比を照合した",
+        "（sagemath/check/curved-free-class-sum-seam-twist-factor）。残る一般証明は、",
+        "未ねじれの局所回転因子と動辺の並べ替え符号の積を、選択項の共通符号へ同定する部分である。",
+      ]),
     ],
   },
 ]);
