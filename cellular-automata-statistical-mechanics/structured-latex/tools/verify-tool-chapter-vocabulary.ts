@@ -179,6 +179,7 @@ const CA_IDENTIFIER_TERMS = [
  */
 const PHYSICS_TERM_CORRESPONDENCE: readonly TermCorrespondenceEntry[] = [
   { body: "物理", identifiers: ["physical"] },
+  { body: "エネルギー", identifiers: ["energy"] },
   { body: "因果集合", identifiers: ["causal"] },
   { body: "時空", identifiers: ["spacetime"] },
   { body: "光円錐", identifiers: ["lightcone"] },
