@@ -45,6 +45,36 @@ const refs: RefUse[] = [];
 let blockCount = 0;
 let headingCount = 0;
 
+/**
+ * 走査範囲そのものの回帰検査。**タイトルの数式が走査から外れたら、その場で落とす。**
+ *
+ * この検査は現在の本文では一件も掛からない（`title.tex` を使うブロックが今は無い）。
+ * 掛からない検査は静かに壊れるので、合成ブロックで走査範囲を毎回確かめる。
+ * `publishedMathOf` を `bodyNodesOf` へ戻す変更は、ここで終了コード 1 になる。
+ *
+ * 文字列が拾えたことではなく、**実際の検査規則が掛かること**を確かめる。
+ * 走査範囲だけを比べると、規則の側が緩んだときに素通りする。
+ */
+{
+  const probe = {
+    id: "probe_published_math_scope",
+    kind: "claim",
+    title: { tex: String.raw`\mathbb{R}\ [a,b]` },
+    labels: [],
+    habitat: "finite",
+    statement: [],
+  } as unknown as ConvertedBlock;
+  const before = projectIssues.length;
+  checkProjectRules(probe, "(走査範囲の回帰検査)");
+  const raised = projectIssues.splice(before).join("\n");
+  if (!raised.includes("ℝ/ℂ が現れる") || !raised.includes("母集合の添字が無い")) {
+    throw new Error(
+      "走査範囲の回帰検査が失敗した: タイトルの数式に ℝ と添字なし区間を置いても検査が掛からない" +
+        `（報告: ${raised || "なし"}）`,
+    );
+  }
+}
+
 const contentFiles = await loadContentFiles();
 
 for (const { file, blocks } of contentFiles) {
@@ -169,6 +199,35 @@ function bodyNodesOf(block: ConvertedBlock): readonly (readonly Node[])[] {
 }
 
 /**
+ * ブロックが出版本文へ出す数式のすべて。**この一本を通してだけ数式を走査する。**
+ *
+ * 本文ノード（statement / proof、図は content / caption）に加えて、**タイトルの数式**を含む。
+ * タイトルは `{ tex: ... }` の形を取れて、`tools/build-latex.ts` の `renderTitle` が
+ * `$...$` として出版本文へ出す。ところが住処と区間記法の検査は `bodyNodesOf` だけを見ており、
+ * タイトルの数式を一度も読んでいなかった。同じファイルの Typst 記法の検査は既に
+ * `title.tex` を読んでいるため、二つの検査で走査範囲が食い違っていた。
+ *
+ * 実測: `habitat: "finite"` を宣言したブロックのタイトルを
+ * `{ tex: String.raw`\mathbb{R}\ \text{smuggled}\ [a,b]` }` に差し替えると、
+ * 可算宣言の裏取り（ℝ/ℂ 非出現）も母集合の添字の要求も一件も報告せず、
+ * 一覧を再生成したうえで `npm run check` が終了コード 0 で通った。
+ * ℝ が出版本文の見出し行へ出るのに、可算で閉じているという宣言は無傷で残る。
+ *
+ * 図は住処を持たない（本プロジェクト固有メタデータは定理型だけに付く）ため、
+ * ℝ/ℂ の検査は掛けようがない。しかし母集合の添字は住処に依らない記法の規律なので、
+ * 図の数式にも掛ける。
+ */
+function publishedMathOf(block: ConvertedBlock): string[] {
+  const math: string[] = [];
+  for (const nodes of bodyNodesOf(block)) collectMathStrings(nodes, math);
+  if (block.kind !== "heading" && block.kind !== "figure") {
+    const title = block.title;
+    if (title !== null && title !== undefined && title.tex !== undefined) math.push(title.tex);
+  }
+  return math;
+}
+
+/**
  * 本プロジェクト固有の検査。
  *
  *   1. 住処と realEscape の対応（型を迂回した値のための保険）
@@ -178,16 +237,15 @@ function bodyNodesOf(block: ConvertedBlock): readonly (readonly Node[])[] {
  *
  * 2 が本プロジェクトの核である。「可算で閉じている」という宣言が本当かを、
  * 宣言した本人の言葉ではなく数式の字面で検査する。
+ *
+ * 走査する数式は `publishedMathOf` の一本に閉じる。ここを `bodyNodesOf` へ戻すと、
+ * タイトルの数式が再び無検査になる。
  */
 function checkProjectRules(block: ConvertedBlock, file: string): void {
-  if (block.kind === "heading" || block.kind === "figure") return;
+  if (block.kind === "heading") return;
 
-  for (const issue of checkHabitation(block)) {
-    projectIssues.push(`${file}: ${issue}`);
-  }
-
-  const math: string[] = [];
-  for (const nodes of bodyNodesOf(block)) collectMathStrings(nodes, math);
+  const math = publishedMathOf(block);
+  // 母集合の添字は住処に依らない記法の規律なので、住処を持たない図にも掛ける。
   const ambiguousInterval = math.find((value) =>
     /\[[^\]\n,]+,[^\]\n]+\](?!_\{\\mathbb\{(?:N|Z|Q|R|C)\}\})/.test(value),
   );
@@ -198,12 +256,20 @@ function checkProjectRules(block: ConvertedBlock, file: string): void {
     );
   }
 
+  // ここから下は本プロジェクト固有メタデータ（住処・検証対応）を持つ定理型だけの検査。
+  // 図はそのメタデータを持たないので、型の上でも掛けようがない。
+  if (block.kind === "figure") return;
+
+  for (const issue of checkHabitation(block)) {
+    projectIssues.push(`${file}: ${issue}`);
+  }
+
   const habitat: unknown = block.habitat;
   if (typeof habitat === "string" && HABITAT_VALUES.countable.has(habitat) && habitat !== "none") {
     // ℝ/ℂ そのものを指す記号だけを見る。可算側のブロックがこれらを数式に書いているなら、
     // 住処の宣言か証明のどちらかが誤っている。
     // 「ℝ を使わない」と本文で述べる文脈は地の文（text ノード）に書けるので、
-    // 検査対象は数式ノードだけにしてある。
+    // 検査対象は数式（本文ノードの数式とタイトルの数式）だけにしてある。
     const offending = math.filter((value) =>
       /\\mathbb\{(R|C)\}|\\mathbf\{(R|C)\}|\\Re\b|\\Im\b/.test(value),
     );
