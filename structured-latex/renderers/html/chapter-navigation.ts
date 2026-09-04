@@ -26,17 +26,19 @@ export const buildChapterTree = (entries: readonly ChapterEntry[]): ChapterNode[
 const entryLabel = (entry: ChapterEntry): string =>
   `${entry.number === '' ? '' : `${entry.number}　`}${entry.title}`
 
-const renderTree = (nodes: readonly ChapterNode[], rootId?: string): string => {
+const renderTree = (nodes: readonly ChapterNode[]): string => {
   const items = nodes.map((node) => {
-    const currentRootId = rootId ?? node.id
-    const children = node.children.length === 0 ? '' : renderTree(node.children, currentRootId)
+    const children = node.children.length === 0 ? '' : renderTree(node.children)
     return (
-      `<li><a class="chapter-link" data-target="${node.id}" data-root-target="${currentRootId}" href="#${node.id}">` +
+      `<li><a class="chapter-link" data-target="${node.id}" href="#${node.id}">` +
       `${entryLabel(node)}</a>${children}</li>`
     )
   }).join('')
   return `<ul>${items}</ul>`
 }
+
+// モバイルの目次パネルはページに 1 つだけ置く。ハンバーガーの aria-controls から引くので id を固定する。
+const MOBILE_MENU_ID = 'chapter-navigation-menu'
 
 export type ChapterNavigation = {
   desktopHtml: string
@@ -50,12 +52,17 @@ export const renderChapterNavigation = (entries: readonly ChapterEntry[]): Chapt
   const desktopHtml =
     `<aside class="chapter-navigation chapter-navigation--desktop" aria-label="章の目次">` +
     `<div class="chapter-navigation__title">目次</div>${renderTree(roots)}</aside>`
-  const mobileTabs = roots.map((root) =>
-    `<li><a class="chapter-link" data-target="${root.id}" data-root-target="${root.id}" href="#${root.id}">${entryLabel(root)}</a></li>`,
-  ).join('')
   const mobileHtml =
     `<nav class="chapter-navigation chapter-navigation--mobile" aria-label="章の目次">` +
-    `<ul>${mobileTabs}</ul></nav>`
+    `<div class="chapter-navigation__bar">` +
+    `<button type="button" class="chapter-navigation__toggle" aria-expanded="false"` +
+    ` aria-controls="${MOBILE_MENU_ID}" aria-label="目次を開く">` +
+    `<span class="chapter-navigation__burger" aria-hidden="true"></span>` +
+    `<span class="chapter-navigation__toggle-text">目次</span></button>` +
+    `<span class="chapter-navigation__current" data-chapter-current></span>` +
+    `</div>` +
+    `<div class="chapter-navigation__menu" id="${MOBILE_MENU_ID}" hidden>${renderTree(roots)}</div>` +
+    `</nav>`
 
   return { desktopHtml, mobileHtml }
 }
@@ -84,14 +91,31 @@ export const CHAPTER_NAVIGATION_CSS = String.raw`
 [id^="sec-"] { scroll-margin-top:24px; }
 @media (max-width: 860px) {
   .chapter-navigation--desktop { display:none; }
-  .chapter-navigation--mobile { position:sticky; top:0; z-index:20; display:block; overflow-x:auto;
-    overscroll-behavior-x:contain; scrollbar-width:none; background:color-mix(in srgb, var(--bg) 94%, transparent);
+  .chapter-navigation--mobile { position:sticky; top:0; z-index:20; display:block;
+    background:color-mix(in srgb, var(--bg) 94%, transparent);
     border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
-  .chapter-navigation--mobile::-webkit-scrollbar { display:none; }
-  .chapter-navigation--mobile ul { display:flex; width:max-content; min-width:100%; padding:8px 12px; box-sizing:border-box; }
-  .chapter-navigation--mobile li { flex:0 0 auto; }
-  .chapter-navigation--mobile a { padding:8px 12px; border-radius:999px; white-space:nowrap; font-size:.86rem; }
-  .chapter-navigation--mobile a.is-active { color:var(--fg); background:var(--panel); box-shadow:inset 0 0 0 1px var(--line); }
+  .chapter-navigation__bar { display:flex; align-items:center; gap:10px; padding:6px 12px; }
+  .chapter-navigation__toggle { display:inline-flex; align-items:center; gap:8px; flex:0 0 auto;
+    padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:transparent;
+    color:var(--fg); font:inherit; font-size:.86rem; line-height:1; cursor:pointer; }
+  .chapter-navigation__toggle:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .chapter-navigation__toggle[aria-expanded="true"] { background:var(--panel); }
+  .chapter-navigation__burger { position:relative; display:inline-block; width:14px; height:10px; }
+  .chapter-navigation__burger::before, .chapter-navigation__burger::after { content:""; }
+  .chapter-navigation__burger, .chapter-navigation__burger::before, .chapter-navigation__burger::after {
+    border-top:2px solid currentColor; box-sizing:border-box; }
+  .chapter-navigation__burger::before { position:absolute; left:0; right:0; top:4px; }
+  .chapter-navigation__burger::after { position:absolute; left:0; right:0; top:8px; }
+  .chapter-navigation__current { flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;
+    white-space:nowrap; color:var(--muted); font-size:.82rem; }
+  .chapter-navigation__menu { max-height:min(70vh, 520px); overflow:auto; overscroll-behavior:contain;
+    padding:4px 14px 14px; border-top:1px solid var(--line); }
+  .chapter-navigation__menu[hidden] { display:none; }
+  .chapter-navigation__menu li { margin:2px 0; }
+  .chapter-navigation__menu a { padding:9px 8px; border-radius:6px; font-size:.88rem; }
+  .chapter-navigation__menu a.is-active { color:var(--fg); background:var(--panel);
+    box-shadow:inset 0 0 0 1px var(--line); }
+  .chapter-navigation__menu li > ul { margin:2px 0 4px 10px; padding-left:10px; border-left:1px solid var(--line); }
   .page-layout { display:block; padding:24px 18px 80px; }
   [id^="sec-"] { scroll-margin-top:72px; }
 }`
@@ -110,8 +134,47 @@ export const CHAPTER_NAVIGATION_SCRIPT = String.raw`
   });
 
   var mobileNav = document.querySelector('.chapter-navigation--mobile');
+  var toggle = mobileNav === null ? null : mobileNav.querySelector('.chapter-navigation__toggle');
+  var menu = mobileNav === null ? null : mobileNav.querySelector('.chapter-navigation__menu');
+  var currentLabel = mobileNav === null ? null : mobileNav.querySelector('[data-chapter-current]');
+
+  var setMenuOpen = function (open) {
+    if (toggle === null || menu === null) return;
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? '目次を閉じる' : '目次を開く');
+    if (!open) return;
+    var activeItem = menu.querySelector('.is-active');
+    if (activeItem !== null) activeItem.scrollIntoView({ block: 'center' });
+  };
+  var isMenuOpen = function () { return toggle !== null && toggle.getAttribute('aria-expanded') === 'true'; };
+
+  if (toggle !== null && menu !== null) {
+    toggle.addEventListener('click', function () { setMenuOpen(!isMenuOpen()); });
+    // 目次から章を選んだら閉じる。開いたまま残ると本文が読めない。
+    menu.addEventListener('click', function (event) {
+      if (event.target.closest('.chapter-link') !== null) setMenuOpen(false);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape' || !isMenuOpen()) return;
+      setMenuOpen(false);
+      toggle.focus();
+    });
+    // 外側の操作で閉じる。キーボードで目次の外へ移ったときも閉じる。
+    document.addEventListener('pointerdown', function (event) {
+      if (!isMenuOpen() || mobileNav.contains(event.target)) return;
+      setMenuOpen(false);
+    });
+    document.addEventListener('focusin', function (event) {
+      if (!isMenuOpen() || mobileNav.contains(event.target)) return;
+      setMenuOpen(false);
+    });
+    window.addEventListener('resize', function () {
+      if (isMenuOpen() && !window.matchMedia('(max-width: 860px)').matches) setMenuOpen(false);
+    });
+  }
+
   var activeTarget = '';
-  var activeRoot = '';
   var update = function () {
     var threshold = window.matchMedia('(max-width: 860px)').matches ? 80 : 32;
     var current = targets[0];
@@ -120,21 +183,16 @@ export const CHAPTER_NAVIGATION_SCRIPT = String.raw`
     });
     if (current === undefined || current.id === activeTarget) return;
     activeTarget = current.id;
-    var matchingLink = links.find(function (link) { return link.dataset.target === activeTarget; });
-    activeRoot = matchingLink === undefined ? activeTarget : matchingLink.dataset.rootTarget;
     links.forEach(function (link) {
-      var isMobile = link.closest('.chapter-navigation--mobile') !== null;
-      var isActive = isMobile ? link.dataset.target === activeRoot : link.dataset.target === activeTarget;
+      var isActive = link.dataset.target === activeTarget;
       link.classList.toggle('is-active', isActive);
       if (isActive) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
-    if (mobileNav !== null) {
-      var activeTab = mobileNav.querySelector('.is-active');
-      if (activeTab !== null) {
-        var left = activeTab.offsetLeft - (mobileNav.clientWidth - activeTab.offsetWidth) / 2;
-        mobileNav.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
-      }
+    if (currentLabel !== null) {
+      // 目次を閉じている間も、いまどこを読んでいるかがバーに残る。
+      var activeLink = links.find(function (link) { return link.dataset.target === activeTarget; });
+      currentLabel.textContent = activeLink === undefined ? '' : activeLink.textContent;
     }
   };
 
