@@ -113,20 +113,53 @@ function topologicallySort(
   return sorted;
 }
 
+/**
+ * 章・節から組み立てる生成ブロックの id。**組み立てと除外をこの一箇所から導く。**
+ *
+ * 生成ブロック（章見出し・節見出し・節の入力/出力/主定理）は content/ に実体を持たないため、
+ * 検査ツールは走査から外す。ところがその除外は各ツールで `id.startsWith("organization_")` と
+ * 書かれており、**接頭辞に一致する id を content/ 側で名乗るだけで、そのブロックが
+ * すべての語彙検査・節検査から静かに消える**（実測: 数学的道具立て章の節へ
+ * `organization_smuggled_tool_block` という id の本文ブロックを置き、CA 固有語と
+ * 既存物理由来語を書いても、語彙検査は違反 0 件・終了コード 0 で通り、走査対象の件数も
+ * 増えなかった）。除外は接頭辞ではなく、いま実在する生成ブロックの id 集合で行う。
+ */
+const chapterHeadingId = (chapterId: string): string => `organization_${chapterId}_heading`;
+const sectionHeadingId = (chapterId: string, sectionId: string): string =>
+  `organization_${chapterId}_${sectionId}_heading`;
+const sectionGoalId = (chapterId: string, sectionId: string): string =>
+  `organization_${chapterId}_${sectionId}_goal`;
+
+/** 生成ブロックの id の全体。検査ツールの除外はこの集合だけを使う。 */
+export const generatedOrganizationBlockIds: ReadonlySet<string> = new Set(
+  documentOrganization.flatMap((chapter) => [
+    chapterHeadingId(String(chapter.id)),
+    ...chapter.sections.flatMap((section) => [
+      sectionHeadingId(String(chapter.id), String(section.id)),
+      sectionGoalId(String(chapter.id), String(section.id)),
+    ]),
+  ]),
+);
+
+/** 走査から外してよいのは、いま実在する生成ブロックだけである。 */
+export function isGeneratedOrganizationBlock(id: string): boolean {
+  return generatedOrganizationBlockIds.has(id);
+}
+
 function sectionIntro(
   chapterId: string,
   section: OrganizationSection,
 ): ConvertedBlock[] {
   return [
     {
-      id: `organization_${chapterId}_${section.id}_heading`,
+      id: sectionHeadingId(chapterId, String(section.id)),
       kind: "heading",
       level: 2,
       title: { text: section.title },
       labels: [],
     },
     {
-      id: `organization_${chapterId}_${section.id}_goal`,
+      id: sectionGoalId(chapterId, String(section.id)),
       kind: "remark",
       title: { text: "この節の入力・出力・主定理" },
       labels: [],
@@ -199,7 +232,7 @@ export async function loadContentFiles(): Promise<LoadedBlockFile[]> {
     out.push({
       file: `organization/${chapter.id}`,
       blocks: [{
-        id: `organization_${chapter.id}_heading`,
+        id: chapterHeadingId(String(chapter.id)),
         kind: "heading",
         level: 1,
         title: { text: chapter.title },

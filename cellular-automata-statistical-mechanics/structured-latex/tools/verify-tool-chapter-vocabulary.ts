@@ -8,7 +8,12 @@
  * 除外語は「CA を仮定せずに定義済みである語」に限る。増やすときは、その語が
  * 有限集合・写像・関係だけで定義されていることを本文で確認してから足すこと。
  */
-import { collectRefTargets, loadContentFiles } from "./content-modules.ts";
+import {
+  collectRefTargets,
+  generatedOrganizationBlockIds,
+  isGeneratedOrganizationBlock,
+  loadContentFiles,
+} from "./content-modules.ts";
 import { documentOrganization } from "./document-organization.ts";
 
 /**
@@ -363,7 +368,7 @@ for (const file of files) {
   const inTools = file.file.startsWith(TOOL_CHAPTER_PREFIX);
   const inCa = file.file.startsWith(CA_CHAPTER_PREFIX);
   for (const block of file.blocks) {
-    if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
+    if (block.kind === "heading" || isGeneratedOrganizationBlock(block.id)) continue;
     if (inTools) toolBlockIds.add(block.id);
     else if (inCa) {
       caBlockIds.add(block.id);
@@ -380,6 +385,29 @@ for (const blockId of PHYSICS_COMPARISON_BLOCK_IDS) {
 
 const violations: string[] = [];
 violations.push(...correspondenceViolations);
+
+/**
+ * 走査の除外そのものの検査。除外は語彙検査の**もう一つの抜け道**なので fail-closed に扱う。
+ *
+ * (1) 生成ブロックの id 集合が実在と食い違えば違反にする。組み立て側の id を変えると、
+ * 除外集合が古い綴りのまま残り、生成ブロックが本文ブロックとして走査されるか、
+ * 逆に新しい綴りの本文ブロックが除外されうる。
+ * (2) 生成ブロックでないのに `organization_` 接頭辞を名乗る本文ブロックを違反にする。
+ * 除外を id 集合へ移した後は語彙検査自体が掛かるようになったが、生成ブロックの名前空間を
+ * 本文ブロックが名乗ること自体が、除外の根拠（content/ に実体を持たないこと）と矛盾する。
+ */
+const loadedBlockIds = new Set<string>();
+for (const file of files) for (const block of file.blocks) loadedBlockIds.add(block.id);
+for (const generatedId of generatedOrganizationBlockIds) {
+  if (!loadedBlockIds.has(generatedId)) {
+    violations.push(`走査から外す生成ブロックの id が実在しない: ${generatedId}`);
+  }
+}
+for (const blockId of loadedBlockIds) {
+  if (blockId.startsWith("organization_") && !isGeneratedOrganizationBlock(blockId)) {
+    violations.push(`生成ブロックでないのに organization_ 接頭辞の id を名乗っている: ${blockId}`);
+  }
+}
 
 /**
  * 除外句そのものの検査。語彙検査で唯一の抜け道なので fail-closed に扱う。
@@ -477,7 +505,7 @@ for (const file of files) {
   const inCa = file.file.startsWith(CA_CHAPTER_PREFIX);
   if (!inTools && !inCa) continue;
   for (const block of file.blocks) {
-    if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
+    if (block.kind === "heading" || isGeneratedOrganizationBlock(block.id)) continue;
     const parts: string[] = [];
     collectText(block, parts);
     const raw = parts.join(" ");
@@ -761,7 +789,7 @@ const caIdentifierValues = [
     .filter((file) => file.file.startsWith(CA_CHAPTER_PREFIX))
     .flatMap((file) =>
       file.blocks.flatMap((block) =>
-        block.kind === "heading" || block.id.startsWith("organization_")
+        block.kind === "heading" || isGeneratedOrganizationBlock(block.id)
           ? []
           : [block.id, ...block.labels],
       ),
@@ -800,7 +828,7 @@ const caBodyCorpus: string[] = [];
 for (const file of files) {
   if (!file.file.startsWith(CA_CHAPTER_PREFIX)) continue;
   for (const block of file.blocks) {
-    if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
+    if (block.kind === "heading" || isGeneratedOrganizationBlock(block.id)) continue;
     caBodyCorpus.push(normalizedTextOf(block));
   }
 }
@@ -831,7 +859,7 @@ for (const file of files) {
   const inCa = file.file.startsWith(CA_CHAPTER_PREFIX);
   if (!inTools && !inCa) continue;
   for (const block of file.blocks) {
-    if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
+    if (block.kind === "heading" || isGeneratedOrganizationBlock(block.id)) continue;
     const hits = caTermsIn(block);
     if (inTools) {
       const bodyPhysicsHits = physicsTermsIn(block);
@@ -942,7 +970,7 @@ for (const file of files) {
   const inCa = file.file.startsWith(CA_CHAPTER_PREFIX);
   if (!inTools && !inCa) continue;
   for (const block of file.blocks) {
-    if (block.kind === "heading" || block.id.startsWith("organization_")) continue;
+    if (block.kind === "heading" || isGeneratedOrganizationBlock(block.id)) continue;
     const identifiers = [
       { key: `id:${block.id}`, value: block.id },
       ...block.labels.map((label) => ({ key: `label:${label}`, value: label })),
@@ -1201,6 +1229,6 @@ console.log(
     `照合ブロックが本文で許す既存物理由来語 ${[...new Set([...PHYSICS_COMPARISON_BLOCK_TERMS.values()].flat())].length} 件（宣言と実際が一語ずつ一致）、` +
     `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語と時間発展を含意する語の非包含・数学的道具立て章での実使用を、句の内側・単独適用・宣言全体での差し引きの三面で確認し、全句適用後の本文でも既存物理由来語 0 件・時間発展を含意する語 0 件・宣言に無い CA 固有語 0 件、除外の回帰 ${duplicateTermMaskingRegressions.length} 件）、` +
     `数学的道具立て章の時間発展を含意する語 0 件（本文・識別子の二軸、対応表 ${TIME_EVOLUTION_TERM_CORRESPONDENCE.length} 件）、` +
-    `章タイトル・節の記述・章節識別子の違反 0 件、章 ${ORGANIZATION_CHAPTER_PROSE_FIELDS.length} 散文フィールド・節 ${ORGANIZATION_SECTION_PROSE_FIELDS.length} 散文フィールドの網羅 OK / 章 ${documentOrganization.length} 件・` +
+    `走査から外した生成ブロック ${generatedOrganizationBlockIds.size} 件（実在と一致、接頭辞を名乗る本文ブロック 0 件）、章タイトル・節の記述・章節識別子の違反 0 件、章 ${ORGANIZATION_CHAPTER_PROSE_FIELDS.length} 散文フィールド・節 ${ORGANIZATION_SECTION_PROSE_FIELDS.length} 散文フィールドの網羅 OK / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );

@@ -13,7 +13,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
+import { isGeneratedOrganizationBlock, loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 
 type Entry = {
   file: string;
@@ -100,7 +100,8 @@ for (const { file, blocks } of contentFiles) {
       chapter = titleOf(block);
       continue;
     }
-    if (String(block.id).startsWith("organization_") && String(block.id).endsWith("_goal")) continue;
+    // 除外は接頭辞ではなく実在する生成ブロックの id 集合で行う（接頭辞を名乗る本文ブロックを取りこぼさない）。
+    if (isGeneratedOrganizationBlock(String(block.id))) continue;
     const deps = new Set<string>();
     collectFromNode(block.statement, deps);
     collectFromNode(block.proof, deps);

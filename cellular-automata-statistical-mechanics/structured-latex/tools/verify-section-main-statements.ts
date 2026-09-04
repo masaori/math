@@ -13,7 +13,7 @@
  *   - 主定理ラベルの所有ブロックが、同じ節の中の別ブロックへ少なくとも一つ依存する。
  *     節の中身が主定理を支えていることを、参照依存の一次情報で要求する。
  */
-import { collectRefTargets, loadContentFiles } from "./content-modules.ts";
+import { collectRefTargets, isGeneratedOrganizationBlock, loadContentFiles } from "./content-modules.ts";
 import { documentOrganization } from "./document-organization.ts";
 
 /** 主定理として宣言してよいブロック種別。定義・注記は主張ではないので含めない。 */
@@ -57,7 +57,7 @@ for (const chapter of documentOrganization) {
       continue;
     }
     const sectionBlocks = file.blocks.filter(
-      (block) => block.kind !== "heading" && !block.id.startsWith("organization_"),
+      (block) => block.kind !== "heading" && !isGeneratedOrganizationBlock(block.id),
     );
     const sectionIds = new Set(sectionBlocks.map((block) => block.id));
     const byId = new Map(sectionBlocks.map((block) => [block.id, block]));

@@ -16,7 +16,7 @@
  * 未解消の成分は下の台帳へ member id ごと固定する。台帳は成果整理の残作業そのものであり、
  * 新しい違反は一件でも失敗する（いま在る形をそのまま残すことだけを許す）。
  */
-import { collectRefTargets, loadContentFiles } from "./content-modules.ts";
+import { collectRefTargets, isGeneratedOrganizationBlock, loadContentFiles } from "./content-modules.ts";
 import { documentOrganization } from "./document-organization.ts";
 
 const STATEMENT_KINDS = new Set(["claim", "theorem"]);
@@ -52,7 +52,7 @@ for (const chapter of documentOrganization) {
       continue;
     }
     const blocks = file.blocks.filter(
-      (block) => block.kind !== "heading" && !block.id.startsWith("organization_"),
+      (block) => block.kind !== "heading" && !isGeneratedOrganizationBlock(block.id),
     );
     const byId = new Map(blocks.map((block) => [block.id, block]));
     const neighbors = new Map<string, Set<string>>();
