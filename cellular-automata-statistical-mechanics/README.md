@@ -94,6 +94,19 @@
 
 **件数ではなく、「可算側で厳密に述べ直され、機械にかけられ、既存研究と差分がある」ことで評価する。**
 
+## 研究の段取り（射程・現在地・完了条件）
+
+舞台の広さと規則クラスの二軸で研究の射程を段階に分け、各段階の依存・現在地・完了条件を
+`structured-latex/research-roadmap.ts` に正本として固定する。段取りは出版物（PDF / HTML）の
+本文の前に載り、公開ページからも読める。**初等セルオートマトンは最初の有限校正の対象であって
+射程の全体ではない。** 状態集合は 2 元集合に固定し、多値・環値への一般化は段取りに入れない。
+
+段取りと公開物の一致は次で検査する（`--published` を付けると公開ページも取得して照合する）。
+
+```sh
+cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh --published
+```
+
 30 分ごとの継続作業は
 [`docs/tasks/auto-loop-runbook.md`](docs/tasks/auto-loop-runbook.md) と
 [`docs/tasks/auto-loop-state.md`](docs/tasks/auto-loop-state.md) を正本として進める。

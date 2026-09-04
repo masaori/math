@@ -109,6 +109,7 @@ Claude 回は専用アカウントの `claude-opus-5`、effort `medium` に固�
 sage cellular-automata-statistical-mechanics/sagemath/check/<対象名>/check.sage
 node cellular-automata-statistical-mechanics/sagemath/tools/verify-check-linkage.ts
 node cellular-automata-statistical-mechanics/sagemath/tools/verify-tooling-tests.ts
+bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh
 (cd cellular-automata-statistical-mechanics/lean && lake build && bash scripts/check-no-sorry.sh)
 ```
 
