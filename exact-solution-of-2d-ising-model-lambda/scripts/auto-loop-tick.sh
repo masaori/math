@@ -170,7 +170,9 @@ exact-solution-of-2d-ising-model-lambda の自動ループを 1 tick 進める�
    この tick スクリプトが最後に自分で行う。**通知は 1 tick 1 通**で、そこには前進・
    コミットなし・打ち切り・異常終了のどれかが入る（エージェント側からは、打ち切られた
    ことも異常終了したことも報告できない。だからスクリプト側に置いてある）。
-   通知の本文は台帳の「現在地」の先頭項目なので、そこに何をしたかを 1〜2 文で簡潔に書く。
+   通知の本文のうち「今回の一歩」は台帳の「現在地」の先頭項目から取るので、そこに
+   何をしたかを 1〜2 文で簡潔に書く（最終ゴール・現在地・次の一手は README のゴール節と
+   台帳の残作業表からスクリプトが組み立てる。台帳の表と節の見出しを壊さないこと）。
    例外は、人間の判断を待って止まるときだけである（そのときは skill で論点を報告する）。
 
 締切について。この tick は @HARD@ に強制終了される（書きかけでも落ちる）。
@@ -417,14 +419,25 @@ case "$status" in
   *)   tick_outcome="異常終了 (exit $status)" ;;
 esac
 
-# **一文だけ送る**（ユーザー指示 2026-08-16）。何をしたかが一読で分かる一文と、公開物がある
-# ときだけその絶対 URL。エージェント名・版・結果の内訳は書かない（前進しなかったときだけ、
-# その事実自体が伝えるべき一文になる）。
+# 「今回の一歩」は、前進した tick だけ台帳の現在地から取り、それ以外は結果そのもの
+# （コミットなし・打ち切り・異常終了）を一文として使う。
 case "$tick_outcome" in
   前進*) tick_line="$tick_summary" ;;
   *)     tick_line="$tick_outcome" ;;
 esac
-tick_message="$(printf '%s\n%s' "$tick_line" "$published_url")"
+
+# **報告には最終ゴール・現在地・今回の一歩・次の一手の四項目を必ず入れる**
+# （ユーザー指示 2026-09-05。それまでは今回の一歩だけを送っていて、
+# 「今どういう状況か・ゴール設定が分からない」と指摘された）。四項目は固定文ではなく、
+# README のゴール節と台帳から毎回抽出する（正本が変われば報告も変わる）。
+# 抽出に失敗したら送らずに落とす（空欄のまま報告しない）。
+if ! tick_body="$(python3 "$PROJECT_DIR/scripts/compose-tick-report.py" \
+      "$PROJECT_DIR/README.md" "$PROJECT_DIR/docs/tasks/auto-loop-state.md" "$tick_line" \
+      2>>"$LOG_FILE")"; then
+  log "    報告本文（最終ゴール・現在地・今回の一歩・次の一手）を組み立てられなかった"
+  exit 1
+fi
+tick_message="$(printf '%s\n%s' "$tick_body" "$published_url")"
 if ! slack route-post math "$tick_message" \
   --topic "可算対数順序群による二次元イジング模型" \
   --artifact-url "https://hexcomp-artifacts.web.app/math/ising-lambda/" \
