@@ -5660,25 +5660,13 @@ c_1^2
    \quad (\because\ \text{加法逆元の相殺})
 \end{aligned}`,
       ),
-      paragraph([
-        "ここで ",
-        math(String.raw`s_1 s_2 > 0`),
-        " かつ ",
-        math(String.raw`1 > 0`),
-        " であり ",
-        math(String.raw`(s_1 s_2)^2 = 1^2`),
-        " であるから、",
-        ref("cosh_sinh_basic_properties"),
-        " (4)（正の実数について ",
-        math(String.raw`a^2 = b^2 \iff a = b`),
-        "）を ",
-        math(String.raw`a = s_1 s_2`),
-        "、",
-        math(String.raw`b = 1`),
-        " に適用して ",
-        math(String.raw`s_1 s_2 = 1`),
-        "。",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+s_1s_2>0\ \land\ 1>0\ \land\ (s_1s_2)^2=1^2
+&\Longrightarrow s_1s_2=1
+&& (\because\ \text{正の実数の二乗の一意性、}\blkref{cosh_sinh_basic_properties}\text{ (4)})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 2: ",
         math(String.raw`(\Leftarrow)`),
@@ -5703,20 +5691,15 @@ c_1^2
    \quad (\because\ \text{Step 0 の } c_1^2 = 1 + s_1^2)
 \end{aligned}`,
       ),
+      displayMath(
+        String.raw`\begin{aligned}
+s_1c_2>0\ \land\ c_1>0\ \land\ (s_1c_2)^2=c_1^2
+&\Longrightarrow s_1c_2=c_1
+&& (\because\ \text{正の実数の二乗の一意性、}\blkref{cosh_sinh_basic_properties}\text{ (4)})
+\end{aligned}`,
+      ),
       paragraph([
-        "ここで ",
-        math(String.raw`s_1 c_2 > 0`),
-        " かつ ",
-        math(String.raw`c_1 > 0`),
-        " であるから、",
-        ref("cosh_sinh_basic_properties"),
-        " (4) を ",
-        math(String.raw`a = s_1 c_2`),
-        "、",
-        math(String.raw`b = c_1`),
-        " に適用して ",
-        math(String.raw`s_1 c_2 = c_1`),
-        "。以上で ",
+        "以上で ",
         math(String.raw`c_1 = s_1 c_2 \iff s_1 s_2 = 1`),
         " が示された。",
       ]),
@@ -5802,6 +5785,7 @@ c_1^2
           "2 乗の代入の鎖と s_1^2 を引く鎖の二本の一行一等号の鎖へ分け、Step 2 の鎖の各行へ行末根拠を付けた。" +
           "内容は変えていない。",
         "2026-08-15 の式変形統一で、Step 0 の正値性と双曲線恒等式、および Step 3 の臨界条件への同値鎖を、一行一関係と行末根拠を持つ整列式へ開いた。内容は変えていない。",
+        "2026-09-05 の式変形統一で、Step 1 と Step 2 の正の実数の二乗の一意性の適用を散文から含意式へ移し、適用行の末尾から根拠を参照する形へ揃えた。内容は変えていない。",
       ],
     },
   },
