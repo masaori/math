@@ -4417,22 +4417,37 @@ c_1\cos\theta_\nu
 && (\because\ AO=OA=O)
 \end{aligned}`,
       ),
+      paragraph(["また、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[\tfrac{1}{2}I,W]
+&=O
+&& (\because\ \blkref{scalar_identity_commutes}) \\
+[\psi_\nu^\dagger\psi_{-\nu}-\tfrac{1}{2}I,W]
+&=[\psi_\nu^\dagger\psi_{-\nu},W]-[\tfrac{1}{2}I,W]
+&& (\because\ \text{交換子の加法性}) \\
+&=O-O
+&& (\because\ [\psi_\nu^\dagger\psi_{-\nu},W]=O,\ [\tfrac{1}{2}I,W]=O) \\
+&=O
+&& (\because\ O-O=O) \\
+[\gamma(\theta_\nu)(\psi_\nu^\dagger\psi_{-\nu}-\tfrac{1}{2}I),W]
+&=\gamma(\theta_\nu)[\psi_\nu^\dagger\psi_{-\nu}-\tfrac{1}{2}I,W]
+&& (\because\ \text{交換子の斉次性}) \\
+&=\gamma(\theta_\nu)O
+&& (\because\ [\psi_\nu^\dagger\psi_{-\nu}-\tfrac{1}{2}I,W]=O) \\
+&=O
+&& (\because\ zO=O\ (z\in\mathbb C)) \\
+[X,W]
+&=\sum_{\substack{\nu=1\\\gamma_2(\theta_\nu)\ne0}}^M
+[\gamma(\theta_\nu)(\psi_\nu^\dagger\psi_{-\nu}-\tfrac{1}{2}I),W]
+&& (\because\ X\text{ の定義と交換子の加法性}) \\
+&=\sum_{\substack{\nu=1\\\gamma_2(\theta_\nu)\ne0}}^M O
+&& (\because\ \text{各 }\nu\text{ に対する直前の等式}) \\
+&=O
+&& (\because\ \text{零行列の有限和})
+\end{aligned}`,
+      ),
       paragraph([
-        "また ",
-        math(String.raw`[\tfrac{1}{2}I, W] = O`),
-        "（",
-        ref("scalar_identity_commutes"),
-        "）だから ",
-        math(String.raw`[\psi_\nu^\dagger \psi_{-\nu} - \tfrac{1}{2}, W] = O`),
-        "、ゆえ ",
-        math(String.raw`[\gamma(\theta_\nu)(\psi_\nu^\dagger \psi_{-\nu} - \tfrac{1}{2}), W] = O`),
-        "。和の各 ",
-        math(String.raw`\nu`),
-        " でこれが ",
-        math(String.raw`O`),
-        " だから交換子の加法性より ",
-        math(String.raw`[X, W] = O`),
-        "。",
         math(String.raw`W`),
         " は ",
         math(String.raw`\hat{Z}_\mu^{(-)}, \hat{Y}_\mu`),
