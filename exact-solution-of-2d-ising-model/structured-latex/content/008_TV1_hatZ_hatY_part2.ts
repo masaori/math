@@ -4313,23 +4313,30 @@ A(\theta_\mu)
         math(String.raw`\theta_\nu = -\theta_\mu + 2\pi\ell`),
         " である。",
       ]),
-      paragraph([
-        "いずれの場合も三角関数の周期性・偶奇性より ",
-        math(String.raw`\cos\theta_\nu = \cos\theta_\mu`),
-        "、",
-        math(String.raw`\sin\theta_\nu = \pm\sin\theta_\mu = 0`),
-        " であるから ",
-        math(String.raw`\sin\theta_\nu = 0`),
-        "、",
-        math(String.raw`c_1\cos\theta_\nu = c_1\cos\theta_\mu = s_1 c_2`),
-        "。",
-        ref("gamma_2_theta_is_0"),
-        " より ",
-        math(String.raw`\gamma_2(\theta_\nu) = 0`),
-        "、Step 1 より ",
-        math(String.raw`\gamma(\theta_\nu) = 0`),
-        "。",
-      ]),
+      paragraph(["いずれの場合も、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cos\theta_\nu
+&= \cos\theta_\mu
+&& (\because\ \text{三角関数の周期性と偶奇性}) \\
+\sin\theta_\nu
+&= \pm\sin\theta_\mu
+&& (\because\ \text{三角関数の周期性と偶奇性}) \\
+&= 0
+&& (\because\ \sin\theta_\mu=0) \\
+c_1\cos\theta_\nu
+&= c_1\cos\theta_\mu
+&& (\because\ \cos\theta_\nu=\cos\theta_\mu) \\
+&= s_1c_2
+&& (\because\ c_1\cos\theta_\mu=s_1c_2) \\
+\gamma_2(\theta_\nu)
+&= 0
+&& (\because\ \blkref{gamma_2_theta_is_0}) \\
+\gamma(\theta_\nu)
+&= 0
+&& (\because\ \text{Step 1})
+\end{aligned}`,
+      ),
       paragraph(["Step 3: ", math(String.raw`\gamma_2(\theta_\mu) = 0`), " のとき ", math(String.raw`[X, \hat{Z}_\mu^{(-)}] = O`), " かつ ", math(String.raw`[X, \hat{Y}_\mu] = O`), "。"]),
       paragraph([
         "各 ",
