@@ -1388,7 +1388,7 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
 &= \left\|X^{l}X\right\|
    \quad (\because \text{行列の冪の定義}) \\
 &\le \left\|X^{l}\right\|\,\|X\|
-   \quad (\because \text{ノルムの劣乗法性}) \\
+   \quad (\because \text{ノルムの劣乗法性。}\blkref{matrix_norm_submultiplicativity}) \\
 &\le a^{l}\,\|X\|
    \quad (\because \text{帰納法の仮定}) \\
 &= a^{l}\,a
@@ -1402,9 +1402,7 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
         math(String.raw`l\in\mathbb{Z}_{\ge 1}`),
         " について ",
         math(String.raw`\|X^{l}\|\le a^{l}`),
-        " が成り立つ（劣乗法性は ",
-        ref("matrix_norm_submultiplicativity"),
-        "）。符号を付けたものも同じ評価をもつ。",
+        " が成り立つ。符号を付けたものも同じ評価をもつ。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1412,7 +1410,7 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
 &= \left\|(-1)^{l}X^{l}\right\|
    \quad (\because (-X)^{l}=(-1)^{l}X^{l}) \\
 &= \left|(-1)^{l}\right|\,\left\|X^{l}\right\|
-   \quad (\because \text{ノルムの斉次性}) \\
+   \quad (\because \text{ノルムの斉次性。}\blkref{matrix_norm_triangle_inequality}) \\
 &= \left\|X^{l}\right\|
    \quad (\because \left|(-1)^{l}\right|=1) \\
 &\le a^{l}
@@ -1420,9 +1418,7 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
 \end{aligned}`,
       ),
       paragraph([
-        "（斉次性は ",
-        ref("matrix_norm_triangle_inequality"),
-        " (2)）。以上を使って ",
+        "以上を使って ",
         math(String.raw`p,q`),
         " の 4 つの場合を評価する。",
       ]),
@@ -1434,9 +1430,9 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
             String.raw`\begin{aligned}
 \left\|X^{p}\,Y\,(-X)^{q}\right\|
 &\le \left\|X^{p}\right\|\,\left\|Y\,(-X)^{q}\right\|
-   \quad (\because \text{ノルムの劣乗法性}) \\
+   \quad (\because \text{ノルムの劣乗法性。}\blkref{matrix_norm_submultiplicativity}) \\
 &\le \left\|X^{p}\right\|\,\|Y\|\,\left\|(-X)^{q}\right\|
-   \quad (\because \text{ノルムの劣乗法性}) \\
+   \quad (\because \text{ノルムの劣乗法性。}\blkref{matrix_norm_submultiplicativity}) \\
 &\le a^{p}\,\|Y\|\,\left\|(-X)^{q}\right\|
    \quad (\because \|X^{p}\|\le a^{p}) \\
 &\le a^{p}\,\|Y\|\,a^{q}
@@ -1453,7 +1449,7 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
 &= \left\|Y\,(-X)^{q}\right\|
    \quad (\because X^{0}=I \text{ と } IY=Y) \\
 &\le \|Y\|\,\left\|(-X)^{q}\right\|
-   \quad (\because \text{ノルムの劣乗法性}) \\
+   \quad (\because \text{ノルムの劣乗法性。}\blkref{matrix_norm_submultiplicativity}) \\
 &\le \|Y\|\,a^{q}
    \quad (\because \|(-X)^{q}\|\le a^{q}) \\
 &= a^{0}\,\|Y\|\,a^{q}
@@ -1470,7 +1466,7 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
 &= \left\|X^{p}\,Y\right\|
    \quad (\because (-X)^{0}=I \text{ と } YI=Y) \\
 &\le \left\|X^{p}\right\|\,\|Y\|
-   \quad (\because \text{ノルムの劣乗法性}) \\
+   \quad (\because \text{ノルムの劣乗法性。}\blkref{matrix_norm_submultiplicativity}) \\
 &\le a^{p}\,\|Y\|
    \quad (\because \|X^{p}\|\le a^{p}) \\
 &= a^{p}\,\|Y\|\,a^{0}
@@ -1755,6 +1751,7 @@ X(-X)
           "labels: theorem_exp_product / theorem_exp_zero（可逆性）を使って完全に証明できるので、" +
           "Lie 群論を経由せずここで証明した。",
         "2026-09-04 の式変形統一で、指数の積・零行列の指数・ad_X の定義への後置き参照を削り、それぞれを使う行末の (∵ …) へ \\blkref を移した。内容・式変形・根拠は変えていない。",
+        "2026-09-04 の式変形統一で、Step 4 の冪と項別ノルム評価に後置きしていた劣乗法性・斉次性の参照を、各適用行の末尾へ移した。内容・式変形・根拠は変えていない。",
       ],
     },
   },
