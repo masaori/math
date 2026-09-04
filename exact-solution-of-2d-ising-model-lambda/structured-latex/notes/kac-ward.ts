@@ -1582,6 +1582,57 @@ export default defineNotes([
         "（sagemath/check/curved-free-class-sum-seam-twist-factor）。残る一般証明は、",
         "未ねじれの局所回転因子と動辺の並べ替え符号の積を、選択項の共通符号へ同定する部分である。",
       ]),
+      paragraph([
+        "同定の標的である選択項の共通符号は、一般の辺長で閉じた式を持つ。",
+        math(String.raw`A:=D\cup C`), " と置くと、任意の鍵と任意の選択集合 ",
+        math(String.raw`C`), " について、巻き付き偶奇 ",
+        math(String.raw`\varepsilon_{L,\mathrm h},\varepsilon_{L,\mathrm v}\in\{0,1\}`),
+        " の対称差加法性だけから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w^{a,b}_L(A)\,w^{a,b}_L(A\mathbin\triangle E)
+&=(-1)^{(1+a)\varepsilon_{L,\mathrm h}(E)+(1+b)\varepsilon_{L,\mathrm v}(E)
++\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(E)}
+\cdot(-1)^{\langle A,E\rangle}
+&&\bigl(\because\ \blkref{claim_winding_parity_symmetric_difference_additivity}
+\text{ と }\mathbb F_2\text{ の分配則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`\langle A,E\rangle:=\varepsilon_{L,\mathrm h}(A)\varepsilon_{L,\mathrm v}(E)
++\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(A)\in\{0,1\}`),
+        " は巻き付きベクトルの交差対である。導出は指数の ", math(String.raw`\mathbb F_2`),
+        " 計算一つで済む: 一次の項は ",
+        math(String.raw`\varepsilon(A)+\varepsilon(A\mathbin\triangle E)=\varepsilon(E)`),
+        " へ落ち、積の項は ",
+        math(String.raw`\varepsilon_{\mathrm h}(A)\varepsilon_{\mathrm v}(A)
++(\varepsilon_{\mathrm h}(A)+\varepsilon_{\mathrm h}(E))(\varepsilon_{\mathrm v}(A)+\varepsilon_{\mathrm v}(E))
+=\varepsilon_{\mathrm h}(E)\varepsilon_{\mathrm v}(E)+\langle A,E\rangle`),
+        " へ落ちる。選択集合を巡回空間の元 ", math(String.raw`z`),
+        " だけ動かすと交差対は ", math(String.raw`\langle z,E\rangle`),
+        " だけ変わるので、選択文字が自明な鍵ではどの基本閉路とも交差対が零になり、",
+        "選択項は ", math(String.raw`C`), " に依らない共通符号",
+      ]),
+      displayMath(String.raw`(-1)^{(1+a)\varepsilon_{L,\mathrm h}(E)+(1+b)\varepsilon_{L,\mathrm v}(E)
++\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(E)}
+\cdot(-1)^{\langle D\cup C_0,\,E\rangle}
+\qquad(C_0\text{ は任意の一つの選択集合})`),
+      paragraph([
+        "を持つ。逆に文字が非自明なら ", math(String.raw`\langle z,E\rangle=1`),
+        " の基本閉路 ", math(String.raw`z`), " があり、",
+        math(String.raw`C\mapsto C\mathbin\triangle z`),
+        " が選択項の符号を反転する不動点なしの対合になって選択和が零になる",
+        "（文字による消滅のもう一つの導出）。一辺二の選択非空 ",
+        math(String.raw`417`), " 鍵の恒等式 ", math(String.raw`4{,}096`),
+        " 件と、一辺三の ", math(String.raw`D=\varnothing`),
+        " の全偶部分グラフの恒等式 ", math(String.raw`34{,}352`),
+        " 件・自明文字 ", math(String.raw`677`), " 鍵の共通符号・非自明文字 ",
+        math(String.raw`346`), " 鍵の対合消滅 ", math(String.raw`21{,}808`),
+        " 件を全数で検査した（sagemath/check/selection-common-sign-closed-formula）。",
+        "残る一般証明は、未ねじれの配向類の局所行列式和 ",
+        math(String.raw`\mathcal L^{0,0}_L(D,E,o)`),
+        " の符号がこの閉じた式に一致することの証明である。",
+      ]),
     ],
   },
 ]);
