@@ -1268,9 +1268,7 @@ P_N := \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)`,
         math(String.raw`P_N`),
         " の有限和表示。まず ",
         math(String.raw`(-X)^q=(-1)^qX^q`),
-        "（",
-        ref("ad_binomial"),
-        " の証明 Step 0）に注意すると、有限和の分配律より",
+        " に注意すると、有限和の分配律より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1280,15 +1278,13 @@ Q_N
 &= \left(\sum_{p=0}^{N}\frac{1}{p!}X^{p}\right)Y\left(\sum_{q=0}^{N}\frac{1}{q!}(-X)^{q}\right)
    \quad (\because \text{部分和 } S_N \text{ の定義}) \\
 &= \sum_{p=0}^{N}\sum_{q=0}^{N}\frac{1}{p!}\,\frac{1}{q!}\,X^{p}\,Y\,(-X)^{q}
-   \quad (\because \text{有限和の分配律を 2 度}) \\
+   \quad (\because \text{有限和の分配律を 2 度。}\blkref{ad_binomial}\text{ の証明 Step 0}) \\
 &= \sum_{p=0}^{N}\sum_{q=0}^{N}\frac{1}{p!\,q!}\,X^{p}\,Y\,(-X)^{q}
    \quad (\because \text{スカラーの積})
 \end{aligned}`,
       ),
       paragraph([
         "一方 ",
-        ref("ad_binomial"),
-        " より ",
         math(String.raw`\mathrm{ad}_X^{m}(Y)=\sum_{k=0}^{m}\binom{m}{k}X^{k}Y(-X)^{m-k}`),
         " であり、各 ",
         math(String.raw`0\le k\le m`),
@@ -1312,7 +1308,7 @@ P_N
 &= \sum_{m=0}^{N}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)
    \quad (\because P_N \text{ の定義（Step 1）}) \\
 &= \sum_{m=0}^{N}\frac{1}{m!}\sum_{k=0}^{m}\binom{m}{k}X^{k}Y(-X)^{m-k}
-   \quad (\because \text{ad の二項展開}) \\
+   \quad (\because \text{ad の二項展開。}\blkref{ad_binomial}) \\
 &= \sum_{m=0}^{N}\sum_{k=0}^{m}\frac{1}{m!}\binom{m}{k}\,X^{k}\,Y\,(-X)^{m-k}
    \quad (\because \text{有限和の分配律}) \\
 &= \sum_{m=0}^{N}\sum_{k=0}^{m}\frac{1}{k!\,(m-k)!}\,X^{k}\,Y\,(-X)^{m-k}

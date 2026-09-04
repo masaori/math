@@ -1633,6 +1633,34 @@ w^{a,b}_L(A)\,w^{a,b}_L(A\mathbin\triangle E)
         math(String.raw`\mathcal L^{0,0}_L(D,E,o)`),
         " の符号がこの閉じた式に一致することの証明である。",
       ]),
+      paragraph([
+        "未ねじれの符号同定は、一つの偶奇恒等式へ還元できる。曲がり型のない均衡配向 ",
+        math(String.raw`o`), " に対し、動辺の固定順序から終点別の行順序へ移す置換の",
+        "反転数偶奇を ", math(String.raw`r(o)`), "、始点別の列順序へ移す置換の",
+        "反転数偶奇を ", math(String.raw`c(o)`), " とする。局所行列式の積を ",
+        math(String.raw`2^{n_4(E)}`), " で割った値は ", math(String.raw`1`),
+        " または ", math(String.raw`-1`), " なので、それを ",
+        math(String.raw`(-1)^{q(o)}`), " と書く。局所行列式への分解式から",
+      ]),
+      displayMath(String.raw`\mathcal L^{0,0}_L(D,E,o)
+=2^{n_4(E)}(-1)^{\lvert2D\sqcup o(E)\rvert+r(o)+c(o)+q(o)}
+\qquad\bigl(\because\ \blkref{claim_kac_ward_determinant_fiber_stratified_phase_sum}
+\text{ と局所行列式の積への分解}\bigr)`),
+      paragraph([
+        "を得る。従って残る一般証明は、任意の選択集合 ", math(String.raw`C_0`),
+        " に対する一つの ", math(String.raw`\mathbb F_2`), " 恒等式",
+      ]),
+      displayMath(String.raw`\lvert2D\sqcup o(E)\rvert+r(o)+c(o)+q(o)
+\equiv \varepsilon_{L,\mathrm h}(E)+\varepsilon_{L,\mathrm v}(E)
++\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(E)
++\langle D\cup C_0,E\rangle\pmod 2`),
+      paragraph([
+        "だけである。左辺の四因子を別々に計算し、局所行列式和の再構成と右辺との一致を、",
+        "一辺二の全対象と一辺三の ", math(String.raw`D=\varnothing`),
+        " の自明文字対象で検査した",
+        "（sagemath/check/curved-free-class-sign-parity-reduction）。次はこの偶奇恒等式を、",
+        "辺ごとの寄与とトーラスの二つの切断線の寄与へ分けて一般に証明する。",
+      ]),
     ],
   },
 ]);
