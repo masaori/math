@@ -177,6 +177,24 @@ export async function loadContentFiles(): Promise<LoadedBlockFile[]> {
 
   const assigned = new Map<string, { chapter: number; section: number }>();
   const out: LoadedBlockFile[] = [];
+  // 「数学的道具が 2 値 CA セマンティクスへ依存してはならない」は章の**同一性**についての規律で、
+  // 並び順についての規律ではない。ここを配列添字の 0 と 1 で書くと、章を並べ替えた瞬間に
+  // 許される向き（CA → 数学的道具）を禁止しはじめ、禁止したい向き（数学的道具 → CA）が
+  // 無検査になる。実測: 二章を入れ替えると `causal_set_primary_literature_remark_source ->
+  // def_locally_finite_partial_order`（CA 章から数学的道具立て章への正当な参照）が
+  // 「数学的道具が 2 値 CA セマンティクスへ依存している」として落ちた。
+  // そこで両章を id で引き、どちらかが無ければその場で落とす。
+  const chapterIndexById = new Map(
+    documentOrganization.map((chapter, index) => [String(chapter.id), index]),
+  );
+  const toolChapterIndex = chapterIndexById.get("mathematical_tools");
+  const caChapterIndex = chapterIndexById.get("binary_cellular_automaton_semantics");
+  if (toolChapterIndex === undefined || caChapterIndex === undefined) {
+    throw new Error(
+      "章立てに数学的道具立て章と 2 値セルオートマトンのセマンティクス章の両方が無い: " +
+        `${[...chapterIndexById.keys()].join(", ")}`,
+    );
+  }
   for (const [chapterIndex, chapter] of documentOrganization.entries()) {
     out.push({
       file: `organization/${chapter.id}`,
@@ -224,7 +242,7 @@ export async function loadContentFiles(): Promise<LoadedBlockFile[]> {
       const owner = labelOwner.get(target);
       if (owner === undefined) continue;
       const dependency = assigned.get(owner)!;
-      if (source.chapter === 0 && dependency.chapter === 1) {
+      if (source.chapter === toolChapterIndex && dependency.chapter === caChapterIndex) {
         throw new Error(`数学的道具が 2 値 CA セマンティクスへ依存している: ${block.id} -> ${target}`);
       }
       if (dependency.chapter > source.chapter ||
