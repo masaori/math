@@ -19,73 +19,8 @@ E 所属 e_s（s は up/down/left/right）、切断隣接旗 4 つ——を F_2 
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/parity-identity-simple-cycle-relative-configuration/check.sage")
+load("sagemath/check/parity-identity-simple-cycle-local-sign-formula/construction.sage")
 
-SLOT_NAMES = ("up", "down", "left", "right")
-FLAG_NAMES = ("row0", "rowTop", "col0", "colTop")
-
-
-def signature_variables(signature):
-    memberships, flags = signature
-    values = {}
-    for name, in_doubled, in_single in memberships:
-        values["d_" + name] = GF(2)(in_doubled)
-        values["e_" + name] = GF(2)(in_single)
-    for flag_name, flag in zip(FLAG_NAMES, flags):
-        values[flag_name] = GF(2)(flag)
-    return values
-
-
-DE_VARIABLES = tuple(prefix + name
-                     for name in SLOT_NAMES for prefix in ("d_", "e_"))
-FLAG_VARIABLES = FLAG_NAMES
-
-
-ALL_VARIABLES = DE_VARIABLES + FLAG_VARIABLES
-
-
-def monomials_up_to_degree(variables, degree):
-    from itertools import combinations
-    names = []
-    for size in range(degree + 1):
-        names.extend(combinations(variables, size))
-    return names
-
-
-def feature_classes():
-    return tuple(
-        ("全変数の次数 %d 以下" % degree,
-         monomials_up_to_degree(ALL_VARIABLES, degree))
-        for degree in range(1, 7)
-    )
-
-
-def evaluate_monomial(monomial, values):
-    result = GF(2)(1)
-    for variable in monomial:
-        result = result * values[variable]
-    return result
-
-
-def sparsify(solution, kernel_basis):
-    current = solution
-    improved = True
-    while improved:
-        improved = False
-        for basis_vector in kernel_basis:
-            candidate = current + basis_vector
-            if candidate.hamming_weight() < current.hamming_weight():
-                current = candidate
-                improved = True
-    return current
-
-
-signature_values = [signature_variables(signature)
-                    for signature in all_signatures]
-statistic_matrix = matrix(GF(2), rows)
-vertex_vector = vector(GF(2), vertex_terms)
-
-chosen = None
 for class_name, monomials in feature_classes():
     feature_matrix = matrix(GF(2), [
         [evaluate_monomial(monomial, values) for values in signature_values]
@@ -106,15 +41,8 @@ for class_name, monomials in feature_classes():
           % (class_name, len(monomials), len(kernel_basis), len(support)))
     chosen = (class_name, monomials, sparse_solution, support)
     break
-
-class_name, monomials, sparse_solution, support = chosen
 for monomial in support:
     print("TERM: %s" % ("1" if not monomial else "*".join(monomial),))
-
-
-def local_formula_value(signature):
-    values = signature_variables(signature)
-    return sum(evaluate_monomial(monomial, values) for monomial in support)
 
 
 for (doubled, single), vertex_term in zip(cycle_keys, vertex_terms):

@@ -21,19 +21,7 @@ F_2 巡回空間の元である（所属は全件 assert する）。この写�
 ある。有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/trivial-character-fiber-magnitude/check.sage")
-
-
-def induced_orientation(phi, single):
-    moved = moved_edges(phi)
-    orientation = {}
-    for base in single:
-        forward = (base[0], base[1], base[2], 0) in moved
-        backward = (base[0], base[1], base[2], 1) in moved
-        assert forward != backward
-        orientation[base] = 0 if forward else 1
-    return orientation
-
+load("sagemath/check/trivial-character-fiber-orientation-classes/construction.sage")
 
 rank_and_class_counts = {}
 membership_checks = ZZ(0)

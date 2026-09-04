@@ -9,21 +9,8 @@
 浮動小数点は使わない。
 """
 
-load("sagemath/check/non-phase-reversing-standard-smoothing-involution/check.sage")
+load("sagemath/check/doubled-edge-fiber-phase-reduction/construction.sage")
 
-
-fibers = {}
-for phi in nonbacktracking_permutations:
-    doubled, single = doubled_and_single_sets(phi)
-    if not doubled:
-        continue
-    key = (frozenset(doubled), frozenset(single))
-    fibers.setdefault(key, []).append(phi)
-
-classified = 0
-cancelled = 0
-equalities = 0
-remainder_total = 0
 for key, fiber in fibers.items():
     parts = {"contact_free": [], "phase_reversing": [], -4: [], 4: [], "remainder": []}
     for phi in fiber:

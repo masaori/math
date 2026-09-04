@@ -8,34 +8,8 @@
 Q(zeta_8) で検査する。浮動小数点は使わない。
 """
 
-load("sagemath/check/standard-contact-smoothing-involution/check.sage")
+load("sagemath/check/contact-smoothing-phase-reversal/construction.sage")
 
-
-def permutation_key(phi):
-    return tuple(phi[edge] for edge in oriented)
-
-
-def phase_contribution(phi, a, b):
-    value = K8(1)
-    for walk in moved_orbits(phi):
-        orbit_product = K8(1)
-        for edge in walk:
-            orbit_product *= K8(transition_entry(L, a, b, edge, phi[edge]))
-        value *= -orbit_product
-    return value
-
-
-contributions = {}
-for phi in nonbacktracking_permutations:
-    key = permutation_key(phi)
-    contributions[key] = {
-        (a, b): phase_contribution(phi, a, b)
-        for a in (0, 1) for b in (0, 1)
-    }
-
-delta_counts = {ZZ(-4): 0, ZZ(0): 0, ZZ(4): 0}
-checked = 0
-standard_delta_counts = {ZZ(-4): 0, ZZ(0): 0, ZZ(4): 0}
 for phi in nonbacktracking_permutations:
     pairs = switchable_contact_pairs(phi)
     standard = ct_min(phi) if contact_pairs(phi) else None

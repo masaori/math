@@ -16,31 +16,7 @@
 線型方程式で構成する。有限集合、F_2、整数、Q(zeta_8) だけを使う。
 """
 
-load("sagemath/check/curved-free-class-sign-parity-reduction/check.sage")
-
-
-def solve_selector(side, doubled, single):
-    edges = sorted(single)
-    vertices = sorted({vertex for base in edges
-                       for vertex in base_endpoints(side, base)})
-    vertex_index = {vertex: index for index, vertex in enumerate(vertices)}
-    incidence = matrix(GF(2), len(vertices), len(edges))
-    for column, base in enumerate(edges):
-        for vertex in base_endpoints(side, base):
-            incidence[vertex_index[vertex], column] += 1
-    demand = vector(GF(2), len(vertices))
-    for base in doubled:
-        for vertex in base_endpoints(side, base):
-            if vertex not in vertex_index:
-                return None
-            demand[vertex_index[vertex]] += 1
-    try:
-        solution = incidence.solve_right(demand)
-    except ValueError:
-        return None
-    return frozenset(edges[column] for column in range(len(edges))
-                     if solution[column] == 1)
-
+load("sagemath/check/parity-identity-doubled-edge-crossing/construction.sage")
 
 probe_crossing = ZZ(0)
 probe_plain = ZZ(0)

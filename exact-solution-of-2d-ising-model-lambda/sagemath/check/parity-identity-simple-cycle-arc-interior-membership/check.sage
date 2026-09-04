@@ -20,7 +20,7 @@ interior_orient: 型を四スロットの E 所属（名前順）へ置き換え
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/parity-identity-simple-cycle-arc-signature-compression/check.sage")
+load("sagemath/check/parity-identity-simple-cycle-arc-signature-compression/construction.sage")
 
 
 def interior_step(signature, keep_d, keep_c, keep_orient):
@@ -84,8 +84,11 @@ for variant_name, compressor in VARIANTS:
         solvable = False
     rank = variant_matrix.rank()
     variant_results[variant_name] = (len(all_types), rank, conflicts, solvable)
+    # 変種ごとに書き出して流す。ログへ落として走らせたとき、途中で打ち切られても
+    # そこまでの観測が残る（実測 2026-09-05: 打ち切られた実行の interior_d の観測は
+    # 流していなかったため取り出せなかった）。
     print("VARIANT %s: types=%d rank=%d direct-conflicts=%d solvable=%s"
-          % (variant_name, len(all_types), rank, conflicts, solvable))
+          % (variant_name, len(all_types), rank, conflicts, solvable), flush=True)
 
 assert len(joint_keys) == 7085
 print("OBSERVED: %s" % {name: values

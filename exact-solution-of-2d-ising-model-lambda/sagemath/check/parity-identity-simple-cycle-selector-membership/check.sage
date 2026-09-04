@@ -19,16 +19,7 @@ D が非空の鍵で閉路上を伝播する選択情報にあると同定した
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/parity-identity-simple-cycle-joint-local-sign-formula/check.sage")
-
-
-def selector_vertex_signature(side, vertex, doubled, single, chosen):
-    memberships = tuple(
-        (name, ZZ(base in doubled), ZZ(base in single), ZZ(base in chosen))
-        for name, base in incident_base_slots(side, vertex)
-    )
-    return memberships, vertex_wrap_flags(side, vertex)
-
+load("sagemath/check/parity-identity-simple-cycle-selector-membership/construction.sage")
 
 def selector_odd_signature_row(side, doubled, single):
     chosen = key_selector(side, doubled, single)

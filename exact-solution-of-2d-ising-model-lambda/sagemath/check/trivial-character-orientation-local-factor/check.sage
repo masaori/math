@@ -10,77 +10,7 @@
 有限集合、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/trivial-character-fiber-orientation-classes/check.sage")
-
-
-def directed_edge(base, orientation):
-    return base + (orientation,)
-
-
-def local_vertex_counts(single, orientation):
-    curved = ZZ(0)
-    straight = ZZ(0)
-    for vertex in {(row, column) for row in range(L) for column in range(L)}:
-        incident = [base for base in single if vertex in endpoints(L, base + (0,))]
-        if len(incident) != 4:
-            continue
-        incoming = []
-        outgoing = []
-        for base in incident:
-            edge = directed_edge(base, orientation[base])
-            first, second = endpoints(L, edge)
-            if first == vertex:
-                outgoing.append(direction(edge))
-            if second == vertex:
-                incoming.append(direction(edge))
-        assert len(incoming) == 2
-        assert len(outgoing) == 2
-        difference = (incoming[0] - incoming[1]) % 4
-        if difference == 2:
-            straight += 1
-        else:
-            assert difference in (1, 3)
-            curved += 1
-    return curved, straight
-
-
-def ordering_sign(items, reordered):
-    positions = {item: index for index, item in enumerate(items)}
-    sequence = [positions[item] for item in reordered]
-    inversions = sum(
-        ZZ(sequence[left] > sequence[right])
-        for left in range(len(sequence))
-        for right in range(left + 1, len(sequence))
-    )
-    return ZZ(-1) ** inversions
-
-
-def local_determinant_product(moved, a, b):
-    ordered = sorted(moved)
-    vertices = sorted({endpoints(L, edge)[0] for edge in ordered})
-    row_order = sorted(ordered, key=lambda edge: (endpoints(L, edge)[1], edge))
-    column_order = sorted(ordered, key=lambda edge: (endpoints(L, edge)[0], edge))
-    row_sign = ordering_sign(ordered, row_order)
-    column_sign = ordering_sign(ordered, column_order)
-    product_value = K8(1)
-    for vertex in vertices:
-        incoming = [edge for edge in row_order if endpoints(L, edge)[1] == vertex]
-        outgoing = [edge for edge in column_order if endpoints(L, edge)[0] == vertex]
-        assert len(incoming) == len(outgoing)
-        local_matrix = matrix(K8, [
-            [K8(transition_entry(L, a, b, edge, successor))
-             for successor in outgoing]
-            for edge in incoming
-        ])
-        product_value *= local_matrix.det()
-    return K8(row_sign * column_sign) * product_value
-
-
-class_checks = ZZ(0)
-zero_class_checks = ZZ(0)
-nonzero_class_checks = ZZ(0)
-local_type_distribution = {}
-determinant_factorization_checks = ZZ(0)
+load("sagemath/check/trivial-character-orientation-local-factor/construction.sage")
 
 for (doubled, single), fiber in sorted(all_fibers.items()):
     selectors = [

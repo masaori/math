@@ -10,26 +10,7 @@ M・D・E_1 を保ち、四つのスピン構造すべてで位相寄与 W の�
 Q(zeta_8) と整数の等号だけで検査する。浮動小数点は使わない。
 """
 
-load("sagemath/check/contact-smoothing-phase-reversal/check.sage")
-
-
-def standard_pair_delta(phi, pair):
-    edge, other = pair
-    return (
-        step_turning(edge, phi[edge]) + step_turning(other, phi[other])
-        - step_turning(edge, phi[other]) - step_turning(other, phi[edge])
-    )
-
-
-def in_B(phi):
-    """B_L の所属判定: 接触対を持ち、標準対が切り替え可能かつ位相反転であること。"""
-    if not contact_pairs(phi):
-        return False
-    pair = tuple(ct_min(phi))
-    if not is_switchable_contact_pair(phi, pair[0], pair[1]):
-        return False
-    return standard_pair_delta(phi, pair) == 0
-
+load("sagemath/check/phase-reversing-standard-smoothing-involution/construction.sage")
 
 members = [phi for phi in nonbacktracking_permutations if in_B(phi)]
 in_A_count = 0

@@ -23,14 +23,7 @@
 浮動小数点は使わない。
 """
 
-load("sagemath/check/curved-free-class-sum-selection-sign/check.sage")
-
-
-def intersection_pairing(side, left, right):
-    left_h, left_v = subset_parities(side, left)
-    right_h, right_v = subset_parities(side, right)
-    return (left_h * right_v + left_v * right_h) % 2
-
+load("sagemath/check/selection-common-sign-closed-formula/construction.sage")
 
 def closed_formula(side, a, b, first, single):
     single_h, single_v = subset_parities(side, single)

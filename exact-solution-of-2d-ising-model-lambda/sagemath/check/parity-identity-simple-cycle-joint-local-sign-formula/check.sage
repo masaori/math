@@ -18,100 +18,12 @@ parity-identity-simple-cycle-local-sign-formula-extension では、一辺二で
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-from itertools import combinations
+load("sagemath/check/parity-identity-simple-cycle-joint-local-sign-formula/construction.sage")
 
-load("sagemath/check/parity-identity-simple-cycle-local-sign-formula/check.sage")
-
-
-def subsets_of_cycle(cycle):
-    ordered = tuple(sorted(cycle))
-    for size in range(len(ordered) + 1):
-        for chosen in combinations(ordered, size):
-            yield frozenset(chosen)
-
-
-def admissible_selectors(side, doubled, single):
-    def is_even(edges):
-        degrees = {}
-        for edge in edges:
-            for vertex in base_endpoints(side, edge):
-                degrees[vertex] = degrees.get(vertex, ZZ(0)) + 1
-        return all(value % 2 == 0 for value in degrees.values())
-
-    return tuple(
-        chosen for chosen in subsets_of_cycle(single)
-        if is_even(doubled.union(chosen))
-    )
-
-
-def key_selector(side, doubled, single):
-    # key_terms が参照する選択子をここで置き換える。単純閉路 E では選択集合が
-    # 非空ならちょうど二つなので、辞書式最小を取る（extension 検査と同じ規約）。
-    found = admissible_selectors(side, doubled, single)
-    assert len(found) == 2
-    return min(found, key=lambda item: tuple(sorted(item)))
-
-
-def odd_signature_row(side, doubled, single):
-    vertices = sorted({
-        endpoint
-        for edge in doubled.union(single)
-        for endpoint in base_endpoints(side, edge)
-    })
-    counts = {}
-    for vertex in vertices:
-        signature = relative_vertex_signature(side, vertex, doubled, single)
-        counts[signature] = counts.get(signature, ZZ(0)) + 1
-    return frozenset(signature for signature, count in counts.items()
-                     if count % 2 == 1)
-
-
-joint_keys = []
-for (doubled, single), vertex_term in zip(cycle_keys, vertex_terms):
-    joint_keys.append((ZZ(2), doubled, single, GF(2)(vertex_term)))
 assert len(joint_keys) == 320
-
-side_three = ZZ(3)
-edges_three = tuple(
-    (kind, row, column) for kind in ("h", "v")
-    for row in range(side_three) for column in range(side_three))
-cycles_three = tuple(sorted((
-    single for single in even_subgraphs_three
-    if is_simple_cycle(side_three, single)
-    and character_is_trivial_general(side_three, single)
-    and curved_free_orientations(side_three, single)
-), key=lambda item: tuple(sorted(item))))
 assert len(cycles_three) == 312
-
-for single in cycles_three:
-    _, vertex_term, _, _ = key_terms(side_three, frozenset(), single)
-    joint_keys.append((side_three, frozenset(), single, GF(2)(vertex_term)))
-
-nonempty_count = ZZ(0)
-for single in cycles_three:
-    complement = tuple(edge for edge in edges_three if edge not in single)
-    for size in (1, 2):
-        for doubled_tuple in combinations(complement, size):
-            doubled = frozenset(doubled_tuple)
-            if not admissible_selectors(side_three, doubled, single):
-                continue
-            _, vertex_term, _, _ = key_terms(side_three, doubled, single)
-            joint_keys.append(
-                (side_three, doubled, single, GF(2)(vertex_term)))
-            nonempty_count += 1
 assert nonempty_count == 6453
 assert len(joint_keys) == 320 + 312 + 6453
-
-row_records = {}
-conflict_pairs = []
-for side, doubled, single, term in joint_keys:
-    row = odd_signature_row(side, doubled, single)
-    if row in row_records:
-        prev_term, prev_key = row_records[row]
-        if prev_term != term:
-            conflict_pairs.append((prev_key, (side, doubled, single), row))
-    else:
-        row_records[row] = (term, (side, doubled, single))
 
 print("JOINT: keys=%d distinct-odd-signature-rows=%d direct-conflicts=%d"
       % (len(joint_keys), len(row_records), len(conflict_pairs)))
