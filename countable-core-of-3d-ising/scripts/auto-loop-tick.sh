@@ -613,7 +613,18 @@ case "$tick_outcome" in
   前進*) tick_line="$tick_summary" ;;
   *)     tick_line="$tick_outcome" ;;
 esac
-notify_slack "$(printf '%s\n%s' "$tick_line" "$published_url")"
+
+# **報告には最終ゴール・現在地・今回の一歩・次の一手の四項目を必ず入れる**
+# （ユーザー指示 2026-09-05。それまでは今回の一歩だけを送っていて、人間から
+# 「今どういう状況か・ゴール設定が報告に含まれていない」と指摘された）。四項目は
+# 固定文ではなく、README と台帳から共通の組み立て器が毎回抽出する（正本が変われば
+# 報告も変わる）。抽出に失敗したら送らずに落ちる（空欄のまま報告しない）。
+if ! tick_body="$(python3 "$LOOP_WORKTREE/scripts/compose-tick-report.py" \
+      "$LOOP_WORKTREE/$PROJECT_NAME" "$tick_line" 2>>"$LOG_FILE")"; then
+  log "    報告本文（最終ゴール・現在地・今回の一歩・次の一手）を組み立てられなかった"
+  exit 1
+fi
+notify_slack "$(printf '%s\n%s' "$tick_body" "$published_url")"
 
 loop_pdf="$LOOP_WORKTREE/$PROJECT_NAME/structured-latex/build/document.pdf"
 main_pdf_dir="$MAIN_REPO_DIR/$PROJECT_NAME/structured-latex/build"
