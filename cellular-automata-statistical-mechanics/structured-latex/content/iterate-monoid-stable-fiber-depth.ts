@@ -1,7 +1,7 @@
 /**
  * 章「安定ファイバーの最小前周期層」。
  * 既に定義した最小前周期と安定ファイバーだけから、各ファイバーの有限な層分解と
- * 一段発展による正の層の降下を導く。有限集合と自然数だけを使い、R / C は使わない。
+ * 自己写像による正の層の降下を導く。有限集合と自然数だけを使い、R / C は使わない。
  */
 
 import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
@@ -54,7 +54,7 @@ export default defineBlocks([
   {
     id: "iterate_monoid_stable_fiber_depth_decrement_claim",
     kind: "claim",
-    title: { text: "一段発展は正の最小前周期を一つ減らす" },
+    title: { text: "自己写像は正の最小前周期を一つ減らす" },
     labels: ["claim_iterate_monoid_min_preperiod_decrements"],
     habitat: "N",
     statement: [
@@ -103,7 +103,7 @@ F^{n+r}(y)
   {
     id: "iterate_monoid_stable_fiber_depth_transition_claim",
     kind: "claim",
-    title: { text: "一段発展は正の層を一つ下の次ファイバーへ写す" },
+    title: { text: "自己写像は正の層を一つ下の次ファイバーへ写す" },
     labels: ["claim_iterate_monoid_stable_fiber_depth_transition"],
     habitat: "finite",
     statement: [

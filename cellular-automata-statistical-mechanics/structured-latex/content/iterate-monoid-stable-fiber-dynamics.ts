@@ -1,5 +1,5 @@
 /**
- * 章「安定ファイバー間の一段発展」。
+ * 章「安定ファイバー間への自己写像の作用」。
  * 自己写像が安定ファイバーの添字をどう移し、各ファイバーをどこへ写すかを、
  * 有限集合、写像合成、写像の等号だけから導く。R / C は使わない。
  */
@@ -28,7 +28,7 @@ export default defineBlocks([
   {
     id: "iterate_monoid_stable_fiber_dynamics_claim_commutation",
     kind: "claim",
-    title: { text: "冪等反復写像と一段発展は可換である" },
+    title: { text: "冪等反復写像は自己写像と可換である" },
     labels: ["claim_iterate_monoid_cycle_idempotent_commutes_with_generator"],
     habitat: "finite",
     statement: [
@@ -57,7 +57,7 @@ E_F(F(y))
   {
     id: "iterate_monoid_stable_fiber_dynamics_claim_exact_preimage",
     kind: "claim",
-    title: { text: "一段発展は安定ファイバーの完全逆像を定める" },
+    title: { text: "自己写像は安定ファイバーの完全逆像を定める" },
     labels: ["claim_iterate_monoid_stable_fiber_exact_preimage"],
     habitat: "finite",
     statement: [
@@ -141,7 +141,7 @@ F(E_F(y))
   {
     id: "iterate_monoid_stable_fiber_dynamics_claim_finite_decidability",
     kind: "claim",
-    title: { text: "ファイバー間の一段発展は有限決定できる" },
+    title: { text: "ファイバー間の自己写像の作用は有限決定できる" },
     labels: ["claim_iterate_monoid_stable_fiber_dynamics_finite_decidability"],
     habitat: "N",
     statement: [

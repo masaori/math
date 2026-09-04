@@ -1,7 +1,7 @@
 /**
  * 章「安定ファイバーの層別完全逆像」。
  * 安定ファイバー全体の完全逆像と最小前周期の一段減少を組み合わせ、
- * 一段発展が各深さの層を逆像としてどう分けるかを導く。R / C は使わない。
+ * 自己写像が各深さの層を逆像としてどう分けるかを導く。R / C は使わない。
  */
 
 import { defineBlocks, displayMath, math, paragraph, ref } from "../schema.ts";
@@ -10,7 +10,7 @@ export default defineBlocks([
   {
     id: "iterate_monoid_stable_fiber_zero_layer_forward_claim",
     kind: "claim",
-    title: { text: "一段発展は最小前周期が零の層を零の層へ写す" },
+    title: { text: "自己写像は最小前周期が零の層を零の層へ写す" },
     labels: ["claim_iterate_monoid_zero_depth_maps_to_zero_depth"],
     habitat: "N",
     statement: [
@@ -133,7 +133,7 @@ k
     habitat: "N",
     statement: [
       paragraph([
-        "有限集合上の自己写像の有限表から、全ての安定ファイバーの層と、その一段発展による完全逆像を",
+        "有限集合上の自己写像の有限表から、全ての安定ファイバーの層と、その自己写像による完全逆像を",
         "有限回の元の等号検査で決定できる。",
       ]),
     ],

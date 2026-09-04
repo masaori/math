@@ -84,7 +84,7 @@ E_F(z)
   {
     id: "iterate_monoid_stable_image_definition_inverse_candidate",
     kind: "definition",
-    title: { text: "安定像上の一段発展の逆写像候補" },
+    title: { text: "安定像上の自己写像の逆写像候補" },
     labels: ["def_iterate_monoid_stable_image_inverse_candidate"],
     habitat: "finite",
     statement: [

@@ -201,10 +201,40 @@ const PHYSICS_IDENTIFIER_TERMS = [
   ...new Set(PHYSICS_TERM_CORRESPONDENCE.flatMap((entry) => entry.identifiers ?? [])),
 ];
 
+/**
+ * 時間発展を含意する語。**数学的道具立て章でのみ禁止する（CA 章では自由）。**
+ *
+ * 章の境界は「2 元状態・局所規則・大域写像・時間発展を仮定せずに述べられるもの」だが、
+ * CA 固有語の対応表はこの四つのうち時間発展だけを `時刻` でしか押さえていなかった。
+ * 実際、数学的道具立て章は有限集合上の自己写像 `F` の一回の適用を `一段発展` と呼んでおり、
+ * `発展` は CA 固有語にも既存物理由来語にも無いため、どの検査にも現れないまま
+ * 時間発展の読みが章へ入っていた（本 tick で `自己写像` へ改名した。識別子の軸は改名前から
+ * `generator` を使っており、散文だけが時間の言葉を持っていた）。
+ *
+ * CA 固有語の対応表へ足せない。あちらは「CA 章の本文で実際に使われていること」を要求するが、
+ * `発展` は CA 章の本文に一度も現れないためである（CA 章は時間の軸を `時刻` で書く）。
+ * したがって既存物理由来語と同じ禁止語の規律で別に持つ。禁止語なので CA 章での使用は求めない。
+ */
+const TIME_EVOLUTION_TERM_CORRESPONDENCE: readonly TermCorrespondenceEntry[] = [
+  { body: "発展", identifiers: ["evolution"] },
+];
+
+const TIME_EVOLUTION_TERMS = TIME_EVOLUTION_TERM_CORRESPONDENCE.map((entry) => entry.body);
+
+const TIME_EVOLUTION_IDENTIFIER_TERMS = [
+  ...new Set(TIME_EVOLUTION_TERM_CORRESPONDENCE.flatMap((entry) => entry.identifiers ?? [])),
+];
+
+function timeEvolutionTermsIn(block: unknown): string[] {
+  const text = normalizedTextOf(block).toLowerCase();
+  return TIME_EVOLUTION_TERMS.filter((term) => text.includes(term.toLowerCase()));
+}
+
 /** 二つの対応表を同じ規則で検査する。CA 固有語と既存物理由来語で規律が食い違わないようにする。 */
 const correspondenceViolations: string[] = [
   ...correspondenceTableViolations("CA 固有語", CA_TERM_CORRESPONDENCE),
   ...correspondenceTableViolations("既存物理由来語", PHYSICS_TERM_CORRESPONDENCE),
+  ...correspondenceTableViolations("時間発展を含意する語", TIME_EVOLUTION_TERM_CORRESPONDENCE),
 ];
 
 /**
@@ -664,6 +694,20 @@ for (const file of files) {
           `数学的道具立て章の本文に既存物理由来語がある: ${block.id}（${bodyPhysicsHits.join("、")}）`,
         );
       }
+      const bodyTimeHits = timeEvolutionTermsIn(block);
+      if (bodyTimeHits.length > 0) {
+        violations.push(
+          `数学的道具立て章の本文に時間発展を含意する語がある: ${block.id}（${bodyTimeHits.join("、")}）`,
+        );
+      }
+      const identifierTimeHits = TIME_EVOLUTION_IDENTIFIER_TERMS.filter((term) =>
+        [block.id, ...block.labels].some((value) => value.toLowerCase().includes(term)),
+      );
+      if (identifierTimeHits.length > 0) {
+        violations.push(
+          `数学的道具立て章の識別子に時間発展を含意する語がある: ${block.id}（${identifierTimeHits.join("、")}）`,
+        );
+      }
     }
     if (inCa) {
       const bodyPhysicsHits = physicsTermsIn(block);
@@ -953,6 +997,7 @@ console.log(
     `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.size} 件、` +
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
     `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用を、句の内側・単独適用・宣言全体での差し引きの三面で確認し、全句適用後の本文でも既存物理由来語 0 件・宣言に無い CA 固有語 0 件、除外の回帰 ${duplicateTermMaskingRegressions.length} 件）、` +
+    `数学的道具立て章の時間発展を含意する語 0 件（本文・識別子の二軸、対応表 ${TIME_EVOLUTION_TERM_CORRESPONDENCE.length} 件）、` +
     `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
