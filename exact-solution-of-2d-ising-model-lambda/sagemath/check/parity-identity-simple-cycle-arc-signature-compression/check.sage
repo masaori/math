@@ -38,34 +38,36 @@ def signature_wrap_total(signature):
     return sum(ZZ(flag) for flag in wrap_flags)
 
 
-def endpoint_pair(word):
-    return min((word[0], word[-1]), (word[-1], word[0]))
-
-
-def compress_counts(kind, word):
+def compress_counts(kind, word, endpoints=None):
     curved = sum(1 for signature in word
                  if signature_turn_type(signature) == "curved")
     wraps = sum(signature_wrap_total(signature) for signature in word)
     if kind == "cycle":
+        assert endpoints is None
         return ("cycle", len(word), ZZ(curved), ZZ(wraps))
-    return ("arc", len(word), ZZ(curved), ZZ(wraps), endpoint_pair(word))
+    assert endpoints is not None
+    return ("arc", len(word), ZZ(curved), ZZ(wraps), endpoints)
 
 
-def compress_turnword(kind, word):
+def compress_turnword(kind, word, endpoints=None):
     turns = tuple(signature_turn_type(signature) for signature in word)
     wraps = sum(signature_wrap_total(signature) for signature in word)
     if kind == "cycle":
+        assert endpoints is None
         return ("cycle", cyclic_reversal_invariant_word(turns), ZZ(wraps))
+    assert endpoints is not None
     return ("arc", reversal_invariant_word(turns), ZZ(wraps),
-            endpoint_pair(word))
+            endpoints)
 
 
-def compress_turnwrapword(kind, word):
+def compress_turnwrapword(kind, word, endpoints=None):
     steps = tuple((signature_turn_type(signature), signature[1])
                   for signature in word)
     if kind == "cycle":
+        assert endpoints is None
         return ("cycle", cyclic_reversal_invariant_word(steps))
-    return ("arc", reversal_invariant_word(steps), endpoint_pair(word))
+    assert endpoints is not None
+    return ("arc", reversal_invariant_word(steps), endpoints)
 
 
 COMPRESSIONS = (
@@ -82,6 +84,7 @@ def compressed_arc_types(side, doubled, single, compressor):
         selector_vertex_signature(side, vertex, doubled, single, chosen)
         for vertex in vertices)
     boundary = boundary_vertices(side, doubled)
+    assert boundary.issubset(set(vertices))
     if not boundary:
         return (compressor("cycle", words),)
     cuts = [index for index, vertex in enumerate(vertices)
@@ -93,7 +96,10 @@ def compressed_arc_types(side, doubled, single, compressor):
             word = words[begin:end]
         else:
             word = words[begin:] + words[:end]
-        arcs.append(compressor("arc", word))
+        assert word
+        endpoints = min((words[begin], words[end]),
+                        (words[end], words[begin]))
+        arcs.append(compressor("arc", word, endpoints))
     return tuple(arcs)
 
 
