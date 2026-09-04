@@ -306,9 +306,8 @@ w\in U_N(S\cup T)
   \qquad(\because\ \text{積の指数表示}).
 \end{aligned}`),
       paragraph([
-        "各段の量は ", math(String.raw`\mathbb N`), " の元であり、",
-        math(String.raw`\mathbb R`), " も ", math(String.raw`\mathbb C`),
-        " も現れない。",
+        "各段の量は ", math(String.raw`\mathbb N`),
+        " の元であり、実数体も複素数体も現れない。",
       ]),
     ],
   },

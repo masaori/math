@@ -91,6 +91,61 @@ let headingCount = 0;
     );
   }
 
+  // 綴りの揺れの回帰検査。中括弧を外した `\mathbb R` が素通りしていた穴を塞いだので、
+  // 綴りごとに実際へ検査が掛かることを毎回確かめる（本文には中括弧付きしか無いため、
+  // 確かめないとこの分岐は静かに壊れる）。
+  for (const spelling of [
+    String.raw`q\in\mathbb R`,
+    String.raw`q\in\mathbb C`,
+    String.raw`q\in\Bbb{R}`,
+    String.raw`q\in\Bbb C`,
+    String.raw`q\in\mathbf R`,
+    "q\\in ℝ",
+  ]) {
+    const spellingProbe = {
+      id: "probe_real_escape_spelling",
+      kind: "claim",
+      title: { text: "綴りの揺れの回帰検査" },
+      labels: [],
+      habitat: "finite",
+      statement: [{ type: "math", tex: spelling }],
+    } as unknown as ConvertedBlock;
+    const beforeSpelling = projectIssues.length;
+    checkProjectRules(spellingProbe, "(ℝ/ℂ 綴りの回帰検査)");
+    const spellingRaised = projectIssues.splice(beforeSpelling).join("\n");
+    if (!spellingRaised.includes("ℝ/ℂ が現れる")) {
+      throw new Error(
+        `ℝ/ℂ 綴りの回帰検査が失敗した: 可算宣言のブロックに ${spelling} を置いても検査が掛からない` +
+          `（報告: ${spellingRaised || "なし"}）`,
+      );
+    }
+  }
+
+  // 逆向きの回帰検査。可算な母集合の記号を ℝ/ℂ と誤検出しないこと（誤検出は本文を
+  // 書けなくするので、緩みと同じく検査の失敗である）。
+  for (const innocent of [
+    String.raw`q\in\mathbb{N}`,
+    String.raw`k\in\mathbb Z`,
+    String.raw`\mathrm{Rec}(F)`,
+  ]) {
+    const innocentProbe = {
+      id: "probe_real_escape_false_positive",
+      kind: "claim",
+      title: { text: "誤検出の回帰検査" },
+      labels: [],
+      habitat: "finite",
+      statement: [{ type: "math", tex: innocent }],
+    } as unknown as ConvertedBlock;
+    const beforeInnocent = projectIssues.length;
+    checkProjectRules(innocentProbe, "(ℝ/ℂ 誤検出の回帰検査)");
+    const innocentRaised = projectIssues.splice(beforeInnocent).join("\n");
+    if (innocentRaised.includes("ℝ/ℂ が現れる")) {
+      throw new Error(
+        `ℝ/ℂ 誤検出の回帰検査が失敗した: ${innocent} を ℝ/ℂ と報告した（報告: ${innocentRaised}）`,
+      );
+    }
+  }
+
   // `\blkref` の実在確認も同じ走査範囲でなければならない。定理型のタイトルと見出しの
   // タイトルの両方から拾えることを毎回確かめる（現在の本文に `title.tex` は無いので、
   // 確かめないとこの経路は静かに壊れる）。
@@ -308,13 +363,11 @@ function checkProjectRules(block: ConvertedBlock, file: string): void {
     // 住処の宣言か証明のどちらかが誤っている。
     // 「ℝ を使わない」と本文で述べる文脈は地の文（text ノード）に書けるので、
     // 検査対象は数式（本文ノードの数式とタイトルの数式）だけにしてある。
-    const offending = math.filter((value) =>
-      /\\mathbb\{(R|C)\}|\\mathbf\{(R|C)\}|\\Re\b|\\Im\b/.test(value),
-    );
-    const first = offending[0];
+    const first = math.find((value) => blackboardRealOrComplexIn(value) !== undefined);
     if (first !== undefined) {
       projectIssues.push(
         `${file}:${block.id} は可算な住処 "${habitat}" を宣言しているのに数式に ℝ/ℂ が現れる: ${first}\n` +
+          `    → 検出した綴り: ${blackboardRealOrComplexIn(first) ?? ""}\n` +
           '    → 実際に ℝ/ℂ を使っているなら habitat を "R" / "C" / "mixed" にし、realEscape を書く。\n' +
           "    → 使っていないなら数式から ℝ/ℂ の記号を除く（地の文で言及するのは可）。",
       );
@@ -332,6 +385,33 @@ function checkProjectRules(block: ConvertedBlock, file: string): void {
       }
     }
   }
+}
+
+/**
+ * 数式の中の ℝ/ℂ を指す綴りを一つ返す（無ければ `undefined`）。
+ *
+ * **中括弧を要求してはならない。** LaTeX も KaTeX も、フォント命令の引数が 1 文字なら
+ * 中括弧を省ける（`\mathbb R` は `\mathbb{R}` と同じ組版結果になる）。旧版の検査は
+ * `\\mathbb\{(R|C)\}` のように中括弧付きだけを見ていたため、**中括弧を外した綴りが
+ * 可算宣言の裏取りを素通りしていた**。
+ *
+ * 実測: `habitat: "finite"` のブロックの数式を `q\in Q_F\subseteq\mathbb R` に差し替えると、
+ * 実行時検証は違反 0 件で終了コード 0、`npm run check` も終了コード 0 で通り、
+ * `build/document.tex` に `\mathbb R` がそのまま乗り、tectonic が組んだ PDF の本文に
+ * 「各 q ∈ Q_F ⊆ ℝ」と印字された。可算で閉じているという宣言だけが無傷で残る。
+ *
+ * そこで綴りの揺れをまとめて見る。中括弧の有無、`\Bbb`（`\mathbb` の別名）、
+ * 直書きの Unicode 文字 ℝ/ℂ を含める。
+ *
+ * 角括弧の区間記法の検査（母集合の添字）にはこの正規化を掛けない。あちらは
+ * `_{\mathbb{N}}` という**書き方そのもの**を要求する記法の規律であり、綴りの揺れを
+ * 許すのは検査を緩める方向になるからである。
+ */
+function blackboardRealOrComplexIn(tex: string): string | undefined {
+  const match = /\\(?:mathbb|mathbf|Bbb)\s*(?:\{\s*[RC]\s*\}|[RC])(?![A-Za-z])|\\Re\b|\\Im\b|[ℝℂ]/.exec(
+    tex,
+  );
+  return match?.[0];
 }
 
 function collectMathStrings(nodes: readonly Node[], out: string[]): void {
