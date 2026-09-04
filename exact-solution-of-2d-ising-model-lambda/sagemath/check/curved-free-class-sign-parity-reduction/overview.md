@@ -8,7 +8,7 @@ $2^{n_4(E)}$ を除いた符号を、動辺数、終点別の行順序への置�
 列順序への置換、局所行列式積の正規化位相という四つの偶奇へ分解する。
 これにより未ねじれの一般符号同定は、その和が
 
-$$arepsilon_{L,\mathrm h}(E)+\varepsilon_{L,\mathrm v}(E)
+$$\varepsilon_{L,\mathrm h}(E)+\varepsilon_{L,\mathrm v}(E)
 +\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(E)
 +\langle D\cup C_0,E\rangle\pmod 2$$
 
