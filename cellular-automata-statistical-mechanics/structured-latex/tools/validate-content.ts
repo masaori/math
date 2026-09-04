@@ -73,6 +73,23 @@ let headingCount = 0;
         `（報告: ${raised || "なし"}）`,
     );
   }
+
+  const headingProbe = {
+    id: "probe_heading_published_math_scope",
+    kind: "heading",
+    level: 2,
+    title: { tex: String.raw`[a,b]` },
+    labels: [],
+  } as unknown as ConvertedBlock;
+  const beforeHeading = projectIssues.length;
+  checkProjectRules(headingProbe, "(見出し走査範囲の回帰検査)");
+  const headingRaised = projectIssues.splice(beforeHeading).join("\n");
+  if (!headingRaised.includes("母集合の添字が無い")) {
+    throw new Error(
+      "見出し走査範囲の回帰検査が失敗した: 見出しタイトルの数式に添字なし区間を置いても検査が掛からない" +
+        `（報告: ${headingRaised || "なし"}）`,
+    );
+  }
 }
 
 const contentFiles = await loadContentFiles();
@@ -220,7 +237,7 @@ function bodyNodesOf(block: ConvertedBlock): readonly (readonly Node[])[] {
 function publishedMathOf(block: ConvertedBlock): string[] {
   const math: string[] = [];
   for (const nodes of bodyNodesOf(block)) collectMathStrings(nodes, math);
-  if (block.kind !== "heading" && block.kind !== "figure") {
+  if (block.kind !== "figure") {
     const title = block.title;
     if (title !== null && title !== undefined && title.tex !== undefined) math.push(title.tex);
   }
@@ -242,8 +259,6 @@ function publishedMathOf(block: ConvertedBlock): string[] {
  * タイトルの数式が再び無検査になる。
  */
 function checkProjectRules(block: ConvertedBlock, file: string): void {
-  if (block.kind === "heading") return;
-
   const math = publishedMathOf(block);
   // 母集合の添字は住処に依らない記法の規律なので、住処を持たない図にも掛ける。
   const ambiguousInterval = math.find((value) =>
@@ -257,8 +272,8 @@ function checkProjectRules(block: ConvertedBlock, file: string): void {
   }
 
   // ここから下は本プロジェクト固有メタデータ（住処・検証対応）を持つ定理型だけの検査。
-  // 図はそのメタデータを持たないので、型の上でも掛けようがない。
-  if (block.kind === "figure") return;
+  // 見出しと図はそのメタデータを持たないので、型の上でも掛けようがない。
+  if (block.kind === "heading" || block.kind === "figure") return;
 
   for (const issue of checkHabitation(block)) {
     projectIssues.push(`${file}: ${issue}`);
