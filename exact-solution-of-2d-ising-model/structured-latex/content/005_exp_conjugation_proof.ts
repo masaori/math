@@ -1641,9 +1641,9 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
 &= \left\|\left(P_N-Q_N\right)+\left(Q_N-\exp(X)\,Y\,\exp(-X)\right)\right\|
    &&(\because\ \text{行列の和の結合則と}\ (-Q_N)+Q_N=O) \\
 &\le \left\|P_N-Q_N\right\|+\left\|Q_N-\exp(X)\,Y\,\exp(-X)\right\|
-   &&(\because\ \text{ノルムの三角不等式}) \\
+   &&(\because\ \text{ノルムの三角不等式。}\blkref{matrix_norm_triangle_inequality}) \\
 &= \left\|Q_N-P_N\right\|+\left\|Q_N-\exp(X)\,Y\,\exp(-X)\right\|
-   &&(\because\ \text{ノルムの斉次性を}\ c=-1\ \text{に取ること}) \\
+   &&(\because\ \text{ノルムの斉次性を}\ c=-1\ \text{に取ること。}\blkref{matrix_norm_triangle_inequality}) \\
 &\longrightarrow 0+0
    &&(\because\ \text{Step 5 と Step 2}) \\
 &= 0
@@ -1747,6 +1747,7 @@ X(-X)
         "2026-09-04 の式変形統一で、指数の積・零行列の指数・ad_X の定義への後置き参照を削り、それぞれを使う行末の (∵ …) へ \\blkref を移した。内容・式変形・根拠は変えていない。",
         "2026-09-04 の式変形統一で、Step 4 の冪と項別ノルム評価に後置きしていた劣乗法性・斉次性の参照を、各適用行の末尾へ移した。内容・式変形・根拠は変えていない。",
         "2026-09-04 の式変形統一で、Step 5 の三角不等式・斉次性と指数級数の尾部評価に後置きしていた参照を、各適用行の末尾へ移した。内容・式変形・根拠は変えていない。",
+        "2026-09-04 の式変形統一で、Step 6 の三角不等式と斉次性に前置きしていた参照を、各適用行の末尾へ移した。内容・式変形・根拠は変えていない。",
       ],
     },
   },
