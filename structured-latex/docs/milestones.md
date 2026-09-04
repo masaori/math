@@ -73,7 +73,7 @@ graph TD
   | --- | --- |
   | 解決（採番・参照解決・ノート配置）の実装がシステムに 1 つだけになった（F9 の解消） | **済**。`domain-model/resolved/resolve.ts`。厳格な `resolve` と寛容な `resolveTolerantly` が同じ実装を通る |
   | 静的 HTML + KaTeX 表示、`ref` の相互リンク | **済**。各論文の `tools/build-html.ts` |
-  | 目次でのナビゲーション | **済**。`renderers/html/chapter-navigation.ts` を各静的HTML生成器が共有 |
+  | 目次でのナビゲーション | **済**。`renderers/html/chapter-navigation.ts` を各静的HTML生成器が共有。スマートフォン幅ではハンバーガーから入れ子を含む全階層の目次を開く |
   | 公開 Web サイトの**システム共通生成器** | **未**。生成器本体は各論文側に残るため M5 は未完了 |
   | **部分**アップロードによる更新（セグメント単位の受け入れ API、版と楽観ロック） | **未**。M6 は未完了 |
   | 複数人が同時に同じサイトを見ながら更新する運用 | **未** |

@@ -33,6 +33,11 @@ jobs:
       - name: Install system dependencies (structured-latex)
         working-directory: structured-latex
         run: pnpm install --frozen-lockfile
+      # 入力言語の正本と、各論文が共有する既定UI（章ナビゲーション等）自体の検査。
+      # ここを回さないと、共有レンダラーの単体テストが CI で一度も実行されない。
+      - name: Check system (structured-latex)
+        working-directory: structured-latex
+        run: npm run check
       - run: pnpm install --frozen-lockfile
       # 生成物の鮮度 → 型検査 → 実行時検証 → 移行漏れ検出 → 負テスト → 実行時検証テスト。
       - run: npm run check
