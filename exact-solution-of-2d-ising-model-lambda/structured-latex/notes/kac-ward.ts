@@ -2025,6 +2025,17 @@ c(o)
         math(String.raw`D\ne\varnothing`),
         " を含む鍵の族で検査し、成り立つ形へ整える。",
       ]),
+      paragraph([
+        "この ", math(String.raw`16`),
+        " 項式を一辺三の自明文字単純閉路と、選択集合が非空で ",
+        math(String.raw`1\le |D|\le2`),
+        " である全 ", math(String.raw`6{,}453`),
+        " 鍵へ代入すると、", math(String.raw`3{,}246`),
+        " 鍵で頂点項と一致しなかった。従って一辺二で得た式は重複隣接に依存し、",
+        "一般辺長の公式にはならない",
+        "（sagemath/check/parity-identity-simple-cycle-local-sign-formula-extension）。",
+        "次は一辺二と一辺三を同時に満たす局所特徴を解く。",
+      ]),
     ],
   },
 ]);
