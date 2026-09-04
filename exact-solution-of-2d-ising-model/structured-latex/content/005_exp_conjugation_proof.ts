@@ -1542,17 +1542,13 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
         math(String.raw`L+1\le N`),
         " なので ",
         math(String.raw`A_N,B_N`),
-        " は空でない）、三角不等式（",
-        ref("matrix_norm_triangle_inequality"),
-        " (3) を有限個に繰り返し適用）と ",
-        ref("matrix_norm_triangle_inequality"),
-        " (2)、および Step 4 より",
+        " は空でない）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left\|Q_N-P_N\right\|
 &\le \sum_{(p,q)\in D_N}\frac{1}{p!\,q!}\left\|X^{p}Y(-X)^{q}\right\|
-   \quad (\because \text{三角不等式・斉次性}) \\
+   \quad (\because \text{三角不等式・斉次性。}\blkref{matrix_norm_triangle_inequality}) \\
 &\le \|Y\|\sum_{(p,q)\in D_N}\frac{a^{p}}{p!}\cdot\frac{a^{q}}{q!}
    \quad (\because \text{Step 4}) \\
 &\le \|Y\|\left(\sum_{(p,q)\in A_N}\frac{a^{p}}{p!}\frac{a^{q}}{q!}
@@ -1562,8 +1558,6 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
       ),
       paragraph([
         "ここで ",
-        ref("real_exp_series_converges"),
-        " (2)(3) より ",
         math(String.raw`\sum_{q=0}^{N}\frac{a^{q}}{q!}=E_N(a)\le E(a)`),
         " かつ ",
         math(String.raw`\sum_{p=L+1}^{N}\frac{a^{p}}{p!}\le R_{L}(a)`),
@@ -1577,11 +1571,11 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
 &= \left(\sum_{p=L+1}^{N}\frac{a^{p}}{p!}\right)\left(\sum_{q=0}^{N}\frac{a^{q}}{q!}\right)
    &&(\because\ \text{長方形の添字集合にわたる有限和の、積への分解（分配律）}) \\
 &\le R_{L}(a)\left(\sum_{q=0}^{N}\frac{a^{q}}{q!}\right)
-   &&(\because\ \sum_{p=L+1}^{N}\tfrac{a^{p}}{p!}\le R_{L}(a)\ \text{と}\ \sum_{q=0}^{N}\tfrac{a^{q}}{q!}\ge 0) \\
+   &&(\because\ \sum_{p=L+1}^{N}\tfrac{a^{p}}{p!}\le R_{L}(a)\ \text{と}\ \sum_{q=0}^{N}\tfrac{a^{q}}{q!}\ge 0\text{。}\blkref{real_exp_series_converges}) \\
 &= R_{L}(a)\,E_N(a)
    &&(\because\ E_N(a)\ \text{の定義}) \\
 &\le R_{L}(a)\,E(a)
-   &&(\because\ E_N(a)\le E(a)\ \text{と}\ R_{L}(a)\ge 0)
+   &&(\because\ E_N(a)\le E(a)\ \text{と}\ R_{L}(a)\ge 0\text{。}\blkref{real_exp_series_converges})
 \end{aligned}`,
       ),
       paragraph(["同じ 4 段を ", math(String.raw`B_N`), " について繰り返して"]),
@@ -1591,11 +1585,11 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
 &= \left(\sum_{p=0}^{N}\frac{a^{p}}{p!}\right)\left(\sum_{q=L+1}^{N}\frac{a^{q}}{q!}\right)
    &&(\because\ \text{長方形の添字集合にわたる有限和の、積への分解（分配律）}) \\
 &\le \left(\sum_{p=0}^{N}\frac{a^{p}}{p!}\right)R_{L}(a)
-   &&(\because\ \sum_{q=L+1}^{N}\tfrac{a^{q}}{q!}\le R_{L}(a)\ \text{と}\ \sum_{p=0}^{N}\tfrac{a^{p}}{p!}\ge 0) \\
+   &&(\because\ \sum_{q=L+1}^{N}\tfrac{a^{q}}{q!}\le R_{L}(a)\ \text{と}\ \sum_{p=0}^{N}\tfrac{a^{p}}{p!}\ge 0\text{。}\blkref{real_exp_series_converges}) \\
 &= E_N(a)\,R_{L}(a)
    &&(\because\ E_N(a)\ \text{の定義}) \\
 &\le E(a)\,R_{L}(a)
-   &&(\because\ E_N(a)\le E(a)\ \text{と}\ R_{L}(a)\ge 0)
+   &&(\because\ E_N(a)\le E(a)\ \text{と}\ R_{L}(a)\ge 0\text{。}\blkref{real_exp_series_converges})
 \end{aligned}`,
       ),
       paragraph(["よって"]),
@@ -1749,9 +1743,10 @@ X(-X)
           "matrix_norm_triangle_inequality / matrix_norm_submultiplicativity / matrix_completeness（ノルムと完備性）、" +
           "labels: real_exp_series_converges / matrix_exp_series_converges / exp_converges / def_exp（指数級数とその定義）、" +
           "labels: theorem_exp_product / theorem_exp_zero（可逆性）を使って完全に証明できるので、" +
-          "Lie 群論を経由せずここで証明した。",
+        "Lie 群論を経由せずここで証明した。",
         "2026-09-04 の式変形統一で、指数の積・零行列の指数・ad_X の定義への後置き参照を削り、それぞれを使う行末の (∵ …) へ \\blkref を移した。内容・式変形・根拠は変えていない。",
         "2026-09-04 の式変形統一で、Step 4 の冪と項別ノルム評価に後置きしていた劣乗法性・斉次性の参照を、各適用行の末尾へ移した。内容・式変形・根拠は変えていない。",
+        "2026-09-04 の式変形統一で、Step 5 の三角不等式・斉次性と指数級数の尾部評価に後置きしていた参照を、各適用行の末尾へ移した。内容・式変形・根拠は変えていない。",
       ],
     },
   },
