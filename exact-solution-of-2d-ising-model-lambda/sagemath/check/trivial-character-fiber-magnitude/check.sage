@@ -12,6 +12,13 @@
 
 load("sagemath/check/trivial-character-fiber-magnitude/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+comparisons = ZZ(0)
+magnitude_distribution = {}
+rank_distribution = {}
+trivial_nonempty_fibers = ZZ(0)
+
 for (doubled, single), fiber in all_fibers.items():
     selectors = [
         selected for selected in base_edge_subsets

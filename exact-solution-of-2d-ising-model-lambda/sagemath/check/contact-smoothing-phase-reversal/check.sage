@@ -10,6 +10,12 @@ Q(zeta_8) で検査する。浮動小数点は使わない。
 
 load("sagemath/check/contact-smoothing-phase-reversal/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+checked = 0
+delta_counts = {ZZ(-4): 0, ZZ(0): 0, ZZ(4): 0}
+standard_delta_counts = {ZZ(-4): 0, ZZ(0): 0, ZZ(4): 0}
+
 for phi in nonbacktracking_permutations:
     pairs = switchable_contact_pairs(phi)
     standard = ct_min(phi) if contact_pairs(phi) else None

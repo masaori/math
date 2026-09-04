@@ -21,6 +21,14 @@ Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 
 load("sagemath/check/curved-free-class-sum-selection-sign/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+fiber_keys = ZZ(0)
+orientation_value_checks_three = ZZ(0)
+orientation_value_checks_two = ZZ(0)
+selector_sign_checks_three = ZZ(0)
+trivial_nonempty_three = ZZ(0)
+
 for (doubled, single), fiber in sorted(all_fibers.items()):
     selectors = [
         selected for selected in base_edge_subsets

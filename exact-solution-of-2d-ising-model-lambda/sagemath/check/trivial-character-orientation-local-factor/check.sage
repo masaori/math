@@ -12,6 +12,14 @@
 
 load("sagemath/check/trivial-character-orientation-local-factor/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+class_checks = ZZ(0)
+determinant_factorization_checks = ZZ(0)
+local_type_distribution = {}
+nonzero_class_checks = ZZ(0)
+zero_class_checks = ZZ(0)
+
 for (doubled, single), fiber in sorted(all_fibers.items()):
     selectors = [
         selected for selected in base_edge_subsets

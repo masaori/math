@@ -19,6 +19,10 @@
 
 load("sagemath/check/parity-identity-simple-cycle-key-terms/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+expressible_by_side = {}
+
 for side in (2, 3):
     keys = collect_keys(side)
     cycle_keys = [(doubled, single) for doubled, single in keys

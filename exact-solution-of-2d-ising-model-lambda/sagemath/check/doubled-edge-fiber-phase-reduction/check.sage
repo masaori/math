@@ -11,6 +11,13 @@
 
 load("sagemath/check/doubled-edge-fiber-phase-reduction/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+cancelled = 0
+classified = 0
+equalities = 0
+remainder_total = 0
+
 for key, fiber in fibers.items():
     parts = {"contact_free": [], "phase_reversing": [], -4: [], 4: [], "remainder": []}
     for phi in fiber:

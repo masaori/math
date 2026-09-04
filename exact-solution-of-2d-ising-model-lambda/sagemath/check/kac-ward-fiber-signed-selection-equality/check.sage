@@ -10,6 +10,10 @@ U_L^{a,b}(D,E) を ZZ で定義から計算し、両者が一致することを�
 
 load("sagemath/check/kac-ward-fiber-signed-selection-equality/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+comparisons = 0
+
 for (doubled, single), fiber in all_fibers.items():
     assert not doubled.intersection(single)
     assert is_even_edge_subset(single)

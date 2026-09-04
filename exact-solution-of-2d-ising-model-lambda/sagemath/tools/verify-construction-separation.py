@@ -50,6 +50,56 @@ def toplevel_check_lines(path):
     return sorted(found)
 
 
+def _mutated_names(tree):
+    """前の値へ足し込む形で書き換えられる名前（累算器）。"""
+    names = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.AugAssign):
+            for target in ast.walk(node.target):
+                if isinstance(target, ast.Name):
+                    names.add(target.id)
+        elif (isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name)
+              and node.attr in ("append", "update", "add", "setdefault", "extend")):
+            names.add(node.value.id)
+        elif isinstance(node, ast.Subscript) and isinstance(node.ctx, ast.Store):
+            base = node.value
+            while isinstance(base, ast.Subscript):
+                base = base.value
+            if isinstance(base, ast.Name):
+                names.add(base.id)
+    return names
+
+
+def _plain_assigned(tree):
+    """トップレベルの単純な代入で初期化される名前。"""
+    names = set()
+    for st in tree.body:
+        if (isinstance(st, ast.Assign) and len(st.targets) == 1
+                and isinstance(st.targets[0], ast.Name)):
+            names.add(st.targets[0].id)
+    return names
+
+
+def double_counted_accumulators(construction_path, check_path):
+    """構成でも check でも足し込まれるのに、check 側で初期化し直していない累算器。
+
+    構成へ移した文にもとから assert が付いていると、その文は原文のまま check.sage へも
+    置く（assertion を減らさないため）。このとき初期化が構成側にしかないと、構成での
+    実行ぶんへ check がもう一度足し込み、件数の assert が落ちる
+    （実測 2026-09-05: comparisons が 2,436 ではなく 4,872 になった）。
+    """
+    with open(construction_path, encoding="utf-8") as handle:
+        construction = ast.parse(handle.read())
+    with open(check_path, encoding="utf-8") as handle:
+        check = ast.parse(handle.read())
+    return sorted(
+        _mutated_names(check)
+        & _mutated_names(construction)
+        & _plain_assigned(construction)
+        - _plain_assigned(check)
+    )
+
+
 def load_closure(target):
     chain, stack = [], [target]
     while stack:
@@ -94,6 +144,10 @@ def verify(root, target):
         for dep in loads_of(own_check):
             if dep.endswith("/check.sage"):
                 problems.append("検算が上流の検算を読んでいる: %s -> %s" % (own_check, dep))
+        doubled = double_counted_accumulators(path, own_check)
+        if doubled:
+            problems.append("check 側で初期化し直していない累算器がある（二重に足し込む）: %s の %s"
+                            % (own_check, "、".join(doubled)))
 
     print("読み込み連鎖: 構成 %d 本、検算 %d 本" % (len(constructions), len(checks)))
     return problems

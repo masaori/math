@@ -69,6 +69,24 @@ root="$(make_case check_ignores_own_construction)"
 printf '%s\n' 'VALUE = 1' 'assert VALUE == 1' > "$root/sagemath/check/upstream/check.sage"
 expect 1 "上流の check.sage が自分の構成を読まないと落ちる" "$root" "sagemath/check/downstream/check.sage"
 
+# 構成でも check でも足し込む累算器を、check 側で初期化し直していないと落ちる。
+root="$(make_case double_counted_accumulator)"
+printf '%s\n' 'VALUE = 1' 'checked = 0' 'for _ in range(3):' '    checked += 1' \
+  > "$root/sagemath/check/upstream/construction.sage"
+printf '%s\n' 'load("sagemath/check/upstream/construction.sage")' \
+  'for _ in range(3):' '    assert VALUE == 1' '    checked += 1' 'assert checked == 3' \
+  > "$root/sagemath/check/upstream/check.sage"
+expect 1 "累算器を初期化し直していないと落ちる" "$root" "sagemath/check/downstream/check.sage"
+
+# 初期化し直していれば通る。
+root="$(make_case reinitialised_accumulator)"
+printf '%s\n' 'VALUE = 1' 'checked = 0' 'for _ in range(3):' '    checked += 1' \
+  > "$root/sagemath/check/upstream/construction.sage"
+printf '%s\n' 'load("sagemath/check/upstream/construction.sage")' 'checked = 0' \
+  'for _ in range(3):' '    assert VALUE == 1' '    checked += 1' 'assert checked == 3' \
+  > "$root/sagemath/check/upstream/check.sage"
+expect 0 "累算器を初期化し直していれば通る" "$root" "sagemath/check/downstream/check.sage"
+
 # 関数の中の assert は構成に残してよい（well-defined 性の番人）。
 root="$(make_case assert_inside_function)"
 printf '%s\n' 'def guarded(value):' '    assert value == 1' '    return value' 'VALUE = 1' \

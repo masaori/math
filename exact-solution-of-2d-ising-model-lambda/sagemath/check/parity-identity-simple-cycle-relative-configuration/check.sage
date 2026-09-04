@@ -16,6 +16,13 @@ parity-identity-simple-cycle-key-terms では、一辺二の単純閉路鍵に�
 
 load("sagemath/check/parity-identity-simple-cycle-relative-configuration/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+pair_terms = []
+rows = []
+target_terms = []
+vertex_terms = []
+
 for doubled, single in cycle_keys:
     vertices = sorted({
         endpoint

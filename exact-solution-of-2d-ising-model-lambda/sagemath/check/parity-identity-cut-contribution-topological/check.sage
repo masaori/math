@@ -10,6 +10,10 @@
 
 load("sagemath/check/parity-identity-cut-contribution-topological/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+records = {}
+
 for side in (2, 3):
     count = ZZ(0)
     patterns = set()

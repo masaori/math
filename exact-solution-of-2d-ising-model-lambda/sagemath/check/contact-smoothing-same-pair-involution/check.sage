@@ -11,6 +11,11 @@
 
 load("sagemath/check/contact-smoothing-same-pair-involution/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+checked = 0
+permutations_with_pair = 0
+
 for phi in nonbacktracking_permutations:
     pairs = switchable_contact_pairs(phi)
     if pairs:

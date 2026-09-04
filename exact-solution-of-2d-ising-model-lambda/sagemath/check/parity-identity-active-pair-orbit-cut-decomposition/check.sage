@@ -18,6 +18,10 @@
 
 load("sagemath/check/parity-identity-active-pair-orbit-cut-decomposition/construction.sage")
 
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
+checks = {}
+
 for side in (2, 3):
     total_keys = ZZ(0)
     total_orbits = ZZ(0)
