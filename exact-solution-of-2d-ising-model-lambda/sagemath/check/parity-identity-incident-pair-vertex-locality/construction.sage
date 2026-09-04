@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-active-pair-orbit-cut-decomposition/construction.sage")
 
+
 def vertex_slot_states(side, vertex, moved):
     row, column = vertex
     slots = (

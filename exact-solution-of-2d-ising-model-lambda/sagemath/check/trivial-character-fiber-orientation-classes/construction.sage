@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/trivial-character-fiber-magnitude/construction.sage")
 
+
 def induced_orientation(phi, single):
     moved = moved_edges(phi)
     orientation = {}

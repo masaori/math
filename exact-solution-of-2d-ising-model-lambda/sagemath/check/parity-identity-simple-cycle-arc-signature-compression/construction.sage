@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-simple-cycle-boundary-arc-decomposition/construction.sage")
 
+
 def signature_turn_type(signature):
     memberships, _ = signature
     names = tuple(name for name, _, in_single, _ in memberships

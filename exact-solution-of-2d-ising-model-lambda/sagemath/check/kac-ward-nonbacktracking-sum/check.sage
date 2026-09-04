@@ -9,6 +9,7 @@
 
 load("sagemath/check/kac-ward-nonbacktracking-sum/construction.sage")
 
+
 def orbit_phase_twist_product(a, b, walks):
     product = P(1)
     for walk in walks:

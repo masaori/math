@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/contact-smoothing-phase-reversal/construction.sage")
 
+
 def standard_pair_delta(phi, pair):
     edge, other = pair
     return (

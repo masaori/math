@@ -20,6 +20,7 @@
 
 load("sagemath/check/parity-identity-standard-orientation-reduction/construction.sage")
 
+
 def check_standard_reduction(side, doubled, single, selector):
     orientations = curved_free_orientations(side, single)
     standard, components = standard_orientation(side, single, orientations)

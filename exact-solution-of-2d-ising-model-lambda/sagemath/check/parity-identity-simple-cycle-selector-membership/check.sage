@@ -21,6 +21,7 @@ D が非空の鍵で閉路上を伝播する選択情報にあると同定した
 
 load("sagemath/check/parity-identity-simple-cycle-selector-membership/construction.sage")
 
+
 def selector_odd_signature_row(side, doubled, single):
     chosen = key_selector(side, doubled, single)
     vertices = sorted({

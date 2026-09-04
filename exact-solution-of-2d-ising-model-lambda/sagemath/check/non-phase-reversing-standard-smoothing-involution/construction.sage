@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/phase-reversing-standard-smoothing-involution/construction.sage")
 
+
 def standard_delta(phi):
     pair = tuple(ct_min(phi))
     return standard_pair_delta(phi, pair)

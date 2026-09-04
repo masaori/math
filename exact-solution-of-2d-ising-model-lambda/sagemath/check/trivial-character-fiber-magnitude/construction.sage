@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/kac-ward-fiber-signed-selection-equality/construction.sage")
 
+
 def even_subgraphs_inside(edge_subset):
     return [subset for subset in base_edge_subsets
             if subset.issubset(edge_subset) and is_even_edge_subset(subset)]

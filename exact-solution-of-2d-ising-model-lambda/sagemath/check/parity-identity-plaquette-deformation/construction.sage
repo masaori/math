@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-cut-contribution-topological/construction.sage")
 
+
 def plaquette_edges(side, row, column):
     return frozenset([
         ("h", row, column),

@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/standard-contact-smoothing-involution/construction.sage")
 
+
 def permutation_key(phi):
     return tuple(phi[edge] for edge in oriented)
 

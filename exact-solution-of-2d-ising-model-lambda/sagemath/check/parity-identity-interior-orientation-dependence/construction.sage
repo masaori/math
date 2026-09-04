@@ -6,4 +6,3 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 """
 
 load("sagemath/check/parity-identity-pair-and-seam-decomposition/construction.sage")
-

@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-simple-cycle-joint-local-sign-formula/construction.sage")
 
+
 def selector_vertex_signature(side, vertex, doubled, single, chosen):
     memberships = tuple(
         (name, ZZ(base in doubled), ZZ(base in single), ZZ(base in chosen))

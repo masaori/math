@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-standard-orientation-reduction/construction.sage")
 
+
 def standard_pattern(side, doubled, single, selector):
     orientations = curved_free_orientations(side, single)
     standard, _ = standard_orientation(side, single, orientations)

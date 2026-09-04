@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-interior-orientation-dependence/construction.sage")
 
+
 def single_edge_components(side, single):
     """単純通過辺集合の非空な辺連結成分を返す。"""
     remaining = set(single)

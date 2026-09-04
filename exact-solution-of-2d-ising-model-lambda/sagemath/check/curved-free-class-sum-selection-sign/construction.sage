@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/trivial-character-orientation-local-factor/construction.sage")
 
+
 def base_edges_of_side(side):
     return [(kind, i, j) for kind in ("h", "v")
             for i in range(side) for j in range(side)]
@@ -274,6 +275,7 @@ for (doubled, single), fiber in sorted(all_fibers.items()):
     fiber_keys += 1
 
 # --- 一辺三: D が空の全ての自明文字鍵で同じ同定を検査する ---
+
 
 def is_even_subset_general(side, subset):
     degrees = {}

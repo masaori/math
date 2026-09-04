@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-doubled-edge-crossing/construction.sage")
 
+
 def pair_and_seam_decomposition(side, doubled, single, orientation):
     moved = sorted(frozenset(
         [base + (d,) for base in doubled for d in (0, 1)]

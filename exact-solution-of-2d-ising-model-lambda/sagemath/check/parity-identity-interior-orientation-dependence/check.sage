@@ -20,6 +20,7 @@
 
 load("sagemath/check/parity-identity-interior-orientation-dependence/construction.sage")
 
+
 def interior_composite_parity(side, doubled, single, orientation):
     pieces, decomposed = pair_and_seam_decomposition(
         side, doubled, single, orientation)

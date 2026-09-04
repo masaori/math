@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/curved-free-class-sign-parity-reduction/construction.sage")
 
+
 def solve_selector(side, doubled, single):
     edges = sorted(single)
     vertices = sorted({vertex for base in edges

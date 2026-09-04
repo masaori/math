@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-plaquette-deformation/construction.sage")
 
+
 def row_loop(side, row):
     return frozenset(("h", row, column) for column in range(side))
 

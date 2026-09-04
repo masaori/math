@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-component-reversal-cancellation/construction.sage")
 
+
 def standard_orientation(side, single, orientations):
     """各成分の最小辺の向きが 0 の配向（標準形）を一意に取り出す。"""
     components = single_edge_components(side, single)

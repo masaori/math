@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-simple-cycle-selector-membership/construction.sage")
 
+
 def cycle_vertex_order(side, single):
     adjacency = {}
     for edge in single:

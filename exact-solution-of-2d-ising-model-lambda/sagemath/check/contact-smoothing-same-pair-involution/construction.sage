@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/kac-ward-nonbacktracking-sum/construction.sage")
 
+
 def moved_edges(phi):
     return {edge for edge in oriented if phi[edge] != edge}
 

@@ -12,6 +12,7 @@
 
 load("sagemath/check/parity-identity-pair-locality/construction.sage")
 
+
 def active_pair_counts(side, doubled, single, orientation):
     moved = sorted(frozenset(
         [base + (direction,) for base in doubled for direction in (0, 1)]

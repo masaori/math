@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-standard-representative/construction.sage")
 
+
 def vertex_degrees(side, edges):
     degrees = {}
     for edge in edges:

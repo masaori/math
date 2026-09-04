@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/contact-smoothing-same-pair-involution/construction.sage")
 
+
 def text_edge_key(edge):
     """本文 def_standard_contact_pair の順序: (辺の番号, 向き) の辞書式。
 

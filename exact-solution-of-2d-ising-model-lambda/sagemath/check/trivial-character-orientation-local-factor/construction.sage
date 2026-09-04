@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/trivial-character-fiber-orientation-classes/construction.sage")
 
+
 def directed_edge(base, orientation):
     return base + (orientation,)
 

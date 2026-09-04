@@ -12,6 +12,7 @@ partial D の頂点で切る。各弧には、辞書式最小の選択 C を含�
 
 load("sagemath/check/parity-identity-simple-cycle-boundary-arc-decomposition/construction.sage")
 
+
 def boundary_arc_signatures(side, doubled, single):
     chosen = key_selector(side, doubled, single)
     vertices = cycle_vertex_order(side, single)

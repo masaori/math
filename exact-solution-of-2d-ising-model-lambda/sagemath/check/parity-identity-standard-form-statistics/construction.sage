@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-standard-contributions-not-topological/construction.sage")
 
+
 def statistics_vector(side, doubled, single, selector):
     """鍵から機械的に計算できる F_2 統計の候補基底を返す。"""
     epsilon_h, epsilon_v = subset_parities(side, single)

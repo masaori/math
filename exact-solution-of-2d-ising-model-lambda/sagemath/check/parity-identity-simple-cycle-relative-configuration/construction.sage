@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-simple-cycle-key-terms/construction.sage")
 
+
 def incident_base_slots(side, vertex):
     row, column = vertex
     return (

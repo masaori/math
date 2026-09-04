@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-incident-pair-vertex-locality/construction.sage")
 
+
 def moved_at_interior(signature):
     side = 5
     vertex = (2, 2)

@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/parity-identity-pair-locality/construction.sage")
 
+
 def translate_directed(side, edge, row_shift, column_shift):
     kind, row, column, orientation = edge
     return (kind, (row + row_shift) % side,

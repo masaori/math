@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/curved-free-class-sum-selection-sign/construction.sage")
 
+
 def intersection_pairing(side, left, right):
     left_h, left_v = subset_parities(side, left)
     right_h, right_v = subset_parities(side, right)

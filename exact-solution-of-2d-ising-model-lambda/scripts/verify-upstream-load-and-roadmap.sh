@@ -105,7 +105,7 @@ if [ "$check_published" -eq 1 ]; then
       grep -q "$stage" "$html" || {
         fail "段取りの段が公開している論文に無い: $stage"; published_missing=1; }
     done
-    [ "$published_missing" -eq 0 ] && ok "五つの段が公開している論文 HTML にある（$PUBLISHED_URL）"
+    [ "$published_missing" -eq 0 ] && ok "五つの段が公開している論文 HTML にある（${PUBLISHED_URL}）"
   else
     fail "公開している論文 HTML を取得できない: $PUBLISHED_URL"
   fi

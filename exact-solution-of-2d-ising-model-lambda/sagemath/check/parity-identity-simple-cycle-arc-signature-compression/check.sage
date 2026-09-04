@@ -22,6 +22,7 @@ turnwrapword: 型と切断旗を頂点ごとに並べた列（反転同一視）
 
 load("sagemath/check/parity-identity-simple-cycle-arc-signature-compression/construction.sage")
 
+
 def signature_wrap_total(signature):
     _, wrap_flags = signature
     return sum(ZZ(flag) for flag in wrap_flags)

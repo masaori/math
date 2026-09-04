@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/torus-kac-ward-even-subgraph-square/construction.sage")
 
+
 def successors(L, oriented, edge):
     return [other for other in oriented
             if endpoints(L, edge)[1] == endpoints(L, other)[0]

@@ -65,17 +65,28 @@ for variant_name, compressor in VARIANTS:
             compressed_arc_types(side, doubled, single, compressor))
     all_types = sorted({arc_type for types in type_lists
                         for arc_type in types})
-    rows = []
+    # 行は「弧型ごとの個数の偶奇」である。零でない成分は高々その鍵の弧の本数しかないので、
+    # 台（奇数回現れる弧型の集合）だけを作る。列を全て並べた組を鍵ごとに作ると
+    # 7,085 行 × 約 1 万列の Python の演算になり、四変種で 30 分を超えた（実測 2026-09-05）。
+    # F_2 上の行は台で一意に決まるので、直接衝突の判定にも台をそのまま使える。
+    column_index = {arc_type: index for index, arc_type in enumerate(all_types)}
+    entries = {}
     row_records = {}
     conflicts = 0
-    for (side, doubled, single, term), types in zip(joint_keys, type_lists):
-        row = tuple(GF(2)(types.count(arc_type)) for arc_type in all_types)
-        rows.append(row)
-        if row in row_records and row_records[row] != term:
+    for row_index, ((side, doubled, single, term), types) in enumerate(
+            zip(joint_keys, type_lists)):
+        multiplicities = {}
+        for arc_type in types:
+            multiplicities[arc_type] = multiplicities.get(arc_type, 0) + 1
+        support = frozenset(arc_type for arc_type, count in multiplicities.items()
+                            if count % 2 == 1)
+        for arc_type in support:
+            entries[(row_index, column_index[arc_type])] = GF(2)(1)
+        if support in row_records and row_records[support] != term:
             conflicts += 1
-        elif row not in row_records:
-            row_records[row] = term
-    variant_matrix = matrix(GF(2), rows)
+        elif support not in row_records:
+            row_records[support] = term
+    variant_matrix = matrix(GF(2), len(joint_keys), len(all_types), entries)
     variant_vector = vector(GF(2), [term for _, _, _, term in joint_keys])
     try:
         variant_matrix.solve_right(variant_vector)
@@ -93,3 +104,24 @@ for variant_name, compressor in VARIANTS:
 assert len(joint_keys) == 7085
 print("OBSERVED: %s" % {name: values
                         for name, values in sorted(variant_results.items())})
+
+# 2026-09-05 の観測をそのまま固定する（弧型の種数・階数・直接衝突数・可解性）。
+# interior_d の三つ組は、疎な行の作り方へ変える前の実行が記録した値と一致した。
+EXPECTED = {
+    "interior_d": (10059, 6760, 25, False),
+    "interior_c": (10030, 6740, 48, False),
+    "interior_dc": (10075, 6776, 16, False),
+    "interior_orient": (10061, 6771, 16, False),
+}
+for variant_name, expected in sorted(EXPECTED.items()):
+    observed = variant_results[variant_name]
+    assert observed == expected, (variant_name, observed, expected)
+
+# 四変種とも直接衝突を持ち、合同の線型系に解が無い。
+for variant_name, (_, _, conflicts, solvable) in sorted(variant_results.items()):
+    assert conflicts > 0
+    assert not solvable
+
+print("PASS: 内部頂点へ D 所属・C 所属・その両方・スロット名つき向きのどれを戻しても、"
+      "圧縮弧型の多重集合の偶奇では頂点項を書けない（四変種とも直接衝突があり合同系は非可解）。"
+      "従って必要なのは向きと所属を同時に保つ完全署名との残差である")

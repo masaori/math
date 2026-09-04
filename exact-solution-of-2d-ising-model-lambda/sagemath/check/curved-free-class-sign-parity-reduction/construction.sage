@@ -7,6 +7,7 @@ assertion を再実行しない（全先行検算は日次監査が check.sage �
 
 load("sagemath/check/selection-common-sign-closed-formula/construction.sage")
 
+
 def inversion_parity(items, reordered):
     positions = {item: index for index, item in enumerate(items)}
     sequence = [positions[item] for item in reordered]
