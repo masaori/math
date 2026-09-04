@@ -29,6 +29,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
+import { renderRoadmapLatex } from "./render-roadmap.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 import { escapeText } from "./latex-escape.ts";
 
@@ -143,7 +144,7 @@ if (unresolved.length > 0) {
 }
 
 mkdirSync(buildDir, { recursive: true });
-writeFileSync(texPath, renderDocument(body.join("\n\n")), "utf8");
+writeFileSync(texPath, renderDocument(renderRoadmapLatex(), body.join("\n\n")), "utf8");
 
 // 地の文に「数式のつもりの記法」が混じっていると、そのまま素の文字として組まれる
 // （例: text ノードの "2^M" は上付きにならない）。content 側の判断材料として警告する。
@@ -247,7 +248,7 @@ console.log(
 
 // --- レンダリング ------------------------------------------------------------
 
-function renderDocument(inner: string): string {
+function renderDocument(roadmap: string, inner: string): string {
   // 版はタイトルの下に小さく出す（表紙を見れば、その PDF がいつの内容か分かるようにするため）。
   const version = versionLine();
   const titleVersion =
@@ -318,6 +319,8 @@ function renderDocument(inner: string): string {
 \\maketitle
 \\tableofcontents
 \\clearpage
+
+${roadmap}
 
 ${inner}
 

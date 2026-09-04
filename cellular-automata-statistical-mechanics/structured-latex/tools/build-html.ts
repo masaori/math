@@ -30,6 +30,7 @@ import {
 } from "../../../structured-latex/renderers/html/chapter-navigation.ts";
 import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
+import { ROADMAP_CSS, renderRoadmapHtml, roadmapTocEntries } from "./render-roadmap.ts";
 
 const require = createRequire(import.meta.url);
 const katexDist = dirname(require.resolve("katex/dist/katex.min.css"));
@@ -230,7 +231,10 @@ function katexCss(): string {
   }).replace(/,\s*;/g, ";");
 }
 
-const { desktopHtml, mobileHtml } = renderChapterNavigation(toc);
+// 段取りは本文の前に置く。目次の項目も本文の見出しより前へ入れる。
+// 本文ブロックの採番はこの経路を通らないので、番号は段取りの有無で変わらない。
+const roadmapHtml = renderRoadmapHtml();
+const { desktopHtml, mobileHtml } = renderChapterNavigation([...roadmapTocEntries(), ...toc]);
 
 const html = `<!doctype html>
 <html lang="ja"><head><meta charset="utf-8">
@@ -262,6 +266,7 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 .matherror { color:#c00; font-family:ui-monospace,monospace; font-size:.85em; }
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
 ${CHAPTER_NAVIGATION_CSS}
+${ROADMAP_CSS}
 </style></head><body>
 ${mobileHtml}
 <div class="page-layout">
@@ -269,6 +274,7 @@ ${desktopHtml}
 <main class="document">
 <h1>2値セルオートマトンの内在構造 — 局所規則から生じる数学の抽出</h1>
 <p class="version">${escapeHtml(versionLine())}</p>
+${roadmapHtml}
 ${body.join("\n")}
 <script>${readFileSync(join(katexDist, "katex.min.js"), "utf8")}</script>
 <script>
