@@ -290,6 +290,17 @@ def recorder_names_patched(recorder_names):
          sweep_all_checks.ASSERT_FAILURE_NAME) = original
 
 
+UNWRITABLE_RECORDER_REBINDING_ATTACK = (
+    'names = [k for k in list(globals()) if k.startswith("__sweep assertion")]\n'
+    'saved = {k: globals()[k] for k in names}\n'
+    'assert 1 == 1\n'
+    'for k in names:\n    globals()[k] = lambda *args: None\n'
+    'def check():\n    assert 1 == 2\n'
+    'try:\n    check()\nexcept Exception:\n    pass\n'
+    'for k in names:\n    globals()[k] = saved[k]\n'
+)
+
+
 class AssertionRecorderTest(unittest.TestCase):
     """記録の経路そのものを検算ファイルが改変できないことを確かめる。"""
 
@@ -376,13 +387,7 @@ class AssertionRecorderTest(unittest.TestCase):
         # 検算は名前を書けなくても globals() を走査して鍵を見つけられるので、
         # 束ね直して元へ戻す書き方は素の dict では素通りする。
         recorder, (recorded, reason) = self.run_verdict_without_guard(
-            'names = [k for k in list(globals()) if k.startswith("__sweep assertion")]\n'
-            'saved = {k: globals()[k] for k in names}\n'
-            'assert 1 == 1\n'
-            'for k in names:\n    globals()[k] = lambda *args: None\n'
-            'def check():\n    assert 1 == 2\n'
-            'try:\n    check()\nexcept Exception:\n    pass\n'
-            'for k in names:\n    globals()[k] = saved[k]\n',
+            UNWRITABLE_RECORDER_REBINDING_ATTACK,
             recorder_names=('__sweep assertion hit__', '__sweep assertion failure__'))
         # 偽な assert は起きたのに、記録も残らず判定も通ってしまう（＝守りを外せない理由）。
         self.assertTrue(recorded)
@@ -394,13 +399,7 @@ class AssertionRecorderTest(unittest.TestCase):
         # 名前の綴りではなく GuardedNamespace の __setitem__ なので、判定は落ちる。
         # 守り無し側（負例）と同じ検算本文・同じ記録名で走らせ、差が守りだけであることを固定する。
         recorder, (recorded, reason) = self.run_verdict(
-            'names = [k for k in list(globals()) if k.startswith("__sweep assertion")]\n'
-            'saved = {k: globals()[k] for k in names}\n'
-            'assert 1 == 1\n'
-            'for k in names:\n    globals()[k] = lambda *args: None\n'
-            'def check():\n    assert 1 == 2\n'
-            'try:\n    check()\nexcept Exception:\n    pass\n'
-            'for k in names:\n    globals()[k] = saved[k]\n',
+            UNWRITABLE_RECORDER_REBINDING_ATTACK,
             recorder_names=('__sweep assertion hit__', '__sweep assertion failure__'))
         self.assertFalse(recorded)
         self.assertIn('rebound', reason)
