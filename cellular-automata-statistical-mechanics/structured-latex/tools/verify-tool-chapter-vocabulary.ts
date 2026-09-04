@@ -906,6 +906,14 @@ for (const chapter of documentOrganization) {
     );
   }
   if (inTools) {
+    const chapterTitleTimeHits = timeEvolutionTermsIn(chapter.title);
+    if (chapterTitleTimeHits.length > 0) {
+      organizationViolations.push(
+        `数学的道具立て章の章タイトルに時間発展を含意する語がある: ${chapterId}（${chapterTitleTimeHits.join("、")}）`,
+      );
+    }
+  }
+  if (inTools) {
     const caHits = CA_IDENTIFIER_TERMS.filter((term) => chapterId.includes(term));
     if (caHits.length > 0) {
       organizationViolations.push(
@@ -916,6 +924,12 @@ for (const chapter of documentOrganization) {
     if (physicsHits.length > 0) {
       organizationViolations.push(
         `数学的道具立て章の章識別子に既存物理由来語がある: chapter:${chapterId}（${physicsHits.join("、")}）`,
+      );
+    }
+    const timeHits = TIME_EVOLUTION_IDENTIFIER_TERMS.filter((term) => chapterId.includes(term));
+    if (timeHits.length > 0) {
+      organizationViolations.push(
+        `数学的道具立て章の章識別子に時間発展を含意する語がある: chapter:${chapterId}（${timeHits.join("、")}）`,
       );
     }
   }
@@ -931,6 +945,12 @@ for (const chapter of documentOrganization) {
       if (sectionPhysicsHits.length > 0) {
         organizationViolations.push(
           `数学的道具立て章の節の記述に既存物理由来語がある: ${chapterId}/${section.id}（${sectionPhysicsHits.join("、")}）`,
+        );
+      }
+      const sectionTimeHits = timeEvolutionTermsIn([section.title, section.input, section.output, section.main]);
+      if (sectionTimeHits.length > 0) {
+        organizationViolations.push(
+          `数学的道具立て章の節の記述に時間発展を含意する語がある: ${chapterId}/${section.id}（${sectionTimeHits.join("、")}）`,
         );
       }
     }
@@ -974,6 +994,12 @@ for (const chapter of documentOrganization) {
       if (physicsHits.length > 0) {
         organizationViolations.push(
           `数学的道具立て章の節の識別子に既存物理由来語がある: ${identifier.key}（${physicsHits.join("、")}）`,
+        );
+      }
+      const timeHits = TIME_EVOLUTION_IDENTIFIER_TERMS.filter((term) => identifier.value.includes(term));
+      if (timeHits.length > 0) {
+        organizationViolations.push(
+          `数学的道具立て章の節の識別子に時間発展を含意する語がある: ${identifier.key}（${timeHits.join("、")}）`,
         );
       }
     }
