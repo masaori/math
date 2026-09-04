@@ -1955,23 +1955,19 @@ V' y
         String.raw`\begin{aligned}
 (S^k)^*
 &= (S^*)^k
-   \quad (\because \text{積の共役転置 } (AB)^* = B^*A^* \text{ を } k \text{ 回繰り返す}) \\
+   \quad (\because \text{積の共役転置を } k \text{ 回繰り返す、}\blkref{star_preserves_norm_and_limits}) \\
 &= S^k
    \quad (\because S \text{ はエルミート、すなわち } S^* = S)
 \end{aligned}`,
       ),
-      paragraph([
-        "（積の共役転置は ",
-        ref("star_preserves_norm_and_limits"),
-        " (1) 第 1 式による）。したがって",
-      ]),
+      paragraph(["したがって、"]),
       displayMath(
         String.raw`\begin{aligned}
 E_K^*
 &= \Bigl(\textstyle\sum_{k=0}^{K}\frac{1}{k!}S^k\Bigr)^*
    \quad (\because E_K \text{ の定義}) \\
 &= \textstyle\sum_{k=0}^{K}\overline{\left(\frac{1}{k!}\right)}\,(S^k)^*
-   \quad (\because \text{共役転置の線型性を和の各項へ適用}) \\
+   \quad (\because \text{共役転置の線型性を和の各項へ適用、}\blkref{star_preserves_norm_and_limits}) \\
 &= \textstyle\sum_{k=0}^{K}\frac{1}{k!}\,(S^k)^*
    \quad (\because 1/k! \in \mathbb{R} \text{ なので } \overline{1/k!} = 1/k!) \\
 &= \textstyle\sum_{k=0}^{K}\frac{1}{k!}\,S^k
@@ -1981,9 +1977,6 @@ E_K^*
 \end{aligned}`,
       ),
       paragraph([
-        "（共役転置の線型性は ",
-        ref("star_preserves_norm_and_limits"),
-        " (1) 第 2 式による）。",
         ref("exp_converges"),
         " より ",
         math(String.raw`E_K \to \exp(S)`),
@@ -2018,16 +2011,12 @@ E_K^*
         String.raw`\begin{aligned}
 \exp(S/2)\exp(S/2)
 &= \exp(S/2 + S/2)
-   \quad (\because \text{可換な行列の指数の積}) \\
+   \quad (\because \text{可換な行列の指数の積、}\blkref{theorem_exp_product}) \\
 &= \exp(S)
    \quad (\because S/2 + S/2 = S)
 \end{aligned}`,
       ),
-      paragraph([
-        "（可換な行列の指数の積は ",
-        ref("theorem_exp_product"),
-        " による）。さらに",
-      ]),
+      paragraph(["さらに、"]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(S/2)\exp(-S/2)
@@ -2036,13 +2025,11 @@ E_K^*
 &= \exp(0)
    \quad (\because S/2 + (-S/2) = 0) \\
 &= I
-   \quad (\because \text{零行列の指数})
+   \quad (\because \text{零行列の指数、}\blkref{theorem_exp_zero})
 \end{aligned}`,
       ),
       paragraph([
-        "（零行列の指数は ",
-        ref("theorem_exp_zero"),
-        " による）ので ",
+        "従って、",
         math(String.raw`\exp(S/2)`),
         " は可逆である。よって ",
         math(String.raw`x \in \mathbb{C}^n\setminus\{0\}`),
@@ -2058,7 +2045,7 @@ x^*\exp(S)x
 &= x^*\exp(S/2)^*\exp(S/2)x
    \quad (\because \text{上で示した } \exp(S/2)^* = \exp(S/2)) \\
 &= \left(\exp(S/2)x\right)^*\left(\exp(S/2)x\right)
-   \quad (\because \text{積の共役転置を } n \times 1 \text{ 行列 } x \text{ へ適用}) \\
+   \quad (\because \text{積の共役転置を } n \times 1 \text{ 行列 } x \text{ へ適用、}\blkref{star_preserves_norm_and_limits}) \\
 &= w^* w
    \quad (\because w \text{ の定義}) \\
 &= \textstyle\sum_{k=1}^{n}\overline{w_k}\,w_k
@@ -2070,9 +2057,6 @@ x^*\exp(S)x
 \end{aligned}`,
       ),
       paragraph([
-        "（積の共役転置は ",
-        ref("star_preserves_norm_and_limits"),
-        " (1) 第 1 式による）。",
         math(String.raw`w \neq 0`),
         " なのでどれかの ",
         math(String.raw`w_k \neq 0`),
@@ -2089,7 +2073,7 @@ x^*\exp(S)x
         String.raw`\begin{aligned}
 (B^*AB)^*
 &= B^*A^*B^{**}
-   \quad (\because \text{積の共役転置}) \\
+   \quad (\because \text{積の共役転置、}\blkref{star_preserves_norm_and_limits}) \\
 &= B^*A^*B
    \quad (\because B^{**}=B) \\
 &= B^*AB
@@ -2097,9 +2081,7 @@ x^*\exp(S)x
 \end{aligned}`,
       ),
       paragraph([
-        "（積の共役転置は ",
-        ref("star_preserves_norm_and_limits"),
-        " (1) 第 1 式による）のでエルミートである。",
+        "従って、エルミートである。",
         math(String.raw`x \neq 0`),
         " なら ",
         math(String.raw`B`),
@@ -2111,7 +2093,7 @@ x^*\exp(S)x
         String.raw`\begin{aligned}
 x^*(B^*AB)x
 &= (Bx)^*A(Bx)
-   \quad (\because \text{積の共役転置}) \\
+   \quad (\because \text{積の共役転置、}\blkref{star_preserves_norm_and_limits}) \\
 &>0
    \quad (\because A\ \text{は正定値かつ}\ Bx\ne0)
 \end{aligned}`,
@@ -2177,7 +2159,12 @@ A_{kk}
         " である。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-05 の式変形統一で、共役転置・可換な行列指数の積・零行列の指数への後置き参照を、実際に適用する各等号の行末へ移した。内容・式変形・根拠・参照は変えていない。",
+      ],
+    },
   },
 
   {
