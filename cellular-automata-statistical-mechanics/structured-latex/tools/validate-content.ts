@@ -90,6 +90,29 @@ let headingCount = 0;
         `（報告: ${headingRaised || "なし"}）`,
     );
   }
+
+  // `\blkref` の実在確認も同じ走査範囲でなければならない。定理型のタイトルと見出しの
+  // タイトルの両方から拾えることを毎回確かめる（現在の本文に `title.tex` は無いので、
+  // 確かめないとこの経路は静かに壊れる）。
+  for (const kind of ["claim", "heading"] as const) {
+    const refProbe = {
+      id: `probe_blkref_scope_${kind}`,
+      kind,
+      level: 2,
+      title: { tex: String.raw`\blkref{probe_target_label}` },
+      labels: [],
+      habitat: kind === "claim" ? "finite" : undefined,
+      statement: [],
+    } as unknown as ConvertedBlock;
+    const collected: RefUse[] = [];
+    collectBlockRefsInMath(refProbe, "(blkref 走査範囲の回帰検査)", collected);
+    if (!collected.some((use) => use.target === "probe_target_label")) {
+      throw new Error(
+        "blkref 走査範囲の回帰検査が失敗した: " +
+          `${kind} のタイトルの数式に置いた \\blkref が実在確認へ渡らない`,
+      );
+    }
+  }
 }
 
 const contentFiles = await loadContentFiles();
@@ -362,12 +385,16 @@ function collectStrings(nodes: readonly Node[], out: string[]): void {
  * 番号で引くために `\blkref` を用意している（LaTeX 側で `\cref` に展開される）。
  * 型では中身が文字列なので検査できない。**ここで実在するラベルかを確かめる**
  * （確かめないと、ラベルを改名したときに参照が黙って壊れる）。
+ *
+ * 走査は `publishedMathOf` の一本を通す。ここを `bodyNodesOf` へ戻すと、**タイトルの数式に
+ * 書いた `\blkref` が実在確認から外れる**。実測: ある定理型ブロックのタイトルを
+ * `{ tex: String.raw`\blkref{no_such_label_smuggled}` }` に差し替え、一覧を再生成すると、
+ * `npm run check` は「相互参照 1732 件、すべて解決」と報告して終了コード 0 で通った。
+ * 壊れた参照は tectonic が組んだ後の LaTeX ログ（`Reference ... undefined`）でしか出ず、
+ * 速い層は全て素通りする。
  */
 function collectBlockRefsInMath(block: ConvertedBlock, file: string, out: RefUse[]): void {
-  if (block.kind === "heading") return;
-  const strings: string[] = [];
-  for (const nodes of bodyNodesOf(block)) collectMathStrings(nodes, strings);
-  for (const tex of strings) {
+  for (const tex of publishedMathOf(block)) {
     for (const match of tex.matchAll(/\\blkref\{([^}]*)\}/g)) {
       out.push({ target: match[1] ?? "", blockId: block.id, file });
     }

@@ -352,12 +352,29 @@ function renderTheoremLike(block: TheoremLikeBlock): string {
   return parts.join("\n\n");
 }
 
+/**
+ * 数式の中からブロックを引く `\blkref{ラベル}` の宛先を、相互参照の解決検査へ渡す。
+ *
+ * `\blkref` は `ref` ノードではなく数式の文字列なので、`usedRefs` へは載っていなかった。
+ * そのため生成器は「相互参照 N 件（すべて解決）」と報告しながら、実在しないラベルを
+ * `\cref` へ展開して出力していた。壊れた参照は tectonic が組んだ後の LaTeX ログでしか
+ * 出ないので、ここで生成前に落とす。
+ */
+function collectBlkrefTargets(tex: string, blockId: string): void {
+  for (const match of tex.matchAll(/\\blkref\{([^}]*)\}/g)) {
+    usedRefs.push({ target: match[1] ?? "", blockId });
+  }
+}
+
 function renderTitle(
   title: { text?: string; tex?: string } | null | undefined,
   blockId = "(title)",
 ): string {
   if (title === null || title === undefined) return "";
-  if (title.tex !== undefined) return `$${title.tex}$`;
+  if (title.tex !== undefined) {
+    collectBlkrefTargets(title.tex, blockId);
+    return `$${title.tex}$`;
+  }
   const text = title.text ?? "";
   // 地の文と同じく、数式記法らしき文字は素の文字として組まれてしまう
   // （実測: タイトルの "2^M" が上付きにならない）。
@@ -388,8 +405,10 @@ function renderNode(node: Node, blockId: string): string {
       }
       return escapeText(node.value);
     case "math":
+      collectBlkrefTargets(node.tex, blockId);
       return `$${node.tex}$`;
     case "displayMath":
+      collectBlkrefTargets(node.tex, blockId);
       return renderDisplayMath(node.tex);
     case "paragraph":
       // 段落の中身は連結する（数式と地の文が交互に並ぶため、間に空行を入れない）。
@@ -443,7 +462,8 @@ function renderDisplayMath(tex: string): string {
 
 /** 段落・リスト項目の内部（改行を挟まない）。 */
 function renderInline(node: Node, blockId: string): string {
-  if (node.type === "displayMath") return `\n${renderDisplayMath(node.tex)}\n`;
+  // 別行立て数式もここで分岐せず `renderNode` を通す（通さないと `\blkref` の収集が漏れる）。
+  if (node.type === "displayMath") return `\n${renderNode(node, blockId)}\n`;
   if (node.type === "list") return `\n${renderNode(node, blockId)}\n`;
   return renderNode(node, blockId);
 }
