@@ -15,6 +15,7 @@ node_modules/
 exact-solution-of-2d-ising-model-lambda/structured-latex/build/
 cellular-automata-statistical-mechanics/structured-latex/build/
 cellular-automata-statistical-mechanics/structured-latex/type-tests/.tmp/
+exact-solution-of-2d-ising-model-lambda/structured-latex/type-tests/.tmp/
 
 # sage が .sage から生成する中間ファイル
 *.sage.py
