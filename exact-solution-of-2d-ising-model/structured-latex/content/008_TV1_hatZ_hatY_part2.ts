@@ -5733,17 +5733,10 @@ s_1c_2>0\ \land\ c_1>0\ \land\ (s_1c_2)^2=c_1^2
 &\iff s_1s_2=1
 && (\because\ \text{Step 1 と Step 2})\\
 &\iff \sinh 2K_1\sinh 2K_2=1
-&& (\because\ s_1=\sinh 2K_1,\ s_2=\sinh 2K_2)
+&& (\because\ s_1=\sinh 2K_1,\ s_2=\sinh 2K_2\text{、}\blkref{def_transfer_matrix_symbols})
 \end{aligned}`,
       ),
       paragraph([
-        "（2 番目の同値が Step 1, Step 2 で示したもの、3 番目は ",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`s_1 = \sinh 2K_1`),
-        "、",
-        math(String.raw`s_2 = \sinh 2K_2`),
-        " による。）",
         ref("def_fermi"),
         " において ",
         math(String.raw`\psi_M, \psi_M^\dagger`),
