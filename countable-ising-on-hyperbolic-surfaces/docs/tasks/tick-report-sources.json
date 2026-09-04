@@ -1,0 +1,8 @@
+{
+  "readme": "README.md",
+  "goalSection": "ゴール",
+  "progress": "docs/tasks/auto-loop-state.md",
+  "queueSection": "実行待ち",
+  "doneMarkers": ["done", "完了", "済"],
+  "titleColumns": [0]
+}

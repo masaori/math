@@ -112,8 +112,16 @@ if [ "$published" -ne 1 ]; then
 fi
 log "OK: 論文を公開した（版 ${short_commit}）→ ${url}"
 
-# **一文だけ送る**（ユーザー指示 2026-08-16）。表題・エージェント名・版は書かない。
-message="${summary}
+# **報告には最終ゴール・現在地・今回の一歩・次の一手の四項目を必ず入れる**
+# （ユーザー指示 2026-09-05。それまでは今回の一歩だけを送っていて、人間から
+# 「今どういう状況か・ゴール設定が報告に含まれていない」と指摘された）。四項目は固定文では
+# なく、README と台帳から共通の組み立て器が毎回抽出する（正本が変われば報告も変わる）。
+# 抽出に失敗したら通知せず落ちる（空欄のまま報告しない）。
+if ! report_body="$(python3 "$REPO_DIR/scripts/compose-tick-report.py" "$PROJECT_DIR" "$summary")"; then
+  log "NG: 報告本文（最終ゴール・現在地・今回の一歩・次の一手）を組み立てられなかった（版 ${short_commit}）"
+  exit 1
+fi
+message="${report_body}
 ${url}"
 case "$message" in
   *"$EXPECTED_URL"*) ;;
