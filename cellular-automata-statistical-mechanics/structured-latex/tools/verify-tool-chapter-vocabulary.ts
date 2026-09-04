@@ -645,6 +645,32 @@ for (const entry of NEUTRAL_PHRASE_ENTRIES) {
       `除外句が既存物理由来語を覆い隠している: ${entry.phrase}（${maskedPhysics.join("、")}）`,
     );
   }
+  // 時間発展を含意する語も既存物理由来語と同じ禁止語であり、使用箇所を要求しない。
+  // したがって除外句で覆うと、数学的道具立て章の本文・章タイトル・節の記述のどこに書いても
+  // 検査に一件も現れない永久の穴になる。既存物理由来語には非包含の検査があったのに、
+  // 時間発展語には無かった（実測: 除外句 `有限舞台の発展` を足し、数学的道具立て章の本文へ
+  // `有限舞台の発展の下で` と書くと、CA 固有語 `舞台` も時間発展語 `発展` も同時に消え、
+  // 検査は違反 0 件・終了コード 0 で「時間発展を含意する語 0 件」と報告した）。
+  // 走査範囲は時間発展語の禁止と同じく数学的道具立て章に限る。
+  const maskedTimeEvolution = [
+    ...new Set([
+      ...TIME_EVOLUTION_TERMS.filter((term) =>
+        entry.phrase.toLowerCase().includes(term.toLowerCase()),
+      ),
+      ...termsMaskedFromTexts(
+        entry.phrase,
+        TIME_EVOLUTION_TERMS,
+        toolChapterRawTexts,
+        true,
+        NEUTRAL_PHRASES,
+      ),
+    ]),
+  ];
+  if (maskedTimeEvolution.length > 0) {
+    violations.push(
+      `除外句が時間発展を含意する語を覆い隠している: ${entry.phrase}（${maskedTimeEvolution.join("、")}）`,
+    );
+  }
   if (!toolChapterRawTexts.some((text) => text.includes(entry.phrase))) {
     violations.push(`除外句が数学的道具立て章の本文で使われていない: ${entry.phrase}`);
   }
@@ -662,6 +688,17 @@ const physicsMaskedByAllPhrases = termsMaskedByAllPhrases(PHYSICS_TERMS, allScan
 if (physicsMaskedByAllPhrases.length > 0) {
   violations.push(
     `除外句をすべて適用すると既存物理由来語が本文から消える: ${physicsMaskedByAllPhrases.join("、")}`,
+  );
+}
+const timeEvolutionMaskedByAllPhrases = termsMaskedByAllPhrases(
+  TIME_EVOLUTION_TERMS,
+  toolChapterRawTexts,
+  true,
+);
+if (timeEvolutionMaskedByAllPhrases.length > 0) {
+  violations.push(
+    "除外句をすべて適用すると時間発展を含意する語が数学的道具立て章の本文から消える: " +
+      timeEvolutionMaskedByAllPhrases.join("、"),
   );
 }
 const declaredMasks = new Set(NEUTRAL_PHRASE_ENTRIES.flatMap((entry) => entry.masks));
@@ -1094,7 +1131,7 @@ console.log(
     `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件・` +
     `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.size} 件、` +
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
-    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用を、句の内側・単独適用・宣言全体での差し引きの三面で確認し、全句適用後の本文でも既存物理由来語 0 件・宣言に無い CA 固有語 0 件、除外の回帰 ${duplicateTermMaskingRegressions.length} 件）、` +
+    `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語と時間発展を含意する語の非包含・数学的道具立て章での実使用を、句の内側・単独適用・宣言全体での差し引きの三面で確認し、全句適用後の本文でも既存物理由来語 0 件・時間発展を含意する語 0 件・宣言に無い CA 固有語 0 件、除外の回帰 ${duplicateTermMaskingRegressions.length} 件）、` +
     `数学的道具立て章の時間発展を含意する語 0 件（本文・識別子の二軸、対応表 ${TIME_EVOLUTION_TERM_CORRESPONDENCE.length} 件）、` +
     `章タイトル・節の記述・章節識別子の違反 0 件、章 ${ORGANIZATION_CHAPTER_PROSE_FIELDS.length} 散文フィールド・節 ${ORGANIZATION_SECTION_PROSE_FIELDS.length} 散文フィールドの網羅 OK / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
