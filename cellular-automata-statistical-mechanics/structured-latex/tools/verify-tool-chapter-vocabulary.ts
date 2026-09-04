@@ -247,11 +247,27 @@ const correspondenceViolations: string[] = [
  *
  * 宣言は fail-closed に扱う。ここに挙げた id が実在しない、CA 章に無い、あるいは既存物理由来語を
  * 一つも持たなくなった場合も違反にする（役目を終えた宣言が許可だけ残るのを防ぐ）。
+ *
+ * **許可は語ごとに宣言する。** ブロック単位で「照合だから許す」とだけ書くと、そのブロックには
+ * 既存物理由来語を何語でも書けてしまう。識別子の軸では同じ非対称を既に塞いであり
+ * （下の照合識別子の族は許可語を一語ずつ検査する）、本文の軸だけが片肺で残っていた。
+ * 実測: 照合ブロック `causal_set_primary_literature_remark_not_claimed` の本文へ
+ * 「量子ヒルベルト空間の多様体としての粒子」と書いても、検査は違反 0 件・終了コード 0 で通った。
+ * 照合が現に必要としている語（比較先を名指し、主張しないことを述べるための語）と、
+ * 先取りに当たる語（量子・ヒルベルト・粒子など）を、宣言が区別できていなかったためである。
+ *
+ * したがって宣言と実際の一致を双方向に要求する。宣言に無い語が本文に現れたら違反、
+ * 宣言したのに本文に現れない語が残っていても違反（役目を終えた許可の残留を防ぐ）。
  */
-const PHYSICS_COMPARISON_BLOCK_IDS = [
-  "causal_set_primary_literature_remark_not_claimed",
-  "causal_set_primary_literature_remark_source",
-];
+const PHYSICS_COMPARISON_BLOCK_TERMS = new Map<string, readonly string[]>([
+  [
+    "causal_set_primary_literature_remark_not_claimed",
+    ["物理", "因果集合", "時空", "光円錐", "多様体"],
+  ],
+  ["causal_set_primary_literature_remark_source", ["因果集合", "時空", "多様体", "Lorentz"]],
+]);
+
+const PHYSICS_COMPARISON_BLOCK_IDS = [...PHYSICS_COMPARISON_BLOCK_TERMS.keys()];
 
 /**
  * CA 章で既存物理由来語を識別子へ持ってよいブロックの族（id の接頭辞）と、
@@ -840,11 +856,19 @@ for (const file of files) {
     }
     if (inCa) {
       const bodyPhysicsHits = physicsTermsIn(block);
-      const allowed = PHYSICS_COMPARISON_BLOCK_IDS.includes(block.id);
-      if (bodyPhysicsHits.length > 0 && !allowed) {
+      const allowedPhysicsBodyTerms = PHYSICS_COMPARISON_BLOCK_TERMS.get(block.id);
+      if (bodyPhysicsHits.length > 0 && allowedPhysicsBodyTerms === undefined) {
         violations.push(
           `CA 章の照合以外の本文に既存物理由来語がある: ${block.id}（${bodyPhysicsHits.join("、")}）`,
         );
+      }
+      if (allowedPhysicsBodyTerms !== undefined) {
+        const unexpected = bodyPhysicsHits.filter((term) => !allowedPhysicsBodyTerms.includes(term));
+        if (unexpected.length > 0) {
+          violations.push(
+            `照合として宣言したブロックの本文に未許可の既存物理由来語がある: ${block.id}（${unexpected.join("、")}）`,
+          );
+        }
       }
     }
     if (inTools && hits.length > 0) {
@@ -881,8 +905,29 @@ for (const blockId of PHYSICS_COMPARISON_BLOCK_IDS) {
     violations.push(`照合として宣言したブロックが CA 章に無い: ${blockId}`);
     continue;
   }
-  if (physicsTermsIn(block).length === 0) {
+  const hits = physicsTermsIn(block);
+  if (hits.length === 0) {
     violations.push(`照合として宣言したブロックに既存物理由来語が無い: ${blockId}`);
+    continue;
+  }
+  // 許可語は一語ずつ検査する。既存物理由来語でない語の許可と、実際には現れない語の許可を止める。
+  const allowedTerms = PHYSICS_COMPARISON_BLOCK_TERMS.get(blockId) ?? [];
+  if (allowedTerms.length === 0) {
+    violations.push(`照合として宣言したブロックに許可語が一つも無い: ${blockId}`);
+    continue;
+  }
+  for (const term of allowedTerms) {
+    if (!PHYSICS_TERMS.includes(term)) {
+      violations.push(
+        `照合として宣言したブロックが既存物理由来語でない語を許可している: ${blockId}（${term}）`,
+      );
+      continue;
+    }
+    if (!hits.includes(term)) {
+      violations.push(
+        `照合として宣言したブロックが本文で使っていない語を許可している: ${blockId}（${term}）`,
+      );
+    }
   }
 }
 
@@ -1152,6 +1197,7 @@ console.log(
     `CA 章の照合ブロック ${PHYSICS_COMPARISON_BLOCK_IDS.length} 件・照合節 ${caComparisonSections.size} 件・` +
     `照合識別子の族 ${PHYSICS_COMPARISON_IDENTIFIER_FAMILIES.size} 件、` +
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
+    `照合ブロックが本文で許す既存物理由来語 ${[...new Set([...PHYSICS_COMPARISON_BLOCK_TERMS.values()].flat())].length} 件（宣言と実際が一語ずつ一致）、` +
     `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語と時間発展を含意する語の非包含・数学的道具立て章での実使用を、句の内側・単独適用・宣言全体での差し引きの三面で確認し、全句適用後の本文でも既存物理由来語 0 件・時間発展を含意する語 0 件・宣言に無い CA 固有語 0 件、除外の回帰 ${duplicateTermMaskingRegressions.length} 件）、` +
     `数学的道具立て章の時間発展を含意する語 0 件（本文・識別子の二軸、対応表 ${TIME_EVOLUTION_TERM_CORRESPONDENCE.length} 件）、` +
     `章タイトル・節の記述・章節識別子の違反 0 件、章 ${ORGANIZATION_CHAPTER_PROSE_FIELDS.length} 散文フィールド・節 ${ORGANIZATION_SECTION_PROSE_FIELDS.length} 散文フィールドの網羅 OK / 章 ${documentOrganization.length} 件・` +
