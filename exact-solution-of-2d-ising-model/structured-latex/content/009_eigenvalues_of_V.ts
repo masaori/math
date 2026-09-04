@@ -1860,9 +1860,9 @@ V' y
 &= \overline{\textstyle\sum_j A_{lj}B_{jk}}
    \quad (\because \text{行列積の定義}) \\
 &= \textstyle\sum_j \overline{A_{lj}B_{jk}}
-   \quad (\because \text{複素共役は和を保つ}) \\
+   \quad (\because \text{複素共役は和を保つ、}\blkref{conjugation_is_ring_homomorphism}) \\
 &= \textstyle\sum_j \overline{A_{lj}}\,\overline{B_{jk}}
-   \quad (\because \text{複素共役は積を保つ}) \\
+   \quad (\because \text{複素共役は積を保つ、}\blkref{conjugation_is_ring_homomorphism}) \\
 &= \textstyle\sum_j \overline{B_{jk}}\,\overline{A_{lj}}
    \quad (\because \mathbb{C}\text{ の積の可換性}) \\
 &= \textstyle\sum_j (B^*)_{kj}(A^*)_{jl}
@@ -1872,9 +1872,7 @@ V' y
 \end{aligned}`,
       ),
       paragraph([
-        "（複素共役が和と積を保つことは ",
-        ref("conjugation_is_ring_homomorphism"),
-        " による）。第 2 式も同様。",
+        "第 2 式も同様。",
       ]),
       paragraph([
         "(2) 任意の ",
@@ -1885,24 +1883,17 @@ V' y
         String.raw`\begin{aligned}
 \|A^*\|
 &= \sqrt{\textstyle\sum_{k,l}|(A^*)_{kl}|^2}
-   \quad (\because \text{行列ノルムの定義}) \\
+   \quad (\because \text{行列ノルムの定義、}\blkref{def_matrix_norm}) \\
 &= \sqrt{\textstyle\sum_{k,l}|\overline{A_{lk}}|^2}
    \quad (\because \text{共役転置の定義}) \\
 &= \sqrt{\textstyle\sum_{k,l}|A_{lk}|^2}
-   \quad (\because \text{複素共役は絶対値を保つ}) \\
+   \quad (\because \text{複素共役は絶対値を保つ、}\blkref{abs_basic_properties}) \\
 &= \sqrt{\textstyle\sum_{k,l}|A_{kl}|^2}
    \quad (\because (k,l)\mapsto(l,k)\text{ は添字集合の全単射}) \\
 &= \|A\|
-   \quad (\because \text{行列ノルムの定義})
+   \quad (\because \text{行列ノルムの定義、}\blkref{def_matrix_norm})
 \end{aligned}`,
       ),
-      paragraph([
-        "ここで行列ノルムの定義は ",
-        ref("def_matrix_norm"),
-        "、複素共役が絶対値を保つことは ",
-        ref("abs_basic_properties"),
-        " による。",
-      ]),
       paragraph([
         "(3) ",
         math(String.raw`A_N\to A`),
@@ -1920,7 +1911,12 @@ V' y
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-05 の式変形統一で、複素共役が和・積・絶対値を保つことと行列ノルムの定義への後置き参照を、実際に適用する各等号の行末へ移した。内容・式変形・根拠・参照は変えていない。",
+      ],
+    },
   },
 
   {
