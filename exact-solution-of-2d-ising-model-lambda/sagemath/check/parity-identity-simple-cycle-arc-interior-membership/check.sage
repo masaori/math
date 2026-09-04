@@ -1,0 +1,92 @@
+"""弧署名の内部頂点の所属情報のどの位置が必要かを切り分ける。
+
+対象: claim_kac_ward_determinant_fiber_stratified_phase_sum。
+
+parity-identity-simple-cycle-arc-signature-compression では、内部頂点の
+D/C 所属だけを落とす turnwrapword でも頂点項の分解が保たれなかった。
+ここでは turnwrapword（内部頂点は曲がり/直進の型と切断旗だけ）と
+完全署名（parity-identity-simple-cycle-boundary-arc-decomposition。解あり）
+の間に次の四変種を置き、内部頂点のどの所属情報が必要かを切り分ける。
+
+interior_d: 型・切断旗に、四スロット（名前順）の D 所属を加える。
+interior_c: 型・切断旗に、四スロットの C 所属を加える。
+interior_dc: 型・切断旗に、四スロットの D 所属と C 所属の両方を加える。
+interior_orient: 型を四スロットの E 所属（名前順）へ置き換える
+    （曲がり/直進では落ちる向きの情報だけを戻し、D/C 所属は落としたまま）。
+
+各変種で、直接衝突（圧縮弧型の多重集合の偶奇が等しく頂点項が異なる
+鍵対）の有無と、合同の F_2 線型系の可解性を判定する。
+
+有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
+"""
+
+load("sagemath/check/parity-identity-simple-cycle-arc-signature-compression/check.sage")
+
+
+def interior_step(signature, keep_d, keep_c, keep_orient):
+    memberships, wrap_flags = signature
+    if keep_orient:
+        turn = tuple(in_single for _, _, in_single, _ in memberships)
+    else:
+        turn = signature_turn_type(signature)
+    extras = []
+    if keep_d:
+        extras.append(tuple(in_doubled for _, in_doubled, _, _ in memberships))
+    if keep_c:
+        extras.append(tuple(in_chosen for _, _, _, in_chosen in memberships))
+    return (turn, wrap_flags, tuple(extras))
+
+
+def make_interior_compressor(keep_d, keep_c, keep_orient):
+    def compressor(kind, word, endpoints=None):
+        steps = tuple(interior_step(signature, keep_d, keep_c, keep_orient)
+                      for signature in word)
+        if kind == "cycle":
+            assert endpoints is None
+            return ("cycle", cyclic_reversal_invariant_word(steps))
+        assert endpoints is not None
+        return ("arc", reversal_invariant_word(steps), endpoints)
+    return compressor
+
+
+VARIANTS = (
+    ("interior_d", make_interior_compressor(True, False, False)),
+    ("interior_c", make_interior_compressor(False, True, False)),
+    ("interior_dc", make_interior_compressor(True, True, False)),
+    ("interior_orient", make_interior_compressor(False, False, True)),
+)
+
+
+variant_results = {}
+for variant_name, compressor in VARIANTS:
+    type_lists = []
+    for side, doubled, single, _ in joint_keys:
+        type_lists.append(
+            compressed_arc_types(side, doubled, single, compressor))
+    all_types = sorted({arc_type for types in type_lists
+                        for arc_type in types})
+    rows = []
+    row_records = {}
+    conflicts = 0
+    for (side, doubled, single, term), types in zip(joint_keys, type_lists):
+        row = tuple(GF(2)(types.count(arc_type)) for arc_type in all_types)
+        rows.append(row)
+        if row in row_records and row_records[row] != term:
+            conflicts += 1
+        elif row not in row_records:
+            row_records[row] = term
+    variant_matrix = matrix(GF(2), rows)
+    variant_vector = vector(GF(2), [term for _, _, _, term in joint_keys])
+    try:
+        variant_matrix.solve_right(variant_vector)
+        solvable = True
+    except ValueError:
+        solvable = False
+    rank = variant_matrix.rank()
+    variant_results[variant_name] = (len(all_types), rank, conflicts, solvable)
+    print("VARIANT %s: types=%d rank=%d direct-conflicts=%d solvable=%s"
+          % (variant_name, len(all_types), rank, conflicts, solvable))
+
+assert len(joint_keys) == 7085
+print("OBSERVED: %s" % {name: values
+                        for name, values in sorted(variant_results.items())})
