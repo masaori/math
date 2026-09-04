@@ -381,6 +381,77 @@ violations.push(...correspondenceViolations);
  * 書くと `物理` ごと消える。したがって覆い隠す語は、句の内側と**実本文への作用**の
  * 両方から求める。
  */
+/**
+ * 章・節が持つフィールドの宣言と、そのうち出版本文へ散文として出るものの宣言。
+ *
+ * 章題・節題・入力・出力・主定理は `content-modules.ts` の `sectionIntro` が本文ブロックへ
+ * 組み立てるため、出版物には出るが content/ の本文ブロックとしては存在しない。語彙検査は
+ * そのため `organization_` 接頭辞のブロックを走査から外し、代わりに章・節の値を直接読む。
+ *
+ * ところがその読み方は `[section.title, section.input, section.output, section.main]` という
+ * **手書きの列挙**で、同じ列挙が五箇所に散っていた。`OrganizationSection` へ出版される散文の
+ * フィールドを一つ足すと、`sectionIntro` がそれを出版しても語彙検査はどこも走査しない。
+ * 前 tick が塞いだのは「章・節の記述が丸ごと無検査だった」ことであり、**フィールドが増えた
+ * ときに同じ状態へ戻る形は残っていた**（実測: `summary` を型・値・`sectionIntro` へ足すと、
+ * そこに `発展` を書いても検査は 0 件で通る）。
+ *
+ * そこで走査するフィールドを一箇所の宣言から導出し、さらに章・節の実際のキー集合が宣言と
+ * 一致することを検査する。フィールドを足した tick は、それが散文か（語彙検査を掛ける）
+ * 構造か（別の軸で検査する）をここで宣言しない限り検査が落ちる。
+ */
+const ORGANIZATION_CHAPTER_PROSE_FIELDS = ["title"] as const;
+const ORGANIZATION_CHAPTER_OTHER_FIELDS = ["id", "sections"] as const;
+const ORGANIZATION_SECTION_PROSE_FIELDS = ["title", "input", "output", "main"] as const;
+const ORGANIZATION_SECTION_OTHER_FIELDS = ["id", "mainLabels"] as const;
+
+/** 宣言したフィールド集合と実際のキー集合の食い違いを違反として返す。 */
+function organizationFieldCoverageViolations(
+  what: string,
+  node: object,
+  prose: readonly string[],
+  other: readonly string[],
+): string[] {
+  const declared = [...prose, ...other].sort();
+  const actual = Object.keys(node).sort();
+  if (declared.length === actual.length && declared.every((key, index) => key === actual[index])) return [];
+  const added = actual.filter((key) => !declared.includes(key));
+  const removed = declared.filter((key) => !actual.includes(key));
+  return [
+    `${what}のフィールドが宣言と一致しない` +
+      `（宣言に無い: ${added.join("、") || "なし"} / 実在しない宣言: ${removed.join("、") || "なし"}）`,
+  ];
+}
+
+/** 出版本文へ出る散文だけを宣言から取り出す。手書きの列挙をここへ閉じる。 */
+function chapterProse(chapter: Record<string, unknown>): unknown[] {
+  return ORGANIZATION_CHAPTER_PROSE_FIELDS.map((field) => chapter[field]);
+}
+function sectionProse(section: Record<string, unknown>): unknown[] {
+  return ORGANIZATION_SECTION_PROSE_FIELDS.map((field) => section[field]);
+}
+
+const organizationFieldViolations: string[] = [];
+for (const chapter of documentOrganization) {
+  organizationFieldViolations.push(
+    ...organizationFieldCoverageViolations(
+      `章 ${String(chapter.id)}`,
+      chapter,
+      ORGANIZATION_CHAPTER_PROSE_FIELDS,
+      ORGANIZATION_CHAPTER_OTHER_FIELDS,
+    ),
+  );
+  for (const section of chapter.sections) {
+    organizationFieldViolations.push(
+      ...organizationFieldCoverageViolations(
+        `節 ${String(chapter.id)}/${String(section.id)}`,
+        section,
+        ORGANIZATION_SECTION_PROSE_FIELDS,
+        ORGANIZATION_SECTION_OTHER_FIELDS,
+      ),
+    );
+  }
+}
+
 const toolChapterRawTexts: string[] = [];
 /** 既存物理由来語の検査が掛かる本文すべて（二章の本文ブロックと、全章の章タイトル・節の記述）。 */
 const allScannedRawTexts: string[] = [];
@@ -399,7 +470,7 @@ for (const file of files) {
 }
 for (const chapter of documentOrganization) {
   const parts: string[] = [];
-  collectText([chapter.title, ...chapter.sections.map((section) => [section.title, section.input, section.output, section.main])], parts);
+  collectText([...chapterProse(chapter), ...chapter.sections.map((section) => sectionProse(section))], parts);
   const raw = parts.join(" ");
   allScannedRawTexts.push(raw);
   if (String(chapter.id) === "mathematical_tools") toolChapterRawTexts.push(raw);
@@ -661,7 +732,7 @@ for (const file of files) {
 for (const chapter of documentOrganization) {
   if (String(chapter.id) !== "binary_cellular_automaton_semantics") continue;
   for (const section of chapter.sections) {
-    caBodyCorpus.push(normalizedTextOf([section.title, section.input, section.output, section.main]));
+    caBodyCorpus.push(normalizedTextOf(sectionProse(section)));
   }
 }
 for (const entry of CA_TERM_CORRESPONDENCE) {
@@ -881,7 +952,7 @@ for (const chapter of documentOrganization) {
     organizationViolations.push(`二章のどちらでもない章がある: ${chapterId}`);
     continue;
   }
-  const chapterTitleHits = caTermsIn(chapter.title);
+  const chapterTitleHits = caTermsIn(chapterProse(chapter));
   if (inTools && chapterTitleHits.length > 0) {
     organizationViolations.push(
       `数学的道具立て章の章タイトルに CA 固有語がある: ${chapterId}（${chapterTitleHits.join("、")}）`,
@@ -899,14 +970,14 @@ for (const chapter of documentOrganization) {
   // 章タイトルは出版本文の最上位の見出しとして現れるので、宣言のないまま既存物理の語が
   // 章全体の名前に入ることになる。CA 章の節の記述には照合節だけを許す制限が既に掛かっており、
   // 章タイトルだけが無制約なのは同じ境界の片肺である。
-  const chapterTitlePhysicsHits = physicsTermsIn(chapter.title);
+  const chapterTitlePhysicsHits = physicsTermsIn(chapterProse(chapter));
   if (chapterTitlePhysicsHits.length > 0) {
     organizationViolations.push(
       `章タイトルに既存物理由来語がある: ${chapterId}（${chapterTitlePhysicsHits.join("、")}）`,
     );
   }
   if (inTools) {
-    const chapterTitleTimeHits = timeEvolutionTermsIn(chapter.title);
+    const chapterTitleTimeHits = timeEvolutionTermsIn(chapterProse(chapter));
     if (chapterTitleTimeHits.length > 0) {
       organizationViolations.push(
         `数学的道具立て章の章タイトルに時間発展を含意する語がある: ${chapterId}（${chapterTitleTimeHits.join("、")}）`,
@@ -934,20 +1005,20 @@ for (const chapter of documentOrganization) {
     }
   }
   for (const section of chapter.sections) {
-    const hits = caTermsIn([section.title, section.input, section.output, section.main]);
+    const hits = caTermsIn(sectionProse(section));
     if (inTools && hits.length > 0) {
       organizationViolations.push(
         `数学的道具立て章の節の記述に CA 固有語がある: ${chapterId}/${section.id}（${hits.join("、")}）`,
       );
     }
     if (inTools) {
-      const sectionPhysicsHits = physicsTermsIn([section.title, section.input, section.output, section.main]);
+      const sectionPhysicsHits = physicsTermsIn(sectionProse(section));
       if (sectionPhysicsHits.length > 0) {
         organizationViolations.push(
           `数学的道具立て章の節の記述に既存物理由来語がある: ${chapterId}/${section.id}（${sectionPhysicsHits.join("、")}）`,
         );
       }
-      const sectionTimeHits = timeEvolutionTermsIn([section.title, section.input, section.output, section.main]);
+      const sectionTimeHits = timeEvolutionTermsIn(sectionProse(section));
       if (sectionTimeHits.length > 0) {
         organizationViolations.push(
           `数学的道具立て章の節の記述に時間発展を含意する語がある: ${chapterId}/${section.id}（${sectionTimeHits.join("、")}）`,
@@ -962,7 +1033,7 @@ for (const chapter of documentOrganization) {
     if (inCa) {
       // 節の入力・出力・主定理は出版本文に出る。既存物理の語を書いてよいのは、
       // 照合ブロックを実際に持つ節だけに限る（照合を持たない節が物理を語り始めるのを止める）。
-      const sectionPhysicsHits = physicsTermsIn([section.title, section.input, section.output, section.main]);
+      const sectionPhysicsHits = physicsTermsIn(sectionProse(section));
       if (sectionPhysicsHits.length > 0 && !caComparisonSections.has(String(section.id))) {
         organizationViolations.push(
           `照合を持たない CA 章の節の記述に既存物理由来語がある: ${chapterId}/${section.id}（${sectionPhysicsHits.join("、")}）`,
@@ -1005,6 +1076,7 @@ for (const chapter of documentOrganization) {
     }
   }
 }
+violations.push(...organizationFieldViolations);
 violations.push(...organizationViolations);
 
 if (violations.length > 0) {
@@ -1024,6 +1096,6 @@ console.log(
     "CA 章の照合以外の本文の既存物理由来語 0 件・照合以外の識別子の既存物理由来語 0 件、" +
     `除外句 ${NEUTRAL_PHRASE_ENTRIES.length} 件（覆い隠す CA 固有語の宣言・既存物理由来語の非包含・数学的道具立て章での実使用を、句の内側・単独適用・宣言全体での差し引きの三面で確認し、全句適用後の本文でも既存物理由来語 0 件・宣言に無い CA 固有語 0 件、除外の回帰 ${duplicateTermMaskingRegressions.length} 件）、` +
     `数学的道具立て章の時間発展を含意する語 0 件（本文・識別子の二軸、対応表 ${TIME_EVOLUTION_TERM_CORRESPONDENCE.length} 件）、` +
-    `章タイトル・節の記述・章節識別子の違反 0 件 / 章 ${documentOrganization.length} 件・` +
+    `章タイトル・節の記述・章節識別子の違反 0 件、章 ${ORGANIZATION_CHAPTER_PROSE_FIELDS.length} 散文フィールド・節 ${ORGANIZATION_SECTION_PROSE_FIELDS.length} 散文フィールドの網羅 OK / 章 ${documentOrganization.length} 件・` +
     `節 ${documentOrganization.reduce((sum, chapter) => sum + chapter.sections.length, 0)} 件）`,
 );
