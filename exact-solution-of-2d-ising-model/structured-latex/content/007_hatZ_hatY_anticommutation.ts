@@ -61,9 +61,21 @@ export default defineBlocks([
       paragraph([
         "はじめに記号を 1 つ置く。",
         math(String.raw`j \in \{1,\dots,M\}`),
-        " について ",
-        math(String.raw`\varepsilon^{(\pm)}_j := \begin{cases}\mp 1 & (j=1)\\ +1 & (j\neq 1)\end{cases} \in \{+1,-1\}`),
-        " とすると、",
+        " について次のように置く。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon^{(\pm)}_j
+&:=
+\begin{cases}
+  \mp 1 & (j=1),\\
+  +1 & (j\neq 1)
+\end{cases}
+\in \{+1,-1\}
+&& (\because\ \text{場合分けによる定義})
+\end{aligned}`,
+      ),
+      paragraph([
         ref("def_hatZ_hatY"),
         " の定義は ",
         math(String.raw`\hat{Z}_\mu^{(\pm)} = \sum_{j=1}^M \varepsilon^{(\pm)}_j Z_j\exp\!\left(-i\frac{2\pi j\mu}{M}\right)`),
@@ -179,6 +191,8 @@ export default defineBlocks([
           "ただし第 1 式の鎖では、符号の場合分けに ε^{(±)}_j という名前を証明の冒頭で与え、" +
           "各行の根拠を行末の (∵ …) で書けるようにした。第 2 式の鎖も同じ名前を使い、" +
           "符号の積の値を計算の前に求めてから 7 段の鎖にした（cases の下線つき注記を廃した）。",
+        "2026-09-04 の式変形統一で、ε の場合分けによる定義を地の文中の数式から独立した式へ移し、" +
+          "所属と定義の根拠を行末へ明示した。内容・式変形・参照は変えていない。",
         "[hatZ^(±),hatY]_+ と [hatY,hatY]_+ は原文自体が「同様」として省略。",
         "抽象テンソル積の記法を廃した。I_{(C^2)^{⊗M}}（抽象テンソル冪の単位元）を、" +
           "<def_kronecker> で具体的に定義された 2^M 次の単位行列 I_{Mat(2^M,C)} へ置き換えた。" +
