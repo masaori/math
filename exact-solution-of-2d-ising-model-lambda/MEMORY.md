@@ -6,10 +6,11 @@
 
 自動 tick の Slack 報告は「今回の一歩」だけを送っていて、人間から「今どういう状況か・ゴール設定が
 報告に含まれていない」と指摘された。以後、報告は**最終ゴール・最終ゴールに対する現在地・今回の一歩・
-次の一手**の四項目を必ず含む。文面は `scripts/compose-tick-report.py` が README の「ゴール」節と
+次の一手**の四項目を必ず含む。文面はリポジトリ直下の共通の組み立て器 `scripts/compose-tick-report.py` が、README の「ゴール」節と
 台帳（`docs/tasks/auto-loop-state.md`）の「現在地」節の残作業表から毎回抽出する（固定文を写さない）。
+どのファイルのどの節を読むかの宣言は `docs/tasks/tick-report-sources.json`。
 **節の見出し名と残作業表の列を壊すと報告が組み立てられず、tick は Slack へ何も送らずに落ちる**
-（空欄のまま報告しない）。回帰テストは `scripts/test-compose-tick-report.sh`。
+（空欄のまま報告しない）。回帰テストはリポジトリ直下の `scripts/test-compose-tick-report.sh`（全プロジェクト共通）。
 
 ## 監査コードの保守記録（2026-09-02）
 

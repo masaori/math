@@ -430,10 +430,10 @@ esac
 # （ユーザー指示 2026-09-05。それまでは今回の一歩だけを送っていて、
 # 「今どういう状況か・ゴール設定が分からない」と指摘された）。四項目は固定文ではなく、
 # README のゴール節と台帳から毎回抽出する（正本が変われば報告も変わる）。
-# 抽出に失敗したら送らずに落とす（空欄のまま報告しない）。
-if ! tick_body="$(python3 "$PROJECT_DIR/scripts/compose-tick-report.py" \
-      "$PROJECT_DIR/README.md" "$PROJECT_DIR/docs/tasks/auto-loop-state.md" "$tick_line" \
-      2>>"$LOG_FILE")"; then
+# 抽出に失敗したら送らずに落とす（空欄のまま報告しない）。組み立て器はリポジトリ直下に
+# あり、他プロジェクトの自動ループも同じものを使う。
+if ! tick_body="$(python3 "$REPO_DIR/scripts/compose-tick-report.py" \
+      "$PROJECT_DIR" "$tick_line" 2>>"$LOG_FILE")"; then
   log "    報告本文（最終ゴール・現在地・今回の一歩・次の一手）を組み立てられなかった"
   exit 1
 fi

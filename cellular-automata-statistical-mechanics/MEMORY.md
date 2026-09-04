@@ -1,5 +1,15 @@
 # MEMORY.md — cellular-automata-statistical-mechanics
 
+## Slack 報告の四項目（2026-09-05）
+
+自動 tick の Slack 報告は「今回の一歩」だけを送っていて、人間から「今どういう状況か・ゴール設定が
+報告に含まれていない」と指摘された。以後、報告は**最終ゴール・最終ゴールに対する現在地・今回の一歩・
+次の一手**の四項目を必ず含む。文面はリポジトリ直下の共通の組み立て器 `scripts/compose-tick-report.py` が、
+README のゴール節と進捗の正本の残作業表から毎回抽出する（固定文を写さない）。どのファイルのどの節を
+読むかの宣言は `docs/tasks/tick-report-sources.json`。**節の見出し名と表の形を壊すと報告が
+組み立てられず、通知は送られずに落ちる**（空欄のまま報告しない）。
+回帰テストはリポジトリ直下の `scripts/test-compose-tick-report.sh`。
+
 ## 2026-09-05 06:12 tick（住処 `"none"` だけが ℝ/ℂ の裏取りから外れていた）
 
 前 tick の `794318bd7` は `origin/main` に包含済み。前 tick の綴り検出境界を実装と回帰検査へ

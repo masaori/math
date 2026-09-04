@@ -1,0 +1,8 @@
+{
+  "readme": "README.md",
+  "goalSection": "ゴール（2026-08-14 に確定）",
+  "progress": "docs/tasks/auto-loop-state.md",
+  "queueSection": "セクション台帳",
+  "doneMarkers": ["done"],
+  "titleColumns": [0]
+}
