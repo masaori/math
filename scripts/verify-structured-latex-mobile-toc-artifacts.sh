@@ -102,7 +102,7 @@ else
     url="$BASE_URL/$slug/"
     file="$tmp/$slug.html"
     curl -sfL "$url" -o "$file" || true
-    check_html "${slug}（$url）" "$file"
+    check_html "${slug}（${url}）" "$file"
 
     # 公開されているのが現行版であること: 埋め込まれた版が remote default branch に含まれるか
     commit="$(grep -o '版 [0-9a-f]\{7,40\}' "$file" | head -1 | awk '{print $2}')"
