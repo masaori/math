@@ -553,7 +553,7 @@ function termsMaskedByAllPhrases(
  * 同じ本文断片に同じ語が複数回ある負例を固定する。
  *
  * `includes` だけで除外前後を比べると、句が一箇所の語を消しても別の一箇所が残るため、
- * 隠蔽を見落とす。CA 固有語と大文字小文字を区別しない既存物理由来語の両方で、
+ * 隠蔽を見落とす。CA 固有語と、大文字小文字を区別しない既存物理由来語・時間発展語で、
  * 一回でも出現数が減れば検出することを常時確認する。
  */
 const duplicateTermMaskingRegressions: readonly {
@@ -582,6 +582,16 @@ const duplicateTermMaskingRegressions: readonly {
     expected: "physics",
   },
   {
+    name: "時間発展語の一箇所だけを消す除外句",
+    actual: termsMaskedFromTexts(
+      "有限舞台の発展",
+      ["発展"],
+      ["有限舞台の発展と別の発展"],
+      true,
+    ),
+    expected: "発展",
+  },
+  {
     name: "他の句の跡に乗って CA 固有語を消す除外句",
     actual: termsMaskedFromTexts(
       "限 状",
@@ -602,6 +612,17 @@ const duplicateTermMaskingRegressions: readonly {
       ["舞台ABC", "限 物"],
     ),
     expected: "物理",
+  },
+  {
+    name: "他の句の跡に乗って時間発展語を消す除外句",
+    actual: termsMaskedFromTexts(
+      "限 発",
+      ["発展"],
+      ["有限舞台ABC発展"],
+      true,
+      ["舞台ABC", "限 発"],
+    ),
+    expected: "発展",
   },
 ] as const;
 for (const regression of duplicateTermMaskingRegressions) {
