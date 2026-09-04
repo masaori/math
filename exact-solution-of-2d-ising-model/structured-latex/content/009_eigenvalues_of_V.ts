@@ -2208,15 +2208,13 @@ S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
       paragraph([
         "Step 0（用いる ",
         math(String.raw`2\times 2`),
-        " の積）。",
-        ref("pauli_matrix_products"),
-        " の行列表示から直接成分計算して",
+        " の積）。Pauli 行列の行列表示から直接成分計算して",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-   \quad (\because \text{Pauli 行列の行列表示}) \\
+   \quad (\because \text{Pauli 行列の行列表示},\ \blkref{pauli_matrix_products}) \\
 &= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
    \quad (\because \text{行列積の成分計算}) \\
 &= -i\,\sigma^x
@@ -2227,7 +2225,7 @@ S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
         String.raw`\begin{aligned}
 \sigma^y\sigma^x
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-   \quad (\because \text{Pauli 行列の行列表示}) \\
+   \quad (\because \text{Pauli 行列の行列表示},\ \blkref{pauli_matrix_products}) \\
 &= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
    \quad (\because \text{行列積の成分計算}) \\
 &= -i\,\sigma^z
@@ -2238,7 +2236,7 @@ S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
         String.raw`\begin{aligned}
 \sigma^x\sigma^z
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-   \quad (\because \text{Pauli 行列の行列表示}) \\
+   \quad (\because \text{Pauli 行列の行列表示},\ \blkref{pauli_matrix_products}) \\
 &= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
    \quad (\because \text{行列積の成分計算}) \\
 &= -i\,\sigma^y
@@ -2448,6 +2446,7 @@ S_1^{(\pm)}
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "iK_1H_1^{(±)} と iK_2^*H_2 が厳密に実対称（成分が実かつ転置不変）であることは、M=2,3,4,5 と両符号について数値的にも残差 0 で確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_01_real_symmetric.sage）。",
         "2026-08-15 の式変形統一で、Step 1 の Z_mY_m の鎖と Step 2 の Y_mZ_{m+1} の鎖の先頭行（定義の適用）に欠けていた行末根拠を補った。内容は変えていない。",
+        "2026-09-05 の式変形統一で、Step 0 の三つの Pauli 行列積について、段落に置かれていた参照を実際に行列表示を使う各等号の行末へ移した。内容と計算順序は変えていない。",
       ],
     },
   },
