@@ -233,8 +233,6 @@ Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
         " 次の行列の積になる。すなわち ",
         math(String.raw`A_1,\dots,A_M,B_1,\dots,B_M \in \mathrm{Mat}(2,\mathbb{C})`),
         " に対し、",
-        ref("kronecker_product_rule"),
-        " (1) より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -244,14 +242,7 @@ Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
 \end{aligned}`,
       ),
       paragraph([
-        "また ",
-        math(String.raw`\boxtimes`),
-        " は各因子について ",
-        math(String.raw`\mathbb{C}`),
-        "-線型であるから（",
-        ref("kronecker_multilinear"),
-        "）、",
-        math(String.raw`c \in \mathbb{C}`),
+        "また ", math(String.raw`c \in \mathbb{C}`),
         " と ",
         math(String.raw`j \in \{1,\dots,M\}`),
         " に対し",
@@ -310,6 +301,7 @@ YX
           "「食い違うのは 1 因子だけで、そこの符号が全体の符号になる」という計算を、" +
           "3 式すべてで共通に使えるよう主張として切り出した（lean/Ising2D/Part006 の " +
           "siteProd_anticomm_of_single_site に対応する）。",
+        "2026-09-04 の式変形統一で、クロネッカー積の積の規則と各因子の線型性に前置きしていた参照を削った。各適用行の末尾に同じ \\blkref があるため、内容・式変形・根拠は変えていない。",
       ],
     },
   },
