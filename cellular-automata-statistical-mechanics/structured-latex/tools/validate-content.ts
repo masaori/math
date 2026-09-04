@@ -121,6 +121,28 @@ let headingCount = 0;
     }
   }
 
+  // 住処 `"none"` の回帰検査。`"none"` も可算側の値なので ℝ/ℂ 検査が掛かる。
+  // 本文の `"none"` ブロックは現在 ℝ/ℂ を書いていないため、確かめないとこの分岐は静かに壊れる。
+  {
+    const noneProbe = {
+      id: "probe_none_habitat_real_escape",
+      kind: "remark",
+      title: { text: "住処 none の回帰検査" },
+      labels: [],
+      habitat: "none",
+      statement: [{ type: "math", tex: String.raw`x\in\mathbb{R}` }],
+    } as unknown as ConvertedBlock;
+    const beforeNone = projectIssues.length;
+    checkProjectRules(noneProbe, "(住処 none の回帰検査)");
+    const noneRaised = projectIssues.splice(beforeNone).join("\n");
+    if (!noneRaised.includes("ℝ/ℂ が現れる")) {
+      throw new Error(
+        "住処 none の回帰検査が失敗した: habitat \"none\" のブロックに ℝ を置いても検査が掛からない" +
+          `（報告: ${noneRaised || "なし"}）`,
+      );
+    }
+  }
+
   // 逆向きの回帰検査。可算な母集合の記号を ℝ/ℂ と誤検出しないこと（誤検出は本文を
   // 書けなくするので、緩みと同じく検査の失敗である）。
   for (const innocent of [
@@ -358,9 +380,19 @@ function checkProjectRules(block: ConvertedBlock, file: string): void {
   }
 
   const habitat: unknown = block.habitat;
-  if (typeof habitat === "string" && HABITAT_VALUES.countable.has(habitat) && habitat !== "none") {
+  if (typeof habitat === "string" && HABITAT_VALUES.countable.has(habitat)) {
     // ℝ/ℂ そのものを指す記号だけを見る。可算側のブロックがこれらを数式に書いているなら、
     // 住処の宣言か証明のどちらかが誤っている。
+    //
+    // **`"none"` を除外してはならない。** `"none"` は「数量を扱わないブロック」であり、
+    // schema.ts の定義どおり可算側の値である（＝ℝ/ℂ へ脱出していないことを主張し、
+    // `realEscape` を型の上で書けない）。旧版はここで `"none"` だけを検査から外していたため、
+    // **数量を扱わないと宣言したブロックが ℝ/ℂ を出版数式へ書いても、脱出理由を書けないまま
+    // 一件も報告されなかった**。実測: `habitat: "none"` のブロックの数式を
+    // `(E_\tau,\preceq_\tau)\subseteq\mathbb{R}` に差し替えると、実行時検証も
+    // `npm run check` も終了コード 0 で通り、`build/document.tex` に `\mathbb{R}` が乗った。
+    // 数量を扱わないブロックが ℝ/ℂ を数式に書く必要は定義上ないので、検査は全ての可算住処へ掛ける
+    //（ℝ を使わないと述べる文脈は地の文へ書けば足りる）。
     // 「ℝ を使わない」と本文で述べる文脈は地の文（text ノード）に書けるので、
     // 検査対象は数式（本文ノードの数式とタイトルの数式）だけにしてある。
     const first = math.find((value) => blackboardRealOrComplexIn(value) !== undefined);
