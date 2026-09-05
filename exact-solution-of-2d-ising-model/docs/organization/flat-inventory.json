@@ -218,6 +218,32 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "双曲線関数の加法公式と逆双曲線正弦",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "critical_001_claim_cosh_addition_and_half_angle"
+      ],
+      "input": [
+        "双曲線関数の定義と基本性質、非負実数の平方根、集合記号",
+        "本文で用いる実指数・対数・微分規則と積分の性質（一般形の前提の整備は未完）"
+      ],
+      "output": [
+        "双曲線関数の加法・半角公式と狭義単調性",
+        "逆双曲線正弦の定義・逆関数の性質と導関数",
+        "非負引数の双曲線正弦の上下評価"
+      ],
+      "mainTheorem": "双曲線関数の加法・半角公式と逆双曲線正弦の性質",
+      "mainTheoremEntryId": "critical_001_claim_cosh_addition_and_half_angle",
+      "boundaryEvidence": "双曲線関数の定義から加法・半角公式を示し、単調性から逆関数の性質を、微積分から導関数と上下評価を述べる現存一項を節へ置く。直後の正弦の評価は本項の出力を使わず、正弦と余弦の微分と積分の単調性から三次誤差を評価する別枝である。双曲線関数から正弦・余弦への入力切替を境界とする。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度および後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で双曲線関数と正弦評価の全本文・全直接入力を読んだ。五群の主張と逆関数定義の分割、指数対数・微分規則の前提、同様計算の展開と各行参照が未解決である。両項のR3/R4はイジング導入注記に混在する積分の性質で、一般形の解析事実として切り出す必要がある。比較側は主張の半角範囲は現行sin/cosの定義域内だが、証明の全非負引数への拡張が定義域を超え、微分公式・零での値・円周率の数値範囲の根拠も未整備である。本文完成とは扱わず、前提補完と主張分割後に分類・依存・配置を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "交換子を反交換子で表す行列恒等式",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2416,7 +2442,8 @@
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y",
-      "critical_001_claim_cosh_addition_and_half_angle"
+      "critical_001_claim_cosh_addition_and_half_angle",
+      "critical_008_claim_elementary_sine_bounds"
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
@@ -8062,7 +8089,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8238,7 +8265,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -27137,23 +27164,27 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4450,
-        "inspectedContentSha256": "8b6413d90545e2caee883e40153be17f534ccf98198f1ad078aaaadf4dc766d4",
+        "inspectedCharacterCount": 4650,
+        "inspectedContentSha256": "9884c021fc176d9524dd25e4f5348eb304a09edfd96264c49bf76e4d0e3a2a41",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 主張の半角は現行sin/cosの定義域内だが、証明のt≥0全域での使用は定義域を超える。微分公式・零での値・π²の数値区間の根拠と複数不等式の分割が未解決である。R3/R4の積分の性質をイジング導入注記から一般形へ切り出す必要があり、補完後に分類・依存・配置を再判定する。"
       },
       "dependsOnLabels": [
+        "def_cos",
+        "def_sin",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_014c_definition_sin",
+        "calc_formulae_014e_definition_cos",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [

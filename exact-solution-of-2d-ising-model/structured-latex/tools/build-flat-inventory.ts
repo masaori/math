@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["critical_008_claim_elementary_sine_bounds", "LLMによる検証: 主張の半角は現行sin/cosの定義域内だが、証明のt≥0全域での使用は定義域を超える。微分公式・零での値・π²の数値区間の根拠と複数不等式の分割が未解決である。R3/R4の積分の性質をイジング導入注記から一般形へ切り出す必要があり、補完後に分類・依存・配置を再判定する。"],
   ["critical_001_claim_cosh_addition_and_half_angle", "LLMによる検証: 五群の主張とarcsinhの定義を同居させ、指数対数の前提、微分規則と各行参照、同様計算の省略が残る。R3/R4の積分の性質はイジング固有の導入注記に混在しており、一般形の解析事実として切り出す必要がある。注記全体を直接入力へ加えず、補完後に分類・依存・配置を再判定する。"],
   ["calculation_formulae_047_claim_commutator_via_anticommutators", "LLMによる検証: 交換子と反交換子の二定義と恒等式を同居させている。結合律・分配則の根拠参照、同時の括弧外しと二箇所への定義代入、零の挿入の演算分解が未解決である。定義と主張を分割した後に依存と閉包を再判定する。"],
   ["calculation_formulae_046_claim_conjugation_is_ring_homomorphism", "LLMによる検証: 乗法性・単位性・合成則と積の逆元公式を一項へ束ねている。加法保存は先行の行列共役にあるが、環準同型という題への接続説明は本項にない。行列の結合律・単位元・逆元一意性の根拠と各適用行の参照が未解決であり、分割後に配置を再判定する。"],
@@ -7892,7 +7893,158 @@ if (findToolEntry("critical_001_claim_cosh_addition_and_half_angle").dependencyP
   !== commutatorIdentitySection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("交換子を反交換子で表す行列恒等式の直後の項目が変わりました");
 }
+const hyperbolicCalculusSectionEntryIds = [
+  "critical_001_claim_cosh_addition_and_half_angle"
+];
+const hyperbolicCalculusSection = validateReviewedSection(
+  "双曲線関数の加法公式と逆双曲線正弦", "数学的道具立て", hyperbolicCalculusSectionEntryIds,
+  new Map([
+  [
+    "critical_001_claim_cosh_addition_and_half_angle",
+    []
+  ]
+]),
+  new Map([
+  [
+    "critical_001_claim_cosh_addition_and_half_angle",
+    "1cb6576cf9e8ced25389d06eaff8f79b31a55154aab293a5fa1b58526482dd08"
+  ]
+]),
+  [
+  "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+  "calc_formulae_001_sqrt_nonnegative_real",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+    "8eb7e83461c7dd3069ae859b9aa527374c7898d1e6f4609218e4f7caac34c68f"
+  ],
+  [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "critical_001_claim_cosh_addition_and_half_angle"
+],
+);
+const hyperbolicCalculusSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+    "kind": "claim",
+    "sha256": "8eb7e83461c7dd3069ae859b9aa527374c7898d1e6f4609218e4f7caac34c68f",
+    "dependencies": [
+      "calc_formulae_definition_cosh_sinh",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_014c_definition_sin",
+    "kind": "definition",
+    "sha256": "6a8ea2317a4ee4a034fe63a9f7371bb06cc429b38cc136c4059b9b1c28983b54",
+    "dependencies": [
+      "calc_formulae_014_definition_inverse_trig_functions",
+      "calc_formulae_014b_claim_arcsin_bijection"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_014e_definition_cos",
+    "kind": "definition",
+    "sha256": "cf32ed2ef717d12941d16958599fccde9b93fe4dc82a7a97b5e4188e35960205",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_014c_definition_sin",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "critical_001_claim_cosh_addition_and_half_angle",
+    "kind": "claim",
+    "sha256": "1cb6576cf9e8ced25389d06eaff8f79b31a55154aab293a5fa1b58526482dd08",
+    "dependencies": [
+      "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "critical_008_claim_elementary_sine_bounds",
+    "kind": "claim",
+    "sha256": "9884c021fc176d9524dd25e4f5348eb304a09edfd96264c49bf76e4d0e3a2a41",
+    "dependencies": [
+      "calc_formulae_014c_definition_sin",
+      "calc_formulae_014e_definition_cos",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of hyperbolicCalculusSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`双曲線関数の加法公式と逆双曲線正弦の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("critical_008_claim_elementary_sine_bounds").dependencyPlacement!.chapterOrder
+  !== hyperbolicCalculusSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("双曲線関数の加法公式と逆双曲線正弦の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "双曲線関数の加法公式と逆双曲線正弦",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "critical_001_claim_cosh_addition_and_half_angle"
+  ],
+  "input": [
+    "双曲線関数の定義と基本性質、非負実数の平方根、集合記号",
+    "本文で用いる実指数・対数・微分規則と積分の性質（一般形の前提の整備は未完）"
+  ],
+  "output": [
+    "双曲線関数の加法・半角公式と狭義単調性",
+    "逆双曲線正弦の定義・逆関数の性質と導関数",
+    "非負引数の双曲線正弦の上下評価"
+  ],
+  "mainTheorem": "双曲線関数の加法・半角公式と逆双曲線正弦の性質",
+  "mainTheoremEntryId": "critical_001_claim_cosh_addition_and_half_angle",
+  "boundaryEvidence": "双曲線関数の定義から加法・半角公式を示し、単調性から逆関数の性質を、微積分から導関数と上下評価を述べる現存一項を節へ置く。直後の正弦の評価は本項の出力を使わず、正弦と余弦の微分と積分の単調性から三次誤差を評価する別枝である。双曲線関数から正弦・余弦への入力切替を境界とする。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度および後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で双曲線関数と正弦評価の全本文・全直接入力を読んだ。五群の主張と逆関数定義の分割、指数対数・微分規則の前提、同様計算の展開と各行参照が未解決である。両項のR3/R4はイジング導入注記に混在する積分の性質で、一般形の解析事実として切り出す必要がある。比較側は主張の半角範囲は現行sin/cosの定義域内だが、証明の全非負引数への拡張が定義域を超え、微分公式・零での値・円周率の数値範囲の根拠も未整備である。本文完成とは扱わず、前提補完と主張分割後に分類・依存・配置を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "交換子を反交換子で表す行列恒等式",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

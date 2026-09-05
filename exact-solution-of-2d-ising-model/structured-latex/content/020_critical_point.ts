@@ -1230,6 +1230,7 @@ A
     title: { tex: String.raw`0 \leq \tfrac{\theta}{2} - \sin\tfrac{\theta}{2} \leq \tfrac{\theta^3}{48} \quad (0 \leq \theta \leq \pi)` },
     labels: ["elementary_sine_bounds"],
     statement: [
+      paragraph(["正弦・余弦は ", ref("def_sin"), "、", ref("def_cos"), " のものを用いる。"]),
       paragraph([
         math(String.raw`c_0 := 1 - \dfrac{\pi^2}{24}`),
         " とおく（",
