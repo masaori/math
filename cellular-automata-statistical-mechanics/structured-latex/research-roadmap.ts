@@ -259,7 +259,12 @@ export const roadmapStages = [
       {
         kind: "path",
         path: "docs/tasks/auto-loop-state.md",
-        why: "有限舞台の量と初等規則の校正を終え、次の対象を任意半径の局所表と周期境界の重複へ定めた。実現可能入力と制限の等号判定、異なる大域写像と実現繊維の元数、半径一への比較を記述した。新主張のSageMath・Leanは未着手。",
+        why: "有限舞台の量と初等規則の校正を終え、次の対象を任意半径の局所表と周期境界の重複へ定めた。実現可能入力と制限の等号判定、異なる大域写像と実現繊維の元数、半径一への比較を記述し、SageMathの有限範囲の各段検算まで完了した。Leanは未着手。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/cyclic-rule-restriction/overview.md",
+        why: "周期境界で重なるオフセット、両立入力、表制限と大域写像の等号、個数公式、半径一比較を、明示した有限範囲で段ごとに厳密検算した。",
       },
       {
         kind: "path",
