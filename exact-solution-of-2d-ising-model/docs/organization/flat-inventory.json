@@ -218,6 +218,35 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "非零実数対の単位円への正規化",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calc_formulae_012b_claim_radial_normalization_exists_unique",
+        "calc_formulae_013_definition_map_cc_to_c_unit"
+      ],
+      "input": [
+        "実数対としての複素数、単位円、集合の記号",
+        "非負実数の平方根"
+      ],
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_011_definition_unit_circle",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ],
+      "output": [
+        "非零実数対を正の半径と単位円上の対に分ける存在一意性",
+        "非零複素数を単位円上へ送る写像"
+      ],
+      "mainTheorem": "非零実数対の単位円への正規化の存在一意性",
+      "mainTheoremEntryId": "calc_formulae_012b_claim_radial_normalization_exists_unique",
+      "concludingDefinition": "正規化の存在一意性で定める単位円への写像",
+      "concludingDefinitionEntryId": "calc_formulae_013_definition_map_cc_to_c_unit",
+      "boundaryEvidence": "平方根と単位円から正の半径と単位円上の対の存在一意性を示し、その結果で写像を定める二項の依存鎖で閉じる。直後の逆正弦はこの二項へ依存せず、円弧長を新たに入力へ加える。円弧長はこの二項節自身の入力には含めない。プログラミングによる検証では二項の連続性、内部依存、唯一の節末出力、対象と全外部入力の本文、対象と直後の完全な直接依存、直後の本文と相対順、および比較で追加される円弧長の本文を固定する。",
+      "readabilityStatus": "LLMによる検証では正の平方根で半径を定め、成分を割って単位円へ移し、一意性から写像を定める筋を本文と照合した。正規化証明には各適用行のラベル参照不足と、一行で複数の四則演算をまとめる箇所が残るため、本文完成とは扱わない。外部入力の複素数と集合記号にも説明粒度の未解決が残る。"
+    },
+    {
       "name": "極座標表現の同値類",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -1816,6 +1845,7 @@
     "reviewedEntryCount": 309,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
+      "calc_formulae_012b_claim_radial_normalization_exists_unique",
       "calc_formulae_014b_claim_arcsin_bijection",
       "calc_formulae_016_definition_angle_equivalence_class",
       "calc_formulae_019_definition_polar_equivalence_class",
@@ -7271,7 +7301,7 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 3187,
@@ -7282,7 +7312,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 正規化の存在一意性の証明は平方根と単位円の根拠を適用行ごとのラベルで引かず、実数の四則として複数の演算を一行へまとめている。節配置だけを確定し、本文の一ステップ一定理への展開は未解決である。"
       },
       "dependsOnLabels": [
         "def_unit_circle",

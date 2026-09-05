@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["calc_formulae_012b_claim_radial_normalization_exists_unique", "LLMによる検証: 正規化の存在一意性の証明は平方根と単位円の根拠を適用行ごとのラベルで引かず、実数の四則として複数の演算を一行へまとめている。節配置だけを確定し、本文の一ステップ一定理への展開は未解決である。"],
   ["calc_formulae_016_definition_angle_equivalence_class", "LLMによる検証: 商集合を定める前提となる反射性・対称性・推移性について、整数 0・-n・n+m を用いる根拠の説明が未整備である。節構造だけを確定し本文完成とは扱わない。"],
   ["calc_formulae_019_definition_polar_equivalence_class", "LLMによる検証: 半径零と正の場合を分けた反射性・対称性・推移性の説明、および同値類から商集合を作る説明が未整備である。外部入力の角度同値関係にも同じ不足がある。節構造だけを確定し本文完成とは扱わない。"],
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
@@ -3734,7 +3735,59 @@ if (polarEquivalenceEntry.kind !== "definition"
   || hyperbolicEntries[0]!.explanationGranularityReview.inspectedContentSha256 !== "e884934c5a35ebb1daa4e665eb779f623f99cffba33fe779cf01ee52518a6d3a") {
   throw new Error("極座標の同値類から双曲線関数への入力切り替わりが変わりました");
 }
+const radialNormalizationSectionEntryIds = ["calc_formulae_012b_claim_radial_normalization_exists_unique", "calc_formulae_013_definition_map_cc_to_c_unit"];
+const radialNormalizationSection = validateReviewedSection(
+  "非零実数対の単位円への正規化", "数学的道具立て", radialNormalizationSectionEntryIds,
+  new Map([["calc_formulae_012b_claim_radial_normalization_exists_unique", []], ["calc_formulae_013_definition_map_cc_to_c_unit", ["calc_formulae_012b_claim_radial_normalization_exists_unique"]]]),
+  new Map([["calc_formulae_012b_claim_radial_normalization_exists_unique", "9caaed727e3cc6211199fcabb9aac1d890013f0199037ab571fcd3dd5a6e8cd3"], ["calc_formulae_013_definition_map_cc_to_c_unit", "2a9a710aa09edac48ef85c2fdc3d9a033b615f80a815264dceb2773a031e77ce"]]),
+  ["calc_formulae_001_sqrt_nonnegative_real", "calc_formulae_006_definition_of_cc", "calc_formulae_011_definition_unit_circle", "calculation_formulae_definition_set_and_algebra_notation"],
+  new Map([["calc_formulae_001_sqrt_nonnegative_real", "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d"], ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"], ["calc_formulae_011_definition_unit_circle", "0f0fa73628443bdff271ad3b3dfe9ec8ab947902b46503d6a5822b6925177765"], ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"]]),
+  ["calc_formulae_013_definition_map_cc_to_c_unit"],
+);
+const radialNormalizationBoundaryDependencies = new Map<string, string[]>([["calc_formulae_012b_claim_radial_normalization_exists_unique", ["calc_formulae_001_sqrt_nonnegative_real", "calc_formulae_011_definition_unit_circle", "calculation_formulae_definition_set_and_algebra_notation"]], ["calc_formulae_013_definition_map_cc_to_c_unit", ["calc_formulae_006_definition_of_cc", "calc_formulae_011_definition_unit_circle", "calc_formulae_012b_claim_radial_normalization_exists_unique"]], ["calc_formulae_014_definition_inverse_trig_functions", ["calc_formulae_001_sqrt_nonnegative_real", "calc_formulae_006_definition_of_cc", "calc_formulae_011_definition_unit_circle", "calc_formulae_012_definition_arc_length", "calculation_formulae_definition_set_and_algebra_notation"]]]);
+for (const [id, expected] of radialNormalizationBoundaryDependencies) {
+  if (JSON.stringify(findToolEntry(id).dependsOnEntryIds) !== JSON.stringify(expected)) {
+    throw new Error(`単位円への正規化の境界の直接依存が変わりました: ${id}`);
+  }
+}
+const radialNormalizationNextEntry = findToolEntry("calc_formulae_014_definition_inverse_trig_functions");
+if (arcLengthEntry.explanationGranularityReview.inspectedContentSha256 !== "f6df94720c8d99c3fc6bf1618a9a348cc682b41ffe02275f8d3abe80c878d9b9"
+  || radialNormalizationNextEntry.dependencyPlacement!.chapterOrder !== radialNormalizationSection.sectionEntries[1]!.dependencyPlacement!.chapterOrder + 1
+  || radialNormalizationNextEntry.explanationGranularityReview.inspectedContentSha256 !== "b3a21e2102af9b25c3ba9f787c8f037b17e6e688071689a00df1c6a1aea3fca3"
+  || radialNormalizationSection.sectionEntries[0]!.kind !== "claim"
+  || radialNormalizationSection.sectionEntries[1]!.kind !== "definition"
+  || radialNormalizationSection.sectionEntries[0]!.explanationGranularityReview.manualReview === null) {
+  throw new Error("単位円への正規化の主張・定義・直後の逆正弦の境界が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "非零実数対の単位円への正規化",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "calc_formulae_012b_claim_radial_normalization_exists_unique",
+    "calc_formulae_013_definition_map_cc_to_c_unit"
+  ],
+  "input": [
+    "実数対としての複素数、単位円、集合の記号",
+    "非負実数の平方根"
+  ],
+  "externalInputEntryIds": [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "calc_formulae_006_definition_of_cc",
+    "calc_formulae_011_definition_unit_circle",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ],
+  "output": [
+    "非零実数対を正の半径と単位円上の対に分ける存在一意性",
+    "非零複素数を単位円上へ送る写像"
+  ],
+  "mainTheorem": "非零実数対の単位円への正規化の存在一意性",
+  "mainTheoremEntryId": "calc_formulae_012b_claim_radial_normalization_exists_unique",
+  "concludingDefinition": "正規化の存在一意性で定める単位円への写像",
+  "concludingDefinitionEntryId": "calc_formulae_013_definition_map_cc_to_c_unit",
+  "boundaryEvidence": "平方根と単位円から正の半径と単位円上の対の存在一意性を示し、その結果で写像を定める二項の依存鎖で閉じる。直後の逆正弦はこの二項へ依存せず、円弧長を新たに入力へ加える。円弧長はこの二項節自身の入力には含めない。プログラミングによる検証では二項の連続性、内部依存、唯一の節末出力、対象と全外部入力の本文、対象と直後の完全な直接依存、直後の本文と相対順、および比較で追加される円弧長の本文を固定する。",
+  "readabilityStatus": "LLMによる検証では正の平方根で半径を定め、成分を割って単位円へ移し、一意性から写像を定める筋を本文と照合した。正規化証明には各適用行のラベル参照不足と、一行で複数の四則演算をまとめる箇所が残るため、本文完成とは扱わない。外部入力の複素数と集合記号にも説明粒度の未解決が残る。"
+}, {
   name: "極座標表現の同値類",
   chapter: "数学的道具立て",
   status: "構造確定・本文粒度未解決",
