@@ -218,6 +218,33 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "成分で定めるクロネッカー積と積の規則",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000b_claim_kronecker_product_rule"
+      ],
+      "input": [
+        "複素数の演算法則、集合記号と有限和・有限積",
+        "成分による行列積と列ベクトルへの作用"
+      ],
+      "output": [
+        "二値多重添字の全単射による数ベクトルと行列のクロネッカー積",
+        "各因子ごとの行列積、単位行列およびベクトルへの作用の公式"
+      ],
+      "mainTheorem": "クロネッカー積の積の規則",
+      "mainTheoremEntryId": "linear_space_general_000b_claim_kronecker_product_rule",
+      "boundaryEvidence": "多重添字と成分による定義を入力に、多重添字和の補題で行列積とベクトルへの作用を因子ごとの計算へ帰着する二項が末尾の積の規則へ閉じる。直後の各因子についての線型性は積の規則を使わず、成分の定義へ戻って複素数の分配律で和とスカラー倍を展開する別枝であり、行列積という入力が外れる。共通の記法だけでまとめず、末尾主張への依存の閉包を根拠とする。プログラミングによる検証で全直接依存・本文・種別・粒度・連続性・節末と後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で二項、全直接入力と後続線型性の全本文を読んだ。定義側の元数・値域・全単射と二定義の分割、積の規則の三主張と多重添字和の補題の分割、有限和の帰納法、添字変更・二箇所への同時代入・可換律と結合律の同時適用、各行参照が未解決である。比較側も行列と数ベクトルの主張の分割、成分ごとの和とスカラー倍の定義、積の並べ替えと分配の分離、数ベクトルの同様計算と各行参照が未解決である。複素演算法則の入力にも既存の本文課題が残る。M=1と空和・空積の規約を保ち、前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "等間隔点の平均の積分への収束",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2561,6 +2588,8 @@
       "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
       "calculation_formulae_047_claim_commutator_via_anticommutators",
       "linear_space_general_000_definition_kronecker_product",
+      "linear_space_general_000b_claim_kronecker_product_rule",
+      "linear_space_general_000c_claim_kronecker_multilinear",
       "linear_space_general_002b_definition_matrix_norm",
       "linear_space_general_003_claim_matrix_norm_submultiplicativity",
       "linear_space_general_003c_claim_matrix_norm_vector_bound",
@@ -7429,7 +7458,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9023,7 +9052,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 12,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -10899,26 +10928,30 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7233,
-        "inspectedContentSha256": "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3",
+        "inspectedCharacterCount": 7481,
+        "inspectedContentSha256": "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積と複素数の演算法則の参照を補った。三主張と多重添字和の補題が同居し、有限和の帰納法、添字変更、二箇所の定義代入、可換律と結合律の同時適用、各行参照の分離が未解決である。M=1と空和・空積の規約を保ち、分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "complex_numbers_form_a_field",
         "def_kronecker",
         "definition_of_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
         "calculation_formulae_definition_set_and_algebra_notation",
         "linear_space_general_000_definition_kronecker_product"
       ],
@@ -10960,26 +10993,28 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3386,
-        "inspectedContentSha256": "e644e2525aecd17cc1b8c439db76c6c4b94348dd1fe9c63405c5c8b6077f068d",
+        "inspectedCharacterCount": 3559,
+        "inspectedContentSha256": "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 複素数の演算法則の参照を補った。行列と数ベクトルの主張およびスカラー倍の特例の分割、成分ごとの和・スカラー倍の定義、積の並べ替えと分配の分離、数ベクトルの同様計算の展開と各行参照が未解決である。M=1の空積を保持し、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "complex_numbers_form_a_field",
         "def_kronecker",
         "definition_of_cc",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
         "calculation_formulae_definition_set_and_algebra_notation",
         "linear_space_general_000_definition_kronecker_product"
       ],

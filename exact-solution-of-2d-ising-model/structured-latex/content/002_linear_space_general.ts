@@ -351,6 +351,7 @@ export default defineBlocks([
       ]),
     ],
     proof: [
+      paragraph(["行列積と列ベクトルへの作用は ", ref("mat_mult"), " に従い、複素数の結合律・可換律・分配律は ", ref("complex_numbers_form_a_field"), " を用いる。"]),
       paragraph([
         "多重添字についての和を、各因子ごとの和の積へ直すこと。",
         math(String.raw`M\in\mathbb{Z}_{\ge 1}`),
@@ -547,6 +548,7 @@ export default defineBlocks([
       ]),
     ],
     proof: [
+      paragraph(["成分の複素数の演算には ", ref("complex_numbers_form_a_field"), " の結合律・可換律・分配律を用いる。"]),
       paragraph([
         "準備。",
         math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M)\in\mathcal{I}_M`),
