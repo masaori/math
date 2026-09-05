@@ -7,7 +7,11 @@
  * 両方向で確かめる。
  */
 
+import { join } from "node:path";
+
 import type { RoadmapStage } from "../research-roadmap.ts";
+import { structuredLatexDir } from "./content-modules.ts";
+import { evidenceFileExists } from "./roadmap-evidence-fs.ts";
 import { inspectRoadmap, type RoadmapInput } from "./roadmap-rules.ts";
 
 const resolvers = { hasLabel: () => true, hasPath: () => true };
@@ -166,9 +170,61 @@ expectViolation(
   "入口が射程の全体になっている",
 );
 
+const pathEvidence = (path: string): Partial<RoadmapStage> => ({
+  evidence: [{ kind: "path", path, why: "合成した根拠" }],
+});
+
+expectViolation(
+  "根拠のパスが空（プロジェクトルート自身へ解決されて実在の判定を素通りする）",
+  replace(baseStages(), "general_stage_and_nonuniform_rules", pathEvidence("")),
+  "根拠のパスが相対パスとして書かれていない（空である）",
+);
+
+expectViolation(
+  "根拠のパスが絶対パス（プロジェクトの外を指す）",
+  replace(baseStages(), "general_stage_and_nonuniform_rules", pathEvidence("/etc/hosts")),
+  "根拠のパスが相対パスとして書かれていない（絶対パスである）",
+);
+
+expectViolation(
+  "根拠のパスが `..` でプロジェクトの外へ出る",
+  replace(baseStages(), "general_stage_and_nonuniform_rules", pathEvidence("../docs/context/README.md")),
+  "根拠のパスが相対パスとして書かれていない（プロジェクトの外を指している）",
+);
+
+expectViolation(
+  "根拠のラベルが空",
+  replace(baseStages(), "general_stage_and_nonuniform_rules", {
+    evidence: [{ kind: "label", label: "   ", why: "合成した根拠" }],
+  }),
+  "根拠のラベルが空である",
+);
+
+/**
+ * 根拠の実在を判定する解決子そのものを検査する。規則の側だけを検査しても、解決子が
+ * ディレクトリやプロジェクト外を真と答えれば、実在の主張は空のまま静かに通る。
+ */
+const projectDir = join(structuredLatexDir, "..");
+
+const expectResolver = (name: string, path: string, expected: boolean): void => {
+  const actual = evidenceFileExists(projectDir, path);
+  if (actual === expected) {
+    console.log(`✓ ${name}`);
+    return;
+  }
+  failures += 1;
+  console.error(`✗ ${name}: ${expected} を期待したが ${actual} だった（${path}）`);
+};
+
+expectResolver("実在する通常ファイルは根拠になる", "README.md", true);
+expectResolver("ディレクトリは根拠にならない（中身が空でも存在する）", "docs", false);
+expectResolver("プロジェクトルート自身は根拠にならない", "", false);
+expectResolver("プロジェクトの外のファイルは根拠にならない", "../docs/context/README.md", false);
+expectResolver("実在しないファイルは根拠にならない", "docs/存在しない.md", false);
+
 if (failures > 0) {
   console.error(`段取りの規則の回帰検査が失敗した（${failures} 件）`);
   process.exit(1);
 }
 
-console.log("段取りの規則の回帰検査がすべて期待どおり（11 件）");
+console.log("段取りの規則と根拠の解決子の回帰検査がすべて期待どおり（20 件）");

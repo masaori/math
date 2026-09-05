@@ -6,11 +6,11 @@
  * ここは正本を読み込み、本文のラベルとディスク上のパスの実在を解決して規則へ渡す入口である。
  */
 
-import { existsSync } from "node:fs";
 import { join } from "node:path";
 
 import { roadmapPreamble, roadmapStages, roadmapTitle, type RoadmapStage } from "../research-roadmap.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
+import { evidenceFileExists } from "./roadmap-evidence-fs.ts";
 import { inspectRoadmap } from "./roadmap-rules.ts";
 
 const projectDir = join(structuredLatexDir, "..");
@@ -35,7 +35,7 @@ const report = inspectRoadmap(
   { title: roadmapTitle, preamble, stages },
   {
     hasLabel: (label) => labels.has(label),
-    hasPath: (path) => existsSync(join(projectDir, path)),
+    hasPath: (path) => evidenceFileExists(projectDir, path),
   },
 );
 
