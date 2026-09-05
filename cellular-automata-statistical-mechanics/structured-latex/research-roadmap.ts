@@ -252,9 +252,14 @@ export const roadmapStages = [
     ],
     evidence: [
       {
+        kind: "label",
+        label: "claim_cyclic_rule_global_equality",
+        why: "周期舞台で実現可能な入力だけへの制限が大域写像を完全に識別する。現在は記述層であり四層完了ではない。",
+      },
+      {
         kind: "path",
         path: "docs/tasks/auto-loop-state.md",
-        why: "有限舞台の量と初等規則の校正を終え、次の対象を任意半径の局所表と周期境界の重複へ定めた。入力の整理に着手した段階で、新しい一般命題はまだない。",
+        why: "有限舞台の量と初等規則の校正を終え、次の対象を任意半径の局所表と周期境界の重複へ定めた。実現可能入力と制限の等号判定、異なる大域写像と実現繊維の元数、半径一への比較を記述した。新主張のSageMath・Leanは未着手。",
       },
       {
         kind: "path",
