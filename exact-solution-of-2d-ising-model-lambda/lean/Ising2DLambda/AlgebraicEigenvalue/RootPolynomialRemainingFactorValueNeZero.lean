@@ -32,10 +32,16 @@ theorem rootPolynomialRemainingFactorValueNeZero (n : ℕ) (hn : 1 ≤ n) (w : Q
   -- 準備の第 1: n < k では f = t^n + (-1)^ の両方の項の係数が零である。
   have hcoeff : ∀ k : ℕ, n < k → (rootPolynomial n).coeff k = 0 := by
     intro k hk
-    rw [rootPolynomial, Polynomial.coeff_add,
-      qbarPolyIndeterminatePowerCoefficient n k,
-      if_neg (by omega : ¬(k = n))]
-    rw [qbarConst, Polynomial.coeff_C, if_neg (by omega : ¬(k = 0)), zero_add]
+    calc
+      (rootPolynomial n).coeff k
+          = (Polynomial.X ^ n : QbarPoly).coeff k + (qbarConst (-1)).coeff k := by
+            rw [rootPolynomial, Polynomial.coeff_add]
+      _ = 0 + (qbarConst (-1)).coeff k := by
+            rw [qbarPolyIndeterminatePowerCoefficient n k,
+              if_neg (by omega : ¬(k = n))]
+      _ = 0 + 0 := by
+            rw [qbarConst, Polynomial.coeff_C, if_neg (by omega : ¬(k = 0))]
+      _ = 0 := zero_add 0
   -- 準備の第 2: w^n = 1 から aev_w(f) = 1 + (-1) = 0（代入は和を保つ・
   -- 不定元の冪の値・定数の値）。
   have hroot : qbarPolyEval w (rootPolynomial n) = 0 := by

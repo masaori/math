@@ -22,10 +22,19 @@ def main():
     for n in range(1, 9):
         f = t^n - 1
         for k in range(n + 1, n + 5):
+            assert f[k] == (t^n)[k] + R(-1)[k]
+            assert (t^n)[k] + R(-1)[k] == QQbar(0) + R(-1)[k]
+            assert QQbar(0) + R(-1)[k] == QQbar(0) + QQbar(0)
+            assert QQbar(0) + QQbar(0) == QQbar(0)
             assert f[k] == 0
         for j in range(n):
             w = QQbar.zeta(n)^j
             assert w^n == 1
+            assert f(w) == (t^n)(w) + R(-1)(w)
+            assert (t^n)(w) + R(-1)(w) == w^n + R(-1)(w)
+            assert w^n + R(-1)(w) == w^n + QQbar(-1)
+            assert w^n + QQbar(-1) == QQbar(1) + QQbar(-1)
+            assert QQbar(1) + QQbar(-1) == QQbar(0)
             assert f(w) == w^n + QQbar(-1)
             assert f(w) == 0
     print("   通過")
@@ -50,6 +59,7 @@ def main():
             assert B == g
             # 値の鎖: aev_w(B) = aev_w(g)
             assert B(w) == g(w)
+            assert g(w) != 0
     print("   通過")
 
     print("3. 主張（aev_w(B) が零でないこと）を確かめる")

@@ -19,10 +19,16 @@ theorem rootPolynomialRemainingFactorValueNeZero_from_necSuf (n : ℕ) (hn : 1 �
   -- 準備は具体版と同じ。
   have hcoeff : ∀ k : ℕ, n < k → (rootPolynomial n).coeff k = 0 := by
     intro k hk
-    rw [rootPolynomial, Polynomial.coeff_add,
-      qbarPolyIndeterminatePowerCoefficient n k,
-      if_neg (by omega : ¬(k = n))]
-    rw [qbarConst, Polynomial.coeff_C, if_neg (by omega : ¬(k = 0)), zero_add]
+    calc
+      (rootPolynomial n).coeff k
+          = (Polynomial.X ^ n : QbarPoly).coeff k + (qbarConst (-1)).coeff k := by
+            rw [rootPolynomial, Polynomial.coeff_add]
+      _ = 0 + (qbarConst (-1)).coeff k := by
+            rw [qbarPolyIndeterminatePowerCoefficient n k,
+              if_neg (by omega : ¬(k = n))]
+      _ = 0 + 0 := by
+            rw [qbarConst, Polynomial.coeff_C, if_neg (by omega : ¬(k = 0))]
+      _ = 0 := zero_add 0
   have hroot : qbarPolyEval w (rootPolynomial n) = 0 := by
     calc
       qbarPolyEval w (rootPolynomial n)

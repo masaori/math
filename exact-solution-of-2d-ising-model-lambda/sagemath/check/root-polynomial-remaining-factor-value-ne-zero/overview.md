@@ -17,3 +17,7 @@ sage sagemath/check/root-polynomial-remaining-factor-value-ne-zero/check.sage
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+**2026-09-06 プログラミングによる検証: 通過。** 準備の係数計算四段と評価計算五段、
+最後の商の非零性を本文の各行へ対応させた。以前の終点の assertion も保持した。
+Lean 具体版と必要十分版への特殊化の係数計算も同じ四段に揃えた。
