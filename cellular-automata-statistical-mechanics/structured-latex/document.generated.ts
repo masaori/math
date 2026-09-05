@@ -18,6 +18,7 @@ import type {
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
+import blocks_binary_ca_positive_count_domain from './content/binary-ca-positive-count-domain.ts'
 import blocks_causal_set_primary_literature from './content/causal-set-primary-literature.ts'
 import blocks_causal_structure_comparison from './content/causal-structure-comparison.ts'
 import blocks_composed_neighborhood_closure from './content/composed-neighborhood-closure.ts'
@@ -68,6 +69,7 @@ import blocks_neighborhood_assignment_union_preserving_image from './content/nei
 import blocks_neighborhood_covering_relation_of_finite_poset from './content/neighborhood-covering-relation-of-finite-poset.ts'
 import blocks_ordered_neighborhood_assignment_monoid from './content/ordered-neighborhood-assignment-monoid.ts'
 import blocks_periodic_point_count from './content/periodic-point-count.ts'
+import blocks_positive_fixed_point_count_domain from './content/positive-fixed-point-count-domain.ts'
 import blocks_recursive_preimage_tree_code from './content/recursive-preimage-tree-code.ts'
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_reversibility_finite_decidability from './content/reversibility-finite-decidability.ts'
@@ -84,6 +86,7 @@ import blocks_transitive_closure_antisymmetry from './content/transitive-closure
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
+  ...typeof blocks_binary_ca_positive_count_domain,
   ...typeof blocks_causal_set_primary_literature,
   ...typeof blocks_causal_structure_comparison,
   ...typeof blocks_composed_neighborhood_closure,
@@ -134,6 +137,7 @@ export type AllBlocks = [
   ...typeof blocks_neighborhood_covering_relation_of_finite_poset,
   ...typeof blocks_ordered_neighborhood_assignment_monoid,
   ...typeof blocks_periodic_point_count,
+  ...typeof blocks_positive_fixed_point_count_domain,
   ...typeof blocks_recursive_preimage_tree_code,
   ...typeof blocks_redundant_neighbor,
   ...typeof blocks_reversibility_finite_decidability,
