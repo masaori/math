@@ -699,6 +699,7 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
     title: null,
     labels: ["arg_of_quotient_of_complex_numbers"],
     statement: [
+      paragraph([ref("def_phi_polar"), " と ", ref("section_of_angle_representation"), " を使う。非零性との同値には ", ref("abs_basic_properties"), "、積の計算には ", ref("operations_on_polar_representation"), " を用いる。"]),
       paragraph([
         math(String.raw`z_1, z_2 \in \mathbb{C}`),
         " について、",
@@ -965,6 +966,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
     title: null,
     labels: ["range_of_args_of_multiple_of_complex_numbers"],
     statement: [
+      paragraph([ref("def_phi_polar"), "、", ref("def_abs_arg"), " を使い、半径の非零性と複素数の非零性の同値には ", ref("abs_basic_properties"), " を用いる。"]),
       paragraph([
         math(String.raw`z_1, z_2 \in \mathbb{C}`),
         " について、",
