@@ -44,9 +44,12 @@ const baseStages = (): RoadmapStage[] => [
   stage("rule_class_separation", "未着手", ["elementary_ca_finite_calibration"]),
 ];
 
-const build = (stages: readonly RoadmapStage[]): RoadmapInput => ({
+const build = (
+  stages: readonly RoadmapStage[],
+  preamble: readonly string[] = ["合成した前置き"],
+): RoadmapInput => ({
   title: "研究の段取り",
-  preamble: ["合成した前置き"],
+  preamble,
   stages,
 });
 
@@ -84,6 +87,26 @@ const expectClean = (name: string, stages: readonly RoadmapStage[]): void => {
 };
 
 expectClean("規則に適合した段取りは通る", baseStages());
+
+/** 前置きは段取りの読み方の宣言なので、段落の個数だけを見ると空の宣言が通る。 */
+const expectPreambleViolation = (name: string, preamble: readonly string[], fragment: string): void => {
+  const { violations } = inspectRoadmap(build(baseStages(), preamble), resolvers);
+  if (violations.some((violation) => violation.includes(fragment))) {
+    console.log(`✓ ${name}`);
+    return;
+  }
+  failures += 1;
+  console.error(`✗ ${name}: 「${fragment}」を含む違反が出なかった（違反 ${violations.length} 件）`);
+  for (const violation of violations) console.error(`    - ${violation}`);
+};
+
+expectPreambleViolation("前置きが空の配列", [], "段取りの前置きが無い");
+expectPreambleViolation("前置きの段落が空文字だけ", ["   "], "空の前置きの段落がある");
+expectPreambleViolation(
+  "前置きの段落の一つが空文字",
+  ["合成した前置き", ""],
+  "空の前置きの段落がある",
+);
 
 expectViolation(
   "現在地が未着手（着手していない段階を現在地と称する）",
@@ -254,4 +277,4 @@ if (failures > 0) {
   process.exit(1);
 }
 
-console.log("段取りの規則と根拠の解決子の回帰検査がすべて期待どおり（22 件）");
+console.log("段取りの規則と根拠の解決子の回帰検査がすべて期待どおり（25 件）");

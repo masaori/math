@@ -79,6 +79,14 @@ export const inspectRoadmap = (input: RoadmapInput, resolvers: RoadmapResolvers)
 
   if (title.trim() === "") fail("段取りの表題が空である");
   if (preamble.length === 0) fail("段取りの前置きが無い");
+  /**
+   * 段落の個数だけを見ると、空文字だけの前置きが「前置きがある」として通る。前置きは射程の
+   * 読み方（入口と射程の区別、状態集合を 2 元集合に固定すること）を宣言している場所なので、
+   * 中身が空なら段階の一覧だけが残り、宣言が消える。
+   */
+  for (const paragraph of preamble) {
+    if (paragraph.trim() === "") fail("空の前置きの段落がある");
+  }
 
   // --- 依存関係 --------------------------------------------------------------
 
