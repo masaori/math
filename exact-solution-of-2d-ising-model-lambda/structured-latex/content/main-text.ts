@@ -27333,11 +27333,13 @@ F_{m+1}
                         displayMath(String.raw`\begin{aligned}
 \mathrm{aev}_{w}(B)
 &=\mathrm{aev}_{w}(g)
-&&(\because\ B=g)
+&&(\because\ B=g)\\
+&\neq0
+&&(\because\ \blkref{claim_root_factor_quotient_value_ne_zero})
 \end{aligned}`),
                         paragraph([
-                          "終点は ", ref("claim_root_factor_quotient_value_ne_zero"),
-                          " により零でない（同じ ", math(String.raw`n\ge1`), "・",
+                          "最後の非零性は ", ref("claim_root_factor_quotient_value_ne_zero"),
+                          " を適用した（同じ ", math(String.raw`n\ge1`), "・",
                           math(String.raw`w\in\mu_n`), "・同じ式の商 ", math(String.raw`g`),
                           " についての主張である）。ゆえに ",
                           math(String.raw`\mathrm{aev}_{w}(B)\neq0`),
