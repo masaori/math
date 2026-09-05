@@ -218,6 +218,39 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "逆数の偏角と負の角度の切断",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_036_claim_arg_of_reciprocal"
+      ],
+      "input": [
+        "複素数と極座標の逆元、極座標への写像と未完の同型性",
+        "絶対値・偏角・非零性、射影と角度切断およびその存在一意性",
+        "複素数と集合記号"
+      ],
+      "output": [
+        "非零複素数の逆数の偏角を、偏角が零なら零、それ以外なら2πから偏角を引いた値として表す公式"
+      ],
+      "mainTheorem": "非零複素数の逆数の偏角の二場合の公式（未完の同型性に依存）",
+      "mainTheoremEntryId": "calculation_formulae_036_claim_arg_of_reciprocal",
+      "boundaryEvidence": "逆元保存で角度を負にし、零と正の偏角を分けて代表区間へ戻す一項で閉じる。直後の複素平方根定義は逆数の公式を使わず、非負平方根・半角・逆方向写像・極座標同値類へ入力を切り替える別枝である。平方根写像の出力は本節へ含めない。プログラミングによる検証では対象と後続比較の全直接入力の本文・全直接依存・種別・粒度、唯一の節末と後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で逆数の全証明と平方根定義および入力を読んだ。逆数の非零仮定は定義に必要である。対象は未完の同型性に依存し、逆写像の一般論の具体化、各行の参照と実数演算の分解が未解決である。比較対象の平方根は半角が[0,π)に入って現行三角関数の主値区間を超え、逆方向写像も未完であるため、定義自体が未完であることを本文と記録に明示した。定義・証明の補完や分割後には依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+        "calc_formulae_017_definition_section_of_angle_representation",
+        "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+        "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+        "calculation_formulae_030_definition_first_and_second_projections",
+        "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_031b_claim_abs_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "自乗の偏角と二倍の角度の切断",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2152,6 +2185,7 @@
       "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi",
       "calculation_formulae_035_claim_arg_of_square",
       "calculation_formulae_036_claim_arg_of_reciprocal",
+      "calculation_formulae_038_definition_sqrt_of_complex_number",
       "calculation_formulae_043_claim_sqrt_of_reciprocal",
       "calculation_formulae_044_claim_reciprocal_of_sqrt",
       "linear_space_general_002b_definition_matrix_norm",
@@ -6895,7 +6929,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 15,
+        "incomingReferenceCount": 16,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8246,7 +8280,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8364,7 +8398,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8674,7 +8708,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 13,
+        "incomingReferenceCount": 14,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8739,7 +8773,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8879,7 +8913,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9464,25 +9498,37 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 623,
-        "inspectedContentSha256": "40207c6ca577c4bd0b459305d5074996d938410b81781dc11c0dc6f0f9f37f16",
+        "inspectedCharacterCount": 1252,
+        "inspectedContentSha256": "806ac234b95ab3b4d315129507d997df85bebf837b3af0cf02472743d26450f1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 半角は[0,π)に入り、現行sin/cosの主値区間を超える。逆方向写像の定義が未完であるため平方根写像の定義自体も未完であり、説明粒度だけの不足とは扱わない。定義域の補完と合成写像の妥当性の説明後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "def_phi_cartesian",
+        "def_phi_polar",
         "definition_of_cc",
+        "definition_of_sqrt_r_positive",
+        "first_and_second_projections",
+        "polar_equivalence_class",
+        "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_017_definition_section_of_angle_representation",
+        "calc_formulae_019_definition_polar_equivalence_class",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_028_definition_phi_cartesian",
+        "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [

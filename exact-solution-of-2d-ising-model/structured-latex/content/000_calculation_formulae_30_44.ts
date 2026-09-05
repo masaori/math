@@ -1662,6 +1662,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     title: { tex: String.raw`\mathbb{C}\text{の}\sqrt{\cdot}` },
     labels: ["def_sqrt_cc"],
     statement: [
+      paragraph([ref("definition_of_sqrt_r_positive"), "、", ref("def_phi_polar"), "、", ref("def_phi_cartesian"), "、", ref("first_and_second_projections"), "、", ref("section_of_angle_representation"), "、", ref("polar_equivalence_class"), " を用いる。半角の値域は ", math(String.raw`[0,\pi)`), " であり、現行の正弦・余弦の定義域を超える。逆方向写像が未完のため、以下の平方根写像の定義も未完である。"]),
       paragraph([
         math(String.raw`\sqrt{\cdot} : \mathbb{C} \to \mathbb{C}`),
         " を以下のように定める。",

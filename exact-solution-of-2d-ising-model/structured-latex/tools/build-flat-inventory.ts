@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["calculation_formulae_038_definition_sqrt_of_complex_number", "LLMによる検証: 半角は[0,π)に入り、現行sin/cosの主値区間を超える。逆方向写像の定義が未完であるため平方根写像の定義自体も未完であり、説明粒度だけの不足とは扱わない。定義域の補完と合成写像の妥当性の説明後に依存と閉包を再判定する。"],
   ["calculation_formulae_036_claim_arg_of_reciprocal", "LLMによる検証: 逆数の定義に非零仮定が必要である。未完の同型性を使う逆写像の積・単位元保存から逆元保存を導いており、証明完成とは扱わない。一般論の具体計算への展開、各行のラベルと複数の実数演算の分解が未解決である。"],
   ["calculation_formulae_035_claim_arg_of_square", "LLMによる検証: 零の場合を分けているので非零仮定は不要である。一方、未完の同型性を使う積保存に依存するため証明完成とは扱わない。逆写像の一般論の具体化、各適用行の参照、複数演算を一段にまとめた箇所の展開が未解決である。"],
   ["calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi", "LLMによる検証: 未完の同型性に依存する積の偏角公式を入力に使うため、本文完成とは扱わない。場合分けの固定整数の説明は明示されているが、複数の実数演算の同時適用と各行のラベル不足は未解決である。"],
@@ -6073,7 +6074,334 @@ if (findToolEntry("calculation_formulae_036_claim_arg_of_reciprocal").dependency
   !== argumentSquareSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("自乗の偏角と二倍の角度の切断の直後の項目が変わりました");
 }
+const argumentReciprocalSectionEntryIds = [
+  "calculation_formulae_036_claim_arg_of_reciprocal"
+];
+const argumentReciprocalSection = validateReviewedSection(
+  "逆数の偏角と負の角度の切断", "数学的道具立て", argumentReciprocalSectionEntryIds,
+  new Map([
+  [
+    "calculation_formulae_036_claim_arg_of_reciprocal",
+    []
+  ]
+]),
+  new Map([
+  [
+    "calculation_formulae_036_claim_arg_of_reciprocal",
+    "21508055a501558c3ce349b1b00bf697a78d1e34258e17924eb8291c63124fb6"
+  ]
+]),
+  [
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+  "calc_formulae_017_definition_section_of_angle_representation",
+  "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+  "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+  "calculation_formulae_027_definition_phi_polar",
+  "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+  "calculation_formulae_030_definition_first_and_second_projections",
+  "calculation_formulae_031_definition_abs_arg",
+  "calculation_formulae_031b_claim_abs_basic_properties",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+    "872f1af8eb8b84e0cfddfb30aeedfee8ccd4d131838f9875853cbd54ed5a5843"
+  ],
+  [
+    "calc_formulae_017_definition_section_of_angle_representation",
+    "eaf728ec8f49c83d0648b474a7922b4d8b061641dd12d7df2c43efe057cbb02b"
+  ],
+  [
+    "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+    "a2f0942eaca2c3852591ec022bfb793463a32d510110f579e43ad76da7b5bd51"
+  ],
+  [
+    "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+    "bd4b1ebeede09bd6ebe666ce9e6007c3399351f81939f0a1e89dbe4ef2ec82a7"
+  ],
+  [
+    "calculation_formulae_027_definition_phi_polar",
+    "c142596ab62d7fd79c40acdffa6a4fe01eb59ace120f96ee2f99cd04084cb861"
+  ],
+  [
+    "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+    "aae6d06271cd77cac45e78e72bb077fdc036c5988f52cab3223337fb568d0ff5"
+  ],
+  [
+    "calculation_formulae_030_definition_first_and_second_projections",
+    "2076ae1c62bb677aef8f13d1ca7a46147e8d652e035e981d861c3389aa7fee68"
+  ],
+  [
+    "calculation_formulae_031_definition_abs_arg",
+    "fc64442d22789d6cb4f802c87699680414adc93241acb97a20a44eeb3490c2cb"
+  ],
+  [
+    "calculation_formulae_031b_claim_abs_basic_properties",
+    "b4e198549ba1d7b1452fe4650837a325244f089149b147b0e8f802a72731588e"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "calculation_formulae_036_claim_arg_of_reciprocal"
+],
+);
+const argumentReciprocalSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+    "kind": "claim",
+    "sha256": "872f1af8eb8b84e0cfddfb30aeedfee8ccd4d131838f9875853cbd54ed5a5843",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_017_definition_section_of_angle_representation",
+    "kind": "definition",
+    "sha256": "eaf728ec8f49c83d0648b474a7922b4d8b061641dd12d7df2c43efe057cbb02b",
+    "dependencies": [
+      "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_019_definition_polar_equivalence_class",
+    "kind": "definition",
+    "sha256": "db5e61c9e6e2f4aef9faa5b5154b7f7e4651951f655d44193a92caf541c654a6",
+    "dependencies": [
+      "calc_formulae_016_definition_angle_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+    "kind": "claim",
+    "sha256": "a2f0942eaca2c3852591ec022bfb793463a32d510110f579e43ad76da7b5bd51",
+    "dependencies": [
+      "calc_formulae_016_definition_angle_equivalence_class",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_022_definition_operations_on_polar_representation",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+    "kind": "claim",
+    "sha256": "bd4b1ebeede09bd6ebe666ce9e6007c3399351f81939f0a1e89dbe4ef2ec82a7",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_027_definition_phi_polar",
+    "kind": "definition",
+    "sha256": "c142596ab62d7fd79c40acdffa6a4fe01eb59ace120f96ee2f99cd04084cb861",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_014d_definition_arctan",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_028_definition_phi_cartesian",
+    "kind": "definition",
+    "sha256": "5bfd7f4af7609a728b0960ddee5f7d2c63845c8de77f97466d69b2e20ed85530",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_014c_definition_sin",
+      "calc_formulae_014e_definition_cos",
+      "calc_formulae_016_definition_angle_equivalence_class",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+    "kind": "claim",
+    "sha256": "aae6d06271cd77cac45e78e72bb077fdc036c5988f52cab3223337fb568d0ff5",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_002_negative_number_to_sqrt",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_015_claim_cos_arctan_sin_arctan",
+      "calculation_formulae_022_definition_operations_on_polar_representation",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_028_definition_phi_cartesian",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_030_definition_first_and_second_projections",
+    "kind": "definition",
+    "sha256": "2076ae1c62bb677aef8f13d1ca7a46147e8d652e035e981d861c3389aa7fee68",
+    "dependencies": [
+      "calc_formulae_016_definition_angle_equivalence_class",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_031_definition_abs_arg",
+    "kind": "definition",
+    "sha256": "fc64442d22789d6cb4f802c87699680414adc93241acb97a20a44eeb3490c2cb",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_017_definition_section_of_angle_representation",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_031b_claim_abs_basic_properties",
+    "kind": "claim",
+    "sha256": "b4e198549ba1d7b1452fe4650837a325244f089149b147b0e8f802a72731588e",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_036_claim_arg_of_reciprocal",
+    "kind": "claim",
+    "sha256": "21508055a501558c3ce349b1b00bf697a78d1e34258e17924eb8291c63124fb6",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+      "calc_formulae_017_definition_section_of_angle_representation",
+      "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+      "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_038_definition_sqrt_of_complex_number",
+    "kind": "definition",
+    "sha256": "806ac234b95ab3b4d315129507d997df85bebf837b3af0cf02472743d26450f1",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_017_definition_section_of_angle_representation",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_028_definition_phi_cartesian",
+      "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of argumentReciprocalSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`逆数の偏角と負の角度の切断の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("calculation_formulae_038_definition_sqrt_of_complex_number").dependencyPlacement!.chapterOrder
+  !== argumentReciprocalSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("逆数の偏角と負の角度の切断の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "逆数の偏角と負の角度の切断",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "calculation_formulae_036_claim_arg_of_reciprocal"
+  ],
+  "input": [
+    "複素数と極座標の逆元、極座標への写像と未完の同型性",
+    "絶対値・偏角・非零性、射影と角度切断およびその存在一意性",
+    "複素数と集合記号"
+  ],
+  "output": [
+    "非零複素数の逆数の偏角を、偏角が零なら零、それ以外なら2πから偏角を引いた値として表す公式"
+  ],
+  "mainTheorem": "非零複素数の逆数の偏角の二場合の公式（未完の同型性に依存）",
+  "mainTheoremEntryId": "calculation_formulae_036_claim_arg_of_reciprocal",
+  "boundaryEvidence": "逆元保存で角度を負にし、零と正の偏角を分けて代表区間へ戻す一項で閉じる。直後の複素平方根定義は逆数の公式を使わず、非負平方根・半角・逆方向写像・極座標同値類へ入力を切り替える別枝である。平方根写像の出力は本節へ含めない。プログラミングによる検証では対象と後続比較の全直接入力の本文・全直接依存・種別・粒度、唯一の節末と後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で逆数の全証明と平方根定義および入力を読んだ。逆数の非零仮定は定義に必要である。対象は未完の同型性に依存し、逆写像の一般論の具体化、各行の参照と実数演算の分解が未解決である。比較対象の平方根は半角が[0,π)に入って現行三角関数の主値区間を超え、逆方向写像も未完であるため、定義自体が未完であることを本文と記録に明示した。定義・証明の補完や分割後には依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_006_definition_of_cc",
+    "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+    "calc_formulae_017_definition_section_of_angle_representation",
+    "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+    "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+    "calculation_formulae_027_definition_phi_polar",
+    "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+    "calculation_formulae_030_definition_first_and_second_projections",
+    "calculation_formulae_031_definition_abs_arg",
+    "calculation_formulae_031b_claim_abs_basic_properties",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "自乗の偏角と二倍の角度の切断",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
