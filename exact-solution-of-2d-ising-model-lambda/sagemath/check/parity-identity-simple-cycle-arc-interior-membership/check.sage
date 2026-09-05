@@ -17,8 +17,17 @@ interior_orient: 型を四スロットの E 所属（名前順）へ置き換え
 各変種で、直接衝突（圧縮弧型の多重集合の偶奇が等しく頂点項が異なる
 鍵対）の有無と、合同の F_2 線型系の可解性を判定する。
 
+四変種の一括実行は 446 秒で終わる（実測 2026-09-05）。以前は上流の検算の
+assertion を読み込みのたびに再実行し、さらに合同系の行を列を全て並べた組で
+作っていたため、1 tick の締切に収まらなかった。
+環境変数 ISING_INTERIOR_VARIANT に変種名を与えると、その一変種だけを
+実行する（与えなければ全変種を順に実行する）。観測値は EXPECTED_RESULTS に
+固定してあり、実行した変種について一致を assert する。
+
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
+
+import os
 
 load("sagemath/check/parity-identity-simple-cycle-arc-signature-compression/construction.sage")
 
@@ -57,8 +66,24 @@ VARIANTS = (
 )
 
 
+# 各変種の (型の種数, 階数, 直接衝突数, 可解性)。観測直後に固定する。
+# interior_d の三つ組は、疎な行の作り方へ変える前の実行が記録した値と一致した。
+EXPECTED_RESULTS = {
+    "interior_d": (10059, 6760, 25, False),
+    "interior_c": (10030, 6740, 48, False),
+    "interior_dc": (10075, 6776, 16, False),
+    "interior_orient": (10061, 6771, 16, False),
+}
+
+selected_variant = os.environ.get("ISING_INTERIOR_VARIANT")
+if selected_variant is not None:
+    names = tuple(name for name, _ in VARIANTS)
+    assert selected_variant in names, selected_variant
+
 variant_results = {}
 for variant_name, compressor in VARIANTS:
+    if selected_variant is not None and variant_name != selected_variant:
+        continue
     type_lists = []
     for side, doubled, single, _ in joint_keys:
         type_lists.append(
@@ -100,24 +125,14 @@ for variant_name, compressor in VARIANTS:
     # 流していなかったため取り出せなかった）。
     print("VARIANT %s: types=%d rank=%d direct-conflicts=%d solvable=%s"
           % (variant_name, len(all_types), rank, conflicts, solvable), flush=True)
+    assert variant_results[variant_name] == EXPECTED_RESULTS[variant_name], \
+        (variant_name, variant_results[variant_name])
 
 assert len(joint_keys) == 7085
 print("OBSERVED: %s" % {name: values
                         for name, values in sorted(variant_results.items())})
 
-# 2026-09-05 の観測をそのまま固定する（弧型の種数・階数・直接衝突数・可解性）。
-# interior_d の三つ組は、疎な行の作り方へ変える前の実行が記録した値と一致した。
-EXPECTED = {
-    "interior_d": (10059, 6760, 25, False),
-    "interior_c": (10030, 6740, 48, False),
-    "interior_dc": (10075, 6776, 16, False),
-    "interior_orient": (10061, 6771, 16, False),
-}
-for variant_name, expected in sorted(EXPECTED.items()):
-    observed = variant_results[variant_name]
-    assert observed == expected, (variant_name, observed, expected)
-
-# 四変種とも直接衝突を持ち、合同の線型系に解が無い。
+# 実行した変種は、どれも直接衝突を持ち、合同の線型系に解が無い。
 for variant_name, (_, _, conflicts, solvable) in sorted(variant_results.items()):
     assert conflicts > 0
     assert not solvable

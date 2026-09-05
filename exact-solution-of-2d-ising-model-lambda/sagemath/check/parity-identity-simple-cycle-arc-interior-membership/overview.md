@@ -17,6 +17,7 @@ $D/C$ 所属だけを落とす turnwrapword でも頂点項の分解が保たれ
 有無と、合同の $\mathbb F_2$ 線型系の可解性を判定する。
 
 - 実行: `sage sagemath/check/parity-identity-simple-cycle-arc-interior-membership/check.sage`
+  （環境変数 `ISING_INTERIOR_VARIANT=<変種名>` を与えると、その一変種だけを実行する）
 - 状態: **PASS**（2026-09-05）。四変種とも直接衝突を持ち、合同線型系に解が無かった。
 
   | 変種 | 弧型の種数 | 階数 | 直接衝突 | 可解 |

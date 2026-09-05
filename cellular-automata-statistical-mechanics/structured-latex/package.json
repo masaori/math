@@ -17,11 +17,12 @@
     "build:html": "node tools/build-html.ts",
     "build:pdf": "node tools/build-latex.ts --pdf && node tools/verify-no-notes-in-output.ts",
     "verify:no-notes": "node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts",
-    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run inventory:check && npm run verify:chapters && npm run verify:sections && npm run verify:components && npm run verify:roadmap && npm run verify:no-notes && npm run test:types && npm run test:runtime",
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run inventory:check && npm run verify:chapters && npm run verify:sections && npm run verify:components && npm run verify:roadmap && npm run test:roadmap && npm run verify:no-notes && npm run test:types && npm run test:runtime",
     "verify:chapters": "node tools/verify-tool-chapter-vocabulary.ts",
     "verify:sections": "node tools/verify-section-main-statements.ts",
     "verify:components": "node tools/verify-section-dependency-components.ts",
-    "verify:roadmap": "node tools/verify-roadmap.ts"
+    "verify:roadmap": "node tools/verify-roadmap.ts",
+    "test:roadmap": "node tools/roadmap-rules-test.ts"
   },
   "dependencies": {
     "zod": "3.25.76"
