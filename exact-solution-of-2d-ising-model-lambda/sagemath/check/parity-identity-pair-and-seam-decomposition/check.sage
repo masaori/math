@@ -15,54 +15,7 @@ D=empty の自明文字対象、および二重辺を持つ一辺三の交差対
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使う。
 """
 
-load("sagemath/check/parity-identity-doubled-edge-crossing/check.sage")
-
-
-def pair_and_seam_decomposition(side, doubled, single, orientation):
-    moved = sorted(frozenset(
-        [base + (d,) for base in doubled for d in (0, 1)]
-        + [base + (orientation[base],) for base in single]
-    ))
-
-    interior_row = ZZ(0)
-    interior_column = ZZ(0)
-    seam_row = ZZ(0)
-    seam_column = ZZ(0)
-    for left_index in range(len(moved)):
-        for right_index in range(left_index + 1, len(moved)):
-            left = moved[left_index]
-            right = moved[right_index]
-            touches_seam = any(base_seam_parities(side, edge[:3]) != (0, 0)
-                               for edge in (left, right))
-            row_inversion = ZZ(
-                (endpoints(side, left)[1], left)
-                > (endpoints(side, right)[1], right)
-            )
-            column_inversion = ZZ(
-                (endpoints(side, left)[0], left)
-                > (endpoints(side, right)[0], right)
-            )
-            if touches_seam:
-                seam_row += row_inversion
-                seam_column += column_inversion
-            else:
-                interior_row += row_inversion
-                interior_column += column_inversion
-
-    original = untwisted_sign_exponent(side, doubled, single, orientation)
-    local_phase = (original - ZZ(len(moved)) - interior_row - interior_column
-                   - seam_row - seam_column) % 2
-
-    pieces = (
-        ZZ(len(moved)) % 2,
-        (interior_row + interior_column) % 2,
-        (seam_row + seam_column) % 2,
-        local_phase,
-    )
-    decomposed = sum(pieces) % 2
-    assert decomposed == original
-    return pieces, decomposed
-
+load("sagemath/check/parity-identity-pair-and-seam-decomposition/construction.sage")
 
 checks_two = ZZ(0)
 for (doubled, single), fiber in sorted(all_fibers.items()):

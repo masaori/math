@@ -8,43 +8,12 @@ U_L^{a,b}(D,E) を ZZ で定義から計算し、両者が一致することを�
 浮動小数点は使わない。
 """
 
-load("sagemath/check/doubled-edge-fiber-phase-reduction/check.sage")
+load("sagemath/check/kac-ward-fiber-signed-selection-equality/construction.sage")
 
-
-base_edge_set = set(base_edges(L))
-base_edge_subsets = [frozenset(subset) for subset in Subsets(base_edge_set)]
-
-
-def subset_winding_parities(subset):
-    return (
-        sum(seam_parities(L, edge)[0] for edge in subset) % 2,
-        sum(seam_parities(L, edge)[1] for edge in subset) % 2,
-    )
-
-
-def signed_even_subgraph_weight(a, b, subset):
-    horizontal, vertical = subset_winding_parities(subset)
-    exponent = ((1 + a) * horizontal + (1 + b) * vertical
-                + horizontal * vertical)
-    return ZZ(-1) ** exponent
-
-
-def is_even_edge_subset(subset):
-    degrees = {(row, column): 0 for row in range(L) for column in range(L)}
-    for edge in subset:
-        start, end = endpoints(L, edge + (0,))
-        degrees[start] += 1
-        degrees[end] += 1
-    return all(degree % 2 == 0 for degree in degrees.values())
-
-
-all_fibers = {}
-for phi in nonbacktracking_permutations:
-    doubled, single = doubled_and_single_sets(phi)
-    key = (frozenset(doubled), frozenset(single))
-    all_fibers.setdefault(key, []).append(phi)
-
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
 comparisons = 0
+
 for (doubled, single), fiber in all_fibers.items():
     assert not doubled.intersection(single)
     assert is_even_edge_subset(single)

@@ -21,27 +21,7 @@
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/parity-identity-plaquette-deformation/check.sage")
-
-
-def row_loop(side, row):
-    return frozenset(("h", row, column) for column in range(side))
-
-
-def column_loop(side, column):
-    return frozenset(("v", row, column) for row in range(side))
-
-
-def straight_union_table(side):
-    table = {}
-    for rows in Subsets(range(side)):
-        for columns in Subsets(range(side)):
-            union = frozenset().union(
-                *[row_loop(side, row) for row in rows],
-                *[column_loop(side, column) for column in columns])
-            table[union] = (ZZ(len(rows)), ZZ(len(columns)))
-    return table
-
+load("sagemath/check/parity-identity-standard-representative/construction.sage")
 
 for side in (2, 3):
     keys = collect_keys(side)

@@ -10,61 +10,7 @@ partial D の頂点で切る。各弧には、辞書式最小の選択 C を含�
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/parity-identity-simple-cycle-selector-membership/check.sage")
-
-
-def cycle_vertex_order(side, single):
-    adjacency = {}
-    for edge in single:
-        endpoints = base_endpoints(side, edge)
-        for vertex in endpoints:
-            adjacency.setdefault(vertex, []).append(edge)
-    assert adjacency and all(len(edges) == 2 for edges in adjacency.values())
-
-    candidates = []
-    for start in sorted(adjacency):
-        for first_edge in sorted(adjacency[start]):
-            vertices = [start]
-            edges = []
-            current = start
-            edge = first_edge
-            while True:
-                edges.append(edge)
-                endpoints = base_endpoints(side, edge)
-                following = endpoints[1] if endpoints[0] == current else endpoints[0]
-                if following == start:
-                    break
-                vertices.append(following)
-                choices = [candidate for candidate in adjacency[following]
-                           if candidate != edge]
-                assert len(choices) == 1
-                current = following
-                edge = choices[0]
-            assert len(edges) == len(single)
-            candidates.append((tuple(edges), tuple(vertices)))
-    return min(candidates)[1]
-
-
-def boundary_vertices(side, doubled):
-    degrees = {}
-    for edge in doubled:
-        for vertex in base_endpoints(side, edge):
-            degrees[vertex] = degrees.get(vertex, ZZ(0)) + 1
-    return frozenset(vertex for vertex, degree in degrees.items()
-                     if degree % 2 == 1)
-
-
-def reversal_invariant_word(word):
-    reversed_word = tuple(reversed(word))
-    return min(word, reversed_word)
-
-
-def cyclic_reversal_invariant_word(word):
-    candidates = []
-    for oriented in (word, tuple(reversed(word))):
-        for offset in range(len(oriented)):
-            candidates.append(oriented[offset:] + oriented[:offset])
-    return min(candidates)
+load("sagemath/check/parity-identity-simple-cycle-boundary-arc-decomposition/construction.sage")
 
 
 def boundary_arc_signatures(side, doubled, single):

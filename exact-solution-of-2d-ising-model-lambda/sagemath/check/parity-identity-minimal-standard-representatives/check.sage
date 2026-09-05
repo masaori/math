@@ -5,44 +5,7 @@
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/parity-identity-standard-representative/check.sage")
-
-
-def vertex_degrees(side, edges):
-    degrees = {}
-    for edge in edges:
-        for vertex in base_endpoints(side, edge):
-            degrees[vertex] = degrees.get(vertex, ZZ(0)) + 1
-    return tuple(sorted(degrees.values()))
-
-
-def edge_component_count(side, edges):
-    remaining = set(edges)
-    count = ZZ(0)
-    while remaining:
-        count += 1
-        stack = [remaining.pop()]
-        while stack:
-            edge = stack.pop()
-            incident_vertices = set(base_endpoints(side, edge))
-            neighbors = {
-                other for other in remaining
-                if incident_vertices.intersection(base_endpoints(side, other))
-            }
-            remaining -= neighbors
-            stack.extend(neighbors)
-    return count
-
-
-def representative_signature(side, doubled, single):
-    return (
-        ZZ(len(doubled)),
-        ZZ(len(single)),
-        vertex_degrees(side, single),
-        edge_component_count(side, single) if single else ZZ(0),
-        subset_parities(side, single),
-    )
-
+load("sagemath/check/parity-identity-minimal-standard-representatives/construction.sage")
 
 for side in (2, 3):
     keys = collect_keys(side)

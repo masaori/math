@@ -10,19 +10,7 @@
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使う。
 """
 
-load("sagemath/check/parity-identity-standard-form-statistics/check.sage")
-
-
-def pair_contribution(side, left, right):
-    row = ZZ(
-        (endpoints(side, left)[1], left)
-        > (endpoints(side, right)[1], right)
-    )
-    column = ZZ(
-        (endpoints(side, left)[0], left)
-        > (endpoints(side, right)[0], right)
-    )
-    return (row + column) % 2
+load("sagemath/check/parity-identity-pair-locality/construction.sage")
 
 
 def active_pair_counts(side, doubled, single, orientation):

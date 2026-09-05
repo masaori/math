@@ -14,48 +14,15 @@ parity-identity-simple-cycle-key-terms では、一辺二の単純閉路鍵に�
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使う。
 """
 
-load("sagemath/check/parity-identity-simple-cycle-key-terms/check.sage")
+load("sagemath/check/parity-identity-simple-cycle-relative-configuration/construction.sage")
 
-
-def incident_base_slots(side, vertex):
-    row, column = vertex
-    return (
-        ("up", ("v", (row - 1) % side, column)),
-        ("down", ("v", row, column)),
-        ("left", ("h", row, (column - 1) % side)),
-        ("right", ("h", row, column)),
-    )
-
-
-def relative_vertex_signature(side, vertex, doubled, single):
-    memberships = tuple(
-        (name, ZZ(base in doubled), ZZ(base in single))
-        for name, base in incident_base_slots(side, vertex)
-    )
-    return memberships, vertex_wrap_flags(side, vertex)
-
-
-side = 2
-cycle_keys = [
-    (doubled, single)
-    for doubled, single in collect_keys(side)
-    if is_simple_cycle(side, single)
-]
-
-all_signatures = sorted({
-    relative_vertex_signature(side, vertex, doubled, single)
-    for doubled, single in cycle_keys
-    for vertex in sorted({
-        endpoint
-        for edge in doubled.union(single)
-        for endpoint in base_endpoints(side, edge)
-    })
-})
-
-rows = []
-vertex_terms = []
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
 pair_terms = []
+rows = []
 target_terms = []
+vertex_terms = []
+
 for doubled, single in cycle_keys:
     vertices = sorted({
         endpoint
@@ -77,9 +44,6 @@ for doubled, single in cycle_keys:
     vertex_terms.append(GF(2)(vertex))
     pair_terms.append(GF(2)(pair))
     target_terms.append(GF(2)(target))
-
-statistic_matrix = matrix(GF(2), rows)
-vertex_solution = statistic_matrix.solve_right(vector(GF(2), vertex_terms))
 selected_signatures = [
     signature
     for index, signature in enumerate(all_signatures)

@@ -16,69 +16,7 @@ E' = E △ P が同じ鍵の族に属するとき、標準形配向での
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使う。
 """
 
-load("sagemath/check/parity-identity-cut-contribution-topological/check.sage")
-
-
-def plaquette_edges(side, row, column):
-    return frozenset([
-        ("h", row, column),
-        ("h", (row + 1) % side, column),
-        ("v", row, column),
-        ("v", row, (column + 1) % side),
-    ])
-
-
-def plaquette_cut_flags(side, row, column):
-    return (ZZ(row == side - 1), ZZ(column == side - 1))
-
-
-def plaquette_local_pattern(side, row, column, subset):
-    pattern = []
-    for delta_row in (0, 1):
-        for delta_column in (-1, 0, 1):
-            edge = ("h", (row + delta_row) % side, (column + delta_column) % side)
-            if edge in subset:
-                pattern.append(("h", delta_row, delta_column))
-    for delta_row in (-1, 0, 1):
-        for delta_column in (0, 1):
-            edge = ("v", (row + delta_row) % side, (column + delta_column) % side)
-            if edge in subset:
-                pattern.append(("v", delta_row, delta_column))
-    return tuple(sorted(pattern))
-
-
-def key_selector(side, doubled, single):
-    if side != 2:
-        return frozenset()
-    selectors = [
-        selected for selected in base_edge_subsets
-        if selected.issubset(single)
-        and is_even_edge_subset(doubled.union(selected))
-    ]
-    return min(selectors, key=lambda item: tuple(sorted(item)))
-
-
-def key_terms(side, doubled, single):
-    orientations = curved_free_orientations(side, single)
-    standard, _ = standard_orientation(side, single, orientations)
-    moved = active_edges(doubled, single, standard)
-    assigned, disjoint_sum = incident_pair_assignment(side, moved)
-    vertices = sorted({vertex for edge in moved
-                       for vertex in endpoints(side, edge)})
-    product_value = K8(1)
-    for vertex in vertices:
-        determinant = vertex_local_determinant(side, moved, vertex)
-        product_value *= determinant * K8(ZZ(-1) ** assigned.get(vertex, ZZ(0)))
-    n_four = degree_four_count(side, single) if single else ZZ(0)
-    normalized = product_value / K8(ZZ(2) ** n_four)
-    assert normalized in (K8(1), K8(-1))
-    vertex_exp = ZZ(normalized == K8(-1))
-    selector = key_selector(side, doubled, single)
-    target = target_exponent(side, doubled, single, selector)
-    moved_parity = ZZ(len(moved)) % 2
-    assert (moved_parity + vertex_exp + disjoint_sum) % 2 == target
-    return moved_parity, vertex_exp, disjoint_sum, target
-
+load("sagemath/check/parity-identity-plaquette-deformation/construction.sage")
 
 for side in (2, 3):
     keys = collect_keys(side)

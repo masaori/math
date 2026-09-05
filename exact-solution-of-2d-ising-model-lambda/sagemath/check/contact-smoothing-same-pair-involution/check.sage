@@ -9,47 +9,13 @@
 浮動小数点は使わない。
 """
 
-load("sagemath/check/kac-ward-nonbacktracking-sum/check.sage")
+load("sagemath/check/contact-smoothing-same-pair-involution/construction.sage")
 
-
-def moved_edges(phi):
-    return {edge for edge in oriented if phi[edge] != edge}
-
-
-def is_switchable_contact_pair(phi, edge, other):
-    if edge == other:
-        return False
-    moved = moved_edges(phi)
-    if edge not in moved or other not in moved:
-        return False
-    if endpoints(L, edge)[1] != endpoints(L, other)[1]:
-        return False
-    if phi[other] not in successor_lists[edge] or phi[edge] not in successor_lists[other]:
-        return False
-    if phi[other] == edge or phi[edge] == other:
-        return False
-    return True
-
-
-def switchable_contact_pairs(phi):
-    moved = [edge for edge in oriented if phi[edge] != edge]
-    pairs = []
-    for i in range(len(moved)):
-        for j in range(i + 1, len(moved)):
-            if is_switchable_contact_pair(phi, moved[i], moved[j]):
-                pairs.append((moved[i], moved[j]))
-    return pairs
-
-
-def smooth(phi, edge, other):
-    result = dict(phi)
-    result[edge] = phi[other]
-    result[other] = phi[edge]
-    return result
-
-
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
 checked = 0
 permutations_with_pair = 0
+
 for phi in nonbacktracking_permutations:
     pairs = switchable_contact_pairs(phi)
     if pairs:

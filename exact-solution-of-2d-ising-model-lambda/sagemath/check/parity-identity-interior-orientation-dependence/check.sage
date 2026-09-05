@@ -18,7 +18,7 @@
 組む必要がある。有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使う。
 """
 
-load("sagemath/check/parity-identity-pair-and-seam-decomposition/check.sage")
+load("sagemath/check/parity-identity-interior-orientation-dependence/construction.sage")
 
 
 def interior_composite_parity(side, doubled, single, orientation):

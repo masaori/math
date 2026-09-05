@@ -16,6 +16,18 @@
 - **検証が失敗したら本文を直す。** 検証を主張に合わせて緩めない。失敗の記録は消さず
   `overview.md` に残す（実際、辺の定義の穴はこの層が検出した）。
 - 共通定義は `_shared/defs.sage` に置き、**本文の定義ラベルと 1 対 1 で対応させる**。
+- **下流の検算から再利用されるディレクトリは、`construction.sage`（再利用する厳密構成）と
+  `check.sage`（観測の出力と assertion）に分ける。下流は `construction.sage` だけを読む。**
+  以前は `check.sage` が上流の `check.sage` を読んでいたため、弧署名の検算を一本走らせるだけで
+  先行 36 本の assertion が毎回再実行され、読み込みだけで 13 分かかっていた（実測 2026-09-05。
+  自動ループの tick はこれで 2700 秒の上限に当たり exit 124 で落ちた）。分けたあとは
+  同じ連鎖の読み込みが 2 分 44 秒である。
+  - `construction.sage` に **関数の外の `assert` と `print` を置かない**。関数の中の `assert`
+    （well-defined 性の番人）はそのまま残す。
+  - `check.sage` は自分の `construction.sage` を読み、**上流の `check.sage` は読まない**。
+  - 構成へ移した文にもとから `assert` が付いていた場合は、その文を原文のまま `check.sage` へも
+    置いて回す。**assertion を減らさない**（先行検算は日次監査が `check.sage` を全数で回して維持する）。
+  - この規約が守られているかは `bash scripts/verify-upstream-load-and-roadmap.sh` が機械検査する。
 
 ## 構成
 
@@ -23,6 +35,7 @@
 sagemath/
 ├── _shared/defs.sage   # 本文の定義に 1 対 1 対応する共通定義
 ├── check/<対象名>/     # overview.md（対象ラベルと結果）＋ check.sage
+│                       # 下流から読まれるものは construction.sage（構成）も持つ
 └── tools/verify-check-linkage.ts  # 検証 ↔ 証明 の対応の機械検証
 ```
 

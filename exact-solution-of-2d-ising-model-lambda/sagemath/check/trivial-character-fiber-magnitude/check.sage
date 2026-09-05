@@ -10,47 +10,14 @@
 有限集合、F_2、整数、Q(zeta_8) の厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/kac-ward-fiber-signed-selection-equality/check.sage")
+load("sagemath/check/trivial-character-fiber-magnitude/construction.sage")
 
-
-def even_subgraphs_inside(edge_subset):
-    return [subset for subset in base_edge_subsets
-            if subset.issubset(edge_subset) and is_even_edge_subset(subset)]
-
-
-def nonempty_vertex_and_component_counts(edge_subset):
-    adjacency = {}
-    for edge in edge_subset:
-        first, second = endpoints(L, edge + (0,))
-        adjacency.setdefault(first, set()).add(second)
-        adjacency.setdefault(second, set()).add(first)
-    seen = set()
-    component_count = 0
-    for root in adjacency:
-        if root in seen:
-            continue
-        component_count += 1
-        seen.add(root)
-        stack = [root]
-        while stack:
-            vertex = stack.pop()
-            for neighbor in adjacency[vertex]:
-                if neighbor not in seen:
-                    seen.add(neighbor)
-                    stack.append(neighbor)
-    return ZZ(len(adjacency)), ZZ(component_count)
-
-
-def character_value(single, even_subgraph):
-    single_h, single_v = subset_winding_parities(single)
-    subgraph_h, subgraph_v = subset_winding_parities(even_subgraph)
-    return ZZ(-1) ** (single_h * subgraph_v + single_v * subgraph_h)
-
-
-trivial_nonempty_fibers = ZZ(0)
+# 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
+# （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
 comparisons = ZZ(0)
-rank_distribution = {}
 magnitude_distribution = {}
+rank_distribution = {}
+trivial_nonempty_fibers = ZZ(0)
 
 for (doubled, single), fiber in all_fibers.items():
     selectors = [

@@ -11,22 +11,7 @@
 使わない。
 """
 
-load("sagemath/check/parity-identity-standard-orientation-reduction/check.sage")
-
-
-def standard_pattern(side, doubled, single, selector):
-    orientations = curved_free_orientations(side, single)
-    standard, _ = standard_orientation(side, single, orientations)
-    pieces, total = pair_and_seam_decomposition(
-        side, doubled, single, standard)
-    epsilon_h, epsilon_v = subset_parities(side, single)
-    union_h, union_v = subset_parities(side, doubled.union(selector))
-    crossing = (union_h * epsilon_v + epsilon_h * union_v) % 2
-    topology = (epsilon_h, epsilon_v, crossing)
-    assert total == (epsilon_h + epsilon_v
-                     + epsilon_h * epsilon_v + crossing) % 2
-    return topology, tuple(pieces)
-
+load("sagemath/check/parity-identity-standard-contributions-not-topological/construction.sage")
 
 patterns_by_side = {2: {}, 3: {}}
 

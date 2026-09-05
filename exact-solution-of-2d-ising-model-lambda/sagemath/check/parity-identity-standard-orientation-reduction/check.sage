@@ -18,18 +18,7 @@
 厳密演算だけを使い、浮動小数点は使わない。
 """
 
-load("sagemath/check/parity-identity-component-reversal-cancellation/check.sage")
-
-
-def standard_orientation(side, single, orientations):
-    """各成分の最小辺の向きが 0 の配向（標準形）を一意に取り出す。"""
-    components = single_edge_components(side, single)
-    found = [
-        orientation for orientation in orientations
-        if all(orientation[min(component)] == 0 for component in components)
-    ]
-    assert len(found) == 1
-    return found[0], components
+load("sagemath/check/parity-identity-standard-orientation-reduction/construction.sage")
 
 
 def check_standard_reduction(side, doubled, single, selector):

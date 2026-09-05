@@ -8,13 +8,7 @@
 浮動小数点は使わない。
 """
 
-load("sagemath/check/phase-reversing-standard-smoothing-involution/check.sage")
-
-
-def standard_delta(phi):
-    pair = tuple(ct_min(phi))
-    return standard_pair_delta(phi, pair)
-
+load("sagemath/check/non-phase-reversing-standard-smoothing-involution/construction.sage")
 
 members = {delta: [] for delta in (ZZ(-4), ZZ(4))}
 for phi in nonbacktracking_permutations:
@@ -28,7 +22,6 @@ for phi in nonbacktracking_permutations:
         members[delta].append(phi)
 
 checked = 0
-fiber_members = {delta: {} for delta in (ZZ(-4), ZZ(4))}
 for delta in (ZZ(-4), ZZ(4)):
     for phi in members[delta]:
         pair = tuple(ct_min(phi))
@@ -53,7 +46,6 @@ for delta in (ZZ(-4), ZZ(4)):
                 checked += 1
 
 fiber_sum_equalities = 0
-all_fibers = set(fiber_members[-4]).union(fiber_members[4])
 for fiber in all_fibers:
     for a in (0, 1):
         for b in (0, 1):
