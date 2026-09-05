@@ -1877,6 +1877,7 @@ R^2
     title: { text: "行列ノルムの劣乗法性" },
     labels: ["matrix_norm_submultiplicativity"],
     statement: [
+      paragraph(["行列積の成分式は ", ref("mat_mult"), "、非負実数の平方根は ", ref("definition_of_sqrt_r_positive"), " を用いる。"]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " または ",

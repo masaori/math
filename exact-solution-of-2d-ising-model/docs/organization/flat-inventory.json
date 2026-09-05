@@ -218,6 +218,46 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "ノルムと内積の性質および共役転置",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+        "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
+        "eigenvalues_of_V_012_claim_star_is_norm_preserving"
+      ],
+      "input": [
+        "複素数の演算・共役・実部・絶対値と実数から複素数への包含",
+        "数ベクトルと行列のノルム、成分内積、行列積・共役転置・トレースの定義",
+        "非負実数の平方根と集合記号、実数列の極限法則の前提"
+      ],
+      "output": [
+        "ノルムの非退化性・斉次性・三角不等式と極限一意性",
+        "成分内積の性質とCauchy–Schwarzの不等式、既出ノルムとの関係",
+        "共役転置の積との関係と共役線型性、ノルム保存と極限保存"
+      ],
+      "mainTheorem": "共役転置のノルム保存と極限保存",
+      "mainTheoremEntryId": "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+      "boundaryEvidence": "ノルムの基本性質を内積の性質の証明が使い、その冒頭の複素共役の和・積保存を末尾の共役転置が使う現存三項の依存鎖で閉じる。共役転置は内積の公理全体ではなく証明冒頭の複素数の計算を受け取る。直後の劣乗法性は内積の性質と共役転置を使わず、ノルムの基本性質の有限列の不等式と成分の行列積へ戻る別枝である。複素共役による保存則から行列積の大きさの評価への入力切替を根拠とし、プログラミングによる検証で対象・比較と全直接入力の本文・種別・粒度・依存・相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で三項・全直接入力と後続劣乗法性の全本文を読んだ。ノルムの四主張と補題、内積の成分式と五群の性質・複素共役の補題、共役転置の積・共役線型性・ノルム保存・極限保存の分割が未解決である。包含写像の各法則の根拠への接続、実数の像と平方根の所属、有限和・数ベクトル・第二式の省略、共役の絶対値への成分代入、実数列の極限法則、同時適用と各行参照の課題が残る。既存の証明と零の場合は保持する。比較側は実行列の積と複素行列の定義の接続、有限和の分解と平方根の同時適用、各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calc_formulae_010_definition_real_imag_parts_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_031b_claim_abs_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_001_definition_trace",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "exp_conjugation_definition_complex_conjugate_and_real_part",
+        "exp_conjugation_proof_003_definition_M_n_C_convergence",
+        "linear_space_general_002b_definition_matrix_norm"
+      ]
+    },
+    {
       "name": "交換子と共役による複素行列上の写像",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -289,7 +329,7 @@
       "mainTheorem": null,
       "mainTheoremEntryId": null,
       "boundaryEvidence": "有限個の成分の絶対値と平方根によって大きさを定め、実数列の収束へ接続する現存一項を定義の節として閉じる。共役転置の性質は複素共役の和・積保存の誤参照を既存の内積の性質の証明へ訂正した結果、その証明より後へ移る。直後となるFrobenius内積定義は既出のノルムを共有するが、共役転置・行列積・トレースを追加して複素数値の二変数関数を定めるため入力が切り替わる。プログラミングによる検証で対象・直後と全直接入力を固定し、移動する共役転置とその全直接入力は節自身の入力へ混ぜず比較専用に固定する。",
-      "readabilityStatus": "LLMによる検証で対象、直後の内積定義、移動する共役転置と全直接入力を読んだ。対象はノルム・収束・極限・級数の定義分割、実数列の収束と極限法則の前提、後続にある極限一意性の証明への接続が未解決である。比較側の内積定義は後続の性質とノルムの一致への接続を分ける必要がある。共役転置は四等式の主張分割、有限和への帰納・第二式の省略・絶対値の成分式への代入・同時適用と各行参照が未解決であり、その入力の内積の性質にも包含写像の法則と所属・主張分割の課題が残る。前提補完と分割後に依存と閉包を再判定する。",
+      "readabilityStatus": "LLMによる検証で対象、直後の内積定義、移動する共役転置と全直接入力を読んだ。対象はノルム・収束・極限・級数の定義分割、実数列の収束と極限法則の前提、後続にある極限一意性の証明への接続が未解決である。比較側の内積定義は後続の性質とノルムの一致への接続を分ける必要がある。共役転置は積・共役線型性・ノルム保存・極限保存の主張分割、有限和への帰納・第二式の省略・絶対値の成分式への代入・同時適用と各行参照が未解決であり、その入力の内積の性質にも包含写像の法則と所属・主張分割の課題が残る。前提補完と分割後に依存と閉包を再判定する。",
       "externalInputEntryIds": [
         "calc_formulae_001_sqrt_nonnegative_real",
         "calc_formulae_006_definition_of_cc",
@@ -7529,7 +7569,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 22,
+        "incomingReferenceCount": 23,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7647,7 +7687,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 13,
+        "incomingReferenceCount": 15,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11641,23 +11681,27 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 5144,
-        "inspectedContentSha256": "9265c84365337fe4a0ddcf51cecb0b32a502ed06d82843f1f253e4ebce195d55",
+        "inspectedCharacterCount": 5376,
+        "inspectedContentSha256": "b120c7834055676e534d67e01428c170782fb7db99651f9955bd5e2a6b16cde3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積と非負平方根の参照を補った。三角不等式と有限列のCauchy–Schwarzを使う成分評価から平方和の評価へ進む。実行列の成分積と複素行列として定めた積の接続、有限和の分解・添字変更・平方根の性質の同時適用と各行参照が未解決である。有限和の三角不等式の帰納法は現存し、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "def_matrix_norm",
         "definition_of_cc",
+        "definition_of_sqrt_r_positive",
+        "mat_mult",
         "matrix_norm_triangle_inequality",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "linear_space_general_002b_definition_matrix_norm",
@@ -13709,8 +13753,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 22099,
-        "inspectedContentSha256": "50f0db9578836a21ed0f59b8189f0e3ef977b4a6caa41b848658605098efb08f",
+        "inspectedCharacterCount": 22401,
+        "inspectedContentSha256": "316edd2523302d9bc329c4ae657623b9228323b847df0312eacbec979fbb2b47",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -13725,16 +13769,20 @@
         "def_abs_arg",
         "def_complex_conjugate",
         "def_frobenius_inner_product",
+        "def_hermitian_positive_definite",
         "def_matrix_norm",
         "def_real_imag_parts",
+        "def_trace",
         "definition_of_cc",
         "definition_of_sqrt_r_positive",
         "inclusion_rr_to_cc",
+        "mat_mult",
         "matrix_norm_triangle_inequality",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_007_inclusion_rr_to_cc",
         "calc_formulae_010_definition_real_imag_parts_of_cc",
@@ -13742,6 +13790,8 @@
         "calculation_formulae_031_definition_abs_arg",
         "calculation_formulae_031b_claim_abs_basic_properties",
         "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_001_definition_trace",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
         "exp_conjugation_definition_complex_conjugate_and_real_part",
         "exp_conjugation_proof_003_definition_M_n_C_convergence",
         "linear_space_general_002b_definition_matrix_norm",
@@ -13753,7 +13803,10 @@
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [
+        "def_hermitian_positive_definite",
+        "def_trace"
+      ],
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
@@ -17539,7 +17592,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -18195,7 +18248,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"

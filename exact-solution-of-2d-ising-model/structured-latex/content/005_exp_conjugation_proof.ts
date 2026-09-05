@@ -80,6 +80,7 @@ export default defineBlocks([
     title: { text: "Frobenius 内積の性質（Hermite 内積の公理と Cauchy--Schwarz の不等式）" },
     labels: ["frobenius_inner_product_axioms"],
     statement: [
+      paragraph(["成分計算に使う行列積は ", ref("mat_mult"), "、共役転置は ", ref("def_hermitian_positive_definite"), "、トレースは ", ref("def_trace"), " による。"]),
       paragraph([
         math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
         "、",
