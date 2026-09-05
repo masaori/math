@@ -8,6 +8,7 @@ export default defineBlocks([
     title: { text: "絶対値, 偏角" },
     labels: ["def_abs_arg"],
     statement: [
+      paragraph([ref("def_phi_polar"), "、", ref("first_and_second_projections"), "、", ref("section_of_angle_representation"), " を用いる。"]),
       paragraph([math(String.raw`z \in \mathbb{C}`), " について、"]),
       paragraph([
         math(String.raw`|\cdot| : \mathbb{C} \to \mathbb{R}_{\geq 0}`),
@@ -515,6 +516,7 @@ x^2+y^2
     title: null,
     labels: ["arg_of_product_of_complex_numbers"],
     statement: [
+      paragraph([ref("def_phi_polar"), " と ", ref("section_of_angle_representation"), " を使う。非零性との同値には ", ref("abs_basic_properties"), "、積の計算には ", ref("operations_on_polar_representation"), " を用いる。"]),
       paragraph([
         math(String.raw`z_1, z_2 \in \mathbb{C}`),
         " について、",

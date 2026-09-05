@@ -218,6 +218,41 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "半径と偏角の取り出しと絶対値の性質",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_030_definition_first_and_second_projections",
+        "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_031b_claim_abs_basic_properties"
+      ],
+      "input": [
+        "極座標同値類と角度同値関係、角度代表を選ぶ切断",
+        "複素数から極座標同値類への写像、非負平方根",
+        "複素数の加法・積・逆元と体の性質、実数包含、集合記号"
+      ],
+      "output": [
+        "半径と角度同値類の射影、複素数の絶対値と偏角",
+        "絶対値の成分表示・平方・零との同値・積・三角不等式・実数との一致"
+      ],
+      "mainTheorem": "成分表示から導く複素数の絶対値の六つの基本性質",
+      "mainTheoremEntryId": "calculation_formulae_031b_claim_abs_basic_properties",
+      "boundaryEvidence": "射影から絶対値・偏角を定め、成分計算で絶対値の性質を示す三項の依存鎖が末尾の六性質へ閉じる。直後の積の偏角はこの節の定義と非零性の性質を使う一方、極座標の積と未完の同型性、角度切断の存在一意性を新たに直接入力へ取る。成分計算の群と、逆写像の積保存から角度を計算する群の入力切替を境界とする。プログラミングによる検証は対象と後続比較の全直接入力の本文・全直接依存・種別・粒度、内部依存・連続性・節末・後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で三項の全本文と後続の積の偏角の本文を読んだ。絶対値の六性質は逆方向写像や同型性を使わない。第一射影の代表元独立性を末尾で初めて示す提示順と、第二射影の代表元独立性が未提示であること、二つずつの定義の混在、六性質と平方比較・Lagrange恒等式・二成分の不等式の同居、各適用行のラベル不足と複数演算の同時適用が未解決である。加法の定義場所の古い説明も残る。後続比較だけの入力である同型性は定義・証明未完であり、積の偏角の証明へその不足が及ぶことを区別して記録した。本文分割後は節内の依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calc_formulae_016_definition_angle_equivalence_class",
+        "calc_formulae_017_definition_section_of_angle_representation",
+        "calc_formulae_019_definition_polar_equivalence_class",
+        "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "複素数と極座標同値類の対応と積保存",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -1984,7 +2019,9 @@
       "calculation_formulae_028_definition_phi_cartesian",
       "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
       "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_031_definition_abs_arg",
       "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_032_claim_arg_of_product",
       "calculation_formulae_033_claim_arg_of_quotient",
       "calculation_formulae_036_claim_arg_of_reciprocal",
       "calculation_formulae_043_claim_sqrt_of_reciprocal",
@@ -8081,7 +8118,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8257,7 +8294,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8509,7 +8546,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8714,7 +8751,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8780,25 +8817,31 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 888,
-        "inspectedContentSha256": "ac7be029a78faef91bcac6ef14661a7ecf0d6e6f137a8ae22b0f80b43a5a4592",
+        "inspectedCharacterCount": 1164,
+        "inspectedContentSha256": "fc64442d22789d6cb4f802c87699680414adc93241acb97a20a44eeb3490c2cb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 絶対値と偏角の二定義を一項へ束ねている。写像・射影・角度切断への参照を補ったが、二定義への分割と合成写像の値域の説明は未解決である。"
       },
       "dependsOnLabels": [
+        "def_phi_polar",
         "definition_of_cc",
+        "first_and_second_projections",
+        "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_017_definition_section_of_angle_representation",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -8833,7 +8876,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8852,7 +8895,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 六つの性質に平方比較・Lagrange恒等式・二成分の不等式が同居し、第一射影の代表元独立性もここで初めて示す。主張分割と妥当性の提示順、各適用行の参照、複数演算の同時適用が未解決である。加法を体の項で定めたとする文は、先行の複素数定義が既に加法を持つ現状に合わせる必要がある。成分計算は逆方向写像と未完の同型性を使わない。"
       },
       "dependsOnLabels": [
         "complex_numbers_form_a_field",
@@ -8916,33 +8959,41 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6887,
-        "inspectedContentSha256": "9de9aee8d8e9ea8a946a96d71823e5eff969f3b18a6a8ead5d5528988321cd92",
+        "inspectedCharacterCount": 7267,
+        "inspectedContentSha256": "8829d38e305c87923b41d5169b2d691ca57da503641f3dba603be84a64f8d3ef",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 未完の同型性から逆写像の積保存を使うため、この証明も未完の入力に依存している。抽象的な準同型の逆写像の議論を具体計算へ展開することと、各適用行の参照、複数演算の同時適用が未解決である。"
       },
       "dependsOnLabels": [
+        "abs_basic_properties",
         "angle_section_existence_uniqueness",
         "def_abs_arg",
+        "def_phi_polar",
         "definition_of_cc",
         "first_and_second_projections",
         "isomorphism_of_phi_cartesian",
+        "operations_on_polar_representation",
+        "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+        "calc_formulae_017_definition_section_of_angle_representation",
+        "calculation_formulae_022_definition_operations_on_polar_representation",
+        "calculation_formulae_027_definition_phi_polar",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
         "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_031b_claim_abs_basic_properties",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
