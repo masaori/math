@@ -1687,6 +1687,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["calculation_formulae_022_definition_operations_on_polar_representation", "LLMによる検証: 代表元から演算を定めた際の代表元独立性は後続の乗法群の主張で初めて示している。定義と妥当性の提示の整備が未解決である。"],
+  ["calculation_formulae_023_claim_multiplicative_group_of_polar_representation", "LLMによる検証: モノイド性・非零部分の群・逆元公式を一項に束ね、一般集合 S の逆元一意性を挿入し、各適用行のラベルが不足する。半径と角度の対の具体的計算への統一と主張の分割は未解決である。"],
   ["calc_formulae_015_claim_cos_arctan_sin_arctan", "LLMによる検証: 逆正接の正弦と余弦の二等式を一項に束ね、適用行ごとの定義ラベルと平方根の商の根拠が不足している。構造だけを確定し、主張の分割と一ステップ一定理の説明は未解決とする。"],
   ["calc_formulae_012_definition_arc_length", "LLMによる検証: 円弧長の存在一意性を外部文献の命題番号だけで指定し、その条件と内容を本文内で説明していない。構造だけを確定し、外部文献の内容の本文内説明は未解決とする。"],
   ["calc_formulae_012b_claim_radial_normalization_exists_unique", "LLMによる検証: 正規化の存在一意性の証明は平方根と単位円の根拠を適用行ごとのラベルで引かず、実数の四則として複数の演算を一行へまとめている。節配置だけを確定し、本文の一ステップ一定理への展開は未解決である。"],
@@ -4015,7 +4017,7 @@ const inverseTrigonometricSectionBoundarySnapshot = [
       "calc_formulae_019_definition_polar_equivalence_class",
       "calculation_formulae_definition_set_and_algebra_notation"
     ],
-    "granularity": "自動検査で主題に適合"
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
   },
   {
     "id": "calculation_formulae_definition_set_and_algebra_notation",
@@ -4039,7 +4041,178 @@ if (findToolEntry("calculation_formulae_022_definition_operations_on_polar_repre
   !== inverseTrigonometricSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("逆正弦から定める正弦・余弦と逆正接の直後の項目が変わりました");
 }
+const polarMultiplicationSectionEntryIds = [
+  "calculation_formulae_022_definition_operations_on_polar_representation",
+  "calculation_formulae_023_claim_multiplicative_group_of_polar_representation"
+];
+const polarMultiplicationSection = validateReviewedSection(
+  "極座標の同値類の積と逆元", "数学的道具立て", polarMultiplicationSectionEntryIds,
+  new Map([
+  [
+    "calculation_formulae_022_definition_operations_on_polar_representation",
+    []
+  ],
+  [
+    "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+    [
+      "calculation_formulae_022_definition_operations_on_polar_representation"
+    ]
+  ]
+]),
+  new Map([
+  [
+    "calculation_formulae_022_definition_operations_on_polar_representation",
+    "8efabc0086375dc9fe3f922cbdf1bce1a60adc3c194feb3b7c6668e5cfca94ba"
+  ],
+  [
+    "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+    "a2f0942eaca2c3852591ec022bfb793463a32d510110f579e43ad76da7b5bd51"
+  ]
+]),
+  [
+  "calc_formulae_016_definition_angle_equivalence_class",
+  "calc_formulae_019_definition_polar_equivalence_class",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_016_definition_angle_equivalence_class",
+    "f5300fd54e60f601a4db6afe271b4f3c72ef16ff4baf25f5e3d03488a2f5286d"
+  ],
+  [
+    "calc_formulae_019_definition_polar_equivalence_class",
+    "db5e61c9e6e2f4aef9faa5b5154b7f7e4651951f655d44193a92caf541c654a6"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "calculation_formulae_023_claim_multiplicative_group_of_polar_representation"
+],
+);
+const polarMultiplicationSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_007_inclusion_rr_to_cc",
+    "kind": "definition",
+    "sha256": "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_016_definition_angle_equivalence_class",
+    "kind": "definition",
+    "sha256": "f5300fd54e60f601a4db6afe271b4f3c72ef16ff4baf25f5e3d03488a2f5286d",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_019_definition_polar_equivalence_class",
+    "kind": "definition",
+    "sha256": "db5e61c9e6e2f4aef9faa5b5154b7f7e4651951f655d44193a92caf541c654a6",
+    "dependencies": [
+      "calc_formulae_016_definition_angle_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_022_definition_operations_on_polar_representation",
+    "kind": "definition",
+    "sha256": "8efabc0086375dc9fe3f922cbdf1bce1a60adc3c194feb3b7c6668e5cfca94ba",
+    "dependencies": [
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+    "kind": "claim",
+    "sha256": "a2f0942eaca2c3852591ec022bfb793463a32d510110f579e43ad76da7b5bd51",
+    "dependencies": [
+      "calc_formulae_016_definition_angle_equivalence_class",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_022_definition_operations_on_polar_representation",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+    "kind": "claim",
+    "sha256": "bd4b1ebeede09bd6ebe666ce9e6007c3399351f81939f0a1e89dbe4ef2ec82a7",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of polarMultiplicationSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`極座標の同値類の積と逆元の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("calculation_formulae_024_claim_multiplicative_group_of_complex_numbers").dependencyPlacement!.chapterOrder
+  !== polarMultiplicationSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("極座標の同値類の積と逆元の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "極座標の同値類の積と逆元",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "calculation_formulae_022_definition_operations_on_polar_representation",
+    "calculation_formulae_023_claim_multiplicative_group_of_polar_representation"
+  ],
+  "input": [
+    "実数の四則演算と集合記号",
+    "角度の同値関係と、半径・角度の対の同値類"
+  ],
+  "output": [
+    "半径の積と角度の和による同値類の積",
+    "積の代表元独立性、結合律と単位元",
+    "非零同値類の積の閉性と逆元の公式"
+  ],
+  "mainTheorem": "極座標同値類の積のモノイド性と非零部分の群・逆元公式",
+  "mainTheoremEntryId": "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+  "boundaryEvidence": "同値類の積を定める項から、その代表元独立性、結合律、単位元、非零部分の閉性と逆元を示す項へ進む二項の依存鎖で閉じる。直後の複素数の乗法群はこの二項を使わず、実数対の複素積と実数の包含写像へ直接入力を切り替える。プログラミングによる検証では対象と後続比較に使う全直接入力の本文・直接依存・種別・粒度、二項の連続性・内部依存・節末出力、直後の相対順を固定する。",
+  "readabilityStatus": "LLMによる検証では半径零と正の場合分けによる代表元独立性から逆元までの計算と、直後の複素数乗法の成分計算を読んだ。演算定義の代表元独立性が後続主張で初めて示される提示、モノイド性・非零部分の群・逆元公式の混在、一般集合Sでの逆元一意性、各適用行のラベル不足は未解決である。語の有無ではなく、具体的な半径・角度の対の計算と主張分割が残ることを理由に本文完成と区別する。外部入力の同値関係と集合記号、および比較側の複素数の記述にも説明粒度の未解決が残る。",
+  "externalInputEntryIds": [
+    "calc_formulae_016_definition_angle_equivalence_class",
+    "calc_formulae_019_definition_polar_equivalence_class",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "逆正弦から定める正弦・余弦と逆正接",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
