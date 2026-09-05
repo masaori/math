@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["exp_linear_map_000a_claim_real_exp_series_converges", "LLMによる検証: 部分和・極限・剰余の定義と三主張が同居する。Archimedesの原理、等比和、上限から単調列収束と極限が上限になる根拠、極限の差の法則と各行参照が未提示である。零引数もa^0=1の規約で含め、前提補完と分割後に依存と閉包を再判定する。"],
   ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "LLMによる検証: 共役転置・エルミート・正定値・実対称を一項に束ねている。正方行列で定めた共役転置を列ベクトルへ使う長方形への拡張、実対称の等式と正の実数を実数包含から説明する段、通常転置の記号導入、定義分割が未解決であり、補完後に依存と閉包を再判定する。"],
   ["exp_conjugation_proof_004_theorem_ad_binomial", "LLMによる検証: 交換子と二項係数の定義、符号の処理、Pascalの法則、帰納証明が同居している。正整数冪の定義と行列演算法則の根拠、符号の帰納法の展開、複数の分配律・結合律・スカラーの可換性の同時適用と二箇所への代入、各行参照と主張分割が未解決である。"],
   ["eigenvalues_of_V_002_claim_trace_properties", "LLMによる検証: 四主張の分割、線型性の成分計算と有限和の順序交換を正当化する帰納法、和の交換と複素積の交換を同時適用する段の分離、各行参照が未解決である。"],
@@ -8532,7 +8533,131 @@ if (findToolEntry("exp_conjugation_proof_004_theorem_ad_binomial").dependencyPla
   !== conjugateAdjointSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("複素共役から共役転置と正定値行列への直後の項目が変わりました");
 }
+const iteratedCommutatorSectionEntryIds = [
+  "exp_conjugation_proof_004_theorem_ad_binomial"
+];
+const iteratedCommutatorSection = validateReviewedSection(
+  "反復交換子の二項係数による展開", "数学的道具立て", iteratedCommutatorSectionEntryIds,
+  new Map([
+  [
+    "exp_conjugation_proof_004_theorem_ad_binomial",
+    []
+  ]
+]),
+  new Map([
+  [
+    "exp_conjugation_proof_004_theorem_ad_binomial",
+    "ba1875ca88bb10163d2a3ba85f2acb5e4a358169c00e6e2959ba76c666c34a1b"
+  ]
+]),
+  [
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_003_matrix_decomposition",
+    "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "exp_conjugation_proof_004_theorem_ad_binomial"
+],
+);
+const iteratedCommutatorSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_proof_004_theorem_ad_binomial",
+    "kind": "theorem",
+    "sha256": "ba1875ca88bb10163d2a3ba85f2acb5e4a358169c00e6e2959ba76c666c34a1b",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_000a_claim_real_exp_series_converges",
+    "kind": "claim",
+    "sha256": "1065e4f465b1b0b49eae7d16f9d734421f472beec053c3effaff63127eecf077",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of iteratedCommutatorSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`反復交換子の二項係数による展開の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("exp_linear_map_000a_claim_real_exp_series_converges").dependencyPlacement!.chapterOrder
+  !== iteratedCommutatorSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("反復交換子の二項係数による展開の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "反復交換子の二項係数による展開",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "exp_conjugation_proof_004_theorem_ad_binomial"
+  ],
+  "input": [
+    "複素数と集合記号、行列の積の成分による定義"
+  ],
+  "output": [
+    "反復交換子を行列の冪の有限和で表す式"
+  ],
+  "mainTheorem": "反復交換子の二項展開公式",
+  "mainTheoremEntryId": "exp_conjugation_proof_004_theorem_ad_binomial",
+  "boundaryEvidence": "反復交換子の再帰と二項係数を置き、符号の処理とPascalの法則を準備し、帰納法で二項展開へ閉じる現存一項を節とする。直後の非負実数の指数級数は本項の出力を使わず、各項の非負性・等比級数による評価・実数の上限性質を入力に収束と剰余を導く。行列の再帰式から実数列の評価への入力切替を根拠とし、極限の有無自体は分類条件にしない。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度および後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で反復交換子と実指数級数の全本文・全直接入力を読んだ。反復交換子・二項係数の定義、符号補題、Pascal則と帰納証明の分割、正整数冪の定義と行列演算法則の根拠、同時代入・複数法則の同時適用と各行参照が未解決である。比較側は単調性・有界性・収束・剰余を一項へ束ね、Archimedesの原理と単調有界列の収束、等比和、極限の差の前提を本文内で説明する必要がある。本文完成とは扱わず、定義・補題の追加と主張分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "複素共役から共役転置と正定値行列へ",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

@@ -218,6 +218,29 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "反復交換子の二項係数による展開",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "exp_conjugation_proof_004_theorem_ad_binomial"
+      ],
+      "input": [
+        "複素数と集合記号、行列の積の成分による定義"
+      ],
+      "output": [
+        "反復交換子を行列の冪の有限和で表す式"
+      ],
+      "mainTheorem": "反復交換子の二項展開公式",
+      "mainTheoremEntryId": "exp_conjugation_proof_004_theorem_ad_binomial",
+      "boundaryEvidence": "反復交換子の再帰と二項係数を置き、符号の処理とPascalの法則を準備し、帰納法で二項展開へ閉じる現存一項を節とする。直後の非負実数の指数級数は本項の出力を使わず、各項の非負性・等比級数による評価・実数の上限性質を入力に収束と剰余を導く。行列の再帰式から実数列の評価への入力切替を根拠とし、極限の有無自体は分類条件にしない。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度および後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で反復交換子と実指数級数の全本文・全直接入力を読んだ。反復交換子・二項係数の定義、符号補題、Pascal則と帰納証明の分割、正整数冪の定義と行列演算法則の根拠、同時代入・複数法則の同時適用と各行参照が未解決である。比較側は単調性・有界性・収束・剰余を一項へ束ね、Archimedesの原理と単調有界列の収束、等比和、極限の差の前提を本文内で説明する必要がある。本文完成とは扱わず、定義・補題の追加と主張分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "複素共役から共役転置と正定値行列へ",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2498,6 +2521,7 @@
       "linear_space_general_003c_claim_matrix_norm_vector_bound",
       "linear_space_general_003d_claim_matrix_completeness",
       "linear_space_general_003b_claim_matrix_multiplication_continuity",
+      "exp_linear_map_000a_claim_real_exp_series_converges",
       "exp_linear_map_000b_claim_matrix_exp_series_converges",
       "exp_linear_map_001_theorem_exp_series_pointwise_converges",
       "exp_linear_map_002_definition_exp_of_endomorphism",
@@ -11589,7 +11613,7 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5263,
@@ -11600,7 +11624,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 部分和・極限・剰余の定義と三主張が同居する。Archimedesの原理、等比和、上限から単調列収束と極限が上限になる根拠、極限の差の法則と各行参照が未提示である。零引数もa^0=1の規約で含め、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "set_and_algebra_notation"
