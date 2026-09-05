@@ -644,7 +644,7 @@ q(t_0)
       displayMath(String.raw`\begin{aligned}
 \|Wx\|^2
 &=(Wx)^\top(Wx)
-&&\bigl(\because\ \text{ノルムの定義}\ \|v\|^2=v^\top v\bigr)\\
+&&\bigl(\because\ \text{ノルムの定義 }\blkref{def_matrix_norm}\ \text{と実成分なので}\ \|v\|^2=v^\top v\bigr)\\
 &=y^\top(Wx)
 &&\bigl(\because\ y=Wx\ \text{の置き換え（左因子）}\bigr)
 \end{aligned}`),
@@ -662,41 +662,53 @@ q(t_0)
 &=\left(y^\top Wx\right)^2
 &&\bigl(\because\ \text{上の式変形}\bigr)\\
 &\leq\left(x^\top Wx\right)\left(y^\top Wy\right)
-&&\bigl(\because\ \text{半正定値の Cauchy--Schwarz を}\ P=W\ \text{に適用}\bigr)\\
+&&\bigl(\because\ \text{半正定値の Cauchy--Schwarz }\blkref{psd_cauchy_schwarz}\ \text{を}\ P=W,\ y=Wx\ \text{に適用}\bigr)\\
 &\leq\left(c\|x\|^2\right)\left(y^\top Wy\right)
-&&\bigl(\because\ \text{レイリー上限の評価}\ x^\top Wx\leq c\|x\|^2\ \text{と}\ 0\leq y^\top Wy\ \text{（半正定値性）}\bigr)\\
+&&\bigl(\because\ \text{上限の評価}\ \blkref{def_rayleigh_sup}\ \text{の}\ x^\top Wx\leq c\|x\|^2\ \text{と}\ 0\leq y^\top Wy\ \text{（半正定値性）}\bigr)\\
 &\leq\left(c\|x\|^2\right)\left(c\|y\|^2\right)
-&&\bigl(\because\ \text{レイリー上限の評価}\ y^\top Wy\leq c\|y\|^2\ \text{と}\ 0\leq c\|x\|^2\bigr)\\
+&&\bigl(\because\ \text{上限の評価}\ \blkref{def_rayleigh_sup}\ \text{の}\ y^\top Wy\leq c\|y\|^2\ \text{と}\ 0\leq c\|x\|^2\bigr)\\
 &=c^2\|x\|^2\|Wx\|^2
 &&\bigl(\because\ y=Wx\ \text{と}\ \mathbb{R}\ \text{の乗法の可換則・結合則}\bigr)
 \end{aligned}`),
       paragraph([
-        "である（半正定値の Cauchy--Schwarz は ",
-        ref("psd_cauchy_schwarz"),
-        "、レイリー上限の評価は ",
-        ref("def_rayleigh_sup"),
-        "）。",
-      ]),
-      paragraph([
         math(String.raw`\|Wx\| = 0`),
-        " なら主張は明らか。",
+        " のときは左辺が ",
+        math(String.raw`0`),
+        "、右辺が ",
+        math(String.raw`c\|x\| \geq 0`),
+        " なので主張が成り立つ。以下 ",
         math(String.raw`\|Wx\| > 0`),
-        " なら両辺を ",
-        math(String.raw`\|Wx\|^2 > 0`),
-        " で割って ",
-        math(String.raw`\|Wx\|^2 \leq c^2\|x\|^2`),
-        "、平方根を取って ",
-        math(String.raw`\|Wx\| \leq c\|x\|`),
-        "（両辺非負）。",
+        " とする。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\|Wx\|^4 \leq c^2\|x\|^2\|Wx\|^2
+&\Longrightarrow \|Wx\|^2 \leq c^2\|x\|^2
+  &&\bigl(\because\ \text{両辺を}\ \|Wx\|^2>0\ \text{で割る}\bigr)\\
+&\Longrightarrow \|Wx\| \leq c\|x\|
+  &&\bigl(\because\ \|Wx\| \geq 0,\ c\|x\| \geq 0\ \text{と平方の単調性}\bigr)
+\end{aligned}`),
       paragraph([
+        "冪についての主張は ",
         math(String.raw`k`),
-        " についての主張は ",
+        " に関する帰納法で示す。",
+        math(String.raw`k=0`),
+        " のときは ",
+        math(String.raw`\|W^0x\| = \|x\| = c^0\|x\|`),
+        " である。",
         math(String.raw`k`),
-        " に関する帰納法：",
-        math(String.raw`\|W^{k+1}x\| = \|W(W^kx)\| \leq c\|W^kx\| \leq c\cdot c^k\|x\|`),
-        "。",
+        " で成り立つとすると",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\|W^{k+1}x\|
+&=\|W(W^kx)\|
+  &&\bigl(\because\ \text{行列の冪の定義と結合則}\bigr)\\
+&\leq c\|W^kx\|
+  &&\bigl(\because\ \text{いま示した評価を}\ W^kx\ \text{に適用}\bigr)\\
+&\leq c\cdot c^k\|x\|
+  &&\bigl(\because\ \text{帰納法の仮定と}\ c>0\bigr)\\
+&=c^{k+1}\|x\|
+  &&\bigl(\because\ \text{冪の指数法則}\bigr)
+\end{aligned}`),
     ],
     conversion: { status: "added" },
   },

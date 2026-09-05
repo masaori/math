@@ -1342,6 +1342,40 @@
       "concludingClaimEntryId": "maxeig_006_definition_rayleigh_sup",
       "boundaryEvidence": "章内依存順72は、順71で確立した W の実対称正定値性とノルムの定義だけを直接入力に、上限 c(M) を定義する。順71までは有限個の複素行列の等式計算で閉じていたのに対し、ここで初めて実数の上限性質を使うため、入力の性質が切り替わる。直後の順73は c(M) を受け取って作用素評価へ進み、半正定値の Cauchy--Schwarz を新たな入力に加えるため、順72の後で節を閉じる。生成時に順72の全直接依存、順73の依存方向、および半正定値 Cauchy--Schwarz が順72の入力でなく順73の入力であることを固定検査する。",
       "readabilityStatus": "有界性の根拠が「Cauchy--Schwarz を使うまでもなく」という散文だったため、実際に引くブロックが定まらなかった。各成分の絶対値が 1 以下であることを二段で示し、成分表示の二重和を三角不等式で押さえる形へ書き換えたので、各行が定義または初等的な不等式を一つだけ引く形になった。"
+    },
+    {
+      "name": "上限による作用素評価とその冪",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "maxeig_007_claim_operator_bound"
+      ],
+      "input": [
+        "上限 c(M) とそこから従う二次形式の評価",
+        "対称化転送行列 W の実対称正定値性",
+        "半正定値双線型形式の Cauchy--Schwarz の不等式",
+        "数ベクトルと行列のノルムの定義"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_002b_definition_matrix_norm",
+        "maxeig_003_claim_W_is_positive_definite",
+        "maxeig_005_claim_psd_cauchy_schwarz",
+        "maxeig_006_definition_rayleigh_sup"
+      ],
+      "output": [
+        "全てのベクトルに対する ||Wx|| <= c(M)||x||",
+        "冪についての ||W^k x|| <= c(M)^k ||x||"
+      ],
+      "formalizationEvidence": {
+        "leanFile": "lean/Ising2D/NecSuf/RayleighMoments.lean",
+        "sageMathFile": "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+        "currentStatus": "本文は ||Wx||^4 を半正定値 Cauchy--Schwarz と上限の評価で二段に押さえ、正の数で割る操作と平方の単調性を式変形へ開き、冪の主張を k についての帰納法で示す。"
+      },
+      "concludingClaim": "上限 c(M) が W の作用素としての評価を与え、冪へ持ち上がる",
+      "concludingClaimEntryId": "maxeig_007_claim_operator_bound",
+      "boundaryEvidence": "章内依存順73は、順72の上限とその二次形式評価、順71の実対称正定値性、半正定値 Cauchy--Schwarz、ノルムの定義を直接入力に、作用素評価とその冪を示す。直後の順74は、この評価を受けてトレースの挟み込みへ進み、出力がベクトルの評価から行列のトレースの評価へ切り替わる。生成時に順73の全直接依存、順74の依存方向、および両者が相互に依存しないことを固定検査する。",
+      "readabilityStatus": "後置きしていた半正定値 Cauchy--Schwarz と上限の評価の参照を、適用した各行の末尾へ移した。正の数で割る操作と平方根を取る操作は、含意の鎖として一行一操作へ開き、非負性の条件を根拠に明示した。帰納法も基底段と帰納段を分け、各行が定義または既証の評価を一つだけ引く。"
     }
   ],
   "explanationGranularityReview": {
@@ -4683,6 +4717,10 @@
         {
           "dependentId": "maxeig_007_claim_operator_bound",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "maxeig_007_claim_operator_bound",
+          "prerequisiteId": "linear_space_general_002b_definition_matrix_norm"
         },
         {
           "dependentId": "maxeig_007_claim_operator_bound",
@@ -18523,7 +18561,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -18579,7 +18617,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -18649,8 +18687,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2969,
-        "inspectedContentSha256": "681401c7a21ad8d522e0bc5fd6db5bf7c6bc74ca2923638a4bec349b51b89e63",
+        "inspectedCharacterCount": 3600,
+        "inspectedContentSha256": "c8cee7a67cc6203725050c2befe938989aa652efeaf34b0a2f2a01518108000c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18661,18 +18699,23 @@
       },
       "dependsOnLabels": [
         "W_is_real_symmetric_positive_definite",
+        "def_matrix_norm",
         "def_rayleigh_sup",
         "psd_cauchy_schwarz",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_002b_definition_matrix_norm",
         "maxeig_003_claim_W_is_positive_definite",
         "maxeig_005_claim_psd_cauchy_schwarz",
         "maxeig_006_definition_rayleigh_sup"
       ],
       "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
+        "set_and_algebra_notation",
+        "def_matrix_norm",
+        "psd_cauchy_schwarz",
+        "def_rayleigh_sup"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],

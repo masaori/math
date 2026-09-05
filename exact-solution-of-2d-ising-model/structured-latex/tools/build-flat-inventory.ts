@@ -1649,6 +1649,7 @@ const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", new Set(["theorem_exp_product"])],
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", new Set(["mat_mult"])],
   ["eigenvalues_of_V_008_claim_joint_eigenspace_decomposition", new Set(["trace_of_idempotent"])],
+  ["maxeig_007_claim_operator_bound", new Set(["def_matrix_norm", "psd_cauchy_schwarz", "def_rayleigh_sup"])],
   ["maxeig_006_definition_rayleigh_sup", new Set(["def_matrix_norm"])],
   ["maxeig_003_claim_W_is_positive_definite", new Set(["def_symmetrized_transfer_matrix"])],
   ["bridge_011_claim_sector_replacement", new Set(["V1_restriction_to_eigenspaces", "def_end_iso", "epsilon_projector_properties"])],
@@ -3319,6 +3320,30 @@ if (rayleighSupEntry.kind !== "definition"
     operatorBoundDependencies: operatorBoundEntry.dependsOnEntryIds,
   })}`);
 }
+const tracePowerSandwichEntry = entries.find((entry) =>
+  entry.id === "maxeig_008_claim_trace_power_sandwich")!;
+const operatorBoundExpectedDirectDependencies = [
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_002b_definition_matrix_norm",
+  "maxeig_003_claim_W_is_positive_definite",
+  "maxeig_005_claim_psd_cauchy_schwarz",
+  "maxeig_006_definition_rayleigh_sup",
+].sort();
+if (operatorBoundEntry.kind !== "claim"
+  || tracePowerSandwichEntry.dependencyPlacement!.chapterOrder !== 74
+  || tracePowerSandwichEntry.provisionalFinalChapter !== "2次元イジングモデル"
+  || JSON.stringify([...operatorBoundEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(operatorBoundExpectedDirectDependencies)
+  || operatorBoundEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || !tracePowerSandwichEntry.dependsOnEntryIds.includes(operatorBoundEntry.id)
+  || operatorBoundEntry.dependsOnEntryIds.includes(tracePowerSandwichEntry.id)) {
+  throw new Error(`作用素評価の一項節が変わりました: ${JSON.stringify({
+    order: operatorBoundEntry.dependencyPlacement?.chapterOrder,
+    kind: operatorBoundEntry.kind,
+    dependencies: operatorBoundEntry.dependsOnEntryIds,
+    traceSandwichDependencies: tracePowerSandwichEntry.dependsOnEntryIds,
+  })}`);
+}
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || ![
@@ -4044,6 +4069,31 @@ const isingModelSectionBoundaries = [{
   concludingClaimEntryId: rayleighSupEntry.id,
   boundaryEvidence: "章内依存順72は、順71で確立した W の実対称正定値性とノルムの定義だけを直接入力に、上限 c(M) を定義する。順71までは有限個の複素行列の等式計算で閉じていたのに対し、ここで初めて実数の上限性質を使うため、入力の性質が切り替わる。直後の順73は c(M) を受け取って作用素評価へ進み、半正定値の Cauchy--Schwarz を新たな入力に加えるため、順72の後で節を閉じる。生成時に順72の全直接依存、順73の依存方向、および半正定値 Cauchy--Schwarz が順72の入力でなく順73の入力であることを固定検査する。",
   readabilityStatus: "有界性の根拠が「Cauchy--Schwarz を使うまでもなく」という散文だったため、実際に引くブロックが定まらなかった。各成分の絶対値が 1 以下であることを二段で示し、成分表示の二重和を三角不等式で押さえる形へ書き換えたので、各行が定義または初等的な不等式を一つだけ引く形になった。",
+}, {
+  name: "上限による作用素評価とその冪",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [operatorBoundEntry.id],
+  input: [
+    "上限 c(M) とそこから従う二次形式の評価",
+    "対称化転送行列 W の実対称正定値性",
+    "半正定値双線型形式の Cauchy--Schwarz の不等式",
+    "数ベクトルと行列のノルムの定義",
+  ],
+  externalInputEntryIds: operatorBoundExpectedDirectDependencies,
+  output: [
+    "全てのベクトルに対する ||Wx|| <= c(M)||x||",
+    "冪についての ||W^k x|| <= c(M)^k ||x||",
+  ],
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/NecSuf/RayleighMoments.lean",
+    sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+    currentStatus: "本文は ||Wx||^4 を半正定値 Cauchy--Schwarz と上限の評価で二段に押さえ、正の数で割る操作と平方の単調性を式変形へ開き、冪の主張を k についての帰納法で示す。",
+  },
+  concludingClaim: "上限 c(M) が W の作用素としての評価を与え、冪へ持ち上がる",
+  concludingClaimEntryId: operatorBoundEntry.id,
+  boundaryEvidence: "章内依存順73は、順72の上限とその二次形式評価、順71の実対称正定値性、半正定値 Cauchy--Schwarz、ノルムの定義を直接入力に、作用素評価とその冪を示す。直後の順74は、この評価を受けてトレースの挟み込みへ進み、出力がベクトルの評価から行列のトレースの評価へ切り替わる。生成時に順73の全直接依存、順74の依存方向、および両者が相互に依存しないことを固定検査する。",
+  readabilityStatus: "後置きしていた半正定値 Cauchy--Schwarz と上限の評価の参照を、適用した各行の末尾へ移した。正の数で割る操作と平方根を取る操作は、含意の鎖として一行一操作へ開き、非負性の条件を根拠に明示した。帰納法も基底段と帰納段を分け、各行が定義または既証の評価を一つだけ引く。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
