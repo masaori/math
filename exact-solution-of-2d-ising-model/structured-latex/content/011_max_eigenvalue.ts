@@ -714,16 +714,14 @@ q(t_0)
   },
 
   {
-    id: "maxeig_008_claim_trace_power_sandwich",
+    id: "maxeig_008a_claim_trace_power_upper_bound",
     kind: "claim",
     origin: { path: SRC, ordinal: 10 },
-    title: { tex: String.raw`c(M)^{n} \leq \mathrm{tr}(W^{n}) \leq 2^{M} c(M)^{n}` },
-    labels: ["trace_power_sandwich"],
+    title: { tex: String.raw`\mathrm{tr}(W^{n}) \leq 2^{M} c(M)^{n}` },
+    labels: ["trace_power_upper_bound"],
     statement: [
       paragraph([math(String.raw`n \in \mathbb{Z}_{\geq 1}`), " について"]),
-      displayMath(
-        String.raw`c(M)^{n} \ \leq\ \mathrm{tr}\!\left(W^{n}\right)\ \leq\ 2^{M}\,c(M)^{n}`,
-      ),
+      displayMath(String.raw`\mathrm{tr}\!\left(W^{n}\right)\ \leq\ 2^{M}\,c(M)^{n}`),
     ],
     proof: [
       paragraph([
@@ -734,7 +732,9 @@ q(t_0)
         math(String.raw`e_1,\dots,e_d`),
         " を標準基底とする。",
         math(String.raw`W`),
-        " は実対称なので、その冪 ",
+        " は実対称なので（",
+        ref("W_is_real_symmetric_positive_definite"),
+        "）、その冪 ",
         math(String.raw`W^n`),
         " も実対称である。標準基底を用いるトレースの表示は、次の一続きの等式で得られる。",
       ]),
@@ -746,7 +746,7 @@ q(t_0)
 &&\bigl(\because\ \text{標準基底 }e_k\text{ による対角成分の表示 }(W^n)_{kk}=e_k^\top W^n e_k\bigr)
 \end{aligned}`),
       paragraph([
-        "Step 1（上からの評価）。まず ",
+        "まず ",
         math(String.raw`n = 2a`),
         " が偶数の場合。各 ",
         math(String.raw`k`),
@@ -806,8 +806,48 @@ e_k^\top W^{2a+1}e_k
 &&\bigl(\because\ d=2^M\ \text{（冒頭の略記）}\bigr)
 \end{aligned}`),
       paragraph(["となり、上からの評価を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-05 の分割で、トレースの挟み込みを上からの評価・モーメントの対数凸性・下からの評価の三主張へ分けた。この主張は上からの評価だけを扱う。式変形と根拠は分割前と同じで、後置きしていた作用素評価の参照を適用行の末尾へ移した。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_008b_claim_moment_log_convexity",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 10 },
+    title: { text: "モーメント列の正値性と対数凸性" },
+    labels: ["moment_log_convexity"],
+    statement: [
       paragraph([
-        "Step 2（下からの評価の準備：モーメントの対数凸性）。単位ベクトル ",
+        ref("def_symmetrized_transfer_matrix"),
+        " の ",
+        math(String.raw`W`),
+        " は ",
+        ref("W_is_real_symmetric_positive_definite"),
+        " より実対称正定値である。単位ベクトル ",
+        math(String.raw`x \in \mathbb{R}^{2^M}`),
+        "（",
+        math(String.raw`\|x\| = 1`),
+        "）を固定し、",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`m_k := x^\top W^k x`),
+        " とおく。このとき全ての ",
+        math(String.raw`k`),
+        " について ",
+        math(String.raw`m_k > 0`),
+        " であり、",
+      ]),
+      displayMath(String.raw`m_k^{\,2} \leq m_{k-1}\,m_{k+1} \qquad (k \in \mathbb{Z}_{\geq 1})`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "単位ベクトル ",
         math(String.raw`x`),
         " を固定し ",
         math(String.raw`m_k := x^\top W^k x`),
@@ -990,17 +1030,39 @@ a+b+1 &= p+(p+1)+1
         math(String.raw`m_j`),
         " はいずれも定義済みである。）",
       ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-05 の分割で、トレースの挟み込みから独立した主張として切り出した。式変形と根拠は分割前と同じである。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_008_claim_trace_power_sandwich",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 10 },
+    title: { tex: String.raw`c(M)^{n} \leq \mathrm{tr}(W^{n}) \leq 2^{M} c(M)^{n}` },
+    labels: ["trace_power_sandwich"],
+    statement: [
+      paragraph([math(String.raw`n \in \mathbb{Z}_{\geq 1}`), " について"]),
+      displayMath(
+        String.raw`c(M)^{n} \ \leq\ \mathrm{tr}\!\left(W^{n}\right)\ \leq\ 2^{M}\,c(M)^{n}`,
+      ),
+    ],
+    proof: [
       paragraph([
-        "Step 3（下からの評価）。まず、任意の ",
+        "まず、任意の ",
         math(String.raw`k \geq 1`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 \frac{m_k}{m_{k-1}}
 &=\frac{m_k^2}{m_{k-1}\,m_k}
-&&\bigl(\because\ \text{分子と分母に }m_k>0\text{ を掛けた（Step 2 の正値性）}\bigr)\\
+&&\bigl(\because\ \text{分子と分母に }m_k>0\text{ を掛けた（}\blkref{moment_log_convexity}\text{ の正値性）}\bigr)\\
 &\leq\frac{m_{k-1}\,m_{k+1}}{m_{k-1}\,m_k}
-&&\bigl(\because\ \text{Step 2 の }m_k^2 \leq m_{k-1}m_{k+1}\text{ と、正の分母での商は順序を保つ}\bigr)\\
+&&\bigl(\because\ \text{対数凸性 }\blkref{moment_log_convexity}\text{ と、正の分母での商は順序を保つ}\bigr)\\
 &=\frac{m_{k+1}}{m_k}
 &&\bigl(\because\ m_{k-1}>0\ \text{の約分}\bigr)
 \end{aligned}`),
@@ -1014,7 +1076,7 @@ a+b+1 &= p+(p+1)+1
       displayMath(String.raw`\begin{aligned}
 m_n
 &=m_0\cdot\frac{m_1}{m_0}\cdot\frac{m_2}{m_1}\cdots\frac{m_n}{m_{n-1}}
-&&\bigl(\because\ \text{望遠鏡積（分母は Step 2 の正値性により零でない）}\bigr)\\
+&&\bigl(\because\ \text{望遠鏡積（分母は }\blkref{moment_log_convexity}\text{ の正値性により零でない）}\bigr)\\
 &=\frac{m_1}{m_0}\cdot\frac{m_2}{m_1}\cdots\frac{m_n}{m_{n-1}}
 &&\bigl(\because\ m_0=x^\top W^0x=\|x\|^2=1\ \text{（}x\text{ は単位ベクトル）}\bigr)\\
 &\geq\left(\frac{m_1}{m_0}\right)^{n}
@@ -1106,7 +1168,11 @@ c^{n}
         math(String.raw`c`),
         " の定義は ",
         ref("def_rayleigh_sup"),
-        "）。",
+        "）。上からの評価 ",
+        math(String.raw`\mathrm{tr}(W^n) \leq 2^M c^n`),
+        " は ",
+        ref("trace_power_upper_bound"),
+        " である。二つを合わせて主張を得る。",
       ]),
     ],
     conversion: {

@@ -1649,6 +1649,7 @@ const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", new Set(["theorem_exp_product"])],
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", new Set(["mat_mult"])],
   ["eigenvalues_of_V_008_claim_joint_eigenspace_decomposition", new Set(["trace_of_idempotent"])],
+  ["maxeig_008_claim_trace_power_sandwich", new Set(["moment_log_convexity"])],
   ["maxeig_007_claim_operator_bound", new Set(["def_matrix_norm", "psd_cauchy_schwarz", "def_rayleigh_sup"])],
   ["maxeig_006_definition_rayleigh_sup", new Set(["def_matrix_norm"])],
   ["maxeig_003_claim_W_is_positive_definite", new Set(["def_symmetrized_transfer_matrix"])],
@@ -3320,6 +3321,10 @@ if (rayleighSupEntry.kind !== "definition"
     operatorBoundDependencies: operatorBoundEntry.dependsOnEntryIds,
   })}`);
 }
+const tracePowerUpperBoundEntry = entries.find((entry) =>
+  entry.id === "maxeig_008a_claim_trace_power_upper_bound")!;
+const momentLogConvexityEntry = entries.find((entry) =>
+  entry.id === "maxeig_008b_claim_moment_log_convexity")!;
 const tracePowerSandwichEntry = entries.find((entry) =>
   entry.id === "maxeig_008_claim_trace_power_sandwich")!;
 const operatorBoundExpectedDirectDependencies = [
@@ -3330,18 +3335,51 @@ const operatorBoundExpectedDirectDependencies = [
   "maxeig_006_definition_rayleigh_sup",
 ].sort();
 if (operatorBoundEntry.kind !== "claim"
-  || tracePowerSandwichEntry.dependencyPlacement!.chapterOrder !== 74
-  || tracePowerSandwichEntry.provisionalFinalChapter !== "2次元イジングモデル"
+  || tracePowerUpperBoundEntry.dependencyPlacement!.chapterOrder !== 74
+  || tracePowerUpperBoundEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...operatorBoundEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(operatorBoundExpectedDirectDependencies)
   || operatorBoundEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
-  || !tracePowerSandwichEntry.dependsOnEntryIds.includes(operatorBoundEntry.id)
-  || operatorBoundEntry.dependsOnEntryIds.includes(tracePowerSandwichEntry.id)) {
+  || !tracePowerUpperBoundEntry.dependsOnEntryIds.includes(operatorBoundEntry.id)
+  || operatorBoundEntry.dependsOnEntryIds.includes(tracePowerUpperBoundEntry.id)) {
   throw new Error(`作用素評価の一項節が変わりました: ${JSON.stringify({
     order: operatorBoundEntry.dependencyPlacement?.chapterOrder,
     kind: operatorBoundEntry.kind,
     dependencies: operatorBoundEntry.dependsOnEntryIds,
-    traceSandwichDependencies: tracePowerSandwichEntry.dependsOnEntryIds,
+    traceUpperBoundDependencies: tracePowerUpperBoundEntry.dependsOnEntryIds,
+  })}`);
+}
+const tracePowerUpperBoundExpectedDirectDependencies = [
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "maxeig_003_claim_W_is_positive_definite",
+  "maxeig_006_definition_rayleigh_sup",
+  "maxeig_007_claim_operator_bound",
+].sort();
+const momentLogConvexityExpectedDirectDependencies = [
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "maxeig_001a_definition_symmetrized_transfer_matrix",
+  "maxeig_003_claim_W_is_positive_definite",
+  "maxeig_005_claim_psd_cauchy_schwarz",
+].sort();
+if (tracePowerUpperBoundEntry.kind !== "claim"
+  || momentLogConvexityEntry.kind !== "claim"
+  || momentLogConvexityEntry.dependencyPlacement!.chapterOrder !== 75
+  || tracePowerSandwichEntry.dependencyPlacement!.chapterOrder !== 76
+  || momentLogConvexityEntry.provisionalFinalChapter !== "2次元イジングモデル"
+  || JSON.stringify([...tracePowerUpperBoundEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(tracePowerUpperBoundExpectedDirectDependencies)
+  || JSON.stringify([...momentLogConvexityEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(momentLogConvexityExpectedDirectDependencies)
+  || momentLogConvexityEntry.dependsOnEntryIds.includes(tracePowerUpperBoundEntry.id)
+  || tracePowerUpperBoundEntry.dependsOnEntryIds.includes(momentLogConvexityEntry.id)
+  || !tracePowerSandwichEntry.dependsOnEntryIds.includes(tracePowerUpperBoundEntry.id)
+  || !tracePowerSandwichEntry.dependsOnEntryIds.includes(momentLogConvexityEntry.id)) {
+  throw new Error(`トレースの挟み込みの分割が変わりました: ${JSON.stringify({
+    orders: [tracePowerUpperBoundEntry, momentLogConvexityEntry, tracePowerSandwichEntry]
+      .map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
+    upperBoundDependencies: tracePowerUpperBoundEntry.dependsOnEntryIds,
+    logConvexityDependencies: momentLogConvexityEntry.dependsOnEntryIds,
+    sandwichDependencies: tracePowerSandwichEntry.dependsOnEntryIds,
   })}`);
 }
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
@@ -4094,6 +4132,37 @@ const isingModelSectionBoundaries = [{
   concludingClaimEntryId: operatorBoundEntry.id,
   boundaryEvidence: "章内依存順73は、順72の上限とその二次形式評価、順71の実対称正定値性、半正定値 Cauchy--Schwarz、ノルムの定義を直接入力に、作用素評価とその冪を示す。直後の順74は、この評価を受けてトレースの挟み込みへ進み、出力がベクトルの評価から行列のトレースの評価へ切り替わる。生成時に順73の全直接依存、順74の依存方向、および両者が相互に依存しないことを固定検査する。",
   readabilityStatus: "後置きしていた半正定値 Cauchy--Schwarz と上限の評価の参照を、適用した各行の末尾へ移した。正の数で割る操作と平方根を取る操作は、含意の鎖として一行一操作へ開き、非負性の条件を根拠に明示した。帰納法も基底段と帰納段を分け、各行が定義または既証の評価を一つだけ引く。",
+}, {
+  name: "トレースの上からの評価とモーメント列の対数凸性",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [tracePowerUpperBoundEntry.id, momentLogConvexityEntry.id],
+  input: [
+    "上限 c(M) とその二次形式の評価",
+    "上限による作用素評価とその冪",
+    "対称化転送行列 W の定義と実対称正定値性",
+    "半正定値双線型形式の Cauchy--Schwarz の不等式",
+  ],
+  externalInputEntryIds: [...new Set([
+    ...tracePowerUpperBoundExpectedDirectDependencies,
+    ...momentLogConvexityExpectedDirectDependencies,
+  ])].sort(),
+  output: [
+    "tr(W^n) <= 2^M c(M)^n",
+    "単位ベクトルを固定したモーメント列の正値性",
+    "モーメント列の対数凸性 m_k^2 <= m_{k-1} m_{k+1}",
+  ],
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/NecSuf/RayleighMoments.lean",
+    sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+    currentStatus: "上からの評価は標準基底によるトレースの表示から偶奇に分けて各対角成分を c^n で押さえ、有限和へ持ち上げる。対数凸性は半正定値 Cauchy--Schwarz を P=W と P=I の二通りで使い、添字の偶奇で場合分けする。分割前と式変形・根拠は同じである。",
+  },
+  mainTheorems: [
+    "トレースの上からの評価",
+    "モーメント列の正値性と対数凸性",
+  ],
+  boundaryEvidence: "章内依存順74は順73の作用素評価とその冪だけを新しい入力に加えてトレースの上からの評価を示す。順75は同じ W の性質と半正定値 Cauchy--Schwarz だけを使い、順74には依存しない独立な準備である。順76の挟み込みはこの二項を直接入力として結論を組み立てるため、順75の後で節を閉じる。生成時に二項の章配置、全直接依存、相互非依存、および順76が両方を直接引くことを固定検査する。",
+  readabilityStatus: "分割前は一ブロックに上からの評価・対数凸性・下からの評価の三主張が同居し、証明中で Step 番号によって相互参照していた。三つの主張へ分け、下からの評価が対数凸性をブロック参照で引く形にしたので、一ブロック一主張になり、どの段がどの主張の根拠かが本文だけで追える。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
