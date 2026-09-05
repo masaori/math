@@ -53,7 +53,7 @@ if [ ! -e "$LOOP_WORKTREE/.git" ]; then
 fi
 
 if [ -z "$(git -C "$LOOP_WORKTREE" status --porcelain)" ]; then
-  git -C "$LOOP_WORKTREE" checkout -q -B "$LOOP_BRANCH" origin/main >> "$LOG_FILE" 2>&1
+  git -C "$LOOP_WORKTREE" merge --ff-only origin/main >> "$LOG_FILE" 2>&1
 else
   log "INFO: 前回 tick の未コミット成果を引き継ぐ"
 fi
@@ -80,7 +80,7 @@ PROMPT='[[AI_AGENT_MESSAGE]]
 
 リポジトリ直下の AGENTS.md、CLAUDE.md、docs/context/ の全ファイルを読み、続いて finite-graph-ising-partition-polynomial-and-fisher-zeros/README.md、MEMORY.md、docs/tasks/auto-loop-runbook.md、docs/tasks/auto-loop-state.md、docs/tasks/task-dependency-graph.md、今回の個別タスク文書を読んでください。.codex/skills/math-prover/SKILL.md も完全に読み、その skill を使うことを commentary で宣言してください。
 
-runbook の停止条件に厳密に従ってください。上位の研究ゴールと次の具体的な研究対象が台帳に明記されるまで、新しい定義・主張・定理、既存証明の細分化、SageMath 検算を追加してはなりません。停止条件を確認したら、作業ツリーを変更せず終了してください。'
+runbook と docs/tasks/next-research-target.md に従い、台帳の「現在の研究対象」の未達項目を一つだけ前進させてください。固定した入力範囲を広げず、否定結果も記録します。未達項目が無ければその事実を記録して終了し、補題や探索範囲を自動追加しないでください。変更に必要なプログラミングによる検証と意味のLLMによる検証を分け、台帳・MEMORY・remote default branchへの反映と包含確認まで行ってください。本文を変更した場合の公開は既存のpublish-artifact手順に従います。'
 
 log "=== tick 開始"
 log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
