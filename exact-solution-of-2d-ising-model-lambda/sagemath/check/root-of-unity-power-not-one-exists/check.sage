@@ -18,6 +18,8 @@ def roots_of_unity(n):
 def check_power_not_one_exists(nmax, mmax):
     one = QQbar(1)
     count = 0
+    polynomials = PolynomialRing(QQbar, "x")
+    x = polynomials.gen()
     for n in range(1, nmax + 1):
         for m in range(mmax + 1):
             if m % n == 0:
@@ -32,6 +34,8 @@ def check_power_not_one_exists(nmax, mmax):
             # 大小: |mu_n| = n（相異なることも確かめる）
             assert len(mu) == n
             assert len(set(mu)) == n
+            assert all(w ** n == one for w in mu)
+            assert set(mu) == set((x ** n - 1).roots(multiplicities=False))
             for w in mu:
                 # 鎖のうち背理法の仮定を使わない段
                 assert w ** r == one * (w ** r)
