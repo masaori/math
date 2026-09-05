@@ -218,6 +218,32 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "トレースの定義と冪等行列の像の次元",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "eigenvalues_of_V_001_definition_trace",
+        "eigenvalues_of_V_002_claim_trace_properties",
+        "eigenvalues_of_V_003_claim_trace_of_idempotent"
+      ],
+      "input": [
+        "複素数、行列の積の成分による定義、集合記号"
+      ],
+      "output": [
+        "対角成分の有限和によるトレースと四つの基本性質",
+        "冪等行列の像と核による直和分解、およびトレースと像の次元の一致"
+      ],
+      "mainTheorem": "冪等行列のトレースは像の次元に等しい",
+      "mainTheoremEntryId": "eigenvalues_of_V_003_claim_trace_of_idempotent",
+      "boundaryEvidence": "トレースを有限和で定義し、基本性質から相似変換での不変性を得て、像と核に適合する基底で冪等行列のトレースを計算する三項が閉じる。直後の複素共役はこの三項を使わず、実数対の第二成分の符号を変える定義へ入力が切り替わる。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度、内部依存・連続性・唯一の節末・後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で三項と複素共役の全本文・全直接入力を読んだ。トレースの定義は有限和で明確だが、基本性質の四主張の分割と線型性の計算、有限和の順序交換を正当化する帰納法の展開と積の可換性の分離、各行参照が未解決である。冪等行列は像・核の部分空間性、基底の存在と個数、直和で基底を結合できること、基底変換の可逆性と表現行列の式の前提が未提示である。零次元の像や核も含め、具体的複素行列の計算への接続、像と核の定義と主張の分割を要する。本文完成とは扱わず、前提補完と主張分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "正弦の近似と積分の対数評価",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2469,6 +2495,8 @@
       "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group",
       "TV1_hatZ_hatY_031_claim_V_psi_commutator",
       "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY",
+      "eigenvalues_of_V_002_claim_trace_properties",
+      "eigenvalues_of_V_003_claim_trace_of_idempotent",
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y",
@@ -7302,7 +7330,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -17167,7 +17195,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -17226,32 +17254,36 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 11,
+        "incomingReferenceCount": 12,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2808,
-        "inspectedContentSha256": "60f5d19acef69e141508635a57c36920bef3d1fdd9f2813bb30cb92ca808105a",
+        "inspectedCharacterCount": 3014,
+        "inspectedContentSha256": "78bd54e0678d6ade8a2e4af5af89866b4bcb64adffcf7ce89c4ca7924dd6f7c1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 四主張の分割、線型性の成分計算と有限和の順序交換を正当化する帰納法、和の交換と複素積の交換を同時適用する段の分離、各行参照が未解決である。"
       },
       "dependsOnLabels": [
+        "def_trace",
         "definition_of_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation"
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_001_definition_trace"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
@@ -17291,26 +17323,32 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4488,
-        "inspectedContentSha256": "a04cdda002bdc81c9a671a11bace00ac6c0d540b3b66a11d6a4ef772ba71c9f0",
+        "inspectedCharacterCount": 4778,
+        "inspectedContentSha256": "a0cc9fd61c2f5b938ee062e64883ae68a88f1d939636ed051b3acb0ec0102c1b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 像・核の部分空間性、基底の存在と個数、直和から基底を連結する根拠、基底変換行列の可逆性と表現行列の式が未提示である。零次元の像または核を含め、一般語彙を具体的複素行列の計算へ接続する前提不足であり、説明粒度だけの不足としない。直和分解とトレースの主張分割、各行参照と前提補完後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "def_trace",
         "definition_of_cc",
-        "set_and_algebra_notation"
+        "mat_mult",
+        "set_and_algebra_notation",
+        "trace_basic_properties"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation"
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_001_definition_trace",
+        "eigenvalues_of_V_002_claim_trace_properties"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",

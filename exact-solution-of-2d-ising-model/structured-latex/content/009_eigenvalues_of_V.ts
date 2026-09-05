@@ -101,6 +101,7 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
     title: { text: "トレースの基本性質" },
     labels: ["trace_basic_properties"],
     statement: [
+      paragraph(["トレースと行列の積は ", ref("def_trace"), "、", ref("mat_mult"), " のものとする。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",
@@ -197,6 +198,7 @@ V = (2\sinh 2K_2)^{M/2}\,V'`,
     title: { text: "冪等行列のトレースは像の次元" },
     labels: ["trace_of_idempotent"],
     statement: [
+      paragraph(["トレースとその相似変換不変性、行列の積は ", ref("def_trace"), "、", ref("trace_basic_properties"), "、", ref("mat_mult"), " を使う。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",

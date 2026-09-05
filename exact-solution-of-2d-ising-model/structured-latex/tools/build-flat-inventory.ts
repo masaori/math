@@ -486,7 +486,7 @@ const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, st
   ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "af6e085d614179050c2b2cfc62548b146f41083dbe158453221af092d9796239"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "de25a7cfd8a1fd81d0d86ca48b4d3a85550853b4857925dd6768c842c31cdeb0"],
-  ["eigenvalues_of_V_002_claim_trace_properties", "60f5d19acef69e141508635a57c36920bef3d1fdd9f2813bb30cb92ca808105a"],
+  ["eigenvalues_of_V_002_claim_trace_properties", "78bd54e0678d6ade8a2e4af5af89866b4bcb64adffcf7ce89c4ca7924dd6f7c1"],
   ["linear_space_general_000_definition_kronecker_product", "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "e644e2525aecd17cc1b8c439db76c6c4b94348dd1fe9c63405c5c8b6077f068d"],
@@ -610,7 +610,7 @@ const symmetrizedTransferMatrixExpectedExternalInputContentSha256 = new Map<stri
   ["bridge_007_claim_partition_function_in_pauli_form", "33cd6cefa483928ac5bb3e3c71983a82af17222c9030b9596522b8ef575e219a"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
-  ["eigenvalues_of_V_002_claim_trace_properties", "60f5d19acef69e141508635a57c36920bef3d1fdd9f2813bb30cb92ca808105a"],
+  ["eigenvalues_of_V_002_claim_trace_properties", "78bd54e0678d6ade8a2e4af5af89866b4bcb64adffcf7ce89c4ca7924dd6f7c1"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "de25a7cfd8a1fd81d0d86ca48b4d3a85550853b4857925dd6768c842c31cdeb0"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
 ]);
@@ -1184,7 +1184,7 @@ const vPlusDefinitionAndSignedTraceExpectedExternalInputContentSha256 = new Map<
   ["closing_definition_D0_open_chain_operator", "b8dfa77a5b2a5ba4e505e614623f3f6ae1dcf44c6e9838b3c4bbe2f130ad42a4"],
   ["closing_definition_G_boundary_operator", "4705a5620e827e2607b1331c0eb24030b96fc0fd668ce9a405fa55dbdd009d22"],
   ["eigenvalues_of_V_001_definition_trace", "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d"],
-  ["eigenvalues_of_V_002_claim_trace_properties", "60f5d19acef69e141508635a57c36920bef3d1fdd9f2813bb30cb92ca808105a"],
+  ["eigenvalues_of_V_002_claim_trace_properties", "78bd54e0678d6ade8a2e4af5af89866b4bcb64adffcf7ce89c4ca7924dd6f7c1"],
   ["evensectorT_definition_V1_plus_square_root", "33659011599514363340a770866a6757ab8b49d6b7259f1c8fc777da7aea773a"],
   ["exp_linear_map_000a_claim_real_exp_series_converges", "1065e4f465b1b0b49eae7d16f9d734421f472beec053c3effaff63127eecf077"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
@@ -1687,6 +1687,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["eigenvalues_of_V_002_claim_trace_properties", "LLMによる検証: 四主張の分割、線型性の成分計算と有限和の順序交換を正当化する帰納法、和の交換と複素積の交換を同時適用する段の分離、各行参照が未解決である。"],
+  ["eigenvalues_of_V_003_claim_trace_of_idempotent", "LLMによる検証: 像・核の部分空間性、基底の存在と個数、直和から基底を連結する根拠、基底変換行列の可逆性と表現行列の式が未提示である。零次元の像または核を含め、一般語彙を具体的複素行列の計算へ接続する前提不足であり、説明粒度だけの不足としない。直和分解とトレースの主張分割、各行参照と前提補完後に依存と閉包を再判定する。"],
   ["critical_009_claim_closed_form_log_integral", "LLMによる検証: 三つの積分・対数評価の分割、対数の定義と法則、平方根の積商法則、合成微分の分解と各行参照が未解決である。積分の基本定理等を一般形で切り出す必要があり、解析前提の補完後に分類・依存・配置を再判定する。"],
   ["critical_010_claim_sine_integral_two_sided", "LLMによる検証: 積分の定義可能性と両側評価の分割、c0の正値性とBの数値根拠、複数の不等式と演算の分解・各行参照が未解決である。p=0の分岐を維持し、正のpだけで分母を評価する。有界差を定数差と述べた表現は訂正した。積分の一般形の前提と入力の未完事項を補った後に分類・依存・配置を再判定する。"],
   ["critical_008_claim_elementary_sine_bounds", "LLMによる検証: 主張の半角は現行sin/cosの定義域内だが、証明のt≥0全域での使用は定義域を超える。微分公式・零での値・π²の数値区間の根拠と複数不等式の分割が未解決である。R3/R4の積分の性質をイジング導入注記から一般形へ切り出す必要があり、補完後に分類・依存・配置を再判定する。"],
@@ -8211,7 +8213,192 @@ if (findToolEntry("eigenvalues_of_V_001_definition_trace").dependencyPlacement!.
   !== sineIntegralSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("正弦の近似と積分の対数評価の直後の項目が変わりました");
 }
+const traceSectionEntryIds = [
+  "eigenvalues_of_V_001_definition_trace",
+  "eigenvalues_of_V_002_claim_trace_properties",
+  "eigenvalues_of_V_003_claim_trace_of_idempotent"
+];
+const traceSection = validateReviewedSection(
+  "トレースの定義と冪等行列の像の次元", "数学的道具立て", traceSectionEntryIds,
+  new Map([
+  [
+    "eigenvalues_of_V_001_definition_trace",
+    []
+  ],
+  [
+    "eigenvalues_of_V_002_claim_trace_properties",
+    [
+      "eigenvalues_of_V_001_definition_trace"
+    ]
+  ],
+  [
+    "eigenvalues_of_V_003_claim_trace_of_idempotent",
+    [
+      "eigenvalues_of_V_001_definition_trace",
+      "eigenvalues_of_V_002_claim_trace_properties"
+    ]
+  ]
+]),
+  new Map([
+  [
+    "eigenvalues_of_V_001_definition_trace",
+    "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d"
+  ],
+  [
+    "eigenvalues_of_V_002_claim_trace_properties",
+    "78bd54e0678d6ade8a2e4af5af89866b4bcb64adffcf7ce89c4ca7924dd6f7c1"
+  ],
+  [
+    "eigenvalues_of_V_003_claim_trace_of_idempotent",
+    "a0cc9fd61c2f5b938ee062e64883ae68a88f1d939636ed051b3acb0ec0102c1b"
+  ]
+]),
+  [
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_003_matrix_decomposition",
+    "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "eigenvalues_of_V_003_claim_trace_of_idempotent"
+],
+);
+const traceSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_010_definition_real_imag_parts_of_cc",
+    "kind": "definition",
+    "sha256": "6e080bfb6c5694b115f4761c5d2db993b1d5c315a4e36f7389774cfd711a07bd",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "eigenvalues_of_V_001_definition_trace",
+    "kind": "definition",
+    "sha256": "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "eigenvalues_of_V_002_claim_trace_properties",
+    "kind": "claim",
+    "sha256": "78bd54e0678d6ade8a2e4af5af89866b4bcb64adffcf7ce89c4ca7924dd6f7c1",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "eigenvalues_of_V_001_definition_trace"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "eigenvalues_of_V_003_claim_trace_of_idempotent",
+    "kind": "claim",
+    "sha256": "a0cc9fd61c2f5b938ee062e64883ae68a88f1d939636ed051b3acb0ec0102c1b",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "eigenvalues_of_V_001_definition_trace",
+      "eigenvalues_of_V_002_claim_trace_properties"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_definition_complex_conjugate_and_real_part",
+    "kind": "definition",
+    "sha256": "69fd82e2a5857d7844277a0dffbd61a33f0c61050aea4abeb87340c5e1fae879",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_010_definition_real_imag_parts_of_cc"
+    ],
+    "granularity": "自動検査で主題に適合"
+  }
+];
+for (const expected of traceSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`トレースの定義と冪等行列の像の次元の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("exp_conjugation_definition_complex_conjugate_and_real_part").dependencyPlacement!.chapterOrder
+  !== traceSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("トレースの定義と冪等行列の像の次元の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "トレースの定義と冪等行列の像の次元",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "eigenvalues_of_V_001_definition_trace",
+    "eigenvalues_of_V_002_claim_trace_properties",
+    "eigenvalues_of_V_003_claim_trace_of_idempotent"
+  ],
+  "input": [
+    "複素数、行列の積の成分による定義、集合記号"
+  ],
+  "output": [
+    "対角成分の有限和によるトレースと四つの基本性質",
+    "冪等行列の像と核による直和分解、およびトレースと像の次元の一致"
+  ],
+  "mainTheorem": "冪等行列のトレースは像の次元に等しい",
+  "mainTheoremEntryId": "eigenvalues_of_V_003_claim_trace_of_idempotent",
+  "boundaryEvidence": "トレースを有限和で定義し、基本性質から相似変換での不変性を得て、像と核に適合する基底で冪等行列のトレースを計算する三項が閉じる。直後の複素共役はこの三項を使わず、実数対の第二成分の符号を変える定義へ入力が切り替わる。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度、内部依存・連続性・唯一の節末・後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で三項と複素共役の全本文・全直接入力を読んだ。トレースの定義は有限和で明確だが、基本性質の四主張の分割と線型性の計算、有限和の順序交換を正当化する帰納法の展開と積の可換性の分離、各行参照が未解決である。冪等行列は像・核の部分空間性、基底の存在と個数、直和で基底を結合できること、基底変換の可逆性と表現行列の式の前提が未提示である。零次元の像や核も含め、具体的複素行列の計算への接続、像と核の定義と主張の分割を要する。本文完成とは扱わず、前提補完と主張分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "正弦の近似と積分の対数評価",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
