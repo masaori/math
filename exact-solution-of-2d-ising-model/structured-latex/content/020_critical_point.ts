@@ -150,6 +150,7 @@ export default defineBlocks([
     title: { tex: String.raw`\cosh,\sinh \text{ の加法定理・半角公式と } \mathrm{arcsinh}` },
     labels: ["cosh_addition_and_half_angle"],
     statement: [
+      paragraph(["非負実数の平方根は ", ref("definition_of_sqrt_r_positive"), " を使う。"]),
       paragraph([
         ref("cosh_sinh_basic_properties"),
         " の ",

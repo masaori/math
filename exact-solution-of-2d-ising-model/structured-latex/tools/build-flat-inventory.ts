@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["critical_001_claim_cosh_addition_and_half_angle", "LLMによる検証: 五群の主張とarcsinhの定義を同居させ、指数対数の前提、微分規則と各行参照、同様計算の省略が残る。R3/R4の積分の性質はイジング固有の導入注記に混在しており、一般形の解析事実として切り出す必要がある。注記全体を直接入力へ加えず、補完後に分類・依存・配置を再判定する。"],
   ["calculation_formulae_047_claim_commutator_via_anticommutators", "LLMによる検証: 交換子と反交換子の二定義と恒等式を同居させている。結合律・分配則の根拠参照、同時の括弧外しと二箇所への定義代入、零の挿入の演算分解が未解決である。定義と主張を分割した後に依存と閉包を再判定する。"],
   ["calculation_formulae_046_claim_conjugation_is_ring_homomorphism", "LLMによる検証: 乗法性・単位性・合成則と積の逆元公式を一項へ束ねている。加法保存は先行の行列共役にあるが、環準同型という題への接続説明は本項にない。行列の結合律・単位元・逆元一意性の根拠と各適用行の参照が未解決であり、分割後に配置を再判定する。"],
   ["calculation_formulae_044_claim_reciprocal_of_sqrt", "LLMによる検証: 未完の平方根定義と逆数平方根の証明への依存が残る。参照先の準備から非零性を取り出す説明、各行参照と二重負号の根拠が未解決である。"],
@@ -7783,7 +7784,136 @@ if (findToolEntry("calculation_formulae_047_claim_commutator_via_anticommutators
   !== matrixConjugationSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("行列共役による積と単位元の保存と合成の直後の項目が変わりました");
 }
+const commutatorIdentitySectionEntryIds = [
+  "calculation_formulae_047_claim_commutator_via_anticommutators"
+];
+const commutatorIdentitySection = validateReviewedSection(
+  "交換子を反交換子で表す行列恒等式", "数学的道具立て", commutatorIdentitySectionEntryIds,
+  new Map([
+  [
+    "calculation_formulae_047_claim_commutator_via_anticommutators",
+    []
+  ]
+]),
+  new Map([
+  [
+    "calculation_formulae_047_claim_commutator_via_anticommutators",
+    "25d2f2a1ad5ab6bcbe05427a4ce4f06a4250ea5f7f3f79b5d7170303b8d4ebeb"
+  ]
+]),
+  [
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "calculation_formulae_047_claim_commutator_via_anticommutators"
+],
+);
+const commutatorIdentitySectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+    "kind": "claim",
+    "sha256": "8eb7e83461c7dd3069ae859b9aa527374c7898d1e6f4609218e4f7caac34c68f",
+    "dependencies": [
+      "calc_formulae_definition_cosh_sinh",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_047_claim_commutator_via_anticommutators",
+    "kind": "claim",
+    "sha256": "25d2f2a1ad5ab6bcbe05427a4ce4f06a4250ea5f7f3f79b5d7170303b8d4ebeb",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "critical_001_claim_cosh_addition_and_half_angle",
+    "kind": "claim",
+    "sha256": "1cb6576cf9e8ced25389d06eaff8f79b31a55154aab293a5fa1b58526482dd08",
+    "dependencies": [
+      "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of commutatorIdentitySectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`交換子を反交換子で表す行列恒等式の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("critical_001_claim_cosh_addition_and_half_angle").dependencyPlacement!.chapterOrder
+  !== commutatorIdentitySection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("交換子を反交換子で表す行列恒等式の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "交換子を反交換子で表す行列恒等式",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "calculation_formulae_047_claim_commutator_via_anticommutators"
+  ],
+  "input": [
+    "複素数と集合記号、複素行列の演算"
+  ],
+  "output": [
+    "三行列の積の交換子を二つの反交換子で表す恒等式"
+  ],
+  "mainTheorem": "交換子と反交換子の関係",
+  "mainTheoremEntryId": "calculation_formulae_047_claim_commutator_via_anticommutators",
+  "boundaryEvidence": "三行列の積の交換子を展開し、零を挿入して左右から括り、二つの反交換子へ閉じる現存一項を節とする。直後の双曲線関数と逆双曲線正弦はこの恒等式を使わず、実指数・非負平方根・対数・微積分を入力として実関数の性質を導く別枝である。有限行列の多項式の展開から実関数の性質へ入力が切り替わる。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度および後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で交換子恒等式と双曲線関数の五群の全本文・全直接入力を読んだ。交換子側は二定義と恒等式の分割、結合律・分配則の参照、同時代入と零の挿入の演算分解が未解決である。比較側は加法定理・半角公式・単調性・arcsinhの定義と導関数・積分評価が同居し、指数対数・微分規則の前提と各行参照、同様計算の省略が残る。R3/R4という積分の性質はイジング固有の導入注記へ混在しているため、一般形での切り出しが未解決である。その注記全体を道具章の直接入力にせず、解析事実の補完後に分類・依存・配置を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "行列共役による積と単位元の保存と合成",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

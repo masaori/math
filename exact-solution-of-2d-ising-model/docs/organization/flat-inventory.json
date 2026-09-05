@@ -218,6 +218,28 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "交換子を反交換子で表す行列恒等式",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_047_claim_commutator_via_anticommutators"
+      ],
+      "input": [
+        "複素数と集合記号、複素行列の演算"
+      ],
+      "output": [
+        "三行列の積の交換子を二つの反交換子で表す恒等式"
+      ],
+      "mainTheorem": "交換子と反交換子の関係",
+      "mainTheoremEntryId": "calculation_formulae_047_claim_commutator_via_anticommutators",
+      "boundaryEvidence": "三行列の積の交換子を展開し、零を挿入して左右から括り、二つの反交換子へ閉じる現存一項を節とする。直後の双曲線関数と逆双曲線正弦はこの恒等式を使わず、実指数・非負平方根・対数・微積分を入力として実関数の性質を導く別枝である。有限行列の多項式の展開から実関数の性質へ入力が切り替わる。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度および後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で交換子恒等式と双曲線関数の五群の全本文・全直接入力を読んだ。交換子側は二定義と恒等式の分割、結合律・分配則の参照、同時代入と零の挿入の演算分解が未解決である。比較側は加法定理・半角公式・単調性・arcsinhの定義と導関数・積分評価が同居し、指数対数・微分規則の前提と各行参照、同様計算の省略が残る。R3/R4という積分の性質はイジング固有の導入注記へ混在しているため、一般形での切り出しが未解決である。その注記全体を道具章の直接入力にせず、解析事実の補完後に分類・依存・配置を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "行列共役による積と単位元の保存と合成",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2393,7 +2415,8 @@
       "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY",
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
       "evensectorT_003_claim_coefficient_conversion",
-      "evenfermi_007_claim_T_eq_on_check_Z_Y"
+      "evenfermi_007_claim_T_eq_on_check_Z_Y",
+      "critical_001_claim_cosh_addition_and_half_angle"
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
@@ -7102,7 +7125,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 19,
+        "incomingReferenceCount": 20,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -26602,25 +26625,27 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7892,
-        "inspectedContentSha256": "cae9dc42164d120724bd9d8b853b46f7e91befef7a7fac74626edaf25ba165cb",
+        "inspectedCharacterCount": 8051,
+        "inspectedContentSha256": "1cb6576cf9e8ced25389d06eaff8f79b31a55154aab293a5fa1b58526482dd08",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 五群の主張とarcsinhの定義を同居させ、指数対数の前提、微分規則と各行参照、同様計算の省略が残る。R3/R4の積分の性質はイジング固有の導入注記に混在しており、一般形の解析事実として切り出す必要がある。注記全体を直接入力へ加えず、補完後に分類・依存・配置を再判定する。"
       },
       "dependsOnLabels": [
         "cosh_sinh_basic_properties",
+        "definition_of_sqrt_r_positive",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calc_formulae_001_sqrt_nonnegative_real",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
