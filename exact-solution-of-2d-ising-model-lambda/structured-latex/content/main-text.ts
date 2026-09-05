@@ -28118,9 +28118,9 @@ S_{n,m}
                           "背理法で示す。結論を否定し、すべての ", math(String.raw`w\in\mu_{n}`),
                           " が ", math(String.raw`w^{m}=1`),
                           " を満たすと仮定する。", math(String.raw`w\in\mu_{n}`),
-                          " を任意に取る。", math(String.raw`w^{n}=1`), " である（",
-                          ref("def_root_of_unity_set"), "）。このとき、",
+                          " を任意に取る。",
                         ]),
+                        displayMath(String.raw`w^{n}=1\quad(\because\ \blkref{def_root_of_unity_set})`),
                         displayMath(String.raw`\begin{aligned}
 w^{r}
 &=1\cdot w^{r}
