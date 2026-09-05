@@ -167,5 +167,17 @@
     "経過秒": 1760,
     "処理上限秒": 2400,
     "注記": "この時刻は成果編集・検査を終えてcommitとremote包含へ移る時点。git包含完了時刻は実行ログで別途観測する。"
+  },
+  "監督成果の初回包含確認": {
+    "観測時刻": "2026-09-05T22:21:29+09:00",
+    "開始からの実測経過秒": 1814,
+    "成果コミット": "25dfbb0de",
+    "確認したremote default": "origin/main",
+    "包含先": "6f398faf6ba946abdf00f0bcc98f2b01aaedb95f",
+    "検証": "プログラミングによる検証",
+    "コマンド": "node scripts/research-supervision/verify.ts --completed 12787fdeb7a2fa9b5e1bdb113371b8c147e3c9f2 c5e9141c-6646-4120-a3f2-420647c8c345 origin/main",
+    "終了コード": 0,
+    "stdout": "プログラミングによる検証: 今回の六研究評価・履歴保存・remote default包含を確認",
+    "意味": "fetch後、今回の一行追記・以前の履歴保存・remote同一内容・HEAD包含・作業ツリーの未コミットなしを確認した時刻。この確認記録自体のcommitは後続する。"
   }
 }
