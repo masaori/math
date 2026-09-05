@@ -218,6 +218,40 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "商の偏角と角度の差の切断",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_033_claim_arg_of_quotient"
+      ],
+      "input": [
+        "複素数と極座標の乗法逆元、極座標の積",
+        "複素数から極座標への写像と未完の同型性",
+        "絶対値・偏角・非零性と射影、角度切断と存在一意性、集合記号"
+      ],
+      "output": [
+        "非零複素数の商の偏角を、偏角の差から必要に応じて2πを足す場合分けで表す公式"
+      ],
+      "mainTheorem": "非零複素数の商の偏角の二場合の公式（未完の同型性に依存）",
+      "mainTheoremEntryId": "calculation_formulae_033_claim_arg_of_quotient",
+      "boundaryEvidence": "逆元保存で商の角度を差へ直し、代表区間への二場合の切断まで一項で閉じる。直後の積の偏角がπである条件の項は商の公式を使わず、先行する積の偏角公式へ入力を切り替え、その二場合へπを代入する別枝である。両側の乗法逆元は商の節の入力であり、後続のπ条件の直接入力には含まれない。プログラミングによる検証では対象と後続比較の全直接入力の本文・全直接依存・種別・粒度、一意な節末と後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で商とπ条件の本文および全入力を読んだ。商は逆元を扱い、π条件は積の公式を再利用することが境界の根拠である。商は未完の同型性を使い、π条件も積の公式を介して同じ未完入力に依存するので、いずれも本文完成とは扱わない。抽象的な逆写像の積・単位元保存を具体計算へ展開すること、逆元保存の各行参照、複数演算の分解が未解決である。本文分割・未完入力の補完後には依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+        "calc_formulae_017_definition_section_of_angle_representation",
+        "calculation_formulae_022_definition_operations_on_polar_representation",
+        "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+        "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+        "calculation_formulae_030_definition_first_and_second_projections",
+        "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_031b_claim_abs_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "積の偏角と角度の和の切断",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2055,6 +2089,7 @@
       "calculation_formulae_031b_claim_abs_basic_properties",
       "calculation_formulae_032_claim_arg_of_product",
       "calculation_formulae_033_claim_arg_of_quotient",
+      "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi",
       "calculation_formulae_036_claim_arg_of_reciprocal",
       "calculation_formulae_043_claim_sqrt_of_reciprocal",
       "calculation_formulae_044_claim_reciprocal_of_sqrt",
@@ -9147,7 +9182,7 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 5228,
@@ -9158,7 +9193,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 未完の同型性に依存する積の偏角公式を入力に使うため、本文完成とは扱わない。場合分けの固定整数の説明は明示されているが、複数の実数演算の同時適用と各行のラベル不足は未解決である。"
       },
       "dependsOnLabels": [
         "abs_basic_properties",
