@@ -1,0 +1,171 @@
+{
+  "実行識別子": "c5e9141c-6646-4120-a3f2-420647c8c345",
+  "観測時刻": "2026-09-05T22:05:21+09:00",
+  "起動登録の実測": {
+    "観測時刻": "2026-09-05T22:05:21+09:00",
+    "コマンド": [
+      "launchctl",
+      "list"
+    ],
+    "終了コード": 0,
+    "stdout": "71992\t0\tcom.masaori.hyperbolic-ising-auto-loop",
+    "stderr": "",
+    "対象label": "com.masaori.hyperbolic-ising-auto-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "観測時刻": "2026-09-05T22:05:21+09:00",
+    "コマンド": [
+      "launchctl",
+      "print",
+      "gui/501/com.masaori.hyperbolic-ising-auto-loop"
+    ],
+    "終了コード": 0,
+    "stdout": "gui/501/com.masaori.hyperbolic-ising-auto-loop = {\n\tactive count = 1\n\tpath = /Users/masaori/Library/LaunchAgents/com.masaori.hyperbolic-ising-auto-loop.plist\n\ttype = LaunchAgent\n\tstate = running\n\n\tprogram = /bin/bash\n\targuments = {\n\t\t/bin/bash\n\t\t-c\n\t\taccount_env=\"$(\"/Users/masaori/git/masaori/local-pc-management/agent-sessions/session-account.py\" env tick --agent codex)\" && eval \"$account_env\" && unset account_env && exec /bin/bash /Users/masaori/.local/bin/hyperbolic-ising-loop-launcher.sh\n\t}\n\n\tstdout path = /Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/launchd.log\n\tstderr path = /Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/launchd-error.log\n\tinherited environment = {\n\t\tSSH_AUTH_SOCK => /var/run/com.apple.launchd.CFV695oPOM/Listeners\n\t}\n\n\tdefault environment = {\n\t\tPATH => /usr/bin:/bin:/usr/sbin:/sbin\n\t}\n\n\tenvironment = {\n\t\tOSLogRateLimit => 64\n\t\tXPC_SERVICE_NAME => com.masaori.hyperbolic-ising-auto-loop\n\t}\n\n\tdomain = gui/501 [100023]\n\tasid = 100023\n\tminimum runtime = 10\n\texit timeout = 5\n\truns = 1\n\tpid = 71992\n\timmediate reason = non-ipc demand\n\tforks = 20\n\texecs = 3\n\tinitialized = 1\n\ttrampolined = 1\n\tstarted suspended = 0\n\tproxy started suspended = 0\n\tchecked allocations = 0 (queried = 1)\n\tchecked allocations reason = no host\n\tchecked allocations flags = 0x0\n\tlast exit code = (never exited)\n\n\tevent triggers = {\n\t\tcom.masaori.hyperbolic-ising-auto-loop.268435749 => {\n\t\t\tkeepalive = 0\n\t\t\tservice = com.masaori.hyperbolic-ising-auto-loop\n\t\t\tstream = com.apple.launchd.calendarinterval\n\t\t\tmonitor = com.apple.UserEventAgent-Aqua\n\t\t\tdescriptor = {\n\t\t\t\t\"Minute\" => 20\n\t\t\t}\n\t\t}\n\t}\n\n\tevent channels = {\n\t\t\"com.apple.launchd.calendarinterval\" = {\n\t\t\tport = 0x10da8f\n\t\t\tactive = 0\n\t\t\tmanaged = 1\n\t\t\treset = 0\n\t\t\thide = 0\n\t\t\twatching = 0\n\t\t}\n\t}\n\n\tresource coalition = {\n\t\tID = 60543\n\t\ttype = resource\n\t\tstate = active\n\t\tactive count = 1\n\t\tname = com.masaori.hyperbolic-ising-auto-loop\n\t}\n\n\tjetsam coalition = {\n\t\tID = 60544\n\t\ttype = jetsam\n\t\tstate = active\n\t\tactive count = 1\n\t\tname = com.masaori.hyperbolic-ising-auto-loop\n\t}\n\n\tspawn type = daemon (3)\n\tjetsam priority = 40\n\tjetsam memory limit (active) = (unlimited)\n\tjetsam memory limit (inactive) = (unlimited)\n\tjetsamproperties category = daemon\n\tjetsam thread limit = 32\n\tcpumon = default\n\n\tproperties = inferred program\n}\n",
+    "stderr": ""
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.hyperbolic-ising-auto-loop.plist",
+    "観測時刻": "2026-09-05T22:05:21+09:00",
+    "存在": true,
+    "sha256": "073b2ba45e068d1997a5a0bbf928620739cfd557176ec088881832b80cd22bf8",
+    "設定": {
+      "Label": "com.masaori.hyperbolic-ising-auto-loop",
+      "ProgramArguments": [
+        "/bin/bash",
+        "-c",
+        "account_env=\"$(\"/Users/masaori/git/masaori/local-pc-management/agent-sessions/session-account.py\" env tick --agent codex)\" && eval \"$account_env\" && unset account_env && exec /bin/bash /Users/masaori/.local/bin/hyperbolic-ising-loop-launcher.sh"
+      ],
+      "EnvironmentVariables": {},
+      "StartCalendarInterval": {
+        "Minute": 20
+      },
+      "RunAtLoad": false,
+      "KeepAlive": false,
+      "StandardOutPath": "/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/launchd.log",
+      "StandardErrorPath": "/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/launchd-error.log"
+    }
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/launchd.log",
+      "観測時刻": "2026-09-05T22:05:21+09:00",
+      "存在": true,
+      "読取バイト範囲": [
+        0,
+        13988
+      ],
+      "読取sha256": "9f216b10acbd8f698df4a561494218fb56379266e466b94576279c3793c71243",
+      "更新時刻": "2026-09-05T22:04:45+09:00",
+      "抽出行": [
+        "2026-08-29 16:20:11 === tick 開始",
+        "2026-08-29 16:30:52 === tick 正常終了",
+        "2026-08-31 01:10:26 === tick 開始",
+        "2026-08-31 01:15:03 === tick 正常終了",
+        "2026-08-31 01:20:06 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 02:20:05 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 03:20:05 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 04:20:07 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 05:20:03 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 06:20:08 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 07:20:09 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-09-05 22:04:45 === tick 開始"
+      ],
+      "末尾行": [
+        "2026-08-31 02:20:05 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 03:20:05 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 04:20:07 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 05:20:03 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 06:20:08 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-08-31 07:20:09 SKIP: 上位研究ゴールが未設定のため新規証明 tick は停止中",
+        "2026-09-05 22:04:45 === tick 開始",
+        "2026-09-05 22:04:45 モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=/Users/masaori/.codex-coding-agent-0003"
+      ]
+    },
+    {
+      "path": "/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/launchd-error.log",
+      "観測時刻": "2026-09-05T22:05:21+09:00",
+      "存在": true,
+      "読取バイト範囲": [
+        0,
+        2057
+      ],
+      "読取sha256": "0ef42d0fc11a643c9cc3765f7fca4823d8a7bf1e706e9a6108864365bd53837b",
+      "更新時刻": "2026-08-28T22:20:04+09:00",
+      "抽出行": [],
+      "末尾行": [
+        "",
+        "Please make sure you have the correct access rights",
+        "and the repository exists.",
+        "ssh: connect to host github.com port 22: Undefined error: 0",
+        "fatal: Could not read from remote repository.",
+        "",
+        "Please make sure you have the correct access rights",
+        "and the repository exists."
+      ]
+    }
+  ],
+  "読取方法": "Pythonによる実ファイル末尾最大200000バイトの読取。抽出行は日付で始まる運用ログを抽出。文書内の過去引用を今回の終了値と解釈しない。",
+  "成果比較": {
+    "開始成果": "12787fdeb7a2fa9b5e1bdb113371b8c147e3c9f2",
+    "読解対象の終点": "21d7f00099c418ebf5742e65686e29f9e7b3b69f",
+    "前回記録の実行識別子": "initial-all-research-20260905T211047",
+    "前回記録の成果": [
+      "4ad432b1ea5221a58e73f50db1a2bae7ef23e23f"
+    ],
+    "区別": "開始成果以降のremote追加も取り込んだ。前回監督が読んだ成果との比較と今回の作業開始との差分を区別する。"
+  },
+  "実行の終了値の解釈": "22:05:21のlistで登録あり、print終了0、last exitはnever exited。実ログ22:04:45の開始を観測し、その実行の終了値は未確認。8月31日の上位ゴール未設定SKIPは過去の記録であり今回の成否ではない。",
+  "検査結果": [
+    {
+      "コマンド": "structured-latex/node_modules/.bin/tsc -p scripts/research-supervision/tsconfig.json",
+      "開始観測": "2026-09-05 13:10:38 UTC",
+      "終了コード": 0,
+      "stdout": ""
+    },
+    {
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "開始観測": "2026-09-05 13:10:38 UTC",
+      "終了コード": 0,
+      "stdout": "プログラミングによる検証: 六研究の評価記録を受理（内容の意味はLLMによる検証の対象）\n"
+    },
+    {
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "開始観測": "2026-09-05 13:10:38 UTC",
+      "終了コード": 0,
+      "stdout": "監督の記録の規則の回帰検査は全て成功した（24 件）\n"
+    },
+    {
+      "コマンド": "node scripts/research-supervision/verify-test.ts",
+      "開始観測": "2026-09-05 13:10:38 UTC",
+      "終了コード": 0,
+      "stdout": "プログラミングによる検証: 六研究の対象・欠落・権限分離・今回追記・外部パスの拒否が成功\n"
+    },
+    {
+      "コマンド": "python3 scripts/test-research-tick-models.py",
+      "開始観測": "2026-09-05 13:10:38 UTC",
+      "終了コード": 0,
+      "stdout": "...\n----------------------------------------------------------------------\nRan 3 tests in 8.569s\n\nOK\n"
+    },
+    {
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
+      "開始観測": "2026-09-05 13:10:38 UTC",
+      "終了コード": 0,
+      "stdout": "== 契約と実装が揃っていることを検査する ==\n  OK: 監督の契約の正本がある\n  OK: 契約が四つの判定・件数を進捗としないこと・ゴールを縮めないことを全て持っている\n  OK: 監督 tick の本体がある\n  OK: 監督 tick が研究 tick とは別の専用 worktree を使う\n  OK: 監督 tick に別モデルへのフォールバック経路が無い\n== 監督の記録が契約を満たしていることを検査する ==\nプログラミングによる検証: セルオートマトンの監督記録を受理\n  OK: 記録が契約を満たしている\n== 記録の規則の回帰検査 ==\n監督の記録の規則の回帰検査は全て成功した（24 件）\n  OK: 規則の回帰検査が通った\n研究監督 tick の検査は全て成功した\n"
+    },
+    {
+      "コマンド": "bash scripts/test-compose-tick-report.sh",
+      "開始観測": "2026-09-05 13:10:38 UTC",
+      "終了コード": 0,
+      "stdout": "PASS: 全通知プロジェクトの四項目・追従・fail-closed・成果物 URL\n"
+    }
+  ],
+  "検査の意味": "プログラミングによる検証は記録の受理・権限分離・起動契約・報告組立て。本文の意味と段取りの妥当性はLLMによる検証であり、この終了0からは導かない。",
+  "所要時間": {
+    "開始観測": "2026-09-05T12:51:15Z",
+    "完了工程へ移る観測": "2026-09-05T22:20:35+09:00",
+    "経過秒": 1760,
+    "処理上限秒": 2400,
+    "注記": "この時刻は成果編集・検査を終えてcommitとremote包含へ移る時点。git包含完了時刻は実行ログで別途観測する。"
+  }
+}
