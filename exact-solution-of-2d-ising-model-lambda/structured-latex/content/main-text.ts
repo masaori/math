@@ -27203,16 +27203,14 @@ F_{m+1}
 &&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の可換則})
 \end{aligned}`),
                         paragraph([
-                          "を得る。", ref("claim_qbar_poly_linear_factor_coeff_bound"), " を ",
-                          math(String.raw`C=F_m`), "、係数の上界 ", math(String.raw`m`), "、根 ",
-                          math(String.raw`w(m)`), " へ当てると、任意の ", math(String.raw`k>m+1`), " について",
+                          "を得る。任意の ", math(String.raw`k>m+1`), " について、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_k(F_{m+1})
 &=\mathrm{ac}_k\bigl((t-\widehat{w(m)})F_m\bigr)
 &&(\because\ \text{上で得た有限積の等式})\\
 &=0
-&&(\because\ \blkref{claim_qbar_poly_linear_factor_coeff_bound}\ \text{と帰納法の仮定})
+&&(\because\ \blkref{claim_qbar_poly_linear_factor_coeff_bound}\ \text{を多項式}\ F_m,\ \text{上界}\ m,\ \text{根}\ w(m)\ \text{へ適用。上界は帰納法の仮定})
 \end{aligned}`),
                         paragraph([
                           "を得る。これで帰納法が閉じた。この議論に実数体も複素数体も現れない。",
@@ -71771,8 +71769,8 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       "現在地: 単純閉路を ", math(String.raw`\partial D`),
                       " の頂点で切った弧の完全な署名列を使えば頂点項が弧型ごとの値の和へ分解できることまで有限検査で確定し、",
                       "内部頂点では向き・切断旗・二重辺への所属を残せばよいことと、語長三の値を定数項・一次項なしの二次式で書けることまで、",
-                      "一辺二・三の有限データで確定した。切断旗を含まない単一辺所属同士の二次項を全て除くと非可解になる。",
-                      "いまは、その種類の項だけを切断旗を含む項へ加えて足りるかを切り分けている。",
+                      "一辺二・三の有限データで確定した。切断旗を含む積へ単一辺所属同士の積だけを加えれば足り、非切断項の他の五種類は同時に除ける。",
+                      "いまは単一辺所属同士の積を同じ頂点に属するものだけへ制限できるかを切り分けている。",
                       "完了条件: 一般の辺長について、四つのねじれのそれぞれで置換側と偶部分グラフ側が一致することを、",
                       math(String.raw`\mathbb{F}_2`),
                       " 上の一つの恒等式として証明すること。扱う量は有限集合の数え上げと ",
