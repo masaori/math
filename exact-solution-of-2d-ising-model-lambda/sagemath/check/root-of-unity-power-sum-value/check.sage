@@ -12,8 +12,13 @@ def roots_of_unity(n):
 
 def check_power_sum_value(nmax, mmax):
     count = 0
+    polynomials = PolynomialRing(QQbar, "x")
+    x = polynomials.gen()
     for n in range(1, nmax + 1):
         mu = roots_of_unity(n)
+        assert len(set(mu)) == n
+        assert all(w ** n == 1 for w in mu)
+        assert set(mu) == set((x ** n - 1).roots(multiplicities=False))
         for m in range(mmax + 1):
             power_sum = sum((w ** m for w in mu), QQbar(0))
             if m % n == 0:
