@@ -1830,11 +1830,12 @@ V' y
     title: { tex: String.raw`\|A^*\| = \|A\| \text{ と極限の共役転置}` },
     labels: ["star_preserves_norm_and_limits"],
     statement: [
+      paragraph(["共役転置は ", ref("def_hermitian_positive_definite"), "、複素共役は ", ref("def_complex_conjugate"), "、行列積は ", ref("mat_mult"), "、複素数の積の可換性は ", ref("complex_numbers_form_a_field"), " を用いる。共役の和・積保存は ", ref("frobenius_inner_product_axioms"), " の証明冒頭の成分計算による。絶対値の成分表示は ", ref("abs_basic_properties"), " による。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",
         math(String.raw`A, B \in \mathrm{Mat}(n,\mathbb{C})`),
-        " について、",
+        "、", math(String.raw`\alpha,\beta\in\mathbb C`), " および ", math(String.raw`(A_N)_{N\in\mathbb Z_{\ge0}}`), " を同じ行列空間の列とする。このとき、",
       ]),
       list([
         [math(String.raw`\text{(1)}\quad (AB)^* = B^* A^*, \qquad (\alpha A + \beta B)^* = \overline{\alpha}A^* + \overline{\beta}B^*`)],
@@ -1863,9 +1864,9 @@ V' y
 &= \overline{\textstyle\sum_j A_{lj}B_{jk}}
    \quad (\because \text{行列積の定義}) \\
 &= \textstyle\sum_j \overline{A_{lj}B_{jk}}
-   \quad (\because \text{複素共役は和を保つ、}\blkref{conjugation_is_ring_homomorphism}) \\
+   \quad (\because \text{複素共役は和を保つ、}\blkref{frobenius_inner_product_axioms}\text{ の証明冒頭}) \\
 &= \textstyle\sum_j \overline{A_{lj}}\,\overline{B_{jk}}
-   \quad (\because \text{複素共役は積を保つ、}\blkref{conjugation_is_ring_homomorphism}) \\
+   \quad (\because \text{複素共役は積を保つ、}\blkref{frobenius_inner_product_axioms}\text{ の証明冒頭}) \\
 &= \textstyle\sum_j \overline{B_{jk}}\,\overline{A_{lj}}
    \quad (\because \mathbb{C}\text{ の積の可換性}) \\
 &= \textstyle\sum_j (B^*)_{kj}(A^*)_{jl}
@@ -1890,7 +1891,7 @@ V' y
 &= \sqrt{\textstyle\sum_{k,l}|\overline{A_{lk}}|^2}
    \quad (\because \text{共役転置の定義}) \\
 &= \sqrt{\textstyle\sum_{k,l}|A_{lk}|^2}
-   \quad (\because \text{複素共役は絶対値を保つ、}\blkref{abs_basic_properties}) \\
+   \quad (\because \text{共役の成分定義と絶対値の成分表示より（この代入の展開は未記載）、}\blkref{def_complex_conjugate},\blkref{abs_basic_properties}) \\
 &= \sqrt{\textstyle\sum_{k,l}|A_{kl}|^2}
    \quad (\because (k,l)\mapsto(l,k)\text{ は添字集合の全単射}) \\
 &= \|A\|

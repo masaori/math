@@ -196,9 +196,9 @@
         "eigenvalues_of_V_002_claim_trace_properties",
         "eigenvalues_of_V_003_claim_trace_of_idempotent",
         "eigenvalues_of_V_011_definition_hermitian_positive_definite",
-        "eigenvalues_of_V_012_claim_star_is_norm_preserving",
         "exp_conjugation_proof_003_definition_M_n_C_convergence",
         "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
+        "eigenvalues_of_V_012_claim_star_is_norm_preserving",
         "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
         "maxeig_005_claim_psd_cauchy_schwarz"
       ]
@@ -217,6 +217,34 @@
     }
   ],
   "mathematicalToolSectionBoundaries": [
+    {
+      "name": "成分の平方和によるノルムと収束の定義",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_002b_definition_matrix_norm"
+      ],
+      "input": [
+        "複素数の絶対値とその成分表示・実数の包含",
+        "非負実数の平方根と集合記号、実数列の収束の前提"
+      ],
+      "output": [
+        "数ベクトルと行列の成分の平方和から定めるノルム",
+        "差のノルムで定める列の収束と極限・無限級数の記法"
+      ],
+      "mainTheorem": null,
+      "mainTheoremEntryId": null,
+      "boundaryEvidence": "有限個の成分の絶対値と平方根によって大きさを定め、実数列の収束へ接続する現存一項を定義の節として閉じる。共役転置の性質は複素共役の和・積保存の誤参照を既存の内積の性質の証明へ訂正した結果、その証明より後へ移る。直後となるFrobenius内積定義は既出のノルムを共有するが、共役転置・行列積・トレースを追加して複素数値の二変数関数を定めるため入力が切り替わる。プログラミングによる検証で対象・直後と全直接入力を固定し、移動する共役転置とその全直接入力は節自身の入力へ混ぜず比較専用に固定する。",
+      "readabilityStatus": "LLMによる検証で対象、直後の内積定義、移動する共役転置と全直接入力を読んだ。対象はノルム・収束・極限・級数の定義分割、実数列の収束と極限法則の前提、後続にある極限一意性の証明への接続が未解決である。比較側の内積定義は後続の性質とノルムの一致への接続を分ける必要がある。共役転置は四等式の主張分割、有限和への帰納・第二式の省略・絶対値の成分式への代入・同時適用と各行参照が未解決であり、その入力の内積の性質にも包含写像の法則と所属・主張分割の課題が残る。前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_031b_claim_abs_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
     {
       "name": "単位行列のスカラー倍と可換性",
       "chapter": "数学的道具立て",
@@ -2712,6 +2740,8 @@
       "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
       "transfer_matrix_011_definition_H1_H2",
       "transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY",
+      "exp_conjugation_proof_003_definition_M_n_C_convergence",
+      "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
       "exp_conjugation_proof_004_theorem_ad_binomial",
       "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
       "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
@@ -2728,6 +2758,7 @@
       "eigenvalues_of_V_003_claim_trace_of_idempotent",
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
       "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+      "eigenvalues_of_V_012_claim_star_is_norm_preserving",
       "freeenergy_004_theorem_riemann_sum_to_integral",
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y",
@@ -3275,35 +3306,35 @@
         {
           "order": 76,
           "entryIds": [
-            "eigenvalues_of_V_012_claim_star_is_norm_preserving"
+            "exp_conjugation_proof_003_definition_M_n_C_convergence"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 77,
           "entryIds": [
-            "exp_conjugation_proof_003_definition_M_n_C_convergence"
+            "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 78,
           "entryIds": [
-            "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
+            "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 79,
           "entryIds": [
-            "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+            "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 80,
           "entryIds": [
-            "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
+            "eigenvalues_of_V_012_claim_star_is_norm_preserving"
           ],
           "inseparableDependencyUnit": false
         },
@@ -7561,7 +7592,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 12,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9155,7 +9186,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 13,
+        "incomingReferenceCount": 14,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9552,7 +9583,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 14,
+        "incomingReferenceCount": 15,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11524,7 +11555,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 79,
+        "chapterOrder": 78,
         "dependencyUnitEntryIds": [
           "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
         ]
@@ -13488,7 +13519,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -13553,24 +13584,26 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1476,
-        "inspectedContentSha256": "b746ebeac8b97214c24b629134c024c2a24e83c0dba299041f8b3f1eddbd2d7b",
+        "inspectedCharacterCount": 1556,
+        "inspectedContentSha256": "05aec16792fec6de063b35504c90d6726cf31b5fc4509c42dab976305d55909d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 内積の式に使う行列積の参照と後続の性質への案内を訂正した。行列空間の表記、二変数関数の定義、その関数が内積の性質を満たすという後続主張、既出ノルムとの一致への接続を分ける必要がある。共役転置とノルムの入力に残る未整備の定義と説明は解消済みとは扱わず、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "def_hermitian_positive_definite",
         "def_matrix_norm",
         "def_trace",
         "definition_of_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "eigenvalues_of_V_001_definition_trace",
@@ -13592,7 +13625,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 77,
+        "chapterOrder": 76,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_003_definition_M_n_C_convergence"
         ]
@@ -13612,13 +13645,13 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 0,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 22099,
@@ -13629,7 +13662,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 証明冒頭には複素共役の和・積保存の成分計算が実在する。成分表示と五群の性質、その前提となる複素数の補題の分割、包含写像の和・積・逆元保存と単射性の根拠への接続、非負実数の像の平方根と実数ノルムの所属を区別する説明、同時代入・複数法則の同時適用と各行参照が未解決である。零の場合を保ち、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "abs_basic_properties",
@@ -13671,7 +13704,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 80,
+        "chapterOrder": 79,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
         ]
@@ -13799,7 +13832,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 78,
+        "chapterOrder": 77,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
         ]
@@ -18105,7 +18138,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -18176,27 +18209,39 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2906,
-        "inspectedContentSha256": "e1b160b06a828b1bd9737079ad760849d5bc9dafbdcf86de9ab4bbcc07105c74",
+        "inspectedCharacterCount": 3764,
+        "inspectedContentSha256": "34155cf8eb5b5d74228dd34a7b3bc563dba0d010dc8e96ab05d0bb4a1f03c3bd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 複素共役の和・積保存を行列共役へ誤参照していた箇所を、既存のFrobenius内積の性質の証明冒頭へ訂正し、その後へ依存順を移した。スカラーと行列列の所属、共役転置・複素共役・行列積・複素演算・絶対値の参照を補った。積と共役線型性、ノルム保存と極限保存の分割、有限和への帰納、第二式の同様計算、絶対値の成分式へ共役を代入する計算、添字の範囲、二箇所同時適用と各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "abs_basic_properties",
+        "complex_numbers_form_a_field",
+        "def_complex_conjugate",
+        "def_hermitian_positive_definite",
         "def_matrix_norm",
         "definition_of_cc",
+        "frobenius_inner_product_axioms",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_031b_claim_abs_basic_properties",
         "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "exp_conjugation_definition_complex_conjugate_and_real_part",
+        "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
         "linear_space_general_002b_definition_matrix_norm"
       ],
       "semanticPrerequisiteLabels": [
@@ -18211,7 +18256,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 76,
+        "chapterOrder": 80,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_012_claim_star_is_norm_preserving"
         ]

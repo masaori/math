@@ -49,17 +49,17 @@ export default defineBlocks([
         " とする。",
       ]),
       paragraph([
-        ref("def_hermitian_positive_definite"), " の共役転置と ", ref("def_trace"), " のトレースを使い、Frobenius 内積 ",
+        ref("def_hermitian_positive_definite"), " の共役転置、", ref("mat_mult"), " の行列積と ", ref("def_trace"), " のトレースを使い、Frobenius 内積 ",
         math(String.raw`\langle\cdot,\cdot\rangle : M(n;\mathbb{C})\times M(n;\mathbb{C})\to\mathbb{C}`),
         " を",
       ]),
       displayMath(String.raw`\langle A, B\rangle := \mathrm{tr}\!\left(A^{*}B\right)`),
       paragraph([
-        "と定める。成分表示と内積の基本性質は直後の主張で成分計算から示す。この ",
+        "と定める。成分表示と内積の基本性質は後続の内積の性質の主張で成分計算から示す。この ",
         math(String.raw`\langle\cdot,\cdot\rangle`),
         " のノルムは既出の成分公式 ",
         ref("def_matrix_norm"),
-        " を使う。直後の主張で、この内積から得る長さと同じ値になることを示す。",
+        " を使う。後続の内積の性質の主張で、この内積から得る長さと同じ値になることを示す。",
       ]),
     ],
     conversion: {
