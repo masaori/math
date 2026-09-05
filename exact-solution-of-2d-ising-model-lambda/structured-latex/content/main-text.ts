@@ -28644,25 +28644,19 @@ Z_L(1)
                         paragraph([
                           "頂点 ", math(String.raw`v\in V_L`), " に対し ",
                           math(String.raw`C(v)`), " を ", math(String.raw`\tau(v)=\sigma(v)`),
-                          " という命題とする。仮定と ", math(String.raw`\{+1,-1\}`),
-                          " の四つの場合を調べると、任意の辺 ", math(String.raw`e\in E_L`), " について",
+                          " という命題とする。任意の辺 ", math(String.raw`e\in E_L`), " について",
                         ]),
-                        displayMath(String.raw`C(\partial_0(e))\quad\Longleftrightarrow\quad C(\partial_1(e))`),
+                        displayMath(String.raw`C(\partial_0(e))\quad\Longleftrightarrow\quad C(\partial_1(e))
+\qquad(\because\ \text{仮定と }\{+1,-1\}\text{ の四場合})`),
                         paragraph([
-                          "を得る。実際、一方の端点で二つの配位の値が等しければ、もう一方の端点では、",
-                          "両方ともその値と等しいか、両方ともその値の符号反転である。逆向きも同じである。",
+                          math(String.raw`(i,j)\in V_L`), " を任意に取り、自然数の代表 ",
+                          math(String.raw`s(i),s(j)\in\{0,1,\dots,L-1\}`), " を用いる。",
                         ]),
-                        paragraph([
-                          math(String.raw`(i,j)\in V_L`), " を任意に取る。", ref("claim_edge_row_partition"),
-                          " の横向きの辺を ", math(String.raw`j`), " 回、縦向きの辺を ",
-                          math(String.raw`i`), " 回たどる道に、直前の同値を一辺ずつ適用する。",
-                          "自然数の代表 ", math(String.raw`s(i),s(j)\in\{0,1,\dots,L-1\}`),
-                          " についての二つの帰納法により",
-                        ]),
-                        displayMath(String.raw`C((i,j))\quad\Longleftrightarrow\quad C((0,0))`),
-                        paragraph(["を得る。これは周期格子の全頂点が ", math(String.raw`(0,0)`), " と辺で結ばれていることを明示したものである。"]),
+                        displayMath(String.raw`C((i,j))\quad\Longleftrightarrow\quad C((0,0))
+\qquad(\because\ \blkref{claim_edge_row_partition}\text{ の横辺を }s(j)\text{ 回、縦辺を }s(i)\text{ 回たどる二つの帰納法})`),
                         paragraph([math(String.raw`C((0,0))`), " が成り立つ場合、任意の ", math(String.raw`v\in V_L`), " について"]),
-                        displayMath(String.raw`\tau(v)=\sigma(v)\quad(\because\ C(v)\Longleftrightarrow C((0,0)))`),
+                        displayMath(String.raw`\tau(v)=\sigma(v)
+\qquad(\because\ C(v)\Longleftrightarrow C((0,0))\text{ かつ }C((0,0)))`),
                         paragraph(["なので ", math(String.raw`\tau=\sigma`), " である。"]),
                         paragraph([math(String.raw`C((0,0))`), " が成り立たない場合、任意の ", math(String.raw`v\in V_L`), " について"]),
                         displayMath(String.raw`\begin{aligned}
