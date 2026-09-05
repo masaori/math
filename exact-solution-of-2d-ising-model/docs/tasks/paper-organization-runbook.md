@@ -15,10 +15,16 @@
 - `AGENTS.md`、`CLAUDE.md`、`docs/context/` 全文、プロジェクト README、この Runbook、状態台帳、`MEMORY.md` を読む。
 - 120秒の上限付きで `origin` を fetch し、remote default branch は fetch 後のローカル `origin/HEAD` から取得する。専用worktreeが遅れていれば、未コミット成果を失わない方法で取り込む。通信処理の失敗時は別経路へ切り替えずエラーで終了し、共有main作業ツリー、lambda版、既存tickには触れない。
 - Codex 内のコマンドは `exec_command` の `login=false` を明示して実行する。tick 本体は `MISE_NO_CONFIG=1` を子プロセスへ継承し、誤って login shell が選ばれた場合も、本文コマンドより前の mise hook が設定探索で停滞しないようにする。`MISE_NO_CONFIG=1` ではmise shimが版を解決できないためshimはPATHへ入れず、Node 22.22.3の実体とSageMath・Lean・Gitをtickが組み立てた `PATH` から取得する。
-- `npm run inventory:organization` で機械可読棚卸しを再生成し、件数・依存ラベル・差分を確認する。
+- npm の対象は常に論文側の `structured-latex/package.json` とする。リポジトリ直下からは `npm --prefix exact-solution-of-2d-ising-model/structured-latex run gen`、同じ prefix で `run inventory:organization`、`run check` を実行する。別の作業場所からは prefix を専用worktree内の絶対パスにする。ラベル再生成も含め、cwd に暗黙依存した `npm run` は使わない。棚卸しの件数・依存ラベル・差分を確認する。
 - 前回成果が残る継続モードでは、状態台帳の次項へ進まず、前回ログと現在差分を一度だけ確認して完了工程へ進む。巨大な差分や既読全文を実行ログへ繰り返し貼らない。
 - 状態台帳の「次の一歩」だけを担当者が分析し、別のエージェントが、分類境界・依存方向・イジング固有セマンティクス混入・二章制約・高校生可読性をレビューする。指摘があれば同じ単位を修正して再レビューし、未解決のまま次へ進まない。
 - 必要な検証を全て通し、状態台帳と `MEMORY.md` を更新する。コミット後は、launchd由来のtmux外実行でkeyringを必要とする `gh` を使わず、SSHのGitで成果コミットをremote defaultへ直接pushし、fetch後の包含確認までを同じtickで行う。non-fast-forward時は同じGit経路でremote defaultを取り込み、再検証してからpushする。
+
+## 2026-09-05 の失敗原因
+
+16:18 の実行は、リポジトリ直下で `npm run gen` を実行し、直下に `package.json` が無いため終了コード254となった。棚卸しだけに実行場所を指定していたプロンプトを、ラベル生成・論文検査を含む全npm操作への明示prefixに改める。これは同じ生成器の呼び出し条件の修正であり、生成器や検査の代替ではない。
+
+後続の時間切れは `launcher.log` の16:44:58から16:47:08、18:56:07から18:58:27に記録された起動口の `git fetch` の終了コード124である。tick本体の開始記録はなく、エージェントの55分上限には到達していない。このログを一単位の作業量超過の根拠にはできないため、最大二項という単位は変更しない。SSH接続の失敗と本文コマンドの誤りを分け、通信失敗はエラーとして止める。
 
 ## 分類規則
 
@@ -41,6 +47,6 @@
 - local-pc-management が配布する起動口: `/Users/masaori/.local/bin/math-complex-matrix-ising-paper-organization-loop-launcher.sh`
 - 推奨 launchd label: `com.masaori.math-complex-matrix-ising-paper-organization-loop`
 - 推奨頻度: 2時間ごと。分は既存tickとの衝突を窓口が監査して決める。tickの強制終了上限55分に対して次回起動まで重ならず、失敗・打ち切り・残骸をログで識別できる間隔として採る。
-- 専用worktree: `/Users/masaori/git/masaori/math-complex-matrix-ising-paper-loop`
+- 専用worktree: `/Users/masaori/git/masaori/math/.codex/worktrees/tick/math-complex-matrix-ising-paper-organization-loop`
 - 専用branch: `goal/complex-matrix-ising-paper-organization-loop`
 - lock/log: `~/Library/Logs/math-complex-matrix-ising-paper-organization/`
