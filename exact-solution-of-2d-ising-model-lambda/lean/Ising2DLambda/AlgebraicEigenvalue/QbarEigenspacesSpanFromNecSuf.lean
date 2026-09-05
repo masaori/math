@@ -13,14 +13,14 @@ theorem qbarEigenspaces_span_from_necSuf
     (v : QbarRowVector L) :
     ∃ u : RootOfUnity L → QbarRowVector L,
       (∀ z, u z ∈ qbarEigenspace L A z.1) ∧ qbarVectorSum L Finset.univ u = v := by
-  let u : RootOfUnity L → QbarRowVector L := fun z =>
-    qbarVectorSmul L ((L : Qbar)⁻¹) (qbarProjector L A z.1 v)
   apply NecSuf.AlgebraicEigenvalue.finite_family_spans_necSuf
-    (E := fun z => qbarEigenspace L A z.1) (sum := qbarVectorSum L Finset.univ)
-    v u
+    (E := fun z : RootOfUnity L => qbarEigenspace L A z.1)
+    (sum := qbarVectorSum L Finset.univ)
+    v (fun z => qbarProjector L A z.1 v) (qbarVectorSmul L ((L : Qbar)⁻¹))
   · intro z
-    exact qbarEigenspace_smul L A z.1 ((L : Qbar)⁻¹) (qbarProjector L A z.1 v)
-      (qbarProjector_mem_eigenspace L A z.1 v hA z.2)
+    exact qbarProjector_mem_eigenspace L A z.1 v hA z.2
+  · intro z x hx
+    exact qbarEigenspace_smul L A z.1 ((L : Qbar)⁻¹) x hx
   · exact qbarProjector_reconstruction L A v
 
 end Ising2DLambda.AlgebraicEigenvalue
