@@ -17,25 +17,27 @@ def local_value(table, a, b, c):
 
 
 def support_by_flip_test(table):
-    """一点反転検査で本質的依存台を決める。返り値は NEIGHBOR_POSITIONS の部分集合。"""
+    """一点反転検査による本質的依存台と、実行した値の比較回数を返す。"""
     support = []
+    comparisons = 0
     for slot in range(3):
         depends = False
         for code in range(8):
             argument = [(code >> 2) & 1, (code >> 1) & 1, code & 1]
             flipped = list(argument)
             flipped[slot] = 1 - flipped[slot]
+            comparisons += 1
             if local_value(table, *argument) != local_value(table, *flipped):
                 depends = True
                 break
         if depends:
             support.append(NEIGHBOR_POSITIONS[slot])
-    return tuple(support)
+    return tuple(support), comparisons
 
 
-def flip_test_comparison_bound(support_size):
+def flip_test_comparison_bound(neighborhood_size):
     """claim_support_finite_decidability の上界 |S| * 2^{|S|}。"""
-    return support_size * 2 ** support_size
+    return neighborhood_size * 2 ** neighborhood_size
 
 
 def configurations(length):
