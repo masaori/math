@@ -16,3 +16,6 @@ sage sagemath/check/qbar-poly-linear-factor-coeff-bound/check.sage
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+2026-09-05 のレビューで再実行し、全段のプログラミングによる検証が通過した。
+LLM による検証では本文と Lean 二版の計算順を突き合わせ、Lean を準備三段・本体六段へ揃えた。
