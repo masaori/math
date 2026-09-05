@@ -416,6 +416,7 @@ W_{\iota(\mu),\iota(\mu')}
     title: { text: "半正定値双線型形式の Cauchy–Schwarz の不等式" },
     labels: ["psd_cauchy_schwarz"],
     statement: [
+      paragraph(["成分積は ", ref("mat_mult"), " の式を実数成分について用い、複素数への包含は ", ref("inclusion_rr_to_cc"), " による。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",

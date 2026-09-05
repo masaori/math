@@ -218,6 +218,35 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "全行列と可換な行列のスカラー表示",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_004_lemma_centralizer_is_scalar"
+      ],
+      "input": [
+        "クロネッカー積・積の規則・線型性と基底",
+        "行列積と複素係数の演算、集合記号"
+      ],
+      "output": [
+        "M>=1 の 2^M 次複素行列で、同じサイズの全行列と可換なものは単位行列のスカラー倍であること"
+      ],
+      "mainTheorem": "全行列と可換な行列のスカラー表示",
+      "mainTheoremEntryId": "linear_space_general_004_lemma_centralizer_is_scalar",
+      "boundaryEvidence": "行列単位の積と単位行列の展開から可換性の係数を比較してスカラー表示へ閉じる一項である。直後の半正定値不等式は本項もクロネッカー積の基底も使わず、実対称行列の二次式を正の係数の場合と零の場合に分ける別枝へ切り替わる。有限行列の係数比較から実数の二次式の非負性への入力切替として、対象・比較と全直接入力の本文・全依存・種別・粒度・相対順をプログラミングによる検証で固定する。",
+      "readabilityStatus": "LLMによる検証で対象と全直接入力、半正定値不等式の全本文を読んだ。生成族の元数と次元から基底を結論する前提、多重添字の有限和と反復適用・同時代入・各行参照の分割が未解決である。比較側は一般サイズと数ベクトルの転置の定義、実行列の演算と複素成分の式の接続、交叉項の等式と分配の成分計算、非負の係数の場合分けを尽くす説明が未整備である。正の係数と零の係数の実際の計算を欠落扱いせず、M=1と半正定値性の零の分岐を保持し、前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000c_claim_kronecker_multilinear",
+        "linear_space_general_001_theorem_tensor_product_basis"
+      ]
+    },
+    {
       "name": "指数の積公式とエルミート行列の指数の正定値性",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -3091,6 +3120,7 @@
       "linear_space_general_000d_claim_kronecker_transpose",
       "linear_space_general_001_theorem_tensor_product_basis",
       "linear_space_general_002_claim_scalar_identity_commutes",
+      "linear_space_general_004_lemma_centralizer_is_scalar",
       "linear_space_general_002b_definition_matrix_norm",
       "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
       "linear_space_general_003_claim_matrix_norm_submultiplicativity",
@@ -3132,6 +3162,7 @@
       "eigenvalues_of_V_012_claim_star_is_norm_preserving",
       "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
       "bridge_003_claim_exp_of_diagonal",
+      "maxeig_005_claim_psd_cauchy_schwarz",
       "maxeig_010_claim_sector_decomposition_of_c",
       "freeenergy_004_theorem_riemann_sum_to_integral",
       "evensectorT_003_claim_coefficient_conversion",
@@ -7977,7 +8008,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 25,
+        "incomingReferenceCount": 27,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8218,7 +8249,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 17,
+        "incomingReferenceCount": 18,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9571,7 +9602,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 18,
+        "incomingReferenceCount": 19,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11761,29 +11792,33 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9567,
-        "inspectedContentSha256": "d03bd0c088226927a708a10b1c3f6e037146f036d433019bf0b651e9bf52c201",
+        "inspectedCharacterCount": 9797,
+        "inspectedContentSha256": "22a91fef805e4fa6c21e27b0ad698ea98f16801ce46d99a47cea5f66468bc884",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積と複素係数の演算への参照を補った。行列単位の定義と積公式・単位行列の展開を経て、可換性から係数を比較する。生成族の元数と次元から基底を結論する前提は既存の基底入力でも未証明であり、本項の2次の場合にも適用根拠が必要である。多重添字の有限和への分配・各因子への反復適用、二箇所の同時代入と係数比較の各行参照の分割が未解決である。M=1を保持し、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "complex_numbers_form_a_field",
         "def_kronecker",
         "definition_of_cc",
         "kronecker_multilinear",
         "kronecker_product_rule",
+        "mat_mult",
         "set_and_algebra_notation",
         "tensor_basis"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
         "calculation_formulae_definition_set_and_algebra_notation",
         "linear_space_general_000_definition_kronecker_product",
         "linear_space_general_000b_claim_kronecker_product_rule",
@@ -20627,23 +20662,27 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3950,
-        "inspectedContentSha256": "c8af6710ab475469d4eb860c7ba8d3a0b305ab19a17065c84ee4fcf2cb5774cf",
+        "inspectedCharacterCount": 4179,
+        "inspectedContentSha256": "d0cb57af2e7bf4d8aa67d33fef9dc1937a0e30ae2af667726c2d2709630a2842",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積と実数包含への参照を補った。一般のn次とn×1の数ベクトルの通常転置の定義および演算法則は未提示であり、既存の2の冪次の転置だけでは適用範囲を満たさない。実行列の演算を複素成分の式へ接続する根拠、二次式への展開での分配と転置の同時適用、対称性から交叉項が等しいことの成分計算、実数の四則演算の分割と各行参照が未解決である。a>0とa=0の双方の計算とb=0への背理法は実在し、半正定値性からa>=0を得て場合を尽くす説明を補い、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "inclusion_rr_to_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_007_inclusion_rr_to_cc",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [

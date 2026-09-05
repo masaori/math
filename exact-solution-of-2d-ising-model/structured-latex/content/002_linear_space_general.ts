@@ -1056,6 +1056,7 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
     title: { tex: String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \text{ の中で全元と可換な元はスカラー}` },
     labels: ["centralizer_is_scalar"],
     statement: [
+      paragraph(["行列単位の成分積は ", ref("mat_mult"), "、複素係数の演算は ", ref("complex_numbers_form_a_field"), " による。"]),
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
         " とする。",

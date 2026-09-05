@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 
 export const centralizerIsScalarExpectedSha256 =
-  "d03bd0c088226927a708a10b1c3f6e037146f036d433019bf0b651e9bf52c201";
+  "22a91fef805e4fa6c21e27b0ad698ea98f16801ce46d99a47cea5f66468bc884";
 
 export function contentFingerprint(inspected: string): string {
   return createHash("sha256").update(inspected).digest("hex");
