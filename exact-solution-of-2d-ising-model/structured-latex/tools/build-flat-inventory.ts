@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["linear_space_general_000_definition_kronecker_product", "LLMによる検証: 添字集合の元数、写像の値域と全単射、数ベクトルと行列の二定義が同居する。有限集合の議論と有限和の法則、同時代入と複数演算の分離、各行参照が未解決である。M=1と単射証明の末尾の空和を保ち、前提補完と分割後に依存と閉包を再判定する。"],
   ["exp_linear_map_004_theorem_exp_zero_is_identity", "LLMによる検証: 行列指数の定義への欠落参照を補い依存順を修正した。行列サイズと成分の所属、正整数冪の計算、収束級数の初項分離とスカラー倍の前提、各行参照が未解決である。"],
   ["freeenergy_004_theorem_riemann_sum_to_integral", "LLMによる検証: イジング固有の導入を外し、一様連続性と積分の基本性質を一般形の外部前提として明示した。それらの本文内の証明、連続度の上限の存在、誤差評価と極限の主張分割、各行参照と複数演算の分離が未解決である。前提補完後に依存と閉包を再判定する。"],
   ["exp_linear_map_000a_claim_real_exp_series_converges", "LLMによる検証: 部分和・極限・剰余の定義と三主張が同居する。Archimedesの原理、等比和、上限から単調列収束と極限が上限になる根拠、極限の差の法則と各行参照が未提示である。零引数もa^0=1の規約で含め、前提補完と分割後に依存と閉包を再判定する。"],
@@ -2369,6 +2370,7 @@ const v1PauliRepresentationUnresolvedExternalInputGranularity = v1PauliRepresent
 if (JSON.stringify(v1PauliRepresentationUnresolvedExternalInputGranularity) !== JSON.stringify([
   "calculation_formulae_definition_set_and_algebra_notation",
   "calc_formulae_006_definition_of_cc",
+  "linear_space_general_000_definition_kronecker_product",
   "exp_linear_map_002_definition_exp_of_endomorphism",
   "transfer_matrix_005_definition_end_isomorphism",
 ])) {
@@ -8735,7 +8737,109 @@ if (findToolEntry("exp_linear_map_004_theorem_exp_zero_is_identity").dependencyP
   <= findToolEntry("exp_linear_map_002_definition_exp_of_endomorphism").dependencyPlacement!.chapterOrder) {
   throw new Error("零行列の指数が行列指数の定義より前へ移りました");
 }
+const riemannAverageSectionEntryIds = [
+  "freeenergy_004_theorem_riemann_sum_to_integral"
+];
+const riemannAverageSection = validateReviewedSection(
+  "等間隔点の平均の積分への収束", "数学的道具立て", riemannAverageSectionEntryIds,
+  new Map([
+  [
+    "freeenergy_004_theorem_riemann_sum_to_integral",
+    []
+  ]
+]),
+  new Map([
+  [
+    "freeenergy_004_theorem_riemann_sum_to_integral",
+    "b7b5c2383ded596b035d003ba855d8f3d8109c68d44e4459836fa39c2218c4e3"
+  ]
+]),
+  [
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "freeenergy_004_theorem_riemann_sum_to_integral"
+],
+);
+const riemannAverageSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "freeenergy_004_theorem_riemann_sum_to_integral",
+    "kind": "theorem",
+    "sha256": "b7b5c2383ded596b035d003ba855d8f3d8109c68d44e4459836fa39c2218c4e3",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_000_definition_kronecker_product",
+    "kind": "definition",
+    "sha256": "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of riemannAverageSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`等間隔点の平均の積分への収束の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("linear_space_general_000_definition_kronecker_product").dependencyPlacement!.chapterOrder
+  !== riemannAverageSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("等間隔点の平均の積分への収束の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "等間隔点の平均の積分への収束",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "freeenergy_004_theorem_riemann_sum_to_integral"
+  ],
+  "input": [
+    "連続実関数と集合記号、一様連続性とRiemann積分の基本性質という外部前提"
+  ],
+  "output": [
+    "等間隔の各区間の代表点での平均の誤差を連続度で抑える評価",
+    "代表点のずらし方に依存しない積分への収束"
+  ],
+  "mainTheorem": "等間隔点の平均は積分に収束する",
+  "mainTheoremEntryId": "freeenergy_004_theorem_riemann_sum_to_integral",
+  "boundaryEvidence": "各区間の代表点での誤差を連続度で抑え、有限和から全体の誤差評価を得て、一様連続性で収束へ閉じる現存一項を節とする。直後のクロネッカー積はこの極限を使わず、二値多重添字の全単射と複素成分の有限積で数ベクトルと行列を定める別枝である。連続関数の平均から有限配列の成分定義への入力切替を根拠とし、解析の有無自体で章を分けない。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度および後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で等間隔平均とクロネッカー積定義の全本文・全直接入力を読んだ。平均側は一般形で明示した外部前提の本文内の証明、連続度の上限の有限な存在、誤差評価と収束・代表点の例の主張分割、各行参照と複数演算の分離が残る。比較側は添字の元数・全単射の証明とベクトル・行列の二定義が同居し、数え上げ・有限和の法則と各行参照、同時代入と複数演算の分離が未解決である。本文完成とは扱わず、前提補完と定義・主張の分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "非負実数の指数級数の収束と剰余",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
