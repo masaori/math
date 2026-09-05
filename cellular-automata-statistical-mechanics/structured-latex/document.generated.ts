@@ -18,6 +18,7 @@ import type {
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
+import blocks_binary_ca_logarithmic_counts from './content/binary-ca-logarithmic-counts.ts'
 import blocks_binary_ca_positive_count_domain from './content/binary-ca-positive-count-domain.ts'
 import blocks_causal_set_primary_literature from './content/causal-set-primary-literature.ts'
 import blocks_causal_structure_comparison from './content/causal-structure-comparison.ts'
@@ -70,6 +71,7 @@ import blocks_neighborhood_covering_relation_of_finite_poset from './content/nei
 import blocks_ordered_neighborhood_assignment_monoid from './content/ordered-neighborhood-assignment-monoid.ts'
 import blocks_periodic_point_count from './content/periodic-point-count.ts'
 import blocks_positive_fixed_point_count_domain from './content/positive-fixed-point-count-domain.ts'
+import blocks_prime_logarithm from './content/prime-logarithm.ts'
 import blocks_recursive_preimage_tree_code from './content/recursive-preimage-tree-code.ts'
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_reversibility_finite_decidability from './content/reversibility-finite-decidability.ts'
@@ -86,6 +88,7 @@ import blocks_transitive_closure_antisymmetry from './content/transitive-closure
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
+  ...typeof blocks_binary_ca_logarithmic_counts,
   ...typeof blocks_binary_ca_positive_count_domain,
   ...typeof blocks_causal_set_primary_literature,
   ...typeof blocks_causal_structure_comparison,
@@ -138,6 +141,7 @@ export type AllBlocks = [
   ...typeof blocks_ordered_neighborhood_assignment_monoid,
   ...typeof blocks_periodic_point_count,
   ...typeof blocks_positive_fixed_point_count_domain,
+  ...typeof blocks_prime_logarithm,
   ...typeof blocks_recursive_preimage_tree_code,
   ...typeof blocks_redundant_neighbor,
   ...typeof blocks_reversibility_finite_decidability,

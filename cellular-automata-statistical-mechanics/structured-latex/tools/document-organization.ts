@@ -26,6 +26,14 @@ export const documentOrganization = [
     title: "数学的道具立て",
     sections: [
       {
+        id: "prime_logarithm_and_integer_division",
+        title: "素数指数の対数順序群と整数除算の定義域",
+        input: "正の有理数、正整数の素因数分解、素数上の有限台整数ベクトルを入力とする。",
+        output: "対数写像と復元写像、加法と両立する全順序、整数で割れる入力の必要十分条件を得る。",
+        main: "主張は、素数指数の対数が正の有理数を順序付き加法群へ移し、群内の整数除算は全係数の整除に限られることである。",
+        mainLabels: ["claim_prime_logarithm_ordered_group", "claim_prime_vector_integer_division"],
+      },
+      {
         id: "neighborhood_assignment_algebra",
         title: "近傍割り当ての合成・順序・束演算",
         input: "有限集合、有限集合上の二項関係、集合値写像を入力とする。",
@@ -186,6 +194,14 @@ export const documentOrganization = [
         output: "状態数の上界、正の状態数を与える回数の存在、および零個となる一セル規則の反例を得る。",
         main: "主張は、有限舞台では正の状態数を与える回数が必ず存在するが、全ての正の回数を対数の入力にできるとは限らないことである。",
         mainLabels: ["claim_binary_ca_positive_count_domain_nonempty", "claim_single_cell_flip_positive_count_domain"],
+      },
+      {
+        id: "binary_ca_logarithmic_counts",
+        title: "有限舞台の状態数から作る対数と隣接差",
+        input: "有限舞台の大域写像、整数値保存写像、正の状態数の定義域と対数順序群を入力とする。",
+        output: "繊維状態数、正の入力だけのエントロピーと自由エントロピー、整数刻み一の隣接差、および刻み二で除算できない反例を得る。",
+        main: "主張は、繊維状態数の総和から自由エントロピーを作れ、隣接差は状態数比の対数となるが、非単位刻みの差分商は有限舞台でも群の外へ出うることである。",
+        mainLabels: ["claim_binary_ca_logarithmic_free_count_fibers", "claim_binary_ca_unit_difference_ratio", "claim_binary_ca_logarithmic_gap_division_obstruction"],
       },
       {
         id: "conjugacy_and_locality_classification",
