@@ -994,15 +994,23 @@ y^2>x\ \land\ x>0
         math("B"),
         " は正則とする。",
       ]),
-      paragraph([math("T_B:\\operatorname{Mat}(n,\\mathbb{C})\\to\\operatorname{Mat}(n,\\mathbb{C})"), " を、"]),
-      displayMath("T_B(A):=BAB^{-1}"),
-      paragraph(["と定めるとき、", math("T_B"), " は線型写像である。"]),
+      paragraph([
+        math("\\operatorname{Mat}(n,\\mathbb{C})"),
+        " の各元 ",
+        math("A"),
+        " に対して ",
+        math("T_B(A):=BAB^{-1} \\in \\operatorname{Mat}(n,\\mathbb{C})"),
+        " と定める。このとき ",
+        math("T_B"),
+        " は和とスカラー倍を保つ。すなわち",
+      ]),
+      displayMath(String.raw`T_B(A+C)=T_B(A)+T_B(C),\qquad
+T_B(\alpha A)=\alpha\,T_B(A)
+\qquad (A,C\in\operatorname{Mat}(n,\mathbb{C}),\ \alpha\in\mathbb{C})`),
+      paragraph(["が成り立つ。"]),
     ],
     proof: [
-      paragraph([
-        "線型写像であるとは、和を保ち、スカラー倍を保つことである。",
-        "この 2 つを別々に示す。",
-      ]),
+      paragraph(["和を保つことと、スカラー倍を保つことを別々に示す。"]),
       paragraph([
         "第一に、和を保つこと。",
         math("A,C\\in\\operatorname{Mat}(n,\\mathbb{C})"),
@@ -1040,7 +1048,7 @@ T_B(\alpha A)
       paragraph([
         "である。以上より ",
         math("T_B"),
-        " は線型写像である。",
+        " は和とスカラー倍を保つ。",
       ]),
     ],
     conversion: {

@@ -3524,6 +3524,23 @@ if (matrixDecompositionEntry.kind !== "definition"
     conjugationDependencies: matrixConjugationEntry.dependsOnEntryIds,
   })}`);
 }
+const inclusionRealToComplexEntry = entries.find((entry) =>
+  entry.id === "calc_formulae_007_inclusion_rr_to_cc")!;
+if (matrixConjugationEntry.kind !== "theorem"
+  || matrixConjugationEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || JSON.stringify([...matrixConjugationEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify([complexNumberDefinitionEntry.id])
+  || inclusionRealToComplexEntry.dependencyPlacement!.chapterOrder !== 6
+  || inclusionRealToComplexEntry.dependsOnEntryIds.includes(matrixConjugationEntry.id)
+  || matrixConjugationEntry.dependsOnEntryIds.includes(inclusionRealToComplexEntry.id)) {
+  throw new Error(`可逆行列による共役写像の一項節が変わりました: ${JSON.stringify({
+    order: matrixConjugationEntry.dependencyPlacement?.chapterOrder,
+    kind: matrixConjugationEntry.kind,
+    granularity: matrixConjugationEntry.explanationGranularityReview.status,
+    dependencies: matrixConjugationEntry.dependsOnEntryIds,
+    inclusionOrder: inclusionRealToComplexEntry.dependencyPlacement?.chapterOrder,
+  })}`);
+}
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || ![
@@ -4437,6 +4454,28 @@ const isingModelSectionBoundaries = [{
   ],
   boundaryEvidence: "章内依存順3は複素数の定義と記号の規約だけを入力に、行列の積を成分の有限和として定める。順4はその定義だけを使い、列に並べた行列への積が列ごとの積になることを成分計算で示す。順5の共役写像からは可逆行列と線型写像という新しい概念が入るため、順4の後で節を閉じる。生成時に二項の依存順、種別、順4が積の定義を引くこと、逆向きの依存が無いこと、および積の定義がラベル mat_mult を保持し続けることを固定検査する。",
   readabilityStatus: "このラベルは本文の20箇所以上から「行列の積の定義」として引かれていたのに、実体は Typst の行列構成子を使った未定義記法の未証明命題だった。引用の意味と一致するよう、成分による積の定義そのものをこのラベルの内容とし、原文が述べていた列ごとの作用は記法を定義したうえで次のブロックへ移して証明を付けた。積の定義が複素数の定義を引くのは、本文の並びでは後ろにあるが依存順では先行する前提であり、案内ではないものとして記録した。",
+}, {
+  name: "可逆行列による共役写像が和とスカラー倍を保つこと",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [matrixConjugationEntry.id],
+  input: [
+    "複素数の定義",
+    "行列の積と可逆行列",
+  ],
+  externalInputEntryIds: ["calc_formulae_006_definition_of_cc"],
+  output: [
+    "可逆行列 B による共役 A から BAB^{-1} が、和とスカラー倍を保つこと",
+  ],
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/Part000",
+    sageMathFile: "sagemath/_shared/defs.sage",
+    currentStatus: "和を保つことは左右の分配則で四段、スカラー倍を保つことはスカラー倍と積の交換で四段。後の章で偶セクター転送行列へ特殊化して使う。",
+  },
+  concludingClaim: "可逆行列による共役は和とスカラー倍を保つ",
+  concludingClaimEntryId: matrixConjugationEntry.id,
+  boundaryEvidence: "章内依存順5は複素数の定義だけを外部入力に、可逆行列による共役が和とスカラー倍を保つことを示す。順6の実数から複素数への包含写像は、行列を離れて数の対応を定める別枝であり、順5に依存しない。したがって順5の後で節を閉じる。生成時に順5の直接依存、説明粒度の状態、順6との相互非依存を固定検査する。",
+  readabilityStatus: "元の主張は「T_B は線型写像である」と述べており、抽象語彙の自動検査に「抽象線型写像」として引っかかっていた。この論文は抽象度の高い道具を持ち込まない方針なので、主張を「和とスカラー倍を保つ」という二つの等式へ書き換えた。証明はもともと二つを別々に示しており、書き換えで各行の根拠はそのまま使える。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

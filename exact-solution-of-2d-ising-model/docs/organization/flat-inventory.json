@@ -1584,13 +1584,39 @@
       ],
       "boundaryEvidence": "章内依存順3は複素数の定義と記号の規約だけを入力に、行列の積を成分の有限和として定める。順4はその定義だけを使い、列に並べた行列への積が列ごとの積になることを成分計算で示す。順5の共役写像からは可逆行列と線型写像という新しい概念が入るため、順4の後で節を閉じる。生成時に二項の依存順、種別、順4が積の定義を引くこと、逆向きの依存が無いこと、および積の定義がラベル mat_mult を保持し続けることを固定検査する。",
       "readabilityStatus": "このラベルは本文の20箇所以上から「行列の積の定義」として引かれていたのに、実体は Typst の行列構成子を使った未定義記法の未証明命題だった。引用の意味と一致するよう、成分による積の定義そのものをこのラベルの内容とし、原文が述べていた列ごとの作用は記法を定義したうえで次のブロックへ移して証明を付けた。積の定義が複素数の定義を引くのは、本文の並びでは後ろにあるが依存順では先行する前提であり、案内ではないものとして記録した。"
+    },
+    {
+      "name": "可逆行列による共役写像が和とスカラー倍を保つこと",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "calc_formulae_005_matrix_conjugation"
+      ],
+      "input": [
+        "複素数の定義",
+        "行列の積と可逆行列"
+      ],
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc"
+      ],
+      "output": [
+        "可逆行列 B による共役 A から BAB^{-1} が、和とスカラー倍を保つこと"
+      ],
+      "formalizationEvidence": {
+        "leanFile": "lean/Ising2D/Part000",
+        "sageMathFile": "sagemath/_shared/defs.sage",
+        "currentStatus": "和を保つことは左右の分配則で四段、スカラー倍を保つことはスカラー倍と積の交換で四段。後の章で偶セクター転送行列へ特殊化して使う。"
+      },
+      "concludingClaim": "可逆行列による共役は和とスカラー倍を保つ",
+      "concludingClaimEntryId": "calc_formulae_005_matrix_conjugation",
+      "boundaryEvidence": "章内依存順5は複素数の定義だけを外部入力に、可逆行列による共役が和とスカラー倍を保つことを示す。順6の実数から複素数への包含写像は、行列を離れて数の対応を定める別枝であり、順5に依存しない。したがって順5の後で節を閉じる。生成時に順5の直接依存、説明粒度の状態、順6との相互非依存を固定検査する。",
+      "readabilityStatus": "元の主張は「T_B は線型写像である」と述べており、抽象語彙の自動検査に「抽象線型写像」として引っかかっていた。この論文は抽象度の高い道具を持ち込まない方針なので、主張を「和とスカラー倍を保つ」という二つの等式へ書き換えた。証明はもともと二つを別々に示しており、書き換えで各行の根拠はそのまま使える。"
     }
   ],
   "explanationGranularityReview": {
     "reviewedEntryCount": 309,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
-      "calc_formulae_005_matrix_conjugation",
       "calc_formulae_014b_claim_arcsin_bijection",
       "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
       "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
@@ -6585,13 +6611,11 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [
-          "抽象線型写像"
-        ],
-        "inspectedCharacterCount": 1928,
-        "inspectedContentSha256": "442d9a2d8bc141ec7b0bf20eff61a6cfe1900e557b328bd47177679d59a81af5",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 2157,
+        "inspectedContentSha256": "db8101215168a62a7c2059d3e97a8cb9d4a4e898c5be04084e68b1547e9b5239",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
