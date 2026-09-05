@@ -28027,11 +28027,10 @@ w^{m}
                           math(String.raw`\mu_{n}`), " は有限集合である。したがって ",
                           math(String.raw`S_{n,m}`), " が定まる。",
                         ]),
+                        displayMath(String.raw`\lvert\mu_{n}\rvert=n
+\quad(\because\ \blkref{claim_root_of_unity_card};\ \text{個数の記法は}\ \blkref{def_cardinality_notation})`),
                         paragraph([
-                          "第 2 に、", ref("claim_root_of_unity_card"), " により ",
-                          math(String.raw`\lvert\mu_{n}\rvert=n`),
-                          "（", ref("def_cardinality_notation"),
-                          "）である。有限集合の元の個数が ", math(String.raw`n`),
+                          "第 2 の準備として、有限集合の元の個数が ", math(String.raw`n`),
                           " であることから、番号の集合 ",
                           math(String.raw`\{\,i\in\mathbb{N}\mid i<n\,\}`), " から ",
                           math(String.raw`\mu_{n}`), " への全単射 ",
