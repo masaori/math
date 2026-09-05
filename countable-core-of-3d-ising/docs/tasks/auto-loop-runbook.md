@@ -315,3 +315,8 @@ python3 ~/git/masaori/local-pc-management/agent-sessions/audit-tick-schedules.py
 | `~/Library/Logs/ising-3d-cut-auto-loop/next-earliest-start` | 次に走れる時刻（エポック秒） |
 
 最短へ戻したいときは、この 3 ファイルを消す（次の発火で 15 分から始まる）。
+
+## 監督で具体化した次の対象（2026-09-05）
+
+[次の有限な研究対象](next-research-target.md) に、READMEの既存目的から導いた入力・採否・完了条件を記録した。
+現時点では未着手であり、本文の新しい数学的成果ではない。停止実体の変更と研究の進展は別に記録する。

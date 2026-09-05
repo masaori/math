@@ -1,0 +1,30 @@
+{
+  "観測時刻": "2026-09-05T21:10:47+09:00",
+  "実ログ": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log",
+  "ログ更新時刻": "2026-09-05T21:05:12+09:00",
+  "読取末尾sha256": "97770f48cdd83f34a1f12d9a604ef0a4c09bc65335eb11d6edf5b740a2f8e8ea",
+  "抽出行": [
+    "2026-09-05 19:35:23 === tick 異常終了 (exit 1)",
+    "2026-09-05 20:05:05 === tick 開始（codex / まとめに入る締切 20:40 / 強制終了 20:50）",
+    "2026-09-05 20:05:05 モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=/Users/masaori/.codex-coding-agent-0002",
+    "2026-09-05 20:05:12 === tick 異常終了 (exit 1)",
+    "2026-09-05 20:35:04 === tick 開始（codex / まとめに入る締切 21:10 / 強制終了 21:20）",
+    "2026-09-05 20:35:04 モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=/Users/masaori/.codex-coding-agent-0002",
+    "2026-09-05 20:35:10 === tick 異常終了 (exit 1)",
+    "2026-09-05 21:05:05 === tick 開始（codex / まとめに入る締切 21:40 / 強制終了 21:50）",
+    "2026-09-05 21:05:05 モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=/Users/masaori/.codex-coding-agent-0002",
+    "2026-09-05 21:05:12 === tick 異常終了 (exit 1)"
+  ],
+  "起動登録": "未確認",
+  "起動登録の取得状況": "tick窓口への今回観測依頼は受理キュー入り。直接のlaunchctl操作を行っていない。過去の登録情報では埋めない。",
+  "起動登録の実測": {
+    "観測時刻": "2026-09-05T21:25:38+09:00",
+    "コマンド": "launchctl list",
+    "終了コード": 0,
+    "対象label": "com.masaori.ising-lambda-auto-loop",
+    "一致行": [
+      "-\t1\tcom.masaori.ising-lambda-auto-loop"
+    ],
+    "判定": "登録あり"
+  }
+}
