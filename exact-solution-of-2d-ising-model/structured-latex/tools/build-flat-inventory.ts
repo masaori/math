@@ -1649,7 +1649,7 @@ const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", new Set(["theorem_exp_product"])],
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", new Set(["mat_mult"])],
   ["eigenvalues_of_V_008_claim_joint_eigenspace_decomposition", new Set(["trace_of_idempotent"])],
-  ["maxeig_008_claim_trace_power_sandwich", new Set(["moment_log_convexity"])],
+  ["maxeig_008_claim_trace_power_sandwich", new Set(["moment_log_convexity", "psd_cauchy_schwarz"])],
   ["maxeig_007_claim_operator_bound", new Set(["def_matrix_norm", "psd_cauchy_schwarz", "def_rayleigh_sup"])],
   ["maxeig_006_definition_rayleigh_sup", new Set(["def_matrix_norm"])],
   ["maxeig_003_claim_W_is_positive_definite", new Set(["def_symmetrized_transfer_matrix"])],
@@ -3382,6 +3382,31 @@ if (tracePowerUpperBoundEntry.kind !== "claim"
     sandwichDependencies: tracePowerSandwichEntry.dependsOnEntryIds,
   })}`);
 }
+const partitionFunctionSandwichEntry = entries.find((entry) =>
+  entry.id === "maxeig_009_claim_partition_function_sandwich")!;
+const tracePowerSandwichExpectedDirectDependencies = [
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "maxeig_005_claim_psd_cauchy_schwarz",
+  "maxeig_006_definition_rayleigh_sup",
+  "maxeig_008a_claim_trace_power_upper_bound",
+  "maxeig_008b_claim_moment_log_convexity",
+].sort();
+if (tracePowerSandwichEntry.kind !== "claim"
+  || JSON.stringify([...tracePowerSandwichEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(tracePowerSandwichExpectedDirectDependencies)
+  || tracePowerSandwichEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || partitionFunctionSandwichEntry.dependencyPlacement!.chapterOrder
+    !== tracePowerSandwichEntry.dependencyPlacement!.chapterOrder + 1
+  || !partitionFunctionSandwichEntry.dependsOnEntryIds.includes(tracePowerSandwichEntry.id)
+  || !partitionFunctionSandwichEntry.dependsOnEntryIds.includes("maxeig_002_claim_Z_equals_trace_of_W")
+  || tracePowerSandwichEntry.dependsOnEntryIds.includes(partitionFunctionSandwichEntry.id)) {
+  throw new Error(`トレースの挟み込み本体の一項節が変わりました: ${JSON.stringify({
+    order: tracePowerSandwichEntry.dependencyPlacement?.chapterOrder,
+    dependencies: tracePowerSandwichEntry.dependsOnEntryIds,
+    partitionFunctionSandwichOrder: partitionFunctionSandwichEntry.dependencyPlacement?.chapterOrder,
+    partitionFunctionSandwichDependencies: partitionFunctionSandwichEntry.dependsOnEntryIds,
+  })}`);
+}
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || ![
@@ -4163,6 +4188,30 @@ const isingModelSectionBoundaries = [{
   ],
   boundaryEvidence: "章内依存順74は順73の作用素評価とその冪だけを新しい入力に加えてトレースの上からの評価を示す。順75は同じ W の性質と半正定値 Cauchy--Schwarz だけを使い、順74には依存しない独立な準備である。順76の挟み込みはこの二項を直接入力として結論を組み立てるため、順75の後で節を閉じる。生成時に二項の章配置、全直接依存、相互非依存、および順76が両方を直接引くことを固定検査する。",
   readabilityStatus: "分割前は一ブロックに上からの評価・対数凸性・下からの評価の三主張が同居し、証明中で Step 番号によって相互参照していた。三つの主張へ分け、下からの評価が対数凸性をブロック参照で引く形にしたので、一ブロック一主張になり、どの段がどの主張の根拠かが本文だけで追える。",
+}, {
+  name: "トレースの挟み込み",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [tracePowerSandwichEntry.id],
+  input: [
+    "トレースの上からの評価",
+    "モーメント列の正値性と対数凸性",
+    "上限 c(M) の定義",
+    "半正定値双線型形式の Cauchy--Schwarz の不等式",
+  ],
+  externalInputEntryIds: tracePowerSandwichExpectedDirectDependencies,
+  output: [
+    "c(M)^n <= tr(W^n) <= 2^M c(M)^n",
+  ],
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/NecSuf/RayleighMoments.lean",
+    sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+    currentStatus: "下からの評価は、対数凸性から比の単調非減少を出し、望遠鏡積で (x^T W x)^n <= m_n を得て、半正定値行列の二次形式をトレースで押さえ、最後に単位ベクトルにわたる上限を取る。上からの評価は独立した主張から引く。",
+  },
+  concludingClaim: "対称化転送行列の冪のトレースが上限 c(M) の冪で両側から挟まれる",
+  concludingClaimEntryId: tracePowerSandwichEntry.id,
+  boundaryEvidence: "分割後の本体は、上からの評価と対数凸性という二つの直前の主張、上限の定義、半正定値 Cauchy--Schwarz だけを直接入力に、両側の評価を組み立てる。直後の分配関数の挟み撃ちは、この結論に加えて分配関数とトレースの一致を新たな入力に取り、対象がトレースから分配関数へ移るため、ここで節を閉じる。生成時に本体の全直接依存、直後の項が本体と分配関数の一致の両方を引くこと、および逆向きの依存が無いことを固定検査する。",
+  readabilityStatus: "後置きの散文で置かれていた対角成分の評価の根拠を、適用した行の末尾へ移した。ブロック化されていない実数ベクトルの Cauchy--Schwarz を引いていた行も、半正定値版を P=I と二つのベクトルへ適用する形へ書き換えたので、全ての不等号がブロックのある根拠を引く。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

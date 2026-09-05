@@ -1415,6 +1415,39 @@
       ],
       "boundaryEvidence": "章内依存順74は順73の作用素評価とその冪だけを新しい入力に加えてトレースの上からの評価を示す。順75は同じ W の性質と半正定値 Cauchy--Schwarz だけを使い、順74には依存しない独立な準備である。順76の挟み込みはこの二項を直接入力として結論を組み立てるため、順75の後で節を閉じる。生成時に二項の章配置、全直接依存、相互非依存、および順76が両方を直接引くことを固定検査する。",
       "readabilityStatus": "分割前は一ブロックに上からの評価・対数凸性・下からの評価の三主張が同居し、証明中で Step 番号によって相互参照していた。三つの主張へ分け、下からの評価が対数凸性をブロック参照で引く形にしたので、一ブロック一主張になり、どの段がどの主張の根拠かが本文だけで追える。"
+    },
+    {
+      "name": "トレースの挟み込み",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "maxeig_008_claim_trace_power_sandwich"
+      ],
+      "input": [
+        "トレースの上からの評価",
+        "モーメント列の正値性と対数凸性",
+        "上限 c(M) の定義",
+        "半正定値双線型形式の Cauchy--Schwarz の不等式"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "maxeig_005_claim_psd_cauchy_schwarz",
+        "maxeig_006_definition_rayleigh_sup",
+        "maxeig_008a_claim_trace_power_upper_bound",
+        "maxeig_008b_claim_moment_log_convexity"
+      ],
+      "output": [
+        "c(M)^n <= tr(W^n) <= 2^M c(M)^n"
+      ],
+      "formalizationEvidence": {
+        "leanFile": "lean/Ising2D/NecSuf/RayleighMoments.lean",
+        "sageMathFile": "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+        "currentStatus": "下からの評価は、対数凸性から比の単調非減少を出し、望遠鏡積で (x^T W x)^n <= m_n を得て、半正定値行列の二次形式をトレースで押さえ、最後に単位ベクトルにわたる上限を取る。上からの評価は独立した主張から引く。"
+      },
+      "concludingClaim": "対称化転送行列の冪のトレースが上限 c(M) の冪で両側から挟まれる",
+      "concludingClaimEntryId": "maxeig_008_claim_trace_power_sandwich",
+      "boundaryEvidence": "分割後の本体は、上からの評価と対数凸性という二つの直前の主張、上限の定義、半正定値 Cauchy--Schwarz だけを直接入力に、両側の評価を組み立てる。直後の分配関数の挟み撃ちは、この結論に加えて分配関数とトレースの一致を新たな入力に取り、対象がトレースから分配関数へ移るため、ここで節を閉じる。生成時に本体の全直接依存、直後の項が本体と分配関数の一致の両方を引くこと、および逆向きの依存が無いことを固定検査する。",
+      "readabilityStatus": "後置きの散文で置かれていた対角成分の評価の根拠を、適用した行の末尾へ移した。ブロック化されていない実数ベクトルの Cauchy--Schwarz を引いていた行も、半正定値版を P=I と二つのベクトルへ適用する形へ書き換えたので、全ての不等号がブロックのある根拠を引く。"
     }
   ],
   "explanationGranularityReview": {
@@ -18626,7 +18659,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -18945,8 +18978,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5519,
-        "inspectedContentSha256": "59b6877f38fed21e5c0e0e8d5b089cca8cb79b92fd722c9d01ba2d284feb85e4",
+        "inspectedCharacterCount": 5551,
+        "inspectedContentSha256": "886bc4707b2bbf9524b3bdb8ab6e74ba4fadcfe6e060eefcf88a57d2de40d50e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18971,7 +19004,8 @@
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
-        "moment_log_convexity"
+        "moment_log_convexity",
+        "psd_cauchy_schwarz"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],

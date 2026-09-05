@@ -1112,24 +1112,20 @@ x^\top A x
 &\leq\sum_{k,l=1}^{d}|x_k|\,|x_l|\,|A_{kl}|
 &&\bigl(\because\ \text{有限和の三角不等式}\bigr)\\
 &\leq\sum_{k,l=1}^{d}|x_k|\,|x_l|\sqrt{A_{kk}A_{ll}}
-&&\bigl(\because\ |A_{kl}|\leq\sqrt{A_{kk}A_{ll}}\bigr)\\
+&&\bigl(\because\ \text{半正定値の Cauchy--Schwarz }\blkref{psd_cauchy_schwarz}\ \text{を}\ P=A,\ x=e_k,\ y=e_l\ \text{に適用して}\ |A_{kl}|\leq\sqrt{A_{kk}A_{ll}}\bigr)\\
 &=\sum_{k,l=1}^{d}|x_k|\,|x_l|\sqrt{A_{kk}}\sqrt{A_{ll}}
 &&\bigl(\because\ A_{kk},A_{ll}\geq0\text{ と平方根の積の法則}\bigr)\\
 &=\left(\sum_{k=1}^{d}|x_k|\sqrt{A_{kk}}\right)^2
 &&\bigl(\because\ \text{有限和の分配則}\bigr)\\
 &\leq\left(\sum_{k=1}^{d}x_k^2\right)\left(\sum_{k=1}^{d}A_{kk}\right)
-&&\bigl(\because\ \mathbb{R}^d\text{ の Cauchy--Schwarz}\bigr)\\
+&&\bigl(\because\ \text{半正定値の Cauchy--Schwarz }\blkref{psd_cauchy_schwarz}\ \text{を}\ P=I\ \text{と}\\
+&&&\quad\text{二つのベクトル}\ \left(|x_k|\right)_k,\ \left(\sqrt{A_{kk}}\right)_k\ \text{に適用}\bigr)\\
 &=\|x\|^2\,\mathrm{tr}(A)
 &&\bigl(\because\ \text{ノルムとトレースの定義}\bigr).
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`|A_{kl}|`),
-        " を評価する不等号は ",
-        ref("psd_cauchy_schwarz"),
-        " による ",
-        math(String.raw`|A_{kl}| = |e_k^\top A e_l| \leq \sqrt{A_{kk}A_{ll}}`),
-        " の適用である。これを ",
+        "この評価を ",
         math(String.raw`A = W^n`),
         " と単位ベクトル ",
         math(String.raw`x`),
