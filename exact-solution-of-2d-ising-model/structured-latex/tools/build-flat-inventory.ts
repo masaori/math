@@ -1649,6 +1649,7 @@ const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", new Set(["theorem_exp_product"])],
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", new Set(["mat_mult"])],
   ["eigenvalues_of_V_008_claim_joint_eigenspace_decomposition", new Set(["trace_of_idempotent"])],
+  ["maxeig_009_claim_partition_function_sandwich", new Set(["Z_equals_trace_of_W", "trace_power_sandwich"])],
   ["maxeig_008_claim_trace_power_sandwich", new Set(["moment_log_convexity", "psd_cauchy_schwarz"])],
   ["maxeig_007_claim_operator_bound", new Set(["def_matrix_norm", "psd_cauchy_schwarz", "def_rayleigh_sup"])],
   ["maxeig_006_definition_rayleigh_sup", new Set(["def_matrix_norm"])],
@@ -3407,6 +3408,24 @@ if (tracePowerSandwichEntry.kind !== "claim"
     partitionFunctionSandwichDependencies: partitionFunctionSandwichEntry.dependsOnEntryIds,
   })}`);
 }
+const partitionFunctionSandwichExpectedDirectDependencies = [
+  "bridge_007_claim_partition_function_in_pauli_form",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "maxeig_002_claim_Z_equals_trace_of_W",
+  "maxeig_008_claim_trace_power_sandwich",
+].sort();
+if (partitionFunctionSandwichEntry.kind !== "claim"
+  || partitionFunctionSandwichEntry.dependencyPlacement!.chapterOrder !== 77
+  || JSON.stringify([...partitionFunctionSandwichEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(partitionFunctionSandwichExpectedDirectDependencies)
+  || partitionFunctionSandwichEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || entries.filter((entry) => entry.dependsOnEntryIds.includes(partitionFunctionSandwichEntry.id))
+    .some((entry) => entry.dependencyPlacement!.chapterOrder <= 77)) {
+  throw new Error(`分配関数の挟み撃ちの一項節が変わりました: ${JSON.stringify({
+    order: partitionFunctionSandwichEntry.dependencyPlacement?.chapterOrder,
+    dependencies: partitionFunctionSandwichEntry.dependsOnEntryIds,
+  })}`);
+}
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || ![
@@ -4212,6 +4231,29 @@ const isingModelSectionBoundaries = [{
   concludingClaimEntryId: tracePowerSandwichEntry.id,
   boundaryEvidence: "分割後の本体は、上からの評価と対数凸性という二つの直前の主張、上限の定義、半正定値 Cauchy--Schwarz だけを直接入力に、両側の評価を組み立てる。直後の分配関数の挟み撃ちは、この結論に加えて分配関数とトレースの一致を新たな入力に取り、対象がトレースから分配関数へ移るため、ここで節を閉じる。生成時に本体の全直接依存、直後の項が本体と分配関数の一致の両方を引くこと、および逆向きの依存が無いことを固定検査する。",
   readabilityStatus: "後置きの散文で置かれていた対角成分の評価の根拠を、適用した行の末尾へ移した。ブロック化されていない実数ベクトルの Cauchy--Schwarz を引いていた行も、半正定値版を P=I と二つのベクトルへ適用する形へ書き換えたので、全ての不等号がブロックのある根拠を引く。",
+}, {
+  name: "分配関数の挟み撃ち",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [partitionFunctionSandwichEntry.id],
+  input: [
+    "分配関数と対称化転送行列の冪のトレースの一致",
+    "トレースの挟み込み",
+    "パウリ行列による分配関数の表示（設定の共有）",
+  ],
+  externalInputEntryIds: partitionFunctionSandwichExpectedDirectDependencies,
+  output: [
+    "c(M)^{N_row} <= Z(J,J') <= 2^M c(M)^{N_row}",
+  ],
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/NecSuf/RayleighMoments.lean",
+    sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+    currentStatus: "分配関数をトレースへ置き換え、トレースの挟み込みの下からの評価と上からの評価をそれぞれ一段で適用する。二つの鎖に分けて書いた。",
+  },
+  concludingClaim: "分配関数そのものが上限 c(M) の冪で両側から挟まれる",
+  concludingClaimEntryId: partitionFunctionSandwichEntry.id,
+  boundaryEvidence: "章内依存順77は、分配関数とトレースの一致、トレースの挟み込み、パウリ形の分配関数表示だけを直接入力に、分配関数の両側評価へ移す。これは行列のトレースについての評価を、模型の分配関数についての評価へ言い換える一歩であり、以後この結論を使う項目はすべて順77より後にある。生成時に全直接依存、章内依存順、および順77以前の項目がこの結論を引かないことを固定検査する。",
+  readabilityStatus: "一文にまとめていた二段の適用を、下からの評価と上からの評価の二つの鎖へ開き、各行が定義または既証の主張を一つだけ引く形にした。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

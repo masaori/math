@@ -1448,6 +1448,37 @@
       "concludingClaimEntryId": "maxeig_008_claim_trace_power_sandwich",
       "boundaryEvidence": "分割後の本体は、上からの評価と対数凸性という二つの直前の主張、上限の定義、半正定値 Cauchy--Schwarz だけを直接入力に、両側の評価を組み立てる。直後の分配関数の挟み撃ちは、この結論に加えて分配関数とトレースの一致を新たな入力に取り、対象がトレースから分配関数へ移るため、ここで節を閉じる。生成時に本体の全直接依存、直後の項が本体と分配関数の一致の両方を引くこと、および逆向きの依存が無いことを固定検査する。",
       "readabilityStatus": "後置きの散文で置かれていた対角成分の評価の根拠を、適用した行の末尾へ移した。ブロック化されていない実数ベクトルの Cauchy--Schwarz を引いていた行も、半正定値版を P=I と二つのベクトルへ適用する形へ書き換えたので、全ての不等号がブロックのある根拠を引く。"
+    },
+    {
+      "name": "分配関数の挟み撃ち",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "maxeig_009_claim_partition_function_sandwich"
+      ],
+      "input": [
+        "分配関数と対称化転送行列の冪のトレースの一致",
+        "トレースの挟み込み",
+        "パウリ行列による分配関数の表示（設定の共有）"
+      ],
+      "externalInputEntryIds": [
+        "bridge_007_claim_partition_function_in_pauli_form",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "maxeig_002_claim_Z_equals_trace_of_W",
+        "maxeig_008_claim_trace_power_sandwich"
+      ],
+      "output": [
+        "c(M)^{N_row} <= Z(J,J') <= 2^M c(M)^{N_row}"
+      ],
+      "formalizationEvidence": {
+        "leanFile": "lean/Ising2D/NecSuf/RayleighMoments.lean",
+        "sageMathFile": "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+        "currentStatus": "分配関数をトレースへ置き換え、トレースの挟み込みの下からの評価と上からの評価をそれぞれ一段で適用する。二つの鎖に分けて書いた。"
+      },
+      "concludingClaim": "分配関数そのものが上限 c(M) の冪で両側から挟まれる",
+      "concludingClaimEntryId": "maxeig_009_claim_partition_function_sandwich",
+      "boundaryEvidence": "章内依存順77は、分配関数とトレースの一致、トレースの挟み込み、パウリ形の分配関数表示だけを直接入力に、分配関数の両側評価へ移す。これは行列のトレースについての評価を、模型の分配関数についての評価へ言い換える一歩であり、以後この結論を使う項目はすべて順77より後にある。生成時に全直接依存、章内依存順、および順77以前の項目がこの結論を引かないことを固定検査する。",
+      "readabilityStatus": "一文にまとめていた二段の適用を、下からの評価と上からの評価の二つの鎖へ開き、各行が定義または既証の主張を一つだけ引く形にした。"
     }
   ],
   "explanationGranularityReview": {
@@ -18450,7 +18481,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "incomingReferenceCount": 0,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -18969,7 +19000,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "incomingReferenceCount": 0,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -19044,8 +19075,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 778,
-        "inspectedContentSha256": "0a2537eb2cb15322d877239898b7f7615bb1dad5a7e68643de2f14a8e3e5ec85",
+        "inspectedCharacterCount": 1173,
+        "inspectedContentSha256": "2d5d29d661bbadd0b634d8787bef36c81e430f510c245f17ce3f6392a1cf7fbd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19067,7 +19098,9 @@
         "maxeig_008_claim_trace_power_sandwich"
       ],
       "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
+        "set_and_algebra_notation",
+        "Z_equals_trace_of_W",
+        "trace_power_sandwich"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -19108,8 +19141,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 14870,
-        "inspectedContentSha256": "1c3b4b36a0974742f349b0b0fe88e8ba0b2e96ffa29063496e77f7c4c485558e",
+        "inspectedCharacterCount": 14972,
+        "inspectedContentSha256": "f1a7478144565fcbbe47a57845f5471cd149b2dd4544c9c3a55b105482242d62",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

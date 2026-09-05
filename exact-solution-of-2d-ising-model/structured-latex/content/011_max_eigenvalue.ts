@@ -1202,18 +1202,28 @@ c^{n}
       ),
     ],
     proof: [
-      paragraph([
-        ref("Z_equals_trace_of_W"),
-        " より ",
-        math(String.raw`Z(J,J') = \mathrm{tr}(W^{N_{\mathrm{row}}})`),
-        " であり、",
-        ref("trace_power_sandwich"),
-        " を ",
-        math(String.raw`n = N_{\mathrm{row}}`),
-        " として適用すればよい。",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+Z(J,J')
+&=\mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)
+  &&\bigl(\because\ \blkref{Z_equals_trace_of_W}\bigr)\\
+&\geq c(M)^{N_{\mathrm{row}}}
+  &&\bigl(\because\ \blkref{trace_power_sandwich}\ \text{の下からの評価を}\ n=N_{\mathrm{row}}\ \text{に適用}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+Z(J,J')
+&=\mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)
+  &&\bigl(\because\ \blkref{Z_equals_trace_of_W}\bigr)\\
+&\leq 2^{M}\,c(M)^{N_{\mathrm{row}}}
+  &&\bigl(\because\ \blkref{trace_power_sandwich}\ \text{の上からの評価を}\ n=N_{\mathrm{row}}\ \text{に適用}\bigr)
+\end{aligned}`),
+      paragraph(["この二つを合わせて主張を得る。"]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-05 の式変形統一で、一文にまとめていた二段の適用を、下からの評価と上からの評価の二つの鎖へ開いた。内容と根拠は変えていない。",
+      ],
+    },
   },
 
   {
@@ -1250,9 +1260,11 @@ c^{n}
         math(String.raw`\mathcal{R}`),
         "）であり、",
         math(String.raw`\mathcal{R}`),
-        " が ",
-        math(String.raw`\|W\|`),
-        " で上に有界だからである。空でないことは、",
+        " が成分の絶対値の有限和 ",
+        math(String.raw`\sum_{i,j}|W_{ij}|`),
+        " で上に有界だからである（",
+        ref("def_rayleigh_sup"),
+        " の有界性の評価）。空でないことは、",
         math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M}`),
         " の単位ベクトルを具体的に作れることから従う。",
       ]),
