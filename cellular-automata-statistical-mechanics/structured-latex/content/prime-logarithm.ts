@@ -6,6 +6,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "素数上の有限台整数ベクトル" },
     labels: ["def_prime_integer_vectors"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [
       paragraph([math(String.raw`\mathcal P:=\{p\in\mathbb N:p\ge2\text{ かつ正の約数が }1,p\text{ だけ}\}`),
@@ -22,6 +23,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "有限台整数ベクトルの加法構造" },
     labels: ["def_prime_vector_additive_operations"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [
       paragraph([ref("def_prime_integer_vectors"), " の ", math(String.raw`a,b\in\Lambda`),
@@ -40,6 +42,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "有限台整数ベクトルは加法可換群をなす" },
     labels: ["claim_prime_vectors_abelian_group"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [paragraph([ref("def_prime_vector_additive_operations"), " の加法・零・符号反転は、",
       ref("def_prime_integer_vectors"), " の集合を可換群にする。すなわち加法は結合的かつ可換で、零は単位元、符号反転は加法逆元である。"])],
@@ -73,6 +76,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "正の有理数の素数指数" },
     labels: ["def_positive_rational_prime_valuation"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "Q",
     statement: [
       paragraph([math(String.raw`q\in\mathbb Q_{>0}`), " を既約分数 ",
@@ -94,6 +98,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "素数指数による対数写像" },
     labels: ["def_prime_logarithm"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [
       paragraph([ref("def_positive_rational_prime_valuation"), " の指数を、",
@@ -108,6 +113,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "有限台整数ベクトルから正の有理数への復元写像" },
     labels: ["def_prime_vector_reconstruction"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "Q",
     statement: [
       paragraph([math(String.raw`a\in\Lambda`), "（", ref("def_prime_integer_vectors"), "）に対し"]),
@@ -129,6 +135,7 @@ R(a):=
     kind: "claim",
     title: { text: "対数写像と復元写像は互いに逆である" },
     labels: ["claim_prime_logarithm_inverse"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [
       paragraph([math(String.raw`q\in\mathbb Q_{>0}`), "、", math(String.raw`a\in\Lambda`), " に対し"]),
@@ -171,6 +178,7 @@ R(\log_\Lambda q)
     kind: "claim",
     title: { text: "正の有理数の積の対数は対数の和である" },
     labels: ["claim_prime_logarithm_product"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [
       paragraph([math(String.raw`q,t\in\mathbb Q_{>0}`), " に対し、", ref("def_prime_logarithm"),
@@ -203,6 +211,7 @@ R(\log_\Lambda q)
     kind: "claim",
     title: { text: "正の有理数の比の対数は対数の差である" },
     labels: ["claim_prime_logarithm_ratio"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [
       paragraph([math(String.raw`q,t\in\mathbb Q_{>0}`), " に対して"]),
@@ -234,6 +243,7 @@ R(\log_\Lambda q)
     kind: "definition",
     title: { text: "正の有理数の比較で定める有限台整数ベクトルの順序" },
     labels: ["def_prime_vector_order"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [
       paragraph([math(String.raw`a,b\in\Lambda`), " に対し、", ref("def_prime_vector_reconstruction"), " を使い"]),
@@ -249,6 +259,7 @@ R(\log_\Lambda q)
     kind: "claim",
     title: { text: "対数写像は正の有理数の順序を保ち加法は順序と両立する" },
     labels: ["claim_prime_logarithm_ordered_group"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [
       paragraph([ref("def_prime_vector_order"), " の順序は ", ref("claim_prime_vectors_abelian_group"),
@@ -285,6 +296,7 @@ a+_\Lambda c\le_\Lambda b+_\Lambda c
     kind: "claim",
     title: { text: "対数順序群内の整数除算は全係数の整除に限る" },
     labels: ["claim_prime_vector_integer_division"],
+    verification: ["sagemath/check/logarithmic-counts"],
     habitat: "countable",
     statement: [
       paragraph([math(String.raw`a\in\Lambda`), "、", math(String.raw`d\in\mathbb Z\setminus\{0\}`),
