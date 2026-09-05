@@ -198,11 +198,11 @@ PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
 log "=== tick 開始（codex / まとめに入る締切 ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
 head_before="$(git -C "$REPO_DIR" rev-parse --short HEAD)"
 # 実行モデルとアカウントを固定する。上限・失敗時も別モデル／別 CLI へ切り替えない。
-log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
+log "モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=$CODEX_TICK_HOME"
 set +e
 printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" \
   timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
-  -m gpt-6-astra -c model_reasoning_effort=medium \
+  -m gpt-5.6-sol -c model_reasoning_effort=high \
   --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
 status=$?
 set -e

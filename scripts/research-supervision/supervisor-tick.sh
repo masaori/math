@@ -76,11 +76,11 @@ EOF
 PROMPT="${PROMPT//@RUN@/$RUN_ID}"
 PROMPT="${PROMPT//@BASE@/$BASE_COMMIT}"
 log "=== 六研究監督開始 run=$RUN_ID base=$BASE_COMMIT"
-log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
+log "モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=$CODEX_TICK_HOME"
 set +e
 printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" LEAN_NUM_THREADS=1 \
   timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
-  -m gpt-6-astra -c model_reasoning_effort=medium \
+  -m gpt-5.6-sol -c model_reasoning_effort=high \
   --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
 status=$?
 set -e
