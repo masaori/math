@@ -395,7 +395,7 @@ const v1PauliRepresentationExpectedExternalInputEntryIds = [
 const v1PauliRepresentationExpectedExternalInputContentSha256 = new Map<string, string>([
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "2040831405f933942bdff84147045e5feddd899546259e7449c6903c8411de65"],
   ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
-  ["bridge_003_claim_exp_of_diagonal", "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747"],
+  ["bridge_003_claim_exp_of_diagonal", "e088de3055a90fec15c19ec4b9241df47aa9f15313c517efbb9946462b5ed8b4"],
   ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "8eb7e83461c7dd3069ae859b9aa527374c7898d1e6f4609218e4f7caac34c68f"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calc_formulae_definition_cosh_sinh", "e884934c5a35ebb1daa4e665eb779f623f99cffba33fe779cf01ee52518a6d3a"],
@@ -474,7 +474,7 @@ const nextIsingBoundaryComparisonExpectedInputContentSha256 = new Map<string, st
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "2040831405f933942bdff84147045e5feddd899546259e7449c6903c8411de65"],
   ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
   ["bridge_002_claim_sigma_z_diagonal_action", "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232"],
-  ["bridge_003_claim_exp_of_diagonal", "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747"],
+  ["bridge_003_claim_exp_of_diagonal", "e088de3055a90fec15c19ec4b9241df47aa9f15313c517efbb9946462b5ed8b4"],
   ["bridge_004_claim_V1_component_equals_pauli", "542e930937951f970b4795cbc171117a849f0b5b3e6eae1da351f9970c0c8c0b"],
   ["bridge_005_claim_two_by_two_transfer_identity", "7488a4fdc7984a8ad7c60219a39eca26d92d3230df4c5c43d320c7931df8d8ee"],
   ["bridge_006_claim_V2_component_equals_pauli", "02f2eb834d7e16abf67232ac9a868ee14eec22cf56c1a5a34294d71ec51f65c1"],
@@ -635,7 +635,7 @@ const positiveSymmetrizedTransferMatrixEntriesExpectedExternalInputEntryIds = [
 const positiveSymmetrizedTransferMatrixEntriesExpectedExternalInputContentSha256 = new Map<string, string>([
   ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
   ["bridge_002_claim_sigma_z_diagonal_action", "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232"],
-  ["bridge_003_claim_exp_of_diagonal", "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747"],
+  ["bridge_003_claim_exp_of_diagonal", "e088de3055a90fec15c19ec4b9241df47aa9f15313c517efbb9946462b5ed8b4"],
   ["bridge_006_claim_V2_component_equals_pauli", "02f2eb834d7e16abf67232ac9a868ee14eec22cf56c1a5a34294d71ec51f65c1"],
   ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "8eb7e83461c7dd3069ae859b9aa527374c7898d1e6f4609218e4f7caac34c68f"],
   ["maxeig_001_definition_transfer_matrix_square_root", "6a3dc703d94db789ada47354ee26a8c4e0b16e88af6cabb8eba15113d892142a"],
@@ -1167,7 +1167,7 @@ const vPlusDefinitionAndSignedTraceExpectedExternalInputEntryIds = [
 ].sort();
 const vPlusDefinitionAndSignedTraceExpectedExternalInputContentSha256 = new Map<string, string>([
   ["bridge_001_definition_config_basis", "c29559e9454e9cb5483e5bd1a1f852995a0904aab977f59d0e209bdbcd28297d"],
-  ["bridge_003_claim_exp_of_diagonal", "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747"],
+  ["bridge_003_claim_exp_of_diagonal", "e088de3055a90fec15c19ec4b9241df47aa9f15313c517efbb9946462b5ed8b4"],
   ["bridge_006_claim_V2_component_equals_pauli", "02f2eb834d7e16abf67232ac9a868ee14eec22cf56c1a5a34294d71ec51f65c1"],
   ["bridge_010_claim_epsilon_commutes", "225512460e5993591f6025bf01e9757753f1b3fc7d65cb02bfd86ee5a82a1735"],
   ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "8eb7e83461c7dd3069ae859b9aa527374c7898d1e6f4609218e4f7caac34c68f"],
@@ -1688,6 +1688,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["bridge_003_claim_exp_of_diagonal", "LLMによる検証: 行列積・複素演算・実数包含・非負平方根への参照を補った。複素成分d_kに非負実数の指数級数の定理を適用しており、その定理だけでは複素数の指数e^{d_k}の定義と収束を与えない。この定義・証明の接続は未完である。非対角成分について「左側が常に0」は差の絶対値を指すなら不正確で、部分和の非対角成分が0であることと極限からの結論を区別する必要がある。成分冪の定義と帰納法、有限線型結合と非負平方比較、同時適用と各行参照の分割も未解決であり、零成分と零次を保って補完後に依存と閉包を再判定する。"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "LLMによる検証: 行列積と実数係数の包含への参照を補った。行列の冪と指数、線型写像の反復と指数の定義が同居する。冪の再帰は本項に実在するが先行する収束証明より前への提示が必要である。実行列と複素行列の成分演算の接続、入力の実数完備性と極限法則、定義群の分割と各行参照が未解決であり、零次と零の引数を保ち、補完後に依存と閉包を再判定する。"],
   ["eigenvalues_of_V_013_claim_exp_hermitian_positive_definite", "LLMによる検証: 指数定義・可換指数積・零行列指数と、成分計算で使う共役・ノルム・絶対値・実数包含・トレースへの欠落参照を補った。指数の正定値性と合同変換・正の定数倍・トレースの四主張が同居する。矩形行列への共役転置の定義と積公式の適用範囲は未整備であり、片側の逆元積だけから可逆性を結論する段階、可逆行列が非零ベクトルを非零へ送る根拠、複素数と正の実数の包含の区別、共役転置の対合性と有限和・冪の帰納、同時適用と各行参照が未解決である。定義と証明の前提を補完し分割した後に依存と閉包を再判定する。"],
 
@@ -2398,6 +2399,7 @@ if (JSON.stringify(v1PauliRepresentationUnresolvedExternalInputGranularity) !== 
   "linear_space_general_000b_claim_kronecker_product_rule",
   "linear_space_general_000c_claim_kronecker_multilinear",
   "exp_linear_map_002_definition_exp_of_endomorphism",
+  "bridge_003_claim_exp_of_diagonal",
   "transfer_matrix_005_definition_end_isomorphism",
 ])) {
   throw new Error(`V1 のパウリ行列表示の外部入力の説明粒度判定が変わりました: ${JSON.stringify(v1PauliRepresentationUnresolvedExternalInputGranularity)}`);
@@ -3777,7 +3779,8 @@ if (kappaDefinitionEntry.explanationGranularityReview.status !== "自動検査�
   || epsilonProjectorPropertiesEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || v1RestrictionToEigenspacesEntry.explanationGranularityReview.status !== "具体的な行列計算への展開またはブロック分割を要する"
   || !positiveSymmetrizedTransferMatrixEntriesSection.externalInputEntryIds.every((id) =>
-    entries.find((entry) => entry.id === id)!.explanationGranularityReview.status === "自動検査で主題に適合")
+    entries.find((entry) => entry.id === id)!.explanationGranularityReview.status ===
+      (id === "bridge_003_claim_exp_of_diagonal" ? "具体的な行列計算への展開またはブロック分割を要する" : "自動検査で主題に適合"))
   || epsilonProjectorDefinitionSection.sectionEntries[0]!.explanationGranularityReview.status !== "自動検査で主題に適合"
   ) {
   throw new Error("章内依存順16–29と対称化転送行列の全成分正値性の外部入力の説明粒度判定が変わりました");
@@ -11881,7 +11884,284 @@ for (const id of ["exp_linear_map_002_definition_exp_of_endomorphism", "exp_line
     throw new Error("正定値性が指数の定義・積公式・零行列の指数より前へ移りました");
   }
 }
+const exponentialDefinitionSectionEntryIds = [
+  "exp_linear_map_002_definition_exp_of_endomorphism"
+];
+const exponentialDefinitionSection = validateReviewedSection(
+  "行列と行列への線型写像の指数の定義", "数学的道具立て", exponentialDefinitionSectionEntryIds,
+  new Map([
+  [
+    "exp_linear_map_002_definition_exp_of_endomorphism",
+    []
+  ]
+]),
+  new Map([
+  [
+    "exp_linear_map_002_definition_exp_of_endomorphism",
+    "1b90c006155b2b723ad7169ab806c4fff82870687ce2865a7bc677a875134fa2"
+  ]
+]),
+  [
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_007_inclusion_rr_to_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "exp_linear_map_000b_claim_matrix_exp_series_converges",
+  "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+  "linear_space_general_002b_definition_matrix_norm",
+  "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+],
+  new Map([
+  [
+    "calc_formulae_003_matrix_decomposition",
+    "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calc_formulae_007_inclusion_rr_to_cc",
+    "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ],
+  [
+    "exp_linear_map_000b_claim_matrix_exp_series_converges",
+    "081de060bbad105f91c57433abbe6545518c96afee20f1e69f81167f6cb35325"
+  ],
+  [
+    "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+    "7f8878116e4672d93d30e4babcccacab6bb2b8f8423348cbb9ba7e19d78af627"
+  ],
+  [
+    "linear_space_general_002b_definition_matrix_norm",
+    "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab"
+  ],
+  [
+    "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069"
+  ]
+]),
+  [
+  "exp_linear_map_002_definition_exp_of_endomorphism"
+],
+);
+const exponentialDefinitionSectionBoundarySnapshot = [
+  {
+    "id": "bridge_003_claim_exp_of_diagonal",
+    "kind": "claim",
+    "sha256": "e088de3055a90fec15c19ec4b9241df47aa9f15313c517efbb9946462b5ed8b4",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_linear_map_000a_claim_real_exp_series_converges",
+      "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+      "exp_linear_map_002_definition_exp_of_endomorphism",
+      "linear_space_general_002b_definition_matrix_norm"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_007_inclusion_rr_to_cc",
+    "kind": "definition",
+    "sha256": "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "kind": "claim",
+    "sha256": "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_008_multiply_by_minus_one",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_000a_claim_real_exp_series_converges",
+    "kind": "claim",
+    "sha256": "1065e4f465b1b0b49eae7d16f9d734421f472beec053c3effaff63127eecf077",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_000b_claim_matrix_exp_series_converges",
+    "kind": "claim",
+    "sha256": "081de060bbad105f91c57433abbe6545518c96afee20f1e69f81167f6cb35325",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_linear_map_000a_claim_real_exp_series_converges",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+      "linear_space_general_003d_claim_matrix_completeness"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+    "kind": "theorem",
+    "sha256": "7f8878116e4672d93d30e4babcccacab6bb2b8f8423348cbb9ba7e19d78af627",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_linear_map_000a_claim_real_exp_series_converges",
+      "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "linear_space_general_003c_claim_matrix_norm_vector_bound",
+      "linear_space_general_003d_claim_matrix_completeness"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_002_definition_exp_of_endomorphism",
+    "kind": "definition",
+    "sha256": "1b90c006155b2b723ad7169ab806c4fff82870687ce2865a7bc677a875134fa2",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002b_definition_matrix_norm",
+    "kind": "definition",
+    "sha256": "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "kind": "claim",
+    "sha256": "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of exponentialDefinitionSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`行列と行列への線型写像の指数の定義の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("bridge_003_claim_exp_of_diagonal").dependencyPlacement!.chapterOrder
+  !== exponentialDefinitionSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("行列と行列への線型写像の指数の定義の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "行列と行列への線型写像の指数の定義",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "exp_linear_map_002_definition_exp_of_endomorphism"
+  ],
+  "input": [
+    "行列指数級数と線型写像の各点収束、ノルムと極限の一意性",
+    "行列積、複素数と実数係数の包含、集合記号"
+  ],
+  "output": [
+    "行列の冪と指数写像",
+    "行列への線型写像の反復と指数写像"
+  ],
+  "mainTheorem": "収束と一意性を使う二種類の指数写像の定義",
+  "mainTheoremEntryId": "exp_linear_map_002_definition_exp_of_endomorphism",
+  "boundaryEvidence": "既存の収束・一意性を受けて行列と線型写像の指数を定める一項で閉じる。直後の対角行列は行列指数だけを使い、線型写像の反復を使わず、対角成分の冪と複素数の指数への接続を追加する計算である。定義から特定の行列の成分計算への境界として、対象と全直接入力、比較項と全直接入力の本文・全依存・種別・粒度・相対順をプログラミングによる検証で固定する。",
+  "readabilityStatus": "LLMによる検証で対象と全直接入力、対角行列の全本文を読んだ。冪と反復、二種類の指数の定義の分割、実行列と複素行列の演算接続、収束証明より後にある冪の再帰の提示順が未解決である。比較側は非負実数だけの級数定理を複素成分へ適用しており、複素数の指数の定義と収束への接続が未完である。非対角の部分和が零であることと差の絶対値の極限の説明、成分冪と有限線型結合の帰納、平方比較と各行参照も未解決に記録する。零の引数と零次を保ち、定義・前提の補完と分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calc_formulae_007_inclusion_rr_to_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "exp_linear_map_000b_claim_matrix_exp_series_converges",
+    "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+    "linear_space_general_002b_definition_matrix_norm",
+    "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+  ]
+}, {
   "name": "指数級数の数ベクトル作用と線型写像の各点収束",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

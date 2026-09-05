@@ -399,6 +399,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
     title: { text: "対角行列の指数関数" },
     labels: ["exp_of_diagonal_matrix"],
     statement: [
+      paragraph(["行列の成分積は ", ref("mat_mult"), "、複素成分の演算は ", ref("complex_numbers_form_a_field"), "、実数係数の包含は ", ref("inclusion_rr_to_cc"), "、非負平方根は ", ref("definition_of_sqrt_r_positive"), " による。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         " とし、",

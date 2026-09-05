@@ -218,6 +218,36 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "行列と行列への線型写像の指数の定義",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "exp_linear_map_002_definition_exp_of_endomorphism"
+      ],
+      "input": [
+        "行列指数級数と線型写像の各点収束、ノルムと極限の一意性",
+        "行列積、複素数と実数係数の包含、集合記号"
+      ],
+      "output": [
+        "行列の冪と指数写像",
+        "行列への線型写像の反復と指数写像"
+      ],
+      "mainTheorem": "収束と一意性を使う二種類の指数写像の定義",
+      "mainTheoremEntryId": "exp_linear_map_002_definition_exp_of_endomorphism",
+      "boundaryEvidence": "既存の収束・一意性を受けて行列と線型写像の指数を定める一項で閉じる。直後の対角行列は行列指数だけを使い、線型写像の反復を使わず、対角成分の冪と複素数の指数への接続を追加する計算である。定義から特定の行列の成分計算への境界として、対象と全直接入力、比較項と全直接入力の本文・全依存・種別・粒度・相対順をプログラミングによる検証で固定する。",
+      "readabilityStatus": "LLMによる検証で対象と全直接入力、対角行列の全本文を読んだ。冪と反復、二種類の指数の定義の分割、実行列と複素行列の演算接続、収束証明より後にある冪の再帰の提示順が未解決である。比較側は非負実数だけの級数定理を複素成分へ適用しており、複素数の指数の定義と収束への接続が未完である。非対角の部分和が零であることと差の絶対値の極限の説明、成分冪と有限線型結合の帰納、平方比較と各行参照も未解決に記録する。零の引数と零次を保ち、定義・前提の補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "exp_linear_map_000b_claim_matrix_exp_series_converges",
+        "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+        "linear_space_general_002b_definition_matrix_norm",
+        "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+      ]
+    },
+    {
       "name": "指数級数の数ベクトル作用と線型写像の各点収束",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2979,6 +3009,7 @@
       "eigenvalues_of_V_011_definition_hermitian_positive_definite",
       "eigenvalues_of_V_012_claim_star_is_norm_preserving",
       "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+      "bridge_003_claim_exp_of_diagonal",
       "freeenergy_004_theorem_riemann_sum_to_integral",
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y",
@@ -7694,7 +7725,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 24,
+        "incomingReferenceCount": 25,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7812,7 +7843,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 21,
+        "incomingReferenceCount": 22,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8053,7 +8084,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 13,
+        "incomingReferenceCount": 14,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9406,7 +9437,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 15,
+        "incomingReferenceCount": 16,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -19137,29 +19168,37 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4204,
-        "inspectedContentSha256": "5113d388b0ec40f7d2e0a87983fe995b358171afa75fda040decfd1c98460747",
+        "inspectedCharacterCount": 4605,
+        "inspectedContentSha256": "e088de3055a90fec15c19ec4b9241df47aa9f15313c517efbb9946462b5ed8b4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積・複素演算・実数包含・非負平方根への参照を補った。複素成分d_kに非負実数の指数級数の定理を適用しており、その定理だけでは複素数の指数e^{d_k}の定義と収束を与えない。この定義・証明の接続は未完である。非対角成分について「左側が常に0」は差の絶対値を指すなら不正確で、部分和の非対角成分が0であることと極限からの結論を区別する必要がある。成分冪の定義と帰納法、有限線型結合と非負平方比較、同時適用と各行参照の分割も未解決であり、零成分と零次を保って補完後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "complex_numbers_form_a_field",
         "def_exp",
         "def_matrix_norm",
         "definition_of_cc",
+        "definition_of_sqrt_r_positive",
         "exp_converges",
+        "inclusion_rr_to_cc",
+        "mat_mult",
         "real_exp_series_converges",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
         "calculation_formulae_definition_set_and_algebra_notation",
         "exp_linear_map_000a_claim_real_exp_series_converges",
         "exp_linear_map_001_theorem_exp_series_pointwise_converges",
