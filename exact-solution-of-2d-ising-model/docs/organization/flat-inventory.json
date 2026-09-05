@@ -218,6 +218,33 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "複素数の逆元と四則演算の性質",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field"
+      ],
+      "input": [
+        "実数対上の複素数の加法と積、集合記号",
+        "実数の包含写像と複素数の負号"
+      ],
+      "output": [
+        "非零複素数の乗法逆元の成分公式と商の記法",
+        "複素数の加法・乗法・分配律を合わせた体の性質"
+      ],
+      "mainTheorem": "成分ごとの加法と複素積を備えた複素数は体をなす",
+      "mainTheoremEntryId": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "boundaryEvidence": "実数対の積から非零複素数の逆元を示す項を、成分加法と分配律を合わせた体の性質の項が直接使う二項の依存鎖で閉じる。直後の複素数から極座標同値類への写像は二項を使わず、平方根・逆正接・極座標同値類へ直接入力を切り替える。後続写像の出力はこの節へ含めない。プログラミングによる検証では対象と後続比較の全直接入力について本文・全直接依存・種別・粒度を固定し、連続性・内部依存・一意な節末出力・直後の相対順を固定する。",
+      "readabilityStatus": "LLMによる検証では乗法群と体の証明を全体で読み、逆元公式から加法と分配律を経た結論への接続を確認した。分配律と結合律の同時適用を同じ定理と説明する箇所、一般集合Sでの逆元一意性、独立した複数主張の混在、行末ラベル不足を具体的な未解決として残す。体の証明冒頭の古い加法説明は現行定義に合わせ、後続写像の欠落参照と逆だった題を修正した。対象の本文完成や後続写像の完成を宣言するものではない。節の外部入力の集合記号と複素数、後続比較だけで使う極座標同値類にも説明粒度の未解決が残る。",
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calc_formulae_008_multiply_by_minus_one",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "極座標の同値類の積と逆元",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -6663,7 +6690,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 14,
+        "incomingReferenceCount": 15,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7714,7 +7741,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "incomingReferenceCount": 2,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8132,7 +8159,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8331,7 +8358,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 非零複素数の乗法群と商の記法を一項へ束ね、分配律と結合律を同時適用して同じ定理と説明する段、一般集合 S の逆元一意性、適用行のラベル不足がある。複素数の成分計算への統一と主張分割は未解決である。"
       },
       "dependsOnLabels": [
         "definition_of_cc",
@@ -8386,15 +8413,15 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 8092,
-        "inspectedContentSha256": "316670a867f1bc6da94520d84c3c276fb8212c902ae383dd8c2205c398bc6203",
+        "inspectedCharacterCount": 8088,
+        "inspectedContentSha256": "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 加法の諸性質、分配律、単位元の相違、乗法逆元を一項に束ね、複数演算をまとめた段と行末ラベル不足がある。成分加法を未定義扱いした旧説明は現行の定義に合わせたが、本文の主張分割と各段の展開は未解決である。"
       },
       "dependsOnLabels": [
         "definition_of_cc",
@@ -8431,8 +8458,8 @@
     {
       "id": "calculation_formulae_027_definition_phi_polar",
       "kind": "definition",
-      "title": "\\text{極座標表現の}\\mathbb{C}\\text{への写像}",
-      "titleFormat": "tex",
+      "title": "複素数から極座標同値類への写像",
+      "titleFormat": "text",
       "labels": [
         "def_phi_polar"
       ],
@@ -8451,8 +8478,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 792,
-        "inspectedContentSha256": "26468a1fc644f2ad89263cf9cf00971e08228a4cebb25f6e5f0292d9f1230053",
+        "inspectedCharacterCount": 1043,
+        "inspectedContentSha256": "c142596ab62d7fd79c40acdffa6a4fe01eb59ace120f96ee2f99cd04084cb861",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8462,11 +8489,17 @@
         "manualReview": null
       },
       "dependsOnLabels": [
+        "def_arctan",
         "definition_of_cc",
+        "definition_of_sqrt_r_positive",
+        "polar_equivalence_class",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_014d_definition_arctan",
+        "calc_formulae_019_definition_polar_equivalence_class",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [

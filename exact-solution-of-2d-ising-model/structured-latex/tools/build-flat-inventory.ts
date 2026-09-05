@@ -1687,6 +1687,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["calculation_formulae_024_claim_multiplicative_group_of_complex_numbers", "LLMによる検証: 非零複素数の乗法群と商の記法を一項へ束ね、分配律と結合律を同時適用して同じ定理と説明する段、一般集合 S の逆元一意性、適用行のラベル不足がある。複素数の成分計算への統一と主張分割は未解決である。"],
+  ["calculation_formulae_025_claim_complex_numbers_form_a_field", "LLMによる検証: 加法の諸性質、分配律、単位元の相違、乗法逆元を一項に束ね、複数演算をまとめた段と行末ラベル不足がある。成分加法を未定義扱いした旧説明は現行の定義に合わせたが、本文の主張分割と各段の展開は未解決である。"],
   ["calculation_formulae_022_definition_operations_on_polar_representation", "LLMによる検証: 代表元から演算を定めた際の代表元独立性は後続の乗法群の主張で初めて示している。定義と妥当性の提示の整備が未解決である。"],
   ["calculation_formulae_023_claim_multiplicative_group_of_polar_representation", "LLMによる検証: モノイド性・非零部分の群・逆元公式を一項に束ね、一般集合 S の逆元一意性を挿入し、各適用行のラベルが不足する。半径と角度の対の具体的計算への統一と主張の分割は未解決である。"],
   ["calc_formulae_015_claim_cos_arctan_sin_arctan", "LLMによる検証: 逆正接の正弦と余弦の二等式を一項に束ね、適用行ごとの定義ラベルと平方根の商の根拠が不足している。構造だけを確定し、主張の分割と一ステップ一定理の説明は未解決とする。"],
@@ -4186,7 +4188,209 @@ if (findToolEntry("calculation_formulae_024_claim_multiplicative_group_of_comple
   !== polarMultiplicationSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("極座標の同値類の積と逆元の直後の項目が変わりました");
 }
+const complexFieldSectionEntryIds = [
+  "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field"
+];
+const complexFieldSection = validateReviewedSection(
+  "複素数の逆元と四則演算の性質", "数学的道具立て", complexFieldSectionEntryIds,
+  new Map([
+  [
+    "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+    []
+  ],
+  [
+    "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    [
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers"
+    ]
+  ]
+]),
+  new Map([
+  [
+    "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+    "bd4b1ebeede09bd6ebe666ce9e6007c3399351f81939f0a1e89dbe4ef2ec82a7"
+  ],
+  [
+    "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6"
+  ]
+]),
+  [
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_007_inclusion_rr_to_cc",
+  "calc_formulae_008_multiply_by_minus_one",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calc_formulae_007_inclusion_rr_to_cc",
+    "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647"
+  ],
+  [
+    "calc_formulae_008_multiply_by_minus_one",
+    "40554c5b165be91970ade721cd63dcef585c555302fe0ff68642327b66571844"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "calculation_formulae_025_claim_complex_numbers_form_a_field"
+],
+);
+const complexFieldSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_007_inclusion_rr_to_cc",
+    "kind": "definition",
+    "sha256": "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_008_multiply_by_minus_one",
+    "kind": "definition",
+    "sha256": "40554c5b165be91970ade721cd63dcef585c555302fe0ff68642327b66571844",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_014d_definition_arctan",
+    "kind": "definition",
+    "sha256": "d7d6ac6e18ecfbb96c7bc7ebe9b89c874e6004df8b114a08b95b9c4568d140a2",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_014_definition_inverse_trig_functions",
+      "calc_formulae_014c_claim_arctan_argument_in_unit_interval",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_019_definition_polar_equivalence_class",
+    "kind": "definition",
+    "sha256": "db5e61c9e6e2f4aef9faa5b5154b7f7e4651951f655d44193a92caf541c654a6",
+    "dependencies": [
+      "calc_formulae_016_definition_angle_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+    "kind": "claim",
+    "sha256": "bd4b1ebeede09bd6ebe666ce9e6007c3399351f81939f0a1e89dbe4ef2ec82a7",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "kind": "claim",
+    "sha256": "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_008_multiply_by_minus_one",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_027_definition_phi_polar",
+    "kind": "definition",
+    "sha256": "c142596ab62d7fd79c40acdffa6a4fe01eb59ace120f96ee2f99cd04084cb861",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_014d_definition_arctan",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of complexFieldSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`複素数の逆元と四則演算の性質の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("calculation_formulae_027_definition_phi_polar").dependencyPlacement!.chapterOrder
+  !== complexFieldSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("複素数の逆元と四則演算の性質の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "複素数の逆元と四則演算の性質",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+    "calculation_formulae_025_claim_complex_numbers_form_a_field"
+  ],
+  "input": [
+    "実数対上の複素数の加法と積、集合記号",
+    "実数の包含写像と複素数の負号"
+  ],
+  "output": [
+    "非零複素数の乗法逆元の成分公式と商の記法",
+    "複素数の加法・乗法・分配律を合わせた体の性質"
+  ],
+  "mainTheorem": "成分ごとの加法と複素積を備えた複素数は体をなす",
+  "mainTheoremEntryId": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+  "boundaryEvidence": "実数対の積から非零複素数の逆元を示す項を、成分加法と分配律を合わせた体の性質の項が直接使う二項の依存鎖で閉じる。直後の複素数から極座標同値類への写像は二項を使わず、平方根・逆正接・極座標同値類へ直接入力を切り替える。後続写像の出力はこの節へ含めない。プログラミングによる検証では対象と後続比較の全直接入力について本文・全直接依存・種別・粒度を固定し、連続性・内部依存・一意な節末出力・直後の相対順を固定する。",
+  "readabilityStatus": "LLMによる検証では乗法群と体の証明を全体で読み、逆元公式から加法と分配律を経た結論への接続を確認した。分配律と結合律の同時適用を同じ定理と説明する箇所、一般集合Sでの逆元一意性、独立した複数主張の混在、行末ラベル不足を具体的な未解決として残す。体の証明冒頭の古い加法説明は現行定義に合わせ、後続写像の欠落参照と逆だった題を修正した。対象の本文完成や後続写像の完成を宣言するものではない。節の外部入力の集合記号と複素数、後続比較だけで使う極座標同値類にも説明粒度の未解決が残る。",
+  "externalInputEntryIds": [
+    "calc_formulae_006_definition_of_cc",
+    "calc_formulae_007_inclusion_rr_to_cc",
+    "calc_formulae_008_multiply_by_minus_one",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "極座標の同値類の積と逆元",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

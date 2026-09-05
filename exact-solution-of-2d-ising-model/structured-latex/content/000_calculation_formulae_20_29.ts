@@ -855,14 +855,14 @@ b
         "加法について。",
         ref("definition_of_cc"),
         " は ",
-        math(String.raw`\mathbb{C}:=\mathbb{R}^2`),
-        " と定めたうえで積のみを明示しているので、加法は ",
+        math(String.raw`\mathbf{C}=\mathbf{R}^2`),
+        " 上の加法と積を定めている。その成分ごとの加法は ",
         math(String.raw`\mathbb{R}^2`),
-        " が標準的にもつ成分ごとの加法",
+        " の実数成分を足す次の式",
       ]),
       displayMath(String.raw`(a,b)+(c,d):=(a+c,\ b+d) \qquad (a,b,c,d\in\mathbb{R})`),
       paragraph([
-        "とする。以下ではこの加法と ",
+        "である。以下ではこの加法と ",
         ref("definition_of_cc"),
         " の積について、体の公理をすべて確かめる。",
       ]),
@@ -1103,10 +1103,11 @@ b
       ordinal: 27,
     },
     title: {
-      tex: "\\text{極座標表現の}\\mathbb{C}\\text{への写像}",
+      text: "複素数から極座標同値類への写像",
     },
     labels: ["def_phi_polar"],
     statement: [
+      paragraph([ref("polar_equivalence_class"), " の同値類と、", ref("definition_of_sqrt_r_positive"), "、", ref("def_arctan"), " を用いる。"]),
       paragraph([
         math(String.raw`\phi_{\mathrm{polar}} : \mathbb{C} \to (\text{極座標表現})`),
         " を次で定める。",
