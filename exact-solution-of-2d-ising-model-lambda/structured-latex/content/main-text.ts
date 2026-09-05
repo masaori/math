@@ -26677,19 +26677,17 @@ g
                       ],
                       proof: [
                         paragraph([
-                          "準備として、値の側の 3 つの非零性を確かめる。第 1 に、",
-                          math(String.raw`n\geq1`), " と ", math(String.raw`w\in\mu_n`),
-                          " から ", math(String.raw`w\neq0`), " である（",
-                          ref("claim_root_of_unity_element_ne_zero"), "）。第 2 に、",
-                          math(String.raw`n\geq1`), " なので ", math(String.raw`n-1`),
-                          " は自然数であり、", math(String.raw`w\neq0`), " から ",
-                          math(String.raw`w^{\,n-1}\neq0`), " である（",
-                          ref("claim_qbar_pow_ne_zero"), "）。第 3 に、零でない元 ",
-                          math(String.raw`w^{\,n-1}`), " を ", math(String.raw`n`),
-                          " 個（", math(String.raw`n\geq1`), "）足す有限和について ",
-                          math(String.raw`\sum_{i:\ i<n}w^{\,n-1}\neq0`), " である（",
-                          ref("claim_qbar_repeated_sum_ne_zero"), "）。",
+                          "準備として、", math(String.raw`n\geq1`), " から ",
+                          math(String.raw`n-1\in\mathbb N`), " であることを用い、値の側の非零性を順に得る。",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+w&\neq0
+&&(\because\ n\geq1,\ w\in\mu_n,\ \blkref{claim_root_of_unity_element_ne_zero})\\
+w^{\,n-1}&\neq0
+&&(\because\ w\neq0,\ n-1\in\mathbb N,\ \blkref{claim_qbar_pow_ne_zero})\\
+\sum_{i:\ i<n}w^{\,n-1}&\neq0
+&&(\because\ n\geq1,\ w^{\,n-1}\neq0,\ \blkref{claim_qbar_repeated_sum_ne_zero})
+\end{aligned}`),
                         paragraph(["そのうえで、", math(String.raw`\mathrm{aev}_{w}(g)`), " を計算する。"]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{aev}_{w}(g)
@@ -26699,7 +26697,7 @@ g
 &&(\because\ \blkref{claim_qbar_pow_diff_quotient_root_value})
 \end{aligned}`),
                         paragraph([
-                          "終点は、準備の第 3 で零でないことを示した元である。ゆえに ",
+                          "終点は、準備で零でないことを示した有限和である。ゆえに ",
                           math(String.raw`\mathrm{aev}_{w}(g)\neq0`),
                           " である。この議論に実数体も複素数体も現れない。",
                         ]),

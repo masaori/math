@@ -12,3 +12,7 @@ sage sagemath/check/root-factor-quotient-value-ne-zero/check.sage
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+2026-09-05: 三つの非零性の根拠を各行末へ移した後も、SageMath の
+プログラミングによる検証は全項目通過。LLM による検証では、本文の論法と参照が
+保存され、検算する式は変わっていないことを確認した。
