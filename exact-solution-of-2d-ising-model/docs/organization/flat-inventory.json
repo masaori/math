@@ -218,6 +218,28 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "クロネッカー積の成分添字と転置",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_000d_claim_kronecker_transpose"
+      ],
+      "input": [
+        "クロネッカー積の成分の定義と複素数の行列"
+      ],
+      "output": [
+        "クロネッカー積の転置が各因子の転置のクロネッカー積になる等式"
+      ],
+      "mainTheorem": "クロネッカー積の転置",
+      "mainTheoremEntryId": "linear_space_general_000d_claim_kronecker_transpose",
+      "boundaryEvidence": "成分の二つの添字を入れ替えて因子ごとの転置へ戻す計算が全成分の一致で閉じる一項を節とする。直後の基底は転置を使わず、行列単位・数ベクトルの標準基底と任意の基底について線型性で展開する別枝である。定義への共通依存だけでまとめず、線型結合と基底の入力が加わる点を境界とし、プログラミングによる検証で対象・比較と全直接入力の本文・依存・種別・粒度・相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で対象と全直接入力、後続基底の全本文を読んだ。対象は転置の定義と公式の分割、各サイズへの定義適用と各行参照の明示が残る。比較側は三主張・次元と行列単位等の定義の分割、有限次元の生成族の元数の下限という未証明の一般命題を具体的複素行列へ接続する根拠、有限展開の帰納法と数ベクトルの場合の省略、各行参照が未解決である。生成に関する包含を逆向きに述べた説明は本文で訂正した。前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "linear_space_general_000_definition_kronecker_product"
+      ]
+    },
+    {
       "name": "クロネッカー積の和とスカラー倍の展開",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2617,6 +2639,7 @@
       "linear_space_general_000b_claim_kronecker_product_rule",
       "linear_space_general_000c_claim_kronecker_multilinear",
       "linear_space_general_000d_claim_kronecker_transpose",
+      "linear_space_general_001_theorem_tensor_product_basis",
       "linear_space_general_002b_definition_matrix_norm",
       "linear_space_general_003_claim_matrix_norm_submultiplicativity",
       "linear_space_general_003c_claim_matrix_norm_vector_bound",
@@ -11141,18 +11164,18 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10807,
-        "inspectedContentSha256": "b1d6fa5e021b9be178b745de740fe02f935e6e352a7fb758d4994f2eeb43cbc2",
+        "inspectedCharacterCount": 10835,
+        "inspectedContentSha256": "0b14d498919e0e510b2e50b975d3379db4e963cb1dc5583d6bb429c782a7fd31",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 生成に関する包含の向きを逆に述べた説明を訂正した。三主張と次元・行列単位等の定義の分割、有限次元の生成族の元数の下限という未証明の一般命題を具体的複素行列へ接続する根拠、有限展開の帰納法、数ベクトルの場合の同様計算と各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "def_kronecker",

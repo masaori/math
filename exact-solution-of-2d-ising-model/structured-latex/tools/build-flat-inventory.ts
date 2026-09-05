@@ -118,7 +118,7 @@ const matrixLinearMapCorrespondenceExpectedExternalInputContentSha256 = new Map<
   ["linear_space_general_000_definition_kronecker_product", "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5"],
-  ["linear_space_general_001_theorem_tensor_product_basis", "b1d6fa5e021b9be178b745de740fe02f935e6e352a7fb758d4994f2eeb43cbc2"],
+  ["linear_space_general_001_theorem_tensor_product_basis", "0b14d498919e0e510b2e50b975d3379db4e963cb1dc5583d6bb429c782a7fd31"],
   ["exp_linear_map_001_theorem_exp_series_pointwise_converges", "af6e085d614179050c2b2cfc62548b146f41083dbe158453221af092d9796239"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
 ]);
@@ -160,7 +160,7 @@ const invertibleMatrixConjugationExpectedExternalInputContentSha256 = new Map<st
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5"],
-  ["linear_space_general_001_theorem_tensor_product_basis", "b1d6fa5e021b9be178b745de740fe02f935e6e352a7fb758d4994f2eeb43cbc2"],
+  ["linear_space_general_001_theorem_tensor_product_basis", "0b14d498919e0e510b2e50b975d3379db4e963cb1dc5583d6bb429c782a7fd31"],
   ["linear_space_general_002_claim_scalar_identity_commutes", "f8f5ddafc9ff868ec1ace87dae5f992b09aacc9063d84f3f432c8b3273ba873e"],
   ["linear_space_general_004_lemma_centralizer_is_scalar", centralizerIsScalarExpectedSha256],
 ]);
@@ -661,7 +661,7 @@ const zYLinearIndependenceExpectedExternalInputContentSha256 = new Map<string, s
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
-  ["linear_space_general_001_theorem_tensor_product_basis", "b1d6fa5e021b9be178b745de740fe02f935e6e352a7fb758d4994f2eeb43cbc2"],
+  ["linear_space_general_001_theorem_tensor_product_basis", "0b14d498919e0e510b2e50b975d3379db4e963cb1dc5583d6bb429c782a7fd31"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
 ]);
 const v1V2JordanWignerSectionEntryIds = [
@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["linear_space_general_001_theorem_tensor_product_basis", "LLMによる検証: 生成に関する包含の向きを逆に述べた説明を訂正した。三主張と次元・行列単位等の定義の分割、有限次元の生成族の元数の下限という未証明の一般命題を具体的複素行列へ接続する根拠、有限展開の帰納法、数ベクトルの場合の同様計算と各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000d_claim_kronecker_transpose", "LLMによる検証: 転置の定義とクロネッカー積の転置公式が同居しており、定義と主張への分割が未解決である。任意のM≥1の各サイズでの転置の定義の適用、定義を使う各行の参照を明示し、分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "LLMによる検証: 行列積と複素数の演算法則の参照を補った。三主張と多重添字和の補題が同居し、有限和の帰納法、添字変更、二箇所の定義代入、可換律と結合律の同時適用、各行参照の分離が未解決である。M=1と空和・空積の規約を保ち、分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "LLMによる検証: 複素数の演算法則の参照を補った。行列と数ベクトルの主張およびスカラー倍の特例の分割、成分ごとの和・スカラー倍の定義、積の並べ替えと分配の分離、数ベクトルの同様計算の展開と各行参照が未解決である。M=1の空積を保持し、前提補完と分割後に依存と閉包を再判定する。"],
@@ -9091,7 +9092,139 @@ if (findToolEntry("linear_space_general_000d_claim_kronecker_transpose").depende
   !== kroneckerLinearitySection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("クロネッカー積の和とスカラー倍の展開の直後の項目が変わりました");
 }
+const kroneckerTransposeSectionEntryIds = [
+  "linear_space_general_000d_claim_kronecker_transpose"
+];
+const kroneckerTransposeSection = validateReviewedSection(
+  "クロネッカー積の成分添字と転置", "数学的道具立て", kroneckerTransposeSectionEntryIds,
+  new Map([
+  [
+    "linear_space_general_000d_claim_kronecker_transpose",
+    []
+  ]
+]),
+  new Map([
+  [
+    "linear_space_general_000d_claim_kronecker_transpose",
+    "c0014341f8b8968f27acf4793018d15312e7313acad2dccadd439617703c4cd4"
+  ]
+]),
+  [
+  "calc_formulae_006_definition_of_cc",
+  "linear_space_general_000_definition_kronecker_product"
+],
+  new Map([
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "linear_space_general_000_definition_kronecker_product",
+    "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40"
+  ]
+]),
+  [
+  "linear_space_general_000d_claim_kronecker_transpose"
+],
+);
+const kroneckerTransposeSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_000_definition_kronecker_product",
+    "kind": "definition",
+    "sha256": "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_000c_claim_kronecker_multilinear",
+    "kind": "claim",
+    "sha256": "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_000_definition_kronecker_product"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_000d_claim_kronecker_transpose",
+    "kind": "claim",
+    "sha256": "c0014341f8b8968f27acf4793018d15312e7313acad2dccadd439617703c4cd4",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "linear_space_general_000_definition_kronecker_product"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_001_theorem_tensor_product_basis",
+    "kind": "theorem",
+    "sha256": "0b14d498919e0e510b2e50b975d3379db4e963cb1dc5583d6bb429c782a7fd31",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_000_definition_kronecker_product",
+      "linear_space_general_000c_claim_kronecker_multilinear"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of kroneckerTransposeSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`クロネッカー積の成分添字と転置の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("linear_space_general_001_theorem_tensor_product_basis").dependencyPlacement!.chapterOrder
+  !== kroneckerTransposeSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("クロネッカー積の成分添字と転置の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "クロネッカー積の成分添字と転置",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "linear_space_general_000d_claim_kronecker_transpose"
+  ],
+  "input": [
+    "クロネッカー積の成分の定義と複素数の行列"
+  ],
+  "output": [
+    "クロネッカー積の転置が各因子の転置のクロネッカー積になる等式"
+  ],
+  "mainTheorem": "クロネッカー積の転置",
+  "mainTheoremEntryId": "linear_space_general_000d_claim_kronecker_transpose",
+  "boundaryEvidence": "成分の二つの添字を入れ替えて因子ごとの転置へ戻す計算が全成分の一致で閉じる一項を節とする。直後の基底は転置を使わず、行列単位・数ベクトルの標準基底と任意の基底について線型性で展開する別枝である。定義への共通依存だけでまとめず、線型結合と基底の入力が加わる点を境界とし、プログラミングによる検証で対象・比較と全直接入力の本文・依存・種別・粒度・相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で対象と全直接入力、後続基底の全本文を読んだ。対象は転置の定義と公式の分割、各サイズへの定義適用と各行参照の明示が残る。比較側は三主張・次元と行列単位等の定義の分割、有限次元の生成族の元数の下限という未証明の一般命題を具体的複素行列へ接続する根拠、有限展開の帰納法と数ベクトルの場合の省略、各行参照が未解決である。生成に関する包含を逆向きに述べた説明は本文で訂正した。前提補完と分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_006_definition_of_cc",
+    "linear_space_general_000_definition_kronecker_product"
+  ]
+}, {
   "name": "クロネッカー積の和とスカラー倍の展開",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

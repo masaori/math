@@ -952,7 +952,7 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         math(String.raw`\left(b_{a_1}\boxtimes\cdots\boxtimes b_{a_M}\right)`),
         " も ",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
-        " を張る（張る族の線型結合で書ける族は、同じ空間を張る）。この族の元数は ",
+        " を張る（既知の基底の各元がこの候補族の線型結合で書けるので、既知の基底が張る空間は候補族が張る空間に含まれる）。この族の元数は ",
         math(String.raw`\#\{1,2,3,4\}^M=4^M`),
         " であり、Step 2 より ",
         math(String.raw`\dim_{\mathbb{C}}\mathrm{Mat}(2^M,\mathbb{C})=4^M`),
