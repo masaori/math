@@ -36,6 +36,7 @@ const escapeHtml = (value: string): string =>
 
 const missing: string[] = [];
 let checked = 0;
+const occurrenceCount = (haystack: string, needle: string): number => haystack.split(needle).length - 1;
 const expectIn = (haystack: string, needle: string, description: string): void => {
   checked += 1;
   if (!haystack.includes(escapeHtml(needle))) missing.push(`${description}: ${needle}`);
@@ -73,25 +74,26 @@ for (const stage of stages) {
   expectIn(section, stage.scope, `${stage.title} の範囲`);
   expectIn(section, stage.habitat, `${stage.title} の量の住処`);
   /**
-   * 状態は進捗の主張そのものなので、段階の区画の中に、正本の三値がそのまま出ていることを見る。
-   * 区画に閉じないと、別の段階に出ている同じ三値で満たされてしまう。
+   * 状態は進捗の主張そのものなので、期待する状態欄が一つだけ存在することを完全一致で見る。
+   * 期待する語の部分一致だけでは、矛盾する別の状態欄を併記した公開物が通ってしまう。
    */
-  expectIn(section, stage.status, `${stage.title} の状態`);
+  const expectedStatus = stage.current ? `${stage.status}（現在地）` : stage.status;
+  const expectedStatusElement = `<p class="roadmap-status">状態: ${escapeHtml(expectedStatus)}</p>`;
   checked += 1;
-  if (section.includes("（現在地）") !== stage.current) {
-    missing.push(
-      stage.current
-        ? `現在地なのに現在地の表示が無い: ${stage.title}`
-        : `現在地でないのに現在地として描かれている: ${stage.title}`,
-    );
+  const statusElementCount = occurrenceCount(section, '<p class="roadmap-status">');
+  if (statusElementCount !== 1) {
+    missing.push(`${stage.title} の状態欄が一つでない: ${statusElementCount} 件`);
   }
   checked += 1;
-  if (section.includes("roadmap-stage--current") !== stage.current) {
-    missing.push(
-      stage.current
-        ? `現在地の印が出力に無い: ${stage.title}`
-        : `現在地でない段階に現在地の印が付いている: ${stage.title}`,
-    );
+  if (occurrenceCount(section, expectedStatusElement) !== 1) {
+    missing.push(`${stage.title} の状態欄が正本と完全一致しない: ${expectedStatus}`);
+  }
+  const expectedOpening =
+    `<section class="roadmap-stage${stage.current ? " roadmap-stage--current" : ""}"` +
+    ` id="sec-roadmap-${stage.id}">`;
+  checked += 1;
+  if (!section.startsWith(expectedOpening)) {
+    missing.push(`${stage.title} の現在地の印が正本と一致しない`);
   }
   for (const item of stage.completion) expectIn(section, item, `${stage.title} の完了条件`);
   for (const item of stage.evidence) {

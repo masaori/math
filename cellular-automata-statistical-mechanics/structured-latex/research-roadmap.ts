@@ -163,6 +163,43 @@ export const roadmapStages = [
     ],
   },
   {
+    id: "finite_stage_lambda_thermodynamics",
+    title: "有限舞台の対数順序群値の熱力学の構成",
+    scope:
+      "有限舞台の上だけで、大域写像の反復の周期点の数え上げから熱力学の量を構成する。" +
+      "配位の個数を自然数として数え、その対数を対数順序群の元として取り、逆温度に当たる量を" +
+      "差分商として同じ群の中で作る。無限の舞台も熱力学極限も使わない範囲に限る。",
+    habitat:
+      "数え上げは自然数、その対数と差分商は対数順序群の元であり、実数体も複素数体も現れない。" +
+      "極限を取らない限りこの段階は可算側で閉じる。",
+    dependsOn: ["general_stage_and_nonuniform_rules", "elementary_ca_finite_calibration"],
+    status: "未着手",
+    current: false,
+    completion: [
+      "有限舞台の数え上げから、状態数・エントロピー・逆温度・自由エントロピーに当たる量が、" +
+        "自然数と対数順序群の中だけで本文に定義されていること。",
+      "構成の各段が実数体・複素数体を一度も経由していないことが、住処の宣言と実数複素数の裏取り検査で確認できること。",
+      "構成した量が初等セルオートマトンの全数計算で素因数分解による厳密計算として検算され、浮動小数点を使っていないこと。",
+    ],
+    evidence: [
+      {
+        kind: "label",
+        label: "claim_fixed_point_count_decomposition",
+        why: "有限舞台の反復の不動点の個数が最小周期ごとの数え上げへ分解され、熱力学の量の材料が自然数として既に本文にある。",
+      },
+      {
+        kind: "label",
+        label: "claim_fixed_point_count_finite_decidability",
+        why: "その数え上げが有限決定可能であり、対数を取る前の量が決定可能な自然数として確定している。",
+      },
+      {
+        kind: "path",
+        path: "docs/survey/連続物理の可算な担い手.md",
+        why: "この段階の成果を書き出す先である、連続物理の概念ごとの可算な担い手の台帳。",
+      },
+    ],
+  },
+  {
     id: "one_dimensional_arbitrary_radius",
     title: "一次元・任意半径の一様規則",
     scope:
@@ -233,12 +270,19 @@ export const roadmapStages = [
     title: "統計力学との照合",
     scope:
       "有限舞台の転送行列、その跡としての分配関数、その対数としての自由エネルギーを、" +
-      "2 値セルオートマトンの数え上げとして構成する。統計力学側の概念（分配関数、自由エネルギー、" +
-      "Gibbs 測度、相転移）ごとに、可算側の担い手と、担えない残りを台帳へ書き出す。",
+      "2 値セルオートマトンの数え上げとして構成する。有限舞台だけで閉じる構成は前段" +
+      "「有限舞台の対数順序群値の熱力学の構成」が済ませており、この段階が加えるのは、" +
+      "無限の舞台と熱力学極限を要する側（Gibbs 測度、相転移）との照合である。統計力学側の概念" +
+      "（分配関数、自由エネルギー、Gibbs 測度、相転移）ごとに、可算側の担い手と、" +
+      "担えない残りを台帳へ書き出す。",
     habitat:
       "転送行列は成分が 0 と 1 の有限行列、分配関数は自然数、自由エネルギーは対数順序群の元である。" +
       "熱力学極限だけが実数へ出る操作であり、その一点へ脱出を隔離する。",
-    dependsOn: ["lattice_and_countable_group_stages", "rule_class_separation"],
+    dependsOn: [
+      "finite_stage_lambda_thermodynamics",
+      "lattice_and_countable_group_stages",
+      "rule_class_separation",
+    ],
     status: "未着手",
     current: false,
     completion: [

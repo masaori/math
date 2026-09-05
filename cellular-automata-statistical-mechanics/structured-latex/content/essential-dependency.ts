@@ -365,7 +365,10 @@ x(u) & (u\in S\setminus\{w\})
     title: { text: "本質的依存台は真理値表から有限回の比較で決定できる" },
     labels: ["claim_support_finite_decidability"],
     habitat: "finite",
-    verification: ["sagemath/check/essential-dependency-support"],
+    verification: [
+      "sagemath/check/essential-dependency-support",
+      "sagemath/check/elementary-ca-finite-calibration",
+    ],
     statement: [
       paragraph([
         "局所真理値表 ",
