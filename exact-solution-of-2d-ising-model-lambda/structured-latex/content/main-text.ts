@@ -27428,7 +27428,8 @@ F_{m+1}
                           " である。帰納法の仮定により、ある ",
                           math(String.raw`A\in\overline{\mathbb{Q}}[t]`), " が存在して",
                         ]),
-                        displayMath(String.raw`\prod_{k=0}^{j-1}(t-\widehat{w(k)})=(t-\widehat{w(i)})A`),
+                        displayMath(String.raw`\prod_{k=0}^{j-1}(t-\widehat{w(k)})=(t-\widehat{w(i)})A
+\quad(\because\ \text{帰納法の仮定を}\ i<j\ \text{へ適用})`),
                         paragraph([
                           "かつ「", math(String.raw`l\in\mathbb{N}`), " が ", math(String.raw`j-1<l`),
                           " を満たすならば ", math(String.raw`\mathrm{ac}_l(A)=0`),
