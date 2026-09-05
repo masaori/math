@@ -20,6 +20,9 @@ exact-solution-of-2d-ising-model-lambda/structured-latex/type-tests/.tmp/
 # sage が .sage から生成する中間ファイル
 *.sage.py
 
+# sage の save() が書く再生成可能なキャッシュ（正本は各 check.sage の生成コード）
+*.sobj
+
 # 自動ループの実行ログ（各 tick の Claude セッションの出力）
 exact-solution-of-2d-ising-model-lambda/logs/
 
