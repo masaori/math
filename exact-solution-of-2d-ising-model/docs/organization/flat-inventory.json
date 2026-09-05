@@ -218,6 +218,32 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "クロネッカー積で作る行列と数ベクトルの基底",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_001_theorem_tensor_product_basis"
+      ],
+      "input": [
+        "クロネッカー積の成分定義と各因子についての線型性",
+        "複素数と集合記号、有限次元の生成族と基底についての前提"
+      ],
+      "output": [
+        "行列単位と標準基底のクロネッカー積による基底と次元",
+        "各因子の任意の基底から得られる行列・数ベクトルの基底"
+      ],
+      "mainTheorem": "クロネッカー積がつくる基底",
+      "mainTheoremEntryId": "linear_space_general_001_theorem_tensor_product_basis",
+      "boundaryEvidence": "成分比較で標準基底と行列単位を同定し、線型性で任意の因子基底へ展開する現存一項が基底の主張へ閉じる。直後のスカラー倍した単位行列の可換性は本項やクロネッカー積を使わず、複素行列の積と交換子を入力にする別枝である。基底による生成の議論から成分による積の演算法則への入力切替を根拠とし、プログラミングによる検証で対象と比較の全直接入力・本文・種別・粒度と相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で対象・全直接入力と後続可換性の全本文を読んだ。三主張・次元と定義の分割、生成族元数の下限の未証明の一般命題を具体的複素行列へ接続する根拠、有限展開の帰納法・数ベクトルの場合の省略・各行参照が未解決である。比較側を複素行列に具体化し行列積と交換子の参照を補ったが、成分ごとの和・スカラー倍・単位行列の定義と積の法則、二箇所同時適用の分離と各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000c_claim_kronecker_multilinear"
+      ]
+    },
+    {
       "name": "クロネッカー積の成分添字と転置",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2640,6 +2666,7 @@
       "linear_space_general_000c_claim_kronecker_multilinear",
       "linear_space_general_000d_claim_kronecker_transpose",
       "linear_space_general_001_theorem_tensor_product_basis",
+      "linear_space_general_002_claim_scalar_identity_commutes",
       "linear_space_general_002b_definition_matrix_norm",
       "linear_space_general_003_claim_matrix_norm_submultiplicativity",
       "linear_space_general_003c_claim_matrix_norm_vector_bound",
@@ -7508,7 +7535,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9102,7 +9129,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 12,
+        "incomingReferenceCount": 13,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -10600,7 +10627,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "incomingReferenceCount": 2,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11227,27 +11254,36 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 786,
-        "inspectedContentSha256": "f8f5ddafc9ff868ec1ace87dae5f992b09aacc9063d84f3f432c8b3273ba873e",
+        "inspectedCharacterCount": 1046,
+        "inspectedContentSha256": "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 任意の体という記述を複素行列へ具体化し、行列積・交換子・成分の複素演算法則の参照を補った。成分ごとの和・スカラー倍・単位行列の定義と積の法則、二箇所への同時適用の分離、各行参照が未解決であり、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "commutator_via_anticommutators",
+        "complex_numbers_form_a_field",
+        "definition_of_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_047_claim_commutator_via_anticommutators",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
+        "set_and_algebra_notation",
+        "definition_of_cc"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],

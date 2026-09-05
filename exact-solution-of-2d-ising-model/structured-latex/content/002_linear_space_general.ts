@@ -1011,17 +1011,15 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
     labels: ["scalar_identity_commutes"],
     statement: [
       paragraph([
-        "体 ",
-        math(String.raw`K`),
-        "、",
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",
-        math(String.raw`c \in K`),
+        math(String.raw`c \in \mathbb{C}`),
         "、",
-        math(String.raw`A \in \mathrm{Mat}(n, K)`),
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
         " について、",
       ]),
       displayMath(String.raw`[c \cdot I,\, A] = 0`),
+      paragraph(["行列積は ", ref("mat_mult"), "、交換子は ", ref("commutator_via_anticommutators"), " の定義を用い、成分の複素数の演算は ", ref("complex_numbers_form_a_field"), " に従う。"]),
     ],
     proof: [
       displayMath(

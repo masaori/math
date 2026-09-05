@@ -161,7 +161,7 @@ const invertibleMatrixConjugationExpectedExternalInputContentSha256 = new Map<st
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5"],
   ["linear_space_general_001_theorem_tensor_product_basis", "0b14d498919e0e510b2e50b975d3379db4e963cb1dc5583d6bb429c782a7fd31"],
-  ["linear_space_general_002_claim_scalar_identity_commutes", "f8f5ddafc9ff868ec1ace87dae5f992b09aacc9063d84f3f432c8b3273ba873e"],
+  ["linear_space_general_002_claim_scalar_identity_commutes", "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f"],
   ["linear_space_general_004_lemma_centralizer_is_scalar", centralizerIsScalarExpectedSha256],
 ]);
 const pauliAndCliffordMatrixGroupsSectionEntryIds = [
@@ -843,7 +843,7 @@ const v1PlusMinusAndCommutationExpectedExternalInputContentSha256 = new Map<stri
   ["exp_linear_map_002_definition_exp_of_endomorphism", "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "de25a7cfd8a1fd81d0d86ca48b4d3a85550853b4857925dd6768c842c31cdeb0"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
-  ["linear_space_general_002_claim_scalar_identity_commutes", "f8f5ddafc9ff868ec1ace87dae5f992b09aacc9063d84f3f432c8b3273ba873e"],
+  ["linear_space_general_002_claim_scalar_identity_commutes", "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f"],
   ["linear_space_general_003b_claim_matrix_multiplication_continuity", "46baea960668f4e457bafd8af2cd6bd763c2b8f565b60b9cca6db63f384d1ca3"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
@@ -1261,7 +1261,7 @@ const vPlusPositiveDefiniteExpectedExternalInputContentSha256 = new Map<string, 
   ["evensectorT_definition_V_plus", "25224f1a0789bbff2c99b11323319f0e297bd6a0f68c213757097e35957e37ef"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "de25a7cfd8a1fd81d0d86ca48b4d3a85550853b4857925dd6768c842c31cdeb0"],
   ["exp_linear_map_004_theorem_exp_zero_is_identity", "bb23ba43e403ab11c2c6a41e4356f0228a5880e37b0e2fe4df9a62289696fd53"],
-  ["linear_space_general_002_claim_scalar_identity_commutes", "f8f5ddafc9ff868ec1ace87dae5f992b09aacc9063d84f3f432c8b3273ba873e"],
+  ["linear_space_general_002_claim_scalar_identity_commutes", "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["transfer_matrix_011_definition_H1_H2", "02a14a895094a781e52c134f1e31763509ed2b747896f18cab3c7564c6c226fb"],
 ]);
@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["linear_space_general_002_claim_scalar_identity_commutes", "LLMによる検証: 任意の体という記述を複素行列へ具体化し、行列積・交換子・成分の複素演算法則の参照を補った。成分ごとの和・スカラー倍・単位行列の定義と積の法則、二箇所への同時適用の分離、各行参照が未解決であり、前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_001_theorem_tensor_product_basis", "LLMによる検証: 生成に関する包含の向きを逆に述べた説明を訂正した。三主張と次元・行列単位等の定義の分割、有限次元の生成族の元数の下限という未証明の一般命題を具体的複素行列へ接続する根拠、有限展開の帰納法、数ベクトルの場合の同様計算と各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000d_claim_kronecker_transpose", "LLMによる検証: 転置の定義とクロネッカー積の転置公式が同居しており、定義と主張への分割が未解決である。任意のM≥1の各サイズでの転置の定義の適用、定義を使う各行の参照を明示し、分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "LLMによる検証: 行列積と複素数の演算法則の参照を補った。三主張と多重添字和の補題が同居し、有限和の帰納法、添字変更、二箇所の定義代入、可換律と結合律の同時適用、各行参照の分離が未解決である。M=1と空和・空積の規約を保ち、分割後に依存と閉包を再判定する。"],
@@ -9203,7 +9204,189 @@ if (findToolEntry("linear_space_general_001_theorem_tensor_product_basis").depen
   !== kroneckerTransposeSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("クロネッカー積の成分添字と転置の直後の項目が変わりました");
 }
+const kroneckerBasisSectionEntryIds = [
+  "linear_space_general_001_theorem_tensor_product_basis"
+];
+const kroneckerBasisSection = validateReviewedSection(
+  "クロネッカー積で作る行列と数ベクトルの基底", "数学的道具立て", kroneckerBasisSectionEntryIds,
+  new Map([
+  [
+    "linear_space_general_001_theorem_tensor_product_basis",
+    []
+  ]
+]),
+  new Map([
+  [
+    "linear_space_general_001_theorem_tensor_product_basis",
+    "0b14d498919e0e510b2e50b975d3379db4e963cb1dc5583d6bb429c782a7fd31"
+  ]
+]),
+  [
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_000_definition_kronecker_product",
+  "linear_space_general_000c_claim_kronecker_multilinear"
+],
+  new Map([
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ],
+  [
+    "linear_space_general_000_definition_kronecker_product",
+    "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40"
+  ],
+  [
+    "linear_space_general_000c_claim_kronecker_multilinear",
+    "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5"
+  ]
+]),
+  [
+  "linear_space_general_001_theorem_tensor_product_basis"
+],
+);
+const kroneckerBasisSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "kind": "claim",
+    "sha256": "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_008_multiply_by_minus_one",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_047_claim_commutator_via_anticommutators",
+    "kind": "claim",
+    "sha256": "25d2f2a1ad5ab6bcbe05427a4ce4f06a4250ea5f7f3f79b5d7170303b8d4ebeb",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_000_definition_kronecker_product",
+    "kind": "definition",
+    "sha256": "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_000c_claim_kronecker_multilinear",
+    "kind": "claim",
+    "sha256": "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_000_definition_kronecker_product"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_001_theorem_tensor_product_basis",
+    "kind": "theorem",
+    "sha256": "0b14d498919e0e510b2e50b975d3379db4e963cb1dc5583d6bb429c782a7fd31",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_000_definition_kronecker_product",
+      "linear_space_general_000c_claim_kronecker_multilinear"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002_claim_scalar_identity_commutes",
+    "kind": "claim",
+    "sha256": "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_047_claim_commutator_via_anticommutators",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of kroneckerBasisSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`クロネッカー積で作る行列と数ベクトルの基底の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("linear_space_general_002_claim_scalar_identity_commutes").dependencyPlacement!.chapterOrder
+  !== kroneckerBasisSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("クロネッカー積で作る行列と数ベクトルの基底の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "クロネッカー積で作る行列と数ベクトルの基底",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "linear_space_general_001_theorem_tensor_product_basis"
+  ],
+  "input": [
+    "クロネッカー積の成分定義と各因子についての線型性",
+    "複素数と集合記号、有限次元の生成族と基底についての前提"
+  ],
+  "output": [
+    "行列単位と標準基底のクロネッカー積による基底と次元",
+    "各因子の任意の基底から得られる行列・数ベクトルの基底"
+  ],
+  "mainTheorem": "クロネッカー積がつくる基底",
+  "mainTheoremEntryId": "linear_space_general_001_theorem_tensor_product_basis",
+  "boundaryEvidence": "成分比較で標準基底と行列単位を同定し、線型性で任意の因子基底へ展開する現存一項が基底の主張へ閉じる。直後のスカラー倍した単位行列の可換性は本項やクロネッカー積を使わず、複素行列の積と交換子を入力にする別枝である。基底による生成の議論から成分による積の演算法則への入力切替を根拠とし、プログラミングによる検証で対象と比較の全直接入力・本文・種別・粒度と相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で対象・全直接入力と後続可換性の全本文を読んだ。三主張・次元と定義の分割、生成族元数の下限の未証明の一般命題を具体的複素行列へ接続する根拠、有限展開の帰納法・数ベクトルの場合の省略・各行参照が未解決である。比較側を複素行列に具体化し行列積と交換子の参照を補ったが、成分ごとの和・スカラー倍・単位行列の定義と積の法則、二箇所同時適用の分離と各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "linear_space_general_000_definition_kronecker_product",
+    "linear_space_general_000c_claim_kronecker_multilinear"
+  ]
+}, {
   "name": "クロネッカー積の成分添字と転置",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
