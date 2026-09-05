@@ -1389,6 +1389,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
     title: { tex: String.raw`\mathbb{C}\text{の逆数の}\arg` },
     labels: ["range_of_args_of_reciprocal_of_complex_numbers"],
     statement: [
+      paragraph([ref("def_phi_polar"), " と ", ref("section_of_angle_representation"), " を使い、半径の非零性と複素数の非零性の同値には ", ref("abs_basic_properties"), " を用いる。"]),
       paragraph([
         math(String.raw`z \in \mathbb{C}`),
         " について、",

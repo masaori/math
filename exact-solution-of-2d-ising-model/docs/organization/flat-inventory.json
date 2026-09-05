@@ -218,6 +218,37 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "自乗の偏角と二倍の角度の切断",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_035_claim_arg_of_square"
+      ],
+      "input": [
+        "極座標への写像と未完の同型性、極座標の積",
+        "絶対値・偏角と射影、角度切断と存在一意性",
+        "複素数と集合記号"
+      ],
+      "output": [
+        "零の場合を含め、自乗の偏角を二倍の偏角から必要に応じて2πを引く場合分けで表す公式"
+      ],
+      "mainTheorem": "複素数の自乗の偏角の二場合の公式（未完の同型性に依存）",
+      "mainTheoremEntryId": "calculation_formulae_035_claim_arg_of_square",
+      "boundaryEvidence": "極座標の積で角度を二倍し、零の場合を先に処理してから二場合の切断へ進む一項で閉じる。直後の逆数の偏角は自乗も商の偏角公式も使わず、両側の乗法逆元と逆元保存を追加入力として負の角度を直接切断する別枝である。自乗には不要な非零仮定を加えず、逆数の定義に必要な非零仮定と区別する。プログラミングによる検証では対象と後続比較の全直接入力の本文・全直接依存・種別・粒度、唯一の節末と後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で自乗と逆数の全本文および入力を読んだ。自乗の零の場合の計算は本文にあり、逆数との仮定の違いは数学的に必要である。いずれも未完の同型性に依存するため証明完成とは扱わない。逆写像の一般論を具体的計算へ開くこと、各適用行のラベル、複数の実数演算をまとめた段の分解が未解決である。定義・証明の補完と本文分割後には依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+        "calc_formulae_017_definition_section_of_angle_representation",
+        "calculation_formulae_022_definition_operations_on_polar_representation",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+        "calculation_formulae_030_definition_first_and_second_projections",
+        "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "積の偏角がπになるときの偏角の和",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -8215,7 +8246,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8643,7 +8674,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 12,
+        "incomingReferenceCount": 13,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8973,7 +9004,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 13,
+        "incomingReferenceCount": 14,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9359,34 +9390,40 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 8783,
-        "inspectedContentSha256": "fce8842d259e99cbcc0811937e4be35b41a4be975496b399a09584f5c00b32b1",
+        "inspectedCharacterCount": 9077,
+        "inspectedContentSha256": "21508055a501558c3ce349b1b00bf697a78d1e34258e17924eb8291c63124fb6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 逆数の定義に非零仮定が必要である。未完の同型性を使う逆写像の積・単位元保存から逆元保存を導いており、証明完成とは扱わない。一般論の具体計算への展開、各行のラベルと複数の実数演算の分解が未解決である。"
       },
       "dependsOnLabels": [
+        "abs_basic_properties",
         "angle_section_existence_uniqueness",
         "def_abs_arg",
+        "def_phi_polar",
         "definition_of_cc",
         "first_and_second_projections",
         "isomorphism_of_phi_cartesian",
         "multiplicative_group_of_cc",
         "multiplicative_group_of_polar_representation",
+        "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+        "calc_formulae_017_definition_section_of_angle_representation",
         "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
         "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+        "calculation_formulae_027_definition_phi_polar",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
         "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_031b_claim_abs_basic_properties",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
