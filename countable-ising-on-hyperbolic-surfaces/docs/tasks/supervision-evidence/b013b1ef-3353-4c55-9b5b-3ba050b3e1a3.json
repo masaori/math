@@ -1,0 +1,12 @@
+{
+  "実行識別子": "b013b1ef-3353-4c55-9b5b-3ba050b3e1a3",
+  "観測時刻": "2026-09-06T08:37:26+09:00",
+  "起動登録の実測": {"コマンド":"launchctl list","終了コード":0,"stdout":"-\\t0\\tcom.masaori.hyperbolic-ising-auto-loop","対象label":"com.masaori.hyperbolic-ising-auto-loop","判定":"登録あり"},
+  "launchctl print": {"コマンド":"launchctl print gui/501/com.masaori.hyperbolic-ising-auto-loop","終了コード":0,"state":"not running","runs":12,"last exit code":0},
+  "plist": {"path":"/Users/masaori/Library/LaunchAgents/com.masaori.hyperbolic-ising-auto-loop.plist","存在":true,"sha256":"073b2ba45e068d1997a5a0bbf928620739cfd557176ec088881832b80cd22bf8","StartCalendarInterval":{"Minute":20}},
+  "実ログ": [{"path":"/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/launchd.log","存在":true,"更新時刻":"2026-09-06T08:26:16+09:00","抽出行":"2026-09-06 08:26:16 === tick 正常終了"}],
+  "実行の終了値の解釈": "launchctl listとprintはいずれも終了0で登録あり・非実行中・last exit code 0。実ログの最新完了は08:26:16正常終了。",
+  "成果比較": {"開始成果":"9abac53b040f57d6f0904e6e7b7ef2c180a6b723","前回読解終点":"21d7f00099c418ebf5742e65686e29f9e7b3b69f","今回読解終点":"cbb77930d4802e89775373805d9554ae3d02dae0"},
+  "検査結果": [{"観測時刻":"2026-09-06T08:46:20+09:00","コマンド":"監督TypeScript型検査、verify --all、記録規則回帰、監督受理回帰、研究tickモデル試験、監督tick契約、通知組立て試験","終了コード":0,"結果":"全件成功。段取りの意味はLLMによる検証。"}],
+  "検査の意味": "実行値と記録受理はプログラミングによる検証。正規商入力への不適合と候補の意味はLLMによる検証。"
+}
