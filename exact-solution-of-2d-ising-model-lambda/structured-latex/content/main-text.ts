@@ -27959,10 +27959,10 @@ f
                       proof: [
                         paragraph([
                           math(String.raw`n\mid m`), " より、", math(String.raw`m=nk`),
-                          " を満たす ", math(String.raw`k\in\mathbb{N}`), " を取る。また ",
-                          math(String.raw`w\in\mu_n`), " より ", math(String.raw`w^n=1`),
-                          " である（", ref("def_root_of_unity_set"), "）。したがって、",
+                          " を満たす ", math(String.raw`k\in\mathbb{N}`), " を取る。",
                         ]),
+                        displayMath(String.raw`w^n=1
+\quad(\because\ w\in\mu_n,\ \blkref{def_root_of_unity_set})`),
                         displayMath(String.raw`\begin{aligned}
 w^{m}
 &=w^{nk}
