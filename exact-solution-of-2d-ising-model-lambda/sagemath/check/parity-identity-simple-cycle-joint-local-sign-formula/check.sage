@@ -20,7 +20,9 @@ parity-identity-simple-cycle-local-sign-formula-extension では、一辺二で
 
 load("sagemath/check/parity-identity-simple-cycle-joint-local-sign-formula/construction.sage")
 
-assert len(joint_keys) == 320
+# 一辺二の鍵は構成の途中で 320 件そろう。ここでは全部そろったあとの joint_keys しか
+# 見えないので、同じことを辺長で数えて確かめる（構成の途中の値へ assert しない）。
+assert sum(1 for side, _, _, _ in joint_keys if side == 2) == 320
 assert len(cycles_three) == 312
 assert nonempty_count == 6453
 assert len(joint_keys) == 320 + 312 + 6453
