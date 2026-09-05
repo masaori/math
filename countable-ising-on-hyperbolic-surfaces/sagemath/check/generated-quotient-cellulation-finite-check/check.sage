@@ -79,9 +79,18 @@ for point in range(1, 9):
 face_stabilizer = quotient_group.subgroup([face_rotation])
 vertex_stabilizer = quotient_group.subgroup([vertex_rotation])
 edge_stabilizer = quotient_group.subgroup([edge_half_turn])
-face_cosets = [frozenset(coset) for coset in quotient_group.cosets(face_stabilizer, side="left")]
-vertex_cosets = [frozenset(coset) for coset in quotient_group.cosets(vertex_stabilizer, side="left")]
-edge_cosets = [frozenset(coset) for coset in quotient_group.cosets(edge_stabilizer, side="left")]
+# 本文の合成 (gk)(a)=g(k(a)) は Sage の積と逆順。
+def compose(left, right):
+    return right * left
+
+
+def left_coset(group_element, subgroup):
+    return frozenset(compose(group_element, member) for member in subgroup)
+
+
+def all_left_cosets(subgroup):
+    return sorted({left_coset(g, subgroup) for g in quotient_group},
+                  key=lambda coset: min(permutation_key(g) for g in coset))
 
 
 def permutation_key(permutation):
@@ -92,15 +101,11 @@ def representative_selector(edge_coset):
     return min(edge_coset, key=permutation_key)
 
 
-def left_coset(group_element, subgroup):
-    return frozenset(group_element * member for member in subgroup)
-
-
 def edge_endpoints(edge_coset):
     selected = representative_selector(edge_coset)
     return {
         SOURCE: left_coset(selected, vertex_stabilizer),
-        TARGET: left_coset(selected * edge_half_turn, vertex_stabilizer),
+        TARGET: left_coset(compose(selected, edge_half_turn), vertex_stabilizer),
     }
 
 
@@ -108,14 +113,14 @@ def boundary_entry(group_element):
     edge_coset = left_coset(group_element, edge_stabilizer)
     selected = representative_selector(edge_coset)
     if selected == group_element:
-        return edge_coset, REVERSE
-    assert selected == group_element * edge_half_turn
-    return edge_coset, FORWARD
+        return edge_coset, FORWARD
+    assert selected == compose(group_element, edge_half_turn)
+    return edge_coset, REVERSE
 
 
 def cyclic_boundary_word(face_coset):
     first = min(face_coset, key=permutation_key)
-    positions = tuple(first * face_rotation**power for power in range(3))
+    positions = tuple(compose(first, face_rotation**power) for power in range(3))
     assert set(positions) == set(face_coset)
     successor = {
         positions[index]: positions[(index + 1) % len(positions)]
@@ -133,11 +138,26 @@ def cyclic_boundary_word(face_coset):
     }
 
 
+face_cosets = all_left_cosets(face_stabilizer)
+vertex_cosets = all_left_cosets(vertex_stabilizer)
+edge_cosets = all_left_cosets(edge_stabilizer)
+for g in quotient_group:
+    for h in (face_rotation, vertex_rotation, edge_half_turn):
+        assert all(compose(g, h)(i) == g(h(i)) for i in range(1, 9))
+
 vertices = tuple(vertex_cosets)
 edges = tuple(edge_cosets)
 faces = tuple(face_cosets)
 endpoints = {edge: edge_endpoints(edge) for edge in edges}
 boundary_words = {face: cyclic_boundary_word(face) for face in faces}
+
+# 本文の各位置の進行端点まで照合し、逆向きの別モデルの成功を防ぐ。
+for word in boundary_words.values():
+    for position in word["positions"]:
+        edge = word["edge_at"][position]
+        orientation = word["orientation_at"][position]
+        assert endpoints[edge][INITIAL_END[orientation]] == left_coset(position, vertex_stabilizer)
+        assert endpoints[edge][TERMINAL_END[orientation]] == left_coset(compose(position, edge_half_turn), vertex_stabilizer)
 
 assert len(vertices) == 24
 assert len(edges) == 84
@@ -272,6 +292,22 @@ hyperbolic_regular_types = Set([
     if 2 * (p + q) < p * q
 ])
 assert (NN(3), NN(7)) in hyperbolic_regular_types
+
+# 旧検算の一次骨格から逆元写像で頂点・辺の全単射を作り、
+# 向きを忘れた端点対を保存することを照合する（Ising 係数の回帰）。
+old_vertices = {frozenset(g * h for h in vertex_stabilizer) for g in quotient_group}
+old_edges = {frozenset(g * h for h in edge_stabilizer) for g in quotient_group}
+
+def invert_coset(C):
+    return frozenset(g**(-1) for g in C)
+
+assert {invert_coset(C) for C in old_vertices} == set(vertices)
+assert {invert_coset(C) for C in old_edges} == set(edges)
+for C in old_edges:
+    selected = min(C, key=permutation_key)
+    old_pair = [frozenset(selected * h for h in vertex_stabilizer),
+                frozenset(selected * edge_half_turn * h for h in vertex_stabilizer)]
+    assert {invert_coset(V) for V in old_pair} == set(endpoints[invert_coset(C)].values())
 
 print(
     "RESULT: PASS — the sourced degree-eight Hurwitz triple generates 24 vertices, "
