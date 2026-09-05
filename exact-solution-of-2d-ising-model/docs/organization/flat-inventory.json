@@ -218,6 +218,35 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "積の偏角がπになるときの偏角の和",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi"
+      ],
+      "input": [
+        "積の偏角の二場合の公式",
+        "極座標への写像、絶対値・偏角と非零性、角度切断の存在一意性",
+        "複素数と集合記号"
+      ],
+      "output": [
+        "非零複素数の積の偏角がπのとき、偏角の和は切断の二場合に従ってπまたは3πになる"
+      ],
+      "mainTheorem": "積の偏角がπである場合の偏角の和の二場合",
+      "mainTheoremEntryId": "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi",
+      "boundaryEvidence": "積の偏角公式へπの条件を代入し、固定された整数の和に応じて偏角の和をπまたは3πへ定める一項で閉じる。直後の自乗の偏角は本項も積の偏角公式も直接使わず、同型性から得る積保存と極座標積、角度切断を使って二倍の角度を直接計算する別枝である。プログラミングによる検証では対象と後続比較の全直接入力の本文・全直接依存・種別・粒度、唯一の節末と後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証でπ条件と自乗の本文および全入力を読み、公式への代入から積保存による直接計算へ入力が切り替わることを確認した。対象は積の公式を介して、自乗は直接、未完の同型性に依存するので本文完成とは扱わない。対象の固定整数による場合分けは明示されているが、実数演算の分解と各適用行のラベル不足が未解決である。自乗には零の場合の証明があり非零仮定は不要である。本文の補完・分割後には依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_031b_claim_abs_basic_properties",
+        "calculation_formulae_032_claim_arg_of_product",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "商の偏角と角度の差の切断",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2090,6 +2119,7 @@
       "calculation_formulae_032_claim_arg_of_product",
       "calculation_formulae_033_claim_arg_of_quotient",
       "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi",
+      "calculation_formulae_035_claim_arg_of_square",
       "calculation_formulae_036_claim_arg_of_reciprocal",
       "calculation_formulae_043_claim_sqrt_of_reciprocal",
       "calculation_formulae_044_claim_reciprocal_of_sqrt",
@@ -8185,7 +8215,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8361,7 +8391,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8613,7 +8643,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 11,
+        "incomingReferenceCount": 12,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9251,30 +9281,36 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10452,
-        "inspectedContentSha256": "b5649c79ed1fd4d66b4fd8e33551f7c19bb4d8b45f4043b5912c00ea67fce724",
+        "inspectedCharacterCount": 10734,
+        "inspectedContentSha256": "5c4e01ef25641e782fc11f048ba69c2bb63eda0b0c91758a3ca1f44a1bdc3a2d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 零の場合を分けているので非零仮定は不要である。一方、未完の同型性を使う積保存に依存するため証明完成とは扱わない。逆写像の一般論の具体化、各適用行の参照、複数演算を一段にまとめた箇所の展開が未解決である。"
       },
       "dependsOnLabels": [
         "angle_section_existence_uniqueness",
         "def_abs_arg",
+        "def_phi_polar",
         "definition_of_cc",
         "first_and_second_projections",
         "isomorphism_of_phi_cartesian",
+        "operations_on_polar_representation",
+        "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+        "calc_formulae_017_definition_section_of_angle_representation",
+        "calculation_formulae_022_definition_operations_on_polar_representation",
+        "calculation_formulae_027_definition_phi_polar",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
         "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_031_definition_abs_arg",

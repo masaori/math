@@ -1122,6 +1122,7 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
     title: { tex: String.raw`\mathbb{C}\text{の自乗の}\arg` },
     labels: ["range_of_args_of_square_of_complex_numbers"],
     statement: [
+      paragraph([ref("def_phi_polar"), "、", ref("operations_on_polar_representation"), "、", ref("section_of_angle_representation"), " を用いる。"]),
       paragraph([
         math(String.raw`z \in \mathbb{C}`),
         " について、",
