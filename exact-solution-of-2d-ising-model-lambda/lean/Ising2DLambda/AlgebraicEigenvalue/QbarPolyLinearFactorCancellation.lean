@@ -8,12 +8,56 @@ import Ising2DLambda.AlgebraicEigenvalue.QbarPolyPowerDifferenceFactorization
 namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Polynomial
+open scoped BigOperators
 
 /-- `Qbar[t]` では、一次因子との積が等しい二つの多項式は等しい。 -/
 theorem qbarPolyLinearFactorCancellation (w : Qbar) (A B : QbarPoly) (n : ℕ)
     (hA : ∀ k, n < k → A.coeff k = 0)
     (hB : ∀ k, n < k → B.coeff k = 0)
     (hmul : (Polynomial.X - qbarConst w) * A = (Polynomial.X - qbarConst w) * B) : A = B := by
+  -- 本文の準備: 一次式の係数三本と、積の係数を五段で求める。
+  have hzero : (Polynomial.X - qbarConst w).coeff 0 = -w := by
+    calc
+      (Polynomial.X - qbarConst w).coeff 0 = (Polynomial.X : QbarPoly).coeff 0 - (qbarConst w).coeff 0 := coeff_sub _ _ _
+      _ = 0 - w := by simp only [qbarConst, coeff_X_zero, coeff_C_zero]
+      _ = -w := zero_sub w
+  have hone : (Polynomial.X - qbarConst w).coeff 1 = 1 := by
+    calc
+      (Polynomial.X - qbarConst w).coeff 1 = (Polynomial.X : QbarPoly).coeff 1 - (qbarConst w).coeff 1 := coeff_sub _ _ _
+      _ = 1 - 0 := by simp only [qbarConst, coeff_X_one, coeff_C_succ]
+      _ = 1 := sub_zero 1
+  have hhigher (i : ℕ) (hi : 2 ≤ i) : (Polynomial.X - qbarConst w).coeff i = 0 := by
+    calc
+      (Polynomial.X - qbarConst w).coeff i = (Polynomial.X : QbarPoly).coeff i - (qbarConst w).coeff i := coeff_sub _ _ _
+      _ = 0 - 0 := by
+        rw [coeff_X_of_ne_one (by omega)]
+        change 0 - (Polynomial.C w).coeff i = 0 - 0
+        rw [coeff_C_of_ne_zero (by omega)]
+      _ = 0 := sub_self 0
+  have hproduct (P : QbarPoly) (m : ℕ) :
+      ((Polynomial.X - qbarConst w) * P).coeff (m + 1) = P.coeff m + (-w) * P.coeff (m + 1) := by
+    let f : ℕ → Qbar := fun i => (Polynomial.X - qbarConst w).coeff i * P.coeff (m + 1 - i)
+    have hsplit : (∑ i ∈ Finset.range (m + 1 + 1), f i) =
+        f 0 + f 1 + ∑ i ∈ Finset.Ico 2 (m + 1 + 1), f i := by
+      rw [← Finset.sum_range_add_sum_Ico f (by omega : 2 ≤ m + 1 + 1)]
+      simp only [Finset.sum_range_succ, Finset.sum_range_zero, zero_add]
+    calc
+      ((Polynomial.X - qbarConst w) * P).coeff (m + 1)
+          = ∑ i ∈ Finset.range (m + 1 + 1), (Polynomial.X - qbarConst w).coeff i * P.coeff (m + 1 - i) := by
+            rw [coeff_mul, Finset.Nat.sum_antidiagonal_eq_sum_range_succ_mk]
+      _ = (Polynomial.X - qbarConst w).coeff 0 * P.coeff (m + 1) + (Polynomial.X - qbarConst w).coeff 1 * P.coeff m +
+          ∑ i ∈ Finset.Ico 2 (m + 1 + 1), (Polynomial.X - qbarConst w).coeff i * P.coeff (m + 1 - i) := by
+            simpa only [f, Nat.sub_zero, Nat.add_sub_cancel] using hsplit
+      _ = (-w) * P.coeff (m + 1) + 1 * P.coeff m +
+          ∑ i ∈ Finset.Ico 2 (m + 1 + 1), 0 * P.coeff (m + 1 - i) := by
+            rw [hzero, hone]
+            congr 1
+            apply Finset.sum_congr rfl
+            intro i hi
+            rw [hhigher i (Finset.mem_Ico.mp hi).1]
+      _ = (-w) * P.coeff (m + 1) + P.coeff m + 0 := by
+            simp only [one_mul, zero_mul, Finset.sum_const_zero]
+      _ = P.coeff m + (-w) * P.coeff (m + 1) := by rw [add_zero, add_comm]
   apply Polynomial.ext
   intro k
   have hP : ∀ j k : ℕ, n + 1 ≤ k + j → A.coeff k = B.coeff k := by
@@ -31,20 +75,16 @@ theorem qbarPolyLinearFactorCancellation (w : Qbar) (A B : QbarPoly) (n : ℕ)
         · exact ih k hprev
         · have hk1 : n + 1 ≤ (k + 1) + j := by omega
           have hcoeff := congrArg (fun p : QbarPoly => p.coeff (k + 1)) hmul
-          have hmulA : ((Polynomial.X - qbarConst w) * A).coeff (k + 1) =
-              A.coeff k + (-w) * A.coeff (k + 1) := by
-            simp [qbarConst, sub_mul, Polynomial.coeff_X_mul] <;> ring
-          have hmulB : ((Polynomial.X - qbarConst w) * B).coeff (k + 1) =
-              B.coeff k + (-w) * B.coeff (k + 1) := by
-            simp [qbarConst, sub_mul, Polynomial.coeff_X_mul] <;> ring
+          have hmulA := hproduct A k
+          have hmulB := hproduct B k
           calc
             A.coeff k
-                = (A.coeff k + (-w) * A.coeff (k + 1)) - (-w) * A.coeff (k + 1) := by ring
+                = (A.coeff k + (-w) * A.coeff (k + 1)) - (-w) * A.coeff (k + 1) := (add_sub_cancel_right _ _).symm
             _ = ((Polynomial.X - qbarConst w) * A).coeff (k + 1) - (-w) * A.coeff (k + 1) := by rw [hmulA]
             _ = ((Polynomial.X - qbarConst w) * B).coeff (k + 1) - (-w) * A.coeff (k + 1) := by rw [hcoeff]
             _ = ((Polynomial.X - qbarConst w) * B).coeff (k + 1) - (-w) * B.coeff (k + 1) := by rw [ih (k + 1) hk1]
             _ = (B.coeff k + (-w) * B.coeff (k + 1)) - (-w) * B.coeff (k + 1) := by rw [hmulB]
-            _ = B.coeff k := by ring
+            _ = B.coeff k := add_sub_cancel_right _ _
   exact hP (n + 1) k (by omega)
 
 end Ising2DLambda.AlgebraicEigenvalue
