@@ -673,6 +673,7 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
     title: { text: "極座標表現の同値類" },
     labels: ["polar_equivalence_class"],
     statement: [
+      paragraph(["角度の同値関係は ", ref("angle_equivalence_class"), " で定めたものを使う。半径が零の対は角度によらず同じ同値類に属するとし、正の半径の対は半径が等しく角度が同値な場合に同じ同値類に属するとする。"]),
       paragraph([
         math("\\mathbb{R}_{\\ge 0}\\times\\mathbb{R}"),
         " の同値関係 ",

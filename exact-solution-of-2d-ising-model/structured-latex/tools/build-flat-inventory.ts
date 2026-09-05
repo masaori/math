@@ -1687,6 +1687,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["calc_formulae_016_definition_angle_equivalence_class", "LLMによる検証: 商集合を定める前提となる反射性・対称性・推移性について、整数 0・-n・n+m を用いる根拠の説明が未整備である。節構造だけを確定し本文完成とは扱わない。"],
+  ["calc_formulae_019_definition_polar_equivalence_class", "LLMによる検証: 半径零と正の場合を分けた反射性・対称性・推移性の説明、および同値類から商集合を作る説明が未整備である。外部入力の角度同値関係にも同じ不足がある。節構造だけを確定し本文完成とは扱わない。"],
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
   ["transfer_matrix_011_definition_H1_H2", "一般の生成子 H1^{(±)} と H2 の二定義に加え、既存の V1^{(±)} と V2 の指数表示を同じブロックへ束ねている。今回確定する節では外部入力として扱い、将来一ブロック一定義へ分割した後に依存順と節境界を再判定する必要がある。"],
@@ -3616,12 +3618,14 @@ const angleRepresentationOfRealsEntry = angleRepresentationEntries[3]!;
 if (angleRepresentationEntries.some((entry, index) =>
   entry.provisionalFinalChapter !== "数学的道具立て"
   || entry.dependencyPlacement!.chapterOrder !== 12 + index
-  || entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  || entry.explanationGranularityReview.status !== (index === 0
+    ? "具体的な行列計算への展開またはブロック分割を要する" : "自動検査で主題に適合"))
   // 角度表現の定義は、同値関係と切断の両方を実際に前提として引く
   || !angleRepresentationOfRealsEntry.dependsOnEntryIds.includes(angleRepresentationEntryIds[0]!)
   || !angleRepresentationOfRealsEntry.dependsOnEntryIds.includes(angleRepresentationEntryIds[2]!)
   || polarEquivalenceEntry.dependencyPlacement!.chapterOrder !== 16
-  || polarEquivalenceEntry.dependsOnEntryIds.some((id) => angleRepresentationIdSet.has(id))) {
+  || JSON.stringify(polarEquivalenceEntry.dependsOnEntryIds.filter((id) => angleRepresentationIdSet.has(id)))
+    !== JSON.stringify([angleRepresentationEntryIds[0]])) {
   throw new Error(`角度表現の節が変わりました: ${JSON.stringify({
     orders: angleRepresentationEntries.map((entry) =>
       [entry.id, entry.dependencyPlacement?.chapterOrder, entry.kind]),
@@ -3712,7 +3716,37 @@ if (kappaDefinitionEntry.explanationGranularityReview.status !== "自動検査�
   ) {
   throw new Error("章内依存順16–29と対称化転送行列の全成分正値性の外部入力の説明粒度判定が変わりました");
 }
+const polarEquivalenceSection = validateReviewedSection(
+  "極座標表現の同値類", "数学的道具立て", [polarEquivalenceEntry.id],
+  new Map([[polarEquivalenceEntry.id, []]]),
+  new Map([[polarEquivalenceEntry.id, "db5e61c9e6e2f4aef9faa5b5154b7f7e4651951f655d44193a92caf541c654a6"]]),
+  ["calc_formulae_016_definition_angle_equivalence_class", "calculation_formulae_definition_set_and_algebra_notation"],
+  new Map([
+    ["calc_formulae_016_definition_angle_equivalence_class", "f5300fd54e60f601a4db6afe271b4f3c72ef16ff4baf25f5e3d03488a2f5286d"],
+    ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
+  ]), [polarEquivalenceEntry.id],
+);
+// プログラミングによる検証: 直後の双曲線関数は角度・半径の同一視を入力に取らない。
+if (polarEquivalenceEntry.kind !== "definition"
+  || polarEquivalenceEntry.explanationGranularityReview.status !== "具体的な行列計算への展開またはブロック分割を要する"
+  || hyperbolicEntries[0]!.dependencyPlacement!.chapterOrder !== polarEquivalenceEntry.dependencyPlacement!.chapterOrder + 1
+  || JSON.stringify([...hyperbolicEntries[0]!.dependsOnEntryIds].sort()) !== JSON.stringify(["calculation_formulae_definition_set_and_algebra_notation"])
+  || hyperbolicEntries[0]!.explanationGranularityReview.inspectedContentSha256 !== "e884934c5a35ebb1daa4e665eb779f623f99cffba33fe779cf01ee52518a6d3a") {
+  throw new Error("極座標の同値類から双曲線関数への入力切り替わりが変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  name: "極座標表現の同値類",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度未解決",
+  entryIds: [polarEquivalenceEntry.id],
+  input: ["非負実数と実数の対、および集合の記号", "角度を 2π の整数倍の差で同一視する同値関係"],
+  externalInputEntryIds: polarEquivalenceSection.externalInputEntryIds,
+  output: ["半径零の全角度を同一視し、正の半径では角度の同値関係を使う極座標の同値類"],
+  concludingDefinition: "半径と角度の対の同値類",
+  concludingDefinitionEntryId: polarEquivalenceEntry.id,
+  boundaryEvidence: "前節から角度の同値関係だけを受け取り、代表元の切断と角度表現の演算は使わない。半径を加えて半径と角度の対を同一視する定義で一項節を閉じる。直後の双曲線関数は集合記号だけを直接入力とし、本項にも角度の同値関係にも依存しない。プログラミングによる検証で、対象と全外部入力の本文、完全な直接依存、節末出力、直後の定義の本文・直接入力・相対順を固定する。",
+  readabilityStatus: "LLMによる検証では、零半径で角度を区別しない場合と正半径で角度を同一視する場合を式と文章で照合した。欠けていた角度の同値関係への参照を補い、前提を先行定義から追えるようにした。対象と入力の角度同値関係では、反射性・対称性・推移性と商集合の構成を追う説明が未整備である。構造だけを確定し本文完成とは扱わない。外部入力の集合記号にも説明粒度の未解決が残る。",
+}, {
   name: "行列指数関数による共役の級数公式",
   chapter: "数学的道具立て",
   status: "構造確定・本文粒度未解決",
@@ -4675,7 +4709,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "角度表現と、その代表元の取り方",
   chapter: "数学的道具立て",
-  status: "構造確定・本文粒度確認済み",
+  status: "構造確定・本文粒度未解決",
   entryIds: angleRepresentationEntryIds,
   input: [
     "集合と代数構造の記号",
@@ -4699,8 +4733,8 @@ const isingModelSectionBoundaries = [{
     "角度表現の切断",
     "角度表現の定義",
   ],
-  boundaryEvidence: "章内依存順12は記号の規約だけを入力に同値関係を定め、順13は同じ入力で代表元を与える整数の存在と一意性を示し、順14はその主張を使って切断を定め、順15は同値関係と切断の両方を使って角度表現を定める。四項は一つのまとまりで、外へ出る出力は角度表現だけである。順16の極座標表現の同値類は記号の規約だけを入力に取り、この四項のいずれにも依存しない別の出発点なので、順15の後で節を閉じる。生成時に四項の依存順、説明粒度、角度表現が同値関係と切断の両方を引くこと、および順16がこの四項に依存しないことを固定検査する。",
-  readabilityStatus: "角度表現の定義は、同値関係と切断を記号だけで使っていて、どのブロックの記号かが本文から追えなかった。それぞれの定義への参照を入れ、依存グラフにも現れるようにした。定義の内容は変えていない。",
+  boundaryEvidence: "章内依存順12は記号の規約だけを入力に同値関係を定め、順13は同じ入力で代表元を与える整数の存在と一意性を示し、順14はその主張を使って切断を定め、順15は同値関係と切断の両方を使って角度表現を定める。四項は一つのまとまりで、節内の最終出力は角度表現である。先行する同値関係は後続の極座標定義でも再利用する。順16の極座標表現の同値類は角度の同値関係だけを再利用し、代表元の切断と角度表現の演算を使わず、非負の半径を新たな入力に加えて半径と角度の対の商集合を定めるため、順15の後で節を閉じる。生成時に四項の依存順、説明粒度、角度表現が同値関係と切断の両方を引くこと、および順16が四項のうち同値関係だけを引くことを固定検査する。",
+  readabilityStatus: "角度表現の定義は、同値関係と切断を記号だけで使っていて、どのブロックの記号かが本文から追えなかった。それぞれの定義への参照を入れ、依存グラフにも現れるようにした。定義の内容は変えていない。LLMによる検証で角度の同値関係の三性質の説明が不足すると判明したため、本文粒度は未解決として区別する。",
 }, {
   name: "双曲線余弦と双曲線正弦",
   chapter: "数学的道具立て",
