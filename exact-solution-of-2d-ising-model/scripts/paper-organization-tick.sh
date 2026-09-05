@@ -127,6 +127,20 @@ if [ "$status" -eq 0 ]; then
     fi
   fi
 fi
+if [ "$status" -eq 0 ]; then
+  # 台帳の前進だけでは人間が読む公開物が古いままになる（2026-08-30 から 2026-09-05 まで
+  # 構成棚卸しページが更新されず、人間から「全く変化していない」と指摘された）。
+  # 成果を remote default へ反映した後、同じ tick で公開物まで追随させる。
+  log "PUBLISH: 論文本体と構成棚卸しの公開物を更新"
+  set +e
+  "$PROJECT_DIR/scripts/publish-paper-organization-artifacts.sh" >>"$LOG_FILE" 2>&1
+  publish_status=$?
+  set -e
+  if [ "$publish_status" -ne 0 ]; then
+    status="$publish_status"
+    log "ERROR: 公開物の更新に失敗（exit $publish_status）"
+  fi
+fi
 case "$status" in
   0) log "SUCCESS: 論文構成tick完了" ;;
   124|137) log "TIMEOUT: 前回成果をworktreeへ保持（exit $status）" ;;
