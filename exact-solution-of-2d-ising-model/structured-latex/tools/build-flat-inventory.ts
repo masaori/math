@@ -3541,6 +3541,38 @@ if (matrixConjugationEntry.kind !== "theorem"
     inclusionOrder: inclusionRealToComplexEntry.dependencyPlacement?.chapterOrder,
   })}`);
 }
+const complexNumberBasicDefinitionEntryIds = [
+  "calc_formulae_007_inclusion_rr_to_cc",
+  "calc_formulae_008_multiply_by_minus_one",
+  "calc_formulae_009_sqrt_minus_one",
+  "calc_formulae_010_definition_real_imag_parts_of_cc",
+];
+const complexNumberBasicDefinitionEntries = complexNumberBasicDefinitionEntryIds.map((id) => {
+  const entry = entries.find((candidate) => candidate.id === id);
+  if (entry === undefined) throw new Error(`複素数に付随する定義の節に必要な項目がありません: ${id}`);
+  return entry;
+});
+const unitCircleEntry = entries.find((entry) =>
+  entry.id === "calc_formulae_011_definition_unit_circle")!;
+const complexNumberBasicDefinitionIdSet = new Set(complexNumberBasicDefinitionEntryIds);
+if (complexNumberBasicDefinitionEntries.some((entry, index) =>
+  entry.kind !== "definition"
+  || entry.provisionalFinalChapter !== "数学的道具立て"
+  || entry.dependencyPlacement!.chapterOrder !== 6 + index
+  || entry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || !entry.dependsOnEntryIds.includes(complexNumberDefinitionEntry.id)
+  // 四項は互いに独立で、複素数の定義と記号の規約だけを引く
+  || entry.dependsOnEntryIds.some((id) => complexNumberBasicDefinitionIdSet.has(id)))
+  || unitCircleEntry.dependencyPlacement!.chapterOrder !== 10
+  || unitCircleEntry.dependsOnEntryIds.some((id) => complexNumberBasicDefinitionIdSet.has(id))) {
+  throw new Error(`複素数に付随する定義の節が変わりました: ${JSON.stringify({
+    orders: complexNumberBasicDefinitionEntries.map((entry) =>
+      [entry.id, entry.dependencyPlacement?.chapterOrder, entry.kind]),
+    dependencies: complexNumberBasicDefinitionEntries.map((entry) => entry.dependsOnEntryIds),
+    unitCircleOrder: unitCircleEntry.dependencyPlacement?.chapterOrder,
+    unitCircleDependencies: unitCircleEntry.dependsOnEntryIds,
+  })}`);
+}
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || ![
@@ -4476,6 +4508,38 @@ const isingModelSectionBoundaries = [{
   concludingClaimEntryId: matrixConjugationEntry.id,
   boundaryEvidence: "章内依存順5は複素数の定義だけを外部入力に、可逆行列による共役が和とスカラー倍を保つことを示す。順6の実数から複素数への包含写像は、行列を離れて数の対応を定める別枝であり、順5に依存しない。したがって順5の後で節を閉じる。生成時に順5の直接依存、説明粒度の状態、順6との相互非依存を固定検査する。",
   readabilityStatus: "元の主張は「T_B は線型写像である」と述べており、抽象語彙の自動検査に「抽象線型写像」として引っかかっていた。この論文は抽象度の高い道具を持ち込まない方針なので、主張を「和とスカラー倍を保つ」という二つの等式へ書き換えた。証明はもともと二つを別々に示しており、書き換えで各行の根拠はそのまま使える。",
+}, {
+  name: "複素数に付随する基本的な定義",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: complexNumberBasicDefinitionEntryIds,
+  input: [
+    "複素数の定義",
+    "集合と代数構造の記号",
+  ],
+  externalInputEntryIds: [
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+  ],
+  output: [
+    "実数を複素数とみなす包含写像",
+    "複素数の -1 倍",
+    "二乗して -1 になる複素数の記号",
+    "複素数の実部と虚部",
+  ],
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/Part000",
+    sageMathFile: "sagemath/_shared/defs.sage",
+    currentStatus: "四つとも Lean・SageMath の複素数型が備える構成に対応する。本文側は実数の対としての定義から成分ごとに定める。",
+  },
+  mainTheorems: [
+    "実数から複素数への包含写像",
+    "複素数の -1 倍",
+    "二乗して -1 になる複素数",
+    "複素数の実部と虚部",
+  ],
+  boundaryEvidence: "章内依存順6から9は、いずれも複素数の定義と記号の規約だけを入力に取り、互いに依存しない四つの定義である。実数の対として定めた複素数に、実数の埋め込み、符号の反転、虚数単位、成分の取り出しという基本的な操作を与える一群にあたる。順10の単位円からは、複素数の絶対値と円弧という幾何の枝が始まり、以後の三角関数の定義へ続くため、順9の後で節を閉じる。生成時に四項の依存順、種別、相互非依存、および順10がこの四項に依存しないことを固定検査する。",
+  readabilityStatus: "四項とも定義だけで、実数の対としての複素数から成分ごとに定めており、抽象語彙の自動検査にも引っかかっていない。この節では本文を変更していない。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
