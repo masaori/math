@@ -47,7 +47,7 @@ LOG_DIR="$HOME/Library/Logs/ising-3d-cut-auto-loop"
 LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
-CODEX_TICK_HOME="$HOME/.codex-coding-agent-0002"
+CODEX_TICK_HOME="${CODEX_HOME:?正規の起動口がCODEX_HOMEを設定する必要がある}"
 
 # --- 発火間隔の自動調整 ------------------------------------------------------
 # launchd は 15 分ごとに呼ぶが、**実際に走る間隔はここで決める**。
@@ -111,7 +111,7 @@ for cli in codex timeout git; do
 done
 
 if [ ! -d "$CODEX_TICK_HOME" ] || [ ! -s "$CODEX_TICK_HOME/auth.json" ]; then
-  log "ERROR: tick 専用の Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
+  log "ERROR: 起動口から渡された Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
   exit 1
 fi
 

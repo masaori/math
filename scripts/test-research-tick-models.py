@@ -46,7 +46,7 @@ class TickModels(unittest.TestCase):
                         "raise SystemExit(int(os.environ['TEST_EXIT']))\n"
                     )
                     cli.chmod(0o755)
-                    env = dict(os.environ, HOME=tmp, CODEX_HOME="wrong-inherited-account",
+                    env = dict(os.environ, HOME=tmp, CODEX_HOME=str(work / "selected account"),
                                PATH=tmp + os.pathsep + os.environ["PATH"],
                                CAPTURE=str(work / "calls.jsonl"), TEST_EXIT=str(code),
                                LOG_FILE=str(work / "run.log"), TICK_TIMEOUT_SECONDS="17", LOOP_WORKTREE=tmp,
@@ -59,14 +59,34 @@ class TickModels(unittest.TestCase):
                     self.assertEqual(result.returncode, code, result.stderr)
                     calls = [json.loads(line) for line in (work / "calls.jsonl").read_text().splitlines()]
                     self.assertEqual(len(calls), 1, "失敗後も別の呼び出しをしてはならない")
-                    self.assertEqual(calls[0]["home"], tmp + "/.codex-coding-agent-0002")
+                    self.assertEqual(calls[0]["home"], env["CODEX_HOME"])
                     self.assertEqual(calls[0]["prompt"], env["PROMPT"])
                     self.assertEqual(calls[0]["argv"], [
                         "-k", "60", "17", "codex", "exec", "-m", "gpt-6-astra",
                         "-c", "model_reasoning_effort=medium",
                         "--dangerously-bypass-approvals-and-sandbox",
-                        *(["-C", tmp] if tick in TICKS[4:] else []), "-",
+                        *(["-C", tmp] if tick.startswith(("countable-ising-on-hyperbolic-surfaces/", "finite-graph-ising-partition-polynomial-and-fisher-zeros/")) else []), "-",
                     ])
+
+    def test_missing_or_empty_account_fails_before_invocation(self):
+        for tick in TICKS:
+            source = (ROOT / tick).read_text()
+            assignment = re.findall(r'^CODEX_TICK_HOME=.*$', source, re.M)
+            self.assertEqual(len(assignment), 1, tick)
+            for value in (None, ""):
+                with self.subTest(tick=tick, account=value), tempfile.TemporaryDirectory() as tmp:
+                    env = dict(os.environ, HOME=tmp)
+                    env.pop("CODEX_HOME", None)
+                    if value is not None:
+                        env["CODEX_HOME"] = value
+                    marker = Path(tmp) / "invoked"
+                    result = subprocess.run(
+                        ["bash", "-c", "set -eu\n" + assignment[0] + '\ntouch "$HOME/invoked"'],
+                        env=env, capture_output=True, text=True, timeout=10,
+                    )
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("CODEX_HOME", result.stderr)
+                    self.assertFalse(marker.exists())
 
     def test_paused_research_does_not_invoke_cli(self):
         with tempfile.TemporaryDirectory() as tmp:

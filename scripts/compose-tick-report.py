@@ -149,7 +149,7 @@ def whereabouts(rows) -> str:
         )
     done = len(rows) - len(remaining)
     return (
-        f"最終ゴールまでに残る作業は {len(remaining)} 件"
+        f"現在の作業表に残る作業は {len(remaining)} 件"
         f"（表に挙げた {len(rows)} 件のうち完了は {done} 件）。"
         f"いま取り組んでいるのは「{remaining[0][0]}」。"
     )

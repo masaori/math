@@ -8,7 +8,7 @@ LOOP_BRANCH="finite-graph-ising-loop"
 LOG_DIR="$HOME/Library/Logs/finite-graph-ising-auto-loop"
 LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
-CODEX_TICK_HOME="$HOME/.codex-coding-agent-0002"
+CODEX_TICK_HOME="${CODEX_HOME:?正規の起動口がCODEX_HOMEを設定する必要がある}"
 TICK_TIMEOUT_SECONDS=3300
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -42,7 +42,7 @@ if ! command -v codex >/dev/null 2>&1; then
 fi
 
 if [ ! -d "$CODEX_TICK_HOME" ] || [ ! -s "$CODEX_TICK_HOME/auth.json" ]; then
-  log "ERROR: tick 専用の Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
+  log "ERROR: 起動口から渡された Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
   exit 1
 fi
 

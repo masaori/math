@@ -28,8 +28,8 @@ LOCK_DIR="$LOG_DIR/supervision.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
 TICK_TIMEOUT_SECONDS=2400
 
-# 対話シェルの割り当てに依存せず、この tick のアカウントを固定する。
-CODEX_TICK_HOME="$HOME/.codex-coding-agent-0002"
+# 正規起動口が起動前に選んだアカウントを使い、この実行中は変更しない。
+CODEX_TICK_HOME="${CODEX_HOME:?正規の起動口がCODEX_HOMEを設定する必要がある}"
 
 mkdir -p "$LOG_DIR"
 # 進捗行は supervision.log と launchd の標準出力の両方へ書く。片方だけだと、外から見張っている
@@ -61,7 +61,7 @@ for cli in codex timeout git node; do
 done
 
 if [ ! -d "$CODEX_TICK_HOME" ] || [ ! -s "$CODEX_TICK_HOME/auth.json" ]; then
-  log "ERROR: tick 専用の Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
+  log "ERROR: 起動口から渡された Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
   exit 1
 fi
 

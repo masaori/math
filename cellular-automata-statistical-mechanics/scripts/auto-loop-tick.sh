@@ -24,8 +24,8 @@ LOCK_DIR="$LOG_DIR/auto-loop.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
 TICK_TIMEOUT_SECONDS=1620
 
-# 対話シェルの割り当てに依存せず、この tick のアカウントを固定する。
-CODEX_TICK_HOME="$HOME/.codex-coding-agent-0002"
+# 正規起動口が起動前に選んだアカウントを使い、この実行中は変更しない。
+CODEX_TICK_HOME="${CODEX_HOME:?正規の起動口がCODEX_HOMEを設定する必要がある}"
 
 mkdir -p "$LOG_DIR"
 # 進捗行は auto-loop.log と launchd の標準出力の両方へ書く。**片方だけだと、外から
@@ -61,7 +61,7 @@ for cli in codex timeout git; do
 done
 
 if [ ! -d "$CODEX_TICK_HOME" ] || [ ! -s "$CODEX_TICK_HOME/auth.json" ]; then
-  log "ERROR: tick 専用の Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
+  log "ERROR: 起動口から渡された Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
   exit 1
 fi
 
@@ -186,11 +186,12 @@ cellular-automata-statistical-mechanics の自動ループを 1 tick 進める�
 - cellular-automata-statistical-mechanics/docs/2値セルオートマトンの定義と呼び名.md
 - 今回の対象に直接関係する survey / ideas / structured-latex のファイル
 
-runbook の通り、前 tick のレビューを先に行う。その後は台帳の「成果整理」の先頭の未完了一層だけを進める。
-整理が完了するまで、新しい定義・定理・証明対象を起票してはならない。既存の全定義・全定理を一度
-フラットに扱い、「数学的道具立て」と「2 値セルオートマトンのセマンティクスを持つもの」の二章へ
-全件分類する。数学的道具への CA 固有セマンティクス混入を独立レビューで反復検査し、章内を依存関係の
-トポロジカル順に並べ、各節の入力・出力・主定理または主張を明示する。
+runbook の通り、前 tick のレビューを先に行う。成果整理の未解消の欠陥があれば先に直す。
+整理が全層完了していれば、README が正本とする research-roadmap.ts の現在の段階と
+台帳の「現在の研究対象」を読み、先頭の未完了対象を一層進める。既存の目的の実行に再開許可を求めない。
+物理的意味を先に入れず、量の定義域・所属・必要な演算を確かめる。未定義の対数や除算は使わない。
+新しい主張も二章の分類と依存順、節の入力・出力・主張の明示を維持する。
+既存成果の再検査や台帳の行数だけを新しい研究成果としない。
 
 研究方向を守る。既存の量子論・場の量子論・相対論を CA へ実装しない。物理的意味を局所規則へ
 入れず、有限舞台と有限真理値表から内在的に生じる数学構造を先に抽出する。ヒルベルト空間、

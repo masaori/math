@@ -20,7 +20,7 @@ STATUS_FILE="$LOG_DIR/auto-loop-status.log"
 # 1 tick の上限。次の発火（60 分後）と、その前に走る監査（毎時 55 分）に食い込ませないため
 # 45 分で打ち切る。30 分間隔・25 分上限では四層まで終わらず 4 回打ち切られたので広げた。
 TICK_TIMEOUT_SECONDS=2700
-CODEX_TICK_HOME="$HOME/.codex-coding-agent-0002"
+CODEX_TICK_HOME="${CODEX_HOME:?正規の起動口がCODEX_HOMEを設定する必要がある}"
 
 mkdir -p "$LOG_DIR"
 
@@ -67,7 +67,7 @@ for cli in codex timeout git; do
 done
 
 if [ ! -d "$CODEX_TICK_HOME" ] || [ ! -s "$CODEX_TICK_HOME/auth.json" ]; then
-  log "ERROR: tick 専用の Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
+  log "ERROR: 起動口から渡された Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
   exit 1
 fi
 

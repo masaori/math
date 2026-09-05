@@ -157,9 +157,9 @@ bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh 
 ### tick のモデルと利用上限
 
 監督も研究 tick と同じ `gpt-6-astra`、reasoning `medium` に統一する。
-`CODEX_HOME=$HOME/.codex-coding-agent-0002` を明示し、Claude の呼び出しを廃止する。
+正規起動口が起動前に選んだ `CODEX_HOME` を保持し、未設定・空なら起動前に失敗する。Claude は呼び出さない。
 上限・認証失敗・モデル利用不可は非ゼロ終了として記録し、未コミット成果を保持する。
-別モデル・別 CLI・別アカウントへの切り替えは行わず、同じ設定の復旧を待つ。
+実行中の別モデル・別 CLI・別アカウントへの切り替えは行わない。次回の起動前の選定は正規起動口が行う。
 認証失敗時は tick 窓口へ停止を依頼して正規の認証経路を復旧する。
 
 ### 頻度の根拠
