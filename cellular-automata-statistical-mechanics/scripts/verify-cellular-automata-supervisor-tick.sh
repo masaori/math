@@ -14,7 +14,7 @@ LAUNCHER="$HOME/.local/bin/cellular-automata-supervision-launcher.sh"
 PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
 LOG_DIR="$HOME/Library/Logs/cellular-automata-research-supervision"
 DECLARATION="$HOME/git/masaori/local-pc-management/agent-sessions/config/tick-schedules.json"
-WORKTREE_SUFFIX=".claude/worktrees/tick/cellular-automata-research-supervision"
+WORKTREE_SUFFIX=".codex/worktrees/tick/cellular-automata-research-supervision"
 
 check_installed=0
 for arg in "$@"; do
@@ -84,8 +84,8 @@ else
     ng "監督 tick に worktree の代入が無い"
   elif printf '%s' "$worktree_line" | grep -q "cellular-automata-auto-loop"; then
     ng "監督 tick が研究 tick の worktree を指している: $worktree_line"
-  elif ! printf '%s' "$worktree_line" | grep -q "cellular-automata-research-supervision"; then
-    ng "監督 tick の worktree が監督専用の名前になっていない: $worktree_line"
+  elif ! printf '%s' "$worktree_line" | grep -Fq "$WORKTREE_SUFFIX"; then
+    ng "監督 tick の worktree が Codex の監督専用パスになっていない: $worktree_line"
   else
     ok "監督 tick が研究 tick とは別の専用 worktree を使う"
   fi
@@ -164,10 +164,10 @@ tick = found[0]
 problems = []
 if tick.get("kind") != "agent-tick":
     problems.append(f'kind が agent-tick でない: {tick.get("kind")}')
-if not tick.get("agents"):
-    problems.append("agents が空である")
-if tick.get("worktree_tool") != "claude":
-    problems.append(f'worktree_tool が claude でない: {tick.get("worktree_tool")}')
+if tick.get("agents") != ["codex"]:
+    problems.append(f'agents が codex だけでない: {tick.get("agents")}')
+if tick.get("worktree_tool") != "codex":
+    problems.append(f'worktree_tool が codex でない: {tick.get("worktree_tool")}')
 worktrees = tick.get("protected_worktrees") or []
 if not any(w.endswith(suffix) for w in worktrees):
     problems.append(f"protected_worktrees に正準の worktree が無い: {worktrees}")

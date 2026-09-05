@@ -3,13 +3,29 @@
 > **停止中（2026-08-29 の人間指示）**: 主経路は模型固有定理が無く判断待ちで、並行経路は
 > 終了条件なしに新規補題を追加していたため、新規証明を止めて成果整理へ切り替えた。
 > [停止状態](auto-loop-paused.md) が存在する間は tick 本体も成功終了して何も変更しない。
-> 再開には人間の明示指示を要する。以下は停止前の運用記録として残す。
+> 再開には人間の明示指示を要する。以下の研究手順は停止前の運用記録として残す。モデル設定だけは停止中も更新する。
 
 このファイルは、launchd が起動する tick が**毎回まっさらな文脈で**読み、決定論的に 1 tick 分を
 実行するための手順書である。状態は [auto-loop-state.md](auto-loop-state.md) に永続化する。
 判断の根拠は、この 2 ファイルとリポジトリ内の一次情報
 （`docs/context/`、このプロジェクトの [README](../../README.md)、
 `docs/discussion/3次元Isingを可算側で書く/`）だけとする。
+
+## tick のモデルと利用上限
+
+研究の定期起動を `gpt-6-astra` に統一するため、Claude と Codex の交互実行を廃止した。
+以前の交互実行はモデル固有の癖を分散するためだったが、今回の固定モデル指定を優先する。
+毎回 `CODEX_HOME=$HOME/.codex-coding-agent-0002` を指定し、`codex exec -m gpt-6-astra`
+と `model_reasoning_effort=medium` で起動する。起動時のログにモデル・推論設定・設定ディレクトリを残す。
+
+利用上限・認証失敗・モデル利用不可は非ゼロ終了としてログへ残し、未コミット成果を保持する。
+別モデル・別 CLI・別アカウントへの切り替えは行わない。後続 tick も同じ設定で起動する。
+旧 `last-agent` と `claude-blocked-until` / `codex-blocked-until` は選択に使わない。
+認証が失敗した場合は定期実行を止める依頼を tick 窓口へ送り、正規の認証経路を復旧してから再開する。
+
+プログラミングによる検証は、リポジトリ直下で `python3 scripts/test-research-tick-models.py` を実行する。
+実際の起動部分へ偽 CLI を渡し、固定モデル・固定アカウント・非ゼロ終了の伝播を判定する。
+この試験は実モデルの応答確認を代替しない。
 
 ## 1 tick の大方針（最重要・絶対遵守）
 
@@ -249,8 +265,8 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 | 起動 | `~/.local/bin/ising-3d-cut-loop-launcher.sh`（リポジトリ外。専用 worktree を用意して tick 本体を exec する） |
 | 実体 | `scripts/auto-loop-tick.sh`（launchd は毎時 0/15/30/45 分に呼ぶ。多重起動を防ぎ、持ち時間で打ち切る） |
 | 間隔 | **最短 15 分。中断が続くと tick 自身が伸ばす**（下の「間隔の自動調整」） |
-| 作業ツリー | `~/git/masaori/math-ising-3d-cut-loop`（ブランチ `ising-3d-cut-loop`。毎 tick の冒頭で `origin/main` へ合わせる） |
-| 使うエージェント | **Claude と Codex を 1 tick ごとに交互**（2 次元側と同じ運用）。Claude は `claude-fable-5` の effort medium、Codex は `gpt-5.6-sol` の reasoning medium。直前に使ったほうを `logs/last-agent` に記録し、その反対を選ぶ |
+| 作業ツリー | `<repo>/.codex/worktrees/tick/ising-3d-cut-auto-loop`（ブランチ `ising-3d-cut-loop`。毎 tick の冒頭で `origin/main` へ合わせる） |
+| 使うエージェント | Codex（`gpt-6-astra`、reasoning `medium`、上の固定アカウント） |
 | ログ | `~/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log`（リポジトリ外。作業ツリーを合わせ直しても消えないため） |
 
 ### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）

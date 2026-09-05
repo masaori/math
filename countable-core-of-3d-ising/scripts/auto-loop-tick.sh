@@ -47,8 +47,7 @@ LOG_DIR="$HOME/Library/Logs/ising-3d-cut-auto-loop"
 LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
-CLAUDE_TICK_CONFIG_DIR="$HOME/.claude-coding-agent-0004"
-CLAUDE_TICK_TOKEN_FILE="$HOME/.config/agent-tokens/claude-coding-agent-0004.token"
+CODEX_TICK_HOME="$HOME/.codex-coding-agent-0002"
 
 # --- 発火間隔の自動調整 ------------------------------------------------------
 # launchd は 15 分ごとに呼ぶが、**実際に走る間隔はここで決める**。
@@ -94,22 +93,27 @@ if [ -d "$HOME/.nvm/versions/node" ]; then
   nvm_default="$(cat "$HOME/.nvm/alias/default" 2>/dev/null || true)"
   nvm_bin=""
   if [ -n "$nvm_default" ]; then
-    nvm_bin="$(ls -d "$HOME"/.nvm/versions/node/v"${nvm_default#v}"* 2>/dev/null | sort -V | tail -1)"
+    nvm_bin="$(find "$HOME/.nvm/versions/node" -mindepth 1 -maxdepth 1 -type d -name "v${nvm_default#v}*" -print | sort -V | tail -1)"
   fi
   if [ -z "$nvm_bin" ]; then
-    nvm_bin="$(ls -d "$HOME"/.nvm/versions/node/v* 2>/dev/null | sort -V | tail -1)"
+    nvm_bin="$(find "$HOME/.nvm/versions/node" -mindepth 1 -maxdepth 1 -type d -name 'v*' -print | sort -V | tail -1)"
   fi
   [ -n "$nvm_bin" ] && PATH="$nvm_bin/bin:$PATH"
 fi
 export PATH
 
-# tick は Claude と Codex を交互に使う（2 次元側と同じ運用）。両方が要る。
-for cli in claude codex; do
+# tick は Codex の固定モデルだけを使う。
+for cli in codex timeout git; do
   if ! command -v "$cli" >/dev/null 2>&1; then
     log "SKIP: $cli が PATH に無い"
     exit 1
   fi
 done
+
+if [ ! -d "$CODEX_TICK_HOME" ] || [ ! -s "$CODEX_TICK_HOME/auth.json" ]; then
+  log "ERROR: tick 専用の Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
+  exit 1
+fi
 
 # 間隔を伸ばしている間は、launchd の発火を見送る（launchd 側の設定は 15 分ごとに固定）。
 TICK_START_EPOCH="$(date +%s)"
@@ -261,6 +265,7 @@ HARD_DEADLINE="$(date -v+$(( TICK_TIMEOUT_SECONDS / 60 ))M '+%H:%M' 2>/dev/null 
   || date -d "+$(( TICK_TIMEOUT_SECONDS / 60 )) minutes" '+%H:%M')"
 
 PROMPT=$(cat <<'EOF'
+[[AI_AGENT_MESSAGE]]
 countable-core-of-3d-ising の自動ループを 1 tick 進める。
 
 まず次を全て読む。
@@ -321,111 +326,17 @@ EOF
 PROMPT="${PROMPT//@SOFT@/$SOFT_DEADLINE}"
 PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
 
-# どちらのエージェントを使うかを交互に決める（同じモデルの癖が証明の癖になるのを避けるため）。
-AGENT_MARK="$LOG_DIR/last-agent"
-BLOCKED_MARK="$LOG_DIR/claude-blocked-until"
-CODEX_BLOCKED_MARK="$LOG_DIR/codex-blocked-until"
-last_agent="$(cat "$AGENT_MARK" 2>/dev/null || echo codex)"
-if [ "$last_agent" = "claude" ]; then agent="codex"; else agent="claude"; fi
-
-if [ "$agent" = "claude" ] && [ -f "$BLOCKED_MARK" ]; then
-  blocked_until="$(cat "$BLOCKED_MARK" 2>/dev/null || echo 0)"
-  if [ "$(date +%s)" -lt "${blocked_until:-0}" ]; then
-    log "claude は使用量の上限中（$(date -r "$blocked_until" '+%m-%d %H:%M' 2>/dev/null) まで）。codex で回す"
-    agent="codex"
-  else
-    rm -f "$BLOCKED_MARK"
-  fi
-fi
-
-# codex 側も同じ扱いにする（実測 2026-08-15 23:35: codex の使用量上限に当たり、
-# 検知の仕組みが無かったため tick が 1 秒で異常終了した。復帰は 5 日後だった）。
-if [ "$agent" = "codex" ] && [ -f "$CODEX_BLOCKED_MARK" ]; then
-  codex_blocked_until="$(cat "$CODEX_BLOCKED_MARK" 2>/dev/null || echo 0)"
-  if [ "$(date +%s)" -lt "${codex_blocked_until:-0}" ]; then
-    if [ -f "$BLOCKED_MARK" ] && [ "$(date +%s)" -lt "$(cat "$BLOCKED_MARK" 2>/dev/null || echo 0)" ]; then
-      log "codex も claude も使用量の上限中。claude で試す（早く復帰するのは claude 側）"
-    else
-      log "codex は使用量の上限中（$(date -r "$codex_blocked_until" '+%m-%d %H:%M' 2>/dev/null) まで）。claude で回す"
-    fi
-    agent="claude"
-  else
-    rm -f "$CODEX_BLOCKED_MARK"
-  fi
-fi
-
-log "=== tick 開始（${agent} / 間隔 ${interval_minutes} 分 / 作業ツリー ${LOOP_WORKTREE} / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
-
-head_before="$(git -C "$LOOP_WORKTREE" rev-parse --short HEAD 2>/dev/null || echo '-')"
-
+log "=== tick 開始（codex / 間隔 ${interval_minutes} 分 / 作業ツリー ${LOOP_WORKTREE} / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
+head_before="$(git -C "$LOOP_WORKTREE" rev-parse --short HEAD)"
+# 実行モデルとアカウントを固定する。上限・失敗時も別モデル／別 CLI へ切り替えない。
+log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
 set +e
-# MCP サーバは 1 つも起動しない（tick の作業に不要で、残ると機械が詰まる）。
-echo '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
-# プロンプトは標準入力から渡す（--mcp-config が可変長引数なので引数で続けると飲み込まれる）。
-if [ "$agent" = "claude" ]; then
-  if [ ! -d "$CLAUDE_TICK_CONFIG_DIR" ] || [ ! -s "$CLAUDE_TICK_TOKEN_FILE" ]; then
-    log "ERROR: claude の専用資格情報が無い"
-    status=1
-  else
-    # モデルは claude-opus-5（人の指示 2026-08-22）。以前は claude-fable-5 だったが、このループ専用アカウント
-    # （coding-agent-0004）の Fable 5 の枠が尽き、2026-08-20 07:36 の公開を最後に
-    # 2 日以上すべての tick が 2 秒で異常終了し続けた（実測 60 回）。同じアカウントで
-    # opus などは応答するのを確認したうえでの変更であり、実行時に別モデルへ
-    # 落とすフォールバックではない（どのモデルで何が動いたか分からなくなるため、
-    # 実行時の切り替えは引き続きしない）。
-    oauth_token="$(cat "$CLAUDE_TICK_TOKEN_FILE")"
-    printf '%s' "$PROMPT" | CLAUDE_CONFIG_DIR="$CLAUDE_TICK_CONFIG_DIR" \
-      CLAUDE_CODE_OAUTH_TOKEN="$oauth_token" \
-      timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
-    --model claude-opus-5 --effort medium \
-    --dangerously-skip-permissions --strict-mcp-config \
-    --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
-    status=$?
-    unset oauth_token
-  fi
-else
-  printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
-    -m gpt-5.6-sol -c model_reasoning_effort=medium \
-    --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
-  status=$?
-fi
+printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" \
+  timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
+  -m gpt-6-astra -c model_reasoning_effort=medium \
+  --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
+status=$?
 set -e
-printf '%s\n' "$agent" > "$AGENT_MARK"
-
-if [ "$agent" = "claude" ] && [ "$status" -ne 0 ]; then
-  recent_output="$(tail -5 "$LOG_FILE")"
-  case "$recent_output" in
-    *"weekly limit"*) date -v+1d +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 86400 )) > "$BLOCKED_MARK"
-                      log "    claude が週次の上限に達した。1 日後まで codex だけで回す" ;;
-    *"session limit"*) date -v+3H +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 10800 )) > "$BLOCKED_MARK"
-                      log "    claude がセッションの上限に達した。3 時間後まで codex だけで回す" ;;
-    # モデル単位の上限は別の文言で来る（実測: "You've reached your Fable 5 limit.
-    # Switch to another model to continue."）。上の 2 つに当たらないため上限として
-    # 記録されず、2026-08-22 は codex も上限中だったので、tick が毎回 2 秒で失敗する
-    # だけの空回りを続けた。モデルを変えるのはこのループの判断ではないので、上限と
-    # 記録して codex 側の復帰を待つ。
-    *"reached your"*"limit"*) date -v+3H +%s > "$BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 10800 )) > "$BLOCKED_MARK"
-                      log "    claude がモデル単位の上限に達した。3 時間後まで codex だけで回す" ;;
-  esac
-fi
-
-# codex の使用量上限。文言に復帰時刻が入っているので、それを期限にする
-# （例: "try again at Aug 20th, 2026 12:35 PM"）。読めなければ 1 日後に試し直す。
-if [ "$agent" = "codex" ] && [ "$status" -ne 0 ]; then
-  case "$(tail -5 "$LOG_FILE")" in
-    *"usage limit"*)
-      resume="$(tail -5 "$LOG_FILE" | sed -n 's/.*try again at \([A-Z][a-z]*\) \([0-9]\{1,2\}\)[a-z]*, \([0-9]\{4\}\) \([0-9]\{1,2\}:[0-9]\{2\}\) \([AP]M\).*/\1 \2 \3 \4 \5/p' | tail -1)"
-      # 月名と AM/PM は英語ロケールでしか読めない（このマシンの既定は日本語）。
-      resume_epoch="$(LC_ALL=C date -j -f '%b %d %Y %I:%M %p' "$resume" +%s 2>/dev/null || true)"
-      if [ -n "$resume_epoch" ]; then
-        printf '%s' "$resume_epoch" > "$CODEX_BLOCKED_MARK"
-        log "    codex が使用量の上限に達した（復帰 $(date -r "$resume_epoch" '+%m-%d %H:%M')）。それまで claude だけで回す"
-      else
-        date -v+1d +%s > "$CODEX_BLOCKED_MARK" 2>/dev/null || echo $(( $(date +%s) + 86400 )) > "$CODEX_BLOCKED_MARK"
-        log "    codex が使用量の上限に達した（復帰時刻を読めず）。1 日後まで claude だけで回す"
-      fi ;;
-  esac
-fi
 
 record_leftover() {  # 失敗した tick が残したものを目印へ書く（次の tick が拾う）
   local reason="$1"

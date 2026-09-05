@@ -1,6 +1,18 @@
 # MEMORY — 2次元 Ising 模型の厳密解（Λ・Fisher 零点の立場）
 
+## 定期起動のモデルを固定した（2026-09-05）
+
+研究 tick は Codex の `gpt-6-astra`、reasoning `medium`、
+`CODEX_HOME=$HOME/.codex-coding-agent-0002` に固定した。固定モデルへの統一を優先し、
+モデルの癖を分散するための Claude との交互実行と、利用上限時の CLI 切り替えを廃止した。
+上限時は非ゼロ終了と未コミット成果を記録し、同じ設定の復旧を待つ。別モデルや別アカウントへ落とさない。
+運用の正本は `docs/tasks/auto-loop-runbook.md` の「tick のモデルと利用上限」。
+
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
+
+プログラミングによる検証: 6 本の起動部分の固定モデル・アカウント・終了コード（正常、異常、打ち切り）、
+当プロジェクトの構造化テキスト一括検査・SageMath 対応・PDF 生成は成功。Lean 全体ビルドと未証明依存検査も成功。
+LLM による検証: 起動分岐と runbook を読み、停止条件を変えずにモデルを固定したことを確認した。
 
 ## 公開は「クリーンで remote default に入っている版」からだけ行う（2026-09-05）
 

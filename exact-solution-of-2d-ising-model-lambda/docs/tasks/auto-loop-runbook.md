@@ -5,6 +5,22 @@
 リポジトリ内の一次情報（`docs/context/`、このプロジェクトの [README](../../README.md)、
 `docs/discussion/Lee-Yang-Fisher零点プログラム/`、`docs/discussion/対数順序群上の統計力学/`）だけとする。
 
+## tick のモデルと利用上限
+
+研究の定期起動を `gpt-6-astra` に統一するため、Claude と Codex の交互実行を廃止した。
+以前の交互実行はモデル固有の癖を分散するためだったが、今回の固定モデル指定を優先する。
+毎回 `CODEX_HOME=$HOME/.codex-coding-agent-0002` を指定し、`codex exec -m gpt-6-astra`
+と `model_reasoning_effort=medium` で起動する。起動時のログにモデル・推論設定・設定ディレクトリを残す。
+
+利用上限・認証失敗・モデル利用不可は非ゼロ終了としてログへ残し、未コミット成果を保持する。
+別モデル・別 CLI・別アカウントへの切り替えは行わない。後続 tick も同じ設定で起動する。
+旧 `last-agent` と `claude-blocked-until` / `codex-blocked-until` は選択に使わない。
+認証が失敗した場合は定期実行を止める依頼を tick 窓口へ送り、正規の認証経路を復旧してから再開する。
+
+プログラミングによる検証は、リポジトリ直下で `python3 scripts/test-research-tick-models.py` を実行する。
+実際の起動部分へ偽 CLI を渡し、固定モデル・固定アカウント・非ゼロ終了の伝播を判定する。
+この試験は実モデルの応答確認を代替しない。
+
 ## 1 tick の大方針（最重要・絶対遵守）
 
 1. **既存出力のレビューと修正を先に行う。** 新しいセクションへ進む前に、既に書いたものを読み直し、
@@ -299,7 +315,7 @@ tick は開始時に作業ツリーが汚れていたら見送るが、**残骸�
 
 ## 起動の仕組み（launchd。このセッションとは独立）
 
-各 tick は launchd が起動する**独立した Claude セッション**として走る。会話の文脈は持ち越さない。
+各 tick は launchd が起動する**独立した Codex セッション**として走る。会話の文脈は持ち越さない。
 持ち越すのは、この runbook・状態台帳・リポジトリの中身だけである。だからこそ台帳を正直に書く。
 
 | | |
@@ -307,11 +323,7 @@ tick は開始時に作業ツリーが汚れていたら見送るが、**残骸�
 | ラベル | `com.masaori.ising-lambda-auto-loop` |
 | 定義 | `~/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist` |
 | 実体 | `scripts/auto-loop-tick.sh`（毎時 5 分。見送られたときの再試行を 35 分に置く。多重起動を防ぎ、45 分で打ち切る） |
-| 使うエージェント | **Claude と Codex を 1 tick ごとに交互**（ユーザー指示）。Claude は `claude-fable-5` の effort medium、Codex は `gpt-5.6-sol` の reasoning medium。直前に使ったほうを `logs/last-agent` に記録し、その反対を選ぶ（見送られた回では記録しないので偏らない） |
-
-交互にするのは、**同じモデルの癖がそのまま証明の癖になるのを避けるため**である。
-どちらが書いた tick かはログの `=== tick 開始（<エージェント名> / …）` で分かる。
-片方でしか起きない失敗（例: 特定の CLI の引数の扱い）を切り分けるときはここを見る。
+| 使うエージェント | Codex（`gpt-6-astra`、reasoning `medium`、上の固定アカウント） |
 | ログ | `logs/auto-loop.log`（現在の raw 出力）、`logs/auto-loop-status.log`（直近の進捗・結果）、`logs/auto-loop.<UTC時刻>.<PID>.log.gz`（可逆圧縮した過去 8 世代、いずれも git 管理外） |
 
 ### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）

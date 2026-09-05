@@ -19,8 +19,8 @@ fi
 
 # 研究 tick（.codex/worktrees/tick/cellular-automata-auto-loop）とは別の worktree を使う。
 # 同じ worktree を共有すると、監督が研究 tick の未コミット成果を巻き込むか、
-# 互いのロックで見送り合う。配置名前空間は起動する CLI に合わせて .claude 側に置く。
-LOOP_WORKTREE="$MAIN_REPO_DIR/.claude/worktrees/tick/cellular-automata-research-supervision"
+# 互いのロックで見送り合う。配置名前空間は起動する CLI に合わせて .codex 側に置く。
+LOOP_WORKTREE="$MAIN_REPO_DIR/.codex/worktrees/tick/cellular-automata-research-supervision"
 
 LOG_DIR="$HOME/Library/Logs/cellular-automata-research-supervision"
 LOG_FILE="$LOG_DIR/supervision.log"
@@ -28,10 +28,8 @@ LOCK_DIR="$LOG_DIR/supervision.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
 TICK_TIMEOUT_SECONDS=2400
 
-# launchd は対話シェルのアカウント割り当てを継承しない。研究 tick と同じ専用アカウントを、
-# このプロセスだけへ明示的に割り当てる。既定の資格情報へ暗黙に接続しない。
-CLAUDE_TICK_CONFIG_DIR="$HOME/.claude-coding-agent-0004"
-CLAUDE_TICK_TOKEN_FILE="$HOME/.config/agent-tokens/claude-coding-agent-0004.token"
+# 対話シェルの割り当てに依存せず、この tick のアカウントを固定する。
+CODEX_TICK_HOME="$HOME/.codex-coding-agent-0002"
 
 mkdir -p "$LOG_DIR"
 # 進捗行は supervision.log と launchd の標準出力の両方へ書く。片方だけだと、外から見張っている
@@ -55,12 +53,17 @@ if [ -d "$HOME/.nvm/versions/node" ]; then
 fi
 export PATH
 
-for cli in claude timeout git node; do
+for cli in codex timeout git node; do
   if ! command -v "$cli" >/dev/null 2>&1; then
     log "SKIP: 必要なコマンドが PATH に無い: $cli"
     exit 1
   fi
 done
+
+if [ ! -d "$CODEX_TICK_HOME" ] || [ ! -s "$CODEX_TICK_HOME/auth.json" ]; then
+  log "ERROR: tick 専用の Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
+  exit 1
+fi
 
 # trap から呼ばれるため、静的解析には通常の関数呼び出しとして見えない。
 # shellcheck disable=SC2329
@@ -196,40 +199,15 @@ PROMPT="${PROMPT//@SOFT@/$SOFT_DEADLINE}"
 PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
 
 log "=== 監督開始（6 時間間隔 / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
-printf '%s\n' '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
-
-if [ ! -d "$CLAUDE_TICK_CONFIG_DIR" ]; then
-  log "SKIP: Claude の設定ディレクトリが無い: $CLAUDE_TICK_CONFIG_DIR"
-  exit 1
-fi
-if [ ! -r "$CLAUDE_TICK_TOKEN_FILE" ]; then
-  log "SKIP: Claude のアカウントトークンを読めない: $CLAUDE_TICK_TOKEN_FILE"
-  exit 1
-fi
-oauth_token="$(<"$CLAUDE_TICK_TOKEN_FILE")"
-if [ -z "$oauth_token" ]; then
-  log "SKIP: Claude のアカウントトークンが空: $CLAUDE_TICK_TOKEN_FILE"
-  exit 1
-fi
-
+# 実行モデルとアカウントを固定する。上限・失敗時も別モデル／別 CLI へ切り替えない。
+log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
 set +e
-printf '%s' "$PROMPT" | \
-  CLAUDE_CONFIG_DIR="$CLAUDE_TICK_CONFIG_DIR" \
-  CLAUDE_CODE_OAUTH_TOKEN="$oauth_token" \
-  timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
-  --model claude-opus-5 --effort medium \
-  --dangerously-skip-permissions --strict-mcp-config \
-  --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
+printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" \
+  timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
+  -m gpt-6-astra -c model_reasoning_effort=medium \
+  --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
 status=$?
 set -e
-
-# モデル単位の上限は、別モデルへ勝手に落とさずエラーとして扱う。何のモデルで何が動いたのか
-# 分からなくなるため（人間の判断 2026-08-17）。研究 tick と同じ扱いに揃える。
-if [ "$status" -ne 0 ]; then
-  case "$(tail -5 "$LOG_FILE")" in
-    *"Switch to another model"*) log "    claude-opus-5 が利用上限。この監督はエラーで終える" ;;
-  esac
-fi
 
 dirty_count="$(git status --porcelain | wc -l | tr -d ' ')"
 if [ "$dirty_count" != "0" ]; then

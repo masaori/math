@@ -24,11 +24,8 @@ LOCK_DIR="$LOG_DIR/auto-loop.lock"
 LEFTOVER_MARK="$LOG_DIR/leftover-from-tick"
 TICK_TIMEOUT_SECONDS=1620
 
-# launchd は対話シェルのアカウント割り当てを継承しない。既定の Claude 資格情報へ
-# 暗黙に接続すると、別アカウントへの全体切り替えでこの tick の経路まで変わる。
-# Claude 用の専用アカウントを、このプロセスだけへ明示的に割り当てる。
-CLAUDE_TICK_CONFIG_DIR="$HOME/.claude-coding-agent-0004"
-CLAUDE_TICK_TOKEN_FILE="$HOME/.config/agent-tokens/claude-coding-agent-0004.token"
+# 対話シェルの割り当てに依存せず、この tick のアカウントを固定する。
+CODEX_TICK_HOME="$HOME/.codex-coding-agent-0002"
 
 mkdir -p "$LOG_DIR"
 # 進捗行は auto-loop.log と launchd の標準出力の両方へ書く。**片方だけだと、外から
@@ -56,12 +53,17 @@ fi
 [ -d "$HOME/.elan/bin" ] && PATH="$HOME/.elan/bin:$PATH"
 export PATH
 
-for cli in claude codex timeout git; do
+for cli in codex timeout git; do
   if ! command -v "$cli" >/dev/null 2>&1; then
     log "SKIP: 必要なコマンドが PATH に無い: $cli"
     exit 1
   fi
 done
+
+if [ ! -d "$CODEX_TICK_HOME" ] || [ ! -s "$CODEX_TICK_HOME/auth.json" ]; then
+  log "ERROR: tick 専用の Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
+  exit 1
+fi
 
 # trap から呼ばれるため、静的解析には通常の関数呼び出しとして見えない。
 # shellcheck disable=SC2329
@@ -206,60 +208,16 @@ EOF
 PROMPT="${PROMPT//@SOFT@/$SOFT_DEADLINE}"
 PROMPT="${PROMPT//@HARD@/$HARD_DEADLINE}"
 
-AGENT_MARK="$LOG_DIR/last-agent"
-last_agent="$(cat "$AGENT_MARK" 2>/dev/null || echo codex)"
-if [ "$last_agent" = "claude" ]; then agent="codex"; else agent="claude"; fi
-
-log "=== tick 開始（${agent} / 30 分間隔 / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
-printf '%s\n' '{"mcpServers":{}}' > "$LOG_DIR/empty-mcp.json"
-
-run_claude() {  # $1 = モデル名
-  local oauth_token
-  if [ ! -d "$CLAUDE_TICK_CONFIG_DIR" ]; then
-    log "SKIP: Claude の設定ディレクトリが無い: $CLAUDE_TICK_CONFIG_DIR"
-    return 1
-  fi
-  if [ ! -r "$CLAUDE_TICK_TOKEN_FILE" ]; then
-    log "SKIP: Claude のアカウントトークンを読めない: $CLAUDE_TICK_TOKEN_FILE"
-    return 1
-  fi
-  oauth_token="$(<"$CLAUDE_TICK_TOKEN_FILE")"
-  if [ -z "$oauth_token" ]; then
-    log "SKIP: Claude のアカウントトークンが空: $CLAUDE_TICK_TOKEN_FILE"
-    return 1
-  fi
-
-  printf '%s' "$PROMPT" | \
-    CLAUDE_CONFIG_DIR="$CLAUDE_TICK_CONFIG_DIR" \
-    CLAUDE_CODE_OAUTH_TOKEN="$oauth_token" \
-    timeout -k 60 "$TICK_TIMEOUT_SECONDS" claude -p \
-    --model "$1" --effort medium \
-    --dangerously-skip-permissions --strict-mcp-config \
-    --mcp-config "$LOG_DIR/empty-mcp.json" >> "$LOG_FILE" 2>&1
-}
-
+log "=== tick 開始（codex / 30 分間隔 / まとめ ${SOFT_DEADLINE} / 強制終了 ${HARD_DEADLINE}）"
+# 実行モデルとアカウントを固定する。上限・失敗時も別モデル／別 CLI へ切り替えない。
+log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
 set +e
-if [ "$agent" = "claude" ]; then
-  # 固定モデルは claude-opus-5。以前の claude-fable-5 は、この専用アカウントで
-  # 2026-08-22 以降すべて利用上限により終了した。同じアカウントの別ループで Opus 5 の
-  # 正常終了を確認したうえでの固定変更であり、実行時のフォールバックは行わない。
-  run_claude claude-opus-5
-  status=$?
-  # モデル単位の上限は、別モデルへ勝手に落とさずエラーとして扱う。何のモデルで何が
-  # 動いたのか分からなくなるため（人間の判断 2026-08-17）。
-  if [ "$status" -ne 0 ]; then
-    case "$(tail -5 "$LOG_FILE")" in
-      *"Switch to another model"*) log "    claude-opus-5 が利用上限。この tick はエラーで終える" ;;
-    esac
-  fi
-else
-  printf '%s' "$PROMPT" | timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
-    -m gpt-5.6-sol -c model_reasoning_effort=medium \
-    --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
-  status=$?
-fi
+printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" \
+  timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
+  -m gpt-6-astra -c model_reasoning_effort=medium \
+  --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
+status=$?
 set -e
-printf '%s\n' "$agent" > "$AGENT_MARK"
 
 dirty_count="$(git status --porcelain | wc -l | tr -d ' ')"
 if [ "$dirty_count" != "0" ]; then

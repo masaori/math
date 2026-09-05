@@ -1,5 +1,19 @@
 # MEMORY.md — cellular-automata-statistical-mechanics
 
+## 定期起動のモデルを固定した（2026-09-05）
+
+研究 tick は Codex の `gpt-6-astra`、reasoning `medium`、
+`CODEX_HOME=$HOME/.codex-coding-agent-0002` に固定した。固定モデルへの統一を優先し、
+モデルの癖を分散するための Claude との交互実行と、利用上限時の CLI 切り替えを廃止した。
+上限時は非ゼロ終了と未コミット成果を記録し、同じ設定の復旧を待つ。別モデルや別アカウントへ落とさない。
+運用の正本は `docs/tasks/auto-loop-runbook.md` の「tick のモデルと利用上限」。
+研究の監督も同じ固定設定で、専用 worktree は `.codex/worktrees/tick/cellular-automata-research-supervision`。
+研究 tick とは別 worktree のまま維持する。
+
+プログラミングによる検証: 6 本の起動部分の固定モデル・アカウント・終了コード（正常、異常、打ち切り）、
+当プロジェクトの構造化テキスト一括検査・SageMath 対応・PDF 生成は成功。Lean 全体ビルドと未証明依存検査も成功。
+LLM による検証: 起動分岐と runbook を読み、停止条件を変えずにモデルを固定したことを確認した。
+
 ## 有限校正の対象ラベルを実態へ戻し、新設分込みで全数掃引した（2026-09-05 16:12 tick）
 
 前 tick の初等セルオートマトン有限校正を独立レビューし、一様な 256 規則の列挙では、任意の非一様な

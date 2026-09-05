@@ -10,6 +10,22 @@
 方向が空になったことをこのループの内側からは検出できない。逆に、監督はこの tick を止めず、
 頻度も変えず、1 tick で進める一層の中身も決めない。
 
+## tick のモデルと利用上限
+
+研究の定期起動を `gpt-6-astra` に統一するため、Claude と Codex の交互実行を廃止した。
+以前の交互実行はモデル固有の癖を分散するためだったが、今回の固定モデル指定を優先する。
+毎回 `CODEX_HOME=$HOME/.codex-coding-agent-0002` を指定し、`codex exec -m gpt-6-astra`
+と `model_reasoning_effort=medium` で起動する。起動時のログにモデル・推論設定・設定ディレクトリを残す。
+
+利用上限・認証失敗・モデル利用不可は非ゼロ終了としてログへ残し、未コミット成果を保持する。
+別モデル・別 CLI・別アカウントへの切り替えは行わない。後続 tick も同じ設定で起動する。
+旧 `last-agent` と `claude-blocked-until` / `codex-blocked-until` は選択に使わない。
+認証が失敗した場合は定期実行を止める依頼を tick 窓口へ送り、正規の認証経路を復旧してから再開する。
+
+プログラミングによる検証は、リポジトリ直下で `python3 scripts/test-research-tick-models.py` を実行する。
+実際の起動部分へ偽 CLI を渡し、固定モデル・固定アカウント・非ゼロ終了の伝播を判定する。
+この試験は実モデルの応答確認を代替しない。
+
 ## 1 tick の境界
 
 1. 前 tick の成果を先にレビューする。誤りを見つけた場合は新規作業より修正を優先する。
@@ -39,9 +55,6 @@
 
 成果整理の `done` は、全件分類の網羅性、章内の依存順、節の入力・出力・主定理、独立レビューの
 指摘解消が機械検査または記録で確認できた場合だけ付ける。
-
-Claude 回は専用アカウントの `claude-opus-5`、effort `medium` に固定する。モデルの利用上限を
-検出しても別モデルへ実行時に切り替えず、エラーとして終了する。
 
 ## 着手前に読むもの
 
@@ -153,7 +166,7 @@ bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh
 - 発火: 毎時 12 分（`~/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist` の実測）
 - 専用 worktree: `<repo>/.codex/worktrees/tick/cellular-automata-auto-loop`
 - ログ: `~/Library/Logs/cellular-automata-auto-loop/auto-loop.log`
-- エージェント: Claude と Codex を tick ごとに交互に使う
+- エージェント: Codex（`gpt-6-astra`、reasoning `medium`）
 - 論文公開・通知: `scripts/publish-artifact.sh`（同じ論文版は再通知しない）
 
 ### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）

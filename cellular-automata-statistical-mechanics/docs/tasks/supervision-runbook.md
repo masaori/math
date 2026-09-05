@@ -149,10 +149,18 @@ bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh 
 - 起動口: `~/.local/bin/cellular-automata-supervision-launcher.sh`
 - tick 本体: `cellular-automata-statistical-mechanics/scripts/supervisor-tick.sh`
 - 発火: 6 時間ごと（2 時 52 分、8 時 52 分、14 時 52 分、20 時 52 分）
-- 専用 worktree: `<repo>/.claude/worktrees/tick/cellular-automata-research-supervision`
+- 専用 worktree: `<repo>/.codex/worktrees/tick/cellular-automata-research-supervision`
   （研究 tick の worktree とは別。同じ worktree を共有すると、監督が研究 tick の
   未コミット成果を巻き込むか、互いのロックで見送り合う）
 - ログ: `~/Library/Logs/cellular-automata-research-supervision/supervision.log`
+
+### tick のモデルと利用上限
+
+監督も研究 tick と同じ `gpt-6-astra`、reasoning `medium` に統一する。
+`CODEX_HOME=$HOME/.codex-coding-agent-0002` を明示し、Claude の呼び出しを廃止する。
+上限・認証失敗・モデル利用不可は非ゼロ終了として記録し、未コミット成果を保持する。
+別モデル・別 CLI・別アカウントへの切り替えは行わず、同じ設定の復旧を待つ。
+認証失敗時は tick 窓口へ停止を依頼して正規の認証経路を復旧する。
 
 ### 頻度の根拠
 

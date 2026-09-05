@@ -8,12 +8,14 @@ LOOP_BRANCH="finite-graph-ising-loop"
 LOG_DIR="$HOME/Library/Logs/finite-graph-ising-auto-loop"
 LOG_FILE="$LOG_DIR/auto-loop.log"
 LOCK_DIR="$LOG_DIR/auto-loop.lock"
+CODEX_TICK_HOME="$HOME/.codex-coding-agent-0002"
+TICK_TIMEOUT_SECONDS=3300
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 GIT_COMMON_DIR="$(git -C "$SCRIPT_DIR" rev-parse --path-format=absolute --git-common-dir)"
 MAIN_REPO_DIR="$(cd "$(dirname "$GIT_COMMON_DIR")" && pwd -P)"
 
-PATH="$HOME/.local/bin:$HOME/.local/share/mise/shims:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+PATH="$HOME/.agent-shims:$HOME/.local/bin:$HOME/.local/share/mise/shims:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 export PATH
 
 mkdir -p "$LOG_DIR"
@@ -36,6 +38,11 @@ trap 'rmdir "$LOCK_DIR" 2>/dev/null || true' EXIT
 
 if ! command -v codex >/dev/null 2>&1; then
   log "ERROR: codex が PATH に無い"
+  exit 1
+fi
+
+if [ ! -d "$CODEX_TICK_HOME" ] || [ ! -s "$CODEX_TICK_HOME/auth.json" ]; then
+  log "ERROR: tick 専用の Codex 設定または認証ファイルが無い: $CODEX_TICK_HOME"
   exit 1
 fi
 
@@ -76,9 +83,11 @@ PROMPT='[[AI_AGENT_MESSAGE]]
 runbook の停止条件に厳密に従ってください。上位の研究ゴールと次の具体的な研究対象が台帳に明記されるまで、新しい定義・主張・定理、既存証明の細分化、SageMath 検算を追加してはなりません。停止条件を確認したら、作業ツリーを変更せず終了してください。'
 
 log "=== tick 開始"
+log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
 set +e
-printf '%s' "$PROMPT" | timeout -k 60 3300 codex exec \
-  -m gpt-5.6-sol -c model_reasoning_effort=medium \
+printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" \
+  timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
+  -m gpt-6-astra -c model_reasoning_effort=medium \
   --dangerously-bypass-approvals-and-sandbox -C "$LOOP_WORKTREE" - >> "$LOG_FILE" 2>&1
 status=$?
 set -e
