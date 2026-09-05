@@ -4,7 +4,7 @@
 
 **対象ラベル**: `claim_support_finite_decidability`
 
-- 併せて検証するラベル: `claim_flip_test_equivalence`、`claim_stage_global_maps_count`、
+- 併せて検証するラベル: `claim_flip_test_equivalence`、
   `claim_stage_realized_cycle_types_decidable`、`claim_locality_restricts_cycle_type`
 - 有限巡回舞台上の一様な半径 1 の 2 値セルオートマトン 256 通りを全数列挙し、一般の舞台で
   述べた不変量（本質的依存台、可逆性、大域写像の巡回型）を小さな舞台の大きさで全数計算して
@@ -56,6 +56,8 @@ $|S|\cdot 2^{|S|}$ に一致する。
   一般の場合の根拠は構造化記述の側にある。とくに「舞台の大きさ 3..8 のすべてで可逆な規則は 6 個」は
   この範囲での事実であって、任意の $L$ についての主張ではない。
 - 規則クラスは一様・半径 1・2 値・巡回舞台に限る。非一様な局所規則や他の舞台は範囲外である。
+- この検算は一様な規則 256 通りだけを列挙するため、任意の非一様な局所規則族から大域写像への
+  対応の単射性（`claim_stage_global_maps_count`）は検算対象ではない。その一般主張の根拠は本文の証明にある。
 - 有限集合、有限写像表、自然数、有限多重集合の等号だけを使う。
   浮動小数点は使わず、$\mathbb{R}$/$\mathbb{C}$ への脱出はない。
 
