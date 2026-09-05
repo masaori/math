@@ -7,6 +7,8 @@
  * 両方向で確かめる。
  */
 
+import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 import type { RoadmapStage } from "../research-roadmap.ts";
@@ -206,8 +208,8 @@ expectViolation(
  */
 const projectDir = join(structuredLatexDir, "..");
 
-const expectResolver = (name: string, path: string, expected: boolean): void => {
-  const actual = evidenceFileExists(projectDir, path);
+const expectResolver = (name: string, path: string, expected: boolean, root = projectDir): void => {
+  const actual = evidenceFileExists(root, path);
   if (actual === expected) {
     console.log(`✓ ${name}`);
     return;
@@ -222,9 +224,34 @@ expectResolver("プロジェクトルート自身は根拠にならない", "", 
 expectResolver("プロジェクトの外のファイルは根拠にならない", "../docs/context/README.md", false);
 expectResolver("実在しないファイルは根拠にならない", "docs/存在しない.md", false);
 
+const fixtureRoot = mkdtempSync(join(tmpdir(), "ca-roadmap-evidence-"));
+try {
+  const fixtureProject = join(fixtureRoot, "project");
+  const fixtureOutside = join(fixtureRoot, "outside");
+  mkdirSync(fixtureProject);
+  mkdirSync(fixtureOutside);
+  writeFileSync(join(fixtureOutside, "outside.md"), "プロジェクト外のファイル\n");
+  symlinkSync(join(fixtureOutside, "outside.md"), join(fixtureProject, "file-link.md"));
+  symlinkSync(fixtureOutside, join(fixtureProject, "directory-link"));
+  expectResolver(
+    "プロジェクト外の通常ファイルへのシンボリックリンクは根拠にならない",
+    "file-link.md",
+    false,
+    fixtureProject,
+  );
+  expectResolver(
+    "プロジェクト外へ出る途中ディレクトリのシンボリックリンクは根拠にならない",
+    "directory-link/outside.md",
+    false,
+    fixtureProject,
+  );
+} finally {
+  rmSync(fixtureRoot, { recursive: true, force: true });
+}
+
 if (failures > 0) {
   console.error(`段取りの規則の回帰検査が失敗した（${failures} 件）`);
   process.exit(1);
 }
 
-console.log("段取りの規則と根拠の解決子の回帰検査がすべて期待どおり（20 件）");
+console.log("段取りの規則と根拠の解決子の回帰検査がすべて期待どおり（22 件）");
