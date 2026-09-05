@@ -33,7 +33,7 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
     IFS= read -r prior_pid < "$LOCK_DIR/pid"
   fi
   if [ -n "$prior_pid" ] && kill -0 "$prior_pid" 2>/dev/null; then
-    log "SKIP: 前の論文構成tick（pid $prior_pid）が動作中"
+    log "SKIP: 前の論文構成tick（pid ${prior_pid}）が動作中"
     exit 0
   fi
   log "RECOVER: 所有プロセスの無いstale lockを回収"
@@ -52,7 +52,7 @@ timeout -k 10 "$GIT_NETWORK_TIMEOUT_SECONDS" git -C "$REPO_DIR" fetch origin >>"
 fetch_status=$?
 set -e
 if [ "$fetch_status" -ne 0 ]; then
-  log "ERROR: git fetchに失敗（exit $fetch_status）"
+  log "ERROR: git fetchに失敗（exit ${fetch_status}）"
   exit "$fetch_status"
 fi
 if ! default_ref="$(git -C "$REPO_DIR" symbolic-ref --quiet refs/remotes/origin/HEAD)"; then
@@ -95,7 +95,7 @@ tee_status="${pipeline_status[2]}"
 set -e
 if [ "$tee_status" -ne 0 ]; then
   status="$tee_status"
-  log "ERROR: tick出力の記録に失敗（exit $tee_status）"
+  log "ERROR: tick出力の記録に失敗（exit ${tee_status}）"
 fi
 has_pending_work=0
 if "$PROJECT_DIR/scripts/paper-organization-has-pending-work.sh" "$REPO_DIR" "origin/$default_branch"; then
@@ -103,7 +103,7 @@ if "$PROJECT_DIR/scripts/paper-organization-has-pending-work.sh" "$REPO_DIR" "or
 fi
 timeout_disposition="$("$PROJECT_DIR/scripts/paper-organization-timeout-disposition.sh" "$status" "$has_pending_work")"
 if [ "$timeout_disposition" = checkpoint ]; then
-  log "CHECKPOINT: 有限上限までの成果をworktreeへ保持し、次回は継続モードで完了工程だけを行う（exit $status）"
+  log "CHECKPOINT: 有限上限までの成果をworktreeへ保持し、次回は継続モードで完了工程だけを行う（exit ${status}）"
   exit 0
 fi
 if [ "$status" -eq 0 ]; then
@@ -117,13 +117,13 @@ if [ "$status" -eq 0 ]; then
     set -e
     if [ "$verify_fetch_status" -ne 0 ]; then
       status="$verify_fetch_status"
-      log "ERROR: 成果包含確認のgit fetchに失敗（exit $verify_fetch_status）"
+      log "ERROR: 成果包含確認のgit fetchに失敗（exit ${verify_fetch_status}）"
     elif [ "$result_commit" = "$start_default_commit" ]; then
       status=1
       log "ERROR: 成果コミットがtick開始時のremote defaultと同一"
     elif ! git -C "$REPO_DIR" merge-base --is-ancestor "$result_commit" "origin/$default_branch"; then
       status=1
-      log "ERROR: 成果コミットがremote defaultに含まれていない（$result_commit）"
+      log "ERROR: 成果コミットがremote defaultに含まれていない（${result_commit}）"
     fi
   fi
 fi
@@ -138,12 +138,12 @@ if [ "$status" -eq 0 ]; then
   set -e
   if [ "$publish_status" -ne 0 ]; then
     status="$publish_status"
-    log "ERROR: 公開物の更新に失敗（exit $publish_status）"
+    log "ERROR: 公開物の更新に失敗（exit ${publish_status}）"
   fi
 fi
 case "$status" in
   0) log "SUCCESS: 論文構成tick完了" ;;
-  124|137) log "TIMEOUT: 前回成果をworktreeへ保持（exit $status）" ;;
-  *) log "ERROR: 論文構成tick異常終了（exit $status）" ;;
+  124|137) log "TIMEOUT: 前回成果をworktreeへ保持（exit ${status}）" ;;
+  *) log "ERROR: 論文構成tick異常終了（exit ${status}）" ;;
 esac
 exit "$status"

@@ -92,4 +92,27 @@ printf 'ahead\n' >> "$PENDING_REPO/tracked.txt"
 git -C "$PENDING_REPO" commit -qam ahead
 "$HAS_PENDING_WORK" "$PENDING_REPO" origin/main
 
+# macOSのbash 3.2ではUTF-8の全角括弧が直後にある裸の変数名を誤認する。
+# 実際の終了分岐を実行し、ログの分類と元の終了値の両方を固定する。
+python3 - "$TICK" <<'PYTEST'
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+source = Path(sys.argv[1]).read_text()
+ending = source[source.index('case "$status" in'):]
+for status, category in [(0, "SUCCESS"), (1, "ERROR"), (124, "TIMEOUT"), (137, "TIMEOUT")]:
+    result = subprocess.run(
+        ["/bin/bash", "-uc", 'log() { printf "%s\\n" "$1"; }; ' + ending],
+        env={**os.environ, "status": str(status), "LC_ALL": "en_US.UTF-8"},
+        capture_output=True, text=True, errors="replace",
+    )
+    assert result.returncode == status, (status, result.returncode, result.stderr)
+    assert result.stdout.startswith(category + ":"), result.stdout
+    assert result.stderr == "", result.stderr
+    if status:
+        assert f"exit {status}）" in result.stdout, result.stdout
+PYTEST
+
 printf 'tick結果判定の回帰テスト成功\n'
