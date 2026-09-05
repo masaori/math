@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+: "${CODEX_HOME:?正規の起動口がCODEX_HOMEを設定する必要がある}"
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 REPO_DIR="$(cd "$PROJECT_DIR/.." && pwd -P)"
@@ -85,9 +86,10 @@ fi
 PROMPT="[[AI_AGENT_MESSAGE]] 複素行列版2次元イジング模型の論文構成再編を1 tickだけ進める。AGENTS.md、CLAUDE.md、docs/context/全ファイル、exact-solution-of-2d-ising-model/README.md、'$PROJECT_DIR/docs/tasks/paper-organization-runbook.md'、'$PROJECT_DIR/docs/tasks/paper-organization-state.md'、'$PROJECT_DIR/MEMORY.md'を全文読む。$mode_instruction 別エージェントによるレビューと指摘修正を同じ単位で反復する。共有main作業ツリー、lambda版、既存tick、docs/contextは変更しない。全てのexec_commandはlogin=falseを明示し、/bin/bash -lcを使わない。論文側のnpm操作は作業ディレクトリに依存させず、必ず npm --prefix '$PROJECT_DIR/structured-latex' run <script> とする。ラベル再生成は npm --prefix '$PROJECT_DIR/structured-latex' run gen、棚卸し再生成は npm --prefix '$PROJECT_DIR/structured-latex' run inventory:organization、論文検査は npm --prefix '$PROJECT_DIR/structured-latex' run check を使う。リポジトリ直下でprefixなしのnpm runを実行しない。状態台帳の次の一歩は2次元イジングモデル章だけを進め、並行担当が編集する数学的道具立ての分類・節境界は変更しない。全検証、状態とMEMORY更新、コミットまで行う。launchd由来のtmux外実行ではGitHub CLIのkeyringを読めないため gh は一切実行しない。反映はSSHのGitだけを使い、120秒上限付きでfetchしたremote defaultを取り込み、検証後の成果コミットを git push origin HEAD:$default_branch で直接反映する。non-fast-forwardなら別手段へ切り替えず、同じGit経路でfetch・merge・再検証してから同じpushを行う。最後にfetchし、成果コミットのremote default包含を確認する。失敗時は別手段へフォールバックせず、一次情報をログへ残して停止し、成功マーカーを出力しない。全作業が成功し、今回の成果コミットがremote defaultの祖先であることをfetch後に確認した場合だけ、最終行へ '${success_prefix}<成果コミットの40桁小文字SHA>' を正確に1行出力する。"
 
 log "START: 論文構成tick"
+log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_HOME"
 set +e
 printf '%s' "$PROMPT" \
-  | timeout -k 60 "$TIMEOUT_SECONDS" codex exec -C "$REPO_DIR" - 2>&1 \
+  | timeout -k 60 "$TIMEOUT_SECONDS" codex exec -m gpt-6-astra -c model_reasoning_effort=medium -C "$REPO_DIR" - 2>&1 \
   | tee -a "$LOG_FILE" "$run_output"
 pipeline_status=("${PIPESTATUS[@]}")
 status="${pipeline_status[1]}"

@@ -115,4 +115,50 @@ for status, category in [(0, "SUCCESS"), (1, "ERROR"), (124, "TIMEOUT"), (137, "
         assert f"exit {status}）" in result.stdout, result.stdout
 PYTEST
 
+# プログラミングによる検証: 実起動部分のモデル・環境・終了値を偽 CLI で判定する。
+python3 - "$TICK" <<'PYTEST'
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+import tempfile
+
+source = Path(sys.argv[1]).read_text()
+guards = re.findall(r'^: "\$\{CODEX_HOME:\?.*$', source, re.M)
+assert len(guards) == 1
+section = source[source.index('log "START: 論文構成tick"'):]
+invocation = re.search(r'^set \+e\n(.*?)^set -e$', section, re.M | re.S).group(1)
+with tempfile.TemporaryDirectory() as tmp:
+    root = Path(tmp)
+    cli = root / 'timeout'
+    cli.write_text("#!/usr/bin/env python3\nimport os,json,sys\nfrom pathlib import Path\n"
+                   "with Path(os.environ['CAPTURE']).open('a') as f: f.write(json.dumps({'args':sys.argv[1:],'home':os.environ['CODEX_HOME'],'prompt':sys.stdin.read()})+'\\n')\n"
+                   "raise SystemExit(int(os.environ['TEST_EXIT']))\n")
+    cli.chmod(0o755)
+    capture = root / 'calls'
+    env = dict(os.environ, PATH=tmp+os.pathsep+os.environ['PATH'], CAPTURE=str(capture),
+               CODEX_HOME=str(root/'selected account'), TIMEOUT_SECONDS='17', REPO_DIR=tmp,
+               PROMPT='[[AI_AGENT_MESSAGE]] 起動の試験', LOG_FILE=str(root/'run.log'), run_output=str(root/'output'))
+    for code in (0,1,124,137):
+        env['TEST_EXIT'] = str(code)
+        result = subprocess.run(['bash','-c','set -eu\n'+guards[0]+'\n'+invocation+'exit "$status"'],
+                                env=env,capture_output=True,text=True,timeout=10)
+        assert result.returncode == code, result.stderr
+    calls = [json.loads(row) for row in capture.read_text().splitlines()]
+    assert len(calls) == 4
+    for call in calls:
+        assert call == {'args':['-k','60','17','codex','exec','-m','gpt-6-astra','-c','model_reasoning_effort=medium','-C',tmp,'-'],
+                        'home':env['CODEX_HOME'],'prompt':env['PROMPT']}, call
+    for value in (None,''):
+        absent = env.copy()
+        absent.pop('CODEX_HOME')
+        if value is not None: absent['CODEX_HOME']=value
+        result=subprocess.run(['bash','-c','set -eu\n'+guards[0]+'\n'+invocation+'exit "$status"'],
+                              env=absent,capture_output=True,text=True,timeout=10)
+        assert result.returncode != 0 and 'CODEX_HOME' in result.stderr
+    assert len(capture.read_text().splitlines()) == 4
+PYTEST
+
 printf 'tick結果判定の回帰テスト成功\n'
