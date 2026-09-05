@@ -1,5 +1,5 @@
-# claim_stage_global_maps_count / claim_stage_realized_cycle_types_decidable /
-# claim_locality_restricts_cycle_type の初等セルオートマトンでの校正。
+# claim_stage_realized_cycle_types_decidable / claim_locality_restricts_cycle_type の
+# 初等セルオートマトンでの校正。
 # 巡回舞台 Z/LZ（L = 3..8）の上で、局所真理値表 256 通りの大域写像を全数構成し、
 # 可逆なものを抽出して巡回型を全数計算し、実現される巡回型が分割全体の真部分集合に
 # とどまることを舞台の大きさごとに確かめる。
@@ -30,7 +30,8 @@ for length in STAGE_SIZES:
         assert sum(partition) == 2 ** length, (length, partition)
     # 局所性による制限: 実現される巡回型は分割全体の真部分集合にとどまる。
     assert len(realized) < partition_count(2 ** length), (length, len(realized))
-    # 大域写像は規則番号から一意に定まるが、異なる規則が同じ大域写像を与えうる。
+    # 大域写像は規則番号から一意に定まるが、異なる一様規則が同じ大域写像を与えうる。
+    # これは任意の非一様な局所規則族から大域写像への単射性を検算するものではない。
     assert len(seen_global_maps) <= 256
 
 # 全数計算の結果（舞台の大きさ 3..8 の範囲での事実）。可逆になる規則の集合は
