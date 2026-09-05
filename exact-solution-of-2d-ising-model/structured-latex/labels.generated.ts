@@ -296,6 +296,7 @@ export const ALL_LABELS = [
   "sqrt_squared_is_original",
   "square_of_sqrt",
   "star_preserves_norm_and_limits",
+  "symmetrized_transfer_matrix_on_sectors",
   "tensor_anticommutation_from_single_site",
   "tensor_basis",
   "theorem_exp_product",

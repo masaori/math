@@ -503,7 +503,7 @@ u^\top W u
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         " とする。",
-        ref("sector_decomposition_of_rayleigh_sup"),
+        ref("def_sector_rayleigh_sup"),
         " の",
       ]),
       displayMath(

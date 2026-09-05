@@ -18,10 +18,10 @@
 | 場 | 原文の主張 | 章 |
 | --- | --- | --- |
 | `hVr` | `V^{(+)}` は実行列（`V_plus_is_positive_definite` の表示 + `iH_is_real_symmetric`） | 017 |
-| `hWV` | `W P^{(+)} = V^{(+)} P^{(+)}`（`sector_decomposition_of_rayleigh_sup` (2)） | 011 |
+| `hWV` | `W P^{(+)} = V^{(+)} P^{(+)}`（`symmetrized_transfer_matrix_on_sectors`） | 011 |
 | `hWsymm`, `hWpsd` | `W` は実対称半正定値（`W_is_real_symmetric_positive_definite`） | 011 |
 
-**章 011 の Lean 形式化も (2) を形式化していない**（`lean/docs/ch011-formalization.md`:
+**章 011 の Lean 形式化もこの行列等式を形式化していない**（`lean/docs/ch011-formalization.md`:
 「`V^{(±)}`, `V_1^{(±)}` は章 004/010 の対象で、本タスクの担当範囲外の定義に依存する」）。
 そのため本ファイルでも仮定として受け取る。
 -/

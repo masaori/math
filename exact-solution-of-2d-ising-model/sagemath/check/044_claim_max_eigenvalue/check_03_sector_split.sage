@@ -1,7 +1,7 @@
 # ---------------------------------------------------------
 # SageMath: c(M) = max(c_+(M), c_-(M)) と、最大が (+) セクターにあること
 #   W P^{(pm)} = V^{(pm)} P^{(pm)} も確認する。
-# 対象: structured-latex sector_decomposition_of_rayleigh_sup
+# 対象: structured-latex sector_decomposition_of_rayleigh_sup / symmetrized_transfer_matrix_on_sectors
 # ---------------------------------------------------------
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
@@ -31,3 +31,6 @@ for (M, K1v, K2v) in MAXEIG_CASES:
     all_ok = ok and all_ok
 
 print("RESULT: PASS" if all_ok else "RESULT: FAIL")
+
+if not all_ok:
+    raise AssertionError("sector split numerical checks failed")

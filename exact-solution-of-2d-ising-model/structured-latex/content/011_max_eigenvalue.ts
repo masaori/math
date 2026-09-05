@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
+import { defineBlocks, paragraph, math, displayMath, ref } from "../schema.ts";
 
 const SRC = "structured-latex/content/011_max_eigenvalue.ts";
 
@@ -1467,6 +1467,61 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
   },
 
   {
+    id: "maxeig_claim_symmetrized_transfer_matrix_on_sectors",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 12 },
+    title: { tex: String.raw`W P^{(\pm)} = V^{(\pm)}P^{(\pm)}` },
+    labels: ["symmetrized_transfer_matrix_on_sectors"],
+    statement: [
+      paragraph([
+        ref("def_symmetrized_transfer_matrix"), " の ", math(String.raw`W`),
+        "、", ref("def_epsilon_projectors"), " の ", math(String.raw`P^{(\pm)}`),
+        "、", ref("partition_function_sector_decomposition"), " の ", math(String.raw`V^{(\pm)}`),
+        " について、複号同順で次が成り立つ。",
+      ]),
+      displayMath(String.raw`W P^{(\pm)} = V^{(\pm)}P^{(\pm)}`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B:=V_1^{1/2}`), " は ", ref("def_transfer_matrix_square_root"),
+        "、", math(String.raw`C:=(V_1^{(\pm)})^{1/2}`), " は ", ref("def_V1_pm_square_root"),
+        " の行列とし、", math(String.raw`P:=P^{(\pm)}`), " と略記する。",
+        ref("V1_restriction_to_eigenspaces"), " に結合定数 ", math(String.raw`K_1/2`),
+        " を代入すると、任意の ", math(String.raw`f\in\mathcal F^{(\pm)}`),
+        " について ", math(String.raw`Bf=Cf`), " を得る。",
+        ref("epsilon_projector_properties"), " より任意の ", math(String.raw`x\in\mathbb C^{2^M}`),
+        " に対して ", math(String.raw`Px\in\mathcal F^{(\pm)}`), " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(BP)x
+&=B(Px) &&(\because\ \text{行列積の結合則})\\
+&=C(Px) &&(\because\ \blkref{V1_restriction_to_eigenspaces}\text{ に }K_1/2\text{ と }Px\text{ を代入})\\
+&=(CP)x &&(\because\ \text{行列積の結合則}).
+\end{aligned}`),
+      paragraph([
+        "すべての数ベクトルへの作用が等しいため ", math(String.raw`BP=CP`), " である。",
+        ref("epsilon_projectors_commute_with_transfer_matrices"), " の ",
+        math(String.raw`PC=CP`), " と ", math(String.raw`PV_2=V_2P`), " を用いると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+WP
+&=BV_2BP &&(\because\ \blkref{def_symmetrized_transfer_matrix})\\
+&=BV_2CP &&(\because\ BP=CP)\\
+&=BV_2PC &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }CP=PC)\\
+&=BPV_2C &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }V_2P=PV_2)\\
+&=CPV_2C &&(\because\ BP=CP)\\
+&=CV_2PC &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }PV_2=V_2P)\\
+&=CV_2CP &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }PC=CP)\\
+&=V^{(\pm)}P &&(\because\ \blkref{partition_function_sector_decomposition}\text{ の }V^{(\pm)}\text{ の定義}).
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: ["セクター射影子による表示を上限の最大値分解から分離した。Lean では未形式化であり、数値計算の成功を形式証明の完了とは扱わない。"],
+    },
+  },
+
+  {
     id: "maxeig_010_claim_sector_decomposition_of_c",
     kind: "claim",
     origin: { path: SRC, ordinal: 12 },
@@ -1474,96 +1529,14 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
     labels: ["sector_decomposition_of_rayleigh_sup"],
     statement: [
       paragraph([
-        ref("def_sector_rayleigh_sup"),
-        " の ",
-        math(String.raw`c_\pm(M)`),
-        " と ",
-        ref("epsilon_commutes_with_W"),
-        " のもとで、",
+        ref("def_rayleigh_sup"), " の ", math(String.raw`c(M)`), " と ",
+        ref("def_sector_rayleigh_sup"), " の ", math(String.raw`c_\pm(M)`),
+        " について、次が成り立つ。",
       ]),
-      list([
-        [
-          math(String.raw`\text{(2)}\quad W\,P^{(\pm)} = \left(V^{(\pm)}\right)P^{(\pm)}`),
-          "（",
-          math(String.raw`V^{(\pm)}`),
-          " は ",
-          ref("partition_function_sector_decomposition"),
-          " のもの）",
-        ],
-        [math(String.raw`\text{(3)}\quad c(M) = \max\left(c_+(M),\, c_-(M)\right)`)],
-      ]),
+      displayMath(String.raw`\text{(3)}\quad c(M) = \max\left(c_+(M), c_-(M)\right)`),
     ],
     proof: [
       paragraph([
-        "(2) ",
-        ref("sector_replacement_of_V1"),
-        " の ",
-        math(String.raw`V_1P^{(\pm)} = V_1^{(\pm)}P^{(\pm)}`),
-        " と同じ議論を半分の冪について行う。",
-        ref("V1_restriction_to_eigenspaces"),
-        " は ",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
-        " 上で ",
-        math(String.raw`V_1`),
-        " と ",
-        math(String.raw`V_1^{(\pm)}`),
-        " が一致することを主張しているが、これは指数の中身 ",
-        math(String.raw`K_1D`),
-        " と ",
-        math(String.raw`iK_1H_1^{(\pm)}`),
-        " が ",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
-        " 上で一致することから従っている。同じ一致から ",
-        math(String.raw`\tfrac12`),
-        " 倍しても一致し、",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
-        " が両者で保たれるので、級数の各項が一致して",
-      ]),
-      displayMath(
-        String.raw`V_1^{1/2}P^{(\pm)} = \left(V_1^{(\pm)}\right)^{1/2}P^{(\pm)}`,
-      ),
-      paragraph([
-        math(String.raw`P^{(\pm)}`),
-        " は ",
-        ref("epsilon_projectors_commute_with_transfer_matrices"),
-        " より ",
-        math(String.raw`V_2`),
-        " とも ",
-        math(String.raw`(V_1^{(\pm)})^{1/2}`),
-        " とも可換、(1) より ",
-        math(String.raw`V_1^{1/2}`),
-        " とも可換であり、",
-        ref("epsilon_projector_properties"),
-        " (2) より ",
-        math(String.raw`\left(P^{(\pm)}\right)^2 = P^{(\pm)}`),
-        " なので",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-W P^{(\pm)}
-&= V_1^{1/2}V_2V_1^{1/2}P^{(\pm)}
-   \quad (\because W=V_1^{1/2}V_2V_1^{1/2}) \\
-&= \left(V_1^{1/2}P^{(\pm)}\right)V_2\left(V_1^{1/2}P^{(\pm)}\right)
-   \quad (\because P^{(\pm)}\text{ の可換性と }(P^{(\pm)})^2=P^{(\pm)}) \\
-&= \left(\left(V_1^{(\pm)}\right)^{1/2}P^{(\pm)}\right)
-   V_2
-   \left(\left(V_1^{(\pm)}\right)^{1/2}P^{(\pm)}\right)
-   \quad (\because V_1^{1/2}P^{(\pm)}=(V_1^{(\pm)})^{1/2}P^{(\pm)}\text{ を二箇所へ適用する}) \\
-&= \left(V_1^{(\pm)}\right)^{1/2}V_2\left(V_1^{(\pm)}\right)^{1/2}P^{(\pm)}
-   \quad (\because P^{(\pm)}\text{ の可換性と }(P^{(\pm)})^2=P^{(\pm)}) \\
-&= V^{(\pm)}P^{(\pm)}
-   \quad (\because V^{(\pm)}=(V_1^{(\pm)})^{1/2}V_2(V_1^{(\pm)})^{1/2}).
-\end{aligned}`,
-      ),
-      paragraph([
-        "（途中で ",
-        math(String.raw`P^{(\pm)}`),
-        " を可換性で移動させ、",
-        math(String.raw`P^{(\pm)}P^{(\pm)} = P^{(\pm)}`),
-        " でまとめた。）",
-      ]),
-      paragraph([
-        "(3) ",
         ref("epsilon_projector_properties"),
         " (3) より、任意の ",
         math(String.raw`x \in \mathbb{R}^{2^M}`),
@@ -1599,7 +1572,9 @@ x_+^\top x_-
         ref("epsilon_projector_properties"),
         " (2)）。よって ",
         math(String.raw`\|x\|^2 = \|x_+\|^2 + \|x_-\|^2`),
-        "。また (1) より ",
+        "。また ",
+        ref("epsilon_commutes_with_W"),
+        " より ",
         math(String.raw`Wx_\pm \in \mathcal{F}^{(\pm)}`),
         " なので、同じ直交性から交叉項が消えて",
       ]),
@@ -1654,7 +1629,9 @@ x^\top Wx
         math(String.raw`\mathbb{R}^{2^M}`),
         " の単位ベクトルでもあるので ",
         math(String.raw`\mathcal{R}_\pm \subseteq \mathcal{R}`),
-        " である（上でこの集合が空でないことも確かめた）。したがって",
+        " である（空でないことと上に有界であることは ",
+        ref("def_sector_rayleigh_sup"),
+        "）。したがって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1681,10 +1658,7 @@ c_\pm
     ],
     conversion: {
       status: "added",
-      notes: [
-        "c_±(M) を上限として定義するために必要な「集合 R_± が空でなく上に有界であること」を statement 側で明示した（def_rayleigh_sup と同じ流儀）。空でないことは a_± := (1, ±1)^T/√2 のクロネッカー積で F^{(±)} ∩ R^{2^M} の単位ベクトルを具体的に構成して示す。章 019 の epsilon_is_sign_flip_permutation (4) も F^{(-)} の単位ベクトルを構成しているが、そちらは後の章なので参照せず、この章より前に確立している def_kronecker / kronecker_product_rule / pauli_matrix_products / def_eigenspaces_of_epsilon だけで閉じる形にした。",
-        "(2) により c_-(M) は eigenvalues_of_V の Λ_ε のうち、固有ベクトルが F^{(-)} に属するものの上限である。c_+(M) に対応する V^{(+)} の固有値は本文では未確立（半整数運動量が要る）。この点は docs/tasks/free-energy-roadmap に章 C' として記録した。",
-      ],
+      notes: ["射影子による表示は独立した主張へ分離した。既存の後続参照を保つため最大値分解の既存表示 (3) は暫定的に残す。後続参照の同期後に除く。"],
     },
   },
 ]);

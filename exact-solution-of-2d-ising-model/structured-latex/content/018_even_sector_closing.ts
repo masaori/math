@@ -2534,7 +2534,7 @@ x^*\check{Q}_\epsilon x
         "、",
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         " とする。",
-        ref("sector_decomposition_of_rayleigh_sup"),
+        ref("def_sector_rayleigh_sup"),
         " の",
       ]),
       displayMath(
@@ -2587,8 +2587,8 @@ P^{(+)}x
       ),
       paragraph([
         "である。したがって ",
-        ref("sector_decomposition_of_rayleigh_sup"),
-        " (2) の ",
+        ref("symmetrized_transfer_matrix_on_sectors"),
+        " の ",
         math(String.raw`WP^{(+)} = V^{(+)}P^{(+)}`),
         " より",
       ]),
@@ -2598,7 +2598,7 @@ Wx
 &= WP^{(+)}x
    \quad (\because \text{直前の } P^{(+)}x = x) \\
 &= V^{(+)}P^{(+)}x
-   \quad (\because \text{sector\_decomposition\_of\_rayleigh\_sup (2) の }
+   \quad (\because \blkref{symmetrized_transfer_matrix_on_sectors}\text{ の }
    WP^{(+)} = V^{(+)}P^{(+)}) \\
 &= V^{(+)}x
    \quad (\because \text{直前の } P^{(+)}x = x)
@@ -2816,7 +2816,7 @@ x^\top Wx
     conversion: {
       status: "added",
       notes: [
-        "011 章の sector_decomposition_of_rayleigh_sup の注記が「c_+(M) に対応する V^{(+)} の固有値は本文では未確立」としていた点が、ここで解消される。",
+        "分割前の上限のセクター分解の注記が「c_+(M) に対応する V^{(+)} の固有値は本文では未確立」としていた点が、ここで解消される。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_04（P^{(+)}WP^{(+)} を F^{(+)} の実基底へ制限して最大固有値を直接求め、Λ^{(1/2)}_M と比較。相対差 ≤ 2e-14）。",
       ],
     },
@@ -3007,7 +3007,7 @@ v^\top Wv
 &=u^\top Wu+2u^\top W\varepsilon u+u^\top\varepsilon W\varepsilon u
 &&\left(\because\ \varepsilon^\top=\varepsilon\right)\\
 &=u^\top Wu+2u^\top W\varepsilon u+u^\top W\varepsilon^2u
-&&\left(\because\ \varepsilon W=W\varepsilon.\ \text{\cref{lab:sector_decomposition_of_rayleigh_sup}}\right)\\
+&&\left(\because\ \varepsilon W=W\varepsilon.\ \text{\cref{lab:epsilon_commutes_with_W}}\right)\\
 &=2u^\top Wu+2u^\top W\varepsilon u
 &&\left(\because\ \varepsilon^2=I\right)\\
 &\geq2u^\top Wu
@@ -3028,7 +3028,7 @@ v^\top Wv
 &= c_+(M)
 &&\left(\because\ \text{\cref{lab:c_plus_equals_Lambda_half_integer}}\right)\\
 &\geq \hat{v}^\top W\hat{v}
-&&\left(\because\ c_+(M)\text{ は }\mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}\text{ の単位ベクトル上の上限. \cref{lab:sector_decomposition_of_rayleigh_sup}}\right)\\
+&&\left(\because\ c_+(M)\text{ は }\mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}\text{ の単位ベクトル上の上限. \cref{lab:def_sector_rayleigh_sup}}\right)\\
 &= \frac{v^\top Wv}{\|v\|^2}
 &&\left(\because\ \hat{v}=v/\|v\|\text{ の代入と二次形式の斉次性}\right)\\
 &\geq \frac{2\,u^\top Wu}{\|v\|^2}
