@@ -916,6 +916,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
     title: { text: "exp の定義（行列の場合と、行列への線型写像の場合）" },
     labels: ["def_exp"],
     statement: [
+      paragraph(["行列の積は ", ref("mat_mult"), "、実数係数の複素数への包含は ", ref("inclusion_rr_to_cc"), " を用いる。"]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " または ",
