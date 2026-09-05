@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["calculation_formulae_046_claim_conjugation_is_ring_homomorphism", "LLMによる検証: 乗法性・単位性・合成則と積の逆元公式を一項へ束ねている。加法保存は先行の行列共役にあるが、環準同型という題への接続説明は本項にない。行列の結合律・単位元・逆元一意性の根拠と各適用行の参照が未解決であり、分割後に配置を再判定する。"],
   ["calculation_formulae_044_claim_reciprocal_of_sqrt", "LLMによる検証: 未完の平方根定義と逆数平方根の証明への依存が残る。参照先の準備から非零性を取り出す説明、各行参照と二重負号の根拠が未解決である。"],
   ["calculation_formulae_045_theorem_euler_formula_cos_sin", "LLMによる検証: 現行sin/cosは主値区間のみであり全実数上の定義が不足する。複素指数の意味付け、Euler公式自体の導出、偶奇性が未整備で、定義と証明の未完である。二等式の分割と各行参照も残る。必要な定義と公式の追加後に依存と配置を再判定する。"],
   ["calculation_formulae_041_claim_sqrt_squared_is_original", "LLMによる検証: 未完の平方根定義・極座標展開と同型性を入力にするため証明完成とは扱わない。展開式を二箇所へ同時適用する段と実数の和の計算の省略、各適用行の参照が未解決である。"],
@@ -7549,7 +7550,161 @@ if (findToolEntry("calculation_formulae_045_theorem_euler_formula_cos_sin").depe
   !== squareRootReciprocalSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("逆数の平方根と平方根の逆元の直後の項目が変わりました");
 }
+const eulerTrigSectionEntryIds = [
+  "calculation_formulae_045_theorem_euler_formula_cos_sin"
+];
+const eulerTrigSection = validateReviewedSection(
+  "正弦と余弦の指数関数による表示", "数学的道具立て", eulerTrigSectionEntryIds,
+  new Map([
+  [
+    "calculation_formulae_045_theorem_euler_formula_cos_sin",
+    []
+  ]
+]),
+  new Map([
+  [
+    "calculation_formulae_045_theorem_euler_formula_cos_sin",
+    "17e951100e2c864fbd07ab446c37156d9ff2b24e720fefc616e5417df7900e43"
+  ]
+]),
+  [
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_014c_definition_sin",
+  "calc_formulae_014e_definition_cos",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calc_formulae_014c_definition_sin",
+    "6a8ea2317a4ee4a034fe63a9f7371bb06cc429b38cc136c4059b9b1c28983b54"
+  ],
+  [
+    "calc_formulae_014e_definition_cos",
+    "cf32ed2ef717d12941d16958599fccde9b93fe4dc82a7a97b5e4188e35960205"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "calculation_formulae_045_theorem_euler_formula_cos_sin"
+],
+);
+const eulerTrigSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_005_matrix_conjugation",
+    "kind": "theorem",
+    "sha256": "db8101215168a62a7c2059d3e97a8cb9d4a4e898c5be04084e68b1547e9b5239",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_014c_definition_sin",
+    "kind": "definition",
+    "sha256": "6a8ea2317a4ee4a034fe63a9f7371bb06cc429b38cc136c4059b9b1c28983b54",
+    "dependencies": [
+      "calc_formulae_014_definition_inverse_trig_functions",
+      "calc_formulae_014b_claim_arcsin_bijection"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_014e_definition_cos",
+    "kind": "definition",
+    "sha256": "cf32ed2ef717d12941d16958599fccde9b93fe4dc82a7a97b5e4188e35960205",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_014c_definition_sin",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_045_theorem_euler_formula_cos_sin",
+    "kind": "theorem",
+    "sha256": "17e951100e2c864fbd07ab446c37156d9ff2b24e720fefc616e5417df7900e43",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_014c_definition_sin",
+      "calc_formulae_014e_definition_cos",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+    "kind": "claim",
+    "sha256": "5f3c6ac5c3bfa898bea8382a6f3dfdb4e72d4c57928d3e19a05e17bd7bf14c0f",
+    "dependencies": [
+      "calc_formulae_005_matrix_conjugation",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of eulerTrigSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`正弦と余弦の指数関数による表示の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("calculation_formulae_046_claim_conjugation_is_ring_homomorphism").dependencyPlacement!.chapterOrder
+  !== eulerTrigSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("正弦と余弦の指数関数による表示の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "正弦と余弦の指数関数による表示",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "calculation_formulae_045_theorem_euler_formula_cos_sin"
+  ],
+  "input": [
+    "現行の正弦・余弦、複素数、集合記号",
+    "本文で使うが未整備の複素指数・Euler公式・全実数上の三角関数と偶奇性"
+  ],
+  "output": [
+    "正弦と余弦を二つの複素指数の差と和で表す二等式（定義・証明未完）"
+  ],
+  "mainTheorem": "正弦と余弦のEuler表示",
+  "mainTheoremEntryId": "calculation_formulae_045_theorem_euler_formula_cos_sin",
+  "boundaryEvidence": "Euler公式を正負の角度で使い、和と差から正弦・余弦の二式を取り出す現存一項を閉じる。直後の行列共役の三性質はこの表示を使わず、正則行列と共役写像を入力とする別枝であり、関数の表示から行列の積・単位元・合成へ入力が切り替わる。プログラミングによる検証では対象と比較入力の本文・全直接依存・種別・粒度および後続相対順を固定する。未定義入力に辺を仮設せず、複素指数等の定義と公式の追加後に配置を再判定する。",
+  "readabilityStatus": "LLMによる検証でEuler表示と行列共役の三性質、および全直接入力を読んだ。現行の正弦・余弦は主値区間に限られ、全実数上の拡張・偶奇性、複素指数の定義とEuler公式の導出が不足し、定義と証明は未完である。二等式の分割と各行参照も未解決である。比較側は三性質と積の逆元公式が同居し、行列演算の根拠と各行参照、先行の加法保存を環準同型という題へ結び付ける説明が残る。本文完成とは扱わず、定義・補題の追加と主張分割後に内部依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_006_definition_of_cc",
+    "calc_formulae_014c_definition_sin",
+    "calc_formulae_014e_definition_cos",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "逆数の平方根と平方根の逆元",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
