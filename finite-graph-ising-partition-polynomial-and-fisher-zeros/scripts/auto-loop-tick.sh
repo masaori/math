@@ -83,11 +83,11 @@ PROMPT='[[AI_AGENT_MESSAGE]]
 runbook と docs/tasks/next-research-target.md に従い、台帳の「現在の研究対象」の未達項目を一つだけ前進させてください。固定した入力範囲を広げず、否定結果も記録します。未達項目が無ければその事実を記録して終了し、補題や探索範囲を自動追加しないでください。変更に必要なプログラミングによる検証と意味のLLMによる検証を分け、台帳・MEMORY・remote default branchへの反映と包含確認まで行ってください。本文を変更した場合の公開は既存のpublish-artifact手順に従います。'
 
 log "=== tick 開始"
-log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
+log "モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=$CODEX_TICK_HOME"
 set +e
 printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" \
   timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
-  -m gpt-6-astra -c model_reasoning_effort=medium \
+  -m gpt-5.6-sol -c model_reasoning_effort=high \
   --dangerously-bypass-approvals-and-sandbox -C "$LOOP_WORKTREE" - >> "$LOG_FILE" 2>&1
 status=$?
 set -e

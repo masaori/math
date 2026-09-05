@@ -46,6 +46,14 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "cyclic_offset_finite_images",
+        title: "整数オフセットの有限剰余像",
+        input: "正の周期、非負の半径、有限整数区間と整数の余り写像を入力とする。",
+        output: "平行移動した区間の衝突条件、像の元数、単射性の境界を得る。",
+        main: "主張は、衝突が差の整除だけで決まり、像の元数が周期と区間長の小さい方に等しいことである。",
+        mainLabels: ["claim_cyclic_offset_collision", "claim_cyclic_offset_image_count"],
+      },
+      {
         id: "neighborhood_assignment_symmetry_and_action",
         title: "近傍割り当ての転置・対称性・部分集合への作用",
         input: "合成・和・積を備えた有限近傍割り当てを入力とする。",
@@ -151,6 +159,14 @@ export const documentOrganization = [
         output: "局所規則族から得られる大域写像全体、その元数、可逆な大域写像全体を得る。",
         main: "主張は、局所規則族から大域写像への対応が単射であり、大域写像全体の元数が局所規則の個数の積になることである。",
         mainLabels: ["claim_stage_global_maps_count"],
+      },
+      {
+        id: "cyclic_uniform_rule_restriction",
+        title: "周期境界で重なる近傍入力と一様規則表の制限",
+        input: "有限剰余舞台、整数オフセット区間、構造を入れない二元状態と一つの真理値表を入力とする。",
+        output: "実現可能入力への制限、異なる一様大域写像と同じ写像を与える表の個数、半径一への比較写像を得る。",
+        main: "主張は、大域写像の等号が周期境界と両立する入力上の表の等号と同値になり、短い周期では256個の初等規則表が少数の大域写像へ重なることである。",
+        mainLabels: ["claim_cyclic_rule_global_equality", "claim_cyclic_uniform_global_count", "claim_cyclic_radius_one_collapse"],
       },
       {
         id: "local_representation_and_composition",

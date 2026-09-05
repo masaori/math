@@ -25,6 +25,8 @@ import blocks_causal_structure_comparison from './content/causal-structure-compa
 import blocks_composed_neighborhood_closure from './content/composed-neighborhood-closure.ts'
 import blocks_composite_map_essential_dependency from './content/composite-map-essential-dependency.ts'
 import blocks_conjugacy_class_code_image_bijection from './content/conjugacy-class-code-image-bijection.ts'
+import blocks_cyclic_offset_projection from './content/cyclic-offset-projection.ts'
+import blocks_cyclic_rule_restriction from './content/cyclic-rule-restriction.ts'
 import blocks_dependency_order_substructures from './content/dependency-order-substructures.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_neighborhood_assignment_monoid from './content/finite-neighborhood-assignment-monoid.ts'
@@ -95,6 +97,8 @@ export type AllBlocks = [
   ...typeof blocks_composed_neighborhood_closure,
   ...typeof blocks_composite_map_essential_dependency,
   ...typeof blocks_conjugacy_class_code_image_bijection,
+  ...typeof blocks_cyclic_offset_projection,
+  ...typeof blocks_cyclic_rule_restriction,
   ...typeof blocks_dependency_order_substructures,
   ...typeof blocks_essential_dependency,
   ...typeof blocks_finite_neighborhood_assignment_monoid,

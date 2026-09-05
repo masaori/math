@@ -149,7 +149,7 @@ with tempfile.TemporaryDirectory() as tmp:
     calls = [json.loads(row) for row in capture.read_text().splitlines()]
     assert len(calls) == 4
     for call in calls:
-        assert call == {'args':['-k','60','17','codex','exec','-m','gpt-6-astra','-c','model_reasoning_effort=medium','-C',tmp,'-'],
+        assert call == {'args':['-k','60','17','codex','exec','-m','gpt-5.6-sol','-c','model_reasoning_effort=high','-C',tmp,'-'],
                         'home':env['CODEX_HOME'],'prompt':env['PROMPT']}, call
     for value in (None,''):
         absent = env.copy()

@@ -83,11 +83,11 @@ PROMPT='[[AI_AGENT_MESSAGE]]
 runbook に厳密に従い、既存成果のレビュー後、docs/tasks/next-research-target.md と台帳の「現在の研究対象」の最初の未達項目から、有限入力の一つの判定または構造化本文の一つの定義・主張・定理だけを前進させてください。必要な SageMath 検算、全検証、台帳と MEMORY の更新、コミット、origin の remote default branch への push、包含確認、Slack 通知まで行ってください。Slack は --topic "有限双曲曲面上の可算イジング模型" --artifact-url "https://hexcomp-artifacts.web.app/math/countable-hyperbolic-ising-mathjax/" を指定してください。通知の本文は自分で書かず、リポジトリ直下の scripts/compose-tick-report.py に今回の一歩の一文を渡して組み立ててください（python3 scripts/compose-tick-report.py countable-ising-on-hyperbolic-surfaces "<今回の一歩>"）。これは報告へ最終ゴール・現在地・今回の一歩・次の一手の四項目を必ず入れるためであり（ユーザー指示 2026-09-05）、組み立てに失敗したら通知せず、失敗を報告して終えてください。公開 URL は本文の最後に添えてください。一 tick 一主張を超えて次へ進まないでください。'
 
 log "=== tick 開始"
-log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
+log "モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=$CODEX_TICK_HOME"
 set +e
 printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" \
   timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
-  -m gpt-6-astra -c model_reasoning_effort=medium \
+  -m gpt-5.6-sol -c model_reasoning_effort=high \
   --dangerously-bypass-approvals-and-sandbox -C "$LOOP_WORKTREE" - >> "$LOG_FILE" 2>&1
 status=$?
 set -e

@@ -29,7 +29,7 @@ class TickModels(unittest.TestCase):
             self.assertEqual(len(assignment), 1, tick)
             invocation = re.findall(r'^set \+e\n(.*?)^set -e$', source, re.M | re.S)
             self.assertEqual(len(invocation), 1, tick)
-            self.assertNotRegex(source, r"claude\s+-p|run_claude|gpt-5\.", tick)
+            self.assertNotRegex(source, r"claude\s+-p|run_claude|gpt-6-astra", tick)
             self.assertNotIn("BLOCKED_MARK", source, tick)
             self.assertRegex(source, r"PROMPT=(?:\$\(cat <<'EOF'\n|')\[\[AI_AGENT_MESSAGE\]\]\n", tick)
             for code in (0, 42, 124, 137):
@@ -64,8 +64,8 @@ class TickModels(unittest.TestCase):
                         self.assertEqual(calls[0]["threads"], "1")
                     self.assertEqual(calls[0]["prompt"], env["PROMPT"])
                     self.assertEqual(calls[0]["argv"], [
-                        "-k", "60", "17", "codex", "exec", "-m", "gpt-6-astra",
-                        "-c", "model_reasoning_effort=medium",
+                        "-k", "60", "17", "codex", "exec", "-m", "gpt-5.6-sol",
+                        "-c", "model_reasoning_effort=high",
                         "--dangerously-bypass-approvals-and-sandbox",
                         *(["-C", tmp] if tick.startswith(("countable-ising-on-hyperbolic-surfaces/", "finite-graph-ising-partition-polynomial-and-fisher-zeros/")) else []), "-",
                     ])
