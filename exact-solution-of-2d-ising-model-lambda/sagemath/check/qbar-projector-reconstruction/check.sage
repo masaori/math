@@ -21,12 +21,17 @@ def projector(L, A, z, v):
 
 def check_reconstruction():
     count = 0
+    polynomials = PolynomialRing(QQbar, "x")
+    x = polynomials.gen()
     for L in range(1, 5):
         dimension = 2 ** L
         A = matrix(QQbar, dimension, dimension,
                    lambda i, j: QQbar((i + 1) * (j + 2) - (1 if i == j else 0)))
         v = vector(QQbar, [QQbar(i + 1) for i in range(dimension)])
         roots = [QQbar.zeta(L) ** j for j in range(L)]
+        assert len(set(roots)) == L
+        assert all(z ** L == 1 for z in roots)
+        assert set(roots) == set((x ** L - 1).roots(multiplicities=False))
 
         for k in range(L):
             root_sum = sum((z ** (L - k) for z in roots), QQbar(0))
