@@ -2301,6 +2301,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     title: { text: "sqrt の2乗は元に戻る" },
     labels: ["sqrt_squared_is_original"],
     statement: [
+      paragraph([ref("sqrt_expansion_via_polar"), "、", ref("operations_on_polar_representation"), "、", ref("definition_of_sqrt_r_positive"), " を用いる。"]),
       paragraph([math(String.raw`z \in \mathbb{C}`), " について、", math(String.raw`\sqrt{z}\sqrt{z}=z`)]),
     ],
     proof: [
@@ -2501,6 +2502,7 @@ z
     title: { tex: String.raw`\mathbb{C}\text{の逆数の}\sqrt{\cdot}` },
     labels: ["inverse_of_sqrt_cc"],
     statement: [
+      paragraph([ref("def_sqrt_cc"), "、", ref("sqrt_squared_is_original"), "、", ref("sqrt_expansion_via_polar"), "、", ref("definition_of_sqrt_r_positive"), "、", ref("def_phi_cartesian"), "、", ref("inclusion_rr_to_cc"), "、", ref("range_of_args_of_reciprocal_of_complex_numbers"), " を用いる。零での値の計算には ", ref("def_arctan"), "、", ref("def_sin"), "、", ref("def_cos"), " の関数が現れる。"]),
       paragraph([math(String.raw`z \in \mathbb{C},\ z \neq 0`), " について、"]),
       displayMath(
         String.raw`\sqrt{\frac{1}{z}} =

@@ -218,6 +218,46 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "平方根の積と自乗の平方根の符号",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_040_claim_sqrt_commutativity_condition",
+        "calculation_formulae_041_claim_sqrt_squared_is_original",
+        "calculation_formulae_042_claim_square_of_sqrt"
+      ],
+      "input": [
+        "複素平方根の定義と極座標展開、非負実数の平方根",
+        "両写像と未完の同型性、極座標同値類と積",
+        "絶対値・偏角、射影、角度切断と存在一意性、複素数と集合記号"
+      ],
+      "output": [
+        "偏角の和による平方根の積の符号条件",
+        "平方根を二乗すると元に戻る性質",
+        "偏角による自乗の平方根の符号式"
+      ],
+      "mainTheorem": "自乗の平方根から元の複素数を偏角に応じた符号で得る式",
+      "mainTheoremEntryId": "calculation_formulae_042_claim_square_of_sqrt",
+      "boundaryEvidence": "平方根と積の交換条件、および平方根の二乗復元を別々に示し、両枝が自乗の平方根の符号式へ合流する三項で閉じる。直後の逆数の平方根は交換条件と二乗復元を使う一方、乗法逆元・逆数の偏角・実数包含と零での三角関数値を用いた平方根1の計算を追加する。自乗の符号式から逆数の式への入力切替を境界とする。プログラミングによる検証では対象と後続比較の全直接入力の本文・全直接依存・種別・粒度、二枝の依存・連続性・唯一の節末・後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で三項と逆数平方根の全本文および入力を読んだ。全てに未完の平方根定義と同型性の影響が残る。交換条件の未整備三角公式・記号導入不足・平方根積法則・同様計算の省略、二乗復元の同時適用と実数計算の省略、符号式の各行参照を具体的な未解決とする。比較側は平方根の非零性と平方根1の計算を同居させ、逆正接・正弦・余弦の零での値の導出が未整備である。本文完成とは扱わず、定義・補題の追加と主張分割後に内部依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+        "calc_formulae_017_definition_section_of_angle_representation",
+        "calc_formulae_019_definition_polar_equivalence_class",
+        "calculation_formulae_022_definition_operations_on_polar_representation",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_028_definition_phi_cartesian",
+        "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+        "calculation_formulae_030_definition_first_and_second_projections",
+        "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_038_definition_sqrt_of_complex_number",
+        "calculation_formulae_039_claim_sqrt_expansion_via_polar",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "複素平方根の定義と極座標による展開",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2222,6 +2262,8 @@
       "calculation_formulae_038_definition_sqrt_of_complex_number",
       "calculation_formulae_039_claim_sqrt_expansion_via_polar",
       "calculation_formulae_040_claim_sqrt_commutativity_condition",
+      "calculation_formulae_041_claim_sqrt_squared_is_original",
+      "calculation_formulae_042_claim_square_of_sqrt",
       "calculation_formulae_043_claim_sqrt_of_reciprocal",
       "calculation_formulae_044_claim_reciprocal_of_sqrt",
       "linear_space_general_002b_definition_matrix_norm",
@@ -6965,7 +7007,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 17,
+        "incomingReferenceCount": 19,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7324,7 +7366,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7902,7 +7944,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8016,7 +8058,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8078,7 +8120,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8492,7 +8534,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8809,7 +8851,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9449,7 +9491,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "incomingReferenceCount": 2,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9528,7 +9570,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9599,7 +9641,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9757,39 +9799,45 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "incomingReferenceCount": 2,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4055,
-        "inspectedContentSha256": "6d5ac2a73aa6ac30f32891a93a7fc308d19defee3f20b83151ab632b2c7ed974",
+        "inspectedCharacterCount": 4346,
+        "inspectedContentSha256": "00655d83f9cc055406052def05c1812ab4bc06a485f66b79f65c634fba0b65c7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 未完の平方根定義・極座標展開と同型性を入力にするため証明完成とは扱わない。展開式を二箇所へ同時適用する段と実数の和の計算の省略、各適用行の参照が未解決である。"
       },
       "dependsOnLabels": [
         "angle_section_existence_uniqueness",
         "def_phi_polar",
         "definition_of_cc",
+        "definition_of_sqrt_r_positive",
         "isomorphism_of_phi_cartesian",
+        "operations_on_polar_representation",
         "polar_equivalence_class",
-        "set_and_algebra_notation"
+        "set_and_algebra_notation",
+        "sqrt_expansion_via_polar"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
         "calc_formulae_019_definition_polar_equivalence_class",
+        "calculation_formulae_022_definition_operations_on_polar_representation",
         "calculation_formulae_027_definition_phi_polar",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+        "calculation_formulae_039_claim_sqrt_expansion_via_polar",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -9830,7 +9878,7 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 2632,
@@ -9841,7 +9889,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 交換条件と二乗復元を合流させる場合分けだが、両入力に定義・証明の未完が及ぶ。各適用行のラベル、二重負号と積の符号の根拠の明示が未解決である。"
       },
       "dependsOnLabels": [
         "condition_of_commutativity_of_sqrt_and_product",
@@ -9900,34 +9948,54 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 8873,
-        "inspectedContentSha256": "bae8564c857801a4e1d637b819d845de99b9e1881a9ae715fe85dc82085ee2fb",
+        "inspectedCharacterCount": 9673,
+        "inspectedContentSha256": "3a8d21819fa5e7e054513060e418c1cfc6b77b44428e1c8ceab1aa7fc9d318de",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 未完の平方根定義と交換条件・二乗復元・逆数の偏角を使うため証明完成とは扱わない。sqrt(z)の非零性とsqrt(1)=1の計算を一項へ束ね、arctan(0)=0・sin(0)=0・cos(0)=1の根拠の導出、各行参照、同時代入と複数演算の分解が未解決である。"
       },
       "dependsOnLabels": [
         "angle_section_existence_uniqueness",
         "condition_of_commutativity_of_sqrt_and_product",
         "def_abs_arg",
+        "def_arctan",
+        "def_cos",
+        "def_phi_cartesian",
         "def_phi_polar",
+        "def_sin",
+        "def_sqrt_cc",
         "definition_of_cc",
+        "definition_of_sqrt_r_positive",
+        "inclusion_rr_to_cc",
         "multiplicative_group_of_cc",
         "polar_equivalence_class",
-        "set_and_algebra_notation"
+        "range_of_args_of_reciprocal_of_complex_numbers",
+        "set_and_algebra_notation",
+        "sqrt_expansion_via_polar",
+        "sqrt_squared_is_original"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calc_formulae_014c_definition_sin",
+        "calc_formulae_014d_definition_arctan",
+        "calc_formulae_014e_definition_cos",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
         "calc_formulae_019_definition_polar_equivalence_class",
         "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
         "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_028_definition_phi_cartesian",
         "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_036_claim_arg_of_reciprocal",
+        "calculation_formulae_038_definition_sqrt_of_complex_number",
+        "calculation_formulae_039_claim_sqrt_expansion_via_polar",
         "calculation_formulae_040_claim_sqrt_commutativity_condition",
+        "calculation_formulae_041_claim_sqrt_squared_is_original",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
