@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["linear_space_general_000d_claim_kronecker_transpose", "LLMによる検証: 転置の定義とクロネッカー積の転置公式が同居しており、定義と主張への分割が未解決である。任意のM≥1の各サイズでの転置の定義の適用、定義を使う各行の参照を明示し、分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "LLMによる検証: 行列積と複素数の演算法則の参照を補った。三主張と多重添字和の補題が同居し、有限和の帰納法、添字変更、二箇所の定義代入、可換律と結合律の同時適用、各行参照の分離が未解決である。M=1と空和・空積の規約を保ち、分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "LLMによる検証: 複素数の演算法則の参照を補った。行列と数ベクトルの主張およびスカラー倍の特例の分割、成分ごとの和・スカラー倍の定義、積の並べ替えと分配の分離、数ベクトルの同様計算の展開と各行参照が未解決である。M=1の空積を保持し、前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000_definition_kronecker_product", "LLMによる検証: 添字集合の元数、写像の値域と全単射、数ベクトルと行列の二定義が同居する。有限集合の議論と有限和の法則、同時代入と複数演算の分離、各行参照が未解決である。M=1と単射証明の末尾の空和を保ち、前提補完と分割後に依存と閉包を再判定する。"],
@@ -8968,7 +8969,154 @@ if (findToolEntry("linear_space_general_000c_claim_kronecker_multilinear").depen
   !== kroneckerProductSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("成分で定めるクロネッカー積と積の規則の直後の項目が変わりました");
 }
+const kroneckerLinearitySectionEntryIds = [
+  "linear_space_general_000c_claim_kronecker_multilinear"
+];
+const kroneckerLinearitySection = validateReviewedSection(
+  "クロネッカー積の和とスカラー倍の展開", "数学的道具立て", kroneckerLinearitySectionEntryIds,
+  new Map([
+  [
+    "linear_space_general_000c_claim_kronecker_multilinear",
+    []
+  ]
+]),
+  new Map([
+  [
+    "linear_space_general_000c_claim_kronecker_multilinear",
+    "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5"
+  ]
+]),
+  [
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_000_definition_kronecker_product"
+],
+  new Map([
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ],
+  [
+    "linear_space_general_000_definition_kronecker_product",
+    "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40"
+  ]
+]),
+  [
+  "linear_space_general_000c_claim_kronecker_multilinear"
+],
+);
+const kroneckerLinearitySectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "kind": "claim",
+    "sha256": "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_008_multiply_by_minus_one",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_000_definition_kronecker_product",
+    "kind": "definition",
+    "sha256": "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_000c_claim_kronecker_multilinear",
+    "kind": "claim",
+    "sha256": "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_000_definition_kronecker_product"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_000d_claim_kronecker_transpose",
+    "kind": "claim",
+    "sha256": "c0014341f8b8968f27acf4793018d15312e7313acad2dccadd439617703c4cd4",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "linear_space_general_000_definition_kronecker_product"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of kroneckerLinearitySectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`クロネッカー積の和とスカラー倍の展開の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("linear_space_general_000d_claim_kronecker_transpose").dependencyPlacement!.chapterOrder
+  !== kroneckerLinearitySection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("クロネッカー積の和とスカラー倍の展開の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "クロネッカー積の和とスカラー倍の展開",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "linear_space_general_000c_claim_kronecker_multilinear"
+  ],
+  "input": [
+    "クロネッカー積の成分の定義と複素数の結合律・可換律・分配律",
+    "集合記号と成分ごとの和・スカラー倍"
+  ],
+  "output": [
+    "一つの因子の有限線型結合をクロネッカー積全体の有限線型結合へ展開する等式",
+    "スカラー倍の特例と数ベクトルについての同形の等式"
+  ],
+  "mainTheorem": "クロネッカー積の各因子についての線型性",
+  "mainTheoremEntryId": "linear_space_general_000c_claim_kronecker_multilinear",
+  "boundaryEvidence": "成分定義から一因子の和を複素数の分配律で展開し、全成分の一致へ閉じる現存一項を節とする。直後の転置は本項を使わず、成分添字の入れ替えとクロネッカー積の成分定義だけで計算する別枝であり、線型結合を展開する演算法則の入力が外れる。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度と後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で対象と全直接入力、後続転置の全本文を読んだ。対象は行列・数ベクトル・スカラー倍の特例の分割、成分ごとの和とスカラー倍の定義、複数演算・同時代入と数ベクトルの同様計算の展開、各行参照が未解決である。比較側は転置の定義と交換公式の主張が同居するため分割が残り、定義の各サイズへの適用と各行の参照を明示する必要がある。M=1の空積を保持し、前提補完と定義・主張の分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "linear_space_general_000_definition_kronecker_product"
+  ]
+}, {
   "name": "成分で定めるクロネッカー積と積の規則",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
