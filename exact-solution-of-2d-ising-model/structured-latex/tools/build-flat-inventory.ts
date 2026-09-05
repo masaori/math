@@ -1260,7 +1260,7 @@ const vPlusPositiveDefiniteExpectedExternalInputContentSha256 = new Map<string, 
   ["evensectorT_definition_V1_plus_square_root", "33659011599514363340a770866a6757ab8b49d6b7259f1c8fc777da7aea773a"],
   ["evensectorT_definition_V_plus", "25224f1a0789bbff2c99b11323319f0e297bd6a0f68c213757097e35957e37ef"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "de25a7cfd8a1fd81d0d86ca48b4d3a85550853b4857925dd6768c842c31cdeb0"],
-  ["exp_linear_map_004_theorem_exp_zero_is_identity", "5a42c7aa57160fc095dd8538d38bf130068bbe858a69b8b18a3142bf16a07852"],
+  ["exp_linear_map_004_theorem_exp_zero_is_identity", "bb23ba43e403ab11c2c6a41e4356f0228a5880e37b0e2fe4df9a62289696fd53"],
   ["linear_space_general_002_claim_scalar_identity_commutes", "f8f5ddafc9ff868ec1ace87dae5f992b09aacc9063d84f3f432c8b3273ba873e"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["transfer_matrix_011_definition_H1_H2", "02a14a895094a781e52c134f1e31763509ed2b747896f18cab3c7564c6c226fb"],
@@ -1687,6 +1687,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["exp_linear_map_004_theorem_exp_zero_is_identity", "LLMによる検証: 行列指数の定義への欠落参照を補い依存順を修正した。行列サイズと成分の所属、正整数冪の計算、収束級数の初項分離とスカラー倍の前提、各行参照が未解決である。"],
+  ["freeenergy_004_theorem_riemann_sum_to_integral", "LLMによる検証: イジング固有の導入を外し、一様連続性と積分の基本性質を一般形の外部前提として明示した。それらの本文内の証明、連続度の上限の存在、誤差評価と極限の主張分割、各行参照と複数演算の分離が未解決である。前提補完後に依存と閉包を再判定する。"],
   ["exp_linear_map_000a_claim_real_exp_series_converges", "LLMによる検証: 部分和・極限・剰余の定義と三主張が同居する。Archimedesの原理、等比和、上限から単調列収束と極限が上限になる根拠、極限の差の法則と各行参照が未提示である。零引数もa^0=1の規約で含め、前提補完と分割後に依存と閉包を再判定する。"],
   ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "LLMによる検証: 共役転置・エルミート・正定値・実対称を一項に束ねている。正方行列で定めた共役転置を列ベクトルへ使う長方形への拡張、実対称の等式と正の実数を実数包含から説明する段、通常転置の記号導入、定義分割が未解決であり、補完後に依存と閉包を再判定する。"],
   ["exp_conjugation_proof_004_theorem_ad_binomial", "LLMによる検証: 交換子と二項係数の定義、符号の処理、Pascalの法則、帰納証明が同居している。正整数冪の定義と行列演算法則の根拠、符号の帰納法の展開、複数の分配律・結合律・スカラーの可換性の同時適用と二箇所への代入、各行参照と主張分割が未解決である。"],
@@ -8635,7 +8637,126 @@ if (findToolEntry("exp_linear_map_000a_claim_real_exp_series_converges").depende
   !== iteratedCommutatorSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("反復交換子の二項係数による展開の直後の項目が変わりました");
 }
+const realExponentialSeriesSectionEntryIds = [
+  "exp_linear_map_000a_claim_real_exp_series_converges"
+];
+const realExponentialSeriesSection = validateReviewedSection(
+  "非負実数の指数級数の収束と剰余", "数学的道具立て", realExponentialSeriesSectionEntryIds,
+  new Map([
+  [
+    "exp_linear_map_000a_claim_real_exp_series_converges",
+    []
+  ]
+]),
+  new Map([
+  [
+    "exp_linear_map_000a_claim_real_exp_series_converges",
+    "1065e4f465b1b0b49eae7d16f9d734421f472beec053c3effaff63127eecf077"
+  ]
+]),
+  [
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "exp_linear_map_000a_claim_real_exp_series_converges"
+],
+);
+const realExponentialSeriesSectionBoundarySnapshot = [
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_000a_claim_real_exp_series_converges",
+    "kind": "claim",
+    "sha256": "1065e4f465b1b0b49eae7d16f9d734421f472beec053c3effaff63127eecf077",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "freeenergy_004_theorem_riemann_sum_to_integral",
+    "kind": "theorem",
+    "sha256": "b7b5c2383ded596b035d003ba855d8f3d8109c68d44e4459836fa39c2218c4e3",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_004_theorem_exp_zero_is_identity",
+    "kind": "theorem",
+    "sha256": "bb23ba43e403ab11c2c6a41e4356f0228a5880e37b0e2fe4df9a62289696fd53",
+    "dependencies": [
+      "exp_linear_map_002_definition_exp_of_endomorphism"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_002_definition_exp_of_endomorphism",
+    "kind": "definition",
+    "sha256": "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of realExponentialSeriesSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`非負実数の指数級数の収束と剰余の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("freeenergy_004_theorem_riemann_sum_to_integral").dependencyPlacement!.chapterOrder
+  !== realExponentialSeriesSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("非負実数の指数級数の収束と剰余の直後の項目が変わりました");
+}
+if (findToolEntry("exp_linear_map_004_theorem_exp_zero_is_identity").dependencyPlacement!.chapterOrder
+  <= findToolEntry("exp_linear_map_002_definition_exp_of_endomorphism").dependencyPlacement!.chapterOrder) {
+  throw new Error("零行列の指数が行列指数の定義より前へ移りました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "非負実数の指数級数の収束と剰余",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "exp_linear_map_000a_claim_real_exp_series_converges"
+  ],
+  "input": [
+    "非負実数と自然数、集合記号、実数の上限性質"
+  ],
+  "output": [
+    "非負実数の指数級数の収束と部分和の上界",
+    "非負剰余の零への収束と有限の末尾和の評価"
+  ],
+  "mainTheorem": "非負実数の指数級数の収束と剰余評価",
+  "mainTheoremEntryId": "exp_linear_map_000a_claim_real_exp_series_converges",
+  "boundaryEvidence": "各項の非負性から部分和を単調にし、等比和で上から抑え、上限による極限と剰余へ閉じる現存一項を節とする。零行列の指数は定義への欠落参照を補うと行列指数の定義より後へ移るため、修正後の直後は等間隔点の平均の積分への収束である。この主張は指数級数を使わず、一様連続性とRiemann積分の基本性質から連続度による誤差を評価する別枝である。プログラミングによる検証では対象と直後の比較入力の本文・全直接依存・種別・粒度・相対順に加え、移動した零行列指数とその全直接入力、および指数定義より後の相対順を比較専用で固定する。",
+  "readabilityStatus": "LLMによる検証で実指数級数、零行列指数と行列指数の定義、等間隔和と直接入力の全本文を読んだ。部分和・極限・剰余と三主張の分割、Archimedes・等比和・上限から収束を導く根拠、極限の差と各行参照が未解決であり零引数を保つ。零行列指数は行列サイズと成分の所属、正整数冪の計算と収束級数の操作の説明が不足する。等間隔和はイジング固有の導入を外し、使う一様連続性と積分の基本性質を一般形の外部前提として明示するが、それらの本文内の証明、連続度の上限の存在、極限と誤差評価の主張分割と各行参照は残る。補完後に依存と閉包を再判定する構造確定であり本文完成とは扱わない。",
+  "externalInputEntryIds": [
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "反復交換子の二項係数による展開",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

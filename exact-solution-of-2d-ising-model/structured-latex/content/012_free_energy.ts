@@ -460,12 +460,8 @@ u
     title: { text: "等間隔点の平均は積分に収束する" },
     labels: ["riemann_sum_to_integral"],
     statement: [
-      paragraph([
-        "**自由エネルギーの表式を得るまでに実数解析（Riemann 積分）を使うのはこの主張だけである。**",
-        "用いる外部事実は ",
-        ref("remark_real_analysis_escape_point"),
-        " の (R1)(R2) に限る。",
-      ]),
+      paragraph(["以下では、有界閉区間上の連続実関数は一様連続であることを外部前提として用いる。"]),
+      paragraph(["また、有界閉区間上の連続実関数のRiemann可積分性、積分の線型性と区間加法性、定数の積分、および積分の絶対値が区間の長さと関数の絶対値の上限の積以下であることを、積分の基本性質として用いる。"]),
       paragraph([
         math(String.raw`g : \mathbb{R} \to \mathbb{R}`),
         " を連続関数とし、",
@@ -499,7 +495,7 @@ u
 \ \leq\ \omega\!\left(\frac{2\pi}{M}\right)`,
       ),
       paragraph([
-        "であり、(R1) より ",
+        "であり、一様連続性 より ",
         math(String.raw`\omega(h) \to 0\ (h \to +0)`),
         " なので右辺は ",
         math(String.raw`0`),
@@ -525,7 +521,7 @@ u
         math(String.raw`\mathbb{R}`),
         " 上連続なので、とくに有界閉区間 ",
         math(String.raw`[0,2\pi]`),
-        " 上で連続であり、(R2) より ",
+        " 上で連続であり、積分の基本性質 より ",
         math(String.raw`\int_0^{2\pi}g(t)\,dt`),
         " が定まる。",
         math(String.raw`M`),
@@ -541,7 +537,7 @@ u
         math(String.raw`2\pi/M`),
         " の ",
         math(String.raw`M`),
-        " 個の区間に分割したものであり、(R2) の区間加法性より",
+        " 個の区間に分割したものであり、積分の基本性質 の区間加法性より",
       ]),
       displayMath(
         String.raw`\int_0^{2\pi} g(t)\,dt = \sum_{\mu=1}^{M}\int_{I_\mu} g(t)\,dt`,
@@ -595,7 +591,7 @@ u
       paragraph([
         "Step 2（各区間での誤差）。",
         math(String.raw`\mu`),
-        " を固定する。(R2) の定数の積分より ",
+        " を固定する。積分の基本性質 の定数の積分より ",
         math(String.raw`\int_{I_\mu} g\!\left(t^{(M)}_\mu\right)dt = \dfrac{2\pi}{M}\,g\!\left(t^{(M)}_\mu\right)`),
         " である。各区間での誤差を一続きに評価する。",
       ]),
@@ -603,7 +599,7 @@ u
         String.raw`\begin{aligned}
 &\left|\int_{I_\mu}g(t)\,dt-\frac{2\pi}{M}g\!\left(t^{(M)}_\mu\right)\right|\\
 ={}&\left|\int_{I_\mu}g(t)\,dt-\int_{I_\mu}g\!\left(t^{(M)}_\mu\right)dt\right|
-&&\left(\because\ \text{(R2) の定数の積分}\right)\\
+&&\left(\because\ \text{積分の基本性質 の定数の積分}\right)\\
 ={}&\left|\int_{I_\mu}\left(g(t)-g\!\left(t^{(M)}_\mu\right)\right)dt\right|
 &&\left(\because\ \text{積分の線型性}\right)\\
 \leq{}&\frac{2\pi}{M}\sup_{t\in I_\mu}\left|g(t)-g\!\left(t^{(M)}_\mu\right)\right|
@@ -634,7 +630,7 @@ u
         " で割ると statement の評価を得る。",
       ]),
       paragraph([
-        "Step 4（収束）。(R1) を ",
+        "Step 4（収束）。一様連続性 を ",
         math(String.raw`[0,2\pi]`),
         " 上の連続関数 ",
         math(String.raw`g`),

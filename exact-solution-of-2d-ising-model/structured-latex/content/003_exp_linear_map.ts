@@ -1421,6 +1421,7 @@ S_NT_N
     title: { tex: String.raw`\exp(O) = I` },
     labels: ["theorem_exp_zero"],
     statement: [
+      paragraph(["行列指数は ", ref("def_exp"), " の定義を用いる。"]),
       paragraph([
         math(String.raw`O`),
         " を零行列、",

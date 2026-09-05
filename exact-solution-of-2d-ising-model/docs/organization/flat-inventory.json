@@ -154,12 +154,12 @@
       "entryIds": [
         "exp_conjugation_proof_004_theorem_ad_binomial",
         "exp_linear_map_000a_claim_real_exp_series_converges",
-        "exp_linear_map_004_theorem_exp_zero_is_identity",
         "exp_linear_map_000b_claim_matrix_exp_series_converges",
         "exp_linear_map_001_theorem_exp_series_pointwise_converges",
         "exp_linear_map_002_definition_exp_of_endomorphism",
         "bridge_003_claim_exp_of_diagonal",
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+        "exp_linear_map_004_theorem_exp_zero_is_identity",
         "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
         "exp_conjugation_proof_008_theorem_exp_ad_series",
         "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
@@ -217,6 +217,28 @@
     }
   ],
   "mathematicalToolSectionBoundaries": [
+    {
+      "name": "非負実数の指数級数の収束と剰余",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "exp_linear_map_000a_claim_real_exp_series_converges"
+      ],
+      "input": [
+        "非負実数と自然数、集合記号、実数の上限性質"
+      ],
+      "output": [
+        "非負実数の指数級数の収束と部分和の上界",
+        "非負剰余の零への収束と有限の末尾和の評価"
+      ],
+      "mainTheorem": "非負実数の指数級数の収束と剰余評価",
+      "mainTheoremEntryId": "exp_linear_map_000a_claim_real_exp_series_converges",
+      "boundaryEvidence": "各項の非負性から部分和を単調にし、等比和で上から抑え、上限による極限と剰余へ閉じる現存一項を節とする。零行列の指数は定義への欠落参照を補うと行列指数の定義より後へ移るため、修正後の直後は等間隔点の平均の積分への収束である。この主張は指数級数を使わず、一様連続性とRiemann積分の基本性質から連続度による誤差を評価する別枝である。プログラミングによる検証では対象と直後の比較入力の本文・全直接依存・種別・粒度・相対順に加え、移動した零行列指数とその全直接入力、および指数定義より後の相対順を比較専用で固定する。",
+      "readabilityStatus": "LLMによる検証で実指数級数、零行列指数と行列指数の定義、等間隔和と直接入力の全本文を読んだ。部分和・極限・剰余と三主張の分割、Archimedes・等比和・上限から収束を導く根拠、極限の差と各行参照が未解決であり零引数を保つ。零行列指数は行列サイズと成分の所属、正整数冪の計算と収束級数の操作の説明が不足する。等間隔和はイジング固有の導入を外し、使う一様連続性と積分の基本性質を一般形の外部前提として明示するが、それらの本文内の証明、連続度の上限の存在、極限と誤差評価の主張分割と各行参照は残る。補完後に依存と閉包を再判定する構造確定であり本文完成とは扱わない。",
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
     {
       "name": "反復交換子の二項係数による展開",
       "chapter": "数学的道具立て",
@@ -928,7 +950,6 @@
         "calc_formulae_006_definition_of_cc",
         "exp_conjugation_proof_004_theorem_ad_binomial",
         "exp_linear_map_000a_claim_real_exp_series_converges",
-        "exp_linear_map_004_theorem_exp_zero_is_identity",
         "linear_space_general_002b_definition_matrix_norm",
         "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
         "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
@@ -937,7 +958,8 @@
         "exp_linear_map_000b_claim_matrix_exp_series_converges",
         "exp_linear_map_001_theorem_exp_series_pointwise_converges",
         "exp_linear_map_002_definition_exp_of_endomorphism",
-        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+        "exp_linear_map_004_theorem_exp_zero_is_identity"
       ],
       "output": [
         "行列指数関数による共役を反復交換子の指数級数で表す主定理",
@@ -1828,10 +1850,10 @@
         "evensectorT_definition_V1_plus_square_root",
         "evensectorT_definition_V_plus",
         "eigenvalues_of_V_011_definition_hermitian_positive_definite",
-        "exp_linear_map_004_theorem_exp_zero_is_identity",
         "linear_space_general_002_claim_scalar_identity_commutes",
         "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
-        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+        "exp_linear_map_004_theorem_exp_zero_is_identity"
       ],
       "output": [
         "V^{(+)} の正定値性",
@@ -2551,6 +2573,7 @@
       "eigenvalues_of_V_003_claim_trace_of_idempotent",
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
       "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+      "freeenergy_004_theorem_riemann_sum_to_integral",
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y",
       "critical_001_claim_cosh_addition_and_half_angle",
@@ -3041,168 +3064,168 @@
         {
           "order": 68,
           "entryIds": [
-            "exp_linear_map_004_theorem_exp_zero_is_identity"
+            "freeenergy_004_theorem_riemann_sum_to_integral"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 69,
           "entryIds": [
-            "freeenergy_004_theorem_riemann_sum_to_integral"
+            "linear_space_general_000_definition_kronecker_product"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 70,
           "entryIds": [
-            "linear_space_general_000_definition_kronecker_product"
+            "linear_space_general_000b_claim_kronecker_product_rule"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 71,
           "entryIds": [
-            "linear_space_general_000b_claim_kronecker_product_rule"
+            "linear_space_general_000c_claim_kronecker_multilinear"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 72,
           "entryIds": [
-            "linear_space_general_000c_claim_kronecker_multilinear"
+            "linear_space_general_000d_claim_kronecker_transpose"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 73,
           "entryIds": [
-            "linear_space_general_000d_claim_kronecker_transpose"
+            "linear_space_general_001_theorem_tensor_product_basis"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 74,
           "entryIds": [
-            "linear_space_general_001_theorem_tensor_product_basis"
+            "linear_space_general_002_claim_scalar_identity_commutes"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 75,
           "entryIds": [
-            "linear_space_general_002_claim_scalar_identity_commutes"
+            "linear_space_general_002b_definition_matrix_norm"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 76,
           "entryIds": [
-            "linear_space_general_002b_definition_matrix_norm"
+            "eigenvalues_of_V_012_claim_star_is_norm_preserving"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 77,
           "entryIds": [
-            "eigenvalues_of_V_012_claim_star_is_norm_preserving"
+            "exp_conjugation_proof_003_definition_M_n_C_convergence"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 78,
           "entryIds": [
-            "exp_conjugation_proof_003_definition_M_n_C_convergence"
+            "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 79,
           "entryIds": [
-            "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
+            "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 80,
           "entryIds": [
-            "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+            "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 81,
           "entryIds": [
-            "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
+            "linear_space_general_003_claim_matrix_norm_submultiplicativity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 82,
           "entryIds": [
-            "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+            "linear_space_general_003b_claim_matrix_multiplication_continuity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 83,
           "entryIds": [
-            "linear_space_general_003b_claim_matrix_multiplication_continuity"
+            "linear_space_general_003c_claim_matrix_norm_vector_bound"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 84,
           "entryIds": [
-            "linear_space_general_003c_claim_matrix_norm_vector_bound"
+            "linear_space_general_003d_claim_matrix_completeness"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 85,
           "entryIds": [
-            "linear_space_general_003d_claim_matrix_completeness"
+            "exp_linear_map_000b_claim_matrix_exp_series_converges"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 86,
           "entryIds": [
-            "exp_linear_map_000b_claim_matrix_exp_series_converges"
+            "exp_linear_map_001_theorem_exp_series_pointwise_converges"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 87,
           "entryIds": [
-            "exp_linear_map_001_theorem_exp_series_pointwise_converges"
+            "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 88,
           "entryIds": [
-            "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+            "exp_linear_map_002_definition_exp_of_endomorphism"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 89,
           "entryIds": [
-            "exp_linear_map_002_definition_exp_of_endomorphism"
+            "bridge_003_claim_exp_of_diagonal"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 90,
           "entryIds": [
-            "bridge_003_claim_exp_of_diagonal"
+            "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 91,
           "entryIds": [
-            "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
+            "exp_linear_map_004_theorem_exp_zero_is_identity"
           ],
           "inseparableDependencyUnit": false
         },
@@ -10827,7 +10850,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 70,
+        "chapterOrder": 69,
         "dependencyUnitEntryIds": [
           "linear_space_general_000_definition_kronecker_product"
         ]
@@ -10888,7 +10911,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 71,
+        "chapterOrder": 70,
         "dependencyUnitEntryIds": [
           "linear_space_general_000b_claim_kronecker_product_rule"
         ]
@@ -10949,7 +10972,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 72,
+        "chapterOrder": 71,
         "dependencyUnitEntryIds": [
           "linear_space_general_000c_claim_kronecker_multilinear"
         ]
@@ -11007,7 +11030,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 73,
+        "chapterOrder": 72,
         "dependencyUnitEntryIds": [
           "linear_space_general_000d_claim_kronecker_transpose"
         ]
@@ -11070,7 +11093,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 74,
+        "chapterOrder": 73,
         "dependencyUnitEntryIds": [
           "linear_space_general_001_theorem_tensor_product_basis"
         ]
@@ -11126,7 +11149,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 75,
+        "chapterOrder": 74,
         "dependencyUnitEntryIds": [
           "linear_space_general_002_claim_scalar_identity_commutes"
         ]
@@ -11260,7 +11283,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 76,
+        "chapterOrder": 75,
         "dependencyUnitEntryIds": [
           "linear_space_general_002b_definition_matrix_norm"
         ]
@@ -11329,7 +11352,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 80,
+        "chapterOrder": 79,
         "dependencyUnitEntryIds": [
           "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
         ]
@@ -11394,7 +11417,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 82,
+        "chapterOrder": 81,
         "dependencyUnitEntryIds": [
           "linear_space_general_003_claim_matrix_norm_submultiplicativity"
         ]
@@ -11457,7 +11480,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 84,
+        "chapterOrder": 83,
         "dependencyUnitEntryIds": [
           "linear_space_general_003c_claim_matrix_norm_vector_bound"
         ]
@@ -11526,7 +11549,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 85,
+        "chapterOrder": 84,
         "dependencyUnitEntryIds": [
           "linear_space_general_003d_claim_matrix_completeness"
         ]
@@ -11587,7 +11610,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 83,
+        "chapterOrder": 82,
         "dependencyUnitEntryIds": [
           "linear_space_general_003b_claim_matrix_multiplication_continuity"
         ]
@@ -11714,7 +11737,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 86,
+        "chapterOrder": 85,
         "dependencyUnitEntryIds": [
           "exp_linear_map_000b_claim_matrix_exp_series_converges"
         ]
@@ -11788,7 +11811,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 87,
+        "chapterOrder": 86,
         "dependencyUnitEntryIds": [
           "exp_linear_map_001_theorem_exp_series_pointwise_converges"
         ]
@@ -11808,7 +11831,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 22,
+        "incomingReferenceCount": 23,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11858,7 +11881,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 89,
+        "chapterOrder": 88,
         "dependencyUnitEntryIds": [
           "exp_linear_map_002_definition_exp_of_endomorphism"
         ]
@@ -11931,7 +11954,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 91,
+        "chapterOrder": 90,
         "dependencyUnitEntryIds": [
           "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
         ]
@@ -11962,18 +11985,22 @@
         "abstractVocabularyMatches": [
           "抽象線型写像"
         ],
-        "inspectedCharacterCount": 1319,
-        "inspectedContentSha256": "5a42c7aa57160fc095dd8538d38bf130068bbe858a69b8b18a3142bf16a07852",
+        "inspectedCharacterCount": 1456,
+        "inspectedContentSha256": "bb23ba43e403ab11c2c6a41e4356f0228a5880e37b0e2fe4df9a62289696fd53",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列指数の定義への欠落参照を補い依存順を修正した。行列サイズと成分の所属、正整数冪の計算、収束級数の初項分離とスカラー倍の前提、各行参照が未解決である。"
       },
-      "dependsOnLabels": [],
-      "dependsOnEntryIds": [],
+      "dependsOnLabels": [
+        "def_exp"
+      ],
+      "dependsOnEntryIds": [
+        "exp_linear_map_002_definition_exp_of_endomorphism"
+      ],
       "semanticPrerequisiteLabels": [],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -11983,7 +12010,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 68,
+        "chapterOrder": 91,
         "dependencyUnitEntryIds": [
           "exp_linear_map_004_theorem_exp_zero_is_identity"
         ]
@@ -13393,7 +13420,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 78,
+        "chapterOrder": 77,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_003_definition_M_n_C_convergence"
         ]
@@ -13472,7 +13499,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 81,
+        "chapterOrder": 80,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
         ]
@@ -13600,7 +13627,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 79,
+        "chapterOrder": 78,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
         ]
@@ -18012,7 +18039,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 77,
+        "chapterOrder": 76,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_012_claim_star_is_norm_preserving"
         ]
@@ -18077,7 +18104,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 88,
+        "chapterOrder": 87,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
         ]
@@ -18649,7 +18676,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 90,
+        "chapterOrder": 89,
         "dependencyUnitEntryIds": [
           "bridge_003_claim_exp_of_diagonal"
         ]
@@ -20741,21 +20768,20 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9479,
-        "inspectedContentSha256": "8cf89b52786140b56bb208c5faba9cfa606f7b27fbf67385653f5b31146be322",
+        "inspectedCharacterCount": 9500,
+        "inspectedContentSha256": "b7b5c2383ded596b035d003ba855d8f3d8109c68d44e4459836fa39c2218c4e3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: イジング固有の導入を外し、一様連続性と積分の基本性質を一般形の外部前提として明示した。それらの本文内の証明、連続度の上限の存在、誤差評価と極限の主張分割、各行参照と複数演算の分離が未解決である。前提補完後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
-        "remark_real_analysis_escape_point",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
@@ -20772,7 +20798,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 69,
+        "chapterOrder": 68,
         "dependencyUnitEntryIds": [
           "freeenergy_004_theorem_riemann_sum_to_integral"
         ]
