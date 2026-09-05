@@ -910,7 +910,7 @@ const realSymmetricGeneratorsAndSignFlipExpectedExternalInputContentSha256 = new
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "2040831405f933942bdff84147045e5feddd899546259e7449c6903c8411de65"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
-  ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "d0d5706bfc9866ba851d979c14387aa1c99cf67bdf434f453699a1fa91d4f22c"],
+  ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1"],
   ["linear_space_general_000_definition_kronecker_product", "d67144d5a2fc061d370a8a29846c5cdb963a1b6ce42b0f6b08daee519364bc40"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
   ["linear_space_general_000d_claim_kronecker_transpose", "c0014341f8b8968f27acf4793018d15312e7313acad2dccadd439617703c4cd4"],
@@ -1254,7 +1254,7 @@ const vPlusPositiveDefiniteExpectedExternalInputEntryIds = [
 const vPlusPositiveDefiniteExpectedExternalInputContentSha256 = new Map<string, string>([
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
-  ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "d0d5706bfc9866ba851d979c14387aa1c99cf67bdf434f453699a1fa91d4f22c"],
+  ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1"],
   ["eigenvalues_of_V_013_claim_exp_hermitian_positive_definite", "11af5903a78e67f1b0e4700b9ac3d38b2245716a71ee75f252d0f7c4bc597957"],
   ["eigenvalues_of_V_014_claim_iH_is_real_symmetric", "d0db638eabbd3f67ab3e07165b00550c189e3af89250349e53cb6cc743563422"],
   ["evensectorT_definition_V1_plus_square_root", "33659011599514363340a770866a6757ab8b49d6b7259f1c8fc777da7aea773a"],
@@ -1687,6 +1687,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "LLMによる検証: 共役転置・エルミート・正定値・実対称を一項に束ねている。正方行列で定めた共役転置を列ベクトルへ使う長方形への拡張、実対称の等式と正の実数を実数包含から説明する段、通常転置の記号導入、定義分割が未解決であり、補完後に依存と閉包を再判定する。"],
+  ["exp_conjugation_proof_004_theorem_ad_binomial", "LLMによる検証: 交換子と二項係数の定義、符号の処理、Pascalの法則、帰納証明が同居している。正整数冪の定義と行列演算法則の根拠、符号の帰納法の展開、複数の分配律・結合律・スカラーの可換性の同時適用と二箇所への代入、各行参照と主張分割が未解決である。"],
   ["eigenvalues_of_V_002_claim_trace_properties", "LLMによる検証: 四主張の分割、線型性の成分計算と有限和の順序交換を正当化する帰納法、和の交換と複素積の交換を同時適用する段の分離、各行参照が未解決である。"],
   ["eigenvalues_of_V_003_claim_trace_of_idempotent", "LLMによる検証: 像・核の部分空間性、基底の存在と個数、直和から基底を連結する根拠、基底変換行列の可逆性と表現行列の式が未提示である。零次元の像または核を含め、一般語彙を具体的複素行列の計算へ接続する前提不足であり、説明粒度だけの不足としない。直和分解とトレースの主張分割、各行参照と前提補完後に依存と閉包を再判定する。"],
   ["critical_009_claim_closed_form_log_integral", "LLMによる検証: 三つの積分・対数評価の分割、対数の定義と法則、平方根の積商法則、合成微分の分解と各行参照が未解決である。積分の基本定理等を一般形で切り出す必要があり、解析前提の補完後に分類・依存・配置を再判定する。"],
@@ -8373,7 +8375,191 @@ if (findToolEntry("exp_conjugation_definition_complex_conjugate_and_real_part").
   !== traceSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("トレースの定義と冪等行列の像の次元の直後の項目が変わりました");
 }
+const conjugateAdjointSectionEntryIds = [
+  "exp_conjugation_definition_complex_conjugate_and_real_part",
+  "eigenvalues_of_V_011_definition_hermitian_positive_definite"
+];
+const conjugateAdjointSection = validateReviewedSection(
+  "複素共役から共役転置と正定値行列へ", "数学的道具立て", conjugateAdjointSectionEntryIds,
+  new Map([
+  [
+    "exp_conjugation_definition_complex_conjugate_and_real_part",
+    []
+  ],
+  [
+    "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    [
+      "exp_conjugation_definition_complex_conjugate_and_real_part"
+    ]
+  ]
+]),
+  new Map([
+  [
+    "exp_conjugation_definition_complex_conjugate_and_real_part",
+    "69fd82e2a5857d7844277a0dffbd61a33f0c61050aea4abeb87340c5e1fae879"
+  ],
+  [
+    "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1"
+  ]
+]),
+  [
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_007_inclusion_rr_to_cc",
+  "calc_formulae_010_definition_real_imag_parts_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_003_matrix_decomposition",
+    "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calc_formulae_007_inclusion_rr_to_cc",
+    "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647"
+  ],
+  [
+    "calc_formulae_010_definition_real_imag_parts_of_cc",
+    "6e080bfb6c5694b115f4761c5d2db993b1d5c315a4e36f7389774cfd711a07bd"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "eigenvalues_of_V_011_definition_hermitian_positive_definite"
+],
+);
+const conjugateAdjointSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_007_inclusion_rr_to_cc",
+    "kind": "definition",
+    "sha256": "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_010_definition_real_imag_parts_of_cc",
+    "kind": "definition",
+    "sha256": "6e080bfb6c5694b115f4761c5d2db993b1d5c315a4e36f7389774cfd711a07bd",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    "kind": "definition",
+    "sha256": "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_conjugation_definition_complex_conjugate_and_real_part"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_definition_complex_conjugate_and_real_part",
+    "kind": "definition",
+    "sha256": "69fd82e2a5857d7844277a0dffbd61a33f0c61050aea4abeb87340c5e1fae879",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_010_definition_real_imag_parts_of_cc"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "exp_conjugation_proof_004_theorem_ad_binomial",
+    "kind": "theorem",
+    "sha256": "ba1875ca88bb10163d2a3ba85f2acb5e4a358169c00e6e2959ba76c666c34a1b",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of conjugateAdjointSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`複素共役から共役転置と正定値行列への境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("exp_conjugation_proof_004_theorem_ad_binomial").dependencyPlacement!.chapterOrder
+  !== conjugateAdjointSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("複素共役から共役転置と正定値行列への直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "複素共役から共役転置と正定値行列へ",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "exp_conjugation_definition_complex_conjugate_and_real_part",
+    "eigenvalues_of_V_011_definition_hermitian_positive_definite"
+  ],
+  "input": [
+    "実数対による複素数と実部・虚部、実数から複素数への包含、集合記号",
+    "行列の積の成分による定義"
+  ],
+  "output": [
+    "複素共役と行列の共役転置",
+    "エルミート行列・正定値行列・実対称行列の定義"
+  ],
+  "mainTheorem": "共役転置を用いたエルミート行列と正定値行列の定義",
+  "mainTheoremEntryId": "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+  "boundaryEvidence": "複素数対の第二成分の符号を変える共役を定め、それを成分へ使う共役転置からエルミート性と正定値性を定める二項が閉じる。主定理に代わる節末出力は行列の定義群である。直後の反復交換子の二項展開は共役も転置も使わず、積・差・二項係数と帰納法へ入力が切り替わる。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度、内部依存・連続性・唯一の節末・後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で二定義と反復交換子の全本文・全直接入力を読んだ。複素共役は実数対の式で明示されている。節末は共役転置・エルミート・正定値・実対称を同居させ、列ベクトルへの長方形共役転置の拡張と、実対称の等式と正の実数を実数包含から説明する段、通常転置の記号導入が不足する。比較側は交換子と二項係数の定義・Pascalの法則・帰納証明を同居させ、正整数冪の定義と行列演算法則の根拠、複数演算法則の同時適用、符号の帰納法の展開と各行参照が残る。本文完成とは扱わず、定義・主張の分割と前提補完後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calc_formulae_007_inclusion_rr_to_cc",
+    "calc_formulae_010_definition_real_imag_parts_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "トレースの定義と冪等行列の像の次元",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

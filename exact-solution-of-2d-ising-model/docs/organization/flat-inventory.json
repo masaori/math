@@ -218,6 +218,34 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "複素共役から共役転置と正定値行列へ",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "exp_conjugation_definition_complex_conjugate_and_real_part",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite"
+      ],
+      "input": [
+        "実数対による複素数と実部・虚部、実数から複素数への包含、集合記号",
+        "行列の積の成分による定義"
+      ],
+      "output": [
+        "複素共役と行列の共役転置",
+        "エルミート行列・正定値行列・実対称行列の定義"
+      ],
+      "mainTheorem": "共役転置を用いたエルミート行列と正定値行列の定義",
+      "mainTheoremEntryId": "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+      "boundaryEvidence": "複素数対の第二成分の符号を変える共役を定め、それを成分へ使う共役転置からエルミート性と正定値性を定める二項が閉じる。主定理に代わる節末出力は行列の定義群である。直後の反復交換子の二項展開は共役も転置も使わず、積・差・二項係数と帰納法へ入力が切り替わる。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度、内部依存・連続性・唯一の節末・後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で二定義と反復交換子の全本文・全直接入力を読んだ。複素共役は実数対の式で明示されている。節末は共役転置・エルミート・正定値・実対称を同居させ、列ベクトルへの長方形共役転置の拡張と、実対称の等式と正の実数を実数包含から説明する段、通常転置の記号導入が不足する。比較側は交換子と二項係数の定義・Pascalの法則・帰納証明を同居させ、正整数冪の定義と行列演算法則の根拠、複数演算法則の同時適用、符号の帰納法の展開と各行参照が残る。本文完成とは扱わず、定義・主張の分割と前提補完後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calc_formulae_010_definition_real_imag_parts_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "トレースの定義と冪等行列の像の次元",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2498,6 +2526,7 @@
       "eigenvalues_of_V_002_claim_trace_properties",
       "eigenvalues_of_V_003_claim_trace_of_idempotent",
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
+      "eigenvalues_of_V_011_definition_hermitian_positive_definite",
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y",
       "critical_001_claim_cosh_addition_and_half_angle",
@@ -7330,7 +7359,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7571,7 +7600,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -13450,21 +13479,23 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 9427,
-        "inspectedContentSha256": "1189ebfc4acfbd008bae561121cac2508419b50ec024620615f25520109c7b9e",
+        "inspectedCharacterCount": 9566,
+        "inspectedContentSha256": "ba1875ca88bb10163d2a3ba85f2acb5e4a358169c00e6e2959ba76c666c34a1b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 交換子と二項係数の定義、符号の処理、Pascalの法則、帰納証明が同居している。正整数冪の定義と行列演算法則の根拠、符号の帰納法の展開、複数の分配律・結合律・スカラーの可換性の同時適用と二箇所への代入、各行参照と主張分割が未解決である。"
       },
       "dependsOnLabels": [
         "definition_of_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
@@ -17857,26 +17888,30 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1771,
-        "inspectedContentSha256": "d0d5706bfc9866ba851d979c14387aa1c99cf67bdf434f453699a1fa91d4f22c",
+        "inspectedCharacterCount": 1991,
+        "inspectedContentSha256": "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 共役転置・エルミート・正定値・実対称を一項に束ねている。正方行列で定めた共役転置を列ベクトルへ使う長方形への拡張、実対称の等式と正の実数を実数包含から説明する段、通常転置の記号導入、定義分割が未解決であり、補完後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "def_complex_conjugate",
         "definition_of_cc",
+        "inclusion_rr_to_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "exp_conjugation_definition_complex_conjugate_and_real_part"
       ],

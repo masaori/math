@@ -632,6 +632,7 @@ u+\overline{u}
     title: { text: "ad 展開の二項定理的公式（Brian Hall exercise 14）" },
     labels: ["ad_binomial"],
     statement: [
+      paragraph(["行列の積は ", ref("mat_mult"), " の成分計算による。"]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " もしくは ",

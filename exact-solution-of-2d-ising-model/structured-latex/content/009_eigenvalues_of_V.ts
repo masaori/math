@@ -1769,6 +1769,7 @@ V' y
     title: { text: "共役転置・エルミート行列・正定値行列" },
     labels: ["def_hermitian_positive_definite"],
     statement: [
+      paragraph(["行列の積は ", ref("mat_mult"), "、実数の複素数への包含は ", ref("inclusion_rr_to_cc"), " を用いる。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",
