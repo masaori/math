@@ -13,6 +13,7 @@ export default defineBlocks([
     },
     labels: ["operations_on_polar_representation"],
     statement: [
+      paragraph([ref("polar_equivalence_class"), " の同値類に対して演算を定める。"]),
       paragraph([
         math(String.raw`\left((\mathbb{R}_{\ge 0}\times\mathbb{R})/\sim\right)`),
         " に二項演算 ",

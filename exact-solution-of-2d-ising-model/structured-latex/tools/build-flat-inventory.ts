@@ -1687,6 +1687,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["calc_formulae_015_claim_cos_arctan_sin_arctan", "LLMによる検証: 逆正接の正弦と余弦の二等式を一項に束ね、適用行ごとの定義ラベルと平方根の商の根拠が不足している。構造だけを確定し、主張の分割と一ステップ一定理の説明は未解決とする。"],
+  ["calc_formulae_012_definition_arc_length", "LLMによる検証: 円弧長の存在一意性を外部文献の命題番号だけで指定し、その条件と内容を本文内で説明していない。構造だけを確定し、外部文献の内容の本文内説明は未解決とする。"],
   ["calc_formulae_012b_claim_radial_normalization_exists_unique", "LLMによる検証: 正規化の存在一意性の証明は平方根と単位円の根拠を適用行ごとのラベルで引かず、実数の四則として複数の演算を一行へまとめている。節配置だけを確定し、本文の一ステップ一定理への展開は未解決である。"],
   ["calc_formulae_016_definition_angle_equivalence_class", "LLMによる検証: 商集合を定める前提となる反射性・対称性・推移性について、整数 0・-n・n+m を用いる根拠の説明が未整備である。節構造だけを確定し本文完成とは扱わない。"],
   ["calc_formulae_019_definition_polar_equivalence_class", "LLMによる検証: 半径零と正の場合を分けた反射性・対称性・推移性の説明、および同値類から商集合を作る説明が未整備である。外部入力の角度同値関係にも同じ不足がある。節構造だけを確定し本文完成とは扱わない。"],
@@ -3589,7 +3591,7 @@ if (unitCircleEntry.kind !== "definition"
   || JSON.stringify([...arcLengthEntry.dependsOnEntryIds].sort())
     !== JSON.stringify([unitCircleEntry.id])
   || unitCircleEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
-  || arcLengthEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || arcLengthEntry.explanationGranularityReview.status !== "具体的な行列計算への展開またはブロック分割を要する"
   // 直後の角度表現の枝は、単位円にも円弧にも依存しない別の出発点である
   || angleEquivalenceEntry.dependsOnEntryIds.includes(unitCircleEntry.id)
   || angleEquivalenceEntry.dependsOnEntryIds.includes(arcLengthEntry.id)) {
@@ -3759,7 +3761,319 @@ if (arcLengthEntry.explanationGranularityReview.inspectedContentSha256 !== "f6df
   || radialNormalizationSection.sectionEntries[0]!.explanationGranularityReview.manualReview === null) {
   throw new Error("単位円への正規化の主張・定義・直後の逆正弦の境界が変わりました");
 }
+const inverseTrigonometricSectionEntryIds = [
+  "calc_formulae_014_definition_inverse_trig_functions",
+  "calc_formulae_014b_claim_arcsin_bijection",
+  "calc_formulae_014c_claim_arctan_argument_in_unit_interval",
+  "calc_formulae_014c_definition_sin",
+  "calc_formulae_014d_definition_arctan",
+  "calc_formulae_014e_definition_cos",
+  "calc_formulae_015_claim_cos_arctan_sin_arctan"
+];
+const inverseTrigonometricSection = validateReviewedSection(
+  "逆正弦から定める正弦・余弦と逆正接", "数学的道具立て", inverseTrigonometricSectionEntryIds,
+  new Map([
+  [
+    "calc_formulae_014_definition_inverse_trig_functions",
+    []
+  ],
+  [
+    "calc_formulae_014b_claim_arcsin_bijection",
+    [
+      "calc_formulae_014_definition_inverse_trig_functions"
+    ]
+  ],
+  [
+    "calc_formulae_014c_claim_arctan_argument_in_unit_interval",
+    []
+  ],
+  [
+    "calc_formulae_014c_definition_sin",
+    [
+      "calc_formulae_014_definition_inverse_trig_functions",
+      "calc_formulae_014b_claim_arcsin_bijection"
+    ]
+  ],
+  [
+    "calc_formulae_014d_definition_arctan",
+    [
+      "calc_formulae_014_definition_inverse_trig_functions",
+      "calc_formulae_014c_claim_arctan_argument_in_unit_interval"
+    ]
+  ],
+  [
+    "calc_formulae_014e_definition_cos",
+    [
+      "calc_formulae_014c_definition_sin"
+    ]
+  ],
+  [
+    "calc_formulae_015_claim_cos_arctan_sin_arctan",
+    [
+      "calc_formulae_014c_claim_arctan_argument_in_unit_interval",
+      "calc_formulae_014c_definition_sin",
+      "calc_formulae_014d_definition_arctan",
+      "calc_formulae_014e_definition_cos"
+    ]
+  ]
+]),
+  new Map([
+  [
+    "calc_formulae_014_definition_inverse_trig_functions",
+    "b3a21e2102af9b25c3ba9f787c8f037b17e6e688071689a00df1c6a1aea3fca3"
+  ],
+  [
+    "calc_formulae_014b_claim_arcsin_bijection",
+    "2a7bfb0570e3135f4eb879131abe4e889a9fe8fe580eddc05ec5f6d093fc06f1"
+  ],
+  [
+    "calc_formulae_014c_claim_arctan_argument_in_unit_interval",
+    "91239d3958a1bcb5f6a55c5feb68940b12dc41c6d5ecf61c8880ca94cb2476f4"
+  ],
+  [
+    "calc_formulae_014c_definition_sin",
+    "6a8ea2317a4ee4a034fe63a9f7371bb06cc429b38cc136c4059b9b1c28983b54"
+  ],
+  [
+    "calc_formulae_014d_definition_arctan",
+    "d7d6ac6e18ecfbb96c7bc7ebe9b89c874e6004df8b114a08b95b9c4568d140a2"
+  ],
+  [
+    "calc_formulae_014e_definition_cos",
+    "cf32ed2ef717d12941d16958599fccde9b93fe4dc82a7a97b5e4188e35960205"
+  ],
+  [
+    "calc_formulae_015_claim_cos_arctan_sin_arctan",
+    "d0e4541754801f6a861911aca135cd1a6d91df5f45cad07fefc2acdbb68b9306"
+  ]
+]),
+  [
+  "calc_formulae_001_sqrt_nonnegative_real",
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_011_definition_unit_circle",
+  "calc_formulae_012_definition_arc_length",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calc_formulae_011_definition_unit_circle",
+    "0f0fa73628443bdff271ad3b3dfe9ec8ab947902b46503d6a5822b6925177765"
+  ],
+  [
+    "calc_formulae_012_definition_arc_length",
+    "f6df94720c8d99c3fc6bf1618a9a348cc682b41ffe02275f8d3abe80c878d9b9"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "calc_formulae_015_claim_cos_arctan_sin_arctan"
+],
+);
+const inverseTrigonometricSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_011_definition_unit_circle",
+    "kind": "definition",
+    "sha256": "0f0fa73628443bdff271ad3b3dfe9ec8ab947902b46503d6a5822b6925177765",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_012_definition_arc_length",
+    "kind": "definition",
+    "sha256": "f6df94720c8d99c3fc6bf1618a9a348cc682b41ffe02275f8d3abe80c878d9b9",
+    "dependencies": [
+      "calc_formulae_011_definition_unit_circle"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_014_definition_inverse_trig_functions",
+    "kind": "definition",
+    "sha256": "b3a21e2102af9b25c3ba9f787c8f037b17e6e688071689a00df1c6a1aea3fca3",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_011_definition_unit_circle",
+      "calc_formulae_012_definition_arc_length",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_014b_claim_arcsin_bijection",
+    "kind": "claim",
+    "sha256": "2a7bfb0570e3135f4eb879131abe4e889a9fe8fe580eddc05ec5f6d093fc06f1",
+    "dependencies": [
+      "calc_formulae_014_definition_inverse_trig_functions"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_014c_claim_arctan_argument_in_unit_interval",
+    "kind": "claim",
+    "sha256": "91239d3958a1bcb5f6a55c5feb68940b12dc41c6d5ecf61c8880ca94cb2476f4",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_014c_definition_sin",
+    "kind": "definition",
+    "sha256": "6a8ea2317a4ee4a034fe63a9f7371bb06cc429b38cc136c4059b9b1c28983b54",
+    "dependencies": [
+      "calc_formulae_014_definition_inverse_trig_functions",
+      "calc_formulae_014b_claim_arcsin_bijection"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_014d_definition_arctan",
+    "kind": "definition",
+    "sha256": "d7d6ac6e18ecfbb96c7bc7ebe9b89c874e6004df8b114a08b95b9c4568d140a2",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_014_definition_inverse_trig_functions",
+      "calc_formulae_014c_claim_arctan_argument_in_unit_interval",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_014e_definition_cos",
+    "kind": "definition",
+    "sha256": "cf32ed2ef717d12941d16958599fccde9b93fe4dc82a7a97b5e4188e35960205",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_014c_definition_sin",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_015_claim_cos_arctan_sin_arctan",
+    "kind": "claim",
+    "sha256": "d0e4541754801f6a861911aca135cd1a6d91df5f45cad07fefc2acdbb68b9306",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_014c_claim_arctan_argument_in_unit_interval",
+      "calc_formulae_014c_definition_sin",
+      "calc_formulae_014d_definition_arctan",
+      "calc_formulae_014e_definition_cos",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_019_definition_polar_equivalence_class",
+    "kind": "definition",
+    "sha256": "db5e61c9e6e2f4aef9faa5b5154b7f7e4651951f655d44193a92caf541c654a6",
+    "dependencies": [
+      "calc_formulae_016_definition_angle_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_022_definition_operations_on_polar_representation",
+    "kind": "definition",
+    "sha256": "8efabc0086375dc9fe3f922cbdf1bce1a60adc3c194feb3b7c6668e5cfca94ba",
+    "dependencies": [
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of inverseTrigonometricSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`逆正弦から定める正弦・余弦と逆正接の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("calculation_formulae_022_definition_operations_on_polar_representation").dependencyPlacement!.chapterOrder
+  !== inverseTrigonometricSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("逆正弦から定める正弦・余弦と逆正接の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "逆正弦から定める正弦・余弦と逆正接",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "calc_formulae_014_definition_inverse_trig_functions",
+    "calc_formulae_014b_claim_arcsin_bijection",
+    "calc_formulae_014c_claim_arctan_argument_in_unit_interval",
+    "calc_formulae_014c_definition_sin",
+    "calc_formulae_014d_definition_arctan",
+    "calc_formulae_014e_definition_cos",
+    "calc_formulae_015_claim_cos_arctan_sin_arctan"
+  ],
+  "input": [
+    "実数対としての複素数、集合記号、単位円と円弧長",
+    "非負実数の平方根"
+  ],
+  "output": [
+    "逆正弦の定義と全単射性",
+    "逆正弦の逆関数としての正弦と、非負平方根で定める余弦（いずれも角度区間を限定）",
+    "引数の範囲を確認して定める逆正接",
+    "逆正接の正弦と余弦を実数の平方根で表す二つの公式"
+  ],
+  "mainTheorem": "逆正接の正弦・余弦の明示公式",
+  "mainTheoremEntryId": "calc_formulae_015_claim_cos_arctan_sin_arctan",
+  "boundaryEvidence": "円弧長から逆正弦を定め、その全単射性から正弦、正弦から余弦を得る。一方、平方根から引数の範囲を確認して逆正接を定める。この二枝を末尾の正弦・余弦の公式で合流させ、七項の節を閉じる。直後の極座標演算は七項を使わず、極座標の同値類を追加して半径の積と角度の和を定める。プログラミングによる検証では全対象と前後比較に使う入力の本文・直接依存・種別・粒度、連続性、内部依存、唯一の節末出力と直後の相対順を固定する。",
+  "readabilityStatus": "LLMによる検証では定義域を制限した各関数と二枝の合流を本文から確認した。逆正弦の性質は外部命題への一段の参照に留まり、円弧長にも外部命題の条件と内容の本文内説明が不足する。末尾公式は二主張を一項に束ね、各適用行のラベルと平方根の商の根拠も不足するため本文完成ではない。今回、引数範囲の主張と、直後の極座標演算が使う同値類への欠落参照だけを補った。節の外部入力である集合記号・複素数、および後続比較だけで使う極座標同値類にも説明粒度の未解決が残る。",
+  "externalInputEntryIds": [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "calc_formulae_006_definition_of_cc",
+    "calc_formulae_011_definition_unit_circle",
+    "calc_formulae_012_definition_arc_length",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "非零実数対の単位円への正規化",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
@@ -4737,7 +5051,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "単位円と円弧",
   chapter: "数学的道具立て",
-  status: "構造確定・本文粒度確認済み",
+  status: "構造確定・本文粒度未解決",
   entryIds: [unitCircleEntry.id, arcLengthEntry.id],
   input: [
     "複素数の定義",
@@ -4758,7 +5072,7 @@ const isingModelSectionBoundaries = [{
     "円弧の定義",
   ],
   boundaryEvidence: "章内依存順10は複素数の定義だけを入力に単位円を定め、順11はその単位円だけを入力に円弧を定める。二項は前提から帰結への一方向の鎖をなす。順12から始まる角度表現の枝は、記号の規約だけを入力に取り、単位円にも円弧にも依存しない別の出発点なので、順11の後で節を閉じる。生成時に二項の依存順、種別、直接依存、および順12がこの二項に依存しないことを固定検査する。",
-  readabilityStatus: "二項とも定義で、複素数の絶対値と単位円上の点という具体的な対象だけを使う。抽象語彙の自動検査にも引っかかっていない。この節では本文を変更していない。",
+  readabilityStatus: "LLMによる検証で円弧長を指定する外部命題の条件と内容の本文内説明が未整備と判明したため、本文完成とは扱わない。単位円は実数成分の平方和で定めるが、円弧長は外部命題への参照に留まる。この節では本文を変更していない。",
 }, {
   name: "角度表現と、その代表元の取り方",
   chapter: "数学的道具立て",

@@ -293,6 +293,7 @@ s
     title: { tex: "\\cos(\\arctan(x)),\\ \\sin(\\arctan(x))" },
     labels: ["cos_arctan_sin_arctan"],
     statement: [
+      paragraph([ref("arctan_argument_in_unit_interval"), " の引数の範囲を用いる。"]),
       paragraph([ref("def_arctan"), "、", ref("def_sin"), "、", ref("def_cos"), "、", ref("definition_of_sqrt_r_positive"), " の定義を用いる。"]),
       paragraph([
         math("x\\in\\mathbb{R}"),
