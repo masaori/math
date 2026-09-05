@@ -41,7 +41,7 @@ class TickModels(unittest.TestCase):
                         "import json, os, sys\n"
                         "from pathlib import Path\n"
                         "with Path(os.environ['CAPTURE']).open('a') as out:\n"
-                        "    out.write(json.dumps({'argv': sys.argv[1:], 'home': os.environ['CODEX_HOME'], "
+                        "    out.write(json.dumps({'argv': sys.argv[1:], 'home': os.environ['CODEX_HOME'], 'threads': os.environ.get('LEAN_NUM_THREADS'), "
                         "'prompt': sys.stdin.read()}) + '\\n')\n"
                         "raise SystemExit(int(os.environ['TEST_EXIT']))\n"
                     )
@@ -60,6 +60,8 @@ class TickModels(unittest.TestCase):
                     calls = [json.loads(line) for line in (work / "calls.jsonl").read_text().splitlines()]
                     self.assertEqual(len(calls), 1, "失敗後も別の呼び出しをしてはならない")
                     self.assertEqual(calls[0]["home"], env["CODEX_HOME"])
+                    if tick == "scripts/research-supervision/supervisor-tick.sh":
+                        self.assertEqual(calls[0]["threads"], "1")
                     self.assertEqual(calls[0]["prompt"], env["PROMPT"])
                     self.assertEqual(calls[0]["argv"], [
                         "-k", "60", "17", "codex", "exec", "-m", "gpt-6-astra",

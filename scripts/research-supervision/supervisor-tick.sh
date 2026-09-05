@@ -65,6 +65,8 @@ READMEから次の具体的対象を根拠つきで導き、上位ゴール設�
 前回の未コミット・未push成果を保持し、最新remote defaultの変更を取り込んでから修正する。
 内容はLLMによる検証と明記し、実行値・受理規則のプログラミングによる検証とは区別する。
 node scripts/research-supervision/verify.ts --all と node scripts/research-supervision/verify-supervision-log-test.ts を通す。
+監督記録だけの変更で、変更していない数学本文のLean・SageMath全体検査を繰り返さない。
+段取りを修正した場合はその変更に対応する既存のプログラミングによる検証を通す。
 各研究MEMORYと docs/ゴール台帳.md の既存「全研究の実行状態と研究上の前進を区別し、監督を全研究へ広げる」を更新する。
 新規ゴール、アーティファクト、Slack通知は作らない。launchctl bootstrap/bootout/kickstartとLaunchAgentsの編集は禁止。実行途中のアカウント・モデル切替は禁止。
 commitしてremote defaultへSSH Gitで反映し、fetch後の包含を確認する。初回は実装担当がPR経由で統合する。
@@ -76,7 +78,7 @@ PROMPT="${PROMPT//@BASE@/$BASE_COMMIT}"
 log "=== 六研究監督開始 run=$RUN_ID base=$BASE_COMMIT"
 log "モデル起動: codex / gpt-6-astra / reasoning medium / CODEX_HOME=$CODEX_TICK_HOME"
 set +e
-printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" \
+printf '%s' "$PROMPT" | CODEX_HOME="$CODEX_TICK_HOME" LEAN_NUM_THREADS=1 \
   timeout -k 60 "$TICK_TIMEOUT_SECONDS" codex exec \
   -m gpt-6-astra -c model_reasoning_effort=medium \
   --dangerously-bypass-approvals-and-sandbox - >> "$LOG_FILE" 2>&1
