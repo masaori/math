@@ -28356,10 +28356,9 @@ n
                   ],
                   proof: [
                     paragraph([
-                      math(String.raw`z\in\mu_L`), " ごとに",
+                      math(String.raw`z\in\mu_L`), " ごとに次の列ベクトルを定める。",
                     ]),
                     displayMath(String.raw`u_z:=\frac{1}{L}\odot P_{A,z}(v)`),
-                    paragraph(["と置く。このとき"]),
                     displayMath(String.raw`\begin{aligned}
 P_{A,z}(v)&\in E_A(z)
 &&(\because\ \blkref{claim_qbar_projector_image_eigenspace},\ A^L=I_L^{\overline{\mathbb{Q}}},\ z^L=1)\\
@@ -28368,9 +28367,6 @@ u_z&=\frac{1}{L}\odot P_{A,z}(v)
 &\in E_A(z)
 &&(\because\ \blkref{claim_qbar_eigenspace_smul})
 \end{aligned}`),
-                    paragraph([
-                      "また、", ref("claim_qbar_projector_reconstruction"), " により",
-                    ]),
                     displayMath(String.raw`\begin{aligned}
 \bigoplus_{z\in\mu_L}u_z
 &=\bigoplus_{z\in\mu_L}\frac{1}{L}\odot P_{A,z}(v)
@@ -28378,6 +28374,7 @@ u_z&=\frac{1}{L}\odot P_{A,z}(v)
 &=v
 &&(\because\ \blkref{claim_qbar_projector_reconstruction})
 \end{aligned}`),
+                    paragraph([ref("claim_qbar_projector_reconstruction")]),
                     paragraph([
                       "したがって求める族は存在する。この段は代数的数を成分とする有限個の列ベクトルの",
                       "スカラー倍と有限和だけで閉じ、実数体も複素数体も現れない。",
