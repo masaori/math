@@ -26502,11 +26502,10 @@ w^{\,k}\cdot w
                       ],
                       proof: [
                         paragraph(["背理法で示す。", math(String.raw`\sum_{i:\ i<n}1=0`), " と仮定する。"]),
-                        paragraph([ref("claim_qbar_unit_sum_eq_rational"), " より、"]),
                         displayMath(String.raw`\begin{aligned}
 n
 &=\sum_{i:\ i<n}1
-&&(\because\ \text{単位元の有限和は自然数の与える有理数に等しい})\\
+&&(\because\ \blkref{claim_qbar_unit_sum_eq_rational})\\
 &=0
 &&(\because\ \text{仮定})
 \end{aligned}`),
