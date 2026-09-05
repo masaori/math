@@ -471,7 +471,7 @@ v_0=v,\qquad v_r=w,\qquad
     title: { text: "向き付けられた閉曲面セル分割を判定する有限述語" },
     labels: ["def_oriented_closed_surface_cellulation"],
     habitat: "finite",
-    verification: ["sagemath/check/oriented-closed-surface-cellulation"],
+    verification: ["sagemath/check/oriented-closed-surface-cellulation", "sagemath/check/fixed-f7-matrix-cellulation"],
     statement: [
       paragraph([
         ref("def_finite_cellulation_face_boundary_word"),
