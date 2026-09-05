@@ -844,7 +844,7 @@ const v1PlusMinusAndCommutationExpectedExternalInputContentSha256 = new Map<stri
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "de25a7cfd8a1fd81d0d86ca48b4d3a85550853b4857925dd6768c842c31cdeb0"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["linear_space_general_002_claim_scalar_identity_commutes", "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f"],
-  ["linear_space_general_003b_claim_matrix_multiplication_continuity", "46baea960668f4e457bafd8af2cd6bd763c2b8f565b60b9cca6db63f384d1ca3"],
+  ["linear_space_general_003b_claim_matrix_multiplication_continuity", "4997ade583c124391b81653b81abdc322ad7d13b46e84827b6e5814fc31a86f3"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
   ["transfer_matrix_006_claim_V1_restriction_to_eigenspaces", "04537e46af040d8bc078042cdfe8f5e0592a48e3632c90e8a94ce038db90f8e6"],
@@ -1688,6 +1688,9 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["linear_space_general_003b_claim_matrix_multiplication_continuity", "LLMによる検証: 行列列の所属とノルム・行列積・劣乗法性の参照を補った。主張は右因子を固定した乗算の連続性に限る。分配則を成分計算へ接続する根拠、非負性と実数列の定数倍・挟み撃ちの極限法則、各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。"],
+  ["linear_space_general_003c_claim_matrix_norm_vector_bound", "LLMによる検証: 行列積・ノルム基本性質の零の絶対値・劣乗法性への欠落参照を補った。数ベクトルを第一列に置いた行列のノルムと数ベクトルのノルムを対応させる計算は存在する。行列と数ベクトルの積への定義適用、零の列を有限和から除く計算、各行参照が未解決である。n=1の第二列以降が空の範囲を保持し、前提補完と分割後に依存と閉包を再判定する。"],
+
   ["linear_space_general_003_claim_matrix_norm_submultiplicativity", "LLMによる検証: 行列積と非負平方根の参照を補った。三角不等式と有限列のCauchy–Schwarzを使う成分評価から平方和の評価へ進む。実行列の成分積と複素行列として定めた積の接続、有限和の分解・添字変更・平方根の性質の同時適用と各行参照が未解決である。有限和の三角不等式の帰納法は現存し、前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_002c_claim_matrix_norm_triangle_inequality", "LLMによる検証: 四主張と非負平方の比較・包含写像の和と積の計算・有限列のCauchy--Schwarzの補題が同居する。有限和の零の議論、実数列の極限法則、数ベクトルの同様計算、二箇所同時適用・複数法則の同時適用と各行参照が未解決である。極限一意性の証明、包含写像の和と積の計算、Cauchy--Schwarzの零の場合の分岐は存在し、欠落とは扱わない。前提補完と分割後に依存と閉包を再判定する。"],
   ["exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix", "LLMによる検証: 行列積の欠落参照を補った。内積定義から使うのは行列空間の表記だけであり、内積の値や性質は使わない。交換子写像・反復の再帰・正則性・共役写像の定義と逆行列一意性の証明が同居する。行列の和・差・単位行列、積の結合律と単位元の法則を具体的成分計算へ接続する根拠、各行参照が未解決であり、前提補完と分割後に依存と閉包を再判定する。"],
@@ -10656,7 +10659,224 @@ if (findToolEntry("linear_space_general_003_claim_matrix_norm_submultiplicativit
   !== normInnerStarSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("ノルムと内積の性質および共役転置の直後の項目が変わりました");
 }
+const productNormContinuitySectionEntryIds = [
+  "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+  "linear_space_general_003b_claim_matrix_multiplication_continuity"
+];
+const productNormContinuitySection = validateReviewedSection(
+  "行列積のノルム評価と右からの乗算の連続性", "数学的道具立て", productNormContinuitySectionEntryIds,
+  new Map([
+  [
+    "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+    []
+  ],
+  [
+    "linear_space_general_003b_claim_matrix_multiplication_continuity",
+    [
+      "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+    ]
+  ]
+]),
+  new Map([
+  [
+    "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+    "b120c7834055676e534d67e01428c170782fb7db99651f9955bd5e2a6b16cde3"
+  ],
+  [
+    "linear_space_general_003b_claim_matrix_multiplication_continuity",
+    "4997ade583c124391b81653b81abdc322ad7d13b46e84827b6e5814fc31a86f3"
+  ]
+]),
+  [
+  "calc_formulae_001_sqrt_nonnegative_real",
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_002b_definition_matrix_norm",
+  "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+],
+  new Map([
+  [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d"
+  ],
+  [
+    "calc_formulae_003_matrix_decomposition",
+    "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ],
+  [
+    "linear_space_general_002b_definition_matrix_norm",
+    "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab"
+  ],
+  [
+    "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069"
+  ]
+]),
+  [
+  "linear_space_general_003b_claim_matrix_multiplication_continuity"
+],
+);
+const productNormContinuitySectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002b_definition_matrix_norm",
+    "kind": "definition",
+    "sha256": "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "kind": "claim",
+    "sha256": "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+    "kind": "claim",
+    "sha256": "b120c7834055676e534d67e01428c170782fb7db99651f9955bd5e2a6b16cde3",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_003b_claim_matrix_multiplication_continuity",
+    "kind": "claim",
+    "sha256": "4997ade583c124391b81653b81abdc322ad7d13b46e84827b6e5814fc31a86f3",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_003c_claim_matrix_norm_vector_bound",
+    "kind": "claim",
+    "sha256": "b8f654d8b634f423754816c6e90589c9dd709246dbe7d95f71382d041b05b11f",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of productNormContinuitySectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`行列積のノルム評価と右からの乗算の連続性の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("linear_space_general_003c_claim_matrix_norm_vector_bound").dependencyPlacement!.chapterOrder
+  !== productNormContinuitySection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("行列積のノルム評価と右からの乗算の連続性の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "行列積のノルム評価と右からの乗算の連続性",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+    "linear_space_general_003b_claim_matrix_multiplication_continuity"
+  ],
+  "input": [
+    "成分で定めた行列積とノルム、非負実数の平方根",
+    "ノルムの基本性質にある絶対値・有限列の不等式、実数列の極限法則の前提",
+    "複素数と集合記号、成分演算と実行列の積への接続"
+  ],
+  "output": [
+    "積のノルムは二因子のノルムの積以下であること",
+    "収束する行列列に右から固定した行列を掛けた列も対応する積へ収束すること"
+  ],
+  "mainTheorem": "右から固定した行列を掛ける操作の連続性",
+  "mainTheoremEntryId": "linear_space_general_003b_claim_matrix_multiplication_continuity",
+  "boundaryEvidence": "行列積の各成分を有限列の不等式で評価した前項の劣乗法性を、末尾が行列列の差へ適用して収束を示す二項の依存鎖で閉じる。直後の数ベクトルの評価は劣乗法性を共有するが末尾の連続性は使わず、数ベクトルを第一列に置いた行列を作り、行列のノルムと数ベクトルのノルムの一致へ入力が切り替わる別枝である。実数列の極限による収束から有限列の埋込みによる作用の評価への切替を根拠とし、プログラミングによる検証で対象・比較と全直接入力の本文・種別・粒度・依存・相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で対象二項・全直接入力と比較する数ベクトルの評価の全本文を読んだ。実行列と複素行列の積の接続、有限和と平方根の同時適用、各行参照が未解決である。連続性は固定した右因子だけについての主張であり、分配則の根拠、非負性と実数列の定数倍・挟み撃ちの極限法則の前提を明示する必要がある。比較側は行列と数ベクトルの積への適用、有限和から零の列を除く計算と各行参照が未解決である。n=1の空の列範囲を保持し、前提補完と分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "linear_space_general_002b_definition_matrix_norm",
+    "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+  ]
+}, {
   "name": "ノルムと内積の性質および共役転置",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

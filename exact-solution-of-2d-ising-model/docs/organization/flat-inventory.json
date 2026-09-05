@@ -218,6 +218,36 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "行列積のノルム評価と右からの乗算の連続性",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+        "linear_space_general_003b_claim_matrix_multiplication_continuity"
+      ],
+      "input": [
+        "成分で定めた行列積とノルム、非負実数の平方根",
+        "ノルムの基本性質にある絶対値・有限列の不等式、実数列の極限法則の前提",
+        "複素数と集合記号、成分演算と実行列の積への接続"
+      ],
+      "output": [
+        "積のノルムは二因子のノルムの積以下であること",
+        "収束する行列列に右から固定した行列を掛けた列も対応する積へ収束すること"
+      ],
+      "mainTheorem": "右から固定した行列を掛ける操作の連続性",
+      "mainTheoremEntryId": "linear_space_general_003b_claim_matrix_multiplication_continuity",
+      "boundaryEvidence": "行列積の各成分を有限列の不等式で評価した前項の劣乗法性を、末尾が行列列の差へ適用して収束を示す二項の依存鎖で閉じる。直後の数ベクトルの評価は劣乗法性を共有するが末尾の連続性は使わず、数ベクトルを第一列に置いた行列を作り、行列のノルムと数ベクトルのノルムの一致へ入力が切り替わる別枝である。実数列の極限による収束から有限列の埋込みによる作用の評価への切替を根拠とし、プログラミングによる検証で対象・比較と全直接入力の本文・種別・粒度・依存・相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で対象二項・全直接入力と比較する数ベクトルの評価の全本文を読んだ。実行列と複素行列の積の接続、有限和と平方根の同時適用、各行参照が未解決である。連続性は固定した右因子だけについての主張であり、分配則の根拠、非負性と実数列の定数倍・挟み撃ちの極限法則の前提を明示する必要がある。比較側は行列と数ベクトルの積への適用、有限和から零の列を除く計算と各行参照が未解決である。n=1の空の列範囲を保持し、前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_002b_definition_matrix_norm",
+        "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+      ]
+    },
+    {
       "name": "ノルムと内積の性質および共役転置",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -7687,7 +7717,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 15,
+        "incomingReferenceCount": 17,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11532,7 +11562,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 16,
+        "incomingReferenceCount": 17,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11601,7 +11631,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11670,7 +11700,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11750,25 +11780,31 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 3971,
-        "inspectedContentSha256": "121c8f783c7fdb60e0308f1fd6ff7d90413589eab598a9d6594d256a5fe33264",
+        "inspectedCharacterCount": 4308,
+        "inspectedContentSha256": "b8f654d8b634f423754816c6e90589c9dd709246dbe7d95f71382d041b05b11f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積・ノルム基本性質の零の絶対値・劣乗法性への欠落参照を補った。数ベクトルを第一列に置いた行列のノルムと数ベクトルのノルムを対応させる計算は存在する。行列と数ベクトルの積への定義適用、零の列を有限和から除く計算、各行参照が未解決である。n=1の第二列以降が空の範囲を保持し、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "def_matrix_norm",
         "definition_of_cc",
+        "mat_mult",
+        "matrix_norm_submultiplicativity",
+        "matrix_norm_triangle_inequality",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
-        "linear_space_general_002b_definition_matrix_norm"
+        "linear_space_general_002b_definition_matrix_norm",
+        "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+        "linear_space_general_003_claim_matrix_norm_submultiplicativity"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
@@ -11882,23 +11918,29 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 868,
-        "inspectedContentSha256": "46baea960668f4e457bafd8af2cd6bd763c2b8f565b60b9cca6db63f384d1ca3",
+        "inspectedCharacterCount": 1273,
+        "inspectedContentSha256": "4997ade583c124391b81653b81abdc322ad7d13b46e84827b6e5814fc31a86f3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列列の所属とノルム・行列積・劣乗法性の参照を補った。主張は右因子を固定した乗算の連続性に限る。分配則を成分計算へ接続する根拠、非負性と実数列の定数倍・挟み撃ちの極限法則、各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "def_matrix_norm",
         "definition_of_cc",
+        "mat_mult",
+        "matrix_norm_submultiplicativity",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation"
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_002b_definition_matrix_norm",
+        "linear_space_general_003_claim_matrix_norm_submultiplicativity"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",

@@ -2034,6 +2034,7 @@ R^2
     title: { text: "行列ノルムによる数ベクトルの評価" },
     labels: ["matrix_norm_vector_bound"],
     statement: [
+      paragraph(["行列と数ベクトルの積は ", ref("mat_mult"), "、零成分の絶対値は ", ref("matrix_norm_triangle_inequality"), " の証明冒頭、積のノルムの評価は ", ref("matrix_norm_submultiplicativity"), " による。"]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " または ",
@@ -2477,6 +2478,7 @@ z_N-z_M&=(x_N-x_M,\ y_N-y_M)
     title: { text: "行列乗算の連続性" },
     labels: ["matrix_multiplication_continuity"],
     statement: [
+      paragraph(["ノルムと収束は ", ref("def_matrix_norm"), "、行列積は ", ref("mat_mult"), "、積のノルムの評価は ", ref("matrix_norm_submultiplicativity"), " による。", math(String.raw`(A_N)_{N\in\mathbb Z_{\ge0}}`), " は以下の行列空間の列とする。"]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " または ",
