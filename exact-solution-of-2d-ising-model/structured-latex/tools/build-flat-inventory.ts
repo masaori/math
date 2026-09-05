@@ -146,13 +146,16 @@ const invertibleMatrixConjugationExpectedInternalDependencies = new Map<string, 
   ]],
 ]);
 const invertibleMatrixConjugationExpectedContentSha256 = new Map<string, string>([
-  ["TV1_hatZ_hatY_009_definition_invertible_elements", "31432b10d571100575fc2bddf157032908bf0996d21d3f77860b0dc613fd7533"],
+  ["TV1_hatZ_hatY_009_definition_invertible_elements", "7d1acdf9f432ea90f31c583e72d93a8c1c5effc6d5dc9fb80bf1ae0b3c83357c"],
   ["TV1_hatZ_hatY_011_definition_T_g", "5f2b17e53697b3403829f55a1b07c6c85da5db2f0683d5e0d821ac74ac5baeb4"],
   ["TV1_hatZ_hatY_011a_claim_center_of_invertible_matrices_is_scalar", "36a619c070399daf4e9acddd4cc7c0b7c1b285ba09e5abd36ecc9f4d23bcafaa"],
   ["TV1_hatZ_hatY_011a_claim_injectivity_of_T", "a0b055ecb95c4f3911dae071db35335e8b9bfe2e730b34bb520330174ff9d29b"],
 ]);
 const invertibleMatrixConjugationExpectedExternalInputEntryIds = [
+  "calc_formulae_003_matrix_decomposition",
   "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field",
+  "calculation_formulae_definition_set_and_algebra_notation",
   "linear_space_general_000b_claim_kronecker_product_rule",
   "linear_space_general_000c_claim_kronecker_multilinear",
   "linear_space_general_001_theorem_tensor_product_basis",
@@ -160,7 +163,10 @@ const invertibleMatrixConjugationExpectedExternalInputEntryIds = [
   "linear_space_general_004_lemma_centralizer_is_scalar",
 ].sort();
 const invertibleMatrixConjugationExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["calc_formulae_003_matrix_decomposition", "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["calculation_formulae_025_claim_complex_numbers_form_a_field", "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6"],
+  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5"],
   ["linear_space_general_001_theorem_tensor_product_basis", "0b14d498919e0e510b2e50b975d3379db4e963cb1dc5583d6bb429c782a7fd31"],
@@ -200,7 +206,7 @@ const pauliAndCliffordMatrixGroupsExpectedExternalInputContentSha256 = new Map<s
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "8a73f81902220cd224baa17d4506c7af2e9e7597bda2e6918da88a3b3c1d23c5"],
-  ["TV1_hatZ_hatY_009_definition_invertible_elements", "31432b10d571100575fc2bddf157032908bf0996d21d3f77860b0dc613fd7533"],
+  ["TV1_hatZ_hatY_009_definition_invertible_elements", "7d1acdf9f432ea90f31c583e72d93a8c1c5effc6d5dc9fb80bf1ae0b3c83357c"],
 ]);
 const singleFactorAnticommutationSectionEntryIds = [
   "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
@@ -1694,6 +1700,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["TV1_hatZ_hatY_004_claim_sinh_cosh_taylor", "LLMによる検証: x の実数所属と双曲線正弦・余弦の定義への参照を補ったが、二つの級数等式には証明が全くない。添字 n の所属集合が明示されず、階乗と無限和の定義も入力に無いため、主張自体の定義可能性も未完である。実指数関数の級数表示と全実数での収束、正負の引数の級数を偶数次・奇数次へ分ける有限部分和と極限の議論、和と差を2で割る計算、二等式の主張分割と各行参照が未完である。対象にラベルがなく参照数も零だが、後続のテイラー係数抽出はこの展開を四回適用しても依存未接続であり、転送行列の橋渡しは展開を別の双曲線関数の主張へ誤帰属し、偶セクターの作用はラベル欠落のため式を再掲したと記録している。零の引数を含め、ラベル・下流依存・必要な定義と証明を補った後に依存と閉包を再判定する。"],
+  ["TV1_hatZ_hatY_009_definition_invertible_elements", "LLMによる検証: M>=1 の所属と、行列積・複素係数の演算への参照を補った。可逆元・逆元・可逆元全体の定義、逆元一意性と四つの性質が同居する。行列積の結合律と単位元の具体的根拠、複素数の逆元の適用、有限行列の二箇所への同時代入、各行参照と主張分割が未解決である。逆元一意性の五段の計算と積の両側逆元、M>=1 を保持し、前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_004_lemma_centralizer_is_scalar", "LLMによる検証: 行列積と複素係数の演算への参照を補った。行列単位の定義と積公式・単位行列の展開を経て、可換性から係数を比較する。生成族の元数と次元から基底を結論する前提は既存の基底入力でも未証明であり、本項の2次の場合にも適用根拠が必要である。多重添字の有限和への分配・各因子への反復適用、二箇所の同時代入と係数比較の各行参照の分割が未解決である。M=1を保持し、前提補完と分割後に依存と閉包を再判定する。"],
   ["maxeig_005_claim_psd_cauchy_schwarz", "LLMによる検証: 行列積と実数包含への参照を補った。一般のn次とn×1の数ベクトルの通常転置の定義および演算法則は未提示であり、既存の2の冪次の転置だけでは適用範囲を満たさない。実行列の演算を複素成分の式へ接続する根拠、二次式への展開での分配と転置の同時適用、対称性から交叉項が等しいことの成分計算、実数の四則演算の分割と各行参照が未解決である。a>0とa=0の双方の計算とb=0への背理法は実在し、半正定値性からa>=0を得て場合を尽くす説明を補い、前提補完と分割後に依存と閉包を再判定する。"],
   ["transfer_matrix_005_definition_end_isomorphism", "LLMによる検証: 数ベクトル空間・標準基底・行列単位・多重添字基底と、それらから基底上の値を指定して二つの線型写像を定める定義群が同居する。End(F) を F 上の C-線型自己写像全体として定める説明、基底上の値から線型写像を一意に拡張できる根拠、有限基底による展開と線型性への接続、定義群の分割と各行参照が未解決である。ここでの行列作用は通常の行列積を追加入力にせず、定義した end(A)(f) を意味する。前提補完と分割後に依存と閉包を再判定する。"],
@@ -13539,6 +13547,51 @@ if (findToolEntry("transfer_matrix_005_definition_end_isomorphism").dependencyPl
   !== positiveSemidefiniteCauchySchwarzSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("半正定値双線型形式の Cauchy–Schwarz の不等式の直後の項目が変わりました");
 }
+const hyperbolicTaylorSectionEntryIds = [
+  "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
+];
+const hyperbolicTaylorSection = validateReviewedSection(
+  "双曲線正弦と双曲線余弦のテイラー展開", "数学的道具立て", hyperbolicTaylorSectionEntryIds,
+  new Map([
+    ["TV1_hatZ_hatY_004_claim_sinh_cosh_taylor", []]
+  ]),
+  new Map([
+    ["TV1_hatZ_hatY_004_claim_sinh_cosh_taylor", "8b1ab9a8d4acb85eed0011e3669f7b07ac4ceaa59d1974e70da80b160a3d506f"]
+  ]),
+  [
+    "calc_formulae_definition_cosh_sinh",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ],
+  new Map([
+    ["calc_formulae_definition_cosh_sinh", "e884934c5a35ebb1daa4e665eb779f623f99cffba33fe779cf01ee52518a6d3a"],
+    ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"]
+  ]),
+  ["TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"],
+);
+const hyperbolicTaylorSectionBoundarySnapshot = [
+  {"id":"TV1_hatZ_hatY_004_claim_sinh_cosh_taylor","kind":"claim","sha256":"8b1ab9a8d4acb85eed0011e3669f7b07ac4ceaa59d1974e70da80b160a3d506f","dependencies":["calc_formulae_definition_cosh_sinh","calculation_formulae_definition_set_and_algebra_notation"],"granularity":"具体的な行列計算への展開またはブロック分割を要する"},
+  {"id":"TV1_hatZ_hatY_009_definition_invertible_elements","kind":"definition","sha256":"7d1acdf9f432ea90f31c583e72d93a8c1c5effc6d5dc9fb80bf1ae0b3c83357c","dependencies":["calc_formulae_003_matrix_decomposition","calc_formulae_006_definition_of_cc","calculation_formulae_025_claim_complex_numbers_form_a_field","calculation_formulae_definition_set_and_algebra_notation","linear_space_general_002_claim_scalar_identity_commutes"],"granularity":"具体的な行列計算への展開またはブロック分割を要する"},
+  {"id":"calc_formulae_003_matrix_decomposition","kind":"definition","sha256":"b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee","dependencies":["calc_formulae_006_definition_of_cc","calculation_formulae_definition_set_and_algebra_notation"],"granularity":"具体的な行列計算への展開またはブロック分割を要する"},
+  {"id":"calc_formulae_006_definition_of_cc","kind":"definition","sha256":"87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c","dependencies":["calculation_formulae_definition_set_and_algebra_notation"],"granularity":"具体的な行列計算への展開またはブロック分割を要する"},
+  {"id":"calc_formulae_definition_cosh_sinh","kind":"definition","sha256":"e884934c5a35ebb1daa4e665eb779f623f99cffba33fe779cf01ee52518a6d3a","dependencies":["calculation_formulae_definition_set_and_algebra_notation"],"granularity":"自動検査で主題に適合"},
+  {"id":"calculation_formulae_025_claim_complex_numbers_form_a_field","kind":"claim","sha256":"c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6","dependencies":["calc_formulae_006_definition_of_cc","calc_formulae_007_inclusion_rr_to_cc","calc_formulae_008_multiply_by_minus_one","calculation_formulae_024_claim_multiplicative_group_of_complex_numbers","calculation_formulae_definition_set_and_algebra_notation"],"granularity":"具体的な行列計算への展開またはブロック分割を要する"},
+  {"id":"calculation_formulae_definition_set_and_algebra_notation","kind":"definition","sha256":"ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b","dependencies":[],"granularity":"具体的な行列計算への展開またはブロック分割を要する"},
+  {"id":"linear_space_general_002_claim_scalar_identity_commutes","kind":"claim","sha256":"2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f","dependencies":["calc_formulae_003_matrix_decomposition","calc_formulae_006_definition_of_cc","calculation_formulae_025_claim_complex_numbers_form_a_field","calculation_formulae_047_claim_commutator_via_anticommutators","calculation_formulae_definition_set_and_algebra_notation"],"granularity":"具体的な行列計算への展開またはブロック分割を要する"}
+];
+for (const expected of hyperbolicTaylorSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`双曲線正弦と双曲線余弦のテイラー展開の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("TV1_hatZ_hatY_009_definition_invertible_elements").dependencyPlacement!.chapterOrder
+  !== hyperbolicTaylorSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("双曲線正弦と双曲線余弦のテイラー展開の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
   "name": "全行列と可換な行列のスカラー表示",
   "chapter": "数学的道具立て",
@@ -13588,6 +13641,28 @@ const mathematicalToolSectionBoundaries = [{
   "externalInputEntryIds": [
     "calc_formulae_003_matrix_decomposition",
     "calc_formulae_007_inclusion_rr_to_cc",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
+  "name": "双曲線正弦と双曲線余弦のテイラー展開",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
+  ],
+  "input": [
+    "実数上の双曲線正弦・双曲線余弦の定義",
+    "実数と自然数の集合記号"
+  ],
+  "output": [
+    "実数 x に対する双曲線正弦の奇数次級数表示と双曲線余弦の偶数次級数表示"
+  ],
+  "mainTheorem": "双曲線正弦と双曲線余弦のテイラー展開",
+  "mainTheoremEntryId": "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor",
+  "boundaryEvidence": "実数上の双曲線正弦・双曲線余弦の定義を受け、奇数次と偶数次の二つの級数表示を述べる一項で閉じる。直後の可逆行列の定義は本項も双曲線関数も使わず、M>=1 の 2^M 次複素行列の積・単位元・逆元へ入力が切り替わる。実関数の無限級数から有限複素行列の可逆性への入力切替として、対象・比較と全直接入力の本文・全依存・種別・粒度・相対順をプログラミングによる検証で固定する。",
+  "readabilityStatus": "LLMによる検証で対象と全直接入力、直後の可逆行列の定義の全本文を読んだ。対象は x の実数所属と双曲線関数の定義への参照を補ったが、添字 n の所属集合、階乗と無限和の定義が無く、主張自体の定義可能性が未完である。実指数関数の級数表示と収束、正負の引数の級数を偶数次・奇数次へ分ける極限の議論、和と差を2で割る計算を含む証明も全くない。対象はラベルと参照が無い一方、後続のテイラー係数抽出が展開を四回適用して依存未接続であり、転送行列の橋渡しは別の主張へ誤帰属し、偶セクターの作用は式を再掲しているため、ラベルと下流依存の補完後にも閉包を再判定する。比較側は M>=1 と行列積・複素係数の演算への参照を補ったが、可逆元等の定義と逆元一意性・四性質の分割、行列演算法則の具体的根拠、同時代入と各行参照が未解決である。零の引数、逆元一意性の五段と両側逆元の計算を保持し、定義・証明の補完と分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_definition_cosh_sinh",
     "calculation_formulae_definition_set_and_algebra_notation"
   ]
 }, {
@@ -15837,6 +15912,17 @@ const groupOf = (entry: typeof entries[number]): string => {
   if (matches.length !== 1) throw new Error(`数学的道具の分類規則一致数が1ではありません: ${entry.id}: ${matches.join(", ")}`);
   return matches[0]!;
 };
+const finalizedMathematicalToolSectionEntryIds = [
+  ...mathematicalToolSectionBoundaries,
+  ...isingModelSectionBoundaries,
+].filter(({ chapter }) => chapter === "数学的道具立て").flatMap(({ entryIds }) => entryIds);
+const expectedMathematicalToolEntryIds = toolEntries.map(({ id }) => id);
+if (expectedMathematicalToolEntryIds.length !== 109
+  || finalizedMathematicalToolSectionEntryIds.length !== expectedMathematicalToolEntryIds.length
+  || new Set(finalizedMathematicalToolSectionEntryIds).size !== expectedMathematicalToolEntryIds.length
+  || expectedMathematicalToolEntryIds.some((id) => !finalizedMathematicalToolSectionEntryIds.includes(id))) {
+  throw new Error("数学的道具立て109件の節配置が全項目を一意に被覆していません");
+}
 const groupDescriptions = new Map([
   ["集合記号と複素数の直交座標計算", { input: "既知の自然数・整数・実数の集合と実数の四則演算", output: "集合と演算付き構造の区別、複素数を実数対として計算する規則", reason: "冒頭から記号の所属と演算を曖昧にせず、行列成分の計算へ進むため。" }],
   ["実数の平方根・指数関数・双曲線関数", { input: "非負実数と実数の級数", output: "平方根、指数関数、cosh・sinhの計算公式", reason: "行列成分に現れる係数を初等的な実数計算へ戻すため。" }],

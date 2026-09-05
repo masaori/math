@@ -1636,6 +1636,12 @@ i\,(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
     title: { tex: String.raw`\sinh, \cosh \text{ のテイラー展開}` },
     labels: [],
     statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " とする。双曲線正弦と双曲線余弦は ",
+        ref("def_cosh_sinh"),
+        " の定義による。",
+      ]),
       displayMath(
         String.raw`\sinh x = \sum_{\substack{n \geq 1 \\ n \text{ 奇数}}} \frac{x^n}{n!}, \qquad
 \cosh x = \sum_{\substack{n \geq 0 \\ n \text{ 偶数}}} \frac{x^n}{n!}`,
@@ -1967,6 +1973,14 @@ i\cdot (2K_2^*)^{n}\cdot\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
     title: { tex: String.raw`\mathrm{Mat}(2^M,\mathbb{C}) \text{ の可逆元}` },
     labels: ["def_invertible_elements_of_R"],
     statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " とする。行列の積は ",
+        ref("mat_mult"),
+        "、複素係数の演算は ",
+        ref("complex_numbers_form_a_field"),
+        " による。",
+      ]),
       paragraph([
         math(String.raw`R := \mathrm{Mat}(2^M,\mathbb{C})`),
         " と書き、その単位元を ",
