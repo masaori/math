@@ -26557,11 +26557,10 @@ n
                       ],
                       proof: [
                         paragraph(["背理法で示す。", math(String.raw`\sum_{i:\ i<n}a=0`), " と仮定する。"]),
-                        paragraph([ref("claim_qbar_repeated_sum_factorization"), " より、"]),
                         displayMath(String.raw`\begin{aligned}
 \Bigl(\sum_{i:\ i<n}1\Bigr)\cdot a
 &=\sum_{i:\ i<n}a
-&&(\because\ \text{同じ元の有限和は、単位元の有限和との積である})\\
+&&(\because\ \blkref{claim_qbar_repeated_sum_factorization})\\
 &=0
 &&(\because\ \text{仮定})
 \end{aligned}`),
