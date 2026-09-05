@@ -107,9 +107,22 @@
 cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh --published
 ```
 
-30 分ごとの継続作業は
+毎時の継続作業（研究を一層進める）は
 [`docs/tasks/auto-loop-runbook.md`](docs/tasks/auto-loop-runbook.md) と
 [`docs/tasks/auto-loop-state.md`](docs/tasks/auto-loop-state.md) を正本として進める。
+
+その継続作業が**向いている方向そのもの**は、独立した監督が 6 時間ごとに評価する。
+上の三つの問いを忘れていないか、段取りが今も正しいか、証明済み事項から何が分かったか、
+段取りを変えるべきかを判定し、記録を残す。契約の正本は
+[`docs/tasks/supervision-runbook.md`](docs/tasks/supervision-runbook.md)、記録は
+[`docs/tasks/supervision-log.jsonl`](docs/tasks/supervision-log.jsonl)。
+**個々の tick の正しさは方向の正しさを含意しない**（実際に、成果整理の完了後に検査基盤の
+改善だけが八回続いた）ため、方向の評価は前進の駆動と同じループへ置かない。
+
+```sh
+node cellular-automata-statistical-mechanics/scripts/verify-supervision-log.ts
+bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh
+```
 
 ## 現段階での見取り図
 
