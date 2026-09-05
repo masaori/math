@@ -3630,6 +3630,56 @@ if (angleRepresentationEntries.some((entry, index) =>
     polarDependencies: polarEquivalenceEntry.dependsOnEntryIds,
   })}`);
 }
+const hyperbolicEntryIds = [
+  "calc_formulae_definition_cosh_sinh",
+  "calc_formulae_000_cosh_sinh_product",
+  "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+];
+const squareRootEntryIds = [
+  "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+  "calc_formulae_001_sqrt_nonnegative_real",
+  "calc_formulae_002_negative_number_to_sqrt",
+];
+const findToolEntry = (id: string) => {
+  const entry = entries.find((candidate) => candidate.id === id);
+  if (entry === undefined) throw new Error(`道具章の節に必要な項目がありません: ${id}`);
+  return entry;
+};
+const hyperbolicEntries = hyperbolicEntryIds.map(findToolEntry);
+const squareRootEntries = squareRootEntryIds.map(findToolEntry);
+const radialNormalizationEntry = findToolEntry("calc_formulae_012b_claim_radial_normalization_exists_unique");
+if (hyperbolicEntries.some((entry, index) =>
+  entry.provisionalFinalChapter !== "数学的道具立て"
+  || entry.dependencyPlacement!.chapterOrder !== 17 + index
+  || entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  // 掛け算の定理と基本性質は、どちらも定義だけを引き、互いに依存しない
+  || hyperbolicEntries[1]!.dependsOnEntryIds.includes(hyperbolicEntries[2]!.id)
+  || hyperbolicEntries[2]!.dependsOnEntryIds.includes(hyperbolicEntries[1]!.id)
+  || !hyperbolicEntries[1]!.dependsOnEntryIds.includes(hyperbolicEntries[0]!.id)
+  || !hyperbolicEntries[2]!.dependsOnEntryIds.includes(hyperbolicEntries[0]!.id)) {
+  throw new Error(`双曲線関数の節が変わりました: ${JSON.stringify({
+    orders: hyperbolicEntries.map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
+    dependencies: hyperbolicEntries.map((entry) => entry.dependsOnEntryIds),
+  })}`);
+}
+if (squareRootEntries.some((entry, index) =>
+  entry.provisionalFinalChapter !== "数学的道具立て"
+  || entry.dependencyPlacement!.chapterOrder !== 20 + index
+  || entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  // 存在と一意性 → 平方根の定義 → 負数への拡張、という一方向の鎖
+  || !squareRootEntries[1]!.dependsOnEntryIds.includes(squareRootEntries[0]!.id)
+  || !squareRootEntries[2]!.dependsOnEntryIds.includes(squareRootEntries[1]!.id)
+  || squareRootEntries[0]!.dependsOnEntryIds.includes(squareRootEntries[1]!.id)
+  // 存在と一意性は双曲線関数の基本性質を実際に使う
+  || !squareRootEntries[0]!.dependsOnEntryIds.includes(hyperbolicEntries[2]!.id)
+  || radialNormalizationEntry.dependencyPlacement!.chapterOrder !== 23
+  || !radialNormalizationEntry.dependsOnEntryIds.includes(squareRootEntries[1]!.id)) {
+  throw new Error(`非負実数の平方根の節が変わりました: ${JSON.stringify({
+    orders: squareRootEntries.map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
+    dependencies: squareRootEntries.map((entry) => entry.dependsOnEntryIds),
+    radialNormalizationOrder: radialNormalizationEntry.dependencyPlacement?.chapterOrder,
+  })}`);
+}
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || ![
@@ -4651,6 +4701,61 @@ const isingModelSectionBoundaries = [{
   ],
   boundaryEvidence: "章内依存順12は記号の規約だけを入力に同値関係を定め、順13は同じ入力で代表元を与える整数の存在と一意性を示し、順14はその主張を使って切断を定め、順15は同値関係と切断の両方を使って角度表現を定める。四項は一つのまとまりで、外へ出る出力は角度表現だけである。順16の極座標表現の同値類は記号の規約だけを入力に取り、この四項のいずれにも依存しない別の出発点なので、順15の後で節を閉じる。生成時に四項の依存順、説明粒度、角度表現が同値関係と切断の両方を引くこと、および順16がこの四項に依存しないことを固定検査する。",
   readabilityStatus: "角度表現の定義は、同値関係と切断を記号だけで使っていて、どのブロックの記号かが本文から追えなかった。それぞれの定義への参照を入れ、依存グラフにも現れるようにした。定義の内容は変えていない。",
+}, {
+  name: "双曲線余弦と双曲線正弦",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: hyperbolicEntryIds,
+  input: ["集合と代数構造の記号", "実数の指数関数"],
+  externalInputEntryIds: ["calculation_formulae_definition_set_and_algebra_notation"],
+  output: [
+    "指数関数の和と差で定めた双曲線余弦・双曲線正弦",
+    "積についての加法定理",
+    "正値性と大小関係などの基本性質",
+  ],
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/Part000",
+    sageMathFile: "sagemath/_shared/defs.sage",
+    currentStatus: "定義は指数関数の和と差そのもので、加法定理と基本性質は実数の四則と指数関数の正値性だけで示す。転送行列の成分計算で繰り返し使う。",
+  },
+  mainTheorems: [
+    "双曲線余弦と双曲線正弦の定義",
+    "双曲線関数の積の公式",
+    "双曲線関数の基本性質",
+  ],
+  boundaryEvidence: "章内依存順17は記号の規約だけを入力に二つの関数を定め、順18と順19はその定義だけを使う並行した出力である。順20の平方根の存在と一意性は、この節の基本性質を入力に取りつつ、平方根という新しい対象を導入する別の枝なので、順19の後で節を閉じる。生成時に三項の依存順、説明粒度、順18と順19が互いに依存せず定義だけを引くことを固定検査する。",
+  readabilityStatus: "三項とも実数の四則と指数関数だけで書かれ、抽象語彙の自動検査に引っかかっていない。基本性質の証明は 2026-09-03 に散文から含意の鎖へ整えられている。この節では本文を変更していない。",
+}, {
+  name: "非負実数の平方根と、負数への拡張",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: squareRootEntryIds,
+  input: [
+    "双曲線関数の基本性質",
+    "集合と代数構造の記号",
+  ],
+  externalInputEntryIds: [
+    "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+    "calculation_formulae_definition_set_and_algebra_notation",
+  ],
+  output: [
+    "非負実数に対して平方が一致する非負実数がただ一つ存在すること",
+    "平方根の記号",
+    "負の実数の平方根を虚数単位で書く規約",
+  ],
+  realEscape: "平方根の存在は実数の連続性に依存する。有理数の範囲では平方根が存在しない場合があり、ここが可算な数の範囲から出る箇所である。",
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/Part000",
+    sageMathFile: "sagemath/_shared/defs.sage",
+    currentStatus: "存在と一意性は双曲線関数の基本性質を経由して示す。形式化側では実数型の平方根が対応する。",
+  },
+  mainTheorems: [
+    "非負実数の平方根の存在と一意性",
+    "平方根の定義",
+    "負数の平方根",
+  ],
+  boundaryEvidence: "章内依存順20は双曲線関数の基本性質と記号の規約を入力に、非負実数の平方根の存在と一意性を示す。順21はその主張を使って記号を定め、順22はその記号を負の実数へ拡張する。三項は一方向の鎖をなす。順23の単位円への正規化は、平方根に加えて単位円を入力に取り、出力が複素数の幾何へ移るため、順22の後で節を閉じる。生成時に三項の依存順、鎖の向き、双曲線関数の基本性質を実際に使うこと、および順23が平方根を引くことを固定検査する。",
+  readabilityStatus: "三項とも実数の四則と大小関係だけで書かれている。平方根の存在は実数の連続性に依存するので、脱出理由として記録した。この節では本文を変更していない。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
