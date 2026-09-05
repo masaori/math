@@ -633,6 +633,10 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
       paragraph([
         math("\\mathbb{R}"),
         " の（角度表現）を、",
+        ref("angle_equivalence_class"),
+        " の同値関係 ",
+        math("\\sim_{\\mathrm{angle}}"),
+        " による商集合 ",
         math("\\mathbb{R}/\\sim_{\\mathrm{angle}}"),
         " に",
       ]),
@@ -646,12 +650,19 @@ x/\sqrt{1+x^2}^{(\mathbb{R}_{\ge 0})}
       displayMath(
         "(a,[\\theta]_{\\sim_{\\mathrm{angle}}})\\mapsto[a\\cdot s_{[0,2\\pi)}([\\theta]_{\\sim_{\\mathrm{angle}}})]_{\\sim_{\\mathrm{angle}}}",
       ),
-      paragraph(["を入れたものとして定める。"]),
+      paragraph([
+        "を入れたものとして定める。ここで ",
+        math("s_{[0,2\\pi)}"),
+        " は ",
+        ref("section_of_angle_representation"),
+        " の切断である。",
+      ]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "原文では最終行が pi/2, -pi/2 と同値類記号なしで書かれているため、そのまま保持した。",
+        "2026-09-05: 同値関係と切断を記号だけで使っていたので、それぞれの定義ブロックへの参照を入れた。定義の内容は変えていない。",
       ],
     },
   },

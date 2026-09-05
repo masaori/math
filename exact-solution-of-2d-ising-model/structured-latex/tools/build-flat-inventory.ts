@@ -3573,6 +3573,63 @@ if (complexNumberBasicDefinitionEntries.some((entry, index) =>
     unitCircleDependencies: unitCircleEntry.dependsOnEntryIds,
   })}`);
 }
+const arcLengthEntry = entries.find((entry) =>
+  entry.id === "calc_formulae_012_definition_arc_length")!;
+const angleEquivalenceEntry = entries.find((entry) =>
+  entry.id === "calc_formulae_016_definition_angle_equivalence_class")!;
+if (unitCircleEntry.kind !== "definition"
+  || arcLengthEntry.kind !== "definition"
+  || arcLengthEntry.dependencyPlacement!.chapterOrder !== 11
+  || angleEquivalenceEntry.dependencyPlacement!.chapterOrder !== 12
+  || JSON.stringify([...unitCircleEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify([complexNumberDefinitionEntry.id])
+  || JSON.stringify([...arcLengthEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify([unitCircleEntry.id])
+  || unitCircleEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || arcLengthEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  // 直後の角度表現の枝は、単位円にも円弧にも依存しない別の出発点である
+  || angleEquivalenceEntry.dependsOnEntryIds.includes(unitCircleEntry.id)
+  || angleEquivalenceEntry.dependsOnEntryIds.includes(arcLengthEntry.id)) {
+  throw new Error(`単位円と円弧の二項節が変わりました: ${JSON.stringify({
+    orders: [unitCircleEntry, arcLengthEntry, angleEquivalenceEntry]
+      .map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder, entry.kind]),
+    unitCircleDependencies: unitCircleEntry.dependsOnEntryIds,
+    arcLengthDependencies: arcLengthEntry.dependsOnEntryIds,
+    angleEquivalenceDependencies: angleEquivalenceEntry.dependsOnEntryIds,
+  })}`);
+}
+const angleRepresentationEntryIds = [
+  "calc_formulae_016_definition_angle_equivalence_class",
+  "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+  "calc_formulae_017_definition_section_of_angle_representation",
+  "calc_formulae_018_definition_angle_representation_of_rr",
+];
+const angleRepresentationEntries = angleRepresentationEntryIds.map((id) => {
+  const entry = entries.find((candidate) => candidate.id === id);
+  if (entry === undefined) throw new Error(`角度表現の節に必要な項目がありません: ${id}`);
+  return entry;
+});
+const angleRepresentationIdSet = new Set(angleRepresentationEntryIds);
+const polarEquivalenceEntry = entries.find((entry) =>
+  entry.id === "calc_formulae_019_definition_polar_equivalence_class")!;
+const angleRepresentationOfRealsEntry = angleRepresentationEntries[3]!;
+if (angleRepresentationEntries.some((entry, index) =>
+  entry.provisionalFinalChapter !== "数学的道具立て"
+  || entry.dependencyPlacement!.chapterOrder !== 12 + index
+  || entry.explanationGranularityReview.status !== "自動検査で主題に適合")
+  // 角度表現の定義は、同値関係と切断の両方を実際に前提として引く
+  || !angleRepresentationOfRealsEntry.dependsOnEntryIds.includes(angleRepresentationEntryIds[0]!)
+  || !angleRepresentationOfRealsEntry.dependsOnEntryIds.includes(angleRepresentationEntryIds[2]!)
+  || polarEquivalenceEntry.dependencyPlacement!.chapterOrder !== 16
+  || polarEquivalenceEntry.dependsOnEntryIds.some((id) => angleRepresentationIdSet.has(id))) {
+  throw new Error(`角度表現の節が変わりました: ${JSON.stringify({
+    orders: angleRepresentationEntries.map((entry) =>
+      [entry.id, entry.dependencyPlacement?.chapterOrder, entry.kind]),
+    angleRepresentationDependencies: angleRepresentationOfRealsEntry.dependsOnEntryIds,
+    polarOrder: polarEquivalenceEntry.dependencyPlacement?.chapterOrder,
+    polarDependencies: polarEquivalenceEntry.dependsOnEntryIds,
+  })}`);
+}
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || ![
@@ -4540,6 +4597,60 @@ const isingModelSectionBoundaries = [{
   ],
   boundaryEvidence: "章内依存順6から9は、いずれも複素数の定義と記号の規約だけを入力に取り、互いに依存しない四つの定義である。実数の対として定めた複素数に、実数の埋め込み、符号の反転、虚数単位、成分の取り出しという基本的な操作を与える一群にあたる。順10の単位円からは、複素数の絶対値と円弧という幾何の枝が始まり、以後の三角関数の定義へ続くため、順9の後で節を閉じる。生成時に四項の依存順、種別、相互非依存、および順10がこの四項に依存しないことを固定検査する。",
   readabilityStatus: "四項とも定義だけで、実数の対としての複素数から成分ごとに定めており、抽象語彙の自動検査にも引っかかっていない。この節では本文を変更していない。",
+}, {
+  name: "単位円と円弧",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [unitCircleEntry.id, arcLengthEntry.id],
+  input: [
+    "複素数の定義",
+  ],
+  externalInputEntryIds: ["calc_formulae_006_definition_of_cc"],
+  output: [
+    "絶対値が 1 の複素数の集合としての単位円",
+    "単位円上の二点が定める円弧",
+  ],
+  realEscape: "円弧の長さは実数の量として扱う。この節では長さそのものを構成せず、後の三角関数の定義で使う対象として置く。",
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/Part000",
+    sageMathFile: "sagemath/_shared/defs.sage",
+    currentStatus: "単位円と円弧は、後の角度・三角関数の定義のための舞台であり、形式化側では複素数型の絶対値と実数の区間が対応する。",
+  },
+  mainTheorems: [
+    "単位円の定義",
+    "円弧の定義",
+  ],
+  boundaryEvidence: "章内依存順10は複素数の定義だけを入力に単位円を定め、順11はその単位円だけを入力に円弧を定める。二項は前提から帰結への一方向の鎖をなす。順12から始まる角度表現の枝は、記号の規約だけを入力に取り、単位円にも円弧にも依存しない別の出発点なので、順11の後で節を閉じる。生成時に二項の依存順、種別、直接依存、および順12がこの二項に依存しないことを固定検査する。",
+  readabilityStatus: "二項とも定義で、複素数の絶対値と単位円上の点という具体的な対象だけを使う。抽象語彙の自動検査にも引っかかっていない。この節では本文を変更していない。",
+}, {
+  name: "角度表現と、その代表元の取り方",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: angleRepresentationEntryIds,
+  input: [
+    "集合と代数構造の記号",
+  ],
+  externalInputEntryIds: ["calculation_formulae_definition_set_and_algebra_notation"],
+  output: [
+    "実数を 2π の差で同一視する同値関係",
+    "各実数に対して半開区間へ移す整数倍がただ一つ存在すること",
+    "その整数倍を使って代表元を取る切断",
+    "同値類に加法と実数倍を入れた角度表現",
+  ],
+  realEscape: "角度表現は実数を出発点にし、2π の差で同一視する。実数の非可算性はそのまま引き継ぐ。可算に落ちるのは、後の章で運動量を有限個の値に限るときである。",
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/Part000",
+    sageMathFile: "sagemath/_shared/defs.sage",
+    currentStatus: "存在と一意性の主張は床関数による整数の取り方に対応する。形式化側では実数型の剰余演算が同じ役割を果たす。",
+  },
+  mainTheorems: [
+    "角度表現の同値関係",
+    "半開区間へ移す整数倍の存在と一意性",
+    "角度表現の切断",
+    "角度表現の定義",
+  ],
+  boundaryEvidence: "章内依存順12は記号の規約だけを入力に同値関係を定め、順13は同じ入力で代表元を与える整数の存在と一意性を示し、順14はその主張を使って切断を定め、順15は同値関係と切断の両方を使って角度表現を定める。四項は一つのまとまりで、外へ出る出力は角度表現だけである。順16の極座標表現の同値類は記号の規約だけを入力に取り、この四項のいずれにも依存しない別の出発点なので、順15の後で節を閉じる。生成時に四項の依存順、説明粒度、角度表現が同値関係と切断の両方を引くこと、および順16がこの四項に依存しないことを固定検査する。",
+  readabilityStatus: "角度表現の定義は、同値関係と切断を記号だけで使っていて、どのブロックの記号かが本文から追えなかった。それぞれの定義への参照を入れ、依存グラフにも現れるようにした。定義の内容は変えていない。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
