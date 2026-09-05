@@ -97,7 +97,7 @@ expectViolation(
 expectViolation(
   "到達済みの段階の依存先が進行中（先に済ませられないものを済ませたと書く）",
   replace(baseStages(), "elementary_ca_finite_calibration", { status: "到達済み" }),
-  "依存先の進捗が自分より遅れている",
+  "先に済んでいる必要がある依存先が到達済みでない",
 );
 
 expectViolation(
@@ -107,7 +107,19 @@ expectViolation(
     "elementary_ca_finite_calibration",
     { status: "進行中", current: true, evidence: [{ kind: "path", path: "README.md", why: "合成した根拠" }] },
   ),
-  "依存先の進捗が自分より遅れている",
+  "先に済んでいる必要がある依存先が到達済みでない",
+);
+
+expectViolation(
+  "進行中の段階の依存先も進行中（依存先の完了前に後続へ着手する）",
+  replace(baseStages(), "elementary_ca_finite_calibration", {
+    status: "進行中",
+    current: true,
+    evidence: [{ kind: "path", path: "README.md", why: "合成した根拠" }],
+  }).map((item) =>
+    item.id === "general_stage_and_nonuniform_rules" ? { ...item, current: false } : item,
+  ),
+  "先に済んでいる必要がある依存先が到達済みでない",
 );
 
 expectClean(
@@ -159,4 +171,4 @@ if (failures > 0) {
   process.exit(1);
 }
 
-console.log("段取りの規則の回帰検査がすべて期待どおり（10 件）");
+console.log("段取りの規則の回帰検査がすべて期待どおり（11 件）");

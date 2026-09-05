@@ -32,13 +32,6 @@ export type RoadmapReport = {
   readonly dependencyCount: number;
 };
 
-/** 進捗の強さ。依存先の進捗が自分より弱いことを検出するために順序を与える。 */
-const statusRank: Record<RoadmapStage["status"], number> = {
-  未着手: 0,
-  進行中: 1,
-  到達済み: 2,
-};
-
 const startedStatuses = new Set<RoadmapStage["status"]>(["到達済み", "進行中"]);
 
 const evidenceExists = (item: Evidence, resolvers: RoadmapResolvers): boolean =>
@@ -111,19 +104,15 @@ export const inspectRoadmap = (input: RoadmapInput, resolvers: RoadmapResolvers)
     }
   }
 
-  /**
-   * 依存先の進捗が自分より弱い段取りは、先に済ませられないものを済ませたと書いている。
-   * 到達済みの段階は依存先も到達済みでなければならず、進行中の段階は依存先が未着手であっては
-   * ならない。両方が `statusRank` の比較一本で表せる。
-   */
+  /** `dependsOn` は「先に済んでいる必要がある段階」なので、着手済みの段階の依存先は到達済みに限る。 */
   for (const stage of stages) {
     if (!startedStatuses.has(stage.status)) continue;
     for (const dependency of stage.dependsOn) {
       const upstream = byId.get(dependency);
       if (upstream === undefined) continue;
-      if (statusRank[upstream.status] < statusRank[stage.status]) {
+      if (upstream.status !== "到達済み") {
         fail(
-          `依存先の進捗が自分より遅れている: ${stage.id}（${stage.status}）` +
+          `先に済んでいる必要がある依存先が到達済みでない: ${stage.id}（${stage.status}）` +
             ` -> ${dependency}（${upstream.status}）`,
         );
       }
