@@ -231,7 +231,13 @@ S_2
         math(String.raw`B := \exp(\tfrac12 K_1D)`),
         " と ",
         math(String.raw`A := \exp(S_2)`),
-        " はいずれもエルミートかつ正定値である。",
+        " はいずれもエルミートかつ正定値である。この ",
+        math(String.raw`B`),
+        " は ",
+        ref("def_transfer_matrix_square_root"),
+        " で定めた ",
+        math(String.raw`V_1^{1/2}`),
+        " そのものである。",
         "さらに実対称行列の冪は実対称で、",
         ref("def_exp"),
         " の級数の部分和は実対称、",
@@ -256,7 +262,7 @@ S_2
       displayMath(String.raw`\begin{aligned}
 W
 &=B\,V_2\,B
-  &&\bigl(\because\ W=B V_2 B\ \text{の定義}\bigr)\\
+  &&\bigl(\because\ W=B V_2 B\ \text{の定義 }\blkref{def_symmetrized_transfer_matrix}\bigr)\\
 &=B\bigl((2s_2)^{M/2}A\bigr)B
   &&\bigl(\because\ V_2=(2s_2)^{M/2}A\bigr)\\
 &=(2s_2)^{M/2}B A B
@@ -279,13 +285,13 @@ W
       displayMath(String.raw`\begin{aligned}
 W^\top
 &=(B V_2 B)^\top
-  &&\bigl(\because\ W=B V_2 B\ \text{の定義}\bigr)\\
+  &&\bigl(\because\ W=B V_2 B\ \text{の定義 }\blkref{def_symmetrized_transfer_matrix}\bigr)\\
 &=B^\top V_2^\top B^\top
   &&\bigl(\because\ \text{転置の積の法則}\ (ABC)^\top=C^\top B^\top A^\top\bigr)\\
 &=B V_2 B
   &&\bigl(\because\ B^\top=B,\ V_2^\top=V_2\bigr)\\
 &=W
-  &&\bigl(\because\ W=B V_2 B\ \text{の定義}\bigr)
+  &&\bigl(\because\ W=B V_2 B\ \text{の定義 }\blkref{def_symmetrized_transfer_matrix}\bigr)
 \end{aligned}`),
       paragraph([
         "可逆性：",

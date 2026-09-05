@@ -154,12 +154,12 @@
       "entryIds": [
         "exp_conjugation_proof_004_theorem_ad_binomial",
         "exp_linear_map_000a_claim_real_exp_series_converges",
+        "exp_linear_map_004_theorem_exp_zero_is_identity",
         "exp_linear_map_000b_claim_matrix_exp_series_converges",
         "exp_linear_map_001_theorem_exp_series_pointwise_converges",
         "exp_linear_map_002_definition_exp_of_endomorphism",
         "bridge_003_claim_exp_of_diagonal",
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-        "exp_linear_map_004_theorem_exp_zero_is_identity",
         "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
         "exp_conjugation_proof_008_theorem_exp_ad_series",
         "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
@@ -235,6 +235,7 @@
         "calc_formulae_006_definition_of_cc",
         "exp_conjugation_proof_004_theorem_ad_binomial",
         "exp_linear_map_000a_claim_real_exp_series_converges",
+        "exp_linear_map_004_theorem_exp_zero_is_identity",
         "linear_space_general_002b_definition_matrix_norm",
         "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
         "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
@@ -243,8 +244,7 @@
         "exp_linear_map_000b_claim_matrix_exp_series_converges",
         "exp_linear_map_001_theorem_exp_series_pointwise_converges",
         "exp_linear_map_002_definition_exp_of_endomorphism",
-        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-        "exp_linear_map_004_theorem_exp_zero_is_identity"
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
       ],
       "output": [
         "行列指数関数による共役を反復交換子の指数級数で表す主定理",
@@ -1135,10 +1135,10 @@
         "evensectorT_definition_V1_plus_square_root",
         "evensectorT_definition_V_plus",
         "eigenvalues_of_V_011_definition_hermitian_positive_definite",
-        "linear_space_general_002_claim_scalar_identity_commutes",
-        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
         "exp_linear_map_004_theorem_exp_zero_is_identity",
-        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+        "linear_space_general_002_claim_scalar_identity_commutes",
+        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
       ],
       "output": [
         "V^{(+)} の正定値性",
@@ -1271,6 +1271,44 @@
       "concludingClaimEntryId": "evensectorT_claim_T_V_plus_is_conjugation",
       "boundaryEvidence": "章内依存順69で、半指数行列と V_2 の可逆性、一般の T_g、V^{(+)} の三因子表示から、三つの共役の合成 T_{(V^{(+)})} を定義する。順70はこの定義と既存の一般合成則を直接入力に、半指数行列と V_2 の可逆性から積も可逆であることを確認し、一般合成則を二回適用して T_{(V^{(+)})}=T_{V^{(+)}} へ閉じる。Lean の TVPlus・TVPlus_eq_TConj と SageMath の全行列単位上の合成共役検査が同じ二項へ対応する。直後の順71は実対称生成子と正定値行列の指数関数から正定値行列 W を扱う別枝で、この二項と相互に依存せず、外部入力集合もすべて切り替わるため、順70の後で節を閉じる。生成時に二項の章配置と連続性、全直接依存、本文 fingerprint、Lean の証明本体、SageMath の実検査本体、順71との相互非依存と入力集合の切り替わりを固定検査する。",
       "readabilityStatus": "順69は一つの合成写像だけを定義する。順70は構成因子と途中積の可逆性を確認した後、既に証明済みの一般合成則を二回適用して三重共役を一つの共役へまとめる。一つの主張内で一般則を重複証明せず、本文、Lean、SageMath の対応も一意なので、対象二項の説明粒度は合格である。"
+    },
+    {
+      "name": "対称化転送行列 W の実対称性と正定値性",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "maxeig_003_claim_W_is_positive_definite"
+      ],
+      "input": [
+        "対称化転送行列 W とその平方根因子の定義",
+        "エルミート正定値行列の定義と、エルミート行列の指数関数の正定値性",
+        "第一・第二の生成子の実対称性と、転送行列の記号"
+      ],
+      "externalInputEntryIds": [
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "maxeig_001_definition_transfer_matrix_square_root",
+        "maxeig_001a_definition_symmetrized_transfer_matrix",
+        "transfer_matrix_001_definition_symbols",
+        "transfer_matrix_011_definition_H1_H2"
+      ],
+      "output": [
+        "W が実対称であること",
+        "W が正定値であること",
+        "W が可逆であること"
+      ],
+      "formalizationEvidence": {
+        "leanFile": "lean/Ising2D/Part011/Definition001_SymmetrizedTransferMatrix.lean",
+        "sageMathFile": "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+        "currentStatus": "本文は実対称性・正定値性・可逆性を一つの主張の中で Step 1〜3 と可逆性の段に分ける。Lean は diagExp_isSymm・diagExp_posDef・matExp_isSymm・matExp_posDef で二つの指数因子を用意し、symTransfer_isSymm・symTransfer_posDef で合同変換の段を、mulVec_eq_zero_iff_of_isUnit で可逆性の段を追う。SageMath は W の対称性・実性・最小固有値の正値性を数値で検査する。"
+      },
+      "concludingClaim": "対称化転送行列 W は実対称正定値であり、とくに可逆である",
+      "concludingClaimEntryId": "maxeig_003_claim_W_is_positive_definite",
+      "boundaryEvidence": "章内依存順71は、W とその平方根因子の定義、エルミート正定値の定義、エルミート行列の指数関数の正定値性、二つの生成子の実対称性、転送行列の記号だけを直接入力に、W の実対称性・正定値性・可逆性を示す。直前の順70までの偶セクター共役写像の節とは入力集合が完全に切り替わり、相互に依存しない。直後の順72は W を受け取るが、単位球面上の上限という実数固有の道具（行列ノルムのベクトル評価と半正定値の Cauchy--Schwarz）を新たに入力へ加えるため、順71の後で節を閉じる。生成時に順71の全直接依存、本文 fingerprint、順72の依存方向と新規入力集合を固定検査する。",
+      "readabilityStatus": "一つの主張の中で、二つの指数因子が実対称正定値であること、合同変換で W が正定値になること、転置計算で実対称になること、核が零で可逆になることを一段ずつ示している。W = B V_2 B と B = V_1^{1/2} の根拠を定義ブロックへ接続したので、式変形の各行が定義または既証の主張を引く形になった。Lean の各補題と SageMath の検査も同じ段へ対応する。"
     }
   ],
   "explanationGranularityReview": {
@@ -1804,168 +1842,168 @@
         {
           "order": 68,
           "entryIds": [
-            "freeenergy_004_theorem_riemann_sum_to_integral"
+            "exp_linear_map_004_theorem_exp_zero_is_identity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 69,
           "entryIds": [
-            "linear_space_general_000_definition_kronecker_product"
+            "freeenergy_004_theorem_riemann_sum_to_integral"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 70,
           "entryIds": [
-            "linear_space_general_000b_claim_kronecker_product_rule"
+            "linear_space_general_000_definition_kronecker_product"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 71,
           "entryIds": [
-            "linear_space_general_000c_claim_kronecker_multilinear"
+            "linear_space_general_000b_claim_kronecker_product_rule"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 72,
           "entryIds": [
-            "linear_space_general_000d_claim_kronecker_transpose"
+            "linear_space_general_000c_claim_kronecker_multilinear"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 73,
           "entryIds": [
-            "linear_space_general_001_theorem_tensor_product_basis"
+            "linear_space_general_000d_claim_kronecker_transpose"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 74,
           "entryIds": [
-            "linear_space_general_002_claim_scalar_identity_commutes"
+            "linear_space_general_001_theorem_tensor_product_basis"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 75,
           "entryIds": [
-            "linear_space_general_002b_definition_matrix_norm"
+            "linear_space_general_002_claim_scalar_identity_commutes"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 76,
           "entryIds": [
-            "eigenvalues_of_V_012_claim_star_is_norm_preserving"
+            "linear_space_general_002b_definition_matrix_norm"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 77,
           "entryIds": [
-            "exp_conjugation_proof_003_definition_M_n_C_convergence"
+            "eigenvalues_of_V_012_claim_star_is_norm_preserving"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 78,
           "entryIds": [
-            "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
+            "exp_conjugation_proof_003_definition_M_n_C_convergence"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 79,
           "entryIds": [
-            "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+            "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 80,
           "entryIds": [
-            "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
+            "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 81,
           "entryIds": [
-            "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+            "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 82,
           "entryIds": [
-            "linear_space_general_003b_claim_matrix_multiplication_continuity"
+            "linear_space_general_003_claim_matrix_norm_submultiplicativity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 83,
           "entryIds": [
-            "linear_space_general_003c_claim_matrix_norm_vector_bound"
+            "linear_space_general_003b_claim_matrix_multiplication_continuity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 84,
           "entryIds": [
-            "linear_space_general_003d_claim_matrix_completeness"
+            "linear_space_general_003c_claim_matrix_norm_vector_bound"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 85,
           "entryIds": [
-            "exp_linear_map_000b_claim_matrix_exp_series_converges"
+            "linear_space_general_003d_claim_matrix_completeness"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 86,
           "entryIds": [
-            "exp_linear_map_001_theorem_exp_series_pointwise_converges"
+            "exp_linear_map_000b_claim_matrix_exp_series_converges"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 87,
           "entryIds": [
-            "exp_linear_map_002_definition_exp_of_endomorphism"
+            "exp_linear_map_001_theorem_exp_series_pointwise_converges"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 88,
           "entryIds": [
-            "bridge_003_claim_exp_of_diagonal"
+            "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 89,
           "entryIds": [
-            "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
+            "exp_linear_map_002_definition_exp_of_endomorphism"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 90,
           "entryIds": [
-            "exp_linear_map_004_theorem_exp_zero_is_identity"
+            "bridge_003_claim_exp_of_diagonal"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 91,
           "entryIds": [
-            "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+            "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
           ],
           "inseparableDependencyUnit": false
         },
@@ -4151,10 +4189,6 @@
         },
         {
           "dependentId": "TV1_hatZ_hatY_042_claim_T_Vprime_fixes_hatZ_hatY_gamma2_zero",
-          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
-        },
-        {
-          "dependentId": "TV1_hatZ_hatY_042_claim_T_Vprime_fixes_hatZ_hatY_gamma2_zero",
           "prerequisiteId": "linear_space_general_003b_claim_matrix_multiplication_continuity"
         },
         {
@@ -4727,15 +4761,7 @@
         },
         {
           "dependentId": "evensector_003b_claim_conjugate_index_of_check_Z_Y",
-          "prerequisiteId": "calculation_formulae_045_theorem_euler_formula_cos_sin"
-        },
-        {
-          "dependentId": "evensector_003b_claim_conjugate_index_of_check_Z_Y",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "evensector_003b_claim_conjugate_index_of_check_Z_Y",
-          "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
         },
         {
           "dependentId": "evensector_004_claim_commutator_H_check_Z_Y",
@@ -5881,7 +5907,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 22,
+        "incomingReferenceCount": 21,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -5890,8 +5916,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6100,
-        "inspectedContentSha256": "2527bb859515783eeeb40add04aa0f13c62f4d9994e2a3437db5fd501ef40aed",
+        "inspectedCharacterCount": 6074,
+        "inspectedContentSha256": "8eb7e83461c7dd3069ae859b9aa527374c7898d1e6f4609218e4f7caac34c68f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5948,8 +5974,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10434,
-        "inspectedContentSha256": "b5caa9043fea4de56aa3f21bffb18af37afb3907129f7fdd6cd598fb46645cbd",
+        "inspectedCharacterCount": 10722,
+        "inspectedContentSha256": "033d11e3fe1d5dbc219e0e546223246eb3e2f18bc094506a1ac9f4764477f3f0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -5997,7 +6023,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 16,
+        "incomingReferenceCount": 14,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -6064,8 +6090,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2300,
-        "inspectedContentSha256": "f99db604e19af3beb980f2c0225e318f0b912d78150b9d00a2ef3be3175404ce",
+        "inspectedCharacterCount": 1983,
+        "inspectedContentSha256": "265d0520de8b0e717f0cec445cd8186b82647f7b3394ff1271e94ca6e39a8557",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6283,7 +6309,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 16,
+        "incomingReferenceCount": 15,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -6348,7 +6374,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -6991,8 +7017,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 789,
-        "inspectedContentSha256": "539e91c0e3b53ca59d2af72eea773461b43418d4e65b31135086e85f1aba12ff",
+        "inspectedCharacterCount": 2159,
+        "inspectedContentSha256": "91239d3958a1bcb5f6a55c5feb68940b12dc41c6d5ecf61c8880ca94cb2476f4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -7508,7 +7534,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7817,7 +7843,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8064,7 +8090,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 11,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8353,8 +8379,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9916,
-        "inspectedContentSha256": "77725e7733850ab58883c040b035b7ea3e9d22aa0bdac1e955a80defafbb57a8",
+        "inspectedCharacterCount": 10452,
+        "inspectedContentSha256": "b5649c79ed1fd4d66b4fd8e33551f7c19bb4d8b45f4043b5912c00ea67fce724",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8411,7 +8437,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8543,7 +8569,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 0,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8627,8 +8653,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 19271,
-        "inspectedContentSha256": "1eb0dda233d4187914622824740ca627927bc4fba24fb2fef656f2ad55fe6a78",
+        "inspectedCharacterCount": 19441,
+        "inspectedContentSha256": "cbcd27d9f350f86ec11fe0dfe682bb48a1acda48686e19577bc59a4b30ce72e6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8689,7 +8715,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8698,8 +8724,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4434,
-        "inspectedContentSha256": "07dc15f6f5d8f33ba3780a382bc2ccff8b8a0b0c9a2452e9a5cd7902d9b85861",
+        "inspectedCharacterCount": 4055,
+        "inspectedContentSha256": "6d5ac2a73aa6ac30f32891a93a7fc308d19defee3f20b83151ab632b2c7ed974",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8712,22 +8738,16 @@
         "angle_section_existence_uniqueness",
         "def_phi_polar",
         "definition_of_cc",
-        "definition_of_sqrt_r_positive",
         "isomorphism_of_phi_cartesian",
-        "operations_on_polar_representation",
         "polar_equivalence_class",
-        "set_and_algebra_notation",
-        "sqrt_expansion_via_polar"
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "calc_formulae_001_sqrt_nonnegative_real",
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
         "calc_formulae_019_definition_polar_equivalence_class",
-        "calculation_formulae_022_definition_operations_on_polar_representation",
         "calculation_formulae_027_definition_phi_polar",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
-        "calculation_formulae_039_claim_sqrt_expansion_via_polar",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -8771,8 +8791,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2640,
-        "inspectedContentSha256": "a8838afe0280978be870ec36814669aab82ae7553d622abb3360e9d29089c053",
+        "inspectedCharacterCount": 2632,
+        "inspectedContentSha256": "1b11ebe29e388f67c5112888800a081fe0a43dea28f90dc5e711455e9b49d873",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8838,8 +8858,8 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 9524,
-        "inspectedContentSha256": "22d82b78477ef400d278be65f8921c39b45c4fdb296f30e0b509afe04608bdc0",
+        "inspectedCharacterCount": 8873,
+        "inspectedContentSha256": "bae8564c857801a4e1d637b819d845de99b9e1881a9ae715fe85dc82085ee2fb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8852,32 +8872,20 @@
         "angle_section_existence_uniqueness",
         "condition_of_commutativity_of_sqrt_and_product",
         "def_abs_arg",
-        "def_phi_cartesian",
         "def_phi_polar",
         "definition_of_cc",
-        "definition_of_sqrt_r_positive",
-        "inclusion_rr_to_cc",
         "multiplicative_group_of_cc",
         "polar_equivalence_class",
-        "range_of_args_of_reciprocal_of_complex_numbers",
-        "set_and_algebra_notation",
-        "sqrt_expansion_via_polar",
-        "sqrt_squared_is_original"
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "calc_formulae_001_sqrt_nonnegative_real",
         "calc_formulae_006_definition_of_cc",
-        "calc_formulae_007_inclusion_rr_to_cc",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
         "calc_formulae_019_definition_polar_equivalence_class",
         "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
         "calculation_formulae_027_definition_phi_polar",
-        "calculation_formulae_028_definition_phi_cartesian",
         "calculation_formulae_031_definition_abs_arg",
-        "calculation_formulae_036_claim_arg_of_reciprocal",
-        "calculation_formulae_039_claim_sqrt_expansion_via_polar",
         "calculation_formulae_040_claim_sqrt_commutativity_condition",
-        "calculation_formulae_041_claim_sqrt_squared_is_original",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -8923,8 +8931,8 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 2227,
-        "inspectedContentSha256": "fb4fbd22531fb2e83616dcd129278cfee0ed057bef2199642d8c1beca41faa66",
+        "inspectedCharacterCount": 2057,
+        "inspectedContentSha256": "6558d232465857bb8c8123d5ab0c47a543ef367d6a05fc6009405377b84ef37e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8974,7 +8982,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 14,
+        "incomingReferenceCount": 13,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9030,7 +9038,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9100,8 +9108,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 989,
-        "inspectedContentSha256": "aef82e1e3b2ad1010d6fa992ef6ffe39bbd9625b8b88a10adc0f5fd256dc9fcc",
+        "inspectedCharacterCount": 1060,
+        "inspectedContentSha256": "25d2f2a1ad5ab6bcbe05427a4ce4f06a4250ea5f7f3f79b5d7170303b8d4ebeb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9443,7 +9451,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 69,
+        "chapterOrder": 70,
         "dependencyUnitEntryIds": [
           "linear_space_general_000_definition_kronecker_product"
         ]
@@ -9463,7 +9471,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 24,
+        "incomingReferenceCount": 23,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9504,7 +9512,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 70,
+        "chapterOrder": 71,
         "dependencyUnitEntryIds": [
           "linear_space_general_000b_claim_kronecker_product_rule"
         ]
@@ -9524,7 +9532,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 12,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9565,7 +9573,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 71,
+        "chapterOrder": 72,
         "dependencyUnitEntryIds": [
           "linear_space_general_000c_claim_kronecker_multilinear"
         ]
@@ -9623,7 +9631,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 72,
+        "chapterOrder": 73,
         "dependencyUnitEntryIds": [
           "linear_space_general_000d_claim_kronecker_transpose"
         ]
@@ -9686,7 +9694,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 73,
+        "chapterOrder": 74,
         "dependencyUnitEntryIds": [
           "linear_space_general_001_theorem_tensor_product_basis"
         ]
@@ -9706,7 +9714,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 20,
+        "incomingReferenceCount": 19,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9742,7 +9750,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 74,
+        "chapterOrder": 75,
         "dependencyUnitEntryIds": [
           "linear_space_general_002_claim_scalar_identity_commutes"
         ]
@@ -9876,7 +9884,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 75,
+        "chapterOrder": 76,
         "dependencyUnitEntryIds": [
           "linear_space_general_002b_definition_matrix_norm"
         ]
@@ -9905,8 +9913,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 14156,
-        "inspectedContentSha256": "66177abbef1f6ea86dba8b3e62b43da74b9e257d0909ed7eeee9d75aa4cac141",
+        "inspectedCharacterCount": 14218,
+        "inspectedContentSha256": "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9945,7 +9953,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 79,
+        "chapterOrder": 80,
         "dependencyUnitEntryIds": [
           "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
         ]
@@ -9965,7 +9973,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9976,8 +9984,8 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 4924,
-        "inspectedContentSha256": "de0aff8af067b4ef89f30c668cfdec203e30681e878a736a0a7e0c636ee4f2e3",
+        "inspectedCharacterCount": 5144,
+        "inspectedContentSha256": "9265c84365337fe4a0ddcf51cecb0b32a502ed06d82843f1f253e4ebce195d55",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10010,7 +10018,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 81,
+        "chapterOrder": 82,
         "dependencyUnitEntryIds": [
           "linear_space_general_003_claim_matrix_norm_submultiplicativity"
         ]
@@ -10073,7 +10081,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 83,
+        "chapterOrder": 84,
         "dependencyUnitEntryIds": [
           "linear_space_general_003c_claim_matrix_norm_vector_bound"
         ]
@@ -10142,7 +10150,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 84,
+        "chapterOrder": 85,
         "dependencyUnitEntryIds": [
           "linear_space_general_003d_claim_matrix_completeness"
         ]
@@ -10173,8 +10181,8 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 978,
-        "inspectedContentSha256": "38ea4eead984a8a947b23553e9fec695419a772f872d64c4894ae08116ccbaf8",
+        "inspectedCharacterCount": 868,
+        "inspectedContentSha256": "46baea960668f4e457bafd8af2cd6bd763c2b8f565b60b9cca6db63f384d1ca3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10185,13 +10193,11 @@
       },
       "dependsOnLabels": [
         "definition_of_cc",
-        "matrix_norm_submultiplicativity",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+        "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
@@ -10205,7 +10211,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 82,
+        "chapterOrder": 83,
         "dependencyUnitEntryIds": [
           "linear_space_general_003b_claim_matrix_multiplication_continuity"
         ]
@@ -10332,7 +10338,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 85,
+        "chapterOrder": 86,
         "dependencyUnitEntryIds": [
           "exp_linear_map_000b_claim_matrix_exp_series_converges"
         ]
@@ -10406,7 +10412,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 86,
+        "chapterOrder": 87,
         "dependencyUnitEntryIds": [
           "exp_linear_map_001_theorem_exp_series_pointwise_converges"
         ]
@@ -10426,7 +10432,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 23,
+        "incomingReferenceCount": 22,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -10476,7 +10482,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 87,
+        "chapterOrder": 89,
         "dependencyUnitEntryIds": [
           "exp_linear_map_002_definition_exp_of_endomorphism"
         ]
@@ -10496,7 +10502,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 26,
+        "incomingReferenceCount": 23,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -10549,7 +10555,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 89,
+        "chapterOrder": 91,
         "dependencyUnitEntryIds": [
           "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
         ]
@@ -10569,7 +10575,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -10580,8 +10586,8 @@
         "abstractVocabularyMatches": [
           "抽象線型写像"
         ],
-        "inspectedCharacterCount": 1437,
-        "inspectedContentSha256": "cd6f641666073a7e118dfad89898575b72fab87fe804f5e45cc4ec71fd28bf49",
+        "inspectedCharacterCount": 1319,
+        "inspectedContentSha256": "5a42c7aa57160fc095dd8538d38bf130068bbe858a69b8b18a3142bf16a07852",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10590,12 +10596,8 @@
         ],
         "manualReview": null
       },
-      "dependsOnLabels": [
-        "def_exp"
-      ],
-      "dependsOnEntryIds": [
-        "exp_linear_map_002_definition_exp_of_endomorphism"
-      ],
+      "dependsOnLabels": [],
+      "dependsOnEntryIds": [],
       "semanticPrerequisiteLabels": [],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -10605,7 +10607,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 90,
+        "chapterOrder": 68,
         "dependencyUnitEntryIds": [
           "exp_linear_map_004_theorem_exp_zero_is_identity"
         ]
@@ -10903,7 +10905,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 12,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11299,7 +11301,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -11447,7 +11449,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -11497,7 +11499,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -11560,7 +11562,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 11,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -11569,8 +11571,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 750,
-        "inspectedContentSha256": "86f6d94505c346c29c7a18e95f61a62dbf389df64574403eeac9a44670188085",
+        "inspectedCharacterCount": 813,
+        "inspectedContentSha256": "73feb602df40fed1d37481c6a61b099e7944ab114f814aa009c696543998c44c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11621,8 +11623,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 900,
-        "inspectedContentSha256": "19baa8255a664202439efe07a7c18f770902aa68a0d3ce553a650712c8a23413",
+        "inspectedCharacterCount": 1034,
+        "inspectedContentSha256": "02a14a895094a781e52c134f1e31763509ed2b747896f18cab3c7564c6c226fb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11679,8 +11681,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6753,
-        "inspectedContentSha256": "6f3858025c49df33a2e2789f4bb2c4d3ae8a7042b04d50bf22be06dc021989cb",
+        "inspectedCharacterCount": 6675,
+        "inspectedContentSha256": "fa0da89d1eaa177fbb02145727f1ccab579dccb743b85729b4b506fab3cfe796",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11690,13 +11692,9 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_H1_H2",
-        "def_hatZ_hatY",
-        "exp_sum"
+        "def_H1_H2"
       ],
       "dependsOnEntryIds": [
-        "transfer_matrix_009_claim_exp_sum",
-        "transfer_matrix_010_definition_hatZ_hatY",
         "transfer_matrix_011_definition_H1_H2"
       ],
       "semanticPrerequisiteLabels": [
@@ -11739,8 +11737,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2239,
-        "inspectedContentSha256": "1a479016a870d83a80b1aa0fe413c3d516b25a9e6fd0537a97fbef3fe4bf5551",
+        "inspectedCharacterCount": 2027,
+        "inspectedContentSha256": "95122e5d74c8498a2487a85a9016f7b23dac893686978f029649c519b15753ac",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11750,12 +11748,10 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_hatZ_hatY",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "transfer_matrix_010_definition_hatZ_hatY"
+        "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation"
@@ -11799,8 +11795,8 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 6173,
-        "inspectedContentSha256": "b2fd03c65487e2a9dfe6c84fec9ed33abb2120de7aeaa4c653751fc89b758bc5",
+        "inspectedCharacterCount": 5654,
+        "inspectedContentSha256": "caad4313e5f725e994420710fce360588bb4b75b45e00f8197db80dae8db25e9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -11812,13 +11808,11 @@
       "dependsOnLabels": [
         "def_hatZ_hatY",
         "definition_of_cc",
-        "exp_sum",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
-        "transfer_matrix_009_claim_exp_sum",
         "transfer_matrix_010_definition_hatZ_hatY"
       ],
       "semanticPrerequisiteLabels": [
@@ -12023,7 +12017,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 77,
+        "chapterOrder": 78,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_003_definition_M_n_C_convergence"
         ]
@@ -12052,8 +12046,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 22523,
-        "inspectedContentSha256": "3d243bb9c57c1d034e93eaf4715643946a490b0d6147f9efd81834837698f282",
+        "inspectedCharacterCount": 22099,
+        "inspectedContentSha256": "50f0db9578836a21ed0f59b8189f0e3ef977b4a6caa41b848658605098efb08f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12102,7 +12096,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 80,
+        "chapterOrder": 81,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms"
         ]
@@ -12228,7 +12222,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 78,
+        "chapterOrder": 79,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix"
         ]
@@ -12259,8 +12253,8 @@
         "abstractVocabularyMatches": [
           "抽象線型写像"
         ],
-        "inspectedCharacterCount": 25641,
-        "inspectedContentSha256": "64229f938d8d19d12dd93c396ec488b8f44803a7f0f9d00b6c4b3ce8a115a867",
+        "inspectedCharacterCount": 25235,
+        "inspectedContentSha256": "5bdb3ed5cd462b4bcdacbc754ee736c14abf5324e610b208bbd7da8582480874",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12278,7 +12272,6 @@
         "exp_converges",
         "matrix_completeness",
         "matrix_exp_series_converges",
-        "matrix_norm_submultiplicativity",
         "matrix_norm_triangle_inequality",
         "real_exp_series_converges",
         "set_and_algebra_notation",
@@ -12298,12 +12291,13 @@
         "exp_linear_map_004_theorem_exp_zero_is_identity",
         "linear_space_general_002b_definition_matrix_norm",
         "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
-        "linear_space_general_003_claim_matrix_norm_submultiplicativity",
         "linear_space_general_003d_claim_matrix_completeness"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
-        "definition_of_cc"
+        "definition_of_cc",
+        "theorem_exp_product",
+        "theorem_exp_zero"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -12346,8 +12340,8 @@
           "抽象線型写像",
           "群の一般論"
         ],
-        "inspectedCharacterCount": 5610,
-        "inspectedContentSha256": "c9e30902311cd76998b6716da76e040f081a0b4dcad42a5f1ad6d99331ab999b",
+        "inspectedCharacterCount": 5487,
+        "inspectedContentSha256": "c06555b7aacaba911d0f832b2a5a07cbb81e56177f19e2a093be6356648dd95a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12487,8 +12481,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4002,
-        "inspectedContentSha256": "7c38e3a79cdbd1e3c76dd1c7bee730eb49732b04530b113f13685a605bfa6c26",
+        "inspectedCharacterCount": 3698,
+        "inspectedContentSha256": "5fd0477a507f285dd767065c5e1633181bf87ee60a4779771f053a3933da6cf2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12511,7 +12505,9 @@
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
-        "definition_of_cc"
+        "definition_of_cc",
+        "kronecker_product_rule",
+        "kronecker_multilinear"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -12552,8 +12548,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 51395,
-        "inspectedContentSha256": "14d6d8d5ea9a5c37a6e1b5bbbc686506dc25e7d04fcfde0e7b976ffa992a223e",
+        "inspectedCharacterCount": 51428,
+        "inspectedContentSha256": "ee8047cea9bdb432d5f1707937765ec5b796ed11e3cd7a89e2773f96a875c98a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -12563,7 +12559,6 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_delta_M",
         "def_transfer_matrix_symbols",
         "definition_of_cc",
         "kronecker_multilinear",
@@ -12577,8 +12572,7 @@
         "calc_formulae_006_definition_of_cc",
         "linear_space_general_000b_claim_kronecker_product_rule",
         "linear_space_general_000c_claim_kronecker_multilinear",
-        "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_008_definition_delta_M"
+        "transfer_matrix_001_definition_symbols"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc"
@@ -12622,8 +12616,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 8655,
-        "inspectedContentSha256": "2bafcb71d196fc98f36905376e94e44976e213212816980d7b2df372f20c5df6",
+        "inspectedCharacterCount": 8754,
+        "inspectedContentSha256": "00e4c2d24dbba935e1ac03e747a545040d7f0c635049e33bf162561b5f2c119e",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15448,8 +15442,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 14522,
-        "inspectedContentSha256": "f8745f25aec8c1301dee33410e18ec8d133de6e76f53e988fe976f52f397ae1f",
+        "inspectedCharacterCount": 15046,
+        "inspectedContentSha256": "ebaf1a1d66b498e4999b6d446128da8307377b3270ccede814c5d030a4fc80bb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15473,7 +15467,6 @@
         "gamma_2_theta_is_0",
         "matrix_multiplication_continuity",
         "relation_of_gamma_2",
-        "scalar_identity_commutes",
         "set_and_algebra_notation",
         "theorem_exp_product",
         "theorem_exp_zero"
@@ -15495,7 +15488,6 @@
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
         "exp_linear_map_004_theorem_exp_zero_is_identity",
         "hatZ_hatY_anticommutation_001_claim_anticommutation_relations",
-        "linear_space_general_002_claim_scalar_identity_commutes",
         "linear_space_general_003b_claim_matrix_multiplication_continuity"
       ],
       "semanticPrerequisiteLabels": [
@@ -15823,8 +15815,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9044,
-        "inspectedContentSha256": "d98fcb934916c5e20d2cde360ce64815a59bbd189e02201dc96a99d2014a1990",
+        "inspectedCharacterCount": 8210,
+        "inspectedContentSha256": "32d0700367722082578226c92366daed28dad248f7f707c9f6a5d1f82fbe80b7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16596,8 +16588,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3083,
-        "inspectedContentSha256": "d6559f9f8498bcfee88826cde327c1bd93eef29b1501fec56133c28351b9215b",
+        "inspectedCharacterCount": 2906,
+        "inspectedContentSha256": "e1b160b06a828b1bd9737079ad760849d5bc9dafbdcf86de9ab4bbcc07105c74",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16607,16 +16599,12 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "abs_basic_properties",
-        "conjugation_is_ring_homomorphism",
         "def_matrix_norm",
         "definition_of_cc",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_031b_claim_abs_basic_properties",
-        "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
         "calculation_formulae_definition_set_and_algebra_notation",
         "linear_space_general_002b_definition_matrix_norm"
       ],
@@ -16632,7 +16620,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 76,
+        "chapterOrder": 77,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_012_claim_star_is_norm_preserving"
         ]
@@ -16661,8 +16649,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 8007,
-        "inspectedContentSha256": "1db946266e8e182faa5d239bcfa5b571c33fc3a776577343cf44a02f060a7db3",
+        "inspectedCharacterCount": 7584,
+        "inspectedContentSha256": "11af5903a78e67f1b0e4700b9ac3d38b2245716a71ee75f252d0f7c4bc597957",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -16676,17 +16664,13 @@
         "exp_converges",
         "matrix_norm_triangle_inequality",
         "set_and_algebra_notation",
-        "star_preserves_norm_and_limits",
-        "theorem_exp_product",
-        "theorem_exp_zero"
+        "star_preserves_norm_and_limits"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "eigenvalues_of_V_012_claim_star_is_norm_preserving",
         "exp_linear_map_001_theorem_exp_series_pointwise_converges",
-        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-        "exp_linear_map_004_theorem_exp_zero_is_identity",
         "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
       ],
       "semanticPrerequisiteLabels": [
@@ -16701,7 +16685,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 91,
+        "chapterOrder": 88,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
         ]
@@ -16732,8 +16716,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9729,
-        "inspectedContentSha256": "58f128326d7105d0494ee2849438389cb2a90991f8d960809e161001bd22e89d",
+        "inspectedCharacterCount": 9766,
+        "inspectedContentSha256": "d0db638eabbd3f67ab3e07165b00550c189e3af89250349e53cb6cc743563422",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17273,7 +17257,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 88,
+        "chapterOrder": 90,
         "dependencyUnitEntryIds": [
           "bridge_003_claim_exp_of_diagonal"
         ]
@@ -17649,7 +17633,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -17914,8 +17898,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1908,
-        "inspectedContentSha256": "3a54ef3eed72f2c5e6faa7829ee5f919ad976d117881ce7007b7e48cdd52785e",
+        "inspectedCharacterCount": 1909,
+        "inspectedContentSha256": "d473a52b805bf42e07e842e7fb0a007d2b4cc743f73dab53156c46d7354a0e6a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17976,8 +17960,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2136,
-        "inspectedContentSha256": "22e55749ba4656531b76fa8dd94ffd561987a5537942905fe78f36b4046b2526",
+        "inspectedCharacterCount": 2009,
+        "inspectedContentSha256": "f55b13638a70defb51a39207099313a89419330b8c6ee8937e426261934ef5f3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18001,7 +17985,10 @@
         "transfer_matrix_007_definition_V1_pm"
       ],
       "semanticPrerequisiteLabels": [
-        "definition_of_cc"
+        "definition_of_cc",
+        "V1_restriction_to_eigenspaces",
+        "def_end_iso",
+        "epsilon_projector_properties"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -18174,7 +18161,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -18375,8 +18362,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4386,
-        "inspectedContentSha256": "2128db72f00940764cc204da35a680c9f3b7184154e4a1abc8413b7592f523a7",
+        "inspectedCharacterCount": 4732,
+        "inspectedContentSha256": "2cbfb2d79ed95a09699d8d990efb810a203709788487d03dbd74d570ec4155e0",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18389,6 +18376,8 @@
         "def_H1_H2",
         "def_exp",
         "def_hermitian_positive_definite",
+        "def_symmetrized_transfer_matrix",
+        "def_transfer_matrix_square_root",
         "def_transfer_matrix_symbols",
         "exp_hermitian_is_positive_definite",
         "iH_is_real_symmetric",
@@ -18400,11 +18389,14 @@
         "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
         "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
         "exp_linear_map_002_definition_exp_of_endomorphism",
+        "maxeig_001_definition_transfer_matrix_square_root",
+        "maxeig_001a_definition_symmetrized_transfer_matrix",
         "transfer_matrix_001_definition_symbols",
         "transfer_matrix_011_definition_H1_H2"
       ],
       "semanticPrerequisiteLabels": [
-        "def_H1_H2"
+        "def_H1_H2",
+        "def_symmetrized_transfer_matrix"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -19128,7 +19120,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 68,
+        "chapterOrder": 69,
         "dependencyUnitEntryIds": [
           "freeenergy_004_theorem_riemann_sum_to_integral"
         ]
@@ -19524,8 +19516,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4938,
-        "inspectedContentSha256": "cb2438676274526fb5ee2e1c45a93891136415c8b5589de33e8ba36b6a2b6847",
+        "inspectedCharacterCount": 4615,
+        "inspectedContentSha256": "adb922ef85bce88bc4b4802839487176407f365d30f5850ba7211cd5cd126f23",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19539,18 +19531,14 @@
         "def_check_index_set",
         "def_half_integer_modes",
         "definition_of_cc",
-        "euler_formula_cos_sin",
-        "set_and_algebra_notation",
-        "theorem_exp_product"
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_045_theorem_euler_formula_cos_sin",
         "calculation_formulae_definition_set_and_algebra_notation",
         "evensector_002_claim_antiperiodic_exp_sum",
         "evensector_003_definition_half_integer_modes",
-        "evensector_003a_definition_check_index_set",
-        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
+        "evensector_003a_definition_check_index_set"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
@@ -23414,8 +23402,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6163,
-        "inspectedContentSha256": "d495b036a34c6c03ff559d71ba187dd91add9d9ab5a930b7d5cc27dea6913f2f",
+        "inspectedCharacterCount": 6074,
+        "inspectedContentSha256": "99b44d573ce01ec4c149debe81b0b613f9dd93871d87214d0446c6bd38da9604",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -24369,8 +24357,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 888,
-        "inspectedContentSha256": "c7a0451efa605dd17821efc7a433df7f151dee481ae5c7bb88f3003e2356da9b",
+        "inspectedCharacterCount": 1183,
+        "inspectedContentSha256": "0eb4cabfc0011b5c04adb17c333ee92850938340ad677b90d36c9768d7ea5a6a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -24394,7 +24382,8 @@
         "closing_005_definition_open_chain_spin_energy"
       ],
       "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
+        "set_and_algebra_notation",
+        "cosh_sinh_basic_properties"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
