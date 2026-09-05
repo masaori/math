@@ -1681,6 +1681,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     title: null,
     labels: ["sqrt_expansion_via_polar"],
     statement: [
+      paragraph([ref("first_and_second_projections"), " の射影を用いる。"]),
       paragraph([
         math(String.raw`z \in \mathbb{C}`),
         " とし、",
@@ -1941,6 +1942,7 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     title: { text: "sqrt と積が可換になる条件" },
     labels: ["condition_of_commutativity_of_sqrt_and_product"],
     statement: [
+      paragraph([ref("def_sqrt_cc"), "、", ref("sqrt_expansion_via_polar"), "、", ref("definition_of_sqrt_r_positive"), "、", ref("def_phi_polar"), "、", ref("def_phi_cartesian"), " を用いる。"]),
       paragraph([
         math(String.raw`z_1, z_2 \in \mathbb{C}`),
         " について、",
