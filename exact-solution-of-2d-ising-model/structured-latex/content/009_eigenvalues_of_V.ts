@@ -1930,6 +1930,7 @@ V' y
     title: { tex: String.raw`\text{エルミート行列の } \exp \text{ は正定値}` },
     labels: ["exp_hermitian_is_positive_definite"],
     statement: [
+      paragraph(["指数は ", ref("def_exp"), "、指数の積と零での値は ", ref("theorem_exp_product"), " と ", ref("theorem_exp_zero"), "、共役転置と正定値性は ", ref("def_hermitian_positive_definite"), "、行列積は ", ref("mat_mult"), " による。成分の共役と積は ", ref("def_complex_conjugate"), "、", ref("frobenius_inner_product_axioms"), " の証明冒頭、", ref("complex_numbers_form_a_field"), "、絶対値の零との同値は ", ref("abs_basic_properties"), "、ノルムは ", ref("def_matrix_norm"), "、実数の包含は ", ref("inclusion_rr_to_cc"), "、トレースは ", ref("def_trace"), " を用いる。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         " とする。",

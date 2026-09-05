@@ -218,6 +218,39 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "指数級数の数ベクトル作用と線型写像の各点収束",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "exp_linear_map_001_theorem_exp_series_pointwise_converges"
+      ],
+      "input": [
+        "行列級数の収束・絶対収束判定、ノルムと数ベクトル作用の評価",
+        "行列積・複素数の演算、実数包含、非負平方根と集合記号"
+      ],
+      "output": [
+        "行列指数級数の数ベクトル作用と成分の収束",
+        "行列単位による線型写像の評価、反復級数の各点収束と極限写像の線型性"
+      ],
+      "mainTheorem": "行列への線型写像の反復級数の各点収束と極限写像の線型性",
+      "mainTheoremEntryId": "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+      "boundaryEvidence": "行列単位による上界から反復級数の各点収束を得て極限の線型性までで閉じる。後続はこの収束と一意性を受け取って、行列と線型写像それぞれの指数を定義する。存在と線型性を示す主張からそれを使う写像定義への境界である。旧直後のエルミート指数の正定値性は、実際に適用する指数定義・可換指数積・零行列指数の参照を補い、それらの後へ移す。移動項と全直接入力は比較専用で固定し、本節の外部入力へ混ぜない。対象・直接入力・直後の定義と移動項の本文・全依存・種別・粒度・相対順をプログラミングによる検証で固定する。",
+      "readabilityStatus": "LLMによる検証で各点収束の全本文・全直接入力、後続の指数定義と移動する正定値性の本文を読んだ。六群の主張と行列単位・反復・上界の定義の分割、有限和の線型性の帰納と添字写像の全単射、実数の収束前提と各行参照が未解決である。行列冪の再帰は後続定義に存在するが先行証明への提示順が未整備である。比較側の指数定義の分割と実行列の演算接続、移動項の矩形共役転置・両側逆元と非零性・正の実数包含の根拠と四主張の分割も未解決に記録した。零次の反復と零の上界を保持し、前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "exp_linear_map_000a_claim_real_exp_series_converges",
+        "exp_linear_map_000b_claim_matrix_exp_series_converges",
+        "linear_space_general_002b_definition_matrix_norm",
+        "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+        "linear_space_general_003c_claim_matrix_norm_vector_bound",
+        "linear_space_general_003d_claim_matrix_completeness"
+      ]
+    },
+    {
       "name": "行列級数の絶対収束と指数級数の収束",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2213,9 +2246,9 @@
         "evensectorT_definition_V_plus",
         "eigenvalues_of_V_011_definition_hermitian_positive_definite",
         "linear_space_general_002_claim_scalar_identity_commutes",
-        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-        "exp_linear_map_004_theorem_exp_zero_is_identity"
+        "exp_linear_map_004_theorem_exp_zero_is_identity",
+        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
       ],
       "output": [
         "V^{(+)} の正定値性",
@@ -2945,6 +2978,7 @@
       "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition",
       "eigenvalues_of_V_011_definition_hermitian_positive_definite",
       "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+      "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
       "freeenergy_004_theorem_riemann_sum_to_integral",
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y",
@@ -3569,35 +3603,35 @@
         {
           "order": 87,
           "entryIds": [
-            "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+            "exp_linear_map_002_definition_exp_of_endomorphism"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 88,
           "entryIds": [
-            "exp_linear_map_002_definition_exp_of_endomorphism"
+            "bridge_003_claim_exp_of_diagonal"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 89,
           "entryIds": [
-            "bridge_003_claim_exp_of_diagonal"
+            "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 90,
           "entryIds": [
-            "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
+            "exp_linear_map_004_theorem_exp_zero_is_identity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 91,
           "entryIds": [
-            "exp_linear_map_004_theorem_exp_zero_is_identity"
+            "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
           ],
           "inseparableDependencyUnit": false
         },
@@ -7778,7 +7812,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 19,
+        "incomingReferenceCount": 21,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8019,7 +8053,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 11,
+        "incomingReferenceCount": 13,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9372,7 +9406,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 14,
+        "incomingReferenceCount": 15,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9769,7 +9803,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 15,
+        "incomingReferenceCount": 16,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11623,7 +11657,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 17,
+        "incomingReferenceCount": 18,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12246,7 +12280,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 23,
+        "incomingReferenceCount": 24,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12258,26 +12292,30 @@
           "一般の体・環",
           "抽象線型写像"
         ],
-        "inspectedCharacterCount": 2536,
-        "inspectedContentSha256": "6d1e05adbfc624b89b429dda12fd2afb5818d6a62fa9f18d3801a2bca1506098",
+        "inspectedCharacterCount": 2758,
+        "inspectedContentSha256": "1b90c006155b2b723ad7169ab806c4fff82870687ce2865a7bc677a875134fa2",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積と実数係数の包含への参照を補った。行列の冪と指数、線型写像の反復と指数の定義が同居する。冪の再帰は本項に実在するが先行する収束証明より前への提示が必要である。実行列と複素行列の成分演算の接続、入力の実数完備性と極限法則、定義群の分割と各行参照が未解決であり、零次と零の引数を保ち、補完後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "def_matrix_norm",
         "definition_of_cc",
         "exp_converges",
+        "inclusion_rr_to_cc",
+        "mat_mult",
         "matrix_exp_series_converges",
         "matrix_norm_triangle_inequality",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "exp_linear_map_000b_claim_matrix_exp_series_converges",
         "exp_linear_map_001_theorem_exp_series_pointwise_converges",
@@ -12296,7 +12334,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 88,
+        "chapterOrder": 87,
         "dependencyUnitEntryIds": [
           "exp_linear_map_002_definition_exp_of_endomorphism"
         ]
@@ -12316,7 +12354,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 23,
+        "incomingReferenceCount": 24,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12369,7 +12407,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 90,
+        "chapterOrder": 89,
         "dependencyUnitEntryIds": [
           "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
         ]
@@ -12389,7 +12427,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12425,7 +12463,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 91,
+        "chapterOrder": 90,
         "dependencyUnitEntryIds": [
           "exp_linear_map_004_theorem_exp_zero_is_identity"
         ]
@@ -13731,7 +13769,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -13857,7 +13895,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "incomingReferenceCount": 2,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -17705,7 +17743,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -18361,7 +18399,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -18505,31 +18543,55 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7584,
-        "inspectedContentSha256": "11af5903a78e67f1b0e4700b9ac3d38b2245716a71ee75f252d0f7c4bc597957",
+        "inspectedCharacterCount": 8613,
+        "inspectedContentSha256": "73fdb5d24c8cec6a1c637fedee45e0040ef03c5d8e7c13449cc4d8c80bc5f324",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 指数定義・可換指数積・零行列指数と、成分計算で使う共役・ノルム・絶対値・実数包含・トレースへの欠落参照を補った。指数の正定値性と合同変換・正の定数倍・トレースの四主張が同居する。矩形行列への共役転置の定義と積公式の適用範囲は未整備であり、片側の逆元積だけから可逆性を結論する段階、可逆行列が非零ベクトルを非零へ送る根拠、複素数と正の実数の包含の区別、共役転置の対合性と有限和・冪の帰納、同時適用と各行参照が未解決である。定義と証明の前提を補完し分割した後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "abs_basic_properties",
+        "complex_numbers_form_a_field",
+        "def_complex_conjugate",
+        "def_exp",
+        "def_hermitian_positive_definite",
+        "def_matrix_norm",
+        "def_trace",
         "definition_of_cc",
         "exp_converges",
+        "frobenius_inner_product_axioms",
+        "inclusion_rr_to_cc",
+        "mat_mult",
         "matrix_norm_triangle_inequality",
         "set_and_algebra_notation",
-        "star_preserves_norm_and_limits"
+        "star_preserves_norm_and_limits",
+        "theorem_exp_product",
+        "theorem_exp_zero"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_031b_claim_abs_basic_properties",
         "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_001_definition_trace",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
         "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+        "exp_conjugation_definition_complex_conjugate_and_real_part",
+        "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
         "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+        "exp_linear_map_004_theorem_exp_zero_is_identity",
+        "linear_space_general_002b_definition_matrix_norm",
         "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
       ],
       "semanticPrerequisiteLabels": [
@@ -18544,7 +18606,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 87,
+        "chapterOrder": 91,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
         ]
@@ -19116,7 +19178,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 89,
+        "chapterOrder": 88,
         "dependencyUnitEntryIds": [
           "bridge_003_claim_exp_of_diagonal"
         ]
