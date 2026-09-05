@@ -926,6 +926,7 @@ u+\overline{u}
     title: { tex: String.raw`\mathrm{ad}_X \text{ と } \mathrm{Ad}_g \text{ の定義（複素行列）}` },
     labels: ["def_ad_X_matrix"],
     statement: [
+      paragraph(["行列の積は ", ref("mat_mult"), " による。"]),
       paragraph([
         math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
         " とし、",

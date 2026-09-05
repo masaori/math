@@ -218,6 +218,33 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "共役転置とトレースによる内積の定義",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "exp_conjugation_proof_003_definition_M_n_C_convergence"
+      ],
+      "input": [
+        "複素行列の成分と行列積、共役転置、トレースの定義",
+        "成分の平方和によるノルムと集合記号"
+      ],
+      "output": [
+        "複素行列空間の表記と、共役転置した第一引数と第二引数の積のトレースで定める二変数関数"
+      ],
+      "mainTheorem": null,
+      "mainTheoremEntryId": null,
+      "boundaryEvidence": "共役転置と行列積のトレースを複素数値の二変数関数として定める現存一項で定義が閉じる。直後の交換子と共役の写像はこの項から行列空間の表記だけを受け取り、内積の値や性質を用いず、交換子の再帰と行列積・逆行列を使う別枝である。二変数関数の定義から行列上の二種類の写像への入力切替を根拠とし、プログラミングによる検証で対象・比較と全直接入力の本文・種別・粒度・依存・相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で対象・全直接入力と後続の二写像の全本文を読んだ。内積の定義とその性質・既出ノルムとの一致は区別し、性質を定義だけで証明済みとは扱わない。行列空間の表記と関数定義の分割、入力の共役転置とノルムに残る定義・説明の不足が未解決である。比較側は交換子写像とその反復、正則性と共役写像、逆行列一意性の証明が同居し、行列の和・差・単位行列と積の法則を具体的成分計算へ接続する根拠、各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_001_definition_trace",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "linear_space_general_002b_definition_matrix_norm"
+      ]
+    },
+    {
       "name": "成分の平方和によるノルムと収束の定義",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -7592,7 +7619,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 12,
+        "incomingReferenceCount": 13,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -13798,23 +13825,25 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 3292,
-        "inspectedContentSha256": "930af3abd137c24cd733790389e704b29fc6806d67db2ab194870211238a0dfd",
+        "inspectedCharacterCount": 3426,
+        "inspectedContentSha256": "8a6b649f4059d7c238cc45e58e70461badfb98bb871e4557cc5032dcc9ce601b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積の欠落参照を補った。内積定義から使うのは行列空間の表記だけであり、内積の値や性質は使わない。交換子写像・反復の再帰・正則性・共役写像の定義と逆行列一意性の証明が同居する。行列の和・差・単位行列、積の結合律と単位元の法則を具体的成分計算へ接続する根拠、各行参照が未解決であり、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "ad_binomial",
         "def_frobenius_inner_product",
         "definition_of_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "exp_conjugation_proof_003_definition_M_n_C_convergence",

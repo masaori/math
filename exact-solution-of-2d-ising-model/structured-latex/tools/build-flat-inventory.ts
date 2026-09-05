@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix", "LLMによる検証: 行列積の欠落参照を補った。内積定義から使うのは行列空間の表記だけであり、内積の値や性質は使わない。交換子写像・反復の再帰・正則性・共役写像の定義と逆行列一意性の証明が同居する。行列の和・差・単位行列、積の結合律と単位元の法則を具体的成分計算へ接続する根拠、各行参照が未解決であり、前提補完と分割後に依存と閉包を再判定する。"],
   ["exp_conjugation_proof_003_definition_M_n_C_convergence", "LLMによる検証: 内積の式に使う行列積の参照と後続の性質への案内を訂正した。行列空間の表記、二変数関数の定義、その関数が内積の性質を満たすという後続主張、既出ノルムとの一致への接続を分ける必要がある。共役転置とノルムの入力に残る未整備の定義と説明は解消済みとは扱わず、前提補完と分割後に依存と閉包を再判定する。"],
   ["eigenvalues_of_V_012_claim_star_is_norm_preserving", "LLMによる検証: 複素共役の和・積保存を行列共役へ誤参照していた箇所を、既存のFrobenius内積の性質の証明冒頭へ訂正し、その後へ依存順を移した。スカラーと行列列の所属、共役転置・複素共役・行列積・複素演算・絶対値の参照を補った。積と共役線型性、ノルム保存と極限保存の分割、有限和への帰納、第二式の同様計算、絶対値の成分式へ共役を代入する計算、添字の範囲、二箇所同時適用と各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。"],
   ["exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms", "LLMによる検証: 証明冒頭には複素共役の和・積保存の成分計算が実在する。成分表示と五群の性質、その前提となる複素数の補題の分割、包含写像の和・積・逆元保存と単射性の根拠への接続、非負実数の像の平方根と実数ノルムの所属を区別する説明、同時代入・複数法則の同時適用と各行参照が未解決である。零の場合を保ち、前提補完と分割後に依存と閉包を再判定する。"],
@@ -9904,7 +9905,205 @@ if (findToolEntry("eigenvalues_of_V_012_claim_star_is_norm_preserving").dependen
   <= findToolEntry("exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms").dependencyPlacement!.chapterOrder) {
   throw new Error("共役転置の性質が複素共役の入力証明より前へ戻りました");
 }
+const frobeniusDefinitionSectionEntryIds = [
+  "exp_conjugation_proof_003_definition_M_n_C_convergence"
+];
+const frobeniusDefinitionSection = validateReviewedSection(
+  "共役転置とトレースによる内積の定義", "数学的道具立て", frobeniusDefinitionSectionEntryIds,
+  new Map([
+  [
+    "exp_conjugation_proof_003_definition_M_n_C_convergence",
+    []
+  ]
+]),
+  new Map([
+  [
+    "exp_conjugation_proof_003_definition_M_n_C_convergence",
+    "05aec16792fec6de063b35504c90d6726cf31b5fc4509c42dab976305d55909d"
+  ]
+]),
+  [
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "eigenvalues_of_V_001_definition_trace",
+  "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+  "linear_space_general_002b_definition_matrix_norm"
+],
+  new Map([
+  [
+    "calc_formulae_003_matrix_decomposition",
+    "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ],
+  [
+    "eigenvalues_of_V_001_definition_trace",
+    "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d"
+  ],
+  [
+    "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1"
+  ],
+  [
+    "linear_space_general_002b_definition_matrix_norm",
+    "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab"
+  ]
+]),
+  [
+  "exp_conjugation_proof_003_definition_M_n_C_convergence"
+],
+);
+const frobeniusDefinitionSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "eigenvalues_of_V_001_definition_trace",
+    "kind": "definition",
+    "sha256": "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    "kind": "definition",
+    "sha256": "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_conjugation_definition_complex_conjugate_and_real_part"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_proof_003_definition_M_n_C_convergence",
+    "kind": "definition",
+    "sha256": "05aec16792fec6de063b35504c90d6726cf31b5fc4509c42dab976305d55909d",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "eigenvalues_of_V_001_definition_trace",
+      "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+      "linear_space_general_002b_definition_matrix_norm"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_proof_004_theorem_ad_binomial",
+    "kind": "theorem",
+    "sha256": "ba1875ca88bb10163d2a3ba85f2acb5e4a358169c00e6e2959ba76c666c34a1b",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
+    "kind": "definition",
+    "sha256": "8a6b649f4059d7c238cc45e58e70461badfb98bb871e4557cc5032dcc9ce601b",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_conjugation_proof_003_definition_M_n_C_convergence",
+      "exp_conjugation_proof_004_theorem_ad_binomial"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002b_definition_matrix_norm",
+    "kind": "definition",
+    "sha256": "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of frobeniusDefinitionSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`共役転置とトレースによる内積の定義の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix").dependencyPlacement!.chapterOrder
+  !== frobeniusDefinitionSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("共役転置とトレースによる内積の定義の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "共役転置とトレースによる内積の定義",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "exp_conjugation_proof_003_definition_M_n_C_convergence"
+  ],
+  "input": [
+    "複素行列の成分と行列積、共役転置、トレースの定義",
+    "成分の平方和によるノルムと集合記号"
+  ],
+  "output": [
+    "複素行列空間の表記と、共役転置した第一引数と第二引数の積のトレースで定める二変数関数"
+  ],
+  "mainTheorem": null,
+  "mainTheoremEntryId": null,
+  "boundaryEvidence": "共役転置と行列積のトレースを複素数値の二変数関数として定める現存一項で定義が閉じる。直後の交換子と共役の写像はこの項から行列空間の表記だけを受け取り、内積の値や性質を用いず、交換子の再帰と行列積・逆行列を使う別枝である。二変数関数の定義から行列上の二種類の写像への入力切替を根拠とし、プログラミングによる検証で対象・比較と全直接入力の本文・種別・粒度・依存・相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で対象・全直接入力と後続の二写像の全本文を読んだ。内積の定義とその性質・既出ノルムとの一致は区別し、性質を定義だけで証明済みとは扱わない。行列空間の表記と関数定義の分割、入力の共役転置とノルムに残る定義・説明の不足が未解決である。比較側は交換子写像とその反復、正則性と共役写像、逆行列一意性の証明が同居し、行列の和・差・単位行列と積の法則を具体的成分計算へ接続する根拠、各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "eigenvalues_of_V_001_definition_trace",
+    "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    "linear_space_general_002b_definition_matrix_norm"
+  ]
+}, {
   "name": "成分の平方和によるノルムと収束の定義",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
