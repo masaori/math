@@ -1354,7 +1354,7 @@ W
         math(String.raw`\mathbb{R}`),
         " を ",
         math(String.raw`\iota_{\mathbb{R}\to\mathbb{C}}`),
-        " で ",
+        "（", ref("inclusion_rr_to_cc"), "）で ",
         math(String.raw`\mathbb{C}`),
         " に埋め込んだとき両者は一致する）。",
       ]),

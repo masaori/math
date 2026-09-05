@@ -218,6 +218,32 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "単位行列のスカラー倍と可換性",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_002_claim_scalar_identity_commutes"
+      ],
+      "input": [
+        "複素行列の積と交換子の定義",
+        "複素数の演算法則と集合記号、行列の和・スカラー倍・単位行列の前提"
+      ],
+      "output": [
+        "単位行列の複素スカラー倍は同じサイズのすべての複素行列と可換であること"
+      ],
+      "mainTheorem": "単位行列のスカラー倍は全行列と可換",
+      "mainTheoremEntryId": "linear_space_general_002_claim_scalar_identity_commutes",
+      "boundaryEvidence": "交換子を二つの積の差へ展開し単位行列を消す現存一項で可換性の主張が閉じる。直後のノルムと収束の定義はこの可換性も交換子も使わず、絶対値・非負実数の平方根・実数の包含写像を入力に成分の平方和と実数列の収束を使う。有限行列の積の計算から大きさと収束の定義へ入力が切り替わる境界であり、プログラミングによる検証で対象と比較の全直接入力・本文・種別・粒度・相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で対象と全直接入力、比較するノルム定義と全直接入力を読んだ。対象は成分ごとの和・スカラー倍・単位行列の定義と積の法則、二箇所同時適用の分離と各行参照が未解決である。比較側はノルム・列の収束・極限・級数の定義の分割、実数列の収束・極限法則と成分の差・有限和の前提が未整備である。極限の一意性は後続のノルムの基本性質で証明しているが、定義時点ではその証明と級数の値の一意性への接続が未提示であり、絶対値とその入力に残る未完も解消済みとは扱わない。前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_047_claim_commutator_via_anticommutators",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "クロネッカー積で作る行列と数ベクトルの基底",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -7776,7 +7802,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11391,26 +11417,28 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 3115,
-        "inspectedContentSha256": "9122c9f6d4657b83c31aa6262aacf1dbaa17eea942ac352d98473083510fd647",
+        "inspectedCharacterCount": 3188,
+        "inspectedContentSha256": "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 実数の包含写像の参照を補った。数ベクトルと行列のノルム、列の収束と極限、無限級数の記法の定義が同居する。実数列の収束・極限法則と成分の差・有限和の前提が未整備である。極限の一意性は後続のノルムの基本性質で証明しているが、定義時点ではその証明への接続が未提示であり、級数の値の一意性への接続も含め補完と分割後に依存と閉包を再判定する。絶対値の定義とその入力に残る未完も解消済みとは扱わない。"
       },
       "dependsOnLabels": [
         "abs_basic_properties",
         "def_abs_arg",
         "definition_of_cc",
         "definition_of_sqrt_r_positive",
+        "inclusion_rr_to_cc",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_001_sqrt_nonnegative_real",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
         "calculation_formulae_031_definition_abs_arg",
         "calculation_formulae_031b_claim_abs_basic_properties",
         "calculation_formulae_definition_set_and_algebra_notation"

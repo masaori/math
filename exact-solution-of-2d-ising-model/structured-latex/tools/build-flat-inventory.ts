@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["linear_space_general_002b_definition_matrix_norm", "LLMによる検証: 実数の包含写像の参照を補った。数ベクトルと行列のノルム、列の収束と極限、無限級数の記法の定義が同居する。実数列の収束・極限法則と成分の差・有限和の前提が未整備である。極限の一意性は後続のノルムの基本性質で証明しているが、定義時点ではその証明への接続が未提示であり、級数の値の一意性への接続も含め補完と分割後に依存と閉包を再判定する。絶対値の定義とその入力に残る未完も解消済みとは扱わない。"],
   ["linear_space_general_002_claim_scalar_identity_commutes", "LLMによる検証: 任意の体という記述を複素行列へ具体化し、行列積・交換子・成分の複素演算法則の参照を補った。成分ごとの和・スカラー倍・単位行列の定義と積の法則、二箇所への同時適用の分離、各行参照が未解決であり、前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_001_theorem_tensor_product_basis", "LLMによる検証: 生成に関する包含の向きを逆に述べた説明を訂正した。三主張と次元・行列単位等の定義の分割、有限次元の生成族の元数の下限という未証明の一般命題を具体的複素行列へ接続する根拠、有限展開の帰納法、数ベクトルの場合の同様計算と各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000d_claim_kronecker_transpose", "LLMによる検証: 転置の定義とクロネッカー積の転置公式が同居しており、定義と主張への分割が未解決である。任意のM≥1の各サイズでの転置の定義の適用、定義を使う各行の参照を明示し、分割後に依存と閉包を再判定する。"],
@@ -9361,7 +9362,225 @@ if (findToolEntry("linear_space_general_002_claim_scalar_identity_commutes").dep
   !== kroneckerBasisSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("クロネッカー積で作る行列と数ベクトルの基底の直後の項目が変わりました");
 }
+const scalarIdentitySectionEntryIds = [
+  "linear_space_general_002_claim_scalar_identity_commutes"
+];
+const scalarIdentitySection = validateReviewedSection(
+  "単位行列のスカラー倍と可換性", "数学的道具立て", scalarIdentitySectionEntryIds,
+  new Map([
+  [
+    "linear_space_general_002_claim_scalar_identity_commutes",
+    []
+  ]
+]),
+  new Map([
+  [
+    "linear_space_general_002_claim_scalar_identity_commutes",
+    "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f"
+  ]
+]),
+  [
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field",
+  "calculation_formulae_047_claim_commutator_via_anticommutators",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_003_matrix_decomposition",
+    "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6"
+  ],
+  [
+    "calculation_formulae_047_claim_commutator_via_anticommutators",
+    "25d2f2a1ad5ab6bcbe05427a4ce4f06a4250ea5f7f3f79b5d7170303b8d4ebeb"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "linear_space_general_002_claim_scalar_identity_commutes"
+],
+);
+const scalarIdentitySectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_007_inclusion_rr_to_cc",
+    "kind": "definition",
+    "sha256": "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "kind": "claim",
+    "sha256": "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_008_multiply_by_minus_one",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_031_definition_abs_arg",
+    "kind": "definition",
+    "sha256": "fc64442d22789d6cb4f802c87699680414adc93241acb97a20a44eeb3490c2cb",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_017_definition_section_of_angle_representation",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_031b_claim_abs_basic_properties",
+    "kind": "claim",
+    "sha256": "b4e198549ba1d7b1452fe4650837a325244f089149b147b0e8f802a72731588e",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_047_claim_commutator_via_anticommutators",
+    "kind": "claim",
+    "sha256": "25d2f2a1ad5ab6bcbe05427a4ce4f06a4250ea5f7f3f79b5d7170303b8d4ebeb",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002_claim_scalar_identity_commutes",
+    "kind": "claim",
+    "sha256": "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_047_claim_commutator_via_anticommutators",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002b_definition_matrix_norm",
+    "kind": "definition",
+    "sha256": "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of scalarIdentitySectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`単位行列のスカラー倍と可換性の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("linear_space_general_002b_definition_matrix_norm").dependencyPlacement!.chapterOrder
+  !== scalarIdentitySection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("単位行列のスカラー倍と可換性の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "単位行列のスカラー倍と可換性",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "linear_space_general_002_claim_scalar_identity_commutes"
+  ],
+  "input": [
+    "複素行列の積と交換子の定義",
+    "複素数の演算法則と集合記号、行列の和・スカラー倍・単位行列の前提"
+  ],
+  "output": [
+    "単位行列の複素スカラー倍は同じサイズのすべての複素行列と可換であること"
+  ],
+  "mainTheorem": "単位行列のスカラー倍は全行列と可換",
+  "mainTheoremEntryId": "linear_space_general_002_claim_scalar_identity_commutes",
+  "boundaryEvidence": "交換子を二つの積の差へ展開し単位行列を消す現存一項で可換性の主張が閉じる。直後のノルムと収束の定義はこの可換性も交換子も使わず、絶対値・非負実数の平方根・実数の包含写像を入力に成分の平方和と実数列の収束を使う。有限行列の積の計算から大きさと収束の定義へ入力が切り替わる境界であり、プログラミングによる検証で対象と比較の全直接入力・本文・種別・粒度・相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で対象と全直接入力、比較するノルム定義と全直接入力を読んだ。対象は成分ごとの和・スカラー倍・単位行列の定義と積の法則、二箇所同時適用の分離と各行参照が未解決である。比較側はノルム・列の収束・極限・級数の定義の分割、実数列の収束・極限法則と成分の差・有限和の前提が未整備である。極限の一意性は後続のノルムの基本性質で証明しているが、定義時点ではその証明と級数の値の一意性への接続が未提示であり、絶対値とその入力に残る未完も解消済みとは扱わない。前提補完と分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "calculation_formulae_047_claim_commutator_via_anticommutators",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "クロネッカー積で作る行列と数ベクトルの基底",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
