@@ -28596,6 +28596,11 @@ Z_L(1)
                         ]),
                       ],
                       proof: [
+                        paragraph([
+                          "整数 ", math(String.raw`a,b\in\mathbb Z`), " について ",
+                          math(String.raw`-a=-b\Longleftrightarrow a=b`),
+                          " の両辺を否定した同値を用いる。",
+                        ]),
                         displayMath(String.raw`\begin{aligned}
 &\bigl(\nu_L(\sigma)\bigr)(\partial_0(e))\ne\bigl(\nu_L(\sigma)\bigr)(\partial_1(e))\\
 &\quad\Longleftrightarrow -\sigma(\partial_0(e))\ne-\sigma(\partial_1(e))
@@ -28603,11 +28608,6 @@ Z_L(1)
 &\quad\Longleftrightarrow \sigma(\partial_0(e))\ne\sigma(\partial_1(e))
 && (\because\ \mathbb{Z}\ \text{で加法逆元を取る写像は単射})
 \end{aligned}`),
-                        paragraph([
-                          "である。最後の同値は、整数 ", math(String.raw`a,b`), " について ",
-                          math(String.raw`-a=-b\Longleftrightarrow a=b`),
-                          " の両辺を否定したものである。",
-                        ]),
                       ],
                     },
                 },
