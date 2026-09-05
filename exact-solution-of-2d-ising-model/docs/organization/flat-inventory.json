@@ -1552,6 +1552,38 @@
       ],
       "boundaryEvidence": "章内依存順1は何にも依存せず、台集合と代数構造の区別、添字の省略、順序で切り出した部分集合という記号の規約だけを定める。順2はその規約の上で、実数の対に加法と乗法を入れて複素数を定義する。順3の行列の分解からは対象が数から行列へ移り、以後は行列の計算規則が続くため、順2の後で節を閉じる。生成時に二項の章配置、依存順、直接依存、および順3が複素数の定義だけを引くことを固定検査する。",
       "readabilityStatus": "二項とも、抽象語彙の自動検査には引っかかっていない。説明粒度の状態表示が「展開または分割を要する」となるのは、記号の規約が後続の複素数定義を、複素数定義が後続の絶対値の性質と行列指数級数の収束を、それぞれ案内として参照しているためである。これらは判定済みの後続案内であって意味的前提ではないので、節の確定を妨げない。内容は高校生が読める粒度で、記号の規約は例つき、複素数は成分による加法と乗法の式で定義されている。"
+    },
+    {
+      "name": "行列の積の定義と、列ごとの作用",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_004_action_on_matrix_pair"
+      ],
+      "input": [
+        "複素数の定義",
+        "集合と代数構造の記号"
+      ],
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ],
+      "output": [
+        "行列の積の成分による定義",
+        "列に並べた行列への積が、列ごとの積と一致すること"
+      ],
+      "formalizationEvidence": {
+        "leanFile": "lean/Ising2D/Part000",
+        "sageMathFile": "sagemath/_shared/defs.sage",
+        "currentStatus": "行列の積は Lean・SageMath の行列型が備える演算に対応する。本文側は成分による定義を持ち、列ごとの作用を成分計算の四段で示す。"
+      },
+      "mainTheorems": [
+        "行列の積の成分による定義",
+        "行列の積は列ごとに作用する"
+      ],
+      "boundaryEvidence": "章内依存順3は複素数の定義と記号の規約だけを入力に、行列の積を成分の有限和として定める。順4はその定義だけを使い、列に並べた行列への積が列ごとの積になることを成分計算で示す。順5の共役写像からは可逆行列と線型写像という新しい概念が入るため、順4の後で節を閉じる。生成時に二項の依存順、種別、順4が積の定義を引くこと、逆向きの依存が無いこと、および積の定義がラベル mat_mult を保持し続けることを固定検査する。",
+      "readabilityStatus": "このラベルは本文の20箇所以上から「行列の積の定義」として引かれていたのに、実体は Typst の行列構成子を使った未定義記法の未証明命題だった。引用の意味と一致するよう、成分による積の定義そのものをこのラベルの内容とし、原文が述べていた列ごとの作用は記法を定義したうえで次のブロックへ移して証明を付けた。積の定義が複素数の定義を引くのは、本文の並びでは後ろにあるが依存順では先行する前提であり、案内ではないものとして記録した。"
     }
   ],
   "explanationGranularityReview": {
@@ -6002,7 +6034,6 @@
   ],
   "unlabeledEntryIds": [
     "calc_formulae_000_cosh_sinh_product",
-    "calc_formulae_004_action_on_matrix_pair",
     "calc_formulae_009_sqrt_minus_one",
     "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor",
     "TV1_hatZ_hatY_013_definition_product_maps",
@@ -6416,8 +6447,8 @@
     },
     {
       "id": "calc_formulae_003_matrix_decomposition",
-      "kind": "theorem",
-      "title": "行列の分解",
+      "kind": "definition",
+      "title": "行列の積の成分による定義",
       "titleFormat": "text",
       "labels": [
         "mat_mult"
@@ -6434,11 +6465,11 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 219,
-        "inspectedContentSha256": "a97a47798c1376adfb7b1536fdbb7d39f2a0953080fdf0177149de1f7ba89200",
+        "inspectedCharacterCount": 1340,
+        "inspectedContentSha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6448,17 +6479,22 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "definition_of_cc"
+        "definition_of_cc",
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "calc_formulae_006_definition_of_cc"
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
         "definition_of_cc"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [
+        "definition_of_cc"
+      ],
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
@@ -6473,9 +6509,11 @@
     {
       "id": "calc_formulae_004_action_on_matrix_pair",
       "kind": "theorem",
-      "title": "行列の組みへの作用",
+      "title": "行列の積は列ごとに作用する",
       "titleFormat": "text",
-      "labels": [],
+      "labels": [
+        "mat_columnwise"
+      ],
       "sourceFile": "000_calculation_formulae_00_09.ts",
       "sourceOrdinal": 5,
       "provisionalFinalChapter": "数学的道具立て",
@@ -6491,8 +6529,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 203,
-        "inspectedContentSha256": "d75c516ec39c361c617c19883fc94d4e9d4e42fad60bfff00eb83952369591dd",
+        "inspectedCharacterCount": 1736,
+        "inspectedContentSha256": "900bc9b1d0d8fffa6431c4b249e0ce4656c3f837f0b6a4e4431aa3af677d0ebf",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -6502,13 +6540,16 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "definition_of_cc"
+        "definition_of_cc",
+        "mat_mult"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc"
       ],
       "semanticPrerequisiteLabels": [
-        "definition_of_cc"
+        "definition_of_cc",
+        "mat_mult"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -6596,7 +6637,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 15,
+        "incomingReferenceCount": 16,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"

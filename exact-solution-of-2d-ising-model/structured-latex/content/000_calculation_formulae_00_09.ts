@@ -882,25 +882,104 @@ y^2>x\ \land\ x>0
   },
   {
     id: "calc_formulae_003_matrix_decomposition",
-    kind: "theorem",
+    kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/003_theorem_行列の分解.typ", ordinal: 4 },
-    title: { text: "行列の分解" },
+    title: { text: "行列の積の成分による定義" },
     labels: ["mat_mult"],
     statement: [
-      displayMath("A\\in\\operatorname{Mat}(n,\\mathbb{C}),\\ a,b\\in\\mathbb{C}^n"),
-      displayMath(String.raw`\operatorname{mat}(Aa,Ab)=A\operatorname{mat}(a,b)`),
+      paragraph([
+        math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする（",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " は成分が ",
+        ref("definition_of_cc"),
+        " の複素数である ",
+        math(String.raw`m`),
+        " 行 ",
+        math(String.raw`n`),
+        " 列の行列全体、",
+        math(String.raw`\mathrm{Mat}(n,\mathbb{C}) := \mathrm{Mat}(n,n,\mathbb{C})`),
+        "）。積 ",
+        math(String.raw`AB \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`(AB)_{ik} := \sum_{j=1}^{n} A_{ij}\,B_{jk}
+\qquad (i \in \{1,\dots,m\},\ k \in \{1,\dots,p\})`),
+      paragraph([
+        "で定める。右辺は ",
+        math(String.raw`n`),
+        " 個の複素数の有限和である。数ベクトル ",
+        math(String.raw`a \in \mathbb{C}^n`),
+        " は ",
+        math(String.raw`n`),
+        " 行 1 列の行列とみなし、",
+        math(String.raw`Aa`),
+        " も同じ式で定める。",
+      ]),
     ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-05: 原文のこのブロックは Typst の行列構成子 mat(...) を使った「行列の分解」で、記号 mat が本文で定義されておらず証明も無かった。一方このラベル mat_mult は本文の20箇所以上から「行列の積の定義」として引かれていた。引用の意味と一致するよう、成分による積の定義そのものをこのラベルの内容とした。原文が述べていた列ごとの作用は次のブロックへ、記法を定義したうえで移した。",
+      ],
+    },
   },
   {
     id: "calc_formulae_004_action_on_matrix_pair",
     kind: "theorem",
     origin: { path: "_old/typst/parts/000_計算公式/004_theorem_行列の組みへの作用.typ", ordinal: 5 },
-    title: { text: "行列の組みへの作用" },
-    labels: [],
+    title: { text: "行列の積は列ごとに作用する" },
+    labels: ["mat_columnwise"],
     statement: [
-      displayMath("A,B,C\\in\\operatorname{Mat}(n,\\mathbb{C})"),
-      displayMath(String.raw`\operatorname{mat}(AB,AC)=A\operatorname{mat}(B,C)`),
+      paragraph([
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`b_1,\dots,b_p \in \mathbb{C}^n`),
+        " とし、これらを列に並べた行列を ",
+        math(String.raw`\left[\,b_1\ \cdots\ b_p\,\right] \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " と書く（第 ",
+        math(String.raw`k`),
+        " 列の第 ",
+        math(String.raw`j`),
+        " 成分が ",
+        math(String.raw`(b_k)_j`),
+        " である行列）。このとき",
+      ]),
+      displayMath(String.raw`A\left[\,b_1\ \cdots\ b_p\,\right]
+= \left[\,Ab_1\ \cdots\ Ab_p\,\right]`),
+      paragraph(["が成り立つ。"]),
     ],
+    proof: [
+      paragraph([
+        "両辺は同じ大きさの行列なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(A\left[\,b_1\ \cdots\ b_p\,\right]\right)_{ik}
+&=\sum_{j=1}^{n} A_{ij}\,\left(\left[\,b_1\ \cdots\ b_p\,\right]\right)_{jk}
+  &&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&=\sum_{j=1}^{n} A_{ij}\,(b_k)_j
+  &&\bigl(\because\ \text{列に並べた行列の成分の定め方}\bigr)\\
+&=(Ab_k)_i
+  &&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\ \text{を}\ Ab_k\ \text{へ適用}\bigr)\\
+&=\left(\left[\,Ab_1\ \cdots\ Ab_p\,\right]\right)_{ik}
+  &&\bigl(\because\ \text{列に並べた行列の成分の定め方}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-05: 原文は Typst の行列構成子 mat(...) で「mat(Aa,Ab)=A mat(a,b)」と書いていたが、その記号は本文で定義されておらず証明も無かった。列に並べた行列という記法を主張の中で定義し、成分計算の四段で証明した。",
+      ],
+    },
   },
   {
     id: "calc_formulae_005_matrix_conjugation",

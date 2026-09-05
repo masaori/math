@@ -193,7 +193,7 @@ const pauliAndCliffordMatrixGroupsExpectedExternalInputEntryIds = [
 ].sort();
 const pauliAndCliffordMatrixGroupsExpectedExternalInputContentSha256 = new Map<string, string>([
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
-  ["calc_formulae_003_matrix_decomposition", "a97a47798c1376adfb7b1536fdbb7d39f2a0953080fdf0177149de1f7ba89200"],
+  ["calc_formulae_003_matrix_decomposition", "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "e644e2525aecd17cc1b8c439db76c6c4b94348dd1fe9c63405c5c8b6077f068d"],
@@ -1023,7 +1023,7 @@ const evenSectorGeneratorExpectedExternalInputContentSha256 = new Map<string, st
   ["bridge_002_claim_sigma_z_diagonal_action", "13002ebb9535f89209c2ebfa23358a0f95c1c1b2e7bcb24a08c2b00b87a10232"],
   ["bridge_009_claim_epsilon_projector_properties", "d109dc4db25a9487b161b9c265101260700ec7eba6697fcb0fde07bc728d9100"],
   ["bridge_010_claim_epsilon_commutes", "225512460e5993591f6025bf01e9757753f1b3fc7d65cb02bfd86ee5a82a1735"],
-  ["calc_formulae_003_matrix_decomposition", "a97a47798c1376adfb7b1536fdbb7d39f2a0953080fdf0177149de1f7ba89200"],
+  ["calc_formulae_003_matrix_decomposition", "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "d56b2a60243b4307c691d3f908be75e465b5319aa6209405017082a2055eb9c3"],
@@ -1649,6 +1649,7 @@ const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", new Set(["theorem_exp_product"])],
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", new Set(["mat_mult"])],
   ["eigenvalues_of_V_008_claim_joint_eigenspace_decomposition", new Set(["trace_of_idempotent"])],
+  ["calc_formulae_004_action_on_matrix_pair", new Set(["mat_mult"])],
   ["maxeig_009_claim_partition_function_sandwich", new Set(["Z_equals_trace_of_W", "trace_power_sandwich"])],
   ["maxeig_008_claim_trace_power_sandwich", new Set(["moment_log_convexity", "psd_cauchy_schwarz"])],
   ["maxeig_007_claim_operator_bound", new Set(["def_matrix_norm", "psd_cauchy_schwarz", "def_rayleigh_sup"])],
@@ -1681,6 +1682,9 @@ const forwardNavigationReviewById = new Map<string, Map<string, string>>([
 const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["exp_conjugation_proof_003_definition_M_n_C_convergence", new Set(["def_hermitian_positive_definite", "def_trace"])],
   ["transfer_matrix_001_definition_symbols", new Set(["pauli_matrix_products"])],
+  // 行列の積の定義は成分が複素数であることを前提にする。複素数の定義は本文では後ろに置かれているが、
+  // 依存順では先行する（提示順と依存順が食い違う箇所であり、案内ではなく前提である）。
+  ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
@@ -3488,7 +3492,7 @@ if (setAndAlgebraNotationEntry.kind !== "definition"
   || JSON.stringify([...complexNumberDefinitionEntry.dependsOnEntryIds].sort())
     !== JSON.stringify([setAndAlgebraNotationEntry.id])
   || JSON.stringify([...matrixDecompositionEntry.dependsOnEntryIds].sort())
-    !== JSON.stringify([complexNumberDefinitionEntry.id])
+    !== JSON.stringify([complexNumberDefinitionEntry.id, setAndAlgebraNotationEntry.id].sort())
   // 二項の前方参照は「後続への案内」として判定済みで、意味的前提ではない
   || complexNumberDefinitionEntry.forwardStatementReferenceLabelsUsedAsPrerequisites.length !== 0
   || setAndAlgebraNotationEntry.forwardStatementReferenceLabelsUsedAsPrerequisites.length !== 0) {
@@ -3498,6 +3502,26 @@ if (setAndAlgebraNotationEntry.kind !== "definition"
     notationDependencies: setAndAlgebraNotationEntry.dependsOnEntryIds,
     complexNumberDependencies: complexNumberDefinitionEntry.dependsOnEntryIds,
     matrixDecompositionDependencies: matrixDecompositionEntry.dependsOnEntryIds,
+  })}`);
+}
+const columnwiseActionEntry = entries.find((entry) =>
+  entry.id === "calc_formulae_004_action_on_matrix_pair")!;
+const matrixConjugationEntry = entries.find((entry) =>
+  entry.id === "calc_formulae_005_matrix_conjugation")!;
+if (matrixDecompositionEntry.kind !== "definition"
+  || columnwiseActionEntry.kind !== "theorem"
+  || columnwiseActionEntry.dependencyPlacement!.chapterOrder !== 4
+  || matrixConjugationEntry.dependencyPlacement!.chapterOrder !== 5
+  || !columnwiseActionEntry.dependsOnEntryIds.includes(matrixDecompositionEntry.id)
+  || matrixDecompositionEntry.dependsOnEntryIds.includes(columnwiseActionEntry.id)
+  || matrixConjugationEntry.dependsOnEntryIds.includes(columnwiseActionEntry.id)
+  // 行列の積の定義は本文の20箇所以上から根拠として引かれる。引用先がこのラベルであり続けること。
+  || !matrixDecompositionEntry.labels.includes("mat_mult")) {
+  throw new Error(`行列の積の定義と列ごとの作用の二項節が変わりました: ${JSON.stringify({
+    orders: [matrixDecompositionEntry, columnwiseActionEntry, matrixConjugationEntry]
+      .map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder, entry.kind]),
+    columnwiseDependencies: columnwiseActionEntry.dependsOnEntryIds,
+    conjugationDependencies: matrixConjugationEntry.dependsOnEntryIds,
   })}`);
 }
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
@@ -4385,6 +4409,34 @@ const isingModelSectionBoundaries = [{
   ],
   boundaryEvidence: "章内依存順1は何にも依存せず、台集合と代数構造の区別、添字の省略、順序で切り出した部分集合という記号の規約だけを定める。順2はその規約の上で、実数の対に加法と乗法を入れて複素数を定義する。順3の行列の分解からは対象が数から行列へ移り、以後は行列の計算規則が続くため、順2の後で節を閉じる。生成時に二項の章配置、依存順、直接依存、および順3が複素数の定義だけを引くことを固定検査する。",
   readabilityStatus: "二項とも、抽象語彙の自動検査には引っかかっていない。説明粒度の状態表示が「展開または分割を要する」となるのは、記号の規約が後続の複素数定義を、複素数定義が後続の絶対値の性質と行列指数級数の収束を、それぞれ案内として参照しているためである。これらは判定済みの後続案内であって意味的前提ではないので、節の確定を妨げない。内容は高校生が読める粒度で、記号の規約は例つき、複素数は成分による加法と乗法の式で定義されている。",
+}, {
+  name: "行列の積の定義と、列ごとの作用",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [matrixDecompositionEntry.id, columnwiseActionEntry.id],
+  input: [
+    "複素数の定義",
+    "集合と代数構造の記号",
+  ],
+  externalInputEntryIds: [
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+  ],
+  output: [
+    "行列の積の成分による定義",
+    "列に並べた行列への積が、列ごとの積と一致すること",
+  ],
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/Part000",
+    sageMathFile: "sagemath/_shared/defs.sage",
+    currentStatus: "行列の積は Lean・SageMath の行列型が備える演算に対応する。本文側は成分による定義を持ち、列ごとの作用を成分計算の四段で示す。",
+  },
+  mainTheorems: [
+    "行列の積の成分による定義",
+    "行列の積は列ごとに作用する",
+  ],
+  boundaryEvidence: "章内依存順3は複素数の定義と記号の規約だけを入力に、行列の積を成分の有限和として定める。順4はその定義だけを使い、列に並べた行列への積が列ごとの積になることを成分計算で示す。順5の共役写像からは可逆行列と線型写像という新しい概念が入るため、順4の後で節を閉じる。生成時に二項の依存順、種別、順4が積の定義を引くこと、逆向きの依存が無いこと、および積の定義がラベル mat_mult を保持し続けることを固定検査する。",
+  readabilityStatus: "このラベルは本文の20箇所以上から「行列の積の定義」として引かれていたのに、実体は Typst の行列構成子を使った未定義記法の未証明命題だった。引用の意味と一致するよう、成分による積の定義そのものをこのラベルの内容とし、原文が述べていた列ごとの作用は記法を定義したうえで次のブロックへ移して証明を付けた。積の定義が複素数の定義を引くのは、本文の並びでは後ろにあるが依存順では先行する前提であり、案内ではないものとして記録した。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

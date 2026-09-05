@@ -229,6 +229,7 @@ export const ALL_LABELS = [
   "linearity_of_T",
   "linearity_of_T_V2",
   "linearity_of_T_on_check_Z_Y",
+  "mat_columnwise",
   "mat_conj",
   "mat_mult",
   "matrix_completeness",
