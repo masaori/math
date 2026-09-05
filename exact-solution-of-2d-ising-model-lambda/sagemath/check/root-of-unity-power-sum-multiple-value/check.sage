@@ -15,8 +15,12 @@ def check_power_sum_multiple_value(nmax, kmax):
     count = 0
     for n in range(1, nmax + 1):
         mu = roots_of_unity(n)
-        # 準備 1: mu_n は有限集合（列挙できている）
-        assert len(mu) == n  # 準備 2: |mu_n| = n（claim_root_of_unity_card）
+        # 準備: 列の長さだけでなく、相異性・根への所属・全根の被覆を判定する。
+        polynomial_ring = PolynomialRing(QQbar, "t")
+        t = polynomial_ring.gen()
+        assert all(z ** n == one for z in mu)
+        assert len(set(mu)) == len(mu) == n
+        assert set(mu) == set((t ** n - 1).roots(multiplicities=False))
         for k in range(kmax + 1):
             m = n * k
             # 第 1 の等号: S_{n,m} の定義
