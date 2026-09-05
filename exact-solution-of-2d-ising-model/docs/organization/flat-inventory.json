@@ -218,6 +218,36 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "正弦の近似と積分の対数評価",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "critical_008_claim_elementary_sine_bounds",
+        "critical_009_claim_closed_form_log_integral",
+        "critical_010_claim_sine_integral_two_sided"
+      ],
+      "input": [
+        "正弦・余弦、逆双曲線正弦の定義と導関数、非負実数の平方根、集合記号",
+        "本文で用いる対数・微分・積分の性質（一般形の前提の整備は未完）"
+      ],
+      "output": [
+        "正弦と半角の差の三次評価と正比例の上下界",
+        "逆双曲線正弦による積分値と対数による評価",
+        "正弦の平方を含む積分の対数項と有界誤差による上下評価"
+      ],
+      "mainTheorem": "正弦の平方を含む積分の両側評価",
+      "mainTheoremEntryId": "critical_010_claim_sine_integral_two_sided",
+      "boundaryEvidence": "正弦の近似と、逆双曲線正弦による積分の計算は互いを使わない二枝であり、末尾の積分の両側評価が両枝を合流させる三項を節とする。直後のトレースの定義はこれらの積分や関数を使わず、複素行列の対角成分の有限和へ入力が切り替わる。解析の使用自体を分類条件とせず、末尾の主張への閉包と次項の入力変更を根拠にする。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度、二枝の内部依存・連続性・唯一の節末・後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で三項とトレースの全本文・全直接入力を読んだ。正弦側の証明の定義域超過と微分・零での値・π²評価の根拠、積分計算の三主張の分割、対数や平方根の積商法則・合成微分規則・数値評価・複数演算の省略、末尾の積分の定義可能性と評価の分割、c0の正値性とBの数値根拠、各点評価と積分の複数不等式の分割と各行参照を未解決とする。共通の積分の線型性・単調性・基本定理をイジング導入注記から一般形へ切り出す必要がある。トレースは対角成分の有限和として定義されており積分側の未完入力を使わない。本文完成とは扱わず、解析事実の補完と主張分割後に分類・依存・配置を再判定する。 p=0の分岐を維持し、正のpだけで分母を評価する。対数項との差は定数とは断定せず有界な差とする。",
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_014c_definition_sin",
+        "calc_formulae_014e_definition_cos",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "critical_001_claim_cosh_addition_and_half_angle"
+      ]
+    },
+    {
       "name": "双曲線関数の加法公式と逆双曲線正弦",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2443,7 +2473,9 @@
       "evensectorT_003_claim_coefficient_conversion",
       "evenfermi_007_claim_T_eq_on_check_Z_Y",
       "critical_001_claim_cosh_addition_and_half_angle",
-      "critical_008_claim_elementary_sine_bounds"
+      "critical_008_claim_elementary_sine_bounds",
+      "critical_009_claim_closed_form_log_integral",
+      "critical_010_claim_sine_integral_two_sided"
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
@@ -7152,7 +7184,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 20,
+        "incomingReferenceCount": 22,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8089,7 +8121,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -27224,24 +27256,26 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5799,
-        "inspectedContentSha256": "e281351e25dc824e0b3fdbd1e713ca9da103d79ef4926b72e541382ef25d72b6",
+        "inspectedCharacterCount": 5959,
+        "inspectedContentSha256": "caf746ec96c16a256aefbec5dc2dc79537d74e662922b544c70c5035146b3875",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 三つの積分・対数評価の分割、対数の定義と法則、平方根の積商法則、合成微分の分解と各行参照が未解決である。積分の基本定理等を一般形で切り出す必要があり、解析前提の補完後に分類・依存・配置を再判定する。"
       },
       "dependsOnLabels": [
         "cosh_addition_and_half_angle",
+        "definition_of_sqrt_r_positive",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
         "calculation_formulae_definition_set_and_algebra_notation",
         "critical_001_claim_cosh_addition_and_half_angle"
       ],
@@ -27282,25 +27316,29 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5985,
-        "inspectedContentSha256": "8e1bebc173af92eea9c98e27d36802398c8fc2b7484876cf656aafa7f9b6713a",
+        "inspectedCharacterCount": 6204,
+        "inspectedContentSha256": "f7860f6e57f8cb18dea15cd0a2deb5c958d4ab8be60fcf4c9e55620598c1b0d4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 積分の定義可能性と両側評価の分割、c0の正値性とBの数値根拠、複数の不等式と演算の分解・各行参照が未解決である。p=0の分岐を維持し、正のpだけで分母を評価する。有界差を定数差と述べた表現は訂正した。積分の一般形の前提と入力の未完事項を補った後に分類・依存・配置を再判定する。"
       },
       "dependsOnLabels": [
         "closed_form_log_integral",
+        "def_sin",
+        "definition_of_sqrt_r_positive",
         "elementary_sine_bounds",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_014c_definition_sin",
         "calculation_formulae_definition_set_and_algebra_notation",
         "critical_008_claim_elementary_sine_bounds",
         "critical_009_claim_closed_form_log_integral"

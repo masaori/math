@@ -1367,6 +1367,7 @@ t-\sin t
     title: { tex: String.raw`\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}} = 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right)` },
     labels: ["closed_form_log_integral"],
     statement: [
+      paragraph(["非負実数の平方根は ", ref("definition_of_sqrt_r_positive"), " を用いる。"]),
       paragraph([
         math(String.raw`\delta \in \mathbb{R}_{>0}`),
         " と ",
@@ -1518,6 +1519,7 @@ G'(\theta)
     title: { tex: String.raw`2\log\frac{\pi}{\delta} \leq \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\sin^2(\theta/2)}} \leq 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2} + B` },
     labels: ["sine_integral_two_sided"],
     statement: [
+      paragraph(["平方根と正弦は ", ref("definition_of_sqrt_r_positive"), "、", ref("def_sin"), " を用いる。"]),
       paragraph([
         ref("elementary_sine_bounds"),
         " の ",
@@ -1544,7 +1546,7 @@ G'(\theta)
         math(String.raw`\delta \to +0`),
         " で有界に留まるので、この積分は ",
         math(String.raw`2\log\frac{1}{\delta}`),
-        " と定数の差しかもたない。",
+        " との差が有界に留まる。",
       ]),
     ],
     proof: [

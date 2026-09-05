@@ -1687,6 +1687,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["critical_009_claim_closed_form_log_integral", "LLMによる検証: 三つの積分・対数評価の分割、対数の定義と法則、平方根の積商法則、合成微分の分解と各行参照が未解決である。積分の基本定理等を一般形で切り出す必要があり、解析前提の補完後に分類・依存・配置を再判定する。"],
+  ["critical_010_claim_sine_integral_two_sided", "LLMによる検証: 積分の定義可能性と両側評価の分割、c0の正値性とBの数値根拠、複数の不等式と演算の分解・各行参照が未解決である。p=0の分岐を維持し、正のpだけで分母を評価する。有界差を定数差と述べた表現は訂正した。積分の一般形の前提と入力の未完事項を補った後に分類・依存・配置を再判定する。"],
   ["critical_008_claim_elementary_sine_bounds", "LLMによる検証: 主張の半角は現行sin/cosの定義域内だが、証明のt≥0全域での使用は定義域を超える。微分公式・零での値・π²の数値区間の根拠と複数不等式の分割が未解決である。R3/R4の積分の性質をイジング導入注記から一般形へ切り出す必要があり、補完後に分類・依存・配置を再判定する。"],
   ["critical_001_claim_cosh_addition_and_half_angle", "LLMによる検証: 五群の主張とarcsinhの定義を同居させ、指数対数の前提、微分規則と各行参照、同様計算の省略が残る。R3/R4の積分の性質はイジング固有の導入注記に混在しており、一般形の解析事実として切り出す必要がある。注記全体を直接入力へ加えず、補完後に分類・依存・配置を再判定する。"],
   ["calculation_formulae_047_claim_commutator_via_anticommutators", "LLMによる検証: 交換子と反交換子の二定義と恒等式を同居させている。結合律・分配則の根拠参照、同時の括弧外しと二箇所への定義代入、零の挿入の演算分解が未解決である。定義と主張を分割した後に依存と閉包を再判定する。"],
@@ -8019,7 +8021,226 @@ if (findToolEntry("critical_008_claim_elementary_sine_bounds").dependencyPlaceme
   !== hyperbolicCalculusSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("双曲線関数の加法公式と逆双曲線正弦の直後の項目が変わりました");
 }
+const sineIntegralSectionEntryIds = [
+  "critical_008_claim_elementary_sine_bounds",
+  "critical_009_claim_closed_form_log_integral",
+  "critical_010_claim_sine_integral_two_sided"
+];
+const sineIntegralSection = validateReviewedSection(
+  "正弦の近似と積分の対数評価", "数学的道具立て", sineIntegralSectionEntryIds,
+  new Map([
+  [
+    "critical_008_claim_elementary_sine_bounds",
+    []
+  ],
+  [
+    "critical_009_claim_closed_form_log_integral",
+    []
+  ],
+  [
+    "critical_010_claim_sine_integral_two_sided",
+    [
+      "critical_008_claim_elementary_sine_bounds",
+      "critical_009_claim_closed_form_log_integral"
+    ]
+  ]
+]),
+  new Map([
+  [
+    "critical_008_claim_elementary_sine_bounds",
+    "9884c021fc176d9524dd25e4f5348eb304a09edfd96264c49bf76e4d0e3a2a41"
+  ],
+  [
+    "critical_009_claim_closed_form_log_integral",
+    "caf746ec96c16a256aefbec5dc2dc79537d74e662922b544c70c5035146b3875"
+  ],
+  [
+    "critical_010_claim_sine_integral_two_sided",
+    "f7860f6e57f8cb18dea15cd0a2deb5c958d4ab8be60fcf4c9e55620598c1b0d4"
+  ]
+]),
+  [
+  "calc_formulae_001_sqrt_nonnegative_real",
+  "calc_formulae_014c_definition_sin",
+  "calc_formulae_014e_definition_cos",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "critical_001_claim_cosh_addition_and_half_angle"
+],
+  new Map([
+  [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d"
+  ],
+  [
+    "calc_formulae_014c_definition_sin",
+    "6a8ea2317a4ee4a034fe63a9f7371bb06cc429b38cc136c4059b9b1c28983b54"
+  ],
+  [
+    "calc_formulae_014e_definition_cos",
+    "cf32ed2ef717d12941d16958599fccde9b93fe4dc82a7a97b5e4188e35960205"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ],
+  [
+    "critical_001_claim_cosh_addition_and_half_angle",
+    "1cb6576cf9e8ced25389d06eaff8f79b31a55154aab293a5fa1b58526482dd08"
+  ]
+]),
+  [
+  "critical_010_claim_sine_integral_two_sided"
+],
+);
+const sineIntegralSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_014c_definition_sin",
+    "kind": "definition",
+    "sha256": "6a8ea2317a4ee4a034fe63a9f7371bb06cc429b38cc136c4059b9b1c28983b54",
+    "dependencies": [
+      "calc_formulae_014_definition_inverse_trig_functions",
+      "calc_formulae_014b_claim_arcsin_bijection"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_014e_definition_cos",
+    "kind": "definition",
+    "sha256": "cf32ed2ef717d12941d16958599fccde9b93fe4dc82a7a97b5e4188e35960205",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_014c_definition_sin",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "critical_001_claim_cosh_addition_and_half_angle",
+    "kind": "claim",
+    "sha256": "1cb6576cf9e8ced25389d06eaff8f79b31a55154aab293a5fa1b58526482dd08",
+    "dependencies": [
+      "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "critical_008_claim_elementary_sine_bounds",
+    "kind": "claim",
+    "sha256": "9884c021fc176d9524dd25e4f5348eb304a09edfd96264c49bf76e4d0e3a2a41",
+    "dependencies": [
+      "calc_formulae_014c_definition_sin",
+      "calc_formulae_014e_definition_cos",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "critical_009_claim_closed_form_log_integral",
+    "kind": "claim",
+    "sha256": "caf746ec96c16a256aefbec5dc2dc79537d74e662922b544c70c5035146b3875",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "critical_001_claim_cosh_addition_and_half_angle"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "critical_010_claim_sine_integral_two_sided",
+    "kind": "claim",
+    "sha256": "f7860f6e57f8cb18dea15cd0a2deb5c958d4ab8be60fcf4c9e55620598c1b0d4",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_014c_definition_sin",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "critical_008_claim_elementary_sine_bounds",
+      "critical_009_claim_closed_form_log_integral"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "eigenvalues_of_V_001_definition_trace",
+    "kind": "definition",
+    "sha256": "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  }
+];
+for (const expected of sineIntegralSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`正弦の近似と積分の対数評価の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("eigenvalues_of_V_001_definition_trace").dependencyPlacement!.chapterOrder
+  !== sineIntegralSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("正弦の近似と積分の対数評価の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "正弦の近似と積分の対数評価",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "critical_008_claim_elementary_sine_bounds",
+    "critical_009_claim_closed_form_log_integral",
+    "critical_010_claim_sine_integral_two_sided"
+  ],
+  "input": [
+    "正弦・余弦、逆双曲線正弦の定義と導関数、非負実数の平方根、集合記号",
+    "本文で用いる対数・微分・積分の性質（一般形の前提の整備は未完）"
+  ],
+  "output": [
+    "正弦と半角の差の三次評価と正比例の上下界",
+    "逆双曲線正弦による積分値と対数による評価",
+    "正弦の平方を含む積分の対数項と有界誤差による上下評価"
+  ],
+  "mainTheorem": "正弦の平方を含む積分の両側評価",
+  "mainTheoremEntryId": "critical_010_claim_sine_integral_two_sided",
+  "boundaryEvidence": "正弦の近似と、逆双曲線正弦による積分の計算は互いを使わない二枝であり、末尾の積分の両側評価が両枝を合流させる三項を節とする。直後のトレースの定義はこれらの積分や関数を使わず、複素行列の対角成分の有限和へ入力が切り替わる。解析の使用自体を分類条件とせず、末尾の主張への閉包と次項の入力変更を根拠にする。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度、二枝の内部依存・連続性・唯一の節末・後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で三項とトレースの全本文・全直接入力を読んだ。正弦側の証明の定義域超過と微分・零での値・π²評価の根拠、積分計算の三主張の分割、対数や平方根の積商法則・合成微分規則・数値評価・複数演算の省略、末尾の積分の定義可能性と評価の分割、c0の正値性とBの数値根拠、各点評価と積分の複数不等式の分割と各行参照を未解決とする。共通の積分の線型性・単調性・基本定理をイジング導入注記から一般形へ切り出す必要がある。トレースは対角成分の有限和として定義されており積分側の未完入力を使わない。本文完成とは扱わず、解析事実の補完と主張分割後に分類・依存・配置を再判定する。 p=0の分岐を維持し、正のpだけで分母を評価する。対数項との差は定数とは断定せず有界な差とする。",
+  "externalInputEntryIds": [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "calc_formulae_014c_definition_sin",
+    "calc_formulae_014e_definition_cos",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "critical_001_claim_cosh_addition_and_half_angle"
+  ]
+}, {
   "name": "双曲線関数の加法公式と逆双曲線正弦",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
