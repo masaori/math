@@ -1692,6 +1692,10 @@ const futureBlockSplitRecommendedById = new Set([
   "transfer_matrix_011_definition_H1_H2",
 ]);
 const presentationPredecessorEntryIdsById = new Map<string, string[]>([
+  // 分割で切り出した二項は、依存関係だけなら章のずっと手前へ移せるが、本文の並びは
+  // 分割前と同じ位置に保つ（読む順序を変えないため）。
+  ["maxeig_010a_definition_sector_rayleigh_sup", ["maxeig_009_claim_partition_function_sandwich"]],
+  ["maxeig_010b_claim_epsilon_commutes_with_W", ["maxeig_010a_definition_sector_rayleigh_sup"]],
   ["closing_definition_D0_open_chain_operator", ["evensectorT_definition_H1_plus"]],
   ["closing_definition_G_boundary_operator", ["closing_definition_D0_open_chain_operator"]],
   ["closing_claim_D0_G_diagonal_action", ["closing_004_claim_H1_plus_in_sigma_z_form"]],
@@ -3426,6 +3430,47 @@ if (partitionFunctionSandwichEntry.kind !== "claim"
     dependencies: partitionFunctionSandwichEntry.dependsOnEntryIds,
   })}`);
 }
+const sectorRayleighSupEntry = entries.find((entry) =>
+  entry.id === "maxeig_010a_definition_sector_rayleigh_sup")!;
+const epsilonCommutesWithWEntry = entries.find((entry) =>
+  entry.id === "maxeig_010b_claim_epsilon_commutes_with_W")!;
+const sectorDecompositionEntry = entries.find((entry) =>
+  entry.id === "maxeig_010_claim_sector_decomposition_of_c")!;
+const sectorRayleighSupExpectedDirectDependencies = [
+  "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+  "bridge_008_definition_epsilon_projectors",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_000_definition_kronecker_product",
+  "linear_space_general_000b_claim_kronecker_product_rule",
+  "maxeig_006_definition_rayleigh_sup",
+  "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+].sort();
+const epsilonCommutesWithWExpectedDirectDependencies = [
+  "bridge_010_claim_epsilon_commutes",
+  "maxeig_001a_definition_symmetrized_transfer_matrix",
+  "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+].sort();
+if (sectorRayleighSupEntry.kind !== "definition"
+  || epsilonCommutesWithWEntry.kind !== "claim"
+  || sectorRayleighSupEntry.dependencyPlacement!.chapterOrder !== 79
+  || epsilonCommutesWithWEntry.dependencyPlacement!.chapterOrder !== 80
+  || JSON.stringify([...sectorRayleighSupEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(sectorRayleighSupExpectedDirectDependencies)
+  || JSON.stringify([...epsilonCommutesWithWEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(epsilonCommutesWithWExpectedDirectDependencies)
+  || sectorRayleighSupEntry.dependsOnEntryIds.includes(epsilonCommutesWithWEntry.id)
+  || epsilonCommutesWithWEntry.dependsOnEntryIds.includes(sectorRayleighSupEntry.id)
+  || !sectorDecompositionEntry.dependsOnEntryIds.includes(sectorRayleighSupEntry.id)
+  || !sectorDecompositionEntry.dependsOnEntryIds.includes(epsilonCommutesWithWEntry.id)) {
+  throw new Error(`セクター上限の定義と可換性の二項節が変わりました: ${JSON.stringify({
+    orders: [sectorRayleighSupEntry, epsilonCommutesWithWEntry, sectorDecompositionEntry]
+      .map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
+    sectorRayleighSupDependencies: sectorRayleighSupEntry.dependsOnEntryIds,
+    epsilonCommutesDependencies: epsilonCommutesWithWEntry.dependsOnEntryIds,
+    sectorDecompositionDependencies: sectorDecompositionEntry.dependsOnEntryIds,
+  })}`);
+}
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || ![
@@ -4254,6 +4299,37 @@ const isingModelSectionBoundaries = [{
   concludingClaimEntryId: partitionFunctionSandwichEntry.id,
   boundaryEvidence: "章内依存順77は、分配関数とトレースの一致、トレースの挟み込み、パウリ形の分配関数表示だけを直接入力に、分配関数の両側評価へ移す。これは行列のトレースについての評価を、模型の分配関数についての評価へ言い換える一歩であり、以後この結論を使う項目はすべて順77より後にある。生成時に全直接依存、章内依存順、および順77以前の項目がこの結論を引かないことを固定検査する。",
   readabilityStatus: "一文にまとめていた二段の適用を、下からの評価と上からの評価の二つの鎖へ開き、各行が定義または既証の主張を一つだけ引く形にした。",
+}, {
+  name: "セクターごとの上限の定義と全スピン反転行列との可換性",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [sectorRayleighSupEntry.id, epsilonCommutesWithWEntry.id],
+  input: [
+    "単位球面上の上限 c(M) の定義",
+    "全スピン反転行列の固有空間とセクター射影子",
+    "クロネッカー積とパウリ行列の積",
+    "対称化転送行列 W の定義と、転送行列が全スピン反転行列と可換であること",
+  ],
+  externalInputEntryIds: [...new Set([
+    ...sectorRayleighSupExpectedDirectDependencies,
+    ...epsilonCommutesWithWExpectedDirectDependencies,
+  ])].sort(),
+  output: [
+    "セクターごとの上限 c_+(M), c_-(M) が定まること",
+    "W が全スピン反転行列と可換であり、二つの固有空間を保つこと",
+  ],
+  realEscape: "セクターごとの上限も、単位球面上の値の集合に対する実数の上限性質を使う。脱出の性質は c(M) の定義と同じで、新しい種類の脱出は増えない。",
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/NecSuf/RayleighMoments.lean",
+    sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+    currentStatus: "定義側は、値の集合が全体の集合に含まれるので上に有界であること、および二つの固有空間それぞれに単位ベクトルをクロネッカー積で具体的に構成して空でないことを示す。可換性側は、全スピン反転行列が二つの転送因子と可換であることから五段の等式鎖で W との可換性を出し、固有空間を保つことへつなぐ。",
+  },
+  mainTheorems: [
+    "セクターごとの上限の定義とその整合性",
+    "対称化転送行列と全スピン反転行列の可換性",
+  ],
+  boundaryEvidence: "分割前は一ブロックに、セクター上限の定義、全スピン反転行列との可換性、セクター射影子による表示、最大値としての分解の四つが同居していた。定義と可換性は互いに依存せず、残る二主張はこの二項を直接入力に取る。二項の後で節を閉じ、残りは境界候補として次の単位へ送る。生成時に二項の章配置、全直接依存、相互非依存、および分解の主張が両方を直接引くことを固定検査する。",
+  readabilityStatus: "定義と可換性がそれぞれ一ブロック一主張になり、証明中で「(1) より」と番号で指していた箇所がブロック参照へ置き換わった。分割で読む順序が変わらないよう、提示順の先行項目を宣言して本文の並びは分割前と同じ位置に保った。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [

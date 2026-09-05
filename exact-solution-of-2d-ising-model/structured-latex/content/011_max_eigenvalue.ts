@@ -1227,11 +1227,11 @@ Z(J,J')
   },
 
   {
-    id: "maxeig_010_claim_sector_decomposition_of_c",
-    kind: "claim",
+    id: "maxeig_010a_definition_sector_rayleigh_sup",
+    kind: "definition",
     origin: { path: SRC, ordinal: 12 },
-    title: { tex: String.raw`c(M) = \max\left(c_+(M), c_-(M)\right)` },
-    labels: ["sector_decomposition_of_rayleigh_sup"],
+    title: { tex: String.raw`c_\pm(M) := \sup \mathcal{R}_\pm \text{（セクターごとの上限）}` },
+    labels: ["def_sector_rayleigh_sup"],
     statement: [
       paragraph([
         ref("def_epsilon_projectors"),
@@ -1359,22 +1359,46 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
         math(String.raw`c_\pm(M) \in \mathbb{R}`),
         " が定まる。以上のもとで、",
       ]),
-      list([
-        [math(String.raw`\text{(1)}\quad \varepsilon W = W\varepsilon`), "、したがって ", math(String.raw`W`), " は ", math(String.raw`\mathcal{F}^{(\pm)}`), " を保つ"],
-        [
-          math(String.raw`\text{(2)}\quad W\,P^{(\pm)} = \left(V^{(\pm)}\right)P^{(\pm)}`),
-          "（",
-          math(String.raw`V^{(\pm)}`),
-          " は ",
-          ref("partition_function_sector_decomposition"),
-          " のもの）",
-        ],
-        [math(String.raw`\text{(3)}\quad c(M) = \max\left(c_+(M),\, c_-(M)\right)`)],
+      paragraph([
+        "以上により、二つのセクターの上限 ",
+        math(String.raw`c_+(M)`),
+        " と ",
+        math(String.raw`c_-(M)`),
+        " が定まった。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-05 の分割で、上限のセクター分解のブロックから、セクターごとの上限の定義とその整合性（値の集合が空でなく上に有界であること）を独立させた。式変形と根拠は分割前と同じである。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_010b_claim_epsilon_commutes_with_W",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 12 },
+    title: { tex: String.raw`\varepsilon W = W\varepsilon` },
+    labels: ["epsilon_commutes_with_W"],
+    statement: [
+      paragraph([
+        ref("def_symmetrized_transfer_matrix"),
+        " の ",
+        math(String.raw`W`),
+        " は全スピン反転行列 ",
+        math(String.raw`\varepsilon`),
+        " と可換である。したがって ",
+        math(String.raw`W`),
+        " は ",
+        ref("def_eigenspaces_of_epsilon"),
+        " の二つの固有空間 ",
+        math(String.raw`\mathcal{F}^{(\pm)}`),
+        " をそれぞれ保つ。",
       ]),
     ],
     proof: [
       paragraph([
-        "(1) ",
         ref("epsilon_commutes_with_transfer_matrices"),
         " の Step 3 で ",
         math(String.raw`\varepsilon`),
@@ -1433,6 +1457,43 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
         ref("def_eigenspaces_of_epsilon"),
         "）。",
       ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-05 の分割で、上限のセクター分解のブロックから、全スピン反転行列との可換性と固有空間の保存を独立させた。式変形と根拠は分割前と同じである。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_010_claim_sector_decomposition_of_c",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 12 },
+    title: { tex: String.raw`c(M) = \max\left(c_+(M), c_-(M)\right)` },
+    labels: ["sector_decomposition_of_rayleigh_sup"],
+    statement: [
+      paragraph([
+        ref("def_sector_rayleigh_sup"),
+        " の ",
+        math(String.raw`c_\pm(M)`),
+        " と ",
+        ref("epsilon_commutes_with_W"),
+        " のもとで、",
+      ]),
+      list([
+        [
+          math(String.raw`\text{(2)}\quad W\,P^{(\pm)} = \left(V^{(\pm)}\right)P^{(\pm)}`),
+          "（",
+          math(String.raw`V^{(\pm)}`),
+          " は ",
+          ref("partition_function_sector_decomposition"),
+          " のもの）",
+        ],
+        [math(String.raw`\text{(3)}\quad c(M) = \max\left(c_+(M),\, c_-(M)\right)`)],
+      ]),
+    ],
+    proof: [
       paragraph([
         "(2) ",
         ref("sector_replacement_of_V1"),
