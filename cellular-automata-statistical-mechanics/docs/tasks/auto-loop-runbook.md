@@ -1,8 +1,14 @@
-# 自動ループ Runbook（30 分ごと）
+# 自動ループ Runbook（毎時）
 
-このファイルは、30 分ごとに独立したエージェントが読み、研究を一層だけ前進させる手順の正本である。
+このファイルは、毎時 12 分に独立したエージェントが読み、研究を一層だけ前進させる手順の正本である。
 進捗は [auto-loop-state.md](auto-loop-state.md) に残す。研究姿勢は
 [マニフェスト](../マニフェスト.md) を最優先する。
+
+このループが**向いている方向そのもの**は、6 時間ごとの独立した監督が評価する（契約は
+[supervision-runbook.md](supervision-runbook.md)、記録は [supervision-log.jsonl](supervision-log.jsonl)）。
+**この tick から監督の記録を書かない。** 前進の駆動と方向の決定を同じループへ置くと、
+方向が空になったことをこのループの内側からは検出できない。逆に、監督はこの tick を止めず、
+頻度も変えず、1 tick で進める一層の中身も決めない。
 
 ## 1 tick の境界
 
@@ -144,8 +150,8 @@ bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh
 
 - launchd ラベル: `com.masaori.cellular-automata-auto-loop`
 - 定義: `~/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist`
-- 発火: 毎時 12 分と 42 分
-- 専用 worktree: `~/git/masaori/math-cellular-automata-loop`
+- 発火: 毎時 12 分（`~/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist` の実測）
+- 専用 worktree: `<repo>/.codex/worktrees/tick/cellular-automata-auto-loop`
 - ログ: `~/Library/Logs/cellular-automata-auto-loop/auto-loop.log`
 - エージェント: Claude と Codex を tick ごとに交互に使う
 - 論文公開・通知: `scripts/publish-artifact.sh`（同じ論文版は再通知しない）
