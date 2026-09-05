@@ -72,8 +72,8 @@ export const roadmapStages = [
       "近傍割り当てをグラフの閉近傍から作った特別な場合として、この段階に含まれる。",
     habitat: "有限舞台に限る限りすべて有限集合の上の数え上げであり、実数体も複素数体も現れない。",
     dependsOn: [],
-    status: "進行中",
-    current: true,
+    status: "到達済み",
+    current: false,
     completion: [
       "近傍割り当ての合成・順序・束演算と、その到達関係が有限決定可能な形で本文に揃っていること。",
       "本質的依存が有限検査に落ち、局所表現可能性の必要十分条件が本文にあること。",
@@ -107,6 +107,21 @@ export const roadmapStages = [
         why: "有限自己写像の共役が再帰的前像木符号で完全に分類されている。",
       },
       {
+        kind: "label",
+        label: "claim_reflexive_transitive_closure_finite_decidable",
+        why: "近傍割り当ての到達関係が反射推移閉包として与えられ、有限決定可能である。",
+      },
+      {
+        kind: "label",
+        label: "claim_neighborhood_assignment_pointwise_union_intersection_lattice",
+        why: "各点合併と各点交叉が束をなすことが本文にあり、合成の順序・束演算が揃っている。",
+      },
+      {
+        kind: "label",
+        label: "claim_composition_not_left_distributive_over_pointwise_intersection",
+        why: "合成が交叉へ分配しない反例があり、束演算と合成の関係の限界が確定している。",
+      },
+      {
         kind: "path",
         path: "docs/2値セルオートマトンの定義と呼び名.md",
         why: "舞台・局所規則・一様性・グラフ上・ポート付きグラフ上の定義と呼び名の正本。",
@@ -122,14 +137,30 @@ export const roadmapStages = [
       "全数計算して本文の主張と突き合わせる。ここで見つかる不一致は本文の誤りであり、校正の失敗として扱う。",
     habitat: "規則も配位空間も有限集合であり、数え上げは自然数の中で閉じる。",
     dependsOn: ["general_stage_and_nonuniform_rules"],
-    status: "未着手",
-    current: false,
+    status: "進行中",
+    current: true,
     completion: [
       "256 通りの規則と、複数の舞台の大きさについて、不変量の全数計算が SageMath の検算として存在すること。",
       "各検算が本文のブロックのラベルへ紐づき、検算と本文の対応の検査を通ること。",
       "全数計算の範囲と、そこから一般の場合を結論できないことが検算の概要に明記されていること。",
     ],
-    evidence: [],
+    evidence: [
+      {
+        kind: "label",
+        label: "claim_locality_restricts_cycle_type",
+        why: "局所性が実現できる巡回型を制限するという一般の主張であり、初等セルオートマトンの全数計算で突き合わせる相手である。",
+      },
+      {
+        kind: "label",
+        label: "claim_support_finite_decidability",
+        why: "本質的依存台が有限検査で決まるため、256 通りの規則について全数計算できる。",
+      },
+      {
+        kind: "label",
+        label: "claim_stage_realized_cycle_types_decidable",
+        why: "舞台ごとに実現される巡回型が決定可能であり、有限巡回舞台の小さな大きさで全数計算できる。",
+      },
+    ],
   },
   {
     id: "one_dimensional_arbitrary_radius",
