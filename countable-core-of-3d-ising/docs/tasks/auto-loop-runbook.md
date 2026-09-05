@@ -21,10 +21,10 @@
 
 ## tick のモデルと利用上限
 
-研究の定期起動を `gpt-6-astra` に統一するため、Claude と Codex の交互実行を廃止した。
+研究の定期起動を `gpt-5.6-sol` に統一するため、Claude と Codex の交互実行を廃止した。
 以前の交互実行はモデル固有の癖を分散するためだったが、今回の固定モデル指定を優先する。
-正規起動口が起動前に選んだ `CODEX_HOME` を使い、`codex exec -m gpt-6-astra`
-と `model_reasoning_effort=medium` で起動する。起動時のログにモデル・推論設定・設定ディレクトリを残す。
+正規起動口が起動前に選んだ `CODEX_HOME` を使い、`codex exec -m gpt-5.6-sol`
+と `model_reasoning_effort=high` で起動する。起動時のログにモデル・推論設定・設定ディレクトリを残す。
 
 利用上限・認証失敗・モデル利用不可は非ゼロ終了としてログへ残し、未コミット成果を保持する。
 実行途中の別モデル・別 CLI・別アカウントへの切り替えは行わない。
@@ -275,7 +275,7 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 | 実体 | `scripts/auto-loop-tick.sh`（launchd は毎時 0/15/30/45 分に呼ぶ。多重起動を防ぎ、持ち時間で打ち切る） |
 | 間隔 | **最短 15 分。中断が続くと tick 自身が伸ばす**（下の「間隔の自動調整」） |
 | 作業ツリー | `<repo>/.codex/worktrees/tick/ising-3d-cut-auto-loop`（ブランチ `ising-3d-cut-loop`。毎 tick の冒頭で `origin/main` へ合わせる） |
-| 使うエージェント | Codex（`gpt-6-astra`、reasoning `medium`、起動口が選んだアカウント） |
+| 使うエージェント | Codex（`gpt-5.6-sol`、reasoning `high`、起動口が選んだアカウント） |
 | ログ | `~/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log`（リポジトリ外。作業ツリーを合わせ直しても消えないため） |
 
 ### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）
