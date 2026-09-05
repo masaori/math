@@ -6,6 +6,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "有限舞台の反復不動点数は配位の総数以下である" },
     labels: ["claim_binary_ca_fixed_point_count_bound"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "N",
     statement: [
       paragraph(["有限舞台上の 2 値セルオートマトン（", ref("def_finite_ca"), "）の大域写像 ",
@@ -28,6 +29,7 @@ Z_n(F)&\le |X|\quad(\because\ \blkref{claim_fixed_point_count_bounded_by_cardina
     kind: "claim",
     title: { text: "有限舞台では正の不動点数を与える回数が必ず存在する" },
     labels: ["claim_binary_ca_positive_count_domain_nonempty"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "N",
     statement: [
       paragraph([ref("claim_binary_ca_fixed_point_count_bound"), " と同じ有限舞台の大域写像 ",
@@ -48,6 +50,7 @@ Z_n(F)&\le |X|\quad(\because\ \blkref{claim_fixed_point_count_bounded_by_cardina
     kind: "definition",
     title: { text: "一セルの入れ替え規則" },
     labels: ["def_single_cell_flip_for_positive_count"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "finite",
     statement: [
       paragraph(["セル集合 ", math(String.raw`V:=\{v\}`), "、近傍 ", math(String.raw`N(v):=\{v\}`),
@@ -64,6 +67,7 @@ Z_n(F)&\le |X|\quad(\because\ \blkref{claim_fixed_point_count_bounded_by_cardina
     kind: "claim",
     title: { text: "一セルの入れ替え規則は奇数回で不動点数が零になる" },
     labels: ["claim_single_cell_flip_positive_count_domain"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "N",
     statement: [
       paragraph([ref("def_single_cell_flip_for_positive_count"), " の ", math(String.raw`G`), " について、各 ",

@@ -53,6 +53,60 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.count_bounds
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.domain_iff_period_divides
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.zero_iff
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.collision_witness
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.nonempty_iff_small_witness
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.mem_lengthsFromData
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.lengths_bound
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.remainder_iff
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.decision_correct
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.rationalInput_value
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.even_iterate
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.odd_iterate
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.odd_count
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.even_count
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.involution_domain
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.bounds
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.domain
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.small_witness
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.finite_table
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.period_bounds
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.remainder
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.zero
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.data_table
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.decision
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.Derivation.rational
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.BinaryDerivation.bounds
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.BinaryDerivation.small_witness
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.FlipDerivation.involutive
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.FlipDerivation.free
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.FlipDerivation.odd
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.FlipDerivation.even
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.FlipDerivation.domain
+  CellularAutomata.NecSuf.PositiveFixedPointCountDomain.FlipDerivation.one_excluded
+  CellularAutomata.PositiveFixedPointCountDomain.mem_realizedLengths
+  CellularAutomata.PositiveFixedPointCountDomain.count_bounds
+  CellularAutomata.PositiveFixedPointCountDomain.mem_positiveDomain_iff
+  CellularAutomata.PositiveFixedPointCountDomain.zero_iff
+  CellularAutomata.PositiveFixedPointCountDomain.nonempty_iff_small_witness
+  CellularAutomata.PositiveFixedPointCountDomain.lengths_subset
+  CellularAutomata.PositiveFixedPointCountDomain.lengths_from_period_data
+  CellularAutomata.PositiveFixedPointCountDomain.remainder_decision
+  CellularAutomata.PositiveFixedPointCountDomain.decideFromTable_correct
+  CellularAutomata.PositiveFixedPointCountDomain.rationalInput_value
+  CellularAutomata.BinaryCAPositiveCountDomain.count_bound
+  CellularAutomata.BinaryCAPositiveCountDomain.small_witness
+  CellularAutomata.BinaryCAPositiveCountDomain.config_exhaustive
+  CellularAutomata.BinaryCAPositiveCountDomain.single_step
+  CellularAutomata.BinaryCAPositiveCountDomain.twice
+  CellularAutomata.BinaryCAPositiveCountDomain.even_iterate
+  CellularAutomata.BinaryCAPositiveCountDomain.odd_iterate
+  CellularAutomata.BinaryCAPositiveCountDomain.odd_count
+  CellularAutomata.BinaryCAPositiveCountDomain.positive_even_count
+  CellularAutomata.BinaryCAPositiveCountDomain.single_domain
+  CellularAutomata.BinaryCAPositiveCountDomain.one_excluded
   CellularAutomata.NeighborhoodAssignmentSubsetUnionAction.subsetUnionMap_composedNeighborhood
   CellularAutomata.NeighborhoodAssignmentSubsetUnionAction.subsetUnionMap_identityNeighborhood
   CellularAutomata.NeighborhoodAssignmentSubsetUnionAction.subsetUnionMap_singleton

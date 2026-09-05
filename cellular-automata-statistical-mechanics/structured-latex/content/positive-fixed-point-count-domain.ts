@@ -6,6 +6,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "正の不動点数を与える反復回数の集合" },
     labels: ["def_positive_fixed_point_count_domain"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "countable",
     statement: [
       paragraph(["有限集合上の自己写像 ", math(String.raw`F:X\to X`), "（", ref("def_finite_self_map"),
@@ -20,6 +21,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "周期点で実現する最小周期の有限集合" },
     labels: ["def_realized_period_set"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "finite",
     statement: [
       paragraph(["有限自己写像 ", math(String.raw`F:X\to X`), " に対し、",
@@ -34,6 +36,7 @@ export default defineBlocks([
     kind: "claim",
     title: { text: "反復の不動点数は零以上で台の元数以下である" },
     labels: ["claim_fixed_point_count_bounded_by_cardinality"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "N",
     statement: [
       paragraph(["有限自己写像 ", math(String.raw`F:X\to X`), " と各 ", math(String.raw`n\in\mathbb{N}_{>0}`), " について"]),
@@ -53,6 +56,7 @@ Z_n(F)&=|\mathrm{Fix}_n(F)|\quad(\because\ \blkref{def_fixed_points_of_iterate})
     kind: "claim",
     title: { text: "正の不動点数の定義域は実現する最小周期の倍数全体である" },
     labels: ["claim_positive_count_domain_iff_period_divides"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "countable",
     statement: [
       paragraph(["有限自己写像 ", math(String.raw`F:X\to X`), " と各 ", math(String.raw`n\in\mathbb{N}_{>0}`),
@@ -85,6 +89,7 @@ n\in \mathsf{Pos}_F
     kind: "claim",
     title: { text: "空でない有限集合では元数以下の回数で正の不動点数を得る" },
     labels: ["claim_positive_count_domain_small_witness"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "N",
     statement: [
       paragraph(["有限自己写像 ", math(String.raw`F:X\to X`), " について"]),
@@ -118,6 +123,7 @@ F^p y&=F^p(F^i x)\quad(\because\ y=F^i x)\\
     kind: "claim",
     title: { text: "正の不動点数の定義域は有限な周期の表から決定できる" },
     labels: ["claim_positive_count_domain_finitely_decidable"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "N",
     statement: [
       paragraph(["有限自己写像 ", math(String.raw`F:X\to X`), " の表から、",
@@ -145,6 +151,7 @@ F^p y&=F^p(F^i x)\quad(\because\ y=F^i x)\\
     kind: "definition",
     title: { text: "正の不動点数を正の有理数へ渡す写像" },
     labels: ["def_positive_fixed_point_count_rational_input"],
+    verification: ["sagemath/check/positive-fixed-point-count-domain"],
     habitat: "Q",
     statement: [
       paragraph(["有限自己写像 ", math(String.raw`F:X\to X`), " について、",
