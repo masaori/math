@@ -27538,9 +27538,12 @@ F_{m+1}
                           math(String.raw`w\in\mu_n`), "・", math(String.raw`h`),
                           " の係数の上界・", math(String.raw`f=(t-\widehat{w})h`), "）により、",
                           ref("claim_root_polynomial_remaining_factor_value_ne_zero"), " を ",
-                          math(String.raw`w`), "、", math(String.raw`h`), " に当てることができ、",
-                          math(String.raw`\mathrm{aev}_{w}(h)\neq0`),
-                          " を得る。これは上の計算と矛盾する。ゆえに ",
+                          math(String.raw`w`), "、", math(String.raw`h`), " に当てると、",
+                        ]),
+                        displayMath(String.raw`\mathrm{aev}_{w}(h)\neq0
+\quad(\because\ \blkref{claim_root_polynomial_remaining_factor_value_ne_zero}\ \text{を上記の仮定で}\ w,h\ \text{へ適用})`),
+                        paragraph([
+                          "これは上の計算と矛盾する。ゆえに ",
                           math(String.raw`w'\neq w`),
                           " である。この議論に実数体も複素数体も現れない。",
                         ]),
