@@ -218,6 +218,43 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "複素数と極座標同値類の対応と積保存",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_028_definition_phi_cartesian",
+        "calculation_formulae_029_claim_isomorphism_of_phi_cartesian"
+      ],
+      "input": [
+        "複素数の成分と積、極座標同値類と積、角度同値関係",
+        "非負平方根の存在一意性と負数の平方根表示、逆正接",
+        "主値区間上で定義された正弦・余弦と逆正接の正弦・余弦公式"
+      ],
+      "output": [
+        "複素数から極座標同値類への場合分けによる写像",
+        "極座標同値類から複素数への写像と積保存・全単射を目指す主張（定義・証明は未完）"
+      ],
+      "mainTheorem": "極座標同値類から複素数への対応の積保存と全単射性（証明未完）",
+      "mainTheoremEntryId": "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+      "boundaryEvidence": "二方向の写像を末尾の積保存と全単射の主張が直接使う三項の依存群として配置する。直後の座標射影は三項を使わず、極座標同値類と角度同値関係だけを入力にする別枝へ切り替わる。現存三項の配置を確定するものであり、未整備の三角関数の拡張・性質を追加し、主張を分割した際には内部依存と節の閉包を再判定する。プログラミングによる検証では対象と後続比較の全直接入力の本文・全直接依存・種別・粒度、連続性・節末出力・後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で両写像と末尾の全計算を読んだ。現行の正弦・余弦は主値区間だけであり、任意角度への写像定義は未完である。全実数への拡張、周期性、加法定理、π移動公式、半径零と正を分けた代表元独立性が不足する。一方向の合成が恒等である計算だけでは単射性は導けず、全単射の証明は未完である。極座標側に加法がないため体として同型という原稿TODOは現状の目標としない。各適用行のラベル不足と主張分割も残るが、これらの定義・証明の不足を説明粒度だけの問題へ縮めない。後続射影の二定義分割と代表元独立性、入力の角度・極座標同値関係の三性質も未解決である。",
+      "externalInputEntryIds": [
+        "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_002_negative_number_to_sqrt",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_014c_definition_sin",
+        "calc_formulae_014d_definition_arctan",
+        "calc_formulae_014e_definition_cos",
+        "calc_formulae_015_claim_cos_arctan_sin_arctan",
+        "calc_formulae_016_definition_angle_equivalence_class",
+        "calc_formulae_019_definition_polar_equivalence_class",
+        "calculation_formulae_022_definition_operations_on_polar_representation",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "複素数の逆元と四則演算の性質",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -1944,6 +1981,9 @@
       "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
       "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
       "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_028_definition_phi_cartesian",
+      "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+      "calculation_formulae_030_definition_first_and_second_projections",
       "calculation_formulae_031b_claim_abs_basic_properties",
       "calculation_formulae_033_claim_arg_of_quotient",
       "calculation_formulae_036_claim_arg_of_reciprocal",
@@ -7627,7 +7667,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7803,7 +7843,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
+        "incomingReferenceCount": 2,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7929,7 +7969,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8159,7 +8199,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8523,8 +8563,8 @@
     {
       "id": "calculation_formulae_028_definition_phi_cartesian",
       "kind": "definition",
-      "title": "\\mathbb{C}\\text{の極座標表現への写像}",
-      "titleFormat": "tex",
+      "title": "極座標同値類から複素数への写像",
+      "titleFormat": "text",
       "labels": [
         "def_phi_cartesian"
       ],
@@ -8540,25 +8580,33 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 780,
-        "inspectedContentSha256": "45094414e3433fd45a6039bb98ff5ecf3bfcfafa9e5af8de1c0c662eba71bfb4",
+        "inspectedCharacterCount": 1173,
+        "inspectedContentSha256": "5bfd7f4af7609a728b0960ddee5f7d2c63845c8de77f97466d69b2e20ed85530",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 正弦・余弦の現行定義域は主値区間のみであり、任意の角度を代入する写像定義は未完である。全実数上への拡張、周期性、半径零と正を分けた代表元独立性が不足する。説明粒度だけの問題とは扱わず、定義追加後に内部依存と節の閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "angle_equivalence_class",
+        "def_cos",
+        "def_sin",
         "definition_of_cc",
+        "polar_equivalence_class",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_014c_definition_sin",
+        "calc_formulae_014e_definition_cos",
+        "calc_formulae_016_definition_angle_equivalence_class",
+        "calc_formulae_019_definition_polar_equivalence_class",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -8599,7 +8647,7 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 14238,
@@ -8610,7 +8658,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 全実数上の三角関数、加法定理、周期性、π移動公式が未整備であり、積保存の証明は未完である。一方向の合成が恒等であることだけでは単射性は導けず、全単射の証明も未完である。極座標側の加法を定義していないため、体として同型という原稿TODOは現状の目標にできない。積保存と全単射の主張分割、定義・補題追加後に内部依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "cos_arctan_sin_arctan",
@@ -8672,23 +8720,27 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 561,
-        "inspectedContentSha256": "500720618a5720301921f7f78c8bdb37b511200e7cde6dbb54d41672e86e79b4",
+        "inspectedCharacterCount": 777,
+        "inspectedContentSha256": "2076ae1c62bb677aef8f13d1ca7a46147e8d652e035e981d861c3389aa7fee68",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 半径と角度同値類への二つの射影を一項に束ねている。半径零と正の場合を分けた代表元独立性の説明と二定義の分割が未解決である。"
       },
       "dependsOnLabels": [
+        "angle_equivalence_class",
+        "polar_equivalence_class",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_016_definition_angle_equivalence_class",
+        "calc_formulae_019_definition_polar_equivalence_class",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [

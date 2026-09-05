@@ -1136,10 +1136,11 @@ b
       ordinal: 28,
     },
     title: {
-      tex: "\\mathbb{C}\\text{の極座標表現への写像}",
+      text: "極座標同値類から複素数への写像",
     },
     labels: ["def_phi_cartesian"],
     statement: [
+      paragraph([ref("polar_equivalence_class"), " の商集合と ", ref("angle_equivalence_class"), " の関係を使う。以下の式に必要な正弦・余弦は、現在の ", ref("def_sin"), " と ", ref("def_cos"), " では主値区間に限られている。全実数上への拡張と周期性が未整備のため、以下の写像定義と代表元独立性の説明は未完である。"]),
       paragraph([
         math(String.raw`\phi_{\mathrm{cartesian}} : (\text{極座標表現}) \to \mathbb{C}`),
         " を次で定める。",
@@ -1471,6 +1472,7 @@ b
     },
     labels: ["first_and_second_projections"],
     statement: [
+      paragraph([ref("polar_equivalence_class"), " の同値類から、半径と ", ref("angle_equivalence_class"), " による角度の同値類を取り出す。"]),
       paragraph([math(String.raw`[(r,\theta)]_{\sim}\in(\text{極座標表現})`), " について、"]),
       displayMath(
         String.raw`\operatorname{pr}_1 : (\text{極座標表現})\to\mathbb{R}_{\ge 0},\quad
