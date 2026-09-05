@@ -2,6 +2,25 @@
 
 作業前に [README.md](README.md) と リポジトリ直下の [docs/context/](../docs/context/) を全て読むこと。
 
+## 公開は「クリーンで remote default に入っている版」からだけ行う（2026-09-05）
+
+論文 HTML の版行は、作業ツリーに未コミット・未追跡のものがあれば
+`+（未コミットの変更を含む）` を付ける。**未追跡ファイルも数えるのは正しい**
+（本文は `content/` をディレクトリ走査で読むので、追跡されていないファイルが 1 つあるだけで
+出力が変わりうる）。
+
+問題は、その印が付いた HTML をそのまま公開できてしまうことだった。実際に、手元の作業用
+ディレクトリ `.tmp/` を消す前に公開してしまい、公開物の版が `a1999f79a+` になった。
+こうなると、その HTML をどのコミットから作り直せるのか誰にも分からない。
+
+**印を隠すのではなく、公開そのものを止める。** 判定は
+`scripts/require-publishable-version.sh`（汚れていたら落とす、HEAD が remote default branch に
+含まれなければ落とす。default は決め打ちせず問い合わせる）にあり、
+`scripts/publish-artifact.sh` はビルドの前にそこを通る。回帰試験は
+`scripts/test-require-publishable-version.sh`。
+
+作業中のスクラッチを置くときは、公開の前に必ず消すこと。
+
 ## 検算の「構成」と「assertion」を分ける（2026-09-05）
 
 下流から読まれる検算ディレクトリは `construction.sage`（再利用する厳密構成）と `check.sage`

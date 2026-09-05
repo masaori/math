@@ -40,6 +40,16 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then exit 0; fi
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 commit="$(git -C "$REPO_DIR" rev-parse --short HEAD)"
+
+# **公開してよいのは、再現できる版だけである。** 判定はここに直書きせず、
+# scripts/require-publishable-version.sh に置いてある（回帰試験を当てるため）。
+# dirty 印を隠すのではなく、dirty なら公開しない。remote default に含まれることも確かめる。
+if ! gate_output="$(bash "$PROJECT_DIR/scripts/require-publishable-version.sh" "$REPO_DIR" 2>&1)"; then
+  log "NG: 公開できる版ではない（版 ${commit}）"
+  printf '%s\n' "$gate_output" | tee -a "$LOG_FILE"
+  exit 1
+fi
+
 PUBLISHED="$LOG_DIR/last-published-commit"
 published="$(cat "$PUBLISHED" 2>/dev/null || true)"
 
