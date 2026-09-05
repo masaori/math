@@ -3471,6 +3471,35 @@ if (sectorRayleighSupEntry.kind !== "definition"
     sectorDecompositionDependencies: sectorDecompositionEntry.dependsOnEntryIds,
   })}`);
 }
+const setAndAlgebraNotationEntry = entries.find((entry) =>
+  entry.id === "calculation_formulae_definition_set_and_algebra_notation")!;
+const complexNumberDefinitionEntry = entries.find((entry) =>
+  entry.id === "calc_formulae_006_definition_of_cc")!;
+const matrixDecompositionEntry = entries.find((entry) =>
+  entry.id === "calc_formulae_003_matrix_decomposition")!;
+if (setAndAlgebraNotationEntry.kind !== "definition"
+  || complexNumberDefinitionEntry.kind !== "definition"
+  || setAndAlgebraNotationEntry.provisionalFinalChapter !== "数学的道具立て"
+  || complexNumberDefinitionEntry.provisionalFinalChapter !== "数学的道具立て"
+  || setAndAlgebraNotationEntry.dependencyPlacement!.chapterOrder !== 1
+  || complexNumberDefinitionEntry.dependencyPlacement!.chapterOrder !== 2
+  || matrixDecompositionEntry.dependencyPlacement!.chapterOrder !== 3
+  || setAndAlgebraNotationEntry.dependsOnEntryIds.length !== 0
+  || JSON.stringify([...complexNumberDefinitionEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify([setAndAlgebraNotationEntry.id])
+  || JSON.stringify([...matrixDecompositionEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify([complexNumberDefinitionEntry.id])
+  // 二項の前方参照は「後続への案内」として判定済みで、意味的前提ではない
+  || complexNumberDefinitionEntry.forwardStatementReferenceLabelsUsedAsPrerequisites.length !== 0
+  || setAndAlgebraNotationEntry.forwardStatementReferenceLabelsUsedAsPrerequisites.length !== 0) {
+  throw new Error(`数学的道具立ての冒頭二項節が変わりました: ${JSON.stringify({
+    orders: [setAndAlgebraNotationEntry, complexNumberDefinitionEntry, matrixDecompositionEntry]
+      .map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
+    notationDependencies: setAndAlgebraNotationEntry.dependsOnEntryIds,
+    complexNumberDependencies: complexNumberDefinitionEntry.dependsOnEntryIds,
+    matrixDecompositionDependencies: matrixDecompositionEntry.dependsOnEntryIds,
+  })}`);
+}
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   entry.explanationGranularityReview.status === "自動検査で主題に適合")
   || ![
@@ -4330,6 +4359,32 @@ const isingModelSectionBoundaries = [{
   ],
   boundaryEvidence: "分割前は一ブロックに、セクター上限の定義、全スピン反転行列との可換性、セクター射影子による表示、最大値としての分解の四つが同居していた。定義と可換性は互いに依存せず、残る二主張はこの二項を直接入力に取る。二項の後で節を閉じ、残りは境界候補として次の単位へ送る。生成時に二項の章配置、全直接依存、相互非依存、および分解の主張が両方を直接引くことを固定検査する。",
   readabilityStatus: "定義と可換性がそれぞれ一ブロック一主張になり、証明中で「(1) より」と番号で指していた箇所がブロック参照へ置き換わった。分割で読む順序が変わらないよう、提示順の先行項目を宣言して本文の並びは分割前と同じ位置に保った。",
+}, {
+  name: "集合と代数構造の記号、そして複素数の定義",
+  chapter: "数学的道具立て",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [setAndAlgebraNotationEntry.id, complexNumberDefinitionEntry.id],
+  input: [
+    "自然数・整数・実数の台集合（既知として扱う）",
+  ],
+  externalInputEntryIds: [],
+  output: [
+    "台集合と代数構造を区別する記号、および添字を省略する略記の規約",
+    "順序で切り出した部分集合の記法",
+    "実数の対の集合に加法と乗法を入れて定めた複素数",
+  ],
+  realEscape: "実数の台集合そのものは構成せず既知として扱う。この論文で扱う量の大半は複素数と有限行列で閉じるが、出発点にある実数は非可算であり、ここがその前提を置く箇所である。",
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/Part000",
+    sageMathFile: "sagemath/_shared/defs.sage",
+    currentStatus: "記号の規約は形式化の対象ではなく、Lean と SageMath ではそれぞれの言語の数値型がこの役割を担う。複素数の定義は Lean の複素数型、SageMath の Gaussian 有理数体または複素数体へ対応する。",
+  },
+  mainTheorems: [
+    "集合と代数構造の記号の規約",
+    "複素数の定義",
+  ],
+  boundaryEvidence: "章内依存順1は何にも依存せず、台集合と代数構造の区別、添字の省略、順序で切り出した部分集合という記号の規約だけを定める。順2はその規約の上で、実数の対に加法と乗法を入れて複素数を定義する。順3の行列の分解からは対象が数から行列へ移り、以後は行列の計算規則が続くため、順2の後で節を閉じる。生成時に二項の章配置、依存順、直接依存、および順3が複素数の定義だけを引くことを固定検査する。",
+  readabilityStatus: "二項とも、抽象語彙の自動検査には引っかかっていない。説明粒度の状態表示が「展開または分割を要する」となるのは、記号の規約が後続の複素数定義を、複素数定義が後続の絶対値の性質と行列指数級数の収束を、それぞれ案内として参照しているためである。これらは判定済みの後続案内であって意味的前提ではないので、節の確定を妨げない。内容は高校生が読める粒度で、記号の規約は例つき、複素数は成分による加法と乗法の式で定義されている。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
