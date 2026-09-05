@@ -47,7 +47,7 @@ ok() { echo "  OK: $1"; }
 
 echo "== 契約と実装が揃っていることを検査する =="
 
-RUNBOOK="$PROJECT_DIR/docs/tasks/supervision-runbook.md"
+RUNBOOK="$PROJECT_DIR/../docs/tasks/research-supervision-runbook.md"
 if [ ! -f "$RUNBOOK" ]; then
   ng "監督の契約の正本が無い: $RUNBOOK"
 else
@@ -70,7 +70,7 @@ else
   fi
 fi
 
-TICK="$PROJECT_DIR/scripts/supervisor-tick.sh"
+TICK="$PROJECT_DIR/../scripts/research-supervision/supervisor-tick.sh"
 if [ ! -f "$TICK" ]; then
   ng "監督 tick の本体が無い: $TICK"
 elif [ ! -x "$TICK" ]; then

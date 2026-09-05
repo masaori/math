@@ -13,7 +13,7 @@ import unittest
 ROOT = Path(__file__).resolve().parent.parent
 TICKS = [
     "cellular-automata-statistical-mechanics/scripts/auto-loop-tick.sh",
-    "cellular-automata-statistical-mechanics/scripts/supervisor-tick.sh",
+    "scripts/research-supervision/supervisor-tick.sh",
     "exact-solution-of-2d-ising-model-lambda/scripts/auto-loop-tick.sh",
     "countable-core-of-3d-ising/scripts/auto-loop-tick.sh",
     "countable-ising-on-hyperbolic-surfaces/scripts/auto-loop-tick.sh",

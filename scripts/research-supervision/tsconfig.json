@@ -1,0 +1,12 @@
+{
+  "extends": "../../structured-latex/tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2023"],
+    "types": ["node"],
+    "typeRoots": ["../../structured-latex/node_modules/@types"],
+    "noEmit": true
+  },
+  "include": ["*.ts"]
+}

@@ -1,0 +1,24 @@
+{
+  "観測時刻": "2026-09-05T21:10:47+09:00",
+  "実ログ": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log",
+  "ログ更新時刻": "2026-09-05T20:43:23+09:00",
+  "読取末尾sha256": "aed845d739ab4c9d6a0f843b5fe2693db518143816c9991e63a104091d6aa9b5",
+  "抽出行": [
+    "ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 12th, 2026 10:01 AM.",
+    "ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 12th, 2026 10:01 AM.",
+    "ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 12th, 2026 10:01 AM.",
+    "ERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 12th, 2026 10:01 AM."
+  ],
+  "起動登録": "未確認",
+  "起動登録の取得状況": "tick窓口への今回観測依頼は受理キュー入り。直接のlaunchctl操作を行っていない。過去の登録情報では埋めない。",
+  "起動登録の実測": {
+    "観測時刻": "2026-09-05T21:25:38+09:00",
+    "コマンド": "launchctl list",
+    "終了コード": 0,
+    "対象label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "一致行": [
+      "-\t1\tcom.masaori.math-complex-matrix-ising-paper-organization-loop"
+    ],
+    "判定": "登録あり"
+  }
+}
