@@ -14,7 +14,12 @@ import type { Evidence, RoadmapStage } from "../research-roadmap.ts";
 export type RoadmapResolvers = {
   /** 本文（`content/`）に実在するラベルか。 */
   readonly hasLabel: (label: string) => boolean;
-  /** プロジェクトルートからの相対パスが実在するか。 */
+  /**
+   * プロジェクトルートからの相対パスが、**通常ファイルとして**実在するか。
+   *
+   * ディレクトリを真と答えてはならない。ディレクトリは中身が空でも存在するため、
+   * それを根拠と認めると実在の主張が空になる。実装は `roadmap-evidence-fs.ts`。
+   */
   readonly hasPath: (path: string) => boolean;
 };
 
@@ -36,6 +41,20 @@ const startedStatuses = new Set<RoadmapStage["status"]>(["到達済み", "進行
 
 const evidenceExists = (item: Evidence, resolvers: RoadmapResolvers): boolean =>
   item.kind === "label" ? resolvers.hasLabel(item.label) : resolvers.hasPath(item.path);
+
+/**
+ * 根拠のパスが、プロジェクトの内側を指す相対パスとして書かれているか。
+ *
+ * 実在の判定だけを解決子へ委ねると、パスの形の異常が実在の判定に吸い込まれて静かに通る。
+ * 空文字はプロジェクトルート自身へ解決され、`..` と絶対パスはプロジェクトの外を指す。
+ * どれもディスク上には存在しうるので、実在の判定では捕まえられない。
+ */
+const malformedPathReason = (path: string): string | undefined => {
+  if (path.trim() === "") return "空である";
+  if (path.startsWith("/")) return "絶対パスである";
+  if (path.split("/").includes("..")) return "プロジェクトの外を指している";
+  return undefined;
+};
 
 export const inspectRoadmap = (input: RoadmapInput, resolvers: RoadmapResolvers): RoadmapReport => {
   const { title, preamble, stages } = input;
@@ -142,6 +161,17 @@ export const inspectRoadmap = (input: RoadmapInput, resolvers: RoadmapResolvers)
     for (const item of stage.evidence) {
       evidenceCount += 1;
       if (item.why.trim() === "") fail(`根拠の説明が空である: ${stage.id}`);
+      if (item.kind === "label" && item.label.trim() === "") {
+        fail(`根拠のラベルが空である: ${stage.id}`);
+        continue;
+      }
+      if (item.kind === "path") {
+        const reason = malformedPathReason(item.path);
+        if (reason !== undefined) {
+          fail(`根拠のパスが相対パスとして書かれていない（${reason}）: ${stage.id} -> ${item.path}`);
+          continue;
+        }
+      }
       if (evidenceExists(item, resolvers)) continue;
       if (item.kind === "label") {
         fail(`本文に存在しないラベルを根拠にしている: ${stage.id} -> ${item.label}`);
