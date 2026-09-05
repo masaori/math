@@ -1,5 +1,16 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "binary_ca_positive_count_claim_single_cell_zero_count": "binary_ca_counting_domains",
+  "binary_ca_positive_count_definition_single_cell_flip": "binary_ca_counting_domains",
+  "binary_ca_positive_count_claim_nonempty_domain": "binary_ca_counting_domains",
+  "binary_ca_positive_count_claim_bound": "binary_ca_counting_domains",
+  "positive_fixed_point_count_definition_positive_rational_input": "finite_self_map_dynamics",
+  "positive_fixed_point_count_claim_finite_encoding": "finite_self_map_dynamics",
+  "positive_fixed_point_count_claim_small_positive_exponent": "finite_self_map_dynamics",
+  "positive_fixed_point_count_claim_domain_divisibility": "finite_self_map_dynamics",
+  "positive_fixed_point_count_claim_bound": "finite_self_map_dynamics",
+  "positive_fixed_point_count_definition_period_set": "finite_self_map_dynamics",
+  "positive_fixed_point_count_definition_domain": "finite_self_map_dynamics",
   "causal_set_primary_literature_claim_event_order_locally_finite": "time_expansion_and_dependency_order",
   "finite_poset_locally_finite_claim_finite_partial_order_locally_finite": "finite_poset_interval_finiteness",
   "finite_poset_locally_finite_definition_locally_finite_partial_order": "finite_poset_interval_finiteness",
