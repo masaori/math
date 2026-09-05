@@ -95,7 +95,7 @@ export const documentOrganization = [
         id: "finite_self_map_dynamics",
         title: "有限自己写像の軌道と安定構造",
         input: "有限集合と、その集合から自身への写像だけを入力とする。",
-        output: "最終周期、反復モノイド、安定像・安定ファイバー・根付き木までの有限決定可能な構造を得る。",
+        output: "最終周期、反復モノイド、安定像・安定ファイバー・根付き木、および正の反復不動点数を与える回数の有限な記述を得る。",
         main: "主定理は、軌道が最終的に周期化し、反復モノイドが過渡部と有限巡回群へ分解されることである。",
         mainLabels: [
           "claim_finite_self_map_repeating_tail",
@@ -178,6 +178,14 @@ export const documentOrganization = [
           "claim_self_neighborhood_reversible_maps_finite_commutative_group",
           "claim_self_neighborhood_reversible_map_cycle_types_general",
         ],
+      },
+      {
+        id: "binary_ca_counting_domains",
+        title: "有限舞台の数え上げと正の入力の定義域",
+        input: "有限舞台の大域写像、反復不動点の個数と、その正値域を特徴づける有限自己写像の結果を入力とする。",
+        output: "状態数の上界、正の状態数を与える回数の存在、および零個となる一セル規則の反例を得る。",
+        main: "主張は、有限舞台では正の状態数を与える回数が必ず存在するが、全ての正の回数を対数の入力にできるとは限らないことである。",
+        mainLabels: ["claim_binary_ca_positive_count_domain_nonempty", "claim_single_cell_flip_positive_count_domain"],
       },
       {
         id: "conjugacy_and_locality_classification",
