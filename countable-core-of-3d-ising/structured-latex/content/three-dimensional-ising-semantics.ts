@@ -91,7 +91,7 @@ export default defineBlocks([
             " ごとに、第 ",
             math(String.raw`i`),
             " 成分が ",
-            math(String.raw`L-1`),
+            math(String.raw`L`),
             " 通りのうち ",
             math(String.raw`L-2`),
             " 以下の ",
