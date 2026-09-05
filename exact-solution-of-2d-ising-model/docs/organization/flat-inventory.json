@@ -218,6 +218,39 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "対角行列の指数の成分表示",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "bridge_003_claim_exp_of_diagonal"
+      ],
+      "input": [
+        "行列指数の定義と各点・成分収束、行列ノルム",
+        "行列積・複素演算・実数包含・非負平方根・集合記号",
+        "非負実数の指数級数（複素成分への接続は未完）"
+      ],
+      "output": [
+        "対角行列の指数が対角行列となる成分計算",
+        "対角成分を複素指数で表示する主張（複素指数の定義と収束への接続は未完）"
+      ],
+      "mainTheorem": "対角行列の指数の対角成分と非対角成分の表示",
+      "mainTheoremEntryId": "bridge_003_claim_exp_of_diagonal",
+      "boundaryEvidence": "対角行列の冪から部分和・成分極限へ進む一項として配置する。直後の可換指数積は対角成分の表示を使わず、一般の可換行列に対する二項展開と有限添字集合の比較、ノルムの劣乗法性と剰余評価を追加する別枝である。未完の複素指数への接続を補った後に閉包を再判定する条件で、現存項目の境界を定める。対象・比較と全直接入力の本文・全依存・種別・粒度・相対順をプログラミングによる検証で固定する。",
+      "readabilityStatus": "LLMによる検証で対象・全直接入力・可換指数積の全本文を読んだ。対象は非負実数の級数定理を任意の複素成分へ適用できず、複素指数の定義と収束への接続が未完である。零の部分和成分と差の絶対値の極限の説明、成分冪と有限和の帰納、同時適用と各行参照の分割も未解決である。比較側は参照先に実在する二項係数とPascalの計算の補題分離、添字全単射・有限和・二箇所の同時適用、実数の極限法則と行列演算への接続が未整備である。零成分・零次と比較側の空の添字範囲を保持し、定義・前提の補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "exp_linear_map_000a_claim_real_exp_series_converges",
+        "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "linear_space_general_002b_definition_matrix_norm"
+      ]
+    },
+    {
       "name": "行列と行列への線型写像の指数の定義",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -7725,7 +7758,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 25,
+        "incomingReferenceCount": 26,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7843,7 +7876,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 22,
+        "incomingReferenceCount": 23,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8084,7 +8117,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 14,
+        "incomingReferenceCount": 15,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9437,7 +9470,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 16,
+        "incomingReferenceCount": 17,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12396,20 +12429,25 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 14286,
-        "inspectedContentSha256": "de25a7cfd8a1fd81d0d86ca48b4d3a85550853b4857925dd6768c842c31cdeb0",
+        "inspectedCharacterCount": 14784,
+        "inspectedContentSha256": "5310027658533830ac1844d325362a6a451df8aad4bd746c7685d92802af5f24",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積・複素演算・実数包含・非負平方根と、二項係数の定義およびPascalの関係式を示す反復交換子の準備への参照を補った。可換な冪と二項展開、有限添字集合の比較と剰余評価、二つの因子が変わる積の収束を一項に含む。Pascalの計算は参照先に存在し、必要な補題としての分離と適用行の参照が未整備である。有限和の展開・添字全単射・両箇所の同時代入、実数の平方根比較と極限法則、成分演算法則への接続と各行参照を未解決に記録する。零次と零のノルム、N=0で空となる添字範囲は本文にある規約を保ち、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
+        "ad_binomial",
+        "complex_numbers_form_a_field",
         "def_exp",
         "def_matrix_norm",
         "definition_of_cc",
+        "definition_of_sqrt_r_positive",
+        "inclusion_rr_to_cc",
+        "mat_mult",
         "matrix_exp_series_converges",
         "matrix_norm_submultiplicativity",
         "matrix_norm_triangle_inequality",
@@ -12417,8 +12455,13 @@
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
         "calculation_formulae_definition_set_and_algebra_notation",
+        "exp_conjugation_proof_004_theorem_ad_binomial",
         "exp_linear_map_000a_claim_real_exp_series_converges",
         "exp_linear_map_000b_claim_matrix_exp_series_converges",
         "exp_linear_map_002_definition_exp_of_endomorphism",
@@ -12432,7 +12475,9 @@
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [
+        "ad_binomial"
+      ],
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
@@ -14014,7 +14059,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"

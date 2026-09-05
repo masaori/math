@@ -1005,6 +1005,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
     title: { text: "可換行列の exp 積公式" },
     labels: ["theorem_exp_product"],
     statement: [
+      paragraph(["行列積は ", ref("mat_mult"), "、成分の演算は ", ref("complex_numbers_form_a_field"), "、実数係数の包含は ", ref("inclusion_rr_to_cc"), "、非負平方根は ", ref("definition_of_sqrt_r_positive"), " による。二項係数とPascalの関係式は ", ref("ad_binomial"), " の定義と証明の準備で述べたものを使う。"]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " または ",
