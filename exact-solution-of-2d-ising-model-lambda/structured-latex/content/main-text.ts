@@ -27652,7 +27652,7 @@ F_{m+1}
                       " に当て、その主張で指定された商を ",
                       math(String.raw`q\in\overline{\mathbb{Q}}[t]`), " と書く。このとき",
                     ]),
-                    displayMath(String.raw`g=(t-\widehat{w(j)})q`),
+                    displayMath(String.raw`g=(t-\widehat{w(j)})q\quad(\because\ \blkref{claim_qbar_factor_theorem}\ \text{を}\ g,w(j),m\ \text{へ適用})`),
                     paragraph([
                       "である。", ref("claim_qbar_factor_quotient_coeff_bound"), " より、",
                       math(String.raw`k\ge m`), " ならば ",
