@@ -28213,16 +28213,19 @@ n
                     ]),
                     paragraph([
                       math(String.raw`n\mid m`), " が成り立つ場合は、",
-                      ref("claim_root_of_unity_power_sum_multiple_value"), " により ",
-                      math(String.raw`S_{n,m}=n`), " である。",
                     ]),
+                    displayMath(String.raw`S_{n,m}=n
+  \quad(\because\ \blkref{claim_root_of_unity_power_sum_multiple_value})`),
                     paragraph([
                       math(String.raw`n\nmid m`), " が成り立つ場合は、",
-                      ref("claim_root_of_unity_power_not_one_exists"), " により ",
-                      math(String.raw`w^m\ne1`), " を満たす ", math(String.raw`w\in\mu_n`),
-                      " が存在する。この元を ", ref("claim_root_of_unity_power_sum_zero"),
-                      " に当てると、", math(String.raw`S_{n,m}=0`), " である。",
                     ]),
+                    displayMath(String.raw`\exists w\in\mu_n,\quad w^m\ne1
+  \quad(\because\ \blkref{claim_root_of_unity_power_not_one_exists})`),
+                    paragraph([
+                      "このような元 ", math(String.raw`w\in\mu_n`), " を一つ取ると、",
+                    ]),
+                    displayMath(String.raw`S_{n,m}=0
+  \quad(\because\ \blkref{claim_root_of_unity_power_sum_zero})`),
                     paragraph([
                       "二つの場合は自然数の割り切り関係について互いに排他的であり、すべての場合を尽くす。",
                       "したがって statement の場合分けが成り立つ。",
