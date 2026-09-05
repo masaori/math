@@ -28782,17 +28782,27 @@ Z_L(1)
                       " を一つ取る。", math(String.raw`B`), " の原像を",
                     ]),
                     displayMath(String.raw`\Sigma_L(B):=\left\{\,\tau\in\Sigma_L\ \middle|\ \mathcal{B}_L(\tau)=B\,\right\}`),
-                    paragraph(["と書く。", ref("claim_global_spin_reversal_preserves_broken_edge"), " より"]),
-                    displayMath(String.raw`\mathcal{B}_L\bigl(\nu_L(\sigma)\bigr)=\mathcal{B}_L(\sigma)=B`),
+                    paragraph(["と書く。"]),
+                    displayMath(String.raw`\mathcal{B}_L\bigl(\nu_L(\sigma)\bigr)=\mathcal{B}_L(\sigma)=B
+\qquad(\because\ \blkref{claim_global_spin_reversal_preserves_broken_edge}\text{ と }\mathcal{B}_L(\sigma)=B)`),
                     paragraph([
                       "である。また、", math(String.raw`(0,0)\in V_L`), " における値は ",
                       math(String.raw`\sigma((0,0))\in\{+1,-1\}`), " なので ",
                       math(String.raw`\nu_L(\sigma)((0,0))=-\sigma((0,0))\ne\sigma((0,0))`), " であり、",
                       math(String.raw`\nu_L(\sigma)\ne\sigma`), " である。",
-                      ref("claim_same_broken_edges_equal_or_global_reversal"), " を ",
-                      math(String.raw`\tau\in\Sigma_L(B)`), " へ適用すると",
+                      math(String.raw`\tau\in\Sigma_L(B)`), " を任意に取る。",
                     ]),
-                    displayMath(String.raw`\Sigma_L(B)=\left\{\sigma,\nu_L(\sigma)\right\},\qquad |\Sigma_L(B)|=2`),
+                    displayMath(String.raw`\begin{aligned}
+\tau\in\Sigma_L(B)
+&\Longleftrightarrow \tau=\sigma\ \text{ または }\ \tau=\nu_L(\sigma)
+&&\bigl(\because\ \blkref{claim_same_broken_edges_equal_or_global_reversal},\ \blkref{claim_global_spin_reversal_preserves_broken_edge}\bigr),\\
+\Sigma_L(B)
+&=\left\{\sigma,\nu_L(\sigma)\right\}
+&&\bigl(\because\ \Sigma_L(B)\text{ の定義と上の同値}\bigr),\\
+|\Sigma_L(B)|
+&=2
+&&\bigl(\because\ \nu_L(\sigma)\ne\sigma\bigr).
+\end{aligned}`),
                     paragraph(["を得る。したがって有限和を ", math(String.raw`\mathcal{B}_L`), " の値ごとにまとめると"]),
                     displayMath(String.raw`\begin{aligned}
 Z_L
@@ -28801,7 +28811,7 @@ Z_L
 &=\sum_{B\in\mathfrak{B}_L}\ \sum_{\tau\in\Sigma_L(B)}x^{\,b(\tau)}
 &&(\because\ \mathcal{B}_L\ \text{の値ごとに有限和を分ける})\\
 &=\sum_{B\in\mathfrak{B}_L}\ \sum_{\tau\in\Sigma_L(B)}x^{\,|B|}
-&&(\because\ b(\tau)=|\mathcal{B}_L(\tau)|=|B|)\\
+&&\bigl(\because\ \blkref{def_broken_bond_count},\ \blkref{def_broken_edge_set},\ \mathcal B_L(\tau)=B\bigr)\\
 &=\sum_{B\in\mathfrak{B}_L}2x^{\,|B|}
 &&(\because\ |\Sigma_L(B)|=2)\\
 &=2\sum_{B\in\mathfrak{B}_L}x^{\,|B|}
