@@ -218,6 +218,32 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "クロネッカー積の和とスカラー倍の展開",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_000c_claim_kronecker_multilinear"
+      ],
+      "input": [
+        "クロネッカー積の成分の定義と複素数の結合律・可換律・分配律",
+        "集合記号と成分ごとの和・スカラー倍"
+      ],
+      "output": [
+        "一つの因子の有限線型結合をクロネッカー積全体の有限線型結合へ展開する等式",
+        "スカラー倍の特例と数ベクトルについての同形の等式"
+      ],
+      "mainTheorem": "クロネッカー積の各因子についての線型性",
+      "mainTheoremEntryId": "linear_space_general_000c_claim_kronecker_multilinear",
+      "boundaryEvidence": "成分定義から一因子の和を複素数の分配律で展開し、全成分の一致へ閉じる現存一項を節とする。直後の転置は本項を使わず、成分添字の入れ替えとクロネッカー積の成分定義だけで計算する別枝であり、線型結合を展開する演算法則の入力が外れる。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度と後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で対象と全直接入力、後続転置の全本文を読んだ。対象は行列・数ベクトル・スカラー倍の特例の分割、成分ごとの和とスカラー倍の定義、複数演算・同時代入と数ベクトルの同様計算の展開、各行参照が未解決である。比較側は転置の定義と交換公式の主張が同居するため分割が残り、定義の各サイズへの適用と各行の参照を明示する必要がある。M=1の空積を保持し、前提補完と定義・主張の分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_000_definition_kronecker_product"
+      ]
+    },
+    {
       "name": "成分で定めるクロネッカー積と積の規則",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2590,6 +2616,7 @@
       "linear_space_general_000_definition_kronecker_product",
       "linear_space_general_000b_claim_kronecker_product_rule",
       "linear_space_general_000c_claim_kronecker_multilinear",
+      "linear_space_general_000d_claim_kronecker_transpose",
       "linear_space_general_002b_definition_matrix_norm",
       "linear_space_general_003_claim_matrix_norm_submultiplicativity",
       "linear_space_general_003c_claim_matrix_norm_vector_bound",
@@ -11056,7 +11083,7 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1913,
@@ -11067,7 +11094,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 転置の定義とクロネッカー積の転置公式が同居しており、定義と主張への分割が未解決である。任意のM≥1の各サイズでの転置の定義の適用、定義を使う各行の参照を明示し、分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "def_kronecker",
