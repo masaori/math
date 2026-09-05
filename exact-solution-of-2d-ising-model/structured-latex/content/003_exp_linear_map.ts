@@ -1425,7 +1425,8 @@ S_NT_N
     title: { tex: String.raw`\exp(O) = I` },
     labels: ["theorem_exp_zero"],
     statement: [
-      paragraph(["行列指数は ", ref("def_exp"), " の定義を用いる。"]),
+      paragraph(["行列指数は ", ref("def_exp"), "、成分積は ", ref("mat_mult"), "、実数係数の包含は ", ref("inclusion_rr_to_cc"), " による。実数級数の収束は ", ref("real_exp_series_converges"), " を引数1に適用する。"]),
+      paragraph([math(String.raw`d \in \mathbb{Z}_{\ge 1}`), " とし、", math(String.raw`O,I \in \mathrm{Mat}(d,\mathbb{C})`), " とする。"]),
       paragraph([
         math(String.raw`O`),
         " を零行列、",

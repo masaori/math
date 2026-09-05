@@ -58,11 +58,14 @@ const matrixExponentialConjugationExpectedInternalDependencies = new Map<string,
   ]],
 ]);
 const matrixExponentialConjugationExpectedContentSha256 = new Map<string, string>([
-  ["exp_conjugation_proof_010_theorem_matrix_exp_conjugation", "5bdb3ed5cd462b4bcdacbc754ee736c14abf5324e610b208bbd7da8582480874"],
+  ["exp_conjugation_proof_010_theorem_matrix_exp_conjugation", "4ae4828ae2515f0fa93979395d943f7c0870aff5e0a938e7a4aee23ec58d1fe6"],
   ["exp_conjugation_proof_008_theorem_exp_ad_series", "c06555b7aacaba911d0f832b2a5a07cbb81e56177f19e2a093be6356648dd95a"],
 ]);
 const matrixExponentialConjugationExpectedExternalInputEntryIds = [
+  "calc_formulae_003_matrix_decomposition",
   "calc_formulae_006_definition_of_cc",
+  "calc_formulae_007_inclusion_rr_to_cc",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field",
   "calculation_formulae_definition_set_and_algebra_notation",
   "exp_conjugation_proof_004_theorem_ad_binomial",
   "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
@@ -1260,7 +1263,7 @@ const vPlusPositiveDefiniteExpectedExternalInputContentSha256 = new Map<string, 
   ["evensectorT_definition_V1_plus_square_root", "33659011599514363340a770866a6757ab8b49d6b7259f1c8fc777da7aea773a"],
   ["evensectorT_definition_V_plus", "25224f1a0789bbff2c99b11323319f0e297bd6a0f68c213757097e35957e37ef"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "5310027658533830ac1844d325362a6a451df8aad4bd746c7685d92802af5f24"],
-  ["exp_linear_map_004_theorem_exp_zero_is_identity", "bb23ba43e403ab11c2c6a41e4356f0228a5880e37b0e2fe4df9a62289696fd53"],
+  ["exp_linear_map_004_theorem_exp_zero_is_identity", "6eb6a014fc1fb0b3b4c5086cf7090a29d220b2203fda132c53ed30019ceb2731"],
   ["linear_space_general_002_claim_scalar_identity_commutes", "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["transfer_matrix_011_definition_H1_H2", "02a14a895094a781e52c134f1e31763509ed2b747896f18cab3c7564c6c226fb"],
@@ -1691,6 +1694,8 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["exp_conjugation_proof_010_theorem_matrix_exp_conjugation", "LLMによる検証: 成分積・複素演算・実数包含・劣乗法性への明示参照を補った。級数収束・共役公式・正則性の三群の主張と部分和や添字集合・ノルム評価の補題が同居する。零次を含む四場合と添字全単射の逆写像、両側の逆元積は本文に実在する。有限和と二箇所の同時代入、実数列の有界性・部分列・極限法則の前提、符号付き冪と成分演算への適用行参照の分割が未解決であり、前提補完と分割後に依存と閉包を再判定する。"],
+
   ["maxeig_010_claim_sector_decomposition_of_c", "LLMによる検証で、零ベクトルと非零ベクトルを分けた正規化、ノルムの平方和と交叉項消去、転置と分配則の分離、各行の根拠参照に既存の説明不足を確認した。四分割とは別の本文粒度の未解決として保持する。"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "LLMによる検証: 行列積・複素演算・実数包含・非負平方根と、二項係数の定義およびPascalの関係式を示す反復交換子の準備への参照を補った。可換な冪と二項展開、有限添字集合の比較と剰余評価、二つの因子が変わる積の収束を一項に含む。Pascalの計算は参照先に存在し、必要な補題としての分離と適用行の参照が未整備である。有限和の展開・添字全単射・両箇所の同時代入、実数の平方根比較と極限法則、成分演算法則への接続と各行参照を未解決に記録する。零次と零のノルム、N=0で空となる添字範囲は本文にある規約を保ち、前提補完と分割後に依存と閉包を再判定する。"],
   ["bridge_003_claim_exp_of_diagonal", "LLMによる検証: 行列積・複素演算・実数包含・非負平方根への参照を補った。複素成分d_kに非負実数の指数級数の定理を適用しており、その定理だけでは複素数の指数e^{d_k}の定義と収束を与えない。この定義・証明の接続は未完である。非対角成分について「左側が常に0」は差の絶対値を指すなら不正確で、部分和の非対角成分が0であることと極限からの結論を区別する必要がある。成分冪の定義と帰納法、有限線型結合と非負平方比較、同時適用と各行参照の分割も未解決であり、零成分と零次を保って補完後に依存と閉包を再判定する。"],
@@ -1718,7 +1723,7 @@ const manualGranularityReviewById = new Map<string, string>([
   ["linear_space_general_000b_claim_kronecker_product_rule", "LLMによる検証: 行列積と複素数の演算法則の参照を補った。三主張と多重添字和の補題が同居し、有限和の帰納法、添字変更、二箇所の定義代入、可換律と結合律の同時適用、各行参照の分離が未解決である。M=1と空和・空積の規約を保ち、分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000c_claim_kronecker_multilinear", "LLMによる検証: 複素数の演算法則の参照を補った。行列と数ベクトルの主張およびスカラー倍の特例の分割、成分ごとの和・スカラー倍の定義、積の並べ替えと分配の分離、数ベクトルの同様計算の展開と各行参照が未解決である。M=1の空積を保持し、前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_000_definition_kronecker_product", "LLMによる検証: 添字集合の元数、写像の値域と全単射、数ベクトルと行列の二定義が同居する。有限集合の議論と有限和の法則、同時代入と複数演算の分離、各行参照が未解決である。M=1と単射証明の末尾の空和を保ち、前提補完と分割後に依存と閉包を再判定する。"],
-  ["exp_linear_map_004_theorem_exp_zero_is_identity", "LLMによる検証: 行列指数の定義への欠落参照を補い依存順を修正した。行列サイズと成分の所属、正整数冪の計算、収束級数の初項分離とスカラー倍の前提、各行参照が未解決である。"],
+  ["exp_linear_map_004_theorem_exp_zero_is_identity", "LLMによる検証: 行列サイズと複素成分の所属を明示し、行列積・実数包含・引数1の実数指数級数への参照を補った。零次の分離と正次数の零行列への置換は本文にあるが、冪の計算の帰納、収束級数の初項分離と無限和のスカラー倍・実数極限の前提、各行参照が未解決である。零行列と零次を保持し、前提補完と分割後に依存と閉包を再判定する。"],
   ["freeenergy_004_theorem_riemann_sum_to_integral", "LLMによる検証: イジング固有の導入を外し、一様連続性と積分の基本性質を一般形の外部前提として明示した。それらの本文内の証明、連続度の上限の存在、誤差評価と極限の主張分割、各行参照と複数演算の分離が未解決である。前提補完後に依存と閉包を再判定する。"],
   ["exp_linear_map_000a_claim_real_exp_series_converges", "LLMによる検証: 部分和・極限・剰余の定義と三主張が同居する。Archimedesの原理、等比和、上限から単調列収束と極限が上限になる根拠、極限の差の法則と各行参照が未提示である。零引数もa^0=1の規約で含め、前提補完と分割後に依存と閉包を再判定する。"],
   ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "LLMによる検証: 共役転置・エルミート・正定値・実対称を一項に束ねている。正方行列で定めた共役転置を列ベクトルへ使う長方形への拡張、実対称の等式と正の実数を実数包含から説明する段、通常転置の記号導入、定義分割が未解決であり、補完後に依存と閉包を再判定する。"],
@@ -9016,10 +9021,15 @@ const realExponentialSeriesSectionBoundarySnapshot = [
   {
     "id": "exp_linear_map_004_theorem_exp_zero_is_identity",
     "kind": "theorem",
-    "sha256": "bb23ba43e403ab11c2c6a41e4356f0228a5880e37b0e2fe4df9a62289696fd53",
+    "sha256": "6eb6a014fc1fb0b3b4c5086cf7090a29d220b2203fda132c53ed30019ceb2731",
     "dependencies": [
-      "exp_linear_map_002_definition_exp_of_endomorphism"
-    ],
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_007_inclusion_rr_to_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "exp_linear_map_000a_claim_real_exp_series_converges",
+  "exp_linear_map_002_definition_exp_of_endomorphism"
+],
     "granularity": "具体的な行列計算への展開またはブロック分割を要する"
   },
   {
@@ -12127,10 +12137,15 @@ const pointwiseMovedPositiveSnapshot = [
   {
     "id": "exp_linear_map_004_theorem_exp_zero_is_identity",
     "kind": "theorem",
-    "sha256": "bb23ba43e403ab11c2c6a41e4356f0228a5880e37b0e2fe4df9a62289696fd53",
+    "sha256": "6eb6a014fc1fb0b3b4c5086cf7090a29d220b2203fda132c53ed30019ceb2731",
     "dependencies": [
-      "exp_linear_map_002_definition_exp_of_endomorphism"
-    ],
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_007_inclusion_rr_to_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "exp_linear_map_000a_claim_real_exp_series_converges",
+  "exp_linear_map_002_definition_exp_of_endomorphism"
+],
     "granularity": "具体的な行列計算への展開またはブロック分割を要する"
   },
   {
@@ -12730,7 +12745,591 @@ if (findToolEntry("exp_linear_map_003_theorem_exp_product_formula_commuting_matr
   !== diagonalExponentialSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("対角行列の指数の成分表示の直後の項目が変わりました");
 }
+const exponentialPositiveSectionEntryIds = [
+  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+  "exp_linear_map_004_theorem_exp_zero_is_identity",
+  "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+];
+const exponentialPositiveSection = validateReviewedSection(
+  "指数の積公式とエルミート行列の指数の正定値性", "数学的道具立て", exponentialPositiveSectionEntryIds,
+  new Map([
+  [
+    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+    []
+  ],
+  [
+    "exp_linear_map_004_theorem_exp_zero_is_identity",
+    []
+  ],
+  [
+    "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+    [
+      "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+      "exp_linear_map_004_theorem_exp_zero_is_identity"
+    ]
+  ]
+]),
+  new Map([
+  [
+    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+    "5310027658533830ac1844d325362a6a451df8aad4bd746c7685d92802af5f24"
+  ],
+  [
+    "exp_linear_map_004_theorem_exp_zero_is_identity",
+    "6eb6a014fc1fb0b3b4c5086cf7090a29d220b2203fda132c53ed30019ceb2731"
+  ],
+  [
+    "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+    "73fdb5d24c8cec6a1c637fedee45e0040ef03c5d8e7c13449cc4d8c80bc5f324"
+  ]
+]),
+  [
+  "calc_formulae_001_sqrt_nonnegative_real",
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calc_formulae_007_inclusion_rr_to_cc",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field",
+  "calculation_formulae_031b_claim_abs_basic_properties",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "eigenvalues_of_V_001_definition_trace",
+  "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+  "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+  "exp_conjugation_definition_complex_conjugate_and_real_part",
+  "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
+  "exp_conjugation_proof_004_theorem_ad_binomial",
+  "exp_linear_map_000a_claim_real_exp_series_converges",
+  "exp_linear_map_000b_claim_matrix_exp_series_converges",
+  "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+  "exp_linear_map_002_definition_exp_of_endomorphism",
+  "linear_space_general_002b_definition_matrix_norm",
+  "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+  "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+],
+  new Map([
+  [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d"
+  ],
+  [
+    "calc_formulae_003_matrix_decomposition",
+    "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calc_formulae_007_inclusion_rr_to_cc",
+    "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647"
+  ],
+  [
+    "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6"
+  ],
+  [
+    "calculation_formulae_031b_claim_abs_basic_properties",
+    "b4e198549ba1d7b1452fe4650837a325244f089149b147b0e8f802a72731588e"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ],
+  [
+    "eigenvalues_of_V_001_definition_trace",
+    "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d"
+  ],
+  [
+    "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1"
+  ],
+  [
+    "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+    "34155cf8eb5b5d74228dd34a7b3bc563dba0d010dc8e96ab05d0bb4a1f03c3bd"
+  ],
+  [
+    "exp_conjugation_definition_complex_conjugate_and_real_part",
+    "69fd82e2a5857d7844277a0dffbd61a33f0c61050aea4abeb87340c5e1fae879"
+  ],
+  [
+    "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
+    "316edd2523302d9bc329c4ae657623b9228323b847df0312eacbec979fbb2b47"
+  ],
+  [
+    "exp_conjugation_proof_004_theorem_ad_binomial",
+    "ba1875ca88bb10163d2a3ba85f2acb5e4a358169c00e6e2959ba76c666c34a1b"
+  ],
+  [
+    "exp_linear_map_000a_claim_real_exp_series_converges",
+    "1065e4f465b1b0b49eae7d16f9d734421f472beec053c3effaff63127eecf077"
+  ],
+  [
+    "exp_linear_map_000b_claim_matrix_exp_series_converges",
+    "081de060bbad105f91c57433abbe6545518c96afee20f1e69f81167f6cb35325"
+  ],
+  [
+    "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+    "7f8878116e4672d93d30e4babcccacab6bb2b8f8423348cbb9ba7e19d78af627"
+  ],
+  [
+    "exp_linear_map_002_definition_exp_of_endomorphism",
+    "1b90c006155b2b723ad7169ab806c4fff82870687ce2865a7bc677a875134fa2"
+  ],
+  [
+    "linear_space_general_002b_definition_matrix_norm",
+    "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab"
+  ],
+  [
+    "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069"
+  ],
+  [
+    "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+    "b120c7834055676e534d67e01428c170782fb7db99651f9955bd5e2a6b16cde3"
+  ]
+]),
+  [
+  "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+],
+);
+const exponentialPositiveSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_001_sqrt_nonnegative_real",
+    "kind": "definition",
+    "sha256": "9b28cccf76a246982dba0b0523ed6abd9dfeba10b9cdb2c1336bf7d5588a739d",
+    "dependencies": [
+      "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_007_inclusion_rr_to_cc",
+    "kind": "definition",
+    "sha256": "fe186e23ab9f4d50ef611f752373da5bb2e5d249e8020c0b0014e9e87c8e1647",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "kind": "claim",
+    "sha256": "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_008_multiply_by_minus_one",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_031b_claim_abs_basic_properties",
+    "kind": "claim",
+    "sha256": "b4e198549ba1d7b1452fe4650837a325244f089149b147b0e8f802a72731588e",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "eigenvalues_of_V_001_definition_trace",
+    "kind": "definition",
+    "sha256": "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    "kind": "definition",
+    "sha256": "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_conjugation_definition_complex_conjugate_and_real_part"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+    "kind": "claim",
+    "sha256": "34155cf8eb5b5d74228dd34a7b3bc563dba0d010dc8e96ab05d0bb4a1f03c3bd",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+      "exp_conjugation_definition_complex_conjugate_and_real_part",
+      "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
+      "linear_space_general_002b_definition_matrix_norm"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+    "kind": "claim",
+    "sha256": "73fdb5d24c8cec6a1c637fedee45e0040ef03c5d8e7c13449cc4d8c80bc5f324",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "eigenvalues_of_V_001_definition_trace",
+      "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+      "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+      "exp_conjugation_definition_complex_conjugate_and_real_part",
+      "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
+      "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+      "exp_linear_map_002_definition_exp_of_endomorphism",
+      "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+      "exp_linear_map_004_theorem_exp_zero_is_identity",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_definition_complex_conjugate_and_real_part",
+    "kind": "definition",
+    "sha256": "69fd82e2a5857d7844277a0dffbd61a33f0c61050aea4abeb87340c5e1fae879",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_010_definition_real_imag_parts_of_cc"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
+    "kind": "claim",
+    "sha256": "316edd2523302d9bc329c4ae657623b9228323b847df0312eacbec979fbb2b47",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_010_definition_real_imag_parts_of_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "eigenvalues_of_V_001_definition_trace",
+      "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+      "exp_conjugation_definition_complex_conjugate_and_real_part",
+      "exp_conjugation_proof_003_definition_M_n_C_convergence",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_proof_004_theorem_ad_binomial",
+    "kind": "theorem",
+    "sha256": "ba1875ca88bb10163d2a3ba85f2acb5e4a358169c00e6e2959ba76c666c34a1b",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
+    "kind": "definition",
+    "sha256": "8a6b649f4059d7c238cc45e58e70461badfb98bb871e4557cc5032dcc9ce601b",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_conjugation_proof_003_definition_M_n_C_convergence",
+      "exp_conjugation_proof_004_theorem_ad_binomial"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
+    "kind": "theorem",
+    "sha256": "4ae4828ae2515f0fa93979395d943f7c0870aff5e0a938e7a4aee23ec58d1fe6",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_conjugation_proof_004_theorem_ad_binomial",
+      "exp_conjugation_proof_005_definition_ad_X_Ad_g_matrix",
+      "exp_linear_map_000a_claim_real_exp_series_converges",
+      "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+      "exp_linear_map_002_definition_exp_of_endomorphism",
+      "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+      "exp_linear_map_004_theorem_exp_zero_is_identity",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+      "linear_space_general_003d_claim_matrix_completeness"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_000a_claim_real_exp_series_converges",
+    "kind": "claim",
+    "sha256": "1065e4f465b1b0b49eae7d16f9d734421f472beec053c3effaff63127eecf077",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_000b_claim_matrix_exp_series_converges",
+    "kind": "claim",
+    "sha256": "081de060bbad105f91c57433abbe6545518c96afee20f1e69f81167f6cb35325",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_linear_map_000a_claim_real_exp_series_converges",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+      "linear_space_general_003d_claim_matrix_completeness"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+    "kind": "theorem",
+    "sha256": "7f8878116e4672d93d30e4babcccacab6bb2b8f8423348cbb9ba7e19d78af627",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_linear_map_000a_claim_real_exp_series_converges",
+      "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "linear_space_general_003c_claim_matrix_norm_vector_bound",
+      "linear_space_general_003d_claim_matrix_completeness"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_002_definition_exp_of_endomorphism",
+    "kind": "definition",
+    "sha256": "1b90c006155b2b723ad7169ab806c4fff82870687ce2865a7bc677a875134fa2",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+    "kind": "theorem",
+    "sha256": "5310027658533830ac1844d325362a6a451df8aad4bd746c7685d92802af5f24",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_conjugation_proof_004_theorem_ad_binomial",
+      "exp_linear_map_000a_claim_real_exp_series_converges",
+      "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "exp_linear_map_002_definition_exp_of_endomorphism",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "exp_linear_map_004_theorem_exp_zero_is_identity",
+    "kind": "theorem",
+    "sha256": "6eb6a014fc1fb0b3b4c5086cf7090a29d220b2203fda132c53ed30019ceb2731",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "exp_linear_map_000a_claim_real_exp_series_converges",
+      "exp_linear_map_002_definition_exp_of_endomorphism"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002b_definition_matrix_norm",
+    "kind": "definition",
+    "sha256": "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "kind": "claim",
+    "sha256": "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+    "kind": "claim",
+    "sha256": "b120c7834055676e534d67e01428c170782fb7db99651f9955bd5e2a6b16cde3",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_003d_claim_matrix_completeness",
+    "kind": "claim",
+    "sha256": "dd073df5d0ec8186d0e924d507fd4c207333a4101bb562a89bdabf1b7029c102",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of exponentialPositiveSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`指数の積公式とエルミート行列の指数の正定値性の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("exp_conjugation_proof_010_theorem_matrix_exp_conjugation").dependencyPlacement!.chapterOrder
+  !== exponentialPositiveSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("指数の積公式とエルミート行列の指数の正定値性の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "指数の積公式とエルミート行列の指数の正定値性",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+    "exp_linear_map_004_theorem_exp_zero_is_identity",
+    "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+  ],
+  "input": [
+    "行列指数とその収束・上界、実数指数級数と剰余",
+    "行列ノルム・劣乗法性、共役転置・エルミート性・正定値性、トレース",
+    "二項係数とPascalの計算、複素演算・絶対値・実数包含・非負平方根・集合記号"
+  ],
+  "output": [
+    "可換行列の指数の積と零行列の指数",
+    "エルミート行列の指数の正定値性の主張",
+    "正定値行列の合同変換・正の定数倍・正のトレースの性質"
+  ],
+  "mainTheorem": "エルミート行列の指数の正定値性",
+  "mainTheoremEntryId": "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+  "boundaryEvidence": "積公式と零での値は互いを使わない二枝だが、末尾の正定値性が両者を使い、半分の指数の積と逆元を経て二次形式のノルム表示へ合流する三項である。直後の行列指数共役は正定値性・共役転置・トレースを使わず、交換子作用と反復の二項展開を使う別枝へ切り替わる。積公式と零での値は後続でも再利用されるが、三項内では末尾の主張へ閉じる。未完の矩形共役転置や逆元推論を補完した後に閉包を再判定する条件で、対象・比較と全直接入力の本文・全依存・種別・粒度・連続性・相対順をプログラミングによる検証で固定する。",
+  "readabilityStatus": "LLMによる検証で三項・全直接入力・後続共役公式の全本文を読んだ。積公式の補題群・有限和と添字変更・実数極限の前提、零行列の冪の帰納と収束級数の初項分離・スカラー倍の前提、正定値性の四主張の分割が未解決である。矩形共役転置の定義と積公式の適用範囲、片側逆元だけからの可逆性と非零ベクトルへの作用、複素数と正の実数の包含の区別は定義・証明の前提不足として残る。比較側は三群の主張と補題群、実数列の有界性と極限法則・同時適用・各行参照が未整備であるが、零次の四場合・添字全単射の逆写像・両側逆元の計算は現存する。零の引数・零次・空の添字範囲を保持し、前提補完と分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_001_sqrt_nonnegative_real",
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calc_formulae_007_inclusion_rr_to_cc",
+    "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "calculation_formulae_031b_claim_abs_basic_properties",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "eigenvalues_of_V_001_definition_trace",
+    "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+    "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+    "exp_conjugation_definition_complex_conjugate_and_real_part",
+    "exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms",
+    "exp_conjugation_proof_004_theorem_ad_binomial",
+    "exp_linear_map_000a_claim_real_exp_series_converges",
+    "exp_linear_map_000b_claim_matrix_exp_series_converges",
+    "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+    "exp_linear_map_002_definition_exp_of_endomorphism",
+    "linear_space_general_002b_definition_matrix_norm",
+    "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+  ]
+}, {
   "name": "対角行列の指数の成分表示",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",

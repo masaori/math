@@ -1044,6 +1044,7 @@ h
     },
     labels: ["matrix_exp_conjugation"],
     statement: [
+      paragraph(["行列積は ", ref("mat_mult"), "、複素成分の演算は ", ref("complex_numbers_form_a_field"), "、実数係数の包含は ", ref("inclusion_rr_to_cc"), "、ノルムの積の評価は ", ref("matrix_norm_submultiplicativity"), " を用いる。"]),
       paragraph([
         math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
         "、",
