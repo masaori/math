@@ -13,11 +13,32 @@ def linear_factor_product(values):
 def extract_remaining_factor(samples, j, i):
     """本文の帰納法どおりに残りの因子 B を構成する（i < j を仮定する）。"""
     assert i < j
-    if i == j - 1:
-        # 場合 i = j-1（帰納法の一歩で「最後の因子」を取り出す場合）
-        return linear_factor_product(samples[:j - 1])
-    # 場合 i ≠ j-1: 帰納法の仮定で j-1 個の積から取り出し、最後の因子を掛ける
-    return extract_remaining_factor(samples, j - 1, i) * (t - samples[j - 1])
+    n = j - 1  # 本文の帰納法の一歩 n → n+1。
+    previous = linear_factor_product(samples[:n])
+    current = linear_factor_product(samples[:j])
+    last = t - samples[n]
+    chosen = t - samples[i]
+    if i == n:
+        B = previous
+        chain = [current, previous * last, last * previous, chosen * B]
+        assert all(left == right for left, right in zip(chain, chain[1:]))
+        for l in range(j, j + 4):
+            assert B[l] == previous[l]
+            assert previous[l] == 0
+        return B
+    assert i < n
+    A = extract_remaining_factor(samples, n, i)
+    assert previous == chosen * A
+    B = A * last
+    chain = [current, previous * last, (chosen * A) * last,
+             chosen * (A * last), chosen * B]
+    assert all(left == right for left, right in zip(chain, chain[1:]))
+    assert n == (n - 1) + 1
+    for l in range(j, j + 4):
+        assert A[l] == 0 and A[l - 1] == 0
+        chain = [B[l], (A * last)[l], (last * A)[l], R.base_ring()(0)]
+        assert all(left == right for left, right in zip(chain, chain[1:]))
+    return B
 
 
 def main():
