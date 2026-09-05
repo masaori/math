@@ -296,6 +296,7 @@ F^{r}\,y
     kind: "claim",
     title: { text: "反復の不動点の個数は最小周期ごとの個数の和である" },
     labels: ["claim_fixed_point_count_decomposition"],
+    verification: ["sagemath/check/elementary-ca-logarithmic-calibration"],
     habitat: "N",
     statement: [
       paragraph([

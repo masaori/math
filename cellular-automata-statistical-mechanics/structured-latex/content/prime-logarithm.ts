@@ -296,7 +296,7 @@ a+_\Lambda c\le_\Lambda b+_\Lambda c
     kind: "claim",
     title: { text: "対数順序群内の整数除算は全係数の整除に限る" },
     labels: ["claim_prime_vector_integer_division"],
-    verification: ["sagemath/check/logarithmic-counts"],
+    verification: ["sagemath/check/logarithmic-counts", "sagemath/check/elementary-ca-logarithmic-calibration"],
     habitat: "countable",
     statement: [
       paragraph([math(String.raw`a\in\Lambda`), "、", math(String.raw`d\in\mathbb Z\setminus\{0\}`),

@@ -188,13 +188,13 @@ export const roadmapStages = [
     scope:
       "有限舞台の上だけで、大域写像の反復の周期点の数え上げから熱力学の量を構成する。" +
       "配位の個数を自然数として数え、その対数を対数順序群の元として取り、逆温度に当たる量を" +
-      "差分商として同じ群の中で作る。無限の舞台も熱力学極限も使わない範囲に限る。",
+      "両端が正の整数刻み一の差として同じ群の中で作り、非単位刻みの除算は全素数係数の整除条件に限る。無限の舞台も熱力学極限も使わない範囲に限る。",
     habitat:
-      "数え上げは自然数、その対数と差分商は対数順序群の元であり、実数体も複素数体も現れない。" +
+      "数え上げは自然数、正の個数の対数と定義域内の隣接差は対数順序群の元であり、実数体も複素数体も現れない。" +
       "極限を取らない限りこの段階は可算側で閉じる。",
     dependsOn: ["general_stage_and_nonuniform_rules", "elementary_ca_finite_calibration"],
-    status: "進行中",
-    current: true,
+    status: "到達済み",
+    current: false,
     completion: [
       "有限舞台の数え上げから、状態数・エントロピー・逆温度・自由エントロピーに当たる量が、" +
         "自然数と対数順序群の中だけで本文に定義されていること。",
@@ -202,6 +202,21 @@ export const roadmapStages = [
       "構成した量が初等セルオートマトンの全数計算で素因数分解による厳密計算として検算され、浮動小数点を使っていないこと。",
     ],
     evidence: [
+      {
+        kind: "label",
+        label: "def_binary_ca_fiber_logarithmic_entropy",
+        why: "正の繊維状態数の対数、両端が正の隣接差、正の総数の自由エントロピーを本文に構成し、Lean具体版・必要十分版と導出を揃えた。",
+      },
+      {
+        kind: "label",
+        label: "claim_prime_vector_integer_division",
+        why: "非単位刻みで群内除算ができる条件は全素数係数の整除であり、無条件の差分商は構成していない。二セルの反例も四層で保持する。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/elementary-ca-logarithmic-calibration/overview.md",
+        why: "三〜六セルの全256規則、明示した五つの整数値写像、反復1〜2×配位数で状態数・対数・隣接差・整数除算を厳密校正した。保存条件と正値域で選別し、一般の保存写像や無限舞台へ拡張していない。",
+      },
       {
         kind: "label",
         label: "claim_fixed_point_count_decomposition",
@@ -228,14 +243,25 @@ export const roadmapStages = [
     habitat:
       "有限舞台では有限。局所的極限を取っても舞台は可算のままで、非可算になるのは全配位を一度に取ったときである。",
     dependsOn: ["elementary_ca_finite_calibration"],
-    status: "未着手",
-    current: false,
+    status: "進行中",
+    current: true,
     completion: [
       "半径を与えるごとに規則空間の大きさと、全数列挙が可能な範囲が本文に明示されていること。",
       "半径 1 の場合が初等セルオートマトンの校正結果と一致することが検算で確認できること。",
       "全数列挙が不可能な半径について、どの不変量が構造的に決定できるかが主張として書かれていること。",
     ],
-    evidence: [],
+    evidence: [
+      {
+        kind: "path",
+        path: "docs/tasks/auto-loop-state.md",
+        why: "有限舞台の量と初等規則の校正を終え、次の対象を任意半径の局所表と周期境界の重複へ定めた。入力の整理に着手した段階で、新しい一般命題はまだない。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/elementary-ca-logarithmic-calibration/overview.md",
+        why: "半径一・三〜六セルの校正を比較の基準として使う。オフセットが同じセルへ戻る小さい周期舞台はこの校正の範囲外であり、次の定義で分離する。",
+      },
+    ],
   },
   {
     id: "lattice_and_countable_group_stages",
