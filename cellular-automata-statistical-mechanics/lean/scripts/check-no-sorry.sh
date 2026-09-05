@@ -53,6 +53,66 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.PrimeLogarithm.scale_apply
+  CellularAutomata.PrimeLogarithm.add_support
+  CellularAutomata.PrimeLogarithm.neg_support
+  CellularAutomata.PrimeLogarithm.scale_support
+  CellularAutomata.PrimeLogarithm.vector_assoc
+  CellularAutomata.PrimeLogarithm.vector_comm
+  CellularAutomata.PrimeLogarithm.vector_zero
+  CellularAutomata.PrimeLogarithm.vector_inverse
+  CellularAutomata.PrimeLogarithm.logarithm_apply
+  CellularAutomata.PrimeLogarithm.numerator_positive
+  CellularAutomata.PrimeLogarithm.denominator_positive
+  CellularAutomata.PrimeLogarithm.order_cross_multiply
+  CellularAutomata.PrimeLogarithm.integer_division
+  CellularAutomata.PrimeLogarithm.logarithm_nat_apply
+  CellularAutomata.PrimeLogarithm.logarithm_one
+  CellularAutomata.PrimeLogarithm.logarithm_two_at_two
+  CellularAutomata.PrimeLogarithm.logarithm_product
+  CellularAutomata.PrimeLogarithm.logarithm_inverse
+  CellularAutomata.PrimeLogarithm.logarithm_ratio
+  CellularAutomata.PrimeLogarithm.logarithm_nat_vector
+  CellularAutomata.PrimeLogarithm.reconstruct_nat
+  CellularAutomata.PrimeLogarithm.natural_log_order
+  CellularAutomata.PrimeLogarithm.product_factorization
+  CellularAutomata.PrimeLogarithm.numerator_factorization
+  CellularAutomata.PrimeLogarithm.denominator_factorization
+  CellularAutomata.PrimeLogarithm.reconstruction_coprime
+  CellularAutomata.PrimeLogarithm.logarithm_reconstruct
+  CellularAutomata.PrimeLogarithm.reduced_exponents_disjoint
+  CellularAutomata.PrimeLogarithm.reconstruct_logarithm
+  CellularAutomata.PrimeLogarithm.reconstruction_injective
+  CellularAutomata.PrimeLogarithm.reconstruct_add
+  CellularAutomata.PrimeLogarithm.order_reflexive
+  CellularAutomata.PrimeLogarithm.order_transitive
+  CellularAutomata.PrimeLogarithm.order_total
+  CellularAutomata.PrimeLogarithm.order_antisymmetric
+  CellularAutomata.PrimeLogarithm.order_translation
+  CellularAutomata.PrimeLogarithm.logarithm_order
+  CellularAutomata.BinaryCALogarithmicCounts.mem_fiber
+  CellularAutomata.BinaryCALogarithmicCounts.mem_levels
+  CellularAutomata.BinaryCALogarithmicCounts.fibers_disjoint
+  CellularAutomata.BinaryCALogarithmicCounts.fibers_cover
+  CellularAutomata.BinaryCALogarithmicCounts.partition_count
+  CellularAutomata.BinaryCALogarithmicCounts.beta_ratio
+  CellularAutomata.BinaryCALogarithmicCounts.fiber_sum_positive
+  CellularAutomata.BinaryCALogarithmicCounts.free_fibers
+  CellularAutomata.BinaryCALogarithmicCounts.free_count_bound
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.global_identity
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.conserved
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.iterate_identity
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.fixed_full
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.fiber_table
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.count_zero
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.count_two
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.count_four
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.level_zero
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.level_two
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.entropy_difference
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.division_obstruction
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.levels_table
+  CellularAutomata.BinaryCALogarithmicCounts.Gap.no_adjacent_levels
   CellularAutomata.NecSuf.PositiveFixedPointCountDomain.count_bounds
   CellularAutomata.NecSuf.PositiveFixedPointCountDomain.domain_iff_period_divides
   CellularAutomata.NecSuf.PositiveFixedPointCountDomain.zero_iff
