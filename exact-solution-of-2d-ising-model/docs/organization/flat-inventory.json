@@ -218,6 +218,40 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "行列級数の絶対収束と指数級数の収束",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "linear_space_general_003d_claim_matrix_completeness",
+        "exp_linear_map_000b_claim_matrix_exp_series_converges"
+      ],
+      "input": [
+        "行列のノルムと基本性質、行列積の劣乗法性",
+        "複素数の演算と絶対値、実数から複素数への包含、集合記号",
+        "非負実数の指数級数の上界と実数のCauchy完備性・極限法則の前提"
+      ],
+      "output": [
+        "行列のCauchy列の収束と行列級数の絶対収束判定・ノルム評価",
+        "行列の指数級数のノルム収束と部分和・極限の共通上界"
+      ],
+      "mainTheorem": "行列の指数級数のノルム収束",
+      "mainTheoremEntryId": "exp_linear_map_000b_claim_matrix_exp_series_converges",
+      "boundaryEvidence": "成分のCauchy列から行列の極限を作り絶対収束判定を得た前項を、行列の冪と非負実数の指数級数で評価する末尾が使う二項の依存鎖で閉じる。直後の各点収束は末尾の行列級数を受け取るが、数ベクトルへの作用の評価を追加し、さらに行列空間上の線型写像を行列単位で展開してその反復級数を扱う。行列級数の存在と上界から作用および線型写像の級数への入力切替を根拠とし、プログラミングによる検証で対象・比較と全直接入力の本文・種別・粒度・依存・相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で対象二項・全直接入力と後続各点収束の全本文を読んだ。Cauchy列・部分和・上界の定義と各主張の分割、実数のCauchy完備性・上限と単調列収束・極限法則の前提、添字の場合分けと有限回の不等式の帰納が未解決である。行列の冪の再帰は後続の指数定義内に存在するため、収束証明の前へ分離する必要がある。比較側は行列単位・線型写像と反復・上界の定義と六群の主張の分割、有限和の線型性、添字写像の全単射の根拠、同時適用と各行参照が未解決である。零の引数と零次の項を保持し、前提補完と分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_031b_claim_abs_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "exp_linear_map_000a_claim_real_exp_series_converges",
+        "linear_space_general_002b_definition_matrix_norm",
+        "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+        "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+      ]
+    },
+    {
       "name": "行列ノルムによる数ベクトルの評価",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -7626,7 +7660,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 23,
+        "incomingReferenceCount": 24,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7744,7 +7778,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 17,
+        "incomingReferenceCount": 19,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7985,7 +8019,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12068,19 +12102,21 @@
         "abstractVocabularyMatches": [
           "一般の体・環"
         ],
-        "inspectedCharacterCount": 5058,
-        "inspectedContentSha256": "25199a5a989a0912bd2303862bdb698e1464428ac06761f13c9f5c6abd48c1f4",
+        "inspectedCharacterCount": 5284,
+        "inspectedContentSha256": "081de060bbad105f91c57433abbe6545518c96afee20f1e69f81167f6cb35325",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積と実数係数の包含への参照を補った。部分和・上界の定義と収束・評価の二主張、冪の評価の帰納法が同居する。行列冪の再帰は後続の指数定義に存在し、収束証明の前へ分離する必要がある。零次と正次数の分離は本文に明示済みである。上限から単調列収束への前提、有限回の三角不等式、N=0で正次数の和が空となる場合への適用説明、同時適用と各行参照が未解決であり、零行列と零次の項を保って補完・分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "def_matrix_norm",
         "definition_of_cc",
+        "inclusion_rr_to_cc",
+        "mat_mult",
         "matrix_completeness",
         "matrix_norm_submultiplicativity",
         "matrix_norm_triangle_inequality",
@@ -12088,7 +12124,9 @@
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "exp_linear_map_000a_claim_real_exp_series_converges",
         "linear_space_general_002b_definition_matrix_norm",
@@ -12140,19 +12178,22 @@
           "一般の体・環",
           "抽象線型写像"
         ],
-        "inspectedCharacterCount": 18559,
-        "inspectedContentSha256": "af6e085d614179050c2b2cfc62548b146f41083dbe158453221af092d9796239",
+        "inspectedCharacterCount": 18880,
+        "inspectedContentSha256": "7f8878116e4672d93d30e4babcccacab6bb2b8f8423348cbb9ba7e19d78af627",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 行列積・非負平方根・実数係数の包含への参照を補った。作用と成分の収束、線型写像の評価・反復・級数収束・極限の線型性の六群の主張に、行列単位・上界・写像と反復の定義が同居する。行列の冪の再帰の提示順、有限和への線型性の帰納、添字写像の全単射の根拠、実数列の単調収束と極限法則、同時適用と各行参照が未解決である。零の上界と零次の反復を保持し、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "def_matrix_norm",
         "definition_of_cc",
+        "definition_of_sqrt_r_positive",
+        "inclusion_rr_to_cc",
+        "mat_mult",
         "matrix_completeness",
         "matrix_exp_series_converges",
         "matrix_norm_triangle_inequality",
@@ -12161,7 +12202,10 @@
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "exp_linear_map_000a_claim_real_exp_series_converges",
         "exp_linear_map_000b_claim_matrix_exp_series_converges",

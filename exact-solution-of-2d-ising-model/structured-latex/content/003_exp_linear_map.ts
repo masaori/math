@@ -192,6 +192,7 @@ export default defineBlocks([
     title: { text: "行列の exp 級数はノルム収束する" },
     labels: ["matrix_exp_series_converges"],
     statement: [
+      paragraph(["行列積は ", ref("mat_mult"), "、実数係数を複素数として使うときの包含は ", ref("inclusion_rr_to_cc"), " による。"]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " または ",
@@ -357,6 +358,7 @@ export default defineBlocks([
     title: { text: "exp 級数の各点収束（数ベクトルへの作用・成分・行列への線型写像）" },
     labels: ["exp_converges"],
     statement: [
+      paragraph(["行列と数ベクトルの積は ", ref("mat_mult"), "、非負実数の平方根は ", ref("definition_of_sqrt_r_positive"), "、実数係数の複素数への包含は ", ref("inclusion_rr_to_cc"), " による。"]),
       paragraph([
         math(String.raw`K := \mathbb{R}`),
         " または ",
