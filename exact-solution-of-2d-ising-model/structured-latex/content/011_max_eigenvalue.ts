@@ -542,23 +542,53 @@ q(t_0)
       paragraph([
         "とおく。",
         math(String.raw`\mathcal{R}`),
-        " は空でなく（",
-        math(String.raw`x = e_1`),
-        " を取れる）、上に有界である。実際、",
-        ref("psd_cauchy_schwarz"),
-        " を ",
-        math(String.raw`P = W`),
-        "、",
-        math(String.raw`y = x`),
-        " として使うまでもなく、",
-        math(String.raw`|x^\top Wx| \leq \|x\|\,\|Wx\| \leq \|W\|\,\|x\|^2 = \|W\|`),
-        "（",
-        ref("matrix_norm_vector_bound"),
-        " と Cauchy–Schwarz）である。よって実数の上限",
+        " は空でない（",
+        math(String.raw`\|e_1\| = 1`),
+        " なので ",
+        math(String.raw`e_1`),
+        " を取れる）。上に有界であることは、成分の有限和として次のように評価できる。",
+        math(String.raw`\|x\| = 1`),
+        " とすると、各 ",
+        math(String.raw`i`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|x_i|^2
+&\leq \sum_{k=1}^{2^M}|x_k|^2
+  &&\bigl(\because\ \text{非負の項の有限和は各項以上}\bigr)\\
+&= \|x\|^2
+  &&\bigl(\because\ \text{ノルムの定義 }\blkref{def_matrix_norm}\bigr)\\
+&= 1
+  &&\bigl(\because\ \|x\| = 1\bigr)
+\end{aligned}`),
+      paragraph([
+        "であるから ",
+        math(String.raw`|x_i| \leq 1`),
+        " である。これを成分表示へ入れると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left|x^\top W x\right|
+&= \left|\sum_{i=1}^{2^M}\sum_{j=1}^{2^M} x_i\,W_{ij}\,x_j\right|
+  &&\bigl(\because\ \text{行列積の成分表示}\bigr)\\
+&\leq \sum_{i=1}^{2^M}\sum_{j=1}^{2^M} |x_i|\,|W_{ij}|\,|x_j|
+  &&\bigl(\because\ \text{有限和の三角不等式と積の絶対値}\bigr)\\
+&\leq \sum_{i=1}^{2^M}\sum_{j=1}^{2^M} |W_{ij}|
+  &&\bigl(\because\ |x_i| \leq 1,\ |x_j| \leq 1\bigr)
+\end{aligned}`),
+      paragraph([
+        "となり、右辺は ",
+        math(String.raw`x`),
+        " によらない有限個の実数の和である。よって ",
+        math(String.raw`\mathcal{R}`),
+        " は上に有界である。ここで実数の上限",
       ]),
       displayMath(String.raw`c(M) := \sup \mathcal{R} \in \mathbb{R}_{>0}`),
       paragraph([
-        "が定まる（上に有界な空でない実数集合は上限をもつ）。定義から",
+        "が定まる。**ここが実数へ脱出する箇所である。** ",
+        math(String.raw`\mathcal{R}`),
+        " は一般に有限集合でも可算集合でもなく、上限の存在は「空でなく上に有界な実数の集合は上限をもつ」という ",
+        math(String.raw`\mathbb{R}`),
+        " の性質による。有理数の範囲では同じ主張は成り立たない。定義から",
       ]),
       displayMath(
         String.raw`x^\top W x \leq c(M)\,\|x\|^2 \qquad (\forall x \in \mathbb{R}^{2^M})`,

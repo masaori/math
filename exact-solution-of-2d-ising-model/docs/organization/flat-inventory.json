@@ -1309,6 +1309,39 @@
       "concludingClaimEntryId": "maxeig_003_claim_W_is_positive_definite",
       "boundaryEvidence": "章内依存順71は、W とその平方根因子の定義、エルミート正定値の定義、エルミート行列の指数関数の正定値性、二つの生成子の実対称性、転送行列の記号だけを直接入力に、W の実対称性・正定値性・可逆性を示す。直前の順70までの偶セクター共役写像の節とは入力集合が完全に切り替わり、相互に依存しない。直後の順72は W を受け取るが、単位球面上の上限という実数固有の道具（行列ノルムのベクトル評価と半正定値の Cauchy--Schwarz）を新たに入力へ加えるため、順71の後で節を閉じる。生成時に順71の全直接依存、本文 fingerprint、順72の依存方向と新規入力集合を固定検査する。",
       "readabilityStatus": "一つの主張の中で、二つの指数因子が実対称正定値であること、合同変換で W が正定値になること、転置計算で実対称になること、核が零で可逆になることを一段ずつ示している。W = B V_2 B と B = V_1^{1/2} の根拠を定義ブロックへ接続したので、式変形の各行が定義または既証の主張を引く形になった。Lean の各補題と SageMath の検査も同じ段へ対応する。"
+    },
+    {
+      "name": "Rayleigh 上限の定義（実数への脱出点）",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・本文粒度確認済み",
+      "entryIds": [
+        "maxeig_006_definition_rayleigh_sup"
+      ],
+      "input": [
+        "対称化転送行列 W が実対称正定値であること",
+        "数ベクトルと行列のノルムの定義",
+        "集合と代数構造の記号"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_002b_definition_matrix_norm",
+        "maxeig_003_claim_W_is_positive_definite"
+      ],
+      "output": [
+        "単位ベクトルにわたる二次形式の値の集合が空でなく上に有界であること",
+        "その上限として定まる正の実数 c(M)",
+        "任意のベクトルに対する二次形式の評価 x^T W x <= c(M) ||x||^2"
+      ],
+      "realEscape": "単位球面上の二次形式の値の集合は有限でも可算でもなく、上限の存在は空でなく上に有界な実数集合が上限をもつという R の性質に依存する。この論文で R へ脱出する最初の箇所であり、本文にもその旨を明記する。",
+      "formalizationEvidence": {
+        "leanFile": "lean/Ising2D/NecSuf/RayleighMoments.lean",
+        "sageMathFile": "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+        "currentStatus": "本文は、値の集合が空でないこと、成分の有限和による上界、上限の存在、任意のベクトルへの評価を一段ずつ示す。上界は各成分が |x_i| <= ||x|| = 1 を満たすことと有限和の三角不等式だけで得るので、ブロック化されていない Cauchy--Schwarz へ依存しない。"
+      },
+      "concludingClaim": "単位球面上の二次形式の上限 c(M) が正の実数として定まる",
+      "concludingClaimEntryId": "maxeig_006_definition_rayleigh_sup",
+      "boundaryEvidence": "章内依存順72は、順71で確立した W の実対称正定値性とノルムの定義だけを直接入力に、上限 c(M) を定義する。順71までは有限個の複素行列の等式計算で閉じていたのに対し、ここで初めて実数の上限性質を使うため、入力の性質が切り替わる。直後の順73は c(M) を受け取って作用素評価へ進み、半正定値の Cauchy--Schwarz を新たな入力に加えるため、順72の後で節を閉じる。生成時に順72の全直接依存、順73の依存方向、および半正定値 Cauchy--Schwarz が順72の入力でなく順73の入力であることを固定検査する。",
+      "readabilityStatus": "有界性の根拠が「Cauchy--Schwarz を使うまでもなく」という散文だったため、実際に引くブロックが定まらなかった。各成分の絶対値が 1 以下であることを二段で示し、成分表示の二重和を三角不等式で押さえる形へ書き換えたので、各行が定義または初等的な不等式を一つだけ引く形になった。"
     }
   ],
   "explanationGranularityReview": {
@@ -4645,11 +4678,7 @@
         },
         {
           "dependentId": "maxeig_006_definition_rayleigh_sup",
-          "prerequisiteId": "linear_space_general_003c_claim_matrix_norm_vector_bound"
-        },
-        {
-          "dependentId": "maxeig_006_definition_rayleigh_sup",
-          "prerequisiteId": "maxeig_005_claim_psd_cauchy_schwarz"
+          "prerequisiteId": "linear_space_general_002b_definition_matrix_norm"
         },
         {
           "dependentId": "maxeig_007_claim_operator_bound",
@@ -10038,7 +10067,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -18494,7 +18523,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 2,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -18559,8 +18588,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1882,
-        "inspectedContentSha256": "c35e3dffde79bf60cc97ba369facf88e9bcf8b4242dcdbe4fccf586133881543",
+        "inspectedCharacterCount": 3003,
+        "inspectedContentSha256": "f2b8fcb073282227dfa524837ca24f5c9767c9b2bb3347e9aec8c7c113e3e5dd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -18571,18 +18600,17 @@
       },
       "dependsOnLabels": [
         "W_is_real_symmetric_positive_definite",
-        "matrix_norm_vector_bound",
-        "psd_cauchy_schwarz",
+        "def_matrix_norm",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calculation_formulae_definition_set_and_algebra_notation",
-        "linear_space_general_003c_claim_matrix_norm_vector_bound",
-        "maxeig_003_claim_W_is_positive_definite",
-        "maxeig_005_claim_psd_cauchy_schwarz"
+        "linear_space_general_002b_definition_matrix_norm",
+        "maxeig_003_claim_W_is_positive_definite"
       ],
       "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
+        "set_and_algebra_notation",
+        "def_matrix_norm"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],

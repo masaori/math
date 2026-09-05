@@ -1649,6 +1649,7 @@ const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix", new Set(["theorem_exp_product"])],
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", new Set(["mat_mult"])],
   ["eigenvalues_of_V_008_claim_joint_eigenspace_decomposition", new Set(["trace_of_idempotent"])],
+  ["maxeig_006_definition_rayleigh_sup", new Set(["def_matrix_norm"])],
   ["maxeig_003_claim_W_is_positive_definite", new Set(["def_symmetrized_transfer_matrix"])],
   ["bridge_011_claim_sector_replacement", new Set(["V1_restriction_to_eigenspaces", "def_end_iso", "epsilon_projector_properties"])],
   ["closing_005_claim_open_chain_spin_sums_positive", new Set(["cosh_sinh_basic_properties"])],
@@ -3270,8 +3271,7 @@ const positiveDefiniteWExpectedDirectDependencies = [
 ].sort();
 // 順72（Rayleigh 上限）で新しく入る入力。ここで単位球面上の上限という実数固有の道具へ移るため、
 // 順71 の後で節を閉じる。
-const rayleighSupNewInputEntryIds = ["linear_space_general_003c_claim_matrix_norm_vector_bound",
-  "maxeig_005_claim_psd_cauchy_schwarz"].sort();
+const rayleighSupNewInputEntryIds = ["linear_space_general_002b_definition_matrix_norm"].sort();
 if (positiveDefiniteWEntry.kind !== "claim"
   || rayleighSupEntry.dependencyPlacement!.chapterOrder !== 72
   || rayleighSupEntry.provisionalFinalChapter !== "2次元イジングモデル"
@@ -3293,6 +3293,30 @@ if (positiveDefiniteWEntry.kind !== "claim"
     dependencies: positiveDefiniteWEntry.dependsOnEntryIds,
     contentSha256: positiveDefiniteWEntry.explanationGranularityReview.inspectedContentSha256,
     rayleighDependencies: rayleighSupEntry.dependsOnEntryIds,
+  })}`);
+}
+const operatorBoundEntry = entries.find((entry) =>
+  entry.id === "maxeig_007_claim_operator_bound")!;
+const rayleighSupExpectedDirectDependencies = [
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_002b_definition_matrix_norm",
+  "maxeig_003_claim_W_is_positive_definite",
+].sort();
+if (rayleighSupEntry.kind !== "definition"
+  || operatorBoundEntry.dependencyPlacement!.chapterOrder !== 73
+  || operatorBoundEntry.provisionalFinalChapter !== "2次元イジングモデル"
+  || JSON.stringify([...rayleighSupEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(rayleighSupExpectedDirectDependencies)
+  || rayleighSupEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || !operatorBoundEntry.dependsOnEntryIds.includes(rayleighSupEntry.id)
+  || rayleighSupEntry.dependsOnEntryIds.includes(operatorBoundEntry.id)
+  || !operatorBoundEntry.dependsOnEntryIds.includes("maxeig_005_claim_psd_cauchy_schwarz")
+  || rayleighSupEntry.dependsOnEntryIds.includes("maxeig_005_claim_psd_cauchy_schwarz")) {
+  throw new Error(`Rayleigh 上限の一項節が変わりました: ${JSON.stringify({
+    order: rayleighSupEntry.dependencyPlacement?.chapterOrder,
+    kind: rayleighSupEntry.kind,
+    dependencies: rayleighSupEntry.dependsOnEntryIds,
+    operatorBoundDependencies: operatorBoundEntry.dependsOnEntryIds,
   })}`);
 }
 if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
@@ -3994,6 +4018,32 @@ const isingModelSectionBoundaries = [{
   concludingClaimEntryId: positiveDefiniteWEntry.id,
   boundaryEvidence: "章内依存順71は、W とその平方根因子の定義、エルミート正定値の定義、エルミート行列の指数関数の正定値性、二つの生成子の実対称性、転送行列の記号だけを直接入力に、W の実対称性・正定値性・可逆性を示す。直前の順70までの偶セクター共役写像の節とは入力集合が完全に切り替わり、相互に依存しない。直後の順72は W を受け取るが、単位球面上の上限という実数固有の道具（行列ノルムのベクトル評価と半正定値の Cauchy--Schwarz）を新たに入力へ加えるため、順71の後で節を閉じる。生成時に順71の全直接依存、本文 fingerprint、順72の依存方向と新規入力集合を固定検査する。",
   readabilityStatus: "一つの主張の中で、二つの指数因子が実対称正定値であること、合同変換で W が正定値になること、転置計算で実対称になること、核が零で可逆になることを一段ずつ示している。W = B V_2 B と B = V_1^{1/2} の根拠を定義ブロックへ接続したので、式変形の各行が定義または既証の主張を引く形になった。Lean の各補題と SageMath の検査も同じ段へ対応する。",
+}, {
+  name: "Rayleigh 上限の定義（実数への脱出点）",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・本文粒度確認済み",
+  entryIds: [rayleighSupEntry.id],
+  input: [
+    "対称化転送行列 W が実対称正定値であること",
+    "数ベクトルと行列のノルムの定義",
+    "集合と代数構造の記号",
+  ],
+  externalInputEntryIds: rayleighSupExpectedDirectDependencies,
+  output: [
+    "単位ベクトルにわたる二次形式の値の集合が空でなく上に有界であること",
+    "その上限として定まる正の実数 c(M)",
+    "任意のベクトルに対する二次形式の評価 x^T W x <= c(M) ||x||^2",
+  ],
+  realEscape: "単位球面上の二次形式の値の集合は有限でも可算でもなく、上限の存在は空でなく上に有界な実数集合が上限をもつという R の性質に依存する。この論文で R へ脱出する最初の箇所であり、本文にもその旨を明記する。",
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/NecSuf/RayleighMoments.lean",
+    sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_01_W_properties.sage",
+    currentStatus: "本文は、値の集合が空でないこと、成分の有限和による上界、上限の存在、任意のベクトルへの評価を一段ずつ示す。上界は各成分が |x_i| <= ||x|| = 1 を満たすことと有限和の三角不等式だけで得るので、ブロック化されていない Cauchy--Schwarz へ依存しない。",
+  },
+  concludingClaim: "単位球面上の二次形式の上限 c(M) が正の実数として定まる",
+  concludingClaimEntryId: rayleighSupEntry.id,
+  boundaryEvidence: "章内依存順72は、順71で確立した W の実対称正定値性とノルムの定義だけを直接入力に、上限 c(M) を定義する。順71までは有限個の複素行列の等式計算で閉じていたのに対し、ここで初めて実数の上限性質を使うため、入力の性質が切り替わる。直後の順73は c(M) を受け取って作用素評価へ進み、半正定値の Cauchy--Schwarz を新たな入力に加えるため、順72の後で節を閉じる。生成時に順72の全直接依存、順73の依存方向、および半正定値 Cauchy--Schwarz が順72の入力でなく順73の入力であることを固定検査する。",
+  readabilityStatus: "有界性の根拠が「Cauchy--Schwarz を使うまでもなく」という散文だったため、実際に引くブロックが定まらなかった。各成分の絶対値が 1 以下であることを二段で示し、成分表示の二重和を三角不等式で押さえる形へ書き換えたので、各行が定義または初等的な不等式を一つだけ引く形になった。",
 }];
 const toolEntries = entries.filter((entry) => entry.provisionalFinalChapter === "数学的道具立て");
 const groupRules: [string, RegExp][] = [
