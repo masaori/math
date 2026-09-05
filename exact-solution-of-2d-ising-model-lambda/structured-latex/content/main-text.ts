@@ -28290,10 +28290,10 @@ n
                       proof: [
                         paragraph([
                           math(String.raw`\tau\in R_L`), " を任意に取る。", math(String.raw`0\le k<L`),
-                          " に対し、", ref("claim_root_of_unity_power_sum_value"), " を ",
-                          math(String.raw`n=L`), "、", math(String.raw`m=L-k`), " へ当てると",
+                          " に対し、",
                         ]),
-                        displayMath(String.raw`\sum_{z\in\mu_L}z^{L-k}=\begin{cases}L,&k=0,\\0,&1\le k<L\end{cases}`),
+                        displayMath(String.raw`\sum_{z\in\mu_L}z^{L-k}=\begin{cases}L,&k=0,\\0,&1\le k<L\end{cases}
+\quad(\because\ \blkref{claim_root_of_unity_power_sum_value},\ n=L,\ m=L-k)`),
                         paragraph([
                           "である。実際、", math(String.raw`k=0`), " なら ", math(String.raw`L\mid L-k`),
                           " である。", math(String.raw`1\le k<L`), " なら ",
