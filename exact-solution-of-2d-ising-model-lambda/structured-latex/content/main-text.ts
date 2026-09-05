@@ -27907,9 +27907,10 @@ f
                           math(String.raw`a=w^{m}-1`), "、", math(String.raw`b=S_{n,m}`),
                           " として当てる。仮定 ", math(String.raw`ab=0`),
                           " は上の等式であり、仮定 ", math(String.raw`a\ne0`),
-                          " は準備で示した ", math(String.raw`w^{m}-1\ne0`), " である。よって ",
-                          math(String.raw`S_{n,m}=0`), " を得る。",
+                          " は準備で示した ", math(String.raw`w^{m}-1\ne0`), " である。",
                         ]),
+                        displayMath(String.raw`S_{n,m}=0
+\quad(\because\ \blkref{claim_qbar_no_zero_divisors})`),
                         paragraph([
                           "この段が ", math(String.raw`\overline{\mathbb{Q}}`),
                           " について新たに使っているのは、引いた 2 つの主張が要求する性質のほかに、",
