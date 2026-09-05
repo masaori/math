@@ -2725,6 +2725,7 @@ z
     title: { tex: String.raw`\mathbb{C}\text{の}\sqrt{\cdot}\text{の逆数}` },
     labels: ["sqrt_cc_of_inverse"],
     statement: [
+      paragraph(["偏角は ", ref("def_abs_arg"), " のものとする。"]),
       paragraph([
         math(String.raw`z \in \mathbb{C},\ z \neq 0`),
         " について、",
@@ -2808,6 +2809,7 @@ z
     title: { tex: String.raw`\cos,\sin\text{のEuler表示}` },
     labels: ["euler_formula_cos_sin"],
     statement: [
+      paragraph(["現行の正弦・余弦は ", ref("def_sin"), "、", ref("def_cos"), "、複素数は ", ref("definition_of_cc"), " で定めている。全実数上への拡張と複素指数の定義、および以下で使うEuler公式の導出は未整備である。"]),
       paragraph([math(String.raw`\forall \theta \in \mathbb{R}`)]),
       displayMath(
         String.raw`\cos\theta = \frac{e^{i\theta} + e^{-i\theta}}{2}`,

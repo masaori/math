@@ -218,6 +218,48 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "逆数の平方根と平方根の逆元",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_043_claim_sqrt_of_reciprocal",
+        "calculation_formulae_044_claim_reciprocal_of_sqrt"
+      ],
+      "input": [
+        "平方根の定義・展開・二乗復元と積の符号条件、非負実数の平方根",
+        "複素数と逆元、実数包含、両写像、極座標同値類、絶対値・偏角と角度切断",
+        "逆数の偏角、逆正接・正弦・余弦、集合記号"
+      ],
+      "output": [
+        "偏角による逆数の平方根の符号式",
+        "平方根の逆元を逆数の平方根で表す符号式"
+      ],
+      "mainTheorem": "平方根の逆元と逆数の平方根の符号関係",
+      "mainTheoremEntryId": "calculation_formulae_044_claim_reciprocal_of_sqrt",
+      "boundaryEvidence": "逆数の平方根の公式とその証明中の非零性を、平方根の逆元の公式が使う二項の鎖で閉じる。直後のEuler表示はこの二項も平方根も使わず、指数関数と正弦・余弦の関係へ入力を切り替える。現存本文の依存境界を確定するものであり、比較側に不足する複素指数と全実数上の三角関数の定義・公式を整備した後には依存と配置を再判定する。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度、内部依存・連続性・唯一の節末・後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で二項とEuler表示および直接入力の全本文を読んだ。平方根定義と入力証明の未完は両項に及ぶ。非零性と平方根1の計算の分割、零での関数値の導出、同時代入と複数演算、各適用行の参照と二重負号の説明が未解決である。比較側は全実数上の三角関数の定義域、複素指数の意味付け、Euler公式の導出と偶奇性が未整備であり、定義・証明の未完として扱う。本文完成を認めず、補完と主張分割後に内部依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calc_formulae_014c_definition_sin",
+        "calc_formulae_014d_definition_arctan",
+        "calc_formulae_014e_definition_cos",
+        "calc_formulae_016b_claim_angle_section_existence_uniqueness",
+        "calc_formulae_019_definition_polar_equivalence_class",
+        "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_028_definition_phi_cartesian",
+        "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_036_claim_arg_of_reciprocal",
+        "calculation_formulae_038_definition_sqrt_of_complex_number",
+        "calculation_formulae_039_claim_sqrt_expansion_via_polar",
+        "calculation_formulae_040_claim_sqrt_commutativity_condition",
+        "calculation_formulae_041_claim_sqrt_squared_is_original",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "平方根の積と自乗の平方根の符号",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2266,6 +2308,7 @@
       "calculation_formulae_042_claim_square_of_sqrt",
       "calculation_formulae_043_claim_sqrt_of_reciprocal",
       "calculation_formulae_044_claim_reciprocal_of_sqrt",
+      "calculation_formulae_045_theorem_euler_formula_cos_sin",
       "linear_space_general_002b_definition_matrix_norm",
       "linear_space_general_003_claim_matrix_norm_submultiplicativity",
       "linear_space_general_003c_claim_matrix_norm_vector_bound",
@@ -7301,7 +7344,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 16,
+        "incomingReferenceCount": 17,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7944,7 +7987,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8120,7 +8163,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9051,7 +9094,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 14,
+        "incomingReferenceCount": 15,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -10041,17 +10084,18 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 2057,
-        "inspectedContentSha256": "6558d232465857bb8c8123d5ab0c47a543ef367d6a05fc6009405377b84ef37e",
+        "inspectedCharacterCount": 2195,
+        "inspectedContentSha256": "e4434859bed3bbcf8bfaa006afbedb93c4eb574d5f9f32b710751e6234ce7ad7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 未完の平方根定義と逆数平方根の証明への依存が残る。参照先の準備から非零性を取り出す説明、各行参照と二重負号の根拠が未解決である。"
       },
       "dependsOnLabels": [
+        "def_abs_arg",
         "definition_of_cc",
         "inverse_of_sqrt_cc",
         "multiplicative_group_of_cc"
@@ -10059,6 +10103,7 @@
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+        "calculation_formulae_031_definition_abs_arg",
         "calculation_formulae_043_claim_sqrt_of_reciprocal"
       ],
       "semanticPrerequisiteLabels": [
@@ -10098,23 +10143,29 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1924,
-        "inspectedContentSha256": "bd5135e23f5397202f69ea706e934d140866214ef2dee2aeaa179b12910f3dcf",
+        "inspectedCharacterCount": 2245,
+        "inspectedContentSha256": "17e951100e2c864fbd07ab446c37156d9ff2b24e720fefc616e5417df7900e43",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 現行sin/cosは主値区間のみであり全実数上の定義が不足する。複素指数の意味付け、Euler公式自体の導出、偶奇性が未整備で、定義と証明の未完である。二等式の分割と各行参照も残る。必要な定義と公式の追加後に依存と配置を再判定する。"
       },
       "dependsOnLabels": [
+        "def_cos",
+        "def_sin",
+        "definition_of_cc",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_014c_definition_sin",
+        "calc_formulae_014e_definition_cos",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
