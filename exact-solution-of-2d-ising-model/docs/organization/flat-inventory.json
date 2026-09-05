@@ -218,6 +218,28 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "等間隔点の平均の積分への収束",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "freeenergy_004_theorem_riemann_sum_to_integral"
+      ],
+      "input": [
+        "連続実関数と集合記号、一様連続性とRiemann積分の基本性質という外部前提"
+      ],
+      "output": [
+        "等間隔の各区間の代表点での平均の誤差を連続度で抑える評価",
+        "代表点のずらし方に依存しない積分への収束"
+      ],
+      "mainTheorem": "等間隔点の平均は積分に収束する",
+      "mainTheoremEntryId": "freeenergy_004_theorem_riemann_sum_to_integral",
+      "boundaryEvidence": "各区間の代表点での誤差を連続度で抑え、有限和から全体の誤差評価を得て、一様連続性で収束へ閉じる現存一項を節とする。直後のクロネッカー積はこの極限を使わず、二値多重添字の全単射と複素成分の有限積で数ベクトルと行列を定める別枝である。連続関数の平均から有限配列の成分定義への入力切替を根拠とし、解析の有無自体で章を分けない。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度および後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で等間隔平均とクロネッカー積定義の全本文・全直接入力を読んだ。平均側は一般形で明示した外部前提の本文内の証明、連続度の上限の有限な存在、誤差評価と収束・代表点の例の主張分割、各行参照と複数演算の分離が残る。比較側は添字の元数・全単射の証明とベクトル・行列の二定義が同居し、数え上げ・有限和の法則と各行参照、同時代入と複数演算の分離が未解決である。本文完成とは扱わず、前提補完と定義・主張の分割後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "非負実数の指数級数の収束と剰余",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2538,6 +2560,7 @@
       "calculation_formulae_045_theorem_euler_formula_cos_sin",
       "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
       "calculation_formulae_047_claim_commutator_via_anticommutators",
+      "linear_space_general_000_definition_kronecker_product",
       "linear_space_general_002b_definition_matrix_norm",
       "linear_space_general_003_claim_matrix_norm_submultiplicativity",
       "linear_space_general_003c_claim_matrix_norm_vector_bound",
@@ -10814,7 +10837,7 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 9138,
@@ -10825,7 +10848,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 添字集合の元数、写像の値域と全単射、数ベクトルと行列の二定義が同居する。有限集合の議論と有限和の法則、同時代入と複数演算の分離、各行参照が未解決である。M=1と単射証明の末尾の空和を保ち、前提補完と分割後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "definition_of_cc",
