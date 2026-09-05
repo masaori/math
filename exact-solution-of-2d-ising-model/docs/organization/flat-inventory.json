@@ -218,6 +218,31 @@
   ],
   "mathematicalToolSectionBoundaries": [
     {
+      "name": "行列共役による積と単位元の保存と合成",
+      "chapter": "数学的道具立て",
+      "status": "構造確定・本文粒度未解決",
+      "entryIds": [
+        "calculation_formulae_046_claim_conjugation_is_ring_homomorphism"
+      ],
+      "input": [
+        "正則複素行列による共役写像とその線型性",
+        "複素数と集合記号"
+      ],
+      "output": [
+        "共役写像の積保存と単位元保存",
+        "共役写像の合成則"
+      ],
+      "mainTheorem": "正則行列による共役写像の三性質",
+      "mainTheoremEntryId": "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+      "boundaryEvidence": "共役写像の定義を受け取り、積・単位元の保存と、積の逆元公式を用いた共役写像の合成則を示す現存一項で閉じる。直後の交換子と反交換子の関係は共役写像を使わず、三行列の積の展開と分配則から直接計算する。正則性と共役写像を使う保存則から、正則性を仮定しない多項式の恒等式への入力切替を境界とする。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度、節末と後続相対順を固定する。",
+      "readabilityStatus": "LLMによる検証で共役の三性質・交換子と全直接入力を読んだ。共役の三性質と積の逆元公式の主張分割、先行の加法保存を環準同型という題へ結び付ける説明、行列の結合律・単位元・逆元一意性の根拠と各行参照が未解決である。比較側も交換子と反交換子の定義を恒等式と同居させ、結合律・分配則と零の挿入の説明を各行の根拠へ展開する課題が残る。本文完成とは扱わず、主張分割と演算法則の補完後に依存と閉包を再判定する。",
+      "externalInputEntryIds": [
+        "calc_formulae_005_matrix_conjugation",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ]
+    },
+    {
       "name": "正弦と余弦の指数関数による表示",
       "chapter": "数学的道具立て",
       "status": "構造確定・本文粒度未解決",
@@ -2335,6 +2360,7 @@
       "calculation_formulae_044_claim_reciprocal_of_sqrt",
       "calculation_formulae_045_theorem_euler_formula_cos_sin",
       "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+      "calculation_formulae_047_claim_commutator_via_anticommutators",
       "linear_space_general_002b_definition_matrix_norm",
       "linear_space_general_003_claim_matrix_norm_submultiplicativity",
       "linear_space_general_003c_claim_matrix_norm_vector_bound",
@@ -10292,7 +10318,7 @@
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
       },
       "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 1060,
@@ -10303,7 +10329,7 @@
           "statement",
           "proof"
         ],
-        "manualReview": null
+        "manualReview": "LLMによる検証: 交換子と反交換子の二定義と恒等式を同居させている。結合律・分配則の根拠参照、同時の括弧外しと二箇所への定義代入、零の挿入の演算分解が未解決である。定義と主張を分割した後に依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
         "definition_of_cc",

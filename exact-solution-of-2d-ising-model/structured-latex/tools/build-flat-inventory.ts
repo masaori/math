@@ -1687,6 +1687,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["calculation_formulae_047_claim_commutator_via_anticommutators", "LLMによる検証: 交換子と反交換子の二定義と恒等式を同居させている。結合律・分配則の根拠参照、同時の括弧外しと二箇所への定義代入、零の挿入の演算分解が未解決である。定義と主張を分割した後に依存と閉包を再判定する。"],
   ["calculation_formulae_046_claim_conjugation_is_ring_homomorphism", "LLMによる検証: 乗法性・単位性・合成則と積の逆元公式を一項へ束ねている。加法保存は先行の行列共役にあるが、環準同型という題への接続説明は本項にない。行列の結合律・単位元・逆元一意性の根拠と各適用行の参照が未解決であり、分割後に配置を再判定する。"],
   ["calculation_formulae_044_claim_reciprocal_of_sqrt", "LLMによる検証: 未完の平方根定義と逆数平方根の証明への依存が残る。参照先の準備から非零性を取り出す説明、各行参照と二重負号の根拠が未解決である。"],
   ["calculation_formulae_045_theorem_euler_formula_cos_sin", "LLMによる検証: 現行sin/cosは主値区間のみであり全実数上の定義が不足する。複素指数の意味付け、Euler公式自体の導出、偶奇性が未整備で、定義と証明の未完である。二等式の分割と各行参照も残る。必要な定義と公式の追加後に依存と配置を再判定する。"],
@@ -7680,7 +7681,133 @@ if (findToolEntry("calculation_formulae_046_claim_conjugation_is_ring_homomorphi
   !== eulerTrigSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("正弦と余弦の指数関数による表示の直後の項目が変わりました");
 }
+const matrixConjugationSectionEntryIds = [
+  "calculation_formulae_046_claim_conjugation_is_ring_homomorphism"
+];
+const matrixConjugationSection = validateReviewedSection(
+  "行列共役による積と単位元の保存と合成", "数学的道具立て", matrixConjugationSectionEntryIds,
+  new Map([
+  [
+    "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+    []
+  ]
+]),
+  new Map([
+  [
+    "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+    "5f3c6ac5c3bfa898bea8382a6f3dfdb4e72d4c57928d3e19a05e17bd7bf14c0f"
+  ]
+]),
+  [
+  "calc_formulae_005_matrix_conjugation",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation"
+],
+  new Map([
+  [
+    "calc_formulae_005_matrix_conjugation",
+    "db8101215168a62a7c2059d3e97a8cb9d4a4e898c5be04084e68b1547e9b5239"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ]
+]),
+  [
+  "calculation_formulae_046_claim_conjugation_is_ring_homomorphism"
+],
+);
+const matrixConjugationSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_005_matrix_conjugation",
+    "kind": "theorem",
+    "sha256": "db8101215168a62a7c2059d3e97a8cb9d4a4e898c5be04084e68b1547e9b5239",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc"
+    ],
+    "granularity": "自動検査で主題に適合"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+    "kind": "claim",
+    "sha256": "5f3c6ac5c3bfa898bea8382a6f3dfdb4e72d4c57928d3e19a05e17bd7bf14c0f",
+    "dependencies": [
+      "calc_formulae_005_matrix_conjugation",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_047_claim_commutator_via_anticommutators",
+    "kind": "claim",
+    "sha256": "25d2f2a1ad5ab6bcbe05427a4ce4f06a4250ea5f7f3f79b5d7170303b8d4ebeb",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of matrixConjugationSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`行列共役による積と単位元の保存と合成の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("calculation_formulae_047_claim_commutator_via_anticommutators").dependencyPlacement!.chapterOrder
+  !== matrixConjugationSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("行列共役による積と単位元の保存と合成の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "行列共役による積と単位元の保存と合成",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "calculation_formulae_046_claim_conjugation_is_ring_homomorphism"
+  ],
+  "input": [
+    "正則複素行列による共役写像とその線型性",
+    "複素数と集合記号"
+  ],
+  "output": [
+    "共役写像の積保存と単位元保存",
+    "共役写像の合成則"
+  ],
+  "mainTheorem": "正則行列による共役写像の三性質",
+  "mainTheoremEntryId": "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+  "boundaryEvidence": "共役写像の定義を受け取り、積・単位元の保存と、積の逆元公式を用いた共役写像の合成則を示す現存一項で閉じる。直後の交換子と反交換子の関係は共役写像を使わず、三行列の積の展開と分配則から直接計算する。正則性と共役写像を使う保存則から、正則性を仮定しない多項式の恒等式への入力切替を境界とする。プログラミングによる検証で対象と比較入力の本文・全直接依存・種別・粒度、節末と後続相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で共役の三性質・交換子と全直接入力を読んだ。共役の三性質と積の逆元公式の主張分割、先行の加法保存を環準同型という題へ結び付ける説明、行列の結合律・単位元・逆元一意性の根拠と各行参照が未解決である。比較側も交換子と反交換子の定義を恒等式と同居させ、結合律・分配則と零の挿入の説明を各行の根拠へ展開する課題が残る。本文完成とは扱わず、主張分割と演算法則の補完後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_005_matrix_conjugation",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation"
+  ]
+}, {
   "name": "正弦と余弦の指数関数による表示",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
