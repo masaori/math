@@ -1688,6 +1688,7 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
 ]);
 const manualGranularityReviewById = new Map<string, string>([
+  ["linear_space_general_003d_claim_matrix_completeness", "LLMによる検証: Cauchy列の定義、完備性、絶対収束判定と級数のノルム評価が同居する。成分のCauchy列から行列の極限を構成する証明は存在するが、実数のCauchy完備性と極限法則の前提、有限回の三角不等式の帰納、N>Mから全添字への場合分けと各行参照の説明が未解決である。前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_003b_claim_matrix_multiplication_continuity", "LLMによる検証: 行列列の所属とノルム・行列積・劣乗法性の参照を補った。主張は右因子を固定した乗算の連続性に限る。分配則を成分計算へ接続する根拠、非負性と実数列の定数倍・挟み撃ちの極限法則、各行参照が未解決である。前提補完と分割後に依存と閉包を再判定する。"],
   ["linear_space_general_003c_claim_matrix_norm_vector_bound", "LLMによる検証: 行列積・ノルム基本性質の零の絶対値・劣乗法性への欠落参照を補った。数ベクトルを第一列に置いた行列のノルムと数ベクトルのノルムを対応させる計算は存在する。行列と数ベクトルの積への定義適用、零の列を有限和から除く計算、各行参照が未解決である。n=1の第二列以降が空の範囲を保持し、前提補完と分割後に依存と閉包を再判定する。"],
 
@@ -10847,7 +10848,232 @@ if (findToolEntry("linear_space_general_003c_claim_matrix_norm_vector_bound").de
   !== productNormContinuitySection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
   throw new Error("行列積のノルム評価と右からの乗算の連続性の直後の項目が変わりました");
 }
+const matrixVectorBoundSectionEntryIds = [
+  "linear_space_general_003c_claim_matrix_norm_vector_bound"
+];
+const matrixVectorBoundSection = validateReviewedSection(
+  "行列ノルムによる数ベクトルの評価", "数学的道具立て", matrixVectorBoundSectionEntryIds,
+  new Map([
+  [
+    "linear_space_general_003c_claim_matrix_norm_vector_bound",
+    []
+  ]
+]),
+  new Map([
+  [
+    "linear_space_general_003c_claim_matrix_norm_vector_bound",
+    "b8f654d8b634f423754816c6e90589c9dd709246dbe7d95f71382d041b05b11f"
+  ]
+]),
+  [
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_002b_definition_matrix_norm",
+  "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+  "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+],
+  new Map([
+  [
+    "calc_formulae_003_matrix_decomposition",
+    "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"
+  ],
+  [
+    "calc_formulae_006_definition_of_cc",
+    "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"
+  ],
+  [
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"
+  ],
+  [
+    "linear_space_general_002b_definition_matrix_norm",
+    "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab"
+  ],
+  [
+    "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069"
+  ],
+  [
+    "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+    "b120c7834055676e534d67e01428c170782fb7db99651f9955bd5e2a6b16cde3"
+  ]
+]),
+  [
+  "linear_space_general_003c_claim_matrix_norm_vector_bound"
+],
+);
+const matrixVectorBoundSectionBoundarySnapshot = [
+  {
+    "id": "calc_formulae_003_matrix_decomposition",
+    "kind": "definition",
+    "sha256": "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calc_formulae_006_definition_of_cc",
+    "kind": "definition",
+    "sha256": "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c",
+    "dependencies": [
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_025_claim_complex_numbers_form_a_field",
+    "kind": "claim",
+    "sha256": "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_008_multiply_by_minus_one",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_031b_claim_abs_basic_properties",
+    "kind": "claim",
+    "sha256": "b4e198549ba1d7b1452fe4650837a325244f089149b147b0e8f802a72731588e",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calc_formulae_019_definition_polar_equivalence_class",
+      "calculation_formulae_024_claim_multiplicative_group_of_complex_numbers",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_027_definition_phi_polar",
+      "calculation_formulae_030_definition_first_and_second_projections",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "calculation_formulae_definition_set_and_algebra_notation",
+    "kind": "definition",
+    "sha256": "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b",
+    "dependencies": [],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002b_definition_matrix_norm",
+    "kind": "definition",
+    "sha256": "c1a48a3eadb1f66ad0d756ebed2e36b33f8321f56c93174c02889052a18d2bab",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "kind": "claim",
+    "sha256": "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_006_definition_of_cc",
+      "calc_formulae_007_inclusion_rr_to_cc",
+      "calculation_formulae_031_definition_abs_arg",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+    "kind": "claim",
+    "sha256": "b120c7834055676e534d67e01428c170782fb7db99651f9955bd5e2a6b16cde3",
+    "dependencies": [
+      "calc_formulae_001_sqrt_nonnegative_real",
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_003c_claim_matrix_norm_vector_bound",
+    "kind": "claim",
+    "sha256": "b8f654d8b634f423754816c6e90589c9dd709246dbe7d95f71382d041b05b11f",
+    "dependencies": [
+      "calc_formulae_003_matrix_decomposition",
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  },
+  {
+    "id": "linear_space_general_003d_claim_matrix_completeness",
+    "kind": "claim",
+    "sha256": "dd073df5d0ec8186d0e924d507fd4c207333a4101bb562a89bdabf1b7029c102",
+    "dependencies": [
+      "calc_formulae_006_definition_of_cc",
+      "calculation_formulae_025_claim_complex_numbers_form_a_field",
+      "calculation_formulae_031b_claim_abs_basic_properties",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality"
+    ],
+    "granularity": "具体的な行列計算への展開またはブロック分割を要する"
+  }
+];
+for (const expected of matrixVectorBoundSectionBoundarySnapshot) {
+  const entry = findToolEntry(expected.id);
+  if (entry.provisionalFinalChapter !== "数学的道具立て"
+    || entry.kind !== expected.kind
+    || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256
+    || entry.explanationGranularityReview.status !== expected.granularity
+    || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)) {
+    throw new Error(`行列ノルムによる数ベクトルの評価の境界比較対象が変わりました: ${expected.id}`);
+  }
+}
+if (findToolEntry("linear_space_general_003d_claim_matrix_completeness").dependencyPlacement!.chapterOrder
+  !== matrixVectorBoundSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+  throw new Error("行列ノルムによる数ベクトルの評価の直後の項目が変わりました");
+}
 const mathematicalToolSectionBoundaries = [{
+  "name": "行列ノルムによる数ベクトルの評価",
+  "chapter": "数学的道具立て",
+  "status": "構造確定・本文粒度未解決",
+  "entryIds": [
+    "linear_space_general_003c_claim_matrix_norm_vector_bound"
+  ],
+  "input": [
+    "行列と数ベクトルの積、ノルムと零成分の絶対値",
+    "行列積の劣乗法性、複素数と集合記号"
+  ],
+  "output": [
+    "行列を数ベクトルへ作用させた結果のノルムが、行列と数ベクトルのノルムの積以下になること"
+  ],
+  "mainTheorem": "行列ノルムによる数ベクトルの評価",
+  "mainTheoremEntryId": "linear_space_general_003c_claim_matrix_norm_vector_bound",
+  "boundaryEvidence": "数ベクトルを第一列に置いた行列を作り、二つのノルムの一致と劣乗法性から作用の評価を得る現存一項で閉じる。直後の完備性と絶対収束判定はこの評価や行列積の劣乗法性を使わず、成分の絶対値をノルムで抑え、実数のCauchy列の収束と有限和の極限へ進む別枝である。有限の行列作用の評価から列と級数の収束への入力切替を根拠とし、プログラミングによる検証で対象・比較と全直接入力の本文・種別・粒度・依存・相対順を固定する。",
+  "readabilityStatus": "LLMによる検証で対象・全直接入力と比較する完備性の全本文を読んだ。対象は行列と数ベクトルの積への定義適用、零の列を除く有限和の計算と各行参照が未解決であり、n=1の空の列範囲を保持する。比較側はCauchy列の定義と完備性・絶対収束判定・級数のノルム評価の分割、実数のCauchy完備性と極限法則の前提、有限回の三角不等式の帰納、添字の大小の場合分け、各行参照が未解決である。成分から行列の極限を作る証明は現存する。前提補完と分割後に依存と閉包を再判定する。",
+  "externalInputEntryIds": [
+    "calc_formulae_003_matrix_decomposition",
+    "calc_formulae_006_definition_of_cc",
+    "calculation_formulae_definition_set_and_algebra_notation",
+    "linear_space_general_002b_definition_matrix_norm",
+    "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+    "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+  ]
+}, {
   "name": "行列積のノルム評価と右からの乗算の連続性",
   "chapter": "数学的道具立て",
   "status": "構造確定・本文粒度未解決",
