@@ -34,7 +34,7 @@
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が `M ≠ 0` を要求する（`CheckFermiSetup.hM`） |
 | `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | 章 016 の結論に残る唯一の仮定（`lean/docs/ch016-formalization.md` 3 章）。008 章以来 `det A(θ) = 1` に必要で、原文が置いている関係である |
-| `bridge` | 章 011 の実行列 `W` と `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 章 011 の `sector_decomposition_of_rayleigh_sup` (2) は Lean 未形式化。004 章の `V1_restriction_to_eigenspaces` に依存し、それも未形式化（`Part010/Claim011_SectorReplacement.lean` の `hres` が同じ仮定を置いている） |
+| `bridge` | 章 011 の実行列 `W` と `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 章 011 の `symmetrized_transfer_matrix_on_sectors` は Lean 未形式化。004 章の `V1_restriction_to_eigenspaces` に依存し、それも未形式化（`Part010/Claim011_SectorReplacement.lean` の `hres` が同じ仮定を置いている） |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化 |
 | `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 010 の `V2_component_equals_pauli` / `epsilon_commutes_with_transfer_matrices` に依存する（章 011 も同じ形で仮定として受け取っている） |
 

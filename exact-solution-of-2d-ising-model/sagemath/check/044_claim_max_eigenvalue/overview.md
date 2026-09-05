@@ -8,7 +8,7 @@
 - 併せて検証:
   - `Z_equals_trace_of_W` / `W_is_real_symmetric_positive_definite` / `W_has_positive_entries`
   - `rayleigh_bounds_operator_norm` / `trace_power_sandwich`
-  - `sector_decomposition_of_rayleigh_sup`
+  - `sector_decomposition_of_rayleigh_sup` / `symmetrized_transfer_matrix_on_sectors`
 
 ### 何を確定させるための検証か
 
@@ -62,3 +62,7 @@ for f in sagemath/check/044_claim_max_eigenvalue/check_*.sage; do sage "$f"; don
 ## 実行ログ
 
 `run-log.txt` に実際の実行出力（全チェックの残差と PASS/FAIL）を保存してある。
+
+## 分割後の対応
+
+プログラミングによる検証では check_03 の r_max が上限の最大値分解、r_rep が射影後の転送行列の表示を調べる。有限個のパラメータでの浮動小数点計算であり、一般証明ではない。BP=CP および射影子を移す各行に対応する独立した式変形検査は未実施。Leanでも射影後の表示は未形式化であり、偶セクター接続では仮定として残る。
