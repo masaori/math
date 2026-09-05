@@ -1708,7 +1708,6 @@ const manualGranularityReviewById = new Map<string, string>([
 
   ["exp_conjugation_proof_010_theorem_matrix_exp_conjugation", "LLMによる検証: 成分積・複素演算・実数包含・劣乗法性への明示参照を補った。級数収束・共役公式・正則性の三群の主張と部分和や添字集合・ノルム評価の補題が同居する。零次を含む四場合と添字全単射の逆写像、両側の逆元積は本文に実在する。有限和と二箇所の同時代入、実数列の有界性・部分列・極限法則の前提、符号付き冪と成分演算への適用行参照の分割が未解決であり、前提補完と分割後に依存と閉包を再判定する。"],
 
-  ["maxeig_010_claim_sector_decomposition_of_c", "LLMによる検証で、零ベクトルと非零ベクトルを分けた正規化、ノルムの平方和と交叉項消去、転置と分配則の分離、各行の根拠参照に既存の説明不足を確認した。四分割とは別の本文粒度の未解決として保持する。"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "LLMによる検証: 行列積・複素演算・実数包含・非負平方根と、二項係数の定義およびPascalの関係式を示す反復交換子の準備への参照を補った。可換な冪と二項展開、有限添字集合の比較と剰余評価、二つの因子が変わる積の収束を一項に含む。Pascalの計算は参照先に存在し、必要な補題としての分離と適用行の参照が未整備である。有限和の展開・添字全単射・両箇所の同時代入、実数の平方根比較と極限法則、成分演算法則への接続と各行参照を未解決に記録する。零次と零のノルム、N=0で空となる添字範囲は本文にある規約を保ち、前提補完と分割後に依存と閉包を再判定する。"],
   ["bridge_003_claim_exp_of_diagonal", "LLMによる検証: 行列積・複素演算・実数包含・非負平方根への参照を補った。複素成分d_kに非負実数の指数級数の定理を適用しており、その定理だけでは複素数の指数e^{d_k}の定義と収束を与えない。この定義・証明の接続は未完である。非対角成分について「左側が常に0」は差の絶対値を指すなら不正確で、部分和の非対角成分が0であることと極限からの結論を区別する必要がある。成分冪の定義と帰納法、有限線型結合と非負平方比較、同時適用と各行参照の分割も未解決であり、零成分と零次を保って補完後に依存と閉包を再判定する。"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "LLMによる検証: 行列積と実数係数の包含への参照を補った。行列の冪と指数、線型写像の反復と指数の定義が同居する。冪の再帰は本項に実在するが先行する収束証明より前への提示が必要である。実行列と複素行列の成分演算の接続、入力の実数完備性と極限法則、定義群の分割と各行参照が未解決であり、零次と零の引数を保ち、補完後に依存と閉包を再判定する。"],
@@ -3737,13 +3736,21 @@ const sectorSplitReviewedEntries = [
     "id": "maxeig_010_claim_sector_decomposition_of_c",
     "chapter": "2次元イジングモデル",
     "dependencies": [
+      "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+      "bridge_008_definition_epsilon_projectors",
       "bridge_009_claim_epsilon_projector_properties",
       "calculation_formulae_definition_set_and_algebra_notation",
+      "linear_space_general_000d_claim_kronecker_transpose",
+      "linear_space_general_002b_definition_matrix_norm",
+      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
+      "maxeig_003_claim_W_is_positive_definite",
       "maxeig_006_definition_rayleigh_sup",
       "maxeig_010a_definition_sector_rayleigh_sup",
-      "maxeig_010b_claim_epsilon_commutes_with_W"
+      "maxeig_010b_claim_epsilon_commutes_with_W",
+      "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+      "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
     ],
-    "sha256": "01941c444df8c025aab406faa511cae9d34b5cd7396633e45b689b6236405c3e"
+    "sha256": "92ba11f7ef7f1396494cd6a4b1205bcf62946416b86a257b34334faa1bf2f394"
   },
   {
     "id": "closing_009_theorem_c_plus_equals_Lambda_half",
@@ -3809,16 +3816,26 @@ for (const expected of sectorSplitReviewedEntries) {
   if (!entry || entry.provisionalFinalChapter !== expected.chapter
     || JSON.stringify(entry.dependsOnEntryIds) !== JSON.stringify(expected.dependencies)
     || entry.explanationGranularityReview.inspectedContentSha256 !== expected.sha256) {
-    throw new Error(`セクター表示と上限分解の本文・直接依存・分類が変わりました: ${expected.id}`);
+    throw new Error(`セクター表示と上限分解の本文・直接依存・分類が変わりました: ${expected.id}; actual=${entry?.explanationGranularityReview.inspectedContentSha256}; dependencies=${JSON.stringify(entry?.dependsOnEntryIds)}`);
   }
 }
 const sectorRepresentationEntry = entries.find((entry) => entry.id === "maxeig_claim_symmetrized_transfer_matrix_on_sectors")!;
+const criticalConditionAfterSectorSplitEntry = entries.find((entry) =>
+  entry.id === "TV1_hatZ_hatY_044_claim_critical_condition")!;
 if (sectorRepresentationEntry.dependsOnEntryIds.includes(sectorDecompositionEntry.id)
   || sectorDecompositionEntry.dependsOnEntryIds.includes(sectorRepresentationEntry.id)
-  || sectorDecompositionEntry.explanationGranularityReview.manualReview === null
+  || sectorRepresentationEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || sectorDecompositionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || sectorDecompositionEntry.explanationGranularityReview.manualReview !== null
+  || sectorDecompositionEntry.dependencyPlacement!.chapterOrder
+    !== sectorRepresentationEntry.dependencyPlacement!.chapterOrder + 1
+  || criticalConditionAfterSectorSplitEntry.dependencyPlacement!.chapterOrder
+    !== sectorDecompositionEntry.dependencyPlacement!.chapterOrder + 1
+  || criticalConditionAfterSectorSplitEntry.dependsOnEntryIds.includes(sectorRepresentationEntry.id)
+  || criticalConditionAfterSectorSplitEntry.dependsOnEntryIds.includes(sectorDecompositionEntry.id)
   || JSON.stringify(sectorRepresentationEntry.presentationPredecessorEntryIds) !== JSON.stringify([epsilonCommutesWithWEntry.id])
   || JSON.stringify(sectorDecompositionEntry.presentationPredecessorEntryIds) !== JSON.stringify([sectorRepresentationEntry.id])) {
-  throw new Error("セクター表示と最大値分解の相互非依存・提示順・未解決事項が変わりました");
+  throw new Error("セクター表示と最大値分解の相互非依存・一項節境界・提示順・本文粒度が変わりました");
 }
 const sectorSplitEvidenceSha256 = [
   [
@@ -3832,6 +3849,10 @@ const sectorSplitEvidenceSha256 = [
   [
     "lean/docs/ch011-formalization.md",
     "9d0c86ecac307d51cd2a068bb9259d1bbcaf896ee3a7d65410ac0ae96fbfb407"
+  ],
+  [
+    "lean/Ising2D/Part011/Claim010_SectorDecomposition.lean",
+    "1bdbf5b43b52dcdcee4399aaf2dbd9c0eb4fc406735c08f7940f5eafbc5a070b"
   ],
   [
     "lean/docs/ch018-formalization.md",
@@ -15661,20 +15682,35 @@ const isingModelSectionBoundaries = [{
   boundaryEvidence: "分割前は一ブロックに、セクター上限の定義、全スピン反転行列との可換性、セクター射影子による表示、最大値としての分解の四つが同居していた。定義と可換性は互いに依存せず、最大値分解はこの二項を直接入力に取る。射影表示は平方根と射影子の行列計算を入力に取り、上限の定義も W との可換性も意味的入力としない。二項の後で節を閉じ、残りは境界候補として次の単位へ送る。生成時に二項の章配置、全直接依存、相互非依存、および分解の主張が両方を直接引くことを固定検査する。",
   readabilityStatus: "定義と可換性がそれぞれ一ブロック一主張になり、証明中で「(1) より」と番号で指していた箇所がブロック参照へ置き換わった。分割で読む順序が変わらないよう、提示順の先行項目を宣言して本文の並びは分割前と同じ位置に保った。",
 }, {
-  name: "セクター射影後の転送行列の表示と上限の最大値分解",
+  name: "セクター射影後の転送行列の表示",
   chapter: "2次元イジングモデル",
-  status: "境界候補・対象本文粒度未解決・外部入力粒度未解決",
-  entryIds: [sectorRepresentationEntry.id, sectorDecompositionEntry.id],
-  input: ["転送行列の平方根とセクターへの制限", "セクター射影子の積と可換性", "全体と各セクターのレイリー商の上限"],
-  externalInputEntryIds: [...new Set([...sectorRepresentationEntry.dependsOnEntryIds, ...sectorDecompositionEntry.dependsOnEntryIds])].sort(),
-  output: ["W P^{(±)} = V^{(±)} P^{(±)}", "c(M) = max(c_+(M), c_-(M))"],
+  status: "構造確定・本文粒度確認済み・形式化未解決・外部入力粒度未解決",
+  entryIds: [sectorRepresentationEntry.id],
+  input: ["転送行列の平方根とセクターへの制限", "セクター射影子の積と可換性"],
+  externalInputEntryIds: [...sectorRepresentationEntry.dependsOnEntryIds].sort(),
+  output: ["W P^{(±)} = V^{(±)} P^{(±)}"],
   formalizationEvidence: {
     leanFile: "lean/docs/ch011-formalization.md",
     sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_03_sector_split.sage",
-    currentStatus: "プログラミングによる検証は有限個のパラメータの数値残差を判定する。r_rep は射影表示、r_max は最大値分解に対応する。BP=CP と射影子移動の各行の独立したSageMath検査は未実施。射影表示はLean未形式化で、偶セクター接続では仮定のまま。最大値分解には既存のLean定理がある。",
+    currentStatus: "プログラミングによる検証は有限個のパラメータについて r_rep の数値残差を判定する。BP=CP と射影子移動の各行の独立したSageMath検査は未実施。射影表示はLean未形式化で、偶セクター接続では仮定のままである。",
   },
-  boundaryEvidence: "LLMによる検証では二つの独立した出力への分割は妥当。最大値分解は射影表示を使わず、提示順だけの辺を意味的依存へ含めない。射影表示の V^{(±)} の参照先は分配関数のセクター分解であり、現行依存順は後方へ移る。定義の分離と前後の入力切替をまだ評価していないため、最終節境界は確定しない。プログラミングによる検証で二項・全外部入力・直接後続の本文fingerprint、直接依存、二章分類、相互非依存、提示順とSageMath・Lean対応を固定する。",
-  readabilityStatus: "射影表示は BP=CP を先に示し、射影子を一段ずつ移動する。最大値分解には零／非零の正規化、ノルムの平方和と交叉項消去、転置と分配則の分離、行末参照の説明不足が残る。LLMによる検証の所見を本文粒度の未解決として保持し、四分割を本文全体の完成とは扱わない。",
+  boundaryEvidence: "射影表示は、転送行列の平方根をセクター制限後の平方根へ置き換え、射影子を各因子の間で一段ずつ移して一つの行列等式へ閉じる。直後の上限最大値分解は射影表示を使わず、全体と各セクターのレイリー商の上限および W のセクター不変性へ入力を切り替える。二項は意味的に相互非依存であり、提示順だけを依存辺へ混ぜないため、射影表示を一項節として閉じる。",
+  readabilityStatus: "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。Lean未形式化と行単位SageMath検査の不足は節配置や本文完成と区別して保持する。",
+}, {
+  name: "全体の上限と二つのセクター上限の最大値分解",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・本文粒度確認済み・外部入力粒度未解決",
+  entryIds: [sectorDecompositionEntry.id],
+  input: ["全体と各セクターのレイリー商の上限", "セクター射影子による直交分解", "W が二つのセクターを保つこと"],
+  externalInputEntryIds: [...sectorDecompositionEntry.dependsOnEntryIds].sort(),
+  output: ["c(M) = max(c_+(M), c_-(M))"],
+  formalizationEvidence: {
+    leanFile: "lean/Ising2D/Part011/Claim010_SectorDecomposition.lean",
+    sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_03_sector_split.sage",
+    currentStatus: "Lean は対称な対合による二セクター分解として形式化済みである。SageMath は有限個のパラメータについて r_max の数値残差を判定する。本文は異なるセクターの実ベクトルの直交性、ノルムの平方和、零・非零を分けた正規化、上限の二方向の比較を一行一根拠で示す。",
+  },
+  boundaryEvidence: "二つのセクターへの直交分解と各セクターの上限から、全体のレイリー商の上限が二つの上限の最大値に等しいことへ閉じる一項である。直後の臨界条件はフェルミオンの定義、gamma_2 の零点、双曲線関数へ入力を切り替え、本項にも射影表示にも依存しない。この入力集合の切り替わりにより一項節として閉じる。",
+  readabilityStatus: "LLMによる検証で、異なるセクターの任意の実ベクトルの直交性、ノルム平方の分解、Wによる交叉項の消去、零ベクトルと非零ベクトルを分けた正規化、上限の両方向の比較を本文で追跡した。以前の正規化欠落は解消され、対象は現行の説明粒度検査に合格する。",
 }, {
   name: "集合と代数構造の記号、そして複素数の定義",
   chapter: "数学的道具立て",

@@ -1534,50 +1534,143 @@ WP
         ref("def_sector_rayleigh_sup"), " の ", math(String.raw`c_\pm(M)`),
         " について、次が成り立つ。",
       ]),
-      displayMath(String.raw`\text{(3)}\quad c(M) = \max\left(c_+(M), c_-(M)\right)`),
+      displayMath(String.raw`c(M) = \max\left(c_+(M), c_-(M)\right)`),
     ],
     proof: [
       paragraph([
         ref("epsilon_projector_properties"),
-        " (3) より、任意の ",
+        " (2)(3) より、任意の ",
         math(String.raw`x \in \mathbb{R}^{2^M}`),
         " は ",
         math(String.raw`x = x_+ + x_-`),
         "（",
         math(String.raw`x_\pm := P^{(\pm)}x \in \mathcal{F}^{(\pm)}`),
         "）と分解される。",
-        math(String.raw`\varepsilon`),
-        " は実対称（置換行列であり ",
-        math(String.raw`\varepsilon^\top = \varepsilon`),
-        "）なので ",
-        math(String.raw`P^{(\pm)}`),
-        " も実対称であり、",
+        ref("epsilon_square_and_eigenvalues"),
+        " の証明で得た ",
+        math(String.raw`\varepsilon=\sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
+        " と、",
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x`),
+        " の成分表示、",
+        ref("kronecker_transpose"),
+        " より、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-x_+^\top x_-
-&= \left(P^{(+)}x\right)^\top\left(P^{(-)}x\right)
-   \quad (\because x_\pm = P^{(\pm)}x \text{ の定義}) \\
-&= x^\top \left(P^{(+)}\right)^\top P^{(-)}x
-   \quad (\because \text{転置の積の法則 } (AB)^\top = B^\top A^\top \text{ と結合則}) \\
-&= x^\top P^{(+)}P^{(-)}x
-   \quad (\because P^{(+)} \text{ は実対称: } (P^{(+)})^\top = P^{(+)}) \\
-&= x^\top\, 0\, x
-   \quad (\because P^{(+)}P^{(-)} = 0) \\
+\varepsilon^\top
+&=\left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)^\top
+  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示})\\
+&=(\sigma^x)^\top\boxtimes\cdots\boxtimes(\sigma^x)^\top
+  \quad (\because \blkref{kronecker_transpose})\\
+&=\sigma^x\boxtimes\cdots\boxtimes\sigma^x
+  \quad (\because \blkref{pauli_matrix_products}\ \text{の }\sigma^x\text{ の成分表示})\\
+&=\varepsilon
+  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`\varepsilon`),
+        " は実対称である。さらに、",
+        ref("def_epsilon_projectors"),
+        " から ",
+        math(String.raw`P^{(\pm)}`),
+        " も実対称である。実際、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(P^{(\pm)}\right)^\top
+&=\left(\tfrac12(I\pm\varepsilon)\right)^\top
+  \quad (\because \blkref{def_epsilon_projectors})\\
+&=\tfrac12\left(I^\top\pm\varepsilon^\top\right)
+  \quad (\because \text{転置は和と実数倍を保つ})\\
+&=\tfrac12(I\pm\varepsilon)
+  \quad (\because I^\top=I,\ \varepsilon^\top=\varepsilon)\\
+&=P^{(\pm)}
+  \quad (\because \blkref{def_epsilon_projectors}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "また ",
+        math(String.raw`I`),
+        " と ",
+        math(String.raw`\varepsilon`),
+        " は実行列なので、",
+        ref("def_epsilon_projectors"),
+        " の ",
+        math(String.raw`P^{(\pm)}`),
+        " も実行列である。したがって ",
+        math(String.raw`x\in\mathbb R^{2^M}`),
+        " から ",
+        math(String.raw`x_\pm=P^{(\pm)}x\in\mathbb R^{2^M}`),
+        " であり、先に示したセクターへの所属と合わせて ",
+        math(String.raw`x_\pm\in\mathcal F^{(\pm)}\cap\mathbb R^{2^M}`),
+        " である。",
+      ]),
+      paragraph([
+        "ここで任意の ",
+        math(String.raw`u_+\in\mathcal F^{(+)}\cap\mathbb R^{2^M}`),
+        " と ",
+        math(String.raw`u_-\in\mathcal F^{(-)}\cap\mathbb R^{2^M}`),
+        " を取る。",
+        ref("epsilon_projector_properties"),
+        " (1)(3) より ",
+        math(String.raw`P^{(+)}u_+=u_+`),
+        "、",
+        math(String.raw`P^{(-)}u_-=u_-`),
+        " だから、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+u_+^\top u_-
+&= \left(P^{(+)}u_+\right)^\top\left(P^{(-)}u_-\right)
+   \quad (\because P^{(+)}u_+=u_+,\ P^{(-)}u_-=u_-) \\
+&= u_+^\top \left(P^{(+)}\right)^\top P^{(-)}u_-
+   \quad (\because \text{転置の積の法則を一回適用する}) \\
+&= u_+^\top P^{(+)}P^{(-)}u_-
+   \quad (\because (P^{(+)})^\top=P^{(+)}) \\
+&= u_+^\top\,0\,u_-
+   \quad (\because \blkref{epsilon_projector_properties}\ \text{(1) の }P^{(+)}P^{(-)}=0) \\
 &= 0
    \quad (\because \text{零行列の作用})
 \end{aligned}`,
       ),
       paragraph([
-        "（",
-        ref("epsilon_projector_properties"),
-        " (2)）。よって ",
-        math(String.raw`\|x\|^2 = \|x_+\|^2 + \|x_-\|^2`),
-        "。また ",
+        "したがって二つのセクターの実ベクトルは直交する。特に ",
+        math(String.raw`x_+^\top x_-=x_-^\top x_+=0`),
+        " である。",
+        ref("def_matrix_norm"),
+        " の数ベクトルのノルムを使うと、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|x\|^2
+&=x^\top x
+  \quad (\because \blkref{def_matrix_norm}\ \text{の数ベクトルのノルムの定義})\\
+&=(x_++x_-)^\top(x_++x_-)
+  \quad (\because x=x_++x_-\ \text{を左右へ代入})\\
+&=x_+^\top x_+ + x_+^\top x_- + x_-^\top x_+ + x_-^\top x_-
+  \quad (\because \text{転置と内積の分配則})\\
+&=x_+^\top x_+ + x_-^\top x_-
+  \quad (\because x_+^\top x_-=x_-^\top x_+=0)\\
+&=\|x_+\|^2+\|x_-\|^2
+  \quad (\because \text{ノルムの定義}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "また ",
         ref("epsilon_commutes_with_W"),
         " より ",
         math(String.raw`Wx_\pm \in \mathcal{F}^{(\pm)}`),
-        " なので、同じ直交性から交叉項が消えて",
+        " である。また ",
+        ref("W_is_real_symmetric_positive_definite"),
+        " より ",
+        math(String.raw`W`),
+        " は実行列なので、",
+        math(String.raw`Wx_\pm\in\mathbb R^{2^M}`),
+        " でもある。したがって、上で示した実ベクトル間の直交性から交叉項が消えて",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1596,9 +1689,88 @@ x^\top Wx
       ),
       paragraph([
         math(String.raw`c_\pm := c_\pm(M)`),
-        " の定義より ",
-        math(String.raw`x_\pm^\top Wx_\pm \leq c_\pm\|x_\pm\|^2`),
-        " なので、",
+        " と略記する。任意の ",
+        math(String.raw`y\in\mathcal F^{(\pm)}\cap\mathbb R^{2^M}`),
+        " について、",
+        math(String.raw`y=0`),
+        " なら ",
+        math(String.raw`y^\top Wy=c_\pm\|y\|^2=0`),
+        " である。",
+        math(String.raw`y\neq0`),
+        " なら ",
+        ref("matrix_norm_triangle_inequality"),
+        " (1) より ",
+        math(String.raw`\|y\|>0`),
+        " であり、",
+        math(String.raw`\widehat y:=y/\|y\|`),
+        " と定める。",
+        ref("def_eigenspaces_of_epsilon"),
+        " と ",
+        ref("matrix_norm_triangle_inequality"),
+        " (2) より、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\widehat y
+&=\varepsilon\left(\frac{1}{\|y\|}y\right)
+  \quad (\because \widehat y\ \text{の定義})\\
+&=\frac{1}{\|y\|}\,\varepsilon y
+  \quad (\because \text{行列の作用は実数倍を保つ})\\
+&=\frac{1}{\|y\|}(\pm y)
+  \quad (\because y\in\mathcal F^{(\pm)}\ \text{と}\ \blkref{def_eigenspaces_of_epsilon})\\
+&=\pm\widehat y
+  \quad (\because \widehat y\ \text{の定義}),\\[1mm]
+\|\widehat y\|
+&=\left\|\frac{1}{\|y\|}y\right\|
+  \quad (\because \widehat y\ \text{の定義})\\
+&=\left|\frac{1}{\|y\|}\right|\,\|y\|
+  \quad (\because \blkref{matrix_norm_triangle_inequality}\ \text{(2)})\\
+&=\frac{1}{\|y\|}\,\|y\|
+  \quad (\because \|y\|>0\ \text{なので }1/\|y\|>0)\\
+&=1
+  \quad (\because \|y\|>0).
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\|y\|>0`),
+        " だから ",
+        math(String.raw`1/\|y\|\in\mathbb R`),
+        " である。また ",
+        math(String.raw`y\in\mathbb R^{2^M}`),
+        " であり、実数ベクトル全体は実数倍について閉じている。よって ",
+        math(String.raw`\widehat y=(1/\|y\|)y\in\mathbb R^{2^M}`),
+        " である。上の計算と合わせると、",
+        math(String.raw`\widehat y`),
+        " は同じセクターの単位ベクトルである。したがって ",
+        ref("def_sector_rayleigh_sup"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{1}{\|y\|^2}\,y^\top Wy
+&=\left(\frac{1}{\|y\|}\right)^2 y^\top Wy
+  \quad (\because (1/a)^2=1/a^2)\\
+&=\frac{1}{\|y\|}\,y^\top\left(\frac{1}{\|y\|}Wy\right)
+  \quad (\because \text{実数倍の結合則})\\
+&=\frac{1}{\|y\|}\,y^\top W\left(\frac{1}{\|y\|}y\right)
+  \quad (\because \text{行列の作用は実数倍を保つ})\\
+&=\left(\frac{1}{\|y\|}y\right)^\top W\left(\frac{1}{\|y\|}y\right)
+  \quad (\because \text{転置は実数倍を保つ})\\
+&=\widehat y^\top W\widehat y
+  \quad (\because \widehat y=(1/\|y\|)y\ \text{を左右へ代入})\\
+&\leq c_\pm
+  \quad (\because \|\widehat y\|=1\ \text{なのでセクター上限の定義を適用})\\
+y^\top Wy
+&\leq c_\pm\|y\|^2
+  \quad (\because \|y\|^2>0\ \text{を両辺へ掛ける}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "零の場合と非零の場合を合わせると、各符号について ",
+        math(String.raw`y^\top Wy\leq c_\pm\|y\|^2`),
+        " が任意のセクターベクトルで成り立つ。これを ",
+        math(String.raw`y=x_\pm`),
+        " へ適用する。",
         math(String.raw`\|x\| = 1`),
         " のとき",
       ]),
@@ -1659,7 +1831,10 @@ c_\pm
     ],
     conversion: {
       status: "added",
-      notes: ["射影子による表示は独立した主張へ分離した。既存の後続参照を保つため最大値分解の既存表示 (3) は暫定的に残す。後続参照の同期後に除く。"],
+      notes: [
+        "射影子による表示は独立した主張へ分離し、最大値分解を独立した無番号の一項として残した。",
+        "2026-09-06 の構成再編で、異なるセクターの任意の実ベクトルが直交すること、ノルムの平方和、零・非零を分けた正規化を明示し、上限の定義を任意の実セクターベクトルへ適用する欠落を埋めた。",
+      ],
     },
   },
 ]);
