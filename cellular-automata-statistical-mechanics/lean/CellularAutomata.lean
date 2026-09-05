@@ -125,3 +125,6 @@ import CellularAutomata.NecSuf.NeighborhoodAssignmentReachabilityRealizationOfFi
 import CellularAutomata.PositiveFixedPointCountDomain
 import CellularAutomata.BinaryCAPositiveCountDomain
 import CellularAutomata.NecSuf.PositiveFixedPointCountDomain
+
+import CellularAutomata.NecSuf.PrimeLogarithm
+import CellularAutomata.NecSuf.LogarithmicCounts
