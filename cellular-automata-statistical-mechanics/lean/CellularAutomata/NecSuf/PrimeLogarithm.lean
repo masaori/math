@@ -88,17 +88,19 @@ theorem pointwise_comm {C : Type*} [AddCommMagma C] (a b : I → C) : a + b = b 
     _ = b p + a p := add_comm _ _
     _ = (b + a) p := rfl
 
-theorem pointwise_zero {C : Type*} [AddZeroClass C] (a : I → C) : a + 0 = a := by
+theorem pointwise_zero {C : Type*} [Add C] [Zero C]
+    (hzero : ∀ z : C, z + 0 = z) (a : I → C) : a + 0 = a := by
   funext p
   calc
     (a + 0) p = a p + 0 := rfl
-    _ = a p := add_zero _
+    _ = a p := hzero (a p)
 
-theorem pointwise_inverse {C : Type*} [AddGroup C] (a : I → C) : a + (-a) = 0 := by
+theorem pointwise_inverse {C : Type*} [Add C] [Neg C] [Zero C]
+    (hinverse : ∀ z : C, z + (-z) = 0) (a : I → C) : a + (-a) = 0 := by
   funext p
   calc
     (a + (-a)) p = a p + (-a p) := rfl
-    _ = 0 := add_neg_cancel _
+    _ = 0 := hinverse (a p)
     _ = (0 : I → C) p := rfl
 
 end Vectors
@@ -475,11 +477,11 @@ theorem commutativity (a b : CellularAutomata.PrimeLogarithm.LogVector) : a+b = 
 
 theorem zero (a : CellularAutomata.PrimeLogarithm.LogVector) : a+0 = a := by
   ext p
-  exact congrFun (Vectors.pointwise_zero (fun i => a i)) p
+  exact congrFun (Vectors.pointwise_zero (fun z : ℤ => add_zero z) (fun i => a i)) p
 
 theorem inverse (a : CellularAutomata.PrimeLogarithm.LogVector) : a+(-a) = 0 := by
   ext p
-  exact congrFun (Vectors.pointwise_inverse (fun i => a i)) p
+  exact congrFun (Vectors.pointwise_inverse (fun z : ℤ => add_neg_cancel z) (fun i => a i)) p
 
 theorem division (a : CellularAutomata.PrimeLogarithm.LogVector) (d : ℤ) (hd : d ≠ 0) :
     (∃! b : CellularAutomata.PrimeLogarithm.LogVector, CellularAutomata.PrimeLogarithm.scale d b = a) ↔ ∀ p ∈ a.support, d ∣ a p := by
