@@ -290,6 +290,11 @@ export const roadmapStages = [
     ],
     evidence: [
       {
+        kind: "label",
+        label: "claim_cyclic_stage_family_locally_converges",
+        why: "有限巡回舞台の族について、有限窓の等号関係が有限段階以後に完全一致することを局所収束の定義へ接続する。",
+      },
+      {
         kind: "path",
         path: "docs/局所的極限の定式化.md",
         why: "有限の舞台の族から可算な舞台を作る極限の定式化。",
