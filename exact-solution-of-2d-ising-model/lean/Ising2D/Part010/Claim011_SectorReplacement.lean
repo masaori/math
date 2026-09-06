@@ -20,10 +20,9 @@
 `ηsign = -η` であり、偶セクターは `(η, ηsign) = (1, -1)`、
 奇セクターは `(-1, 1)` である。
 
-下流の同期は別単位なので、本ファイルの既存定理は引き続き `hres` を受け取る。
-仮定の内容は原文の主張そのもの
-「`ε f = ±f` なる `f` については `V_1 f = V_1^{(±)} f`」であるが、
-このファイル内の二つの具体的な定理から供給できる。
+以下のセクター置換定理は `M ≥ 2` を受け取り、
+`V1_restrictsOnSector_of_opposite_sign` から制限の事実を直接供給する。
+したがって下流へ `RestrictsOnSector` を仮定として渡さない。
 `sector_replacement_pow` は `sector_replacement_of_V1` から純代数的に従い、そこは無条件に証明してある
 （必要十分版 `Ising2D.NecSuf.pow_mul_proj`）。
 
@@ -216,21 +215,20 @@ theorem V1_restrictsOnOddSector (hM : 2 ≤ M) (K1 : ℂ) :
     hM (by norm_num)
 
 /-- **人手本文 `sector_replacement_of_V1`: `V_1 P^{(±)} = V_1^{(±)} P^{(±)}`。** -/
-theorem sector_replacement_of_V1 {K1 ηsign η : ℂ} (hη : η * η = 1)
-    (hres : RestrictsOnSector M K1 ηsign η) :
-    V1pauli M K1 * epsProj M η = V1 M K1 ηsign * epsProj M η := by
+theorem sector_replacement_of_V1 {K1 η : ℂ} (hM : 2 ≤ M) (hη : η * η = 1) :
+    V1pauli M K1 * epsProj M η = V1 M K1 (-η) * epsProj M η := by
   refine Matrix.ext_of_mulVec_single fun i => ?_
   rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
-  exact hres _ (epsProj_mulVec_mem hη _)
+  exact V1_restrictsOnSector_of_opposite_sign hM hη _ (epsProj_mulVec_mem hη _)
 
 /-- **人手本文 `sector_replacement_pow`: `(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`**
 （必要十分版 `Ising2D.NecSuf.pow_mul_proj` の系）。 -/
-theorem sector_replacement_pow {K1 ηsign η : ℂ} {s2 : ℝ} {K2star : ℂ} (hη : η * η = 1)
-    (hres : RestrictsOnSector M K1 ηsign η) (n : ℕ) :
+theorem sector_replacement_pow {K1 η : ℂ} {s2 : ℝ} {K2star : ℂ} (hM : 2 ≤ M)
+    (hη : η * η = 1) (n : ℕ) :
     (V1pauli M K1 * V2pauli M s2 K2star) ^ n * epsProj M η
-      = (V1 M K1 ηsign * V2pauli M s2 K2star) ^ n * epsProj M η :=
+      = (V1 M K1 (-η) * V2pauli M s2 K2star) ^ n * epsProj M η :=
   NecSuf.pow_mul_proj (epsProj_sq hη) (commute_V1pauli_epsProj K1 η)
-    (commute_V2pauli_epsProj s2 K2star η) (commute_V1_epsProj K1 ηsign η)
-    (sector_replacement_of_V1 hη hres) n
+    (commute_V2pauli_epsProj s2 K2star η) (commute_V1_epsProj K1 (-η) η)
+    (sector_replacement_of_V1 hM hη) n
 
 end Ising2D

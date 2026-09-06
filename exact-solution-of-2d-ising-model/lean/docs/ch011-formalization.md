@@ -141,7 +141,7 @@
 
 | 人手証明 | 状況 | 理由 |
 | --- | --- | --- |
-| `symmetrized_transfer_matrix_on_sectors` `W P^{(±)} = V^{(±)}P^{(±)}` | **未形式化** | `V^{(±)}`, `V₁^{(±)}`, `sector_replacement_of_V1`, `V1_restriction_to_eigenspaces` に依存する。これらは章 004 / 010 の対象で、本タスクの担当範囲外（既存 `.lean` の編集も禁止）。記録は `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md` |
+| `symmetrized_transfer_matrix_on_sectors` `W P^{(±)} = V^{(±)}P^{(±)}` | **未形式化** | `V₁` の固有空間制限と下流のセクター置換は形式化済み。残る入力は、章 011 の実行列 `W` と複素 `TensorPow` 上の物理的転送行列の同一視、およびそれを既存の `Vsym` と `epsProj` へ接続する最終定理である。記録は `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md` |
 | `maxeig_000_remark_overview` | 形式化対象外 | 章の目的を述べた注記であり数学的主張ではない |
 
 （上記以外の 10 ブロックはすべて形式化済み。`sorry` / `admit` はゼロ。）

@@ -804,11 +804,11 @@ const v1RestrictionFormalizationBoundaryEvidenceSha256 = [
   ],
   [
     "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
-    "27f048c017470ba3fb83a7636e8326316315e6c3ab0925460f7df6f956718170",
+    "4f54b84d905c55c5d21f5240f3fa206fb5af78f12a8f78ae83e56f0e62a23e2d",
   ],
   [
     "lean/Ising2D/Part010/Claim012_SectorDecomposition.lean",
-    "386b5ed78d43c69eb6a7653cc997410969e8579593a01c2002dd0c2fac95f000",
+    "8b091c05e749f231667ac151d924932865e446b0abe985a859dce3763f9be782",
   ],
 ] as const;
 for (const [path, expected] of v1RestrictionFormalizationBoundaryEvidenceSha256) {
@@ -3923,7 +3923,7 @@ const sectorSplitEvidenceSha256 = [
   ],
   [
     "lean/docs/ch011-formalization.md",
-    "9d0c86ecac307d51cd2a068bb9259d1bbcaf896ee3a7d65410ac0ae96fbfb407"
+    "0cf628d526a1ba766f0fd6d9ef3803d9e62b834a272ed760ef2a263aac8bfafc"
   ],
   [
     "lean/Ising2D/Part011/Claim010_SectorDecomposition.lean",
@@ -3931,7 +3931,7 @@ const sectorSplitEvidenceSha256 = [
   ],
   [
     "lean/docs/ch018-formalization.md",
-    "b153fa579670adaf84dfe320f646f6ce5b85a5d67ff2b76d9858ccc5fef7e605"
+    "ceb0f62ef00e91899d62c8cc5b693320f32fa8a02d951e267df01fb7a06c3842"
   ],
   [
     "lean/Ising2D/Part018/Theorem009_CPlusEqualsLambda.lean",
@@ -3939,7 +3939,7 @@ const sectorSplitEvidenceSha256 = [
   ],
   [
     "lean/Ising2D/Part018/Theorem013_OnsagerUnconditional.lean",
-    "590fe6295d32a655d7a2c5adbc7353fde817b2283a8c3d6d27b166093755c6a7"
+    "8f4ed8736240b4136ecbecd6cfb2482d8e01f66d8b8726bf2bb397a208affa5f"
   ]
 ];
 for (const [path, expected] of sectorSplitEvidenceSha256) {
@@ -15338,11 +15338,7 @@ const isingModelSectionBoundaries = [{
   formalizationEvidence: {
     leanFile: "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
     downstreamLeanFile: "lean/Ising2D/Part010/Claim012_SectorDecomposition.lean",
-    currentStatus: "本文の出力は、固有値 η の固有ベクトル f 上で V1 と境界符号を固定した V1^{(±)} の作用が一致することである。Lean では V1pauli_eq_jordanWigner を入力に、本文 Step 3–6 と同じ順で固有空間の不変性、ηsign=-η の生成子作用、冪の帰納、有限部分和、指数級数の極限をベクトル作用として直接証明し、V1_restrictsOnSector_of_opposite_sign へ閉じた。実際の符号対は V1_restrictsOnEvenSector が (η,ηsign)=(1,-1)、V1_restrictsOnOddSector が (-1,1) を与える。M>=2 は Jordan–Wigner 行列表示にだけ使い、TensorPow と mulVec が本文の end と F を具体化する。残る別単位は、M>=2 を下流へ渡して hresPlus・hresMinus を除く同期である。",
-    boundaryCandidates: [
-      "セクター置換と分配関数のセクター分解から RestrictsOnSector 仮定を除く",
-    ],
-    nextTickUnit: "セクター置換と分配関数のセクター分解から RestrictsOnSector 仮定を除き、M>=2 を渡す一項",
+    currentStatus: "本文の出力は、固有値 η の固有ベクトル f 上で V1 と境界符号を固定した V1^{(±)} の作用が一致することである。Lean では V1pauli_eq_jordanWigner を入力に、本文 Step 3–6 と同じ順で固有空間の不変性、ηsign=-η の生成子作用、冪の帰納、有限部分和、指数級数の極限をベクトル作用として直接証明し、V1_restrictsOnSector_of_opposite_sign へ閉じた。実際の符号対は V1_restrictsOnEvenSector が (η,ηsign)=(1,-1)、V1_restrictsOnOddSector が (-1,1) を与える。M>=2 は Jordan–Wigner 行列表示にだけ使い、TensorPow と mulVec が本文の end と F を具体化する。セクター置換、その冪、トレース接続、分配関数のセクター分解は M>=2 を直接受け取り、この導出を内部で使うため、下流の RestrictsOnSector 仮定は解消済みである。",
   },
   boundaryEvidence: "章内依存順29の一項は、V1 の Jordan–Wigner 行列表示、全スピン反転行列の固有空間、ノルムの基本性質の数ベクトル版を入力に、全スピン反転行列を固有値 ±1 へ置き換え、行列指数関数の部分和を通じて V1 の作用を各固有空間へ制限する主張へ閉じる。直後の章内依存順30は、境界項の符号を固定した二つの指数行列 V1^{(±)} を定義するだけで順29を参照せず、順29も証明内の局所的な略記として同じ指数行列を自足的に定めるため、二項に相互依存はない。順30は転送行列とサイト作用素の記号定義を順29と共有する一方、V1 の Jordan–Wigner 表示、固有空間、一因子の反可換性、ノルムの基本性質の数ベクトル版、作用対応の積・指数保存を入力から外し、線型写像の指数関数の定義を追加するため、外部入力集合も切り替わる。したがって順29の後で一項の節を閉じる。生成時に対象と全外部入力の本文 fingerprint、章内順、節末出力の一意性、順30の直接依存・本文 fingerprint、二項間の相互非依存、および入力集合の追加・除外を固定検査する。",
   readabilityStatus: "対象は複素行列の積・反交換・有限和・部分和の極限を一段ずつ展開しているが、行列と抽象線型写像の対応を証明全体で往復しており、現行の説明粒度検査では未完成である。外部入力にも、集合と代数構造の記号、複素数、混在したサイト作用素の記号、ノルムの基本性質の数ベクトル版、行列と線型写像の対応および指数関数保存に説明粒度の未解決が残る。直後の V1^{(±)} の定義自体は現行の説明粒度検査に合格している。",
@@ -15790,7 +15786,7 @@ const isingModelSectionBoundaries = [{
       "sagemath/check/044_claim_max_eigenvalue/check_C_V2_P_C_equals_C_V2_C_P.sage",
       "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage",
     ],
-    currentStatus: "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。射影表示は Lean 未形式化で、V1 の固有空間への制限、実行列 W と複素 TensorPow 上の転送行列の同一視、これらを Vsym と epsProj へ接続する定理が別々に必要である。",
+    currentStatus: "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。V1 の固有空間への制限と下流の RestrictsOnSector 仮定除去は形式化済みである。射影表示の Lean 接続には、章011の実行列 W と複素 TensorPow 上の物理的転送行列の同一視、およびそれを Vsym と epsProj へ接続する最終定理が別単位として残る。",
   },
   boundaryEvidence: "射影表示は、転送行列の平方根をセクター制限後の平方根へ置き換え、射影子を各因子の間で一段ずつ移して一つの行列等式へ閉じる。直後の上限最大値分解は射影表示を使わず、全体と各セクターのレイリー商の上限および W のセクター不変性へ入力を切り替える。二項は意味的に相互非依存であり、提示順だけを依存辺へ混ぜないため、射影表示を一項節として閉じる。",
   readabilityStatus: "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる検証では九つの等式を一ファイル一等式で判定した。Lean未形式化は節配置や本文完成と区別して保持する。",

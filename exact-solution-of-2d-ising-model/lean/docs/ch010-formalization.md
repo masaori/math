@@ -89,7 +89,7 @@
 | `Ising2D.epsilon_commute_H1` | `ε H_1^{(±)} = H_1^{(±)} ε` | 同 Step 4 |
 | `Ising2D.epsilon_commute_V1` / `epsilon_commute_V1half` | **`ε V_1^{(±)} = V_1^{(±)}ε`, `ε (V_1^{(±)})^{1/2} = ⋯`** | 同 Step 4 |
 | `Ising2D.commute_epsProj_of_commute_epsilon` ほか 5 本 | `P^{(±)}` との可換性 | 同 Step 5 |
-| `Ising2D.RestrictsOnSector` | 004 章 `V1_restriction_to_eigenspaces` を仮定として述べた述語 | `sector_replacement_of_V1` の前提 |
+| `Ising2D.RestrictsOnSector` | 004 章 `V1_restriction_to_eigenspaces` を述べた中間述語 | `V1_restrictsOnSector_of_opposite_sign` の結論 |
 | `Ising2D.sector_replacement_of_V1` | **`V_1 P^{(±)} = V_1^{(±)} P^{(±)}`** | `sector_replacement_of_V1` |
 | `Ising2D.sector_replacement_pow` | **`(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`** | `sector_replacement_pow` |
 | `Ising2D.Vsym` | `V^{(±)} = (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}` | `V_eq_Vprime` |
@@ -141,11 +141,11 @@
 
 ---
 
-## 3. 条件つきになった主張と残る同期
+## 3. 条件と残る同期
 
 | 主張 | 状況 | 記録 |
 | --- | --- | --- |
-| `sector_replacement_of_V1` と、それに依存する `partition_function_sector_decomposition` | **既存の定理形は仮定 `RestrictsOnSector` つき**。仮定自体は `M>=2` の下で `V1_restrictsOnEvenSector` / `V1_restrictsOnOddSector` により導出済み。下流から仮定を除いて格子幅条件を渡す同期は別単位として残す | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
+| `sector_replacement_of_V1` と、それに依存する `partition_function_sector_decomposition` | **同期済み**。`sector_replacement_of_V1` と冪・トレースの補助定理は `M>=2` と `η²=1` を受けて `ηsign=-η` を内部で使い、最終定理も `M>=2` を直接受け取る。下流の `RestrictsOnSector` 仮定は残らない | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
 | `V2_in_Z_Y` | `V_2` の Jordan–Wigner 行列表示は未形式化。独立な本文項目なので、今回形式化した `V_1` の表示へ混在させない | 本ファイル |
 | `epsilon_projector_properties` (4) の「`im P^{(±)} = 𝓕^{(±)}`」 | 部分空間の等式としてではなく、**2 つの包含をベクトルの言葉で**述べた（`epsProj_mulVec_mem` / `epsProj_mulVec_eq_self`）。`𝓕^{(±)}` を `Submodule` として導入すると 004 章の `def_eigenspaces_of_epsilon` の形式化が要り、本タスクの範囲外になるため | 本ファイル |
 | `bridge_000_remark_overview`（記号の対応の説明） | 主張ではなく記号の宣言なので、定理としては形式化していない。内容（`K_1 = J'`, `K_2 = J`）は `partitionFunctionC_eq_trace` が実際に成り立つことで裏づけた | `docs/tasks/2026-07_lean-ch009-013/002_ch010_Nrow_positive_is_necessary.md` |
