@@ -589,6 +589,9 @@ targets=(
   Ising2D.symTransfer_pow_succ
   Ising2D.mul_pow_mul_eq
   Ising2D.trace_symTransfer_pow
+  Ising2D.physicalV1halfC_eq_map
+  Ising2D.physicalV2C_eq_map
+  Ising2D.physicalSymTransferC_eq_map
   Ising2D.symTransfer_isSymm
   Ising2D.mulVec_eq_zero_iff_of_isUnit
   Ising2D.symTransfer_posDef

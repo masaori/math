@@ -292,7 +292,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`） |
 | `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | **原文が置いている関係**であって形式化の穴ではない（`lean/docs/ch016-formalization.md` 3 章: 「残る仮定は双対関係の 1 つだけ」）。008 章以来 `det A(θ) = 1` に必要 |
-| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 章 011 の `symmetrized_transfer_matrix_on_sectors` が **Lean 未形式化**。`V₁` の固有空間制限と下流のセクター置換は形式化済みで、章 011 の実行列 `W` と複素 `TensorPow` 上の物理的転送行列の同一視、および既存の `Vsym`・`epsProj` への最終接続が残る。実行列性のほうは「実行列の `exp` が実行列である」ことを要し、本リポジトリの Lean 側にその補題が無い |
+| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 章 011 の `symmetrized_transfer_matrix_on_sectors` が **Lean 未形式化**。`V₁` の固有空間制限、下流のセクター置換、章 011 の実行列 `W` と複素 `TensorPow` 上の物理的転送行列の同一視は形式化済みで、既存の `Vsym`・`epsProj` への最終接続が残る。実行列性のほうは「実行列の `exp` が実行列である」ことを要し、本リポジトリの Lean 側にその補題が無い |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
 | `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 010 の `V2_component_equals_pauli` / `epsilon_commutes_with_transfer_matrices` に依存。章 011 も同じ形で仮定として受け取っている（`lean/docs/ch011-formalization.md` 3 章） |
 

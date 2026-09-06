@@ -2871,7 +2871,7 @@
           "sagemath/check/044_claim_max_eigenvalue/check_C_V2_P_C_equals_C_V2_C_P.sage",
           "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage"
         ],
-        "currentStatus": "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。V1 の固有空間への制限と下流の RestrictsOnSector 仮定除去は形式化済みである。射影表示の Lean 接続には、章011の実行列 W と複素 TensorPow 上の物理的転送行列の同一視、およびそれを Vsym と epsProj へ接続する最終定理が別単位として残る。"
+        "currentStatus": "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。V1 の固有空間への制限と下流の RestrictsOnSector 仮定除去は形式化済みである。章011の実行列 W と複素 TensorPow 上の物理的転送行列の同一視も physicalSymTransferC_eq_map で形式化済みである。射影表示の Lean 接続には、この同一視を既存の Vsym と epsProj へ接続する最終定理だけが別単位として残る。"
       },
       "boundaryEvidence": "射影表示は、転送行列の平方根をセクター制限後の平方根へ置き換え、射影子を各因子の間で一段ずつ移して一つの行列等式へ閉じる。直後の上限最大値分解は射影表示を使わず、全体と各セクターのレイリー商の上限および W のセクター不変性へ入力を切り替える。二項は意味的に相互非依存であり、提示順だけを依存辺へ混ぜないため、射影表示を一項節として閉じる。",
       "readabilityStatus": "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる検証では九つの等式を一ファイル一等式で判定した。Lean未形式化は節配置や本文完成と区別して保持する。"

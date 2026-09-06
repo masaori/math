@@ -88,6 +88,7 @@ import Ising2D.Part011.Definition006_RayleighSup
 import Ising2D.Part011.Claim007_OperatorBound
 import Ising2D.Part011.Claim008_TracePowerSandwich
 import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
+import Ising2D.Part011.PhysicalSymTransferBridge
 import Ising2D.Part011.Claim009_PartitionFunctionSandwich
 import Ising2D.Part011.Claim010_SectorDecomposition
 import Ising2D.NecSuf.NumberOperator

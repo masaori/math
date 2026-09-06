@@ -3923,7 +3923,7 @@ const sectorSplitEvidenceSha256 = [
   ],
   [
     "lean/docs/ch011-formalization.md",
-    "0cf628d526a1ba766f0fd6d9ef3803d9e62b834a272ed760ef2a263aac8bfafc"
+    "f3a865176d68b1b4fba7447d52d0593add001961ba5ebc9c576b0f8f52ebe103"
   ],
   [
     "lean/Ising2D/Part011/Claim010_SectorDecomposition.lean",
@@ -3931,15 +3931,15 @@ const sectorSplitEvidenceSha256 = [
   ],
   [
     "lean/docs/ch018-formalization.md",
-    "ceb0f62ef00e91899d62c8cc5b693320f32fa8a02d951e267df01fb7a06c3842"
+    "454ed09ed10f2fc49678acec9f76aad3e0ae11ea8fbcc7b39725b20db2385390"
   ],
   [
     "lean/Ising2D/Part018/Theorem009_CPlusEqualsLambda.lean",
-    "a69fd81c35f56ce1f511bf98fc04be64cfe935e5673c43c838dc68d269a67a68"
+    "5adf251df92d6451efefa54b3e9c67f07c8efeed1a3e3f358d632209042a93f8"
   ],
   [
     "lean/Ising2D/Part018/Theorem013_OnsagerUnconditional.lean",
-    "8f4ed8736240b4136ecbecd6cfb2482d8e01f66d8b8726bf2bb397a208affa5f"
+    "a9f1c6896fd987d6fd8895f6a33ed3a6d406091e3124ddba0a0d7b9388314316"
   ]
 ];
 for (const [path, expected] of sectorSplitEvidenceSha256) {
@@ -15786,7 +15786,7 @@ const isingModelSectionBoundaries = [{
       "sagemath/check/044_claim_max_eigenvalue/check_C_V2_P_C_equals_C_V2_C_P.sage",
       "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage",
     ],
-    currentStatus: "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。V1 の固有空間への制限と下流の RestrictsOnSector 仮定除去は形式化済みである。射影表示の Lean 接続には、章011の実行列 W と複素 TensorPow 上の物理的転送行列の同一視、およびそれを Vsym と epsProj へ接続する最終定理が別単位として残る。",
+    currentStatus: "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。V1 の固有空間への制限と下流の RestrictsOnSector 仮定除去は形式化済みである。章011の実行列 W と複素 TensorPow 上の物理的転送行列の同一視も physicalSymTransferC_eq_map で形式化済みである。射影表示の Lean 接続には、この同一視を既存の Vsym と epsProj へ接続する最終定理だけが別単位として残る。",
   },
   boundaryEvidence: "射影表示は、転送行列の平方根をセクター制限後の平方根へ置き換え、射影子を各因子の間で一段ずつ移して一つの行列等式へ閉じる。直後の上限最大値分解は射影表示を使わず、全体と各セクターのレイリー商の上限および W のセクター不変性へ入力を切り替える。二項は意味的に相互非依存であり、提示順だけを依存辺へ混ぜないため、射影表示を一項節として閉じる。",
   readabilityStatus: "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる検証では九つの等式を一ファイル一等式で判定した。Lean未形式化は節配置や本文完成と区別して保持する。",

@@ -21,9 +21,10 @@
 | `hWV` | `W P^{(+)} = V^{(+)} P^{(+)}`（`symmetrized_transfer_matrix_on_sectors`） | 011 |
 | `hWsymm`, `hWpsd` | `W` は実対称半正定値（`W_is_real_symmetric_positive_definite`） | 011 |
 
-**章 011 の Lean 形式化もこの行列等式を形式化していない**（`lean/docs/ch011-formalization.md`:
-「`V^{(±)}`, `V_1^{(±)}` は章 004/010 の対象で、本タスクの担当範囲外の定義に依存する」）。
-そのため本ファイルでも仮定として受け取る。
+章 011 の物理的な実行列 `W` と、章 010 の Pauli 表示から作る複素行列の同一視は
+`Ising2D.physicalSymTransferC_eq_map` で形式化済みである。一方、この同一視と
+`V^{(±)}`・`epsProj` を接続する射影後の最終等式はまだ形式化していないため、
+本ファイルでは `hWV` を仮定として受け取る。
 -/
 import Ising2D.Part018.Theorem007_MaxEigenvectorEvenSector
 import Ising2D.Part011.Claim010_SectorDecomposition

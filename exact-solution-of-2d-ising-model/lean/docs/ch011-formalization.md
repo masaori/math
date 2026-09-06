@@ -41,6 +41,9 @@
 | `Ising2D.symTransfer_pow_succ` | `(BV₂B)^{k+1} = B(V₂BB)^k V₂ B` | `Z_equals_trace_of_W` の括り直し |
 | `Ising2D.mul_pow_mul_eq` | `V₁(V₂V₁)^k V₂ = (V₁V₂)^{k+1}` | 同上の最後の等号 |
 | **`Ising2D.trace_symTransfer_pow`** | `tr(W^n) = tr((V₁V₂)^n)` | **`Z_equals_trace_of_W`** |
+| `Ising2D.physicalV1halfR` / `physicalV2R` / `physicalSymTransferR` | 章 011 の物理的な `V₁^{1/2}`, `V₂`, `W` を実成分で定義 | `def_transfer_matrix_square_root`, `def_symmetrized_transfer_matrix` |
+| `Ising2D.physicalV1halfC` / `physicalSymTransferC` | 同じ物理的行列を章 010 の Pauli 表示から複素行列として定義 | 同上 |
+| **`Ising2D.physicalSymTransferC_eq_map`** | 複素側の物理的転送行列は実行列 `W` の成分ごとの複素化に一致 | **`def_symmetrized_transfer_matrix` の章間接続** |
 | `Ising2D.symTransfer_isSymm` | `W` は実対称 | `W_is_real_symmetric_positive_definite` Step 3 |
 | `Ising2D.symTransfer_posDef` | `W` は正定値（合同変換） | 同上 |
 | `Ising2D.mulVec_eq_zero_iff_of_isUnit` | 可逆行列の `mulVec` は単射 | 同上「可逆性」 |
@@ -141,7 +144,7 @@
 
 | 人手証明 | 状況 | 理由 |
 | --- | --- | --- |
-| `symmetrized_transfer_matrix_on_sectors` `W P^{(±)} = V^{(±)}P^{(±)}` | **未形式化** | `V₁` の固有空間制限と下流のセクター置換は形式化済み。残る入力は、章 011 の実行列 `W` と複素 `TensorPow` 上の物理的転送行列の同一視、およびそれを既存の `Vsym` と `epsProj` へ接続する最終定理である。記録は `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md` |
+| `symmetrized_transfer_matrix_on_sectors` `W P^{(±)} = V^{(±)}P^{(±)}` | **未形式化** | `V₁` の固有空間制限、下流のセクター置換、章 011 の実行列 `W` と複素 `TensorPow` 上の物理的転送行列の同一視は形式化済み。残る入力は、この同一視を既存の `Vsym` と `epsProj` へ接続する最終定理である。記録は `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md` |
 | `maxeig_000_remark_overview` | 形式化対象外 | 章の目的を述べた注記であり数学的主張ではない |
 
 （上記以外の 10 ブロックはすべて形式化済み。`sorry` / `admit` はゼロ。）
