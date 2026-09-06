@@ -1,0 +1,17 @@
+=== BV2CP = BV2PC ===
+  M=2, K1=0.400000000000000, K2=0.800000000000000, sector=+1: relative residual=7.417e-17 -> PASS
+  M=2, K1=0.400000000000000, K2=0.800000000000000, sector=-1: relative residual=5.250e-17 -> PASS
+  M=2, K1=0.700000000000000, K2=0.300000000000000, sector=+1: relative residual=1.434e-17 -> PASS
+  M=2, K1=0.700000000000000, K2=0.300000000000000, sector=-1: relative residual=5.375e-18 -> PASS
+  M=3, K1=0.400000000000000, K2=0.800000000000000, sector=+1: relative residual=1.590e-16 -> PASS
+  M=3, K1=0.400000000000000, K2=0.800000000000000, sector=-1: relative residual=9.535e-17 -> PASS
+  M=3, K1=0.700000000000000, K2=0.300000000000000, sector=+1: relative residual=1.356e-16 -> PASS
+  M=3, K1=0.700000000000000, K2=0.300000000000000, sector=-1: relative residual=1.846e-16 -> PASS
+  M=3, K1=0.250000000000000, K2=1.10000000000000, sector=+1: relative residual=6.946e-17 -> PASS
+  M=3, K1=0.250000000000000, K2=1.10000000000000, sector=-1: relative residual=6.568e-17 -> PASS
+  M=4, K1=0.400000000000000, K2=0.800000000000000, sector=+1: relative residual=4.727e-17 -> PASS
+  M=4, K1=0.400000000000000, K2=0.800000000000000, sector=-1: relative residual=3.427e-17 -> PASS
+  M=4, K1=0.700000000000000, K2=0.300000000000000, sector=+1: relative residual=1.605e-16 -> PASS
+  M=4, K1=0.700000000000000, K2=0.300000000000000, sector=-1: relative residual=1.826e-16 -> PASS
+WORST RELATIVE RESIDUAL: 1.846e-16
+RESULT: PASS

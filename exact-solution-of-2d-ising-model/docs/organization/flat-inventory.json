@@ -2827,7 +2827,7 @@
     {
       "name": "セクター射影後の転送行列の表示",
       "chapter": "2次元イジングモデル",
-      "status": "構造確定・本文粒度確認済み・形式化未解決・外部入力粒度未解決",
+      "status": "構造確定・本文粒度確認済み・SageMath行単位検査済み・形式化未解決・外部入力粒度未解決",
       "entryIds": [
         "maxeig_claim_symmetrized_transfer_matrix_on_sectors"
       ],
@@ -2851,11 +2851,21 @@
       ],
       "formalizationEvidence": {
         "leanFile": "lean/docs/ch011-formalization.md",
-        "sageMathFile": "sagemath/check/044_claim_max_eigenvalue/check_03_sector_split.sage",
-        "currentStatus": "プログラミングによる検証は有限個のパラメータについて r_rep の数値残差を判定する。BP=CP と射影子移動の各行の独立したSageMath検査は未実施。射影表示はLean未形式化で、偶セクター接続では仮定のままである。"
+        "sageMathFiles": [
+          "sagemath/check/044_claim_max_eigenvalue/check_B_P_equals_C_P.sage",
+          "sagemath/check/044_claim_max_eigenvalue/check_W_P_equals_B_V2_B_P.sage",
+          "sagemath/check/044_claim_max_eigenvalue/check_B_V2_B_P_equals_B_V2_C_P.sage",
+          "sagemath/check/044_claim_max_eigenvalue/check_B_V2_C_P_equals_B_V2_P_C.sage",
+          "sagemath/check/044_claim_max_eigenvalue/check_B_V2_P_C_equals_B_P_V2_C.sage",
+          "sagemath/check/044_claim_max_eigenvalue/check_B_P_V2_C_equals_C_P_V2_C.sage",
+          "sagemath/check/044_claim_max_eigenvalue/check_C_P_V2_C_equals_C_V2_P_C.sage",
+          "sagemath/check/044_claim_max_eigenvalue/check_C_V2_P_C_equals_C_V2_C_P.sage",
+          "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage"
+        ],
+        "currentStatus": "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。射影表示は Lean 未形式化で、V1 の固有空間への制限、実行列 W と複素 TensorPow 上の転送行列の同一視、これらを Vsym と epsProj へ接続する定理が別々に必要である。"
       },
       "boundaryEvidence": "射影表示は、転送行列の平方根をセクター制限後の平方根へ置き換え、射影子を各因子の間で一段ずつ移して一つの行列等式へ閉じる。直後の上限最大値分解は射影表示を使わず、全体と各セクターのレイリー商の上限および W のセクター不変性へ入力を切り替える。二項は意味的に相互非依存であり、提示順だけを依存辺へ混ぜないため、射影表示を一項節として閉じる。",
-      "readabilityStatus": "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。Lean未形式化と行単位SageMath検査の不足は節配置や本文完成と区別して保持する。"
+      "readabilityStatus": "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる検証では九つの等式を一ファイル一等式で判定した。Lean未形式化は節配置や本文完成と区別して保持する。"
     },
     {
       "name": "全体の上限と二つのセクター上限の最大値分解",

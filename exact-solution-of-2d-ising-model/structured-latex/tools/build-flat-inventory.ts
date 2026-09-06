@@ -3844,7 +3844,47 @@ const sectorSplitEvidenceSha256 = [
   ],
   [
     "sagemath/check/044_claim_max_eigenvalue/overview.md",
-    "87d5a195d8bdbb813cdde9aa88d92dfda8028cca723699797719bc1b6bff9357"
+    "41578691e562e4778eb6dad90efe3dcb55164cf9a210d04df27816162cbcd109"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/_sector_representation_prelude.sage",
+    "d1eac65a2332c36694f247c4f406c48201dac9bd9eef709142cb4741a465ba3d"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/check_B_P_equals_C_P.sage",
+    "36463e01f42f7e628a9117fd81ca29088f53e86a9f5aee65b4a071462c6e992a"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/check_W_P_equals_B_V2_B_P.sage",
+    "474bdf92571d62248131e4a6b54ea31f3afbd07ac5302ab60c9c6f014b1f1c64"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/check_B_V2_B_P_equals_B_V2_C_P.sage",
+    "d529cb27c3b1e093c6982538b6da7b8a57815d9c669dea932fdad201ea757b0c"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/check_B_V2_C_P_equals_B_V2_P_C.sage",
+    "d4736a7faf4706c2af8eacbd17e9db7f5c6d45afc92e9a5ecd0c44c99be53226"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/check_B_V2_P_C_equals_B_P_V2_C.sage",
+    "585a4df6d2a922cc7617c0c763e7d26928fa712c2aafebfd37d9f0d3b334fb57"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/check_B_P_V2_C_equals_C_P_V2_C.sage",
+    "0c595ba1eda912d1c8b13ac300fe0310202417415d5d044c1715e0bead479026"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/check_C_P_V2_C_equals_C_V2_P_C.sage",
+    "277ecf0e8601fe7427ce124d85570d1731b39584b2d2365ae99436d96f88d0d6"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/check_C_V2_P_C_equals_C_V2_C_P.sage",
+    "523c2f77bf2ad6ec1a8d004a042f9602434cd78b91b72414d9ce5994f086431d"
+  ],
+  [
+    "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage",
+    "0309225fda9217f3bf393c2701447ccd4cbd8dd7996ce22146ba8bfa4d933ecf"
   ],
   [
     "lean/docs/ch011-formalization.md",
@@ -15684,18 +15724,28 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "セクター射影後の転送行列の表示",
   chapter: "2次元イジングモデル",
-  status: "構造確定・本文粒度確認済み・形式化未解決・外部入力粒度未解決",
+  status: "構造確定・本文粒度確認済み・SageMath行単位検査済み・形式化未解決・外部入力粒度未解決",
   entryIds: [sectorRepresentationEntry.id],
   input: ["転送行列の平方根とセクターへの制限", "セクター射影子の積と可換性"],
   externalInputEntryIds: [...sectorRepresentationEntry.dependsOnEntryIds].sort(),
   output: ["W P^{(±)} = V^{(±)} P^{(±)}"],
   formalizationEvidence: {
     leanFile: "lean/docs/ch011-formalization.md",
-    sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_03_sector_split.sage",
-    currentStatus: "プログラミングによる検証は有限個のパラメータについて r_rep の数値残差を判定する。BP=CP と射影子移動の各行の独立したSageMath検査は未実施。射影表示はLean未形式化で、偶セクター接続では仮定のままである。",
+    sageMathFiles: [
+      "sagemath/check/044_claim_max_eigenvalue/check_B_P_equals_C_P.sage",
+      "sagemath/check/044_claim_max_eigenvalue/check_W_P_equals_B_V2_B_P.sage",
+      "sagemath/check/044_claim_max_eigenvalue/check_B_V2_B_P_equals_B_V2_C_P.sage",
+      "sagemath/check/044_claim_max_eigenvalue/check_B_V2_C_P_equals_B_V2_P_C.sage",
+      "sagemath/check/044_claim_max_eigenvalue/check_B_V2_P_C_equals_B_P_V2_C.sage",
+      "sagemath/check/044_claim_max_eigenvalue/check_B_P_V2_C_equals_C_P_V2_C.sage",
+      "sagemath/check/044_claim_max_eigenvalue/check_C_P_V2_C_equals_C_V2_P_C.sage",
+      "sagemath/check/044_claim_max_eigenvalue/check_C_V2_P_C_equals_C_V2_C_P.sage",
+      "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage",
+    ],
+    currentStatus: "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。射影表示は Lean 未形式化で、V1 の固有空間への制限、実行列 W と複素 TensorPow 上の転送行列の同一視、これらを Vsym と epsProj へ接続する定理が別々に必要である。",
   },
   boundaryEvidence: "射影表示は、転送行列の平方根をセクター制限後の平方根へ置き換え、射影子を各因子の間で一段ずつ移して一つの行列等式へ閉じる。直後の上限最大値分解は射影表示を使わず、全体と各セクターのレイリー商の上限および W のセクター不変性へ入力を切り替える。二項は意味的に相互非依存であり、提示順だけを依存辺へ混ぜないため、射影表示を一項節として閉じる。",
-  readabilityStatus: "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。Lean未形式化と行単位SageMath検査の不足は節配置や本文完成と区別して保持する。",
+  readabilityStatus: "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる検証では九つの等式を一ファイル一等式で判定した。Lean未形式化は節配置や本文完成と区別して保持する。",
 }, {
   name: "全体の上限と二つのセクター上限の最大値分解",
   chapter: "2次元イジングモデル",
