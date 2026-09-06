@@ -94,10 +94,17 @@ targets=(
   CellularAutomata.NecSuf.CyclicRuleRestriction.globalRealizedMap_eq_iff_restriction
   CellularAutomata.NecSuf.CyclicRuleRestriction.card_compatible_inputs
   CellularAutomata.NecSuf.CyclicRuleRestriction.card_truth_tables
+  CellularAutomata.NecSuf.CyclicRuleRestriction.extendRestriction_on_compatible
+  CellularAutomata.NecSuf.CyclicRuleRestriction.restrictGlobalMap_of_realized
+  CellularAutomata.NecSuf.CyclicRuleRestriction.card_restriction_fiber
+  CellularAutomata.NecSuf.CyclicRuleRestriction.card_global_realization_fiber
+  CellularAutomata.NecSuf.CyclicRuleRestriction.card_global_realized_maps
   CellularAutomata.NecSuf.CyclicRuleRestriction.realizedMap_eq_iff_restriction_of_necSuf
   CellularAutomata.NecSuf.CyclicRuleRestriction.globalRealizedMap_eq_iff_restriction_of_necSuf
   CellularAutomata.NecSuf.CyclicRuleRestriction.card_admissible_inputs_of_necSuf
   CellularAutomata.NecSuf.CyclicRuleRestriction.card_truth_tables_of_necSuf
+  CellularAutomata.NecSuf.CyclicRuleRestriction.card_global_realization_fiber_of_necSuf
+  CellularAutomata.NecSuf.CyclicRuleRestriction.card_global_realized_maps_of_necSuf
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.scale_apply
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.add_support
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.neg_support

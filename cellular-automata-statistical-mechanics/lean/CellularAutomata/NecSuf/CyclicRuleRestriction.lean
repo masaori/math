@@ -148,12 +148,129 @@ theorem globalRealizedMap_eq_iff_restriction (a₀ : A) (q : C → D → C) (v�
     exact hrestriction
       ⟨fun j => x (q v j), fun j k hjk => congrArg x ((hcollision v j k).mpr hjk)⟩
 
+/-- 射影の衝突と両立しない入力。 -/
+def IncompatibleInput (q : D → C) :=
+  {a : D → A // ¬ ∀ j k : D, q j = q k → a j = a k}
+
+/-- 基準表 `g` と両立入力上で一致する表の繊維。 -/
+def RestrictionFiber (q : D → C) (g : (D → A) → B) :=
+  {h : (D → A) → B // SameRestriction q h g}
+
+/-- 両立入力では `g`、両立しない入力では `c` を使う。 -/
+noncomputable def extendIncompatibleTable (q : D → C) (g : (D → A) → B)
+    (c : IncompatibleInput (A := A) q → B) : (D → A) → B :=
+  by
+    classical
+    exact fun a => if ha : ∀ j k : D, q j = q k → a j = a k then g a else c ⟨a, ha⟩
+
+/-- 同じ制限を持つ表は、両立しない入力上の出力値と全単射で対応する。 -/
+noncomputable def incompatibleTableEquivRestrictionFiber (q : D → C)
+    (g : (D → A) → B) :
+    (IncompatibleInput (A := A) q → B) ≃ RestrictionFiber q g where
+  toFun c := ⟨extendIncompatibleTable q g c, fun a => by
+    simp only [extendIncompatibleTable, dif_pos a.property]⟩
+  invFun h a := h.val a.val
+  left_inv c := by
+    funext a
+    simp only [extendIncompatibleTable, dif_neg a.property]
+    apply congrArg c
+    exact Subtype.ext rfl
+  right_inv h := by
+    apply Subtype.ext
+    funext a
+    by_cases ha : ∀ j k : D, q j = q k → a j = a k
+    · simpa only [extendIncompatibleTable, dif_pos ha] using (h.property ⟨a, ha⟩).symm
+    · simp only [extendIncompatibleTable, dif_neg ha]
+
+/-- 基準表 `g` と同じ全セル写像を与える表の繊維。 -/
+def GlobalRealizationFiber (q : C → D → C) (g : (D → A) → B) :=
+  {h : (D → A) → B // globalRealizedMap q h = globalRealizedMap q g}
+
+/-- 共通の衝突関係の下で、大域実現繊維と制限繊維は同じ台を持つ。 -/
+noncomputable def globalFiberEquivRestrictionFiber (a₀ : A) (q : C → D → C) (v₀ : C)
+    (hcollision : SameCollisionRelation q v₀) (g : (D → A) → B) :
+    GlobalRealizationFiber q g ≃ RestrictionFiber (q v₀) g where
+  toFun h := ⟨h.val,
+    (globalRealizedMap_eq_iff_restriction a₀ q v₀ hcollision h.val g).mp h.property⟩
+  invFun h := ⟨h.val,
+    (globalRealizedMap_eq_iff_restriction a₀ q v₀ hcollision h.val g).mpr h.property⟩
+  left_inv h := Subtype.ext rfl
+  right_inv h := Subtype.ext rfl
+
+/-- 両立入力上の表を、それ以外では指定値として全入力へ延長する。 -/
+noncomputable def extendRestriction (b₀ : B) (q₀ : D → C)
+    (b : CompatibleInput (A := A) q₀ → B) : (D → A) → B :=
+  by
+    classical
+    exact fun a => if ha : ∀ j k, q₀ j = q₀ k → a j = a k then b ⟨a, ha⟩ else b₀
+
+theorem extendRestriction_on_compatible (b₀ : B) (q₀ : D → C)
+    (b : CompatibleInput (A := A) q₀ → B) (a : CompatibleInput (A := A) q₀) :
+    extendRestriction b₀ q₀ b a.val = b a := by
+  unfold extendRestriction
+  rw [dif_pos a.property]
+  congr
+
+/-- 一つの入力値から作る両立入力。出力値を延長する際の基準入力に使う。 -/
+def constantCompatibleInput (a₀ : A) (q₀ : D → C) : CompatibleInput (A := A) q₀ :=
+  ⟨fun _ => a₀, fun _ _ _ => rfl⟩
+
+/-- 大域写像を基準セルで評価し、両立入力上の表へ戻す。 -/
+noncomputable def restrictGlobalMap (a₀ : A) (q : C → D → C) (v₀ : C)
+    (F : (C → A) → (C → B)) : CompatibleInput (A := A) (q v₀) → B :=
+  fun a => F (extendConfiguration a₀ (q v₀) (descend (q v₀) a)) v₀
+
+theorem restrictGlobalMap_of_realized (a₀ : A) (q : C → D → C) (v₀ : C)
+    (g : (D → A) → B) (a : CompatibleInput (A := A) (q v₀)) :
+    restrictGlobalMap a₀ q v₀ (globalRealizedMap q g) a = g a.val := by
+  change g (fun j => extendConfiguration a₀ (q v₀) (descend (q v₀) a) (q v₀ j)) = g a.val
+  congr 1
+  funext j
+  calc
+    extendConfiguration a₀ (q v₀) (descend (q v₀) a) (q v₀ j) =
+        (descend (q v₀) a) ⟨q v₀ j, ⟨j, rfl⟩⟩ :=
+      extendConfiguration_on_image a₀ (q v₀) (descend (q v₀) a) j
+    _ = (pullback (q v₀) (descend (q v₀) a)).val j := rfl
+    _ = a.val j := congrFun (congrArg Subtype.val (pullback_descend (q v₀) a)) j
+
+/-- 一つの局所表から実現される大域写像全体。 -/
+def GlobalRealizedMap (q : C → D → C) :=
+  {F : (C → A) → (C → B) // ∃ g : (D → A) → B, globalRealizedMap q g = F}
+
+/-- 共通の衝突関係の下で、異なる大域写像は基準セルの両立入力上の表と対応する。 -/
+noncomputable def restrictionGlobalEquiv (a₀ : A) (q : C → D → C) (v₀ : C)
+    (hcollision : SameCollisionRelation q v₀) :
+    (CompatibleInput (A := A) (q v₀) → B) ≃ GlobalRealizedMap (A := A) (B := B) q where
+  toFun b :=
+    ⟨globalRealizedMap q (extendRestriction (b (constantCompatibleInput a₀ (q v₀))) (q v₀) b),
+      ⟨extendRestriction (b (constantCompatibleInput a₀ (q v₀))) (q v₀) b, rfl⟩⟩
+  invFun F := restrictGlobalMap a₀ q v₀ F.val
+  left_inv b := by
+    funext a
+    change restrictGlobalMap a₀ q v₀
+      (globalRealizedMap q
+        (extendRestriction (b (constantCompatibleInput a₀ (q v₀))) (q v₀) b)) a = b a
+    rw [restrictGlobalMap_of_realized]
+    exact extendRestriction_on_compatible
+      (b (constantCompatibleInput a₀ (q v₀))) (q v₀) b a
+  right_inv F := by
+    apply Subtype.ext
+    obtain ⟨g, hg⟩ := F.property
+    change globalRealizedMap q
+      (extendRestriction
+        (restrictGlobalMap a₀ q v₀ F.val (constantCompatibleInput a₀ (q v₀)))
+        (q v₀) (restrictGlobalMap a₀ q v₀ F.val)) = F.val
+    rw [← hg]
+    apply (globalRealizedMap_eq_iff_restriction a₀ q v₀ hcollision _ _).mpr
+    intro a
+    rw [extendRestriction_on_compatible, restrictGlobalMap_of_realized]
+
 /-! ### 有限性が要る個数 -/
 
 section Finite
 
-variable [Fintype D] [DecidableEq D] [Fintype C] [DecidableEq C]
-  [Fintype A] [DecidableEq A] [Fintype B] [DecidableEq B]
+variable [Fintype D] [DecidableEq D] [DecidableEq C]
+  [Fintype A] [DecidableEq A] [Fintype B]
 
 noncomputable instance (q : D → C) : DecidableEq (ProjectionImage q) :=
   Classical.decEq _
@@ -168,7 +285,33 @@ noncomputable instance (q : D → C) : Fintype (ProjectionImage q) :=
 noncomputable instance (q : D → C) : Fintype (CompatibleInput (A := A) q) :=
   by
     classical
-    exact Fintype.ofEquiv (ProjectionImage q → A) (pullbackEquiv q)
+    exact Subtype.fintype _
+
+noncomputable instance (q : D → C) : Fintype (IncompatibleInput (A := A) q) :=
+  by
+    classical
+    exact Subtype.fintype _
+
+noncomputable instance (q : D → C) (g : (D → A) → B) :
+    Fintype (RestrictionFiber q g) := by
+  classical
+  exact Subtype.fintype _
+
+noncomputable instance (q : C → D → C) (g : (D → A) → B) :
+    Fintype (GlobalRealizationFiber q g) := by
+  classical
+  exact Subtype.fintype _
+
+noncomputable instance (q : C → D → C) : Fintype (GlobalRealizedMap (A := A) (B := B) q) := by
+  classical
+  change Fintype {F : (C → A) → (C → B) //
+    ∃ g : (D → A) → B, globalRealizedMap q g = F}
+  exact Fintype.ofFinset
+    (Finset.univ.image (globalRealizedMap q))
+    (fun F => by
+      change F ∈ Finset.univ.image (globalRealizedMap q) ↔
+        ∃ g : (D → A) → B, globalRealizedMap q g = F
+      simp)
 
 /-- 両立入力の個数。二元性を仮定する前の一般式。 -/
 theorem card_compatible_inputs (q : D → C) :
@@ -185,6 +328,80 @@ theorem card_truth_tables :
     Fintype.card ((D → A) → B) =
       Fintype.card B ^ (Fintype.card A ^ Fintype.card D) := by
   rw [Fintype.card_fun, Fintype.card_fun]
+
+/-- 同じ制限を持つ表の個数。入出力集合の元数を分離した一般式。 -/
+theorem card_restriction_fiber (q : D → C) (g : (D → A) → B) :
+    Fintype.card (RestrictionFiber q g) =
+      Fintype.card B ^
+        (Fintype.card A ^ Fintype.card D -
+          Fintype.card A ^ Fintype.card (ProjectionImage q)) := by
+  classical
+  have hcomplement : Fintype.card (IncompatibleInput (A := A) q) =
+      Fintype.card (D → A) - Fintype.card (CompatibleInput (A := A) q) := by
+    let compatibleSubtype :=
+      {a : D → A // ∀ j k : D, q j = q k → a j = a k}
+    let incompatibleSubtype :=
+      {a : D → A // ¬ ∀ j k : D, q j = q k → a j = a k}
+    let compatibleEquiv : compatibleSubtype ≃ CompatibleInput (A := A) q :=
+      {
+        toFun := fun a => ⟨a.val, a.property⟩
+        invFun := fun a => ⟨a.val, a.property⟩
+        left_inv := fun a => Subtype.ext rfl
+        right_inv := fun a => Subtype.ext rfl
+      }
+    calc
+      Fintype.card (IncompatibleInput (A := A) q) = Fintype.card incompatibleSubtype :=
+        Fintype.card_congr (Equiv.refl _)
+      _ = Fintype.card (D → A) - Fintype.card compatibleSubtype :=
+        Fintype.card_subtype_compl
+          (fun a : D → A => ∀ j k : D, q j = q k → a j = a k)
+      _ = Fintype.card (D → A) - Fintype.card (CompatibleInput (A := A) q) := by
+        rw [Fintype.card_congr compatibleEquiv]
+  calc
+    Fintype.card (RestrictionFiber q g) =
+        Fintype.card (IncompatibleInput (A := A) q → B) :=
+      Fintype.card_congr (incompatibleTableEquivRestrictionFiber q g).symm
+    _ = Fintype.card B ^ Fintype.card (IncompatibleInput (A := A) q) := Fintype.card_fun
+    _ = Fintype.card B ^
+        (Fintype.card (D → A) - Fintype.card (CompatibleInput (A := A) q)) := by
+      rw [hcomplement]
+    _ = Fintype.card B ^
+        (Fintype.card A ^ Fintype.card D -
+          Fintype.card A ^ Fintype.card (ProjectionImage q)) := by
+      rw [Fintype.card_fun, card_compatible_inputs]
+
+/-- 同じ大域写像を与える表の個数。 -/
+theorem card_global_realization_fiber (a₀ : A) (q : C → D → C) (v₀ : C)
+    (hcollision : SameCollisionRelation q v₀) (g : (D → A) → B) :
+    Fintype.card (GlobalRealizationFiber q g) =
+      Fintype.card B ^
+        (Fintype.card A ^ Fintype.card D -
+          Fintype.card A ^ Fintype.card (ProjectionImage (q v₀))) := by
+  calc
+    Fintype.card (GlobalRealizationFiber q g) =
+        Fintype.card (RestrictionFiber (q v₀) g) :=
+      Fintype.card_congr (globalFiberEquivRestrictionFiber a₀ q v₀ hcollision g)
+    _ = Fintype.card B ^
+        (Fintype.card A ^ Fintype.card D -
+          Fintype.card A ^ Fintype.card (ProjectionImage (q v₀))) :=
+      card_restriction_fiber (q v₀) g
+
+/-- 異なる大域写像の個数。 -/
+theorem card_global_realized_maps (a₀ : A) (q : C → D → C) (v₀ : C)
+    (hcollision : SameCollisionRelation q v₀) :
+    Fintype.card (GlobalRealizedMap (A := A) (B := B) q) =
+      Fintype.card B ^
+        (Fintype.card A ^ Fintype.card (ProjectionImage (q v₀))) := by
+  classical
+  calc
+    Fintype.card (GlobalRealizedMap (A := A) (B := B) q) =
+        Fintype.card (CompatibleInput (A := A) (q v₀) → B) :=
+      Fintype.card_congr (restrictionGlobalEquiv a₀ q v₀ hcollision).symm
+    _ = Fintype.card B ^ Fintype.card (CompatibleInput (A := A) (q v₀)) :=
+      Fintype.card_fun
+    _ = Fintype.card B ^
+        (Fintype.card A ^ Fintype.card (ProjectionImage (q v₀))) := by
+      rw [card_compatible_inputs]
 
 end Finite
 
@@ -211,6 +428,23 @@ noncomputable def concreteCompatibleEquiv (q : X → Y) :
   invFun a := ⟨a.val, a.property⟩
   left_inv a := Subtype.ext rfl
   right_inv a := Subtype.ext rfl
+
+noncomputable def concreteGlobalFiberEquiv (q : Y → X → Y)
+    (g : (X → State) → State) :
+    CellularAutomata.CyclicRuleRestriction.GlobalRealizationFiber q g ≃
+      GlobalRealizationFiber q g where
+  toFun h := ⟨h.val, h.property⟩
+  invFun h := ⟨h.val, h.property⟩
+  left_inv h := Subtype.ext rfl
+  right_inv h := Subtype.ext rfl
+
+noncomputable def concreteGlobalRealizedEquiv (q : Y → X → Y) :
+    CellularAutomata.CyclicRuleRestriction.GlobalRealizedMap q ≃
+      GlobalRealizedMap (A := State) (B := State) q where
+  toFun F := ⟨F.val, F.property⟩
+  invFun F := ⟨F.val, F.property⟩
+  left_inv F := Subtype.ext rfl
+  right_inv F := Subtype.ext rfl
 
 /-- 具体版の局所等号判定は、入力値と出力値を State に一致させた特殊化である。 -/
 theorem realizedMap_eq_iff_restriction_of_necSuf (q : X → Y)
@@ -249,6 +483,45 @@ theorem card_admissible_inputs_of_necSuf (q : X → Y) :
 theorem card_truth_tables_of_necSuf :
     Fintype.card ((X → State) → State) = 2 ^ (2 ^ Fintype.card X) := by
   simpa only [card_state] using card_truth_tables (D := X) (A := State) (B := State)
+
+/-- 具体版の実現繊維個数は、入出力値を二元とした特殊化である。 -/
+theorem card_global_realization_fiber_of_necSuf (q : Y → X → Y) (v₀ : Y)
+    (hcollision : CellularAutomata.CyclicRuleRestriction.SameCollisionRelation q v₀)
+    (g : (X → State) → State) :
+    Fintype.card (CellularAutomata.CyclicRuleRestriction.GlobalRealizationFiber q g) =
+      2 ^ (2 ^ Fintype.card X -
+        2 ^ Fintype.card (CellularAutomata.CyclicRuleRestriction.Image (q v₀))) := by
+  change SameCollisionRelation q v₀ at hcollision
+  calc
+    Fintype.card (CellularAutomata.CyclicRuleRestriction.GlobalRealizationFiber q g) =
+        Fintype.card (GlobalRealizationFiber q g) :=
+      Fintype.card_congr (concreteGlobalFiberEquiv q g)
+    _ = 2 ^ (2 ^ Fintype.card X - 2 ^ Fintype.card (ProjectionImage (q v₀))) := by
+      simpa only [card_state] using
+        card_global_realization_fiber State.zero q v₀ hcollision g
+    _ = 2 ^ (2 ^ Fintype.card X -
+        2 ^ Fintype.card (CellularAutomata.CyclicRuleRestriction.Image (q v₀))) := by
+      rw [Fintype.card_congr (concreteImageEquiv (q v₀)).symm]
+
+/-- 具体版の大域写像個数は、入出力値を二元とした特殊化である。 -/
+theorem card_global_realized_maps_of_necSuf (q : Y → X → Y) (v₀ : Y)
+    (hcollision : CellularAutomata.CyclicRuleRestriction.SameCollisionRelation q v₀) :
+    Fintype.card (CellularAutomata.CyclicRuleRestriction.GlobalRealizedMap q) =
+      2 ^ (2 ^ Fintype.card (CellularAutomata.CyclicRuleRestriction.Image (q v₀))) := by
+  change SameCollisionRelation q v₀ at hcollision
+  calc
+    Fintype.card (CellularAutomata.CyclicRuleRestriction.GlobalRealizedMap q) =
+        Fintype.card (GlobalRealizedMap (A := State) (B := State) q) :=
+      Fintype.card_congr (concreteGlobalRealizedEquiv q)
+    _ = 2 ^ (2 ^ Fintype.card (ProjectionImage (q v₀))) := by
+      have hgeneral := card_global_realized_maps
+        (A := State) (B := State) State.zero q v₀ hcollision
+      have hstate : Fintype.card State = 2 :=
+        CellularAutomata.EssentialDependency.card_state
+      rw [hstate] at hgeneral
+      exact hgeneral
+    _ = 2 ^ (2 ^ Fintype.card (CellularAutomata.CyclicRuleRestriction.Image (q v₀))) := by
+      rw [Fintype.card_congr (concreteImageEquiv (q v₀)).symm]
 
 end Derivation
 
