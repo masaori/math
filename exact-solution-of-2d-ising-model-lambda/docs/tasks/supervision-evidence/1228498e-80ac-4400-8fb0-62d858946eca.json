@@ -1,0 +1,11 @@
+{
+  "実行識別子": "1228498e-80ac-4400-8fb0-62d858946eca",
+  "観測時刻": "2026-09-06T11:24:08+09:00",
+  "起動登録の実測": {"コマンド": "launchctl list com.masaori.ising-lambda-auto-loop", "終了コード": 0, "対象label": "com.masaori.ising-lambda-auto-loop", "判定": "登録あり"},
+  "launchctl print": {"コマンド": "launchctl print gui/501/com.masaori.ising-lambda-auto-loop", "終了コード": 0, "state": "not running", "runs": 2, "last exit code": 0},
+  "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist", "存在": true, "sha256": "cbed703002cee81ff8c2c71fd5a6ab508bc0e394ab401a3d247eee1173a6c3c5", "StartCalendarInterval": [{"Minute": 5}, {"Minute": 35}]},
+  "実ログ": [{"path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log", "存在": true, "更新時刻": "2026-09-06T11:05:09+09:00", "抽出行": ["2026-09-06 09:26:34 === tick 正常終了", "2026-09-06 11:05:09 WARN: 死んだロックを掃除した (pid 13367)", "2026-09-06 11:05:09 SKIP: 作業ツリーに未コミットの変更がある"]}],
+  "実行の終了値の解釈": "launchctlの直近呼出しは終了0だが研究処理は未コミット差分のため見送られた。09:35開始分には対応する終了行がなく、過去の09:26正常終了をその終了値へ流用しない。",
+  "成果比較": {"開始成果": "9e4f8e0221d421bc3dd88ebc7ee9416b9fb46b72", "前回読解終点": "21dcaaeba8086d41f5366c33714b9259b29f49cb", "今回読解終点": "b1a2d1d0ee735d39f25f2afa9245bb1c5bf378e1", "確認した成果": "dc6107f55の異位置ブロック同名辺スロット48項を含む有限系の非可解性。9e4f8e022以後に当研究の成果差分なし"},
+  "検査結果": [{"時刻": "2026-09-06T11:20:00+09:00", "コマンド": "node scripts/research-supervision/verify.ts --all", "終了コード": 1, "結果": "複素行列版の実在しないLean参照先を拒否"}, {"時刻": "2026-09-06T11:21:00+09:00", "コマンド": "node scripts/research-supervision/verify.ts --all", "終了コード": 0, "結果": "六研究の評価記録を受理"}, {"時刻": "2026-09-06T11:21:00+09:00", "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts", "終了コード": 0, "結果": "24件成功"}, {"時刻": "2026-09-06T11:34:00+09:00", "コマンド": "remote更新取込後に両検査を再実行", "終了コード": 0, "結果": "六研究受理・回帰24件成功"}]
+}
