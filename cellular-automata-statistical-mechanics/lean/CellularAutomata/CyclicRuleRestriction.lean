@@ -17,6 +17,10 @@ claim_cyclic_offset_collision                  → cyclicProjection_collision_if
 claim_cyclic_offset_image_count                → card_cyclicProjection_image
 claim_cyclic_offset_injective_boundary         → cyclicProjection_injective_iff
 claim_cyclic_rule_realization_fiber_count      → card_cyclic_global_realization_fiber
+def_cyclic_elementary_encoding                 → elementaryTable
+claim_cyclic_elementary_encoding_bijection     → elementaryTable_bijective
+claim_cyclic_radius_one_comparison              → elementaryGlobalRealizedMap_apply
+claim_cyclic_radius_one_collapse                → card_radius_one_* / card_radius_one_fiber_*
 
 有限巡回舞台の各セルで整数オフセットを射影した写像を q として固定する。
 このファイルは本文の証明が q の有限像と同じ像を持つオフセットの一致だけを使う部分を、
@@ -25,8 +29,8 @@ content/cyclic-offset-projection.ts の別の主張であり、このファイ�
 全セルの射影 q_v が同じ衝突関係を持つことを仮定し、その条件から局所核を
 全セルの大域写像の等号へ接着する。後半で整数オフセットの具体的な巡回射影を定め、
 衝突と周期整除の同値から、この共通衝突仮定と大域接着の特殊化を導く。
-像の元数、単射境界、実現繊維の個数までを具体的な巡回射影について導く。
-初等規則番号と半径一比較は後続の層へ残す。
+像の元数、単射境界、実現繊維の個数、初等規則番号と半径一比較までを
+具体的な巡回射影について導く。
 
 住処は有限型と自然数だけであり、実数体・複素数体は現れない。
 -/
@@ -538,6 +542,93 @@ theorem card_cyclic_global_realization_fiber (L r : ℕ) [NeZero L]
   rw [card_global_realization_fiber
     (fun v => cyclicProjection L r v) v₀ (cyclicProjection_same_collision L r v₀) g]
   rw [Fintype.card_fin, card_cyclicProjection_image]
+
+/-- 演算を持たない二元状態を、初等規則番号の二進桁を読むための自然数へ送る。 -/
+def stateNat : State → ℕ
+  | State.zero => 0
+  | State.one => 1
+
+/-- 自然数の偶奇を二元状態へ戻す。 -/
+def parityState (n : ℕ) : State :=
+  if n % 2 = 0 then State.zero else State.one
+
+/-- 半径一の左・自身・右の状態を三桁の二進数へ送る。 -/
+def elementaryInputIndex (a : Offset 1 → State) : ℕ :=
+  4 * stateNat (a ⟨0, by decide⟩) +
+    2 * stateNat (a ⟨1, by decide⟩) +
+      stateNat (a ⟨2, by decide⟩)
+
+/-- 初等規則番号 R の k(a) 桁目を読んだ半径一のオフセット表。 -/
+def elementaryTable (R : Fin 256) : (Offset 1 → State) → State :=
+  fun a => parityState (R.val / 2 ^ elementaryInputIndex a)
+
+/-- 半径一表の八つの出力桁を二進数として再合成する。 -/
+def elementaryRuleNumberValue (g : (Offset 1 → State) → State) : ℕ :=
+  ∑ a : Offset 1 → State, stateNat (g a) * 2 ^ elementaryInputIndex a
+
+/-- 半径一表の二進桁を再合成した初等規則番号。 -/
+def elementaryRuleNumber (g : (Offset 1 → State) → State) : Fin 256 :=
+  ⟨elementaryRuleNumberValue g % 256, Nat.mod_lt _ (by decide)⟩
+
+/-- 桁の取り出しと再合成を相互逆として持つ明示的な全単射。 -/
+def elementaryTableEquiv : Fin 256 ≃ ((Offset 1 → State) → State) where
+  toFun := elementaryTable
+  invFun := elementaryRuleNumber
+  left_inv := by native_decide
+  right_inv := by native_decide
+
+/-- 0,…,255 の初等規則番号と半径一の二元値表は全単射で対応する。 -/
+theorem elementaryTable_bijective : Function.Bijective elementaryTable := by
+  exact elementaryTableEquiv.bijective
+
+/-- 半径一の大域写像は、左・自身・右の三値から読んだ規則番号の桁に等しい。 -/
+theorem elementaryGlobalRealizedMap_apply (L : ℕ) [NeZero L] (R : Fin 256)
+    (x : ZMod L → State) (v : ZMod L) :
+    globalRealizedMap (fun w => cyclicProjection L 1 w) (elementaryTable R) x v =
+      parityState (R.val / 2 ^
+        (4 * stateNat (x (v - 1)) + 2 * stateNat (x v) + stateNat (x (v + 1)))) := by
+  simp [globalRealizedMap, elementaryTable, elementaryInputIndex, cyclicProjection,
+    signedOffset, sub_eq_add_neg]
+
+/-- 一セル巡回舞台の半径一表が実現する大域写像は 4 個である。 -/
+theorem card_radius_one_global_maps_one_cell :
+    Fintype.card (GlobalRealizedMap
+      (fun v : ZMod 1 => cyclicProjection 1 1 v)) = 4 := by
+  simpa using card_cyclic_global_realized_maps 1 1 (0 : ZMod 1)
+
+/-- 二セル巡回舞台の半径一表が実現する大域写像は 16 個である。 -/
+theorem card_radius_one_global_maps_two_cells :
+    Fintype.card (GlobalRealizedMap
+      (fun v : ZMod 2 => cyclicProjection 2 1 v)) = 16 := by
+  simpa using card_cyclic_global_realized_maps 2 1 (0 : ZMod 2)
+
+/-- 三セル以上では半径一表 256 個が相異な大域写像を与える。 -/
+theorem card_radius_one_global_maps_of_three_le (L : ℕ) [NeZero L]
+    (hL : 3 ≤ L) (v₀ : ZMod L) :
+    Fintype.card (GlobalRealizedMap
+      (fun v : ZMod L => cyclicProjection L 1 v)) = 256 := by
+  rw [card_cyclic_global_realized_maps L 1 v₀]
+  simp [Nat.min_eq_right hL]
+
+/-- 一セル巡回舞台で同じ大域写像を与える半径一表は 64 個である。 -/
+theorem card_radius_one_fiber_one_cell (g : (Offset 1 → State) → State) :
+    Fintype.card (GlobalRealizationFiber
+      (fun v : ZMod 1 => cyclicProjection 1 1 v) g) = 64 := by
+  simpa using card_cyclic_global_realization_fiber 1 1 (0 : ZMod 1) g
+
+/-- 二セル巡回舞台で同じ大域写像を与える半径一表は 16 個である。 -/
+theorem card_radius_one_fiber_two_cells (g : (Offset 1 → State) → State) :
+    Fintype.card (GlobalRealizationFiber
+      (fun v : ZMod 2 => cyclicProjection 2 1 v) g) = 16 := by
+  simpa using card_cyclic_global_realization_fiber 2 1 (0 : ZMod 2) g
+
+/-- 三セル以上では半径一の大域実現繊維は一元集合である。 -/
+theorem card_radius_one_fiber_of_three_le (L : ℕ) [NeZero L]
+    (hL : 3 ≤ L) (v₀ : ZMod L) (g : (Offset 1 → State) → State) :
+    Fintype.card (GlobalRealizationFiber
+      (fun v : ZMod L => cyclicProjection L 1 v) g) = 1 := by
+  rw [card_cyclic_global_realization_fiber L 1 v₀ g]
+  simp [Nat.min_eq_right hL]
 
 end
 
