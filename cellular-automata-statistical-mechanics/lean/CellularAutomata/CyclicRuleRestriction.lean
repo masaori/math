@@ -11,19 +11,24 @@ claim_cyclic_admissible_input_count           → card_admissible_inputs
 claim_cyclic_rule_table_count                 → card_truth_tables
 def_cyclic_uniform_rule_map の全セル版        → globalRealizedMap
 claim_cyclic_rule_global_equality              → globalRealizedMap_eq_iff_restriction
+def_integer_offset_interval                    → Offset, signedOffset
+def_cyclic_offset_projection                   → cyclicProjection
+claim_cyclic_offset_collision                  → cyclicProjection_collision_iff_dvd
 
 有限巡回舞台の各セルで整数オフセットを射影した写像を q として固定する。
 このファイルは本文の証明が q の有限像と同じ像を持つオフセットの一致だけを使う部分を、
 演算を持たない二元状態 State 上で同じ順序により形式化する。整数剰余による q 自体の算術は
 content/cyclic-offset-projection.ts の別の主張であり、このファイルでは仮定として一般化しない。
 全セルの射影 q_v が同じ衝突関係を持つことを仮定し、その条件から局所核を
-全セルの大域写像の等号へ接着するところまでを形式化する。整数剰余射影が実際にこの仮定を
-満たすこと、射影算術と残る個数公式は後半へ残す。
+全セルの大域写像の等号へ接着する。後半で整数オフセットの具体的な巡回射影を定め、
+衝突と周期整除の同値から、この共通衝突仮定と大域接着の特殊化を導く。
+像の元数、単射境界、実現繊維の個数、初等規則番号と半径一比較は後続の層へ残す。
 
 住処は有限型と自然数だけであり、実数体・複素数体は現れない。
 -/
 import Mathlib.Data.Fintype.Card
 import Mathlib.Data.Fintype.Pi
+import Mathlib.Data.ZMod.Basic
 import CellularAutomata.EssentialDependency
 
 namespace CellularAutomata.CyclicRuleRestriction
@@ -289,6 +294,68 @@ theorem card_global_realized_maps (q : C → D → C) (v₀ : C)
     _ = 2 ^ Fintype.card (AdmissibleInput (q v₀)) := by rw [card_state]
     _ = 2 ^ (2 ^ Fintype.card (Image (q v₀))) := by
       rw [card_admissible_inputs]
+
+/-- 半径 r の整数オフセットを -r,…,r の順で持つ有限添字型。 -/
+abbrev Offset (r : ℕ) := Fin (2 * r + 1)
+
+/-- 有限添字を実際の整数オフセット -r,…,r へ送る。 -/
+def signedOffset (r : ℕ) (j : Offset r) : ℤ := (j.val : ℤ) - (r : ℤ)
+
+theorem signedOffset_mem_interval (r : ℕ) (j : Offset r) :
+    -(r : ℤ) ≤ signedOffset r j ∧ signedOffset r j ≤ (r : ℤ) := by
+  have hj := j.isLt
+  simp only [signedOffset]
+  omega
+
+theorem signedOffset_injective (r : ℕ) : Function.Injective (signedOffset r) := by
+  intro j k h
+  apply Fin.ext
+  simp only [signedOffset] at h
+  omega
+
+/-- 周期 L の巡回舞台で、セル v から整数オフセットを見た射影。 -/
+def cyclicProjection (L r : ℕ) [NeZero L] (v : ZMod L) (j : Offset r) : ZMod L :=
+  v + (signedOffset r j : ZMod L)
+
+/--
+同じセルへ射影されることは、二つの整数オフセットの差が周期 L で
+整除されることと同値である。セル位置 v は両辺から消去される。
+-/
+theorem cyclicProjection_collision_iff_dvd (L r : ℕ) [NeZero L]
+    (v : ZMod L) (j k : Offset r) :
+    cyclicProjection L r v j = cyclicProjection L r v k ↔
+      (L : ℤ) ∣ signedOffset r j - signedOffset r k := by
+  rw [cyclicProjection, cyclicProjection, add_left_cancel_iff]
+  constructor
+  · intro h
+    have hd : (L : ℤ) ∣ signedOffset r k - signedOffset r j :=
+      (ZMod.intCast_eq_intCast_iff_dvd_sub (signedOffset r j) (signedOffset r k) L).mp h
+    simpa only [neg_sub] using hd.neg_right
+  · intro hd
+    apply (ZMod.intCast_eq_intCast_iff_dvd_sub (signedOffset r j) (signedOffset r k) L).mpr
+    simpa only [neg_sub] using hd.neg_right
+
+/-- 巡回舞台のオフセット衝突関係は基準セルの選び方に依存しない。 -/
+theorem cyclicProjection_same_collision (L r : ℕ) [NeZero L] (v₀ : ZMod L) :
+    SameCollisionRelation (fun v => cyclicProjection L r v) v₀ := by
+  intro v j k
+  rw [cyclicProjection_collision_iff_dvd, cyclicProjection_collision_iff_dvd]
+
+/-- 具体的な巡回射影では、大域写像の等号を基準セルの両立入力上で判定できる。 -/
+theorem cyclicGlobalRealizedMap_eq_iff_restriction (L r : ℕ) [NeZero L]
+    (v₀ : ZMod L) (g h : (Offset r → State) → State) :
+    globalRealizedMap (fun v => cyclicProjection L r v) g =
+        globalRealizedMap (fun v => cyclicProjection L r v) h ↔
+      SameRestriction (cyclicProjection L r v₀) g h :=
+  globalRealizedMap_eq_iff_restriction
+    (fun v => cyclicProjection L r v) v₀ (cyclicProjection_same_collision L r v₀) g h
+
+/-- 具体的な巡回射影が実現する異なる大域写像の個数。 -/
+theorem card_cyclic_global_realized_maps (L r : ℕ) [NeZero L] (v₀ : ZMod L) :
+    Fintype.card (GlobalRealizedMap (fun v => cyclicProjection L r v)) =
+      2 ^ (2 ^ Fintype.card (Image (cyclicProjection L r v₀))) :=
+  card_global_realized_maps
+    (fun v => cyclicProjection L r v) v₀ (cyclicProjection_same_collision L r v₀)
 
 end
 

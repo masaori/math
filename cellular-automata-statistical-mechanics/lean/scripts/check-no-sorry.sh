@@ -65,6 +65,12 @@ targets=(
   CellularAutomata.CyclicRuleRestriction.card_admissible_inputs
   CellularAutomata.CyclicRuleRestriction.card_truth_tables
   CellularAutomata.CyclicRuleRestriction.card_global_realized_maps
+  CellularAutomata.CyclicRuleRestriction.signedOffset_mem_interval
+  CellularAutomata.CyclicRuleRestriction.signedOffset_injective
+  CellularAutomata.CyclicRuleRestriction.cyclicProjection_collision_iff_dvd
+  CellularAutomata.CyclicRuleRestriction.cyclicProjection_same_collision
+  CellularAutomata.CyclicRuleRestriction.cyclicGlobalRealizedMap_eq_iff_restriction
+  CellularAutomata.CyclicRuleRestriction.card_cyclic_global_realized_maps
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.scale_apply
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.add_support
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.neg_support
