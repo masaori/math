@@ -67,6 +67,18 @@ targets=(
   Ising2D.epsilon_mul_Y_mul_Z_next_of_last
   Ising2D.sum_sigmaZ_sigmaZ_eq_jordanWigner
   Ising2D.V1pauli_eq_jordanWigner
+  Ising2D.mulVec_mem_sector_of_commute_epsilon
+  Ising2D.Y_mul_Z_next_mulVec_mem_sector
+  Ising2D.V1JordanWigner_generator_mulVec_mem_sector
+  Ising2D.V1fixed_generator_mulVec_mem_sector
+  Ising2D.H1JordanWigner_mulVec_eq_H1
+  Ising2D.V1_generators_mulVec_eq
+  Ising2D.V1_generators_pow_mulVec_eq
+  Ising2D.V1_generator_partialSums_mulVec_eq
+  Ising2D.V1pauli_mulVec_eq_V1
+  Ising2D.V1_restrictsOnSector_of_opposite_sign
+  Ising2D.V1_restrictsOnEvenSector
+  Ising2D.V1_restrictsOnOddSector
   Ising2D.Conjugation.T_mul
   Ising2D.Conjugation.T_one
   Ising2D.Conjugation.T_add

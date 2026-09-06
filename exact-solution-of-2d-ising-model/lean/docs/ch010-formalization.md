@@ -42,6 +42,10 @@
 | `Ising2D.Y_mul_Z_next_of_not_last` / `epsilon_mul_Y_mul_Z_next_of_last` | 非境界項 `Y_mZ_{m+1}` と周期境界項 `εY_MZ_1` の Pauli 表示 | 同 Step 1–3 |
 | `Ising2D.H1JordanWigner` / `sum_sigmaZ_sigmaZ_eq_jordanWigner` | Jordan–Wigner 二次式と `∑_mσ^z_mσ^z_{m+1}=iH_1` | 同 Step 4 |
 | `Ising2D.V1pauli_eq_jordanWigner` | **`V_1=exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M-εY_MZ_1))`**（`M>=2`） | `V1_in_Z_Y_epsilon` |
+| `Ising2D.Y_mul_Z_next_mulVec_mem_sector` / `V1JordanWigner_generator_mulVec_mem_sector` / `V1fixed_generator_mulVec_mem_sector` | **`W` と二つの生成子が固有空間を保つこと** | `V1_restriction_to_eigenspaces` Step 3 |
+| `Ising2D.H1JordanWigner_mulVec_eq_H1` / `V1_generators_mulVec_eq` | **`ηsign=-η` のときの固有ベクトル上の生成子一致** | 同 Step 4 |
+| `Ising2D.V1_generators_pow_mulVec_eq` / `V1_generator_partialSums_mulVec_eq` / `V1pauli_mulVec_eq_V1` | **ベクトル作用の冪を直接帰納し、有限部分和と指数級数の極限を一致させる**（`M>=2`） | 同 Step 5, 6 |
+| `Ising2D.V1_restrictsOnSector_of_opposite_sign` / `V1_restrictsOnEvenSector` / `V1_restrictsOnOddSector` | **`RestrictsOnSector` を一般の反対符号と実際の偶奇二セクターについて導出** | `V1_restriction_to_eigenspaces` |
 | `Ising2D.V1pauli_eq_diagonal` | パウリ表示の `V_1` も対角 | `V1_component_equals_pauli` Step 1, 2 |
 | `Ising2D.V1pauli_eq_V1comp` | **2 つの `V_1` は同一の行列** | `V1_component_equals_pauli` |
 | `Ising2D.V1_component_equals_pauli` | 同上を原文どおり成分（`μ, μ'`）で述べた形 | 同上 |
@@ -137,11 +141,11 @@
 
 ---
 
-## 3. 形式化できなかった主張・条件つきになった主張
+## 3. 条件つきになった主張と残る同期
 
 | 主張 | 状況 | 記録 |
 | --- | --- | --- |
-| `sector_replacement_of_V1` と、それに依存する `partition_function_sector_decomposition` | **仮定 `RestrictsOnSector` つきで形式化**。仮定の中身は 004 章の `V1_restriction_to_eigenspaces`（Lean 未形式化） | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
+| `sector_replacement_of_V1` と、それに依存する `partition_function_sector_decomposition` | **既存の定理形は仮定 `RestrictsOnSector` つき**。仮定自体は `M>=2` の下で `V1_restrictsOnEvenSector` / `V1_restrictsOnOddSector` により導出済み。下流から仮定を除いて格子幅条件を渡す同期は別単位として残す | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
 | `V2_in_Z_Y` | `V_2` の Jordan–Wigner 行列表示は未形式化。独立な本文項目なので、今回形式化した `V_1` の表示へ混在させない | 本ファイル |
 | `epsilon_projector_properties` (4) の「`im P^{(±)} = 𝓕^{(±)}`」 | 部分空間の等式としてではなく、**2 つの包含をベクトルの言葉で**述べた（`epsProj_mulVec_mem` / `epsProj_mulVec_eq_self`）。`𝓕^{(±)}` を `Submodule` として導入すると 004 章の `def_eigenspaces_of_epsilon` の形式化が要り、本タスクの範囲外になるため | 本ファイル |
 | `bridge_000_remark_overview`（記号の対応の説明） | 主張ではなく記号の宣言なので、定理としては形式化していない。内容（`K_1 = J'`, `K_2 = J`）は `partitionFunctionC_eq_trace` が実際に成り立つことで裏づけた | `docs/tasks/2026-07_lean-ch009-013/002_ch010_Nrow_positive_is_necessary.md` |
@@ -176,5 +180,5 @@ lake build            # 成功（警告のみ）
 ./scripts/check-no-sorry.sh   # exit 0
 ```
 
-`scripts/check-no-sorry.sh` の `targets` には本章の主要定理 62 本を追記済み。
+`scripts/check-no-sorry.sh` の `targets` には本章の主要定理を追記済み。
 数値検証は `sagemath/check/043_claim_transfer_matrix_bridge/`（5 チェック全 PASS）。

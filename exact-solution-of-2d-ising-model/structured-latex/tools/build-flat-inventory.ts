@@ -804,7 +804,7 @@ const v1RestrictionFormalizationBoundaryEvidenceSha256 = [
   ],
   [
     "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
-    "42d00a102c41be1953d4b3dcd764e25b48dd17ac41f3d84b3f255a2bba9699b1",
+    "27f048c017470ba3fb83a7636e8326316315e6c3ab0925460f7df6f956718170",
   ],
   [
     "lean/Ising2D/Part010/Claim012_SectorDecomposition.lean",
@@ -15338,12 +15338,11 @@ const isingModelSectionBoundaries = [{
   formalizationEvidence: {
     leanFile: "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
     downstreamLeanFile: "lean/Ising2D/Part010/Claim012_SectorDecomposition.lean",
-    currentStatus: "本文の出力は、固有値 η の固有ベクトル f 上で V1 と境界符号を固定した V1^{(±)} の作用が一致することであり、Lean の RestrictsOnSector の出力と一致する。複号対応は ηsign=-η で、偶セクターが (η,ηsign)=(1,-1)、奇セクターが (-1,1) である。M>=2 の下で使う直接入力の V1 の Jordan–Wigner 行列表示は V1JordanWigner.lean の V1pauli_eq_jordanWigner として形式化済みである。一方、RestrictsOnSector は M に下限条件を課さず、二つの符号を互いに無関係な複素数として取り、求める作用等式そのものを仮定としている。Lean の TensorPow と mulVec は本文の end と F を具体化するため、この同一視は追加の形式化単位を要しない。残るのは、この行列表示から M>=2 と ηsign=-η の下で RestrictsOnSector の実際の二つの符号対を導く制限定理と、M>=2 を下流へ渡して hresPlus・hresMinus を除く同期の二単位である。",
+    currentStatus: "本文の出力は、固有値 η の固有ベクトル f 上で V1 と境界符号を固定した V1^{(±)} の作用が一致することである。Lean では V1pauli_eq_jordanWigner を入力に、本文 Step 3–6 と同じ順で固有空間の不変性、ηsign=-η の生成子作用、冪の帰納、有限部分和、指数級数の極限をベクトル作用として直接証明し、V1_restrictsOnSector_of_opposite_sign へ閉じた。実際の符号対は V1_restrictsOnEvenSector が (η,ηsign)=(1,-1)、V1_restrictsOnOddSector が (-1,1) を与える。M>=2 は Jordan–Wigner 行列表示にだけ使い、TensorPow と mulVec が本文の end と F を具体化する。残る別単位は、M>=2 を下流へ渡して hresPlus・hresMinus を除く同期である。",
     boundaryCandidates: [
-      "M>=2 と ηsign=-η の下で V1 の固有空間への制限を証明する",
       "セクター置換と分配関数のセクター分解から RestrictsOnSector 仮定を除く",
     ],
-    nextTickUnit: "M>=2 と ηsign=-η の下で V1 の固有空間への制限を証明する一項",
+    nextTickUnit: "セクター置換と分配関数のセクター分解から RestrictsOnSector 仮定を除き、M>=2 を渡す一項",
   },
   boundaryEvidence: "章内依存順29の一項は、V1 の Jordan–Wigner 行列表示、全スピン反転行列の固有空間、ノルムの基本性質の数ベクトル版を入力に、全スピン反転行列を固有値 ±1 へ置き換え、行列指数関数の部分和を通じて V1 の作用を各固有空間へ制限する主張へ閉じる。直後の章内依存順30は、境界項の符号を固定した二つの指数行列 V1^{(±)} を定義するだけで順29を参照せず、順29も証明内の局所的な略記として同じ指数行列を自足的に定めるため、二項に相互依存はない。順30は転送行列とサイト作用素の記号定義を順29と共有する一方、V1 の Jordan–Wigner 表示、固有空間、一因子の反可換性、ノルムの基本性質の数ベクトル版、作用対応の積・指数保存を入力から外し、線型写像の指数関数の定義を追加するため、外部入力集合も切り替わる。したがって順29の後で一項の節を閉じる。生成時に対象と全外部入力の本文 fingerprint、章内順、節末出力の一意性、順30の直接依存・本文 fingerprint、二項間の相互非依存、および入力集合の追加・除外を固定検査する。",
   readabilityStatus: "対象は複素行列の積・反交換・有限和・部分和の極限を一段ずつ展開しているが、行列と抽象線型写像の対応を証明全体で往復しており、現行の説明粒度検査では未完成である。外部入力にも、集合と代数構造の記号、複素数、混在したサイト作用素の記号、ノルムの基本性質の数ベクトル版、行列と線型写像の対応および指数関数保存に説明粒度の未解決が残る。直後の V1^{(±)} の定義自体は現行の説明粒度検査に合格している。",

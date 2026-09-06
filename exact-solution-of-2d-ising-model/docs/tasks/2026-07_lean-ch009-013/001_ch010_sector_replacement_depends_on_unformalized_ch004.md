@@ -38,11 +38,14 @@ def RestrictsOnSector (M : ℕ) (K1 ηsign η : ℂ) : Prop :=
 
 `sector_replacement_pow` 以降は `sector_replacement_of_V1` から**純代数的に**従うので、この仮定は `sector_replacement_of_V1` の 1 点にだけ効いている。
 
-## 残作業（本タスクの範囲外）
+## 2026-09-06 の進展と残作業
 
-004 章の `V1_restriction_to_eigenspaces` を Lean で証明し、
-`RestrictsOnSector` を仮定から定理へ格上げする。そうすれば
-`partition_function_sector_decomposition` は無条件の定理になる。
+004 章の `V1_restriction_to_eigenspaces` は、`M>=2` と `ηsign=-η` の下で
+`V1_restrictsOnSector_of_opposite_sign` として証明した。実際の二つの符号対も
+`V1_restrictsOnEvenSector` と `V1_restrictsOnOddSector` で得られる。
+
+残る別単位は、`sector_replacement_of_V1` と `partition_function_sector_decomposition` から
+`RestrictsOnSector` 仮定を除き、代わりに `M>=2` を渡す同期である。今回そこには進んでいない。
 
 なお `Ising2D.partition_function_in_pauli_form`（章 010 の `bridge_007`、
 `Z(J,J') = tr((V_1V_2)^{N_row})`）は**この仮定を使っていない**。
