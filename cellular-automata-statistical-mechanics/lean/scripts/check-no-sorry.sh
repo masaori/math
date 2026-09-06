@@ -59,8 +59,12 @@ targets=(
   CellularAutomata.CyclicRuleRestriction.extendConfiguration_on_image
   CellularAutomata.CyclicRuleRestriction.realized_inputs
   CellularAutomata.CyclicRuleRestriction.realizedMap_eq_iff_restriction
+  CellularAutomata.CyclicRuleRestriction.globalRealizedMap_eq_iff_restriction
+  CellularAutomata.CyclicRuleRestriction.extendRestriction_on_admissible
+  CellularAutomata.CyclicRuleRestriction.restrictGlobalMap_of_realized
   CellularAutomata.CyclicRuleRestriction.card_admissible_inputs
   CellularAutomata.CyclicRuleRestriction.card_truth_tables
+  CellularAutomata.CyclicRuleRestriction.card_global_realized_maps
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.scale_apply
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.add_support
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.neg_support
