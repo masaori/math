@@ -315,6 +315,7 @@ EOF
 | `Ising2D.matExpUnits` / `smulUnits` | `exp X` と 0 でないスカラー倍の可逆性 | 補助（原文は暗黙に可逆性を使用） |
 | `Ising2D.V1Units` / `V1halfUnits` / `V2Units` | 転送行列を単元 `(TensorPow M)ˣ` として | 同上（`V_2` には `s_2 > 0` が要る） |
 | `Ising2D.isUnit_V1` / `isUnit_V1half` / `isUnit_V2` | 上記の `IsUnit` 版 | 同上 |
+| `Ising2D.H1JordanWigner` / `sum_sigmaZ_sigmaZ_eq_jordanWigner` / `V1pauli_eq_jordanWigner` | `V_1 = exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M-εY_MZ_1))` | `V1_in_Z_Y_epsilon` |
 | `Ising2D.TConj` | `T_g : X ↦ g X g⁻¹` を **ℂ-代数自己同型**として | `def_T_g` |
 | `Ising2D.TConj_linear` / `TConj_trans` | `T_g` の ℂ-線型性、`T_g ∘ T_h = T_{gh}` | `linearity_of_T`, `conjugation_is_ring_homomorphism` (3) |
 | `Ising2D.TV` | `T_{(V)}(X) = T_{g_1}(T_{g_2}(T_{g_1}(X)))` | `def_T_V` |
@@ -541,8 +542,8 @@ Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `su
        `IsingConst` の成分が `K_1, K_2^*` の双曲線関数であること — **原文が明示していない前提**
 
      いずれも上の「原文の問題」表を参照
-  3. `V_1, V_2` を `Z, Y, ε` で表す表式（`parts/004_転送行列/002_claim_...`）。
-     `V_1`, `V_2` の定義自体は `Ising2D.V1`, `Ising2D.V2` で形式化済み
+  3. ~~`V_1` を `Z, Y, ε` で表す表式（`V1_in_Z_Y_epsilon`）~~ **形式化済み**
+     （`Ising2D/Part010/V1JordanWigner.lean`）。`V_2` を `Z, Y` で表す表式は未形式化。
   4. `ε = (√-1)^M Z_1 Y_1 ⋯ Z_M Y_M`（積）の完全形。
      現状は再帰形 `xString_succ_eq` まで。順序つき積（`List.prod` / `Finset.noncommProd`）の
      整備が要る

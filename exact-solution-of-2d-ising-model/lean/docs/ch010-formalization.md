@@ -38,6 +38,10 @@
 | `Ising2D.rowEnergy` / `Ising2D.interEnergy` | `V_1, V_2` の指数の肩 | `def_transfer_matrix`（001 章） |
 | `Ising2D.V1comp` / `Ising2D.V2comp` | **成分で定義された `V_1, V_2`**（001 章） | 同上 |
 | `Ising2D.V1pauli` | **`V_1 = exp(K_1 ∑_m σ^z_m σ^z_{m+1})`**（004 章） | `def_transfer_matrix_symbols` |
+| `Ising2D.pauliY_mul_pauliX_eq` / `pauliX_mul_pauliY_eq` | `σ^yσ^x=-iσ^z`, `σ^xσ^y=iσ^z` | `V1_in_Z_Y_epsilon` Step 0 |
+| `Ising2D.Y_mul_Z_next_of_not_last` / `epsilon_mul_Y_mul_Z_next_of_last` | 非境界項 `Y_mZ_{m+1}` と周期境界項 `εY_MZ_1` の Pauli 表示 | 同 Step 1–3 |
+| `Ising2D.H1JordanWigner` / `sum_sigmaZ_sigmaZ_eq_jordanWigner` | Jordan–Wigner 二次式と `∑_mσ^z_mσ^z_{m+1}=iH_1` | 同 Step 4 |
+| `Ising2D.V1pauli_eq_jordanWigner` | **`V_1=exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M-εY_MZ_1))`**（`M>=2`） | `V1_in_Z_Y_epsilon` |
 | `Ising2D.V1pauli_eq_diagonal` | パウリ表示の `V_1` も対角 | `V1_component_equals_pauli` Step 1, 2 |
 | `Ising2D.V1pauli_eq_V1comp` | **2 つの `V_1` は同一の行列** | `V1_component_equals_pauli` |
 | `Ising2D.V1_component_equals_pauli` | 同上を原文どおり成分（`μ, μ'`）で述べた形 | 同上 |
@@ -127,6 +131,9 @@
 * `def_config_basis_iso`
   — Lean では添字型 `Conf M = Fin M → Fin 2` が多重添字そのものなので、
     主張は「成分ごとの全単射の直積」という 1 行であり抽象化の余地が無い。
+* `V1_in_Z_Y_epsilon`
+  — 同じ具体的な `V_1` の Pauli 表示と Jordan–Wigner 表示を突き合わせる主張である。
+    一般的な内容は既存の `siteProd_mul` と `siteProd_smul_family` に分離済みである。
 
 ---
 
@@ -135,6 +142,7 @@
 | 主張 | 状況 | 記録 |
 | --- | --- | --- |
 | `sector_replacement_of_V1` と、それに依存する `partition_function_sector_decomposition` | **仮定 `RestrictsOnSector` つきで形式化**。仮定の中身は 004 章の `V1_restriction_to_eigenspaces`（Lean 未形式化） | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
+| `V2_in_Z_Y` | `V_2` の Jordan–Wigner 行列表示は未形式化。独立な本文項目なので、今回形式化した `V_1` の表示へ混在させない | 本ファイル |
 | `epsilon_projector_properties` (4) の「`im P^{(±)} = 𝓕^{(±)}`」 | 部分空間の等式としてではなく、**2 つの包含をベクトルの言葉で**述べた（`epsProj_mulVec_mem` / `epsProj_mulVec_eq_self`）。`𝓕^{(±)}` を `Submodule` として導入すると 004 章の `def_eigenspaces_of_epsilon` の形式化が要り、本タスクの範囲外になるため | 本ファイル |
 | `bridge_000_remark_overview`（記号の対応の説明） | 主張ではなく記号の宣言なので、定理としては形式化していない。内容（`K_1 = J'`, `K_2 = J`）は `partitionFunctionC_eq_trace` が実際に成り立つことで裏づけた | `docs/tasks/2026-07_lean-ch009-013/002_ch010_Nrow_positive_is_necessary.md` |
 
@@ -168,5 +176,5 @@ lake build            # 成功（警告のみ）
 ./scripts/check-no-sorry.sh   # exit 0
 ```
 
-`scripts/check-no-sorry.sh` の `targets` には本章の主要定理 58 本を追記済み。
+`scripts/check-no-sorry.sh` の `targets` には本章の主要定理 62 本を追記済み。
 数値検証は `sagemath/check/043_claim_transfer_matrix_bridge/`（5 チェック全 PASS）。

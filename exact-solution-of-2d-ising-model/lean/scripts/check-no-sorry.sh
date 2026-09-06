@@ -63,6 +63,10 @@ targets=(
   Ising2D.centralizer_is_scalar
   Ising2D.centralizer_is_scalar_abstract
   Ising2D.matExp_units_conj
+  Ising2D.Y_mul_Z_next_of_not_last
+  Ising2D.epsilon_mul_Y_mul_Z_next_of_last
+  Ising2D.sum_sigmaZ_sigmaZ_eq_jordanWigner
+  Ising2D.V1pauli_eq_jordanWigner
   Ising2D.Conjugation.T_mul
   Ising2D.Conjugation.T_one
   Ising2D.Conjugation.T_add

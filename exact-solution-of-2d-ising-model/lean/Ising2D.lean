@@ -61,6 +61,7 @@ import Ising2D.Part010.Definition001_ConfigBasisIso
 import Ising2D.Part010.Claim002_SigmaZDiagonal
 import Ising2D.Part010.Claim003_ExpDiagonal
 import Ising2D.Part010.Definition000_ComponentTransfer
+import Ising2D.Part010.V1JordanWigner
 import Ising2D.Part010.Claim004_V1Bridge
 import Ising2D.Part010.Claim005_TwoByTwoTransfer
 import Ising2D.Part010.Claim006_V2Bridge
