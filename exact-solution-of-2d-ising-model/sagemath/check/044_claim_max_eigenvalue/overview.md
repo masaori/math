@@ -41,6 +41,15 @@ c(M)^{N_row} <= Z <= 2^M c(M)^{N_row},   c(M) = sup_{||x||=1} x^T W x
 | 01 | check_01_W_properties.sage | `W` の実対称性・正定値性・成分の正値性・`ε` との可換性・`tr(W^n)=tr((V_1V_2)^n)` | PASS | （run-log.txt 参照） |
 | 02 | check_02_sandwich.sage | `c^n <= tr(W^n) <= 2^M c^n`、`‖Wx‖ <= c‖x‖`、`Z` との一致 | PASS | （run-log.txt 参照） |
 | 03 | check_03_sector_split.sage | `c(M) = max(c_+,c_-)`、`W P^{(±)} = V^{(±)} P^{(±)}`、最大が `(+)` セクターにあること | PASS | （run-log.txt 参照） |
+| — | check_B_P_equals_C_P.sage | `BP=CP` | PASS | 最大相対残差 `5.476e-16` |
+| — | check_W_P_equals_B_V2_B_P.sage | `WP=BV_2BP` | PASS | 最大相対残差 `0.000e+00` |
+| — | check_B_V2_B_P_equals_B_V2_C_P.sage | `BV_2BP=BV_2CP` | PASS | 最大相対残差 `5.043e-16` |
+| — | check_B_V2_C_P_equals_B_V2_P_C.sage | `BV_2CP=BV_2PC` | PASS | 最大相対残差 `1.846e-16` |
+| — | check_B_V2_P_C_equals_B_P_V2_C.sage | `BV_2PC=BPV_2C` | PASS | 最大相対残差 `2.694e-16` |
+| — | check_B_P_V2_C_equals_C_P_V2_C.sage | `BPV_2C=CPV_2C` | PASS | 最大相対残差 `4.548e-16` |
+| — | check_C_P_V2_C_equals_C_V2_P_C.sage | `CPV_2C=CV_2PC` | PASS | 最大相対残差 `2.987e-16` |
+| — | check_C_V2_P_C_equals_C_V2_C_P.sage | `CV_2PC=CV_2CP` | PASS | 最大相対残差 `1.978e-16` |
+| — | check_C_V2_C_P_equals_V_pm_P.sage | `CV_2CP=V^{(±)}P` | PASS | 最大相対残差 `0.000e+00` |
 
 ## 備考
 
@@ -52,6 +61,9 @@ c(M)^{N_row} <= Z <= 2^M c(M)^{N_row},   c(M) = sup_{||x||=1} x^T W x
 - **最大が `(+)` セクターにあること**は check_03 で確認しているが、本文ではこの事実を使っていない。
   `W` の成分がすべて正なので Perron–Frobenius から期待されるとおりの結果である。
   この事実は次章（偶セクターの固有値）の指針として `docs/tasks/free-energy-roadmap` に記録した。
+- 行単位検査は `M=2,3,4`、結合定数 7 組、両セクターについて、左右の行列の作用素ノルムによる
+  相対残差を `1e-9` 以下と判定する。指数行列を `CDF`、実パラメータを `RDF` で評価する箇所が
+  数値計算上の `ℝ/ℂ` への脱出であり、有限個の浮動小数点計算は一般の等式の証明ではない。
 
 ## 実行方法
 
@@ -61,8 +73,8 @@ for f in sagemath/check/044_claim_max_eigenvalue/check_*.sage; do sage "$f"; don
 
 ## 実行ログ
 
-`run-log.txt` に実際の実行出力（全チェックの残差と PASS/FAIL）を保存してある。
+既存三検査の実行出力は `run-log.txt`、行単位検査の実行出力は `logs/` の各ファイルに保存してある。
 
 ## 分割後の対応
 
-プログラミングによる検証では check_03 の r_max が上限の最大値分解、r_rep が射影後の転送行列の表示を調べる。有限個のパラメータでの浮動小数点計算であり、一般証明ではない。BP=CP および射影子を移す各行に対応する独立した式変形検査は未実施。Leanでも射影後の表示は未形式化であり、偶セクター接続では仮定として残る。
+プログラミングによる検証では check_03 の r_max が上限の最大値分解、r_rep が射影後の転送行列の最終表示を調べる。これとは独立に、上表の九検査が `BP=CP` と、その後の等式鎖を一行ずつ調べる。すべて PASS したが、有限個のパラメータでの浮動小数点計算であり、一般証明ではない。Lean では射影後の表示が未形式化であり、偶セクター接続では仮定として残る。
