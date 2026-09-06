@@ -84,6 +84,32 @@ theorem finite_window_exact_agreement (L : PositiveStage) (s : ℕ)
   · intro hjk
     exact congrArg (projection L) hjk
 
+/-- 有限窓の等号関係が各半径で安定する、本文の局所収束の定義。 -/
+def LocallyConverges : Prop :=
+  ∀ s : ℕ, ∃ L₀ : PositiveStage, ∀ L : PositiveStage,
+    L₀.val ≤ L.val → finiteWindowRelation L s = integerWindowRelation s
+
+/-- 有限巡回舞台の族は、安定段階 `2s+1` により整数舞台へ局所収束する。 -/
+theorem stage_family_locally_converges : LocallyConverges := by
+  intro s
+  let L₀ : PositiveStage := ⟨2 * s + 1, by omega⟩
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  exact finite_window_exact_agreement L s hL
+
+/-- 半径と、その有限窓上の二元状態表からなる有限局所観測の総体。 -/
+def FiniteObservationCatalogue := Σ s : ℕ, Offset s → State
+
+/-- 半径 `s` の有限局所観測は `2^(2s+1)` 個である。 -/
+theorem finite_observation_stage_card (s : ℕ) :
+    Fintype.card (Offset s → State) = 2 ^ (2 * s + 1) := by
+  rw [Fintype.card_fun, card_state]
+  rfl
+
+/-- 自然数で添字づけた有限局所観測の総体は高々可算である。 -/
+theorem finite_observation_catalogue_countable : Countable FiniteObservationCatalogue := by
+  infer_instance
+
 /-- 各有限段階の比較写像は整数全体では単射でない。 -/
 theorem projection_not_injective (L : PositiveStage) :
     ¬ Function.Injective (projection L) := by
