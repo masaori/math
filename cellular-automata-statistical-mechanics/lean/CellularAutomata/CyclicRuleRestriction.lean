@@ -14,6 +14,8 @@ claim_cyclic_rule_global_equality              → globalRealizedMap_eq_iff_rest
 def_integer_offset_interval                    → Offset, signedOffset
 def_cyclic_offset_projection                   → cyclicProjection
 claim_cyclic_offset_collision                  → cyclicProjection_collision_iff_dvd
+claim_cyclic_offset_image_count                → card_cyclicProjection_image
+claim_cyclic_offset_injective_boundary         → cyclicProjection_injective_iff
 
 有限巡回舞台の各セルで整数オフセットを射影した写像を q として固定する。
 このファイルは本文の証明が q の有限像と同じ像を持つオフセットの一致だけを使う部分を、
@@ -22,7 +24,8 @@ content/cyclic-offset-projection.ts の別の主張であり、このファイ�
 全セルの射影 q_v が同じ衝突関係を持つことを仮定し、その条件から局所核を
 全セルの大域写像の等号へ接着する。後半で整数オフセットの具体的な巡回射影を定め、
 衝突と周期整除の同値から、この共通衝突仮定と大域接着の特殊化を導く。
-像の元数、単射境界、実現繊維の個数、初等規則番号と半径一比較は後続の層へ残す。
+像の元数と単射境界までを具体的な巡回射影について導く。
+実現繊維の個数、初等規則番号と半径一比較は後続の層へ残す。
 
 住処は有限型と自然数だけであり、実数体・複素数体は現れない。
 -/
@@ -77,6 +80,14 @@ noncomputable def representative (q : D → C) (w : Image q) : D :=
 theorem representative_projects (q : D → C) (w : Image q) :
     q (representative q w) = w.val :=
   Classical.choose_spec w.property
+
+/-- 単射な写像の定義域と像の間の全単射。 -/
+noncomputable def imageEquivOfInjective (q : D → C) (hinj : Function.Injective q) :
+    D ≃ Image q where
+  toFun j := ⟨q j, ⟨j, rfl⟩⟩
+  invFun := representative q
+  left_inv j := hinj (representative_projects q ⟨q j, ⟨j, rfl⟩⟩)
+  right_inv w := Subtype.ext (representative_projects q w)
 
 /-- 両立入力を像 M 上の値へ戻す写像 T。 -/
 noncomputable def descend (q : D → C) (a : AdmissibleInput q) : Image q → State :=
@@ -335,6 +346,79 @@ theorem cyclicProjection_collision_iff_dvd (L r : ℕ) [NeZero L]
     apply (ZMod.intCast_eq_intCast_iff_dvd_sub (signedOffset r j) (signedOffset r k) L).mpr
     simpa only [neg_sub] using hd.neg_right
 
+/-- オフセット数が周期以下なら、巡回射影は単射である。 -/
+theorem cyclicProjection_injective_of_width_le (L r : ℕ) [NeZero L]
+    (v : ZMod L) (hwidth : 2 * r + 1 ≤ L) :
+    Function.Injective (cyclicProjection L r v) := by
+  intro j k hjk
+  have hd : (L : ℤ) ∣ signedOffset r j - signedOffset r k :=
+    (cyclicProjection_collision_iff_dvd L r v j k).mp hjk
+  have hj := signedOffset_mem_interval r j
+  have hk := signedOffset_mem_interval r k
+  have habs : |signedOffset r j - signedOffset r k| < (L : ℤ) := by
+    rw [abs_lt]
+    omega
+  have hzero : signedOffset r j - signedOffset r k = 0 :=
+    Int.eq_zero_of_abs_lt_dvd hd habs
+  exact signedOffset_injective r (sub_eq_zero.mp hzero)
+
+/-- 巡回射影の像の元数は、周期とオフセット数の小さい方である。 -/
+theorem card_cyclicProjection_image (L r : ℕ) [NeZero L] (v : ZMod L) :
+    Fintype.card (Image (cyclicProjection L r v)) = min L (2 * r + 1) := by
+  by_cases hwidth : 2 * r + 1 ≤ L
+  · have hinj := cyclicProjection_injective_of_width_le L r v hwidth
+    have hcard : Fintype.card (Image (cyclicProjection L r v)) =
+        Fintype.card (Offset r) := by
+      exact Fintype.card_congr (imageEquivOfInjective (cyclicProjection L r v) hinj).symm
+    simpa [Nat.min_eq_right hwidth] using hcard
+  · have hperiod : L < 2 * r + 1 := Nat.lt_of_not_ge hwidth
+    let firstPeriod : Fin L → Image (cyclicProjection L r v) := fun i =>
+      ⟨cyclicProjection L r v ⟨i.val, i.isLt.trans hperiod⟩,
+        ⟨⟨i.val, i.isLt.trans hperiod⟩, rfl⟩⟩
+    have hfirst : Function.Injective firstPeriod := by
+      intro i k hik
+      have hprojection :
+          cyclicProjection L r v ⟨i.val, i.isLt.trans hperiod⟩ =
+            cyclicProjection L r v ⟨k.val, k.isLt.trans hperiod⟩ :=
+        congrArg Subtype.val hik
+      have hd : (L : ℤ) ∣
+          signedOffset r ⟨i.val, i.isLt.trans hperiod⟩ -
+            signedOffset r ⟨k.val, k.isLt.trans hperiod⟩ :=
+        (cyclicProjection_collision_iff_dvd L r v _ _).mp hprojection
+      have habs :
+          |signedOffset r ⟨i.val, i.isLt.trans hperiod⟩ -
+            signedOffset r ⟨k.val, k.isLt.trans hperiod⟩| < (L : ℤ) := by
+        simp only [signedOffset]
+        rw [abs_lt]
+        omega
+      have hzero :
+          signedOffset r ⟨i.val, i.isLt.trans hperiod⟩ -
+            signedOffset r ⟨k.val, k.isLt.trans hperiod⟩ = 0 :=
+        Int.eq_zero_of_abs_lt_dvd hd habs
+      apply Fin.ext
+      simp only [signedOffset] at hzero
+      omega
+    have hlower : L ≤ Fintype.card (Image (cyclicProjection L r v)) := by
+      simpa using Fintype.card_le_of_injective firstPeriod hfirst
+    have hupper : Fintype.card (Image (cyclicProjection L r v)) ≤ L := by
+      simpa using Fintype.card_le_of_injective
+        (fun w : Image (cyclicProjection L r v) => w.val) Subtype.val_injective
+    have hcard : Fintype.card (Image (cyclicProjection L r v)) = L :=
+      Nat.le_antisymm hupper hlower
+    simpa [Nat.min_eq_left hperiod.le] using hcard
+
+/-- オフセットの巡回射影が単射であるための必要十分条件。 -/
+theorem cyclicProjection_injective_iff (L r : ℕ) [NeZero L] (v : ZMod L) :
+    Function.Injective (cyclicProjection L r v) ↔ 2 * r + 1 ≤ L := by
+  constructor
+  · intro hinj
+    have hcard : Fintype.card (Image (cyclicProjection L r v)) =
+        Fintype.card (Offset r) := by
+      exact Fintype.card_congr (imageEquivOfInjective (cyclicProjection L r v) hinj).symm
+    rw [card_cyclicProjection_image] at hcard
+    simpa using hcard
+  · exact cyclicProjection_injective_of_width_le L r v
+
 /-- 巡回舞台のオフセット衝突関係は基準セルの選び方に依存しない。 -/
 theorem cyclicProjection_same_collision (L r : ℕ) [NeZero L] (v₀ : ZMod L) :
     SameCollisionRelation (fun v => cyclicProjection L r v) v₀ := by
@@ -353,9 +437,10 @@ theorem cyclicGlobalRealizedMap_eq_iff_restriction (L r : ℕ) [NeZero L]
 /-- 具体的な巡回射影が実現する異なる大域写像の個数。 -/
 theorem card_cyclic_global_realized_maps (L r : ℕ) [NeZero L] (v₀ : ZMod L) :
     Fintype.card (GlobalRealizedMap (fun v => cyclicProjection L r v)) =
-      2 ^ (2 ^ Fintype.card (Image (cyclicProjection L r v₀))) :=
-  card_global_realized_maps
-    (fun v => cyclicProjection L r v) v₀ (cyclicProjection_same_collision L r v₀)
+      2 ^ (2 ^ min L (2 * r + 1)) := by
+  rw [card_global_realized_maps
+    (fun v => cyclicProjection L r v) v₀ (cyclicProjection_same_collision L r v₀)]
+  rw [card_cyclicProjection_image]
 
 end
 
