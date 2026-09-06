@@ -63,6 +63,8 @@ targets=(
   CellularAutomata.CyclicRuleRestriction.extendRestriction_on_admissible
   CellularAutomata.CyclicRuleRestriction.restrictGlobalMap_of_realized
   CellularAutomata.CyclicRuleRestriction.card_admissible_inputs
+  CellularAutomata.CyclicRuleRestriction.card_restriction_fiber
+  CellularAutomata.CyclicRuleRestriction.card_global_realization_fiber
   CellularAutomata.CyclicRuleRestriction.card_truth_tables
   CellularAutomata.CyclicRuleRestriction.card_global_realized_maps
   CellularAutomata.CyclicRuleRestriction.signedOffset_mem_interval
@@ -74,6 +76,7 @@ targets=(
   CellularAutomata.CyclicRuleRestriction.cyclicProjection_same_collision
   CellularAutomata.CyclicRuleRestriction.cyclicGlobalRealizedMap_eq_iff_restriction
   CellularAutomata.CyclicRuleRestriction.card_cyclic_global_realized_maps
+  CellularAutomata.CyclicRuleRestriction.card_cyclic_global_realization_fiber
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.scale_apply
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.add_support
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.neg_support

@@ -16,6 +16,7 @@ def_cyclic_offset_projection                   → cyclicProjection
 claim_cyclic_offset_collision                  → cyclicProjection_collision_iff_dvd
 claim_cyclic_offset_image_count                → card_cyclicProjection_image
 claim_cyclic_offset_injective_boundary         → cyclicProjection_injective_iff
+claim_cyclic_rule_realization_fiber_count      → card_cyclic_global_realization_fiber
 
 有限巡回舞台の各セルで整数オフセットを射影した写像を q として固定する。
 このファイルは本文の証明が q の有限像と同じ像を持つオフセットの一致だけを使う部分を、
@@ -24,8 +25,8 @@ content/cyclic-offset-projection.ts の別の主張であり、このファイ�
 全セルの射影 q_v が同じ衝突関係を持つことを仮定し、その条件から局所核を
 全セルの大域写像の等号へ接着する。後半で整数オフセットの具体的な巡回射影を定め、
 衝突と周期整除の同値から、この共通衝突仮定と大域接着の特殊化を導く。
-像の元数と単射境界までを具体的な巡回射影について導く。
-実現繊維の個数、初等規則番号と半径一比較は後続の層へ残す。
+像の元数、単射境界、実現繊維の個数までを具体的な巡回射影について導く。
+初等規則番号と半径一比較は後続の層へ残す。
 
 住処は有限型と自然数だけであり、実数体・複素数体は現れない。
 -/
@@ -59,13 +60,7 @@ def AdmissibleInput (q : D → C) :=
 
 instance (q : D → C) : Fintype (AdmissibleInput q) := by
   classical
-  exact Fintype.ofFinset
-    (Finset.univ.filter (fun a : D → State => ∀ j k : D, q j = q k → a j = a k))
-    (fun a => by
-      change a ∈ Finset.univ.filter (fun b : D → State =>
-        ∀ j k : D, q j = q k → b j = b k) ↔
-        ∀ j k : D, q j = q k → a j = a k
-      simp)
+  exact Subtype.fintype _
 
 /-- 像 M 上の値をオフセット入力へ戻す写像 U。 -/
 def pullback (q : D → C) (y : Image q → State) : AdmissibleInput q :=
@@ -151,6 +146,46 @@ def realizedMap (q : D → C) (g : (D → State) → State) : (C → State) → 
 def SameRestriction (q : D → C) (g h : (D → State) → State) : Prop :=
   ∀ a : AdmissibleInput q, g a.val = h a.val
 
+/-- 周期境界と両立しないオフセット入力。 -/
+def InadmissibleInput (q : D → C) :=
+  {a : D → State // ¬ ∀ j k : D, q j = q k → a j = a k}
+
+noncomputable instance (q : D → C) : Fintype (InadmissibleInput q) :=
+  Subtype.fintype _
+
+/-- 基準表 g と両立入力上で一致する表の繊維。 -/
+def RestrictionFiber (q : D → C) (g : (D → State) → State) :=
+  {h : (D → State) → State // SameRestriction q h g}
+
+noncomputable instance (q : D → C) (g : (D → State) → State) :
+    Fintype (RestrictionFiber q g) := by
+  classical
+  exact Subtype.fintype _
+
+/-- 両立入力では g、両立しない入力では c を使って真理値表を貼り合わせる。 -/
+noncomputable def extendInadmissibleTable (q : D → C) (g : (D → State) → State)
+    (c : InadmissibleInput q → State) : (D → State) → State :=
+  fun a => if ha : ∀ j k : D, q j = q k → a j = a k then g a else c ⟨a, ha⟩
+
+/-- 基準表と同じ制限を持つ表は、両立しない入力上の値と全単射で対応する。 -/
+noncomputable def inadmissibleTableEquivRestrictionFiber (q : D → C)
+    (g : (D → State) → State) :
+    (InadmissibleInput q → State) ≃ RestrictionFiber q g where
+  toFun c := ⟨extendInadmissibleTable q g c, fun a => by
+    simp only [extendInadmissibleTable, dif_pos a.property]⟩
+  invFun h a := h.val a.val
+  left_inv c := by
+    funext a
+    simp only [extendInadmissibleTable, dif_neg a.property]
+    apply congrArg c
+    exact Subtype.ext rfl
+  right_inv h := by
+    apply Subtype.ext
+    funext a
+    by_cases ha : ∀ j k : D, q j = q k → a j = a k
+    · simpa only [extendInadmissibleTable, dif_pos ha] using (h.property ⟨a, ha⟩).symm
+    · simp only [extendInadmissibleTable, dif_neg ha]
+
 /-- 実現写像の等号は両立入力上の表の等号と同値である。 -/
 theorem realizedMap_eq_iff_restriction (q : D → C)
     (g h : (D → State) → State) :
@@ -178,6 +213,15 @@ def globalRealizedMap (q : C → D → C) (g : (D → State) → State) :
     (C → State) → (C → State) :=
   fun x v => g (fun j => x (q v j))
 
+/-- 基準表 g と同じ大域写像を与えるオフセット表の繊維。 -/
+def GlobalRealizationFiber (q : C → D → C) (g : (D → State) → State) :=
+  {h : (D → State) → State // globalRealizedMap q h = globalRealizedMap q g}
+
+noncomputable instance (q : C → D → C) (g : (D → State) → State) :
+    Fintype (GlobalRealizationFiber q g) := by
+  classical
+  exact Subtype.fintype _
+
 /-- 全セルの射影が基準セルと同じオフセット衝突関係を持つという仮定。 -/
 def SameCollisionRelation (q : C → D → C) (v₀ : C) : Prop :=
   ∀ v j k, q v j = q v k ↔ q v₀ j = q v₀ k
@@ -202,6 +246,17 @@ theorem globalRealizedMap_eq_iff_restriction (q : C → D → C) (v₀ : C)
     let a : AdmissibleInput (q v₀) :=
       ⟨fun j => x (q v j), fun j k hjk => congrArg x ((hcollision v j k).mpr hjk)⟩
     exact hrestriction a
+
+/-- 共通の衝突関係の下で、大域実現繊維と制限繊維は同じ表を台に持つ全単射である。 -/
+noncomputable def globalFiberEquivRestrictionFiber (q : C → D → C) (v₀ : C)
+    (hcollision : SameCollisionRelation q v₀) (g : (D → State) → State) :
+    GlobalRealizationFiber q g ≃ RestrictionFiber (q v₀) g where
+  toFun h := ⟨h.val,
+    (globalRealizedMap_eq_iff_restriction q v₀ hcollision h.val g).mp h.property⟩
+  invFun h := ⟨h.val,
+    (globalRealizedMap_eq_iff_restriction q v₀ hcollision h.val g).mpr h.property⟩
+  left_inv h := Subtype.ext rfl
+  right_inv h := Subtype.ext rfl
 
 /-- 両立入力上の表を、両立しない入力では状態零として全入力へ延長する。 -/
 noncomputable def extendRestriction (q₀ : D → C)
@@ -286,6 +341,38 @@ theorem card_admissible_inputs (q : D → C) :
       Fintype.card_congr (pullbackEquiv q).symm
     _ = Fintype.card State ^ Fintype.card (Image q) := Fintype.card_fun
     _ = 2 ^ Fintype.card (Image q) := by rw [card_state]
+
+/-- 同じ制限を持つ表の個数は、両立しない入力への自由な二元値割り当ての個数である。 -/
+theorem card_restriction_fiber (q : D → C) (g : (D → State) → State) :
+    Fintype.card (RestrictionFiber q g) =
+      2 ^ (2 ^ Fintype.card D - 2 ^ Fintype.card (Image q)) := by
+  classical
+  have hcomplement : Fintype.card (InadmissibleInput q) =
+      Fintype.card (D → State) - Fintype.card (AdmissibleInput q) := by
+    exact Fintype.card_subtype_compl
+      (fun a : D → State => ∀ j k : D, q j = q k → a j = a k)
+  calc
+    Fintype.card (RestrictionFiber q g) =
+        Fintype.card (InadmissibleInput q → State) :=
+      Fintype.card_congr (inadmissibleTableEquivRestrictionFiber q g).symm
+    _ = Fintype.card State ^ Fintype.card (InadmissibleInput q) := Fintype.card_fun
+    _ = 2 ^ Fintype.card (InadmissibleInput q) := by rw [card_state]
+    _ = 2 ^ (Fintype.card (D → State) - Fintype.card (AdmissibleInput q)) := by
+      rw [hcomplement]
+    _ = 2 ^ (2 ^ Fintype.card D - 2 ^ Fintype.card (Image q)) := by
+      rw [Fintype.card_fun, card_state, card_admissible_inputs]
+
+/-- 同じ大域写像を与える表の個数を、オフセット数と射影像の元数で数える。 -/
+theorem card_global_realization_fiber (q : C → D → C) (v₀ : C)
+    (hcollision : SameCollisionRelation q v₀) (g : (D → State) → State) :
+    Fintype.card (GlobalRealizationFiber q g) =
+      2 ^ (2 ^ Fintype.card D - 2 ^ Fintype.card (Image (q v₀))) := by
+  calc
+    Fintype.card (GlobalRealizationFiber q g) =
+        Fintype.card (RestrictionFiber (q v₀) g) :=
+      Fintype.card_congr (globalFiberEquivRestrictionFiber q v₀ hcollision g)
+    _ = 2 ^ (2 ^ Fintype.card D - 2 ^ Fintype.card (Image (q v₀))) :=
+      card_restriction_fiber (q v₀) g
 
 /-- D 上の二元値真理値表は 2^{2^{|D|}} 個である。 -/
 theorem card_truth_tables :
@@ -441,6 +528,16 @@ theorem card_cyclic_global_realized_maps (L r : ℕ) [NeZero L] (v₀ : ZMod L) 
   rw [card_global_realized_maps
     (fun v => cyclicProjection L r v) v₀ (cyclicProjection_same_collision L r v₀)]
   rw [card_cyclicProjection_image]
+
+/-- 具体的な巡回射影で同じ大域写像を与えるオフセット表の個数。 -/
+theorem card_cyclic_global_realization_fiber (L r : ℕ) [NeZero L]
+    (v₀ : ZMod L) (g : (Offset r → State) → State) :
+    Fintype.card
+      (GlobalRealizationFiber (fun v => cyclicProjection L r v) g) =
+        2 ^ (2 ^ (2 * r + 1) - 2 ^ min L (2 * r + 1)) := by
+  rw [card_global_realization_fiber
+    (fun v => cyclicProjection L r v) v₀ (cyclicProjection_same_collision L r v₀) g]
+  rw [Fintype.card_fin, card_cyclicProjection_image]
 
 end
 
