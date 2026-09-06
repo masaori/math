@@ -22,6 +22,9 @@ Lean で抽象化してみると、効いているのは次だけである。
 * **対称形の分解（`partition_function_sector_decomposition` の Step 3）**:
   `B (B V B)^n = (B B V)^n B` は結合法則だけで成り立つ
   （原文が「結合法則で括り直すだけ」と書いているとおり）。
+* **射影後の対称形における因子の置き換え（`symmetrized_transfer_matrix_on_sectors`）**:
+  `BP = CP` と、`C`, `V` が `P` と可換であること、および結合法則だけで
+  `BVB P = CVC P` が成り立つ。射影子の冪等性も、行列であることも使わない。
 -/
 import Mathlib.Algebra.Group.Commute.Defs
 import Mathlib.Algebra.Ring.Invertible
@@ -118,6 +121,33 @@ theorem pow_mul_proj {P a b a' : R} (hP : P * P = P)
         _ = a * (b * Y) := by rw [ih]
         _ = a' * (b * Y) := hstep
         _ = (a' * b) ^ (n + 1) * P := by rw [pow_succ']; simp only [mul_assoc, hYdef]
+
+section SymmetricSectorReplacement
+
+variable {S : Type*} [Semigroup S]
+
+/-- **人手本文 `symmetrized_transfer_matrix_on_sectors` の必要十分版。**
+
+`BP = CP` かつ `C`, `V` が `P` と可換なら、対称形でも `BVB P = CVC P` となる。
+証明に効いているのはこの三つの関係と結合法則だけである。 -/
+theorem sandwich_mul_proj_eq {B C V P : S} (hBP : B * P = C * P)
+    (hCP : Commute C P) (hVP : Commute V P) :
+    B * V * B * P = C * V * C * P := by
+  calc
+    B * V * B * P = B * V * (B * P) := by rw [mul_assoc]
+    _ = B * V * (C * P) := by rw [hBP]
+    _ = B * V * (P * C) := by rw [hCP.eq]
+    _ = B * (V * P) * C := by simp only [mul_assoc]
+    _ = B * (P * V) * C := by rw [hVP.eq]
+    _ = (B * P) * V * C := by simp only [mul_assoc]
+    _ = (C * P) * V * C := by rw [hBP]
+    _ = C * (P * V) * C := by simp only [mul_assoc]
+    _ = C * (V * P) * C := by rw [← hVP.eq]
+    _ = C * V * (P * C) := by simp only [mul_assoc]
+    _ = C * V * (C * P) := by rw [← hCP.eq]
+    _ = C * V * C * P := by simp only [mul_assoc]
+
+end SymmetricSectorReplacement
 
 /-- **`(B V B)^n` の対称形の解消**（原文 `partition_function_sector_decomposition` Step 3）。 -/
 theorem mul_pow_conj_left (B V : R) : ∀ n : ℕ, B * (B * V * B) ^ n = (B * B * V) ^ n * B

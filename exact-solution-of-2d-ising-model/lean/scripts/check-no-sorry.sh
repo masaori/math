@@ -592,6 +592,8 @@ targets=(
   Ising2D.physicalV1halfC_eq_map
   Ising2D.physicalV2C_eq_map
   Ising2D.physicalSymTransferC_eq_map
+  Ising2D.NecSuf.sandwich_mul_proj_eq
+  Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym
   Ising2D.symTransfer_isSymm
   Ising2D.mulVec_eq_zero_iff_of_isUnit
   Ising2D.symTransfer_posDef

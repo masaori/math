@@ -3923,28 +3923,36 @@ const sectorSplitEvidenceSha256 = [
   ],
   [
     "lean/docs/ch011-formalization.md",
-    "f3a865176d68b1b4fba7447d52d0593add001961ba5ebc9c576b0f8f52ebe103"
+    "d2f8884ff7280cc7d8848e10ea9293a5eaab040d1e0208ea51139e8dea1603ae"
+  ],
+  [
+    "lean/Ising2D/NecSuf/Projector.lean",
+    "a5a41e66bcd98363b44a8e468c0d002ae7622b4e7088dd0f052b886b528f49e5"
+  ],
+  [
+    "lean/Ising2D/Part011/PhysicalSymTransferBridge.lean",
+    "7f975a8989d4b13190ee3e6272dfee567868001438491a4b4d2f710bb6bf260b"
   ],
   [
     "lean/Ising2D/Part011/Claim010_SectorDecomposition.lean",
-    "1bdbf5b43b52dcdcee4399aaf2dbd9c0eb4fc406735c08f7940f5eafbc5a070b"
+    "056ad55ff3fcd8f11f19e8b1bf9f54dc308e830de34f4f61b7040cefcc339b29"
   ],
   [
     "lean/docs/ch018-formalization.md",
-    "454ed09ed10f2fc49678acec9f76aad3e0ae11ea8fbcc7b39725b20db2385390"
+    "82aaaad9d3eba9aafd657ab7399b81b201d69e3df88f380cdaac762d737043c1"
   ],
   [
     "lean/Ising2D/Part018/Theorem009_CPlusEqualsLambda.lean",
-    "5adf251df92d6451efefa54b3e9c67f07c8efeed1a3e3f358d632209042a93f8"
+    "f53ca96d1e4181ebce5d8ff8c853f82e83c39fb344e7134b16375692505ddb09"
   ],
   [
     "lean/Ising2D/Part018/Theorem013_OnsagerUnconditional.lean",
-    "a9f1c6896fd987d6fd8895f6a33ed3a6d406091e3124ddba0a0d7b9388314316"
+    "e716b5a6c5b6efa095485ac02ead127eb39579dbcf8fd462d1643c07e578d73c"
   ]
 ];
 for (const [path, expected] of sectorSplitEvidenceSha256) {
   if (createHash("sha256").update(readFileSync(join(projectDir, path!))).digest("hex") !== expected) {
-    throw new Error(`セクター分割のSageMath実検査・Lean未形式化の対応が変わりました: ${path}`);
+    throw new Error(`セクター分割のSageMath実検査・Lean形式化の対応が変わりました: ${path}`);
   }
 }
 const setAndAlgebraNotationEntry = entries.find((entry) =>
@@ -15768,13 +15776,13 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "セクター射影後の転送行列の表示",
   chapter: "2次元イジングモデル",
-  status: "構造確定・本文粒度確認済み・SageMath行単位検査済み・形式化未解決・外部入力粒度未解決",
+  status: "構造確定・本文粒度確認済み・SageMath行単位検査済み・Lean形式化済み・外部入力粒度未解決",
   entryIds: [sectorRepresentationEntry.id],
   input: ["転送行列の平方根とセクターへの制限", "セクター射影子の積と可換性"],
   externalInputEntryIds: [...sectorRepresentationEntry.dependsOnEntryIds].sort(),
   output: ["W P^{(±)} = V^{(±)} P^{(±)}"],
   formalizationEvidence: {
-    leanFile: "lean/docs/ch011-formalization.md",
+    leanFile: "lean/Ising2D/Part011/PhysicalSymTransferBridge.lean",
     sageMathFiles: [
       "sagemath/check/044_claim_max_eigenvalue/check_B_P_equals_C_P.sage",
       "sagemath/check/044_claim_max_eigenvalue/check_W_P_equals_B_V2_B_P.sage",
@@ -15786,10 +15794,10 @@ const isingModelSectionBoundaries = [{
       "sagemath/check/044_claim_max_eigenvalue/check_C_V2_P_C_equals_C_V2_C_P.sage",
       "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage",
     ],
-    currentStatus: "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。V1 の固有空間への制限と下流の RestrictsOnSector 仮定除去は形式化済みである。章011の実行列 W と複素 TensorPow 上の物理的転送行列の同一視も physicalSymTransferC_eq_map で形式化済みである。射影表示の Lean 接続には、この同一視を既存の Vsym と epsProj へ接続する最終定理だけが別単位として残る。",
+    currentStatus: "プログラミングによる有限校正では、BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。Lean の physicalSymTransferR_map_mul_epsProj_eq_Vsym は、実行列 W の複素化、K1/2 による半指数のセクター置換、Vsym と epsProj の可換移動を同じ順に接続して閉じた。このうち射影子移動に効く構造だけを、任意の半群上の NecSuf.sandwich_mul_proj_eq に分離し、具体定理をその特殊化として導いた。",
   },
   boundaryEvidence: "射影表示は、転送行列の平方根をセクター制限後の平方根へ置き換え、射影子を各因子の間で一段ずつ移して一つの行列等式へ閉じる。直後の上限最大値分解は射影表示を使わず、全体と各セクターのレイリー商の上限および W のセクター不変性へ入力を切り替える。二項は意味的に相互非依存であり、提示順だけを依存辺へ混ぜないため、射影表示を一項節として閉じる。",
-  readabilityStatus: "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる検証では九つの等式を一ファイル一等式で判定した。Lean未形式化は節配置や本文完成と区別して保持する。",
+  readabilityStatus: "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる有限校正は九つの等式を一ファイル一等式で判定する。Lean の具体版は一般の M>=2 と η^2=1 の下で同じ置換・可換移動を証明し、必要十分版は射影子の冪等性も行列構造も不要であることを示す。",
 }, {
   name: "全体の上限と二つのセクター上限の最大値分解",
   chapter: "2次元イジングモデル",

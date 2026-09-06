@@ -7,6 +7,8 @@
   （ラベル **`def_transfer_matrix_square_root`**）
 * `maxeig_001a_definition_symmetrized_transfer_matrix`
   （ラベル **`def_symmetrized_transfer_matrix`**）
+* `maxeig_claim_symmetrized_transfer_matrix_on_sectors`
+  （ラベル **`symmetrized_transfer_matrix_on_sectors`**）
 
 章 011 の Rayleigh 商は実行列 `W` 上で述べる一方、章 010 までの物理的転送行列は
 `TensorPow M = Matrix (Conf M) (Conf M) ℂ` 上で定義されている。本ファイルでは、
@@ -17,6 +19,7 @@
 -/
 import Ising2D.Part010.Claim004_V1Bridge
 import Ising2D.Part010.Claim006_V2Bridge
+import Ising2D.Part010.Claim012_SectorDecomposition
 import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
 
 namespace Ising2D
@@ -98,5 +101,49 @@ theorem physicalSymTransferC_eq_map {K2 : ℝ} (K1 : ℝ) (hK2 : 0 < K2) :
   rw [physicalSymTransferC, physicalSymTransferR, symTransfer,
     Matrix.map_mul, Matrix.map_mul, ← physicalV1halfC_eq_map K1,
     ← physicalV2C_eq_map hK2]
+
+/-! ## セクター射影後の表示 -/
+
+/-- **人手本文 `symmetrized_transfer_matrix_on_sectors`:
+`W P^{(±)} = V^{(±)} P^{(±)}`。**
+
+左辺では章 011 の実行列 `W` を成分ごとに `ℂ` へ埋め込む。右辺では
+セクター固有値 `η` に対して境界符号を `-η` とした章 010 の `Vsym` を使う。
+証明は本文と同じく、`B P = C P` と `P C = C P`, `P V₂ = V₂ P` を
+一行ずつ代入する。ここで使う構造だけを残した必要十分版は
+`Ising2D.NecSuf.sandwich_mul_proj_eq` である。 -/
+theorem physicalSymTransferR_map_mul_epsProj_eq_Vsym {K2 : ℝ} (K1 : ℝ)
+    (hM : 2 ≤ M) (hK2 : 0 < K2) {η : ℂ} (hη : η * η = 1) :
+    (physicalSymTransferR M K1 K2).map Complex.ofRealHom * epsProj M η
+      = Vsym M (K1 : ℂ) (-η) (Real.sinh (2 * K2)) (((Kstar K2 : ℝ) : ℂ)) *
+          epsProj M η := by
+  rw [← physicalSymTransferC_eq_map K1 hK2]
+  let B : TensorPow M := physicalV1halfC M K1
+  let C : TensorPow M := V1half M (K1 : ℂ) (-η)
+  let V : TensorPow M :=
+    V2pauli M (Real.sinh (2 * K2)) (((Kstar K2 : ℝ) : ℂ))
+  let P : TensorPow M := epsProj M η
+  have hhalf : V1 M (((K1 / 2 : ℝ) : ℂ)) (-η) = C := by
+    dsimp [C]
+    rw [V1, V1half]
+    congr 1
+    rw [Complex.ofReal_div]
+    norm_num
+    module
+  have hBP : B * P = C * P := by
+    dsimp [B, P]
+    rw [physicalV1halfC]
+    calc
+      V1pauli M (((K1 / 2 : ℝ) : ℂ)) * epsProj M η
+          = V1 M (((K1 / 2 : ℝ) : ℂ)) (-η) * epsProj M η :=
+            sector_replacement_of_V1 hM hη
+      _ = C * epsProj M η := by rw [hhalf]
+  have hCP : C * P = P * C := by
+    exact (commute_V1half_epsProj (M := M) (K1 : ℂ) (-η) η).eq
+  have hVP : V * P = P * V := by
+    exact (commute_V2pauli_epsProj (M := M) (Real.sinh (2 * K2))
+      (((Kstar K2 : ℝ) : ℂ)) η).eq
+  change B * V * B * P = C * V * C * P
+  exact NecSuf.sandwich_mul_proj_eq hBP hCP hVP
 
 end Ising2D

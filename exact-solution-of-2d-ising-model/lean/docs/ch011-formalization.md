@@ -44,6 +44,7 @@
 | `Ising2D.physicalV1halfR` / `physicalV2R` / `physicalSymTransferR` | 章 011 の物理的な `V₁^{1/2}`, `V₂`, `W` を実成分で定義 | `def_transfer_matrix_square_root`, `def_symmetrized_transfer_matrix` |
 | `Ising2D.physicalV1halfC` / `physicalSymTransferC` | 同じ物理的行列を章 010 の Pauli 表示から複素行列として定義 | 同上 |
 | **`Ising2D.physicalSymTransferC_eq_map`** | 複素側の物理的転送行列は実行列 `W` の成分ごとの複素化に一致 | **`def_symmetrized_transfer_matrix` の章間接続** |
+| **`Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym`** | 実行列 `W` の複素化について `W P^{(±)} = V^{(±)}P^{(±)}` | **`symmetrized_transfer_matrix_on_sectors`** |
 | `Ising2D.symTransfer_isSymm` | `W` は実対称 | `W_is_real_symmetric_positive_definite` Step 3 |
 | `Ising2D.symTransfer_posDef` | `W` は正定値（合同変換） | 同上 |
 | `Ising2D.mulVec_eq_zero_iff_of_isUnit` | 可逆行列の `mulVec` は単射 | 同上「可逆性」 |
@@ -77,6 +78,7 @@
 | `NecSuf.IsPsdPair.moment_log_convex` | `m_{k+1}² ≤ m_k m_{k+2}` | Step 2 |
 | `NecSuf.IsPdPair.moment_pos` / `W_ker` / `pow_ne_zero_of_ne_zero` | `m_k > 0`、`W` の核は `{0}` | Step 2 冒頭・`W` の可逆性 |
 | `NecSuf.IsPdPair.moment_ratio_le` / `moment_pow_le` | 比の単調性と `(xᵀWx)^n ≤ m_n` | Step 3 前半 |
+| `Ising2D.NecSuf.sandwich_mul_proj_eq` | 任意の半群で `BP=CP` と `C,V` の `P` との可換性から `BVB P=CVC P` | `symmetrized_transfer_matrix_on_sectors` |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
@@ -85,6 +87,7 @@
 | `psd_cauchy_schwarz` | `Ising2D.psd_cauchy_schwarz` | `Ising2D.NecSuf.psd_cauchy_schwarz` | **はい**（`matBilin P` を代入） |
 | `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(Sq)(_pow)` | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`isPsdPair_of_matrix` 経由） |
 | `trace_power_sandwich` | `Ising2D.trace_power_sandwich` | `NecSuf.IsPsdPair.moment_le_pow` / `moment_log_convex` / `NecSuf.IsPdPair.moment_pow_le` | 不等式の中核部分は**はい**。跡と `sup` の部分は ℝ 固有なので具体版のみ |
+| `symmetrized_transfer_matrix_on_sectors` | `Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
 | `Z_equals_trace_of_W` | `Ising2D.trace_symTransfer_pow` | なし（下記） | — |
 | `W_is_real_symmetric_positive_definite` | `Ising2D.symTransfer_isSymm` / `symTransfer_posDef` | なし（下記） | — |
 | `W_has_positive_entries` | `Ising2D.symTransfer_entry_pos` | なし（下記） | — |
@@ -111,6 +114,10 @@
   2. `m_n ≤ tr(W^n)` の証明（`|A_kl| ≤ √(A_kk A_ll)` で平方根を使う）。
   つまり**この章で「実数への脱出」が必要なのはこの 2 点だけ**であり、
   行列の対角化可能性も固有値の存在も要らない。
+
+- **`symmetrized_transfer_matrix_on_sectors` の射影子移動は任意の半群で閉じている。**
+  `BP=CP` と `C,V` が `P` と可換であることだけを使い、`P` の冪等性も、行列・複素数・
+  転送行列であることも使わない。具体版はこの一般定理へ物理的な四因子を特殊化して得られる。
 
 - **`W` の対称性・正定値性・成分の正値性、および `Z = tr(W^n)` は、
   抽象化しても失われる構造がない。**
@@ -144,10 +151,9 @@
 
 | 人手証明 | 状況 | 理由 |
 | --- | --- | --- |
-| `symmetrized_transfer_matrix_on_sectors` `W P^{(±)} = V^{(±)}P^{(±)}` | **未形式化** | `V₁` の固有空間制限、下流のセクター置換、章 011 の実行列 `W` と複素 `TensorPow` 上の物理的転送行列の同一視は形式化済み。残る入力は、この同一視を既存の `Vsym` と `epsProj` へ接続する最終定理である。記録は `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md` |
 | `maxeig_000_remark_overview` | 形式化対象外 | 章の目的を述べた注記であり数学的主張ではない |
 
-（上記以外の 10 ブロックはすべて形式化済み。`sorry` / `admit` はゼロ。）
+（数学的主張を持つブロックはすべて形式化済み。`sorry` / `admit` はゼロ。）
 
 ## 5. 人手証明に見つけた問題
 

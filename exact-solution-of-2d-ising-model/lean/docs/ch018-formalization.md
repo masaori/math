@@ -209,7 +209,7 @@
 | `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 上記10ブロックに依存する。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
 | `def_check_fermi` / `anticommutator_of_check_psi`（章 016） | **`CheckFermi` の仮定** | 本章の形式化時点で Lean 側に `Part016` が無かった |
 | `eigenvalues_of_V_plus`（章 017） | **`VPlusData` の仮定** | 本章の形式化時点で Lean 側に `Part017` が無かった |
-| `W P^{(+)} = V^{(+)} P^{(+)}`（章 011 の `symmetrized_transfer_matrix_on_sectors`） | **`EvenSectorBridge` の仮定** | 章 011 の Lean 形式化もこの行列等式を形式化していない（`lean/docs/ch011-formalization.md`: 「`V^{(±)}`, `V_1^{(±)}` は章 004/010 の対象で、本タスクの担当範囲外の定義に依存する」）。章 019 も同じ扱い |
+| `W P^{(+)} = V^{(+)} P^{(+)}`（章 011 の `symmetrized_transfer_matrix_on_sectors`） | **`EvenSectorBridge` の仮定** | 行列等式自体は章 011 の `physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済み。章 018 の抽象入力 `EvenSectorBridge` と物理パラメータを結ぶ同期は本章の既存構成に残る |
 | `closing_000_remark_overview` | 形式化対象外 | `remark`（本章の位置づけの説明）であり、数学的主張は他ブロックに含まれる |
 
 詳細と一次情報は `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md` に記録した。
@@ -292,7 +292,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`） |
 | `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | **原文が置いている関係**であって形式化の穴ではない（`lean/docs/ch016-formalization.md` 3 章: 「残る仮定は双対関係の 1 つだけ」）。008 章以来 `det A(θ) = 1` に必要 |
-| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 章 011 の `symmetrized_transfer_matrix_on_sectors` が **Lean 未形式化**。`V₁` の固有空間制限、下流のセクター置換、章 011 の実行列 `W` と複素 `TensorPow` 上の物理的転送行列の同一視は形式化済みで、既存の `Vsym`・`epsProj` への最終接続が残る。実行列性のほうは「実行列の `exp` が実行列である」ことを要し、本リポジトリの Lean 側にその補題が無い |
+| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 前半の複素行列等式は章 011 の `physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済み。残るのは `V^{(+)}` の実行列性と、この等式を実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続である |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
 | `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 010 の `V2_component_equals_pauli` / `epsilon_commutes_with_transfer_matrices` に依存。章 011 も同じ形で仮定として受け取っている（`lean/docs/ch011-formalization.md` 3 章） |
 

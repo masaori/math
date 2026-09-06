@@ -22,9 +22,10 @@
 | `hWsymm`, `hWpsd` | `W` は実対称半正定値（`W_is_real_symmetric_positive_definite`） | 011 |
 
 章 011 の物理的な実行列 `W` と、章 010 の Pauli 表示から作る複素行列の同一視は
-`Ising2D.physicalSymTransferC_eq_map` で形式化済みである。一方、この同一視と
-`V^{(±)}`・`epsProj` を接続する射影後の最終等式はまだ形式化していないため、
-本ファイルでは `hWV` を仮定として受け取る。
+`Ising2D.physicalSymTransferC_eq_map`、射影後の最終等式は
+`Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済みである。
+ただし、章 017 の `V^{(+)}` の実行列表示と組み合わせ、この複素行列等式を実ベクトル上の
+`W *ᵥ x = Vr *ᵥ x` へ変換する接続は未形式化なので、本ファイルでは `hWV` を仮定として受け取る。
 -/
 import Ising2D.Part018.Theorem007_MaxEigenvectorEvenSector
 import Ising2D.Part011.Claim010_SectorDecomposition

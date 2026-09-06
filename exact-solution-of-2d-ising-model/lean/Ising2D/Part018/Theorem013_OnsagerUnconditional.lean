@@ -34,7 +34,7 @@
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が `M ≠ 0` を要求する（`CheckFermiSetup.hM`） |
 | `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | 章 016 の結論に残る唯一の仮定（`lean/docs/ch016-formalization.md` 3 章）。008 章以来 `det A(θ) = 1` に必要で、原文が置いている関係である |
-| `bridge` | 章 011 の実行列 `W` と `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 章 011 の `symmetrized_transfer_matrix_on_sectors` は Lean 未形式化。`V₁` の固有空間制限、下流のセクター置換、実行列 `W` と複素 `TensorPow` 上の物理的転送行列の同一視は形式化済みで、既存の `Vsym`・`epsProj` への最終接続が残る |
+| `bridge` | 章 011 の実行列 `W` と `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 章 011 の射影後の複素行列等式は `physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済み。章 017 の `V^{(+)}` の実行列表示と組み合わせ、実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続が残る |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化 |
 | `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 010 の `V2_component_equals_pauli` / `epsilon_commutes_with_transfer_matrices` に依存する（章 011 も同じ形で仮定として受け取っている） |
 
@@ -73,7 +73,7 @@ structure EvenSectorClosureInput (P : IsingParam) (M : ℕ) where
   hM : M ≠ 0
   /-- 双対関係 `c_2 s_2^* = c_2^*`（章 016 に残る唯一の仮定） -/
   hdual : P.const.c2 * P.const.s2star = P.const.c2star
-  /-- 章 011 の `W` と章 017 の `V^{(+)}` の橋渡し（章 011 (2) は Lean 未形式化） -/
+  /-- 章 011 の `W` と章 017 の `V^{(+)}` の実行列上の橋渡し -/
   bridge : EvenSectorBridge M (checkFermiOf P hM) (vPlusDataOf P hM hdual)
   /-- `tr(εV^{(+)}) > 0`（章 018 の `closing_006`。Lean 未形式化） -/
   htr : 0 < ((epsilon M * (vPlusDataOf P hM hdual).V).trace).re

@@ -2836,7 +2836,7 @@
     {
       "name": "セクター射影後の転送行列の表示",
       "chapter": "2次元イジングモデル",
-      "status": "構造確定・本文粒度確認済み・SageMath行単位検査済み・形式化未解決・外部入力粒度未解決",
+      "status": "構造確定・本文粒度確認済み・SageMath行単位検査済み・Lean形式化済み・外部入力粒度未解決",
       "entryIds": [
         "maxeig_claim_symmetrized_transfer_matrix_on_sectors"
       ],
@@ -2859,7 +2859,7 @@
         "W P^{(±)} = V^{(±)} P^{(±)}"
       ],
       "formalizationEvidence": {
-        "leanFile": "lean/docs/ch011-formalization.md",
+        "leanFile": "lean/Ising2D/Part011/PhysicalSymTransferBridge.lean",
         "sageMathFiles": [
           "sagemath/check/044_claim_max_eigenvalue/check_B_P_equals_C_P.sage",
           "sagemath/check/044_claim_max_eigenvalue/check_W_P_equals_B_V2_B_P.sage",
@@ -2871,10 +2871,10 @@
           "sagemath/check/044_claim_max_eigenvalue/check_C_V2_P_C_equals_C_V2_C_P.sage",
           "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage"
         ],
-        "currentStatus": "プログラミングによる検証は、有限個のパラメータについて BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。既存 check_03 の最終残差から独立した検査である。V1 の固有空間への制限と下流の RestrictsOnSector 仮定除去は形式化済みである。章011の実行列 W と複素 TensorPow 上の物理的転送行列の同一視も physicalSymTransferC_eq_map で形式化済みである。射影表示の Lean 接続には、この同一視を既存の Vsym と epsProj へ接続する最終定理だけが別単位として残る。"
+        "currentStatus": "プログラミングによる有限校正では、BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。Lean の physicalSymTransferR_map_mul_epsProj_eq_Vsym は、実行列 W の複素化、K1/2 による半指数のセクター置換、Vsym と epsProj の可換移動を同じ順に接続して閉じた。このうち射影子移動に効く構造だけを、任意の半群上の NecSuf.sandwich_mul_proj_eq に分離し、具体定理をその特殊化として導いた。"
       },
       "boundaryEvidence": "射影表示は、転送行列の平方根をセクター制限後の平方根へ置き換え、射影子を各因子の間で一段ずつ移して一つの行列等式へ閉じる。直後の上限最大値分解は射影表示を使わず、全体と各セクターのレイリー商の上限および W のセクター不変性へ入力を切り替える。二項は意味的に相互非依存であり、提示順だけを依存辺へ混ぜないため、射影表示を一項節として閉じる。",
-      "readabilityStatus": "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる検証では九つの等式を一ファイル一等式で判定した。Lean未形式化は節配置や本文完成と区別して保持する。"
+      "readabilityStatus": "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる有限校正は九つの等式を一ファイル一等式で判定する。Lean の具体版は一般の M>=2 と η^2=1 の下で同じ置換・可換移動を証明し、必要十分版は射影子の冪等性も行列構造も不要であることを示す。"
     },
     {
       "name": "全体の上限と二つのセクター上限の最大値分解",
