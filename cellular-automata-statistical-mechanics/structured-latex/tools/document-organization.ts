@@ -169,6 +169,17 @@ export const documentOrganization = [
         mainLabels: ["claim_cyclic_rule_global_equality", "claim_cyclic_uniform_global_count", "claim_cyclic_radius_one_collapse"],
       },
       {
+        id: "cyclic_stage_local_agreement",
+        title: "有限巡回舞台の族と整数との局所的一致",
+        input: "正の自然数で添字づけた有限剰余代表の族、整数から各有限段階への余り写像、有限整数窓を入力とする。",
+        output: "有限窓上の等号関係が明示した段階以後に整数の等号と完全一致することと、各比較写像が整数全体では単射でない境界を得る。",
+        main: "主張は、半径sの有限窓では周期が2s+1以上なら有限巡回舞台と整数の等号関係が完全一致するが、この局所的一致は大域的な埋め込みや量の収束を含意しないことである。",
+        mainLabels: [
+          "claim_cyclic_stages_eventually_match_integer_window",
+          "claim_cyclic_stage_projection_not_globally_injective",
+        ],
+      },
+      {
         id: "local_representation_and_composition",
         title: "局所表現・逆写像・大域写像の合成",
         input: "本質的依存台、有限大域写像の可逆性、近傍割り当ての合成を入力とする。",

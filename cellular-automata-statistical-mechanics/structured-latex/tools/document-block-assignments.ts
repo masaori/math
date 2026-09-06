@@ -1,5 +1,9 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "cyclic_stage_local_agreement_definition_family": "cyclic_stage_local_agreement",
+  "cyclic_stage_local_agreement_definition_window_relations": "cyclic_stage_local_agreement",
+  "cyclic_stage_local_agreement_claim_eventual_exact_window_agreement": "cyclic_stage_local_agreement",
+  "cyclic_stage_local_agreement_claim_no_global_injection": "cyclic_stage_local_agreement",
   "cyclic_rule_definition_elementary_encoding": "cyclic_uniform_rule_restriction",
   "cyclic_rule_claim_elementary_encoding_bijection": "cyclic_uniform_rule_restriction",
   "cyclic_offset_claim_injective_boundary": "cyclic_offset_finite_images",
