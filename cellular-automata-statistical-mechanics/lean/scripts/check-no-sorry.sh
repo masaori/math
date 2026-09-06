@@ -53,6 +53,13 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.CyclicStageLocalAgreement.projection_preserves_addition
+  CellularAutomata.CyclicStageLocalAgreement.stage_group_laws
+  CellularAutomata.CyclicStageLocalAgreement.projection_surjective
+  CellularAutomata.CyclicStageLocalAgreement.stage_card
+  CellularAutomata.CyclicStageLocalAgreement.finite_window_exact_agreement
+  CellularAutomata.CyclicStageLocalAgreement.projection_not_injective
+  CellularAutomata.CyclicStageLocalAgreement.logarithmicCountSequence_apply
   CellularAutomata.CyclicRuleRestriction.representative_projects
   CellularAutomata.CyclicRuleRestriction.pullback_descend
   CellularAutomata.CyclicRuleRestriction.descend_pullback

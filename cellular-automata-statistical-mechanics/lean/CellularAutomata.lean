@@ -1,6 +1,7 @@
 import CellularAutomata.BinaryCALogarithmicCounts
 import CellularAutomata.PrimeLogarithm
 import CellularAutomata.CyclicRuleRestriction
+import CellularAutomata.CyclicStageLocalAgreement
 -- 入口。すべての .lean をここから import する（import 漏れはビルドも検査もされない）。
 import CellularAutomata.CausalSetPrimaryLiterature
 import CellularAutomata.CausalStructureComparison
