@@ -171,10 +171,11 @@ export const documentOrganization = [
       {
         id: "cyclic_stage_local_agreement",
         title: "有限巡回舞台の族と整数との局所的一致",
-        input: "正の自然数で添字づけた有限剰余代表の族、整数から各有限段階への余り写像、有限整数窓を入力とする。",
-        output: "有限窓上の等号関係が明示した段階以後に整数の等号と完全一致することと、各比較写像が整数全体では単射でない境界を得る。",
-        main: "主張は、半径sの有限窓では周期が2s+1以上なら有限巡回舞台と整数の等号関係が完全一致するが、この局所的一致は大域的な埋め込みや量の収束を含意しないことである。",
+        input: "正の自然数で添字づけた有限剰余代表の族、整数から各有限段階への余り写像、有限整数窓、一つの有限局所真理値表を入力とする。",
+        output: "有限巡回群の族、有限窓での完全一致、各有限段階の大域写像・不動点数・対数順序群値の列と、全配位・量の極限を未定義のまま持ち込まない境界を得る。",
+        main: "主張は、各有限剰余舞台が明示した演算で巡回群をなし、半径sの有限窓では周期が2s+1以上なら整数の等号関係と完全一致する一方、この局所的一致は大域的な埋め込み・全配位の一致・量の収束を含意しないことである。",
         mainLabels: [
+          "claim_cyclic_stage_is_finite_cyclic_group",
           "claim_cyclic_stages_eventually_match_integer_window",
           "claim_cyclic_stage_projection_not_globally_injective",
         ],

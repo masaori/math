@@ -51,6 +51,177 @@ export default defineBlocks([
     ],
   },
   {
+    id: "cyclic_stage_local_agreement_definition_group_operations",
+    kind: "definition",
+    title: { text: "有限剰余代表集合の巡回群演算" },
+    labels: ["def_cyclic_stage_group_operations"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        ref("def_cyclic_stage_family"),
+        " の ",
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " を固定する。任意の ",
+        math(String.raw`a,b\in C_L`),
+        " に対し、有限集合 ",
+        math(String.raw`C_L`),
+        " 上の二項演算、単位元候補、逆元候補を",
+      ]),
+      displayMath(String.raw`a\oplus_L b:=\pi_L(a+b),\qquad
+0_L:=\pi_L(0),\qquad \ominus_L a:=\pi_L(-a)`),
+      paragraph([
+        "で定める。括弧内の加法と負号は整数の演算であり、値は比較写像を通って ",
+        math(String.raw`C_L`),
+        " に属する。代表集合と整数を同一視した群演算は使わない。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_local_agreement_claim_remainder_preserves_addition",
+    kind: "claim",
+    title: { text: "有限剰余への比較写像は整数の加法を巡回演算へ移す" },
+    labels: ["claim_cyclic_stage_projection_preserves_addition"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_cyclic_stage_group_operations"),
+        " の任意の ",
+        math(String.raw`z,w\in\mathbb Z`),
+        " について",
+      ]),
+      displayMath(String.raw`\pi_L(z+w)=\pi_L(z)\oplus_L\pi_L(w)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_cyclic_integer_remainder"),
+        " により ",
+        math(String.raw`z=\ell q+\pi_L(z)`),
+        "、",
+        math(String.raw`w=\ell t+\pi_L(w)`),
+        " を満たす ",
+        math(String.raw`q,t\in\mathbb Z`),
+        " がある。従って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z+w
+&=(\ell q+\pi_L(z))+(\ell t+\pi_L(w))
+  \quad(\because\ \blkref{def_cyclic_integer_remainder})\\
+&=\ell(q+t)+(\pi_L(z)+\pi_L(w))
+  \quad(\because\ \mathbb Z\text{ の結合律と分配律}).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\pi_L(z)+\pi_L(w)`),
+        " をさらに ",
+        math(String.raw`\ell`),
+        " で割った余りが ",
+        math(String.raw`\pi_L(z)\oplus_L\pi_L(w)`),
+        " である（",
+        ref("def_cyclic_stage_group_operations"),
+        "）。上の表示と余りの一意性から主張を得る。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_local_agreement_claim_finite_cyclic_group",
+    kind: "claim",
+    title: { text: "各有限剰余舞台は明示した演算で有限巡回群になる" },
+    labels: ["claim_cyclic_stage_is_finite_cyclic_group"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        ref("def_cyclic_stage_group_operations"),
+        " の組 ",
+        math(String.raw`(C_L,\oplus_L,0_L,\ominus_L)`),
+        " は元数 ",
+        math(String.raw`L`),
+        " の有限巡回群である。比較写像 ",
+        math(String.raw`\pi_L:(\mathbb Z,+,0,-)\to(C_L,\oplus_L,0_L,\ominus_L)`),
+        " は全射な群準同型である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a,b,c\in C_L`),
+        " は余りの代表なので ",
+        math(String.raw`\pi_L(a)=a`),
+        "、",
+        math(String.raw`\pi_L(b)=b`),
+        "、",
+        math(String.raw`\pi_L(c)=c`),
+        " である（",
+        ref("def_cyclic_integer_remainder"),
+        "）。まず結合律は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(a\oplus_L b)\oplus_L c
+&=\pi_L(a+b)\oplus_L\pi_L(c)
+  \quad(\because\ \blkref{def_cyclic_stage_group_operations},\ \pi_L(c)=c)\\
+&=\pi_L((a+b)+c)
+  \quad(\because\ \blkref{claim_cyclic_stage_projection_preserves_addition})\\
+&=\pi_L(a+(b+c))
+  \quad(\because\ \mathbb Z\text{ の加法の結合律})\\
+&=\pi_L(a)\oplus_L\pi_L(b+c)
+  \quad(\because\ \blkref{claim_cyclic_stage_projection_preserves_addition})\\
+&=a\oplus_L(b\oplus_L c)
+  \quad(\because\ \blkref{def_cyclic_stage_group_operations},\ \pi_L(a)=a).
+\end{aligned}`),
+      paragraph(["単位元と逆元はそれぞれ"]),
+      displayMath(String.raw`\begin{aligned}
+0_L\oplus_L a
+&=\pi_L(0+a)
+  \quad(\because\ \blkref{def_cyclic_stage_group_operations},\ \blkref{claim_cyclic_stage_projection_preserves_addition})\\
+&=a
+  \quad(\because\ 0+a=a,\ \pi_L(a)=a),\\
+a\oplus_L0_L
+&=\pi_L(a+0)
+  \quad(\because\ \blkref{def_cyclic_stage_group_operations},\ \blkref{claim_cyclic_stage_projection_preserves_addition})\\
+&=a
+  \quad(\because\ a+0=a,\ \pi_L(a)=a),\\
+a\oplus_L(\ominus_La)
+&=\pi_L(a+(-a))
+  \quad(\because\ \blkref{def_cyclic_stage_group_operations},\ \blkref{claim_cyclic_stage_projection_preserves_addition})\\
+&=0_L
+  \quad(\because\ a+(-a)=0,\ \blkref{def_cyclic_stage_group_operations}),\\
+(\ominus_La)\oplus_La
+&=\pi_L((-a)+a)
+  \quad(\because\ \blkref{def_cyclic_stage_group_operations},\ \blkref{claim_cyclic_stage_projection_preserves_addition})\\
+&=0_L
+  \quad(\because\ (-a)+a=0,\ \blkref{def_cyclic_stage_group_operations}).
+\end{aligned}`),
+      paragraph([
+        "よって群である。各 ",
+        math(String.raw`a\in C_L`),
+        " について、",
+        math(String.raw`\iota(m)=a`),
+        " を満たす ",
+        math(String.raw`m\in\mathbb N`),
+        " がある。",
+        math(String.raw`\pi_L`),
+        " の加法保存を ",
+        math(String.raw`m`),
+        " について反復すると、",
+        math(String.raw`a=\pi_L(\iota(m))`),
+        " は ",
+        math(String.raw`\pi_L(1)`),
+        " を ",
+        math(String.raw`m`),
+        " 回加えた元である（",
+        ref("claim_cyclic_stage_projection_preserves_addition"),
+        "）。従って ",
+        math(String.raw`\pi_L(1)`),
+        " が全体を生成する。元数は ",
+        ref("def_cyclic_integer_remainder"),
+        " により ",
+        math(String.raw`L`),
+        " である。加法保存は前の主張、全射性は ",
+        math(String.raw`a=\pi_L(a)`),
+        " による。",
+      ]),
+    ],
+  },
+  {
     id: "cyclic_stage_local_agreement_claim_eventual_exact_window_agreement",
     kind: "claim",
     title: { text: "有限巡回舞台の族は各有限窓で整数と完全に一致する" },
@@ -126,6 +297,129 @@ L_0\le L\Longrightarrow E_{L,s}=E_{\mathbb Z,s}.`),
 &=\pi_L(\ell)\quad(\because\ \ell=\ell\cdot1+0).
 \end{aligned}`),
       paragraph(["相異なる二整数が同じ値を持つので、単射ではない。"]),
+    ],
+  },
+  {
+    id: "cyclic_stage_local_agreement_definition_global_map_family",
+    kind: "definition",
+    title: { text: "一つの有限真理値表が有限巡回舞台の族に定める大域写像" },
+    labels: ["def_cyclic_stage_global_map_family"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        math(String.raw`r\in\mathbb N`),
+        " と局所真理値表 ",
+        math(String.raw`g:A^{D_r}\to A`),
+        " を固定する。各 ",
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " に対して ",
+        ref("def_cyclic_uniform_rule_map"),
+        " が定める有限自己写像を並べた族を",
+      ]),
+      displayMath(String.raw`\mathcal F_{r,g}:=\bigl(F_{L,r,g}:A^{C_L}\to A^{C_L}\bigr)_{L\in\mathbb N_{>0}}`),
+      paragraph([
+        "と定める。各定義域 ",
+        math(String.raw`A^{C_L}`),
+        " は ",
+        math(String.raw`2^L`),
+        " 元の有限集合であり、族の添字集合だけが高々可算である。異なる ",
+        math(String.raw`L`),
+        " の配位集合を同一視する写像は定めない。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_local_agreement_definition_fixed_point_count_sequence",
+    kind: "definition",
+    title: { text: "有限巡回段階の反復不動点数の列" },
+    labels: ["def_cyclic_stage_fixed_point_count_sequence"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_cyclic_stage_global_map_family"),
+        " と ",
+        math(String.raw`n\in\mathbb N_{>0}`),
+        " に対し、自然数値の列を",
+      ]),
+      displayMath(String.raw`\mathbf Z_{r,g,n}:\mathbb N_{>0}\longrightarrow\mathbb N,\qquad
+\mathbf Z_{r,g,n}(L):=Z_n(F_{L,r,g})`),
+      paragraph([
+        "と定める。各項は ",
+        ref("def_fixed_points_of_iterate"),
+        " の有限集合の元数であり、零も許す。これは各有限段階で定義された列であって、",
+        math(String.raw`L`),
+        " に関する極限または規格化を含まない。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_local_agreement_definition_positive_stage_domain",
+    kind: "definition",
+    title: { text: "正の不動点数を持つ有限巡回舞台サイズの集合" },
+    labels: ["def_cyclic_stage_positive_count_domain"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_cyclic_stage_fixed_point_count_sequence"),
+        " の列に対し、",
+      ]),
+      displayMath(String.raw`\mathsf{StagePos}_{r,g,n}:=
+\{L\in\mathbb N_{>0}:\mathbf Z_{r,g,n}(L)>0\}\subseteq\mathbb N_{>0}`),
+      paragraph([
+        "と定める。これは高々可算な集合である。正でない項へ対数を適用するための既定値は置かない。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_local_agreement_definition_logarithmic_count_sequence",
+    kind: "definition",
+    title: { text: "正の有限巡回段階だけに定義する対数順序群値の列" },
+    labels: ["def_cyclic_stage_logarithmic_count_sequence"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_cyclic_stage_positive_count_domain"),
+        " の定義域から対数順序群への写像を",
+      ]),
+      displayMath(String.raw`\mathbf\Phi_{r,g,n}:\mathsf{StagePos}_{r,g,n}\longrightarrow\Lambda,\qquad
+\mathbf\Phi_{r,g,n}(L):=
+\log_\Lambda\!\left(\frac{\mathbf Z_{r,g,n}(L)}1\right)`),
+      paragraph([
+        "と定める。対数は ",
+        ref("def_prime_logarithm"),
+        " による。定義域では分子が正なので入力は ",
+        math(String.raw`\mathbb Q_{>0}`),
+        " に属する。各項は ",
+        math(String.raw`Z_n(F_{L,r,g})`),
+        " の素因数指数ベクトルである。実対数、除算による規格化、実数体への実現写像は使わない。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_local_agreement_remark_local_and_global_boundaries",
+    kind: "remark",
+    title: { text: "局所一致・全配位・量の極限は別の主張である" },
+    labels: ["remark_cyclic_stage_local_global_limit_boundaries"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("claim_cyclic_stages_eventually_match_integer_window"),
+        " が比較するのは、各固定有限窓 ",
+        math(String.raw`D_s`),
+        " 上の有限な等号関係だけである。",
+        ref("def_cyclic_stage_global_map_family"),
+        " の異なる配位集合 ",
+        math(String.raw`A^{C_L}`),
+        " の間には比較写像を定めておらず、可算無限舞台の全配位集合 ",
+        math(String.raw`A^{\mathbb Z}`),
+        " は非可算である。従って局所一致から全配位の写像の一致は導かない。",
+      ]),
+      paragraph([
+        ref("def_cyclic_stage_fixed_point_count_sequence"),
+        " と ",
+        ref("def_cyclic_stage_logarithmic_count_sequence"),
+        " は有限段階の項だけを定義する。これらの極限または近似を主張するには、比較する終域、各項から終域への写像、規格化、収束概念を別に定義しなければならない。現段階ではそれらを定義していないため、極限値・誤差・収束を主張しない。",
+      ]),
     ],
   },
 ]);
