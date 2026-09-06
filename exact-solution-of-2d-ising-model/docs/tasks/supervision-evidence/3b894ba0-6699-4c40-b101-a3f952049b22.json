@@ -1,0 +1,120 @@
+{
+  "実行識別子": "3b894ba0-6699-4c40-b101-a3f952049b22",
+  "観測時刻": "2026-09-06T20:59:50+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "終了コード": 0,
+    "state": "running",
+    "runs": 6,
+    "pid": 9059,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "2f811ad50d24476e63564a39c657e27f5f42d3207de30629da59bd4c0910e641",
+    "StartCalendarInterval": [
+      {
+        "Hour": 0,
+        "Minute": 43
+      },
+      {
+        "Hour": 2,
+        "Minute": 43
+      },
+      {
+        "Hour": 4,
+        "Minute": 43
+      },
+      {
+        "Hour": 6,
+        "Minute": 43
+      },
+      {
+        "Hour": 8,
+        "Minute": 43
+      },
+      {
+        "Hour": 10,
+        "Minute": 43
+      },
+      {
+        "Hour": 12,
+        "Minute": 43
+      },
+      {
+        "Hour": 14,
+        "Minute": 43
+      },
+      {
+        "Hour": 16,
+        "Minute": 43
+      },
+      {
+        "Hour": 18,
+        "Minute": 43
+      },
+      {
+        "Hour": 20,
+        "Minute": 43
+      },
+      {
+        "Hour": 22,
+        "Minute": 43
+      }
+    ]
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log",
+      "存在": true,
+      "更新時刻": "2026-09-06T20:59:24+09:00",
+      "抽出行": [
+        "2026-09-06 20:43:17 PREPARE: remote default追随を開始",
+        "2026-09-06 20:43:20 START: 論文構成tick",
+        "2026-09-06 20:43:20 モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=/Users/masaori/.codex-coding-agent-0001"
+      ]
+    },
+    {
+      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick-run-20260906T204320-9059.log",
+      "存在": true,
+      "更新時刻": "2026-09-06T20:59:24+09:00",
+      "抽出行": [
+        "workdir: /Users/masaori/git/masaori/math/.codex/worktrees/tick/math-complex-matrix-ising-paper-organization-loop",
+        "model: gpt-5.6-sol",
+        "reasoning effort: high"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "観測時に登録あり・実行中。last exit code 0は前回値で、20:43開始分の終了値は未確認。",
+  "成果比較": {
+    "開始成果": "d9df40ba29cb0c91facbb57932812610fc6238fd",
+    "前回読解終点": "0b591092ff7296977a3b1adb3b226af7f556e57d",
+    "今回読解終点": "d9df40ba29cb0c91facbb57932812610fc6238fd",
+    "確認した成果": [
+      "c6df6f4d6650ae87d5e0c746d693421f332b718d: V1の固有空間制限",
+      "01ab7be1e42d060bb4c19ce335f27ebe14cf00cb: 下流RestrictsOnSector仮定の除去",
+      "aaf05d8fa99d0bdea57dd24ae399b47e8ebf9cef: 実行列Wと複素物理転送行列の同一視"
+    ]
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-06T21:06:16+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究の評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-06T21:06:16+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "24件成功"
+    }
+  ]
+}

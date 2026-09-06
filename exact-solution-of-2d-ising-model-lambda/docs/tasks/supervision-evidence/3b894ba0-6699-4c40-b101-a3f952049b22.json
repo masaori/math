@@ -1,0 +1,65 @@
+{
+  "実行識別子": "3b894ba0-6699-4c40-b101-a3f952049b22",
+  "観測時刻": "2026-09-06T20:59:50+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.ising-lambda-auto-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.ising-lambda-auto-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.ising-lambda-auto-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 21,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist",
+    "存在": true,
+    "sha256": "cbed703002cee81ff8c2c71fd5a6ab508bc0e394ab401a3d247eee1173a6c3c5",
+    "StartCalendarInterval": [
+      {
+        "Minute": 5
+      },
+      {
+        "Minute": 35
+      }
+    ]
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log",
+      "存在": true,
+      "更新時刻": "2026-09-06T20:35:12+09:00",
+      "抽出行": [
+        "2026-09-06 09:35:11 === tick 開始（codex / まとめに入る締切 10:10 / 強制終了 10:20）",
+        "2026-09-06 11:05:09 WARN: ロックが古すぎる（5399 秒）。居座りとみなして掃除する (pid 13367)",
+        "2026-09-06 20:35:12 SKIP: 作業ツリーに未コミットの変更がある（人間が作業中とみなす）"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "観測時に登録あり・非実行中・last exit code 0。直近呼出しは20:35:12に見送り。09:35開始分の終了値は実ログで確認できない。",
+  "成果比較": {
+    "開始成果": "d9df40ba29cb0c91facbb57932812610fc6238fd",
+    "前回読解終点": "0b591092ff7296977a3b1adb3b226af7f556e57d",
+    "今回読解終点": "d9df40ba29cb0c91facbb57932812610fc6238fd",
+    "確認した成果": [
+      "今回区間に新しい統合済み数学成果なし"
+    ]
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-06T21:06:16+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究の評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-06T21:06:16+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "24件成功"
+    }
+  ]
+}
