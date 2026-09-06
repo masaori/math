@@ -309,7 +309,7 @@ EOF
 | `Ising2D.acomm_hatY_hatY` | `[hat(Y)_μ, hat(Y)_ν]₊ = 2M δ^M_{μ+ν,0} I` | 同 4（**原文は「同様」で省略**） |
 | `Ising2D.nextSite` | site 添字の巡回 `m ↦ m+1`（`M` で巻き戻る） | `Z_{M+1} := Z_1` の規約 |
 | `Ising2D.H1` / `Ising2D.H2` | `H_1^{(±)}`, `H_2` | `transfer_matrix_011_definition_H1_H2` |
-| `Ising2D.I_smul_H2_eq_sum_sigmaX` | `√-1 H_2 = ∑_m σ^x_m`（2 つの `V_2` 表式の一致） | 同上（**原文は暗黙**） |
+| `Ising2D.I_smul_H2_eq_sum_sigmaX` / `V2_eq_V2pauli` | `V_2 = (2s_2)^{M/2}\exp(iK_2^*\sum_m Z_mY_m)` | `V2_in_Z_Y`（前者が指数の等式、後者が規格化因子を保った行列等式） |
 | `Ising2D.V1` / `Ising2D.V1half` / `Ising2D.V2` | `V_1^{(±)}`, `(V_1^{(±)})^{1/2}`, `V_2` | `transfer_matrix_007_definition_V1_pm`, `011` |
 | `Ising2D.V1half_sq` | `((V_1^{(±)})^{1/2})^2 = V_1^{(±)}` | 同上（「平方根」であることの確認） |
 | `Ising2D.matExpUnits` / `smulUnits` | `exp X` と 0 でないスカラー倍の可逆性 | 補助（原文は暗黙に可逆性を使用） |
@@ -542,8 +542,9 @@ Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `su
        `IsingConst` の成分が `K_1, K_2^*` の双曲線関数であること — **原文が明示していない前提**
 
      いずれも上の「原文の問題」表を参照
-  3. ~~`V_1` を `Z, Y, ε` で表す表式（`V1_in_Z_Y_epsilon`）~~ **形式化済み**
-     （`Ising2D/Part010/V1JordanWigner.lean`）。`V_2` を `Z, Y` で表す表式は未形式化。
+  3. ~~`V_1` を `Z, Y, ε` で表す表式（`V1_in_Z_Y_epsilon`）と、`V_2` を `Z, Y` で表す表式
+     （`V2_in_Z_Y`）~~ **形式化済み**。前者は `Ising2D/Part010/V1JordanWigner.lean`、後者は
+     `Ising2D.I_smul_H2_eq_sum_sigmaX` と `Ising2D.V2_eq_V2pauli` が閉じる。
   4. `ε = (√-1)^M Z_1 Y_1 ⋯ Z_M Y_M`（積）の完全形。
      現状は再帰形 `xString_succ_eq` まで。順序つき積（`List.prod` / `Finset.noncommProd`）の
      整備が要る

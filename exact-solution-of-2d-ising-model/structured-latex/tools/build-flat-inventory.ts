@@ -788,7 +788,7 @@ const v1RestrictionFormalizationBoundaryEvidenceSha256 = [
   ],
   [
     "lean/Ising2D/Part004/Definition010_H1H2V1V2.lean",
-    "d8a35e2185b4f4a067a09a4323379aec7f6406a4270f8e98aebf6094e12a6686",
+    "dee0db44ec6bb7538ebc8a2ae2c263c54c03edca5f194cb55df62ab27d8ec830",
   ],
   [
     "lean/Ising2D/Part004/Definition000_TransferMatrixSymbols.lean",

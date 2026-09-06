@@ -1,13 +1,15 @@
 /-
 # `H_1^{(±)}`, `H_2` の定義と転送行列 `V_1^{(±)}`, `V_2` の定義
 
-対応する人手証明（正本は `structured-latex/content/*.mjs`）:
+対応する人手証明（正本は `structured-latex/content/*.ts`）:
 
-* `structured-latex/content/004_transfer_matrix.mjs`
+* `structured-latex/content/004_transfer_matrix.ts`
   * `transfer_matrix_001_definition_symbols`（ラベル `def_transfer_matrix_symbols`）
     — `V_1`, `V_2` の定義、`K_i^*`, `c_i`, `s_i`, `c_i^*`, `s_i^*` の定義
   * `transfer_matrix_007_definition_V1_pm`
     — `V_1^{(±)} := exp(√-1 K_1 (Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1))`
+  * `transfer_matrix_003a_claim_V2_in_Z_Y`（ラベル `V2_in_Z_Y`）
+    — `V_2 = (2s_2)^{M/2} exp(√-1 K_2^* (Z_1Y_1 + ⋯ + Z_MY_M))`
   * `transfer_matrix_011_definition_H1_H2`
     — `H_1^{(±)} := Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1`、`H_2 := Z_1 Y_1 + ⋯ + Z_M Y_M`、
       `V_1^{(±)} = exp(√-1 K_1 H_1^{(±)})`、`V_2 = (2 s_2)^{M/2} exp(√-1 K_2^* H_2)`
@@ -55,7 +57,7 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
   `√-1 Z_m Y_m = σ^x_m` が要る。実際 `Z_m Y_m = -√-1 σ^x_m`
   （`Ising2D.Z_mul_Y_same`）なので `√-1 Z_m Y_m = √-1 · (-√-1) σ^x_m = σ^x_m` で一致する。
   原文はこの等式を明示していない（`transfer_matrix_011` は「よって、」とだけ書く）。
-  本ファイルでは `H2_eq_sum_sigmaX`（`√-1 H_2 = ∑_m σ^x_m`）として補って証明する。
+  本ファイルでは `I_smul_H2_eq_sum_sigmaX`（`√-1 H_2 = ∑_m σ^x_m`）として補って証明する。
 -/
 import Ising2D.Part004.Definition009_HatZHatY
 import Ising2D.Representation
@@ -104,8 +106,13 @@ noncomputable def H1 (M : ℕ) (η : ℂ) : TensorPow M :=
 /-- **原文の `H_2 = Z_1 Y_1 + Z_2 Y_2 + ⋯ + Z_M Y_M`**。 -/
 noncomputable def H2 (M : ℕ) : TensorPow M := ∑ m : Fin M, Z m * Y m
 
-/-- 原文 `def_transfer_matrix_symbols` の `V_2` の表式（`exp(K_2^*(σ^x_1 + ⋯))`）と
-`transfer_matrix_011_definition_H1_H2` の表式（`exp(√-1 K_2^* H_2)`）が一致することの根拠。
+/-- 原文 `V2_in_Z_Y` の Step 0–2 に対応する等式。
+
+Step 0–2 の単一サイト計算とクロネッカー積への持ち上げは
+`Ising2D.Z_mul_Y_same` が担い、本定理が各サイトの等式を有限和へ持ち上げる。
+これにより `def_transfer_matrix_symbols` の `V_2` の指数
+`K_2^*(σ^x_1 + ⋯)` と `transfer_matrix_011_definition_H1_H2` の指数
+`√-1 K_2^* H_2` が一致する。
 
 `Z_m Y_m = -√-1 σ^x_m`（`Ising2D.Z_mul_Y_same`）より `√-1 H_2 = ∑_m σ^x_m`。 -/
 theorem I_smul_H2_eq_sum_sigmaX :
