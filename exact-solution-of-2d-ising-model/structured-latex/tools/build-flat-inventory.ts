@@ -707,6 +707,51 @@ const epsilonEigenspacesExpectedDirectDependencies = [
   "transfer_matrix_005_definition_end_isomorphism",
 ].sort();
 const epsilonEigenspacesExpectedContentSha256 = "625aa21f69aa73fcf3e7f955ed87e59306a704737074a15c0acdd7b47fd758e7";
+const epsilonEigenspacesBoundaryCandidates = [
+  "固有値 +1 の固有ベクトル全体 F^{(+)} の定義",
+  "固有値 -1 の固有ベクトル全体 F^{(-)} の定義",
+  "F^{(+)} が複素数上の部分線型空間であること",
+  "F^{(-)} が複素数上の部分線型空間であること",
+] as const;
+const epsilonEigenspacesExpectedBoundaryCandidates = [
+  "固有値 +1 の固有ベクトル全体 F^{(+)} の定義",
+  "固有値 -1 の固有ベクトル全体 F^{(-)} の定義",
+  "F^{(+)} が複素数上の部分線型空間であること",
+  "F^{(-)} が複素数上の部分線型空間であること",
+] as const;
+const epsilonEigenspacesNextTickUnit = epsilonEigenspacesBoundaryCandidates.slice(0, 1);
+const epsilonEigenspacesExpectedNextTickUnit = [
+  "固有値 +1 の固有ベクトル全体 F^{(+)} の定義",
+] as const;
+if (JSON.stringify(epsilonEigenspacesBoundaryCandidates)
+    !== JSON.stringify(epsilonEigenspacesExpectedBoundaryCandidates)
+  || JSON.stringify(epsilonEigenspacesNextTickUnit)
+    !== JSON.stringify(epsilonEigenspacesExpectedNextTickUnit)) {
+  throw new Error("全スピン反転行列の二つの固有空間の境界候補または次回一項単位が変わりました");
+}
+const epsilonEigenspacesFormalizationEvidenceSha256 = [
+  [
+    "lean/Ising2D/Part010/Claim009_EpsilonProjectors.lean",
+    "2efb621043022a0b6e0712f22534957ddda11064f151707a8f5ab8a0f2c7ccf7",
+  ],
+  [
+    "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
+    "4f54b84d905c55c5d21f5240f3fa206fb5af78f12a8f78ae83e56f0e62a23e2d",
+  ],
+  [
+    "lean/docs/ch010-formalization.md",
+    "889778fe2f8e4a9063217ad3620ad504be194109074fb3d62aeba6b28f630f60",
+  ],
+  [
+    "sagemath/check/169_def_eigenspaces_of_epsilon/check_01_eigenspaces.sage",
+    "27887c21cac1a82693490b5002b22f7ad068453ed5c09d961233e47bc989fbbd",
+  ],
+] as const;
+for (const [path, expected] of epsilonEigenspacesFormalizationEvidenceSha256) {
+  if (createHash("sha256").update(readFileSync(join(projectDir, path))).digest("hex") !== expected) {
+    throw new Error(`全スピン反転行列の二つの固有空間の形式化資料が変わりました: ${path}`);
+  }
+}
 const epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds = [
   "transfer_matrix_004_definition_eigenspaces_of_epsilon",
   "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
@@ -1811,10 +1856,12 @@ const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_019_definition_polar_equivalence_class", "LLMによる検証: 半径零と正の場合を分けた反射性・対称性・推移性の説明、および同値類から商集合を作る説明が未整備である。外部入力の角度同値関係にも同じ不足がある。節構造だけを確定し本文完成とは扱わない。"],
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
+  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "LLMによる検証: 固有値 +1 と -1 の固有ベクトル全体という二つの定義と、それぞれが複素部分線型空間であるという二つの主張を一ブロックへ束ねている。具体的な行列作用と抽象線型写像による作用も同じ定義で往復する。四つの本文単位と Lean・SageMath の対応ラベルを分けた後に、直接依存、節境界、説明粒度を再判定する必要がある。"],
   ["transfer_matrix_011_definition_H1_H2", "一般の生成子 H1^{(±)} と H2 の二定義に加え、既存の V1^{(±)} と V2 の指数表示を同じブロックへ束ねている。今回確定する節では外部入力として扱い、将来一ブロック一定義へ分割した後に依存順と節境界を再判定する必要がある。"],
 ]);
 const futureBlockSplitRecommendedById = new Set([
   "transfer_matrix_001_definition_symbols",
+  "transfer_matrix_004_definition_eigenspaces_of_epsilon",
   "transfer_matrix_011_definition_H1_H2",
 ]);
 const presentationPredecessorEntryIdsById = new Map<string, string[]>([
@@ -15322,10 +15369,21 @@ const isingModelSectionBoundaries = [{
     "全スピン反転行列の二乗が単位行列であり、その作用の固有値が +1 または −1 に限ること",
     "P^{(+)} と P^{(-)} が互いに補い合い、それぞれの像が対応する固有空間に一致すること",
   ],
+  boundaryCandidates: epsilonEigenspacesBoundaryCandidates,
+  nextTickUnit: epsilonEigenspacesNextTickUnit,
+  formalizationEvidence: {
+    leanFiles: [
+      "lean/Ising2D/Part010/Claim009_EpsilonProjectors.lean",
+      "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
+      "lean/docs/ch010-formalization.md",
+    ],
+    sageMathFile: "sagemath/check/169_def_eigenspaces_of_epsilon/check_01_eigenspaces.sage",
+    currentStatus: "Lean は固有値条件をベクトル述語として使うが、F^{(+)} と F^{(-)} を複素部分空間として定義していない。SageMath は def_eigenspaces_of_epsilon 一ラベルに、本文の定義だけでなく別主張の ε²=I・固有値の候補と、本文に無い各固有空間の次元 2^{M-1} まで束ねている。本文を二定義・二部分空間主張へ分けた後、Lean の部分空間定義を各本文ラベルへ対応させ、SageMath の対象を本文に存在する主張ごとに分離する必要がある。",
+  },
   mainTheorem: "全スピン反転行列から作る二つの行列が対応する固有空間への相補射影であること",
   mainTheoremEntryId: "bridge_009_claim_epsilon_projector_properties",
   boundaryEvidence: "章内依存順26–28は、順26で全スピン反転行列 ε の固有空間を定め、これと相互依存しない順27で ε²=I と固有値が ±1 に限ることを証明し、順28で順26の固有空間と順27の二乗公式を合わせて二つの行列の冪等性・相互直交性・和・像を計算する。従来は相補射影の主張に二乗公式が重複して含まれ、その証明が固有空間の定義を二乗公式の根拠として誤参照していた。二乗・固有値を独立した主張へ分け、順26と順27が順28へ合流する依存形に直した。直後の順29は順26の固有空間だけを再利用して V1 の制限へ分岐し、順27の二乗・固有値と順28の相補射影には依存しない。順29では P^{(±)} の定義とクロネッカー積の積の規則を入力から外し、V1 の Jordan–Wigner 行列表示、一因子の反可換性、ノルムの基本性質の数ベクトル版、行列指数関数の作用保存を追加するため、順28の主定理で節を閉じる。生成時に三項の連続性、順28へ入る二本の内部依存辺、節内本文と全外部入力の fingerprint、節末出力の一意性、順29の章内順・直接依存・本文、順29が順27・28へ依存しないこと、および入力集合の追加・除外を固定検査する。",
-  readabilityStatus: "二乗公式を相補射影の主張から重複して述べる箇条書きを除き、相補射影という一つの主張の三組の等式へ整理した。二乗と固有値は二乗公式から固有値の候補を絞る一方向の主張であり、相補射影の証明も有限行列の分配法則とベクトルへの作用を一段ずつ記すため、この二項は現行の説明粒度検査に合格している。固有空間の定義には抽象線型写像の記述が残るため、対象本文全体は未完成として扱う。外部入力にも、複素数の定義、混在したサイト作用素の記号定義、行列と線型写像の対応および積の保存に説明粒度の未解決が残る。",
+  readabilityStatus: "二乗公式を相補射影の主張から重複して述べる箇条書きを除き、相補射影という一つの主張の三組の等式へ整理した。二乗と固有値は二乗公式から固有値の候補を絞る一方向の主張であり、相補射影の証明も有限行列の分配法則とベクトルへの作用を一段ずつ記すため、この二項は現行の説明粒度検査に合格している。固有空間の現行ブロックは、固有値 +1 と -1 の二定義に加え、それぞれが複素部分空間であるという二主張を束ねる。また行列作用 εf と抽象線型写像 end(ε)(f) を同じ定義で往復する。四つの本文単位と Lean・SageMath のラベル同期が必要なので、本文は変更せず境界候補を固定した。外部入力にも、複素数の定義、混在したサイト作用素の記号定義、行列と線型写像の対応および積の保存に説明粒度の未解決が残る。",
 }, {
   name: "V1 の固有空間への制限",
   chapter: "2次元イジングモデル",
