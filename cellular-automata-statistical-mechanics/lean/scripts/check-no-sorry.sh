@@ -85,6 +85,19 @@ targets=(
   CellularAutomata.CyclicRuleRestriction.card_radius_one_fiber_one_cell
   CellularAutomata.CyclicRuleRestriction.card_radius_one_fiber_two_cells
   CellularAutomata.CyclicRuleRestriction.card_radius_one_fiber_of_three_le
+  CellularAutomata.NecSuf.CyclicRuleRestriction.representative_projects
+  CellularAutomata.NecSuf.CyclicRuleRestriction.pullback_descend
+  CellularAutomata.NecSuf.CyclicRuleRestriction.descend_pullback
+  CellularAutomata.NecSuf.CyclicRuleRestriction.extendConfiguration_on_image
+  CellularAutomata.NecSuf.CyclicRuleRestriction.realized_inputs
+  CellularAutomata.NecSuf.CyclicRuleRestriction.realizedMap_eq_iff_restriction
+  CellularAutomata.NecSuf.CyclicRuleRestriction.globalRealizedMap_eq_iff_restriction
+  CellularAutomata.NecSuf.CyclicRuleRestriction.card_compatible_inputs
+  CellularAutomata.NecSuf.CyclicRuleRestriction.card_truth_tables
+  CellularAutomata.NecSuf.CyclicRuleRestriction.realizedMap_eq_iff_restriction_of_necSuf
+  CellularAutomata.NecSuf.CyclicRuleRestriction.globalRealizedMap_eq_iff_restriction_of_necSuf
+  CellularAutomata.NecSuf.CyclicRuleRestriction.card_admissible_inputs_of_necSuf
+  CellularAutomata.NecSuf.CyclicRuleRestriction.card_truth_tables_of_necSuf
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.scale_apply
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.add_support
   CellularAutomata.NecSuf.PrimeLogarithm.Vectors.neg_support
