@@ -13,6 +13,11 @@
     最終的に一致することだけを要る。有限性、距離、誤差、群構造は要らない。
   - 有限局所観測の総体が高々可算であることには、添字型の可算性と各繊維の有限性だけを要る。
     添字が自然数であること、繊維が二元状態表であることは要らない。
+  - 近傍間の全単射不在には二つの有限型の元数が異なることだけを要る。
+  - 写像が目標と異なることには、目標に属し写像に属さない一元だけを要る。
+  - 局所入力型の元数には、近傍型と状態型の有限性、および有限関数表を
+    列挙するための近傍型の等号判定だけを要る。
+    状態が二値であることや、近傍が同じ舞台の部分集合であることは要らない。
   - 有限性は具体版の舞台元数と不動点の有限走査にだけ残る。
   実数体、複素数体、全配位の逆極限、規格化、極限、収束は使わない。
 -/
@@ -136,6 +141,32 @@ theorem observationCatalogue_countable
   letI (r : R) : Countable (Observation r) := Finite.to_countable
   infer_instance
 
+/-! ### 一般の舞台で失われる近傍輸送に必要な構造 -/
+
+/-- 二つの有限型の元数が異なれば、それらの間に全単射は存在しない。 -/
+theorem no_bijection_of_card_ne
+    {S : Type uS} {T : Type uT} [Fintype S] [Fintype T]
+    (hcard : Fintype.card S ≠ Fintype.card T) :
+    ¬ ∃ h : S → T, Function.Bijective h := by
+  rintro ⟨h, hb⟩
+  exact hcard (Fintype.card_congr (Equiv.ofBijective h hb))
+
+/-- 目標に属し写像に属さない元があれば、写像と目標は等しくない。 -/
+theorem image_ne_target_of_witness
+    {V : Type uS} [DecidableEq V] (source target : Finset V) (transport : V → V)
+    {w : V} (htarget : w ∈ target) (himage : w ∉ source.image transport) :
+    source.image transport ≠ target := by
+  intro h
+  apply himage
+  rw [h]
+  exact htarget
+
+/-- 有限な近傍型から有限な状態型への局所入力型の元数。 -/
+theorem localInput_card
+    {N : Type uS} {A : Type uT} [Fintype N] [DecidableEq N] [Fintype A] :
+    Fintype.card (N → A) = Fintype.card A ^ Fintype.card N := by
+  exact Fintype.card_fun
+
 /-! ### 具体版の導出 -/
 
 section Derivation
@@ -217,6 +248,44 @@ theorem finite_observation_catalogue_countable_of_necSuf :
     Countable CellularAutomata.CyclicStageLocalAgreement.FiniteObservationCatalogue := by
   change Countable (ObservationCatalogue (fun s : ℕ => Offset s → State))
   exact observationCatalogue_countable (fun s : ℕ => Offset s → State)
+
+/-- 具体版の近傍間の全単射不在は、二つの近傍型の元数の差だけから従う。 -/
+theorem no_bare_neighborhood_bijection_of_necSuf :
+    ¬ ∃ h : (↥(bareNeighborhood bareU)) → (↥(bareNeighborhood bareV)),
+      Function.Bijective h := by
+  apply no_bijection_of_card_ne
+  simpa [bare_neighborhood_u_card, bare_neighborhood_v_card]
+
+/-- 具体版の近傍非保存は、目標にだけ属するセル `u` を証人とする。 -/
+theorem bare_swap_not_neighborhood_preserving_of_necSuf :
+    (bareNeighborhood bareU).image bareSwap ≠ bareNeighborhood (bareSwap bareU) := by
+  apply image_ne_target_of_witness
+    (bareNeighborhood bareU) (bareNeighborhood (bareSwap bareU)) bareSwap
+    (w := bareU)
+  · rw [bare_swap_target_u]
+    simp
+  · rw [bare_swap_image_u]
+    decide
+
+/-- 小さい近傍の具体的な局所入力数は、有限関数型の一般式の特殊化である。 -/
+theorem bare_local_input_u_card_of_necSuf :
+    Fintype.card (↥(bareNeighborhood bareU) → State) = 2 := by
+  rw [localInput_card, card_state]
+  simp [bare_neighborhood_u_card]
+
+/-- 大きい近傍の具体的な局所入力数は、有限関数型の一般式の特殊化である。 -/
+theorem bare_local_input_v_card_of_necSuf :
+    Fintype.card (↥(bareNeighborhood bareV) → State) = 4 := by
+  rw [localInput_card, card_state]
+  simp [bare_neighborhood_v_card]
+
+/-- 局所入力間の全単射不在も、二つの関数型の元数の差だけから従う。 -/
+theorem no_bare_local_input_bijection_of_necSuf :
+    ¬ ∃ h : (↥(bareNeighborhood bareU) → State) →
+        (↥(bareNeighborhood bareV) → State), Function.Bijective h := by
+  apply no_bijection_of_card_ne
+  rw [bare_local_input_u_card_of_necSuf, bare_local_input_v_card_of_necSuf]
+  decide
 
 end Derivation
 

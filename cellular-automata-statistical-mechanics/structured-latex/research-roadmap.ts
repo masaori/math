@@ -281,8 +281,8 @@ export const roadmapStages = [
       "平行移動が与える構造（近傍の標準的な番号付け、平行移動不変性）が何を買っているかを分離する。",
     habitat: "有限商では有限。局所的極限の舞台は可算。全配位の逆極限を取った時点で非可算へ移る。",
     dependsOn: ["one_dimensional_arbitrary_radius", "general_stage_and_nonuniform_rules"],
-    status: "進行中",
-    current: true,
+    status: "到達済み",
+    current: false,
     completion: [
       "有限商の舞台の族と、その上での不変量の列が本文で定義されていること。",
       "局所的極限の定式化が本文の主張と接続され、可算のまま言えることと全配位を要することが分離されていること。",
@@ -322,8 +322,8 @@ export const roadmapStages = [
       "決定性の規則クラスは有限集合と自然数で閉じる。確率的な規則は重みが有理数に住み、" +
       "有理数のまま閉じる範囲と、極限で実数へ出る箇所を分けて記す。",
     dependsOn: ["general_stage_and_nonuniform_rules", "elementary_ca_finite_calibration"],
-    status: "未着手",
-    current: false,
+    status: "進行中",
+    current: true,
     completion: [
       "各規則クラスの定義が呼び名の規約に沿って本文にあり、クラス所属が有限検査で判定できること。" +
         "その有限検査の入力と量化範囲を明示すること。" +
@@ -333,7 +333,13 @@ export const roadmapStages = [
       "クラスごとに、そのクラスでだけ成り立つ主張と、一般の舞台では成り立たない反例が対で本文にあること。",
       "確率的な規則について、有理数で閉じる主張と実数へ脱出する主張が住処の宣言で区別されていること。",
     ],
-    evidence: [],
+    evidence: [
+      {
+        kind: "path",
+        path: "docs/2値セルオートマトンの定義と呼び名.md",
+        why: "総和型、二元体上で線形なもの、可逆なもの、二次のもの、ブロック型、確率的なものの呼び名と入力構造の正本。現在はこれらと既存本文の定義・有限判定の対応を確定する段階である。",
+      },
+    ],
   },
   {
     id: "statistical_mechanics_correspondence",

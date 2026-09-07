@@ -221,6 +221,15 @@ theorem bare_local_input_v_card :
   rw [Fintype.card_fun, card_state]
   simp [bare_neighborhood_v_card]
 
+/-- 局所入力集合の元数が二と四なので、それらの間に全単射は存在しない。 -/
+theorem no_bare_local_input_bijection :
+    ¬ ∃ h : (↥(bareNeighborhood bareU) → State) →
+        (↥(bareNeighborhood bareV) → State), Function.Bijective h := by
+  rintro ⟨h, hb⟩
+  have hcard := Fintype.card_congr (Equiv.ofBijective h hb)
+  rw [bare_local_input_u_card, bare_local_input_v_card] at hcard
+  omega
+
 end
 
 end CellularAutomata.CyclicStageLocalAgreement
