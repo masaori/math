@@ -1,6 +1,6 @@
 {
   "実行識別子": "8c3a3a5d-a6c4-48fa-9644-e5e0f0309232",
-  "観測時刻": "2026-09-07T16:28:10+09:00",
+  "観測時刻": "2026-09-07T16:33:22+09:00",
   "起動登録の実測": {
     "コマンド": "launchctl list com.masaori.finite-graph-ising-auto-loop",
     "終了コード": 0,
@@ -10,9 +10,8 @@
   "launchctl print": {
     "コマンド": "launchctl print gui/501/com.masaori.finite-graph-ising-auto-loop",
     "終了コード": 0,
-    "state": "running",
+    "state": "not running",
     "runs": 6,
-    "pid": 21718,
     "last exit code": 0
   },
   "plist": {
@@ -27,20 +26,21 @@
     {
       "path": "/Users/masaori/Library/Logs/finite-graph-ising-auto-loop/launchd.log",
       "存在": true,
-      "更新時刻": "2026-09-07T16:27:13+09:00",
+      "更新時刻": "2026-09-07T16:32:59+09:00",
       "抽出行": [
         "2026-09-07 16:27:13 === tick 開始",
-        "2026-09-07 16:27:13 モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=/Users/masaori/.codex-coding-agent-0004"
+        "2026-09-07 16:27:13 モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=/Users/masaori/.codex-coding-agent-0004",
+        "2026-09-07 16:32:59 === tick 正常終了"
       ]
     }
   ],
-  "実行の終了値の解釈": "観測時に登録あり・実行中・runs 6・pid 21718。実ログは16:27:13の起動までで成功・失敗マーカーがなく、last exit code 0は前回値なので今回終了値へ流用しない。",
+  "実行の終了値の解釈": "追観測時に登録あり・非実行中・runs 6・last exit code 0。実ログも16:32:59の正常終了を示すが、未達項目ゼロの確認だけで研究前進ではない。",
   "成果比較": {
     "開始成果": "3c37e0c4d7c994a920be494931f2da8b2fc017b9",
     "前回読解終点": "d9df40ba29cb0c91facbb57932812610fc6238fd",
-    "今回読解終点": "41373f286338cf5eaf0a407c87b597107ddb1a3c",
+    "今回読解終点": "f0c991c523e1a45e9ecf8a0a62864c02b6abdaf5",
     "確認した成果": [
-      "d9df40ba29cb0c91facbb57932812610fc6238fd..41373f286338cf5eaf0a407c87b597107ddb1a3c: 当研究の数学本文・有限証拠・形式化の統合差分なし"
+      "d9df40ba29cb0c91facbb57932812610fc6238fd..f0c991c523e1a45e9ecf8a0a62864c02b6abdaf5: 当研究の数学本文・有限証拠・形式化の統合差分なし"
     ]
   },
   "検査結果": [
