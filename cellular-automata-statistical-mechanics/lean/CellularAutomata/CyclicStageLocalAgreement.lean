@@ -150,6 +150,77 @@ theorem logarithmicCountSequence_apply (r : ℕ) (g : (Offset r → State) → S
   exact PrimeLogarithm.logarithm_nat_apply
     (fixedPointCountSequence r g n L.val) L.property p
 
+/-! ### 群構造を持たない二セル舞台の近傍輸送反例
+
+`claim_bare_stage_loses_uniform_transport` の Lean 具体版。
+人手証明と同じ二セル、近傍割り当て、交換写像を固定する。
+有限型と自然数だけを使い、全配位、極限、実数体・複素数体は使わない。 -/
+
+/-- 反例の相異なる二セルからなる有限舞台。 -/
+abbrev BareStage := Fin 2
+
+/-- 人手証明のセル `u`。 -/
+def bareU : BareStage := 0
+
+/-- 人手証明のセル `v`。 -/
+def bareV : BareStage := 1
+
+/-- `u` の近傍は `{u}`、`v` の近傍は `{u,v}` である。 -/
+def bareNeighborhood (z : BareStage) : Finset BareStage :=
+  if z = bareU then {bareU} else {bareU, bareV}
+
+/-- 二セルを交換する全単射。 -/
+def bareSwap : Equiv.Perm BareStage := Equiv.swap bareU bareV
+
+/-- 小さい方の近傍は一元である。 -/
+theorem bare_neighborhood_u_card : (bareNeighborhood bareU).card = 1 := by
+  decide
+
+/-- 大きい方の近傍は二元である。 -/
+theorem bare_neighborhood_v_card : (bareNeighborhood bareV).card = 2 := by
+  decide
+
+/-- 元数が一と二なので、二つの近傍の間に全単射は存在しない。 -/
+theorem no_bare_neighborhood_bijection :
+    ¬ ∃ h : (↥(bareNeighborhood bareU)) → (↥(bareNeighborhood bareV)),
+      Function.Bijective h := by
+  rintro ⟨h, hb⟩
+  have hcard := Fintype.card_congr (Equiv.ofBijective h hb)
+  have hu : Fintype.card (↥(bareNeighborhood bareU)) = 1 := by
+    simpa using bare_neighborhood_u_card
+  have hv : Fintype.card (↥(bareNeighborhood bareV)) = 2 := by
+    simpa using bare_neighborhood_v_card
+  rw [hu, hv] at hcard
+  omega
+
+/-- 交換写像による小さい近傍の像は `{v}` である。 -/
+theorem bare_swap_image_u :
+    (bareNeighborhood bareU).image bareSwap = {bareV} := by
+  decide
+
+/-- 交換先 `v` の近傍は `{u,v}` である。 -/
+theorem bare_swap_target_u :
+    bareNeighborhood (bareSwap bareU) = {bareU, bareV} := by
+  decide
+
+/-- 交換写像は近傍割り当てを保存しない。 -/
+theorem bare_swap_not_neighborhood_preserving :
+    (bareNeighborhood bareU).image bareSwap ≠ bareNeighborhood (bareSwap bareU) := by
+  rw [bare_swap_image_u, bare_swap_target_u]
+  decide
+
+/-- `u` の近傍上の二元状態入力は二つである。 -/
+theorem bare_local_input_u_card :
+    Fintype.card (↥(bareNeighborhood bareU) → State) = 2 := by
+  rw [Fintype.card_fun, card_state]
+  simp [bare_neighborhood_u_card]
+
+/-- `v` の近傍上の二元状態入力は四つである。 -/
+theorem bare_local_input_v_card :
+    Fintype.card (↥(bareNeighborhood bareV) → State) = 4 := by
+  rw [Fintype.card_fun, card_state]
+  simp [bare_neighborhood_v_card]
+
 end
 
 end CellularAutomata.CyclicStageLocalAgreement
