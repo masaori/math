@@ -128,6 +128,7 @@ export const ALL_LABELS = [
   "def_eigenspaces_of_epsilon",
   "def_end_iso",
   "def_epsilon_projectors",
+  "def_even_eigenvectors_of_epsilon",
   "def_exp",
   "def_fermi",
   "def_frobenius_inner_product",

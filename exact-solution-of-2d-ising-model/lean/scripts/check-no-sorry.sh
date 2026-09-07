@@ -479,6 +479,7 @@ targets=(
   Ising2D.NecSuf.commute_invProj
   Ising2D.NecSuf.pow_mul_proj
   Ising2D.NecSuf.mul_pow_conj_left
+  Ising2D.evenEigenvectors
   Ising2D.epsProj_sq
   Ising2D.epsProj_mul_epsProj_neg
   Ising2D.epsProj_add_epsProj_neg
