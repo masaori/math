@@ -145,6 +145,7 @@ export const ALL_LABELS = [
   "def_lattice_size",
   "def_matrix_norm",
   "def_number_operator",
+  "def_odd_eigenvectors_of_epsilon",
   "def_open_chain_spin_energy",
   "def_partition_function_2d_ising",
   "def_pauli_group",

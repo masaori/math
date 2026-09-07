@@ -19,6 +19,7 @@ import Ising2D.NecSuf.TensorPowerBasis
 import Ising2D.Part002.Theorem000_TensorBasisFromNecSuf
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
 import Ising2D.Part004.EvenEigenvectors
+import Ising2D.Part004.OddEigenvectors
 import Ising2D.Part004.Claim014_ZYGenerateAlgebra
 import Ising2D.NecSuf.GeneratedByBasis
 import Ising2D.Part004.Claim014_ZYGenerateAlgebraFromNecSuf

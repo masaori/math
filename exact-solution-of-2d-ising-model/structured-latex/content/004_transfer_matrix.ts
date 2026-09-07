@@ -1792,19 +1792,60 @@ S_Nf
     },
   },
   {
+    id: "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { tex: String.raw`\varepsilon\text{ の固有値 }-1\text{ の固有ベクトル全体}` },
+    labels: ["def_odd_eigenvectors_of_epsilon"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\varepsilon\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を考える。",
+        math(String.raw`\varepsilon`),
+        " を ",
+        math(String.raw`2^M`),
+        " 成分の複素数ベクトルへ ",
+        ref("mat_mult"),
+        " の通常の行列と数ベクトルの積として作用させ、",
+      ]),
+      displayMath(
+        String.raw`\mathcal{F}^{(-)}
+:=\left\{f\in\mathbb{C}^{2^M}\;\middle|\;\varepsilon f=-f\right\}`,
+      ),
+      paragraph([
+        "と定める。すなわち ",
+        math(String.raw`\mathcal{F}^{(-)}`),
+        " は、全スピン反転行列を左から掛けると符号が反転する複素数ベクトルの全体である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "固有値 -1 の集合定義と二つの部分空間性を束ねていたブロックから、固有値 -1 の集合定義だけを分離した。",
+        "抽象線型写像 end(ε) を経由せず、2^M 次複素行列 ε と数ベクトルの積で定義した。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/003_definition_epsilonの固有空間.typ", ordinal: 4 },
-    title: { tex: String.raw`\varepsilon\text{ の固有値 }-1\text{ の固有ベクトル全体と二つの部分空間性}` },
+    title: { tex: String.raw`\varepsilon\text{ の二つの固有ベクトル集合の部分空間性}` },
     labels: ["def_eigenspaces_of_epsilon"],
     statement: [
       paragraph([
         ref("def_even_eigenvectors_of_epsilon"),
         " で ",
         math(String.raw`\mathcal{F}^{(+)}`),
-        " を定めた。さらに ",
+        " を、",
+        ref("def_odd_eigenvectors_of_epsilon"),
+        " で ",
         math(String.raw`\mathcal{F}^{(-)}`),
-        " を次で定める。",
+        " を定めた。",
       ]),
       paragraph([
         ref("def_end_iso"),
@@ -1820,12 +1861,7 @@ S_Nf
         math(String.raw`\mathcal{F}`),
         " への作用について、",
       ]),
-      displayMath(
-        String.raw`\mathcal{F}^{(-)} := \{f \in \mathcal{F} \mid \varepsilon f = -f\}
-= \{f \in \mathcal{F} \mid (\mathbf{end}(\varepsilon))(f) = -f\}`,
-      ),
       paragraph([
-        "とおく。",
         math(String.raw`\mathbf{end}(\varepsilon)`),
         " は線型写像だから、",
         math(String.raw`\mathcal{F}^{(\pm)}`),
@@ -1838,7 +1874,7 @@ S_Nf
     ],
     conversion: {
       status: "converted",
-      notes: ["固有値 -1 の集合定義と二つの部分空間性を、次の分割対象として保持する。"],
+      notes: ["二つの部分空間性を、次の分割対象として保持する。"],
     },
   },
   {
