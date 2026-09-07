@@ -1,5 +1,5 @@
 /-
-章「有限巡回舞台の族と有限段階の量の列」の Lean 必要十分版。
+章「有限巡回舞台の族・局所収束・有限段階の量の列」の Lean 必要十分版。
 
 必要な構造の検査結果:
   - 比較写像の加法保存には、始域と終域の加法と保存則だけを要る。
@@ -9,6 +9,10 @@
   - 大域非単射には、相異なる二元が同じ像を持つことだけを要る。
   - 正値域と素因数指数ベクトル値列には、添字集合上の自然数値写像だけを要る。
     添字集合の有限性、二値状態、局所規則、反復、群構造は要らない。
+  - 局所収束には、窓の添字、段階の添字、段階の前後関係、各窓上の二つの関係が
+    最終的に一致することだけを要る。有限性、距離、誤差、群構造は要らない。
+  - 有限局所観測の総体が高々可算であることには、添字型の可算性と各繊維の有限性だけを要る。
+    添字が自然数であること、繊維が二元状態表であることは要らない。
   - 有限性は具体版の舞台元数と不動点の有限走査にだけ残る。
   実数体、複素数体、全配位の逆極限、規格化、極限、収束は使わない。
 -/
@@ -16,7 +20,7 @@ import CellularAutomata.CyclicStageLocalAgreement
 
 namespace CellularAutomata.NecSuf.CyclicStageLocalAgreement
 
-universe uS uT uD uC uI
+universe uS uT uD uC uI uR uStage uW uO
 
 /-- 加法を持つ二つの型の間で、比較写像が加法を保存するという最小の仮定。 -/
 theorem projection_preserves_addition
@@ -87,6 +91,51 @@ theorem logarithmicCountSequence_apply {I : Type uI} (count : I → ℕ)
     logarithmicCountSequence count i p = ((count i.val).factorization p.val : ℤ) := by
   exact PrimeLogarithm.logarithm_nat_apply (count i.val) i.property p
 
+/-- 窓ごとの関係が、段階の前後関係に沿って最終的に極限側の関係と一致すること。 -/
+def EventuallyAgrees
+    {R : Type uR} {StageIndex : Type uStage} (Window : R → Type uW)
+    (atOrBeyond : StageIndex → StageIndex → Prop)
+    (stageRelation : (i : StageIndex) → (r : R) → Set (Window r × Window r))
+    (limitRelation : (r : R) → Set (Window r × Window r)) : Prop :=
+  ∀ r : R, ∃ i₀ : StageIndex, ∀ i : StageIndex,
+    atOrBeyond i₀ i → stageRelation i r = limitRelation r
+
+/-- 最終一致の定義は、窓ごとに安定段階が存在するという量化条件と必要十分である。 -/
+theorem eventuallyAgrees_iff
+    {R : Type uR} {StageIndex : Type uStage} (Window : R → Type uW)
+    (atOrBeyond : StageIndex → StageIndex → Prop)
+    (stageRelation : (i : StageIndex) → (r : R) → Set (Window r × Window r))
+    (limitRelation : (r : R) → Set (Window r × Window r)) :
+    EventuallyAgrees Window atOrBeyond stageRelation limitRelation ↔
+      ∀ r : R, ∃ i₀ : StageIndex, ∀ i : StageIndex,
+        atOrBeyond i₀ i → stageRelation i r = limitRelation r := by
+  rfl
+
+/-- 窓ごとに安定段階と、それ以後の関係一致を与えれば最終一致が従う。 -/
+theorem eventuallyAgrees_of_witness
+    {R : Type uR} {StageIndex : Type uStage} (Window : R → Type uW)
+    (atOrBeyond : StageIndex → StageIndex → Prop)
+    (stageRelation : (i : StageIndex) → (r : R) → Set (Window r × Window r))
+    (limitRelation : (r : R) → Set (Window r × Window r))
+    (witness : R → StageIndex)
+    (hagrees : ∀ r i, atOrBeyond (witness r) i → stageRelation i r = limitRelation r) :
+    EventuallyAgrees Window atOrBeyond stageRelation limitRelation := by
+  intro r
+  exact ⟨witness r, fun i hi => hagrees r i hi⟩
+
+/-- 可算な添字に有限な繊維を載せた、有限局所観測の一般形。 -/
+def ObservationCatalogue {R : Type uR} (Observation : R → Type uO) :=
+  Σ r : R, Observation r
+
+/-- 可算個の有限繊維の非交和は高々可算である。 -/
+theorem observationCatalogue_countable
+    {R : Type uR} [Countable R] (Observation : R → Type uO)
+    [∀ r : R, Finite (Observation r)] :
+    Countable (ObservationCatalogue Observation) := by
+  change Countable (Σ r : R, Observation r)
+  letI (r : R) : Countable (Observation r) := Finite.to_countable
+  infer_instance
+
 /-! ### 具体版の導出 -/
 
 section Derivation
@@ -148,6 +197,26 @@ theorem logarithmicCountSequence_apply_of_necSuf
       ((fixedPointCountSequence r g n L.val).factorization p.val : ℤ) := by
   exact logarithmicCountSequence_apply (fixedPointCountSequence r g n)
     ⟨L.val, L.property⟩ p
+
+/-- 具体版の局所収束は、窓ごとの最終一致だけを使う一般主張の特殊化である。 -/
+theorem stage_family_locally_converges_of_necSuf :
+    CellularAutomata.CyclicStageLocalAgreement.LocallyConverges := by
+  change EventuallyAgrees (fun s : ℕ => Offset s)
+    (fun L₀ L : PositiveStage => L₀.val ≤ L.val)
+    (fun L s => finiteWindowRelation L s) integerWindowRelation
+  apply eventuallyAgrees_of_witness
+    (fun s : ℕ => Offset s)
+    (fun L₀ L : PositiveStage => L₀.val ≤ L.val)
+    (fun L s => finiteWindowRelation L s) integerWindowRelation
+    (fun s => ⟨2 * s + 1, by omega⟩)
+  intro s L hL
+  exact CellularAutomata.CyclicStageLocalAgreement.finite_window_exact_agreement L s hL
+
+/-- 具体版の有限局所観測総体の可算性は、可算添字と有限繊維だけを使う一般主張の特殊化である。 -/
+theorem finite_observation_catalogue_countable_of_necSuf :
+    Countable CellularAutomata.CyclicStageLocalAgreement.FiniteObservationCatalogue := by
+  change Countable (ObservationCatalogue (fun s : ℕ => Offset s → State))
+  exact observationCatalogue_countable (fun s : ℕ => Offset s → State)
 
 end Derivation
 

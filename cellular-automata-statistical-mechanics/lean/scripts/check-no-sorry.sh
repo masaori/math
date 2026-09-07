@@ -53,6 +53,11 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.NecSuf.CyclicStageLocalAgreement.eventuallyAgrees_iff
+  CellularAutomata.NecSuf.CyclicStageLocalAgreement.eventuallyAgrees_of_witness
+  CellularAutomata.NecSuf.CyclicStageLocalAgreement.observationCatalogue_countable
+  CellularAutomata.NecSuf.CyclicStageLocalAgreement.stage_family_locally_converges_of_necSuf
+  CellularAutomata.NecSuf.CyclicStageLocalAgreement.finite_observation_catalogue_countable_of_necSuf
   CellularAutomata.NecSuf.CyclicStageLocalAgreement.projection_preserves_addition
   CellularAutomata.NecSuf.CyclicStageLocalAgreement.additive_group_laws
   CellularAutomata.NecSuf.CyclicStageLocalAgreement.pulledBackEquality_eq_nativeEquality_iff_injective
@@ -68,6 +73,9 @@ targets=(
   CellularAutomata.CyclicStageLocalAgreement.projection_surjective
   CellularAutomata.CyclicStageLocalAgreement.stage_card
   CellularAutomata.CyclicStageLocalAgreement.finite_window_exact_agreement
+  CellularAutomata.CyclicStageLocalAgreement.stage_family_locally_converges
+  CellularAutomata.CyclicStageLocalAgreement.finite_observation_stage_card
+  CellularAutomata.CyclicStageLocalAgreement.finite_observation_catalogue_countable
   CellularAutomata.CyclicStageLocalAgreement.projection_not_injective
   CellularAutomata.CyclicStageLocalAgreement.logarithmicCountSequence_apply
   CellularAutomata.CyclicRuleRestriction.representative_projects

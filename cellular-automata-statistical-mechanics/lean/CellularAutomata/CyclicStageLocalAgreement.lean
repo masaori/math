@@ -12,6 +12,7 @@
 import CellularAutomata.CyclicRuleRestriction
 import CellularAutomata.NecSuf.PeriodicPointCount
 import CellularAutomata.PrimeLogarithm
+import Mathlib.Data.Countable.Basic
 
 namespace CellularAutomata.CyclicStageLocalAgreement
 
@@ -103,11 +104,12 @@ def FiniteObservationCatalogue := Σ s : ℕ, Offset s → State
 /-- 半径 `s` の有限局所観測は `2^(2s+1)` 個である。 -/
 theorem finite_observation_stage_card (s : ℕ) :
     Fintype.card (Offset s → State) = 2 ^ (2 * s + 1) := by
-  rw [Fintype.card_fun, card_state]
-  rfl
+  rw [Fintype.card_fun, card_state, Fintype.card_fin]
 
 /-- 自然数で添字づけた有限局所観測の総体は高々可算である。 -/
 theorem finite_observation_catalogue_countable : Countable FiniteObservationCatalogue := by
+  change Countable (Σ s : ℕ, Offset s → State)
+  letI (s : ℕ) : Countable (Offset s → State) := Finite.to_countable
   infer_instance
 
 /-- 各有限段階の比較写像は整数全体では単射でない。 -/
