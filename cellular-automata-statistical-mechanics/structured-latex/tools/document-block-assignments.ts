@@ -16,6 +16,8 @@ export const blockSectionAssignments = {
   "cyclic_stage_local_agreement_definition_positive_stage_domain": "cyclic_stage_local_agreement",
   "cyclic_stage_local_agreement_definition_logarithmic_count_sequence": "cyclic_stage_local_agreement",
   "cyclic_stage_local_agreement_remark_local_and_global_boundaries": "cyclic_stage_local_agreement",
+  "cyclic_stage_local_agreement_definition_bare_stage_transport_counterexample": "cyclic_stage_local_agreement",
+  "cyclic_stage_local_agreement_claim_bare_stage_loses_uniform_transport": "cyclic_stage_local_agreement",
   "cyclic_rule_definition_elementary_encoding": "cyclic_uniform_rule_restriction",
   "cyclic_rule_claim_elementary_encoding_bijection": "cyclic_uniform_rule_restriction",
   "cyclic_offset_claim_injective_boundary": "cyclic_offset_finite_images",

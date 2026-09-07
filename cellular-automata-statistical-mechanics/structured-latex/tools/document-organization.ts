@@ -172,14 +172,15 @@ export const documentOrganization = [
         id: "cyclic_stage_local_agreement",
         title: "有限巡回舞台の族と整数との局所的一致",
         input: "正の自然数で添字づけた有限剰余代表の族、整数から各有限段階への余り写像、有限整数窓、一つの有限局所真理値表を入力とする。",
-        output: "有限巡回群の族、有限窓での完全一致による局所収束、可算な有限局所観測の総体、各有限段階の大域写像・不動点数・対数順序群値の列と、全配位・量の極限を未定義のまま持ち込まない境界を得る。",
-        main: "主張は、各有限剰余舞台が明示した演算で巡回群をなし、半径sの有限窓では周期が2s+1以上なら整数の等号関係と完全一致して局所収束する一方、この局所収束が扱う有限局所観測は高々可算であり、大域的な埋め込み・全配位の一致・量の収束を含意しないことである。",
+        output: "有限巡回群の族、有限窓での完全一致による局所収束、可算な有限局所観測の総体、各有限段階の大域写像・不動点数・対数順序群値の列と、全配位・量の極限を未定義のまま持ち込まない境界を得る。さらに、群構造を持たない一般の舞台では近傍の一様な輸送と平行移動不変性が失われる有限反例を得る。",
+        main: "主張は、各有限剰余舞台が明示した演算で巡回群をなし、半径sの有限窓では周期が2s+1以上なら整数の等号関係と完全一致して局所収束する一方、この局所収束が扱う有限局所観測は高々可算であり、大域的な埋め込み・全配位の一致・量の収束を含意しないことである。また、一般の舞台では近傍の元数がセルごとに異なりうるため、共通の局所真理値表を運ぶ近傍の全単射も、セルの入れ替えに対する不変性も舞台からは導かれない。",
         mainLabels: [
           "claim_cyclic_stage_is_finite_cyclic_group",
           "claim_cyclic_stages_eventually_match_integer_window",
           "claim_cyclic_stage_family_locally_converges",
           "claim_integer_stage_finite_observation_catalogue_countable",
           "claim_cyclic_stage_projection_not_globally_injective",
+          "claim_bare_stage_loses_uniform_transport",
         ],
       },
       {

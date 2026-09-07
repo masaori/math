@@ -295,6 +295,11 @@ export const roadmapStages = [
         why: "有限巡回舞台の族について、有限窓の等号関係が有限段階以後に完全一致することを局所収束の定義へ接続する。",
       },
       {
+        kind: "label",
+        label: "claim_bare_stage_loses_uniform_transport",
+        why: "群構造を持たない二セルの有限舞台では近傍の元数がセルごとに異なり、近傍の輸送とセル交換に対する不変性がともに失われる反例を与える。",
+      },
+      {
         kind: "path",
         path: "docs/局所的極限の定式化.md",
         why: "有限の舞台の族から可算な舞台を作る極限の定式化。",

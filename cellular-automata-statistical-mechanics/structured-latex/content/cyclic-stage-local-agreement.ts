@@ -549,4 +549,94 @@ L_0\le L\Longrightarrow E_{L,s}=E_{\mathbb Z,s}`),
       ]),
     ],
   },
+  {
+    id: "cyclic_stage_local_agreement_definition_bare_stage_transport_counterexample",
+    kind: "definition",
+    title: { text: "セル間の近傍輸送を持たない有限舞台" },
+    labels: ["def_bare_stage_transport_counterexample"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        ref("def_finite_neighborhood_system"),
+        " の有限舞台として、相異なる二元からなる集合 ",
+        math(String.raw`V_{\lozenge}:=\{u,v\}`),
+        " と近傍割り当て",
+      ]),
+      displayMath(String.raw`N_{\lozenge}(u):=\{u\},\qquad
+N_{\lozenge}(v):=\{u,v\}`),
+      paragraph([
+        "を定める。また、二元を交換する全単射を ",
+        math(String.raw`\sigma:V_{\lozenge}\to V_{\lozenge}`),
+        "、",
+        math(String.raw`\sigma(u):=v`),
+        "、",
+        math(String.raw`\sigma(v):=u`),
+        " と定める。これらは有限集合と有限写像だけからなる。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_local_agreement_claim_bare_stage_loses_uniform_transport",
+    kind: "claim",
+    title: { text: "一般の舞台から近傍の一様な輸送と平行移動不変性は導けない" },
+    labels: ["claim_bare_stage_loses_uniform_transport"],
+    habitat: "finite",
+    statement: [
+      paragraph([
+        ref("def_bare_stage_transport_counterexample"),
+        " の舞台では、",
+        math(String.raw`N_{\lozenge}(u)`),
+        " と ",
+        math(String.raw`N_{\lozenge}(v)`),
+        " の間に全単射は存在せず、交換写像も近傍を保存しない。すなわち",
+      ]),
+      displayMath(String.raw`\sigma\bigl[N_{\lozenge}(u)\bigr]\neq
+N_{\lozenge}\bigl(\sigma(u)\bigr).`),
+      paragraph([
+        ref("def_state_set"),
+        " の二元状態集合 ",
+        math(String.raw`A`),
+        " に対して局所規則の二つの入力集合はそれぞれ二元と四元である。従って、一つの固定入力集合上の有限真理値表を、セル間の近傍の全単射で運んで共有することはできない。これは、",
+        ref("claim_cyclic_stage_is_finite_cyclic_group"),
+        " の有限巡回群構造を落としたとき、近傍の標準的なセル間輸送と平行移動不変性が舞台のデータからは得られなくなる有限反例である。個別の局所規則族を与えることはできるが、その一様性は一般の舞台からは導かれない。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("def_bare_stage_transport_counterexample"), " の定義から"]),
+      displayMath(String.raw`\begin{aligned}
+|N_{\lozenge}(u)|&=1\quad(\because\ N_{\lozenge}(u)=\{u\}),\\
+|N_{\lozenge}(v)|&=2\quad(\because\ N_{\lozenge}(v)=\{u,v\},\ u\neq v).
+\end{aligned}`),
+      paragraph([
+        "有限集合の間に全単射があれば元数は等しいが、",
+        math(String.raw`1\neq2`),
+        " なので、二つの近傍の間に全単射は存在しない。次に",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sigma\bigl[N_{\lozenge}(u)\bigr]
+&=\{v\}\quad(\because\ N_{\lozenge}(u)=\{u\},\ \sigma(u)=v),\\
+N_{\lozenge}\bigl(\sigma(u)\bigr)
+&=\{u,v\}\quad(\because\ \sigma(u)=v,\ N_{\lozenge}(v)=\{u,v\}).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`u\in\{u,v\}`),
+        " かつ ",
+        math(String.raw`u\notin\{v\}`),
+        " なので、二つの集合は等しくない。最後に ",
+        ref("def_state_set"),
+        " より ",
+        math(String.raw`|A|=2`),
+        " であるから",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl|A^{N_{\lozenge}(u)}\bigr|
+&=2^1=2\quad(\because\ |N_{\lozenge}(u)|=1),\\
+\bigl|A^{N_{\lozenge}(v)}\bigr|
+&=2^2=4\quad(\because\ |N_{\lozenge}(v)|=2).
+\end{aligned}`),
+      paragraph([
+        "入力集合どうしにも全単射はない。従って近傍の輸送による一つの真理値表の共有はこの舞台データから構成できず、交換写像も近傍割り当ての不変性を与えない。",
+      ]),
+    ],
+  },
 ]);
