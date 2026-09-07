@@ -337,7 +337,7 @@ export const roadmapStages = [
       {
         kind: "label",
         label: "claim_totalistic_pairwise_characterization",
-        why: "有限な閉近傍舞台上の総和型局所規則族を、同じ中心値と一状態数を持つ入力対の整合性で特徴づけた。現在は構造化記述までで、SageMathとLean二版は後続対象である。",
+        why: "有限な閉近傍舞台上の総和型局所規則族を、同じ中心値と一状態数を持つ入力対の整合性で特徴づけた。SageMathの段別検算とLean具体版まで完了し、Lean必要十分版と具体版への導出が後続対象である。",
       },
       {
         kind: "label",

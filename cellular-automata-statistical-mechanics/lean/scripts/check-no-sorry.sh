@@ -53,6 +53,10 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.TotalisticRuleClass.oneCount_le_stage_card
+  CellularAutomata.TotalisticRuleClass.totalistic_implies_pairwise
+  CellularAutomata.TotalisticRuleClass.pairwise_implies_totalistic
+  CellularAutomata.TotalisticRuleClass.totalistic_iff_pairwise
   CellularAutomata.NecSuf.CyclicStageLocalAgreement.eventuallyAgrees_iff
   CellularAutomata.NecSuf.CyclicStageLocalAgreement.eventuallyAgrees_of_witness
   CellularAutomata.NecSuf.CyclicStageLocalAgreement.observationCatalogue_countable
