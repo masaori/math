@@ -1,0 +1,21 @@
+{
+  "実行識別子": "8c3a3a5d-a6c4-48fa-9644-e5e0f0309232",
+  "観測時刻": "2026-09-07T16:11:08+09:00",
+  "起動登録の実測": {"コマンド": "launchctl list com.masaori.math-complex-matrix-ising-paper-organization-loop", "終了コード": 0, "対象label": "com.masaori.math-complex-matrix-ising-paper-organization-loop", "判定": "登録あり"},
+  "launchctl print": {"コマンド": "launchctl print gui/501/com.masaori.math-complex-matrix-ising-paper-organization-loop", "終了コード": 0, "state": "not running", "runs": 2, "last exit code": 1},
+  "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist", "存在": true, "sha256": "2f811ad50d24476e63564a39c657e27f5f42d3207de30629da59bd4c0910e641", "StartCalendarInterval": [{"Hour": 0, "Minute": 43}, {"Hour": 2, "Minute": 43}, {"Hour": 4, "Minute": 43}, {"Hour": 6, "Minute": 43}, {"Hour": 8, "Minute": 43}, {"Hour": 10, "Minute": 43}, {"Hour": 12, "Minute": 43}, {"Hour": 14, "Minute": 43}, {"Hour": 16, "Minute": 43}, {"Hour": 18, "Minute": 43}, {"Hour": 20, "Minute": 43}, {"Hour": 22, "Minute": 43}]},
+  "実ログ": [
+    {"path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd-error.log", "存在": true, "更新時刻": "2026-09-07T14:43:58+09:00", "抽出行": ["subprocess.TimeoutExpired: Command '['ps', '-eo', 'pid=,command=']' timed out after 10 seconds", "RuntimeError: Codexプロセス一覧を取得できなかった"]},
+    {"path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log", "存在": true, "更新時刻": "2026-09-07T13:44:42+09:00", "抽出行": ["2026-09-07 12:43:22 START: 論文構成tick", "2026-09-07 12:43:22 モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=/Users/masaori/.codex-coding-agent-0004", "2026-09-07 13:44:39 CHECKPOINT: 有限上限までの成果をworktreeへ保持し、次回は継続モードで完了工程だけを行う（exit 124）"]}
+  ],
+  "実行の終了値の解釈": "観測時に登録あり・非実行中・last exit code 1。最新の起動失敗はアカウント割当処理がpsの10秒タイムアウトで停止したもの。直前の研究実行はexit 124で打ち切られ、未コミット成果をworktreeへ保持した。どちらも研究上の前進には数えない。",
+  "成果比較": {"開始成果": "3c37e0c4d7c994a920be494931f2da8b2fc017b9", "前回読解終点": "d9df40ba29cb0c91facbb57932812610fc6238fd", "今回読解終点": "98ac1d8a171777ca087b6a37f5474376dd9b1e60", "確認した成果": ["a8a90a2c72dbf9b4614c621f5cdfad773ef66ddb: セクター射影後の転送行列表示のLean具体版と必要十分版", "093de7ddea6806a9b92c2749b1fe5d4965d0f8ba: V2 Jordan–Wigner形式化対応の同期", "033e31196222b071164c4380da21086c2015b56e: 全スピン反転行列の二固有空間を二定義・二部分空間主張へ分ける境界の確定"]},
+  "検査結果": [
+    {"時刻": "2026-09-07T16:23:34+09:00", "コマンド": "node scripts/research-supervision/verify.ts --all", "終了コード": 0, "結果": "六研究の評価記録を受理"},
+    {"時刻": "2026-09-07T16:23:34+09:00", "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts", "終了コード": 0, "結果": "24件成功"},
+    {"時刻": "2026-09-07T16:24:39+09:00", "コマンド": "structured-latex/node_modules/.bin/tsc -p scripts/research-supervision/tsconfig.json", "終了コード": 0, "結果": "型検査成功"},
+    {"時刻": "2026-09-07T16:24:39+09:00", "コマンド": "node scripts/research-supervision/verify-test.ts", "終了コード": 0, "結果": "対象・欠落・権限分離・今回追記・外部パス拒否が成功"},
+    {"時刻": "2026-09-07T16:24:39+09:00", "コマンド": "python3 scripts/test-research-tick-models.py", "終了コード": 0, "結果": "3件成功"},
+    {"時刻": "2026-09-07T16:24:39+09:00", "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh", "終了コード": 0, "結果": "研究監督tickの検査成功"}
+  ]
+}
