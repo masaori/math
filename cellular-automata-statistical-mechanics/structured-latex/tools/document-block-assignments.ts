@@ -1,5 +1,10 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "totalistic_rule_class_definition_closed_symmetric_stage": "rule_class_separation",
+  "totalistic_rule_class_definition_local_signature": "rule_class_separation",
+  "totalistic_rule_class_definition_totalistic_family": "rule_class_separation",
+  "totalistic_rule_class_claim_pairwise_characterization": "rule_class_separation",
+  "totalistic_rule_class_claim_finite_decidability": "rule_class_separation",
   "cyclic_stage_local_agreement_definition_family": "cyclic_stage_local_agreement",
   "cyclic_stage_local_agreement_definition_window_relations": "cyclic_stage_local_agreement",
   "cyclic_stage_local_agreement_definition_group_operations": "cyclic_stage_local_agreement",

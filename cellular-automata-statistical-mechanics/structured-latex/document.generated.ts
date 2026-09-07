@@ -85,6 +85,7 @@ import blocks_self_transpose_composition_total_closure_characterization from './
 import blocks_self_transpose_neighborhood_assignment_count from './content/self-transpose-neighborhood-assignment-count.ts'
 import blocks_stage_reversible_composition_nonclosure from './content/stage-reversible-composition-nonclosure.ts'
 import blocks_time_expansion_dependency from './content/time-expansion-dependency.ts'
+import blocks_totalistic_rule_class from './content/totalistic-rule-class.ts'
 import blocks_transitive_closure_antisymmetry from './content/transitive-closure-antisymmetry.ts'
 
 
@@ -158,6 +159,7 @@ export type AllBlocks = [
   ...typeof blocks_self_transpose_neighborhood_assignment_count,
   ...typeof blocks_stage_reversible_composition_nonclosure,
   ...typeof blocks_time_expansion_dependency,
+  ...typeof blocks_totalistic_rule_class,
   ...typeof blocks_transitive_closure_antisymmetry,
 ]
 

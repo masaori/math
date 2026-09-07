@@ -335,6 +335,16 @@ export const roadmapStages = [
     ],
     evidence: [
       {
+        kind: "label",
+        label: "claim_totalistic_pairwise_characterization",
+        why: "有限な閉近傍舞台上の総和型局所規則族を、同じ中心値と一状態数を持つ入力対の整合性で特徴づけた。現在は構造化記述までで、SageMathとLean二版は後続対象である。",
+      },
+      {
+        kind: "label",
+        label: "claim_totalistic_membership_finite_decidable",
+        why: "総和型所属を有限セルと有限局所入力の全比較へ落とし、判定の入力と量化範囲を明示した。",
+      },
+      {
         kind: "path",
         path: "docs/2値セルオートマトンの定義と呼び名.md",
         why: "総和型、二元体上で線形なもの、可逆なもの、二次のもの、ブロック型、確率的なものの呼び名と入力構造の正本。現在はこれらと既存本文の定義・有限判定の対応を確定する段階である。",

@@ -184,6 +184,14 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "rule_class_separation",
+        title: "有限真理値表による規則クラスの分別",
+        input: "有限舞台、規則クラスごとに必要な舞台・状態の追加構造、有限局所真理値表を入力とする。",
+        output: "各規則クラスの定義、所属の有限判定、クラス固有の主張と一般には成り立たない境界を得る。",
+        main: "現在の主張は、有限な閉近傍舞台上の総和型所属が、同じ中心値と一状態数を持つ全入力対の有限比較と同値になることである。",
+        mainLabels: ["claim_totalistic_pairwise_characterization", "claim_totalistic_membership_finite_decidable"],
+      },
+      {
         id: "local_representation_and_composition",
         title: "局所表現・逆写像・大域写像の合成",
         input: "本質的依存台、有限大域写像の可逆性、近傍割り当ての合成を入力とする。",
