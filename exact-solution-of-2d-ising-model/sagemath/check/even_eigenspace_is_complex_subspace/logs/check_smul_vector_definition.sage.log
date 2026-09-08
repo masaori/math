@@ -1,0 +1,8 @@
+PASS: componentwise complex scalar multiplication, r=0
+RESULT: PASS
+PASS: componentwise complex scalar multiplication, r=1
+RESULT: PASS
+PASS: componentwise complex scalar multiplication, r=2
+RESULT: PASS
+PASS: componentwise complex scalar multiplication, r=3
+RESULT: PASS

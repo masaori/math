@@ -1,0 +1,8 @@
+PASS: [epsilon 0]_r = sum_s epsilon_rs 0, r=0
+RESULT: PASS
+PASS: [epsilon 0]_r = sum_s epsilon_rs 0, r=1
+RESULT: PASS
+PASS: [epsilon 0]_r = sum_s epsilon_rs 0, r=2
+RESULT: PASS
+PASS: [epsilon 0]_r = sum_s epsilon_rs 0, r=3
+RESULT: PASS

@@ -480,6 +480,15 @@ targets=(
   Ising2D.NecSuf.pow_mul_proj
   Ising2D.NecSuf.mul_pow_conj_left
   Ising2D.evenEigenvectors
+  Ising2D.zero_mem_evenEigenvectors
+  Ising2D.add_mem_evenEigenvectors
+  Ising2D.smul_mem_evenEigenvectors
+  Ising2D.evenEigenspace
+  Ising2D.evenEigenspace_eq_fixedSubmodule
+  Ising2D.NecSuf.zero_mem_fixedVectors
+  Ising2D.NecSuf.add_mem_fixedVectors
+  Ising2D.NecSuf.smul_mem_fixedVectors
+  Ising2D.NecSuf.fixedSubmodule
   Ising2D.oddEigenvectors
   Ising2D.epsProj_sq
   Ising2D.epsProj_mul_epsProj_neg

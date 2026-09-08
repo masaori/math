@@ -1,0 +1,8 @@
+PASS: distribute epsilon_rs over f_s+g_s, r=0
+RESULT: PASS
+PASS: distribute epsilon_rs over f_s+g_s, r=1
+RESULT: PASS
+PASS: distribute epsilon_rs over f_s+g_s, r=2
+RESULT: PASS
+PASS: distribute epsilon_rs over f_s+g_s, r=3
+RESULT: PASS

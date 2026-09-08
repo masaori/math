@@ -1831,6 +1831,150 @@ S_Nf
     },
   },
   {
+    id: "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { tex: String.raw`\mathcal{F}^{(+)}\text{ の複素部分線型空間性}` },
+    labels: ["even_eigenspace_is_complex_subspace"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " の ",
+        math(String.raw`\mathcal{F}^{(+)}\subseteq\mathbb{C}^{2^M}`),
+        " を考える。この集合は零ベクトルを含み、複素数ベクトルの和と複素スカラー倍について閉じる。すなわち、",
+      ]),
+      displayMath(String.raw`0\in\mathcal{F}^{(+)}`),
+      paragraph(["であり、任意の ", math(String.raw`f,g\in\mathcal{F}^{(+)}`), " と ", math(String.raw`a\in\mathbb{C}`), " に対して、"]),
+      displayMath(String.raw`f+g\in\mathcal{F}^{(+)},\qquad af\in\mathcal{F}^{(+)}`),
+      paragraph(["が成り立つ。したがって ", math(String.raw`\mathcal{F}^{(+)}`), " は ", math(String.raw`\mathbb{C}^{2^M}`), " の複素部分線型空間である。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("mat_mult"),
+        " の行列と数ベクトルの積、および ",
+        ref("complex_numbers_form_a_field"),
+        " の複素数の演算法則を用いる。複素数ベクトルの演算は成分ごとに定め、任意の ",
+        math(String.raw`u,v\in\mathbb{C}^{2^M}`),
+        "、",
+        math(String.raw`a\in\mathbb{C}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " に対して ",
+        math(String.raw`[u+v]_r:=u_r+v_r`),
+        " および ",
+        math(String.raw`[au]_r:=au_r`),
+        " とする。まず零ベクトルを考える。任意の ",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[\varepsilon 0]_r
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}0
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=\sum_{s=1}^{2^M}0
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の零倍}\right)\\
+&=0
+&&\left(\because\ \text{有限個の零の和}\right).
+\end{aligned}`),
+      paragraph([
+        "全ての成分が一致するので ",
+        math(String.raw`\varepsilon 0=0`),
+        " である。よって ",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " から ",
+        math(String.raw`0\in\mathcal{F}^{(+)}`),
+        " である。",
+      ]),
+      paragraph([
+        "次に ",
+        math(String.raw`f,g\in\mathcal{F}^{(+)}`),
+        " とする。",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " より ",
+        math(String.raw`\varepsilon f=f`),
+        " かつ ",
+        math(String.raw`\varepsilon g=g`),
+        " である。任意の ",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[\varepsilon(f+g)]_r
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}(f_s+g_s)
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=\sum_{s=1}^{2^M}(\varepsilon_{rs}f_s+\varepsilon_{rs}g_s)
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配律}\right)\\
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}f_s+\sum_{s=1}^{2^M}\varepsilon_{rs}g_s
+&&\left(\because\ \text{有限和を項ごとに分ける}\right)\\
+&=[\varepsilon f]_r+[\varepsilon g]_r
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=f_r+g_r
+&&\left(\because\ \varepsilon f=f\ \text{かつ}\ \varepsilon g=g\right)\\
+&=[f+g]_r
+&&\left(\because\ \text{複素数ベクトルの和の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "全ての成分が一致するので ",
+        math(String.raw`\varepsilon(f+g)=f+g`),
+        " である。よって ",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " から ",
+        math(String.raw`f+g\in\mathcal{F}^{(+)}`),
+        " である。",
+      ]),
+      paragraph([
+        "最後に ",
+        math(String.raw`a\in\mathbb{C}`),
+        " と ",
+        math(String.raw`f\in\mathcal{F}^{(+)}`),
+        " を取る。",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " より ",
+        math(String.raw`\varepsilon f=f`),
+        " である。任意の ",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[\varepsilon(af)]_r
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}(af_s)
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=\sum_{s=1}^{2^M}(\varepsilon_{rs}a)f_s
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\right)\\
+&=\sum_{s=1}^{2^M}(a\varepsilon_{rs})f_s
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律}\right)\\
+&=\sum_{s=1}^{2^M}a(\varepsilon_{rs}f_s)
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\right)\\
+&=a\sum_{s=1}^{2^M}\varepsilon_{rs}f_s
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配律を有限回適用}\right)\\
+&=a[\varepsilon f]_r
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=af_r
+&&\left(\because\ \varepsilon f=f\right)\\
+&=[af]_r
+&&\left(\because\ \text{複素数ベクトルのスカラー倍の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "全ての成分が一致するので ",
+        math(String.raw`\varepsilon(af)=af`),
+        " である。よって ",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " から ",
+        math(String.raw`af\in\mathcal{F}^{(+)}`),
+        " である。零ベクトル・和・複素スカラー倍についての三つの結果から、主張を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "二つの部分空間性を束ねていた後続ブロックから、F^{(+)} の複素部分線型空間性だけを分離した。",
+        "抽象線型写像 end(ε) を経由せず、通常の行列と数ベクトルの積を成分ごとに展開した。F^{(-)} の部分空間性は後続ブロックに残す。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/003_definition_epsilonの固有空間.typ", ordinal: 4 },
@@ -1846,6 +1990,16 @@ S_Nf
         " で ",
         math(String.raw`\mathcal{F}^{(-)}`),
         " を定めた。",
+      ]),
+      paragraph([
+        ref("even_eigenspace_is_complex_subspace"),
+        " により ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        "-部分線型空間である。残る ",
+        math(String.raw`\mathcal{F}^{(-)}`),
+        " について、",
       ]),
       paragraph([
         ref("def_end_iso"),
@@ -1864,7 +2018,7 @@ S_Nf
       paragraph([
         math(String.raw`\mathbf{end}(\varepsilon)`),
         " は線型写像だから、",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
+        math(String.raw`\mathcal{F}^{(-)}`),
         " は ",
         math(String.raw`\mathcal{F}`),
         " の ",
@@ -1874,7 +2028,7 @@ S_Nf
     ],
     conversion: {
       status: "converted",
-      notes: ["二つの部分空間性を、次の分割対象として保持する。"],
+      notes: ["F^{(+)} の部分空間性を独立ブロックへ分離し、F^{(-)} の部分空間性だけを次の分割対象として保持する。"],
     },
   },
   {

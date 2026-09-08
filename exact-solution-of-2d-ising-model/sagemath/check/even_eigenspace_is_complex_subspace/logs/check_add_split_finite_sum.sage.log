@@ -1,0 +1,8 @@
+PASS: split the finite sum termwise, r=0
+RESULT: PASS
+PASS: split the finite sum termwise, r=1
+RESULT: PASS
+PASS: split the finite sum termwise, r=2
+RESULT: PASS
+PASS: split the finite sum termwise, r=3
+RESULT: PASS

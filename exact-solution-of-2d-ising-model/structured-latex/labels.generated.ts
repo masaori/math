@@ -192,6 +192,7 @@ export const ALL_LABELS = [
   "epsilon_square_and_eigenvalues",
   "equation_of_a_theta_mu",
   "euler_formula_cos_sin",
+  "even_eigenspace_is_complex_subspace",
   "exp_X_Y_exp_-X",
   "exp_converges",
   "exp_hermitian_is_positive_definite",

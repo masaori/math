@@ -1,0 +1,8 @@
+PASS: use epsilon f=f, r=0
+RESULT: PASS
+PASS: use epsilon f=f, r=1
+RESULT: PASS
+PASS: use epsilon f=f, r=2
+RESULT: PASS
+PASS: use epsilon f=f, r=3
+RESULT: PASS

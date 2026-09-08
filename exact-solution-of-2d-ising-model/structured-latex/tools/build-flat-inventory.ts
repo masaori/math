@@ -703,12 +703,13 @@ const v1V2JordanWignerExpectedExternalInputContentSha256 = new Map<string, strin
 ]);
 const epsilonEigenspacesExpectedDirectDependencies = [
   "calc_formulae_006_definition_of_cc",
+  "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
   "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
   "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_005_definition_end_isomorphism",
 ].sort();
-const epsilonEigenspacesExpectedContentSha256 = "76adc6924021740c36514c8d75989e44eb515038a2e28ba4a087e6fba4086adf";
+const epsilonEigenspacesExpectedContentSha256 = "a847cf4c46fe1be6bbfa5be5b2bb9135b3ceb71567f88adbf82302ad3e8b7e83";
 const evenEigenvectorsExpectedDirectDependencies = [
   "calc_formulae_003_matrix_decomposition",
   "calc_formulae_006_definition_of_cc",
@@ -716,6 +717,14 @@ const evenEigenvectorsExpectedDirectDependencies = [
   "transfer_matrix_001_definition_symbols",
 ].sort();
 const evenEigenvectorsExpectedContentSha256 = "388f1d9a42da7e2e5fcbea03e04777482706b0de3679a6073252660261e56cef";
+const evenEigenspaceSubspaceExpectedDirectDependencies = [
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
+].sort();
+const evenEigenspaceSubspaceExpectedContentSha256 = "fb50221fcb157e202e8d17e29f0f2bcf8155255d439799828148efdd32900624";
 const oddEigenvectorsExpectedDirectDependencies = [
   "calc_formulae_003_matrix_decomposition",
   "calc_formulae_006_definition_of_cc",
@@ -724,16 +733,14 @@ const oddEigenvectorsExpectedDirectDependencies = [
 ].sort();
 const oddEigenvectorsExpectedContentSha256 = "c0c4e8962153fafbe3a91c79b7aa011d702de7db0f772708f187b27c21e810c5";
 const epsilonEigenspacesBoundaryCandidates = [
-  "F^{(+)} が複素数上の部分線型空間であること",
   "F^{(-)} が複素数上の部分線型空間であること",
 ] as const;
 const epsilonEigenspacesExpectedBoundaryCandidates = [
-  "F^{(+)} が複素数上の部分線型空間であること",
   "F^{(-)} が複素数上の部分線型空間であること",
 ] as const;
 const epsilonEigenspacesNextTickUnit = epsilonEigenspacesBoundaryCandidates.slice(0, 1);
 const epsilonEigenspacesExpectedNextTickUnit = [
-  "F^{(+)} が複素数上の部分線型空間であること",
+  "F^{(-)} が複素数上の部分線型空間であること",
 ] as const;
 if (JSON.stringify(epsilonEigenspacesBoundaryCandidates)
     !== JSON.stringify(epsilonEigenspacesExpectedBoundaryCandidates)
@@ -752,11 +759,91 @@ const epsilonEigenspacesFormalizationEvidenceSha256 = [
   ],
   [
     "lean/docs/ch010-formalization.md",
-    "1a515ccf140064324101ec8c4486351fa233e238487eb43d60a85c635439e8ba",
+    "6c19bea712da703a633e9e0fdb92570ec0a818d9b5f4dd62d703c5dd183cacf5",
   ],
   [
     "lean/Ising2D/Part004/EvenEigenvectors.lean",
-    "0eeefc63c291f883c3aa07e92197401c6049e1fefebbf4d1edeafb608c051706",
+    "594ff5ff3ca0900a4fc79bfcf413a4ea6b2590277a07fa4bb0088d97e7fcd08b",
+  ],
+  [
+    "lean/Ising2D/NecSuf/FixedVectorsSubmodule.lean",
+    "06b6d15e954df1740da6a14635271bd1938aa7ce68638d394140f60521356aee",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/_prelude.sage",
+    "fe737d164eca9a1e0777a7c2e862a368b6ff5924354d26afb23288a5a7efee61",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_add_action_definition.sage",
+    "cb28e5900f8157c3716290d414198abacd4404673c24f8a604e53a2d3144a5ec",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_add_action_reassembly.sage",
+    "0e8ef7f3b6501b304dc271bef1b7a4b760d4093433a0075dfcaca4636556876a",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_add_distributivity.sage",
+    "0b022424f57e4e8ef978e7f022c527644faa8ff4e190bed83fe5e14efa1dcdd4",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_add_eigenvector_hypotheses.sage",
+    "bde147caa169dad2c419c1c6b6c67857b3394412cec19894c9d96025bf86b51a",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_add_split_finite_sum.sage",
+    "94eb0c85638713378b2daee3c3683b20bb77985f0019fa16dc91ee5cee881ac0",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_add_vector_definition.sage",
+    "e31d68ea0b759df45605d533372ffe84120d10c14a5c3c1affa3ab1e55402e83",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_action_definition.sage",
+    "37f1eec7ac06db0b5665e6f2edb90c6cb00f97b1d2c2a53c4d2520bf8d9735eb",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_action_reassembly.sage",
+    "f3fa86ffff1c30714af5960304183075c015661d5e2d01ad78cd387f83df73d7",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_associate_left.sage",
+    "e1e11daf31a60adeb73a76a2b2e114194369ba01903230b5006574b68c8ad5e7",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_associate_right.sage",
+    "27e85e023e79d4b9bfe4759e25e79858bdf119651c74d6a1e62cd328ba1af0e3",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_commute_scalar.sage",
+    "0a72ddbde0ef6ca7fcadeaeb88040239b611afa74ca8d1c0949ffa24d12dc812",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_eigenvector_hypothesis.sage",
+    "e3e380945730a7e2a3792f79ef4654845e0a5dca8580d84b4096012d80dc7e69",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_extract_finite_sum.sage",
+    "ba853faee5451fdaf6b70eaab69d1ade88718591cc1495601351d73076963ed0",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_vector_definition.sage",
+    "6a45d3042366a72d2d5d8bcafe91f31bf6f41f0e49a60aff627ee8604303fee9",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_zero_action_definition.sage",
+    "2f4c8bf255c648dfe94e017dbe786cb7dea3ec3000aef2275077e2c169f4f6ef",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_zero_finite_sum.sage",
+    "b5f7bb6944faa1c4fc36f3070faf587d881fb266240676d09211049ccfed6a65",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/check_zero_multiplication.sage",
+    "b9bea62911d5483963aceedc8d366a1c3261279196a1353c94aa211e37e0d4cb",
+  ],
+  [
+    "sagemath/check/even_eigenspace_is_complex_subspace/overview.md",
+    "9c1a4d7e5d77e36dc25a36f5a5d1c9aaac7f55626343cde84381534de2a264b2",
   ],
   [
     "sagemath/check/def_even_eigenvectors_of_epsilon/check_even_eigenvectors.sage",
@@ -791,6 +878,7 @@ for (const [path, expected] of epsilonEigenspacesFormalizationEvidenceSha256) {
 const epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds = [
   "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
   "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
+  "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
   "transfer_matrix_004_definition_eigenspaces_of_epsilon",
   "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
   "bridge_009_claim_epsilon_projector_properties",
@@ -798,7 +886,11 @@ const epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds = [
 const epsilonEigenspacesAndComplementaryProjectorsExpectedInternalDependencies = new Map<string, string[]>([
   ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", []],
   ["transfer_matrix_004_definition_eigenspace_odd_of_epsilon", []],
+  ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace", [
+    "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
+  ]],
   ["transfer_matrix_004_definition_eigenspaces_of_epsilon", [
+    "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
     "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
     "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
   ]],
@@ -811,7 +903,8 @@ const epsilonEigenspacesAndComplementaryProjectorsExpectedInternalDependencies =
 const epsilonEigenspacesAndComplementaryProjectorsExpectedContentSha256 = new Map<string, string>([
   ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", "388f1d9a42da7e2e5fcbea03e04777482706b0de3679a6073252660261e56cef"],
   ["transfer_matrix_004_definition_eigenspace_odd_of_epsilon", "c0c4e8962153fafbe3a91c79b7aa011d702de7db0f772708f187b27c21e810c5"],
-  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "76adc6924021740c36514c8d75989e44eb515038a2e28ba4a087e6fba4086adf"],
+  ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace", "fb50221fcb157e202e8d17e29f0f2bcf8155255d439799828148efdd32900624"],
+  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "a847cf4c46fe1be6bbfa5be5b2bb9135b3ceb71567f88adbf82302ad3e8b7e83"],
   ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", "70574d82e3eb8756d2c02681bad01f2c23a44a29bbdcbb7488ec62978dbc5e39"],
   ["bridge_009_claim_epsilon_projector_properties", "d109dc4db25a9487b161b9c265101260700ec7eba6697fcb0fde07bc728d9100"],
 ]);
@@ -820,6 +913,7 @@ const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputEntryIds 
   "bridge_008_definition_epsilon_projectors",
   "calc_formulae_003_matrix_decomposition",
   "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field",
   "calculation_formulae_definition_set_and_algebra_notation",
   "linear_space_general_000b_claim_kronecker_product_rule",
   "transfer_matrix_001_definition_symbols",
@@ -831,6 +925,7 @@ const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputContentSh
   ["bridge_008_definition_epsilon_projectors", "be5003446b4cb92b2911fb88cee1a7cc85dd13f412c3207866e1f70d987c4890"],
   ["calc_formulae_003_matrix_decomposition", "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
+  ["calculation_formulae_025_claim_complex_numbers_form_a_field", "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
@@ -868,7 +963,7 @@ const v1RestrictionToEigenspacesExpectedExternalInputContentSha256 = new Map<str
   ["linear_space_general_002c_claim_matrix_norm_triangle_inequality", "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
   ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "81e8943e63a08c66cf386327af850af907b332c366431782bff3f4b1dd7092f2"],
-  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "76adc6924021740c36514c8d75989e44eb515038a2e28ba4a087e6fba4086adf"],
+  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "a847cf4c46fe1be6bbfa5be5b2bb9135b3ceb71567f88adbf82302ad3e8b7e83"],
   ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
   ["transfer_matrix_005b_claim_end_is_algebra_isomorphism", "1a9ecef9cd59f12d82071b4c248e4319f7c9be8e3f42cf1bc9289737d9e5d033"],
   ["transfer_matrix_005c_claim_end_preserves_matrix_exponential", "6b163e3b366800fd0dcda4eec827fa428e8721922ff5b3e064127c321b4d62c0"],
@@ -1903,7 +1998,7 @@ const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_019_definition_polar_equivalence_class", "LLMによる検証: 半径零と正の場合を分けた反射性・対称性・推移性の説明、および同値類から商集合を作る説明が未整備である。外部入力の角度同値関係にも同じ不足がある。節構造だけを確定し本文完成とは扱わない。"],
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
   ["transfer_matrix_001_definition_symbols", "二次・多因子の単位行列、サイトごとの三つの Pauli 行列、V1・V2、Jordan–Wigner 行列、全スピン反転行列、双対結合定数、双曲線関数の略記という独立した定義を一ブロックへ束ねている。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。分割後に節境界と依存順を再判定する必要がある。"],
-  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "LLMによる検証: F^{(+)}・F^{(-)} がそれぞれ複素部分線型空間であるという二主張を一ブロックへ束ね、抽象線型写像 end(ε) を使っている。残る二つの本文単位と Lean・SageMath の対応ラベルを分けた後に、直接依存、節境界、説明粒度を再判定する必要がある。"],
+  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "LLMによる検証: F^{(+)} の複素部分線型空間性は成分表示の独立項へ分離した。残る F^{(-)} の複素部分線型空間性は抽象線型写像 end(ε) に依存しているため、本文の独立項と Lean・SageMath の対応ラベルへ分けた後に、直接依存、節境界、説明粒度を再判定する必要がある。"],
   ["transfer_matrix_011_definition_H1_H2", "一般の生成子 H1^{(±)} と H2 の二定義に加え、既存の V1^{(±)} と V2 の指数表示を同じブロックへ束ねている。今回確定する節では外部入力として扱い、将来一ブロック一定義へ分割した後に依存順と節境界を再判定する必要がある。"],
 ]);
 const futureBlockSplitRecommendedById = new Set([
@@ -1913,6 +2008,8 @@ const futureBlockSplitRecommendedById = new Set([
 ]);
 const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", ["transfer_matrix_003a_claim_V2_in_Z_Y"]],
+  ["transfer_matrix_004_definition_eigenspace_odd_of_epsilon", ["transfer_matrix_004_definition_eigenspace_even_of_epsilon"]],
+  ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace", ["transfer_matrix_004_definition_eigenspace_odd_of_epsilon"]],
   ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", ["transfer_matrix_004_definition_eigenspaces_of_epsilon"]],
   ["maxeig_claim_symmetrized_transfer_matrix_on_sectors", ["maxeig_010b_claim_epsilon_commutes_with_W"]],
   ["maxeig_010_claim_sector_decomposition_of_c", ["maxeig_claim_symmetrized_transfer_matrix_on_sectors"]],
@@ -2779,9 +2876,10 @@ const positiveSymmetrizedTransferMatrixEntriesEntry = positiveSymmetrizedTransfe
 const zYLinearIndependenceEntry = zYLinearIndependenceSection.sectionEntries[0]!;
 const evenEigenvectorsEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[0]!;
 const oddEigenvectorsEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[1]!;
-const epsilonEigenspacesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[2]!;
-const epsilonSquareAndEigenvaluesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[3]!;
-const epsilonProjectorPropertiesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[4]!;
+const evenEigenspaceSubspaceEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[2]!;
+const epsilonEigenspacesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[3]!;
+const epsilonSquareAndEigenvaluesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[4]!;
+const epsilonProjectorPropertiesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[5]!;
 const v1RestrictionToEigenspacesEntry = v1RestrictionToEigenspacesSection.sectionEntries[0]!;
 const v1PlusMinusDefinitionEntry = v1PlusMinusAndCommutationSection.sectionEntries[0]!;
 const sectorReplacementEntry = v1PlusMinusAndCommutationSection.sectionEntries[1]!;
@@ -2842,10 +2940,11 @@ if (kappaDefinitionEntry.dependencyPlacement!.chapterOrder !== 17
   || v1V2JordanWignerSection.sectionEntries[1]!.dependencyPlacement!.chapterOrder !== 25
   || evenEigenvectorsEntry.dependencyPlacement!.chapterOrder !== 26
   || oddEigenvectorsEntry.dependencyPlacement!.chapterOrder !== 27
-  || epsilonEigenspacesEntry.dependencyPlacement!.chapterOrder !== 28
-  || epsilonSquareAndEigenvaluesEntry.dependencyPlacement!.chapterOrder !== 29
-  || epsilonProjectorPropertiesEntry.dependencyPlacement!.chapterOrder !== 30
-  || v1RestrictionToEigenspacesEntry.dependencyPlacement!.chapterOrder !== 31) {
+  || evenEigenspaceSubspaceEntry.dependencyPlacement!.chapterOrder !== 28
+  || epsilonEigenspacesEntry.dependencyPlacement!.chapterOrder !== 29
+  || epsilonSquareAndEigenvaluesEntry.dependencyPlacement!.chapterOrder !== 30
+  || epsilonProjectorPropertiesEntry.dependencyPlacement!.chapterOrder !== 31
+  || v1RestrictionToEigenspacesEntry.dependencyPlacement!.chapterOrder !== 32) {
   throw new Error(`臨界条件用実数から V1 の固有空間への制限までの章内順が変わりました: ${JSON.stringify({
     kappaOrder: kappaDefinitionEntry.dependencyPlacement!.chapterOrder,
     criticalSinhProductOrder: criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder,
@@ -2900,6 +2999,10 @@ if (JSON.stringify([...evenEigenvectorsEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(oddEigenvectorsExpectedDirectDependencies)
   || oddEigenvectorsEntry.explanationGranularityReview.inspectedContentSha256
     !== oddEigenvectorsExpectedContentSha256
+  || JSON.stringify([...evenEigenspaceSubspaceEntry.dependsOnEntryIds].sort())
+    !== JSON.stringify(evenEigenspaceSubspaceExpectedDirectDependencies)
+  || evenEigenspaceSubspaceEntry.explanationGranularityReview.inspectedContentSha256
+    !== evenEigenspaceSubspaceExpectedContentSha256
   || JSON.stringify([...epsilonEigenspacesEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(epsilonEigenspacesExpectedDirectDependencies)
   || epsilonEigenspacesEntry.explanationGranularityReview.inspectedContentSha256
@@ -2959,6 +3062,7 @@ if (JSON.stringify(inputsAddedForV1Restriction.sort()) !== JSON.stringify([
   || JSON.stringify(inputsDroppedAfterEpsilonProjectors.sort()) !== JSON.stringify([
     "bridge_008_definition_epsilon_projectors",
     "calc_formulae_003_matrix_decomposition",
+    "calculation_formulae_025_claim_complex_numbers_form_a_field",
     "linear_space_general_000b_claim_kronecker_product_rule",
   ].sort())) {
   throw new Error(`全スピン反転行列の相補射影の直後で入力集合の切り替わり方が変わりました: ${JSON.stringify({
@@ -2966,7 +3070,7 @@ if (JSON.stringify(inputsAddedForV1Restriction.sort()) !== JSON.stringify([
     dropped: inputsDroppedAfterEpsilonProjectors,
   })}`);
 }
-if (v1PlusMinusDefinitionEntry.dependencyPlacement!.chapterOrder !== 32
+if (v1PlusMinusDefinitionEntry.dependencyPlacement!.chapterOrder !== 33
   || JSON.stringify([...v1PlusMinusDefinitionEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(v1PlusMinusDefinitionExpectedDirectDependencies)
   || v1PlusMinusDefinitionEntry.explanationGranularityReview.inspectedContentSha256
@@ -2997,13 +3101,13 @@ if (JSON.stringify(inputsAddedForV1PlusMinusDefinition.sort()) !== JSON.stringif
     dropped: inputsDroppedAfterV1Restriction,
   })}`);
 }
-if (v1PlusMinusDefinitionEntry.dependencyPlacement!.chapterOrder !== 32
-  || sectorReplacementEntry.dependencyPlacement!.chapterOrder !== 33
-  || v1PlusMinusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 34
-  || v1PlusMinusSquareRootClaimEntry.dependencyPlacement!.chapterOrder !== 35
-  || epsilonCommutationEntry.dependencyPlacement!.chapterOrder !== 36
-  || epsilonProjectorCommutationEntry.dependencyPlacement!.chapterOrder !== 37
-  || sectorReplacementPowerEntry.dependencyPlacement!.chapterOrder !== 38
+if (v1PlusMinusDefinitionEntry.dependencyPlacement!.chapterOrder !== 33
+  || sectorReplacementEntry.dependencyPlacement!.chapterOrder !== 34
+  || v1PlusMinusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 35
+  || v1PlusMinusSquareRootClaimEntry.dependencyPlacement!.chapterOrder !== 36
+  || epsilonCommutationEntry.dependencyPlacement!.chapterOrder !== 37
+  || epsilonProjectorCommutationEntry.dependencyPlacement!.chapterOrder !== 38
+  || sectorReplacementPowerEntry.dependencyPlacement!.chapterOrder !== 39
   || JSON.stringify([...sectorReplacementEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(sectorReplacementExpectedDirectDependencies)
   || sectorReplacementEntry.explanationGranularityReview.inspectedContentSha256
@@ -3169,9 +3273,9 @@ for (const entry of v1PlusHalfExponentAndSquareRootSection.sectionEntries) {
     throw new Error(`偶セクターの半指数行列と平方根性の直接依存が変わりました: ${entry.id}: ${JSON.stringify(entry.dependsOnEntryIds)}`);
   }
 }
-if (v1PlusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 57
-  || v1PlusSquareRootClaimEntry.dependencyPlacement!.chapterOrder !== 58
-  || vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 59
+if (v1PlusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 58
+  || v1PlusSquareRootClaimEntry.dependencyPlacement!.chapterOrder !== 59
+  || vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 60
   || v1PlusSquareRootDefinitionEntry.kind !== "definition"
   || v1PlusSquareRootClaimEntry.kind !== "claim"
   || vPlusDefinitionEntry.kind !== "definition"
@@ -3225,9 +3329,9 @@ for (const entry of vPlusDefinitionAndSignedTraceSection.sectionEntries) {
     throw new Error(`偶セクター転送行列と符号付きトレースの正値公式の直接依存が変わりました: ${entry.id}: ${JSON.stringify(entry.dependsOnEntryIds)}`);
   }
 }
-if (vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 59
-  || signedTraceOfVPlusEntry.dependencyPlacement!.chapterOrder !== 60
-  || vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 61
+if (vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 60
+  || signedTraceOfVPlusEntry.dependencyPlacement!.chapterOrder !== 61
+  || vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 62
   || vPlusDefinitionEntry.kind !== "definition"
   || signedTraceOfVPlusEntry.kind !== "theorem"
   || vPlusPositiveDefiniteEntry.kind !== "claim"
@@ -3253,16 +3357,16 @@ if (!vPlusDefinitionAndSignedTraceSection.sectionEntries.every((entry) =>
     !== "自動検査で主題に適合") {
   throw new Error("偶セクター転送行列・符号付きトレースまたは直後の正定値性の説明粒度判定が変わりました");
 }
-if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 61
-  || traceVPlusPositiveEntry.dependencyPlacement!.chapterOrder !== 62
-  || vPlusInvertibleEntry.dependencyPlacement!.chapterOrder !== 63
-  || vPlusInversePositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 64
-  || vPlusInversePositiveAndTracesEntry.dependencyPlacement!.chapterOrder !== 65
-  || v1PlusHalfInvertibleEntry.dependencyPlacement!.chapterOrder !== 66
-  || vTwoInvertibleEntry.dependencyPlacement!.chapterOrder !== 67
-  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 68
-  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 69
-  || vTwoConjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 70
+if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 62
+  || traceVPlusPositiveEntry.dependencyPlacement!.chapterOrder !== 63
+  || vPlusInvertibleEntry.dependencyPlacement!.chapterOrder !== 64
+  || vPlusInversePositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 65
+  || vPlusInversePositiveAndTracesEntry.dependencyPlacement!.chapterOrder !== 66
+  || v1PlusHalfInvertibleEntry.dependencyPlacement!.chapterOrder !== 67
+  || vTwoInvertibleEntry.dependencyPlacement!.chapterOrder !== 68
+  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 69
+  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 70
+  || vTwoConjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 71
   || vPlusInvertibleEntry.kind !== "claim"
   || vPlusInversePositiveDefiniteEntry.kind !== "claim"
   || traceVPlusPositiveEntry.kind !== "claim"
@@ -3435,9 +3539,9 @@ const vPlusCompositeConjugationExternalInputEntryIds = [...new Set(
     .flatMap((entry) => entry.dependsOnEntryIds)
     .filter((id) => !vPlusCompositeConjugationSectionIdSet.has(id)),
 )].sort((a, b) => order.get(a)!.chapterOrder - order.get(b)!.chapterOrder);
-if (vPlusCompositeConjugationDefinitionEntry.dependencyPlacement!.chapterOrder !== 71
-  || vPlusCompositeConjugationEqualityEntry.dependencyPlacement!.chapterOrder !== 72
-  || positiveDefiniteWEntry.dependencyPlacement!.chapterOrder !== 73
+if (vPlusCompositeConjugationDefinitionEntry.dependencyPlacement!.chapterOrder !== 72
+  || vPlusCompositeConjugationEqualityEntry.dependencyPlacement!.chapterOrder !== 73
+  || positiveDefiniteWEntry.dependencyPlacement!.chapterOrder !== 74
   || vPlusCompositeConjugationDefinitionEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || vPlusCompositeConjugationEqualityEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || positiveDefiniteWEntry.provisionalFinalChapter !== "2次元イジングモデル"
@@ -3518,11 +3622,11 @@ const positiveDefiniteWExpectedDirectDependencies = [
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_011_definition_H1_H2",
 ].sort();
-// 順74（Rayleigh 上限）で新しく入る入力。ここで単位球面上の上限という実数固有の道具へ移るため、
-// 順73 の後で節を閉じる。
+// 順75（Rayleigh 上限）で新しく入る入力。ここで単位球面上の上限という実数固有の道具へ移るため、
+// 順74 の後で節を閉じる。
 const rayleighSupNewInputEntryIds = ["linear_space_general_002b_definition_matrix_norm"].sort();
 if (positiveDefiniteWEntry.kind !== "claim"
-  || rayleighSupEntry.dependencyPlacement!.chapterOrder !== 74
+  || rayleighSupEntry.dependencyPlacement!.chapterOrder !== 75
   || rayleighSupEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...positiveDefiniteWEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(positiveDefiniteWExpectedDirectDependencies)
@@ -3552,7 +3656,7 @@ const rayleighSupExpectedDirectDependencies = [
   "maxeig_003_claim_W_is_positive_definite",
 ].sort();
 if (rayleighSupEntry.kind !== "definition"
-  || operatorBoundEntry.dependencyPlacement!.chapterOrder !== 75
+  || operatorBoundEntry.dependencyPlacement!.chapterOrder !== 76
   || operatorBoundEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...rayleighSupEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(rayleighSupExpectedDirectDependencies)
@@ -3582,7 +3686,7 @@ const operatorBoundExpectedDirectDependencies = [
   "maxeig_006_definition_rayleigh_sup",
 ].sort();
 if (operatorBoundEntry.kind !== "claim"
-  || tracePowerUpperBoundEntry.dependencyPlacement!.chapterOrder !== 76
+  || tracePowerUpperBoundEntry.dependencyPlacement!.chapterOrder !== 77
   || tracePowerUpperBoundEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...operatorBoundEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(operatorBoundExpectedDirectDependencies)
@@ -3610,8 +3714,8 @@ const momentLogConvexityExpectedDirectDependencies = [
 ].sort();
 if (tracePowerUpperBoundEntry.kind !== "claim"
   || momentLogConvexityEntry.kind !== "claim"
-  || momentLogConvexityEntry.dependencyPlacement!.chapterOrder !== 77
-  || tracePowerSandwichEntry.dependencyPlacement!.chapterOrder !== 78
+  || momentLogConvexityEntry.dependencyPlacement!.chapterOrder !== 78
+  || tracePowerSandwichEntry.dependencyPlacement!.chapterOrder !== 79
   || momentLogConvexityEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...tracePowerUpperBoundEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(tracePowerUpperBoundExpectedDirectDependencies)
@@ -3661,12 +3765,12 @@ const partitionFunctionSandwichExpectedDirectDependencies = [
   "maxeig_008_claim_trace_power_sandwich",
 ].sort();
 if (partitionFunctionSandwichEntry.kind !== "claim"
-  || partitionFunctionSandwichEntry.dependencyPlacement!.chapterOrder !== 79
+  || partitionFunctionSandwichEntry.dependencyPlacement!.chapterOrder !== 80
   || JSON.stringify([...partitionFunctionSandwichEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(partitionFunctionSandwichExpectedDirectDependencies)
   || partitionFunctionSandwichEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || entries.filter((entry) => entry.dependsOnEntryIds.includes(partitionFunctionSandwichEntry.id))
-    .some((entry) => entry.dependencyPlacement!.chapterOrder <= 78)) {
+    .some((entry) => entry.dependencyPlacement!.chapterOrder <= 79)) {
   throw new Error(`分配関数の挟み撃ちの一項節が変わりました: ${JSON.stringify({
     order: partitionFunctionSandwichEntry.dependencyPlacement?.chapterOrder,
     dependencies: partitionFunctionSandwichEntry.dependsOnEntryIds,
@@ -3695,8 +3799,8 @@ const epsilonCommutesWithWExpectedDirectDependencies = [
 ].sort();
 if (sectorRayleighSupEntry.kind !== "definition"
   || epsilonCommutesWithWEntry.kind !== "claim"
-  || sectorRayleighSupEntry.dependencyPlacement!.chapterOrder !== 81
-  || epsilonCommutesWithWEntry.dependencyPlacement!.chapterOrder !== 82
+  || sectorRayleighSupEntry.dependencyPlacement!.chapterOrder !== 82
+  || epsilonCommutesWithWEntry.dependencyPlacement!.chapterOrder !== 83
   || JSON.stringify([...sectorRayleighSupEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(sectorRayleighSupExpectedDirectDependencies)
   || JSON.stringify([...epsilonCommutesWithWEntry.dependsOnEntryIds].sort())
@@ -15428,7 +15532,7 @@ const isingModelSectionBoundaries = [{
   ],
   externalInputEntryIds: epsilonEigenspacesAndComplementaryProjectorsSection.externalInputEntryIds,
   output: [
-    "全スピン反転行列の固有値 +1 と −1 に対応する二つの固有空間",
+    "全スピン反転行列の固有値 +1 と −1 に対応する二つの固有空間、および F^{(+)} の複素部分線型空間性",
     "全スピン反転行列の二乗が単位行列であり、その作用の固有値が +1 または −1 に限ること",
     "P^{(+)} と P^{(-)} が互いに補い合い、それぞれの像が対応する固有空間に一致すること",
   ],
@@ -15437,6 +15541,7 @@ const isingModelSectionBoundaries = [{
   formalizationEvidence: {
     leanFiles: [
       "lean/Ising2D/Part004/EvenEigenvectors.lean",
+      "lean/Ising2D/NecSuf/FixedVectorsSubmodule.lean",
       "lean/Ising2D/Part004/OddEigenvectors.lean",
       "lean/Ising2D/Part010/Claim009_EpsilonProjectors.lean",
       "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
@@ -15445,13 +15550,16 @@ const isingModelSectionBoundaries = [{
     sageMathFiles: [
       "sagemath/check/def_even_eigenvectors_of_epsilon/check_even_eigenvectors.sage",
       "sagemath/check/def_odd_eigenvectors_of_epsilon/check_odd_eigenvectors.sage",
+      "sagemath/check/even_eigenspace_is_complex_subspace/check_zero_action_definition.sage",
+      "sagemath/check/even_eigenspace_is_complex_subspace/check_add_distributivity.sage",
+      "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_extract_finite_sum.sage",
     ],
-    currentStatus: "固有値 +1 と -1 の固有ベクトル全体 F^{(+)}・F^{(-)} は、本文と Lean の evenEigenvectors・oddEigenvectors の双方で M≥1 の下、εf=f・εf=-f を満たす複素数ベクトルの集合として具体的な行列作用だけから定義した。SageMath は各本文ラベルに対し M=1,…,5 の有限例で選んだベクトルが定義式を満たすことを校正する。二つの部分空間性は残る二単位として旧ブロックに保持する。既存の SageMath 検査が同じ旧ラベルへ束ねる ε²=I・固有値候補・次元公式は今回変更していない。",
+    currentStatus: "固有値 +1 と -1 の固有ベクトル全体 F^{(+)}・F^{(-)} は、本文と Lean の evenEigenvectors・oddEigenvectors の双方で M≥1 の下、εf=f・εf=-f を満たす複素数ベクトルの集合として具体的な行列作用だけから定義した。F^{(+)} の複素部分線型空間性は独立項へ分け、本文では零ベクトル・加法・複素スカラー倍の閉性を成分ごとに示し、Lean の具体版では同じ17段の成分計算に対応する三閉性と部分加群を証明した。必要十分版は有限添字と可換半環行列だけを仮定して同じ17段を証明し、具体版がその特殊化であることも示す。SageMath は M=2 の有限例を QQ(i) 上の厳密等号として本文の17段へ一ファイルずつ対応させる。F^{(-)} の部分空間性だけを旧ブロックに残す。既存の SageMath 検査が同じ旧ラベルへ束ねる ε²=I・固有値候補・次元公式は今回変更していない。",
   },
   mainTheorem: "全スピン反転行列から作る二つの行列が対応する固有空間への相補射影であること",
   mainTheoremEntryId: "bridge_009_claim_epsilon_projector_properties",
-  boundaryEvidence: "章内依存順26で固有値 +1、順27で固有値 -1 の固有ベクトル全体 F^{(+)}・F^{(-)} を具体的な行列作用だけから定め、順28に二つの部分空間性を保持する。これらと相互依存しない順29で ε²=I と固有値が ±1 に限ることを証明し、順30で順28の固有空間と順29の二乗公式を合わせて二つの行列の冪等性・相互直交性・和・像を計算する。直後の順31は固有空間だけを再利用して V1 の制限へ分岐し、順29の二乗・固有値と順30の相補射影には依存しない。順31では P^{(±)} の定義とクロネッカー積の積の規則を入力から外し、V1 の Jordan–Wigner 行列表示、一因子の反可換性、ノルムの基本性質の数ベクトル版、行列指数関数の作用保存を追加するため、順30の主定理で節を閉じる。生成時に五項の連続性、内部依存辺、節内本文と全外部入力の fingerprint、節末出力、順31の章内順・直接依存・本文・非依存、および入力集合の追加・除外を固定検査する。",
-  readabilityStatus: "順26の F^{(+)} と順27の F^{(-)} はそれぞれ一つの集合だけを定義し、抽象線型写像を経由せず εf=f・εf=-f という具体的な複素行列の作用で記述するため、現行の説明粒度検査に合格している。二乗・固有値と相補射影の二項も現行の説明粒度検査に合格している。順28には二つの部分空間性が残り、抽象線型写像 end(ε) を使う二主張を束ねている。残る二つの本文単位と Lean・SageMath のラベル同期が必要であり、次回は F^{(+)} の部分空間性一項だけを扱う。外部入力にも、複素数の定義、混在したサイト作用素の記号定義、行列と線型写像の対応および積の保存に説明粒度の未解決が残る。",
+  boundaryEvidence: "章内依存順26で固有値 +1、順27で固有値 -1 の固有ベクトル全体 F^{(+)}・F^{(-)} を具体的な行列作用だけから定める。順28では F^{(+)} の零ベクトル・加法・複素スカラー倍の閉性を成分表示で示し、順29には F^{(-)} の部分空間性だけを残す。これらと相互依存しない順30で ε²=I と固有値が ±1 に限ることを証明し、順31で順29の固有空間と順30の二乗公式を合わせて二つの行列の冪等性・相互直交性・和・像を計算する。直後の順32は固有空間だけを再利用して V1 の制限へ分岐し、順30の二乗・固有値と順31の相補射影には依存しない。順32では P^{(±)} の定義とクロネッカー積の積の規則を入力から外し、V1 の Jordan–Wigner 行列表示、一因子の反可換性、ノルムの基本性質の数ベクトル版、行列指数関数の作用保存を追加するため、順31の主定理で節を閉じる。生成時に六項の連続性、内部依存辺、節内本文と全外部入力の fingerprint、節末出力、順32の章内順・直接依存・本文・非依存、および入力集合の追加・除外を固定検査する。",
+  readabilityStatus: "順26の F^{(+)} と順27の F^{(-)} はそれぞれ一つの集合だけを定義し、抽象線型写像を経由せず εf=f・εf=-f という具体的な複素行列の作用で記述するため、現行の説明粒度検査に合格している。順28の F^{(+)} の部分空間性も、零ベクトル・和・複素スカラー倍への ε の作用を成分和で一段ずつ計算する独立主張となり、本文・Lean・SageMath のラベルを同期した。二乗・固有値と相補射影の二項も現行の説明粒度検査に合格している。順29には F^{(-)} の部分空間性だけが残り、抽象線型写像 end(ε) を使っている。次回はこの一項だけを成分表示へ分離し、Lean・SageMath の対応ラベルを同期する。外部入力にも、複素数の定義、混在したサイト作用素の記号定義、行列と線型写像の対応および積の保存に説明粒度の未解決が残る。",
 }, {
   name: "V1 の固有空間への制限",
   chapter: "2次元イジングモデル",
@@ -15474,7 +15582,7 @@ const isingModelSectionBoundaries = [{
     downstreamLeanFile: "lean/Ising2D/Part010/Claim012_SectorDecomposition.lean",
     currentStatus: "本文の出力は、固有値 η の固有ベクトル f 上で V1 と境界符号を固定した V1^{(±)} の作用が一致することである。Lean では V1pauli_eq_jordanWigner を入力に、本文 Step 3–6 と同じ順で固有空間の不変性、ηsign=-η の生成子作用、冪の帰納、有限部分和、指数級数の極限をベクトル作用として直接証明し、V1_restrictsOnSector_of_opposite_sign へ閉じた。実際の符号対は V1_restrictsOnEvenSector が (η,ηsign)=(1,-1)、V1_restrictsOnOddSector が (-1,1) を与える。M>=2 は Jordan–Wigner 行列表示にだけ使い、TensorPow と mulVec が本文の end と F を具体化する。セクター置換、その冪、トレース接続、分配関数のセクター分解は M>=2 を直接受け取り、この導出を内部で使うため、下流の RestrictsOnSector 仮定は解消済みである。",
   },
-  boundaryEvidence: "章内依存順31の一項は、V1 の Jordan–Wigner 行列表示、全スピン反転行列の固有空間、ノルムの基本性質の数ベクトル版を入力に、全スピン反転行列を固有値 ±1 へ置き換え、行列指数関数の部分和を通じて V1 の作用を各固有空間へ制限する主張へ閉じる。直後の章内依存順32は、境界項の符号を固定した二つの指数行列 V1^{(±)} を定義するだけで順31を参照せず、順31も証明内の局所的な略記として同じ指数行列を自足的に定めるため、二項に相互依存はない。順32は転送行列とサイト作用素の記号定義を順31と共有する一方、V1 の Jordan–Wigner 表示、固有空間、一因子の反可換性、ノルムの基本性質の数ベクトル版、作用対応の積・指数保存を入力から外し、線型写像の指数関数の定義を追加するため、外部入力集合も切り替わる。したがって順31の後で一項の節を閉じる。生成時に対象と全外部入力の本文 fingerprint、章内順、節末出力の一意性、順32の直接依存・本文 fingerprint、二項間の相互非依存、および入力集合の追加・除外を固定検査する。",
+  boundaryEvidence: "章内依存順32の一項は、V1 の Jordan–Wigner 行列表示、全スピン反転行列の固有空間、ノルムの基本性質の数ベクトル版を入力に、全スピン反転行列を固有値 ±1 へ置き換え、行列指数関数の部分和を通じて V1 の作用を各固有空間へ制限する主張へ閉じる。直後の章内依存順33は、境界項の符号を固定した二つの指数行列 V1^{(±)} を定義するだけで順32を参照せず、順32も証明内の局所的な略記として同じ指数行列を自足的に定めるため、二項に相互依存はない。順33は転送行列とサイト作用素の記号定義を順32と共有する一方、V1 の Jordan–Wigner 表示、固有空間、一因子の反可換性、ノルムの基本性質の数ベクトル版、作用対応の積・指数保存を入力から外し、線型写像の指数関数の定義を追加するため、外部入力集合も切り替わる。したがって順32の後で一項の節を閉じる。生成時に対象と全外部入力の本文 fingerprint、章内順、節末出力の一意性、順33の直接依存・本文 fingerprint、二項間の相互非依存、および入力集合の追加・除外を固定検査する。",
   readabilityStatus: "対象は複素行列の積・反交換・有限和・部分和の極限を一段ずつ展開しているが、行列と抽象線型写像の対応を証明全体で往復しており、現行の説明粒度検査では未完成である。外部入力にも、集合と代数構造の記号、複素数、混在したサイト作用素の記号、ノルムの基本性質の数ベクトル版、行列と線型写像の対応および指数関数保存に説明粒度の未解決が残る。直後の V1^{(±)} の定義自体は現行の説明粒度検査に合格している。",
 }, {
   name: "境界項の符号を固定した指数行列・全スピン反転対称性・セクター上の置き換え",
@@ -15507,7 +15615,7 @@ const isingModelSectionBoundaries = [{
   ],
   concludingCorollary: "セクター上での置き換えを転送行列の積の非負整数冪へ反復する公式",
   concludingCorollaryEntryId: "bridge_011a_claim_sector_replacement_pow",
-  boundaryEvidence: "章内依存順32で V1^{(±)} を定義する。順33はこの定義と既に閉じた V1 の固有空間への制限・相補射影の像から、射影後の V1 を V1^{(±)} へ置き換える主定理へ進む。並行して順34–37は半指数行列とその平方根性、全スピン反転行列との可換性、相補射影との可換性へ進む。順38は順33の置換等式、相補射影の冪等性、順37の可換性を合流させ、置き換えを転送行列の積の任意の非負整数冪へ反復する系で節を閉じる。直後の順39は V1^{(±)} の定義を再利用するが、順33–38の主張には依存せず、Pauli 行列の積とクロネッカー積の転置から iK1H1^{(±)} と iK2*H2 の実対称性を示す。生成時に七項の連続性と内部依存、対象と全外部入力の本文 fingerprint、順38への一意な閉包、順39の直接依存・本文 fingerprint、順33–38からの非依存、および入力集合の追加・除外を固定検査する。",
+  boundaryEvidence: "章内依存順33で V1^{(±)} を定義する。順34はこの定義と既に閉じた V1 の固有空間への制限・相補射影の像から、射影後の V1 を V1^{(±)} へ置き換える主定理へ進む。並行して順35–38は半指数行列とその平方根性、全スピン反転行列との可換性、相補射影との可換性へ進む。順39は順34の置換等式、相補射影の冪等性、順38の可換性を合流させ、置き換えを転送行列の積の任意の非負整数冪へ反復する系で節を閉じる。直後の順40は V1^{(±)} の定義を再利用するが、順34–39の主張には依存せず、Pauli 行列の積とクロネッカー積の転置から iK1H1^{(±)} と iK2*H2 の実対称性を示す。生成時に七項の連続性と内部依存、対象と全外部入力の本文 fingerprint、順39への一意な閉包、順40の直接依存・本文 fingerprint、順34–39からの非依存、および入力集合の追加・除外を固定検査する。",
   readabilityStatus: "未定義だった H1^{(±)} を使わず、半指数行列の定義・平方根性・二種類の可換性を別ブロックにした。さらに、射影後の V1 の置き換えと、その置き換えを積の冪へ反復する系を別ブロックへ分けた。対象七項は一ブロック一主張で依存順に読め、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、行列指数関数、固有空間への制限、行列と線型写像の対応に説明粒度の未解決が残る。",
 }, {
   name: "実対称な生成子と符号反転共役",
@@ -15533,7 +15641,7 @@ const isingModelSectionBoundaries = [{
     "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
     "eigenvalues_of_V_016_claim_sign_flip_conjugation",
   ],
-  boundaryEvidence: "章内依存順47で一般の H1^{(±)},H2 を定義する。順48は Pauli 行列の積とクロネッカー積の転置を使い、iK1H1^{(±)} と iK2*H2 を実係数の Pauli 行列積として表して実対称性を示す。順49は順48で得た H2 の表示を直接用い、両方の生成子を同時に負号へ移す可逆行列による共役へ進むため、二項は一方向の内部依存で連続する。後続の正定値性は順48の実対称性だけを再利用して順49には依存せず、順50の偶セクター生成子は一般定義から上符号を選ぶ別枝である。したがって実対称性と符号反転共役を二出力として順49で節を閉じる。生成時に二項の連続性、全直接依存、本文 fingerprint、後続二枝の依存差、および入力集合の切り替わりを固定検査する。",
+  boundaryEvidence: "章内依存順48で一般の H1^{(±)},H2 を定義する。順49は Pauli 行列の積とクロネッカー積の転置を使い、iK1H1^{(±)} と iK2*H2 を実係数の Pauli 行列積として表して実対称性を示す。順50は順49で得た H2 の表示を直接用い、両方の生成子を同時に負号へ移す可逆行列による共役へ進むため、二項は一方向の内部依存で連続する。後続の正定値性は順49の実対称性だけを再利用して順50には依存せず、順51の偶セクター生成子は一般定義から上符号を選ぶ別枝である。したがって実対称性と符号反転共役を二出力として順50で節を閉じる。生成時に二項の連続性、全直接依存、本文 fingerprint、後続二枝の依存差、および入力集合の切り替わりを固定検査する。",
   readabilityStatus: "実対称性は二次の Pauli 行列の積、サイトごとの積、クロネッカー積の転置を一段ずつ計算し、符号反転共役は各サイトの共役から生成子の各項へ進むため、対象二項は現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号に説明粒度の未解決が残る。",
 }, {
   name: "偶セクター生成子のスピン作用素表示",
@@ -15561,7 +15669,7 @@ const isingModelSectionBoundaries = [{
     "closing_claim_D0_G_diagonal_action",
     "closing_claim_epsilon_G_is_involution",
   ],
-  boundaryEvidence: "章内依存順50で一般の H1^{(±)} の定義から上符号を選び、偶セクターの生成子 H1^{(+)} を一対象だけ定める。順51–52の開鎖項 D0 と周期境界項 G は H1^{(+)} に意味的依存しない並行定義であり、読み順だけを提示順制約で固定する。順53はこの三定義を受け取り、Jordan–Wigner 行列をサイトごとの Pauli 行列積へ展開して iH1^{(+)}=D0+εG を示す。順54の対角作用と順55の可換性も相互に意味的依存しない出力で、提示順だけを固定する。順56は順55の可換性を使った (εG)^2=I を示す。直後の順57は順50だけを再利用して V1^{(+)} の半指数行列を定義し、順51–56の出力を使わない。順57では Pauli 行列積、配置基底、クロネッカー積、全スピン反転行列を入力から外すため、順56で節を閉じる。生成時に七項の連続性、項目ごとの全直接依存、意味的依存とは分離した提示順、対象と全外部入力の本文 fingerprint、三つの節末出力、順57の直接依存・本文・順51–56からの非依存、および入力集合の切り替わりを固定検査する。",
+  boundaryEvidence: "章内依存順51で一般の H1^{(±)} の定義から上符号を選び、偶セクターの生成子 H1^{(+)} を一対象だけ定める。順52–53の開鎖項 D0 と周期境界項 G は H1^{(+)} に意味的依存しない並行定義であり、読み順だけを提示順制約で固定する。順54はこの三定義を受け取り、Jordan–Wigner 行列をサイトごとの Pauli 行列積へ展開して iH1^{(+)}=D0+εG を示す。順55の対角作用と順56の可換性も相互に意味的依存しない出力で、提示順だけを固定する。順57は順56の可換性を使った (εG)^2=I を示す。直後の順58は順51だけを再利用して V1^{(+)} の半指数行列を定義し、順52–57の出力を使わない。順58では Pauli 行列積、配置基底、クロネッカー積、全スピン反転行列を入力から外すため、順57で節を閉じる。生成時に七項の連続性、項目ごとの全直接依存、意味的依存とは分離した提示順、対象と全外部入力の本文 fingerprint、三つの節末出力、順58の直接依存・本文・順52–57からの非依存、および入力集合の切り替わりを固定検査する。",
   readabilityStatus: "生成子、半指数行列、転送行列、共役写像、可逆性、平方根性、共役合成一致を束ねていた旧定義ブロックを一ブロック一定義または一主張へ分割した。さらに、局所積、境界項、生成子表示、可換性、二乗、対角作用を束ねていた旧主張を、D0 の定義、G の定義、生成子表示、対角作用、二つずつの可換性、二乗へ分割した。対象七項は生成子の定義から二次の Pauli 行列積とクロネッカー積の有限計算を経て三つの節末出力へ進み、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号に加え、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義に説明粒度の未解決と将来の分割が残る。",
 }, {
   name: "偶セクターの半指数行列と平方根性",
@@ -15580,7 +15688,7 @@ const isingModelSectionBoundaries = [{
   ],
   mainTheorem: "偶セクターの半指数行列の平方根性",
   mainTheoremEntryId: "evensectorT_claim_V1_plus_square_root",
-  boundaryEvidence: "章内依存順57で偶セクター生成子 H1^{(+)} から半指数行列を定義し、順58で可換な行列指数関数の積公式と V1^{(+)} の定義を使って、その二乗が V1^{(+)} に等しいことを示す。二項は一方向の依存鎖をなし、平方根性で閉じる。直後の順59は半指数行列の定義だけを再利用して V2 と挟み、偶セクター転送行列 V^{(+)} を定義するが、順58の平方根性には依存しない。順59では転送行列の記号を入力へ追加し、偶セクター生成子、指数関数の積公式、V1^{(±)} の一般定義を直接入力から外すため、順58の後で節を閉じる。生成時に二項の連続性、全直接依存、対象と全外部入力の本文 fingerprint、順58への一意な閉包、順59の直接依存・本文・順58からの非依存、および入力集合の切り替わりを固定検査する。",
+  boundaryEvidence: "章内依存順58で偶セクター生成子 H1^{(+)} から半指数行列を定義し、順59で可換な行列指数関数の積公式と V1^{(+)} の定義を使って、その二乗が V1^{(+)} に等しいことを示す。二項は一方向の依存鎖をなし、平方根性で閉じる。直後の順60は半指数行列の定義だけを再利用して V2 と挟み、偶セクター転送行列 V^{(+)} を定義するが、順59の平方根性には依存しない。順60では転送行列の記号を入力へ追加し、偶セクター生成子、指数関数の積公式、V1^{(±)} の一般定義を直接入力から外すため、順59の後で節を閉じる。生成時に二項の連続性、全直接依存、対象と全外部入力の本文 fingerprint、順59への一意な閉包、順60の直接依存・本文・順59からの非依存、および入力集合の切り替わりを固定検査する。",
   readabilityStatus: "定義は一つの有限複素行列だけを定め、平方根性は同じ行列指数関数を二回掛ける計算を一段ずつ示しているため、対象二項は現行の説明粒度検査に合格している。外部入力では複素数、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。",
 }, {
   name: "偶セクター転送行列と符号付きトレースの正値公式",
@@ -15599,8 +15707,8 @@ const isingModelSectionBoundaries = [{
   ],
   mainTheorem: "偶セクター転送行列の符号付きトレースの正値公式",
   mainTheoremEntryId: "closing_006_theorem_trace_of_epsilon_V_plus",
-  boundaryEvidence: "章内依存順59で V1^{(+)} の半指数行列と V2 を掛け合わせて偶セクター転送行列 V^{(+)} を定義し、順60で配置基底上の対角作用、全スピン反転行列との可換性、開鎖イジング模型の有限和を使って tr(εV^{(+)}) を明示的な正の実数へ計算する。二項は定義から正値公式へ進む一方向の依存鎖をなす。直後の順61は V^{(+)} の定義を再利用するが、エルミート正定値行列の指数関数と実対称生成子を入力に正定値性を示す別枝であり、順60のトレース公式には依存しない。順60も順61に依存せず、両者の全直接依存集合は異なるため、順60の後で節を閉じる。生成時に二項の連続性と全直接依存、対象と全外部入力の本文 fingerprint、順60への一意な閉包、順61の直接依存・本文、順60と順61の相互非依存、および対象三項の説明粒度を固定検査する。",
-  readabilityStatus: "順59は一つの有限複素行列だけを定義する。順60は符号付きトレースを配置基底和へ直し、開鎖スピン配置の有限和を因数分解して正の閉形式へ至る一つの計算鎖であり、対象二項は現行の説明粒度検査に合格している。三項以上の本文分割または形式化同期は不要だった。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義、行列指数関数の定義と可換積公式、および行列と線型写像の対応に説明粒度の未解決が残る。",
+  boundaryEvidence: "章内依存順60で V1^{(+)} の半指数行列と V2 を掛け合わせて偶セクター転送行列 V^{(+)} を定義し、順61で配置基底上の対角作用、全スピン反転行列との可換性、開鎖イジング模型の有限和を使って tr(εV^{(+)}) を明示的な正の実数へ計算する。二項は定義から正値公式へ進む一方向の依存鎖をなす。直後の順62は V^{(+)} の定義を再利用するが、エルミート正定値行列の指数関数と実対称生成子を入力に正定値性を示す別枝であり、順61のトレース公式には依存しない。順61も順62に依存せず、両者の全直接依存集合は異なるため、順61の後で節を閉じる。生成時に二項の連続性と全直接依存、対象と全外部入力の本文 fingerprint、順61への一意な閉包、順62の直接依存・本文、順61と順62の相互非依存、および対象三項の説明粒度を固定検査する。",
+  readabilityStatus: "順60は一つの有限複素行列だけを定義する。順61は符号付きトレースを配置基底和へ直し、開鎖スピン配置の有限和を因数分解して正の閉形式へ至る一つの計算鎖であり、対象二項は現行の説明粒度検査に合格している。三項以上の本文分割または形式化同期は不要だった。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義、行列指数関数の定義と可換積公式、および行列と線型写像の対応に説明粒度の未解決が残る。",
 }, {
   name: "偶セクター転送行列の正定値性・可逆性とトレース正値性",
   chapter: "2次元イジングモデル",
@@ -15634,8 +15742,8 @@ const isingModelSectionBoundaries = [{
   },
   mainTheorem: "偶セクター転送行列の逆行列のトレース正値性",
   mainTheoremEntryId: "evenEigen_claim_V_plus_inverse_positive_and_traces",
-  boundaryEvidence: "章内依存順61は順59の V^{(+)} の定義と順48の生成子の実対称性を受けて V^{(+)} の正定値性を示す。順62の tr(V^{(+)}) の正値性は順61だけを直接使う並行出力である。順63は順61を受けて明示候補が左右逆であることから可逆性と逆行列の式を示し、順64は順63の明示式と順48の実対称性を使って (V^{(+)})^{-1} の正定値性を示す。順65は節内では順64だけを直接受け、外部入力の正定値行列の指数関数と集合・代数構造の記号も用いて tr((V^{(+)})^{-1}) の正値性を示す。Lean はこれらを VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos で検証する。SageMath は左右逆を別々に検査し、候補逆行列の全固有値について虚部の最大値が 1.732×10^{-14}、実部の最小値が 5.145×10^{-4}>0 であること、および tr((V^{(+)})^{-1}) の全体最小値が 1.032>0 であることを検査した。直後の順66は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順61〜65とは相互に依存しない。順67は順66だけへ依存する。この入力集合の切り替わりにより順65の後で節を閉じる。生成時には順61〜65の全直接依存、二つの節末出力、本文 fingerprint、Lean 宣言、SageMath の実検査、順66〜67との相互非依存、および入力集合の切り替わりを固定検査する。",
-  readabilityStatus: "順65は既に一ブロック一主張であり、直前に確定した (V^{(+)})^{-1} の正定値性から、正定値行列のトレースが正であることを一段だけ適用している。Lean の trace_VPlusInv_pos も VPlusInv_posDef に trace_pos を一段適用する同じ推論で、SageMath は候補逆行列のトレース正値性を直接検査する。したがって対象本文の推論粒度と形式化対応は合格であり、順65の後を節境界として確定する。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。",
+  boundaryEvidence: "章内依存順62は順60の V^{(+)} の定義と順49の生成子の実対称性を受けて V^{(+)} の正定値性を示す。順63の tr(V^{(+)}) の正値性は順62だけを直接使う並行出力である。順64は順62を受けて明示候補が左右逆であることから可逆性と逆行列の式を示し、順65は順64の明示式と順49の実対称性を使って (V^{(+)})^{-1} の正定値性を示す。順66は節内では順65だけを直接受け、外部入力の正定値行列の指数関数と集合・代数構造の記号も用いて tr((V^{(+)})^{-1}) の正値性を示す。Lean はこれらを VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos で検証する。SageMath は左右逆を別々に検査し、候補逆行列の全固有値について虚部の最大値が 1.732×10^{-14}、実部の最小値が 5.145×10^{-4}>0 であること、および tr((V^{(+)})^{-1}) の全体最小値が 1.032>0 であることを検査した。直後の順67は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順62〜66とは相互に依存しない。順68は順67だけへ依存する。この入力集合の切り替わりにより順66の後で節を閉じる。生成時には順62〜66の全直接依存、二つの節末出力、本文 fingerprint、Lean 宣言、SageMath の実検査、順67〜68との相互非依存、および入力集合の切り替わりを固定検査する。",
+  readabilityStatus: "順66は既に一ブロック一主張であり、直前に確定した (V^{(+)})^{-1} の正定値性から、正定値行列のトレースが正であることを一段だけ適用している。Lean の trace_VPlusInv_pos も VPlusInv_posDef に trace_pos を一段適用する同じ推論で、SageMath は候補逆行列のトレース正値性を直接検査する。したがって対象本文の推論粒度と形式化対応は合格であり、順66の後を節境界として確定する。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。",
 }, {
   name: "偶セクター転送行列の構成因子の可逆性",
   chapter: "2次元イジングモデル",
@@ -15712,8 +15820,8 @@ const isingModelSectionBoundaries = [{
   },
   concludingClaim: "偶セクターの合成共役写像は V^{(+)} による共役写像そのものである",
   concludingClaimEntryId: vPlusCompositeConjugationEqualityEntry.id,
-  boundaryEvidence: "章内依存順71で、半指数行列と V_2 の可逆性、一般の T_g、V^{(+)} の三因子表示から、三つの共役の合成 T_{(V^{(+)})} を定義する。順72はこの定義と既存の一般合成則を直接入力に、半指数行列と V_2 の可逆性から積も可逆であることを確認し、一般合成則を二回適用して T_{(V^{(+)})}=T_{V^{(+)}} へ閉じる。Lean の TVPlus・TVPlus_eq_TConj と SageMath の全行列単位上の合成共役検査が同じ二項へ対応する。直後の順73は実対称生成子と正定値行列の指数関数から正定値行列 W を扱う別枝で、この二項と相互に依存せず、外部入力集合もすべて切り替わるため、順72の後で節を閉じる。生成時に二項の章配置と連続性、全直接依存、本文 fingerprint、Lean の証明本体、SageMath の実検査本体、順73との相互非依存と入力集合の切り替わりを固定検査する。",
-  readabilityStatus: "順71は一つの合成写像だけを定義する。順72は構成因子と途中積の可逆性を確認した後、既に証明済みの一般合成則を二回適用して三重共役を一つの共役へまとめる。一つの主張内で一般則を重複証明せず、本文、Lean、SageMath の対応も一意なので、対象二項の説明粒度は合格である。",
+  boundaryEvidence: "章内依存順72で、半指数行列と V_2 の可逆性、一般の T_g、V^{(+)} の三因子表示から、三つの共役の合成 T_{(V^{(+)})} を定義する。順73はこの定義と既存の一般合成則を直接入力に、半指数行列と V_2 の可逆性から積も可逆であることを確認し、一般合成則を二回適用して T_{(V^{(+)})}=T_{V^{(+)}} へ閉じる。Lean の TVPlus・TVPlus_eq_TConj と SageMath の全行列単位上の合成共役検査が同じ二項へ対応する。直後の順74は実対称生成子と正定値行列の指数関数から正定値行列 W を扱う別枝で、この二項と相互に依存せず、外部入力集合もすべて切り替わるため、順73の後で節を閉じる。生成時に二項の章配置と連続性、全直接依存、本文 fingerprint、Lean の証明本体、SageMath の実検査本体、順74との相互非依存と入力集合の切り替わりを固定検査する。",
+  readabilityStatus: "順72は一つの合成写像だけを定義する。順73は構成因子と途中積の可逆性を確認した後、既に証明済みの一般合成則を二回適用して三重共役を一つの共役へまとめる。一つの主張内で一般則を重複証明せず、本文、Lean、SageMath の対応も一意なので、対象二項の説明粒度は合格である。",
 }, {
   name: "対称化転送行列 W の実対称性と正定値性",
   chapter: "2次元イジングモデル",
@@ -15737,7 +15845,7 @@ const isingModelSectionBoundaries = [{
   },
   concludingClaim: "対称化転送行列 W は実対称正定値であり、とくに可逆である",
   concludingClaimEntryId: positiveDefiniteWEntry.id,
-  boundaryEvidence: "章内依存順73は、W とその平方根因子の定義、エルミート正定値の定義、エルミート行列の指数関数の正定値性、二つの生成子の実対称性、転送行列の記号だけを直接入力に、W の実対称性・正定値性・可逆性を示す。直前の順72までの偶セクター共役写像の節とは入力集合が完全に切り替わり、相互に依存しない。直後の順74は W を受け取るが、単位球面上の上限という実数固有の道具（行列ノルムのベクトル評価と半正定値の Cauchy--Schwarz）を新たに入力へ加えるため、順73の後で節を閉じる。生成時に順73の全直接依存、本文 fingerprint、順74の依存方向と新規入力集合を固定検査する。",
+  boundaryEvidence: "章内依存順74は、W とその平方根因子の定義、エルミート正定値の定義、エルミート行列の指数関数の正定値性、二つの生成子の実対称性、転送行列の記号だけを直接入力に、W の実対称性・正定値性・可逆性を示す。直前の順73までの偶セクター共役写像の節とは入力集合が完全に切り替わり、相互に依存しない。直後の順75は W を受け取るが、単位球面上の上限という実数固有の道具（行列ノルムのベクトル評価と半正定値の Cauchy--Schwarz）を新たに入力へ加えるため、順74の後で節を閉じる。生成時に順74の全直接依存、本文 fingerprint、順75の依存方向と新規入力集合を固定検査する。",
   readabilityStatus: "一つの主張の中で、二つの指数因子が実対称正定値であること、合同変換で W が正定値になること、転置計算で実対称になること、核が零で可逆になることを一段ずつ示している。W = B V_2 B と B = V_1^{1/2} の根拠を定義ブロックへ接続したので、式変形の各行が定義または既証の主張を引く形になった。Lean の各補題と SageMath の検査も同じ段へ対応する。",
 }, {
   name: "Rayleigh 上限の定義（実数への脱出点）",
@@ -15763,7 +15871,7 @@ const isingModelSectionBoundaries = [{
   },
   concludingClaim: "単位球面上の二次形式の上限 c(M) が正の実数として定まる",
   concludingClaimEntryId: rayleighSupEntry.id,
-  boundaryEvidence: "章内依存順74は、順73で確立した W の実対称正定値性とノルムの定義だけを直接入力に、上限 c(M) を定義する。順73までは有限個の複素行列の等式計算で閉じていたのに対し、ここで初めて実数の上限性質を使うため、入力の性質が切り替わる。直後の順75は c(M) を受け取って作用素評価へ進み、半正定値の Cauchy--Schwarz を新たな入力に加えるため、順74の後で節を閉じる。生成時に順74の全直接依存、順75の依存方向、および半正定値 Cauchy--Schwarz が順74の入力でなく順75の入力であることを固定検査する。",
+  boundaryEvidence: "章内依存順75は、順74で確立した W の実対称正定値性とノルムの定義だけを直接入力に、上限 c(M) を定義する。順74までは有限個の複素行列の等式計算で閉じていたのに対し、ここで初めて実数の上限性質を使うため、入力の性質が切り替わる。直後の順76は c(M) を受け取って作用素評価へ進み、半正定値の Cauchy--Schwarz を新たな入力に加えるため、順75の後で節を閉じる。生成時に順75の全直接依存、順76の依存方向、および半正定値 Cauchy--Schwarz が順75の入力でなく順76の入力であることを固定検査する。",
   readabilityStatus: "有界性の根拠が「Cauchy--Schwarz を使うまでもなく」という散文だったため、実際に引くブロックが定まらなかった。各成分の絶対値が 1 以下であることを二段で示し、成分表示の二重和を三角不等式で押さえる形へ書き換えたので、各行が定義または初等的な不等式を一つだけ引く形になった。",
 }, {
   name: "上限による作用素評価とその冪",
@@ -15788,7 +15896,7 @@ const isingModelSectionBoundaries = [{
   },
   concludingClaim: "上限 c(M) が W の作用素としての評価を与え、冪へ持ち上がる",
   concludingClaimEntryId: operatorBoundEntry.id,
-  boundaryEvidence: "章内依存順75は、順74の上限とその二次形式評価、順73の実対称正定値性、半正定値 Cauchy--Schwarz、ノルムの定義を直接入力に、作用素評価とその冪を示す。直後の順76は、この評価を受けてトレースの挟み込みへ進み、出力がベクトルの評価から行列のトレースの評価へ切り替わる。生成時に順75の全直接依存、順76の依存方向、および両者が相互に依存しないことを固定検査する。",
+  boundaryEvidence: "章内依存順76は、順75の上限とその二次形式評価、順74の実対称正定値性、半正定値 Cauchy--Schwarz、ノルムの定義を直接入力に、作用素評価とその冪を示す。直後の順77は、この評価を受けてトレースの挟み込みへ進み、出力がベクトルの評価から行列のトレースの評価へ切り替わる。生成時に順76の全直接依存、順77の依存方向、および両者が相互に依存しないことを固定検査する。",
   readabilityStatus: "後置きしていた半正定値 Cauchy--Schwarz と上限の評価の参照を、適用した各行の末尾へ移した。正の数で割る操作と平方根を取る操作は、含意の鎖として一行一操作へ開き、非負性の条件を根拠に明示した。帰納法も基底段と帰納段を分け、各行が定義または既証の評価を一つだけ引く。",
 }, {
   name: "トレースの上からの評価とモーメント列の対数凸性",
@@ -15819,7 +15927,7 @@ const isingModelSectionBoundaries = [{
     "トレースの上からの評価",
     "モーメント列の正値性と対数凸性",
   ],
-  boundaryEvidence: "章内依存順76は順75の作用素評価とその冪だけを新しい入力に加えてトレースの上からの評価を示す。順77は同じ W の性質と半正定値 Cauchy--Schwarz だけを使い、順76には依存しない独立な準備である。順78の挟み込みはこの二項を直接入力として結論を組み立てるため、順77の後で節を閉じる。生成時に二項の章配置、全直接依存、相互非依存、および順78が両方を直接引くことを固定検査する。",
+  boundaryEvidence: "章内依存順77は順76の作用素評価とその冪だけを新しい入力に加えてトレースの上からの評価を示す。順78は同じ W の性質と半正定値 Cauchy--Schwarz だけを使い、順77には依存しない独立な準備である。順79の挟み込みはこの二項を直接入力として結論を組み立てるため、順78の後で節を閉じる。生成時に二項の章配置、全直接依存、相互非依存、および順79が両方を直接引くことを固定検査する。",
   readabilityStatus: "分割前は一ブロックに上からの評価・対数凸性・下からの評価の三主張が同居し、証明中で Step 番号によって相互参照していた。三つの主張へ分け、下からの評価が対数凸性をブロック参照で引く形にしたので、一ブロック一主張になり、どの段がどの主張の根拠かが本文だけで追える。",
 }, {
   name: "トレースの挟み込み",
@@ -15866,7 +15974,7 @@ const isingModelSectionBoundaries = [{
   },
   concludingClaim: "分配関数そのものが上限 c(M) の冪で両側から挟まれる",
   concludingClaimEntryId: partitionFunctionSandwichEntry.id,
-  boundaryEvidence: "章内依存順79は、分配関数とトレースの一致、トレースの挟み込み、パウリ形の分配関数表示だけを直接入力に、分配関数の両側評価へ移す。これは行列のトレースについての評価を、模型の分配関数についての評価へ言い換える一歩であり、以後この結論を使う項目はすべて順79より後にある。生成時に全直接依存、章内依存順、および順79以前の項目がこの結論を引かないことを固定検査する。",
+  boundaryEvidence: "章内依存順80は、分配関数とトレースの一致、トレースの挟み込み、パウリ形の分配関数表示だけを直接入力に、分配関数の両側評価へ移す。これは行列のトレースについての評価を、模型の分配関数についての評価へ言い換える一歩であり、以後この結論を使う項目はすべて順80より後にある。生成時に全直接依存、章内依存順、および順80以前の項目がこの結論を引かないことを固定検査する。",
   readabilityStatus: "一文にまとめていた二段の適用を、下からの評価と上からの評価の二つの鎖へ開き、各行が定義または既証の主張を一つだけ引く形にした。",
 }, {
   name: "セクターごとの上限の定義と全スピン反転行列との可換性",

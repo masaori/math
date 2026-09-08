@@ -1,0 +1,8 @@
+PASS: componentwise vector addition, r=0
+RESULT: PASS
+PASS: componentwise vector addition, r=1
+RESULT: PASS
+PASS: componentwise vector addition, r=2
+RESULT: PASS
+PASS: componentwise vector addition, r=3
+RESULT: PASS
