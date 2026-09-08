@@ -53,6 +53,12 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.BinaryFieldLinearRuleClass.globalMap_preserves_zero
+  CellularAutomata.BinaryFieldLinearRuleClass.globalMap_additive
+  CellularAutomata.BinaryFieldLinearRuleClass.globalMap_preserves_scalar_multiplication
+  CellularAutomata.BinaryFieldLinearRuleClass.swapGlobalMap_zero_apply
+  CellularAutomata.BinaryFieldLinearRuleClass.swapGlobalMap_does_not_preserve_zero
+  CellularAutomata.BinaryFieldLinearRuleClass.swapRule_not_binaryFieldLinear
   CellularAutomata.NecSuf.TotalisticRuleClass.factorsThrough_implies_fiberConsistent
   CellularAutomata.NecSuf.TotalisticRuleClass.fiberConsistent_implies_factorsThrough
   CellularAutomata.NecSuf.TotalisticRuleClass.factorsThrough_iff_fiberConsistent
