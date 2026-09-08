@@ -329,15 +329,52 @@ theorem Z_mul_Y_same (m : Fin M) : Z m * Y m = (-Complex.I) • sigmaX m := by
 theorem sigmaX_eq_smul_Z_mul_Y (m : Fin M) : sigmaX m = Complex.I • (Z m * Y m) := by
   rw [Z_mul_Y_same, smul_smul, mul_neg, Complex.I_mul_I, neg_neg, one_smul]
 
+/-- サイト作用素を左から順に掛けた接頭積。本文の有限帰納法で扱う左辺をそのまま表す。 -/
+noncomputable def sigmaXPrefixProduct (M : ℕ) : ℕ → TensorPow M
+  | 0 => 1
+  | m + 1 => sigmaXPrefixProduct M m * if h : m < M then sigmaX ⟨m, h⟩ else 1
+
 /-- 原文の `ε := σ^x_1 ⋯ σ^x_M`。
+
+定義をサイト作用素の左からの接頭積そのものにすることで、下の有限帰納法が
+`ε` の積表示を各因子のクロネッカー積へ変換する本文の段と一対一に対応する。
 
 原文はさらに `ε = (√-1)^M Z_1 Y_1 + ⋯ + Z_M Y_M` と書いているが、これは
 **和ではなく積**でなければならない（ファイル冒頭の「原文の記述に対する疑義」参照）。
 積であることの根拠は `sigmaX_eq_smul_Z_mul_Y`（`σ^x_m = √-1 Z_m Y_m`）と
 `xString_succ_eq`（文字列を 1 因子ずつ `√-1 Z_m Y_m` で伸ばせる）である。 -/
-noncomputable def epsilon (M : ℕ) : TensorPow M := xString M M
+noncomputable def epsilon (M : ℕ) : TensorPow M := sigmaXPrefixProduct M M
 
-theorem epsilon_mul_self : epsilon M * epsilon M = 1 := xString_mul_self M
+/-- 本文の有限帰納法に対応し、サイト作用素の接頭積を各因子のクロネッカー積へ直す。 -/
+theorem sigmaXPrefixProduct_eq_xString (m : ℕ) (hm : m ≤ M) :
+    sigmaXPrefixProduct M m = xString M m := by
+  induction m with
+  | zero => simp [sigmaXPrefixProduct]
+  | succ m ih =>
+      have hlt : m < M := Nat.lt_of_succ_le hm
+      rw [sigmaXPrefixProduct, dif_pos hlt, ih (Nat.le_of_lt hlt), ← xString_succ m hlt]
+
+/-- 本文の有限帰納法の終端: `ε` は全因子が `σˣ` のクロネッカー積である。 -/
+theorem epsilon_eq_siteProd_pauliX_by_induction :
+    epsilon M = siteProd M (fun _ => pauliX) := by
+  calc
+    epsilon M = sigmaXPrefixProduct M M := rfl
+    _ = xString M M := sigmaXPrefixProduct_eq_xString (M := M) M (Nat.le_refl M)
+    _ = siteProd M (fun _ => pauliX) := by
+      rw [xString]
+      congr 1
+      funext i
+      rw [if_pos i.isLt]
+
+/-- **`<epsilon_square_identity>` の人手証明と一対一に対応する具体版**:
+有限帰納法でサイト積を全 `σˣ` 因子へ直し、クロネッカー積の積、`(σˣ)²=I₂`、
+単位因子のクロネッカー積を順に適用する。 -/
+theorem epsilon_mul_self : epsilon M * epsilon M = 1 := by
+  rw [epsilon_eq_siteProd_pauliX_by_induction, ← siteProd_mul]
+  have h : (fun _ : Fin M => pauliX) * (fun _ : Fin M => pauliX) = 1 := by
+    funext i
+    simp [Pi.mul_apply]
+  rw [h, siteProd_one]
 
 /-- `ε` の積表示の再帰形: `P_{m+1} = P_m · (√-1 Z_m Y_m)`。
 

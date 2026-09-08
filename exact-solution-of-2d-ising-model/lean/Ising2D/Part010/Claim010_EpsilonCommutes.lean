@@ -38,10 +38,7 @@ variable {M : ℕ}
 /-- `ε = σ^x_1 ⋯ σ^x_M` は全サイトに `σ^x` を置いたクロネッカー積である。 -/
 theorem epsilon_eq_siteProd (M : ℕ) :
     epsilon M = siteProd M (fun _ => pauliX) := by
-  rw [epsilon, xString]
-  congr 1
-  funext i
-  simp [i.isLt]
+  exact epsilon_eq_siteProd_pauliX_by_induction
 
 /-- ただ 1 サイトで反可換なら `ε` と反交換する、の形にした補助補題。 -/
 theorem epsilon_anticomm_of_single_site (y : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (j : Fin M)

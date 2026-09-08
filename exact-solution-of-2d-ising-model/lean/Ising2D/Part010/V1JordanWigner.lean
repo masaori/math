@@ -35,10 +35,7 @@ variable {M : ℕ}
 
 private theorem epsilon_eq_siteProd_for_jordanWigner (M : ℕ) :
     epsilon M = siteProd M (fun _ => pauliX) := by
-  rw [epsilon, xString]
-  congr 1
-  funext i
-  rw [if_pos i.isLt]
+  exact epsilon_eq_siteProd_pauliX_by_induction
 
 private theorem siteProd_smul_family_for_jordanWigner (c : Fin M → ℂ)
     (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :

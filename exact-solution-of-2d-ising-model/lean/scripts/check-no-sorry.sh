@@ -123,6 +123,12 @@ targets=(
   Ising2D.jw_mul_jw_same
   Ising2D.Z_mul_Y_same
   Ising2D.xString_succ_eq
+  Ising2D.sigmaXPrefixProduct_eq_xString
+  Ising2D.epsilon_eq_siteProd_pauliX_by_induction
+  Ising2D.epsilon_mul_self
+  Ising2D.NecSuf.prefix_eq_of_same_recursion
+  Ising2D.NecSuf.prefix_terminal_mul_self
+  Ising2D.epsilon_mul_self_of_necSuf
   Ising2D.siteProd_smul_family
   Ising2D.siteProd_anticomm_of_single_site
   Ising2D.jw_sq

@@ -2173,8 +2173,8 @@ S_Nf
     id: "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
     kind: "claim",
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
-    title: { tex: String.raw`\varepsilon\text{ の二乗と固有値}` },
-    labels: ["epsilon_square_and_eigenvalues"],
+    title: { tex: String.raw`\varepsilon\text{ の二乗}` },
+    labels: ["epsilon_square_and_eigenvalues", "epsilon_square_identity"],
     statement: [
       paragraph([
         math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
@@ -2182,61 +2182,46 @@ S_Nf
         ref("def_transfer_matrix_symbols"),
         " の ",
         math(String.raw`\varepsilon\in\mathrm{Mat}(2^M,\mathbb{C})`),
-        " を考える。",
-        ref("def_end_iso"),
-        " の ",
-        math(String.raw`\mathcal{F}=\mathbb{C}^{2^M}`),
-        " 上で、",
+        " について、",
       ]),
       displayMath(String.raw`\varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
-      paragraph([
-        "が成り立ち、",
-        math(String.raw`\mathcal{F}`),
-        " 上の作用 ",
-        math(String.raw`\mathbf{end}(\varepsilon)`),
-        " の固有値は ",
-        math(String.raw`1`),
-        " または ",
-        math(String.raw`-1`),
-        " に限る。",
-      ]),
     ],
     proof: [
       paragraph([
         "まず ",
         math(String.raw`I:=I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        " と略記する。各 ",
-        math(String.raw`r\in\{1,\dots,M\}`),
+        " と略記し、",
+        math(String.raw`P_0:=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        "、",
+        math(String.raw`P_r:=\sigma_1^x\cdots\sigma_r^x\ (1\leq r\leq M)`),
+        " と置く。各 ",
+        math(String.raw`r\in\{0,\dots,M\}`),
         " について、",
       ]),
       displayMath(
-        String.raw`\sigma_1^x\cdots\sigma_r^x
+        String.raw`P_r
 =\underbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}_{r}
  \boxtimes
  \underbrace{I\boxtimes\cdots\boxtimes I}_{M-r}`,
       ),
       paragraph([
-        "を示す。ただし ",
-        math(String.raw`r=M`),
-        " のとき、右辺末尾の ",
-        math(String.raw`M-r=0`),
-        " 個の ",
-        math(String.raw`I`),
-        " は書かない。",
-        math(String.raw`r=1`),
-        " の場合は ",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`\sigma_1^x`),
-        " の定義そのものである。ある ",
-        math(String.raw`r\in\{1,\dots,M-1\}`),
-        " についてこの式が成り立つと仮定する。サイト作用素の定義と ",
+        "を示す。ただし、因子が零個の部分は書かない。",
+        math(String.raw`r=0`),
+        " の場合は、",
+        ref("kronecker_product_rule"),
+        " (2) を繰り返し使うと、右辺は ",
+        math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}=P_0`),
+        " である。ある ",
+        math(String.raw`r\in\{0,\dots,M-1\}`),
+        " についてこの式が成り立つと仮定する。このとき ",
+        math(String.raw`r+1\leq M`),
+        " なので、サイト作用素の定義と ",
         ref("kronecker_product_rule"),
         " (1)(2) より、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sigma_1^x\cdots\sigma_r^x\sigma_{r+1}^x
+P_{r+1}=P_r\sigma_{r+1}^x
 &=\left(
    \underbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}_{r}
    \boxtimes
@@ -2288,49 +2273,66 @@ S_Nf
 &&(\because\ \text{クロネッカー積の単位元の規則})
 \end{aligned}`,
       ),
+    ],
+    conversion: {
+      status: "added",
+      notes: ["全スピン反転行列の二乗と固有値候補を、一ブロック一主張になるよう分離した。"],
+    },
+  },
+  {
+    id: "transfer_matrix_004c_claim_epsilon_action_eigenvalues",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { tex: String.raw`\varepsilon\text{ の行列作用の固有値候補}` },
+    labels: ["epsilon_action_eigenvalues_are_signs"],
+    statement: [
       paragraph([
-        "次に、",
-        ref("end_is_algebra_isomorphism"),
-        " (2)(3) を一段ずつ適用すると、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\mathbf{end}(\varepsilon))^2
-&=\mathbf{end}(\varepsilon)\circ\mathbf{end}(\varepsilon)
-&&(\because\ \text{作用の二乗の定義})\\
-&=\mathbf{end}(\varepsilon^2)
-&&(\because\ \mathbf{end}\ \text{は行列積を写像の合成へ移す})\\
-&=\mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
-&&(\because\ \varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})})\\
-&=\mathrm{id}_{\mathcal{F}}
-&&(\because\ \mathbf{end}\ \text{は単位行列を恒等写像へ移す}).
-\end{aligned}`,
-      ),
-      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\varepsilon\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を考える。非零ベクトル ",
+        math(String.raw`f\in\mathbb{C}^{2^M}\setminus\{0\}`),
+        " と複素数 ",
         math(String.raw`\lambda\in\mathbb{C}`),
-        " を ",
-        math(String.raw`\mathbf{end}(\varepsilon)`),
-        " の固有値とし、対応する固有ベクトルを ",
-        math(String.raw`f\in\mathcal{F}\setminus\{0\}`),
-        " とする。すなわち ",
-        math(String.raw`\mathbf{end}(\varepsilon)(f)=\lambda f`),
-        " である。このとき",
+        " が ",
+        math(String.raw`\varepsilon f=\lambda f`),
+        " を満たすなら、",
+        math(String.raw`\lambda`),
+        " は ",
+        math(String.raw`1`),
+        " または ",
+        math(String.raw`-1`),
+        " に限る。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("epsilon_square_identity"),
+        "、行列と数ベクトルの積の結合則 ",
+        ref("mat_mult"),
+        "、および複素数の体の法則 ",
+        ref("complex_numbers_form_a_field"),
+        " を用いる。仮定 ",
+        math(String.raw`\varepsilon f=\lambda f`),
+        " を二回適用すると、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 f
-&=\mathrm{id}_{\mathcal{F}}(f)
-&&(\because\ \text{恒等写像の定義})\\
-&=(\mathbf{end}(\varepsilon))^2(f)
-&&(\because\ (\mathbf{end}(\varepsilon))^2=\mathrm{id}_{\mathcal{F}})\\
-&=\mathbf{end}(\varepsilon)(\mathbf{end}(\varepsilon)(f))
-&&(\because\ \text{写像の合成の定義})\\
-&=\mathbf{end}(\varepsilon)(\lambda f)
-&&(\because\ \mathbf{end}(\varepsilon)(f)=\lambda f)\\
-&=\lambda\,\mathbf{end}(\varepsilon)(f)
-&&(\because\ \mathbf{end}(\varepsilon)\ \text{の}\ \mathbb{C}\text{-線型性})\\
+&=I_{\mathrm{Mat}(2^M,\mathbb{C})}f
+&&(\because\ \text{単位行列の作用})\\
+&=\varepsilon^2f
+&&(\because\ \varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})})\\
+&=\varepsilon(\varepsilon f)
+&&(\because\ \text{行列と数ベクトルの積の結合則})\\
+&=\varepsilon(\lambda f)
+&&(\because\ \varepsilon f=\lambda f)\\
+&=\lambda(\varepsilon f)
+&&(\because\ \text{行列と数ベクトルの積の複素線型性})\\
 &=\lambda(\lambda f)
-&&(\because\ \mathbf{end}(\varepsilon)(f)=\lambda f)\\
+&&(\because\ \varepsilon f=\lambda f)\\
 &=\lambda^2f
 &&(\because\ \text{複素数倍の結合則}).
 \end{aligned}`,
@@ -2366,7 +2368,7 @@ f
     ],
     conversion: {
       status: "added",
-      notes: ["固有空間の定義と、クロネッカー積を使う固有値計算を依存境界で分離した。"],
+      notes: ["全スピン反転行列の二乗を入力に、通常の行列と数ベクトルの積だけで固有値候補を述べる独立主張へ分離した。"],
     },
   },
   {
