@@ -322,8 +322,8 @@ export const roadmapStages = [
       "決定性の規則クラスは有限集合と自然数で閉じる。確率的な規則は重みが有理数に住み、" +
       "有理数のまま閉じる範囲と、極限で実数へ出る箇所を分けて記す。",
     dependsOn: ["general_stage_and_nonuniform_rules", "elementary_ca_finite_calibration"],
-    status: "進行中",
-    current: true,
+    status: "到達済み",
+    current: false,
     completion: [
       "各規則クラスの定義が呼び名の規約に沿って本文にあり、クラス所属が有限検査で判定できること。" +
         "その有限検査の入力と量化範囲を明示すること。" +
@@ -352,7 +352,7 @@ export const roadmapStages = [
       {
         kind: "path",
         path: "docs/2値セルオートマトンの定義と呼び名.md",
-        why: "総和型、二元体上で線形なもの、可逆なもの、二次のもの、ブロック型、確率的なものの呼び名と入力構造の正本。現在はこれらと既存本文の定義・有限判定の対応を確定する段階である。",
+        why: "総和型、二元体上で線形なもの、可逆なもの、二次のもの、ブロック型、確率的なものの呼び名と入力構造の正本。これらと本文の定義・有限判定の対応を確定した。",
       },
       {
         kind: "label",
@@ -377,7 +377,7 @@ export const roadmapStages = [
       {
         kind: "label",
         label: "theorem_probabilistic_global_transition_normalized",
-        why: "有理重みの確率的局所規則族から、有限配位上の正規化された大域遷移重みを構成した。有限回合成の有理数閉性、有限所属判定、決定論的規則との零一重み境界も同じ節に構造化記述し、SageMath の段別検算と人手証明に対応する Lean 具体版を揃えた。Lean 必要十分版と導出は後続である。",
+        why: "有理重みの確率的局所規則族から、有限配位上の正規化された大域遷移重みを構成した。有限回合成の有理数閉性、有限所属判定、決定論的規則との零一重み境界も同じ節に構造化記述し、SageMath の段別検算、Lean 具体版、有限和積と二元出力だけを残した Lean 必要十分版、具体版への導出を揃えた。",
       },
       {
         kind: "path",
@@ -404,8 +404,8 @@ export const roadmapStages = [
       "lattice_and_countable_group_stages",
       "rule_class_separation",
     ],
-    status: "未着手",
-    current: false,
+    status: "進行中",
+    current: true,
     completion: [
       "有限舞台での転送行列・分配関数・自由エネルギーが本文で定義され、住処が可算側で宣言されていること。",
       "統計力学側の各概念について、可算な担い手と担えない残りが台帳の形で揃っていること。",
