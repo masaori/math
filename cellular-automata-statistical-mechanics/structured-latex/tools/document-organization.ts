@@ -192,7 +192,9 @@ export const documentOrganization = [
         mainLabels: [
           "claim_totalistic_pairwise_characterization",
           "claim_totalistic_membership_finite_decidable",
+          "claim_binary_field_linear_global_map_preserves_zero",
           "claim_binary_field_linear_global_map_additive",
+          "claim_binary_field_linear_global_map_preserves_scalar_multiplication",
           "claim_binary_field_linear_membership_finite_decidable",
           "claim_general_binary_rule_need_not_preserve_zero",
         ],
