@@ -354,6 +354,11 @@ export const roadmapStages = [
         path: "docs/2値セルオートマトンの定義と呼び名.md",
         why: "総和型、二元体上で線形なもの、可逆なもの、二次のもの、ブロック型、確率的なものの呼び名と入力構造の正本。現在はこれらと既存本文の定義・有限判定の対応を確定する段階である。",
       },
+      {
+        kind: "label",
+        label: "theorem_second_order_global_evolution_bijective",
+        why: "二次規則族を二時刻の有限真理値表として定義し、所属の有限判定と二時刻大域写像の明示逆写像を構造化記述した。SageMath と Lean の二層は後続対象である。",
+      },
     ],
   },
   {

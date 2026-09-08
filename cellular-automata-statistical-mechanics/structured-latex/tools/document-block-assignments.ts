@@ -1,5 +1,17 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "second_order_rule_class_definition_local_family": "rule_class_separation",
+  "second_order_rule_class_claim_base_family_unique": "rule_class_separation",
+  "second_order_rule_class_claim_membership_finite_decidable": "rule_class_separation",
+  "second_order_rule_class_definition_two_time_configuration_space": "rule_class_separation",
+  "second_order_rule_class_definition_recovered_global_map": "rule_class_separation",
+  "second_order_rule_class_definition_global_evolution": "rule_class_separation",
+  "second_order_rule_class_definition_inverse_candidate": "rule_class_separation",
+  "second_order_rule_class_claim_binary_cancellation": "rule_class_separation",
+  "second_order_rule_class_claim_inverse_after_evolution": "rule_class_separation",
+  "second_order_rule_class_claim_evolution_after_inverse": "rule_class_separation",
+  "second_order_rule_class_theorem_global_bijection": "rule_class_separation",
+  "second_order_rule_class_claim_general_rule_not_forced_reversible": "rule_class_separation",
   "binary_field_linear_rule_class_definition_state_addition": "rule_class_separation",
   "binary_field_linear_rule_class_definition_state_multiplication": "rule_class_separation",
   "binary_field_linear_rule_class_definition_zero_input": "rule_class_separation",

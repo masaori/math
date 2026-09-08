@@ -80,6 +80,7 @@ import blocks_recursive_preimage_tree_code from './content/recursive-preimage-tr
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_reversibility_finite_decidability from './content/reversibility-finite-decidability.ts'
 import blocks_reversible_global_map_cycle_type from './content/reversible-global-map-cycle-type.ts'
+import blocks_second_order_rule_class from './content/second-order-rule-class.ts'
 import blocks_self_neighborhood_reversible_map_group from './content/self-neighborhood-reversible-map-group.ts'
 import blocks_self_transpose_composition_closure from './content/self-transpose-composition-closure.ts'
 import blocks_self_transpose_composition_total_closure_characterization from './content/self-transpose-composition-total-closure-characterization.ts'
@@ -155,6 +156,7 @@ export type AllBlocks = [
   ...typeof blocks_redundant_neighbor,
   ...typeof blocks_reversibility_finite_decidability,
   ...typeof blocks_reversible_global_map_cycle_type,
+  ...typeof blocks_second_order_rule_class,
   ...typeof blocks_self_neighborhood_reversible_map_group,
   ...typeof blocks_self_transpose_composition_closure,
   ...typeof blocks_self_transpose_composition_total_closure_characterization,

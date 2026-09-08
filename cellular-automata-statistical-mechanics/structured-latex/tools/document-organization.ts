@@ -188,7 +188,7 @@ export const documentOrganization = [
         title: "有限真理値表による規則クラスの分別",
         input: "有限舞台、規則クラスごとに必要な舞台・状態の追加構造、有限局所真理値表を入力とする。",
         output: "各規則クラスの定義、所属の有限判定、クラス固有の主張と一般には成り立たない境界を得る。",
-        main: "現在の主張は、有限な閉近傍舞台上の総和型所属が同じ局所署名を持つ入力対の有限比較と同値になり、二元体上で線形な局所規則族の局所条件が大域写像の零保存・加法保存・スカラー倍保存を与えることである。一般の局所規則では零保存が破れる。",
+        main: "現在の主張は、総和型所属が局所署名の繊維上の有限比較と同値になり、二元体上の局所線形性が大域の演算保存を与え、二次規則族の二時刻大域写像が明示逆写像を持つことである。一般の局所規則では零保存と可逆性は強制されない。",
         mainLabels: [
           "claim_totalistic_pairwise_characterization",
           "claim_totalistic_membership_finite_decidable",
@@ -197,6 +197,9 @@ export const documentOrganization = [
           "claim_binary_field_linear_global_map_preserves_scalar_multiplication",
           "claim_binary_field_linear_membership_finite_decidable",
           "claim_general_binary_rule_need_not_preserve_zero",
+          "claim_second_order_membership_finite_decidable",
+          "theorem_second_order_global_evolution_bijective",
+          "claim_general_binary_rule_not_forced_reversible",
         ],
       },
       {
