@@ -357,7 +357,12 @@ export const roadmapStages = [
       {
         kind: "label",
         label: "theorem_second_order_global_evolution_bijective",
-        why: "二次規則族を二時刻の有限真理値表として定義し、所属の有限判定と二時刻大域写像の明示逆写像を構造化記述した。SageMath と Lean の二層は後続対象である。",
+        why: "二次規則族を二時刻の有限真理値表として定義し、所属の有限判定と二時刻大域写像の明示逆写像を構造化記述した。SageMath の段別検算があり、Lean 二版は後続対象である。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/second-order-rule-class/overview.md",
+        why: "基礎表の回復と一意性、有限所属判定、二元体加法の消去、二時刻発展の明示逆写像、一般の一段規則の反例を明示した有限範囲で全数検算する。",
       },
     ],
   },
