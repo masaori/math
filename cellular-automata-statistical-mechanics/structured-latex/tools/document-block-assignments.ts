@@ -1,5 +1,11 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "binary_field_linear_rule_class_definition_field_operations": "rule_class_separation",
+  "binary_field_linear_rule_class_definition_pointwise_operations": "rule_class_separation",
+  "binary_field_linear_rule_class_definition_linear_family": "rule_class_separation",
+  "binary_field_linear_rule_class_claim_global_additivity": "rule_class_separation",
+  "binary_field_linear_rule_class_claim_finite_decidability": "rule_class_separation",
+  "binary_field_linear_rule_class_claim_general_counterexample": "rule_class_separation",
   "totalistic_rule_class_definition_closed_symmetric_stage": "rule_class_separation",
   "totalistic_rule_class_definition_local_signature": "rule_class_separation",
   "totalistic_rule_class_definition_totalistic_family": "rule_class_separation",
