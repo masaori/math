@@ -53,6 +53,18 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.NecSuf.SecondOrderRuleClass.secondOrderForm_eq_lifted_recovered
+  CellularAutomata.NecSuf.SecondOrderRuleClass.baseFamily_unique
+  CellularAutomata.NecSuf.SecondOrderRuleClass.inverse_after_evolution
+  CellularAutomata.NecSuf.SecondOrderRuleClass.evolution_after_inverse
+  CellularAutomata.NecSuf.SecondOrderRuleClass.evolution_bijective
+  CellularAutomata.NecSuf.SecondOrderRuleClass.concreteHasSecondOrderForm
+  CellularAutomata.NecSuf.SecondOrderRuleClass.secondOrder_eq_lift_recovered_of_necSuf
+  CellularAutomata.NecSuf.SecondOrderRuleClass.baseFamily_unique_of_necSuf
+  CellularAutomata.NecSuf.SecondOrderRuleClass.secondOrder_finite_decidable_of_necSuf
+  CellularAutomata.NecSuf.SecondOrderRuleClass.inverse_after_evolution_of_necSuf
+  CellularAutomata.NecSuf.SecondOrderRuleClass.evolution_after_inverse_of_necSuf
+  CellularAutomata.NecSuf.SecondOrderRuleClass.globalEvolution_bijective_of_necSuf
   CellularAutomata.SecondOrderRuleClass.secondOrder_eq_lift_recovered
   CellularAutomata.SecondOrderRuleClass.baseFamily_unique
   CellularAutomata.SecondOrderRuleClass.twoTimeConfiguration_card

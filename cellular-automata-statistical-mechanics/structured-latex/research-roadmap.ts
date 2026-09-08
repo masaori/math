@@ -357,7 +357,7 @@ export const roadmapStages = [
       {
         kind: "label",
         label: "theorem_second_order_global_evolution_bijective",
-        why: "二次規則族を二時刻の有限真理値表として定義し、所属の有限判定と二時刻大域写像の明示逆写像を構造化記述した。SageMath の段別検算と、人手証明と同じ有限舞台・二元状態・局所規則族を使う Lean 具体版があり、Lean 必要十分版は後続対象である。",
+        why: "二次規則族を二時刻の有限真理値表として定義し、所属の有限判定と二時刻大域写像の明示逆写像を構造化記述した。SageMath の段別検算、Lean 具体版、右単位元と二つの消去等式だけを残した Lean 必要十分版と具体版への導出が揃っている。",
       },
       {
         kind: "path",

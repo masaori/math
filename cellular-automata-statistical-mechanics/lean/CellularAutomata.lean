@@ -132,6 +132,7 @@ import CellularAutomata.BinaryCAPositiveCountDomain
 import CellularAutomata.BinaryFieldLinearRuleClass
 import CellularAutomata.NecSuf.BinaryFieldLinearRuleClass
 import CellularAutomata.SecondOrderRuleClass
+import CellularAutomata.NecSuf.SecondOrderRuleClass
 import CellularAutomata.NecSuf.PositiveFixedPointCountDomain
 
 import CellularAutomata.NecSuf.PrimeLogarithm
