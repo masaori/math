@@ -1,5 +1,14 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "block_partition_rule_class_definition_partition": "finite_set_block_partitions",
+  "block_partition_rule_class_claim_blocks_are_membership_fibers": "finite_set_block_partitions",
+  "block_partition_rule_class_definition_rule_family": "rule_class_separation",
+  "block_partition_rule_class_definition_phase_update": "rule_class_separation",
+  "block_partition_rule_class_definition_schedule": "rule_class_separation",
+  "block_partition_rule_class_definition_sweep_update": "rule_class_separation",
+  "block_partition_rule_class_claim_phase_characterization": "rule_class_separation",
+  "block_partition_rule_class_claim_membership_finite_decidable": "rule_class_separation",
+  "block_partition_rule_class_claim_synchronous_boundary": "rule_class_separation",
   "second_order_rule_class_definition_local_family": "rule_class_separation",
   "second_order_rule_class_claim_base_family_unique": "rule_class_separation",
   "second_order_rule_class_claim_membership_finite_decidable": "rule_class_separation",

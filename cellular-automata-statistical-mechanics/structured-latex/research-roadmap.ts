@@ -364,6 +364,11 @@ export const roadmapStages = [
         path: "sagemath/check/second-order-rule-class/overview.md",
         why: "基礎表の回復と一意性、有限所属判定、二元体加法の消去、二時刻発展の明示逆写像、一般の一段規則の反例を明示した有限範囲で全数検算する。",
       },
+      {
+        kind: "label",
+        label: "claim_block_phase_characterization",
+        why: "ブロック型を有限分割上の一相更新と有限相の順序付き一巡更新として定義し、固定分割に対する一相更新を各ブロック内入力だけへの依存で特徴づけた。有限所属判定と同期更新との二セル反例を構造化記述し、SageMath と Lean 二層は後続対象である。",
+      },
     ],
   },
   {

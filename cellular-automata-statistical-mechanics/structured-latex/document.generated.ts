@@ -21,6 +21,7 @@ import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.gener
 import blocks_binary_ca_logarithmic_counts from './content/binary-ca-logarithmic-counts.ts'
 import blocks_binary_ca_positive_count_domain from './content/binary-ca-positive-count-domain.ts'
 import blocks_binary_field_linear_rule_class from './content/binary-field-linear-rule-class.ts'
+import blocks_block_partition_rule_class from './content/block-partition-rule-class.ts'
 import blocks_causal_set_primary_literature from './content/causal-set-primary-literature.ts'
 import blocks_causal_structure_comparison from './content/causal-structure-comparison.ts'
 import blocks_composed_neighborhood_closure from './content/composed-neighborhood-closure.ts'
@@ -97,6 +98,7 @@ export type AllBlocks = [
   ...typeof blocks_binary_ca_logarithmic_counts,
   ...typeof blocks_binary_ca_positive_count_domain,
   ...typeof blocks_binary_field_linear_rule_class,
+  ...typeof blocks_block_partition_rule_class,
   ...typeof blocks_causal_set_primary_literature,
   ...typeof blocks_causal_structure_comparison,
   ...typeof blocks_composed_neighborhood_closure,

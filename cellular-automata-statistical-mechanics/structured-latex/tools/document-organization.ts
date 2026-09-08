@@ -130,6 +130,14 @@ export const documentOrganization = [
           "claim_reversible_cycle_type_completeness",
         ],
       },
+      {
+        id: "finite_set_block_partitions",
+        title: "有限集合のブロック分割",
+        input: "有限集合と、その有限部分集合の有限集合を入力とする。",
+        output: "空でない部分集合が各元を重複なく覆うブロック分割と、各元が属する唯一のブロックを得る。",
+        main: "主張は、各ブロックが所属ブロック写像の対応する繊維として正確に復元されることである。",
+        mainLabels: ["claim_block_partition_blocks_are_membership_fibers"],
+      },
     ],
   },
   {
@@ -188,7 +196,7 @@ export const documentOrganization = [
         title: "有限真理値表による規則クラスの分別",
         input: "有限舞台、規則クラスごとに必要な舞台・状態の追加構造、有限局所真理値表を入力とする。",
         output: "各規則クラスの定義、所属の有限判定、クラス固有の主張と一般には成り立たない境界を得る。",
-        main: "現在の主張は、総和型所属が局所署名の繊維上の有限比較と同値になり、二元体上の局所線形性が大域の演算保存を与え、二次規則族の二時刻大域写像が明示逆写像を持つことである。一般の局所規則では零保存と可逆性は強制されない。",
+        main: "現在の主張は、総和型所属が局所署名の繊維上の有限比較と同値になり、二元体上の局所線形性が大域の演算保存を与え、二次規則族の二時刻大域写像が明示逆写像を持ち、一相ブロック更新が各ブロック内の入力だけへの依存で特徴づけられることである。一般の局所規則では零保存・可逆性・指定した分割へのブロック局所性は強制されない。",
         mainLabels: [
           "claim_totalistic_pairwise_characterization",
           "claim_totalistic_membership_finite_decidable",
@@ -200,6 +208,9 @@ export const documentOrganization = [
           "claim_second_order_membership_finite_decidable",
           "theorem_second_order_global_evolution_bijective",
           "claim_general_binary_rule_not_forced_reversible",
+          "claim_block_phase_characterization",
+          "claim_block_phase_membership_finite_decidable",
+          "claim_synchronous_rule_not_forced_block_local",
         ],
       },
       {
