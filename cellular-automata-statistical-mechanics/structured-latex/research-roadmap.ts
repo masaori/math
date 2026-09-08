@@ -367,7 +367,12 @@ export const roadmapStages = [
       {
         kind: "label",
         label: "claim_block_phase_characterization",
-        why: "ブロック型を有限分割上の一相更新と有限相の順序付き一巡更新として定義し、固定分割に対する一相更新を各ブロック内入力だけへの依存で特徴づけた。有限所属判定と同期更新との二セル反例を構造化記述し、SageMath と Lean 二層は後続対象である。",
+        why: "ブロック型を有限分割上の一相更新と有限相の順序付き一巡更新として定義し、固定分割に対する一相更新を各ブロック内入力だけへの依存で特徴づけた。有限所属判定と同期更新との二セル反例を構造化記述し、SageMath の段別検算まで揃えた。Lean 二層は後続対象である。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/block-partition-rule-class/overview.md",
+        why: "分割条件と所属ブロックの繊維、一相更新の特徴づけの両方向、有限所属判定、同期二セル交換の境界を、明示した有限範囲で全数検算する。",
       },
     ],
   },
