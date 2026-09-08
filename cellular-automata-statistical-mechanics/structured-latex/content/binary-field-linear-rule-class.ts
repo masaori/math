@@ -176,10 +176,10 @@ f_v(a\odot_{N(v)}x)=a\odot_A f_v(x)`),
       displayMath(String.raw`\begin{aligned}
 (F(a\odot_Vp))(v)
 &=f_v\bigl(\rho^V_{N(v)}(a\odot_Vp)\bigr)\qquad(\because\ \blkref{def_global_map})\\
-&=f_v\bigl(a\odot_{N(v)}(\rho^V_{N(v)}p)\bigr)\qquad(\because\ \blkref{def_binary_configuration_pointwise_addition})\\
+&=f_v\bigl(a\odot_{N(v)}(\rho^V_{N(v)}p)\bigr)\qquad(\because\ \blkref{def_binary_configuration_scalar_multiplication})\\
 &=a\odot_Af_v(\rho^V_{N(v)}p)\qquad(\because\ \blkref{def_binary_field_linear_local_rule_family})\\
 &=a\odot_A(Fp)(v)\qquad(\because\ \blkref{def_global_map})\\
-&=(a\odot_VF(p))(v)\qquad(\because\ \blkref{def_binary_configuration_pointwise_addition}).
+&=(a\odot_VF(p))(v)\qquad(\because\ \blkref{def_binary_configuration_scalar_multiplication}).
 \end{aligned}`),
       paragraph(["したがって写像の外延性により主張を得る。"]),
     ],
