@@ -134,6 +134,7 @@ import CellularAutomata.NecSuf.BinaryFieldLinearRuleClass
 import CellularAutomata.SecondOrderRuleClass
 import CellularAutomata.NecSuf.SecondOrderRuleClass
 import CellularAutomata.BlockPartitionRuleClass
+import CellularAutomata.ProbabilisticRuleClass
 import CellularAutomata.NecSuf.BlockPartitionRuleClass
 import CellularAutomata.NecSuf.PositiveFixedPointCountDomain
 
