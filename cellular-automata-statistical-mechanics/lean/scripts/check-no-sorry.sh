@@ -53,6 +53,17 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.SecondOrderRuleClass.secondOrder_eq_lift_recovered
+  CellularAutomata.SecondOrderRuleClass.baseFamily_unique
+  CellularAutomata.SecondOrderRuleClass.twoTimeConfiguration_card
+  CellularAutomata.SecondOrderRuleClass.stateAdd_cancellation
+  CellularAutomata.SecondOrderRuleClass.pointwiseAdd_cancellation
+  CellularAutomata.SecondOrderRuleClass.inverse_after_evolution
+  CellularAutomata.SecondOrderRuleClass.evolution_after_inverse
+  CellularAutomata.SecondOrderRuleClass.globalEvolution_bijective
+  CellularAutomata.SecondOrderRuleClass.single_zero_ne_one
+  CellularAutomata.SecondOrderRuleClass.constantZeroGlobalMap_not_injective
+  CellularAutomata.SecondOrderRuleClass.constantZeroGlobalMap_not_bijective
   CellularAutomata.NecSuf.BinaryFieldLinearRuleClass.assembledMap_preserves_zero
   CellularAutomata.NecSuf.BinaryFieldLinearRuleClass.assembledMap_preserves_addition
   CellularAutomata.NecSuf.BinaryFieldLinearRuleClass.assembledMap_preserves_scalar_action
