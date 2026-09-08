@@ -374,6 +374,11 @@ export const roadmapStages = [
         path: "sagemath/check/block-partition-rule-class/overview.md",
         why: "分割条件と所属ブロックの繊維、一相更新の特徴づけの両方向、有限所属判定、同期二セル交換の境界を、明示した有限範囲で全数検算する。",
       },
+      {
+        kind: "label",
+        label: "theorem_probabilistic_global_transition_normalized",
+        why: "有理重みの確率的局所規則族から、有限配位上の正規化された大域遷移重みを構成した。有限回合成の有理数閉性、有限所属判定、決定論的規則との零一重み境界も同じ節に構造化記述した。SageMath と Lean 二層は後続である。",
+      },
     ],
   },
   {

@@ -196,7 +196,7 @@ export const documentOrganization = [
         title: "有限真理値表による規則クラスの分別",
         input: "有限舞台、規則クラスごとに必要な舞台・状態の追加構造、有限局所真理値表を入力とする。",
         output: "各規則クラスの定義、所属の有限判定、クラス固有の主張と一般には成り立たない境界を得る。",
-        main: "現在の主張は、総和型所属が局所署名の繊維上の有限比較と同値になり、二元体上の局所線形性が大域の演算保存を与え、二次規則族の二時刻大域写像が明示逆写像を持ち、一相ブロック更新が各ブロック内の入力だけへの依存で特徴づけられることである。一般の局所規則では零保存・可逆性・指定した分割へのブロック局所性は強制されない。",
+        main: "現在の主張は、総和型所属が局所署名の繊維上の有限比較と同値になり、二元体上の局所線形性が大域の演算保存を与え、二次規則族の二時刻大域写像が明示逆写像を持ち、一相ブロック更新が各ブロック内の入力だけへの依存で特徴づけられ、有理重みの確率的局所規則が有限回の更新まで有理確率分布として閉じることである。一般の局所規則では零保存・可逆性・指定した分割へのブロック局所性は強制されず、確率的規則は零一重みでない限り決定論的規則ではない。",
         mainLabels: [
           "claim_totalistic_pairwise_characterization",
           "claim_totalistic_membership_finite_decidable",
@@ -211,6 +211,10 @@ export const documentOrganization = [
           "claim_block_phase_characterization",
           "claim_block_phase_membership_finite_decidable",
           "claim_synchronous_rule_not_forced_block_local",
+          "theorem_probabilistic_global_transition_normalized",
+          "claim_probabilistic_finite_step_rational_closure",
+          "claim_probabilistic_membership_finite_decidable",
+          "claim_deterministic_rules_are_zero_one_probabilistic_rules",
         ],
       },
       {

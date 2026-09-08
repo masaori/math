@@ -1,5 +1,12 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "probabilistic_rule_class_definition_local_family": "rule_class_separation",
+  "probabilistic_rule_class_definition_local_output_weight": "rule_class_separation",
+  "probabilistic_rule_class_definition_global_transition_weight": "rule_class_separation",
+  "probabilistic_rule_class_theorem_global_normalization": "rule_class_separation",
+  "probabilistic_rule_class_claim_finite_step_rational_closure": "rule_class_separation",
+  "probabilistic_rule_class_claim_membership_finite_decidable": "rule_class_separation",
+  "probabilistic_rule_class_claim_deterministic_boundary": "rule_class_separation",
   "block_partition_rule_class_definition_partition": "finite_set_block_partitions",
   "block_partition_rule_class_claim_blocks_are_membership_fibers": "finite_set_block_partitions",
   "block_partition_rule_class_definition_rule_family": "rule_class_separation",

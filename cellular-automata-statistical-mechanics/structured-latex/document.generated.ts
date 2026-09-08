@@ -77,6 +77,7 @@ import blocks_ordered_neighborhood_assignment_monoid from './content/ordered-nei
 import blocks_periodic_point_count from './content/periodic-point-count.ts'
 import blocks_positive_fixed_point_count_domain from './content/positive-fixed-point-count-domain.ts'
 import blocks_prime_logarithm from './content/prime-logarithm.ts'
+import blocks_probabilistic_rule_class from './content/probabilistic-rule-class.ts'
 import blocks_recursive_preimage_tree_code from './content/recursive-preimage-tree-code.ts'
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_reversibility_finite_decidability from './content/reversibility-finite-decidability.ts'
@@ -154,6 +155,7 @@ export type AllBlocks = [
   ...typeof blocks_periodic_point_count,
   ...typeof blocks_positive_fixed_point_count_domain,
   ...typeof blocks_prime_logarithm,
+  ...typeof blocks_probabilistic_rule_class,
   ...typeof blocks_recursive_preimage_tree_code,
   ...typeof blocks_redundant_neighbor,
   ...typeof blocks_reversibility_finite_decidability,
