@@ -490,6 +490,16 @@ targets=(
   Ising2D.NecSuf.smul_mem_fixedVectors
   Ising2D.NecSuf.fixedSubmodule
   Ising2D.oddEigenvectors
+  Ising2D.zero_mem_oddEigenvectors
+  Ising2D.add_mem_oddEigenvectors
+  Ising2D.smul_mem_oddEigenvectors
+  Ising2D.oddEigenspace
+  Ising2D.oddEigenspace_eq_negatedSubmodule
+  Ising2D.NecSuf.negatedVectors
+  Ising2D.NecSuf.zero_mem_negatedVectors
+  Ising2D.NecSuf.add_mem_negatedVectors
+  Ising2D.NecSuf.smul_mem_negatedVectors
+  Ising2D.NecSuf.negatedSubmodule
   Ising2D.epsProj_sq
   Ising2D.epsProj_mul_epsProj_neg
   Ising2D.epsProj_add_epsProj_neg

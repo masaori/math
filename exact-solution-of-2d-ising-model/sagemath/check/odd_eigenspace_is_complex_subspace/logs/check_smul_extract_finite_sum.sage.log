@@ -1,0 +1,8 @@
+PASS: extract a from the finite sum, r=0
+RESULT: PASS
+PASS: extract a from the finite sum, r=1
+RESULT: PASS
+PASS: extract a from the finite sum, r=2
+RESULT: PASS
+PASS: extract a from the finite sum, r=3
+RESULT: PASS

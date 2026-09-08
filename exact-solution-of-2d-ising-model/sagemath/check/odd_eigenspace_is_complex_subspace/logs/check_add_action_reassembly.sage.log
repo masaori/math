@@ -1,0 +1,8 @@
+PASS: reassemble the two matrix-vector products, r=0
+RESULT: PASS
+PASS: reassemble the two matrix-vector products, r=1
+RESULT: PASS
+PASS: reassemble the two matrix-vector products, r=2
+RESULT: PASS
+PASS: reassemble the two matrix-vector products, r=3
+RESULT: PASS

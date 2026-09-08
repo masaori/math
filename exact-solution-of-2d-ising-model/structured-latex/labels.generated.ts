@@ -253,6 +253,7 @@ export const ALL_LABELS = [
   "nesting_of_commutator_of_H_and_check_Z",
   "number_operator_idempotent",
   "number_operators_commute",
+  "odd_eigenspace_is_complex_subspace",
   "onsager_exact_solution",
   "onsager_free_energy_expression",
   "open_chain_endpoint_product_sum",

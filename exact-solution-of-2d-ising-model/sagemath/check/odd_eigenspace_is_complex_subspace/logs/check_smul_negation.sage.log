@@ -1,0 +1,8 @@
+PASS: a(-f_r) = -(af_r), r=0
+RESULT: PASS
+PASS: a(-f_r) = -(af_r), r=1
+RESULT: PASS
+PASS: a(-f_r) = -(af_r), r=2
+RESULT: PASS
+PASS: a(-f_r) = -(af_r), r=3
+RESULT: PASS

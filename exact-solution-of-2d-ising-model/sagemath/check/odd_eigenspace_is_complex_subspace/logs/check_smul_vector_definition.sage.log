@@ -1,0 +1,8 @@
+PASS: componentwise scalar multiplication and negation, r=0
+RESULT: PASS
+PASS: componentwise scalar multiplication and negation, r=1
+RESULT: PASS
+PASS: componentwise scalar multiplication and negation, r=2
+RESULT: PASS
+PASS: componentwise scalar multiplication and negation, r=3
+RESULT: PASS
