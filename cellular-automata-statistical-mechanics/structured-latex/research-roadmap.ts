@@ -377,7 +377,12 @@ export const roadmapStages = [
       {
         kind: "label",
         label: "theorem_probabilistic_global_transition_normalized",
-        why: "有理重みの確率的局所規則族から、有限配位上の正規化された大域遷移重みを構成した。有限回合成の有理数閉性、有限所属判定、決定論的規則との零一重み境界も同じ節に構造化記述した。SageMath と Lean 二層は後続である。",
+        why: "有理重みの確率的局所規則族から、有限配位上の正規化された大域遷移重みを構成した。有限回合成の有理数閉性、有限所属判定、決定論的規則との零一重み境界も同じ節に構造化記述し、SageMath の段別検算を揃えた。Lean 二層は後続である。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/probabilistic-rule-class/overview.md",
+        why: "有理重みの大域正規化、有限回遷移の有理閉性と正規化、有限所属判定、零一重みの決定論的境界を、明示した有限範囲で段別検算する。",
       },
     ],
   },
