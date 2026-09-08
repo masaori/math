@@ -135,6 +135,7 @@ import CellularAutomata.SecondOrderRuleClass
 import CellularAutomata.NecSuf.SecondOrderRuleClass
 import CellularAutomata.BlockPartitionRuleClass
 import CellularAutomata.ProbabilisticRuleClass
+import CellularAutomata.FiniteTransferMatrixComparison
 import CellularAutomata.NecSuf.BlockPartitionRuleClass
 import CellularAutomata.NecSuf.ProbabilisticRuleClass
 import CellularAutomata.NecSuf.PositiveFixedPointCountDomain
