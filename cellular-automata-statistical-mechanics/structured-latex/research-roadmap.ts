@@ -83,6 +83,11 @@ export const roadmapStages = [
     evidence: [
       {
         kind: "label",
+        label: "theorem_deterministic_transfer_trace_equals_fixed_point_count",
+        why: "有理遷移重みを有限転送行列へ送る比較写像を置き、決定論的な零一重みでは正の冪の跡が反復不動点数に一致することを構造化記述した。SageMathとLean二層は後続である。",
+      },
+      {
+        kind: "label",
         label: "claim_flip_test_equivalence",
         why: "本質的依存が一点反転検査と同値であり、有限真理値表から決定できる。",
       },

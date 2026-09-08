@@ -269,6 +269,17 @@ export const documentOrganization = [
         mainLabels: ["claim_binary_ca_logarithmic_free_count_fibers", "claim_binary_ca_unit_difference_ratio", "claim_binary_ca_logarithmic_gap_division_obstruction"],
       },
       {
+        id: "finite_transfer_matrix_and_trace",
+        title: "有限遷移重みの転送行列と決定論的状態数",
+        input: "有限舞台上の有理重みの確率的局所規則族、その有限回遷移重み、決定論的局所規則族と反復不動点数を入力とする。",
+        output: "有理遷移重みを行確率行列へ送る比較写像、有限和積だけで定めた行列冪と跡、および零一重みの跡と反復不動点数の一致を得る。",
+        main: "主定理は、決定論的局所規則族を明示的な零一重み写像で埋め込むと、転送行列の正の冪の跡が大域写像の反復不動点数に一致し、正の場合だけ既存の対数順序群値自由エントロピーへ接続することである。",
+        mainLabels: [
+          "claim_transfer_matrix_power_equals_finite_step_weight",
+          "theorem_deterministic_transfer_trace_equals_fixed_point_count",
+        ],
+      },
+      {
         id: "conjugacy_and_locality_classification",
         title: "共役分類と局所性による制限",
         input: "有限自己写像の共役分類と、2 値 CA の局所表現を入力とする。",

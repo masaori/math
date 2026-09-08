@@ -1,5 +1,12 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "finite_transfer_matrix_comparison_definition_matrix": "finite_transfer_matrix_and_trace",
+  "finite_transfer_matrix_comparison_definition_power_trace": "finite_transfer_matrix_and_trace",
+  "finite_transfer_matrix_comparison_claim_power_is_finite_transition": "finite_transfer_matrix_and_trace",
+  "finite_transfer_matrix_comparison_definition_deterministic_embedding": "finite_transfer_matrix_and_trace",
+  "finite_transfer_matrix_comparison_claim_deterministic_entry": "finite_transfer_matrix_and_trace",
+  "finite_transfer_matrix_comparison_claim_deterministic_power": "finite_transfer_matrix_and_trace",
+  "finite_transfer_matrix_comparison_theorem_trace_fixed_count": "finite_transfer_matrix_and_trace",
   "probabilistic_rule_class_definition_local_family": "rule_class_separation",
   "probabilistic_rule_class_definition_local_output_weight": "rule_class_separation",
   "probabilistic_rule_class_definition_global_transition_weight": "rule_class_separation",

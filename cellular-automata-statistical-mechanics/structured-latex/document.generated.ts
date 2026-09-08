@@ -34,6 +34,7 @@ import blocks_dependency_order_substructures from './content/dependency-order-su
 import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_neighborhood_assignment_monoid from './content/finite-neighborhood-assignment-monoid.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
+import blocks_finite_transfer_matrix_comparison from './content/finite-transfer-matrix-comparison.ts'
 import blocks_global_map_iteration from './content/global-map-iteration.ts'
 import blocks_inverse_map_locality from './content/inverse-map-locality.ts'
 import blocks_iterate_monoid_conjugacy_invariance from './content/iterate-monoid-conjugacy-invariance.ts'
@@ -112,6 +113,7 @@ export type AllBlocks = [
   ...typeof blocks_essential_dependency,
   ...typeof blocks_finite_neighborhood_assignment_monoid,
   ...typeof blocks_finite_propagation_boundary,
+  ...typeof blocks_finite_transfer_matrix_comparison,
   ...typeof blocks_global_map_iteration,
   ...typeof blocks_inverse_map_locality,
   ...typeof blocks_iterate_monoid_conjugacy_invariance,
