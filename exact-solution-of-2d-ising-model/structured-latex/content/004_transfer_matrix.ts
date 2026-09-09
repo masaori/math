@@ -2314,7 +2314,77 @@ P_{r+1}=P_r\sigma_{r+1}^x
         ref("mat_mult"),
         "、および複素数の体の法則 ",
         ref("complex_numbers_form_a_field"),
-        " を用いる。仮定 ",
+        " を用いる。まず、この証明で使う行列作用の結合則を成分から確かめる。任意の ",
+        math(String.raw`A,B\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        "、",
+        math(String.raw`g\in\mathbb{C}^{2^M}`),
+        "、",
+        math(String.raw`i\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+((AB)g)_i
+&=\sum_{k=1}^{2^M}(AB)_{ik}g_k
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義})\\
+&=\sum_{k=1}^{2^M}\left(\sum_{\ell=1}^{2^M}A_{i\ell}B_{\ell k}\right)g_k
+&&(\because\ \blkref{mat_mult}\ \text{の行列積の成分の定義})\\
+&=\sum_{k=1}^{2^M}\sum_{\ell=1}^{2^M}(A_{i\ell}B_{\ell k})g_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を有限回適用})\\
+&=\sum_{k=1}^{2^M}\sum_{\ell=1}^{2^M}A_{i\ell}(B_{\ell k}g_k)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&=\sum_{\ell=1}^{2^M}\sum_{k=1}^{2^M}A_{i\ell}(B_{\ell k}g_k)
+&&(\because\ \text{有限二重和の順序交換})\\
+&=\sum_{\ell=1}^{2^M}A_{i\ell}\left(\sum_{k=1}^{2^M}B_{\ell k}g_k\right)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を有限回適用})\\
+&=(A(Bg))_i
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`(AB)g=A(Bg)`),
+        " である。同様に、任意の ",
+        math(String.raw`\mu\in\mathbb{C}`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(A(\mu g))_i
+&=\sum_{k=1}^{2^M}A_{ik}(\mu g_k)
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義})\\
+&=\sum_{k=1}^{2^M}(A_{ik}\mu)g_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&=\sum_{k=1}^{2^M}(\mu A_{ik})g_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の交換律})\\
+&=\sum_{k=1}^{2^M}\mu(A_{ik}g_k)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&=\mu\sum_{k=1}^{2^M}A_{ik}g_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を有限回適用})\\
+&=(\mu(Ag))_i
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`A(\mu g)=\mu(Ag)`),
+        " である。また、単位行列の作用も成分から確かめると、任意の ",
+        math(String.raw`i\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(I_{\mathrm{Mat}(2^M,\mathbb{C})}f)_i
+&=\sum_{k=1}^{2^M}(I_{\mathrm{Mat}(2^M,\mathbb{C})})_{ik}f_k
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義})\\
+&=f_i
+&&(\because\ \text{単位行列の成分と }\blkref{complex_numbers_form_a_field}\ \text{の }0,1\text{ の法則}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}f=f`),
+        " である。以上の三つの等式と仮定 ",
         math(String.raw`\varepsilon f=\lambda f`),
         " を二回適用すると、",
       ]),
@@ -2322,19 +2392,21 @@ P_{r+1}=P_r\sigma_{r+1}^x
         String.raw`\begin{aligned}
 f
 &=I_{\mathrm{Mat}(2^M,\mathbb{C})}f
-&&(\because\ \text{単位行列の作用})\\
+&&(\because\ \text{直前に成分ごとに示した単位行列の作用})\\
 &=\varepsilon^2f
-&&(\because\ \varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})})\\
+&&(\because\ \blkref{epsilon_square_identity})\\
 &=\varepsilon(\varepsilon f)
-&&(\because\ \text{行列と数ベクトルの積の結合則})\\
+&&(\because\ \blkref{mat_mult},\blkref{complex_numbers_form_a_field}\ \text{から直前に成分ごとに示した結合則})\\
 &=\varepsilon(\lambda f)
 &&(\because\ \varepsilon f=\lambda f)\\
 &=\lambda(\varepsilon f)
-&&(\because\ \text{行列と数ベクトルの積の複素線型性})\\
+&&(\because\ \blkref{mat_mult},\blkref{complex_numbers_form_a_field}\ \text{から直前に成分ごとに示した複素線型性})\\
 &=\lambda(\lambda f)
 &&(\because\ \varepsilon f=\lambda f)\\
+&=(\lambda\lambda)f
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合則})\\
 &=\lambda^2f
-&&(\because\ \text{複素数倍の結合則}).
+&&(\because\ \lambda^2=\lambda\lambda\ \text{という二乗の定義}).
 \end{aligned}`,
       ),
       paragraph([
@@ -2353,16 +2425,24 @@ f
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(\lambda^2-1)f_j&=0
-&&(\because\ f_j=\lambda^2f_j)\\
+\lambda^2f_j-f_j&=0
+&&(\because\ f_j=\lambda^2f_j\ \text{の両辺から }f_j\text{ を引く})\\
+(\lambda^2-1)f_j&=\lambda^2f_j-1f_j
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&=\lambda^2f_j-f_j
+&&(\because\ 1f_j=f_j)\\
+&=0
+&&(\because\ \lambda^2f_j-f_j=0)\\
 \lambda^2-1&=0
-&&(\because\ f_j\neq0\ \text{と複素数の零積則})\\
-(\lambda-1)(\lambda+1)&=0
-&&(\because\ \lambda^2-1=(\lambda-1)(\lambda+1))\\
+&&(\because\ f_j\neq0\ \text{と }\blkref{complex_numbers_form_a_field}\ \text{の零積則})\\
+(\lambda-1)(\lambda+1)&=\lambda^2-1
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&=0
+&&(\because\ \lambda^2-1=0)\\
 \lambda-1=0\quad\text{または}\quad\lambda+1&=0
-&&(\because\ \text{複素数の零積則})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零積則})\\
 \lambda=1\quad\text{または}\quad\lambda&=-1
-&&(\because\ \text{複素数の加法}).
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法}).
 \end{aligned}`,
       ),
     ],

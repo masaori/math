@@ -2119,7 +2119,7 @@
       "readabilityStatus": "V1 と V2 の独立した等式を別ブロックへ分けた。V1 は単一サイトの Pauli 行列積から隣接項・周期境界項を、V2 は単一サイト項を、それぞれクロネッカー積で一段ずつ導いており、両方とも現行の説明粒度検査に合格している。外部入力では、集合と代数構造の記号、複素数の定義、および混在したサイト作用素の記号定義に分割が残る。直後の固有値 +1 の集合定義は具体的な行列作用だけで記述済みである。"
     },
     {
-      "name": "全スピン反転行列の固有空間と相補射影",
+      "name": "全スピン反転行列の二つの固有空間",
       "chapter": "2次元イジングモデル",
       "status": "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
       "entryIds": [
@@ -2127,74 +2127,120 @@
         "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
         "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
         "transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace",
-        "transfer_matrix_004_definition_eigenspaces_of_epsilon",
-        "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
-        "transfer_matrix_004c_claim_epsilon_action_eigenvalues",
-        "bridge_009_claim_epsilon_projector_properties"
+        "transfer_matrix_004_definition_eigenspaces_of_epsilon"
       ],
       "input": [
-        "全スピン反転行列 ε と、ε と単位行列の和・差から定めた二つの行列 P^{(±)}",
-        "有限複素行列の数ベクトルへの作用と複素数の体の法則",
-        "Pauli 行列の二乗とクロネッカー積の積・単位元の規則"
+        "全スピン反転行列 ε の有限複素数ベクトルへの作用",
+        "複素数ベクトルの零・和・複素スカラー倍"
       ],
       "externalInputEntryIds": [
         "calculation_formulae_definition_set_and_algebra_notation",
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_003_matrix_decomposition",
         "transfer_matrix_001_definition_symbols",
-        "bridge_008_definition_epsilon_projectors",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field"
+      ],
+      "output": [
+        "全スピン反転行列の固有値 +1 と −1 に対応する二つの複素部分線型空間"
+      ],
+      "formalizationEvidence": {
+        "leanFiles": [
+          "lean/Ising2D/Part004/EvenEigenvectors.lean",
+          "lean/Ising2D/NecSuf/FixedVectorsSubmodule.lean",
+          "lean/Ising2D/Part004/OddEigenvectors.lean",
+          "lean/Ising2D/NecSuf/NegatedVectorsSubmodule.lean"
+        ],
+        "sageMathOverviews": [
+          "sagemath/check/def_even_eigenvectors_of_epsilon/overview.md",
+          "sagemath/check/even_eigenspace_is_complex_subspace/overview.md",
+          "sagemath/check/def_odd_eigenvectors_of_epsilon/overview.md",
+          "sagemath/check/odd_eigenspace_is_complex_subspace/overview.md"
+        ],
+        "currentStatus": "固有値 +1 と -1 の集合定義、および両集合の複素部分線型空間性を本文・Lean・SageMathで同期済みである。"
+      },
+      "mainTheorem": "全スピン反転行列の二つの固有空間",
+      "mainTheoremEntryId": "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+      "boundaryEvidence": "章内依存順26–30は、二つの固有ベクトル集合を定義し、それぞれの部分空間性を示して統合する。直後の順31はこれらに依存せず、Pauli 行列の二乗とクロネッカー積の規則へ入力が切り替わるため、順30の後で節を閉じる。",
+      "readabilityStatus": "二つの集合定義と部分空間性を一主張ずつ分離し、具体的な複素行列作用と成分和だけで記述している。外部入力の混在した記号定義には説明粒度の未解決が残る。"
+    },
+    {
+      "name": "全スピン反転行列の二乗と固有値候補",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+      "entryIds": [
+        "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
+        "transfer_matrix_004c_claim_epsilon_action_eigenvalues"
+      ],
+      "input": [
+        "Pauli 行列の二乗とクロネッカー積の積・単位元の規則",
+        "有限複素行列の数ベクトルへの作用と複素数の体の法則"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_003_matrix_decomposition",
+        "transfer_matrix_001_definition_symbols",
         "calculation_formulae_025_claim_complex_numbers_form_a_field",
         "linear_space_general_000b_claim_kronecker_product_rule",
-        "transfer_matrix_005_definition_end_isomorphism",
         "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
       ],
       "output": [
-        "全スピン反転行列の固有値 +1 と −1 に対応する二つの固有空間、および両固有空間の複素部分線型空間性",
         "全スピン反転行列の二乗が単位行列であること",
-        "全スピン反転行列の作用の固有値が +1 または −1 に限ること",
-        "P^{(+)} と P^{(-)} が互いに補い合い、それぞれの像が対応する固有空間に一致すること"
-      ],
-      "boundaryCandidates": [
-        "ε²=I とその行列作用の固有値候補は、固有空間の部分空間性と相補射影から独立した節候補。固有値候補で複素数の体と行列作用が新規入力になり、相補射影は固有値候補へ依存しないため、固有値候補の形式化同期時に前後の節から分離する。"
-      ],
-      "nextTickUnit": [
-        "全スピン反転行列の作用の固有値が +1 または -1 に限ること"
+        "全スピン反転行列の作用の固有値が +1 または −1 に限ること"
       ],
       "formalizationEvidence": {
         "leanFiles": [
           "lean/Ising2D/Part004/Definition000_TransferMatrixSymbols.lean",
           "lean/Ising2D/NecSuf/EpsilonSquare.lean",
           "lean/Ising2D/Part004/ClaimEpsilonSquareFromNecSuf.lean",
-          "lean/Ising2D/Part004/EvenEigenvectors.lean",
-          "lean/Ising2D/NecSuf/FixedVectorsSubmodule.lean",
-          "lean/Ising2D/Part004/OddEigenvectors.lean",
-          "lean/Ising2D/NecSuf/NegatedVectorsSubmodule.lean",
-          "lean/Ising2D/Part010/Claim009_EpsilonProjectors.lean",
-          "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
-          "lean/docs/ch010-formalization.md"
+          "lean/Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean",
+          "lean/Ising2D/NecSuf/InvolutionEigenvalue.lean",
+          "lean/Ising2D/Part004/ClaimEpsilonActionEigenvaluesFromNecSuf.lean",
+          "lean/docs/ch010-formalization.md",
+          "lean/docs/necsuf-involution-eigenvalue.md"
         ],
         "sageMathFiles": [
-          "sagemath/check/epsilon_square_identity/check_site_product_equals_all_factors.sage",
-          "sagemath/check/epsilon_square_identity/check_prefix_append_site_operator.sage",
-          "sagemath/check/epsilon_square_identity/check_prefix_kronecker_multiplication.sage",
-          "sagemath/check/epsilon_square_identity/check_prefix_identity_simplification.sage",
-          "sagemath/check/epsilon_square_identity/check_kronecker_product_multiplication.sage",
-          "sagemath/check/epsilon_square_identity/check_pauli_square_each_factor.sage",
-          "sagemath/check/epsilon_square_identity/check_kronecker_identity.sage",
           "sagemath/check/epsilon_square_identity/overview.md",
-          "sagemath/check/def_even_eigenvectors_of_epsilon/check_even_eigenvectors.sage",
-          "sagemath/check/def_odd_eigenvectors_of_epsilon/check_odd_eigenvectors.sage",
-          "sagemath/check/even_eigenspace_is_complex_subspace/check_zero_action_definition.sage",
-          "sagemath/check/even_eigenspace_is_complex_subspace/check_add_distributivity.sage",
-          "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_extract_finite_sum.sage",
-          "sagemath/check/odd_eigenspace_is_complex_subspace/overview.md"
+          "sagemath/check/epsilon_action_eigenvalues_are_signs/overview.md"
         ],
-        "currentStatus": "固有値 +1 と -1 の固有ベクトル全体 F^{(+)}・F^{(-)} は、本文と Lean の evenEigenvectors・oddEigenvectors の双方で M≥1 の下、εf=f・εf=-f を満たす複素数ベクトルの集合として具体的な行列作用だけから定義した。両集合の複素部分線型空間性も独立項へ分け、本文では零ベクトル・加法・複素スカラー倍の閉性を成分ごとに示した。Lean の具体版では正側17段・負側20段の成分計算に対応する三閉性と部分加群を証明し、必要十分版は有限添字と可換半環または可換環だけを仮定して同じ計算を示し、具体版がその特殊化であることも示す。SageMath は M=2 の有限例の全4成分を QQ(i) 上の厳密等号として、正側17段・負側20段へ一ファイルずつ対応させる。ε²=I と固有値候補は本文で別ブロックへ分割した。二乗公式は Lean でサイト作用素の有限帰納法、クロネッカー積の因子別計算、各因子の二乗、単位因子の積を本文と同順に証明し、不要な行列構造を除いた必要十分版も分離した。SageMath は本文の帰納段三行と二乗計算四行を一行一ファイルで M=1,…,5 の有限行列について厳密に確認する。固有値候補は、分割した二項間では二乗公式だけを入力とするが、通常の行列作用と複素数の体の法則も直接入力に持つ。対応する Lean 定理と独立した SageMath 対象ラベルはまだ無いため、次回はこの一項だけを形式化同期する。固有空間性と無関係な二乗・固有値候補、および固有値候補に依存しない相補射影は、別節とする境界候補として保持する。"
+        "currentStatus": "二乗公式は本文と同順のLean具体版・必要十分版、および一行一ファイルのSageMath検査に同期した。固有値候補は本文・Lean具体版・SageMathで成分和十三段と主計算十九段を対応させた。Lean必要十分版は可換性を除いた仮定へ絞り、具体版から分離した導出と必要十分性の記録も持つ。次元公式は対象外である。"
+      },
+      "mainTheorem": "全スピン反転行列の作用の固有値候補",
+      "mainTheoremEntryId": "transfer_matrix_004c_claim_epsilon_action_eigenvalues",
+      "boundaryEvidence": "章内依存順31の二乗公式から順32の固有値候補だけが導かれる。順31–32は順26–30の固有空間と相互依存せず、順33の相補射影も順32を使わないため、この二項を独立節として確定した。",
+      "readabilityStatus": "二乗公式と固有値候補は一ブロック一主張で、固有値候補は抽象線型写像を経由せず epsilon f=lambda f から複素数の零積の法則までを一段ずつ示す。"
+    },
+    {
+      "name": "全スピン反転行列から作る相補射影",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+      "entryIds": [
+        "bridge_009_claim_epsilon_projector_properties"
+      ],
+      "input": [
+        "全スピン反転行列の二つの固有空間と二乗公式",
+        "全スピン反転行列と単位行列の和・差から定めた二つの行列 P^{(±)}"
+      ],
+      "externalInputEntryIds": [
+        "bridge_008_definition_epsilon_projectors",
+        "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+        "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
+        "transfer_matrix_005_definition_end_isomorphism"
+      ],
+      "output": [
+        "P^{(+)} と P^{(-)} が互いに補い合い、それぞれの像が対応する固有空間に一致すること"
+      ],
+      "formalizationEvidence": {
+        "leanFiles": [
+          "lean/Ising2D/Part010/Claim009_EpsilonProjectors.lean",
+          "lean/Ising2D/Part010/Claim011_SectorReplacement.lean"
+        ],
+        "currentStatus": "相補射影の既存本文とLean対応を保持し、固有値候補には依存しない一項節として確定した。"
       },
       "mainTheorem": "全スピン反転行列から作る二つの行列が対応する固有空間への相補射影であること",
       "mainTheoremEntryId": "bridge_009_claim_epsilon_projector_properties",
-      "boundaryEvidence": "章内依存順26で固有値 +1、順27で固有値 -1 の固有ベクトル全体 F^{(+)}・F^{(-)} を具体的な行列作用だけから定める。順28と順29では各集合の複素部分線型空間性を示し、順30は両結果を統合する。これらと相互依存しない順31で ε²=I を証明し、順32は分割した二項間では順31だけを入力とする一方、複素数の体と通常の行列作用を新規入力に固有値候補を導く。順33の相補射影は順30と順31だけを使い、順32には依存しない。この枝分かれと入力切替のため、順31–32を独立節、順33を一項節とする境界候補を保持し、固有値候補の形式化同期時に確定する。直後の順34は固有空間だけを再利用して V1 の制限へ分岐し、順31–33に依存しない。生成時に八項の連続性、内部依存辺、節内本文と全外部入力の fingerprint、節末出力、境界候補、順34の章内順・直接依存・本文・非依存、および入力集合の追加・除外を固定検査する。",
-      "readabilityStatus": "順26の F^{(+)} と順27の F^{(-)} はそれぞれ一つの集合だけを定義し、抽象線型写像を経由せず εf=f・εf=-f という具体的な複素行列の作用で記述する。順28と順29の両部分空間性も、零ベクトル・和・複素スカラー倍への ε の作用を成分和で一段ずつ計算する独立主張であり、本文・Lean・SageMath のラベルを同期した。順30は両結果の統合だけを担う。順31の ε²=I と順32の固有値候補も一ブロック一主張へ分割し、順32は抽象的な end 写像を経由せず、εf=λf という通常の行列作用から導く。次回は順32の固有値候補だけを Lean・SageMath の独立対象へ同期し、同時に保持した節境界候補を確定する。固有空間の次元公式や相補射影の内容には進まない。外部入力には、複素数の定義と混在したサイト作用素の記号定義に説明粒度の未解決が残る。"
+      "boundaryEvidence": "章内依存順33は順30の固有空間と順31の二乗公式だけを使い、順32の固有値候補を使わない。直後の順34も順33に依存せず固有空間から別枝へ進むため、一項節として閉じる。",
+      "readabilityStatus": "相補射影の性質だけを一項に保ち、固有値候補と次元公式を含めない。外部入力の写像対応には説明粒度の未解決が残る。"
     },
     {
       "name": "V1 の固有空間への制限",
@@ -13917,8 +13963,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2691,
-        "inspectedContentSha256": "71038f80618a53b384fa93ee79ae1931945acec0ec84b4027923ac6e9d29b543",
+        "inspectedCharacterCount": 6297,
+        "inspectedContentSha256": "99cceee356c8dd674b028ae98323c3128bedab89d94e07a31aeb221ef6458412",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

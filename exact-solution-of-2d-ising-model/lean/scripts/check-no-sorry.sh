@@ -129,6 +129,9 @@ targets=(
   Ising2D.NecSuf.prefix_eq_of_same_recursion
   Ising2D.NecSuf.prefix_terminal_mul_self
   Ising2D.epsilon_mul_self_of_necSuf
+  Ising2D.NecSuf.eigenvalue_eq_one_or_neg_one_of_involution
+  Ising2D.epsilon_action_eigenvalues_are_signs
+  Ising2D.epsilon_action_eigenvalues_are_signs_of_necSuf
   Ising2D.siteProd_smul_family
   Ising2D.siteProd_anticomm_of_single_site
   Ising2D.jw_sq

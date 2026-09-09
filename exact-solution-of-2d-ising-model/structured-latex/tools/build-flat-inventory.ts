@@ -739,18 +739,10 @@ const oddEigenvectorsExpectedDirectDependencies = [
   "transfer_matrix_001_definition_symbols",
 ].sort();
 const oddEigenvectorsExpectedContentSha256 = "c0c4e8962153fafbe3a91c79b7aa011d702de7db0f772708f187b27c21e810c5";
-const epsilonEigenspacesBoundaryCandidates = [
-  "ε²=I とその行列作用の固有値候補は、固有空間の部分空間性と相補射影から独立した節候補。固有値候補で複素数の体と行列作用が新規入力になり、相補射影は固有値候補へ依存しないため、固有値候補の形式化同期時に前後の節から分離する。",
-] as const;
-const epsilonEigenspacesExpectedBoundaryCandidates = [
-  "ε²=I とその行列作用の固有値候補は、固有空間の部分空間性と相補射影から独立した節候補。固有値候補で複素数の体と行列作用が新規入力になり、相補射影は固有値候補へ依存しないため、固有値候補の形式化同期時に前後の節から分離する。",
-] as const;
-const epsilonEigenspacesNextTickUnit = [
-  "全スピン反転行列の作用の固有値が +1 または -1 に限ること",
-] as const;
-const epsilonEigenspacesExpectedNextTickUnit = [
-  "全スピン反転行列の作用の固有値が +1 または -1 に限ること",
-] as const;
+const epsilonEigenspacesBoundaryCandidates = [] as const;
+const epsilonEigenspacesExpectedBoundaryCandidates = [] as const;
+const epsilonEigenspacesNextTickUnit = [] as const;
+const epsilonEigenspacesExpectedNextTickUnit = [] as const;
 if (JSON.stringify(epsilonEigenspacesBoundaryCandidates)
     !== JSON.stringify(epsilonEigenspacesExpectedBoundaryCandidates)
   || JSON.stringify(epsilonEigenspacesNextTickUnit)
@@ -779,8 +771,24 @@ const epsilonEigenspacesFormalizationEvidenceSha256 = [
     "4f54b84d905c55c5d21f5240f3fa206fb5af78f12a8f78ae83e56f0e62a23e2d",
   ],
   [
+    "lean/Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean",
+    "5f698c86848a53dc51777363f6fe2b95ad2c082ca2c2b36ce2971497bdbc8235",
+  ],
+  [
+    "lean/Ising2D/NecSuf/InvolutionEigenvalue.lean",
+    "f7d68e523c953a6c39061a952dc799552fd34f7d6dee8648a7bd8aabb293bcb3",
+  ],
+  [
+    "lean/Ising2D/Part004/ClaimEpsilonActionEigenvaluesFromNecSuf.lean",
+    "d8cb0c263607af35b1071445ebd2c54fb36a1e36fd10facd3283f6ba0ff01967",
+  ],
+  [
     "lean/docs/ch010-formalization.md",
-    "3bda5b370e8754e4788cd2f227d77301050ccb3ceda4fdd23c69c2e5144dc99c",
+    "749ac96242ce560563f799666a30fda672e6729dc93086e9a6e4027887ea4965",
+  ],
+  [
+    "lean/docs/necsuf-involution-eigenvalue.md",
+    "fce5a7cade688eb7713d46baccc10da7f7dfe0c2e247cfe47ffe8ebf5f6bd255",
   ],
   [
     "lean/Ising2D/Part004/EvenEigenvectors.lean",
@@ -1022,6 +1030,142 @@ const epsilonEigenspacesFormalizationEvidenceSha256 = [
     "sagemath/check/epsilon_square_identity/overview.md",
     "882c6e7df4f206d918e9394fc3f60af2ca68ce111fa46c24af1ab965f43b7ac8",
   ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/_prelude.sage",
+    "8186158f68be4cc0b16b41f64f3d31859587fbb4554dfc9c26900a5796315cf5",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_assoc_component_action_definition.sage",
+    "24700ade534155bf15d048f79d43306815b12f4f953f97fe7b8eeb15d93f732b",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_assoc_component_distribute_vector.sage",
+    "2d863689d257b3ae07694d72ae016b4a52bb5861b6f57d294413e03bcda58d78",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_assoc_component_factor_matrix_entry.sage",
+    "410d21cd4d3f3335dadc9b1635b9c0178ceb764d4327aa9f9d73377577c17025",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_assoc_component_finite_sum.sage",
+    "b79138c66ca07413beabd6a30c8218cc167cb8099b639ba60285192230ba46f7",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_assoc_component_matrix_product.sage",
+    "18b986b09a5d9da6aa6bc0accbb22c89a788a0a5ec166e177aec6862126fb788",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_assoc_component_nested_action.sage",
+    "0573b91da1c7bc44661700517fd20eed39b4566ada14bd543249fc28ff02d001",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_assoc_component_reassociate_products.sage",
+    "f9c454e21d758a69f71895ca0added897d6b024a86a2f5003968e07ae1b66f94",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_linearity_component_action_definition.sage",
+    "bf15b1b1b1fcc5ab5f660a44c59c143bc38a2dcb51de92cc80a46cc5af3bb2ce",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_linearity_component_commute_scalar.sage",
+    "19f82b6222a929479db040972f085790299bb814c4704b7d39b6a660cd5b72e9",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_linearity_component_factor_scalar.sage",
+    "95f2de323d6f8ccbee061f1b33980bcc93d65eff818b222a1832c8cb2ca07286",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_linearity_component_reassociate_scalar.sage",
+    "46965ae80abfe6fe64bfb1a09a12deb95a05b69c69390e6faa0e726702fc88f9",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_linearity_component_result.sage",
+    "cc18d2f30baf906696357ac277732cb404f2d1efca924b819aa30ed176c3c61c",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_linearity_component_scalar_association.sage",
+    "d013c829d370b889030b90d4276dfcd19f0d81c06443d2567c1021dcbe301da1",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_component_cancel_nonzero.sage",
+    "4faedf02e2f77e7830860039f87bcbb647c8cbb310189d6626a21fbf151db7b9",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_component_difference_zero.sage",
+    "3bab94bcc0dd02d8b50c3101d3d1a81b92e1ef95798a09bc5f3fa7f91fb15160",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_component_factor_expansion.sage",
+    "915d41c41087d2f5dd84b27d3390614c262b4757ecff000089fad1a84de89300",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_component_one_product.sage",
+    "e7d094cf1489177c08ef1b840e017032cdf78ea37d8dc3de870fac0dd9cef53a",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_component_product_zero.sage",
+    "dc118e47b781af68711ec42d424a6512911466c5d8cd245dee56d6c32343a612",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_eigenvector_substitution_inner.sage",
+    "b29172de029698c6fe007a13a978a9a14a5e471ba6a89ede2392d0b768c23bdb",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_eigenvector_substitution_outer.sage",
+    "0ad7404ab1b655b1438e2719a2756371a96ac0db239ff10e61e5aae891b16434",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_factor_difference_of_squares.sage",
+    "17074a30fa52387d55a357e8678ef27a86eae1c1ffc487721ccd14f2e73ce872",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_factor_substitute_zero.sage",
+    "4870818a89c12193f8542d995b26a20b4e9c0e29645dcc827ae76918f30b0895",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_identity_action_component_definition.sage",
+    "4b3ed544b9d6d3989ba8574848280fdb06fc76be12ed814b8de516f3410a9869",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_identity_action_zero_one.sage",
+    "e08d78d0408910b1ae7df564af7b2cf96e543e56b4669a8694f93d1f433f0b58",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_matrix_product_action.sage",
+    "980745d574e9a375909d3da6772956536cee6d94f93371dd152e568b5e2e7f68",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_nested_scalar_product.sage",
+    "96303bf6d9fa74eb6bcf225b7e3a2bea38a5712bd040f2f1a4d935f4c69da683",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_replace_identity_by_epsilon_square.sage",
+    "95d6f0972a04793a70bfd99bbffc36316f4a44d27cfdb8faa2ce55d673d40717",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_scalar_extraction.sage",
+    "263065c617c5352309de4a81b5ee4cc36a2b45050db06cf3ffd7eb364af5f7d2",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_scalar_square_definition.sage",
+    "1959781627a3d9d82779211bf2f0e0237d2f6de74db57f37cfff645e805ece14",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_solve_linear_factors.sage",
+    "7fa162843948f7e0a936d0c60409434b9c5840476fde2c6d2b3a00224ad9ef9f",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_vector_identity_action.sage",
+    "82d885a63682f1344d5474185eddd58a864a2c9942926943080ee803090aef59",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/check_zero_product_alternatives.sage",
+    "e630d8f1f9114ecb4d135404aa846f53dba6e3143ba58884029d932884d5ab94",
+  ],
+  [
+    "sagemath/check/epsilon_action_eigenvalues_are_signs/overview.md",
+    "1dfa4f6f50ae3b793d4b7abf1901828d9add939b7b5502f4bc731c2c100c0746",
+  ],
 ] as const;
 for (const [path, expected] of epsilonEigenspacesFormalizationEvidenceSha256) {
   if (createHash("sha256").update(readFileSync(join(projectDir, path))).digest("hex") !== expected) {
@@ -1038,7 +1182,13 @@ const epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds = [
   "transfer_matrix_004c_claim_epsilon_action_eigenvalues",
   "bridge_009_claim_epsilon_projector_properties",
 ] as const;
-const epsilonEigenspacesAndComplementaryProjectorsExpectedInternalDependencies = new Map<string, string[]>([
+const epsilonEigenspacesSectionEntryIds =
+  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds.slice(0, 5);
+const epsilonSquareAndActionEigenvaluesSectionEntryIds =
+  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds.slice(5, 7);
+const epsilonProjectorPropertiesSectionEntryIds =
+  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds.slice(7, 8);
+const epsilonEigenspacesSectionExpectedInternalDependencies = new Map<string, string[]>([
   ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", []],
   ["transfer_matrix_004_definition_eigenspace_odd_of_epsilon", []],
   ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace", [
@@ -1053,14 +1203,15 @@ const epsilonEigenspacesAndComplementaryProjectorsExpectedInternalDependencies =
     "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
     "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
   ]],
+]);
+const epsilonSquareAndActionEigenvaluesSectionExpectedInternalDependencies = new Map<string, string[]>([
   ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", []],
   ["transfer_matrix_004c_claim_epsilon_action_eigenvalues", [
     "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
   ]],
-  ["bridge_009_claim_epsilon_projector_properties", [
-    "transfer_matrix_004_definition_eigenspaces_of_epsilon",
-    "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
-  ]],
+]);
+const epsilonProjectorPropertiesSectionExpectedInternalDependencies = new Map<string, string[]>([
+  ["bridge_009_claim_epsilon_projector_properties", []],
 ]);
 const epsilonEigenspacesAndComplementaryProjectorsExpectedContentSha256 = new Map<string, string>([
   ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", "388f1d9a42da7e2e5fcbea03e04777482706b0de3679a6073252660261e56cef"],
@@ -1069,7 +1220,7 @@ const epsilonEigenspacesAndComplementaryProjectorsExpectedContentSha256 = new Ma
   ["transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace", "0f800f588ee480e7bf67e4c0014f5391ac1ea3e09b58ff0cfd0661f8cf34d199"],
   ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "f7ea58ef9b604cd643f178b8945d52085cf2d874e39a57fe65897c64c6897471"],
   ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", "8727ec6c5107514b0262ea4adaa5eb9a7447c28da06b35038d7acc374c986536"],
-  ["transfer_matrix_004c_claim_epsilon_action_eigenvalues", "71038f80618a53b384fa93ee79ae1931945acec0ec84b4027923ac6e9d29b543"],
+  ["transfer_matrix_004c_claim_epsilon_action_eigenvalues", "99cceee356c8dd674b028ae98323c3128bedab89d94e07a31aeb221ef6458412"],
   ["bridge_009_claim_epsilon_projector_properties", "d109dc4db25a9487b161b9c265101260700ec7eba6697fcb0fde07bc728d9100"],
 ]);
 const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputEntryIds = [
@@ -1083,6 +1234,28 @@ const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputEntryIds 
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_005_definition_end_isomorphism",
 ].sort();
+const epsilonEigenspacesSectionExpectedExternalInputEntryIds = [
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "transfer_matrix_001_definition_symbols",
+].sort();
+const epsilonSquareAndActionEigenvaluesSectionExpectedExternalInputEntryIds = [
+  "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+  "calc_formulae_003_matrix_decomposition",
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_025_claim_complex_numbers_form_a_field",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "linear_space_general_000b_claim_kronecker_product_rule",
+  "transfer_matrix_001_definition_symbols",
+].sort();
+const epsilonProjectorPropertiesSectionExpectedExternalInputEntryIds = [
+  "bridge_008_definition_epsilon_projectors",
+  "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+  "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
+  "transfer_matrix_005_definition_end_isomorphism",
+].sort();
 const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputContentSha256 = new Map<string, string>([
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "2040831405f933942bdff84147045e5feddd899546259e7449c6903c8411de65"],
   ["bridge_008_definition_epsilon_projectors", "be5003446b4cb92b2911fb88cee1a7cc85dd13f412c3207866e1f70d987c4890"],
@@ -1092,6 +1265,8 @@ const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputContentSh
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["transfer_matrix_001_definition_symbols", "ec8988f0766c8e6eaa686a03d4aa268bfe139e6ee33449ea604f292ac158cee6"],
+  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "f7ea58ef9b604cd643f178b8945d52085cf2d874e39a57fe65897c64c6897471"],
+  ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", "8727ec6c5107514b0262ea4adaa5eb9a7447c28da06b35038d7acc374c986536"],
   ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
   ["transfer_matrix_005b_claim_end_is_algebra_isomorphism", "1a9ecef9cd59f12d82071b4c248e4319f7c9be8e3f42cf1bc9289737d9e5d033"],
 ]);
@@ -2950,19 +3125,45 @@ const v1V2JordanWignerSection = validateReviewedSection(
   v1V2JordanWignerExpectedExternalInputContentSha256,
   ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "transfer_matrix_003a_claim_V2_in_Z_Y"],
 );
-const epsilonEigenspacesAndComplementaryProjectorsSection = validateReviewedSection(
-  "全スピン反転行列の固有空間と相補射影",
+const epsilonEigenspacesSection = validateReviewedSection(
+  "全スピン反転行列の二つの固有空間",
   "2次元イジングモデル",
-  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds,
-  epsilonEigenspacesAndComplementaryProjectorsExpectedInternalDependencies,
+  epsilonEigenspacesSectionEntryIds,
+  epsilonEigenspacesSectionExpectedInternalDependencies,
   epsilonEigenspacesAndComplementaryProjectorsExpectedContentSha256,
-  epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputEntryIds,
+  epsilonEigenspacesSectionExpectedExternalInputEntryIds,
   epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputContentSha256,
-  [
-    "transfer_matrix_004c_claim_epsilon_action_eigenvalues",
-    "bridge_009_claim_epsilon_projector_properties",
-  ],
+  ["transfer_matrix_004_definition_eigenspaces_of_epsilon"],
 );
+const epsilonSquareAndActionEigenvaluesSection = validateReviewedSection(
+  "全スピン反転行列の二乗と固有値候補",
+  "2次元イジングモデル",
+  epsilonSquareAndActionEigenvaluesSectionEntryIds,
+  epsilonSquareAndActionEigenvaluesSectionExpectedInternalDependencies,
+  epsilonEigenspacesAndComplementaryProjectorsExpectedContentSha256,
+  epsilonSquareAndActionEigenvaluesSectionExpectedExternalInputEntryIds,
+  epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputContentSha256,
+  ["transfer_matrix_004c_claim_epsilon_action_eigenvalues"],
+);
+const epsilonProjectorPropertiesSection = validateReviewedSection(
+  "全スピン反転行列から作る相補射影",
+  "2次元イジングモデル",
+  epsilonProjectorPropertiesSectionEntryIds,
+  epsilonProjectorPropertiesSectionExpectedInternalDependencies,
+  epsilonEigenspacesAndComplementaryProjectorsExpectedContentSha256,
+  epsilonProjectorPropertiesSectionExpectedExternalInputEntryIds,
+  epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputContentSha256,
+  ["bridge_009_claim_epsilon_projector_properties"],
+);
+const epsilonEigenspacesAndComplementaryProjectorsSection = {
+  sectionEntries: [
+    ...epsilonEigenspacesSection.sectionEntries,
+    ...epsilonSquareAndActionEigenvaluesSection.sectionEntries,
+    ...epsilonProjectorPropertiesSection.sectionEntries,
+  ],
+  externalInputEntryIds: [...epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputEntryIds]
+    .sort((a, b) => order.get(a)!.chapterOrder - order.get(b)!.chapterOrder),
+};
 const v1RestrictionToEigenspacesSection = validateReviewedSection(
   "V1 の固有空間への制限",
   "2次元イジングモデル",
@@ -15707,59 +15908,92 @@ const isingModelSectionBoundaries = [{
   boundaryEvidence: "章内依存順24–25は、旧ブロックに束ねられていた独立な二等式を V1 と V2 の二つの主張へ分けたものである。順24は隣接サイト項と周期境界項を、順25は単一サイト項を、Pauli 行列の積とクロネッカー積の規則からそれぞれ Jordan–Wigner 行列で計算する。二項は同じ外部入力を共有する並行した出力で、相互依存はない。直後の章内依存順26は全スピン反転行列 ε の固有値 +1 の固有ベクトル全体を定義するだけで、二つの表示のどちらも使わない。順26では Pauli 行列の積とクロネッカー積の規則を入力から外し、集合の記号を使って通常の行列と数ベクトルの積だけで定義するため、順25の後で二項の節を閉じる。生成時に二項と全外部入力の本文 fingerprint、章内順、内部依存がないこと、二つの節末出力、順26の直接依存・本文 fingerprint、節と順26との相互非依存、および入力集合の追加・除外を固定検査する。",
   readabilityStatus: "V1 と V2 の独立した等式を別ブロックへ分けた。V1 は単一サイトの Pauli 行列積から隣接項・周期境界項を、V2 は単一サイト項を、それぞれクロネッカー積で一段ずつ導いており、両方とも現行の説明粒度検査に合格している。外部入力では、集合と代数構造の記号、複素数の定義、および混在したサイト作用素の記号定義に分割が残る。直後の固有値 +1 の集合定義は具体的な行列作用だけで記述済みである。",
 }, {
-  name: "全スピン反転行列の固有空間と相補射影",
+  name: "全スピン反転行列の二つの固有空間",
   chapter: "2次元イジングモデル",
   status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
-  entryIds: epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds,
+  entryIds: epsilonEigenspacesSectionEntryIds,
   input: [
-    "全スピン反転行列 ε と、ε と単位行列の和・差から定めた二つの行列 P^{(±)}",
-    "有限複素行列の数ベクトルへの作用と複素数の体の法則",
-    "Pauli 行列の二乗とクロネッカー積の積・単位元の規則",
+    "全スピン反転行列 ε の有限複素数ベクトルへの作用",
+    "複素数ベクトルの零・和・複素スカラー倍",
   ],
-  externalInputEntryIds: epsilonEigenspacesAndComplementaryProjectorsSection.externalInputEntryIds,
+  externalInputEntryIds: epsilonEigenspacesSection.externalInputEntryIds,
+  output: ["全スピン反転行列の固有値 +1 と −1 に対応する二つの複素部分線型空間"],
+  formalizationEvidence: {
+    leanFiles: [
+      "lean/Ising2D/Part004/EvenEigenvectors.lean",
+      "lean/Ising2D/NecSuf/FixedVectorsSubmodule.lean",
+      "lean/Ising2D/Part004/OddEigenvectors.lean",
+      "lean/Ising2D/NecSuf/NegatedVectorsSubmodule.lean",
+    ],
+    sageMathOverviews: [
+      "sagemath/check/def_even_eigenvectors_of_epsilon/overview.md",
+      "sagemath/check/even_eigenspace_is_complex_subspace/overview.md",
+      "sagemath/check/def_odd_eigenvectors_of_epsilon/overview.md",
+      "sagemath/check/odd_eigenspace_is_complex_subspace/overview.md",
+    ],
+    currentStatus: "固有値 +1 と -1 の集合定義、および両集合の複素部分線型空間性を本文・Lean・SageMathで同期済みである。",
+  },
+  mainTheorem: "全スピン反転行列の二つの固有空間",
+  mainTheoremEntryId: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+  boundaryEvidence: "章内依存順26–30は、二つの固有ベクトル集合を定義し、それぞれの部分空間性を示して統合する。直後の順31はこれらに依存せず、Pauli 行列の二乗とクロネッカー積の規則へ入力が切り替わるため、順30の後で節を閉じる。",
+  readabilityStatus: "二つの集合定義と部分空間性を一主張ずつ分離し、具体的な複素行列作用と成分和だけで記述している。外部入力の混在した記号定義には説明粒度の未解決が残る。",
+}, {
+  name: "全スピン反転行列の二乗と固有値候補",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  entryIds: epsilonSquareAndActionEigenvaluesSectionEntryIds,
+  input: [
+    "Pauli 行列の二乗とクロネッカー積の積・単位元の規則",
+    "有限複素行列の数ベクトルへの作用と複素数の体の法則",
+  ],
+  externalInputEntryIds: epsilonSquareAndActionEigenvaluesSection.externalInputEntryIds,
   output: [
-    "全スピン反転行列の固有値 +1 と −1 に対応する二つの固有空間、および両固有空間の複素部分線型空間性",
     "全スピン反転行列の二乗が単位行列であること",
     "全スピン反転行列の作用の固有値が +1 または −1 に限ること",
-    "P^{(+)} と P^{(-)} が互いに補い合い、それぞれの像が対応する固有空間に一致すること",
   ],
-  boundaryCandidates: epsilonEigenspacesBoundaryCandidates,
-  nextTickUnit: epsilonEigenspacesNextTickUnit,
   formalizationEvidence: {
     leanFiles: [
       "lean/Ising2D/Part004/Definition000_TransferMatrixSymbols.lean",
       "lean/Ising2D/NecSuf/EpsilonSquare.lean",
       "lean/Ising2D/Part004/ClaimEpsilonSquareFromNecSuf.lean",
-      "lean/Ising2D/Part004/EvenEigenvectors.lean",
-      "lean/Ising2D/NecSuf/FixedVectorsSubmodule.lean",
-      "lean/Ising2D/Part004/OddEigenvectors.lean",
-      "lean/Ising2D/NecSuf/NegatedVectorsSubmodule.lean",
-      "lean/Ising2D/Part010/Claim009_EpsilonProjectors.lean",
-      "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
+      "lean/Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean",
+      "lean/Ising2D/NecSuf/InvolutionEigenvalue.lean",
+      "lean/Ising2D/Part004/ClaimEpsilonActionEigenvaluesFromNecSuf.lean",
       "lean/docs/ch010-formalization.md",
+      "lean/docs/necsuf-involution-eigenvalue.md",
     ],
     sageMathFiles: [
-      "sagemath/check/epsilon_square_identity/check_site_product_equals_all_factors.sage",
-      "sagemath/check/epsilon_square_identity/check_prefix_append_site_operator.sage",
-      "sagemath/check/epsilon_square_identity/check_prefix_kronecker_multiplication.sage",
-      "sagemath/check/epsilon_square_identity/check_prefix_identity_simplification.sage",
-      "sagemath/check/epsilon_square_identity/check_kronecker_product_multiplication.sage",
-      "sagemath/check/epsilon_square_identity/check_pauli_square_each_factor.sage",
-      "sagemath/check/epsilon_square_identity/check_kronecker_identity.sage",
       "sagemath/check/epsilon_square_identity/overview.md",
-      "sagemath/check/def_even_eigenvectors_of_epsilon/check_even_eigenvectors.sage",
-      "sagemath/check/def_odd_eigenvectors_of_epsilon/check_odd_eigenvectors.sage",
-      "sagemath/check/even_eigenspace_is_complex_subspace/check_zero_action_definition.sage",
-      "sagemath/check/even_eigenspace_is_complex_subspace/check_add_distributivity.sage",
-      "sagemath/check/even_eigenspace_is_complex_subspace/check_smul_extract_finite_sum.sage",
-      "sagemath/check/odd_eigenspace_is_complex_subspace/overview.md",
+      "sagemath/check/epsilon_action_eigenvalues_are_signs/overview.md",
     ],
-    currentStatus: "固有値 +1 と -1 の固有ベクトル全体 F^{(+)}・F^{(-)} は、本文と Lean の evenEigenvectors・oddEigenvectors の双方で M≥1 の下、εf=f・εf=-f を満たす複素数ベクトルの集合として具体的な行列作用だけから定義した。両集合の複素部分線型空間性も独立項へ分け、本文では零ベクトル・加法・複素スカラー倍の閉性を成分ごとに示した。Lean の具体版では正側17段・負側20段の成分計算に対応する三閉性と部分加群を証明し、必要十分版は有限添字と可換半環または可換環だけを仮定して同じ計算を示し、具体版がその特殊化であることも示す。SageMath は M=2 の有限例の全4成分を QQ(i) 上の厳密等号として、正側17段・負側20段へ一ファイルずつ対応させる。ε²=I と固有値候補は本文で別ブロックへ分割した。二乗公式は Lean でサイト作用素の有限帰納法、クロネッカー積の因子別計算、各因子の二乗、単位因子の積を本文と同順に証明し、不要な行列構造を除いた必要十分版も分離した。SageMath は本文の帰納段三行と二乗計算四行を一行一ファイルで M=1,…,5 の有限行列について厳密に確認する。固有値候補は、分割した二項間では二乗公式だけを入力とするが、通常の行列作用と複素数の体の法則も直接入力に持つ。対応する Lean 定理と独立した SageMath 対象ラベルはまだ無いため、次回はこの一項だけを形式化同期する。固有空間性と無関係な二乗・固有値候補、および固有値候補に依存しない相補射影は、別節とする境界候補として保持する。",
+    currentStatus: "二乗公式は本文と同順のLean具体版・必要十分版、および一行一ファイルのSageMath検査に同期した。固有値候補は本文・Lean具体版・SageMathで成分和十三段と主計算十九段を対応させた。Lean必要十分版は可換性を除いた仮定へ絞り、具体版から分離した導出と必要十分性の記録も持つ。次元公式は対象外である。",
+  },
+  mainTheorem: "全スピン反転行列の作用の固有値候補",
+  mainTheoremEntryId: "transfer_matrix_004c_claim_epsilon_action_eigenvalues",
+  boundaryEvidence: "章内依存順31の二乗公式から順32の固有値候補だけが導かれる。順31–32は順26–30の固有空間と相互依存せず、順33の相補射影も順32を使わないため、この二項を独立節として確定した。",
+  readabilityStatus: "二乗公式と固有値候補は一ブロック一主張で、固有値候補は抽象線型写像を経由せず epsilon f=lambda f から複素数の零積の法則までを一段ずつ示す。",
+}, {
+  name: "全スピン反転行列から作る相補射影",
+  chapter: "2次元イジングモデル",
+  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  entryIds: epsilonProjectorPropertiesSectionEntryIds,
+  input: [
+    "全スピン反転行列の二つの固有空間と二乗公式",
+    "全スピン反転行列と単位行列の和・差から定めた二つの行列 P^{(±)}",
+  ],
+  externalInputEntryIds: epsilonProjectorPropertiesSection.externalInputEntryIds,
+  output: ["P^{(+)} と P^{(-)} が互いに補い合い、それぞれの像が対応する固有空間に一致すること"],
+  formalizationEvidence: {
+    leanFiles: [
+      "lean/Ising2D/Part010/Claim009_EpsilonProjectors.lean",
+      "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
+    ],
+    currentStatus: "相補射影の既存本文とLean対応を保持し、固有値候補には依存しない一項節として確定した。",
   },
   mainTheorem: "全スピン反転行列から作る二つの行列が対応する固有空間への相補射影であること",
   mainTheoremEntryId: "bridge_009_claim_epsilon_projector_properties",
-  boundaryEvidence: "章内依存順26で固有値 +1、順27で固有値 -1 の固有ベクトル全体 F^{(+)}・F^{(-)} を具体的な行列作用だけから定める。順28と順29では各集合の複素部分線型空間性を示し、順30は両結果を統合する。これらと相互依存しない順31で ε²=I を証明し、順32は分割した二項間では順31だけを入力とする一方、複素数の体と通常の行列作用を新規入力に固有値候補を導く。順33の相補射影は順30と順31だけを使い、順32には依存しない。この枝分かれと入力切替のため、順31–32を独立節、順33を一項節とする境界候補を保持し、固有値候補の形式化同期時に確定する。直後の順34は固有空間だけを再利用して V1 の制限へ分岐し、順31–33に依存しない。生成時に八項の連続性、内部依存辺、節内本文と全外部入力の fingerprint、節末出力、境界候補、順34の章内順・直接依存・本文・非依存、および入力集合の追加・除外を固定検査する。",
-  readabilityStatus: "順26の F^{(+)} と順27の F^{(-)} はそれぞれ一つの集合だけを定義し、抽象線型写像を経由せず εf=f・εf=-f という具体的な複素行列の作用で記述する。順28と順29の両部分空間性も、零ベクトル・和・複素スカラー倍への ε の作用を成分和で一段ずつ計算する独立主張であり、本文・Lean・SageMath のラベルを同期した。順30は両結果の統合だけを担う。順31の ε²=I と順32の固有値候補も一ブロック一主張へ分割し、順32は抽象的な end 写像を経由せず、εf=λf という通常の行列作用から導く。次回は順32の固有値候補だけを Lean・SageMath の独立対象へ同期し、同時に保持した節境界候補を確定する。固有空間の次元公式や相補射影の内容には進まない。外部入力には、複素数の定義と混在したサイト作用素の記号定義に説明粒度の未解決が残る。",
+  boundaryEvidence: "章内依存順33は順30の固有空間と順31の二乗公式だけを使い、順32の固有値候補を使わない。直後の順34も順33に依存せず固有空間から別枝へ進むため、一項節として閉じる。",
+  readabilityStatus: "相補射影の性質だけを一項に保ち、固有値候補と次元公式を含めない。外部入力の写像対応には説明粒度の未解決が残る。",
 }, {
   name: "V1 の固有空間への制限",
   chapter: "2次元イジングモデル",
