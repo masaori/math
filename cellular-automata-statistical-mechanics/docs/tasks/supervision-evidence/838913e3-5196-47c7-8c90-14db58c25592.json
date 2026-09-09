@@ -1,0 +1,88 @@
+{
+  "実行識別子": "838913e3-5196-47c7-8c90-14db58c25592",
+  "観測時刻": "2026-09-10T03:02:49+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.cellular-automata-auto-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.cellular-automata-auto-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.cellular-automata-auto-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 64,
+    "last exit code": 1
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist",
+    "存在": true,
+    "更新時刻": "2026-09-05T21:28:07+09:00",
+    "sha256": "d13342cf574a15bd2fcdbc892aafa71f32e036e6b0c5f6bd96a52e66ae5e34ff",
+    "StartCalendarInterval": [
+      {
+        "Minute": 12
+      }
+    ]
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/launchd.log",
+      "存在": true,
+      "更新時刻": "2026-09-10T02:12:32+09:00",
+      "抽出行": [
+        "2026-09-10 02:12:22 === tick 開始（codex / 30 分間隔 / まとめ 02:34 / 強制終了 02:39）",
+        "2026-09-10 02:12:22 モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=/Users/masaori/.codex-coding-agent-0002",
+        "2026-09-10 02:12:32 === tick 異常終了（exit 1、未コミット 0 ファイル）"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "登録あり・非実行中・runs 64・last exit code 1。02:12:22開始分は02:12:32にexit 1で異常終了し、未コミットは0ファイルだった。",
+  "成果比較": {
+    "開始成果": "4bf76f28e5e91685575bc852114cf483d66cd43e",
+    "前回読解終点": "d7ed93ea2054f0a519bda1c84c834363da62a48a",
+    "今回読解終点": "4bf76f28e5e91685575bc852114cf483d66cd43e",
+    "確認した成果": [
+      "451e0cd6934a213b64d0c6dafd199befd569bbee: 有限転送行列比較のLean必要十分版",
+      "0247c24965292d207272427068893ac5b12dd269・6db906b96ca10a70b45b2631b0461abef5213f45・76adc0e66e5e1041aa9d48516829b2c62bdb389f・cd00a4254f11057190748abb7af97f71707e49c7: 可算な担い手台帳、行列方向、Gibbs有限窓比較入力、有限検算記録"
+    ]
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "structured-latex/node_modules/.bin/tsc -p scripts/research-supervision/tsconfig.json",
+      "終了コード": 0,
+      "結果": "型検査成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究の評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "24件成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "node scripts/research-supervision/verify-test.ts",
+      "終了コード": 0,
+      "結果": "六研究の対象・欠落・権限分離・今回追記・外部パス拒否が成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "python3 scripts/test-research-tick-models.py",
+      "終了コード": 0,
+      "結果": "3件成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
+      "終了コード": 0,
+      "結果": "研究監督tickの全検査成功"
+    }
+  ]
+}
