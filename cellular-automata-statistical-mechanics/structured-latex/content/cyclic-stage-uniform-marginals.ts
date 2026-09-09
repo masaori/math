@@ -133,7 +133,7 @@ r_{m,t}(x)|_{D_s}(z)
 &=x\bigl(j_{m,t}|_{D_s}(z)\bigr)
   \quad(\because\ \blkref{def_cyclic_stage_uniform_distribution_family})\\
 &=x\bigl(j_{m,s}(z)\bigr)
-  \quad(\because\ \blkref{claim_cyclic_stage_window_embeddings_compatible})\\
+  \quad(\because\ j_{m,s}=j_{m,t}|_{D_s}\text{ は直前に示した})\\
 &=r_{m,s}(x)(z)
   \quad(\because\ \blkref{def_cyclic_stage_uniform_distribution_family}).
 \end{aligned}`),
