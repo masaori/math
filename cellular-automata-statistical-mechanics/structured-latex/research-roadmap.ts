@@ -83,11 +83,6 @@ export const roadmapStages = [
     evidence: [
       {
         kind: "label",
-        label: "theorem_deterministic_transfer_trace_equals_fixed_point_count",
-        why: "有理遷移重みを有限転送行列へ送る比較写像を置き、決定論的な零一重みでは正の冪の跡が反復不動点数に一致することを構造化記述した。SageMathとLean二層は後続である。",
-      },
-      {
-        kind: "label",
         label: "claim_flip_test_equivalence",
         why: "本質的依存が一点反転検査と同値であり、有限真理値表から決定できる。",
       },
@@ -402,7 +397,8 @@ export const roadmapStages = [
       "（分配関数、自由エネルギー、Gibbs 測度、相転移）ごとに、可算側の担い手と、" +
       "担えない残りを台帳へ書き出す。",
     habitat:
-      "転送行列は成分が 0 と 1 の有限行列、分配関数は自然数、自由エネルギーは対数順序群の元である。" +
+      "確率的規則の転送行列は有理数成分の有限行列であり、決定論的な零一埋め込みでは成分が 0 と 1 に限られる。" +
+      "後者の跡は自然数、正の跡の自由エントロピーは対数順序群の元である。" +
       "熱力学極限だけが実数へ出る操作であり、その一点へ脱出を隔離する。",
     dependsOn: [
       "finite_stage_lambda_thermodynamics",
@@ -417,6 +413,16 @@ export const roadmapStages = [
       "各構成が SageMath の厳密計算で検算され、浮動小数点を使っていないこと。",
     ],
     evidence: [
+      {
+        kind: "label",
+        label: "theorem_deterministic_transfer_trace_equals_fixed_point_count",
+        why: "有理遷移重みを有限転送行列へ送る比較写像を置き、決定論的な零一重みでは正の冪の跡が反復不動点数に一致することを構造化記述した。SageMathの段別検算、Lean具体版、有限型・半環・零一指示値だけを残したLean必要十分版と具体版への導出が揃っている。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/finite-transfer-matrix-comparison/overview.md",
+        why: "比較写像、有限和積による行列冪、決定論的な零一遷移、跡と反復不動点数の一致を、明示した有限範囲で段別検算する。",
+      },
       {
         kind: "path",
         path: "docs/Gibbs測度と相転移の定義.md",

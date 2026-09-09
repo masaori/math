@@ -11,12 +11,12 @@ CA の局所規則 $f$ から大域写像 $F:A^{\mathbb{Z}/L}\to A^{\mathbb{Z}/L
 転送行列を
 
 $$
-T\in M_{2^L}(\{0,1\}),\qquad T_{xy}:=\begin{cases}1&(x=F(y))\\0&(\text{otherwise})\end{cases}
+T\in M_{2^L}(\{0,1\}),\qquad T_{xy}:=\begin{cases}1&(y=F(x))\\0&(\text{otherwise})\end{cases}
 $$
 
-で定める。$T$ の各列はちょうど 1 つの 1 を持つ（$F$ が写像だから）。
+で定める。行を現在配位、列を次配位とする。$T$ の各行はちょうど 1 つの 1 を持つ（$F$ が写像だから）。
 
-**基本等式**（証明: $(T^N)_{xy}=1\iff x=F^N(y)$、対角を数える）
+**基本等式**（証明: $(T^N)_{xy}=1\iff y=F^N(x)$、対角を数える）
 
 $$
 Z_N:=\operatorname{Tr}T^N=\#\{x\in A^{\mathbb{Z}/L}\ :\ F^N(x)=x\}\ \in\mathbb{N}.

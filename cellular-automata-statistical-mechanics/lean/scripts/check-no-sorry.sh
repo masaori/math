@@ -53,6 +53,12 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.NecSuf.FiniteTransferMatrixComparison.transferPower_eq_finiteStepWeight
+  CellularAutomata.NecSuf.FiniteTransferMatrixComparison.transferPower_deterministic
+  CellularAutomata.NecSuf.FiniteTransferMatrixComparison.transferTrace_deterministic
+  CellularAutomata.NecSuf.FiniteTransferMatrixComparison.transferPower_eq_necessary_sufficient
+  CellularAutomata.NecSuf.FiniteTransferMatrixComparison.deterministic_transferMatrix_eq_necessary_sufficient
+  CellularAutomata.NecSuf.FiniteTransferMatrixComparison.transferTrace_eq_fixedPointCount_of_necSuf
   CellularAutomata.FiniteTransferMatrixComparison.transferPower_eq_finiteStepWeight
   CellularAutomata.FiniteTransferMatrixComparison.localOutputWeight_deterministic
   CellularAutomata.FiniteTransferMatrixComparison.transferMatrix_deterministic_entry
