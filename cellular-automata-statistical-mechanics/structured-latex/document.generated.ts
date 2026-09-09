@@ -30,6 +30,7 @@ import blocks_conjugacy_class_code_image_bijection from './content/conjugacy-cla
 import blocks_cyclic_offset_projection from './content/cyclic-offset-projection.ts'
 import blocks_cyclic_rule_restriction from './content/cyclic-rule-restriction.ts'
 import blocks_cyclic_stage_local_agreement from './content/cyclic-stage-local-agreement.ts'
+import blocks_cyclic_stage_uniform_conditional_kernel from './content/cyclic-stage-uniform-conditional-kernel.ts'
 import blocks_cyclic_stage_uniform_marginals from './content/cyclic-stage-uniform-marginals.ts'
 import blocks_dependency_order_substructures from './content/dependency-order-substructures.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
@@ -110,6 +111,7 @@ export type AllBlocks = [
   ...typeof blocks_cyclic_offset_projection,
   ...typeof blocks_cyclic_rule_restriction,
   ...typeof blocks_cyclic_stage_local_agreement,
+  ...typeof blocks_cyclic_stage_uniform_conditional_kernel,
   ...typeof blocks_cyclic_stage_uniform_marginals,
   ...typeof blocks_dependency_order_substructures,
   ...typeof blocks_essential_dependency,
