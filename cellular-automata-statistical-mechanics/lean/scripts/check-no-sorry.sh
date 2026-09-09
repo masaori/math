@@ -63,6 +63,7 @@ targets=(
   CellularAutomata.CyclicStageUniformMarginals.unusedCell_card
   CellularAutomata.CyclicStageUniformMarginals.windowPullback_fiber_card
   CellularAutomata.CyclicStageUniformMarginals.marginalWeight_formula
+  CellularAutomata.CyclicStageUniformMarginals.marginalWeight_consistent
   CellularAutomata.NecSuf.FiniteTransferMatrixComparison.transferPower_eq_finiteStepWeight
   CellularAutomata.NecSuf.FiniteTransferMatrixComparison.transferPower_deterministic
   CellularAutomata.NecSuf.FiniteTransferMatrixComparison.transferTrace_deterministic

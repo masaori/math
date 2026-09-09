@@ -10,6 +10,8 @@
     `windowEmbedding_compatible`, `windowPullback_compatible`
   claim_cyclic_stage_uniform_marginal_formula
     `windowPullback_fiber_card`, `marginalWeight_formula`
+  theorem_cyclic_stage_uniform_marginals_consistent
+    `marginalWeight_consistent`
 
 奇数位数 2m+1 の有限巡回舞台、半径 s 以下の整数窓、演算を持たない
 二元状態、一様有理分布を固定し、人手証明と同じ有限個数計算を形式化する。
@@ -206,6 +208,55 @@ theorem marginalWeight_formula (m s : ℕ) (hsm : s ≤ m) (a : Offset s → Sta
   rw [show 2 * m + 1 = 2 * (m - s) + (2 * s + 1) by omega, pow_add]
   field_simp
   norm_num
+
+/-- 大窓周辺分布を小窓へ再周辺化すると、小窓周辺分布に一致する。 -/
+theorem marginalWeight_consistent (m s t : ℕ) (hst : s ≤ t) (_htm : t ≤ m)
+    (a : Offset s → State) :
+    marginalWeight m s a =
+      ∑ c : Offset t → State,
+        if restrictWindow s t hst c = a then marginalWeight m t c else 0 := by
+  classical
+  unfold marginalWeight
+  symm
+  calc
+    (∑ c : Offset t → State,
+        if restrictWindow s t hst c = a then
+          ∑ x : OddStage m → State,
+            if windowPullback m t x = c then uniformWeight m x else 0
+        else 0) =
+        ∑ c : Offset t → State, ∑ x : OddStage m → State,
+          if restrictWindow s t hst c = a then
+            (if windowPullback m t x = c then uniformWeight m x else 0)
+          else 0 := by
+      apply Finset.sum_congr rfl
+      intro c _hc
+      rw [Finset.sum_ite_irrel]
+      simp
+    _ = ∑ x : OddStage m → State, ∑ c : Offset t → State,
+          if restrictWindow s t hst c = a then
+            (if windowPullback m t x = c then uniformWeight m x else 0)
+          else 0 := by
+      rw [Finset.sum_comm]
+    _ = ∑ x : OddStage m → State,
+          if windowPullback m s x = a then uniformWeight m x else 0 := by
+      apply Finset.sum_congr rfl
+      intro x _hx
+      have hcompat := windowPullback_compatible m s t hst x
+      have hsingle :
+          (∑ c : Offset t → State,
+            if restrictWindow s t hst c = a then
+              (if windowPullback m t x = c then uniformWeight m x else 0)
+            else 0) =
+            if restrictWindow s t hst (windowPullback m t x) = a then
+              uniformWeight m x
+            else 0 := by
+        rw [Finset.sum_eq_single (windowPullback m t x)]
+        · simp
+        · intro c _hc hne
+          have hne' : windowPullback m t x ≠ c := Ne.symm hne
+          simp [hne']
+        · simp
+      rw [hsingle, hcompat]
 
 end
 
