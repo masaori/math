@@ -137,6 +137,7 @@ import CellularAutomata.BlockPartitionRuleClass
 import CellularAutomata.ProbabilisticRuleClass
 import CellularAutomata.FiniteTransferMatrixComparison
 import CellularAutomata.CyclicStageUniformMarginals
+import CellularAutomata.NecSuf.CyclicStageUniformMarginals
 import CellularAutomata.NecSuf.FiniteTransferMatrixComparison
 import CellularAutomata.NecSuf.BlockPartitionRuleClass
 import CellularAutomata.NecSuf.ProbabilisticRuleClass
