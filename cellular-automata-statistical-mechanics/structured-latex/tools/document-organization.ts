@@ -280,6 +280,19 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "cyclic_stage_uniform_marginals",
+        title: "有限巡回舞台の一様分布と有限窓周辺化",
+        input: "奇数位数の有限巡回舞台、整数の有限窓、二元状態集合と有限配位上の一様有理分布を入力とする。",
+        output: "有限窓から有限巡回舞台への整合的な単射、一様分布の有限窓周辺確率、窓の包含に沿う周辺化の整合性を得る。",
+        main: "主定理は、一様有理分布の有限窓周辺確率が舞台の大きさに依らず、有限窓の包含に沿う再周辺化と一致することである。これはGibbs条件ではなく、比較に必要な整合性を有限有理数だけで満たす具体例である。",
+        mainLabels: [
+          "claim_cyclic_stage_uniform_distribution_normalized",
+          "claim_cyclic_stage_window_embeddings_compatible",
+          "claim_cyclic_stage_uniform_marginal_formula",
+          "theorem_cyclic_stage_uniform_marginals_consistent",
+        ],
+      },
+      {
         id: "conjugacy_and_locality_classification",
         title: "共役分類と局所性による制限",
         input: "有限自己写像の共役分類と、2 値 CA の局所表現を入力とする。",

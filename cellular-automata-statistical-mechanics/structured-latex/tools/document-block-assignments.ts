@@ -1,5 +1,10 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "cyclic_stage_uniform_marginals_definition_family": "cyclic_stage_uniform_marginals",
+  "cyclic_stage_uniform_marginals_claim_normalized": "cyclic_stage_uniform_marginals",
+  "cyclic_stage_uniform_marginals_claim_embedding_compatibility": "cyclic_stage_uniform_marginals",
+  "cyclic_stage_uniform_marginals_claim_formula": "cyclic_stage_uniform_marginals",
+  "cyclic_stage_uniform_marginals_theorem_consistency": "cyclic_stage_uniform_marginals",
   "finite_transfer_matrix_comparison_definition_matrix": "finite_transfer_matrix_and_trace",
   "finite_transfer_matrix_comparison_definition_power_trace": "finite_transfer_matrix_and_trace",
   "finite_transfer_matrix_comparison_claim_power_is_finite_transition": "finite_transfer_matrix_and_trace",
