@@ -295,6 +295,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "definition",
     title: { text: "正有理数の許容誤差による有理数列の収束" },
     labels: ["def_positive_rational_epsilon_convergence"],
+    verification: ["sagemath/check/rational-reciprocal-convergence"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -321,6 +322,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "claim",
     title: { text: "正整数の逆数列は有理数内で零へ収束する" },
     labels: ["claim_positive_integer_reciprocal_converges_rationally"],
+    verification: ["sagemath/check/rational-reciprocal-convergence"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -374,6 +376,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "claim",
     title: { text: "シフト正規化列の素数二係数は有理数内で零へ収束する" },
     labels: ["claim_shift_rationalized_logarithmic_density_converges_rationally"],
+    verification: ["sagemath/check/rational-reciprocal-convergence"],
     habitat: "countable",
     statement: [
       paragraph([
