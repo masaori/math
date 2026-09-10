@@ -13,6 +13,12 @@
     最終的に一致することだけを要る。有限性、距離、誤差、群構造は要らない。
   - 有限局所観測の総体が高々可算であることには、添字型の可算性と各繊維の有限性だけを要る。
     添字が自然数であること、繊維が二元状態表であることは要らない。
+  - 有限台配位の高々可算性には、可算な符号先への単射だけを要る。
+  - 全配位の対角線反証には、自然数位置をセルから回収する写像、
+    固定点を持たない状態反転だけを要る。全配位型の非可算性には、これらに加えて状態型の
+    非空性を与える一つの既定状態だけを要る。整数の加法、順序、有限台、
+    二元状態という名前は要らない。
+  - 高々可算な部分から非可算な全体への写像が全射でないことには、二つの濃度だけを要る。
   - 近傍間の全単射不在には二つの有限型の元数が異なることだけを要る。
   - 写像が目標と異なることには、目標に属し写像に属さない一元だけを要る。
   - 局所入力型の元数には、近傍型と状態型の有限性、および有限関数表を
@@ -25,7 +31,7 @@ import CellularAutomata.CyclicStageLocalAgreement
 
 namespace CellularAutomata.NecSuf.CyclicStageLocalAgreement
 
-universe uS uT uD uC uI uR uStage uW uO
+universe uS uT uD uC uI uR uStage uW uO uX uCode uCell uA
 
 /-- 加法を持つ二つの型の間で、比較写像が加法を保存するという最小の仮定。 -/
 theorem projection_preserves_addition
@@ -141,6 +147,59 @@ theorem observationCatalogue_countable
   letI (r : R) : Countable (Observation r) := Finite.to_countable
   infer_instance
 
+/-! ### 有限台配位と全配位の濃度境界に必要な構造 -/
+
+/-- 可算な符号先への単射を持つ型は高々可算である。 -/
+theorem countable_of_injective_code
+    {X : Type uX} {Code : Type uCode} [Countable Code]
+    (encode : X → Code) (hinjective : Function.Injective encode) : Countable X := by
+  exact hinjective.countable
+
+/-- 候補列の番号をセルから回収し、その候補の同じセルでの値を反転する対角配位。 -/
+def DiagonalConfiguration
+    {Cell : Type uCell} {A : Type uA}
+    (readIndex : Cell → ℕ) (flip : A → A)
+    (q : ℕ → Cell → A) : Cell → A :=
+  fun z => flip (q (readIndex z) z)
+
+/-- 番号を回収でき、反転に固定点が無ければ、対角配位は各候補と指定セルで異なる。 -/
+theorem diagonalConfiguration_differs
+    {Cell : Type uCell} {A : Type uA}
+    (position : ℕ → Cell) (readIndex : Cell → ℕ) (flip : A → A)
+    (hsection : ∀ n, readIndex (position n) = n)
+    (hflip : ∀ a, flip a ≠ a) (q : ℕ → Cell → A) (n : ℕ) :
+    DiagonalConfiguration readIndex flip q (position n) ≠ q n (position n) := by
+  rw [DiagonalConfiguration, hsection]
+  exact hflip (q n (position n))
+
+/-- 上の対角配位があるため、自然数で添字づけた全配位候補列は全射でない。 -/
+theorem configuration_sequence_not_surjective
+    {Cell : Type uCell} {A : Type uA}
+    (position : ℕ → Cell) (readIndex : Cell → ℕ) (flip : A → A)
+    (hsection : ∀ n, readIndex (position n) = n)
+    (hflip : ∀ a, flip a ≠ a) (q : ℕ → Cell → A) :
+    ¬ Function.Surjective q := by
+  intro hsurjective
+  obtain ⟨n, hn⟩ := hsurjective (DiagonalConfiguration readIndex flip q)
+  exact diagonalConfiguration_differs position readIndex flip hsection hflip q n
+    (congrFun hn (position n)).symm
+
+/-- 自然数位置を回収でき、固定点を持たない反転があれば、全配位型は非可算である。 -/
+theorem configurations_uncountable
+    {Cell : Type uCell} {A : Type uA}
+    (position : ℕ → Cell) (readIndex : Cell → ℕ) (flip : A → A) (default : A)
+    (hsection : ∀ n, readIndex (position n) = n)
+    (hflip : ∀ a, flip a ≠ a) : Uncountable (Cell → A) := by
+  letI : Nonempty (Cell → A) := ⟨fun _ => default⟩
+  rw [uncountable_iff_forall_not_surjective]
+  exact configuration_sequence_not_surjective position readIndex flip hsection hflip
+
+/-- 高々可算な型から非可算な型への写像は全射でない。 -/
+theorem map_not_surjective_of_countable_uncountable
+    {X : Type uX} {Y : Type uT} [Countable X] [Uncountable Y] (f : X → Y) :
+    ¬ Function.Surjective f := by
+  exact not_surjective_countable_uncountable f
+
 /-! ### 一般の舞台で失われる近傍輸送に必要な構造 -/
 
 /-- 二つの有限型の元数が異なれば、それらの間に全単射は存在しない。 -/
@@ -248,6 +307,38 @@ theorem finite_observation_catalogue_countable_of_necSuf :
     Countable CellularAutomata.CyclicStageLocalAgreement.FiniteObservationCatalogue := by
   change Countable (ObservationCatalogue (fun s : ℕ => Offset s → State))
   exact observationCatalogue_countable (fun s : ℕ => Offset s → State)
+
+/-- 具体版の有限台配位の可算性は、一状態台への単射と符号先の可算性だけから従う。 -/
+theorem finite_support_configurations_countable_of_necSuf :
+    Countable FiniteSupportConfiguration := by
+  exact countable_of_injective_code finiteSupportSet finiteSupportSet_injective
+
+/-- 具体版の候補列非全射性は、非負整数位置の回収と状態反転だけから従う。 -/
+theorem full_configuration_sequence_not_surjective_of_necSuf
+    (q : ℕ → IntegerConfiguration) : ¬ Function.Surjective q := by
+  apply configuration_sequence_not_surjective
+    (fun n : ℕ => (n : ℤ)) Int.toNat nu
+  · intro n
+    simp
+  · intro a
+    cases a <;> simp [nu]
+
+/-- 具体版の全配位の非可算性は、同じ対角線反証の特殊化である。 -/
+theorem full_configurations_uncountable_of_necSuf : Uncountable IntegerConfiguration := by
+  apply configurations_uncountable
+    (fun n : ℕ => (n : ℤ)) Int.toNat nu State.zero
+  · intro n
+    simp
+  · intro a
+    cases a <;> simp [nu]
+
+/-- 具体版の包含非全射性は、定義域の可算性と終域の非可算性だけから従う。 -/
+theorem finiteSupportInclusion_not_surjective_of_necSuf :
+    ¬ Function.Surjective finiteSupportInclusion := by
+  letI : Countable FiniteSupportConfiguration :=
+    finite_support_configurations_countable_of_necSuf
+  letI : Uncountable IntegerConfiguration := full_configurations_uncountable_of_necSuf
+  exact map_not_surjective_of_countable_uncountable finiteSupportInclusion
 
 /-- 具体版の近傍間の全単射不在は、二つの近傍型の元数の差だけから従う。 -/
 theorem no_bare_neighborhood_bijection_of_necSuf :
