@@ -428,6 +428,45 @@ const nextIsingBoundaryComparisonExpectedChapterOrders = new Map<string, number>
   ["bridge_006_claim_V2_component_equals_pauli", 14],
   ["bridge_007_claim_partition_function_in_pauli_form", 15],
 ]);
+const transferMatrixSymbolsBoundaryCandidates = [
+  "サイトごとの Pauli 行列族",
+  "第一の転送行列 V1 と周期規約",
+  "第二の転送行列 V2",
+  "Jordan–Wigner 行列族 Z_m",
+  "Jordan–Wigner 行列族 Y_m",
+  "全スピン反転行列 epsilon の定義",
+  "全スピン反転行列 epsilon の Jordan–Wigner 行列による表示",
+  "第一の双対結合定数 K1*",
+  "第一の結合定数と双対結合定数の双対関係",
+  "第二の双対結合定数 K2*",
+  "第二の結合定数と双対結合定数の双対関係",
+  "双曲線関数の添字つき略記",
+  "結合定数と双対結合定数から得る双曲線関数値の正値性",
+] as const;
+const transferMatrixSymbolsDuplicateRemovalCandidates = [
+  "二次の単位行列の記法を既存の Pauli 行列項への参照へ置き換える",
+  "2^M 次の単位行列の記法を既存のクロネッカー積項への参照へ置き換える",
+] as const;
+const transferMatrixSymbolsNextTickUnit = [
+  "サイトごとの Pauli 行列族",
+] as const;
+const transferMatrixSymbolsUsageThroughChapterOrder15 = [
+  { definitionPart: "二次の単位行列の重複記法", usedBy: [] },
+  { definitionPart: "サイトごとの Pauli 行列族", usedBy: ["章内依存順11の sigma^z の基底作用", "章内依存順12の V1 の二表示の一致", "章内依存順14の V2 の二表示の一致"] },
+  { definitionPart: "2^M 次の単位行列の重複記法", usedBy: [] },
+  { definitionPart: "第一の転送行列 V1 と周期規約", usedBy: ["章内依存順12の V1 の二表示の一致", "章内依存順15の分配関数の Pauli 行列表示"] },
+  { definitionPart: "第二の転送行列 V2", usedBy: ["章内依存順14の V2 の二表示の一致", "章内依存順15の分配関数の Pauli 行列表示"] },
+  { definitionPart: "Jordan–Wigner 行列族 Z_m", usedBy: [] },
+  { definitionPart: "Jordan–Wigner 行列族 Y_m", usedBy: [] },
+  { definitionPart: "全スピン反転行列 epsilon の定義", usedBy: [] },
+  { definitionPart: "全スピン反転行列 epsilon の Jordan–Wigner 行列による表示", usedBy: [] },
+  { definitionPart: "第一の双対結合定数 K1*", usedBy: [] },
+  { definitionPart: "第一の結合定数と双対結合定数の双対関係", usedBy: [] },
+  { definitionPart: "第二の双対結合定数 K2*", usedBy: ["章内依存順13の二次転送行列の恒等式", "章内依存順14の V2 の二表示の一致"] },
+  { definitionPart: "第二の結合定数と双対結合定数の双対関係", usedBy: [] },
+  { definitionPart: "双曲線関数の添字つき略記", usedBy: ["章内依存順13の二次転送行列の恒等式（s_2 のみ）", "章内依存順14の V2 の二表示の一致（s_2 のみ）"] },
+  { definitionPart: "結合定数と双対結合定数から得る双曲線関数値の正値性", usedBy: [] },
+] as const;
 const nextIsingBoundaryComparisonExpectedDependencies = new Map<string, string[]>([
   ["bridge_004_claim_V1_component_equals_pauli", [
     "bridge_001_definition_config_basis",
@@ -15759,6 +15798,10 @@ const isingModelSectionBoundaries = [{
     "サイトごとの σz とその二つの積がスピン配置基底へ対角に作用する公式",
     "成分で定義した V1 と Pauli 行列の指数関数で表した V1 が同じ行列であること",
   ],
+  boundaryCandidates: transferMatrixSymbolsBoundaryCandidates,
+  duplicateRemovalCandidates: transferMatrixSymbolsDuplicateRemovalCandidates,
+  nextTickUnit: transferMatrixSymbolsNextTickUnit,
+  usageThroughChapterOrder15: transferMatrixSymbolsUsageThroughChapterOrder15,
   mainTheorem: "成分定義の V1 と Pauli 行列による指数表示の一致",
   mainTheoremEntryId: "bridge_004_claim_V1_component_equals_pauli",
   boundaryEvidence: "現行の未分割グラフでは章内依存順10–12が連続し、順10のサイト作用素の記号を順11のσzの基底作用が受け取り、順12がその作用と対角行列の指数関数を用いて、成分定義とPauli行列表示のV1が同じ行列であるという主定理へ閉じるため、順12の後は節境界の候補となる。ただし順10はV1だけでなくV2とJordan–Wigner変換の記号も束ね、順13・14は順10を再利用し、順15は順10と順12を受け取る。順10を一ブロック一定義へ分割すると依存辺と境界が変わりうるため、最終的な節構造は確定しない。生成時には、この暫定評価の前提として、外部入力とその本文 fingerprint、三項の本文 fingerprint、内部依存辺、章内依存順、現行グラフ上の節末出力に加え、章内依存順13–15の章内順・直接依存・本文 fingerprint、および順15がこの候補から順10・12を受け取ることを固定検査する。",
