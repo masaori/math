@@ -137,6 +137,69 @@ theorem shift_not_mem_logarithmicDensityDomain (L : PositiveStage) (hL : 2 ≤ L
   simp at hle
   omega
 
+/-! ## 有理係数へ拡張した一方向シフトの正規化列 -/
+
+/-- 素数上の有限台有理ベクトル。 -/
+abbrev RationalLogVector := Prime →₀ ℚ
+
+/-- 対数順序群の有限台整数ベクトルを有限台有理ベクトルへ埋め込む。 -/
+noncomputable def rationalEmbedding (a : LogVector) : RationalLogVector :=
+  a.mapRange (fun z : ℤ => (z : ℚ)) (by norm_num)
+
+theorem rationalEmbedding_apply (a : LogVector) (p : Prime) :
+    rationalEmbedding a p = (a p : ℚ) := rfl
+
+/-- 有限台有理ベクトルの各係数を正の舞台サイズで割る。 -/
+noncomputable def divideRationalVector (a : RationalLogVector) (L : PositiveStage) :
+    RationalLogVector :=
+  a.mapRange (fun q : ℚ => q / (L.val : ℚ)) (by simp)
+
+theorem divideRationalVector_apply (a : RationalLogVector) (L : PositiveStage) (p : Prime) :
+    divideRationalVector a L p = a p / (L.val : ℚ) := rfl
+
+/-- 一方向シフト規則族の有理係数正規化列。 -/
+noncomputable def shiftRationalizedLogarithmicDensity (L : PositiveStage) :
+    RationalLogVector :=
+  divideRationalVector
+    (rationalEmbedding
+      (logarithmicCountSequence 1 shiftRule 1 (shiftPositiveCountStage L)))
+    L
+
+/-- 一方向シフトの有理係数正規化列の素数二係数は舞台サイズの逆数である。 -/
+theorem shiftRationalizedLogarithmicDensity_at_two (L : PositiveStage) :
+    shiftRationalizedLogarithmicDensity L ⟨2, by decide⟩ = 1 / (L.val : ℚ) := by
+  rw [shiftRationalizedLogarithmicDensity, divideRationalVector_apply,
+    rationalEmbedding_apply, shift_logarithmic_count_at_two]
+  norm_num
+
+/-- 任意の開始段階と、その二倍の段階で有理係数正規化列は異なる。 -/
+theorem shiftRationalizedLogarithmicDensity_ne_double (L : PositiveStage) :
+    shiftRationalizedLogarithmicDensity L ≠
+      shiftRationalizedLogarithmicDensity ⟨2 * L.val, by omega⟩ := by
+  intro hequal
+  have hcoefficient := congrArg (fun a : RationalLogVector => a ⟨2, by decide⟩) hequal
+  rw [shiftRationalizedLogarithmicDensity_at_two,
+    shiftRationalizedLogarithmicDensity_at_two] at hcoefficient
+  have hnonzero : (L.val : ℚ) ≠ 0 := by exact_mod_cast L.property.ne'
+  have hdoubleNonzero : ((2 * L.val : ℕ) : ℚ) ≠ 0 := by
+    exact_mod_cast (Nat.mul_pos (by decide : 0 < 2) L.property).ne'
+  have hdenominators : ((2 * L.val : ℕ) : ℚ) = (L.val : ℚ) := by
+    simpa using (div_eq_div_iff hnonzero hdoubleNonzero).mp hcoefficient
+  have hnat : 2 * L.val = L.val := by exact_mod_cast hdenominators
+  omega
+
+/-- 有理係数へ拡張した一方向シフトの正規化列も、等号では最終的に一定にならない。 -/
+theorem shiftRationalizedLogarithmicDensity_not_eventually_constant :
+    ¬ ∃ L₀ : PositiveStage, ∃ d : RationalLogVector,
+      ∀ L : PositiveStage, L₀.val ≤ L.val → shiftRationalizedLogarithmicDensity L = d := by
+  rintro ⟨L₀, d, hconstant⟩
+  let L₂ : PositiveStage := ⟨2 * L₀.val, by omega⟩
+  have hfirst := hconstant L₀ (by omega)
+  have hlater := hconstant L₂ (by change L₀.val ≤ 2 * L₀.val; omega)
+  have hdouble : L₂ = (⟨2 * L₀.val, by omega⟩ : PositiveStage) := rfl
+  rw [hdouble] at hlater
+  exact shiftRationalizedLogarithmicDensity_ne_double L₀ (hfirst.trans hlater.symm)
+
 end
 
 end CellularAutomata.CyclicStageLogarithmicDensity
