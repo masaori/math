@@ -6,14 +6,14 @@
  * このファイルがやることは 3 つだけである。
  *
  *   1. 生成された `Label`（content に実在するラベルのユニオン型）を受け取る
- *   2. **本プロジェクト固有メタデータ**を宣言する（`habitat` / `realEscape` / `verification` / `lean`）
+ *   2. **本プロジェクト固有メタデータ**を宣言する（`habitat` / 脱出理由 / `verification` / `lean`）
  *   3. ファクトリを具体化して `defineBlocks` / `defineNotes` / `ref` を得る
  *
  * 型で捕まえること（コンパイル時）:
  *   - 存在しないラベルへの `ref()` / ノートの `targets`、未登録ラベルの宣言（システム）
  *   - id・ラベル・ノート id の重複、kind ごとに許されるフィールド（システム）
  *   - **本文ブロックが `habitat`（扱う量の住処）を宣言していること**（本プロジェクト固有）
- *   - **`habitat` が非可算側（R/C/mixed）なら `realEscape` が必須、可算側なら書けない**（同上）
+ *   - **`habitat` が非可算側なら、その種類に対応する脱出理由が必須**（同上）
  *   - **見出しブロックは固有メタデータを持てない**（同上。見出しは量を扱わない）
  *
  * 実行時にしか捕まえられないこと（`tools/validate-content.ts`）:
@@ -94,14 +94,17 @@ export type CountableHabitat =
   | "none";
 
 /**
- * 非可算側の住処。`"R"` / `"C"` は主要な量そのものが ℝ / ℂ に住む場合、
+ * 実数・複素数側の住処。`"R"` / `"C"` は主要な量そのものが ℝ / ℂ に住む場合、
  * `"mixed"` は可算な対象を扱いながら一部の議論で ℝ/ℂ へ脱出する場合。
  * いずれも `realEscape`（どこで・なぜ脱出したか）の記述が必須になる。
  */
-export type EscapingHabitat = "R" | "C" | "mixed";
+export type RealEscapingHabitat = "R" | "C" | "mixed";
+
+/** ℝ/ℂ を経由しない非可算側。例は可算無限舞台上の全配位集合。 */
+export type NonRealUncountableHabitat = "uncountable";
 
 /** ブロックが扱う量の住処。可算側と非可算側が型で区別される。 */
-export type Habitat = CountableHabitat | EscapingHabitat;
+export type Habitat = CountableHabitat | RealEscapingHabitat | NonRealUncountableHabitat;
 
 const COUNTABLE_HABITATS = [
   "finite",
@@ -114,17 +117,20 @@ const COUNTABLE_HABITATS = [
   "none",
 ] as const satisfies readonly CountableHabitat[];
 
-const ESCAPING_HABITATS = ["R", "C", "mixed"] as const satisfies readonly EscapingHabitat[];
+const REAL_ESCAPING_HABITATS = ["R", "C", "mixed"] as const satisfies readonly RealEscapingHabitat[];
+const NON_REAL_UNCOUNTABLE_HABITATS = ["uncountable"] as const satisfies readonly NonRealUncountableHabitat[];
 
 const ALL_HABITATS = [
   ...COUNTABLE_HABITATS,
-  ...ESCAPING_HABITATS,
+  ...REAL_ESCAPING_HABITATS,
+  ...NON_REAL_UNCOUNTABLE_HABITATS,
 ] as const satisfies readonly Habitat[];
 
 /**
  * 住処の宣言。**判別共用体**なので、
  *   - 可算側（`CountableHabitat`）を宣言したブロックに `realEscape` を書くとコンパイル時に落ちる
- *   - 非可算側（`EscapingHabitat`）を宣言して `realEscape` を書かないとコンパイル時に落ちる
+ *   - 実数・複素数側（`RealEscapingHabitat`）では `realEscape`、それ以外の非可算側では
+ *     `uncountableEscape` を書かないとコンパイル時に落ちる
  * 「ℝ へ脱出した箇所を必ず明示する」という要求が、散文の約束ではなく型の制約になる。
  */
 export type Habitation =
@@ -132,11 +138,19 @@ export type Habitation =
       habitat: CountableHabitat;
       /** 可算側では書けない（`never` によりコンパイル時に拒否する）。 */
       realEscape?: never;
+      uncountableEscape?: never;
     }
   | {
-      habitat: EscapingHabitat;
+      habitat: RealEscapingHabitat;
       /** ℝ/ℂ をどこで、なぜ使ったか。空文字は実行時に拒否する。 */
       realEscape: string;
+      uncountableEscape?: never;
+    }
+  | {
+      habitat: NonRealUncountableHabitat;
+      realEscape?: never;
+      /** ℝ/ℂ を経由せず、どの構成で非可算へ出たか。空文字は実行時に拒否する。 */
+      uncountableEscape: string;
     };
 
 /** 証明と外部の機械検証との紐づけ。 */
@@ -169,6 +183,7 @@ export type TheoremLikeBlock = SystemTheoremLikeBlock<Label, ProjectMeta>;
 export type HeadingBlock = SystemHeadingBlock<Label> & {
   habitat?: never;
   realEscape?: never;
+  uncountableEscape?: never;
   verification?: never;
   lean?: never;
 };
@@ -205,7 +220,8 @@ export const ref = schema.ref;
 /** 住処の値の集合（型の定義と同じ集合）。ツール側の判定に使う。 */
 export const HABITAT_VALUES = {
   countable: new Set<string>(COUNTABLE_HABITATS) as ReadonlySet<string>,
-  escaping: new Set<string>(ESCAPING_HABITATS) as ReadonlySet<string>,
+  realEscaping: new Set<string>(REAL_ESCAPING_HABITATS) as ReadonlySet<string>,
+  nonRealUncountable: new Set<string>(NON_REAL_UNCOUNTABLE_HABITATS) as ReadonlySet<string>,
 } as const;
 
 /**
@@ -220,6 +236,7 @@ export const HABITAT_VALUES = {
 type BlockMetaSchema = {
   habitat: z.ZodTypeAny;
   realEscape: z.ZodTypeAny;
+  uncountableEscape: z.ZodTypeAny;
   verification: z.ZodTypeAny;
   lean: z.ZodTypeAny;
 };
@@ -227,6 +244,7 @@ type BlockMetaSchema = {
 const blockMeta: BlockMetaSchema = {
   habitat: z.enum(ALL_HABITATS),
   realEscape: z.string().min(1).optional(),
+  uncountableEscape: z.string().min(1).optional(),
   verification: z.array(z.string().min(1)).optional(),
   lean: z.array(z.string().min(1)).optional(),
 };
@@ -234,7 +252,9 @@ const blockMeta: BlockMetaSchema = {
 export const runtimeSchema = createRuntimeSchema<Label, ProjectMeta, BlockMetaSchema>({ blockMeta });
 
 const isKnownHabitat = (value: string): boolean =>
-  HABITAT_VALUES.countable.has(value) || HABITAT_VALUES.escaping.has(value);
+  HABITAT_VALUES.countable.has(value) ||
+  HABITAT_VALUES.realEscaping.has(value) ||
+  HABITAT_VALUES.nonRealUncountable.has(value);
 
 /**
  * 住処と `realEscape` の**対応**の実行時検証（本プロジェクト固有）。
@@ -249,19 +269,21 @@ export const checkHabitation = (block: {
   id: string;
   habitat?: unknown;
   realEscape?: unknown;
+  uncountableEscape?: unknown;
 }): string[] => {
-  const { habitat, realEscape } = block;
+  const { habitat, realEscape, uncountableEscape } = block;
   if (habitat === undefined) {
     return [
       `${block.id}.habitat が無い: 本文ブロックは扱う量の住処を宣言する` +
-        `（可算: ${COUNTABLE_HABITATS.join(" / ")}、非可算: ${ESCAPING_HABITATS.join(" / ")}）。` +
+        `（可算: ${COUNTABLE_HABITATS.join(" / ")}、ℝ/ℂ: ${REAL_ESCAPING_HABITATS.join(" / ")}、` +
+        `ℝ/ℂを経由しない非可算: ${NON_REAL_UNCOUNTABLE_HABITATS.join(" / ")}）。` +
         '量を扱わないブロックは "none" を書く。',
     ];
   }
   if (typeof habitat !== "string" || !isKnownHabitat(habitat)) {
     return [`${block.id}.habitat が未知の値: ${String(habitat)}`];
   }
-  if (HABITAT_VALUES.escaping.has(habitat)) {
+  if (HABITAT_VALUES.realEscaping.has(habitat)) {
     if (realEscape === undefined) {
       return [
         `${block.id}.realEscape が無い: habitat "${habitat}" は非可算（ℝ/ℂ）へ脱出しているので、` +
@@ -271,12 +293,36 @@ export const checkHabitation = (block: {
     if (typeof realEscape !== "string" || realEscape.trim() === "") {
       return [`${block.id}.realEscape が空: 脱出箇所を具体的に書く`];
     }
+    if (uncountableEscape !== undefined) {
+      return [`${block.id}.uncountableEscape は habitat "${habitat}" では書けない`];
+    }
+    return [];
+  }
+  if (HABITAT_VALUES.nonRealUncountable.has(habitat)) {
+    if (uncountableEscape === undefined) {
+      return [
+        `${block.id}.uncountableEscape が無い: habitat "${habitat}" は ℝ/ℂ を経由せず非可算へ脱出しているので、` +
+          "どの構成で脱出したかを必ず書く。",
+      ];
+    }
+    if (typeof uncountableEscape !== "string" || uncountableEscape.trim() === "") {
+      return [`${block.id}.uncountableEscape が空: 非可算化の箇所を具体的に書く`];
+    }
+    if (realEscape !== undefined) {
+      return [`${block.id}.realEscape は habitat "uncountable" では書けない: ℝ/ℂ を使うなら habitat を変更する`];
+    }
     return [];
   }
   if (realEscape !== undefined) {
     return [
       `${block.id}.realEscape は habitat "${habitat}"（可算側）では書けない: ` +
         'ℝ/ℂ を使ったなら habitat を "R" / "C" / "mixed" にする。使っていないなら realEscape を消す。',
+    ];
+  }
+  if (uncountableEscape !== undefined) {
+    return [
+      `${block.id}.uncountableEscape は habitat "${habitat}"（可算側）では書けない: ` +
+        '非可算な対象を扱うなら habitat を "uncountable" にする。',
     ];
   }
   return [];

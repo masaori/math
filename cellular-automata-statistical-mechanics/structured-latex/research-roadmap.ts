@@ -405,8 +405,8 @@ export const roadmapStages = [
       "lattice_and_countable_group_stages",
       "rule_class_separation",
     ],
-    status: "進行中",
-    current: true,
+    status: "到達済み",
+    current: false,
     completion: [
       "有限舞台での転送行列・分配関数・自由エネルギーが本文で定義され、住処が可算側で宣言されていること。",
       "統計力学側の各概念について、可算な担い手と担えない残りが台帳の形で揃っていること。",
@@ -445,13 +445,24 @@ export const roadmapStages = [
     habitat:
       "この段階は非可算側を対象とするため、各主張がどこで実数体または複素数体へ脱出したかを必ず宣言する。",
     dependsOn: ["statistical_mechanics_correspondence"],
-    status: "未着手",
-    current: false,
+    status: "進行中",
+    current: true,
     completion: [
       "有限舞台で定義できる量と、無限舞台を要する量の全件が仕分けられていること。",
       "実数へ脱出する各主張について、脱出の理由が住処の宣言として本文に書かれていること。",
       "実数側にしか無いと判断した内容について、可算側で述べ直せない理由が反例または不可能性の主張として残ること。",
     ],
-    evidence: [],
+    evidence: [
+      {
+        kind: "label",
+        label: "claim_integer_stage_finite_support_configurations_countable",
+        why: "整数舞台上の有限台配位が可算個の有限窓配位の合併として高々可算であることを明示する。",
+      },
+      {
+        kind: "label",
+        label: "claim_integer_stage_full_configurations_uncountable",
+        why: "同じ整数舞台でも全配位を一度に取ると非可算になることを、実数体を経由しない対角線反証で示す。",
+      },
+    ],
   },
 ] as const satisfies readonly RoadmapStage[];
