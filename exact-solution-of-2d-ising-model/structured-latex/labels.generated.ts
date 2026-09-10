@@ -154,6 +154,7 @@ export const ALL_LABELS = [
   "def_phi_polar",
   "def_rayleigh_sup",
   "def_real_imag_parts",
+  "def_second_transfer_matrix_pauli",
   "def_sector_rayleigh_sup",
   "def_sin",
   "def_site_pauli_matrices",
