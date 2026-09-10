@@ -18,6 +18,51 @@ export default defineBlocks([
     labels: [],
   },
   {
+    id: "transfer_matrix_000_definition_site_pauli_matrices",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "サイトごとの Pauli 行列族" },
+    labels: ["def_site_pauli_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("pauli_matrix_products"),
+        " で定めた二次の Pauli 行列 ",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
+        " と単位行列 ",
+        math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "、および ",
+        ref("def_kronecker"),
+        " のクロネッカー積を用いる。",
+      ]),
+      paragraph([
+        math(String.raw`1\leq k\leq M`),
+        " と ",
+        math(String.raw`a\in\{x,y,z\}`),
+        " に対して、サイト ",
+        math(String.raw`k`),
+        " だけに ",
+        math(String.raw`\sigma^a`),
+        " を置く行列を",
+      ]),
+      displayMath(
+        String.raw`\sigma_k^a := I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "と定める。これにより ",
+        math(String.raw`(\sigma_k^a)_{\substack{1\leq k\leq M\\ a\in\{x,y,z\}}}`),
+        " は一つの添字つき行列族として定まる。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、サイトごとの三つの Pauli 行列を一つの添字つき行列族として分離した。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -26,7 +71,9 @@ export default defineBlocks([
     statement: [
       paragraph([
         ref("pauli_matrix_products"),
-        " で定めた二次の Pauli 行列と単位行列、および ",
+        " で定めた二次の Pauli 行列と単位行列、",
+        ref("def_site_pauli_matrices"),
+        " で定めたサイトごとの Pauli 行列族、および ",
         ref("def_cosh_sinh"),
         " で定めた双曲線余弦・双曲線正弦を用いる。後者の正値性には ",
         ref("cosh_sinh_basic_properties"),
@@ -38,15 +85,6 @@ export default defineBlocks([
           ": ",
           math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
           " 上の単位行列",
-        ],
-        [
-          math(String.raw`\sigma_k^x := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes \overbrace{\sigma^x}^{k\text{th}} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        ],
-        [
-          math(String.raw`\sigma_k^y := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes \overbrace{\sigma^y}^{k\text{th}} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        ],
-        [
-          math(String.raw`\sigma_k^z := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes \overbrace{\sigma^z}^{k\text{th}} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2^M,\mathbb{C})`),
         ],
         [
           math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),

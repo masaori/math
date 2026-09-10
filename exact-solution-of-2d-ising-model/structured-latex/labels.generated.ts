@@ -155,6 +155,7 @@ export const ALL_LABELS = [
   "def_real_imag_parts",
   "def_sector_rayleigh_sup",
   "def_sin",
+  "def_site_pauli_matrices",
   "def_sqrt_cc",
   "def_symmetrized_transfer_matrix",
   "def_theta_mu",
