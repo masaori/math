@@ -1,6 +1,6 @@
 {
   "実行識別子": "06042fb9-0ec5-44ec-a7df-47990bd21b0b",
-  "観測時刻": "2026-09-10T21:05:46+09:00",
+  "観測時刻": "2026-09-11T02:59:31+09:00",
   "起動登録の実測": {
     "コマンド": "launchctl list com.masaori.ising-lambda-auto-loop",
     "終了コード": 0,
@@ -11,7 +11,7 @@
     "コマンド": "launchctl print gui/501/com.masaori.ising-lambda-auto-loop",
     "終了コード": 0,
     "state": "not running",
-    "runs": 165,
+    "runs": 176,
     "last exit code": 0
   },
   "plist": {
@@ -32,18 +32,18 @@
     {
       "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/launchd.log",
       "存在": true,
-      "更新時刻": "2026-09-10T21:05:09+09:00",
+      "更新時刻": "2026-09-11T02:35:09+09:00",
       "抽出行": [
-        "2026-09-10 20:35:10 SKIP: 作業ツリーに未コミットの変更がある（人間が作業中とみなす）",
-        "2026-09-10 21:05:09 SKIP: 作業ツリーに未コミットの変更がある（人間が作業中とみなす）"
+        "2026-09-11 02:05:09 SKIP: 作業ツリーに未コミットの変更がある（人間が作業中とみなす）",
+        "2026-09-11 02:35:09 SKIP: 作業ツリーに未コミットの変更がある（人間が作業中とみなす）"
       ]
     }
   ],
-  "実行の終了値の解釈": "登録あり・非実行中・runs 165・last exit code 0。21:05:09の呼出しは未コミット成果の保護による見送りで、研究実行の終了値ではない。",
+  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・非実行中・runs 176・last exit code 0。02:35:09の呼出しは未コミット差分を保護するSKIPで、研究実行の終了値ではない。",
   "成果比較": {
     "開始成果": "3692976c8a5af6b784f27a96531f088b0114916d",
     "前回読解終点": "4bf76f28e5e91685575bc852114cf483d66cd43e",
-    "今回読解終点": "522588402675fb1dafaacfbda9a6d545d38478c0",
+    "今回読解終点": "047c762eaff4b439745ac9d2d2dd0044075cfaaa",
     "確認した成果": [
       "前回読解終点以後に当研究の統合済み数学成果なし"
     ],
@@ -51,37 +51,37 @@
   },
   "検査結果": [
     {
-      "時刻": "2026-09-10T21:30:17+09:00",
+      "時刻": "2026-09-11T03:03:42+09:00",
       "コマンド": "node scripts/research-supervision/verify.ts --all",
       "終了コード": 0,
       "結果": "六研究の評価記録を受理"
     },
     {
-      "時刻": "2026-09-10T21:30:17+09:00",
+      "時刻": "2026-09-11T03:03:42+09:00",
       "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
       "終了コード": 0,
       "結果": "24件成功"
     },
     {
-      "時刻": "2026-09-10T21:30:17+09:00",
+      "時刻": "2026-09-11T03:03:42+09:00",
       "コマンド": "structured-latex/node_modules/.bin/tsc -p scripts/research-supervision/tsconfig.json",
       "終了コード": 0,
       "結果": "型検査成功"
     },
     {
-      "時刻": "2026-09-10T21:30:17+09:00",
+      "時刻": "2026-09-11T03:03:42+09:00",
       "コマンド": "node scripts/research-supervision/verify-test.ts",
       "終了コード": 0,
       "結果": "対象・欠落・権限分離・今回追記・外部パス拒否の統合検査成功"
     },
     {
-      "時刻": "2026-09-10T21:30:17+09:00",
+      "時刻": "2026-09-11T03:03:42+09:00",
       "コマンド": "python3 scripts/test-research-tick-models.py",
       "終了コード": 0,
       "結果": "3件成功"
     },
     {
-      "時刻": "2026-09-10T21:30:17+09:00",
+      "時刻": "2026-09-11T03:03:42+09:00",
       "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
       "終了コード": 0,
       "結果": "監督tickの契約・実装・記録・回帰検査成功"
