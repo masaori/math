@@ -290,4 +290,131 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
       ]),
     ],
   },
+  {
+    id: "positive_rational_convergence_definition_epsilon",
+    kind: "definition",
+    title: { text: "正有理数の許容誤差による有理数列の収束" },
+    labels: ["def_positive_rational_epsilon_convergence"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        math(String.raw`u:\mathbb N_{>0}\to\mathbb Q`),
+        " と ",
+        math(String.raw`q\in\mathbb Q`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`u\xrightarrow{\mathbb Q}q
+\quad:\Longleftrightarrow\quad
+\forall\varepsilon\in\mathbb Q_{>0},\ \exists L_0\in\mathbb N_{>0},\
+\forall L\in\mathbb N_{>0},\ L\ge L_0\Longrightarrow
+\lvert u(L)-q\rvert_{\mathbb Q}<\varepsilon`),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`\lvert a\rvert_{\mathbb Q}:=\max_{\mathbb Q}\{a,-a\}`),
+        " は有理数の全順序と加法逆元で定める絶対値である。量化する許容誤差も列の値も有理数に属し、",
+        "実数体への埋め込み、位相空間、完備化は定義に使わない。この定義は与えた有理数列が指定した有理数へ収束するかだけを述べ、全ての有理数列が有理数内に極限を持つとは主張しない。",
+      ]),
+    ],
+  },
+  {
+    id: "positive_rational_convergence_claim_positive_integer_reciprocal_sequence",
+    kind: "claim",
+    title: { text: "正整数の逆数列は有理数内で零へ収束する" },
+    labels: ["claim_positive_integer_reciprocal_converges_rationally"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " に対して ",
+        math(String.raw`u_{\mathrm{rec}}(L):=1/\iota_{\mathbb Q}(\iota(L))\in\mathbb Q_{>0}`),
+        " と定めると、",
+      ]),
+      displayMath(String.raw`u_{\mathrm{rec}}\xrightarrow{\mathbb Q}0.`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\varepsilon\in\mathbb Q_{>0}`),
+        " を任意に取る。正の有理数の分数表示により、ある ",
+        math(String.raw`a,b\in\mathbb N_{>0}`),
+        " が存在して ",
+        math(String.raw`\varepsilon=\iota_{\mathbb Q}(\iota(a))/\iota_{\mathbb Q}(\iota(b))`),
+        " と書ける。",
+        math(String.raw`L_0:=b+1\in\mathbb N_{>0}`),
+        " と置く。",
+      ]),
+      paragraph([
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " が ",
+        math(String.raw`L\ge L_0`),
+        " を満たすとする。正整数の標準埋め込みを式では省略すると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lvert u_{\mathrm{rec}}(L)-0\rvert_{\mathbb Q}
+&=\frac{1}{L}
+  \quad(\because\ L>0\text{ なので }1/L>0)\\
+&\le\frac{1}{b+1}
+  \quad(\because\ b+1=L_0\le L\text{ と正有理数の逆数の順序反転})\\
+&<\frac{1}{b}
+  \quad(\because\ 0<b<b+1\text{ と正有理数の逆数の順序反転})\\
+&\le\frac{a}{b}
+  \quad(\because\ 1\le a\text{ かつ }b>0)\\
+&=\varepsilon
+  \quad(\because\ a,b\text{ の選び方}).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\varepsilon`),
+        " は任意だったので、",
+        ref("def_positive_rational_epsilon_convergence"),
+        " により主張を得る。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_logarithmic_density_claim_rationalized_shift_rational_convergence",
+    kind: "claim",
+    title: { text: "シフト正規化列の素数二係数は有理数内で零へ収束する" },
+    labels: ["claim_shift_rationalized_logarithmic_density_converges_rationally"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_shift_rationalized_logarithmic_density_sequence"),
+        " の正の段階 ",
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " と素数 ",
+        math(String.raw`2\in\mathcal P`),
+        " における係数を ",
+        math(String.raw`q_{\mathrm{sh}}(L):=\mathbf D_{\mathrm{sh}}(L)(2)\in\mathbb Q`),
+        " と置くと、",
+      ]),
+      displayMath(String.raw`q_{\mathrm{sh}}\xrightarrow{\mathbb Q}0.`),
+      paragraph([
+        "従って、",
+        ref("claim_shift_rationalized_logarithmic_density_not_eventually_constant"),
+        " の完全安定化の否定は、有理数内の収束の否定を意味しない。ここで得たのは一つの素数係数の収束であり、有限台有理ベクトル列全体の収束、全配位空間、無限段階の極限、実数値の極限量については主張しない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("claim_cyclic_stage_shift_logarithmic_density_obstruction"),
+        "、",
+        ref("def_shift_rationalized_logarithmic_density_sequence"),
+        "、",
+        ref("def_finite_support_rational_prime_vectors"),
+        " により、任意の ",
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " で",
+      ]),
+      displayMath(String.raw`q_{\mathrm{sh}}(L)
+=\frac{1}{\iota_{\mathbb Q}(\iota(L))}
+\quad(\because\ \blkref{claim_cyclic_stage_shift_logarithmic_density_obstruction},\
+\ \blkref{def_shift_rationalized_logarithmic_density_sequence},\
+\ \blkref{def_finite_support_rational_prime_vectors}).`),
+      paragraph([
+        ref("claim_positive_integer_reciprocal_converges_rationally"),
+        " と ",
+        ref("def_positive_rational_epsilon_convergence"),
+        " により主張を得る。",
+      ]),
+    ],
+  },
 ]);

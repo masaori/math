@@ -34,6 +34,14 @@ export const documentOrganization = [
         mainLabels: ["claim_prime_logarithm_ordered_group", "claim_prime_vector_integer_division"],
       },
       {
+        id: "positive_rational_sequence_convergence",
+        title: "正有理数の許容誤差による有理数列の収束",
+        input: "正の自然数で添字づけた有理数列、有理数の全順序・加法逆元・非零除算を入力とする。",
+        output: "実数への埋め込みや完備化を使わない収束概念と、正整数の逆数列が有理数内で零へ収束する例を得る。",
+        main: "主張は、許容誤差を正の有理数だけで量化しても、正整数の逆数列が有理数の零へ収束することである。",
+        mainLabels: ["claim_positive_integer_reciprocal_converges_rationally"],
+      },
+      {
         id: "neighborhood_assignment_algebra",
         title: "近傍割り当ての合成・順序・束演算",
         input: "有限集合、有限集合上の二項関係、集合値写像を入力とする。",
@@ -197,11 +205,12 @@ export const documentOrganization = [
         id: "cyclic_stage_logarithmic_density_boundary",
         title: "有限巡回段階の対数順序群値と規格化の境界",
         input: "有限巡回舞台の族、正の反復不動点数の対数順序群値列、整数係数と有理係数の有限台素数ベクトルを入力とする。",
-        output: "群内で規格化できる段階を分離し、有理係数へ拡張して全段階を規格化しても、有限段階列の完全安定化は自動で得られない境界を得る。",
-        main: "主張は、一方向シフト規則の自由エントロピーが舞台サイズ二以上では対数順序群内で割れず、有理係数へ拡張した正規化列もどの段階以後も一定にならないことである。",
+        output: "群内で規格化できる段階を分離し、有理係数へ拡張して全段階を規格化しても完全安定化は自動で得られない一方、一つの素数係数は有理数内で収束しうる境界を得る。",
+        main: "主張は、一方向シフト規則の自由エントロピーが舞台サイズ二以上では対数順序群内で割れず、有理係数へ拡張した正規化列もどの段階以後も一定にならないが、その素数二係数は正有理数の許容誤差による意味で有理数の零へ収束することである。",
         mainLabels: [
           "claim_cyclic_stage_shift_logarithmic_density_obstruction",
           "claim_shift_rationalized_logarithmic_density_not_eventually_constant",
+          "claim_shift_rationalized_logarithmic_density_converges_rationally",
         ],
       },
       {
