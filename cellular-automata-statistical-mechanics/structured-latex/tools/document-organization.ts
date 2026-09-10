@@ -194,6 +194,14 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "cyclic_stage_logarithmic_density_boundary",
+        title: "有限巡回段階の対数順序群値と規格化の境界",
+        input: "有限巡回舞台の族、正の反復不動点数の対数順序群値列、対数順序群内の整数除算条件を入力とする。",
+        output: "舞台サイズによる規格化が定義できる段階だけを分離し、有限段階の量が存在しても規格化は常には存在しないことを得る。",
+        main: "主張は、一方向シフト規則の一回反復不動点数が全ての有限巡回段階で二である一方、その対数順序群値は舞台サイズが二以上なら群内で割れないことである。",
+        mainLabels: ["claim_cyclic_stage_shift_logarithmic_density_obstruction"],
+      },
+      {
         id: "rule_class_separation",
         title: "有限真理値表による規則クラスの分別",
         input: "有限舞台、規則クラスごとに必要な舞台・状態の追加構造、有限局所真理値表を入力とする。",
