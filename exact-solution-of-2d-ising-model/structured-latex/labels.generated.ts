@@ -131,6 +131,7 @@ export const ALL_LABELS = [
   "def_even_eigenvectors_of_epsilon",
   "def_exp",
   "def_fermi",
+  "def_first_transfer_matrix_pauli",
   "def_frobenius_inner_product",
   "def_gamma1_gamma2_of_theta",
   "def_gamma_theta_mu",
