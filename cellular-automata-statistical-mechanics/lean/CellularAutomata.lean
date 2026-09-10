@@ -2,6 +2,7 @@ import CellularAutomata.BinaryCALogarithmicCounts
 import CellularAutomata.PrimeLogarithm
 import CellularAutomata.CyclicRuleRestriction
 import CellularAutomata.CyclicStageLocalAgreement
+import CellularAutomata.CyclicStageLogarithmicDensity
 import CellularAutomata.TotalisticRuleClass
 import CellularAutomata.NecSuf.TotalisticRuleClass
 import CellularAutomata.NecSuf.CyclicStageLocalAgreement
