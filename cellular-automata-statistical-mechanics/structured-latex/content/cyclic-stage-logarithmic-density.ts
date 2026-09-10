@@ -6,6 +6,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "有限巡回段階の対数順序群値を舞台サイズで割れる定義域" },
     labels: ["def_cyclic_stage_logarithmic_density_domain"],
+    verification: ["sagemath/check/cyclic-stage-logarithmic-density"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -41,6 +42,7 @@ export default defineBlocks([
     kind: "definition",
     title: { text: "有限巡回舞台の一方向シフト規則族" },
     labels: ["def_cyclic_stage_shift_rule_family"],
+    verification: ["sagemath/check/cyclic-stage-logarithmic-density"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -74,6 +76,7 @@ g_{\mathrm{sh}}(y):=y(1)`),
     kind: "claim",
     title: { text: "シフト規則族の自由エントロピーは舞台サイズで常には割れない" },
     labels: ["claim_cyclic_stage_shift_logarithmic_density_obstruction"],
+    verification: ["sagemath/check/cyclic-stage-logarithmic-density"],
     habitat: "countable",
     statement: [
       paragraph([
