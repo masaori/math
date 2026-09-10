@@ -393,7 +393,9 @@ L_0\le L\Longrightarrow E_{L,s}=E_{\mathbb Z,s}`),
     kind: "definition",
     title: { text: "整数舞台上の有限台配位と全配位" },
     labels: ["def_integer_stage_finite_support_configurations"],
-    habitat: "countable",
+    habitat: "uncountable",
+    uncountableEscape:
+      "可算無限な整数舞台上で、有限窓ごとの配位を全て整合させた全配位集合 A^Z を一度に取ることで非可算へ出る。実数体・複素数体は経由しない。",
     statement: [
       paragraph([
         ref("def_state_set"),
@@ -466,7 +468,9 @@ L_0\le L\Longrightarrow E_{L,s}=E_{\mathbb Z,s}`),
     kind: "claim",
     title: { text: "整数舞台上の全配位は非可算である" },
     labels: ["claim_integer_stage_full_configurations_uncountable"],
-    habitat: "countable",
+    habitat: "uncountable",
+    uncountableEscape:
+      "可算無限な整数舞台上の全配位集合 A^Z を一度に取り、自然数添字の任意の候補列を対角線配位で外すことで非可算性を示す。実数体・複素数体は経由しない。",
     statement: [
       paragraph([
         ref("def_integer_stage_finite_support_configurations"),

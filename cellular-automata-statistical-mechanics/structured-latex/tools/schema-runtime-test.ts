@@ -47,6 +47,11 @@ const schemaCases: Case[] = [
     expect: /realEscape/,
   },
   {
+    name: "uncountableEscape が空文字なら拒む",
+    value: { ...base, habitat: "uncountable", uncountableEscape: "" },
+    expect: /uncountableEscape/,
+  },
+  {
     name: "verification が文字列の配列でないなら拒む",
     value: { ...base, habitat: "N", verification: "sagemath/check/foo" },
     expect: /verification/,
@@ -108,6 +113,16 @@ const habitationCases: { name: string; value: Parameters<typeof checkHabitation>
       value: { id: "countable_with_reason", habitat: "N", realEscape: "連続極限" },
       expect: /realEscape は habitat/,
     },
+    {
+      name: "ℝ\/ℂを経由しない非可算な住処なのに uncountableEscape が無いブロックを拒む",
+      value: { id: "uncountable_without_reason", habitat: "uncountable" },
+      expect: /uncountableEscape が無い/,
+    },
+    {
+      name: "可算な住処なのに uncountableEscape を書いたブロックを拒む",
+      value: { id: "countable_with_uncountable_reason", habitat: "countable", uncountableEscape: "全配位" },
+      expect: /uncountableEscape は habitat/,
+    },
   ];
 
 for (const testCase of habitationCases) {
@@ -151,10 +166,23 @@ if (!control.success) {
   console.log("✓ 正しいブロック（住処と脱出理由つき）は通る");
 }
 
+if (
+  checkHabitation({
+    id: "uncountable_control",
+    habitat: "uncountable",
+    uncountableEscape: "可算無限個の二元状態を全て同時に選ぶ",
+  }).length > 0
+) {
+  failed += 1;
+  console.error("✗ 正しいℝ/ℂを経由しない非可算ブロックが拒まれた");
+} else {
+  console.log("✓ 正しいℝ/ℂを経由しない非可算ブロックは通る");
+}
+
 if (failed > 0) {
   console.error(`\n${failed} 件の実行時検証テストが期待どおりに動かなかった`);
   process.exit(1);
 }
 console.log(
-  `\n実行時検証テスト ${schemaCases.length + habitationCases.length + 1} 件すべて期待どおり`,
+  `\n実行時検証テスト ${schemaCases.length + habitationCases.length + 2} 件すべて期待どおり`,
 );
