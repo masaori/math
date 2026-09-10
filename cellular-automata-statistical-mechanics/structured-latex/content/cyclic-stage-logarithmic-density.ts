@@ -154,4 +154,137 @@ x(v)
       ]),
     ],
   },
+  {
+    id: "rational_prime_vectors_definition_finite_support",
+    kind: "definition",
+    title: { text: "素数上の有限台有理ベクトルと対数順序群の埋め込み" },
+    labels: ["def_finite_support_rational_prime_vectors"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_prime_integer_vectors"),
+        " の素数集合 ",
+        math(String.raw`\mathcal P`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`\Lambda_{\mathbb Q}:=
+\left\{a:\mathcal P\to\mathbb Q:\operatorname{supp}(a)
+\text{ は有限}\right\}`),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`\operatorname{supp}(a):=\{p\in\mathcal P:a(p)\ne0\}`),
+        " である。有限個の素数と有理係数の表で表せるので、",
+        math(String.raw`\Lambda_{\mathbb Q}`),
+        " は高々可算である。埋め込みと正の整数による除算を各 ",
+        math(String.raw`p\in\mathcal P`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
+  \quad(a\in\Lambda),\\
+\left(\frac{b}{L}\right)(p)&:=
+  \frac{b(p)}{\iota_{\mathbb Q}(\iota(L))}
+  \quad(b\in\Lambda_{\mathbb Q},\ L\in\mathbb N_{>0})
+\end{aligned}`),
+      paragraph([
+        "と定める。",
+        math(String.raw`\iota_{\mathbb Q}:\mathbb Z\to\mathbb Q`),
+        " は整数の標準埋め込み、",
+        math(String.raw`\iota:\mathbb N\to\mathbb Z`),
+        " は自然数の標準埋め込みである。第二式の分母は正なので零ではない。どちらの結果の台も元の有限台に含まれる。従って演算は ",
+        math(String.raw`\Lambda_{\mathbb Q}`),
+        " の中で定義される。実数体、実対数、無限和、完備化は使わない。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_logarithmic_density_definition_rationalized_shift_sequence",
+    kind: "definition",
+    title: { text: "一方向シフト規則族の有理係数正規化列" },
+    labels: ["def_shift_rationalized_logarithmic_density_sequence"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_cyclic_stage_shift_rule_family"),
+        " と ",
+        ref("def_finite_support_rational_prime_vectors"),
+        " に対し、全ての ",
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " で",
+      ]),
+      displayMath(String.raw`\mathbf D_{\mathrm{sh}}(L):=
+\frac{j_{\Lambda}\!\left(\mathbf\Phi_{1,g_{\mathrm{sh}},1}(L)\right)}{L}
+\in\Lambda_{\mathbb Q}`),
+      paragraph([
+        "と定める。",
+        ref("claim_cyclic_stage_shift_logarithmic_density_obstruction"),
+        " により分子は全ての正の舞台サイズで定義される。除算は ",
+        math(String.raw`\Lambda`),
+        " の群内除算ではなく、",
+        math(String.raw`\Lambda_{\mathbb Q}`),
+        " の有理係数を非零有理数 ",
+        math(String.raw`\iota_{\mathbb Q}(\iota(L))`),
+        " で割る演算である。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_logarithmic_density_claim_rationalized_shift_not_eventually_constant",
+    kind: "claim",
+    title: { text: "有理係数へ拡張したシフト正規化列も完全安定化しない" },
+    labels: ["claim_shift_rationalized_logarithmic_density_not_eventually_constant"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_shift_rationalized_logarithmic_density_sequence"),
+        " の列について、",
+      ]),
+      displayMath(String.raw`\neg\exists L_0\in\mathbb N_{>0},\ \exists d\in\Lambda_{\mathbb Q},\
+\forall L\in\mathbb N_{>0},\ L\ge L_0\Longrightarrow\mathbf D_{\mathrm{sh}}(L)=d.`),
+      paragraph([
+        "従って、有理係数への拡張は各有限段階の規格化を定義可能にするが、有限段階列の等号による最終的な完全安定化を与えない。位相、距離、完備化、実数値の収束は定義していないので、それらについては主張しない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L_0\in\mathbb N_{>0}`),
+        " を任意に取る。",
+        ref("claim_cyclic_stage_shift_logarithmic_density_obstruction"),
+        " と ",
+        ref("def_finite_support_rational_prime_vectors"),
+        "、",
+        ref("def_prime_logarithm"),
+        "、",
+        ref("def_positive_rational_prime_valuation"),
+        " より、素数 ",
+        math(String.raw`2\in\mathcal P`),
+        " での係数は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathbf D_{\mathrm{sh}}(L_0)(2)
+&=\frac{1}{\iota_{\mathbb Q}(\iota(L_0))}
+  \quad(\because\ \blkref{claim_cyclic_stage_shift_logarithmic_density_obstruction},\
+  \ \blkref{def_shift_rationalized_logarithmic_density_sequence},\
+  \ \blkref{def_prime_logarithm},\ \blkref{def_positive_rational_prime_valuation}),\\
+\mathbf D_{\mathrm{sh}}(2L_0)(2)
+&=\frac{1}{\iota_{\mathbb Q}(\iota(2L_0))}
+  \quad(\because\ \blkref{claim_cyclic_stage_shift_logarithmic_density_obstruction},\
+  \ \blkref{def_shift_rationalized_logarithmic_density_sequence},\
+  \ \blkref{def_prime_logarithm},\ \blkref{def_positive_rational_prime_valuation}).
+\end{aligned}`),
+      paragraph([
+        "この二係数が等しいと仮定し、正の有理数 ",
+        math(String.raw`\iota_{\mathbb Q}(\iota(2L_0))`),
+        " を両辺へ掛けると",
+      ]),
+      displayMath(String.raw`2=1\quad(\because\ \mathbb Q\text{ の体演算と }L_0>0)`),
+      paragraph([
+        "となり矛盾する。従って ",
+        math(String.raw`\mathbf D_{\mathrm{sh}}(L_0)\ne\mathbf D_{\mathrm{sh}}(2L_0)`),
+        " である。しかも ",
+        math(String.raw`2L_0\ge L_0`),
+        " なので、どの開始段階以後も列は一定にならない。",
+      ]),
+    ],
+  },
 ]);
