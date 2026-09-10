@@ -1,6 +1,7 @@
 # 対象ラベル: claim_integer_stage_finite_support_configurations_countable
 # 併せて検証: def_integer_stage_finite_support_configurations
-# 式ペア・判定: |X_k| = 2^|D_k| = 2^(2k+1)。
+# 式ペア・判定: x -> supp_1(x) が二値の有限窓配位上で単射であり、
+#                 |X_k| = 2^|D_k| = 2^(2k+1)。
 # 帰属: 有限集合と NN。浮動小数点、除算、R/C、全配位、極限は使わない。
 import os
 load(os.path.join(os.path.dirname(os.path.abspath(__file__)), '_prelude.sage'))
@@ -11,7 +12,7 @@ for radius in range(0, 9):
     window = integer_window(radius)
     configurations = finite_window_configurations(radius)
     expected_count = ZZ(2) ** ZZ(2 * radius + 1)
-    encoded = set()
+    encoded_supports = set()
 
     assert ZZ(len(window)) == ZZ(2 * radius + 1)
     for values in configurations:
@@ -21,9 +22,9 @@ for radius in range(0, 9):
             (position in support) == (value == 1)
             for position, value in zip(window, values)
         )
-        encoded.add(tuple(values))
+        encoded_supports.add(tuple(support))
 
-    assert ZZ(len(encoded)) == expected_count
+    assert ZZ(len(encoded_supports)) == expected_count
     assert ZZ(len(configurations)) == expected_count
     windows_checked += 1
     configurations_checked += len(configurations)

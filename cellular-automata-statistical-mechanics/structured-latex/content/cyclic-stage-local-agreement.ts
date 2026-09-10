@@ -437,30 +437,37 @@ L_0\le L\Longrightarrow E_{L,s}=E_{\mathbb Z,s}`),
     ],
     proof: [
       paragraph([
-        "各 ",
-        math(String.raw`k\in\mathbb N`),
-        " に対し、有限整数窓 ",
-        ref("def_integer_offset_interval"),
-        " を用いて",
+        "各有限台配位をその一状態台へ送る写像を",
       ]),
-      displayMath(String.raw`X_k:=\{x\in X_{\mathrm{fin}}:\operatorname{supp}_1(x)\subseteq D_k\}`),
-      paragraph(["と置く。窓の外側の値は零に固定され、窓内の各セルには二状態を選べるので"]),
-      displayMath(String.raw`|X_k|=2^{|D_k|}=2^{2k+1}\in\mathbb N
-\quad(\because\ \blkref{def_state_set},\ \blkref{def_integer_offset_interval}).`),
+      displayMath(String.raw`e:X_{\mathrm{fin}}\longrightarrow
+\{S\subseteq\mathbb Z:S\text{ は有限}\},
+\qquad e(x):=\operatorname{supp}_1(x)`),
       paragraph([
-        "任意の ",
-        math(String.raw`x\in X_{\mathrm{fin}}`),
-        " について ",
-        math(String.raw`\operatorname{supp}_1(x)`),
-        " は有限であるため、ある ",
-        math(String.raw`k\in\mathbb N`),
-        " が存在して ",
-        math(String.raw`\operatorname{supp}_1(x)\subseteq D_k`),
-        " となる。従って",
+        "と定める。任意の ",
+        math(String.raw`x,y\in X_{\mathrm{fin}}`),
+        " と ",
+        math(String.raw`z\in\mathbb Z`),
+        " について、",
       ]),
-      displayMath(String.raw`X_{\mathrm{fin}}=\bigcup_{k\in\mathbb N}X_k
-\quad(\because\ \blkref{def_integer_stage_finite_support_configurations}).`),
-      paragraph(["右辺は可算個の有限集合の合併なので、高々可算である。"]),
+      displayMath(String.raw`\begin{aligned}
+e(x)=e(y)
+&\Longrightarrow
+\bigl(x(z)=1\Longleftrightarrow y(z)=1\bigr)
+  \quad(\because\ e\text{ の定義})\\
+&\Longrightarrow x(z)=y(z)
+  \quad(\because\ \blkref{def_state_set}).
+\end{aligned}`),
+      paragraph([
+        "従って ",
+        math(String.raw`e`),
+        " は単射である。整数の有限部分集合全体は、可算集合 ",
+        math(String.raw`\mathbb Z`),
+        " の有限列全体の像なので高々可算である。ゆえに単射 ",
+        math(String.raw`e`),
+        " の定義域 ",
+        math(String.raw`X_{\mathrm{fin}}`),
+        " も高々可算である。",
+      ]),
     ],
   },
   {
