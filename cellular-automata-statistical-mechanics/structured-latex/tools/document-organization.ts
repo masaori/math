@@ -28,8 +28,8 @@ export const documentOrganization = [
       {
         id: "prime_logarithm_and_integer_division",
         title: "素数指数の対数順序群と整数除算の定義域",
-        input: "正の有理数、正整数の素因数分解、素数上の有限台整数ベクトルを入力とする。",
-        output: "対数写像と復元写像、加法と両立する全順序、整数で割れる入力の必要十分条件を得る。",
+        input: "正の有理数、正整数の素因数分解、素数上の有限台整数ベクトルと有限台有理ベクトルを入力とする。",
+        output: "対数写像と復元写像、加法と両立する全順序、整数係数内で割れる入力の必要十分条件、有理係数への埋め込みと正整数による除算を得る。",
         main: "主張は、素数指数の対数が正の有理数を順序付き加法群へ移し、群内の整数除算は全係数の整除に限られることである。",
         mainLabels: ["claim_prime_logarithm_ordered_group", "claim_prime_vector_integer_division"],
       },
@@ -191,6 +191,17 @@ export const documentOrganization = [
           "claim_integer_stage_full_configurations_uncountable",
           "claim_cyclic_stage_projection_not_globally_injective",
           "claim_bare_stage_loses_uniform_transport",
+        ],
+      },
+      {
+        id: "cyclic_stage_logarithmic_density_boundary",
+        title: "有限巡回段階の対数順序群値と規格化の境界",
+        input: "有限巡回舞台の族、正の反復不動点数の対数順序群値列、整数係数と有理係数の有限台素数ベクトルを入力とする。",
+        output: "群内で規格化できる段階を分離し、有理係数へ拡張して全段階を規格化しても、有限段階列の完全安定化は自動で得られない境界を得る。",
+        main: "主張は、一方向シフト規則の自由エントロピーが舞台サイズ二以上では対数順序群内で割れず、有理係数へ拡張した正規化列もどの段階以後も一定にならないことである。",
+        mainLabels: [
+          "claim_cyclic_stage_shift_logarithmic_density_obstruction",
+          "claim_shift_rationalized_logarithmic_density_not_eventually_constant",
         ],
       },
       {

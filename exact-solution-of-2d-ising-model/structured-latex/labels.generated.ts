@@ -141,6 +141,7 @@ export const ALL_LABELS = [
   "def_hermitian_positive_definite",
   "def_inverse_trig_functions",
   "def_invertible_elements_of_R",
+  "def_jordan_wigner_Z_matrices",
   "def_kappa",
   "def_kronecker",
   "def_lattice_size",
