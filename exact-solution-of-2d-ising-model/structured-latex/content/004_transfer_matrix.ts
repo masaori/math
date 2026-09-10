@@ -196,6 +196,47 @@ export default defineBlocks([
     },
   },
   {
+    id: "transfer_matrix_000d_definition_jordan_wigner_Y_matrices",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 5 },
+    title: { text: "Jordan–Wigner 行列族 Y_m" },
+    labels: ["def_jordan_wigner_Y_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " で定めたサイトごとの Pauli 行列族を用いる。各 ",
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " に対して、Jordan--Wigner 行列 ",
+        math(String.raw`Y_m`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`Y_m:=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "と定める。",
+        math(String.raw`m=1`),
+        " では左側の積を空積とし、",
+        math(String.raw`Y_1:=\sigma_1^y`),
+        " とする。また周期端では ",
+        math(String.raw`Y_{M+1}:=Y_1`),
+        " と定める。ホロノミック量子場では ",
+        math(String.raw`Y_m`),
+        " を ",
+        math(String.raw`q_m`),
+        " と書く。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、Jordan--Wigner 行列族 Y_m と周期端の規約だけを一つの定義として分離した。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -214,6 +255,10 @@ export default defineBlocks([
         ref("def_jordan_wigner_Z_matrices"),
         " で定めた Jordan--Wigner 行列族 ",
         math(String.raw`Z_m`),
+        "、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " で定めた Jordan--Wigner 行列族 ",
+        math(String.raw`Y_m`),
         "、および ",
         ref("def_cosh_sinh"),
         " で定めた双曲線余弦・双曲線正弦を用いる。後者の正値性には ",
@@ -229,16 +274,6 @@ export default defineBlocks([
         ],
         [
           math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        ],
-        [
-          math(String.raw`Y_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^y \in \mathrm{Mat}(2^M,\mathbb{C})`),
-          "（ただし ",
-          math(String.raw`Y_1 := \sigma_1^y`),
-          "、",
-          math(String.raw`Y_{M+1} := Y_1`),
-          "。ホロノミック量子場では ",
-          math(String.raw`q_m`),
-          "）",
         ],
         [
           math(String.raw`\varepsilon := \sigma_1^x \cdots \sigma_M^x = i^M (Z_1 Y_1)(Z_2 Y_2) \cdots (Z_M Y_M) \in \mathrm{Mat}(2^M,\mathbb{C})`),
@@ -288,6 +323,7 @@ export default defineBlocks([
         "第一の転送行列と周期規約は <def_first_transfer_matrix_pauli> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         "第二の転送行列は <def_second_transfer_matrix_pauli> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         "Jordan--Wigner 行列族 Z_m は <def_jordan_wigner_Z_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
+        "Jordan--Wigner 行列族 Y_m は <def_jordan_wigner_Y_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +
@@ -310,7 +346,7 @@ export default defineBlocks([
         " の ",
         math(String.raw`Z_1,\dots,Z_M`),
         " と ",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_jordan_wigner_Y_matrices"),
         " の ",
         math(String.raw`Y_1,\dots,Y_M`),
         " を ",
@@ -350,7 +386,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
       ),
       paragraph([
         "とする。",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_site_pauli_matrices"),
         " のとおり ",
         math(String.raw`\sigma_k^a`),
         "（",
@@ -519,7 +555,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
         " の ",
         math(String.raw`Z_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z`),
         " と、",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_jordan_wigner_Y_matrices"),
         " の ",
         math(String.raw`Y_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
         " にこれを適用すると（",
@@ -543,7 +579,7 @@ Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^y}^{m\text{th}}
 \boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
-&&(\because\ \text{Step 3 の帰納法と }Y_m\text{ の定義})
+&&(\because\ \text{Step 3 の帰納法と }Y_m\text{ の定義 }\blkref{def_jordan_wigner_Y_matrices})
 \end{aligned}`,
       ),
       paragraph([
@@ -876,12 +912,16 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
       ),
       paragraph([
         "これを ",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_jordan_wigner_Z_matrices"),
         " の ",
         math(String.raw`Z_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z`),
         "、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
         math(String.raw`Y_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
         "、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
         math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x`),
         " に適用すると（",
         math(String.raw`m=1`),
@@ -904,7 +944,7 @@ Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^y}^{m\text{th}}
 \boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
-&&(\because \text{上の一般式と } Y_m \text{ の定義}) \\
+&&(\because \text{上の一般式と } Y_m \text{ の定義 }\blkref{def_jordan_wigner_Y_matrices}) \\
 \varepsilon &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M}
 &&(\because \text{上の一般式（} r=M \text{）と } \varepsilon \text{ の定義})
 \end{aligned}`,
