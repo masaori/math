@@ -149,3 +149,4 @@ import CellularAutomata.NecSuf.PositiveFixedPointCountDomain
 import CellularAutomata.NecSuf.PrimeLogarithm
 import CellularAutomata.NecSuf.LogarithmicCounts
 import CellularAutomata.NecSuf.CyclicRuleRestriction
+import CellularAutomata.NecSuf.CyclicStageLogarithmicDensity
