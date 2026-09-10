@@ -101,6 +101,60 @@ export default defineBlocks([
     },
   },
   {
+    id: "transfer_matrix_000b_definition_second_transfer_matrix",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 3 },
+    title: { text: "第二の転送行列" },
+    labels: ["def_second_transfer_matrix_pauli"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`K_2,K_2^*\in\mathbb{R}_{>0}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " のサイトごとの Pauli 行列族を用いて、第二の転送行列を",
+      ]),
+      displayMath(
+        String.raw`V_2 := (2\sinh 2K_2)^{M/2}\exp\!\left(K_2^*\sum_{m=1}^{M}\sigma_m^x\right)
+= (2\sinh 2K_2)^{M/2}\exp\!\left(K_2^*\left(\sigma_1^x+\sigma_2^x+\cdots+\sigma_M^x\right)\right)
+\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "で定める。ここに現れる ",
+        math(String.raw`\sinh`),
+        " は ",
+        ref("def_cosh_sinh"),
+        " の双曲線正弦である。",
+        math(String.raw`K_2>0`),
+        " と ",
+        ref("cosh_sinh_basic_properties"),
+        " より ",
+        math(String.raw`2\sinh 2K_2>0`),
+        " であり、前係数は ",
+        ref("definition_of_sqrt_r_positive"),
+        " の非負平方根を用いて",
+      ]),
+      displayMath(
+        String.raw`(2\sinh 2K_2)^{M/2}:=\left(\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\right)^M\in\mathbb{R}_{>0}`,
+      ),
+      paragraph([
+        "と定める。また、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " で成分級数として定めた行列の指数関数である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、第二の転送行列だけを一つの定義として分離した。K_2^* の定義と双対関係、双曲線関数の添字つき略記は残余複合定義に残している。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+        "V_2 の exp の意味（どの代数のどの位相での級数か）が書かれていなかったため、<def_exp> の exp であることを明示した（定義が意味をもつために必要な事項）。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -110,6 +164,8 @@ export default defineBlocks([
       paragraph([
         ref("def_first_transfer_matrix_pauli"),
         " で定めた第一の転送行列と周期規約、",
+        ref("def_second_transfer_matrix_pauli"),
+        " で定めた第二の転送行列、",
         ref("pauli_matrix_products"),
         " で定めた二次の Pauli 行列と単位行列、",
         ref("def_site_pauli_matrices"),
@@ -128,9 +184,6 @@ export default defineBlocks([
         ],
         [
           math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        ],
-        [
-          math(String.raw`V_2 := (2\sinh 2K_2)^{M/2} \exp\!\left(K_2^* \left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right) \in \mathrm{Mat}(2^M,\mathbb{C})`),
         ],
         [
           math(String.raw`Z_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^z \in \mathrm{Mat}(2^M,\mathbb{C})`),
@@ -192,22 +245,13 @@ export default defineBlocks([
         math(String.raw`2^M`),
         " 次の複素行列である。",
       ]),
-      paragraph([
-        math(String.raw`V_2`),
-        " に現れる ",
-        math(String.raw`\exp`),
-        " は、",
-        ref("def_exp"),
-        " で成分級数として定義した行列の指数関数である。",
-      ]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "第一の転送行列と周期規約は <def_first_transfer_matrix_pauli> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
-        "V_2 の exp の意味（どの代数のどの位相での級数か）が書かれていなかったため、<def_end_iso> の同一視のもとでの " +
-          "<def_exp> の exp であることを明示した（定義が意味をもつために必要な事項）。",
+        "第二の転送行列は <def_second_transfer_matrix_pauli> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +
