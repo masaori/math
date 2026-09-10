@@ -7,7 +7,10 @@
   - 不動配位と状態の全単射には、上の到達性だけを要る。状態型の有限性は個数を取る段でだけ要る。
   - 舞台サイズによる群内除算障害には、有限台整数ベクトルの一つの係数が一であることと、
     倍率が二以上であることだけを要る。添字が素数であること、対数、舞台、局所規則は要らない。
-  - 実対数、実数除算、極限、実数体、複素数体は使わない。
+  - 有理係数への埋め込みと正整数除算には、任意の添字型上の有限台ベクトルだけを要る。
+  - 正規化列の非一定性には、任意の値域から有理数への一つの観測写像と、その観測値が
+    舞台サイズの逆数であることだけを要る。有限台、素数、対数、CA は要らない。
+  - 実対数、極限、実数体、複素数体は使わない。
 -/
 import CellularAutomata.CyclicStageLogarithmicDensity
 
@@ -84,6 +87,69 @@ theorem no_scaled_preimage_of_coefficient_one
   have hle := Int.natAbs_le_of_dvd_ne_zero hdiv (by norm_num : (1 : ℤ) ≠ 0)
   simp at hle
   omega
+
+/-! ### 有理係数正規化列に必要な構造 -/
+
+/-- 任意の添字型上の有限台有理ベクトル。 -/
+abbrev RationalVector (Index : Type) := Index →₀ ℚ
+
+/-- 任意の添字型上の有限台整数ベクトルを有限台有理ベクトルへ埋め込む。 -/
+noncomputable def integerVectorEmbedding {Index : Type} [DecidableEq Index]
+    (a : Index →₀ ℤ) : RationalVector Index :=
+  a.mapRange (fun z : ℤ => (z : ℚ)) (by norm_num)
+
+theorem integerVectorEmbedding_apply {Index : Type} [DecidableEq Index]
+    (a : Index →₀ ℤ) (i : Index) :
+    integerVectorEmbedding a i = (a i : ℚ) := rfl
+
+/-- 有限台有理ベクトルの各係数を正の自然数で割る。 -/
+noncomputable def divideRationalVectorByPositiveNat {Index : Type} [DecidableEq Index]
+    (a : RationalVector Index) (L : PositiveStage) : RationalVector Index :=
+  a.mapRange (fun q : ℚ => q / (L.val : ℚ)) (by simp)
+
+theorem divideRationalVectorByPositiveNat_apply
+    {Index : Type} [DecidableEq Index]
+    (a : RationalVector Index) (L : PositiveStage) (i : Index) :
+    divideRationalVectorByPositiveNat a L i = a i / (L.val : ℚ) := rfl
+
+/--
+列の一つの有理観測値が各正段階で舞台サイズの逆数なら、任意の段階とその二倍で列は異なる。
+値域には、観測写像以外の構造を要しない。
+-/
+theorem sequence_ne_double_of_inverse_observation
+    {Value : Type}
+    (sequence : PositiveStage → Value) (observation : Value → ℚ)
+    (hinverse : ∀ L : PositiveStage, observation (sequence L) = 1 / (L.val : ℚ))
+    (L : PositiveStage) :
+    sequence L ≠ sequence ⟨2 * L.val, by omega⟩ := by
+  intro hequal
+  have hobservation := congrArg observation hequal
+  rw [hinverse, hinverse] at hobservation
+  have hnonzero : (L.val : ℚ) ≠ 0 := by exact_mod_cast L.property.ne'
+  have hdoubleNonzero : ((2 * L.val : ℕ) : ℚ) ≠ 0 := by
+    exact_mod_cast (Nat.mul_pos (by decide : 0 < 2) L.property).ne'
+  have hdenominators : ((2 * L.val : ℕ) : ℚ) = (L.val : ℚ) := by
+    simpa using (div_eq_div_iff hnonzero hdoubleNonzero).mp hobservation
+  have hnat : 2 * L.val = L.val := by exact_mod_cast hdenominators
+  omega
+
+/--
+一つの有理観測値が舞台サイズの逆数である列は、等号では最終的に一定にならない。
+-/
+theorem sequence_not_eventually_constant_of_inverse_observation
+    {Value : Type}
+    (sequence : PositiveStage → Value) (observation : Value → ℚ)
+    (hinverse : ∀ L : PositiveStage, observation (sequence L) = 1 / (L.val : ℚ)) :
+    ¬ ∃ L₀ : PositiveStage, ∃ d : Value,
+      ∀ L : PositiveStage, L₀.val ≤ L.val → sequence L = d := by
+  rintro ⟨L₀, d, hconstant⟩
+  let L₂ : PositiveStage := ⟨2 * L₀.val, by omega⟩
+  have hfirst := hconstant L₀ (by omega)
+  have hlater := hconstant L₂ (by change L₀.val ≤ 2 * L₀.val; omega)
+  have hdouble : L₂ = (⟨2 * L₀.val, by omega⟩ : PositiveStage) := rfl
+  rw [hdouble] at hlater
+  exact sequence_ne_double_of_inverse_observation sequence observation hinverse L₀
+    (hfirst.trans hlater.symm)
 
 /-! ### 具体版の導出 -/
 
@@ -166,6 +232,44 @@ theorem shift_not_mem_logarithmicDensityDomain_of_necSuf
     (⟨2, by decide⟩ : Prime) L.val hL (shift_logarithmic_count_at_two_of_necSuf L)
   refine ⟨d, ?_⟩
   exact hd
+
+/-- 具体版の整数係数埋め込みは、任意の添字型上の埋め込みの特殊化である。 -/
+theorem rationalEmbedding_eq_necessary_sufficient (a : LogVector) :
+    rationalEmbedding a = integerVectorEmbedding a := rfl
+
+/-- 具体版の正整数除算は、任意の添字型上の除算の特殊化である。 -/
+theorem divideRationalVector_eq_necessary_sufficient
+    (a : RationalLogVector) (L : PositiveStage) :
+    divideRationalVector a L = divideRationalVectorByPositiveNat a L := rfl
+
+/-- 具体版の素数二係数は、一般の埋め込みと正整数除算から得られる。 -/
+theorem shiftRationalizedLogarithmicDensity_at_two_of_necSuf (L : PositiveStage) :
+    shiftRationalizedLogarithmicDensity L ⟨2, by decide⟩ = 1 / (L.val : ℚ) := by
+  rw [shiftRationalizedLogarithmicDensity,
+    divideRationalVector_eq_necessary_sufficient,
+    divideRationalVectorByPositiveNat_apply,
+    rationalEmbedding_eq_necessary_sufficient,
+    integerVectorEmbedding_apply,
+    shift_logarithmic_count_at_two_of_necSuf]
+  norm_num
+
+/-- 具体版の二倍段階との非一致は、一座標の逆数表示だけを使う一般定理から得られる。 -/
+theorem shiftRationalizedLogarithmicDensity_ne_double_of_necSuf (L : PositiveStage) :
+    shiftRationalizedLogarithmicDensity L ≠
+      shiftRationalizedLogarithmicDensity ⟨2 * L.val, by omega⟩ := by
+  exact sequence_ne_double_of_inverse_observation
+    shiftRationalizedLogarithmicDensity
+    (fun a : RationalLogVector => a ⟨2, by decide⟩)
+    shiftRationalizedLogarithmicDensity_at_two_of_necSuf L
+
+/-- 具体版の完全安定化の否定は、一座標の逆数表示だけを使う一般定理から得られる。 -/
+theorem shiftRationalizedLogarithmicDensity_not_eventually_constant_of_necSuf :
+    ¬ ∃ L₀ : PositiveStage, ∃ d : RationalLogVector,
+      ∀ L : PositiveStage, L₀.val ≤ L.val → shiftRationalizedLogarithmicDensity L = d := by
+  exact sequence_not_eventually_constant_of_inverse_observation
+    shiftRationalizedLogarithmicDensity
+    (fun a : RationalLogVector => a ⟨2, by decide⟩)
+    shiftRationalizedLogarithmicDensity_at_two_of_necSuf
 
 end Derivation
 
