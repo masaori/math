@@ -159,6 +159,7 @@ x(v)
     kind: "definition",
     title: { text: "素数上の有限台有理ベクトルと対数順序群の埋め込み" },
     labels: ["def_finite_support_rational_prime_vectors"],
+    verification: ["sagemath/check/rationalized-shift-logarithmic-density"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -202,6 +203,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "definition",
     title: { text: "一方向シフト規則族の有理係数正規化列" },
     labels: ["def_shift_rationalized_logarithmic_density_sequence"],
+    verification: ["sagemath/check/rationalized-shift-logarithmic-density"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -233,6 +235,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "claim",
     title: { text: "有理係数へ拡張したシフト正規化列も完全安定化しない" },
     labels: ["claim_shift_rationalized_logarithmic_density_not_eventually_constant"],
+    verification: ["sagemath/check/rationalized-shift-logarithmic-density"],
     habitat: "countable",
     statement: [
       paragraph([
