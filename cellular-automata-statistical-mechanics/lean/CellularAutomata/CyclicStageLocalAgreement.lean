@@ -13,6 +13,7 @@ import CellularAutomata.CyclicRuleRestriction
 import CellularAutomata.NecSuf.PeriodicPointCount
 import CellularAutomata.PrimeLogarithm
 import Mathlib.Data.Countable.Basic
+import Mathlib.Logic.Equiv.List
 
 namespace CellularAutomata.CyclicStageLocalAgreement
 
@@ -149,6 +150,71 @@ theorem logarithmicCountSequence_apply (r : ℕ) (g : (Offset r → State) → S
       ((fixedPointCountSequence r g n L.val).factorization p.val : ℤ) := by
   exact PrimeLogarithm.logarithm_nat_apply
     (fixedPointCountSequence r g n L.val) L.property p
+
+/-! ### 整数舞台上の有限台配位と全配位の濃度境界
+
+`claim_integer_stage_finite_support_configurations_countable` と
+`claim_integer_stage_full_configurations_uncountable` の Lean 具体版。
+
+整数舞台、二元状態、一状態台が有限な配位と、自然数で添字づけた
+全配位の候補列に固定する。実数体・複素数体、位相、測度、極限は使わない。 -/
+
+/-- 整数舞台上の全配位。 -/
+abbrev IntegerConfiguration := ℤ → State
+
+/-- 一状態にあるセルが有限個である整数舞台上の配位。 -/
+def FiniteSupportConfiguration :=
+  {x : IntegerConfiguration // Set.Finite {z : ℤ | x z = State.one}}
+
+/-- 有限台配位を、一状態にあるセルの有限表へ送る。 -/
+noncomputable def finiteSupportSet (x : FiniteSupportConfiguration) : Finset ℤ :=
+  x.property.toFinset
+
+/-- 二元状態の配位は、一状態にあるセルの有限表から一意に復元できる。 -/
+theorem finiteSupportSet_injective : Function.Injective finiteSupportSet := by
+  intro x y hxy
+  apply Subtype.ext
+  funext z
+  have hz : z ∈ finiteSupportSet x ↔ z ∈ finiteSupportSet y := by rw [hxy]
+  simp only [finiteSupportSet, Set.Finite.mem_toFinset, Set.mem_setOf_eq] at hz
+  cases hx : x.val z <;> cases hy : y.val z <;> simp_all
+
+/-- 有限台配位全体は、整数の有限部分集合全体へ単射されるので高々可算である。 -/
+theorem finite_support_configurations_countable : Countable FiniteSupportConfiguration := by
+  exact finiteSupportSet_injective.countable
+
+/-- 候補列 `q` の各項を非負整数位置で反転する対角配位。 -/
+def diagonalConfiguration (q : ℕ → IntegerConfiguration) : IntegerConfiguration :=
+  fun z => if 0 ≤ z then nu (q z.toNat z) else State.zero
+
+/-- 対角配位は、各候補とその候補番号の成分で異なる。 -/
+theorem diagonalConfiguration_differs (q : ℕ → IntegerConfiguration) (n : ℕ) :
+    diagonalConfiguration q (n : ℤ) ≠ q n (n : ℤ) := by
+  cases h : q n (n : ℤ) <;> simp [diagonalConfiguration, nu, h]
+
+/-- 自然数で添字づけた任意の全配位候補列は全射でない。 -/
+theorem full_configuration_sequence_not_surjective
+    (q : ℕ → IntegerConfiguration) : ¬ Function.Surjective q := by
+  intro hsurjective
+  obtain ⟨n, hn⟩ := hsurjective (diagonalConfiguration q)
+  exact diagonalConfiguration_differs q n (congrFun hn (n : ℤ)).symm
+
+/-- 整数舞台上の全配位は非可算である。 -/
+theorem full_configurations_uncountable : Uncountable IntegerConfiguration := by
+  letI : Nonempty IntegerConfiguration := ⟨fun _ => State.zero⟩
+  rw [uncountable_iff_forall_not_surjective]
+  exact full_configuration_sequence_not_surjective
+
+/-- 有限台配位から全配位への包含写像。 -/
+def finiteSupportInclusion : FiniteSupportConfiguration → IntegerConfiguration :=
+  Subtype.val
+
+/-- 有限台配位から全配位への包含写像は全射でない。 -/
+theorem finiteSupportInclusion_not_surjective :
+    ¬ Function.Surjective finiteSupportInclusion := by
+  letI : Countable FiniteSupportConfiguration := finite_support_configurations_countable
+  letI : Uncountable IntegerConfiguration := full_configurations_uncountable
+  exact not_surjective_countable_uncountable finiteSupportInclusion
 
 /-! ### 群構造を持たない二セル舞台の近傍輸送反例
 

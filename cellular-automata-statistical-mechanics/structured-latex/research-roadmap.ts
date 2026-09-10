@@ -443,7 +443,7 @@ export const roadmapStages = [
       "位相的エントロピーのように無限舞台を要する量がここに属する。" +
       "実数側にしか無い内容を正直に書き出すことがこの段階の成果である。",
     habitat:
-      "この段階は非可算側を対象とするため、各主張がどこで実数体または複素数体へ脱出したかを必ず宣言する。",
+      "有限・高々可算・非可算を分け、非可算化の構成または実数体・複素数体への脱出理由を各主張で宣言する。",
     dependsOn: ["statistical_mechanics_correspondence"],
     status: "進行中",
     current: true,
@@ -456,7 +456,7 @@ export const roadmapStages = [
       {
         kind: "label",
         label: "claim_integer_stage_finite_support_configurations_countable",
-        why: "整数舞台上の有限台配位が可算個の有限窓配位の合併として高々可算であることを明示する。",
+        why: "整数舞台上の有限台配位が、一状態台を有限部分集合へ送る単射により高々可算であることを明示する。",
       },
       {
         kind: "label",

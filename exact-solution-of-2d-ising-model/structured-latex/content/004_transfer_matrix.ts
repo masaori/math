@@ -63,6 +63,44 @@ export default defineBlocks([
     },
   },
   {
+    id: "transfer_matrix_000a_definition_first_transfer_matrix",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 2 },
+    title: { text: "第一の転送行列と周期規約" },
+    labels: ["def_first_transfer_matrix_pauli"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`K_1\in\mathbb{R}_{>0}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " のサイトごとの Pauli 行列族について、",
+        math(String.raw`\sigma_{M+1}^z:=\sigma_1^z`),
+        " と周期的に延長する。第一の転送行列を",
+      ]),
+      displayMath(
+        String.raw`V_1 := \exp\!\left(K_1 \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right)
+= \exp\!\left(K_1 \left(\sigma_1^z\sigma_2^z + \sigma_2^z\sigma_3^z + \cdots + \sigma_M^z\sigma_1^z\right)\right)
+\in \mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "で定める。ここに現れる ",
+        math(String.raw`\exp`),
+        " は、",
+        ref("def_exp"),
+        " で成分級数として定めた行列の指数関数である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、第一の転送行列とその周期規約だけを一つの定義として分離した。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+        "原文の V_1 の定義は exp(√-1 K_1 (σ^z_1σ^z_2 + ⋯ + σ^z_Mσ^z_1)) と虚数単位を含んでいたが、これは誤りなので K_1 に訂正済みである。Y_m Z_{m+1} = -√-1 σ^z_mσ^z_{m+1} なので、虚数単位は Jordan--Wigner 置換から生じる。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -70,6 +108,8 @@ export default defineBlocks([
     labels: ["def_transfer_matrix_symbols"],
     statement: [
       paragraph([
+        ref("def_first_transfer_matrix_pauli"),
+        " で定めた第一の転送行列と周期規約、",
         ref("pauli_matrix_products"),
         " で定めた二次の Pauli 行列と単位行列、",
         ref("def_site_pauli_matrices"),
@@ -88,15 +128,6 @@ export default defineBlocks([
         ],
         [
           math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        ],
-        [
-          math(String.raw`V_1 := \exp\!\left(K_1 \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right)
-= \exp\!\left(K_1 \left(\sigma_1^z\sigma_2^z + \sigma_2^z\sigma_3^z + \cdots + \sigma_M^z\sigma_1^z\right)\right) \in \mathrm{Mat}(2^M,\mathbb{C})`),
-          "（",
-          math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
-          " とし、",
-          math(String.raw`\sigma_{M+1}^z := \sigma_1^z`),
-          " と周期的に延長した上での和である）",
         ],
         [
           math(String.raw`V_2 := (2\sinh 2K_2)^{M/2} \exp\!\left(K_2^* \left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right) \in \mathrm{Mat}(2^M,\mathbb{C})`),
@@ -162,7 +193,7 @@ export default defineBlocks([
         " 次の複素行列である。",
       ]),
       paragraph([
-        math(String.raw`V_1, V_2`),
+        math(String.raw`V_2`),
         " に現れる ",
         math(String.raw`\exp`),
         " は、",
@@ -174,17 +205,8 @@ export default defineBlocks([
       status: "converted",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
-        "原文（および本ブロックの旧版）の V_1 の定義は exp(√-1 K_1 (σ^z_1σ^z_2 + ⋯ + σ^z_Mσ^z_1)) と" +
-          "虚数単位を含んでいたが、これは誤りなので K_1 に訂正した。根拠: Y_m Z_{m+1} = -√-1 σ^z_mσ^z_{m+1} " +
-          "（<V1_in_Z_Y_epsilon> の証明 Step 2）であるから、定義を原文どおり √-1 K_1 とすると " +
-          "V_1 = exp(-K_1(Y_1Z_2+⋯)) となり、原文の主張 <V1_in_Z_Y_epsilon>（V_1 = exp(√-1 K_1(Y_1Z_2+⋯)））と" +
-          "矛盾する。さらに 004 章以降（H_1^{(±)} の定義ブロック、V_1^{(±)} の定義、008 章）はすべて " +
-          "V_1 = exp(√-1 K_1 H_1) 側と整合しており、虚数単位は Jordan--Wigner 置換 σ^z_mσ^z_{m+1} = √-1 Y_mZ_{m+1} " +
-          "から生じるものである。V_2 の定義（虚数単位なし）とその主張（√-1 K_2^* が付く）も同じ理由で整合している。" +
-          "また 001 章の転送行列 (V_1)_{μ,μ'} は実正値行列であり、σ^z 表示の V_1 に虚数単位が付かないことと合う。",
-        "V_1 の指数の中の巡回和は M ≥ 2 でなければ意味を持たない（M = 1 では σ^z_1σ^z_2 が未定義）ため、" +
-          "M ≥ 2 と σ^z_{M+1} := σ^z_1 を明示した。σ_k^a, Z_m, Y_m, ε 自体は M ≥ 1 で定義される。",
-        "exp の意味（どの代数のどの位相での級数か）が書かれていなかったため、<def_end_iso> の同一視のもとでの " +
+        "第一の転送行列と周期規約は <def_first_transfer_matrix_pauli> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
+        "V_2 の exp の意味（どの代数のどの位相での級数か）が書かれていなかったため、<def_end_iso> の同一視のもとでの " +
           "<def_exp> の exp であることを明示した（定義が意味をもつために必要な事項）。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
