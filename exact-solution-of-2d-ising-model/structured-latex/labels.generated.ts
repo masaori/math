@@ -136,6 +136,7 @@ export const ALL_LABELS = [
   "def_gamma1_gamma2_of_theta",
   "def_gamma_theta_mu",
   "def_gamma_theta_tilde_mu",
+  "def_global_spin_flip_matrix",
   "def_half_integer_modes",
   "def_hatZ_hatY",
   "def_hermitian_positive_definite",

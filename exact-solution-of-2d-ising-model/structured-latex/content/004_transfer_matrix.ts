@@ -237,6 +237,33 @@ export default defineBlocks([
     },
   },
   {
+    id: "transfer_matrix_000e_definition_global_spin_flip_matrix",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 6 },
+    title: { text: "全スピン反転行列" },
+    labels: ["def_global_spin_flip_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " で定めたサイトごとの Pauli 行列族を用いて、全スピン反転行列を",
+      ]),
+      displayMath(
+        String.raw`\varepsilon:=\sigma_1^x\sigma_2^x\cdots\sigma_M^x\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "と定める。積はサイト番号の昇順に取る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、全スピン反転行列の定義だけを分離した。Jordan--Wigner 行列による表示は残余複合定義に残している。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -259,6 +286,10 @@ export default defineBlocks([
         ref("def_jordan_wigner_Y_matrices"),
         " で定めた Jordan--Wigner 行列族 ",
         math(String.raw`Y_m`),
+        "、",
+        ref("def_global_spin_flip_matrix"),
+        " で定めた全スピン反転行列 ",
+        math(String.raw`\varepsilon`),
         "、および ",
         ref("def_cosh_sinh"),
         " で定めた双曲線余弦・双曲線正弦を用いる。後者の正値性には ",
@@ -276,7 +307,7 @@ export default defineBlocks([
           math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
         ],
         [
-          math(String.raw`\varepsilon := \sigma_1^x \cdots \sigma_M^x = i^M (Z_1 Y_1)(Z_2 Y_2) \cdots (Z_M Y_M) \in \mathrm{Mat}(2^M,\mathbb{C})`),
+          math(String.raw`\varepsilon = i^M (Z_1 Y_1)(Z_2 Y_2) \cdots (Z_M Y_M) \in \mathrm{Mat}(2^M,\mathbb{C})`),
           "（右辺は ",
           math(String.raw`Z_m Y_m`),
           " の積であって和ではない。",
@@ -324,6 +355,7 @@ export default defineBlocks([
         "第二の転送行列は <def_second_transfer_matrix_pauli> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         "Jordan--Wigner 行列族 Z_m は <def_jordan_wigner_Z_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         "Jordan--Wigner 行列族 Y_m は <def_jordan_wigner_Y_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
+        "全スピン反転行列 epsilon は <def_global_spin_flip_matrix> へ分離した。Jordan--Wigner 行列による表示は本ブロックに残し、旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +
