@@ -6,13 +6,20 @@ def_cyclic_stage_shift_rule_family           → shiftOffset, shiftRule, stageMa
 claim_cyclic_stage_shift_logarithmic_density_obstruction
   → shift_fixed_iff_constant, shiftFixedEquivState, shift_fixedPointCountSequence,
     shift_logarithmic_count_at_two, shift_not_mem_logarithmicDensityDomain
+def_positive_rational_epsilon_convergence → RationallyConverges
+claim_positive_integer_reciprocal_converges_rationally
+  → positiveIntegerReciprocal_rationallyConverges
+claim_shift_rationalized_logarithmic_density_converges_rationally
+  → shiftRationalizedPrimeTwoCoefficient_rationallyConverges
 
 有限巡回舞台を ZMod L、二元状態を演算なしの State、一方向シフト規則を半径一の
 有限真理値表に固定する。不動点の全数分類、状態数二の素数二係数、舞台サイズによる
 群内除算障害を本文と同じ順序で示す。有限型・自然数・整数・有限台整数ベクトルだけを
-使い、実対数、実数除算、極限、実数体、複素数体は使わない。
+使う。有理収束は正有理数の許容誤差だけで定義し、実対数、実数除算、位相、完備化、
+実数体、複素数体は使わない。
 -/
 import CellularAutomata.CyclicStageLocalAgreement
+import Mathlib.Algebra.Order.Archimedean.Basic
 
 namespace CellularAutomata.CyclicStageLogarithmicDensity
 
@@ -199,6 +206,52 @@ theorem shiftRationalizedLogarithmicDensity_not_eventually_constant :
   have hdouble : L₂ = (⟨2 * L₀.val, by omega⟩ : PositiveStage) := rfl
   rw [hdouble] at hlater
   exact shiftRationalizedLogarithmicDensity_ne_double L₀ (hfirst.trans hlater.symm)
+
+/-! ## 正有理数の許容誤差による収束 -/
+
+/-- 正有理数だけを許容誤差として量化する、有理数列の有理数値への収束。 -/
+def RationallyConverges (u : PositiveStage → ℚ) (q : ℚ) : Prop :=
+  ∀ ε : ℚ, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L : PositiveStage, L₀.val ≤ L.val → |u L - q| < ε
+
+/-- 正整数の逆数列は、正有理数の許容誤差による意味で有理数の零へ収束する。 -/
+theorem positiveIntegerReciprocal_rationallyConverges :
+    RationallyConverges (fun L : PositiveStage => 1 / (L.val : ℚ)) 0 := by
+  intro ε hε
+  obtain ⟨n, hn⟩ := exists_nat_gt (1 / ε)
+  let L₀ : PositiveStage := ⟨n + 1, by omega⟩
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  have hnL : n < L.val := by
+    change n + 1 ≤ L.val at hL
+    omega
+  have hnLrat : (n : ℚ) < (L.val : ℚ) := by exact_mod_cast hnL
+  have hinverseLt : 1 / ε < (L.val : ℚ) := hn.trans hnLrat
+  have honeLt : (1 : ℚ) < (L.val : ℚ) * ε :=
+    (div_lt_iff₀ hε).mp hinverseLt
+  have hLpositive : (0 : ℚ) < (L.val : ℚ) := by exact_mod_cast L.property
+  rw [sub_zero, abs_of_pos (one_div_pos.mpr hLpositive)]
+  apply (div_lt_iff₀ hLpositive).mpr
+  simpa [mul_comm] using honeLt
+
+/-- 一方向シフトの有理係数正規化列から素数二係数だけを取り出す。 -/
+def shiftRationalizedPrimeTwoCoefficient (L : PositiveStage) : ℚ :=
+  shiftRationalizedLogarithmicDensity L ⟨2, by decide⟩
+
+/-- 一方向シフトの素数二係数列は、正整数の逆数列に一致する。 -/
+theorem shiftRationalizedPrimeTwoCoefficient_eq_reciprocal (L : PositiveStage) :
+    shiftRationalizedPrimeTwoCoefficient L = 1 / (L.val : ℚ) := by
+  exact shiftRationalizedLogarithmicDensity_at_two L
+
+/-- 一方向シフトの素数二係数列は、有理数内で零へ収束する。 -/
+theorem shiftRationalizedPrimeTwoCoefficient_rationallyConverges :
+    RationallyConverges shiftRationalizedPrimeTwoCoefficient 0 := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ := positiveIntegerReciprocal_rationallyConverges ε hε
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  rw [shiftRationalizedPrimeTwoCoefficient_eq_reciprocal]
+  exact htail L hL
 
 end
 
