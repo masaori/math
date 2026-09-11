@@ -13,6 +13,10 @@
   - 正の許容誤差による収束には、値域の線形順序付き加法群だけを要る。正整数の逆数列の
     収束には、さらに正整数の埋め込み、除算、順序の Archimedes 性だけを要る。
     シフト正規化列への移送には、一つの観測値が逆数列に一致することだけを要る。
+  - 有限和差量の定義と非負性には、添字が素数であることを要らず、任意の添字型上の
+    有限台有理ベクトルだけを要る。差量による収束の定義には、対象型上の差量写像と、
+    許容誤差型の零と狭義順序だけを要る。収束の証明には、差量が正整数の逆数に一致する
+    ことだけを要り、有限台、素数、巡回舞台、シフト規則は要らない。
   - 実対数、位相、距離空間、完備化、実数体、複素数体は使わない。
 -/
 import CellularAutomata.CyclicStageLogarithmicDensity
@@ -211,6 +215,54 @@ theorem observedSequence_converges_of_inverse_representation
   rw [hinverse]
   exact htail L hL
 
+/-! ### 有限和差量による収束に必要な構造 -/
+
+/-- 任意の添字型上の有限台有理ベクトルについて、台の合併上で取る有限和差量。 -/
+noncomputable def rationalVectorFiniteSumDistance
+    {Index : Type} [DecidableEq Index]
+    (a b : RationalVector Index) : ℚ :=
+  (a.support ∪ b.support).sum fun i => |a i - b i|
+
+/-- 任意の添字型上でも、有限和差量は非負有理数である。 -/
+theorem rationalVectorFiniteSumDistance_nonnegative
+    {Index : Type} [DecidableEq Index]
+    (a b : RationalVector Index) :
+    0 ≤ rationalVectorFiniteSumDistance a b := by
+  apply Finset.sum_nonneg
+  intro i hi
+  exact abs_nonneg (a i - b i)
+
+/--
+対象型上の差量写像を用い、正の許容誤差だけを量化する収束。
+対象型には構造を要らず、許容誤差型には零と狭義順序だけを要る。
+-/
+def ConvergesByPositiveErrors
+    {Source Error : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (sequence : PositiveStage → Source) (target : Source) : Prop :=
+  ∀ ε : Error, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L : PositiveStage, L₀.val ≤ L.val → discrepancy (sequence L) target < ε
+
+/--
+差量が各正段階で正整数の逆数に一致すれば、その差量について零へ収束する。
+元の対象型には差量写像以外の構造を要しない。
+-/
+theorem convergesByPositiveErrors_of_inverse_discrepancy
+    {Source Value : Type} [Field Value] [LinearOrder Value] [IsStrictOrderedRing Value]
+    [Archimedean Value]
+    (discrepancy : Source → Source → Value)
+    (sequence : PositiveStage → Source) (target : Source)
+    (hinverse : ∀ L : PositiveStage,
+      discrepancy (sequence L) target = 1 / (L.val : Value)) :
+    ConvergesByPositiveErrors discrepancy sequence target := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ :=
+    (positiveIntegerReciprocal_convergesWithPositiveErrors (Value := Value)) ε hε
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  rw [hinverse]
+  simpa using htail L hL
+
 /-! ### 具体版の導出 -/
 
 section Derivation
@@ -353,6 +405,38 @@ theorem shiftRationalizedPrimeTwoCoefficient_rationallyConverges_of_necSuf :
     shiftRationalizedLogarithmicDensity
     (fun a : RationalLogVector => a ⟨2, by decide⟩)
     shiftRationalizedLogarithmicDensity_at_two_of_necSuf
+
+/-- 素数添字の具体的な有限和差量は、任意添字上の一般定義の特殊化である。 -/
+theorem rationalLogVectorFiniteSumDistance_eq_necessary_sufficient
+    (a b : RationalLogVector) :
+    rationalLogVectorFiniteSumDistance a b = rationalVectorFiniteSumDistance a b := by
+  rfl
+
+/-- 具体版の有限和差量の非負性は、任意添字上の一般定理から得られる。 -/
+theorem rationalLogVectorFiniteSumDistance_nonnegative_of_necSuf
+    (a b : RationalLogVector) :
+    0 ≤ rationalLogVectorFiniteSumDistance a b := by
+  rw [rationalLogVectorFiniteSumDistance_eq_necessary_sufficient]
+  exact rationalVectorFiniteSumDistance_nonnegative a b
+
+/-- 具体版のベクトル収束定義は、差量写像だけを使う一般定義の特殊化である。 -/
+theorem rationalLogVectorConverges_iff_convergesByPositiveErrors
+    (d : PositiveStage → RationalLogVector) (a : RationalLogVector) :
+    RationalLogVectorConverges d a ↔
+      ConvergesByPositiveErrors rationalLogVectorFiniteSumDistance d a := by
+  rfl
+
+/--
+具体版のシフト正規化ベクトル列の収束は、差量の逆数表示だけを使う一般定理から得られる。
+-/
+theorem shiftRationalizedLogarithmicDensity_vectorConverges_of_necSuf :
+    RationalLogVectorConverges shiftRationalizedLogarithmicDensity rationalLogVectorZero := by
+  rw [rationalLogVectorConverges_iff_convergesByPositiveErrors]
+  exact convergesByPositiveErrors_of_inverse_discrepancy
+    rationalLogVectorFiniteSumDistance
+    shiftRationalizedLogarithmicDensity
+    rationalLogVectorZero
+    shiftRationalizedLogarithmicDensity_distance_zero
 
 end Derivation
 
