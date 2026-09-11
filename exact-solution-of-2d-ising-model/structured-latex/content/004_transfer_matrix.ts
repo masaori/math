@@ -259,7 +259,277 @@ export default defineBlocks([
     conversion: {
       status: "added",
       notes: [
-        "旧来の複合定義から、全スピン反転行列の定義だけを分離した。Jordan--Wigner 行列による表示は残余複合定義に残している。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+        "旧来の複合定義から、全スピン反転行列の定義だけを分離した。Jordan--Wigner 行列による表示は <global_spin_flip_jordan_wigner_representation> へ分離し、そこから本定義を明示参照している。旧ラベルからの後続参照は、残した複合定義が新しい表示主張を明示参照することで意味を保つ。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_000f_claim_global_spin_flip_jordan_wigner_representation",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 7 },
+    title: { text: "全スピン反転行列の Jordan–Wigner 表示" },
+    labels: ["global_spin_flip_jordan_wigner_representation"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("def_jordan_wigner_Z_matrices"),
+        " の ",
+        math(String.raw`Z_1,\dots,Z_M`),
+        "、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
+        math(String.raw`Y_1,\dots,Y_M`),
+        "、および ",
+        ref("def_global_spin_flip_matrix"),
+        " の全スピン反転行列 ",
+        math(String.raw`\varepsilon`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\varepsilon=i^M(Z_1Y_1)(Z_2Y_2)\cdots(Z_MY_M)\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "が成り立つ。右辺は ",
+        math(String.raw`Z_mY_m`),
+        " の積であって、和ではない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の Pauli 行列の成分表示、",
+        ref("mat_mult"),
+        " の行列積、および ",
+        ref("complex_numbers_form_a_field"),
+        " の複素数の四則から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sigma^z\sigma^y
+&=\begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&&(\because\ \text{Pauli 行列の定義。}\blkref{pauli_matrix_products})\\
+&=\begin{pmatrix}0&-i\\-i&0\end{pmatrix}
+&&(\because\ 2\times2\text{ 行列の積の定義。}\blkref{mat_mult})\\
+&=-i\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because\ \mathbb{C}\text{ の四則})\\
+&=-i\,\sigma^x
+&&(\because\ \text{Pauli 行列の定義。}\blkref{pauli_matrix_products})
+\end{aligned}`),
+      paragraph([
+        "を得る。次に任意の ",
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " を固定する。まず ",
+        math(String.raw`r\in\{0,1,\dots,M\}`),
+        " に対して ",
+        math(String.raw`P_r:=\sigma_1^x\cdots\sigma_r^x\in\mathrm{Mat}(2^M,\mathbb C)`),
+        " と置き、",
+        math(String.raw`P_0:=I_{\mathrm{Mat}(2^M,\mathbb C)}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " と ",
+        ref("kronecker_product_rule"),
+        " を用いる有限帰納法で、次の表示を示す。後で一因子の複素スカラーを外へ出すときは ",
+        ref("kronecker_multilinear"),
+        " の各因子についての線型性を用いる。",
+      ]),
+      displayMath(String.raw`P_r=
+\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{r}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r}
+\qquad(0\leq r\leq M)`),
+      paragraph(["を示す。初項では"]),
+      displayMath(String.raw`\begin{aligned}
+P_0
+&=I_{\mathrm{Mat}(2^M,\mathbb C)}
+&&(\because\ P_0\text{ の定義})\\
+&=\overbrace{I\boxtimes\cdots\boxtimes I}^{M}
+&&(\because\ \text{単位因子のクロネッカー積。}\blkref{kronecker_product_rule})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0\leq r<M`),
+        " で帰納法の仮定が成り立つとする。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_{r+1}
+&=P_r\sigma_{r+1}^x
+&&(\because\ P_{r+1}\text{ の定義})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{r}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r}\right)\sigma_{r+1}^x
+&&(\because\ \text{帰納法の仮定})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{r}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r}\right)
+\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{r}
+\boxtimes\sigma^x\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r-1}\right)
+&&(\because\ \text{サイト行列の定義。}\blkref{def_site_pauli_matrices})\\
+&=\overbrace{(\sigma^xI)\boxtimes\cdots\boxtimes(\sigma^xI)}^{r}
+\boxtimes(I\sigma^x)\boxtimes
+\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-r-1}
+&&(\because\ \text{クロネッカー積の積の規則。}\blkref{kronecker_product_rule})\\
+&=\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{r+1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r-1}
+&&(\because\ AI=IA=A)
+\end{aligned}`),
+      paragraph([
+        "となる。よって有限帰納法により上の ",
+        math(String.raw`P_r`),
+        " の表示がすべての ",
+        math(String.raw`0\leq r\leq M`),
+        " で成り立つ。特に ",
+        ref("def_jordan_wigner_Z_matrices"),
+        " と ",
+        ref("def_jordan_wigner_Y_matrices"),
+        " から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_m
+&=P_{m-1}\sigma_m^z
+&&(\because\ Z_m\text{ の定義。}\blkref{def_jordan_wigner_Z_matrices})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m+1}\right)\sigma_m^z
+&&(\because\ P_{m-1}\text{ の表示})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m+1}\right)
+\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+&&(\because\ \text{サイト行列の定義。}\blkref{def_site_pauli_matrices})\\
+&=\overbrace{(\sigma^xI)\boxtimes\cdots\boxtimes(\sigma^xI)}^{m-1}
+\boxtimes(I\sigma^z)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m}
+&&(\because\ \text{クロネッカー積の積の規則。}\blkref{kronecker_product_rule})\\
+&=\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ AI=IA=A)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+Y_m
+&=P_{m-1}\sigma_m^y
+&&(\because\ Y_m\text{ の定義。}\blkref{def_jordan_wigner_Y_matrices})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m+1}\right)\sigma_m^y
+&&(\because\ P_{m-1}\text{ の表示})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m+1}\right)
+\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+&&(\because\ \text{サイト行列の定義。}\blkref{def_site_pauli_matrices})\\
+&=\overbrace{(\sigma^xI)\boxtimes\cdots\boxtimes(\sigma^xI)}^{m-1}
+\boxtimes(I\sigma^y)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m}
+&&(\because\ \text{クロネッカー積の積の規則。}\blkref{kronecker_product_rule})\\
+&=\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ AI=IA=A)
+\end{aligned}`),
+      paragraph(["を得る。したがって"]),
+      displayMath(String.raw`\begin{aligned}
+Z_mY_m
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+&&(\because\ \text{直前の }Z_m,Y_m\text{ のクロネッカー積表示})\\
+&=\overbrace{(\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)}^{m-1}
+\boxtimes(\sigma^z\sigma^y)\boxtimes
+\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m}
+&&(\because\ \text{クロネッカー積の積の規則。}\blkref{kronecker_product_rule})\\
+&=\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes(\sigma^z\sigma^y)\boxtimes
+\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m}
+&&(\because\ \sigma^x\sigma^x=I.\ \blkref{pauli_matrix_products})\\
+&=\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes(\sigma^z\sigma^y)\boxtimes
+\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ II=I)\\
+&=\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes(-i\,\sigma^x)\boxtimes
+\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ \text{上の }\sigma^z\sigma^y=-i\sigma^x)\\
+&=-i\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes\sigma^x\boxtimes
+\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+&&(\because\ \text{クロネッカー積の線型性。}\blkref{kronecker_multilinear})\\
+&=-i\,\sigma_m^x
+&&(\because\ \text{サイト行列の定義。}\blkref{def_site_pauli_matrices})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m=1`),
+        " では先頭の ",
+        math(String.raw`m-1`),
+        " 因子を空積、",
+        math(String.raw`m=M`),
+        " では末尾の ",
+        math(String.raw`M-m`),
+        " 因子を空積と読む。ここで ",
+        math(String.raw`Q_0:=I_{\mathrm{Mat}(2^M,\mathbb C)}`),
+        "、",
+        math(String.raw`Q_r:=(Z_1Y_1)\cdots(Z_rY_r)\in\mathrm{Mat}(2^M,\mathbb C)`),
+        " と置く。",
+        math(String.raw`Q_r=(-i)^rP_r`),
+        " を ",
+        math(String.raw`r=0,\dots,M`),
+        " について有限帰納法で示す。初項は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Q_0
+&=I_{\mathrm{Mat}(2^M,\mathbb C)}
+&&(\because\ Q_0\text{ の定義})\\
+&=(-i)^0I_{\mathrm{Mat}(2^M,\mathbb C)}
+&&(\because\ (-i)^0=1)\\
+&=(-i)^0P_0
+&&(\because\ P_0\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0\leq r<M`),
+        " で帰納法の仮定が成り立つとすると、因子を並べ替えずに",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Q_{r+1}
+&=Q_r(Z_{r+1}Y_{r+1})
+&&(\because\ Q_{r+1}\text{ の定義})\\
+&=(-i)^rP_r(Z_{r+1}Y_{r+1})
+&&(\because\ \text{帰納法の仮定})\\
+&=(-i)^rP_r(-i\,\sigma_{r+1}^x)
+&&(\because\ Z_{r+1}Y_{r+1}=-i\sigma_{r+1}^x)\\
+&=(-i)^r\bigl(P_r(-i\,\sigma_{r+1}^x)\bigr)
+&&(\because\ \text{左側のスカラー倍と行列積の両立})\\
+&=(-i)^r\bigl((-i)(P_r\sigma_{r+1}^x)\bigr)
+&&(\because\ \text{右側のスカラー倍と行列積の両立})\\
+&=\bigl((-i)^r(-i)\bigr)(P_r\sigma_{r+1}^x)
+&&(\because\ \text{スカラー倍の結合律})\\
+&=(-i)^{r+1}P_r\sigma_{r+1}^x
+&&(\because\ \text{冪の再帰})\\
+&=(-i)^{r+1}P_{r+1}
+&&(\because\ P_{r+1}\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "となる。したがって有限帰納法の終端 ",
+        math(String.raw`r=M`),
+        " で ",
+        math(String.raw`Q_M=(-i)^MP_M`),
+        " を得る。ゆえに",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon
+&=\sigma_1^x\sigma_2^x\cdots\sigma_M^x
+&&(\because\ \text{全スピン反転行列の定義。}\blkref{def_global_spin_flip_matrix})\\
+&=P_M
+&&(\because\ P_M\text{ の定義})\\
+&=1^MP_M
+&&(\because\ 1^M=1)\\
+&=(i(-i))^MP_M
+&&(\because\ i(-i)=1)\\
+&=i^M(-i)^MP_M
+&&(\because\ \mathbb{C}\text{ の乗法の可換律と冪の法則})\\
+&=i^MQ_M
+&&(\because\ \text{有限帰納法の終端})\\
+&=i^M(Z_1Y_1)(Z_2Y_2)\cdots(Z_MY_M)
+&&(\because\ Q_M\text{ の定義})
+\end{aligned}`),
+      paragraph(["ゆえに主張が示された。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、全スピン反転行列の Jordan--Wigner 表示だけを独立した主張として分離した。各サイトの積 Z_mY_m=-i sigma_m^x と昇順の有限積を明示し、右辺が和でないことを保持した。Lean の zyPrefixProduct_eq_neg_i_pow_smul_xString と epsilon_eq_i_pow_smul_zyPrefixProduct が本文の向きの第二の有限帰納法と終端に対応し、NecSuf.prefix_eq_pow_smul_of_local_smul が同じ手順の必要十分版を担う。SageMath は同じ各行を global_spin_flip_jordan_wigner_representation で検算する。",
       ],
     },
   },
@@ -279,18 +549,8 @@ export default defineBlocks([
         " で定めた二次の Pauli 行列と単位行列、",
         ref("def_site_pauli_matrices"),
         " で定めたサイトごとの Pauli 行列族、",
-        ref("def_jordan_wigner_Z_matrices"),
-        " で定めた Jordan--Wigner 行列族 ",
-        math(String.raw`Z_m`),
-        "、",
-        ref("def_jordan_wigner_Y_matrices"),
-        " で定めた Jordan--Wigner 行列族 ",
-        math(String.raw`Y_m`),
-        "、",
-        ref("def_global_spin_flip_matrix"),
-        " で定めた全スピン反転行列 ",
-        math(String.raw`\varepsilon`),
-        "、および ",
+        ref("global_spin_flip_jordan_wigner_representation"),
+        " で示した全スピン反転行列の Jordan--Wigner 表示、および ",
         ref("def_cosh_sinh"),
         " で定めた双曲線余弦・双曲線正弦を用いる。後者の正値性には ",
         ref("cosh_sinh_basic_properties"),
@@ -305,16 +565,6 @@ export default defineBlocks([
         ],
         [
           math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        ],
-        [
-          math(String.raw`\varepsilon = i^M (Z_1 Y_1)(Z_2 Y_2) \cdots (Z_M Y_M) \in \mathrm{Mat}(2^M,\mathbb{C})`),
-          "（右辺は ",
-          math(String.raw`Z_m Y_m`),
-          " の積であって和ではない。",
-          math(String.raw`Z_m Y_m = \sigma_m^z \sigma_m^y = -i\,\sigma_m^x`),
-          " より ",
-          math(String.raw`i^M(-i)^M \sigma_1^x \cdots \sigma_M^x = \sigma_1^x \cdots \sigma_M^x`),
-          " で一致する）",
         ],
         [
           math(String.raw`K_1^* := -\tfrac{1}{2}\log(\tanh K_1) \iff \sinh(2K_1)\sinh(2K_1^*) = 1`),
@@ -355,7 +605,7 @@ export default defineBlocks([
         "第二の転送行列は <def_second_transfer_matrix_pauli> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         "Jordan--Wigner 行列族 Z_m は <def_jordan_wigner_Z_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         "Jordan--Wigner 行列族 Y_m は <def_jordan_wigner_Y_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
-        "全スピン反転行列 epsilon は <def_global_spin_flip_matrix> へ分離した。Jordan--Wigner 行列による表示は本ブロックに残し、旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
+        "全スピン反転行列 epsilon は <def_global_spin_flip_matrix> へ、その Jordan--Wigner 行列による表示は <global_spin_flip_jordan_wigner_representation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新しい表示主張を明示参照している。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +

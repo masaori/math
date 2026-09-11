@@ -36,9 +36,8 @@ Lean では `Z 0 = sigmaZ 0` にあたり、`xString` の値が `1` になるこ
 
 となり積なら正しいが、和の場合は `M = 2` で
 `(√-1)^2 (Z_1 Y_1 + Z_2 Y_2) = √-1 (σ^x_1 + σ^x_2) ≠ σ^x_1 σ^x_2` となって成り立たない。
-本ファイルでは `ε := σ^x_1 ⋯ σ^x_M`（左辺）を定義とし、
-積の形の等式は `epsilon_eq_prod_ZY`（`Ising2D/Part004/Claim014_...` 系の補題）としては
-まだ形式化していない。
+本ファイルでは `ε := σ^x_1 ⋯ σ^x_M`（左辺）を定義とし、積の形の等式を
+`epsilon_eq_i_pow_smul_zyPrefixProduct` で形式化する。
 -/
 import Ising2D.Representation
 
@@ -110,9 +109,21 @@ theorem pauliX_eq : pauliX = (-Complex.I) • (pauliY * pauliZ) := by
 
 /-- `σ^z σ^y = -√-1 σ^x`（`ε` の表式の検証に使う）。 -/
 theorem pauliZ_mul_pauliY : pauliZ * pauliY = (-Complex.I) • pauliX := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliX, pauliY, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
+  calc
+    -- 本文: 二つの Pauli 行列を成分表示へ展開する。
+    pauliZ * pauliY =
+        !![1, 0; 0, -1] * !![0, -Complex.I; Complex.I, 0] := rfl
+    -- 本文: `2×2` 行列積を成分ごとに計算する。
+    _ = !![0, -Complex.I; -Complex.I, 0] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [Matrix.mul_apply, Fin.sum_univ_two]
+    -- 本文: 各成分から共通因子 `-i` を取り出す。
+    _ = (-Complex.I) • !![0, 1; 1, 0] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp
+    -- 本文: 残った行列を `σˣ` の定義へ戻す。
+    _ = (-Complex.I) • pauliX := rfl
 
 end PauliRelations
 
@@ -288,12 +299,58 @@ theorem jw_eq_xString_mul (m : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
     rw [jwFamily_of_gt h, if_neg (by omega : ¬ ((i : ℕ) < (m : ℕ))), if_neg hne, mul_one]
 
 /-- 原文どおりの分解 `Z_m = (σ^x_1 ⋯ σ^x_{m-1}) σ^z_m`。 -/
-theorem Z_eq_xString_mul (m : Fin M) : Z m = xString M (m : ℕ) * sigmaZ m :=
-  jw_eq_xString_mul m pauliZ
+theorem Z_eq_xString_mul (m : Fin M) : Z m = xString M (m : ℕ) * sigmaZ m := by
+  calc
+    -- 本文: `Z_m` の定義を、接頭文字列とサイト行列の積へ書き換える。
+    Z m = siteProd M (jwFamily m pauliZ) := rfl
+    -- 本文: 各因子を、接頭文字列の因子とサイト行列の因子との積へ分ける。
+    _ = siteProd M ((fun i : Fin M => if (i : ℕ) < (m : ℕ) then pauliX else 1) *
+        Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m pauliZ) := by
+      congr 1
+      funext i
+      simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
+      rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
+      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
+        rw [jwFamily_of_lt h, if_pos h, if_neg hne, mul_one]
+      · have he : i = m := Fin.val_injective h
+        subst i
+        rw [jwFamily_self, if_neg (lt_irrefl _), if_pos rfl, one_mul]
+      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
+        rw [jwFamily_of_gt h, if_neg (by omega), if_neg hne, mul_one]
+    -- 本文: クロネッカー積の積の規則を逆向きに適用する。
+    _ = siteProd M (fun i : Fin M => if (i : ℕ) < (m : ℕ) then pauliX else 1) *
+        siteProd M (Function.update 1 m pauliZ) := siteProd_mul M _ _
+    -- 本文: 前半を `P_{m-1}`、後半をサイト行列 `σ_m^z` へ戻す。
+    _ = xString M (m : ℕ) * siteOp m pauliZ := by rw [xString, siteOp_apply]
+    -- 本文: サイト行列を `σ_m^z` の定義へ戻す。
+    _ = xString M (m : ℕ) * sigmaZ m := rfl
 
 /-- 原文どおりの分解 `Y_m = (σ^x_1 ⋯ σ^x_{m-1}) σ^y_m`。 -/
-theorem Y_eq_xString_mul (m : Fin M) : Y m = xString M (m : ℕ) * sigmaY m :=
-  jw_eq_xString_mul m pauliY
+theorem Y_eq_xString_mul (m : Fin M) : Y m = xString M (m : ℕ) * sigmaY m := by
+  calc
+    -- 本文: `Y_m` の定義を、接頭文字列とサイト行列の積へ書き換える。
+    Y m = siteProd M (jwFamily m pauliY) := rfl
+    -- 本文: 各因子を、接頭文字列の因子とサイト行列の因子との積へ分ける。
+    _ = siteProd M ((fun i : Fin M => if (i : ℕ) < (m : ℕ) then pauliX else 1) *
+        Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m pauliY) := by
+      congr 1
+      funext i
+      simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
+      rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
+      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
+        rw [jwFamily_of_lt h, if_pos h, if_neg hne, mul_one]
+      · have he : i = m := Fin.val_injective h
+        subst i
+        rw [jwFamily_self, if_neg (lt_irrefl _), if_pos rfl, one_mul]
+      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
+        rw [jwFamily_of_gt h, if_neg (by omega), if_neg hne, mul_one]
+    -- 本文: クロネッカー積の積の規則を逆向きに適用する。
+    _ = siteProd M (fun i : Fin M => if (i : ℕ) < (m : ℕ) then pauliX else 1) *
+        siteProd M (Function.update 1 m pauliY) := siteProd_mul M _ _
+    -- 本文: 前半を `P_{m-1}`、後半をサイト行列 `σ_m^y` へ戻す。
+    _ = xString M (m : ℕ) * siteOp m pauliY := by rw [xString, siteOp_apply]
+    -- 本文: サイト行列を `σ_m^y` の定義へ戻す。
+    _ = xString M (m : ℕ) * sigmaY m := rfl
 
 /-- 原文の `Z_1 = σ^z_1`（Lean の添字では `Z 0 = σ^z_0`）。
 原文では場合分けで与えているが、`xString` の空積が `I` になるので自動的に従う。 -/
@@ -323,7 +380,56 @@ theorem jw_mul_jw_same (m : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
 
 /-- `Z_m Y_m = -√-1 σ^x_m`。原文の `ε` の表式（下記 `epsilon` の docstring 参照）の要。 -/
 theorem Z_mul_Y_same (m : Fin M) : Z m * Y m = (-Complex.I) • sigmaX m := by
-  rw [Z, Y, jw_mul_jw_same, pauliZ_mul_pauliY, map_smul, sigmaX]
+  calc
+    -- 本文: 直前に得た `Z_m,Y_m` のクロネッカー積表示を積へ代入する。
+    Z m * Y m = siteProd M (jwFamily m pauliZ) * siteProd M (jwFamily m pauliY) := rfl
+    -- 本文: クロネッカー積の積を因子ごとの積へ移す。
+    _ = siteProd M (jwFamily m pauliZ * jwFamily m pauliY) :=
+      (siteProd_mul M (jwFamily m pauliZ) (jwFamily m pauliY)).symm
+    _ = siteProd M (fun i =>
+        if (i : ℕ) < (m : ℕ) then pauliX * pauliX
+        else if i = m then pauliZ * pauliY else 1 * 1) := by
+      congr 1
+      funext i
+      simp only [Pi.mul_apply]
+      rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
+      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
+        rw [jwFamily_of_lt h, jwFamily_of_lt h, if_pos h]
+      · have he : i = m := Fin.val_injective h
+        rw [he, jwFamily_self, jwFamily_self, if_neg (by omega), if_pos rfl]
+      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
+        rw [jwFamily_of_gt h, jwFamily_of_gt h, if_neg (by omega), if_neg hne]
+    -- 本文: 先頭の各因子へ `(σˣ)²=I` を適用する。
+    _ = siteProd M (fun i =>
+        if (i : ℕ) < (m : ℕ) then 1
+        else if i = m then pauliZ * pauliY else 1 * 1) := by
+      congr 1
+      funext i
+      by_cases h : (i : ℕ) < (m : ℕ) <;> simp [h]
+    -- 本文: 末尾の各因子へ `II=I` を適用する。
+    _ = siteProd M (fun i =>
+        if (i : ℕ) < (m : ℕ) then 1
+        else if i = m then pauliZ * pauliY else 1) := by
+      congr 1
+      funext i
+      simp
+    _ = siteOp m (pauliZ * pauliY) := by
+      rw [siteOp_apply]
+      congr 1
+      funext i
+      by_cases he : i = m
+      · subst i
+        simp
+      · have hlt_or_gt : (i : ℕ) < (m : ℕ) ∨ (m : ℕ) < (i : ℕ) := by omega
+        rcases hlt_or_gt with hlt | hgt
+        · simp [hlt, he]
+        · simp [he]
+    -- 本文: 一サイトの積 `σᶻσʸ=-iσˣ` を代入する。
+    _ = siteOp m ((-Complex.I) • pauliX) := by rw [pauliZ_mul_pauliY]
+    -- 本文: 一因子の複素スカラーをクロネッカー積の外へ出す。
+    _ = (-Complex.I) • siteOp m pauliX := by rw [map_smul]
+    -- 本文: サイト行列 `σ_m^x` の定義へ戻す。
+    _ = (-Complex.I) • sigmaX m := rfl
 
 /-- `σ^x_m = √-1 Z_m Y_m`（上の言い換え）。 -/
 theorem sigmaX_eq_smul_Z_mul_Y (m : Fin M) : sigmaX m = Complex.I • (Z m * Y m) := by
@@ -349,10 +455,51 @@ noncomputable def epsilon (M : ℕ) : TensorPow M := sigmaXPrefixProduct M M
 theorem sigmaXPrefixProduct_eq_xString (m : ℕ) (hm : m ≤ M) :
     sigmaXPrefixProduct M m = xString M m := by
   induction m with
-  | zero => simp [sigmaXPrefixProduct]
+  | zero =>
+      calc
+        -- 本文第一帰納法の初項: `P_0` は空積なので単位行列である。
+        sigmaXPrefixProduct M 0 = 1 := rfl
+        -- 本文: 単位行列を全因子が `I` のクロネッカー積へ直す。
+        _ = siteProd M (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) := (siteProd_one M).symm
+        _ = siteProd M (fun i => if (i : ℕ) < 0 then pauliX else 1) := by
+          apply congrArg (siteProd M)
+          funext i
+          simp
+        _ = xString M 0 := rfl
   | succ m ih =>
       have hlt : m < M := Nat.lt_of_succ_le hm
-      rw [sigmaXPrefixProduct, dif_pos hlt, ih (Nat.le_of_lt hlt), ← xString_succ m hlt]
+      calc
+        -- 本文第一帰納法: `P_{m+1}=P_m σ_{m+1}^x`。
+        sigmaXPrefixProduct M (m + 1) =
+            sigmaXPrefixProduct M m * sigmaX ⟨m, hlt⟩ := by
+          rw [sigmaXPrefixProduct, dif_pos hlt]
+        -- 本文: 帰納法の仮定を代入する。
+        _ = xString M m * sigmaX ⟨m, hlt⟩ := by
+          rw [ih (Nat.le_of_lt hlt)]
+        -- 本文: 接頭積とサイト行列をそれぞれクロネッカー積へ展開する。
+        _ = siteProd M (fun i => if (i : ℕ) < m then pauliX else 1) *
+            siteProd M (Function.update 1 (⟨m, hlt⟩ : Fin M) pauliX) := by
+          rw [xString, sigmaX, siteOp_apply]
+        -- 本文: クロネッカー積の積を因子ごとの積へ移す。
+        _ = siteProd M ((fun i : Fin M => if (i : ℕ) < m then pauliX else 1) *
+            (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ)
+              (⟨m, hlt⟩ : Fin M) pauliX)) :=
+          (siteProd_mul M _ _).symm
+        -- 本文: `σˣI=Iσˣ=σˣ` と `II=I` を各因子へ適用する。
+        _ = siteProd M (fun i => if (i : ℕ) < m + 1 then pauliX else 1) := by
+          congr 1
+          funext i
+          simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
+          rcases lt_trichotomy (i : ℕ) m with hi | hi | hi
+          · have hne : i ≠ (⟨m, hlt⟩ : Fin M) :=
+              Fin.ne_of_val_ne (show (i : ℕ) ≠ m by omega)
+            rw [if_pos hi, if_neg hne, mul_one, if_pos (by omega)]
+          · have he : i = (⟨m, hlt⟩ : Fin M) := Fin.val_injective hi
+            rw [if_neg (by omega), if_pos he, one_mul, if_pos (by omega)]
+          · have hne : i ≠ (⟨m, hlt⟩ : Fin M) :=
+              Fin.ne_of_val_ne (show (i : ℕ) ≠ m by omega)
+            rw [if_neg (by omega), if_neg hne, mul_one, if_neg (by omega)]
+        _ = xString M (m + 1) := rfl
 
 /-- 本文の有限帰納法の終端: `ε` は全因子が `σˣ` のクロネッカー積である。 -/
 theorem epsilon_eq_siteProd_pauliX_by_induction :
@@ -383,6 +530,81 @@ theorem epsilon_mul_self : epsilon M * epsilon M = 1 := by
 theorem xString_succ_eq (m : ℕ) (h : m < M) :
     xString M (m + 1) = xString M m * (Complex.I • (Z (⟨m, h⟩ : Fin M) * Y ⟨m, h⟩)) := by
   rw [xString_succ m h, sigmaX_eq_smul_Z_mul_Y]
+
+/-- `Z_0Y_0,\ldots,Z_{m-1}Y_{m-1}` を添字順に左から掛けた接頭積。
+本文の `Q_m` に対応する。 -/
+noncomputable def zyPrefixProduct (M : ℕ) : ℕ → TensorPow M
+  | 0 => 1
+  | m + 1 => zyPrefixProduct M m *
+      if h : m < M then Z (⟨m, h⟩ : Fin M) * Y ⟨m, h⟩ else 1
+
+/-- **`<global_spin_flip_jordan_wigner_representation>` の第二の有限帰納法に対応する具体版**:
+本文と同じ向きの `Q_m=(-√-1)^mP_m` を、局所積
+`Z_mY_m=-√-1 σ^x_m` から空積・帰納段の順に示す。 -/
+theorem zyPrefixProduct_eq_neg_i_pow_smul_xString (m : ℕ) (hm : m ≤ M) :
+    zyPrefixProduct M m = (-Complex.I) ^ m • xString M m := by
+  induction m with
+  | zero =>
+      calc
+        -- 本文第二帰納法の初項: `Q_0` は空積なので単位行列である。
+        zyPrefixProduct M 0 = 1 := rfl
+        -- 本文: `(-i)^0=1`。
+        _ = (-Complex.I) ^ 0 • (1 : TensorPow M) := by simp
+        -- 本文: `P_0` の定義を代入する。
+        _ = (-Complex.I) ^ 0 • xString M 0 := by rw [xString_zero]
+  | succ m ih =>
+      have hlt : m < M := Nat.lt_of_succ_le hm
+      calc
+        -- 本文第二帰納法: `Q_{m+1}=Q_m(Z_{m+1}Y_{m+1})`。
+        zyPrefixProduct M (m + 1) =
+            zyPrefixProduct M m * (Z ⟨m, hlt⟩ * Y ⟨m, hlt⟩) := by
+          rw [zyPrefixProduct, dif_pos hlt]
+        -- 本文: 帰納法の仮定を代入する。
+        _ = ((-Complex.I) ^ m • xString M m) *
+            (Z ⟨m, hlt⟩ * Y ⟨m, hlt⟩) := by
+          rw [ih (Nat.le_of_lt hlt)]
+        -- 本文: 局所積 `Z_{m+1}Y_{m+1}=-iσ_{m+1}^x` を代入する。
+        _ = ((-Complex.I) ^ m • xString M m) *
+            ((-Complex.I) • sigmaX ⟨m, hlt⟩) := by
+          rw [Z_mul_Y_same]
+        -- 本文: 左のスカラー作用を行列積の外へ出す。
+        _ = (-Complex.I) ^ m •
+            (xString M m * ((-Complex.I) • sigmaX ⟨m, hlt⟩)) := by
+          rw [Matrix.smul_mul]
+        -- 本文: 右因子のスカラー作用を内側の積の外へ出す。
+        _ = (-Complex.I) ^ m •
+            ((-Complex.I) • (xString M m * sigmaX ⟨m, hlt⟩)) := by
+          rw [Matrix.mul_smul]
+        -- 本文: 二つのスカラー作用を合成する。
+        _ = (((-Complex.I) ^ m * (-Complex.I)) •
+            (xString M m * sigmaX ⟨m, hlt⟩)) := by
+          rw [smul_smul]
+        -- 本文: `(-i)` の冪の再帰を適用する。
+        _ = (-Complex.I) ^ (m + 1) •
+            (xString M m * sigmaX ⟨m, hlt⟩) := by rw [pow_succ]
+        -- 本文: `P_{m+1}` の定義を代入する。
+        _ = (-Complex.I) ^ (m + 1) • xString M (m + 1) := by
+          rw [xString_succ m hlt]
+
+/-- 全スピン反転行列の Jordan--Wigner 表示（原文の右辺は和でなく積）。 -/
+theorem epsilon_eq_i_pow_smul_zyPrefixProduct :
+    epsilon M = Complex.I ^ M • zyPrefixProduct M M := by
+  calc
+    -- 本文終端: 全スピン反転行列の定義を接頭積 `P_M` へ直す。
+    epsilon M = sigmaXPrefixProduct M M := rfl
+    _ = xString M M := sigmaXPrefixProduct_eq_xString (M := M) M (Nat.le_refl M)
+    -- 本文: `P_M=1^MP_M`。
+    _ = (1 : ℂ) ^ M • xString M M := by simp
+    -- 本文: `i(-i)=1` を底へ代入する。
+    _ = (Complex.I * (-Complex.I)) ^ M • xString M M := by
+      rw [mul_neg, Complex.I_mul_I, neg_neg]
+    -- 本文: 積の冪を二つの冪の積へ分ける。
+    _ = (Complex.I ^ M * (-Complex.I) ^ M) • xString M M := by rw [mul_pow]
+    -- 本文: スカラー作用の合成として `i^M` を外側へ出す。
+    _ = Complex.I ^ M • ((-Complex.I) ^ M • xString M M) := by rw [mul_smul]
+    -- 本文: 第二帰納法の終端 `Q_M=(-i)^MP_M` を代入する。
+    _ = Complex.I ^ M • zyPrefixProduct M M := by
+      rw [zyPrefixProduct_eq_neg_i_pow_smul_xString (M := M) M (Nat.le_refl M)]
 
 end JordanWigner
 

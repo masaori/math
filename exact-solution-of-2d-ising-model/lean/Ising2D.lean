@@ -18,6 +18,8 @@ import Ising2D.Representation
 import Ising2D.NecSuf.TensorPowerBasis
 import Ising2D.Part002.Theorem000_TensorBasisFromNecSuf
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.NecSuf.ScalarPrefixProduct
+import Ising2D.Part004.ClaimGlobalSpinFlipJordanWignerRepresentationFromNecSuf
 import Ising2D.NecSuf.EpsilonSquare
 import Ising2D.Part004.ClaimEpsilonSquareFromNecSuf
 import Ising2D.Part004.ClaimEpsilonActionEigenvalues

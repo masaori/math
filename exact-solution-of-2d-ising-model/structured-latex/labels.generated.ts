@@ -221,6 +221,7 @@ export const ALL_LABELS = [
   "gamma_derivatives_in_kappa",
   "gamma_is_continuous",
   "gamma_kappa_identity",
+  "global_spin_flip_jordan_wigner_representation",
   "hatZ_hatY_M_periodicity",
   "iH_is_real_symmetric",
   "inclusion_rr_to_cc",
