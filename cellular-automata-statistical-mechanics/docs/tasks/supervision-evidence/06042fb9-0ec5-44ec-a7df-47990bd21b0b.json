@@ -1,6 +1,6 @@
 {
   "実行識別子": "06042fb9-0ec5-44ec-a7df-47990bd21b0b",
-  "観測時刻": "2026-09-11T08:59:29+09:00",
+  "観測時刻": "2026-09-11T15:01:51+09:00",
   "起動登録の実測": {
     "コマンド": "launchctl list com.masaori.cellular-automata-auto-loop",
     "終了コード": 0,
@@ -11,7 +11,7 @@
     "コマンド": "launchctl print gui/501/com.masaori.cellular-automata-auto-loop",
     "終了コード": 0,
     "state": "not running",
-    "runs": 94,
+    "runs": 100,
     "last exit code": 0
   },
   "plist": {
@@ -29,40 +29,63 @@
     {
       "path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/launchd.log",
       "存在": true,
-      "更新時刻": "2026-09-11T08:37:04+09:00",
+      "更新時刻": "2026-09-11T14:29:33+09:00",
       "抽出行": [
-        "2026-09-11 08:12:40 === tick 開始（codex / 30 分間隔 / まとめ 08:34 / 強制終了 08:39）",
-        "2026-09-11 08:34:38 === tick 正常終了（未コミット 0 ファイル）",
-        "2026-09-11 08:37:04 論文公開・URL つき Slack 通知の処理を完了した"
+        "2026-09-11 13:15:21 === tick 開始（codex / 30 分間隔 / まとめ 13:37 / 強制終了 13:42）",
+        "2026-09-11 13:44:34 === tick 打ち切り（1620 秒、exit 124、未コミット 1 ファイル）",
+        "2026-09-11 14:12:20 前 tick の未コミット成果を引き継ぐ（2026-09-11 13:44:33 に exit 124 で終了し、1 ファイルが未コミットで残った）",
+        "2026-09-11 14:28:04 === tick 正常終了（未コミット 0 ファイル）",
+        "2026-09-11 14:29:33 論文公開・URL つき Slack 通知の処理を完了した"
       ]
     }
   ],
-  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・非実行中・runs 94・last exit code 0。実ログの08:12:40開始分は08:34:38に正常終了し、未コミット0件を記録した。",
+  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・非実行中・runs 100・last exit code 0。13:15開始分はexit 124で未コミット1件を残したが、14:12開始分がそれを引き継ぎ、14:28:04に未コミット0件で正常終了した。",
   "成果比較": {
     "開始成果": "3692976c8a5af6b784f27a96531f088b0114916d",
     "前回読解終点": "4bf76f28e5e91685575bc852114cf483d66cd43e",
-    "今回読解終点": "4c9aa8161e07af2529eddf8196a1a11551343e9f",
+    "今回読解終点": "1829d2ba65e0a0eb7e101dea5d48399bd126106c",
     "確認した成果": [
       "ad4634550・15bf47dfb: 有限条件付き再標本化核のSageMath・Lean二版と特殊化",
       "a8d8e112d・21331ee41・03b1951bb・721b7a455・44ce2d1eb・9aae00f8e: 整数添字舞台の有限台配位の高々可算性と全配位の非可算性の四層、および住処・層間対応の修正",
       "3ef8b4c68・5edb2944d・c88d0ea6e・029fb175d: 有限巡回シフトの対数密度がΛ内で定義できない必要十分条件を構造化本文・SageMath・Lean具体版・Lean必要十分版へ統合",
       "d1b78320d・047c762ea: Λ_Qへの係数ごとの有理除算と、正規化列が完全一致で安定しない境界を構造化本文・SageMathへ統合",
       "bd5c98eb・ab707de22: Λ_Q上の正規化列の完全一致非安定性をLean具体版・必要十分版へ統合",
-      "9467edadd・25a6b8220・4c9aa8161: 素数二係数1/Lの正有理数内の零への収束を構造化本文・SageMath・Lean具体版へ統合"
+      "9467edadd・25a6b8220・4c9aa8161: 素数二係数1/Lの正有理数内の零への収束を構造化本文・SageMath・Lean具体版へ統合",
+      "a5c459135: 素数二係数1/Lの正有理数内の零への収束をLean必要十分版と具体版からの導出へ統合",
+      "7ddb326f8: 有理収束の証拠を一般段階から可算・実数境界へ移し、roadmapの射程と本文依存を一致",
+      "bf5b69b10・5c45db5a7・e17badb8f・1829d2ba6: 有限台有理素数ベクトルの有限和差量と、一方向シフト正規化列全体の零ベクトルへの収束を構造化本文・SageMath・Lean具体版へ統合"
     ]
   },
   "検査結果": [
     {
-      "時刻": "2026-09-11T09:05:50+09:00",
+      "時刻": "2026-09-11T15:05:23+09:00",
       "コマンド": "SUPERVISION_RUN=06042fb9-0ec5-44ec-a7df-47990bd21b0b SUPERVISION_BEFORE=3692976c8a5af6b784f27a96531f088b0114916d SUPERVISION_REMOTE_DEFAULT=origin/main node scripts/research-supervision/verify.ts --all",
       "終了コード": 0,
       "結果": "六研究の評価記録を受理。内容の意味はLLMによる検証の対象"
     },
     {
-      "時刻": "2026-09-11T09:05:50+09:00",
+      "時刻": "2026-09-11T15:05:23+09:00",
       "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
       "終了コード": 0,
       "結果": "24件成功"
+    },
+    {
+      "時刻": "2026-09-11T15:07:14+09:00",
+      "コマンド": "cd cellular-automata-statistical-mechanics/structured-latex && npm run verify:roadmap",
+      "終了コード": 0,
+      "結果": "段階8件、依存12件、完了条件26件、根拠46件、現在地1件を受理"
+    },
+    {
+      "時刻": "2026-09-11T15:07:14+09:00",
+      "コマンド": "cd cellular-automata-statistical-mechanics/structured-latex && npm run test:roadmap",
+      "終了コード": 0,
+      "結果": "段取り規則と根拠解決子の回帰検査25件成功"
+    },
+    {
+      "時刻": "2026-09-11T15:07:14+09:00",
+      "コマンド": "cd cellular-automata-statistical-mechanics/structured-latex && npm run test:roadmap-output",
+      "終了コード": 0,
+      "結果": "出力上の段取り照合回帰検査2件成功"
     }
   ]
 }
