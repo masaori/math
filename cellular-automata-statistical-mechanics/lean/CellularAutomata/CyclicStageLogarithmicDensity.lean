@@ -11,6 +11,17 @@ claim_positive_integer_reciprocal_converges_rationally
   → positiveIntegerReciprocal_rationallyConverges
 claim_shift_rationalized_logarithmic_density_converges_rationally
   → shiftRationalizedPrimeTwoCoefficient_rationallyConverges
+def_rational_prime_vector_finite_sum_distance
+  → rationalLogVectorFiniteSumDistance
+def_rational_prime_vector_finite_sum_convergence
+  → RationalLogVectorConverges
+claim_rational_prime_vector_finite_sum_distance_nonnegative
+  → rationalLogVectorFiniteSumDistance_nonnegative
+claim_shift_rationalized_logarithmic_density_vector_converges
+  → shiftRationalizedLogarithmicDensity_apply,
+    shiftRationalizedLogarithmicDensity_support,
+    shiftRationalizedLogarithmicDensity_distance_zero,
+    shiftRationalizedLogarithmicDensity_vectorConverges
 
 有限巡回舞台を ZMod L、二元状態を演算なしの State、一方向シフト規則を半径一の
 有限真理値表に固定する。不動点の全数分類、状態数二の素数二係数、舞台サイズによる
@@ -252,6 +263,77 @@ theorem shiftRationalizedPrimeTwoCoefficient_rationallyConverges :
   intro L hL
   rw [shiftRationalizedPrimeTwoCoefficient_eq_reciprocal]
   exact htail L hL
+
+/-! ## 有限台有理素数ベクトル列の有限和差量による収束 -/
+
+/-- 有限台有理素数ベクトルの零元。 -/
+def rationalLogVectorZero : RationalLogVector := 0
+
+/-- 二つの有限台有理素数ベクトルについて、台の合併上の有理絶対差を有限加法した量。 -/
+def rationalLogVectorFiniteSumDistance (a b : RationalLogVector) : ℚ :=
+  (a.support ∪ b.support).sum fun p => |a p - b p|
+
+/-- 正有理数だけを許容誤差として量化する、有限和差量によるベクトル列の収束。 -/
+def RationalLogVectorConverges
+    (d : PositiveStage → RationalLogVector) (a : RationalLogVector) : Prop :=
+  ∀ ε : ℚ, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L : PositiveStage, L₀.val ≤ L.val → rationalLogVectorFiniteSumDistance (d L) a < ε
+
+/-- 有限和差量は非負有理数である。 -/
+theorem rationalLogVectorFiniteSumDistance_nonnegative (a b : RationalLogVector) :
+    0 ≤ rationalLogVectorFiniteSumDistance a b := by
+  apply Finset.sum_nonneg
+  intro p hp
+  exact abs_nonneg (a p - b p)
+
+/-- シフト正規化ベクトルの各素数係数は、素数二だけで非零になる。 -/
+theorem shiftRationalizedLogarithmicDensity_apply (L : PositiveStage) (p : Prime) :
+    shiftRationalizedLogarithmicDensity L p =
+      if p = (⟨2, by decide⟩ : Prime) then 1 / (L.val : ℚ) else 0 := by
+  rw [shiftRationalizedLogarithmicDensity, divideRationalVector_apply,
+    rationalEmbedding_apply, shift_logarithmic_count, logarithm_nat_apply]
+  by_cases hp : p = (⟨2, by decide⟩ : Prime)
+  · subst p
+    rw [Nat.Prime.factorization_self (by decide : Nat.Prime 2)]
+    simp
+  · have hnotdiv : ¬p.val ∣ 2 := by
+      intro hdiv
+      have hle : p.val ≤ 2 := Nat.le_of_dvd (by decide : 0 < 2) hdiv
+      have hge : 2 ≤ p.val := p.property.two_le
+      have heq : p.val = 2 := by omega
+      exact hp (Subtype.ext heq)
+    rw [Nat.factorization_eq_zero_of_not_dvd hnotdiv]
+    simp [hp]
+
+/-- シフト正規化ベクトルの台は素数二だけからなる。 -/
+theorem shiftRationalizedLogarithmicDensity_support (L : PositiveStage) :
+    (shiftRationalizedLogarithmicDensity L).support = {⟨2, by decide⟩} := by
+  ext p
+  rw [Finsupp.mem_support_iff]
+  simp only [Finset.mem_singleton]
+  rw [shiftRationalizedLogarithmicDensity_apply]
+  have hLnonzero : (L.val : ℚ) ≠ 0 := by exact_mod_cast L.property.ne'
+  by_cases hp : p = (⟨2, by decide⟩ : Prime)
+  · simp [hp, hLnonzero]
+  · simp [hp]
+
+/-- シフト正規化ベクトルと零ベクトルの有限和差量は舞台サイズの逆数である。 -/
+theorem shiftRationalizedLogarithmicDensity_distance_zero (L : PositiveStage) :
+    rationalLogVectorFiniteSumDistance
+        (shiftRationalizedLogarithmicDensity L) rationalLogVectorZero =
+      1 / (L.val : ℚ) := by
+  rw [rationalLogVectorFiniteSumDistance, shiftRationalizedLogarithmicDensity_support]
+  simp [rationalLogVectorZero, shiftRationalizedLogarithmicDensity_at_two]
+
+/-- 一方向シフトの正規化列は、有限和差量について零ベクトルへ収束する。 -/
+theorem shiftRationalizedLogarithmicDensity_vectorConverges :
+    RationalLogVectorConverges shiftRationalizedLogarithmicDensity rationalLogVectorZero := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ := positiveIntegerReciprocal_rationallyConverges ε hε
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  rw [shiftRationalizedLogarithmicDensity_distance_zero]
+  simpa using htail L hL
 
 end
 
