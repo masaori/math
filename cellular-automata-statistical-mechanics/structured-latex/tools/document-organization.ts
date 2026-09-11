@@ -43,11 +43,15 @@ export const documentOrganization = [
       },
       {
         id: "rational_prime_vector_convergence",
-        title: "有限台有理素数ベクトル列の収束",
+        title: "有限台有理素数ベクトル列の収束と完備性の境界",
         input: "有限台有理素数ベクトル、有理絶対値、有限和、正の有理数による許容誤差を入力とする。",
-        output: "実数値ノルム・無限和・完備化を使わず、二つの有限台ベクトルの有限和差量と、指定した有限台ベクトルへの列の収束を得る。",
-        main: "主張は、有限台の合併上で取る有理絶対差の有限和が非負有理数となり、それにより有限台有理素数ベクトル列の収束を可算側だけで定義できることである。",
-        mainLabels: ["claim_rational_prime_vector_finite_sum_distance_nonnegative"],
+        output: "実数値ノルム・無限和・完備化を使わずに列の収束と Cauchy 性を定義し、Cauchy だが有限台の極限を持たない具体例から完備性の境界を得る。",
+        main: "主張は、有限和差量を有理数内で定義できる一方、素数係数の幾何級数打ち切り列は Cauchy でありながら有限台有理素数ベクトルの極限を持たないことである。",
+        mainLabels: [
+          "claim_rational_prime_vector_finite_sum_distance_nonnegative",
+          "claim_rational_prime_vector_geometric_truncations_cauchy",
+          "claim_rational_prime_vector_geometric_truncations_no_limit",
+        ],
       },
       {
         id: "neighborhood_assignment_algebra",

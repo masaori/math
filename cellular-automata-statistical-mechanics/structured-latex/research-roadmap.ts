@@ -468,6 +468,11 @@ export const roadmapStages = [
         label: "claim_shift_rationalized_logarithmic_density_converges_rationally",
         why: "完全安定化しない有理係数正規化列でも、素数二係数は正有理数の誤差だけを量化して有理数の零へ収束する。収束概念そのものと、全ての Cauchy 列に極限を与える完備化・実数脱出を分離する。",
       },
+      {
+        kind: "label",
+        label: "claim_rational_prime_vector_geometric_truncations_no_limit",
+        why: "有理有限和差量について Cauchy だが、どの有限台有理素数ベクトルにも収束しない列を構成し、可算な有限台の担い手が完備でないことを具体的に示す。",
+      },
     ],
   },
 ] as const satisfies readonly RoadmapStage[];

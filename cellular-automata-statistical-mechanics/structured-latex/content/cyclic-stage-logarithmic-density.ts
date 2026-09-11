@@ -582,4 +582,223 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
       ]),
     ],
   },
+  {
+    id: "rational_prime_vector_definition_finite_sum_cauchy",
+    kind: "definition",
+    title: { text: "有限和差量による Cauchy 列" },
+    labels: ["def_rational_prime_vector_finite_sum_cauchy"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        math(String.raw`d:\mathbb N_{>0}\to\Lambda_{\mathbb Q}`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`\mathsf{Cauchy}_{\delta_{\mathbb Q}}(d)
+\quad:\Longleftrightarrow\quad
+\forall\varepsilon\in\mathbb Q_{>0},\ \exists L_0\in\mathbb N_{>0},\
+\forall L,M\in\mathbb N_{>0},\
+L\ge L_0\land M\ge L_0\Longrightarrow
+\delta_{\mathbb Q}(d(L),d(M))<\varepsilon`),
+      paragraph([
+        "と定める。許容誤差と有限和差量は有理数に属する。Cauchy 列であることは列の二段階だけを比較し、極限値、無限和、完備化、実数体を定義に使わない。",
+      ]),
+    ],
+  },
+  {
+    id: "rational_prime_vector_definition_increasing_prime_sequence",
+    kind: "definition",
+    title: { text: "素数の増加列" },
+    labels: ["def_increasing_prime_sequence"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_prime_integer_vectors"),
+        " の素数集合を自然数の通常の大小順に並べ、",
+        math(String.raw`k\in\mathbb N_{>0}`),
+        " に対する第 ",
+        math(String.raw`k`),
+        " 番目の素数を ",
+        math(String.raw`p_k\in\mathcal P`),
+        " と書く。すなわち、",
+      ]),
+      displayMath(String.raw`p_k:=\min\left\{p\in\mathcal P:\
+\#\{q\in\mathcal P:q<p\}=k-1\right\}.`),
+      paragraph([
+        "各自然数以下の素数は有限個であり、Euclid の定理により任意の有限個の素数より大きい素数が存在するので、この最小値は全ての ",
+        math(String.raw`k\in\mathbb N_{>0}`),
+        " で定義される。列 ",
+        math(String.raw`k\mapsto p_k`),
+        " は狭義単調で、素数集合を重複なく尽くす。",
+      ]),
+    ],
+  },
+  {
+    id: "rational_prime_vector_definition_geometric_truncation_sequence",
+    kind: "definition",
+    title: { text: "素数係数の幾何級数打ち切り列" },
+    labels: ["def_rational_prime_vector_geometric_truncation_sequence"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_increasing_prime_sequence"),
+        " に対し、各 ",
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " で有限台有理素数ベクトル ",
+        math(String.raw`\mathbf c_L\in\Lambda_{\mathbb Q}`),
+        " を",
+      ]),
+      displayMath(String.raw`\mathbf c_L(p):=
+\begin{cases}
+  2^{-k} & \left(p=p_k\text{ を満たす }k\in[1,L]_{\mathbb{N}}\text{ が存在するとき}\right),\\
+  0 & \left(\text{それ以外}\right)
+\end{cases}
+\qquad(p\in\mathcal P)`),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`2^{-k}:=1/2^k\in\mathbb Q_{>0}`),
+        " である。素数列の単射性により第一の場合の ",
+        math(String.raw`k`),
+        " は一意であり、",
+      ]),
+      displayMath(String.raw`\operatorname{supp}(\mathbf c_L)=
+\{p_k:k\in[1,L]_{\mathbb{N}}\}`),
+      paragraph([
+        "は有限である。従って各 ",
+        math(String.raw`\mathbf c_L`),
+        " は ",
+        math(String.raw`\Lambda_{\mathbb Q}`),
+        " に属する。無限和は定義していない。",
+      ]),
+    ],
+  },
+  {
+    id: "rational_prime_vector_claim_geometric_truncations_cauchy",
+    kind: "claim",
+    title: { text: "素数係数の幾何級数打ち切り列は Cauchy 列である" },
+    labels: ["claim_rational_prime_vector_geometric_truncations_cauchy"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_rational_prime_vector_geometric_truncation_sequence"),
+        " の列について、",
+      ]),
+      displayMath(String.raw`\mathsf{Cauchy}_{\delta_{\mathbb Q}}
+\bigl(L\mapsto\mathbf c_L\bigr).`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L,M\in\mathbb N_{>0}`),
+        " とし、",
+        math(String.raw`m:=\min\{L,M\}`),
+        "、",
+        math(String.raw`n:=\max\{L,M\}`),
+        " と置く。",
+        ref("def_rational_prime_vector_finite_sum_distance"),
+        " と ",
+        ref("def_rational_prime_vector_geometric_truncation_sequence"),
+        " より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta_{\mathbb Q}(\mathbf c_L,\mathbf c_M)
+&=\sum_{k=m+1}^{n}2^{-k}
+  \quad(\because\ \blkref{def_rational_prime_vector_finite_sum_distance},\
+  \ \blkref{def_rational_prime_vector_geometric_truncation_sequence})\\
+&=2^{-m}-2^{-n}
+  \quad(\because\ \text{有限等比級数の和})\\
+&<2^{-m}
+  \quad(\because\ 2^{-n}>0)\\
+&\le\frac{1}{m}
+  \quad(\because\ 2^m\ge m\text{ かつ }m>0).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\varepsilon\in\mathbb Q_{>0}`),
+        " を任意に取る。",
+        ref("claim_positive_integer_reciprocal_converges_rationally"),
+        " により、ある ",
+        math(String.raw`L_0\in\mathbb N_{>0}`),
+        " が存在し、",
+        math(String.raw`m\ge L_0`),
+        " なら ",
+        math(String.raw`1/m<\varepsilon`),
+        " である。従って ",
+        math(String.raw`L,M\ge L_0`),
+        " なら上の有限和差量は ",
+        math(String.raw`\varepsilon`),
+        " 未満であり、",
+        ref("def_rational_prime_vector_finite_sum_cauchy"),
+        " により主張を得る。",
+      ]),
+    ],
+  },
+  {
+    id: "rational_prime_vector_claim_geometric_truncations_no_finite_support_limit",
+    kind: "claim",
+    title: { text: "素数係数の幾何級数打ち切り列は有限台の極限を持たない" },
+    labels: ["claim_rational_prime_vector_geometric_truncations_no_limit"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_rational_prime_vector_geometric_truncation_sequence"),
+        " の列について、",
+      ]),
+      displayMath(String.raw`\neg\exists a\in\Lambda_{\mathbb Q},\quad
+\mathbf c\xrightarrow{\Lambda_{\mathbb Q}}a.`),
+      paragraph([
+        "従って、有限和差量について Cauchy である全ての列へ ",
+        math(String.raw`\Lambda_{\mathbb Q}`),
+        " の元を極限として割り当てることはできない。これは有限台という可算な担い手の内部で完備性が失われる具体的な反例である。完備化した集合や実数値の極限はまだ構成しない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a\in\Lambda_{\mathbb Q}`),
+        " を任意に取る。",
+        math(String.raw`\operatorname{supp}(a)`),
+        " は有限で、",
+        ref("def_increasing_prime_sequence"),
+        " の素数列は重複なく無限に続くので、ある ",
+        math(String.raw`K\in\mathbb N_{>0}`),
+        " が存在して ",
+        math(String.raw`p_K\notin\operatorname{supp}(a)`),
+        " である。従って ",
+        math(String.raw`a(p_K)=0`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`L\ge K`),
+        " とする。",
+        ref("def_rational_prime_vector_geometric_truncation_sequence"),
+        " により ",
+        math(String.raw`\mathbf c_L(p_K)=2^{-K}`),
+        " である。",
+        ref("def_rational_prime_vector_finite_sum_distance"),
+        " の和は非負項だけからなり、素数 ",
+        math(String.raw`p_K`),
+        " の項を含むので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta_{\mathbb Q}(\mathbf c_L,a)
+&\ge\lvert\mathbf c_L(p_K)-a(p_K)\rvert_{\mathbb Q}
+  \quad(\because\ \text{有限和の他の項は非負})\\
+&=\lvert2^{-K}-0\rvert_{\mathbb Q}
+  \quad(\because\ \mathbf c_L(p_K)=2^{-K},\ a(p_K)=0)\\
+&=2^{-K}
+  \quad(\because\ 2^{-K}>0).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\varepsilon:=2^{-K}\in\mathbb Q_{>0}`),
+        " と取ると、どの開始段階以後にも ",
+        math(String.raw`\delta_{\mathbb Q}(\mathbf c_L,a)<\varepsilon`),
+        " は成立しない。",
+        ref("def_rational_prime_vector_finite_sum_convergence"),
+        " により ",
+        math(String.raw`\mathbf c`),
+        " は ",
+        math(String.raw`a`),
+        " へ収束しない。",
+        math(String.raw`a`),
+        " は任意だったので主張を得る。",
+      ]),
+    ],
+  },
 ]);
