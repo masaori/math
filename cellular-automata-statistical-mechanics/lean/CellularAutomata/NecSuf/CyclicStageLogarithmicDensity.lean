@@ -10,7 +10,10 @@
   - 有理係数への埋め込みと正整数除算には、任意の添字型上の有限台ベクトルだけを要る。
   - 正規化列の非一定性には、任意の値域から有理数への一つの観測写像と、その観測値が
     舞台サイズの逆数であることだけを要る。有限台、素数、対数、CA は要らない。
-  - 実対数、極限、実数体、複素数体は使わない。
+  - 正の許容誤差による収束には、値域の線形順序付き加法群だけを要る。正整数の逆数列の
+    収束には、さらに正整数の埋め込み、除算、順序の Archimedes 性だけを要る。
+    シフト正規化列への移送には、一つの観測値が逆数列に一致することだけを要る。
+  - 実対数、位相、距離空間、完備化、実数体、複素数体は使わない。
 -/
 import CellularAutomata.CyclicStageLogarithmicDensity
 
@@ -151,6 +154,63 @@ theorem sequence_not_eventually_constant_of_inverse_observation
   exact sequence_ne_double_of_inverse_observation sequence observation hinverse L₀
     (hfirst.trans hlater.symm)
 
+/-! ### 正の許容誤差による収束に必要な構造 -/
+
+/--
+正の許容誤差だけを量化する列の収束。値域には線形順序付き加法群以外を要しない。
+位相、距離空間、完備化は仮定しない。
+-/
+def ConvergesWithPositiveErrors
+    {Value : Type} [AddCommGroup Value] [LinearOrder Value] [IsOrderedAddMonoid Value]
+    (u : PositiveStage → Value) (q : Value) : Prop :=
+  ∀ ε : Value, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L : PositiveStage, L₀.val ≤ L.val → |u L - q| < ε
+
+/--
+線形順序体が Archimedes 性を持てば、正整数の逆数列は正の許容誤差の意味で零へ収束する。
+完備性は要らない。
+-/
+theorem positiveIntegerReciprocal_convergesWithPositiveErrors
+    {Value : Type} [Field Value] [LinearOrder Value] [IsStrictOrderedRing Value]
+    [Archimedean Value] :
+    ConvergesWithPositiveErrors
+      (fun L : PositiveStage => 1 / (L.val : Value)) 0 := by
+  intro ε hε
+  obtain ⟨n, hn⟩ := exists_nat_gt (1 / ε)
+  let L₀ : PositiveStage := ⟨n + 1, by omega⟩
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  have hnL : n < L.val := by
+    change n + 1 ≤ L.val at hL
+    omega
+  have hnLValue : (n : Value) < (L.val : Value) := by exact_mod_cast hnL
+  have hinverseLt : 1 / ε < (L.val : Value) := hn.trans hnLValue
+  have honeLt : (1 : Value) < (L.val : Value) * ε :=
+    (div_lt_iff₀ hε).mp hinverseLt
+  have hLpositive : (0 : Value) < (L.val : Value) := by exact_mod_cast L.property
+  rw [sub_zero, abs_of_pos (one_div_pos.mpr hLpositive)]
+  apply (div_lt_iff₀ hLpositive).mpr
+  simpa [mul_comm] using honeLt
+
+/--
+任意の値域から取った一つの観測値が正整数の逆数なら、その観測値列は零へ収束する。
+元の値域には観測写像以外の構造を要しない。
+-/
+theorem observedSequence_converges_of_inverse_representation
+    {Source Value : Type} [Field Value] [LinearOrder Value] [IsStrictOrderedRing Value]
+    [Archimedean Value]
+    (sequence : PositiveStage → Source) (observation : Source → Value)
+    (hinverse : ∀ L : PositiveStage, observation (sequence L) = 1 / (L.val : Value)) :
+    ConvergesWithPositiveErrors (fun L => observation (sequence L)) 0 := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ :=
+    (positiveIntegerReciprocal_convergesWithPositiveErrors (Value := Value)) ε hε
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  change |observation (sequence L) - 0| < ε
+  rw [hinverse]
+  exact htail L hL
+
 /-! ### 具体版の導出 -/
 
 section Derivation
@@ -267,6 +327,29 @@ theorem shiftRationalizedLogarithmicDensity_not_eventually_constant_of_necSuf :
     ¬ ∃ L₀ : PositiveStage, ∃ d : RationalLogVector,
       ∀ L : PositiveStage, L₀.val ≤ L.val → shiftRationalizedLogarithmicDensity L = d := by
   exact sequence_not_eventually_constant_of_inverse_observation
+    shiftRationalizedLogarithmicDensity
+    (fun a : RationalLogVector => a ⟨2, by decide⟩)
+    shiftRationalizedLogarithmicDensity_at_two_of_necSuf
+
+/-- 具体版の有理収束定義は、線形順序付き加法群上の一般定義の特殊化である。 -/
+theorem rationallyConverges_iff_convergesWithPositiveErrors
+    (u : PositiveStage → ℚ) (q : ℚ) :
+    RationallyConverges u q ↔ ConvergesWithPositiveErrors u q := by
+  rfl
+
+/-- 具体版の正整数逆数列の収束は、Archimedes 線形順序体上の一般定理から得られる。 -/
+theorem positiveIntegerReciprocal_rationallyConverges_of_necSuf :
+    RationallyConverges (fun L : PositiveStage => 1 / (L.val : ℚ)) 0 := by
+  rw [rationallyConverges_iff_convergesWithPositiveErrors]
+  exact positiveIntegerReciprocal_convergesWithPositiveErrors
+
+/--
+具体版のシフト素数二係数列の収束は、一つの観測値の逆数表示だけを使う一般定理から得られる。
+-/
+theorem shiftRationalizedPrimeTwoCoefficient_rationallyConverges_of_necSuf :
+    RationallyConverges shiftRationalizedPrimeTwoCoefficient 0 := by
+  rw [rationallyConverges_iff_convergesWithPositiveErrors]
+  exact observedSequence_converges_of_inverse_representation
     shiftRationalizedLogarithmicDensity
     (fun a : RationalLogVector => a ⟨2, by decide⟩)
     shiftRationalizedLogarithmicDensity_at_two_of_necSuf
