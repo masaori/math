@@ -558,12 +558,6 @@ Q_{r+1}
       ]),
       list([
         [
-          math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
-          ": ",
-          math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-          " 上の単位行列",
-        ],
-        [
           math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
         ],
         [
@@ -606,6 +600,7 @@ Q_{r+1}
         "Jordan--Wigner 行列族 Z_m は <def_jordan_wigner_Z_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         "Jordan--Wigner 行列族 Y_m は <def_jordan_wigner_Y_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
         "全スピン反転行列 epsilon は <def_global_spin_flip_matrix> へ、その Jordan--Wigner 行列による表示は <global_spin_flip_jordan_wigner_representation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新しい表示主張を明示参照している。",
+        "二次の単位行列 I_{Mat(2,C)} は <pauli_matrix_products> で既に定義されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +
