@@ -42,6 +42,14 @@ export const documentOrganization = [
         mainLabels: ["claim_positive_integer_reciprocal_converges_rationally"],
       },
       {
+        id: "rational_prime_vector_convergence",
+        title: "有限台有理素数ベクトル列の収束",
+        input: "有限台有理素数ベクトル、有理絶対値、有限和、正の有理数による許容誤差を入力とする。",
+        output: "実数値ノルム・無限和・完備化を使わず、二つの有限台ベクトルの有限和差量と、指定した有限台ベクトルへの列の収束を得る。",
+        main: "主張は、有限台の合併上で取る有理絶対差の有限和が非負有理数となり、それにより有限台有理素数ベクトル列の収束を可算側だけで定義できることである。",
+        mainLabels: ["claim_rational_prime_vector_finite_sum_distance_nonnegative"],
+      },
+      {
         id: "neighborhood_assignment_algebra",
         title: "近傍割り当ての合成・順序・束演算",
         input: "有限集合、有限集合上の二項関係、集合値写像を入力とする。",
@@ -205,12 +213,13 @@ export const documentOrganization = [
         id: "cyclic_stage_logarithmic_density_boundary",
         title: "有限巡回段階の対数順序群値と規格化の境界",
         input: "有限巡回舞台の族、正の反復不動点数の対数順序群値列、整数係数と有理係数の有限台素数ベクトルを入力とする。",
-        output: "群内で規格化できる段階を分離し、有理係数へ拡張して全段階を規格化しても完全安定化は自動で得られない一方、一つの素数係数は有理数内で収束しうる境界を得る。",
-        main: "主張は、一方向シフト規則の自由エントロピーが舞台サイズ二以上では対数順序群内で割れず、有理係数へ拡張した正規化列もどの段階以後も一定にならないが、その素数二係数は正有理数の許容誤差による意味で有理数の零へ収束することである。",
+        output: "群内で規格化できる段階を分離し、有理係数へ拡張して全段階を規格化しても完全安定化は自動で得られない一方、シフト正規化列全体は有理有限和差量で零へ収束する境界を得る。",
+        main: "主張は、一方向シフト規則の自由エントロピーが舞台サイズ二以上では対数順序群内で割れず、有理係数へ拡張した正規化列もどの段階以後も一定にならないが、その列全体は正有理数の許容誤差と有限和差量による意味で零ベクトルへ収束することである。",
         mainLabels: [
           "claim_cyclic_stage_shift_logarithmic_density_obstruction",
           "claim_shift_rationalized_logarithmic_density_not_eventually_constant",
           "claim_shift_rationalized_logarithmic_density_converges_rationally",
+          "claim_shift_rationalized_logarithmic_density_vector_converges",
         ],
       },
       {

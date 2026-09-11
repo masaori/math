@@ -420,4 +420,161 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
       ]),
     ],
   },
+  {
+    id: "rational_prime_vector_definition_zero",
+    kind: "definition",
+    title: { text: "有限台有理素数ベクトルの零元" },
+    labels: ["def_rational_prime_vector_zero"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_finite_support_rational_prime_vectors"),
+        " の素数集合 ",
+        math(String.raw`\mathcal P`),
+        " 上で、",
+      ]),
+      displayMath(String.raw`\mathbf 0_{\Lambda_{\mathbb Q}}:\mathcal P\longrightarrow\mathbb Q,
+\qquad \mathbf 0_{\Lambda_{\mathbb Q}}(p):=0\quad(p\in\mathcal P)`),
+      paragraph([
+        "と定める。台は空集合なので有限であり、",
+        math(String.raw`\mathbf 0_{\Lambda_{\mathbb Q}}\in\Lambda_{\mathbb Q}`),
+        " である。",
+      ]),
+    ],
+  },
+  {
+    id: "rational_prime_vector_definition_finite_sum_distance",
+    kind: "definition",
+    title: { text: "有限台有理素数ベクトルの有限和差量" },
+    labels: ["def_rational_prime_vector_finite_sum_distance"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        math(String.raw`a,b\in\Lambda_{\mathbb Q}`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`\delta_{\mathbb Q}(a,b):=
+\sum_{p\in\operatorname{supp}(a)\cup\operatorname{supp}(b)}
+\lvert a(p)-b(p)\rvert_{\mathbb Q}\in\mathbb Q_{\ge0}`),
+      paragraph([
+        "と定める。二つの台の合併は有限であり、各項は ",
+        ref("def_positive_rational_epsilon_convergence"),
+        " の有理絶対値で定まる非負有理数なので、この和は有理数の有限加法だけで定義される。実数値のノルム、無限和、完備化は使わない。",
+      ]),
+    ],
+  },
+  {
+    id: "rational_prime_vector_definition_finite_sum_convergence",
+    kind: "definition",
+    title: { text: "有限和差量による有限台有理素数ベクトル列の収束" },
+    labels: ["def_rational_prime_vector_finite_sum_convergence"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        math(String.raw`d:\mathbb N_{>0}\to\Lambda_{\mathbb Q}`),
+        " と ",
+        math(String.raw`a\in\Lambda_{\mathbb Q}`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`d\xrightarrow{\Lambda_{\mathbb Q}}a
+\quad:\Longleftrightarrow\quad
+\forall\varepsilon\in\mathbb Q_{>0},\ \exists L_0\in\mathbb N_{>0},\
+\forall L\in\mathbb N_{>0},\ L\ge L_0\Longrightarrow
+\delta_{\mathbb Q}(d(L),a)<\varepsilon`),
+      paragraph([
+        "と定める。許容誤差、各段階の距離、比較は全て有理数に属する。この定義は指定した列と指定した有限台ベクトルの間だけを比較し、任意の列に極限が存在することも、",
+        math(String.raw`\Lambda_{\mathbb Q}`),
+        " の完備性も主張しない。",
+      ]),
+    ],
+  },
+  {
+    id: "rational_prime_vector_claim_finite_sum_distance_nonnegative",
+    kind: "claim",
+    title: { text: "有限和差量は非負有理数である" },
+    labels: ["claim_rational_prime_vector_finite_sum_distance_nonnegative"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        "任意の ",
+        math(String.raw`a,b\in\Lambda_{\mathbb Q}`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`\delta_{\mathbb Q}(a,b)\in\mathbb Q_{\ge0}.`),
+    ],
+    proof: [
+      paragraph([
+        ref("def_rational_prime_vector_finite_sum_distance"),
+        " の各加数は有理絶対値なので非負である。有限個の非負有理数の和は非負有理数であるから、主張を得る。",
+      ]),
+    ],
+  },
+  {
+    id: "cyclic_stage_logarithmic_density_claim_rationalized_shift_vector_convergence",
+    kind: "claim",
+    title: { text: "シフト正規化列は有限和差量で零ベクトルへ収束する" },
+    labels: ["claim_shift_rationalized_logarithmic_density_vector_converges"],
+    habitat: "countable",
+    statement: [
+      paragraph([
+        ref("def_shift_rationalized_logarithmic_density_sequence"),
+        " の列について、",
+      ]),
+      displayMath(String.raw`\mathbf D_{\mathrm{sh}}
+\xrightarrow{\Lambda_{\mathbb Q}}\mathbf 0_{\Lambda_{\mathbb Q}}.`),
+      paragraph([
+        "従って、一つの素数係数だけでなく、各段階の有限台有理ベクトル全体が、有理数の有限和だけで定めた距離について収束する。実数体への埋め込み、無限和、完備化、実数値の極限量は使わない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " を任意に取る。",
+        ref("claim_cyclic_stage_shift_logarithmic_density_obstruction"),
+        "、",
+        ref("def_shift_rationalized_logarithmic_density_sequence"),
+        "、",
+        ref("def_prime_logarithm"),
+        "、",
+        ref("def_positive_rational_prime_valuation"),
+        " により、",
+      ]),
+      displayMath(String.raw`\mathbf D_{\mathrm{sh}}(L)(p)=
+\begin{cases}
+  1/\iota_{\mathbb Q}(\iota(L)) & (p=2),\\
+  0 & (p\ne2)
+\end{cases}
+\quad(p\in\mathcal P)
+\quad(\because\ \blkref{claim_cyclic_stage_shift_logarithmic_density_obstruction},\
+\ \blkref{def_shift_rationalized_logarithmic_density_sequence},\
+\ \blkref{def_prime_logarithm},\ \blkref{def_positive_rational_prime_valuation})`),
+      paragraph([
+        "である。従って ",
+        math(String.raw`\operatorname{supp}(\mathbf D_{\mathrm{sh}}(L))=\{2\}`),
+        " であり、",
+        ref("def_rational_prime_vector_zero"),
+        " と ",
+        ref("def_rational_prime_vector_finite_sum_distance"),
+        " から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta_{\mathbb Q}
+\left(\mathbf D_{\mathrm{sh}}(L),\mathbf 0_{\Lambda_{\mathbb Q}}\right)
+&=\left\lvert
+  \frac{1}{\iota_{\mathbb Q}(\iota(L))}-0
+\right\rvert_{\mathbb Q}
+  \quad(\because\ \operatorname{supp}(\mathbf D_{\mathrm{sh}}(L))=\{2\})\\
+&=\frac{1}{\iota_{\mathbb Q}(\iota(L))}
+  \quad(\because\ L>0).
+\end{aligned}`),
+      paragraph([
+        ref("claim_positive_integer_reciprocal_converges_rationally"),
+        "、",
+        ref("def_positive_rational_epsilon_convergence"),
+        "、",
+        ref("def_rational_prime_vector_finite_sum_convergence"),
+        " により主張を得る。",
+      ]),
+    ],
+  },
 ]);
