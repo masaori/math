@@ -22,6 +22,12 @@ claim_shift_rationalized_logarithmic_density_vector_converges
     shiftRationalizedLogarithmicDensity_support,
     shiftRationalizedLogarithmicDensity_distance_zero,
     shiftRationalizedLogarithmicDensity_vectorConverges
+def_rational_prime_vector_finite_sum_cauchy → RationalLogVectorCauchy
+def_increasing_prime_sequence → increasingPrimeIndex, increasingPrimeIndex_injective
+def_rational_prime_vector_geometric_truncation_sequence
+  → geometricPrimeTruncation, geometricPrimeTruncation_apply_index
+claim_rational_prime_vector_geometric_truncations_no_limit
+  → geometricPrimeTruncation_no_finiteSupport_limit
 
 有限巡回舞台を ZMod L、二元状態を演算なしの State、一方向シフト規則を半径一の
 有限真理値表に固定する。不動点の全数分類、状態数二の素数二係数、舞台サイズによる
@@ -31,6 +37,7 @@ claim_shift_rationalized_logarithmic_density_vector_converges
 -/
 import CellularAutomata.CyclicStageLocalAgreement
 import Mathlib.Algebra.Order.Archimedean.Basic
+import Mathlib.Data.Nat.Prime.Nth
 
 namespace CellularAutomata.CyclicStageLogarithmicDensity
 
@@ -334,6 +341,110 @@ theorem shiftRationalizedLogarithmicDensity_vectorConverges :
   intro L hL
   rw [shiftRationalizedLogarithmicDensity_distance_zero]
   simpa using htail L hL
+
+/-! ## 有限台有理素数ベクトルの完備性の境界 -/
+
+/-- 正有理数だけを許容誤差として量化する、有限和差量による Cauchy 性。 -/
+def RationalLogVectorCauchy (d : PositiveStage → RationalLogVector) : Prop :=
+  ∀ ε : ℚ, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L M : PositiveStage, L₀.val ≤ L.val → L₀.val ≤ M.val →
+      rationalLogVectorFiniteSumDistance (d L) (d M) < ε
+
+/-- 自然数で零始まりに添字付けした素数の増加列。 -/
+def increasingPrimeIndex (k : ℕ) : Prime :=
+  ⟨Nat.nth Nat.Prime k, Nat.nth_mem_of_infinite Nat.infinite_setOf_prime k⟩
+
+theorem increasingPrimeIndex_injective : Function.Injective increasingPrimeIndex := by
+  intro k l h
+  apply (Nat.nth_injective Nat.infinite_setOf_prime)
+  exact congrArg Subtype.val h
+
+/-- 最初の `L` 個の素数へ係数 `2^-(k+1)` を置く有限打ち切りベクトル。 -/
+noncomputable def geometricPrimeTruncation (L : PositiveStage) : RationalLogVector :=
+  (Finset.range L.val).sum fun k =>
+    Finsupp.single (increasingPrimeIndex k) (1 / (2 : ℚ) ^ (k + 1))
+
+theorem geometricPrimeTruncation_apply_index (L : PositiveStage) (k : ℕ) :
+    geometricPrimeTruncation L (increasingPrimeIndex k) =
+      if k < L.val then 1 / (2 : ℚ) ^ (k + 1) else 0 := by
+  classical
+  simp [geometricPrimeTruncation, Finsupp.single_apply,
+    increasingPrimeIndex_injective.eq_iff]
+
+theorem geometricPrimeTruncation_support_subset (L : PositiveStage) :
+    (geometricPrimeTruncation L).support ⊆
+      (Finset.range L.val).image increasingPrimeIndex := by
+  classical
+  intro p hp
+  have hpRange : p.val ∈ Set.range (Nat.nth Nat.Prime) := by
+    rw [Nat.range_nth_of_infinite Nat.infinite_setOf_prime]
+    exact p.property
+  obtain ⟨k, hk⟩ := hpRange
+  have hkPrime : increasingPrimeIndex k = p := by
+    apply Subtype.ext
+    exact hk
+  have hnonzero := Finsupp.mem_support_iff.mp hp
+  rw [← hkPrime, geometricPrimeTruncation_apply_index] at hnonzero
+  have hkL : k < L.val := by
+    by_contra hnot
+    simp [hnot] at hnonzero
+  exact Finset.mem_image.mpr ⟨k, Finset.mem_range.mpr hkL, hkPrime⟩
+
+/-- 有限和差量は差ベクトルの台上の絶対値和に一致する。 -/
+theorem rationalLogVectorFiniteSumDistance_eq_support_sum (a b : RationalLogVector) :
+    rationalLogVectorFiniteSumDistance a b =
+      (a - b).support.sum fun p => |(a - b) p| := by
+  classical
+  rw [rationalLogVectorFiniteSumDistance]
+  symm
+  apply Finset.sum_subset Finsupp.support_sub
+  intro p hpUnion hpNotSupport
+  rw [Finsupp.notMem_support_iff.mp hpNotSupport]
+  simp
+
+/-- 任意の一係数の絶対差は有限和差量以下である。 -/
+theorem coefficient_abs_le_finiteSumDistance (a b : RationalLogVector) (p : Prime) :
+    |a p - b p| ≤ rationalLogVectorFiniteSumDistance a b := by
+  classical
+  by_cases hp : p ∈ (a - b).support
+  · rw [rationalLogVectorFiniteSumDistance_eq_support_sum]
+    exact Finset.single_le_sum (fun q _ => abs_nonneg ((a - b) q)) hp
+  · have hzero : a p - b p = 0 := by
+      simpa using Finsupp.notMem_support_iff.mp hp
+    rw [hzero, abs_zero]
+    exact rationalLogVectorFiniteSumDistance_nonnegative a b
+
+/-- 幾何級数打ち切り列は、どの有限台有理素数ベクトルにも収束しない。 -/
+theorem geometricPrimeTruncation_no_finiteSupport_limit :
+    ¬ ∃ a : RationalLogVector,
+      RationalLogVectorConverges geometricPrimeTruncation a := by
+  classical
+  rintro ⟨a, ha⟩
+  have hcard : a.support.card < ENat.card Prime := by
+    rw [ENat.card_eq_top_of_infinite]
+    exact WithTop.coe_lt_top _
+  obtain ⟨p, hp⟩ := a.support.exists_not_mem_of_card_lt_enatCard hcard
+  have hpRange : p.val ∈ Set.range (Nat.nth Nat.Prime) := by
+    rw [Nat.range_nth_of_infinite Nat.infinite_setOf_prime]
+    exact p.property
+  obtain ⟨k, hk⟩ := hpRange
+  have hkPrime : increasingPrimeIndex k = p := by
+    apply Subtype.ext
+    exact hk
+  let ε : ℚ := 1 / (2 : ℚ) ^ (k + 1)
+  have hε : 0 < ε := by positivity
+  obtain ⟨L₀, htail⟩ := ha ε hε
+  let L : PositiveStage := ⟨max L₀.val (k + 1), by omega⟩
+  have hL₀ : L₀.val ≤ L.val := by simp [L]
+  have hkL : k < L.val := by simp [L]
+  have hlt := htail L hL₀
+  have hcoefficient : geometricPrimeTruncation L p = ε := by
+    rw [← hkPrime, geometricPrimeTruncation_apply_index]
+    simp [hkL, ε]
+  have hap : a p = 0 := Finsupp.notMem_support_iff.mp hp
+  have hle := coefficient_abs_le_finiteSumDistance (geometricPrimeTruncation L) a p
+  rw [hcoefficient, hap, sub_zero, abs_of_pos hε] at hle
+  exact (not_lt_of_ge hle) hlt
 
 end
 
