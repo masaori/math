@@ -587,6 +587,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "definition",
     title: { text: "有限和差量による Cauchy 列" },
     labels: ["def_rational_prime_vector_finite_sum_cauchy"],
+    verification: ["sagemath/check/rational-prime-vector-completeness-boundary"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -609,6 +610,7 @@ L\ge L_0\land M\ge L_0\Longrightarrow
     kind: "definition",
     title: { text: "素数の増加列" },
     labels: ["def_increasing_prime_sequence"],
+    verification: ["sagemath/check/rational-prime-vector-completeness-boundary"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -637,6 +639,7 @@ L\ge L_0\land M\ge L_0\Longrightarrow
     kind: "definition",
     title: { text: "素数係数の幾何級数打ち切り列" },
     labels: ["def_rational_prime_vector_geometric_truncation_sequence"],
+    verification: ["sagemath/check/rational-prime-vector-completeness-boundary"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -676,6 +679,7 @@ L\ge L_0\land M\ge L_0\Longrightarrow
     kind: "claim",
     title: { text: "素数係数の幾何級数打ち切り列は Cauchy 列である" },
     labels: ["claim_rational_prime_vector_geometric_truncations_cauchy"],
+    verification: ["sagemath/check/rational-prime-vector-completeness-boundary"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -735,6 +739,7 @@ L\ge L_0\land M\ge L_0\Longrightarrow
     kind: "claim",
     title: { text: "素数係数の幾何級数打ち切り列は有限台の極限を持たない" },
     labels: ["claim_rational_prime_vector_geometric_truncations_no_limit"],
+    verification: ["sagemath/check/rational-prime-vector-completeness-boundary"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -786,10 +791,20 @@ L\ge L_0\land M\ge L_0\Longrightarrow
   \quad(\because\ 2^{-K}>0).
 \end{aligned}`),
       paragraph([
+        math(String.raw`L_0\in\mathbb N_{>0}`),
+        " を任意に取り、",
+        math(String.raw`L:=\max\{L_0,K\}`),
+        " と置く。このとき ",
+        math(String.raw`L\ge L_0`),
+        " かつ ",
+        math(String.raw`L\ge K`),
+        " である。",
         math(String.raw`\varepsilon:=2^{-K}\in\mathbb Q_{>0}`),
-        " と取ると、どの開始段階以後にも ",
+        " と取ると、上の不等式により ",
+        math(String.raw`\delta_{\mathbb Q}(\mathbf c_L,a)\ge\varepsilon`),
+        " である。従って、どの開始段階を選んでも、その段階以後の全ての ",
         math(String.raw`\delta_{\mathbb Q}(\mathbf c_L,a)<\varepsilon`),
-        " は成立しない。",
+        " が成立することはない。",
         ref("def_rational_prime_vector_finite_sum_convergence"),
         " により ",
         math(String.raw`\mathbf c`),
