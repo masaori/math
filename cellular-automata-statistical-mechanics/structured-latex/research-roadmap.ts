@@ -83,11 +83,6 @@ export const roadmapStages = [
     evidence: [
       {
         kind: "label",
-        label: "claim_shift_rationalized_logarithmic_density_converges_rationally",
-        why: "完全安定化しない有理係数正規化列でも、素数二係数は正有理数の誤差だけを量化して有理数の零へ収束する。収束概念そのものと、全てのCauchy列に極限を与える完備化・実数脱出を分離する。",
-      },
-      {
-        kind: "label",
         label: "claim_flip_test_equivalence",
         why: "本質的依存が一点反転検査と同値であり、有限真理値表から決定できる。",
       },
@@ -467,6 +462,11 @@ export const roadmapStages = [
         kind: "label",
         label: "claim_integer_stage_full_configurations_uncountable",
         why: "同じ整数舞台でも全配位を一度に取ると非可算になることを、実数体を経由しない対角線反証で示す。",
+      },
+      {
+        kind: "label",
+        label: "claim_shift_rationalized_logarithmic_density_converges_rationally",
+        why: "完全安定化しない有理係数正規化列でも、素数二係数は正有理数の誤差だけを量化して有理数の零へ収束する。収束概念そのものと、全ての Cauchy 列に極限を与える完備化・実数脱出を分離する。",
       },
     ],
   },
