@@ -597,8 +597,20 @@ const transferMatrixSymbolsBoundaryCandidates = [
 ] as const;
 const transferMatrixSymbolsDuplicateRemovalCandidates = [
 ] as const;
+const transferMatrixSymbolsRequiredPriorDefinitionCandidates = [
+  {
+    definition: "正の実数上の実対数",
+    status: "独立した先行定義が未整備",
+    requiredFor: "0<tanh K1<1 を log の定義域へ入れ、0<y<1 なら log y<0 となる符号性から K1*>0 を得る",
+  },
+  {
+    definition: "正の実数上の双曲線正接",
+    status: "独立した先行定義が未整備",
+    requiredFor: "K1>0 のとき 0<tanh K1<1 となる値域を示し、実対数へ入力して K1*>0 を得られるようにする",
+  },
+] as const;
 const transferMatrixSymbolsNextTickUnit = [
-  "第一の双対結合定数 K1* の定義を残余複合定義から分離する",
+  "実対数の 0<y<1 における負値性と双曲線正接の x>0 における値域 0<tanh x<1 を含む独立した先行定義が整備済みであることを確認した後、第一の双対結合定数 K1* の定義だけを残余複合定義から分離する",
 ] as const;
 const transferMatrixSymbolsUsageThroughChapterOrder22 = [
   { definitionPart: "第一の双対結合定数 K1*", usedBy: [] },
@@ -15951,7 +15963,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "転送行列・Jordan–Wigner 行列族・全スピン反転行列の定義と表示、および V1 のパウリ行列表示",
   chapter: "2次元イジングモデル",
-  status: "境界候補・対象本文粒度未解決・外部入力粒度未解決",
+  status: "境界候補・対象本文粒度未解決・先行定義未整備・外部入力粒度未解決",
   entryIds: v1PauliRepresentationSectionEntryIds,
   input: [
     "最初の節で成分表示により定めた転送行列 V1",
@@ -15975,12 +15987,13 @@ const isingModelSectionBoundaries = [{
   ],
   boundaryCandidates: transferMatrixSymbolsBoundaryCandidates,
   duplicateRemovalCandidates: transferMatrixSymbolsDuplicateRemovalCandidates,
+  requiredPriorDefinitionCandidates: transferMatrixSymbolsRequiredPriorDefinitionCandidates,
   nextTickUnit: transferMatrixSymbolsNextTickUnit,
   usageThroughChapterOrder22: transferMatrixSymbolsUsageThroughChapterOrder22,
   mainTheorem: "成分定義の V1 と Pauli 行列による指数表示の一致",
   mainTheoremEntryId: "bridge_004_claim_V1_component_equals_pauli",
-  boundaryEvidence: "章内依存順10にサイトごとの Pauli 行列族、順11に第一転送行列 V1 と周期規約、順12に第二転送行列 V2、順13に Jordan–Wigner 行列族 Z_m と周期規約、順14に Jordan–Wigner 行列族 Y_m と周期規約、順15に全スピン反転行列、順16にその Jordan–Wigner 表示を分離した。順17の残余複合定義は新しい表示主張を明示参照し、二次の単位行列は既存の Pauli 行列項、2^M 次の単位行列は既存のクロネッカー積項への参照だけで接続する。順18の σz の基底作用はサイトごとの Pauli 行列族へ直接依存し、順19が残余複合定義と基底作用を用いて V1 の二表示の一致へ閉じる。順20–22は残余複合定義を旧ラベル経由で再利用する。順23の全スピン反転行列から定める二つの行列と順31の V1 の Jordan–Wigner 表示は旧ラベルを保ちつつ、新しい表示主張と全スピン反転行列の定義へ推移的に接続する。生成時には、外部入力とその本文 fingerprint、十項の本文 fingerprint、内部依存辺、章内依存順、現行グラフ上の節末出力に加え、順20–23・順30・順31の直接依存と本文 fingerprint を固定検査する。",
-  readabilityStatus: "サイトごとの Pauli 行列族、第一転送行列 V1 と周期規約、第二転送行列 V2、Jordan–Wigner 行列族 Z_m,Y_m と各周期規約、全スピン反転行列、およびその Jordan–Wigner 表示は、それぞれ独立した項へ分離した。全スピン反転行列の表示は、各サイトの有限複素行列等式と昇順の有限積を一段ずつ示している。σz の基底作用と V1 の二表示の一致も、二次行列の基底作用、クロネッカー積、周期端を分けた対角成分を一段ずつ計算しており、現行の説明粒度検査に合格している。二次と2^M次の単位行列は既存項への参照へ置き換えた。残余の「記号の定義」は、双対結合定数と双曲線関数の略記を一ブロックへ束ねているため未解決である。外部入力にも集合と代数構造の記号、複素数、行列積、行列指数関数、行列と線型写像の対応の未解決が残る。",
+  boundaryEvidence: "章内依存順10にサイトごとの Pauli 行列族、順11に第一転送行列 V1 と周期規約、順12に第二転送行列 V2、順13に Jordan–Wigner 行列族 Z_m と周期規約、順14に Jordan–Wigner 行列族 Y_m と周期規約、順15に全スピン反転行列、順16にその Jordan–Wigner 表示を分離した。順17の残余複合定義は新しい表示主張を明示参照し、二次の単位行列は既存の Pauli 行列項、2^M 次の単位行列は既存のクロネッカー積項への参照だけで接続する。順18の σz の基底作用はサイトごとの Pauli 行列族へ直接依存し、順19が残余複合定義と基底作用を用いて V1 の二表示の一致へ閉じる。順20–22は残余複合定義を旧ラベル経由で再利用する。順23の全スピン反転行列から定める二つの行列と順31の V1 の Jordan–Wigner 表示は旧ラベルを保ちつつ、新しい表示主張と全スピン反転行列の定義へ推移的に接続する。第一の双対結合定数の式は、K1* の定義に加えて、正の実数上の実対数と双曲線正接の独立した先行定義を必要とする。現行本文には後二者の独立定義がなく、K1>0 から 0<tanh K1<1 を得る値域と、0<y<1 なら log y<0 となる符号性も未整備である。本文三項以上の分割が必要なので、今回の本文分割は行わず先行定義候補と次回一単位だけを固定した。生成時には、外部入力とその本文 fingerprint、十項の本文 fingerprint、内部依存辺、章内依存順、現行グラフ上の節末出力に加え、順20–23・順30・順31の直接依存と本文 fingerprint を固定検査する。",
+  readabilityStatus: "サイトごとの Pauli 行列族、第一転送行列 V1 と周期規約、第二転送行列 V2、Jordan–Wigner 行列族 Z_m,Y_m と各周期規約、全スピン反転行列、およびその Jordan–Wigner 表示は、それぞれ独立した項へ分離した。全スピン反転行列の表示は、各サイトの有限複素行列等式と昇順の有限積を一段ずつ示している。σz の基底作用と V1 の二表示の一致も、二次行列の基底作用、クロネッカー積、周期端を分けた対角成分を一段ずつ計算しており、現行の説明粒度検査に合格している。二次と2^M次の単位行列は既存項への参照へ置き換えた。残余の「記号の定義」は、双対結合定数と双曲線関数の略記を一ブロックへ束ねているため未解決である。K1* の分離には、正の実数上の実対数と双曲線正接を本文で先に定め、K1>0 から 0<tanh K1<1 を得て log の定義域へ入ることと、0<y<1 なら log y<0 となることから K1*>0 を示す必要がある。これらは数学的道具立て側の未整備な先行定義と性質であり、今回その分類・節境界は変更していない。外部入力にも集合と代数構造の記号、複素数、行列積、行列指数関数、行列と線型写像の対応の未解決が残る。",
 }, {
   name: "V2 のパウリ行列表示と分配関数への接続",
   chapter: "2次元イジングモデル",
