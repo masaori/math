@@ -1886,7 +1886,7 @@
         "Jordan–Wigner 行列族 Y_m と周期規約",
         "全スピン反転行列",
         "全スピン反転行列の Jordan–Wigner 表示",
-        "2^M 次の単位行列、双対結合定数、双曲線関数の略記",
+        "双対結合定数、双曲線関数の略記",
         "サイトごとの σz とその二つの積がスピン配置基底へ対角に作用する公式",
         "成分で定義した V1 と Pauli 行列の指数関数で表した V1 が同じ行列であること"
       ],
@@ -1898,17 +1898,11 @@
         "双曲線関数の添字つき略記",
         "結合定数と双対結合定数から得る双曲線関数値の正値性"
       ],
-      "duplicateRemovalCandidates": [
-        "2^M 次の単位行列の記法を既存のクロネッカー積項への参照へ置き換える"
-      ],
+      "duplicateRemovalCandidates": [],
       "nextTickUnit": [
-        "2^M 次の単位行列の記法を既存のクロネッカー積項への参照へ置き換える"
+        "第一の双対結合定数 K1* の定義を残余複合定義から分離する"
       ],
       "usageThroughChapterOrder22": [
-        {
-          "definitionPart": "2^M 次の単位行列の重複記法",
-          "usedBy": []
-        },
         {
           "definitionPart": "第一の双対結合定数 K1*",
           "usedBy": []
@@ -1942,8 +1936,8 @@
       ],
       "mainTheorem": "成分定義の V1 と Pauli 行列による指数表示の一致",
       "mainTheoremEntryId": "bridge_004_claim_V1_component_equals_pauli",
-      "boundaryEvidence": "章内依存順10にサイトごとの Pauli 行列族、順11に第一転送行列 V1 と周期規約、順12に第二転送行列 V2、順13に Jordan–Wigner 行列族 Z_m と周期規約、順14に Jordan–Wigner 行列族 Y_m と周期規約、順15に全スピン反転行列、順16にその Jordan–Wigner 表示を分離した。順17の残余複合定義は新しい表示主張を明示参照し、二次の単位行列は既存の Pauli 行列項への参照だけで接続する。順18の σz の基底作用はサイトごとの Pauli 行列族へ直接依存し、順19が残余複合定義と基底作用を用いて V1 の二表示の一致へ閉じる。順20–22は残余複合定義を旧ラベル経由で再利用する。順23の全スピン反転行列から定める二つの行列と順31の V1 の Jordan–Wigner 表示は旧ラベルを保ちつつ、新しい表示主張と全スピン反転行列の定義へ推移的に接続する。生成時には、外部入力とその本文 fingerprint、十項の本文 fingerprint、内部依存辺、章内依存順、現行グラフ上の節末出力に加え、順20–23・順30・順31の直接依存と本文 fingerprint を固定検査する。",
-      "readabilityStatus": "サイトごとの Pauli 行列族、第一転送行列 V1 と周期規約、第二転送行列 V2、Jordan–Wigner 行列族 Z_m,Y_m と各周期規約、全スピン反転行列、およびその Jordan–Wigner 表示は、それぞれ独立した項へ分離した。全スピン反転行列の表示は、各サイトの有限複素行列等式と昇順の有限積を一段ずつ示している。σz の基底作用と V1 の二表示の一致も、二次行列の基底作用、クロネッカー積、周期端を分けた対角成分を一段ずつ計算しており、現行の説明粒度検査に合格している。二次の単位行列は既存の Pauli 行列項への参照へ置き換えた。残余の「記号の定義」は、2^M 次の単位行列、双対結合定数、双曲線関数の略記を一ブロックへ束ねているため未解決である。外部入力にも集合と代数構造の記号、複素数、行列積、行列指数関数、行列と線型写像の対応の未解決が残る。"
+      "boundaryEvidence": "章内依存順10にサイトごとの Pauli 行列族、順11に第一転送行列 V1 と周期規約、順12に第二転送行列 V2、順13に Jordan–Wigner 行列族 Z_m と周期規約、順14に Jordan–Wigner 行列族 Y_m と周期規約、順15に全スピン反転行列、順16にその Jordan–Wigner 表示を分離した。順17の残余複合定義は新しい表示主張を明示参照し、二次の単位行列は既存の Pauli 行列項、2^M 次の単位行列は既存のクロネッカー積項への参照だけで接続する。順18の σz の基底作用はサイトごとの Pauli 行列族へ直接依存し、順19が残余複合定義と基底作用を用いて V1 の二表示の一致へ閉じる。順20–22は残余複合定義を旧ラベル経由で再利用する。順23の全スピン反転行列から定める二つの行列と順31の V1 の Jordan–Wigner 表示は旧ラベルを保ちつつ、新しい表示主張と全スピン反転行列の定義へ推移的に接続する。生成時には、外部入力とその本文 fingerprint、十項の本文 fingerprint、内部依存辺、章内依存順、現行グラフ上の節末出力に加え、順20–23・順30・順31の直接依存と本文 fingerprint を固定検査する。",
+      "readabilityStatus": "サイトごとの Pauli 行列族、第一転送行列 V1 と周期規約、第二転送行列 V2、Jordan–Wigner 行列族 Z_m,Y_m と各周期規約、全スピン反転行列、およびその Jordan–Wigner 表示は、それぞれ独立した項へ分離した。全スピン反転行列の表示は、各サイトの有限複素行列等式と昇順の有限積を一段ずつ示している。σz の基底作用と V1 の二表示の一致も、二次行列の基底作用、クロネッカー積、周期端を分けた対角成分を一段ずつ計算しており、現行の説明粒度検査に合格している。二次と2^M次の単位行列は既存項への参照へ置き換えた。残余の「記号の定義」は、双対結合定数と双曲線関数の略記を一ブロックへ束ねているため未解決である。外部入力にも集合と代数構造の記号、複素数、行列積、行列指数関数、行列と線型写像の対応の未解決が残る。"
     },
     {
       "name": "V2 のパウリ行列表示と分配関数への接続",
@@ -5872,6 +5866,10 @@
         {
           "dependentId": "transfer_matrix_001_definition_symbols",
           "prerequisiteId": "linear_space_general_000_definition_kronecker_product"
+        },
+        {
+          "dependentId": "transfer_matrix_001_definition_symbols",
+          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
         },
         {
           "dependentId": "transfer_matrix_002_claim_Z_Y_linearly_independent",
@@ -11998,7 +11996,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 24,
+        "incomingReferenceCount": 25,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -13716,15 +13714,15 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2035,
-        "inspectedContentSha256": "b1505c4a7d7717c3de94c19d59c89d7174e3576d64fbcd08a763dd59bf19ce1d",
+        "inspectedCharacterCount": 1978,
+        "inspectedContentSha256": "7fe0f05cdf34fdb89847e95cddc4693096e52153f90c08520a667c25f6d239a3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": "二次・多因子の単位行列、双対結合定数、双曲線関数の略記という独立した内容を一ブロックへ束ねている。サイトごとの Pauli 行列族、V1 とその周期規約、V2、Jordan–Wigner 行列族 Z_m,Y_m、全スピン反転行列、およびその Jordan–Wigner 表示は独立した先行項へ分離済みである。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。残余部分の分割後に節境界と依存順を再判定する必要がある。"
+        "manualReview": "双対結合定数と双曲線関数の略記という独立した内容を一ブロックへ束ねている。サイトごとの Pauli 行列族、V1 とその周期規約、V2、Jordan–Wigner 行列族 Z_m,Y_m、全スピン反転行列、およびその Jordan–Wigner 表示は独立した先行項へ分離済みである。二次の単位行列は Pauli 行列項、2^M 次の単位行列はクロネッカー積の積の規則への参照へ置き換えた。Pauli行列、cosh・sinh、その正値性は先行項を明示参照したが、tanh と実対数には独立した先行定義がなく、双対関係の後続証明は本項へ依存するため参照できない。残余部分の分割後に節境界と依存順を再判定する必要がある。"
       },
       "dependsOnLabels": [
         "cosh_sinh_basic_properties",
@@ -13735,6 +13733,7 @@
         "def_site_pauli_matrices",
         "definition_of_cc",
         "global_spin_flip_jordan_wigner_representation",
+        "kronecker_product_rule",
         "pauli_matrix_products"
       ],
       "dependsOnEntryIds": [
@@ -13743,6 +13742,7 @@
         "calc_formulae_006_definition_of_cc",
         "calc_formulae_definition_cosh_sinh",
         "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000b_claim_kronecker_product_rule",
         "transfer_matrix_000_definition_site_pauli_matrices",
         "transfer_matrix_000a_definition_first_transfer_matrix",
         "transfer_matrix_000b_definition_second_transfer_matrix",
