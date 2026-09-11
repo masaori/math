@@ -425,6 +425,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "definition",
     title: { text: "有限台有理素数ベクトルの零元" },
     labels: ["def_rational_prime_vector_zero"],
+    verification: ["sagemath/check/rational-prime-vector-convergence"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -447,6 +448,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "definition",
     title: { text: "有限台有理素数ベクトルの有限和差量" },
     labels: ["def_rational_prime_vector_finite_sum_distance"],
+    verification: ["sagemath/check/rational-prime-vector-convergence"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -468,6 +470,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "definition",
     title: { text: "有限和差量による有限台有理素数ベクトル列の収束" },
     labels: ["def_rational_prime_vector_finite_sum_convergence"],
+    verification: ["sagemath/check/rational-prime-vector-convergence"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -493,6 +496,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "claim",
     title: { text: "有限和差量は非負有理数である" },
     labels: ["claim_rational_prime_vector_finite_sum_distance_nonnegative"],
+    verification: ["sagemath/check/rational-prime-vector-convergence"],
     habitat: "countable",
     statement: [
       paragraph([
@@ -514,6 +518,7 @@ j_{\Lambda}(a)(p)&:=\iota_{\mathbb Q}(a(p))
     kind: "claim",
     title: { text: "シフト正規化列は有限和差量で零ベクトルへ収束する" },
     labels: ["claim_shift_rationalized_logarithmic_density_vector_converges"],
+    verification: ["sagemath/check/rational-prime-vector-convergence"],
     habitat: "countable",
     statement: [
       paragraph([
