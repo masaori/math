@@ -1,6 +1,6 @@
 {
   "実行識別子": "06042fb9-0ec5-44ec-a7df-47990bd21b0b",
-  "観測時刻": "2026-09-11T15:01:51+09:00",
+  "観測時刻": "2026-09-12T09:01:27+09:00",
   "起動登録の実測": {
     "コマンド": "launchctl list com.masaori.ising-3d-cut-auto-loop",
     "終了コード": 0,
@@ -10,10 +10,9 @@
   "launchctl print": {
     "コマンド": "launchctl print gui/501/com.masaori.ising-3d-cut-auto-loop",
     "終了コード": 0,
-    "state": "running",
-    "runs": 201,
-    "last exit code": 0,
-    "pid": 17118
+    "state": "not running",
+    "runs": 6,
+    "last exit code": 0
   },
   "plist": {
     "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-3d-cut-auto-loop.plist",
@@ -33,37 +32,70 @@
     {
       "path": "/Users/masaori/Library/Logs/ising-3d-cut-auto-loop/launchd.log",
       "存在": true,
-      "更新時刻": "2026-09-11T15:00:17+09:00",
+      "更新時刻": "2026-09-12T09:00:06+09:00",
       "抽出行": [
-        "2026-09-11 14:00:15 === tick 開始（codex / 間隔 60 分 / 作業ツリー /Users/masaori/git/masaori/math/.codex/worktrees/tick/ising-3d-cut-auto-loop / まとめ 14:52 / 強制終了 14:57）",
-        "2026-09-11 14:04:32 === tick 正常終了",
-        "2026-09-11 14:04:32     本文・Lean・SageMath が 1 件も増えていない（レビューのみ）。進まなかった扱いにする",
-        "2026-09-11 15:00:17 === tick 開始（codex / 間隔 60 分 / 作業ツリー /Users/masaori/git/masaori/math/.codex/worktrees/tick/ising-3d-cut-auto-loop / まとめ 15:52 / 強制終了 15:57）"
+        "2026-09-12 08:34:56 === tick 正常終了",
+        "2026-09-12 08:34:56     本文・Lean・SageMath が 1 件も増えていない（レビューのみ）。進まなかった扱いにする",
+        "2026-09-12 09:00:06 SKIP: 間隔を 60 分へ伸ばしている（次に走れるのは 09:28 以降）"
+      ]
+    },
+    {
+      "path": "/Users/masaori/Library/Logs/ising-3d-cut-auto-loop/launchd-error.log",
+      "存在": true,
+      "更新時刻": "2026-09-11T20:00:05+09:00",
+      "抽出行": [
+        "RuntimeError: macOSのプロセス実行ファイルを取得できなかった: PID=14092, errno=2"
       ]
     }
   ],
-  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・running・runs 201・pid 17118・last exit code 0。15:00:17開始分は15:01:51の観測時に実行中で終了値未確認であり、過去のlast exit codeを今回起動へ流用しない。直前の14:00開始分は14:04:32正常終了だが、本文・Lean・SageMathの増加なしと実ログに記録されている。",
+  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・非実行中・runs 6・last exit code 0。08:30:10開始分は08:34:56に正常終了したが本文・Lean・SageMathの増加なし。09:00:06の最新呼出しは60分間隔制御によるSKIPであり、研究上の前進ではない。",
   "成果比較": {
     "開始成果": "3692976c8a5af6b784f27a96531f088b0114916d",
     "前回読解終点": "4bf76f28e5e91685575bc852114cf483d66cd43e",
-    "今回読解終点": "1829d2ba65e0a0eb7e101dea5d48399bd126106c",
+    "今回読解終点": "82201de514e266d8435ad8e0b68b471e09043fd3",
     "確認した成果": [
       "前回読解終点以後に当研究の統合済み数学成果なし",
-      "4c9aa8161以後、当研究の統合済み数学成果なし。現在の読解終点までの新規コミットはセルオートマトン研究に限られる"
-    ]
+      "4c9aa8161以後、当研究の統合済み数学成果なし。現在の読解終点までの新規コミットはセルオートマトン研究に限られる",
+      "前回追記の読解終点以後に当研究の統合済み数学成果なし"
+    ],
+    "前回追記の読解終点": "1829d2ba65e0a0eb7e101dea5d48399bd126106c"
   },
   "検査結果": [
     {
-      "時刻": "2026-09-11T15:05:23+09:00",
+      "時刻": "2026-09-12T09:09:47+09:00",
+      "コマンド": "structured-latex/node_modules/.bin/tsc -p scripts/research-supervision/tsconfig.json",
+      "終了コード": 0,
+      "結果": "型検査成功"
+    },
+    {
+      "時刻": "2026-09-12T09:09:47+09:00",
       "コマンド": "SUPERVISION_RUN=06042fb9-0ec5-44ec-a7df-47990bd21b0b SUPERVISION_BEFORE=3692976c8a5af6b784f27a96531f088b0114916d SUPERVISION_REMOTE_DEFAULT=origin/main node scripts/research-supervision/verify.ts --all",
       "終了コード": 0,
       "結果": "六研究の評価記録を受理。内容の意味はLLMによる検証の対象"
     },
     {
-      "時刻": "2026-09-11T15:05:23+09:00",
+      "時刻": "2026-09-12T09:09:47+09:00",
       "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
       "終了コード": 0,
-      "結果": "24件成功"
+      "結果": "監督記録の規則の回帰検査24件成功"
+    },
+    {
+      "時刻": "2026-09-12T09:09:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify-test.ts",
+      "終了コード": 0,
+      "結果": "六研究の対象・欠落・権限分離・今回追記・外部パス拒否の検査成功"
+    },
+    {
+      "時刻": "2026-09-12T09:09:47+09:00",
+      "コマンド": "python3 scripts/test-research-tick-models.py",
+      "終了コード": 0,
+      "結果": "起動モデル契約の検査3件成功"
+    },
+    {
+      "時刻": "2026-09-12T09:09:47+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
+      "終了コード": 0,
+      "結果": "監督契約・専用worktree・フォールバック不在・記録受理・回帰検査が成功"
     }
   ]
 }
