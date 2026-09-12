@@ -1,6 +1,6 @@
 {
   "実行識別子": "06042fb9-0ec5-44ec-a7df-47990bd21b0b",
-  "観測時刻": "2026-09-11T15:01:51+09:00",
+  "観測時刻": "2026-09-12T09:01:27+09:00",
   "起動登録の実測": {
     "コマンド": "launchctl list com.masaori.math-complex-matrix-ising-paper-organization-loop",
     "終了コード": 0,
@@ -10,10 +10,9 @@
   "launchctl print": {
     "コマンド": "launchctl print gui/501/com.masaori.math-complex-matrix-ising-paper-organization-loop",
     "終了コード": 0,
-    "state": "running",
-    "runs": 50,
-    "last exit code": 0,
-    "pid": 46701
+    "state": "not running",
+    "runs": 2,
+    "last exit code": 0
   },
   "plist": {
     "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
@@ -24,29 +23,28 @@
   },
   "実ログ": [
     {
-      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launcher.log",
+      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log",
       "存在": true,
-      "更新時刻": "2026-09-11T14:43:16+09:00",
+      "更新時刻": "2026-09-12T08:58:36+09:00",
       "抽出行": [
-        "2026-09-11 14:43:10 PREPARE: math originの取得を開始",
-        "2026-09-11 14:43:15 INFO: 前回tickの未コミット成果を保持して続行"
+        "TICK_RESULT_SUCCESS:20260912T084316-26256:82201de514e266d8435ad8e0b68b471e09043fd3",
+        "2026-09-12 08:58:36 SUCCESS: 論文構成tick完了"
       ]
     },
     {
-      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick-run-20260911T144319-46701.log",
+      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd-error.log",
       "存在": true,
-      "更新時刻": "2026-09-11T15:00:37+09:00",
+      "更新時刻": "2026-09-11T11:37:30+09:00",
       "抽出行": [
-        "14:43:19開始分は15:01:51の観測時に実行中",
-        "観測時点でTICK_RESULTマーカーなし"
+        "unique success commit count must be 1, got 0"
       ]
     }
   ],
-  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・running・runs 50・pid 46701・last exit code 0。14:43:15開始分は15:01:51の観測時も実行中で成功マーカーがなく、今回起動の終了値は未確認である。専用worktreeの未コミット差分は研究上の前進へ数えていない。",
+  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・非実行中・runs 2・last exit code 0。08:43:16開始分は成果コミット82201de514e266d8435ad8e0b68b471e09043fd3を出し、08:58:36にSUCCESSで終了した。本文を進めず先行定義の不足を記録した終了であり、実行成功と数学的前進を分離する。",
   "成果比較": {
     "開始成果": "3692976c8a5af6b784f27a96531f088b0114916d",
     "前回読解終点": "4bf76f28e5e91685575bc852114cf483d66cd43e",
-    "今回読解終点": "1829d2ba65e0a0eb7e101dea5d48399bd126106c",
+    "今回読解終点": "82201de514e266d8435ad8e0b68b471e09043fd3",
     "確認した成果": [
       "15a26fb92: 転送行列記号の分割境界を固定",
       "47924bc56: サイトごとのPauli行列族を一定義へ分離",
@@ -55,21 +53,61 @@
       "4951eac11: Jordan–Wigner行列族Z_mと周期規約を残余複合定義から分離し、後続依存を同期",
       "40c35c955: Jordan–Wigner行列族Y_mを独立定義へ分離し、Z_mとの直接依存を同期",
       "493190a6e: 全スピン反転行列εを独立定義へ分離し、次対象をJordan–Wigner表示へ限定",
-      "4c9aa8161以後、当研究の統合済み数学成果なし。現在の読解終点までの新規コミットはセルオートマトン研究に限られる"
-    ]
+      "4c9aa8161以後、当研究の統合済み数学成果なし。現在の読解終点までの新規コミットはセルオートマトン研究に限られる",
+      "848b0c600: 全スピン反転行列のJordan–Wigner表示を構造化本文・SageMath・Lean具体版・Lean必要十分版へ統合",
+      "f28a9e304・dc595e748: 二次と2^M次の単位行列の重複定義を既存項への参照へ置換",
+      "9934b2482・82201de51: 第一の双対結合定数に必要な実対数と双曲線正接の独立先行定義が未整備であることを棚卸し・state・MEMORYへ固定し、本文変更を停止"
+    ],
+    "前回追記の読解終点": "1829d2ba65e0a0eb7e101dea5d48399bd126106c"
   },
   "検査結果": [
     {
-      "時刻": "2026-09-11T15:05:23+09:00",
+      "時刻": "2026-09-12T09:09:47+09:00",
+      "コマンド": "structured-latex/node_modules/.bin/tsc -p scripts/research-supervision/tsconfig.json",
+      "終了コード": 0,
+      "結果": "型検査成功"
+    },
+    {
+      "時刻": "2026-09-12T09:09:47+09:00",
       "コマンド": "SUPERVISION_RUN=06042fb9-0ec5-44ec-a7df-47990bd21b0b SUPERVISION_BEFORE=3692976c8a5af6b784f27a96531f088b0114916d SUPERVISION_REMOTE_DEFAULT=origin/main node scripts/research-supervision/verify.ts --all",
       "終了コード": 0,
       "結果": "六研究の評価記録を受理。内容の意味はLLMによる検証の対象"
     },
     {
-      "時刻": "2026-09-11T15:05:23+09:00",
+      "時刻": "2026-09-12T09:09:47+09:00",
       "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
       "終了コード": 0,
-      "結果": "24件成功"
+      "結果": "監督記録の規則の回帰検査24件成功"
+    },
+    {
+      "時刻": "2026-09-12T09:09:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify-test.ts",
+      "終了コード": 0,
+      "結果": "六研究の対象・欠落・権限分離・今回追記・外部パス拒否の検査成功"
+    },
+    {
+      "時刻": "2026-09-12T09:09:47+09:00",
+      "コマンド": "python3 scripts/test-research-tick-models.py",
+      "終了コード": 0,
+      "結果": "起動モデル契約の検査3件成功"
+    },
+    {
+      "時刻": "2026-09-12T09:09:47+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
+      "終了コード": 0,
+      "結果": "監督契約・専用worktree・フォールバック不在・記録受理・回帰検査が成功"
+    },
+    {
+      "時刻": "2026-09-12T09:16:52+09:00",
+      "コマンド": "cd exact-solution-of-2d-ising-model/structured-latex && npm run check:generated",
+      "終了コード": 0,
+      "結果": "lockfile一致を確認してmain checkoutからnode_modulesをclone copyした後、322ラベル・本文26ファイル・note8ファイルの生成同期を受理"
+    },
+    {
+      "時刻": "2026-09-12T09:16:52+09:00",
+      "コマンド": "cd exact-solution-of-2d-ising-model/structured-latex && npm run test:inventory-fingerprint",
+      "終了コード": 0,
+      "結果": "棚卸し外部入力fingerprint回帰検査成功"
     }
   ]
 }
