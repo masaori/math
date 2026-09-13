@@ -1,0 +1,64 @@
+{
+  "実行識別子": "0a88b0e4-b340-4857-a657-5389f7dd095c",
+  "観測時刻": "2026-09-14T03:06:28+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 23,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "更新時刻": "2026-09-05T21:28:53+09:00",
+    "sha256": "2f811ad50d24476e63564a39c657e27f5f42d3207de30629da59bd4c0910e641",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log",
+      "mtime": "2026-09-14T03:02:49+09:00",
+      "lines": [
+        "2026-09-14 02:43:16 START: 論文構成tick",
+        "TICK_RESULT_SUCCESS:20260914T024316-75649:9f7d58df5949546a23c14549fa1ee9e9148cefdf",
+        "2026-09-14 03:00:38 PUBLISH: 論文本体と構成棚卸しの公開物を更新",
+        "2026-09-14 03:02:49 SUCCESS: 論文構成tick完了"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "03:06:28のlaunchctl list/printは終了0で登録あり・非実行中・runs 23・last exit code 0。02:43:16開始分は実行固有成功マーカー9f7d58df5、03:00:38の公開更新、03:02:49の完了を実ログに記録した。正常終了と研究上の前進なしを分離する。",
+  "成果比較": {
+    "開始成果": "027279c0e767b15694300482b90b81cd51277e55",
+    "直前監督の読解終点": "8af55f089dcb84847d2390cbaa227a36cfabe9ef",
+    "今回読解終点": "9f7d58df5949546a23c14549fa1ee9e9148cefdf",
+    "開始成果以後の統合差分": [
+      "9f7d58df5: 複素行列版の実対数・双曲線正接の先行定義不足をstate・MEMORYへ再確認。数学本文・Lean・SageMath変更なし"
+    ],
+    "直前監督以後の統合差分": [
+      "4c43bbcfe・7a46cba43・6b1c53e09: 実対数・双曲線正接の独立先行定義不足をstate・MEMORYへ再確認。数学本文・Lean・SageMath変更なし",
+      "3063dbe1a・027279c0e: 他研究の未完了対象ゼロ記録"
+    ],
+    "未統合成果の保全": "可算二次元版の専用worktreeに160項有限系の未コミットcheckpointを保持。観測中の当研究tickへ操作していない。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-14T03:09:05+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理。内容の意味はLLMによる検証の対象"
+    },
+    {
+      "時刻": "2026-09-14T03:09:05+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則の回帰検査24件成功"
+    }
+  ]
+}
