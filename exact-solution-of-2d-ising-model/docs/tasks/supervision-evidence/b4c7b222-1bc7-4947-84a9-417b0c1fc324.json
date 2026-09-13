@@ -1,0 +1,60 @@
+{
+  "実行識別子": "b4c7b222-1bc7-4947-84a9-417b0c1fc324",
+  "観測時刻": "2026-09-13T15:07:04+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 17,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "更新時刻": "2026-09-05T21:28:53+09:00",
+    "sha256": "2f811ad50d24476e63564a39c657e27f5f42d3207de30629da59bd4c0910e641",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log",
+      "mtime": "2026-09-13T15:03:16+09:00",
+      "lines": [
+        "2026-09-13 14:43:21 START: 論文構成tick",
+        "TICK_RESULT_SUCCESS:20260913T144321-36952:8af55f089dcb84847d2390cbaa227a36cfabe9ef",
+        "2026-09-13 14:59:21 PUBLISH: 論文本体と構成棚卸しの公開物を更新",
+        "2026-09-13 15:03:16 SUCCESS: 論文構成tick完了"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "15:07:04のlaunchctl list/printは終了0で登録あり・非実行中・runs 17・last exit code 0。14:43:21開始分は実ログ上、実行固有成功マーカー、14:59:21の公開更新、15:03:16の完了を記録した。今回の終了値0と実ログが対応し、正常終了と研究上の前進なしを分離する。",
+  "成果比較": {
+    "開始成果": "92996471c3b460162cbaf09e020d8d67234da012",
+    "直前監督の読解終点": "db3541d70c088eb80c99dd04db23d1c9a4bfd365",
+    "今回読解終点": "8af55f089dcb84847d2390cbaa227a36cfabe9ef",
+    "開始成果以後の統合差分": [
+      "8af55f089: 複素行列版の実対数・双曲線正接の先行定義不足をstate・MEMORYへ再確認。数学本文・Lean・SageMath変更なし"
+    ],
+    "未統合成果の保全": "可算二次元版の専用worktreeに160項系の未コミットcheckpointを保持。メインcheckoutの既存未コミット変更も変更していない。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-13T15:08:30+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理。内容の意味はLLMによる検証の対象"
+    },
+    {
+      "時刻": "2026-09-13T15:08:30+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則の回帰検査24件成功"
+    }
+  ]
+}

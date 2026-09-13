@@ -1,0 +1,58 @@
+{
+  "実行識別子": "b4c7b222-1bc7-4947-84a9-417b0c1fc324",
+  "観測時刻": "2026-09-13T15:00:54+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.hyperbolic-ising-auto-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.hyperbolic-ising-auto-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.hyperbolic-ising-auto-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 33,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.hyperbolic-ising-auto-loop.plist",
+    "存在": true,
+    "更新時刻": "2026-09-05T22:04:02+09:00",
+    "sha256": "073b2ba45e068d1997a5a0bbf928620739cfd557176ec088881832b80cd22bf8",
+    "StartCalendarInterval": "毎時20分"
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/launchd.log",
+      "mtime": "2026-09-13T14:23:33+09:00",
+      "lines": [
+        "2026-09-13 14:20:13 === tick 開始",
+        "2026-09-13 14:23:33 === tick 正常終了"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・非実行中・runs 33・last exit code 0。14:20:13開始分は14:23:33に正常終了したが、固定候補終了後の再確認であり研究上の前進ではない。",
+  "成果比較": {
+    "開始成果": "92996471c3b460162cbaf09e020d8d67234da012",
+    "直前監督の読解終点": "db3541d70c088eb80c99dd04db23d1c9a4bfd365",
+    "今回読解終点": "8af55f089dcb84847d2390cbaa227a36cfabe9ef",
+    "開始成果以後の統合差分": [
+      "8af55f089: 複素行列版の実対数・双曲線正接の先行定義不足をstate・MEMORYへ再確認。数学本文・Lean・SageMath変更なし"
+    ],
+    "未統合成果の保全": "可算二次元版の専用worktreeに160項系の未コミットcheckpointを保持。メインcheckoutの既存未コミット変更も変更していない。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-13T15:08:30+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理。内容の意味はLLMによる検証の対象"
+    },
+    {
+      "時刻": "2026-09-13T15:08:30+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則の回帰検査24件成功"
+    }
+  ]
+}
