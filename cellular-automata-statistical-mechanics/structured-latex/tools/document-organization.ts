@@ -90,6 +90,17 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_word_complexity_boundary",
+        title: "有限語個数と位相的エントロピーの境界",
+        input: "二元集合、有限自然数区間上の語、指定長の連続した一を禁じる有限条件を入力とする。",
+        output: "各長さの語個数を自然数として有限決定する一方、同じ有限語個数表を持つ二語族が次の長さで分かれる境界を得る。",
+        main: "主張は、全二元語族と長さ K+1 の連続した一を禁じる語族が長さ K まで同じ個数を持つが、次の長さでは一だけ異なるため、有限語個数表から次の長さの個数は決まらず、位相的エントロピーを論じるには全段階の語個数列と極限の定義が別に要ることである。",
+        mainLabels: [
+          "claim_forbidden_one_run_words_full_below_cutoff",
+          "claim_finite_word_counts_do_not_determine_next_length",
+        ],
+      },
+      {
         id: "cyclic_offset_finite_images",
         title: "整数オフセットの有限剰余像",
         input: "正の周期、非負の半径、有限整数区間と整数の余り写像を入力とする。",

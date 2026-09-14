@@ -40,6 +40,7 @@ import blocks_finite_power_bound_certificate from './content/finite-power-bound-
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
 import blocks_finite_submultiplicative_count_bounds from './content/finite-submultiplicative-count-bounds.ts'
 import blocks_finite_transfer_matrix_comparison from './content/finite-transfer-matrix-comparison.ts'
+import blocks_finite_word_complexity_boundary from './content/finite-word-complexity-boundary.ts'
 import blocks_global_map_iteration from './content/global-map-iteration.ts'
 import blocks_inverse_map_locality from './content/inverse-map-locality.ts'
 import blocks_iterate_monoid_conjugacy_invariance from './content/iterate-monoid-conjugacy-invariance.ts'
@@ -124,6 +125,7 @@ export type AllBlocks = [
   ...typeof blocks_finite_propagation_boundary,
   ...typeof blocks_finite_submultiplicative_count_bounds,
   ...typeof blocks_finite_transfer_matrix_comparison,
+  ...typeof blocks_finite_word_complexity_boundary,
   ...typeof blocks_global_map_iteration,
   ...typeof blocks_inverse_map_locality,
   ...typeof blocks_iterate_monoid_conjugacy_invariance,
