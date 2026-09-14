@@ -30648,7 +30648,7 @@ s\cdot s
                         displayMath(String.raw`\begin{aligned}
 \xi^2+2\xi-1
 &=\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \text{準備の等式}\bigr)\\
+&&\bigl(\because\ \bigl((\xi+1)-s\bigr)\bigl((\xi+1)+s\bigr)=\xi^2+2\xi-1\bigr)\\
 &=\Bigl(\bigl(((-1)+s)+1\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
 &&\bigl(\because\ \text{仮定}\ \xi=-1+s\bigr)\\
 &=\Bigl(\bigl(s+((-1)+1)\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
@@ -30669,7 +30669,7 @@ s\cdot s
                         displayMath(String.raw`\begin{aligned}
 \xi^2+2\xi-1
 &=\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \text{準備の等式}\bigr)\\
+&&\bigl(\because\ \bigl((\xi+1)-s\bigr)\bigl((\xi+1)+s\bigr)=\xi^2+2\xi-1\bigr)\\
 &=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl(((-1)+(-s))+1\bigr)+s\Bigr)
 &&\bigl(\because\ \text{仮定}\ \xi=-1-s\bigr)\\
 &=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl((-s)+((-1)+1)\bigr)+s\Bigr)
@@ -30700,7 +30700,7 @@ s\cdot s
                         displayMath(String.raw`\begin{aligned}
 \bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
 &=\xi^2+2\xi-1
-&&\bigl(\because\ \text{準備の等式}\bigr)\\
+&&\bigl(\because\ \bigl((\xi+1)-s\bigr)\bigl((\xi+1)+s\bigr)=\xi^2+2\xi-1\bigr)\\
 &=0
 &&\bigl(\because\ \text{仮定}\ \xi^2+2\xi-1=0\bigr)
 \end{aligned}`),
