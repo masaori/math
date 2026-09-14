@@ -31059,11 +31059,11 @@ s
 &=1\cdot s
 &&\bigl(\because\ \text{単位元との積}\bigr)\\
 &=\bigl(b^{-1}\cdot b\bigr)\cdot s
-&&\bigl(\because\ \text{準備の等式}\ b^{-1}\cdot b=1\bigr)\\
+&&\bigl(\because\ b^{-1}\cdot b=1\bigr)\\
 &=b^{-1}\cdot\bigl(b\cdot s\bigr)
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=b^{-1}\cdot(-a)
-&&\bigl(\because\ \text{上で得た}\ b\cdot s=-a\bigr)\\
+&&\bigl(\because\ b\cdot s=-a\bigr)\\
 &=r
 &&\bigl(\because\ r\ \text{の定義}\bigr)
 \end{aligned}`),
@@ -31071,7 +31071,7 @@ s
                         displayMath(String.raw`\begin{aligned}
 r\cdot r
 &=s\cdot s
-&&\bigl(\because\ \text{上で得た}\ s=r\bigr)\\
+&&\bigl(\because\ s=r\bigr)\\
 &=2
 &&\bigl(\because\ \text{仮定}\ s\cdot s=2\bigr)
 \end{aligned}`),
@@ -31109,7 +31109,7 @@ a
 &=a+0\cdot s
 &&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)\\
 &=a+b\cdot s
-&&\bigl(\because\ \text{上で得た}\ b=0\bigr)\\
+&&\bigl(\because\ b=0\bigr)\\
 &=0
 &&\bigl(\because\ \text{仮定}\ a+b\cdot s=0\bigr)
 \end{aligned}`),
