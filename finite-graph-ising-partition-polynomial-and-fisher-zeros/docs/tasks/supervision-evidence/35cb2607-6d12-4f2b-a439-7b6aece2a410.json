@@ -1,0 +1,11 @@
+{
+  "実行識別子": "35cb2607-6d12-4f2b-a439-7b6aece2a410",
+  "観測時刻": "2026-09-14T15:02:12+09:00",
+  "起動登録の実測": {"コマンド": "launchctl list com.masaori.finite-graph-ising-auto-loop", "終了コード": 0, "対象label": "com.masaori.finite-graph-ising-auto-loop", "判定": "登録あり"},
+  "launchctl print": {"コマンド": "launchctl print gui/501/com.masaori.finite-graph-ising-auto-loop", "終了コード": 0, "state": "not running", "runs": 0, "last exit code": "never exited"},
+  "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.finite-graph-ising-auto-loop.plist", "存在": true, "更新時刻": "2026-09-05T22:04:02+09:00", "sha256": "4f6c784aa35cb74c4c4deecacf93fa4b9b7de290ea5562c6b17991c505fdf633", "StartCalendarInterval": "毎時27分"},
+  "実ログ": [{"path": "/Users/masaori/Library/Logs/finite-graph-ising-auto-loop/auto-loop.log", "mtime": "2026-09-14T13:34:07+09:00", "lines": ["プログラミングによる検証: 対象一件・完了一件・未達ゼロ。", "2026-09-14 13:34:07 === tick 正常終了"]}],
+  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・非実行中だが、現在のサービス記録はruns 0・never exited。13:34:07の実ログに正常終了があるため直近成否は正常終了。ただし未達ゼロの再確認で研究上の前進ではない。",
+  "成果比較": {"開始成果": "a5eef69324930fd2f67b0852155bef75fd7d1f9a", "直前監督の読解終点": "ed1c128905ca3b063ec2bd0ca2cb707face37ca5", "今回読解終点": "838cc8b89c3b4c0089523c6ef1f96e5df8ce8377", "直前監督以後の統合差分": ["14d224fc・0b66f046: 未達ゼロをstate・MEMORYへ記録。数学本文・Lean・SageMath変更なし"], "未統合成果の保全": "未統合成果なし。監督は停止条件と探索範囲を変更していない。"},
+  "検査結果": [{"時刻": "2026-09-14T15:17:06+09:00", "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh", "終了コード": 0, "結果": "段階8件・依存12件・完了条件26件・根拠47件・現在地1件、手元HTML照合192件を受理"}, {"時刻": "2026-09-14T15:17:06+09:00", "コマンド": "node scripts/research-supervision/verify.ts --all", "終了コード": 0, "結果": "六研究のschemaVersion 2評価記録を受理"}, {"時刻": "2026-09-14T15:17:06+09:00", "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts", "終了コード": 0, "結果": "監督記録の規則回帰24件成功"}]
+}
