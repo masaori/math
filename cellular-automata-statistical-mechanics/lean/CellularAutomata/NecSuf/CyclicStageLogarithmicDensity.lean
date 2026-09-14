@@ -17,6 +17,9 @@
     有限台有理ベクトルだけを要る。差量による収束の定義には、対象型上の差量写像と、
     許容誤差型の零と狭義順序だけを要る。収束の証明には、差量が正整数の逆数に一致する
     ことだけを要り、有限台、素数、巡回舞台、シフト規則は要らない。
+  - 相互に漸近一致しない Cauchy 列の非可算族には、対象型上の差量写像、正の許容誤差、
+    非可算な符号型から Cauchy 列への単射、および相異なる符号の像が漸近一致しないことだけを要る。
+    二元状態、有限台ベクトル、素数、有理数の四則演算、巡回舞台、局所規則は要らない。
   - 実対数、位相、距離空間、完備化、実数体、複素数体は使わない。
 -/
 import CellularAutomata.CyclicStageLogarithmicDensity
@@ -324,6 +327,91 @@ theorem noLimitByPositiveErrors_of_persistentLowerBound
   obtain ⟨L, hL, hbound⟩ := hlowerTarget L₀
   exact (not_lt_of_ge hbound) (htail L hL)
 
+/-! ### 相互に漸近一致しない Cauchy 列族に必要な構造 -/
+
+/--
+対象型上の差量写像を用い、正の許容誤差だけを量化する二列の漸近一致条件。
+対象型には構造を要らず、許容誤差型には零と狭義順序だけを要る。
+-/
+def AsymptoticallyAgreesByPositiveErrors
+    {Source Error : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (left right : PositiveStage → Source) : Prop :=
+  ∀ ε : Error, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L : PositiveStage, L₀.val ≤ L.val →
+      discrepancy (left L) (right L) < ε
+
+/-- 指定した差量について Cauchy である列の型。 -/
+def CauchySequenceByPositiveErrors
+    {Source Error : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error) :=
+  {sequence : PositiveStage → Source //
+    CauchyByPositiveErrors discrepancy sequence}
+
+/-- 符号型から構成した Cauchy 列だけからなる族。 -/
+def EncodedCauchySequenceFamily
+    {Source Error Code : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy) :=
+  {sequence : CauchySequenceByPositiveErrors discrepancy //
+    sequence ∈ Set.range encode}
+
+/-- 各符号を、その符号から構成した Cauchy 列族の元へ送る。 -/
+noncomputable def encodedCauchySequenceFamilyElement
+    {Source Error Code : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy)
+    (code : Code) : EncodedCauchySequenceFamily discrepancy encode :=
+  ⟨encode code, ⟨code, rfl⟩⟩
+
+/-- 符号化が単射なら、符号から Cauchy 列族への写像も単射である。 -/
+theorem encodedCauchySequenceFamilyElement_injective
+    {Source Error Code : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy)
+    (hencode : Function.Injective encode) :
+    Function.Injective
+      (encodedCauchySequenceFamilyElement discrepancy encode) := by
+  intro left right hequal
+  apply hencode
+  exact congrArg
+    (fun sequence : EncodedCauchySequenceFamily discrepancy encode => sequence.val)
+    hequal
+
+/--
+相異なる符号の像が漸近一致しないなら、符号化した族の相異なる二列も漸近一致しない。
+-/
+theorem encodedCauchySequenceFamily_pairwise_not_asymptotically_agree
+    {Source Error Code : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy)
+    (hpair : ∀ {left right : Code}, left ≠ right →
+      ¬ AsymptoticallyAgreesByPositiveErrors discrepancy
+        (encode left).val (encode right).val)
+    (left right : EncodedCauchySequenceFamily discrepancy encode)
+    (hne : left ≠ right) :
+    ¬ AsymptoticallyAgreesByPositiveErrors discrepancy
+      left.val.val right.val.val := by
+  obtain ⟨leftCode, hleft⟩ := left.property
+  obtain ⟨rightCode, hright⟩ := right.property
+  have hcodes : leftCode ≠ rightCode := by
+    intro hequal
+    apply hne
+    apply Subtype.ext
+    exact hleft.symm.trans ((congrArg encode hequal).trans hright)
+  rw [← hleft, ← hright]
+  exact hpair hcodes
+
+/-- 非可算な符号型が単射されるなら、符号化した Cauchy 列族は非可算である。 -/
+theorem encodedCauchySequenceFamily_uncountable
+    {Source Error Code : Type} [Zero Error] [LT Error] [Uncountable Code]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy)
+    (hencode : Function.Injective encode) :
+    Uncountable (EncodedCauchySequenceFamily discrepancy encode) := by
+  exact (encodedCauchySequenceFamilyElement_injective
+    discrepancy encode hencode).uncountable
+
 /-! ### 具体版の導出 -/
 
 section Derivation
@@ -561,6 +649,54 @@ theorem geometricPrimeTruncation_no_finiteSupport_limit_of_necSuf :
   have hle := coefficient_abs_le_finiteSumDistance (geometricPrimeTruncation L) a p
   rw [hcoefficient, hap, sub_zero, abs_of_pos hε] at hle
   exact hle
+
+/-- 具体版の漸近一致条件は、差量写像だけを使う一般定義の特殊化である。 -/
+theorem rationalLogVectorAsymptoticallyAgrees_iff_necessary_sufficient
+    (left right : PositiveStage → RationalLogVector) :
+    RationalLogVectorAsymptoticallyAgrees left right ↔
+      AsymptoticallyAgreesByPositiveErrors
+        rationalLogVectorFiniteSumDistance left right := by
+  rfl
+
+/-- 具体版の Cauchy 列型は、差量写像だけを使う一般の Cauchy 列型と一致する。 -/
+theorem rationalLogVectorCauchySequence_eq_necessary_sufficient :
+    RationalLogVectorCauchySequence =
+      CauchySequenceByPositiveErrors rationalLogVectorFiniteSumDistance := by
+  rfl
+
+/--
+具体版の非可算族は、非可算な符号型から Cauchy 列への単射だけを使う一般定理から得られる。
+-/
+theorem binaryCauchySequenceFamily_uncountable_of_necSuf :
+    Uncountable BinaryCauchySequenceFamily := by
+  have hbinary : Uncountable (ℕ → State) := by
+    letI : Nonempty (ℕ → State) := ⟨fun _ => State.zero⟩
+    rw [uncountable_iff_forall_not_surjective]
+    intro candidate hsurjective
+    let diagonal : ℕ → State := fun n => nu (candidate n n)
+    obtain ⟨n, hn⟩ := hsurjective diagonal
+    have hat := congrFun hn n
+    cases hstate : candidate n n <;> simp_all [diagonal, nu]
+  letI : Uncountable (ℕ → State) := hbinary
+  change Uncountable (EncodedCauchySequenceFamily
+    rationalLogVectorFiniteSumDistance binaryCauchySequence)
+  exact encodedCauchySequenceFamily_uncountable
+    rationalLogVectorFiniteSumDistance binaryCauchySequence
+    binaryCauchySequence_injective
+
+/--
+具体版の族の相互漸近不一致は、符号像の相互漸近不一致だけを使う一般定理から得られる。
+-/
+theorem binaryCauchySequenceFamily_pairwise_not_asymptotically_agree_of_necSuf
+    (left right : BinaryCauchySequenceFamily) (hne : left ≠ right) :
+    ¬ RationalLogVectorAsymptoticallyAgrees left.val.val right.val.val := by
+  rw [rationalLogVectorAsymptoticallyAgrees_iff_necessary_sufficient]
+  apply encodedCauchySequenceFamily_pairwise_not_asymptotically_agree
+    rationalLogVectorFiniteSumDistance binaryCauchySequence
+  · intro leftCode rightCode hcodes
+    rw [← rationalLogVectorAsymptoticallyAgrees_iff_necessary_sufficient]
+    exact binaryGeometricPrimeTruncation_not_asymptotically_agree hcodes
+  · exact hne
 
 end Derivation
 
