@@ -29757,12 +29757,16 @@ B
 &&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{の往復（部分集合の像にも及ぶ）}\bigr).
 \end{aligned}`),
                     paragraph([
-                      "したがって ", math(String.raw`\Delta_L`), " は全単射である。また ",
-                      ref("claim_dual_edge_map_bijective"), " より ", math(String.raw`\delta_L`),
-                      " は単射なので、有限集合 ", math(String.raw`B`), " の像の元の個数は",
+                      "したがって ", math(String.raw`\Delta_L`), " は全単射である。また任意の ",
+                      math(String.raw`B\in\mathfrak{B}_L`), " について",
                     ]),
-                    displayMath(String.raw`|\delta_L(B)|=|B|
-\quad\bigl(\because\ \text{単射写像は有限集合の元の個数を保つ}\bigr)`),
+                    displayMath(String.raw`\begin{aligned}
+|\Delta_L(B)|
+&=|\delta_L(B)|
+&&\bigl(\because\ \Delta_L(B)=\delta_L(B)\ \text{の定義}\bigr)\\
+&=|B|
+&&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{と、単射写像は有限集合の元の個数を保つこと}\bigr).
+\end{aligned}`),
                     paragraph(["である。以上を組み合わせると"]),
                     displayMath(String.raw`\begin{aligned}
 Z_L
@@ -29770,8 +29774,8 @@ Z_L
 &&\bigl(\because\ \blkref{claim_low_temperature_polynomial_identity}\bigr)\\
 &=2\sum_{B\in\mathfrak{B}_L}x^{\,|B|}
 &&\bigl(\because\ \blkref{def_broken_edge_set_polynomial}\bigr)\\
-&=2\sum_{B\in\mathfrak{B}_L}x^{\,|\delta_L(B)|}
-&&\bigl(\because\ |\delta_L(B)|=|B|\bigr)\\
+&=2\sum_{B\in\mathfrak{B}_L}x^{\,|\Delta_L(B)|}
+&&\bigl(\because\ |\Delta_L(B)|=|B|\bigr)\\
 &=2\sum_{A\in\mathcal{E}^{0,0}_L}x^{\,|A|}
 &&\bigl(\because\ \text{全単射 }\Delta_L\text{ による有限和の添字の取り替え}\bigr)\\
 &=2G^{0,0}_L
