@@ -1,0 +1,57 @@
+{
+  "実行識別子": "e73ddff5-bbd6-471e-ac42-54c751cae720",
+  "観測時刻": "2026-09-15T04:40:35+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.hyperbolic-ising-auto-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.hyperbolic-ising-auto-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.hyperbolic-ising-auto-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 14,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.hyperbolic-ising-auto-loop.plist",
+    "存在": true,
+    "更新時刻": "2026-09-05T22:04:02+09:00",
+    "sha256": "073b2ba45e068d1997a5a0bbf928620739cfd557176ec088881832b80cd22bf8",
+    "StartCalendarInterval": "毎時20分"
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/auto-loop.log",
+      "mtime": "2026-09-15T04:20:10+09:00",
+      "lines": [
+        "2026-09-15 04:20:10 SKIP: 前の tick が動作中"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "04:40:35のlaunchctl list/printは終了0で登録あり・非実行中・runs 14・last exit 0。直近04:20:10実ログは前のtick動作中によるSKIPであり、last exit 0をこの呼出しの成功として流用していない。",
+  "成果比較": {
+    "開始成果": "637ddc6895dd6fca6e47cf4149e2c503d0afe124",
+    "直前監督の読解終点": "db8e45826f89c211fc586585f2456ff6616de1fe",
+    "今回読解終点": "784db2384182b4766c8f63f9d04537c4546ae877",
+    "直前監督以後の統合差分": [
+      "開始成果以後784db2384まで当研究の数学本文・有限証拠・Lean・SageMath変更なし"
+    ],
+    "未統合成果の保全": "停止条件と固定被覆・正規商不適合の判定を変更していない。監督開始時の差分はstashで保全して再適用した。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-15T04:48:04+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-15T04:48:04+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    }
+  ]
+}
