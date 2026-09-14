@@ -473,6 +473,11 @@ export const roadmapStages = [
         label: "claim_rational_prime_vector_geometric_truncations_no_limit",
         why: "有理有限和差量について Cauchy だが、どの有限台有理素数ベクトルにも収束しない列を構成し、可算な有限台の担い手が完備でないことを具体的に示す。",
       },
+      {
+        kind: "label",
+        label: "claim_rational_prime_vector_asymptotically_distinct_cauchy_sequences_uncountable",
+        why: "自然数添字の二元列から互いに漸近一致しない Cauchy 列の非可算族を作り、可算な有限台の担い手の外へ出る境界を実数体なしで示す。",
+      },
     ],
   },
 ] as const satisfies readonly RoadmapStage[];

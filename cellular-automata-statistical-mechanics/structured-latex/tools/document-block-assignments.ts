@@ -98,6 +98,8 @@ export const blockSectionAssignments = {
   "rational_prime_vector_definition_geometric_truncation_sequence": "rational_prime_vector_convergence",
   "rational_prime_vector_claim_geometric_truncations_cauchy": "rational_prime_vector_convergence",
   "rational_prime_vector_claim_geometric_truncations_no_finite_support_limit": "rational_prime_vector_convergence",
+  "rational_prime_vector_definition_cauchy_sequence_asymptotic_agreement": "rational_prime_vector_convergence",
+  "rational_prime_vector_claim_uncountably_many_asymptotically_distinct_cauchy_sequences": "rational_prime_vector_convergence",
   "cyclic_stage_logarithmic_density_claim_rationalized_shift_rational_convergence": "cyclic_stage_logarithmic_density_boundary",
   "cyclic_stage_logarithmic_density_claim_rationalized_shift_vector_convergence": "cyclic_stage_logarithmic_density_boundary",
   "cyclic_stage_local_agreement_definition_bare_stage_transport_counterexample": "cyclic_stage_local_agreement",

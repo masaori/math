@@ -816,4 +816,126 @@ L\ge L_0\land M\ge L_0\Longrightarrow
       ]),
     ],
   },
+  {
+    id: "rational_prime_vector_definition_cauchy_sequence_asymptotic_agreement",
+    kind: "definition",
+    title: { text: "有限和差量 Cauchy 列の漸近一致条件" },
+    labels: ["def_rational_prime_vector_cauchy_sequence_asymptotic_agreement"],
+    habitat: "uncountable",
+    uncountableEscape:
+      "有限台有理素数ベクトルの Cauchy 列全体を一度に取り、自然数ごとに独立な二元選択を許すことで非可算へ出る。実数体・複素数体は経由しない。",
+    statement: [
+      paragraph([
+        ref("def_rational_prime_vector_finite_sum_cauchy"),
+        " を満たす二列 ",
+        math(String.raw`d,e:\mathbb N_{>0}\to\Lambda_{\mathbb Q}`),
+        " に対し、漸近一致条件を",
+      ]),
+      displayMath(String.raw`d\approx_{\delta_{\mathbb Q}}e
+\quad:\Longleftrightarrow\quad
+\forall\varepsilon\in\mathbb Q_{>0},\ \exists L_0\in\mathbb N_{>0},\
+\forall L\in\mathbb N_{>0},\ L\ge L_0\Longrightarrow
+\delta_{\mathbb Q}(d(L),e(L))<\varepsilon`),
+      paragraph([
+        "と定める。これは有限段階ごとの有理数値だけを比較し、無限和、実数値ノルム、完備化を定義に使わない。",
+      ]),
+    ],
+  },
+  {
+    id: "rational_prime_vector_claim_uncountably_many_asymptotically_distinct_cauchy_sequences",
+    kind: "claim",
+    title: { text: "相互に漸近一致しない有限和差量 Cauchy 列は非可算個ある" },
+    labels: ["claim_rational_prime_vector_asymptotically_distinct_cauchy_sequences_uncountable"],
+    habitat: "uncountable",
+    uncountableEscape:
+      "自然数添字の二元列全体から、相互に漸近一致しない有限台有理素数ベクトルの Cauchy 列へ単射を作ることで非可算へ出る。実数体・複素数体は経由しない。",
+    statement: [
+      paragraph([
+        ref("def_rational_prime_vector_cauchy_sequence_asymptotic_agreement"),
+        " の意味で互いに漸近一致しない有限和差量 Cauchy 列からなる非可算集合が存在する。ここでは漸近一致条件が同値関係であること、商集合、完備化した集合のいずれも先取りしない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`B:=\{0,1\}^{\mathbb N_{>0}}`),
+        " とし、二元集合から有理数への写像を ",
+        math(String.raw`\nu:\{0,1\}\to\mathbb Q,\ \nu(0):=0,\ \nu(1):=1`),
+        " と定める。任意の ",
+        math(String.raw`b\in B`),
+        " と ",
+        math(String.raw`L\in\mathbb N_{>0}`),
+        " に対し、有限台有理素数ベクトル ",
+        math(String.raw`\mathbf c^b_L\in\Lambda_{\mathbb Q}`),
+        " を",
+      ]),
+      displayMath(String.raw`\mathbf c^b_L(p_k):=
+\begin{cases}
+  \nu(b(k))\,2^{-k} & (k\le L),\\
+  0 & (k>L)
+\end{cases}`),
+      paragraph([
+        "と定め、それ以外の素数で係数を零とする。台は最初の ",
+        math(String.raw`L`),
+        " 個の素数に含まれるので有限であり、各係数は有理数に属する。",
+      ]),
+      paragraph([
+        math(String.raw`L,M\in\mathbb N_{>0}`),
+        " とし、",
+        math(String.raw`m:=\min\{L,M\}`),
+        "、",
+        math(String.raw`n:=\max\{L,M\}`),
+        " と置く。",
+        ref("def_rational_prime_vector_finite_sum_distance"),
+        " より、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta_{\mathbb Q}(\mathbf c^b_L,\mathbf c^b_M)
+&=\sum_{k=m+1}^{n} \nu(b(k))\,2^{-k}
+  \quad(\because\ \blkref{def_rational_prime_vector_finite_sum_distance})\\
+&\le\sum_{k=m+1}^{n}2^{-k}
+  \quad(\because\ \nu(b(k))\in\{0,1\}\subset\mathbb Q)\\
+&=2^{-m}-2^{-n}
+  \quad(\because\ \text{有限等比級数の和})\\
+&<\frac1m
+  \quad(\because\ 2^{-n}>0\ \text{かつ}\ 2^m\ge m).
+\end{aligned}`),
+      paragraph([
+        ref("claim_positive_integer_reciprocal_converges_rationally"),
+        " と ",
+        ref("def_rational_prime_vector_finite_sum_cauchy"),
+        " により、列 ",
+        math(String.raw`L\mapsto\mathbf c^b_L`),
+        " は Cauchy である。",
+      ]),
+      paragraph([
+        math(String.raw`b,b'\in B`),
+        " が相異なるとし、",
+        math(String.raw`b(K)\ne b'(K)`),
+        " となる ",
+        math(String.raw`K\in\mathbb N_{>0}`),
+        " を取る。任意の ",
+        math(String.raw`L\ge K`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\delta_{\mathbb Q}(\mathbf c^b_L,\mathbf c^{b'}_L)
+&\ge\left|\mathbf c^b_L(p_K)-\mathbf c^{b'}_L(p_K)\right|_{\mathbb Q}
+  \quad(\because\ \text{有限和の他の項は非負})\\
+&=2^{-K}
+  \quad(\because\ \nu(b(K)),\nu(b'(K))\in\{0,1\}\ \text{かつ}\ b(K)\ne b'(K)).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\varepsilon:=2^{-K}\in\mathbb Q_{>0}`),
+        " と取れば、",
+        ref("def_rational_prime_vector_cauchy_sequence_asymptotic_agreement"),
+        " により二列は漸近一致しない。従って ",
+        math(String.raw`b\mapsto(L\mapsto\mathbf c^b_L)`),
+        " の像は相互に漸近一致しない Cauchy 列からなり、元数は ",
+        math(String.raw`B`),
+        " と等しい。",
+        math(String.raw`B`),
+        " は、任意の自然数添字候補列を対角成分で反転して外せるため非可算である。従って、この像は互いに漸近一致しない Cauchy 列からなる非可算集合である。",
+      ]),
+    ],
+  },
 ]);
