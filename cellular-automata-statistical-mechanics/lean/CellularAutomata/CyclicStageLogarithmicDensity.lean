@@ -32,6 +32,12 @@ claim_rational_prime_vector_geometric_truncations_cauchy
     geometricPrimeTruncation_cauchy
 claim_rational_prime_vector_geometric_truncations_no_limit
   → geometricPrimeTruncation_no_finiteSupport_limit
+def_rational_prime_vector_cauchy_sequence_asymptotic_agreement
+  → RationalLogVectorAsymptoticallyAgrees
+claim_rational_prime_vector_asymptotically_distinct_cauchy_sequences_uncountable
+  → binaryGeometricPrimeTruncation, binaryGeometricPrimeTruncation_cauchy,
+    binaryGeometricPrimeTruncation_not_asymptotically_agree,
+    binaryCauchySequenceFamily_uncountable
 
 有限巡回舞台を ZMod L、二元状態を演算なしの State、一方向シフト規則を半径一の
 有限真理値表に固定する。不動点の全数分類、状態数二の素数二係数、舞台サイズによる
@@ -564,6 +570,244 @@ theorem geometricPrimeTruncation_no_finiteSupport_limit :
   have hle := coefficient_abs_le_finiteSumDistance (geometricPrimeTruncation L) a p
   rw [hcoefficient, hap, sub_zero, abs_of_pos hε] at hle
   exact (not_lt_of_ge hle) hlt
+
+/-! ## 互いに漸近一致しない Cauchy 列の非可算族 -/
+
+/-- 二つの有限和差量 Cauchy 列が、正有理数の全許容誤差について漸近一致する。 -/
+def RationalLogVectorAsymptoticallyAgrees
+    (d e : PositiveStage → RationalLogVector) : Prop :=
+  ∀ ε : ℚ, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L : PositiveStage, L₀.val ≤ L.val →
+      rationalLogVectorFiniteSumDistance (d L) (e L) < ε
+
+/-- 二元状態を有理係数零または一へ送る。 -/
+def stateRationalWeight : State → ℚ
+  | State.zero => 0
+  | State.one => 1
+
+theorem stateRationalWeight_nonnegative (a : State) : 0 ≤ stateRationalWeight a := by
+  cases a <;> simp [stateRationalWeight]
+
+theorem stateRationalWeight_le_one (a : State) : stateRationalWeight a ≤ 1 := by
+  cases a <;> simp [stateRationalWeight]
+
+/-- 二元列に従い、最初の `L` 個の素数へ零または `2^-(k+1)` を置く有限打ち切り。 -/
+noncomputable def binaryGeometricPrimeTruncation
+    (b : ℕ → State) (L : PositiveStage) : RationalLogVector :=
+  (Finset.range L.val).sum fun k =>
+    Finsupp.single (increasingPrimeIndex k)
+      (stateRationalWeight (b k) / (2 : ℚ) ^ (k + 1))
+
+theorem binaryGeometricPrimeTruncation_apply_index
+    (b : ℕ → State) (L : PositiveStage) (k : ℕ) :
+    binaryGeometricPrimeTruncation b L (increasingPrimeIndex k) =
+      if k < L.val then stateRationalWeight (b k) / (2 : ℚ) ^ (k + 1) else 0 := by
+  classical
+  simp [binaryGeometricPrimeTruncation, Finsupp.single_apply,
+    increasingPrimeIndex_injective.eq_iff]
+
+theorem binaryGeometricPrimeTruncation_support_subset
+    (b : ℕ → State) (L : PositiveStage) :
+    (binaryGeometricPrimeTruncation b L).support ⊆
+      (Finset.range L.val).image increasingPrimeIndex := by
+  classical
+  intro p hp
+  have hpRange : p.val ∈ Set.range (Nat.nth Nat.Prime) := by
+    rw [Nat.range_nth_of_infinite Nat.infinite_setOf_prime]
+    exact p.property
+  obtain ⟨k, hk⟩ := hpRange
+  have hkPrime : increasingPrimeIndex k = p := by
+    apply Subtype.ext
+    exact hk
+  have hnonzero := Finsupp.mem_support_iff.mp hp
+  rw [← hkPrime, binaryGeometricPrimeTruncation_apply_index] at hnonzero
+  have hkL : k < L.val := by
+    by_contra hnot
+    simp [hnot] at hnonzero
+  exact Finset.mem_image.mpr ⟨k, Finset.mem_range.mpr hkL, hkPrime⟩
+
+/-- 小段階から大段階への二元打ち切りの差量は、完全な幾何級数尾以下である。 -/
+theorem binaryGeometricPrimeTruncation_distance_le_full_tail
+    (b : ℕ → State) (L M : PositiveStage) (hLM : L.val ≤ M.val) :
+    rationalLogVectorFiniteSumDistance
+        (binaryGeometricPrimeTruncation b L) (binaryGeometricPrimeTruncation b M) ≤
+      ∑ k ∈ Finset.Ico L.val M.val, 1 / (2 : ℚ) ^ (k + 1) := by
+  classical
+  rw [rationalLogVectorFiniteSumDistance]
+  let fullSupport := (Finset.range M.val).image increasingPrimeIndex
+  have hLsupport : (binaryGeometricPrimeTruncation b L).support ⊆ fullSupport := by
+    exact (binaryGeometricPrimeTruncation_support_subset b L).trans
+      (Finset.image_mono increasingPrimeIndex (Finset.range_mono hLM))
+  have hMsupport : (binaryGeometricPrimeTruncation b M).support ⊆ fullSupport :=
+    binaryGeometricPrimeTruncation_support_subset b M
+  have hunion :
+      (binaryGeometricPrimeTruncation b L).support ∪
+          (binaryGeometricPrimeTruncation b M).support ⊆ fullSupport :=
+    Finset.union_subset hLsupport hMsupport
+  calc
+    ∑ p ∈ (binaryGeometricPrimeTruncation b L).support ∪
+          (binaryGeometricPrimeTruncation b M).support,
+        |binaryGeometricPrimeTruncation b L p - binaryGeometricPrimeTruncation b M p| ≤
+        ∑ p ∈ fullSupport,
+          |binaryGeometricPrimeTruncation b L p - binaryGeometricPrimeTruncation b M p| := by
+      exact Finset.sum_le_sum_of_subset_of_nonneg hunion
+        (fun p hp hnot => abs_nonneg _)
+    _ = ∑ k ∈ Finset.range M.val,
+          |binaryGeometricPrimeTruncation b L (increasingPrimeIndex k) -
+            binaryGeometricPrimeTruncation b M (increasingPrimeIndex k)| := by
+      rw [Finset.sum_image (Set.injOn_of_injective increasingPrimeIndex_injective)]
+    _ ≤ ∑ k ∈ Finset.range M.val,
+          if L.val ≤ k then 1 / (2 : ℚ) ^ (k + 1) else 0 := by
+      apply Finset.sum_le_sum
+      intro k hk
+      have hkM : k < M.val := Finset.mem_range.mp hk
+      rw [binaryGeometricPrimeTruncation_apply_index,
+        binaryGeometricPrimeTruncation_apply_index]
+      by_cases hkL : k < L.val
+      · simp [hkL, hkM, Nat.not_le.mpr hkL]
+      · cases hbk : b k <;>
+          simp [hkL, hkM, Nat.le_of_not_gt hkL, stateRationalWeight]
+    _ = ∑ k ∈ (Finset.range M.val).filter (fun k => L.val ≤ k),
+          1 / (2 : ℚ) ^ (k + 1) := by
+      rw [Finset.sum_filter]
+    _ = ∑ k ∈ Finset.Ico L.val M.val, 1 / (2 : ℚ) ^ (k + 1) := by
+      congr 1
+      ext k
+      simp [Finset.mem_Ico, and_comm]
+
+/-- 各二元列が定める有限打ち切り列は Cauchy である。 -/
+theorem binaryGeometricPrimeTruncation_cauchy (b : ℕ → State) :
+    RationalLogVectorCauchy (binaryGeometricPrimeTruncation b) := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ := positiveIntegerReciprocal_rationallyConverges ε hε
+  refine ⟨L₀, ?_⟩
+  intro L M hL hM
+  rcases le_total L.val M.val with hLM | hML
+  · calc
+      rationalLogVectorFiniteSumDistance
+          (binaryGeometricPrimeTruncation b L) (binaryGeometricPrimeTruncation b M) ≤
+          ∑ k ∈ Finset.Ico L.val M.val, 1 / (2 : ℚ) ^ (k + 1) :=
+        binaryGeometricPrimeTruncation_distance_le_full_tail b L M hLM
+      _ = rationalLogVectorFiniteSumDistance
+          (geometricPrimeTruncation L) (geometricPrimeTruncation M) :=
+        (geometricPrimeTruncation_distance_of_le L M hLM).symm
+      _ < 1 / (L.val : ℚ) := geometricPrimeTruncation_distance_lt_reciprocal L M hLM
+      _ < ε := by simpa using htail L hL
+  · have hsymmetric :
+        rationalLogVectorFiniteSumDistance
+            (binaryGeometricPrimeTruncation b L) (binaryGeometricPrimeTruncation b M) =
+          rationalLogVectorFiniteSumDistance
+            (binaryGeometricPrimeTruncation b M) (binaryGeometricPrimeTruncation b L) := by
+      rw [rationalLogVectorFiniteSumDistance, rationalLogVectorFiniteSumDistance,
+        Finset.union_comm]
+      apply Finset.sum_congr rfl
+      intro p hp
+      exact abs_sub_comm _ _
+    rw [hsymmetric]
+    calc
+      rationalLogVectorFiniteSumDistance
+          (binaryGeometricPrimeTruncation b M) (binaryGeometricPrimeTruncation b L) ≤
+          ∑ k ∈ Finset.Ico M.val L.val, 1 / (2 : ℚ) ^ (k + 1) :=
+        binaryGeometricPrimeTruncation_distance_le_full_tail b M L hML
+      _ = rationalLogVectorFiniteSumDistance
+          (geometricPrimeTruncation M) (geometricPrimeTruncation L) :=
+        (geometricPrimeTruncation_distance_of_le M L hML).symm
+      _ < 1 / (M.val : ℚ) := geometricPrimeTruncation_distance_lt_reciprocal M L hML
+      _ < ε := by simpa using htail M hM
+
+/-- 相異なる二元列の打ち切り列は、相違座標の正有理下界を保つため漸近一致しない。 -/
+theorem binaryGeometricPrimeTruncation_not_asymptotically_agree
+    {b c : ℕ → State} (hbc : b ≠ c) :
+    ¬ RationalLogVectorAsymptoticallyAgrees
+      (binaryGeometricPrimeTruncation b) (binaryGeometricPrimeTruncation c) := by
+  intro hagree
+  have hexists : ∃ k : ℕ, b k ≠ c k := by
+    simpa [Function.ne_iff] using hbc
+  obtain ⟨k, hk⟩ := hexists
+  let ε : ℚ := 1 / (2 : ℚ) ^ (k + 1)
+  have hε : 0 < ε := by positivity
+  obtain ⟨L₀, htail⟩ := hagree ε hε
+  let L : PositiveStage := ⟨max L₀.val (k + 1), by omega⟩
+  have hL₀ : L₀.val ≤ L.val := by simp [L]
+  have hkL : k < L.val := by simp [L]
+  have hlt := htail L hL₀
+  have hcoefficient :
+      |binaryGeometricPrimeTruncation b L (increasingPrimeIndex k) -
+        binaryGeometricPrimeTruncation c L (increasingPrimeIndex k)| = ε := by
+    rw [binaryGeometricPrimeTruncation_apply_index,
+      binaryGeometricPrimeTruncation_apply_index]
+    simp only [if_pos hkL]
+    cases hb : b k <;> cases hc : c k <;> simp_all [stateRationalWeight, ε]
+  have hle := coefficient_abs_le_finiteSumDistance
+    (binaryGeometricPrimeTruncation b L) (binaryGeometricPrimeTruncation c L)
+    (increasingPrimeIndex k)
+  rw [hcoefficient] at hle
+  exact (not_lt_of_ge hle) hlt
+
+/-- 有限和差量 Cauchy 列の型。 -/
+def RationalLogVectorCauchySequence :=
+  {d : PositiveStage → RationalLogVector // RationalLogVectorCauchy d}
+
+/-- 二元列が定める Cauchy 列。 -/
+noncomputable def binaryCauchySequence (b : ℕ → State) :
+    RationalLogVectorCauchySequence :=
+  ⟨binaryGeometricPrimeTruncation b, binaryGeometricPrimeTruncation_cauchy b⟩
+
+theorem binaryCauchySequence_injective : Function.Injective binaryCauchySequence := by
+  intro b c hequal
+  by_contra hbc
+  have hnot := binaryGeometricPrimeTruncation_not_asymptotically_agree hbc
+  apply hnot
+  intro ε hε
+  refine ⟨⟨1, by decide⟩, ?_⟩
+  intro L hL
+  have hfunctions := congrArg Subtype.val hequal
+  change binaryGeometricPrimeTruncation b = binaryGeometricPrimeTruncation c at hfunctions
+  rw [congrFun hfunctions L]
+  simpa [rationalLogVectorFiniteSumDistance] using hε
+
+/-- 二元列から構成した有限和差量 Cauchy 列だけからなる族。 -/
+def BinaryCauchySequenceFamily :=
+  {d : RationalLogVectorCauchySequence // d ∈ Set.range binaryCauchySequence}
+
+/-- 各二元列を、そこから構成した Cauchy 列の族へ送る。 -/
+noncomputable def binaryCauchySequenceFamilyElement (b : ℕ → State) :
+    BinaryCauchySequenceFamily :=
+  ⟨binaryCauchySequence b, ⟨b, rfl⟩⟩
+
+theorem binaryCauchySequenceFamilyElement_injective :
+    Function.Injective binaryCauchySequenceFamilyElement := by
+  intro b c hequal
+  apply binaryCauchySequence_injective
+  exact congrArg (fun d : BinaryCauchySequenceFamily => d.val) hequal
+
+/-- 構成した族の相異なる二列は漸近一致しない。 -/
+theorem binaryCauchySequenceFamily_pairwise_not_asymptotically_agree
+    (d e : BinaryCauchySequenceFamily) (hde : d ≠ e) :
+    ¬ RationalLogVectorAsymptoticallyAgrees d.val.val e.val.val := by
+  obtain ⟨b, hb⟩ := d.property
+  obtain ⟨c, hc⟩ := e.property
+  have hbc : b ≠ c := by
+    intro h
+    apply hde
+    apply Subtype.ext
+    exact hb.symm.trans ((congrArg binaryCauchySequence h).trans hc)
+  rw [← hb, ← hc]
+  exact binaryGeometricPrimeTruncation_not_asymptotically_agree hbc
+
+/-- 二元列の全体が単射されるため、構成した Cauchy 列の族は非可算である。 -/
+theorem binaryCauchySequenceFamily_uncountable :
+    Uncountable BinaryCauchySequenceFamily := by
+  have hbinary : Uncountable (ℕ → State) := by
+    letI : Nonempty (ℕ → State) := ⟨fun _ => State.zero⟩
+    rw [uncountable_iff_forall_not_surjective]
+    intro q hsurjective
+    let diagonal : ℕ → State := fun n => nu (q n n)
+    obtain ⟨n, hn⟩ := hsurjective diagonal
+    have hat := congrFun hn n
+    cases hstate : q n n <;> simp_all [diagonal, nu]
+  letI : Uncountable (ℕ → State) := hbinary
+  exact binaryCauchySequenceFamilyElement_injective.uncountable
 
 end
 
