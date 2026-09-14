@@ -30302,7 +30302,7 @@ H_L
 &=(1-\xi)\cdot\bigl((1+\xi)\cdot(1+\xi)^{-1}\bigr)
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則}\bigr)\\
 &=(1-\xi)\cdot 1
-&&\bigl(\because\ \text{準備の逆元の等式}\bigr)\\
+&&\bigl(\because\ (1+\xi)(1+\xi)^{-1}=1\bigr)\\
 &=1-\xi
 &&\bigl(\because\ \text{単位元との積}\bigr)
 \end{aligned}`),
@@ -30321,7 +30321,7 @@ H_L
 &=\mathrm{KW}(\xi)\cdot(1+\xi)
 &&\bigl(\because\ \text{仮定}\ \mathrm{KW}(\xi)=\xi\bigr)\\
 &=1-\xi
-&&\bigl(\because\ \text{準備の等式}\ \mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi\bigr)
+&&\bigl(\because\ \mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi\bigr)
 \end{aligned}`),
                         paragraph(["を得る。これを使って"]),
                         displayMath(String.raw`\begin{aligned}
@@ -30329,7 +30329,7 @@ H_L
 &=\bigl(\xi\cdot(1+\xi)-\xi\bigr)+2\xi-1
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\ \xi\cdot(1+\xi)=\xi+\xi^2\ \text{の移項}\bigr)\\
 &=\bigl((1-\xi)-\xi\bigr)+2\xi-1
-&&\bigl(\because\ \text{上の計算}\ \xi\cdot(1+\xi)=1-\xi\bigr)\\
+&&\bigl(\because\ \xi\cdot(1+\xi)=1-\xi\bigr)\\
 &=(1-2\xi)+2\xi-1
 &&\bigl(\because\ \xi+\xi=2\xi\bigr)\\
 &=0
@@ -30351,7 +30351,7 @@ H_L
 &=\mathrm{KW}(\xi)\cdot(1+\xi)-\xi\cdot(1+\xi)
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を 2 つの積へ適用}\bigr)\\
 &=(1-\xi)-\xi\cdot(1+\xi)
-&&\bigl(\because\ \text{準備の等式}\ \mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi\bigr)\\
+&&\bigl(\because\ \mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi\bigr)\\
 &=(1-\xi)-(\xi+\xi^2)
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
 &=-\bigl(\xi^2+2\xi-1\bigr)
