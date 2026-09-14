@@ -30875,7 +30875,7 @@ r\cdot r
 &=w_2(2)
 &&\bigl(\because\ \blkref{def_rational_log}\ \text{の}\ w_2\ \text{の定義を表示}\ 2=2/1\ \text{へ適用}\bigr)\\
 &=w_2(r\cdot r)
-&&\bigl(\because\ \text{準備で得た}\ r\cdot r=2\bigr)\\
+&&\bigl(\because\ r\cdot r=2\bigr)\\
 &=\bigl(\log(r\cdot r)\bigr)(2)
 &&\bigl(\because\ \blkref{def_rational_log}\ \text{の}\ \log\ \text{の定義}\bigr)\\
 &=\bigl(\log r+\log r\bigr)(2)
