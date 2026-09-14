@@ -151,3 +151,4 @@ import CellularAutomata.NecSuf.LogarithmicCounts
 import CellularAutomata.NecSuf.CyclicRuleRestriction
 import CellularAutomata.NecSuf.CyclicStageLogarithmicDensity
 import CellularAutomata.FiniteSubmultiplicativeCountBounds
+import CellularAutomata.NecSuf.FiniteSubmultiplicativeCountBounds
