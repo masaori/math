@@ -380,7 +380,10 @@ function checkProjectRules(block: ConvertedBlock, file: string): void {
   }
 
   const habitat: unknown = block.habitat;
-  if (typeof habitat === "string" && HABITAT_VALUES.countable.has(habitat)) {
+  if (
+    typeof habitat === "string" &&
+    (HABITAT_VALUES.countable.has(habitat) || HABITAT_VALUES.nonRealUncountable.has(habitat))
+  ) {
     // ℝ/ℂ そのものを指す記号だけを見る。可算側のブロックがこれらを数式に書いているなら、
     // 住処の宣言か証明のどちらかが誤っている。
     //
@@ -398,7 +401,7 @@ function checkProjectRules(block: ConvertedBlock, file: string): void {
     const first = math.find((value) => blackboardRealOrComplexIn(value) !== undefined);
     if (first !== undefined) {
       projectIssues.push(
-        `${file}:${block.id} は可算な住処 "${habitat}" を宣言しているのに数式に ℝ/ℂ が現れる: ${first}\n` +
+        `${file}:${block.id} は ℝ/ℂ を経由しない住処 "${habitat}" を宣言しているのに数式に ℝ/ℂ が現れる: ${first}\n` +
           `    → 検出した綴り: ${blackboardRealOrComplexIn(first) ?? ""}\n` +
           '    → 実際に ℝ/ℂ を使っているなら habitat を "R" / "C" / "mixed" にし、realEscape を書く。\n' +
           "    → 使っていないなら数式から ℝ/ℂ の記号を除く（地の文で言及するのは可）。",

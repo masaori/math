@@ -1,0 +1,8 @@
+PASS: [epsilon(f+g)]_r = sum_s epsilon_rs(f_s+g_s), r=0
+RESULT: PASS
+PASS: [epsilon(f+g)]_r = sum_s epsilon_rs(f_s+g_s), r=1
+RESULT: PASS
+PASS: [epsilon(f+g)]_r = sum_s epsilon_rs(f_s+g_s), r=2
+RESULT: PASS
+PASS: [epsilon(f+g)]_r = sum_s epsilon_rs(f_s+g_s), r=3
+RESULT: PASS

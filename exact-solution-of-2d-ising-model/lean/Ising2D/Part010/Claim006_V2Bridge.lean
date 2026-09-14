@@ -1,9 +1,16 @@
 /-
 # `V_2` の成分定義とパウリ表示の一致
 
-対応する人手証明（正本は `structured-latex/content/010_transfer_matrix_bridge.ts`）:
+対応する人手証明（正本は `structured-latex/content/*.ts`）:
 
-* `bridge_006_claim_V2_component_equals_pauli`（ラベル **`V2_component_equals_pauli`**）
+* `004_transfer_matrix.ts` の
+  `transfer_matrix_003a_claim_V2_in_Z_Y`（ラベル **`V2_in_Z_Y`**）
+* `010_transfer_matrix_bridge.ts` の
+  `bridge_006_claim_V2_component_equals_pauli`（ラベル **`V2_component_equals_pauli`**）
+
+`V2_in_Z_Y` の Step 0–2 は `Ising2D.Z_mul_Y_same` と
+`Ising2D.I_smul_H2_eq_sum_sigmaX` が担う。Step 3 の最終行列等式は
+`V2_eq_V2pauli` の対称向きである。
 
 原文の主張（`K_2 = J`）:
 
@@ -150,8 +157,10 @@ theorem exp_smul_sum_sigmaX (t : ℂ) :
 noncomputable def V2pauli (M : ℕ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
   (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) • exp (K2star • ∑ m : Fin M, sigmaX m)
 
-/-- 既存の `Ising2D.V2`（`H_2` を使う表式）と本ファイルの `V2pauli`（`σ^x` を使う表式）は
-同じ行列である（`√-1 H_2 = ∑_m σ^x_m` による。`Ising2D.I_smul_H2_eq_sum_sigmaX`）。 -/
+/-- **原文 `V2_in_Z_Y` Step 3。** 既存の `Ising2D.V2`（`H_2` を使う表式）と
+本ファイルの `V2pauli`（`σ^x` を使う表式）は同じ行列である
+（`√-1 H_2 = ∑_m σ^x_m` による。`Ising2D.I_smul_H2_eq_sum_sigmaX`）。
+原文は Pauli 表示から `H_2` 表示への向きであり、本定理の対称向きがその等式にあたる。 -/
 theorem V2_eq_V2pauli (s2 : ℝ) (K2star : ℂ) :
     V2 M s2 K2star = V2pauli M s2 K2star := by
   have h : (Complex.I * K2star) • H2 M = K2star • (Complex.I • H2 M) := by

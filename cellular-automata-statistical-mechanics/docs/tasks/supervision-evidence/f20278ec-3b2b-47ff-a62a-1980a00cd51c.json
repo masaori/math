@@ -1,0 +1,11 @@
+{
+  "実行識別子": "f20278ec-3b2b-47ff-a62a-1980a00cd51c",
+  "観測時刻": "2026-09-06T14:57:21+09:00",
+  "起動登録の実測": {"コマンド": "launchctl list com.masaori.cellular-automata-auto-loop", "終了コード": 0, "対象label": "com.masaori.cellular-automata-auto-loop", "判定": "登録あり"},
+  "launchctl print": {"コマンド": "launchctl print gui/501/com.masaori.cellular-automata-auto-loop", "終了コード": 0, "state": "not running", "runs": 4, "last exit code": 0},
+  "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist", "存在": true, "sha256": "d13342cf574a15bd2fcdbc892aafa71f32e036e6b0c5f6bd96a52e66ae5e34ff", "StartCalendarInterval": [{"Minute": 12}]},
+  "実ログ": [{"path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/launchd.log", "存在": true, "更新時刻": "2026-09-06T14:31:00+09:00", "抽出行": ["2026-09-06 14:12:19 === tick 開始", "2026-09-06 14:29:01 === tick 正常終了（未コミット 0 ファイル）", "2026-09-06 14:31:00 論文公開・URLつきSlack通知の処理を完了"]}],
+  "実行の終了値の解釈": "観測時に登録あり・非実行中・last exit code 0。実ログも14:29:01の正常終了を示す。",
+  "成果比較": {"開始成果": "0b591092ff7296977a3b1adb3b226af7f556e57d", "前回読解終点": "b1a2d1d0ee735d39f25f2afa9245bb1c5bf378e1", "今回読解終点": "0b591092ff7296977a3b1adb3b226af7f556e57d", "確認した成果": ["e82934ae366daa3ce4525524431f268daeaf4fa9: 巡回射影の衝突算術", "1d6d175c7ba5d47159aa302e7995010980356f1c: 射影像の元数と単射境界", "0b591092ff7296977a3b1adb3b226af7f556e57d: 実現繊維の個数"]},
+  "検査結果": [{"時刻": "2026-09-06T15:09:00+09:00", "コマンド": "node scripts/research-supervision/verify.ts --all", "終了コード": 0, "結果": "六研究の評価記録を受理"}, {"時刻": "2026-09-06T15:09:00+09:00", "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts", "終了コード": 0, "結果": "24件成功"}]
+}

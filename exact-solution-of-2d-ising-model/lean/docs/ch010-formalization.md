@@ -38,6 +38,16 @@
 | `Ising2D.rowEnergy` / `Ising2D.interEnergy` | `V_1, V_2` の指数の肩 | `def_transfer_matrix`（001 章） |
 | `Ising2D.V1comp` / `Ising2D.V2comp` | **成分で定義された `V_1, V_2`**（001 章） | 同上 |
 | `Ising2D.V1pauli` | **`V_1 = exp(K_1 ∑_m σ^z_m σ^z_{m+1})`**（004 章） | `def_transfer_matrix_symbols` |
+| `Ising2D.pauliY_mul_pauliX_eq` / `pauliX_mul_pauliY_eq` | `σ^yσ^x=-iσ^z`, `σ^xσ^y=iσ^z` | `V1_in_Z_Y_epsilon` Step 0 |
+| `Ising2D.Y_mul_Z_next_of_not_last` / `epsilon_mul_Y_mul_Z_next_of_last` | 非境界項 `Y_mZ_{m+1}` と周期境界項 `εY_MZ_1` の Pauli 表示 | 同 Step 1–3 |
+| `Ising2D.H1JordanWigner` / `sum_sigmaZ_sigmaZ_eq_jordanWigner` | Jordan–Wigner 二次式と `∑_mσ^z_mσ^z_{m+1}=iH_1` | 同 Step 4 |
+| `Ising2D.V1pauli_eq_jordanWigner` | **`V_1=exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M-εY_MZ_1))`**（`M>=2`） | `V1_in_Z_Y_epsilon` |
+| `Ising2D.evenEigenvectors` | **`M≥1` で `𝓕⁽⁺⁾={f∈ℂ^{2^M} \mid εf=f}`** を具体的な行列の数ベクトル作用で定める集合 | `def_even_eigenvectors_of_epsilon` |
+| `Ising2D.oddEigenvectors` | **`M≥1` で `𝓕⁽⁻⁾={f∈ℂ^{2^M} \mid εf=-f}`** を具体的な行列の数ベクトル作用で定める集合 | `def_odd_eigenvectors_of_epsilon` |
+| `Ising2D.Y_mul_Z_next_mulVec_mem_sector` / `V1JordanWigner_generator_mulVec_mem_sector` / `V1fixed_generator_mulVec_mem_sector` | **`W` と二つの生成子が固有空間を保つこと** | `V1_restriction_to_eigenspaces` Step 3 |
+| `Ising2D.H1JordanWigner_mulVec_eq_H1` / `V1_generators_mulVec_eq` | **`ηsign=-η` のときの固有ベクトル上の生成子一致** | 同 Step 4 |
+| `Ising2D.V1_generators_pow_mulVec_eq` / `V1_generator_partialSums_mulVec_eq` / `V1pauli_mulVec_eq_V1` | **ベクトル作用の冪を直接帰納し、有限部分和と指数級数の極限を一致させる**（`M>=2`） | 同 Step 5, 6 |
+| `Ising2D.V1_restrictsOnSector_of_opposite_sign` / `V1_restrictsOnEvenSector` / `V1_restrictsOnOddSector` | **`RestrictsOnSector` を一般の反対符号と実際の偶奇二セクターについて導出** | `V1_restriction_to_eigenspaces` |
 | `Ising2D.V1pauli_eq_diagonal` | パウリ表示の `V_1` も対角 | `V1_component_equals_pauli` Step 1, 2 |
 | `Ising2D.V1pauli_eq_V1comp` | **2 つの `V_1` は同一の行列** | `V1_component_equals_pauli` |
 | `Ising2D.V1_component_equals_pauli` | 同上を原文どおり成分（`μ, μ'`）で述べた形 | 同上 |
@@ -81,7 +91,7 @@
 | `Ising2D.epsilon_commute_H1` | `ε H_1^{(±)} = H_1^{(±)} ε` | 同 Step 4 |
 | `Ising2D.epsilon_commute_V1` / `epsilon_commute_V1half` | **`ε V_1^{(±)} = V_1^{(±)}ε`, `ε (V_1^{(±)})^{1/2} = ⋯`** | 同 Step 4 |
 | `Ising2D.commute_epsProj_of_commute_epsilon` ほか 5 本 | `P^{(±)}` との可換性 | 同 Step 5 |
-| `Ising2D.RestrictsOnSector` | 004 章 `V1_restriction_to_eigenspaces` を仮定として述べた述語 | `sector_replacement_of_V1` の前提 |
+| `Ising2D.RestrictsOnSector` | 004 章 `V1_restriction_to_eigenspaces` を述べた中間述語 | `V1_restrictsOnSector_of_opposite_sign` の結論 |
 | `Ising2D.sector_replacement_of_V1` | **`V_1 P^{(±)} = V_1^{(±)} P^{(±)}`** | `sector_replacement_of_V1` |
 | `Ising2D.sector_replacement_pow` | **`(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`** | `sector_replacement_pow` |
 | `Ising2D.Vsym` | `V^{(±)} = (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}` | `V_eq_Vprime` |
@@ -127,15 +137,29 @@
 * `def_config_basis_iso`
   — Lean では添字型 `Conf M = Fin M → Fin 2` が多重添字そのものなので、
     主張は「成分ごとの全単射の直積」という 1 行であり抽象化の余地が無い。
+* `V1_in_Z_Y_epsilon`
+  — 同じ具体的な `V_1` の Pauli 表示と Jordan–Wigner 表示を突き合わせる主張である。
+    一般的な内容は既存の `siteProd_mul` と `siteProd_smul_family` に分離済みである。
+* `V2_in_Z_Y`
+  — 非自明な単一サイト計算とクロネッカー積への持ち上げは既存の `Z_mul_Y_same`、
+    有限和への持ち上げは `I_smul_H2_eq_sum_sigmaX` に分離済みである。残る
+    `V2_eq_V2pauli` は同一の規格化因子を保ったスカラー倍・行列指数関数への合同であり、
+    必要十分版を作っても二つの具体的な `V_2` 定義を突き合わせる別名定理にしかならない。
 
 ---
 
-## 3. 形式化できなかった主張・条件つきになった主張
+## 3. 条件と残る同期
 
 | 主張 | 状況 | 記録 |
 | --- | --- | --- |
-| `sector_replacement_of_V1` と、それに依存する `partition_function_sector_decomposition` | **仮定 `RestrictsOnSector` つきで形式化**。仮定の中身は 004 章の `V1_restriction_to_eigenspaces`（Lean 未形式化） | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
-| `epsilon_projector_properties` (4) の「`im P^{(±)} = 𝓕^{(±)}`」 | 部分空間の等式としてではなく、**2 つの包含をベクトルの言葉で**述べた（`epsProj_mulVec_mem` / `epsProj_mulVec_eq_self`）。`𝓕^{(±)}` を `Submodule` として導入すると 004 章の `def_eigenspaces_of_epsilon` の形式化が要り、本タスクの範囲外になるため | 本ファイル |
+| `sector_replacement_of_V1` と、それに依存する `partition_function_sector_decomposition` | **同期済み**。`sector_replacement_of_V1` と冪・トレースの補助定理は `M>=2` と `η²=1` を受けて `ηsign=-η` を内部で使い、最終定理も `M>=2` を直接受け取る。下流の `RestrictsOnSector` 仮定は残らない | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
+| `V2_in_Z_Y` | **形式化済み**。`I_smul_H2_eq_sum_sigmaX` が各サイトの `iZ_mY_m=σ_m^x` を有限和へ持ち上げ、`V2_eq_V2pauli` が同じ規格化因子のまま行列指数へ適用する。Lean の等式は本文と左右が逆だが、同じ行列等式である | `Ising2D/Part004/Definition010_H1H2V1V2.lean`・`Ising2D/Part010/Claim006_V2Bridge.lean` |
+| `def_even_eigenvectors_of_epsilon` | **固有値 `+1` の集合定義を同期済み**。`evenEigenvectors` は本文と同じ `M≥1` の下で、`epsilon M *ᵥ f = f` を満たす数ベクトルの集合として定める | `Ising2D/Part004/EvenEigenvectors.lean` |
+| `even_eigenspace_is_complex_subspace` | **固有値 `+1` の集合の複素部分線型空間性を同期済み**。本文の零・和・複素スカラー倍に含まれる17段の成分計算を同じ順で `zero_mem_evenEigenvectors`・`add_mem_evenEigenvectors`・`smul_mem_evenEigenvectors` に展開し、同じ集合を台集合とする `evenEigenspace` を構成した。必要十分版は有限添字と可換半環行列だけを仮定して同じ17段を証明し、`evenEigenspace_eq_fixedSubmodule` が具体版との一致を示す | `Ising2D/Part004/EvenEigenvectors.lean`・`Ising2D/NecSuf/FixedVectorsSubmodule.lean` |
+| `def_odd_eigenvectors_of_epsilon` | **固有値 `-1` の集合定義を同期済み**。`oddEigenvectors` は本文と同じ `M≥1` の下で、`epsilon M *ᵥ f = -f` を満たす数ベクトルの集合として定める | `Ising2D/Part004/OddEigenvectors.lean` |
+| `odd_eigenspace_is_complex_subspace` | **固有値 `-1` の集合の複素部分線型空間性を同期済み**。本文の零・和・複素スカラー倍に含まれる20段の成分計算を同じ順で `zero_mem_oddEigenvectors`・`add_mem_oddEigenvectors`・`smul_mem_oddEigenvectors` に展開し、同じ集合を台集合とする `oddEigenspace` を構成した。必要十分版は有限添字と可換環行列だけを仮定して同じ20段を証明し、`oddEigenspace_eq_negatedSubmodule` が具体版との一致を示す | `Ising2D/Part004/OddEigenvectors.lean`・`Ising2D/NecSuf/NegatedVectorsSubmodule.lean` |
+| `epsilon_action_eigenvalues_are_signs` | **固有値候補を同期済み**。具体版は本文と同じ `M≥1`、非零数ベクトル `f`、`epsilon M *ᵥ f = lambda • f` の下で、行列作用の結合則、複素線型性、単位行列の作用を成分和から示し、`epsilon_mul_self` から `f=lambda^2f` を得る。非零成分と複素数の零積の法則から `lambda=1` または `lambda=-1` を示す。必要十分版は二回作用で元へ戻る線型写像、非可換でもよい整域、無ねじれ加群に抽象化した。特殊化定理と必要十分性の記録は専用ファイルへ分離した。固有空間の次元公式は対象外である | `Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean`・`Ising2D/NecSuf/InvolutionEigenvalue.lean`・`Ising2D/Part004/ClaimEpsilonActionEigenvaluesFromNecSuf.lean`・`docs/necsuf-involution-eigenvalue.md` |
+| `epsilon_projector_properties` (4) の「`im P^{(±)} = 𝓕^{(±)}`」 | 既存定理は **2 つの包含をベクトルの言葉で**述べたまま保持する（`epsProj_mulVec_mem` / `epsProj_mulVec_eq_self`）。両固有空間の部分加群は形式化済みだが、射影子の像との部分加群としての等式への再記述は今回行わない | 本ファイル |
 | `bridge_000_remark_overview`（記号の対応の説明） | 主張ではなく記号の宣言なので、定理としては形式化していない。内容（`K_1 = J'`, `K_2 = J`）は `partitionFunctionC_eq_trace` が実際に成り立つことで裏づけた | `docs/tasks/2026-07_lean-ch009-013/002_ch010_Nrow_positive_is_necessary.md` |
 
 ### mathlib について調べた結果（一次情報）
@@ -168,5 +192,5 @@ lake build            # 成功（警告のみ）
 ./scripts/check-no-sorry.sh   # exit 0
 ```
 
-`scripts/check-no-sorry.sh` の `targets` には本章の主要定理 58 本を追記済み。
+`scripts/check-no-sorry.sh` の `targets` には本章の主要定理を追記済み。
 数値検証は `sagemath/check/043_claim_transfer_matrix_bridge/`（5 チェック全 PASS）。

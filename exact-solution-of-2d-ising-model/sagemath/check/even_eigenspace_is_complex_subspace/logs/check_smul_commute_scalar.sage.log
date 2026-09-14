@@ -1,0 +1,8 @@
+PASS: commute a and epsilon_rs, r=0
+RESULT: PASS
+PASS: commute a and epsilon_rs, r=1
+RESULT: PASS
+PASS: commute a and epsilon_rs, r=2
+RESULT: PASS
+PASS: commute a and epsilon_rs, r=3
+RESULT: PASS

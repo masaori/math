@@ -1,0 +1,11 @@
+{
+  "実行識別子": "35cb2607-6d12-4f2b-a439-7b6aece2a410",
+  "観測時刻": "2026-09-14T15:02:12+09:00",
+  "起動登録の実測": {"コマンド": "launchctl list com.masaori.cellular-automata-auto-loop", "終了コード": 0, "対象label": "com.masaori.cellular-automata-auto-loop", "判定": "登録あり"},
+  "launchctl print": {"コマンド": "launchctl print gui/501/com.masaori.cellular-automata-auto-loop", "終了コード": 0, "state": "not running", "runs": 0, "last exit code": "never exited"},
+  "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist", "存在": true, "更新時刻": "2026-09-05T21:28:07+09:00", "sha256": "d13342cf574a15bd2fcdbc892aafa71f32e036e6b0c5f6bd96a52e66ae5e34ff", "StartCalendarInterval": "毎時12分"},
+  "実ログ": [{"path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/auto-loop.log", "mtime": "2026-09-14T13:43:22+09:00", "lines": ["コミット a5eef6932 を origin/main へ push し、fetch 後の ancestry 包含を確認済みです。", "2026-09-14 13:43:22 === tick 正常終了（未コミット 0 ファイル）"]}],
+  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・非実行中だが、現在のサービス記録はruns 0・never exitedで終了値を持たない。13:43:22の実ログは今回開始成果a5eef6932のremote default包含と正常終了を明記するため、直近の成否は正常終了とした。",
+  "成果比較": {"開始成果": "a5eef69324930fd2f67b0852155bef75fd7d1f9a", "直前監督の読解終点": "ed1c128905ca3b063ec2bd0ca2cb707face37ca5", "今回読解終点": "838cc8b89c3b4c0089523c6ef1f96e5df8ce8377", "直前監督以後の統合差分": ["cc46e0c3e: 有限台有理素数ベクトル列のCauchy性と有限台極限不在のLean具体版を修復・完成", "a5eef6932: 対称差量の一方向逆数上界と候補ごとの正の下界へ弱めたLean必要十分版、および具体版への導出を統合", "b989befd・14d224fc・0b66f046: 複素行列版と一般有限グラフの状態記録だけで数学本文の前進なし"], "未統合成果の保全": "可算二次元版の専用worktreeに160項有限系の未コミットcheckpointを保持。複素行列版の14時台state・MEMORY未コミット差分にも触れていない。"},
+  "検査結果": [{"時刻": "2026-09-14T15:17:06+09:00", "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh", "終了コード": 0, "結果": "段階8件・依存12件・完了条件26件・根拠47件・現在地1件、手元HTML照合192件を受理"}, {"時刻": "2026-09-14T15:17:06+09:00", "コマンド": "node scripts/research-supervision/verify.ts --all", "終了コード": 0, "結果": "六研究のschemaVersion 2評価記録を受理"}, {"時刻": "2026-09-14T15:17:06+09:00", "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts", "終了コード": 0, "結果": "監督記録の規則回帰24件成功"}]
+}

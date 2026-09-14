@@ -243,23 +243,23 @@ export const roadmapStages = [
     habitat:
       "有限舞台では有限。局所的極限を取っても舞台は可算のままで、非可算になるのは全配位を一度に取ったときである。",
     dependsOn: ["elementary_ca_finite_calibration"],
-    status: "進行中",
-    current: true,
+    status: "到達済み",
+    current: false,
     completion: [
-      "半径を与えるごとに規則空間の大きさと、全数列挙が可能な範囲が本文に明示されていること。",
+      "半径を与えるごとに規則空間の大きさが本文に明示され、固定した有限半径では全数列挙が有限手続きであることと、実際に全数検算した範囲が区別されていること。",
       "半径 1 の場合が初等セルオートマトンの校正結果と一致することが検算で確認できること。",
-      "全数列挙が不可能な半径について、どの不変量が構造的に決定できるかが主張として書かれていること。",
+      "規則表全体を列挙せずに、周期境界で二つの表が同じ大域写像を与えるかを有限比較で決定でき、その同値類と繊維の個数が主張として書かれていること。",
     ],
     evidence: [
       {
         kind: "label",
         label: "claim_cyclic_rule_global_equality",
-        why: "周期舞台で実現可能な入力だけへの制限が大域写像を完全に識別する。現在は記述層であり四層完了ではない。",
+        why: "周期舞台で実現可能な入力だけへの制限が大域写像を完全に識別する。構造化記述、SageMath、Lean具体版、Lean必要十分版と導出が揃っている。",
       },
       {
         kind: "path",
         path: "docs/tasks/auto-loop-state.md",
-        why: "有限舞台の量と初等規則の校正を終え、次の対象を任意半径の局所表と周期境界の重複へ定めた。実現可能入力と制限の等号判定、異なる大域写像と実現繊維の元数、半径一への比較を記述し、SageMathの有限範囲の各段検算を完了した。Lean具体版は両立入力・引き戻し・入力実現・一セルでの表制限による等号と基本個数までで、射影算術・全セルへの接着・大域写像と繊維の個数・半径一比較が残る。",
+        why: "有限舞台の量と初等規則の校正を終え、次の対象を任意半径の局所表と周期境界の重複へ定めた。実現可能入力と制限の等号判定、異なる大域写像と実現繊維の元数、半径一への比較を記述し、SageMathの有限範囲の各段検算とLean具体版を完了した。Lean必要十分版では入力実現と局所・全セルの等号判定から有限性・二値性を除き、一般の有限入出力集合で両立入力数・表数・異なる大域写像数・実現繊維数を分離した。二元状態の全対応式を必要十分版の特殊化として導出済みである。",
       },
       {
         kind: "path",
@@ -281,7 +281,7 @@ export const roadmapStages = [
       "平行移動が与える構造（近傍の標準的な番号付け、平行移動不変性）が何を買っているかを分離する。",
     habitat: "有限商では有限。局所的極限の舞台は可算。全配位の逆極限を取った時点で非可算へ移る。",
     dependsOn: ["one_dimensional_arbitrary_radius", "general_stage_and_nonuniform_rules"],
-    status: "未着手",
+    status: "到達済み",
     current: false,
     completion: [
       "有限商の舞台の族と、その上での不変量の列が本文で定義されていること。",
@@ -289,6 +289,16 @@ export const roadmapStages = [
       "群構造を落として一般の舞台へ戻したときに何が失われるかが、反例つきで本文にあること。",
     ],
     evidence: [
+      {
+        kind: "label",
+        label: "claim_cyclic_stage_family_locally_converges",
+        why: "有限巡回舞台の族について、有限窓の等号関係が有限段階以後に完全一致することを局所収束の定義へ接続する。",
+      },
+      {
+        kind: "label",
+        label: "claim_bare_stage_loses_uniform_transport",
+        why: "群構造を持たない二セルの有限舞台では近傍の元数がセルごとに異なり、近傍の輸送とセル交換に対する不変性がともに失われる反例を与える。",
+      },
       {
         kind: "path",
         path: "docs/局所的極限の定式化.md",
@@ -312,7 +322,7 @@ export const roadmapStages = [
       "決定性の規則クラスは有限集合と自然数で閉じる。確率的な規則は重みが有理数に住み、" +
       "有理数のまま閉じる範囲と、極限で実数へ出る箇所を分けて記す。",
     dependsOn: ["general_stage_and_nonuniform_rules", "elementary_ca_finite_calibration"],
-    status: "未着手",
+    status: "到達済み",
     current: false,
     completion: [
       "各規則クラスの定義が呼び名の規約に沿って本文にあり、クラス所属が有限検査で判定できること。" +
@@ -323,7 +333,58 @@ export const roadmapStages = [
       "クラスごとに、そのクラスでだけ成り立つ主張と、一般の舞台では成り立たない反例が対で本文にあること。",
       "確率的な規則について、有理数で閉じる主張と実数へ脱出する主張が住処の宣言で区別されていること。",
     ],
-    evidence: [],
+    evidence: [
+      {
+        kind: "label",
+        label: "claim_totalistic_pairwise_characterization",
+        why: "有限な閉近傍舞台上の総和型局所規則族を、同じ中心値と一状態数を持つ入力対の整合性で特徴づけた。構造化記述、SageMathの段別検算、Lean具体版、任意の署名写像の繊維整合性まで弱めたLean必要十分版と具体版への導出が揃っている。",
+      },
+      {
+        kind: "label",
+        label: "claim_totalistic_membership_finite_decidable",
+        why: "総和型所属を有限セルと有限局所入力の全比較へ落とし、判定の入力と量化範囲を明示した。",
+      },
+      {
+        kind: "label",
+        label: "claim_binary_field_linear_global_map_additive",
+        why: "二元体演算を有限表として明示し、局所線形性が大域写像の加法保存を与えることを構造化記述した。零保存・スカラー倍保存、一般の局所規則で零保存が破れる一セル反例、所属の有限判定も同じ節に置き、SageMath の段別検算、Lean 具体版、任意の型上の演算保存だけを残した Lean 必要十分版と具体版への導出を揃えた。",
+      },
+      {
+        kind: "path",
+        path: "docs/2値セルオートマトンの定義と呼び名.md",
+        why: "総和型、二元体上で線形なもの、可逆なもの、二次のもの、ブロック型、確率的なものの呼び名と入力構造の正本。これらと本文の定義・有限判定の対応を確定した。",
+      },
+      {
+        kind: "label",
+        label: "theorem_second_order_global_evolution_bijective",
+        why: "二次規則族を二時刻の有限真理値表として定義し、所属の有限判定と二時刻大域写像の明示逆写像を構造化記述した。SageMath の段別検算、Lean 具体版、右単位元と二つの消去等式だけを残した Lean 必要十分版と具体版への導出が揃っている。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/second-order-rule-class/overview.md",
+        why: "基礎表の回復と一意性、有限所属判定、二元体加法の消去、二時刻発展の明示逆写像、一般の一段規則の反例を明示した有限範囲で全数検算する。",
+      },
+      {
+        kind: "label",
+        label: "claim_block_phase_characterization",
+        why: "ブロック型を有限分割上の一相更新と有限相の順序付き一巡更新として定義し、固定分割に対する一相更新を各ブロック内入力だけへの依存で特徴づけた。有限所属判定と同期更新との二セル反例を構造化記述し、SageMath の段別検算、Lean 具体版、任意の状態型と既定状態一つだけを残した Lean 必要十分版、具体版への導出を揃えた。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/block-partition-rule-class/overview.md",
+        why: "分割条件と所属ブロックの繊維、一相更新の特徴づけの両方向、有限所属判定、同期二セル交換の境界を、明示した有限範囲で全数検算する。",
+      },
+      {
+        kind: "label",
+        label: "theorem_probabilistic_global_transition_normalized",
+        why: "有理重みの確率的局所規則族から、有限配位上の正規化された大域遷移重みを構成した。有限回合成の有理数閉性、有限所属判定、決定論的規則との零一重み境界も同じ節に構造化記述し、SageMath の段別検算、Lean 具体版、有限和積と二元出力だけを残した Lean 必要十分版、具体版への導出を揃えた。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/probabilistic-rule-class/overview.md",
+        why: "有理重みの大域正規化、有限回遷移の有理閉性と正規化、有限所属判定、零一重みの決定論的境界を、明示した有限範囲で段別検算する。",
+      },
+    ],
   },
   {
     id: "statistical_mechanics_correspondence",
@@ -336,14 +397,15 @@ export const roadmapStages = [
       "（分配関数、自由エネルギー、Gibbs 測度、相転移）ごとに、可算側の担い手と、" +
       "担えない残りを台帳へ書き出す。",
     habitat:
-      "転送行列は成分が 0 と 1 の有限行列、分配関数は自然数、自由エネルギーは対数順序群の元である。" +
+      "確率的規則の転送行列は有理数成分の有限行列であり、決定論的な零一埋め込みでは成分が 0 と 1 に限られる。" +
+      "後者の跡は自然数、正の跡の自由エントロピーは対数順序群の元である。" +
       "熱力学極限だけが実数へ出る操作であり、その一点へ脱出を隔離する。",
     dependsOn: [
       "finite_stage_lambda_thermodynamics",
       "lattice_and_countable_group_stages",
       "rule_class_separation",
     ],
-    status: "未着手",
+    status: "到達済み",
     current: false,
     completion: [
       "有限舞台での転送行列・分配関数・自由エネルギーが本文で定義され、住処が可算側で宣言されていること。",
@@ -351,6 +413,16 @@ export const roadmapStages = [
       "各構成が SageMath の厳密計算で検算され、浮動小数点を使っていないこと。",
     ],
     evidence: [
+      {
+        kind: "label",
+        label: "theorem_deterministic_transfer_trace_equals_fixed_point_count",
+        why: "有理遷移重みを有限転送行列へ送る比較写像を置き、決定論的な零一重みでは正の冪の跡が反復不動点数に一致することを構造化記述した。SageMathの段別検算、Lean具体版、有限型・半環・零一指示値だけを残したLean必要十分版と具体版への導出が揃っている。",
+      },
+      {
+        kind: "path",
+        path: "sagemath/check/finite-transfer-matrix-comparison/overview.md",
+        why: "比較写像、有限和積による行列冪、決定論的な零一遷移、跡と反復不動点数の一致を、明示した有限範囲で段別検算する。",
+      },
       {
         kind: "path",
         path: "docs/Gibbs測度と相転移の定義.md",
@@ -371,15 +443,46 @@ export const roadmapStages = [
       "位相的エントロピーのように無限舞台を要する量がここに属する。" +
       "実数側にしか無い内容を正直に書き出すことがこの段階の成果である。",
     habitat:
-      "この段階は非可算側を対象とするため、各主張がどこで実数体または複素数体へ脱出したかを必ず宣言する。",
+      "有限・高々可算・非可算を分け、非可算化の構成または実数体・複素数体への脱出理由を各主張で宣言する。",
     dependsOn: ["statistical_mechanics_correspondence"],
-    status: "未着手",
-    current: false,
+    status: "進行中",
+    current: true,
     completion: [
       "有限舞台で定義できる量と、無限舞台を要する量の全件が仕分けられていること。",
       "実数へ脱出する各主張について、脱出の理由が住処の宣言として本文に書かれていること。",
       "実数側にしか無いと判断した内容について、可算側で述べ直せない理由が反例または不可能性の主張として残ること。",
     ],
-    evidence: [],
+    evidence: [
+      {
+        kind: "label",
+        label: "claim_integer_stage_finite_support_configurations_countable",
+        why: "整数舞台上の有限台配位が、一状態台を有限部分集合へ送る単射により高々可算であることを明示する。",
+      },
+      {
+        kind: "label",
+        label: "claim_integer_stage_full_configurations_uncountable",
+        why: "同じ整数舞台でも全配位を一度に取ると非可算になることを、実数体を経由しない対角線反証で示す。",
+      },
+      {
+        kind: "label",
+        label: "claim_shift_rationalized_logarithmic_density_converges_rationally",
+        why: "完全安定化しない有理係数正規化列でも、素数二係数は正有理数の誤差だけを量化して有理数の零へ収束する。収束概念そのものと、全ての Cauchy 列に極限を与える完備化・実数脱出を分離する。",
+      },
+      {
+        kind: "label",
+        label: "claim_rational_prime_vector_geometric_truncations_no_limit",
+        why: "有理有限和差量について Cauchy だが、どの有限台有理素数ベクトルにも収束しない列を構成し、可算な有限台の担い手が完備でないことを具体的に示す。",
+      },
+      {
+        kind: "label",
+        label: "claim_rational_prime_vector_asymptotically_distinct_cauchy_sequences_uncountable",
+        why: "自然数添字の二元列から互いに漸近一致しない Cauchy 列の非可算族を作り、可算な有限台の担い手の外へ出る境界を実数体なしで示す。",
+      },
+      {
+        kind: "label",
+        label: "claim_finite_submultiplicative_count_multiple_index_density_bound",
+        why: "有限打ち切り内の劣乗法不等式から倍数段階の交差冪による密度上界を自然数演算だけで導き、全段階の仮定と極限存在を別問題として分離する。",
+      },
+    ],
   },
 ] as const satisfies readonly RoadmapStage[];

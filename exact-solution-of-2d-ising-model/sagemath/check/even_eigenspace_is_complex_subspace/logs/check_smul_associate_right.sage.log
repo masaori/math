@@ -1,0 +1,8 @@
+PASS: associate a(epsilon_rs f_s), r=0
+RESULT: PASS
+PASS: associate a(epsilon_rs f_s), r=1
+RESULT: PASS
+PASS: associate a(epsilon_rs f_s), r=2
+RESULT: PASS
+PASS: associate a(epsilon_rs f_s), r=3
+RESULT: PASS

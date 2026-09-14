@@ -23,12 +23,11 @@
   巡回性 `Matrix.trace_mul_comm` と `P^{(±)}` が `B` と可換であることだけ。
 * Step 4（結論）→ `partition_function_sector_decomposition`。
 
-## 仮定について
+## 格子幅について
 
-人手本文が Step 2 で使う `sector_replacement_of_V1` は 004 章の
-`V1_restriction_to_eigenspaces` に依存しており、それは Lean 未形式化である。
-そのため本ファイルの最終定理も `RestrictsOnSector`（`Claim011` 参照）を仮定に持つ。
-これは**未形式化に由来する仮定**であって、数学的な穴ではない。
+人手本文が Step 2 で使う `sector_replacement_of_V1` は、`M ≥ 2` の下で形式化済みの
+`V1_restrictsOnEvenSector` と `V1_restrictsOnOddSector` から得られる。
+以下ではこの格子幅条件を下流へ渡し、`RestrictsOnSector` を仮定として受け取らない。
 -/
 import Ising2D.Part010.Claim011_SectorReplacement
 import Ising2D.Part010.Claim007_PartitionFunction
@@ -76,29 +75,28 @@ theorem trace_epsProj_sym_pow {K1 ηsign η : ℂ} {s2 : ℝ} {K2star : ℂ} (n 
         rw [mul_assoc (epsProj M η), mul_assoc, hBBi, mul_one]
 
 /-- 1 つのセクターぶんの等式（Step 2 と Step 3 を合わせたもの）。 -/
-theorem trace_epsProj_sym_pow_eq_plain {K1 ηsign η : ℂ} {s2 : ℝ} {K2star : ℂ}
-    (hη : η * η = 1) (hres : RestrictsOnSector M K1 ηsign η) (n : ℕ) :
-    (epsProj M η * (Vsym M K1 ηsign s2 K2star) ^ n).trace
+theorem trace_epsProj_sym_pow_eq_plain {K1 η : ℂ} {s2 : ℝ} {K2star : ℂ}
+    (hM : 2 ≤ M) (hη : η * η = 1) (n : ℕ) :
+    (epsProj M η * (Vsym M K1 (-η) s2 K2star) ^ n).trace
       = (epsProj M η * (V1pauli M K1 * V2pauli M s2 K2star) ^ n).trace := by
   rw [trace_epsProj_sym_pow]
   have hcomm1 : epsProj M η * (V1pauli M K1 * V2pauli M s2 K2star) ^ n
       = (V1pauli M K1 * V2pauli M s2 K2star) ^ n * epsProj M η :=
     (((commute_V1pauli_epsProj K1 η).mul_left
       (commute_V2pauli_epsProj s2 K2star η)).pow_left n).symm.eq
-  have hcomm2 : epsProj M η * (V1 M K1 ηsign * V2pauli M s2 K2star) ^ n
-      = (V1 M K1 ηsign * V2pauli M s2 K2star) ^ n * epsProj M η := by
-    exact (((commute_V1_epsProj K1 ηsign η).mul_left
+  have hcomm2 : epsProj M η * (V1 M K1 (-η) * V2pauli M s2 K2star) ^ n
+      = (V1 M K1 (-η) * V2pauli M s2 K2star) ^ n * epsProj M η := by
+    exact (((commute_V1_epsProj K1 (-η) η).mul_left
       (commute_V2pauli_epsProj s2 K2star η)).pow_left n).symm.eq
-  rw [hcomm2, hcomm1, sector_replacement_pow hη hres n]
+  rw [hcomm2, hcomm1, sector_replacement_pow hM hη n]
 
 /-- **原文 `partition_function_sector_decomposition`。**
 
 `P^{(+)}` は `epsProj M 1`、`P^{(-)}` は `epsProj M (-1)`。
 Lean の `V1 M K1 η` は原文の `V_1^{(∓)}`（`η` が原文の `∓1`）なので、
 セクター `P^{(±)}` に対応する `V_1` は `V1 M K1 (∓1)`、すなわち `V1 M K1 (-η)` である。 -/
-theorem partition_function_sector_decomposition {J J' : ℝ} (hJ : 0 < J) (m : ℕ)
-    (hresPlus : RestrictsOnSector M (J' : ℂ) (-1) 1)
-    (hresMinus : RestrictsOnSector M (J' : ℂ) 1 (-1)) :
+theorem partition_function_sector_decomposition {J J' : ℝ} (hM : 2 ≤ M)
+    (hJ : 0 < J) (m : ℕ) :
     ((partitionFunction (m + 1) M J J' : ℝ) : ℂ)
       = (epsProj M 1 *
             (Vsym M (J' : ℂ) (-1) (Real.sinh (2 * J)) ((Kstar J : ℝ) : ℂ)) ^ (m + 1)).trace
@@ -106,8 +104,14 @@ theorem partition_function_sector_decomposition {J J' : ℝ} (hJ : 0 < J) (m : �
             (Vsym M (J' : ℂ) 1 (Real.sinh (2 * J)) ((Kstar J : ℝ) : ℂ)) ^ (m + 1)).trace := by
   have h1 : (1 : ℂ) * 1 = 1 := by norm_num
   have h2 : (-1 : ℂ) * (-1) = 1 := by norm_num
-  rw [trace_epsProj_sym_pow_eq_plain h1 hresPlus, trace_epsProj_sym_pow_eq_plain h2 hresMinus,
-    partition_function_in_pauli_form hJ m]
+  have hplus := trace_epsProj_sym_pow_eq_plain (M := M) (K1 := (J' : ℂ))
+    (η := (1 : ℂ)) (s2 := Real.sinh (2 * J)) (K2star := ((Kstar J : ℝ) : ℂ))
+    hM h1 (m + 1)
+  have hminus := trace_epsProj_sym_pow_eq_plain (M := M) (K1 := (J' : ℂ))
+    (η := (-1 : ℂ)) (s2 := Real.sinh (2 * J)) (K2star := ((Kstar J : ℝ) : ℂ))
+    hM h2 (m + 1)
+  simp only [neg_neg] at hminus
+  rw [hplus, hminus, partition_function_in_pauli_form hJ m]
   have := trace_eq_sector_sum (M := M) 1
     ((V1pauli M (J' : ℂ) * V2pauli M (Real.sinh (2 * J)) ((Kstar J : ℝ) : ℂ)) ^ (m + 1))
   rw [this]

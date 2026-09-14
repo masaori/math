@@ -20,6 +20,8 @@ import type {
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
 import blocks_binary_ca_logarithmic_counts from './content/binary-ca-logarithmic-counts.ts'
 import blocks_binary_ca_positive_count_domain from './content/binary-ca-positive-count-domain.ts'
+import blocks_binary_field_linear_rule_class from './content/binary-field-linear-rule-class.ts'
+import blocks_block_partition_rule_class from './content/block-partition-rule-class.ts'
 import blocks_causal_set_primary_literature from './content/causal-set-primary-literature.ts'
 import blocks_causal_structure_comparison from './content/causal-structure-comparison.ts'
 import blocks_composed_neighborhood_closure from './content/composed-neighborhood-closure.ts'
@@ -27,10 +29,17 @@ import blocks_composite_map_essential_dependency from './content/composite-map-e
 import blocks_conjugacy_class_code_image_bijection from './content/conjugacy-class-code-image-bijection.ts'
 import blocks_cyclic_offset_projection from './content/cyclic-offset-projection.ts'
 import blocks_cyclic_rule_restriction from './content/cyclic-rule-restriction.ts'
+import blocks_cyclic_stage_local_agreement from './content/cyclic-stage-local-agreement.ts'
+import blocks_cyclic_stage_logarithmic_density from './content/cyclic-stage-logarithmic-density.ts'
+import blocks_cyclic_stage_uniform_conditional_kernel from './content/cyclic-stage-uniform-conditional-kernel.ts'
+import blocks_cyclic_stage_uniform_marginals from './content/cyclic-stage-uniform-marginals.ts'
 import blocks_dependency_order_substructures from './content/dependency-order-substructures.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_neighborhood_assignment_monoid from './content/finite-neighborhood-assignment-monoid.ts'
+import blocks_finite_power_bound_certificate from './content/finite-power-bound-certificate.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
+import blocks_finite_submultiplicative_count_bounds from './content/finite-submultiplicative-count-bounds.ts'
+import blocks_finite_transfer_matrix_comparison from './content/finite-transfer-matrix-comparison.ts'
 import blocks_global_map_iteration from './content/global-map-iteration.ts'
 import blocks_inverse_map_locality from './content/inverse-map-locality.ts'
 import blocks_iterate_monoid_conjugacy_invariance from './content/iterate-monoid-conjugacy-invariance.ts'
@@ -74,16 +83,19 @@ import blocks_ordered_neighborhood_assignment_monoid from './content/ordered-nei
 import blocks_periodic_point_count from './content/periodic-point-count.ts'
 import blocks_positive_fixed_point_count_domain from './content/positive-fixed-point-count-domain.ts'
 import blocks_prime_logarithm from './content/prime-logarithm.ts'
+import blocks_probabilistic_rule_class from './content/probabilistic-rule-class.ts'
 import blocks_recursive_preimage_tree_code from './content/recursive-preimage-tree-code.ts'
 import blocks_redundant_neighbor from './content/redundant-neighbor.ts'
 import blocks_reversibility_finite_decidability from './content/reversibility-finite-decidability.ts'
 import blocks_reversible_global_map_cycle_type from './content/reversible-global-map-cycle-type.ts'
+import blocks_second_order_rule_class from './content/second-order-rule-class.ts'
 import blocks_self_neighborhood_reversible_map_group from './content/self-neighborhood-reversible-map-group.ts'
 import blocks_self_transpose_composition_closure from './content/self-transpose-composition-closure.ts'
 import blocks_self_transpose_composition_total_closure_characterization from './content/self-transpose-composition-total-closure-characterization.ts'
 import blocks_self_transpose_neighborhood_assignment_count from './content/self-transpose-neighborhood-assignment-count.ts'
 import blocks_stage_reversible_composition_nonclosure from './content/stage-reversible-composition-nonclosure.ts'
 import blocks_time_expansion_dependency from './content/time-expansion-dependency.ts'
+import blocks_totalistic_rule_class from './content/totalistic-rule-class.ts'
 import blocks_transitive_closure_antisymmetry from './content/transitive-closure-antisymmetry.ts'
 
 
@@ -92,6 +104,8 @@ import blocks_transitive_closure_antisymmetry from './content/transitive-closure
 export type AllBlocks = [
   ...typeof blocks_binary_ca_logarithmic_counts,
   ...typeof blocks_binary_ca_positive_count_domain,
+  ...typeof blocks_binary_field_linear_rule_class,
+  ...typeof blocks_block_partition_rule_class,
   ...typeof blocks_causal_set_primary_literature,
   ...typeof blocks_causal_structure_comparison,
   ...typeof blocks_composed_neighborhood_closure,
@@ -99,10 +113,17 @@ export type AllBlocks = [
   ...typeof blocks_conjugacy_class_code_image_bijection,
   ...typeof blocks_cyclic_offset_projection,
   ...typeof blocks_cyclic_rule_restriction,
+  ...typeof blocks_cyclic_stage_local_agreement,
+  ...typeof blocks_cyclic_stage_logarithmic_density,
+  ...typeof blocks_cyclic_stage_uniform_conditional_kernel,
+  ...typeof blocks_cyclic_stage_uniform_marginals,
   ...typeof blocks_dependency_order_substructures,
   ...typeof blocks_essential_dependency,
   ...typeof blocks_finite_neighborhood_assignment_monoid,
+  ...typeof blocks_finite_power_bound_certificate,
   ...typeof blocks_finite_propagation_boundary,
+  ...typeof blocks_finite_submultiplicative_count_bounds,
+  ...typeof blocks_finite_transfer_matrix_comparison,
   ...typeof blocks_global_map_iteration,
   ...typeof blocks_inverse_map_locality,
   ...typeof blocks_iterate_monoid_conjugacy_invariance,
@@ -146,16 +167,19 @@ export type AllBlocks = [
   ...typeof blocks_periodic_point_count,
   ...typeof blocks_positive_fixed_point_count_domain,
   ...typeof blocks_prime_logarithm,
+  ...typeof blocks_probabilistic_rule_class,
   ...typeof blocks_recursive_preimage_tree_code,
   ...typeof blocks_redundant_neighbor,
   ...typeof blocks_reversibility_finite_decidability,
   ...typeof blocks_reversible_global_map_cycle_type,
+  ...typeof blocks_second_order_rule_class,
   ...typeof blocks_self_neighborhood_reversible_map_group,
   ...typeof blocks_self_transpose_composition_closure,
   ...typeof blocks_self_transpose_composition_total_closure_characterization,
   ...typeof blocks_self_transpose_neighborhood_assignment_count,
   ...typeof blocks_stage_reversible_composition_nonclosure,
   ...typeof blocks_time_expansion_dependency,
+  ...typeof blocks_totalistic_rule_class,
   ...typeof blocks_transitive_closure_antisymmetry,
 ]
 

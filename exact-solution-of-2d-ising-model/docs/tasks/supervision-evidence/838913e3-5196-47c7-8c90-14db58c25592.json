@@ -1,0 +1,140 @@
+{
+  "実行識別子": "838913e3-5196-47c7-8c90-14db58c25592",
+  "観測時刻": "2026-09-10T03:02:49+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 32,
+    "last exit code": 1
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "更新時刻": "2026-09-05T21:28:53+09:00",
+    "sha256": "2f811ad50d24476e63564a39c657e27f5f42d3207de30629da59bd4c0910e641",
+    "StartCalendarInterval": [
+      {
+        "Hour": 0,
+        "Minute": 43
+      },
+      {
+        "Hour": 2,
+        "Minute": 43
+      },
+      {
+        "Hour": 4,
+        "Minute": 43
+      },
+      {
+        "Hour": 6,
+        "Minute": 43
+      },
+      {
+        "Hour": 8,
+        "Minute": 43
+      },
+      {
+        "Hour": 10,
+        "Minute": 43
+      },
+      {
+        "Hour": 12,
+        "Minute": 43
+      },
+      {
+        "Hour": 14,
+        "Minute": 43
+      },
+      {
+        "Hour": 16,
+        "Minute": 43
+      },
+      {
+        "Hour": 18,
+        "Minute": 43
+      },
+      {
+        "Hour": 20,
+        "Minute": 43
+      },
+      {
+        "Hour": 22,
+        "Minute": 43
+      }
+    ]
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd-error.log",
+      "存在": true,
+      "更新時刻": "2026-09-10T02:43:10+09:00",
+      "抽出行": [
+        "RuntimeError: Codexプロセス観測中の変動または取得失敗が継続した",
+        "codex: 利用可能な新規起動候補が無い: 全四アカウントが利用上限中"
+      ]
+    },
+    {
+      "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log",
+      "存在": true,
+      "更新時刻": "2026-09-10T01:46:24+09:00",
+      "抽出行": [
+        "2026-09-10 01:46:24 CHECKPOINT: 有限上限までの成果をworktreeへ保持し、次回は継続モードで完了工程だけを行う（exit 124）"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "登録あり・非実行中・runs 32・last exit code 1。直近02:43の起動はアカウント割当前に失敗した。直前の研究実行は01:46:24にexit 124でcheckpointとなり、未コミット成果を別worktreeに保持している。",
+  "成果比較": {
+    "開始成果": "4bf76f28e5e91685575bc852114cf483d66cd43e",
+    "前回読解終点": "d7ed93ea2054f0a519bda1c84c834363da62a48a",
+    "今回読解終点": "4bf76f28e5e91685575bc852114cf483d66cd43e",
+    "確認した成果": [
+      "remote defaultには当研究の新しい統合済み数学成果なし",
+      "別worktreeのcheckpointに全スピン反転行列の固有値候補の本文・SageMath・Lean二版と棚卸し差分を保持"
+    ]
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "structured-latex/node_modules/.bin/tsc -p scripts/research-supervision/tsconfig.json",
+      "終了コード": 0,
+      "結果": "型検査成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究の評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "24件成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "node scripts/research-supervision/verify-test.ts",
+      "終了コード": 0,
+      "結果": "六研究の対象・欠落・権限分離・今回追記・外部パス拒否が成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "python3 scripts/test-research-tick-models.py",
+      "終了コード": 0,
+      "結果": "3件成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
+      "終了コード": 0,
+      "結果": "研究監督tickの全検査成功"
+    }
+  ]
+}

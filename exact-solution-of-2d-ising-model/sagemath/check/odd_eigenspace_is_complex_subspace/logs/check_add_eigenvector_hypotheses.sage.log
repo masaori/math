@@ -1,0 +1,8 @@
+PASS: use epsilon f=-f and epsilon g=-g, r=0
+RESULT: PASS
+PASS: use epsilon f=-f and epsilon g=-g, r=1
+RESULT: PASS
+PASS: use epsilon f=-f and epsilon g=-g, r=2
+RESULT: PASS
+PASS: use epsilon f=-f and epsilon g=-g, r=3
+RESULT: PASS

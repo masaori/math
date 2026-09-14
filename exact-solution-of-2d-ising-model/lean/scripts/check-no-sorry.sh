@@ -63,6 +63,22 @@ targets=(
   Ising2D.centralizer_is_scalar
   Ising2D.centralizer_is_scalar_abstract
   Ising2D.matExp_units_conj
+  Ising2D.Y_mul_Z_next_of_not_last
+  Ising2D.epsilon_mul_Y_mul_Z_next_of_last
+  Ising2D.sum_sigmaZ_sigmaZ_eq_jordanWigner
+  Ising2D.V1pauli_eq_jordanWigner
+  Ising2D.mulVec_mem_sector_of_commute_epsilon
+  Ising2D.Y_mul_Z_next_mulVec_mem_sector
+  Ising2D.V1JordanWigner_generator_mulVec_mem_sector
+  Ising2D.V1fixed_generator_mulVec_mem_sector
+  Ising2D.H1JordanWigner_mulVec_eq_H1
+  Ising2D.V1_generators_mulVec_eq
+  Ising2D.V1_generators_pow_mulVec_eq
+  Ising2D.V1_generator_partialSums_mulVec_eq
+  Ising2D.V1pauli_mulVec_eq_V1
+  Ising2D.V1_restrictsOnSector_of_opposite_sign
+  Ising2D.V1_restrictsOnEvenSector
+  Ising2D.V1_restrictsOnOddSector
   Ising2D.Conjugation.T_mul
   Ising2D.Conjugation.T_one
   Ising2D.Conjugation.T_add
@@ -107,6 +123,15 @@ targets=(
   Ising2D.jw_mul_jw_same
   Ising2D.Z_mul_Y_same
   Ising2D.xString_succ_eq
+  Ising2D.sigmaXPrefixProduct_eq_xString
+  Ising2D.epsilon_eq_siteProd_pauliX_by_induction
+  Ising2D.epsilon_mul_self
+  Ising2D.NecSuf.prefix_eq_of_same_recursion
+  Ising2D.NecSuf.prefix_terminal_mul_self
+  Ising2D.epsilon_mul_self_of_necSuf
+  Ising2D.NecSuf.eigenvalue_eq_one_or_neg_one_of_involution
+  Ising2D.epsilon_action_eigenvalues_are_signs
+  Ising2D.epsilon_action_eigenvalues_are_signs_of_necSuf
   Ising2D.siteProd_smul_family
   Ising2D.siteProd_anticomm_of_single_site
   Ising2D.jw_sq
@@ -463,6 +488,27 @@ targets=(
   Ising2D.NecSuf.commute_invProj
   Ising2D.NecSuf.pow_mul_proj
   Ising2D.NecSuf.mul_pow_conj_left
+  Ising2D.evenEigenvectors
+  Ising2D.zero_mem_evenEigenvectors
+  Ising2D.add_mem_evenEigenvectors
+  Ising2D.smul_mem_evenEigenvectors
+  Ising2D.evenEigenspace
+  Ising2D.evenEigenspace_eq_fixedSubmodule
+  Ising2D.NecSuf.zero_mem_fixedVectors
+  Ising2D.NecSuf.add_mem_fixedVectors
+  Ising2D.NecSuf.smul_mem_fixedVectors
+  Ising2D.NecSuf.fixedSubmodule
+  Ising2D.oddEigenvectors
+  Ising2D.zero_mem_oddEigenvectors
+  Ising2D.add_mem_oddEigenvectors
+  Ising2D.smul_mem_oddEigenvectors
+  Ising2D.oddEigenspace
+  Ising2D.oddEigenspace_eq_negatedSubmodule
+  Ising2D.NecSuf.negatedVectors
+  Ising2D.NecSuf.zero_mem_negatedVectors
+  Ising2D.NecSuf.add_mem_negatedVectors
+  Ising2D.NecSuf.smul_mem_negatedVectors
+  Ising2D.NecSuf.negatedSubmodule
   Ising2D.epsProj_sq
   Ising2D.epsProj_mul_epsProj_neg
   Ising2D.epsProj_add_epsProj_neg
@@ -573,6 +619,11 @@ targets=(
   Ising2D.symTransfer_pow_succ
   Ising2D.mul_pow_mul_eq
   Ising2D.trace_symTransfer_pow
+  Ising2D.physicalV1halfC_eq_map
+  Ising2D.physicalV2C_eq_map
+  Ising2D.physicalSymTransferC_eq_map
+  Ising2D.NecSuf.sandwich_mul_proj_eq
+  Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym
   Ising2D.symTransfer_isSymm
   Ising2D.mulVec_eq_zero_iff_of_isUnit
   Ising2D.symTransfer_posDef

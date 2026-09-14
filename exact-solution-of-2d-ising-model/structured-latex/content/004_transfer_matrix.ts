@@ -18,6 +18,522 @@ export default defineBlocks([
     labels: [],
   },
   {
+    id: "transfer_matrix_000_definition_site_pauli_matrices",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "サイトごとの Pauli 行列族" },
+    labels: ["def_site_pauli_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("pauli_matrix_products"),
+        " で定めた二次の Pauli 行列 ",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
+        " と単位行列 ",
+        math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "、および ",
+        ref("def_kronecker"),
+        " のクロネッカー積を用いる。",
+      ]),
+      paragraph([
+        math(String.raw`1\leq k\leq M`),
+        " と ",
+        math(String.raw`a\in\{x,y,z\}`),
+        " に対して、サイト ",
+        math(String.raw`k`),
+        " だけに ",
+        math(String.raw`\sigma^a`),
+        " を置く行列を",
+      ]),
+      displayMath(
+        String.raw`\sigma_k^a := I_{\mathrm{Mat}(2,\mathbb{C})}\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "と定める。これにより ",
+        math(String.raw`(\sigma_k^a)_{\substack{1\leq k\leq M\\ a\in\{x,y,z\}}}`),
+        " は一つの添字つき行列族として定まる。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、サイトごとの三つの Pauli 行列を一つの添字つき行列族として分離した。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_000a_definition_first_transfer_matrix",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 2 },
+    title: { text: "第一の転送行列と周期規約" },
+    labels: ["def_first_transfer_matrix_pauli"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`K_1\in\mathbb{R}_{>0}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " のサイトごとの Pauli 行列族について、",
+        math(String.raw`\sigma_{M+1}^z:=\sigma_1^z`),
+        " と周期的に延長する。第一の転送行列を",
+      ]),
+      displayMath(
+        String.raw`V_1 := \exp\!\left(K_1 \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right)
+= \exp\!\left(K_1 \left(\sigma_1^z\sigma_2^z + \sigma_2^z\sigma_3^z + \cdots + \sigma_M^z\sigma_1^z\right)\right)
+\in \mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "で定める。ここに現れる ",
+        math(String.raw`\exp`),
+        " は、",
+        ref("def_exp"),
+        " で成分級数として定めた行列の指数関数である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、第一の転送行列とその周期規約だけを一つの定義として分離した。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+        "原文の V_1 の定義は exp(√-1 K_1 (σ^z_1σ^z_2 + ⋯ + σ^z_Mσ^z_1)) と虚数単位を含んでいたが、これは誤りなので K_1 に訂正済みである。Y_m Z_{m+1} = -√-1 σ^z_mσ^z_{m+1} なので、虚数単位は Jordan--Wigner 置換から生じる。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_000b_definition_second_transfer_matrix",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 3 },
+    title: { text: "第二の転送行列" },
+    labels: ["def_second_transfer_matrix_pauli"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`K_2,K_2^*\in\mathbb{R}_{>0}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " のサイトごとの Pauli 行列族を用いて、第二の転送行列を",
+      ]),
+      displayMath(
+        String.raw`V_2 := (2\sinh 2K_2)^{M/2}\exp\!\left(K_2^*\sum_{m=1}^{M}\sigma_m^x\right)
+= (2\sinh 2K_2)^{M/2}\exp\!\left(K_2^*\left(\sigma_1^x+\sigma_2^x+\cdots+\sigma_M^x\right)\right)
+\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "で定める。ここに現れる ",
+        math(String.raw`\sinh`),
+        " は ",
+        ref("def_cosh_sinh"),
+        " の双曲線正弦である。",
+        math(String.raw`K_2>0`),
+        " と ",
+        ref("cosh_sinh_basic_properties"),
+        " より ",
+        math(String.raw`2\sinh 2K_2>0`),
+        " であり、前係数は ",
+        ref("definition_of_sqrt_r_positive"),
+        " の非負平方根を用いて",
+      ]),
+      displayMath(
+        String.raw`(2\sinh 2K_2)^{M/2}:=\left(\sqrt{2\sinh 2K_2}^{\,(\mathbb{R}_{\geq 0})}\right)^M\in\mathbb{R}_{>0}`,
+      ),
+      paragraph([
+        "と定める。また、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " で成分級数として定めた行列の指数関数である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、第二の転送行列だけを一つの定義として分離した。K_2^* の定義と双対関係、双曲線関数の添字つき略記は残余複合定義に残している。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+        "V_2 の exp の意味（どの代数のどの位相での級数か）が書かれていなかったため、<def_exp> の exp であることを明示した（定義が意味をもつために必要な事項）。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_000c_definition_jordan_wigner_Z_matrices",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { text: "Jordan–Wigner 行列族 Z_m" },
+    labels: ["def_jordan_wigner_Z_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " で定めたサイトごとの Pauli 行列族を用いる。各 ",
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " に対して、Jordan--Wigner 行列 ",
+        math(String.raw`Z_m`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`Z_m:=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "と定める。",
+        math(String.raw`m=1`),
+        " では左側の積を空積とし、",
+        math(String.raw`Z_1:=\sigma_1^z`),
+        " とする。また周期端では ",
+        math(String.raw`Z_{M+1}:=Z_1`),
+        " と定める。ホロノミック量子場では ",
+        math(String.raw`Z_m`),
+        " を ",
+        math(String.raw`p_m`),
+        " と書く。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、Jordan--Wigner 行列族 Z_m と周期端の規約だけを一つの定義として分離した。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_000d_definition_jordan_wigner_Y_matrices",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 5 },
+    title: { text: "Jordan–Wigner 行列族 Y_m" },
+    labels: ["def_jordan_wigner_Y_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " で定めたサイトごとの Pauli 行列族を用いる。各 ",
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " に対して、Jordan--Wigner 行列 ",
+        math(String.raw`Y_m`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`Y_m:=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "と定める。",
+        math(String.raw`m=1`),
+        " では左側の積を空積とし、",
+        math(String.raw`Y_1:=\sigma_1^y`),
+        " とする。また周期端では ",
+        math(String.raw`Y_{M+1}:=Y_1`),
+        " と定める。ホロノミック量子場では ",
+        math(String.raw`Y_m`),
+        " を ",
+        math(String.raw`q_m`),
+        " と書く。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、Jordan--Wigner 行列族 Y_m と周期端の規約だけを一つの定義として分離した。旧ラベルからの後続参照は、残した複合定義が本定義を明示参照することで意味を保つ。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_000e_definition_global_spin_flip_matrix",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 6 },
+    title: { text: "全スピン反転行列" },
+    labels: ["def_global_spin_flip_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " で定めたサイトごとの Pauli 行列族を用いて、全スピン反転行列を",
+      ]),
+      displayMath(
+        String.raw`\varepsilon:=\sigma_1^x\sigma_2^x\cdots\sigma_M^x\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "と定める。積はサイト番号の昇順に取る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、全スピン反転行列の定義だけを分離した。Jordan--Wigner 行列による表示は <global_spin_flip_jordan_wigner_representation> へ分離し、そこから本定義を明示参照している。旧ラベルからの後続参照は、残した複合定義が新しい表示主張を明示参照することで意味を保つ。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_000f_claim_global_spin_flip_jordan_wigner_representation",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 7 },
+    title: { text: "全スピン反転行列の Jordan–Wigner 表示" },
+    labels: ["global_spin_flip_jordan_wigner_representation"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とする。",
+        ref("def_jordan_wigner_Z_matrices"),
+        " の ",
+        math(String.raw`Z_1,\dots,Z_M`),
+        "、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
+        math(String.raw`Y_1,\dots,Y_M`),
+        "、および ",
+        ref("def_global_spin_flip_matrix"),
+        " の全スピン反転行列 ",
+        math(String.raw`\varepsilon`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\varepsilon=i^M(Z_1Y_1)(Z_2Y_2)\cdots(Z_MY_M)\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "が成り立つ。右辺は ",
+        math(String.raw`Z_mY_m`),
+        " の積であって、和ではない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の Pauli 行列の成分表示、",
+        ref("mat_mult"),
+        " の行列積、および ",
+        ref("complex_numbers_form_a_field"),
+        " の複素数の四則から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sigma^z\sigma^y
+&=\begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&&(\because\ \text{Pauli 行列の定義。}\blkref{pauli_matrix_products})\\
+&=\begin{pmatrix}0&-i\\-i&0\end{pmatrix}
+&&(\because\ 2\times2\text{ 行列の積の定義。}\blkref{mat_mult})\\
+&=-i\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because\ \mathbb{C}\text{ の四則})\\
+&=-i\,\sigma^x
+&&(\because\ \text{Pauli 行列の定義。}\blkref{pauli_matrix_products})
+\end{aligned}`),
+      paragraph([
+        "を得る。次に任意の ",
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " を固定する。まず ",
+        math(String.raw`r\in\{0,1,\dots,M\}`),
+        " に対して ",
+        math(String.raw`P_r:=\sigma_1^x\cdots\sigma_r^x\in\mathrm{Mat}(2^M,\mathbb C)`),
+        " と置き、",
+        math(String.raw`P_0:=I_{\mathrm{Mat}(2^M,\mathbb C)}`),
+        " とする。",
+        ref("def_site_pauli_matrices"),
+        " と ",
+        ref("kronecker_product_rule"),
+        " を用いる有限帰納法で、次の表示を示す。後で一因子の複素スカラーを外へ出すときは ",
+        ref("kronecker_multilinear"),
+        " の各因子についての線型性を用いる。",
+      ]),
+      displayMath(String.raw`P_r=
+\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{r}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r}
+\qquad(0\leq r\leq M)`),
+      paragraph(["を示す。初項では"]),
+      displayMath(String.raw`\begin{aligned}
+P_0
+&=I_{\mathrm{Mat}(2^M,\mathbb C)}
+&&(\because\ P_0\text{ の定義})\\
+&=\overbrace{I\boxtimes\cdots\boxtimes I}^{M}
+&&(\because\ \text{単位因子のクロネッカー積。}\blkref{kronecker_product_rule})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0\leq r<M`),
+        " で帰納法の仮定が成り立つとする。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_{r+1}
+&=P_r\sigma_{r+1}^x
+&&(\because\ P_{r+1}\text{ の定義})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{r}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r}\right)\sigma_{r+1}^x
+&&(\because\ \text{帰納法の仮定})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{r}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r}\right)
+\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{r}
+\boxtimes\sigma^x\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r-1}\right)
+&&(\because\ \text{サイト行列の定義。}\blkref{def_site_pauli_matrices})\\
+&=\overbrace{(\sigma^xI)\boxtimes\cdots\boxtimes(\sigma^xI)}^{r}
+\boxtimes(I\sigma^x)\boxtimes
+\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-r-1}
+&&(\because\ \text{クロネッカー積の積の規則。}\blkref{kronecker_product_rule})\\
+&=\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{r+1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-r-1}
+&&(\because\ AI=IA=A)
+\end{aligned}`),
+      paragraph([
+        "となる。よって有限帰納法により上の ",
+        math(String.raw`P_r`),
+        " の表示がすべての ",
+        math(String.raw`0\leq r\leq M`),
+        " で成り立つ。特に ",
+        ref("def_jordan_wigner_Z_matrices"),
+        " と ",
+        ref("def_jordan_wigner_Y_matrices"),
+        " から、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_m
+&=P_{m-1}\sigma_m^z
+&&(\because\ Z_m\text{ の定義。}\blkref{def_jordan_wigner_Z_matrices})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m+1}\right)\sigma_m^z
+&&(\because\ P_{m-1}\text{ の表示})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m+1}\right)
+\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+&&(\because\ \text{サイト行列の定義。}\blkref{def_site_pauli_matrices})\\
+&=\overbrace{(\sigma^xI)\boxtimes\cdots\boxtimes(\sigma^xI)}^{m-1}
+\boxtimes(I\sigma^z)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m}
+&&(\because\ \text{クロネッカー積の積の規則。}\blkref{kronecker_product_rule})\\
+&=\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ AI=IA=A)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+Y_m
+&=P_{m-1}\sigma_m^y
+&&(\because\ Y_m\text{ の定義。}\blkref{def_jordan_wigner_Y_matrices})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m+1}\right)\sigma_m^y
+&&(\because\ P_{m-1}\text{ の表示})\\
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m+1}\right)
+\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+&&(\because\ \text{サイト行列の定義。}\blkref{def_site_pauli_matrices})\\
+&=\overbrace{(\sigma^xI)\boxtimes\cdots\boxtimes(\sigma^xI)}^{m-1}
+\boxtimes(I\sigma^y)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m}
+&&(\because\ \text{クロネッカー積の積の規則。}\blkref{kronecker_product_rule})\\
+&=\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ AI=IA=A)
+\end{aligned}`),
+      paragraph(["を得る。したがって"]),
+      displayMath(String.raw`\begin{aligned}
+Z_mY_m
+&=\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
+\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+&&(\because\ \text{直前の }Z_m,Y_m\text{ のクロネッカー積表示})\\
+&=\overbrace{(\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)}^{m-1}
+\boxtimes(\sigma^z\sigma^y)\boxtimes
+\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m}
+&&(\because\ \text{クロネッカー積の積の規則。}\blkref{kronecker_product_rule})\\
+&=\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes(\sigma^z\sigma^y)\boxtimes
+\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m}
+&&(\because\ \sigma^x\sigma^x=I.\ \blkref{pauli_matrix_products})\\
+&=\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes(\sigma^z\sigma^y)\boxtimes
+\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ II=I)\\
+&=\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes(-i\,\sigma^x)\boxtimes
+\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because\ \text{上の }\sigma^z\sigma^y=-i\sigma^x)\\
+&=-i\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}
+\boxtimes\sigma^x\boxtimes
+\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+&&(\because\ \text{クロネッカー積の線型性。}\blkref{kronecker_multilinear})\\
+&=-i\,\sigma_m^x
+&&(\because\ \text{サイト行列の定義。}\blkref{def_site_pauli_matrices})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m=1`),
+        " では先頭の ",
+        math(String.raw`m-1`),
+        " 因子を空積、",
+        math(String.raw`m=M`),
+        " では末尾の ",
+        math(String.raw`M-m`),
+        " 因子を空積と読む。ここで ",
+        math(String.raw`Q_0:=I_{\mathrm{Mat}(2^M,\mathbb C)}`),
+        "、",
+        math(String.raw`Q_r:=(Z_1Y_1)\cdots(Z_rY_r)\in\mathrm{Mat}(2^M,\mathbb C)`),
+        " と置く。",
+        math(String.raw`Q_r=(-i)^rP_r`),
+        " を ",
+        math(String.raw`r=0,\dots,M`),
+        " について有限帰納法で示す。初項は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Q_0
+&=I_{\mathrm{Mat}(2^M,\mathbb C)}
+&&(\because\ Q_0\text{ の定義})\\
+&=(-i)^0I_{\mathrm{Mat}(2^M,\mathbb C)}
+&&(\because\ (-i)^0=1)\\
+&=(-i)^0P_0
+&&(\because\ P_0\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`0\leq r<M`),
+        " で帰納法の仮定が成り立つとすると、因子を並べ替えずに",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Q_{r+1}
+&=Q_r(Z_{r+1}Y_{r+1})
+&&(\because\ Q_{r+1}\text{ の定義})\\
+&=(-i)^rP_r(Z_{r+1}Y_{r+1})
+&&(\because\ \text{帰納法の仮定})\\
+&=(-i)^rP_r(-i\,\sigma_{r+1}^x)
+&&(\because\ Z_{r+1}Y_{r+1}=-i\sigma_{r+1}^x)\\
+&=(-i)^r\bigl(P_r(-i\,\sigma_{r+1}^x)\bigr)
+&&(\because\ \text{左側のスカラー倍と行列積の両立})\\
+&=(-i)^r\bigl((-i)(P_r\sigma_{r+1}^x)\bigr)
+&&(\because\ \text{右側のスカラー倍と行列積の両立})\\
+&=\bigl((-i)^r(-i)\bigr)(P_r\sigma_{r+1}^x)
+&&(\because\ \text{スカラー倍の結合律})\\
+&=(-i)^{r+1}P_r\sigma_{r+1}^x
+&&(\because\ \text{冪の再帰})\\
+&=(-i)^{r+1}P_{r+1}
+&&(\because\ P_{r+1}\text{ の定義})
+\end{aligned}`),
+      paragraph([
+        "となる。したがって有限帰納法の終端 ",
+        math(String.raw`r=M`),
+        " で ",
+        math(String.raw`Q_M=(-i)^MP_M`),
+        " を得る。ゆえに",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon
+&=\sigma_1^x\sigma_2^x\cdots\sigma_M^x
+&&(\because\ \text{全スピン反転行列の定義。}\blkref{def_global_spin_flip_matrix})\\
+&=P_M
+&&(\because\ P_M\text{ の定義})\\
+&=1^MP_M
+&&(\because\ 1^M=1)\\
+&=(i(-i))^MP_M
+&&(\because\ i(-i)=1)\\
+&=i^M(-i)^MP_M
+&&(\because\ \mathbb{C}\text{ の乗法の可換律と冪の法則})\\
+&=i^MQ_M
+&&(\because\ \text{有限帰納法の終端})\\
+&=i^M(Z_1Y_1)(Z_2Y_2)\cdots(Z_MY_M)
+&&(\because\ Q_M\text{ の定義})
+\end{aligned}`),
+      paragraph(["ゆえに主張が示された。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、全スピン反転行列の Jordan--Wigner 表示だけを独立した主張として分離した。各サイトの積 Z_mY_m=-i sigma_m^x と昇順の有限積を明示し、右辺が和でないことを保持した。Lean の zyPrefixProduct_eq_neg_i_pow_smul_xString と epsilon_eq_i_pow_smul_zyPrefixProduct が本文の向きの第二の有限帰納法と終端に対応し、NecSuf.prefix_eq_pow_smul_of_local_smul が同じ手順の必要十分版を担う。SageMath は同じ各行を global_spin_flip_jordan_wigner_representation で検算する。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -25,74 +541,24 @@ export default defineBlocks([
     labels: ["def_transfer_matrix_symbols"],
     statement: [
       paragraph([
+        ref("def_first_transfer_matrix_pauli"),
+        " で定めた第一の転送行列と周期規約、",
+        ref("def_second_transfer_matrix_pauli"),
+        " で定めた第二の転送行列、",
         ref("pauli_matrix_products"),
-        " で定めた二次の Pauli 行列と単位行列、および ",
+        " で定めた二次の Pauli 行列と単位行列、",
+        ref("kronecker_product_rule"),
+        " の (2) で示した二次の単位行列のクロネッカー積、",
+        ref("def_site_pauli_matrices"),
+        " で定めたサイトごとの Pauli 行列族、",
+        ref("global_spin_flip_jordan_wigner_representation"),
+        " で示した全スピン反転行列の Jordan--Wigner 表示、および ",
         ref("def_cosh_sinh"),
         " で定めた双曲線余弦・双曲線正弦を用いる。後者の正値性には ",
         ref("cosh_sinh_basic_properties"),
         " を用いる。",
       ]),
       list([
-        [
-          math(String.raw`I_{\mathrm{Mat}(2,\mathbb{C})}`),
-          ": ",
-          math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-          " 上の単位行列",
-        ],
-        [
-          math(String.raw`\sigma_k^x := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes \overbrace{\sigma^x}^{k\text{th}} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        ],
-        [
-          math(String.raw`\sigma_k^y := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes \overbrace{\sigma^y}^{k\text{th}} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        ],
-        [
-          math(String.raw`\sigma_k^z := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes \overbrace{\sigma^z}^{k\text{th}} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})} \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        ],
-        [
-          math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})} := I_{\mathrm{Mat}(2,\mathbb{C})} \boxtimes \cdots \boxtimes I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        ],
-        [
-          math(String.raw`V_1 := \exp\!\left(K_1 \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z\right)
-= \exp\!\left(K_1 \left(\sigma_1^z\sigma_2^z + \sigma_2^z\sigma_3^z + \cdots + \sigma_M^z\sigma_1^z\right)\right) \in \mathrm{Mat}(2^M,\mathbb{C})`),
-          "（",
-          math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
-          " とし、",
-          math(String.raw`\sigma_{M+1}^z := \sigma_1^z`),
-          " と周期的に延長した上での和である）",
-        ],
-        [
-          math(String.raw`V_2 := (2\sinh 2K_2)^{M/2} \exp\!\left(K_2^* \left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)\right) \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        ],
-        [
-          math(String.raw`Z_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^z \in \mathrm{Mat}(2^M,\mathbb{C})`),
-          "（ただし ",
-          math(String.raw`Z_1 := \sigma_1^z`),
-          "、",
-          math(String.raw`Z_{M+1} := Z_1`),
-          "。ホロノミック量子場では ",
-          math(String.raw`p_m`),
-          "）",
-        ],
-        [
-          math(String.raw`Y_m := \sigma_1^x \cdots \sigma_{m-1}^x \sigma_m^y \in \mathrm{Mat}(2^M,\mathbb{C})`),
-          "（ただし ",
-          math(String.raw`Y_1 := \sigma_1^y`),
-          "、",
-          math(String.raw`Y_{M+1} := Y_1`),
-          "。ホロノミック量子場では ",
-          math(String.raw`q_m`),
-          "）",
-        ],
-        [
-          math(String.raw`\varepsilon := \sigma_1^x \cdots \sigma_M^x = i^M (Z_1 Y_1)(Z_2 Y_2) \cdots (Z_M Y_M) \in \mathrm{Mat}(2^M,\mathbb{C})`),
-          "（右辺は ",
-          math(String.raw`Z_m Y_m`),
-          " の積であって和ではない。",
-          math(String.raw`Z_m Y_m = \sigma_m^z \sigma_m^y = -i\,\sigma_m^x`),
-          " より ",
-          math(String.raw`i^M(-i)^M \sigma_1^x \cdots \sigma_M^x = \sigma_1^x \cdots \sigma_M^x`),
-          " で一致する）",
-        ],
         [
           math(String.raw`K_1^* := -\tfrac{1}{2}\log(\tanh K_1) \iff \sinh(2K_1)\sinh(2K_1^*) = 1`),
         ],
@@ -123,31 +589,18 @@ export default defineBlocks([
         math(String.raw`2^M`),
         " 次の複素行列である。",
       ]),
-      paragraph([
-        math(String.raw`V_1, V_2`),
-        " に現れる ",
-        math(String.raw`\exp`),
-        " は、",
-        ref("def_exp"),
-        " で成分級数として定義した行列の指数関数である。",
-      ]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
-        "原文（および本ブロックの旧版）の V_1 の定義は exp(√-1 K_1 (σ^z_1σ^z_2 + ⋯ + σ^z_Mσ^z_1)) と" +
-          "虚数単位を含んでいたが、これは誤りなので K_1 に訂正した。根拠: Y_m Z_{m+1} = -√-1 σ^z_mσ^z_{m+1} " +
-          "（<V1_in_Z_Y_epsilon> の証明 Step 2）であるから、定義を原文どおり √-1 K_1 とすると " +
-          "V_1 = exp(-K_1(Y_1Z_2+⋯)) となり、原文の主張 <V1_in_Z_Y_epsilon>（V_1 = exp(√-1 K_1(Y_1Z_2+⋯)））と" +
-          "矛盾する。さらに 004 章以降（H_1^{(±)} の定義ブロック、V_1^{(±)} の定義、008 章）はすべて " +
-          "V_1 = exp(√-1 K_1 H_1) 側と整合しており、虚数単位は Jordan--Wigner 置換 σ^z_mσ^z_{m+1} = √-1 Y_mZ_{m+1} " +
-          "から生じるものである。V_2 の定義（虚数単位なし）とその主張（√-1 K_2^* が付く）も同じ理由で整合している。" +
-          "また 001 章の転送行列 (V_1)_{μ,μ'} は実正値行列であり、σ^z 表示の V_1 に虚数単位が付かないことと合う。",
-        "V_1 の指数の中の巡回和は M ≥ 2 でなければ意味を持たない（M = 1 では σ^z_1σ^z_2 が未定義）ため、" +
-          "M ≥ 2 と σ^z_{M+1} := σ^z_1 を明示した。σ_k^a, Z_m, Y_m, ε 自体は M ≥ 1 で定義される。",
-        "exp の意味（どの代数のどの位相での級数か）が書かれていなかったため、<def_end_iso> の同一視のもとでの " +
-          "<def_exp> の exp であることを明示した（定義が意味をもつために必要な事項）。",
+        "第一の転送行列と周期規約は <def_first_transfer_matrix_pauli> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
+        "第二の転送行列は <def_second_transfer_matrix_pauli> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
+        "Jordan--Wigner 行列族 Z_m は <def_jordan_wigner_Z_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
+        "Jordan--Wigner 行列族 Y_m は <def_jordan_wigner_Y_matrices> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。",
+        "全スピン反転行列 epsilon は <def_global_spin_flip_matrix> へ、その Jordan--Wigner 行列による表示は <global_spin_flip_jordan_wigner_representation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新しい表示主張を明示参照している。",
+        "二次の単位行列 I_{Mat(2,C)} は <pauli_matrix_products> で既に定義されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
+        "2^M 次の単位行列 I_{Mat(2^M,C)} と二次の単位行列のクロネッカー積の等式は <kronecker_product_rule> (2) で既に示されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +
@@ -166,10 +619,16 @@ export default defineBlocks([
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
         " とし、",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_jordan_wigner_Z_matrices"),
         " の ",
-        math(String.raw`Z_1,\dots,Z_M,Y_1,\dots,Y_M \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        " を考える。",
+        math(String.raw`Z_1,\dots,Z_M`),
+        " と ",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
+        math(String.raw`Y_1,\dots,Y_M`),
+        " を ",
+        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        " の元として考える。",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " を ",
         math(String.raw`\mathbb{C}`),
@@ -204,7 +663,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
       ),
       paragraph([
         "とする。",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_site_pauli_matrices"),
         " のとおり ",
         math(String.raw`\sigma_k^a`),
         "（",
@@ -369,10 +828,12 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}`,
 \end{aligned}`,
       ),
       paragraph([
-        ref("def_transfer_matrix_symbols"),
+        ref("def_jordan_wigner_Z_matrices"),
         " の ",
         math(String.raw`Z_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z`),
-        "、",
+        " と、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
         math(String.raw`Y_m=\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
         " にこれを適用すると（",
         math(String.raw`m=1`),
@@ -395,7 +856,7 @@ Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^y}^{m\text{th}}
 \boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
-&&(\because\ \text{Step 3 の帰納法と }Y_m\text{ の定義})
+&&(\because\ \text{Step 3 の帰納法と }Y_m\text{ の定義 }\blkref{def_jordan_wigner_Y_matrices})
 \end{aligned}`,
       ),
       paragraph([
@@ -728,12 +1189,16 @@ Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
       ),
       paragraph([
         "これを ",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_jordan_wigner_Z_matrices"),
         " の ",
         math(String.raw`Z_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z`),
         "、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
         math(String.raw`Y_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
         "、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
         math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x`),
         " に適用すると（",
         math(String.raw`m=1`),
@@ -756,7 +1221,7 @@ Z_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 Y_m &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}
 \boxtimes\overbrace{\sigma^y}^{m\text{th}}
 \boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
-&&(\because \text{上の一般式と } Y_m \text{ の定義}) \\
+&&(\because \text{上の一般式と } Y_m \text{ の定義 }\blkref{def_jordan_wigner_Y_matrices}) \\
 \varepsilon &= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M}
 &&(\because \text{上の一般式（} r=M \text{）と } \varepsilon \text{ の定義})
 \end{aligned}`,
@@ -1753,53 +2218,11 @@ S_Nf
     },
   },
   {
-    id: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+    id: "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
     kind: "definition",
-    origin: { path: "_old/typst/parts/004_転送行列/003_definition_epsilonの固有空間.typ", ordinal: 4 },
-    title: { tex: String.raw`\varepsilon \text{ の固有空間}` },
-    labels: ["def_eigenspaces_of_epsilon"],
-    statement: [
-      paragraph([
-        ref("def_end_iso"),
-        " の ",
-        math(String.raw`\mathcal{F} = \mathbb{C}^{2^M}`),
-        " と、",
-        math(String.raw`\varepsilon \in \mathrm{Mat}(2^M,\mathbb{C})`),
-        "（",
-        ref("def_transfer_matrix_symbols"),
-        "）の ",
-        math(String.raw`\mathbf{end}`),
-        " による ",
-        math(String.raw`\mathcal{F}`),
-        " への作用について、",
-      ]),
-      displayMath(
-        String.raw`\mathcal{F}^{(\pm)} := \{f \in \mathcal{F} \mid \varepsilon f = \pm f\}
-= \{f \in \mathcal{F} \mid (\mathbf{end}(\varepsilon))(f) = \pm f\}`,
-      ),
-      paragraph([
-        "とおく。",
-        math(String.raw`\mathbf{end}(\varepsilon)`),
-        " は線型写像だから、",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
-        " は ",
-        math(String.raw`\mathcal{F}`),
-        " の ",
-        math(String.raw`\mathbb{C}`),
-        "-部分線型空間である。",
-      ]),
-    ],
-    conversion: {
-      status: "converted",
-      notes: ["抽象テンソル積を使わず、具体的な数ベクトル空間と行列作用で固有空間だけを定義した。"],
-    },
-  },
-  {
-    id: "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
-    kind: "claim",
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
-    title: { tex: String.raw`\varepsilon\text{ の二乗と固有値}` },
-    labels: ["epsilon_square_and_eigenvalues"],
+    title: { tex: String.raw`\varepsilon\text{ の固有値 }+1\text{ の固有ベクトル全体}` },
+    labels: ["def_even_eigenvectors_of_epsilon"],
     statement: [
       paragraph([
         math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
@@ -1808,60 +2231,462 @@ S_Nf
         " の ",
         math(String.raw`\varepsilon\in\mathrm{Mat}(2^M,\mathbb{C})`),
         " を考える。",
-        ref("def_end_iso"),
+        math(String.raw`\varepsilon`),
+        " を ",
+        math(String.raw`2^M`),
+        " 成分の複素数ベクトルへ ",
+        ref("mat_mult"),
+        " の通常の行列と数ベクトルの積として作用させ、",
+      ]),
+      displayMath(
+        String.raw`\mathcal{F}^{(+)}
+:=\left\{f\in\mathbb{C}^{2^M}\;\middle|\;\varepsilon f=f\right\}`,
+      ),
+      paragraph([
+        "と定める。すなわち ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " は、全スピン反転行列を左から掛けても変わらない複素数ベクトルの全体である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "二つの固有ベクトル集合と二つの部分空間性を束ねていたブロックから、固有値 +1 の集合定義だけを分離した。",
+        "抽象線型写像 end(ε) を経由せず、2^M 次複素行列 ε と数ベクトルの積で定義した。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { tex: String.raw`\varepsilon\text{ の固有値 }-1\text{ の固有ベクトル全体}` },
+    labels: ["def_odd_eigenvectors_of_epsilon"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`\mathcal{F}=\mathbb{C}^{2^M}`),
-        " 上で、",
+        math(String.raw`\varepsilon\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を考える。",
+        math(String.raw`\varepsilon`),
+        " を ",
+        math(String.raw`2^M`),
+        " 成分の複素数ベクトルへ ",
+        ref("mat_mult"),
+        " の通常の行列と数ベクトルの積として作用させ、",
+      ]),
+      displayMath(
+        String.raw`\mathcal{F}^{(-)}
+:=\left\{f\in\mathbb{C}^{2^M}\;\middle|\;\varepsilon f=-f\right\}`,
+      ),
+      paragraph([
+        "と定める。すなわち ",
+        math(String.raw`\mathcal{F}^{(-)}`),
+        " は、全スピン反転行列を左から掛けると符号が反転する複素数ベクトルの全体である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "固有値 -1 の集合定義と二つの部分空間性を束ねていたブロックから、固有値 -1 の集合定義だけを分離した。",
+        "抽象線型写像 end(ε) を経由せず、2^M 次複素行列 ε と数ベクトルの積で定義した。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { tex: String.raw`\mathcal{F}^{(+)}\text{ の複素部分線型空間性}` },
+    labels: ["even_eigenspace_is_complex_subspace"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " の ",
+        math(String.raw`\mathcal{F}^{(+)}\subseteq\mathbb{C}^{2^M}`),
+        " を考える。この集合は零ベクトルを含み、複素数ベクトルの和と複素スカラー倍について閉じる。すなわち、",
+      ]),
+      displayMath(String.raw`0\in\mathcal{F}^{(+)}`),
+      paragraph(["であり、任意の ", math(String.raw`f,g\in\mathcal{F}^{(+)}`), " と ", math(String.raw`a\in\mathbb{C}`), " に対して、"]),
+      displayMath(String.raw`f+g\in\mathcal{F}^{(+)},\qquad af\in\mathcal{F}^{(+)}`),
+      paragraph(["が成り立つ。したがって ", math(String.raw`\mathcal{F}^{(+)}`), " は ", math(String.raw`\mathbb{C}^{2^M}`), " の複素部分線型空間である。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("mat_mult"),
+        " の行列と数ベクトルの積、および ",
+        ref("complex_numbers_form_a_field"),
+        " の複素数の演算法則を用いる。複素数ベクトルの演算は成分ごとに定め、任意の ",
+        math(String.raw`u,v\in\mathbb{C}^{2^M}`),
+        "、",
+        math(String.raw`a\in\mathbb{C}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " に対して ",
+        math(String.raw`[u+v]_r:=u_r+v_r`),
+        " および ",
+        math(String.raw`[au]_r:=au_r`),
+        " とする。まず零ベクトルを考える。任意の ",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[\varepsilon 0]_r
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}0
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=\sum_{s=1}^{2^M}0
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の零倍}\right)\\
+&=0
+&&\left(\because\ \text{有限個の零の和}\right).
+\end{aligned}`),
+      paragraph([
+        "全ての成分が一致するので ",
+        math(String.raw`\varepsilon 0=0`),
+        " である。よって ",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " から ",
+        math(String.raw`0\in\mathcal{F}^{(+)}`),
+        " である。",
+      ]),
+      paragraph([
+        "次に ",
+        math(String.raw`f,g\in\mathcal{F}^{(+)}`),
+        " とする。",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " より ",
+        math(String.raw`\varepsilon f=f`),
+        " かつ ",
+        math(String.raw`\varepsilon g=g`),
+        " である。任意の ",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[\varepsilon(f+g)]_r
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}(f_s+g_s)
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=\sum_{s=1}^{2^M}(\varepsilon_{rs}f_s+\varepsilon_{rs}g_s)
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配律}\right)\\
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}f_s+\sum_{s=1}^{2^M}\varepsilon_{rs}g_s
+&&\left(\because\ \text{有限和を項ごとに分ける}\right)\\
+&=[\varepsilon f]_r+[\varepsilon g]_r
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=f_r+g_r
+&&\left(\because\ \varepsilon f=f\ \text{かつ}\ \varepsilon g=g\right)\\
+&=[f+g]_r
+&&\left(\because\ \text{複素数ベクトルの和の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "全ての成分が一致するので ",
+        math(String.raw`\varepsilon(f+g)=f+g`),
+        " である。よって ",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " から ",
+        math(String.raw`f+g\in\mathcal{F}^{(+)}`),
+        " である。",
+      ]),
+      paragraph([
+        "最後に ",
+        math(String.raw`a\in\mathbb{C}`),
+        " と ",
+        math(String.raw`f\in\mathcal{F}^{(+)}`),
+        " を取る。",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " より ",
+        math(String.raw`\varepsilon f=f`),
+        " である。任意の ",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[\varepsilon(af)]_r
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}(af_s)
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=\sum_{s=1}^{2^M}(\varepsilon_{rs}a)f_s
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\right)\\
+&=\sum_{s=1}^{2^M}(a\varepsilon_{rs})f_s
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律}\right)\\
+&=\sum_{s=1}^{2^M}a(\varepsilon_{rs}f_s)
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\right)\\
+&=a\sum_{s=1}^{2^M}\varepsilon_{rs}f_s
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配律を有限回適用}\right)\\
+&=a[\varepsilon f]_r
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=af_r
+&&\left(\because\ \varepsilon f=f\right)\\
+&=[af]_r
+&&\left(\because\ \text{複素数ベクトルのスカラー倍の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "全ての成分が一致するので ",
+        math(String.raw`\varepsilon(af)=af`),
+        " である。よって ",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " から ",
+        math(String.raw`af\in\mathcal{F}^{(+)}`),
+        " である。零ベクトル・和・複素スカラー倍についての三つの結果から、主張を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "二つの部分空間性を束ねていた後続ブロックから、F^{(+)} の複素部分線型空間性だけを分離した。",
+        "抽象線型写像 end(ε) を経由せず、通常の行列と数ベクトルの積を成分ごとに展開した。F^{(-)} の部分空間性は後続ブロックに残す。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { tex: String.raw`\mathcal{F}^{(-)}\text{ の複素部分線型空間性}` },
+    labels: ["odd_eigenspace_is_complex_subspace"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_odd_eigenvectors_of_epsilon"),
+        " の ",
+        math(String.raw`\mathcal{F}^{(-)}\subseteq\mathbb{C}^{2^M}`),
+        " を考える。この集合は零ベクトルを含み、複素数ベクトルの和と複素スカラー倍について閉じる。すなわち、",
+      ]),
+      displayMath(String.raw`0\in\mathcal{F}^{(-)}`),
+      paragraph(["であり、任意の ", math(String.raw`f,g\in\mathcal{F}^{(-)}`), " と ", math(String.raw`a\in\mathbb{C}`), " に対して、"]),
+      displayMath(String.raw`f+g\in\mathcal{F}^{(-)},\qquad af\in\mathcal{F}^{(-)}`),
+      paragraph(["が成り立つ。したがって ", math(String.raw`\mathcal{F}^{(-)}`), " は ", math(String.raw`\mathbb{C}^{2^M}`), " の複素部分線型空間である。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("mat_mult"),
+        " の行列と数ベクトルの積、および ",
+        ref("complex_numbers_form_a_field"),
+        " の複素数の演算法則を用いる。複素数ベクトルの演算は成分ごとに定め、任意の ",
+        math(String.raw`u,v\in\mathbb{C}^{2^M}`),
+        "、",
+        math(String.raw`a\in\mathbb{C}`),
+        "、",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " に対して ",
+        math(String.raw`[u+v]_r:=u_r+v_r`),
+        "、",
+        math(String.raw`[au]_r:=au_r`),
+        " および ",
+        math(String.raw`[-u]_r:=-u_r`),
+        " とする。まず零ベクトルを考える。任意の ",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[\varepsilon 0]_r
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}0
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=\sum_{s=1}^{2^M}0
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の零倍}\right)\\
+&=0
+&&\left(\because\ \text{有限個の零の和}\right)\\
+&=-0
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の零の加法逆元}\right).
+\end{aligned}`),
+      paragraph([
+        "全ての成分が一致するので ",
+        math(String.raw`\varepsilon 0=-0`),
+        " である。よって ",
+        ref("def_odd_eigenvectors_of_epsilon"),
+        " から ",
+        math(String.raw`0\in\mathcal{F}^{(-)}`),
+        " である。",
+      ]),
+      paragraph([
+        "次に ",
+        math(String.raw`f,g\in\mathcal{F}^{(-)}`),
+        " とする。",
+        ref("def_odd_eigenvectors_of_epsilon"),
+        " より ",
+        math(String.raw`\varepsilon f=-f`),
+        " かつ ",
+        math(String.raw`\varepsilon g=-g`),
+        " である。任意の ",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[\varepsilon(f+g)]_r
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}(f_s+g_s)
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=\sum_{s=1}^{2^M}(\varepsilon_{rs}f_s+\varepsilon_{rs}g_s)
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配律}\right)\\
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}f_s+\sum_{s=1}^{2^M}\varepsilon_{rs}g_s
+&&\left(\because\ \text{有限和を項ごとに分ける}\right)\\
+&=[\varepsilon f]_r+[\varepsilon g]_r
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=-f_r+(-g_r)
+&&\left(\because\ \varepsilon f=-f\ \text{かつ}\ \varepsilon g=-g\right)\\
+&=-(f_r+g_r)
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の和の加法逆元}\right)\\
+&=[-(f+g)]_r
+&&\left(\because\ \text{複素数ベクトルの加法逆元の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "全ての成分が一致するので ",
+        math(String.raw`\varepsilon(f+g)=-(f+g)`),
+        " である。よって ",
+        ref("def_odd_eigenvectors_of_epsilon"),
+        " から ",
+        math(String.raw`f+g\in\mathcal{F}^{(-)}`),
+        " である。",
+      ]),
+      paragraph([
+        "最後に ",
+        math(String.raw`a\in\mathbb{C}`),
+        " と ",
+        math(String.raw`f\in\mathcal{F}^{(-)}`),
+        " を取る。",
+        ref("def_odd_eigenvectors_of_epsilon"),
+        " より ",
+        math(String.raw`\varepsilon f=-f`),
+        " である。任意の ",
+        math(String.raw`r\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[\varepsilon(af)]_r
+&=\sum_{s=1}^{2^M}\varepsilon_{rs}(af_s)
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=\sum_{s=1}^{2^M}(\varepsilon_{rs}a)f_s
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\right)\\
+&=\sum_{s=1}^{2^M}(a\varepsilon_{rs})f_s
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律}\right)\\
+&=\sum_{s=1}^{2^M}a(\varepsilon_{rs}f_s)
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\right)\\
+&=a\sum_{s=1}^{2^M}\varepsilon_{rs}f_s
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配律を有限回適用}\right)\\
+&=a[\varepsilon f]_r
+&&\left(\because\ \blkref{mat_mult}\right)\\
+&=a(-f_r)
+&&\left(\because\ \varepsilon f=-f\right)\\
+&=-(af_r)
+&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積と加法逆元の両立}\right)\\
+&=[-(af)]_r
+&&\left(\because\ \text{複素数ベクトルの加法逆元とスカラー倍の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "全ての成分が一致するので ",
+        math(String.raw`\varepsilon(af)=-(af)`),
+        " である。よって ",
+        ref("def_odd_eigenvectors_of_epsilon"),
+        " から ",
+        math(String.raw`af\in\mathcal{F}^{(-)}`),
+        " である。零ベクトル・和・複素スカラー倍についての三つの結果から、主張を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "二つの部分空間性を束ねていた後続ブロックから、F^{(-)} の複素部分線型空間性を独立させた。",
+        "抽象線型写像 end(ε) を経由せず、通常の行列と数ベクトルの積を成分ごとに展開した。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+    kind: "claim",
+    origin: { path: "_old/typst/parts/004_転送行列/003_definition_epsilonの固有空間.typ", ordinal: 4 },
+    title: { tex: String.raw`\varepsilon\text{ の二つの固有ベクトル集合は複素部分線型空間である}` },
+    labels: ["def_eigenspaces_of_epsilon"],
+    statement: [
+      paragraph([
+        ref("def_even_eigenvectors_of_epsilon"),
+        " で ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " を、",
+        ref("def_odd_eigenvectors_of_epsilon"),
+        " で ",
+        math(String.raw`\mathcal{F}^{(-)}`),
+        " を定めた。",
+      ]),
+      paragraph([
+        ref("even_eigenspace_is_complex_subspace"),
+        " により ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " は ",
+        math(String.raw`\mathbb{C}`),
+        "-部分線型空間である。残る ",
+        math(String.raw`\mathcal{F}^{(-)}`),
+        " について、",
+      ]),
+      paragraph([
+        ref("odd_eigenspace_is_complex_subspace"),
+        " により ",
+        math(String.raw`\mathcal{F}^{(-)}`),
+        " も ",
+        math(String.raw`\mathbb{C}^{2^M}`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        "-部分線型空間である。",
+      ]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: ["二つの部分空間性をそれぞれ独立ブロックへ分離し、このブロックは後続参照のための統合結果として保持する。"],
+    },
+  },
+  {
+    id: "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { tex: String.raw`\varepsilon\text{ の二乗}` },
+    labels: ["epsilon_square_and_eigenvalues", "epsilon_square_identity"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\varepsilon\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " について、",
       ]),
       displayMath(String.raw`\varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
-      paragraph([
-        "が成り立ち、",
-        math(String.raw`\mathcal{F}`),
-        " 上の作用 ",
-        math(String.raw`\mathbf{end}(\varepsilon)`),
-        " の固有値は ",
-        math(String.raw`1`),
-        " または ",
-        math(String.raw`-1`),
-        " に限る。",
-      ]),
     ],
     proof: [
       paragraph([
         "まず ",
         math(String.raw`I:=I_{\mathrm{Mat}(2,\mathbb{C})}`),
-        " と略記する。各 ",
-        math(String.raw`r\in\{1,\dots,M\}`),
+        " と略記し、",
+        math(String.raw`P_0:=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        "、",
+        math(String.raw`P_r:=\sigma_1^x\cdots\sigma_r^x\ (1\leq r\leq M)`),
+        " と置く。各 ",
+        math(String.raw`r\in\{0,\dots,M\}`),
         " について、",
       ]),
       displayMath(
-        String.raw`\sigma_1^x\cdots\sigma_r^x
+        String.raw`P_r
 =\underbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}_{r}
  \boxtimes
  \underbrace{I\boxtimes\cdots\boxtimes I}_{M-r}`,
       ),
       paragraph([
-        "を示す。ただし ",
-        math(String.raw`r=M`),
-        " のとき、右辺末尾の ",
-        math(String.raw`M-r=0`),
-        " 個の ",
-        math(String.raw`I`),
-        " は書かない。",
-        math(String.raw`r=1`),
-        " の場合は ",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`\sigma_1^x`),
-        " の定義そのものである。ある ",
-        math(String.raw`r\in\{1,\dots,M-1\}`),
-        " についてこの式が成り立つと仮定する。サイト作用素の定義と ",
+        "を示す。ただし、因子が零個の部分は書かない。",
+        math(String.raw`r=0`),
+        " の場合は、",
+        ref("kronecker_product_rule"),
+        " (2) を繰り返し使うと、右辺は ",
+        math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}=P_0`),
+        " である。ある ",
+        math(String.raw`r\in\{0,\dots,M-1\}`),
+        " についてこの式が成り立つと仮定する。このとき ",
+        math(String.raw`r+1\leq M`),
+        " なので、サイト作用素の定義と ",
         ref("kronecker_product_rule"),
         " (1)(2) より、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sigma_1^x\cdots\sigma_r^x\sigma_{r+1}^x
+P_{r+1}=P_r\sigma_{r+1}^x
 &=\left(
    \underbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}_{r}
    \boxtimes
@@ -1913,51 +2738,140 @@ S_Nf
 &&(\because\ \text{クロネッカー積の単位元の規則})
 \end{aligned}`,
       ),
+    ],
+    conversion: {
+      status: "added",
+      notes: ["全スピン反転行列の二乗と固有値候補を、一ブロック一主張になるよう分離した。"],
+    },
+  },
+  {
+    id: "transfer_matrix_004c_claim_epsilon_action_eigenvalues",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
+    title: { tex: String.raw`\varepsilon\text{ の行列作用の固有値候補}` },
+    labels: ["epsilon_action_eigenvalues_are_signs"],
+    statement: [
       paragraph([
-        "次に、",
-        ref("end_is_algebra_isomorphism"),
-        " (2)(3) を一段ずつ適用すると、",
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`\varepsilon\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を考える。非零ベクトル ",
+        math(String.raw`f\in\mathbb{C}^{2^M}\setminus\{0\}`),
+        " と複素数 ",
+        math(String.raw`\lambda\in\mathbb{C}`),
+        " が ",
+        math(String.raw`\varepsilon f=\lambda f`),
+        " を満たすなら、",
+        math(String.raw`\lambda`),
+        " は ",
+        math(String.raw`1`),
+        " または ",
+        math(String.raw`-1`),
+        " に限る。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("epsilon_square_identity"),
+        "、行列と数ベクトルの積の結合則 ",
+        ref("mat_mult"),
+        "、および複素数の体の法則 ",
+        ref("complex_numbers_form_a_field"),
+        " を用いる。まず、この証明で使う行列作用の結合則を成分から確かめる。任意の ",
+        math(String.raw`A,B\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        "、",
+        math(String.raw`g\in\mathbb{C}^{2^M}`),
+        "、",
+        math(String.raw`i\in\{1,\dots,2^M\}`),
+        " について、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(\mathbf{end}(\varepsilon))^2
-&=\mathbf{end}(\varepsilon)\circ\mathbf{end}(\varepsilon)
-&&(\because\ \text{作用の二乗の定義})\\
-&=\mathbf{end}(\varepsilon^2)
-&&(\because\ \mathbf{end}\ \text{は行列積を写像の合成へ移す})\\
-&=\mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
-&&(\because\ \varepsilon^2=I_{\mathrm{Mat}(2^M,\mathbb{C})})\\
-&=\mathrm{id}_{\mathcal{F}}
-&&(\because\ \mathbf{end}\ \text{は単位行列を恒等写像へ移す}).
+((AB)g)_i
+&=\sum_{k=1}^{2^M}(AB)_{ik}g_k
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義})\\
+&=\sum_{k=1}^{2^M}\left(\sum_{\ell=1}^{2^M}A_{i\ell}B_{\ell k}\right)g_k
+&&(\because\ \blkref{mat_mult}\ \text{の行列積の成分の定義})\\
+&=\sum_{k=1}^{2^M}\sum_{\ell=1}^{2^M}(A_{i\ell}B_{\ell k})g_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を有限回適用})\\
+&=\sum_{k=1}^{2^M}\sum_{\ell=1}^{2^M}A_{i\ell}(B_{\ell k}g_k)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&=\sum_{\ell=1}^{2^M}\sum_{k=1}^{2^M}A_{i\ell}(B_{\ell k}g_k)
+&&(\because\ \text{有限二重和の順序交換})\\
+&=\sum_{\ell=1}^{2^M}A_{i\ell}\left(\sum_{k=1}^{2^M}B_{\ell k}g_k\right)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を有限回適用})\\
+&=(A(Bg))_i
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義}).
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\lambda\in\mathbb{C}`),
-        " を ",
-        math(String.raw`\mathbf{end}(\varepsilon)`),
-        " の固有値とし、対応する固有ベクトルを ",
-        math(String.raw`f\in\mathcal{F}\setminus\{0\}`),
-        " とする。すなわち ",
-        math(String.raw`\mathbf{end}(\varepsilon)(f)=\lambda f`),
-        " である。このとき",
+        "したがって ",
+        math(String.raw`(AB)g=A(Bg)`),
+        " である。同様に、任意の ",
+        math(String.raw`\mu\in\mathbb{C}`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(A(\mu g))_i
+&=\sum_{k=1}^{2^M}A_{ik}(\mu g_k)
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義})\\
+&=\sum_{k=1}^{2^M}(A_{ik}\mu)g_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&=\sum_{k=1}^{2^M}(\mu A_{ik})g_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の交換律})\\
+&=\sum_{k=1}^{2^M}\mu(A_{ik}g_k)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&=\mu\sum_{k=1}^{2^M}A_{ik}g_k
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を有限回適用})\\
+&=(\mu(Ag))_i
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`A(\mu g)=\mu(Ag)`),
+        " である。また、単位行列の作用も成分から確かめると、任意の ",
+        math(String.raw`i\in\{1,\dots,2^M\}`),
+        " について、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(I_{\mathrm{Mat}(2^M,\mathbb{C})}f)_i
+&=\sum_{k=1}^{2^M}(I_{\mathrm{Mat}(2^M,\mathbb{C})})_{ik}f_k
+&&(\because\ \blkref{mat_mult}\ \text{の数ベクトルへの作用の定義})\\
+&=f_i
+&&(\because\ \text{単位行列の成分と }\blkref{complex_numbers_form_a_field}\ \text{の }0,1\text{ の法則}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}f=f`),
+        " である。以上の三つの等式と仮定 ",
+        math(String.raw`\varepsilon f=\lambda f`),
+        " を二回適用すると、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 f
-&=\mathrm{id}_{\mathcal{F}}(f)
-&&(\because\ \text{恒等写像の定義})\\
-&=(\mathbf{end}(\varepsilon))^2(f)
-&&(\because\ (\mathbf{end}(\varepsilon))^2=\mathrm{id}_{\mathcal{F}})\\
-&=\mathbf{end}(\varepsilon)(\mathbf{end}(\varepsilon)(f))
-&&(\because\ \text{写像の合成の定義})\\
-&=\mathbf{end}(\varepsilon)(\lambda f)
-&&(\because\ \mathbf{end}(\varepsilon)(f)=\lambda f)\\
-&=\lambda\,\mathbf{end}(\varepsilon)(f)
-&&(\because\ \mathbf{end}(\varepsilon)\ \text{の}\ \mathbb{C}\text{-線型性})\\
+&=I_{\mathrm{Mat}(2^M,\mathbb{C})}f
+&&(\because\ \text{直前に成分ごとに示した単位行列の作用})\\
+&=\varepsilon^2f
+&&(\because\ \blkref{epsilon_square_identity})\\
+&=\varepsilon(\varepsilon f)
+&&(\because\ \blkref{mat_mult},\blkref{complex_numbers_form_a_field}\ \text{から直前に成分ごとに示した結合則})\\
+&=\varepsilon(\lambda f)
+&&(\because\ \varepsilon f=\lambda f)\\
+&=\lambda(\varepsilon f)
+&&(\because\ \blkref{mat_mult},\blkref{complex_numbers_form_a_field}\ \text{から直前に成分ごとに示した複素線型性})\\
 &=\lambda(\lambda f)
-&&(\because\ \mathbf{end}(\varepsilon)(f)=\lambda f)\\
+&&(\because\ \varepsilon f=\lambda f)\\
+&=(\lambda\lambda)f
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合則})\\
 &=\lambda^2f
-&&(\because\ \text{複素数倍の結合則}).
+&&(\because\ \lambda^2=\lambda\lambda\ \text{という二乗の定義}).
 \end{aligned}`,
       ),
       paragraph([
@@ -1976,22 +2890,30 @@ f
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(\lambda^2-1)f_j&=0
-&&(\because\ f_j=\lambda^2f_j)\\
+\lambda^2f_j-f_j&=0
+&&(\because\ f_j=\lambda^2f_j\ \text{の両辺から }f_j\text{ を引く})\\
+(\lambda^2-1)f_j&=\lambda^2f_j-1f_j
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&=\lambda^2f_j-f_j
+&&(\because\ 1f_j=f_j)\\
+&=0
+&&(\because\ \lambda^2f_j-f_j=0)\\
 \lambda^2-1&=0
-&&(\because\ f_j\neq0\ \text{と複素数の零積則})\\
-(\lambda-1)(\lambda+1)&=0
-&&(\because\ \lambda^2-1=(\lambda-1)(\lambda+1))\\
+&&(\because\ f_j\neq0\ \text{と }\blkref{complex_numbers_form_a_field}\ \text{の零積則})\\
+(\lambda-1)(\lambda+1)&=\lambda^2-1
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&=0
+&&(\because\ \lambda^2-1=0)\\
 \lambda-1=0\quad\text{または}\quad\lambda+1&=0
-&&(\because\ \text{複素数の零積則})\\
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零積則})\\
 \lambda=1\quad\text{または}\quad\lambda&=-1
-&&(\because\ \text{複素数の加法}).
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法}).
 \end{aligned}`,
       ),
     ],
     conversion: {
       status: "added",
-      notes: ["固有空間の定義と、クロネッカー積を使う固有値計算を依存境界で分離した。"],
+      notes: ["全スピン反転行列の二乗を入力に、通常の行列と数ベクトルの積だけで固有値候補を述べる独立主張へ分離した。"],
     },
   },
   {

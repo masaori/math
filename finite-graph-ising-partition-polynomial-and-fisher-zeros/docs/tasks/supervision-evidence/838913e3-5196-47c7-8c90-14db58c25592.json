@@ -1,0 +1,94 @@
+{
+  "実行識別子": "838913e3-5196-47c7-8c90-14db58c25592",
+  "観測時刻": "2026-09-10T03:02:49+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.finite-graph-ising-auto-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.finite-graph-ising-auto-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.finite-graph-ising-auto-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 62,
+    "last exit code": 1
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.finite-graph-ising-auto-loop.plist",
+    "存在": true,
+    "更新時刻": "2026-09-05T22:04:02+09:00",
+    "sha256": "4f6c784aa35cb74c4c4deecacf93fa4b9b7de290ea5562c6b17991c505fdf633",
+    "StartCalendarInterval": [
+      {
+        "Minute": 27
+      }
+    ]
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/finite-graph-ising-auto-loop/launchd-error.log",
+      "存在": true,
+      "更新時刻": "2026-09-10T02:27:06+09:00",
+      "抽出行": [
+        "codex: 利用可能な新規起動候補が無い: 全四アカウントが利用上限中"
+      ]
+    },
+    {
+      "path": "/Users/masaori/Library/Logs/finite-graph-ising-auto-loop/launchd.log",
+      "存在": true,
+      "更新時刻": "2026-09-10T01:36:01+09:00",
+      "抽出行": [
+        "2026-09-10 01:27:13 === tick 開始",
+        "2026-09-10 01:36:01 === tick 正常終了"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "登録あり・非実行中・runs 62・last exit code 1。直近02:27の起動はアカウント割当前に失敗した。直前の研究tickは01:36:01に正常終了したが、未達ゼロの再記録で研究上の前進ではない。",
+  "成果比較": {
+    "開始成果": "4bf76f28e5e91685575bc852114cf483d66cd43e",
+    "前回読解終点": "d7ed93ea2054f0a519bda1c84c834363da62a48a",
+    "今回読解終点": "4bf76f28e5e91685575bc852114cf483d66cd43e",
+    "確認した成果": [
+      "a63d29efbe1f6dfcd4b6835d5e1da97e9b2b0445・2403f1ea66a4f55ab6f46e617780784086179d38・4bf76f28e5e91685575bc852114cf483d66cd43eは未達ゼロの運用記録で、数学本文・有限証拠・Leanには新しい成果なし"
+    ]
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "structured-latex/node_modules/.bin/tsc -p scripts/research-supervision/tsconfig.json",
+      "終了コード": 0,
+      "結果": "型検査成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究の評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "24件成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "node scripts/research-supervision/verify-test.ts",
+      "終了コード": 0,
+      "結果": "六研究の対象・欠落・権限分離・今回追記・外部パス拒否が成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "python3 scripts/test-research-tick-models.py",
+      "終了コード": 0,
+      "結果": "3件成功"
+    },
+    {
+      "時刻": "2026-09-10T03:24:50+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
+      "終了コード": 0,
+      "結果": "研究監督tickの全検査成功"
+    }
+  ]
+}

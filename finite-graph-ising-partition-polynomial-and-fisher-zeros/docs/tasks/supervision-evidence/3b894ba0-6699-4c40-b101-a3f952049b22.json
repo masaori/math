@@ -1,0 +1,60 @@
+{
+  "実行識別子": "3b894ba0-6699-4c40-b101-a3f952049b22",
+  "観測時刻": "2026-09-06T20:59:50+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.finite-graph-ising-auto-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.finite-graph-ising-auto-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.finite-graph-ising-auto-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 11,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.finite-graph-ising-auto-loop.plist",
+    "存在": true,
+    "sha256": "4f6c784aa35cb74c4c4deecacf93fa4b9b7de290ea5562c6b17991c505fdf633",
+    "StartCalendarInterval": {
+      "Minute": 27
+    }
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/finite-graph-ising-auto-loop/launchd.log",
+      "存在": true,
+      "更新時刻": "2026-09-06T20:30:22+09:00",
+      "抽出行": [
+        "2026-09-06 20:27:14 === tick 開始",
+        "2026-09-06 20:27:14 モデル起動: codex / gpt-5.6-sol / reasoning high / CODEX_HOME=/Users/masaori/.codex-coding-agent-0001",
+        "2026-09-06 20:30:22 === tick 正常終了"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "観測時に登録あり・非実行中・last exit code 0。実ログは20:30:22正常終了、auto-loop.logは未達ゼロ・数学成果変更なしを示す。",
+  "成果比較": {
+    "開始成果": "d9df40ba29cb0c91facbb57932812610fc6238fd",
+    "前回読解終点": "0b591092ff7296977a3b1adb3b226af7f556e57d",
+    "今回読解終点": "d9df40ba29cb0c91facbb57932812610fc6238fd",
+    "確認した成果": [
+      "d55188543a86d6603b4b40a8ec203582700b04df・8bfc281eb5c3405eaf8238649453467567796f9a: 終了状態とMEMORYの記録のみ"
+    ]
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-06T21:06:16+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究の評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-06T21:06:16+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "24件成功"
+    }
+  ]
+}

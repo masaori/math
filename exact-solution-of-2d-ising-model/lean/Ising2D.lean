@@ -18,6 +18,15 @@ import Ising2D.Representation
 import Ising2D.NecSuf.TensorPowerBasis
 import Ising2D.Part002.Theorem000_TensorBasisFromNecSuf
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.NecSuf.ScalarPrefixProduct
+import Ising2D.Part004.ClaimGlobalSpinFlipJordanWignerRepresentationFromNecSuf
+import Ising2D.NecSuf.EpsilonSquare
+import Ising2D.Part004.ClaimEpsilonSquareFromNecSuf
+import Ising2D.Part004.ClaimEpsilonActionEigenvalues
+import Ising2D.NecSuf.InvolutionEigenvalue
+import Ising2D.Part004.ClaimEpsilonActionEigenvaluesFromNecSuf
+import Ising2D.Part004.EvenEigenvectors
+import Ising2D.Part004.OddEigenvectors
 import Ising2D.Part004.Claim014_ZYGenerateAlgebra
 import Ising2D.NecSuf.GeneratedByBasis
 import Ising2D.Part004.Claim014_ZYGenerateAlgebraFromNecSuf
@@ -61,6 +70,7 @@ import Ising2D.Part010.Definition001_ConfigBasisIso
 import Ising2D.Part010.Claim002_SigmaZDiagonal
 import Ising2D.Part010.Claim003_ExpDiagonal
 import Ising2D.Part010.Definition000_ComponentTransfer
+import Ising2D.Part010.V1JordanWigner
 import Ising2D.Part010.Claim004_V1Bridge
 import Ising2D.Part010.Claim005_TwoByTwoTransfer
 import Ising2D.Part010.Claim006_V2Bridge
@@ -87,6 +97,7 @@ import Ising2D.Part011.Definition006_RayleighSup
 import Ising2D.Part011.Claim007_OperatorBound
 import Ising2D.Part011.Claim008_TracePowerSandwich
 import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
+import Ising2D.Part011.PhysicalSymTransferBridge
 import Ising2D.Part011.Claim009_PartitionFunctionSandwich
 import Ising2D.Part011.Claim010_SectorDecomposition
 import Ising2D.NecSuf.NumberOperator

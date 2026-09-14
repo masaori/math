@@ -1,0 +1,8 @@
+PASS: componentwise vector negation, r=0
+RESULT: PASS
+PASS: componentwise vector negation, r=1
+RESULT: PASS
+PASS: componentwise vector negation, r=2
+RESULT: PASS
+PASS: componentwise vector negation, r=3
+RESULT: PASS

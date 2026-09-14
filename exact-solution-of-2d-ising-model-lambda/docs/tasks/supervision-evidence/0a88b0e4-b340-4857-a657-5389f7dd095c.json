@@ -1,0 +1,60 @@
+{
+  "実行識別子": "0a88b0e4-b340-4857-a657-5389f7dd095c",
+  "観測時刻": "2026-09-14T02:58:03+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.ising-lambda-auto-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.ising-lambda-auto-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.ising-lambda-auto-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 89,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist",
+    "存在": true,
+    "更新時刻": "2026-09-05T21:28:34+09:00",
+    "sha256": "cbed703002cee81ff8c2c71fd5a6ab508bc0e394ab401a3d247eee1173a6c3c5",
+    "StartCalendarInterval": "毎時5分・35分"
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log",
+      "mtime": "2026-09-14T02:35:08+09:00",
+      "lines": [
+        "2026-09-14 02:35:08 SKIP: 作業ツリーに未コミットの変更がある（人間が作業中とみなす）"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・非実行中・runs 89・last exit code 0。実ログの最新呼出し02:35:08は未コミット差分を保護するSKIPで、研究実行の成功ではない。",
+  "成果比較": {
+    "開始成果": "027279c0e767b15694300482b90b81cd51277e55",
+    "直前監督の読解終点": "8af55f089dcb84847d2390cbaa227a36cfabe9ef",
+    "今回読解終点": "9f7d58df5949546a23c14549fa1ee9e9148cefdf",
+    "開始成果以後の統合差分": [
+      "9f7d58df5: 複素行列版の実対数・双曲線正接の先行定義不足をstate・MEMORYへ再確認。数学本文・Lean・SageMath変更なし"
+    ],
+    "直前監督以後の統合差分": [
+      "当研究の数学本文・Lean・SageMathに統合差分なし"
+    ],
+    "未統合成果の保全": "専用worktreeにMEMORY・state・archive・本文の変更と160項有限系の証拠ディレクトリを未コミットのまま保持。12,220行・13,354未知数、階数11,833・拡大階数11,834の非可解性を記すcheckpointであり、監督から変更していない。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-14T03:09:05+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理。内容の意味はLLMによる検証の対象"
+    },
+    {
+      "時刻": "2026-09-14T03:09:05+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則の回帰検査24件成功"
+    }
+  ]
+}

@@ -324,7 +324,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         " と一言で書ける。",
       ]),
       paragraph([
-        ref("def_transfer_matrix_symbols"),
+        ref("def_site_pauli_matrices"),
         " の ",
         math(String.raw`\sigma_m^z = I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I`),
         "（第 ",

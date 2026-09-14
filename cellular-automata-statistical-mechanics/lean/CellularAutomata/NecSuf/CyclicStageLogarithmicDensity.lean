@@ -1,0 +1,703 @@
+/-
+章「有限巡回段階の対数順序群値と舞台サイズ規格化の境界」の Lean 必要十分版。
+
+必要な構造の検査結果:
+  - シフト不動点の分類には、セル型上の自己写像、基点、および基点から全セルへ有限反復で
+    到達できることだけを要る。有限性、巡回群、加法、局所規則、二元状態は要らない。
+  - 不動配位と状態の全単射には、上の到達性だけを要る。状態型の有限性は個数を取る段でだけ要る。
+  - 舞台サイズによる群内除算障害には、有限台整数ベクトルの一つの係数が一であることと、
+    倍率が二以上であることだけを要る。添字が素数であること、対数、舞台、局所規則は要らない。
+  - 有理係数への埋め込みと正整数除算には、任意の添字型上の有限台ベクトルだけを要る。
+  - 正規化列の非一定性には、任意の値域から有理数への一つの観測写像と、その観測値が
+    舞台サイズの逆数であることだけを要る。有限台、素数、対数、CA は要らない。
+  - 正の許容誤差による収束には、値域の線形順序付き加法群だけを要る。正整数の逆数列の
+    収束には、さらに正整数の埋め込み、除算、順序の Archimedes 性だけを要る。
+    シフト正規化列への移送には、一つの観測値が逆数列に一致することだけを要る。
+  - 有限和差量の定義と非負性には、添字が素数であることを要らず、任意の添字型上の
+    有限台有理ベクトルだけを要る。差量による収束の定義には、対象型上の差量写像と、
+    許容誤差型の零と狭義順序だけを要る。収束の証明には、差量が正整数の逆数に一致する
+    ことだけを要り、有限台、素数、巡回舞台、シフト規則は要らない。
+  - 相互に漸近一致しない Cauchy 列の非可算族には、対象型上の差量写像、正の許容誤差、
+    非可算な符号型から Cauchy 列への単射、および相異なる符号の像が漸近一致しないことだけを要る。
+    二元状態、有限台ベクトル、素数、有理数の四則演算、巡回舞台、局所規則は要らない。
+  - 実対数、位相、距離空間、完備化、実数体、複素数体は使わない。
+-/
+import CellularAutomata.CyclicStageLogarithmicDensity
+
+namespace CellularAutomata.NecSuf.CyclicStageLogarithmicDensity
+
+open CellularAutomata.EssentialDependency
+open CellularAutomata.CyclicRuleRestriction
+open CellularAutomata.CyclicStageLocalAgreement
+open CellularAutomata.CyclicStageLogarithmicDensity
+open CellularAutomata.PrimeLogarithm
+open CellularAutomata.NecSuf.GlobalMapIteration
+open CellularAutomata.NecSuf.PeriodicPointCount
+
+/-- 基点から自己写像を有限回反復して全セルへ到達できる。 -/
+def ReachesFromBase {Cell : Type} (step : Cell → Cell) (base : Cell) : Prop :=
+  ∀ v : Cell, ∃ n : ℕ, iterate step n base = v
+
+/--
+基点から全セルへ到達できる自己写像に沿う前合成で不変な配位は、定値配位に限る。
+逆向きには到達性を要らない。
+-/
+theorem fixed_precomposition_iff_constant
+    {Cell State' : Type}
+    (step : Cell → Cell) (base : Cell) (hreaches : ReachesFromBase step base)
+    (x : Cell → State') :
+    (fun v => x (step v)) = x ↔ ∀ v : Cell, x v = x base := by
+  constructor
+  · intro hfixed v
+    have hinvariant : ∀ n : ℕ, x (iterate step n base) = x base := by
+      intro n
+      induction n with
+      | zero => rfl
+      | succ n ih =>
+          rw [iterate_succ]
+          exact (congrFun hfixed _).trans ih
+    obtain ⟨n, hn⟩ := hreaches v
+    calc
+      x v = x (iterate step n base) := congrArg x hn.symm
+      _ = x base := hinvariant n
+  · intro hconstant
+    funext v
+    exact (hconstant (step v)).trans (hconstant v).symm
+
+/-- 上の到達条件の下で、不動配位は基点での値と全単射になる。 -/
+noncomputable def fixedPrecompositionEquivState
+    {Cell State' : Type}
+    (step : Cell → Cell) (base : Cell) (hreaches : ReachesFromBase step base) :
+    {x : Cell → State' // (fun v => x (step v)) = x} ≃ State' where
+  toFun x := x.val base
+  invFun a := ⟨fun _ => a, rfl⟩
+  left_inv x := by
+    apply Subtype.ext
+    funext v
+    exact (fixed_precomposition_iff_constant step base hreaches x.val).1 x.property v |>.symm
+  right_inv _ := rfl
+
+/-- 添字型上の有限台整数ベクトルの各係数を整数倍する。 -/
+noncomputable def vectorScale {Index : Type} [DecidableEq Index]
+    (d : ℤ) (a : Index →₀ ℤ) : Index →₀ ℤ :=
+  a.mapRange (fun z => d * z) (mul_zero d)
+
+theorem vectorScale_apply {Index : Type} [DecidableEq Index]
+    (d : ℤ) (a : Index →₀ ℤ) (p : Index) : vectorScale d a p = d * a p := rfl
+
+/-- ある係数が一なら、二以上の整数倍として有限台整数ベクトルを表せない。 -/
+theorem no_scaled_preimage_of_coefficient_one
+    {Index : Type} [DecidableEq Index]
+    (a : Index →₀ ℤ) (p : Index) (d : ℕ) (hd : 2 ≤ d) (hp : a p = 1) :
+    ¬ ∃ b : Index →₀ ℤ, vectorScale (d : ℤ) b = a := by
+  rintro ⟨b, hb⟩
+  have hcoefficient := congrArg (fun v : Index →₀ ℤ => v p) hb
+  rw [vectorScale_apply, hp] at hcoefficient
+  have hdiv : (d : ℤ) ∣ 1 := ⟨b p, hcoefficient.symm⟩
+  have hle := Int.natAbs_le_of_dvd_ne_zero hdiv (by norm_num : (1 : ℤ) ≠ 0)
+  simp at hle
+  omega
+
+/-! ### 有理係数正規化列に必要な構造 -/
+
+/-- 任意の添字型上の有限台有理ベクトル。 -/
+abbrev RationalVector (Index : Type) := Index →₀ ℚ
+
+/-- 任意の添字型上の有限台整数ベクトルを有限台有理ベクトルへ埋め込む。 -/
+noncomputable def integerVectorEmbedding {Index : Type} [DecidableEq Index]
+    (a : Index →₀ ℤ) : RationalVector Index :=
+  a.mapRange (fun z : ℤ => (z : ℚ)) (by norm_num)
+
+theorem integerVectorEmbedding_apply {Index : Type} [DecidableEq Index]
+    (a : Index →₀ ℤ) (i : Index) :
+    integerVectorEmbedding a i = (a i : ℚ) := rfl
+
+/-- 有限台有理ベクトルの各係数を正の自然数で割る。 -/
+noncomputable def divideRationalVectorByPositiveNat {Index : Type} [DecidableEq Index]
+    (a : RationalVector Index) (L : PositiveStage) : RationalVector Index :=
+  a.mapRange (fun q : ℚ => q / (L.val : ℚ)) (by simp)
+
+theorem divideRationalVectorByPositiveNat_apply
+    {Index : Type} [DecidableEq Index]
+    (a : RationalVector Index) (L : PositiveStage) (i : Index) :
+    divideRationalVectorByPositiveNat a L i = a i / (L.val : ℚ) := rfl
+
+/--
+列の一つの有理観測値が各正段階で舞台サイズの逆数なら、任意の段階とその二倍で列は異なる。
+値域には、観測写像以外の構造を要しない。
+-/
+theorem sequence_ne_double_of_inverse_observation
+    {Value : Type}
+    (sequence : PositiveStage → Value) (observation : Value → ℚ)
+    (hinverse : ∀ L : PositiveStage, observation (sequence L) = 1 / (L.val : ℚ))
+    (L : PositiveStage) :
+    sequence L ≠ sequence ⟨2 * L.val, by omega⟩ := by
+  intro hequal
+  have hobservation := congrArg observation hequal
+  rw [hinverse, hinverse] at hobservation
+  have hnonzero : (L.val : ℚ) ≠ 0 := by exact_mod_cast L.property.ne'
+  have hdoubleNonzero : ((2 * L.val : ℕ) : ℚ) ≠ 0 := by
+    exact_mod_cast (Nat.mul_pos (by decide : 0 < 2) L.property).ne'
+  have hdenominators : ((2 * L.val : ℕ) : ℚ) = (L.val : ℚ) := by
+    simpa using (div_eq_div_iff hnonzero hdoubleNonzero).mp hobservation
+  have hnat : 2 * L.val = L.val := by exact_mod_cast hdenominators
+  omega
+
+/--
+一つの有理観測値が舞台サイズの逆数である列は、等号では最終的に一定にならない。
+-/
+theorem sequence_not_eventually_constant_of_inverse_observation
+    {Value : Type}
+    (sequence : PositiveStage → Value) (observation : Value → ℚ)
+    (hinverse : ∀ L : PositiveStage, observation (sequence L) = 1 / (L.val : ℚ)) :
+    ¬ ∃ L₀ : PositiveStage, ∃ d : Value,
+      ∀ L : PositiveStage, L₀.val ≤ L.val → sequence L = d := by
+  rintro ⟨L₀, d, hconstant⟩
+  let L₂ : PositiveStage := ⟨2 * L₀.val, by omega⟩
+  have hfirst := hconstant L₀ (by omega)
+  have hlater := hconstant L₂ (by change L₀.val ≤ 2 * L₀.val; omega)
+  have hdouble : L₂ = (⟨2 * L₀.val, by omega⟩ : PositiveStage) := rfl
+  rw [hdouble] at hlater
+  exact sequence_ne_double_of_inverse_observation sequence observation hinverse L₀
+    (hfirst.trans hlater.symm)
+
+/-! ### 正の許容誤差による収束に必要な構造 -/
+
+/--
+正の許容誤差だけを量化する列の収束。値域には線形順序付き加法群以外を要しない。
+位相、距離空間、完備化は仮定しない。
+-/
+def ConvergesWithPositiveErrors
+    {Value : Type} [AddCommGroup Value] [LinearOrder Value] [IsOrderedAddMonoid Value]
+    (u : PositiveStage → Value) (q : Value) : Prop :=
+  ∀ ε : Value, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L : PositiveStage, L₀.val ≤ L.val → |u L - q| < ε
+
+/--
+線形順序体が Archimedes 性を持てば、正整数の逆数列は正の許容誤差の意味で零へ収束する。
+完備性は要らない。
+-/
+theorem positiveIntegerReciprocal_convergesWithPositiveErrors
+    {Value : Type} [Field Value] [LinearOrder Value] [IsStrictOrderedRing Value]
+    [Archimedean Value] :
+    ConvergesWithPositiveErrors
+      (fun L : PositiveStage => 1 / (L.val : Value)) 0 := by
+  intro ε hε
+  obtain ⟨n, hn⟩ := exists_nat_gt (1 / ε)
+  let L₀ : PositiveStage := ⟨n + 1, by omega⟩
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  have hnL : n < L.val := by
+    change n + 1 ≤ L.val at hL
+    omega
+  have hnLValue : (n : Value) < (L.val : Value) := by exact_mod_cast hnL
+  have hinverseLt : 1 / ε < (L.val : Value) := hn.trans hnLValue
+  have honeLt : (1 : Value) < (L.val : Value) * ε :=
+    (div_lt_iff₀ hε).mp hinverseLt
+  have hLpositive : (0 : Value) < (L.val : Value) := by exact_mod_cast L.property
+  rw [sub_zero, abs_of_pos (one_div_pos.mpr hLpositive)]
+  apply (div_lt_iff₀ hLpositive).mpr
+  simpa [mul_comm] using honeLt
+
+/--
+任意の値域から取った一つの観測値が正整数の逆数なら、その観測値列は零へ収束する。
+元の値域には観測写像以外の構造を要しない。
+-/
+theorem observedSequence_converges_of_inverse_representation
+    {Source Value : Type} [Field Value] [LinearOrder Value] [IsStrictOrderedRing Value]
+    [Archimedean Value]
+    (sequence : PositiveStage → Source) (observation : Source → Value)
+    (hinverse : ∀ L : PositiveStage, observation (sequence L) = 1 / (L.val : Value)) :
+    ConvergesWithPositiveErrors (fun L => observation (sequence L)) 0 := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ :=
+    (positiveIntegerReciprocal_convergesWithPositiveErrors (Value := Value)) ε hε
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  change |observation (sequence L) - 0| < ε
+  rw [hinverse]
+  exact htail L hL
+
+/-! ### 有限和差量による収束に必要な構造 -/
+
+/-- 任意の添字型上の有限台有理ベクトルについて、台の合併上で取る有限和差量。 -/
+noncomputable def rationalVectorFiniteSumDistance
+    {Index : Type} [DecidableEq Index]
+    (a b : RationalVector Index) : ℚ :=
+  (a.support ∪ b.support).sum fun i => |a i - b i|
+
+/-- 任意の添字型上でも、有限和差量は非負有理数である。 -/
+theorem rationalVectorFiniteSumDistance_nonnegative
+    {Index : Type} [DecidableEq Index]
+    (a b : RationalVector Index) :
+    0 ≤ rationalVectorFiniteSumDistance a b := by
+  apply Finset.sum_nonneg
+  intro i hi
+  exact abs_nonneg (a i - b i)
+
+/--
+対象型上の差量写像を用い、正の許容誤差だけを量化する収束。
+対象型には構造を要らず、許容誤差型には零と狭義順序だけを要る。
+-/
+def ConvergesByPositiveErrors
+    {Source Error : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (sequence : PositiveStage → Source) (target : Source) : Prop :=
+  ∀ ε : Error, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L : PositiveStage, L₀.val ≤ L.val → discrepancy (sequence L) target < ε
+
+/--
+差量が各正段階で正整数の逆数に一致すれば、その差量について零へ収束する。
+元の対象型には差量写像以外の構造を要しない。
+-/
+theorem convergesByPositiveErrors_of_inverse_discrepancy
+    {Source Value : Type} [Field Value] [LinearOrder Value] [IsStrictOrderedRing Value]
+    [Archimedean Value]
+    (discrepancy : Source → Source → Value)
+    (sequence : PositiveStage → Source) (target : Source)
+    (hinverse : ∀ L : PositiveStage,
+      discrepancy (sequence L) target = 1 / (L.val : Value)) :
+    ConvergesByPositiveErrors discrepancy sequence target := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ :=
+    (positiveIntegerReciprocal_convergesWithPositiveErrors (Value := Value)) ε hε
+  refine ⟨L₀, ?_⟩
+  intro L hL
+  rw [hinverse]
+  simpa using htail L hL
+
+/-! ### Cauchy 性と極限不在に必要な構造 -/
+
+/--
+対象型上の差量写像を用い、正の許容誤差だけを量化する Cauchy 性。
+対象型には構造を要らず、許容誤差型には零と狭義順序だけを要る。
+-/
+def CauchyByPositiveErrors
+    {Source Error : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (sequence : PositiveStage → Source) : Prop :=
+  ∀ ε : Error, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L M : PositiveStage, L₀.val ≤ L.val → L₀.val ≤ M.val →
+      discrepancy (sequence L) (sequence M) < ε
+
+/--
+対称な差量が、順序づけた二段階では早い段階の正整数逆数より小さければ、列は Cauchy である。
+対象型には差量写像以外の構造を要らず、値域には Archimedes 線形順序体だけを要る。
+-/
+theorem cauchyByPositiveErrors_of_oneSidedInverseBound
+    {Source Value : Type} [Field Value] [LinearOrder Value] [IsStrictOrderedRing Value]
+    [Archimedean Value]
+    (discrepancy : Source → Source → Value)
+    (hsymmetric : ∀ a b, discrepancy a b = discrepancy b a)
+    (sequence : PositiveStage → Source)
+    (hbound : ∀ L M : PositiveStage, L.val ≤ M.val →
+      discrepancy (sequence L) (sequence M) < 1 / (L.val : Value)) :
+    CauchyByPositiveErrors discrepancy sequence := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ :=
+    (positiveIntegerReciprocal_convergesWithPositiveErrors (Value := Value)) ε hε
+  refine ⟨L₀, ?_⟩
+  intro L M hL hM
+  rcases le_total L.val M.val with hLM | hML
+  · have hLpositive : (0 : Value) < (L.val : Value) := by exact_mod_cast L.property
+    have hreciprocal : 1 / (L.val : Value) < ε := by
+      simpa [abs_of_pos (one_div_pos.mpr hLpositive)] using htail L hL
+    exact (hbound L M hLM).trans hreciprocal
+  · rw [hsymmetric]
+    have hMpositive : (0 : Value) < (M.val : Value) := by exact_mod_cast M.property
+    have hreciprocal : 1 / (M.val : Value) < ε := by
+      simpa [abs_of_pos (one_div_pos.mpr hMpositive)] using htail M hM
+    exact (hbound M L hML).trans hreciprocal
+
+/--
+各候補に対して正の下界が任意に遅い段階で残るなら、その列はどの候補にも収束しない。
+対象型には列と差量写像以外の構造を要らず、誤差型には前順序と零だけを要る。
+-/
+theorem noLimitByPositiveErrors_of_persistentLowerBound
+    {Source Error : Type} [Preorder Error] [Zero Error]
+    (discrepancy : Source → Source → Error)
+    (sequence : PositiveStage → Source)
+    (hlower : ∀ target : Source, ∃ ε : Error, 0 < ε ∧
+      ∀ L₀ : PositiveStage, ∃ L : PositiveStage,
+        L₀.val ≤ L.val ∧ ε ≤ discrepancy (sequence L) target) :
+    ¬ ∃ target : Source, ConvergesByPositiveErrors discrepancy sequence target := by
+  rintro ⟨target, hconverges⟩
+  obtain ⟨ε, hε, hlowerTarget⟩ := hlower target
+  obtain ⟨L₀, htail⟩ := hconverges ε hε
+  obtain ⟨L, hL, hbound⟩ := hlowerTarget L₀
+  exact (not_lt_of_ge hbound) (htail L hL)
+
+/-! ### 相互に漸近一致しない Cauchy 列族に必要な構造 -/
+
+/--
+対象型上の差量写像を用い、正の許容誤差だけを量化する二列の漸近一致条件。
+対象型には構造を要らず、許容誤差型には零と狭義順序だけを要る。
+-/
+def AsymptoticallyAgreesByPositiveErrors
+    {Source Error : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (left right : PositiveStage → Source) : Prop :=
+  ∀ ε : Error, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L : PositiveStage, L₀.val ≤ L.val →
+      discrepancy (left L) (right L) < ε
+
+/-- 指定した差量について Cauchy である列の型。 -/
+def CauchySequenceByPositiveErrors
+    {Source Error : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error) :=
+  {sequence : PositiveStage → Source //
+    CauchyByPositiveErrors discrepancy sequence}
+
+/-- 符号型から構成した Cauchy 列だけからなる族。 -/
+def EncodedCauchySequenceFamily
+    {Source Error Code : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy) :=
+  {sequence : CauchySequenceByPositiveErrors discrepancy //
+    sequence ∈ Set.range encode}
+
+/-- 各符号を、その符号から構成した Cauchy 列族の元へ送る。 -/
+noncomputable def encodedCauchySequenceFamilyElement
+    {Source Error Code : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy)
+    (code : Code) : EncodedCauchySequenceFamily discrepancy encode :=
+  ⟨encode code, ⟨code, rfl⟩⟩
+
+/-- 符号化が単射なら、符号から Cauchy 列族への写像も単射である。 -/
+theorem encodedCauchySequenceFamilyElement_injective
+    {Source Error Code : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy)
+    (hencode : Function.Injective encode) :
+    Function.Injective
+      (encodedCauchySequenceFamilyElement discrepancy encode) := by
+  intro left right hequal
+  apply hencode
+  exact congrArg
+    (fun sequence : EncodedCauchySequenceFamily discrepancy encode => sequence.val)
+    hequal
+
+/--
+相異なる符号の像が漸近一致しないなら、符号化した族の相異なる二列も漸近一致しない。
+-/
+theorem encodedCauchySequenceFamily_pairwise_not_asymptotically_agree
+    {Source Error Code : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy)
+    (hpair : ∀ {left right : Code}, left ≠ right →
+      ¬ AsymptoticallyAgreesByPositiveErrors discrepancy
+        (encode left).val (encode right).val)
+    (left right : EncodedCauchySequenceFamily discrepancy encode)
+    (hne : left ≠ right) :
+    ¬ AsymptoticallyAgreesByPositiveErrors discrepancy
+      left.val.val right.val.val := by
+  obtain ⟨leftCode, hleft⟩ := left.property
+  obtain ⟨rightCode, hright⟩ := right.property
+  have hcodes : leftCode ≠ rightCode := by
+    intro hequal
+    apply hne
+    apply Subtype.ext
+    exact hleft.symm.trans ((congrArg encode hequal).trans hright)
+  rw [← hleft, ← hright]
+  exact hpair hcodes
+
+/-- 非可算な符号型が単射されるなら、符号化した Cauchy 列族は非可算である。 -/
+theorem encodedCauchySequenceFamily_uncountable
+    {Source Error Code : Type} [Zero Error] [LT Error] [Uncountable Code]
+    (discrepancy : Source → Source → Error)
+    (encode : Code → CauchySequenceByPositiveErrors discrepancy)
+    (hencode : Function.Injective encode) :
+    Uncountable (EncodedCauchySequenceFamily discrepancy encode) := by
+  exact (encodedCauchySequenceFamilyElement_injective
+    discrepancy encode hencode).uncountable
+
+/-! ### 具体版の導出 -/
+
+section Derivation
+
+/-- 有限巡回舞台の加法一ステップは、零から全セルへ有限反復で到達する。 -/
+theorem cyclic_successor_reaches_from_zero (L : PositiveStage) :
+    ReachesFromBase (fun v : Stage L => v + 1) 0 := by
+  intro v
+  have hnat : ∀ n : ℕ, iterate (fun w : Stage L => w + 1) n 0 = (n : Stage L) := by
+    intro n
+    induction n with
+    | zero => simp [iterate_zero]
+    | succ n ih => rw [iterate_succ, ih, Nat.cast_succ]
+  exact ⟨v.val, (hnat v.val).trans (ZMod.natCast_zmod_val v)⟩
+
+/-- 具体版のシフト不動点分類は、基点からの到達性だけを使う一般定理の特殊化である。 -/
+theorem shift_fixed_iff_constant_of_necSuf (L : PositiveStage) (x : Stage L → State) :
+    iterate (stageMap L 1 shiftRule) 1 x = x ↔ ∀ v : Stage L, x v = x 0 := by
+  have hmap : iterate (stageMap L 1 shiftRule) 1 x =
+      (fun v : Stage L => x (v + 1)) := by
+    funext v
+    simp [iterate, stageMap_shiftRule_apply]
+  rw [hmap]
+  exact fixed_precomposition_iff_constant
+    (fun v : Stage L => v + 1) 0 (cyclic_successor_reaches_from_zero L) x
+
+/-- 具体版の不動配位と二元状態の全単射も、基点からの到達性だけから得られる。 -/
+noncomputable def shiftFixedEquivStateOfNecSuf (L : PositiveStage) :
+    {x : Stage L → State // iterate (stageMap L 1 shiftRule) 1 x = x} ≃ State where
+  toFun x := x.val 0
+  invFun a := ⟨fun _ => a, (shift_fixed_iff_constant_of_necSuf L _).2 (fun _ => rfl)⟩
+  left_inv x := by
+    apply Subtype.ext
+    funext v
+    exact (shift_fixed_iff_constant_of_necSuf L x.val).1 x.property v |>.symm
+  right_inv _ := rfl
+
+/-- 具体版の不動点数二は、一般の不動配位全単射の特殊化である。 -/
+theorem shift_fixedPointCountSequence_of_necSuf (L : PositiveStage) :
+    fixedPointCountSequence 1 shiftRule 1 L = 2 := by
+  classical
+  calc
+    fixedPointCountSequence 1 shiftRule 1 L =
+        Fintype.card {x : Stage L → State // iterate (stageMap L 1 shiftRule) 1 x = x} := by
+      unfold fixedPointCountSequence fixedPointCount fixedPoints
+      convert (Fintype.card_subtype
+        (fun x : Stage L → State => iterate (stageMap L 1 shiftRule) 1 x = x)).symm using 1
+      apply congrArg Finset.card
+      ext x
+      simp
+    _ = Fintype.card State := Fintype.card_congr (shiftFixedEquivStateOfNecSuf L)
+    _ = 2 := card_state
+
+/-- 具体版の自由エントロピー値は、一般の不動配位全単射から得た個数二に従う。 -/
+theorem shift_logarithmic_count_of_necSuf (L : PositiveStage) :
+    logarithmicCountSequence 1 shiftRule 1 (shiftPositiveCountStage L) =
+      logarithm (positiveNat 2 (by decide)) := by
+  unfold logarithmicCountSequence
+  apply congrArg logarithm
+  apply Subtype.ext
+  change ((fixedPointCountSequence 1 shiftRule 1 L : ℕ) : ℚ) / 1 = (2 : ℚ) / 1
+  rw [shift_fixedPointCountSequence_of_necSuf]
+  norm_num
+
+/-- 具体版の素数二係数一も、一般の不動配位全単射から得た個数二に従う。 -/
+theorem shift_logarithmic_count_at_two_of_necSuf (L : PositiveStage) :
+    logarithmicCountSequence 1 shiftRule 1 (shiftPositiveCountStage L) ⟨2, by decide⟩ = 1 := by
+  rw [shift_logarithmic_count_of_necSuf]
+  exact logarithm_two_at_two
+
+/-- 具体版の規格化障害は、素数二の係数一だけを使う一般定理の特殊化である。 -/
+theorem shift_not_mem_logarithmicDensityDomain_of_necSuf
+    (L : PositiveStage) (hL : 2 ≤ L.val) :
+    shiftPositiveCountStage L ∉ LogarithmicDensityDomain 1 shiftRule 1 := by
+  intro hdomain
+  obtain ⟨d, hd, _⟩ := hdomain
+  apply no_scaled_preimage_of_coefficient_one
+    (logarithmicCountSequence 1 shiftRule 1 (shiftPositiveCountStage L))
+    (⟨2, by decide⟩ : Prime) L.val hL (shift_logarithmic_count_at_two_of_necSuf L)
+  refine ⟨d, ?_⟩
+  exact hd
+
+/-- 具体版の整数係数埋め込みは、任意の添字型上の埋め込みの特殊化である。 -/
+theorem rationalEmbedding_eq_necessary_sufficient (a : LogVector) :
+    rationalEmbedding a = integerVectorEmbedding a := rfl
+
+/-- 具体版の正整数除算は、任意の添字型上の除算の特殊化である。 -/
+theorem divideRationalVector_eq_necessary_sufficient
+    (a : RationalLogVector) (L : PositiveStage) :
+    divideRationalVector a L = divideRationalVectorByPositiveNat a L := rfl
+
+/-- 具体版の素数二係数は、一般の埋め込みと正整数除算から得られる。 -/
+theorem shiftRationalizedLogarithmicDensity_at_two_of_necSuf (L : PositiveStage) :
+    shiftRationalizedLogarithmicDensity L ⟨2, by decide⟩ = 1 / (L.val : ℚ) := by
+  rw [shiftRationalizedLogarithmicDensity,
+    divideRationalVector_eq_necessary_sufficient,
+    divideRationalVectorByPositiveNat_apply,
+    rationalEmbedding_eq_necessary_sufficient,
+    integerVectorEmbedding_apply,
+    shift_logarithmic_count_at_two_of_necSuf]
+  norm_num
+
+/-- 具体版の二倍段階との非一致は、一座標の逆数表示だけを使う一般定理から得られる。 -/
+theorem shiftRationalizedLogarithmicDensity_ne_double_of_necSuf (L : PositiveStage) :
+    shiftRationalizedLogarithmicDensity L ≠
+      shiftRationalizedLogarithmicDensity ⟨2 * L.val, by omega⟩ := by
+  exact sequence_ne_double_of_inverse_observation
+    shiftRationalizedLogarithmicDensity
+    (fun a : RationalLogVector => a ⟨2, by decide⟩)
+    shiftRationalizedLogarithmicDensity_at_two_of_necSuf L
+
+/-- 具体版の完全安定化の否定は、一座標の逆数表示だけを使う一般定理から得られる。 -/
+theorem shiftRationalizedLogarithmicDensity_not_eventually_constant_of_necSuf :
+    ¬ ∃ L₀ : PositiveStage, ∃ d : RationalLogVector,
+      ∀ L : PositiveStage, L₀.val ≤ L.val → shiftRationalizedLogarithmicDensity L = d := by
+  exact sequence_not_eventually_constant_of_inverse_observation
+    shiftRationalizedLogarithmicDensity
+    (fun a : RationalLogVector => a ⟨2, by decide⟩)
+    shiftRationalizedLogarithmicDensity_at_two_of_necSuf
+
+/-- 具体版の有理収束定義は、線形順序付き加法群上の一般定義の特殊化である。 -/
+theorem rationallyConverges_iff_convergesWithPositiveErrors
+    (u : PositiveStage → ℚ) (q : ℚ) :
+    RationallyConverges u q ↔ ConvergesWithPositiveErrors u q := by
+  rfl
+
+/-- 具体版の正整数逆数列の収束は、Archimedes 線形順序体上の一般定理から得られる。 -/
+theorem positiveIntegerReciprocal_rationallyConverges_of_necSuf :
+    RationallyConverges (fun L : PositiveStage => 1 / (L.val : ℚ)) 0 := by
+  rw [rationallyConverges_iff_convergesWithPositiveErrors]
+  exact positiveIntegerReciprocal_convergesWithPositiveErrors
+
+/--
+具体版のシフト素数二係数列の収束は、一つの観測値の逆数表示だけを使う一般定理から得られる。
+-/
+theorem shiftRationalizedPrimeTwoCoefficient_rationallyConverges_of_necSuf :
+    RationallyConverges shiftRationalizedPrimeTwoCoefficient 0 := by
+  rw [rationallyConverges_iff_convergesWithPositiveErrors]
+  exact observedSequence_converges_of_inverse_representation
+    shiftRationalizedLogarithmicDensity
+    (fun a : RationalLogVector => a ⟨2, by decide⟩)
+    shiftRationalizedLogarithmicDensity_at_two_of_necSuf
+
+/-- 素数添字の具体的な有限和差量は、任意添字上の一般定義の特殊化である。 -/
+theorem rationalLogVectorFiniteSumDistance_eq_necessary_sufficient
+    (a b : RationalLogVector) :
+    rationalLogVectorFiniteSumDistance a b = rationalVectorFiniteSumDistance a b := by
+  rfl
+
+/-- 具体版の有限和差量の非負性は、任意添字上の一般定理から得られる。 -/
+theorem rationalLogVectorFiniteSumDistance_nonnegative_of_necSuf
+    (a b : RationalLogVector) :
+    0 ≤ rationalLogVectorFiniteSumDistance a b := by
+  rw [rationalLogVectorFiniteSumDistance_eq_necessary_sufficient]
+  exact rationalVectorFiniteSumDistance_nonnegative a b
+
+/-- 具体版のベクトル収束定義は、差量写像だけを使う一般定義の特殊化である。 -/
+theorem rationalLogVectorConverges_iff_convergesByPositiveErrors
+    (d : PositiveStage → RationalLogVector) (a : RationalLogVector) :
+    RationalLogVectorConverges d a ↔
+      ConvergesByPositiveErrors rationalLogVectorFiniteSumDistance d a := by
+  rfl
+
+/--
+具体版のシフト正規化ベクトル列の収束は、差量の逆数表示だけを使う一般定理から得られる。
+-/
+theorem shiftRationalizedLogarithmicDensity_vectorConverges_of_necSuf :
+    RationalLogVectorConverges shiftRationalizedLogarithmicDensity rationalLogVectorZero := by
+  rw [rationalLogVectorConverges_iff_convergesByPositiveErrors]
+  exact convergesByPositiveErrors_of_inverse_discrepancy
+    rationalLogVectorFiniteSumDistance
+    shiftRationalizedLogarithmicDensity
+    rationalLogVectorZero
+    shiftRationalizedLogarithmicDensity_distance_zero
+
+/-- 具体版の Cauchy 性の定義は、差量写像だけを使う一般定義の特殊化である。 -/
+theorem rationalLogVectorCauchy_iff_cauchyByPositiveErrors
+    (d : PositiveStage → RationalLogVector) :
+    RationalLogVectorCauchy d ↔
+      CauchyByPositiveErrors rationalLogVectorFiniteSumDistance d := by
+  rfl
+
+/-- 具体版の幾何級数打ち切り列の Cauchy 性は、対称性と一方向の逆数上界から得られる。 -/
+theorem geometricPrimeTruncation_cauchy_of_necSuf :
+    RationalLogVectorCauchy geometricPrimeTruncation := by
+  rw [rationalLogVectorCauchy_iff_cauchyByPositiveErrors]
+  apply cauchyByPositiveErrors_of_oneSidedInverseBound
+  · intro a b
+    rw [rationalLogVectorFiniteSumDistance, rationalLogVectorFiniteSumDistance,
+      Finset.union_comm]
+    apply Finset.sum_congr rfl
+    intro p hp
+    exact abs_sub_comm _ _
+  · exact geometricPrimeTruncation_distance_lt_reciprocal
+
+/-- 具体版の非収束は、各有限台候補の外に残る一係数の正の下界から得られる。 -/
+theorem geometricPrimeTruncation_no_finiteSupport_limit_of_necSuf :
+    ¬ ∃ a : RationalLogVector,
+      RationalLogVectorConverges geometricPrimeTruncation a := by
+  rw [show (∃ a : RationalLogVector,
+      RationalLogVectorConverges geometricPrimeTruncation a) ↔
+      ∃ a : RationalLogVector,
+        ConvergesByPositiveErrors rationalLogVectorFiniteSumDistance
+          geometricPrimeTruncation a by rfl]
+  apply noLimitByPositiveErrors_of_persistentLowerBound
+  intro a
+  classical
+  have hmissing : ∃ k ∈ Finset.range (a.support.card + 1),
+      increasingPrimeIndex k ∉ a.support := by
+    by_contra h
+    push_neg at h
+    have hsubset :
+        (Finset.range (a.support.card + 1)).image increasingPrimeIndex ⊆ a.support := by
+      intro p hp
+      obtain ⟨k, hk, rfl⟩ := Finset.mem_image.mp hp
+      exact h k hk
+    have hcard := Finset.card_le_card hsubset
+    rw [Finset.card_image_iff.mpr
+      (Set.injOn_of_injective increasingPrimeIndex_injective)] at hcard
+    simp at hcard
+  obtain ⟨k, hkRange, hp⟩ := hmissing
+  let p : Prime := increasingPrimeIndex k
+  let ε : ℚ := 1 / (2 : ℚ) ^ (k + 1)
+  have hε : 0 < ε := by positivity
+  refine ⟨ε, hε, ?_⟩
+  intro L₀
+  let L : PositiveStage := ⟨max L₀.val (k + 1), by omega⟩
+  refine ⟨L, by simp [L], ?_⟩
+  have hkL : k < L.val := by simp [L]
+  have hcoefficient : geometricPrimeTruncation L p = ε := by
+    change geometricPrimeTruncation L (increasingPrimeIndex k) = ε
+    rw [geometricPrimeTruncation_apply_index]
+    simp [hkL, ε]
+  have hap : a p = 0 := Finsupp.notMem_support_iff.mp hp
+  have hle := coefficient_abs_le_finiteSumDistance (geometricPrimeTruncation L) a p
+  rw [hcoefficient, hap, sub_zero, abs_of_pos hε] at hle
+  exact hle
+
+/-- 具体版の漸近一致条件は、差量写像だけを使う一般定義の特殊化である。 -/
+theorem rationalLogVectorAsymptoticallyAgrees_iff_necessary_sufficient
+    (left right : PositiveStage → RationalLogVector) :
+    RationalLogVectorAsymptoticallyAgrees left right ↔
+      AsymptoticallyAgreesByPositiveErrors
+        rationalLogVectorFiniteSumDistance left right := by
+  rfl
+
+/-- 具体版の Cauchy 列型は、差量写像だけを使う一般の Cauchy 列型と一致する。 -/
+theorem rationalLogVectorCauchySequence_eq_necessary_sufficient :
+    RationalLogVectorCauchySequence =
+      CauchySequenceByPositiveErrors rationalLogVectorFiniteSumDistance := by
+  rfl
+
+/--
+具体版の非可算族は、非可算な符号型から Cauchy 列への単射だけを使う一般定理から得られる。
+-/
+theorem binaryCauchySequenceFamily_uncountable_of_necSuf :
+    Uncountable BinaryCauchySequenceFamily := by
+  have hbinary : Uncountable (ℕ → State) := by
+    letI : Nonempty (ℕ → State) := ⟨fun _ => State.zero⟩
+    rw [uncountable_iff_forall_not_surjective]
+    intro candidate hsurjective
+    let diagonal : ℕ → State := fun n => nu (candidate n n)
+    obtain ⟨n, hn⟩ := hsurjective diagonal
+    have hat := congrFun hn n
+    cases hstate : candidate n n <;> simp_all [diagonal, nu]
+  letI : Uncountable (ℕ → State) := hbinary
+  change Uncountable (EncodedCauchySequenceFamily
+    rationalLogVectorFiniteSumDistance binaryCauchySequence)
+  exact encodedCauchySequenceFamily_uncountable
+    rationalLogVectorFiniteSumDistance binaryCauchySequence
+    binaryCauchySequence_injective
+
+/--
+具体版の族の相互漸近不一致は、符号像の相互漸近不一致だけを使う一般定理から得られる。
+-/
+theorem binaryCauchySequenceFamily_pairwise_not_asymptotically_agree_of_necSuf
+    (left right : BinaryCauchySequenceFamily) (hne : left ≠ right) :
+    ¬ RationalLogVectorAsymptoticallyAgrees left.val.val right.val.val := by
+  rw [rationalLogVectorAsymptoticallyAgrees_iff_necessary_sufficient]
+  apply encodedCauchySequenceFamily_pairwise_not_asymptotically_agree
+    rationalLogVectorFiniteSumDistance binaryCauchySequence
+  · intro leftCode rightCode hcodes
+    rw [← rationalLogVectorAsymptoticallyAgrees_iff_necessary_sufficient]
+    exact binaryGeometricPrimeTruncation_not_asymptotically_agree hcodes
+  · exact hne
+
+end Derivation
+
+end CellularAutomata.NecSuf.CyclicStageLogarithmicDensity
