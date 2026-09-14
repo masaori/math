@@ -67,6 +67,18 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_submultiplicative_count_bounds",
+        title: "正整数値有限表の劣乗法不等式と極限の境界",
+        input: "正の自然数で添字づけた正整数値の有限表、自然数の加法・乗法・冪・順序比較を入力とする。",
+        output: "有限打ち切り内の劣乗法性を有限比較で決定し、倍数段階の規格化前の密度上界を対数と除算なしで得る一方、有限証明書から全段階の不等式も極限存在も従わない境界を得る。",
+        main: "主張は、有限劣乗法証明書から倍数段階の交差冪不等式を導けるが、同じ有限表を持つ二つの後続列が次段階の不等式では分かれうるため、熱力学極限の存在には全段階の仮定と完備な住処が別に要ることである。",
+        mainLabels: [
+          "claim_finite_submultiplicative_count_certificate_decidable",
+          "claim_finite_submultiplicative_count_multiple_index_density_bound",
+          "claim_finite_submultiplicative_count_cutoff_not_global",
+        ],
+      },
+      {
         id: "cyclic_offset_finite_images",
         title: "整数オフセットの有限剰余像",
         input: "正の周期、非負の半径、有限整数区間と整数の余り写像を入力とする。",

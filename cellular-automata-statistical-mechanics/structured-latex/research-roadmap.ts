@@ -478,6 +478,11 @@ export const roadmapStages = [
         label: "claim_rational_prime_vector_asymptotically_distinct_cauchy_sequences_uncountable",
         why: "自然数添字の二元列から互いに漸近一致しない Cauchy 列の非可算族を作り、可算な有限台の担い手の外へ出る境界を実数体なしで示す。",
       },
+      {
+        kind: "label",
+        label: "claim_finite_submultiplicative_count_multiple_index_density_bound",
+        why: "有限打ち切り内の劣乗法不等式から倍数段階の交差冪による密度上界を自然数演算だけで導き、全段階の仮定と極限存在を別問題として分離する。",
+      },
     ],
   },
 ] as const satisfies readonly RoadmapStage[];
