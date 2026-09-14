@@ -36,6 +36,7 @@ import blocks_cyclic_stage_uniform_marginals from './content/cyclic-stage-unifor
 import blocks_dependency_order_substructures from './content/dependency-order-substructures.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_neighborhood_assignment_monoid from './content/finite-neighborhood-assignment-monoid.ts'
+import blocks_finite_power_bound_certificate from './content/finite-power-bound-certificate.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
 import blocks_finite_submultiplicative_count_bounds from './content/finite-submultiplicative-count-bounds.ts'
 import blocks_finite_transfer_matrix_comparison from './content/finite-transfer-matrix-comparison.ts'
@@ -119,6 +120,7 @@ export type AllBlocks = [
   ...typeof blocks_dependency_order_substructures,
   ...typeof blocks_essential_dependency,
   ...typeof blocks_finite_neighborhood_assignment_monoid,
+  ...typeof blocks_finite_power_bound_certificate,
   ...typeof blocks_finite_propagation_boundary,
   ...typeof blocks_finite_submultiplicative_count_bounds,
   ...typeof blocks_finite_transfer_matrix_comparison,

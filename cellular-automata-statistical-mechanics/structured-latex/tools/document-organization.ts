@@ -79,6 +79,17 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_power_bound_certificates",
+        title: "正整数値有限表の交差冪上界とスケーリングの境界",
+        input: "正の自然数で添字づけた正整数値の有限表、正整数の指数順序対、自然数の冪と順序比較を入力とする。",
+        output: "有理べき型の上界候補を商・根・対数なしで有限決定する一方、有限打ち切りから全後続段階の上界は決まらない境界を得る。",
+        main: "主張は、有限表の交差冪上界証明書は有限決定できるが、同じ有限表を持つ二つの後続列が次段階の上界では分かれうるため、有限サイズの足跡だけでは漸近的な指数を決められないことである。",
+        mainLabels: [
+          "claim_finite_power_bound_certificate_decidable",
+          "claim_finite_power_bound_cutoff_not_global",
+        ],
+      },
+      {
         id: "cyclic_offset_finite_images",
         title: "整数オフセットの有限剰余像",
         input: "正の周期、非負の半径、有限整数区間と整数の余り写像を入力とする。",
