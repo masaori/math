@@ -30181,18 +30181,18 @@ H_L
 &=\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot\Bigl(\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}\Bigr)
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則}\bigr)\\
 &=\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot 1
-&&\bigl(\because\ \text{準備の逆元の等式}\bigr)\\
+&&\bigl(\because\ \bigl(1+\mathrm{KW}(\xi)\bigr)\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}=1\bigr)\\
 &=1-\mathrm{KW}(\xi)
 &&\bigl(\because\ \text{単位元との積}\bigr)
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \xi\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
 &=\xi\cdot\bigl(2\cdot(1+\xi)^{-1}\bigr)
-&&\bigl(\because\ \text{上の計算}\ 1+\mathrm{KW}(\xi)=2\cdot(1+\xi)^{-1}\bigr)\\
+&&\bigl(\because\ 1+\mathrm{KW}(\xi)=2\cdot(1+\xi)^{-1}\bigr)\\
 &=2\xi\cdot(1+\xi)^{-1}
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則と結合則を}\ \xi\cdot(2\cdot y)=2\xi\cdot y\ \text{へ適用}\bigr)\\
 &=1-\mathrm{KW}(\xi)
-&&\bigl(\because\ \text{上の計算}\ 1-\mathrm{KW}(\xi)=2\xi\cdot(1+\xi)^{-1}\bigr)
+&&\bigl(\because\ 1-\mathrm{KW}(\xi)=2\xi\cdot(1+\xi)^{-1}\bigr)
 \end{aligned}`),
                         paragraph([
                           "二つの値が一致したので、差に ",
@@ -30206,7 +30206,7 @@ H_L
 &=\mathrm{KW}(\mathrm{KW}(\xi))\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)-\xi\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を 2 つの積へ適用}\bigr)\\
 &=\bigl(1-\mathrm{KW}(\xi)\bigr)-\bigl(1-\mathrm{KW}(\xi)\bigr)
-&&\bigl(\because\ \text{上の 2 つの計算}\bigr)\\
+&&\bigl(\because\ \mathrm{KW}(\mathrm{KW}(\xi))\bigl(1+\mathrm{KW}(\xi)\bigr)=1-\mathrm{KW}(\xi)\ \text{と}\ \xi\bigl(1+\mathrm{KW}(\xi)\bigr)=1-\mathrm{KW}(\xi)\bigr)\\
 &=0
 &&\bigl(\because\ \text{加法の逆元}\bigr)
 \end{aligned}`),
