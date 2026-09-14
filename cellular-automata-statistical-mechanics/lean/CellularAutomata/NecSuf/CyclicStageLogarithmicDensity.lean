@@ -263,6 +263,67 @@ theorem convergesByPositiveErrors_of_inverse_discrepancy
   rw [hinverse]
   simpa using htail L hL
 
+/-! ### Cauchy 性と極限不在に必要な構造 -/
+
+/--
+対象型上の差量写像を用い、正の許容誤差だけを量化する Cauchy 性。
+対象型には構造を要らず、許容誤差型には零と狭義順序だけを要る。
+-/
+def CauchyByPositiveErrors
+    {Source Error : Type} [Zero Error] [LT Error]
+    (discrepancy : Source → Source → Error)
+    (sequence : PositiveStage → Source) : Prop :=
+  ∀ ε : Error, 0 < ε → ∃ L₀ : PositiveStage,
+    ∀ L M : PositiveStage, L₀.val ≤ L.val → L₀.val ≤ M.val →
+      discrepancy (sequence L) (sequence M) < ε
+
+/--
+対称な差量が、順序づけた二段階では早い段階の正整数逆数より小さければ、列は Cauchy である。
+対象型には差量写像以外の構造を要らず、値域には Archimedes 線形順序体だけを要る。
+-/
+theorem cauchyByPositiveErrors_of_oneSidedInverseBound
+    {Source Value : Type} [Field Value] [LinearOrder Value] [IsStrictOrderedRing Value]
+    [Archimedean Value]
+    (discrepancy : Source → Source → Value)
+    (hsymmetric : ∀ a b, discrepancy a b = discrepancy b a)
+    (sequence : PositiveStage → Source)
+    (hbound : ∀ L M : PositiveStage, L.val ≤ M.val →
+      discrepancy (sequence L) (sequence M) < 1 / (L.val : Value)) :
+    CauchyByPositiveErrors discrepancy sequence := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ :=
+    (positiveIntegerReciprocal_convergesWithPositiveErrors (Value := Value)) ε hε
+  refine ⟨L₀, ?_⟩
+  intro L M hL hM
+  rcases le_total L.val M.val with hLM | hML
+  · have hLpositive : (0 : Value) < (L.val : Value) := by exact_mod_cast L.property
+    have hreciprocal : 1 / (L.val : Value) < ε := by
+      simpa [abs_of_pos (one_div_pos.mpr hLpositive)] using htail L hL
+    exact (hbound L M hLM).trans hreciprocal
+  · rw [hsymmetric]
+    have hMpositive : (0 : Value) < (M.val : Value) := by exact_mod_cast M.property
+    have hreciprocal : 1 / (M.val : Value) < ε := by
+      simpa [abs_of_pos (one_div_pos.mpr hMpositive)] using htail M hM
+    exact (hbound M L hML).trans hreciprocal
+
+/--
+各候補に対して正の下界が任意に遅い段階で残るなら、その列はどの候補にも収束しない。
+対象型には列と差量写像以外の構造を要らず、誤差型には前順序と零だけを要る。
+-/
+theorem noLimitByPositiveErrors_of_persistentLowerBound
+    {Source Error : Type} [Preorder Error] [Zero Error]
+    (discrepancy : Source → Source → Error)
+    (sequence : PositiveStage → Source)
+    (hlower : ∀ target : Source, ∃ ε : Error, 0 < ε ∧
+      ∀ L₀ : PositiveStage, ∃ L : PositiveStage,
+        L₀.val ≤ L.val ∧ ε ≤ discrepancy (sequence L) target) :
+    ¬ ∃ target : Source, ConvergesByPositiveErrors discrepancy sequence target := by
+  rintro ⟨target, hconverges⟩
+  obtain ⟨ε, hε, hlowerTarget⟩ := hlower target
+  obtain ⟨L₀, htail⟩ := hconverges ε hε
+  obtain ⟨L, hL, hbound⟩ := hlowerTarget L₀
+  exact (not_lt_of_ge hbound) (htail L hL)
+
 /-! ### 具体版の導出 -/
 
 section Derivation
@@ -437,6 +498,69 @@ theorem shiftRationalizedLogarithmicDensity_vectorConverges_of_necSuf :
     shiftRationalizedLogarithmicDensity
     rationalLogVectorZero
     shiftRationalizedLogarithmicDensity_distance_zero
+
+/-- 具体版の Cauchy 性の定義は、差量写像だけを使う一般定義の特殊化である。 -/
+theorem rationalLogVectorCauchy_iff_cauchyByPositiveErrors
+    (d : PositiveStage → RationalLogVector) :
+    RationalLogVectorCauchy d ↔
+      CauchyByPositiveErrors rationalLogVectorFiniteSumDistance d := by
+  rfl
+
+/-- 具体版の幾何級数打ち切り列の Cauchy 性は、対称性と一方向の逆数上界から得られる。 -/
+theorem geometricPrimeTruncation_cauchy_of_necSuf :
+    RationalLogVectorCauchy geometricPrimeTruncation := by
+  rw [rationalLogVectorCauchy_iff_cauchyByPositiveErrors]
+  apply cauchyByPositiveErrors_of_oneSidedInverseBound
+  · intro a b
+    rw [rationalLogVectorFiniteSumDistance, rationalLogVectorFiniteSumDistance,
+      Finset.union_comm]
+    apply Finset.sum_congr rfl
+    intro p hp
+    exact abs_sub_comm _ _
+  · exact geometricPrimeTruncation_distance_lt_reciprocal
+
+/-- 具体版の非収束は、各有限台候補の外に残る一係数の正の下界から得られる。 -/
+theorem geometricPrimeTruncation_no_finiteSupport_limit_of_necSuf :
+    ¬ ∃ a : RationalLogVector,
+      RationalLogVectorConverges geometricPrimeTruncation a := by
+  rw [show (∃ a : RationalLogVector,
+      RationalLogVectorConverges geometricPrimeTruncation a) ↔
+      ∃ a : RationalLogVector,
+        ConvergesByPositiveErrors rationalLogVectorFiniteSumDistance
+          geometricPrimeTruncation a by rfl]
+  apply noLimitByPositiveErrors_of_persistentLowerBound
+  intro a
+  classical
+  have hmissing : ∃ k ∈ Finset.range (a.support.card + 1),
+      increasingPrimeIndex k ∉ a.support := by
+    by_contra h
+    push_neg at h
+    have hsubset :
+        (Finset.range (a.support.card + 1)).image increasingPrimeIndex ⊆ a.support := by
+      intro p hp
+      obtain ⟨k, hk, rfl⟩ := Finset.mem_image.mp hp
+      exact h k hk
+    have hcard := Finset.card_le_card hsubset
+    rw [Finset.card_image_iff.mpr
+      (Set.injOn_of_injective increasingPrimeIndex_injective)] at hcard
+    simp at hcard
+  obtain ⟨k, hkRange, hp⟩ := hmissing
+  let p : Prime := increasingPrimeIndex k
+  let ε : ℚ := 1 / (2 : ℚ) ^ (k + 1)
+  have hε : 0 < ε := by positivity
+  refine ⟨ε, hε, ?_⟩
+  intro L₀
+  let L : PositiveStage := ⟨max L₀.val (k + 1), by omega⟩
+  refine ⟨L, by simp [L], ?_⟩
+  have hkL : k < L.val := by simp [L]
+  have hcoefficient : geometricPrimeTruncation L p = ε := by
+    change geometricPrimeTruncation L (increasingPrimeIndex k) = ε
+    rw [geometricPrimeTruncation_apply_index]
+    simp [hkL, ε]
+  have hap : a p = 0 := Finsupp.notMem_support_iff.mp hp
+  have hle := coefficient_abs_le_finiteSumDistance (geometricPrimeTruncation L) a p
+  rw [hcoefficient, hap, sub_zero, abs_of_pos hε] at hle
+  exact hle
 
 end Derivation
 
