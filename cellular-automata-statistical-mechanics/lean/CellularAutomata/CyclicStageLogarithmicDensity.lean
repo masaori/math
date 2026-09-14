@@ -26,6 +26,10 @@ def_rational_prime_vector_finite_sum_cauchy → RationalLogVectorCauchy
 def_increasing_prime_sequence → increasingPrimeIndex, increasingPrimeIndex_injective
 def_rational_prime_vector_geometric_truncation_sequence
   → geometricPrimeTruncation, geometricPrimeTruncation_apply_index
+claim_rational_prime_vector_geometric_truncations_cauchy
+  → geometricPrimeTruncation_distance_of_le,
+    geometricPrimeTruncation_distance_lt_reciprocal,
+    geometricPrimeTruncation_cauchy
 claim_rational_prime_vector_geometric_truncations_no_limit
   → geometricPrimeTruncation_no_finiteSupport_limit
 
@@ -37,6 +41,7 @@ claim_rational_prime_vector_geometric_truncations_no_limit
 -/
 import CellularAutomata.CyclicStageLocalAgreement
 import Mathlib.Algebra.Order.Archimedean.Basic
+import Mathlib.Algebra.Order.Field.GeomSum
 import Mathlib.Data.Nat.Prime.Nth
 
 namespace CellularAutomata.CyclicStageLogarithmicDensity
@@ -390,6 +395,115 @@ theorem geometricPrimeTruncation_support_subset (L : PositiveStage) :
     simp [hnot] at hnonzero
   exact Finset.mem_image.mpr ⟨k, Finset.mem_range.mpr hkL, hkPrime⟩
 
+/-- 幾何級数打ち切りベクトルの台は、最初の `L` 個の素数である。 -/
+theorem geometricPrimeTruncation_support (L : PositiveStage) :
+    (geometricPrimeTruncation L).support =
+      (Finset.range L.val).image increasingPrimeIndex := by
+  classical
+  apply Finset.Subset.antisymm (geometricPrimeTruncation_support_subset L)
+  intro p hp
+  obtain ⟨k, hk, rfl⟩ := Finset.mem_image.mp hp
+  rw [Finsupp.mem_support_iff, geometricPrimeTruncation_apply_index]
+  simp [Finset.mem_range.mp hk]
+
+/-- 小さい打ち切り段階が大きい打ち切り段階の台に含まれる。 -/
+theorem geometricPrimeTruncation_support_mono
+    (L M : PositiveStage) (hLM : L.val ≤ M.val) :
+    (geometricPrimeTruncation L).support ⊆ (geometricPrimeTruncation M).support := by
+  rw [geometricPrimeTruncation_support, geometricPrimeTruncation_support]
+  exact Finset.image_mono increasingPrimeIndex (Finset.range_mono hLM)
+
+/-- 二つの打ち切り段階の有限和差量は、その間の幾何級数の尾である。 -/
+theorem geometricPrimeTruncation_distance_of_le
+    (L M : PositiveStage) (hLM : L.val ≤ M.val) :
+    rationalLogVectorFiniteSumDistance
+        (geometricPrimeTruncation L) (geometricPrimeTruncation M) =
+      ∑ k ∈ Finset.Ico L.val M.val, 1 / (2 : ℚ) ^ (k + 1) := by
+  classical
+  rw [rationalLogVectorFiniteSumDistance]
+  rw [Finset.union_eq_right.mpr (geometricPrimeTruncation_support_mono L M hLM)]
+  rw [geometricPrimeTruncation_support,
+    Finset.sum_image (Set.injOn_of_injective increasingPrimeIndex_injective)]
+  calc
+    ∑ k ∈ Finset.range M.val,
+        |geometricPrimeTruncation L (increasingPrimeIndex k) -
+          geometricPrimeTruncation M (increasingPrimeIndex k)| =
+        ∑ k ∈ Finset.range M.val,
+          if L.val ≤ k then 1 / (2 : ℚ) ^ (k + 1) else 0 := by
+      apply Finset.sum_congr rfl
+      intro k hk
+      have hkM : k < M.val := Finset.mem_range.mp hk
+      rw [geometricPrimeTruncation_apply_index, geometricPrimeTruncation_apply_index]
+      by_cases hkL : k < L.val
+      · simp [hkL, hkM, Nat.not_le.mpr hkL]
+      · simp [hkL, Nat.le_of_not_gt hkL, hkM]
+    _ = ∑ k ∈ (Finset.range M.val).filter (fun k => L.val ≤ k),
+        1 / (2 : ℚ) ^ (k + 1) := by
+      rw [Finset.sum_filter]
+    _ = ∑ k ∈ Finset.Ico L.val M.val, 1 / (2 : ℚ) ^ (k + 1) := by
+      congr 1
+      ext k
+      simp [Finset.mem_Ico, and_comm]
+
+/-- 有限幾何級数の尾は、小さい段階の逆数未満である。 -/
+theorem geometricPrimeTruncation_distance_lt_reciprocal
+    (L M : PositiveStage) (hLM : L.val ≤ M.val) :
+    rationalLogVectorFiniteSumDistance
+        (geometricPrimeTruncation L) (geometricPrimeTruncation M) <
+      1 / (L.val : ℚ) := by
+  rw [geometricPrimeTruncation_distance_of_le L M hLM]
+  have hgeom := geom_sum_Ico' (x := (1 : ℚ) / 2) (by norm_num) hLM
+  have hsum :
+      (∑ k ∈ Finset.Ico L.val M.val, 1 / (2 : ℚ) ^ (k + 1)) =
+        1 / (2 : ℚ) ^ L.val - 1 / (2 : ℚ) ^ M.val := by
+    calc
+      ∑ k ∈ Finset.Ico L.val M.val, 1 / (2 : ℚ) ^ (k + 1) =
+          (1 / 2 : ℚ) * ∑ k ∈ Finset.Ico L.val M.val, ((1 : ℚ) / 2) ^ k := by
+        rw [Finset.mul_sum]
+        apply Finset.sum_congr rfl
+        intro k hk
+        rw [pow_succ]
+        field_simp
+        rw [← mul_pow]
+        norm_num
+      _ = 1 / (2 : ℚ) ^ L.val - 1 / (2 : ℚ) ^ M.val := by
+        rw [hgeom]
+        simp only [one_div, inv_pow]
+        ring
+  rw [hsum]
+  have hMpositive : 0 < 1 / (2 : ℚ) ^ M.val := by positivity
+  have hpow : (L.val : ℚ) ≤ (2 : ℚ) ^ L.val := by
+    exact_mod_cast (Nat.lt_two_pow_self (n := L.val)).le
+  have hLpositive : (0 : ℚ) < L.val := by exact_mod_cast L.property
+  have hpowPositive : (0 : ℚ) < (2 : ℚ) ^ L.val := by positivity
+  have hinv : 1 / (2 : ℚ) ^ L.val ≤ 1 / (L.val : ℚ) := by
+    exact one_div_le_one_div_of_le hLpositive hpow
+  linarith
+
+/-- 幾何級数打ち切り列は、有限和差量について Cauchy である。 -/
+theorem geometricPrimeTruncation_cauchy :
+    RationalLogVectorCauchy geometricPrimeTruncation := by
+  intro ε hε
+  obtain ⟨L₀, htail⟩ := positiveIntegerReciprocal_rationallyConverges ε hε
+  refine ⟨L₀, ?_⟩
+  intro L M hL hM
+  rcases le_total L.val M.val with hLM | hML
+  · exact (geometricPrimeTruncation_distance_lt_reciprocal L M hLM).trans_le
+      (le_of_lt (by simpa using htail L hL))
+  · have hsymmetric :
+        rationalLogVectorFiniteSumDistance
+            (geometricPrimeTruncation L) (geometricPrimeTruncation M) =
+          rationalLogVectorFiniteSumDistance
+            (geometricPrimeTruncation M) (geometricPrimeTruncation L) := by
+      rw [rationalLogVectorFiniteSumDistance, rationalLogVectorFiniteSumDistance,
+        Finset.union_comm]
+      apply Finset.sum_congr rfl
+      intro p hp
+      exact abs_sub_comm _ _
+    rw [hsymmetric]
+    exact (geometricPrimeTruncation_distance_lt_reciprocal M L hML).trans_le
+      (le_of_lt (by simpa using htail M hM))
+
 /-- 有限和差量は差ベクトルの台上の絶対値和に一致する。 -/
 theorem rationalLogVectorFiniteSumDistance_eq_support_sum (a b : RationalLogVector) :
     rationalLogVectorFiniteSumDistance a b =
@@ -420,17 +534,22 @@ theorem geometricPrimeTruncation_no_finiteSupport_limit :
       RationalLogVectorConverges geometricPrimeTruncation a := by
   classical
   rintro ⟨a, ha⟩
-  have hcard : a.support.card < ENat.card Prime := by
-    rw [ENat.card_eq_top_of_infinite]
-    exact WithTop.coe_lt_top _
-  obtain ⟨p, hp⟩ := a.support.exists_not_mem_of_card_lt_enatCard hcard
-  have hpRange : p.val ∈ Set.range (Nat.nth Nat.Prime) := by
-    rw [Nat.range_nth_of_infinite Nat.infinite_setOf_prime]
-    exact p.property
-  obtain ⟨k, hk⟩ := hpRange
-  have hkPrime : increasingPrimeIndex k = p := by
-    apply Subtype.ext
-    exact hk
+  have hmissing : ∃ k ∈ Finset.range (a.support.card + 1),
+      increasingPrimeIndex k ∉ a.support := by
+    by_contra h
+    push_neg at h
+    have hsubset :
+        (Finset.range (a.support.card + 1)).image increasingPrimeIndex ⊆ a.support := by
+      intro p hp
+      obtain ⟨k, hk, rfl⟩ := Finset.mem_image.mp hp
+      exact h k hk
+    have hcard := Finset.card_le_card hsubset
+    rw [Finset.card_image_iff.mpr
+      (Set.injOn_of_injective increasingPrimeIndex_injective)] at hcard
+    simp at hcard
+  obtain ⟨k, hkRange, hp⟩ := hmissing
+  let p : Prime := increasingPrimeIndex k
+  have hkPrime : increasingPrimeIndex k = p := rfl
   let ε : ℚ := 1 / (2 : ℚ) ^ (k + 1)
   have hε : 0 < ε := by positivity
   obtain ⟨L₀, htail⟩ := ha ε hε
