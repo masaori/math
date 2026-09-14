@@ -1,0 +1,11 @@
+{
+  "実行識別子": "7907f348-ccf0-47ad-81fa-a80222f688d9",
+  "観測時刻": "2026-09-14T09:02:07+09:00",
+  "起動登録の実測": {"コマンド": "launchctl list com.masaori.math-complex-matrix-ising-paper-organization-loop", "終了コード": 0, "対象label": "com.masaori.math-complex-matrix-ising-paper-organization-loop", "判定": "登録あり"},
+  "launchctl print": {"コマンド": "launchctl print gui/501/com.masaori.math-complex-matrix-ising-paper-organization-loop", "終了コード": 0, "state": "running", "runs": 26, "last exit code": 0},
+  "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist", "存在": true, "更新時刻": "2026-09-05T21:28:53+09:00", "sha256": "2f8117642f85bdb0a7ab1bd95b27857fe429341592479401d398eb14012ee641", "StartCalendarInterval": "偶数時43分"},
+  "実ログ": [{"path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log", "mtime": "2026-09-14T09:01:26+09:00", "lines": ["TICK_RESULT_SUCCESS:20260914T084351-82778:ed1c128905ca3b063ec2bd0ca2cb707face37ca5", "2026-09-14 09:01:26 PUBLISH: 論文本体と構成棚卸しの公開物を更新"]}],
+  "実行の終了値の解釈": "launchctl list/printは終了0で登録あり・running・runs 26。実ログには08:43:51開始分の成功マーカーと09:01:26の公開更新があるが、観測時点でプロセスは実行中で今回のlaunchd終了値は未確認。表示されたlast exit code 0を今回実行の終了値へ流用しない。",
+  "成果比較": {"開始成果": "a0619d1a64dce35ca4d7340c649936c0a4f11f04", "直前監督の読解終点": "9f7d58df5949546a23c14549fa1ee9e9148cefdf", "今回読解終点": "ed1c128905ca3b063ec2bd0ca2cb707face37ca5", "開始成果以後の統合差分": ["ed1c12890: 複素行列版の実対数・双曲線正接の先行定義不足をstate・MEMORYへ再確認。数学本文・Lean・SageMath変更なし"], "直前監督以後の統合差分": ["9e9945250・60d17e007・ed1c12890: 同じ先行定義不足の再確認だけ", "a0619d1a6: 一般有限グラフの未完了対象ゼロの再記録だけ"], "未統合成果の保全": "可算二次元版の未コミットcheckpointを保持。複素行列版の08:43開始分は成功マーカーの成果ed1c12890までremote defaultへ統合済み。"},
+  "検査結果": [{"時刻": "2026-09-14T09:13:05+09:00", "コマンド": "node scripts/research-supervision/verify.ts --all", "終了コード": 0, "結果": "六研究のschemaVersion 2評価記録を受理"}, {"時刻": "2026-09-14T09:13:05+09:00", "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts", "終了コード": 0, "結果": "監督記録の規則回帰24件成功"}]
+}
