@@ -35319,53 +35319,63 @@ Z_L(x_c)
                         paragraph([
                           "背理法を使う。",
                           math(String.raw`x_c\in\mathcal{F}_{L}`),
-                          " と仮定すると、",
-                          ref("def_finite_lattice_fisher_zeros"),
-                          " により ",
-                          math(String.raw`\mathrm{Ev}^{F}_{x_c}(Z_L)=0`),
-                          " なので、準備の鎖から ",
-                          math(String.raw`\xi=0`),
-                          " である。",
-                          math(String.raw`\xi\in P_s\subseteq Q_s`),
-                          "（", ref("def_quadratic_positive_cone"),
-                          "）だから、",
-                          ref("claim_quadratic_zero_representation"),
-                          " により ",
-                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)=(0,0)`),
+                          " と仮定する。組 ",
+                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb{Q}\times\mathbb{Q}`),
                           "（", ref("def_quadratic_representation_map"),
-                          "）である。この組について ",
+                          "）と置くと、次の鎖を得る。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+x_c
+&\in\mathcal F_L
+&&\bigl(\because\ \text{背理法の仮定}\bigr)\\
+&\Longrightarrow \mathrm{Ev}^{F}_{x_c}(Z_L)=0
+&&\bigl(\because\ \blkref{def_finite_lattice_fisher_zeros}\bigr)\\
+&\Longrightarrow \xi=0
+&&\bigl(\because\ \mathrm{Ev}^{F}_{x_c}(Z_L)=\xi\bigr)\\
+&\Longrightarrow (a,b)=(0,0)
+&&\bigl(\because\ \xi\in P_s\subseteq Q_s,\ \blkref{def_quadratic_positive_cone},\
+\ \blkref{claim_quadratic_zero_representation}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "この組について ",
                           ref("def_quadratic_positive_cone"),
                           " の三つの条件を順に確かめる。不等号はすべて有理数体 ",
                           math(String.raw`\mathbb{Q}`),
                           " の順序である。",
                         ]),
-                        list([
-                          [
-                            "第一の条件は ", math(String.raw`(a,b)\ne(0,0)`),
-                            " を要求するが、", math(String.raw`(a,b)=(0,0)`),
-                            " なので満たされない。",
-                          ],
-                          [
-                            "第二の条件は ", math(String.raw`0<a`),
-                            " を要求するが、", math(String.raw`a=0`),
-                            " なので満たされない。",
-                          ],
-                          [
-                            "第三の条件は ", math(String.raw`a<0`),
-                            " を要求するが、", math(String.raw`a=0`),
-                            " なので満たされない。",
-                          ],
-                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(a,b)
+&=(0,0)
+&&\bigl(\because\ \text{上の鎖}\bigr)\\
+&\Longrightarrow \neg\bigl((a,b)\ne(0,0)\bigr)
+&&\bigl(\because\ \text{等号と不等号の定義}\bigr),\\[2mm]
+a
+&=0
+&&\bigl(\because\ (a,b)=(0,0)\bigr)\\
+&\Longrightarrow \neg(0<a)
+&&\bigl(\because\ \mathbb Q\ \text{の狭義順序の非反射性}\bigr),\\[2mm]
+a
+&=0
+&&\bigl(\because\ (a,b)=(0,0)\bigr)\\
+&\Longrightarrow \neg(a<0)
+&&\bigl(\because\ \mathbb Q\ \text{の狭義順序の非反射性}\bigr).
+\end{aligned}`),
                         paragraph([
                           ref("def_quadratic_positive_cone"),
                           " により、正であることは三つの条件の少なくとも一つが成り立つことである。",
-                          "三つとも満たされないので ",
-                          math(String.raw`\xi\notin P_s`),
-                          " となり、準備の ",
-                          math(String.raw`\xi\in P_s`),
-                          " と矛盾する。ゆえに仮定は成り立たず、",
-                          math(String.raw`x_c\notin\mathcal{F}_{L}`),
-                          " である。全過程は代数的数の有限和・冪と有理数の順序比較だけで閉じ、",
+                          "上の三条件の否定から次を得る。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\xi
+&\notin P_s
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\bigr)\\
+&\Longrightarrow \bot
+&&\bigl(\because\ \xi\in P_s\bigr)\\
+&\Longrightarrow x_c\notin\mathcal F_L
+&&\bigl(\because\ \text{背理法}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "全過程は代数的数の有限和・冪と有理数の順序比較だけで閉じ、",
                           "実数体も複素数体も現れない。",
                         ]),
                       ],
