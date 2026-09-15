@@ -32867,6 +32867,7 @@ b+b'
                       ],
                       proof: [
                         paragraph([
+                          "準備。",
                           math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
                           " は部分体である（",
                           ref("def_algebraic_numbers"),
@@ -32874,25 +32875,25 @@ b+b'
                           math(String.raw`a+a',b+b'\in\mathbb{Q}`),
                           " は ",
                           math(String.raw`\overline{\mathbb{Q}}`),
-                          " でも同じ和である。",
-                          ref("claim_quadratic_addition_mem"),
-                          " の証明の鎖により",
+                          " でも同じ和である。以下の計算は ",
+                          math(String.raw`\overline{\mathbb{Q}}`),
+                          " の中で行う。",
                         ]),
-                        displayMath(String.raw`\xi+\eta=(a+a')+(b+b')\cdot s
-\qquad\bigl(\because\ \blkref{claim_quadratic_addition_mem}\text{ の証明の鎖の始点と終点}\bigr)`),
+                        displayMath(String.raw`\begin{aligned}
+\xi+\eta
+&=\bigl(a+b\cdot s\bigr)+\bigl(a'+b'\cdot s\bigr)
+&&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\text{ を両方の項へ同時適用}\bigr)\\
+&=(a+a')+(b+b')\cdot s
+&&\bigl(\because\ \blkref{claim_quadratic_addition_mem}\text{ の証明の鎖}\bigr)\\
+\xi+\eta
+&\in Q_s
+&&\bigl(\because\ \blkref{claim_quadratic_addition_mem}\bigr)\\
+\mathrm{rep}_s(\xi+\eta)
+&=(a+a',b+b')
+&&\bigl(\because\ \blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\text{ を上の表示へ適用}\bigr)
+\end{aligned}`),
                         paragraph([
-                          math(String.raw`\mathrm{rep}_s(\xi+\eta)`),
-                          " は ",
-                          math(String.raw`\xi+\eta`),
-                          " を表す唯一の組である（",
-                          ref("def_quadratic_representation_map"),
-                          "）。上の表示 ",
-                          math(String.raw`(a+a',b+b')`),
-                          " に ",
-                          ref("claim_quadratic_representation_unique"),
-                          " を適用して ",
-                          math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
-                          " を得る。全過程は体 ",
+                          "全過程は体 ",
                           math(String.raw`\mathbb{Q}`),
                           " と ",
                           math(String.raw`\overline{\mathbb{Q}}`),
