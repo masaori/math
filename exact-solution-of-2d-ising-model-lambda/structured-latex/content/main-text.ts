@@ -31275,7 +31275,7 @@ a
 &=\alpha+a'
 &&\bigl(\because\ \alpha\ \text{の定義}\bigr)\\
 &=0+a'
-&&\bigl(\because\ \text{上で得た}\ \alpha=0\bigr)\\
+&&\bigl(\because\ \alpha=0\bigr)\\
 &=a'
 &&\bigl(\because\ \text{加法の単位元}\bigr)
 \end{aligned}`),
@@ -31291,7 +31291,7 @@ b
 &=\beta+b'
 &&\bigl(\because\ \beta\ \text{の定義}\bigr)\\
 &=0+b'
-&&\bigl(\because\ \text{上で得た}\ \beta=0\bigr)\\
+&&\bigl(\because\ \beta=0\bigr)\\
 &=b'
 &&\bigl(\because\ \text{加法の単位元}\bigr)
 \end{aligned}`),
