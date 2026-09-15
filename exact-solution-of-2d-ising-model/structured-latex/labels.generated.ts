@@ -155,6 +155,7 @@ export const ALL_LABELS = [
   "def_pauli_group",
   "def_phi_cartesian",
   "def_phi_polar",
+  "def_positive_coupling_tanh",
   "def_rayleigh_sup",
   "def_real_imag_parts",
   "def_second_transfer_matrix_pauli",

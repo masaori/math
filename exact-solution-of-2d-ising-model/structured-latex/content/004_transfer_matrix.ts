@@ -534,6 +534,79 @@ Q_{r+1}
     },
   },
   {
+    id: "transfer_matrix_000g_definition_positive_coupling_tanh",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "正の結合定数上の双曲線正接" },
+    labels: ["def_positive_coupling_tanh"],
+    statement: [
+      paragraph([
+        ref("def_cosh_sinh"),
+        " の双曲線余弦・双曲線正弦を用いる。このイジング模型で用いる正の結合定数を ",
+        math(String.raw`K\in\mathbb{R}_{>0}`),
+        " とする。このとき",
+      ]),
+      displayMath(String.raw`\tanh K:=\frac{\sinh K}{\cosh K}\in\{y\in\mathbb{R}\mid 0<y<1\}`),
+      paragraph(["と定める。右辺が指定した集合の元になることを以下で確認する。"]),
+    ],
+    proof: [
+      paragraph([ref("cosh_sinh_basic_properties"), " の (3) を次の行で用いる。"]),
+      displayMath(String.raw`\begin{aligned}
+\cosh K&>\sinh K>0
+&&(\because\ \blkref{cosh_sinh_basic_properties}\text{ の (3)})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\cosh K>0
+&\Longrightarrow \cosh K\ne0
+&&(\because\ \mathbb{R}\text{ の正の元は零でない})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+K\in\mathbb{R}_{>0}
+&\Longrightarrow K\in\mathbb{R}
+&&(\because\ \mathbb{R}_{>0}\subset\mathbb{R})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+K\in\mathbb{R}
+&\Longrightarrow \sinh K,\cosh K\in\mathbb{R}
+&&(\because\ \blkref{def_cosh_sinh})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sinh K,\cosh K\in\mathbb{R}\ \land\ \cosh K\ne0
+&\Longrightarrow \frac{\sinh K}{\cosh K}\in\mathbb{R}
+&&(\because\ \mathbb{R}\text{ の零でない元による除法の閉性})
+\end{aligned}`),
+      paragraph(["定義した実数の商の正値性は"]),
+      displayMath(String.raw`\begin{aligned}
+\tanh K
+&=\frac{\sinh K}{\cosh K}
+&&(\because\ \tanh\ \text{の定義})\\
+&>0
+&&(\because\ \sinh K>0\ \text{かつ}\ \cosh K>0)
+\end{aligned}`),
+      paragraph(["上側の評価は"]),
+      displayMath(String.raw`\begin{aligned}
+\tanh K
+&=\frac{\sinh K}{\cosh K}
+&&(\because\ \tanh\ \text{の定義})\\
+&<\frac{\cosh K}{\cosh K}
+&&(\because\ \sinh K<\cosh K\ \text{かつ}\ \cosh K>0)\\
+&=1
+&&(\because\ \cosh K\ne0)
+\end{aligned}`),
+      paragraph([
+        "である。以上より ",
+        math(String.raw`\tanh K\in\{y\in\mathbb{R}\mid 0<y<1\}`),
+        " であり、定義可能性が確認できた。この項は実数の指数関数から定めた双曲線関数を正の実数上で割るため、有限な複素行列計算から実数解析へ移る先行定義である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "第一の双対結合定数を定める前提として、このイジング模型で用いる正の結合定数に対する双曲線正接を、値域を余域へ含めた一つの定義として独立させた。数学的道具立ての既存分類・節境界は変更していない。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -556,7 +629,9 @@ Q_{r+1}
         ref("def_cosh_sinh"),
         " で定めた双曲線余弦・双曲線正弦を用いる。後者の正値性には ",
         ref("cosh_sinh_basic_properties"),
-        " を用いる。",
+        " を用いる。また、双対結合定数の式に現れる双曲線正接は ",
+        ref("def_positive_coupling_tanh"),
+        " で定めたものを用いる。",
       ]),
       list([
         [
