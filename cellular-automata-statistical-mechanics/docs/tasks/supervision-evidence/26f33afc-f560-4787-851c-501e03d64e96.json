@@ -1,0 +1,57 @@
+{
+  "実行識別子": "26f33afc-f560-4787-851c-501e03d64e96",
+  "観測時刻": "2026-09-15T14:58:42+09:00",
+  "起動登録の実測": {
+    "コマンド": "launchctl list com.masaori.cellular-automata-auto-loop",
+    "終了コード": 0,
+    "対象label": "com.masaori.cellular-automata-auto-loop",
+    "判定": "登録あり"
+  },
+  "launchctl print": {
+    "コマンド": "launchctl print gui/501/com.masaori.cellular-automata-auto-loop",
+    "終了コード": 0,
+    "state": "not running",
+    "runs": 28,
+    "last exit code": 1
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist",
+    "存在": true,
+    "更新時刻": "2026-09-05T21:28:07+09:00",
+    "sha256": "d13342cf574a15bd2fcdbc892aafa71f32e036e6b0c5f6bd96a52e66ae5e34ff",
+    "StartCalendarInterval": "毎時12分"
+  },
+  "実ログ": [
+    {
+      "path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/auto-loop.log",
+      "mtime": "2026-09-15T12:24:30+09:00",
+      "lines": [
+        "2026-09-15 12:23:10 === tick 正常終了（未コミット 0 ファイル）",
+        "2026-09-15 12:24:30 論文公開・URL つき Slack 通知の処理を完了した"
+      ]
+    },
+    {
+      "path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/launchd-error.log",
+      "mtime": "2026-09-15T14:12:06+09:00",
+      "lines": [
+        "RuntimeError: Codexプロセスの起動引数を取得できなかった",
+        "Codex実応答を判定できない (FileNotFoundError); 再試行しない"
+      ]
+    }
+  ],
+  "実行の終了値の解釈": "14:58:42のlaunchctl list/printは登録あり・非実行中・runs 28・last exit 1。12:23の研究tickは正常終了したが、14:12更新のエラーログはCodex実応答判定に失敗して再試行しなかったため、現在の直近実行は異常終了と解釈した。",
+  "成果比較": {
+    "開始成果": "d0c44f2b7ff5ba85d50d8428b44d6f1640a8bada",
+    "直前監督の読解終点": "90696968a1339b961442e09f07f4b59f396d44b2",
+    "今回読解終点": "d37d6433bef5cf679a529a620bfed1d0a49d49e2",
+    "直前監督以後の統合差分": [
+      "245ff5d14・0536fc45f: 有限語個数境界のLean具体版・必要十分版・導出",
+      "a1788791a・bd0784077: 有限語個数の実数規格化境界の構造化本文と四つのSageMath検算"
+    ],
+    "未統合成果の保全": "監督開始時の作業ツリーに当研究の未コミット差分なし。前回打ち切り時の三ファイルは後続コミットへ統合済み。"
+  },
+  "検査結果": [
+    {"時刻":"2026-09-15T15:09:25+09:00","コマンド":"node scripts/research-supervision/verify.ts --all","終了コード":0,"結果":"六研究のschemaVersion 2評価記録を受理"},
+    {"時刻":"2026-09-15T15:09:25+09:00","コマンド":"node scripts/research-supervision/verify-supervision-log-test.ts","終了コード":0,"結果":"監督記録の規則回帰24件成功"}
+  ]
+}
