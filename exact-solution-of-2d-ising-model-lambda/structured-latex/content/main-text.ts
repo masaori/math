@@ -35708,36 +35708,39 @@ a\cdot a
                       ],
                       proof: [
                         paragraph([
-                          math(String.raw`(a,b):=\mathrm{rep}_s(-1-s)=(-1,-1)`),
-                          " と置く（", ref("claim_self_dual_root_minus_representation"),
-                          "）。", ref("def_quadratic_positive_cone"),
-                          " の三つの条件を順に確かめる。不等号はすべて有理数体 ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の順序である。",
-                        ]),
-                        list([
-                          [
-                            "第一の条件は ", math(String.raw`0\le a`),
-                            " を要求するが、", math(String.raw`a=-1<0`),
-                            " なので満たされない。",
-                          ],
-                          [
-                            "第二の条件は ", math(String.raw`0<a`),
-                            " を要求するが、", math(String.raw`a=-1<0`),
-                            " なので満たされない。",
-                          ],
-                          [
-                            "第三の条件は ", math(String.raw`0<b`),
-                            " を要求するが、", math(String.raw`b=-1<0`),
-                            " なので満たされない。",
-                          ],
-                        ]),
-                        paragraph([
                           ref("def_quadratic_positive_cone"),
-                          " により、正であることは三つの条件の少なくとも一つが成り立つことである。",
-                          "三つとも満たされないので ",
-                          math(String.raw`-1-s\notin P_s`),
-                          " である。全過程は有理数の順序の中で閉じ、実数体も複素数体も現れない。",
+                          " の三つの条件がいずれも成り立たないことを確かめる。不等号と四則はすべて有理数体 ",
+                          math(String.raw`\mathbb{Q}`),
+                          " の中で扱う。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+a
+&=-1
+&&\bigl(\because\ (a,b):=\mathrm{rep}_s(-1-s),\ \blkref{claim_self_dual_root_minus_representation}\bigr)\\
+a
+&<0
+&&\bigl(\because\ a=-1,\ -1<0\text{ は }\mathbb{Q}\text{ の順序}\bigr)\\
+0\le a
+&\text{ は成り立たない}
+&&\bigl(\because\ a<0\bigr)\\
+0<a
+&\text{ は成り立たない}
+&&\bigl(\because\ a<0\bigr)\\
+b
+&=-1
+&&\bigl(\because\ (a,b):=\mathrm{rep}_s(-1-s),\ \blkref{claim_self_dual_root_minus_representation}\bigr)\\
+b
+&<0
+&&\bigl(\because\ b=-1,\ -1<0\text{ は }\mathbb{Q}\text{ の順序}\bigr)\\
+0<b
+&\text{ は成り立たない}
+&&\bigl(\because\ b<0\bigr)\\
+-1-s
+&\notin P_s
+&&\bigl(\because\ 0\le a,\ 0<a,\ 0<b\text{ がいずれも成り立たず、}\ \blkref{def_quadratic_positive_cone}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "全過程は有理数の四則と順序の中で閉じ、実数体も複素数体も現れない。",
                         ]),
                       ],
                     },
