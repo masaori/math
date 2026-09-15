@@ -32022,14 +32022,14 @@ r\cdot r
 &=2
 &&\bigl(\because\ \text{乗法単位元}\ 1\cdot1=1,\ 2\cdot1=2\bigr)
 \end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+r\cdot r
+&\ne2
+&&\bigl(\because\ \blkref{claim_no_rational_square_two}\bigr).
+\end{aligned}
+`),
                         paragraph([
-                          "したがって ",
-                          math(String.raw`r\in\mathbb{Q}`),
-                          " が ",
-                          math(String.raw`r\cdot r=2`),
-                          " を満たすが、これは ",
-                          ref("claim_no_rational_square_two"),
-                          " と矛盾する。ゆえに ",
+                          "二つの結論は矛盾する。ゆえに ",
                           math(String.raw`a\cdot a\ne2\cdot(b\cdot b)`),
                           " である。全過程は体 ",
                           math(String.raw`\mathbb{Q}`),
