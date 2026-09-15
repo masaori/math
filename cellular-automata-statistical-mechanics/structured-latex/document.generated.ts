@@ -39,6 +39,7 @@ import blocks_finite_gibbs_weight_boundary from './content/finite-gibbs-weight-b
 import blocks_finite_neighborhood_assignment_monoid from './content/finite-neighborhood-assignment-monoid.ts'
 import blocks_finite_power_bound_certificate from './content/finite-power-bound-certificate.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
+import blocks_finite_rational_entropy_boundary from './content/finite-rational-entropy-boundary.ts'
 import blocks_finite_submultiplicative_count_bounds from './content/finite-submultiplicative-count-bounds.ts'
 import blocks_finite_transfer_matrix_comparison from './content/finite-transfer-matrix-comparison.ts'
 import blocks_finite_word_complexity_boundary from './content/finite-word-complexity-boundary.ts'
@@ -126,6 +127,7 @@ export type AllBlocks = [
   ...typeof blocks_finite_neighborhood_assignment_monoid,
   ...typeof blocks_finite_power_bound_certificate,
   ...typeof blocks_finite_propagation_boundary,
+  ...typeof blocks_finite_rational_entropy_boundary,
   ...typeof blocks_finite_submultiplicative_count_bounds,
   ...typeof blocks_finite_transfer_matrix_comparison,
   ...typeof blocks_finite_word_complexity_boundary,

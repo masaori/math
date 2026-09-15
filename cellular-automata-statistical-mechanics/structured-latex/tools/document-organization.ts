@@ -112,6 +112,17 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_rational_entropy_boundary",
+        title: "有限有理確率分布のエントロピーと実数境界",
+        input: "空でない有限集合上の有理確率分布、正の有理数の素数指数、有限台有理素数ベクトルを入力とする。",
+        output: "零重みへ対数を適用しない有限台有理素数ベクトル値エントロピー、その実対数評価、および有理分布では覆えない有限実数値分布を得る。",
+        main: "主張は、有理確率分布のエントロピーが有限和だけで可算な有限台有理素数ベクトルに構成でき、その実対数評価は通常の有限和に一致する一方、無理数重みを持つ二元分布はこの比較写像の像に入らないことである。",
+        mainLabels: [
+          "claim_finite_rational_entropy_real_comparison",
+          "claim_finite_real_distribution_not_always_rational",
+        ],
+      },
+      {
         id: "cyclic_offset_finite_images",
         title: "整数オフセットの有限剰余像",
         input: "正の周期、非負の半径、有限整数区間と整数の余り写像を入力とする。",
