@@ -32800,17 +32800,22 @@ a\cdot a
 &=(a+a')+(b+b')\cdot s
 &&\bigl(\because\ \text{分配則}\ (u+v)\cdot w=u\cdot w+v\cdot w\bigr)
 \end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+a+a'
+&\in\mathbb{Q}
+&&\bigl(\because\ a,a'\in\mathbb{Q}\ \text{と}\ \mathbb{Q}\ \text{の加法による閉性}\bigr)\\
+b+b'
+&\in\mathbb{Q}
+&&\bigl(\because\ b,b'\in\mathbb{Q}\ \text{と}\ \mathbb{Q}\ \text{の加法による閉性}\bigr)\\
+(a+a')+(b+b')\cdot s
+&\in Q_s
+&&\bigl(\because\ \blkref{def_quadratic_field_set}\ \text{を}\ (a+a',b+b')\ \text{へ適用}\bigr)\\
+\xi+\eta
+&\in Q_s
+&&\bigl(\because\ \xi+\eta=(a+a')+(b+b')\cdot s\bigr)
+\end{aligned}`),
                         paragraph([
-                          math(String.raw`a+a'\in\mathbb{Q}`),
-                          "、",
-                          math(String.raw`b+b'\in\mathbb{Q}`),
-                          " なので、組 ",
-                          math(String.raw`(a+a',b+b')`),
-                          " が ",
-                          ref("def_quadratic_field_set"),
-                          " の存在条件の証人になり、",
-                          math(String.raw`\xi+\eta\in Q_s`),
-                          " である。全過程は体 ",
+                          "全過程は体 ",
                           math(String.raw`\mathbb{Q}`),
                           " と ",
                           math(String.raw`\overline{\mathbb{Q}}`),
