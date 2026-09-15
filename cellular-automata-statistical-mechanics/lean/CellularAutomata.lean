@@ -154,3 +154,4 @@ import CellularAutomata.FiniteSubmultiplicativeCountBounds
 import CellularAutomata.NecSuf.FiniteSubmultiplicativeCountBounds
 import CellularAutomata.FinitePowerBoundCertificate
 import CellularAutomata.NecSuf.FinitePowerBoundCertificate
+import CellularAutomata.FiniteWordComplexityBoundary
