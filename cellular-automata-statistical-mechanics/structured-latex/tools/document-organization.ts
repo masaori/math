@@ -118,6 +118,7 @@ export const documentOrganization = [
         output: "零重みへ対数を適用しない有限台有理素数ベクトル値エントロピー、その実対数評価、および有理分布では覆えない有限実数値分布を得る。",
         main: "主張は、有理確率分布のエントロピーが有限和だけで可算な有限台有理素数ベクトルに構成でき、その実対数評価は通常の有限和に一致する一方、無理数重みを持つ二元分布はこの比較写像の像に入らないことである。",
         mainLabels: [
+          "claim_prime_vector_real_evaluation_of_prime_logarithm",
           "claim_finite_rational_entropy_real_comparison",
           "claim_finite_real_distribution_not_always_rational",
         ],
@@ -359,6 +360,17 @@ export const documentOrganization = [
         output: "繊維状態数、正の入力だけのエントロピーと自由エントロピー、整数刻み一の隣接差、および刻み二で除算できない反例を得る。",
         main: "主張は、繊維状態数の総和から自由エントロピーを作れ、隣接差は状態数比の対数となるが、非単位刻みの差分商は有限舞台でも群の外へ出うることである。",
         mainLabels: ["claim_binary_ca_logarithmic_free_count_fibers", "claim_binary_ca_unit_difference_ratio", "claim_binary_ca_logarithmic_gap_division_obstruction"],
+      },
+      {
+        id: "finite_difference_temperature_derivative_boundary",
+        title: "有限差分逆温度の実評価と実数微分の境界",
+        input: "有限舞台の正の繊維状態数、対数順序群値エントロピーの整数刻み一の差、有限台素数ベクトルの実対数評価を入力とする。",
+        output: "対数順序群値の隣接差と有限実数差の一致、および同じ二端点を通りながら一点の微分値が異なる二つの実多項式補間を得る。",
+        main: "主張は、有限差分逆温度の実評価は対応する二つの有限実エントロピー値の差に一致するが、その二端点データだけでは連続補間の一点での微分逆温度を決められないことである。",
+        mainLabels: [
+          "claim_binary_ca_unit_difference_real_evaluation",
+          "claim_binary_ca_finite_difference_does_not_determine_derivative",
+        ],
       },
       {
         id: "finite_transfer_matrix_and_trace",
