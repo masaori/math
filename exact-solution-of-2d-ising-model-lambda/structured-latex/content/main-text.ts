@@ -32504,21 +32504,17 @@ a\cdot a
                           math(String.raw`-\xi\in P_s`),
                           " は両立しない）。",
                           math(String.raw`\xi=0`),
-                          " と仮定すると、前段と同じく ",
-                          math(String.raw`\mathrm{rep}_s(\xi)=(0,0)`),
-                          "（",
-                          math(String.raw`\because`),
-                          " ",
-                          ref("claim_quadratic_zero_representation"),
-                          "）であり、",
-                          math(String.raw`\mathrm{rep}_s(-\xi)=(-0,-0)=(0,0)`),
-                          "（",
-                          math(String.raw`\because`),
-                          " ",
-                          ref("claim_quadratic_negation_representation"),
-                          " と、零元の加法逆元 ",
-                          math(String.raw`-0=0`),
-                          "）である。準備により組 ",
+                          " と仮定する。このとき",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{rep}_s(-\xi)
+&=(-0,-0)
+&&\bigl(\because\ \blkref{claim_quadratic_zero_representation}\ \text{と}\ \blkref{claim_quadratic_negation_representation}\bigr)\\
+&=(0,0)
+&&\bigl(\because\ \mathbb{Q}\ \text{の零元の加法逆元}\ -0=0\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "である。準備により組 ",
                           math(String.raw`(0,0)`),
                           " は三条件のどれも満たさないから、",
                           ref("def_quadratic_positive_cone"),
