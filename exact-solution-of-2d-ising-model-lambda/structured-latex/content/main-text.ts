@@ -35780,35 +35780,45 @@ b
                   ],
                   proof: [
                     paragraph([
-                      math(String.raw`\xi^2+2\xi-1=0`),
-                      " と仮定すると、",
-                      ref("claim_self_dual_quadratic_roots"),
-                      " により ",
-                      math(String.raw`\xi=-1+s`),
-                      " または ",
-                      math(String.raw`\xi=-1-s`),
-                      " である。二つの場合は別々の仮定なので場合分けする。",
+                      "根を尽くす主張を仮定へ適用すると、次の二つの場合で尽くされる。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\xi^2+2\xi-1
+&=0
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&\Longrightarrow \xi=-1+s\ \text{または}\ \xi=-1-s
+&&\bigl(\because\ \blkref{claim_self_dual_quadratic_roots}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "二つの場合は別々の仮定なので場合分けする。",
                     ]),
                     list([
                       [
-                        math(String.raw`\xi=-1+s`),
-                        " の場合。示すべき等式そのものである。",
+                        displayMath(String.raw`\begin{aligned}
+\xi
+&=-1+s
+&&\bigl(\because\ \text{第一の場合の仮定}\bigr)
+\end{aligned}`),
                       ],
                       [
-                        math(String.raw`\xi=-1-s`),
-                        " の場合。仮定 ",
-                        math(String.raw`\xi\in P_s`),
-                        " から ",
-                        math(String.raw`-1-s\in P_s`),
-                        " が従うが、これは ",
-                        ref("claim_self_dual_root_minus_not_positive"),
-                        " の ",
-                        math(String.raw`-1-s\notin P_s`),
-                        " と矛盾する。したがってこの場合は起きない。",
+                        displayMath(String.raw`\begin{aligned}
+\xi
+&=-1-s
+&&\bigl(\because\ \text{第二の場合の仮定}\bigr)\\
+-1-s
+&\in P_s
+&&\bigl(\because\ \xi\in P_s\ \text{と}\ \xi=-1-s\bigr)\\
+-1-s
+&\notin P_s
+&&\bigl(\because\ \blkref{claim_self_dual_root_minus_not_positive}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "後二行は矛盾するので、第二の場合は起きない。",
+                        ]),
                       ],
                     ]),
                     paragraph([
-                      "いずれの場合も ",
+                      "したがって第一の場合だけが残り、",
                       math(String.raw`\xi=-1+s`),
                       " である。全過程は代数的数の等式と有理数の順序の中で閉じ、実数体も複素数体も現れない。",
                     ]),
