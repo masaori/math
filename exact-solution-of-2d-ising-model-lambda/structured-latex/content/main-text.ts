@@ -31847,16 +31847,22 @@ a+b\cdot s
 &&\bigl(\because\ \text{積の加法逆元}\ -(b\cdot s)=(-b)\cdot s\bigr)
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`-a\in\mathbb{Q}`),
-                          "、",
-                          math(String.raw`-b\in\mathbb{Q}`),
-                          " なので、組 ",
-                          math(String.raw`(-a,-b)`),
-                          " が ",
+                          "この等式と ",
                           ref("def_quadratic_field_set"),
-                          " の存在条件の証人になり、",
-                          math(String.raw`-\xi\in Q_s`),
-                          " である。全過程は体 ",
+                          " から、次の所属の鎖を得る。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(a,b)&\in\mathbb{Q}\times\mathbb{Q}
+&&\bigl(\because\ \text{表示の写像の値域 }\blkref{def_quadratic_representation_map}\bigr)\\
+&\Longrightarrow(-a,-b)\in\mathbb{Q}\times\mathbb{Q}
+&&\bigl(\because\ \mathbb{Q}\ \text{の加法逆元による閉性}\bigr)\\
+&\Longrightarrow(-a)+(-b)\cdot s\in Q_s
+&&\bigl(\because\ \blkref{def_quadratic_field_set}\bigr)\\
+&\Longrightarrow-\xi\in Q_s
+&&\bigl(\because\ -\xi=(-a)+(-b)\cdot s\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "全過程は体 ",
                           math(String.raw`\mathbb{Q}`),
                           " と ",
                           math(String.raw`\overline{\mathbb{Q}}`),
