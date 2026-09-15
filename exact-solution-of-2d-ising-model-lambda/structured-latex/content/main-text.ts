@@ -30189,8 +30189,10 @@ H_L
 \xi\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
 &=\xi\cdot\bigl(2\cdot(1+\xi)^{-1}\bigr)
 &&\bigl(\because\ 1+\mathrm{KW}(\xi)=2\cdot(1+\xi)^{-1}\bigr)\\
-&=2\xi\cdot(1+\xi)^{-1}
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則と結合則を}\ \xi\cdot(2\cdot y)=2\xi\cdot y\ \text{へ適用}\bigr)\\
+&=(\xi\cdot2)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
+&=(2\cdot\xi)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を}\ \xi\cdot2\ \text{へ適用}\bigr)\\
 &=1-\mathrm{KW}(\xi)
 &&\bigl(\because\ 1-\mathrm{KW}(\xi)=2\xi\cdot(1+\xi)^{-1}\bigr)
 \end{aligned}`),
