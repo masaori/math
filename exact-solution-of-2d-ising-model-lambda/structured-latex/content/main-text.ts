@@ -35199,24 +35199,40 @@ c\cdot\xi
                       ],
                       proof: [
                         paragraph([
-                          "まず正の項を一つ確保する。全て正の定数配位 ", math(String.raw`\sigma_+`),
-                          "（", ref("def_constant_plus_configuration"), "）は ",
-                          math(String.raw`b(\sigma_+)=0`), "（", ref("claim_constant_plus_breaks_no_bond"),
-                          "）を満たすので、多重度の定義から",
+                          "まず正の項を一つ確保する。次の準備を得る。",
                         ]),
-                        displayMath(String.raw`1\le\Omega_L(0)\qquad(\because\ \blkref{def_multiplicity})`),
-                        paragraph([
-                          "である。また ", math(String.raw`x_c\in P_s`),
-                          " は ", ref("claim_self_dual_root_plus_positive"), " が与える。よって",
-                        ]),
-                        displayMath(String.raw`\Omega_L(0)\,x_c^0\in P_s
-\qquad
-(\because\ x_c^0=1\in P_s\text{（}\blkref{claim_quadratic_positive_cone_pow_closed}\text{）、}
-\ 1\le\Omega_L(0)\text{、}\blkref{claim_quadratic_positive_cone_nat_mul})`),
+                        displayMath(String.raw`\begin{aligned}
+b(\sigma_+)
+&=0
+&&\bigl(\because\ \blkref{def_constant_plus_configuration},\ \blkref{claim_constant_plus_breaks_no_bond}\bigr)\\
+1
+&\le\Omega_L(0)
+&&\bigl(\because\ \blkref{def_multiplicity}\bigr)\\
+x_c
+&\in P_s
+&&\bigl(\because\ \blkref{claim_self_dual_root_plus_positive}\bigr)\\
+x_c^0
+&\in P_s
+&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_pow_closed}\bigr)\\
+\Omega_L(0)\,x_c^0
+&\in P_s
+&&\bigl(\because\ 1\le\Omega_L(0),\ \blkref{claim_quadratic_positive_cone_nat_mul}\bigr)
+\end{aligned}`),
                         paragraph([
                           math(String.raw`S_n:=\sum_{m=0}^{n}\Omega_L(m)\,x_c^m`),
-                          " と置き、", math(String.raw`n`), " について帰納法を使う。出発点 ",
-                          math(String.raw`S_0`), " は上で正錐に属する。", math(String.raw`S_n\in P_s`),
+                          " と置き、", math(String.raw`n`), " について帰納法を使う。出発点は",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+S_0
+&=\sum_{m=0}^{0}\Omega_L(m)\,x_c^m
+&&\bigl(\because\ S_n\ \text{の定義}\bigr)\\
+&=\Omega_L(0)\,x_c^0
+&&\bigl(\because\ \text{一項だけの有限和}\bigr)\\
+&\in P_s
+&&\bigl(\because\ \Omega_L(0)\,x_c^0\in P_s\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "である。", math(String.raw`S_n\in P_s`),
                           " と仮定する。", math(String.raw`x_c^{n+1}\in P_s`),
                           "（", ref("claim_quadratic_positive_cone_pow_closed"), "）なので、",
                           ref("claim_quadratic_positive_cone_nat_mul"), " により次項は零元または正錐の元である。",
