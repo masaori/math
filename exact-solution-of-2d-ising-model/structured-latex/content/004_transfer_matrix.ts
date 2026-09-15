@@ -607,6 +607,114 @@ K\in\mathbb{R}
     },
   },
   {
+    id: "transfer_matrix_000h_definition_real_logarithm_positive",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "正の実数上の実対数" },
+    labels: ["def_real_logarithm_positive"],
+    statement: [
+      paragraph([
+        ref("cosh_sinh_basic_properties"),
+        " で用いた実数の指数関数を考える。実解析の標準的な事実として、指数関数は狭義単調増加な全単射 ",
+        math(String.raw`\exp:\mathbb{R}\longrightarrow\mathbb{R}_{>0}`),
+        " である。その逆写像を正の実数上の実対数と呼び、",
+      ]),
+      displayMath(String.raw`\log:\mathbb{R}_{>0}\longrightarrow\mathbb{R}`),
+      paragraph([
+        "と書く。したがって、任意の ",
+        math(String.raw`y\in\mathbb{R}_{>0}`),
+        " と ",
+        math(String.raw`x\in\mathbb{R}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\exp(\log y)=y,\qquad \log(\exp x)=x`),
+      paragraph([
+        "が成り立つ。狭義単調増加な全単射の逆写像も狭義単調増加なので、",
+      ]),
+      displayMath(String.raw`0<u<v\Longrightarrow\log u<\log v\qquad(u,v\in\mathbb{R}_{>0})`),
+      paragraph([
+        "である。とくに、",
+        math(String.raw`y\in\mathbb{R}`),
+        " が ",
+        math(String.raw`0<y<1`),
+        " を満たすならば ",
+        math(String.raw`\log y<0`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`y\in\mathbb{R}`),
+        " かつ ",
+        math(String.raw`0<y<1`),
+        " とする。まず、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0<y
+&\Longrightarrow y\in\mathbb{R}_{>0}
+&&\left(\because\ \mathbb{R}_{>0}\text{ の定義}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+1>0
+&\Longrightarrow 1\in\mathbb{R}_{>0}
+&&\left(\because\ \mathbb{R}_{>0}\text{ の定義}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+y\in\mathbb{R}_{>0}
+&\Longrightarrow \log y\in\mathbb{R}
+&&\left(\because\ \log:\mathbb{R}_{>0}\to\mathbb{R}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+1\in\mathbb{R}_{>0}
+&\Longrightarrow \log 1\in\mathbb{R}
+&&\left(\because\ \log:\mathbb{R}_{>0}\to\mathbb{R}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0<y<1
+&\Longrightarrow \log y<\log 1
+&&\left(\because\ \log\text{ は狭義単調増加}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\exp 0&=1
+&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した指数関数の基本性質}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\exp 0=1
+&\Longrightarrow \log 1=\log(\exp 0)
+&&\left(\because\ \exp 0=1\text{ による左辺の置換}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\log(\exp 0)&=0
+&&\left(\because\ \log\text{ は }\exp\text{ の逆写像}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\log 1=\log(\exp 0)\ \land\ \log(\exp 0)=0
+&\Longrightarrow \log 1=0
+&&\left(\because\ \mathbb{R}\text{ の等号の推移律}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\log y<\log 1\ \land\ \log 1=0
+&\Longrightarrow \log y<0
+&&\left(\because\ \text{等しい実数による右辺の置換}\right)
+\end{aligned}`),
+      paragraph([
+        "ゆえに ",
+        math(String.raw`0<y<1`),
+        " ならば ",
+        math(String.raw`\log y<0`),
+        " である。（実対数による ",
+        math(String.raw`\mathbb R`),
+        " 脱出）この項は実数指数関数の全単射性、実対数、および実数の順序を用いるため、有限な複素行列計算から実数解析へ移る先行定義である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "第一の双対結合定数を定める前提として、正の実数上の実対数と、0<y<1 なら log y<0 となる符号性を一つの独立定義として置いた。数学的道具立ての既存分類・節境界は変更していない。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -631,6 +739,8 @@ K\in\mathbb{R}
         ref("cosh_sinh_basic_properties"),
         " を用いる。また、双対結合定数の式に現れる双曲線正接は ",
         ref("def_positive_coupling_tanh"),
+        " で定めたものを用いる。実対数は ",
+        ref("def_real_logarithm_positive"),
         " で定めたものを用いる。",
       ]),
       list([

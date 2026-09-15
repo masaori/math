@@ -158,6 +158,7 @@ export const ALL_LABELS = [
   "def_positive_coupling_tanh",
   "def_rayleigh_sup",
   "def_real_imag_parts",
+  "def_real_logarithm_positive",
   "def_second_transfer_matrix_pauli",
   "def_sector_rayleigh_sup",
   "def_sin",
