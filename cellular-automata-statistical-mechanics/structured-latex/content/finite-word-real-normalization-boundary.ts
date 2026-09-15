@@ -194,4 +194,110 @@ d_\rho(n)
       ]),
     ],
   },
+  {
+    id: "finite_word_real_normalization_definition_zero_realization",
+    kind: "definition",
+    title: { text: "対数順序群の零実数実現" },
+    labels: ["def_prime_vector_zero_real_realization"],
+    habitat: "R",
+    realEscape:
+      "有限台整数ベクトルを実数体の零へ送る比較写像の値域として実数体を選ぶ。",
+    statement: [
+      paragraph([
+        ref("def_prime_vector_additive_real_realization"),
+        " と同じ始域・終域を持つ写像を",
+      ]),
+      displayMath(String.raw`\rho_0:\Lambda\to\mathbb R,\qquad
+\rho_0(a):=0\quad(a\in\Lambda)`),
+      paragraph(["と定め、零実数実現と呼ぶ。"])],
+  },
+  {
+    id: "finite_word_real_normalization_claim_zero_realization_additive",
+    kind: "claim",
+    title: { text: "零実数実現は加法的である" },
+    labels: ["claim_prime_vector_zero_realization_additive"],
+    habitat: "R",
+    realEscape:
+      "零実数実現の値を実数体の零と加法で比較するため実数体を使う。",
+    statement: [
+      paragraph([
+        ref("def_prime_vector_zero_real_realization"),
+        " の ",
+        math(String.raw`\rho_0`),
+        " は ",
+        ref("def_prime_vector_additive_real_realization"),
+        " の条件を満たす。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\rho_0(0_\Lambda)
+=0
+\quad(\because\ \blkref{def_prime_vector_zero_real_realization}).`),
+      paragraph([math(String.raw`a,b\in\Lambda`), " に対し、"]),
+      displayMath(String.raw`\begin{aligned}
+\rho_0(a+_\Lambda b)
+&=0
+  \quad(\because\ \blkref{def_prime_vector_zero_real_realization})\\
+&=0+0
+  \quad(\because\ \mathbb R\text{ の零})\\
+&=\rho_0(a)+\rho_0(b)
+  \quad(\because\ \blkref{def_prime_vector_zero_real_realization}).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "finite_word_real_normalization_claim_additivity_not_faithful",
+    kind: "claim",
+    title: { text: "加法性だけでは異なる有限個数を識別しない" },
+    labels: ["claim_additive_realization_need_not_distinguish_counts"],
+    habitat: "R",
+    realEscape:
+      "相異なる対数順序群元の像を実数体で比較するため実数体へ脱出する。",
+    statement: [
+      paragraph([
+        ref("def_prime_vector_zero_real_realization"),
+        " と ",
+        ref("claim_prime_vector_zero_realization_additive"),
+        " の ",
+        math(String.raw`\rho_0`),
+        " に対し、正の自然数から正の有理数への標準単射を ",
+        math(String.raw`\iota_{\mathbb Q}:\mathbb N_{>0}\to\mathbb Q_{>0}`),
+        " と書く。正の有限個数 ",
+        math(String.raw`1,2\in\mathbb N_{>0}`),
+        " の像は対数順序群では異なるが、その実数像は一致する。すなわち",
+      ]),
+      displayMath(String.raw`\log_\Lambda \iota_{\mathbb Q}(1)
+\ne\log_\Lambda \iota_{\mathbb Q}(2),
+\qquad
+\rho_0\!\left(\log_\Lambda \iota_{\mathbb Q}(1)\right)
+=\rho_0\!\left(\log_\Lambda \iota_{\mathbb Q}(2)\right)=0.`),
+      paragraph([
+        "従って、加法的な実数実現という条件だけでは、異なる有限語個数やその対数順序群値を実数側で識別できない。一般語族の実数規格化値を比較するには、比較写像を具体的に固定するか、識別に必要な追加条件を課す必要がある。",
+      ]),
+    ],
+    proof: [
+      paragraph([ref("claim_prime_logarithm_inverse"), " により"]),
+      displayMath(String.raw`\begin{aligned}
+R\!\left(\log_\Lambda \iota_{\mathbb Q}(1)\right)
+&=\iota_{\mathbb Q}(1)
+  \quad(\because\ \blkref{claim_prime_logarithm_inverse})\\
+&\ne\iota_{\mathbb Q}(2)
+  \quad(\because\ \iota_{\mathbb Q}\text{ の単射性と }1\ne2)\\
+&=R\!\left(\log_\Lambda \iota_{\mathbb Q}(2)\right)
+  \quad(\because\ \blkref{claim_prime_logarithm_inverse}).
+\end{aligned}`),
+      paragraph(["従って写像の等しい入力は等しい出力を持つことの対偶から"]),
+      displayMath(String.raw`\log_\Lambda \iota_{\mathbb Q}(1)
+\ne\log_\Lambda \iota_{\mathbb Q}(2).`),
+      paragraph(["一方、"]),
+      displayMath(String.raw`\begin{aligned}
+\rho_0\!\left(\log_\Lambda \iota_{\mathbb Q}(1)\right)
+&=0
+  \quad(\because\ \blkref{def_prime_vector_zero_real_realization})\\
+&=\rho_0\!\left(\log_\Lambda \iota_{\mathbb Q}(2)\right)
+  \quad(\because\ \blkref{def_prime_vector_zero_real_realization}).
+\end{aligned}`),
+      paragraph(["これらを合わせて主張を得る。"]),
+    ],
+  },
 ]);

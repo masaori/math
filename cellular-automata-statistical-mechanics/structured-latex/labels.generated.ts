@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_additive_realization_need_not_distinguish_counts",
   "claim_all_finite_self_maps_finite",
   "claim_all_self_maps_binary_ca_full_neighborhood_specialization",
   "claim_all_self_transpose_assignments_composition_closed_iff_subsingleton",
@@ -315,6 +316,7 @@ export const ALL_LABELS = [
   "claim_prime_logarithm_ratio",
   "claim_prime_vector_additive_realization_natural_multiple",
   "claim_prime_vector_integer_division",
+  "claim_prime_vector_zero_realization_additive",
   "claim_prime_vectors_abelian_group",
   "claim_probabilistic_finite_step_rational_closure",
   "claim_probabilistic_membership_finite_decidable",
@@ -581,6 +583,7 @@ export const ALL_LABELS = [
   "def_prime_vector_additive_real_realization",
   "def_prime_vector_order",
   "def_prime_vector_reconstruction",
+  "def_prime_vector_zero_real_realization",
   "def_probabilistic_global_transition_weight",
   "def_probabilistic_local_output_weight",
   "def_propagation_ball",
