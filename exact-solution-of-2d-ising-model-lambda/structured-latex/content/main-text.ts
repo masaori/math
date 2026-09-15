@@ -35109,31 +35109,30 @@ c\cdot\xi
 &=0\cdot\xi
 &&\bigl(\because\ c=0\bigr)\\
 &=0
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元との積}\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元との積}\bigr)\\
+0
+&=0+0\cdot s
+&&\bigl(\because\ \mathbb{Q}\ \text{と}\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
+0
+&\in Q_s
+&&\bigl(\because\ (0,0)\in\mathbb{Q}\times\mathbb{Q},\ \blkref{def_quadratic_field_set}\bigr)
 \end{aligned}`),
                     paragraph([
-                      "であり、組 ", math(String.raw`(0,0)`),
-                      " が ", ref("def_quadratic_field_set"),
-                      " の存在条件の証人になる（",
-                      math(String.raw`0=0+0\cdot s`),
-                      "。", math(String.raw`\mathbb{Q}`), " と ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " の四則）から ", math(String.raw`c\cdot\xi=0\in Q_s`),
-                      " である。",
+                      "したがって ", math(String.raw`c\cdot\xi=0\in Q_s`), " である。",
                     ]),
                     paragraph([
                       math(String.raw`1\le c`), " の場合。",
-                      math(String.raw`\mathbb{Q}`), " の順序で ",
-                      math(String.raw`0<1\le c`),
-                      " なので、推移律により ",
-                      math(String.raw`c\in\mathbb{Q}_{>0}`),
-                      " である。", ref("claim_positive_rational_in_positive_cone"),
-                      " を ", math(String.raw`q=c`), " へ適用して ",
-                      math(String.raw`c\in Q_s`), " かつ ",
-                      math(String.raw`c\in P_s`),
-                      " を得る。したがって",
                     ]),
                     displayMath(String.raw`\begin{aligned}
+c
+&>0
+&&\bigl(\because\ \mathbb{Q}\ \text{の順序で }0<1\le c\bigr)\\
+c
+&\in Q_s
+&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=c\text{ へ適用}\bigr)\\
+c
+&\in P_s
+&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=c\text{ へ適用}\bigr)\\
 c\cdot\xi
 &\in Q_s
 &&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\bigr),\\
