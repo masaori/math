@@ -35308,7 +35308,7 @@ Z_L(x_c)
                           "が成り立つ（", math(String.raw`\mathcal{F}_{L}`), " は ",
                           ref("def_finite_lattice_fisher_zeros"),
                           "）。すなわち、どの有限格子でも臨界点は分配多項式の根でない。",
-                          "零点は臨界点へ詰め寄るだけであり、有限の ",
+                          "有限の ",
                           math(String.raw`L`),
                           " で臨界点に触れることはない。",
                         ]),
