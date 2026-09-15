@@ -35633,46 +35633,47 @@ a
                       ],
                       proof: [
                         paragraph([
-                          math(String.raw`(a,b):=\mathrm{rep}_s(-1+s)=(-1,1)`),
-                          " と置く（", ref("claim_self_dual_root_plus_representation"),
-                          "）。", ref("def_quadratic_positive_cone"),
+                          ref("def_quadratic_positive_cone"),
                           " の第三の条件（",
                           math(String.raw`a<0`), " かつ ",
                           math(String.raw`0<b`), " かつ ",
                           math(String.raw`a\cdot a<2\cdot b\cdot b`),
-                          "）を確かめる。不等号はすべて有理数体 ",
+                          "）を確かめる。不等号と四則はすべて有理数体 ",
                           math(String.raw`\mathbb{Q}`),
-                          " の順序である。",
-                          math(String.raw`a=-1<0`),
-                          "、",
-                          math(String.raw`0<1=b`),
-                          " である。第三の不等式の両辺は",
+                          " の中で扱う。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
+a
+&=-1
+&&\bigl(\because\ (a,b):=\mathrm{rep}_s(-1+s),\ \blkref{claim_self_dual_root_plus_representation}\bigr)\\
+a
+&<0
+&&\bigl(\because\ a=-1,\ -1<0\text{ は }\mathbb{Q}\text{ の順序}\bigr)\\
+b
+&=1
+&&\bigl(\because\ (a,b):=\mathrm{rep}_s(-1+s),\ \blkref{claim_self_dual_root_plus_representation}\bigr)\\
+0
+&<b
+&&\bigl(\because\ b=1,\ 0<1\text{ は }\mathbb{Q}\text{ の順序}\bigr)\\
 a\cdot a
 &=(-1)\cdot(-1)
 &&\bigl(\because\ a=-1\bigr)\\
 &=1
-&&\bigl(\because\ \mathbb{Q}\ \text{の符号規則}\ (-u)\cdot(-v)=u\cdot v\ \text{と単位元との積}\bigr)
-\end{aligned}`),
-                        displayMath(String.raw`\begin{aligned}
+&&\bigl(\because\ \mathbb{Q}\ \text{の符号規則}\ (-u)\cdot(-v)=u\cdot v\ \text{と単位元との積}\bigr)\\
 2\cdot(b\cdot b)
 &=2\cdot(1\cdot1)
 &&\bigl(\because\ b=1\bigr)\\
 &=2
-&&\bigl(\because\ \text{単位元との積}\bigr)
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
+a\cdot a
+&<2\cdot(b\cdot b)
+&&\bigl(\because\ a\cdot a=1,\ 2\cdot(b\cdot b)=2,\ 1<2\text{ は }\mathbb{Q}\text{ の順序}\bigr)\\
+-1+s
+&\in P_s
+&&\bigl(\because\ a<0,\ 0<b,\ a\cdot a<2\cdot b\cdot b,\ \blkref{def_quadratic_positive_cone}\bigr)
 \end{aligned}`),
                         paragraph([
-                          "であり、",
-                          math(String.raw`1<2`),
-                          "（", math(String.raw`\mathbb{Q}`),
-                          " の順序）だから ",
-                          math(String.raw`a\cdot a<2\cdot b\cdot b`),
-                          " である。三つの比較がすべて成り立つので第三の条件が満たされ、",
-                          ref("def_quadratic_positive_cone"),
-                          " により ",
-                          math(String.raw`-1+s\in P_s`),
-                          " である。全過程は有理数の四則と順序の中で閉じ、実数体も複素数体も現れない。",
+                          "全過程は有理数の四則と順序の中で閉じ、実数体も複素数体も現れない。",
                         ]),
                       ],
                     },
