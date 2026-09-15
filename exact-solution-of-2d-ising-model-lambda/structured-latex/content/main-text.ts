@@ -35417,7 +35417,7 @@ a
                           "）から、", math(String.raw`-1\in\mathbb{Q}`),
                           "、", math(String.raw`1\in\mathbb{Q}`),
                           " は ", math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元でもある。次の鎖を得る。",
+                          " の元でもある。まず次の等式鎖を得る。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 -1+s
@@ -35426,14 +35426,17 @@ a
 &=(-1)+1\cdot s
 &&\bigl(\because\ \text{単位元との積}\ 1\cdot s=s\bigr)
 \end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+(-1,1)
+&\in\mathbb Q\times\mathbb Q
+&&\bigl(\because\ -1\in\mathbb Q,\ 1\in\mathbb Q\bigr)\\
+&\Longrightarrow (-1)+1\cdot s\in Q_s
+&&\bigl(\because\ \blkref{def_quadratic_field_set}\bigr)\\
+&\Longrightarrow -1+s\in Q_s
+&&\bigl(\because\ -1+s=(-1)+1\cdot s\bigr).
+\end{aligned}`),
                         paragraph([
-                          math(String.raw`-1\in\mathbb{Q}`),
-                          "、", math(String.raw`1\in\mathbb{Q}`),
-                          " なので、組 ", math(String.raw`(-1,1)`),
-                          " が ", ref("def_quadratic_field_set"),
-                          " の存在条件の証人になり、",
-                          math(String.raw`-1+s\in Q_s`),
-                          " である。全過程は体 ",
+                          "全過程は体 ",
                           math(String.raw`\mathbb{Q}`), " と ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の四則の中で閉じ、実数体も複素数体も現れない。",
