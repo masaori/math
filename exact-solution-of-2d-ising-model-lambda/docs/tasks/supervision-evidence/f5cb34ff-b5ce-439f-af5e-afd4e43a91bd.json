@@ -1,0 +1,10 @@
+{
+  "実行識別子":"f5cb34ff-b5ce-439f-af5e-afd4e43a91bd","観測時刻":"2026-09-15T08:59:06+09:00",
+  "起動登録の実測":{"コマンド":"launchctl list com.masaori.ising-lambda-auto-loop","終了コード":0,"対象label":"com.masaori.ising-lambda-auto-loop","判定":"登録あり"},
+  "launchctl print":{"コマンド":"launchctl print gui/501/com.masaori.ising-lambda-auto-loop","終了コード":0,"state":"not running","runs":34,"last exit code":0},
+  "plist":{"path":"/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist","存在":true,"更新時刻":"2026-09-05T21:28:34+09:00","sha256":"cbed703002cee81ff8c2c71fd5a6ab508bc0e394ab401a3d247eee1173a6c3c5","StartCalendarInterval":"毎時5分・35分"},
+  "実ログ":[{"path":"/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log","mtime":"2026-09-15T08:39:50+09:00","lines":["2026-09-15 08:05:06 === tick 開始（codex / まとめに入る締切 08:40 / 強制終了 08:50）","2026-09-15 08:39:50 === tick 正常終了"]}],
+  "実行の終了値の解釈":"08:59:06のlaunchctl list/printは終了0で登録あり・非実行中・runs 34・last exit 0。実ログにも08:39:50正常終了がある。",
+  "成果比較":{"開始成果":"7ee31d5ae69467742553938cb69b4a7fab7d3b72","直前監督の読解終点":"784db2384182b4766c8f63f9d04537c4546ae877","今回読解終点":"90696968a1339b961442e09f07f4b59f396d44b2","直前監督以後の統合差分":["809978b4e・a3a620f0b: 語位置・端点混合族を有限F2系で判定","0e65b647a・e132140ff・c060e0e3f: 所属向き、軸、上下スロットを段階的に分割","7ee31d5ae: 左右それぞれの二項族が可解性を回復"],"未統合成果の保全":"監督開始時の作業ツリーに当研究の未コミット差分なし。"},
+  "検査結果": [{"時刻":"2026-09-15T09:07:25+09:00","コマンド":"node scripts/research-supervision/verify.ts --all","終了コード":0,"結果":"六研究のschemaVersion 2評価記録を受理"},{"時刻":"2026-09-15T09:07:25+09:00","コマンド":"node scripts/research-supervision/verify-supervision-log-test.ts","終了コード":0,"結果":"監督記録の規則回帰24件成功"}]
+}

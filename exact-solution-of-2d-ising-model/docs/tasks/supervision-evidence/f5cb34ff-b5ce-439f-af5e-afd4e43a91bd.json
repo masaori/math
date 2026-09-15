@@ -1,0 +1,10 @@
+{
+  "実行識別子":"f5cb34ff-b5ce-439f-af5e-afd4e43a91bd","観測時刻":"2026-09-15T09:09:15+09:00",
+  "起動登録の実測":{"コマンド":"launchctl list com.masaori.math-complex-matrix-ising-paper-organization-loop","終了コード":0,"対象label":"com.masaori.math-complex-matrix-ising-paper-organization-loop","判定":"登録あり"},
+  "launchctl print":{"コマンド":"launchctl print gui/501/com.masaori.math-complex-matrix-ising-paper-organization-loop","終了コード":0,"state":"not running","runs":10,"last exit code":0},
+  "plist":{"path":"/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist","存在":true,"更新時刻":"2026-09-05T21:28:53+09:00","sha256":"2f811ad50d24476e63564a39c657e27f5f42d3207de30629da59bd4c0910e641","StartCalendarInterval":"偶数時43分"},
+  "実ログ":[{"path":"/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick-run-20260915T084316-2732.log","mtime":"2026-09-15T09:04:26+09:00","lines":["独立レビュー結果：未解消指摘なし。","TICK_RESULT_SUCCESS:20260915T084316-2732:90696968a1339b961442e09f07f4b59f396d44b2"]}],
+  "実行の終了値の解釈":"08:59:06には実行中だった。09:09:15の追観測でlaunchctl list/printは終了0、登録あり・非実行中・runs 10・last exit 0となり、実ログの成功標識と成果コミットのremote default包含も確認した。",
+  "成果比較":{"開始成果":"7ee31d5ae69467742553938cb69b4a7fab7d3b72","直前監督の読解終点":"784db2384182b4766c8f63f9d04537c4546ae877","今回読解終点":"90696968a1339b961442e09f07f4b59f396d44b2","直前監督以後の統合差分":["7a02819f3・6418c2bfa・90696968a: 第一双対結合定数の先行定義不足をstate・MEMORYで再確認。数学本文の前進なし"],"未統合成果の保全":"08:43開始分は成果コミット90696968aとしてremote defaultへ統合済みで、未統合成果は観測されなかった。"},
+  "検査結果": [{"時刻":"2026-09-15T09:07:25+09:00","コマンド":"node scripts/research-supervision/verify.ts --all","終了コード":0,"結果":"六研究のschemaVersion 2評価記録を受理"},{"時刻":"2026-09-15T09:07:25+09:00","コマンド":"node scripts/research-supervision/verify-supervision-log-test.ts","終了コード":0,"結果":"監督記録の規則回帰24件成功"}]
+}
