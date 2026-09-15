@@ -31734,7 +31734,7 @@ a+b\cdot s
 &=0
 &&\bigl(\because\ \text{仮定}\ \xi=0\bigr)\\
 &=0+0\cdot s
-&&\bigl(\because\ \text{準備の鎖}\bigr)
+&&\bigl(\because\ 0=0+0\cdot s\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`a+b\cdot s=0+0\cdot s`),
