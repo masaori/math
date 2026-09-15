@@ -2418,6 +2418,10 @@ targets=(
   CellularAutomata.NecSuf.FiniteWordComplexityBoundary.forbiddenOneRunWordFamily_nextLength_eq_erase_of_necSuf
   CellularAutomata.NecSuf.FiniteWordComplexityBoundary.forbiddenOneRunWordFamily_card_nextLength_of_necSuf
   CellularAutomata.NecSuf.FiniteWordComplexityBoundary.finiteWordCounts_agree_below_and_diverge_next_of_necSuf
+  CellularAutomata.FiniteWordRealNormalizationBoundary.additiveRealization_naturalMultiple
+  CellularAutomata.FiniteWordRealNormalizationBoundary.logarithm_two_power
+  CellularAutomata.FiniteWordRealNormalizationBoundary.finiteWordLogarithmicCount_eq_naturalMultiple
+  CellularAutomata.FiniteWordRealNormalizationBoundary.fullTwoSymbolWordRealizedDensity_constant
 )
 
 tmpdir="$(mktemp -d /tmp/check-axioms-XXXXXX)"

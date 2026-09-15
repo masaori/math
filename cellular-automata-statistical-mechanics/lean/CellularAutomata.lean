@@ -156,3 +156,4 @@ import CellularAutomata.FinitePowerBoundCertificate
 import CellularAutomata.NecSuf.FinitePowerBoundCertificate
 import CellularAutomata.FiniteWordComplexityBoundary
 import CellularAutomata.NecSuf.FiniteWordComplexityBoundary
+import CellularAutomata.FiniteWordRealNormalizationBoundary
