@@ -32967,22 +32967,19 @@ b+b'
                           math(String.raw`\mathbb{Q}`),
                           " での和と積は ",
                           math(String.raw`\overline{\mathbb{Q}}`),
-                          " での和と積と同じ元である。まず、あとで使う三つの補助等式を立てる。第一に",
+                          " での和と積と同じ元である。あとで使う三つの補助等式を得る。",
                         ]),
-                        displayMath(String.raw`a\cdot(b'\cdot s)=(a\cdot b')\cdot s
-\qquad\bigl(\because\ \text{乗法の結合則}\bigr)`),
-                        paragraph(["第二に"]),
                         displayMath(String.raw`\begin{aligned}
+a\cdot(b'\cdot s)
+&=(a\cdot b')\cdot s
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
 (b\cdot s)\cdot a'
 &=b\cdot(s\cdot a')
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
 &=b\cdot(a'\cdot s)
 &&\bigl(\because\ \text{乗法の可換則}\bigr)\\
 &=(b\cdot a')\cdot s
-&&\bigl(\because\ \text{乗法の結合則}\bigr)
-\end{aligned}`),
-                        paragraph(["第三に"]),
-                        displayMath(String.raw`\begin{aligned}
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
 (b\cdot s)\cdot(b'\cdot s)
 &=\bigl((b\cdot s)\cdot b'\bigr)\cdot s
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
@@ -32999,7 +32996,6 @@ b+b'
 &=2\cdot(b\cdot b')
 &&\bigl(\because\ \text{乗法の可換則}\bigr)
 \end{aligned}`),
-                        paragraph(["次の鎖を得る。"]),
                         displayMath(String.raw`\begin{aligned}
 \xi\cdot\eta
 &=\bigl(a+b\cdot s\bigr)\cdot\bigl(a'+b'\cdot s\bigr)
@@ -33011,11 +33007,11 @@ b+b'
 &=\bigl(a\cdot a'+a\cdot(b'\cdot s)\bigr)+\bigl((b\cdot s)\cdot a'+(b\cdot s)\cdot(b'\cdot s)\bigr)
 &&\bigl(\because\ \text{分配則}\ u\cdot(v+w)=u\cdot v+u\cdot w\bigr)\\
 &=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl((b\cdot s)\cdot a'+(b\cdot s)\cdot(b'\cdot s)\bigr)
-&&\bigl(\because\ \text{第一の補助等式}\bigr)\\
+&&\bigl(\because\ a\cdot(b'\cdot s)=(a\cdot b')\cdot s\bigr)\\
 &=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl((b\cdot a')\cdot s+(b\cdot s)\cdot(b'\cdot s)\bigr)
-&&\bigl(\because\ \text{第二の補助等式}\bigr)\\
+&&\bigl(\because\ (b\cdot s)\cdot a'=(b\cdot a')\cdot s\bigr)\\
 &=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl((b\cdot a')\cdot s+2\cdot(b\cdot b')\bigr)
-&&\bigl(\because\ \text{第三の補助等式}\bigr)\\
+&&\bigl(\because\ (b\cdot s)\cdot(b'\cdot s)=2\cdot(b\cdot b')\bigr)\\
 &=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl(2\cdot(b\cdot b')+(b\cdot a')\cdot s\bigr)
 &&\bigl(\because\ \text{加法の可換則}\bigr)\\
 &=a\cdot a'+\Bigl((a\cdot b')\cdot s+\bigl(2\cdot(b\cdot b')+(b\cdot a')\cdot s\bigr)\Bigr)
