@@ -34792,8 +34792,10 @@ A\cdot A
 \mathrm{rep}_s(\xi\cdot\eta)
 &=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')
   &&\bigl(\because\ \blkref{claim_quadratic_multiplication_representation}\bigr)\\
+&=(a'\cdot a+2\cdot(b'\cdot b),\ b'\cdot a+a'\cdot b)
+  &&\bigl(\because\ \mathbb{Q}\ \text{の乗法の可換則を各積に適用する}\bigr)\\
 &=(a'\cdot a+2\cdot(b'\cdot b),\ a'\cdot b+b'\cdot a)
-  &&\bigl(\because\ \mathbb{Q}\ \text{の乗法の可換則と加法の可換則を各成分に適用する}\bigr)\\
+  &&\bigl(\because\ \mathbb{Q}\ \text{の加法の可換則}\bigr)\\
 &=\mathrm{rep}_s(\eta\cdot\xi)
   &&\bigl(\because\ \blkref{claim_quadratic_multiplication_representation}\bigr)
 \end{aligned}`),

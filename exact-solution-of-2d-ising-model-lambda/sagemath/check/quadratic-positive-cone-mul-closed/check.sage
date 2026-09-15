@@ -36,8 +36,9 @@ for (a, b) in cone:
         B = a * bp + b * ap
         # 主張: 積の表示は正錐の三条件の少なくとも一つを満たす。
         assert positive(A, B)
-        # 転送の根拠: 表示の各成分の乗法・加法の可換則。
-        assert (a * ap + 2 * (b * bp), a * bp + b * ap) == (ap * a + 2 * (bp * b), ap * b + bp * a)
+        # 転送の根拠: まず各積の乗法可換則、次に第二成分の加法可換則。
+        assert (a * ap + 2 * (b * bp), a * bp + b * ap) == (ap * a + 2 * (bp * b), bp * a + ap * b)
+        assert (ap * a + 2 * (bp * b), bp * a + ap * b) == (ap * a + 2 * (bp * b), ap * b + bp * a)
         # 場合分けが九通りを尽くすこと(各組がどの場合に入るかを記録する)。
         case = (
             0 if cond_nonnegative(a, b) else (1 if cond_negative_second(a, b) else 2),

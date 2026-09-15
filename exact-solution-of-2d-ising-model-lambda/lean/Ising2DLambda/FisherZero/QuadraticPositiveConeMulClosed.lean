@@ -25,15 +25,16 @@ theorem quadraticPositiveCone_mul_transfer
     (quadraticRepresentation s (quadraticMulElement s hs xi eta))
   change quadraticCoefficientPositive
     (quadraticRepresentation s (quadraticMulElement s hs eta xi)) at h
-  -- 本文の鎖: rep(ξη) = (aa'+2bb', ab'+ba') = (a'a+2b'b, a'b+b'a) = rep(ηξ)
+  -- 本文の鎖: rep(ξη) = (aa'+2bb', ab'+ba') = (a'a+2b'b, b'a+a'b)
+  -- = (a'a+2b'b, a'b+b'a) = rep(ηξ)
   rw [quadraticRepresentation_mul s hs xi eta]
   rw [quadraticRepresentation_mul s hs eta xi] at h
   rw [mul_comm (quadraticRepresentation s xi).1 (quadraticRepresentation s eta).1,
     mul_comm (quadraticRepresentation s xi).2 (quadraticRepresentation s eta).2,
     mul_comm (quadraticRepresentation s xi).1 (quadraticRepresentation s eta).2,
-    mul_comm (quadraticRepresentation s xi).2 (quadraticRepresentation s eta).1,
-    add_comm ((quadraticRepresentation s eta).2 * (quadraticRepresentation s xi).1)
-      ((quadraticRepresentation s eta).1 * (quadraticRepresentation s xi).2)]
+    mul_comm (quadraticRepresentation s xi).2 (quadraticRepresentation s eta).1]
+  rw [add_comm ((quadraticRepresentation s eta).2 * (quadraticRepresentation s xi).1)
+    ((quadraticRepresentation s eta).1 * (quadraticRepresentation s xi).2)]
   exact h
 
 /-- `claim_quadratic_positive_cone_mul_closed` の具体版。
