@@ -161,3 +161,4 @@ import CellularAutomata.NecSuf.FiniteWordRealNormalizationBoundary
 import CellularAutomata.AdditiveRealizationNonseparationBoundary
 import CellularAutomata.NecSuf.AdditiveRealizationNonseparationBoundary
 import CellularAutomata.FiniteGibbsWeightBoundary
+import CellularAutomata.NecSuf.FiniteGibbsWeightBoundary
