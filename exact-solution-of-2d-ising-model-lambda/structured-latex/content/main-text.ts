@@ -34918,54 +34918,55 @@ A\cdot A
                       ],
                       proof: [
                         paragraph([
-                          "まず所属を示す。",
                           math(String.raw`\overline{\mathbb{Q}}`),
-                          " の中で",
+                          " の中で次の一続きの鎖を得る。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 q
 &=q+0
-&&(\because\ \text{加法単位元})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法単位元}\bigr)\\
 &=q+0\cdot s
-&&(\because\ \text{零元の乗法})
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元の乗法}\bigr)\\
+&\in Q_s
+&&\bigl(\because\ q,0\in\mathbb{Q}\ \text{であり、組}\ (q,0)\ \text{が}\ \blkref{def_quadratic_field_set}\ \text{の存在条件を満たす}\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{rep}_s(q)
+&=(q,0)
+&&\bigl(\because\ \text{上の表示と}\ \blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr)
 \end{aligned}`),
                         paragraph([
-                          "であり、", math(String.raw`q\in\mathbb{Q}`),
-                          "、", math(String.raw`0\in\mathbb{Q}`),
-                          " なので、組 ", math(String.raw`(q,0)`),
-                          " は ", ref("def_quadratic_field_set"),
-                          " の存在条件の証人である。ゆえに ",
-                          math(String.raw`q\in Q_s`), " である。表示の一意性（",
-                          ref("claim_quadratic_representation_unique"),
-                          "）により ",
-                          math(String.raw`\mathrm{rep}_s(q)=(q,0)`),
-                          "（", ref("def_quadratic_representation_map"), "）である。",
-                        ]),
-                        paragraph([
                           math(String.raw`(a,b):=(q,0)`),
-                          " と置き、", ref("def_quadratic_positive_cone"),
-                          " の第一の条件（",
-                          math(String.raw`0\le a`),
-                          " かつ ",
-                          math(String.raw`0\le b`),
-                          " かつ ",
-                          math(String.raw`(a,b)\ne(0,0)`),
-                          "）を確かめる。不等号はすべて有理数体 ",
+                          " と置く。不等号はすべて有理数体 ",
                           math(String.raw`\mathbb{Q}`),
-                          " の順序である。仮定 ",
-                          math(String.raw`0<q`),
-                          " から ", math(String.raw`0\le a=q`),
-                          " である。", math(String.raw`b=0`),
-                          " なので ", math(String.raw`0\le b`),
-                          " である。", math(String.raw`q\ne0`),
-                          "（", math(String.raw`0<q`),
-                          " と ", math(String.raw`\mathbb{Q}`),
-                          " の順序の非反射性）なので ",
-                          math(String.raw`(a,b)=(q,0)\ne(0,0)`),
-                          " である。三つの比較がすべて成り立つので第一の条件が満たされ、",
-                          ref("def_quadratic_positive_cone"),
-                          " により ", math(String.raw`q\in P_s`),
-                          " である。全過程は有理数の四則と順序の中で閉じ、実数体も複素数体も現れない。",
+                          " の順序である。正錐の第一の条件は次の各行から従う。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+a
+&=q
+&&\bigl(\because\ (a,b)=(q,0)\bigr)\\
+b
+&=0
+&&\bigl(\because\ (a,b)=(q,0)\bigr)\\
+0
+&\le a
+&&\bigl(\because\ 0<q\ \text{と}\ a=q\bigr)\\
+0
+&\le b
+&&\bigl(\because\ b=0\bigr)\\
+q
+&\ne0
+&&\bigl(\because\ 0<q\ \text{と}\ \mathbb{Q}\ \text{の順序の非反射性}\bigr)\\
+(a,b)
+&\ne(0,0)
+&&\bigl(\because\ (a,b)=(q,0)\ \text{と}\ q\ne0\bigr)\\
+q
+&\in P_s
+&&\bigl(\because\ \mathrm{rep}_s(q)=(a,b)=(q,0)\ \text{が}\ \blkref{def_quadratic_positive_cone}\ \text{の第一の条件を満たす}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "全過程は有理数の四則と順序、および代数的数の表示の中で閉じ、",
+                          "実数体も複素数体も現れない。",
                         ]),
                       ],
                     },
