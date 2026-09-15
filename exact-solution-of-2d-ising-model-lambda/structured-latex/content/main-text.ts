@@ -31649,17 +31649,10 @@ b
 &=0+0
 &&\bigl(\because\ \text{加法の単位元}\bigr)\\
 &=0+0\cdot s
-&&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)
+&&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)\\
+&\in Q_s
+&&\bigl(\because\ (0,0)\in\mathbb{Q}\times\mathbb{Q},\ \blkref{def_quadratic_field_set}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "組 ",
-                          math(String.raw`(0,0)`),
-                          " が ",
-                          ref("def_quadratic_field_set"),
-                          " の存在条件の証人になるから ",
-                          math(String.raw`0\in Q_s`),
-                          " である。",
-                        ]),
                       ],
                     },
                 },
