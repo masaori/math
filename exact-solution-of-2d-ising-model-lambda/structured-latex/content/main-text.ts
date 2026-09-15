@@ -33215,18 +33215,15 @@ q\cdot q
 &\le p\cdot p
 &&\bigl(\because\ \text{背理法の仮定}\ q\le p\ \text{の両辺に、}0\le p\ \text{の}\ p\ \text{を左から掛ける。非負元を掛けても}\ \le\ \text{は保たれる}\bigr)
 \end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+p\cdot p
+&<q\cdot q
+&&\bigl(\because\ \text{仮定}\ p\cdot p<q\cdot q\bigr)\\
+&\le p\cdot p
+&&\bigl(\because\ \text{上の二段の鎖と順序の推移律}\bigr),
+\end{aligned}`),
                         paragraph([
-                          "したがって ",
-                          math(String.raw`q\cdot q\le p\cdot p`),
-                          "（",
-                          math(String.raw`\because`),
-                          " 順序の推移律）。これと仮定 ",
-                          math(String.raw`p\cdot p<q\cdot q`),
-                          " をつなぐと ",
-                          math(String.raw`p\cdot p<p\cdot p`),
-                          "（",
-                          math(String.raw`\because`),
-                          " 狭義不等式と広義不等式の連結）となり、順序の非反射性（",
+                          "これは順序の非反射性（",
                           math(String.raw`p\cdot p<p\cdot p`),
                           " は成り立たない）と矛盾する。ゆえに背理法の仮定 ",
                           math(String.raw`q\le p`),
