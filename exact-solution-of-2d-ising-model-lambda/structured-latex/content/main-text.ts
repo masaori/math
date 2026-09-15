@@ -31930,19 +31930,13 @@ a+b\cdot s
 &=(-a)+(-b)\cdot s
 &&\bigl(\because\ \text{積の加法逆元}\ -(b\cdot s)=(-b)\cdot s\bigr)
 \end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{rep}_s(-\xi)
+&=(-a,-b)
+&&\bigl(\because\ -\xi=(-a)+(-b)\cdot s,\ \blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr)
+\end{aligned}`),
                         paragraph([
-                          math(String.raw`\mathrm{rep}_s(-\xi)`),
-                          " は ",
-                          math(String.raw`-\xi`),
-                          " を表す唯一の組である（",
-                          ref("def_quadratic_representation_map"),
-                          "）。上の鎖の表示 ",
-                          math(String.raw`(-a,-b)`),
-                          " に ",
-                          ref("claim_quadratic_representation_unique"),
-                          " を適用して ",
-                          math(String.raw`\mathrm{rep}_s(-\xi)=(-a,-b)`),
-                          " を得る。全過程は体 ",
+                          "全過程は体 ",
                           math(String.raw`\mathbb{Q}`),
                           " と ",
                           math(String.raw`\overline{\mathbb{Q}}`),
