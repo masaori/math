@@ -163,3 +163,4 @@ import CellularAutomata.NecSuf.AdditiveRealizationNonseparationBoundary
 import CellularAutomata.FiniteGibbsWeightBoundary
 import CellularAutomata.NecSuf.FiniteGibbsWeightBoundary
 import CellularAutomata.FiniteRationalEntropyBoundary
+import CellularAutomata.NecSuf.FiniteRationalEntropyBoundary
