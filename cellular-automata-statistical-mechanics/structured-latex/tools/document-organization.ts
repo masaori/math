@@ -101,6 +101,16 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_word_real_normalization_boundary",
+        title: "有限語個数の実数実現による規格化境界",
+        input: "正の語長、正の有限二元語個数、対数順序群、そこから実数体への加法的な比較写像を入力とする。",
+        output: "有限段階の規格化値を定義できる正確な定義域と実数脱出点を得て、全二元語族では極限を使わず一定値になることを得る。",
+        main: "主張は、全二元語族の対数順序群値を加法的な実数実現へ送り、正の語長で割った値が全有限段階で同じになる一方、一般の位相的エントロピーには全段階の列・収束概念・極限存在が別に要ることである。",
+        mainLabels: [
+          "claim_full_two_symbol_word_realized_density_constant",
+        ],
+      },
+      {
         id: "cyclic_offset_finite_images",
         title: "整数オフセットの有限剰余像",
         input: "正の周期、非負の半径、有限整数区間と整数の余り写像を入力とする。",

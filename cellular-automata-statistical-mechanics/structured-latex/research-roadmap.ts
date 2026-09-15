@@ -483,6 +483,11 @@ export const roadmapStages = [
         label: "claim_finite_submultiplicative_count_multiple_index_density_bound",
         why: "有限打ち切り内の劣乗法不等式から倍数段階の交差冪による密度上界を自然数演算だけで導き、全段階の仮定と極限存在を別問題として分離する。",
       },
+      {
+        kind: "label",
+        label: "claim_full_two_symbol_word_realized_density_constant",
+        why: "対数順序群から実数への比較写像と正の語長による除算を明示し、有限段階の実数脱出と位相的エントロピーの極限を分離する。",
+      },
     ],
   },
 ] as const satisfies readonly RoadmapStage[];
