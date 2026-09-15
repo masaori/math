@@ -5,7 +5,8 @@
   "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist", "存在": true, "更新時刻": "2026-09-05T21:28:53+09:00", "sha256": "2f811ad50d24476e63564a39c657e27f5f42d3207de30629da59bd4c0910e641", "StartCalendarInterval": "偶数時43分"},
   "実ログ": {"path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launcher.log", "mtime": "2026-09-15T20:44:02+09:00", "終端": "20:43開始分は準備と開始時差分までで、正常・異常・打ち切りの終端記録なし"},
   "実行の終了値の解釈": "観測時に実行中で現在回の終端がない。launchctlのlast exit 0は過去回なので直近成否へ流用せず未確認とした。",
-  "成果比較": {"開始成果": "c4ff950329a8dfd9869e54819684f3d12b9d2bf9", "今回読解終点": "c4ff950329a8dfd9869e54819684f3d12b9d2bf9", "前回監督以後": "数学本文・棚卸しの新成果なし。先行定義不足の待機再確認のみ。"},
+  "追観測": {"観測時刻": "2026-09-15T21:09:12+09:00", "list終了コード": 0, "print終了コード": 0, "state": "not running", "runs": 16, "last exit code": 0, "実ログ": [{"path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick-run-20260915T204405-52771.log", "mtime": "2026-09-15T21:03:59+09:00", "終端": "TICK_RESULT_SUCCESS:20260915T204405-52771:0271aa9b3b39bbe3e704066ec330c40c054ef3ee"}, {"path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick.log", "mtime": "2026-09-15T21:06:10+09:00", "終端": "2026-09-15 21:06:10 SUCCESS: 論文構成tick完了"}], "解釈": "現在回の正常終了と成果コミットのremote default包含を確認"},
+  "成果比較": {"開始成果": "c4ff950329a8dfd9869e54819684f3d12b9d2bf9", "今回読解終点": "0271aa9b3b39bbe3e704066ec330c40c054ef3ee", "前回監督以後": "数学本文・棚卸しの新成果なし。先行定義不足の待機再確認のみ。"},
   "検査結果": [
     {"時刻": "2026-09-15T21:06:33+09:00", "コマンド": "node scripts/research-supervision/verify.ts --all", "終了コード": 0, "結果": "六研究のschemaVersion 2評価記録を受理"},
     {"時刻": "2026-09-15T21:06:33+09:00", "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts", "終了コード": 0, "結果": "監督記録の規則回帰24件成功"}
