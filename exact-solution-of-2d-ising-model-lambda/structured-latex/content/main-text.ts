@@ -33097,8 +33097,11 @@ a\cdot(b'\cdot s)
                       ref("claim_quadratic_multiplication_mem"),
                       " の証明の鎖により",
                     ]),
-                    displayMath(String.raw`\xi\cdot\eta=\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)+\bigl(a\cdot b'+b\cdot a'\bigr)\cdot s
-\qquad\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\text{ の証明の鎖の始点と終点}\bigr)`),
+                    displayMath(String.raw`\begin{aligned}
+\xi\cdot\eta
+&=\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)+\bigl(a\cdot b'+b\cdot a'\bigr)\cdot s
+&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\text{ の証明の鎖の始点と終点}\bigr)
+\end{aligned}`),
                     paragraph([
                       math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)`),
                       " は ",
@@ -33109,9 +33112,15 @@ a\cdot(b'\cdot s)
                       math(String.raw`\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)`),
                       " に ",
                       ref("claim_quadratic_representation_unique"),
-                      " を適用して ",
-                      math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)=\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)`),
-                      " を得る。全過程は体 ",
+                      " を適用する。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{rep}_s(\xi\cdot\eta)
+&=\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)
+&&\bigl(\because\ \blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr)
+\end{aligned}`),
+                    paragraph([
+                      "全過程は体 ",
                       math(String.raw`\mathbb{Q}`),
                       " と ",
                       math(String.raw`\overline{\mathbb{Q}}`),
