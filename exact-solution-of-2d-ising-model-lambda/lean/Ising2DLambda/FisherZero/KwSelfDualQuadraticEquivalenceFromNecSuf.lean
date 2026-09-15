@@ -26,6 +26,7 @@ theorem kwSelfDual_quadratic_equivalence_from_necSuf {xi : Qbar} (hDomain : 1 + 
       (forwardProduct := xi * (1 + xi))
       (forwardAfterSelf := kwDualTransform xi * (1 + xi))
       (forwardQuadratic := xi ^ 2 + 2 * xi - 1)
+      (forwardAfterCancellation := ((xi + xi ^ 2) - xi) + 2 * xi - 1)
       (forwardAfterProduct := (xi * (1 + xi) - xi) + 2 * xi - 1)
       (forwardAfterCollect := ((1 - xi) - xi) + 2 * xi - 1)
       (differenceProduct := (1 + xi) * (kwDualTransform xi - xi))
@@ -35,6 +36,10 @@ theorem kwSelfDual_quadratic_equivalence_from_necSuf {xi : Qbar} (hDomain : 1 + 
         kwDualTransform xi * (1 + xi) - xi * (1 + xi))
       (differenceAfterProduct := (1 - xi) - xi * (1 + xi))
       (differenceAfterExpansion := (1 - xi) - (xi + xi ^ 2))
+      (differenceAfterSubtraction := 1 - xi - xi - xi ^ 2)
+      (differenceAfterDoubling := 1 - 2 * xi - xi ^ 2)
+      (differenceAfterCommuting := -xi ^ 2 + (1 - 2 * xi))
+      (differenceAfterAssociating := -xi ^ 2 - 2 * xi + 1)
       (differenceAfterNegation := -(xi ^ 2 + 2 * xi - 1))
       (differenceAfterAssumption := -0)
       (difference := kwDualTransform xi - xi)
@@ -48,6 +53,7 @@ theorem kwSelfDual_quadratic_equivalence_from_necSuf {xi : Qbar} (hDomain : 1 + 
   · intro hProduct
     exact hProduct
   · ring
+  · ring
   · intro hForward
     rw [hForward]
   · ring
@@ -57,6 +63,10 @@ theorem kwSelfDual_quadratic_equivalence_from_necSuf {xi : Qbar} (hDomain : 1 + 
   · ring
   · intro hProduct
     rw [hProduct]
+  · ring
+  · ring
+  · ring
+  · ring
   · ring
   · ring
   · intro hQuadratic

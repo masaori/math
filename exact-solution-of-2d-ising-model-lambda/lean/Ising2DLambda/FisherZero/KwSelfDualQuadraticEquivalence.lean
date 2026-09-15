@@ -29,7 +29,8 @@ theorem kwSelfDual_quadratic_equivalence {xi : Qbar} (hDomain : 1 + xi ≠ 0) :
         xi * (1 + xi) = kwDualTransform xi * (1 + xi) := by rw [hSelfDual]
         _ = 1 - xi := hProduct
     calc
-      xi ^ 2 + 2 * xi - 1 = (xi * (1 + xi) - xi) + 2 * xi - 1 := by ring
+      xi ^ 2 + 2 * xi - 1 = ((xi + xi ^ 2) - xi) + 2 * xi - 1 := by ring
+      _ = (xi * (1 + xi) - xi) + 2 * xi - 1 := by ring
       _ = ((1 - xi) - xi) + 2 * xi - 1 := by rw [hXiProduct]
       _ = (1 - 2 * xi) + 2 * xi - 1 := by ring
       _ = 0 := by ring
@@ -41,6 +42,10 @@ theorem kwSelfDual_quadratic_equivalence {xi : Qbar} (hDomain : 1 + xi ≠ 0) :
         _ = kwDualTransform xi * (1 + xi) - xi * (1 + xi) := by ring
         _ = (1 - xi) - xi * (1 + xi) := by rw [hProduct]
         _ = (1 - xi) - (xi + xi ^ 2) := by ring
+        _ = 1 - xi - xi - xi ^ 2 := by ring
+        _ = 1 - 2 * xi - xi ^ 2 := by ring
+        _ = -xi ^ 2 + (1 - 2 * xi) := by ring
+        _ = -xi ^ 2 - 2 * xi + 1 := by ring
         _ = -(xi ^ 2 + 2 * xi - 1) := by ring
         _ = -0 := by rw [hQuadratic]
         _ = 0 := neg_zero
