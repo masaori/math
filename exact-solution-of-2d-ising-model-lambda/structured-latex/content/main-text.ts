@@ -35477,16 +35477,15 @@ a
                           ref("claim_self_dual_root_plus_mem"),
                           " の証明の鎖により ",
                           math(String.raw`-1+s=(-1)+1\cdot s`),
-                          " である。",
-                          math(String.raw`\mathrm{rep}_s(-1+s)`),
-                          " は ", math(String.raw`-1+s`),
-                          " を表す唯一の組である（",
-                          ref("def_quadratic_representation_map"),
-                          "）。表示 ", math(String.raw`(-1,1)`),
-                          " に ", ref("claim_quadratic_representation_unique"),
-                          " を適用して ",
-                          math(String.raw`\mathrm{rep}_s(-1+s)=(-1,1)`),
-                          " を得る。全過程は体 ",
+                          " である。表示の写像の値は次の等式で決まる。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{rep}_s(-1+s)
+&=(-1,1)
+&&\bigl(\because\ -1+s=(-1)+1\cdot s,\ \blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "全過程は体 ",
                           math(String.raw`\mathbb{Q}`), " と ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の四則の中で閉じ、実数体も複素数体も現れない。",
