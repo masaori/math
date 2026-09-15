@@ -35526,26 +35526,27 @@ a
                         paragraph([
                           math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
                           " は部分体である（", ref("def_algebraic_numbers"),
-                          "）から、", math(String.raw`-1\in\mathbb{Q}`),
-                          " は ", math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元でもある。次の鎖を得る。",
+                          "）。係数と値の所属を次の鎖で確定する。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
+-1
+&\in\mathbb{Q}
+&&\bigl(\because\ \mathbb{Q}\ \text{の加法の逆元による閉性}\bigr)\\
+&\in\overline{\mathbb{Q}}
+&&\bigl(\because\ \mathbb{Q}\subseteq\overline{\mathbb{Q}},\ \blkref{def_algebraic_numbers}\bigr),\\
 -1-s
 &=(-1)+(-s)
 &&\bigl(\because\ \text{記法}\ \blkref{claim_self_dual_quadratic_roots}\bigr)\\
 &=(-1)+\bigl(-(1\cdot s)\bigr)
 &&\bigl(\because\ \text{単位元との積}\ 1\cdot s=s\bigr)\\
 &=(-1)+(-1)\cdot s
-&&\bigl(\because\ \text{積の加法逆元}\ -(b\cdot s)=(-b)\cdot s\bigr)
+&&\bigl(\because\ \text{積の加法逆元}\ -(b\cdot s)=(-b)\cdot s\bigr)\\
+&\in Q_s
+&&\bigl(\because\ (-1,-1)\in\mathbb{Q}\times\mathbb{Q},\ \blkref{def_quadratic_field_set}\bigr)
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`-1\in\mathbb{Q}`),
-                          " なので、組 ", math(String.raw`(-1,-1)`),
-                          " が ", ref("def_quadratic_field_set"),
-                          " の存在条件の証人になり、",
-                          math(String.raw`-1-s\in Q_s`),
-                          " である。全過程は体 ",
+                          "組 ", math(String.raw`(-1,-1)`),
+                          " は最後の所属の証人である。全過程は体 ",
                           math(String.raw`\mathbb{Q}`), " と ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の四則の中で閉じ、実数体も複素数体も現れない。",
