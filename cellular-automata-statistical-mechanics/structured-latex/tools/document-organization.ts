@@ -361,6 +361,18 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_gibbs_weight_boundary",
+        title: "有限有理遷移重みと有限 Gibbs 重みの境界",
+        input: "有限舞台上の有理遷移重み、有理数から実数への標準単射、有限実数値エネルギー、正の実数値逆温度を入力とする。",
+        output: "有理遷移重みの標準実数比較と、実指数関数で作る有限 Gibbs 遷移重みを別々に得て、有限舞台でも後者が実数へ脱出する箇所と両者が一致しない有限反例を得る。",
+        main: "主張は、有限 Gibbs 遷移重みが全て正かつ各行で規格化される一方、一セル恒等規則の零一遷移重みは零成分を持つため、どの有限実数値エネルギーと正の逆温度からも得られないことである。",
+        mainLabels: [
+          "claim_finite_gibbs_transition_weight_strictly_positive",
+          "claim_finite_gibbs_transition_weight_normalized",
+          "claim_rational_transition_weight_not_always_finite_gibbs",
+        ],
+      },
+      {
         id: "cyclic_stage_uniform_marginals",
         title: "有限巡回舞台の一様分布・有限窓周辺化・条件付き再標本化",
         input: "奇数位数の有限巡回舞台、整数の有限窓、二元状態集合と有限配位上の一様有理分布を入力とする。",

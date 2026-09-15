@@ -35,6 +35,7 @@ import blocks_cyclic_stage_uniform_conditional_kernel from './content/cyclic-sta
 import blocks_cyclic_stage_uniform_marginals from './content/cyclic-stage-uniform-marginals.ts'
 import blocks_dependency_order_substructures from './content/dependency-order-substructures.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
+import blocks_finite_gibbs_weight_boundary from './content/finite-gibbs-weight-boundary.ts'
 import blocks_finite_neighborhood_assignment_monoid from './content/finite-neighborhood-assignment-monoid.ts'
 import blocks_finite_power_bound_certificate from './content/finite-power-bound-certificate.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
@@ -121,6 +122,7 @@ export type AllBlocks = [
   ...typeof blocks_cyclic_stage_uniform_marginals,
   ...typeof blocks_dependency_order_substructures,
   ...typeof blocks_essential_dependency,
+  ...typeof blocks_finite_gibbs_weight_boundary,
   ...typeof blocks_finite_neighborhood_assignment_monoid,
   ...typeof blocks_finite_power_bound_certificate,
   ...typeof blocks_finite_propagation_boundary,
