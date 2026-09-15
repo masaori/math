@@ -30328,8 +30328,10 @@ H_L
                         paragraph(["を得る。これを使って"]),
                         displayMath(String.raw`\begin{aligned}
 \xi^2+2\xi-1
+&=\bigl((\xi+\xi^2)-\xi\bigr)+2\xi-1
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
 &=\bigl(\xi\cdot(1+\xi)-\xi\bigr)+2\xi-1
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\ \xi\cdot(1+\xi)=\xi+\xi^2\ \text{の移項}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
 &=\bigl((1-\xi)-\xi\bigr)+2\xi-1
 &&\bigl(\because\ \xi\cdot(1+\xi)=1-\xi\bigr)\\
 &=(1-2\xi)+2\xi-1
@@ -30356,8 +30358,16 @@ H_L
 &&\bigl(\because\ \mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi\bigr)\\
 &=(1-\xi)-(\xi+\xi^2)
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=1-\xi-\xi-\xi^2
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
+&=1-2\xi-\xi^2
+&&\bigl(\because\ \xi+\xi=2\xi\bigr)\\
+&=-\xi^2+(1-2\xi)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)\\
+&=-\xi^2-2\xi+1
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
 &=-\bigl(\xi^2+2\xi-1\bigr)
-&&\bigl(\because\ \xi+\xi=2\xi\ \text{と加法の逆元の分配}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元の分配}\bigr)\\
 &=-0
 &&\bigl(\because\ \text{仮定}\ \xi^2+2\xi-1=0\bigr)\\
 &=0

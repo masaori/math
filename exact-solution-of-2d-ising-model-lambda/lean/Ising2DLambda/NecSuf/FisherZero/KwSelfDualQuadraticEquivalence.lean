@@ -15,10 +15,12 @@ theorem kw_self_dual_quadratic_equivalence_necSuf
     (start target quadratic
       product productAfterDefinition productAfterAssociation productAfterCommutation
       productAfterInverse productCommon
-      forwardProduct forwardAfterSelf forwardQuadratic forwardAfterProduct
-      forwardAfterCollect
+      forwardProduct forwardAfterSelf forwardQuadratic forwardAfterCancellation
+      forwardAfterProduct forwardAfterCollect
       differenceProduct differenceAfterDistribution differenceAfterCommutation
-      differenceAfterProduct differenceAfterExpansion differenceAfterNegation
+      differenceAfterProduct differenceAfterExpansion differenceAfterSubtraction
+      differenceAfterDoubling differenceAfterCommuting differenceAfterAssociating
+      differenceAfterNegation
       differenceAfterAssumption difference : A)
     (hProductDefinition : product = productAfterDefinition)
     (hProductAssociation : productAfterDefinition = productAfterAssociation)
@@ -27,7 +29,8 @@ theorem kw_self_dual_quadratic_equivalence_necSuf
     (hProductUnit : productAfterInverse = productCommon)
     (hSelfImpliesForward : start = target → forwardProduct = forwardAfterSelf)
     (hForwardUsesProduct : product = productCommon → forwardAfterSelf = productCommon)
-    (hForwardQuadraticStart : forwardQuadratic = forwardAfterProduct)
+    (hForwardCancellation : forwardQuadratic = forwardAfterCancellation)
+    (hForwardQuadraticStart : forwardAfterCancellation = forwardAfterProduct)
     (hForwardSubstitution : forwardProduct = productCommon →
       forwardAfterProduct = forwardAfterCollect)
     (hForwardZero : forwardAfterCollect = 0)
@@ -37,7 +40,11 @@ theorem kw_self_dual_quadratic_equivalence_necSuf
     (hDifferenceProduct : product = productCommon →
       differenceAfterCommutation = differenceAfterProduct)
     (hDifferenceExpansion : differenceAfterProduct = differenceAfterExpansion)
-    (hDifferenceNegation : differenceAfterExpansion = differenceAfterNegation)
+    (hDifferenceSubtraction : differenceAfterExpansion = differenceAfterSubtraction)
+    (hDifferenceDoubling : differenceAfterSubtraction = differenceAfterDoubling)
+    (hDifferenceCommuting : differenceAfterDoubling = differenceAfterCommuting)
+    (hDifferenceAssociating : differenceAfterCommuting = differenceAfterAssociating)
+    (hDifferenceNegation : differenceAfterAssociating = differenceAfterNegation)
     (hDifferenceAssumption : quadratic = 0 →
       differenceAfterNegation = differenceAfterAssumption)
     (hDifferenceZero : differenceAfterAssumption = 0)
@@ -59,7 +66,8 @@ theorem kw_self_dual_quadratic_equivalence_necSuf
         _ = productCommon := hForwardUsesProduct hProductCommon
     have hForwardQuadratic : forwardQuadratic = 0 := by
       calc
-        forwardQuadratic = forwardAfterProduct := hForwardQuadraticStart
+        forwardQuadratic = forwardAfterCancellation := hForwardCancellation
+        _ = forwardAfterProduct := hForwardQuadraticStart
         _ = forwardAfterCollect := hForwardSubstitution hForwardProduct
         _ = 0 := hForwardZero
     exact hQuadraticFromForward hForwardQuadratic
@@ -70,6 +78,10 @@ theorem kw_self_dual_quadratic_equivalence_necSuf
         _ = differenceAfterCommutation := hDifferenceCommutation
         _ = differenceAfterProduct := hDifferenceProduct hProductCommon
         _ = differenceAfterExpansion := hDifferenceExpansion
+        _ = differenceAfterSubtraction := hDifferenceSubtraction
+        _ = differenceAfterDoubling := hDifferenceDoubling
+        _ = differenceAfterCommuting := hDifferenceCommuting
+        _ = differenceAfterAssociating := hDifferenceAssociating
         _ = differenceAfterNegation := hDifferenceNegation
         _ = differenceAfterAssumption := hDifferenceAssumption hQuadratic
         _ = 0 := hDifferenceZero

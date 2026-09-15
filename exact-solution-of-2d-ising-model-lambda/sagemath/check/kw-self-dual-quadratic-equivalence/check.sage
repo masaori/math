@@ -69,10 +69,25 @@ for xi in test_points:
         holds_count += 1
         # forward の中間段: xi * (1 + xi) = 1 - xi
         assert xi * one_plus == QQbar(1) - xi, f"forward の中間段が不一致: xi = {xi}"
+        assert quadratic == ((xi + xi * xi) - xi) + QQbar(2) * xi - QQbar(1)
+        assert ((xi + xi * xi) - xi) + QQbar(2) * xi - QQbar(1) == (
+            (xi * one_plus - xi) + QQbar(2) * xi - QQbar(1)
+        )
         # forward の鎖の終端: ((1 - xi) - xi) + 2 xi - 1 = 0
         assert ((QQbar(1) - xi) - xi) + QQbar(2) * xi - QQbar(1) == 0, (
             f"forward の終端が不一致: xi = {xi}"
         )
+
+    expanded = (QQbar(1) - xi) - (xi + xi * xi)
+    subtracted = QQbar(1) - xi - xi - xi * xi
+    doubled = QQbar(1) - QQbar(2) * xi - xi * xi
+    commuted = -xi * xi + (QQbar(1) - QQbar(2) * xi)
+    associated = -xi * xi - QQbar(2) * xi + QQbar(1)
+    assert expanded == subtracted
+    assert subtracted == doubled
+    assert doubled == commuted
+    assert commuted == associated
+    assert associated == -quadratic
     checked += 1
 
 assert holds_count == 2, f"成立側の検査点は 2 点のはずだが {holds_count} 点だった"
