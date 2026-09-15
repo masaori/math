@@ -19,7 +19,7 @@ open scoped BigOperators
 
 noncomputable section
 
-variable {X W : Type}
+variable {X W : Type*}
 
 /-! ## 有限集合上の正の重みの規格化 -/
 
@@ -36,7 +36,7 @@ theorem rowWeightSum_pos [Fintype X] [Nonempty X]
     0 < rowWeightSum weight source := by
   classical
   unfold rowWeightSum
-  positivity
+  exact Finset.sum_pos (fun target _ => hpositive source target) Finset.univ_nonempty
 
 /-- 正の有限行和で割った規格化重み。 -/
 def normalizedWeight [Fintype X] [Field W]
