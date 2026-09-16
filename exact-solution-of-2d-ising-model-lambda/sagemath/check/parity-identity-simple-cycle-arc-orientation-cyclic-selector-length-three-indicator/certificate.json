@@ -1,0 +1,1 @@
+{"kind":"cyclic-selector-length-three-indicator","longer_support_entry_count":781,"conflicting_endpoint_pair_bit_count":2,"conflict_word_lengths":[3,5],"conflict_word_length_parities":[1],"predicate":"word_length == 3","distinct_augmented_input_count":612,"conflicting_augmented_input_count":0}
