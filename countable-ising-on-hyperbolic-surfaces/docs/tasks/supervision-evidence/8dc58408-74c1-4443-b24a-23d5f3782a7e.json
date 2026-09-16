@@ -1,0 +1,55 @@
+{
+  "実行識別子": "8dc58408-74c1-4443-b24a-23d5f3782a7e",
+  "観測時刻": "2026-09-16T08:55:05+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.hyperbolic-ising-auto-loop",
+    "state": "not running",
+    "runs": 43,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.hyperbolic-ising-auto-loop.plist",
+    "存在": true,
+    "sha256": "073b2ba45e068d1997a5a0bbf928620739cfd557176ec088881832b80cd22bf8",
+    "StartCalendarInterval": "毎時20分"
+  },
+  "実ログ": {
+    "path": "/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/auto-loop.log",
+    "終端": "2026-09-16 08:20:06 SKIP: 前の tick が動作中"
+  },
+  "追加観測": "launchctlは非実行中。auto-loop.lockは2026-09-14 14:20以後残存し、lsofで保持プロセスを観測しなかった。原因は今回確定しない。",
+  "実行の終了値の解釈": "最新実ログは既存ロックによる見送りである。過去のlast exit 0を今回成功として流用しない。",
+  "成果比較": {
+    "開始成果": "8aab421bda5107e489ef5d34c38e8d5492d315ad",
+    "今回読解終点": "8aab421bda5107e489ef5d34c38e8d5492d315ad",
+    "前回監督以後": "新しい統合済み数学成果なし。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    },
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh",
+      "終了コード": 0,
+      "結果": "段取り8段階・依存12件・完了条件26件・根拠50件・現在地1件、手元HTMLとの照合198件成功"
+    },
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
+      "終了コード": 0,
+      "結果": "監督契約・実装・記録・規則回帰の検査成功"
+    }
+  ]
+}
