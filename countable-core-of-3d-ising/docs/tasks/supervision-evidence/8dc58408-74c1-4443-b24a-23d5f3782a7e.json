@@ -1,0 +1,54 @@
+{
+  "実行識別子": "8dc58408-74c1-4443-b24a-23d5f3782a7e",
+  "観測時刻": "2026-09-16T08:55:05+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.ising-3d-cut-auto-loop",
+    "state": "not running",
+    "runs": 87,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-3d-cut-auto-loop.plist",
+    "存在": true,
+    "sha256": "b15709b26349fd26b3a1296d7b4c404346b41e0f60f7c2e804ca8ea1f968c221",
+    "StartCalendarInterval": "毎時0分・30分"
+  },
+  "実ログ": {
+    "path": "/Users/masaori/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log",
+    "終端": "2026-09-16 08:30:06 SKIP: 間隔を伸ばしている"
+  },
+  "実行の終了値の解釈": "launchctlは登録あり・非実行中・last exit 0だが、今回観測できる直近呼出しは間隔延長による見送りである。",
+  "成果比較": {
+    "開始成果": "8aab421bda5107e489ef5d34c38e8d5492d315ad",
+    "今回読解終点": "8aab421bda5107e489ef5d34c38e8d5492d315ad",
+    "前回監督以後": "新しい統合済み数学成果なし。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    },
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh",
+      "終了コード": 0,
+      "結果": "段取り8段階・依存12件・完了条件26件・根拠50件・現在地1件、手元HTMLとの照合198件成功"
+    },
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
+      "終了コード": 0,
+      "結果": "監督契約・実装・記録・規則回帰の検査成功"
+    }
+  ]
+}

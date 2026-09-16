@@ -1,0 +1,54 @@
+{
+  "実行識別子": "8dc58408-74c1-4443-b24a-23d5f3782a7e",
+  "観測時刻": "2026-09-16T08:55:05+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.cellular-automata-auto-loop",
+    "state": "not running",
+    "runs": 50,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist",
+    "存在": true,
+    "sha256": "d13342cf574a15bd2fcdbc892aafa71f32e036e6b0c5f6bd96a52e66ae5e34ff",
+    "StartCalendarInterval": "毎時12分"
+  },
+  "実ログ": {
+    "path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/auto-loop.log",
+    "終端": "2026-09-16 08:22:09 === tick 正常終了（未コミット 0 ファイル）"
+  },
+  "実行の終了値の解釈": "launchctl list/printは登録あり・非実行中・last exit 0を返し、実ログも直近tickの正常終了を記録する。",
+  "成果比較": {
+    "開始成果": "8aab421bda5107e489ef5d34c38e8d5492d315ad",
+    "今回読解終点": "8aab421bda5107e489ef5d34c38e8d5492d315ad",
+    "前回監督以後": "有限有理エントロピー境界の四層、完了条件監査、有限差分逆温度と実数微分の境界の構造化本文・四検算が統合された。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    },
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh",
+      "終了コード": 0,
+      "結果": "段取り8段階・依存12件・完了条件26件・根拠50件・現在地1件、手元HTMLとの照合198件成功"
+    },
+    {
+      "時刻": "2026-09-16T09:07:17+09:00",
+      "コマンド": "bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh",
+      "終了コード": 0,
+      "結果": "監督契約・実装・記録・規則回帰の検査成功"
+    }
+  ]
+}
