@@ -37,6 +37,7 @@ import blocks_dependency_order_substructures from './content/dependency-order-su
 import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_bath_count_canonical_boundary from './content/finite-bath-count-canonical-boundary.ts'
 import blocks_finite_difference_temperature_derivative_boundary from './content/finite-difference-temperature-derivative-boundary.ts'
+import blocks_finite_discrete_continuous_symmetry_boundary from './content/finite-discrete-continuous-symmetry-boundary.ts'
 import blocks_finite_gibbs_weight_boundary from './content/finite-gibbs-weight-boundary.ts'
 import blocks_finite_neighborhood_assignment_monoid from './content/finite-neighborhood-assignment-monoid.ts'
 import blocks_finite_power_bound_certificate from './content/finite-power-bound-certificate.ts'
@@ -127,6 +128,7 @@ export type AllBlocks = [
   ...typeof blocks_essential_dependency,
   ...typeof blocks_finite_bath_count_canonical_boundary,
   ...typeof blocks_finite_difference_temperature_derivative_boundary,
+  ...typeof blocks_finite_discrete_continuous_symmetry_boundary,
   ...typeof blocks_finite_gibbs_weight_boundary,
   ...typeof blocks_finite_neighborhood_assignment_monoid,
   ...typeof blocks_finite_power_bound_certificate,

@@ -385,6 +385,19 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_discrete_continuous_symmetry_boundary",
+        title: "有限離散対称性と実数一径数対称性の境界",
+        input: "有限舞台の大域写像、その有限配位集合上の全単射、整数値保存写像を入力とする。",
+        output: "大域写像と可換する有限置換群、整数値保存写像の加法群、引き戻し作用、および有限置換群への実数加法群作用の自明性を得る。",
+        main: "主張は、有限大域写像の対称性と整数値保存写像が有限・高々可算な演算として内在的に定義できる一方、その有限対称群の中では実数加法群による非自明な一径数対称性が存在しないことである。",
+        mainLabels: [
+          "claim_binary_ca_commuting_configuration_symmetries_finite_group",
+          "claim_binary_ca_integer_conserved_observables_additive_group",
+          "claim_binary_ca_symmetry_pullback_preserves_conserved_observables",
+          "claim_binary_ca_real_parameter_symmetry_action_trivial",
+        ],
+      },
+      {
         id: "finite_transfer_matrix_and_trace",
         title: "有限遷移重みの転送行列と決定論的状態数",
         input: "有限舞台上の有理重みの確率的局所規則族、その有限回遷移重み、決定論的局所規則族と反復不動点数を入力とする。",
