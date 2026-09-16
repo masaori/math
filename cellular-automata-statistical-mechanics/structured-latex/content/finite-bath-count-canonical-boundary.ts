@@ -132,7 +132,7 @@ export default defineBlocks([
         math(String.raw`E:X_A\to\mathbb R`), " と ", math(String.raw`\beta\in\mathbb R_{>0}`), " を取る。"]),
       displayMath(String.raw`Z_{\beta,E}:=\sum_{z\in X_A}\exp_{\mathbb R}(-\beta E(z))\in\mathbb R_{>0}`),
       displayMath(String.raw`P_{\beta,E}^{\exp}(x):=
-\frac{\exp_{\mathbb R}(-\beta E(x))}{Z_{\beta,E}}in\mathbb R_{>0}
+\frac{\exp_{\mathbb R}(-\beta E(x))}{Z_{\beta,E}}\in\mathbb R_{>0}
 \qquad(x\in X_A)`),
       paragraph(["と定める。有限和だが、実数値入力と実指数関数を選ぶため実数へ脱出する。各重みは厳密に正である。"]),
     ],
@@ -195,7 +195,7 @@ P_{1,E_U}^{\exp}(x)
       displayMath(String.raw`H_A(x_0):=0,\quad H_A(x_1):=1,\qquad
 H_B(y_0):=H_B(y_1):=0`),
       paragraph(["で定め、", math(String.raw`U:=0`), " とすると"]),
-      displayMath(String.raw`P_0^{\mathrm{count}}(x_0)=1,qquad P_0^{\mathrm{count}}(x_1)=0.`),
+      displayMath(String.raw`P_0^{\mathrm{count}}(x_0)=1,\qquad P_0^{\mathrm{count}}(x_1)=0.`),
       paragraph(["従って有限実数値写像 ", math(String.raw`E:X_A\to\mathbb R`), " と ", math(String.raw`\beta\in\mathbb R_{>0}`), " で"]),
       displayMath(String.raw`\iota_{\mathbb Q,\mathbb R}\circ P_0^{\mathrm{count}}
 =P_{\beta,E}^{\exp}`),
