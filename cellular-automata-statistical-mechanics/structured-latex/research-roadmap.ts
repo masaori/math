@@ -40,7 +40,7 @@ export type RoadmapStage = {
   /** 先に済んでいる必要がある段階の id。有向非巡回でなければ検査が落ちる。 */
   readonly dependsOn: readonly string[];
   readonly status: StageStatus;
-  /** いまの現在地。ちょうど一つの段階だけが true を取る。 */
+  /** いまの現在地。進行中はちょうど一つが true、全段階到達後は全て false とする。 */
   readonly current: boolean;
   /** 何が確認できたら完了と見なすか。機械検査または全数計算で判定できる形で書く。 */
   readonly completion: readonly string[];
@@ -445,8 +445,8 @@ export const roadmapStages = [
     habitat:
       "有限・高々可算・非可算を分け、非可算化の構成または実数体・複素数体への脱出理由を各主張で宣言する。",
     dependsOn: ["statistical_mechanics_correspondence"],
-    status: "進行中",
-    current: true,
+    status: "到達済み",
+    current: false,
     completion: [
       "有限舞台で定義できる量と、無限舞台を要する量の全件が仕分けられていること。",
       "実数へ脱出する各主張について、脱出の理由が住処の宣言として本文に書かれていること。",
@@ -487,6 +487,31 @@ export const roadmapStages = [
         kind: "label",
         label: "claim_full_two_symbol_word_realized_density_constant",
         why: "対数順序群から実数への比較写像と正の語長による除算を明示し、有限段階の実数脱出と位相的エントロピーの極限を分離する。",
+      },
+      {
+        kind: "label",
+        label: "claim_rational_transition_weight_not_always_finite_gibbs",
+        why: "零を許す有限有理遷移重みが、有限実数値エネルギーから得る厳密正値の Gibbs 重みにはならない境界を有限反例で示す。",
+      },
+      {
+        kind: "label",
+        label: "claim_finite_real_distribution_not_always_rational",
+        why: "有限有理分布の可算なエントロピーと、無理数重みを持つ有限実数分布がその標準実数像に入らない境界を有限反例で示す。",
+      },
+      {
+        kind: "label",
+        label: "claim_binary_ca_finite_difference_does_not_determine_derivative",
+        why: "有限差分だけでは同じ二端点を通る実数補間の一点微分を決められないことを有限反例で示す。",
+      },
+      {
+        kind: "label",
+        label: "claim_binary_finite_bath_count_not_always_exponential_canonical",
+        why: "有限状態数比が零重みを許す一方、有限実数値指数形は全成分が正である境界を有限反例で示す。",
+      },
+      {
+        kind: "path",
+        path: "docs/survey/連続物理の可算な担い手.md",
+        why: "台帳の全項目を有限・高々可算・非可算または実数脱出へ仕分け、実数側が加える内容と未対応範囲を項目ごとに記録する。",
       },
     ],
   },

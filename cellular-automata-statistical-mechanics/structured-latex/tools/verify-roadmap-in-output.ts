@@ -111,7 +111,9 @@ for (const stage of stages) {
   }
 }
 
-if (stages.every((stage) => !stage.current)) missing.push("現在地が正本に無い");
+if (stages.every((stage) => !stage.current) && stages.some((stage) => stage.status !== "到達済み")) {
+  missing.push("未到達段階があるのに現在地が正本に無い");
+}
 
 if (missing.length > 0) {
   console.error(`${where} に段取りが正本どおり載っていない（${missing.length} 件）:`);

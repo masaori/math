@@ -167,7 +167,23 @@ expectViolation(
     status: "進行中",
     evidence: [{ kind: "path", path: "README.md", why: "合成した根拠" }],
   }),
-  "現在地はちょうど一つ",
+  "進行中は現在地がちょうど一つ",
+);
+
+expectViolation(
+  "未到達段階があるのに現在地が無い",
+  baseStages().map((item) => ({ ...item, current: false })),
+  "進行中は現在地がちょうど一つ",
+);
+
+expectClean(
+  "全段階が到達済みなら現在地が無くても通る",
+  baseStages().map((item) => ({
+    ...item,
+    status: "到達済み",
+    current: false,
+    evidence: [{ kind: "path", path: "README.md", why: "合成した根拠" }],
+  })),
 );
 
 expectViolation("依存関係に巡回がある", [

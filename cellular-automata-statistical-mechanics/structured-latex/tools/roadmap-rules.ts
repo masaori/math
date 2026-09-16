@@ -117,8 +117,12 @@ export const inspectRoadmap = (input: RoadmapInput, resolvers: RoadmapResolvers)
   // --- 現在地と進捗の整合 ----------------------------------------------------
 
   const currents = stages.filter((stage) => stage.current);
-  if (currents.length !== 1) {
-    fail(`現在地はちょうど一つでなければならない: ${currents.map((stage) => stage.id).join(", ") || "無し"}`);
+  const allReached = stages.every((stage) => stage.status === "到達済み");
+  if (currents.length > 1 || (currents.length === 0 && !allReached)) {
+    fail(
+      `進行中は現在地がちょうど一つ、全段階到達後は現在地が無いこと: ` +
+        `${currents.map((stage) => stage.id).join(", ") || "無し"}`,
+    );
   }
   /**
    * 現在地は「いま手を動かしている段階」である。未着手の段階を現在地と書けば、着手していない
