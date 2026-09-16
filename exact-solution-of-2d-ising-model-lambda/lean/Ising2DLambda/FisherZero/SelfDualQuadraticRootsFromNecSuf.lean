@@ -18,7 +18,9 @@ theorem selfDualQuadratic_roots_from_necSuf {s xi : Qbar} (hs : s * s = 2) :
       _ = (xi + 1) * (xi + 1) - s * s := by ring
       _ = (xi + 1) * (xi + 1) - 2 := by rw [hs]
       _ = (((xi + 1) * xi + (xi + 1) * 1) - 2) := by ring
+      _ = (((xi * xi + 1 * xi) + (xi + 1) * 1) - 2) := by ring
       _ = (((xi * xi + 1 * xi) + (xi + 1)) - 2) := by ring
+      _ = (((xi ^ 2 + 1 * xi) + (xi + 1)) - 2) := by ring
       _ = (((xi ^ 2 + xi) + (xi + 1)) - 2) := by ring
       _ = (((xi ^ 2 + (xi + xi)) + 1) - 2) := by ring
       _ = (((xi ^ 2 + 2 * xi) + 1) - 2) := by ring

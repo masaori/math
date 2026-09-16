@@ -30630,10 +30630,14 @@ s\cdot s
 &&\bigl(\because\ \text{仮定}\ s\cdot s=2\bigr)\\
 &=\bigl((\xi+1)\cdot\xi+(\xi+1)\cdot1\bigr)-2
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=\bigl((\xi\cdot\xi+1\cdot\xi)+(\xi+1)\cdot1\bigr)-2
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
 &=\bigl((\xi\cdot\xi+1\cdot\xi)+(\xi+1)\bigr)-2
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則と単位元との積}\bigr)\\
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
+&=\bigl((\xi^2+1\cdot\xi)+(\xi+1)\bigr)-2
+&&\bigl(\because\ \xi^2\ \text{の定義}\bigr)\\
 &=\bigl((\xi^2+\xi)+(\xi+1)\bigr)-2
-&&\bigl(\because\ \xi^2\ \text{の定義と単位元との積}\bigr)\\
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
 &=\bigl((\xi^2+(\xi+\xi))+1\bigr)-2
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
 &=\bigl((\xi^2+2\xi)+1\bigr)-2
@@ -30663,8 +30667,10 @@ s\cdot s
 &&\bigl(\because\ \bigl((\xi+1)-s\bigr)\bigl((\xi+1)+s\bigr)=\xi^2+2\xi-1\bigr)\\
 &=\Bigl(\bigl(((-1)+s)+1\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
 &&\bigl(\because\ \text{仮定}\ \xi=-1+s\bigr)\\
+&=\Bigl(\bigl((s+(-1))+1\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)\\
 &=\Bigl(\bigl(s+((-1)+1)\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則・結合則}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
 &=\bigl((s+0)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
 &&\bigl(\because\ \text{加法の逆元}\ (-1)+1=0\bigr)\\
 &=(s-s)\cdot\bigl((\xi+1)+s\bigr)
@@ -30684,8 +30690,10 @@ s\cdot s
 &&\bigl(\because\ \bigl((\xi+1)-s\bigr)\bigl((\xi+1)+s\bigr)=\xi^2+2\xi-1\bigr)\\
 &=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl(((-1)+(-s))+1\bigr)+s\Bigr)
 &&\bigl(\because\ \text{仮定}\ \xi=-1-s\bigr)\\
+&=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl(((-s)+(-1))+1\bigr)+s\Bigr)
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)\\
 &=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl((-s)+((-1)+1)\bigr)+s\Bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則・結合則}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
 &=\bigl((\xi+1)-s\bigr)\cdot\bigl(((-s)+0)+s\bigr)
 &&\bigl(\because\ \text{加法の逆元}\ (-1)+1=0\bigr)\\
 &=\bigl((\xi+1)-s\bigr)\cdot\bigl((-s)+s\bigr)

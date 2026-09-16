@@ -62,6 +62,18 @@ for s in s_candidates:
             f"準備の鎖の中間段（(xi+1)^2 - s*s）が不一致: s = {s}, xi = {xi}"
         assert (xi + 1) * (xi + 1) - s * s == (xi + 1) * (xi + 1) - two, \
             f"準備の鎖の s*s = 2 の段が不一致: s = {s}, xi = {xi}"
+        expanded_first = (xi + 1) * xi + (xi + 1) * QQbar(1)
+        expanded_second = (xi * xi + QQbar(1) * xi) + (xi + 1) * QQbar(1)
+        assert (xi + 1) * (xi + 1) == expanded_first, \
+            f"準備の外側の分配則が不一致: s = {s}, xi = {xi}"
+        assert expanded_first == expanded_second, \
+            f"準備の内側の分配則が不一致: s = {s}, xi = {xi}"
+        assert expanded_second == (xi * xi + QQbar(1) * xi) + (xi + 1), \
+            f"準備の右側の単位元との積が不一致: s = {s}, xi = {xi}"
+        assert (xi * xi + QQbar(1) * xi) + (xi + 1) == (xi**2 + QQbar(1) * xi) + (xi + 1), \
+            f"準備の二乗の定義が不一致: s = {s}, xi = {xi}"
+        assert (xi**2 + QQbar(1) * xi) + (xi + 1) == (xi**2 + xi) + (xi + 1), \
+            f"準備の左側の単位元との積が不一致: s = {s}, xi = {xi}"
         assert (xi + 1) * (xi + 1) - two == quadratic, \
             f"準備の鎖の展開の段が不一致: s = {s}, xi = {xi}"
         assert factor_first * factor_second == quadratic, \
