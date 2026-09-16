@@ -445,8 +445,8 @@ export const roadmapStages = [
     habitat:
       "有限・高々可算・非可算を分け、非可算化の構成または実数体・複素数体への脱出理由を各主張で宣言する。",
     dependsOn: ["statistical_mechanics_correspondence"],
-    status: "到達済み",
-    current: false,
+    status: "進行中",
+    current: true,
     completion: [
       "有限舞台で定義できる量と、無限舞台を要する量の全件が仕分けられていること。",
       "実数へ脱出する各主張について、脱出の理由が住処の宣言として本文に書かれていること。",
