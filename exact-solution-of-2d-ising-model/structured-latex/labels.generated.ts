@@ -141,6 +141,7 @@ export const ALL_LABELS = [
   "def_half_integer_modes",
   "def_hatZ_hatY",
   "def_hermitian_positive_definite",
+  "def_indexed_hyperbolic_abbreviations",
   "def_inverse_trig_functions",
   "def_invertible_elements_of_R",
   "def_jordan_wigner_Y_matrices",

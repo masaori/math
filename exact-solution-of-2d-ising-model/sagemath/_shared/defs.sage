@@ -32,6 +32,7 @@ K2_star = -log(tanh(K2)) / 2
 
 # ---------------------------------------------------------
 # 略記号 c_i, s_i, c_i^*, s_i^*
+#   構造化本文: <def_indexed_hyperbolic_abbreviations>
 #   c_i := cosh(2 K_i)
 #   s_i := sinh(2 K_i)
 #   c_i^* := cosh(2 K_i^*)

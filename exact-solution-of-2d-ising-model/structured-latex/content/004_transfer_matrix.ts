@@ -1205,6 +1205,51 @@ K_2^*&=-\frac12\log(\tanh K_2)
     },
   },
   {
+    id: "transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations",
+    kind: "definition",
+    origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
+    title: { text: "双曲線関数の添字つき略記" },
+    labels: ["def_indexed_hyperbolic_abbreviations"],
+    statement: [
+      paragraph([
+        ref("def_first_transfer_matrix_pauli"),
+        " と ",
+        ref("def_second_transfer_matrix_pauli"),
+        " で用いる正の結合定数 ",
+        math(String.raw`K_1,K_2\in\mathbb{R}_{>0}`),
+        "、および ",
+        ref("def_first_dual_coupling_constant"),
+        " と ",
+        ref("def_second_dual_coupling_constant"),
+        " で定めた双対結合定数 ",
+        math(String.raw`K_1^*,K_2^*`),
+        " に対し、各 ",
+        math(String.raw`i\in\{1,2\}`),
+        " について次の略記を定める。",
+      ]),
+      list([
+        [
+          math(String.raw`c_i := \cosh 2K_i,\quad s_i := \sinh 2K_i,\quad c_i^* := \cosh 2K_i^*,\quad s_i^* := \sinh 2K_i^*`),
+        ],
+      ]),
+      paragraph([
+        "右辺の双曲線余弦と双曲線正弦は ",
+        ref("def_cosh_sinh"),
+        " で定めた実数値関数である。したがって各 ",
+        math(String.raw`i\in\{1,2\}`),
+        " について ",
+        math(String.raw`c_i,s_i,c_i^*,s_i^*\in\mathbb{R}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "残余複合定義から双曲線関数の添字つき略記だけを独立した定義へ分離した。略記の正値性は残余ブロックに保っている。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -1239,14 +1284,14 @@ K_2^*&=-\frac12\log(\tanh K_2)
         ref("def_second_dual_coupling_constant"),
         " で定めたものを用いる。第二の双対関係は ",
         ref("second_dual_coupling_relation"),
-        " で示したものを用いる。",
-      ]),
-      list([
-        [
-          math(String.raw`c_i := \cosh 2K_i,\quad s_i := \sinh 2K_i,\quad c_i^* := \cosh 2K_i^*,\quad s_i^* := \sinh 2K_i^*`),
-        ],
+        " で示したものに加え、双曲線関数の添字つき略記は ",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        " で定めたものを用いる。",
       ]),
       paragraph([
+        "各 ",
+        math(String.raw`i\in\{1,2\}`),
+        " について、",
         math(String.raw`K_i, K_i^* > 0`),
         " より、",
         math(String.raw`c_i, s_i, c_i^*, s_i^* > 0`),
@@ -1279,7 +1324,8 @@ K_2^*&=-\frac12\log(\tanh K_2)
         "二次の単位行列 I_{Mat(2,C)} は <pauli_matrix_products> で既に定義されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
         "2^M 次の単位行列 I_{Mat(2^M,C)} と二次の単位行列のクロネッカー積の等式は <kronecker_product_rule> (2) で既に示されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
         "第一の双対結合定数 K_1^* の定義と正値性は <def_first_dual_coupling_constant> へ、第一の双対関係は <first_dual_coupling_relation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから両者を明示参照している。",
-        "第二の双対結合定数 K_2^* の定義と正値性は <def_second_dual_coupling_constant> へ、第二の双対関係は <second_dual_coupling_relation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから両者を明示参照している。双曲線関数の略記と残る正値性は本ブロックに残している。",
+        "第二の双対結合定数 K_2^* の定義と正値性は <def_second_dual_coupling_constant> へ、第二の双対関係は <second_dual_coupling_relation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから両者を明示参照している。",
+        "双曲線関数の添字つき略記は <def_indexed_hyperbolic_abbreviations> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。残る正値性は本ブロックに保っている。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +

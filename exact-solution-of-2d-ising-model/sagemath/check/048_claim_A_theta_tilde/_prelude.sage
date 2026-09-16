@@ -23,7 +23,7 @@ def K2_star_of(K2):
 
 
 def coeffs(K1, K2):
-    """def_transfer_matrix_symbols の c_1, s_1, c_2, s_2, c_2^*, s_2^* を数値で返す。"""
+    """def_indexed_hyperbolic_abbreviations の c_1, s_1, c_2, s_2, c_2^*, s_2^* を数値で返す。"""
     K1 = RDF(K1)
     K2 = RDF(K2)
     K2s = K2_star_of(K2)

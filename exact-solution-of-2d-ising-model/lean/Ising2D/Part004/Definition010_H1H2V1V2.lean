@@ -4,8 +4,10 @@
 対応する人手証明（正本は `structured-latex/content/*.ts`）:
 
 * `structured-latex/content/004_transfer_matrix.ts`
+  * `transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations`
+    — `c_i`, `s_i`, `c_i^*`, `s_i^*` の定義
   * `transfer_matrix_001_definition_symbols`（ラベル `def_transfer_matrix_symbols`）
-    — `V_1`, `V_2` の定義、`K_i^*`, `c_i`, `s_i`, `c_i^*`, `s_i^*` の定義
+    — `c_i`, `s_i`, `c_i^*`, `s_i^*` の正値性（この正値性は次回の本文分離まで未形式化）
   * `transfer_matrix_007_definition_V1_pm`
     — `V_1^{(±)} := exp(√-1 K_1 (Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1))`
   * `transfer_matrix_003a_claim_V2_in_Z_Y`（ラベル `V2_in_Z_Y`）
@@ -44,7 +46,7 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
 
 `M` が奇数のとき指数 `M/2` は整数でないので、`Real.rpow`（`(2 * s2) ^ ((M : ℝ) / 2)`）を使う。
 `Real.rpow` は底が正のときにのみ通常の意味を持つので、`s2 > 0`（原文
-`def_transfer_matrix_symbols` 末尾の「`K_i, K_i^* > 0` より `c_i, s_i, c_i^*, s_i^* > 0`」）
+`def_transfer_matrix_symbols` の「`K_i, K_i^* > 0` より `c_i, s_i, c_i^*, s_i^* > 0`」）
 を可逆性の証明で明示的な仮定として置く。
 
 ## 原文の問題点
@@ -121,6 +123,33 @@ theorem I_smul_H2_eq_sum_sigmaX :
   refine Finset.sum_congr rfl fun m _ => ?_
   rw [Z_mul_Y_same, smul_smul]
   norm_num [Complex.I_mul_I]
+
+/-! ## 双曲線関数の添字つき略記 -/
+
+/-- 人手本文 `def_indexed_hyperbolic_abbreviations` の八つの実数値をまとめたもの。 -/
+structure IndexedHyperbolicAbbreviations where
+  c1 : ℝ
+  s1 : ℝ
+  c2 : ℝ
+  s2 : ℝ
+  c1star : ℝ
+  s1star : ℝ
+  c2star : ℝ
+  s2star : ℝ
+
+/-- 人手本文の
+`c_i := cosh(2K_i)`, `s_i := sinh(2K_i)`,
+`c_i^* := cosh(2K_i^*)`, `s_i^* := sinh(2K_i^*)`（`i ∈ {1,2}`）。 -/
+noncomputable def indexedHyperbolicAbbreviations
+    (K1 K2 K1star K2star : ℝ) : IndexedHyperbolicAbbreviations where
+  c1 := Real.cosh (2 * K1)
+  s1 := Real.sinh (2 * K1)
+  c2 := Real.cosh (2 * K2)
+  s2 := Real.sinh (2 * K2)
+  c1star := Real.cosh (2 * K1star)
+  s1star := Real.sinh (2 * K1star)
+  c2star := Real.cosh (2 * K2star)
+  s2star := Real.sinh (2 * K2star)
 
 /-! ## 転送行列 `V_1^{(±)}`, `(V_1^{(±)})^{1/2}`, `V_2` -/
 
