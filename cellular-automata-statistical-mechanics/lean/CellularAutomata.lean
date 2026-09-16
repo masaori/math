@@ -164,3 +164,4 @@ import CellularAutomata.FiniteGibbsWeightBoundary
 import CellularAutomata.NecSuf.FiniteGibbsWeightBoundary
 import CellularAutomata.FiniteRationalEntropyBoundary
 import CellularAutomata.NecSuf.FiniteRationalEntropyBoundary
+import CellularAutomata.FiniteDifferenceTemperatureDerivativeBoundary
