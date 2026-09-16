@@ -373,6 +373,18 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_bath_count_canonical_boundary",
+        title: "有限状態数比と実数指数カノニカル分布の境界",
+        input: "二つの有限二値配位集合、各配位の整数値観測、観測値の和を固定した有限殻を入力とする。",
+        output: "第二配位側の繊維の元数だけから有理周辺分布を得て、正の台では実対数を経由して指数規格化分布へ移せる一方、零を持つ状態数比分布は有限実数値指数形では表せない境界を得る。",
+        main: "主張は、有限殻上一様分布の第一周辺分布が第二配位側の状態数比として有理数内で構成できる一方、指数形との比較は実対数と実指数関数を要し、零重みがある場合は有限実数値観測から作る厳密正値の指数形と一致しないことである。",
+        mainLabels: [
+          "claim_binary_finite_bath_count_distribution_is_marginal",
+          "claim_binary_finite_positive_bath_count_exponential_comparison",
+          "claim_binary_finite_bath_count_not_always_exponential_canonical",
+        ],
+      },
+      {
         id: "finite_transfer_matrix_and_trace",
         title: "有限遷移重みの転送行列と決定論的状態数",
         input: "有限舞台上の有理重みの確率的局所規則族、その有限回遷移重み、決定論的局所規則族と反復不動点数を入力とする。",
