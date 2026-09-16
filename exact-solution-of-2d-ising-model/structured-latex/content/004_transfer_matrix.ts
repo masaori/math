@@ -960,6 +960,98 @@ K_1^*&=-\frac12\log(\tanh K_1)
     },
   },
   {
+    id: "transfer_matrix_000k_definition_second_dual_coupling_constant",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "第二の双対結合定数" },
+    labels: ["def_second_dual_coupling_constant"],
+    statement: [
+      paragraph([
+        ref("def_second_transfer_matrix_pauli"),
+        " の正の結合定数 ",
+        math(String.raw`K_2\in\mathbb{R}_{>0}`),
+        " をとる。",
+        ref("def_positive_coupling_tanh"),
+        " の双曲線正接と ",
+        ref("def_real_logarithm_positive"),
+        " の実対数を用いて、第二の双対結合定数を",
+      ]),
+      displayMath(String.raw`K_2^*:=-\frac{1}{2}\log(\tanh K_2)\in\mathbb{R}_{>0}`),
+      paragraph(["と定める。右辺の定義可能性と正値性を以下で確認する。"]),
+    ],
+    proof: [
+      paragraph([
+        "（実対数による ",
+        math(String.raw`\mathbb{R}`),
+        " 脱出）この証明では、実数値の双曲線正接と実対数、および実数の順序を用いる。以下の各量の所属と符号を一段ずつ確認する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+K_2\in\mathbb{R}_{>0}
+&\Longrightarrow 0<\tanh K_2<1
+&&\left(\because\ \blkref{def_positive_coupling_tanh}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0<\tanh K_2
+&\Longrightarrow \tanh K_2\in\mathbb{R}_{>0}
+&&\left(\because\ \mathbb{R}_{>0}\text{ の定義}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\tanh K_2\in\mathbb{R}_{>0}
+&\Longrightarrow \log(\tanh K_2)\in\mathbb{R}
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\log:\mathbb{R}_{>0}\to\mathbb{R}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0<\tanh K_2<1
+&\Longrightarrow \log(\tanh K_2)<0
+&&\left(\because\ \blkref{def_real_logarithm_positive}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\frac{1}{2}&\in\mathbb{R}
+&&\left(\because\ \mathbb{R}\text{ は体であり、逆元と符号反転について閉じている}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\frac{1}{2}&<0
+&&\left(\because\ \mathbb{R}\text{ の分数の大小}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\frac{1}{2}\in\mathbb{R}\ \land\ \log(\tanh K_2)\in\mathbb{R}
+&\Longrightarrow -\frac{1}{2}\log(\tanh K_2)\in\mathbb{R}
+&&\left(\because\ \mathbb{R}\text{ の乗法についての閉性}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\frac{1}{2}<0\ \land\ \log(\tanh K_2)<0
+&\Longrightarrow -\frac{1}{2}\log(\tanh K_2)>0
+&&\left(\because\ \text{負の実数二つの積は正である}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+K_2^*&=-\frac{1}{2}\log(\tanh K_2)
+&&\left(\because\ K_2^*\text{ の定義}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+K_2^*=-\frac{1}{2}\log(\tanh K_2)\ \land\ -\frac{1}{2}\log(\tanh K_2)\in\mathbb{R}
+&\Longrightarrow K_2^*\in\mathbb{R}
+&&\left(\because\ \text{等しい対象による所属の置換}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+K_2^*=-\frac{1}{2}\log(\tanh K_2)\ \land\ -\frac{1}{2}\log(\tanh K_2)>0
+&\Longrightarrow K_2^*>0
+&&\left(\because\ \text{等しい実数による左辺の置換}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+K_2^*\in\mathbb{R}\ \land\ K_2^*>0
+&\Longrightarrow K_2^*\in\mathbb{R}_{>0}
+&&\left(\because\ \mathbb{R}_{>0}\text{ の定義}\right)
+\end{aligned}`),
+      paragraph(["以上により、第二の双対結合定数は正の実数として定まる。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧来の複合定義から、第二の双対結合定数の定義と正値性だけを独立させた。第二の双対関係、双曲線関数の略記、およびそれらの正値性には進んでいない。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -990,11 +1082,13 @@ K_1^*&=-\frac12\log(\tanh K_1)
         ref("def_first_dual_coupling_constant"),
         " で定めたものを用いる。第一の双対関係は ",
         ref("first_dual_coupling_relation"),
-        " で示したものを用いる。",
+        " で示したものを用いる。第二の双対結合定数は ",
+        ref("def_second_dual_coupling_constant"),
+        " で定めたものを用いる。",
       ]),
       list([
         [
-          math(String.raw`K_2^* := -\tfrac{1}{2}\log(\tanh K_2) \iff \sinh(2K_2)\sinh(2K_2^*) = 1`),
+          math(String.raw`\sinh(2K_2)\sinh(2K_2^*) = 1`),
         ],
         [
           math(String.raw`c_i := \cosh 2K_i,\quad s_i := \sinh 2K_i,\quad c_i^* := \cosh 2K_i^*,\quad s_i^* := \sinh 2K_i^*`),
@@ -1033,6 +1127,7 @@ K_1^*&=-\frac12\log(\tanh K_1)
         "二次の単位行列 I_{Mat(2,C)} は <pauli_matrix_products> で既に定義されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
         "2^M 次の単位行列 I_{Mat(2^M,C)} と二次の単位行列のクロネッカー積の等式は <kronecker_product_rule> (2) で既に示されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
         "第一の双対結合定数 K_1^* の定義と正値性は <def_first_dual_coupling_constant> へ、第一の双対関係は <first_dual_coupling_relation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから両者を明示参照している。",
+        "第二の双対結合定数 K_2^* の定義と正値性は <def_second_dual_coupling_constant> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。第二の双対関係と双曲線関数の略記は本ブロックに残している。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +
