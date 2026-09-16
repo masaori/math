@@ -1,0 +1,2 @@
+exp(-log t) exp(log t) = exp(-log t + log t): max relative error = 6.2230152778611417071440640537801242405902521687211671331011e-61
+RESULT: PASS

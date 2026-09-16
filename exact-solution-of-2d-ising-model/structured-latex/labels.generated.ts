@@ -299,6 +299,7 @@ export const ALL_LABELS = [
   "riemann_sum_to_integral",
   "scalar_identity_commutes",
   "second_derivative_log_divergence",
+  "second_dual_coupling_relation",
   "section_of_angle_representation",
   "sector_decomposition_of_rayleigh_sup",
   "sector_replacement_of_V1",

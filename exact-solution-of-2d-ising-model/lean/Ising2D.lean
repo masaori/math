@@ -73,6 +73,9 @@ import Ising2D.Part010.Definition000_ComponentTransfer
 import Ising2D.Part010.V1JordanWigner
 import Ising2D.Part010.Claim004_V1Bridge
 import Ising2D.Part010.Claim005_TwoByTwoTransfer
+import Ising2D.NecSuf.DualCouplingRelation
+import Ising2D.Part010.ClaimSecondDualCouplingRelation
+import Ising2D.Part010.ClaimSecondDualCouplingRelationFromNecSuf
 import Ising2D.Part010.Claim006_V2Bridge
 import Ising2D.Part010.Claim007_PartitionFunction
 import Ising2D.Part010.Claim009_EpsilonProjectors

@@ -1052,6 +1052,159 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
     },
   },
   {
+    id: "transfer_matrix_000l_claim_second_dual_coupling_relation",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "第二の結合定数と双対結合定数の双対関係" },
+    labels: ["second_dual_coupling_relation"],
+    statement: [
+      paragraph([
+        ref("def_second_dual_coupling_constant"),
+        " の ",
+        math(String.raw`K_2,K_2^*\in\mathbb{R}_{>0}`),
+        " に対して、",
+      ]),
+      displayMath(String.raw`\sinh(2K_2)\sinh(2K_2^*)=1`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "（実対数による ",
+        math(String.raw`\mathbb{R}`),
+        " 脱出）この証明では、",
+        ref("def_positive_coupling_tanh"),
+        " の実数値の双曲線正接、",
+        ref("def_real_logarithm_positive"),
+        " の実対数、",
+        ref("def_cosh_sinh"),
+        " の双曲線関数の定義、および ",
+        ref("cosh_sinh_basic_properties"),
+        " の実双曲線関数の基本性質を用いる。まず、各分母が零でないことを確認する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+K_2\in\mathbb{R}_{>0}
+&\Longrightarrow \cosh K_2>\sinh K_2>0
+&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ の (3)}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\cosh K_2>\sinh K_2>0
+&\Longrightarrow \sinh K_2\ne0\ \land\ \cosh K_2\ne0
+&&\left(\because\ \mathbb{R}\text{ の正の元は零でない}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sinh K_2\ne0\ \land\ \cosh K_2\ne0
+&\Longrightarrow \sinh K_2\cosh K_2\ne0
+&&\left(\because\ \mathbb{R}\text{ は体である}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+K_2\in\mathbb{R}_{>0}
+&\Longrightarrow 0<\tanh K_2<1
+&&\left(\because\ \blkref{def_positive_coupling_tanh}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+0<\tanh K_2
+&\Longrightarrow \tanh K_2\in\mathbb{R}_{>0}
+&&\left(\because\ \mathbb{R}_{>0}\text{ の定義}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\tanh K_2\in\mathbb{R}_{>0}
+&\Longrightarrow \tanh K_2\ne0
+&&\left(\because\ \mathbb{R}\text{ の正の元は零でない}\right)
+\end{aligned}`),
+      paragraph(["双対結合定数の定義を指数関数へ戻すと、"]),
+      displayMath(String.raw`\begin{aligned}
+K_2^*&=-\frac12\log(\tanh K_2)
+&&\left(\because\ \blkref{def_second_dual_coupling_constant}\right)\\
+2K_2^*&=-\log(\tanh K_2)
+&&\left(\because\ \mathbb{R}\text{ の等式の両辺を }2\text{ 倍}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+&\exp\!\left(-\log(\tanh K_2)\right)\exp\!\left(\log(\tanh K_2)\right)\\
+&\qquad=\exp\!\left(-\log(\tanh K_2)+\log(\tanh K_2)\right)
+&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した }\exp(x)\exp(y)=\exp(x+y)\right)\\
+&\qquad=\exp(0)
+&&\left(\because\ \mathbb{R}\text{ の加法逆元}\right)\\
+&\qquad=1
+&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した }\exp(0)=1\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\exp\!\left(-\log(\tanh K_2)\right)\tanh K_2
+&=1
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\exp(\log y)=y\right)\\
+\exp\!\left(-\log(\tanh K_2)\right)
+&=\frac1{\tanh K_2}
+&&\left(\because\ \tanh K_2\ne0\text{ と }\mathbb{R}\text{ の除法}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\exp(2K_2^*)
+&=\exp\!\left(-\log(\tanh K_2)\right)
+&&\left(\because\ 2K_2^*=-\log(\tanh K_2)\right)\\
+&=\frac{1}{\tanh K_2}
+&&\left(\because\ \text{直前の等式}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-2K_2^*&=\log(\tanh K_2)
+&&\left(\because\ 2K_2^*=-\log(\tanh K_2)\text{ の両辺を符号反転}\right)\\
+\exp(-2K_2^*)&=\exp(\log(\tanh K_2))
+&&\left(\because\ \text{等しい実数への指数関数の適用}\right)\\
+&=\tanh K_2
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\exp(\log y)=y\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sinh(2K_2^*)
+&=\frac{\exp(2K_2^*)-\exp(-2K_2^*)}{2}
+&&\left(\because\ \blkref{def_cosh_sinh}\right)\\
+&=\frac{\frac1{\tanh K_2}-\exp(-2K_2^*)}{2}
+&&\left(\because\ \exp(2K_2^*)=\frac1{\tanh K_2}\right)\\
+&=\frac{\frac1{\tanh K_2}-\tanh K_2}{2}
+&&\left(\because\ \exp(-2K_2^*)=\tanh K_2\right)\\
+&=\frac12\left(\frac1{\tanh K_2}-\tanh K_2\right)
+&&\left(\because\ \mathbb{R}\text{ の分配法則}\right)
+\end{aligned}`),
+      paragraph(["一方、倍角の双曲線正弦は定義から"]),
+      displayMath(String.raw`\begin{aligned}
+2\sinh K_2\cosh K_2
+&=2\frac{\exp(K_2)-\exp(-K_2)}2\frac{\exp(K_2)+\exp(-K_2)}2
+&&\left(\because\ \blkref{def_cosh_sinh}\right)\\
+&=\frac12\left(\exp(K_2)-\exp(-K_2)\right)\left(\exp(K_2)+\exp(-K_2)\right)
+&&\left(\because\ 2\cdot\frac12\cdot\frac12=\frac12\right)\\
+&=\frac{\exp(K_2)^2-\exp(-K_2)^2}{2}
+&&\left(\because\ (a-b)(a+b)=a^2-b^2\right)\\
+&=\frac{\exp(2K_2)-\exp(-2K_2)}2
+&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した }\exp(x)\exp(y)=\exp(x+y)\right)\\
+&=\sinh(2K_2)
+&&\left(\because\ \blkref{def_cosh_sinh}\right)
+\end{aligned}`),
+      paragraph(["したがって、"]),
+      displayMath(String.raw`\begin{aligned}
+\sinh(2K_2)\sinh(2K_2^*)
+&=2\sinh K_2\cosh K_2\sinh(2K_2^*)
+&&\left(\because\ \sinh(2K_2)=2\sinh K_2\cosh K_2\right)\\
+&=2\sinh K_2\cosh K_2\cdot\frac12\left(\frac1{\tanh K_2}-\tanh K_2\right)
+&&\left(\because\ \sinh(2K_2^*)=\frac12\left(\frac1{\tanh K_2}-\tanh K_2\right)\right)\\
+&=\sinh K_2\cosh K_2\left(\frac1{\tanh K_2}-\tanh K_2\right)
+&&\left(\because\ 2\cdot\frac12=1\right)\\
+&=\sinh K_2\cosh K_2\left(\frac1{\sinh K_2/\cosh K_2}-\frac{\sinh K_2}{\cosh K_2}\right)
+&&\left(\because\ \blkref{def_positive_coupling_tanh}\right)\\
+&=\sinh K_2\cosh K_2\left(\frac{\cosh K_2}{\sinh K_2}-\frac{\sinh K_2}{\cosh K_2}\right)
+&&\left(\because\ \sinh K_2\ne0\ \land\ \cosh K_2\ne0\right)\\
+&=\sinh K_2\cosh K_2\frac{(\cosh K_2)^2-(\sinh K_2)^2}{\sinh K_2\cosh K_2}
+&&\left(\because\ \mathbb{R}\text{ の分数の通分}\right)\\
+&=(\cosh K_2)^2-(\sinh K_2)^2
+&&\left(\because\ \sinh K_2\cosh K_2\ne0\right)\\
+&=1
+&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ の (2)}\right)
+\end{aligned}`),
+      paragraph(["ゆえに第二の結合定数と双対結合定数の双対関係が示された。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "残余複合定義から第二の双対関係だけを独立した主張として分離した。第二の双対結合定数、双曲線正接、実対数、および双曲線関数の基本性質を先行入力とし、指数関数へ戻す計算から双対関係を一段ずつ示した。双曲線関数の略記と残る正値性には進んでいない。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_001_definition_symbols",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
@@ -1084,12 +1237,11 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
         ref("first_dual_coupling_relation"),
         " で示したものを用いる。第二の双対結合定数は ",
         ref("def_second_dual_coupling_constant"),
-        " で定めたものを用いる。",
+        " で定めたものを用いる。第二の双対関係は ",
+        ref("second_dual_coupling_relation"),
+        " で示したものを用いる。",
       ]),
       list([
-        [
-          math(String.raw`\sinh(2K_2)\sinh(2K_2^*) = 1`),
-        ],
         [
           math(String.raw`c_i := \cosh 2K_i,\quad s_i := \sinh 2K_i,\quad c_i^* := \cosh 2K_i^*,\quad s_i^* := \sinh 2K_i^*`),
         ],
@@ -1127,7 +1279,7 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
         "二次の単位行列 I_{Mat(2,C)} は <pauli_matrix_products> で既に定義されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
         "2^M 次の単位行列 I_{Mat(2^M,C)} と二次の単位行列のクロネッカー積の等式は <kronecker_product_rule> (2) で既に示されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
         "第一の双対結合定数 K_1^* の定義と正値性は <def_first_dual_coupling_constant> へ、第一の双対関係は <first_dual_coupling_relation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから両者を明示参照している。",
-        "第二の双対結合定数 K_2^* の定義と正値性は <def_second_dual_coupling_constant> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。第二の双対関係と双曲線関数の略記は本ブロックに残している。",
+        "第二の双対結合定数 K_2^* の定義と正値性は <def_second_dual_coupling_constant> へ、第二の双対関係は <second_dual_coupling_relation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから両者を明示参照している。双曲線関数の略記と残る正値性は本ブロックに残している。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +
