@@ -214,6 +214,7 @@ export const ALL_LABELS = [
   "factorization_of_A_theta",
   "factorization_of_A_theta_general",
   "first_and_second_projections",
+  "first_dual_coupling_relation",
   "frobenius_inner_product_axioms",
   "gamma1_geq_1",
   "gamma1_gt_1_theta_tilde",
