@@ -68,14 +68,16 @@ export const documentOrganization = [
       },
       {
         id: "finite_yang_baxter_decision",
-        title: "有限集合上の Yang–Baxter 条件の有限決定",
-        input: "有限集合と、その直積平方上の一つの有限二体写像を入力とする。",
-        output: "三体直積上の二つの隣接持ち上げ、有限 Yang--Baxter 条件、その有限決定手続き、成立例と不成立例を得る。",
-        main: "主張は、有限 Yang–Baxter 条件が三体直積上の二つの有限写像の等号であり、元数 n の入力集合では全ての三つ組の比較で決定できる一方、二元集合上でも任意の二体写像が条件を満たすわけではないことである。",
+        title: "有限 Yang–Baxter 条件と複素スペクトル依存性の境界",
+        input: "有限集合と、その直積平方上の一つの有限二体写像、および比較先となる複素線形作用素の二パラメータ族を入力とする。",
+        output: "有限 braid 条件の有限決定、複素線形化と成分交換による定数パラメータ族への埋め込み、一点の有限解からスペクトル依存性を復元できない反例を得る。",
+        main: "主張は、有限 braid 条件が全ての三つ組の比較で決定できて複素側の定数族へ情報を失わずに埋め込める一方、同じ一点の有限解を持つ異なる複素パラメータ族が存在するためスペクトル依存性は有限写像に無い追加構造だということである。",
         mainLabels: [
           "claim_finite_yang_baxter_condition_decidable",
           "claim_finite_swap_is_yang_baxter",
           "claim_two_element_pair_map_not_always_yang_baxter",
+          "claim_finite_braid_solution_gives_constant_complex_yang_baxter_family",
+          "claim_single_finite_yang_baxter_map_does_not_determine_spectral_dependence",
         ],
       },
       {

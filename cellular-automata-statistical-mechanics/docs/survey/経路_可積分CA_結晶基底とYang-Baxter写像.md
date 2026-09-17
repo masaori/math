@@ -54,9 +54,12 @@ $q\to0$ の後に残るのは：
 
 ## Yang–Baxter 写像（set-theoretical YBE）
 
-Drinfeld が提起し Veselov が "Yang–Baxter map" と名付けた対象：
-集合 $X$ 上の写像 $R:X\times X\to X\times X$ で braid 関係
-$R_{12}R_{13}R_{23}=R_{23}R_{13}R_{12}$（$X^3$ 上）を満たすもの。
+Drinfeld が提起し Veselov が "Yang–Baxter map" と名付けた対象には、二つの規約を区別する必要がある。
+Veselov (2003) の式 (1) は集合 $X$ 上の写像 $R:X\times X\to X\times X$ に対する
+$R_{12}R_{13}R_{23}=R_{23}R_{13}R_{12}$ である。一方、Gombor–Pozsgay (2022) の式 (17) は
+CA の局所更新 $U:X\times X\to X\times X$ に対する隣接作用の braid 関係
+$U_{12}U_{23}U_{12}=U_{23}U_{12}U_{23}$ である。両者は成分交換 $P$ を用いる
+$R=P\circ U$ によって移り合うが、比較写像なしに同じ式として扱わない。
 
 **局所規則が YB 写像であるようなブロック CA は超可積分（superintegrable）である**：
 Gombor–Pozsgay, "Superintegrable cellular automata and dual unitary gates from Yang–Baxter maps",
@@ -77,8 +80,10 @@ $$
 \text{「この CA 規則は可積分か」}\ \text{は、有限記号操作で決定可能な述語になる。}
 $$
 
-これは通常の可積分性（$R$ 行列の族 $R(u)$ がスペクトルパラメータ $u\in\mathbb{C}$ について
-YBE を満たす、という**連続体上の**条件）とは決定的に異なる。
+これは通常の可積分性（$R$ 行列の族 $R(u,v)$ がスペクトルパラメータ $u,v\in\mathbb{C}$ について
+YBE を満たす、という**連続体上の**条件）とは決定的に異なる。有限 braid 解は複素線形化と
+成分交換により定数パラメータ族へ埋め込めるため「対応が無い」のではない。一方、同じ一点の有限写像へ
+制限される異なる複素パラメータ族が存在し、スペクトル依存性は一つの有限写像から復元できない。
 **可積分性という概念が、CA の側では決定可能な有限条件に化ける**（→ 種「可解性は有限検査で決まる」）。
 
 ## 3D consistency と quad-graph

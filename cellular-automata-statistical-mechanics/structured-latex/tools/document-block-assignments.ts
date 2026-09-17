@@ -1,11 +1,16 @@
 /** 全本文ブロックの最終節分類。新規ブロックは明示分類するまで検証を通さない。 */
 export const blockSectionAssignments = {
+  "finite_yang_baxter_decision_remark_conventions_and_sources": "finite_yang_baxter_decision",
   "finite_yang_baxter_decision_definition_pair_map": "finite_yang_baxter_decision",
   "finite_yang_baxter_decision_definition_adjacent_lifts": "finite_yang_baxter_decision",
   "finite_yang_baxter_decision_definition_condition": "finite_yang_baxter_decision",
   "finite_yang_baxter_decision_claim_decidable": "finite_yang_baxter_decision",
   "finite_yang_baxter_decision_claim_swap_example": "finite_yang_baxter_decision",
   "finite_yang_baxter_decision_claim_two_element_counterexample": "finite_yang_baxter_decision",
+  "finite_yang_baxter_decision_definition_complex_parameter_family": "finite_yang_baxter_decision",
+  "finite_yang_baxter_decision_definition_finite_to_complex_comparison": "finite_yang_baxter_decision",
+  "finite_yang_baxter_decision_claim_constant_complex_family": "finite_yang_baxter_decision",
+  "finite_yang_baxter_decision_claim_spectral_dependence_not_determined": "finite_yang_baxter_decision",
   "cyclic_stage_uniform_marginals_definition_family": "cyclic_stage_uniform_marginals",
   "cyclic_stage_uniform_marginals_claim_normalized": "cyclic_stage_uniform_marginals",
   "cyclic_stage_uniform_marginals_claim_embedding_compatibility": "cyclic_stage_uniform_marginals",
