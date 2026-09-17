@@ -133,6 +133,100 @@ theorem phaseValue_pow_period (d : ℕ) (hd : 0 < d) (k : ℕ) :
   push_cast
   field_simp [hd0]
 
+/-- 正の周期長の巡回添字における直前の位置。 -/
+def cyclicPrevious (d : ℕ) (hd : 0 < d) (j : Fin d) : Fin d :=
+  if hj : j.1 = 0 then
+    ⟨d - 1, Nat.sub_lt hd (by omega)⟩
+  else
+    ⟨j.1 - 1,
+      (Nat.sub_lt (n := j.1) (m := 1) (Nat.pos_of_ne_zero hj) (by omega)).trans j.2⟩
+
+/-- 正の周期長の巡回添字における直後の位置。 -/
+def cyclicNext (d : ℕ) (hd : 0 < d) (j : Fin d) : Fin d :=
+  ⟨(j.1 + 1) % d, Nat.mod_lt _ hd⟩
+
+/-- 位相符号に対応する、巡回添字ごとの複素係数。 -/
+noncomputable def orbitPhaseCoefficient (d k : ℕ) (j : Fin d) : ℂ :=
+  phaseValue d k ^ (d - j.1)
+
+/-- 直前の巡回位置の係数は、現在位置の係数に位相値を掛けたものである。 -/
+theorem orbitPhaseCoefficient_previous (d : ℕ) (hd : 0 < d) (k : ℕ) (j : Fin d) :
+    orbitPhaseCoefficient d k (cyclicPrevious d hd j) =
+      phaseValue d k * orbitPhaseCoefficient d k j := by
+  by_cases hj : j.1 = 0
+  · have hsub : d - (d - 1) = 1 := by omega
+    simp [orbitPhaseCoefficient, cyclicPrevious, hj, hsub, phaseValue_pow_period d hd k]
+  · have hjpos : 0 < j.1 := Nat.pos_of_ne_zero hj
+    have hexponent : d - (j.1 - 1) = (d - j.1) + 1 := by omega
+    simp [orbitPhaseCoefficient, cyclicPrevious, hj, hexponent, pow_succ, mul_comm]
+
+/-- 一つの周期軌道の列挙に支えられた複素位相ベクトル。 -/
+noncomputable def orbitPhaseVector (d k : ℕ)
+    (points : Fin d → Configuration V) : Configuration V → ℂ :=
+  fun x => ∑ j : Fin d, if x = points j then orbitPhaseCoefficient d k j else 0
+
+theorem orbitPhaseVector_at_point (d k : ℕ)
+    (points : Fin d → Configuration V) (hpoints : Function.Injective points) (j : Fin d) :
+    orbitPhaseVector d k points (points j) = orbitPhaseCoefficient d k j := by
+  classical
+  simp [orbitPhaseVector, hpoints.eq_iff]
+
+theorem orbitPhaseVector_outside (d k : ℕ)
+    (points : Fin d → Configuration V) (x : Configuration V)
+    (hx : ¬∃ j, x = points j) :
+    orbitPhaseVector d k points x = 0 := by
+  classical
+  rw [orbitPhaseVector]
+  apply Finset.sum_eq_zero
+  intro j _
+  simp only [ite_eq_right_iff]
+  intro hxj
+  exact (hx ⟨j, hxj⟩).elim
+
+/--
+周期軌道を巡回順に列挙すると、各有限位相符号はその軌道に支えられた
+非零固有ベクトルを明示的に与える。
+-/
+theorem orbitPhaseVector_nonzero_and_eigenpair (F : ReversibleEvolution V)
+    (d : ℕ) (hd : 0 < d) (k : ℕ)
+    (points : Fin d → Configuration V) (hpoints : Function.Injective points)
+    (hforward : ∀ j, F (points j) = points (cyclicNext d hd j))
+    (hbackward : ∀ j, F.symm (points j) = points (cyclicPrevious d hd j)) :
+    orbitPhaseVector d k points ≠ 0 ∧
+      complexAction F (orbitPhaseVector d k points) =
+        phaseValue d k • orbitPhaseVector d k points := by
+  classical
+  constructor
+  · intro hzero
+    let j0 : Fin d := ⟨0, hd⟩
+    have hat := orbitPhaseVector_at_point d k points hpoints j0
+    rw [hzero] at hat
+    have hcoefficient : orbitPhaseCoefficient d k j0 = 1 := by
+      simp [orbitPhaseCoefficient, j0, phaseValue_pow_period d hd k]
+    simp [hcoefficient] at hat
+  · funext y
+    by_cases hy : ∃ j, y = points j
+    · obtain ⟨j, rfl⟩ := hy
+      rw [show complexAction F (orbitPhaseVector d k points) (points j) =
+          orbitPhaseVector d k points (F.symm (points j)) by rfl]
+      rw [hbackward, orbitPhaseVector_at_point d k points hpoints]
+      change orbitPhaseCoefficient d k (cyclicPrevious d hd j) =
+        phaseValue d k * orbitPhaseVector d k points (points j)
+      rw [orbitPhaseVector_at_point d k points hpoints,
+        orbitPhaseCoefficient_previous d hd k j]
+    · have hpre : ¬∃ j, F.symm y = points j := by
+        rintro ⟨j, hj⟩
+        apply hy
+        refine ⟨cyclicNext d hd j, ?_⟩
+        rw [← hforward j, ← hj]
+        exact (F.apply_symm_apply y).symm
+      rw [show complexAction F (orbitPhaseVector d k points) y =
+          orbitPhaseVector d k points (F.symm y) by rfl]
+      rw [orbitPhaseVector_outside d k points _ hpre]
+      change 0 = phaseValue d k * orbitPhaseVector d k points y
+      rw [orbitPhaseVector_outside d k points _ hy]
+      simp
+
 /-- 正の時間尺度と整数持ち上げから得る実数値位相生成子。 -/
 noncomputable def phaseGenerator (tau : ℝ) (d k : ℕ) (n : ℤ) : ℝ :=
   (2 * Real.pi / tau) * ((k : ℝ) / d + n)
