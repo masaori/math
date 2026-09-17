@@ -1707,6 +1707,9 @@ targets=(
   Ising2DLambda.KacWard.reversalFreeOrbitSupportEdges_distinct
   Ising2DLambda.NecSuf.KacWard.invariant_elimination_by_splitting_necSuf
   Ising2DLambda.KacWard.reversalFreeOrbit_vertexSimpleDecomposition
+  Ising2DLambda.NecSuf.KacWard.two_support_coefficient_formula_necSuf
+  Ising2DLambda.KacWard.twoSupportCoefficientFormula
+  Ising2DLambda.KacWard.twoSupportCoefficientFormula_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

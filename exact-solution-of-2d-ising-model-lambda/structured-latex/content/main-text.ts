@@ -52307,6 +52307,101 @@ k\in\mathcal G
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_two_support_coefficient_formula",
+        labels: [],
+        title: { text: "二つの正準巡回支持の係数式" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_two_support_coefficient_formula",
+            focus: {
+              id: "kac_ward_claim_two_support_coefficient_formula",
+              kind: "claim",
+              title: { text: "二つの支持の対称差は軌道係数の和と最小切断で復元できる" },
+              labels: ["claim_two_support_coefficient_formula"],
+              habitat: "Z",
+              verification: [
+                "sagemath/check/parity-identity-simple-cycle-arc-orientation-two-support-coefficient-formula",
+              ],
+              lean: [
+                "Ising2DLambda.KacWard.twoSupportCoefficientFormula",
+                "Ising2DLambda.NecSuf.KacWard.two_support_coefficient_formula_necSuf",
+                "Ising2DLambda.KacWard.twoSupportCoefficientFormula_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "空でない内部語の巡回・反転軌道の有限集合を ", math(String.raw`\Omega`),
+                  "、切断候補の添字集合を ", math(String.raw`K:=\{0,1\}`),
+                  " とする。各 ", math(String.raw`\omega\in\Omega`),
+                  " について、", ref("claim_cut_flag_realizable_candidate_selection"),
+                  " が定める実現可能な最小切断を ", math(String.raw`\kappa(\omega)\in K`),
+                  " と書く。二つの正準巡回支持の切断前の係数を ",
+                  math(String.raw`c_{\mathrm e},c_{\mathrm{se}}:\Omega\times K\to\mathbb F_2`),
+                  " とし、いずれも ", math(String.raw`k\ne\kappa(\omega)`),
+                  " なら係数が零であると仮定する。軌道係数を",
+                ]),
+                displayMath(String.raw`\bar c_r(\omega):=\sum_{j\in K}c_r(\omega,j)
+\qquad(r\in\{\mathrm e,\mathrm{se}\})`),
+                paragraph([
+                  "で定め、二つの支持の対称差の係数を ",
+                  math(String.raw`c_{\oplus}(\omega,k):=c_{\mathrm e}(\omega,k)+c_{\mathrm{se}}(\omega,k)`),
+                  " とする。このとき、任意の内部語が定める各 ",
+                  math(String.raw`(\omega,k)\in\Omega\times K`), " について",
+                ]),
+                displayMath(String.raw`c_{\oplus}(\omega,k)=
+\begin{cases}
+\bar c_{\mathrm e}(\omega)+\bar c_{\mathrm{se}}(\omega),&k=\kappa(\omega),\\
+0,&k\ne\kappa(\omega)
+\end{cases}`),
+                paragraph([
+                  "が成り立つ。従って二つの支持を合成した係数では、切断位置を保存した表引きを持たず、",
+                  "二つの巡回軌道係数の和と、有限合同条件から復元する最小切断だけで書ける。",
+                  "保存済みの二つの正準支持では 227 軌道が共通し、その切断位置も一致するので相殺し、",
+                  "対称差には 624 軌道が残ることを有限検算している。全ての量は有限集合と ",
+                  math(String.raw`\mathbb F_2`), " の有限和の中にあり、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`\omega\in\Omega`), " と ", math(String.raw`k\in K`),
+                  " を固定する。まず ", math(String.raw`k=\kappa(\omega)`), " とする。",
+                  ref("claim_selected_support_coefficient_reconstruction"),
+                  " を二つの係数へそれぞれ適用すると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+c_{\oplus}(\omega,k)
+&=c_{\mathrm e}(\omega,k)+c_{\mathrm{se}}(\omega,k)
+&&\bigl(\because\ c_{\oplus}\text{ の定義}\bigr)\\
+&=\bar c_{\mathrm e}(\omega)+\bar c_{\mathrm{se}}(\omega)
+&&\bigl(\because\ \blkref{claim_selected_support_coefficient_reconstruction}\text{ を二つの係数へ適用}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "次に ", math(String.raw`k\ne\kappa(\omega)`), " とする。このとき",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+c_{\oplus}(\omega,k)
+&=c_{\mathrm e}(\omega,k)+c_{\mathrm{se}}(\omega,k)
+&&\bigl(\because\ c_{\oplus}\text{ の定義}\bigr)\\
+&=0+0
+&&\bigl(\because\ k\ne\kappa(\omega)\text{ では二つの係数がともに零}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb F_2\text{ の加法単位元}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "二つの場合は ", math(String.raw`K`),
+                  " の全ての元を尽くすので、表示した係数式を得る。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_fiber_phase_weight_topological_form",
         labels: [],
         title: { text: "ファイバーの位相付き寄与の位相形" },
