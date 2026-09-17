@@ -67,6 +67,18 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_yang_baxter_decision",
+        title: "有限集合上の Yang–Baxter 条件の有限決定",
+        input: "有限集合と、その直積平方上の一つの有限二体写像を入力とする。",
+        output: "三体直積上の二つの隣接持ち上げ、有限 Yang--Baxter 条件、その有限決定手続き、成立例と不成立例を得る。",
+        main: "主張は、有限 Yang–Baxter 条件が三体直積上の二つの有限写像の等号であり、元数 n の入力集合では全ての三つ組の比較で決定できる一方、二元集合上でも任意の二体写像が条件を満たすわけではないことである。",
+        mainLabels: [
+          "claim_finite_yang_baxter_condition_decidable",
+          "claim_finite_swap_is_yang_baxter",
+          "claim_two_element_pair_map_not_always_yang_baxter",
+        ],
+      },
+      {
         id: "finite_submultiplicative_count_bounds",
         title: "正整数値有限表の劣乗法不等式と極限の境界",
         input: "正の自然数で添字づけた正整数値の有限表、自然数の加法・乗法・冪・順序比較を入力とする。",

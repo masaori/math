@@ -69,7 +69,8 @@ Gombor–Pozsgay, "Superintegrable cellular automata and dual unitary gates from
 
 ### 可算性・決定可能性の観点（重要）
 
-**有限集合 $X$（$|X|=n$）上の写像が YB 写像かどうかは、$n^6$ 個の等式の有限検査で決まる。**
+**有限集合 $X$（$|X|=n$）上の写像が YB 写像かどうかは、$X^3$ の全 $n^3$ 入力における
+二つの合成写像の値の比較で決まる。**
 すなわち
 
 $$

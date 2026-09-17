@@ -48,6 +48,7 @@ import blocks_finite_submultiplicative_count_bounds from './content/finite-submu
 import blocks_finite_transfer_matrix_comparison from './content/finite-transfer-matrix-comparison.ts'
 import blocks_finite_word_complexity_boundary from './content/finite-word-complexity-boundary.ts'
 import blocks_finite_word_real_normalization_boundary from './content/finite-word-real-normalization-boundary.ts'
+import blocks_finite_yang_baxter_decision from './content/finite-yang-baxter-decision.ts'
 import blocks_global_map_iteration from './content/global-map-iteration.ts'
 import blocks_inverse_map_locality from './content/inverse-map-locality.ts'
 import blocks_iterate_monoid_conjugacy_invariance from './content/iterate-monoid-conjugacy-invariance.ts'
@@ -140,6 +141,7 @@ export type AllBlocks = [
   ...typeof blocks_finite_transfer_matrix_comparison,
   ...typeof blocks_finite_word_complexity_boundary,
   ...typeof blocks_finite_word_real_normalization_boundary,
+  ...typeof blocks_finite_yang_baxter_decision,
   ...typeof blocks_global_map_iteration,
   ...typeof blocks_inverse_map_locality,
   ...typeof blocks_iterate_monoid_conjugacy_invariance,
