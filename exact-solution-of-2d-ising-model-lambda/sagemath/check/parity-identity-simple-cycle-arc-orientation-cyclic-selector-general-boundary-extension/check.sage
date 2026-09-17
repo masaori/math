@@ -40,6 +40,22 @@ def word_from_path(side, first_vertex, first_incoming, outgoing_directions):
     return tuple(word), traversal, tuple(vertices)
 
 
+def enumerated_traversal_coordinate_lifts_for_side(side, word, traversal):
+    """比較用: 始点を全列挙して切断旗と整合する座標列を返す。"""
+    _, _, internal_outgoing = traversal
+    lifts = []
+    for first_vertex in ((row, column)
+                         for row in range(side)
+                         for column in range(side)):
+        vertices = [first_vertex]
+        for outgoing in internal_outgoing:
+            vertices.append(move_vertex(side, vertices[-1], outgoing))
+        if all(vertex_wrap_flags_from_coordinate(side, vertex) == step[1]
+               for vertex, step in zip(vertices, word)):
+            lifts.append(tuple(vertices))
+    return tuple(lifts)
+
+
 checked_paths = 0
 checked_extensions = 0
 distinct_words = set()
@@ -82,6 +98,9 @@ for side in range(2, 5):
 
 for side, word, traversal, vertices in path_cases:
     lifts = traversal_coordinate_lifts_for_side(side, word, traversal)
+    enumerated_lifts = enumerated_traversal_coordinate_lifts_for_side(
+        side, word, traversal)
+    assert lifts == enumerated_lifts
     assert vertices in lifts
     assert traversal in connected_word_traversals(word)
 
@@ -137,8 +156,9 @@ certificate = {
     "checked_path_count": int(checked_paths),
     "checked_extension_count": int(checked_extensions),
     "distinct_side_and_word_count": int(len(distinct_words)),
+    "checked_congruence_system_count": int(len(path_cases)),
     "observed_incidence_agreement_count": int(checked_observed_incidences),
-    "rule": "enumerate the first torus vertex, follow the internal outgoing directions, require every recorded cut flag, and extend one boundary edge",
+    "rule": "solve the row and column start residues from cumulative direction displacements and every recorded cut-flag congruence, then extend one boundary edge",
 }
 certificate_path = Path(
     "sagemath/check/"
@@ -150,6 +170,7 @@ certificate_path.write_text(
 print("CHECKED PATHS", checked_paths, flush=True)
 print("CHECKED EXTENSIONS", checked_extensions, flush=True)
 print("DISTINCT SIDE/WORD PAIRS", len(distinct_words), flush=True)
+print("CHECKED CONGRUENCE SYSTEMS", len(path_cases), flush=True)
 print("OBSERVED INCIDENCE AGREEMENTS", checked_observed_incidences, flush=True)
 print("CERTIFICATE", certificate_path, flush=True)
 print("PASS: boundary extension rule applies to arbitrary finite words", flush=True)
