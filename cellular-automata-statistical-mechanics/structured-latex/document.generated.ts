@@ -40,6 +40,7 @@ import blocks_finite_difference_temperature_derivative_boundary from './content/
 import blocks_finite_discrete_continuous_symmetry_boundary from './content/finite-discrete-continuous-symmetry-boundary.ts'
 import blocks_finite_gibbs_weight_boundary from './content/finite-gibbs-weight-boundary.ts'
 import blocks_finite_neighborhood_assignment_monoid from './content/finite-neighborhood-assignment-monoid.ts'
+import blocks_finite_permutation_complex_phase_boundary from './content/finite-permutation-complex-phase-boundary.ts'
 import blocks_finite_power_bound_certificate from './content/finite-power-bound-certificate.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
 import blocks_finite_rational_entropy_boundary from './content/finite-rational-entropy-boundary.ts'
@@ -131,6 +132,7 @@ export type AllBlocks = [
   ...typeof blocks_finite_discrete_continuous_symmetry_boundary,
   ...typeof blocks_finite_gibbs_weight_boundary,
   ...typeof blocks_finite_neighborhood_assignment_monoid,
+  ...typeof blocks_finite_permutation_complex_phase_boundary,
   ...typeof blocks_finite_power_bound_certificate,
   ...typeof blocks_finite_propagation_boundary,
   ...typeof blocks_finite_rational_entropy_boundary,

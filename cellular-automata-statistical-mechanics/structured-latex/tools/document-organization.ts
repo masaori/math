@@ -398,6 +398,19 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_permutation_complex_phase_boundary",
+        title: "有限置換時間発展と複素位相実現の境界",
+        input: "有限舞台上の可逆な 2 値セルオートマトン、その大域写像の周期軌道分割と巡回型を入力とする。",
+        output: "整数置換行列、有限位数、有限位相符号を先に得て、複素固有値への比較写像と、時間尺度を選んだ実数値位相生成子への持ち上げを分離する。",
+        main: "主張は、有限位相符号が整数置換行列の複素固有対を与え、全ての複素固有値が有限位数の一の冪根になる一方、同じ複素位相には整数周期だけ異なる実数値位相生成子が無限にあり、有限時間発展だけから生成子は一意に決まらないことである。",
+        mainLabels: [
+          "claim_binary_ca_reversible_global_finite_order_identity",
+          "claim_binary_ca_phase_code_realizes_complex_eigenpair",
+          "claim_binary_ca_permutation_complex_eigenvalue_root_of_unity",
+          "claim_binary_ca_real_phase_generator_not_unique",
+        ],
+      },
+      {
         id: "finite_transfer_matrix_and_trace",
         title: "有限遷移重みの転送行列と決定論的状態数",
         input: "有限舞台上の有理重みの確率的局所規則族、その有限回遷移重み、決定論的局所規則族と反復不動点数を入力とする。",
