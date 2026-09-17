@@ -102,7 +102,16 @@ export default defineBlocks([
       displayMath(String.raw`\sigma\mathbin{\triangleright}H:=H\circ\sigma^{-1}:A^V\to\mathbb Z`),
       paragraph([
         "と定めると、", math(String.raw`\sigma\mathbin{\triangleright}H\in\operatorname{Cons}_{\mathbb Z}(F)`),
-        " である。この作用は保存写像を別の保存写像へ送るだけで、各保存写像が対称性の下で不変であるとは仮定しない。",
+        " であり、恒等置換 ", math(String.raw`e:=\operatorname{id}_{A^V}`), " と任意の ",
+        math(String.raw`\sigma,\tau\in\operatorname{Sym}(F)`), " に対して",
+      ]),
+      displayMath(String.raw`e\mathbin{\triangleright}H=H,\qquad
+(\sigma\circ\tau)\mathbin{\triangleright}H
+=\sigma\mathbin{\triangleright}(\tau\mathbin{\triangleright}H)`),
+      paragraph([
+        "が成り立つ。従ってこれは ", math(String.raw`\operatorname{Sym}(F)`), " の ",
+        math(String.raw`\operatorname{Cons}_{\mathbb Z}(F)`),
+        " への左作用である。各保存写像が各対称性の下で不変であるとは仮定しない。",
       ]),
     ],
     proof: [
@@ -119,6 +128,22 @@ export default defineBlocks([
 &=H\circ\sigma^{-1}
   \quad(\because\ \blkref{def_binary_ca_integer_conserved_observable_group})\\
 &=\sigma\mathbin{\triangleright}H
+  \quad(\because\ \text{引き戻しの定義}).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+e\mathbin{\triangleright}H
+&=H\circ e^{-1}
+  \quad(\because\ \text{引き戻しの定義})\\
+&=H
+  \quad(\because\ e^{-1}=e\text{ と恒等写像の単位律}),\\[4pt]
+(\sigma\circ\tau)\mathbin{\triangleright}H
+&=H\circ(\sigma\circ\tau)^{-1}
+  \quad(\because\ \text{引き戻しの定義})\\
+&=H\circ(\tau^{-1}\circ\sigma^{-1})
+  \quad(\because\ \text{合成の逆写像})\\
+&=(H\circ\tau^{-1})\circ\sigma^{-1}
+  \quad(\because\ \text{写像合成の結合律})\\
+&=\sigma\mathbin{\triangleright}(\tau\mathbin{\triangleright}H)
   \quad(\because\ \text{引き戻しの定義}).
 \end{aligned}`),
     ],
