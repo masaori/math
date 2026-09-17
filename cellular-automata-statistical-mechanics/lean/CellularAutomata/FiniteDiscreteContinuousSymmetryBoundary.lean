@@ -17,8 +17,8 @@ claim_binary_ca_real_parameter_symmetry_action_trivial
   → realParameterAction_trivial
 
 有限舞台、二元状態、整数値保存写像、実数加法群に固定し、本文と同じ順序で示す。
-位相、極限、微分、対数、除算は使わない。実数体は一径数作用のパラメータと、
-有限群の位数による除法可能性にだけ使う。
+位相、極限、微分、対数は使わない。実数体は一径数作用のパラメータと、
+有限群の位数の階乗による除法可能性にだけ使う。
 -/
 import Mathlib.Data.Real.Basic
 import Mathlib.GroupTheory.OrderOfElement
@@ -139,7 +139,7 @@ theorem realParameterAction_trivial (F : Configuration V → Configuration V)
     dsimp [r]
     rw [nsmul_eq_mul]
     change (m : ℝ) * (t / (m : ℝ)) = t
-    rw [mul_div_assoc, mul_div_cancel_left₀ t (Nat.cast_ne_zero.mpr (ne_of_gt hm))]
+    rw [mul_div_cancel₀ t (Nat.cast_ne_zero.mpr (ne_of_gt hm))]
   rw [← ht, Theta.map_nsmul_as_pow]
   obtain ⟨k, hk⟩ := Nat.dvd_factorial hc (le_refl c)
   have hcard : Theta.toFun r ^ c = 1 := pow_card_eq_one'
