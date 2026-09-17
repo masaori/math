@@ -1031,6 +1031,15 @@ targets=(
   Ising2DLambda.KacWard.coordinateStartCompatible_iff_forcedForbidden
   Ising2DLambda.NecSuf.KacWard.compatible_iff_forced_forbidden
   Ising2DLambda.KacWard.coordinateStartCompatible_iff_forcedForbidden_from_necSuf
+  Ising2DLambda.KacWard.twoCoordinateCompatible_iff_recovered
+  Ising2DLambda.KacWard.coordinateLiftCandidate_iff_recovered
+  Ising2DLambda.KacWard.boundaryExtensionCandidate_iff_recovered
+  Ising2DLambda.NecSuf.KacWard.pairCompatible_iff_pairRecovered
+  Ising2DLambda.NecSuf.KacWard.liftCandidate_iff_recovered
+  Ising2DLambda.NecSuf.KacWard.boundaryCandidate_iff_recovered
+  Ising2DLambda.KacWard.twoCoordinateCompatible_iff_recovered_from_necSuf
+  Ising2DLambda.KacWard.coordinateLiftCandidate_iff_recovered_from_necSuf
+  Ising2DLambda.KacWard.boundaryExtensionCandidate_iff_recovered_from_necSuf
   Ising2DLambda.FisherZero.quadraticPositive_mul_of_mixedSigns
   Ising2DLambda.NecSuf.FisherZero.positive_mul_mixedSigns_necSuf
   Ising2DLambda.FisherZero.quadraticPositive_mul_of_mixedSigns_from_necSuf

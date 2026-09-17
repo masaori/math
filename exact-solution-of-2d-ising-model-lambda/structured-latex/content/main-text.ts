@@ -51996,6 +51996,131 @@ B&:=\left\{[-\delta_i]_L:z_i=0\right\}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_cut_flag_two_coordinate_boundary_completeness",
+        labels: [],
+        title: { text: "切断旗による二次元座標列と境界延長候補の復元" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_cut_flag_two_coordinate_boundary_completeness",
+            focus: {
+              id: "kac_ward_claim_cut_flag_two_coordinate_boundary_completeness",
+              kind: "claim",
+              title: { text: "行列の独立復元は二次元座標列と境界延長候補を尽くす" },
+              labels: ["claim_cut_flag_two_coordinate_boundary_completeness"],
+              habitat: "Z",
+              verification: [
+                "sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-general-boundary-extension",
+              ],
+              lean: [
+                "Ising2DLambda.KacWard.coordinateLiftCandidate_iff_recovered",
+                "Ising2DLambda.KacWard.boundaryExtensionCandidate_iff_recovered",
+                "Ising2DLambda.NecSuf.KacWard.liftCandidate_iff_recovered",
+                "Ising2DLambda.NecSuf.KacWard.boundaryCandidate_iff_recovered",
+                "Ising2DLambda.KacWard.coordinateLiftCandidate_iff_recovered_from_necSuf",
+                "Ising2DLambda.KacWard.boundaryExtensionCandidate_iff_recovered_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  math(String.raw`L,n\in\mathbb N`), "、", math(String.raw`2\le L`),
+                  " とする。各 ", math(String.raw`i\in\{0,\ldots,n-1\}`), " に対し、行と列の累積変位を ",
+                  math(String.raw`\delta_i^{\mathrm r},\delta_i^{\mathrm c}\in\mathbb Z`),
+                  "、行と列の零側・末尾側の切断旗を ",
+                  math(String.raw`(z_i^{\mathrm r},\ell_i^{\mathrm r}),(z_i^{\mathrm c},\ell_i^{\mathrm c})\in\{0,1\}^2`),
+                  " とし、各対で二つの旗が同時に一にならないとする。",
+                ]),
+                paragraph([
+                  ref("claim_cut_flag_congruence_start_recovery"),
+                  " を行の変位と旗へ適用して得る始点剰余類の有限集合を ", math(String.raw`S_{\mathrm r}`),
+                  "、列へ適用して得るものを ", math(String.raw`S_{\mathrm c}`), " と書く。また ",
+                ]),
+                displayMath(String.raw`w_L(u):=
+\left(\mathbf 1_{[u]_L=0},\mathbf 1_{[u]_L=L-1}\right),\qquad
+W_L(u,v):=\bigl(w_L(u),w_L(v)\bigr)`),
+                paragraph([
+                  "と定める。記録された四つの切断旗に整合する二次元座標列の集合を ",
+                ]),
+                displayMath(String.raw`\mathcal P:=\left\{
+\left(\bigl([r+\delta_i^{\mathrm r}]_L,[c+\delta_i^{\mathrm c}]_L\bigr)\right)_{i=0}^{n-1}:
+\begin{array}{l}
+r,c\in\{0,\ldots,L-1\},\\
+w_L(r+\delta_i^{\mathrm r})=(z_i^{\mathrm r},\ell_i^{\mathrm r})\quad(0\le i<n),\\
+w_L(c+\delta_i^{\mathrm c})=(z_i^{\mathrm c},\ell_i^{\mathrm c})\quad(0\le i<n)
+\end{array}
+\right\}`),
+                paragraph(["とすると、有限集合の等式"]),
+                displayMath(String.raw`\mathcal P=
+\left\{
+\left(\bigl([r+\delta_i^{\mathrm r}]_L,[c+\delta_i^{\mathrm c}]_L\bigr)\right)_{i=0}^{n-1}:
+r\in S_{\mathrm r},\ c\in S_{\mathrm c}
+\right\}`),
+                paragraph([
+                  "が成り立つ。さらに、内部語の反対端点までの行列変位を ",
+                  math(String.raw`(\alpha,\beta)\in\mathbb Z^2`),
+                  " とする。この変位は、内部方向列の累積変位へ境界の一辺の変位を足したものである。",
+                  "整合する二次元座標列を反対端点まで延長して得る切断旗候補の集合は",
+                ]),
+                displayMath(String.raw`\mathcal B_{\alpha,\beta}=
+\left\{W_L(r+\alpha,c+\beta):r\in S_{\mathrm r},\ c\in S_{\mathrm c}\right\}`),
+                paragraph([
+                  "に等しい。従って、行と列の有限合同条件を独立に解き、その直積から座標列を作って一辺延長する規則は、",
+                  "実現可能な座標列も境界延長候補も落とさず、実現不能な候補を加えない。扱う量は有限集合と整数の剰余だけであり、",
+                  "実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "任意の ", math(String.raw`r,c\in\{0,\ldots,L-1\}`), " を取る。",
+                  ref("claim_cut_flag_congruence_start_recovery"),
+                  " を行の累積変位と行の旗へ適用すると、行の全切断旗に整合することと ",
+                  math(String.raw`r\in S_{\mathrm r}`), " は同値である。同じ命題を列へ適用すると、列の全切断旗に整合することと ",
+                  math(String.raw`c\in S_{\mathrm c}`), " は同値である。よって二つを合わせて",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+&\left(
+\begin{array}{l}
+w_L(r+\delta_i^{\mathrm r})=(z_i^{\mathrm r},\ell_i^{\mathrm r})\quad(0\le i<n),\\
+w_L(c+\delta_i^{\mathrm c})=(z_i^{\mathrm c},\ell_i^{\mathrm c})\quad(0\le i<n)
+\end{array}
+\right)\\
+&\qquad\Longleftrightarrow
+\bigl(r\in S_{\mathrm r}\ \land\ c\in S_{\mathrm c}\bigr)
+&&\bigl(\because\ \blkref{claim_cut_flag_congruence_start_recovery}\text{ を行と列へ独立に適用}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "を得る。この同値の左辺と座標列の定義を ", math(String.raw`\mathcal P`),
+                  " の定義へ代入すれば、表示した ", math(String.raw`\mathcal P`),
+                  " の等式を得る。この等式は両方向の同値なので、復元規則は座標列を落とさず、余分な座標列も加えない。",
+                ]),
+                paragraph([
+                  "次に整合する座標列を一つ取り、その始点を ", math(String.raw`(r,c)`),
+                  " とする。反対端点は始点から整数変位 ", math(String.raw`(\alpha,\beta)`),
+                  " だけ進んだ剰余類なので、その四つの切断旗は ",
+                  math(String.raw`W_L(r+\alpha,c+\beta)`), " である。上の座標列の等式により、整合する始点対はちょうど ",
+                  math(String.raw`S_{\mathrm r}\times S_{\mathrm c}`), " を尽くす。従って境界延長後の旗の像は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal B_{\alpha,\beta}
+&=\left\{W_L(r+\alpha,c+\beta):(r,c)\in S_{\mathrm r}\times S_{\mathrm c}\right\}
+&&\bigl(\because\ \text{整合する始点対の完全性と整数剰余による一辺延長}\bigr)\\
+&=\left\{W_L(r+\alpha,c+\beta):r\in S_{\mathrm r},\ c\in S_{\mathrm c}\right\}
+&&\bigl(\because\ \text{直積の所属の定義}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "である。これは像の等式なので、境界延長候補についても欠落と余分な候補の双方が無い。",
+                  "全過程は有限集合の直積、整数の加法と剰余、有限個の等式と除外条件だけで閉じる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_fiber_phase_weight_topological_form",
         labels: [],
         title: { text: "ファイバーの位相付き寄与の位相形" },

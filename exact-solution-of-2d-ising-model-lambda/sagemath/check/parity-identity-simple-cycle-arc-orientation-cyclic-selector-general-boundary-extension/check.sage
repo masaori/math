@@ -1,6 +1,7 @@
 """一般の有限内部語へ運べる境界延長規則を有限全探索で検算する。
 
-対象ラベル: claim_cut_flag_congruence_start_recovery
+対象ラベル: claim_cut_flag_congruence_start_recovery,
+claim_cut_flag_two_coordinate_boundary_completeness
 一般の辺長についての証明ではない。
 """
 
@@ -58,6 +59,7 @@ def enumerated_traversal_coordinate_lifts_for_side(side, word, traversal):
 
 checked_paths = 0
 checked_extensions = 0
+checked_two_coordinate_products = 0
 distinct_words = set()
 path_cases = set()
 expected_options = {}
@@ -103,6 +105,17 @@ for side, word, traversal, vertices in path_cases:
     assert lifts == enumerated_lifts
     assert vertices in lifts
     assert traversal in connected_word_traversals(word)
+    row_starts = tuple(sorted(set(vertex[0] for lift in lifts
+                                  for vertex in lift[:1])))
+    column_starts = tuple(sorted(set(vertex[1] for lift in lifts
+                                     for vertex in lift[:1])))
+    assert set(lifts) == {
+        tuple((ZZ((row + vertex[0] - vertices[0][0]) % side),
+               ZZ((column + vertex[1] - vertices[0][1]) % side))
+              for vertex in vertices)
+        for row in row_starts for column in column_starts
+    }
+    checked_two_coordinate_products += 1
 
 for key, expected in expected_options.items():
     side, word, boundary_position, boundary_direction = key
@@ -146,6 +159,7 @@ for lift in lifts.values():
 
 assert checked_paths == 13920
 assert checked_extensions == 27840
+assert checked_two_coordinate_products == 13920
 assert len(distinct_words) == 13234
 assert checked_observed_incidences == 1036
 
@@ -155,6 +169,7 @@ certificate = {
     "checked_word_lengths": list(map(int, range(1, 5))),
     "checked_path_count": int(checked_paths),
     "checked_extension_count": int(checked_extensions),
+    "checked_two_coordinate_product_count": int(checked_two_coordinate_products),
     "distinct_side_and_word_count": int(len(distinct_words)),
     "checked_congruence_system_count": int(len(path_cases)),
     "observed_incidence_agreement_count": int(checked_observed_incidences),
@@ -169,6 +184,7 @@ certificate_path.write_text(
 
 print("CHECKED PATHS", checked_paths, flush=True)
 print("CHECKED EXTENSIONS", checked_extensions, flush=True)
+print("CHECKED TWO-COORDINATE PRODUCTS", checked_two_coordinate_products, flush=True)
 print("DISTINCT SIDE/WORD PAIRS", len(distinct_words), flush=True)
 print("CHECKED CONGRUENCE SYSTEMS", len(path_cases), flush=True)
 print("OBSERVED INCIDENCE AGREEMENTS", checked_observed_incidences, flush=True)
