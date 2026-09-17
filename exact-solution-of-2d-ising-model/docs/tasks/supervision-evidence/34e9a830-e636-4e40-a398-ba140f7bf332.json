@@ -1,0 +1,23 @@
+{
+  "実行識別子": "34e9a830-e636-4e40-a398-ba140f7bf332",
+  "観測時刻": "2026-09-18T03:00:48+09:00",
+  "起動登録の実測": { "list終了コード": 0, "print終了コード": 0, "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop", "state": "running", "runs": 43, "pid": 54510, "last exit code": 0 },
+  "plist": { "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist", "存在": true, "sha256": "2f811ad50d24476e63564a39c657e27f5f42d3207de30629da59bd4c0910e641", "StartCalendarInterval": "偶数時43分" },
+  "実ログ": { "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick-run-20260918T024323-54510.log", "終端": "TICK_RESULT_SUCCESS:20260918T024323-54510:42b1c960845f97a35933a223cd576cb503803ced" },
+  "実行の終了値の解釈": "launchctl観測時はPID 54510が残っていたが、実行固有ログに成功マーカーとorigin/main包含済み成果コミットがあるため今回tickは正常終了と判定する。launchctlのlast exit 0は過去値として成功根拠に使わない。",
+  "成果比較": { "開始成果": "ac7b9832f5fca333ed672ba7af96a3e6d77eb8ac", "今回読解終点": "42b1c960845f97a35933a223cd576cb503803ced", "前回監督以後": "第二の双対関係、添字つき双曲線関数の略記と正値性が独立項として統合された。" },
+  "検査結果": [
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    }
+  ]
+}

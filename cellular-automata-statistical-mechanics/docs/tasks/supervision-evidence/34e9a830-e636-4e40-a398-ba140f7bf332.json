@@ -1,0 +1,23 @@
+{
+  "実行識別子": "34e9a830-e636-4e40-a398-ba140f7bf332",
+  "観測時刻": "2026-09-18T03:00:48+09:00",
+  "起動登録の実測": { "list終了コード": 0, "print終了コード": 0, "label": "com.masaori.cellular-automata-auto-loop", "state": "not running", "runs": 92, "last exit code": 0 },
+  "plist": { "path": "/Users/masaori/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist", "存在": true, "sha256": "d13342cf574a15bd2fcdbc892aafa71f32e036e6b0c5f6bd96a52e66ae5e34ff", "StartCalendarInterval": "毎時12分" },
+  "実ログ": { "path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/auto-loop.log", "終端": "2026-09-18 02:28:10 === tick 正常終了（未コミット 0 ファイル）" },
+  "実行の終了値の解釈": "launchctl list/printは登録あり・非実行中・last exit 0を返し、実ログも直近tickの正常終了を記録する。",
+  "成果比較": { "開始成果": "ac7b9832f5fca333ed672ba7af96a3e6d77eb8ac", "今回読解終点": "42b1c960845f97a35933a223cd576cb503803ced", "前回監督以後": "有限状態数比と有限対称性の境界が四層化され、有限置換時間発展と複素位相実現の境界が構造化記述まで統合された。" },
+  "検査結果": [
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    }
+  ]
+}

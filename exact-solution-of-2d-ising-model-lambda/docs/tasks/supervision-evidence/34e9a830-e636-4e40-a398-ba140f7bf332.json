@@ -1,0 +1,23 @@
+{
+  "実行識別子": "34e9a830-e636-4e40-a398-ba140f7bf332",
+  "観測時刻": "2026-09-18T03:00:48+09:00",
+  "起動登録の実測": { "list終了コード": 0, "print終了コード": 0, "label": "com.masaori.ising-lambda-auto-loop", "state": "not running", "runs": 158, "last exit code": 0 },
+  "plist": { "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist", "存在": true, "sha256": "cbed703002cee81ff8c2c71fd5a6ab508bc0e394ab401a3d247eee1173a6c3c5", "StartCalendarInterval": "毎時5分・35分" },
+  "実ログ": { "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log", "終端": "2026-09-18 02:54:08 === tick 正常終了" },
+  "実行の終了値の解釈": "launchctl list/printは登録あり・非実行中・last exit 0を返し、実ログも直近tickの正常終了を記録する。",
+  "成果比較": { "開始成果": "ac7b9832f5fca333ed672ba7af96a3e6d77eb8ac", "今回読解終点": "42b1c960845f97a35933a223cd576cb503803ced", "前回監督以後": "語長依存の衝突分離から境界入射・座標復元・実現可能候補選択へ進み、最小切断から支持係数を再構成する一般命題まで統合された。" },
+  "検査結果": [
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    }
+  ]
+}

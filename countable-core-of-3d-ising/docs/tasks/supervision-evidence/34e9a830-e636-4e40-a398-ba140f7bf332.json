@@ -1,0 +1,23 @@
+{
+  "実行識別子": "34e9a830-e636-4e40-a398-ba140f7bf332",
+  "観測時刻": "2026-09-18T03:00:48+09:00",
+  "起動登録の実測": { "list終了コード": 0, "print終了コード": 0, "label": "com.masaori.ising-3d-cut-auto-loop", "state": "running", "runs": 172, "pid": 15232, "last exit code": 0 },
+  "plist": { "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-3d-cut-auto-loop.plist", "存在": true, "sha256": "b15709b26349fd26b3a1296d7b4c404346b41e0f60f7c2e804ca8ea1f968c221", "StartCalendarInterval": "毎時0分・30分（tick内部で60分間隔制御）" },
+  "実ログ": { "path": "/Users/masaori/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log", "終端": "2026-09-18 03:00:24 === tick 開始（観測時に終端なし）", "直前完了": "2026-09-18 02:03:47 === tick 正常終了（研究の前進なし）" },
+  "実行の終了値の解釈": "launchctl list/printはPID 15232で実行中を示し、03:00:24開始分の実ログに終端がない。last exit 0は過去値なので今回の成否は未確認とする。",
+  "成果比較": { "開始成果": "ac7b9832f5fca333ed672ba7af96a3e6d77eb8ac", "今回読解終点": "42b1c960845f97a35933a223cd576cb503803ced", "前回監督以後": "数学本文・証明・有限反例の新しい統合成果はない。" },
+  "検査結果": [
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    }
+  ]
+}

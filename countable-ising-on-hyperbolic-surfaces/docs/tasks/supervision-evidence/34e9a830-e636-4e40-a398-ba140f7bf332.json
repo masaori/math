@@ -1,0 +1,23 @@
+{
+  "実行識別子": "34e9a830-e636-4e40-a398-ba140f7bf332",
+  "観測時刻": "2026-09-18T03:00:48+09:00",
+  "起動登録の実測": { "list終了コード": 0, "print終了コード": 0, "label": "com.masaori.hyperbolic-ising-auto-loop", "state": "not running", "runs": 85, "last exit code": 0 },
+  "plist": { "path": "/Users/masaori/Library/LaunchAgents/com.masaori.hyperbolic-ising-auto-loop.plist", "存在": true, "sha256": "073b2ba45e068d1997a5a0bbf928620739cfd557176ec088881832b80cd22bf8", "StartCalendarInterval": "毎時20分" },
+  "実ログ": { "path": "/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/auto-loop.log", "終端": "2026-09-18 02:20:17 SKIP: 前の tick が動作中" },
+  "実行の終了値の解釈": "launchctl list/printは非実行中・last exit 0だが、直近実ログは既存tickによる見送りである。ロックディレクトリの更新時刻は2026-09-14 14:20:12で所有者情報がなく、現在の原因は未確認とする。",
+  "成果比較": { "開始成果": "ac7b9832f5fca333ed672ba7af96a3e6d77eb8ac", "今回読解終点": "42b1c960845f97a35933a223cd576cb503803ced", "前回監督以後": "数学本文・証明・有限反例の新しい統合成果はない。" },
+  "検査結果": [
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-18T03:08:47+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    }
+  ]
+}
