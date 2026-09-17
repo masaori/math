@@ -13,9 +13,12 @@
     — `V_1^{(±)} := exp(√-1 K_1 (Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1))`
   * `transfer_matrix_003a_claim_V2_in_Z_Y`（ラベル `V2_in_Z_Y`）
     — `V_2 = (2s_2)^{M/2} exp(√-1 K_2^* (Z_1Y_1 + ⋯ + Z_MY_M))`
-  * `transfer_matrix_011_definition_H1_H2`
-    — `H_1^{(±)} := Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1`、`H_2 := Z_1 Y_1 + ⋯ + Z_M Y_M`、
-      `V_1^{(±)} = exp(√-1 K_1 H_1^{(±)})`、`V_2 = (2 s_2)^{M/2} exp(√-1 K_2^* H_2)`
+  * `transfer_matrix_011a_definition_H1_pm`（ラベル `def_H1_pm`）
+    — `H_1^{(±)} := Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1`
+  * `transfer_matrix_011b_definition_H2`（ラベル `def_H2`）
+    — `H_2 := Z_1 Y_1 + ⋯ + Z_M Y_M`
+  * `transfer_matrix_011_definition_H1_H2`（ラベル `def_H1_H2`）
+    — `V_1^{(±)} = exp(√-1 K_1 H_1^{(±)})`、`V_2 = (2 s_2)^{M/2} exp(√-1 K_2^* H_2)`
 （旧 Typst の対応ファイルは `_old/typst/parts/004_転送行列/006, 010`。）
 
 ## 形式化の方針
@@ -102,12 +105,12 @@ theorem lastSign_one (m : Fin M) : lastSign 1 m = 1 := by
 
 /-! ## `H_1^{(±)}` と `H_2` -/
 
-/-- **原文の `H_1^{(±)} = Y_1 Z_2 + Y_2 Z_3 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1`**
+/-- **人手本文 `def_H1_pm` の `H_1^{(±)} = Y_1 Z_2 + Y_2 Z_3 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1`**
 （`η` が原文の `∓1`）。 -/
 noncomputable def H1 (M : ℕ) (η : ℂ) : TensorPow M :=
   ∑ m : Fin M, lastSign η m • (Y m * Z (nextSite m))
 
-/-- **原文の `H_2 = Z_1 Y_1 + Z_2 Y_2 + ⋯ + Z_M Y_M`**。 -/
+/-- **人手本文 `def_H2` の `H_2 = Z_1 Y_1 + Z_2 Y_2 + ⋯ + Z_M Y_M`**。 -/
 noncomputable def H2 (M : ℕ) : TensorPow M := ∑ m : Fin M, Z m * Y m
 
 /-- 原文 `V2_in_Z_Y` の Step 0–2 に対応する等式。

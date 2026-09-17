@@ -12,10 +12,10 @@
     "2次元イジングモデル"
   ],
   "classificationStatus": "全項目の分類・説明粒度・ブロック境界を再検証し、章内依存順と数学的道具立ての分類群を確定済み。説明粒度の手動レビューで将来の分割対象とした複合定義は各項目に明記する。",
-  "entryCount": 330,
+  "entryCount": 332,
   "chapterEntryCounts": {
     "数学的道具立て": 109,
-    "2次元イジングモデル": 221
+    "2次元イジングモデル": 223
   },
   "mathematicalToolGroups": [
     {
@@ -2428,9 +2428,9 @@
         "calculation_formulae_definition_set_and_algebra_notation",
         "calc_formulae_006_definition_of_cc",
         "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_007_definition_V1_pm",
         "eigenvalues_of_V_011_definition_hermitian_positive_definite",
-        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2",
         "linear_space_general_000_definition_kronecker_product",
         "linear_space_general_000b_claim_kronecker_product_rule",
         "linear_space_general_000d_claim_kronecker_transpose",
@@ -2448,7 +2448,7 @@
         "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
         "eigenvalues_of_V_016_claim_sign_flip_conjugation"
       ],
-      "boundaryEvidence": "章内依存順57で一般の H1^{(±)},H2 を定義する。順58は Pauli 行列の積とクロネッカー積の転置を使い、iK1H1^{(±)} と iK2*H2 を実係数の Pauli 行列積として表して実対称性を示す。順59は順58で得た H2 の表示を直接用い、両方の生成子を同時に負号へ移す可逆行列による共役へ進むため、二項は一方向の内部依存で連続する。後続の正定値性は順58の実対称性だけを再利用して順59には依存せず、順60の偶セクター生成子は一般定義から上符号を選ぶ別枝である。したがって実対称性と符号反転共役を二出力として順59で節を閉じる。生成時に二項の連続性、全直接依存、本文 fingerprint、後続二枝の依存差、および入力集合の切り替わりを固定検査する。",
+      "boundaryEvidence": "章内依存順65・66で H1^{(±)} と H2 を独立に定義し、順67には二つの転送行列の指数表示だけを残す。順68は Pauli 行列の積とクロネッカー積の転置を使い、iK1H1^{(±)} と iK2*H2 を実係数の Pauli 行列積として表して実対称性を示す。順69は順68で得た H2 の表示を直接用い、両方の生成子を同時に負号へ移す可逆行列による共役へ進むため、二項は一方向の内部依存で連続する。後続の正定値性は順68の実対称性だけを再利用して順69には依存せず、順70の偶セクター生成子は順65から上符号を選ぶ別枝である。したがって実対称性と符号反転共役を二出力として順69で節を閉じる。生成時に二項の連続性、全直接依存、本文 fingerprint、後続二枝の依存差、および入力集合の切り替わりを固定検査する。",
       "readabilityStatus": "実対称性は二次の Pauli 行列の積、サイトごとの積、クロネッカー積の転置を一段ずつ計算し、符号反転共役は各サイトの共役から生成子の各項へ進むため、対象二項は現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号に説明粒度の未解決が残る。"
     },
     {
@@ -2465,7 +2465,7 @@
         "closing_claim_epsilon_G_is_involution"
       ],
       "input": [
-        "一般の生成子 H1^{(±)}, H2 と境界項の符号を固定した指数行列 V1^{(±)}, V2 の複合定義",
+        "独立した一般生成子 H1^{(±)} の定義",
         "Jordan–Wigner 行列と全スピン反転行列のサイトごとの Pauli 行列表示",
         "クロネッカー積の積の規則と、スピン配置に対応する標準基底上の σz の作用"
       ],
@@ -2479,7 +2479,7 @@
         "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
         "bridge_009_claim_epsilon_projector_properties",
         "bridge_010_claim_epsilon_commutes",
-        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011a_definition_H1_pm",
         "linear_space_general_000b_claim_kronecker_product_rule",
         "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
       ],
@@ -2498,8 +2498,8 @@
         "closing_claim_D0_G_diagonal_action",
         "closing_claim_epsilon_G_is_involution"
       ],
-      "boundaryEvidence": "章内依存順60で一般の H1^{(±)} の定義から上符号を選び、偶セクターの生成子 H1^{(+)} を一対象だけ定める。順61–62の開鎖項 D0 と周期境界項 G は H1^{(+)} に意味的依存しない並行定義であり、読み順だけを提示順制約で固定する。順63はこの三定義を受け取り、Jordan–Wigner 行列をサイトごとの Pauli 行列積へ展開して iH1^{(+)}=D0+εG を示す。順64の対角作用と順65の可換性も相互に意味的依存しない出力で、提示順だけを固定する。順66は順65の可換性を使った (εG)^2=I を示す。直後の順67は順60だけを再利用して V1^{(+)} の半指数行列を定義し、順61–66の出力を使わない。順67では Pauli 行列積、配置基底、クロネッカー積、全スピン反転行列を入力から外すため、順66で節を閉じる。生成時に七項の連続性、項目ごとの全直接依存、意味的依存とは分離した提示順、対象と全外部入力の本文 fingerprint、三つの節末出力、順67の直接依存・本文・順61–66からの非依存、および入力集合の切り替わりを固定検査する。",
-      "readabilityStatus": "生成子、半指数行列、転送行列、共役写像、可逆性、平方根性、共役合成一致を束ねていた旧定義ブロックを一ブロック一定義または一主張へ分割した。さらに、局所積、境界項、生成子表示、可換性、二乗、対角作用を束ねていた旧主張を、D0 の定義、G の定義、生成子表示、対角作用、二つずつの可換性、二乗へ分割した。対象七項は生成子の定義から二次の Pauli 行列積とクロネッカー積の有限計算を経て三つの節末出力へ進み、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号に加え、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義に説明粒度の未解決と将来の分割が残る。"
+      "boundaryEvidence": "章内依存順70で順65の H1^{(±)} から上符号を選び、偶セクターの生成子 H1^{(+)} を一対象だけ定める。順71–72の開鎖項 D0 と周期境界項 G は H1^{(+)} に意味的依存しない並行定義であり、読み順だけを提示順制約で固定する。順73はこの三定義を受け取り、Jordan–Wigner 行列をサイトごとの Pauli 行列積へ展開して iH1^{(+)}=D0+εG を示す。順74の対角作用と順75の可換性も相互に意味的依存しない出力で、提示順だけを固定する。順76は順75の可換性を使った (εG)^2=I を示す。直後の順77は順70だけを再利用して V1^{(+)} の半指数行列を定義し、順71–76の出力を使わない。順77では Pauli 行列積、配置基底、クロネッカー積、全スピン反転行列を入力から外すため、順76で節を閉じる。生成時に七項の連続性、項目ごとの全直接依存、意味的依存とは分離した提示順、対象と全外部入力の本文 fingerprint、三つの節末出力、順77の直接依存・本文・順71–76からの非依存、および入力集合の切り替わりを固定検査する。",
+      "readabilityStatus": "生成子、半指数行列、転送行列、共役写像、可逆性、平方根性、共役合成一致を束ねていた旧定義ブロックを一ブロック一定義または一主張へ分割した。さらに、局所積、境界項、生成子表示、可換性、二乗、対角作用を束ねていた旧主張を、D0 の定義、G の定義、生成子表示、対角作用、二つずつの可換性、二乗へ分割した。対象七項は独立した H1^{(±)} の定義から二次の Pauli 行列積とクロネッカー積の有限計算を経て三つの節末出力へ進み、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、および混在した転送行列・サイト作用素の記号に説明粒度の未解決が残る。"
     },
     {
       "name": "偶セクターの半指数行列と平方根性",
@@ -2517,7 +2517,7 @@
       "externalInputEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "transfer_matrix_007_definition_V1_pm",
-        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011a_definition_H1_pm",
         "evensectorT_definition_H1_plus",
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
       ],
@@ -2527,8 +2527,8 @@
       ],
       "mainTheorem": "偶セクターの半指数行列の平方根性",
       "mainTheoremEntryId": "evensectorT_claim_V1_plus_square_root",
-      "boundaryEvidence": "章内依存順67で偶セクター生成子 H1^{(+)} から半指数行列を定義し、順68で可換な行列指数関数の積公式と V1^{(+)} の定義を使って、その二乗が V1^{(+)} に等しいことを示す。二項は一方向の依存鎖をなし、平方根性で閉じる。直後の順69は半指数行列の定義だけを再利用して V2 と挟み、偶セクター転送行列 V^{(+)} を定義するが、順68の平方根性には依存しない。順69では転送行列の記号を入力へ追加し、偶セクター生成子、指数関数の積公式、V1^{(±)} の一般定義を直接入力から外すため、順68の後で節を閉じる。生成時に二項の連続性、全直接依存、対象と全外部入力の本文 fingerprint、順68への一意な閉包、順69の直接依存・本文・順68からの非依存、および入力集合の切り替わりを固定検査する。",
-      "readabilityStatus": "定義は一つの有限複素行列だけを定め、平方根性は同じ行列指数関数を二回掛ける計算を一段ずつ示しているため、対象二項は現行の説明粒度検査に合格している。外部入力では複素数、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
+      "boundaryEvidence": "章内依存順77で偶セクター生成子 H1^{(+)} から半指数行列を定義し、順78で可換な行列指数関数の積公式と V1^{(+)} の定義を使って、その二乗が V1^{(+)} に等しいことを示す。二項は一方向の依存鎖をなし、平方根性で閉じる。直後の順79は半指数行列の定義と順67に残る V2 の指数表示を使って、偶セクター転送行列 V^{(+)} を定義するが、順78の平方根性には依存しない。順79では V2 の指数表示と独立した H2 定義を入力へ追加し、偶セクター生成子、指数関数の積公式、V1^{(±)} の定義を直接入力から外すため、順78の後で節を閉じる。生成時に二項の連続性、全直接依存、対象と全外部入力の本文 fingerprint、順78への一意な閉包、順79の直接依存・本文・順78からの非依存、および入力集合の切り替わりを固定検査する。",
+      "readabilityStatus": "定義は一つの有限複素行列だけを定め、平方根性は同じ行列指数関数を二回掛ける計算を一段ずつ示しているため、対象二項は現行の説明粒度検査に合格している。外部入力では複素数、独立した H1^{(±)} の定義、V1^{(±)} の定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
     },
     {
       "name": "偶セクター転送行列と符号付きトレースの正値公式",
@@ -2552,17 +2552,18 @@
         "closing_005_claim_open_chain_partition_sum",
         "closing_005_claim_open_chain_spin_sums_positive",
         "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "transfer_matrix_001_definition_symbols",
         "bridge_006_claim_V2_component_equals_pauli",
         "transfer_matrix_007_definition_V1_pm",
         "bridge_010_claim_epsilon_commutes",
         "eigenvalues_of_V_001_definition_trace",
         "eigenvalues_of_V_002_claim_trace_properties",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2",
         "transfer_matrix_011_definition_H1_H2",
         "exp_linear_map_000a_claim_real_exp_series_converges",
+        "linear_space_general_000b_claim_kronecker_product_rule",
         "closing_definition_D0_open_chain_operator",
         "closing_definition_G_boundary_operator",
-        "linear_space_general_000b_claim_kronecker_product_rule",
         "closing_004_claim_H1_plus_in_sigma_z_form",
         "closing_claim_D0_G_diagonal_action",
         "closing_claim_epsilon_D0_G_pairwise_commute",
@@ -2579,8 +2580,8 @@
       ],
       "mainTheorem": "偶セクター転送行列の符号付きトレースの正値公式",
       "mainTheoremEntryId": "closing_006_theorem_trace_of_epsilon_V_plus",
-      "boundaryEvidence": "章内依存順69で V1^{(+)} の半指数行列と V2 を掛け合わせて偶セクター転送行列 V^{(+)} を定義し、順70で配置基底上の対角作用、全スピン反転行列との可換性、開鎖イジング模型の有限和を使って tr(εV^{(+)}) を明示的な正の実数へ計算する。二項は定義から正値公式へ進む一方向の依存鎖をなす。直後の順71は V^{(+)} の定義を再利用するが、エルミート正定値行列の指数関数と実対称生成子を入力に正定値性を示す別枝であり、順70のトレース公式には依存しない。順70も順71に依存せず、両者の全直接依存集合は異なるため、順70の後で節を閉じる。生成時に二項の連続性と全直接依存、対象と全外部入力の本文 fingerprint、順70への一意な閉包、順71の直接依存・本文、順70と順71の相互非依存、および対象三項の説明粒度を固定検査する。",
-      "readabilityStatus": "順69は一つの有限複素行列だけを定義する。順70は符号付きトレースを配置基底和へ直し、開鎖スピン配置の有限和を因数分解して正の閉形式へ至る一つの計算鎖であり、対象二項は現行の説明粒度検査に合格している。三項以上の本文分割または形式化同期は不要だった。外部入力では集合と代数構造の記号、複素数、残余複合定義、H1^{(±)}, H2 と V1^{(±)}, V2 を束ねた複合定義、行列指数関数の定義と可換積公式、および行列と線型写像の対応に説明粒度の未解決が残る。"
+      "boundaryEvidence": "章内依存順79で V1^{(+)} の半指数行列と V2 を掛け合わせて偶セクター転送行列 V^{(+)} を定義し、順80で配置基底上の対角作用、全スピン反転行列との可換性、開鎖イジング模型の有限和を使って tr(εV^{(+)}) を明示的な正の実数へ計算する。二項は定義から正値公式へ進む一方向の依存鎖をなす。直後の順81は V^{(+)} の定義を再利用するが、エルミート正定値行列の指数関数と実対称生成子を入力に正定値性を示す別枝であり、順80のトレース公式には依存しない。順80も順81に依存せず、両者の全直接依存集合は異なるため、順80の後で節を閉じる。生成時に二項の連続性と全直接依存、対象と全外部入力の本文 fingerprint、順80への一意な閉包、順81の直接依存・本文、順80と順81の相互非依存、および対象三項の説明粒度を固定検査する。",
+      "readabilityStatus": "順79は一つの有限複素行列だけを定義する。順80は符号付きトレースを配置基底和へ直し、開鎖スピン配置の有限和を因数分解して正の閉形式へ至る一つの計算鎖であり、対象二項は現行の説明粒度検査に合格している。三項以上の本文分割または形式化同期は不要だった。外部入力では集合と代数構造の記号、複素数、V2 の指数表示を保持する残余複合定義、独立した H1^{(±)} と H2 の定義、行列指数関数の定義と可換積公式、および行列と線型写像の対応に説明粒度の未解決が残る。"
     },
     {
       "name": "偶セクター転送行列の正定値性・可逆性とトレース正値性",
@@ -2604,6 +2605,8 @@
         "calc_formulae_006_definition_of_cc",
         "transfer_matrix_001_definition_symbols",
         "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2",
         "transfer_matrix_011_definition_H1_H2",
         "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
         "linear_space_general_002_claim_scalar_identity_commutes",
@@ -2634,8 +2637,8 @@
       },
       "mainTheorem": "偶セクター転送行列の逆行列のトレース正値性",
       "mainTheoremEntryId": "evenEigen_claim_V_plus_inverse_positive_and_traces",
-      "boundaryEvidence": "章内依存順71は順69の V^{(+)} の定義と順58の生成子の実対称性を受けて V^{(+)} の正定値性を示す。順72の tr(V^{(+)}) の正値性は順71だけを直接使う並行出力である。順73は順71を受けて明示候補が左右逆であることから可逆性と逆行列の式を示し、順74は順73の明示式と順58の実対称性を使って (V^{(+)})^{-1} の正定値性を示す。順75は節内では順74だけを直接受け、外部入力の正定値行列の指数関数と集合・代数構造の記号も用いて tr((V^{(+)})^{-1}) の正値性を示す。Lean はこれらを VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos で検証する。SageMath は左右逆を別々に検査し、候補逆行列の全固有値について虚部の最大値が 1.732×10^{-14}、実部の最小値が 5.145×10^{-4}>0 であること、および tr((V^{(+)})^{-1}) の全体最小値が 1.032>0 であることを検査した。直後の順76–78は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順71〜75とは相互に依存しない。順79は順76だけへ依存する。この入力集合の切り替わりにより順75の後で節を閉じる。生成時には順71〜75の全直接依存、二つの節末出力、本文 fingerprint、Lean 宣言、SageMath の実検査、順76〜78との相互非依存、および入力集合の切り替わりを固定検査する。",
-      "readabilityStatus": "順75は既に一ブロック一主張であり、直前に確定した (V^{(+)})^{-1} の正定値性から、正定値行列のトレースが正であることを一段だけ適用している。Lean の trace_VPlusInv_pos も VPlusInv_posDef に trace_pos を一段適用する同じ推論で、SageMath は候補逆行列のトレース正値性を直接検査する。したがって対象本文の推論粒度と形式化対応は合格であり、順75の後を節境界として確定する。外部入力では集合と代数構造の記号、複素数、残余複合定義、一般の生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
+      "boundaryEvidence": "章内依存順81は順79の V^{(+)} の定義と順68の生成子の実対称性を受けて V^{(+)} の正定値性を示す。順82の tr(V^{(+)}) の正値性は順81だけを直接使う並行出力である。順83は順81を受けて明示候補が左右逆であることから可逆性と逆行列の式を示し、順84は順83の明示式と順68の実対称性を使って (V^{(+)})^{-1} の正定値性を示す。順85は節内では順84だけを直接受け、外部入力の正定値行列の指数関数と集合・代数構造の記号も用いて tr((V^{(+)})^{-1}) の正値性を示す。Lean はこれらを VPlus_posDef、trace_VPlus_pos、VPlus_mul_VPlusInv、VPlusInv_mul_VPlus、VPlusInv_posDef、trace_VPlusInv_pos で検証する。SageMath は左右逆を別々に検査し、候補逆行列の全固有値について虚部の最大値が 1.732×10^{-14}、実部の最小値が 5.145×10^{-4}>0 であること、および tr((V^{(+)})^{-1}) の全体最小値が 1.032>0 であることを検査した。直後の順86–88は同じ V^{(+)} と半指数行列を再利用するものの、一般の行列指数関数の逆行列公式と可逆元の積から三つの構成因子の可逆性を示す別枝であり、順81〜85とは相互に依存しない。順89は順86だけへ依存する。この入力集合の切り替わりにより順85の後で節を閉じる。生成時には順81〜85の全直接依存、二つの節末出力、本文 fingerprint、Lean 宣言、SageMath の実検査、順86〜88との相互非依存、および入力集合の切り替わりを固定検査する。",
+      "readabilityStatus": "順85は既に一ブロック一主張であり、直前に確定した (V^{(+)})^{-1} の正定値性から、正定値行列のトレースが正であることを一段だけ適用している。Lean の trace_VPlusInv_pos も VPlusInv_posDef に trace_pos を一段適用する同じ推論で、SageMath は候補逆行列のトレース正値性を直接検査する。したがって対象本文の推論粒度と形式化対応は合格であり、順85の後を節境界として確定する。外部入力では集合と代数構造の記号、複素数、V2 の指数表示を保持する残余複合定義、独立した一般生成子定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。"
     },
     {
       "name": "偶セクター転送行列の構成因子の可逆性",
@@ -2742,7 +2745,7 @@
       },
       "concludingClaim": "偶セクターの合成共役写像は V^{(+)} による共役写像そのものである",
       "concludingClaimEntryId": "evensectorT_claim_T_V_plus_is_conjugation",
-      "boundaryEvidence": "章内依存順81で、半指数行列と V_2 の可逆性、一般の T_g、V^{(+)} の三因子表示から、三つの共役の合成 T_{(V^{(+)})} を定義する。順82はこの定義と既存の一般合成則を直接入力に、半指数行列と V_2 の可逆性から積も可逆であることを確認し、一般合成則を二回適用して T_{(V^{(+)})}=T_{V^{(+)}} へ閉じる。Lean の TVPlus・TVPlus_eq_TConj と SageMath の全行列単位上の合成共役検査が同じ二項へ対応する。直後の順83は実対称生成子と正定値行列の指数関数から正定値行列 W を扱う別枝で、この二項と相互に依存せず、外部入力集合もすべて切り替わるため、順82の後で節を閉じる。生成時に二項の章配置と連続性、全直接依存、本文 fingerprint、Lean の証明本体、SageMath の実検査本体、順83との相互非依存と入力集合の切り替わりを固定検査する。",
+      "boundaryEvidence": "章内依存順91で、半指数行列と V_2 の可逆性、一般の T_g、V^{(+)} の三因子表示から、三つの共役の合成 T_{(V^{(+)})} を定義する。順92はこの定義と既存の一般合成則を直接入力に、半指数行列と V_2 の可逆性から積も可逆であることを確認し、一般合成則を二回適用して T_{(V^{(+)})}=T_{V^{(+)}} へ閉じる。Lean の TVPlus・TVPlus_eq_TConj と SageMath の全行列単位上の合成共役検査が同じ二項へ対応する。直後の順93は実対称生成子と正定値行列の指数関数から正定値行列 W を扱う別枝で、この二項と相互に依存せず、外部入力集合もすべて切り替わるため、順92の後で節を閉じる。生成時に二項の章配置と連続性、全直接依存、本文 fingerprint、Lean の証明本体、SageMath の実検査本体、順93との相互非依存と入力集合の切り替わりを固定検査する。",
       "readabilityStatus": "順81は一つの合成写像だけを定義する。順82は構成因子と途中積の可逆性を確認した後、既に証明済みの一般合成則を二回適用して三重共役を一つの共役へまとめる。一つの主張内で一般則を重複証明せず、本文、Lean、SageMath の対応も一意なので、対象二項の説明粒度は合格である。"
     },
     {
@@ -2765,8 +2768,8 @@
         "exp_linear_map_002_definition_exp_of_endomorphism",
         "maxeig_001_definition_transfer_matrix_square_root",
         "maxeig_001a_definition_symmetrized_transfer_matrix",
-        "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011b_definition_H2"
       ],
       "output": [
         "W が実対称であること",
@@ -3344,7 +3347,7 @@
     }
   ],
   "explanationGranularityReview": {
-    "reviewedEntryCount": 330,
+    "reviewedEntryCount": 332,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
       "calc_formulae_012_definition_arc_length",
@@ -4213,7 +4216,7 @@
     },
     {
       "chapter": "2次元イジングモデル",
-      "entryCount": 221,
+      "entryCount": 223,
       "dependencyDirection": "prerequisite から dependent へ",
       "topologicalOrder": [
         {
@@ -4667,1097 +4670,1111 @@
         {
           "order": 65,
           "entryIds": [
-            "transfer_matrix_011_definition_H1_H2"
+            "transfer_matrix_011a_definition_H1_pm"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 66,
           "entryIds": [
-            "eigenvalues_of_V_014_claim_iH_is_real_symmetric"
+            "transfer_matrix_011b_definition_H2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 67,
           "entryIds": [
-            "eigenvalues_of_V_016_claim_sign_flip_conjugation"
+            "transfer_matrix_011_definition_H1_H2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 68,
           "entryIds": [
-            "evensectorT_definition_H1_plus"
+            "eigenvalues_of_V_014_claim_iH_is_real_symmetric"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 69,
           "entryIds": [
-            "closing_definition_D0_open_chain_operator"
+            "eigenvalues_of_V_016_claim_sign_flip_conjugation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 70,
           "entryIds": [
-            "closing_definition_G_boundary_operator"
+            "evensectorT_definition_H1_plus"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 71,
           "entryIds": [
-            "closing_004_claim_H1_plus_in_sigma_z_form"
+            "closing_definition_D0_open_chain_operator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 72,
           "entryIds": [
-            "closing_claim_D0_G_diagonal_action"
+            "closing_definition_G_boundary_operator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 73,
           "entryIds": [
-            "closing_claim_epsilon_D0_G_pairwise_commute"
+            "closing_004_claim_H1_plus_in_sigma_z_form"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 74,
           "entryIds": [
-            "closing_claim_epsilon_G_is_involution"
+            "closing_claim_D0_G_diagonal_action"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 75,
           "entryIds": [
-            "evensectorT_definition_V1_plus_square_root"
+            "closing_claim_epsilon_D0_G_pairwise_commute"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 76,
           "entryIds": [
-            "evensectorT_claim_V1_plus_square_root"
+            "closing_claim_epsilon_G_is_involution"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 77,
           "entryIds": [
-            "evensectorT_definition_V_plus"
+            "evensectorT_definition_V1_plus_square_root"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 78,
           "entryIds": [
-            "closing_006_theorem_trace_of_epsilon_V_plus"
+            "evensectorT_claim_V1_plus_square_root"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 79,
           "entryIds": [
-            "evenEigen_008_claim_V_plus_is_positive_definite"
+            "evensectorT_definition_V_plus"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 80,
           "entryIds": [
-            "evenEigen_claim_trace_V_plus_is_positive"
+            "closing_006_theorem_trace_of_epsilon_V_plus"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 81,
           "entryIds": [
-            "evenEigen_claim_V_plus_is_invertible"
+            "evenEigen_008_claim_V_plus_is_positive_definite"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 82,
           "entryIds": [
-            "evenEigen_claim_V_plus_inverse_is_positive_definite"
+            "evenEigen_claim_trace_V_plus_is_positive"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 83,
           "entryIds": [
-            "evenEigen_claim_V_plus_inverse_positive_and_traces"
+            "evenEigen_claim_V_plus_is_invertible"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 84,
           "entryIds": [
-            "evensectorT_claim_V1_plus_half_invertible"
+            "evenEigen_claim_V_plus_inverse_is_positive_definite"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 85,
           "entryIds": [
-            "evensectorT_claim_V2_invertible"
+            "evenEigen_claim_V_plus_inverse_positive_and_traces"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 86,
           "entryIds": [
-            "evensectorT_claim_V_plus_factors_invertible"
+            "evensectorT_claim_V1_plus_half_invertible"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 87,
           "entryIds": [
-            "evensectorT_006_claim_linearity_of_T"
+            "evensectorT_claim_V2_invertible"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 88,
           "entryIds": [
-            "evensectorT_006a_claim_linearity_of_T_V2"
+            "evensectorT_claim_V_plus_factors_invertible"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 89,
           "entryIds": [
-            "evensectorT_definition_T_V_plus"
+            "evensectorT_006_claim_linearity_of_T"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 90,
           "entryIds": [
-            "evensectorT_claim_T_V_plus_is_conjugation"
+            "evensectorT_006a_claim_linearity_of_T_V2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 91,
           "entryIds": [
-            "maxeig_003_claim_W_is_positive_definite"
+            "evensectorT_definition_T_V_plus"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 92,
           "entryIds": [
-            "maxeig_006_definition_rayleigh_sup"
+            "evensectorT_claim_T_V_plus_is_conjugation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 93,
           "entryIds": [
-            "maxeig_007_claim_operator_bound"
+            "maxeig_003_claim_W_is_positive_definite"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 94,
           "entryIds": [
-            "maxeig_008a_claim_trace_power_upper_bound"
+            "maxeig_006_definition_rayleigh_sup"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 95,
           "entryIds": [
-            "maxeig_008b_claim_moment_log_convexity"
+            "maxeig_007_claim_operator_bound"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 96,
           "entryIds": [
-            "maxeig_008_claim_trace_power_sandwich"
+            "maxeig_008a_claim_trace_power_upper_bound"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 97,
           "entryIds": [
-            "maxeig_009_claim_partition_function_sandwich"
+            "maxeig_008b_claim_moment_log_convexity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 98,
           "entryIds": [
-            "freeenergy_003_claim_limit_in_N_row"
+            "maxeig_008_claim_trace_power_sandwich"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 99,
           "entryIds": [
-            "maxeig_010a_definition_sector_rayleigh_sup"
+            "maxeig_009_claim_partition_function_sandwich"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 100,
           "entryIds": [
-            "maxeig_010b_claim_epsilon_commutes_with_W"
+            "freeenergy_003_claim_limit_in_N_row"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 101,
           "entryIds": [
-            "sector_001_claim_epsilon_is_permutation"
+            "maxeig_010a_definition_sector_rayleigh_sup"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 102,
           "entryIds": [
-            "sector_002_claim_abs_vector_moves_to_even_sector"
+            "maxeig_010b_claim_epsilon_commutes_with_W"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 103,
           "entryIds": [
-            "sector_003_theorem_c_minus_le_c_plus"
+            "sector_001_claim_epsilon_is_permutation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 104,
           "entryIds": [
-            "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY"
+            "sector_002_claim_abs_vector_moves_to_even_sector"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 105,
           "entryIds": [
-            "evensector_007_claim_H1_H2_via_check_Z_Y"
+            "sector_003_theorem_c_minus_le_c_plus"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 106,
           "entryIds": [
-            "transfer_matrix_013_claim_hatZ_hatY_M_periodicity"
+            "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 107,
           "entryIds": [
-            "transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY"
+            "evensector_007_claim_H1_H2_via_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 108,
           "entryIds": [
-            "transfer_matrix_015_claim_Z_Y_generate_algebra"
+            "transfer_matrix_013_claim_hatZ_hatY_M_periodicity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 109,
           "entryIds": [
-            "evensector_006_claim_recover_Z_Y"
+            "transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 110,
           "entryIds": [
-            "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y"
+            "transfer_matrix_015_claim_Z_Y_generate_algebra"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 111,
           "entryIds": [
-            "TV1_hatZ_hatY_002_claim_nesting_commutator"
+            "evensector_006_claim_recover_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 112,
           "entryIds": [
-            "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion"
+            "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 113,
           "entryIds": [
-            "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient"
+            "TV1_hatZ_hatY_002_claim_nesting_commutator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 114,
           "entryIds": [
-            "TV1_hatZ_hatY_006_claim_exp_conjugation"
+            "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 115,
           "entryIds": [
-            "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group"
+            "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 116,
           "entryIds": [
-            "TV1_hatZ_hatY_012_claim_TV1_TV2_actions"
+            "TV1_hatZ_hatY_006_claim_exp_conjugation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 117,
           "entryIds": [
-            "TV1_hatZ_hatY_013_definition_product_maps"
+            "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 118,
           "entryIds": [
-            "TV1_hatZ_hatY_014_claim_product_action_computation"
+            "TV1_hatZ_hatY_012_claim_TV1_TV2_actions"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 119,
           "entryIds": [
-            "TV1_hatZ_hatY_016_definition_T_V"
+            "TV1_hatZ_hatY_013_definition_product_maps"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 120,
           "entryIds": [
-            "TV1_hatZ_hatY_016a_claim_duality_c2_star"
+            "TV1_hatZ_hatY_014_claim_product_action_computation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 121,
           "entryIds": [
-            "TV1_hatZ_hatY_017_definition_A_theta"
+            "TV1_hatZ_hatY_016_definition_T_V"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 122,
           "entryIds": [
-            "Athetatilde_001_definition_gamma1_gamma2"
+            "TV1_hatZ_hatY_016a_claim_duality_c2_star"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 123,
           "entryIds": [
-            "TV1_hatZ_hatY_018_claim_T_V_action"
+            "TV1_hatZ_hatY_017_definition_A_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 124,
           "entryIds": [
-            "TV1_hatZ_hatY_019_definition_theta_mu"
+            "Athetatilde_001_definition_gamma1_gamma2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 125,
           "entryIds": [
-            "TV1_hatZ_hatY_020_definition_gamma1_gamma2"
+            "TV1_hatZ_hatY_018_claim_T_V_action"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 126,
           "entryIds": [
-            "TV1_hatZ_hatY_021_claim_arg_gamma1_gamma2"
+            "TV1_hatZ_hatY_019_definition_theta_mu"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 127,
           "entryIds": [
-            "TV1_hatZ_hatY_022_claim_gamma2_theta_is_0"
+            "TV1_hatZ_hatY_020_definition_gamma1_gamma2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 128,
           "entryIds": [
-            "Athetatilde_002_claim_gamma2_nonzero"
+            "TV1_hatZ_hatY_021_claim_arg_gamma1_gamma2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 129,
           "entryIds": [
-            "TV1_hatZ_hatY_023_claim_relation_of_gamma2"
+            "TV1_hatZ_hatY_022_claim_gamma2_theta_is_0"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 130,
           "entryIds": [
-            "TV1_hatZ_hatY_024_claim_arg_of_gamma2_mu"
+            "Athetatilde_002_claim_gamma2_nonzero"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 131,
           "entryIds": [
-            "Athetatilde_003_claim_relation_of_gamma2"
+            "TV1_hatZ_hatY_023_claim_relation_of_gamma2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 132,
           "entryIds": [
-            "TV1_hatZ_hatY_025_claim_arg_gamma2_sum"
+            "TV1_hatZ_hatY_024_claim_arg_of_gamma2_mu"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 133,
           "entryIds": [
-            "TV1_hatZ_hatY_026_claim_arg_gamma2_quotient"
+            "Athetatilde_003_claim_relation_of_gamma2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 134,
           "entryIds": [
-            "TV1_hatZ_hatY_027_claim_eigenvector_A_theta"
+            "TV1_hatZ_hatY_025_claim_arg_gamma2_sum"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 135,
           "entryIds": [
-            "Athetatilde_004_claim_eigenvector"
+            "TV1_hatZ_hatY_026_claim_arg_gamma2_quotient"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 136,
           "entryIds": [
-            "TV1_hatZ_hatY_029_claim_a_theta_mu"
+            "TV1_hatZ_hatY_027_claim_eigenvector_A_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 137,
           "entryIds": [
-            "TV1_hatZ_hatY_034a_definition_gamma_theta_mu"
+            "Athetatilde_004_claim_eigenvector"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 138,
           "entryIds": [
-            "TV1_hatZ_hatY_036_claim_gamma1_geq_1"
+            "TV1_hatZ_hatY_029_claim_a_theta_mu"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 139,
           "entryIds": [
-            "freeenergy_001_claim_gamma1_lower_bound_all_theta"
+            "TV1_hatZ_hatY_034a_definition_gamma_theta_mu"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 140,
           "entryIds": [
-            "critical_003_claim_gamma_kappa_identity"
+            "TV1_hatZ_hatY_036_claim_gamma1_geq_1"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 141,
           "entryIds": [
-            "critical_005_claim_isotropic_setting"
+            "freeenergy_001_claim_gamma1_lower_bound_all_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 142,
           "entryIds": [
-            "critical_007_claim_gamma_derivatives_in_kappa"
+            "critical_003_claim_gamma_kappa_identity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 143,
           "entryIds": [
-            "freeenergy_002_claim_gamma_is_continuous"
+            "critical_005_claim_isotropic_setting"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 144,
           "entryIds": [
-            "TV1_hatZ_hatY_037_claim_factorization_A_theta"
+            "critical_007_claim_gamma_derivatives_in_kappa"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 145,
           "entryIds": [
-            "evensectorT_007_definition_B1_B2"
+            "freeenergy_002_claim_gamma_is_continuous"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 146,
           "entryIds": [
-            "evensectorT_009_claim_factorization_A_theta"
+            "TV1_hatZ_hatY_037_claim_factorization_A_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 147,
           "entryIds": [
-            "TV1_hatZ_hatY_035_claim_det_A_theta"
+            "evensectorT_007_definition_B1_B2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 148,
           "entryIds": [
-            "Athetatilde_006_claim_det_A"
+            "evensectorT_009_claim_factorization_A_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 149,
           "entryIds": [
-            "Athetatilde_007_claim_gamma1_gt_1"
+            "TV1_hatZ_hatY_035_claim_det_A_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 150,
           "entryIds": [
-            "Athetatilde_008_definition_gamma_theta_tilde"
+            "Athetatilde_006_claim_det_A"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 151,
           "entryIds": [
-            "TV1_hatZ_hatY_034b_claim_lambda_pm_exp_gamma"
+            "Athetatilde_007_claim_gamma1_gt_1"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 152,
           "entryIds": [
-            "Athetatilde_009_claim_lambda_eq_exp_gamma"
+            "Athetatilde_008_definition_gamma_theta_tilde"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 153,
           "entryIds": [
-            "TV1_hatZ_hatY_041_claim_gamma2_periodicity"
+            "TV1_hatZ_hatY_034b_claim_lambda_pm_exp_gamma"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 154,
           "entryIds": [
-            "TV1_hatZ_hatY_045_claim_A_theta_is_identity"
+            "Athetatilde_009_claim_lambda_eq_exp_gamma"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 155,
           "entryIds": [
-            "TV1_hatZ_hatY_028_claim_P_mu_D_mu"
+            "TV1_hatZ_hatY_041_claim_gamma2_periodicity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 156,
           "entryIds": [
-            "Athetatilde_005_claim_diagonalization"
+            "TV1_hatZ_hatY_045_claim_A_theta_is_identity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 157,
           "entryIds": [
-            "evenfermi_002_claim_periodicity"
+            "TV1_hatZ_hatY_028_claim_P_mu_D_mu"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 158,
           "entryIds": [
-            "TV1_hatZ_hatY_030_definition_fermi"
+            "Athetatilde_005_claim_diagonalization"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 159,
           "entryIds": [
-            "TV1_hatZ_hatY_031_claim_V_psi_commutator"
+            "evenfermi_002_claim_periodicity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 160,
           "entryIds": [
-            "TV1_hatZ_hatY_032_claim_anticommutator_psi"
+            "TV1_hatZ_hatY_030_definition_fermi"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 161,
           "entryIds": [
-            "eigenvalues_of_V_006_claim_number_operators_commute"
+            "TV1_hatZ_hatY_031_claim_V_psi_commutator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 162,
           "entryIds": [
-            "eigenvalues_of_V_007_claim_trace_of_number_operator_product"
+            "TV1_hatZ_hatY_032_claim_anticommutator_psi"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 163,
           "entryIds": [
-            "TV1_hatZ_hatY_033_definition_Vprime"
+            "eigenvalues_of_V_006_claim_number_operators_commute"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 164,
           "entryIds": [
-            "eigenvalues_of_V_004_definition_number_operator"
+            "eigenvalues_of_V_007_claim_trace_of_number_operator_product"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 165,
           "entryIds": [
-            "eigenvalues_of_V_005_claim_number_operator_idempotent"
+            "TV1_hatZ_hatY_033_definition_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 166,
           "entryIds": [
-            "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition"
+            "eigenvalues_of_V_004_definition_number_operator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 167,
           "entryIds": [
-            "eigenvalues_of_V_009_claim_eigenvalues_of_Vprime"
+            "eigenvalues_of_V_005_claim_number_operator_idempotent"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 168,
           "entryIds": [
-            "eigenvalues_of_V_010_claim_trace_of_Vprime"
+            "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 169,
           "entryIds": [
-            "TV1_hatZ_hatY_038_claim_action_T_Vprime_psi"
+            "eigenvalues_of_V_009_claim_eigenvalues_of_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 170,
           "entryIds": [
-            "TV1_hatZ_hatY_042_claim_T_Vprime_fixes_hatZ_hatY_gamma2_zero"
+            "eigenvalues_of_V_010_claim_trace_of_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 171,
           "entryIds": [
-            "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY"
+            "TV1_hatZ_hatY_038_claim_action_T_Vprime_psi"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 172,
           "entryIds": [
-            "TV1_hatZ_hatY_039_claim_T_V_eq_T_Vprime"
+            "TV1_hatZ_hatY_042_claim_T_Vprime_fixes_hatZ_hatY_gamma2_zero"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 173,
           "entryIds": [
-            "TV1_hatZ_hatY_040_claim_V_eq_cVprime"
+            "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 174,
           "entryIds": [
-            "eigenvalues_of_V_015_claim_V_is_positive_definite"
+            "TV1_hatZ_hatY_039_claim_T_V_eq_T_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 175,
           "entryIds": [
-            "eigenvalues_of_V_017_claim_constant_c_value"
+            "TV1_hatZ_hatY_040_claim_V_eq_cVprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 176,
           "entryIds": [
-            "eigenvalues_of_V_018_claim_eigenvalues_of_V"
+            "eigenvalues_of_V_015_claim_V_is_positive_definite"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 177,
           "entryIds": [
-            "bridge_012_claim_partition_function_sector_decomposition"
+            "eigenvalues_of_V_017_claim_constant_c_value"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 178,
           "entryIds": [
-            "freeenergy_005_theorem_onsager_expression"
+            "eigenvalues_of_V_018_claim_eigenvalues_of_V"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 179,
           "entryIds": [
-            "maxeig_claim_symmetrized_transfer_matrix_on_sectors"
+            "bridge_012_claim_partition_function_sector_decomposition"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 180,
           "entryIds": [
-            "maxeig_010_claim_sector_decomposition_of_c"
+            "freeenergy_005_theorem_onsager_expression"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 181,
           "entryIds": [
-            "TV1_hatZ_hatY_044_claim_critical_condition"
+            "maxeig_claim_symmetrized_transfer_matrix_on_sectors"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 182,
           "entryIds": [
-            "critical_004_claim_critical_point_iff_kappa_zero"
+            "maxeig_010_claim_sector_decomposition_of_c"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 183,
           "entryIds": [
-            "critical_006_claim_kappa_of_K_basic"
+            "TV1_hatZ_hatY_044_claim_critical_condition"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 184,
           "entryIds": [
-            "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y"
+            "critical_004_claim_critical_point_iff_kappa_zero"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 185,
           "entryIds": [
-            "evensector_001_claim_why_minus_only"
+            "critical_006_claim_kappa_of_K_basic"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 186,
           "entryIds": [
-            "evensector_004_claim_commutator_H_check_Z_Y"
+            "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 187,
           "entryIds": [
-            "evensector_005_claim_anticommutator_check_Z_Y"
+            "evensector_001_claim_why_minus_only"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 188,
           "entryIds": [
-            "evensectorT_002_claim_nesting_commutator"
+            "evensector_004_claim_commutator_H_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 189,
           "entryIds": [
-            "evensectorT_003_claim_coefficient_conversion"
+            "evensector_005_claim_anticommutator_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 190,
           "entryIds": [
-            "evensectorT_004_claim_extract_taylor"
+            "evensectorT_002_claim_nesting_commutator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 191,
           "entryIds": [
-            "evensectorT_005_claim_T_actions"
+            "evensectorT_003_claim_coefficient_conversion"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 192,
           "entryIds": [
-            "evensectorT_008_claim_product_action"
+            "evensectorT_004_claim_extract_taylor"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 193,
           "entryIds": [
-            "evenfermi_001_definition_check_fermi"
+            "evensectorT_005_claim_T_actions"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 194,
           "entryIds": [
-            "evenfermi_003_claim_anticommutator"
+            "evensectorT_008_claim_product_action"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 195,
           "entryIds": [
-            "evenfermi_005_definition_check_Vprime"
+            "evenfermi_001_definition_check_fermi"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 196,
           "entryIds": [
-            "evenEigen_001_definition_check_number_operator"
+            "evenfermi_003_claim_anticommutator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 197,
           "entryIds": [
-            "evenEigen_002_claim_check_number_operator_idempotent"
+            "evenfermi_005_definition_check_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 198,
           "entryIds": [
-            "evenEigen_003_claim_check_number_operators_commute"
+            "evenEigen_001_definition_check_number_operator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 199,
           "entryIds": [
-            "evenEigen_004_claim_trace_of_check_number_operator_product"
+            "evenEigen_002_claim_check_number_operator_idempotent"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 200,
           "entryIds": [
-            "evenEigen_005_claim_check_joint_eigenspace_decomposition"
+            "evenEigen_003_claim_check_number_operators_commute"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 201,
           "entryIds": [
-            "closing_001_claim_epsilon_anticommutes"
+            "evenEigen_004_claim_trace_of_check_number_operator_product"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 202,
           "entryIds": [
-            "closing_002_claim_epsilon_eigenvalue_on_check_Q"
+            "evenEigen_005_claim_check_joint_eigenspace_decomposition"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 203,
           "entryIds": [
-            "closing_008_claim_check_Q_is_hermitian"
+            "closing_001_claim_epsilon_anticommutes"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 204,
           "entryIds": [
-            "evenEigen_006_claim_eigenvalues_of_check_Vprime"
+            "closing_002_claim_epsilon_eigenvalue_on_check_Q"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 205,
           "entryIds": [
-            "evenEigen_007_claim_trace_of_check_Vprime"
+            "closing_008_claim_check_Q_is_hermitian"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 206,
           "entryIds": [
-            "evenfermi_006_claim_action_T_check_Vprime"
+            "evenEigen_006_claim_eigenvalues_of_check_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 207,
           "entryIds": [
-            "evensectorT_010_claim_T_V_plus_action"
+            "evenEigen_007_claim_trace_of_check_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 208,
           "entryIds": [
-            "evenfermi_004_claim_commutation_V_plus_psi"
+            "evenfermi_006_claim_action_T_check_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 209,
           "entryIds": [
-            "evenfermi_007_claim_T_eq_on_check_Z_Y"
+            "evensectorT_010_claim_T_V_plus_action"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 210,
           "entryIds": [
-            "evenfermi_008_claim_T_eq"
+            "evenfermi_004_claim_commutation_V_plus_psi"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 211,
           "entryIds": [
-            "evenfermi_009_claim_V_plus_eq_c_Vprime"
+            "evenfermi_007_claim_T_eq_on_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 212,
           "entryIds": [
-            "evenEigen_009_claim_constant_c_value_even_sector"
+            "evenfermi_008_claim_T_eq"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 213,
           "entryIds": [
-            "evenEigen_010_theorem_eigenvalues_of_V_plus"
+            "evenfermi_009_claim_V_plus_eq_c_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 214,
           "entryIds": [
-            "closing_003_claim_trace_epsilon_V_plus_via_eigenvalues"
+            "evenEigen_009_claim_constant_c_value_even_sector"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 215,
           "entryIds": [
-            "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
+            "evenEigen_010_theorem_eigenvalues_of_V_plus"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 216,
           "entryIds": [
-            "closing_007_theorem_max_eigenvector_in_even_sector"
+            "closing_003_claim_trace_epsilon_V_plus_via_eigenvalues"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 217,
           "entryIds": [
-            "closing_009_theorem_c_plus_equals_Lambda_half"
+            "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 218,
           "entryIds": [
-            "closing_010_theorem_onsager_exact_solution"
+            "closing_007_theorem_max_eigenvector_in_even_sector"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 219,
           "entryIds": [
-            "critical_011_theorem_second_derivative_log_divergence"
+            "closing_009_theorem_c_plus_equals_Lambda_half"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 220,
           "entryIds": [
-            "critical_012_theorem_specific_heat_log_divergence"
+            "closing_010_theorem_onsager_exact_solution"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 221,
+          "entryIds": [
+            "critical_011_theorem_second_derivative_log_divergence"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 222,
+          "entryIds": [
+            "critical_012_theorem_specific_heat_log_divergence"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 223,
           "entryIds": [
             "sector_004_theorem_c_equals_c_plus"
           ],
@@ -6195,6 +6212,22 @@
         },
         {
           "dependentId": "transfer_matrix_009_claim_exp_sum",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "transfer_matrix_011a_definition_H1_pm",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "transfer_matrix_011a_definition_H1_pm",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "transfer_matrix_011b_definition_H2",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "transfer_matrix_011b_definition_H2",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
@@ -8215,7 +8248,6 @@
     "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi",
     "calculation_formulae_039_claim_sqrt_expansion_via_polar",
     "transfer_matrix_009_claim_exp_sum",
-    "transfer_matrix_011_definition_H1_H2",
     "TV1_hatZ_hatY_002_claim_nesting_commutator",
     "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion",
     "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient",
@@ -13537,7 +13569,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [
           "site"
         ],
@@ -13600,7 +13632,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [
           "site"
         ],
@@ -14329,7 +14361,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 61,
+        "incomingReferenceCount": 58,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -15457,7 +15489,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 11,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -15674,10 +15706,140 @@
       }
     },
     {
+      "id": "transfer_matrix_011a_definition_H1_pm",
+      "kind": "definition",
+      "title": "\\text{一般生成子 } H_1^{(\\pm)}",
+      "titleFormat": "tex",
+      "labels": [
+        "def_H1_pm"
+      ],
+      "sourceFile": "004_transfer_matrix.ts",
+      "sourceOrdinal": 11,
+      "provisionalFinalChapter": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 5,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 807,
+        "inspectedContentSha256": "dfc81731af0ba20b0b55f24ece9bd7606be5b77df1b7d0bc4f631f05b48bfc67",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_jordan_wigner_Y_matrices",
+        "def_jordan_wigner_Z_matrices",
+        "definition_of_cc",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "transfer_matrix_000c_definition_jordan_wigner_Z_matrices",
+        "transfer_matrix_000d_definition_jordan_wigner_Y_matrices"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [
+        "hatZ_hatY_anticommutation_001_claim_anticommutation_relations"
+      ],
+      "dependencyPlacement": {
+        "chapterOrder": 65,
+        "dependencyUnitEntryIds": [
+          "transfer_matrix_011a_definition_H1_pm"
+        ]
+      }
+    },
+    {
+      "id": "transfer_matrix_011b_definition_H2",
+      "kind": "definition",
+      "title": "\\text{一般生成子 } H_2",
+      "titleFormat": "tex",
+      "labels": [
+        "def_H2"
+      ],
+      "sourceFile": "004_transfer_matrix.ts",
+      "sourceOrdinal": 11,
+      "provisionalFinalChapter": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 747,
+        "inspectedContentSha256": "bb2a1f07abbde474e4ac69b14bc53c37882f6689b6e87b552b3b57cdf3ad5381",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_jordan_wigner_Y_matrices",
+        "def_jordan_wigner_Z_matrices",
+        "definition_of_cc",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "transfer_matrix_000c_definition_jordan_wigner_Z_matrices",
+        "transfer_matrix_000d_definition_jordan_wigner_Y_matrices"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [
+        "transfer_matrix_011a_definition_H1_pm"
+      ],
+      "dependencyPlacement": {
+        "chapterOrder": 66,
+        "dependencyUnitEntryIds": [
+          "transfer_matrix_011b_definition_H2"
+        ]
+      }
+    },
+    {
       "id": "transfer_matrix_011_definition_H1_H2",
       "kind": "definition",
-      "title": null,
-      "titleFormat": null,
+      "title": "一般生成子による転送行列の指数表示",
+      "titleFormat": "text",
       "labels": [
         "def_H1_H2"
       ],
@@ -15687,9 +15849,9 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [
-          "transfer"
+          "転送"
         ],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -15698,36 +15860,45 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1034,
-        "inspectedContentSha256": "02a14a895094a781e52c134f1e31763509ed2b747896f18cab3c7564c6c226fb",
+        "inspectedCharacterCount": 1052,
+        "inspectedContentSha256": "ed4789ae14478fd457b3fab25bfc2c503dd5b4adaf5da43b7e493137555eab72",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
           "statement",
           "proof"
         ],
-        "manualReview": "一般の生成子 H1^{(±)} と H2 の二定義に加え、既存の V1^{(±)} と V2 の指数表示を同じブロックへ束ねている。今回確定する節では外部入力として扱い、将来一ブロック一定義へ分割した後に依存順と節境界を再判定する必要がある。"
+        "manualReview": "一般の生成子 H1^{(±)} と H2 の定義は独立項へ分離済みである。残る V1^{(±)} と V2 の指数表示を同じブロックへ束ねているため、将来一ブロック一表示へ分割した後に依存順と節境界を再判定する必要がある。"
       },
       "dependsOnLabels": [
         "V2_in_Z_Y",
+        "def_H1_pm",
+        "def_H2",
         "def_V1_pm",
         "def_transfer_matrix_symbols"
       ],
       "dependsOnEntryIds": [
         "transfer_matrix_001_definition_symbols",
         "transfer_matrix_003a_claim_V2_in_Z_Y",
-        "transfer_matrix_007_definition_V1_pm"
+        "transfer_matrix_007_definition_V1_pm",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
-      "semanticPrerequisiteLabels": [],
+      "semanticPrerequisiteLabels": [
+        "def_H1_pm",
+        "def_H2"
+      ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": true,
-      "presentationPredecessorEntryIds": [],
+      "presentationPredecessorEntryIds": [
+        "transfer_matrix_011b_definition_H2"
+      ],
       "dependencyPlacement": {
-        "chapterOrder": 65,
+        "chapterOrder": 67,
         "dependencyUnitEntryIds": [
           "transfer_matrix_011_definition_H1_H2"
         ]
@@ -15756,8 +15927,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6675,
-        "inspectedContentSha256": "fa0da89d1eaa177fbb02145727f1ccab579dccb743b85729b4b506fab3cfe796",
+        "inspectedCharacterCount": 6667,
+        "inspectedContentSha256": "ad9546fb95631bd7de0d0ade4c696c9936d8a924f522c5b9ba86baca579ceb21",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15767,13 +15938,16 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "dependsOnEntryIds": [
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -15781,9 +15955,11 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
+      "presentationPredecessorEntryIds": [
+        "transfer_matrix_011_definition_H1_H2"
+      ],
       "dependencyPlacement": {
-        "chapterOrder": 104,
+        "chapterOrder": 106,
         "dependencyUnitEntryIds": [
           "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY"
         ]
@@ -15839,7 +16015,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 106,
+        "chapterOrder": 108,
         "dependencyUnitEntryIds": [
           "transfer_matrix_013_claim_hatZ_hatY_M_periodicity"
         ]
@@ -15900,7 +16076,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 107,
+        "chapterOrder": 109,
         "dependencyUnitEntryIds": [
           "transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY"
         ]
@@ -15966,7 +16142,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 108,
+        "chapterOrder": 110,
         "dependencyUnitEntryIds": [
           "transfer_matrix_015_claim_Z_Y_generate_algebra"
         ]
@@ -16678,7 +16854,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 184,
+        "chapterOrder": 186,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y"
         ]
@@ -16788,7 +16964,8 @@
       "dependsOnLabels": [
         "H1_H2_via_hatZ_hatY",
         "anticommutator_of_hat_Z_and_hat_Y",
-        "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "def_delta_M",
         "def_hatZ_hatY",
         "definition_of_cc",
@@ -16803,14 +16980,16 @@
         "transfer_matrix_008_definition_delta_M",
         "transfer_matrix_009_claim_exp_sum",
         "transfer_matrix_010_definition_hatZ_hatY",
-        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2",
         "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY",
         "transfer_matrix_013_claim_hatZ_hatY_M_periodicity"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [
         "why_008_applies_only_to_minus_sector"
@@ -16822,7 +17001,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 110,
+        "chapterOrder": 112,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_001_claim_commutator_H_Z_Y"
         ]
@@ -16866,7 +17045,8 @@
       "dependsOnLabels": [
         "H1_H2_via_hatZ_hatY",
         "commutator_of_H_and_Z_Y",
-        "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "def_hatZ_hatY",
         "definition_of_cc",
         "scalar_identity_commutes",
@@ -16878,13 +17058,15 @@
         "calculation_formulae_definition_set_and_algebra_notation",
         "linear_space_general_002_claim_scalar_identity_commutes",
         "transfer_matrix_010_definition_hatZ_hatY",
-        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2",
         "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -16894,7 +17076,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 111,
+        "chapterOrder": 113,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_002_claim_nesting_commutator"
         ]
@@ -16936,7 +17118,8 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "definition_of_cc",
         "nesting_of_commutator_of_H_and_Z",
         "set_and_algebra_notation"
@@ -16945,12 +17128,14 @@
         "TV1_hatZ_hatY_002_claim_nesting_commutator",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -16960,7 +17145,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 112,
+        "chapterOrder": 114,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion"
         ]
@@ -17057,16 +17242,19 @@
       },
       "dependsOnLabels": [
         "cosh_sinh_coefficient_conversion",
-        "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "nesting_of_commutator_of_H_and_Z"
       ],
       "dependsOnEntryIds": [
         "TV1_hatZ_hatY_002_claim_nesting_commutator",
         "TV1_hatZ_hatY_003_claim_cosh_sinh_coefficient_conversion",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -17076,7 +17264,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 113,
+        "chapterOrder": 115,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_005_claim_extract_taylor_coefficient"
         ]
@@ -17154,7 +17342,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 114,
+        "chapterOrder": 116,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_006_claim_exp_conjugation"
         ]
@@ -17439,7 +17627,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 115,
+        "chapterOrder": 117,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_010a_claim_V2_not_in_clifford_group"
         ]
@@ -17659,8 +17847,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 8378,
-        "inspectedContentSha256": "a141367fe6ad75a334e9a572fd08515e79c77bfc84edaf8e1b8c725085e5d0e5",
+        "inspectedCharacterCount": 8452,
+        "inspectedContentSha256": "41303ae48fd77441260e95210731bec9822e2df8c6bd1eea573db88693b790db",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -17671,6 +17859,8 @@
       },
       "dependsOnLabels": [
         "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "definition_of_cc",
         "exp_X_Y_exp_-X",
         "extract_taylor_coefficient_of_Z_Y",
@@ -17681,11 +17871,14 @@
         "TV1_hatZ_hatY_006_claim_exp_conjugation",
         "calc_formulae_006_definition_of_cc",
         "linear_space_general_002_claim_scalar_identity_commutes",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -17695,7 +17888,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 116,
+        "chapterOrder": 118,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_012_claim_TV1_TV2_actions"
         ]
@@ -17743,7 +17936,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 117,
+        "chapterOrder": 119,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_013_definition_product_maps"
         ]
@@ -17797,7 +17990,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 118,
+        "chapterOrder": 120,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_014_claim_product_action_computation"
         ]
@@ -17916,7 +18109,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 119,
+        "chapterOrder": 121,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_016_definition_T_V"
         ]
@@ -17976,7 +18169,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 120,
+        "chapterOrder": 122,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_016a_claim_duality_c2_star"
         ]
@@ -18032,7 +18225,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 121,
+        "chapterOrder": 123,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_017_definition_A_theta"
         ]
@@ -18106,7 +18299,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 123,
+        "chapterOrder": 125,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_018_claim_T_V_action"
         ]
@@ -18162,7 +18355,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 144,
+        "chapterOrder": 146,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_037_claim_factorization_A_theta"
         ]
@@ -18212,7 +18405,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 124,
+        "chapterOrder": 126,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_019_definition_theta_mu"
         ]
@@ -18269,7 +18462,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 125,
+        "chapterOrder": 127,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_020_definition_gamma1_gamma2"
         ]
@@ -18342,7 +18535,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 126,
+        "chapterOrder": 128,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_021_claim_arg_gamma1_gamma2"
         ]
@@ -18413,7 +18606,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 127,
+        "chapterOrder": 129,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_022_claim_gamma2_theta_is_0"
         ]
@@ -18469,7 +18662,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 129,
+        "chapterOrder": 131,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_023_claim_relation_of_gamma2"
         ]
@@ -18529,7 +18722,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 130,
+        "chapterOrder": 132,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_024_claim_arg_of_gamma2_mu"
         ]
@@ -18589,7 +18782,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 132,
+        "chapterOrder": 134,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_025_claim_arg_gamma2_sum"
         ]
@@ -18672,7 +18865,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 133,
+        "chapterOrder": 135,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_026_claim_arg_gamma2_quotient"
         ]
@@ -18738,7 +18931,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 134,
+        "chapterOrder": 136,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_027_claim_eigenvector_A_theta"
         ]
@@ -18805,7 +18998,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 155,
+        "chapterOrder": 157,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_028_claim_P_mu_D_mu"
         ]
@@ -18875,7 +19068,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 136,
+        "chapterOrder": 138,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_029_claim_a_theta_mu"
         ]
@@ -18951,7 +19144,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 158,
+        "chapterOrder": 160,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_030_definition_fermi"
         ]
@@ -19017,7 +19210,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 159,
+        "chapterOrder": 161,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_031_claim_V_psi_commutator"
         ]
@@ -19088,7 +19281,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 160,
+        "chapterOrder": 162,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_032_claim_anticommutator_psi"
         ]
@@ -19158,7 +19351,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 147,
+        "chapterOrder": 149,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_035_claim_det_A_theta"
         ]
@@ -19212,7 +19405,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 138,
+        "chapterOrder": 140,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_036_claim_gamma1_geq_1"
         ]
@@ -19268,7 +19461,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 137,
+        "chapterOrder": 139,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_034a_definition_gamma_theta_mu"
         ]
@@ -19328,7 +19521,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 151,
+        "chapterOrder": 153,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_034b_claim_lambda_pm_exp_gamma"
         ]
@@ -19384,7 +19577,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 163,
+        "chapterOrder": 165,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_033_definition_Vprime"
         ]
@@ -19458,7 +19651,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 169,
+        "chapterOrder": 171,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_038_claim_action_T_Vprime_psi"
         ]
@@ -19518,7 +19711,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 154,
+        "chapterOrder": 156,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_045_claim_A_theta_is_identity"
         ]
@@ -19609,7 +19802,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 170,
+        "chapterOrder": 172,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_042_claim_T_Vprime_fixes_hatZ_hatY_gamma2_zero"
         ]
@@ -19697,7 +19890,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 171,
+        "chapterOrder": 173,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_043_claim_T_V_eq_T_Vprime_on_hatZ_hatY"
         ]
@@ -19769,7 +19962,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 172,
+        "chapterOrder": 174,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_039_claim_T_V_eq_T_Vprime"
         ]
@@ -19837,7 +20030,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 173,
+        "chapterOrder": 175,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_040_claim_V_eq_cVprime"
         ]
@@ -19891,7 +20084,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 153,
+        "chapterOrder": 155,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_041_claim_gamma2_periodicity"
         ]
@@ -19959,7 +20152,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 181,
+        "chapterOrder": 183,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_044_claim_critical_condition"
         ]
@@ -20216,7 +20409,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 164,
+        "chapterOrder": 166,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_004_definition_number_operator"
         ]
@@ -20280,7 +20473,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 165,
+        "chapterOrder": 167,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_005_claim_number_operator_idempotent"
         ]
@@ -20338,7 +20531,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 161,
+        "chapterOrder": 163,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_006_claim_number_operators_commute"
         ]
@@ -20401,7 +20594,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 162,
+        "chapterOrder": 164,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_007_claim_trace_of_number_operator_product"
         ]
@@ -20470,7 +20663,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 166,
+        "chapterOrder": 168,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_008_claim_joint_eigenspace_decomposition"
         ]
@@ -20545,7 +20738,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 167,
+        "chapterOrder": 169,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_009_claim_eigenvalues_of_Vprime"
         ]
@@ -20615,7 +20808,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 168,
+        "chapterOrder": 170,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_010_claim_trace_of_Vprime"
         ]
@@ -20873,8 +21066,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9766,
-        "inspectedContentSha256": "d0db638eabbd3f67ab3e07165b00550c189e3af89250349e53cb6cc743563422",
+        "inspectedCharacterCount": 9768,
+        "inspectedContentSha256": "4141a424716b1102fc77a274f0a94030721a4557e0f2dec40b32aab9af28e3bd",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -20884,8 +21077,8 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_H1_H2",
-        "def_V1_pm",
+        "def_H1_pm",
+        "def_H2",
         "def_hermitian_positive_definite",
         "def_kronecker",
         "def_transfer_matrix_symbols",
@@ -20904,13 +21097,14 @@
         "linear_space_general_000b_claim_kronecker_product_rule",
         "linear_space_general_000d_claim_kronecker_transpose",
         "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_007_definition_V1_pm",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -20918,9 +21112,11 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
+      "presentationPredecessorEntryIds": [
+        "transfer_matrix_011_definition_H1_H2"
+      ],
       "dependencyPlacement": {
-        "chapterOrder": 66,
+        "chapterOrder": 68,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_014_claim_iH_is_real_symmetric"
         ]
@@ -20963,7 +21159,7 @@
       },
       "dependsOnLabels": [
         "V_eq_Vprime",
-        "def_H1_H2",
+        "def_H1_pm",
         "def_transfer_matrix_symbols",
         "exp_hermitian_is_positive_definite",
         "iH_is_real_symmetric",
@@ -20983,11 +21179,11 @@
         "exp_linear_map_004_theorem_exp_zero_is_identity",
         "linear_space_general_002_claim_scalar_identity_commutes",
         "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
-        "def_H1_H2"
+        "def_H1_pm"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -20997,7 +21193,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 174,
+        "chapterOrder": 176,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_015_claim_V_is_positive_definite"
         ]
@@ -21028,8 +21224,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 11707,
-        "inspectedContentSha256": "bf0cc5752d2a2ff61c7528355e825e7a2f1be3a0a7f5d21d43928553fc3bfe64",
+        "inspectedCharacterCount": 11701,
+        "inspectedContentSha256": "c9b4e2424f88a58d7eb3829dad7317cedf022377d0b23967bf4e25458f1373cb",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21039,8 +21235,8 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_H1_H2",
-        "def_V1_pm",
+        "def_H1_pm",
+        "def_H2",
         "def_transfer_matrix_symbols",
         "definition_of_cc",
         "iH_is_real_symmetric",
@@ -21055,13 +21251,14 @@
         "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
         "linear_space_general_000b_claim_kronecker_product_rule",
         "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_007_definition_V1_pm",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -21071,7 +21268,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 67,
+        "chapterOrder": 69,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_016_claim_sign_flip_conjugation"
         ]
@@ -21148,7 +21345,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 175,
+        "chapterOrder": 177,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_017_claim_constant_c_value"
         ]
@@ -21212,7 +21409,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 176,
+        "chapterOrder": 178,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_018_claim_eigenvalues_of_V"
         ]
@@ -22274,7 +22471,7 @@
       },
       "dependsOnLabels": [
         "V_eq_Vprime",
-        "def_H1_H2",
+        "def_H1_pm",
         "def_epsilon_projectors",
         "definition_of_cc",
         "eigenvalues_of_V",
@@ -22296,11 +22493,11 @@
         "eigenvalues_of_V_002_claim_trace_properties",
         "eigenvalues_of_V_018_claim_eigenvalues_of_V",
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -22310,7 +22507,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 177,
+        "chapterOrder": 179,
         "dependencyUnitEntryIds": [
           "bridge_012_claim_partition_function_sector_decomposition"
         ]
@@ -22531,8 +22728,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4732,
-        "inspectedContentSha256": "2cbfb2d79ed95a09699d8d990efb810a203709788487d03dbd74d570ec4155e0",
+        "inspectedCharacterCount": 4714,
+        "inspectedContentSha256": "6ec9cb65bd107d9f7bd5f853040e61b8f01a5269d2a378b759e32bfcc564a5e8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22543,11 +22740,11 @@
       },
       "dependsOnLabels": [
         "def_H1_H2",
+        "def_H2",
         "def_exp",
         "def_hermitian_positive_definite",
         "def_symmetrized_transfer_matrix",
         "def_transfer_matrix_square_root",
-        "def_transfer_matrix_symbols",
         "exp_hermitian_is_positive_definite",
         "iH_is_real_symmetric",
         "star_preserves_norm_and_limits"
@@ -22560,11 +22757,11 @@
         "exp_linear_map_002_definition_exp_of_endomorphism",
         "maxeig_001_definition_transfer_matrix_square_root",
         "maxeig_001a_definition_symmetrized_transfer_matrix",
-        "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
-        "def_H1_H2",
+        "def_H2",
         "def_symmetrized_transfer_matrix"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
@@ -22575,7 +22772,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 91,
+        "chapterOrder": 93,
         "dependencyUnitEntryIds": [
           "maxeig_003_claim_W_is_positive_definite"
         ]
@@ -22764,7 +22961,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 92,
+        "chapterOrder": 94,
         "dependencyUnitEntryIds": [
           "maxeig_006_definition_rayleigh_sup"
         ]
@@ -22831,7 +23028,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 93,
+        "chapterOrder": 95,
         "dependencyUnitEntryIds": [
           "maxeig_007_claim_operator_bound"
         ]
@@ -22893,7 +23090,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 94,
+        "chapterOrder": 96,
         "dependencyUnitEntryIds": [
           "maxeig_008a_claim_trace_power_upper_bound"
         ]
@@ -22957,7 +23154,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 95,
+        "chapterOrder": 97,
         "dependencyUnitEntryIds": [
           "maxeig_008b_claim_moment_log_convexity"
         ]
@@ -23023,7 +23220,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 96,
+        "chapterOrder": 98,
         "dependencyUnitEntryIds": [
           "maxeig_008_claim_trace_power_sandwich"
         ]
@@ -23087,7 +23284,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 97,
+        "chapterOrder": 99,
         "dependencyUnitEntryIds": [
           "maxeig_009_claim_partition_function_sandwich"
         ]
@@ -23162,7 +23359,7 @@
         "maxeig_009_claim_partition_function_sandwich"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 99,
+        "chapterOrder": 101,
         "dependencyUnitEntryIds": [
           "maxeig_010a_definition_sector_rayleigh_sup"
         ]
@@ -23224,7 +23421,7 @@
         "maxeig_010a_definition_sector_rayleigh_sup"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 100,
+        "chapterOrder": 102,
         "dependencyUnitEntryIds": [
           "maxeig_010b_claim_epsilon_commutes_with_W"
         ]
@@ -23300,7 +23497,7 @@
         "maxeig_010b_claim_epsilon_commutes_with_W"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 179,
+        "chapterOrder": 181,
         "dependencyUnitEntryIds": [
           "maxeig_claim_symmetrized_transfer_matrix_on_sectors"
         ]
@@ -23384,7 +23581,7 @@
         "maxeig_claim_symmetrized_transfer_matrix_on_sectors"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 180,
+        "chapterOrder": 182,
         "dependencyUnitEntryIds": [
           "maxeig_010_claim_sector_decomposition_of_c"
         ]
@@ -23452,7 +23649,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 139,
+        "chapterOrder": 141,
         "dependencyUnitEntryIds": [
           "freeenergy_001_claim_gamma1_lower_bound_all_theta"
         ]
@@ -23517,7 +23714,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 143,
+        "chapterOrder": 145,
         "dependencyUnitEntryIds": [
           "freeenergy_002_claim_gamma_is_continuous"
         ]
@@ -23581,7 +23778,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 98,
+        "chapterOrder": 100,
         "dependencyUnitEntryIds": [
           "freeenergy_003_claim_limit_in_N_row"
         ]
@@ -23703,7 +23900,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 178,
+        "chapterOrder": 180,
         "dependencyUnitEntryIds": [
           "freeenergy_005_theorem_onsager_expression"
         ]
@@ -23747,7 +23944,7 @@
       "dependsOnLabels": [
         "anticommutator_of_Z_and_Y",
         "commutator_of_H_and_Z_Y",
-        "def_H1_H2",
+        "def_H2",
         "def_hatZ_hatY",
         "def_transfer_matrix_symbols",
         "definition_of_cc",
@@ -23762,11 +23959,11 @@
         "calc_formulae_006_definition_of_cc",
         "transfer_matrix_001_definition_symbols",
         "transfer_matrix_010_definition_hatZ_hatY",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -23776,7 +23973,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 185,
+        "chapterOrder": 187,
         "dependencyUnitEntryIds": [
           "evensector_001_claim_why_minus_only"
         ]
@@ -24100,8 +24297,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 18179,
-        "inspectedContentSha256": "8f79f322d67b170fb7346925a77c023a43d7b7b1f8215b600e1438cc9b03ceca",
+        "inspectedCharacterCount": 18177,
+        "inspectedContentSha256": "9b6dc1853b0726f03420c50c107b21ff5a80fb001ac6a2c71e7a7eb60d2d6f4c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -24113,8 +24310,8 @@
       "dependsOnLabels": [
         "anticommutator_of_Z_and_Y",
         "commutator_of_H_and_Z_Y",
-        "def_H1_H2",
-        "def_V1_pm",
+        "def_H1_pm",
+        "def_H2",
         "def_check_index_set",
         "def_half_integer_modes",
         "def_transfer_matrix_symbols",
@@ -24129,12 +24326,13 @@
         "evensector_003_definition_half_integer_modes",
         "evensector_003a_definition_check_index_set",
         "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_007_definition_V1_pm",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -24144,7 +24342,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 186,
+        "chapterOrder": 188,
         "dependencyUnitEntryIds": [
           "evensector_004_claim_commutator_H_check_Z_Y"
         ]
@@ -24216,7 +24414,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 187,
+        "chapterOrder": 189,
         "dependencyUnitEntryIds": [
           "evensector_005_claim_anticommutator_check_Z_Y"
         ]
@@ -24283,7 +24481,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 109,
+        "chapterOrder": 111,
         "dependencyUnitEntryIds": [
           "evensector_006_claim_recover_Z_Y"
         ]
@@ -24328,7 +24526,8 @@
         "H1_H2_via_hatZ_hatY",
         "antiperiodic_exp_sum",
         "conjugate_index_of_check_Z_Y",
-        "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "def_V1_pm",
         "def_check_index_set",
         "def_half_integer_modes",
@@ -24343,11 +24542,13 @@
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
         "transfer_matrix_001_definition_symbols",
         "transfer_matrix_007_definition_V1_pm",
-        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2",
         "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY"
       ],
       "semanticPrerequisiteLabels": [
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -24357,7 +24558,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 105,
+        "chapterOrder": 107,
         "dependencyUnitEntryIds": [
           "evensector_007_claim_H1_H2_via_check_Z_Y"
         ]
@@ -24389,7 +24590,7 @@
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
         "inspectedCharacterCount": 333,
-        "inspectedContentSha256": "fff8d040f78e719bed462ae839eed9542927f1ae1f0e76c854a28333215ef6be",
+        "inspectedContentSha256": "6d6745a4263d927330b857bc31e119e82066f97a23f7bb81a28829e63d8a500d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -24399,13 +24600,13 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_H1_H2"
+        "def_H1_pm"
       ],
       "dependsOnEntryIds": [
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm"
       ],
       "semanticPrerequisiteLabels": [
-        "def_H1_H2"
+        "def_H1_pm"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -24413,9 +24614,11 @@
       "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
+      "presentationPredecessorEntryIds": [
+        "transfer_matrix_011_definition_H1_H2"
+      ],
       "dependencyPlacement": {
-        "chapterOrder": 68,
+        "chapterOrder": 70,
         "dependencyUnitEntryIds": [
           "evensectorT_definition_H1_plus"
         ]
@@ -24455,18 +24658,18 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_H1_H2",
         "def_H1_plus",
+        "def_H1_pm",
         "definition_of_cc"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "evensectorT_definition_H1_plus",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -24476,7 +24679,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 75,
+        "chapterOrder": 77,
         "dependencyUnitEntryIds": [
           "evensectorT_definition_V1_plus_square_root"
         ]
@@ -24507,8 +24710,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 602,
-        "inspectedContentSha256": "25224f1a0789bbff2c99b11323319f0e297bd6a0f68c213757097e35957e37ef",
+        "inspectedCharacterCount": 584,
+        "inspectedContentSha256": "bfdd1368022990f3d77df5772391bb5b76acfa8b436f100903d8fbc91392abe9",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -24519,19 +24722,19 @@
       },
       "dependsOnLabels": [
         "def_H1_H2",
+        "def_H2",
         "def_V1_plus_square_root",
-        "def_transfer_matrix_symbols",
         "definition_of_cc"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
         "evensectorT_definition_V1_plus_square_root",
-        "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -24541,7 +24744,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 77,
+        "chapterOrder": 79,
         "dependencyUnitEntryIds": [
           "evensectorT_definition_V_plus"
         ]
@@ -24581,7 +24784,7 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_H1_H2",
+        "def_H1_pm",
         "def_V1_plus_square_root",
         "def_invertible_elements_of_R",
         "definition_of_cc",
@@ -24592,11 +24795,11 @@
         "calc_formulae_006_definition_of_cc",
         "evensectorT_definition_V1_plus_square_root",
         "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2",
+        "def_H1_pm",
         "matrix_exp_conjugation"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
@@ -24609,7 +24812,7 @@
         "evenEigen_claim_V_plus_inverse_positive_and_traces"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 84,
+        "chapterOrder": 86,
         "dependencyUnitEntryIds": [
           "evensectorT_claim_V1_plus_half_invertible"
         ]
@@ -24652,6 +24855,7 @@
       },
       "dependsOnLabels": [
         "def_H1_H2",
+        "def_H2",
         "def_invertible_elements_of_R",
         "def_transfer_matrix_symbols",
         "definition_of_cc",
@@ -24662,11 +24866,12 @@
         "calc_formulae_006_definition_of_cc",
         "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
         "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -24678,7 +24883,7 @@
         "evensectorT_claim_V1_plus_half_invertible"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 85,
+        "chapterOrder": 87,
         "dependencyUnitEntryIds": [
           "evensectorT_claim_V2_invertible"
         ]
@@ -24744,7 +24949,7 @@
         "evensectorT_claim_V2_invertible"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 86,
+        "chapterOrder": 88,
         "dependencyUnitEntryIds": [
           "evensectorT_claim_V_plus_factors_invertible"
         ]
@@ -24810,7 +25015,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 89,
+        "chapterOrder": 91,
         "dependencyUnitEntryIds": [
           "evensectorT_definition_T_V_plus"
         ]
@@ -24850,7 +25055,7 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_H1_H2",
+        "def_H1_pm",
         "def_V1_plus_square_root",
         "def_V1_pm",
         "theorem_exp_product"
@@ -24859,10 +25064,10 @@
         "evensectorT_definition_V1_plus_square_root",
         "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
         "transfer_matrix_007_definition_V1_pm",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm"
       ],
       "semanticPrerequisiteLabels": [
-        "def_H1_H2"
+        "def_H1_pm"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -24872,7 +25077,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 76,
+        "chapterOrder": 78,
         "dependencyUnitEntryIds": [
           "evensectorT_claim_V1_plus_square_root"
         ]
@@ -24936,7 +25141,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 90,
+        "chapterOrder": 92,
         "dependencyUnitEntryIds": [
           "evensectorT_claim_T_V_plus_is_conjugation"
         ]
@@ -24979,7 +25184,8 @@
       },
       "dependsOnLabels": [
         "commutator_of_H_and_check_Z_Y",
-        "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "def_V1_pm",
         "def_check_index_set",
         "def_half_integer_modes",
@@ -24999,12 +25205,14 @@
         "linear_space_general_002_claim_scalar_identity_commutes",
         "transfer_matrix_001_definition_symbols",
         "transfer_matrix_007_definition_V1_pm",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -25014,7 +25222,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 188,
+        "chapterOrder": 190,
         "dependencyUnitEntryIds": [
           "evensectorT_002_claim_nesting_commutator"
         ]
@@ -25057,7 +25265,8 @@
       },
       "dependsOnLabels": [
         "cosh_sinh_coefficient_conversion",
-        "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "def_check_index_set",
         "definition_of_cc",
         "nesting_of_commutator_of_H_and_check_Z",
@@ -25069,12 +25278,14 @@
         "calculation_formulae_definition_set_and_algebra_notation",
         "evensectorT_002_claim_nesting_commutator",
         "evensector_003a_definition_check_index_set",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -25084,7 +25295,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 189,
+        "chapterOrder": 191,
         "dependencyUnitEntryIds": [
           "evensectorT_003_claim_coefficient_conversion"
         ]
@@ -25125,7 +25336,8 @@
       },
       "dependsOnLabels": [
         "cosh_sinh_coefficient_conversion_for_check",
-        "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "def_check_index_set",
         "definition_of_cc",
         "matrix_exp_conjugation"
@@ -25135,11 +25347,13 @@
         "evensectorT_003_claim_coefficient_conversion",
         "evensector_003a_definition_check_index_set",
         "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -25149,7 +25363,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 190,
+        "chapterOrder": 192,
         "dependencyUnitEntryIds": [
           "evensectorT_004_claim_extract_taylor"
         ]
@@ -25170,9 +25384,7 @@
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
         "incomingReferenceCount": 2,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
+        "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
@@ -25180,8 +25392,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9077,
-        "inspectedContentSha256": "69107d5c4b60b613cb21ee22a09e14c03dd5eaf5ffbf36afd857974a7415c913",
+        "inspectedCharacterCount": 9019,
+        "inspectedContentSha256": "39083209f90e3c17e344b7bca2a532f8a3731a55d0a12899f1f824aa4999b2a8",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -25192,11 +25404,12 @@
       },
       "dependsOnLabels": [
         "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "def_T_g",
         "def_V1_plus_square_root",
         "def_check_index_set",
         "def_invertible_elements_of_R",
-        "def_transfer_matrix_symbols",
         "definition_of_cc",
         "exp_X_Y_exp_-X",
         "extract_taylor_coefficient_of_check_Z_Y",
@@ -25213,12 +25426,14 @@
         "evensector_003a_definition_check_index_set",
         "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
         "linear_space_general_002_claim_scalar_identity_commutes",
-        "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -25228,7 +25443,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 191,
+        "chapterOrder": 193,
         "dependencyUnitEntryIds": [
           "evensectorT_005_claim_T_actions"
         ]
@@ -25294,7 +25509,7 @@
         "evensectorT_claim_V_plus_factors_invertible"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 87,
+        "chapterOrder": 89,
         "dependencyUnitEntryIds": [
           "evensectorT_006_claim_linearity_of_T"
         ]
@@ -25360,7 +25575,7 @@
         "evensectorT_006_claim_linearity_of_T"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 88,
+        "chapterOrder": 90,
         "dependencyUnitEntryIds": [
           "evensectorT_006a_claim_linearity_of_T_V2"
         ]
@@ -25425,7 +25640,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 145,
+        "chapterOrder": 147,
         "dependencyUnitEntryIds": [
           "evensectorT_007_definition_B1_B2"
         ]
@@ -25483,7 +25698,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 192,
+        "chapterOrder": 194,
         "dependencyUnitEntryIds": [
           "evensectorT_008_claim_product_action"
         ]
@@ -25564,7 +25779,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 146,
+        "chapterOrder": 148,
         "dependencyUnitEntryIds": [
           "evensectorT_009_claim_factorization_A_theta"
         ]
@@ -25641,7 +25856,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 207,
+        "chapterOrder": 209,
         "dependencyUnitEntryIds": [
           "evensectorT_010_claim_T_V_plus_action"
         ]
@@ -25706,7 +25921,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 122,
+        "chapterOrder": 124,
         "dependencyUnitEntryIds": [
           "Athetatilde_001_definition_gamma1_gamma2"
         ]
@@ -25783,7 +25998,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 128,
+        "chapterOrder": 130,
         "dependencyUnitEntryIds": [
           "Athetatilde_002_claim_gamma2_nonzero"
         ]
@@ -25867,7 +26082,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 131,
+        "chapterOrder": 133,
         "dependencyUnitEntryIds": [
           "Athetatilde_003_claim_relation_of_gamma2"
         ]
@@ -25938,7 +26153,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 135,
+        "chapterOrder": 137,
         "dependencyUnitEntryIds": [
           "Athetatilde_004_claim_eigenvector"
         ]
@@ -26011,7 +26226,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 156,
+        "chapterOrder": 158,
         "dependencyUnitEntryIds": [
           "Athetatilde_005_claim_diagonalization"
         ]
@@ -26092,7 +26307,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 148,
+        "chapterOrder": 150,
         "dependencyUnitEntryIds": [
           "Athetatilde_006_claim_det_A"
         ]
@@ -26162,7 +26377,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 149,
+        "chapterOrder": 151,
         "dependencyUnitEntryIds": [
           "Athetatilde_007_claim_gamma1_gt_1"
         ]
@@ -26226,7 +26441,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 150,
+        "chapterOrder": 152,
         "dependencyUnitEntryIds": [
           "Athetatilde_008_definition_gamma_theta_tilde"
         ]
@@ -26298,7 +26513,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 152,
+        "chapterOrder": 154,
         "dependencyUnitEntryIds": [
           "Athetatilde_009_claim_lambda_eq_exp_gamma"
         ]
@@ -26371,7 +26586,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 193,
+        "chapterOrder": 195,
         "dependencyUnitEntryIds": [
           "evenfermi_001_definition_check_fermi"
         ]
@@ -26443,7 +26658,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 157,
+        "chapterOrder": 159,
         "dependencyUnitEntryIds": [
           "evenfermi_002_claim_periodicity"
         ]
@@ -26518,7 +26733,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 194,
+        "chapterOrder": 196,
         "dependencyUnitEntryIds": [
           "evenfermi_003_claim_anticommutator"
         ]
@@ -26601,7 +26816,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 208,
+        "chapterOrder": 210,
         "dependencyUnitEntryIds": [
           "evenfermi_004_claim_commutation_V_plus_psi"
         ]
@@ -26674,7 +26889,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 195,
+        "chapterOrder": 197,
         "dependencyUnitEntryIds": [
           "evenfermi_005_definition_check_Vprime"
         ]
@@ -26751,7 +26966,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 206,
+        "chapterOrder": 208,
         "dependencyUnitEntryIds": [
           "evenfermi_006_claim_action_T_check_Vprime"
         ]
@@ -26834,7 +27049,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 209,
+        "chapterOrder": 211,
         "dependencyUnitEntryIds": [
           "evenfermi_007_claim_T_eq_on_check_Z_Y"
         ]
@@ -26909,7 +27124,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 210,
+        "chapterOrder": 212,
         "dependencyUnitEntryIds": [
           "evenfermi_008_claim_T_eq"
         ]
@@ -26990,7 +27205,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 211,
+        "chapterOrder": 213,
         "dependencyUnitEntryIds": [
           "evenfermi_009_claim_V_plus_eq_c_Vprime"
         ]
@@ -27059,7 +27274,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 196,
+        "chapterOrder": 198,
         "dependencyUnitEntryIds": [
           "evenEigen_001_definition_check_number_operator"
         ]
@@ -27123,7 +27338,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 197,
+        "chapterOrder": 199,
         "dependencyUnitEntryIds": [
           "evenEigen_002_claim_check_number_operator_idempotent"
         ]
@@ -27181,7 +27396,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 198,
+        "chapterOrder": 200,
         "dependencyUnitEntryIds": [
           "evenEigen_003_claim_check_number_operators_commute"
         ]
@@ -27258,7 +27473,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 199,
+        "chapterOrder": 201,
         "dependencyUnitEntryIds": [
           "evenEigen_004_claim_trace_of_check_number_operator_product"
         ]
@@ -27328,7 +27543,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 200,
+        "chapterOrder": 202,
         "dependencyUnitEntryIds": [
           "evenEigen_005_claim_check_joint_eigenspace_decomposition"
         ]
@@ -27411,7 +27626,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 204,
+        "chapterOrder": 206,
         "dependencyUnitEntryIds": [
           "evenEigen_006_claim_eigenvalues_of_check_Vprime"
         ]
@@ -27481,7 +27696,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 205,
+        "chapterOrder": 207,
         "dependencyUnitEntryIds": [
           "evenEigen_007_claim_trace_of_check_Vprime"
         ]
@@ -27512,8 +27727,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4199,
-        "inspectedContentSha256": "f24523708646634691ca594190862d9add2ea1adfd52be33b462cc66916628f0",
+        "inspectedCharacterCount": 4263,
+        "inspectedContentSha256": "3dbee87c19c838d8e80b9afdf86763faac11204e858f55c4b552fd8eab7a296a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -27524,6 +27739,8 @@
       },
       "dependsOnLabels": [
         "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "def_V1_plus_square_root",
         "def_V_plus",
         "def_hermitian_positive_definite",
@@ -27542,11 +27759,14 @@
         "evensectorT_definition_V_plus",
         "linear_space_general_002_claim_scalar_identity_commutes",
         "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011_definition_H1_H2",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -27556,7 +27776,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 79,
+        "chapterOrder": 81,
         "dependencyUnitEntryIds": [
           "evenEigen_008_claim_V_plus_is_positive_definite"
         ]
@@ -27620,7 +27840,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 81,
+        "chapterOrder": 83,
         "dependencyUnitEntryIds": [
           "evenEigen_claim_V_plus_is_invertible"
         ]
@@ -27684,7 +27904,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 82,
+        "chapterOrder": 84,
         "dependencyUnitEntryIds": [
           "evenEigen_claim_V_plus_inverse_is_positive_definite"
         ]
@@ -27744,7 +27964,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 80,
+        "chapterOrder": 82,
         "dependencyUnitEntryIds": [
           "evenEigen_claim_trace_V_plus_is_positive"
         ]
@@ -27804,7 +28024,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 83,
+        "chapterOrder": 85,
         "dependencyUnitEntryIds": [
           "evenEigen_claim_V_plus_inverse_positive_and_traces"
         ]
@@ -27848,7 +28068,8 @@
         "V_plus_is_invertible",
         "V_plus_is_positive_definite",
         "complex_numbers_form_a_field",
-        "def_H1_H2",
+        "def_H1_pm",
+        "def_H2",
         "def_exp",
         "definition_of_cc",
         "iH_is_real_symmetric",
@@ -27873,12 +28094,14 @@
         "evenfermi_009_claim_V_plus_eq_c_Vprime",
         "exp_linear_map_002_definition_exp_of_endomorphism",
         "linear_space_general_003_claim_matrix_norm_submultiplicativity",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm",
+        "def_H2"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -27888,7 +28111,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 212,
+        "chapterOrder": 214,
         "dependencyUnitEntryIds": [
           "evenEigen_009_claim_constant_c_value_even_sector"
         ]
@@ -27956,7 +28179,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 213,
+        "chapterOrder": 215,
         "dependencyUnitEntryIds": [
           "evenEigen_010_theorem_eigenvalues_of_V_plus"
         ]
@@ -28035,7 +28258,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 215,
+        "chapterOrder": 217,
         "dependencyUnitEntryIds": [
           "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
         ]
@@ -28112,7 +28335,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 201,
+        "chapterOrder": 203,
         "dependencyUnitEntryIds": [
           "closing_001_claim_epsilon_anticommutes"
         ]
@@ -28189,7 +28412,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 202,
+        "chapterOrder": 204,
         "dependencyUnitEntryIds": [
           "closing_002_claim_epsilon_eigenvalue_on_check_Q"
         ]
@@ -28259,7 +28482,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 214,
+        "chapterOrder": 216,
         "dependencyUnitEntryIds": [
           "closing_003_claim_trace_epsilon_V_plus_via_eigenvalues"
         ]
@@ -28321,7 +28544,7 @@
         "evensectorT_definition_H1_plus"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 69,
+        "chapterOrder": 71,
         "dependencyUnitEntryIds": [
           "closing_definition_D0_open_chain_operator"
         ]
@@ -28383,7 +28606,7 @@
         "closing_definition_D0_open_chain_operator"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 70,
+        "chapterOrder": 72,
         "dependencyUnitEntryIds": [
           "closing_definition_G_boundary_operator"
         ]
@@ -28428,8 +28651,8 @@
         "V1_in_Z_Y_epsilon",
         "def_D0_open_chain_operator",
         "def_G_boundary_operator",
-        "def_H1_H2",
         "def_H1_plus",
+        "def_H1_pm",
         "def_transfer_matrix_symbols",
         "definition_of_cc",
         "kronecker_product_rule",
@@ -28448,12 +28671,12 @@
         "linear_space_general_000b_claim_kronecker_product_rule",
         "transfer_matrix_001_definition_symbols",
         "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
         "definition_of_cc",
-        "def_H1_H2"
+        "def_H1_pm"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -28463,7 +28686,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 71,
+        "chapterOrder": 73,
         "dependencyUnitEntryIds": [
           "closing_004_claim_H1_plus_in_sigma_z_form"
         ]
@@ -28527,7 +28750,7 @@
         "closing_claim_D0_G_diagonal_action"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 73,
+        "chapterOrder": 75,
         "dependencyUnitEntryIds": [
           "closing_claim_epsilon_D0_G_pairwise_commute"
         ]
@@ -28591,7 +28814,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 74,
+        "chapterOrder": 76,
         "dependencyUnitEntryIds": [
           "closing_claim_epsilon_G_is_involution"
         ]
@@ -28655,7 +28878,7 @@
         "closing_004_claim_H1_plus_in_sigma_z_form"
       ],
       "dependencyPlacement": {
-        "chapterOrder": 72,
+        "chapterOrder": 74,
         "dependencyUnitEntryIds": [
           "closing_claim_D0_G_diagonal_action"
         ]
@@ -28958,7 +29181,7 @@
         "cosh_sinh_basic_properties",
         "def_D0_open_chain_operator",
         "def_G_boundary_operator",
-        "def_H1_H2",
+        "def_H1_pm",
         "def_V1_plus_square_root",
         "def_V1_pm",
         "def_V_plus",
@@ -29007,11 +29230,11 @@
         "linear_space_general_000b_claim_kronecker_product_rule",
         "transfer_matrix_005_definition_end_isomorphism",
         "transfer_matrix_007_definition_V1_pm",
-        "transfer_matrix_011_definition_H1_H2"
+        "transfer_matrix_011a_definition_H1_pm"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation",
-        "def_H1_H2"
+        "def_H1_pm"
       ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
@@ -29021,7 +29244,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 78,
+        "chapterOrder": 80,
         "dependencyUnitEntryIds": [
           "closing_006_theorem_trace_of_epsilon_V_plus"
         ]
@@ -29091,7 +29314,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 216,
+        "chapterOrder": 218,
         "dependencyUnitEntryIds": [
           "closing_007_theorem_max_eigenvector_in_even_sector"
         ]
@@ -29176,7 +29399,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 203,
+        "chapterOrder": 205,
         "dependencyUnitEntryIds": [
           "closing_008_claim_check_Q_is_hermitian"
         ]
@@ -29265,7 +29488,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 217,
+        "chapterOrder": 219,
         "dependencyUnitEntryIds": [
           "closing_009_theorem_c_plus_equals_Lambda_half"
         ]
@@ -29351,7 +29574,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 218,
+        "chapterOrder": 220,
         "dependencyUnitEntryIds": [
           "closing_010_theorem_onsager_exact_solution"
         ]
@@ -29422,7 +29645,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 101,
+        "chapterOrder": 103,
         "dependencyUnitEntryIds": [
           "sector_001_claim_epsilon_is_permutation"
         ]
@@ -29490,7 +29713,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 102,
+        "chapterOrder": 104,
         "dependencyUnitEntryIds": [
           "sector_002_claim_abs_vector_moves_to_even_sector"
         ]
@@ -29556,7 +29779,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 103,
+        "chapterOrder": 105,
         "dependencyUnitEntryIds": [
           "sector_003_theorem_c_minus_le_c_plus"
         ]
@@ -29628,7 +29851,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 221,
+        "chapterOrder": 223,
         "dependencyUnitEntryIds": [
           "sector_004_theorem_c_equals_c_plus"
         ]
@@ -29880,7 +30103,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 140,
+        "chapterOrder": 142,
         "dependencyUnitEntryIds": [
           "critical_003_claim_gamma_kappa_identity"
         ]
@@ -29946,7 +30169,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 182,
+        "chapterOrder": 184,
         "dependencyUnitEntryIds": [
           "critical_004_claim_critical_point_iff_kappa_zero"
         ]
@@ -30010,7 +30233,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 141,
+        "chapterOrder": 143,
         "dependencyUnitEntryIds": [
           "critical_005_claim_isotropic_setting"
         ]
@@ -30078,7 +30301,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 183,
+        "chapterOrder": 185,
         "dependencyUnitEntryIds": [
           "critical_006_claim_kappa_of_K_basic"
         ]
@@ -30140,7 +30363,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 142,
+        "chapterOrder": 144,
         "dependencyUnitEntryIds": [
           "critical_007_claim_gamma_derivatives_in_kappa"
         ]
@@ -30392,7 +30615,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 219,
+        "chapterOrder": 221,
         "dependencyUnitEntryIds": [
           "critical_011_theorem_second_derivative_log_divergence"
         ]
@@ -30460,7 +30683,7 @@
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "dependencyPlacement": {
-        "chapterOrder": 220,
+        "chapterOrder": 222,
         "dependencyUnitEntryIds": [
           "critical_012_theorem_specific_heat_log_divergence"
         ]

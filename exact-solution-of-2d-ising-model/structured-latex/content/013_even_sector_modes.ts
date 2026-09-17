@@ -1072,11 +1072,11 @@ e^{-ij\tilde\theta_{M+1-\mu}}
         "）について（",
         math(String.raw`H_1^{(+)}`),
         " は ",
-        ref("def_V1_pm"),
+        ref("def_H1_pm"),
         " の ",
         math(String.raw`H_1^{(\pm)}`),
         " で上の符号を取ったもの、すなわち ",
-        math(String.raw`H_1^{(+)} = Y_1Z_2 + \cdots + Y_{M-1}Z_M - Y_MZ_1`),
+        math(String.raw`H_1^{(+)} = \sum_{m=1}^{M-1}Y_mZ_{m+1} - Y_MZ_1`),
         "）、",
       ]),
       displayMath(

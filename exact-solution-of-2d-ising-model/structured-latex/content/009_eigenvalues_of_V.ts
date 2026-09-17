@@ -2298,7 +2298,7 @@ Z_m Y_m
         String.raw`\begin{aligned}
 H_2
 &= \sum_{m=1}^{M} Z_mY_m
-   \quad (\because H_2 \text{ の定義}) \\
+   \quad (\because\ \blkref{def_H2}) \\
 &= \sum_{m=1}^{M} (-i\,\sigma_m^x)
    \quad (\because \text{上で得た } Z_mY_m = -i\,\sigma_m^x) \\
 &= -i\sum_{m=1}^{M}\sigma_m^x
@@ -2357,7 +2357,7 @@ Y_M Z_1
       ),
       paragraph([
         "これらと ",
-        ref("def_V1_pm"),
+        ref("def_H1_pm"),
         " の ",
         math(String.raw`H_1^{(\pm)}`),
         " の定義を使うと",
@@ -2919,13 +2919,13 @@ U Y_m U^{-1}
         " と ",
         math(String.raw`H_2`),
         " への作用）。",
-        ref("def_V1_pm"),
+        ref("def_H1_pm"),
         " の ",
-        math(String.raw`H_1^{(\pm)} = Y_1Z_2 + \cdots + Y_{M-1}Z_M \mp Y_MZ_1`),
+        math(String.raw`H_1^{(\pm)} = \sum_{m=1}^{M-1}Y_mZ_{m+1} \mp Y_MZ_1`),
         " と ",
         ref("iH_is_real_symmetric"),
         " の Step 1 の ",
-        math(String.raw`H_2 = Z_1Y_1 + \cdots + Z_MY_M`),
+        math(String.raw`H_2 = \sum_{m=1}^{M}Z_mY_m`),
         " は、どちらも ",
         math(String.raw`Y`),
         " と ",

@@ -120,7 +120,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
     labels: ["def_H1_plus"],
     statement: [
       paragraph([
-        ref("def_H1_H2"),
+        ref("def_H1_pm"),
         " の生成子で上の符号を取ったものを",
       ]),
       displayMath(
@@ -166,7 +166,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         " の ",
         math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
         " と ",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_H1_H2"),
         " の ",
         math(String.raw`V_2 = (2s_2)^{M/2}\exp\!\left(iK_2^* H_2\right)`),
         " を用いて",
@@ -1619,7 +1619,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
       paragraph([
         math(String.raw`T_{V_2}`),
         " については、",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_H1_H2"),
         " の ",
         math(String.raw`V_2 = (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)`),
         " の前因子 ",
@@ -1645,7 +1645,7 @@ T_{V_2}(\check{Z}_\mu)
    \quad (\because \text{def\_T\_g}) \\
 &= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,
    \left((2s_2)^{M/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{def\_transfer\_matrix\_symbols の } V_2 \text{ と直前の } V_2^{-1} \text{ の表示}) \\
+   \quad (\because \text{def\_H1\_H2 の } V_2 \text{ と直前の } V_2^{-1} \text{ の表示}) \\
 &= (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1}
    \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
    \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M/2}\right)^{-1} \text{ を左端へ移す）}) \\
@@ -1665,7 +1665,7 @@ T_{V_2}(\check{Y}_\mu)
    \quad (\because \text{def\_T\_g}) \\
 &= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,
    \left((2s_2)^{M/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{def\_transfer\_matrix\_symbols の } V_2 \text{ と直前の } V_2^{-1} \text{ の表示}) \\
+   \quad (\because \text{def\_H1\_H2 の } V_2 \text{ と直前の } V_2^{-1} \text{ の表示}) \\
 &= (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1}
    \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
    \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M/2}\right)^{-1} \text{ を左端へ移す）}) \\

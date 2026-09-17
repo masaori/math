@@ -248,7 +248,7 @@ S_2
       ]),
       paragraph([
         "Step 3（合同変換）。",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_H1_H2"),
         " より ",
         math(String.raw`V_2 = (2s_2)^{M/2}A`),
         "（",

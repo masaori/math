@@ -1860,6 +1860,8 @@ E_K \check{Q}_\epsilon
         "、",
         ref("def_V1_plus_square_root"),
         "、",
+        ref("def_H1_H2"),
+        "、",
         ref("def_transfer_matrix_symbols"),
         "、",
         ref("iH_is_real_symmetric"),

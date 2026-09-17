@@ -100,6 +100,8 @@ export const ALL_LABELS = [
   "def_G_boundary_operator",
   "def_H1_H2",
   "def_H1_plus",
+  "def_H1_pm",
+  "def_H2",
   "def_T_V",
   "def_T_V_plus",
   "def_T_g",

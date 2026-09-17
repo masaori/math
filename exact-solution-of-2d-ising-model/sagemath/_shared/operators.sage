@@ -125,7 +125,7 @@ def V2_op(K2, M):
 
 
 # ---------------------------------------------------------
-# H_1^{(±)}, H_2（transfer_matrix_011_definition_H1_H2）
+# H_1^{(±)}（transfer_matrix_011a_definition_H1_pm）、H_2（transfer_matrix_011b_definition_H2）
 #   H_1^{(±)} := Y_1 Z_2 + … + Y_{M-1} Z_M ∓ Y_M Z_1
 #   H_2       := Z_1 Y_1 + … + Z_M Y_M
 #   sign は '+' / '-' の文字列。複号 ∓ は sign='+' で -1、sign='-' で +1。

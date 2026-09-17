@@ -4383,29 +4383,98 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     },
   },
   {
+    id: "transfer_matrix_011a_definition_H1_pm",
+    kind: "definition",
+    origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
+    title: { tex: String.raw`\text{一般生成子 } H_1^{(\pm)}` },
+    labels: ["def_H1_pm"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 2}`),
+        " とし、各 ",
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " について、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " と ",
+        ref("def_jordan_wigner_Z_matrices"),
+        " で定めた具体的な複素行列 ",
+        math(String.raw`Y_m,Z_m\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を用いる。二つの符号の各々について、",
+        math(String.raw`H_1^{(\pm)}\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`H_1^{(\pm)} := \sum_{m=1}^{M-1} Y_m Z_{m+1} \mp Y_M Z_1`,
+      ),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧複合ブロック <def_H1_H2> から、一般生成子 H_1^{(±)} の定義だけを独立させた。端点を含めて曖昧さのない有限和で、元の式と同じ内容を記した。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_011b_definition_H2",
+    kind: "definition",
+    origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
+    title: { tex: String.raw`\text{一般生成子 } H_2` },
+    labels: ["def_H2"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        " とし、各 ",
+        math(String.raw`m\in\{1,\dots,M\}`),
+        " について、",
+        ref("def_jordan_wigner_Z_matrices"),
+        " と ",
+        ref("def_jordan_wigner_Y_matrices"),
+        " で定めた具体的な複素行列 ",
+        math(String.raw`Z_m,Y_m\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を用い、",
+        math(String.raw`H_2\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(String.raw`H_2 := \sum_{m=1}^{M} Z_m Y_m`),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧複合ブロック <def_H1_H2> から、一般生成子 H_2 の定義だけを独立させた。端点を含めて曖昧さのない有限和で、元の式と同じ内容を記した。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_011_definition_H1_H2",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
-    title: null,
+    title: { text: "一般生成子による転送行列の指数表示" },
     labels: ["def_H1_H2"],
     statement: [
       paragraph([
-        ref("def_transfer_matrix_symbols"),
+        ref("def_H1_pm"),
         " の ",
-        math(String.raw`Y_m,Z_m,K_1,K_2^*,s_2,V_2`),
-        " と ",
+        math(String.raw`H_1^{(\pm)}`),
+        "、",
+        ref("def_H2"),
+        " の ",
+        math(String.raw`H_2`),
+        "、",
         ref("def_V1_pm"),
         " の ",
         math(String.raw`V_1^{(\pm)}`),
-        " を用いる。",
+        "、および ",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`K_1,K_2^*,s_2,V_2`),
+        " を用いる。すると、",
+        ref("def_V1_pm"),
+        " と ",
+        ref("V2_in_Z_Y"),
+        " より",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-H_1^{(\pm)} &:= Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1} Z_M \mp Y_M Z_1 \\
-H_2 &:= Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M
-\end{aligned}`,
-      ),
-      paragraph(["すると、", ref("def_V1_pm"), " と ", ref("V2_in_Z_Y"), " より"]),
       displayMath(
         String.raw`\begin{aligned}
 V_1^{(\pm)}
@@ -4420,6 +4489,7 @@ V_2
     conversion: {
       status: "converted",
       notes: [
+        "一般生成子 H_1^{(±)} の定義は <def_H1_pm> へ、H_2 の定義は <def_H2> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックには二つの指数表示を残して新定義を明示参照している。",
         "2026-09-04: 式変形の書き方の統一。H1, H2 を用いた V1, V2 の二つの等号を分け、" +
           "各行末に参照先の根拠を付けた。式・定義の内容は変えていない。",
       ],
@@ -4477,7 +4547,7 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
 &= \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ k_2\in\{2,\dots,M\}\\ -(k_1-k_2+1)\equiv 0 \pmod{M}}} M(Y_{k_1}Z_{k_2})
 + \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ -k_1\equiv 0 \pmod{M}}} \mp M(Y_{k_1}Z_1) &&(\because\ k_2=1\ \text{の項とそれ以外（}k_2\in\{2,\dots,M\}\text{）の項へ和を分けた}) \\
 &= (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1}Z_M) + (\mp Y_M Z_1) &&(\because\ \text{下記のとおり第 1 項は } k_1=k_2-1\text{、第 2 項は } k_1=M \text{ に限ること、および } \tfrac{1}{M}\cdot M=1) \\
-&= H_1^{(\pm)} &&(\because\ H_1^{(\pm)}\ \text{の定義})
+&= H_1^{(\pm)} &&(\because\ \blkref{def_H1_pm})
 \end{aligned}`,
       ),
       paragraph([
@@ -4524,7 +4594,7 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
 &= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1-k_2\equiv 0 \pmod{M}}} Z_{k_1}Y_{k_2} &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が落ちること}) \\
 &= \sum_{\substack{k_1,k_2\in\{1,\dots,M\}\\ k_1=k_2}} Z_{k_1}Y_{k_2} &&(\because\ k_1,k_2\in\{1,\dots,M\}\ \text{では } k_1-k_2\equiv 0 \pmod{M} \text{ と } k_1=k_2 \text{ が同値}) \\
 &= Z_1 Y_1 + Z_2 Y_2 + \cdots + Z_M Y_M &&(\because\ \text{和の添字を } k_1=k_2 \text{ で走らせて書き下したもの}) \\
-&= H_2 &&(\because\ H_2\ \text{の定義})
+&= H_2 &&(\because\ \blkref{def_H2})
 \end{aligned}`,
       ),
     ],
