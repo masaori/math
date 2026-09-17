@@ -8,7 +8,7 @@ claim_cut_flag_realizable_candidate_selection
 import ast
 import itertools
 import json
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 load("sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-realizable-boundary-incidence/construction.sage")
@@ -116,9 +116,23 @@ full_conflicts = conflicting_requirements(all_features)
 empty_candidate_counts = tuple(sum(
     1 for _, _, full_pair in records if not full_pair[rank])
     for rank in (0, 1))
+realizability_patterns = Counter(
+    (bool(full_pair[0]), bool(full_pair[1]))
+    for _, _, full_pair in records)
+selected_unrealizable_count = sum(
+    1 for selected_rank, _, full_pair in records
+    if not full_pair[selected_rank])
+selected_not_minimum_realizable_count = sum(
+    1 for selected_rank, _, full_pair in records
+    if selected_rank != (0 if full_pair[0] else 1))
 
 print("BOTH CONNECTED RECORDS", len(records), flush=True)
 print("EMPTY CANDIDATE COUNTS", empty_candidate_counts, flush=True)
+print("REALIZABILITY PATTERNS", sorted(realizability_patterns.items()),
+      flush=True)
+print("SELECTED UNREALIZABLE", selected_unrealizable_count, flush=True)
+print("SELECTED NOT MINIMUM REALIZABLE",
+      selected_not_minimum_realizable_count, flush=True)
 print("REALIZABLE-INCIDENCE KEYS", len(requirements_for(())), flush=True)
 print("REALIZABLE-INCIDENCE CONFLICTS", len(empty_conflicts), flush=True)
 print("ENDPOINT-AND-REALIZABLE-INCIDENCE CONFLICTS",
@@ -143,6 +157,13 @@ assert sum(
     for _, _, full_pair in records
     for candidate_descriptor in full_pair) == 651
 assert empty_candidate_counts == (153, 174)
+assert realizability_patterns == Counter({
+    (False, True): 153,
+    (True, False): 174,
+    (True, True): 162,
+})
+assert selected_unrealizable_count == 0
+assert selected_not_minimum_realizable_count == 0
 assert len(requirements_for(())) == 94
 assert not empty_conflicts
 assert not endpoint_empty_conflicts
@@ -157,6 +178,17 @@ certificate = {
     "realizable_incidence_count": int(651),
     "empty_candidate_counts_by_rank": [
         int(count) for count in empty_candidate_counts],
+    "realizability_patterns": [
+        {
+            "candidate_zero_realizable": pattern[0],
+            "candidate_one_realizable": pattern[1],
+            "count": int(count),
+        }
+        for pattern, count in sorted(realizability_patterns.items())
+    ],
+    "selected_unrealizable_count": int(selected_unrealizable_count),
+    "selected_not_minimum_realizable_count": int(
+        selected_not_minimum_realizable_count),
     "realizable_incidence_key_count": int(len(requirements_for(()))),
     "realizable_incidence_conflicting_key_count": int(len(empty_conflicts)),
     "endpoint_and_realizable_incidence_conflicting_key_count": int(

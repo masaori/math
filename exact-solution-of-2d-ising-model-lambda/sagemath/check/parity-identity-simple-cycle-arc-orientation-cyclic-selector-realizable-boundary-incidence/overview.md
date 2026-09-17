@@ -9,6 +9,9 @@
 - 実行日: 2026-09-18
 - 結果: 成功。方向上連結する 1,036 入射から座標上実現不能な 385 入射を除くと、残る
   651 入射の記述は 94 種になり、選択順位が反対になる衝突は無かった。
+- 二候補の実現可能性は、候補 0 だけが 174 項、候補 1 だけが 153 項、両方が 162 項だった。
+  従って実現可能候補の一意性は成り立たない。一方、保存済み切断位置は全 489 項で実現可能であり、
+  実現可能候補集合の最小元と一致した。
 
 ## 何を確かめるか
 
@@ -21,8 +24,13 @@
 端点ビットは候補の分離に必要ない。ただしこれは観測済みの一辺二・三の支持上の有限判定であり、
 一般の語長に対する切断選択規則ではない。
 
+この有限判定は、実現可能候補が一意であることを示さない。両候補が実現可能な 162 項がある。
+支持係数の再構成には、一般命題 `claim_cut_flag_realizable_candidate_selection` が定める
+「実現可能候補集合の最小元」を使う必要がある。保存済み切断位置は全項でこの最小元と一致する。
+
 ## 実行方法
 
 ```sh
 sage sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-realizable-boundary-incidence/check.sage
+sage sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-realizable-boundary-incidence/verify-certificate.sage
 ```
