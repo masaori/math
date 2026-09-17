@@ -1040,6 +1040,10 @@ targets=(
   Ising2DLambda.KacWard.twoCoordinateCompatible_iff_recovered_from_necSuf
   Ising2DLambda.KacWard.coordinateLiftCandidate_iff_recovered_from_necSuf
   Ising2DLambda.KacWard.boundaryExtensionCandidate_iff_recovered_from_necSuf
+  Ising2DLambda.KacWard.cutCandidateRealizable_iff_mem_recoveredSet
+  Ising2DLambda.KacWard.selectedRecoveredCutCandidate_realizable
+  Ising2DLambda.NecSuf.KacWard.realizable_iff_mem_recoveredCandidateSet
+  Ising2DLambda.KacWard.cutCandidateRealizable_iff_mem_recoveredSet_from_necSuf
   Ising2DLambda.FisherZero.quadraticPositive_mul_of_mixedSigns
   Ising2DLambda.NecSuf.FisherZero.positive_mul_mixedSigns_necSuf
   Ising2DLambda.FisherZero.quadraticPositive_mul_of_mixedSigns_from_necSuf

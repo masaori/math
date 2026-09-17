@@ -3,7 +3,8 @@
 ## 対象
 
 **対象ラベル**: `claim_cut_flag_congruence_start_recovery`、
-`claim_cut_flag_two_coordinate_boundary_completeness`
+`claim_cut_flag_two_coordinate_boundary_completeness`、
+`claim_cut_flag_realizable_candidate_selection`
 
 - 帰属: 有限集合と整数の厳密演算。浮動小数点を使わない。
 - 一般の辺長についての証明ではない。
@@ -12,6 +13,7 @@
   切断旗が課す始点座標の合同条件を 13,920 系で解き、始点を全列挙する旧規則と完全に一致した。
   復元した行始点集合と列始点集合の直積が全座標列を尽くすことも 13,920 系で一致した。
   27,840 件の境界延長と、前段の一辺二・三の 1,036 境界入射に対する従来の判定も完全に一致した。
+  復元した反対端点旗への所属で濾過すると、実現可能な 651 入射を残し、実現不能な 385 入射を除いた。
 
 ## 何を確かめるか
 

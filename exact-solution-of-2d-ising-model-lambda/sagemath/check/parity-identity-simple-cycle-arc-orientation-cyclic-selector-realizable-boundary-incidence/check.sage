@@ -1,6 +1,7 @@
 """実現可能な境界入射だけで選択衝突と必要な端点ビットを再計算する。
 
-対象ラベル: claim_kac_ward_determinant_fiber_stratified_phase_sum
+対象ラベル: claim_kac_ward_determinant_fiber_stratified_phase_sum,
+claim_cut_flag_realizable_candidate_selection
 一般の辺長についての命題ではない。
 """
 

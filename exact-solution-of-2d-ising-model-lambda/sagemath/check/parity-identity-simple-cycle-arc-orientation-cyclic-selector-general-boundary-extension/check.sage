@@ -1,7 +1,8 @@
 """一般の有限内部語へ運べる境界延長規則を有限全探索で検算する。
 
 対象ラベル: claim_cut_flag_congruence_start_recovery,
-claim_cut_flag_two_coordinate_boundary_completeness
+claim_cut_flag_two_coordinate_boundary_completeness,
+claim_cut_flag_realizable_candidate_selection
 一般の辺長についての証明ではない。
 """
 
@@ -130,6 +131,8 @@ lift_path = Path(
     "certificate.json")
 lifts = json.loads(lift_path.read_text())["lifts"]
 checked_observed_incidences = 0
+checked_realizable_candidate_incidences = 0
+checked_unrealizable_candidate_incidences = 0
 for lift in lifts.values():
     for arc_type in map(ast.literal_eval, lift["arc_support"]):
         if len(arc_type[1]) == 1:
@@ -155,6 +158,12 @@ for lift in lifts.values():
                         side, word, boundary_position, boundary_direction)
                     for side in (2, 3)))
                 assert new_options == old_options
+                actual_other_wrap = orbit_key[2][1 - ZZ(incidence[1])][1]
+                if actual_other_wrap in new_options:
+                    checked_realizable_candidate_incidences += 1
+                else:
+                    assert not new_options
+                    checked_unrealizable_candidate_incidences += 1
                 checked_observed_incidences += 1
 
 assert checked_paths == 13920
@@ -162,6 +171,8 @@ assert checked_extensions == 27840
 assert checked_two_coordinate_products == 13920
 assert len(distinct_words) == 13234
 assert checked_observed_incidences == 1036
+assert checked_realizable_candidate_incidences == 651
+assert checked_unrealizable_candidate_incidences == 385
 
 certificate = {
     "kind": "cyclic-selector-general-boundary-extension",
@@ -173,6 +184,10 @@ certificate = {
     "distinct_side_and_word_count": int(len(distinct_words)),
     "checked_congruence_system_count": int(len(path_cases)),
     "observed_incidence_agreement_count": int(checked_observed_incidences),
+    "realizable_candidate_incidence_count": int(
+        checked_realizable_candidate_incidences),
+    "unrealizable_candidate_incidence_count": int(
+        checked_unrealizable_candidate_incidences),
     "rule": "solve the row and column start residues from cumulative direction displacements and every recorded cut-flag congruence, then extend one boundary edge",
 }
 certificate_path = Path(
@@ -188,5 +203,9 @@ print("CHECKED TWO-COORDINATE PRODUCTS", checked_two_coordinate_products, flush=
 print("DISTINCT SIDE/WORD PAIRS", len(distinct_words), flush=True)
 print("CHECKED CONGRUENCE SYSTEMS", len(path_cases), flush=True)
 print("OBSERVED INCIDENCE AGREEMENTS", checked_observed_incidences, flush=True)
+print("REALIZABLE CANDIDATE INCIDENCES",
+      checked_realizable_candidate_incidences, flush=True)
+print("UNREALIZABLE CANDIDATE INCIDENCES",
+      checked_unrealizable_candidate_incidences, flush=True)
 print("CERTIFICATE", certificate_path, flush=True)
 print("PASS: boundary extension rule applies to arbitrary finite words", flush=True)

@@ -2,11 +2,11 @@
 
 ## 対象
 
-**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`、`claim_cut_flag_realizable_candidate_selection`
 
 - 帰属: 有限集合と整数の厳密演算。浮動小数点を使わない。
 - 一般の辺長についての命題ではない。
-- 実行日: 2026-09-17
+- 実行日: 2026-09-18
 - 結果: 成功。方向上連結する 1,036 入射から座標上実現不能な 385 入射を除くと、残る
   651 入射の記述は 94 種になり、選択順位が反対になる衝突は無かった。
 

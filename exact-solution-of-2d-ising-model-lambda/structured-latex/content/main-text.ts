@@ -52121,6 +52121,103 @@ w_L(c+\delta_i^{\mathrm c})=(z_i^{\mathrm c},\ell_i^{\mathrm c})\quad(0\le i<n)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_cut_flag_realizable_candidate_selection",
+        labels: [],
+        title: { text: "復元した切断旗による実現可能な切断候補の選択" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_cut_flag_realizable_candidate_selection",
+            focus: {
+              id: "kac_ward_claim_cut_flag_realizable_candidate_selection",
+              kind: "claim",
+              title: { text: "二つの切断候補は復元した反対端点旗への所属だけで完全に濾過できる" },
+              labels: ["claim_cut_flag_realizable_candidate_selection"],
+              habitat: "Z",
+              verification: [
+                "sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-general-boundary-extension",
+                "sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-realizable-boundary-incidence",
+              ],
+              lean: [
+                "Ising2DLambda.KacWard.cutCandidateRealizable_iff_mem_recoveredSet",
+                "Ising2DLambda.KacWard.selectedRecoveredCutCandidate_realizable",
+                "Ising2DLambda.NecSuf.KacWard.realizable_iff_mem_recoveredCandidateSet",
+                "Ising2DLambda.KacWard.cutCandidateRealizable_iff_mem_recoveredSet_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  math(String.raw`L,n\in\mathbb N`), "、", math(String.raw`2\le L`),
+                  " とする。正準巡回支持の二つの切断位置を表す添字集合を ",
+                  math(String.raw`K:=\{0,1\}`), " とする。各 ", math(String.raw`k\in K`),
+                  " について、復号した空でない内部語の行列累積変位を ",
+                  math(String.raw`\delta_i^{\mathrm r,k},\delta_i^{\mathrm c,k}\in\mathbb Z`),
+                  "、内部語が記録する行列の零側・末尾側の切断旗を ",
+                  math(String.raw`(z_i^{\mathrm r,k},\ell_i^{\mathrm r,k}),(z_i^{\mathrm c,k},\ell_i^{\mathrm c,k})\in\{0,1\}^2`),
+                  "（", math(String.raw`0\le i<n`), "）、反対端点までの変位を ",
+                  math(String.raw`(\alpha_k,\beta_k)\in\mathbb Z^2`),
+                  "、支持が要求する反対端点の四切断旗を ",
+                  math(String.raw`q_k\in(\{0,1\}^2)^2`), " とする。",
+                ]),
+                paragraph([
+                  ref("claim_cut_flag_two_coordinate_boundary_completeness"),
+                  " の規則で候補 ", math(String.raw`k`), " の行と列の始点集合を独立に復元し、",
+                  "その直積を変位 ", math(String.raw`(\alpha_k,\beta_k)`),
+                  " だけ延長して得る四切断旗の有限集合を ", math(String.raw`\mathcal B_k`),
+                  " と書く。復元規則が残す切断候補の集合を",
+                ]),
+                displayMath(String.raw`\mathcal R:=\{\,k\in K:q_k\in\mathcal B_k\,\}`),
+                paragraph([
+                  "と定める。一方、内部語の全切断旗に整合する始点対が存在し、その始点対を反対端点まで延長した四切断旗が ",
+                  math(String.raw`q_k`), " に等しい切断候補の集合を ", math(String.raw`\mathcal G`),
+                  " とする。このとき有限集合の等式",
+                ]),
+                displayMath(String.raw`\mathcal G=\mathcal R`),
+                paragraph([
+                  "が成り立つ。従って ", math(String.raw`\mathcal R\ne\varnothing`),
+                  " ならば、その最小の添字を選ぶ規則は必ず実現可能な切断候補を返す。",
+                  "この規則は観測済みの支持を表引きせず、各内部語の有限合同条件だけを使う。",
+                  "全ての量は有限集合、整数の加法と剰余、二元集合の順序の中にあり、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "任意の ", math(String.raw`k\in K`), " を固定する。",
+                  math(String.raw`k\in\mathcal G`),
+                  " とは、候補 ", math(String.raw`k`), " の内部語の全切断旗に整合する始点対があり、",
+                  "その始点対を変位 ", math(String.raw`(\alpha_k,\beta_k)`),
+                  " だけ延長した旗が ", math(String.raw`q_k`), " に等しいことである。",
+                  ref("claim_cut_flag_two_coordinate_boundary_completeness"),
+                  " は、整合する始点対が復元した行列始点集合の直積を尽くし、延長後の旗がその直積の像 ",
+                  math(String.raw`\mathcal B_k`), " を尽くすことを与える。従って",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+k\in\mathcal G
+&\Longleftrightarrow q_k\in\mathcal B_k
+&&\bigl(\because\ \blkref{claim_cut_flag_two_coordinate_boundary_completeness}\text{ を候補 }k\text{ へ適用}\bigr)\\
+&\Longleftrightarrow k\in\mathcal R
+&&\bigl(\because\ \mathcal R\text{ の定義}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "を得る。これは全ての ", math(String.raw`k\in K`), " について成り立つので、外延性により ",
+                  math(String.raw`\mathcal G=\mathcal R`), " である。",
+                ]),
+                paragraph([
+                  math(String.raw`\mathcal R\ne\varnothing`), " なら、有限全順序集合 ", math(String.raw`K=\{0,1\}`),
+                  " の空でない部分集合 ", math(String.raw`\mathcal R`), " には最小元がある。",
+                  math(String.raw`\mathcal G=\mathcal R`), " により、その最小元は ", math(String.raw`\mathcal G`),
+                  " に属するので実現可能である。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_fiber_phase_weight_topological_form",
         labels: [],
         title: { text: "ファイバーの位相付き寄与の位相形" },
