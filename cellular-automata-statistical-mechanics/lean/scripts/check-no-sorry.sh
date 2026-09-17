@@ -53,6 +53,12 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.FiniteDiscreteContinuousSymmetryBoundary.commutingSymmetryGroup_isFinite
+  CellularAutomata.FiniteDiscreteContinuousSymmetryBoundary.pullback_mem
+  CellularAutomata.FiniteDiscreteContinuousSymmetryBoundary.pullback_identity
+  CellularAutomata.FiniteDiscreteContinuousSymmetryBoundary.pullback_multiplication
+  CellularAutomata.FiniteDiscreteContinuousSymmetryBoundary.RealParameterAction.map_nsmul_as_pow
+  CellularAutomata.FiniteDiscreteContinuousSymmetryBoundary.realParameterAction_trivial
   CellularAutomata.CyclicStageUniformMarginals.windowEmbedding_injective
   CellularAutomata.CyclicStageUniformMarginals.oddStage_card
   CellularAutomata.CyclicStageUniformMarginals.uniformWeight_denominator_positive
