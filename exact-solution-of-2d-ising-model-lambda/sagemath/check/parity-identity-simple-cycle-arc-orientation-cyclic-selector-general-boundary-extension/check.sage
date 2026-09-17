@@ -1,6 +1,6 @@
 """一般の有限内部語へ運べる境界延長規則を有限全探索で検算する。
 
-対象ラベル: claim_kac_ward_determinant_fiber_stratified_phase_sum
+対象ラベル: claim_cut_flag_congruence_start_recovery
 一般の辺長についての証明ではない。
 """
 

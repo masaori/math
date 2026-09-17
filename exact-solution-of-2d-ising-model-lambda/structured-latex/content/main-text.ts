@@ -51904,6 +51904,98 @@ x^{\,2\lvert D\rvert+\lvert E\rvert}\cdot
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_cut_flag_congruence_start_recovery",
+        labels: [],
+        title: { text: "切断旗の合同条件による始点復元" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_cut_flag_congruence_start_recovery",
+            focus: {
+              id: "kac_ward_claim_cut_flag_congruence_start_recovery",
+              kind: "claim",
+              title: { text: "切断旗は始点剰余類の等式と除外条件に分かれる" },
+              labels: ["claim_cut_flag_congruence_start_recovery"],
+              habitat: "Z",
+              verification: [
+                "sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-general-boundary-extension",
+              ],
+              lean: [
+                "Ising2DLambda.KacWard.coordinateStartCompatible_iff_forcedForbidden",
+                "Ising2DLambda.NecSuf.KacWard.compatible_iff_forced_forbidden",
+                "Ising2DLambda.KacWard.coordinateStartCompatible_iff_forcedForbidden_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  math(String.raw`L,n\in\mathbb N`), "、", math(String.raw`2\le L`), " とし、",
+                  math(String.raw`i\in\{0,\ldots,n-1\}`), " ごとに累積変位 ",
+                  math(String.raw`\delta_i\in\mathbb Z`), " と切断旗 ",
+                  math(String.raw`(z_i,\ell_i)\in\{0,1\}^2`), " を取り、",
+                  math(String.raw`z_i\ell_i=0`), " とする。整数 ", math(String.raw`u`),
+                  " の ", math(String.raw`0`), " 以上 ", math(String.raw`L-1`),
+                  " 以下の剰余を ", math(String.raw`[u]_L`), " と書く。始点候補の集合を",
+                ]),
+                displayMath(String.raw`S:=\left\{r\in\{0,\ldots,L-1\}:
+\forall i,\quad
+\bigl(z_i=1\Longleftrightarrow[r+\delta_i]_L=0\bigr)\ \land
+\bigl(\ell_i=1\Longleftrightarrow[r+\delta_i]_L=L-1\bigr)
+\right\}`),
+                paragraph(["と定める。また、正の切断旗が強制する剰余類の集合と、負の切断旗が除外する剰余類の集合を"]),
+                displayMath(String.raw`\begin{aligned}
+F&:=\left\{[-\delta_i]_L:z_i=1\right\}
+\cup\left\{[L-1-\delta_i]_L:\ell_i=1\right\},\\
+B&:=\left\{[-\delta_i]_L:z_i=0\right\}
+\cup\left\{[L-1-\delta_i]_L:\ell_i=0\right\}
+\end{aligned}`),
+                paragraph(["と定める。このとき整数の有限集合の等式"]),
+                displayMath(String.raw`S=\left\{r\in\{0,\ldots,L-1\}:
+\bigl(\forall f\in F,\ r=f\bigr)\ \land\ r\notin B
+\right\}`),
+                paragraph([
+                  "が成り立つ。したがって始点候補は、方向列の累積変位から作った有限個の等式と除外条件だけで復元でき、",
+                  "トーラスの全頂点を先に列挙する必要はない。扱う量は有限集合と整数の剰余だけであり、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([math(String.raw`r\in\{0,\ldots,L-1\}`), " を固定する。まず ", math(String.raw`r\in S`), " とする。任意の ", math(String.raw`f\in F`), " を取る。"]),
+                list([
+                  [
+                    math(String.raw`f=[-\delta_i]_L`), " かつ ", math(String.raw`z_i=1`), " となる ", math(String.raw`i`), " がある場合、",
+                    math(String.raw`r`), " が満たす切断旗の同値条件から ", math(String.raw`[r+\delta_i]_L=0`), " である。よって ",
+                    math(String.raw`r=[-\delta_i]_L=f`), " である（", math(String.raw`\because`), " 整数の合同式の移項）。",
+                  ],
+                  [
+                    math(String.raw`f=[L-1-\delta_i]_L`), " かつ ", math(String.raw`\ell_i=1`), " となる ", math(String.raw`i`), " がある場合も、",
+                    math(String.raw`[r+\delta_i]_L=L-1`), " から ", math(String.raw`r=[L-1-\delta_i]_L=f`), " である（", math(String.raw`\because`), " 整数の合同式の移項）。",
+                  ],
+                ]),
+                paragraph([
+                  "従って ", math(String.raw`\forall f\in F,\ r=f`), " である。一方、もし ", math(String.raw`r\in B`), " なら、",
+                  "ある負の切断旗に対応する剰余が ", math(String.raw`r`), " に等しい。零側なら ", math(String.raw`[r+\delta_i]_L=0`),
+                  "、末尾側なら ", math(String.raw`[r+\delta_i]_L=L-1`), " となり、対応する旗が ", math(String.raw`0`),
+                  " であることと ", math(String.raw`S`), " の同値条件が矛盾する。従って ", math(String.raw`r\notin B`), " である。",
+                ]),
+                paragraph([
+                  "逆に ", math(String.raw`\forall f\in F,\ r=f`), " かつ ", math(String.raw`r\notin B`), " とする。任意の ", math(String.raw`i`),
+                  " を取る。", math(String.raw`z_i=1`), " なら ", math(String.raw`[-\delta_i]_L\in F`), " なので ",
+                  math(String.raw`r=[-\delta_i]_L`), "、従って ", math(String.raw`[r+\delta_i]_L=0`), " である。逆に ",
+                  math(String.raw`z_i=0`), " なら ", math(String.raw`[-\delta_i]_L\in B`), " であり、",
+                  math(String.raw`r\notin B`), " から ", math(String.raw`r\ne[-\delta_i]_L`), "、従って ",
+                  math(String.raw`[r+\delta_i]_L\ne0`), " である。同じ議論を ", math(String.raw`\ell_i`), " と ",
+                  math(String.raw`[L-1-\delta_i]_L`), " へ適用すると、", math(String.raw`\ell_i=1\Longleftrightarrow[r+\delta_i]_L=L-1`),
+                  " を得る。よって ", math(String.raw`r\in S`), " である。両包含から表示した集合の等式を得る。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_fiber_phase_weight_topological_form",
         labels: [],
         title: { text: "ファイバーの位相付き寄与の位相形" },
