@@ -1245,7 +1245,75 @@ K_2^*&=-\frac12\log(\tanh K_2)
     conversion: {
       status: "added",
       notes: [
-        "残余複合定義から双曲線関数の添字つき略記だけを独立した定義へ分離した。略記の正値性は残余ブロックに保っている。",
+        "残余複合定義から双曲線関数の添字つき略記だけを独立した定義へ分離した。略記の正値性は <indexed_hyperbolic_abbreviations_positive> へ分離した。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive",
+    kind: "claim",
+    origin: { path: "_old/typst/parts/004_転送行列/000_definition_転送行列の記号の定義.typ", ordinal: 1 },
+    title: { text: "双曲線関数の添字つき略記の正値性" },
+    labels: ["indexed_hyperbolic_abbreviations_positive"],
+    statement: [
+      paragraph([
+        "各 ",
+        math(String.raw`i\in\{1,2\}`),
+        " について、",
+        math(String.raw`K_i,K_i^*\in\mathbb{R}_{>0}`),
+        " ならば、",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        " の略記は ",
+        math(String.raw`c_i,s_i,c_i^*,s_i^*\in\mathbb{R}`),
+        " であり、",
+      ]),
+      displayMath(String.raw`c_i>0,\qquad s_i>0,\qquad c_i^*>0,\qquad s_i^*>0`),
+      paragraph(["を満たす。"]),
+    ],
+    proof: [
+      paragraph([
+        "任意の ",
+        math(String.raw`i\in\{1,2\}`),
+        " を固定する。（実双曲線関数の評価と実数順序による実数への脱出）ここでは ",
+        math(String.raw`K_i,K_i^*\in\mathbb{R}_{>0}`),
+        " を実双曲線関数へ入力し、実数の順序で値を比較する。したがって、以下は実双曲線関数の評価と実数順序を用いる実数上の主張である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+2K_i&>0
+&&\bigl(\because 2>0,\ K_i>0,\ \text{正数の積}\bigr),\\
+2K_i^*&>0
+&&\bigl(\because 2>0,\ K_i^*>0,\ \text{正数の積}\bigr).
+\end{aligned}`),
+      paragraph([
+        ref("cosh_sinh_basic_properties"),
+        " の (3) を二つの正の引数へ適用する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\cosh(2K_i)&>\sinh(2K_i)>0
+&&\bigl(\because \blkref{cosh_sinh_basic_properties}\text{ の (3) と }2K_i>0\bigr),\\
+\cosh(2K_i^*)&>\sinh(2K_i^*)>0
+&&\bigl(\because \blkref{cosh_sinh_basic_properties}\text{ の (3) と }2K_i^*>0\bigr).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+c_i&>s_i>0
+&&\bigl(\because \blkref{def_indexed_hyperbolic_abbreviations}\text{ の定義で上の第 1 式を書き換えた}\bigr),\\
+c_i^*&>s_i^*>0
+&&\bigl(\because \blkref{def_indexed_hyperbolic_abbreviations}\text{ の定義で上の第 2 式を書き換えた}\bigr),\\
+s_i&>0
+&&\bigl(\because c_i>s_i>0\text{ の後半}\bigr),\\
+s_i^*&>0
+&&\bigl(\because c_i^*>s_i^*>0\text{ の後半}\bigr),\\
+c_i&>0
+&&\bigl(\because c_i>s_i\text{ と }s_i>0\text{ の推移律}\bigr),\\
+c_i^*&>0
+&&\bigl(\because c_i^*>s_i^*\text{ と }s_i^*>0\text{ の推移律}\bigr).
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "残余複合定義から、添字つき略記の正値性だけを独立した主張へ分離した。実数の順序を用いる実数への脱出であるため、双曲線関数の基本性質を入力として正値性を一段ずつ示した。",
       ],
     },
   },
@@ -1270,9 +1338,7 @@ K_2^*&=-\frac12\log(\tanh K_2)
         ref("global_spin_flip_jordan_wigner_representation"),
         " で示した全スピン反転行列の Jordan--Wigner 表示、および ",
         ref("def_cosh_sinh"),
-        " で定めた双曲線余弦・双曲線正弦を用いる。後者の正値性には ",
-        ref("cosh_sinh_basic_properties"),
-        " を用いる。また、双対結合定数の式に現れる双曲線正接は ",
+        " で定めた双曲線余弦・双曲線正弦を用いる。また、双対結合定数の式に現れる双曲線正接は ",
         ref("def_positive_coupling_tanh"),
         " で定めたものを用いる。実対数は ",
         ref("def_real_logarithm_positive"),
@@ -1286,15 +1352,9 @@ K_2^*&=-\frac12\log(\tanh K_2)
         ref("second_dual_coupling_relation"),
         " で示したものに加え、双曲線関数の添字つき略記は ",
         ref("def_indexed_hyperbolic_abbreviations"),
-        " で定めたものを用いる。",
-      ]),
-      paragraph([
-        "各 ",
-        math(String.raw`i\in\{1,2\}`),
-        " について、",
-        math(String.raw`K_i, K_i^* > 0`),
-        " より、",
-        math(String.raw`c_i, s_i, c_i^*, s_i^* > 0`),
+        " で定めたものを用い、その正値性は ",
+        ref("indexed_hyperbolic_abbreviations_positive"),
+        " で示したものを用いる。",
       ]),
       paragraph([
         "ここで ",
@@ -1325,7 +1385,7 @@ K_2^*&=-\frac12\log(\tanh K_2)
         "2^M 次の単位行列 I_{Mat(2^M,C)} と二次の単位行列のクロネッカー積の等式は <kronecker_product_rule> (2) で既に示されているため、本ブロックの重複した一覧項目を削除し、先頭段落の参照だけで接続した。",
         "第一の双対結合定数 K_1^* の定義と正値性は <def_first_dual_coupling_constant> へ、第一の双対関係は <first_dual_coupling_relation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから両者を明示参照している。",
         "第二の双対結合定数 K_2^* の定義と正値性は <def_second_dual_coupling_constant> へ、第二の双対関係は <second_dual_coupling_relation> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから両者を明示参照している。",
-        "双曲線関数の添字つき略記は <def_indexed_hyperbolic_abbreviations> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから新定義を明示参照している。残る正値性は本ブロックに保っている。",
+        "双曲線関数の添字つき略記は <def_indexed_hyperbolic_abbreviations> へ、その正値性は <indexed_hyperbolic_abbreviations_positive> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックから両者を明示参照している。",
         '旧 main.typ には、見出し「対角化の計算」直下に同内容のインライン #definition("記号の定義") が' +
           "重複して置かれていた。相違は双対関係の注記のみで、そちらは旧版の sinh(K_i)sinh(K_i^*)=1" +
           "（parts/004/000 で sinh(2K_i)sinh(2K_i^*)=1 に訂正済み）。よって重複ブロックは作らず、" +

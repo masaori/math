@@ -6,8 +6,9 @@
 * `structured-latex/content/004_transfer_matrix.ts`
   * `transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations`
     — `c_i`, `s_i`, `c_i^*`, `s_i^*` の定義
-  * `transfer_matrix_001_definition_symbols`（ラベル `def_transfer_matrix_symbols`）
-    — `c_i`, `s_i`, `c_i^*`, `s_i^*` の正値性（この正値性は次回の本文分離まで未形式化）
+  * `transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive`
+    （ラベル `indexed_hyperbolic_abbreviations_positive`）
+    — `c_i`, `s_i`, `c_i^*`, `s_i^*` の正値性
   * `transfer_matrix_007_definition_V1_pm`
     — `V_1^{(±)} := exp(√-1 K_1 (Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1))`
   * `transfer_matrix_003a_claim_V2_in_Z_Y`（ラベル `V2_in_Z_Y`）
@@ -64,6 +65,7 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
 import Ising2D.Part004.Definition009_HatZHatY
 import Ising2D.Representation
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 
 namespace Ising2D
 
@@ -150,6 +152,74 @@ noncomputable def indexedHyperbolicAbbreviations
   s1star := Real.sinh (2 * K1star)
   c2star := Real.cosh (2 * K2star)
   s2star := Real.sinh (2 * K2star)
+
+/-- 人手本文 `indexed_hyperbolic_abbreviations_positive` の具体版。
+二組の結合定数と双対結合定数について、本文の略記定義を代入したうえで、
+各添字の四つの正値性を本文と同じ順で示す。
+解析関数そのものに固有の主張なので、不要な構造を除いた別の必要十分版は置かない。 -/
+theorem indexedHyperbolicAbbreviations_pos
+    {K1 K2 K1star K2star : ℝ}
+    (hK1 : 0 < K1) (hK2 : 0 < K2) (hK1star : 0 < K1star) (hK2star : 0 < K2star) :
+    0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c1 ∧
+      0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s1 ∧
+      0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c1star ∧
+      0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s1star ∧
+      0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c2 ∧
+      0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s2 ∧
+      0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c2star ∧
+      0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s2star := by
+  -- 人手本文の第1段: 正の結合定数を二倍しても正である。
+  have h2K1 : 0 < 2 * K1 := mul_pos (by norm_num) hK1
+  have h2K1star : 0 < 2 * K1star := mul_pos (by norm_num) hK1star
+  have h2K2 : 0 < 2 * K2 := mul_pos (by norm_num) hK2
+  have h2K2star : 0 < 2 * K2star := mul_pos (by norm_num) hK2star
+  -- 人手本文の第2段: 各正の引数で `cosh x > sinh x > 0` を得る。
+  have hSinhK1 : 0 < Real.sinh (2 * K1) := (Real.sinh_pos_iff).2 h2K1
+  have hSinhK1star : 0 < Real.sinh (2 * K1star) := (Real.sinh_pos_iff).2 h2K1star
+  have hSinhK2 : 0 < Real.sinh (2 * K2) := (Real.sinh_pos_iff).2 h2K2
+  have hSinhK2star : 0 < Real.sinh (2 * K2star) := (Real.sinh_pos_iff).2 h2K2star
+  have hSinhLtCoshK1 : Real.sinh (2 * K1) < Real.cosh (2 * K1) := Real.sinh_lt_cosh _
+  have hSinhLtCoshK1star : Real.sinh (2 * K1star) < Real.cosh (2 * K1star) :=
+    Real.sinh_lt_cosh _
+  have hSinhLtCoshK2 : Real.sinh (2 * K2) < Real.cosh (2 * K2) := Real.sinh_lt_cosh _
+  have hSinhLtCoshK2star : Real.sinh (2 * K2star) < Real.cosh (2 * K2star) :=
+    Real.sinh_lt_cosh _
+  -- 人手本文の第3段: 略記定義を代入して二つの連鎖不等式を得る。
+  have hS1LtC1 :
+      (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s1 <
+        (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c1 := by
+    simpa [indexedHyperbolicAbbreviations] using hSinhLtCoshK1
+  have hS1starLtC1star :
+      (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s1star <
+        (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c1star := by
+    simpa [indexedHyperbolicAbbreviations] using hSinhLtCoshK1star
+  have hS2LtC2 :
+      (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s2 <
+        (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c2 := by
+    simpa [indexedHyperbolicAbbreviations] using hSinhLtCoshK2
+  have hS2starLtC2star :
+      (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s2star <
+        (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c2star := by
+    simpa [indexedHyperbolicAbbreviations] using hSinhLtCoshK2star
+  -- 人手本文の第4・第5段: `s_i`, `s_i^*` の正値性を定義から取り出す。
+  have hS1 : 0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s1 := by
+    simpa [indexedHyperbolicAbbreviations] using hSinhK1
+  have hS1star : 0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s1star := by
+    simpa [indexedHyperbolicAbbreviations] using hSinhK1star
+  have hS2 : 0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s2 := by
+    simpa [indexedHyperbolicAbbreviations] using hSinhK2
+  have hS2star : 0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).s2star := by
+    simpa [indexedHyperbolicAbbreviations] using hSinhK2star
+  -- 人手本文の第6・第7段: 推移律で `c_i`, `c_i^*` の正値性を得る。
+  have hC1 : 0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c1 :=
+    lt_trans hS1 hS1LtC1
+  have hC1star : 0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c1star :=
+    lt_trans hS1star hS1starLtC1star
+  have hC2 : 0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c2 :=
+    lt_trans hS2 hS2LtC2
+  have hC2star : 0 < (indexedHyperbolicAbbreviations K1 K2 K1star K2star).c2star :=
+    lt_trans hS2star hS2starLtC2star
+  exact ⟨hC1, hS1, hC1star, hS1star, hC2, hS2, hC2star, hS2star⟩
 
 /-! ## 転送行列 `V_1^{(±)}`, `(V_1^{(±)})^{1/2}`, `V_2` -/
 

@@ -231,6 +231,7 @@ export const ALL_LABELS = [
   "hatZ_hatY_M_periodicity",
   "iH_is_real_symmetric",
   "inclusion_rr_to_cc",
+  "indexed_hyperbolic_abbreviations_positive",
   "injectivity_of_T_up_to_scalar",
   "inverse_of_sqrt_cc",
   "invertible_matrix_centralizer_is_nonzero_scalar_identity",
