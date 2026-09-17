@@ -52218,6 +52218,95 @@ k\in\mathcal G
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_selected_support_coefficient_reconstruction",
+        labels: [],
+        title: { text: "実現可能な最小切断による支持係数の再構成" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_selected_support_coefficient_reconstruction",
+            focus: {
+              id: "kac_ward_claim_selected_support_coefficient_reconstruction",
+              kind: "claim",
+              title: { text: "巡回軌道の係数と実現可能な最小切断は切断前の係数を復元する" },
+              labels: ["claim_selected_support_coefficient_reconstruction"],
+              habitat: "Z",
+              verification: [
+                "sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-support-encoding",
+                "sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-realizable-boundary-incidence",
+                "sagemath/check/parity-identity-simple-cycle-arc-orientation-selected-support-coefficient-reconstruction",
+              ],
+              lean: [
+                "Ising2DLambda.KacWard.supportCoefficient_eq_reconstructed",
+                "Ising2DLambda.NecSuf.KacWard.coefficient_eq_selected_sum",
+                "Ising2DLambda.KacWard.supportCoefficient_eq_reconstructed_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "空でない内部語の巡回・反転軌道の有限集合を ", math(String.raw`\Omega`),
+                  " とし、切断候補の添字集合を ", math(String.raw`K:=\{0,1\}`),
+                  " とする。各 ", math(String.raw`\omega\in\Omega`),
+                  " について、", ref("claim_cut_flag_realizable_candidate_selection"),
+                  " が復元した空でない実現可能候補集合を ", math(String.raw`\mathcal R_\omega\subseteq K`),
+                  "、その最小元を ", math(String.raw`\kappa(\omega):=\min\mathcal R_\omega`),
+                  " と書く。切断位置を保った係数を ",
+                  math(String.raw`c:\Omega\times K\to\mathbb F_2`), " とし、任意の ",
+                  math(String.raw`\omega\in\Omega`), " と ", math(String.raw`k\in K`),
+                  " について ", math(String.raw`k\ne\kappa(\omega)`), " ならば ",
+                  math(String.raw`c(\omega,k)=0`), " と仮定する。巡回軌道の係数を",
+                ]),
+                displayMath(String.raw`\bar c(\omega):=\sum_{j\in K}c(\omega,j)\in\mathbb F_2`),
+                paragraph(["で定める。このとき各切断位置の係数は"]),
+                displayMath(String.raw`c(\omega,k)=
+\begin{cases}
+\bar c(\omega),&k=\kappa(\omega),\\
+0,&k\ne\kappa(\omega)
+\end{cases}`),
+                paragraph([
+                  "で一意に復元される。従って、各巡回軌道で非零係数を持つ切断位置が実現可能候補の最小元だけであるなら、",
+                  "切断前の支持を保存するために必要なデータは巡回軌道の係数と有限合同条件から得る最小候補だけである。",
+                  "二つの正準巡回支持では、軌道への射影がそれぞれ単射であり、そのうち方向上連結する二候補を持つ 489 項では保存済み切断位置がこの最小候補に一致することを有限検算している。",
+                  "全ての量は有限集合と ", math(String.raw`\mathbb F_2`),
+                  " の有限和の中にあり、実数体も複素数体も現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`\omega\in\Omega`), " と ", math(String.raw`k\in K`),
+                  " を固定する。まず ", math(String.raw`k=\kappa(\omega)`), " とする。",
+                  "有限和を選択された項とそれ以外の項に分けると",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\bar c(\omega)
+&=\sum_{j\in K}c(\omega,j)
+&&\bigl(\because\ \bar c\text{ の定義}\bigr)\\
+&=c\bigl(\omega,\kappa(\omega)\bigr)
+ +\sum_{\substack{j\in K\\j\ne\kappa(\omega)}}c(\omega,j)
+&&\bigl(\because\ \text{有限和を }\kappa(\omega)\text{ の項と残りへ分割}\bigr)\\
+&=c\bigl(\omega,\kappa(\omega)\bigr)
+&&\bigl(\because\ j\ne\kappa(\omega)\text{ の係数は全て }0\bigr)\\
+&=c(\omega,k)
+&&\bigl(\because\ k=\kappa(\omega)\bigr)
+\end{aligned}`),
+                paragraph([
+                  "次に ", math(String.raw`k\ne\kappa(\omega)`), " とする。仮定から直接 ",
+                  math(String.raw`c(\omega,k)=0`),
+                  " である。二つの場合は ", math(String.raw`K`),
+                  " の全ての元を尽くすので、表示した場合分けを得る。",
+                  "この等式は各 ", math(String.raw`(\omega,k)\in\Omega\times K`),
+                  " の係数を確定するので、再構成は一意である。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_fiber_phase_weight_topological_form",
         labels: [],
         title: { text: "ファイバーの位相付き寄与の位相形" },
