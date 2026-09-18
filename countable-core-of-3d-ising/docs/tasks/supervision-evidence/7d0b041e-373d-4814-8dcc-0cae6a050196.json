@@ -1,0 +1,50 @@
+{
+  "実行識別子": "7d0b041e-373d-4814-8dcc-0cae6a050196",
+  "観測時刻": "2026-09-18T09:00:01+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.ising-3d-cut-auto-loop",
+    "state": "not running",
+    "runs": 183,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-3d-cut-auto-loop.plist",
+    "存在": true,
+    "sha256": "b15709b26349fd26b3a1296d7b4c404346b41e0f60f7c2e804ca8ea1f968c221",
+    "StartCalendarInterval": "毎時0分・30分（tick内部で60分間隔制御）"
+  },
+  "実ログ": {
+    "path": "/Users/masaori/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log",
+    "終端": "2026-09-18 08:02:25 === tick 正常終了（研究の前進なし）",
+    "補足": "2026-09-18 08:30:16 SKIP: 間隔を60分へ伸ばしている"
+  },
+  "実行の終了値の解釈": "launchctl list/printは登録あり・非実行中・last exit 0。実ログで08:00開始回の正常終了と研究前進なしを確認し、08:30回は間隔制御で見送られた。",
+  "成果比較": {
+    "開始成果": "3473abb22506fcacd42dd46312fad334f7aa99fb",
+    "前回監督の読解終点": "42b1c960845f97a35933a223cd576cb503803ced",
+    "今回読解終点": "3473abb22506fcacd42dd46312fad334f7aa99fb",
+    "前回監督以後": "数学本文・証明・有限反例の新しい統合成果はない。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-18T09:09:31+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-18T09:09:31+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    },
+    {
+      "時刻": "2026-09-18T09:09:31+09:00",
+      "コマンド": "git diff --check",
+      "終了コード": 0,
+      "結果": "空白エラーなし"
+    }
+  ]
+}

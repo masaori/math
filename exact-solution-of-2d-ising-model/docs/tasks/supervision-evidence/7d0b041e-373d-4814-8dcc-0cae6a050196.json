@@ -1,0 +1,50 @@
+{
+  "実行識別子": "7d0b041e-373d-4814-8dcc-0cae6a050196",
+  "観測時刻": "2026-09-18T09:00:01+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "state": "running",
+    "runs": 46,
+    "pid": 37044,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "2f811ad50d24476e63564a39c657e27f5f42d3207de30629da59bd4c0910e641",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": {
+    "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick-run-20260918T084321-37044.log",
+    "終端": "2026-09-18 08:43:21開始（観測時に成功・失敗の終端なし）"
+  },
+  "実行の終了値の解釈": "launchctl list/printはPID 37044で実行中。実行固有ログに終端がなく、last exit 0は過去値なので成否未確認とする。",
+  "成果比較": {
+    "開始成果": "3473abb22506fcacd42dd46312fad334f7aa99fb",
+    "前回監督の読解終点": "42b1c960845f97a35933a223cd576cb503803ced",
+    "今回読解終点": "3473abb22506fcacd42dd46312fad334f7aa99fb",
+    "前回監督以後": "一般生成子H_1^{(±)}とH_2が独立定義へ分離され、本文・棚卸し・Lean/SageMath対応・後続依存へ統合された。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-18T09:09:31+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-18T09:09:31+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    },
+    {
+      "時刻": "2026-09-18T09:09:31+09:00",
+      "コマンド": "git diff --check",
+      "終了コード": 0,
+      "結果": "空白エラーなし"
+    }
+  ]
+}

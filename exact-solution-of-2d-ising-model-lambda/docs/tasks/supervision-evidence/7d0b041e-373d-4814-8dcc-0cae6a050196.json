@@ -1,0 +1,49 @@
+{
+  "実行識別子": "7d0b041e-373d-4814-8dcc-0cae6a050196",
+  "観測時刻": "2026-09-18T09:00:01+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.ising-lambda-auto-loop",
+    "state": "not running",
+    "runs": 169,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist",
+    "存在": true,
+    "sha256": "cbed703002cee81ff8c2c71fd5a6ab508bc0e394ab401a3d247eee1173a6c3c5",
+    "StartCalendarInterval": "毎時5分・35分"
+  },
+  "実ログ": {
+    "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log",
+    "終端": "2026-09-18 08:52:38 === tick 正常終了"
+  },
+  "実行の終了値の解釈": "launchctl list/printは登録あり・非実行中・last exit 0を返し、実ログも08:35開始回の正常終了を記録する。",
+  "成果比較": {
+    "開始成果": "3473abb22506fcacd42dd46312fad334f7aa99fb",
+    "前回監督の読解終点": "42b1c960845f97a35933a223cd576cb503803ced",
+    "今回読解終点": "3473abb22506fcacd42dd46312fad334f7aa99fb",
+    "前回監督以後": "二支持係数式が合成され、内部語・端点・文字数・局所所属・相対スロット・隣接二文字の候補について有限全データの決定性または反例が統合された。"
+  },
+  "検査結果": [
+    {
+      "時刻": "2026-09-18T09:09:31+09:00",
+      "コマンド": "node scripts/research-supervision/verify.ts --all",
+      "終了コード": 0,
+      "結果": "六研究のschemaVersion 2評価記録を受理"
+    },
+    {
+      "時刻": "2026-09-18T09:09:31+09:00",
+      "コマンド": "node scripts/research-supervision/verify-supervision-log-test.ts",
+      "終了コード": 0,
+      "結果": "監督記録の規則回帰24件成功"
+    },
+    {
+      "時刻": "2026-09-18T09:09:31+09:00",
+      "コマンド": "git diff --check",
+      "終了コード": 0,
+      "結果": "空白エラーなし"
+    }
+  ]
+}
