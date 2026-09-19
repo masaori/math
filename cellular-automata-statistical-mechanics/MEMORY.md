@@ -1,5 +1,15 @@
 # MEMORY.md — cellular-automata-statistical-mechanics
 
+## 自動ループ tick: 有限 Yang–Baxter 条件の Lean 具体版後半の再レビュー（2026-09-20 06:37）
+
+前 tick の Lean 具体版後半を構造化本文と四つの SageMath 検算へ戻って LLM による検証で照合し、
+有限全走査、基底係数による有限表の回収、定数族への比較の主張に修正を要する不一致は見つからなかった。
+
+プログラミングによる検証は `lake env lean CellularAutomata/FiniteYangBaxterBoundary.lean` を実行したが、
+欠けていた mathlib 依存の取得が締め境界までに完了せず、Lean コンパイルは開始できなかった。
+対象は Lean 具体版後半までのままであり、次 tick は依存取得後にこのファイルのコンパイルを最優先する。
+必要十分版と具体版への導出は後続である。公開と Slack 通知は外側が担当する。
+
 ## 自動ループ tick: 有限 Yang–Baxter 条件の Lean 具体版後半（2026-09-20 05:43）
 
 前 tick の Lean 具体版前半を構造化本文と四つの SageMath 検算へ戻って LLM による検証で照合し、
