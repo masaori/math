@@ -3126,7 +3126,7 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
       paragraph([
         math(String.raw`T_{V_2}(\hat{Z}_\mu^{(-)})`),
         " について。",
-        ref("def_H1_H2"),
+        ref("V2_exponential_representation"),
         " の指数表示を用いる。準備として 2 つ置く。第一に、スカラー ",
         math(String.raw`(2s_2)^{M/2} \in \mathbb{C}^{\times}`),
         " は ",

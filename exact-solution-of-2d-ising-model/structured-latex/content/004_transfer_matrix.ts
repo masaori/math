@@ -4447,51 +4447,118 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     },
   },
   {
-    id: "transfer_matrix_011_definition_H1_H2",
-    kind: "definition",
+    id: "transfer_matrix_011c_claim_V1_pm_exponential_representation",
+    kind: "claim",
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
-    title: { text: "一般生成子による転送行列の指数表示" },
-    labels: ["def_H1_H2"],
+    title: { tex: String.raw`V_1^{(\pm)} \text{ の一般生成子による指数表示}` },
+    labels: ["V1_pm_exponential_representation"],
     statement: [
       paragraph([
-        ref("def_H1_pm"),
-        " の ",
-        math(String.raw`H_1^{(\pm)}`),
+        math(String.raw`M\in\mathbb{Z}_{\geq 2}`),
         "、",
-        ref("def_H2"),
-        " の ",
-        math(String.raw`H_2`),
-        "、",
-        ref("def_V1_pm"),
-        " の ",
-        math(String.raw`V_1^{(\pm)}`),
-        "、および ",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`K_1,K_2^*,s_2,V_2`),
-        " を用いる。すると、",
-        ref("def_V1_pm"),
+        math(String.raw`K_1\in\mathbb{R}_{>0}\subset\mathbb{C}`),
+        "、および虚数単位 ",
+        math(String.raw`i\in\mathbb{C}`),
+        " を用いる。",
+        ref("def_H1_pm"),
+        " の ",
+        math(String.raw`H_1^{(\pm)}\in\mathrm{Mat}(2^M,\mathbb{C})`),
         " と ",
-        ref("V2_in_Z_Y"),
-        " より",
+        ref("def_V1_pm"),
+        " の ",
+        math(String.raw`V_1^{(\pm)}\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " について、",
       ]),
       displayMath(
-        String.raw`\begin{aligned}
-V_1^{(\pm)}
-&= \exp\!\left(i K_1 H_1^{(\pm)}\right)
-&&\left(\because\ \blkref{def_V1_pm}\right) \\
-V_2
-&= (2s_2)^{M/2} \exp\!\left(i K_2^* H_2\right)
-&&\left(\because\ \blkref{V2_in_Z_Y}\right)
-\end{aligned}`,
+        String.raw`V_1^{(\pm)}
+= \exp\!\left(i K_1 H_1^{(\pm)}\right)`,
       ),
     ],
+    proof: [
+      paragraph([
+        ref("def_V1_pm"),
+        " の表示中の ",
+        math(String.raw`Y_1Z_2+Y_2Z_3+\cdots+Y_{M-1}Z_M`),
+        " は、添字を省略しない有限和 ",
+        math(String.raw`\sum_{m=1}^{M-1}Y_mZ_{m+1}`),
+        " を表す。特に ",
+        math(String.raw`M=2`),
+        " では一項 ",
+        math(String.raw`Y_1Z_2`),
+        " だけである。したがって、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+V_1^{(\pm)}
+&=\exp\!\left(iK_1\left(\sum_{m=1}^{M-1}Y_mZ_{m+1}\mp Y_MZ_1\right)\right)
+&&(\because\ \text{第一転送行列の定義と上の有限和記法。}\blkref{def_V1_pm})\\
+&=\exp\!\left(iK_1H_1^{(\pm)}\right)
+&&(\because\ \text{一般生成子の定義。}\blkref{def_H1_pm})
+\end{aligned}`),
+    ],
     conversion: {
-      status: "converted",
+      status: "added",
       notes: [
-        "一般生成子 H_1^{(±)} の定義は <def_H1_pm> へ、H_2 の定義は <def_H2> へ分離した。旧ラベルを使う後続参照の意味を保つため、本ブロックには二つの指数表示を残して新定義を明示参照している。",
-        "2026-09-04: 式変形の書き方の統一。H1, H2 を用いた V1, V2 の二つの等号を分け、" +
-          "各行末に参照先の根拠を付けた。式・定義の内容は変えていない。",
+        "旧複合ブロック <def_H1_H2> から、V1^{(±)} の指数表示だけを独立主張として分離した。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_011d_claim_V2_exponential_representation",
+    kind: "claim",
+    origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
+    title: { tex: String.raw`V_2 \text{ の一般生成子による指数表示}` },
+    labels: ["V2_exponential_representation"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb{Z}_{\geq 1}`),
+        "、",
+        ref("def_transfer_matrix_symbols"),
+        " の ",
+        math(String.raw`K_2^*,s_2\in\mathbb{R}_{>0}\subset\mathbb{C}`),
+        "、および虚数単位 ",
+        math(String.raw`i\in\mathbb{C}`),
+        " を用いる。",
+        ref("def_H2"),
+        " の ",
+        math(String.raw`H_2\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " と同じ記号定義の ",
+        math(String.raw`V_2\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " について、",
+        ref("V2_in_Z_Y"),
+        " と合わせると",
+      ]),
+      displayMath(
+        String.raw`V_2
+= (2s_2)^{M/2} \exp\!\left(i K_2^* H_2\right)`,
+      ),
+    ],
+    proof: [
+      paragraph([
+        ref("V2_in_Z_Y"),
+        " の表示中の ",
+        math(String.raw`Z_1Y_1+Z_2Y_2+\cdots+Z_MY_M`),
+        " は、添字を省略しない有限和 ",
+        math(String.raw`\sum_{m=1}^{M}Z_mY_m`),
+        " を表す。特に ",
+        math(String.raw`M=1`),
+        " では一項 ",
+        math(String.raw`Z_1Y_1`),
+        " だけである。したがって、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+V_2
+&=(2s_2)^{M/2}\exp\!\left(iK_2^*\sum_{m=1}^{M}Z_mY_m\right)
+&&(\because\ \text{第二転送行列の Jordan--Wigner 表示と上の有限和記法。}\blkref{V2_in_Z_Y})\\
+&=(2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)
+&&(\because\ \text{一般生成子の定義。}\blkref{def_H2})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧複合ブロック <def_H1_H2> から、V2 の指数表示だけを独立主張として分離した。",
       ],
     },
   },

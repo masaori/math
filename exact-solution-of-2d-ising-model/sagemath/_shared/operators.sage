@@ -3,7 +3,8 @@
 #
 # Mat(2,C)^{⊗M} の元を「具体的な 2^M × 2^M の複素行列（クロネッカー積）」として構成する。
 # structured-latex 側のラベル <def_transfer_matrix_symbols>, <def_hatZ_hatY>,
-# <transfer_matrix_011_definition_H1_H2>, <def_A_theta>, <def_fermi> などに対応する。
+# <transfer_matrix_011c_claim_V1_pm_exponential_representation>,
+# <transfer_matrix_011d_claim_V2_exponential_representation>, <def_A_theta>, <def_fermi> などに対応する。
 #
 # 既存の `_shared/defs.sage` は「symbolic な γ_1, γ_2, A(θ) の式」を提供するもので、
 # こちらは「作用素を明示的な行列として作る」ためのもの。役割が違うので両方 load してよい。
