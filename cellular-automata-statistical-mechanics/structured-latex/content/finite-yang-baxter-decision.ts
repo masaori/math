@@ -14,7 +14,7 @@ export default defineBlocks([
     habitat: "none",
     statement: [
       paragraph([
-        "有限 CA の比較元には T. Gombor–B. Pozsgay, “Superintegrable cellular automata and dual unitary gates from Yang–Baxter maps,” SciPost Physics 12 (2022) 102 の式 (17) を用いる。",
+        "有限写像側の比較元には T. Gombor–B. Pozsgay, “Superintegrable cellular automata and dual unitary gates from Yang–Baxter maps,” SciPost Physics 12 (2022) 102 の式 (17) を用いる。",
         "同論文は隣接二体写像の braid 関係をスペクトルパラメータなしの Yang–Baxter 方程式として使う。",
         "複素数値族の比較先には A. P. Veselov, “Yang–Baxter maps and integrable dynamics,” Physics Letters A 314 (2003) 214–221 の式 (1), (3) を用いる。",
         "同論文は非隣接作用を含む Yang–Baxter 方程式と、その二パラメータ版を区別する。",
@@ -77,7 +77,7 @@ R_{23}(x,y,z)&=\bigl(x,R_1(y,z),R_2(y,z)\bigr).
       paragraph([
         "を満たすとき、", math(String.raw`R`), " を有限 Yang--Baxter 写像と呼ぶ。",
         "これは ", ref("remark_yang_baxter_conventions_and_sources"),
-        " の有限 CA 側の braid 規約である。合成は右端の写像から適用する。",
+        " の有限写像側の braid 規約である。合成は右端の写像から適用する。",
         "この定義は一つの有限写像の等号であり、",
         "実数体、複素数体、行列、スペクトルパラメータを仮定しない。",
       ]),

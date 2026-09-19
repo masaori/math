@@ -1,0 +1,29 @@
+{
+  "実行識別子": "9bd8381d-5644-4ffe-bd00-547947a24239",
+  "観測時刻": "2026-09-20T00:13:27+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.finite-graph-ising-auto-loop",
+    "state": "not running",
+    "runs": 1,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.finite-graph-ising-auto-loop.plist",
+    "存在": true,
+    "sha256": "4a7903ee2f928547f632c408447ace31615df77230267a386749624596f151e5",
+    "StartCalendarInterval": "毎時27分"
+  },
+  "実ログ": {
+    "path": "/Users/masaori/Library/Logs/finite-graph-ising-auto-loop/auto-loop.log",
+    "終端": "2026-09-19 23:32:42 === tick 正常終了"
+  },
+  "実行の終了値の解釈": "launchctl list/printは登録あり・非実行中・last exit 0。実ログも正常終了だが、内容は固定対象done一件・未達0であり研究上の前進ではない。",
+  "成果比較": {
+    "開始成果": "406871cfa6dafdff325d1f61dcf5e9991c99f743",
+    "前回監督の読解終点": "3473abb22506fcacd42dd46312fad334f7aa99fb",
+    "今回読解終点": "406871cfa6dafdff325d1f61dcf5e9991c99f743",
+    "前回監督以後": "数学本文・証明・有限反例の新しい統合成果はない。"
+  }
+}

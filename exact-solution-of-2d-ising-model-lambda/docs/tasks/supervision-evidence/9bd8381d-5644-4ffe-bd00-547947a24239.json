@@ -1,0 +1,30 @@
+{
+  "実行識別子": "9bd8381d-5644-4ffe-bd00-547947a24239",
+  "観測時刻": "2026-09-20T00:13:27+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.ising-lambda-auto-loop",
+    "state": "running",
+    "runs": 3,
+    "pid": 98465,
+    "last exit code": 1
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist",
+    "存在": true,
+    "sha256": "0251205e11070166bad48b0a0fa90288543e32339c1ca704301bb202ba0ecf70",
+    "StartCalendarInterval": "毎時5分・35分"
+  },
+  "実ログ": {
+    "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log",
+    "終端": "2026-09-19 23:32:15 === tick 開始（観測時に成功・失敗の終端なし）"
+  },
+  "実行の終了値の解釈": "launchctl list/printは実行中を示す。実ログに現行回の終端がなく、last exit 1は過去値なので現行回の成否は未確認とする。",
+  "成果比較": {
+    "開始成果": "406871cfa6dafdff325d1f61dcf5e9991c99f743",
+    "前回監督の読解終点": "3473abb22506fcacd42dd46312fad334f7aa99fb",
+    "今回読解終点": "406871cfa6dafdff325d1f61dcf5e9991c99f743",
+    "前回監督以後": "連続三文字の共同回転窓が隣接二文字窓と同じ7,427記述・同じ係数衝突を残す有限判定が統合された。"
+  }
+}

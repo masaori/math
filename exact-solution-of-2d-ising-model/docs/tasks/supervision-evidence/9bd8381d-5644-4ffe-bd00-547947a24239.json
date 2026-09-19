@@ -1,0 +1,29 @@
+{
+  "実行識別子": "9bd8381d-5644-4ffe-bd00-547947a24239",
+  "観測時刻": "2026-09-20T00:13:27+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "state": "not running",
+    "runs": 1,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "3d05a4e2dffcf073838797e47d24ad41df834e7bf65e40378224940c326ee4ed",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": {
+    "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick.log",
+    "終端": "2026-09-20 00:06:03 CHECKPOINT: 有限上限までの成果をworktreeへ保持し、次回は継続モードで完了工程だけを行う（exit 124）"
+  },
+  "実行の終了値の解釈": "launchctl list/printは非実行中・last exit 0だが、実ログの最新実行はexit 124でcheckpointを保持して打ち切られた。過去のlaunchctl値を最新実行の成功として流用しない。",
+  "成果比較": {
+    "開始成果": "406871cfa6dafdff325d1f61dcf5e9991c99f743",
+    "前回監督の読解終点": "3473abb22506fcacd42dd46312fad334f7aa99fb",
+    "今回読解終点": "406871cfa6dafdff325d1f61dcf5e9991c99f743",
+    "前回監督以後": "remote defaultに数学本文・証明・有限検算の新しい統合成果はない。外部作業場所の未コミット成果は実ログ上保持されている。"
+  }
+}
