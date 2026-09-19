@@ -71,6 +71,52 @@ theorem binaryCounterexample_not_braid :
   have ht := congrFun h (true, true, true)
   decide at ht
 
+/-- 有限集合では braid 条件を三体入力の全走査で決定できる。 -/
+theorem satisfiesBraid_decidable [Fintype X] [DecidableEq X]
+    (R : PairMap X) : Decidable (SatisfiesBraid R) := by
+  unfold SatisfiesBraid
+  infer_instance
+
+/-- 有限二体写像の複素線形化を基底係数で書いたもの。 -/
+def complexLinearization [DecidableEq X] (U : PairMap X)
+    (target source : X × X) : ℂ :=
+  if target = U source then 1 else 0
+
+/-- 各基底列から元の有限二体写像の値を回収できる。 -/
+theorem complexLinearization_eq_one_iff [DecidableEq X]
+    (U : PairMap X) (target source : X × X) :
+    complexLinearization U target source = 1 ↔ target = U source := by
+  simp [complexLinearization]
+
+/-- 複素線形化をパラメータに依らない族として置く。 -/
+def constantComplexLinearization [DecidableEq X] (U : PairMap X) :
+    ℂ → ℂ → X × X → X × X → ℂ :=
+  fun _ _ => complexLinearization U
+
+theorem constantComplexLinearization_recovers [DecidableEq X]
+    (U : PairMap X) (l m : ℂ) (source : X × X) :
+    constantComplexLinearization U l m (U source) source = 1 := by
+  simp [constantComplexLinearization, complexLinearization]
+
+/-- 成分交換後の基底作用を、複素パラメータに依らない族として置く。 -/
+def constantConvertedFamily (U : PairMap X) : ℂ → ℂ → PairMap X :=
+  fun _ _ => swapAfter U
+
+def SatisfiesParameterizedYangBaxter
+    (R : ℂ → ℂ → PairMap X) : Prop :=
+  ∀ l₁ l₂ l₃,
+    adjacent12 (R l₁ l₂) ∘ nonadjacent13 (R l₁ l₃) ∘
+        adjacent23 (R l₂ l₃) =
+      adjacent23 (R l₂ l₃) ∘ nonadjacent13 (R l₁ l₃) ∘
+        adjacent12 (R l₁ l₂)
+
+/-- 有限 braid 解の複素線形化は定数な Yang--Baxter 族を与える。 -/
+theorem braid_gives_constant_parameterized_yangBaxter
+    (U : PairMap X) (hU : SatisfiesBraid U) :
+    SatisfiesParameterizedYangBaxter (constantConvertedFamily U) := by
+  intro l₁ l₂ l₃
+  exact (braid_iff_swapAfter_yangBaxter U).mp hU
+
 /-- 一元複素作用素を係数で表した二パラメータ族。 -/
 abbrev ScalarSpectralFamily := ℂ → ℂ → ℂ
 
