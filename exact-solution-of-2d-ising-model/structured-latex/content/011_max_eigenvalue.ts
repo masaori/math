@@ -248,7 +248,7 @@ S_2
       ]),
       paragraph([
         "Step 3（合同変換）。",
-        ref("def_H1_H2"),
+        ref("V2_exponential_representation"),
         " より ",
         math(String.raw`V_2 = (2s_2)^{M/2}A`),
         "（",

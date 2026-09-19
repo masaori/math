@@ -310,7 +310,11 @@ EOF
 | `Ising2D.nextSite` | site 添字の巡回 `m ↦ m+1`（`M` で巻き戻る） | `Z_{M+1} := Z_1` の規約 |
 | `Ising2D.H1` / `Ising2D.H2` | `H_1^{(±)}`, `H_2` | `transfer_matrix_011a_definition_H1_pm` / `transfer_matrix_011b_definition_H2` |
 | `Ising2D.I_smul_H2_eq_sum_sigmaX` / `V2_eq_V2pauli` | `V_2 = (2s_2)^{M/2}\exp(iK_2^*\sum_m Z_mY_m)` | `V2_in_Z_Y`（前者が指数の等式、後者が規格化因子を保った行列等式） |
-| `Ising2D.V1` / `Ising2D.V1half` / `Ising2D.V2` | `V_1^{(±)}`, `(V_1^{(±)})^{1/2}`, `V_2` | `transfer_matrix_007_definition_V1_pm`, `011` |
+| `Ising2D.V1FromDefinition` | `V_1^{(±)}` の有限和を省略しない定義 | `transfer_matrix_007_definition_V1_pm` |
+| `Ising2D.V1` / `Ising2D.V1_exponential_representation` | `V_1^{(±)}=\exp(iK_1H_1^{(±)})` | `V1_pm_exponential_representation` |
+| `Ising2D.V1half` | `(V_1^{(±)})^{1/2}` | `def_V1_plus_square_root` |
+| `Ising2D.V2FromJordanWigner` | `V_2` の Jordan--Wigner 有限和表示 | `V2_in_Z_Y` |
+| `Ising2D.V2` / `Ising2D.V2_exponential_representation` | `V_2=(2s_2)^{M/2}\exp(iK_2^*H_2)` | `V2_exponential_representation` |
 | `Ising2D.V1half_sq` | `((V_1^{(±)})^{1/2})^2 = V_1^{(±)}` | 同上（「平方根」であることの確認） |
 | `Ising2D.matExpUnits` / `smulUnits` | `exp X` と 0 でないスカラー倍の可逆性 | 補助（原文は暗黙に可逆性を使用） |
 | `Ising2D.V1Units` / `V1halfUnits` / `V2Units` | 転送行列を単元 `(TensorPow M)ˣ` として | 同上（`V_2` には `s_2 > 0` が要る） |
@@ -499,7 +503,7 @@ Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `su
 | `parts/006_ZとYの反交換関係/000_claim_...`（`<anticommutator_of_Z_and_Y>`） | `[Z_μ, Y_ν]₊`, `[Y_μ, Y_ν]₊` の証明が TODO のまま | Lean 側で 3 式とも証明済み（`Ising2D/Part006/Claim000_AnticommutatorZY.lean`） |
 | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | 形式化時点で証明が「TODO: 証明略」のままだった（その後、別経路の人手証明が追記されている）。また線型独立性は**族**の性質なのに集合 `{Z_1,…,Y_M}` で述べている | Lean 側で証明済み（`Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean`）。族の形（`ZY_linearIndependent`）と集合の形（`ZYSet_linearIndepOn`）の両方を用意 |
 | `parts/007_hatZとhatYの反交換関係/000_claim_...`（`<anticommutator_of_hat_Z_and_hat_Y>`） | `[hat(Z), hat(Y)]₊` と `[hat(Y), hat(Y)]₊` を「同様」として省略（原文自身が省略と明記） | Lean 側で 4 式とも証明済み（`Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean`） |
-| `transfer_matrix_001_definition_symbols` と `transfer_matrix_011_definition_H1_H2`（`V_2` の 2 つの表式） | 一方は `exp(K_2^*(σ^x_1+⋯+σ^x_M))`、他方は `exp(√-1 K_2^* H_2)` と書かれているが、一致の根拠（`√-1 Z_m Y_m = σ^x_m`）が明示されていない | `Ising2D/Part004/Definition010_H1H2V1V2.lean` 冒頭に記載。`I_smul_H2_eq_sum_sigmaX` として証明 |
+| `transfer_matrix_001_definition_symbols` と `transfer_matrix_011d_claim_V2_exponential_representation`（`V_2` の 2 つの表式） | 一方は `exp(K_2^*(σ^x_1+⋯+σ^x_M))`、他方は `exp(√-1 K_2^* H_2)` と書かれているが、一致の根拠（`√-1 Z_m Y_m = σ^x_m`）が明示されていない | `Ising2D/Part004/Definition010_H1H2V1V2.lean` 冒頭に記載。`I_smul_H2_eq_sum_sigmaX` として証明 |
 | `TV1_hatZ_hatY_017_definition_A_theta`（`def_A_theta`）と `TV1_hatZ_hatY_018_claim_T_V_action`（`T_V_hatZ_hatY`） | `A(θ)` の非対角成分に `c_2` が現れるが、`B_1 B_2 B_1` を計算すると同じ位置に出るのは `c_2^*` である。一致には双対関係から従う等式 `c_2^* = s_2^* c_2` が要るのに、原文はどこにも書いていない | `Ising2D/Part008/Definition016_TV.lean` 冒頭に記載。`B1_mul_B2_mul_B1_eq_explicit` / `B1_mul_B2_mul_B1_eq_AMat` の仮定 `hdual` として明示 |
 | `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`（`ホロノミック量子場_p142下段_1`） | （かつて）ネストした交換子のテイラー係数抽出（`parts 008` の 001〜005）に依存し、本リポジトリでは未形式化だった | **解消済み（2026-07-26）**。`Ising2D/Part008/Claim012_TVActions.lean` の `actsBy_TConj_V1half` / `actsBy_TConj_V2` として証明した。係数を独立に導出して原文の `cosh K_1`, `±i e^{∓iθ_μ} sinh K_1`, `cosh 2K_2^*`, `±i sinh 2K_2^*` と突き合わせた結果、**原文の誤りは無かった**（`B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat`） |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_022`（`gamma_2_theta_is_0`） | 形式化時点の原文は `γ_2(θ_μ) = 0` の同値条件で **`s_2^* = 0` の場合を落としていた**（`γ_2` は `s_2^*` を因子に持つ）。また「`sin θ_μ = 0 ⟺ μ = ±M`」は単独では偽で、正しくは `M ∣ 2μ`（`M` が偶数なら `μ = ±M/2` も該当） | **並行して原文側が修正済み**（現在は `K_1, K_2 ∈ ℝ_{>0}` を前提に置き、`μ = ±M/2` が排除される理由も明記）。Lean 側は `gamma2_eq_zero_iff` と `sin_thetaMu_eq_zero_iff` として機械的裏づけを残した |

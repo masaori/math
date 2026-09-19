@@ -1860,7 +1860,7 @@ E_K \check{Q}_\epsilon
         "、",
         ref("def_V1_plus_square_root"),
         "、",
-        ref("def_H1_H2"),
+        ref("V2_exponential_representation"),
         "、",
         ref("def_transfer_matrix_symbols"),
         "、",
