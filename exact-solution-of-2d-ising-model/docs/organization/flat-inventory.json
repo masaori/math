@@ -2407,8 +2407,42 @@
       ],
       "concludingCorollary": "セクター上での置き換えを転送行列の積の非負整数冪へ反復する公式",
       "concludingCorollaryEntryId": "bridge_011a_claim_sector_replacement_pow",
-      "boundaryEvidence": "章内依存順42で V1^{(±)} を定義する。順43はこの定義と既に閉じた V1 の固有空間への制限・相補射影の像から、射影後の V1 を V1^{(±)} へ置き換える主定理へ進む。並行して順44–46は半指数行列とその平方根性、全スピン反転行列との可換性、相補射影との可換性へ進む。順48は順43の置換等式、相補射影の冪等性、順47の可換性を合流させ、置き換えを転送行列の積の任意の非負整数冪へ反復する系で節を閉じる。後続の順58は順57で定めた生成子を使うが、順43–47の主張には依存せず、Pauli 行列の積とクロネッカー積の転置から iK1H1^{(±)} と iK2*H2 の実対称性を示す。生成時に七項の連続性と内部依存、対象と全外部入力の本文 fingerprint、順48への一意な閉包、順58の直接依存・本文 fingerprint、順43–47からの非依存、および入力集合の追加・除外を固定検査する。",
+      "boundaryEvidence": "章内依存順50で V1^{(±)} を定義する。順51はこの定義と既に閉じた V1 の固有空間への制限・相補射影の像から、射影後の V1 を V1^{(±)} へ置き換える主定理へ進む。並行して順52–55は半指数行列とその平方根性、全スピン反転行列との可換性、相補射影との可換性へ進む。順56は順51の置換等式、相補射影の冪等性、順55の可換性を合流させ、置き換えを転送行列の積の任意の非負整数冪へ反復する系で節を閉じる。直後の順57は新しい記号 δ^M_{(μ,ν)} の定義へ主題を切り替え、当節の七項を参照しない。生成時に七項の連続性と内部依存、対象と全外部入力の本文 fingerprint、および順56への一意な閉包を固定検査する。",
       "readabilityStatus": "未定義だった H1^{(±)} を使わず、半指数行列の定義・平方根性・二種類の可換性を別ブロックにした。さらに、射影後の V1 の置き換えと、その置き換えを積の冪へ反復する系を別ブロックへ分けた。対象七項は一ブロック一主張で依存順に読め、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、行列指数関数、固有空間への制限、行列と線型写像の対応に説明粒度の未解決が残る。"
+    },
+    {
+      "name": "二つの一般生成子",
+      "chapter": "2次元イジングモデル",
+      "status": "構造確定・対象本文粒度合格・外部入力粒度未解決",
+      "entryIds": [
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
+      ],
+      "input": [
+        "周期規約を含む Jordan–Wigner 行列族 Z_m, Y_m",
+        "有限複素行列の積と整数の集合記法"
+      ],
+      "externalInputEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_003_matrix_decomposition",
+        "transfer_matrix_000c_definition_jordan_wigner_Z_matrices",
+        "transfer_matrix_000d_definition_jordan_wigner_Y_matrices"
+      ],
+      "output": [
+        "第一転送行列の二つの境界符号に対応する一般生成子 H1^{(±)}",
+        "第二転送行列に対応する一般生成子 H2"
+      ],
+      "concludingDefinitions": [
+        "第一転送行列の一般生成子 H1^{(±)}",
+        "第二転送行列の一般生成子 H2"
+      ],
+      "concludingDefinitionEntryIds": [
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
+      ],
+      "boundaryEvidence": "章内依存順65・66は、同じ Jordan–Wigner 行列族 Z_m,Y_m、行列積、複素数・集合記法を外部入力として、それぞれ H1^{(±)} と H2 を具体的な有限和で独立に定める。二定義に相互の意味的依存はなく、提示順だけを固定する。直前の順64は Fourier 変換した行列の反交換関係を主題とし、二定義から参照されない。直後の順67は V1^{(±)} と転送行列記号を入力へ追加して H1^{(±)} の指数表示へ進む一方、Jordan–Wigner 行列族と行列積の定義を直接入力から外すため、外部入力集合が切り替わる。したがって二つの並行定義を一節にまとめ、順66の後で閉じる。生成時に二項の連続性、相互非依存、本文 fingerprint、全外部入力、および順67への入力集合の切り替わりを固定検査する。",
+      "readabilityStatus": "二定義はそれぞれ Jordan–Wigner 行列の有限和だけを一ブロックで定め、対象本文は現行の説明粒度検査に合格している。外部入力では複素数の定義に説明粒度の未解決が残る。"
     },
     {
       "name": "第一転送行列の一般生成子による指数表示",
@@ -6274,11 +6308,19 @@
         },
         {
           "dependentId": "transfer_matrix_011a_definition_H1_pm",
+          "prerequisiteId": "calc_formulae_003_matrix_decomposition"
+        },
+        {
+          "dependentId": "transfer_matrix_011a_definition_H1_pm",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
         {
           "dependentId": "transfer_matrix_011a_definition_H1_pm",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "transfer_matrix_011b_definition_H2",
+          "prerequisiteId": "calc_formulae_003_matrix_decomposition"
         },
         {
           "dependentId": "transfer_matrix_011b_definition_H2",
@@ -8756,7 +8798,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 34,
+        "incomingReferenceCount": 36,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -15802,8 +15844,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 807,
-        "inspectedContentSha256": "dfc81731af0ba20b0b55f24ece9bd7606be5b77df1b7d0bc4f631f05b48bfc67",
+        "inspectedCharacterCount": 885,
+        "inspectedContentSha256": "07850963d7a30a10437d251b65756680178f34afceb0369e2333760ed81cbc11",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15816,9 +15858,11 @@
         "def_jordan_wigner_Y_matrices",
         "def_jordan_wigner_Z_matrices",
         "definition_of_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "transfer_matrix_000c_definition_jordan_wigner_Z_matrices",
@@ -15867,8 +15911,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 747,
-        "inspectedContentSha256": "bb2a1f07abbde474e4ac69b14bc53c37882f6689b6e87b552b3b57cdf3ad5381",
+        "inspectedCharacterCount": 825,
+        "inspectedContentSha256": "eafd7e46a62c24f8c2fa97e296af83eb7780c705b462c444acc1ba12543c69d4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15881,9 +15925,11 @@
         "def_jordan_wigner_Y_matrices",
         "def_jordan_wigner_Z_matrices",
         "definition_of_cc",
+        "mat_mult",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "transfer_matrix_000c_definition_jordan_wigner_Z_matrices",

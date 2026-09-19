@@ -4406,7 +4406,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
       displayMath(
         String.raw`H_1^{(\pm)} := \sum_{m=1}^{M-1} Y_m Z_{m+1} \mp Y_M Z_1`,
       ),
-      paragraph(["と定める。"]),
+      paragraph(["と定める。行列の積は ", ref("mat_mult"), " の成分表示による。"]),
     ],
     conversion: {
       status: "added",
@@ -4437,7 +4437,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
         " を",
       ]),
       displayMath(String.raw`H_2 := \sum_{m=1}^{M} Z_m Y_m`),
-      paragraph(["と定める。"]),
+      paragraph(["と定める。行列の積は ", ref("mat_mult"), " の成分表示による。"]),
     ],
     conversion: {
       status: "added",
