@@ -64839,6 +64839,11 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
               title: { text: "反復横断階段は非零の周期並進と交わらない" },
               labels: ["claim_period_translates_of_iterated_staircase_disjoint"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_ne_period_translate",
+                "Ising2DLambda.NecSuf.KacWard.bounded_family_avoids_nonzero_integer_translates_necSuf",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_ne_period_translate_from_necSuf",
+              ],
               verification: ["sagemath/check/period-translates-of-iterated-staircase"],
               statement: [
                 paragraph([
