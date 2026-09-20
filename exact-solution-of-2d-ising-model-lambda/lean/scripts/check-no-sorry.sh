@@ -1094,6 +1094,9 @@ targets=(
   Ising2DLambda.FisherZero.criticalPoint_not_mem_fisherZero_from_necSuf
   Ising2DLambda.FisherZero.distanceSquaredToCriticalPoint_eq_zero_iff
   Ising2DLambda.FisherZero.distanceSquaredToCriticalPoint_eq_zero_iff_from_necSuf
+  Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs
+  Ising2DLambda.NecSuf.KacWard.four_cells_form_parity_arcs_necSuf
+  Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs_from_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval
   Ising2DLambda.NecSuf.FisherZero.kw_dual_preserves_unit_interval_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval_from_necSuf

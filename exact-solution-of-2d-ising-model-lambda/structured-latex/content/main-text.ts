@@ -62444,6 +62444,11 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
               title: { text: "持ち上げ点が相異なる閉路の各訪問頂点で内側セルと外側セルはそれぞれ一つの弧をなす" },
               labels: ["claim_vertex_surrounding_cells_form_parity_arcs"],
               habitat: "N",
+              lean: [
+                "Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs",
+                "Ising2DLambda.NecSuf.KacWard.four_cells_form_parity_arcs_necSuf",
+                "Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs_from_necSuf",
+              ],
               verification: ["sagemath/check/vertex-surrounding-cells-parity-arcs"],
               statement: [
                 paragraph([
