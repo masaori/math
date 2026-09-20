@@ -1097,6 +1097,9 @@ targets=(
   Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs
   Ising2DLambda.NecSuf.KacWard.four_cells_form_parity_arcs_necSuf
   Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf
+  Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected
+  Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval
   Ising2DLambda.NecSuf.FisherZero.kw_dual_preserves_unit_interval_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_preservesUnitInterval_from_necSuf
