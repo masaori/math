@@ -5,7 +5,7 @@
 `parts/004_転送行列/008_claim_指数関数の和とクロネッカーのデルタの関係.typ` (`<exp_sum>`)
 および `parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ`（`δ^M`）
 
-原文の主張: `k ∈ ℤ` について
+原文の主張: `M ∈ ℕ`、`M ≥ 1`、`k ∈ ℤ` について
 
   `∑_{j=1}^{M} exp(2π√-1 j k / M) = M δ^M_{(k, 0)}`
 
@@ -83,7 +83,9 @@ theorem expPhase_eq_one_iff {M : ℕ} (hM : M ≠ 0) (k : ℤ) :
   rw [expPhase_eq_zpow, (Complex.isPrimitiveRoot_exp M hM).zpow_eq_one_iff_dvd, dvd_neg]
 
 /-- 原文 `parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ` の
-`δ^M_{(μ,ν)}`（`μ ≡ ν (mod M)` なら `1`、そうでなければ `0`）。
+`δ^M : ℤ × ℤ → ℂ`（`μ ≡ ν (mod M)` なら `1`、そうでなければ `0`）。
+
+原文の `M ∈ ℕ`, `M ≥ 1` は本ファイルの `M : ℕ`, `hM : M ≠ 0` に直接対応する。
 
 `parts/006_...` 側では添字を `Fin M` の代表元にとって `Ising2D.deltaM` として定義したが、
 `hatZ, hatY` の添字 `μ ∈ ℳ = {-M, …, -1, 1, …, M}` は `Fin M` に収まらないので、
