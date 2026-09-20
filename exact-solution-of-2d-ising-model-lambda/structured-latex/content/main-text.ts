@@ -66034,6 +66034,11 @@ cL W_{\perp}(\gamma)
               title: { text: "射影の平面持ち上げは元の平面閉路の平行移動で巻き付きは零である" },
               labels: ["claim_projected_plane_cycle_lift_translation"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.projectedPlaneCycleLift_translation_and_winding_zero",
+                "Ising2DLambda.NecSuf.KacWard.projected_cycle_lift_translation_necSuf",
+                "Ising2DLambda.KacWard.projectedPlaneCycleLift_translation_and_winding_zero_from_necSuf",
+              ],
               verification: ["sagemath/check/plane-cycle-torus-projection"],
               statement: [
                 paragraph([

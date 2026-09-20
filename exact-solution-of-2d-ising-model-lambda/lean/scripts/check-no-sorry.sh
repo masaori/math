@@ -637,6 +637,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarVectorSmul_comm
   Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_add_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarEigenspace_smul_from_necSuf
+  Ising2DLambda.KacWard.projectedPlaneCycleLift_translation_and_winding_zero
+  Ising2DLambda.NecSuf.KacWard.projected_cycle_lift_translation_necSuf
+  Ising2DLambda.KacWard.projectedPlaneCycleLift_translation_and_winding_zero_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.identity_action_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarIdentity_action_from_necSuf
