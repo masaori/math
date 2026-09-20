@@ -65732,6 +65732,11 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
               title: { text: "一側閉包は終点を除いて頂点を繰り返さない" },
               labels: ["claim_one_sided_periodic_lift_closure_simple"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective",
+                "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
+                "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
+              ],
               verification: ["sagemath/check/one-sided-periodic-lift-closure"],
               statement: [
                 paragraph([

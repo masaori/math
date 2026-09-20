@@ -658,6 +658,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.one_sided_four_segments_closed_steps_necSuf
   Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps
   Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf
+  Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective
+  Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf
   Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase_injOn_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_smul_necSuf
