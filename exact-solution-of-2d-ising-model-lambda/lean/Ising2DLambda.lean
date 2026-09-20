@@ -1030,3 +1030,6 @@ import Ising2DLambda.KacWard.InteriorCellSetEdgeConnectedFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.ExteriorCellSetEdgeConnected
 import Ising2DLambda.KacWard.ExteriorCellSetEdgeConnected
 import Ising2DLambda.KacWard.ExteriorCellSetEdgeConnectedFromNecSuf
+import Ising2DLambda.KacWard.CellComplexOneCellIncrement
+import Ising2DLambda.NecSuf.KacWard.CellComplexOneCellIncrement
+import Ising2DLambda.KacWard.CellComplexOneCellIncrementFromNecSuf

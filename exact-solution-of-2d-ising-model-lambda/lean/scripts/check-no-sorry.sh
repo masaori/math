@@ -1742,6 +1742,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.connected_of_two_connected_cores_and_reaches_necSuf
   Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected
   Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.cellComplex_oneCellIncrement_necSuf
+  Ising2DLambda.KacWard.cellEulerNumber_insert
+  Ising2DLambda.KacWard.cellEulerNumber_insert_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

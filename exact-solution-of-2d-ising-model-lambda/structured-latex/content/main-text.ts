@@ -63176,6 +63176,7 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                   title: { text: "セル集合の頂点集合" },
                   labels: ["def_cell_vertex_set"],
                   habitat: "Z",
+                  lean: ["Ising2DLambda.KacWard.cellVertices"],
                   statement: [
                     paragraph([
                       "有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
@@ -63202,6 +63203,7 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                   title: { text: "セル集合の辺集合" },
                   labels: ["def_cell_edge_set"],
                   habitat: "Z",
+                  lean: ["Ising2DLambda.KacWard.cellEdges"],
                   statement: [
                     paragraph([
                       "セル ", math(String.raw`(r,c)\in\mathbb Z\times\mathbb Z`),
@@ -63232,6 +63234,7 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                   title: { text: "セル集合の Euler 数" },
                   labels: ["def_cell_euler_number"],
                   habitat: "Z",
+                  lean: ["Ising2DLambda.KacWard.cellEulerNumber"],
                   statement: [
                     paragraph([
                       "有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
@@ -63256,6 +63259,11 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
               title: { text: "一セルを追加したときの Euler 数の増分" },
               labels: ["claim_cell_complex_one_cell_increment"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.cellEulerNumber_insert",
+                "Ising2DLambda.NecSuf.KacWard.cellComplex_oneCellIncrement_necSuf",
+                "Ising2DLambda.KacWard.cellEulerNumber_insert_from_necSuf",
+              ],
               verification: ["sagemath/check/cell-complex-one-cell-increment"],
               statement: [
                 paragraph([
@@ -63333,10 +63341,8 @@ e_x(S):=\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|`),
 \bigl|S\cup\{x\}\bigr|
 &=|S|+\bigl|\{x\}\bigr|-\bigl|S\cap\{x\}\bigr|
 &&\bigl(\because\ \text{有限集合の包除 }|A\cup B|=|A|+|B|-|A\cap B|\bigr)\\
-&=|S|+1-0
-&&\bigl(\because\ \bigl|\{x\}\bigr|=1\text{ と、}x\notin S\text{ なので }S\cap\{x\}=\varnothing\bigr)\\
 &=|S|+1
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+&&\bigl(\because\ \bigl|\{x\}\bigr|=1\text{ と、}x\notin S\text{ なので }S\cap\{x\}=\varnothing\bigr)
 \end{aligned}`),
                 paragraph(["となる。以上を合わせて"]),
                 displayMath(String.raw`\begin{aligned}
