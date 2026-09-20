@@ -1,0 +1,31 @@
+{
+  "実行識別子": "65e3693f-9257-40eb-aed3-30e0daef8cda",
+  "観測時刻": "2026-09-20T09:07:19+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "state": "running",
+    "runs": 11,
+    "pid": 66864,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "3d05a4e2dffcf073838797e47d24ad41df834e7bf65e40378224940c326ee4ed",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-20T09:07:35+09:00",
+    "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launcher.log",
+    "終端": "2026-09-20 08:44:06準備開始、08:44:30未コミット成果を保持して続行。09:07:35観測時に現行実行の終端なし。"
+  },
+  "実行の終了値の解釈": "09:07:19のlaunchctl list/printは終了0で登録あり・state running・PID 66864・runs 11・last exit 0。実ログは08:44:06の準備開始と08:44:30の未コミット成果保持までで現行回の終端がなく、last exitは過去値なので成否は未確認とする。",
+  "成果比較": {
+    "開始成果": "7f3ad1795b3dc72cf2763d72af649ce0f934abdf",
+    "前回監督の読解終点": "406871cfa6dafdff325d1f61dcf5e9991c99f743",
+    "今回読解終点": "7f3ad1795b3dc72cf2763d72af649ce0f934abdf",
+    "前回監督以後": "一般生成子二定義と二つの指数表示が本文・Lean・SageMathへ分離され、次の周期デルタと整数指数和の仮定不足が具体化された。"
+  }
+}
