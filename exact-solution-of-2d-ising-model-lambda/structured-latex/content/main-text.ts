@@ -65079,6 +65079,11 @@ B
               title: { text: "接続階段は元の持ち上げと始点でのみ、移動後の持ち上げと終点でのみ交わる" },
               labels: ["claim_first_hit_connecting_staircase_meets_lifts_only_at_ends"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.firstHitConnectingStaircase_meets_lifts_only_at_ends",
+                "Ising2DLambda.NecSuf.KacWard.first_hit_prefix_meets_families_only_at_ends_necSuf",
+                "Ising2DLambda.KacWard.firstHitConnectingStaircase_meets_lifts_only_at_ends_from_necSuf",
+              ],
               verification: ["sagemath/check/first-hit-connecting-staircase"],
               statement: [
                 paragraph([
