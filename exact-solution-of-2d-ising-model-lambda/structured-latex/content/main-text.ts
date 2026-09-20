@@ -64933,6 +64933,11 @@ B
               title: { text: "基点の平行座標が幅を超えて離れた二つの反復横断階段は交わらない" },
               labels: ["claim_parallel_separated_staircases_disjoint"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.parallelSeparatedIteratedTransverseStaircases_ne",
+                "Ising2DLambda.NecSuf.KacWard.separated_bases_bounded_families_disjoint_necSuf",
+                "Ising2DLambda.KacWard.parallelSeparatedIteratedTransverseStaircases_ne_from_necSuf",
+              ],
               verification: ["sagemath/check/parallel-separated-staircases"],
               statement: [
                 paragraph([
