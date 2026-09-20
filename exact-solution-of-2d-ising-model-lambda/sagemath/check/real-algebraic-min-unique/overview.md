@@ -18,4 +18,4 @@
 sage sagemath/check/real-algebraic-min-unique/check.sage
 ```
 
-**2026-08-18 実行: すべて通過。**
+**2026-09-20 再実行: すべて通過。**
