@@ -5,5 +5,5 @@
   "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.finite-graph-ising-auto-loop.plist", "存在": true, "sha256": "4a79a57ed3e42c9e09a1dadd84793790c0d419772a94ac1c4d5ac32a837151e5", "StartCalendarInterval": "毎時27分"},
   "実ログ": {"観測時刻": "2026-09-21T02:57:37+09:00", "path": "/Users/masaori/Library/Logs/finite-graph-ising-auto-loop/auto-loop.log", "終端": "2026-09-21 02:32:16正常終了。対象一件done・未達ゼロで本文変更なし。"},
   "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 28・last exit 0。実ログも02:32:16正常終了だが、未達ゼロの終了記録だけなので研究上の前進へ数えない。",
-  "成果比較": {"開始成果": "558eadb47dcbee62f17cfa7c1c161a140a8d4360", "前回監督の読解終点": "21b2c7eeaba62b028eb5f4f32a43d117099915c7", "今回読解終点": "5fe3661b95fece6386222b122ef72a8170abc1ad", "前回監督以後": "未達項目なしの終了記録以外に、新しい数学本文・証明・有限反例・識別子はない。"}
+  "成果比較": {"開始成果": "558eadb47dcbee62f17cfa7c1c161a140a8d4360", "前回監督の読解終点": "21b2c7eeaba62b028eb5f4f32a43d117099915c7", "今回読解終点": "4584c2884b173c3398a1c63f891ef6faa1c4a205", "前回監督以後": "未達項目なしの終了記録以外に、新しい数学本文・証明・有限反例・識別子はない。"}
 }
