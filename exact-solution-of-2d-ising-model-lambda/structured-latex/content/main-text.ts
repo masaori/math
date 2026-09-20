@@ -64590,6 +64590,13 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
               labels: ["claim_transverse_translates_of_periodic_plane_lift_disjoint"],
               habitat: "Z",
               verification: ["sagemath/check/transverse-translates-of-periodic-plane-lift"],
+              lean: [
+                "Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLift_coordinate",
+                "Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLifts_disjoint",
+                "Ising2DLambda.NecSuf.KacWard.translatedFamily_coordinate_necSuf",
+                "Ising2DLambda.NecSuf.KacWard.translatedFamilies_disjoint_necSuf",
+                "Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLift_coordinate_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数 ", math(String.raw`u\in\mathbb Z`), " と ", math(String.raw`k\in\mathbb Z`),

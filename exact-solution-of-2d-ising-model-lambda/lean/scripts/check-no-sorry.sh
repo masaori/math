@@ -1772,6 +1772,11 @@ targets=(
   Ising2DLambda.KacWard.iteratedTransverseStaircase_lower_bound
   Ising2DLambda.KacWard.iteratedTransverseStaircase_unit_step
   Ising2DLambda.KacWard.iteratedTransverseStaircase_lower_bound_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.translatedFamily_coordinate_necSuf
+  Ising2DLambda.NecSuf.KacWard.translatedFamilies_disjoint_necSuf
+  Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLift_coordinate
+  Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLifts_disjoint
+  Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLift_coordinate_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
