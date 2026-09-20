@@ -1748,6 +1748,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_region_count_necSuf
   Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count
   Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.direction_gate_crossing_turning_necSuf
+  Ising2DLambda.KacWard.directionGateCrossing_turning
+  Ising2DLambda.KacWard.directionGateCrossing_turning_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

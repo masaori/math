@@ -63672,6 +63672,7 @@ r_4(\operatorname{dir}(\vec e_k))=0,\ r_4(\operatorname{dir}(\vec e_{k+1}))=3\}\
               title: { text: "循環総回転数は方向番号の門の符号付き横断数の 4 倍である" },
               labels: ["claim_direction_gate_crossing_turning"],
               habitat: "Z",
+              lean: ["Ising2DLambda.KacWard.directionGateCrossing_turning"],
               verification: ["sagemath/check/direction-gate-crossing-turning"],
               statement: [
                 paragraph(["任意の閉じた非後退辺列 ", math(String.raw`\gamma`), " について、整数の等式"]),
