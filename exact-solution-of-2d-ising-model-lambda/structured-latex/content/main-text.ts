@@ -62769,6 +62769,11 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
               title: { text: "持ち上げ点が相異なる閉路の内側セル集合は辺連結である" },
               labels: ["claim_interior_cell_set_edge_connected"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected",
+                "Ising2DLambda.NecSuf.KacWard.connected_of_connected_core_and_reaches_necSuf",
+                "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected_from_necSuf",
+              ],
               verification: ["sagemath/check/interior-cell-set-edge-connected"],
               statement: [paragraph([
                 "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",

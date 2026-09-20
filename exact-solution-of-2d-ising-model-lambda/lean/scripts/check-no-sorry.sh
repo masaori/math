@@ -1734,6 +1734,9 @@ targets=(
   Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even
   Ising2DLambda.NecSuf.KacWard.closed_endpoint_incidence_double_necSuf
   Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.connected_of_connected_core_and_reaches_necSuf
+  Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected
+  Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
