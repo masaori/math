@@ -63383,6 +63383,11 @@ e_x(S):=\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|`),
               title: { text: "有限な辺連結セル集合の補集合も辺連結なら Euler 数は 1 である" },
               labels: ["claim_hole_free_cell_set_euler_number_one"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count",
+                "Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_region_count_necSuf",
+                "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count_from_necSuf",
+              ],
               verification: ["sagemath/check/hole-free-cell-set-euler-number"],
               statement: [
                 paragraph([
