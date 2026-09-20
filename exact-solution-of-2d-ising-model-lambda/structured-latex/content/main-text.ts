@@ -65239,6 +65239,12 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
                 "Ising2DLambda.KacWard.periodicLiftClosure_is_simple_cycle",
                 "Ising2DLambda.NecSuf.KacWard.four_segments_form_simple_closed_walk_necSuf",
                 "Ising2DLambda.KacWard.periodicLiftClosure_is_simple_cycle_from_necSuf",
+                "Ising2DLambda.KacWard.positivePeriodicMultiple_movesPoint",
+                "Ising2DLambda.NecSuf.KacWard.positive_period_multiple_moves_point_necSuf",
+                "Ising2DLambda.KacWard.positivePeriodicMultiple_movesPoint_from_necSuf",
+                "Ising2DLambda.KacWard.periodicLiftClosure_length",
+                "Ising2DLambda.NecSuf.KacWard.periodic_closure_length_necSuf",
+                "Ising2DLambda.KacWard.periodicLiftClosure_length_from_necSuf",
               ],
               verification: ["sagemath/check/periodic-lift-closure-cycle"],
               statement: [
