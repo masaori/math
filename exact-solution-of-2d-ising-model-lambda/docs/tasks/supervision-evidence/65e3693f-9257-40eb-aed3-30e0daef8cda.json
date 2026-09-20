@@ -1,0 +1,31 @@
+{
+  "実行識別子": "65e3693f-9257-40eb-aed3-30e0daef8cda",
+  "観測時刻": "2026-09-20T09:07:19+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.ising-lambda-auto-loop",
+    "state": "running",
+    "runs": 12,
+    "pid": 10812,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist",
+    "存在": true,
+    "sha256": "0251205e11070166bad48b0a0fa90288543e32339c1ca704301bb202ba0ecf70",
+    "StartCalendarInterval": "毎時5分・35分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-20T09:07:35+09:00",
+    "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log",
+    "終端": "2026-09-20 09:05:53現行tick開始。09:07:35観測時に成功・失敗の終端なし。"
+  },
+  "実行の終了値の解釈": "09:07:19のlaunchctl list/printは終了0で登録あり・state running・PID 10812・runs 12・last exit 0。実ログは09:05:53に現行回を開始し、09:07:35観測時に終端がないため、last exitは過去値として成否は未確認とする。",
+  "成果比較": {
+    "開始成果": "7f3ad1795b3dc72cf2763d72af649ce0f934abdf",
+    "前回監督の読解終点": "406871cfa6dafdff325d1f61dcf5e9991c99f743",
+    "今回読解終点": "7f3ad1795b3dc72cf2763d72af649ce0f934abdf",
+    "前回監督以後": "境界基準の窓長四から八を一括判定して局所窓頻度候補を棄却し、絶対境界方向を戻すと二係数の衝突が零になることを確定した。"
+  }
+}
