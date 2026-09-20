@@ -1,0 +1,31 @@
+{
+  "実行識別子": "811465fd-4507-46a0-ab2c-38cbe3e537f7",
+  "観測時刻": "2026-09-20T20:55:46+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "state": "running",
+    "runs": 17,
+    "pid": 97995,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "3d05a4e2dffcf073838797e47d24ad41df834e7bf65e40378224940c326ee4ed",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-20T20:55:46+09:00",
+    "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log",
+    "終端": "観測時は半整数運動量の指数和に関するLean対応の読解出力が継続中で、現行回の成功・失敗終端は無かった。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・PID 97995で実行中・runs 17。last exit 0は前回値であり、現行回の終了値ではないため直近の成否は未確認とする。",
+  "成果比較": {
+    "開始成果": "21b2c7eeaba62b028eb5f4f32a43d117099915c7",
+    "前回監督の読解終点": "9ecb996453625a3ff12eed89b1f2684f37b5790d",
+    "今回読解終点": "21b2c7eeaba62b028eb5f4f32a43d117099915c7",
+    "前回監督以後": "前回監督記録以外にremote defaultへ統合済みの数学本文・証明・節境界の変更はない。観測中の実行結果は未統合なので研究成果へ数えていない。"
+  }
+}
