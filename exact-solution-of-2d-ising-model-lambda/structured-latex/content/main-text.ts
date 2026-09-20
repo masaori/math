@@ -64676,6 +64676,11 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
               labels: ["claim_staircase_from_band_top_meets_lift_only_at_base"],
               habitat: "Z",
               verification: ["sagemath/check/staircase-from-band-top-avoids-lift"],
+              lean: [
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top",
+                "Ising2DLambda.NecSuf.KacWard.staircase_above_upper_avoids_family_necSuf",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
