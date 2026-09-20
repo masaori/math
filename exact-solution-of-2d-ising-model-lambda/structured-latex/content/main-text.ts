@@ -65235,6 +65235,11 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
               title: { text: "接続階段とその周期並進は二つの持ち上げを単純閉路へ閉じる" },
               labels: ["claim_periodic_lift_closure_is_simple_cycle"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.periodicLiftClosure_is_simple_cycle",
+                "Ising2DLambda.NecSuf.KacWard.four_segments_form_simple_closed_walk_necSuf",
+                "Ising2DLambda.KacWard.periodicLiftClosure_is_simple_cycle_from_necSuf",
+              ],
               verification: ["sagemath/check/periodic-lift-closure-cycle"],
               statement: [
                 paragraph([

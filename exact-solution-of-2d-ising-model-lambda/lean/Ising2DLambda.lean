@@ -1075,3 +1075,6 @@ import Ising2DLambda.KacWard.ParallelSeparatedStaircasesFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.FirstHitConnectingStaircase
 import Ising2DLambda.KacWard.FirstHitConnectingStaircase
 import Ising2DLambda.KacWard.FirstHitConnectingStaircaseFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.PeriodicLiftClosureCycle
+import Ising2DLambda.KacWard.PeriodicLiftClosureCycle
+import Ising2DLambda.KacWard.PeriodicLiftClosureCycleFromNecSuf
