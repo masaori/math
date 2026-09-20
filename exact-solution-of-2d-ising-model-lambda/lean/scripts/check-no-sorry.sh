@@ -1762,6 +1762,11 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.periodic_lift_coordinate_next_period_necSuf
   Ising2DLambda.KacWard.periodicPlaneLift_parallelCoordinate_add_period_from_necSuf
   Ising2DLambda.KacWard.windingParallelCoordinate_windingShift_pos
+  Ising2DLambda.NecSuf.KacWard.twoPhaseStaircase_step_necSuf
+  Ising2DLambda.NecSuf.KacWard.twoPhaseStaircase_injOn_necSuf
+  Ising2DLambda.KacWard.windingTransverseStaircase_step_increase
+  Ising2DLambda.KacWard.windingTransverseStaircase_injOn
+  Ising2DLambda.KacWard.windingTransverseStaircase_step_increase_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

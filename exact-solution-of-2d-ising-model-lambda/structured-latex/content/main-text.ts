@@ -64248,6 +64248,7 @@ s(i_r)-s(i_{r'})
                 title: { text: "巻き付きベクトルを横切る整数格子の階段" },
                 labels: ["def_winding_transverse_staircase"],
                 habitat: "Z",
+                lean: ["Ising2DLambda.KacWard.windingTransverseStaircase"],
                 statement: [
                   paragraph([
                     "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -64293,6 +64294,12 @@ s(i_r)-s(i_{r'})
               labels: ["claim_winding_transverse_staircase_step_increase"],
               habitat: "Z",
               verification: ["sagemath/check/winding-transverse-staircase"],
+              lean: [
+                "Ising2DLambda.KacWard.windingTransverseStaircase_step_increase",
+                "Ising2DLambda.NecSuf.KacWard.twoPhaseStaircase_step_necSuf",
+                "Ising2DLambda.KacWard.windingTransverseStaircase_step_increase_from_necSuf",
+                "Ising2DLambda.KacWard.windingTransverseStaircase_injOn",
+              ],
               statement: [
                 paragraph([
                   "正の横断階段（", ref("def_winding_transverse_staircase"), "）について、任意の ",
