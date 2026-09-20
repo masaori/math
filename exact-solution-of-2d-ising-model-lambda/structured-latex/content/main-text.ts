@@ -5446,6 +5446,11 @@ D_c(a)&:=\bigl(a_k=c+1\ \text{かつ}\ a_{k+1}=c\ \text{を満たす}\ k\in\{1,\
                 labels: ["claim_integer_sequence_level_crossing"],
                 habitat: "Z",
                 verification: ["sagemath/check/integer-sequence-level-crossing"],
+                lean: [
+                  "Ising2DLambda.Tools.integerSequence_levelCrossing",
+                  "Ising2DLambda.NecSuf.Tools.adjacent_difference_sum_necSuf",
+                  "Ising2DLambda.Tools.integerSequence_levelCrossing_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     math(String.raw`n\in\mathbb N`), "、",
