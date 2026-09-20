@@ -63483,6 +63483,11 @@ e_x(S):=\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|`),
               labels: ["claim_boundary_vertex_diagonal_contact_excluded"],
               habitat: "Z",
               verification: ["sagemath/check/no-diagonal-only-contact"],
+              lean: [
+                "Ising2DLambda.KacWard.boundaryVertex_diagonalContactExcluded",
+                "Ising2DLambda.NecSuf.KacWard.diagonal_cell_pairs_excluded_necSuf",
+                "Ising2DLambda.KacWard.boundaryVertex_diagonalContactExcluded_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
