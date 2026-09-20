@@ -99,7 +99,10 @@ for observation_index, observation in enumerate(observations):
             break
         basis_row, basis_targets, basis_witness = basis[pivot]
         row.symmetric_difference_update(basis_row)
-        targets = [left + right for left, right in zip(targets, basis_targets)]
+        targets = [
+            (left + right) % 2
+            for left, right in zip(targets, basis_targets)
+        ]
         witness.symmetric_difference_update(basis_witness)
     if not row:
         for support_index, target in enumerate(targets):
@@ -119,7 +122,7 @@ def xor_observation_rows(indices):
 def xor_targets(indices, support_index):
     total = ZZ(0)
     for index in indices:
-        total += observations[index]["targets"][support_index]
+        total = (total + observations[index]["targets"][support_index]) % 2
     return total
 
 
@@ -144,11 +147,14 @@ for support_index, support_name in enumerate(support_names):
             value = targets[support_index]
             for column in row:
                 if column != pivot:
-                    value += values.get(column, 0)
+                    value = (value + values.get(column, 0)) % 2
             values[pivot] = ZZ(value)
         canonical_support = {column for column, value in values.items() if value == 1}
         for observation in observations:
-            actual = sum((ZZ(column in canonical_support) for column in observation["row"]), ZZ(0))
+            actual = sum(
+                (ZZ(column in canonical_support) for column in observation["row"]),
+                ZZ(0),
+            ) % 2
             assert actual == observation["targets"][support_index]
         result["canonical_support_columns"] = list(map(int, sorted(canonical_support)))
         result["canonical_support_size"] = len(canonical_support)
