@@ -8,5 +8,5 @@ $L=1,\ldots,5$ と $-L\le w_{\mathrm h},w_{\mathrm v}\le L$ の非零巻き付�
 $\max\{0,w_{\mathrm h}w_{\mathrm v}\}$ 以下のずれに収まることを `ZZ` 上で検査する。
 
 - 実行: `sage sagemath/check/iterated-staircase-parallel-width/check.sage`
-- 状態: PASS（2026-09-01）。非零巻き付き対 280 組、平行座標のずれ 16,800 件を検査した。
+- 状態: PASS（2026-09-21）。非零巻き付き対 280 組、平行座標のずれ 16,800 件を検査した。
 - 計算: 有限列挙と `ZZ` の四則・絶対値・順序だけ。浮動小数点は使わない。

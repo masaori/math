@@ -64754,6 +64754,11 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
               title: { text: "反復横断階段の平行座標は基点から幅以内に収まる" },
               labels: ["claim_iterated_staircase_parallel_width_bound"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_parallel_width_bound",
+                "Ising2DLambda.NecSuf.KacWard.iteratedStaircase_coordinate_between_necSuf",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_parallel_width_bound_from_necSuf",
+              ],
               verification: ["sagemath/check/iterated-staircase-parallel-width"],
               statement: [
                 paragraph([
