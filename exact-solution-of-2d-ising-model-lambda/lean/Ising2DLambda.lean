@@ -1007,3 +1007,6 @@ import Ising2DLambda.Tools.IntegerSequenceLevelCrossingFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.OddRayInteriorCellsBounded
 import Ising2DLambda.KacWard.OddRayInteriorCellsBounded
 import Ising2DLambda.KacWard.OddRayInteriorCellsBoundedFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.AdjacentCellsBoundaryParity
+import Ising2DLambda.KacWard.AdjacentCellsBoundaryParity
+import Ising2DLambda.KacWard.AdjacentCellsBoundaryParityFromNecSuf

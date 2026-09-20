@@ -62081,6 +62081,7 @@ N_{r,c}^{\rightarrow}(\gamma)
                   title: { text: "持ち上げた縦辺の通過回数" },
                   labels: ["def_vertical_edge_traversal_count"],
                   habitat: "N",
+                  lean: ["Ising2DLambda.KacWard.verticalEdgeTraversalCount"],
                   statement: [
                     paragraph([
                       "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -62111,6 +62112,11 @@ k\in\{1,\ldots,m\}\ \middle|\
               labels: ["claim_adjacent_cells_ray_crossing_difference"],
               habitat: "N",
               verification: ["sagemath/check/adjacent-cells-ray-crossing-difference"],
+              lean: [
+                "Ising2DLambda.KacWard.rightRayCrossingCount_adjacent",
+                "Ising2DLambda.NecSuf.KacWard.integer_tail_sum_split_necSuf",
+                "Ising2DLambda.KacWard.rightRayCrossingCount_adjacent_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
@@ -62166,6 +62172,7 @@ N_{r,c}^{\rightarrow}(\gamma)
                 title: { text: "持ち上げた横辺の通過回数" },
                 labels: ["def_horizontal_edge_traversal_count"],
                 habitat: "N",
+                lean: ["Ising2DLambda.KacWard.horizontalEdgeTraversalCount"],
                 statement: [
                   paragraph([
                     "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -62189,6 +62196,11 @@ N_{r,c}^{\rightarrow}(\gamma)
               labels: ["claim_vertically_adjacent_cells_boundary_parity"],
               habitat: "Z",
               verification: ["sagemath/check/adjacent-cells-boundary-parity"],
+              lean: [
+                "Ising2DLambda.KacWard.verticallyAdjacentCells_boundaryParity",
+                "Ising2DLambda.NecSuf.KacWard.boundary_three_part_parity_necSuf",
+                "Ising2DLambda.KacWard.verticallyAdjacentCells_boundaryParity_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
