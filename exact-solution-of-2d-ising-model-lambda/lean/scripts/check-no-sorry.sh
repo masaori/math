@@ -645,6 +645,11 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarVectorSmul_one
   Ising2DLambda.AlgebraicEigenvalue.qbarVectorSmul_mul
+  Ising2DLambda.KacWard.windingParallelStaircase_step_increase
+  Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase_step_necSuf
+  Ising2DLambda.KacWard.windingParallelStaircase_step_increase_from_necSuf
+  Ising2DLambda.KacWard.windingParallelStaircase_injOn
+  Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase_injOn_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_smul_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul_from_necSuf

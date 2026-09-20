@@ -65367,6 +65367,13 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
               title: { text: "平行階段の各歩は平行座標を増やす単位歩である" },
               labels: ["claim_winding_parallel_staircase_step_increase"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.windingParallelStaircase_step_increase",
+                "Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase_step_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_step_increase_from_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_injOn",
+                "Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase_injOn_necSuf",
+              ],
               verification: ["sagemath/check/winding-parallel-staircase"],
               statement: [
                 paragraph([
