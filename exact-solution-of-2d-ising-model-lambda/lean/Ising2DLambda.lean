@@ -1042,3 +1042,6 @@ import Ising2DLambda.KacWard.BoundaryVertexDiagonalContactExcludedFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.DirectionGateCrossingTurning
 import Ising2DLambda.KacWard.DirectionGateCrossingTurning
 import Ising2DLambda.KacWard.DirectionGateCrossingTurningFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftDistinct
+import Ising2DLambda.KacWard.PeriodicPlaneLiftDistinct
+import Ising2DLambda.KacWard.PeriodicPlaneLiftDistinctFromNecSuf

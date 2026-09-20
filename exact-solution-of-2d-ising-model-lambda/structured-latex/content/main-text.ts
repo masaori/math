@@ -63879,6 +63879,9 @@ t_{\circ}(\gamma)
                 title: { text: "周期延長した平面持ち上げ" },
                 labels: ["def_periodic_plane_lift"],
                 habitat: "Z",
+                lean: [
+                  "Ising2DLambda.KacWard.periodicPlaneLift",
+                ],
                 statement: [
                   paragraph([
                     "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -63916,6 +63919,11 @@ t_{\circ}(\gamma)
               labels: ["claim_periodic_plane_lift_points_distinct"],
               habitat: "Z",
               verification: ["sagemath/check/periodic-plane-lift-distinct"],
+              lean: [
+                "Ising2DLambda.KacWard.periodicPlaneLift_injective",
+                "Ising2DLambda.NecSuf.KacWard.periodic_lift_injective_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_injective_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),

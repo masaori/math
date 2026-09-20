@@ -1751,6 +1751,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.direction_gate_crossing_turning_necSuf
   Ising2DLambda.KacWard.directionGateCrossing_turning
   Ising2DLambda.KacWard.directionGateCrossing_turning_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.periodic_lift_injective_necSuf
+  Ising2DLambda.KacWard.periodicPlaneLift_injective
+  Ising2DLambda.KacWard.periodicPlaneLift_injective_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
