@@ -61994,6 +61994,11 @@ N_{r,c}^{\rightarrow}(\gamma)\equiv1\pmod 2
               labels: ["claim_odd_ray_interior_cells_bounded"],
               habitat: "Z",
               verification: ["sagemath/check/odd-ray-interior-cells-bounded"],
+              lean: [
+                "Ising2DLambda.KacWard.oddRayInteriorCells_finite",
+                "Ising2DLambda.NecSuf.KacWard.odd_support_finite_necSuf",
+                "Ising2DLambda.KacWard.oddRayInteriorCells_finite_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数巻き付き数が零である閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),

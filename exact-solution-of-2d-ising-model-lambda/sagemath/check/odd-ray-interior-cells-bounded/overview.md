@@ -9,5 +9,5 @@ $\{r_{\min},\ldots,r_{\max}-1\}\times\{c_{\min},\ldots,c_{\max}-1\}$
 に入ることを検査する。
 
 - 実行: `sage sagemath/check/odd-ray-interior-cells-bounded/check.sage`
-- 状態: PASS（2026-08-31。閉歩道 5,340 本・セル 166,232 個）
+- 状態: PASS（2026-09-20。閉歩道 5,340 本・セル 166,232 個）
 - 計算: 単位格子歩の有限列挙と `ZZ` の比較・加法・奇偶だけ。浮動小数点は使わない。

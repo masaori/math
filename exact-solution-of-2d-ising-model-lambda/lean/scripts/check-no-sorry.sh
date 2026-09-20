@@ -1713,6 +1713,9 @@ targets=(
   Ising2DLambda.Tools.integerSequence_levelCrossing
   Ising2DLambda.NecSuf.Tools.adjacent_difference_sum_necSuf
   Ising2DLambda.Tools.integerSequence_levelCrossing_from_necSuf
+  Ising2DLambda.KacWard.oddRayInteriorCells_finite
+  Ising2DLambda.NecSuf.KacWard.odd_support_finite_necSuf
+  Ising2DLambda.KacWard.oddRayInteriorCells_finite_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
