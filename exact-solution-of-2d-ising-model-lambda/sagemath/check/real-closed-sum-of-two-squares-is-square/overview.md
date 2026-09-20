@@ -1,6 +1,6 @@
-# SageMath Check: 実閉部分体では二つの平方の和が平方であり、$2$ が平方である
+# SageMath Check: 実閉部分体での平方の和、$2$ の平方性、$-2$ の非平方性
 
-**対象ラベル**: `claim_real_closed_sum_of_two_squares_is_square`, `claim_two_is_square_in_real_closed`
+**対象ラベル**: `claim_real_closed_sum_of_two_squares_is_square`, `claim_two_is_square_in_real_closed`, `claim_neg_two_not_square_in_real_closed`
 
 本文の証明を厳密計算で確かめる。浮動小数点は使わない。
 $R$ のモデルは実代数的数体 `AA`、$\omega$ のモデルは `QQbar(I)`、$\overline{\mathbb Q}$ の代数閉性は

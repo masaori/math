@@ -1,4 +1,5 @@
-# 対象ラベル: claim_real_closed_sum_of_two_squares_is_square, claim_two_is_square_in_real_closed
+# 対象ラベル: claim_real_closed_sum_of_two_squares_is_square, claim_two_is_square_in_real_closed,
+#             claim_neg_two_not_square_in_real_closed
 #
 # 主張 1: x, y ∈ R について、ある c ∈ R が存在して x*x + y*y = c*c（平方の和は平方）。
 # 主張 2: 2 は R の零でない元の平方であり、-2 は R の平方でない。

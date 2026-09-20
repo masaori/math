@@ -37564,24 +37564,21 @@ x\cdot x+y\cdot y
                     {
                       id: "zero_pinching_claim_two_is_square_in_real_closed",
                       kind: "claim",
-                      title: { text: "実閉部分体では $2$ が平方であり、$-2$ は平方でない" },
+                      title: { text: "実閉部分体では $2$ が平方である" },
                       labels: ["claim_two_is_square_in_real_closed"],
                       habitat: "Qbar",
                       verification: ["sagemath/check/real-closed-sum-of-two-squares-is-square"],
                       lean: [
                         "Ising2DLambda.FisherZero.two_is_square_in_realClosed",
-                        "Ising2DLambda.FisherZero.neg_two_not_square_in_realClosed",
                       ],
                       statement: [
                         paragraph([
                           "ある零でない ", math(String.raw`s\in R`), "（", ref("def_real_closed_subfield"),
                           "）が存在して ", math(String.raw`s\cdot s=2`), " である（",
-                          math(String.raw`2:=1+1`), "）。また、",
-                          math(String.raw`-2=w\cdot w`), " を満たす零でない ",
-                          math(String.raw`w\in R`), " は存在しない。",
+                          math(String.raw`2:=1+1`), "）。",
                         ]),
                         paragraph([
-                          "前半により、", ref("claim_sqrt_two_exists"), " の元 ",
+                          "この主張により、", ref("claim_sqrt_two_exists"), " の元 ",
                           math(String.raw`s`), " を ", math(String.raw`R`),
                           " の中に取れる。これが臨界点 ", math(String.raw`x_c=-1+s`), "（",
                           ref("def_critical_point"), "）が ", math(String.raw`R`),
@@ -37594,7 +37591,15 @@ x\cdot x+y\cdot y
                           math(String.raw`x:=1`), "、", math(String.raw`y:=1`),
                           " に当てると、ある ", math(String.raw`s\in R`), " が存在して",
                         ]),
-                        displayMath(String.raw`s\cdot s=1\cdot1+1\cdot1=1+1=2`),
+                        displayMath(String.raw`\begin{aligned}
+s\cdot s
+&=1\cdot1+1\cdot1
+&&(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\ \text{を }x:=1,\ y:=1\text{ に適用})\\
+&=1+1
+&&(\because\ R\ \text{の乗法単位元})\\
+&=2
+&&(\because\ 2\ \text{の定め方})
+\end{aligned}`),
                         paragraph([
                           "である（", math(String.raw`1\in R`), " は部分体の単位元。",
                           math(String.raw`1\cdot1=1`), " は積の単位元）。",
@@ -37607,18 +37612,51 @@ x\cdot x+y\cdot y
                           ref("def_algebraic_numbers"), " の第 1 条件）なので矛盾する。",
                         ]),
                         paragraph([
-                          "後半は前半と ", ref("def_real_closed_subfield"),
-                          " の第 2 条件（平方の三分法）から従う。元 ",
+                          "これで ", math(String.raw`s\cdot s=2`), " の根を ",
+                          math(String.raw`R`), " の中に取れることが確定した。実数体も複素数体も現れない。",
+                        ]),
+                      ],
+                    },
+                },
+                {
+                  role: "supportingClaim",
+                  element:
+                    {
+                      id: "zero_pinching_claim_neg_two_not_square_in_real_closed",
+                      kind: "claim",
+                      title: { text: "実閉部分体では $-2$ は平方でない" },
+                      labels: ["claim_neg_two_not_square_in_real_closed"],
+                      habitat: "Qbar",
+                      verification: ["sagemath/check/real-closed-sum-of-two-squares-is-square"],
+                      lean: [
+                        "Ising2DLambda.FisherZero.neg_two_not_square_in_realClosed",
+                      ],
+                      statement: [
+                        paragraph([
+                          math(String.raw`-2=w\cdot w`), " を満たす零でない ",
+                          math(String.raw`w\in R`), "（", ref("def_real_closed_subfield"),
+                          "）は存在しない。",
+                        ]),
+                        paragraph([
+                          "この非存在は、臨界点の平方根が ", math(String.raw`R`),
+                          " の元であることを示すときに、", math(String.raw`-2`),
+                          " が平方になる枝を排除するために使う。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          ref("claim_two_is_square_in_real_closed"), " と ",
+                          ref("def_real_closed_subfield"),
+                          " の第 2 条件（平方の三分法）を使う。元 ",
                           math(String.raw`z:=2\in R`), " について三分法の 3 つのうちちょうど 1 つが成り立つが、",
-                          "前半により第 2 の場合（", math(String.raw`z=s\cdot s`),
-                          "、", math(String.raw`s\ne0`), "）が成り立っている。したがって第 3 の場合（",
+                          ref("claim_two_is_square_in_real_closed"), " により第 2 の場合（",
+                          math(String.raw`z=s\cdot s`), "、", math(String.raw`s\ne0`),
+                          "）が成り立っている。したがって第 3 の場合（",
                           math(String.raw`-z=-2`), " が零でない元の平方であること）は成り立たない。",
                         ]),
                         paragraph([
-                          "この 2 つで、", math(String.raw`s\cdot s=2`), " の根を ",
-                          math(String.raw`R`), " の中に取れることと、",
-                          math(String.raw`-2`), " 側の枝が起きないことが確定した。",
-                          "実数体も複素数体も現れない。",
+                          "これで ", math(String.raw`-2`),
+                          " 側の枝が起きないことが確定した。実数体も複素数体も現れない。",
                         ]),
                       ],
                     },
@@ -37938,8 +37976,8 @@ c-a
                         " となる。ここで ", math(String.raw`b\ne0`), " である（",
                         math(String.raw`b=0`), " なら ", math(String.raw`-2=0`),
                         " となり ", math(String.raw`2\ne0`), " に反する）。",
-                        "しかし ", ref("claim_two_is_square_in_real_closed"),
-                        " の後半により、", math(String.raw`-2`), " を零でない ",
+                        "しかし ", ref("claim_neg_two_not_square_in_real_closed"),
+                        " により、", math(String.raw`-2`), " を零でない ",
                         math(String.raw`R`), " の元の平方に書くことはできない。したがってこの場合は起きない。",
                       ],
                     ]),
@@ -37950,7 +37988,7 @@ c-a
                       " であり、加法で閉じているから ",
                       math(String.raw`x_c=-1+s\in R`), " である。",
                       "使ったのは固定した組 ", math(String.raw`(R,\omega)`),
-                      " の第 1・第 3・第 4 条件と ", ref("claim_two_is_square_in_real_closed"),
+                      " の第 1・第 3・第 4 条件と ", ref("claim_neg_two_not_square_in_real_closed"),
                       " だけであり、実数体も複素数体も現れない。",
                     ]),
                   ],
