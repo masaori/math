@@ -7,6 +7,7 @@ Yang--Baxter 規約、二元集合上の反例、一元複素作用素族の
 位相、極限、微分、内積、完備性、近似は使わない。
 -/
 import Mathlib.Data.Complex.Basic
+import Mathlib.Data.Fintype.Prod
 
 namespace CellularAutomata.FiniteYangBaxterBoundary
 
@@ -50,15 +51,17 @@ theorem braid_iff_swapAfter_yangBaxter (U : PairMap X) :
   · intro h
     funext t
     rcases t with ⟨x, y, z⟩
-    have ht := congrFun h (z, y, x)
+    have ht := congrFun h (x, y, z)
     simpa [SatisfiesBraid, SatisfiesYangBaxter, adjacent12, adjacent23,
-      nonadjacent13, swapAfter, swap, Function.comp_def] using congrArg swap ht
+      nonadjacent13, swapAfter, swap, Function.comp_def] using
+      congrArg (fun t : X × X × X => (t.2.2, t.2.1, t.1)) ht.symm
   · intro h
     funext t
     rcases t with ⟨x, y, z⟩
-    have ht := congrFun h (z, y, x)
+    have ht := congrFun h (x, y, z)
     simpa [SatisfiesBraid, SatisfiesYangBaxter, adjacent12, adjacent23,
-      nonadjacent13, swapAfter, swap, Function.comp_def] using congrArg swap ht
+      nonadjacent13, swapAfter, swap, Function.comp_def] using
+      congrArg (fun t : X × X × X => (t.2.2, t.2.1, t.1)) ht.symm
 
 /-- 二元集合上の有限二体写像の明示的な非解。 -/
 def binaryCounterexample : PairMap Bool
@@ -69,13 +72,20 @@ theorem binaryCounterexample_not_braid :
     ¬ SatisfiesBraid binaryCounterexample := by
   intro h
   have ht := congrFun h (true, true, true)
-  decide at ht
+  norm_num [adjacent12, adjacent23, binaryCounterexample, Function.comp_def] at ht
 
 /-- 有限集合では braid 条件を三体入力の全走査で決定できる。 -/
-theorem satisfiesBraid_decidable [Fintype X] [DecidableEq X]
+instance satisfiesBraid_decidable [Fintype X] [DecidableEq X]
     (R : PairMap X) : Decidable (SatisfiesBraid R) := by
-  unfold SatisfiesBraid
-  infer_instance
+  letI : Decidable (∀ t : X × X × X,
+      (adjacent12 R ∘ adjacent23 R ∘ adjacent12 R) t =
+        (adjacent23 R ∘ adjacent12 R ∘ adjacent23 R) t) :=
+    Fintype.decidableForallFintype
+  exact decidable_of_iff
+    (∀ t : X × X × X,
+      (adjacent12 R ∘ adjacent23 R ∘ adjacent12 R) t =
+        (adjacent23 R ∘ adjacent12 R ∘ adjacent23 R) t)
+    ⟨fun h => funext h, fun h t => congrFun h t⟩
 
 /-- 有限二体写像の複素線形化を基底係数で書いたもの。 -/
 def complexLinearization [DecidableEq X] (U : PairMap X)

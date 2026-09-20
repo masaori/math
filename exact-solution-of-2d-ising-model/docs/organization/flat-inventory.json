@@ -6295,6 +6295,14 @@
           "prerequisiteId": "transfer_matrix_005_definition_end_isomorphism"
         },
         {
+          "dependentId": "transfer_matrix_008_definition_delta_M",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "transfer_matrix_008_definition_delta_M",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
           "dependentId": "transfer_matrix_009_claim_exp_sum",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
@@ -15681,8 +15689,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 238,
-        "inspectedContentSha256": "178e7d3326f0f7c38343766bba02889ec5611ede8b2a032a91e531b1e0ffcafc",
+        "inspectedCharacterCount": 517,
+        "inspectedContentSha256": "6f2ed24db31dbeb1a1b56afc0ba4ee14fcdebb38088225e6725625bf8cc8fb32",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -15691,9 +15699,18 @@
         ],
         "manualReview": null
       },
-      "dependsOnLabels": [],
-      "dependsOnEntryIds": [],
-      "semanticPrerequisiteLabels": [],
+      "dependsOnLabels": [
+        "definition_of_cc",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
       "referenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
@@ -15731,8 +15748,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3017,
-        "inspectedContentSha256": "5f76ed3261a457f1d70a72b5b21cd4281cd46f0e6236a4531eaffce3bdb38909",
+        "inspectedCharacterCount": 3132,
+        "inspectedContentSha256": "432e516aed0e651e2f173316af98d98007cae2c7373c4a8fabc640b46e3bfe04",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",

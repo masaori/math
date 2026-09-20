@@ -4251,15 +4251,27 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     title: { tex: String.raw`\delta^M_{(\mu,\nu)} \text{ の定義}` },
     labels: ["def_delta_M"],
     statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{N}_{\geq 1}`),
+        " とし、",
+        math(String.raw`\mu,\nu \in \mathbb{Z}`),
+        " とする。",
+      ]),
       displayMath(
-        String.raw`\delta^M_{(\mu,\nu)} :=
+        String.raw`\delta^M : \mathbb{Z}\times\mathbb{Z}\longrightarrow\mathbb{C},\qquad
+\delta^M_{(\mu,\nu)} :=
 \begin{cases}
 1 & (\mu \equiv \nu \pmod{M}) \\
 0 & (\mu \not\equiv \nu \pmod{M})
 \end{cases}`,
       ),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-09-20: M を正の自然数、μ,ν を整数として明記し、δ^M の定義域と値域を ℤ×ℤ→ℂ とした。Lean の M : ℕ, M ≠ 0 および SageMath の正の M という検査範囲に仮定を同期した。合同条件は変えていない。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_009_claim_exp_sum",
@@ -4268,7 +4280,12 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     title: null,
     labels: ["exp_sum"],
     statement: [
-      paragraph([math(String.raw`k \in \mathbb{Z}`), " について、"]),
+      paragraph([
+        math(String.raw`M \in \mathbb{N}_{\geq 1}`),
+        " とし、",
+        math(String.raw`k \in \mathbb{Z}`),
+        " について、",
+      ]),
       displayMath(
         String.raw`\sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j k}{M}\right) = M\,\delta^M_{(k,0)}`,
       ),
@@ -4292,7 +4309,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
 &= \sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j \cdot lM}{M}\right)
 &&(\because\ k = lM) \\
 &= \sum_{j=1}^{M} \exp\!\left(2\pi i\, l j\right)
-&&(\because\ M\ \text{で約分した}) \\
+&&(\because\ M\geq1\ \text{より}\ M\neq0\ \text{なので約分した}) \\
 &= \sum_{j=1}^{M} \left(\cos 2\pi l j + i \sin 2\pi l j\right)
 &&(\because\ \text{オイラーの公式}) \\
 &= \sum_{j=1}^{M} \left(1 + i \cdot 0\right)
@@ -4345,7 +4362,12 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
         " である。",
       ]),
     ],
-    conversion: { status: "converted" },
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-09-20: M を正の自然数として明記し、約分に使う M≠0 の根拠を補った。Lean の M : ℕ, hM : M ≠ 0 および SageMath の M = 1,...,12 という検査範囲に仮定を同期した。主張の数学的内容は変えていない。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_010_definition_hatZ_hatY",
