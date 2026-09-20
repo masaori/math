@@ -1716,6 +1716,15 @@ targets=(
   Ising2DLambda.KacWard.oddRayInteriorCells_finite
   Ising2DLambda.NecSuf.KacWard.odd_support_finite_necSuf
   Ising2DLambda.KacWard.oddRayInteriorCells_finite_from_necSuf
+  Ising2DLambda.KacWard.rightRayCrossingCount_adjacent
+  Ising2DLambda.NecSuf.KacWard.integer_tail_sum_split_necSuf
+  Ising2DLambda.KacWard.rightRayCrossingCount_adjacent_from_necSuf
+  Ising2DLambda.KacWard.verticallyAdjacentCells_boundaryParity
+  Ising2DLambda.NecSuf.KacWard.boundary_three_part_parity_necSuf
+  Ising2DLambda.KacWard.verticallyAdjacentCells_boundaryParity_from_necSuf
+  Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge
+  Ising2DLambda.NecSuf.KacWard.odd_run_reaches_odd_increment_necSuf
+  Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

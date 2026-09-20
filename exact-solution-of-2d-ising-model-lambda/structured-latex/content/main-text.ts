@@ -62267,6 +62267,11 @@ N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
               labels: ["claim_interior_cells_reach_odd_vertical_edge"],
               habitat: "Z",
               verification: ["sagemath/check/interior-cells-reach-odd-vertical-edge"],
+              lean: [
+                "Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge",
+                "Ising2DLambda.NecSuf.KacWard.odd_run_reaches_odd_increment_necSuf",
+                "Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
