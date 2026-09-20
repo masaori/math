@@ -64052,6 +64052,12 @@ s(i_r)-s(i_{r'})
               labels: ["claim_periodic_plane_lift_transverse_bounded"],
               habitat: "Z",
               verification: ["sagemath/check/periodic-plane-lift-transverse-bounded"],
+              lean: [
+                "Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_eq_base",
+                "Ising2DLambda.NecSuf.KacWard.periodic_lift_coordinate_eq_base_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_eq_base_from_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_range_finite",
+              ],
               statement: [
                 paragraph([
                   "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),

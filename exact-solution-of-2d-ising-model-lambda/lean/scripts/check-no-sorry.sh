@@ -1754,6 +1754,10 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.periodic_lift_injective_necSuf
   Ising2DLambda.KacWard.periodicPlaneLift_injective
   Ising2DLambda.KacWard.periodicPlaneLift_injective_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.periodic_lift_coordinate_eq_base_necSuf
+  Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_eq_base
+  Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_eq_base_from_necSuf
+  Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_range_finite
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
