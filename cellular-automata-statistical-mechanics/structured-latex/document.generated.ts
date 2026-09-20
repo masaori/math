@@ -36,6 +36,7 @@ import blocks_cyclic_stage_uniform_marginals from './content/cyclic-stage-unifor
 import blocks_dependency_order_substructures from './content/dependency-order-substructures.ts'
 import blocks_essential_dependency from './content/essential-dependency.ts'
 import blocks_finite_bath_count_canonical_boundary from './content/finite-bath-count-canonical-boundary.ts'
+import blocks_finite_combinatorial_scattering_data from './content/finite-combinatorial-scattering-data.ts'
 import blocks_finite_difference_temperature_derivative_boundary from './content/finite-difference-temperature-derivative-boundary.ts'
 import blocks_finite_discrete_continuous_symmetry_boundary from './content/finite-discrete-continuous-symmetry-boundary.ts'
 import blocks_finite_gibbs_weight_boundary from './content/finite-gibbs-weight-boundary.ts'
@@ -129,6 +130,7 @@ export type AllBlocks = [
   ...typeof blocks_dependency_order_substructures,
   ...typeof blocks_essential_dependency,
   ...typeof blocks_finite_bath_count_canonical_boundary,
+  ...typeof blocks_finite_combinatorial_scattering_data,
   ...typeof blocks_finite_difference_temperature_derivative_boundary,
   ...typeof blocks_finite_discrete_continuous_symmetry_boundary,
   ...typeof blocks_finite_gibbs_weight_boundary,

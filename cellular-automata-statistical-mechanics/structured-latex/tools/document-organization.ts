@@ -81,6 +81,14 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_combinatorial_scattering_data",
+        title: "有限組合せ散乱表と整数位相持ち上げ",
+        input: "空でない有限集合、有限添字集合、部分作用表、左右の作用因子表、直積間の全単射、整数値表とその正規化を入力とする。",
+        output: "有限表の可換性・整数差分・正規化を別々に有限決定し、整数座標を伴う高々可算な持ち上げと三体 Yang–Baxter 適合条件を定義する。",
+        main: "主張は、固定した有限内部表の三つの適合条件が別々の有限等号比較で決定できる一方、整数位相を伴うアフィン化は高々可算であり、その三体整合性は内部表の有限性だけから自動ではないことである。",
+        mainLabels: ["claim_finite_internal_scattering_compatibilities_decidable"],
+      },
+      {
         id: "finite_submultiplicative_count_bounds",
         title: "正整数値有限表の劣乗法不等式と極限の境界",
         input: "正の自然数で添字づけた正整数値の有限表、自然数の加法・乗法・冪・順序比較を入力とする。",
