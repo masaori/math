@@ -1,0 +1,9 @@
+{
+  "実行識別子": "8b419085-2dcb-4d5f-9198-3aaef3b9d55a",
+  "観測時刻": "2026-09-20T15:04:04+09:00",
+  "起動登録の実測": { "list終了コード": 0, "print終了コード": 0, "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop", "state": "not running", "runs": 14, "last exit code": 1 },
+  "plist": { "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist", "存在": true, "sha256": "3d05a4e2dffcf073838797e47d24ad41df834e7bf65e40378224940c326ee4ed", "StartCalendarInterval": "偶数時43分" },
+  "実ログ": { "観測時刻": "2026-09-20T15:04:04+09:00", "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log", "終端": "Selected model is at capacity を記録し、2026-09-20 14:47:25にexit 1で異常終了。" },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 14・last exit 1。実ログの現行最新回もモデルcapacityによる14:47:25のexit 1であり、異常終了とする。別モデルへは切り替えていない。",
+  "成果比較": { "開始成果": "98dcd907dd8a6cbaef8ebd958960319d1f64a680", "前回監督の読解終点": "7f3ad1795b3dc72cf2763d72af649ce0f934abdf", "今回読解終点": "9ecb996453625a3ff12eed89b1f2684f37b5790d", "前回監督以後": "周期デルタと整数運動量の指数和へ正の格子幅・整数添字・非零除数の根拠を同期した。直近の異常終了とは分離する。" }
+}
