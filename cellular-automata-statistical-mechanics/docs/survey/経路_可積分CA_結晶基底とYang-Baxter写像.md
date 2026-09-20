@@ -35,6 +35,67 @@ Takahashi–Satsuma (1990) が導入した 1 次元 CA。箱の列に玉を置�
 複素 $R$ 行列・Bethe 方程式への比較写像をまだ定義していない。従って、この既存例を有限写像だけの
 主張へ縮めず、何が保存され何が失われるかは後続の比較で確定する。
 
+### 一次文献で確定した定義域と適合条件
+
+ここでの入力は「有限集合、任意の全単射、任意の整数値関数」ではない。
+Fukuda–Okado–Yamada, *Energy Functions in Box Ball Systems*
+([arXiv:math/9908116](https://arxiv.org/abs/math/9908116)) の節 2、定理 3.2、定理 4.6 と、
+Hatayama–Kuniba–Okado–Takagi–Yamada, *Scattering Rules in Soliton Cellular Automata
+Associated with Crystal Bases* ([arXiv:math/0007175](https://arxiv.org/abs/math/0007175)) の節 2.4、
+定理 2.7、系 2.8、付録 A を正本として、次の順に定める。
+これらの文献は、サイト状態の結晶 $B_1$、時間発展で運搬体として使う結晶 $B_l$、
+低階数代数のソリトン内部状態を標識する結晶 $B_l$ に同じ記号を使う。
+ここではそれらを同一視せず、以下の $B_l,B_{l'}$ は組合せ散乱の入出力となる結晶を指す。
+
+- $n\in\mathbb Z_{\ge 2}$ と $l\in\mathbb Z_{>0}$ に対する $U_q'(\widehat{\mathfrak{sl}}_n)$ の具体例では、$B_l$ は
+  $\{1,\ldots,n\}$ の元からなる長さ $l$ の非減少列全体であり、有限集合である。
+  色の集合 $I:=\{0,\ldots,n-1\}$ と、部分作用素
+  $\widetilde e_i,\widetilde f_i:B_l\to B_l\sqcup\{0\}$、およびその反復可能回数
+  $\varepsilon_i,\varphi_i:B_l\to\mathbb Z_{\ge0}$ が結晶グラフを定める。
+- $B_l\otimes B_{l'}$ では、$\varphi_i(b)$ と $\varepsilon_i(b')$ の比較により、
+  $\widetilde e_i$ と $\widetilde f_i$ が左右のどちらの因子に作用するかを定める。
+  内部状態の組合せ $R$ は全単射
+  $$\bar R_{l,l'}:B_l\otimes B_{l'}\longrightarrow B_{l'}\otimes B_l$$
+  であり、全ての $i\in I$ について両側の $\widetilde e_i,\widetilde f_i$ と可換でなければならない。
+- $\bar R_{l,l'}(b\otimes b')=\widetilde b'\otimes\widetilde b$ と書く。エネルギー関数は
+  $$H_{l,l'}:B_l\otimes B_{l'}\longrightarrow\mathbb Z$$
+  である。$\widetilde e_i(b\otimes b')\ne0$ のとき、
+  $H_{l,l'}(\widetilde e_i(b\otimes b'))-H_{l,l'}(b\otimes b')$ は、$i\ne0$ なら $0$、
+  $i=0$ かつ $\widetilde e_0$ が $\bar R_{l,l'}$ の前後でともに左因子へ作用する場合は $1$、
+  ともに右因子へ作用する場合は $-1$、その他は $0$ である。
+  この差分条件は $H_{l,l'}$ を加法定数を除いて定めるため、絶対的な位相差を述べるには
+  基準点での正規化も入力に含める。
+- 位相を含む定義域は有限集合ではない。アフィン化
+  $$\operatorname{Aff}(B_l):=\{z^d b\mid d\in\mathbb Z,\ b\in B_l\}\cong\mathbb Z\times B_l$$
+  は高々可算である。組合せ $R$ の持ち上げは
+  $$
+  z^d b\otimes z^{d'}b'
+  \longmapsto
+  z^{d'+H_{l,l'}(b\otimes b')}\widetilde b'
+  \otimes z^{d-H_{l,l'}(b\otimes b')}\widetilde b
+  $$
+  であり、内部状態と整数位相を同時に運ぶ。
+- 三つのアフィン結晶に作用する持ち上げが Yang–Baxter 等式を満たすことが、
+  多体散乱を二体散乱に因数分解し、分解順序に依存させない適合条件である。
+
+Fukuda–Okado–Yamada が扱う箱玉系の二ソリトン定理は、長さ $l>l'$ の十分離れた
+ソリトンと指定された時間発展の下で、内部状態の交換が $\bar R_{l,l'}$、
+整数位相の変化が正規化した $H_{l,l'}$ で述べられると主張する。
+Fukuda–Okado–Yamada の定理 4.6 では同論文の正規化の下で
+$\delta=2l'+H_{l,l'}(b\otimes b')$ である。エネルギー関数は加法定数の自由度を持つため、
+正規化が異なる文献の位相差式をそのまま同一視しない。
+
+従って、本プロジェクトで次に有限検査へ移す対象は、固定した $n,l,l'$ に対する
+$B_l,B_{l'}$、結晶作用素の表、$\bar R_{l,l'}$ の表、正規化付き $H_{l,l'}$ の表と、
+それらの有限な適合等式である。これらの表の適合性は有限手続きで判定できるが、
+その事実だけから、表が量子アフィン代数の表現から生じること、一般の CA の散乱を表すこと、
+複素 $R$ 行列・Bethe 方程式と対応することは従わない。
+
+さらに、一般化箱玉系の一サイト状態集合 $B_1$ は $n$ 元を持つ。
+このリポジトリの CA は状態集合を二元に固定しているため、$n>2$ の非自明な内部色を持つ
+散乱は既存理論との比較対象であり、2 値 CA のセマンティクスを持つ主張ではない。
+$n=2$ の二値箱玉系への特殊化と、多色の一般化箱玉系での結論を分けて記録する。
+
 ### 可算性の観点（重要）
 
 $q\to0$ の後に残るのは：
