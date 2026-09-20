@@ -65454,6 +65454,14 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
               title: { text: "平行階段の横断座標は両端の水準の間に収まる" },
               labels: ["claim_parallel_staircase_transverse_width_bound"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.windingParallelStaircase_transverse_width_bound",
+                "Ising2DLambda.NecSuf.KacWard.translatedPath_coordinate_between_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_transverse_width_bound_from_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_above_band_avoids_periodicPlaneLift",
+                "Ising2DLambda.NecSuf.KacWard.translatedPath_above_upper_avoids_family_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_above_band_avoids_periodicPlaneLift_from_necSuf",
+              ],
               verification: ["sagemath/check/parallel-staircase-transverse-width"],
               statement: [
                 paragraph([
