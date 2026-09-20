@@ -65882,6 +65882,11 @@ cL W_{\perp}(\gamma)
               title: { text: "頂点単純な閉単位格子路のトーラス射影は閉じた非後退辺列である" },
               labels: ["claim_plane_simple_cycle_projection_closed_nonbacktracking"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.planeSimpleCycleProjection_closedNonbacktracking",
+                "Ising2DLambda.NecSuf.KacWard.simple_cycle_projection_closed_nonbacktracking_necSuf",
+                "Ising2DLambda.KacWard.planeSimpleCycleProjection_closedNonbacktracking_from_necSuf",
+              ],
               verification: ["sagemath/check/plane-cycle-torus-projection"],
               statement: [
                 paragraph([
