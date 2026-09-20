@@ -14,4 +14,4 @@
 sage sagemath/check/critical-point-rational-approximation/check.sage
 ```
 
-**2026-08-18 実行: すべて通過。**
+**2026-09-20 実行: すべて通過。**
