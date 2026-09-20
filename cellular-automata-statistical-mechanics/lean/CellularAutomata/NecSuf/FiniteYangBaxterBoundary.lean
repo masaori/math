@@ -23,21 +23,30 @@ theorem braid_iff_swapAfter_yangBaxter
   · intro h
     funext t
     rcases t with ⟨x, y, z⟩
-    have ht := congrFun h (z, y, x)
+    have ht := congrFun h (x, y, z)
     simpa [SatisfiesBraid, SatisfiesYangBaxter, adjacent12, adjacent23,
-      nonadjacent13, swapAfter, swap, Function.comp_def] using congrArg swap ht
+      nonadjacent13, swapAfter, swap, Function.comp_def] using
+      congrArg (fun t : X × X × X => (t.2.2, t.2.1, t.1)) ht.symm
   · intro h
     funext t
     rcases t with ⟨x, y, z⟩
-    have ht := congrFun h (z, y, x)
+    have ht := congrFun h (x, y, z)
     simpa [SatisfiesBraid, SatisfiesYangBaxter, adjacent12, adjacent23,
-      nonadjacent13, swapAfter, swap, Function.comp_def] using congrArg swap ht
+      nonadjacent13, swapAfter, swap, Function.comp_def] using
+      congrArg (fun t : X × X × X => (t.2.2, t.2.1, t.1)) ht.symm
 
 /-- 有限全走査に必要なのは、入力型の有限性と等号判定だけである。 -/
-theorem satisfiesBraid_decidable [Fintype X] [DecidableEq X]
+instance satisfiesBraid_decidable [Fintype X] [DecidableEq X]
     (U : PairMap X) : Decidable (SatisfiesBraid U) := by
-  unfold SatisfiesBraid
-  infer_instance
+  letI : Decidable (∀ t : X × X × X,
+      (adjacent12 U ∘ adjacent23 U ∘ adjacent12 U) t =
+        (adjacent23 U ∘ adjacent12 U ∘ adjacent23 U) t) :=
+    Fintype.decidableForallFintype
+  exact decidable_of_iff
+    (∀ t : X × X × X,
+      (adjacent12 U ∘ adjacent23 U ∘ adjacent12 U) t =
+        (adjacent23 U ∘ adjacent12 U ∘ adjacent23 U) t)
+    ⟨fun h => funext h, fun h t => congrFun h t⟩
 
 /-- 写像表の一成分を、相異なる零と一を持つ任意の係数型へ埋め込む。 -/
 def basisCoefficient [DecidableEq X] [Zero K] [One K]
@@ -130,19 +139,21 @@ theorem basisCoefficient_eq_complexLinearization
 theorem complexLinearization_eq_one_iff_of_necSuf
     [DecidableEq X] (U : PairMap X) (target source : X × X) :
     complexLinearization U target source = 1 ↔ target = U source := by
-  simpa only [basisCoefficient_eq_complexLinearization] using
+  simpa [basisCoefficient, complexLinearization] using
     basisCoefficient_eq_one_iff (K := ℂ) U target source
 
 theorem constantComplexLinearization_recovers_of_necSuf
     [DecidableEq X] (U : PairMap X) (l m : ℂ) (source : X × X) :
     constantComplexLinearization U l m (U source) source = 1 := by
-  exact constantCoefficientFamily_recovers (P := ℂ) (K := ℂ) U l m source
+  simpa [constantCoefficientFamily, basisCoefficient,
+    constantComplexLinearization, complexLinearization] using
+    (constantCoefficientFamily_recovers (P := ℂ) (K := ℂ) U l m source)
 
 theorem braid_iff_swapAfter_yangBaxter_of_necSuf (U : PairMap X) :
     SatisfiesBraid U ↔ SatisfiesYangBaxter (swapAfter U) :=
   braid_iff_swapAfter_yangBaxter U
 
-theorem satisfiesBraid_decidable_of_necSuf [Fintype X] [DecidableEq X]
+instance satisfiesBraid_decidable_of_necSuf [Fintype X] [DecidableEq X]
     (U : PairMap X) : Decidable (SatisfiesBraid U) :=
   satisfiesBraid_decidable U
 
@@ -166,7 +177,9 @@ theorem affineFirstFamily_satisfies_of_necSuf :
     CellularAutomata.FiniteYangBaxterBoundary.SatisfiesScalarYangBaxter
       CellularAutomata.FiniteYangBaxterBoundary.affineFirstFamily := by
   simpa [CellularAutomata.FiniteYangBaxterBoundary.SatisfiesScalarYangBaxter,
-    CellularAutomata.FiniteYangBaxterBoundary.affineFirstFamily, firstParameterFamily] using
+    CellularAutomata.FiniteYangBaxterBoundary.affineFirstFamily,
+    CellularAutomata.NecSuf.FiniteYangBaxterBoundary.SatisfiesScalarYangBaxter,
+    firstParameterFamily] using
     (firstParameterFamily_satisfies (P := ℂ) (K := ℂ) (fun p => 1 + p))
 
 theorem scalar_spectral_dependence_not_determined_of_necSuf :
@@ -183,6 +196,7 @@ theorem scalar_spectral_dependence_not_determined_of_necSuf :
   simpa [CellularAutomata.FiniteYangBaxterBoundary.SatisfiesScalarYangBaxter,
     CellularAutomata.FiniteYangBaxterBoundary.constantFamily,
     CellularAutomata.FiniteYangBaxterBoundary.affineFirstFamily,
+    CellularAutomata.NecSuf.FiniteYangBaxterBoundary.SatisfiesScalarYangBaxter,
     constantOneFamily, firstParameterFamily] using h
 
 end Derivation
