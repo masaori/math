@@ -1758,6 +1758,10 @@ targets=(
   Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_eq_base
   Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_eq_base_from_necSuf
   Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_range_finite
+  Ising2DLambda.KacWard.periodicPlaneLift_parallelCoordinate_add_period
+  Ising2DLambda.NecSuf.KacWard.periodic_lift_coordinate_next_period_necSuf
+  Ising2DLambda.KacWard.periodicPlaneLift_parallelCoordinate_add_period_from_necSuf
+  Ising2DLambda.KacWard.windingParallelCoordinate_windingShift_pos
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

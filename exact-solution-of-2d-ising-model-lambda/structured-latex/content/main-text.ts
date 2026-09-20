@@ -64155,6 +64155,12 @@ s(i_r)-s(i_{r'})
               labels: ["claim_periodic_plane_lift_parallel_period_increase"],
               habitat: "Z",
               verification: ["sagemath/check/periodic-plane-lift-parallel-increase"],
+              lean: [
+                "Ising2DLambda.KacWard.periodicPlaneLift_parallelCoordinate_add_period",
+                "Ising2DLambda.NecSuf.KacWard.periodic_lift_coordinate_next_period_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_parallelCoordinate_add_period_from_necSuf",
+                "Ising2DLambda.KacWard.windingParallelCoordinate_windingShift_pos",
+              ],
               statement: [
                 paragraph([
                   "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
