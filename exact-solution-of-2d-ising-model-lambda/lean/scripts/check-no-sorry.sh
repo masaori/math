@@ -1725,6 +1725,9 @@ targets=(
   Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge
   Ising2DLambda.NecSuf.KacWard.odd_run_reaches_odd_increment_necSuf
   Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge_from_necSuf
+  Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even
+  Ising2DLambda.NecSuf.KacWard.closed_endpoint_incidence_double_necSuf
+  Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

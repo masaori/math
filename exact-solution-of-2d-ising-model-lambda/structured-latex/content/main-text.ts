@@ -62357,6 +62357,11 @@ V_{r,g}(\gamma)
               labels: ["claim_vertex_incident_edge_traversal_even"],
               habitat: "N",
               verification: ["sagemath/check/vertex-incident-edge-traversal-even"],
+              lean: [
+                "Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even",
+                "Ising2DLambda.NecSuf.KacWard.closed_endpoint_incidence_double_necSuf",
+                "Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
