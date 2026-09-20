@@ -15,7 +15,8 @@
 
 | 具体版 | 必要十分版 | 特殊化の中身 |
 | --- | --- | --- |
-| `antiperiodic_exp_sum` | `NecSuf.sum_zpow_antiperiodic` | `ξ := e^{-iπ/M}`（1 の原始 `2M` 乗根） |
+| `antiperiodic_exp_sum` の奇偶分割 | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `ξ := e^{-iπ/M}`（1 の原始 `2M` 乗根） |
+| `antiperiodic_exp_sum` の閉形式 | `NecSuf.sum_zpow_antiperiodic` | 同上 |
 | `def_half_integer_modes` (1) | `NecSuf.pow_half_eq_neg_one` | 同上 |
 | `def_half_integer_modes` (2) | `NecSuf.transform_periodic`（**整数運動量と共通**） | 重み `w_j = ξ^{-j}`、周波数 `a_j = j`、`ζ = ξ^2` |
 
@@ -69,6 +70,160 @@ theorem isPrimitiveRoot_expPhase_neg_one {N : ℕ} (hN : N ≠ 0) :
     exact_mod_cast hd
 
 /-! ## `antiperiodic_exp_sum` を必要十分版から導く -/
+
+/-- **本文の奇偶分割による中間式を必要十分版から導いたもの**。 -/
+theorem antiperiodic_exp_sum_delta_difference_of_necSuf (hM : M ≠ 0) (k : ℤ) :
+    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) =
+      ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 := by
+  have hξ : IsPrimitiveRoot (expPhase (2 * M) 1) (2 * M) :=
+    isPrimitiveRoot_expPhase_one (by omega)
+  have hL : ∀ μ : Fin M,
+      checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) =
+        (expPhase (2 * M) 1) ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (-k)) := by
+    intro μ
+    rw [checkPhase, expPhase_eq_zpow_one]
+    congr 1
+    ring
+  rw [Finset.sum_congr rfl fun μ _ => hL μ,
+    NecSuf.sum_zpow_antiperiodic_delta_difference (K := ℂ) hM hξ (-k)]
+  simp only [deltaMod, sub_zero, dvd_neg]
+
+/-- **本文と同じ `Complex.exp` のデルタ差を必要十分版から導いたもの**。 -/
+theorem antiperiodic_complex_exp_sum_delta_difference_of_necSuf (hM : M ≠ 0) (k : ℤ) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+      = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k,
+    antiperiodic_exp_sum_delta_difference_of_necSuf hM k]
+
+/-- `checkPhase M (-k)` を、正の周波数 `k` と原始根 `expPhase (2M) (-1)` の冪で書く。 -/
+theorem checkPhase_neg_eq_zpow_neg_root (M : ℕ) (k : ℤ) (μ : Fin M) :
+    checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) =
+      (expPhase (2 * M) (-1)) ^ ((2 * ((μ : ℕ) : ℤ) + 1) * k) := by
+  rw [checkPhase, ← expPhase_neg_eq_zpow_neg_one]
+  congr 1
+  ring
+
+/-- 必要十分版から導く、`k = lM` かつ `l` が偶数の場合。 -/
+theorem antiperiodic_exp_sum_dvd_even_of_necSuf (hM : M ≠ 0) (l : ℤ) (hl : Even l) :
+    ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1) =
+      (M : ℂ) * (-1 : ℂ) ^ l := by
+  rw [Finset.sum_congr rfl fun μ _ => checkPhase_neg_eq_zpow_neg_root M (l * (M : ℤ)) μ]
+  exact NecSuf.sum_zpow_antiperiodic_dvd_even hM
+    (isPrimitiveRoot_expPhase_neg_one (by omega)) l hl
+
+/-- 必要十分版から導く、`k = lM` かつ `l` が奇数の場合。 -/
+theorem antiperiodic_exp_sum_dvd_odd_of_necSuf (hM : M ≠ 0) (l : ℤ) (hl : Odd l) :
+    ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1) =
+      (M : ℂ) * (-1 : ℂ) ^ l := by
+  rw [Finset.sum_congr rfl fun μ _ => checkPhase_neg_eq_zpow_neg_root M (l * (M : ℤ)) μ]
+  exact NecSuf.sum_zpow_antiperiodic_dvd_odd hM
+    (isPrimitiveRoot_expPhase_neg_one (by omega)) l hl
+
+/-- 必要十分版から導く、`M ∤ k` の場合。 -/
+theorem antiperiodic_exp_sum_not_dvd_of_necSuf (hM : M ≠ 0) {k : ℤ}
+    (hk : ¬ (M : ℤ) ∣ k) :
+    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) = 0 := by
+  rw [Finset.sum_congr rfl fun μ _ => checkPhase_neg_eq_zpow_neg_root M k μ]
+  exact NecSuf.sum_zpow_antiperiodic_not_dvd hM
+    (isPrimitiveRoot_expPhase_neg_one (by omega)) hk
+
+/-- 必要十分版から導く `Complex.exp` 版の、`l` が偶数の場合。 -/
+theorem antiperiodic_complex_exp_sum_dvd_even_of_necSuf (hM : M ≠ 0) (l : ℤ)
+    (hl : Even l) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * ((l * (M : ℤ) : ℤ) : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) =
+      (M : ℂ) * (-1 : ℂ) ^ l := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM (l * (M : ℤ)),
+    antiperiodic_exp_sum_dvd_even_of_necSuf hM l hl]
+
+/-- 必要十分版から導く `Complex.exp` 版の、`l` が奇数の場合。 -/
+theorem antiperiodic_complex_exp_sum_dvd_odd_of_necSuf (hM : M ≠ 0) (l : ℤ)
+    (hl : Odd l) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * ((l * (M : ℤ) : ℤ) : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) =
+      (M : ℂ) * (-1 : ℂ) ^ l := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM (l * (M : ℤ)),
+    antiperiodic_exp_sum_dvd_odd_of_necSuf hM l hl]
+
+/-- 必要十分版から導く `Complex.exp` 版の、`M ∤ k` の場合。 -/
+theorem antiperiodic_complex_exp_sum_not_dvd_of_necSuf (hM : M ≠ 0) {k : ℤ}
+    (hk : ¬ (M : ℤ) ∣ k) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) = 0 := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k,
+    antiperiodic_exp_sum_not_dvd_of_necSuf hM hk]
+
+/-- 必要十分版から導く、本文どおりの無条件な `k = lM` の場合。 -/
+theorem antiperiodic_exp_sum_dvd_of_necSuf (hM : M ≠ 0) (l : ℤ) :
+    ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1) =
+      (M : ℂ) * (-1 : ℂ) ^ l := by
+  by_cases hl : Even l
+  · exact antiperiodic_exp_sum_dvd_even_of_necSuf hM l hl
+  · exact antiperiodic_exp_sum_dvd_odd_of_necSuf hM l (Int.not_even_iff_odd.mp hl)
+
+/-- 必要十分版から導く、本文と同じ `Complex.exp` の `k = lM` の場合。 -/
+theorem antiperiodic_complex_exp_sum_dvd_of_necSuf (hM : M ≠ 0) (l : ℤ) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * ((l * (M : ℤ) : ℤ) : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) =
+      (M : ℂ) * (-1 : ℂ) ^ l := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM (l * (M : ℤ)),
+    antiperiodic_exp_sum_dvd_of_necSuf hM l]
+
+/-- 必要十分版から導く、本文の「とくに」の非零の場合。 -/
+theorem antiperiodic_exp_sum_nonzero_of_abs_lt_of_necSuf (hM : M ≠ 0) {k : ℤ}
+    (hklt : |k| < (M : ℤ)) (hk0 : k ≠ 0) :
+    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) = 0 := by
+  apply antiperiodic_exp_sum_not_dvd_of_necSuf hM
+  intro hd
+  rcases hd with ⟨l, hl⟩
+  have hMpos : (0 : ℤ) < (M : ℤ) := by exact_mod_cast Nat.pos_of_ne_zero hM
+  have hk_abs : |k| = |l * (M : ℤ)| := by rw [hl, mul_comm]
+  have habs_product : |l * (M : ℤ)| = |l| * |(M : ℤ)| := abs_mul l (M : ℤ)
+  have habs_M : |(M : ℤ)| = (M : ℤ) := abs_of_pos hMpos
+  have habs_mul : |l| * (M : ℤ) < (M : ℤ) := by
+    calc
+      |l| * (M : ℤ) = |l| * |(M : ℤ)| := by rw [habs_M]
+      _ = |l * (M : ℤ)| := habs_product.symm
+      _ = |k| := hk_abs.symm
+      _ < (M : ℤ) := hklt
+  have hl_abs_lt_one : |l| < 1 := by
+    exact (Int.mul_lt_mul_right hMpos).mp (by simpa using habs_mul)
+  have hl_abs_nonneg : 0 ≤ |l| := abs_nonneg l
+  have hl_abs_zero : |l| = 0 := by omega
+  have hl_zero : l = 0 := abs_eq_zero.mp hl_abs_zero
+  have hk_zero : k = 0 := by rw [hl, hl_zero, mul_zero]
+  exact hk0 hk_zero
+
+/-- 必要十分版から導く、本文と同じ `Complex.exp` の「とくに」の非零の場合。 -/
+theorem antiperiodic_complex_exp_sum_nonzero_of_abs_lt_of_necSuf (hM : M ≠ 0) {k : ℤ}
+    (hklt : |k| < (M : ℤ)) (hk0 : k ≠ 0) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) = 0 := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k,
+    antiperiodic_exp_sum_nonzero_of_abs_lt_of_necSuf hM hklt hk0]
+
+/-- 必要十分版から導く、本文の「とくに」の零の場合。 -/
+theorem antiperiodic_exp_sum_zero_of_necSuf (hM : M ≠ 0) :
+    ∑ μ : Fin M, checkPhase M 0 (((μ : ℕ) : ℤ) + 1) = (M : ℂ) := by
+  calc
+    ∑ μ : Fin M, checkPhase M 0 (((μ : ℕ) : ℤ) + 1)
+        = (M : ℂ) * (-1 : ℂ) ^ (0 : ℤ) := by
+            simpa using antiperiodic_exp_sum_dvd_of_necSuf hM 0
+    _ = (M : ℂ) * 1 := by rw [zpow_zero]
+    _ = (M : ℂ) := by rw [mul_one]
+
+/-- 必要十分版から導く、本文と同じ `Complex.exp` の「とくに」の零の場合。 -/
+theorem antiperiodic_complex_exp_sum_zero_of_necSuf (hM : M ≠ 0) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (0 : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) = (M : ℂ) := by
+  calc
+    ∑ μ : Fin M, Complex.exp (Complex.I * (0 : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+        = ∑ μ : Fin M, checkPhase M 0 (((μ : ℕ) : ℤ) + 1) := by
+            simpa only [Int.cast_zero, neg_zero] using
+              antiperiodic_complex_exp_sum_eq_checkPhase hM 0
+    _ = (M : ℂ) := antiperiodic_exp_sum_zero_of_necSuf hM
 
 /-- **`antiperiodic_exp_sum` を `NecSuf.sum_zpow_antiperiodic` の特殊化として導いたもの**
 （`ξ := expPhase (2M) 1 = e^{-iπ/M}`）。 -/

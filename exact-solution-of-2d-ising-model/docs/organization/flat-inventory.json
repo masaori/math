@@ -7396,15 +7396,15 @@
         },
         {
           "dependentId": "evensector_002_claim_antiperiodic_exp_sum",
-          "prerequisiteId": "calculation_formulae_045_theorem_euler_formula_cos_sin"
+          "prerequisiteId": "calc_formulae_007_inclusion_rr_to_cc"
+        },
+        {
+          "dependentId": "evensector_002_claim_antiperiodic_exp_sum",
+          "prerequisiteId": "calculation_formulae_025_claim_complex_numbers_form_a_field"
         },
         {
           "dependentId": "evensector_002_claim_antiperiodic_exp_sum",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "evensector_002_claim_antiperiodic_exp_sum",
-          "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
         },
         {
           "dependentId": "evensector_003_definition_half_integer_modes",
@@ -9047,7 +9047,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 18,
+        "incomingReferenceCount": 19,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -10400,7 +10400,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 24,
+        "incomingReferenceCount": 25,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11775,7 +11775,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 13,
+        "incomingReferenceCount": 12,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -13338,7 +13338,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 24,
+        "incomingReferenceCount": 23,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -24209,11 +24209,11 @@
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
       },
       "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4491,
-        "inspectedContentSha256": "eacb3ff7957aa080018a44760a532572bd4000eb6f0f1a23526c044fad3db815",
+        "inspectedCharacterCount": 15752,
+        "inspectedContentSha256": "b73455abdf2d4a6bd84cd638b354a48c595a62edab65b498c2ac0827d2c914c6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -24223,18 +24223,18 @@
         "manualReview": null
       },
       "dependsOnLabels": [
+        "complex_numbers_form_a_field",
         "def_delta_M",
         "definition_of_cc",
-        "euler_formula_cos_sin",
         "exp_sum",
-        "set_and_algebra_notation",
-        "theorem_exp_product"
+        "inclusion_rr_to_cc",
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_045_theorem_euler_formula_cos_sin",
+        "calc_formulae_007_inclusion_rr_to_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
         "calculation_formulae_definition_set_and_algebra_notation",
-        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
         "transfer_matrix_008_definition_delta_M",
         "transfer_matrix_009_claim_exp_sum"
       ],
@@ -24242,16 +24242,10 @@
         "set_and_algebra_notation",
         "definition_of_cc"
       ],
-      "referenceLabelsNotUsedAsPrerequisites": [
-        "def_check_index_set"
-      ],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [
-        "def_check_index_set"
-      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": {
-        "def_check_index_set": "後続表記への案内"
-      },
+      "forwardStatementReferenceReview": null,
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
@@ -24354,7 +24348,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 39,
+        "incomingReferenceCount": 38,
         "isingSemanticMatches": [
           "運動量"
         ],

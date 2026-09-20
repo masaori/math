@@ -317,39 +317,83 @@ export default defineBlocks([
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
-        " とし、",
+        " とする。自然数を整数へ送る標準包含 ",
+        math(String.raw`\iota_{\mathbb N\to\mathbb Z}:\mathbb N\to\mathbb Z`),
+        " と整数を実数へ送る標準包含 ",
+        math(String.raw`\iota_{\mathbb Z\to\mathbb R}:\mathbb Z\to\mathbb R`),
+        " は零、単位元、和、積、順序を保つものとする。また、",
+        ref("inclusion_rr_to_cc"),
+        " の実数から複素数への包含を用いる。",
+      ]),
+      displayMath(
+        String.raw`n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\quad(n\in\mathbb N),
+\qquad a_{\mathbb R}:=\iota_{\mathbb Z\to\mathbb R}(a)\quad(a\in\mathbb Z),
+\qquad n_{\mathbb R}:=(n_{\mathbb Z})_{\mathbb R},
+\qquad a_{\mathbb C}:=(a_{\mathbb R})_{\mathbb C},
+\qquad n_{\mathbb C}:=(n_{\mathbb R})_{\mathbb C}`,
+      ),
+      paragraph([
+        "と書く。",
+        math(String.raw`M\ge2`),
+        " なので、",
+        math(String.raw`(M_{\mathbb N})_{\mathbb Z}=M`),
+        " を満たす一意な ",
+        math(String.raw`M_{\mathbb N}\in\mathbb N_{\ge2}`),
+        " がある。有限和の項数と周期デルタの法には ",
+        math(String.raw`M_{\mathbb N}`),
+        " を用いる。",
+      ]),
+      paragraph([
+        "順序を保つ包含写像により ",
+        math(String.raw`M_{\mathbb R}\ge2_{\mathbb R}>0_{\mathbb R}`),
+        " である。したがって ",
+        math(String.raw`M_{\mathbb R}\ne0_{\mathbb R}`),
+        " であり、さらに実数の零因子がないことから ",
+        math(String.raw`2M_{\mathbb R}\ne0_{\mathbb R}`),
+        " である。以下の分数はこの二つの非零性により定まる。",
+      ]),
+      paragraph([
+        "さらに、",
+        math(String.raw`\pi\in\mathbb R`),
+        " を円周率、",
+        math(String.raw`i:=(0_{\mathbb R},1_{\mathbb R})\in\mathbb C`),
+        " を虚数単位とする。複素数の差、零元、単位元、逆元には ",
+        ref("complex_numbers_form_a_field"),
+        " の体構造を用いる。とくに ",
+        math(String.raw`-1_{\mathbb C}\ne0_{\mathbb C}`),
+        " なので、",
+        math(String.raw`l\in\mathbb Z`),
+        " に対する ",
+        math(String.raw`(-1_{\mathbb C})^l`),
+        " は、非負の指数では積、負の指数では逆元の積として定まる整数冪である。 ",
         math(String.raw`\mu \in \mathbb{Z}`),
         " について",
       ]),
       displayMath(
-        String.raw`\tilde\theta_\mu := \frac{2\pi\left(\mu-\tfrac12\right)}{M} \in \mathbb{R}`,
+        String.raw`\tilde\theta_\mu := \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{M_{\mathbb R}} \in \mathbb{R}`,
       ),
       paragraph([
-        "とおく（ここで ",
+        "とおく。ここで ",
         math(String.raw`\mu \in \mathbb{Z}`),
-        " としているのは**記号 ",
+        " としているのは記号 ",
         math(String.raw`\tilde\theta_\mu`),
-        " の定義域**であって、主張を述べる添字の範囲ではない。主張の範囲は ",
-        ref("def_check_index_set"),
-        " で ",
-        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
-        " に絞る。下の指数和も ",
+        " の定義域である。以下の指数和では ",
         math(String.raw`\mu`),
         " を ",
         math(String.raw`1`),
         " から ",
-        math(String.raw`M`),
-        " まで、すなわち ",
-        math(String.raw`\check{\mathcal{M}}`),
-        " 全体にわたって取っている）。このとき ",
+        math(String.raw`M_{\mathbb N}`),
+        " までの自然数に限り、指数ではその整数像 ",
+        math(String.raw`\mu_{\mathbb Z}`),
+        " を用いる。このとき ",
         math(String.raw`k \in \mathbb{Z}`),
         " について",
       ]),
       displayMath(
-        String.raw`\sum_{\mu=1}^{M} e^{i k \tilde\theta_\mu}
+        String.raw`\sum_{\mu=1}^{M_{\mathbb N}} e^{i (k_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}}
 = \begin{cases}
-M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
-0 & (k \not\equiv 0 \pmod M)
+M_{\mathbb C}\,(-1_{\mathbb C})^{l} & (k = lM,\ l \in \mathbb{Z}) \\
+0_{\mathbb C} & (k \not\equiv 0 \pmod M)
 \end{cases}`,
       ),
       paragraph([
@@ -358,56 +402,158 @@ M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
         " かつ ",
         math(String.raw`k \neq 0`),
         " なら和は ",
-        math(String.raw`0`),
+        math(String.raw`0_{\mathbb C}`),
         "、",
         math(String.raw`k = 0`),
         " なら ",
-        math(String.raw`M`),
+        math(String.raw`M_{\mathbb C}`),
         " である。",
       ]),
     ],
     proof: [
+      paragraph(["最初に、自然数の項数と整数の格子幅の像を対応させる。包含写像の保存性より"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(M_{\mathbb N})_{\mathbb R}
+&=M_{\mathbb R}
+&&\bigl(\because\ (M_{\mathbb N})_{\mathbb Z}=M\bigr)\\
+(2M_{\mathbb N})_{\mathbb R}
+&=2M_{\mathbb R}
+&&\bigl(\because\ \iota_{\mathbb N\to\mathbb Z},\iota_{\mathbb Z\to\mathbb R}\text{ は積を保つ}\bigr)\\
+(M_{\mathbb N})_{\mathbb C}
+&=M_{\mathbb C}
+&&\bigl(\because\ (M_{\mathbb N})_{\mathbb R}=M_{\mathbb R}\bigr)\\
+(2M_{\mathbb N})_{\mathbb C}
+&=(2M)_{\mathbb C}
+&&\bigl(\because\ (2M_{\mathbb N})_{\mathbb R}=2M_{\mathbb R}\bigr).
+\end{aligned}`,
+      ),
       paragraph([
-        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi\mu}{M} - \dfrac{\pi}{M}`),
-        " である。以下、指数法則 ",
-        math(String.raw`e^{z+w} = e^{z}e^{w}`),
-        "（",
-        math(String.raw`z, w \in \mathbb{C}`),
-        "）としては ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n = 1`),
-        " すなわち ",
-        math(String.raw`\mathrm{Mat}(1,\mathbb{C}) = \mathbb{C}`),
-        " に適用したものを使う（",
-        math(String.raw`\mathbb{C}`),
-        " の積は可換なので仮定は満たされる）。これより",
+        "上で定めた像の記号により ",
+        math(String.raw`k_{\mathbb R}\tilde\theta_\mu`),
+        " は実数である。",
+      ]),
+      paragraph([
+        "実数 ",
+        math(String.raw`r\in\mathbb R`),
+        " の複素数への像は、",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}:=\iota_{\mathbb R\to\mathbb C}(r)`),
+        " で表す。主張の ",
+        math(String.raw`(k_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}`),
+        " は複素数であり、",
+        math(String.raw`i(k_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\in\mathbb C`),
+        " である。まず指数の実数部分を計算する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{\mu=1}^{M} e^{ik\tilde\theta_\mu}
-&= \sum_{\mu=1}^{M} e^{i k\left(\frac{2\pi\mu}{M} - \frac{\pi}{M}\right)}
-&&\bigl(\because\ \tilde\theta_\mu = \tfrac{2\pi\mu}{M} - \tfrac{\pi}{M}\bigr) \\
-&= \sum_{\mu=1}^{M} e^{i\frac{2\pi\mu k}{M}}\,e^{-i\frac{\pi k}{M}}
-&&\bigl(\because\ \text{theorem\_exp\_product}\ (n=1)\bigr) \\
-&= e^{-i\frac{\pi k}{M}}\sum_{\mu=1}^{M} e^{\frac{2\pi i \mu k}{M}}
-&&\bigl(\because\ \text{有限和から }\mu\text{ に依らない因子をくくり出す（分配律）}\bigr)
+k_{\mathbb R}\tilde\theta_\mu
+&=\frac{2\pi k_{\mathbb R}\left(\mu_{\mathbb R}-\frac12\right)}{M_{\mathbb R}}
+&&\bigl(\because\ \tilde\theta_\mu=\tfrac{2\pi(\mu_{\mathbb R}-\frac12)}{M_{\mathbb R}}\bigr)\\
+&=\frac{2\pi(2\mu_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}
+&&\bigl(\because\ M_{\mathbb R}\ne0_{\mathbb R},\ 2_{\mathbb R}\ne0_{\mathbb R}\text{ と }\mathbb R\text{ の分数の通分}\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって、求める和を",
+      ]),
+      displayMath(
+        String.raw`S_{M,k}:=\sum_{\mu=1}^{M_{\mathbb N}}
+e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}\in\mathbb C`,
+      ),
+      paragraph([
+        "と書ける。また、正の自然数 ",
+        math(String.raw`N\in\mathbb N_{\ge1}`),
+        " については、順序を保つ包含写像により ",
+        math(String.raw`N_{\mathbb R}\ge1_{\mathbb R}>0_{\mathbb R}`),
+        " なので ",
+        math(String.raw`N_{\mathbb R}\ne0_{\mathbb R}`),
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`T_{N,k}:=\sum_{r=1}^{N}e^{i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{N_{\mathbb R}}\right)_{\mathbb C}}\in\mathbb C
+\qquad(N\in\mathbb N_{\ge1})`,
+      ),
+      paragraph([
+        "とおく。整数 ",
+        math(String.raw`1,\ldots,2M_{\mathbb N}`),
+        " は、ただ一通り ",
+        math(String.raw`r=2\mu-1`),
+        " または ",
+        math(String.raw`r=2\mu`),
+        "（",
+        math(String.raw`1\le\mu\le M_{\mathbb N}`),
+        "）と書ける。ゆえに有限和を奇数番目と偶数番目へ分けると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{2M_{\mathbb N},k}
+&=\sum_{r=1}^{2M_{\mathbb N}}e^{i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(2M_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ T_{N,k}\text{ の定義に }N=2M_{\mathbb N}\text{ を代入}\bigr)\\
+&=\sum_{r=1}^{2M_{\mathbb N}}e^{i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ (2M_{\mathbb N})_{\mathbb R}=2M_{\mathbb R}\bigr)\\
+&=\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
++\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ r\text{ の奇偶による有限和の分割}\bigr)\\
+&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ S_{M,k}\text{ の定義}\bigr)\\
+&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{M_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ 2M_{\mathbb R}\ne0_{\mathbb R}\text{ と分数の約分}\bigr)\\
+&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(M_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ (M_{\mathbb N})_{\mathbb R}=M_{\mathbb R}\bigr)\\
+&=S_{M,k}+T_{M_{\mathbb N},k}
+&&\bigl(\because\ T_{M_{\mathbb N},k}\text{ の定義}\bigr).
 \end{aligned}`,
       ),
       paragraph([
         ref("exp_sum"),
-        " より右端の和は ",
-        math(String.raw`M\,\delta^M_{(k,0)}`),
-        " である（",
+        " を正の整数 ",
+        math(String.raw`2M_{\mathbb N}`),
+        " と ",
+        math(String.raw`M_{\mathbb N}`),
+        " にそれぞれ適用し、",
         ref("def_delta_M"),
-        "）。",
+        " の記号を使うと",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{2M_{\mathbb N},k}
+&=(2M_{\mathbb N})_{\mathbb C}\,\delta^{2M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ \text{exp\_sum}\text{ を }2M_{\mathbb N}\text{ に適用}\bigr),\\
+&=(2M)_{\mathbb C}\,\delta^{2M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ (2M_{\mathbb N})_{\mathbb C}=(2M)_{\mathbb C}\bigr),\\
+T_{M_{\mathbb N},k}
+&=(M_{\mathbb N})_{\mathbb C}\,\delta^{M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ \text{exp\_sum}\text{ を }M_{\mathbb N}\text{ に適用}\bigr),\\
+&=M_{\mathbb C}\,\delta^{M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ (M_{\mathbb N})_{\mathbb C}=M_{\mathbb C}\bigr).
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_{M,k}
+&=T_{2M_{\mathbb N},k}-T_{M_{\mathbb N},k}
+&&\bigl(\because\ T_{2M_{\mathbb N},k}=S_{M,k}+T_{M_{\mathbb N},k}\bigr)\\
+&=(2M)_{\mathbb C}\,\delta^{2M_{\mathbb N}}_{(k,0)}-M_{\mathbb C}\,\delta^{M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ \text{直前の二つの指数和}\bigr).
+\end{aligned}`,
+      ),
       paragraph([
         math(String.raw`k \not\equiv 0 \pmod M`),
-        " のときは ",
-        math(String.raw`\delta^M_{(k,0)} = 0`),
+        " のときは、",
+        math(String.raw`2M\mid k`),
+        " なら ",
+        math(String.raw`M\mid k`),
+        " となることの対偶から ",
+        math(String.raw`2M\nmid k`),
+        " でもある。したがって ",
+        math(String.raw`\delta^{2M_{\mathbb N}}_{(k,0)}=0_{\mathbb C}`),
+        " かつ ",
+        math(String.raw`\delta^{M_{\mathbb N}}_{(k,0)} = 0_{\mathbb C}`),
         " なので和は ",
-        math(String.raw`0`),
+        math(String.raw`0_{\mathbb C}`),
         "。",
       ]),
       paragraph([
@@ -415,31 +561,157 @@ M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
         "（",
         math(String.raw`l \in \mathbb{Z}`),
         "）のときは ",
-        math(String.raw`\delta^M_{(k,0)} = 1`),
-        " であり、前因子は",
+        math(String.raw`\delta^{M_{\mathbb N}}_{(k,0)} = 1_{\mathbb C}`),
+        " である。また ",
+        math(String.raw`M\ne0`),
+        " なので、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-i\frac{\pi k}{M}}
-&= e^{-i\frac{\pi l M}{M}}
-&&\bigl(\because\ k = lM\bigr) \\
-&= e^{-i\pi l}
-&&\bigl(\because\ M\ge 2\text{ なので }M\ne0\text{、分数の約分}\bigr) \\
-&= \cos(\pi l) - i\sin(\pi l)
-&&\bigl(\because\ \text{euler\_formula\_cos\_sin}\bigr) \\
-&= (-1)^{l}
-&&\bigl(\because\ l \in \mathbb{Z} \text{ に対し } \cos(\pi l) = (-1)^l,\ \sin(\pi l) = 0\bigr)
+2M\mid k
+&\iff 2M\mid lM
+&&\bigl(\because\ k=lM\bigr)\\
+&\iff 2\mid l
+&&\bigl(\because\ M\ne0\text{ による整数の約分}\bigr).
 \end{aligned}`,
       ),
       paragraph([
-        "（",
-        math(String.raw`e^{-i\pi l} = \cos(\pi l) - i\sin(\pi l)`),
-        " は ",
-        ref("euler_formula_cos_sin"),
-        " による。）よって和は ",
-        math(String.raw`M(-1)^l`),
-        "。",
+        math(String.raw`l`),
+        " が偶数なら ",
+        math(String.raw`\delta^{2M_{\mathbb N}}_{(k,0)}=1_{\mathbb C}`),
+        " なので",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_{M,k}
+&=(2M)_{\mathbb C}\cdot1_{\mathbb C}-M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ \delta^{2M_{\mathbb N}}_{(k,0)}=\delta^{M_{\mathbb N}}_{(k,0)}=1_{\mathbb C}\bigr)\\
+&=(2M)_{\mathbb C}-M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ (2M)_{\mathbb C}\cdot1_{\mathbb C}=(2M)_{\mathbb C}\bigr)\\
+&=(2M)_{\mathbb C}-M_{\mathbb C}
+&&\bigl(\because\ M_{\mathbb C}\cdot1_{\mathbb C}=M_{\mathbb C}\bigr)\\
+&=M_{\mathbb C}
+&&\bigl(\because\ (2M)_{\mathbb C}-M_{\mathbb C}=M_{\mathbb C}\bigr)\\
+&=M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元}\bigr)\\
+&=M_{\mathbb C}(-1_{\mathbb C})^l
+&&\bigl(\because\ l\text{ が偶数なら }(-1_{\mathbb C})^l=1_{\mathbb C}\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`l`),
+        " が奇数なら ",
+        math(String.raw`\delta^{2M_{\mathbb N}}_{(k,0)}=0_{\mathbb C}`),
+        " なので",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_{M,k}
+&=(2M)_{\mathbb C}\cdot0_{\mathbb C}-M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ \delta^{2M_{\mathbb N}}_{(k,0)}=0_{\mathbb C},\ \delta^{M_{\mathbb N}}_{(k,0)}=1_{\mathbb C}\bigr)\\
+&=0_{\mathbb C}-M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ (2M)_{\mathbb C}\cdot0_{\mathbb C}=0_{\mathbb C}\bigr)\\
+&=0_{\mathbb C}-M_{\mathbb C}
+&&\bigl(\because\ M_{\mathbb C}\cdot1_{\mathbb C}=M_{\mathbb C}\bigr)\\
+&=-M_{\mathbb C}
+&&\bigl(\because\ 0_{\mathbb C}-M_{\mathbb C}=-M_{\mathbb C}\bigr)\\
+&=M_{\mathbb C}(-1_{\mathbb C})
+&&\bigl(\because\ -M_{\mathbb C}=M_{\mathbb C}(-1_{\mathbb C})\bigr)\\
+&=M_{\mathbb C}(-1_{\mathbb C})^l
+&&\bigl(\because\ l\text{ が奇数なら }(-1_{\mathbb C})^l=-1_{\mathbb C}\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "最後に「とくに」を示す。",
+        math(String.raw`|k|<M`),
+        " かつ ",
+        math(String.raw`k\ne0`),
+        " とする。もし ",
+        math(String.raw`M\mid k`),
+        " なら、ある ",
+        math(String.raw`l\in\mathbb{Z}`),
+        " が存在して ",
+        math(String.raw`k=lM`),
+        " である。このとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|lM|
+&=|l|\,|M|
+&&\bigl(\because\ \text{積の絶対値}\bigr)\\
+&=|l|M
+&&\bigl(\because\ M>0\text{ なので }|M|=M\bigr)\\
+&= |k|
+&&\bigl(\because\ k=lM\bigr) \\
+&< M
+&&\bigl(\because\ |k|<M\bigr),
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`M>0`),
+        " なので、整数における正数倍は狭義順序を反映する。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|l|
+&<1
+&&\bigl(\because\ |l|M<1\cdot M,\ M>0\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "一方、整数 ",
+        math(String.raw`l`),
+        " の絶対値は非負整数なので、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|l|
+&=0
+&&\bigl(\because\ |l|\in\mathbb{Z}_{\ge0},\ |l|<1\bigr) \\
+l
+&=0
+&&\bigl(\because\ |l|=0\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+k
+&=lM
+&&\bigl(\because\ k=lM\bigr) \\
+&=0\cdot M
+&&\bigl(\because\ l=0\bigr) \\
+&=0
+&&\bigl(\because\ 0\cdot M=0\bigr),
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり ",
+        math(String.raw`0`),
+        " ではないという仮定 ",
+        math(String.raw`k\ne0`),
+        " に矛盾する。ゆえに ",
+        math(String.raw`M\nmid k`),
+        " であり、上の非整除の場合から和は ",
+        math(String.raw`0_{\mathbb C}`),
+        " である。また ",
+        math(String.raw`k=0`),
+        " では ",
+        math(String.raw`l=0`),
+        " とした整除の場合により",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+M_{\mathbb C}(-1_{\mathbb C})^0
+&=M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ (-1)^0=1\bigr) \\
+&=M_{\mathbb C}
+&&\bigl(\because\ M_{\mathbb C}\cdot1_{\mathbb C}=M_{\mathbb C}\bigr).
+\end{aligned}`,
+      ),
+      paragraph(["となる。"]),
     ],
     conversion: { status: "added" },
   },

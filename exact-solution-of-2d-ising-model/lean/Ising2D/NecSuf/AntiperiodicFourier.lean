@@ -28,13 +28,13 @@
   これは「`ξ^M` は `1` の平方根で、原始性から `1` ではない」から出る。
   整数運動量が `ζ = ξ^2`（1 の原始 `M` 乗根）の偶数周波数だったのに対応する。
 
-* **整数運動量と半整数運動量は、同じ直交性 `sum_zpow_primitiveRoot` の別の特殊化である。**
-  奇数周波数の和は
-  `∑_{μ=1}^{M} ξ^{(2μ-1)k} = ξ^{k} ∑_{μ=0}^{M-1} (ξ^2)^{μ k} = ξ^{k} · M δ^M_{k,0}`
-  と、定数位相 `ξ^{k}` を括り出すだけで偶数周波数の和（既存の
-  `Ising2D.NecSuf.sum_zpow_primitiveRoot`）に帰着する。
-  人手証明が「`M(-1)^l` か `0`」と場合分けしている `(-1)^l` は、この定数位相を
-  `M ∣ k` のところで評価した `ξ^{lM} = (ξ^M)^{l} = (-1)^l` である。
+* **人手証明の奇偶分割は、任意の体でもそのまま成立する。**
+  `2M` 項の和を奇数番目と偶数番目へ分けると、奇数周波数の和は
+  `2M δ^{2M}_{k,0} - M δ^M_{k,0}` になる。これを
+  `sum_zpow_antiperiodic_delta_difference` として、人手証明と同じ手順で示す。
+  さらに定数位相 `ξ^k` を括る既存の短い閉形式
+  `sum_zpow_antiperiodic` も補助定理として残す。人手証明が場合分けしている
+  `(-1)^l` は、差の式で `2M ∣ lM` と `M ∣ lM` を `l` の奇偶により評価して現れる。
 
 * **反交換関係は既存の必要十分版のまま特殊化できる。** `NecSuf.acomm_fourier_clifford_weights`
   は「位相が `ζ^{(j+1)ν}`、重みが任意」という形なので、`ζ := ξ`（`2M` 乗根）、
@@ -98,6 +98,18 @@ theorem zpow_mul_natCast {M : ℕ} (hM : M ≠ 0) {ξ : K} (hξ : IsPrimitiveRoo
 
 /-! ## 反周期的な指数和（`antiperiodic_exp_sum` の必要十分版） -/
 
+/-- 長さ `2M` の有限和を偶数番目と奇数番目へ分ける。 -/
+private theorem sum_range_even_odd {A : Type*} [AddCommMonoid A] (f : ℕ → A) (M : ℕ) :
+    ∑ r ∈ Finset.range (2 * M), f r =
+      (∑ μ ∈ Finset.range M, f (2 * μ)) + ∑ μ ∈ Finset.range M, f (2 * μ + 1) := by
+  induction M with
+  | zero => simp
+  | succ M ih =>
+      rw [show 2 * (M + 1) = 2 * M + 2 by omega]
+      simp only [Finset.sum_range_succ]
+      rw [ih]
+      abel
+
 /-- 既存の直交性 `sum_zpow_primitiveRoot`（添字が `1,…,M`）の `0,…,M-1` 版。
 
 `μ = 0` の項と `μ = M` の項がどちらも `ζ^0 = ζ^{Mk} = 1` なので値は同じである。 -/
@@ -116,6 +128,148 @@ theorem sum_zpow_primitiveRoot_zero_based {M : ℕ} (hM : M ≠ 0) {ζ : K}
   by_cases hd : (M : ℤ) ∣ k
   · rw [if_pos hd, mul_one, (hζ.zpow_eq_one_iff_dvd (-k)).2 ((dvd_neg).2 hd), mul_one]
   · rw [if_neg hd, mul_zero, zero_mul]
+
+/-- **人手証明と同じ奇偶分割による必要十分版**。
+
+`ξ` が体 `K` の中の 1 の原始 `2M` 乗根なら、奇数周波数の和は
+
+`∑_{μ=0}^{M-1} ξ^{(2μ+1)k}
+  = 2M · δ^{2M}_{k,0} - M · δ^M_{k,0}`。
+
+証明は `2M` 項の整数運動量和を偶数番目と奇数番目へ分け、偶数番目の和を引く。
+指数関数・円周率・複素数であることは使わない。 -/
+theorem sum_zpow_antiperiodic_delta_difference {M : ℕ} (hM : M ≠ 0) {ξ : K}
+    (hξ : IsPrimitiveRoot ξ (2 * M)) (k : ℤ) :
+    ∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * k) =
+      (((2 * M : ℕ) : K) * (if ((2 * M : ℕ) : ℤ) ∣ k then 1 else 0)) -
+        ((M : K) * (if (M : ℤ) ∣ k then 1 else 0)) := by
+  have h2M : 2 * M ≠ 0 := by omega
+  have hsplit := sum_range_even_odd
+    (fun r : ℕ => ξ ^ ((((r + 1 : ℕ) : ℤ)) * k)) M
+  have hodd :
+      ∑ μ ∈ Finset.range M, ξ ^ (((2 * μ + 1 : ℕ) : ℤ) * k) =
+        ∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * k) := by
+    rw [Fin.sum_univ_eq_sum_range
+      (fun μ : ℕ => ξ ^ ((2 * (μ : ℤ) + 1) * k))]
+    apply Finset.sum_congr rfl
+    intro μ _
+    congr 1
+  have heven :
+      ∑ μ ∈ Finset.range M, ξ ^ (((2 * μ + 2 : ℕ) : ℤ) * k) =
+        ∑ μ : Fin M, (ξ ^ 2) ^ (((((μ : ℕ) : ℤ) + 1) * k)) := by
+    calc
+      ∑ μ ∈ Finset.range M, ξ ^ (((2 * μ + 2 : ℕ) : ℤ) * k) =
+          ∑ μ ∈ Finset.range M, (ξ ^ 2) ^ ((((μ + 1 : ℕ) : ℤ) * k)) := by
+            apply Finset.sum_congr rfl
+            intro μ _
+            rw [← zpow_natCast ξ 2, ← zpow_mul]
+            congr 1
+            push_cast
+            ring
+      _ = ∑ μ : Fin M, (ξ ^ 2) ^ (((((μ : ℕ) : ℤ) + 1) * k)) := by
+            exact (Fin.sum_univ_eq_sum_range
+              (fun μ : ℕ => (ξ ^ 2) ^ ((((μ : ℤ) + 1) * k))) M).symm
+  have hfull :
+      ∑ r ∈ Finset.range (2 * M), ξ ^ (((r + 1 : ℕ) : ℤ) * k) =
+        (((2 * M : ℕ) : K) * (if ((2 * M : ℕ) : ℤ) ∣ k then 1 else 0)) := by
+    calc
+      ∑ r ∈ Finset.range (2 * M), ξ ^ (((r + 1 : ℕ) : ℤ) * k) =
+          ∑ r : Fin (2 * M), ξ ^ (((((r : ℕ) : ℤ) + 1) * k)) := by
+            exact (Fin.sum_univ_eq_sum_range
+              (fun r : ℕ => ξ ^ ((((r : ℤ) + 1) * k))) (2 * M)).symm
+      _ = (((2 * M : ℕ) : K) * (if ((2 * M : ℕ) : ℤ) ∣ k then 1 else 0)) :=
+            sum_zpow_primitiveRoot h2M hξ k
+  have hMsum :
+      ∑ μ : Fin M, (ξ ^ 2) ^ (((((μ : ℕ) : ℤ) + 1) * k)) =
+        (M : K) * (if (M : ℤ) ∣ k then 1 else 0) :=
+    sum_zpow_primitiveRoot hM (sq_isPrimitiveRoot hM hξ) k
+  calc
+    ∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * k) =
+        ∑ μ ∈ Finset.range M, ξ ^ (((2 * μ + 1 : ℕ) : ℤ) * k) := hodd.symm
+    _ = (∑ r ∈ Finset.range (2 * M), ξ ^ (((r + 1 : ℕ) : ℤ) * k)) -
+        ∑ μ ∈ Finset.range M, ξ ^ (((2 * μ + 2 : ℕ) : ℤ) * k) := by
+          rw [hsplit]
+          ring
+    _ = (((2 * M : ℕ) : K) * (if ((2 * M : ℕ) : ℤ) ∣ k then 1 else 0)) -
+        ∑ μ ∈ Finset.range M, ξ ^ (((2 * μ + 2 : ℕ) : ℤ) * k) := by rw [hfull]
+    _ = (((2 * M : ℕ) : K) * (if ((2 * M : ℕ) : ℤ) ∣ k then 1 else 0)) -
+        ∑ μ : Fin M, (ξ ^ 2) ^ (((((μ : ℕ) : ℤ) + 1) * k)) := by rw [heven]
+    _ = (((2 * M : ℕ) : K) * (if ((2 * M : ℕ) : ℤ) ∣ k then 1 else 0)) -
+        ((M : K) * (if (M : ℤ) ∣ k then 1 else 0)) := by rw [hMsum]
+
+/-- 奇数周波数和の非整除の場合。人手証明の二つの周期デルタの零評価に対応する。 -/
+theorem sum_zpow_antiperiodic_not_dvd {M : ℕ} (hM : M ≠ 0) {ξ : K}
+    (hξ : IsPrimitiveRoot ξ (2 * M)) {k : ℤ} (hk : ¬ (M : ℤ) ∣ k) :
+    ∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * k) = 0 := by
+  have hk2 : ¬ ((2 * M : ℕ) : ℤ) ∣ k := by
+    intro hd
+    apply hk
+    apply dvd_trans (b := ((2 * M : ℕ) : ℤ))
+    · use 2
+      push_cast
+      ring
+    · exact hd
+  calc
+    ∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * k) =
+        (((2 * M : ℕ) : K) * (if ((2 * M : ℕ) : ℤ) ∣ k then 1 else 0)) -
+          ((M : K) * (if (M : ℤ) ∣ k then 1 else 0)) :=
+            sum_zpow_antiperiodic_delta_difference hM hξ k
+    _ = ((2 * M : ℕ) : K) * 0 - (M : K) * 0 := by rw [if_neg hk2, if_neg hk]
+    _ = 0 := by ring
+
+/-- 奇数周波数和の `k = lM`・`l` 偶数の場合。 -/
+theorem sum_zpow_antiperiodic_dvd_even {M : ℕ} (hM : M ≠ 0) {ξ : K}
+    (hξ : IsPrimitiveRoot ξ (2 * M)) (l : ℤ) (hl : Even l) :
+    ∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (l * (M : ℤ))) =
+      (M : K) * (-1 : K) ^ l := by
+  have hMdiv : (M : ℤ) ∣ l * (M : ℤ) := ⟨l, by ring⟩
+  have h2Mdiv : ((2 * M : ℕ) : ℤ) ∣ l * (M : ℤ) := by
+    rcases hl.two_dvd with ⟨q, hq⟩
+    use q
+    push_cast at hq ⊢
+    rw [hq]
+    ring
+  have hpow : (-1 : K) ^ l = 1 := hl.neg_one_zpow
+  calc
+    ∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (l * (M : ℤ))) =
+        (((2 * M : ℕ) : K) * (if ((2 * M : ℕ) : ℤ) ∣ l * (M : ℤ) then 1 else 0)) -
+          ((M : K) * (if (M : ℤ) ∣ l * (M : ℤ) then 1 else 0)) :=
+            sum_zpow_antiperiodic_delta_difference hM hξ (l * (M : ℤ))
+    _ = ((2 * M : ℕ) : K) * 1 - (M : K) * 1 := by rw [if_pos h2Mdiv, if_pos hMdiv]
+    _ = ((2 * M : ℕ) : K) - (M : K) * 1 := by rw [mul_one]
+    _ = ((2 * M : ℕ) : K) - (M : K) := by rw [mul_one]
+    _ = (M : K) := by push_cast; ring
+    _ = (M : K) * 1 := by rw [mul_one]
+    _ = (M : K) * (-1 : K) ^ l := by rw [hpow]
+
+/-- 奇数周波数和の `k = lM`・`l` 奇数の場合。 -/
+theorem sum_zpow_antiperiodic_dvd_odd {M : ℕ} (hM : M ≠ 0) {ξ : K}
+    (hξ : IsPrimitiveRoot ξ (2 * M)) (l : ℤ) (hl : Odd l) :
+    ∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (l * (M : ℤ))) =
+      (M : K) * (-1 : K) ^ l := by
+  have hMdiv : (M : ℤ) ∣ l * (M : ℤ) := ⟨l, by ring⟩
+  have h2Mnot : ¬ ((2 * M : ℕ) : ℤ) ∣ l * (M : ℤ) := by
+    intro hd
+    rcases hd with ⟨q, hq⟩
+    have hMint : (M : ℤ) ≠ 0 := by exact_mod_cast hM
+    have heq : l * (M : ℤ) = (2 * q) * (M : ℤ) := by
+      rw [hq]
+      push_cast
+      ring
+    have hlq : l = 2 * q := mul_right_cancel₀ hMint heq
+    exact (Int.not_even_iff_odd.mpr hl) ⟨q, by rw [hlq, two_mul]⟩
+  have hpow : (-1 : K) ^ l = -1 := hl.neg_one_zpow
+  calc
+    ∑ μ : Fin M, ξ ^ ((2 * ((μ : ℕ) : ℤ) + 1) * (l * (M : ℤ))) =
+        (((2 * M : ℕ) : K) * (if ((2 * M : ℕ) : ℤ) ∣ l * (M : ℤ) then 1 else 0)) -
+          ((M : K) * (if (M : ℤ) ∣ l * (M : ℤ) then 1 else 0)) :=
+            sum_zpow_antiperiodic_delta_difference hM hξ (l * (M : ℤ))
+    _ = ((2 * M : ℕ) : K) * 0 - (M : K) * 1 := by rw [if_neg h2Mnot, if_pos hMdiv]
+    _ = 0 - (M : K) * 1 := by rw [mul_zero]
+    _ = 0 - (M : K) := by rw [mul_one]
+    _ = -(M : K) := by rw [zero_sub]
+    _ = (M : K) * (-1) := by ring
+    _ = (M : K) * (-1 : K) ^ l := by rw [hpow]
 
 /-- **必要十分版の本体（`antiperiodic_exp_sum` の骨格）**: `ξ` が体 `K` の中の 1 の原始 `2M` 乗根なら
 

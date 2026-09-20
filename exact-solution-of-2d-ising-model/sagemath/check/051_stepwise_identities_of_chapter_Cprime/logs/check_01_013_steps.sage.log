@@ -32,12 +32,58 @@
   commutator Step1 境界 [-Y_MZ_1,Y_M] (3) = -2 Z^flat_{M+1}: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)}, Z_j] = 2 Y^flat_{j-1}: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)}, Y_j] = -2 Z^flat_{j+1}: max residual = 0.000e+00  ->  PASS
-  antiperiodic_exp_sum (1) theta~ の書き換え: max residual = 7.065e-15  ->  PASS
-  antiperiodic_exp_sum (2) 指数法則 [theorem_exp_product n=1]: max residual = 8.132e-15  ->  PASS
-  antiperiodic_exp_sum (3) 前因子を和の外へ: max residual = 2.811e-16  ->  PASS
-  antiperiodic_exp_sum (4c) 和 = 0  (k != 0 mod M): max residual = 7.158e-15  ->  PASS
-  antiperiodic_exp_sum (4a) 前因子 e^{-i pi k/M} = (-1)^l: max residual = 2.449e-16  ->  PASS
-  antiperiodic_exp_sum (4b) 和 = M(-1)^l: max residual = 5.757e-15  ->  PASS
+  antiperiodic_exp_sum (0a) (M_N)_R=M_R: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (0b) (2M_N)_R=2M_R: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (0c) (M_N)_C=M_C: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (0d) (2M_N)_C=(2M)_C: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (0e) M_R は 0 でない [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (0f) 2M_R は 0 でない [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (1a) theta~ の定義を代入: max residual = 7.065e-15  ->  PASS
+  antiperiodic_exp_sum (1b) 分母を 2M に通分: max residual = 1.015e-14  ->  PASS
+  antiperiodic_exp_sum (2a) T_{2M_N,k} の定義を展開: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (2b) (2M_N)_R=2M_R を分母へ適用: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (2c) 2M 項を奇数番目と偶数番目へ分割: max residual = 4.441e-16  ->  PASS
+  antiperiodic_exp_sum (2d) 奇数番目の和を S_{M,k} と置く: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (2e) 偶数番目の指数を約分: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (2f) (M_N)_R=M_R を分母へ適用: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (2g) 偶数番目の和は T_{M_N,k}: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (3a) exp_sum を 2M_N に適用: max residual = 1.347e-14  ->  PASS
+  antiperiodic_exp_sum (3b) (2M_N)_C=(2M)_C を係数へ適用: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (3c) exp_sum を M_N に適用: max residual = 7.625e-15  ->  PASS
+  antiperiodic_exp_sum (3d) (M_N)_C=M_C を係数へ適用: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (4a) 奇数番目 = 全体 - 偶数番目: max residual = 4.441e-16  ->  PASS
+  antiperiodic_exp_sum (4b) 二つの exp_sum を代入: max residual = 6.141e-15  ->  PASS
+  antiperiodic_exp_sum (5e-1) M が k を割らなければ 2M も k を割らない [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5e-2) 2M の周期デルタは 0: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5e-3) M の周期デルタは 0: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5e-4) 二つのデルタ値を代入: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5e-5) 零倍と零の差を簡約: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5a) k=lM を 2M|k へ代入 [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5b) 2M|lM と 2|l は同値 [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5c-even-1) 偶数時のデルタ値を代入: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5c-even-2) 左の単位元を簡約: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5c-even-3) 右の単位元を簡約: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5c-even-4) 係数を計算: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5c-even-5) 積の単位元を挿入: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5c-even-6) 偶数の整数冪を評価: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5d-odd-1) 奇数時のデルタ値を代入: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5d-odd-2) 零倍を簡約: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5d-odd-3) 積の単位元を簡約: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5d-odd-4) 零からの差を加法逆元へ: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5d-odd-5) 加法逆元を -1 倍へ: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (5d-odd-6) 奇数の整数冪を評価: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (6a) |k|<M, k!=0 なら M は k を割らない [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (6b) |lM|=|l||M| [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (6c) M>0 なら |M|=M [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (6d) k=lM なら |l|M=|k| [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (6e) |k|<M を鎖の狭義不等号へ代入 [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (6f) |l|M<M なら |l|<1 [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (6g) 整数 |l|<1 なら |l|=0 [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (6h) |l|=0 なら l=0 [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (6i) l=0 なら lM=0 [finite ZZ example]: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (7a) k=0 は l=0 の整除の場合: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (7b) M(-1)^0=M*1: max residual = 0.000e+00  ->  PASS
+  antiperiodic_exp_sum (7c) M*1=M: max residual = 0.000e+00  ->  PASS
   def_half_integer_modes (1a) M theta~ = 2 pi mu - pi: max residual = 7.105e-15  ->  PASS
   def_half_integer_modes (1b) e^{-iM theta~} = e^{-2pi i mu} e^{i pi}: max residual = 3.553e-15  ->  PASS
   def_half_integer_modes (1c) = -1: max residual = 4.410e-15  ->  PASS
@@ -104,5 +150,5 @@
   H1_H2_via_check (H1 5) antiperiodic_exp_sum の l=0, l=1 の 2 場合: max residual = 2.624e-15  ->  PASS
   H1_H2_via_check (H1 6) = H_1^{(+)}: max residual = 7.463e-15  ->  PASS
   def_check_index_set (4) そのとき theta~_mu = pi: max residual = 0.000e+00  ->  PASS
-  段数（区別された等式の種類）: 105
+  段数（区別された等式の種類）: 151
 check_01: PASS

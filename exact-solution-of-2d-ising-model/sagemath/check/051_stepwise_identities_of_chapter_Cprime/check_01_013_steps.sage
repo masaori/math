@@ -22,6 +22,19 @@ print("=== check_01: 013 章の各段の等式 ===")
 
 S = Steps()
 
+def add_exact_integer_example(name, proposition):
+    """ZZ 上の有限例を浮動小数へ落とさず判定する。"""
+    if not bool(proposition):
+        raise AssertionError(name)
+    S.add(name + " [finite ZZ example]", ZZ(1), ZZ(1))
+
+def integer_mode_sum(N, k):
+    """本文の T_{N,k} を定義どおり評価する。"""
+    return sum([
+        eiph(RDF(2 * pi * r * k) / RDF(N))
+        for r in range(1, N + 1)
+    ], CDF(0))
+
 for M in STEP_M:
     O = SpinOps(M)
     Id = identity_matrix(CDF, O.d)
@@ -128,24 +141,163 @@ for M in STEP_M:
     # -----------------------------------------------------------------
     # antiperiodic_exp_sum の各段
     # -----------------------------------------------------------------
+    m_nat = NN(M)
+    m_int = ZZ(m_nat)
+    m_real_via_int = RDF(m_int)
+    m_complex_via_real = CDF(m_real_via_int)
+    two_m_nat = NN(2) * m_nat
+    two_m_int = ZZ(two_m_nat)
+    two_m_real_via_int = RDF(two_m_int)
+    two_m_complex_via_real = CDF(two_m_real_via_int)
+    S.add("antiperiodic_exp_sum (0a) (M_N)_R=M_R", m_real_via_int, RDF(M))
+    S.add("antiperiodic_exp_sum (0b) (2M_N)_R=2M_R", two_m_real_via_int, RDF(2) * RDF(M))
+    S.add("antiperiodic_exp_sum (0c) (M_N)_C=M_C", m_complex_via_real, CDF(RDF(M)))
+    S.add("antiperiodic_exp_sum (0d) (2M_N)_C=(2M)_C",
+          two_m_complex_via_real, CDF(RDF(2) * RDF(M)))
+    add_exact_integer_example("antiperiodic_exp_sum (0e) M_R は 0 でない", M > 0)
+    add_exact_integer_example("antiperiodic_exp_sum (0f) 2M_R は 0 でない", 2 * M > 0)
     for k in range(-2 * M - 1, 2 * M + 2):
         lhs = sum([eiph(k * th_tilde(M, mu)) for mu in range(1, M + 1)], CDF(0))
-        s1 = sum([eiph(k * (RDF(2 * pi * mu) / M - RDF(pi) / M))
-                  for mu in range(1, M + 1)], CDF(0))
-        s2 = sum([eiph(RDF(2 * pi * mu * k) / M) * eiph(-RDF(pi * k) / M)
-                  for mu in range(1, M + 1)], CDF(0))
-        s3 = eiph(-RDF(pi * k) / M) * sum(
-            [eiph(RDF(2 * pi * mu * k) / M) for mu in range(1, M + 1)], CDF(0))
-        S.add("antiperiodic_exp_sum (1) theta~ の書き換え", lhs, s1)
-        S.add("antiperiodic_exp_sum (2) 指数法則 [theorem_exp_product n=1]", s1, s2)
-        S.add("antiperiodic_exp_sum (3) 前因子を和の外へ", s2, s3)
+        theta_definition_sum = sum([
+            eiph(RDF(k) * (RDF(2 * pi) * (RDF(mu) - RDF(1) / RDF(2)) / RDF(M)))
+            for mu in range(1, M + 1)
+        ], CDF(0))
+        odd_sum = sum([
+            eiph(RDF(2 * pi * (2 * mu - 1) * k) / RDF(2 * M))
+            for mu in range(1, M + 1)
+        ], CDF(0))
+        even_sum = sum([
+            eiph(RDF(2 * pi * (2 * mu) * k) / RDF(2 * M))
+            for mu in range(1, M + 1)
+        ], CDF(0))
+        sum_2M_from_definition = integer_mode_sum(2 * M, k)
+        sum_2M = sum([
+            eiph(RDF(2 * pi * r * k) / RDF(2 * M))
+            for r in range(1, 2 * M + 1)
+        ], CDF(0))
+        sum_2M_via_nat_image = sum([
+            eiph(RDF(2 * pi * r * k) / RDF(ZZ(two_m_nat)))
+            for r in range(1, 2 * M + 1)
+        ], CDF(0))
+        sum_M_from_definition = integer_mode_sum(M, k)
+        sum_M = sum([
+            eiph(RDF(2 * pi * mu * k) / RDF(M))
+            for mu in range(1, M + 1)
+        ], CDF(0))
+        sum_M_via_nat_image = sum([
+            eiph(RDF(2 * pi * mu * k) / RDF(ZZ(m_nat)))
+            for mu in range(1, M + 1)
+        ], CDF(0))
+        delta_2M_indicator = CDF(1 if k % (2 * M) == 0 else 0)
+        delta_M_indicator = CDF(1 if k % M == 0 else 0)
+        delta_2M_value_via_nat = two_m_complex_via_real * delta_2M_indicator
+        delta_M_value_via_nat = m_complex_via_real * delta_M_indicator
+        delta_2M_value = CDF(2 * M) * delta_2M_indicator
+        delta_M_value = CDF(M) * delta_M_indicator
+
+        S.add("antiperiodic_exp_sum (1a) theta~ の定義を代入", lhs, theta_definition_sum)
+        S.add("antiperiodic_exp_sum (1b) 分母を 2M に通分", theta_definition_sum, odd_sum)
+        S.add("antiperiodic_exp_sum (2a) T_{2M_N,k} の定義を展開",
+              sum_2M_from_definition, sum_2M_via_nat_image)
+        S.add("antiperiodic_exp_sum (2b) (2M_N)_R=2M_R を分母へ適用",
+              sum_2M_via_nat_image, sum_2M)
+        S.add("antiperiodic_exp_sum (2c) 2M 項を奇数番目と偶数番目へ分割",
+              sum_2M, odd_sum + even_sum)
+        S.add("antiperiodic_exp_sum (2d) 奇数番目の和を S_{M,k} と置く", odd_sum, odd_sum)
+        S.add("antiperiodic_exp_sum (2e) 偶数番目の指数を約分", even_sum, sum_M)
+        S.add("antiperiodic_exp_sum (2f) (M_N)_R=M_R を分母へ適用",
+              sum_M, sum_M_via_nat_image)
+        S.add("antiperiodic_exp_sum (2g) 偶数番目の和は T_{M_N,k}",
+              sum_M_via_nat_image, sum_M_from_definition)
+        S.add("antiperiodic_exp_sum (3a) exp_sum を 2M_N に適用",
+              sum_2M, delta_2M_value_via_nat)
+        S.add("antiperiodic_exp_sum (3b) (2M_N)_C=(2M)_C を係数へ適用",
+              delta_2M_value_via_nat, delta_2M_value)
+        S.add("antiperiodic_exp_sum (3c) exp_sum を M_N に適用",
+              sum_M, delta_M_value_via_nat)
+        S.add("antiperiodic_exp_sum (3d) (M_N)_C=M_C を係数へ適用",
+              delta_M_value_via_nat, delta_M_value)
+        S.add("antiperiodic_exp_sum (4a) 奇数番目 = 全体 - 偶数番目",
+              odd_sum, sum_2M - sum_M)
+        S.add("antiperiodic_exp_sum (4b) 二つの exp_sum を代入",
+              sum_2M - sum_M, delta_2M_value - delta_M_value)
         if k % M == 0:
             l = k // M
-            S.add("antiperiodic_exp_sum (4a) 前因子 e^{-i pi k/M} = (-1)^l",
-                  eiph(-RDF(pi * k) / M), CDF((-1) ** l))
-            S.add("antiperiodic_exp_sum (4b) 和 = M(-1)^l", lhs, CDF(M * (-1) ** l))
+            add_exact_integer_example(
+                "antiperiodic_exp_sum (5a) k=lM を 2M|k へ代入",
+                (ZZ(k) % ZZ(2 * M) == 0) == (ZZ(l * M) % ZZ(2 * M) == 0))
+            add_exact_integer_example(
+                "antiperiodic_exp_sum (5b) 2M|lM と 2|l は同値",
+                (ZZ(k) % ZZ(2 * M) == 0) == (ZZ(l) % ZZ(2) == 0))
+            if l % 2 == 0:
+                S.add("antiperiodic_exp_sum (5c-even-1) 偶数時のデルタ値を代入",
+                      delta_2M_value - delta_M_value, CDF(2 * M * 1 - M * 1))
+                S.add("antiperiodic_exp_sum (5c-even-2) 左の単位元を簡約",
+                      CDF(2 * M * 1 - M * 1), CDF(2 * M - M * 1))
+                S.add("antiperiodic_exp_sum (5c-even-3) 右の単位元を簡約",
+                      CDF(2 * M - M * 1), CDF(2 * M - M))
+                S.add("antiperiodic_exp_sum (5c-even-4) 係数を計算",
+                      CDF(2 * M - M), CDF(M))
+                S.add("antiperiodic_exp_sum (5c-even-5) 積の単位元を挿入",
+                      CDF(M), CDF(M * 1))
+                S.add("antiperiodic_exp_sum (5c-even-6) 偶数の整数冪を評価",
+                      CDF(M * 1), CDF(M * (-1) ** l))
+            else:
+                S.add("antiperiodic_exp_sum (5d-odd-1) 奇数時のデルタ値を代入",
+                      delta_2M_value - delta_M_value, CDF(2 * M * 0 - M * 1))
+                S.add("antiperiodic_exp_sum (5d-odd-2) 零倍を簡約",
+                      CDF(2 * M * 0 - M * 1), CDF(0 - M * 1))
+                S.add("antiperiodic_exp_sum (5d-odd-3) 積の単位元を簡約",
+                      CDF(0 - M * 1), CDF(0 - M))
+                S.add("antiperiodic_exp_sum (5d-odd-4) 零からの差を加法逆元へ",
+                      CDF(0 - M), CDF(-M))
+                S.add("antiperiodic_exp_sum (5d-odd-5) 加法逆元を -1 倍へ",
+                      CDF(-M), CDF(M * (-1)))
+                S.add("antiperiodic_exp_sum (5d-odd-6) 奇数の整数冪を評価",
+                      CDF(M * (-1)), CDF(M * (-1) ** l))
         else:
-            S.add("antiperiodic_exp_sum (4c) 和 = 0  (k != 0 mod M)", lhs, CDF(0))
+            add_exact_integer_example(
+                "antiperiodic_exp_sum (5e-1) M が k を割らなければ 2M も k を割らない",
+                ZZ(k) % ZZ(2 * M) != 0)
+            S.add("antiperiodic_exp_sum (5e-2) 2M の周期デルタは 0",
+                  delta_2M_indicator, CDF(0))
+            S.add("antiperiodic_exp_sum (5e-3) M の周期デルタは 0",
+                  delta_M_indicator, CDF(0))
+            S.add("antiperiodic_exp_sum (5e-4) 二つのデルタ値を代入",
+                  delta_2M_value - delta_M_value, CDF(2 * M) * 0 - CDF(M) * 0)
+            S.add("antiperiodic_exp_sum (5e-5) 零倍と零の差を簡約",
+                  CDF(2 * M) * 0 - CDF(M) * 0, CDF(0))
+
+        if abs(k) < M and k != 0:
+            add_exact_integer_example(
+                "antiperiodic_exp_sum (6a) |k|<M, k!=0 なら M は k を割らない",
+                ZZ(k) % ZZ(M) != 0)
+
+    for l in range(-3, 4):
+        lz = ZZ(l)
+        mz = ZZ(M)
+        kz = lz * mz
+        add_exact_integer_example("antiperiodic_exp_sum (6b) |lM|=|l||M|",
+                                  abs(lz * mz) == abs(lz) * abs(mz))
+        add_exact_integer_example("antiperiodic_exp_sum (6c) M>0 なら |M|=M",
+                                  abs(mz) == mz)
+        add_exact_integer_example("antiperiodic_exp_sum (6d) k=lM なら |l|M=|k|",
+                                  abs(lz) * mz == abs(kz))
+        add_exact_integer_example("antiperiodic_exp_sum (6e) |k|<M を鎖の狭義不等号へ代入",
+                                  not (abs(kz) < mz) or abs(lz) * mz < mz)
+        add_exact_integer_example("antiperiodic_exp_sum (6f) |l|M<M なら |l|<1",
+                                  not (abs(lz) * mz < mz) or abs(lz) < 1)
+        add_exact_integer_example("antiperiodic_exp_sum (6g) 整数 |l|<1 なら |l|=0",
+                                  not (abs(lz) < 1) or abs(lz) == 0)
+        add_exact_integer_example("antiperiodic_exp_sum (6h) |l|=0 なら l=0",
+                                  not (abs(lz) == 0) or lz == 0)
+        add_exact_integer_example("antiperiodic_exp_sum (6i) l=0 なら lM=0",
+                                  lz != 0 or lz * mz == 0)
+
+    zero_sum = sum([eiph(0 * th_tilde(M, mu)) for mu in range(1, M + 1)], CDF(0))
+    S.add("antiperiodic_exp_sum (7a) k=0 は l=0 の整除の場合", zero_sum, CDF(M * (-1) ** 0))
+    S.add("antiperiodic_exp_sum (7b) M(-1)^0=M*1", CDF(M * (-1) ** 0), CDF(M * 1))
+    S.add("antiperiodic_exp_sum (7c) M*1=M", CDF(M * 1), CDF(M))
 
     # -----------------------------------------------------------------
     # def_half_integer_modes (1)(2)(3) の各段

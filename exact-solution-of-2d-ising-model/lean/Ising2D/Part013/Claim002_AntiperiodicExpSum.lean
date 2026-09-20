@@ -6,10 +6,14 @@
 `evensector_002_claim_antiperiodic_exp_sum`）
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`（名前空間 `Ising2D.NecSuf`、
-同じラベル `antiperiodic_exp_sum`）の `Ising2D.NecSuf.sum_zpow_antiperiodic`。
+同じラベル `antiperiodic_exp_sum`）の
+`Ising2D.NecSuf.sum_zpow_antiperiodic_delta_difference`。
 必要十分版からの導出は `Ising2D/Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean`。
 
 ## 原文の主張（`M ∈ ℤ_{≥2}`、`μ ∈ ℤ`）
+
+原文の有限和では、標準包含による像が `M` となる一意な自然数 `M_ℕ` を項数と法に用いる。
+以下の Lean の `M : ℕ` は、この `M_ℕ` を表す。
 
   `θ~_μ := 2π(μ - 1/2)/M ∈ ℝ`
   `∑_{μ=1}^{M} e^{i k θ~_μ} = M(-1)^l  (k = lM),  0  (k ≢ 0 mod M)`
@@ -143,6 +147,103 @@ theorem expPhase_sum_zero_based (hM : M ≠ 0) (k : ℤ) :
       (expPhase_eq_one_iff hM (-k)).2 ((dvd_neg).2 hd), mul_one]
   · rw [deltaMod, sub_zero, if_neg hd, mul_zero, zero_mul]
 
+/-- 長さ `2M` の有限和を、偶数番目と奇数番目へ分ける。人手証明の有限和の奇偶分割に対応する。 -/
+private theorem sum_range_even_odd {A : Type*} [AddCommMonoid A] (f : ℕ → A) (M : ℕ) :
+    ∑ r ∈ Finset.range (2 * M), f r =
+      (∑ μ ∈ Finset.range M, f (2 * μ)) + ∑ μ ∈ Finset.range M, f (2 * μ + 1) := by
+  induction M with
+  | zero => simp
+  | succ M ih =>
+      rw [show 2 * (M + 1) = 2 * M + 2 by omega]
+      simp only [Finset.sum_range_succ]
+      rw [ih]
+      abel
+
+/-- 人手証明の奇偶分割そのもの:
+
+`2M` 項の整数運動量指数和から偶数番目の `M` 項を引くと、半整数運動量指数和になる。 -/
+theorem antiperiodic_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
+    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) =
+      ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 := by
+  have h2M : 2 * M ≠ 0 := by omega
+  have hsplit := sum_range_even_odd
+    (fun r : ℕ => expPhase (2 * M) ((((r + 1 : ℕ) : ℤ)) * (-k))) M
+  have hodd :
+      ∑ μ ∈ Finset.range M,
+          expPhase (2 * M) (((2 * μ + 1 : ℕ) : ℤ) * (-k)) =
+        ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) := by
+    rw [Fin.sum_univ_eq_sum_range
+      (fun μ : ℕ => checkPhase M (-k) ((μ : ℤ) + 1))]
+    apply Finset.sum_congr rfl
+    intro μ hμ
+    rw [checkPhase]
+    congr 1
+    push_cast
+    ring
+  have heven :
+      ∑ μ ∈ Finset.range M,
+          expPhase (2 * M) (((2 * μ + 2 : ℕ) : ℤ) * (-k)) =
+        ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) := by
+    calc
+      ∑ μ ∈ Finset.range M,
+          expPhase (2 * M) (((2 * μ + 2 : ℕ) : ℤ) * (-k)) =
+          ∑ μ ∈ Finset.range M,
+            expPhase M (((μ + 1 : ℕ) : ℤ) * (-k)) := by
+              apply Finset.sum_congr rfl
+              intro μ hμ
+              rw [← expPhase_two_mul hM]
+              congr 1
+              push_cast
+              ring
+      _ = ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) := by
+            exact (Fin.sum_univ_eq_sum_range
+              (fun μ : ℕ => expPhase M (((μ + 1 : ℕ) : ℤ) * (-k))) M).symm
+  have hfull :
+      ∑ r ∈ Finset.range (2 * M),
+          expPhase (2 * M) (((r + 1 : ℕ) : ℤ) * (-k)) =
+        ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 := by
+    calc
+      ∑ r ∈ Finset.range (2 * M),
+          expPhase (2 * M) (((r + 1 : ℕ) : ℤ) * (-k)) =
+          ∑ r : Fin (2 * M),
+            expPhase (2 * M) (((r : ℕ) + 1 : ℤ) * (-k)) := by
+              exact (Fin.sum_univ_eq_sum_range
+                (fun r : ℕ => expPhase (2 * M) (((r + 1 : ℕ) : ℤ) * (-k)))
+                (2 * M)).symm
+      _ = ∑ r : Fin (2 * M),
+            expPhase (2 * M) ((((r : ℕ) : ℤ) + 1) * (-k)) := by
+              apply Finset.sum_congr rfl
+              intro r hr
+              congr 1
+      _ = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 := by
+            have h := expPhase_sum h2M (-k)
+            rw [deltaMod, sub_zero] at h ⊢
+            simpa only [dvd_neg] using h
+  have hMsum :
+      ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) =
+        (M : ℂ) * deltaMod M k 0 := by
+    have h := expPhase_sum hM (-k)
+    rw [deltaMod, sub_zero] at h ⊢
+    simpa only [dvd_neg] using h
+  calc
+    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1)
+        = ∑ μ ∈ Finset.range M,
+            expPhase (2 * M) (((2 * μ + 1 : ℕ) : ℤ) * (-k)) := hodd.symm
+    _
+        = (∑ r ∈ Finset.range (2 * M),
+            expPhase (2 * M) (((r + 1 : ℕ) : ℤ) * (-k))) -
+          ∑ μ ∈ Finset.range M,
+            expPhase (2 * M) (((2 * μ + 2 : ℕ) : ℤ) * (-k)) := by
+              rw [hsplit]
+              ring
+    _ = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 -
+          ∑ μ ∈ Finset.range M,
+            expPhase (2 * M) (((2 * μ + 2 : ℕ) : ℤ) * (-k)) := by rw [hfull]
+    _ = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 -
+          ∑ μ : Fin M, expPhase M ((((μ : ℕ) + 1 : ℤ)) * (-k)) := by rw [heven]
+    _ = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 -
+          (M : ℂ) * deltaMod M k 0 := by rw [hMsum]
+
 /-! ## `antiperiodic_exp_sum` 本体 -/
 
 /-- **`antiperiodic_exp_sum` の形式化**:
@@ -155,7 +256,8 @@ theorem expPhase_sum_zero_based (hM : M ≠ 0) (k : ℤ) :
 `M ∤ k` のときは `δ^M_{(k,0)} = 0` で両者は一致し、`k = lM` のときの前因子
 `expPhase (2M) (-k) = (-1)^l` は下の `antiperiodic_exp_sum_dvd` で評価する。
 
-証明は原文どおり「定数位相 `e^{-iπk/M}` を括り出して整数運動量の指数和に帰着させる」。 -/
+これは定数位相を括り出す補助的な閉形式であり、人手証明の奇偶分割は
+`antiperiodic_exp_sum_delta_difference` が直接形式化する。 -/
 theorem antiperiodic_exp_sum (hM : M ≠ 0) (k : ℤ) :
     ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1)
       = expPhase (2 * M) (-k) * ((M : ℂ) * deltaMod M k 0) := by
@@ -171,6 +273,33 @@ theorem antiperiodic_exp_sum (hM : M ≠ 0) (k : ℤ) :
   congr 2
   rw [deltaMod, deltaMod, sub_zero, sub_zero]
   simp only [dvd_neg]
+
+/-- 原文の `Complex.exp` の有限和と、計算に使う `checkPhase` の有限和は同じである。 -/
+theorem antiperiodic_complex_exp_sum_eq_checkPhase (hM : M ≠ 0) (k : ℤ) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+      = ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) := by
+  apply Finset.sum_congr rfl
+  intro μ _
+  rw [checkPhase_eq_exp hM]
+  congr 1
+  push_cast
+  ring
+
+/-- **本文と同じ `Complex.exp` で書いた、奇偶分割によるデルタ差**。 -/
+theorem antiperiodic_complex_exp_sum_delta_difference (hM : M ≠ 0) (k : ℤ) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+      = ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) k 0 - (M : ℂ) * deltaMod M k 0 := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k,
+    antiperiodic_exp_sum_delta_difference hM k]
+
+/-- **原文と同じ `Complex.exp` で書いた `antiperiodic_exp_sum`**。 -/
+theorem antiperiodic_complex_exp_sum (hM : M ≠ 0) (k : ℤ) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+      = expPhase (2 * M) (-k) * ((M : ℂ) * deltaMod M k 0) := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k, antiperiodic_exp_sum hM k]
 
 /-- `antiperiodic_exp_sum` を、周波数をそのまま（符号を反転せずに）書いた形。
 以降の計算ではこちらの形で使う。 -/
@@ -190,24 +319,139 @@ theorem antiperiodic_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
       = (M : ℂ) * (-1 : ℂ) ^ l := by
   have hdelta : deltaMod M (l * (M : ℤ)) 0 = 1 := by
     rw [deltaMod, sub_zero, if_pos ⟨l, by ring⟩]
-  have hphase : expPhase (2 * M) (-(l * (M : ℤ))) = (-1 : ℂ) ^ l := by
-    rw [show (-(l * (M : ℤ))) = (-l) * (M : ℤ) by ring, expPhase_zpow,
-      expPhase_two_mul_half hM, zpow_neg]
-    have hsq : ((-1 : ℂ) ^ l) * ((-1 : ℂ) ^ l) = 1 := by
-      rw [← zpow_add₀ (by norm_num : (-1 : ℂ) ≠ 0), show l + l = 2 * l by ring, zpow_mul]
-      norm_num
-    exact inv_eq_of_mul_eq_one_left hsq
-  rw [antiperiodic_exp_sum hM (l * (M : ℤ)), hphase, hdelta, mul_one]
-  ring
+  have hsum := antiperiodic_exp_sum_delta_difference hM (l * (M : ℤ))
+  by_cases hl : Even l
+  · have hdelta2 : deltaMod (2 * M) (l * (M : ℤ)) 0 = 1 := by
+      rw [deltaMod, sub_zero, if_pos]
+      rcases hl.two_dvd with ⟨q, hq⟩
+      use q
+      push_cast at hq ⊢
+      calc
+        l * (M : ℤ) = (2 * q) * (M : ℤ) := by rw [hq]
+        _ = 2 * (M : ℤ) * q := by ring
+    have hpow : (-1 : ℂ) ^ l = 1 := hl.neg_one_zpow
+    calc
+      ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1) =
+          ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) (l * (M : ℤ)) 0 -
+            (M : ℂ) * deltaMod M (l * (M : ℤ)) 0 := hsum
+      _ = ((2 * M : ℕ) : ℂ) * 1 - (M : ℂ) * 1 := by rw [hdelta2, hdelta]
+      _ = ((2 * M : ℕ) : ℂ) - (M : ℂ) * 1 := by rw [mul_one]
+      _ = ((2 * M : ℕ) : ℂ) - (M : ℂ) := by rw [mul_one]
+      _ = (M : ℂ) := by push_cast; ring
+      _ = (M : ℂ) * 1 := by rw [mul_one]
+      _ = (M : ℂ) * (-1 : ℂ) ^ l := by rw [hpow]
+  · have hodd : Odd l := Int.not_even_iff_odd.mp hl
+    have hdelta2 : deltaMod (2 * M) (l * (M : ℤ)) 0 = 0 := by
+      rw [deltaMod, sub_zero, if_neg]
+      intro hd
+      rcases hd with ⟨q, hq⟩
+      have hMint : (M : ℤ) ≠ 0 := by exact_mod_cast hM
+      have heq : l * (M : ℤ) = (2 * q) * (M : ℤ) := by
+        rw [hq]
+        push_cast
+        ring
+      have hlq : l = 2 * q := mul_right_cancel₀ hMint heq
+      exact hl ⟨q, by rw [hlq, two_mul]⟩
+    have hpow : (-1 : ℂ) ^ l = -1 := hodd.neg_one_zpow
+    calc
+      ∑ μ : Fin M, checkPhase M (-(l * (M : ℤ))) (((μ : ℕ) : ℤ) + 1) =
+          ((2 * M : ℕ) : ℂ) * deltaMod (2 * M) (l * (M : ℤ)) 0 -
+            (M : ℂ) * deltaMod M (l * (M : ℤ)) 0 := hsum
+      _ = ((2 * M : ℕ) : ℂ) * 0 - (M : ℂ) * 1 := by rw [hdelta2, hdelta]
+      _ = 0 - (M : ℂ) * 1 := by rw [mul_zero]
+      _ = 0 - (M : ℂ) := by rw [mul_one]
+      _ = -(M : ℂ) := by rw [zero_sub]
+      _ = (M : ℂ) * (-1) := by ring
+      _ = (M : ℂ) * (-1 : ℂ) ^ l := by rw [hpow]
+
+/-- **原文と同じ `Complex.exp` で書いた `k = lM` の場合**。 -/
+theorem antiperiodic_complex_exp_sum_dvd (hM : M ≠ 0) (l : ℤ) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * ((l * (M : ℤ) : ℤ) : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+      = (M : ℂ) * (-1 : ℂ) ^ l := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM (l * (M : ℤ)),
+    antiperiodic_exp_sum_dvd hM l]
 
 /-- **`antiperiodic_exp_sum` の `M ∤ k` の場合**: 和は `0`。 -/
 theorem antiperiodic_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ} (hk : ¬ (M : ℤ) ∣ k) :
     ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) = 0 := by
-  rw [antiperiodic_exp_sum hM k, deltaMod, sub_zero, if_neg hk, mul_zero, mul_zero]
+  have hk2 : ¬ ((2 * M : ℕ) : ℤ) ∣ k := by
+    intro hd
+    apply hk
+    apply dvd_trans (b := ((2 * M : ℕ) : ℤ))
+    · use 2
+      push_cast
+      ring
+    · exact hd
+  rw [antiperiodic_exp_sum_delta_difference hM k, deltaMod, deltaMod]
+  simp only [sub_zero, if_neg hk2, if_neg hk]
+  push_cast
+  ring
 
-/-- **`|k| < M` かつ `k ≠ 0` なら和は `0`、`k = 0` なら `M`**（原文の「とくに」）。 -/
+/-- **原文と同じ `Complex.exp` で書いた `M ∤ k` の場合**。 -/
+theorem antiperiodic_complex_exp_sum_not_dvd (hM : M ≠ 0) {k : ℤ}
+    (hk : ¬ (M : ℤ) ∣ k) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) = 0 := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k,
+    antiperiodic_exp_sum_not_dvd hM hk]
+
+/-- **原文の「とくに」の非零の場合**: `|k| < M` かつ `k ≠ 0` なら和は `0`。 -/
+theorem antiperiodic_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
+    (hklt : |k| < (M : ℤ)) (hk0 : k ≠ 0) :
+    ∑ μ : Fin M, checkPhase M (-k) (((μ : ℕ) : ℤ) + 1) = 0 := by
+  apply antiperiodic_exp_sum_not_dvd hM
+  intro hd
+  rcases hd with ⟨l, hl⟩
+  have hMpos : (0 : ℤ) < (M : ℤ) := by exact_mod_cast Nat.pos_of_ne_zero hM
+  -- 人手証明の `|l|M = |lM| = |k| < M` に対応する。
+  have hk_abs : |k| = |l * (M : ℤ)| := by rw [hl, mul_comm]
+  have habs_product : |l * (M : ℤ)| = |l| * |(M : ℤ)| := abs_mul l (M : ℤ)
+  have habs_M : |(M : ℤ)| = (M : ℤ) := abs_of_pos hMpos
+  have habs_mul : |l| * (M : ℤ) < (M : ℤ) := by
+    calc
+      |l| * (M : ℤ) = |l| * |(M : ℤ)| := by rw [habs_M]
+      _ = |l * (M : ℤ)| := habs_product.symm
+      _ = |k| := hk_abs.symm
+      _ < (M : ℤ) := hklt
+  -- 人手証明の「正数 `M` で割って `|l| < 1`」に対応する。
+  have hl_abs_lt_one : |l| < 1 := by
+    exact (Int.mul_lt_mul_right hMpos).mp (by simpa using habs_mul)
+  have hl_abs_nonneg : 0 ≤ |l| := abs_nonneg l
+  -- 人手証明の「非負整数で 1 未満なら 0」に対応する。
+  have hl_abs_zero : |l| = 0 := by omega
+  have hl_zero : l = 0 := abs_eq_zero.mp hl_abs_zero
+  have hk_zero : k = 0 := by rw [hl, hl_zero, mul_zero]
+  exact hk0 hk_zero
+
+/-- **原文と同じ `Complex.exp` で書いた「とくに」の非零の場合**。 -/
+theorem antiperiodic_complex_exp_sum_nonzero_of_abs_lt (hM : M ≠ 0) {k : ℤ}
+    (hklt : |k| < (M : ℤ)) (hk0 : k ≠ 0) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (k : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) = 0 := by
+  rw [antiperiodic_complex_exp_sum_eq_checkPhase hM k,
+    antiperiodic_exp_sum_nonzero_of_abs_lt hM hklt hk0]
+
+/-- **原文の「とくに」の零の場合**: `k = 0` なら和は `M`。 -/
 theorem antiperiodic_exp_sum_zero (_hM : M ≠ 0) :
     ∑ μ : Fin M, checkPhase M 0 (((μ : ℕ) : ℤ) + 1) = (M : ℂ) := by
-  simp
+  calc
+    ∑ μ : Fin M, checkPhase M 0 (((μ : ℕ) : ℤ) + 1)
+        = (M : ℂ) * (-1 : ℂ) ^ (0 : ℤ) := by
+            simpa using antiperiodic_exp_sum_dvd _hM 0
+    _ = (M : ℂ) * 1 := by rw [zpow_zero]
+    _ = (M : ℂ) := by rw [mul_one]
+
+/-- **原文と同じ `Complex.exp` で書いた「とくに」の零の場合**。 -/
+theorem antiperiodic_complex_exp_sum_zero (hM : M ≠ 0) :
+    ∑ μ : Fin M, Complex.exp (Complex.I * (0 : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ)) = (M : ℂ) := by
+  calc
+    ∑ μ : Fin M, Complex.exp (Complex.I * (0 : ℂ) *
+        (thetaTilde M (((μ : ℕ) : ℤ) + 1) : ℂ))
+        = ∑ μ : Fin M, checkPhase M 0 (((μ : ℕ) : ℤ) + 1) := by
+            simpa only [Int.cast_zero, neg_zero] using
+              antiperiodic_complex_exp_sum_eq_checkPhase hM 0
+    _ = (M : ℂ) := antiperiodic_exp_sum_zero hM
 
 end Ising2D

@@ -27,9 +27,15 @@
 | `Ising2D.expPhase_two_mul` | `expPhase (2M) (2n) = expPhase M n`（偶数周波数は `M` 乗根） | 同上 |
 | `Ising2D.expPhase_two_mul_half` | `expPhase (2M) M = -1`（**反周期性の正体**） | 同上 |
 | `Ising2D.expPhase_sum_zero_based` | `∑_{μ=0}^{M-1} e^{-2π√-1 μk/M} = M δ^M_{k,0}` | 同上（補助） |
-| `Ising2D.antiperiodic_exp_sum` | `∑_{μ=1}^{M} e^{ikθ~_μ} = e^{-iπk/M} M δ^M_{k,0}` | `antiperiodic_exp_sum` |
-| `Ising2D.antiperiodic_exp_sum_dvd` | `k = lM` のとき和は `M(-1)^l` | 同上 |
-| `Ising2D.antiperiodic_exp_sum_not_dvd` | `M ∤ k` のとき和は `0` | 同上 |
+| `Ising2D.antiperiodic_complex_exp_sum_delta_difference` | 本文と同じ `Complex.exp` で `2M` 項を奇数番目と偶数番目へ分け、半整数運動量の和を `2M δ^{2M}_{k,0}-M δ^M_{k,0}` とする本文の中間式 | 同上 |
+| `Ising2D.antiperiodic_exp_sum_delta_difference` | 直前のデルタ差を内部表現 `checkPhase` で書いたもの | 同上（補助） |
+| `Ising2D.antiperiodic_complex_exp_sum` | 定数位相を括り出した補助的な閉形式 `∑_{μ=1}^{M} e^{ikθ~_μ} = e^{-iπk/M} M δ^M_{k,0}` | `antiperiodic_exp_sum`（補助） |
+| `Ising2D.antiperiodic_exp_sum` | 直前の補助的な閉形式を内部表現 `checkPhase` で書いたもの | 同上（補助） |
+| `Ising2D.antiperiodic_complex_exp_sum_dvd` | 本文と同じ `Complex.exp` で、`k = lM` のとき和は `M(-1)^l` | 同上 |
+| `Ising2D.antiperiodic_complex_exp_sum_not_dvd` | 本文と同じ `Complex.exp` で、`M ∤ k` のとき和は `0` | 同上 |
+| `Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt` | 本文と同じ `Complex.exp` で、`|k|<M, k\ne0` のとき和は `0` | 同上（「とくに」） |
+| `Ising2D.antiperiodic_complex_exp_sum_zero` | 本文と同じ `Complex.exp` で、`k=0` のとき和は `M` | 同上（「とくに」） |
+| `Ising2D.antiperiodic_exp_sum_dvd` / `antiperiodic_exp_sum_not_dvd` / `antiperiodic_exp_sum_nonzero_of_abs_lt` / `antiperiodic_exp_sum_zero` | 直前四主張を内部表現 `checkPhase` で書いたもの | 同上（補助） |
 | `Ising2D.sum_checkPhase` | 上を周波数そのままで書いた形（以降の計算で使う） | 同上 |
 | `Ising2D.checkZ` / `Ising2D.checkY` | `check(Z)_μ`, `check(Y)_μ` | `def_half_integer_modes` |
 | `Ising2D.checkPhase_antiperiodic` | (1) `e^{-iMθ~_μ} = -1` | 同上 (1) |
@@ -74,7 +80,10 @@
 | `NecSuf.sq_isPrimitiveRoot` | `ξ` が原始 `2M` 乗根なら `ξ^2` は原始 `M` 乗根 | 同上（橋渡し） |
 | `NecSuf.zpow_mul_natCast` | `ξ^{lM} = (-1)^l` | `antiperiodic_exp_sum` |
 | `NecSuf.sum_zpow_primitiveRoot_zero_based` | 既存の直交性の `0` 始まり版 | 同上（補助） |
-| `NecSuf.sum_zpow_antiperiodic` | `∑_{μ=1}^{M} ξ^{(2μ-1)k} = ξ^k M δ^M_{k,0}` | `antiperiodic_exp_sum` |
+| `NecSuf.sum_zpow_antiperiodic_delta_difference` | `2M` 項を奇数番目と偶数番目へ分け、`∑_{μ=1}^{M} ξ^{(2μ-1)k} = 2M δ^{2M}_{k,0}-M δ^M_{k,0}` とする | `antiperiodic_exp_sum` |
+| `NecSuf.sum_zpow_antiperiodic_dvd_even` / `sum_zpow_antiperiodic_dvd_odd` | `k=lM` の偶数・奇数の場合をデルタ差から評価する | 同上 |
+| `NecSuf.sum_zpow_antiperiodic_not_dvd` | `M∤k` の場合を二つの周期デルタの零評価から導く | 同上 |
+| `NecSuf.sum_zpow_antiperiodic` | `∑_{μ=1}^{M} ξ^{(2μ-1)k} = ξ^k M δ^M_{k,0}` | 同上（補助） |
 | `NecSuf.acomm_antiperiodic_fourier_clifford` | 奇数周波数フーリエ和どうしの反交換子 | `anticommutator_of_check_Z_Y` |
 | `NecSuf.inverse_dft_antiperiodic` | 反周期的離散フーリエ逆変換（任意の体・任意の加群） | `recover_Z_Y_from_check_Z_Y` |
 
@@ -82,6 +91,12 @@
 
 | 導出した定理 | 元の必要十分版 | ファイル |
 | --- | --- | --- |
+| `Ising2D.antiperiodic_complex_exp_sum_delta_difference_of_necSuf` | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean` |
+| `Ising2D.antiperiodic_exp_sum_delta_difference_of_necSuf` | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean` |
+| `Ising2D.antiperiodic_complex_exp_sum_dvd_even_of_necSuf` / `antiperiodic_complex_exp_sum_dvd_odd_of_necSuf` / `antiperiodic_complex_exp_sum_not_dvd_of_necSuf` | 必要十分版の偶数・奇数・非整除の場合 | 同上 |
+| `Ising2D.antiperiodic_complex_exp_sum_dvd_of_necSuf` | 必要十分版の偶数・奇数の場合を合わせた本文の `k=lM` の主張 | 同上 |
+| `Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt_of_necSuf` / `antiperiodic_complex_exp_sum_zero_of_necSuf` | 本文の二つの「とくに」 | 同上 |
+| 対応する `Ising2D.antiperiodic_exp_sum_*_of_necSuf` | 直前三行を内部表現 `checkPhase` で書いたもの | 同上 |
 | `Ising2D.antiperiodic_exp_sum_of_necSuf` | `NecSuf.sum_zpow_antiperiodic` | `Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean` |
 | `Ising2D.checkPhase_M_of_necSuf` | `NecSuf.pow_half_eq_neg_one` | 同上 |
 | `Ising2D.checkZ_period_of_necSuf` / `checkY_period_of_necSuf` | **既存の** `NecSuf.transform_periodic` | 同上 |
@@ -109,11 +124,14 @@
    指数関数も円周率も複素数であることも効いていない。
 
 2. **指数和は同じ直交性の特殊化である。**
-   `∑_{μ=1}^{M} ξ^{(2μ-1)k} = ξ^k ∑_{μ=0}^{M-1} (ξ^2)^{μk} = ξ^k · M δ^M_{k,0}`。
-   定数位相 `ξ^k` を括り出すだけで、既存の `NecSuf.sum_zpow_primitiveRoot`
-   （整数運動量の `exp_sum` の必要十分版）に帰着する。
-   本文が場合分けして出している `(-1)^l` は、この定数位相を `k = lM` で評価した
-   `ξ^{lM} = (ξ^M)^l = (-1)^l` にすぎない。
+   本文と必要十分版はともに、`2M` 項の和を奇数番目と偶数番目へ分けて
+   `∑_{μ=1}^{M} ξ^{(2μ-1)k} = 2M δ^{2M}_{k,0}-M δ^M_{k,0}`
+   を得る。どちらの項も既存の `NecSuf.sum_zpow_primitiveRoot`
+   （整数運動量の `exp_sum` の必要十分版）の特殊化である。
+   本文が場合分けして出している `(-1)^l` は、`k=lM` のとき
+   `2M ∣ k` が `l` の偶奇と一致することから現れる。
+   補助的な閉形式として、定数位相を括り出す
+   `∑_{μ=1}^{M} ξ^{(2μ-1)k}=ξ^k Mδ^M_{k,0}` も残す。
    つまり**整数運動量の `exp_sum` と半整数運動量の `antiperiodic_exp_sum` は、
    同じ 1 つの直交性補題の 2 通りの特殊化**である。
 
