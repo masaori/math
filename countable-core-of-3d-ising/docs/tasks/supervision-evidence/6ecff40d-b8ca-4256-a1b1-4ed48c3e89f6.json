@@ -1,0 +1,9 @@
+{
+  "実行識別子": "6ecff40d-b8ca-4256-a1b1-4ed48c3e89f6",
+  "観測時刻": "2026-09-21T02:57:37+09:00",
+  "起動登録の実測": {"list終了コード": 0, "print終了コード": 0, "label": "com.masaori.ising-3d-cut-auto-loop", "state": "not running", "runs": 56, "last exit code": 0},
+  "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-3d-cut-auto-loop.plist", "存在": true, "sha256": "645e7ee64646b4ce7c7cc90cddc59629ffae6cbd51c6646ad96be01266819f10", "StartCalendarInterval": "毎時0分・30分"},
+  "実ログ": {"観測時刻": "2026-09-21T02:57:37+09:00", "path": "/Users/masaori/Library/Logs/ising-3d-cut-auto-loop/auto-loop.log", "終端": "2026-09-21 02:33:53正常終了。現在対象は完了一件・未達ゼロで、本文・Lean・SageMathの増加なし。"},
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 56・last exit 0。実ログも02:33:53正常終了だが成果増加なしで、研究上の前進とは分離する。",
+  "成果比較": {"開始成果": "558eadb47dcbee62f17cfa7c1c161a140a8d4360", "前回監督の読解終点": "21b2c7eeaba62b028eb5f4f32a43d117099915c7", "今回読解終点": "5fe3661b95fece6386222b122ef72a8170abc1ad", "前回監督以後": "前回監督記録以外に数学本文・証明・有限反例の統合成果はない。"}
+}

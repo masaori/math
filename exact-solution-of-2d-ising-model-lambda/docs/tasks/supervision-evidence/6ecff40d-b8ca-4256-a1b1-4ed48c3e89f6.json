@@ -1,0 +1,9 @@
+{
+  "実行識別子": "6ecff40d-b8ca-4256-a1b1-4ed48c3e89f6",
+  "観測時刻": "2026-09-21T02:57:37+09:00",
+  "起動登録の実測": {"list終了コード": 0, "print終了コード": 0, "label": "com.masaori.ising-lambda-auto-loop", "state": "not running", "runs": 42, "last exit code": 0},
+  "plist": {"path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist", "存在": true, "sha256": "0251205e11070166bad48b0a0fa90288543e32339c1ca704301bb202ba0ecf70", "StartCalendarInterval": "毎時5分・35分"},
+  "実ログ": {"観測時刻": "2026-09-21T02:57:37+09:00", "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log", "終端": "2026-09-21 02:35:31開始、02:55:26正常終了。"},
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 42・last exit 0。実ログの現行最新回も02:55:26正常終了である。",
+  "成果比較": {"開始成果": "558eadb47dcbee62f17cfa7c1c161a140a8d4360", "前回監督の読解終点": "21b2c7eeaba62b028eb5f4f32a43d117099915c7", "今回読解終点": "5fe3661b95fece6386222b122ef72a8170abc1ad", "前回監督以後": "離散Whitney経路のセル複体Euler数・対角接触排除・方向門横断・周期持上げ・横断階段を本文既存主張からLean具体版・必要十分版・導出版へ接続し、反復横断階段と非零周期並進の分離まで統合した。"}
+}
