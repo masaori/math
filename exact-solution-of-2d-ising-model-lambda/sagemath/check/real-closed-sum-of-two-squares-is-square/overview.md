@@ -19,4 +19,4 @@ $x,y$ は $0,\pm1,\tfrac23,\sqrt2,-\tfrac{\sqrt5}{7}$ の組すべて。
 sage sagemath/check/real-closed-sum-of-two-squares-is-square/check.sage
 ```
 
-**2026-08-18 実行: すべて通過。**
+**2026-09-20 実行: すべて通過。**
