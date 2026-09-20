@@ -58,7 +58,7 @@ theorem boundaryVertex_diagonalContactExcluded
     omega
   · left
     have hv1 : vertexVisitCount n row col a b = 1 := by omega
-    exact vertexSurroundingCells_formParityArcs n row col a b
+    exact vertexSurroundingCells_formParityArcs_local n row col a b
       hclosedRow hclosedCol hunit hv1 hleft hright hdown hup
 
 end Ising2DLambda.KacWard

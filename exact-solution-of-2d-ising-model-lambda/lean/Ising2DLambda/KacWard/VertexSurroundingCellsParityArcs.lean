@@ -14,8 +14,8 @@ namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.NecSuf.KacWard
 
-/-- `claim_vertex_surrounding_cells_form_parity_arcs` の具体版。 -/
-theorem vertexSurroundingCells_formParityArcs
+/-- 訪問回数が一回である頂点についての局所計算。 -/
+theorem vertexSurroundingCells_formParityArcs_local
     (n : ℕ) (row col : ℕ → ℤ) (a b : ℤ)
     (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
     (hunit : IsUnitGridWalk n row col)
@@ -74,5 +74,37 @@ theorem vertexSurroundingCells_formParityArcs
     omega
   exact four_cells_form_parity_arcs_necSuf c0 c1 c2 c3 e0 e1 e2 e3
     hc0 hc1 hc2 hc3 hedges h01 h12 h23 h30
+
+/-- `claim_vertex_surrounding_cells_form_parity_arcs` の具体版。 -/
+theorem vertexSurroundingCells_formParityArcs
+    (n : ℕ) (row col : ℕ → ℤ) (j : ℕ)
+    (hj : j < n)
+    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
+    (hunit : IsUnitGridWalk n row col)
+    (hdistinct : ∀ k l, k < n → l < n →
+      row k = row l → col k = col l → k = l)
+    -- 閉じた非後退単位格子路と持ち上げ点の相異性から得る局所的な辺単純性。
+    (hleft : verticalEdgeTraversalCount n row col (row j - 1) (col j) ≤ 1)
+    (hright : verticalEdgeTraversalCount n row col (row j) (col j) ≤ 1)
+    (hdown : horizontalEdgeTraversalCount n row col (row j) (col j - 1) ≤ 1)
+    (hup : horizontalEdgeTraversalCount n row col (row j) (col j) ≤ 1) :
+    FourCellsFormParityArcs
+      (rightRayCrossingCount n row col (row j - 1) (col j - 1) % 2)
+      (rightRayCrossingCount n row col (row j - 1) (col j) % 2)
+      (rightRayCrossingCount n row col (row j) (col j) % 2)
+      (rightRayCrossingCount n row col (row j) (col j - 1) % 2) := by
+  have hvisit : vertexVisitCount n row col (row j) (col j) = 1 := by
+    unfold vertexVisitCount
+    rw [Finset.sum_eq_single j]
+    · simp
+    · intro k hk hkj
+      have hklt : k < n := Finset.mem_range.mp hk
+      have hcoordinates : ¬ (row k = row j ∧ col k = col j) := by
+        intro h
+        exact hkj (hdistinct k j hklt hj h.1 h.2)
+      simp [hcoordinates]
+    · exact fun h => False.elim (h (Finset.mem_range.mpr hj))
+  exact vertexSurroundingCells_formParityArcs_local n row col (row j) (col j)
+    hclosedRow hclosedCol hunit hvisit hleft hright hdown hup
 
 end Ising2DLambda.KacWard
