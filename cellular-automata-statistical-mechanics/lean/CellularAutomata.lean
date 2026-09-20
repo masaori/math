@@ -173,3 +173,4 @@ import CellularAutomata.NecSuf.FiniteDiscreteContinuousSymmetryBoundary
 import CellularAutomata.FinitePermutationComplexPhaseBoundary
 import CellularAutomata.NecSuf.FinitePermutationComplexPhaseBoundary
 import CellularAutomata.FiniteYangBaxterBoundary
+import CellularAutomata.NecSuf.FiniteYangBaxterBoundary
