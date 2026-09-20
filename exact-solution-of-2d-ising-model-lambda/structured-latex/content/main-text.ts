@@ -65550,6 +65550,10 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
                 title: { text: "逆向きの周期持ち上げを使わない一側閉包" },
                 labels: ["def_one_sided_periodic_lift_closure"],
                 habitat: "Z",
+                lean: [
+                  "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure",
+                  "Ising2DLambda.NecSuf.KacWard.oneSidedFourSegmentPath",
+                ],
                 statement: [
                   paragraph([
                     "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -65609,6 +65613,11 @@ D^{\gamma,S,t}_{N-j},&cm+t\,n_{\perp}+c\,n_{\parallel}\le j\le N.
               title: { text: "一側閉包は閉じた単位格子路である" },
               labels: ["claim_one_sided_periodic_lift_closure_closed_unit_steps"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps",
+                "Ising2DLambda.NecSuf.KacWard.one_sided_four_segments_closed_steps_necSuf",
+                "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps_from_necSuf",
+              ],
               verification: ["sagemath/check/one-sided-periodic-lift-closure"],
               statement: [
                 paragraph([
