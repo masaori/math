@@ -62875,6 +62875,11 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
               title: { text: "持ち上げ点が相異なる閉路の歩道沿いの外側帯は空でなく辺連結である" },
               labels: ["claim_walk_side_exterior_band_edge_connected"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected",
+                "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
+                "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected_from_necSuf",
+              ],
               verification: ["sagemath/check/walk-side-exterior-band-connected"],
               statement: [
                 paragraph([
