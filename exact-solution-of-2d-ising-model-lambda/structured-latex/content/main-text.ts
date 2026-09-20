@@ -64380,6 +64380,7 @@ C^{\gamma}_{s+1}-C^{\gamma}_s
                 title: { text: "基点と反復回数を持つ反復横断階段" },
                 labels: ["def_iterated_transverse_staircase"],
                 habitat: "Z",
+                lean: ["Ising2DLambda.KacWard.iteratedTransverseStaircase"],
                 statement: [
                   paragraph([
                     "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -64423,6 +64424,13 @@ C^{\gamma}_{s+1}-C^{\gamma}_s
               labels: ["claim_iterated_transverse_staircase_lower_bound"],
               habitat: "Z",
               verification: ["sagemath/check/iterated-transverse-staircase"],
+              lean: [
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_lower_bound",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_unit_step",
+                "Ising2DLambda.NecSuf.KacWard.iteratedStaircase_step_necSuf",
+                "Ising2DLambda.NecSuf.KacWard.iteratedStaircase_coordinate_necSuf",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_lower_bound_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "反復横断階段（", ref("def_iterated_transverse_staircase"),

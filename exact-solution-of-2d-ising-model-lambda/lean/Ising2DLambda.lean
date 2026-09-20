@@ -1054,3 +1054,6 @@ import Ising2DLambda.KacWard.PeriodicPlaneLiftParallelIncreaseFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.WindingTransverseStaircase
 import Ising2DLambda.KacWard.WindingTransverseStaircase
 import Ising2DLambda.KacWard.WindingTransverseStaircaseFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.IteratedTransverseStaircase
+import Ising2DLambda.KacWard.IteratedTransverseStaircase
+import Ising2DLambda.KacWard.IteratedTransverseStaircaseFromNecSuf
