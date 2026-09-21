@@ -2819,7 +2819,7 @@ V^{(+)}\check{Q}_\epsilon
       ),
       paragraph([
         "である。",
-        ref("def_half_integer_modes"),
+        ref("antiperiodic_exp_sum"),
         " の ",
         math(String.raw`\tilde\theta_\mu = \dfrac{2\pi\left(\mu-\frac12\right)}{M}`),
         " より ",

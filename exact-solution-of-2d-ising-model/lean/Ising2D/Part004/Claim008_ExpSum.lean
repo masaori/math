@@ -11,8 +11,8 @@
 
 ## 形式化の方針
 
-原文の `exp(-√-1 · 2π k / M)`（`<def_hatZ_hatY>` の位相因子）を `expPhase M k` として定義し、
-`expPhase` の基本性質（加法性・`M` 周期性・`= 1` となる条件）を先に用意する。
+原文の `exp(-√-1 · 2π k / M)`（`<def_hatZ_pm>` と `<def_hatY>` の位相因子）は
+`DefinitionExpPhase.lean` の中立な先行定義 `expPhase M k` を使う。
 原文の `exp_sum` は `k ↦ -k` の読み替えで `expPhase` の和として述べられる
 （両辺とも `k` と `-k` で同じ値なので、主張として同値）。
 
@@ -29,58 +29,9 @@
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Algebra.Field.GeomSum
-import Mathlib.RingTheory.RootsOfUnity.Complex
+import Ising2D.Part004.DefinitionExpPhase
 
 namespace Ising2D
-
-/-! ## 位相因子 `exp(-√-1 · 2π k / M)` -/
-
-/-- 原文 `<def_hatZ_hatY>` に現れる位相因子 `exp(-√-1 · 2π k / M)`（`k ∈ ℤ`）。
-
-`M = 0` のときは `ℂ` の規約 `x / 0 = 0` により `expPhase 0 k = 1` になるが、
-以降の主張はすべて `M ≠ 0` を仮定するので影響しない。 -/
-noncomputable def expPhase (M : ℕ) (k : ℤ) : ℂ :=
-  Complex.exp (-(2 * (Real.pi : ℂ) * Complex.I * (k : ℂ)) / (M : ℂ))
-
-@[simp]
-theorem expPhase_zero (M : ℕ) : expPhase M 0 = 1 := by
-  simp [expPhase]
-
-/-- 指数法則 `exp(-2π√-1(k+l)/M) = exp(-2π√-1 k/M) exp(-2π√-1 l/M)`。 -/
-theorem expPhase_add (M : ℕ) (k l : ℤ) :
-    expPhase M (k + l) = expPhase M k * expPhase M l := by
-  rw [expPhase, expPhase, expPhase, ← Complex.exp_add]
-  congr 1
-  push_cast
-  ring
-
-theorem expPhase_neg (M : ℕ) (k : ℤ) : expPhase M (-k) = (expPhase M k)⁻¹ := by
-  rw [expPhase, expPhase, ← Complex.exp_neg]
-  congr 1
-  push_cast
-  ring
-
-/-- `expPhase M (n k) = (expPhase M k)^n`（`n : ℕ`）。 -/
-theorem expPhase_natCast_mul (M : ℕ) (n : ℕ) (k : ℤ) :
-    expPhase M ((n : ℤ) * k) = expPhase M k ^ n := by
-  induction n with
-  | zero => simp
-  | succ n ih =>
-      have h : ((n + 1 : ℕ) : ℤ) * k = (n : ℤ) * k + k := by push_cast; ring
-      rw [h, expPhase_add, ih, pow_succ]
-
-/-- `expPhase` を `M` 次の原始単位根のべきとして書く。 -/
-theorem expPhase_eq_zpow (M : ℕ) (k : ℤ) :
-    expPhase M k = (Complex.exp (2 * (Real.pi : ℂ) * Complex.I / (M : ℂ))) ^ (-k) := by
-  rw [← Complex.exp_int_mul, expPhase]
-  congr 1
-  push_cast
-  ring
-
-/-- **原文 (a)(b) の場合分けの根拠**: `exp(-2π√-1 k/M) = 1 ⟺ M ∣ k`。 -/
-theorem expPhase_eq_one_iff {M : ℕ} (hM : M ≠ 0) (k : ℤ) :
-    expPhase M k = 1 ↔ (M : ℤ) ∣ k := by
-  rw [expPhase_eq_zpow, (Complex.isPrimitiveRoot_exp M hM).zpow_eq_one_iff_dvd, dvd_neg]
 
 /-- 原文 `parts/004_転送行列/007_definition_クロネッカーのデルタ_delta_M.typ` の
 `δ^M : ℤ × ℤ → ℂ`（`μ ≡ ν (mod M)` なら `1`、そうでなければ `0`）。

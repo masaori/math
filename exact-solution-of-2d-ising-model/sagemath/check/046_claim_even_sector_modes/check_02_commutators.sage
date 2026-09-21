@@ -7,7 +7,7 @@
 #   (C) [H_2,       checkZ_mu] = -2 checkY_mu
 #   (D) [H_2,       checkY_mu] =  2 checkZ_mu
 # 対象: structured-latex commutator_of_H_and_check_Z_Y
-#   （def_half_integer_modes も併せて検証）
+#   （def_half_integer_checkZ / def_half_integer_checkY / def_half_integer_modes も併せて検証）
 # ---------------------------------------------------------
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'

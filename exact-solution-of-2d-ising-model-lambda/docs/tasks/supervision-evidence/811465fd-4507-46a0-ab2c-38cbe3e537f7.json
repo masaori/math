@@ -1,0 +1,30 @@
+{
+  "実行識別子": "811465fd-4507-46a0-ab2c-38cbe3e537f7",
+  "観測時刻": "2026-09-20T20:55:46+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.ising-lambda-auto-loop",
+    "state": "not running",
+    "runs": 30,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist",
+    "存在": true,
+    "sha256": "0251205e11070166bad48b0a0fa90288543e32339c1ca704301bb202ba0ecf70",
+    "StartCalendarInterval": "毎時5分・35分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-20T20:55:46+09:00",
+    "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log",
+    "終端": "2026-09-20 20:35:36開始、20:51:11正常終了。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 30・last exit 0。実ログの現行最新回も20:51:11正常終了である。",
+  "成果比較": {
+    "開始成果": "21b2c7eeaba62b028eb5f4f32a43d117099915c7",
+    "前回監督の読解終点": "9ecb996453625a3ff12eed89b1f2684f37b5790d",
+    "今回読解終点": "21b2c7eeaba62b028eb5f4f32a43d117099915c7",
+    "前回監督以後": "離散Whitney論証で頂点通過偶奇、内外セル帯、内側セル集合、外側セル補集合の辺連結性を本文・SageMath・Lean具体版・必要十分版・導出版へ順に接続した。有限特徴多項式探索の停止条件は維持した。"
+  }
+}

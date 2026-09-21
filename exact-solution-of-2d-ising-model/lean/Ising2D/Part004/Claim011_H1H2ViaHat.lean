@@ -31,6 +31,7 @@
   （`dvd_succ_sub_iff_eq_nextSite`）にまとめてある。原文の場合分けは、この一意性を
   `k_2 = k_1 + 1` と `k_1 = M, k_2 = 1` に手で分けたものにほかならない。
 -/
+import Ising2D.Part004.Claim008_ExpSum
 import Ising2D.Part004.Definition010_H1H2V1V2
 
 namespace Ising2D

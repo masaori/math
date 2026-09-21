@@ -12,4 +12,4 @@ $b\ne0$ の場合に本文で使う逆元による平方の等式を検査する
 sage sagemath/check/critical-distance-squared-zero-iff-equal/check.sage
 ```
 
-**2026-08-18 実行: 18 組すべて通過。**
+**2026-09-20 再実行: 18 組すべて通過。**

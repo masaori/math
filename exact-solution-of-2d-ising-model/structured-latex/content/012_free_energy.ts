@@ -975,7 +975,7 @@ u
       ]),
       paragraph([
         "本文にこれが無い理由は具体的である。",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " の ",
         math(String.raw`\hat{Z}_\mu^{(\pm)}`),
         " は第 1 項に符号 ",

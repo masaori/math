@@ -9,7 +9,8 @@
   `016_even_sector_fermions.ts`
 - 併せて検証（章 C′ の全ブロック）:
   - 013 章: `why_008_applies_only_to_minus_sector` / `antiperiodic_exp_sum` /
-    `def_half_integer_modes` / `commutator_of_H_and_check_Z_Y` /
+    `def_half_integer_checkZ` / `def_half_integer_checkY` / `def_half_integer_modes` /
+    `commutator_of_H_and_check_Z_Y` /
     `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y` / `H1_H2_via_check_Z_Y`
   - 014 章: `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` /
     `def_V_plus` / `V1_plus_half_invertible` / `V2_invertible` /
@@ -97,7 +98,7 @@ A(t)   = [[gamma_1(t), gamma_2(t)], [-gamma_2(-t), gamma_1(t)]]
 
 - check_01（013 章）: `def_check_index_set` (1)〜(5) と `conjugate_index_of_check_Z_Y`
   (1)(2)(3) の各段を追加。`H1_H2_via_check_Z_Y` の `Ž_{1−μ}` の 3 段は、
-  `Ž_{M+1−μ}` の **2 段**（`def_half_integer_modes` → `conjugate_index_of_check_Z_Y` (2)）に
+  `Ž_{M+1−μ}` の **2 段**（`def_half_integer_checkZ` → `conjugate_index_of_check_Z_Y` (2)）に
   置き換わった（合同式・符号反転の段が消えた）。段数 92 → 105。
 - check_04（016 章）: `periodicity_of_check_fermi` の (1)(2)(3) の組み替えに追随。
   `anticommutator_of_check_psi` の Step 1 と `action_of_T_check_Vprime_on_check_psi` の
@@ -106,6 +107,20 @@ A(t)   = [[gamma_1(t), gamma_2(t)], [-gamma_2(-t), gamma_1(t)]]
 - `μ` を走らせる範囲も、主張が `𝓜̌` 上のものになった箇所は `𝓜̌` に合わせた
   （`def_half_integer_modes` (1)(2)(3) の検証だけは `μ = 0, −1, M+1` を含めたまま残してある。
   これは `μ ∈ ℤ` で量化してよい 2 主張のうちの 1 つだからである）。
+
+## 半整数運動量の指数和の段分割（2026-09-20）
+
+`antiperiodic_exp_sum` は、法 `2M` の指数和を奇数番目と偶数番目へ分け、偶数番目を法 `M` の
+指数和として引く本文経路へ揃えた。包含像と分母の非零性、指数の定義代入と通分、
+有限和の奇偶分割、偶数番目の約分、
+`exp_sum` の二つの適用、二つの周期デルタの差、`l` の奇偶による評価を各段で検査する。さらに
+非整除の場合の `2M∤k` と二つの周期デルタの零評価、`|k|<M, k!=0` の非整除導出、
+`k=0` の三段も検査する。整数部分は
+`ZZ` 上の有限例を厳密等号で判定し、一般命題は Lean の
+`antiperiodic_exp_sum_nonzero_of_abs_lt` が担う。さらに包含像の四つの一致、定義適用と像の書換え、
+偶奇二場合のデルタ代入・零元と単位元の簡約・係数計算・整数冪評価を一行ずつ対応させた。これにより check_01 は
+105 種類から 151 種類となった。変更した check_01 を再実行し、最大残差は従来どおり
+`2.3e-14`、全段 PASS だった。
 
 ## 実行
 
@@ -123,12 +138,12 @@ sage check_04_016_steps.sage
 
 | ファイル | 対象 | 区別された段の種類 | 最大残差 | 判定 |
 | --- | --- | --- | --- | --- |
-| `check_01_013_steps.sage` | 013 章の各段 | 105 | 2.3e-14 | PASS |
+| `check_01_013_steps.sage` | 013 章の各段 | 151 | 2.3e-14 | PASS |
 | `check_02_015_steps.sage` | 015 章の各段 | 66 | 1.7e-13 | PASS |
 | `check_03_014_steps.sage` | 014 章の各段 | 100 | 9.5e-11 | PASS |
 | `check_04_016_steps.sage` | 016 章の各段 | 62 | 5.8e-12 | PASS |
 
-**章 C′ の 4 章あわせて 333 種類の段がすべて成り立っている。**
+**章 C′ の 4 章あわせて 379 種類の段がすべて成り立っている。**
 
 副産物として、次の 3 つの狭義不等号も再確認した（本文が半整数運動量に固有の帰結として
 主張しているもの。整数運動量では臨界点で等号が起こる）。

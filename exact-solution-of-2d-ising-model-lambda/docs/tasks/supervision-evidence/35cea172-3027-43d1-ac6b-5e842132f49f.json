@@ -1,0 +1,30 @@
+{
+  "実行識別子": "35cea172-3027-43d1-ac6b-5e842132f49f",
+  "観測時刻": "2026-09-21T20:56:25+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.ising-lambda-auto-loop",
+    "state": "not running",
+    "runs": 18,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist",
+    "存在": true,
+    "sha256": "0251205e11070166bad48b0a0fa90288543e32339c1ca704301bb202ba0ecf70",
+    "StartCalendarInterval": "毎時5分・35分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-21T20:56:25+09:00",
+    "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log",
+    "終端": "2026-09-21 20:35:31、作業ツリーに未コミットの変更があるため見送り。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 18・last exit 0。ただし直近実ログは20:35:31に「作業ツリーに未コミットの変更がある」として見送りであり、last exit 0を研究実行の成功へ読み替えていない。",
+  "成果比較": {
+    "開始成果": "bd81d266b620c058aec218cb1d39d737939c301d",
+    "前回監督の読解終点": "28800ac642e634d4d1b99287ad1b601fef735c86",
+    "今回読解終点": "bd81d266b620c058aec218cb1d39d737939c301d",
+    "前回監督以後": "内外連結性と境界接触の仮定緩和、平面閉多角形と一側閉包射影の回転数をLean二版へ接続した。"
+  }
+}

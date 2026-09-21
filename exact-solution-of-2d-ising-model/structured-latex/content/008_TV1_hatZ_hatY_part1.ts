@@ -68,11 +68,11 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \hat{Y}_{\nu+M}
-&= \sum_{j=1}^{M} Y_j \exp\!\left(-i\frac{2\pi j(\nu+M)}{M}\right)
+&= \sum_{j=1}^{M} \exp\!\left(-i\frac{2\pi j(\nu+M)}{M}\right)Y_j
 &&(\because\ \text{$\hat{Z}, \hat{Y}$ の定義})\\
-&= \sum_{j=1}^{M} Y_j \exp\!\left(-i\frac{2\pi j\nu}{M}\right)\exp\!\left(-i 2\pi j\right)
+&= \sum_{j=1}^{M} \exp\!\left(-i\frac{2\pi j\nu}{M}\right)\exp\!\left(-i 2\pi j\right)Y_j
 &&(\because\ \text{指数法則})\\
-&= \sum_{j=1}^{M} Y_j \exp\!\left(-i\frac{2\pi j\nu}{M}\right)\cdot 1
+&= \sum_{j=1}^{M} \exp\!\left(-i\frac{2\pi j\nu}{M}\right)\cdot 1\,Y_j
 &&(\because\ j \in \mathbb{Z}\ \text{でのオイラーの公式}\ \text{（$\hat{Z}_M^{(-)}=\hat{Z}_{-M}^{(-)},\ \hat{Y}_M=\hat{Y}_{-M}$ と同じ計算）})\\
 &= \hat{Y}_{\nu}
 &&(\because\ \text{$\hat{Z}, \hat{Y}$ の定義})
@@ -165,7 +165,9 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
       ),
       paragraph([
         "引いたブロックは ",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
+        "、",
+        ref("def_hatY"),
         "、",
         ref("hatZ_hatY_M_periodicity"),
         "、",
@@ -291,7 +293,9 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
       ]),
       paragraph([
         "引いたブロックは ",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
+        "、",
+        ref("def_hatY"),
         "、",
         ref("hatZ_hatY_M_periodicity"),
         "、",
@@ -413,7 +417,9 @@ e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
       ),
       paragraph([
         "引いたブロックは ",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
+        "、",
+        ref("def_hatY"),
         "、",
         ref("hatZ_hatY_M_periodicity"),
         "、",
@@ -733,7 +739,9 @@ M & (\mu = M)
         " の元であり（",
         ref("H1_H2_via_hatZ_hatY"),
         "、",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
+        "、",
+        ref("def_hatY"),
         "）、",
         math(String.raw`K_1, K_2^* \in \mathbb{R}`),
         " はスカラー、",

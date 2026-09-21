@@ -36,6 +36,7 @@ import Ising2D.Part006.Claim000_AnticommutatorZYFromNecSuf
 import Ising2D.Part004.Claim001_ZYLinearlyIndependent
 import Ising2D.NecSuf.CliffordIndependence
 import Ising2D.Part004.Claim001_ZYLinearlyIndependentFromNecSuf
+import Ising2D.Part004.DefinitionExpPhase
 import Ising2D.Part004.Claim008_ExpSum
 import Ising2D.NecSuf.RootOfUnitySum
 import Ising2D.Part004.Claim008_ExpSumFromNecSuf

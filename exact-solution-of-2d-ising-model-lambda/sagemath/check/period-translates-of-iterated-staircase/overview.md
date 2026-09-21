@@ -9,6 +9,6 @@ $L=1,\ldots,5$ と $-L\le w_{\mathrm h},w_{\mathrm v}\le L$ の非零巻き付�
 交わらないことを `ZZ` 上で全比較する。
 
 - 実行: `sage sagemath/check/period-translates-of-iterated-staircase/check.sage`
-- 状態: PASS（2026-09-01）。非零巻き付き対 280 組、階段頂点 16,800 個、
+- 状態: PASS（2026-09-21）。非零巻き付き対 280 組、階段頂点 16,800 個、
   非零周期並進との頂点比較 908,544 件を検査した。
 - 計算: 有限列挙と `ZZ` の四則・絶対値・順序だけ。浮動小数点は使わない。

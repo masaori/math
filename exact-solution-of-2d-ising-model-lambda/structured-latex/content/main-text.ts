@@ -28379,7 +28379,6 @@ u_z&=\frac{1}{L}\odot P_{A,z}(v)
 &=v
 &&(\because\ \blkref{claim_qbar_projector_reconstruction})
 \end{aligned}`),
-                    paragraph([ref("claim_qbar_projector_reconstruction")]),
                     paragraph([
                       "したがって求める族は存在する。この段は代数的数を成分とする有限個の列ベクトルの",
                       "スカラー倍と有限和だけで閉じ、実数体も複素数体も現れない。",
@@ -62267,6 +62266,11 @@ N_{r,c}^{\rightarrow}(\gamma)+N_{r+1,c}^{\rightarrow}(\gamma)
               labels: ["claim_interior_cells_reach_odd_vertical_edge"],
               habitat: "Z",
               verification: ["sagemath/check/interior-cells-reach-odd-vertical-edge"],
+              lean: [
+                "Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge",
+                "Ising2DLambda.NecSuf.KacWard.odd_run_reaches_odd_increment_necSuf",
+                "Ising2DLambda.KacWard.interiorCells_reachOddVerticalEdge_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
@@ -62352,6 +62356,11 @@ V_{r,g}(\gamma)
               labels: ["claim_vertex_incident_edge_traversal_even"],
               habitat: "N",
               verification: ["sagemath/check/vertex-incident-edge-traversal-even"],
+              lean: [
+                "Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even",
+                "Ising2DLambda.NecSuf.KacWard.closed_endpoint_incidence_double_necSuf",
+                "Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
@@ -62434,6 +62443,11 @@ V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
               title: { text: "持ち上げ点が相異なる閉路の各訪問頂点で内側セルと外側セルはそれぞれ一つの弧をなす" },
               labels: ["claim_vertex_surrounding_cells_form_parity_arcs"],
               habitat: "N",
+              lean: [
+                "Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs",
+                "Ising2DLambda.NecSuf.KacWard.four_cells_form_parity_arcs_necSuf",
+                "Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs_from_necSuf",
+              ],
               verification: ["sagemath/check/vertex-surrounding-cells-parity-arcs"],
               statement: [
                 paragraph([
@@ -62591,6 +62605,11 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
               title: { text: "持ち上げ点が相異なる閉路の歩道沿いの内側帯は空でなく辺連結である" },
               labels: ["claim_walk_side_interior_band_edge_connected"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected",
+                "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
+                "Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf",
+              ],
               verification: ["sagemath/check/walk-side-interior-band-connected"],
               statement: [
                 paragraph([
@@ -62749,6 +62768,11 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
               title: { text: "持ち上げ点が相異なる閉路の内側セル集合は辺連結である" },
               labels: ["claim_interior_cell_set_edge_connected"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected",
+                "Ising2DLambda.NecSuf.KacWard.connected_of_connected_core_and_reaches_necSuf",
+                "Ising2DLambda.KacWard.interiorCellSet_nonempty_edgeConnected_from_necSuf",
+              ],
               verification: ["sagemath/check/interior-cell-set-edge-connected"],
               statement: [paragraph([
                 "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
@@ -62850,6 +62874,11 @@ P_j(\gamma)\in\{(r,c),(r,c+1),(r+1,c),(r+1,c+1)\}
               title: { text: "持ち上げ点が相異なる閉路の歩道沿いの外側帯は空でなく辺連結である" },
               labels: ["claim_walk_side_exterior_band_edge_connected"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected",
+                "Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf",
+                "Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected_from_necSuf",
+              ],
               verification: ["sagemath/check/walk-side-exterior-band-connected"],
               statement: [
                 paragraph([
@@ -63009,6 +63038,11 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
               title: { text: "持ち上げ点が相異なる閉路の内側セル集合の補集合は辺連結である" },
               labels: ["claim_exterior_cell_set_edge_connected"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected",
+                "Ising2DLambda.NecSuf.KacWard.connected_of_two_connected_cores_and_reaches_necSuf",
+                "Ising2DLambda.KacWard.exteriorCellSet_nonempty_edgeConnected_from_necSuf",
+              ],
               verification: ["sagemath/check/exterior-cell-set-edge-connected"],
               statement: [
                 paragraph([
@@ -63141,6 +63175,7 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                   title: { text: "セル集合の頂点集合" },
                   labels: ["def_cell_vertex_set"],
                   habitat: "Z",
+                  lean: ["Ising2DLambda.KacWard.cellVertices"],
                   statement: [
                     paragraph([
                       "有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
@@ -63167,6 +63202,7 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                   title: { text: "セル集合の辺集合" },
                   labels: ["def_cell_edge_set"],
                   habitat: "Z",
+                  lean: ["Ising2DLambda.KacWard.cellEdges"],
                   statement: [
                     paragraph([
                       "セル ", math(String.raw`(r,c)\in\mathbb Z\times\mathbb Z`),
@@ -63197,6 +63233,7 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                   title: { text: "セル集合の Euler 数" },
                   labels: ["def_cell_euler_number"],
                   habitat: "Z",
+                  lean: ["Ising2DLambda.KacWard.cellEulerNumber"],
                   statement: [
                     paragraph([
                       "有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
@@ -63221,6 +63258,11 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
               title: { text: "一セルを追加したときの Euler 数の増分" },
               labels: ["claim_cell_complex_one_cell_increment"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.cellEulerNumber_insert",
+                "Ising2DLambda.NecSuf.KacWard.cellComplex_oneCellIncrement_necSuf",
+                "Ising2DLambda.KacWard.cellEulerNumber_insert_from_necSuf",
+              ],
               verification: ["sagemath/check/cell-complex-one-cell-increment"],
               statement: [
                 paragraph([
@@ -63298,10 +63340,8 @@ e_x(S):=\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|`),
 \bigl|S\cup\{x\}\bigr|
 &=|S|+\bigl|\{x\}\bigr|-\bigl|S\cap\{x\}\bigr|
 &&\bigl(\because\ \text{有限集合の包除 }|A\cup B|=|A|+|B|-|A\cap B|\bigr)\\
-&=|S|+1-0
-&&\bigl(\because\ \bigl|\{x\}\bigr|=1\text{ と、}x\notin S\text{ なので }S\cap\{x\}=\varnothing\bigr)\\
 &=|S|+1
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+&&\bigl(\because\ \bigl|\{x\}\bigr|=1\text{ と、}x\notin S\text{ なので }S\cap\{x\}=\varnothing\bigr)
 \end{aligned}`),
                 paragraph(["となる。以上を合わせて"]),
                 displayMath(String.raw`\begin{aligned}
@@ -63342,6 +63382,11 @@ e_x(S):=\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|`),
               title: { text: "有限な辺連結セル集合の補集合も辺連結なら Euler 数は 1 である" },
               labels: ["claim_hole_free_cell_set_euler_number_one"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count",
+                "Ising2DLambda.NecSuf.KacWard.cellEuler_eq_one_of_region_count_necSuf",
+                "Ising2DLambda.KacWard.cellEulerNumber_eq_one_of_region_count_from_necSuf",
+              ],
               verification: ["sagemath/check/hole-free-cell-set-euler-number"],
               statement: [
                 paragraph([
@@ -63437,6 +63482,11 @@ e_x(S):=\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|`),
               labels: ["claim_boundary_vertex_diagonal_contact_excluded"],
               habitat: "Z",
               verification: ["sagemath/check/no-diagonal-only-contact"],
+              lean: [
+                "Ising2DLambda.KacWard.boundaryVertex_diagonalContactExcluded",
+                "Ising2DLambda.NecSuf.KacWard.diagonal_cell_pairs_excluded_necSuf",
+                "Ising2DLambda.KacWard.boundaryVertex_diagonalContactExcluded_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
@@ -63621,6 +63671,7 @@ r_4(\operatorname{dir}(\vec e_k))=0,\ r_4(\operatorname{dir}(\vec e_{k+1}))=3\}\
               title: { text: "循環総回転数は方向番号の門の符号付き横断数の 4 倍である" },
               labels: ["claim_direction_gate_crossing_turning"],
               habitat: "Z",
+              lean: ["Ising2DLambda.KacWard.directionGateCrossing_turning"],
               verification: ["sagemath/check/direction-gate-crossing-turning"],
               statement: [
                 paragraph(["任意の閉じた非後退辺列 ", math(String.raw`\gamma`), " について、整数の等式"]),
@@ -63690,6 +63741,11 @@ t_{\circ}(\gamma)
               title: { text: "持ち上げ点が相異なる零巻き付き閉路の循環総回転数は正負 4 のいずれかである" },
               labels: ["claim_plane_simple_polygon_cyclic_turning"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning",
+                "Ising2DLambda.NecSuf.KacWard.plane_simple_polygon_cyclic_turning_necSuf",
+                "Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning_from_necSuf",
+              ],
               verification: [
                 "sagemath/check/vertex-simple-cycle-turning",
                 "sagemath/check/lift-point-distinct-cycle-turning",
@@ -63827,6 +63883,9 @@ t_{\circ}(\gamma)
                 title: { text: "周期延長した平面持ち上げ" },
                 labels: ["def_periodic_plane_lift"],
                 habitat: "Z",
+                lean: [
+                  "Ising2DLambda.KacWard.periodicPlaneLift",
+                ],
                 statement: [
                   paragraph([
                     "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -63864,6 +63923,11 @@ t_{\circ}(\gamma)
               labels: ["claim_periodic_plane_lift_points_distinct"],
               habitat: "Z",
               verification: ["sagemath/check/periodic-plane-lift-distinct"],
+              lean: [
+                "Ising2DLambda.KacWard.periodicPlaneLift_injective",
+                "Ising2DLambda.NecSuf.KacWard.periodic_lift_injective_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_injective_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -63992,6 +64056,12 @@ s(i_r)-s(i_{r'})
               labels: ["claim_periodic_plane_lift_transverse_bounded"],
               habitat: "Z",
               verification: ["sagemath/check/periodic-plane-lift-transverse-bounded"],
+              lean: [
+                "Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_eq_base",
+                "Ising2DLambda.NecSuf.KacWard.periodic_lift_coordinate_eq_base_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_eq_base_from_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_transverseCoordinate_range_finite",
+              ],
               statement: [
                 paragraph([
                   "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -64089,6 +64159,12 @@ s(i_r)-s(i_{r'})
               labels: ["claim_periodic_plane_lift_parallel_period_increase"],
               habitat: "Z",
               verification: ["sagemath/check/periodic-plane-lift-parallel-increase"],
+              lean: [
+                "Ising2DLambda.KacWard.periodicPlaneLift_parallelCoordinate_add_period",
+                "Ising2DLambda.NecSuf.KacWard.periodic_lift_coordinate_next_period_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_parallelCoordinate_add_period_from_necSuf",
+                "Ising2DLambda.KacWard.windingParallelCoordinate_windingShift_pos",
+              ],
               statement: [
                 paragraph([
                   "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -64176,6 +64252,7 @@ s(i_r)-s(i_{r'})
                 title: { text: "巻き付きベクトルを横切る整数格子の階段" },
                 labels: ["def_winding_transverse_staircase"],
                 habitat: "Z",
+                lean: ["Ising2DLambda.KacWard.windingTransverseStaircase"],
                 statement: [
                   paragraph([
                     "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -64221,6 +64298,12 @@ s(i_r)-s(i_{r'})
               labels: ["claim_winding_transverse_staircase_step_increase"],
               habitat: "Z",
               verification: ["sagemath/check/winding-transverse-staircase"],
+              lean: [
+                "Ising2DLambda.KacWard.windingTransverseStaircase_step_increase",
+                "Ising2DLambda.NecSuf.KacWard.twoPhaseStaircase_step_necSuf",
+                "Ising2DLambda.KacWard.windingTransverseStaircase_step_increase_from_necSuf",
+                "Ising2DLambda.KacWard.windingTransverseStaircase_injOn",
+              ],
               statement: [
                 paragraph([
                   "正の横断階段（", ref("def_winding_transverse_staircase"), "）について、任意の ",
@@ -64301,6 +64384,7 @@ C^{\gamma}_{s+1}-C^{\gamma}_s
                 title: { text: "基点と反復回数を持つ反復横断階段" },
                 labels: ["def_iterated_transverse_staircase"],
                 habitat: "Z",
+                lean: ["Ising2DLambda.KacWard.iteratedTransverseStaircase"],
                 statement: [
                   paragraph([
                     "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -64344,6 +64428,13 @@ C^{\gamma}_{s+1}-C^{\gamma}_s
               labels: ["claim_iterated_transverse_staircase_lower_bound"],
               habitat: "Z",
               verification: ["sagemath/check/iterated-transverse-staircase"],
+              lean: [
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_lower_bound",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_unit_step",
+                "Ising2DLambda.NecSuf.KacWard.iteratedStaircase_step_necSuf",
+                "Ising2DLambda.NecSuf.KacWard.iteratedStaircase_coordinate_necSuf",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_lower_bound_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "反復横断階段（", ref("def_iterated_transverse_staircase"),
@@ -64503,6 +64594,13 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
               labels: ["claim_transverse_translates_of_periodic_plane_lift_disjoint"],
               habitat: "Z",
               verification: ["sagemath/check/transverse-translates-of-periodic-plane-lift"],
+              lean: [
+                "Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLift_coordinate",
+                "Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLifts_disjoint",
+                "Ising2DLambda.NecSuf.KacWard.translatedFamily_coordinate_necSuf",
+                "Ising2DLambda.NecSuf.KacWard.translatedFamilies_disjoint_necSuf",
+                "Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLift_coordinate_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "整数 ", math(String.raw`u\in\mathbb Z`), " と ", math(String.raw`k\in\mathbb Z`),
@@ -64582,6 +64680,11 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
               labels: ["claim_staircase_from_band_top_meets_lift_only_at_base"],
               habitat: "Z",
               verification: ["sagemath/check/staircase-from-band-top-avoids-lift"],
+              lean: [
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top",
+                "Ising2DLambda.NecSuf.KacWard.staircase_above_upper_avoids_family_necSuf",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top_from_necSuf",
+              ],
               statement: [
                 paragraph([
                   "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -64655,6 +64758,11 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
               title: { text: "反復横断階段の平行座標は基点から幅以内に収まる" },
               labels: ["claim_iterated_staircase_parallel_width_bound"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_parallel_width_bound",
+                "Ising2DLambda.NecSuf.KacWard.iteratedStaircase_coordinate_between_necSuf",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_parallel_width_bound_from_necSuf",
+              ],
               verification: ["sagemath/check/iterated-staircase-parallel-width"],
               statement: [
                 paragraph([
@@ -64740,6 +64848,11 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
               title: { text: "反復横断階段は非零の周期並進と交わらない" },
               labels: ["claim_period_translates_of_iterated_staircase_disjoint"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_ne_period_translate",
+                "Ising2DLambda.NecSuf.KacWard.bounded_family_avoids_nonzero_integer_translates_necSuf",
+                "Ising2DLambda.KacWard.iteratedTransverseStaircase_ne_period_translate_from_necSuf",
+              ],
               verification: ["sagemath/check/period-translates-of-iterated-staircase"],
               statement: [
                 paragraph([
@@ -64824,6 +64937,11 @@ B
               title: { text: "基点の平行座標が幅を超えて離れた二つの反復横断階段は交わらない" },
               labels: ["claim_parallel_separated_staircases_disjoint"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.parallelSeparatedIteratedTransverseStaircases_ne",
+                "Ising2DLambda.NecSuf.KacWard.separated_bases_bounded_families_disjoint_necSuf",
+                "Ising2DLambda.KacWard.parallelSeparatedIteratedTransverseStaircases_ne_from_necSuf",
+              ],
               verification: ["sagemath/check/parallel-separated-staircases"],
               statement: [
                 paragraph([
@@ -64965,6 +65083,11 @@ B
               title: { text: "接続階段は元の持ち上げと始点でのみ、移動後の持ち上げと終点でのみ交わる" },
               labels: ["claim_first_hit_connecting_staircase_meets_lifts_only_at_ends"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.firstHitConnectingStaircase_meets_lifts_only_at_ends",
+                "Ising2DLambda.NecSuf.KacWard.first_hit_prefix_meets_families_only_at_ends_necSuf",
+                "Ising2DLambda.KacWard.firstHitConnectingStaircase_meets_lifts_only_at_ends_from_necSuf",
+              ],
               verification: ["sagemath/check/first-hit-connecting-staircase"],
               statement: [
                 paragraph([
@@ -65116,6 +65239,17 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
               title: { text: "接続階段とその周期並進は二つの持ち上げを単純閉路へ閉じる" },
               labels: ["claim_periodic_lift_closure_is_simple_cycle"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.periodicLiftClosure_is_simple_cycle",
+                "Ising2DLambda.NecSuf.KacWard.four_segments_form_simple_closed_walk_necSuf",
+                "Ising2DLambda.KacWard.periodicLiftClosure_is_simple_cycle_from_necSuf",
+                "Ising2DLambda.KacWard.positivePeriodicMultiple_movesPoint",
+                "Ising2DLambda.NecSuf.KacWard.positive_period_multiple_moves_point_necSuf",
+                "Ising2DLambda.KacWard.positivePeriodicMultiple_movesPoint_from_necSuf",
+                "Ising2DLambda.KacWard.periodicLiftClosure_length",
+                "Ising2DLambda.NecSuf.KacWard.periodic_closure_length_necSuf",
+                "Ising2DLambda.KacWard.periodicLiftClosure_length_from_necSuf",
+              ],
               verification: ["sagemath/check/periodic-lift-closure-cycle"],
               statement: [
                 paragraph([
@@ -65237,6 +65371,13 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
               title: { text: "平行階段の各歩は平行座標を増やす単位歩である" },
               labels: ["claim_winding_parallel_staircase_step_increase"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.windingParallelStaircase_step_increase",
+                "Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase_step_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_step_increase_from_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_injOn",
+                "Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase_injOn_necSuf",
+              ],
               verification: ["sagemath/check/winding-parallel-staircase"],
               statement: [
                 paragraph([
@@ -65317,6 +65458,14 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
               title: { text: "平行階段の横断座標は両端の水準の間に収まる" },
               labels: ["claim_parallel_staircase_transverse_width_bound"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.windingParallelStaircase_transverse_width_bound",
+                "Ising2DLambda.NecSuf.KacWard.translatedPath_coordinate_between_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_transverse_width_bound_from_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_above_band_avoids_periodicPlaneLift",
+                "Ising2DLambda.NecSuf.KacWard.translatedPath_above_upper_avoids_family_necSuf",
+                "Ising2DLambda.KacWard.windingParallelStaircase_above_band_avoids_periodicPlaneLift_from_necSuf",
+              ],
               verification: ["sagemath/check/parallel-staircase-transverse-width"],
               statement: [
                 paragraph([
@@ -65405,6 +65554,10 @@ G^{\gamma}_{s+1}-G^{\gamma}_s
                 title: { text: "逆向きの周期持ち上げを使わない一側閉包" },
                 labels: ["def_one_sided_periodic_lift_closure"],
                 habitat: "Z",
+                lean: [
+                  "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure",
+                  "Ising2DLambda.NecSuf.KacWard.oneSidedFourSegmentPath",
+                ],
                 statement: [
                   paragraph([
                     "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -65464,6 +65617,11 @@ D^{\gamma,S,t}_{N-j},&cm+t\,n_{\perp}+c\,n_{\parallel}\le j\le N.
               title: { text: "一側閉包は閉じた単位格子路である" },
               labels: ["claim_one_sided_periodic_lift_closure_closed_unit_steps"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps",
+                "Ising2DLambda.NecSuf.KacWard.one_sided_four_segments_closed_steps_necSuf",
+                "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_closed_unit_steps_from_necSuf",
+              ],
               verification: ["sagemath/check/one-sided-periodic-lift-closure"],
               statement: [
                 paragraph([
@@ -65578,6 +65736,11 @@ F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
               title: { text: "一側閉包は終点を除いて頂点を繰り返さない" },
               labels: ["claim_one_sided_periodic_lift_closure_simple"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective",
+                "Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf",
+                "Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf",
+              ],
               verification: ["sagemath/check/one-sided-periodic-lift-closure"],
               statement: [
                 paragraph([
@@ -65723,6 +65886,11 @@ cL W_{\perp}(\gamma)
               title: { text: "頂点単純な閉単位格子路のトーラス射影は閉じた非後退辺列である" },
               labels: ["claim_plane_simple_cycle_projection_closed_nonbacktracking"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.planeSimpleCycleProjection_closedNonbacktracking",
+                "Ising2DLambda.NecSuf.KacWard.simple_cycle_projection_closed_nonbacktracking_necSuf",
+                "Ising2DLambda.KacWard.planeSimpleCycleProjection_closedNonbacktracking_from_necSuf",
+              ],
               verification: ["sagemath/check/plane-cycle-torus-projection"],
               statement: [
                 paragraph([
@@ -65870,6 +66038,11 @@ cL W_{\perp}(\gamma)
               title: { text: "射影の平面持ち上げは元の平面閉路の平行移動で巻き付きは零である" },
               labels: ["claim_projected_plane_cycle_lift_translation"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.projectedPlaneCycleLift_translation_and_winding_zero",
+                "Ising2DLambda.NecSuf.KacWard.projected_cycle_lift_translation_necSuf",
+                "Ising2DLambda.KacWard.projectedPlaneCycleLift_translation_and_winding_zero_from_necSuf",
+              ],
               verification: ["sagemath/check/plane-cycle-torus-projection"],
               statement: [
                 paragraph([
@@ -65982,6 +66155,11 @@ P_n(\gamma)
               title: { text: "一側閉包のトーラス射影の循環総回転数は正負 4 のいずれかである" },
               labels: ["claim_one_sided_closure_projection_cyclic_turning"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning",
+                "Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf",
+                "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning_from_necSuf",
+              ],
               verification: ["sagemath/check/one-sided-periodic-lift-closure"],
               statement: [
                 paragraph([

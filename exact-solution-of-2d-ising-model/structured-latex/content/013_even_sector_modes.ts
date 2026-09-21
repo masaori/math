@@ -90,7 +90,7 @@ export default defineBlocks([
     labels: ["why_008_applies_only_to_minus_sector"],
     statement: [
       paragraph([
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " の ",
         math(String.raw`\hat{Z}_\mu^{(\pm)}`),
         " と ",
@@ -207,9 +207,9 @@ export default defineBlocks([
         "Step 2（",
         math(String.raw`(-)`),
         " の場合）。",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " より ",
-        math(String.raw`\hat{Z}_\mu^{(-)} = \sum_{j=1}^{M} Z_j e^{-i\frac{2\pi j\mu}{M}}`),
+        math(String.raw`\hat{Z}_\mu^{(-)} = \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}Z_j`),
         "（",
         math(String.raw`j=1`),
         " の係数は ",
@@ -220,7 +220,7 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left[H_2,\ \hat{Z}_\mu^{(-)}\right]
 &= \left[H_2,\ \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}Z_j\right]
-   &&(\because \text{def\_hatZ\_hatY}) \\
+   &&(\because \text{def\_hatZ\_pm}) \\
 &= \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\left[H_2,\ Z_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\left(-2Y_j\right)
@@ -228,21 +228,21 @@ export default defineBlocks([
 &= -2\sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\,Y_j
    &&(\because \text{スカラー倍を有限和の外へ出す（分配律）}) \\
 &= -2\,\hat{Y}_\mu
-   &&(\because \text{def\_hatZ\_hatY})
+   &&(\because \text{def\_hatY})
 \end{aligned}`,
       ),
       paragraph([
         "（最初と最後の等号で使ったのは ",
-        ref("def_hatZ_hatY"),
-        " の ",
-        math(String.raw`\hat{Z}_\mu^{(-)}, \hat{Y}_\mu`),
+        ref("def_hatZ_pm"),
+        " と ",
+        ref("def_hatY"),
         " の定義である。）",
       ]),
       paragraph([
         "Step 3（",
         math(String.raw`(+)`),
         " の場合）。",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " より ",
         math(String.raw`\hat{Z}_\mu^{(+)}`),
         " は ",
@@ -317,39 +317,83 @@ export default defineBlocks([
     statement: [
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
-        " とし、",
+        " とする。自然数を整数へ送る標準包含 ",
+        math(String.raw`\iota_{\mathbb N\to\mathbb Z}:\mathbb N\to\mathbb Z`),
+        " と整数を実数へ送る標準包含 ",
+        math(String.raw`\iota_{\mathbb Z\to\mathbb R}:\mathbb Z\to\mathbb R`),
+        " は零、単位元、和、積、順序を保つものとする。また、",
+        ref("inclusion_rr_to_cc"),
+        " の実数から複素数への包含を用いる。",
+      ]),
+      displayMath(
+        String.raw`n_{\mathbb Z}:=\iota_{\mathbb N\to\mathbb Z}(n)\quad(n\in\mathbb N),
+\qquad a_{\mathbb R}:=\iota_{\mathbb Z\to\mathbb R}(a)\quad(a\in\mathbb Z),
+\qquad n_{\mathbb R}:=(n_{\mathbb Z})_{\mathbb R},
+\qquad a_{\mathbb C}:=(a_{\mathbb R})_{\mathbb C},
+\qquad n_{\mathbb C}:=(n_{\mathbb R})_{\mathbb C}`,
+      ),
+      paragraph([
+        "と書く。",
+        math(String.raw`M\ge2`),
+        " なので、",
+        math(String.raw`(M_{\mathbb N})_{\mathbb Z}=M`),
+        " を満たす一意な ",
+        math(String.raw`M_{\mathbb N}\in\mathbb N_{\ge2}`),
+        " がある。有限和の項数と周期デルタの法には ",
+        math(String.raw`M_{\mathbb N}`),
+        " を用いる。",
+      ]),
+      paragraph([
+        "順序を保つ包含写像により ",
+        math(String.raw`M_{\mathbb R}\ge2_{\mathbb R}>0_{\mathbb R}`),
+        " である。したがって ",
+        math(String.raw`M_{\mathbb R}\ne0_{\mathbb R}`),
+        " であり、さらに実数の零因子がないことから ",
+        math(String.raw`2M_{\mathbb R}\ne0_{\mathbb R}`),
+        " である。以下の分数はこの二つの非零性により定まる。",
+      ]),
+      paragraph([
+        "さらに、",
+        math(String.raw`\pi\in\mathbb R`),
+        " を円周率、",
+        math(String.raw`i:=(0_{\mathbb R},1_{\mathbb R})\in\mathbb C`),
+        " を虚数単位とする。複素数の差、零元、単位元、逆元には ",
+        ref("complex_numbers_form_a_field"),
+        " の体構造を用いる。とくに ",
+        math(String.raw`-1_{\mathbb C}\ne0_{\mathbb C}`),
+        " なので、",
+        math(String.raw`l\in\mathbb Z`),
+        " に対する ",
+        math(String.raw`(-1_{\mathbb C})^l`),
+        " は、非負の指数では積、負の指数では逆元の積として定まる整数冪である。 ",
         math(String.raw`\mu \in \mathbb{Z}`),
         " について",
       ]),
       displayMath(
-        String.raw`\tilde\theta_\mu := \frac{2\pi\left(\mu-\tfrac12\right)}{M} \in \mathbb{R}`,
+        String.raw`\tilde\theta_\mu := \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{M_{\mathbb R}} \in \mathbb{R}`,
       ),
       paragraph([
-        "とおく（ここで ",
+        "とおく。ここで ",
         math(String.raw`\mu \in \mathbb{Z}`),
-        " としているのは**記号 ",
+        " としているのは記号 ",
         math(String.raw`\tilde\theta_\mu`),
-        " の定義域**であって、主張を述べる添字の範囲ではない。主張の範囲は ",
-        ref("def_check_index_set"),
-        " で ",
-        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
-        " に絞る。下の指数和も ",
+        " の定義域である。以下の指数和では ",
         math(String.raw`\mu`),
         " を ",
         math(String.raw`1`),
         " から ",
-        math(String.raw`M`),
-        " まで、すなわち ",
-        math(String.raw`\check{\mathcal{M}}`),
-        " 全体にわたって取っている）。このとき ",
+        math(String.raw`M_{\mathbb N}`),
+        " までの自然数に限り、指数ではその整数像 ",
+        math(String.raw`\mu_{\mathbb Z}`),
+        " を用いる。このとき ",
         math(String.raw`k \in \mathbb{Z}`),
         " について",
       ]),
       displayMath(
-        String.raw`\sum_{\mu=1}^{M} e^{i k \tilde\theta_\mu}
+        String.raw`\sum_{\mu=1}^{M_{\mathbb N}} e^{i (k_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}}
 = \begin{cases}
-M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
-0 & (k \not\equiv 0 \pmod M)
+M_{\mathbb C}\,(-1_{\mathbb C})^{l} & (k = lM,\ l \in \mathbb{Z}) \\
+0_{\mathbb C} & (k \not\equiv 0 \pmod M)
 \end{cases}`,
       ),
       paragraph([
@@ -358,56 +402,158 @@ M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
         " かつ ",
         math(String.raw`k \neq 0`),
         " なら和は ",
-        math(String.raw`0`),
+        math(String.raw`0_{\mathbb C}`),
         "、",
         math(String.raw`k = 0`),
         " なら ",
-        math(String.raw`M`),
+        math(String.raw`M_{\mathbb C}`),
         " である。",
       ]),
     ],
     proof: [
+      paragraph(["最初に、自然数の項数と整数の格子幅の像を対応させる。包含写像の保存性より"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(M_{\mathbb N})_{\mathbb R}
+&=M_{\mathbb R}
+&&\bigl(\because\ (M_{\mathbb N})_{\mathbb Z}=M\bigr)\\
+(2M_{\mathbb N})_{\mathbb R}
+&=2M_{\mathbb R}
+&&\bigl(\because\ \iota_{\mathbb N\to\mathbb Z},\iota_{\mathbb Z\to\mathbb R}\text{ は積を保つ}\bigr)\\
+(M_{\mathbb N})_{\mathbb C}
+&=M_{\mathbb C}
+&&\bigl(\because\ (M_{\mathbb N})_{\mathbb R}=M_{\mathbb R}\bigr)\\
+(2M_{\mathbb N})_{\mathbb C}
+&=(2M)_{\mathbb C}
+&&\bigl(\because\ (2M_{\mathbb N})_{\mathbb R}=2M_{\mathbb R}\bigr).
+\end{aligned}`,
+      ),
       paragraph([
-        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi\mu}{M} - \dfrac{\pi}{M}`),
-        " である。以下、指数法則 ",
-        math(String.raw`e^{z+w} = e^{z}e^{w}`),
-        "（",
-        math(String.raw`z, w \in \mathbb{C}`),
-        "）としては ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n = 1`),
-        " すなわち ",
-        math(String.raw`\mathrm{Mat}(1,\mathbb{C}) = \mathbb{C}`),
-        " に適用したものを使う（",
-        math(String.raw`\mathbb{C}`),
-        " の積は可換なので仮定は満たされる）。これより",
+        "上で定めた像の記号により ",
+        math(String.raw`k_{\mathbb R}\tilde\theta_\mu`),
+        " は実数である。",
+      ]),
+      paragraph([
+        "実数 ",
+        math(String.raw`r\in\mathbb R`),
+        " の複素数への像は、",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb C}:=\iota_{\mathbb R\to\mathbb C}(r)`),
+        " で表す。主張の ",
+        math(String.raw`(k_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}`),
+        " は複素数であり、",
+        math(String.raw`i(k_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\in\mathbb C`),
+        " である。まず指数の実数部分を計算する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{\mu=1}^{M} e^{ik\tilde\theta_\mu}
-&= \sum_{\mu=1}^{M} e^{i k\left(\frac{2\pi\mu}{M} - \frac{\pi}{M}\right)}
-&&\bigl(\because\ \tilde\theta_\mu = \tfrac{2\pi\mu}{M} - \tfrac{\pi}{M}\bigr) \\
-&= \sum_{\mu=1}^{M} e^{i\frac{2\pi\mu k}{M}}\,e^{-i\frac{\pi k}{M}}
-&&\bigl(\because\ \text{theorem\_exp\_product}\ (n=1)\bigr) \\
-&= e^{-i\frac{\pi k}{M}}\sum_{\mu=1}^{M} e^{\frac{2\pi i \mu k}{M}}
-&&\bigl(\because\ \text{有限和から }\mu\text{ に依らない因子をくくり出す（分配律）}\bigr)
+k_{\mathbb R}\tilde\theta_\mu
+&=\frac{2\pi k_{\mathbb R}\left(\mu_{\mathbb R}-\frac12\right)}{M_{\mathbb R}}
+&&\bigl(\because\ \tilde\theta_\mu=\tfrac{2\pi(\mu_{\mathbb R}-\frac12)}{M_{\mathbb R}}\bigr)\\
+&=\frac{2\pi(2\mu_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}
+&&\bigl(\because\ M_{\mathbb R}\ne0_{\mathbb R},\ 2_{\mathbb R}\ne0_{\mathbb R}\text{ と }\mathbb R\text{ の分数の通分}\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって、求める和を",
+      ]),
+      displayMath(
+        String.raw`S_{M,k}:=\sum_{\mu=1}^{M_{\mathbb N}}
+e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}\in\mathbb C`,
+      ),
+      paragraph([
+        "と書ける。また、正の自然数 ",
+        math(String.raw`N\in\mathbb N_{\ge1}`),
+        " については、順序を保つ包含写像により ",
+        math(String.raw`N_{\mathbb R}\ge1_{\mathbb R}>0_{\mathbb R}`),
+        " なので ",
+        math(String.raw`N_{\mathbb R}\ne0_{\mathbb R}`),
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`T_{N,k}:=\sum_{r=1}^{N}e^{i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{N_{\mathbb R}}\right)_{\mathbb C}}\in\mathbb C
+\qquad(N\in\mathbb N_{\ge1})`,
+      ),
+      paragraph([
+        "とおく。整数 ",
+        math(String.raw`1,\ldots,2M_{\mathbb N}`),
+        " は、ただ一通り ",
+        math(String.raw`r=2\mu-1`),
+        " または ",
+        math(String.raw`r=2\mu`),
+        "（",
+        math(String.raw`1\le\mu\le M_{\mathbb N}`),
+        "）と書ける。ゆえに有限和を奇数番目と偶数番目へ分けると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{2M_{\mathbb N},k}
+&=\sum_{r=1}^{2M_{\mathbb N}}e^{i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(2M_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ T_{N,k}\text{ の定義に }N=2M_{\mathbb N}\text{ を代入}\bigr)\\
+&=\sum_{r=1}^{2M_{\mathbb N}}e^{i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ (2M_{\mathbb N})_{\mathbb R}=2M_{\mathbb R}\bigr)\\
+&=\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
++\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ r\text{ の奇偶による有限和の分割}\bigr)\\
+&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ S_{M,k}\text{ の定義}\bigr)\\
+&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{M_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ 2M_{\mathbb R}\ne0_{\mathbb R}\text{ と分数の約分}\bigr)\\
+&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(M_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C}}
+&&\bigl(\because\ (M_{\mathbb N})_{\mathbb R}=M_{\mathbb R}\bigr)\\
+&=S_{M,k}+T_{M_{\mathbb N},k}
+&&\bigl(\because\ T_{M_{\mathbb N},k}\text{ の定義}\bigr).
 \end{aligned}`,
       ),
       paragraph([
         ref("exp_sum"),
-        " より右端の和は ",
-        math(String.raw`M\,\delta^M_{(k,0)}`),
-        " である（",
+        " を正の整数 ",
+        math(String.raw`2M_{\mathbb N}`),
+        " と ",
+        math(String.raw`M_{\mathbb N}`),
+        " にそれぞれ適用し、",
         ref("def_delta_M"),
-        "）。",
+        " の記号を使うと",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{2M_{\mathbb N},k}
+&=(2M_{\mathbb N})_{\mathbb C}\,\delta^{2M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ \text{exp\_sum}\text{ を }2M_{\mathbb N}\text{ に適用}\bigr),\\
+&=(2M)_{\mathbb C}\,\delta^{2M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ (2M_{\mathbb N})_{\mathbb C}=(2M)_{\mathbb C}\bigr),\\
+T_{M_{\mathbb N},k}
+&=(M_{\mathbb N})_{\mathbb C}\,\delta^{M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ \text{exp\_sum}\text{ を }M_{\mathbb N}\text{ に適用}\bigr),\\
+&=M_{\mathbb C}\,\delta^{M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ (M_{\mathbb N})_{\mathbb C}=M_{\mathbb C}\bigr).
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_{M,k}
+&=T_{2M_{\mathbb N},k}-T_{M_{\mathbb N},k}
+&&\bigl(\because\ T_{2M_{\mathbb N},k}=S_{M,k}+T_{M_{\mathbb N},k}\bigr)\\
+&=(2M)_{\mathbb C}\,\delta^{2M_{\mathbb N}}_{(k,0)}-M_{\mathbb C}\,\delta^{M_{\mathbb N}}_{(k,0)}
+&&\bigl(\because\ \text{直前の二つの指数和}\bigr).
+\end{aligned}`,
+      ),
       paragraph([
         math(String.raw`k \not\equiv 0 \pmod M`),
-        " のときは ",
-        math(String.raw`\delta^M_{(k,0)} = 0`),
+        " のときは、",
+        math(String.raw`2M\mid k`),
+        " なら ",
+        math(String.raw`M\mid k`),
+        " となることの対偶から ",
+        math(String.raw`2M\nmid k`),
+        " でもある。したがって ",
+        math(String.raw`\delta^{2M_{\mathbb N}}_{(k,0)}=0_{\mathbb C}`),
+        " かつ ",
+        math(String.raw`\delta^{M_{\mathbb N}}_{(k,0)} = 0_{\mathbb C}`),
         " なので和は ",
-        math(String.raw`0`),
+        math(String.raw`0_{\mathbb C}`),
         "。",
       ]),
       paragraph([
@@ -415,92 +561,308 @@ M\,(-1)^{l} & (k = lM,\ l \in \mathbb{Z}) \\
         "（",
         math(String.raw`l \in \mathbb{Z}`),
         "）のときは ",
-        math(String.raw`\delta^M_{(k,0)} = 1`),
-        " であり、前因子は",
+        math(String.raw`\delta^{M_{\mathbb N}}_{(k,0)} = 1_{\mathbb C}`),
+        " である。また ",
+        math(String.raw`M\ne0`),
+        " なので、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-i\frac{\pi k}{M}}
-&= e^{-i\frac{\pi l M}{M}}
-&&\bigl(\because\ k = lM\bigr) \\
-&= e^{-i\pi l}
-&&\bigl(\because\ M\ge 2\text{ なので }M\ne0\text{、分数の約分}\bigr) \\
-&= \cos(\pi l) - i\sin(\pi l)
-&&\bigl(\because\ \text{euler\_formula\_cos\_sin}\bigr) \\
-&= (-1)^{l}
-&&\bigl(\because\ l \in \mathbb{Z} \text{ に対し } \cos(\pi l) = (-1)^l,\ \sin(\pi l) = 0\bigr)
+2M\mid k
+&\iff 2M\mid lM
+&&\bigl(\because\ k=lM\bigr)\\
+&\iff 2\mid l
+&&\bigl(\because\ M\ne0\text{ による整数の約分}\bigr).
 \end{aligned}`,
       ),
       paragraph([
-        "（",
-        math(String.raw`e^{-i\pi l} = \cos(\pi l) - i\sin(\pi l)`),
-        " は ",
-        ref("euler_formula_cos_sin"),
-        " による。）よって和は ",
-        math(String.raw`M(-1)^l`),
-        "。",
+        math(String.raw`l`),
+        " が偶数なら ",
+        math(String.raw`\delta^{2M_{\mathbb N}}_{(k,0)}=1_{\mathbb C}`),
+        " なので",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_{M,k}
+&=(2M)_{\mathbb C}\cdot1_{\mathbb C}-M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ \delta^{2M_{\mathbb N}}_{(k,0)}=\delta^{M_{\mathbb N}}_{(k,0)}=1_{\mathbb C}\bigr)\\
+&=(2M)_{\mathbb C}-M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ (2M)_{\mathbb C}\cdot1_{\mathbb C}=(2M)_{\mathbb C}\bigr)\\
+&=(2M)_{\mathbb C}-M_{\mathbb C}
+&&\bigl(\because\ M_{\mathbb C}\cdot1_{\mathbb C}=M_{\mathbb C}\bigr)\\
+&=M_{\mathbb C}
+&&\bigl(\because\ (2M)_{\mathbb C}-M_{\mathbb C}=M_{\mathbb C}\bigr)\\
+&=M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元}\bigr)\\
+&=M_{\mathbb C}(-1_{\mathbb C})^l
+&&\bigl(\because\ l\text{ が偶数なら }(-1_{\mathbb C})^l=1_{\mathbb C}\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`l`),
+        " が奇数なら ",
+        math(String.raw`\delta^{2M_{\mathbb N}}_{(k,0)}=0_{\mathbb C}`),
+        " なので",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_{M,k}
+&=(2M)_{\mathbb C}\cdot0_{\mathbb C}-M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ \delta^{2M_{\mathbb N}}_{(k,0)}=0_{\mathbb C},\ \delta^{M_{\mathbb N}}_{(k,0)}=1_{\mathbb C}\bigr)\\
+&=0_{\mathbb C}-M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ (2M)_{\mathbb C}\cdot0_{\mathbb C}=0_{\mathbb C}\bigr)\\
+&=0_{\mathbb C}-M_{\mathbb C}
+&&\bigl(\because\ M_{\mathbb C}\cdot1_{\mathbb C}=M_{\mathbb C}\bigr)\\
+&=-M_{\mathbb C}
+&&\bigl(\because\ 0_{\mathbb C}-M_{\mathbb C}=-M_{\mathbb C}\bigr)\\
+&=M_{\mathbb C}(-1_{\mathbb C})
+&&\bigl(\because\ -M_{\mathbb C}=M_{\mathbb C}(-1_{\mathbb C})\bigr)\\
+&=M_{\mathbb C}(-1_{\mathbb C})^l
+&&\bigl(\because\ l\text{ が奇数なら }(-1_{\mathbb C})^l=-1_{\mathbb C}\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "最後に「とくに」を示す。",
+        math(String.raw`|k|<M`),
+        " かつ ",
+        math(String.raw`k\ne0`),
+        " とする。もし ",
+        math(String.raw`M\mid k`),
+        " なら、ある ",
+        math(String.raw`l\in\mathbb{Z}`),
+        " が存在して ",
+        math(String.raw`k=lM`),
+        " である。このとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|lM|
+&=|l|\,|M|
+&&\bigl(\because\ \text{積の絶対値}\bigr)\\
+&=|l|M
+&&\bigl(\because\ M>0\text{ なので }|M|=M\bigr)\\
+&= |k|
+&&\bigl(\because\ k=lM\bigr) \\
+&< M
+&&\bigl(\because\ |k|<M\bigr),
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`M>0`),
+        " なので、整数における正数倍は狭義順序を反映する。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|l|
+&<1
+&&\bigl(\because\ |l|M<1\cdot M,\ M>0\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "一方、整数 ",
+        math(String.raw`l`),
+        " の絶対値は非負整数なので、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+|l|
+&=0
+&&\bigl(\because\ |l|\in\mathbb{Z}_{\ge0},\ |l|<1\bigr) \\
+l
+&=0
+&&\bigl(\because\ |l|=0\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+k
+&=lM
+&&\bigl(\because\ k=lM\bigr) \\
+&=0\cdot M
+&&\bigl(\because\ l=0\bigr) \\
+&=0
+&&\bigl(\because\ 0\cdot M=0\bigr),
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり ",
+        math(String.raw`0`),
+        " ではないという仮定 ",
+        math(String.raw`k\ne0`),
+        " に矛盾する。ゆえに ",
+        math(String.raw`M\nmid k`),
+        " であり、上の非整除の場合から和は ",
+        math(String.raw`0_{\mathbb C}`),
+        " である。また ",
+        math(String.raw`k=0`),
+        " では ",
+        math(String.raw`l=0`),
+        " とした整除の場合により",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+M_{\mathbb C}(-1_{\mathbb C})^0
+&=M_{\mathbb C}\cdot1_{\mathbb C}
+&&\bigl(\because\ (-1)^0=1\bigr) \\
+&=M_{\mathbb C}
+&&\bigl(\because\ M_{\mathbb C}\cdot1_{\mathbb C}=M_{\mathbb C}\bigr).
+\end{aligned}`,
+      ),
+      paragraph(["となる。"]),
     ],
     conversion: { status: "added" },
   },
 
   {
-    id: "evensector_003_definition_half_integer_modes",
+    id: "evensector_003_definition_half_integer_checkZ",
     kind: "definition",
     origin: { path: SRC, ordinal: 5 },
-    title: { tex: String.raw`\check{Z}_\mu, \check{Y}_\mu \text{（半整数運動量モード）}` },
+    title: { tex: String.raw`\check{Z}_\mu \text{（半整数運動量で Fourier 変換した }Z\text{ 行列）}` },
+    labels: ["def_half_integer_checkZ"],
+    statement: [
+      paragraph([
+        ref("set_and_algebra_notation"),
+        " の記号で ",
+        math(String.raw`M\in\mathbb Z_{\geq2}`),
+        " とする。",
+        ref("antiperiodic_exp_sum"),
+        " で定めた ",
+        math(String.raw`M_{\mathbb N}\in\mathbb N_{\geq2}`),
+        "、整数・実数への像 ",
+        math(String.raw`j_{\mathbb Z},j_{\mathbb R}`),
+        "、および各 ",
+        math(String.raw`\mu\in\mathbb Z`),
+        " に対する ",
+        math(String.raw`\tilde\theta_\mu\in\mathbb R`),
+        " を用いる。複素数と虚数単位は ",
+        ref("definition_of_cc"),
+        " の ",
+        math(String.raw`\mathbb C`),
+        " と ",
+        math(String.raw`i=(0_{\mathbb R},1_{\mathbb R})\in\mathbb C`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`j\in\{1,\dots,M_{\mathbb N}\}`),
+        " なら ",
+        math(String.raw`j_{\mathbb Z}\in\{1,\dots,M\}`),
+        " なので、",
+        ref("def_jordan_wigner_Z_matrices"),
+        " から ",
+        math(String.raw`Z_{j_{\mathbb Z}}\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`),
+        " である。複素指数の定義と所属は現行本文では未整備なので、以下では ",
+        math(String.raw`e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}\in\mathbb C`),
+        " を仮定する。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
+      ]),
+      displayMath(
+        String.raw`\check{Z}_\mu
+:=\sum_{j=1}^{M_{\mathbb N}}
+e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Z_{j_{\mathbb Z}}
+\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`,
+      ),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "旧複合ブロックから、半整数運動量で Fourier 変換した Z 行列の定義だけを分離した。旧複合ラベルは性質の残余ブロックに残し、本定義には新しいラベル def_half_integer_checkZ を割り当てた。",
+        "hat Z との係数の比較は意味上の前提ではないため、依存辺には含めていない。複素指数の先行定義と所属証明は現行本文に無く、その所属を仮定した条件付きの定義である。",
+      ],
+    },
+  },
+
+  {
+    id: "evensector_003_definition_half_integer_checkY",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 5 },
+    title: { tex: String.raw`\check{Y}_\mu \text{（半整数運動量で Fourier 変換した }Y\text{ 行列）}` },
+    labels: ["def_half_integer_checkY"],
+    statement: [
+      paragraph([
+        ref("set_and_algebra_notation"),
+        " の記号で ",
+        math(String.raw`M\in\mathbb Z_{\geq2}`),
+        " とする。",
+        ref("antiperiodic_exp_sum"),
+        " で定めた ",
+        math(String.raw`M_{\mathbb N}\in\mathbb N_{\geq2}`),
+        "、整数・実数への像 ",
+        math(String.raw`j_{\mathbb Z},j_{\mathbb R}`),
+        "、および各 ",
+        math(String.raw`\mu\in\mathbb Z`),
+        " に対する ",
+        math(String.raw`\tilde\theta_\mu\in\mathbb R`),
+        " を用いる。複素数と虚数単位は ",
+        ref("definition_of_cc"),
+        " の ",
+        math(String.raw`\mathbb C`),
+        " と ",
+        math(String.raw`i=(0_{\mathbb R},1_{\mathbb R})\in\mathbb C`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`j\in\{1,\dots,M_{\mathbb N}\}`),
+        " なら ",
+        math(String.raw`j_{\mathbb Z}\in\{1,\dots,M\}`),
+        " なので、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " から ",
+        math(String.raw`Y_{j_{\mathbb Z}}\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`),
+        " である。複素指数の定義と所属は現行本文では未整備なので、以下では ",
+        math(String.raw`e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}\in\mathbb C`),
+        " を仮定する。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
+      ]),
+      displayMath(
+        String.raw`\check{Y}_\mu
+:=\sum_{j=1}^{M_{\mathbb N}}
+e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Y_{j_{\mathbb Z}}
+\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`,
+      ),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "旧複合ブロックから、半整数運動量で Fourier 変換した Y 行列の定義だけを分離した。旧複合ラベルは性質の残余ブロックに残し、本定義には新しいラベル def_half_integer_checkY を割り当てた。",
+        "複素指数の先行定義と所属証明は現行本文に無く、その所属を仮定した条件付きの定義である。",
+      ],
+    },
+  },
+
+  {
+    id: "evensector_003_definition_half_integer_modes",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 5 },
+    title: { text: "半整数位相と Fourier 行列の周期性" },
     labels: ["def_half_integer_modes"],
     statement: [
       paragraph([
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M\in\mathbb Z_{\geq2}`),
         "、",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " とし、",
+        math(String.raw`\mu\in\mathbb Z`),
+        " とする。",
         ref("antiperiodic_exp_sum"),
         " の ",
-        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi(\mu-\frac12)}{M}`),
-        " を用いて",
+        math(String.raw`\tilde\theta_\mu`),
+        " と、",
+        ref("def_half_integer_checkZ"),
+        "、",
+        ref("def_half_integer_checkY"),
+        " の Fourier 行列について、次の 4 つの性質が成り立つ。",
       ]),
-      displayMath(
-        String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,e^{-i j\tilde\theta_\mu},\qquad
-\check{Y}_\mu := \sum_{j=1}^{M} Y_j\,e^{-i j\tilde\theta_\mu}
-\ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
-      ),
-      paragraph([
-        "と定める（",
-        math(String.raw`Z_j, Y_j`),
-        " は ",
-        ref("def_transfer_matrix_symbols"),
-        " のもの）。",
-        ref("def_hatZ_hatY"),
-        " の ",
-        math(String.raw`\hat{Z}_\mu^{(\pm)}`),
-        " と違い、**係数に例外項が無い**（すべての ",
-        math(String.raw`j`),
-        " で係数は ",
-        math(String.raw`e^{-ij\tilde\theta_\mu}`),
-        "）。",
-      ]),
-      paragraph([
-        "**定義域を ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " としているのは、下の (2)（添字の周期性）を述べるためである。** 主張を述べる添字の範囲は ",
-        ref("def_check_index_set"),
-        " の ",
-        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
-        " に絞る。以降 ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " 全体で述べるのは、この (2) と ",
-        ref("periodicity_of_check_fermi"),
-        " の 2 つだけである。",
-      ]),
-      paragraph(["次の 3 つの性質を後で繰り返し使う。"]),
+      paragraph(["次の 4 つの性質を後で繰り返し使う。"]),
       list([
         [
           math(String.raw`\text{(1) 反周期性：}\quad e^{-i M \tilde\theta_\mu} = -1`),
         ],
         [
-          math(String.raw`\text{(2) 添字の周期性：}\quad \check{Z}_{\mu+M} = \check{Z}_\mu,\quad \check{Y}_{\mu+M} = \check{Y}_\mu`),
+          math(String.raw`\text{(2) 添字の周期性（}Z\text{）：}\quad \check{Z}_{\mu+M} = \check{Z}_\mu`),
+        ],
+        [
+          math(String.raw`\text{(2) 添字の周期性（}Y\text{）：}\quad \check{Y}_{\mu+M} = \check{Y}_\mu`),
         ],
         [
           math(String.raw`\text{(3) 共役添字：}\quad \tilde\theta_{1-\mu} = -\tilde\theta_\mu`),
@@ -627,7 +989,7 @@ e^{-ij\tilde\theta_{\mu+M}}
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         " とし、",
-        ref("def_half_integer_modes"),
+        ref("antiperiodic_exp_sum"),
         " の ",
         math(String.raw`\tilde\theta_\mu`),
         "（",
@@ -639,7 +1001,7 @@ e^{-ij\tilde\theta_{\mu+M}}
       ),
       paragraph([
         "と定める。008 章で整数運動量の添字集合が ",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " の ",
         math(String.raw`\mathcal{M} = \{-M,\dots,-1,1,\dots,M\}`),
         " だったのに対応する、**半整数運動量側の添字集合**である。",
@@ -649,9 +1011,23 @@ e^{-ij\tilde\theta_{\mu+M}}
         math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
         " について述べる。** ",
         math(String.raw`\mu \in \mathbb{Z}`),
-        " 全体で述べるのは、記号 ",
-        math(String.raw`\tilde\theta_\mu, \check{Z}_\mu, \check{Y}_\mu, \check\psi_\mu`),
-        " の**定義域**と、添字の周期性を述べる 2 つの主張 ",
+        " 全体で述べる記号の**定義域**は、",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`\tilde\theta_\mu`),
+        "、",
+        ref("def_half_integer_checkZ"),
+        " の ",
+        math(String.raw`\check Z_\mu`),
+        "、",
+        ref("def_half_integer_checkY"),
+        " の ",
+        math(String.raw`\check Y_\mu`),
+        "、および後の ",
+        ref("periodicity_of_check_fermi"),
+        " で用いる ",
+        math(String.raw`\check\psi_\mu`),
+        " である。添字の周期性を述べる 2 つの主張は ",
         ref("def_half_integer_modes"),
         " (2) と ",
         ref("periodicity_of_check_fermi"),
@@ -1346,26 +1722,30 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
         "Step 2（(C)(D)）。交換子は第 2 引数について ",
         math(String.raw`\mathbb{C}`),
         " 線型なので、Step 1 の第 1 式と ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         " より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left[H_2,\ \check{Z}_\mu\right]
 &= \left[H_2,\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j\right]
-   &&(\because \text{def\_half\_integer\_modes}) \\
+   &&(\because \blkref{def_half_integer_checkZ}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_2,\ Z_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2Y_j\right)
    &&(\because \text{Step 1 の第 1 式}) \\
 &= -2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j \\
 &= -2\,\check{Y}_\mu
-   &&(\because \text{def\_half\_integer\_modes})
+   &&(\because \blkref{def_half_integer_checkY})
 \end{aligned}`,
       ),
       paragraph([
         "（最初と最後の等号は ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         " の ",
         math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
         " の定義による。）Step 1 の第 2 式 ",
@@ -1376,7 +1756,7 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
         String.raw`\begin{aligned}
 \left[H_2,\ \check{Y}_\mu\right]
 &= \left[H_2,\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
-   &&(\because \text{def\_half\_integer\_modes}) \\
+   &&(\because \blkref{def_half_integer_checkY}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_2,\ Y_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\cdot 2Z_j
@@ -1384,7 +1764,7 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 &= 2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j
    &&(\because \text{スカラー倍を和の外へ出す}) \\
 &= 2\,\check{Z}_\mu
-   &&(\because \text{def\_half\_integer\_modes})
+   &&(\because \blkref{def_half_integer_checkZ})
 \end{aligned}`,
       ),
       paragraph([
@@ -1427,7 +1807,7 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ \check{Z}_\mu\right]
 &= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j\right]
-   &&(\because \blkref{def_half_integer_modes}) \\
+   &&(\because \blkref{def_half_integer_checkZ}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Z_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\cdot 2\,Y_{j-1}^{\flat}
@@ -1445,7 +1825,7 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
 &= 2\,e^{-i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Y_l
    &&(\because 1 \leq l \leq M \text{ では } Y_l^{\flat} = Y_l) \\
 &= 2\,e^{-i\tilde\theta_\mu}\,\check{Y}_\mu
-   &&(\because \blkref{def_half_integer_modes})
+   &&(\because \blkref{def_half_integer_checkY})
 \end{aligned}`,
       ),
       paragraph([
@@ -1485,7 +1865,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ \check{Y}_\mu\right]
 &= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
-   &&(\because \blkref{def_half_integer_modes}) \\
+   &&(\because \blkref{def_half_integer_checkY}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Y_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2\,Z_{j+1}^{\flat}\right)
@@ -1503,7 +1883,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
 &= -2\,e^{i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Z_l
    &&(\because 1 \leq l \leq M \text{ では } Z_l^{\flat} = Z_l) \\
 &= -2\,e^{i\tilde\theta_\mu}\,\check{Z}_\mu
-   &&(\because \blkref{def_half_integer_modes})
+   &&(\because \blkref{def_half_integer_checkZ})
 \end{aligned}`,
       ),
     ],
@@ -1586,7 +1966,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         " 双線型（",
         math(String.raw`[\alpha X,\beta W]_+ = \alpha\beta[X,W]_+`),
         "）なので、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
         "、",
         ref("anticommutator_of_Z_and_Y"),
         "、",
@@ -1603,7 +1983,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu, \check{Z}_\nu\right]_+
 &= \left[\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j,\ \sum_{k=1}^{M} e^{-ik\tilde\theta_\nu}Z_k\right]_+
-   &&\bigl(\because \text{def\_half\_integer\_modes}\bigr) \\
+   &&\bigl(\because \blkref{def_half_integer_checkZ}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ik\tilde\theta_\nu}
    \left[Z_j, Z_k\right]_+
    &&\bigl(\because \text{反交換子の } \mathbb{C} \text{ 双線型性}\bigr) \\
@@ -1625,7 +2005,9 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
       ),
       paragraph([
         "第 2 式は、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         " と ",
         ref("anticommutator_of_Z_and_Y"),
         " の ",
@@ -1636,7 +2018,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu,\check{Y}_\nu\right]_+
 &= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Z_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
-   &&\bigl(\because \text{def\_half\_integer\_modes}\bigr) \\
+   &&\bigl(\because \blkref{def_half_integer_checkZ},\ \blkref{def_half_integer_checkY}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Z_j,Y_k]_+
    &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 0
@@ -1647,7 +2029,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
       ),
       paragraph([
         "第 3 式も、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkY"),
         "、",
         ref("anticommutator_of_Z_and_Y"),
         " の ",
@@ -1666,7 +2048,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[\check{Y}_\mu,\check{Y}_\nu\right]_+
 &= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Y_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
-   &&\bigl(\because \text{def\_half\_integer\_modes}\bigr) \\
+   &&\bigl(\because \blkref{def_half_integer_checkY}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Y_j,Y_k]_+
    &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 2I\,\delta^M_{(j,k)}
@@ -1761,7 +2143,7 @@ M & (j = k) \\
       ),
       paragraph([
         "である。第 1 式は、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
         " と ",
         ref("theorem_exp_product"),
         " と準備の等式を順に使うと、一続きに",
@@ -1770,7 +2152,7 @@ M & (j = k) \\
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{ij\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_\mu}\right)e^{ij\tilde\theta_\mu}
-&&(\because \text{def\_half\_integer\_modes}) \\
+&&(\because \blkref{def_half_integer_checkZ}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_\mu}\,e^{ij\tilde\theta_\mu}
 &&(\because \text{有限和への分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,e^{i(j-k)\tilde\theta_\mu}
@@ -1785,7 +2167,7 @@ M & (j = k) \\
       ),
       paragraph([
         "第 2 式も、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkY"),
         " の ",
         math(String.raw`\check{Y}_\mu`),
         " の定義から同じ根拠の並びで、一続きに",
@@ -1794,7 +2176,7 @@ M & (j = k) \\
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{ij\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\right)e^{ij\tilde\theta_\mu}
-&&(\because \text{def\_half\_integer\_modes}) \\
+&&(\because \blkref{def_half_integer_checkY}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\,e^{ij\tilde\theta_\mu}
 &&(\because \text{有限和への分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{i(j-k)\tilde\theta_\mu}
@@ -1869,7 +2251,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
     proof: [
       paragraph([
         "まず ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
         " と ",
         ref("conjugate_index_of_check_Z_Y"),
         " (2) から ",
@@ -1880,7 +2262,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
         String.raw`\begin{aligned}
 \check{Z}_{M+1-\mu}
 &= \sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_{M+1-\mu}}
-&& (\because \text{def\_half\_integer\_modes}) \\
+&& (\because \blkref{def_half_integer_checkZ}) \\
 &= \sum_{k=1}^{M} Z_k\,e^{ik\tilde\theta_\mu}
 && (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)})
 \end{aligned}`,
@@ -1899,7 +2281,9 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
         "、そうでないとき ",
         math(String.raw`0`),
         " である。これと ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         "、",
         ref("theorem_exp_product"),
         "、",
@@ -1911,7 +2295,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{M+1-\mu}\check{Y}_\mu
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right)
    \left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
-&& (\because \text{準備した }\check Z_{M+1-\mu}\text{ の表示と def\_half\_integer\_modes}) \\
+&& (\because \text{準備した }\check Z_{M+1-\mu}\text{ の表示と }\blkref{def_half_integer_checkY}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
    e^{ik\tilde\theta_\mu}e^{-ij\tilde\theta_\mu}
 && (\because \text{積を二重和へ分配}) \\
@@ -1978,7 +2362,9 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
       ]),
       paragraph([
         "したがって、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         "、",
         ref("theorem_exp_product"),
         "、",
@@ -1990,7 +2376,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{M+1-\mu}e^{-i\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
    \left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right) e^{-i\tilde\theta_\mu}
-&& (\because \text{def\_half\_integer\_modes と準備した } \check{Z}_{M+1-\mu} \text{ の表示}) \\
+&& (\because \blkref{def_half_integer_checkY}\text{ と準備した } \check{Z}_{M+1-\mu} \text{ の表示}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
    e^{-ij\tilde\theta_\mu}e^{ik\tilde\theta_\mu}e^{-i\tilde\theta_\mu}
 && (\because \text{積を二重和へ分配}) \\

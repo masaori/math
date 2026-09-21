@@ -7,7 +7,8 @@
 - ファイル: `structured-latex/content/013_even_sector_modes.ts`
 - 併せて検証:
   - `why_008_applies_only_to_minus_sector`（008 章が `(−)` 専用である理由）
-  - `antiperiodic_exp_sum` / `def_half_integer_modes`
+  - `antiperiodic_exp_sum` / `def_half_integer_checkZ` / `def_half_integer_checkY` /
+    `def_half_integer_modes`
   - `commutator_of_H_and_check_Z_Y`（(A)〜(D)）
   - `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y`
 

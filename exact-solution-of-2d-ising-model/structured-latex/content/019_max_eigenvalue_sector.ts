@@ -691,7 +691,7 @@ x^\top W x
         "が成り立つ（",
         math(String.raw`\tilde\theta_\mu`),
         " は ",
-        ref("def_half_integer_modes"),
+        ref("antiperiodic_exp_sum"),
         " の半整数運動量、",
         math(String.raw`\gamma`),
         " は ",

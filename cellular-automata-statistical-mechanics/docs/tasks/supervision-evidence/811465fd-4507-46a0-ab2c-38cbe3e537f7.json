@@ -1,0 +1,30 @@
+{
+  "実行識別子": "811465fd-4507-46a0-ab2c-38cbe3e537f7",
+  "観測時刻": "2026-09-20T20:55:46+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.cellular-automata-auto-loop",
+    "state": "not running",
+    "runs": 24,
+    "last exit code": 1
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist",
+    "存在": true,
+    "sha256": "c38cadc881e1716015ff02c973244a9afc3e54960d96b6d9f2540d8f34324573",
+    "StartCalendarInterval": "毎時12分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-20T20:55:46+09:00",
+    "path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/auto-loop.log",
+    "終端": "2026-09-20 20:13:04、専用worktreeがorigin/mainから分岐してfast-forward取込に失敗。直前の17:41:56はexit 124の打ち切り、未コミット0ファイル。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 24・last exit 1。現行実ログの最新回は20:13:04のfast-forward取込失敗なので異常終了とする。過去の正常終了を今回値へ流用していない。",
+  "成果比較": {
+    "開始成果": "21b2c7eeaba62b028eb5f4f32a43d117099915c7",
+    "前回監督の読解終点": "9ecb996453625a3ff12eed89b1f2684f37b5790d",
+    "今回読解終点": "21b2c7eeaba62b028eb5f4f32a43d117099915c7",
+    "前回監督以後": "箱玉系の組合せRとエネルギー関数の定義域・適合条件を一次文献で固定し、有限内部表の可換性・整数差分・正規化・高々可算な持ち上げ・型付き三体Yang--Baxter条件を構造化本文へ分離した。"
+  }
+}

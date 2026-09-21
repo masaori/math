@@ -9,6 +9,6 @@ $\kappa_\gamma(\widetilde P_k^{[u]})=\kappa_\gamma(\widetilde P_k)+uW_\perp$ を
 $u$ 側の横断座標が $v$ 側より真に小さく、点も異なることを検査する。
 
 - 実行: `sage sagemath/check/transverse-translates-of-periodic-plane-lift/check.sage`
-- 状態: PASS（2026-09-01）。非零巻き付きの頂点単純閉路 3,464 本について、横断座標の等式
+- 状態: PASS（2026-09-21）。非零巻き付きの頂点単純閉路 3,464 本について、横断座標の等式
   520,632 件と、横断幅を超えて離した点対 21,566,088 組を検査した。
 - 計算: 有限列挙と `ZZ` の四則・順序だけ。浮動小数点は使わない。
