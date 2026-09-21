@@ -10,7 +10,15 @@ namespace Ising2DLambda.KacWard
 /-- `claim_interior_cell_set_edge_connected` を必要十分版から導く。 -/
 theorem interiorCellSet_nonempty_edgeConnected_from_necSuf
     (n : ℕ) (row col : ℕ → ℤ) (hn : 0 < n)
-    (hnonempty : ∀ k < n, (surroundingInteriorCells n row col k).Nonempty)
+    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
+    (hunit : IsUnitGridWalk n row col)
+    (hdistinct : ∀ k l, k < n → l < n →
+      row k = row l → col k = col l → k = l)
+    (hedgeSimple : ∀ k, k < n →
+      verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
+      verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1)
     (hlocal : ∀ k < n, EdgeConnectedCellSet (surroundingInteriorCells n row col k))
     (hbridge : ∀ k, k + 1 < n → ∃ p,
       p ∈ surroundingInteriorCells n row col k ∧
@@ -25,6 +33,6 @@ theorem interiorCellSet_nonempty_edgeConnected_from_necSuf
     (oddRayInteriorCells n row col).Nonempty ∧
       EdgeConnectedCellSet (oddRayInteriorCells n row col) :=
   interiorCellSet_nonempty_edgeConnected
-    n row col hn hnonempty hlocal hbridge hreaches
+    n row col hn hclosedRow hclosedCol hunit hdistinct hedgeSimple hlocal hbridge hreaches
 
 end Ising2DLambda.KacWard
