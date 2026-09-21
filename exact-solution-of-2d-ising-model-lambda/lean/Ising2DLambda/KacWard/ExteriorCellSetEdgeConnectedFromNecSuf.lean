@@ -10,11 +10,19 @@ namespace Ising2DLambda.KacWard
 /-- `claim_exterior_cell_set_edge_connected` を必要十分版から導く。 -/
 theorem exteriorCellSet_nonempty_edgeConnected_from_necSuf
     (n : ℕ) (row col : ℕ → ℤ) (rMin rMax cMin cMax : ℤ) (hn : 0 < n)
+    (hclosedRow : row n = row 0) (hclosedCol : col n = col 0)
+    (hunit : IsUnitGridWalk n row col)
+    (hdistinct : ∀ k l, k < n → l < n →
+      row k = row l → col k = col l → k = l)
+    (hedgeSimple : ∀ k, k < n →
+      verticalEdgeTraversalCount n row col (row k - 1) (col k) ≤ 1 ∧
+      verticalEdgeTraversalCount n row col (row k) (col k) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k - 1) ≤ 1 ∧
+      horizontalEdgeTraversalCount n row col (row k) (col k) ≤ 1)
     (houtsideSubset : outsideBoundingRectangle rMin rMax cMin cMax ⊆
       exteriorCells n row col)
     (houtsideConnected : EdgeConnectedCellSet
       (outsideBoundingRectangle rMin rMax cMin cMax))
-    (hbandNonempty : ∀ k < n, (surroundingExteriorCells n row col k).Nonempty)
     (hbandLocal : ∀ k < n,
       EdgeConnectedCellSet (surroundingExteriorCells n row col k))
     (hbandBridge : ∀ k, k + 1 < n → ∃ p,
@@ -35,8 +43,8 @@ theorem exteriorCellSet_nonempty_edgeConnected_from_necSuf
     (exteriorCells n row col).Nonempty ∧
       EdgeConnectedCellSet (exteriorCells n row col) :=
   exteriorCellSet_nonempty_edgeConnected
-    n row col rMin rMax cMin cMax hn
+    n row col rMin rMax cMin cMax hn hclosedRow hclosedCol hunit hdistinct hedgeSimple
     houtsideSubset houtsideConnected
-    hbandNonempty hbandLocal hbandBridge hoverlap hreaches
+    hbandLocal hbandBridge hoverlap hreaches
 
 end Ising2DLambda.KacWard
