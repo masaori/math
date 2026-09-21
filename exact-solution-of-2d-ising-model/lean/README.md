@@ -7,7 +7,7 @@ SageMath による数値検証（`sagemath/`）と併用する。
 （`.mjs` は全廃済み。ファイル形式は TypeScript に統一されている）。
 旧 Typst 一式は `_old/typst/` へ参照用に退避されており（更新されない）、
 本 README で `parts/…/*.typ` と書いているのは `_old/typst/parts/…` のことである。
-対応づけは**ラベル**（`labels` フィールド、例 `def_hatZ_hatY`）で辿る。
+対応づけは**ラベル**（`labels` フィールド、例 `def_hatZ_pm`）で辿る。
 
 ## セットアップ
 
@@ -292,11 +292,12 @@ EOF
 | `Ising2D.acomm_sum_smul` / `acomm_sum_smul_left` | 反交換子の双線型性（有限線型結合の展開） | 補助（原文は暗黙に使用） |
 | `Ising2D.ZY_linearIndependent` | `(Z_1,…,Z_M,Y_1,…,Y_M)` は線型独立 | `004/001`（**原文は TODO**） |
 | `Ising2D.ZYSet_linearIndepOn` | 同上を集合 `S` の形で述べた版 | 同上 |
-| `Ising2D.expPhase` | 位相因子 `exp(-√-1·2πk/M)`（`k : ℤ`） | `<def_hatZ_hatY>` |
+| `Ising2D.expPhase` | 位相因子 `exp(-√-1·2πk/M)`（`k : ℤ`） | `<def_hatZ_pm>` / `<def_hatY>`（中立な先行定義への分離は次の作業単位） |
 | `Ising2D.expPhase_eq_one_iff` | `exp(-√-1·2πk/M) = 1 ⟺ M ∣ k` | `<exp_sum>` (a)(b) の場合分け |
 | `Ising2D.expPhase_sum` | `∑_{j=1}^M exp(-√-1·2πjk/M) = M δ^M_{k,0}` | `<exp_sum>` |
 | `Ising2D.deltaMod` | `δ^M_{(μ,ν)}` の整数添字版 | `parts/004/007_definition_…` |
-| `Ising2D.hatZ` / `hatZPlus` / `hatZMinus` / `hatY` | `hat(Z)_μ^{(±)}`, `hat(Y)_μ` | `<def_hatZ_hatY>` |
+| `Ising2D.hatZ` / `hatZPlus` / `hatZMinus` | `hat(Z)_μ^{(±)}` | `<def_hatZ_pm>` |
+| `Ising2D.hatY` | `hat(Y)_μ` | `<def_hatY>` |
 | `Ising2D.hatZMinus_eq` | `hat(Z)^{(-)}` は一様和 | `<recover_Z_Y_from_hatZ_hatY>` 冒頭 |
 | `Ising2D.hatZ_periodic` / `hatY_periodic` | `hat(Z)_{μ+M} = hat(Z)_μ` ほか（一般の `μ`） | `<hatZ_hatY_M_periodicity>` の一般化 |
 | `Ising2D.hatZMinus_M_eq_neg_M` / `hatY_M_eq_neg_M` | `hat(Z)_M^{(-)} = hat(Z)_{-M}^{(-)}` ほか | `<hatZ_hatY_M_periodicity>` |

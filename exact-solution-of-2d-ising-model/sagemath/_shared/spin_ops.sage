@@ -10,8 +10,8 @@
 #   - Y_m := sigma_1^x ... sigma_{m-1}^x sigma_m^y   : 同上
 #   - H_1^{(pm)} := Y_1 Z_2 + ... + Y_{M-1} Z_M -+ Y_M Z_1 : 同上（H1_H2 の定義）
 #   - H_2 := Z_1 Y_1 + ... + Z_M Y_M                : 同上
-#   - hatZ_mu^{(pm)} := -+ Z_1 e^{-i 2 pi mu/M} + sum_{j=2}^M Z_j e^{-i 2 pi j mu/M} : def_hatZ_hatY
-#   - hatY_mu        := sum_{j=1}^M Y_j e^{-i 2 pi j mu/M}                          : def_hatZ_hatY
+#   - hatZ_mu^{(pm)} := -+ Z_1 e^{-i 2 pi mu/M} + sum_{j=2}^M Z_j e^{-i 2 pi j mu/M} : def_hatZ_pm
+#   - hatY_mu        := sum_{j=1}^M Y_j e^{-i 2 pi j mu/M}                          : def_hatY
 #
 # 符号の規約: sgn = +1 が上付き (+)、sgn = -1 が上付き (-) に対応する。
 #   H_1^{(pm)} の最終項は -+ Y_M Z_1 なので、コード上は -sgn * Y_M Z_1。

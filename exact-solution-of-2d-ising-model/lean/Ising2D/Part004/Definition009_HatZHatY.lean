@@ -1,8 +1,8 @@
 /-
-# `hat(Z)`, `hat(Y)` の定義（離散フーリエ変換）
+# `hat(Z)` と `hat(Y)` の二定義（離散フーリエ変換）
 
 対応する人手証明:
-`parts/004_転送行列/009_definition_Zhat_Yhatの定義.typ` (`<def_hatZ_hatY>`)
+`structured-latex/content/004_transfer_matrix.ts` の `<def_hatZ_pm>` と `<def_hatY>`
 
 原文の定義（`ℳ := {-M, …, -1, 1, …, M}`、`μ ∈ ℳ`）:
 
@@ -53,6 +53,57 @@ noncomputable def hatZ (M : ℕ) (η : ℂ) (μ : ℤ) : TensorPow M :=
 /-- **原文の `hat(Y)_μ`**。 -/
 noncomputable def hatY (M : ℕ) (μ : ℤ) : TensorPow M :=
   ∑ j : Fin M, expPhase M (((j : ℕ) + 1 : ℤ) * μ) • Y j
+
+/-- **人手本文の先頭項分離**（`<def_hatZ_pm>` の四段の等号鎖）:
+`Fin M` の添字 `0` を本文の `j = 1` に対応させ、残りの添字では係数が `1` になることを示す。
+本文の仮定 `M ∈ ℤ_{≥1}` は、Lean では `M ≠ 0` として受け取る。本文が課す
+`μ ∈ {-M, …, -1, 1, …, M}` より広い `μ : ℤ` で成り立つため、その範囲への制限も含む。 -/
+theorem hatZ_eq_first_add_rest (hM : M ≠ 0) (η : ℂ) (μ : ℤ) :
+    let z : Fin M := ⟨0, Nat.pos_of_ne_zero hM⟩
+    hatZ M η μ =
+      (η * expPhase M μ) • Z z +
+        ∑ j ∈ Finset.univ.erase z,
+          expPhase M (((j : ℕ) + 1 : ℤ) * μ) • Z j := by
+  let z : Fin M := ⟨0, Nat.pos_of_ne_zero hM⟩
+  change (∑ j : Fin M,
+    (firstSign η j * expPhase M (((j : ℕ) + 1 : ℤ) * μ)) • Z j) = _
+  calc
+    _ = (firstSign η z * expPhase M (((z : ℕ) + 1 : ℤ) * μ)) • Z z +
+        ∑ j ∈ Finset.univ.erase z,
+          (firstSign η j * expPhase M (((j : ℕ) + 1 : ℤ) * μ)) • Z j := by
+      rw [← Finset.sum_erase_add Finset.univ
+        (fun j : Fin M =>
+          (firstSign η j * expPhase M (((j : ℕ) + 1 : ℤ) * μ)) • Z j)
+        (Finset.mem_univ z)]
+      abel
+    _ = (η * expPhase M (((z : ℕ) + 1 : ℤ) * μ)) • Z z +
+        ∑ j ∈ Finset.univ.erase z,
+          (firstSign η j * expPhase M (((j : ℕ) + 1 : ℤ) * μ)) • Z j := by
+      rw [show firstSign η z = η by simp [z, firstSign]]
+    _ = (η * expPhase M μ) • Z z +
+        ∑ j ∈ Finset.univ.erase z,
+          (firstSign η j * expPhase M (((j : ℕ) + 1 : ℤ) * μ)) • Z j := by
+      simp only [z, Nat.cast_zero, zero_add, one_mul]
+    _ = (η * expPhase M μ) • Z z +
+        ∑ j ∈ Finset.univ.erase z,
+          (1 * expPhase M (((j : ℕ) + 1 : ℤ) * μ)) • Z j := by
+      congr 1
+      apply Finset.sum_congr rfl
+      intro j hj
+      have hj_ne_z : j ≠ z := (Finset.mem_erase.mp hj).1
+      have hj_ne_zero : (j : ℕ) ≠ 0 := by
+        intro hj0
+        apply hj_ne_z
+        apply Fin.ext
+        simpa [z] using hj0
+      rw [firstSign_of_val_ne_zero hj_ne_zero]
+    _ = (η * expPhase M μ) • Z z +
+        ∑ j ∈ Finset.univ.erase z,
+          expPhase M (((j : ℕ) + 1 : ℤ) * μ) • Z j := by
+      congr 1
+      apply Finset.sum_congr rfl
+      intro j _
+      rw [one_mul]
 
 /-- 原文の `hat(Z)_μ^{(+)}`（`j = 1` の係数が `-1`）。 -/
 noncomputable abbrev hatZPlus (M : ℕ) (μ : ℤ) : TensorPow M := hatZ M (-1) μ

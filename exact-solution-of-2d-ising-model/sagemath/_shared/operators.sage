@@ -2,7 +2,7 @@
 # 共通定義ファイル (sagemath/_shared/operators.sage)
 #
 # Mat(2,C)^{⊗M} の元を「具体的な 2^M × 2^M の複素行列（クロネッカー積）」として構成する。
-# structured-latex 側のラベル <def_transfer_matrix_symbols>, <def_hatZ_hatY>,
+# structured-latex 側のラベル <def_transfer_matrix_symbols>, <def_hatZ_pm>, <def_hatY>,
 # <transfer_matrix_011c_claim_V1_pm_exponential_representation>,
 # <transfer_matrix_011d_claim_V2_exponential_representation>, <def_A_theta>, <def_fermi> などに対応する。
 #
@@ -155,23 +155,23 @@ def V1pm_op(K1, M, sign):
 
 
 # ---------------------------------------------------------
-# 離散 Fourier 変換（<def_hatZ_hatY>）
-#   hatZ^{(±)}_mu := sum_{j=1}^{M} w_j Z_j exp(-i 2 pi j mu / M),  w_1 = ∓1, w_{j≠1} = 1
-#   hatY_mu       := sum_{j=1}^{M} Y_j exp(-i 2 pi j mu / M)
+# 離散 Fourier 変換（<def_hatZ_pm>, <def_hatY>）
+#   hatZ^{(±)}_mu := sum_{j=1}^{M} w_j exp(-i 2 pi j mu / M) Z_j,  w_1 = ∓1, w_{j≠1} = 1
+#   hatY_mu       := sum_{j=1}^{M} exp(-i 2 pi j mu / M) Y_j
 # ---------------------------------------------------------
 def hatZ_op(mu, M, sign):
     w1 = _mp_sign(sign)
     out = _np.zeros((2 ** M, 2 ** M), dtype=complex)
     for j in range(1, M + 1):
         w = w1 if j == 1 else 1.0
-        out = out + w * Zop(j, M) * _np.exp(-1j * 2 * _np.pi * j * mu / M)
+        out = out + w * _np.exp(-1j * 2 * _np.pi * j * mu / M) * Zop(j, M)
     return out
 
 
 def hatY_op(mu, M):
     out = _np.zeros((2 ** M, 2 ** M), dtype=complex)
     for j in range(1, M + 1):
-        out = out + Yop(j, M) * _np.exp(-1j * 2 * _np.pi * j * mu / M)
+        out = out + _np.exp(-1j * 2 * _np.pi * j * mu / M) * Yop(j, M)
     return out
 
 

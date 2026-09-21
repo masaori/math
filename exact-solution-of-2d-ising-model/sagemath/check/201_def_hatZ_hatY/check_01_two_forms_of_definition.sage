@@ -1,8 +1,8 @@
-# def_hatZ_hatY: 定義の 2 つの書き方が一致することを確認する。
+# def_hatZ_pm と def_hatY: 定義の 2 つの書き方が一致することを確認する。
 #
-# 本文（transfer_matrix_010_definition_hatZ_hatY）は hatZ^{(±)}_mu を
-#   (i)  sum_{j=1}^{M} {∓1 (j=1), 1 (j≠1)} Z_j exp(-i 2 pi j mu / M)
-#   (ii) ∓ Z_1 exp(-i 2 pi mu / M) + sum_{j=2}^{M} Z_j exp(-i 2 pi j mu / M)
+# 本文（transfer_matrix_010a_definition_hatZ_pm）は hatZ^{(±)}_mu を
+#   (i)  sum_{j=1}^{M} {∓1 (j=1), 1 (j≠1)} exp(-i 2 pi j mu / M) Z_j
+#   (ii) ∓ exp(-i 2 pi mu / M) Z_1 + sum_{j=2}^{M} exp(-i 2 pi j mu / M) Z_j
 # の 2 通りで書いている。(i) と (ii) の一致は定義の well-defined 性に関わるので確認する。
 #
 # 独立経路:
@@ -14,24 +14,24 @@ import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
 load(os.path.join(_dir, '../../_shared/operators.sage'))
 
-rep = CheckReport("def_hatZ_hatY: 定義の 2 形式 (cases 記法 / j=1 を外に出した形) の一致")
+rep = CheckReport("def_hatZ_pm / def_hatY: 定義の 2 形式 (cases 記法 / j=1 を外に出した形) の一致")
 
-M_LIST = [2, 3, 4, 5]
+M_LIST = [1, 2, 3, 4, 5]
 
 
 def hatZ_form_ii(mu, M, sign):
     """形 (ii): j=1 の項を和の外へ出した書き方。"""
     w1 = -1.0 if sign == '+' else +1.0   # ∓1
-    out = w1 * Zop(1, M) * _np.exp(-1j * 2 * _np.pi * 1.0 * float(mu) / float(M))
+    out = w1 * _np.exp(-1j * 2 * _np.pi * 1.0 * float(mu) / float(M)) * Zop(1, M)
     for j in range(2, int(M) + 1):
-        out = out + Zop(j, M) * _np.exp(-1j * 2 * _np.pi * float(j) * float(mu) / float(M))
+        out = out + _np.exp(-1j * 2 * _np.pi * float(j) * float(mu) / float(M)) * Zop(j, M)
     return out
 
 
 def hatY_form_ii(mu, M):
     out = _np.zeros((2 ** int(M), 2 ** int(M)), dtype=complex)
     for j in range(1, int(M) + 1):
-        out = out + Yop(j, M) * _np.exp(-1j * 2 * _np.pi * float(j) * float(mu) / float(M))
+        out = out + _np.exp(-1j * 2 * _np.pi * float(j) * float(mu) / float(M)) * Yop(j, M)
     return out
 
 

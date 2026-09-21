@@ -76,9 +76,11 @@ export default defineBlocks([
 \end{aligned}`,
       ),
       paragraph([
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
+        " と ",
+        ref("def_hatY"),
         " の定義は ",
-        math(String.raw`\hat{Z}_\mu^{(\pm)} = \sum_{j=1}^M \varepsilon^{(\pm)}_j Z_j\exp\!\left(-i\frac{2\pi j\mu}{M}\right)`),
+        math(String.raw`\hat{Z}_\mu^{(\pm)} = \sum_{j=1}^M \varepsilon^{(\pm)}_j\exp\!\left(-i\frac{2\pi j\mu}{M}\right)Z_j`),
         " と書ける。",
         math(String.raw`\varepsilon^{(\pm)}_j`),
         " は ",
@@ -92,13 +94,13 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 [\hat{Z}_\mu^{(\pm)}, \hat{Z}_\nu^{(\pm)}]_+
-&= \left[\sum_{j=1}^M \varepsilon^{(\pm)}_j Z_j\exp\!\left(-i \frac{2\pi j\mu}{M}\right),\ \sum_{k=1}^M \varepsilon^{(\pm)}_k Z_k\exp\!\left(-i \frac{2\pi k\nu}{M}\right)\right]_+
-&&(\because\ \blkref{def_hatZ_hatY}\ \text{と上で置いた記号}) \\
-&= \left(\sum_{j=1}^M \varepsilon^{(\pm)}_j Z_j\exp\!\left(-i \frac{2\pi j\mu}{M}\right)\right)\left(\sum_{k=1}^M \varepsilon^{(\pm)}_k Z_k\exp\!\left(-i \frac{2\pi k\nu}{M}\right)\right) \\
-&\quad + \left(\sum_{k=1}^M \varepsilon^{(\pm)}_k Z_k\exp\!\left(-i \frac{2\pi k\nu}{M}\right)\right)\left(\sum_{j=1}^M \varepsilon^{(\pm)}_j Z_j\exp\!\left(-i \frac{2\pi j\mu}{M}\right)\right)
+&= \left[\sum_{j=1}^M \varepsilon^{(\pm)}_j\exp\!\left(-i \frac{2\pi j\mu}{M}\right)Z_j,\ \sum_{k=1}^M \varepsilon^{(\pm)}_k\exp\!\left(-i \frac{2\pi k\nu}{M}\right)Z_k\right]_+
+&&(\because\ \blkref{def_hatZ_pm}\ \text{と上で置いた記号}) \\
+&= \left(\sum_{j=1}^M \varepsilon^{(\pm)}_j\exp\!\left(-i \frac{2\pi j\mu}{M}\right)Z_j\right)\left(\sum_{k=1}^M \varepsilon^{(\pm)}_k\exp\!\left(-i \frac{2\pi k\nu}{M}\right)Z_k\right) \\
+&\quad + \left(\sum_{k=1}^M \varepsilon^{(\pm)}_k\exp\!\left(-i \frac{2\pi k\nu}{M}\right)Z_k\right)\left(\sum_{j=1}^M \varepsilon^{(\pm)}_j\exp\!\left(-i \frac{2\pi j\mu}{M}\right)Z_j\right)
 &&(\because\ \text{反交換子の定義}) \\
-&= \sum_{j,k=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_k\, Z_j Z_k\exp\!\left(-i\frac{2\pi}{M}(j\mu+k\nu)\right) \\
-&\quad + \sum_{j,k=1}^M \varepsilon^{(\pm)}_k\varepsilon^{(\pm)}_j\, Z_k Z_j\exp\!\left(-i\frac{2\pi}{M}(k\nu+j\mu)\right)
+&= \sum_{j,k=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_k\exp\!\left(-i\frac{2\pi}{M}(j\mu+k\nu)\right)Z_j Z_k \\
+&\quad + \sum_{j,k=1}^M \varepsilon^{(\pm)}_k\varepsilon^{(\pm)}_j\exp\!\left(-i\frac{2\pi}{M}(k\nu+j\mu)\right)Z_k Z_j
 &&(\because\ \text{有限和どうしの積を二重和へ開いた（分配則）}) \\
 &= \sum_{j,k=1}^M \varepsilon^{(\pm)}_j\varepsilon^{(\pm)}_k\exp\!\left(-i\frac{2\pi}{M}(j\mu+k\nu)\right)(Z_j Z_k + Z_k Z_j)
 &&(\because\ \text{2 つの二重和をまとめ、}\ \mathbb{C}\ \text{の係数を前へ出した}) \\

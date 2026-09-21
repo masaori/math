@@ -90,7 +90,7 @@ export default defineBlocks([
     labels: ["why_008_applies_only_to_minus_sector"],
     statement: [
       paragraph([
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " の ",
         math(String.raw`\hat{Z}_\mu^{(\pm)}`),
         " と ",
@@ -207,9 +207,9 @@ export default defineBlocks([
         "Step 2（",
         math(String.raw`(-)`),
         " の場合）。",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " より ",
-        math(String.raw`\hat{Z}_\mu^{(-)} = \sum_{j=1}^{M} Z_j e^{-i\frac{2\pi j\mu}{M}}`),
+        math(String.raw`\hat{Z}_\mu^{(-)} = \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}Z_j`),
         "（",
         math(String.raw`j=1`),
         " の係数は ",
@@ -220,7 +220,7 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left[H_2,\ \hat{Z}_\mu^{(-)}\right]
 &= \left[H_2,\ \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}Z_j\right]
-   &&(\because \text{def\_hatZ\_hatY}) \\
+   &&(\because \text{def\_hatZ\_pm}) \\
 &= \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\left[H_2,\ Z_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\left(-2Y_j\right)
@@ -228,21 +228,21 @@ export default defineBlocks([
 &= -2\sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\,Y_j
    &&(\because \text{スカラー倍を有限和の外へ出す（分配律）}) \\
 &= -2\,\hat{Y}_\mu
-   &&(\because \text{def\_hatZ\_hatY})
+   &&(\because \text{def\_hatY})
 \end{aligned}`,
       ),
       paragraph([
         "（最初と最後の等号で使ったのは ",
-        ref("def_hatZ_hatY"),
-        " の ",
-        math(String.raw`\hat{Z}_\mu^{(-)}, \hat{Y}_\mu`),
+        ref("def_hatZ_pm"),
+        " と ",
+        ref("def_hatY"),
         " の定義である。）",
       ]),
       paragraph([
         "Step 3（",
         math(String.raw`(+)`),
         " の場合）。",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " より ",
         math(String.raw`\hat{Z}_\mu^{(+)}`),
         " は ",
@@ -744,7 +744,7 @@ M_{\mathbb C}(-1_{\mathbb C})^0
         " は ",
         ref("def_transfer_matrix_symbols"),
         " のもの）。",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " の ",
         math(String.raw`\hat{Z}_\mu^{(\pm)}`),
         " と違い、**係数に例外項が無い**（すべての ",
@@ -911,7 +911,7 @@ e^{-ij\tilde\theta_{\mu+M}}
       ),
       paragraph([
         "と定める。008 章で整数運動量の添字集合が ",
-        ref("def_hatZ_hatY"),
+        ref("def_hatZ_pm"),
         " の ",
         math(String.raw`\mathcal{M} = \{-M,\dots,-1,1,\dots,M\}`),
         " だったのに対応する、**半整数運動量側の添字集合**である。",

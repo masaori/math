@@ -226,7 +226,7 @@ README 3 節 4「暗黙に使われている未定義の概念を残さない」
 | 実数の指数関数 `exp : R → R_{>0}` | `calc_formulae_000b_claim_cosh_sinh_basic_properties`（ラベル `cosh_sinh_basic_properties`）ほか多数 | 定義ブロックが無い。当該ブロックは「`exp(x)exp(y)=exp(x+y)`、`exp(0)=1`、`exp(x)>0`、狭義単調増加であることのみを用いる」と**仮定として**明記している |
 | `log`, `tanh` | `transfer_matrix_001_definition_symbols`（`def_transfer_matrix_symbols`）の `K_1^* := -½ log(tanh K_1)`、`K_2^*` も同様 | 本文のどこにも定義が無い |
 | 実数の非整数冪 `(2 sinh 2K_2)^{M/2}` | 同上（`V_2` の定義）、および `V2_in_Z_Y` | `M` が奇数のとき平方根が必要だが、`^{M/2}` の意味を定めた記述が無い |
-| 複素指数 `e^{2πijk/M}`, `e^{iθ}` | `transfer_matrix_009_claim_exp_sum`（`exp_sum`）、`def_hatZ_hatY`、`H1_H2_via_hatZ_hatY`、`recover_Z_Y_from_hatZ_hatY` ほか多数 | `def_exp` は `End(V)` 上の exp。複素数の指数がそのどれに当たるかが本文に無い。`exp_sum` の証明は `cos 2πlj + i sin 2πlj` と等比数列の和の公式を根拠なしに使う |
+| 複素指数 `e^{2πijk/M}`, `e^{iθ}` | `transfer_matrix_009_claim_exp_sum`（`exp_sum`）、`def_hatZ_pm`、`def_hatY`、`H1_H2_via_hatZ_hatY`、`recover_Z_Y_from_hatZ_hatY` ほか多数 | `def_exp` は `End(V)` 上の exp。複素数の指数がそのどれに当たるかが本文に無い。`exp_sum` の証明は `cos 2πlj + i sin 2πlj` と等比数列の和の公式を根拠なしに使う |
 | `π`、弧長 `l(PQ)` | `calc_formulae_012_definition_arc_length`（円弧の定義） | 「**齋藤微積分 命題 2.1.3 (1) を満たす**実数 `l(PQ)` がただ一つ存在し」として外部文献に委ねている。README 1 節は実解析への脱出を最後の熱力学極限だけに限り、脱出箇所を明示するよう求めているが、ここは冒頭の計算公式章で無明示に実解析へ出ている |
 | 行列式 `det`、特性多項式 | 初回監査時の `TV1_hatZ_hatY_011a_claim_injectivity_of_T`（`injectivity_of_T_up_to_scalar`）の証明 | 解消済み。未定義の `det(x+tI) ≠ 0` と特性多項式の経路を削除し、明示的な逆行列を持つ行列単位の摂動だけを使う有限行列計算へ置き換えた |
 | ユニタリ行列 `U^† U = I`、`U(2^M)`、`U(1)` | `TV1_hatZ_hatY_010_definition_clifford_group`（`def_clifford_group`） | `†`（随伴）の定義が本文に無い |
