@@ -63741,6 +63741,11 @@ t_{\circ}(\gamma)
               title: { text: "持ち上げ点が相異なる零巻き付き閉路の循環総回転数は正負 4 のいずれかである" },
               labels: ["claim_plane_simple_polygon_cyclic_turning"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning",
+                "Ising2DLambda.NecSuf.KacWard.plane_simple_polygon_cyclic_turning_necSuf",
+                "Ising2DLambda.KacWard.planeSimplePolygon_cyclicTurning_from_necSuf",
+              ],
               verification: [
                 "sagemath/check/vertex-simple-cycle-turning",
                 "sagemath/check/lift-point-distinct-cycle-turning",
