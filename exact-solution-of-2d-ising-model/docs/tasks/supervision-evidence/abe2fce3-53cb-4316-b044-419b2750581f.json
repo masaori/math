@@ -1,0 +1,31 @@
+{
+  "実行識別子": "abe2fce3-53cb-4316-b044-419b2750581f",
+  "観測時刻": "2026-09-22T03:03:56+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "state": "running",
+    "runs": 8,
+    "last exit code": 0,
+    "pid": 89554
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "3d05a4e2dffcf073838797e47d24ad41df834e7bf65e40378224940c326ee4ed",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-22T03:03:56+09:00",
+    "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log",
+    "終端": "2026-09-22 03:03:21まで更新中。半整数運動量モード二定義の分割作業中で、観測時に現行回の終端なし。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・実行中・runs 8・PID 89554・表示上のlast exit 0。03:03:21までlaunchd.logが更新中で現行回の終端がないため、過去のlast exitを現行回の成功へ流用せず成否未確認とした。",
+  "成果比較": {
+    "開始成果": "55406d2bef0b8705a5dc58f04422366ae325b215",
+    "前回監督の読解終点": "bd81d266b620c058aec218cb1d39d737939c301d",
+    "今回読解終点": "55406d2bef0b8705a5dc58f04422366ae325b215",
+    "前回監督以後": "共有位相expPhaseと既存基本補題を中立な先行Leanモジュールへ移し、半整数運動量モード複合項を二定義・四性質へ分ける境界を棚卸しとstateへ記録した。新しい数学的主張は追加していない。"
+  }
+}
