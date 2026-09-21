@@ -2743,7 +2743,73 @@ const manualGranularityReviewById = new Map<string, string>([
   ["calc_formulae_014b_claim_arcsin_bijection", "円弧長に関する外部命題の証明を本文内の一ステップ一定理へ展開する余地がある。分類境界と依存順は確定している。"],
   ["transfer_matrix_001_definition_symbols", "独立した数学内容はすべて先行項へ分離済みであり、残余ブロックは旧ラベルを使う後続参照の意味を保つための参照規約と、扱う対象が具体的な有限複素行列であることの確認だけを担う。参照先が多いため自動の説明粒度判定には適合しないが、複数の定義・主張を同居させてはいないため、追加分割は不要である。"],
 ]);
-const futureBlockSplitRecommendedById = new Set<string>();
+const halfIntegerModesBoundaryCandidates = [
+  {
+    name: "半整数運動量で Fourier 変換した Z 行列の定義",
+    kind: "definition",
+    newLabel: "def_half_integer_checkZ",
+    directDependenciesAfterSplit: [
+      "半整数運動量の指数和",
+      "Jordan–Wigner 行列族 Z_m",
+      "集合と代数構造の記号",
+      "複素数の定義",
+    ],
+  },
+  {
+    name: "半整数運動量で Fourier 変換した Y 行列の定義",
+    kind: "definition",
+    newLabel: "def_half_integer_checkY",
+    directDependenciesAfterSplit: [
+      "半整数運動量の指数和",
+      "Jordan–Wigner 行列族 Y_m",
+      "集合と代数構造の記号",
+      "複素数の定義",
+    ],
+  },
+  { name: "半整数位相の反周期性", kind: "claim" },
+  { name: "半整数運動量で Fourier 変換した Z 行列の添字周期性", kind: "claim" },
+  { name: "半整数運動量で Fourier 変換した Y 行列の添字周期性", kind: "claim" },
+  { name: "半整数位相の共役添字恒等式", kind: "claim" },
+] as const;
+const halfIntegerModesExpectedBoundaryCandidates = [
+  {
+    name: "半整数運動量で Fourier 変換した Z 行列の定義",
+    kind: "definition",
+    newLabel: "def_half_integer_checkZ",
+    directDependenciesAfterSplit: [
+      "半整数運動量の指数和",
+      "Jordan–Wigner 行列族 Z_m",
+      "集合と代数構造の記号",
+      "複素数の定義",
+    ],
+  },
+  {
+    name: "半整数運動量で Fourier 変換した Y 行列の定義",
+    kind: "definition",
+    newLabel: "def_half_integer_checkY",
+    directDependenciesAfterSplit: [
+      "半整数運動量の指数和",
+      "Jordan–Wigner 行列族 Y_m",
+      "集合と代数構造の記号",
+      "複素数の定義",
+    ],
+  },
+  { name: "半整数位相の反周期性", kind: "claim" },
+  { name: "半整数運動量で Fourier 変換した Z 行列の添字周期性", kind: "claim" },
+  { name: "半整数運動量で Fourier 変換した Y 行列の添字周期性", kind: "claim" },
+  { name: "半整数位相の共役添字恒等式", kind: "claim" },
+] as const;
+const halfIntegerModesNextTickUnit = halfIntegerModesBoundaryCandidates.slice(0, 2);
+const halfIntegerModesExpectedNextTickUnit = halfIntegerModesExpectedBoundaryCandidates.slice(0, 2);
+if (JSON.stringify(halfIntegerModesBoundaryCandidates)
+    !== JSON.stringify(halfIntegerModesExpectedBoundaryCandidates)
+  || JSON.stringify(halfIntegerModesNextTickUnit)
+    !== JSON.stringify(halfIntegerModesExpectedNextTickUnit)) {
+  throw new Error("半整数運動量モードの境界候補または次回二定義の単位が変わりました");
+}
+const futureBlockSplitRecommendedById = new Set<string>([
+  "evensector_003_definition_half_integer_modes",
+]);
 const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["transfer_matrix_000g_definition_positive_coupling_tanh", ["transfer_matrix_000f_claim_global_spin_flip_jordan_wigner_representation"]],
   ["transfer_matrix_000h_definition_real_logarithm_positive", ["transfer_matrix_000g_definition_positive_coupling_tanh"]],
@@ -2988,6 +3054,31 @@ const entries = baseEntries.map((entry) => ({ ...entry, dependencyPlacement: ord
 const unresolvedBlockSplits = entries.filter((entry) => entry.blockSplitRequiredBeforeFinalOrdering);
 if (unresolvedBlockSplits.length > 0) {
   throw new Error(`未レビューの前方参照が残っています: ${unresolvedBlockSplits.map(({ id }) => id).join(", ")}`);
+}
+const halfIntegerModesEntry = entries.find((entry) =>
+  entry.id === "evensector_003_definition_half_integer_modes");
+const halfIntegerModesExpectedDirectDependencies = [
+  "calc_formulae_006_definition_of_cc",
+  "calculation_formulae_045_theorem_euler_formula_cos_sin",
+  "calculation_formulae_definition_set_and_algebra_notation",
+  "evensector_002_claim_antiperiodic_exp_sum",
+  "transfer_matrix_001_definition_symbols",
+  "transfer_matrix_010a_definition_hatZ_pm",
+].sort();
+if (halfIntegerModesEntry === undefined
+  || halfIntegerModesEntry.provisionalFinalChapter !== "2次元イジングモデル"
+  || halfIntegerModesEntry.kind !== "definition"
+  || halfIntegerModesEntry.explanationGranularityReview.inspectedContentSha256
+    !== "e1df2047ef3efc855dc136a08cf898968fe4f0230ae52e2df7d8e40d613aec24"
+  || JSON.stringify(halfIntegerModesEntry.dependsOnEntryIds)
+    !== JSON.stringify(halfIntegerModesExpectedDirectDependencies)
+  || halfIntegerModesEntry.dependencyPlacement?.chapterOrder !== 62
+  || JSON.stringify(halfIntegerModesEntry.presentationPredecessorEntryIds)
+    !== JSON.stringify(["transfer_matrix_010b_definition_hatY"])
+  || halfIntegerModesEntry.explanationGranularityReview.status
+    !== "具体的な行列計算への展開またはブロック分割を要する"
+  || !halfIntegerModesEntry.futureBlockSplitRecommended) {
+  throw new Error("半整数運動量モード複合項の本文・依存境界・提示順・将来分割状態が変わりました");
 }
 const matrixExponentialConjugationSectionIdSet = new Set<string>(matrixExponentialConjugationSectionEntryIds);
 const matrixExponentialConjugationSectionEntries = matrixExponentialConjugationSectionEntryIds.map((id) => {

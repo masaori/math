@@ -24458,7 +24458,7 @@
         "periodicity_of_check_fermi": "後続利用への案内"
       },
       "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
+      "futureBlockSplitRecommended": true,
       "presentationPredecessorEntryIds": [
         "transfer_matrix_010b_definition_hatY"
       ],
