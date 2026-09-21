@@ -1,0 +1,30 @@
+{
+  "実行識別子": "abe2fce3-53cb-4316-b044-419b2750581f",
+  "観測時刻": "2026-09-22T03:03:56+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.hyperbolic-ising-auto-loop",
+    "state": "not running",
+    "runs": 15,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.hyperbolic-ising-auto-loop.plist",
+    "存在": true,
+    "sha256": "5fc2a91602b7ae545312d0385bde3c4745d179c90a3e200ef67354d0908c6efe",
+    "StartCalendarInterval": "毎時20分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-22T03:03:56+09:00",
+    "path": "/Users/masaori/Library/Logs/hyperbolic-ising-auto-loop/auto-loop.log",
+    "終端": "2026-09-22 02:20:34、「前のtickが動作中」として見送り。原因となった所有者は観測できない。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 15・last exit 0。ただし直近実ログは02:20:34の「前のtickが動作中」による見送りで、観測時に原因となった所有者は確認できない。過去のlast exit 0を現行成功へ読み替えていない。",
+  "成果比較": {
+    "開始成果": "55406d2bef0b8705a5dc58f04422366ae325b215",
+    "前回監督の読解終点": "bd81d266b620c058aec218cb1d39d737939c301d",
+    "今回読解終点": "55406d2bef0b8705a5dc58f04422366ae325b215",
+    "前回監督以後": "前回監督記録以外に数学本文・証明・有限反例・別の正規商候補の統合成果はない。"
+  }
+}

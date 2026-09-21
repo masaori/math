@@ -1,0 +1,30 @@
+{
+  "実行識別子": "abe2fce3-53cb-4316-b044-419b2750581f",
+  "観測時刻": "2026-09-22T03:03:56+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.ising-lambda-auto-loop",
+    "state": "not running",
+    "runs": 30,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.ising-lambda-auto-loop.plist",
+    "存在": true,
+    "sha256": "0251205e11070166bad48b0a0fa90288543e32339c1ca704301bb202ba0ecf70",
+    "StartCalendarInterval": "毎時5分・35分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-22T03:03:56+09:00",
+    "path": "/Users/masaori/git/masaori/math/exact-solution-of-2d-ising-model-lambda/logs/auto-loop-status.log",
+    "終端": "2026-09-22 02:35:34、作業ツリーに未コミットの変更があるため見送り。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 30・last exit 0。ただし直近実ログは02:35:34に作業ツリーの未コミット変更を理由として見送りであり、last exit 0を研究実行の成功へ読み替えていない。",
+  "成果比較": {
+    "開始成果": "55406d2bef0b8705a5dc58f04422366ae325b215",
+    "前回監督の読解終点": "bd81d266b620c058aec218cb1d39d737939c301d",
+    "今回読解終点": "55406d2bef0b8705a5dc58f04422366ae325b215",
+    "前回監督以後": "前回監督記録以外にremote defaultへ統合済みの数学本文・証明・段取りの変更はない。"
+  }
+}
