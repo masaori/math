@@ -25,6 +25,7 @@
 （原文の `j, μ, m ∈ {1, …, M}` は Lean の `Fin M` の元 `j` に対して `(j : ℕ) + 1`）。
 位相因子 `exp(√-1 m · 2πμ/M)` は `expPhase M (-(m μ))` である。
 -/
+import Ising2D.Part004.Claim008_ExpSum
 import Ising2D.Part004.Definition009_HatZHatY
 
 namespace Ising2D

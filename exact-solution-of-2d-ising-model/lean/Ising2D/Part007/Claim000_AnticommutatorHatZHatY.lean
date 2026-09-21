@@ -30,6 +30,7 @@ Lean では 4 つとも証明する。
 引数 `η : ℂ`（原文の `∓1`、`j = 1` の項の係数）で表す。本質的に効くのは `η^2 = 1` だけで、
 1. は「同じ `η`」、2. は「`η` と `-η`」の場合にあたる。
 -/
+import Ising2D.Part004.Claim008_ExpSum
 import Ising2D.Part004.Claim012_HatPeriodicity
 
 namespace Ising2D

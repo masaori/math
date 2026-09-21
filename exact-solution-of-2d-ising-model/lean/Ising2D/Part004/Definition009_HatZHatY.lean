@@ -24,7 +24,7 @@
   （`hatZ M η μ`）。`hat(Z)^{(+)}` は `η = -1`、`hat(Z)^{(-)}` は `η = 1`。
   以降の反交換関係で本質的に効くのは `η^2 = 1` だけである。
 -/
-import Ising2D.Part004.Claim008_ExpSum
+import Ising2D.Part004.DefinitionExpPhase
 import Ising2D.Part006.Claim000_AnticommutatorZY
 
 namespace Ising2D
