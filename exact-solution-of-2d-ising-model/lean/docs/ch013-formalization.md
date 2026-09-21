@@ -37,12 +37,13 @@
 | `Ising2D.antiperiodic_complex_exp_sum_zero` | 本文と同じ `Complex.exp` で、`k=0` のとき和は `M` | 同上（「とくに」） |
 | `Ising2D.antiperiodic_exp_sum_dvd` / `antiperiodic_exp_sum_not_dvd` / `antiperiodic_exp_sum_nonzero_of_abs_lt` / `antiperiodic_exp_sum_zero` | 直前四主張を内部表現 `checkPhase` で書いたもの | 同上（補助） |
 | `Ising2D.sum_checkPhase` | 上を周波数そのままで書いた形（以降の計算で使う） | 同上 |
-| `Ising2D.checkZ` / `Ising2D.checkY` | `check(Z)_μ`, `check(Y)_μ` | `def_half_integer_modes` |
-| `Ising2D.checkPhase_antiperiodic` | (1) `e^{-iMθ~_μ} = -1` | 同上 (1) |
-| `Ising2D.checkZ_period` / `checkY_period` | (2) `check(Z)_{μ+M} = check(Z)_μ` ほか | 同上 (2) |
-| `Ising2D.checkPhase_congr` / `checkZ_congr` / `checkY_congr` | (2) の合同形（`M ∣ μ-ν` 版） | 同上 (2) |
-| `Ising2D.thetaTilde_one_sub` | (3) `θ~_{1-μ} = -θ~_μ` | 同上 (3) |
-| `Ising2D.checkPhase_one_sub` | (3) の位相因子版 | 同上 (3) |
+| `Ising2D.checkZ` | `check(Z)_μ` | `def_half_integer_checkZ` |
+| `Ising2D.checkY` | `check(Y)_μ` | `def_half_integer_checkY` |
+| `Ising2D.checkPhase_antiperiodic` | (1) `e^{-iMθ~_μ} = -1` | `def_half_integer_modes` (1) |
+| `Ising2D.checkZ_period` / `checkY_period` | (2) `check(Z)_{μ+M} = check(Z)_μ` ほか | `def_half_integer_modes` (2) |
+| `Ising2D.checkPhase_congr` / `checkZ_congr` / `checkY_congr` | (2) の合同形（`M ∣ μ-ν` 版） | `def_half_integer_modes` (2) |
+| `Ising2D.thetaTilde_one_sub` | (3) `θ~_{1-μ} = -θ~_μ` | `def_half_integer_modes` (3) |
+| `Ising2D.checkPhase_one_sub` | (3) の位相因子版 | `def_half_integer_modes` (3) |
 | `Ising2D.CheckIndex` | `μ ∈ 𝓜̌ = {1,…,M}` | `def_check_index_set` |
 | `Ising2D.thetaTilde_ne` | (1) `μ ≠ ν ⟹ θ~_μ ≠ θ~_ν` | 同上 (1) |
 | `Ising2D.thetaTilde_pos` / `thetaTilde_lt_two_pi` | (1) `0 < θ~_μ < 2π` | 同上 (1) |

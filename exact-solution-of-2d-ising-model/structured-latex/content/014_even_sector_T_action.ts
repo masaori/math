@@ -91,7 +91,9 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
       ]),
       paragraph([
         "**添字の量化について。** ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         " は ",
         math(String.raw`\mu \in \mathbb{Z}`),
         " について定義されているが、",
@@ -493,7 +495,9 @@ T_{(V^{(+)})}
         " はすべて ",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の元であり（",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        "、",
+        ref("def_half_integer_checkY"),
         "、",
         ref("def_V1_pm"),
         "、",
@@ -1701,7 +1705,9 @@ T_{V_2}(\check{Y}_\mu)
     labels: ["linearity_of_T_on_check_Z_Y"],
     statement: [
       paragraph([
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         " と ",
         ref("def_check_index_set"),
         " の記号を用いる。",
@@ -1755,7 +1761,9 @@ T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(a\check Z_\mu+b\check Y_\mu\right)
     labels: ["linearity_of_T_V2"],
     statement: [
       paragraph([
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         " と ",
         ref("def_check_index_set"),
         " の記号を用いる。",
@@ -2266,7 +2274,7 @@ P_{21}
         "。",
         math(String.raw`\theta \in \mathbb{R}`),
         " は任意だったから、",
-        ref("def_half_integer_modes"),
+        ref("antiperiodic_exp_sum"),
         " の ",
         math(String.raw`\tilde\theta_\mu \in \mathbb{R}`),
         " を代入して後半を得る。",

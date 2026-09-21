@@ -9,7 +9,8 @@
   `016_even_sector_fermions.ts`
 - 併せて検証（章 C′ の全ブロック）:
   - 013 章: `why_008_applies_only_to_minus_sector` / `antiperiodic_exp_sum` /
-    `def_half_integer_modes` / `commutator_of_H_and_check_Z_Y` /
+    `def_half_integer_checkZ` / `def_half_integer_checkY` / `def_half_integer_modes` /
+    `commutator_of_H_and_check_Z_Y` /
     `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y` / `H1_H2_via_check_Z_Y`
   - 014 章: `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` /
     `def_V_plus` / `V1_plus_half_invertible` / `V2_invertible` /
@@ -97,7 +98,7 @@ A(t)   = [[gamma_1(t), gamma_2(t)], [-gamma_2(-t), gamma_1(t)]]
 
 - check_01（013 章）: `def_check_index_set` (1)〜(5) と `conjugate_index_of_check_Z_Y`
   (1)(2)(3) の各段を追加。`H1_H2_via_check_Z_Y` の `Ž_{1−μ}` の 3 段は、
-  `Ž_{M+1−μ}` の **2 段**（`def_half_integer_modes` → `conjugate_index_of_check_Z_Y` (2)）に
+  `Ž_{M+1−μ}` の **2 段**（`def_half_integer_checkZ` → `conjugate_index_of_check_Z_Y` (2)）に
   置き換わった（合同式・符号反転の段が消えた）。段数 92 → 105。
 - check_04（016 章）: `periodicity_of_check_fermi` の (1)(2)(3) の組み替えに追随。
   `anticommutator_of_check_psi` の Step 1 と `action_of_T_check_Vprime_on_check_psi` の

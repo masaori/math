@@ -130,20 +130,20 @@
   anticommutator_of_check_Z_Y (5b) def_check_index_set (5) で delta_{nu,M+1-mu}: max residual = 0.000e+00  ->  PASS
   anticommutator_of_check_Z_Y (6) 第 2 式 [checkZ,checkY]_+ = 0: max residual = 1.950e-15  ->  PASS
   anticommutator_of_check_Z_Y (7) 第 3 式 [checkY,checkY]_+: max residual = 1.085e-14  ->  PASS
-  recover_Z_Y (1) def_half_integer_modes の代入と分配: max residual = 0.000e+00  ->  PASS
+  recover_Z_Y (1) def_half_integer_checkZ の代入と分配: max residual = 0.000e+00  ->  PASS
   recover_Z_Y (2) 指数法則 [theorem_exp_product n=1]: max residual = 1.055e-15  ->  PASS
   recover_Z_Y (3) 有限和の順序交換: max residual = 0.000e+00  ->  PASS
   recover_Z_Y (4) antiperiodic_exp_sum で k=j の項のみ -> Z_j: max residual = 6.474e-16  ->  PASS
   recover_Z_Y (5) Y_j についても同様: max residual = 1.045e-15  ->  PASS
-  H1_H2_via_check (ZM+1-mu 1) def_half_integer_modes: max residual = 0.000e+00  ->  PASS
+  H1_H2_via_check (ZM+1-mu 1) def_half_integer_checkZ: max residual = 0.000e+00  ->  PASS
   H1_H2_via_check (ZM+1-mu 2) conjugate_index_of_check_Z_Y (2): max residual = 5.148e-15  ->  PASS
-  H1_H2_via_check (H2 1) def_half_integer_modes の代入: max residual = 6.554e-15  ->  PASS
+  H1_H2_via_check (H2 1) def_half_integer_checkZ / def_half_integer_checkY の代入: max residual = 6.554e-15  ->  PASS
   H1_H2_via_check (H2 2) 積を二重和へ分配: max residual = 1.054e-15  ->  PASS
   H1_H2_via_check (H2 3) 指数法則 [theorem_exp_product n=1]: max residual = 2.903e-15  ->  PASS
   H1_H2_via_check (H2 4) 有限和の順序交換: max residual = 3.280e-16  ->  PASS
   H1_H2_via_check (H2 5) antiperiodic_exp_sum -> sum Z_jY_j: max residual = 2.033e-15  ->  PASS
   H1_H2_via_check (H2 6) = H_2: max residual = 7.043e-15  ->  PASS
-  H1_H2_via_check (H1 1) def_half_integer_modes の代入: max residual = 5.491e-15  ->  PASS
+  H1_H2_via_check (H1 1) def_half_integer_checkZ / def_half_integer_checkY の代入: max residual = 5.491e-15  ->  PASS
   H1_H2_via_check (H1 2) 積を二重和へ分配: max residual = 8.190e-16  ->  PASS
   H1_H2_via_check (H1 3) 指数法則 [theorem_exp_product n=1]: max residual = 1.753e-15  ->  PASS
   H1_H2_via_check (H1 4) 有限和の順序交換: max residual = 2.665e-16  ->  PASS

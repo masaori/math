@@ -717,62 +717,152 @@ M_{\mathbb C}(-1_{\mathbb C})^0
   },
 
   {
-    id: "evensector_003_definition_half_integer_modes",
+    id: "evensector_003_definition_half_integer_checkZ",
     kind: "definition",
     origin: { path: SRC, ordinal: 5 },
-    title: { tex: String.raw`\check{Z}_\mu, \check{Y}_\mu \text{（半整数運動量モード）}` },
+    title: { tex: String.raw`\check{Z}_\mu \text{（半整数運動量で Fourier 変換した }Z\text{ 行列）}` },
+    labels: ["def_half_integer_checkZ"],
+    statement: [
+      paragraph([
+        ref("set_and_algebra_notation"),
+        " の記号で ",
+        math(String.raw`M\in\mathbb Z_{\geq2}`),
+        " とする。",
+        ref("antiperiodic_exp_sum"),
+        " で定めた ",
+        math(String.raw`M_{\mathbb N}\in\mathbb N_{\geq2}`),
+        "、整数・実数への像 ",
+        math(String.raw`j_{\mathbb Z},j_{\mathbb R}`),
+        "、および各 ",
+        math(String.raw`\mu\in\mathbb Z`),
+        " に対する ",
+        math(String.raw`\tilde\theta_\mu\in\mathbb R`),
+        " を用いる。複素数と虚数単位は ",
+        ref("definition_of_cc"),
+        " の ",
+        math(String.raw`\mathbb C`),
+        " と ",
+        math(String.raw`i=(0_{\mathbb R},1_{\mathbb R})\in\mathbb C`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`j\in\{1,\dots,M_{\mathbb N}\}`),
+        " なら ",
+        math(String.raw`j_{\mathbb Z}\in\{1,\dots,M\}`),
+        " なので、",
+        ref("def_jordan_wigner_Z_matrices"),
+        " から ",
+        math(String.raw`Z_{j_{\mathbb Z}}\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`),
+        " である。複素指数の定義と所属は現行本文では未整備なので、以下では ",
+        math(String.raw`e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}\in\mathbb C`),
+        " を仮定する。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
+      ]),
+      displayMath(
+        String.raw`\check{Z}_\mu
+:=\sum_{j=1}^{M_{\mathbb N}}
+e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Z_{j_{\mathbb Z}}
+\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`,
+      ),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "旧複合ブロックから、半整数運動量で Fourier 変換した Z 行列の定義だけを分離した。旧複合ラベルは性質の残余ブロックに残し、本定義には新しいラベル def_half_integer_checkZ を割り当てた。",
+        "hat Z との係数の比較は意味上の前提ではないため、依存辺には含めていない。複素指数の先行定義と所属証明は現行本文に無く、その所属を仮定した条件付きの定義である。",
+      ],
+    },
+  },
+
+  {
+    id: "evensector_003_definition_half_integer_checkY",
+    kind: "definition",
+    origin: { path: SRC, ordinal: 5 },
+    title: { tex: String.raw`\check{Y}_\mu \text{（半整数運動量で Fourier 変換した }Y\text{ 行列）}` },
+    labels: ["def_half_integer_checkY"],
+    statement: [
+      paragraph([
+        ref("set_and_algebra_notation"),
+        " の記号で ",
+        math(String.raw`M\in\mathbb Z_{\geq2}`),
+        " とする。",
+        ref("antiperiodic_exp_sum"),
+        " で定めた ",
+        math(String.raw`M_{\mathbb N}\in\mathbb N_{\geq2}`),
+        "、整数・実数への像 ",
+        math(String.raw`j_{\mathbb Z},j_{\mathbb R}`),
+        "、および各 ",
+        math(String.raw`\mu\in\mathbb Z`),
+        " に対する ",
+        math(String.raw`\tilde\theta_\mu\in\mathbb R`),
+        " を用いる。複素数と虚数単位は ",
+        ref("definition_of_cc"),
+        " の ",
+        math(String.raw`\mathbb C`),
+        " と ",
+        math(String.raw`i=(0_{\mathbb R},1_{\mathbb R})\in\mathbb C`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`j\in\{1,\dots,M_{\mathbb N}\}`),
+        " なら ",
+        math(String.raw`j_{\mathbb Z}\in\{1,\dots,M\}`),
+        " なので、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " から ",
+        math(String.raw`Y_{j_{\mathbb Z}}\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`),
+        " である。複素指数の定義と所属は現行本文では未整備なので、以下では ",
+        math(String.raw`e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}\in\mathbb C`),
+        " を仮定する。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
+      ]),
+      displayMath(
+        String.raw`\check{Y}_\mu
+:=\sum_{j=1}^{M_{\mathbb N}}
+e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Y_{j_{\mathbb Z}}
+\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`,
+      ),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "旧複合ブロックから、半整数運動量で Fourier 変換した Y 行列の定義だけを分離した。旧複合ラベルは性質の残余ブロックに残し、本定義には新しいラベル def_half_integer_checkY を割り当てた。",
+        "複素指数の先行定義と所属証明は現行本文に無く、その所属を仮定した条件付きの定義である。",
+      ],
+    },
+  },
+
+  {
+    id: "evensector_003_definition_half_integer_modes",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 5 },
+    title: { text: "半整数位相と Fourier 行列の周期性" },
     labels: ["def_half_integer_modes"],
     statement: [
       paragraph([
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M\in\mathbb Z_{\geq2}`),
         "、",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " とし、",
+        math(String.raw`\mu\in\mathbb Z`),
+        " とする。",
         ref("antiperiodic_exp_sum"),
         " の ",
-        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi(\mu-\frac12)}{M}`),
-        " を用いて",
+        math(String.raw`\tilde\theta_\mu`),
+        " と、",
+        ref("def_half_integer_checkZ"),
+        "、",
+        ref("def_half_integer_checkY"),
+        " の Fourier 行列について、次の 4 つの性質が成り立つ。",
       ]),
-      displayMath(
-        String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,e^{-i j\tilde\theta_\mu},\qquad
-\check{Y}_\mu := \sum_{j=1}^{M} Y_j\,e^{-i j\tilde\theta_\mu}
-\ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
-      ),
-      paragraph([
-        "と定める（",
-        math(String.raw`Z_j, Y_j`),
-        " は ",
-        ref("def_transfer_matrix_symbols"),
-        " のもの）。",
-        ref("def_hatZ_pm"),
-        " の ",
-        math(String.raw`\hat{Z}_\mu^{(\pm)}`),
-        " と違い、**係数に例外項が無い**（すべての ",
-        math(String.raw`j`),
-        " で係数は ",
-        math(String.raw`e^{-ij\tilde\theta_\mu}`),
-        "）。",
-      ]),
-      paragraph([
-        "**定義域を ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " としているのは、下の (2)（添字の周期性）を述べるためである。** 主張を述べる添字の範囲は ",
-        ref("def_check_index_set"),
-        " の ",
-        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
-        " に絞る。以降 ",
-        math(String.raw`\mu \in \mathbb{Z}`),
-        " 全体で述べるのは、この (2) と ",
-        ref("periodicity_of_check_fermi"),
-        " の 2 つだけである。",
-      ]),
-      paragraph(["次の 3 つの性質を後で繰り返し使う。"]),
+      paragraph(["次の 4 つの性質を後で繰り返し使う。"]),
       list([
         [
           math(String.raw`\text{(1) 反周期性：}\quad e^{-i M \tilde\theta_\mu} = -1`),
         ],
         [
-          math(String.raw`\text{(2) 添字の周期性：}\quad \check{Z}_{\mu+M} = \check{Z}_\mu,\quad \check{Y}_{\mu+M} = \check{Y}_\mu`),
+          math(String.raw`\text{(2) 添字の周期性（}Z\text{）：}\quad \check{Z}_{\mu+M} = \check{Z}_\mu`),
+        ],
+        [
+          math(String.raw`\text{(2) 添字の周期性（}Y\text{）：}\quad \check{Y}_{\mu+M} = \check{Y}_\mu`),
         ],
         [
           math(String.raw`\text{(3) 共役添字：}\quad \tilde\theta_{1-\mu} = -\tilde\theta_\mu`),
@@ -899,7 +989,7 @@ e^{-ij\tilde\theta_{\mu+M}}
       paragraph([
         math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
         " とし、",
-        ref("def_half_integer_modes"),
+        ref("antiperiodic_exp_sum"),
         " の ",
         math(String.raw`\tilde\theta_\mu`),
         "（",
@@ -921,9 +1011,23 @@ e^{-ij\tilde\theta_{\mu+M}}
         math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
         " について述べる。** ",
         math(String.raw`\mu \in \mathbb{Z}`),
-        " 全体で述べるのは、記号 ",
-        math(String.raw`\tilde\theta_\mu, \check{Z}_\mu, \check{Y}_\mu, \check\psi_\mu`),
-        " の**定義域**と、添字の周期性を述べる 2 つの主張 ",
+        " 全体で述べる記号の**定義域**は、",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`\tilde\theta_\mu`),
+        "、",
+        ref("def_half_integer_checkZ"),
+        " の ",
+        math(String.raw`\check Z_\mu`),
+        "、",
+        ref("def_half_integer_checkY"),
+        " の ",
+        math(String.raw`\check Y_\mu`),
+        "、および後の ",
+        ref("periodicity_of_check_fermi"),
+        " で用いる ",
+        math(String.raw`\check\psi_\mu`),
+        " である。添字の周期性を述べる 2 つの主張は ",
         ref("def_half_integer_modes"),
         " (2) と ",
         ref("periodicity_of_check_fermi"),
@@ -1618,26 +1722,30 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
         "Step 2（(C)(D)）。交換子は第 2 引数について ",
         math(String.raw`\mathbb{C}`),
         " 線型なので、Step 1 の第 1 式と ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         " より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left[H_2,\ \check{Z}_\mu\right]
 &= \left[H_2,\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j\right]
-   &&(\because \text{def\_half\_integer\_modes}) \\
+   &&(\because \blkref{def_half_integer_checkZ}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_2,\ Z_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2Y_j\right)
    &&(\because \text{Step 1 の第 1 式}) \\
 &= -2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j \\
 &= -2\,\check{Y}_\mu
-   &&(\because \text{def\_half\_integer\_modes})
+   &&(\because \blkref{def_half_integer_checkY})
 \end{aligned}`,
       ),
       paragraph([
         "（最初と最後の等号は ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         " の ",
         math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
         " の定義による。）Step 1 の第 2 式 ",
@@ -1648,7 +1756,7 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
         String.raw`\begin{aligned}
 \left[H_2,\ \check{Y}_\mu\right]
 &= \left[H_2,\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
-   &&(\because \text{def\_half\_integer\_modes}) \\
+   &&(\because \blkref{def_half_integer_checkY}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_2,\ Y_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\cdot 2Z_j
@@ -1656,7 +1764,7 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 &= 2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j
    &&(\because \text{スカラー倍を和の外へ出す}) \\
 &= 2\,\check{Z}_\mu
-   &&(\because \text{def\_half\_integer\_modes})
+   &&(\because \blkref{def_half_integer_checkZ})
 \end{aligned}`,
       ),
       paragraph([
@@ -1699,7 +1807,7 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ \check{Z}_\mu\right]
 &= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j\right]
-   &&(\because \blkref{def_half_integer_modes}) \\
+   &&(\because \blkref{def_half_integer_checkZ}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Z_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\cdot 2\,Y_{j-1}^{\flat}
@@ -1717,7 +1825,7 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
 &= 2\,e^{-i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Y_l
    &&(\because 1 \leq l \leq M \text{ では } Y_l^{\flat} = Y_l) \\
 &= 2\,e^{-i\tilde\theta_\mu}\,\check{Y}_\mu
-   &&(\because \blkref{def_half_integer_modes})
+   &&(\because \blkref{def_half_integer_checkY})
 \end{aligned}`,
       ),
       paragraph([
@@ -1757,7 +1865,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ \check{Y}_\mu\right]
 &= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
-   &&(\because \blkref{def_half_integer_modes}) \\
+   &&(\because \blkref{def_half_integer_checkY}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Y_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2\,Z_{j+1}^{\flat}\right)
@@ -1775,7 +1883,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
 &= -2\,e^{i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Z_l
    &&(\because 1 \leq l \leq M \text{ では } Z_l^{\flat} = Z_l) \\
 &= -2\,e^{i\tilde\theta_\mu}\,\check{Z}_\mu
-   &&(\because \blkref{def_half_integer_modes})
+   &&(\because \blkref{def_half_integer_checkZ})
 \end{aligned}`,
       ),
     ],
@@ -1858,7 +1966,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         " 双線型（",
         math(String.raw`[\alpha X,\beta W]_+ = \alpha\beta[X,W]_+`),
         "）なので、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
         "、",
         ref("anticommutator_of_Z_and_Y"),
         "、",
@@ -1875,7 +1983,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu, \check{Z}_\nu\right]_+
 &= \left[\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j,\ \sum_{k=1}^{M} e^{-ik\tilde\theta_\nu}Z_k\right]_+
-   &&\bigl(\because \text{def\_half\_integer\_modes}\bigr) \\
+   &&\bigl(\because \blkref{def_half_integer_checkZ}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ik\tilde\theta_\nu}
    \left[Z_j, Z_k\right]_+
    &&\bigl(\because \text{反交換子の } \mathbb{C} \text{ 双線型性}\bigr) \\
@@ -1897,7 +2005,9 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
       ),
       paragraph([
         "第 2 式は、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         " と ",
         ref("anticommutator_of_Z_and_Y"),
         " の ",
@@ -1908,7 +2018,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu,\check{Y}_\nu\right]_+
 &= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Z_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
-   &&\bigl(\because \text{def\_half\_integer\_modes}\bigr) \\
+   &&\bigl(\because \blkref{def_half_integer_checkZ},\ \blkref{def_half_integer_checkY}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Z_j,Y_k]_+
    &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 0
@@ -1919,7 +2029,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
       ),
       paragraph([
         "第 3 式も、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkY"),
         "、",
         ref("anticommutator_of_Z_and_Y"),
         " の ",
@@ -1938,7 +2048,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         String.raw`\begin{aligned}
 \left[\check{Y}_\mu,\check{Y}_\nu\right]_+
 &= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Y_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
-   &&\bigl(\because \text{def\_half\_integer\_modes}\bigr) \\
+   &&\bigl(\because \blkref{def_half_integer_checkY}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Y_j,Y_k]_+
    &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
 &= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 2I\,\delta^M_{(j,k)}
@@ -2033,7 +2143,7 @@ M & (j = k) \\
       ),
       paragraph([
         "である。第 1 式は、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
         " と ",
         ref("theorem_exp_product"),
         " と準備の等式を順に使うと、一続きに",
@@ -2042,7 +2152,7 @@ M & (j = k) \\
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{ij\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_\mu}\right)e^{ij\tilde\theta_\mu}
-&&(\because \text{def\_half\_integer\_modes}) \\
+&&(\because \blkref{def_half_integer_checkZ}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_\mu}\,e^{ij\tilde\theta_\mu}
 &&(\because \text{有限和への分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,e^{i(j-k)\tilde\theta_\mu}
@@ -2057,7 +2167,7 @@ M & (j = k) \\
       ),
       paragraph([
         "第 2 式も、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkY"),
         " の ",
         math(String.raw`\check{Y}_\mu`),
         " の定義から同じ根拠の並びで、一続きに",
@@ -2066,7 +2176,7 @@ M & (j = k) \\
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{ij\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\right)e^{ij\tilde\theta_\mu}
-&&(\because \text{def\_half\_integer\_modes}) \\
+&&(\because \blkref{def_half_integer_checkY}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\,e^{ij\tilde\theta_\mu}
 &&(\because \text{有限和への分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{i(j-k)\tilde\theta_\mu}
@@ -2141,7 +2251,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
     proof: [
       paragraph([
         "まず ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
         " と ",
         ref("conjugate_index_of_check_Z_Y"),
         " (2) から ",
@@ -2152,7 +2262,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
         String.raw`\begin{aligned}
 \check{Z}_{M+1-\mu}
 &= \sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_{M+1-\mu}}
-&& (\because \text{def\_half\_integer\_modes}) \\
+&& (\because \blkref{def_half_integer_checkZ}) \\
 &= \sum_{k=1}^{M} Z_k\,e^{ik\tilde\theta_\mu}
 && (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)})
 \end{aligned}`,
@@ -2171,7 +2281,9 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
         "、そうでないとき ",
         math(String.raw`0`),
         " である。これと ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         "、",
         ref("theorem_exp_product"),
         "、",
@@ -2183,7 +2295,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{M+1-\mu}\check{Y}_\mu
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right)
    \left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
-&& (\because \text{準備した }\check Z_{M+1-\mu}\text{ の表示と def\_half\_integer\_modes}) \\
+&& (\because \text{準備した }\check Z_{M+1-\mu}\text{ の表示と }\blkref{def_half_integer_checkY}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
    e^{ik\tilde\theta_\mu}e^{-ij\tilde\theta_\mu}
 && (\because \text{積を二重和へ分配}) \\
@@ -2250,7 +2362,9 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
       ]),
       paragraph([
         "したがって、",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
+        " と ",
+        ref("def_half_integer_checkY"),
         "、",
         ref("theorem_exp_product"),
         "、",
@@ -2262,7 +2376,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{M+1-\mu}e^{-i\tilde\theta_\mu}
 &= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
    \left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right) e^{-i\tilde\theta_\mu}
-&& (\because \text{def\_half\_integer\_modes と準備した } \check{Z}_{M+1-\mu} \text{ の表示}) \\
+&& (\because \blkref{def_half_integer_checkY}\text{ と準備した } \check{Z}_{M+1-\mu} \text{ の表示}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
    e^{-ij\tilde\theta_\mu}e^{ik\tilde\theta_\mu}e^{-i\tilde\theta_\mu}
 && (\because \text{積を二重和へ分配}) \\

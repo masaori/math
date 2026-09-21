@@ -13,6 +13,8 @@ _sage_const_1 = Integer(1); _sage_const_2 = Integer(2); _sage_const_0 = Integer(
 #  対象ラベル:
 #    why_008_applies_only_to_minus_sector
 #    antiperiodic_exp_sum
+#    def_half_integer_checkZ
+#    def_half_integer_checkY
 #    def_half_integer_modes
 #    commutator_of_H_and_check_Z_Y
 #    anticommutator_of_check_Z_Y
@@ -467,7 +469,7 @@ for M in STEP_M:
         r3 = sum([O.Z[k] * sum([eiph((j - k) * th_tilde(M, mu))
                                 for mu in range(_sage_const_1 , M + _sage_const_1 )], CDF(_sage_const_0 ))
                   for k in range(_sage_const_1 , M + _sage_const_1 )], matrix(CDF, O.d, O.d, _sage_const_0 )) / M
-        S.add("recover_Z_Y (1) def_half_integer_modes の代入と分配", r0, r1)
+        S.add("recover_Z_Y (1) def_half_integer_checkZ の代入と分配", r0, r1)
         S.add("recover_Z_Y (2) 指数法則 [theorem_exp_product n=1]", r1, r2)
         S.add("recover_Z_Y (3) 有限和の順序交換", r2, r3)
         S.add("recover_Z_Y (4) antiperiodic_exp_sum で k=j の項のみ -> Z_j", r3, O.Z[j])
@@ -486,7 +488,7 @@ for M in STEP_M:
                  matrix(CDF, O.d, O.d, _sage_const_0 ))
         c3 = sum([O.Z[k] * eiph(k * t) for k in range(_sage_const_1 , M + _sage_const_1 )],
                  matrix(CDF, O.d, O.d, _sage_const_0 ))
-        S.add("H1_H2_via_check (ZM+1-mu 1) def_half_integer_modes", c0, c1)
+        S.add("H1_H2_via_check (ZM+1-mu 1) def_half_integer_checkZ", c0, c1)
         S.add("H1_H2_via_check (ZM+1-mu 2) conjugate_index_of_check_Z_Y (2)", c1, c3)
 
     # H_2 側の 4 段
@@ -507,7 +509,7 @@ for M in STEP_M:
                                      for mu in range(_sage_const_1 , M + _sage_const_1 )], CDF(_sage_const_0 ))
               for k in range(_sage_const_1 , M + _sage_const_1 ) for j in range(_sage_const_1 , M + _sage_const_1 )],
              matrix(CDF, O.d, O.d, _sage_const_0 )) / M
-    S.add("H1_H2_via_check (H2 1) def_half_integer_modes の代入", h0, h1)
+    S.add("H1_H2_via_check (H2 1) def_half_integer_checkZ / def_half_integer_checkY の代入", h0, h1)
     S.add("H1_H2_via_check (H2 2) 積を二重和へ分配", h1, h2)
     S.add("H1_H2_via_check (H2 3) 指数法則 [theorem_exp_product n=1]", h2, h3)
     S.add("H1_H2_via_check (H2 4) 有限和の順序交換", h3, h4)
@@ -537,7 +539,7 @@ for M in STEP_M:
              matrix(CDF, O.d, O.d, _sage_const_0 )) / M
     k5 = (sum([O.Y[j] * O.Z[j + _sage_const_1 ] * M for j in range(_sage_const_1 , M)],
               matrix(CDF, O.d, O.d, _sage_const_0 )) + O.Y[M] * O.Z[_sage_const_1 ] * (-M)) / M
-    S.add("H1_H2_via_check (H1 1) def_half_integer_modes の代入", k0, k1)
+    S.add("H1_H2_via_check (H1 1) def_half_integer_checkZ / def_half_integer_checkY の代入", k0, k1)
     S.add("H1_H2_via_check (H1 2) 積を二重和へ分配", k1, k2)
     S.add("H1_H2_via_check (H1 3) 指数法則 [theorem_exp_product n=1]", k2, k3)
     S.add("H1_H2_via_check (H1 4) 有限和の順序交換", k3, k4)

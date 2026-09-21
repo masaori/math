@@ -1,8 +1,11 @@
 /-
 # `check(Z)_μ`, `check(Y)_μ`（半整数運動量モード）の定義（**具体版**）
 
-対応する人手証明のラベル: `def_half_integer_modes`
+対応する人手証明のラベル: `def_half_integer_checkZ`, `def_half_integer_checkY`,
+`def_half_integer_modes`
 （`structured-latex/content/013_even_sector_modes.ts` の
+`evensector_003_definition_half_integer_checkZ`,
+`evensector_003_definition_half_integer_checkY`,
 `evensector_003_definition_half_integer_modes`）
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`。
@@ -32,15 +35,17 @@ namespace Ising2D
 
 variable {M : ℕ}
 
-/-- **原文の `check(Z)_μ := ∑_{j=1}^{M} Z_j e^{-i j θ~_μ}`**。 -/
+/-- **`def_half_integer_checkZ`**:
+原文の `check(Z)_μ := ∑_{j=1}^{M} Z_j e^{-i j θ~_μ}`。 -/
 noncomputable def checkZ (M : ℕ) (μ : ℤ) : TensorPow M :=
   ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Z j
 
-/-- **原文の `check(Y)_μ := ∑_{j=1}^{M} Y_j e^{-i j θ~_μ}`**。 -/
+/-- **`def_half_integer_checkY`**:
+原文の `check(Y)_μ := ∑_{j=1}^{M} Y_j e^{-i j θ~_μ}`。 -/
 noncomputable def checkY (M : ℕ) (μ : ℤ) : TensorPow M :=
   ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Y j
 
-/-! ## 原文が挙げる 3 つの性質 -/
+/-! ## `def_half_integer_modes` に残した四つの性質 -/
 
 /-- **(1) 反周期性**: `e^{-iM θ~_μ} = -1`。
 

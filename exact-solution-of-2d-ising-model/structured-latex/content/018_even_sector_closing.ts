@@ -273,7 +273,7 @@ export default defineBlocks([
       ]),
       paragraph([
         "(2) ",
-        ref("def_half_integer_modes"),
+        ref("def_half_integer_checkZ"),
         " の ",
         math(String.raw`\check{Z}_\mu = \sum_{j=1}^{M}Z_je^{-ij\tilde\theta_\mu}`),
         " は ",
