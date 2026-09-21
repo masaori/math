@@ -549,4 +549,3 @@ for M in STEP_M:
 ok_all = S.report_all()
 print(f"  段数（区別された等式の種類）: {len(S.worst)}")
 print("check_01:", "PASS" if ok_all else "FAIL")
-
