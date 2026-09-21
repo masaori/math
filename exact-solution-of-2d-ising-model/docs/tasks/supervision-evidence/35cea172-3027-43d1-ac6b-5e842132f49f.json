@@ -1,0 +1,30 @@
+{
+  "実行識別子": "35cea172-3027-43d1-ac6b-5e842132f49f",
+  "観測時刻": "2026-09-21T20:56:25+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "state": "not running",
+    "runs": 5,
+    "last exit code": 1
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "3d05a4e2dffcf073838797e47d24ad41df834e7bf65e40378224940c326ee4ed",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-21T20:56:25+09:00",
+    "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd-error.log",
+    "終端": "2026-09-21 20:43:05更新の直近起動は「Codex probeの実行先が正規の配布shimではない; 再試行しない」で終了1。19:01:12の成功より後の記録。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 5・last exit 1。launchd.logの19:01:12成功より後に更新されたlaunchd-error.logは20:43起動の終端で「Codex probeの実行先が正規の配布shimではない; 再試行しない」と記録しており、直近は異常終了とした。",
+  "成果比較": {
+    "開始成果": "bd81d266b620c058aec218cb1d39d737939c301d",
+    "前回監督の読解終点": "28800ac642e634d4d1b99287ad1b601fef735c86",
+    "今回読解終点": "bd81d266b620c058aec218cb1d39d737939c301d",
+    "前回監督以後": "Fourier変換したhat Zとhat Yの独立定義化、型付き所属、最小幅検算、Lean対応がremote defaultへ統合された。"
+  }
+}
