@@ -664,6 +664,9 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.one_sided_four_segment_path_injective_necSuf
   Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective
   Ising2DLambda.KacWard.oneSidedPeriodicLiftClosure_injective_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf
+  Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning
+  Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning_from_necSuf
   Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase_injOn_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarAction_pow_smul
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.action_pow_smul_necSuf

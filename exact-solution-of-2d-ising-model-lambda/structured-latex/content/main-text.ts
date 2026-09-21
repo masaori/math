@@ -66155,6 +66155,11 @@ P_n(\gamma)
               title: { text: "一側閉包のトーラス射影の循環総回転数は正負 4 のいずれかである" },
               labels: ["claim_one_sided_closure_projection_cyclic_turning"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning",
+                "Ising2DLambda.NecSuf.KacWard.translated_injective_path_whitney_turning_necSuf",
+                "Ising2DLambda.KacWard.oneSidedClosureProjection_cyclicTurning_from_necSuf",
+              ],
               verification: ["sagemath/check/one-sided-periodic-lift-closure"],
               statement: [
                 paragraph([
