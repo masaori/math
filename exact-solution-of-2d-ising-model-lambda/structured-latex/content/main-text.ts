@@ -28379,7 +28379,6 @@ u_z&=\frac{1}{L}\odot P_{A,z}(v)
 &=v
 &&(\because\ \blkref{claim_qbar_projector_reconstruction})
 \end{aligned}`),
-                    paragraph([ref("claim_qbar_projector_reconstruction")]),
                     paragraph([
                       "したがって求める族は存在する。この段は代数的数を成分とする有限個の列ベクトルの",
                       "スカラー倍と有限和だけで閉じ、実数体も複素数体も現れない。",
