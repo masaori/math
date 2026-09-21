@@ -21,4 +21,3 @@ assert checked == 4
 print('integer difference inputs checked:', checked)
 print('difference branches checked:', sorted(seen))
 print('RESULT: PASS')
-

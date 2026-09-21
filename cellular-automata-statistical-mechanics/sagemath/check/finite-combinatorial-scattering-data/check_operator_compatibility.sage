@@ -14,4 +14,3 @@ for index, pair in product(I, product(B, C)):
 assert checked == len(I) * len(B) * len(C)
 print('operator compatibility inputs checked:', checked)
 print('RESULT: PASS')
-

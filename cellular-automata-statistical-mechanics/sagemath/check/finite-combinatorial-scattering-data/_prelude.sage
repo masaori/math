@@ -54,4 +54,3 @@ def swap_affine(pair_left, pair_right, energy):
     degree_left, state_left = pair_left
     degree_right, state_right = pair_right
     return ((degree_right + energy, state_right), (degree_left - energy, state_left))
-

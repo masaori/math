@@ -10,4 +10,3 @@ assert base_input in product(B, C)
 assert H[base_input] == base_integer
 print('normalization input checked:', base_input)
 print('RESULT: PASS')
-
