@@ -82,11 +82,14 @@ export const documentOrganization = [
       },
       {
         id: "finite_combinatorial_scattering_data",
-        title: "有限組合せ散乱表と整数位相持ち上げ",
-        input: "空でない有限集合、有限添字集合、部分作用表、左右の作用因子表、直積間の全単射、整数値表とその正規化を入力とする。",
-        output: "有限表の可換性・整数差分・正規化を別々に有限決定し、整数座標を伴う高々可算な持ち上げと三体 Yang–Baxter 適合条件を定義する。",
-        main: "主張は、固定した有限内部表の三つの適合条件が別々の有限等号比較で決定できる一方、整数位相を伴うアフィン化は高々可算であり、その三体整合性は内部表の有限性だけから自動ではないことである。",
-        mainLabels: ["claim_finite_internal_scattering_compatibilities_decidable"],
+        title: "有限組合せ散乱表と結晶化境界",
+        input: "空でない有限集合、部分作用表、直積間の全単射、整数値表とその正規化、および比較元となる q=0 で正則な複素係数作用素を入力とする。",
+        output: "有限表の適合条件と整数位相持ち上げを定義し、q=0 の基底成分を有限全単射と整数指数へ送る結晶化抽出、および異なるスカラー規格化を復元できない反例を得る。",
+        main: "主張は、有限内部表の適合条件が有限決定できる一方、結晶化抽出は q=0 で生き残る有限全単射と整数指数だけを保存し、結晶化前の異なるスカラー規格化を一意に復元しないことである。",
+        mainLabels: [
+          "claim_finite_internal_scattering_compatibilities_decidable",
+          "claim_crystallization_extraction_not_injective",
+        ],
       },
       {
         id: "finite_submultiplicative_count_bounds",

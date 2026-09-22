@@ -181,4 +181,112 @@ S_i^{CB}:\{v\in C\times B\mid E_i^{CB}(v)\ne\bot\}\longrightarrow\{\mathsf L,\ma
       ]),
     ],
   },
+  {
+    id: "finite_combinatorial_scattering_data_definition_crystallization_extraction",
+    kind: "definition",
+    title: { text: "正規化された q 依存作用素の結晶化抽出" },
+    labels: ["def_normalized_q_operator_crystallization_extraction"],
+    habitat: "mixed",
+    realEscape:
+      "結晶化前の比較元を記述するため複素係数の有理関数を用いる。q=0 で正則な係数の代数的評価だけを使い、解析的極限、位相、内積、完備性は用いない。",
+    statement: [
+      paragraph([
+        math(String.raw`q,z`), " を不定元とし、",
+        math(String.raw`\mathcal O_0:=\{f\in\mathbb C(q):f\text{ は }q=0\text{ で正則}\}`),
+        " と置く。", math(String.raw`\mathcal L_z`), " を ", math(String.raw`z`),
+        " の複素 Laurent 多項式環、",
+        math(String.raw`\mathcal A_0:=\mathcal O_0\otimes_{\mathbb C}\mathcal L_z`),
+        " とし、係数ごとの評価写像を ",
+        math(String.raw`\operatorname{ev}_0:\mathcal A_0\to\mathcal L_z`),
+        " とする。空でない有限集合 ", math(String.raw`B,C`), " に対し、基底をそれぞれ ",
+        math(String.raw`\{e_b:b\in B\}`), " と ", math(String.raw`\{e_c:c\in C\}`), " で標識する。",
+      ]),
+      displayMath(String.raw`\mathcal M_{BC}:=
+\bigoplus_{(b,c)\in B\times C}\mathcal A_0(e_b\otimes e_c),
+\qquad
+\mathcal M_{CB}:=
+\bigoplus_{(c,b)\in C\times B}\mathcal A_0(e_c\otimes e_b)`),
+      paragraph([
+        "と置き、", math(String.raw`\operatorname{ev}_0`),
+        " を両自由加群へ係数ごとに延長する。", math(String.raw`\mathcal A_0`), " 上の同型 ",
+        math(String.raw`\mathcal R_{BC}:\mathcal M_{BC}\to\mathcal M_{CB}`),
+        " が、全ての ", math(String.raw`(b,c)\in B\times C`),
+        " について一意な ", math(String.raw`(\widetilde c,\widetilde b)\in C\times B`),
+        " と ", math(String.raw`H_{BC}(b,c)\in\mathbb Z`), " を用いて",
+      ]),
+      displayMath(String.raw`\operatorname{ev}_0\!\left(
+  \mathcal R_{BC}(e_b\otimes e_c)
+\right)
+=z^{H_{BC}(b,c)}e_{\widetilde c}\otimes e_{\widetilde b}`),
+      paragraph([
+        "を満たし、対応 ",
+        math(String.raw`R_{BC}(b,c):=(\widetilde c,\widetilde b)`),
+        " が全単射であるとき、", math(String.raw`\mathcal R_{BC}`),
+        " を結晶化抽出可能と呼ぶ。このとき部分写像",
+      ]),
+      displayMath(String.raw`\operatorname{Cry}(\mathcal R_{BC}):=(R_{BC},H_{BC})`),
+      paragraph([
+        "を結晶化抽出と呼ぶ。出力の ", math(String.raw`R_{BC}`), " は有限表、",
+        math(String.raw`H_{BC}`), " は有限定義域上の整数値表である。",
+        "入力の複素係数、", math(String.raw`q\ne0`), " での値、消える項、",
+        math(String.raw`q,z`), " への依存は出力に含めない。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_combinatorial_scattering_data_claim_crystallization_not_injective",
+    kind: "claim",
+    title: { text: "結晶化抽出はスカラー規格化を復元しない" },
+    labels: ["claim_crystallization_extraction_not_injective"],
+    habitat: "mixed",
+    realEscape:
+      "結晶化前の異なる作用素族を比較するため複素係数の q 有理関数環を用いる。q=0 での代数的評価だけを使い、解析的極限や複素対数は用いない。",
+    statement: [
+      paragraph([
+        ref("def_normalized_q_operator_crystallization_extraction"), " の結晶化抽出可能な ",
+        math(String.raw`\mathcal R_{BC}`), " に対し",
+      ]),
+      displayMath(String.raw`\mathcal R_{BC}^{(0)}:=\mathcal R_{BC},
+\qquad
+\mathcal R_{BC}^{(1)}:=(1+q)\mathcal R_{BC}`),
+      paragraph([
+        "と置く。二つは異なる結晶化抽出可能な同型だが、",
+      ]),
+      displayMath(String.raw`\operatorname{Cry}(\mathcal R_{BC}^{(0)})
+=\operatorname{Cry}(\mathcal R_{BC}^{(1)})`),
+      paragraph([
+        "である。従って結晶化抽出は単射でなく、有限内部散乱表と整数値表から結晶化前のスカラー規格化を一意に復元する逆写像は存在しない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`1+q\in\mathcal O_0`), " は単元であり、",
+        math(String.raw`\operatorname{ev}_0(1+q)=1`), " である。任意の ",
+        math(String.raw`(b,c)\in B\times C`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\operatorname{ev}_0\!\left(
+  \mathcal R_{BC}^{(1)}(e_b\otimes e_c)
+\right)
+&=\operatorname{ev}_0(1+q)\,
+  \operatorname{ev}_0\!\left(
+    \mathcal R_{BC}(e_b\otimes e_c)
+  \right)
+  \quad(\because\ \operatorname{ev}_0\ \text{は環準同型})\\
+&=\operatorname{ev}_0\!\left(
+    \mathcal R_{BC}(e_b\otimes e_c)
+  \right)
+  \quad(\because\ \operatorname{ev}_0(1+q)=1).
+\end{aligned}`),
+      paragraph([
+        ref("def_normalized_q_operator_crystallization_extraction"),
+        " により、二つの入力から抽出される全単射と整数値表は一致する。",
+        "一方、もし ", math(String.raw`\mathcal R_{BC}^{(1)}=\mathcal R_{BC}^{(0)}`),
+        " なら、両辺の差を取って ", math(String.raw`q\mathcal R_{BC}=0`), " となる。",
+        math(String.raw`\mathcal A_0`), " は整域で、",
+        math(String.raw`q\ne0`), " かつ ", math(String.raw`\mathcal R_{BC}`),
+        " は同型なので、これは不可能である。従って二つの入力は異なる。",
+      ]),
+    ],
+  },
 ]);

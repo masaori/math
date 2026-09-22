@@ -18,6 +18,8 @@ export const blockSectionAssignments = {
   "finite_combinatorial_scattering_data_claim_finite_checks_decidable": "finite_combinatorial_scattering_data",
   "finite_combinatorial_scattering_data_definition_affinization_and_lift": "finite_combinatorial_scattering_data",
   "finite_combinatorial_scattering_data_definition_affine_yang_baxter_compatibility": "finite_combinatorial_scattering_data",
+  "finite_combinatorial_scattering_data_definition_crystallization_extraction": "finite_combinatorial_scattering_data",
+  "finite_combinatorial_scattering_data_claim_crystallization_not_injective": "finite_combinatorial_scattering_data",
   "cyclic_stage_uniform_marginals_definition_family": "cyclic_stage_uniform_marginals",
   "cyclic_stage_uniform_marginals_claim_normalized": "cyclic_stage_uniform_marginals",
   "cyclic_stage_uniform_marginals_claim_embedding_compatibility": "cyclic_stage_uniform_marginals",
