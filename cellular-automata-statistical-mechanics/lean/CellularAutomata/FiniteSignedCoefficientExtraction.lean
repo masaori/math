@@ -7,6 +7,7 @@
 実数体・複素数体、対数、除算、極限は使わない。
 -/
 import Mathlib
+import CellularAutomata.TimeExpansionDependency
 
 namespace CellularAutomata.FiniteSignedCoefficientExtraction
 
@@ -185,5 +186,96 @@ theorem counterexample_not_indicator (F : BinaryState → BinaryState) :
   have hZeroOrOne := indicatorMatrix_entry_zero_or_one F BinaryState.zero BinaryState.zero
   rw [counterexample_top_entry] at hEntry
   omega
+
+/-! ## 局所係数因子から一段発展行列への比較写像 -/
+
+open CellularAutomata.EssentialDependency
+open CellularAutomata.RedundantNeighbor
+open CellularAutomata.TimeExpansionDependency
+open scoped BigOperators
+
+section LocalFactorStepEvolution
+
+variable {V : Type} [Fintype V] [LinearOrder V] [Nonempty V]
+
+/-- `def_finite_local_update_coefficient_factor` の局所更新等号の指示値。 -/
+def localUpdateIndicator (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State)
+    (v : V) (x y : V → State) : ℤ :=
+  if y v = f v (restrict (N v) x) then 1 else 0
+
+/-- `def_finite_local_update_coefficient_factor`。局所更新等号は一元基底または零表を与える。 -/
+def localUpdateCoefficientFactor (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State)
+    (v : V) (x y : V → State) : CoefficientTable V :=
+  if y v = f v (restrict (N v) x) then basisTable {v} else zeroTable
+
+/-- 局所係数因子が人手証明の二場合分けと一致する。 -/
+theorem localUpdateCoefficientFactor_eq (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State)
+    (v : V) (x y : V → State) :
+    localUpdateCoefficientFactor N f v x y =
+      if y v = f v (restrict (N v) x) then basisTable {v} else zeroTable := by
+  rfl
+
+/-- `def_finite_ordered_local_factor_product`。全順序に沿う係数積と標準順序単項式の積。 -/
+def orderedLocalFactorProduct (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State)
+    (x y : V → State) : CoefficientTable V :=
+  fun U =>
+    (∏ v : V, localUpdateIndicator N f v x y) *
+      permutationMonomial (Equiv.refl V) U
+
+/-- `def_finite_local_factor_step_evolution_matrix`。 -/
+def localFactorStepEvolutionMatrix (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State) :
+    (V → State) → (V → State) → ℤ :=
+  fun x y => topCoefficient (orderedLocalFactorProduct N f x y)
+
+/-- 全局所更新等号の指示値積は、大域更新の指示値に等しい。 -/
+theorem localUpdateIndicator_product_eq_indicator (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State)
+    (x y : V → State) :
+    (∏ v : V, localUpdateIndicator N f v x y) =
+      indicatorMatrix (globalMap N f) x y := by
+  classical
+  by_cases hxy : y = globalMap N f x
+  · subst y
+    simp [localUpdateIndicator, indicatorMatrix, globalMap]
+  · have hv : ∃ v : V, y v ≠ globalMap N f x v := by
+      by_contra h
+      apply hxy
+      funext v
+      exact not_ne_iff.mp (not_exists.mp h v)
+    obtain ⟨v, hv⟩ := hv
+    rw [Finset.prod_eq_zero (Finset.mem_univ v)]
+    · simp [indicatorMatrix, hxy]
+    · have hv' : y v ≠ f v (restrict (N v) x) := by
+        simpa only [globalMap] using hv
+      simp [localUpdateIndicator, hv']
+
+/-- `theorem_finite_local_factor_step_matrix_equals_update_indicator`。
+    局所係数因子の最高次係数行列は大域更新の零一指示行列に等しい。 -/
+theorem localFactorStepEvolutionMatrix_eq_indicator (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State) :
+    localFactorStepEvolutionMatrix N f = indicatorMatrix (globalMap N f) := by
+  classical
+  funext x y
+  unfold localFactorStepEvolutionMatrix orderedLocalFactorProduct topCoefficient
+  simp [permutationMonomial]
+  exact localUpdateIndicator_product_eq_indicator N f x y
+
+/-- `claim_finite_local_factor_step_comparison_decidable` の有限な入力表。
+    全成分は局所真理値表から計算した指示値の有限積で決まる。 -/
+theorem localFactorStepEvolutionMatrix_entry (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State)
+    (x y : V → State) :
+    localFactorStepEvolutionMatrix N f x y =
+      ∏ v : V, localUpdateIndicator N f v x y := by
+  classical
+  unfold localFactorStepEvolutionMatrix orderedLocalFactorProduct topCoefficient
+  simp [permutationMonomial]
+
+end LocalFactorStepEvolution
 
 end CellularAutomata.FiniteSignedCoefficientExtraction
