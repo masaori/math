@@ -100,7 +100,7 @@ theorem checkPhase_add_left (M : ℕ) (k l μ : ℤ) :
   congr 1
   ring
 
-/-- **原文 `def_half_integer_modes` (1)（反周期性）**: `e^{-iM θ~_μ} = -1`。
+/-- **原文 `half_integer_phase_antiperiodicity`（反周期性）**: `e^{-iM θ~_μ} = -1`。
 
 `M(2μ-1) = 2M·μ - M` と分けて、前半は `2M` 乗根の周期（`= 1`）、
 後半が `expPhase (2M) (-M) = -1` になる。 -/

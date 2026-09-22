@@ -10,7 +10,7 @@
 #    antiperiodic_exp_sum
 #    def_half_integer_checkZ
 #    def_half_integer_checkY
-#    def_half_integer_modes
+#    half_integer_phase_antiperiodicity / def_half_integer_modes
 #    commutator_of_H_and_check_Z_Y
 #    anticommutator_of_check_Z_Y
 #    recover_Z_Y_from_check_Z_Y
@@ -302,23 +302,53 @@ for M in STEP_M:
     S.add("antiperiodic_exp_sum (7c) M*1=M", CDF(M * 1), CDF(M))
 
     # -----------------------------------------------------------------
-    # def_half_integer_modes (1)(2)(3) の各段
+    # half_integer_phase_antiperiodicity と def_half_integer_modes (2)(3) の各段
     # -----------------------------------------------------------------
     for mu in list(range(1, M + 1)) + [0, -1, M + 1]:
         t = th_tilde(M, mu)
-        S.add("def_half_integer_modes (1a) M theta~ = 2 pi mu - pi",
-              RDF(M) * t, RDF(2 * pi * mu - pi))
-        S.add("def_half_integer_modes (1b) e^{-iM theta~} = e^{-2pi i mu} e^{i pi}",
-              eiph(-M * t), eiph(-RDF(2 * pi * mu)) * eiph(RDF(pi)))
-        S.add("def_half_integer_modes (1c) = -1", eiph(-M * t), CDF(-1))
+        expanded = RDF(M) * (RDF(2 * pi) / RDF(M)) * (RDF(mu) - RDF(1) / RDF(2))
+        half_turn = RDF(2 * pi) * (RDF(mu) - RDF(1) / RDF(2))
+        S.add("half_integer_phase_antiperiodicity (a) theta~ の定義を代入",
+              RDF(M) * t, expanded)
+        S.add("half_integer_phase_antiperiodicity (b) M を約分",
+              expanded, half_turn)
+        S.add("half_integer_phase_antiperiodicity (c) 実数の分配則",
+              half_turn, RDF(2 * pi * mu - pi))
+        S.add("half_integer_phase_antiperiodicity (d) Euler formula",
+              eiph(-M * t), cos(RDF(M) * t) - CDF(I) * sin(RDF(M) * t))
+        S.add("half_integer_phase_antiperiodicity (e) substitute M theta~",
+              cos(RDF(M) * t) - CDF(I) * sin(RDF(M) * t),
+              cos(RDF(2 * pi * mu - pi)) - CDF(I) * sin(RDF(2 * pi * mu - pi)))
+        S.add("half_integer_phase_antiperiodicity (f) cos integer half-turn = -1",
+              cos(RDF(2 * pi * mu - pi)) - CDF(I) * sin(RDF(2 * pi * mu - pi)),
+              CDF(-1) - CDF(I) * sin(RDF(2 * pi * mu - pi)))
+        S.add("half_integer_phase_antiperiodicity (g) sin integer half-turn = 0",
+              CDF(-1) - CDF(I) * sin(RDF(2 * pi * mu - pi)),
+              CDF(-1) - CDF(I) * CDF(0))
+        S.add("half_integer_phase_antiperiodicity (h) i*0 = 0",
+              CDF(-1) - CDF(I) * CDF(0), CDF(-1) - CDF(0))
+        S.add("half_integer_phase_antiperiodicity (i) additive identity",
+              CDF(-1) - CDF(0), CDF(-1))
         S.add("def_half_integer_modes (2a) theta~_{mu+M} = theta~_mu + 2 pi",
               th_tilde(M, mu + M), t + RDF(2 * pi))
         for j in range(1, M + 1):
-            S.add("def_half_integer_modes (2b) e^{-ij theta~_{mu+M}} = e^{-ij theta~_mu}",
-                  eiph(-j * th_tilde(M, mu + M)), eiph(-j * t))
-        S.add("def_half_integer_modes (2c) checkZ_{mu+M} = checkZ_mu",
+            shifted = th_tilde(M, mu + M)
+            S.add("def_half_integer_modes (2b) negative-angle Euler representation",
+                  eiph(-j * shifted), cos(RDF(j) * shifted) - CDF(I) * sin(RDF(j) * shifted))
+            S.add("def_half_integer_modes (2c) substitute theta~_{mu+M}",
+                  cos(RDF(j) * shifted) - CDF(I) * sin(RDF(j) * shifted),
+                  cos(RDF(j) * (t + RDF(2 * pi))) - CDF(I) * sin(RDF(j) * (t + RDF(2 * pi))))
+            S.add("def_half_integer_modes (2d) distribute j",
+                  cos(RDF(j) * (t + RDF(2 * pi))) - CDF(I) * sin(RDF(j) * (t + RDF(2 * pi))),
+                  cos(RDF(j) * t + RDF(2 * pi * j)) - CDF(I) * sin(RDF(j) * t + RDF(2 * pi * j)))
+            S.add("def_half_integer_modes (2e) trigonometric periodicity",
+                  cos(RDF(j) * t + RDF(2 * pi * j)) - CDF(I) * sin(RDF(j) * t + RDF(2 * pi * j)),
+                  cos(RDF(j) * t) - CDF(I) * sin(RDF(j) * t))
+            S.add("def_half_integer_modes (2f) reverse negative-angle Euler representation",
+                  cos(RDF(j) * t) - CDF(I) * sin(RDF(j) * t), eiph(-j * t))
+        S.add("def_half_integer_modes (2g) checkZ_{mu+M} = checkZ_mu",
               checkZ(O, mu + M), checkZ(O, mu))
-        S.add("def_half_integer_modes (2d) checkY_{mu+M} = checkY_mu",
+        S.add("def_half_integer_modes (2h) checkY_{mu+M} = checkY_mu",
               checkY(O, mu + M), checkY(O, mu))
         S.add("def_half_integer_modes (3) theta~_{1-mu} = -theta~_mu",
               th_tilde(M, 1 - mu), -t)

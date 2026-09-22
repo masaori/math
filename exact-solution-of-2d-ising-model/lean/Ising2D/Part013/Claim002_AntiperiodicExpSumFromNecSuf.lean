@@ -1,7 +1,8 @@
 /-
 # 半整数運動量の指数和・添字周期性を**必要十分版から導出**する
 
-対応する人手証明のラベル: `antiperiodic_exp_sum`, `def_half_integer_modes` (1)(2)
+対応する人手証明のラベル: `antiperiodic_exp_sum`,
+`half_integer_phase_antiperiodicity`, `def_half_integer_modes` (2)
 （`structured-latex/content/013_even_sector_modes.ts`）
 
 具体版（直接証明）は `Ising2D/Part013/Claim002_AntiperiodicExpSum.lean` と
@@ -17,7 +18,7 @@
 | --- | --- | --- |
 | `antiperiodic_exp_sum` の奇偶分割 | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `ξ := e^{-iπ/M}`（1 の原始 `2M` 乗根） |
 | `antiperiodic_exp_sum` の閉形式 | `NecSuf.sum_zpow_antiperiodic` | 同上 |
-| `def_half_integer_modes` (1) | `NecSuf.pow_half_eq_neg_one` | 同上 |
+| `half_integer_phase_antiperiodicity` | `NecSuf.pow_half_eq_neg_one` | 同上 |
 | `def_half_integer_modes` (2) | `NecSuf.transform_periodic`（**整数運動量と共通**） | 重み `w_j = ξ^{-j}`、周波数 `a_j = j`、`ζ = ξ^2` |
 
 とくに (2) は**整数運動量版 `hatZ_hatY_M_periodicity` とまったく同じ必要十分版**の
@@ -245,9 +246,17 @@ theorem antiperiodic_exp_sum_of_necSuf (hM : M ≠ 0) (k : ℤ) :
   rw [Finset.sum_congr rfl fun μ _ => hL μ,
     NecSuf.sum_zpow_antiperiodic (K := ℂ) hM hξ (-k), ← expPhase_eq_zpow_one, hdelta]
 
-/-- **`def_half_integer_modes` (1)（反周期性）を `NecSuf.pow_half_eq_neg_one` から導いたもの**。 -/
-theorem checkPhase_M_of_necSuf (hM : M ≠ 0) : (expPhase (2 * M) 1) ^ M = -1 :=
-  NecSuf.pow_half_eq_neg_one hM (isPrimitiveRoot_expPhase_one (by omega))
+/-- **`half_integer_phase_antiperiodicity`（反周期性）を
+`NecSuf.pow_half_eq_neg_one` から導いたもの**。 -/
+theorem checkPhase_M_of_necSuf (hM : M ≠ 0) (μ : ℤ) : checkPhase M (M : ℤ) μ = -1 := by
+  have hξ : IsPrimitiveRoot (expPhase (2 * M) 1) (2 * M) :=
+    isPrimitiveRoot_expPhase_one (by omega)
+  rw [checkPhase, expPhase_eq_zpow_one,
+    show (M : ℤ) * (2 * μ - 1) = (2 * μ - 1) * (M : ℤ) by ring,
+    NecSuf.zpow_mul_natCast hM hξ (2 * μ - 1)]
+  rw [show 2 * μ - 1 = 2 * (μ - 1) + 1 by ring, zpow_add₀ (by norm_num : (-1 : ℂ) ≠ 0)]
+  rw [zpow_mul]
+  norm_num
 
 /-! ## 添字の周期性を（整数運動量と共通の）必要十分版から導く -/
 

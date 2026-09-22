@@ -833,10 +833,75 @@ e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Y_{j_{\mathbb Z}}
   },
 
   {
+    id: "evensector_003_claim_half_integer_phase_antiperiodicity",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 5 },
+    title: { text: "半整数位相の反周期性" },
+    labels: ["half_integer_phase_antiperiodicity"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb Z_{\geq2}`),
+        "、",
+        math(String.raw`\mu\in\mathbb Z`),
+        " とする。",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`\tilde\theta_\mu`),
+        " について",
+      ]),
+      displayMath(String.raw`e^{-i M \tilde\theta_\mu} = -1`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "まず指数の角度を計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+M\tilde\theta_\mu
+&=M\cdot\frac{2\pi}{M}\left(\mu-\tfrac12\right)
+&&\bigl(\because\ \tilde\theta_\mu=\tfrac{2\pi}{M}(\mu-\tfrac12)\text{ を代入}\bigr)\\
+&=2\pi\left(\mu-\tfrac12\right)
+&&\bigl(\because\ M\geq2\text{ より }M\neq0\text{ なので }M\text{ を約分}\bigr)\\
+&=2\pi\mu-\pi
+&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)
+\end{aligned}`),
+      paragraph([
+        "この等式と ",
+        ref("euler_formula_cos_sin"),
+        " より",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{-iM\tilde\theta_\mu}
+&= \cos\!\left(M\tilde\theta_\mu\right)-i\sin\!\left(M\tilde\theta_\mu\right)
+&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }e^{-ix}=\cos x-i\sin x\bigr) \\
+&= \cos(2\pi\mu-\pi)-i\sin(2\pi\mu-\pi)
+&&\bigl(\because M\tilde\theta_\mu=2\pi\mu-\pi\ \text{を 2 箇所へ同時代入}\bigr) \\
+&= -1-i\sin(2\pi\mu-\pi)
+&&\bigl(\because \mu\in\mathbb Z\ \text{より}\ \cos(2\pi\mu-\pi)=-1\bigr) \\
+&= -1-i\cdot0
+&&\bigl(\because \mu\in\mathbb Z\ \text{より}\ \sin(2\pi\mu-\pi)=0\bigr) \\
+&= -1-0
+&&\bigl(\because i\cdot0=0\bigr) \\
+&= -1
+&&\bigl(\because \text{加法の単位元}\bigr)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "旧複合ラベル def_half_integer_modes の (1) から、半整数位相の反周期性だけを独立した主張へ分離した。",
+        "複素指数の先行定義と所属証明は現行本文では未整備である。分離後の証明では、行列の exp 積公式をスカラーへ無標識に同一視せず、Euler 公式を一度だけ適用してから実数の三角関数値を一段ずつ評価する。",
+      ],
+    },
+  },
+
+  {
     id: "evensector_003_definition_half_integer_modes",
     kind: "claim",
     origin: { path: SRC, ordinal: 5 },
-    title: { text: "半整数位相と Fourier 行列の周期性" },
+    title: { text: "半整数運動量 Fourier 行列の添字周期性と共役添字" },
     labels: ["def_half_integer_modes"],
     statement: [
       paragraph([
@@ -851,13 +916,9 @@ e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Y_{j_{\mathbb Z}}
         ref("def_half_integer_checkZ"),
         "、",
         ref("def_half_integer_checkY"),
-        " の Fourier 行列について、次の 4 つの性質が成り立つ。",
+        " の Fourier 行列について、次の 3 つの性質が成り立つ。番号は既存の参照との対応を保つ。",
       ]),
-      paragraph(["次の 4 つの性質を後で繰り返し使う。"]),
       list([
-        [
-          math(String.raw`\text{(1) 反周期性：}\quad e^{-i M \tilde\theta_\mu} = -1`),
-        ],
         [
           math(String.raw`\text{(2) 添字の周期性（}Z\text{）：}\quad \check{Z}_{\mu+M} = \check{Z}_\mu`),
         ],
@@ -870,38 +931,6 @@ e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Y_{j_{\mathbb Z}}
       ]),
     ],
     proof: [
-      paragraph([
-        "(1) まず指数の角度を計算する。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-M\tilde\theta_\mu
-&=2\pi\left(\mu-\tfrac12\right)
-&&\bigl(\because\ \tilde\theta_\mu=\tfrac{2\pi}{M}(\mu-\tfrac12)\bigr)\\
-&=2\pi\mu-\pi
-&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)
-\end{aligned}`),
-      paragraph([
-        "この等式と ",
-        ref("euler_formula_cos_sin"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-e^{-iM\tilde\theta_\mu}
-&= e^{-i(2\pi\mu - \pi)}
-&&\bigl(\because M\tilde\theta_\mu = 2\pi\mu - \pi\bigr) \\
-&= e^{-2\pi i\mu}\,e^{i\pi}
-&&\bigl(\because \blkref{theorem_exp_product}\ (n=1)\bigr) \\
-&= \left(\cos(2\pi\mu) - i\sin(2\pi\mu)\right)\left(\cos\pi + i\sin\pi\right)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\ \text{を 2 箇所へ同時適用}\bigr) \\
-&= \left(1 - i\cdot 0\right)\left(-1 + i\cdot 0\right)
-&&\bigl(\because \cos(2\pi\mu)=1,\ \sin(2\pi\mu)=0,\ \cos\pi=-1,\ \sin\pi=0\ (\mu\in\mathbb{Z})\bigr) \\
-&= 1\cdot(-1)
-&&\bigl(\because i\cdot 0 = 0\ \text{と加法の単位元}\bigr) \\
-&= -1
-&&\bigl(\because \text{積の単位元}\bigr)
-\end{aligned}`,
-      ),
       paragraph([
         "(2) まず添字をずらした角度を計算する。",
       ]),
@@ -918,19 +947,25 @@ e^{-iM\tilde\theta_\mu}
 \end{aligned}`),
       paragraph([
         math(String.raw`j \in \mathbb{Z}`),
-        " について",
+        " について、",
+        ref("euler_formula_cos_sin"),
+        " の証明冒頭で導いた負角の表示と、正弦・余弦の ",
+        math(String.raw`2\pi`),
+        " 周期性を用いると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 e^{-ij\tilde\theta_{\mu+M}}
-&= e^{-ij\left(\tilde\theta_\mu + 2\pi\right)}
-&&\bigl(\because \tilde\theta_{\mu+M}=\tilde\theta_\mu+2\pi\bigr) \\
-&= e^{-ij\tilde\theta_\mu}\,e^{-2\pi i j}
-&&\bigl(\because \blkref{theorem_exp_product}\ (n=1)\bigr) \\
-&= e^{-ij\tilde\theta_\mu}\left(\cos(2\pi j) - i\sin(2\pi j)\right)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\bigr) \\
-&= e^{-ij\tilde\theta_\mu}
-&&\bigl(\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0\bigr)
+&=\cos\!\left(j\tilde\theta_{\mu+M}\right)-i\sin\!\left(j\tilde\theta_{\mu+M}\right)
+&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }e^{-ix}=\cos x-i\sin x\bigr) \\
+&=\cos\!\left(j(\tilde\theta_\mu+2\pi)\right)-i\sin\!\left(j(\tilde\theta_\mu+2\pi)\right)
+&&\bigl(\because \tilde\theta_{\mu+M}=\tilde\theta_\mu+2\pi\text{ を 2 箇所へ同時代入}\bigr) \\
+&=\cos\!\left(j\tilde\theta_\mu+2\pi j\right)-i\sin\!\left(j\tilde\theta_\mu+2\pi j\right)
+&&\bigl(\because \mathbb R\text{ の分配則}\bigr) \\
+&=\cos\!\left(j\tilde\theta_\mu\right)-i\sin\!\left(j\tilde\theta_\mu\right)
+&&\bigl(\because j\in\mathbb Z\text{ と正弦・余弦の }2\pi\text{ 周期性}\bigr) \\
+&=e^{-ij\tilde\theta_\mu}
+&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた等式の対称律}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -972,8 +1007,9 @@ e^{-ij\tilde\theta_{\mu+M}}
       ),
     ],
     conversion: {
-      status: "added",
+      status: "converted",
       notes: [
+        "旧複合ラベルは、後続参照の意味を保つため、二つの添字周期性と共役添字恒等式からなる残余主張に残した。",
         "(3) により、整数運動量の場合に -μ が果たしていた「共役添字」の役割を、半整数運動量では 1-μ が果たす。反交換関係の対が μ+ν ≡ 1 (mod M) になるのはこのためである。",
       ],
     },
@@ -1778,8 +1814,8 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
         " が ",
         math(String.raw`l = 0,\dots,M-1`),
         " に 1 対 1 で対応する）。また、",
-        ref("def_half_integer_modes"),
-        " (1) の ",
+        ref("half_integer_phase_antiperiodicity"),
+        " の ",
         math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
         " と ",
         math(String.raw`Y_0^{\flat} = -Y_M`),
@@ -1795,7 +1831,7 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
 &= \left(-1\right)Y_M
    &&(\because \mathbb{C}\text{ の四則}) \\
 &= e^{-iM\tilde\theta_\mu}\,Y_M
-   &&(\because \text{def\_half\_integer\_modes (1)}) \\
+   &&(\because \blkref{half_integer_phase_antiperiodicity}) \\
 &= e^{-iM\tilde\theta_\mu}\,Y_M^{\flat}
    &&(\because Y_M^{\flat} := Y_M\ (1 \leq M \leq M))
 \end{aligned}`,
@@ -1836,8 +1872,8 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
         " が ",
         math(String.raw`l = 2,\dots,M+1`),
         " に 1 対 1 で対応する）。また、",
-        ref("def_half_integer_modes"),
-        " (1) の ",
+        ref("half_integer_phase_antiperiodicity"),
+        " の ",
         math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
         " と ",
         math(String.raw`Z_{M+1}^{\flat} = -Z_1`),
@@ -1851,7 +1887,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
 &= e^{-iM\tilde\theta_\mu}\,e^{-i\tilde\theta_\mu}\left(-Z_1\right)
    &&(\because Z_{M+1}^{\flat} := -Z_1) \\
 &= \left(-1\right)e^{-i\tilde\theta_\mu}\left(-Z_1\right)
-   &&(\because \text{def\_half\_integer\_modes (1)}) \\
+   &&(\because \blkref{half_integer_phase_antiperiodicity}) \\
 &= e^{-i\tilde\theta_\mu}\,Z_1
    &&(\because \mathbb{C}\text{ の四則}) \\
 &= e^{-i\cdot 1\cdot\tilde\theta_\mu}\,Z_1^{\flat}

@@ -64,7 +64,7 @@ variable {K : Type*} [Field K]
 
 /-- **反周期性の正体**: `ξ` が 1 の原始 `2M` 乗根なら `ξ^M = -1`。
 
-人手証明の `e^{-iM\tildeθ_μ} = -1`（`def_half_integer_modes` (1)）にあたる。
+人手証明の `e^{-iM\tildeθ_μ} = -1`（`half_integer_phase_antiperiodicity`）にあたる。
 効いているのは「`(ξ^M)^2 = 1` かつ `ξ^M ≠ 1`」だけで、
 指数関数・円周率・複素数であることは効かない。 -/
 theorem pow_half_eq_neg_one {M : ℕ} (hM : M ≠ 0) {ξ : K} (hξ : IsPrimitiveRoot ξ (2 * M)) :

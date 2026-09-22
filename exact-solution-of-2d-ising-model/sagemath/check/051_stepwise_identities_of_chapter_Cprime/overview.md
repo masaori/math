@@ -9,7 +9,8 @@
   `016_even_sector_fermions.ts`
 - 併せて検証（章 C′ の全ブロック）:
   - 013 章: `why_008_applies_only_to_minus_sector` / `antiperiodic_exp_sum` /
-    `def_half_integer_checkZ` / `def_half_integer_checkY` / `def_half_integer_modes` /
+    `def_half_integer_checkZ` / `def_half_integer_checkY` /
+    `half_integer_phase_antiperiodicity` / `def_half_integer_modes` /
     `commutator_of_H_and_check_Z_Y` /
     `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y` / `H1_H2_via_check_Z_Y`
   - 014 章: `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` /
@@ -105,8 +106,11 @@ A(t)   = [[gamma_1(t), gamma_2(t)], [-gamma_2(-t), gamma_1(t)]]
   Step 1 / Step 1' で、合同式のデルタと `M+1−μ` 形のデルタが一致することを 1 段として検証。
   段数 58 → 62。
 - `μ` を走らせる範囲も、主張が `𝓜̌` 上のものになった箇所は `𝓜̌` に合わせた
-  （`def_half_integer_modes` (1)(2)(3) の検証だけは `μ = 0, −1, M+1` を含めたまま残してある。
-  これは `μ ∈ ℤ` で量化してよい 2 主張のうちの 1 つだからである）。
+  （`half_integer_phase_antiperiodicity` と `def_half_integer_modes` (2)(3) の検証だけは
+  `μ = 0, −1, M+1` を含めたまま残してある。
+  これらはどちらも `μ ∈ ℤ` で量化してよい主張だからである）。
+- `half_integer_phase_antiperiodicity` は、Euler 公式、角度の代入、余弦値、正弦値、零積、
+  加法の単位元を本文の各等号に対応する別々の検査として記録する。
 
 ## 半整数運動量の指数和の段分割（2026-09-20）
 
@@ -138,12 +142,12 @@ sage check_04_016_steps.sage
 
 | ファイル | 対象 | 区別された段の種類 | 最大残差 | 判定 |
 | --- | --- | --- | --- | --- |
-| `check_01_013_steps.sage` | 013 章の各段 | 151 | 2.3e-14 | PASS |
+| `check_01_013_steps.sage` | 013 章の各段 | 161 | 2.3e-14 | PASS |
 | `check_02_015_steps.sage` | 015 章の各段 | 66 | 1.7e-13 | PASS |
 | `check_03_014_steps.sage` | 014 章の各段 | 100 | 9.5e-11 | PASS |
-| `check_04_016_steps.sage` | 016 章の各段 | 62 | 5.8e-12 | PASS |
+| `check_04_016_steps.sage` | 016 章の各段 | 62 | 5.0e-9 | PASS |
 
-**章 C′ の 4 章あわせて 379 種類の段がすべて成り立っている。**
+**章 C′ の 4 章あわせて 389 種類の段がすべて成り立っている。**
 
 副産物として、次の 3 つの狭義不等号も再確認した（本文が半整数運動量に固有の帰結として
 主張しているもの。整数運動量では臨界点で等号が起こる）。

@@ -25,7 +25,7 @@
 | `Ising2D.checkPhase` | `e^{-i k θ~_μ} = expPhase (2M) (k(2μ-1))` | 同上 |
 | `Ising2D.checkPhase_eq_exp` | `checkPhase` が原文の `e^{-ikθ~_μ}` そのものであること | 同上 |
 | `Ising2D.expPhase_two_mul` | `expPhase (2M) (2n) = expPhase M n`（偶数周波数は `M` 乗根） | 同上 |
-| `Ising2D.expPhase_two_mul_half` | `expPhase (2M) M = -1`（**反周期性の正体**） | 同上 |
+| `Ising2D.expPhase_two_mul_half` | `expPhase (2M) M = -1`（**反周期性の正体**） | `half_integer_phase_antiperiodicity` |
 | `Ising2D.expPhase_sum_zero_based` | `∑_{μ=0}^{M-1} e^{-2π√-1 μk/M} = M δ^M_{k,0}` | 同上（補助） |
 | `Ising2D.antiperiodic_complex_exp_sum_delta_difference` | 本文と同じ `Complex.exp` で `2M` 項を奇数番目と偶数番目へ分け、半整数運動量の和を `2M δ^{2M}_{k,0}-M δ^M_{k,0}` とする本文の中間式 | 同上 |
 | `Ising2D.antiperiodic_exp_sum_delta_difference` | 直前のデルタ差を内部表現 `checkPhase` で書いたもの | 同上（補助） |
@@ -39,7 +39,7 @@
 | `Ising2D.sum_checkPhase` | 上を周波数そのままで書いた形（以降の計算で使う） | 同上 |
 | `Ising2D.checkZ` | `check(Z)_μ` | `def_half_integer_checkZ` |
 | `Ising2D.checkY` | `check(Y)_μ` | `def_half_integer_checkY` |
-| `Ising2D.checkPhase_antiperiodic` | (1) `e^{-iMθ~_μ} = -1` | `def_half_integer_modes` (1) |
+| `Ising2D.checkPhase_antiperiodic` | `e^{-iMθ~_μ} = -1` | `half_integer_phase_antiperiodicity` |
 | `Ising2D.checkZ_period` / `checkY_period` | (2) `check(Z)_{μ+M} = check(Z)_μ` ほか | `def_half_integer_modes` (2) |
 | `Ising2D.checkPhase_congr` / `checkZ_congr` / `checkY_congr` | (2) の合同形（`M ∣ μ-ν` 版） | `def_half_integer_modes` (2) |
 | `Ising2D.thetaTilde_one_sub` | (3) `θ~_{1-μ} = -θ~_μ` | `def_half_integer_modes` (3) |
@@ -77,8 +77,8 @@
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `NecSuf.pow_half_eq_neg_one` | `ξ` が 1 の原始 `2M` 乗根なら `ξ^M = -1` | `def_half_integer_modes` (1) |
-| `NecSuf.sq_isPrimitiveRoot` | `ξ` が原始 `2M` 乗根なら `ξ^2` は原始 `M` 乗根 | 同上（橋渡し） |
+| `NecSuf.pow_half_eq_neg_one` | `ξ` が 1 の原始 `2M` 乗根なら `ξ^M = -1` | `half_integer_phase_antiperiodicity` |
+| `NecSuf.sq_isPrimitiveRoot` | `ξ` が原始 `2M` 乗根なら `ξ^2` は原始 `M` 乗根 | `antiperiodic_exp_sum`（橋渡し） |
 | `NecSuf.zpow_mul_natCast` | `ξ^{lM} = (-1)^l` | `antiperiodic_exp_sum` |
 | `NecSuf.sum_zpow_primitiveRoot_zero_based` | 既存の直交性の `0` 始まり版 | 同上（補助） |
 | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `2M` 項を奇数番目と偶数番目へ分け、`∑_{μ=1}^{M} ξ^{(2μ-1)k} = 2M δ^{2M}_{k,0}-M δ^M_{k,0}` とする | `antiperiodic_exp_sum` |

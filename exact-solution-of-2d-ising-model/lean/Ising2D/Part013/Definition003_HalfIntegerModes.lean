@@ -2,14 +2,15 @@
 # `check(Z)_μ`, `check(Y)_μ`（半整数運動量モード）の定義（**具体版**）
 
 対応する人手証明のラベル: `def_half_integer_checkZ`, `def_half_integer_checkY`,
-`def_half_integer_modes`
+`half_integer_phase_antiperiodicity`, `def_half_integer_modes`
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_003_definition_half_integer_checkZ`,
 `evensector_003_definition_half_integer_checkY`,
+`evensector_003_claim_half_integer_phase_antiperiodicity`,
 `evensector_003_definition_half_integer_modes`）
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`。
-とくに (1) の反周期性は `Ising2D.NecSuf.pow_half_eq_neg_one`（`ξ^M = -1`）、
+とくに反周期性は `Ising2D.NecSuf.pow_half_eq_neg_one`（`ξ^M = -1`）、
 (2) の添字周期性は既存の `Ising2D.NecSuf.transform_periodic`
 （`NecSuf/DiscreteFourier.lean`、重み・周波数が任意）の特殊化である。
 必要十分版からの導出は `Ising2D/Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean`。
@@ -45,9 +46,9 @@ noncomputable def checkZ (M : ℕ) (μ : ℤ) : TensorPow M :=
 noncomputable def checkY (M : ℕ) (μ : ℤ) : TensorPow M :=
   ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Y j
 
-/-! ## `def_half_integer_modes` に残した四つの性質 -/
+/-! ## 独立させた反周期性と `def_half_integer_modes` に残した三つの性質 -/
 
-/-- **(1) 反周期性**: `e^{-iM θ~_μ} = -1`。
+/-- **`half_integer_phase_antiperiodicity`（反周期性）**: `e^{-iM θ~_μ} = -1`。
 
 これが 013 章全体の仕組みである（整数運動量では `e^{-iMθ_μ} = +1`）。 -/
 theorem checkPhase_antiperiodic (hM : M ≠ 0) (μ : ℤ) : checkPhase M (M : ℤ) μ = -1 :=
