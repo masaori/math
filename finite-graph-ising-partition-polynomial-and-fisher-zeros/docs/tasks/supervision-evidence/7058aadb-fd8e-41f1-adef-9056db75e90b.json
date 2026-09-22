@@ -1,0 +1,36 @@
+{
+  "実行識別子": "7058aadb-fd8e-41f1-adef-9056db75e90b",
+  "観測時刻": "2026-09-22T21:02:47+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.finite-graph-ising-auto-loop",
+    "state": "not running",
+    "runs": 33,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.finite-graph-ising-auto-loop.plist",
+    "存在": true,
+    "sha256": "4a79a57ed3e42c9e09a1dadd84793790c0d419772a94ac1c4d5ac32a837151e5",
+    "StartCalendarInterval": "毎時27分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-22T21:02:47+09:00",
+    "path": "/Users/masaori/Library/Logs/finite-graph-ising-auto-loop/auto-loop.log",
+    "終端": "2026-09-22 20:37:02正常終了。対象一件done・未達ゼロで本文変更なし。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 33・last exit 0。実ログは20:37:02に正常終了したが、対象一件done・未達ゼロで本文変更なしなので研究上の前進とは分離した。",
+  "成果比較": {
+    "開始成果": "2417bb5bc8ef6dcbba437451980d278c3a4f2b87",
+    "前回監督の読解終点": "8f89601ae96985cf3cb7175327c1f471d2452fec",
+    "今回読解終点": "2417bb5bc8ef6dcbba437451980d278c3a4f2b87",
+    "前回監督以後": "この研究の数学本文・証明・候補評価または段取りにremote defaultへ統合済みの変更はない。"
+  },
+  "監督処理の時計": {
+    "開始": "2026-09-22T21:02:47+09:00",
+    "処理上限秒数": 2400,
+    "評価・検査終了と完了工程への移行": "2026-09-22T21:11:18+09:00",
+    "実測秒数": 511
+  }
+}
