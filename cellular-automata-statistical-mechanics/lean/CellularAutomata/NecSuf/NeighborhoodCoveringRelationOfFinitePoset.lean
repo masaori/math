@@ -2,8 +2,10 @@
 章「有限半順序の被覆関係と被覆近傍割り当てによる生成」の Lean 必要十分版。
 
 必要な構造の検査結果:
-  - 被覆辺が関係を生成する証明に要るのは、関係の反射性・反対称性・推移性と、
-    非被覆な比較可能対を二つの真に小さい対へ分ける自然数値尺度だけである。
+  - 被覆辺が関係を生成する証明に要るのは、非被覆な比較可能対を二つの真に小さい対へ
+    分ける自然数値尺度だけである。
+  - 被覆辺の反射推移閉包が元の関係に一致する証明で追加されるのは、関係の反射性と
+    推移性だけである。反対称性は要らない。
   - 台の有限性、等号判定、有限区間、有限表現は要らない。
   - 有限性と等号判定は、具体版で区間の元数を尺度として構成し、被覆関係を有限表にして
     全ての組を走査する段だけで要る。
@@ -16,10 +18,9 @@ namespace CellularAutomata.NecSuf.NeighborhoodCoveringRelationOfFinitePoset
 
 open CellularAutomata.NecSuf.NeighborhoodAssignmentReachabilityClosure
 
-/-- 台の全体上の部分順序を、証明で使う三条件だけで書く。 -/
-def IsPartialOrderOnUniv {V : Type} (R : V → V → Prop) : Prop :=
+/-- 台の全体上の関係について、閉包等式で使う反射性と推移性だけを書く。 -/
+def IsPreorderOnUniv {V : Type} (R : V → V → Prop) : Prop :=
   (∀ v : V, R v v) ∧
-    (∀ v w : V, R v w → R w v → v = w) ∧
     (∀ v u w : V, R v u → R u w → R v w)
 
 /-- 比較可能な相異なる二点の間に中間点が無いこととして被覆を定める。 -/
@@ -70,16 +71,16 @@ theorem coveringAssignment_generates {V : Type} (R : V → V → Prop)
         exact setReachabilityClosure_transitive (coveringAssignment R) v u w hLeft hRight
   exact aux (measure v w) v w rfl hvw
 
-/-- 被覆辺の反射推移閉包は元の部分順序に一致する。 -/
+/-- 被覆辺の反射推移閉包は元の反射・推移的な関係に一致する。 -/
 theorem coveringAssignment_closure_eq {V : Type} (R : V → V → Prop)
-    (measure : V → V → ℕ) (hR : IsPartialOrderOnUniv R)
+    (measure : V → V → ℕ) (hR : IsPreorderOnUniv R)
     (hMeasure : HasDescendingInteriorMeasure R measure) :
     setReachabilityClosure (coveringAssignment R) = assignmentOfRelation R := by
   funext v
   ext w
   constructor
   · exact setReachabilityClosure_minimal (coveringAssignment R) (assignmentOfRelation R)
-      hR.1 hR.2.2 (coveringAssignment_included R) v w
+      hR.1 hR.2 (coveringAssignment_included R) v w
   · exact coveringAssignment_generates R measure hMeasure
 
 namespace Derivation
@@ -181,7 +182,8 @@ theorem coveringAssignment_closure_eq_of_necSuf (R : V → V → Prop) [Decidabl
   apply Finset.ext
   intro w
   have hGeneral := congrArg (fun N : V → Set V => w ∈ N v)
-    (coveringAssignment_closure_eq R (intervalMeasure R) hR (intervalMeasure_descends R hR))
+    (coveringAssignment_closure_eq R (intervalMeasure R) ⟨hR.1, hR.2.2⟩
+      (intervalMeasure_descends R hR))
   rw [← coe_coveringAssignment R hR] at hGeneral
   rw [← coe_reachabilityClosure
     (CellularAutomata.NeighborhoodCoveringRelationOfFinitePoset.coveringAssignment R)] at hGeneral
