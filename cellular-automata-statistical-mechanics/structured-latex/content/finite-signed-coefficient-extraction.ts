@@ -323,6 +323,153 @@ Q_K(x_0,x_0)
     ],
   },
   {
+    id: "finite_signed_coefficient_extraction_remark_local_factor_comparison_scope",
+    kind: "remark",
+    title: { text: "局所係数因子から有限更新行列へ送る比較の入力と出力" },
+    labels: ["remark_finite_local_factor_comparison_scope"],
+    habitat: "none",
+    statement: [
+      paragraph([
+        "ここからは、有限舞台上の局所真理値表を入力とし、各セルの更新等号を表す一元基底係数表、",
+        "それらの有限な順序付き積、最高次係数からなる整数行列を順に作る。出力は一段の大域更新を表す零一指示行列である。",
+        "有限舞台に入れる全順序は反交換生成子を並べるための追加データであり、局所規則の一部とは扱わない。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_signed_coefficient_extraction_definition_local_constraint_factor",
+    kind: "definition",
+    title: { text: "局所更新等号の一元係数因子" },
+    labels: ["def_finite_local_update_coefficient_factor"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        ref("def_finite_ca"), " の空でない有限舞台上の 2 値セルオートマトンを取り、セル集合 ",
+        math(String.raw`V`), " に全順序を一つ与える。有限配位集合を ", math(String.raw`X:=A^V`),
+        " とする。各 ", math(String.raw`v\in V`), " と ", math(String.raw`x,y\in X`),
+        " に対する局所更新等号の一元係数因子 ", math(String.raw`L^F_v(x,y)\in\mathcal E_V`), " を",
+      ]),
+      displayMath(String.raw`L^F_v(x,y):=
+\begin{cases}
+e_{\{v\}},&y(v)=f_v\!\left(x|_{N(v)}\right),\\
+0_V,&y(v)\ne f_v\!\left(x|_{N(v)}\right)
+\end{cases}`),
+      paragraph([
+        "で定める。これは各セルの有限真理値表と二元状態の等号だけから決まる有限外積係数表である。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_signed_coefficient_extraction_definition_ordered_local_product",
+    kind: "definition",
+    title: { text: "局所係数因子の標準順序積" },
+    labels: ["def_finite_ordered_local_factor_product"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        math(String.raw`n:=|V|\in\mathbb N_{>0}`), " とし、", math(String.raw`\iota:[n]_{\mathbb N}\to V`),
+        " を順序を保つ全単射とする。局所更新等号の指示値を",
+      ]),
+      displayMath(String.raw`\delta^F_v(x,y):=
+\begin{cases}
+1,&y(v)=f_v\!\left(x|_{N(v)}\right),\\
+0,&y(v)\ne f_v\!\left(x|_{N(v)}\right)
+\end{cases}\in\{0,1\}`),
+      paragraph([
+        "と定める。", ref("def_finite_local_update_coefficient_factor"), " の因子をセルの全順序で並べた係数表を",
+      ]),
+      displayMath(String.raw`K_F(x,y):=
+\left(\prod_{r=1}^{n}\delta^F_{\iota(r)}(x,y)\right)m_V(\iota)\in\mathcal E_V`),
+      paragraph([
+        "で定める。これは各因子が ", math(String.raw`e_{\{v\}}`), " または ", math(String.raw`0_V`),
+        " である場合の標準順序付き反交換積を、", ref("def_finite_exterior_word_monomial"),
+        " により明示した有限係数表である。積の係数は整数零または整数一である。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_signed_coefficient_extraction_definition_local_step_matrix",
+    kind: "definition",
+    title: { text: "局所係数因子から抽出する一段発展行列" },
+    labels: ["def_finite_local_factor_step_evolution_matrix"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        ref("def_finite_ordered_local_factor_product"), " の有限係数表族から、行を入力配位、列を出力配位で添字づけた整数行列 ",
+        math(String.raw`S_F\in\mathbb Z^{X\times X}`), " を",
+      ]),
+      displayMath(String.raw`S_F(x,y):=\operatorname{Top}_V\!\left(K_F(x,y)\right)`),
+      paragraph([
+        "で定める。この比較写像の入力は有限個の局所係数因子であり、出力は有限整数行列である。",
+      ]),
+    ],
+  },
+  {
+    id: "finite_signed_coefficient_extraction_theorem_local_step_matrix_indicator",
+    kind: "theorem",
+    title: { text: "局所係数因子の一段発展行列は大域更新の指示行列に等しい" },
+    labels: ["theorem_finite_local_factor_step_matrix_equals_update_indicator"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        ref("def_finite_local_factor_step_evolution_matrix"), " と ", ref("def_finite_self_map_indicator_matrix"),
+        " の行列は、全ての ", math(String.raw`x,y\in X`), " について",
+      ]),
+      displayMath(String.raw`S_F(x,y)=D_F(x,y)`),
+      paragraph([
+        "を満たす。従って有限局所係数因子から最高次係数を抽出する比較写像は、一段の大域更新を情報の欠落なく零一行列として回復する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\iota`), " は順序を保つ全単射なので単射であり、像は ", math(String.raw`V`),
+        "、転倒数は零である。従って",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_F(x,y)
+&=\operatorname{Top}_V\!\left(
+  \left(\prod_{r=1}^{n}\delta^F_{\iota(r)}(x,y)\right)m_V(\iota)
+  \right)
+  \quad(\because\ \blkref{def_finite_local_factor_step_evolution_matrix}\text{ と }\blkref{def_finite_ordered_local_factor_product})\\
+&=\prod_{r=1}^{n}\delta^F_{\iota(r)}(x,y)
+  \quad(\because\ \blkref{def_finite_exterior_word_monomial}\text{ と }\blkref{def_finite_exterior_top_coefficient})\\
+&=\begin{cases}
+1,&\text{全ての }v\in V\text{ で }y(v)=f_v\!\left(x|_{N(v)}\right),\\
+0,&\text{それ以外}
+\end{cases}
+  \quad(\because\ \blkref{def_finite_ordered_local_factor_product})\\
+&=\begin{cases}1,&y=F(x),\\0,&y\ne F(x)\end{cases}
+  \quad(\because\ \blkref{def_global_map})\\
+&=D_F(x,y)
+  \quad(\because\ \blkref{def_finite_self_map_indicator_matrix}).
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "finite_signed_coefficient_extraction_claim_local_comparison_decidable",
+    kind: "claim",
+    title: { text: "局所係数因子から一段発展行列への比較は有限決定できる" },
+    labels: ["claim_finite_local_factor_step_comparison_decidable"],
+    habitat: "Z",
+    statement: [
+      paragraph([
+        ref("def_finite_local_update_coefficient_factor"), " の全因子、",
+        ref("def_finite_ordered_local_factor_product"), " の全係数表、",
+        ref("def_finite_local_factor_step_evolution_matrix"), " の全行列成分、および ",
+        ref("theorem_finite_local_factor_step_matrix_equals_update_indicator"),
+        " の成分ごとの等号は、有限真理値表、有限集合の列挙、二元状態の等号、整数の有限積だけで決定できる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`V`), " と ", math(String.raw`X=A^V`), " は有限である。各 ",
+        math(String.raw`(x,y,v)\in X\times X\times V`), " について局所真理値表を一度評価して等号を判定できる。",
+        "得られた有限個の零一指示値を整数として掛け、各 ", math(String.raw`(x,y)\in X^2`),
+        " の最高次係数と ", math(String.raw`D_F(x,y)`), " を比較すればよい。",
+      ]),
+    ],
+  },
+  {
     id: "finite_signed_coefficient_extraction_remark_continuum_boundary",
     kind: "remark",
     title: { text: "有限係数抽出から連続構造は従わない" },
@@ -333,7 +480,9 @@ Q_K(x_0,x_0)
         ref("claim_finite_signed_coefficient_extraction_decidable"), " と ",
         ref("def_finite_top_coefficient_matrix"), " は、整数係数の有限表と有限行列までを与える。",
         ref("claim_finite_top_coefficient_matrix_not_automatically_update"),
-        " により、2 値セルオートマトンの大域写像との対応さえ係数抽出だけからは従わない。従って連続時間発展、連続 Lorentz 対称性、",
+        " により、任意の係数表族を与えただけでは 2 値セルオートマトンの大域写像との対応は従わない。一方、",
+        ref("theorem_finite_local_factor_step_matrix_equals_update_indicator"),
+        " は局所真理値表から作った特定の因子族について一段更新の零一行列を回復する。この正の比較が保存するのは有限な一段更新だけである。従って連続時間発展、連続 Lorentz 対称性、",
         "Dirac 型または Thirring 型の方程式、Pfaffian 表現も本節からは主張しない。",
         "それらを比較するには、比較対象・比較写像・保存される構造・極限または誤差の概念を別に定義する必要がある。",
       ]),
