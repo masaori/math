@@ -73,3 +73,46 @@ def self_map_indicator_matrix(states, self_map):
         (source, target): ZZ(1) if target == self_map[source] else ZZ(0)
         for source, target in product(states, repeat=2)
     }
+
+
+def binary_configurations(cells):
+    return tuple(product((ZZ(0), ZZ(1)), repeat=len(cells)))
+
+
+def full_neighborhood_rule_family(cells, states, truth_bits):
+    entries = tuple(product(cells, states))
+    assert len(truth_bits) == len(entries)
+    return {entry: ZZ(bit) for entry, bit in zip(entries, truth_bits)}
+
+
+def global_update_from_full_neighborhood(cells, states, rule_family):
+    return {
+        source: tuple(rule_family[(cell, source)] for cell in cells)
+        for source in states
+    }
+
+
+def local_update_indicator(cells, rule_family, cell, source, target):
+    position = cells.index(cell)
+    return ZZ(1) if target[position] == rule_family[(cell, source)] else ZZ(0)
+
+
+def local_update_coefficient_factor(cells, rule_family, cell, source, target):
+    indicator = local_update_indicator(cells, rule_family, cell, source, target)
+    return scale_table(indicator, basis_table(cells, (cell,)))
+
+
+def ordered_local_factor_product(cells, rule_family, source, target):
+    result = basis_table(cells, ())
+    for cell in cells:
+        factor = local_update_coefficient_factor(cells, rule_family, cell, source, target)
+        result = anticommuting_product(cells, result, factor)
+    return result
+
+
+def explicit_ordered_local_product(cells, rule_family, source, target):
+    indicator_product = prod(
+        local_update_indicator(cells, rule_family, cell, source, target)
+        for cell in cells
+    )
+    return scale_table(indicator_product, word_monomial(cells, cells))
