@@ -65,6 +65,8 @@ READMEから次の具体的対象を根拠つきで導き、上位ゴール設�
 前回の未コミット・未push成果を保持し、最新remote defaultの変更を取り込んでから修正する。
 内容はLLMによる検証と明記し、実行値・受理規則のプログラミングによる検証とは区別する。
 node scripts/research-supervision/verify.ts --all と node scripts/research-supervision/verify-supervision-log-test.ts を通す。
+remote default の更新を取り込んで成果をcommitした後、push または PR 作成の直前に node scripts/research-supervision/verify.ts --candidate @BASE@ @RUN@ を通し、実際に送るHEADを検査する。
+その後に merge・rebase・競合解消を行った場合は同じ candidate 検査を再実行し、既存履歴の変更を含む状態をremoteへ送らない。
 監督記録だけの変更で、変更していない数学本文のLean・SageMath全体検査を繰り返さない。
 段取りを修正した場合はその変更に対応する既存のプログラミングによる検証を通す。
 各研究MEMORYと docs/ゴール台帳.md の既存「全研究の実行状態と研究上の前進を区別し、監督を全研究へ広げる」を更新する。

@@ -92,6 +92,12 @@ python3 scripts/test-research-tick-models.py
 bash cellular-automata-statistical-mechanics/scripts/verify-cellular-automata-supervisor-tick.sh
 ```
 
+remote default の更新を取り込んで成果をcommitした後、push または PR 作成の直前に
+`node scripts/research-supervision/verify.ts --candidate <開始コミット> <実行識別子>` を通す。
+この検査は作業ツリーではなく実際に送る `HEAD` を判定する。その後に merge・rebase・競合解消を
+行った場合は変更をcommitして同じ検査を再実行する。完了後の検査だけに委ねず、
+既存履歴を変更した候補を remote へ送らない。
+
 共通tickは六研究それぞれの今回の追記、既存履歴の保存、remote defaultでの同一記録とancestry、
 未コミット変更の不在まで判定して初めて正常終了とする。過去の有効な記録だけでは成功しない。
 固定モデルは `gpt-6-astra`、reasoning `medium`、アカウントは正規起動口が起動前に一度選んで渡す `CODEX_HOME`。未設定・空なら起動前に失敗する。

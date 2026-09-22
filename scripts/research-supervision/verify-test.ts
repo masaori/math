@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { mkdtempSync, mkdirSync, writeFileSync, symlinkSync, rmSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { assertFresh, verifyProject } from "./verify.ts";
+import { assertCommittedFresh, assertFresh, labelsOfGenerated, revisionFileExists, verifyProject } from "./verify.ts";
 import { violationsOfEntry } from "./supervision-log-rules.ts";
 import { evidenceFileExists } from "./evidence-fs.ts";
 import { projects, projectNamed } from "./projects.ts";
@@ -14,9 +15,44 @@ assert.throws(() => projectNamed("unknown"));
 const old = '{"history":true}\n';
 const added = JSON.stringify({ schemaVersion: 2, 実行識別子: "今回" }) + "\n";
 assertFresh(old, old + added, "今回");
-for (const after of [old, added, old + added + added, old + added.replace("今回", "過去")]) {
+const rewritten = '{"history":false}\n' + added;
+for (const after of [old, added, rewritten, old + added + added, old + added.replace("今回", "過去")]) {
   assert.throws(() => assertFresh(old, after, "今回"));
 }
+const repository = mkdtempSync(join(tmpdir(), "supervision-candidate-"));
+try {
+  execFileSync("git", ["init", "-q"], { cwd: repository });
+  execFileSync("git", ["config", "user.name", "supervision test"], { cwd: repository });
+  execFileSync("git", ["config", "user.email", "supervision-test@example.invalid"], { cwd: repository });
+  const path = "supervision-log.jsonl";
+  mkdirSync(join(repository, "project"));
+  writeFileSync(join(repository, "project", "proof"), "proof\n");
+  symlinkSync(join(repository, "project", "proof"), join(repository, "project", "proof-link"));
+  writeFileSync(join(repository, path), old);
+  execFileSync("git", ["add", path, "project/proof", "project/proof-link"], { cwd: repository });
+  execFileSync("git", ["commit", "-qm", "base"], { cwd: repository });
+  const before = execFileSync("git", ["rev-parse", "HEAD"], { cwd: repository, encoding: "utf8" }).trim();
+  writeFileSync(join(repository, path), rewritten);
+  execFileSync("git", ["add", path], { cwd: repository });
+  execFileSync("git", ["commit", "-qm", "broken candidate"], { cwd: repository });
+  const candidate = execFileSync("git", ["rev-parse", "HEAD"], { cwd: repository, encoding: "utf8" }).trim();
+  writeFileSync(join(repository, path), old + added);
+  execFileSync("git", ["add", path], { cwd: repository });
+  const worktreeAdded = JSON.stringify({ schemaVersion: 2, 実行識別子: "今回", 作業ツリーだけ: true }) + "\n";
+  writeFileSync(join(repository, path), old + worktreeAdded);
+  assert.doesNotThrow(() => assertFresh(old, old + worktreeAdded, "今回"));
+  assert.throws(
+    () => assertCommittedFresh(repository, before, candidate, path, "今回"),
+    /既存の監督履歴を書き換えた/,
+    "index と作業ツリーが修復済みでも、破損した候補コミットを拒否する",
+  );
+  writeFileSync(join(repository, "project", "dirty-only"), "dirty\n");
+  assert.equal(revisionFileExists(repository, candidate, "project", "proof"), true);
+  assert.equal(revisionFileExists(repository, candidate, "project", "proof-link"), false);
+  assert.equal(revisionFileExists(repository, candidate, "project", "dirty-only"), false);
+  assert.equal(revisionFileExists(repository, candidate, "project", "../supervision-log.jsonl"), false);
+  assert.deepEqual(labelsOfGenerated('export const ALL_LABELS = [\n  "known_label",\n] as const\n'), new Set(["known_label"]));
+} finally { rmSync(repository, { recursive: true }); }
 const fixture = mkdtempSync(join(tmpdir(), "supervision-evidence-"));
 try {
   const marker = join(fixture, "unfinished");

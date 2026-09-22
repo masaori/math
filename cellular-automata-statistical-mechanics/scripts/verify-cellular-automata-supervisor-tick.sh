@@ -95,6 +95,11 @@ else
   else
     ok "監督 tick に別モデルへのフォールバック経路が無い"
   fi
+  if grep -Fq 'verify.ts --candidate @BASE@ @RUN@' "$TICK"; then
+    ok "監督 tick がremote反映前の既存履歴不変検査を指示する"
+  else
+    ng "監督 tick にremote反映前の既存履歴不変検査が無い"
+  fi
 fi
 
 echo "== 監督の記録が契約を満たしていることを検査する =="
