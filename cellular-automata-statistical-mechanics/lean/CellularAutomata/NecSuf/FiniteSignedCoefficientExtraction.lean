@@ -120,6 +120,48 @@ theorem matrix_ne_indicator_of_entry_ne_zero_one
   · exact hZero (hEntry.trans hIndicator)
   · exact hOne (hEntry.trans hIndicator)
 
+/-! ## 局所等号指示値の有限積による一段写像の回復 -/
+
+section LocalFactorStepEvolution
+
+variable {J X A : Type*} [Fintype J] [DecidableEq X] [DecidableEq A]
+
+/-- 局所出力と目標出力が等しいことの整数値指示値。 -/
+def localEqualityIndicator
+    (localOutput : J → X → A) (targetOutput : J → X → A)
+    (j : J) (x y : X) : ℤ :=
+  if targetOutput j y = localOutput j x then 1 else 0
+
+/--
+全局所出力の一致が一つの大域写像の等式と同値なら、
+局所等号指示値の有限積は大域写像の零一指示値に等しい。
+必要な構造は、局所位置の有限性、出力の等号判定、有限積、大域写像だけである。
+-/
+theorem localEqualityIndicator_product_eq_indicator
+    (localOutput : J → X → A) (targetOutput : J → X → A)
+    (F : X → X)
+    (hGlobal : ∀ x y, y = F x ↔ ∀ j, targetOutput j y = localOutput j x)
+    (x y : X) :
+    (∏ j : J, localEqualityIndicator localOutput targetOutput j x y) =
+      indicatorMatrix F x y := by
+  classical
+  by_cases hxy : y = F x
+  · have hLocal : ∀ j, targetOutput j y = localOutput j x :=
+      (hGlobal x y).mp hxy
+    rw [show indicatorMatrix F x y = 1 by simp [indicatorMatrix, hxy]]
+    apply Finset.prod_eq_one
+    intro j _
+    simp [localEqualityIndicator, hLocal j]
+  · have hNotLocal : ¬ ∀ j, targetOutput j y = localOutput j x := by
+      intro hLocal
+      exact hxy ((hGlobal x y).mpr hLocal)
+    obtain ⟨j, hj⟩ := not_forall.mp hNotLocal
+    rw [Finset.prod_eq_zero (Finset.mem_univ j)]
+    · simp [indicatorMatrix, hxy]
+    · simp [localEqualityIndicator, hj]
+
+end LocalFactorStepEvolution
+
 /-! ## 具体版の導出 -/
 
 section Derivation
@@ -158,6 +200,56 @@ theorem counterexample_not_indicator_of_necSuf
     omega
   · rw [counterexample_top_entry]
     omega
+
+/-! ### 局所係数因子から一段発展行列への具体版の導出 -/
+
+open CellularAutomata.EssentialDependency
+open CellularAutomata.RedundantNeighbor
+open CellularAutomata.TimeExpansionDependency
+open scoped BigOperators
+
+section LocalFactorStepEvolutionDerivation
+
+variable {V : Type} [Fintype V] [LinearOrder V] [Nonempty V]
+
+/-- 具体版の大域更新等式は、全局所出力の一致と同値である。 -/
+theorem globalMap_eq_iff_all_local_outputs
+    (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State)
+    (x y : V → State) :
+    y = globalMap N f x ↔ ∀ v, y v = f v (restrict (N v) x) := by
+  constructor
+  · intro hxy v
+    rw [hxy]
+    rfl
+  · intro hLocal
+    funext v
+    exact hLocal v
+
+/-- 局所更新指示値の積は、必要十分版の有限指示値積の特殊化である。 -/
+theorem localUpdateIndicator_product_eq_indicator_of_necSuf
+    (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State)
+    (x y : V → State) :
+    (∏ v : V, localUpdateIndicator N f v x y) =
+      indicatorMatrix (globalMap N f) x y := by
+  simpa [localUpdateIndicator, localEqualityIndicator] using
+    localEqualityIndicator_product_eq_indicator
+      (localOutput := fun v x ↦ f v (restrict (N v) x))
+      (targetOutput := fun v y ↦ y v)
+      (F := globalMap N f)
+      (globalMap_eq_iff_all_local_outputs N f) x y
+
+/-- 局所係数因子の一段行列等式は、必要十分版の指示値積等式から得られる。 -/
+theorem localFactorStepEvolutionMatrix_eq_indicator_of_necSuf
+    (N : V → Finset V)
+    (f : (v : V) → (↥(N v) → State) → State) :
+    localFactorStepEvolutionMatrix N f = indicatorMatrix (globalMap N f) := by
+  funext x y
+  rw [localFactorStepEvolutionMatrix_entry]
+  exact localUpdateIndicator_product_eq_indicator_of_necSuf N f x y
+
+end LocalFactorStepEvolutionDerivation
 
 end Derivation
 
