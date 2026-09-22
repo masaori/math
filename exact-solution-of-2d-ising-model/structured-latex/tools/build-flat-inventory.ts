@@ -2746,12 +2746,10 @@ const manualGranularityReviewById = new Map<string, string>([
   ["transfer_matrix_001_definition_symbols", "独立した数学内容はすべて先行項へ分離済みであり、残余ブロックは旧ラベルを使う後続参照の意味を保つための参照規約と、扱う対象が具体的な有限複素行列であることの確認だけを担う。参照先が多いため自動の説明粒度判定には適合しないが、複数の定義・主張を同居させてはいないため、追加分割は不要である。"],
 ]);
 const halfIntegerModesBoundaryCandidates = [
-  { name: "半整数運動量で Fourier 変換した Z 行列の添字周期性", kind: "claim" },
   { name: "半整数運動量で Fourier 変換した Y 行列の添字周期性", kind: "claim" },
   { name: "半整数位相の共役添字恒等式", kind: "claim" },
 ] as const;
 const halfIntegerModesExpectedBoundaryCandidates = [
-  { name: "半整数運動量で Fourier 変換した Z 行列の添字周期性", kind: "claim" },
   { name: "半整数運動量で Fourier 変換した Y 行列の添字周期性", kind: "claim" },
   { name: "半整数位相の共役添字恒等式", kind: "claim" },
 ] as const;
@@ -2790,7 +2788,8 @@ const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["evensector_003_definition_half_integer_checkZ", ["transfer_matrix_010b_definition_hatY"]],
   ["evensector_003_definition_half_integer_checkY", ["evensector_003_definition_half_integer_checkZ"]],
   ["evensector_003_claim_half_integer_phase_antiperiodicity", ["evensector_003_definition_half_integer_checkY"]],
-  ["evensector_003_definition_half_integer_modes", ["evensector_003_claim_half_integer_phase_antiperiodicity"]],
+  ["evensector_003_claim_half_integer_checkZ_periodicity", ["evensector_003_claim_half_integer_phase_antiperiodicity"]],
+  ["evensector_003_definition_half_integer_modes", ["evensector_003_claim_half_integer_checkZ_periodicity"]],
   // 旧複合ブロックから切り出した二定義と二つの指数表示は、分割前の本文位置に連続して置く。
   ["transfer_matrix_011a_definition_H1_pm", ["hatZ_hatY_anticommutation_001_claim_anticommutation_relations"]],
   ["transfer_matrix_011b_definition_H2", ["transfer_matrix_011a_definition_H1_pm"]],
@@ -3057,18 +3056,31 @@ const halfIntegerModesSplitExpected = [
     futureBlockSplitRecommended: false,
   },
   {
+    id: "evensector_003_claim_half_integer_checkZ_periodicity",
+    kind: "claim",
+    sha256: "f66797d78b495543625c86b995510369ae3a93d613ba4448f038cdaac9940a53",
+    dependencies: [
+      "calculation_formulae_045_theorem_euler_formula_cos_sin",
+      "calculation_formulae_definition_set_and_algebra_notation",
+      "evensector_002_claim_antiperiodic_exp_sum",
+      "evensector_003_definition_half_integer_checkZ",
+    ].sort(),
+    chapterOrder: 65,
+    presentationPredecessors: ["evensector_003_claim_half_integer_phase_antiperiodicity"],
+    futureBlockSplitRecommended: false,
+  },
+  {
     id: "evensector_003_definition_half_integer_modes",
     kind: "claim",
-    sha256: "93584cab777030afc9d4f6b3d81bdd911954d5edd96e1ce32a6b5dd2c772e5fa",
+    sha256: "27612142aeb4ef51415ef0b332091090e67ab15b90c06a2b5d495d445aa78eb9",
     dependencies: [
       "calculation_formulae_045_theorem_euler_formula_cos_sin",
       "calculation_formulae_definition_set_and_algebra_notation",
       "evensector_002_claim_antiperiodic_exp_sum",
       "evensector_003_definition_half_integer_checkY",
-      "evensector_003_definition_half_integer_checkZ",
     ].sort(),
-    chapterOrder: 65,
-    presentationPredecessors: ["evensector_003_claim_half_integer_phase_antiperiodicity"],
+    chapterOrder: 66,
+    presentationPredecessors: ["evensector_003_claim_half_integer_checkZ_periodicity"],
     futureBlockSplitRecommended: true,
   },
 ];
@@ -4112,8 +4124,8 @@ if (integerMomentumFourierDefinitionEntries[0]!.dependencyPlacement!.chapterOrde
     })),
   })}`);
 }
-if (h1GeneralGeneratorEntry.dependencyPlacement!.chapterOrder !== 69
-  || h2GeneralGeneratorEntry.dependencyPlacement!.chapterOrder !== 70
+if (h1GeneralGeneratorEntry.dependencyPlacement!.chapterOrder !== 70
+  || h2GeneralGeneratorEntry.dependencyPlacement!.chapterOrder !== 71
   || h1GeneralGeneratorEntry.kind !== "definition"
   || h2GeneralGeneratorEntry.kind !== "definition"
   || h1GeneralGeneratorEntry.explanationGranularityReview.status
@@ -4149,9 +4161,9 @@ if (JSON.stringify(inputsAddedForV1ExponentialRepresentation.sort()) !== JSON.st
     dropped: inputsDroppedAfterGeneralGenerators,
   })}`);
 }
-if (v1ExponentialRepresentationEntry.dependencyPlacement!.chapterOrder !== 71
-  || v2ExponentialRepresentationEntry.dependencyPlacement!.chapterOrder !== 72
-  || realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder !== 73
+if (v1ExponentialRepresentationEntry.dependencyPlacement!.chapterOrder !== 72
+  || v2ExponentialRepresentationEntry.dependencyPlacement!.chapterOrder !== 73
+  || realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder !== 74
   || v1ExponentialRepresentationEntry.kind !== "claim"
   || v2ExponentialRepresentationEntry.kind !== "claim"
   || v1ExponentialRepresentationEntry.dependsOnEntryIds.includes(v2ExponentialRepresentationEntry.id)
@@ -4320,9 +4332,9 @@ for (const entry of v1PlusHalfExponentAndSquareRootSection.sectionEntries) {
     throw new Error(`偶セクターの半指数行列と平方根性の直接依存が変わりました: ${entry.id}: ${JSON.stringify(entry.dependsOnEntryIds)}`);
   }
 }
-if (v1PlusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 82
-  || v1PlusSquareRootClaimEntry.dependencyPlacement!.chapterOrder !== 83
-  || vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 84
+if (v1PlusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 83
+  || v1PlusSquareRootClaimEntry.dependencyPlacement!.chapterOrder !== 84
+  || vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 85
   || v1PlusSquareRootDefinitionEntry.kind !== "definition"
   || v1PlusSquareRootClaimEntry.kind !== "claim"
   || vPlusDefinitionEntry.kind !== "definition"
@@ -4378,9 +4390,9 @@ for (const entry of vPlusDefinitionAndSignedTraceSection.sectionEntries) {
     throw new Error(`偶セクター転送行列と符号付きトレースの正値公式の直接依存が変わりました: ${entry.id}: ${JSON.stringify(entry.dependsOnEntryIds)}`);
   }
 }
-if (vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 84
-  || signedTraceOfVPlusEntry.dependencyPlacement!.chapterOrder !== 85
-  || vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 86
+if (vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 85
+  || signedTraceOfVPlusEntry.dependencyPlacement!.chapterOrder !== 86
+  || vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 87
   || vPlusDefinitionEntry.kind !== "definition"
   || signedTraceOfVPlusEntry.kind !== "theorem"
   || vPlusPositiveDefiniteEntry.kind !== "claim"
@@ -4406,16 +4418,16 @@ if (!vPlusDefinitionAndSignedTraceSection.sectionEntries.every((entry) =>
     !== "自動検査で主題に適合") {
   throw new Error("偶セクター転送行列・符号付きトレースまたは直後の正定値性の説明粒度判定が変わりました");
 }
-if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 86
-  || traceVPlusPositiveEntry.dependencyPlacement!.chapterOrder !== 87
-  || vPlusInvertibleEntry.dependencyPlacement!.chapterOrder !== 88
-  || vPlusInversePositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 89
-  || vPlusInversePositiveAndTracesEntry.dependencyPlacement!.chapterOrder !== 90
-  || v1PlusHalfInvertibleEntry.dependencyPlacement!.chapterOrder !== 91
-  || vTwoInvertibleEntry.dependencyPlacement!.chapterOrder !== 92
-  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 93
-  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 94
-  || vTwoConjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 95
+if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 87
+  || traceVPlusPositiveEntry.dependencyPlacement!.chapterOrder !== 88
+  || vPlusInvertibleEntry.dependencyPlacement!.chapterOrder !== 89
+  || vPlusInversePositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 90
+  || vPlusInversePositiveAndTracesEntry.dependencyPlacement!.chapterOrder !== 91
+  || v1PlusHalfInvertibleEntry.dependencyPlacement!.chapterOrder !== 92
+  || vTwoInvertibleEntry.dependencyPlacement!.chapterOrder !== 93
+  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 94
+  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 95
+  || vTwoConjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 96
   || vPlusInvertibleEntry.kind !== "claim"
   || vPlusInversePositiveDefiniteEntry.kind !== "claim"
   || traceVPlusPositiveEntry.kind !== "claim"
@@ -4594,9 +4606,9 @@ const vPlusCompositeConjugationExternalInputEntryIds = [...new Set(
     .flatMap((entry) => entry.dependsOnEntryIds)
     .filter((id) => !vPlusCompositeConjugationSectionIdSet.has(id)),
 )].sort((a, b) => order.get(a)!.chapterOrder - order.get(b)!.chapterOrder);
-if (vPlusCompositeConjugationDefinitionEntry.dependencyPlacement!.chapterOrder !== 96
-  || vPlusCompositeConjugationEqualityEntry.dependencyPlacement!.chapterOrder !== 97
-  || positiveDefiniteWEntry.dependencyPlacement!.chapterOrder !== 98
+if (vPlusCompositeConjugationDefinitionEntry.dependencyPlacement!.chapterOrder !== 97
+  || vPlusCompositeConjugationEqualityEntry.dependencyPlacement!.chapterOrder !== 98
+  || positiveDefiniteWEntry.dependencyPlacement!.chapterOrder !== 99
   || vPlusCompositeConjugationDefinitionEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || vPlusCompositeConjugationEqualityEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || positiveDefiniteWEntry.provisionalFinalChapter !== "2次元イジングモデル"
@@ -4681,7 +4693,7 @@ const positiveDefiniteWExpectedDirectDependencies = [
 // 順97 の後で節を閉じる。
 const rayleighSupNewInputEntryIds = ["linear_space_general_002b_definition_matrix_norm"].sort();
 if (positiveDefiniteWEntry.kind !== "claim"
-  || rayleighSupEntry.dependencyPlacement!.chapterOrder !== 99
+  || rayleighSupEntry.dependencyPlacement!.chapterOrder !== 100
   || rayleighSupEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...positiveDefiniteWEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(positiveDefiniteWExpectedDirectDependencies)
@@ -4711,7 +4723,7 @@ const rayleighSupExpectedDirectDependencies = [
   "maxeig_003_claim_W_is_positive_definite",
 ].sort();
 if (rayleighSupEntry.kind !== "definition"
-  || operatorBoundEntry.dependencyPlacement!.chapterOrder !== 100
+  || operatorBoundEntry.dependencyPlacement!.chapterOrder !== 101
   || operatorBoundEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...rayleighSupEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(rayleighSupExpectedDirectDependencies)
@@ -4741,7 +4753,7 @@ const operatorBoundExpectedDirectDependencies = [
   "maxeig_006_definition_rayleigh_sup",
 ].sort();
 if (operatorBoundEntry.kind !== "claim"
-  || tracePowerUpperBoundEntry.dependencyPlacement!.chapterOrder !== 101
+  || tracePowerUpperBoundEntry.dependencyPlacement!.chapterOrder !== 102
   || tracePowerUpperBoundEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...operatorBoundEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(operatorBoundExpectedDirectDependencies)
@@ -4769,8 +4781,8 @@ const momentLogConvexityExpectedDirectDependencies = [
 ].sort();
 if (tracePowerUpperBoundEntry.kind !== "claim"
   || momentLogConvexityEntry.kind !== "claim"
-  || momentLogConvexityEntry.dependencyPlacement!.chapterOrder !== 102
-  || tracePowerSandwichEntry.dependencyPlacement!.chapterOrder !== 103
+  || momentLogConvexityEntry.dependencyPlacement!.chapterOrder !== 103
+  || tracePowerSandwichEntry.dependencyPlacement!.chapterOrder !== 104
   || momentLogConvexityEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...tracePowerUpperBoundEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(tracePowerUpperBoundExpectedDirectDependencies)
@@ -4820,12 +4832,12 @@ const partitionFunctionSandwichExpectedDirectDependencies = [
   "maxeig_008_claim_trace_power_sandwich",
 ].sort();
 if (partitionFunctionSandwichEntry.kind !== "claim"
-  || partitionFunctionSandwichEntry.dependencyPlacement!.chapterOrder !== 104
+  || partitionFunctionSandwichEntry.dependencyPlacement!.chapterOrder !== 105
   || JSON.stringify([...partitionFunctionSandwichEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(partitionFunctionSandwichExpectedDirectDependencies)
   || partitionFunctionSandwichEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || entries.filter((entry) => entry.dependsOnEntryIds.includes(partitionFunctionSandwichEntry.id))
-    .some((entry) => entry.dependencyPlacement!.chapterOrder <= 92)) {
+    .some((entry) => entry.dependencyPlacement!.chapterOrder <= 93)) {
   throw new Error(`分配関数の挟み撃ちの一項節が変わりました: ${JSON.stringify({
     order: partitionFunctionSandwichEntry.dependencyPlacement?.chapterOrder,
     dependencies: partitionFunctionSandwichEntry.dependsOnEntryIds,
@@ -4854,8 +4866,8 @@ const epsilonCommutesWithWExpectedDirectDependencies = [
 ].sort();
 if (sectorRayleighSupEntry.kind !== "definition"
   || epsilonCommutesWithWEntry.kind !== "claim"
-  || sectorRayleighSupEntry.dependencyPlacement!.chapterOrder !== 106
-  || epsilonCommutesWithWEntry.dependencyPlacement!.chapterOrder !== 107
+  || sectorRayleighSupEntry.dependencyPlacement!.chapterOrder !== 107
+  || epsilonCommutesWithWEntry.dependencyPlacement!.chapterOrder !== 108
   || JSON.stringify([...sectorRayleighSupEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(sectorRayleighSupExpectedDirectDependencies)
   || JSON.stringify([...epsilonCommutesWithWEntry.dependsOnEntryIds].sort())

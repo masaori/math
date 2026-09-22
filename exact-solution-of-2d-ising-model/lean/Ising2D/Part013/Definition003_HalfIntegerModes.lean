@@ -2,11 +2,13 @@
 # `check(Z)_μ`, `check(Y)_μ`（半整数運動量モード）の定義（**具体版**）
 
 対応する人手証明のラベル: `def_half_integer_checkZ`, `def_half_integer_checkY`,
-`half_integer_phase_antiperiodicity`, `def_half_integer_modes`
+`half_integer_phase_antiperiodicity`, `half_integer_checkZ_periodicity`,
+`def_half_integer_modes`
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_003_definition_half_integer_checkZ`,
 `evensector_003_definition_half_integer_checkY`,
 `evensector_003_claim_half_integer_phase_antiperiodicity`,
+`evensector_003_claim_half_integer_checkZ_periodicity`,
 `evensector_003_definition_half_integer_modes`）
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`。
@@ -46,7 +48,7 @@ noncomputable def checkZ (M : ℕ) (μ : ℤ) : TensorPow M :=
 noncomputable def checkY (M : ℕ) (μ : ℤ) : TensorPow M :=
   ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Y j
 
-/-! ## 独立させた反周期性と `def_half_integer_modes` に残した三つの性質 -/
+/-! ## 独立させた反周期性・Z 行列の周期性と `def_half_integer_modes` に残した二つの性質 -/
 
 /-- **`half_integer_phase_antiperiodicity`（反周期性）**: `e^{-iM θ~_μ} = -1`。
 
@@ -54,9 +56,66 @@ noncomputable def checkY (M : ℕ) (μ : ℤ) : TensorPow M :=
 theorem checkPhase_antiperiodic (hM : M ≠ 0) (μ : ℤ) : checkPhase M (M : ℤ) μ = -1 :=
   checkPhase_M hM μ
 
-/-- **(2) 添字の周期性**: `check(Z)_{μ+M} = check(Z)_μ`。 -/
-theorem checkZ_period (hM : M ≠ 0) (μ : ℤ) : checkZ M (μ + (M : ℤ)) = checkZ M μ :=
-  Finset.sum_congr rfl fun j _ => by rw [checkPhase_period hM]
+/-- **`half_integer_checkZ_periodicity`**: `check(Z)_{μ+M} = check(Z)_μ`。 -/
+theorem thetaTilde_period_for_checkZ (hM : M ≠ 0) (μ : ℤ) :
+    thetaTilde M (μ + (M : ℤ)) = thetaTilde M μ + 2 * Real.pi := by
+  have hMR : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hM
+  calc
+    thetaTilde M (μ + (M : ℤ))
+        = 2 * Real.pi * (((μ : ℝ) + M) - 1 / 2) / M := by
+            rw [thetaTilde]
+            push_cast
+            rfl
+    _ = (2 * Real.pi * ((μ : ℝ) - 1 / 2) + 2 * Real.pi * M) / M := by ring
+    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M + (2 * Real.pi * M) / M := by
+          rw [add_div]
+    _ = 2 * Real.pi * ((μ : ℝ) - 1 / 2) / M + 2 * Real.pi := by
+          field_simp
+    _ = thetaTilde M μ + 2 * Real.pi := by rw [thetaTilde]
+
+/-- 負角の Euler 公式を、本文と同じ実数の正弦・余弦で書いたもの。 -/
+theorem checkPhase_eq_cos_sub_I_sin (hM : M ≠ 0) (j μ : ℤ) :
+    checkPhase M j μ =
+      (Real.cos ((j : ℝ) * thetaTilde M μ) : ℂ)
+        - Complex.I * (Real.sin ((j : ℝ) * thetaTilde M μ) : ℂ) := by
+  rw [checkPhase_eq_exp hM]
+  rw [show -(Complex.I * (j : ℂ) * (thetaTilde M μ : ℂ)) =
+      ((-((j : ℝ) * thetaTilde M μ) : ℝ) : ℂ) * Complex.I by
+        push_cast
+        ring]
+  rw [Complex.exp_mul_I, ← Complex.ofReal_cos, ← Complex.ofReal_sin,
+    Real.cos_neg, Real.sin_neg]
+  push_cast
+  ring
+
+/-- 本文の「角度を `2π` ずらし、Euler 公式と三角関数の周期性を使う」経路で示す位相周期性。 -/
+theorem checkPhase_period_for_checkZ (hM : M ≠ 0) (j μ : ℤ) :
+    checkPhase M j (μ + (M : ℤ)) = checkPhase M j μ := by
+  calc
+    checkPhase M j (μ + (M : ℤ))
+        = (Real.cos ((j : ℝ) * thetaTilde M (μ + (M : ℤ))) : ℂ)
+            - Complex.I * (Real.sin ((j : ℝ) * thetaTilde M (μ + (M : ℤ))) : ℂ) :=
+          checkPhase_eq_cos_sub_I_sin hM j _
+    _ = (Real.cos ((j : ℝ) * (thetaTilde M μ + 2 * Real.pi)) : ℂ)
+            - Complex.I * (Real.sin ((j : ℝ) * (thetaTilde M μ + 2 * Real.pi)) : ℂ) := by
+          rw [thetaTilde_period_for_checkZ hM]
+    _ = (Real.cos ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ)
+            - Complex.I *
+                (Real.sin ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ) := by
+          ring
+    _ = (Real.cos ((j : ℝ) * thetaTilde M μ) : ℂ)
+            - Complex.I * (Real.sin ((j : ℝ) * thetaTilde M μ) : ℂ) := by
+          rw [Real.cos_add_int_mul_two_pi, Real.sin_add_int_mul_two_pi]
+    _ = checkPhase M j μ := (checkPhase_eq_cos_sub_I_sin hM j μ).symm
+
+/-- **`half_integer_checkZ_periodicity`**: `check(Z)_{μ+M} = check(Z)_μ`。 -/
+theorem checkZ_period (hM : M ≠ 0) (μ : ℤ) : checkZ M (μ + (M : ℤ)) = checkZ M μ := by
+  calc
+    checkZ M (μ + (M : ℤ)) =
+        ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) (μ + (M : ℤ)) • Z j := rfl
+    _ = ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Z j :=
+      Finset.sum_congr rfl fun j _ => by rw [checkPhase_period_for_checkZ hM]
+    _ = checkZ M μ := rfl
 
 /-- **(2) 添字の周期性**: `check(Y)_{μ+M} = check(Y)_μ`。 -/
 theorem checkY_period (hM : M ≠ 0) (μ : ℤ) : checkY M (μ + (M : ℤ)) = checkY M μ :=
@@ -75,7 +134,8 @@ theorem checkPhase_congr (hM : M ≠ 0) (k : ℤ) {a b : ℤ} (h : (M : ℤ) ∣
   push_cast
   ring
 
-/-- 添字の周期性の合同形: `M ∣ μ - ν` なら `check(Z)_μ = check(Z)_ν`。 -/
+/-- **`half_integer_checkZ_periodicity` の合同形**:
+`M ∣ μ - ν` なら `check(Z)_μ = check(Z)_ν`。 -/
 theorem checkZ_congr (hM : M ≠ 0) {μ ν : ℤ} (h : (M : ℤ) ∣ μ - ν) :
     checkZ M μ = checkZ M ν :=
   Finset.sum_congr rfl fun j _ => by rw [checkPhase_congr hM _ h]

@@ -8,7 +8,8 @@
 #   (D) [H_2,       checkY_mu] =  2 checkZ_mu
 # 対象: structured-latex commutator_of_H_and_check_Z_Y
 #   （def_half_integer_checkZ / def_half_integer_checkY /
-#     half_integer_phase_antiperiodicity / def_half_integer_modes も併せて検証）
+#     half_integer_phase_antiperiodicity / half_integer_checkZ_periodicity /
+#     def_half_integer_modes も併せて検証）
 # ---------------------------------------------------------
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
@@ -19,12 +20,13 @@ all_ok = True
 for M in EVEN_CASES_M:
     O = SpinOps(M)
     H1p = O.H1(+1)
-    w = {'antiper': 0.0, 'period': 0.0, 'conj': 0.0, 'A': 0.0, 'B': 0.0, 'C': 0.0, 'D': 0.0}
+    w = {'antiper': 0.0, 'periodZ': 0.0, 'periodY': 0.0,
+         'conj': 0.0, 'A': 0.0, 'B': 0.0, 'C': 0.0, 'D': 0.0}
     for mu in range(1, M + 1):
         t = th_tilde(M, mu)
         w['antiper'] = max(w['antiper'], abs(eiph(-M * t) + 1))
-        w['period'] = max(w['period'], opnorm(checkZ(O, mu + M) - checkZ(O, mu)),
-                          opnorm(checkY(O, mu + M) - checkY(O, mu)))
+        w['periodZ'] = max(w['periodZ'], opnorm(checkZ(O, mu + M) - checkZ(O, mu)))
+        w['periodY'] = max(w['periodY'], opnorm(checkY(O, mu + M) - checkY(O, mu)))
         # conjugate_index_of_check_Z_Y (1)(3): 共役添字は M+1-mu で取る（1-mu と同じ値）
         w['conj'] = max(w['conj'], abs(th_tilde(M, M + 1 - mu) - (CDF(2 * pi) - t)),
                         opnorm(checkZ(O, M + 1 - mu) - checkZ(O, 1 - mu)),
@@ -36,7 +38,8 @@ for M in EVEN_CASES_M:
         w['D'] = max(w['D'], opnorm(comm(O.H2, cY) - 2 * cZ))
     worst = max(w.values())
     ok = worst <= TOL
-    print(f"  M={M}: 反周期性 {w['antiper']:.1e}, 添字周期 {w['period']:.1e}, 共役添字 {w['conj']:.1e}, "
+    print(f"  M={M}: 反周期性 {w['antiper']:.1e}, Z 添字周期 {w['periodZ']:.1e}, "
+          f"Y 添字周期 {w['periodY']:.1e}, 共役添字 {w['conj']:.1e}, "
           f"(A) {w['A']:.1e} (B) {w['B']:.1e} (C) {w['C']:.1e} (D) {w['D']:.1e}"
           f"  -> {'PASS' if ok else 'FAIL'}")
     all_ok = ok and all_ok

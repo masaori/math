@@ -93,14 +93,26 @@
   half_integer_phase_antiperiodicity (g) sin integer half-turn = 0: max residual = 4.900e-15  ->  PASS
   half_integer_phase_antiperiodicity (h) i*0 = 0: max residual = 0.000e+00  ->  PASS
   half_integer_phase_antiperiodicity (i) additive identity: max residual = 0.000e+00  ->  PASS
+  half_integer_checkZ_periodicity (a1) theta~ の定義に mu+M を代入: max residual = 1.776e-15  ->  PASS
+  half_integer_checkZ_periodicity (a2) 実数の分配則: max residual = 0.000e+00  ->  PASS
+  half_integer_checkZ_periodicity (a3) 分数の加法: max residual = 1.776e-15  ->  PASS
+  half_integer_checkZ_periodicity (a4) M!=0 により M を約分: max residual = 0.000e+00  ->  PASS
+  half_integer_checkZ_periodicity (a5) theta~ の定義を再適用: max residual = 1.776e-15  ->  PASS
+  half_integer_checkZ_periodicity (b) negative-angle Euler representation: max residual = 1.570e-16  ->  PASS
+  half_integer_checkZ_periodicity (c) substitute theta~_{mu+M}: max residual = 7.105e-15  ->  PASS
+  half_integer_checkZ_periodicity (d) distribute j: max residual = 7.144e-15  ->  PASS
+  half_integer_checkZ_periodicity (e) trigonometric periodicity: max residual = 4.777e-15  ->  PASS
+  half_integer_checkZ_periodicity (f) reverse negative-angle Euler representation: max residual = 1.570e-16  ->  PASS
+  half_integer_checkZ_periodicity (g) checkZ_{mu+M} の定義: max residual = 0.000e+00  ->  PASS
+  half_integer_checkZ_periodicity (h) 位相の一致を全項へ適用: max residual = 2.289e-14  ->  PASS
+  half_integer_checkZ_periodicity (i) checkZ_mu の定義を再適用: max residual = 0.000e+00  ->  PASS
   def_half_integer_modes (2a) theta~_{mu+M} = theta~_mu + 2 pi: max residual = 1.776e-15  ->  PASS
   def_half_integer_modes (2b) negative-angle Euler representation: max residual = 1.570e-16  ->  PASS
   def_half_integer_modes (2c) substitute theta~_{mu+M}: max residual = 7.105e-15  ->  PASS
   def_half_integer_modes (2d) distribute j: max residual = 7.144e-15  ->  PASS
   def_half_integer_modes (2e) trigonometric periodicity: max residual = 4.777e-15  ->  PASS
   def_half_integer_modes (2f) reverse negative-angle Euler representation: max residual = 1.570e-16  ->  PASS
-  def_half_integer_modes (2g) checkZ_{mu+M} = checkZ_mu: max residual = 2.289e-14  ->  PASS
-  def_half_integer_modes (2h) checkY_{mu+M} = checkY_mu: max residual = 2.289e-14  ->  PASS
+  def_half_integer_modes (2g) checkY_{mu+M} = checkY_mu: max residual = 2.289e-14  ->  PASS
   def_half_integer_modes (3) theta~_{1-mu} = -theta~_mu: max residual = 0.000e+00  ->  PASS
   def_check_index_set (1) theta~_nu - theta~_mu = 2pi(nu-mu)/M: max residual = 4.441e-16  ->  PASS
   def_check_index_set (1) theta~_1 = pi/M: max residual = 0.000e+00  ->  PASS
@@ -160,5 +172,5 @@
   H1_H2_via_check (H1 5) antiperiodic_exp_sum の l=0, l=1 の 2 場合: max residual = 2.624e-15  ->  PASS
   H1_H2_via_check (H1 6) = H_1^{(+)}: max residual = 7.463e-15  ->  PASS
   def_check_index_set (4) そのとき theta~_mu = pi: max residual = 0.000e+00  ->  PASS
-  段数（区別された等式の種類）: 161
+  段数（区別された等式の種類）: 173
 check_01: PASS

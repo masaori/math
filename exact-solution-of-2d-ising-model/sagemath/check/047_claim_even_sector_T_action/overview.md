@@ -55,7 +55,7 @@ B_1(θ), B_2, A(θ)
 交換子の級数展開（`exp_X_Y_exp_-X`）にも `extract_taylor_coefficient_of_check_Z_Y` にも
 依存しない独立な経路になっている（check_03, check_04）。
 
-パラメータは `M = 2, 3, 4, 5`、`μ = 1,…,M`（`def_half_integer_modes` (2) の添字周期性により
+パラメータは `M = 2, 3, 4, 5`、`μ = 1,…,M`（`half_integer_checkZ_periodicity` により
 これで全域）、`(K1, K2)` は次の 5 組。
 
 | K1 | K2 | 位置づけ |

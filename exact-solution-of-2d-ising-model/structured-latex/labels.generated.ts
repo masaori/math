@@ -234,6 +234,7 @@ export const ALL_LABELS = [
   "gamma_is_continuous",
   "gamma_kappa_identity",
   "global_spin_flip_jordan_wigner_representation",
+  "half_integer_checkZ_periodicity",
   "half_integer_phase_antiperiodicity",
   "hatZ_hatY_M_periodicity",
   "iH_is_real_symmetric",

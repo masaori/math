@@ -898,11 +898,11 @@ e^{-iM\tilde\theta_\mu}
   },
 
   {
-    id: "evensector_003_definition_half_integer_modes",
+    id: "evensector_003_claim_half_integer_checkZ_periodicity",
     kind: "claim",
     origin: { path: SRC, ordinal: 5 },
-    title: { text: "半整数運動量 Fourier 行列の添字周期性と共役添字" },
-    labels: ["def_half_integer_modes"],
+    title: { text: "半整数運動量 Fourier Z 行列の添字周期性" },
+    labels: ["half_integer_checkZ_periodicity"],
     statement: [
       paragraph([
         math(String.raw`M\in\mathbb Z_{\geq2}`),
@@ -914,14 +914,90 @@ e^{-iM\tilde\theta_\mu}
         math(String.raw`\tilde\theta_\mu`),
         " と、",
         ref("def_half_integer_checkZ"),
+        " の Fourier 行列について、",
+        math(String.raw`\check{Z}_{\mu+M} = \check{Z}_\mu`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph(["まず添字をずらした角度を計算する。"]),
+      displayMath(String.raw`\begin{aligned}
+\tilde\theta_{\mu+M}
+&=\frac{2\pi\left(\mu+M-\tfrac12\right)}{M}
+&&\bigl(\because\ \tilde\theta_\mu\text{ の定義に }\mu+M\text{ を代入}\bigr)\\
+&=\frac{2\pi\left(\mu-\tfrac12\right)+2\pi M}{M}
+&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)\\
+&=\frac{2\pi\left(\mu-\tfrac12\right)}{M}+\frac{2\pi M}{M}
+&&\bigl(\because\ \mathbb R\text{ の分数の加法}\bigr)\\
+&=\frac{2\pi\left(\mu-\tfrac12\right)}{M}+2\pi
+&&\bigl(\because\ M\geq2\text{ より }M\neq0\text{ であり、分子と分母の }M\text{ を約分}\bigr)\\
+&=\tilde\theta_\mu+2\pi
+&&\bigl(\because\ \tilde\theta_\mu\text{ の定義}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`j \in \mathbb{Z}`),
+        " について、",
+        ref("euler_formula_cos_sin"),
+        " の証明冒頭で導いた負角の表示と、正弦・余弦の ",
+        math(String.raw`2\pi`),
+        " 周期性を用いると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+e^{-ij\tilde\theta_{\mu+M}}
+&=\cos\!\left(j\tilde\theta_{\mu+M}\right)-i\sin\!\left(j\tilde\theta_{\mu+M}\right)
+&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }e^{-ix}=\cos x-i\sin x\bigr) \\
+&=\cos\!\left(j(\tilde\theta_\mu+2\pi)\right)-i\sin\!\left(j(\tilde\theta_\mu+2\pi)\right)
+&&\bigl(\because \tilde\theta_{\mu+M}=\tilde\theta_\mu+2\pi\text{ を 2 箇所へ同時代入}\bigr) \\
+&=\cos\!\left(j\tilde\theta_\mu+2\pi j\right)-i\sin\!\left(j\tilde\theta_\mu+2\pi j\right)
+&&\bigl(\because \mathbb R\text{ の分配則}\bigr) \\
+&=\cos\!\left(j\tilde\theta_\mu\right)-i\sin\!\left(j\tilde\theta_\mu\right)
+&&\bigl(\because j\in\mathbb Z\text{ と正弦・余弦の }2\pi\text{ 周期性}\bigr) \\
+&=e^{-ij\tilde\theta_\mu}
+&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた等式の対称律}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["係数がすべて一致するので、一続きに"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Z}_{\mu+M}
+&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}e^{-ij_{\mathbb R}\tilde\theta_{\mu+M}}Z_{j_{\mathbb Z}}
+&&\left(\because\ \check{Z}_{\mu+M}\text{ の定義}\right)\\
+&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}e^{-ij_{\mathbb R}\tilde\theta_{\mu}}Z_{j_{\mathbb Z}}
+&&\left(\because\ \text{上で得た }e^{-ij\tilde\theta_{\mu+M}}=e^{-ij\tilde\theta_\mu}\text{ を全項へ同時適用}\right)\\
+&=\check{Z}_{\mu}
+&&\left(\because\ \check{Z}_{\mu}\text{ の定義}\right)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "旧複合ラベル def_half_integer_modes の (2) から、半整数運動量 Fourier Z 行列の添字周期性だけを独立した主張へ分離した。",
+      ],
+    },
+  },
+
+  {
+    id: "evensector_003_definition_half_integer_modes",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 5 },
+    title: { text: "半整数運動量 Fourier Y 行列の添字周期性と共役添字" },
+    labels: ["def_half_integer_modes"],
+    statement: [
+      paragraph([
+        math(String.raw`M\in\mathbb Z_{\geq2}`),
         "、",
+        math(String.raw`\mu\in\mathbb Z`),
+        " とする。",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`\tilde\theta_\mu`),
+        " と、",
         ref("def_half_integer_checkY"),
-        " の Fourier 行列について、次の 3 つの性質が成り立つ。番号は既存の参照との対応を保つ。",
+        " の Fourier 行列について、次の 2 つの性質が成り立つ。番号は既存の参照との対応を保つ。",
       ]),
       list([
-        [
-          math(String.raw`\text{(2) 添字の周期性（}Z\text{）：}\quad \check{Z}_{\mu+M} = \check{Z}_\mu`),
-        ],
         [
           math(String.raw`\text{(2) 添字の周期性（}Y\text{）：}\quad \check{Y}_{\mu+M} = \check{Y}_\mu`),
         ],
@@ -973,13 +1049,6 @@ e^{-ij\tilde\theta_{\mu+M}}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\check{Z}_{\mu+M}
-&=\sum_{j=1}^{M}Z_j e^{-ij\tilde\theta_{\mu+M}}
-&&\left(\because\ \check{Z}_{\mu+M}\text{ の定義}\right)\\
-&=\sum_{j=1}^{M}Z_j e^{-ij\tilde\theta_{\mu}}
-&&\left(\because\ \text{上で得た }e^{-ij\tilde\theta_{\mu+M}}=e^{-ij\tilde\theta_\mu}\text{ を全項へ同時適用}\right)\\
-&=\check{Z}_{\mu}
-&&\left(\because\ \check{Z}_{\mu}\text{ の定義}\right),\\[4pt]
 \check{Y}_{\mu+M}
 &=\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_{\mu+M}}
 &&\left(\because\ \check{Y}_{\mu+M}\text{ の定義}\right)\\
@@ -1009,7 +1078,7 @@ e^{-ij\tilde\theta_{\mu+M}}
     conversion: {
       status: "converted",
       notes: [
-        "旧複合ラベルは、後続参照の意味を保つため、二つの添字周期性と共役添字恒等式からなる残余主張に残した。",
+        "旧複合ラベルは、後続参照の意味を保つため、Y 行列の添字周期性と共役添字恒等式からなる残余主張に残した。",
         "(3) により、整数運動量の場合に -μ が果たしていた「共役添字」の役割を、半整数運動量では 1-μ が果たす。反交換関係の対が μ+ν ≡ 1 (mod M) になるのはこのためである。",
       ],
     },
@@ -1063,11 +1132,13 @@ e^{-ij\tilde\theta_{\mu+M}}
         ref("periodicity_of_check_fermi"),
         " で用いる ",
         math(String.raw`\check\psi_\mu`),
-        " である。添字の周期性を述べる 2 つの主張は ",
+        " である。添字の周期性を述べる 3 つの主張は ",
+        ref("half_integer_checkZ_periodicity"),
+        "、",
         ref("def_half_integer_modes"),
         " (2) と ",
         ref("periodicity_of_check_fermi"),
-        " だけである。これら 2 つは、計算の途中で ",
+        " だけである。これら 3 つは、計算の途中で ",
         math(String.raw`\check{\mathcal{M}}`),
         " の外に現れた添字を ",
         math(String.raw`\check{\mathcal{M}}`),
@@ -1436,6 +1507,8 @@ e^{-ij\tilde\theta_{M+1-\mu}}
       ]),
       paragraph([
         "(3) ",
+        ref("half_integer_checkZ_periodicity"),
+        " と ",
         ref("def_half_integer_modes"),
         " (2)（添字の周期性）を添字 ",
         math(String.raw`1-\mu \in \mathbb{Z}`),
@@ -1447,7 +1520,7 @@ e^{-ij\tilde\theta_{M+1-\mu}}
 &=\check{Z}_{(1-\mu)+M}
 &&\bigl(\because (1-\mu)+M=M+1-\mu\bigr)\\
 &=\check{Z}_{1-\mu}
-&&\bigl(\because \blkref{def_half_integer_modes}\text{ (2)}\bigr),\\[2pt]
+&&\bigl(\because \blkref{half_integer_checkZ_periodicity}\bigr),\\[2pt]
 \check{Y}_{M+1-\mu}
 &=\check{Y}_{(1-\mu)+M}
 &&\bigl(\because (1-\mu)+M=M+1-\mu\bigr)\\

@@ -178,7 +178,7 @@ $V$ は $V_1^{(\pm)}$ を使って定義されており、$V_1^{(\pm)}$ は $\ma
 |---|---|---|---|
 | C′-1 | 008 章が `(−)` 専用である理由を等式で確定：`[H_2, hatZ^{(+)}_μ] = −2 hatY_μ + 4e^{−iθ_μ}Y_1 ≠ −2 hatY_μ` | `why_008_applies_only_to_minus_sector` | 完了 |
 | C′-2 | 半整数運動量の指数和 `Σ_μ e^{ikθ~_μ} = M(−1)^l`（`k=lM`）/ `0` | `antiperiodic_exp_sum` | 完了 |
-| C′-3 | `checkZ_μ, checkY_μ` の定義、反周期性 `e^{−iMθ~_μ} = −1`、添字周期性、共役添字 `1−μ` | `def_half_integer_checkZ`、`def_half_integer_checkY`、`half_integer_phase_antiperiodicity`、`def_half_integer_modes` | 完了 |
+| C′-3 | `checkZ_μ, checkY_μ` の定義、反周期性 `e^{−iMθ~_μ} = −1`、添字周期性、共役添字 `1−μ` | `def_half_integer_checkZ`、`def_half_integer_checkY`、`half_integer_phase_antiperiodicity`、`half_integer_checkZ_periodicity`、`def_half_integer_modes` | 完了 |
 | C′-4 | (A)〜(D)：`H_1^{(+)}, H_2` との交換関係が 008 章と**同じ形**で閉じる | `commutator_of_H_and_check_Z_Y` | 完了 |
 | C′-5 | 反交換関係（対は `μ+ν ≡ 1 (mod M)`） | `anticommutator_of_check_Z_Y` | 完了 |
 | C′-6 | 復元公式 `Z_j = (1/M)Σ_μ checkZ_μ e^{ijθ~_μ}` と生成性 | `recover_Z_Y_from_check_Z_Y` | 完了 |
@@ -477,17 +477,21 @@ C′-15 で最大固有値の一意性を言うときに、整数運動量側で
 
 ##### 弱くなっていないことの確認
 
-`μ ∈ ℤ` で量化したまま残したのは**主張 2 つだけ**である。
+`μ ∈ ℤ` で量化したまま残したのは**主張 3 つだけ**である。
 
-- `def_half_integer_modes` (2)：`Ž_{μ+M} = Ž_μ`、`Y̌_{μ+M} = Y̌_μ`
+- `half_integer_checkZ_periodicity`：`Ž_{μ+M} = Ž_μ`
+- `def_half_integer_modes` (2)：`Y̌_{μ+M} = Y̌_μ`
 - `periodicity_of_check_fermi` (2)：`θ~_{μ+kM} = θ~_μ + 2kπ` と、そこでの `γ_1, γ_2` の値
 
-前者は `conjugate_index_of_check_Z_Y` (3)（`Ž_{M+1−μ} = Ž_{1−μ}`）を導く橋渡しであり、
-後者は `γ_1, γ_2` が `θ ∈ ℝ` の関数（`def_gamma1_gamma2_of_theta`）であることによって
+前二者は Z・Y Fourier 行列の添字周期性であり、それぞれ
+`conjugate_index_of_check_Z_Y` (3) の Z 側（`Ž_{M+1−μ} = Ž_{1−μ}`）と
+Y 側（`Y̌_{M+1−μ} = Y̌_{1−μ}`）を導く橋渡しである。
+後者は `γ_1, γ_2` が `θ ∈ ℝ` の関数
+（`def_gamma1_gamma2_of_theta`）であることによって
 意味をもつ主張である（`γ(θ~_μ)` と `ψ̌_μ` は `𝓜̌` 上でしか定義していない）。
 これ以外に `μ ∈ ℤ` の量化は残っていない。`013` に 12 箇所、`014` に 1 箇所、`016` に 2 箇所
 `\mathbb{Z}` の字面が残っているが、いずれも**記号の定義域の宣言**（`θ~_μ`、`Ž_μ`、`Y̌_μ`）、
-**上記 2 主張とその説明**、または**証明中の整数性の確認**（`M+1−μ ∈ ℤ` 等）である。
+**上記 3 主張とその説明**、または**証明中の整数性の確認**（`M+1−μ ∈ ℤ` 等）である。
 
 `𝓜̌` がこれ以上減らせないことは数値でも確認した：`𝓜̌` から 1 点でも除くと
 `θ~` の像が `M` 個を尽くせない（`sagemath/check/052_def_check_index_set/check_01`、`M = 2..40` の全探索）。
