@@ -1,5 +1,19 @@
 # MEMORY.md — cellular-automata-statistical-mechanics
 
+## 自動ループ運用: 論文公開を成果物基盤の認証付き API へ移行（2026-09-22）
+
+15:12 と 16:12 の tick は研究・commit・push・PDF 更新まで正常に終えた後、廃止済みの
+`hexagonal-computation/artifacts/publish.py` を呼んで公開段階だけ失敗した。通知済み印と成功印は
+進まず、失敗を成功扱いした Slack 通知も無い。公開入口を成果物基盤の認証付き API CLI へ置き換え、
+API が返すログイン不要の URL だけを受理して HTTP 200 を確認後に通知するようにした。
+
+公開対象の研究 commit は外側の tick が明示して渡し、現在の履歴に含まれ、運用スクリプト・runbook・
+MEMORY 以外の研究成果を実際に変更した40桁 commit だけを受理する。これにより、運用修正 commit を
+失敗した研究版として誤通知しない。
+プログラミングによる検証は、公開応答と研究 commit の正負回帰、Slack 配送応答、モデル固定回帰、
+shellcheck、構造化本文の全検査、HTML 生成まで成功した。実公開・通知の終端は、Mac の正規
+repository caller 主体が外部適用された後に確認する。
+
 ## 自動ループ tick: 有限半順序の被覆関係と被覆近傍割り当てによる生成の Lean 具体版（2026-09-22 16:12）
 
 前 tick の可解性一般に関する過大主張の修正を関連文書へ戻ってレビューし、追加修正を要する不一致は

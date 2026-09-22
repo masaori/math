@@ -243,7 +243,9 @@ if [ -f "$loop_pdf" ] && [ -d "$MAIN_REPO_DIR/$PROJECT_NAME" ]; then
 fi
 
 if [ "$status" -eq 0 ] && [ "$dirty_count" = "0" ]; then
-  if /bin/bash "$LOOP_WORKTREE/$PROJECT_NAME/scripts/publish-artifact.sh" >> "$LOG_FILE" 2>&1; then
+  project_commit="$(git log -1 --format=%H -- "$PROJECT_NAME")"
+  if /bin/bash "$LOOP_WORKTREE/$PROJECT_NAME/scripts/publish-artifact.sh" \
+    --project-commit "$project_commit" >> "$LOG_FILE" 2>&1; then
     git rev-parse HEAD > "$LOG_DIR/last-success-commit"
     log "論文公開・URL つき Slack 通知の処理を完了した"
   else
