@@ -1,0 +1,36 @@
+{
+  "実行識別子": "105ce5c8-a9c4-4ed5-b3c2-56273c96e46e",
+  "観測時刻": "2026-09-23T03:06:00+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.cellular-automata-auto-loop",
+    "state": "not running",
+    "runs": 39,
+    "last exit code": 1
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist",
+    "存在": true,
+    "sha256": "c38cadc881e1716015ff02c973244a9afc3e54960d96b6d9f2540d8f34324573",
+    "StartCalendarInterval": "毎時12分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-23T03:06:00+09:00",
+    "path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/auto-loop.log",
+    "終端": "2026-09-23 02:33:35に研究tick正常終了、02:33:37に論文公開またはURL付きSlack通知が失敗。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0。登録あり・非実行中・runs 39・last exit 1。研究処理の成果統合後に外側処理が失敗したため、起動単位は異常終了とする。",
+  "成果比較": {
+    "開始成果": "ce9416287f58a2b298978fb4cc66fb2a65dcf649",
+    "前回監督の読解終点": "2417bb5bc8ef6dcbba437451980d278c3a4f2b87",
+    "今回読解終点": "ce9416287f58a2b298978fb4cc66fb2a65dcf649",
+    "前回監督以後": "古典的非退化性のLean二版と、有限反交換係数抽出の構造化記述・SageMath・Lean具体版がremote defaultへ統合された。"
+  },
+  "監督処理の時計": {
+    "開始": "2026-09-23T02:53:39+09:00",
+    "処理上限秒数": 2400,
+    "評価・検査終了と完了工程への移行": "2026-09-23T03:21:19+09:00",
+    "実測秒数": 1660
+  }
+}
