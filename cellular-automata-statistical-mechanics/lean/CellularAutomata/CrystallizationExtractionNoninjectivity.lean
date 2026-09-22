@@ -24,8 +24,8 @@ def basisSwap : BasisPair ≃ BasisPair := Equiv.prodComm Bool Bool
 def integerExponent : BasisPair → ℤ
   | (false, false) => -1
   | (false, true) => 0
-  | (true, false) => 1
-  | (true, true) => 2
+  | (true, false) => 2
+  | (true, true) => 1
 
 /-- 基底対を交換し、整数指数だけ次数を移す全単射。 -/
 def gradedBasisSwap : GradedBasis ≃ GradedBasis where
@@ -98,8 +98,8 @@ theorem coefficient_evaluation_at_zero :
 theorem integer_exponent_extraction :
     integerExponent (false, false) = -1 ∧
     integerExponent (false, true) = 0 ∧
-    integerExponent (true, false) = 1 ∧
-    integerExponent (true, true) = 2 := by
+    integerExponent (true, false) = 2 ∧
+    integerExponent (true, true) = 1 := by
   decide
 
 /-- 第一の同型は基底対を交換し、整数指数だけ次数を移す。 -/

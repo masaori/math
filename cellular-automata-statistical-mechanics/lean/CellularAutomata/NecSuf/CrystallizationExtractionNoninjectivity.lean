@@ -64,13 +64,14 @@ def evaluatedBasisData (evaluation : K → L) (coefficient : K)
     (swap : S ≃ S) (exponent : S → ℤ) (s : S) : L × S × ℤ :=
   (evaluation coefficient, swap s, exponent s)
 
-/-- 評価が単元を 1 へ送るなら、規格化の前後で有限基底と整数標識の抽出は一致する。 -/
-theorem scalar_normalization_same_extraction [CommRing K] [CommRing L]
-    (evaluation : K →+* L) (swap : S ≃ S) (exponent : S → ℤ)
-    (unit : Kˣ) (hevaluation : evaluation unit = 1) (s : S) :
+/-- 評価が 1 と単元を同じ値へ送るなら、規格化の前後で有限基底と整数標識の抽出は一致する。 -/
+theorem scalar_normalization_same_extraction [CommRing K]
+    (evaluation : K → L) (swap : S ≃ S) (exponent : S → ℤ)
+    (unit : Kˣ) (hevaluation : evaluation 1 = evaluation unit) (s : S) :
     evaluatedBasisData evaluation 1 swap exponent s =
       evaluatedBasisData evaluation (unit : K) swap exponent s := by
-  simp [evaluatedBasisData, hevaluation]
+  simp only [evaluatedBasisData]
+  rw [hevaluation]
 
 /-! ## 具体版の導出 -/
 
@@ -108,7 +109,10 @@ theorem operators_distinct_of_necSuf : operatorZero ≠ operatorOne := by
 theorem same_crystallization_extraction_of_necSuf (pair : BasisPair) :
     (evaluateAtZero coefficientZero, basisSwap pair, integerExponent pair) =
       (evaluateAtZero coefficientOne, basisSwap pair, integerExponent pair) := by
-  rw [coefficientZero_evaluateAtZero, coefficientOne_evaluateAtZero]
+  let unit : Coefficientˣ := Units.mk0 coefficientOne coefficientOne_ne_zero
+  apply scalar_normalization_same_extraction evaluateAtZero basisSwap integerExponent unit
+  simpa [unit, coefficientZero] using
+    coefficientZero_evaluateAtZero.trans coefficientOne_evaluateAtZero.symm
 
 end Derivation
 
