@@ -2,7 +2,7 @@
 # 構造化証明から論文 HTML を生成・公開し、公開 URL を Slack へ一度だけ通知する。
 #
 # Firebase Hosting 上の成果物は、その場で読むための一時公開物であり、恒久リンクには使わない。
-# 定期実行では対話セッションを前提にできないため、並行公開対応済みの publish.py を使う。
+# 定期実行では対話セッションを前提にできないため、成果物基盤の認証付き API CLI を使う。
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
@@ -14,16 +14,19 @@ LOCK_DIR="$LOG_DIR/publish-artifact.lock"
 HTML="$PROJECT_DIR/structured-latex/build/document.html"
 SLUG="cellular-automata-statistical-mechanics"
 STAGE="$HOME/.artifact-uploads/math/$SLUG"
-# 公開先は GitHub Pages から Firebase Hosting へ移った。旧 URL のままだと公開自体は
-# 成功しているのに照合だけが落ち、ティックが毎回失敗として記録される（2026-08-16）。
-EXPECTED_URL="https://hexcomp-artifacts.web.app/math/$SLUG/"
-PUBLISHER="/Users/masaori/git/masaori/artifacts/publish.py"
+ARTIFACTS_REPO="/Users/masaori/git/masaori/artifacts"
+PUBLISHER="$ARTIFACTS_REPO/frontend/for-ai-agents/bin/publish.ts"
+ARTIFACTS_API_URL="https://hexcomp-artifacts.web.app"
+ARTIFACTS_API_AUDIENCE="https://artifacts.hexagonal-computation.com/api"
+ARTIFACT_TITLE="2値セルオートマトンの内在構造 — 局所規則から生じる数学の抽出"
+PUBLISH_RESPONSE_VALIDATOR="$PROJECT_DIR/scripts/validate-artifact-publish-response.sh"
+PROJECT_COMMIT_VALIDATOR="$PROJECT_DIR/scripts/validate-publish-project-commit.sh"
 SLACK_RESPONSE_VALIDATOR="$PROJECT_DIR/scripts/validate-slack-route-response.sh"
 
 mkdir -p "$LOG_DIR"
 log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >> "$LOG_FILE"; }
 
-PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+PATH="$HOME/.agent-shims:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 [ -d "$HOME/.local/share/mise/shims" ] && PATH="$HOME/.local/share/mise/shims:$PATH"
 if [ -d "$HOME/.nvm/versions/node" ]; then
   nvm_bin="$(find "$HOME/.nvm/versions/node" -mindepth 1 -maxdepth 1 -type d -name 'v*' -print | sort -V | tail -1)"
@@ -31,14 +34,37 @@ if [ -d "$HOME/.nvm/versions/node" ]; then
 fi
 export PATH
 
-for cli in git pnpm jq curl python3; do
+for cli in git pnpm npx jq curl python3; do
   if ! command -v "$cli" >/dev/null 2>&1; then
     log "NG: 必要なコマンドが PATH に無い: $cli"
     exit 1
   fi
 done
-if [ ! -x "$PUBLISHER" ]; then
+if [ ! -f "$PUBLISHER" ]; then
   log "NG: 公開スクリプトが見つからない: $PUBLISHER"
+  exit 1
+fi
+
+case "$#" in
+  0) project_commit="$(git -C "$REPO_DIR" log -1 --format=%H -- "$PROJECT_NAME")" ;;
+  2)
+    if [ "$1" != "--project-commit" ]; then
+      log "NG: 未知の引数: $1"
+      exit 2
+    fi
+    project_commit="$2"
+    ;;
+  *)
+    log "NG: usage: publish-artifact.sh [--project-commit <commit>]"
+    exit 2
+    ;;
+esac
+if ! "$PROJECT_COMMIT_VALIDATOR" "$REPO_DIR" "$PROJECT_NAME" "$project_commit"; then
+  log "NG: 公開対象は現在の履歴に含まれ、この研究を変更した commit でなければならない"
+  exit 1
+fi
+if ! bash -lc 'type agent-id-token >/dev/null 2>&1'; then
+  log "NG: 正規 API の呼出主体を取得する agent-id-token が配布されていない"
   exit 1
 fi
 
@@ -63,7 +89,6 @@ cleanup_lock() {
 printf '%s\n' "$$" > "$LOCK_DIR/pid"
 trap cleanup_lock EXIT
 
-project_commit="$(git -C "$REPO_DIR" log -1 --format=%H -- "$PROJECT_NAME")"
 short_commit="$(printf '%.8s' "$project_commit")"
 notified_mark="$LOG_DIR/last-notified-project-commit"
 if [ "$(cat "$notified_mark" 2>/dev/null || true)" = "$project_commit" ]; then
@@ -71,7 +96,7 @@ if [ "$(cat "$notified_mark" 2>/dev/null || true)" = "$project_commit" ]; then
   exit 0
 fi
 
-summary="$(git -C "$REPO_DIR" log -1 --format='%s' -- "$PROJECT_NAME")"
+summary="$(git -C "$REPO_DIR" show -s --format='%s' "$project_commit")"
 summary="$(printf '%s' "$summary" | sed -E 's/^[^:]+:[[:space:]]*//; s/（.*$//; s/[[:space:]]+$//')"
 summary="「${summary}」を完了しました。"
 
@@ -84,17 +109,22 @@ mkdir -p "$STAGE"
 cp "$HTML" "$STAGE/index.html"
 
 publish_output=""
-if ! publish_output="$($PUBLISHER --src "$STAGE" --repo math --path "$SLUG" 2>&1)"; then
-  printf '%s\n' "$publish_output" >> "$LOG_FILE"
+if ! publish_output="$(
+  cd "$REPO_DIR"
+  ARTIFACTS_API_URL="$ARTIFACTS_API_URL" \
+    ARTIFACTS_API_AUDIENCE="$ARTIFACTS_API_AUDIENCE" \
+    npx --prefix "$ARTIFACTS_REPO" tsx "$PUBLISHER" \
+      --src "$STAGE" \
+      --repo math \
+      --path "$SLUG" \
+      --title "$ARTIFACT_TITLE"
+)" 2>> "$LOG_FILE"; then
   log "NG: 論文の公開に失敗した（版 ${short_commit}）"
   exit 1
 fi
 printf '%s\n' "$publish_output" >> "$LOG_FILE"
-# 公開先の URL は EXPECTED_URL だけを正本とし、形を推測する正規表現を持たない
-# （旧公開先には /artifacts/ の階層があり、移設後はそれが無い。形を二重に持つと片方が腐る）。
-url="$(printf '%s\n' "$publish_output" | grep -Fo "$EXPECTED_URL" | tail -1 || true)"
-if [ "$url" != "$EXPECTED_URL" ]; then
-  log "NG: 公開スクリプトが期待した URL を返さなかった（版 ${short_commit}）"
+if ! url="$(printf '%s' "$publish_output" | "$PUBLISH_RESPONSE_VALIDATOR" "$ARTIFACTS_API_URL")"; then
+  log "NG: 公開 API が公開済み URL を正しい JSON で返さなかった（版 ${short_commit}）"
   exit 1
 fi
 
@@ -124,7 +154,7 @@ fi
 message="${report_body}
 ${url}"
 case "$message" in
-  *"$EXPECTED_URL"*) ;;
+  *"$url"*) ;;
   *)
     log "NG: Slack 通知文に公開アーティファクト URL が無い（版 ${short_commit}）"
     exit 1
@@ -132,7 +162,7 @@ case "$message" in
 esac
 slack_response="$(slack route-post math "$message" \
   --topic "セルオートマトン統計力学" \
-  --artifact-url "$EXPECTED_URL")"
+  --artifact-url "$url")"
 printf '%s\n' "$slack_response" >> "$LOG_FILE"
 if ! printf '%s' "$slack_response" | "$SLACK_RESPONSE_VALIDATOR" math; then
   log "NG: Slack の明示routeから期待した配送応答を得られなかった（版 ${short_commit}）"

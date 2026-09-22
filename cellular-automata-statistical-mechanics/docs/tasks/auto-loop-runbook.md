@@ -148,10 +148,11 @@
 6. `auto-loop-state.md` の現在地と対象表、`MEMORY.md` を更新する。
 7. commit し、remote が進んでいれば取り込んでから `HEAD:main` へ push する。
 8. fetch 後、成果コミットが remote default branch の祖先であることを確認する。
-9. 正常終了かつ worktree が clean の場合だけ、外側の `scripts/publish-artifact.sh` が論文 HTML を
-   `hexagonal-computation/artifacts` へ公開し、Firebase Hosting の公開 URL が HTTP 200 を返した後、その URL を含む
-   Slack 通知を一度だけ送る。公開アーティファクト URL のない完了通知は送信失敗として扱う。
-   tick 内のエージェントは通知しない。
+9. 正常終了かつ worktree が clean の場合だけ、外側の `scripts/publish-artifact.sh` が、その tick で
+   最後に研究を変更した commit を明示して論文 HTML を `hexagonal-computation/artifacts` の認証付き
+   API CLI から公開する。API が返したログイン不要の公開 URL が HTTP 200 を返した後、その URL を含む
+   Slack 通知を一度だけ送る。公開アーティファクト URL のない完了通知は送信失敗として扱い、公開と
+   通知がともに成功するまで通知済み印を進めない。tick 内のエージェントは通知しない。
 
 ## 検証
 
@@ -202,7 +203,7 @@ bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh
 - 専用 worktree: `<repo>/.codex/worktrees/tick/cellular-automata-auto-loop`
 - ログ: `~/Library/Logs/cellular-automata-auto-loop/auto-loop.log`
 - エージェント: Codex（`gpt-6-astra`、reasoning `medium`）
-- 論文公開・通知: `scripts/publish-artifact.sh`（同じ論文版は再通知しない）
+- 論文公開・通知: `scripts/publish-artifact.sh`（成果物基盤の認証付き API CLI を使い、同じ研究版は再通知しない）
 
 ### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）
 
