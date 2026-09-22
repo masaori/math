@@ -273,6 +273,7 @@ const PHYSICS_COMPARISON_BLOCK_TERMS = new Map<string, readonly string[]>([
   ["causal_set_primary_literature_remark_source", ["因果集合", "時空", "多様体", "Lorentz"]],
   ["finite_gibbs_weight_boundary_definition_row_partition_sum", ["エネルギー"]],
   ["finite_gibbs_weight_boundary_claim_zero_weight_counterexample", ["エネルギー"]],
+  ["finite_signed_coefficient_extraction_remark_continuum_boundary", ["Lorentz"]],
 ]);
 
 const PHYSICS_COMPARISON_BLOCK_IDS = [...PHYSICS_COMPARISON_BLOCK_TERMS.keys()];

@@ -92,6 +92,18 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_signed_coefficient_extraction",
+        title: "有限反交換係数表の符号と最高次係数抽出",
+        input: "有限全順序集合、その冪集合、整数係数の有限表を入力とする。",
+        output: "反交換積、基底順序の置換符号、最高次係数、有限族から抽出する整数係数行列を得る。",
+        main: "主張は、一元基底が平方零かつ互いに反交換し、基底順序の変更が置換符号として最高次係数に現れ、全係数を有限整数計算で決定できることである。",
+        mainLabels: [
+          "claim_finite_exterior_generators_square_zero_anticommute",
+          "claim_finite_exterior_basis_permutation_top_sign",
+          "claim_finite_signed_coefficient_extraction_decidable",
+        ],
+      },
+      {
         id: "finite_combinatorial_scattering_data",
         title: "有限組合せ散乱表と結晶化境界",
         input: "空でない有限集合、部分作用表、直積間の全単射、整数値表とその正規化、および比較元となる q=0 で正則な複素係数作用素を入力とする。",
@@ -353,6 +365,14 @@ export const documentOrganization = [
         output: "三条件の個別の有限判定と、それらを可解性一般へ同一視しない境界を得る。",
         main: "主張は、三条件がそれぞれ有限決定できる一方、同じ入力型の非退化性から Yang--Baxter 条件は従わず、線形性は入力型も異なるため、個別証明書を一つの可解性述語として扱えないことである。",
         mainLabels: ["claim_exact_solution_candidate_certificates_individually_decidable"],
+      },
+      {
+        id: "finite_signed_coefficient_continuum_boundary",
+        title: "有限符号付き係数行列と連続構造の境界",
+        input: "有限反交換係数表から抽出した整数係数行列と、有限舞台上の 2 値セルオートマトンの零一遷移表を入力とする。",
+        output: "有限係数抽出と 2 値セルオートマトンの大域写像を同一視できない境界、および連続側との比較に別の写像と極限概念が要る範囲を得る。",
+        main: "主張は、有限反交換符号と最高次係数が整数計算で閉じる一方、その係数行列だけから 2 値セルオートマトンの大域写像も連続構造も従わないことである。",
+        mainLabels: ["claim_finite_top_coefficient_matrix_not_automatically_update"],
       },
       {
         id: "local_representation_and_composition",

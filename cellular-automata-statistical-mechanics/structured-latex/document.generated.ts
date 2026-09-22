@@ -46,6 +46,7 @@ import blocks_finite_permutation_complex_phase_boundary from './content/finite-p
 import blocks_finite_power_bound_certificate from './content/finite-power-bound-certificate.ts'
 import blocks_finite_propagation_boundary from './content/finite-propagation-boundary.ts'
 import blocks_finite_rational_entropy_boundary from './content/finite-rational-entropy-boundary.ts'
+import blocks_finite_signed_coefficient_extraction from './content/finite-signed-coefficient-extraction.ts'
 import blocks_finite_submultiplicative_count_bounds from './content/finite-submultiplicative-count-bounds.ts'
 import blocks_finite_transfer_matrix_comparison from './content/finite-transfer-matrix-comparison.ts'
 import blocks_finite_word_complexity_boundary from './content/finite-word-complexity-boundary.ts'
@@ -141,6 +142,7 @@ export type AllBlocks = [
   ...typeof blocks_finite_power_bound_certificate,
   ...typeof blocks_finite_propagation_boundary,
   ...typeof blocks_finite_rational_entropy_boundary,
+  ...typeof blocks_finite_signed_coefficient_extraction,
   ...typeof blocks_finite_submultiplicative_count_bounds,
   ...typeof blocks_finite_transfer_matrix_comparison,
   ...typeof blocks_finite_word_complexity_boundary,
