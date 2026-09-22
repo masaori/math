@@ -1,0 +1,36 @@
+{
+  "実行識別子": "4407661c-15c0-4656-9b0f-904ca4b494df",
+  "観測時刻": "2026-09-22T15:01:25+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.cellular-automata-auto-loop",
+    "state": "not running",
+    "runs": 27,
+    "last exit code": 0
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist",
+    "存在": true,
+    "sha256": "c38cadc881e1716015ff02c973244a9afc3e54960d96b6d9f2540d8f34324573",
+    "StartCalendarInterval": "毎時12分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-22T15:01:25+09:00",
+    "path": "/Users/masaori/Library/Logs/cellular-automata-auto-loop/auto-loop.log",
+    "終端": "2026-09-22 14:31:59正常終了。14:33:43に外側の公開処理も完了。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・非実行中・runs 27・last exit 0。実ログは14:31:59正常終了し、14:33:43に外側の公開処理も完了した。",
+  "成果比較": {
+    "開始成果": "8f89601ae96985cf3cb7175327c1f471d2452fec",
+    "前回監督の読解終点": "d46114c70b6989815508ae0dc4302d5d1d1ba650",
+    "今回読解終点": "8f89601ae96985cf3cb7175327c1f471d2452fec",
+    "前回監督以後": "結晶化抽出のSageMath検算、Lean具体版、必要十分版と導出、層間不一致修正が統合された。"
+  },
+  "監督処理の時計": {
+    "開始": "2026-09-22T15:01:25+09:00",
+    "処理上限秒数": 2400,
+    "評価・検査終了と完了工程への移行": "2026-09-22T15:14:22+09:00",
+    "実測秒数": 777
+  }
+}
