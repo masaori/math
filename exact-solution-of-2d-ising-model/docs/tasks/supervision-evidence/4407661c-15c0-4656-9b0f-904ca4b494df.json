@@ -1,0 +1,37 @@
+{
+  "実行識別子": "4407661c-15c0-4656-9b0f-904ca4b494df",
+  "観測時刻": "2026-09-22T15:01:25+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "state": "running",
+    "runs": 14,
+    "last exit code": 1,
+    "pid": 90115
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "3d05a4e2dffcf073838797e47d24ad41df834e7bf65e40378224940c326ee4ed",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-22T15:01:25+09:00",
+    "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick-run-20260922T144339-90115.log",
+    "終端": "2026-09-22 14:43開始分は実行中で、15:01:25時点に終端なし。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・実行中・runs 14・PID 90115。表示上のlast exit 1は過去回の値で、14:43開始分は実ログに終端がなく成否未確認とした。",
+  "成果比較": {
+    "開始成果": "8f89601ae96985cf3cb7175327c1f471d2452fec",
+    "前回監督の読解終点": "d46114c70b6989815508ae0dc4302d5d1d1ba650",
+    "今回読解終点": "8f89601ae96985cf3cb7175327c1f471d2452fec",
+    "前回監督以後": "この研究の数学本文・証明・候補評価または段取りにremote defaultへ統合済みの変更はない。"
+  },
+  "監督処理の時計": {
+    "開始": "2026-09-22T15:01:25+09:00",
+    "処理上限秒数": 2400,
+    "評価・検査終了と完了工程への移行": "2026-09-22T15:14:22+09:00",
+    "実測秒数": 777
+  }
+}
