@@ -1,0 +1,37 @@
+{
+  "実行識別子": "7005d8ee-2e7f-4384-b77c-d0e247cc692d",
+  "観測時刻": "2026-09-22T09:03:01+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "state": "running",
+    "runs": 11,
+    "last exit code": 0,
+    "pid": 55395
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "3d05a4e2dffcf073838797e47d24ad41df834e7bf65e40378224940c326ee4ed",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-22T09:03:01+09:00",
+    "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/launchd.log",
+    "終端": "2026-09-22 09:00:58まで更新中。観測時は半整数運動量の反周期性周辺を作業中で、現行回の終端なし。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0で登録あり・実行中・runs 11・PID 55395・表示上のlast exit 0。現行回の終端がないため、過去のlast exitを現行回の成功へ流用せず成否未確認とした。",
+  "成果比較": {
+    "開始成果": "8ecb628249fc2c56c2a286f9388da1af69c84457",
+    "前回監督の読解終点": "55406d2bef0b8705a5dc58f04422366ae325b215",
+    "今回読解終点": "8ecb628249fc2c56c2a286f9388da1af69c84457",
+    "前回監督以後": "半整数運動量Fourier行列のcheck Zとcheck Yを独立定義へ分離し、本文・Lean・SageMath・棚卸し・参照を同期した成果が統合された。観測中の未統合差分は今回読解終点の成果に数えていない。"
+  },
+  "監督処理の時計": {
+    "開始": "2026-09-22T08:52:04+09:00",
+    "評価・検査終了と完了工程への移行": "2026-09-22T09:22:24+09:00",
+    "実測秒数": 1820,
+    "処理上限秒数": 2400
+  }
+}
