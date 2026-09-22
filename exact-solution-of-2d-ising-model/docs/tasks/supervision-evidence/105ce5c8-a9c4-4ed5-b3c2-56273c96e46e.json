@@ -1,0 +1,36 @@
+{
+  "実行識別子": "105ce5c8-a9c4-4ed5-b3c2-56273c96e46e",
+  "観測時刻": "2026-09-23T03:06:00+09:00",
+  "起動登録の実測": {
+    "list終了コード": 0,
+    "print終了コード": 0,
+    "label": "com.masaori.math-complex-matrix-ising-paper-organization-loop",
+    "state": "not running",
+    "runs": 20,
+    "last exit code": 1
+  },
+  "plist": {
+    "path": "/Users/masaori/Library/LaunchAgents/com.masaori.math-complex-matrix-ising-paper-organization-loop.plist",
+    "存在": true,
+    "sha256": "3d05a4e2dffcf073838797e47d24ad41df834e7bf65e40378224940c326ee4ed",
+    "StartCalendarInterval": "偶数時43分"
+  },
+  "実ログ": {
+    "観測時刻": "2026-09-23T03:06:00+09:00",
+    "path": "/Users/masaori/Library/Logs/math-complex-matrix-ising-paper-organization/tick-run-20260923T024334-32615.log.20260922T175707Z-609150310-1790099827924829518-1325803.gz",
+    "終端": "02:43開始分は本文・SageMath・Lean・PDFの検査後、独立レビューの正規起動がruntime-account理由の終了コード78で停止。17ファイルの未コミット成果を保持し、commit/pushなし。"
+  },
+  "実行の終了値の解釈": "launchctl list/printはいずれも終了0。登録あり・非実行中・runs 20・last exit 1。必須独立レビュー未完了なので異常終了とする。",
+  "成果比較": {
+    "開始成果": "ce9416287f58a2b298978fb4cc66fb2a65dcf649",
+    "前回監督の読解終点": "2417bb5bc8ef6dcbba437451980d278c3a4f2b87",
+    "今回読解終点": "ce9416287f58a2b298978fb4cc66fb2a65dcf649",
+    "前回監督以後": "当研究のremote default統合成果なし。check Y周期性に関する未コミット成果は必須レビュー未完了のため前進に数えない。"
+  },
+  "監督処理の時計": {
+    "開始": "2026-09-23T02:53:39+09:00",
+    "処理上限秒数": 2400,
+    "評価・検査終了と完了工程への移行": "2026-09-23T03:21:19+09:00",
+    "実測秒数": 1660
+  }
+}
