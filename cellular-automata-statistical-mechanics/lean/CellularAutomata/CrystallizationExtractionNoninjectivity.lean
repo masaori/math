@@ -13,8 +13,9 @@ namespace CellularAutomata.CrystallizationExtractionNoninjectivity
 noncomputable section
 
 abbrev BasisPair := Bool × Bool
+abbrev GradedBasis := BasisPair × ℤ
 abbrev Coefficient := RatFunc ℚ
-abbrev FreeModule := BasisPair →₀ Coefficient
+abbrev FreeModule := GradedBasis →₀ Coefficient
 
 /-- 二元基底対の因子交換。 -/
 def basisSwap : BasisPair ≃ BasisPair := Equiv.prodComm Bool Bool
@@ -25,6 +26,18 @@ def integerExponent : BasisPair → ℤ
   | (false, true) => 0
   | (true, false) => 1
   | (true, true) => 2
+
+/-- 基底対を交換し、整数指数だけ次数を移す全単射。 -/
+def gradedBasisSwap : GradedBasis ≃ GradedBasis where
+  toFun state := (basisSwap state.1, state.2 + integerExponent state.1)
+  invFun state :=
+    (basisSwap.symm state.1, state.2 - integerExponent (basisSwap.symm state.1))
+  left_inv state := by
+    rcases state with ⟨⟨b, c⟩, degree⟩
+    cases b <;> cases c <;> simp [basisSwap, integerExponent]
+  right_inv state := by
+    rcases state with ⟨⟨b, c⟩, degree⟩
+    cases b <;> cases c <;> simp [basisSwap, integerExponent]
 
 /-- q=0 における有理関数の代数的評価。 -/
 def evaluateAtZero (coefficient : Coefficient) : ℚ :=
@@ -37,11 +50,12 @@ def coefficientZero : Coefficient := 1
 def coefficientOne : Coefficient := 1 + RatFunc.X
 
 /-- 基底ベクトル。 -/
-def basisVector (pair : BasisPair) : FreeModule := Finsupp.single pair 1
+def basisVector (pair : BasisPair) (degree : ℤ) : FreeModule :=
+  Finsupp.single (pair, degree) 1
 
 /-- 因子交換から得る有限基底自由加群の同型。 -/
 def operatorZero : FreeModule ≃ₗ[Coefficient] FreeModule :=
-  Finsupp.lcongr basisSwap (LinearEquiv.refl Coefficient Coefficient)
+  Finsupp.lcongr gradedBasisSwap (LinearEquiv.refl Coefficient Coefficient)
 
 /-- 係数 1 は q=0 で 1 へ評価される。 -/
 theorem coefficientZero_evaluateAtZero : evaluateAtZero coefficientZero = 1 := by
@@ -88,29 +102,28 @@ theorem integer_exponent_extraction :
     integerExponent (true, true) = 2 := by
   decide
 
-/-- 第一の同型は基底対を交換し、係数を 1 のまま保つ。 -/
-theorem operatorZero_on_basis (pair : BasisPair) :
-    operatorZero (basisVector pair) = basisVector (basisSwap pair) := by
-  simp [operatorZero, basisVector]
+/-- 第一の同型は基底対を交換し、整数指数だけ次数を移す。 -/
+theorem operatorZero_on_basis (pair : BasisPair) (degree : ℤ) :
+    operatorZero (basisVector pair degree) =
+      basisVector (basisSwap pair) (degree + integerExponent pair) := by
+  simp [operatorZero, basisVector, gradedBasisSwap]
 
-/-- 第二の同型は同じ基底対へ送り、係数だけを 1+q 倍する。 -/
-theorem operatorOne_on_basis (pair : BasisPair) :
-    operatorOne (basisVector pair) = coefficientOne • basisVector (basisSwap pair) := by
+/-- 第二の同型は同じ次数移動を行い、係数だけを 1+q 倍する。 -/
+theorem operatorOne_on_basis (pair : BasisPair) (degree : ℤ) :
+    operatorOne (basisVector pair degree) =
+      coefficientOne • basisVector (basisSwap pair) (degree + integerExponent pair) := by
   simp [operatorOne, operatorZero, scalarNormalization, basisVector, coefficientOne,
-    Units.smul_def]
+    gradedBasisSwap, Units.smul_def]
 
 /-- 二つの自由加群同型は基底ベクトル上ですでに異なる。 -/
 theorem operators_distinct : operatorZero ≠ operatorOne := by
   intro h
-  have basisEquality := LinearEquiv.congr_fun h (basisVector (false, false))
+  have basisEquality := LinearEquiv.congr_fun h (basisVector (false, false) 0)
   rw [operatorZero_on_basis, operatorOne_on_basis] at basisEquality
-  have coefficientEquality := congrArg (fun vector : FreeModule => vector (false, false)) basisEquality
-  simp [basisVector, basisSwap, coefficientOne] at coefficientEquality
-  have hX : (RatFunc.X : Coefficient) = 0 := by
-    calc
-    (RatFunc.X : Coefficient) = (1 + RatFunc.X) - 1 := by ring
-    _ = 0 := by rw [coefficientEquality]; ring
-  exact RatFunc.X_ne_zero hX
+  have coefficientEquality :=
+    congrArg (fun vector : FreeModule => vector (basisSwap (false, false), -1)) basisEquality
+  simp [basisVector, basisSwap, integerExponent, coefficientOne] at coefficientEquality
+  exact RatFunc.X_ne_zero coefficientEquality
 
 /-- q=0 評価後には、二つの規格化から同じ基底全単射と整数指数を抽出する。 -/
 theorem same_crystallization_extraction (pair : BasisPair) :
