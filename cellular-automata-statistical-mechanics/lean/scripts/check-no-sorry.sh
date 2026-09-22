@@ -53,6 +53,13 @@ fi
 # 2. 形式化した定理の依存公理に sorryAx が含まれていないか。
 #    **形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。**
 targets=(
+  CellularAutomata.FiniteSignedCoefficientExtraction.anticommutingProduct_basis
+  CellularAutomata.FiniteSignedCoefficientExtraction.generator_square_zero
+  CellularAutomata.FiniteSignedCoefficientExtraction.generators_anticommute
+  CellularAutomata.FiniteSignedCoefficientExtraction.topCoefficient_permutationMonomial
+  CellularAutomata.FiniteSignedCoefficientExtraction.counterexample_top_entry
+  CellularAutomata.FiniteSignedCoefficientExtraction.indicatorMatrix_entry_zero_or_one
+  CellularAutomata.FiniteSignedCoefficientExtraction.counterexample_not_indicator
   CellularAutomata.NecSuf.FiniteExactSolutionCertificates.hasBijectiveSlices_iff_classicallyNondegenerate
   CellularAutomata.NecSuf.FiniteExactSolutionCertificates.not_satisfiesBraid_of_witness
   CellularAutomata.NecSuf.FiniteExactSolutionCertificates.nondegeneracy_does_not_imply_braid_of_witness
