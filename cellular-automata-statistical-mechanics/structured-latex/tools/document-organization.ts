@@ -81,6 +81,17 @@ export const documentOrganization = [
         ],
       },
       {
+        id: "finite_exact_solution_certificates",
+        title: "有限二体写像の古典的非退化性",
+        input: "有限集合と、その直積平方上の有限二体写像を入力する。",
+        output: "古典的非退化性の有限判定と、それだけでは有限 Yang--Baxter 条件が従わない反例を得る。",
+        main: "主張は、古典的非退化性が成分写像の値表から有限決定できる一方、その条件だけでは有限 Yang--Baxter 条件が従わないことである。",
+        mainLabels: [
+          "claim_finite_pair_map_classical_nondegeneracy_decidable",
+          "claim_classical_nondegeneracy_does_not_imply_yang_baxter",
+        ],
+      },
+      {
         id: "finite_combinatorial_scattering_data",
         title: "有限組合せ散乱表と結晶化境界",
         input: "空でない有限集合、部分作用表、直積間の全単射、整数値表とその正規化、および比較元となる q=0 で正則な複素係数作用素を入力とする。",
@@ -334,6 +345,14 @@ export const documentOrganization = [
           "claim_probabilistic_membership_finite_decidable",
           "claim_deterministic_rules_are_zero_one_probabilistic_rules",
         ],
+      },
+      {
+        id: "exact_solution_candidate_certificates",
+        title: "厳密解の候補を限定する個別の有限証明書",
+        input: "有限二体写像に対する Yang--Baxter 条件と古典的非退化性、および有限舞台上の二元体線形な局所規則族を、異なる入力型として入力する。",
+        output: "三条件の個別の有限判定と、それらを可解性一般へ同一視しない境界を得る。",
+        main: "主張は、三条件がそれぞれ有限決定できる一方、同じ入力型の非退化性から Yang--Baxter 条件は従わず、線形性は入力型も異なるため、個別証明書を一つの可解性述語として扱えないことである。",
+        mainLabels: ["claim_exact_solution_candidate_certificates_individually_decidable"],
       },
       {
         id: "local_representation_and_composition",
