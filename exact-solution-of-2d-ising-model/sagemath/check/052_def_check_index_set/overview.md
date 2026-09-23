@@ -58,7 +58,7 @@
 - 008 章の `𝓜 = {−M,…,−1,1,…,M}` が `μ ↦ −μ` について閉じ、自己共役点が
   `μ = ±M, ±M/2` だったのと同じ構造である。半整数運動量では共役が `μ ↦ M+1−μ` になる。
 - **`μ ∈ ℤ` で量化したまま残してよいのは 3 つの主張だけ**である：
-  `half_integer_checkZ_periodicity`（`Ž_{μ+M} = Ž_μ`）、`def_half_integer_modes` (2)
+  `half_integer_checkZ_periodicity`（`Ž_{μ+M} = Ž_μ`）、`half_integer_checkY_periodicity`
   （`Y̌_{μ+M} = Y̌_μ`）、および `periodicity_of_check_fermi` (2)
   （`γ_1, γ_2` の `θ~_{μ+kM}` での値）。前二者は本ディレクトリの check_02 が使う橋渡しであり、
   後者は `γ_1, γ_2` が `θ ∈ ℝ` の関数であることによって意味をもつ。

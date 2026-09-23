@@ -115,7 +115,7 @@ theorem checkPhase_M (hM : M ≠ 0) (μ : ℤ) : checkPhase M (M : ℤ) μ = -1 
   rw [checkPhase, hsplit, expPhase_add, hfull, one_mul, expPhase_two_mul_neg_half hM]
 
 /-- 添字 `μ` について `M` 周期（`half_integer_checkZ_periodicity` と
-`def_half_integer_modes` (2) に共通する位相因子の部分）。 -/
+`half_integer_checkY_periodicity` に共通する位相因子の部分）。 -/
 theorem checkPhase_period (hM : M ≠ 0) (k μ : ℤ) :
     checkPhase M k (μ + (M : ℤ)) = checkPhase M k μ := by
   have hsplit : (k * (2 * (μ + (M : ℤ)) - 1)) = k * (2 * μ - 1) + (k * (2 * (M : ℤ))) := by ring

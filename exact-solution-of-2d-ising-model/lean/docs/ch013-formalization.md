@@ -41,8 +41,8 @@
 | `Ising2D.checkY` | `check(Y)_μ` | `def_half_integer_checkY` |
 | `Ising2D.checkPhase_antiperiodic` | `e^{-iMθ~_μ} = -1` | `half_integer_phase_antiperiodicity` |
 | `Ising2D.checkZ_period` / `checkZ_congr` | `check(Z)_{μ+M} = check(Z)_μ` とその合同形（`M ∣ μ-ν` 版） | `half_integer_checkZ_periodicity` |
-| `Ising2D.checkY_period` / `checkY_congr` | (2) `check(Y)_{μ+M} = check(Y)_μ` とその合同形 | `def_half_integer_modes` (2) |
-| `Ising2D.checkPhase_congr` | Z・Y 両方の添字周期性の合同形で使う位相因子の補助定理 | `half_integer_checkZ_periodicity` / `def_half_integer_modes` (2) |
+| `Ising2D.checkY_period` / `checkY_congr` | `check(Y)_{μ+M} = check(Y)_μ` とその合同形 | `half_integer_checkY_periodicity` |
+| `Ising2D.checkPhase_congr` | Z・Y 両方の添字周期性の合同形で使う位相因子の補助定理 | `half_integer_checkZ_periodicity` / `half_integer_checkY_periodicity` |
 | `Ising2D.thetaTilde_one_sub` | (3) `θ~_{1-μ} = -θ~_μ` | `def_half_integer_modes` (3) |
 | `Ising2D.checkPhase_one_sub` | (3) の位相因子版 | `def_half_integer_modes` (3) |
 | `Ising2D.CheckIndex` | `μ ∈ 𝓜̌ = {1,…,M}` | `def_check_index_set` |
@@ -102,7 +102,7 @@
 | `Ising2D.antiperiodic_exp_sum_of_necSuf` | `NecSuf.sum_zpow_antiperiodic` | `Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean` |
 | `Ising2D.checkPhase_M_of_necSuf` | `NecSuf.pow_half_eq_neg_one` | 同上 |
 | `Ising2D.checkZ_period_of_necSuf` | **既存の** `NecSuf.transform_periodic` | `half_integer_checkZ_periodicity` |
-| `Ising2D.checkY_period_of_necSuf` | **既存の** `NecSuf.transform_periodic` | `def_half_integer_modes` (2) |
+| `Ising2D.checkY_period_of_necSuf` | **既存の** `NecSuf.transform_periodic` | `half_integer_checkY_periodicity` |
 | `Ising2D.acomm_checkZ_checkZ_of_necSuf` / `acomm_checkY_checkY_of_necSuf` | `NecSuf.acomm_antiperiodic_fourier_clifford`（それ自体が既存の `NecSuf.acomm_fourier_clifford_weights` の特殊化） | `Part013/Claim005_AnticommutatorCheckZYFromNecSuf.lean` |
 | `Ising2D.inverse_dft_check_of_necSuf` / `recover_checkZ_of_necSuf` / `recover_checkY_of_necSuf` | `NecSuf.inverse_dft_antiperiodic` | `Part013/Claim006_RecoverZYFromNecSuf.lean` |
 | (A)〜(D)（`lie_H1Plus_checkZ` ほか 4 本） | **既存の** `NecSuf.CliffordTriple.lie_sum_*` | `Part013/Claim004_CommutatorHCheckZY.lean`（本体がそのまま導出） |

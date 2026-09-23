@@ -3,12 +3,14 @@
 
 対応する人手証明のラベル: `def_half_integer_checkZ`, `def_half_integer_checkY`,
 `half_integer_phase_antiperiodicity`, `half_integer_checkZ_periodicity`,
+`half_integer_checkY_periodicity`,
 `def_half_integer_modes`
 （`structured-latex/content/013_even_sector_modes.ts` の
 `evensector_003_definition_half_integer_checkZ`,
 `evensector_003_definition_half_integer_checkY`,
 `evensector_003_claim_half_integer_phase_antiperiodicity`,
 `evensector_003_claim_half_integer_checkZ_periodicity`,
+`evensector_003_claim_half_integer_checkY_periodicity`,
 `evensector_003_definition_half_integer_modes`）
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`。
@@ -48,7 +50,7 @@ noncomputable def checkZ (M : ℕ) (μ : ℤ) : TensorPow M :=
 noncomputable def checkY (M : ℕ) (μ : ℤ) : TensorPow M :=
   ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Y j
 
-/-! ## 独立させた反周期性・Z 行列の周期性と `def_half_integer_modes` に残した二つの性質 -/
+/-! ## 独立させた反周期性・Z/Y 行列の周期性と `def_half_integer_modes` に残した共役添字 -/
 
 /-- **`half_integer_phase_antiperiodicity`（反周期性）**: `e^{-iM θ~_μ} = -1`。
 
@@ -57,7 +59,7 @@ theorem checkPhase_antiperiodic (hM : M ≠ 0) (μ : ℤ) : checkPhase M (M : �
   checkPhase_M hM μ
 
 /-- **`half_integer_checkZ_periodicity`**: `check(Z)_{μ+M} = check(Z)_μ`。 -/
-theorem thetaTilde_period_for_checkZ (hM : M ≠ 0) (μ : ℤ) :
+theorem thetaTilde_period_for_checkZY (hM : M ≠ 0) (μ : ℤ) :
     thetaTilde M (μ + (M : ℤ)) = thetaTilde M μ + 2 * Real.pi := by
   have hMR : (M : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr hM
   calc
@@ -89,7 +91,7 @@ theorem checkPhase_eq_cos_sub_I_sin (hM : M ≠ 0) (j μ : ℤ) :
   ring
 
 /-- 本文の「角度を `2π` ずらし、Euler 公式と三角関数の周期性を使う」経路で示す位相周期性。 -/
-theorem checkPhase_period_for_checkZ (hM : M ≠ 0) (j μ : ℤ) :
+theorem checkPhase_period_for_checkZY (hM : M ≠ 0) (j μ : ℤ) :
     checkPhase M j (μ + (M : ℤ)) = checkPhase M j μ := by
   calc
     checkPhase M j (μ + (M : ℤ))
@@ -98,7 +100,7 @@ theorem checkPhase_period_for_checkZ (hM : M ≠ 0) (j μ : ℤ) :
           checkPhase_eq_cos_sub_I_sin hM j _
     _ = (Real.cos ((j : ℝ) * (thetaTilde M μ + 2 * Real.pi)) : ℂ)
             - Complex.I * (Real.sin ((j : ℝ) * (thetaTilde M μ + 2 * Real.pi)) : ℂ) := by
-          rw [thetaTilde_period_for_checkZ hM]
+          rw [thetaTilde_period_for_checkZY hM]
     _ = (Real.cos ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ)
             - Complex.I *
                 (Real.sin ((j : ℝ) * thetaTilde M μ + (j : ℝ) * (2 * Real.pi)) : ℂ) := by
@@ -114,12 +116,17 @@ theorem checkZ_period (hM : M ≠ 0) (μ : ℤ) : checkZ M (μ + (M : ℤ)) = ch
     checkZ M (μ + (M : ℤ)) =
         ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) (μ + (M : ℤ)) • Z j := rfl
     _ = ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Z j :=
-      Finset.sum_congr rfl fun j _ => by rw [checkPhase_period_for_checkZ hM]
+      Finset.sum_congr rfl fun j _ => by rw [checkPhase_period_for_checkZY hM]
     _ = checkZ M μ := rfl
 
-/-- **(2) 添字の周期性**: `check(Y)_{μ+M} = check(Y)_μ`。 -/
-theorem checkY_period (hM : M ≠ 0) (μ : ℤ) : checkY M (μ + (M : ℤ)) = checkY M μ :=
-  Finset.sum_congr rfl fun j _ => by rw [checkPhase_period hM]
+/-- **`half_integer_checkY_periodicity`**: `check(Y)_{μ+M} = check(Y)_μ`。 -/
+theorem checkY_period (hM : M ≠ 0) (μ : ℤ) : checkY M (μ + (M : ℤ)) = checkY M μ := by
+  calc
+    checkY M (μ + (M : ℤ)) =
+        ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) (μ + (M : ℤ)) • Y j := rfl
+    _ = ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Y j :=
+      Finset.sum_congr rfl fun j _ => by rw [checkPhase_period_for_checkZY hM]
+    _ = checkY M μ := rfl
 
 /-- 位相因子の合同不変性: `M ∣ a - b` なら `e^{-i k θ~_a} = e^{-i k θ~_b}`。
 
@@ -140,7 +147,8 @@ theorem checkZ_congr (hM : M ≠ 0) {μ ν : ℤ} (h : (M : ℤ) ∣ μ - ν) :
     checkZ M μ = checkZ M ν :=
   Finset.sum_congr rfl fun j _ => by rw [checkPhase_congr hM _ h]
 
-/-- 添字の周期性の合同形: `M ∣ μ - ν` なら `check(Y)_μ = check(Y)_ν`。 -/
+/-- **`half_integer_checkY_periodicity` の合同形**:
+`M ∣ μ - ν` なら `check(Y)_μ = check(Y)_ν`。 -/
 theorem checkY_congr (hM : M ≠ 0) {μ ν : ℤ} (h : (M : ℤ) ∣ μ - ν) :
     checkY M μ = checkY M ν :=
   Finset.sum_congr rfl fun j _ => by rw [checkPhase_congr hM _ h]

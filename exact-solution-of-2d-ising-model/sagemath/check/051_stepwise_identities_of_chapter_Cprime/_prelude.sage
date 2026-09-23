@@ -55,7 +55,7 @@ def checkY(O, mu):
     t = th_tilde(O.M, mu)
     out = matrix(CDF, O.d, O.d, 0)
     for j in range(1, O.M + 1):
-        out = out + O.Y[j] * eiph(-j * t)
+        out = out + eiph(-j * t) * O.Y[j]
     return matrix(CDF, out)
 
 

@@ -3,7 +3,7 @@
 
 対応する人手証明のラベル: `antiperiodic_exp_sum`,
 `half_integer_phase_antiperiodicity`, `half_integer_checkZ_periodicity`,
-`def_half_integer_modes` (2)
+`half_integer_checkY_periodicity`
 （`structured-latex/content/013_even_sector_modes.ts`）
 
 具体版（直接証明）は `Ising2D/Part013/Claim002_AntiperiodicExpSum.lean` と
@@ -20,7 +20,7 @@
 | `antiperiodic_exp_sum` の奇偶分割 | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `ξ := e^{-iπ/M}`（1 の原始 `2M` 乗根） |
 | `antiperiodic_exp_sum` の閉形式 | `NecSuf.sum_zpow_antiperiodic` | 同上 |
 | `half_integer_phase_antiperiodicity` | `NecSuf.pow_half_eq_neg_one` | 同上 |
-| `half_integer_checkZ_periodicity` / `def_half_integer_modes` (2) | `NecSuf.transform_periodic`（**整数運動量と共通**） | 重み `w_j = ξ^{-j}`、周波数 `a_j = j`、`ζ = ξ^2` |
+| `half_integer_checkZ_periodicity` / `half_integer_checkY_periodicity` | `NecSuf.transform_periodic`（**整数運動量と共通**） | 重み `w_j = ξ^{-j}`、周波数 `a_j = j`、`ζ = ξ^2` |
 
 とくに (2) は**整数運動量版 `hatZ_hatY_M_periodicity` とまったく同じ必要十分版**の
 別の特殊化である（重みの取り方が違うだけ）。
@@ -293,7 +293,7 @@ theorem checkZ_period_of_necSuf (hM : M ≠ 0) (μ : ℤ) :
   rw [hL (μ + (M : ℤ)), hL μ]
   exact h
 
-/-- **`def_half_integer_modes` (2)（`check(Y)` 側）**を同じ必要十分版から導いたもの。 -/
+/-- **`half_integer_checkY_periodicity`**を同じ必要十分版から導いたもの。 -/
 theorem checkY_period_of_necSuf (hM : M ≠ 0) (μ : ℤ) :
     checkY M (μ + (M : ℤ)) = checkY M μ := by
   have hζ : IsPrimitiveRoot (expPhase M 1) M := isPrimitiveRoot_expPhase_one hM

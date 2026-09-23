@@ -178,7 +178,7 @@ $V$ は $V_1^{(\pm)}$ を使って定義されており、$V_1^{(\pm)}$ は $\ma
 |---|---|---|---|
 | C′-1 | 008 章が `(−)` 専用である理由を等式で確定：`[H_2, hatZ^{(+)}_μ] = −2 hatY_μ + 4e^{−iθ_μ}Y_1 ≠ −2 hatY_μ` | `why_008_applies_only_to_minus_sector` | 完了 |
 | C′-2 | 半整数運動量の指数和 `Σ_μ e^{ikθ~_μ} = M(−1)^l`（`k=lM`）/ `0` | `antiperiodic_exp_sum` | 完了 |
-| C′-3 | `checkZ_μ, checkY_μ` の定義、反周期性 `e^{−iMθ~_μ} = −1`、添字周期性、共役添字 `1−μ` | `def_half_integer_checkZ`、`def_half_integer_checkY`、`half_integer_phase_antiperiodicity`、`half_integer_checkZ_periodicity`、`def_half_integer_modes` | 完了 |
+| C′-3 | `checkZ_μ, checkY_μ` の定義、反周期性 `e^{−iMθ~_μ} = −1`、添字周期性、共役添字 `1−μ` | `def_half_integer_checkZ`、`def_half_integer_checkY`、`half_integer_phase_antiperiodicity`、`half_integer_checkZ_periodicity`、`half_integer_checkY_periodicity`、`def_half_integer_modes` | 完了 |
 | C′-4 | (A)〜(D)：`H_1^{(+)}, H_2` との交換関係が 008 章と**同じ形**で閉じる | `commutator_of_H_and_check_Z_Y` | 完了 |
 | C′-5 | 反交換関係（対は `μ+ν ≡ 1 (mod M)`） | `anticommutator_of_check_Z_Y` | 完了 |
 | C′-6 | 復元公式 `Z_j = (1/M)Σ_μ checkZ_μ e^{ijθ~_μ}` と生成性 | `recover_Z_Y_from_check_Z_Y` | 完了 |
@@ -480,7 +480,7 @@ C′-15 で最大固有値の一意性を言うときに、整数運動量側で
 `μ ∈ ℤ` で量化したまま残したのは**主張 3 つだけ**である。
 
 - `half_integer_checkZ_periodicity`：`Ž_{μ+M} = Ž_μ`
-- `def_half_integer_modes` (2)：`Y̌_{μ+M} = Y̌_μ`
+- `half_integer_checkY_periodicity`：`Y̌_{μ+M} = Y̌_μ`
 - `periodicity_of_check_fermi` (2)：`θ~_{μ+kM} = θ~_μ + 2kπ` と、そこでの `γ_1, γ_2` の値
 
 前二者は Z・Y Fourier 行列の添字周期性であり、それぞれ

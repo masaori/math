@@ -11,6 +11,7 @@
   - 013 章: `why_008_applies_only_to_minus_sector` / `antiperiodic_exp_sum` /
     `def_half_integer_checkZ` / `def_half_integer_checkY` /
     `half_integer_phase_antiperiodicity` / `half_integer_checkZ_periodicity` /
+    `half_integer_checkY_periodicity` /
     `def_half_integer_modes` /
     `commutator_of_H_and_check_Z_Y` /
     `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y` / `H1_H2_via_check_Z_Y`
@@ -108,7 +109,7 @@ A(t)   = [[gamma_1(t), gamma_2(t)], [-gamma_2(-t), gamma_1(t)]]
   段数 58 → 62。
 - `μ` を走らせる範囲も、主張が `𝓜̌` 上のものになった箇所は `𝓜̌` に合わせた
   （`half_integer_phase_antiperiodicity`、`half_integer_checkZ_periodicity`、
-  `def_half_integer_modes` (2)(3) の検証だけは
+  `half_integer_checkY_periodicity`、`def_half_integer_modes` (3) の検証だけは
   `μ = 0, −1, M+1` を含めたまま残してある。
   これらはいずれも `μ ∈ ℤ` で量化してよい主張だからである）。
 - `half_integer_phase_antiperiodicity` は、Euler 公式、角度の代入、余弦値、正弦値、零積、
@@ -144,12 +145,12 @@ sage check_04_016_steps.sage
 
 | ファイル | 対象 | 区別された段の種類 | 最大残差 | 判定 |
 | --- | --- | --- | --- | --- |
-| `check_01_013_steps.sage` | 013 章の各段 | 173 | 2.3e-14 | PASS |
+| `check_01_013_steps.sage` | 013 章の各段 | 179 | 2.3e-14 | PASS |
 | `check_02_015_steps.sage` | 015 章の各段 | 66 | 1.7e-13 | PASS |
 | `check_03_014_steps.sage` | 014 章の各段 | 100 | 9.5e-11 | PASS |
 | `check_04_016_steps.sage` | 016 章の各段 | 62 | 5.0e-9 | PASS |
 
-**章 C′ の 4 章あわせて 401 種類の段がすべて成り立っている。**
+**章 C′ の 4 章あわせて 407 種類の段がすべて成り立っている。**
 
 副産物として、次の 3 つの狭義不等号も再確認した（本文が半整数運動量に固有の帰結として
 主張しているもの。整数運動量では臨界点で等号が起こる）。
