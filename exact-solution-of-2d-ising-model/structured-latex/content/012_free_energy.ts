@@ -88,14 +88,14 @@ export default defineBlocks([
         " と ",
         ref("limit_of_log_Z_in_N_row"),
         " により、鎖の長さ ",
-        math(String.raw`M`),
+        math(String.raw`M_{\mathrm{col}}`),
         " を固定したままの量 ",
-        math(String.raw`\frac{1}{M}\log c(M)`),
+        math(String.raw`\frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`),
         " までは有限の行列計算で到達する。",
         "しかし ",
-        math(String.raw`M \to \infty`),
+        math(String.raw`M_{\mathrm{col}} \to \infty`),
         " で現れるのは ",
-        math(String.raw`\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\frac12)}{M}\right)`),
+        math(String.raw`\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\frac12)}{M_{\mathrm{col}}}\right)`),
         " という**点の個数が増えていく有限和**であり、その極限を閉じた式で書くには",
         "「等間隔の点での値の平均が積分に収束する」という実数解析の事実が要る。",
         "ここだけは有限の代数計算では代用できない。",
@@ -357,33 +357,31 @@ u
     labels: ["limit_of_log_Z_in_N_row"],
     statement: [
       paragraph([
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " を固定する。",
         ref("partition_function_sandwich"),
         " の ",
-        math(String.raw`c(M)`),
+        math(String.raw`c(M_{\mathrm{col}})`),
         " について、極限",
       ]),
       displayMath(
         String.raw`\lim_{N_{\mathrm{row}} \to \infty}
-\frac{1}{M\,N_{\mathrm{row}}}\log Z(J,J')
-= \frac{1}{M}\log c(M)`,
+\frac{1}{M_{\mathrm{col}}\,N_{\mathrm{row}}}\log Z(K_1,K_2)
+= \frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`,
       ),
       paragraph([
         "が存在する。すなわち、行数 ",
         math(String.raw`N_{\mathrm{row}}`),
         " についての極限は ",
-        math(String.raw`c(M)`),
+        math(String.raw`c(M_{\mathrm{col}})`),
         " だけで決まる。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`Z := Z(J,J')`),
+        math(String.raw`Z := Z(K_1,K_2)`),
         "、",
-        math(String.raw`c := c(M)`),
-        "、",
-        math(String.raw`N := N_{\mathrm{row}}`),
+        math(String.raw`c := c(M_{\mathrm{col}})`),
         " と略記する。",
         ref("def_partition_function_2d_ising"),
         " より ",
@@ -402,42 +400,42 @@ u
       ]),
       displayMath(
         String.raw`\begin{aligned}
-&c^{N} \leq Z \leq 2^{M}c^{N}
+&c^{N_{\mathrm{row}}} \leq Z \leq 2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}}
 &&\left(\because\ \text{分配関数の挟み込み}\right)\\
-\Longrightarrow\ &\log(c^{N}) \leq \log Z \leq \log(2^{M}c^{N})
+\Longrightarrow\ &\log(c^{N_{\mathrm{row}}}) \leq \log Z \leq \log(2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}})
 &&\left(\because\ \log\text{ は }\mathbb{R}_{>0}\text{ 上で狭義単調増加}\right)\\
-\Longrightarrow\ &N\log c \leq \log Z \leq \log(2^{M}c^{N})
-&&\left(\because\ \log(c^{N})=N\log c\right)\\
-\Longrightarrow\ &N\log c \leq \log Z \leq \log(2^{M})+\log(c^{N})
+\Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq \log(2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}})
+&&\left(\because\ \log(c^{N_{\mathrm{row}}})=N_{\mathrm{row}}\log c\right)\\
+\Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq \log(2^{M_{\mathrm{col}}})+\log(c^{N_{\mathrm{row}}})
 &&\left(\because\ \log(ab)=\log a+\log b\right)\\
-\Longrightarrow\ &N\log c \leq \log Z \leq M\log 2+\log(c^{N})
-&&\left(\because\ \log(2^{M})=M\log 2\right)\\
-\Longrightarrow\ &N\log c \leq \log Z \leq M\log 2+N\log c
-&&\left(\because\ \log(c^{N})=N\log c\right)\\
-\Longrightarrow\ &\frac{1}{M}\log c \leq \frac{1}{MN}\log Z \leq \frac{1}{M}\log c + \frac{\log 2}{N}
-&&\left(\because\ \text{各辺を }MN>0\text{ で割る。正の数で割っても不等号は保たれる}\right)\\
-\Longrightarrow\ &\left|\frac{1}{MN}\log Z - \frac{1}{M}\log c\right| \leq \frac{\log 2}{N}
-&&\left(\because\ \text{上下の評価が中心 }\tfrac1M\log c\text{ からの差を }\tfrac{\log 2}{N}\text{ で挟む。}\mathbb{R}\text{ の四則}\right).
+\Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq M_{\mathrm{col}}\log 2+\log(c^{N_{\mathrm{row}}})
+&&\left(\because\ \log(2^{M_{\mathrm{col}}})=M_{\mathrm{col}}\log 2\right)\\
+\Longrightarrow\ &N_{\mathrm{row}}\log c \leq \log Z \leq M_{\mathrm{col}}\log 2+N_{\mathrm{row}}\log c
+&&\left(\because\ \log(c^{N_{\mathrm{row}}})=N_{\mathrm{row}}\log c\right)\\
+\Longrightarrow\ &\frac{1}{M_{\mathrm{col}}}\log c \leq \frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z \leq \frac{1}{M_{\mathrm{col}}}\log c + \frac{\log 2}{N_{\mathrm{row}}}
+&&\left(\because\ \text{各辺を }M_{\mathrm{col}}N_{\mathrm{row}}>0\text{ で割る。正の数で割っても不等号は保たれる}\right)\\
+\Longrightarrow\ &\left|\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z - \frac{1}{M_{\mathrm{col}}}\log c\right| \leq \frac{\log 2}{N_{\mathrm{row}}}
+&&\left(\because\ \text{上下の評価が中心 }\tfrac{1}{M_{\mathrm{col}}}\log c\text{ からの差を }\tfrac{\log 2}{N_{\mathrm{row}}}\text{ で挟む。}\mathbb{R}\text{ の四則}\right).
 \end{aligned}`,
       ),
       paragraph([
         "右辺は ",
-        math(String.raw`N \to \infty`),
+        math(String.raw`N_{\mathrm{row}} \to \infty`),
         " で ",
         math(String.raw`0`),
         " に収束する（",
         math(String.raw`\log 2`),
         " は ",
-        math(String.raw`N`),
+        math(String.raw`N_{\mathrm{row}}`),
         " に依らない定数）。よって主張の極限が存在して値は ",
-        math(String.raw`\frac1M\log c(M)`),
+        math(String.raw`\frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`),
         " である。",
       ]),
       paragraph([
         "**この段階では実数解析へ移行していない**：使ったのは有限個の実数の不等式、",
         math(String.raw`\log`),
         " の単調性と乗法から加法への変換、および実数列 ",
-        math(String.raw`(\log 2)/N \to 0`),
+        math(String.raw`(\log 2)/N_{\mathrm{row}} \to 0`),
         " だけである。",
       ]),
     ],
@@ -445,6 +443,7 @@ u
       status: "added",
       notes: [
         "2026-08-18: 式変形の書き方を統一した。挟み込みへの log の適用・MN による割り算・中心からの差の評価が散文で継がれた 3 つの表示に分かれていたのを、一続きの含意の鎖へまとめ、根拠を各行末の (∵ …) へ移した。極限の存在の論法と参照は変更していない。",
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
       ],
     },
   },
@@ -713,18 +712,18 @@ u
       paragraph([
         math(String.raw`\delta \in [0,1)`),
         " を固定し、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " について",
       ]),
       displayMath(
-        String.raw`\Theta_M^{(\delta)} := \left\{\, \frac{2\pi(\mu-\delta)}{M} \ \middle|\ \mu = 1,\dots,M \,\right\},
+        String.raw`\Theta_{M_{\mathrm{col}}}^{(\delta)} := \left\{\, \frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}} \ \middle|\ \mu = 1,\dots,M_{\mathrm{col}} \,\right\},
 \qquad
-\Lambda^{(\delta)}_M := (2\sinh 2K_2)^{M/2}
-\exp\left(\frac{1}{2}\sum_{\theta \in \Theta_M^{(\delta)}} \gamma(\theta)\right)`,
+\Lambda^{(\delta)}_{M_{\mathrm{col}}} := (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\exp\left(\frac{1}{2}\sum_{\theta \in \Theta_{M_{\mathrm{col}}}^{(\delta)}} \gamma(\theta)\right)`,
       ),
       paragraph(["とおく。このとき"]),
       displayMath(
-        String.raw`\lim_{M\to\infty}\frac{1}{M}\log \Lambda^{(\delta)}_M
+        String.raw`\lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\log \Lambda^{(\delta)}_{M_{\mathrm{col}}}
 = \frac{1}{2}\log\left(2\sinh 2K_2\right)
 + \frac{1}{4\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta`,
       ),
@@ -746,7 +745,7 @@ u
     ],
     proof: [
       paragraph([
-        math(String.raw`\Lambda := \Lambda^{(\delta)}_M`),
+        math(String.raw`\Lambda := \Lambda^{(\delta)}_{M_{\mathrm{col}}}`),
         " の ",
         math(String.raw`\log`),
         " を取る。",
@@ -763,87 +762,87 @@ u
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\log\Lambda^{(\delta)}_M
-&=\log\left(\left(2\sinh 2K_2\right)^{M/2}
-\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)\right)\right)
-&&\left(\because\ \Lambda^{(\delta)}_M\text{ の定義}\right)\\
-&=\log\left(\left(2\sinh 2K_2\right)^{M/2}\right)
-+\log\left(\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)\right)\right)
+\log\Lambda^{(\delta)}_{M_{\mathrm{col}}}
+&=\log\left(\left(2\sinh 2K_2\right)^{M_{\mathrm{col}}/2}
+\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)\right)\right)
+&&\left(\because\ \Lambda^{(\delta)}_{M_{\mathrm{col}}}\text{ の定義}\right)\\
+&=\log\left(\left(2\sinh 2K_2\right)^{M_{\mathrm{col}}/2}\right)
++\log\left(\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)\right)\right)
 &&\left(\because\ \text{積の対数 }\log(ab)=\log a+\log b\right)\\
-&=\frac{M}{2}\log\left(2\sinh 2K_2\right)
-+\log\left(\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)\right)\right)
+&=\frac{M_{\mathrm{col}}}{2}\log\left(2\sinh 2K_2\right)
++\log\left(\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)\right)\right)
 &&\left(\because\ \text{冪の対数 }\log(x^{r})=r\log x\right)\\
-&=\frac{M}{2}\log\left(2\sinh 2K_2\right)
-+ \frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
+&=\frac{M_{\mathrm{col}}}{2}\log\left(2\sinh 2K_2\right)
++ \frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)
 &&\left(\because\ \log(\exp(y))=y\right)
 \end{aligned}`,
       ),
       paragraph(["を得る。"]),
       paragraph([
         "ここで集合 ",
-        math(String.raw`\Theta_M^{(\delta)}`),
+        math(String.raw`\Theta_{M_{\mathrm{col}}}^{(\delta)}`),
         " 上の和を添字 ",
         math(String.raw`\mu`),
         " についての和に書き換える。写像 ",
-        math(String.raw`\mu \mapsto \dfrac{2\pi(\mu-\delta)}{M}`),
+        math(String.raw`\mu \mapsto \dfrac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}`),
         " は ",
-        math(String.raw`\{1,\dots,M\}`),
+        math(String.raw`\{1,\dots,M_{\mathrm{col}}\}`),
         " 上単射である。実際、",
-        math(String.raw`\mu,\nu\in\{1,\dots,M\}`),
+        math(String.raw`\mu,\nu\in\{1,\dots,M_{\mathrm{col}}\}`),
         " と ",
         math(String.raw`\mu \neq \nu`),
         " を仮定すると、一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{2\pi(\mu-\delta)}{M}-\frac{2\pi(\nu-\delta)}{M}
-&=\frac{2\pi(\mu-\nu)}{M}
+\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}-\frac{2\pi(\nu-\delta)}{M_{\mathrm{col}}}
+&=\frac{2\pi(\mu-\nu)}{M_{\mathrm{col}}}
 &&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
 &\ne0
-&&\left(\because\ \frac{2\pi}{M}>0\text{ かつ }\mu-\nu\ne0\right)
+&&\left(\because\ \frac{2\pi}{M_{\mathrm{col}}}>0\text{ かつ }\mu-\nu\ne0\right)
 \end{aligned}`,
       ),
       paragraph([
         "を得る。よって ",
-        math(String.raw`\Theta_M^{(\delta)}`),
+        math(String.raw`\Theta_{M_{\mathrm{col}}}^{(\delta)}`),
         " はちょうど ",
-        math(String.raw`M`),
+        math(String.raw`M_{\mathrm{col}}`),
         " 個の元をもち、一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
-&=\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
-&&\left(\because\ \mu\mapsto\frac{2\pi(\mu-\delta)}{M}\text{ は }\{1,\dots,M\}\text{ から }\Theta_M^{(\delta)}\text{ への全単射}\right)
+\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)
+&=\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
+&&\left(\because\ \mu\mapsto\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\text{ は }\{1,\dots,M_{\mathrm{col}}\}\text{ から }\Theta_{M_{\mathrm{col}}}^{(\delta)}\text{ への全単射}\right)
 \end{aligned}`,
       ),
       paragraph([
         "を得る。また、",
-        math(String.raw`M > 0`),
+        math(String.raw`M_{\mathrm{col}} > 0`),
         " なので、一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{1}{M}\log\Lambda^{(\delta)}_M
-&=\frac{1}{M}\left(
-  \frac{M}{2}\log\left(2\sinh 2K_2\right)
-  +\frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
+\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(\delta)}_{M_{\mathrm{col}}}
+&=\frac{1}{M_{\mathrm{col}}}\left(
+  \frac{M_{\mathrm{col}}}{2}\log\left(2\sinh 2K_2\right)
+  +\frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)
 \right)
-&&\left(\because\ \text{上で得た }\log\Lambda^{(\delta)}_M\text{ の表示を代入}\right)\\
+&&\left(\because\ \text{上で得た }\log\Lambda^{(\delta)}_{M_{\mathrm{col}}}\text{ の表示を代入}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\frac{1}{2M}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
++\frac{1}{2M_{\mathrm{col}}}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)
 &&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\frac{1}{2M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
++\frac{1}{2M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
 &&\left(\because\ \text{上で得た添字の取り替え}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\frac{1}{2}\cdot\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
++\frac{1}{2}\cdot\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
 &&\left(\because\ \mathbb{R}\text{ の四則}\right)
 \end{aligned}`,
       ),
       paragraph([
         "第 1 項は ",
-        math(String.raw`M`),
+        math(String.raw`M_{\mathrm{col}}`),
         " に依らない定数である。第 2 項について、",
         ref("gamma_is_continuous"),
         " より ",
@@ -859,25 +858,25 @@ u
         " として適用でき",
       ]),
       displayMath(
-        String.raw`\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
-\ \xrightarrow[M\to\infty]{}\ \frac{1}{2\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta`,
+        String.raw`\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
+\ \xrightarrow[M_{\mathrm{col}}\to\infty]{}\ \frac{1}{2\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta`,
       ),
       paragraph([
         "を得る。よって、一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\lim_{M\to\infty}\frac{1}{M}\log\Lambda^{(\delta)}_M
-&=\lim_{M\to\infty}\left(
+\lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(\delta)}_{M_{\mathrm{col}}}
+&=\lim_{M_{\mathrm{col}}\to\infty}\left(
   \frac{1}{2}\log\left(2\sinh 2K_2\right)
-  +\frac{1}{2}\cdot\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
+  +\frac{1}{2}\cdot\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
 \right)
-&&\left(\because\ \text{上で得た }\frac{1}{M}\log\Lambda^{(\delta)}_M\text{ の表示を代入}\right)\\
+&&\left(\because\ \text{上で得た }\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(\delta)}_{M_{\mathrm{col}}}\text{ の表示を代入}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\lim_{M\to\infty}\left(\frac{1}{2}\cdot\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)\right)
++\lim_{M_{\mathrm{col}}\to\infty}\left(\frac{1}{2}\cdot\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)\right)
 &&\left(\because\ \text{収束する実数列に定数を加えた列は収束し、極限に定数が加わる}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\frac{1}{2}\cdot\lim_{M\to\infty}\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M}\right)
++\frac{1}{2}\cdot\lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
 &&\left(\because\ \text{収束する実数列の定数倍は収束し、極限が定数倍になる}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
 +\frac{1}{2}\cdot\frac{1}{2\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta
@@ -919,29 +918,29 @@ u
       ]),
       list([
         [
-          ref("partition_function_in_pauli_form"),
+          ref("partition_function_via_transfer_matrix"),
           "：",
           math(String.raw`Z = \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)`),
         ],
         [
           ref("partition_function_sandwich"),
           "：",
-          math(String.raw`c(M)^{N_{\mathrm{row}}} \leq Z \leq 2^{M}c(M)^{N_{\mathrm{row}}}`),
+          math(String.raw`c(M_{\mathrm{col}})^{N_{\mathrm{row}}} \leq Z \leq 2^{M_{\mathrm{col}}}c(M_{\mathrm{col}})^{N_{\mathrm{row}}}`),
         ],
         [
           ref("limit_of_log_Z_in_N_row"),
           "：",
-          math(String.raw`\dfrac{1}{MN_{\mathrm{row}}}\log Z \to \dfrac{1}{M}\log c(M)`),
+          math(String.raw`\dfrac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z \to \dfrac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`),
         ],
         [
           ref("sector_decomposition_of_rayleigh_sup"),
           "：",
-          math(String.raw`c(M) = \max\left(c_+(M),c_-(M)\right)`),
+          math(String.raw`c(M_{\mathrm{col}}) = \max\left(c_+(M_{\mathrm{col}}),c_-(M_{\mathrm{col}})\right)`),
         ],
         [
           ref("onsager_free_energy_expression"),
           "：",
-          math(String.raw`\dfrac{1}{M}\log\Lambda^{(\delta)}_M \to \dfrac12\log(2\sinh 2K_2) + \dfrac1{4\pi}\displaystyle\int_0^{2\pi}\gamma`),
+          math(String.raw`\dfrac{1}{M_{\mathrm{col}}}\log\Lambda^{(\delta)}_{M_{\mathrm{col}}} \to \dfrac12\log(2\sinh 2K_2) + \dfrac1{4\pi}\displaystyle\int_0^{2\pi}\gamma`),
           "（",
           math(String.raw`\delta`),
           " に依らない）",
@@ -954,17 +953,17 @@ u
         " で解消された。最終的な結論は ",
         ref("onsager_exact_solution"),
         "）：",
-        math(String.raw`c_+(M)`),
+        math(String.raw`c_+(M_{\mathrm{col}})`),
         "（",
         math(String.raw`\varepsilon`),
         " の固有値 ",
         math(String.raw`+1`),
         " のセクターでの上限）が ",
-        math(String.raw`\Lambda^{(1/2)}_M`),
+        math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " に等しいこと、すなわち ",
         math(String.raw`V^{(+)}`),
         " の固有値が**半整数運動量** ",
-        math(String.raw`2\pi(\mu-\tfrac12)/M`),
+        math(String.raw`2\pi(\mu-\tfrac12)/M_{\mathrm{col}}`),
         " で与えられることである。",
       ]),
       paragraph([
@@ -975,10 +974,10 @@ u
         "（",
         ref("def_H1_pm"),
         " で上の符号を取ったもの）は、境界項 ",
-        math(String.raw`-Y_MZ_1`),
+        math(String.raw`-Y_{M_{\mathrm{col}}}Z_1`),
         " を持つ：",
       ]),
-      displayMath(String.raw`H_1^{(+)} = \sum_{m=1}^{M-1}Y_mZ_{m+1} - Y_MZ_1`),
+      displayMath(String.raw`H_1^{(+)} = \sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1`),
       paragraph([
         "この符号のため、",
         math(String.raw`V^{(+)}`),
@@ -989,9 +988,9 @@ u
         "）で Fourier 変換した",
       ]),
       displayMath(
-        String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,\exp(-i j \tilde\theta_\mu),\qquad
-\check{Y}_\mu := \sum_{j=1}^{M} Y_j\,\exp(-i j \tilde\theta_\mu),\qquad
-\tilde\theta_\mu := \frac{2\pi\left(\mu-\tfrac12\right)}{M}`,
+        String.raw`\check{Z}_\mu := \sum_{j=1}^{M_{\mathrm{col}}} Z_j\,\exp(-i j \tilde\theta_\mu),\qquad
+\check{Y}_\mu := \sum_{j=1}^{M_{\mathrm{col}}} Y_j\,\exp(-i j \tilde\theta_\mu),\qquad
+\tilde\theta_\mu := \frac{2\pi\left(\mu-\tfrac12\right)}{M_{\mathrm{col}}}`,
       ),
       paragraph([
         "になる（",
@@ -1005,7 +1004,7 @@ u
         " との交換関係 (A)〜(D) を満たし（",
         ref("commutator_of_H_and_check_Z_Y"),
         "）、反交換関係の対は ",
-        math(String.raw`\nu = M+1-\mu`),
+        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
         " になる（",
         ref("anticommutator_of_check_Z_Y"),
         "）。",
@@ -1013,7 +1012,7 @@ u
         "到達点は ",
         ref("c_plus_equals_Lambda_half_integer"),
         " の ",
-        math(String.raw`c_+(M) = \Lambda^{(1/2)}_M`),
+        math(String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " と ",
         ref("onsager_exact_solution"),
         " である。",
@@ -1024,6 +1023,7 @@ u
       notes: [
         "V^{(+)} の固有値が半整数運動量で与えられることは M=2,3,4 で数値的に確認済み（相対誤差 1e-14 以下、整数運動量では 0.5〜2.4 の相対差で明確に不一致）。また最大固有値が (+) セクターで達成されることも M=2,3,4 で確認した（W の成分がすべて正なので Perron–Frobenius から期待される通り）。これらは sagemath/check/044_claim_max_eigenvalue/ と 045_claim_free_energy/ に記録した。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
       ],
     },
   },

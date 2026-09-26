@@ -20,9 +20,9 @@ export default defineBlocks([
     labels: [],
     statement: [
       paragraph([
-        ref("partition_function_in_pauli_form"),
+        ref("partition_function_via_transfer_matrix"),
         " により ",
-        math(String.raw`Z(J,J') = \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)`),
+        math(String.raw`Z(K_1,K_2) = \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)`),
         " である。熱力学極限を取るには、この ",
         math(String.raw`N_{\mathrm{row}}`),
         " 乗のトレースを**最大固有値ひとつ**で挟み撃ちしたい。この章でそれを行う。",
@@ -31,15 +31,15 @@ export default defineBlocks([
         "得られる評価は、",
         math(String.raw`W := V_1^{1/2}V_2V_1^{1/2}`),
         "、",
-        math(String.raw`c(M) := \sup\{\,x^{\top}Wx \mid x \in \mathbb{R}^{2^M},\ \|x\| = 1\,\}`),
+        math(String.raw`c(M_{\mathrm{col}}) := \sup\{\,x^{\top}Wx \mid x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1\,\}`),
         " として",
       ]),
       displayMath(
-        String.raw`c(M)^{N_{\mathrm{row}}} \ \leq\ Z(J,J')\ \leq\ 2^{M}\,c(M)^{N_{\mathrm{row}}}`,
+        String.raw`c(M_{\mathrm{col}})^{N_{\mathrm{row}}} \ \leq\ Z(K_1,K_2)\ \leq\ 2^{M_{\mathrm{col}}}\,c(M_{\mathrm{col}})^{N_{\mathrm{row}}}`,
       ),
       paragraph([
         "である。**この章では固有値の存在（対角化可能性・スペクトル定理）を一切使わない。**",
-        math(String.raw`c(M)`),
+        math(String.raw`c(M_{\mathrm{col}})`),
         " は上限として定義され、必要な不等式はすべて半正定値双線型形式に対する Cauchy–Schwarz の不等式から出る。",
         "有限次元の実対称行列が対角化できること自体は正しいが、その証明は本文にまだ無く、",
         "また挟み撃ちには不要だからである。",
@@ -50,11 +50,16 @@ export default defineBlocks([
         " が ",
         math(String.raw`\varepsilon`),
         " の偶奇セクターを保つこと、および ",
-        math(String.raw`c(M) = \max(c_+(M), c_-(M))`),
+        math(String.raw`c(M_{\mathrm{col}}) = \max(c_+(M_{\mathrm{col}}), c_-(M_{\mathrm{col}}))`),
         "（各セクターでの上限）を示す。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+      ],
+    },
   },
 
   {
@@ -65,18 +70,18 @@ export default defineBlocks([
     labels: ["def_transfer_matrix_square_root"],
     statement: [
       paragraph([
-        ref("def_transfer_matrix_symbols"),
+        ref("first_transfer_matrix_pauli_form"),
         " の ",
         math(String.raw`V_1 = \exp(K_1 D)`),
         "（",
-        math(String.raw`D := \sum_{m=1}^{M}\sigma_m^z\sigma_{m+1}^z`),
+        math(String.raw`D := \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z`),
         "、",
-        math(String.raw`\sigma_{M+1}^z := \sigma_1^z`),
+        math(String.raw`\sigma_{M_{\mathrm{col}}+1}^z := \sigma_1^z`),
         "）について",
       ]),
       displayMath(
         String.raw`V_1^{1/2} := \exp\!\left(\tfrac{1}{2}K_1 D\right)
-\in \mathrm{Mat}(2^M,\mathbb{C})`,
+\in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
         "と定める。",
@@ -90,7 +95,12 @@ export default defineBlocks([
         " は自分自身と可換）。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。V_1 = exp(K_1 D) の参照先を <first_transfer_matrix_pauli_form> にした。",
+      ],
+    },
   },
 
   {
@@ -112,7 +122,7 @@ export default defineBlocks([
       ]),
       displayMath(
         String.raw`W := V_1^{1/2}\,V_2\,V_1^{1/2}
-\in \mathrm{Mat}(2^M,\mathbb{C})`,
+\in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph(["と定める。"]),
     ],
@@ -127,7 +137,7 @@ export default defineBlocks([
     labels: ["Z_equals_trace_of_W"],
     statement: [
       paragraph([
-        ref("partition_function_in_pauli_form"),
+        ref("partition_function_via_transfer_matrix"),
         " と同じ設定のもと、",
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         " について",
@@ -135,7 +145,7 @@ export default defineBlocks([
       displayMath(String.raw`\mathrm{tr}\!\left((V_1V_2)^{n}\right) = \mathrm{tr}\!\left(W^{n}\right)`),
       paragraph([
         "が成り立つ。とくに ",
-        math(String.raw`Z(J,J') = \mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)`),
+        math(String.raw`Z(K_1,K_2) = \mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)`),
         "。",
       ]),
     ],
@@ -174,7 +184,12 @@ export default defineBlocks([
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+      ],
+    },
   },
 
   {
@@ -219,7 +234,7 @@ export default defineBlocks([
 S_2
 &=iK_2^*H_2
   &&\bigl(\because\ S_2\ \text{の定義}\bigr)\\
-&=K_2^*\sum_{m=1}^{M}\sigma_m^x
+&=K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
   &&\bigl(\because\ \text{実対称性の主張の Step 1}\bigr)
 \end{aligned}`),
       paragraph([
@@ -250,7 +265,7 @@ S_2
         "Step 3（合同変換）。",
         ref("V2_exponential_representation"),
         " より ",
-        math(String.raw`V_2 = (2s_2)^{M/2}A`),
+        math(String.raw`V_2 = (2s_2)^{M_{\mathrm{col}}/2}A`),
         "（",
         ref("iH_is_real_symmetric"),
         " Step 1）であり、",
@@ -263,11 +278,11 @@ S_2
 W
 &=B\,V_2\,B
   &&\bigl(\because\ W=B V_2 B\ \text{の定義 }\blkref{def_symmetrized_transfer_matrix}\bigr)\\
-&=B\bigl((2s_2)^{M/2}A\bigr)B
-  &&\bigl(\because\ V_2=(2s_2)^{M/2}A\bigr)\\
-&=(2s_2)^{M/2}B A B
+&=B\bigl((2s_2)^{M_{\mathrm{col}}/2}A\bigr)B
+  &&\bigl(\because\ V_2=(2s_2)^{M_{\mathrm{col}}/2}A\bigr)\\
+&=(2s_2)^{M_{\mathrm{col}}/2}B A B
   &&\bigl(\because\ \text{スカラー倍と行列積の結合則}\bigr)\\
-&=(2s_2)^{M/2}B^{*}A B
+&=(2s_2)^{M_{\mathrm{col}}/2}B^{*}A B
   &&\bigl(\because\ B^*=B\bigr)
 \end{aligned}`),
       paragraph([
@@ -277,7 +292,7 @@ W
         " は正定値、",
         math(String.raw`K_2 > 0`),
         " より ",
-        math(String.raw`(2s_2)^{M/2} > 0`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} > 0`),
         " なので同 (3) より ",
         math(String.raw`W`),
         " は正定値である。実対称性は次の転置の計算から従う。",
@@ -331,7 +346,11 @@ x^\top W x
     statement: [
       paragraph([
         ref("def_config_basis_iso"),
-        " の同一視のもとで、",
+        " の ",
+        math(String.raw`\iota`),
+        " による番号付け（",
+        ref("config_numbering_equals_kronecker_numbering"),
+        "）のもとで、",
         ref("def_symmetrized_transfer_matrix"),
         " で定めた ",
         math(String.raw`W`),
@@ -346,7 +365,7 @@ x^\top W x
         "Step 1（",
         math(String.raw`V_1^{1/2}`),
         " は正の対角行列）。以下、周期端では ",
-        math(String.raw`\mu(M+1):=\mu(1)`),
+        math(String.raw`\mu(M_{\mathrm{col}}+1):=\mu(1)`),
         " と書く。",
         ref("def_transfer_matrix_square_root"),
         " の定義と ",
@@ -364,7 +383,7 @@ x^\top W x
       displayMath(
         String.raw`\left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu')}
 = \begin{cases}
-\exp\!\left(\tfrac{1}{2}K_1\sum_{m=1}^{M}\mu(m)\mu(m+1)\right) > 0 & (\mu = \mu') \\
+\exp\!\left(\tfrac{1}{2}K_1\sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\mu(m+1)\right) > 0 & (\mu = \mu') \\
 0 & (\mu \neq \mu')
 \end{cases}`,
       ),
@@ -372,9 +391,13 @@ x^\top W x
         "Step 2（",
         math(String.raw`V_2`),
         " の成分は正）。",
-        ref("V2_component_equals_pauli"),
-        " より ",
-        math(String.raw`(V_2)_{\iota(\mu),\iota(\mu')} = \exp\!\left(\sum_{m}K_2\,\mu(m)\mu'(m)\right)`),
+        ref("def_transfer_matrix"),
+        " と ",
+        ref("config_numbering_equals_kronecker_numbering"),
+        "（行・列番号 ",
+        math(String.raw`\nu(\iota(\mu)) = \mathrm{ord}(\mu)`),
+        "）より ",
+        math(String.raw`(V_2)_{\iota(\mu),\iota(\mu')} = \exp\!\left(K_2\sum_{m}\mu(m)\mu'(m)\right)`),
         " である。指数は実数なので、",
         ref("cosh_sinh_basic_properties"),
         " に記録した実指数関数の正値性より、この値は正である。",
@@ -385,10 +408,10 @@ x^\top W x
 W_{\iota(\mu),\iota(\mu')}
 &= \left(V_1^{1/2}\,V_2\,V_1^{1/2}\right)_{\iota(\mu),\iota(\mu')}
    \quad (\because W = V_1^{1/2}V_2V_1^{1/2}) \\
-&= \sum_{j=1}^{2^M}\sum_{k=1}^{2^M}
+&= \sum_{j=1}^{2^{M_{\mathrm{col}}}}\sum_{k=1}^{2^{M_{\mathrm{col}}}}
    \left(V_1^{1/2}\right)_{\iota(\mu),j}\left(V_2\right)_{j,k}\left(V_1^{1/2}\right)_{k,\iota(\mu')}
    \quad (\because \text{行列の積の定義}) \\
-&= \sum_{k=1}^{2^M}
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}
    \left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu)}\left(V_2\right)_{\iota(\mu),k}\left(V_1^{1/2}\right)_{k,\iota(\mu')}
    \quad (\because \text{Step 1 の対角性で } j\neq\iota(\mu)\ \text{の項は } 0) \\
 &= \left(V_1^{1/2}\right)_{\iota(\mu),\iota(\mu)}
@@ -405,6 +428,7 @@ W_{\iota(\mu),\iota(\mu')}
       status: "added",
       notes: [
         "この正値性は、最大固有値が偶セクター（ε の固有値 +1 の側）で達成されることの理由でもある（Perron–Frobenius）。本文ではその事実を使っていないが、docs/tasks/free-energy-roadmap に次章の指針として記録した。数値でも M=2,3,4 で最大が (+) セクターにあることを確認している。",
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
       ],
     },
   },
@@ -528,7 +552,7 @@ q(t_0)
     id: "maxeig_006_definition_rayleigh_sup",
     kind: "definition",
     origin: { path: SRC, ordinal: 8 },
-    title: { tex: String.raw`c(M) := \sup_{\|x\|=1} x^\top W x` },
+    title: { tex: String.raw`c(M_{\mathrm{col}}) := \sup_{\|x\|=1} x^\top W x` },
     labels: ["def_rayleigh_sup"],
     statement: [
       paragraph([
@@ -538,7 +562,7 @@ q(t_0)
         " より実行列とみなせるので、",
       ]),
       displayMath(
-        String.raw`\mathcal{R} := \left\{\, x^\top W x \ \middle|\ x \in \mathbb{R}^{2^M},\ \|x\| = 1 \,\right\} \subseteq \mathbb{R}_{>0}`,
+        String.raw`\mathcal{R} := \left\{\, x^\top W x \ \middle|\ x \in \mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\} \subseteq \mathbb{R}_{>0}`,
       ),
       paragraph([
         "とおく。",
@@ -555,7 +579,7 @@ q(t_0)
       ]),
       displayMath(String.raw`\begin{aligned}
 |x_i|^2
-&\leq \sum_{k=1}^{2^M}|x_k|^2
+&\leq \sum_{k=1}^{2^{M_{\mathrm{col}}}}|x_k|^2
   &&\bigl(\because\ \text{非負の項の有限和は各項以上}\bigr)\\
 &= \|x\|^2
   &&\bigl(\because\ \text{ノルムの定義 }\blkref{def_matrix_norm}\bigr)\\
@@ -569,11 +593,11 @@ q(t_0)
       ]),
       displayMath(String.raw`\begin{aligned}
 \left|x^\top W x\right|
-&= \left|\sum_{i=1}^{2^M}\sum_{j=1}^{2^M} x_i\,W_{ij}\,x_j\right|
+&= \left|\sum_{i=1}^{2^{M_{\mathrm{col}}}}\sum_{j=1}^{2^{M_{\mathrm{col}}}} x_i\,W_{ij}\,x_j\right|
   &&\bigl(\because\ \text{行列積の成分表示}\bigr)\\
-&\leq \sum_{i=1}^{2^M}\sum_{j=1}^{2^M} |x_i|\,|W_{ij}|\,|x_j|
+&\leq \sum_{i=1}^{2^{M_{\mathrm{col}}}}\sum_{j=1}^{2^{M_{\mathrm{col}}}} |x_i|\,|W_{ij}|\,|x_j|
   &&\bigl(\because\ \text{有限和の三角不等式と積の絶対値}\bigr)\\
-&\leq \sum_{i=1}^{2^M}\sum_{j=1}^{2^M} |W_{ij}|
+&\leq \sum_{i=1}^{2^{M_{\mathrm{col}}}}\sum_{j=1}^{2^{M_{\mathrm{col}}}} |W_{ij}|
   &&\bigl(\because\ |x_i| \leq 1,\ |x_j| \leq 1\bigr)
 \end{aligned}`),
       paragraph([
@@ -583,7 +607,7 @@ q(t_0)
         math(String.raw`\mathcal{R}`),
         " は上に有界である。ここで実数の上限",
       ]),
-      displayMath(String.raw`c(M) := \sup \mathcal{R} \in \mathbb{R}_{>0}`),
+      displayMath(String.raw`c(M_{\mathrm{col}}) := \sup \mathcal{R} \in \mathbb{R}_{>0}`),
       paragraph([
         "が定まる。**ここが実数へ脱出する箇所である。** ",
         math(String.raw`\mathcal{R}`),
@@ -592,7 +616,7 @@ q(t_0)
         " の性質による。有理数の範囲では同じ主張は成り立たない。定義から",
       ]),
       displayMath(
-        String.raw`x^\top W x \leq c(M)\,\|x\|^2 \qquad (\forall x \in \mathbb{R}^{2^M})`,
+        String.raw`x^\top W x \leq c(M_{\mathrm{col}})\,\|x\|^2 \qquad (\forall x \in \mathbb{R}^{2^{M_{\mathrm{col}}}})`,
       ),
       paragraph([
         "が成り立つ（",
@@ -608,7 +632,7 @@ q(t_0)
       paragraph([
         "**上限が達成されること（最大固有値の存在）はここでは主張しない。**",
         "以下の評価は上限としての ",
-        math(String.raw`c(M)`),
+        math(String.raw`c(M_{\mathrm{col}})`),
         " だけで足りる。",
       ]),
     ],
@@ -619,25 +643,25 @@ q(t_0)
     id: "maxeig_007_claim_operator_bound",
     kind: "claim",
     origin: { path: SRC, ordinal: 9 },
-    title: { tex: String.raw`\|Wx\| \leq c(M)\,\|x\|` },
+    title: { tex: String.raw`\|Wx\| \leq c(M_{\mathrm{col}})\,\|x\|` },
     labels: ["rayleigh_bounds_operator_norm"],
     statement: [
       paragraph([
-        math(String.raw`\forall x \in \mathbb{R}^{2^M}`),
+        math(String.raw`\forall x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " について ",
-        math(String.raw`\|Wx\| \leq c(M)\,\|x\|`),
+        math(String.raw`\|Wx\| \leq c(M_{\mathrm{col}})\,\|x\|`),
         "。したがって ",
         math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
         " について ",
-        math(String.raw`\|W^k x\| \leq c(M)^k\|x\|`),
+        math(String.raw`\|W^k x\| \leq c(M_{\mathrm{col}})^k\|x\|`),
         "。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`c := c(M)`),
+        math(String.raw`c := c(M_{\mathrm{col}})`),
         " と略記する。",
-        math(String.raw`x \in \mathbb{R}^{2^M}`),
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " を取り、",
         math(String.raw`y := Wx`),
         " とおく。まず",
@@ -718,17 +742,17 @@ q(t_0)
     id: "maxeig_008a_claim_trace_power_upper_bound",
     kind: "claim",
     origin: { path: SRC, ordinal: 10 },
-    title: { tex: String.raw`\mathrm{tr}(W^{n}) \leq 2^{M} c(M)^{n}` },
+    title: { tex: String.raw`\mathrm{tr}(W^{n}) \leq 2^{M_{\mathrm{col}}} c(M_{\mathrm{col}})^{n}` },
     labels: ["trace_power_upper_bound"],
     statement: [
       paragraph([math(String.raw`n \in \mathbb{Z}_{\geq 1}`), " について"]),
-      displayMath(String.raw`\mathrm{tr}\!\left(W^{n}\right)\ \leq\ 2^{M}\,c(M)^{n}`),
+      displayMath(String.raw`\mathrm{tr}\!\left(W^{n}\right)\ \leq\ 2^{M_{\mathrm{col}}}\,c(M_{\mathrm{col}})^{n}`),
     ],
     proof: [
       paragraph([
-        math(String.raw`c := c(M)`),
+        math(String.raw`c := c(M_{\mathrm{col}})`),
         "、",
-        math(String.raw`d := 2^M`),
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
         " と略記し、",
         math(String.raw`e_1,\dots,e_d`),
         " を標準基底とする。",
@@ -803,8 +827,8 @@ e_k^\top W^{2a+1}e_k
 &&\bigl(\because\ \text{各 }k\text{ の評価 }e_k^\top W^ne_k \leq c^n\text{ と、項ごとの不等式の有限和は順序を保つ}\bigr)\\
 &=d\,c^n
 &&\bigl(\because\ \text{同じ項 }c^n\text{ を }d\text{ 個足した和}\bigr)\\
-&=2^M c^n
-&&\bigl(\because\ d=2^M\ \text{（冒頭の略記）}\bigr)
+&=2^{M_{\mathrm{col}}} c^n
+&&\bigl(\because\ d=2^{M_{\mathrm{col}}}\ \text{（冒頭の略記）}\bigr)
 \end{aligned}`),
       paragraph(["となり、上からの評価を得る。"]),
     ],
@@ -830,7 +854,7 @@ e_k^\top W^{2a+1}e_k
         " は ",
         ref("W_is_real_symmetric_positive_definite"),
         " より実対称正定値である。単位ベクトル ",
-        math(String.raw`x \in \mathbb{R}^{2^M}`),
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "（",
         math(String.raw`\|x\| = 1`),
         "）を固定し、",
@@ -1044,12 +1068,12 @@ a+b+1 &= p+(p+1)+1
     id: "maxeig_008_claim_trace_power_sandwich",
     kind: "claim",
     origin: { path: SRC, ordinal: 10 },
-    title: { tex: String.raw`c(M)^{n} \leq \mathrm{tr}(W^{n}) \leq 2^{M} c(M)^{n}` },
+    title: { tex: String.raw`c(M_{\mathrm{col}})^{n} \leq \mathrm{tr}(W^{n}) \leq 2^{M_{\mathrm{col}}} c(M_{\mathrm{col}})^{n}` },
     labels: ["trace_power_sandwich"],
     statement: [
       paragraph([math(String.raw`n \in \mathbb{Z}_{\geq 1}`), " について"]),
       displayMath(
-        String.raw`c(M)^{n} \ \leq\ \mathrm{tr}\!\left(W^{n}\right)\ \leq\ 2^{M}\,c(M)^{n}`,
+        String.raw`c(M_{\mathrm{col}})^{n} \ \leq\ \mathrm{tr}\!\left(W^{n}\right)\ \leq\ 2^{M_{\mathrm{col}}}\,c(M_{\mathrm{col}})^{n}`,
       ),
     ],
     proof: [
@@ -1166,7 +1190,7 @@ c^{n}
         " の定義は ",
         ref("def_rayleigh_sup"),
         "）。上からの評価 ",
-        math(String.raw`\mathrm{tr}(W^n) \leq 2^M c^n`),
+        math(String.raw`\mathrm{tr}(W^n) \leq 2^{M_{\mathrm{col}}} c^n`),
         " は ",
         ref("trace_power_upper_bound"),
         " である。二つを合わせて主張を得る。",
@@ -1194,28 +1218,28 @@ c^{n}
     labels: ["partition_function_sandwich"],
     statement: [
       paragraph([
-        ref("partition_function_in_pauli_form"),
+        ref("partition_function_via_transfer_matrix"),
         " と同じ設定のもと、",
         math(String.raw`N_{\mathrm{row}} \in \mathbb{Z}_{\geq 1}`),
         " について",
       ]),
       displayMath(
-        String.raw`c(M)^{N_{\mathrm{row}}} \ \leq\ Z(J,J')\ \leq\ 2^{M}\,c(M)^{N_{\mathrm{row}}}`,
+        String.raw`c(M_{\mathrm{col}})^{N_{\mathrm{row}}} \ \leq\ Z(K_1,K_2)\ \leq\ 2^{M_{\mathrm{col}}}\,c(M_{\mathrm{col}})^{N_{\mathrm{row}}}`,
       ),
     ],
     proof: [
       displayMath(String.raw`\begin{aligned}
-Z(J,J')
+Z(K_1,K_2)
 &=\mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)
   &&\bigl(\because\ \blkref{Z_equals_trace_of_W}\bigr)\\
-&\geq c(M)^{N_{\mathrm{row}}}
+&\geq c(M_{\mathrm{col}})^{N_{\mathrm{row}}}
   &&\bigl(\because\ \blkref{trace_power_sandwich}\ \text{の下からの評価を}\ n=N_{\mathrm{row}}\ \text{に適用}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
-Z(J,J')
+Z(K_1,K_2)
 &=\mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)
   &&\bigl(\because\ \blkref{Z_equals_trace_of_W}\bigr)\\
-&\leq 2^{M}\,c(M)^{N_{\mathrm{row}}}
+&\leq 2^{M_{\mathrm{col}}}\,c(M_{\mathrm{col}})^{N_{\mathrm{row}}}
   &&\bigl(\because\ \blkref{trace_power_sandwich}\ \text{の上からの評価を}\ n=N_{\mathrm{row}}\ \text{に適用}\bigr)
 \end{aligned}`),
       paragraph(["この二つを合わせて主張を得る。"]),
@@ -1224,6 +1248,7 @@ Z(J,J')
       status: "added",
       notes: [
         "2026-09-05 の式変形統一で、一文にまとめていた二段の適用を、下からの評価と上からの評価の二つの鎖へ開いた。内容と根拠は変えていない。",
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
       ],
     },
   },
@@ -1232,7 +1257,7 @@ Z(J,J')
     id: "maxeig_010a_definition_sector_rayleigh_sup",
     kind: "definition",
     origin: { path: SRC, ordinal: 12 },
-    title: { tex: String.raw`c_\pm(M) := \sup \mathcal{R}_\pm \text{（セクターごとの上限）}` },
+    title: { tex: String.raw`c_\pm(M_{\mathrm{col}}) := \sup \mathcal{R}_\pm \text{（セクターごとの上限）}` },
     labels: ["def_sector_rayleigh_sup"],
     statement: [
       paragraph([
@@ -1246,14 +1271,14 @@ Z(J,J')
         " について、",
       ]),
       displayMath(
-        String.raw`\mathcal{R}_\pm := \left\{\, x^\top W x \ \middle|\ x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M},\ \|x\| = 1 \,\right\},
-\qquad c_\pm(M) := \sup \mathcal{R}_\pm`,
+        String.raw`\mathcal{R}_\pm := \left\{\, x^\top W x \ \middle|\ x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\},
+\qquad c_\pm(M_{\mathrm{col}}) := \sup \mathcal{R}_\pm`,
       ),
       paragraph([
         "とおく（複号同順）。この上限が定まること、すなわち ",
         math(String.raw`\mathcal{R}_\pm`),
         " が空でなく上に有界であることを先に確かめる。上に有界なのは ",
-        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M} \subseteq \mathbb{R}^{2^M}`),
+        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}} \subseteq \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " より ",
         math(String.raw`\mathcal{R}_\pm \subseteq \mathcal{R}`),
         "（",
@@ -1267,7 +1292,7 @@ Z(J,J')
         " で上に有界だからである（",
         ref("def_rayleigh_sup"),
         " の有界性の評価）。空でないことは、",
-        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルを具体的に作れることから従う。",
       ]),
       paragraph([
@@ -1291,10 +1316,10 @@ Z(J,J')
         " (1) の数ベクトルのクロネッカー積で",
       ]),
       displayMath(
-        String.raw`x^{(+)} := \overbrace{a_+ \boxtimes a_+ \boxtimes \cdots \boxtimes a_+}^{M},
+        String.raw`x^{(+)} := \overbrace{a_+ \boxtimes a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mathrm{col}}},
 \qquad
-x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
-\quad \in \mathbb{R}^{2^M}`,
+x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mathrm{col}}-1}
+\quad \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`,
       ),
       paragraph([
         "と定める（",
@@ -1302,9 +1327,9 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
         " (1) より成分は各因子の成分の積だから、",
         math(String.raw`x^{(\pm)}`),
         " の各成分は ",
-        math(String.raw`\pm 2^{-M/2}`),
+        math(String.raw`\pm 2^{-M_{\mathrm{col}}/2}`),
         " という実数であり、とくに ",
-        math(String.raw`x^{(\pm)} \in \mathbb{R}^{2^M}`),
+        math(String.raw`x^{(\pm)} \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "）。",
         ref("def_eigenspaces_of_epsilon"),
         " の ",
@@ -1332,40 +1357,40 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
         " 倍されることによる）。よって ",
         ref("def_eigenspaces_of_epsilon"),
         " より ",
-        math(String.raw`x^{(\pm)} \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`x^{(\pm)} \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " である。さらに ",
         math(String.raw`x^{(\pm)}`),
         " の ",
-        math(String.raw`2^M`),
+        math(String.raw`2^{M_{\mathrm{col}}}`),
         " 個の成分はすべて絶対値 ",
-        math(String.raw`2^{-M/2}`),
+        math(String.raw`2^{-M_{\mathrm{col}}/2}`),
         " なので",
       ]),
       displayMath(
         String.raw`\left\|x^{(\pm)}\right\|^2
-= \sum_{I \in \mathcal{I}_M}\left(2^{-M/2}\right)^2
-= 2^M\cdot 2^{-M} = 1`,
+= \sum_{I \in \mathcal{I}_{M_{\mathrm{col}}}}\left(2^{-M_{\mathrm{col}}/2}\right)^2
+= 2^{M_{\mathrm{col}}}\cdot 2^{-M_{\mathrm{col}}} = 1`,
       ),
       paragraph([
         "（",
-        math(String.raw`\mathcal{I}_M`),
+        math(String.raw`\mathcal{I}_{M_{\mathrm{col}}}`),
         " は ",
         ref("def_kronecker"),
         " の添字集合で ",
-        math(String.raw`\#\mathcal{I}_M = 2^M`),
+        math(String.raw`\#\mathcal{I}_{M_{\mathrm{col}}} = 2^{M_{\mathrm{col}}}`),
         "）。したがって ",
         math(String.raw`\left(x^{(\pm)}\right)^\top Wx^{(\pm)} \in \mathcal{R}_\pm`),
         " で ",
         math(String.raw`\mathcal{R}_\pm \neq \emptyset`),
         " であり、上限 ",
-        math(String.raw`c_\pm(M) \in \mathbb{R}`),
+        math(String.raw`c_\pm(M_{\mathrm{col}}) \in \mathbb{R}`),
         " が定まる。以上のもとで、",
       ]),
       paragraph([
         "以上により、二つのセクターの上限 ",
-        math(String.raw`c_+(M)`),
+        math(String.raw`c_+(M_{\mathrm{col}})`),
         " と ",
-        math(String.raw`c_-(M)`),
+        math(String.raw`c_-(M_{\mathrm{col}})`),
         " が定まった。",
       ]),
     ],
@@ -1491,7 +1516,7 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M-1}
         ref("V1_restriction_to_eigenspaces"), " に結合定数 ", math(String.raw`K_1/2`),
         " を代入すると、任意の ", math(String.raw`f\in\mathcal F^{(\pm)}`),
         " について ", math(String.raw`Bf=Cf`), " を得る。",
-        ref("epsilon_projector_properties"), " より任意の ", math(String.raw`x\in\mathbb C^{2^M}`),
+        ref("epsilon_projector_properties"), " より任意の ", math(String.raw`x\in\mathbb C^{2^{M_{\mathrm{col}}}}`),
         " に対して ", math(String.raw`Px\in\mathcal F^{(\pm)}`), " なので、",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -1528,21 +1553,21 @@ WP
     kind: "claim",
     standing: "mainTheorem",
     origin: { path: SRC, ordinal: 12 },
-    title: { tex: String.raw`c(M) = \max\left(c_+(M), c_-(M)\right)` },
+    title: { tex: String.raw`c(M_{\mathrm{col}}) = \max\left(c_+(M_{\mathrm{col}}), c_-(M_{\mathrm{col}})\right)` },
     labels: ["sector_decomposition_of_rayleigh_sup"],
     statement: [
       paragraph([
-        ref("def_rayleigh_sup"), " の ", math(String.raw`c(M)`), " と ",
-        ref("def_sector_rayleigh_sup"), " の ", math(String.raw`c_\pm(M)`),
+        ref("def_rayleigh_sup"), " の ", math(String.raw`c(M_{\mathrm{col}})`), " と ",
+        ref("def_sector_rayleigh_sup"), " の ", math(String.raw`c_\pm(M_{\mathrm{col}})`),
         " について、次が成り立つ。",
       ]),
-      displayMath(String.raw`c(M) = \max\left(c_+(M), c_-(M)\right)`),
+      displayMath(String.raw`c(M_{\mathrm{col}}) = \max\left(c_+(M_{\mathrm{col}}), c_-(M_{\mathrm{col}})\right)`),
     ],
     proof: [
       paragraph([
         ref("epsilon_projector_properties"),
         " (2)(3) より、任意の ",
-        math(String.raw`x \in \mathbb{R}^{2^M}`),
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " は ",
         math(String.raw`x = x_+ + x_-`),
         "（",
@@ -1604,18 +1629,18 @@ WP
         " の ",
         math(String.raw`P^{(\pm)}`),
         " も実行列である。したがって ",
-        math(String.raw`x\in\mathbb R^{2^M}`),
+        math(String.raw`x\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
         " から ",
-        math(String.raw`x_\pm=P^{(\pm)}x\in\mathbb R^{2^M}`),
+        math(String.raw`x_\pm=P^{(\pm)}x\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
         " であり、先に示したセクターへの所属と合わせて ",
-        math(String.raw`x_\pm\in\mathcal F^{(\pm)}\cap\mathbb R^{2^M}`),
+        math(String.raw`x_\pm\in\mathcal F^{(\pm)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`),
         " である。",
       ]),
       paragraph([
         "ここで任意の ",
-        math(String.raw`u_+\in\mathcal F^{(+)}\cap\mathbb R^{2^M}`),
+        math(String.raw`u_+\in\mathcal F^{(+)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`),
         " と ",
-        math(String.raw`u_-\in\mathcal F^{(-)}\cap\mathbb R^{2^M}`),
+        math(String.raw`u_-\in\mathcal F^{(-)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`),
         " を取る。",
         ref("epsilon_projector_properties"),
         " (1)(3) より ",
@@ -1671,7 +1696,7 @@ u_+^\top u_-
         " より ",
         math(String.raw`W`),
         " は実行列なので、",
-        math(String.raw`Wx_\pm\in\mathbb R^{2^M}`),
+        math(String.raw`Wx_\pm\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
         " でもある。したがって、上で示した実ベクトル間の直交性から交叉項が消えて",
       ]),
       displayMath(
@@ -1690,9 +1715,9 @@ x^\top Wx
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`c_\pm := c_\pm(M)`),
+        math(String.raw`c_\pm := c_\pm(M_{\mathrm{col}})`),
         " と略記する。任意の ",
-        math(String.raw`y\in\mathcal F^{(\pm)}\cap\mathbb R^{2^M}`),
+        math(String.raw`y\in\mathcal F^{(\pm)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`),
         " について、",
         math(String.raw`y=0`),
         " なら ",
@@ -1738,9 +1763,9 @@ x^\top Wx
         " だから ",
         math(String.raw`1/\|y\|\in\mathbb R`),
         " である。また ",
-        math(String.raw`y\in\mathbb R^{2^M}`),
+        math(String.raw`y\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
         " であり、実数ベクトル全体は実数倍について閉じている。よって ",
-        math(String.raw`\widehat y=(1/\|y\|)y\in\mathbb R^{2^M}`),
+        math(String.raw`\widehat y=(1/\|y\|)y\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
         " である。上の計算と合わせると、",
         math(String.raw`\widehat y`),
         " は同じセクターの単位ベクトルである。したがって ",
@@ -1797,11 +1822,11 @@ x^\top Wx
       ),
       paragraph([
         "上限を取って ",
-        math(String.raw`c(M) \leq \max(c_+,c_-)`),
+        math(String.raw`c(M_{\mathrm{col}}) \leq \max(c_+,c_-)`),
         "。逆に、",
-        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルは ",
-        math(String.raw`\mathbb{R}^{2^M}`),
+        math(String.raw`\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルでもあるので ",
         math(String.raw`\mathcal{R}_\pm \subseteq \mathcal{R}`),
         " である（空でないことと上に有界であることは ",
@@ -1815,16 +1840,16 @@ c_\pm
   \quad (\because c_\pm \text{ の定義})\\
 &\leq \sup \mathcal{R}
   \quad (\because \mathcal{R}_\pm \subseteq \mathcal{R} \text{ と上限の単調性})\\
-&= c(M)
-  \quad (\because c(M) \text{ の定義})
+&= c(M_{\mathrm{col}})
+  \quad (\because c(M_{\mathrm{col}}) \text{ の定義})
 \end{aligned}`,
       ),
       paragraph(["両方の符号について成り立つので、"]),
       displayMath(
         String.raw`\begin{aligned}
 \max(c_+,c_-)
-&\leq c(M)
-  \quad (\because c_+\leq c(M) \text{ かつ } c_-\leq c(M))\\
+&\leq c(M_{\mathrm{col}})
+  \quad (\because c_+\leq c(M_{\mathrm{col}}) \text{ かつ } c_-\leq c(M_{\mathrm{col}}))\\
 &\leq \max(c_+,c_-)
   \quad (\because \text{上で示したレイリー商の上界})
 \end{aligned}`,

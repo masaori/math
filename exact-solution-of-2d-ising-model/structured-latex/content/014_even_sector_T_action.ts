@@ -75,13 +75,13 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         " について定義されているが、",
         ref("half_integer_checkZ_periodicity"),
         " の添字周期性 ",
-        math(String.raw`\check{Z}_{\mu+M} = \check{Z}_\mu`),
+        math(String.raw`\check{Z}_{\mu+M_{\mathrm{col}}} = \check{Z}_\mu`),
         " により本質的に相異なる添字は ",
-        math(String.raw`M`),
+        math(String.raw`M_{\mathrm{col}}`),
         " 個である。**この章の主張はすべて ",
         ref("def_check_index_set"),
         " の ",
-        math(String.raw`\mu \in \check{\mathcal{M}} = \{1,\dots,M\}`),
+        math(String.raw`\mu \in \check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
         " について述べる。**",
       ]),
     ],
@@ -105,7 +105,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         " の生成子で上の符号を取ったものを",
       ]),
       displayMath(
-        String.raw`H_1^{(+)} := Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M - Y_MZ_1`,
+        String.raw`H_1^{(+)} := Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M_{\mathrm{col}}-1}Z_{M_{\mathrm{col}}} - Y_{M_{\mathrm{col}}}Z_1`,
       ),
       paragraph(["と書く。"]),
     ],
@@ -129,7 +129,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
       ]),
       displayMath(
         String.raw`\left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
-\ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
+\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
     ],
     conversion: { status: "added" },
@@ -149,12 +149,12 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         " と ",
         ref("V2_exponential_representation"),
         " の ",
-        math(String.raw`V_2 = (2s_2)^{M/2}\exp\!\left(iK_2^* H_2\right)`),
+        math(String.raw`V_2 = (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^* H_2\right)`),
         " を用いて",
       ]),
       displayMath(
         String.raw`V^{(+)} := \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}
-\ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
+\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
     ],
     conversion: { status: "added" },
@@ -180,7 +180,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
     ],
     proof: [
       paragraph([
-        math(String.raw`\tfrac{i}{2}K_1H_1^{(+)}\in\mathrm{Mat}(2^M,\mathbb C)`),
+        math(String.raw`\tfrac{i}{2}K_1H_1^{(+)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb C)`),
         " である。逆行列を一続きに計算すると、",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -220,7 +220,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
       paragraph([
         ref("matrix_exp_conjugation"),
         " (3) を ",
-        math(String.raw`iK_2^*H_2\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        math(String.raw`iK_2^*H_2\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " に適用すると、",
         math(String.raw`\exp\!\left(iK_2^*H_2\right)`),
         " は可逆である。",
@@ -232,17 +232,17 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         " より ",
         math(String.raw`s_2 = \sinh 2K_2 > 0`),
         " なので ",
-        math(String.raw`(2s_2)^{M/2} \in \mathbb{C}\setminus\{0\}`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{C}\setminus\{0\}`),
         " である。",
         ref("def_invertible_elements_of_R"),
         " (iv) より",
       ]),
-      displayMath(String.raw`(2s_2)^{M/2}I\in R^\times`),
+      displayMath(String.raw`(2s_2)^{M_{\mathrm{col}}/2}I\in R^\times`),
       paragraph([
         ref("V2_exponential_representation"),
         " の指数表示により",
       ]),
-      displayMath(String.raw`V_2=(2s_2)^{M/2}I\cdot\exp\!\left(iK_2^*H_2\right)`),
+      displayMath(String.raw`V_2=(2s_2)^{M_{\mathrm{col}}/2}I\cdot\exp\!\left(iK_2^*H_2\right)`),
       paragraph([
         ref("def_invertible_elements_of_R"),
         " (ii) をこの積へ適用すると、",
@@ -288,7 +288,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
       ]),
       displayMath(
         String.raw`\left(V_1^{(+)}\right)^{1/2}V_2\in R^\times,
-\qquad R=\mathrm{Mat}(2^M,\mathbb{C})`,
+\qquad R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
         ref("V1_plus_half_invertible"),
@@ -330,7 +330,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
       displayMath(
         String.raw`T_{(V^{(+)})}(X) := T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
 T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
-\qquad \left(X \in \mathrm{Mat}(2^M,\mathbb{C})\right)`,
+\qquad \left(X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\right)`,
       ),
     ],
     conversion: { status: "added" },
@@ -472,7 +472,7 @@ T_{(V^{(+)})}
         " とする。",
         math(String.raw`H_1^{(+)}, H_2, \check{Z}_\mu, \check{Y}_\mu`),
         " はすべて ",
-        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " の元であり（",
         ref("def_half_integer_checkZ"),
         "、",
@@ -488,7 +488,7 @@ T_{(V^{(+)})}
         " のスカラー、",
         math(String.raw`[X, W] := XW - WX`),
         " は交換子である。",
-        math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        math(String.raw`X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " を固定するごとに ",
         math(String.raw`n`),
         " 重の交換子を",
@@ -563,7 +563,7 @@ T_{(V^{(+)})}
       ]),
       displayMath(
         String.raw`[\alpha X, \beta W] = \alpha\beta\,[X, W]
-\qquad (\alpha, \beta \in \mathbb{C},\ X, W \in \mathrm{Mat}(2^M,\mathbb{C}))`,
+\qquad (\alpha, \beta \in \mathbb{C},\ X, W \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C}))`,
       ),
       paragraph([
         "だけである。後者は、スカラー倍が積と可換なこと（",
@@ -999,14 +999,14 @@ i (2K_2^*)^n\,\check{Z}_\mu & (n \text{ 奇数}) \\
         "まず 4 式すべてで用いる 2 つの補題を用意する（いずれも ",
         math(String.raw`\check{Z}, \check{Y}`),
         " とは無関係に ",
-        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " の任意の元について成り立つ）。",
       ]),
       paragraph([
         "補題 1（生成子のスカラー倍）：",
         math(String.raw`\alpha \in \mathbb{C}`),
         "、",
-        math(String.raw`X, W \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        math(String.raw`X, W \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         "、",
         math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
         " について",
@@ -1318,7 +1318,7 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
         " とし ",
         math(String.raw`\tilde\theta := \tilde\theta_\mu`),
         " と略記する。次の 4 つの級数は ",
-        math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
+        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " において収束し（",
         ref("matrix_exp_conjugation"),
         " (1)）、それぞれ次に等しい。",
@@ -1534,7 +1534,7 @@ T_{V_2}(\check{Y}_\mu)
         "ここで行ベクトルと列ベクトルの積は ",
         math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}a \\ b\end{pmatrix} := aA + bB`),
         "（",
-        math(String.raw`A, B \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        math(String.raw`A, B \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         "、",
         math(String.raw`a, b \in \mathbb{C}`),
         "）とする。",
@@ -1608,17 +1608,17 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
         " については、",
         ref("V2_exponential_representation"),
         " の ",
-        math(String.raw`V_2 = (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)`),
+        math(String.raw`V_2 = (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)`),
         " の前因子 ",
-        math(String.raw`(2s_2)^{M/2} \in \mathbb{C}\setminus\{0\}`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{C}\setminus\{0\}`),
         " が共役で打ち消し合う。実際 ",
         ref("scalar_identity_commutes"),
         " より ",
-        math(String.raw`(2s_2)^{M/2}I`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}I`),
         " は任意の元と可換であり、",
         ref("def_invertible_elements_of_R"),
         " (ii)(iv) より ",
-        math(String.raw`V_2^{-1} = \left((2s_2)^{M/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)`),
+        math(String.raw`V_2^{-1} = \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)`),
         " である（",
         ref("def_T_g"),
         " と ",
@@ -1630,14 +1630,14 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
 T_{V_2}(\check{Z}_\mu)
 &= V_2\,\check{Z}_\mu\,V_2^{-1}
    \quad (\because \text{def\_T\_g}) \\
-&= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,
-   \left((2s_2)^{M/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,
+   \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
    \quad (\because \blkref{V2_exponential_representation}\text{ と直前の } V_2^{-1} \text{ の表示}) \\
-&= (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1}
+&= (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}
    \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M/2}\right)^{-1} \text{ を左端へ移す）}) \\
+   \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} \text{ を左端へ移す）}) \\
 &= \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1} = 1) \\
+   \quad (\because (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} = 1) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[iK_2^*H_2,\dots,\left[iK_2^*H_2,\check{Z}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
@@ -1650,14 +1650,14 @@ T_{V_2}(\check{Z}_\mu)
 T_{V_2}(\check{Y}_\mu)
 &= V_2\,\check{Y}_\mu\,V_2^{-1}
    \quad (\because \text{def\_T\_g}) \\
-&= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,
-   \left((2s_2)^{M/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,
+   \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
    \quad (\because \blkref{V2_exponential_representation}\text{ と直前の } V_2^{-1} \text{ の表示}) \\
-&= (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1}
+&= (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}
    \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M/2}\right)^{-1} \text{ を左端へ移す）}) \\
+   \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} \text{ を左端へ移す）}) \\
 &= \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1} = 1) \\
+   \quad (\because (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} = 1) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[iK_2^*H_2,\dots,\left[iK_2^*H_2,\check{Y}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
@@ -2279,7 +2279,7 @@ P_{21}
       displayMath(
         String.raw`\left(T_{(V^{(+)})}(\check{Z}_\mu),\; T_{(V^{(+)})}(\check{Y}_\mu)\right)
 = \left(\check{Z}_\mu,\; \check{Y}_\mu\right) A\!\left(\tilde\theta_\mu\right),
-\qquad \tilde\theta_\mu = \frac{2\pi\left(\mu - \tfrac12\right)}{M}`,
+\qquad \tilde\theta_\mu = \frac{2\pi\left(\mu - \tfrac12\right)}{M_{\mathrm{col}}}`,
       ),
       paragraph([
         "が成り立つ（",

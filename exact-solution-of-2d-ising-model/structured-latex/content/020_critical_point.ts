@@ -2366,7 +2366,7 @@ T
       paragraph([
         ref("def_partition_function_2d_ising"),
         " の ",
-        math(String.raw`Z(J,J')`),
+        math(String.raw`Z(K_1,K_2)`),
         " において、等方な場合の結合定数を",
       ]),
       displayMath(
@@ -2454,6 +2454,11 @@ C &= \frac{\partial u}{\partial\beta}\cdot\frac{d\beta}{dT}
         " であり、これが Onsager の臨界温度である。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+      ],
+    },
   },
 ]);

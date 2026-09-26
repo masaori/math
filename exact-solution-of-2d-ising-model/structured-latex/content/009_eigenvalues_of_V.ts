@@ -716,15 +716,15 @@ A_{kk}
       paragraph(["とおくと、"]),
       displayMath(
         String.raw`\begin{aligned}
-S_1^{(\pm)} &= K_1\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)
+S_1^{(\pm)} &= K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
   \mp K_1\, G, \qquad
-G := \sigma_1^y\,\sigma_2^x \sigma_3^x \cdots \sigma_{M-1}^x\, \sigma_M^y \\
-S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_M^x\right)
+G := \sigma_1^y\,\sigma_2^x \sigma_3^x \cdots \sigma_{M_{\mathrm{col}}-1}^x\, \sigma_{M_{\mathrm{col}}}^y \\
+S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\mathrm{col}}}^x\right)
 \end{aligned}`,
       ),
       paragraph([
         "であり（",
-        math(String.raw`M = 2`),
+        math(String.raw`M_{\mathrm{col}} = 2`),
         " のとき ",
         math(String.raw`G = \sigma_1^y\sigma_2^y`),
         " と読む）、",
@@ -824,11 +824,11 @@ Z_m Y_m
       displayMath(
         String.raw`\begin{aligned}
 H_2
-&= \sum_{m=1}^{M} Z_mY_m
+&= \sum_{m=1}^{M_{\mathrm{col}}} Z_mY_m
    \quad (\because\ \blkref{def_H2}) \\
-&= \sum_{m=1}^{M} (-i\,\sigma_m^x)
+&= \sum_{m=1}^{M_{\mathrm{col}}} (-i\,\sigma_m^x)
    \quad (\because \text{上で得た } Z_mY_m = -i\,\sigma_m^x) \\
-&= -i\sum_{m=1}^{M}\sigma_m^x
+&= -i\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad (\because \text{スカラー倍の和の分配})
 \end{aligned}`,
       ),
@@ -838,11 +838,11 @@ H_2
 S_2
 &= iK_2^*H_2
    \quad (\because S_2 \text{ の定義}) \\
-&= iK_2^*\left(-i\sum_{m=1}^{M}\sigma_m^x\right)
+&= iK_2^*\left(-i\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\right)
    \quad (\because \text{上で得た } H_2 \text{ の表示}) \\
-&= i(-i)\,K_2^*\sum_{m=1}^{M}\sigma_m^x
+&= i(-i)\,K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad (\because \text{スカラー倍の交換}) \\
-&= K_2^*\sum_{m=1}^{M}\sigma_m^x
+&= K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad (\because i\cdot(-i) = 1)
 \end{aligned}`,
       ),
@@ -850,7 +850,7 @@ S_2
         "Step 2（",
         math(String.raw`S_1^{(\pm)}`),
         " の形）。",
-        math(String.raw`1 \leq m \leq M-1`),
+        math(String.raw`1 \leq m \leq M_{\mathrm{col}}-1`),
         " に対して",
       ]),
       displayMath(
@@ -871,12 +871,12 @@ Y_m Z_{m+1}
       paragraph(["また境界項について"]),
       displayMath(
         String.raw`\begin{aligned}
-Y_M Z_1
-&= \left(\sigma_1^x\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y\right)\sigma_1^z
-   \quad (\because Y_M,\ Z_1 \text{ の定義}) \\
-&= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y
+Y_{M_{\mathrm{col}}} Z_1
+&= \left(\sigma_1^x\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y\right)\sigma_1^z
+   \quad (\because Y_{M_{\mathrm{col}}},\ Z_1 \text{ の定義}) \\
+&= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
    \quad (\because \sigma_1^z \text{ は他の因子と可換}) \\
-&= -i\,\sigma_1^y\,\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y
+&= -i\,\sigma_1^y\,\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
    \quad (\because \text{Step 0}) \\
 &= -i\,G
    \quad (\because G \text{ の定義})
@@ -894,13 +894,13 @@ Y_M Z_1
 S_1^{(\pm)}
 &= iK_1H_1^{(\pm)}
    \quad (\because S_1^{(\pm)} \text{ の定義}) \\
-&= iK_1\left(\sum_{m=1}^{M-1} Y_mZ_{m+1} \mp Y_MZ_1\right)
+&= iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} \mp Y_{M_{\mathrm{col}}}Z_1\right)
    \quad (\because H_1^{(\pm)} \text{ の定義}) \\
-&= iK_1\left(\sum_{m=1}^{M-1}\left(-i\,\sigma_m^z\sigma_{m+1}^z\right) \mp (-i\,G)\right)
-   \quad (\because \text{上で得た } Y_mZ_{m+1},\ Y_MZ_1 \text{ の表示}) \\
-&= i(-i)\,K_1\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z \mp G\right)
+&= iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left(-i\,\sigma_m^z\sigma_{m+1}^z\right) \mp (-i\,G)\right)
+   \quad (\because \text{上で得た } Y_mZ_{m+1},\ Y_{M_{\mathrm{col}}}Z_1 \text{ の表示}) \\
+&= i(-i)\,K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z \mp G\right)
    \quad (\because \text{スカラー倍の和の分配と交換}) \\
-&= K_1\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z \mp K_1\,G
+&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z \mp K_1\,G
    \quad (\because i\cdot(-i) = 1 \text{ と分配則})
 \end{aligned}`,
       ),
@@ -920,8 +920,8 @@ S_1^{(\pm)}
         "）：",
       ]),
       displayMath(
-        String.raw`\left(A_1\boxtimes\cdots\boxtimes A_M\right)^\top
-= A_1^\top\boxtimes\cdots\boxtimes A_M^\top
+        String.raw`\left(A_1\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}\right)^\top
+= A_1^\top\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}^\top
 \quad (\because \text{クロネッカー積の転置})`,
       ),
       paragraph([
@@ -949,7 +949,7 @@ S_1^{(\pm)}
           "：",
           math(String.raw`\sigma^y`),
           " が **2 個**（第 1 因子と第 ",
-          math(String.raw`M`),
+          math(String.raw`M_{\mathrm{col}}`),
           " 因子）、残りは ",
           math(String.raw`\sigma^x`),
           "。純虚数成分の因子がちょうど 2 個なので、成分の積に現れる虚数単位は ",
@@ -990,11 +990,11 @@ S_1^{(\pm)}
     title: { tex: String.raw`\text{符号反転共役 } U` },
     labels: ["sign_flip_conjugation"],
     statement: [
-      paragraph([math(String.raw`M \in \mathbb{Z}_{\geq 2}`), " とし、"]),
+      paragraph([math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`), " とし、"]),
       displayMath(
-        String.raw`E := \prod_{\substack{1 \leq m \leq M \\ m\ \text{奇数}}} \sigma_m^x, \qquad
-F := \prod_{m=1}^{M} \sigma_m^z, \qquad
-U := E F \in \mathrm{Mat}(2^M,\mathbb{C})`,
+        String.raw`E := \prod_{\substack{1 \leq m \leq M_{\mathrm{col}} \\ m\ \text{奇数}}} \sigma_m^x, \qquad
+F := \prod_{m=1}^{M_{\mathrm{col}}} \sigma_m^z, \qquad
+U := E F \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
         "とおく（積の因子は相異なるサイトに置かれた ",
@@ -1251,11 +1251,11 @@ U Y_m U^{-1}
         " への作用）。",
         ref("def_H1_pm"),
         " の ",
-        math(String.raw`H_1^{(\pm)} = \sum_{m=1}^{M-1}Y_mZ_{m+1} \mp Y_MZ_1`),
+        math(String.raw`H_1^{(\pm)} = \sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} \mp Y_{M_{\mathrm{col}}}Z_1`),
         " と ",
         ref("iH_is_real_symmetric"),
         " の Step 1 の ",
-        math(String.raw`H_2 = \sum_{m=1}^{M}Z_mY_m`),
+        math(String.raw`H_2 = \sum_{m=1}^{M_{\mathrm{col}}}Z_mY_m`),
         " は、どちらも ",
         math(String.raw`Y`),
         " と ",
