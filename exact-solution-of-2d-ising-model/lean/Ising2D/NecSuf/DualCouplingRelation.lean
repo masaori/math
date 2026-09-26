@@ -4,7 +4,7 @@
 対応する人手証明のラベル: `second_dual_coupling_relation`
 （正本は `structured-latex/content/004_transfer_matrix.ts`）。
 
-具体版は `Ising2D/Part010/ClaimSecondDualCouplingRelation.lean` に置く。
+具体版は `Ising2D/Part004/ClaimSecondDualCouplingRelation.lean` に置く。
 
 ## 何が効いているか / 効いていないか
 

@@ -11,11 +11,15 @@
   → `epsilon_commute_sigmaX` / `epsilon_anticomm_sigmaZ` / `epsilon_anticomm_sigmaY`。
   「1 サイトだけ反可換ならテンソル積は反交換」は既存の
   `Ising2D.siteProd_anticomm_of_single_site`（`Part006/Claim000_AnticommutatorZY.lean`）。
-* Step 2, 3（`V_2`, `V_1` との可換性）→ `epsilon_commute_V2pauli` / `epsilon_commute_V1pauli`。
-  原文は「可換なら冪とも可換 → 部分和とも可換 → 極限との交換」と 3 段で書いているが、
-  Lean ではこれが `Commute.exp_right`（mathlib）1 本にあたる。
+* Step 2, 3（`V_2`, `V_1` との可換性）→ 右辺の式についての `epsilon_commute_V2PauliForm` /
+  `epsilon_commute_V1PauliForm` と、人手の `V_2`, `V_1`（`def_transfer_matrix`）についての
+  `epsilon_commute_V2` / `epsilon_commute_V1`。人手の鎖の第 1 行・最終行で
+  `second_transfer_matrix_pauli_form` / `first_transfer_matrix_pauli_form` を引く段が、
+  後者の証明の書き換えにあたる。人手は「可換なら冪とも可換 → 部分和とも可換 → 極限との交換」と
+  3 段で書いているが、Lean ではこれが `Commute.exp_right`（mathlib）1 本にあたる。
+  `epsilon_commute_V2H2Form` は `V2H2Form`（`V2_exponential_representation` の右辺の式）についての版。
 * Step 4（`V_1^{(±)}` と `(V_1^{(±)})^{1/2}`）→ `epsilon_commute_H1` から
-  `epsilon_commute_V1` / `epsilon_commute_V1half`。
+  `epsilon_commute_V1pm` / `epsilon_commute_V1pmHalf`。
 * Step 5（`P^{(±)}`）→ `epsProj_commute_of_commute_epsilon`
   （必要十分版 `Ising2D.NecSuf.commute_invProj` の系）。
 
@@ -23,8 +27,8 @@
 `ε` と Pauli 行列の具体的な反交換関係の計算であり、取り払える構造が無い。
 -/
 import Ising2D.Part010.Claim009_EpsilonProjectors
-import Ising2D.Part010.Definition000_ComponentTransfer
-import Ising2D.Part010.Claim006_V2Bridge
+import Ising2D.Part004.ClaimFirstTransferMatrixPauliForm
+import Ising2D.Part004.ClaimSecondTransferMatrixPauliForm
 import Ising2D.Part006.Claim000_AnticommutatorZY
 
 namespace Ising2D
@@ -120,22 +124,32 @@ theorem epsilon_commute_sum_sigmaX (M : ℕ) :
     Commute (epsilon M) (∑ m : Fin M, sigmaX m) :=
   Commute.sum_right _ _ _ fun m _ => epsilon_commute_sigmaX m
 
-/-- **原文 Step 3: `ε V_1 = V_1 ε`**（`V_1 = exp(K_1 ∑ σ^z σ^z)`）。 -/
-theorem epsilon_commute_V1pauli (K1 : ℂ) : Commute (epsilon M) (V1pauli M K1) := by
-  rw [V1pauli, matExp]
+/-- 人手 Step 3 の `ε exp(K_1 D) = exp(K_1 D) ε`（右辺の式 `V1PauliForm` について）。 -/
+theorem epsilon_commute_V1PauliForm (K1 : ℂ) : Commute (epsilon M) (V1PauliForm M K1) := by
+  rw [V1PauliForm, matExp]
   exact ((epsilon_commute_sum_sigmaZ_sigmaZ M).smul_right K1).exp_right
 
-/-- **原文 Step 2: `ε V_2 = V_2 ε`**（`V_2 = (2s_2)^{M/2} exp(K_2^* ∑ σ^x)`）。 -/
-theorem epsilon_commute_V2pauli (s2 : ℝ) (K2star : ℂ) :
-    Commute (epsilon M) (V2pauli M s2 K2star) := by
-  rw [V2pauli]
+/-- 人手 Step 2 の `ε (2s_2)^{M/2}exp(R) = (2s_2)^{M/2}exp(R) ε`（右辺の式 `V2PauliForm` について）。 -/
+theorem epsilon_commute_V2PauliForm (s2 : ℝ) (K2star : ℂ) :
+    Commute (epsilon M) (V2PauliForm M s2 K2star) := by
+  rw [V2PauliForm]
   exact (((epsilon_commute_sum_sigmaX M).smul_right K2star).exp_right).smul_right _
 
-/-- 同上を既存の `Ising2D.V2` について述べた版。 -/
-theorem epsilon_commute_V2 (s2 : ℝ) (K2star : ℂ) :
-    Commute (epsilon M) (V2 M s2 K2star) := by
-  rw [V2_eq_V2pauli]
-  exact epsilon_commute_V2pauli s2 K2star
+/-- 同上を `V2H2Form`（`V2_exponential_representation` の右辺の式）について述べた版。 -/
+theorem epsilon_commute_V2H2Form (s2 : ℝ) (K2star : ℂ) :
+    Commute (epsilon M) (V2H2Form M s2 K2star) := by
+  rw [← V2PauliForm_eq_V2H2Form]
+  exact epsilon_commute_V2PauliForm s2 K2star
+
+/-- **人手 Step 3: `ε V_1 = V_1 ε`**（`V_1` は `def_transfer_matrix` の `V_1`）。 -/
+theorem epsilon_commute_V1 (K1 : ℝ) : Commute (epsilon M) (V1 M K1) := by
+  rw [first_transfer_matrix_pauli_form]
+  exact epsilon_commute_V1PauliForm _
+
+/-- **人手 Step 2: `ε V_2 = V_2 ε`**（`V_2` は `def_transfer_matrix` の `V_2`、`K_2 > 0`）。 -/
+theorem epsilon_commute_V2 {K2 : ℝ} (hK2 : 0 < K2) : Commute (epsilon M) (V2 M K2) := by
+  rw [second_transfer_matrix_pauli_form hK2]
+  exact epsilon_commute_V2PauliForm _ _
 
 /-! ## Step 4: `V_1^{(±)}` と `(V_1^{(±)})^{1/2}` -/
 
@@ -147,13 +161,13 @@ theorem epsilon_commute_H1 (η : ℂ) : Commute (epsilon M) (H1 M η) := by
     (epsilon_anticomm_Z (nextSite m))).smul_right _
 
 /-- **原文 Step 4: `ε V_1^{(±)} = V_1^{(±)} ε`**。 -/
-theorem epsilon_commute_V1 (K1 η : ℂ) : Commute (epsilon M) (V1 M K1 η) := by
-  rw [V1, matExp]
+theorem epsilon_commute_V1pm (K1 η : ℂ) : Commute (epsilon M) (V1pm M K1 η) := by
+  rw [V1pm, matExp]
   exact ((epsilon_commute_H1 η).smul_right _).exp_right
 
 /-- **原文 Step 4: `ε (V_1^{(±)})^{1/2} = (V_1^{(±)})^{1/2} ε`**。 -/
-theorem epsilon_commute_V1half (K1 η : ℂ) : Commute (epsilon M) (V1half M K1 η) := by
-  rw [V1half, matExp]
+theorem epsilon_commute_V1pmHalf (K1 η : ℂ) : Commute (epsilon M) (V1pmHalf M K1 η) := by
+  rw [V1pmHalf, matExp]
   exact ((epsilon_commute_H1 η).smul_right _).exp_right
 
 /-! ## Step 5: 射影子との可換性 -/
@@ -165,21 +179,29 @@ theorem commute_epsProj_of_commute_epsilon {a : TensorPow M} (η : ℂ)
   rw [epsProj_eq_invProj]
   exact NecSuf.commute_invProj (h.smul_right η)
 
-theorem commute_V1pauli_epsProj (K1 η : ℂ) : Commute (V1pauli M K1) (epsProj M η) :=
-  commute_epsProj_of_commute_epsilon η (epsilon_commute_V1pauli K1).symm
+theorem commute_V1PauliForm_epsProj (K1 η : ℂ) : Commute (V1PauliForm M K1) (epsProj M η) :=
+  commute_epsProj_of_commute_epsilon η (epsilon_commute_V1PauliForm K1).symm
 
-theorem commute_V2pauli_epsProj (s2 : ℝ) (K2star η : ℂ) :
-    Commute (V2pauli M s2 K2star) (epsProj M η) :=
-  commute_epsProj_of_commute_epsilon η (epsilon_commute_V2pauli s2 K2star).symm
+theorem commute_V2PauliForm_epsProj (s2 : ℝ) (K2star η : ℂ) :
+    Commute (V2PauliForm M s2 K2star) (epsProj M η) :=
+  commute_epsProj_of_commute_epsilon η (epsilon_commute_V2PauliForm s2 K2star).symm
 
-theorem commute_V2_epsProj (s2 : ℝ) (K2star η : ℂ) :
-    Commute (V2 M s2 K2star) (epsProj M η) :=
-  commute_epsProj_of_commute_epsilon η (epsilon_commute_V2 s2 K2star).symm
+theorem commute_V2H2Form_epsProj (s2 : ℝ) (K2star η : ℂ) :
+    Commute (V2H2Form M s2 K2star) (epsProj M η) :=
+  commute_epsProj_of_commute_epsilon η (epsilon_commute_V2H2Form s2 K2star).symm
 
-theorem commute_V1_epsProj (K1 ηsign η : ℂ) : Commute (V1 M K1 ηsign) (epsProj M η) :=
-  commute_epsProj_of_commute_epsilon η (epsilon_commute_V1 K1 ηsign).symm
+/-- 人手 `epsilon_projectors_commute_with_transfer_matrices` の `V_1 P^{(±)} = P^{(±)} V_1`。 -/
+theorem commute_V1_epsProj (K1 : ℝ) (η : ℂ) : Commute (V1 M K1) (epsProj M η) :=
+  commute_epsProj_of_commute_epsilon η (epsilon_commute_V1 K1).symm
 
-theorem commute_V1half_epsProj (K1 ηsign η : ℂ) : Commute (V1half M K1 ηsign) (epsProj M η) :=
-  commute_epsProj_of_commute_epsilon η (epsilon_commute_V1half K1 ηsign).symm
+/-- 人手 `epsilon_projectors_commute_with_transfer_matrices` の `V_2 P^{(±)} = P^{(±)} V_2`。 -/
+theorem commute_V2_epsProj {K2 : ℝ} (hK2 : 0 < K2) (η : ℂ) : Commute (V2 M K2) (epsProj M η) :=
+  commute_epsProj_of_commute_epsilon η (epsilon_commute_V2 hK2).symm
+
+theorem commute_V1pm_epsProj (K1 ηsign η : ℂ) : Commute (V1pm M K1 ηsign) (epsProj M η) :=
+  commute_epsProj_of_commute_epsilon η (epsilon_commute_V1pm K1 ηsign).symm
+
+theorem commute_V1pmHalf_epsProj (K1 ηsign η : ℂ) : Commute (V1pmHalf M K1 ηsign) (epsProj M η) :=
+  commute_epsProj_of_commute_epsilon η (epsilon_commute_V1pmHalf K1 ηsign).symm
 
 end Ising2D

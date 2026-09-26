@@ -1,0 +1,6 @@
+  M_col=1: ⊠ の成分定義 = tensor_product、f_ι(μ) = 第 ord(μ) 標準基底 -> PASS
+  M_col=2: ⊠ の成分定義 = tensor_product、f_ι(μ) = 第 ord(μ) 標準基底 -> PASS
+  M_col=3: ⊠ の成分定義 = tensor_product、f_ι(μ) = 第 ord(μ) 標準基底 -> PASS
+  M_col=4: ⊠ の成分定義 = tensor_product、f_ι(μ) = 第 ord(μ) 標準基底 -> PASS
+  M_col=5: ⊠ の成分定義 = tensor_product、f_ι(μ) = 第 ord(μ) 標準基底 -> PASS
+RESULT: PASS

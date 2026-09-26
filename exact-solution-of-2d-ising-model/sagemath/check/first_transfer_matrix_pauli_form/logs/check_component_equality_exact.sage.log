@@ -1,0 +1,25 @@
+  M_col=1, exp(K_1)=2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=1, exp(K_1)=3/2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=1, exp(K_1)=5/4: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=1, exp(K_1)=7/3: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=2, exp(K_1)=2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=2, exp(K_1)=3/2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=2, exp(K_1)=5/4: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=2, exp(K_1)=7/3: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=3, exp(K_1)=2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=3, exp(K_1)=3/2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=3, exp(K_1)=5/4: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=3, exp(K_1)=7/3: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=4, exp(K_1)=2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=4, exp(K_1)=3/2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=4, exp(K_1)=5/4: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=4, exp(K_1)=7/3: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=5, exp(K_1)=2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=5, exp(K_1)=3/2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=5, exp(K_1)=5/4: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=5, exp(K_1)=7/3: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=6, exp(K_1)=2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=6, exp(K_1)=3/2: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=6, exp(K_1)=5/4: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+  M_col=6, exp(K_1)=7/3: V_1（成分定義） = exp(K_1 D)（厳密）と成分の 5 段 -> PASS
+RESULT: PASS

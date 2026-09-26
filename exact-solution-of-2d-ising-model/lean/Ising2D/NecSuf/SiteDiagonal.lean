@@ -2,7 +2,7 @@
 # 必要十分版: 「因子がすべて対角なら積も対角」
 
 対応する人手証明のラベル: **`sigma_z_diagonal_action`**
-（具体版は `Ising2D/Part010/Claim002_SigmaZDiagonal.lean`）
+（具体版は `Ising2D/Part004/ClaimSigmaZDiagonalAction.lean`）
 
 ## この主張に本質的に効いている構造は何か
 

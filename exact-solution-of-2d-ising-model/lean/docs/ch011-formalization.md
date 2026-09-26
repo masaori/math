@@ -42,7 +42,7 @@
 | `Ising2D.mul_pow_mul_eq` | `V₁(V₂V₁)^k V₂ = (V₁V₂)^{k+1}` | 同上の最後の等号 |
 | **`Ising2D.trace_symTransfer_pow`** | `tr(W^n) = tr((V₁V₂)^n)` | **`Z_equals_trace_of_W`** |
 | `Ising2D.physicalV1halfR` / `physicalV2R` / `physicalSymTransferR` | 章 011 の物理的な `V₁^{1/2}`, `V₂`, `W` を実成分で定義 | `def_transfer_matrix_square_root`, `def_symmetrized_transfer_matrix` |
-| `Ising2D.physicalV1halfC` / `physicalSymTransferC` | 同じ物理的行列を章 010 の Pauli 表示から複素行列として定義 | 同上 |
+| `Ising2D.physicalV1halfC` / `physicalSymTransferC` | 同じ物理的行列を複素行列として定義（`V₁^{1/2} = exp(½K₁D)` は `V1PauliForm` の `K₁/2` での値、`V₂` は `def_transfer_matrix` の `Ising2D.V2`） | 同上 |
 | **`Ising2D.physicalSymTransferC_eq_map`** | 複素側の物理的転送行列は実行列 `W` の成分ごとの複素化に一致 | **`def_symmetrized_transfer_matrix` の章間接続** |
 | **`Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym`** | 実行列 `W` の複素化について `W P^{(±)} = V^{(±)}P^{(±)}` | **`symmetrized_transfer_matrix_on_sectors`** |
 | `Ising2D.symTransfer_isSymm` | `W` は実対称 | `W_is_real_symmetric_positive_definite` Step 3 |
@@ -135,15 +135,15 @@
 
 ## 3. 他章に仮定として置いた事実
 
-章 009 / 010 の Lean 形式化は本タスクの担当外なので、次を **import せず仮定として受け取っている**。
+章 009 / 010 などの結果は、次を **import せず仮定として受け取っている**（本章の定理は一般の実行列について述べてある）。
 （`Part011/Definition001_SymmetrizedTransferMatrix.lean` と
 `Part011/Claim009_PartitionFunctionSandwich.lean` の冒頭コメントにも明記した。）
 
 | 仮定 | 対応する人手証明 | Lean での受け取り方 |
 | --- | --- | --- |
-| `Z(J,J') = tr((V₁V₂)^{N_row})` | `partition_function_in_pauli_form`（章 010） | `partition_function_sandwich` の引数 `hZ` |
+| `Z(K_1,K_2) = tr((V₁V₂)^{N_row})` | `partition_function_via_transfer_matrix`（章 001。Lean では `Ising2D.partition_function_via_transfer_matrix`） | `partition_function_sandwich` の引数 `hZ` |
 | `V₁^{1/2}` が正の対角行列 | `sigma_z_diagonal_action` + `exp_of_diagonal_matrix`（章 009） | `Ising2D.diagExp d`（`d : n → ℝ`）として与える。`d μ = (1/2)K₁∑_m μ(m)μ(m+1)` に対応 |
-| `V₂` の成分がすべて正 | `V2_component_equals_pauli`（章 010） | `symTransfer_entry_pos` の引数 `hV2` |
+| `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2` |
 | `V₂` が実対称正定値 | `iH_is_real_symmetric` + `exp_hermitian_is_positive_definite`（章 009） | `symTransfer_posDef` / `partition_function_sandwich` の引数。**`Ising2D.matExp_posDef` を本ファイルで証明してあるので、章 009 が形式化されればそのまま接続できる** |
 | `ε` が実対称・`ε² = 1`・`εW = Wε` | `epsilon_commutes_with_transfer_matrices`（章 009/010） | `sector_decomposition_of_rayleigh_sup` の引数 `hε`, `hεε`, `hcomm` |
 

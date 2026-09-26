@@ -1,0 +1,7 @@
+  M_col=1: V_2（成分定義、ord で指す） = A^(⊠M_col) を Laurent 多項式として、成分の 5 段も -> PASS
+  M_col=2: V_2（成分定義、ord で指す） = A^(⊠M_col) を Laurent 多項式として、成分の 5 段も -> PASS
+  M_col=3: V_2（成分定義、ord で指す） = A^(⊠M_col) を Laurent 多項式として、成分の 5 段も -> PASS
+  M_col=4: V_2（成分定義、ord で指す） = A^(⊠M_col) を Laurent 多項式として、成分の 5 段も -> PASS
+  M_col=5: V_2（成分定義、ord で指す） = A^(⊠M_col) を Laurent 多項式として、成分の 5 段も -> PASS
+  M_col=6: V_2（成分定義、ord で指す） = A^(⊠M_col) を Laurent 多項式として、成分の 5 段も -> PASS
+RESULT: PASS

@@ -1,7 +1,7 @@
 /-
 # 対角行列の指数関数
 
-対応する人手証明（正本は `structured-latex/content/010_transfer_matrix_bridge.ts`）:
+対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
 
 * `bridge_003_claim_exp_of_diagonal`（ラベル **`exp_of_diagonal_matrix`**）
 
@@ -18,7 +18,7 @@
   連続な環準同型 `Matrix.diagonalRingHom` と `Pi.evalRingHom` への特殊化から導いたもの）
 の 2 本を置く。
 -/
-import Ising2D.Part010.Definition001_ConfigBasisIso
+import Ising2D.Part004.DefinitionConfigBasisIso
 import Ising2D.NecSuf.ExpDiagonal
 import Ising2D.Representation
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential

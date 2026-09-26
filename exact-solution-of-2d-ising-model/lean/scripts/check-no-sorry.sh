@@ -34,6 +34,39 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 targets=(
   Ising2D.tensorPowBasis
+  Ising2D.card_spinVal
+  Ising2D.spinBit_eq
+  Ising2D.rowConfigOrd
+  Ising2D.geom_sum_two
+  Ising2D.rowConfigOrd_mem_Icc
+  Ising2D.tail_sum_two_pow
+  Ising2D.rowConfigOrd_sub_pos_of_first_diff
+  Ising2D.rowConfigOrd_injective
+  Ising2D.card_spinConf
+  Ising2D.row_configuration_numbering_bijective
+  Ising2D.kroneckerNumbering
+  Ising2D.config_numbering_equals_kronecker_numbering
+  Ising2D.V1
+  Ising2D.V2
+  Ising2D.V1_apply_configBasisIso
+  Ising2D.V2_apply_configBasisIso
+  Ising2D.V1_eq_diagonal
+  Ising2D.V2_apply
+  Ising2D.partitionFunction
+  Ising2D.Kstar
+  Ising2D.commute_V1_epsProj
+  Ising2D.commute_V2_epsProj
+  Ising2D.sector_replacement_pow
+  Ising2D.partition_function_sector_decomposition
+  Ising2D.V2Units
+  Ising2D.V2Units_eq_V2H2FormUnits
+  Ising2D.isUnit_V2
+  Ising2D.V1plusHalf_mul_V2_mul_V1plusHalf
+  Ising2D.TV_V1plusHalfUnits_V2Units
+  Ising2D.TConj_V2_checkZ
+  Ising2D.TConj_V2_checkY
+  Ising2D.linearity_of_T_V2
+  Ising2D.linearity_of_T_V2H2Form
   Ising2D.matTensorPowBasis
   Ising2D.NecSuf.matrix_eq_sum_smul_single
   Ising2D.NecSuf.sum_smul_single_apply
@@ -66,7 +99,8 @@ targets=(
   Ising2D.Y_mul_Z_next_of_not_last
   Ising2D.epsilon_mul_Y_mul_Z_next_of_last
   Ising2D.sum_sigmaZ_sigmaZ_eq_jordanWigner
-  Ising2D.V1pauli_eq_jordanWigner
+  Ising2D.V1PauliForm_eq_jordanWigner
+  Ising2D.V1_in_Z_Y_epsilon
   Ising2D.mulVec_mem_sector_of_commute_epsilon
   Ising2D.Y_mul_Z_next_mulVec_mem_sector
   Ising2D.V1JordanWigner_generator_mulVec_mem_sector
@@ -75,7 +109,7 @@ targets=(
   Ising2D.V1_generators_mulVec_eq
   Ising2D.V1_generators_pow_mulVec_eq
   Ising2D.V1_generator_partialSums_mulVec_eq
-  Ising2D.V1pauli_mulVec_eq_V1
+  Ising2D.V1_mulVec_eq_V1pm
   Ising2D.V1_restrictsOnSector_of_opposite_sign
   Ising2D.V1_restrictsOnEvenSector
   Ising2D.V1_restrictsOnOddSector
@@ -203,25 +237,25 @@ targets=(
   Ising2D.H1
   Ising2D.H2
   Ising2D.I_smul_H2_eq_sum_sigmaX
-  Ising2D.V1
-  Ising2D.V1half
-  Ising2D.V2
-  Ising2D.V1half_sq
+  Ising2D.V1pm
+  Ising2D.V1pmHalf
+  Ising2D.V2H2Form
+  Ising2D.V1pmHalf_sq
   Ising2D.matExpUnits
   Ising2D.matExpUnits_val
   Ising2D.matExpUnits_inv
   Ising2D.smulUnits
   Ising2D.smulUnits_val
-  Ising2D.V1Units
-  Ising2D.V1halfUnits
-  Ising2D.V1Units_val
-  Ising2D.V1halfUnits_val
-  Ising2D.isUnit_V1
-  Ising2D.isUnit_V1half
+  Ising2D.V1pmUnits
+  Ising2D.V1pmHalfUnits
+  Ising2D.V1pmUnits_val
+  Ising2D.V1pmHalfUnits_val
+  Ising2D.isUnit_V1pm
+  Ising2D.isUnit_V1pmHalf
   Ising2D.rpow_two_s2_ne_zero
-  Ising2D.V2Units
-  Ising2D.V2Units_val
-  Ising2D.isUnit_V2
+  Ising2D.V2H2FormUnits
+  Ising2D.V2H2FormUnits_val
+  Ising2D.isUnit_V2H2Form
   Ising2D.TConj
   Ising2D.TConj_apply
   Ising2D.TConj_linear
@@ -394,12 +428,12 @@ targets=(
   Ising2D.B2mat_eq_twoDimConjMat
   Ising2D.actsBy_TConj_matExpUnits
   Ising2D.actsBy_TConj_smulUnits
-  Ising2D.ad_V1half_hatZMinus
-  Ising2D.ad_V1half_hatY
-  Ising2D.actsBy_TConj_V1half
-  Ising2D.ad_V2_hatZMinus
-  Ising2D.ad_V2_hatY
-  Ising2D.actsBy_TConj_V2
+  Ising2D.ad_V1pmHalf_hatZMinus
+  Ising2D.ad_V1pmHalf_hatY
+  Ising2D.actsBy_TConj_V1pmHalf
+  Ising2D.ad_V2H2Form_hatZMinus
+  Ising2D.ad_V2H2Form_hatY
+  Ising2D.actsBy_TConj_V2H2Form
   Ising2D.TV_hatZ_hatY
   Ising2D.TV_psiDag
   Ising2D.TV_psi
@@ -460,9 +494,11 @@ targets=(
   Ising2D.exp_pi_apply
   Ising2D.matrixExp_diagonal
   Ising2D.matrixExp_diagonal_apply
-  Ising2D.V1pauli_eq_diagonal
-  Ising2D.V1pauli_eq_V1comp
-  Ising2D.V1_component_equals_pauli
+  Ising2D.V1PauliForm_eq_diagonal
+  Ising2D.V1PauliForm_apply_configBasisIso
+  Ising2D.first_transfer_matrix_pauli_form
+  Ising2D.sigmaZ_nextSite_of_last
+  Ising2D.sum_sigmaZ_sigmaZ_mulVec_basisVec_spin
   Ising2D.exp_smul_pauliX
   Ising2D.exp_smul_pauliX_eq_cosh_add_sinh
   Ising2D.exp_neg_Kstar
@@ -471,17 +507,24 @@ targets=(
   Ising2D.sqrt_two_s2_mul_sinh_Kstar
   Ising2D.two_by_two_transfer_identity
   Ising2D.exp_smul_sum_sigmaX
-  Ising2D.V2_eq_V2pauli
-  Ising2D.V2comp_eq_siteProd_twoByTwo
-  Ising2D.V2pauli_eq_V2comp
-  Ising2D.V2_component_equals_pauli
+  Ising2D.V2PauliForm_eq_V2H2Form
+  Ising2D.V2_apply_configBasisIso_eq_siteProd
+  Ising2D.V2_eq_siteProd_twoByTwo
+  Ising2D.siteOp_pow
+  Ising2D.exp_smul_sigmaX
+  Ising2D.noncommProd_siteOp
+  Ising2D.secondTransferPrefactor_eq_rpow
+  Ising2D.second_transfer_matrix_pauli_form_prefactor
+  Ising2D.second_transfer_matrix_pauli_form
+  Ising2D.V2PauliForm_eq_V2FromJordanWigner
+  Ising2D.V2_in_Z_Y
+  Ising2D.V2_exponential_representation
   Ising2D.NecSuf.openW_snoc
   Ising2D.NecSuf.pow_succ_apply_eq_sum
   Ising2D.NecSuf.trace_pow_succ
-  Ising2D.partitionFunction_eq_conf
-  Ising2D.partitionFunctionC_eq_trace
-  Ising2D.partition_function_in_pauli_form
-  Ising2D.partition_function_in_pauli_form_V2
+  Ising2D.rowsToLattice_apply
+  Ising2D.V1_mul_V2_apply
+  Ising2D.partition_function_via_transfer_matrix
   Ising2D.NecSuf.invProj_sq
   Ising2D.NecSuf.invProj_mul_invProj_neg
   Ising2D.NecSuf.invProj_add_invProj_neg
@@ -517,10 +560,12 @@ targets=(
   Ising2D.epsilon_commute_sigmaX
   Ising2D.epsilon_anticomm_sigmaZ
   Ising2D.epsilon_anticomm_sigmaY
-  Ising2D.epsilon_commute_V1pauli
-  Ising2D.epsilon_commute_V2pauli
+  Ising2D.epsilon_commute_V1PauliForm
   Ising2D.epsilon_commute_V1
-  Ising2D.epsilon_commute_V1half
+  Ising2D.epsilon_commute_V2PauliForm
+  Ising2D.epsilon_commute_V2
+  Ising2D.epsilon_commute_V1pm
+  Ising2D.epsilon_commute_V1pmHalf
   Ising2D.commute_epsProj_of_commute_epsilon
   Ising2D.sector_replacement_of_V1
   Ising2D.sector_replacement_pow
@@ -884,7 +929,7 @@ targets=(
   Ising2D.VPlus_eq_smul_checkVprime
   Ising2D.VPlus
   Ising2D.isUnit_VPlus
-  Ising2D.V1halfPlus_sq
+  Ising2D.V1plusHalf_sq
   Ising2D.TVPlus_eq_TConj
   Ising2D.nesting_H1Plus_checkZ_even
   Ising2D.nesting_H1Plus_checkZ_odd
@@ -906,13 +951,13 @@ targets=(
   Ising2D.extract_taylor_H1Plus_checkY
   Ising2D.extract_taylor_H2_checkZ
   Ising2D.extract_taylor_H2_checkY
-  Ising2D.TConj_V1halfPlus_checkZ
-  Ising2D.TConj_V1halfPlus_checkY
-  Ising2D.TConj_V2_checkZ
-  Ising2D.TConj_V2_checkY
+  Ising2D.TConj_V1plusHalf_checkZ
+  Ising2D.TConj_V1plusHalf_checkY
+  Ising2D.TConj_V2H2Form_checkZ
+  Ising2D.TConj_V2H2Form_checkY
   Ising2D.linearity_of_T_on_check
-  Ising2D.actsBy_TConj_V1halfPlus
-  Ising2D.actsBy_TConj_V2_check
+  Ising2D.actsBy_TConj_V1plusHalf
+  Ising2D.actsBy_TConj_V2H2Form_check
   Ising2D.factorization_of_A_theta_general
   Ising2D.factorization_of_A_thetaTilde
   Ising2D.NecSuf.actsBy_sandwich

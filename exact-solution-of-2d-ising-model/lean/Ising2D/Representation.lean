@@ -160,10 +160,11 @@ section Exponential
 /-!
 ## 行列指数関数が使えること（表現選択の決め手）
 
-人手証明の主対象である転送行列
-`V_1 = exp(√(-1) K_1 (σ^z_1 σ^z_2 + ⋯))`,
-`V_2 = (2 sinh 2K_2)^{M/2} exp(K_2^* (σ^x_1 + ⋯))`
-（`parts/004_転送行列/000_definition_転送行列の記号の定義.typ`）は指数関数を含む。
+人手証明の主対象である転送行列のパウリ行列表示
+`V_1 = exp(K_1 (σ^z_1 σ^z_2 + ⋯))`（`first_transfer_matrix_pauli_form`）,
+`V_2 = (2 sinh 2K_2)^{M/2} exp(K_2^* (σ^x_1 + ⋯))`（`second_transfer_matrix_pauli_form`）
+と、`V_1^{(±)}` などの表式は指数関数を含む（`V_1, V_2` の定義そのものは成分による。
+`Part001/DefinitionTransferMatrix.lean`）。
 
 `TensorPow M = Matrix (Conf M) (Conf M) ℂ` では mathlib の
 `Mathlib.Analysis.Normed.Algebra.MatrixExponential` がそのまま適用できる。

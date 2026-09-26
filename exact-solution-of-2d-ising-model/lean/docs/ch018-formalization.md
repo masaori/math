@@ -294,7 +294,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | **原文が置いている関係**であって形式化の穴ではない（`lean/docs/ch016-formalization.md` 3 章: 「残る仮定は双対関係の 1 つだけ」）。008 章以来 `det A(θ) = 1` に必要 |
 | `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 前半の複素行列等式は章 011 の `physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済み。残るのは `V^{(+)}` の実行列性と、この等式を実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続である |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
-| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 010 の `V2_component_equals_pauli` / `epsilon_commutes_with_transfer_matrices` に依存。章 011 も同じ形で仮定として受け取っている（`lean/docs/ch011-formalization.md` 3 章） |
+| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 011 の `W_has_positive_entries`（章 001 の `def_transfer_matrix` の成分定義による）/ 章 010 の `epsilon_commutes_with_transfer_matrices` に依存。章 011 も同じ形で仮定として受け取っている（`lean/docs/ch011-formalization.md` 3 章） |
 
 `hZ1` / `hZ2` は章 011 `partition_function_sandwich` の内容であり、章 018 の仮定ではない。
 

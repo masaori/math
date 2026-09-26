@@ -1,0 +1,25 @@
+  exp(K_2)=2, M_col=1: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=2, M_col=2: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=2, M_col=3: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=2, M_col=4: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=2, M_col=5: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=2: tanh K_2=3/5（0<tanh K_2<1）、2×2 の恒等式 -> PASS
+  exp(K_2)=3/2, M_col=1: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=3/2, M_col=2: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=3/2, M_col=3: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=3/2, M_col=4: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=3/2, M_col=5: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=3/2: tanh K_2=5/13（0<tanh K_2<1）、2×2 の恒等式 -> PASS
+  exp(K_2)=5/4, M_col=1: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=5/4, M_col=2: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=5/4, M_col=3: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=5/4, M_col=4: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=5/4, M_col=5: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=5/4: tanh K_2=9/41（0<tanh K_2<1）、2×2 の恒等式 -> PASS
+  exp(K_2)=7/3, M_col=1: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=7/3, M_col=2: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=7/3, M_col=3: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=7/3, M_col=4: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=7/3, M_col=5: V_2（成分定義） = (2 sinh 2K_2)^(M/2) exp(K_2^* Σσ^x) と結論の 5 段 -> PASS
+  exp(K_2)=7/3: tanh K_2=20/29（0<tanh K_2<1）、2×2 の恒等式 -> PASS
+RESULT: PASS

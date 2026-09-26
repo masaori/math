@@ -1,5 +1,5 @@
 /-
-# `H_1^{(±)}`, `H_2` の定義と転送行列 `V_1^{(±)}`, `V_2` の定義
+# `H_1^{(±)}`, `H_2` の定義、`V_1^{(±)}` の定義、`V_2` の指数表示の右辺
 
 対応する人手証明（正本は `structured-latex/content/*.ts`）:
 
@@ -12,7 +12,8 @@
   * `transfer_matrix_007_definition_V1_pm`
     — `V_1^{(±)} := exp(√-1 K_1 (Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1))`
   * `transfer_matrix_003a_claim_V2_in_Z_Y`（ラベル `V2_in_Z_Y`）
-    — `V_2 = (2s_2)^{M/2} exp(√-1 K_2^* (Z_1Y_1 + ⋯ + Z_MY_M))`
+    — `V_2 = (2s_2)^{M/2} exp(√-1 K_2^* (Z_1Y_1 + ⋯ + Z_MY_M))` の右辺（`V2FromJordanWigner`）と
+      Step 2 の直後の等式の有限和版（`I_smul_H2_eq_sum_sigmaX`）
   * `transfer_matrix_011a_definition_H1_pm`（ラベル `def_H1_pm`）
     — `H_1^{(±)} := Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1`
   * `transfer_matrix_011b_definition_H2`（ラベル `def_H2`）
@@ -22,7 +23,9 @@
     — `V_1^{(±)} = exp(√-1 K_1 H_1^{(±)})`
   * `transfer_matrix_011d_claim_V2_exponential_representation`
     （ラベル `V2_exponential_representation`）
-    — `V_2 = (2 s_2)^{M/2} exp(√-1 K_2^* H_2)`
+    — `V_2 = (2 s_2)^{M/2} exp(√-1 K_2^* H_2)` の右辺（`V2H2Form`）
+  * 人手の `V_2`（`def_transfer_matrix`）そのものについての主張 `V2_in_Z_Y`・
+    `V2_exponential_representation` は `Part004/ClaimV2InZY.lean` にある。
 （旧 Typst の対応ファイルは `_old/typst/parts/004_転送行列/006, 010`。）
 
 ## 形式化の方針
@@ -57,17 +60,11 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
 `def_transfer_matrix_symbols` の「`K_i, K_i^* > 0` より `c_i, s_i, c_i^*, s_i^* > 0`」）
 を可逆性の証明で明示的な仮定として置く。
 
-## 原文の問題点
+## `√-1 H_2 = ∑_m σ^x_m`
 
-* `transfer_matrix_001_definition_symbols` の `V_2` は
-  `(2 sinh 2K_2)^{M/2} exp(K_2^*(σ^x_1 + ⋯ + σ^x_M))` と書かれているのに対し、
-  `transfer_matrix_011d_claim_V2_exponential_representation` の `V_2` は
-  `(2 s_2)^{M/2} exp(√-1 K_2^* H_2)` である。
-  両者が一致するには `√-1 H_2 = σ^x_1 + ⋯ + σ^x_M`、すなわち
-  `√-1 Z_m Y_m = σ^x_m` が要る。実際 `Z_m Y_m = -√-1 σ^x_m`
-  （`Ising2D.Z_mul_Y_same`）なので `√-1 Z_m Y_m = √-1 · (-√-1) σ^x_m = σ^x_m` で一致する。
-  原文はこの等式を明示していない（`transfer_matrix_011` は「よって、」とだけ書く）。
-  本ファイルでは `I_smul_H2_eq_sum_sigmaX`（`√-1 H_2 = ∑_m σ^x_m`）として補って証明する。
+人手 `V2_in_Z_Y` の Step 2 の直後の等式 `σ^x_m = √-1 Z_m Y_m`（`Ising2D.Z_mul_Y_same` から従う）を
+全サイトで足し合わせたものが `I_smul_H2_eq_sum_sigmaX` である。人手 `V2_in_Z_Y` の Step 3 は
+これを指数の肩の等式として使う。
 -/
 import Ising2D.Part004.Definition009_HatZHatY
 import Ising2D.Representation
@@ -121,9 +118,9 @@ noncomputable def H2 (M : ℕ) : TensorPow M := ∑ m : Fin M, Z m * Y m
 
 Step 0–2 の単一サイト計算とクロネッカー積への持ち上げは
 `Ising2D.Z_mul_Y_same` が担い、本定理が各サイトの等式を有限和へ持ち上げる。
-これにより `def_transfer_matrix_symbols` の `V_2` の指数
-`K_2^*(σ^x_1 + ⋯)` と `transfer_matrix_011d_claim_V2_exponential_representation` の指数
-`√-1 K_2^* H_2` が一致する。
+これにより `second_transfer_matrix_pauli_form` の `V_2` の指数
+`K_2^*(σ^x_1 + ⋯)` と `V2_exponential_representation` の指数
+`√-1 K_2^* H_2` が一致する（人手 `V2_in_Z_Y` Step 3）。
 
 `Z_m Y_m = -√-1 σ^x_m`（`Ising2D.Z_mul_Y_same`）より `√-1 H_2 = ∑_m σ^x_m`。 -/
 theorem I_smul_H2_eq_sum_sigmaX :
@@ -228,54 +225,67 @@ theorem indexedHyperbolicAbbreviations_pos
     lt_trans hS2star hS2starLtC2star
   exact ⟨hC1, hS1, hC1star, hS1star, hC2, hS2, hC2star, hS2star⟩
 
-/-! ## 転送行列 `V_1^{(±)}`, `(V_1^{(±)})^{1/2}`, `V_2` -/
+/-! ## `V_1^{(±)}`, `(V_1^{(±)})^{1/2}` と、`V_2` の二つの指数表示の右辺
+
+ここで定義する名前の整理:
+
+* `V1pm M K1 η` は人手 `def_V1_pm` の `V_1^{(±)}`（`η` が人手の `∓1`）。
+  人手 `def_transfer_matrix` の `V_1` とは別の行列であり、`V_1` は
+  `Ising2D.V1`（`Part001/DefinitionTransferMatrix.lean`）である。
+* `V2FromJordanWigner M s2 K2star`, `V2H2Form M s2 K2star` は、人手 `V2_in_Z_Y`・
+  `V2_exponential_representation` の**右辺の式**に名前を付けたもの。`s2`, `K2star` を
+  独立な引数として持つ一般化であり、人手の `V_2`（`Ising2D.V2`）と一致するのは
+  `s2 = sinh 2K_2`, `K2star = K_2^*` のとき（`Part004/ClaimV2InZY.lean` の
+  `V2_in_Z_Y` / `V2_exponential_representation`）。
+-/
 
 /-- **人手本文 `def_V1_pm` の有限和を省略しない定義**。
 `H1` という名前を使わず、境界項を含む有限和をそのまま指数へ入れる。 -/
-noncomputable def V1FromDefinition (M : ℕ) (K1 η : ℂ) : TensorPow M :=
+noncomputable def V1pmFromDefinition (M : ℕ) (K1 η : ℂ) : TensorPow M :=
   matExp ((Complex.I * K1) •
     (∑ m : Fin M, lastSign η m • (Y m * Z (nextSite m))))
 
-/-- **原文の `V_1^{(±)} = exp(√-1 K_1 H_1^{(±)})`**。 -/
-noncomputable def V1 (M : ℕ) (K1 η : ℂ) : TensorPow M :=
+/-- **人手の `V_1^{(±)} = exp(√-1 K_1 H_1^{(±)})`**（`η` が人手の `∓1`）。 -/
+noncomputable def V1pm (M : ℕ) (K1 η : ℂ) : TensorPow M :=
   matExp ((Complex.I * K1) • H1 M η)
 
 /-- **人手本文 `V1_pm_exponential_representation` の具体版**。
 `def_V1_pm` の有限和を `def_H1_pm` の `H_1^{(±)}` へ置き換える一段に対応する。 -/
-theorem V1_exponential_representation (M : ℕ) (K1 η : ℂ) :
-    V1FromDefinition M K1 η = V1 M K1 η := by
+theorem V1pm_exponential_representation (M : ℕ) (K1 η : ℂ) :
+    V1pmFromDefinition M K1 η = V1pm M K1 η := by
   rfl
 
-/-- **原文の `(V_1^{(±)})^{1/2} = exp((1/2)√-1 K_1 H_1^{(±)})`**
-（`TV1_hatZ_hatY_012_claim_TV1_TV2_actions` の証明で使われている表式。
-原文は「`exp(X)` の `1/2` 乗」を `exp(X/2)` と読み替えているが、
-一般の行列の平方根は一意でないので、Lean では `exp(X/2)` の方を定義とする）。 -/
-noncomputable def V1half (M : ℕ) (K1 η : ℂ) : TensorPow M :=
+/-- **人手 `def_V1_pm_square_root` の `(V_1^{(±)})^{1/2} = exp((1/2)√-1 K_1 H_1^{(±)})`**。
+人手も最初から `exp(X/2)` を定義に採っている（一般の行列の平方根は一意でないため）。 -/
+noncomputable def V1pmHalf (M : ℕ) (K1 η : ℂ) : TensorPow M :=
   matExp (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)
 
-/-- **人手本文 `V2_in_Z_Y` の有限和を省略しない表示**。 -/
+/-- **人手 `V2_in_Z_Y` の右辺** `(2s_2)^{M/2} exp(√-1 K_2^* (Z_1Y_1 + ⋯ + Z_MY_M))`
+（有限和を省略しない表示。`s2`, `K2star` は独立な引数）。 -/
 noncomputable def V2FromJordanWigner
     (M : ℕ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
   ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ)) •
     matExp ((Complex.I * K2star) • (∑ m : Fin M, Z m * Y m))
 
-/-- **原文の `V_2 = (2 s_2)^{M/2} exp(√-1 K_2^* H_2)`**。
+/-- **人手 `V2_exponential_representation` の右辺** `(2 s_2)^{M/2} exp(√-1 K_2^* H_2)`
+（`s2`, `K2star` は独立な引数）。
 `(2 s_2)^{M/2}` は `M` が奇数のとき実冪なので `Real.rpow` を使う。 -/
-noncomputable def V2 (M : ℕ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
+noncomputable def V2H2Form (M : ℕ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
   ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ)) • matExp ((Complex.I * K2star) • H2 M)
 
-/-- **人手本文 `V2_exponential_representation` の具体版**。
-`V2_in_Z_Y` の有限和を `def_H2` の `H_2` へ置き換える一段に対応する。 -/
-theorem V2_exponential_representation (M : ℕ) (s2 : ℝ) (K2star : ℂ) :
-    V2FromJordanWigner M s2 K2star = V2 M s2 K2star := by
+/-- 人手 `V2_exponential_representation` の証明の第 2 段（`def_H2` で有限和を `H_2` に置き換える）を、
+右辺の式どうしの等式として述べたもの。人手の `V_2` についての主張は
+`Ising2D.V2_exponential_representation`（`Part004/ClaimV2InZY.lean`）。 -/
+theorem V2FromJordanWigner_eq_V2H2Form (M : ℕ) (s2 : ℝ) (K2star : ℂ) :
+    V2FromJordanWigner M s2 K2star = V2H2Form M s2 K2star := by
   rfl
 
 /-- `V_1^{(±)} = ((V_1^{(±)})^{1/2})^2`（「平方根」の名に値することの確認）。 -/
-theorem V1half_sq (K1 η : ℂ) :
-    V1half M K1 η * V1half M K1 η = V1 M K1 η := by
+theorem V1pmHalf_sq (K1 η : ℂ) :
+    V1pmHalf M K1 η * V1pmHalf M K1 η = V1pm M K1 η := by
   have h : Commute (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)
       (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η) := Commute.refl _
-  rw [V1half, V1, matExp, matExp, ← Matrix.exp_add_of_commute _ _ h, ← two_smul ℂ]
+  rw [V1pmHalf, V1pm, matExp, matExp, ← Matrix.exp_add_of_commute _ _ h, ← two_smul ℂ]
   congr 1
   rw [smul_smul]
   congr 1
@@ -320,24 +330,24 @@ theorem smulUnits_val (c : ℂ) (hc : c ≠ 0) (u : (TensorPow M)ˣ) :
     ((smulUnits c hc u : (TensorPow M)ˣ) : TensorPow M) = c • (u : TensorPow M) := rfl
 
 /-- `V_1^{(±)}` を単元として。 -/
-noncomputable def V1Units (M : ℕ) (K1 η : ℂ) : (TensorPow M)ˣ :=
+noncomputable def V1pmUnits (M : ℕ) (K1 η : ℂ) : (TensorPow M)ˣ :=
   matExpUnits ((Complex.I * K1) • H1 M η)
 
 /-- `(V_1^{(±)})^{1/2}` を単元として。 -/
-noncomputable def V1halfUnits (M : ℕ) (K1 η : ℂ) : (TensorPow M)ˣ :=
+noncomputable def V1pmHalfUnits (M : ℕ) (K1 η : ℂ) : (TensorPow M)ˣ :=
   matExpUnits (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)
 
 @[simp]
-theorem V1Units_val (K1 η : ℂ) :
-    ((V1Units M K1 η : (TensorPow M)ˣ) : TensorPow M) = V1 M K1 η := rfl
+theorem V1pmUnits_val (K1 η : ℂ) :
+    ((V1pmUnits M K1 η : (TensorPow M)ˣ) : TensorPow M) = V1pm M K1 η := rfl
 
 @[simp]
-theorem V1halfUnits_val (K1 η : ℂ) :
-    ((V1halfUnits M K1 η : (TensorPow M)ˣ) : TensorPow M) = V1half M K1 η := rfl
+theorem V1pmHalfUnits_val (K1 η : ℂ) :
+    ((V1pmHalfUnits M K1 η : (TensorPow M)ˣ) : TensorPow M) = V1pmHalf M K1 η := rfl
 
-theorem isUnit_V1 (K1 η : ℂ) : IsUnit (V1 M K1 η) := ⟨V1Units M K1 η, rfl⟩
+theorem isUnit_V1pm (K1 η : ℂ) : IsUnit (V1pm M K1 η) := ⟨V1pmUnits M K1 η, rfl⟩
 
-theorem isUnit_V1half (K1 η : ℂ) : IsUnit (V1half M K1 η) := ⟨V1halfUnits M K1 η, rfl⟩
+theorem isUnit_V1pmHalf (K1 η : ℂ) : IsUnit (V1pmHalf M K1 η) := ⟨V1pmHalfUnits M K1 η, rfl⟩
 
 /-- `(2 s_2)^{M/2} ≠ 0`（`s_2 > 0` のとき）。原文 `def_transfer_matrix_symbols` 末尾の
 「`K_i > 0` より `s_i > 0`」に対応する仮定。 -/
@@ -346,17 +356,18 @@ theorem rpow_two_s2_ne_zero {s2 : ℝ} (hs2 : 0 < s2) (M : ℕ) :
   refine Complex.ofReal_ne_zero.mpr (ne_of_gt ?_)
   exact Real.rpow_pos_of_pos (by linarith) _
 
-/-- `V_2` を単元として。スカラー因子が 0 でないために `s_2 > 0` を要する。 -/
-noncomputable def V2Units (M : ℕ) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) : (TensorPow M)ˣ :=
+/-- `V2H2Form` を単元として。スカラー因子が 0 でないために `s_2 > 0` を要する。 -/
+noncomputable def V2H2FormUnits (M : ℕ) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) : (TensorPow M)ˣ :=
   smulUnits ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ)) (rpow_two_s2_ne_zero hs2 M)
     (matExpUnits ((Complex.I * K2star) • H2 M))
 
 @[simp]
-theorem V2Units_val {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) :
-    ((V2Units M hs2 K2star : (TensorPow M)ˣ) : TensorPow M) = V2 M s2 K2star := rfl
+theorem V2H2FormUnits_val {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) :
+    ((V2H2FormUnits M hs2 K2star : (TensorPow M)ˣ) : TensorPow M) = V2H2Form M s2 K2star := rfl
 
-/-- **原文 `V2_invertible`**: `V_2` は可逆。 -/
-theorem isUnit_V2 {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) : IsUnit (V2 M s2 K2star) :=
-  ⟨V2Units M hs2 K2star, rfl⟩
+/-- `V2H2Form` は可逆（人手 `V2_invertible` の一般化。人手の `V_2` については
+`Ising2D.isUnit_V2`（`Part004/ClaimV2InZY.lean`））。 -/
+theorem isUnit_V2H2Form {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) : IsUnit (V2H2Form M s2 K2star) :=
+  ⟨V2H2FormUnits M hs2 K2star, rfl⟩
 
 end Ising2D

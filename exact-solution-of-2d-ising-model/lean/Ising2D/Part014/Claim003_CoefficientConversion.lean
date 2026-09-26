@@ -33,7 +33,7 @@ variable {M : ℕ}
 /-! ## `ad((i/2)K_1H_1^{(+)})` が `span{check(Z)_μ, check(Y)_μ}` を保つこと -/
 
 /-- 原文 (A) を `(i/2)K_1` 倍したもの。 -/
-theorem ad_V1halfPlus_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
+theorem ad_V1plusHalf_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
     (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) * checkZ M μ -
         checkZ M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1))
       = (Complex.I * K1 * checkPhase M 1 μ) • checkY M μ := by
@@ -43,7 +43,7 @@ theorem ad_V1halfPlus_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
   ring
 
 /-- 原文 (B) を `(i/2)K_1` 倍したもの。 -/
-theorem ad_V1halfPlus_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
+theorem ad_V1plusHalf_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
     (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) * checkY M μ -
         checkY M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1))
       = (-Complex.I * K1 * checkPhase M (-1) μ) • checkZ M μ := by
@@ -62,7 +62,7 @@ theorem sK1_sq (M : ℕ) (K1 : ℂ) (μ : ℤ) :
 /-! ## `ad(i K_2^* H_2)` が `span{check(Z)_μ, check(Y)_μ}` を保つこと -/
 
 /-- 原文 (C) を `i K_2^*` 倍したもの。 -/
-theorem ad_V2_checkZ (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem ad_V2H2Form_checkZ (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
     ((Complex.I * K2star) • H2 M) * checkZ M μ -
         checkZ M μ * ((Complex.I * K2star) • H2 M)
       = (-(2 * Complex.I * K2star)) • checkY M μ := by
@@ -71,7 +71,7 @@ theorem ad_V2_checkZ (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
   ring
 
 /-- 原文 (D) を `i K_2^*` 倍したもの。 -/
-theorem ad_V2_checkY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem ad_V2H2Form_checkY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
     ((Complex.I * K2star) • H2 M) * checkY M μ -
         checkY M μ * ((Complex.I * K2star) • H2 M)
       = (2 * Complex.I * K2star) • checkZ M μ := by
@@ -110,14 +110,14 @@ private theorem adPow_odd_y_aux {X z y : TensorPow M} {α β s : ℂ}
 theorem conversion_H1Plus_checkZ_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) (2 * k) (checkZ M μ)
       = (K1 ^ (2 * k)) • checkZ M μ :=
-  (adPow_even_aux (ad_V1halfPlus_checkZ hM K1 μ) (ad_V1halfPlus_checkY hM K1 μ)
+  (adPow_even_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
     (sK1_sq M K1 μ) k).1
 
 /-- **原文 (h1.z) 奇数側**: `n = 2k+1` のとき `i K_1^{2k+1} e^{-iθ~_μ} check(Y)_μ`。 -/
 theorem conversion_H1Plus_checkZ_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) (2 * k + 1) (checkZ M μ)
       = (Complex.I * K1 ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ := by
-  rw [adPow_odd_z_aux (ad_V1halfPlus_checkZ hM K1 μ) (ad_V1halfPlus_checkY hM K1 μ)
+  rw [adPow_odd_z_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
     (sK1_sq M K1 μ) k]
   congr 1
   rw [pow_succ]
@@ -127,14 +127,14 @@ theorem conversion_H1Plus_checkZ_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : �
 theorem conversion_H1Plus_checkY_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) (2 * k) (checkY M μ)
       = (K1 ^ (2 * k)) • checkY M μ :=
-  (adPow_even_aux (ad_V1halfPlus_checkZ hM K1 μ) (ad_V1halfPlus_checkY hM K1 μ)
+  (adPow_even_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
     (sK1_sq M K1 μ) k).2
 
 /-- **原文 (h1.y) 奇数側**: `n = 2k+1` のとき `-i K_1^{2k+1} e^{iθ~_μ} check(Z)_μ`。 -/
 theorem conversion_H1Plus_checkY_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) (2 * k + 1) (checkY M μ)
       = (-Complex.I * K1 ^ (2 * k + 1) * checkPhase M (-1) μ) • checkZ M μ := by
-  rw [adPow_odd_y_aux (ad_V1halfPlus_checkZ hM K1 μ) (ad_V1halfPlus_checkY hM K1 μ)
+  rw [adPow_odd_y_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
     (sK1_sq M K1 μ) k]
   congr 1
   rw [pow_succ]
@@ -146,13 +146,13 @@ theorem conversion_H1Plus_checkY_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : �
 theorem conversion_H2_checkZ_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkZ M μ)
       = ((2 * K2star) ^ (2 * k)) • checkZ M μ :=
-  (adPow_even_aux (ad_V2_checkZ hM K2star μ) (ad_V2_checkY hM K2star μ) (sK2_sq K2star) k).1
+  (adPow_even_aux (ad_V2H2Form_checkZ hM K2star μ) (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star) k).1
 
 /-- **原文 (h2.z) 奇数側**: `n = 2k+1` のとき `-i (2K_2^*)^{2k+1} check(Y)_μ`。 -/
 theorem conversion_H2_checkZ_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkZ M μ)
       = (-Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkY M μ := by
-  rw [adPow_odd_z_aux (ad_V2_checkZ hM K2star μ) (ad_V2_checkY hM K2star μ) (sK2_sq K2star) k]
+  rw [adPow_odd_z_aux (ad_V2H2Form_checkZ hM K2star μ) (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star) k]
   congr 1
   rw [pow_succ]
   ring
@@ -161,13 +161,13 @@ theorem conversion_H2_checkZ_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : �
 theorem conversion_H2_checkY_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkY M μ)
       = ((2 * K2star) ^ (2 * k)) • checkY M μ :=
-  (adPow_even_aux (ad_V2_checkZ hM K2star μ) (ad_V2_checkY hM K2star μ) (sK2_sq K2star) k).2
+  (adPow_even_aux (ad_V2H2Form_checkZ hM K2star μ) (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star) k).2
 
 /-- **原文 (h2.y) 奇数側**: `n = 2k+1` のとき `i (2K_2^*)^{2k+1} check(Z)_μ`。 -/
 theorem conversion_H2_checkY_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkY M μ)
       = (Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ := by
-  rw [adPow_odd_y_aux (ad_V2_checkZ hM K2star μ) (ad_V2_checkY hM K2star μ) (sK2_sq K2star) k]
+  rw [adPow_odd_y_aux (ad_V2H2Form_checkZ hM K2star μ) (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star) k]
   congr 1
   rw [pow_succ]
   ring

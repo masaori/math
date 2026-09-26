@@ -43,8 +43,8 @@
 **この仮定は現在 `Ising2D/Part008/Claim012_TVActions.lean` で証明されており、
 穴は残っていない。** 同ファイルの
 
-* `Ising2D.actsBy_TConj_V1half` — `hT1` にあたる主張（証明済み）
-* `Ising2D.actsBy_TConj_V2` — `hT2` にあたる主張（証明済み）
+* `Ising2D.actsBy_TConj_V1pmHalf` — `hT1` にあたる主張（証明済み）
+* `Ising2D.actsBy_TConj_V2H2Form` — `hT2` にあたる主張（証明済み）
 * `Ising2D.TV_hatZ_hatY` — 原文 `T_V_hatZ_hatY` の**無条件版**
 
 を参照すること。証明は `<commutator_of_H_and_Z_Y>` の (1)(3)(4)(6)

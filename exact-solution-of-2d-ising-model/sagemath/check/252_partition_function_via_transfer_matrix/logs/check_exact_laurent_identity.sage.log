@@ -1,0 +1,16 @@
+  N_row=1, M_col=1: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 1） -> PASS
+  N_row=1, M_col=3: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 2）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=3, M_col=1: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 2）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=2, M_col=2: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 5） -> PASS
+  N_row=3, M_col=2: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 8）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=2, M_col=3: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 8）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=4, M_col=2: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 15）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=2, M_col=4: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 15）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=3, M_col=3: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 12） -> PASS
+  N_row=4, M_col=3: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 25）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=3, M_col=4: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 25）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=2, M_col=5: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 22）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=5, M_col=2: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 22）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=2, M_col=6: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 33）、K_1 と K_2 の入れ替えは不一致 -> PASS
+  N_row=6, M_col=2: Z = tr((V_1V_2)^N_row) が Laurent 多項式として一致（項数 33）、K_1 と K_2 の入れ替えは不一致 -> PASS
+RESULT: PASS

@@ -21,7 +21,7 @@
 | `hWV` | `W P^{(+)} = V^{(+)} P^{(+)}`（`symmetrized_transfer_matrix_on_sectors`） | 011 |
 | `hWsymm`, `hWpsd` | `W` は実対称半正定値（`W_is_real_symmetric_positive_definite`） | 011 |
 
-章 011 の物理的な実行列 `W` と、章 010 の Pauli 表示から作る複素行列の同一視は
+章 011 の物理的な実行列 `W` と、`V_1^{1/2} = exp(½K_1D)` と `V_2`（`def_transfer_matrix`）から作る複素行列の同一視は
 `Ising2D.physicalSymTransferC_eq_map`、射影後の最終等式は
 `Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済みである。
 ただし、章 017 の `V^{(+)}` の実行列表示と組み合わせ、この複素行列等式を実ベクトル上の

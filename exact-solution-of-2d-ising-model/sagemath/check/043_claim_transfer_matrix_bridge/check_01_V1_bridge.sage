@@ -1,8 +1,8 @@
 # ---------------------------------------------------------
 # SageMath: V_1 の成分定義とパウリ表示の一致
-#   (exp(K_1 sum_m sz_m sz_{m+1}))_{iota(mu),iota(mu')}
-#     = delta_{mu=mu'} exp( sum_m J' mu(m) mu(m+1) )     (K_1 = J')
-# 対象: structured-latex V1_component_equals_pauli
+#   (exp(K_1 sum_m sz_m sz_{m+1}))_{ord(mu),ord(mu')}
+#     = delta_{mu=mu'} exp( K_1 sum_m mu(m) mu(m+1) ) = (V_1)_{ord(mu),ord(mu')}
+# 対象: structured-latex first_transfer_matrix_pauli_form（004_transfer_matrix.ts）
 #   （sigma_z_diagonal_action / exp_of_diagonal_matrix も併せて検証）
 # ---------------------------------------------------------
 import os

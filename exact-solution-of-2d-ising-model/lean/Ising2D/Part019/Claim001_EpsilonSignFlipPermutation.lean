@@ -29,7 +29,7 @@
 -/
 import Ising2D.NecSuf.PermSector
 import Ising2D.Part010.Claim010_EpsilonCommutes
-import Ising2D.Part010.Definition001_ConfigBasisIso
+import Ising2D.Part004.DefinitionConfigBasisIso
 
 set_option linter.unusedSectionVars false
 

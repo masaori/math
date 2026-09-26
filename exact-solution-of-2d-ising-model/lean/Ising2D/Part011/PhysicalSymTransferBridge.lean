@@ -10,15 +10,17 @@
 * `maxeig_claim_symmetrized_transfer_matrix_on_sectors`
   （ラベル **`symmetrized_transfer_matrix_on_sectors`**）
 
-章 011 の Rayleigh 商は実行列 `W` 上で述べる一方、章 010 までの物理的転送行列は
+章 011 の Rayleigh 商は実行列 `W` 上で述べる一方、転送行列は
 `TensorPow M = Matrix (Conf M) (Conf M) ℂ` 上で定義されている。本ファイルでは、
 実成分で定めた `V₁¹⁄²`, `V₂`, `W` を明示し、各成分を `ℂ` へ埋め込むと
-章 010 の Pauli 表示から作る対称化転送行列そのものになることを示す。
+人手の `V_1^{1/2} = exp(½K_1D)`（`def_transfer_matrix_square_root`、右辺の式 `V1PauliForm` の `K_1/2` での値）と
+`V_2`（`def_transfer_matrix` の `Ising2D.V2`）から作る対称化転送行列そのものになることを示す。
+`V_1^{1/2}` の成分は、`first_transfer_matrix_pauli_form` を結合定数 `K_1/2` で使って
+`def_transfer_matrix` の成分定義から読む。
 
 これは同じ具体的な行列の二つの係数体での表示を突き合わせる主張なので、必要十分版は置かない。
 -/
-import Ising2D.Part010.Claim004_V1Bridge
-import Ising2D.Part010.Claim006_V2Bridge
+import Ising2D.Part004.ClaimFirstTransferMatrixPauliForm
 import Ising2D.Part010.Claim012_SectorDecomposition
 import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
 
@@ -48,59 +50,48 @@ noncomputable def physicalSymTransferR (M : ℕ) (K1 K2 : ℝ) :
 
 /-! ## `TensorPow` 上の物理的転送行列 -/
 
-/-- 章 010 の Pauli 表示から作る `V₁¹⁄²`。 -/
+/-- **人手 `def_transfer_matrix_square_root` の `V_1^{1/2} := exp(½ K_1 D)`**
+（`first_transfer_matrix_pauli_form` の右辺の式 `V1PauliForm` を結合定数 `K_1/2` で評価したもの）。 -/
 noncomputable def physicalV1halfC (M : ℕ) (K1 : ℝ) : TensorPow M :=
-  V1pauli M (((K1 / 2 : ℝ) : ℂ))
+  V1PauliForm M (((K1 / 2 : ℝ) : ℂ))
 
-/-- 章 010 の Pauli 表示から作る物理的な対称化転送行列。 -/
+/-- **人手 `def_symmetrized_transfer_matrix` の `W = V_1^{1/2} V_2 V_1^{1/2}`**
+（`V_2` は `def_transfer_matrix` の `V_2`）。 -/
 noncomputable def physicalSymTransferC (M : ℕ) (K1 K2 : ℝ) : TensorPow M :=
-  physicalV1halfC M K1 *
-    V2pauli M (Real.sinh (2 * K2)) (((Kstar K2 : ℝ) : ℂ)) *
-    physicalV1halfC M K1
+  physicalV1halfC M K1 * V2 M K2 * physicalV1halfC M K1
 
-/-- 実行列表示の `V₁¹⁄²` を成分ごとに `ℂ` へ埋め込むと、Pauli 表示に一致する。 -/
+/-- 実行列表示の `V₁¹⁄²` を成分ごとに `ℂ` へ埋め込むと `exp(½K_1D)` に一致する
+（`first_transfer_matrix_pauli_form` を結合定数 `K_1/2` で引き、`def_transfer_matrix` の成分を読む）。 -/
 theorem physicalV1halfC_eq_map (K1 : ℝ) :
     physicalV1halfC M K1 = (physicalV1halfR M K1).map Complex.ofRealHom := by
-  rw [physicalV1halfC, V1pauli_eq_V1comp]
+  rw [physicalV1halfC, ← first_transfer_matrix_pauli_form]
   ext I J
-  rw [V1comp_apply]
+  rw [V1_apply]
   by_cases h : I = J
   · subst h
-    simp only [if_pos, physicalV1halfR, Matrix.map_apply, Matrix.diagonal_apply_eq,
-      Complex.ofRealHom_eq_coe, rowEnergy]
-    rw [Complex.ofReal_exp]
-    congr 1
-    rw [Complex.ofReal_mul, Complex.ofReal_sum, Finset.mul_sum]
-    refine Finset.sum_congr rfl fun m _ => ?_
-    simp only [sgnC, Complex.ofReal_mul, Complex.ofReal_div]
-    ring
-  · rw [if_neg h, physicalV1halfR, Matrix.map_apply, Matrix.diagonal_apply_ne _ h,
-      map_zero]
+    rw [if_pos rfl, physicalV1halfR, Matrix.map_apply, Matrix.diagonal_apply_eq,
+      Complex.ofRealHom_eq_coe]
+  · rw [if_neg h, physicalV1halfR, Matrix.map_apply, Matrix.diagonal_apply_ne _ h, map_zero]
 
-/-- 実行列表示の `V₂` を成分ごとに `ℂ` へ埋め込むと、Pauli 表示に一致する。 -/
-theorem physicalV2C_eq_map {K2 : ℝ} (hK2 : 0 < K2) :
-    V2pauli M (Real.sinh (2 * K2)) (((Kstar K2 : ℝ) : ℂ))
-      = (physicalV2R M K2).map Complex.ofRealHom := by
-  rw [V2pauli_eq_V2comp hK2]
+/-- 実行列表示の `V₂` を成分ごとに `ℂ` へ埋め込むと `def_transfer_matrix` の `V_2` に一致する
+（人手 `W_has_positive_entries` Step 2 の成分表示）。 -/
+theorem physicalV2C_eq_map (K2 : ℝ) :
+    V2 M K2 = (physicalV2R M K2).map Complex.ofRealHom := by
   ext I J
-  rw [V2comp_apply]
-  change Complex.exp (interEnergy (K2 : ℂ) I J) =
-    ((Real.exp (∑ m : Fin M, K2 * sgn (I m) * sgn (J m)) : ℝ) : ℂ)
-  rw [Complex.ofReal_exp, interEnergy, Complex.ofReal_sum]
-  congr 1
-  refine Finset.sum_congr rfl fun m _ => ?_
-  simp only [sgnC, Complex.ofReal_mul]
+  rw [V2_apply, physicalV2R, Matrix.map_apply, Matrix.of_apply, Complex.ofRealHom_eq_coe,
+    Finset.mul_sum]
+  simp only [mul_assoc]
 
-/-- **章 011 の実行列 `W` と複素 `TensorPow` 上の物理的転送行列は同じ成分を持つ。**
+/-- **章 011 の実行列 `W` と複素 `TensorPow` 上の対称化転送行列は同じ成分を持つ。**
 
-左辺は章 010 の `V₁`, `V₂` の Pauli 表示から作る行列、右辺は章 011 の
+左辺は人手の `V_1^{1/2}`, `V_2` から作る行列、右辺は章 011 の
 Rayleigh 商で使う実行列を成分ごとに `ℂ` へ埋め込んだ行列である。 -/
-theorem physicalSymTransferC_eq_map {K2 : ℝ} (K1 : ℝ) (hK2 : 0 < K2) :
+theorem physicalSymTransferC_eq_map (K1 K2 : ℝ) :
     physicalSymTransferC M K1 K2 =
       (physicalSymTransferR M K1 K2).map Complex.ofRealHom := by
   rw [physicalSymTransferC, physicalSymTransferR, symTransfer,
     Matrix.map_mul, Matrix.map_mul, ← physicalV1halfC_eq_map K1,
-    ← physicalV2C_eq_map hK2]
+    ← physicalV2C_eq_map K2]
 
 /-! ## セクター射影後の表示 -/
 
@@ -115,34 +106,31 @@ theorem physicalSymTransferC_eq_map {K2 : ℝ} (K1 : ℝ) (hK2 : 0 < K2) :
 theorem physicalSymTransferR_map_mul_epsProj_eq_Vsym {K2 : ℝ} (K1 : ℝ)
     (hM : 2 ≤ M) (hK2 : 0 < K2) {η : ℂ} (hη : η * η = 1) :
     (physicalSymTransferR M K1 K2).map Complex.ofRealHom * epsProj M η
-      = Vsym M (K1 : ℂ) (-η) (Real.sinh (2 * K2)) (((Kstar K2 : ℝ) : ℂ)) *
-          epsProj M η := by
-  rw [← physicalSymTransferC_eq_map K1 hK2]
+      = Vsym M K1 (-η) K2 * epsProj M η := by
+  rw [← physicalSymTransferC_eq_map K1 K2]
   let B : TensorPow M := physicalV1halfC M K1
-  let C : TensorPow M := V1half M (K1 : ℂ) (-η)
-  let V : TensorPow M :=
-    V2pauli M (Real.sinh (2 * K2)) (((Kstar K2 : ℝ) : ℂ))
+  let C : TensorPow M := V1pmHalf M (K1 : ℂ) (-η)
+  let V : TensorPow M := V2 M K2
   let P : TensorPow M := epsProj M η
-  have hhalf : V1 M (((K1 / 2 : ℝ) : ℂ)) (-η) = C := by
+  have hhalf : V1pm M (((K1 / 2 : ℝ) : ℂ)) (-η) = C := by
     dsimp [C]
-    rw [V1, V1half]
+    rw [V1pm, V1pmHalf]
     congr 1
     rw [Complex.ofReal_div]
     norm_num
     module
   have hBP : B * P = C * P := by
     dsimp [B, P]
-    rw [physicalV1halfC]
+    rw [physicalV1halfC, ← first_transfer_matrix_pauli_form]
     calc
-      V1pauli M (((K1 / 2 : ℝ) : ℂ)) * epsProj M η
-          = V1 M (((K1 / 2 : ℝ) : ℂ)) (-η) * epsProj M η :=
+      V1 M (K1 / 2) * epsProj M η
+          = V1pm M (((K1 / 2 : ℝ) : ℂ)) (-η) * epsProj M η :=
             sector_replacement_of_V1 hM hη
       _ = C * epsProj M η := by rw [hhalf]
   have hCP : C * P = P * C := by
-    exact (commute_V1half_epsProj (M := M) (K1 : ℂ) (-η) η).eq
+    exact (commute_V1pmHalf_epsProj (M := M) (K1 : ℂ) (-η) η).eq
   have hVP : V * P = P * V := by
-    exact (commute_V2pauli_epsProj (M := M) (Real.sinh (2 * K2))
-      (((Kstar K2 : ℝ) : ℂ)) η).eq
+    exact (commute_V2_epsProj (M := M) hK2 η).eq
   change B * V * B * P = C * V * C * P
   exact NecSuf.sandwich_mul_proj_eq hBP hCP hVP
 

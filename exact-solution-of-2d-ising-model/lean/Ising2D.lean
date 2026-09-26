@@ -5,6 +5,9 @@
 形式化。ファイルと人手証明の対応規約は `lean/README.md` を参照。
 -/
 import Ising2D.Basic
+import Ising2D.Part001.DefinitionRowConfigurations
+import Ising2D.Part001.DefinitionRowConfigurationNumbering
+import Ising2D.Part001.ClaimRowConfigurationNumberingBijective
 import Ising2D.NecSuf.MatrixUnits
 import Ising2D.NecSuf.ScalarCentral
 import Ising2D.Part000.Claim045_ConjugationIsRingHom
@@ -67,18 +70,22 @@ import Ising2D.NecSuf.SiteDiagonal
 import Ising2D.NecSuf.ExpDiagonal
 import Ising2D.NecSuf.Projector
 import Ising2D.NecSuf.TracePathSum
-import Ising2D.Part010.Definition001_ConfigBasisIso
-import Ising2D.Part010.Claim002_SigmaZDiagonal
-import Ising2D.Part010.Claim003_ExpDiagonal
-import Ising2D.Part010.Definition000_ComponentTransfer
-import Ising2D.Part010.V1JordanWigner
-import Ising2D.Part010.Claim004_V1Bridge
-import Ising2D.Part010.Claim005_TwoByTwoTransfer
+import Ising2D.Part004.DefinitionConfigBasisIso
+import Ising2D.Part004.ClaimSigmaZDiagonalAction
+import Ising2D.Part004.ClaimExpOfDiagonalMatrix
+import Ising2D.Part001.DefinitionTransferMatrix
+import Ising2D.Part001.DefinitionPartitionFunction
+import Ising2D.Part001.ClaimPartitionFunctionViaTransferMatrix
+import Ising2D.Part004.ClaimConfigNumberingEqualsKroneckerNumbering
+import Ising2D.Part004.ClaimFirstTransferMatrixPauliForm
+import Ising2D.Part004.ClaimV1InZYEpsilon
+import Ising2D.Part004.DefinitionSecondDualCouplingConstant
+import Ising2D.Part004.ClaimTwoByTwoTransferIdentity
 import Ising2D.NecSuf.DualCouplingRelation
-import Ising2D.Part010.ClaimSecondDualCouplingRelation
-import Ising2D.Part010.ClaimSecondDualCouplingRelationFromNecSuf
-import Ising2D.Part010.Claim006_V2Bridge
-import Ising2D.Part010.Claim007_PartitionFunction
+import Ising2D.Part004.ClaimSecondDualCouplingRelation
+import Ising2D.Part004.ClaimSecondDualCouplingRelationFromNecSuf
+import Ising2D.Part004.ClaimSecondTransferMatrixPauliForm
+import Ising2D.Part004.ClaimV2InZY
 import Ising2D.Part010.Claim009_EpsilonProjectors
 import Ising2D.Part010.Claim010_EpsilonCommutes
 import Ising2D.Part010.Claim011_SectorReplacement
