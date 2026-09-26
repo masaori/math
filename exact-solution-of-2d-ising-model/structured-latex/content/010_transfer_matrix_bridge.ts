@@ -128,17 +128,13 @@ export default defineBlocks([
       paragraph([
         "が得られることである（",
         math(String.raw`V^{(\pm)} := (V_1^{(\pm)})^{1/2} V_2 (V_1^{(\pm)})^{1/2}`),
-        " は ",
-        ref("V_eq_Vprime"),
-        " の ",
-        math(String.raw`V`),
         "、",
         math(String.raw`P^{(\pm)}`),
         " は ",
         math(String.raw`\varepsilon`),
-        " の固有空間への射影子）。右辺は ",
-        ref("eigenvalues_of_V"),
-        " で固有値が分かっているので、これで分配関数が固有値の言葉で書ける。",
+        " の固有空間への射影子）。これで分配関数が、各セクターの転送行列 ",
+        math(String.raw`V^{(\pm)}`),
+        " の冪のトレースで書ける。",
       ]),
     ],
     conversion: {
@@ -146,6 +142,7 @@ export default defineBlocks([
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "M と N の役割の対応は、001 章の V_1 が同一の μ の隣接成分を結び、004 章の V_1 が同一鎖の隣接サイトを結ぶ、という一次情報から確定させた。数値でも Z の直接和と tr((V_1V_2)^{N_row}) が K_1 = J'、K_2 = J のときに一致することを確認済み（sagemath/check/043_claim_transfer_matrix_bridge/check_04_partition_function.sage）。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },
@@ -2053,8 +2050,6 @@ P^{(\pm)}X
       paragraph([
         ref("partition_function_in_pauli_form"),
         " と同じ設定のもと、",
-        ref("V_eq_Vprime"),
-        " の",
       ]),
       displayMath(
         String.raw`V^{(\pm)} := \left(V_1^{(\pm)}\right)^{1/2} V_2 \left(V_1^{(\pm)}\right)^{1/2},
@@ -2081,13 +2076,7 @@ P^{(\pm)}X
 - \mathrm{tr}\bigl(\varepsilon\,(V^{(-)})^{N_{\mathrm{row}}}\bigr)
 \Bigr)`,
       ),
-      paragraph([
-        "とも書ける。",
-        math(String.raw`V^{(\pm)}`),
-        " の固有値は ",
-        ref("eigenvalues_of_V"),
-        " で決まっているので、これで分配関数が固有値の言葉で書けたことになる。",
-      ]),
+      paragraph(["とも書ける。"]),
     ],
     proof: [
       paragraph([
@@ -2250,6 +2239,7 @@ Z(J,J')
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "N_row = 2,3 と M = 2,3,4、複数の (K_1,K_2) について、tr((V_1V_2)^{N_row}) と右辺のセクター和が相対誤差 2e-15 以下で一致することを確認した（sagemath/check/043_claim_transfer_matrix_bridge/check_05_sector_decomposition.sage）。",
         "この主張は docs/tasks/free-energy-roadmap の章 C（最大固有値）の直接の入口になる。eigenvalues_of_V の Λ_ε をここへ代入すればよい。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },

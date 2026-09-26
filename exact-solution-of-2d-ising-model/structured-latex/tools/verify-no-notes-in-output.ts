@@ -20,7 +20,7 @@ import { join } from "node:path";
 
 import type { Node } from "../schema.ts";
 import { escapeText } from "./latex-escape.ts";
-import { loadNoteFiles, structuredLatexDir } from "./content-modules.ts";
+import { loadContentFiles, loadNoteFiles, structuredLatexDir } from "./content-modules.ts";
 
 const texPath = join(structuredLatexDir, "build", "document.tex");
 if (!existsSync(texPath)) {
@@ -45,11 +45,30 @@ for (const forbidden of ["loadNoteFiles", "notesDir", "notes/"]) {
 
 // --- 2 と 3. ノートの id と本文が生成物に現れないこと -------------------------
 const noteFiles = await loadNoteFiles();
+// 本文ブロック自身の地の文。ノートの標本がここにも現れるなら、生成物に在っても混入の証拠にならない
+// （退避した経路のノートが、本文の対応ブロックと同じ文言を持つ場合）。
+const contentTexts: string[] = [];
+for (const { blocks } of await loadContentFiles()) {
+  for (const block of blocks) {
+    if (block.kind === "heading" || block.kind === "figure") continue;
+    const collect = (list: readonly Node[]): void => {
+      for (const node of list) {
+        if (node.type === "text") contentTexts.push(node.value);
+        if (node.type === "paragraph") collect(node.children);
+        if (node.type === "list") node.items.forEach(collect);
+      }
+    };
+    collect(block.statement);
+    collect(block.proof ?? []);
+  }
+}
+const inContent = (sample: string): boolean => contentTexts.some((text) => text.includes(sample));
 const leakedIds: string[] = [];
 const leakedTexts: { noteId: string; sample: string }[] = [];
 const notesWithoutSample: string[] = [];
 let noteCount = 0;
 let checkedSamples = 0;
+let sharedWithContent = 0;
 
 for (const { notes } of noteFiles) {
   for (const note of notes) {
@@ -58,6 +77,10 @@ for (const { notes } of noteFiles) {
     const samples = distinctiveTexts(note.body ?? []);
     if (samples.length === 0) notesWithoutSample.push(note.id);
     for (const sample of samples) {
+      if (inContent(sample)) {
+        sharedWithContent += 1;
+        continue;
+      }
       checkedSamples += 1;
       // 生成物は地の文をエスケープするので、エスケープ後の形でも照合する。
       if (tex.includes(sample) || tex.includes(escapeText(sample))) {
@@ -77,7 +100,8 @@ if (leakedIds.length > 0 || leakedTexts.length > 0) {
 
 console.log(
   `no notes in output: ノート ${noteCount} 件（本文サンプル ${checkedSamples} 件）は ` +
-    "いずれも build/document.tex に現れない",
+    "いずれも build/document.tex に現れない" +
+    (sharedWithContent > 0 ? `（本文ブロックにも同じ文言がある標本 ${sharedWithContent} 件は照合から除いた）` : ""),
 );
 if (notesWithoutSample.length > 0) {
   // 本文がほぼ数式のノートは、地の文サンプルを取れない。id 検査だけが効いている状態なので明示する。

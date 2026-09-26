@@ -20,20 +20,25 @@ export default defineBlocks([
     labels: [],
     statement: [
       paragraph([
-        ref("remark_remaining_input_even_sector"),
-        " で述べたとおり、Onsager の自由エネルギーを本文で閉じるために残っている入力は 1 つだけである：",
-        math(String.raw`V^{(+)}`),
-        " の固有値が**半整数運動量**で与えられること。この章はその土台を据える。",
+        "偶セクターの生成子 ",
+        math(String.raw`H_1^{(+)}`),
+        "（",
+        ref("def_H1_pm"),
+        " で上の符号を取ったもの）は",
       ]),
+      displayMath(
+        String.raw`H_1^{(+)} = \sum_{m=1}^{M-1} Y_mZ_{m+1} - Y_MZ_1`,
+      ),
       paragraph([
-        "まず ",
-        ref("why_008_applies_only_to_minus_sector"),
-        " で、004 章以降の ",
-        math(String.raw`\hat{Z}_\mu^{(\pm)}`),
-        " が ",
-        math(String.raw`(-)`),
-        " セクターにしか使えない理由を**等式として**確定させる。",
-        "次に、符号を第 1 項に置く代わりに位相へ繰り込んだモード",
+        "であり、サイト ",
+        math(String.raw`M`),
+        " とサイト ",
+        math(String.raw`1`),
+        " をつなぐ境界項 ",
+        math(String.raw`-Y_MZ_1`),
+        " だけが符号 ",
+        math(String.raw`-1`),
+        " を持つ（反周期的な境界条件）。この章では、この符号に合わせた Fourier モード",
       ]),
       displayMath(
         String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,e^{-i j\tilde\theta_\mu},\qquad
@@ -41,269 +46,92 @@ export default defineBlocks([
 \tilde\theta_\mu := \frac{2\pi\left(\mu - \tfrac{1}{2}\right)}{M}`,
       ),
       paragraph([
-        "を導入し、これらが ",
-        math(String.raw`H_1^{(+)}, H_2`),
-        " に対して ",
-        ref("commutator_of_H_and_Z_Y"),
-        " と**同じ形**の交換関係を満たすこと、および ",
-        ref("anticommutator_of_hat_Z_and_hat_Y"),
-        " に対応する反交換関係を満たすことを示す。",
-      ]),
-      paragraph([
-        "働く仕組みは 1 つの等式に集約される：",
-        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
-        "（**反周期性**）。",
-        math(String.raw`\hat{Z}^{(\pm)}`),
-        " では境界の符号を第 1 項に置いていたのに対し、",
-        math(String.raw`\check{Z}`),
-        " では位相 ",
-        math(String.raw`e^{-ij\tilde\theta_\mu}`),
-        " が ",
-        math(String.raw`j = M`),
-        " から ",
-        math(String.raw`j = 0`),
-        " へ回るときに自動的に符号を出す。この違いが、",
-        math(String.raw`H_2`),
-        " との交換関係が壊れるか壊れないかを分ける。",
-      ]),
-      paragraph([
-        "**この章で扱うのはここまでである。** これらの関係式から ",
-        math(String.raw`V^{(+)}`),
-        " の固有値を導くには、008 章・009 章と同じ道筋（",
-        math(String.raw`T_V`),
-        " の作用 → ",
-        math(String.raw`A(\theta)`),
-        " の対角化 → フェルミオン → ",
-        math(String.raw`V = cV'`),
-        " → 固有値）を半整数運動量で辿る必要があり、その分量は 008 章と 009 章の合計に相当する。",
-        "進め方は `docs/tasks/free-energy-roadmap/task-dependency-graph.md` の章 C′ に記した。",
-      ]),
-    ],
-    conversion: { status: "added" },
-  },
-
-  {
-    id: "evensector_001_claim_why_minus_only",
-    kind: "claim",
-    origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`008 \text{ 章の議論が } (-) \text{ セクター専用である理由}` },
-    labels: ["why_008_applies_only_to_minus_sector"],
-    statement: [
-      paragraph([
-        ref("def_hatZ_pm"),
-        " の ",
-        math(String.raw`\hat{Z}_\mu^{(\pm)}`),
+        "を導入する（正確な定義は ",
+        ref("def_half_integer_checkZ"),
         " と ",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`H_2`),
-        " について、",
-        math(String.raw`\mu \in \mathcal{M}`),
-        " で",
-      ]),
-      displayMath(
-        String.raw`\left[H_2,\ \hat{Z}_\mu^{(-)}\right] = -2\,\hat{Y}_\mu,
-\qquad
-\left[H_2,\ \hat{Z}_\mu^{(+)}\right] = -2\,\hat{Y}_\mu + 4\,e^{-i\frac{2\pi\mu}{M}}\,Y_1`,
-      ),
-      paragraph([
-        "が成り立つ。とくに ",
-        math(String.raw`Y_1 \neq 0`),
-        " なので **",
-        math(String.raw`\left[H_2, \hat{Z}_\mu^{(+)}\right] \neq -2\hat{Y}_\mu`),
-        "** である。",
-      ]),
-      paragraph([
-        ref("commutator_of_H_and_Z_Y"),
-        " の (C) は ",
-        math(String.raw`\hat{Z}_\mu^{(-)}`),
-        " についての主張であり、008 章以降の議論（",
-        ref("nesting_of_commutator_of_H_and_Z"),
-        " の (h2.z−) 以下すべて）はこの (C) を土台にしている。",
-        "したがって **008 章以降は ",
-        math(String.raw`(-)`),
-        " セクター専用であり、",
-        math(String.raw`V^{(+)}`),
-        " にはそのまま適用できない。**",
-      ]),
-    ],
-    proof: [
-      paragraph([
-        "Step 1（サイトごとの交換関係）。",
-        math(String.raw`H_2 = \sum_{m=1}^{M} Z_mY_m`),
-        " と ",
-        ref("anticommutator_of_Z_and_Y"),
-        " から、",
-        math(String.raw`j \in \{1,\dots,M\}`),
-        " について",
-      ]),
-      displayMath(String.raw`\left[H_2,\ Z_j\right] = -2\,Y_j`),
-      paragraph([
-        "を示す。",
-        math(String.raw`m \neq j`),
-        " の項について、",
-        ref("anticommutator_of_Z_and_Y"),
-        " より ",
-        math(String.raw`Z_mZ_j = -Z_jZ_m`),
-        "、",
-        math(String.raw`Y_mZ_j = -Z_jY_m`),
-        " なので",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(Z_mY_m\right)Z_j
-&= Z_m\left(Y_mZ_j\right)
-   &&(\because \text{行列の積の結合法則}) \\
-&= Z_m\left(-Z_jY_m\right)
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (m \neq j)) \\
-&= -\left(Z_mZ_j\right)Y_m
-   &&(\because \text{結合法則とスカラー倍}) \\
-&= -\left(-Z_jZ_m\right)Y_m
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (m \neq j)) \\
-&= Z_j\left(Z_mY_m\right)
-   &&(\because -(-1) = 1 \text{ の符号の消去と行列の積の結合法則})
-\end{aligned}`,
-      ),
-      paragraph([
-        "すなわち ",
-        math(String.raw`[Z_mY_m, Z_j] = 0`),
-        "（符号が 2 回反転して戻る）。",
-        math(String.raw`m = j`),
-        " の項は、",
-        math(String.raw`Y_jZ_j = -Z_jY_j`),
-        " と ",
-        math(String.raw`Z_jZ_j = I`),
-        "（",
-        ref("anticommutator_of_Z_and_Y"),
-        " で ",
-        math(String.raw`\mu=\nu=j`),
-        " とすると ",
-        math(String.raw`2Z_j^2 = 2I`),
-        "）より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[Z_jY_j,\ Z_j\right]
-&= \left(Z_jY_j\right)Z_j - Z_j\left(Z_jY_j\right)
-   &&(\because \text{交換子の定義}) \\
-&= Z_j\left(Y_jZ_j\right) - \left(Z_jZ_j\right)Y_j
-   &&(\because \text{行列の積の結合法則}) \\
-&= Z_j\left(-Z_jY_j\right) - \left(Z_jZ_j\right)Y_j
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_jZ_j = -Z_jY_j)) \\
-&= -\left(Z_jZ_j\right)Y_j - \left(Z_jZ_j\right)Y_j
-   &&(\because \text{結合法則とスカラー倍}) \\
-&= -I\,Y_j - I\,Y_j
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_jZ_j = I)) \\
-&= -2Y_j
-   &&(\because I\,Y_j = Y_j \text{（単位行列）と同じ行列の和})
-\end{aligned}`,
-      ),
-      paragraph([
-        "交換子は第 2 引数について線型なので、和をとって ",
-        math(String.raw`[H_2, Z_j] = -2Y_j`),
-        "。",
-      ]),
-      paragraph([
-        "Step 2（",
-        math(String.raw`(-)`),
-        " の場合）。",
-        ref("def_hatZ_pm"),
-        " より ",
-        math(String.raw`\hat{Z}_\mu^{(-)} = \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}Z_j`),
-        "（",
-        math(String.raw`j=1`),
-        " の係数は ",
-        math(String.raw`-(-1) = +1`),
-        "）である。交換子の線型性と Step 1 より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[H_2,\ \hat{Z}_\mu^{(-)}\right]
-&= \left[H_2,\ \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}Z_j\right]
-   &&(\because \text{def\_hatZ\_pm}) \\
-&= \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\left[H_2,\ Z_j\right]
-   &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\left(-2Y_j\right)
-   &&(\because \text{Step 1}) \\
-&= -2\sum_{j=1}^{M} e^{-i\frac{2\pi j\mu}{M}}\,Y_j
-   &&(\because \text{スカラー倍を有限和の外へ出す（分配律）}) \\
-&= -2\,\hat{Y}_\mu
-   &&(\because \text{def\_hatY})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（最初と最後の等号で使ったのは ",
-        ref("def_hatZ_pm"),
-        " と ",
-        ref("def_hatY"),
-        " の定義である。）",
-      ]),
-      paragraph([
-        "Step 3（",
-        math(String.raw`(+)`),
-        " の場合）。",
-        ref("def_hatZ_pm"),
-        " より ",
-        math(String.raw`\hat{Z}_\mu^{(+)}`),
-        " は ",
-        math(String.raw`j=1`),
-        " の係数だけが ",
-        math(String.raw`-1`),
-        " なので",
-      ]),
-      displayMath(
-        String.raw`\hat{Z}_\mu^{(+)} = \hat{Z}_\mu^{(-)} - 2\,e^{-i\frac{2\pi\mu}{M}}\,Z_1`,
-      ),
-      paragraph([
-        "（",
-        math(String.raw`j=1`),
-        " の係数が ",
-        math(String.raw`+1`),
-        " から ",
-        math(String.raw`-1`),
-        " へ変わる分を引いた）。交換子の線型性と Step 1・Step 2 より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[H_2,\ \hat{Z}_\mu^{(+)}\right]
-&= \left[H_2,\ \hat{Z}_\mu^{(-)} - 2e^{-i\frac{2\pi\mu}{M}}Z_1\right]
-   &&(\because \text{直前の displayMath}) \\
-&= \left[H_2,\ \hat{Z}_\mu^{(-)}\right] - 2e^{-i\frac{2\pi\mu}{M}}\left[H_2,\ Z_1\right]
-   &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= -2\hat{Y}_\mu - 2e^{-i\frac{2\pi\mu}{M}}\left[H_2,\ Z_1\right]
-   &&(\because \text{Step 2}) \\
-&= -2\hat{Y}_\mu - 2e^{-i\frac{2\pi\mu}{M}}\left(-2Y_1\right)
-   &&(\because \text{Step 1 を } j = 1 \text{ に適用}) \\
-&= -2\hat{Y}_\mu + 4\,e^{-i\frac{2\pi\mu}{M}}\,Y_1
-   &&(\because (-2)\cdot(-2) = 4 \text{ のスカラーの計算})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 4（",
-        math(String.raw`Y_1 \neq 0`),
+        ref("def_half_integer_checkY"),
         "）。",
-        ref("def_transfer_matrix_symbols"),
-        " より ",
-        math(String.raw`Y_1 = \sigma_1^y`),
-        " であり、",
-        ref("pauli_matrix_products"),
-        " の ",
-        math(String.raw`\sigma^y\sigma^y = I`),
-        " より ",
-        math(String.raw`Y_1`),
-        " は可逆、とくに ",
-        math(String.raw`Y_1 \neq 0`),
-        "。また ",
-        math(String.raw`e^{-i2\pi\mu/M} \neq 0`),
-        " なので ",
-        math(String.raw`4e^{-i2\pi\mu/M}Y_1 \neq 0`),
-        " であり、2 つの交換子は一致しない。",
+      ]),
+      paragraph([
+        "働く仕組みは 1 つの等式 ",
+        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
+        "（",
+        ref("half_integer_phase_antiperiodicity"),
+        "、**反周期性**）に集約される。",
+        math(String.raw`H_1^{(+)}`),
+        " と ",
+        math(String.raw`Z_j`),
+        " の交換子は隣のサイトの ",
+        math(String.raw`Y_{j-1}`),
+        " を与えるが、",
+        math(String.raw`j = 1`),
+        " では添字がサイト ",
+        math(String.raw`M`),
+        " へ回り込み、境界項の符号のために ",
+        math(String.raw`-Y_M`),
+        " が現れる。一方、位相 ",
+        math(String.raw`e^{-ij\tilde\theta_\mu}`),
+        " は添字 ",
+        math(String.raw`j = 0`),
+        " を ",
+        math(String.raw`j = M`),
+        " へ読み替えるときにちょうど ",
+        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
+        " 倍になる。この 2 つの符号が打ち消し合うので、",
+        math(String.raw`H_1^{(+)}`),
+        " との交換関係が ",
+        math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
+        " の中で閉じる。",
+      ]),
+      paragraph(["この章で示すのは次のことである。"]),
+      list([
+        [
+          "半整数運動量の添字集合 ",
+          math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
+          " とその共役添字 ",
+          math(String.raw`M+1-\mu`),
+          "（",
+          ref("def_check_index_set"),
+          "、",
+          ref("conjugate_index_of_check_Z_Y"),
+          "）。",
+        ],
+        [
+          math(String.raw`H_1^{(+)}, H_2`),
+          " と ",
+          math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
+          " の交換関係（",
+          ref("commutator_of_H_and_check_Z_Y"),
+          "）。",
+        ],
+        [
+          math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
+          " の反交換関係（",
+          ref("anticommutator_of_check_Z_Y"),
+          "）。",
+        ],
+        [
+          math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
+          " から ",
+          math(String.raw`Z_j, Y_j`),
+          " を復元する式（",
+          ref("recover_Z_Y_from_check_Z_Y"),
+          "）。",
+        ],
+        [
+          math(String.raw`H_1^{(+)}, H_2`),
+          " を ",
+          math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
+          " で表す式（",
+          ref("H1_H2_via_check_Z_Y"),
+          "）。",
+        ],
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
-        "数値でも (-) 側は残差 1e-15 で成立、(+) 側は残差 1e-3 以上で不成立であることを確認済み（sagemath/check/045_claim_free_energy/check_03_remaining_input.sage および 046_claim_even_sector_modes/check_01）。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },
@@ -1126,11 +954,7 @@ e^{-ij\tilde\theta_{\mu+M}}
         String.raw`\check{\mathcal{M}} := \left\{1, 2, \dots, M\right\} \subset \mathbb{Z}`,
       ),
       paragraph([
-        "と定める。008 章で整数運動量の添字集合が ",
-        ref("def_hatZ_pm"),
-        " の ",
-        math(String.raw`\mathcal{M} = \{-M,\dots,-1,1,\dots,M\}`),
-        " だったのに対応する、**半整数運動量側の添字集合**である。",
+        "と定め、**半整数運動量の添字集合**と呼ぶ。",
       ]),
       paragraph([
         "**以降、013 章から 017 章までのすべての主張は ",
@@ -1419,6 +1243,7 @@ e^{-ij\tilde\theta_{\mu+M}}
       status: "added",
       notes: [
         "𝓜̌ = {1,…,M} はこれ以上減らせない: θ~_μ (μ = 1..M) は (0,2π) 内の相異なる M 個であり ((1))、共役 μ ↦ M+1−μ について閉じている ((2))。008 章の 𝓜 = {−M,…,−1,1,…,M} が μ ↦ −μ について閉じていたのと同じ構造である。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },
@@ -1594,31 +1419,13 @@ e^{-ij\tilde\theta_{M+1-\mu}}
 \text{(D)}\quad \left[H_2,\ \check{Y}_\mu\right] &= 2\,\check{Z}_\mu
 \end{aligned}`,
       ),
-      paragraph([
-        "が成り立つ。これは ",
-        ref("commutator_of_H_and_Z_Y"),
-        " の (A)〜(D) と**同じ形**であり、",
-        math(String.raw`\theta_\mu`),
-        " が ",
-        math(String.raw`\tilde\theta_\mu`),
-        " に、",
-        math(String.raw`\hat{Z}_\mu^{(\pm)}, \hat{Y}_\mu`),
-        " が ",
-        math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
-        " に置き換わっただけである。",
-      ]),
+      paragraph(["が成り立つ。"]),
     ],
     proof: [
       paragraph([
         "Step 1（サイトごとの交換関係）。",
-        ref("anticommutator_of_Z_and_Y"),
-        " の関係式（相異なる添字の ",
-        math(String.raw`Z, Y`),
-        " は反可換、同じ添字では ",
-        math(String.raw`Z_jZ_j = Y_jY_j = I`),
-        " かつ ",
-        math(String.raw`Z_jY_j = -Y_jZ_j`),
-        "）から、次を示す。",
+        math(String.raw`j \in \{1,\dots,M\}`),
+        " について次を示す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1637,23 +1444,181 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
       ),
       paragraph([
         "を用いた（",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_jordan_wigner_Z_matrices"),
         " の ",
         math(String.raw`Z_{M+1} := Z_1`),
         " という**周期的**な規約とは符号が逆である点に注意）。",
       ]),
       paragraph([
-        math(String.raw`[H_2, Z_j] = -2Y_j`),
-        " は ",
-        ref("why_008_applies_only_to_minus_sector"),
-        " の Step 1 で示した。",
-        math(String.raw`[H_2, Y_j] = 2Z_j`),
-        " も同様で、",
-        math(String.raw`m \neq j`),
-        " の項は 2 回の符号反転で消え、",
-        math(String.raw`m = j`),
-        " の項は",
+        "準備として、",
+        ref("anticommutator_of_Z_and_Y"),
+        " から従う関係式をまとめる。",
+        math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        "、",
+        math(String.raw`j, k \in \{1,\dots,M\}`),
+        " とする。",
+        math(String.raw`j \neq k`),
+        " なら ",
+        math(String.raw`1 \leq j, k \leq M`),
+        " より ",
+        math(String.raw`j \not\equiv k \pmod M`),
+        " なので ",
+        math(String.raw`\delta^M_{(j,k)} = 0`),
+        "、また ",
+        math(String.raw`\delta^M_{(j,j)} = 1`),
+        " である。これを ",
+        ref("anticommutator_of_Z_and_Y"),
+        " の 3 式へ代入して移項し、",
+        math(String.raw`2Z_jZ_j = 2I`),
+        "、",
+        math(String.raw`2Y_jY_j = 2I`),
+        " の両辺を ",
+        math(String.raw`2`),
+        " で割ると",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_jZ_k &= -Z_kZ_j,\quad Y_jY_k = -Y_kY_j && (j \neq k), \\
+Z_jY_k &= -Y_kZ_j && (j, k \text{ は任意}), \\
+Z_jZ_j &= I,\quad Y_jY_j = I &&
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。以下の鎖で ",
+        ref("anticommutator_of_Z_and_Y"),
+        " を根拠とする行は、この 3 行のいずれかを適用している。",
+      ]),
+      paragraph([
+        "まず、相異なる添字の項が消えることを示す。",
+        math(String.raw`a, b, j \in \{1,\dots,M\}`),
+        " とする。",
+        math(String.raw`a \neq j`),
+        " のとき、一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[Z_aY_a,\ Z_j\right]
+&= \left(Z_aY_a\right)Z_j - Z_j\left(Z_aY_a\right)
+   &&(\because \text{交換子の定義}) \\
+&= Z_a\left(Y_aZ_j\right) - Z_j\left(Z_aY_a\right)
+   &&(\because \text{行列の積の結合法則}) \\
+&= Z_a\left(-Z_jY_a\right) - Z_j\left(Z_aY_a\right)
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_aZ_j = -Z_jY_a)) \\
+&= -\left(Z_aZ_j\right)Y_a - Z_j\left(Z_aY_a\right)
+   &&(\because \text{結合法則とスカラー倍}) \\
+&= -\left(-Z_jZ_a\right)Y_a - Z_j\left(Z_aY_a\right)
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_aZ_j = -Z_jZ_a,\ a \neq j)) \\
+&= \left(Z_jZ_a\right)Y_a - Z_j\left(Z_aY_a\right)
+   &&(\because -(-1) = 1 \text{ の符号の消去}) \\
+&= Z_j\left(Z_aY_a\right) - Z_j\left(Z_aY_a\right)
+   &&(\because \text{行列の積の結合法則}) \\
+&= 0
+   &&(\because \text{同じ行列の差は零行列})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、同じく ",
+        math(String.raw`a \neq j`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[Z_aY_a,\ Y_j\right]
+&= \left(Z_aY_a\right)Y_j - Y_j\left(Z_aY_a\right)
+   &&(\because \text{交換子の定義}) \\
+&= Z_a\left(Y_aY_j\right) - Y_j\left(Z_aY_a\right)
+   &&(\because \text{行列の積の結合法則}) \\
+&= Z_a\left(-Y_jY_a\right) - Y_j\left(Z_aY_a\right)
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_aY_j = -Y_jY_a,\ a \neq j)) \\
+&= -\left(Z_aY_j\right)Y_a - Y_j\left(Z_aY_a\right)
+   &&(\because \text{結合法則とスカラー倍}) \\
+&= -\left(-Y_jZ_a\right)Y_a - Y_j\left(Z_aY_a\right)
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_aY_j = -Y_jZ_a)) \\
+&= \left(Y_jZ_a\right)Y_a - Y_j\left(Z_aY_a\right)
+   &&(\because -(-1) = 1 \text{ の符号の消去}) \\
+&= Y_j\left(Z_aY_a\right) - Y_j\left(Z_aY_a\right)
+   &&(\because \text{行列の積の結合法則}) \\
+&= 0
+   &&(\because \text{同じ行列の差は零行列})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`b \neq j`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[Y_aZ_b,\ Z_j\right]
+&= \left(Y_aZ_b\right)Z_j - Z_j\left(Y_aZ_b\right)
+   &&(\because \text{交換子の定義}) \\
+&= Y_a\left(Z_bZ_j\right) - Z_j\left(Y_aZ_b\right)
+   &&(\because \text{行列の積の結合法則}) \\
+&= Y_a\left(-Z_jZ_b\right) - Z_j\left(Y_aZ_b\right)
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_bZ_j = -Z_jZ_b,\ b \neq j)) \\
+&= -\left(Y_aZ_j\right)Z_b - Z_j\left(Y_aZ_b\right)
+   &&(\because \text{結合法則とスカラー倍}) \\
+&= -\left(-Z_jY_a\right)Z_b - Z_j\left(Y_aZ_b\right)
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_aZ_j = -Z_jY_a)) \\
+&= \left(Z_jY_a\right)Z_b - Z_j\left(Y_aZ_b\right)
+   &&(\because -(-1) = 1 \text{ の符号の消去}) \\
+&= Z_j\left(Y_aZ_b\right) - Z_j\left(Y_aZ_b\right)
+   &&(\because \text{行列の積の結合法則}) \\
+&= 0
+   &&(\because \text{同じ行列の差は零行列})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`a \neq j`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[Y_aZ_b,\ Y_j\right]
+&= \left(Y_aZ_b\right)Y_j - Y_j\left(Y_aZ_b\right)
+   &&(\because \text{交換子の定義}) \\
+&= Y_a\left(Z_bY_j\right) - Y_j\left(Y_aZ_b\right)
+   &&(\because \text{行列の積の結合法則}) \\
+&= Y_a\left(-Y_jZ_b\right) - Y_j\left(Y_aZ_b\right)
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_bY_j = -Y_jZ_b)) \\
+&= -\left(Y_aY_j\right)Z_b - Y_j\left(Y_aZ_b\right)
+   &&(\because \text{結合法則とスカラー倍}) \\
+&= -\left(-Y_jY_a\right)Z_b - Y_j\left(Y_aZ_b\right)
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_aY_j = -Y_jY_a,\ a \neq j)) \\
+&= \left(Y_jY_a\right)Z_b - Y_j\left(Y_aZ_b\right)
+   &&(\because -(-1) = 1 \text{ の符号の消去}) \\
+&= Y_j\left(Y_aZ_b\right) - Y_j\left(Y_aZ_b\right)
+   &&(\because \text{行列の積の結合法則}) \\
+&= 0
+   &&(\because \text{同じ行列の差は零行列})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。次に、同じ添字を含む項を計算する。",
+        math(String.raw`j \in \{1,\dots,M\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[Z_jY_j,\ Z_j\right]
+&= \left(Z_jY_j\right)Z_j - Z_j\left(Z_jY_j\right)
+   &&(\because \text{交換子の定義}) \\
+&= Z_j\left(Y_jZ_j\right) - \left(Z_jZ_j\right)Y_j
+   &&(\because \text{行列の積の結合法則}) \\
+&= Z_j\left(-Z_jY_j\right) - \left(Z_jZ_j\right)Y_j
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jZ_j = -Z_jY_j)) \\
+&= -\left(Z_jZ_j\right)Y_j - \left(Z_jZ_j\right)Y_j
+   &&(\because \text{結合法則とスカラー倍}) \\
+&= -I\,Y_j - I\,Y_j
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_jZ_j = I)) \\
+&= -Y_j - Y_j
+   &&(\because \text{単位行列の性質 } I\,Y_j = Y_j) \\
+&= -2Y_j
+   &&(\because \text{同類項をまとめる})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
       displayMath(
         String.raw`\begin{aligned}
 \left[Z_jY_j,\ Y_j\right]
@@ -1662,13 +1627,15 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 &= Z_j\left(Y_jY_j\right) - \left(Y_jZ_j\right)Y_j
    &&(\because \text{行列の積の結合法則}) \\
 &= Z_j\,I - \left(Y_jZ_j\right)Y_j
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_jY_j = I)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jY_j = I)) \\
+&= Z_j - \left(Y_jZ_j\right)Y_j
+   &&(\because \text{単位行列の性質 } Z_j\,I = Z_j) \\
 &= Z_j - \left(-Z_jY_j\right)Y_j
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_jZ_j = -Z_jY_j)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jZ_j = -Z_jY_j)) \\
 &= Z_j + Z_j\left(Y_jY_j\right)
    &&(\because \text{結合法則とスカラー倍}) \\
 &= Z_j + Z_j\,I
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_jY_j = I)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jY_j = I)) \\
 &= Z_j + Z_j
    &&(\because \text{単位行列の性質 } Z_j\,I = Z_j) \\
 &= 2Z_j
@@ -1676,39 +1643,9 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 \end{aligned}`,
       ),
       paragraph([
-        "（",
-        math(String.raw`Y_jY_j = I`),
-        " と ",
-        math(String.raw`Y_jZ_j = -Z_jY_j`),
-        " はいずれも ",
-        ref("anticommutator_of_Z_and_Y"),
-        " による。）",
-      ]),
-      paragraph([
-        math(String.raw`H_1^{(+)}`),
-        " については、各項 ",
-        math(String.raw`Y_mZ_{m+1}`),
-        "（",
-        math(String.raw`1 \leq m \leq M-1`),
-        "）と境界項 ",
-        math(String.raw`-Y_MZ_1`),
-        " を個別に見る。",
-        math(String.raw`Y_mZ_{m+1}`),
-        " と ",
-        math(String.raw`Z_j`),
-        " について、",
-        math(String.raw`j \neq m+1`),
-        " なら ",
-        math(String.raw`Z_j`),
-        " は ",
-        math(String.raw`Y_m`),
-        " とも ",
-        math(String.raw`Z_{m+1}`),
-        " とも反可換なので 2 回の符号反転で可換になり交換子は ",
-        math(String.raw`0`),
-        "。",
-        math(String.raw`j = m+1`),
-        " なら",
+        "である。",
+        math(String.raw`m \in \{1,\dots,M-1\}`),
+        " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1718,35 +1655,43 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 &= Y_m\left(Z_{m+1}Z_{m+1}\right) - \left(Z_{m+1}Y_m\right)Z_{m+1}
    &&(\because \text{行列の積の結合法則}) \\
 &= Y_m\,I - \left(Z_{m+1}Y_m\right)Z_{m+1}
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_{m+1}Z_{m+1} = I)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Z_{m+1} = I)) \\
+&= Y_m - \left(Z_{m+1}Y_m\right)Z_{m+1}
+   &&(\because \text{単位行列の性質 } Y_m\,I = Y_m) \\
 &= Y_m - \left(-Y_mZ_{m+1}\right)Z_{m+1}
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_{m+1}Y_m = -Y_mZ_{m+1})) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Y_m = -Y_mZ_{m+1})) \\
 &= Y_m + Y_m\left(Z_{m+1}Z_{m+1}\right)
    &&(\because \text{結合法則とスカラー倍}) \\
 &= Y_m + Y_m\,I
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_{m+1}Z_{m+1} = I)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Z_{m+1} = I)) \\
 &= Y_m + Y_m
    &&(\because \text{単位行列の性質 } Y_m\,I = Y_m) \\
 &= 2Y_m
    &&(\because \text{同類項をまとめる})
 \end{aligned}`,
       ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[Y_mZ_{m+1},\ Y_m\right]
+&= \left(Y_mZ_{m+1}\right)Y_m - Y_m\left(Y_mZ_{m+1}\right)
+   &&(\because \text{交換子の定義}) \\
+&= Y_m\left(Z_{m+1}Y_m\right) - \left(Y_mY_m\right)Z_{m+1}
+   &&(\because \text{行列の積の結合法則}) \\
+&= Y_m\left(-Y_mZ_{m+1}\right) - \left(Y_mY_m\right)Z_{m+1}
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Y_m = -Y_mZ_{m+1})) \\
+&= -\left(Y_mY_m\right)Z_{m+1} - \left(Y_mY_m\right)Z_{m+1}
+   &&(\because \text{結合法則とスカラー倍}) \\
+&= -I\,Z_{m+1} - I\,Z_{m+1}
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_mY_m = I)) \\
+&= -Z_{m+1} - Z_{m+1}
+   &&(\because \text{単位行列の性質 } I\,Z_{m+1} = Z_{m+1}) \\
+&= -2Z_{m+1}
+   &&(\because \text{同類項をまとめる})
+\end{aligned}`,
+      ),
       paragraph([
-        "（",
-        math(String.raw`Z_{m+1}Z_{m+1} = I`),
-        " と ",
-        math(String.raw`Z_{m+1}Y_m = -Y_mZ_{m+1}`),
-        " はいずれも ",
-        ref("anticommutator_of_Z_and_Y"),
-        " による。）したがって ",
-        math(String.raw`2 \leq j \leq M`),
-        " では ",
-        math(String.raw`m = j-1`),
-        " の項だけが残って ",
-        math(String.raw`[H_1^{(+)}, Z_j] = 2Y_{j-1}`),
-        "。",
-        math(String.raw`j = 1`),
-        " では境界項だけが残り",
+        "である。境界項については",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1758,13 +1703,15 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 &= -\left(Y_M\left(Z_1Z_1\right) - \left(Z_1Y_M\right)Z_1\right)
    &&(\because \text{行列の積の結合法則}) \\
 &= -\left(Y_M\,I - \left(Z_1Y_M\right)Z_1\right)
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_1Z_1 = I)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Z_1 = I)) \\
+&= -\left(Y_M - \left(Z_1Y_M\right)Z_1\right)
+   &&(\because \text{単位行列の性質 } Y_M\,I = Y_M) \\
 &= -\left(Y_M - \left(-Y_MZ_1\right)Z_1\right)
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_1Y_M = -Y_MZ_1)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Y_M = -Y_MZ_1)) \\
 &= -\left(Y_M + Y_M\left(Z_1Z_1\right)\right)
    &&(\because \text{結合法則とスカラー倍}) \\
 &= -\left(Y_M + Y_M\,I\right)
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_1Z_1 = I)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Z_1 = I)) \\
 &= -\left(Y_M + Y_M\right)
    &&(\because \text{単位行列の性質 } Y_M\,I = Y_M) \\
 &= -2Y_M
@@ -1775,48 +1722,7 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
    &&(\because Y_0^{\flat} := -Y_M)
 \end{aligned}`,
       ),
-      paragraph([
-        "であるから、両方の場合が ",
-        math(String.raw`[H_1^{(+)}, Z_j] = 2Y_{j-1}^{\flat}`),
-        " にまとまる。",
-      ]),
-      paragraph([
-        "同様に ",
-        math(String.raw`Y_mZ_{m+1}`),
-        " と ",
-        math(String.raw`Y_j`),
-        " については ",
-        math(String.raw`j = m`),
-        " の項だけが残り",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[Y_mZ_{m+1},\ Y_m\right]
-&= \left(Y_mZ_{m+1}\right)Y_m - Y_m\left(Y_mZ_{m+1}\right)
-   &&(\because \text{交換子の定義}) \\
-&= Y_m\left(Z_{m+1}Y_m\right) - \left(Y_mY_m\right)Z_{m+1}
-   &&(\because \text{行列の積の結合法則}) \\
-&= Y_m\left(-Y_mZ_{m+1}\right) - \left(Y_mY_m\right)Z_{m+1}
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_{m+1}Y_m = -Y_mZ_{m+1})) \\
-&= -\left(Y_mY_m\right)Z_{m+1} - \left(Y_mY_m\right)Z_{m+1}
-   &&(\because \text{結合法則とスカラー倍}) \\
-&= -I\,Z_{m+1} - I\,Z_{m+1}
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_mY_m = I)) \\
-&= -2Z_{m+1}
-   &&(\because \text{単位行列の性質 } I\,Z_{m+1} = Z_{m+1}\text{ と同類項をまとめる})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（用いた関係式はいずれも ",
-        ref("anticommutator_of_Z_and_Y"),
-        " による。）なので ",
-        math(String.raw`1 \leq j \leq M-1`),
-        " では ",
-        math(String.raw`[H_1^{(+)}, Y_j] = -2Z_{j+1}`),
-        "。",
-        math(String.raw`j = M`),
-        " では境界項だけが残り",
-      ]),
+      paragraph(["と"]),
       displayMath(
         String.raw`\begin{aligned}
 \left[-Y_MZ_1,\ Y_M\right]
@@ -1827,11 +1733,11 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 &= -\left(Y_M\left(Z_1Y_M\right) - \left(Y_MY_M\right)Z_1\right)
    &&(\because \text{行列の積の結合法則}) \\
 &= -\left(Y_M\left(-Y_MZ_1\right) - \left(Y_MY_M\right)Z_1\right)
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Z_1Y_M = -Y_MZ_1)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Y_M = -Y_MZ_1)) \\
 &= -\left(-\left(Y_MY_M\right)Z_1 - \left(Y_MY_M\right)Z_1\right)
    &&(\because \text{結合法則とスカラー倍}) \\
 &= -\left(-I\,Z_1 - I\,Z_1\right)
-   &&(\because \text{anticommutator\_of\_Z\_and\_Y}\ (Y_MY_M = I)) \\
+   &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_MY_M = I)) \\
 &= -\left(-Z_1 - Z_1\right)
    &&(\because \text{単位行列の性質 } I\,Z_1 = Z_1) \\
 &= -\left(-2Z_1\right)
@@ -1845,7 +1751,151 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
 \end{aligned}`,
       ),
       paragraph([
-        "であるから ",
+        "である。以上を和へまとめる。",
+        math(String.raw`H_2`),
+        " について、一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[H_2,\ Z_j\right]
+&= \left[\sum_{a=1}^{M} Z_aY_a,\ Z_j\right]
+   &&(\because \blkref{def_H2}) \\
+&= \sum_{a=1}^{M}\left[Z_aY_a,\ Z_j\right]
+   &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
+&= \left[Z_jY_j,\ Z_j\right] + \sum_{\substack{1 \leq a \leq M \\ a \neq j}}\left[Z_aY_a,\ Z_j\right]
+   &&(\because a = j \text{ の項を有限和から分ける}) \\
+&= \left[Z_jY_j,\ Z_j\right] + \sum_{\substack{1 \leq a \leq M \\ a \neq j}} 0
+   &&(\because \text{上で示した } \left[Z_aY_a, Z_j\right] = 0\ (a \neq j) \text{ を各項へ同時適用}) \\
+&= \left[Z_jY_j,\ Z_j\right]
+   &&(\because \text{零行列の和は零行列}) \\
+&= -2Y_j
+   &&(\because \text{上で示した } \left[Z_jY_j, Z_j\right] = -2Y_j)
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[H_2,\ Y_j\right]
+&= \left[\sum_{a=1}^{M} Z_aY_a,\ Y_j\right]
+   &&(\because \blkref{def_H2}) \\
+&= \sum_{a=1}^{M}\left[Z_aY_a,\ Y_j\right]
+   &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
+&= \left[Z_jY_j,\ Y_j\right] + \sum_{\substack{1 \leq a \leq M \\ a \neq j}}\left[Z_aY_a,\ Y_j\right]
+   &&(\because a = j \text{ の項を有限和から分ける}) \\
+&= \left[Z_jY_j,\ Y_j\right] + \sum_{\substack{1 \leq a \leq M \\ a \neq j}} 0
+   &&(\because \text{上で示した } \left[Z_aY_a, Y_j\right] = 0\ (a \neq j) \text{ を各項へ同時適用}) \\
+&= \left[Z_jY_j,\ Y_j\right]
+   &&(\because \text{零行列の和は零行列}) \\
+&= 2Z_j
+   &&(\because \text{上で示した } \left[Z_jY_j, Y_j\right] = 2Z_j)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`H_1^{(+)}`),
+        " と ",
+        math(String.raw`Z_j`),
+        " について、",
+        math(String.raw`2 \leq j \leq M`),
+        " のときは一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[H_1^{(+)},\ Z_j\right]
+&= \left[\sum_{m=1}^{M-1} Y_mZ_{m+1} - Y_MZ_1,\ Z_j\right]
+   &&(\because \blkref{def_H1_pm}\text{ の上の符号}) \\
+&= \sum_{m=1}^{M-1}\left[Y_mZ_{m+1},\ Z_j\right] - \left[Y_MZ_1,\ Z_j\right]
+   &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
+&= \sum_{m=1}^{M-1}\left[Y_mZ_{m+1},\ Z_j\right] - 0
+   &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = 0\ (b \neq j) \text{ を } a = M,\ b = 1 \neq j \text{ に適用}) \\
+&= \sum_{m=1}^{M-1}\left[Y_mZ_{m+1},\ Z_j\right]
+   &&(\because \text{零行列を引いても変わらない}) \\
+&= \left[Y_{j-1}Z_j,\ Z_j\right] + \sum_{\substack{1 \leq m \leq M-1 \\ m \neq j-1}}\left[Y_mZ_{m+1},\ Z_j\right]
+   &&(\because 1 \leq j-1 \leq M-1 \text{ なので } m = j-1 \text{ の項を有限和から分ける}) \\
+&= \left[Y_{j-1}Z_j,\ Z_j\right] + \sum_{\substack{1 \leq m \leq M-1 \\ m \neq j-1}} 0
+   &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = 0\ (b \neq j) \text{ を } a = m,\ b = m+1 \neq j \text{ として各項へ同時適用}) \\
+&= \left[Y_{j-1}Z_j,\ Z_j\right]
+   &&(\because \text{零行列の和は零行列}) \\
+&= 2Y_{j-1}
+   &&(\because \text{上で示した } \left[Y_mZ_{m+1}, Z_{m+1}\right] = 2Y_m \text{ を } m = j-1 \text{ に適用}) \\
+&= 2Y_{j-1}^{\flat}
+   &&(\because 1 \leq j-1 \leq M \text{ では } Y_{j-1}^{\flat} := Y_{j-1})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`j = 1`),
+        " のときは一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[H_1^{(+)},\ Z_1\right]
+&= \left[\sum_{m=1}^{M-1} Y_mZ_{m+1} - Y_MZ_1,\ Z_1\right]
+   &&(\because \blkref{def_H1_pm}\text{ の上の符号}) \\
+&= \sum_{m=1}^{M-1}\left[Y_mZ_{m+1},\ Z_1\right] + \left[-Y_MZ_1,\ Z_1\right]
+   &&(\because \text{交換子の第 1 引数についての加法性}) \\
+&= \sum_{m=1}^{M-1} 0 + \left[-Y_MZ_1,\ Z_1\right]
+   &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = 0\ (b \neq j) \text{ を } a = m,\ b = m+1 \geq 2,\ j = 1 \text{ として各項へ同時適用}) \\
+&= \left[-Y_MZ_1,\ Z_1\right]
+   &&(\because \text{零行列の和は零行列}) \\
+&= 2\,Y_0^{\flat}
+   &&(\because \text{上で示した境界項の等式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから、両方の場合が ",
+        math(String.raw`[H_1^{(+)}, Z_j] = 2Y_{j-1}^{\flat}`),
+        " にまとまる。",
+        math(String.raw`H_1^{(+)}`),
+        " と ",
+        math(String.raw`Y_j`),
+        " について、",
+        math(String.raw`1 \leq j \leq M-1`),
+        " のときは一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[H_1^{(+)},\ Y_j\right]
+&= \left[\sum_{m=1}^{M-1} Y_mZ_{m+1} - Y_MZ_1,\ Y_j\right]
+   &&(\because \blkref{def_H1_pm}\text{ の上の符号}) \\
+&= \sum_{m=1}^{M-1}\left[Y_mZ_{m+1},\ Y_j\right] - \left[Y_MZ_1,\ Y_j\right]
+   &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
+&= \sum_{m=1}^{M-1}\left[Y_mZ_{m+1},\ Y_j\right] - 0
+   &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = 0\ (a \neq j) \text{ を } a = M \neq j,\ b = 1 \text{ に適用}) \\
+&= \sum_{m=1}^{M-1}\left[Y_mZ_{m+1},\ Y_j\right]
+   &&(\because \text{零行列を引いても変わらない}) \\
+&= \left[Y_jZ_{j+1},\ Y_j\right] + \sum_{\substack{1 \leq m \leq M-1 \\ m \neq j}}\left[Y_mZ_{m+1},\ Y_j\right]
+   &&(\because 1 \leq j \leq M-1 \text{ なので } m = j \text{ の項を有限和から分ける}) \\
+&= \left[Y_jZ_{j+1},\ Y_j\right] + \sum_{\substack{1 \leq m \leq M-1 \\ m \neq j}} 0
+   &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = 0\ (a \neq j) \text{ を } a = m \neq j,\ b = m+1 \text{ として各項へ同時適用}) \\
+&= \left[Y_jZ_{j+1},\ Y_j\right]
+   &&(\because \text{零行列の和は零行列}) \\
+&= -2Z_{j+1}
+   &&(\because \text{上で示した } \left[Y_mZ_{m+1}, Y_m\right] = -2Z_{m+1} \text{ を } m = j \text{ に適用}) \\
+&= -2Z_{j+1}^{\flat}
+   &&(\because 2 \leq j+1 \leq M \text{ では } Z_{j+1}^{\flat} := Z_{j+1})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`j = M`),
+        " のときは一続きに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[H_1^{(+)},\ Y_M\right]
+&= \left[\sum_{m=1}^{M-1} Y_mZ_{m+1} - Y_MZ_1,\ Y_M\right]
+   &&(\because \blkref{def_H1_pm}\text{ の上の符号}) \\
+&= \sum_{m=1}^{M-1}\left[Y_mZ_{m+1},\ Y_M\right] + \left[-Y_MZ_1,\ Y_M\right]
+   &&(\because \text{交換子の第 1 引数についての加法性}) \\
+&= \sum_{m=1}^{M-1} 0 + \left[-Y_MZ_1,\ Y_M\right]
+   &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = 0\ (a \neq j) \text{ を } a = m \leq M-1,\ b = m+1,\ j = M \text{ として各項へ同時適用}) \\
+&= \left[-Y_MZ_1,\ Y_M\right]
+   &&(\because \text{零行列の和は零行列}) \\
+&= -2\,Z_{M+1}^{\flat}
+   &&(\because \text{上で示した境界項の等式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから、両方の場合が ",
         math(String.raw`[H_1^{(+)}, Y_j] = -2Z_{j+1}^{\flat}`),
         " にまとまる。",
       ]),
@@ -1867,7 +1917,8 @@ Z_{M+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M)`,
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2Y_j\right)
    &&(\because \text{Step 1 の第 1 式}) \\
-&= -2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j \\
+&= -2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j
+   &&(\because \text{スカラー倍を和の外へ出す}) \\
 &= -2\,\check{Y}_\mu
    &&(\because \blkref{def_half_integer_checkY})
 \end{aligned}`,
@@ -2025,6 +2076,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         "M=2,3,4,5 の全 μ について数値で確認済み（sagemath/check/046_claim_even_sector_modes/check_02_commutators.sage）。",
         "2026-08-15 の式変形統一で、三つの鎖の最終行（= 2Z_j・= 2Y_m・= 2(−Y_M)）に欠けていた行末根拠を補い、単位行列の消去と同類項の統合の圧縮を開いた。内容は変えていない。",
         "2026-08-19 の式変形統一で、境界項二本の鎖にあった「直前の displayMath と同じ計算」の一行を、(Y_M, Z_1) に対する交換子の定義・結合法則・anticommutator_of_Z_and_Y・単位行列・同類項の一操作ずつの行へ開いた。内容・参照は変えていない。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },
@@ -2075,20 +2127,6 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
         " と ",
         math(String.raw`\nu = M+1-\mu`),
         " が同値である。",
-      ]),
-      paragraph([
-        ref("anticommutator_of_hat_Z_and_hat_Y"),
-        " では対になる添字が ",
-        math(String.raw`\nu = -\mu`),
-        " だったのに対し、ここでは ",
-        math(String.raw`\nu = M+1-\mu`),
-        " である。これは ",
-        ref("conjugate_index_of_check_Z_Y"),
-        " の共役添字が ",
-        math(String.raw`-\mu`),
-        " ではなく ",
-        math(String.raw`M+1-\mu`),
-        " であることに対応する。",
       ]),
     ],
     proof: [
@@ -2200,7 +2238,12 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+      ],
+    },
   },
 
   {
@@ -2364,12 +2407,14 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
       ),
       paragraph([
         "が成り立つ（",
-        ref("H1_H2_via_hatZ_hatY"),
-        " の半整数運動量版。共役添字が ",
-        math(String.raw`-\mu`),
-        " から ",
-        math(String.raw`M+1-\mu`),
-        " に変わっている）。和の添字 ",
+        math(String.raw`H_1^{(+)}`),
+        " は ",
+        ref("def_H1_pm"),
+        " で上の符号を取ったもの、",
+        math(String.raw`H_2`),
+        " は ",
+        ref("def_H2"),
+        " のもの）。和の添字 ",
         math(String.raw`\mu`),
         " も共役添字 ",
         math(String.raw`M+1-\mu`),
@@ -2419,7 +2464,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
         "、",
         ref("theorem_exp_product"),
         "、",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_H2"),
         " を順に使うと、",
       ]),
       displayMath(
@@ -2442,7 +2487,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 &= \sum_{j=1}^{M} Z_jY_j
 && (\because \text{スカラー } \tfrac{1}{M} \text{ と } M \text{ の相殺}) \\
 &= H_2
-&& (\because \text{def\_transfer\_matrix\_symbols})
+&& (\because \blkref{def_H2})
 \end{aligned}`,
       ),
       paragraph([
@@ -2500,7 +2545,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
         "、",
         ref("theorem_exp_product"),
         "、",
-        ref("def_V1_pm"),
+        ref("def_H1_pm"),
         " を順に使うと、",
       ]),
       displayMath(
@@ -2523,7 +2568,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
 &= \sum_{j=1}^{M-1} Y_jZ_{j+1} - Y_MZ_1
 && (\because \text{スカラー } \tfrac{1}{M} \text{ の分配と } \tfrac{1}{M}\cdot M = 1,\ \tfrac{1}{M}\cdot(-M) = -1 \text{ の相殺}) \\
 &= H_1^{(+)}
-&& (\because \text{def\_V1\_pm})
+&& (\because \blkref{def_H1_pm}\text{ の上の符号})
 \end{aligned}`,
       ),
     ],
@@ -2533,6 +2578,7 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
         "境界項 -Y_M Z_1 の符号が、antiperiodic_exp_sum の l=1 の因子 (-1)^1 として自動的に出てくる。整数運動量版 H1_H2_via_hatZ_hatY で hat(Z)^{(±)} の第 1 項の符号が担っていた役割を、ここでは指数和の符号が担っている。",
         "2026-08-19 の式変形統一で、H_2 と H_1^{(+)} の導出を分断していた説明・重複した参照を準備へ移し、それぞれ主張の右辺から H_2・H_1^{(+)} へ至る一続きの鎖へまとめた。内容・参照は変えていない。",
         "2026-09-01 の式変形統一で、三本の鎖に行中の \\quad(\\because …) で置かれていた根拠 16 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠・参照は変えていない。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },

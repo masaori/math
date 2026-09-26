@@ -5,7 +5,7 @@ import { defineNotes, paragraph, math, displayMath, ref } from "../schema.ts";
 export default defineNotes([
   {
     id: "note_TV1_hatZ_hatY_001_expressions_used_in_proof",
-    targets: ["commutator_of_H_and_Z_Y"],
+    targets: ["commutator_of_H_and_check_Z_Y"],
     title: { text: "証明で用いる表式と反交換関係（原文の note）" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/000_claim_H1_H2とhatZ_hatYの交換関係.typ",
@@ -29,7 +29,7 @@ H_2 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j \\
   },
   {
     id: "note_TV1_hatZ_hatY_002_concrete_examples",
-    targets: ["nesting_of_commutator_of_H_and_Z"],
+    targets: ["nesting_of_commutator_of_H_and_check_Z"],
     title: { text: "原文 note の具体例（n = 0,1,2,3,4）" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/001_claim_交換子のネスト.typ",
@@ -38,7 +38,7 @@ H_2 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j \\
     body: [
       paragraph([
         "原文 note の具体例（",
-        ref("commutator_of_H_and_Z_Y"),
+        "〔commutator_of_H_and_Z_Y〕",
         " を繰り返し適用）：",
       ]),
       paragraph(["(h1.z) ", math(String.raw`n=0`), "："]),
@@ -163,7 +163,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
   },
   {
     id: "note_TV1_hatZ_hatY_005_taylor_expansion_of_sinh_cosh",
-    targets: ["extract_taylor_coefficient_of_Z_Y"],
+    targets: ["extract_taylor_coefficient_of_check_Z_Y"],
     title: { text: "sinh, cosh のテイラー展開（原文の note）" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/004_claim_テイラー係数の抽出.typ",
@@ -179,7 +179,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
   },
   {
     id: "note_TV1_hatZ_hatY_026_reference_facts_on_arg",
-    targets: ["arg_of_gamma2_quotient"],
+    targets: ["relation_of_gamma_2_theta_tilde"],
     title: { text: "逆数と積の arg に関する参考事実（原文の note）" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/025_claim_gamma2の商のarg.typ",
@@ -214,7 +214,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
     // 元は def_fermi の notes。定義の妥当性（γ2≠0 のときのみ定義される）は statement へ格上げ済みで、
     // ここに残すのは書き換え形と先行研究との比較（出版の解説パート用の素材）。
     id: "note_TV1_hatZ_hatY_030_epsilon_form_and_holonomic_comparison",
-    targets: ["def_fermi"],
+    targets: ["def_check_fermi"],
     title: { text: "符号 ε_μ を用いた書き換えと、ホロノミック量子場の定義との相違" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/029_definition_フェルミオン.typ",
@@ -222,7 +222,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
     },
     body: [
       paragraph([
-        ref("equation_of_a_theta_mu"),
+        "〔equation_of_a_theta_mu〕",
         " の Part A より、",
         math(String.raw`\arg^{[0,2\pi)}(\gamma_2(-\theta_\mu))`),
         " に応じて符号 ",
@@ -251,7 +251,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
     // 元は def_Vprime の notes。和の範囲を限定する理由（well-definedness）は statement へ格上げ済みで、
     // ここに残すのは先行研究との比較。
     id: "note_TV1_hatZ_hatY_033_holonomic_comparison",
-    targets: ["def_Vprime"],
+    targets: ["def_check_Vprime"],
     title: { text: "ホロノミック量子場の定義との相違（添字を反転させる理由）" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/032_definition_Vprimeの定義.typ",
@@ -283,7 +283,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
     // 元は V_eq_Vprime の #note。証明の依存関係についての方針メモであり、
     // 主張の正しさそのものには不要なのでノートへ置く。
     id: "note_TV1_hatZ_hatY_039_proof_does_not_use_clifford_group",
-    targets: ["V_eq_Vprime"],
+    targets: ["V_plus_eq_c_check_Vprime"],
     title: { text: "この証明はクリフォード群の性質に依存しない（原文の note）" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
@@ -294,7 +294,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
         "この証明はクリフォード群（",
         ref("def_T_g"),
         " とは別の TODO 項目 009）の性質には依存しない。",
-        ref("T_V_eq_T_Vprime"),
+        "〔T_V_eq_T_Vprime〕",
         " の共役写像としての一致から、全行列環 ",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
         " の中心がスカラーに限ること（",

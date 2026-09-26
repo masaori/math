@@ -16,7 +16,7 @@ export default defineBlocks([
     id: "evensectorT_000_remark_overview",
     kind: "remark",
     origin: { path: SRC, ordinal: 2 },
-    title: { text: "この章の目的と、008 章との関係" },
+    title: { text: "この章の目的" },
     labels: [],
     statement: [
       paragraph([
@@ -45,49 +45,25 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         " について定義された）行列である。",
       ]),
       paragraph([
-        "**008 章との関係。** 008 章は同じ道筋を整数運動量 ",
-        math(String.raw`\theta_\mu = 2\pi\mu/M`),
-        " と ",
-        math(String.raw`\hat{Z}_\mu^{(-)}, \hat{Y}_\mu`),
-        " について辿っている。",
-        ref("why_008_applies_only_to_minus_sector"),
-        " で確定させたとおり 008 章の議論は ",
-        math(String.raw`(-)`),
-        " セクター専用なので、そこで扱われている ",
-        math(String.raw`V`),
-        " は実質 ",
-        math(String.raw`\left(V_1^{(-)}\right)^{1/2} V_2 \left(V_1^{(-)}\right)^{1/2}`),
-        " である。混同を避けるため、この章では ",
-        math(String.raw`V^{(+)}, T_{(V^{(+)})}`),
-        " という別の記号を用い、必要な主張はすべてこの章で立て直す。",
-      ]),
-      paragraph([
-        "**同じ代数計算で通る理由。** 008 章の ",
-        ref("nesting_of_commutator_of_H_and_Z"),
-        " から ",
-        ref("T_V_hatZ_hatY"),
-        " までの各証明は、1 重の交換子の公式 (A)〜(D) と、交換子の双線型性・指数関数の共役の級数展開・",
-        math(String.raw`e^{i\theta}e^{-i\theta} = 1`),
-        " だけを使っており、",
-        math(String.raw`\theta_\mu`),
-        " に固有の性質（",
-        math(String.raw`e^{-iM\theta_\mu} = +1`),
-        "、添字集合 ",
-        math(String.raw`\mathcal{M}`),
-        " の形、",
-        ref("hatZ_hatY_M_periodicity"),
+        "道筋は次のとおりである。(A)〜(D) を繰り返し使って ",
+        math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
         " の ",
-        math(String.raw`M`),
-        " 周期性）を使っていない。",
-        math(String.raw`\theta_\mu`),
-        " に固有の性質が使われていたのは 1 重の交換子 (A)〜(D) を導く段階（",
-        ref("commutator_of_H_and_Z_Y"),
-        "）だけであり、そこは ",
-        ref("commutator_of_H_and_check_Z_Y"),
-        " が半整数運動量について独立に済ませてある。",
-        "したがってこの章の各主張は、008 章の対応する証明と同じ代数計算を ",
-        math(String.raw`\tilde\theta_\mu, \check{Z}_\mu, \check{Y}_\mu`),
-        " について繰り返すことで得られる。",
+        math(String.raw`n`),
+        " 重交換子を求め（",
+        ref("nesting_of_commutator_of_H_and_check_Z"),
+        "）、指数関数の共役の級数展開（",
+        ref("exp_X_Y_exp_-X"),
+        "）で ",
+        math(String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}`),
+        " と ",
+        math(String.raw`T_{V_2}`),
+        " の作用を得て（",
+        ref("T_actions_on_check_Z_Y"),
+        "）、それらを合成する（",
+        ref("T_V_plus_check_Z_Y"),
+        "）。用いるのは (A)〜(D)、交換子の双線型性、",
+        math(String.raw`e^{i\theta}e^{-i\theta} = 1`),
+        " と行列の計算だけである。",
       ]),
       paragraph([
         "**添字の量化について。** ",
@@ -106,12 +82,15 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         ref("def_check_index_set"),
         " の ",
         math(String.raw`\mu \in \check{\mathcal{M}} = \{1,\dots,M\}`),
-        " について述べる。** これは 008 章の ",
-        math(String.raw`\mathcal{M} = \{-M,\dots,-1,1,\dots,M\}`),
-        " に対応する、半整数運動量側の必要最小の有限集合である。",
+        " について述べる。**",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+      ],
+    },
   },
 
   {
@@ -499,16 +478,16 @@ T_{(V^{(+)})}
         "、",
         ref("def_half_integer_checkY"),
         "、",
-        ref("def_V1_pm"),
+        ref("def_H1_plus"),
         "、",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_H2"),
         "）、",
         math(String.raw`K_1, K_2^* \in \mathbb{R}`),
-        " はスカラー、",
+        " は ",
+        ref("def_transfer_matrix_symbols"),
+        " のスカラー、",
         math(String.raw`[X, W] := XW - WX`),
         " は交換子である。",
-        ref("nesting_of_commutator_of_H_and_Z"),
-        " と同じく、",
         math(String.raw`X \in \mathrm{Mat}(2^M,\mathbb{C})`),
         " を固定するごとに ",
         math(String.raw`n`),
@@ -962,6 +941,7 @@ F_{n+1}
         "008 章の nesting_of_commutator_of_H_and_Z と同じ帰納法を、(A)〜(D) を commutator_of_H_and_check_Z_Y から取って半整数運動量について繰り返したもの。008 章の証明が θ_μ に固有の性質（e^{-iMθ_μ}=+1、添字集合 calM、hatZ_hatY_M_periodicity）を一切使っていないことを確認したうえで書いた。使うのは (A)〜(D) と交換子の双線型性と e^{iθ}e^{-iθ}=1 だけである。",
         "008 章では (h2.z) が hatZ^{(-)} 専用だったのに対し、ここでは (C)(D) が checkZ, checkY について成り立つので (h2.z)(h2.y) にセクターの制限が付かない。これが偶セクターで議論が閉じる理由である。",
         "M=2,3,4,5、μ=1..M、n=0..8、5 組の (K1,K2)（臨界点上・臨界点近傍を含む）で数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_01_nested_commutators.sage）。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },
@@ -1016,9 +996,7 @@ i (2K_2^*)^n\,\check{Z}_\mu & (n \text{ 奇数}) \\
     ],
     proof: [
       paragraph([
-        "まず 4 式すべてで用いる 2 つの補題を用意する（",
-        ref("cosh_sinh_coefficient_conversion"),
-        " の proof の補題 1・補題 2 と同一の主張であり、",
+        "まず 4 式すべてで用いる 2 つの補題を用意する（いずれも ",
         math(String.raw`\check{Z}, \check{Y}`),
         " とは無関係に ",
         math(String.raw`\mathrm{Mat}(2^M,\mathbb{C})`),
@@ -1323,6 +1301,7 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
       notes: [
         "008 章の cosh_sinh_coefficient_conversion と同一形の計算を半整数運動量について繰り返したもの。用いる補題 1・補題 2 は θ にも Z,Y にも依存しない純代数的な主張なので、そのまま同じものを使える。",
         "M=2,3,4,5、μ=1..M、n=0..8 で数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_01_nested_commutators.sage の scaled 列）。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },
@@ -1374,6 +1353,8 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
         "各級数を ",
         ref("cosh_sinh_coefficient_conversion_for_check"),
         " により偶数項・奇数項に分け、",
+        ref("sinh_cosh_taylor_series"),
+        " の ",
         math(String.raw`\sinh, \cosh`),
         " のテイラー展開",
       ]),
@@ -1402,7 +1383,7 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
    + i\,e^{-i\tilde\theta}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\check{Y}_\mu
    \quad (\because \check{Z}_\mu, \check{Y}_\mu, i e^{-i\tilde\theta} \text{ が } n \text{ に依らないので和の外へ出した}) \\
 &= \cosh(K_1)\check{Z}_\mu + i\,e^{-i\tilde\theta}\sinh(K_1)\check{Y}_\mu
-   \quad (\because \sinh, \cosh \text{ のテイラー展開})
+   \quad (\because \blkref{sinh_cosh_taylor_series})
 \end{aligned}`,
       ),
       paragraph([
@@ -1445,7 +1426,7 @@ K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
    - i\,e^{i\tilde\theta}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\check{Z}_\mu
    \quad (\because \check{Z}_\mu, \check{Y}_\mu, -i e^{i\tilde\theta} \text{ が } n \text{ に依らないので和の外へ出した}) \\
 &= \cosh(K_1)\check{Y}_\mu - i\,e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu
-   \quad (\because \sinh, \cosh \text{ のテイラー展開}) \\
+   \quad (\because \blkref{sinh_cosh_taylor_series}) \\
 &= -i\,e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
    \quad (\because \text{行列加法の可換則})
 \end{aligned}`,
@@ -1471,7 +1452,7 @@ K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
    - i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Y}_\mu
    \quad (\because \check{Z}_\mu, \check{Y}_\mu, -i \text{ が } n \text{ に依らないので和の外へ出した}) \\
 &= \cosh(2K_2^*)\check{Z}_\mu - i\sinh(2K_2^*)\check{Y}_\mu
-   \quad (\because \sinh, \cosh \text{ のテイラー展開})
+   \quad (\because \blkref{sinh_cosh_taylor_series})
 \end{aligned}`,
       ),
       paragraph([
@@ -1495,7 +1476,7 @@ i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
    + i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Z}_\mu
    \quad (\because \check{Z}_\mu, \check{Y}_\mu, i \text{ が } n \text{ に依らないので和の外へ出した}) \\
 &= \cosh(2K_2^*)\check{Y}_\mu + i\sinh(2K_2^*)\check{Z}_\mu
-   \quad (\because \sinh, \cosh \text{ のテイラー展開}) \\
+   \quad (\because \blkref{sinh_cosh_taylor_series}) \\
 &= i\sinh(2K_2^*)\check{Z}_\mu + \cosh(2K_2^*)\check{Y}_\mu
    \quad (\because \text{行列加法の可換則})
 \end{aligned}`,
@@ -1510,6 +1491,8 @@ i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
         "008 章の extract_taylor_coefficient_of_Z_Y と同一形。sinh/cosh のテイラー展開は 008 章の TV1_hatZ_hatY_004_claim_sinh_cosh_taylor がラベルを持たないため、ここでは式を再掲して使った。",
         "級数を 40 次で打ち切った数値検証を M=2,3,4,5・μ=1..M・5 組の (K1,K2) で実施し、残差 1e-13 以下（sagemath/check/047_claim_even_sector_T_action/check_02_taylor_sums.sage）。",
         "4 式の係数変換の適用を各式鎖の直前から実在ラベルで参照し、(h1.y)・(h2.y) の終端の項の交換へ行列加法の可換則を明記した（2026-08-15）。",
+        "2026-09-26: sinh, cosh のテイラー展開の適用を sinh_cosh_taylor_series のラベル参照で引くようにした。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },
@@ -1649,7 +1632,7 @@ T_{V_2}(\check{Z}_\mu)
    \quad (\because \text{def\_T\_g}) \\
 &= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,
    \left((2s_2)^{M/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{V2\_exponential\_representation と直前の } V_2^{-1} \text{ の表示}) \\
+   \quad (\because \blkref{V2_exponential_representation}\text{ と直前の } V_2^{-1} \text{ の表示}) \\
 &= (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1}
    \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
    \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M/2}\right)^{-1} \text{ を左端へ移す）}) \\
@@ -1669,7 +1652,7 @@ T_{V_2}(\check{Y}_\mu)
    \quad (\because \text{def\_T\_g}) \\
 &= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,
    \left((2s_2)^{M/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{def\_H1\_H2 の } V_2 \text{ と直前の } V_2^{-1} \text{ の表示}) \\
+   \quad (\because \blkref{V2_exponential_representation}\text{ と直前の } V_2^{-1} \text{ の表示}) \\
 &= (2s_2)^{M/2}\left((2s_2)^{M/2}\right)^{-1}
    \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
    \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M/2}\right)^{-1} \text{ を左端へ移す）}) \\
@@ -1693,6 +1676,7 @@ T_{V_2}(\check{Y}_\mu)
       notes: [
         "008 章の ホロノミック量子場_p142下段_1 の半整数運動量版。008 章では H_1 の符号 (±) と hatZ の符号 (-) が食い違ったまま書かれていたが（why_008_applies_only_to_minus_sector により実質 (-) 専用）、ここでは H_1^{(+)} と checkZ, checkY で首尾一貫している。",
         "行列指数関数を明示的に構成した直接計算（交換子の級数展開に依存しない独立経路）で数値確認済み。V_2 の前因子 (2 s_2)^{M/2} を明示的に付けた形で相殺も確認した（sagemath/check/047_claim_even_sector_T_action/check_03_T_actions.sage）。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },
@@ -1826,20 +1810,13 @@ B_2 := \begin{pmatrix}
         " は ",
         ref("def_transfer_matrix_symbols"),
         " の記号）。",
-        ref("factorization_of_A_theta"),
-        " の ",
-        math(String.raw`B_1(\theta_\mu), B_2`),
-        " は ",
-        math(String.raw`\theta = \theta_\mu`),
-        " とした場合であり、この定義はそれを ",
-        math(String.raw`\theta \in \mathbb{R}`),
-        " 一般へ広げたものである。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "008 章では B_1, B_2 は factorization_of_A_theta の statement と T_V_hatZ_hatY の proof の中で θ_μ（μ ∈ calM）に限って導入されている。半整数運動量 θ~_μ で使うために、θ ∈ R 一般の定義として立て直した（008 章側は変更していない）。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },

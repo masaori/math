@@ -29,7 +29,6 @@ import blocks_003_exp_linear_map from './content/003_exp_linear_map.ts'
 import blocks_004_transfer_matrix from './content/004_transfer_matrix.ts'
 import blocks_005_exp_conjugation_proof from './content/005_exp_conjugation_proof.ts'
 import blocks_006_Z_Y_anticommutation from './content/006_Z_Y_anticommutation.ts'
-import blocks_007_hatZ_hatY_anticommutation from './content/007_hatZ_hatY_anticommutation.ts'
 import blocks_008_TV1_hatZ_hatY_part1 from './content/008_TV1_hatZ_hatY_part1.ts'
 import blocks_008_TV1_hatZ_hatY_part2 from './content/008_TV1_hatZ_hatY_part2.ts'
 import blocks_009_eigenvalues_of_V from './content/009_eigenvalues_of_V.ts'
@@ -52,6 +51,7 @@ import notes_005_exp_conjugation_lie_route from './notes/005_exp_conjugation_lie
 import notes_008_TV1_hatZ_hatY from './notes/008_TV1_hatZ_hatY.ts'
 import notes_008_group_theory_general from './notes/008_group_theory_general.ts'
 import notes_009_clifford_algebra from './notes/009_clifford_algebra.ts'
+import notes_integer_momentum_route_not_adopted from './notes/integer_momentum_route_not_adopted.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
@@ -67,7 +67,6 @@ export type AllBlocks = [
   ...typeof blocks_004_transfer_matrix,
   ...typeof blocks_005_exp_conjugation_proof,
   ...typeof blocks_006_Z_Y_anticommutation,
-  ...typeof blocks_007_hatZ_hatY_anticommutation,
   ...typeof blocks_008_TV1_hatZ_hatY_part1,
   ...typeof blocks_008_TV1_hatZ_hatY_part2,
   ...typeof blocks_009_eigenvalues_of_V,
@@ -94,6 +93,7 @@ export type AllNotes = [
   ...typeof notes_008_TV1_hatZ_hatY,
   ...typeof notes_008_group_theory_general,
   ...typeof notes_009_clifford_algebra,
+  ...typeof notes_integer_momentum_route_not_adopted,
 ]
 
 type AllBlockIds = BlockIdsOf<AllBlocks>

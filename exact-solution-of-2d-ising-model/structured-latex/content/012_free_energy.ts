@@ -95,7 +95,7 @@ export default defineBlocks([
         "しかし ",
         math(String.raw`M \to \infty`),
         " で現れるのは ",
-        math(String.raw`\frac{1}{M}\sum_{\mu=1}^{M}\gamma(\theta_\mu)`),
+        math(String.raw`\frac{1}{M}\sum_{\mu=1}^{M}\gamma\!\left(\frac{2\pi(\mu-\frac12)}{M}\right)`),
         " という**点の個数が増えていく有限和**であり、その極限を閉じた式で書くには",
         "「等間隔の点での値の平均が積分に収束する」という実数解析の事実が要る。",
         "ここだけは有限の代数計算では代用できない。",
@@ -107,7 +107,12 @@ export default defineBlocks([
         " に (R3)〜(R6) として列挙してあり、この章の (R0)(R1)(R2) とは独立に管理する。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+      ],
+    },
   },
 
   {
@@ -123,13 +128,7 @@ export default defineBlocks([
         math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
         " を**すべての実数** ",
         math(String.raw`\theta`),
-        " について考える（",
-        ref("gamma1_geq_1"),
-        " は ",
-        math(String.raw`\theta = \theta_\mu`),
-        " の場合の主張だが、以下の評価は任意の実数 ",
-        math(String.raw`\theta`),
-        " で成り立つ）。このとき",
+        " について考える。このとき",
       ]),
       displayMath(
         String.raw`\gamma_1(\theta) \geq \cosh\left(2K_1 - 2K_2^*\right) \geq 1
@@ -140,11 +139,7 @@ export default defineBlocks([
         math(String.raw`\gamma(\theta) := \mathrm{arccosh}\left(\gamma_1(\theta)\right) \in \mathbb{R}_{\geq 0}`),
         " が**すべての実数** ",
         math(String.raw`\theta`),
-        " について定まる（",
-        ref("def_gamma_theta_mu"),
-        " の ",
-        math(String.raw`\gamma(\theta_\mu)`),
-        " の拡張）。",
+        " について定まる。",
       ]),
     ],
     proof: [
@@ -203,6 +198,7 @@ export default defineBlocks([
           "散文で継がれた 2 つの表示に分かれていたのを、γ_1(θ) から 1 までの一続きの鎖にし、" +
           "根拠を行末の (∵ …) へ揃えた。引いていた根拠（加法定理・K_1,K_2^*>0・cosh≥1）は" +
           "すべて行末と直後の参照に残した。段は増えており、減った段は無い。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },
@@ -726,15 +722,7 @@ u
 \Lambda^{(\delta)}_M := (2\sinh 2K_2)^{M/2}
 \exp\left(\frac{1}{2}\sum_{\theta \in \Theta_M^{(\delta)}} \gamma(\theta)\right)`,
       ),
-      paragraph([
-        "とおく（",
-        ref("eigenvalues_of_V"),
-        " の ",
-        math(String.raw`\Lambda_{\max}`),
-        " は ",
-        math(String.raw`\delta = 0`),
-        " の場合にあたる）。このとき",
-      ]),
+      paragraph(["とおく。このとき"]),
       displayMath(
         String.raw`\lim_{M\to\infty}\frac{1}{M}\log \Lambda^{(\delta)}_M
 = \frac{1}{2}\log\left(2\sinh 2K_2\right)
@@ -911,7 +899,12 @@ u
         " に依らない。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+      ],
+    },
   },
 
   {
@@ -975,31 +968,25 @@ u
         " で与えられることである。",
       ]),
       paragraph([
-        "本文にこれが無い理由は具体的である。",
-        ref("def_hatZ_pm"),
-        " の ",
-        math(String.raw`\hat{Z}_\mu^{(\pm)}`),
-        " は第 1 項に符号 ",
-        math(String.raw`\mp`),
-        " を持つ。",
-        ref("commutator_of_H_and_Z_Y"),
-        " の (C) ",
-        math(String.raw`[H_2, \hat{Z}_\mu^{(-)}] = -2\hat{Y}_\mu`),
-        " は、",
-        math(String.raw`[H_2, Z_j] = -2Y_j`),
-        " を各項に適用して係数どうしを比べる形で示されるが、",
-        math(String.raw`\hat{Z}_\mu^{(+)}`),
-        " では第 1 項の符号だけが反転しているため右辺が ",
-        math(String.raw`-2\hat{Y}_\mu`),
-        " にならない。",
-        "したがって 008 章以降の議論は ",
-        math(String.raw`\hat{Z}_\mu^{(-)}`),
-        "（整数運動量）に対してのみ成立しており、",
+        "偶セクターの転送行列 ",
         math(String.raw`V^{(+)}`),
-        " には適用できない。",
+        " を作る ",
+        math(String.raw`H_1^{(+)}`),
+        "（",
+        ref("def_H1_pm"),
+        " で上の符号を取ったもの）は、境界項 ",
+        math(String.raw`-Y_MZ_1`),
+        " を持つ：",
       ]),
+      displayMath(String.raw`H_1^{(+)} = \sum_{m=1}^{M-1}Y_mZ_{m+1} - Y_MZ_1`),
       paragraph([
-        "偶セクターを扱うには、符号を第 1 項に置く代わりに**位相に繰り込んだ**",
+        "この符号のため、",
+        math(String.raw`V^{(+)}`),
+        " を対角化するモードは半整数運動量 ",
+        math(String.raw`\tilde\theta_\mu`),
+        "（",
+        ref("antiperiodic_exp_sum"),
+        "）で Fourier 変換した",
       ]),
       displayMath(
         String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,e^{-i j \tilde\theta_\mu},\qquad
@@ -1007,13 +994,15 @@ u
 \tilde\theta_\mu := \frac{2\pi\left(\mu-\tfrac12\right)}{M}`,
       ),
       paragraph([
-        "を用いればよい。この ",
+        "になる（",
+        ref("def_half_integer_checkZ"),
+        "、",
+        ref("def_half_integer_checkY"),
+        "）。この ",
         math(String.raw`\check{Z}, \check{Y}`),
-        " については ",
-        ref("commutator_of_H_and_Z_Y"),
-        " の (A)〜(D) が ",
+        " は ",
         math(String.raw`H_1^{(+)}, H_2`),
-        " に対して成り立ち（",
+        " との交換関係 (A)〜(D) を満たし（",
         ref("commutator_of_H_and_check_Z_Y"),
         "）、反交換関係の対は ",
         math(String.raw`\nu = M+1-\mu`),
@@ -1034,6 +1023,7 @@ u
       status: "added",
       notes: [
         "V^{(+)} の固有値が半整数運動量で与えられることは M=2,3,4 で数値的に確認済み（相対誤差 1e-14 以下、整数運動量では 0.5〜2.4 の相対差で明確に不一致）。また最大固有値が (+) セクターで達成されることも M=2,3,4 で確認した（W の成分がすべて正なので Perron–Frobenius から期待される通り）。これらは sagemath/check/044_claim_max_eigenvalue/ と 045_claim_free_energy/ に記録した。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },
   },

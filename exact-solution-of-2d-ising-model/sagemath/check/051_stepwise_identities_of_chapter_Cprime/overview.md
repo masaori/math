@@ -8,7 +8,7 @@
   `014_even_sector_T_action.ts`, `015_A_theta_tilde_diagonalization.ts`,
   `016_even_sector_fermions.ts`
 - 併せて検証（章 C′ の全ブロック）:
-  - 013 章: `why_008_applies_only_to_minus_sector` / `antiperiodic_exp_sum` /
+  - 013 章: `antiperiodic_exp_sum` /
     `def_half_integer_checkZ` / `def_half_integer_checkY` /
     `half_integer_phase_antiperiodicity` / `half_integer_checkZ_periodicity` /
     `half_integer_checkY_periodicity` /
@@ -129,6 +129,37 @@ A(t)   = [[gamma_1(t), gamma_2(t)], [-gamma_2(-t), gamma_1(t)]]
 105 種類から 151 種類となった。変更した check_01 を再実行し、最大残差は従来どおり
 `2.3e-14`、全段 PASS だった。
 
+## 整数運動量の経路の退避に伴う更新（2026-09-26）
+
+整数運動量の経路を本文から外し、`why_008_applies_only_to_minus_sector` は参照用ノート
+`structured-latex/notes/integer_momentum_route_not_adopted.ts` へ退避された。その証明の Step 1
+（`[H_2, Z_j] = -2Y_j`）は `commutator_of_H_and_check_Z_Y` の Step 1 へ移り、Step 1 全体が
+一行一等号で書き下された。これに合わせて check_01 と check_02 を更新し、再実行した。
+
+- check_01: `why_008` の 12 種類の段と、旧 Step 1 の 21 種類の段を外し、新しい Step 1 の
+  displayMath を並び順どおりに一行ずつ比較する 142 種類の段に置き換えた。内訳は
+  `anticommutator_of_Z_and_Y` の 3 式と `delta^M_{(j,k)}` の評価、そこから従う 3 行の関係式、
+  相異なる添字の項が消える 4 本の鎖（`[Z_aY_a, Z_j]`, `[Z_aY_a, Y_j]` は `a != j`、
+  `[Y_aZ_b, Z_j]` は `b != j` と任意の `a`、`[Y_aZ_b, Y_j]` は `a != j` と任意の `b`）、
+  同じ添字を含む項の 6 本の鎖（`[Z_jY_j, Z_j]`, `[Z_jY_j, Y_j]`, `[Y_mZ_{m+1}, Z_{m+1}]`,
+  `[Y_mZ_{m+1}, Y_m]`, 境界項 `[-Y_MZ_1, Z_1]`, `[-Y_MZ_1, Y_M]`）、`def_H2` から
+  `[H_2, Z_j]`, `[H_2, Y_j]` を和へまとめる 2 本の鎖、`H_1^{(+)}` についての 4 本の鎖
+  （`Z_j` の `2 <= j <= M` と `j = 1`、`Y_j` の `1 <= j <= M-1` と `j = M`）、および Step 1 の主張 4 式。
+  添字はすべての組（`M = 2..5`）を回す。段数 179 → 288。残差はすべて 0。
+- `why_008` の段は `sagemath/_old/integer-momentum-route/why_008_applies_only_to_minus_sector/`
+  の check_02 へ移した（ノートにある証明の検証として残す）。
+- check_02: `gamma_2_theta_tilde_nonzero` の Step 0（正値性）の 4 行を追加した。
+  `K_1^*, K_2^*` は `def_first_dual_coupling_constant` / `def_second_dual_coupling_constant` の
+  定義式 `-1/2 log(tanh K_i)` から直接作り、`K_1^* > 0`, `K_2^* > 0`, `c_1, s_1 > 0`,
+  `c_2, s_2^* > 0` を 6 組のパラメータで真偽判定する（不等号なので残差ではなく各量の最小値を出す）。
+  あわせて定義式から作った `K_2^*, s_2^*, c_1, s_1, c_2` が prelude の値と一致することを 5 段で見る。
+  残差の段数 66 → 71、不等号の判定 6 件。
+
+SageMath 10.9 の `sage <file>.sage` はスクリプトの `__file__` をパッケージ側の値にするので、
+`_prelude.sage` の `load` が失敗する。今回のログは `<file>.sage.py` を生成して
+SageMath 環境の `python <file>.sage.py` で実行した（2026-09-26、SageMath 10.9 / Linux）。
+check_03・check_04 は変更していないので再実行していない。
+
 ## 実行
 
 ```
@@ -145,12 +176,12 @@ sage check_04_016_steps.sage
 
 | ファイル | 対象 | 区別された段の種類 | 最大残差 | 判定 |
 | --- | --- | --- | --- | --- |
-| `check_01_013_steps.sage` | 013 章の各段 | 179 | 2.3e-14 | PASS |
-| `check_02_015_steps.sage` | 015 章の各段 | 66 | 1.7e-13 | PASS |
+| `check_01_013_steps.sage` | 013 章の各段 | 288 | 2.3e-14 | PASS |
+| `check_02_015_steps.sage` | 015 章の各段（ほかに不等号 6 件） | 71 | 2.1e-13 | PASS |
 | `check_03_014_steps.sage` | 014 章の各段 | 100 | 9.5e-11 | PASS |
 | `check_04_016_steps.sage` | 016 章の各段 | 62 | 5.0e-9 | PASS |
 
-**章 C′ の 4 章あわせて 407 種類の段がすべて成り立っている。**
+**章 C′ の 4 章あわせて 521 種類の段と、Step 0 の不等号 6 件がすべて成り立っている。**
 
 副産物として、次の 3 つの狭義不等号も再確認した（本文が半整数運動量に固有の帰結として
 主張しているもの。整数運動量では臨界点で等号が起こる）。

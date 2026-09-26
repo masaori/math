@@ -7,7 +7,8 @@ _sage_const_1en3 = RealNumber('1e-3'); _sage_const_0p0 = RealNumber('0.0'); _sag
 # SageMath: 008 章が (-) 専用である理由
 #   [H_2, hatZ^{(-)}_mu] = -2 hatY_mu           （成立）
 #   [H_2, hatZ^{(+)}_mu] = -2 hatY_mu + 4 e^{-i theta_mu} Y_1  （右辺が -2 hatY ではない）
-# 対象: structured-latex why_008_applies_only_to_minus_sector
+# 対象: why_008_applies_only_to_minus_sector（本文から参照用ノート
+#       structured-latex/notes/integer_momentum_route_not_adopted.ts へ退避したブロック）
 # ---------------------------------------------------------
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'

@@ -29,6 +29,36 @@ min_abs_g2 = None
 min_g1_minus_1 = None
 min_gamma = None
 
+# -----------------------------------------------------------------
+# gamma_2_theta_tilde_nonzero / Step 0（正値性）の 4 行
+#   K_1^* > 0, K_2^* > 0, (c_1 > 0, s_1 > 0), (c_2 > 0, s_2^* > 0)
+#   不等号の行なので残差ではなく真偽で判定し、各行について全パラメータでの
+#   最小値（0 からの離れ）を出力する。
+#   K_i^* は def_first_dual_coupling_constant / def_second_dual_coupling_constant の
+#   定義式 -1/2 log(tanh K_i) から直接作り、prelude の K_star と一致することも見る。
+# -----------------------------------------------------------------
+step0_min = {}
+for p in STEP_PARAMS:
+    K1 = RDF(p['K1']); K2 = RDF(p['K2'])
+    K1s_def = RDF(-log(tanh(K1)) / 2)
+    K2s_def = RDF(-log(tanh(K2)) / 2)
+    S.add("gamma_2_nonzero Step0 K_2^* の定義式 = prelude の K_star(K_2)", K2s_def, K_star(K2))
+    P = coeffs(K1, K2)
+    rows = {
+        "gamma_2_nonzero Step0 (1) K_1^* > 0": K1s_def,
+        "gamma_2_nonzero Step0 (2) K_2^* > 0": K2s_def,
+        "gamma_2_nonzero Step0 (3) c_1 > 0": RDF(cosh(2 * K1)),
+        "gamma_2_nonzero Step0 (3) s_1 > 0": RDF(sinh(2 * K1)),
+        "gamma_2_nonzero Step0 (4) c_2 > 0": RDF(cosh(2 * K2)),
+        "gamma_2_nonzero Step0 (4) s_2^* > 0": RDF(sinh(2 * K2s_def)),
+    }
+    S.add("gamma_2_nonzero Step0 s_2^* = prelude の s2s", RDF(sinh(2 * K2s_def)), P['s2s'])
+    S.add("gamma_2_nonzero Step0 c_1 = prelude の c1", RDF(cosh(2 * K1)), P['c1'])
+    S.add("gamma_2_nonzero Step0 s_1 = prelude の s1", RDF(sinh(2 * K1)), P['s1'])
+    S.add("gamma_2_nonzero Step0 c_2 = prelude の c2", RDF(cosh(2 * K2)), P['c2'])
+    for name, val in rows.items():
+        step0_min[name] = val if name not in step0_min else min(step0_min[name], val)
+
 for M in STEP_M + [6, 7, 8]:
     for p in STEP_PARAMS:
         P = coeffs(p['K1'], p['K2'])
@@ -214,6 +244,10 @@ for M in STEP_M + [6, 7, 8]:
             assert lam_p > 1 > lam_m > 0, "Step3 の分離が破れた"
 
 ok_all = S.report_all()
+for name, v in step0_min.items():
+    ok_row = bool(v > 0)
+    print(f"  {name}: min = {float(v):.3e}  ->  {'PASS' if ok_row else 'FAIL'}")
+    ok_all &= ok_row
 print(f"  gamma_2_theta_tilde_nonzero: min |gamma_2(theta~_mu)| = {float(min_abs_g2):.3e} "
       f"-> {'0 から離れている' if min_abs_g2 > 1e-2 else '判定不能'}")
 print(f"  gamma1_gt_1_theta_tilde:    min (gamma_1 - 1) = {float(min_g1_minus_1):.3e} "

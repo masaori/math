@@ -17,7 +17,7 @@ import { defineNotes, paragraph, math, displayMath, list, ref } from "../schema.
 export default defineNotes([
   {
     id: "note_TV1_hatZ_hatY_007_definition_automorphism_groups",
-    targets: ["injectivity_of_T_up_to_scalar"],
+    targets: ["V_plus_eq_c_check_Vprime"],
     title: { text: "自己同型群・内部自己同型群・外部自己同型群" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/006_definition_自己同型群_内部自己同型群_外部自己同型群.typ",
@@ -30,7 +30,7 @@ export default defineNotes([
         " が定数倍を除いて単射であること）は、",
         ref("centralizer_is_scalar"),
         "（すべての元と可換な元はスカラー倍の単位行列に限る）を直接当てるだけで書けた（",
-        ref("injectivity_of_T_up_to_scalar"),
+        "〔injectivity_of_T_up_to_scalar〕",
         "）。",
       ]),
       paragraph(["群 ", math(String.raw`G`), " について、"]),
@@ -106,7 +106,7 @@ export default defineNotes([
   },
   {
     id: "note_TV1_hatZ_hatY_007a_definition_group_hom_ker_im",
-    targets: ["injectivity_of_T_up_to_scalar"],
+    targets: ["V_plus_eq_c_check_Vprime"],
     title: { text: "群準同型・核・像" },
     origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 2 },
     body: [
@@ -116,7 +116,7 @@ export default defineNotes([
         " が定数倍を除いて単射であること）は、",
         ref("centralizer_is_scalar"),
         "（すべての元と可換な元はスカラー倍の単位行列に限る）を直接当てるだけで書けた（",
-        ref("injectivity_of_T_up_to_scalar"),
+        "〔injectivity_of_T_up_to_scalar〕",
         "）。",
       ]),
       paragraph([
@@ -263,7 +263,7 @@ export default defineNotes([
   },
   {
     id: "note_TV1_hatZ_hatY_007b_definition_center_of_group",
-    targets: ["injectivity_of_T_up_to_scalar"],
+    targets: ["V_plus_eq_c_check_Vprime"],
     title: { text: "群の中心" },
     origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 3 },
     body: [
@@ -273,7 +273,7 @@ export default defineNotes([
         " が定数倍を除いて単射であること）は、",
         ref("centralizer_is_scalar"),
         "（すべての元と可換な元はスカラー倍の単位行列に限る）を直接当てるだけで書けた（",
-        ref("injectivity_of_T_up_to_scalar"),
+        "〔injectivity_of_T_up_to_scalar〕",
         "）。",
       ]),
       paragraph(["群 ", math(String.raw`G`), " について、"]),
@@ -329,7 +329,7 @@ export default defineNotes([
   },
   {
     id: "note_TV1_hatZ_hatY_007c_claim_inn_normal_in_aut",
-    targets: ["injectivity_of_T_up_to_scalar"],
+    targets: ["V_plus_eq_c_check_Vprime"],
     title: { tex: String.raw`\mathrm{Inn}(G) \trianglelefteq \mathrm{Aut}(G)` },
     origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 4 },
     body: [
@@ -339,7 +339,7 @@ export default defineNotes([
         " が定数倍を除いて単射であること）は、",
         ref("centralizer_is_scalar"),
         "（すべての元と可換な元はスカラー倍の単位行列に限る）を直接当てるだけで書けた（",
-        ref("injectivity_of_T_up_to_scalar"),
+        "〔injectivity_of_T_up_to_scalar〕",
         "）。",
       ]),
       paragraph([
@@ -488,7 +488,7 @@ export default defineNotes([
   },
   {
     id: "note_TV1_hatZ_hatY_007d_definition_exact_sequence",
-    targets: ["injectivity_of_T_up_to_scalar"],
+    targets: ["V_plus_eq_c_check_Vprime"],
     title: { text: "群の完全列" },
     origin: { path: "structured-latex/content/008_TV1_hatZ_hatY_part1.ts", ordinal: 5 },
     body: [
@@ -498,7 +498,7 @@ export default defineNotes([
         " が定数倍を除いて単射であること）は、",
         ref("centralizer_is_scalar"),
         "（すべての元と可換な元はスカラー倍の単位行列に限る）を直接当てるだけで書けた（",
-        ref("injectivity_of_T_up_to_scalar"),
+        "〔injectivity_of_T_up_to_scalar〕",
         "）。",
       ]),
       paragraph([
@@ -563,7 +563,7 @@ export default defineNotes([
   },
   {
     id: "note_TV1_hatZ_hatY_008_definition_exact_sequence_aut",
-    targets: ["injectivity_of_T_up_to_scalar"],
+    targets: ["V_plus_eq_c_check_Vprime"],
     title: { text: "自己同型群の完全列" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/007_definition_自己同型群の完全列.typ",
@@ -576,7 +576,7 @@ export default defineNotes([
         " が定数倍を除いて単射であること）は、",
         ref("centralizer_is_scalar"),
         "（すべての元と可換な元はスカラー倍の単位行列に限る）を直接当てるだけで書けた（",
-        ref("injectivity_of_T_up_to_scalar"),
+        "〔injectivity_of_T_up_to_scalar〕",
         "）。",
       ]),
       paragraph([
@@ -817,7 +817,7 @@ export default defineNotes([
   },
   {
     id: "note_TV1_hatZ_hatY_009_definition_ring_multiplicative_group",
-    targets: ["injectivity_of_T_up_to_scalar"],
+    targets: ["V_plus_eq_c_check_Vprime"],
     title: { text: "環の乗法群" },
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/008_definition_環の乗法群.typ",

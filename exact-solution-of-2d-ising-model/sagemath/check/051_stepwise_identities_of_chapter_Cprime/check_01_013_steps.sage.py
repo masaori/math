@@ -11,7 +11,6 @@ _sage_const_1 = Integer(1); _sage_const_2 = Integer(2); _sage_const_0 = Integer(
 #  displayMath の行の順に 1 行ずつ確かめる。
 #
 #  対象ラベル:
-#    why_008_applies_only_to_minus_sector
 #    antiperiodic_exp_sum
 #    def_half_integer_checkZ
 #    def_half_integer_checkY
@@ -36,6 +35,15 @@ def add_exact_integer_example(name, proposition):
         raise AssertionError(name)
     S.add(name + " [finite ZZ example]", ZZ(_sage_const_1 ), ZZ(_sage_const_1 ))
 
+def chain(prefix, exprs, reasons):
+    """本文の一続きの式変形 exprs[0] = exprs[1] = ... の隣り合う 2 式を 1 段ずつ比較する。
+
+    reasons[k] は exprs[k] = exprs[k+1] の行末に本文が書いた根拠。
+    """
+    assert len(reasons) == len(exprs) - _sage_const_1 , prefix
+    for k in range(len(reasons)):
+        S.add(f"{prefix} ({k + _sage_const_1 }) {reasons[k]}", exprs[k], exprs[k + _sage_const_1 ])
+
 def integer_mode_sum(N, k):
     """本文の T_{N,k} を定義どおり評価する。"""
     return sum([
@@ -50,100 +58,287 @@ for M in STEP_M:
     H1p = O.H1(+_sage_const_1 )
 
     # -----------------------------------------------------------------
-    # why_008_applies_only_to_minus_sector / Step 1
-    #   (Z_m Y_m) Z_j = Z_m (Y_m Z_j)            (結合法則)
-    #                 = Z_m (-Z_j Y_m)           (anticommutator_of_Z_and_Y)
-    #                 = -(Z_m Z_j) Y_m           (結合法則)
-    #                 = -(-Z_j Z_m) Y_m          (anticommutator_of_Z_and_Y)
-    #                 = Z_j (Z_m Y_m)
+    # commutator_of_H_and_check_Z_Y / Step 1（サイトごとの交換関係）
+    #   本文の Step 1 の displayMath を、並び順のとおり 1 行ずつ確かめる。
+    #   各鎖は「左辺 = e_1 = e_2 = ...」の隣り合う 2 式を比較する。
     # -----------------------------------------------------------------
-    for j in range(_sage_const_1 , M + _sage_const_1 ):
-        for m in range(_sage_const_1 , M + _sage_const_1 ):
-            if m == j:
-                continue
-            Zm, Ym, Zj = O.Z[m], O.Y[m], O.Z[j]
-            S.add("why_008 Step1 (1) (Z_mY_m)Z_j = Z_m(Y_mZ_j)",
-                  (Zm * Ym) * Zj, Zm * (Ym * Zj))
-            S.add("why_008 Step1 (2) Y_mZ_j = -Z_jY_m  [anticommutator_of_Z_and_Y]",
-                  Zm * (Ym * Zj), Zm * (-Zj * Ym))
-            S.add("why_008 Step1 (3) Z_m(-Z_jY_m) = -(Z_mZ_j)Y_m",
-                  Zm * (-Zj * Ym), -(Zm * Zj) * Ym)
-            S.add("why_008 Step1 (4) Z_mZ_j = -Z_jZ_m  [anticommutator_of_Z_and_Y]",
-                  -(Zm * Zj) * Ym, -(-Zj * Zm) * Ym)
-            S.add("why_008 Step1 (5) = Z_j(Z_mY_m)",
-                  -(-Zj * Zm) * Ym, Zj * (Zm * Ym))
+    Zero = matrix(CDF, O.d, O.d, _sage_const_0 )
 
-    # [Z_jY_j, Z_j] の 6 段
-    for j in range(_sage_const_1 , M + _sage_const_1 ):
-        Zj, Yj = O.Z[j], O.Y[j]
-        S.add("why_008 Step1 [Z_jY_j,Z_j] (1) 交換子の定義",
-              comm(Zj * Yj, Zj), (Zj * Yj) * Zj - Zj * (Zj * Yj))
-        S.add("why_008 Step1 [Z_jY_j,Z_j] (2) 結合法則",
-              (Zj * Yj) * Zj - Zj * (Zj * Yj), Zj * (Yj * Zj) - (Zj * Zj) * Yj)
-        S.add("why_008 Step1 [Z_jY_j,Z_j] (3) Y_jZ_j = -Z_jY_j",
-              Zj * (Yj * Zj) - (Zj * Zj) * Yj, Zj * (-Zj * Yj) - (Zj * Zj) * Yj)
-        S.add("why_008 Step1 [Z_jY_j,Z_j] (4) 結合法則とスカラー倍",
-              Zj * (-Zj * Yj) - (Zj * Zj) * Yj, -(Zj * Zj) * Yj - (Zj * Zj) * Yj)
-        S.add("why_008 Step1 [Z_jY_j,Z_j] (5) Z_jZ_j = I",
-              -(Zj * Zj) * Yj - (Zj * Zj) * Yj, -Id * Yj - Id * Yj)
-        S.add("why_008 Step1 [Z_jY_j,Z_j] (6) = -2Y_j",
-              -Id * Yj - Id * Yj, -_sage_const_2  * Yj)
-        S.add("why_008 Step1 まとめ [H_2, Z_j] = -2Y_j", comm(H2, Zj), -_sage_const_2  * Yj)
-        S.add("commutator_of_H_and_check_Z_Y Step1 [H_2, Y_j] = 2Z_j",
-              comm(H2, Yj), _sage_const_2  * Zj)
+    def msum(terms):
+        return sum(terms, matrix(CDF, O.d, O.d, _sage_const_0 ))
 
-    # commutator_of_H_and_check_Z_Y / Step 1 の [Z_jY_j, Y_j] の 6 段
+    # 準備: anticommutator_of_Z_and_Y の 3 式と delta^M の評価、そこから従う 3 行の関係式
+    for j in range(_sage_const_1 , M + _sage_const_1 ):
+        for k in range(_sage_const_1 , M + _sage_const_1 ):
+            Zj, Zk, Yj, Yk = O.Z[j], O.Z[k], O.Y[j], O.Y[k]
+            dl = delta_M(M, j, k)
+            add_exact_integer_example(
+                "commutator Step1 準備 delta^M_{(j,k)} = [j = k]  (1<=j,k<=M)",
+                dl == (_sage_const_1  if j == k else _sage_const_0 ))
+            S.add("commutator Step1 準備 [Z_j,Z_k]_+ = 2I delta^M  [anticommutator_of_Z_and_Y]",
+                  Zj * Zk + Zk * Zj, _sage_const_2  * Id * dl)
+            S.add("commutator Step1 準備 [Z_j,Y_k]_+ = 0  [anticommutator_of_Z_and_Y]",
+                  Zj * Yk + Yk * Zj, Zero)
+            S.add("commutator Step1 準備 [Y_j,Y_k]_+ = 2I delta^M  [anticommutator_of_Z_and_Y]",
+                  Yj * Yk + Yk * Yj, _sage_const_2  * Id * dl)
+            if j != k:
+                S.add("commutator Step1 準備 (1) Z_jZ_k = -Z_kZ_j (j!=k)", Zj * Zk, -Zk * Zj)
+                S.add("commutator Step1 準備 (1) Y_jY_k = -Y_kY_j (j!=k)", Yj * Yk, -Yk * Yj)
+            S.add("commutator Step1 準備 (2) Z_jY_k = -Y_kZ_j (j,k 任意)", Zj * Yk, -Yk * Zj)
+        S.add("commutator Step1 準備 (3) Z_jZ_j = I", O.Z[j] * O.Z[j], Id)
+        S.add("commutator Step1 準備 (3) Y_jY_j = I", O.Y[j] * O.Y[j], Id)
+
+    # 相異なる添字の項が消えること（a, b, j は {1..M}）
     for j in range(_sage_const_1 , M + _sage_const_1 ):
         Zj, Yj = O.Z[j], O.Y[j]
-        S.add("commutator Step1 [Z_jY_j,Y_j] (1) 交換子の定義",
-              comm(Zj * Yj, Yj), (Zj * Yj) * Yj - Yj * (Zj * Yj))
-        S.add("commutator Step1 [Z_jY_j,Y_j] (2) 結合法則",
-              (Zj * Yj) * Yj - Yj * (Zj * Yj), Zj * (Yj * Yj) - (Yj * Zj) * Yj)
-        S.add("commutator Step1 [Z_jY_j,Y_j] (3) Y_jY_j = I",
-              Zj * (Yj * Yj) - (Yj * Zj) * Yj, Zj * Id - (Yj * Zj) * Yj)
-        S.add("commutator Step1 [Z_jY_j,Y_j] (4) Y_jZ_j = -Z_jY_j",
-              Zj * Id - (Yj * Zj) * Yj, Zj - (-Zj * Yj) * Yj)
-        S.add("commutator Step1 [Z_jY_j,Y_j] (5) 結合法則とスカラー倍",
-              Zj - (-Zj * Yj) * Yj, Zj + Zj * (Yj * Yj))
-        S.add("commutator Step1 [Z_jY_j,Y_j] (6) = 2Z_j",
-              Zj + Zj * (Yj * Yj), _sage_const_2  * Zj)
+        for a in range(_sage_const_1 , M + _sage_const_1 ):
+            Za, Ya = O.Z[a], O.Y[a]
+            if a != j:
+                # [Z_aY_a, Z_j] = 0  (a != j)
+                chain("commutator Step1 [Z_aY_a,Z_j] (a!=j)", [
+                    comm(Za * Ya, Zj),
+                    (Za * Ya) * Zj - Zj * (Za * Ya),
+                    Za * (Ya * Zj) - Zj * (Za * Ya),
+                    Za * (-Zj * Ya) - Zj * (Za * Ya),
+                    -(Za * Zj) * Ya - Zj * (Za * Ya),
+                    -(-Zj * Za) * Ya - Zj * (Za * Ya),
+                    (Zj * Za) * Ya - Zj * (Za * Ya),
+                    Zj * (Za * Ya) - Zj * (Za * Ya),
+                    Zero,
+                ], ["交換子の定義", "結合法則", "Y_aZ_j = -Z_jY_a", "結合法則とスカラー倍",
+                    "Z_aZ_j = -Z_jZ_a (a!=j)", "-(-1)=1", "結合法則", "同じ行列の差は零"])
+                # [Z_aY_a, Y_j] = 0  (a != j)
+                chain("commutator Step1 [Z_aY_a,Y_j] (a!=j)", [
+                    comm(Za * Ya, Yj),
+                    (Za * Ya) * Yj - Yj * (Za * Ya),
+                    Za * (Ya * Yj) - Yj * (Za * Ya),
+                    Za * (-Yj * Ya) - Yj * (Za * Ya),
+                    -(Za * Yj) * Ya - Yj * (Za * Ya),
+                    -(-Yj * Za) * Ya - Yj * (Za * Ya),
+                    (Yj * Za) * Ya - Yj * (Za * Ya),
+                    Yj * (Za * Ya) - Yj * (Za * Ya),
+                    Zero,
+                ], ["交換子の定義", "結合法則", "Y_aY_j = -Y_jY_a (a!=j)", "結合法則とスカラー倍",
+                    "Z_aY_j = -Y_jZ_a", "-(-1)=1", "結合法則", "同じ行列の差は零"])
+            for b in range(_sage_const_1 , M + _sage_const_1 ):
+                Zb = O.Z[b]
+                if b != j:
+                    # [Y_aZ_b, Z_j] = 0  (b != j)
+                    chain("commutator Step1 [Y_aZ_b,Z_j] (b!=j)", [
+                        comm(Ya * Zb, Zj),
+                        (Ya * Zb) * Zj - Zj * (Ya * Zb),
+                        Ya * (Zb * Zj) - Zj * (Ya * Zb),
+                        Ya * (-Zj * Zb) - Zj * (Ya * Zb),
+                        -(Ya * Zj) * Zb - Zj * (Ya * Zb),
+                        -(-Zj * Ya) * Zb - Zj * (Ya * Zb),
+                        (Zj * Ya) * Zb - Zj * (Ya * Zb),
+                        Zj * (Ya * Zb) - Zj * (Ya * Zb),
+                        Zero,
+                    ], ["交換子の定義", "結合法則", "Z_bZ_j = -Z_jZ_b (b!=j)",
+                        "結合法則とスカラー倍", "Y_aZ_j = -Z_jY_a", "-(-1)=1", "結合法則",
+                        "同じ行列の差は零"])
+                if a != j:
+                    # [Y_aZ_b, Y_j] = 0  (a != j)
+                    chain("commutator Step1 [Y_aZ_b,Y_j] (a!=j)", [
+                        comm(Ya * Zb, Yj),
+                        (Ya * Zb) * Yj - Yj * (Ya * Zb),
+                        Ya * (Zb * Yj) - Yj * (Ya * Zb),
+                        Ya * (-Yj * Zb) - Yj * (Ya * Zb),
+                        -(Ya * Yj) * Zb - Yj * (Ya * Zb),
+                        -(-Yj * Ya) * Zb - Yj * (Ya * Zb),
+                        (Yj * Ya) * Zb - Yj * (Ya * Zb),
+                        Yj * (Ya * Zb) - Yj * (Ya * Zb),
+                        Zero,
+                    ], ["交換子の定義", "結合法則", "Z_bY_j = -Y_jZ_b", "結合法則とスカラー倍",
+                        "Y_aY_j = -Y_jY_a (a!=j)", "-(-1)=1", "結合法則", "同じ行列の差は零"])
 
-    # commutator_of_H_and_check_Z_Y / Step 1 の [Y_mZ_{m+1}, ...] と境界項
+    # 同じ添字を含む項
+    for j in range(_sage_const_1 , M + _sage_const_1 ):
+        Zj, Yj = O.Z[j], O.Y[j]
+        chain("commutator Step1 [Z_jY_j,Z_j]", [
+            comm(Zj * Yj, Zj),
+            (Zj * Yj) * Zj - Zj * (Zj * Yj),
+            Zj * (Yj * Zj) - (Zj * Zj) * Yj,
+            Zj * (-Zj * Yj) - (Zj * Zj) * Yj,
+            -(Zj * Zj) * Yj - (Zj * Zj) * Yj,
+            -Id * Yj - Id * Yj,
+            -Yj - Yj,
+            -_sage_const_2  * Yj,
+        ], ["交換子の定義", "結合法則", "Y_jZ_j = -Z_jY_j", "結合法則とスカラー倍",
+            "Z_jZ_j = I", "I Y_j = Y_j", "同類項をまとめる"])
+        chain("commutator Step1 [Z_jY_j,Y_j]", [
+            comm(Zj * Yj, Yj),
+            (Zj * Yj) * Yj - Yj * (Zj * Yj),
+            Zj * (Yj * Yj) - (Yj * Zj) * Yj,
+            Zj * Id - (Yj * Zj) * Yj,
+            Zj - (Yj * Zj) * Yj,
+            Zj - (-Zj * Yj) * Yj,
+            Zj + Zj * (Yj * Yj),
+            Zj + Zj * Id,
+            Zj + Zj,
+            _sage_const_2  * Zj,
+        ], ["交換子の定義", "結合法則", "Y_jY_j = I", "Z_j I = Z_j", "Y_jZ_j = -Z_jY_j",
+            "結合法則とスカラー倍", "Y_jY_j = I", "Z_j I = Z_j", "同類項をまとめる"])
+
     for m in range(_sage_const_1 , M):
-        Ym, Zm1 = O.Y[m], O.Z[m + _sage_const_1 ]
-        S.add("commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (1) 交換子の定義",
-              comm(Ym * Zm1, Zm1), (Ym * Zm1) * Zm1 - Zm1 * (Ym * Zm1))
-        S.add("commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (2) 結合法則",
-              (Ym * Zm1) * Zm1 - Zm1 * (Ym * Zm1),
-              Ym * (Zm1 * Zm1) - (Zm1 * Ym) * Zm1)
-        S.add("commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (3) Z_{m+1}Z_{m+1} = I",
-              Ym * (Zm1 * Zm1) - (Zm1 * Ym) * Zm1, Ym * Id - (Zm1 * Ym) * Zm1)
-        S.add("commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (4) Z_{m+1}Y_m = -Y_mZ_{m+1}",
-              Ym * Id - (Zm1 * Ym) * Zm1, Ym - (-Ym * Zm1) * Zm1)
-        S.add("commutator Step1 [Y_mZ_{m+1},Z_{m+1}] (5) = 2Y_m",
-              Ym - (-Ym * Zm1) * Zm1, _sage_const_2  * Ym)
-        S.add("commutator Step1 [Y_mZ_{m+1},Y_m] = -2Z_{m+1}",
-              comm(Ym * Zm1, Ym), -_sage_const_2  * Zm1)
+        Ym, W = O.Y[m], O.Z[m + _sage_const_1 ]
+        chain("commutator Step1 [Y_mZ_{m+1},Z_{m+1}]", [
+            comm(Ym * W, W),
+            (Ym * W) * W - W * (Ym * W),
+            Ym * (W * W) - (W * Ym) * W,
+            Ym * Id - (W * Ym) * W,
+            Ym - (W * Ym) * W,
+            Ym - (-Ym * W) * W,
+            Ym + Ym * (W * W),
+            Ym + Ym * Id,
+            Ym + Ym,
+            _sage_const_2  * Ym,
+        ], ["交換子の定義", "結合法則", "Z_{m+1}Z_{m+1} = I", "Y_m I = Y_m",
+            "Z_{m+1}Y_m = -Y_mZ_{m+1}", "結合法則とスカラー倍", "Z_{m+1}Z_{m+1} = I",
+            "Y_m I = Y_m", "同類項をまとめる"])
+        chain("commutator Step1 [Y_mZ_{m+1},Y_m]", [
+            comm(Ym * W, Ym),
+            (Ym * W) * Ym - Ym * (Ym * W),
+            Ym * (W * Ym) - (Ym * Ym) * W,
+            Ym * (-Ym * W) - (Ym * Ym) * W,
+            -(Ym * Ym) * W - (Ym * Ym) * W,
+            -Id * W - Id * W,
+            -W - W,
+            -_sage_const_2  * W,
+        ], ["交換子の定義", "結合法則", "Z_{m+1}Y_m = -Y_mZ_{m+1}", "結合法則とスカラー倍",
+            "Y_mY_m = I", "I Z_{m+1} = Z_{m+1}", "同類項をまとめる"])
 
+    # 境界項
     YM, Z1 = O.Y[M], O.Z[_sage_const_1 ]
-    S.add("commutator Step1 境界 [-Y_MZ_1,Z_1] (1) 第 1 引数の線型性",
-          comm(-YM * Z1, Z1), -comm(YM * Z1, Z1))
-    S.add("commutator Step1 境界 [-Y_MZ_1,Z_1] (2) = -2Y_M",
-          -comm(YM * Z1, Z1), -_sage_const_2  * YM)
-    S.add("commutator Step1 境界 [-Y_MZ_1,Z_1] (3) = 2 Y^flat_0",
-          -_sage_const_2  * YM, _sage_const_2  * Yflat(O, _sage_const_0 ))
-    S.add("commutator Step1 境界 [-Y_MZ_1,Y_M] (1) 第 1 引数の線型性",
-          comm(-YM * Z1, YM), -comm(YM * Z1, YM))
-    S.add("commutator Step1 境界 [-Y_MZ_1,Y_M] (2) = 2Z_1",
-          -comm(YM * Z1, YM), _sage_const_2  * Z1)
-    S.add("commutator Step1 境界 [-Y_MZ_1,Y_M] (3) = -2 Z^flat_{M+1}",
-          _sage_const_2  * Z1, -_sage_const_2  * Zflat(O, M + _sage_const_1 ))
+    chain("commutator Step1 境界 [-Y_MZ_1,Z_1]", [
+        comm(-YM * Z1, Z1),
+        -comm(YM * Z1, Z1),
+        -((YM * Z1) * Z1 - Z1 * (YM * Z1)),
+        -(YM * (Z1 * Z1) - (Z1 * YM) * Z1),
+        -(YM * Id - (Z1 * YM) * Z1),
+        -(YM - (Z1 * YM) * Z1),
+        -(YM - (-YM * Z1) * Z1),
+        -(YM + YM * (Z1 * Z1)),
+        -(YM + YM * Id),
+        -(YM + YM),
+        -_sage_const_2  * YM,
+        _sage_const_2  * (-YM),
+        _sage_const_2  * Yflat(O, _sage_const_0 ),
+    ], ["第 1 引数の C 線型性", "交換子の定義", "結合法則", "Z_1Z_1 = I", "Y_M I = Y_M",
+        "Z_1Y_M = -Y_MZ_1", "結合法則とスカラー倍", "Z_1Z_1 = I", "Y_M I = Y_M",
+        "同類項をまとめる", "-2Y_M = 2(-Y_M)", "Y^flat_0 := -Y_M"])
+    chain("commutator Step1 境界 [-Y_MZ_1,Y_M]", [
+        comm(-YM * Z1, YM),
+        -comm(YM * Z1, YM),
+        -((YM * Z1) * YM - YM * (YM * Z1)),
+        -(YM * (Z1 * YM) - (YM * YM) * Z1),
+        -(YM * (-YM * Z1) - (YM * YM) * Z1),
+        -(-(YM * YM) * Z1 - (YM * YM) * Z1),
+        -(-Id * Z1 - Id * Z1),
+        -(-Z1 - Z1),
+        -(-_sage_const_2  * Z1),
+        _sage_const_2  * Z1,
+        -_sage_const_2  * (-Z1),
+        -_sage_const_2  * Zflat(O, M + _sage_const_1 ),
+    ], ["第 1 引数の C 線型性", "交換子の定義", "結合法則", "Z_1Y_M = -Y_MZ_1",
+        "結合法則とスカラー倍", "Y_MY_M = I", "I Z_1 = Z_1", "同類項をまとめる",
+        "-(-2Z_1) = 2Z_1", "2Z_1 = -2(-Z_1)", "Z^flat_{M+1} := -Z_1"])
 
-    # サイトごとの H_1^{(+)} の交換子（flat 記法でまとまること）
+    # [H_2, Z_j], [H_2, Y_j] を和へまとめる鎖
+    H2sum = msum([O.Z[a] * O.Y[a] for a in range(_sage_const_1 , M + _sage_const_1 )])
+    S.add("commutator Step1 def_H2: H_2 = sum_a Z_aY_a", H2, H2sum)
     for j in range(_sage_const_1 , M + _sage_const_1 ):
-        S.add("commutator Step1 [H_1^{(+)}, Z_j] = 2 Y^flat_{j-1}",
+        Zj, Yj = O.Z[j], O.Y[j]
+        others = [a for a in range(_sage_const_1 , M + _sage_const_1 ) if a != j]
+        chain("commutator Step1 [H_2,Z_j]", [
+            comm(H2, Zj),
+            comm(H2sum, Zj),
+            msum([comm(O.Z[a] * O.Y[a], Zj) for a in range(_sage_const_1 , M + _sage_const_1 )]),
+            comm(Zj * Yj, Zj) + msum([comm(O.Z[a] * O.Y[a], Zj) for a in others]),
+            comm(Zj * Yj, Zj) + msum([Zero for a in others]),
+            comm(Zj * Yj, Zj),
+            -_sage_const_2  * Yj,
+        ], ["def_H2", "第 1 引数の C 線型性", "a=j の項を分ける",
+            "[Z_aY_a,Z_j]=0 (a!=j) を各項へ", "零行列の和は零行列", "[Z_jY_j,Z_j] = -2Y_j"])
+        chain("commutator Step1 [H_2,Y_j]", [
+            comm(H2, Yj),
+            comm(H2sum, Yj),
+            msum([comm(O.Z[a] * O.Y[a], Yj) for a in range(_sage_const_1 , M + _sage_const_1 )]),
+            comm(Zj * Yj, Yj) + msum([comm(O.Z[a] * O.Y[a], Yj) for a in others]),
+            comm(Zj * Yj, Yj) + msum([Zero for a in others]),
+            comm(Zj * Yj, Yj),
+            _sage_const_2  * Zj,
+        ], ["def_H2", "第 1 引数の C 線型性", "a=j の項を分ける",
+            "[Z_aY_a,Y_j]=0 (a!=j) を各項へ", "零行列の和は零行列", "[Z_jY_j,Y_j] = 2Z_j"])
+
+    # [H_1^{(+)}, Z_j], [H_1^{(+)}, Y_j] の場合分けの鎖
+    H1sum = msum([O.Y[m] * O.Z[m + _sage_const_1 ] for m in range(_sage_const_1 , M)]) - YM * Z1
+    S.add("commutator Step1 def_H1_pm 上の符号: H_1^{(+)} = sum Y_mZ_{m+1} - Y_MZ_1", H1p, H1sum)
+    bulk = list(range(_sage_const_1 , M))
+    for j in range(_sage_const_2 , M + _sage_const_1 ):
+        Zj = O.Z[j]
+        rest = [m for m in bulk if m != j - _sage_const_1 ]
+        chain("commutator Step1 [H_1^{(+)},Z_j] (2<=j<=M)", [
+            comm(H1p, Zj),
+            comm(H1sum, Zj),
+            msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], Zj) for m in bulk]) - comm(YM * Z1, Zj),
+            msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], Zj) for m in bulk]) - Zero,
+            msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], Zj) for m in bulk]),
+            comm(O.Y[j - _sage_const_1 ] * Zj, Zj) + msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], Zj) for m in rest]),
+            comm(O.Y[j - _sage_const_1 ] * Zj, Zj) + msum([Zero for m in rest]),
+            comm(O.Y[j - _sage_const_1 ] * Zj, Zj),
+            _sage_const_2  * O.Y[j - _sage_const_1 ],
+            _sage_const_2  * Yflat(O, j - _sage_const_1 ),
+        ], ["def_H1_pm 上の符号", "第 1 引数の C 線型性",
+            "[Y_aZ_b,Z_j]=0 (b!=j) を a=M,b=1 に", "零行列を引いても不変",
+            "m=j-1 の項を分ける", "[Y_aZ_b,Z_j]=0 (b!=j) を各項へ", "零行列の和は零行列",
+            "[Y_mZ_{m+1},Z_{m+1}] = 2Y_m (m=j-1)", "Y^flat_{j-1} := Y_{j-1}"])
+    chain("commutator Step1 [H_1^{(+)},Z_1]", [
+        comm(H1p, Z1),
+        comm(H1sum, Z1),
+        msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], Z1) for m in bulk]) + comm(-YM * Z1, Z1),
+        msum([Zero for m in bulk]) + comm(-YM * Z1, Z1),
+        comm(-YM * Z1, Z1),
+        _sage_const_2  * Yflat(O, _sage_const_0 ),
+    ], ["def_H1_pm 上の符号", "第 1 引数の加法性",
+        "[Y_aZ_b,Z_j]=0 (b!=j) を b=m+1>=2, j=1 で各項へ", "零行列の和は零行列",
+        "境界項の等式"])
+    for j in range(_sage_const_1 , M):
+        Yj = O.Y[j]
+        rest = [m for m in bulk if m != j]
+        chain("commutator Step1 [H_1^{(+)},Y_j] (1<=j<=M-1)", [
+            comm(H1p, Yj),
+            comm(H1sum, Yj),
+            msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], Yj) for m in bulk]) - comm(YM * Z1, Yj),
+            msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], Yj) for m in bulk]) - Zero,
+            msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], Yj) for m in bulk]),
+            comm(Yj * O.Z[j + _sage_const_1 ], Yj) + msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], Yj) for m in rest]),
+            comm(Yj * O.Z[j + _sage_const_1 ], Yj) + msum([Zero for m in rest]),
+            comm(Yj * O.Z[j + _sage_const_1 ], Yj),
+            -_sage_const_2  * O.Z[j + _sage_const_1 ],
+            -_sage_const_2  * Zflat(O, j + _sage_const_1 ),
+        ], ["def_H1_pm 上の符号", "第 1 引数の C 線型性",
+            "[Y_aZ_b,Y_j]=0 (a!=j) を a=M,b=1 に", "零行列を引いても不変",
+            "m=j の項を分ける", "[Y_aZ_b,Y_j]=0 (a!=j) を各項へ", "零行列の和は零行列",
+            "[Y_mZ_{m+1},Y_m] = -2Z_{m+1} (m=j)", "Z^flat_{j+1} := Z_{j+1}"])
+    chain("commutator Step1 [H_1^{(+)},Y_M]", [
+        comm(H1p, YM),
+        comm(H1sum, YM),
+        msum([comm(O.Y[m] * O.Z[m + _sage_const_1 ], YM) for m in bulk]) + comm(-YM * Z1, YM),
+        msum([Zero for m in bulk]) + comm(-YM * Z1, YM),
+        comm(-YM * Z1, YM),
+        -_sage_const_2  * Zflat(O, M + _sage_const_1 ),
+    ], ["def_H1_pm 上の符号", "第 1 引数の加法性",
+        "[Y_aZ_b,Y_j]=0 (a!=j) を a=m<=M-1, j=M で各項へ", "零行列の和は零行列",
+        "境界項の等式"])
+
+    # Step 1 の主張（4 式）
+    for j in range(_sage_const_1 , M + _sage_const_1 ):
+        S.add("commutator Step1 主張 [H_2, Z_j] = -2Y_j", comm(H2, O.Z[j]), -_sage_const_2  * O.Y[j])
+        S.add("commutator Step1 主張 [H_2, Y_j] = 2Z_j", comm(H2, O.Y[j]), _sage_const_2  * O.Z[j])
+        S.add("commutator Step1 主張 [H_1^{(+)}, Z_j] = 2 Y^flat_{j-1}",
               comm(H1p, O.Z[j]), _sage_const_2  * Yflat(O, j - _sage_const_1 ))
-        S.add("commutator Step1 [H_1^{(+)}, Y_j] = -2 Z^flat_{j+1}",
+        S.add("commutator Step1 主張 [H_1^{(+)}, Y_j] = -2 Z^flat_{j+1}",
               comm(H1p, O.Y[j]), -_sage_const_2  * Zflat(O, j + _sage_const_1 ))
 
     # -----------------------------------------------------------------
@@ -649,3 +844,4 @@ for M in STEP_M:
 ok_all = S.report_all()
 print(f"  段数（区別された等式の種類）: {len(S.worst)}")
 print("check_01:", "PASS" if ok_all else "FAIL")
+

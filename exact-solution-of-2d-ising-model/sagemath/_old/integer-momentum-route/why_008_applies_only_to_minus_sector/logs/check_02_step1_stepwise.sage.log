@@ -1,0 +1,15 @@
+=== check_02: why_008 Step 1 の各段の等式 ===
+  why_008 Step1 (1) (Z_mY_m)Z_j = Z_m(Y_mZ_j): max residual = 0.000e+00  ->  PASS
+  why_008 Step1 (2) Y_mZ_j = -Z_jY_m  [anticommutator_of_Z_and_Y]: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 (3) Z_m(-Z_jY_m) = -(Z_mZ_j)Y_m: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 (4) Z_mZ_j = -Z_jZ_m  [anticommutator_of_Z_and_Y]: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 (5) = Z_j(Z_mY_m): max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (1) 交換子の定義: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (2) 結合法則: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (3) Y_jZ_j = -Z_jY_j: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (4) 結合法則とスカラー倍: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (5) Z_jZ_j = I: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 [Z_jY_j,Z_j] (6) = -2Y_j: max residual = 0.000e+00  ->  PASS
+  why_008 Step1 まとめ [H_2, Z_j] = -2Y_j: max residual = 0.000e+00  ->  PASS
+  段数（区別された等式の種類）: 12
+RESULT: PASS
