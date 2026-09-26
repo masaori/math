@@ -1,5 +1,9 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 2026-09-26: 同時固有空間分解の Q_ε の定義を R_μ^{(ε_μ)} の積へ揃えた
+
+`joint_eigenspace_decomposition` の Q_ε を、選択係数 ε_μ n_μ + (1−ε_μ)(I−n_μ) の積から、`trace_of_number_operator_product` で定義済みの R_μ^{(ε_μ)} の積へ揃え、Q_ε が I = ∏(R^{(1)}+R^{(0)}) を展開した各項であることを主張に書いた。行列としては同じなので Lean（`Qproj` は元から選択の形）・SageMath は変更不要。
+
 ## 2026-09-26: 公開 HTML に主定理とサブ定理の区別と折りたたみを入れた
 
 人間の指示で、公開 HTML を共有の既定 UI（`structured-latex/renderers/html/theorem-standing.ts`）へ

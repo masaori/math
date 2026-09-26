@@ -987,14 +987,43 @@ n_\mu n_\nu
         " に対して",
       ]),
       displayMath(
-        String.raw`Q_\epsilon := \prod_{\mu \in \mathcal{I}}
-\Bigl(\epsilon_\mu\, n_\mu + (1 - \epsilon_\mu)\,(I - n_\mu)\Bigr)
+        String.raw`Q_\epsilon := \prod_{\mu \in \mathcal{I}} R_\mu^{(\epsilon_\mu)}
 \in \mathrm{Mat}(2^M,\mathbb{C})`,
       ),
       paragraph([
-        "と定める（因子は ",
+        "と定める。ここで ",
+        math(String.raw`R_\mu^{(1)} = n_\mu`),
+        "、",
+        math(String.raw`R_\mu^{(0)} = I - n_\mu`),
+        " は ",
+        ref("trace_of_number_operator_product"),
+        " の記号であり、因子は ",
         ref("number_operators_commute"),
-        " により互いに可換なので、積の順序は問わない）。このとき、",
+        " により互いに可換なので、積の順序は問わない。",
+      ]),
+      paragraph([
+        math(String.raw`Q_\epsilon`),
+        " は、恒等式",
+      ]),
+      displayMath(
+        String.raw`I = \prod_{\mu \in \mathcal{I}}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)`,
+      ),
+      paragraph([
+        "の右辺を分配法則で展開したときに現れる項のうち、各 ",
+        math(String.raw`\mu \in \mathcal{I}`),
+        " について因子 ",
+        math(String.raw`R_\mu^{(\epsilon_\mu)}`),
+        " を選んで作られる項である。",
+        math(String.raw`\epsilon_\mu = 1`),
+        " は ",
+        math(String.raw`n_\mu`),
+        " が ",
+        math(String.raw`1`),
+        " として働く側を、",
+        math(String.raw`\epsilon_\mu = 0`),
+        " は ",
+        math(String.raw`0`),
+        " として働く側を選ぶことに当たる（下の (3)）。このとき、",
       ]),
       list([
         [math(String.raw`\text{(1)}\quad Q_\epsilon Q_{\epsilon'} = 0 \quad (\epsilon \neq \epsilon'), \qquad Q_\epsilon^2 = Q_\epsilon`)],
@@ -1014,19 +1043,6 @@ n_\mu n_\nu
       ]),
     ],
     proof: [
-      paragraph([
-        "以下、",
-        math(String.raw`\mu \in \mathcal{I}`),
-        " と ",
-        math(String.raw`e \in \{0,1\}`),
-        " に対して ",
-        math(String.raw`R_\mu^{(1)} := n_\mu`),
-        "、",
-        math(String.raw`R_\mu^{(0)} := I - n_\mu`),
-        " と書く。",
-        math(String.raw`Q_\epsilon = \prod_{\mu \in \mathcal{I}} R_\mu^{(\epsilon_\mu)}`),
-        " である。",
-      ]),
       paragraph([
         "Step 0（1 つの添字についての関係）。",
         ref("number_operator_idempotent"),
@@ -1378,6 +1394,7 @@ y_\epsilon, & \epsilon=\epsilon'
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "2026-08-17 の式変形統一で、Step 4 末尾の dim im Q_ε = tr(Q_ε) = 2^{M−m} を、一続きの等号と行末の根拠へ揃えた。内容は変えていない。",
+        "Q_ε の定義を、選択係数 ε_μ n_μ + (1−ε_μ)(I−n_μ) の積から、trace_of_number_operator_product で定義済みの R_μ^{(ε_μ)} の積へ揃え、Q_ε が I = ∏(R^{(1)}+R^{(0)}) の展開の各項であることを主張に書いた。二つの定義は各 ε で同じ行列を与えるので、主張と証明の内容は変えていない。証明冒頭の R の再定義は削った。",
       ],
     },
   },
