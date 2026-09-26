@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
+import { defineBlocks, paragraph, math, displayMath, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -8,19 +8,6 @@ export default defineBlocks([
     origin: { path: "_old/typst/main.typ", ordinal: 1 },
     title: { text: "計算公式" },
     labels: [],
-  },
-  {
-    id: "calc_formulae_definition_cosh_sinh",
-    kind: "definition",
-    origin: { path: "structured-latex/content/000_calculation_formulae_00_09.ts", ordinal: 1 },
-    title: { text: "双曲線余弦と双曲線正弦" },
-    labels: ["def_cosh_sinh"],
-    statement: [
-      paragraph([math(String.raw`x\in\mathbb R`), " に対して、実数値の指数関数を使い"]),
-      displayMath(String.raw`\cosh x:=\frac{\exp(x)+\exp(-x)}2,\qquad \sinh x:=\frac{\exp(x)-\exp(-x)}2`),
-      paragraph(["と定める。"]),
-    ],
-    conversion: { status: "added", notes: ["双曲線関数の定義と、その性質を依存境界で分離した。"] },
   },
   {
     id: "calculation_formulae_definition_set_and_algebra_notation",
@@ -94,300 +81,37 @@ export default defineBlocks([
     },
   },
   {
-    id: "calc_formulae_000_cosh_sinh_product",
-    kind: "theorem",
-    origin: { path: "_old/typst/parts/000_計算公式/000_theorem_cosh_sinhの掛け算.typ", ordinal: 1 },
-    title: { tex: "\\cosh,\\sinh\\text{の掛け算}" },
-    labels: [],
-    statement: [
-      paragraph([ref("def_cosh_sinh"), " の記号を用いる。"]),
-      displayMath("\\forall a,b\\in\\mathbb{R}"),
-      displayMath(String.raw`\begin{aligned}
-\cosh(a)\sinh(b) &= \frac{1}{2}\left(\sinh(a+b)-\sinh(a-b)\right) \\
-\cosh(a)\cosh(b) &= \frac{1}{2}\left(\cosh(a+b)+\cosh(a-b)\right)
-\end{aligned}`),
-    ],
-    proof: [
-      paragraph(["1 つめの等式。"]),
-      displayMath(String.raw`\begin{aligned}
-\cosh(a)\sinh(b)
-&=
-\frac{\exp(a)+\exp(-a)}{2}
-\frac{\exp(b)-\exp(-b)}{2}
-&&(\because\ \cosh,\ \sinh\ \text{の定義})
-\\
-&=
-\frac{1}{4}
-\left(
-\left(\exp(a)\exp(b)-\exp(-a)\exp(-b)\right)
--
-\left(\exp(a)\exp(-b)-\exp(-a)\exp(b)\right)
-\right)
-&&(\because\ \text{分配則})
-\\
-&=
-\frac{1}{2}
-\left(
-\frac{\exp(a+b)-\exp(-(a+b))}{2}
--
-\frac{\exp(a-b)-\exp(-(a-b))}{2}
-\right)
-&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ})
-\\
-&=
-\frac{1}{2}
-\left(
-\sinh(a+b)-\sinh(a-b)
-\right)
-&&(\because\ \sinh\ \text{の定義})
-\end{aligned}`),
-      paragraph(["2 つめの等式。"]),
-      displayMath(String.raw`\begin{aligned}
-\cosh(a)\cosh(b)
-&=
-\frac{\exp(a)+\exp(-a)}{2}
-\frac{\exp(b)+\exp(-b)}{2}
-&&(\because\ \cosh\ \text{の定義})
-\\
-&=
-\frac{1}{4}
-\left(
-\left(\exp(a)\exp(b)+\exp(-a)\exp(-b)\right)
-+
-\left(\exp(a)\exp(-b)+\exp(-a)\exp(b)\right)
-\right)
-&&(\because\ \text{分配則})
-\\
-&=
-\frac{1}{2}
-\left(
-\frac{\exp(a+b)+\exp(-(a+b))}{2}
-+
-\frac{\exp(a-b)+\exp(-(a-b))}{2}
-\right)
-&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ})
-\\
-&=
-\frac{1}{2}
-\left(
-\cosh(a+b)+\cosh(a-b)
-\right)
-&&(\because\ \cosh\ \text{の定義})
-\end{aligned}`),
-    ],
-  },
-  {
-    id: "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+    id: "calc_formulae_000c0_claim_positive_real_square_injective",
     kind: "claim",
-    origin: { path: "structured-latex/content/000_calculation_formulae_00_09.ts", ordinal: 1 },
-    title: { tex: String.raw`\cosh,\ \sinh\text{ の基本性質}` },
-    labels: ["cosh_sinh_basic_properties"],
+    title: { text: "正の実数の二乗の一意性" },
+    labels: ["positive_real_square_injective"],
     statement: [
       paragraph([
-        ref("def_cosh_sinh"), " の ", math(String.raw`x\in\mathbb R`), " における値について、次が成り立つ。",
+        math(String.raw`a, b \in \mathbb{R}_{>0}`),
+        " について",
       ]),
-      list([
-        [
-          "(1) ",
-          math(String.raw`\cosh x - \sinh x = \exp(-x) > 0`),
-          " かつ ",
-          math(String.raw`\cosh x + \sinh x = \exp(x) > 0`),
-          "。特に ",
-          math(String.raw`\cosh x > 0`),
-          " かつ ",
-          math(String.raw`\cosh x > \sinh x`),
-          "。",
-        ],
-        ["(2) ", math(String.raw`(\cosh x)^2 - (\sinh x)^2 = 1`), "。"],
-        [
-          "(3) ",
-          math(String.raw`x > 0`),
-          " ならば ",
-          math(String.raw`\cosh x > \sinh x > 0`),
-          "。",
-        ],
-        [
-          "(4) ",
-          math(String.raw`a, b \in \mathbb{R}_{>0}`),
-          " について ",
-          math(String.raw`a^2 = b^2 \iff a = b`),
-          "。",
-        ],
-      ]),
-      paragraph([
-        "ここで ",
-        math(String.raw`\exp`),
-        " については、実数の指数関数の基本性質として ",
-        math(String.raw`\exp(x)\exp(y) = \exp(x+y)`),
-        "、",
-        math(String.raw`\exp(0) = 1`),
-        "、",
-        math(String.raw`\exp(x) > 0`),
-        "、および ",
-        math(String.raw`\exp`),
-        " が狭義単調増加であること（",
-        math(String.raw`x < y \Rightarrow \exp(x) < \exp(y)`),
-        "）のみを用いる。",
-      ]),
+      displayMath(String.raw`a^2 = b^2 \iff a = b`),
     ],
     proof: [
-      paragraph(["(1) の証明。"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\cosh x - \sinh x
-&= \frac{\exp(x) + \exp(-x)}{2} - \frac{\exp(x) - \exp(-x)}{2}
-&&(\because\ \cosh,\ \sinh\ \text{の定義})\\
-&= \frac{\bigl(\exp(x) + \exp(-x)\bigr) - \bigl(\exp(x) - \exp(-x)\bigr)}{2}
-&&(\because\ \text{分母の等しい分数の差})\\
-&= \frac{2\exp(-x)}{2}
-&&(\because\ \text{分子の整理})\\
-&= \exp(-x)
-&&(\because\ \text{約分})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\cosh x + \sinh x
-&= \frac{\exp(x) + \exp(-x)}{2} + \frac{\exp(x) - \exp(-x)}{2}
-&&(\because\ \cosh,\ \sinh\ \text{の定義})\\
-&= \frac{\bigl(\exp(x) + \exp(-x)\bigr) + \bigl(\exp(x) - \exp(-x)\bigr)}{2}
-&&(\because\ \text{分母の等しい分数の和})\\
-&= \frac{2\exp(x)}{2}
-&&(\because\ \text{分子の整理})\\
-&= \exp(x)
-&&(\because\ \text{約分})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\cosh x - \sinh x
-&= \exp(-x)
-&&(\because\ \text{上の第 1 式})\\
-&> 0
-&&(\because\ \exp\ \text{の正値性})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\cosh x - \sinh x > 0
-&\Longrightarrow \cosh x > \sinh x
-&&(\because\ \text{両辺に}\ \sinh x\ \text{を加える})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-2\cosh x
-&= (\cosh x - \sinh x) + (\cosh x + \sinh x)
-&&(\because\ \text{右辺の整理})\\
-&= \exp(-x) + \exp(x)
-&&(\because\ \text{上の 2 式})\\
-&> 0
-&&(\because\ \exp\ \text{の正値性})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-2\cosh x > 0
-&\Longrightarrow \cosh x > 0
-&&(\because\ \text{両辺を}\ 2 > 0\ \text{で割る})
-\end{aligned}`,
-      ),
-      paragraph(["(2) の証明。"]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\cosh x)^2 - (\sinh x)^2
-&= (\cosh x - \sinh x)(\cosh x + \sinh x)
-&&(\because\ \text{2 乗の差の因数分解})\\
-&= \exp(-x)\exp(x)
-&&(\because\ \text{(1) の 2 式})\\
-&= \exp(-x + x)
-&&(\because\ \exp(x)\exp(y) = \exp(x+y))\\
-&= \exp(0)
-&&(\because\ -x + x = 0)\\
-&= 1
-&&(\because\ \exp(0) = 1)
-\end{aligned}`,
-      ),
-      paragraph(["(3) の証明。"]),
-      displayMath(
-        String.raw`\begin{aligned}
-x>0
-&\Longrightarrow -x<0
-&&(\because\ \text{両辺に }-1<0\text{ を掛けると不等号の向きが反転する})\\
-x>0
-&\Longrightarrow 0<x
-&&(\because\ \text{同じ不等式の左右を入れ替える})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(-x)
-&< \exp(0)
-&&(\because\ \exp\ \text{が狭義単調増加で}\ -x < 0)\\
-&= 1
-&&(\because\ \exp(0) = 1)
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-1
-&= \exp(0)
-&&(\because\ \exp(0) = 1)\\
-&< \exp(x)
-&&(\because\ \exp\ \text{が狭義単調増加で}\ 0 < x)
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(-x)<1<\exp(x)
-&\Longrightarrow \exp(-x)<\exp(x)
-&&(\because\ \mathbb R\text{ の順序の推移律})\\
-&\Longrightarrow \exp(x)-\exp(-x)>0
-&&(\because\ \text{両辺に }-\exp(-x)\text{ を加える})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\sinh x
-&= \frac{\exp(x) - \exp(-x)}{2}
-&&(\because\ \sinh\ \text{の定義})\\
-&> 0
-&&(\because\ \text{正の実数を}\ 2 > 0\ \text{で割った値は正})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\cosh x>\sinh x\ \land\ \sinh x>0
-&\Longrightarrow \cosh x>\sinh x>0
-&&(\because\ \text{(1) と直前の不等式})
-\end{aligned}`,
-      ),
-      paragraph([
-        "(4) の証明。両方向を別々に示すので、ここは一続きの式にしない。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      paragraph(["両方向を別々に示すので、ここは一続きの式にしない。"]),
+      displayMath(String.raw`\begin{aligned}
 a=b
 &\Longrightarrow a^2=b^2
 &&(\because\ \text{等しい実数を二乗しても等しい})
-\end{aligned}`,
-      ),
+\end{aligned}`),
       paragraph([
         "逆に ",
         math(String.raw`a^2 = b^2`),
         " とする。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 (a - b)(a + b)
 &= a^2 - b^2
 &&(\because\ \text{2 乗の差の因数分解})\\
 &= 0
 &&(\because\ a^2 = b^2)
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
 a>0\ \land\ b>0
 &\Longrightarrow a+b>0
 &&(\because\ \text{正の実数の和は正})\\
@@ -398,17 +122,12 @@ a>0\ \land\ b>0
 &&(\because\ \mathbb R\text{ は整域})\\
 &\Longrightarrow a=b
 &&(\because\ \text{両辺に }b\text{ を加える})
-\end{aligned}`,
-      ),
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
-        "原文（Typst）に対応ブロックは無い。cosh, sinh の定義から直ちに従う基本性質" +
-          "（cosh - sinh = e^{-x} > 0、cosh^2 - sinh^2 = 1、x>0 での正値性、正実数の自乗の単射性）は、" +
-          "008_TV1_hatZ_hatY_part2 の γ_1 の偏角・臨界条件 c_1 = s_1 c_2 ⟺ s_1 s_2 = 1 の証明で必要になるが、" +
-          "従来どのブロックにも主張として置かれていなかったため、cosh, sinh の積公式" +
-          "（calc_formulae_000_cosh_sinh_product）の直後に追加した。",
+        "順序体の性質であり双曲線関数とは無関係なので、双曲線関数の基本性質 (4) から独立させた。非負実数の平方根の存在と一意性がこれを引くことで、平方根→行列ノルム→行列の exp→数の exp→双曲線関数→平方根という依存の循環を断つ。",
       ],
     },
   },
@@ -523,8 +242,8 @@ y_1^2
 \end{aligned}`),
       paragraph([
         "と ",
-        ref("cosh_sinh_basic_properties"),
-        " (4)（",
+        ref("positive_real_square_injective"),
+        "（",
         math(String.raw`a,b\in\mathbb{R}_{>0}`),
         " について ",
         math(String.raw`a^2=b^2\iff a=b`),

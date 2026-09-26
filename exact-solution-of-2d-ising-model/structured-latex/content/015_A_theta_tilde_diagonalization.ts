@@ -90,7 +90,7 @@ export default defineBlocks([
       displayMath(
         String.raw`\gamma_1(\theta) := c_1 c_2^* - s_1 s_2^*\cos\theta \in \mathbb{R},
 \qquad
-\gamma_2(\theta) := i\,e^{i\theta} s_2^*\bigl(c_1\cos\theta - i\sin\theta - s_1 c_2\bigr) \in \mathbb{C}`,
+\gamma_2(\theta) := i\,\exp(i\theta) s_2^*\bigl(c_1\cos\theta - i\sin\theta - s_1 c_2\bigr) \in \mathbb{C}`,
       ),
       paragraph([
         "と定める。このとき ",
@@ -121,7 +121,7 @@ export default defineBlocks([
         "、",
         math(String.raw`(1,2)`),
         " 成分は ",
-        math(String.raw`ie^{i\theta}s_2^*(c_1\cos\theta - i\sin\theta - s_1c_2) = \gamma_2(\theta)`),
+        math(String.raw`i\exp(i\theta)s_2^*(c_1\cos\theta - i\sin\theta - s_1c_2) = \gamma_2(\theta)`),
         " であり、定義そのものである。",
       ]),
       paragraph([
@@ -135,17 +135,17 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(-\theta)
-&= i\,e^{i(-\theta)}s_2^*\bigl(c_1\cos(-\theta) - i\sin(-\theta) - s_1c_2\bigr)
+&= i\,\exp(i(-\theta))s_2^*\bigl(c_1\cos(-\theta) - i\sin(-\theta) - s_1c_2\bigr)
    \quad (\because \text{本ブロックの } \gamma_2 \text{ の定義式を } \theta \to -\theta \text{ として適用}) \\
-&= i\,e^{-i\theta}s_2^*\bigl(c_1\cos\theta - i\sin(-\theta) - s_1c_2\bigr)
+&= i\,\exp(-i\theta)s_2^*\bigl(c_1\cos\theta - i\sin(-\theta) - s_1c_2\bigr)
    \quad (\because \cos(-\theta) = \cos\theta) \\
-&= i\,e^{-i\theta}s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
+&= i\,\exp(-i\theta)s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
    \quad (\because \sin(-\theta) = -\sin\theta)
 \end{aligned}`,
       ),
       paragraph([
         "であるから ",
-        math(String.raw`-\gamma_2(-\theta) = -i\,e^{-i\theta}s_2^*(c_1\cos\theta + i\sin\theta - s_1c_2)`),
+        math(String.raw`-\gamma_2(-\theta) = -i\,\exp(-i\theta)s_2^*(c_1\cos\theta + i\sin\theta - s_1c_2)`),
         " となり、",
         ref("def_A_theta"),
         " の ",
@@ -219,11 +219,11 @@ export default defineBlocks([
         "Step 1（零点の必要条件）。",
         ref("def_gamma1_gamma2_of_theta"),
         " より ",
-        math(String.raw`\gamma_2(\theta) = \left(i\,e^{i\theta}s_2^*\right)w(\theta)`),
+        math(String.raw`\gamma_2(\theta) = \left(i\,\exp(i\theta)s_2^*\right)w(\theta)`),
         "、",
         math(String.raw`w(\theta) := c_1\cos\theta - i\sin\theta - s_1c_2`),
         " である。",
-        math(String.raw`\left|i\,e^{i\theta}s_2^*\right| = s_2^* > 0`),
+        math(String.raw`\left|i\,\exp(i\theta)s_2^*\right| = s_2^* > 0`),
         "（",
         ref("abs_basic_properties"),
         " と ",
@@ -239,10 +239,10 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(\theta) = 0_{\mathbb{C}}
-&\iff \left(i\,e^{i\theta}s_2^*\right)w(\theta) = 0_{\mathbb{C}}
+&\iff \left(i\,\exp(i\theta)s_2^*\right)w(\theta) = 0_{\mathbb{C}}
    \quad (\because \gamma_1,\gamma_2 \text{ の定義}) \\
 &\iff w(\theta) = 0_{\mathbb{C}}
-   \quad (\because i\,e^{i\theta}s_2^* \neq 0 \text{ と、体 } \mathbb{C} \text{ が零因子を持たないこと}) \\
+   \quad (\because i\,\exp(i\theta)s_2^* \neq 0 \text{ と、体 } \mathbb{C} \text{ が零因子を持たないこと}) \\
 &\iff \begin{cases} \sin\theta = 0 \\ c_1\cos\theta = s_1c_2 \end{cases}
    \quad (\because \text{複素数の定義の成分表示（実部と虚部が共に } 0\text{）})
 \end{aligned}`,
@@ -426,7 +426,7 @@ s_1c_2
       ]),
       displayMath(
         String.raw`\gamma_2(-\theta)
-= i\,e^{-i\theta}s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
+= i\,\exp(-i\theta)s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
 \quad (\because \text{def\_gamma1\_gamma2\_of\_theta})`,
       ),
       paragraph([
@@ -453,27 +453,27 @@ s_1c_2
       displayMath(
         String.raw`\begin{aligned}
 \overline{\gamma_2(\theta)}
-&= \overline{i\,e^{i\theta}s_2^*\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
+&= \overline{i\,\exp(i\theta)s_2^*\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
    \quad (\because \text{def\_gamma1\_gamma2\_of\_theta}) \\
-&= \bar i\;\overline{e^{i\theta}}\;\overline{s_2^*}\;
+&= \bar i\;\overline{\exp(i\theta)}\;\overline{s_2^*}\;
    \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
    \quad (\because \text{複素共役が積を保つこと}) \\
-&= (-i)\;\overline{e^{i\theta}}\;\overline{s_2^*}\;
+&= (-i)\;\overline{\exp(i\theta)}\;\overline{s_2^*}\;
    \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
    \quad (\because \bar i = -i) \\
-&= (-i)\,e^{-i\theta}\;\overline{s_2^*}\;
+&= (-i)\,\exp(-i\theta)\;\overline{s_2^*}\;
    \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
-   \quad (\because \theta \in \mathbb{R} \text{ と euler\_formula\_cos\_sin より } \overline{e^{i\theta}} = e^{-i\theta}) \\
-&= (-i)\,e^{-i\theta}\,s_2^*\;
+   \quad (\because \theta \in \mathbb{R} \text{ と euler\_formula\_cos\_sin より } \overline{\exp(i\theta)} = \exp(-i\theta)) \\
+&= (-i)\,\exp(-i\theta)\,s_2^*\;
    \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
    \quad (\because s_2^* \in \mathbb{R}) \\
-&= (-i)\,e^{-i\theta}\,s_2^*
+&= (-i)\,\exp(-i\theta)\,s_2^*
    \left(\overline{c_1\cos\theta} - \overline{i\sin\theta} - \overline{s_1c_2}\right)
    \quad (\because \text{複素共役が和・差を保つこと}) \\
-&= (-i)\,e^{-i\theta}\,s_2^*
+&= (-i)\,\exp(-i\theta)\,s_2^*
    \bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
    \quad (\because c_1\cos\theta,\ \sin\theta,\ s_1c_2 \in \mathbb{R} \text{ と } \bar i = -i) \\
-&= -\Bigl(i\,e^{-i\theta}\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)\Bigr)
+&= -\Bigl(i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)\Bigr)
    \quad (\because \text{複素数の四則}) \\
 &= -\gamma_2(-\theta)
    \quad (\because \text{上の } \gamma_2(-\theta) \text{ の表示})
@@ -481,11 +481,11 @@ s_1c_2
       ),
       paragraph([
         "（",
-        math(String.raw`\overline{e^{i\theta}} = e^{-i\theta}`),
+        math(String.raw`\overline{\exp(i\theta)} = \exp(-i\theta)`),
         " は ",
         ref("euler_formula_cos_sin"),
         " の ",
-        math(String.raw`e^{i\theta} = \cos\theta + i\sin\theta`),
+        math(String.raw`\exp(i\theta) = \cos\theta + i\sin\theta`),
         " と ",
         math(String.raw`\theta \in \mathbb{R}`),
         "、すなわち ",
@@ -539,7 +539,7 @@ s_1c_2
         " である。すなわち ",
         math(String.raw`r := |\gamma_2(\theta)|^2 > 0`),
         " として ",
-        math(String.raw`\gamma_2(\theta)\gamma_2(-\theta) = -r = r\,e^{i\pi}`),
+        math(String.raw`\gamma_2(\theta)\gamma_2(-\theta) = -r = r\,\exp(i\pi)`),
         " であり、",
         math(String.raw`\pi \in [0,2\pi)`),
         " だから ",
@@ -560,10 +560,10 @@ s_1c_2
       displayMath(
         String.raw`\begin{aligned}
 \sqrt{-\gamma_2(\theta)\gamma_2(-\theta)}
-&= \sqrt{\left|\gamma_2(\theta)\right|^2}\;e^{i\cdot 0/2}
+&= \sqrt{\left|\gamma_2(\theta)\right|^2}\;\exp(i\cdot 0/2)
    \quad (\because \text{def\_sqrt\_cc を絶対値 } |\gamma_2(\theta)|^2,\ \text{偏角 } 0 \text{ に適用}) \\
 &= \sqrt{\left|\gamma_2(\theta)\right|^2}
-   \quad (\because e^{i\cdot 0} = 1) \\
+   \quad (\because \exp(i\cdot 0) = 1) \\
 &= \left|\gamma_2(\theta)\right|
    \quad (\because \text{sqrt\_nonnegative\_existence\_uniqueness と } |\gamma_2(\theta)| \geq 0) \\
 &> 0
@@ -591,9 +591,9 @@ s_1c_2
       displayMath(
         String.raw`\begin{aligned}
 \sqrt{\gamma_2(\theta)\gamma_2(-\theta)}
-&= \sqrt{\left|\gamma_2(\theta)\right|^2}\;e^{i\pi/2}
+&= \sqrt{\left|\gamma_2(\theta)\right|^2}\;\exp(i\pi/2)
    \quad (\because \text{def\_sqrt\_cc を絶対値 } |\gamma_2(\theta)|^2,\ \text{偏角 } \pi \text{ に適用}) \\
-&= \left|\gamma_2(\theta)\right|\,e^{i\pi/2}
+&= \left|\gamma_2(\theta)\right|\,\exp(i\pi/2)
    \quad (\because \text{sqrt\_nonnegative\_existence\_uniqueness}) \\
 &= \left|\gamma_2(\theta)\right|\left(\cos\tfrac{\pi}{2} + i\sin\tfrac{\pi}{2}\right)
    \quad (\because \text{euler\_formula\_cos\_sin}) \\
@@ -1164,8 +1164,8 @@ A(\tilde\theta_\mu)
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\gamma_2(\theta) &= i\,e^{i\theta}s_2^*\bigl((c_1u - s_1c_2) - iv\bigr), &
-\gamma_2(-\theta) &= i\,e^{-i\theta}s_2^*\bigl((c_1u - s_1c_2) + iv\bigr)
+\gamma_2(\theta) &= i\,\exp(i\theta)s_2^*\bigl((c_1u - s_1c_2) - iv\bigr), &
+\gamma_2(-\theta) &= i\,\exp(-i\theta)s_2^*\bigl((c_1u - s_1c_2) + iv\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -1180,13 +1180,13 @@ A(\tilde\theta_\mu)
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{i\theta}e^{-i\theta}
-&= e^{i\theta + (-i\theta)}
+\exp(i\theta)\exp(-i\theta)
+&= \exp(i\theta + (-i\theta))
    \quad (\because \text{可換な指数の積公式を } n=1 \text{ に適用}) \\
-&= e^{0}
+&= \exp(0)
    \quad (\because \mathbb{C} \text{ の加法 } i\theta + (-i\theta) = 0) \\
 &= 1
-   \quad (\because e^0 = 1)
+   \quad (\because \exp(0) = 1)
 \end{aligned}`,
       ),
       paragraph([
@@ -1199,11 +1199,11 @@ e^{i\theta}e^{-i\theta}
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(\theta)\gamma_2(-\theta)
-&= \left(i\cdot i\right)\left(e^{i\theta}e^{-i\theta}\right)(s_2^*)^2
+&= \left(i\cdot i\right)\left(\exp(i\theta)\exp(-i\theta)\right)(s_2^*)^2
    \bigl(a_0 - iv\bigr)\bigl(a_0 + iv\bigr)
    \quad (\because \text{直前の 2 式と } \mathbb{C} \text{ の積の可換性}) \\
 &= (-1)\cdot 1\cdot (s_2^*)^2\bigl(a_0 - iv\bigr)\bigl(a_0 + iv\bigr)
-   \quad (\because i\cdot i = -1 \text{ と直前の式変形 } e^{i\theta}e^{-i\theta} = 1) \\
+   \quad (\because i\cdot i = -1 \text{ と直前の式変形 } \exp(i\theta)\exp(-i\theta) = 1) \\
 &= -(s_2^*)^2\Bigl(a_0^2 + v^2\Bigr)
    \quad (\because (a_0-iv)(a_0+iv) = a_0^2 + v^2) \\
 &= -(s_2^*)^2\Bigl((c_1u - s_1c_2)^2 + v^2\Bigr)
@@ -1381,7 +1381,7 @@ s_1^2c_2^2(s_2^*)^2
         "）。",
         math(String.raw`x \in \mathbb{R}`),
         " について ",
-        math(String.raw`\cosh x - \sinh x = e^{-x} > 0`),
+        math(String.raw`\cosh x - \sinh x = \exp(-x) > 0`),
         "（",
         ref("cosh_sinh_basic_properties"),
         "）なので ",
@@ -1514,10 +1514,10 @@ t^2
         " を満たす唯一の ",
         math(String.raw`t \in \mathbb{R}_{\geq 0}`),
         " である（",
-        math(String.raw`\cosh`),
-        " は ",
-        math(String.raw`\mathbb{R}_{\geq 0}`),
-        " 上で狭義単調増加なので一意）。",
+        ref("def_arccosh"),
+        "、",
+        ref("arccosh_properties"),
+        " (1)–(3)）。",
       ]),
       paragraph([
         "さらに ",
@@ -1550,7 +1550,7 @@ t^2
     id: "Athetatilde_009_claim_lambda_eq_exp_gamma",
     kind: "claim",
     origin: { path: SRC, ordinal: 11 },
-    title: { tex: String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\tilde\theta_\mu)}` },
+    title: { tex: String.raw`\lambda_{\pm,\mu} = \exp(\pm\gamma(\tilde\theta_\mu))` },
     labels: ["lambda_eq_exp_gamma_theta_tilde"],
     statement: [
       paragraph([
@@ -1562,8 +1562,8 @@ t^2
         " について、",
       ]),
       displayMath(
-        String.raw`\lambda_{+,\mu} = e^{+\gamma(\tilde\theta_\mu)}, \qquad
-\lambda_{-,\mu} = e^{-\gamma(\tilde\theta_\mu)}`,
+        String.raw`\lambda_{+,\mu} = \exp(+\gamma(\tilde\theta_\mu)), \qquad
+\lambda_{-,\mu} = \exp(-\gamma(\tilde\theta_\mu))`,
       ),
       paragraph(["が成り立つ。とくに ", math(String.raw`\gamma(\tilde\theta_\mu) > 0`), " なので"]),
       displayMath(String.raw`\lambda_{+,\mu} > 1 > \lambda_{-,\mu} > 0`),
@@ -1615,7 +1615,7 @@ t^2
       paragraph([
         math(String.raw`\gamma > 0`),
         " より ",
-        math(String.raw`\sinh\gamma = \frac{1}{2}(e^{\gamma} - e^{-\gamma}) > 0`),
+        math(String.raw`\sinh\gamma = \frac{1}{2}(\exp(\gamma) - \exp(-\gamma)) > 0`),
         " であり、",
         math(String.raw`r > 0`),
         " でもあるから、非負の平方根の一意性（",
@@ -1626,14 +1626,14 @@ t^2
       ]),
       paragraph([
         "Step 2（結論）。",
-        math(String.raw`e^{\pm\gamma} = \cosh\gamma \pm \sinh\gamma`),
+        math(String.raw`\exp(\pm\gamma) = \cosh\gamma \pm \sinh\gamma`),
         "（",
         ref("cosh_sinh_basic_properties"),
         "）と Step 1 より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{+\gamma}
+\exp(+\gamma)
 &= \cosh\gamma + \sinh\gamma
    \quad (\because \text{cosh\_sinh\_basic\_properties}) \\
 &= g_1 + \sinh\gamma
@@ -1642,7 +1642,7 @@ e^{+\gamma}
    \quad (\because \text{Step 1}) \\
 &= \lambda_{+,\mu}
    \quad (\because \text{eigenvector\_of\_A\_theta\_tilde}) \\
-e^{-\gamma}
+\exp(-\gamma)
 &= \cosh\gamma - \sinh\gamma
    \quad (\because \text{cosh\_sinh\_basic\_properties}) \\
 &= g_1 - \sinh\gamma
@@ -1667,16 +1667,16 @@ e^{-\gamma}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{\gamma}
-&> e^0
+\exp(\gamma)
+&> \exp(0)
    \quad (\because \gamma>0 \text{ と実指数関数の狭義単調増加性}) \\
-e^0
+\exp(0)
 &= 1
-   \quad (\because e^0=1) \\
-1=e^0
-&> e^{-\gamma}
+   \quad (\because \exp(0)=1) \\
+1=\exp(0)
+&> \exp(-\gamma)
    \quad (\because 0>-\gamma \text{ と実指数関数の狭義単調増加性}) \\
-e^{-\gamma}
+\exp(-\gamma)
 &> 0
    \quad (\because \text{実指数関数の正値性})
 \end{aligned}`,

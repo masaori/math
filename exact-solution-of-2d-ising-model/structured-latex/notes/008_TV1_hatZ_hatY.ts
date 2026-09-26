@@ -15,14 +15,14 @@ export default defineNotes([
       paragraph(["証明で用いる表式と反交換関係（原文 note）："]),
       displayMath(
         String.raw`\begin{aligned}
-H_1^{(\pm)} &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right) \\
+H_1^{(\pm)} &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\exp(-i\frac{2\pi j}{M})\right) \\
 H_2 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j \\
 [\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\pm)}]_+ &= 2M\,\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})} \\
 [\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\mp)}]_+ &= \overbrace{2M\,\delta^M_{\mu+\nu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}}^{[\hat{Z}_\mu^{(\pm)},\hat{Z}_\nu^{(\pm)}]_+}
-   + \left(-2\,e^{-i\frac{2\pi}{M}(\mu+\nu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) \\
+   + \left(-2\,\exp(-i\frac{2\pi}{M}(\mu+\nu))\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right) \\
 [\hat{Z}_\mu^{(\pm)},\hat{Y}_\nu]_+ &= 0 \\
 [\hat{Y}_\mu,\hat{Y}_\nu]_+ &= 2M\,\delta^M_{\mu+\nu,0}\,I \\
-\sum_{j=1}^{M} e^{k\cdot\frac{2\pi i j}{M}} &= M\,\delta^M_{(k,0)}
+\sum_{j=1}^{M} \exp(k\cdot\frac{2\pi i j}{M}) &= M\,\delta^M_{(k,0)}
 \end{aligned}`,
       ),
     ],
@@ -53,11 +53,11 @@ H_2 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Z}_{-j}^{(-)}\hat{Y}_j \\
 &= K_1[H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}] \\
 &= K_1\cdot 2\cdot\begin{cases}
 \hat{Y}_M & (\mu = -M) \\
-e^{-i\frac{2\pi(M+\mu)}{M}}\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
-e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
+\exp(-i\frac{2\pi(M+\mu)}{M})\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
+\exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
 \hat{Y}_M & (\mu = M)
 \end{cases} \\
-&= K_1\cdot 2\cdot\left(e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu\right)
+&= K_1\cdot 2\cdot\left(\exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu\right)
    \quad (\because \hat{Y}\text{ の }M\text{ 周期性})
 \end{aligned}`,
       ),
@@ -65,10 +65,10 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
       displayMath(
         String.raw`\begin{aligned}
 [K_1 H_1^{(\pm)}, [K_1 H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}]]
-&= [K_1 H_1^{(\pm)},\ K_1\cdot 2\cdot(e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu)] \\
-&= K_1^2\cdot 2\cdot e^{-i\frac{2\pi\mu}{M}}[H_1^{(\pm)}, \hat{Y}_\mu] \\
-&= K_1^2\cdot 2\cdot e^{-i\frac{2\pi\mu}{M}}\left(-2\cdot(e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
-&= K_1^2\cdot 2^2\cdot(-1)^1\cdot e^{\overbrace{-i\frac{2\pi\mu}{M}-i\frac{2\pi(-\mu)}{M}}^{0}}\hat{Z}_\mu^{(\pm)} \\
+&= [K_1 H_1^{(\pm)},\ K_1\cdot 2\cdot(\exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu)] \\
+&= K_1^2\cdot 2\cdot \exp(-i\frac{2\pi\mu}{M})[H_1^{(\pm)}, \hat{Y}_\mu] \\
+&= K_1^2\cdot 2\cdot \exp(-i\frac{2\pi\mu}{M})\left(-2\cdot(\exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_\mu^{(\pm)})\right) \\
+&= K_1^2\cdot 2^2\cdot(-1)^1\cdot \exp(\overbrace{-i\frac{2\pi\mu}{M}-i\frac{2\pi(-\mu)}{M}}^{0})\hat{Z}_\mu^{(\pm)} \\
 &= K_1^2\cdot 2^2\cdot(-1)^1\cdot\hat{Z}_\mu^{(\pm)}
 \end{aligned}`,
       ),
@@ -78,19 +78,19 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
 [K_1 H_1^{(\pm)}, \overbrace{[K_1 H_1^{(\pm)},[K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}]]}^{n=2}]
 &= [K_1 H_1^{(\pm)},\ K_1^2\cdot 2^2\cdot(-1)^1\cdot\hat{Z}_\mu^{(\pm)}] \\
 &= K_1\cdot K_1^2\cdot 2^2\cdot(-1)^1\cdot[H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}] \\
-&= K_1\cdot K_1^2\cdot 2^2\cdot(-1)^1\cdot\left(2\cdot(e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu)\right) \\
-&= K_1^3\cdot 2^3\cdot(-1)^1\cdot e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu
+&= K_1\cdot K_1^2\cdot 2^2\cdot(-1)^1\cdot\left(2\cdot(\exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu)\right) \\
+&= K_1^3\cdot 2^3\cdot(-1)^1\cdot \exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu
 \end{aligned}`,
       ),
       paragraph(["(h1.z) ", math(String.raw`n=4`), "："]),
       displayMath(
         String.raw`\begin{aligned}
 [K_1 H_1^{(\pm)}, \overbrace{[K_1 H_1^{(\pm)},[K_1 H_1^{(\pm)},[K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}]]]}^{n=3}]
-&= [K_1 H_1^{(\pm)},\ K_1^3\cdot 2^3\cdot(-1)^1\cdot e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu] \\
-&= K_1\cdot K_1^3\cdot 2^3\cdot(-1)^1\cdot e^{-i\frac{2\pi\mu}{M}}[H_1^{(\pm)}, \hat{Y}_\mu] \\
-&= K_1\cdot K_1^3\cdot 2^3\cdot(-1)^1\cdot e^{-i\frac{2\pi\mu}{M}}\left(-2\cdot(e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
-&= K_1^4\cdot 2^4\cdot(-1)^2\cdot e^{-i\frac{2\pi\mu}{M}}e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)} \\
-&= K_1^4\cdot 2^4\cdot(-1)^2\cdot e^{\overbrace{-i\frac{2\pi\mu}{M}-i\frac{2\pi(-\mu)}{M}}^{0}}\hat{Z}_\mu^{(\pm)} \\
+&= [K_1 H_1^{(\pm)},\ K_1^3\cdot 2^3\cdot(-1)^1\cdot \exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu] \\
+&= K_1\cdot K_1^3\cdot 2^3\cdot(-1)^1\cdot \exp(-i\frac{2\pi\mu}{M})[H_1^{(\pm)}, \hat{Y}_\mu] \\
+&= K_1\cdot K_1^3\cdot 2^3\cdot(-1)^1\cdot \exp(-i\frac{2\pi\mu}{M})\left(-2\cdot(\exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_\mu^{(\pm)})\right) \\
+&= K_1^4\cdot 2^4\cdot(-1)^2\cdot \exp(-i\frac{2\pi\mu}{M})\exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_\mu^{(\pm)} \\
+&= K_1^4\cdot 2^4\cdot(-1)^2\cdot \exp(\overbrace{-i\frac{2\pi\mu}{M}-i\frac{2\pi(-\mu)}{M}}^{0})\hat{Z}_\mu^{(\pm)} \\
 &= K_1^4\cdot 2^4\cdot(-1)^2\cdot\hat{Z}_\mu^{(\pm)}
 \end{aligned}`,
       ),
@@ -104,19 +104,19 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
         String.raw`\begin{aligned}
 [K_1 H_1^{(\pm)}, \hat{Y}_\mu]
 &= K_1[H_1^{(\pm)}, \hat{Y}_\mu] \\
-&= K_1\left(-2\cdot(e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
-&= K_1\cdot 2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)}
+&= K_1\left(-2\cdot(\exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_\mu^{(\pm)})\right) \\
+&= K_1\cdot 2\cdot(-1)\cdot \exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_\mu^{(\pm)}
 \end{aligned}`,
       ),
       paragraph(["(h1.y) ", math(String.raw`n=2`), "："]),
       displayMath(
         String.raw`\begin{aligned}
 [K_1 H_1^{(\pm)}, \overbrace{[K_1 H_1^{(\pm)},\hat{Y}_\mu]}^{n=1}]
-&= [K_1 H_1^{(\pm)},\ K_1\cdot 2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)}] \\
-&= K_1^2\cdot 2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}[H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}] \\
-&= K_1^2\cdot 2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}\left(2\cdot(e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu)\right) \\
-&= K_1^2\cdot 2^2\cdot(-1)\cdot e^{-i\frac{2\pi(-\mu)}{M}}e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu \\
-&= K_1^2\cdot 2^2\cdot(-1)\cdot e^{\overbrace{-i\frac{2\pi(-\mu)}{M}-i\frac{2\pi\mu}{M}}^{0}}\hat{Y}_\mu \\
+&= [K_1 H_1^{(\pm)},\ K_1\cdot 2\cdot(-1)\cdot \exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_\mu^{(\pm)}] \\
+&= K_1^2\cdot 2\cdot(-1)\cdot \exp(-i\frac{2\pi(-\mu)}{M})[H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}] \\
+&= K_1^2\cdot 2\cdot(-1)\cdot \exp(-i\frac{2\pi(-\mu)}{M})\left(2\cdot(\exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu)\right) \\
+&= K_1^2\cdot 2^2\cdot(-1)\cdot \exp(-i\frac{2\pi(-\mu)}{M})\exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu \\
+&= K_1^2\cdot 2^2\cdot(-1)\cdot \exp(\overbrace{-i\frac{2\pi(-\mu)}{M}-i\frac{2\pi\mu}{M}}^{0})\hat{Y}_\mu \\
 &= K_1^2\cdot 2^2\cdot(-1)\cdot\hat{Y}_\mu
 \end{aligned}`,
       ),
@@ -126,8 +126,8 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
 [K_1 H_1^{(\pm)}, \overbrace{[K_1 H_1^{(\pm)},[K_1 H_1^{(\pm)},\hat{Y}_\mu]]}^{n=2}]
 &= [K_1 H_1^{(\pm)},\ K_1^2\cdot 2^2\cdot(-1)\cdot\hat{Y}_\mu] \\
 &= K_1^3\cdot 2^2\cdot(-1)\cdot[H_1^{(\pm)}, \hat{Y}_\mu] \\
-&= K_1^3\cdot 2^2\cdot(-1)\cdot\left(-2\cdot(e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)})\right) \\
-&= K_1^3\cdot 2^3\cdot(-1)^2\cdot e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_\mu^{(\pm)}
+&= K_1^3\cdot 2^2\cdot(-1)\cdot\left(-2\cdot(\exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_\mu^{(\pm)})\right) \\
+&= K_1^3\cdot 2^3\cdot(-1)^2\cdot \exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_\mu^{(\pm)}
 \end{aligned}`,
       ),
       paragraph(["(h2.z−) ", math(String.raw`n=1`), "："]),
@@ -268,7 +268,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M-1) \\
         " が ",
         math(String.raw`\mathrm{ad}(X)`),
         " の固有ベクトルにならないため ",
-        math(String.raw`T_{(V')}(\psi_\mu^\dagger) = e^{\gamma(\theta_\mu)}\psi_\mu^\dagger`),
+        math(String.raw`T_{(V')}(\psi_\mu^\dagger) = \exp(\gamma(\theta_\mu))\psi_\mu^\dagger`),
         " が成り立たない。本定義では ",
         math(String.raw`\psi_\mu^\dagger \psi_{-\mu}`),
         "（反転インデックス）を使い和を ",

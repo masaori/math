@@ -315,12 +315,12 @@ export default defineBlocks([
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{i(t+2k\pi)}
+\exp(i(t+2k\pi))
 &= \cos(t+2k\pi) + i\sin(t+2k\pi)
    \quad (\because \text{Euler の公式}) \\
 &= \cos t + i\sin t
    \quad (\because \cos, \sin \text{ の } 2\pi \text{ 周期性}) \\
-&= e^{it}
+&= \exp(it)
    \quad (\because \text{Euler の公式})
 \end{aligned}`,
       ),
@@ -330,9 +330,9 @@ e^{i(t+2k\pi)}
         " の ",
         math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
         " と ",
-        math(String.raw`\gamma_2(\theta) = ie^{i\theta}s_2^*\left(c_1\cos\theta - i\sin\theta - s_1c_2\right)`),
+        math(String.raw`\gamma_2(\theta) = i\exp(i\theta)s_2^*\left(c_1\cos\theta - i\sin\theta - s_1c_2\right)`),
         " は ",
-        math(String.raw`\cos\theta, \sin\theta, e^{i\theta}`),
+        math(String.raw`\cos\theta, \sin\theta, \exp(i\theta)`),
         " のみを通じて ",
         math(String.raw`\theta`),
         " に依存するから、(1) が従う。",
@@ -870,9 +870,9 @@ r_\mu r_\nu\cdot 2M\,\delta\,I
         "）について",
       ]),
       displayMath(
-        String.raw`T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) = e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger,
+        String.raw`T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) = \exp(+\gamma(\tilde\theta_\mu))\,\check\psi_\mu^\dagger,
 \qquad
-T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu`,
+T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = \exp(-\gamma(\tilde\theta_\mu))\,\check\psi_\mu`,
       ),
       paragraph([
         "が成り立つ（",
@@ -1006,13 +1006,13 @@ g_{12}T_{(V^{(+)})}(A_0)+g_{22}T_{(V^{(+)})}(B_0)\right)
 T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right)
 &= \lambda_{+,\mu}\check\psi_\mu^\dagger
    \quad (\because \text{上の行ベクトルの等式の第 1 列}) \\
-&= e^{+\gamma(\tilde\theta_\mu)}\check\psi_\mu^\dagger
-   \quad (\because \lambda_{+,\mu}=e^{+\gamma(\tilde\theta_\mu)}),\\[4pt]
+&= \exp(+\gamma(\tilde\theta_\mu))\check\psi_\mu^\dagger
+   \quad (\because \lambda_{+,\mu}=\exp(+\gamma(\tilde\theta_\mu))),\\[4pt]
 T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
 &= \lambda_{-,\mu}\check\psi_\mu
    \quad (\because \text{上の行ベクトルの等式の第 2 列}) \\
-&= e^{-\gamma(\tilde\theta_\mu)}\check\psi_\mu
-   \quad (\because \lambda_{-,\mu}=e^{-\gamma(\tilde\theta_\mu)})
+&= \exp(-\gamma(\tilde\theta_\mu))\check\psi_\mu
+   \quad (\because \lambda_{-,\mu}=\exp(-\gamma(\tilde\theta_\mu)))
 \end{aligned}`,
       ),
     ],
@@ -1160,9 +1160,9 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
         "）について",
       ]),
       displayMath(
-        String.raw`T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right) = e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger,
+        String.raw`T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right) = \exp(+\gamma(\tilde\theta_\mu))\,\check\psi_\mu^\dagger,
 \qquad
-T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu`,
+T_{(\check{V}')}\!\left(\check\psi_\mu\right) = \exp(-\gamma(\tilde\theta_\mu))\,\check\psi_\mu`,
       ),
     ],
     proof: [
@@ -1365,7 +1365,7 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right) = e^{-\gamma(\tilde\theta_\mu)}\,\
         " について",
       ]),
       displayMath(
-        String.raw`\exp(cI) = e^{c}I
+        String.raw`\exp(cI) = \exp(c)I
 \quad (\because \left(cI\right)^n = c^n I\ (n\in\mathbb{Z}_{\geq 0})\text{ と }\exp\text{ の級数定義})`,
       ),
       paragraph([
@@ -1390,9 +1390,9 @@ T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
    \quad (\because \text{Step 4}) \\
 &= \check\psi_\mu^\dagger\,\exp\!\left(\gamma(\tilde\theta_\mu)I\right)
    \quad (\because \text{可換な指数の積の法則}) \\
-&= \check\psi_\mu^\dagger\left(e^{\gamma(\tilde\theta_\mu)}I\right)
-   \quad (\because \text{準備の等式 } \exp(cI)=e^{c}I) \\
-&= e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger
+&= \check\psi_\mu^\dagger\left(\exp(\gamma(\tilde\theta_\mu))I\right)
+   \quad (\because \text{準備の等式 } \exp(cI)=\exp(c)I) \\
+&= \exp(+\gamma(\tilde\theta_\mu))\,\check\psi_\mu^\dagger
    \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換})
 \end{aligned}`,
       ),
@@ -1595,9 +1595,9 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right)
    \quad (\because \text{Step 4'}) \\
 &= \check\psi_\mu\,\exp\!\left(-\gamma(\tilde\theta_\mu)I\right)
    \quad (\because \text{可換な指数の積の法則}) \\
-&= \check\psi_\mu\left(e^{-\gamma(\tilde\theta_\mu)}I\right)
-   \quad (\because \text{準備の等式 } \exp(cI)=e^{c}I) \\
-&= e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu
+&= \check\psi_\mu\left(\exp(-\gamma(\tilde\theta_\mu))I\right)
+   \quad (\because \text{準備の等式 } \exp(cI)=\exp(c)I) \\
+&= \exp(-\gamma(\tilde\theta_\mu))\,\check\psi_\mu
    \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換})
 \end{aligned}`,
       ),
@@ -1717,18 +1717,18 @@ T_{(V^{(+)})}\!\left(\check{Y}_\mu\right) = T_{(\check{V}')}\!\left(\check{Y}_\m
         " と ",
         ref("action_of_T_check_Vprime_on_check_psi"),
         " より、いずれも ",
-        math(String.raw`e^{\pm\gamma(\tilde\theta_\mu)}`),
+        math(String.raw`\exp(\pm\gamma(\tilde\theta_\mu))`),
         " 倍であるから",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right)
-&= e^{+\gamma(\tilde\theta_\mu)}\,\check\psi_\mu^\dagger
+&= \exp(+\gamma(\tilde\theta_\mu))\,\check\psi_\mu^\dagger
    \quad (\because V^{(+)}\text{ と }\check\psi\text{ の交換関係}) \\
 &= T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
    \quad (\because T_{(\check V')}\text{ の }\check\psi\text{ への作用}), \\
 T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
-&= e^{-\gamma(\tilde\theta_\mu)}\,\check\psi_\mu
+&= \exp(-\gamma(\tilde\theta_\mu))\,\check\psi_\mu
    \quad (\because V^{(+)}\text{ と }\check\psi\text{ の交換関係}) \\
 &= T_{(\check{V}')}\!\left(\check\psi_\mu\right)
    \quad (\because T_{(\check V')}\text{ の }\check\psi\text{ への作用})
@@ -1834,13 +1834,13 @@ T_{(V^{(+)})}\!\left(\check{Y}_\mu\right)
         " について",
       ]),
       displayMath(
-        String.raw`Z_m = \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{im\tilde\theta_\mu},
+        String.raw`Z_m = \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,\exp(im\tilde\theta_\mu),
 \qquad
-Y_m = \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{im\tilde\theta_\mu}`,
+Y_m = \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,\exp(im\tilde\theta_\mu)`,
       ),
       paragraph([
         "である。",
-        math(String.raw`e^{im\tilde\theta_\mu}/M \in \mathbb{C}`),
+        math(String.raw`\exp(im\tilde\theta_\mu)/M \in \mathbb{C}`),
         " はスカラーなので、この復元公式と、Step 1 の線型性と、",
         ref("T_V_plus_eq_T_check_Vprime_on_check_Z_Y"),
         "（以下「",
@@ -1850,13 +1850,13 @@ Y_m = \frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{im\tilde\theta_\mu}`,
       displayMath(
         String.raw`\begin{aligned}
 T_{(V^{(+)})}(Z_m)
-&= T_{(V^{(+)})}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{im\tilde\theta_\mu}\right)
+&= T_{(V^{(+)})}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,\exp(im\tilde\theta_\mu)\right)
    \quad (\because \text{復元公式}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
+&= \frac{1}{M}\sum_{\mu=1}^{M} \exp(im\tilde\theta_\mu)\,T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
    \quad (\because \text{Step 1 の線型性}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(\check{V}')}\!\left(\check{Z}_\mu\right)
+&= \frac{1}{M}\sum_{\mu=1}^{M} \exp(im\tilde\theta_\mu)\,T_{(\check{V}')}\!\left(\check{Z}_\mu\right)
    \quad (\because \check{Z},\check{Y}\text{ 上の一致}) \\
-&= T_{(\check{V}')}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{im\tilde\theta_\mu}\right)
+&= T_{(\check{V}')}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,\exp(im\tilde\theta_\mu)\right)
    \quad (\because \text{Step 1 の線型性}) \\
 &= T_{(\check{V}')}(Z_m)
    \quad (\because \text{復元公式})
@@ -1869,13 +1869,13 @@ T_{(V^{(+)})}(Z_m)
       displayMath(
         String.raw`\begin{aligned}
 T_{(V^{(+)})}(Y_m)
-&= T_{(V^{(+)})}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{im\tilde\theta_\mu}\right)
+&= T_{(V^{(+)})}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,\exp(im\tilde\theta_\mu)\right)
    \quad (\because \text{復元公式}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(V^{(+)})}\!\left(\check{Y}_\mu\right)
+&= \frac{1}{M}\sum_{\mu=1}^{M} \exp(im\tilde\theta_\mu)\,T_{(V^{(+)})}\!\left(\check{Y}_\mu\right)
    \quad (\because \text{Step 1 の線型性}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M} e^{im\tilde\theta_\mu}\,T_{(\check{V}')}\!\left(\check{Y}_\mu\right)
+&= \frac{1}{M}\sum_{\mu=1}^{M} \exp(im\tilde\theta_\mu)\,T_{(\check{V}')}\!\left(\check{Y}_\mu\right)
    \quad (\because \check{Z},\check{Y}\text{ 上の一致}) \\
-&= T_{(\check{V}')}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{im\tilde\theta_\mu}\right)
+&= T_{(\check{V}')}\!\left(\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,\exp(im\tilde\theta_\mu)\right)
    \quad (\because \text{Step 1 の線型性}) \\
 &= T_{(\check{V}')}(Y_m)
    \quad (\because \text{復元公式})

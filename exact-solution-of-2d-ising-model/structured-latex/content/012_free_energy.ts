@@ -271,21 +271,21 @@ export default defineBlocks([
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^u
+\exp(u)
 &=y+\sqrt{y^2-1}
 &&\left(\because\ \log\text{ と }\exp\text{ は正の実数上で互いに逆写像}\right),\\
-e^{-u}
-&=\frac{1}{e^u}
-&&\left(\because\ \text{指数法則 }e^{-u}\cdot e^{u}=e^{0}=1\right)\\
+\exp(-u)
+&=\frac{1}{\exp(u)}
+&&\left(\because\ \text{指数法則 }\exp(-u)\cdot \exp(u)=\exp(0)=1\right)\\
 &=\frac{1}{y+\sqrt{y^2-1}}
-&&\left(\because\ \text{上の }e^u\text{ の表示}\right)\\
+&&\left(\because\ \text{上の }\exp(u)\text{ の表示}\right)\\
 &=y-\sqrt{y^2-1}
 &&\left(\because\ \text{分母の有理化と }y^2-(y^2-1)=1\right),\\
 \cosh u
-&=\frac{e^u+e^{-u}}{2}
+&=\frac{\exp(u)+\exp(-u)}{2}
 &&\left(\because\ \cosh\text{ の定義}\right)\\
 &=\frac{y+\sqrt{y^2-1}+y-\sqrt{y^2-1}}{2}
-&&\left(\because\ \text{上の }e^u,e^{-u}\text{ の表示}\right)\\
+&&\left(\because\ \text{上の }\exp(u),\exp(-u)\text{ の表示}\right)\\
 &=y
 &&\left(\because\ \mathbb{R}\text{ の四則}\right).
 \end{aligned}`,
@@ -306,7 +306,7 @@ u
         String.raw`\begin{aligned}
 \mathrm{arccosh}(y)
 &=u
-&&\left(\because\ \mathrm{arccosh}\text{ は }\cosh|_{[0,\infty)}\text{ の逆写像}\right)\\
+&&\left(\because\ \blkref{def_arccosh}\text{ と }u\text{ の定義}\right)\\
 &=\log\left(y+\sqrt{y^2-1}\right)
 &&\left(\because\ u\text{ の定義}\right).
 \end{aligned}`,
@@ -775,7 +775,7 @@ u
 &&\left(\because\ \text{冪の対数 }\log(x^{r})=r\log x\right)\\
 &=\frac{M}{2}\log\left(2\sinh 2K_2\right)
 + \frac{1}{2}\sum_{\theta\in\Theta_M^{(\delta)}}\gamma(\theta)
-&&\left(\because\ \log(e^{y})=y\right)
+&&\left(\because\ \log(\exp(y))=y\right)
 \end{aligned}`,
       ),
       paragraph(["を得る。"]),
@@ -989,8 +989,8 @@ u
         "）で Fourier 変換した",
       ]),
       displayMath(
-        String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,e^{-i j \tilde\theta_\mu},\qquad
-\check{Y}_\mu := \sum_{j=1}^{M} Y_j\,e^{-i j \tilde\theta_\mu},\qquad
+        String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,\exp(-i j \tilde\theta_\mu),\qquad
+\check{Y}_\mu := \sum_{j=1}^{M} Y_j\,\exp(-i j \tilde\theta_\mu),\qquad
 \tilde\theta_\mu := \frac{2\pi\left(\mu-\tfrac12\right)}{M}`,
       ),
       paragraph([

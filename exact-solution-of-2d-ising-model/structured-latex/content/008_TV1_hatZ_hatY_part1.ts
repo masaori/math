@@ -520,12 +520,12 @@ T_g(aX+bW)
 -2K_2^*
 &=\log(\tanh K_2)
 &&(\because\ K_2^*=-\tfrac12\log(\tanh K_2)\text{ と }\mathbb R\text{ の四則})\\
-e^{-2K_2^*}
-&=e^{\log(\tanh K_2)}
+\exp(-2K_2^*)
+&=\exp(\log(\tanh K_2))
 &&(\because\ \text{直前の等式の両辺の指数})\\
 &=\tanh K_2
 &&(\because\ 0<\tanh K_2\text{ と実対数・指数の逆写像性})\\
-e^{2K_2^*}
+\exp(2K_2^*)
 &=(\tanh K_2)^{-1}
 &&(\because\ \text{直前の等式の逆数と }\tanh K_2\ne0).
 \end{aligned}`),
@@ -540,10 +540,10 @@ e^{2K_2^*}
 s_2^*
 &=\sinh 2K_2^*
 &&(\because\ s_2^*=\sinh 2K_2^*\text{ の定義})\\
-&= \frac{e^{2K_2^*} - e^{-2K_2^*}}{2}
-&&(\because \sinh x = \tfrac{1}{2}(e^{x}-e^{-x})) \\
+&= \frac{\exp(2K_2^*) - \exp(-2K_2^*)}{2}
+&&(\because \sinh x = \tfrac{1}{2}(\exp(x)-\exp(-x))) \\
 &= \frac{(\tanh K_2)^{-1} - \tanh K_2}{2}
-&&(\because \text{準備の } e^{2K_2^*} = (\tanh K_2)^{-1},\ e^{-2K_2^*} = \tanh K_2) \\
+&&(\because \text{準備の } \exp(2K_2^*) = (\tanh K_2)^{-1},\ \exp(-2K_2^*) = \tanh K_2) \\
 &= \frac{1}{2}\left(\frac{\cosh K_2}{\sinh K_2} - \frac{\sinh K_2}{\cosh K_2}\right)
 &&(\because \tanh x = \tfrac{\sinh x}{\cosh x}\ \text{とその逆数}) \\
 &= \frac{\cosh^2 K_2 - \sinh^2 K_2}{2\sinh K_2\cosh K_2}
@@ -559,10 +559,10 @@ s_2^*
 c_2^*
 &=\cosh 2K_2^*
 &&(\because\ c_2^*=\cosh 2K_2^*\text{ の定義})\\
-&= \frac{e^{2K_2^*} + e^{-2K_2^*}}{2}
-&&(\because \cosh x = \tfrac{1}{2}(e^{x}+e^{-x})) \\
+&= \frac{\exp(2K_2^*) + \exp(-2K_2^*)}{2}
+&&(\because \cosh x = \tfrac{1}{2}(\exp(x)+\exp(-x))) \\
 &= \frac{(\tanh K_2)^{-1} + \tanh K_2}{2}
-&&(\because \text{準備の } e^{2K_2^*} = (\tanh K_2)^{-1},\ e^{-2K_2^*} = \tanh K_2) \\
+&&(\because \text{準備の } \exp(2K_2^*) = (\tanh K_2)^{-1},\ \exp(-2K_2^*) = \tanh K_2) \\
 &= \frac{1}{2}\left(\frac{\cosh K_2}{\sinh K_2} + \frac{\sinh K_2}{\cosh K_2}\right)
 &&(\because \tanh x = \tfrac{\sinh x}{\cosh x}\ \text{とその逆数}) \\
 &= \frac{\cosh^2 K_2 + \sinh^2 K_2}{2\sinh K_2\cosh K_2}
@@ -605,8 +605,8 @@ c_2^*
         String.raw`A(\theta) :=
 \begin{pmatrix}
 c_1 c_2^* - s_1 s_2^*\cos\theta &
-i e^{i\theta} s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2) \\
--i e^{-i\theta} s_2^*(c_1\cos\theta + i\sin\theta - s_1 c_2) &
+i \exp(i\theta) s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2) \\
+-i \exp(-i\theta) s_2^*(c_1\cos\theta + i\sin\theta - s_1 c_2) &
 c_1 c_2^* - s_1 s_2^*\cos\theta
 \end{pmatrix}`,
       ),

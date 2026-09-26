@@ -1477,94 +1477,106 @@ S_NT_N
     },
   },
   {
-    id: "exp_linear_map_005_definition_one_by_one_matrix_of_real",
+    id: "exp_linear_map_005_definition_one_by_one_matrix",
     kind: "definition",
     origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 5 },
-    title: { text: "実数を成分とする 1 行 1 列の行列" },
-    labels: ["def_one_by_one_matrix_of_real"],
+    title: { text: "数を成分とする 1 行 1 列の行列" },
+    labels: ["def_one_by_one_matrix"],
     statement: [
       paragraph([
-        math(String.raw`x \in \mathbb{R}`),
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        " とする。",
+        math(String.raw`x \in K`),
         " に対して、ただ 1 つの成分が ",
         math(String.raw`x`),
         " である 1 行 1 列の行列を",
       ]),
-      displayMath(String.raw`[x] \in \mathrm{Mat}(1,\mathbb{R}), \qquad [x]_{11} := x`),
+      displayMath(String.raw`[x]_K \in \mathrm{Mat}(1,K), \qquad \left([x]_K\right)_{11} := x`),
       paragraph([
         "と書く。これにより写像 ",
-        math(String.raw`[\,\cdot\,] : \mathbb{R} \to \mathrm{Mat}(1,\mathbb{R})`),
+        math(String.raw`[\,\cdot\,]_K : K \to \mathrm{Mat}(1,K)`),
         " が定まる。",
-        math(String.raw`\mathrm{Mat}(1,\mathbb{R})`),
+        math(String.raw`\mathrm{Mat}(1,K)`),
         " の元 ",
         math(String.raw`A`),
         " は成分 ",
         math(String.raw`A_{11}`),
         " だけで決まるので、",
-        math(String.raw`A = [A_{11}]`),
+        math(String.raw`A = [A_{11}]_K`),
         " である。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
-        "実数の exp（labels: def_real_exp）を行列の exp（labels: def_exp）から定義するために置いた。実数と 1 行 1 列の行列を同一視せず、行き来をこの写像と成分の取り出し A ↦ A_11 の 2 本に限る。",
+        "数の exp（labels: def_scalar_exp）を行列の exp（labels: def_exp）から定義するために置いた。数と 1 行 1 列の行列を同一視せず、行き来をこの写像と成分の取り出し A ↦ A_11 の 2 本に限る。",
       ],
     },
   },
   {
-    id: "exp_linear_map_006_definition_real_exp",
+    id: "exp_linear_map_006_definition_scalar_exp",
     kind: "definition",
     origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 6 },
-    title: { text: "実数の exp" },
-    labels: ["def_real_exp"],
+    title: { text: "実数と複素数の exp" },
+    labels: ["def_scalar_exp"],
     statement: [
       paragraph([
-        math(String.raw`x \in \mathbb{R}`),
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        " とし、",
+        math(String.raw`x \in K`),
         " に対して",
       ]),
-      displayMath(String.raw`\exp(x) := \bigl(\exp([x])\bigr)_{11} \in \mathbb{R}`),
+      displayMath(String.raw`\exp(x) := \bigl(\exp([x]_K)\bigr)_{11} \in K`),
       paragraph([
         "と定める。右辺の ",
         math(String.raw`\exp`),
         " は ",
         ref("def_exp"),
         " (1) の行列の exp を ",
-        math(String.raw`K = \mathbb{R}`),
-        "、",
         math(String.raw`n = 1`),
         " で ",
-        ref("def_one_by_one_matrix_of_real"),
+        ref("def_one_by_one_matrix"),
         " の ",
-        math(String.raw`[x]`),
+        math(String.raw`[x]_K`),
         " に適用したものであり、",
-        math(String.raw`\exp([x]) \in \mathrm{Mat}(1,\mathbb{R})`),
-        " だからその成分は実数である。以後、引数が実数である ",
-        math(String.raw`\exp`),
-        " はこの定義の ",
+        math(String.raw`\exp([x]_K) \in \mathrm{Mat}(1,K)`),
+        " だからその成分は ",
+        math(String.raw`K`),
+        " の元である。これにより写像 ",
         math(String.raw`\exp : \mathbb{R} \to \mathbb{R}`),
-        " を、引数が行列である ",
+        " と ",
+        math(String.raw`\exp : \mathbb{C} \to \mathbb{C}`),
+        " が定まる。以後、",
         math(String.raw`\exp`),
-        " は ",
+        " の引数が実数ならば前者、複素数ならば後者、行列ならば ",
         ref("def_exp"),
-        " のものを表す。",
+        " の行列の exp を表す。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
-        "それまで本文は実数の指数関数を e^x や exp(x) と書いて定義なしに使っていた。新しい極限の議論を持ち込まず、既に定義と収束が済んでいる行列の exp の 1 行 1 列の場合として定めた。級数で直接定義する経路は、負の引数での収束と積公式を実数について証明し直す必要があるため採らなかった。",
+        "それまで本文は指数関数を e^x・e^{iθ} や定義のない exp(x) で書いていた。新しい極限の議論を持ち込まず、既に定義と収束が済んでいる行列の exp の 1 行 1 列の場合として定めた。級数で直接定義する経路は、負の引数や複素数の引数での収束と積公式を数について証明し直す必要があるため採らなかった。",
       ],
     },
   },
   {
-    id: "exp_linear_map_007_claim_real_exp_is_limit_of_partial_sums",
+    id: "exp_linear_map_007_claim_scalar_exp_is_limit_of_partial_sums",
     kind: "claim",
     origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 7 },
-    title: { text: "実数の exp は指数級数の部分和の極限" },
-    labels: ["real_exp_is_limit_of_partial_sums"],
+    title: { text: "数の exp は指数級数の部分和の極限" },
+    labels: ["scalar_exp_is_limit_of_partial_sums"],
     statement: [
       paragraph([
-        math(String.raw`x \in \mathbb{R}`),
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        "、",
+        math(String.raw`x \in K`),
         " とする。",
         math(String.raw`N \to \infty`),
         " のとき",
@@ -1572,7 +1584,7 @@ S_NT_N
       displayMath(String.raw`\sum_{m=0}^{N}\frac{x^m}{m!} \to \exp(x)`),
       paragraph([
         "が ",
-        math(String.raw`\mathbb{R}`),
+        math(String.raw`K`),
         " において成り立つ（",
         math(String.raw`x^0 := 1`),
         "、",
@@ -1583,96 +1595,98 @@ S_NT_N
     proof: [
       paragraph([
         "Step 1（",
-        math(String.raw`[x]^m = [x^m]`),
+        math(String.raw`[x]_K^{\,m} = [x^m]_K`),
         "）。",
         math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
         " に関する帰納法で示す。",
         math(String.raw`m = 0`),
         " では ",
-        math(String.raw`[x]^0 = I = [1] = [x^0]`),
+        math(String.raw`[x]_K^{\,0} = I = [1]_K = [x^0]_K`),
         "（1 行 1 列の単位行列の成分は 1）。",
         math(String.raw`m`),
         " で成り立つと仮定すると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left([x]^{m+1}\right)_{11}
-&= \left([x]^{m}[x]\right)_{11}
+\left([x]_K^{\,m+1}\right)_{11}
+&= \left([x]_K^{\,m}[x]_K\right)_{11}
    \quad (\because \text{行列の冪の定義。}\blkref{def_exp}) \\
-&= \sum_{j=1}^{1}\left([x]^{m}\right)_{1j}[x]_{j1}
+&= \sum_{j=1}^{1}\left([x]_K^{\,m}\right)_{1j}\left([x]_K\right)_{j1}
    \quad (\because \text{行列の積の成分。}\blkref{mat_mult}) \\
-&= \left([x]^{m}\right)_{11}[x]_{11}
+&= \left([x]_K^{\,m}\right)_{11}\left([x]_K\right)_{11}
    \quad (\because \text{和は } j=1 \text{ の 1 項だけ}) \\
-&= [x^m]_{11}\,[x]_{11}
+&= \left([x^m]_K\right)_{11}\left([x]_K\right)_{11}
    \quad (\because \text{帰納法の仮定}) \\
 &= x^m\,x
-   \quad (\because \blkref{def_one_by_one_matrix_of_real}) \\
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
 &= x^{m+1}
-   \quad (\because \text{実数の冪の定義})
+   \quad (\because \text{冪の定義})
 \end{aligned}`,
       ),
       paragraph([
         "したがって ",
-        math(String.raw`[x]^{m+1} = [x^{m+1}]`),
+        math(String.raw`[x]_K^{\,m+1} = [x^{m+1}]_K`),
         "（1 行 1 列の行列は成分だけで決まる。",
-        ref("def_one_by_one_matrix_of_real"),
+        ref("def_one_by_one_matrix"),
         "）。",
       ]),
       paragraph([
         "Step 2（部分和の成分）。",
         ref("matrix_exp_series_converges"),
         " の部分和 ",
-        math(String.raw`S_N([x]) = \sum_{m=0}^{N}\frac{1}{m!}[x]^m \in \mathrm{Mat}(1,\mathbb{R})`),
+        math(String.raw`S_N([x]_K) = \sum_{m=0}^{N}\frac{1}{m!}[x]_K^{\,m} \in \mathrm{Mat}(1,K)`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left(S_N([x])\right)_{11}
-&= \sum_{m=0}^{N}\frac{1}{m!}\left([x]^m\right)_{11}
+\left(S_N([x]_K)\right)_{11}
+&= \sum_{m=0}^{N}\frac{1}{m!}\left([x]_K^{\,m}\right)_{11}
    \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
-&= \sum_{m=0}^{N}\frac{1}{m!}\,[x^m]_{11}
+&= \sum_{m=0}^{N}\frac{1}{m!}\left([x^m]_K\right)_{11}
    \quad (\because \text{Step 1 を各項へ適用}) \\
 &= \sum_{m=0}^{N}\frac{x^m}{m!}
-   \quad (\because \blkref{def_one_by_one_matrix_of_real})
+   \quad (\because \blkref{def_one_by_one_matrix})
 \end{aligned}`,
       ),
       paragraph([
         "Step 3（極限）。",
         ref("exp_converges"),
         " (1b) を ",
-        math(String.raw`K = \mathbb{R}`),
-        "、",
         math(String.raw`n = 1`),
         "、",
-        math(String.raw`A = [x]`),
+        math(String.raw`A = [x]_K`),
         "、",
         math(String.raw`i = j = 1`),
         " に適用すると ",
-        math(String.raw`\left(S_N([x])\right)_{11} \to \left(\exp([x])\right)_{11}`),
+        math(String.raw`\left(S_N([x]_K)\right)_{11} \to \left(\exp([x]_K)\right)_{11}`),
         " である（",
-        math(String.raw`\sum_{m=0}^{\infty}\frac{1}{m!}[x]^m = \exp([x])`),
+        math(String.raw`\sum_{m=0}^{\infty}\frac{1}{m!}[x]_K^{\,m} = \exp([x]_K)`),
         " は ",
         ref("def_exp"),
         " (1)）。左辺は Step 2 により ",
         math(String.raw`\sum_{m=0}^{N}\frac{x^m}{m!}`),
         "、右辺は ",
-        ref("def_real_exp"),
+        ref("def_scalar_exp"),
         " により ",
         math(String.raw`\exp(x)`),
         " である。",
       ]),
     ],
-    conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い、指数級数との関係を主張として置いた。"] },
+    conversion: { status: "added", notes: ["数の exp を行列の exp から定義したことに伴い、指数級数との関係を主張として置いた。"] },
   },
   {
-    id: "exp_linear_map_008_claim_real_exp_product",
+    id: "exp_linear_map_008_claim_scalar_exp_product",
     kind: "claim",
     origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 8 },
     title: { tex: String.raw`\exp(x)\exp(y) = \exp(x+y)` },
-    labels: ["real_exp_product"],
+    labels: ["scalar_exp_product"],
     statement: [
       paragraph([
-        math(String.raw`x, y \in \mathbb{R}`),
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        "、",
+        math(String.raw`x, y \in K`),
         " について",
       ]),
       displayMath(String.raw`\exp(x)\exp(y) = \exp(x+y)`),
@@ -1680,7 +1694,7 @@ S_NT_N
     proof: [
       paragraph([
         "準備。1 行 1 列の行列 ",
-        math(String.raw`A, B \in \mathrm{Mat}(1,\mathbb{R})`),
+        math(String.raw`A, B \in \mathrm{Mat}(1,K)`),
         " について、",
         ref("mat_mult"),
         " の和は ",
@@ -1688,38 +1702,50 @@ S_NT_N
         " の 1 項だけなので ",
         math(String.raw`(AB)_{11} = A_{11}B_{11}`),
         " である。とくに ",
-        math(String.raw`([x][y])_{11} = xy = yx = ([y][x])_{11}`),
+        math(String.raw`([x]_K[y]_K)_{11} = xy = yx = ([y]_K[x]_K)_{11}`),
         " より ",
-        math(String.raw`[x][y] = [y][x]`),
+        math(String.raw`[x]_K[y]_K = [y]_K[x]_K`),
         "。また行列の和は成分ごとなので ",
-        math(String.raw`[x] + [y] = [x+y]`),
+        math(String.raw`[x]_K + [y]_K = [x+y]_K`),
         "。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(x)\exp(y)
-&= \bigl(\exp([x])\bigr)_{11}\bigl(\exp([y])\bigr)_{11}
-   \quad (\because \blkref{def_real_exp}) \\
-&= \bigl(\exp([x])\exp([y])\bigr)_{11}
+&= \bigl(\exp([x]_K)\bigr)_{11}\bigl(\exp([y]_K)\bigr)_{11}
+   \quad (\because \blkref{def_scalar_exp}) \\
+&= \bigl(\exp([x]_K)\exp([y]_K)\bigr)_{11}
    \quad (\because \text{準備の } (AB)_{11} = A_{11}B_{11}) \\
-&= \bigl(\exp([x]+[y])\bigr)_{11}
-   \quad (\because [x][y] = [y][x] \text{ と可換行列の exp 積公式。}\blkref{theorem_exp_product}) \\
-&= \bigl(\exp([x+y])\bigr)_{11}
-   \quad (\because [x]+[y] = [x+y]) \\
+&= \bigl(\exp([x]_K+[y]_K)\bigr)_{11}
+   \quad (\because [x]_K[y]_K = [y]_K[x]_K \text{ と可換行列の exp 積公式。}\blkref{theorem_exp_product}) \\
+&= \bigl(\exp([x+y]_K)\bigr)_{11}
+   \quad (\because [x]_K+[y]_K = [x+y]_K) \\
 &= \exp(x+y)
-   \quad (\because \blkref{def_real_exp})
+   \quad (\because \blkref{def_scalar_exp})
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い、指数法則を可換行列の exp 積公式から導いた。"] },
+    conversion: { status: "added", notes: ["数の exp を行列の exp から定義したことに伴い、指数法則を可換行列の exp 積公式から導いた。"] },
   },
   {
-    id: "exp_linear_map_009_claim_real_exp_zero",
+    id: "exp_linear_map_009_claim_scalar_exp_zero",
     kind: "claim",
     origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 9 },
     title: { tex: String.raw`\exp(0) = 1` },
-    labels: ["real_exp_zero"],
-    statement: [displayMath(String.raw`\exp(0) = 1`)],
+    labels: ["scalar_exp_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        " とし、",
+        math(String.raw`0, 1`),
+        " を ",
+        math(String.raw`K`),
+        " の零元と単位元とするとき",
+      ]),
+      displayMath(String.raw`\exp(0) = 1`),
+    ],
     proof: [
       paragraph([
         "すべての ",
@@ -1734,22 +1760,24 @@ S_NT_N
 &= \frac{1}{1} + \sum_{m=1}^{N}\frac{0}{m!}
    \quad (\because 0^0 = 1,\ 0! = 1,\ m \ge 1 \text{ で } 0^m = 0) \\
 &= 1
-   \quad (\because \text{実数の四則演算})
+   \quad (\because K \text{ の四則演算})
 \end{aligned}`,
       ),
       paragraph([
         "であり、定数列の極限は 1 である。一方 ",
-        ref("real_exp_is_limit_of_partial_sums"),
+        ref("scalar_exp_is_limit_of_partial_sums"),
         " を ",
         math(String.raw`x = 0`),
         " に適用すると同じ列は ",
         math(String.raw`\exp(0)`),
-        " に収束する。実数列の極限の一意性より ",
+        " に収束する。",
+        math(String.raw`K`),
+        " の列の極限の一意性より ",
         math(String.raw`\exp(0) = 1`),
         "。",
       ]),
     ],
-    conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い置いた。"] },
+    conversion: { status: "added", notes: ["数の exp を行列の exp から定義したことに伴い置いた。"] },
   },
   {
     id: "exp_linear_map_010_claim_real_exp_positive",
@@ -1771,11 +1799,11 @@ S_NT_N
         String.raw`\begin{aligned}
 \exp(x)\exp(-x)
 &= \exp\bigl(x + (-x)\bigr)
-   \quad (\because \blkref{real_exp_product}) \\
+   \quad (\because \blkref{scalar_exp_product}) \\
 &= \exp(0)
    \quad (\because \text{加法の逆元}) \\
 &= 1
-   \quad (\because \blkref{real_exp_zero})
+   \quad (\because \blkref{scalar_exp_zero})
 \end{aligned}`,
       ),
       paragraph([
@@ -1792,7 +1820,7 @@ S_NT_N
 &= \exp\!\left(\frac{x}{2} + \frac{x}{2}\right)
    \quad (\because \tfrac{x}{2} + \tfrac{x}{2} = x) \\
 &= \exp\!\left(\frac{x}{2}\right)\exp\!\left(\frac{x}{2}\right)
-   \quad (\because \blkref{real_exp_product}) \\
+   \quad (\because \blkref{scalar_exp_product}) \\
 &= \left(\exp\!\left(\frac{x}{2}\right)\right)^2
    \quad (\because \text{冪の定義}) \\
 &\ge 0
@@ -1836,7 +1864,7 @@ S_NT_N
         " と ",
         math(String.raw`E(a) = \lim_{N\to\infty}E_N(a)`),
         " を使う。",
-        ref("real_exp_is_limit_of_partial_sums"),
+        ref("scalar_exp_is_limit_of_partial_sums"),
         " より同じ列 ",
         math(String.raw`E_N(a)`),
         " は ",
@@ -1865,7 +1893,7 @@ S_NT_N
 &= \exp\bigl(x + (y-x)\bigr)
    \quad (\because x + (y - x) = y) \\
 &= \exp(x)\exp(y-x)
-   \quad (\because \blkref{real_exp_product}) \\
+   \quad (\because \blkref{scalar_exp_product}) \\
 &> \exp(x)\cdot 1
    \quad (\because \exp(x) > 0\ \blkref{real_exp_positive}\text{ と、}y - x > 0\text{ への Step 1}) \\
 &= \exp(x)
@@ -1874,5 +1902,408 @@ S_NT_N
       ),
     ],
     conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い置いた。"] },
+  },
+  {
+    id: "exp_linear_map_012_claim_complex_exp_of_real_argument",
+    kind: "claim",
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 12 },
+    title: { text: "実数の exp と複素数の exp は実数上で一致する" },
+    labels: ["complex_exp_of_real_argument"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " について、",
+        ref("inclusion_rr_to_cc"),
+        " の記法で",
+      ]),
+      displayMath(String.raw`\exp\!\left(x_{\mathbb{C}}\right) = \left(\exp(x)\right)_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。左辺は複素数の exp、右辺の内側は実数の exp である（",
+        ref("def_scalar_exp"),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        ref("definition_of_cc"),
+        " の演算より、",
+        math(String.raw`a, b \in \mathbb{R}`),
+        " について ",
+        math(String.raw`a_{\mathbb{C}} + b_{\mathbb{C}} = (a+b,0) = (a+b)_{\mathbb{C}}`),
+        "、",
+        math(String.raw`a_{\mathbb{C}}\,b_{\mathbb{C}} = (ab - 0\cdot 0,\ a\cdot 0 + 0\cdot b) = (ab)_{\mathbb{C}}`),
+        " である。これを項ごとに使うと、すべての ",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\sum_{m=0}^{N}\frac{\left(x_{\mathbb{C}}\right)^m}{m!}
+= \left(\sum_{m=0}^{N}\frac{x^m}{m!}\right)_{\mathbb{C}}
+\quad (\because \text{上の和と積の保存を有限個の項へ適用})`,
+      ),
+      paragraph([
+        "である。また ",
+        math(String.raw`a, b \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left|a_{\mathbb{C}} - b_{\mathbb{C}}\right|
+&= \left|(a-b)_{\mathbb{C}}\right|
+   \quad (\because \text{上の和の保存と } (-1)_{\mathbb{C}}\,b_{\mathbb{C}} = (-b)_{\mathbb{C}}) \\
+&= \sqrt{(a-b)^2+0^2}^{(\mathbb{R}_{\ge 0})}
+   \quad (\because \blkref{abs_basic_properties}\text{ (1)}) \\
+&= |a-b|
+   \quad (\because \text{実数の平方の非負平方根は絶対値})
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので、実数列 ",
+        math(String.raw`E_N := \sum_{m=0}^{N}\frac{x^m}{m!}`),
+        " が ",
+        math(String.raw`\exp(x)`),
+        " に収束すること（",
+        ref("scalar_exp_is_limit_of_partial_sums"),
+        " を ",
+        math(String.raw`K = \mathbb{R}`),
+        " で適用）から、",
+        math(String.raw`(E_N)_{\mathbb{C}}`),
+        " は ",
+        math(String.raw`(\exp(x))_{\mathbb{C}}`),
+        " に収束する。一方、上の等式より ",
+        math(String.raw`(E_N)_{\mathbb{C}}`),
+        " は ",
+        math(String.raw`x_{\mathbb{C}}`),
+        " の指数級数の部分和でもあるから、",
+        ref("scalar_exp_is_limit_of_partial_sums"),
+        " を ",
+        math(String.raw`K = \mathbb{C}`),
+        " で適用すると ",
+        math(String.raw`\exp(x_{\mathbb{C}})`),
+        " に収束する。",
+        math(String.raw`\mathbb{C}`),
+        " の列の極限の一意性より主張が従う。",
+      ]),
+    ],
+    conversion: { status: "added", notes: ["実数の exp と複素数の exp を別々の写像として定義したので、両者の関係を主張として置いた。"] },
+  },
+  {
+    id: "calc_formulae_definition_cosh_sinh",
+    kind: "definition",
+    origin: { path: "structured-latex/content/000_calculation_formulae_00_09.ts", ordinal: 1 },
+    title: { text: "双曲線余弦と双曲線正弦" },
+    labels: ["def_cosh_sinh"],
+    statement: [
+      paragraph([math(String.raw`x\in\mathbb R`), " に対して、", ref("def_scalar_exp"), " の実数の exp を使い"]),
+      displayMath(String.raw`\cosh x:=\frac{\exp(x)+\exp(-x)}2,\qquad \sinh x:=\frac{\exp(x)-\exp(-x)}2`),
+      paragraph(["と定める。"]),
+    ],
+    conversion: { status: "added", notes: ["双曲線関数の定義と、その性質を依存境界で分離した。", "定義のない実数値の指数関数を使っていたので、実数の exp（labels: def_scalar_exp）を引く形にし、計算公式の章から実数の exp の直後へ移した。"] },
+  },
+  {
+    id: "calc_formulae_000_cosh_sinh_product",
+    kind: "theorem",
+    origin: { path: "_old/typst/parts/000_計算公式/000_theorem_cosh_sinhの掛け算.typ", ordinal: 1 },
+    title: { tex: "\\cosh,\\sinh\\text{の掛け算}" },
+    labels: [],
+    statement: [
+      paragraph([ref("def_cosh_sinh"), " の記号を用いる。"]),
+      displayMath("\\forall a,b\\in\\mathbb{R}"),
+      displayMath(String.raw`\begin{aligned}
+\cosh(a)\sinh(b) &= \frac{1}{2}\left(\sinh(a+b)-\sinh(a-b)\right) \\
+\cosh(a)\cosh(b) &= \frac{1}{2}\left(\cosh(a+b)+\cosh(a-b)\right)
+\end{aligned}`),
+    ],
+    proof: [
+      paragraph(["1 つめの等式。"]),
+      displayMath(String.raw`\begin{aligned}
+\cosh(a)\sinh(b)
+&=
+\frac{\exp(a)+\exp(-a)}{2}
+\frac{\exp(b)-\exp(-b)}{2}
+&&(\because\ \cosh,\ \sinh\ \text{の定義})
+\\
+&=
+\frac{1}{4}
+\left(
+\left(\exp(a)\exp(b)-\exp(-a)\exp(-b)\right)
+-
+\left(\exp(a)\exp(-b)-\exp(-a)\exp(b)\right)
+\right)
+&&(\because\ \text{分配則})
+\\
+&=
+\frac{1}{2}
+\left(
+\frac{\exp(a+b)-\exp(-(a+b))}{2}
+-
+\frac{\exp(a-b)-\exp(-(a-b))}{2}
+\right)
+&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ。}\blkref{scalar_exp_product})
+\\
+&=
+\frac{1}{2}
+\left(
+\sinh(a+b)-\sinh(a-b)
+\right)
+&&(\because\ \sinh\ \text{の定義})
+\end{aligned}`),
+      paragraph(["2 つめの等式。"]),
+      displayMath(String.raw`\begin{aligned}
+\cosh(a)\cosh(b)
+&=
+\frac{\exp(a)+\exp(-a)}{2}
+\frac{\exp(b)+\exp(-b)}{2}
+&&(\because\ \cosh\ \text{の定義})
+\\
+&=
+\frac{1}{4}
+\left(
+\left(\exp(a)\exp(b)+\exp(-a)\exp(-b)\right)
++
+\left(\exp(a)\exp(-b)+\exp(-a)\exp(b)\right)
+\right)
+&&(\because\ \text{分配則})
+\\
+&=
+\frac{1}{2}
+\left(
+\frac{\exp(a+b)+\exp(-(a+b))}{2}
++
+\frac{\exp(a-b)+\exp(-(a-b))}{2}
+\right)
+&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ。}\blkref{scalar_exp_product})
+\\
+&=
+\frac{1}{2}
+\left(
+\cosh(a+b)+\cosh(a-b)
+\right)
+&&(\because\ \cosh\ \text{の定義})
+\end{aligned}`),
+    ],
+  },
+  {
+    id: "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+    kind: "claim",
+    origin: { path: "structured-latex/content/000_calculation_formulae_00_09.ts", ordinal: 1 },
+    title: { tex: String.raw`\cosh,\ \sinh\text{ の基本性質}` },
+    labels: ["cosh_sinh_basic_properties"],
+    statement: [
+      paragraph([
+        ref("def_cosh_sinh"), " の ", math(String.raw`x\in\mathbb R`), " における値について、次が成り立つ。",
+      ]),
+      list([
+        [
+          "(1) ",
+          math(String.raw`\cosh x - \sinh x = \exp(-x) > 0`),
+          " かつ ",
+          math(String.raw`\cosh x + \sinh x = \exp(x) > 0`),
+          "。特に ",
+          math(String.raw`\cosh x > 0`),
+          " かつ ",
+          math(String.raw`\cosh x > \sinh x`),
+          "。",
+        ],
+        ["(2) ", math(String.raw`(\cosh x)^2 - (\sinh x)^2 = 1`), "。"],
+        [
+          "(3) ",
+          math(String.raw`x > 0`),
+          " ならば ",
+          math(String.raw`\cosh x > \sinh x > 0`),
+          "。",
+        ],
+        [
+          "(4) ",
+          math(String.raw`a, b \in \mathbb{R}_{>0}`),
+          " について ",
+          math(String.raw`a^2 = b^2 \iff a = b`),
+          "。",
+        ],
+      ]),
+    ],
+    proof: [
+      paragraph(["(1) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh x - \sinh x
+&= \frac{\exp(x) + \exp(-x)}{2} - \frac{\exp(x) - \exp(-x)}{2}
+&&(\because\ \cosh,\ \sinh\ \text{の定義})\\
+&= \frac{\bigl(\exp(x) + \exp(-x)\bigr) - \bigl(\exp(x) - \exp(-x)\bigr)}{2}
+&&(\because\ \text{分母の等しい分数の差})\\
+&= \frac{2\exp(-x)}{2}
+&&(\because\ \text{分子の整理})\\
+&= \exp(-x)
+&&(\because\ \text{約分})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh x + \sinh x
+&= \frac{\exp(x) + \exp(-x)}{2} + \frac{\exp(x) - \exp(-x)}{2}
+&&(\because\ \cosh,\ \sinh\ \text{の定義})\\
+&= \frac{\bigl(\exp(x) + \exp(-x)\bigr) + \bigl(\exp(x) - \exp(-x)\bigr)}{2}
+&&(\because\ \text{分母の等しい分数の和})\\
+&= \frac{2\exp(x)}{2}
+&&(\because\ \text{分子の整理})\\
+&= \exp(x)
+&&(\because\ \text{約分})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh x - \sinh x
+&= \exp(-x)
+&&(\because\ \text{上の第 1 式})\\
+&> 0
+&&(\because\ \exp\ \text{の正値性。}\blkref{real_exp_positive})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh x - \sinh x > 0
+&\Longrightarrow \cosh x > \sinh x
+&&(\because\ \text{両辺に}\ \sinh x\ \text{を加える})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+2\cosh x
+&= (\cosh x - \sinh x) + (\cosh x + \sinh x)
+&&(\because\ \text{右辺の整理})\\
+&= \exp(-x) + \exp(x)
+&&(\because\ \text{上の 2 式})\\
+&> 0
+&&(\because\ \exp\ \text{の正値性。}\blkref{real_exp_positive})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+2\cosh x > 0
+&\Longrightarrow \cosh x > 0
+&&(\because\ \text{両辺を}\ 2 > 0\ \text{で割る})
+\end{aligned}`,
+      ),
+      paragraph(["(2) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\cosh x)^2 - (\sinh x)^2
+&= (\cosh x - \sinh x)(\cosh x + \sinh x)
+&&(\because\ \text{2 乗の差の因数分解})\\
+&= \exp(-x)\exp(x)
+&&(\because\ \text{(1) の 2 式})\\
+&= \exp(-x + x)
+&&(\because\ \blkref{scalar_exp_product})\\
+&= \exp(0)
+&&(\because\ -x + x = 0)\\
+&= 1
+&&(\because\ \blkref{scalar_exp_zero})
+\end{aligned}`,
+      ),
+      paragraph(["(3) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+x>0
+&\Longrightarrow -x<0
+&&(\because\ \text{両辺に }-1<0\text{ を掛けると不等号の向きが反転する})\\
+x>0
+&\Longrightarrow 0<x
+&&(\because\ \text{同じ不等式の左右を入れ替える})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-x)
+&< \exp(0)
+&&(\because\ -x < 0\ \text{と}\ \blkref{real_exp_strictly_increasing})\\
+&= 1
+&&(\because\ \blkref{scalar_exp_zero})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+1
+&= \exp(0)
+&&(\because\ \blkref{scalar_exp_zero})\\
+&< \exp(x)
+&&(\because\ 0 < x\ \text{と}\ \blkref{real_exp_strictly_increasing})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-x)<1<\exp(x)
+&\Longrightarrow \exp(-x)<\exp(x)
+&&(\because\ \mathbb R\text{ の順序の推移律})\\
+&\Longrightarrow \exp(x)-\exp(-x)>0
+&&(\because\ \text{両辺に }-\exp(-x)\text{ を加える})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sinh x
+&= \frac{\exp(x) - \exp(-x)}{2}
+&&(\because\ \sinh\ \text{の定義})\\
+&> 0
+&&(\because\ \text{正の実数を}\ 2 > 0\ \text{で割った値は正})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh x>\sinh x\ \land\ \sinh x>0
+&\Longrightarrow \cosh x>\sinh x>0
+&&(\because\ \text{(1) と直前の不等式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "(4) の証明。両方向を別々に示すので、ここは一続きの式にしない。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a=b
+&\Longrightarrow a^2=b^2
+&&(\because\ \text{等しい実数を二乗しても等しい})
+\end{aligned}`,
+      ),
+      paragraph([
+        "逆に ",
+        math(String.raw`a^2 = b^2`),
+        " とする。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(a - b)(a + b)
+&= a^2 - b^2
+&&(\because\ \text{2 乗の差の因数分解})\\
+&= 0
+&&(\because\ a^2 = b^2)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+a>0\ \land\ b>0
+&\Longrightarrow a+b>0
+&&(\because\ \text{正の実数の和は正})\\
+&\Longrightarrow a+b\ne0
+&&(\because\ \text{正の実数は }0\text{ でない})\\
+(a-b)(a+b)=0\ \land\ a+b\ne0
+&\Longrightarrow a-b=0
+&&(\because\ \mathbb R\text{ は整域})\\
+&\Longrightarrow a=b
+&&(\because\ \text{両辺に }b\text{ を加える})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "原文（Typst）に対応ブロックは無い。cosh, sinh の定義から直ちに従う基本性質" +
+          "（cosh - sinh = e^{-x} > 0、cosh^2 - sinh^2 = 1、x>0 での正値性、正実数の自乗の単射性）は、" +
+          "008_TV1_hatZ_hatY_part2 の γ_1 の偏角・臨界条件 c_1 = s_1 c_2 ⟺ s_1 s_2 = 1 の証明で必要になるが、" +
+          "従来どのブロックにも主張として置かれていなかったため、cosh, sinh の積公式" +
+          "（calc_formulae_000_cosh_sinh_product）の直後に追加した。",
+        "計算公式の章から実数の exp の直後へ移し、前提として列挙していた指数関数の性質（積公式・exp(0)=1・正値性・狭義単調増加）を、実数の exp の主張への参照に置き換えた。",
+      ],
+    },
   },
 ]);

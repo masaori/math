@@ -1293,7 +1293,7 @@ y_{\epsilon'}
       paragraph(["とおく（", ref("def_gamma_theta_tilde_mu"), "）。このとき"]),
       displayMath(
         String.raw`\check{V}'\,\check{Q}_\epsilon = \check{Q}_\epsilon\,\check{V}'
-= e^{\check{g}(\epsilon)}\,\check{Q}_\epsilon`,
+= \exp(\check{g}(\epsilon))\,\check{Q}_\epsilon`,
       ),
       paragraph([
         "が成り立つ。すなわち ",
@@ -1301,7 +1301,7 @@ y_{\epsilon'}
         " の各元は ",
         math(String.raw`\check{V}'`),
         " の固有値 ",
-        math(String.raw`e^{\check{g}(\epsilon)}`),
+        math(String.raw`\exp(\check{g}(\epsilon))`),
         " の固有ベクトルであり、",
         ref("check_joint_eigenspace_decomposition"),
         " (5) より ",
@@ -1309,7 +1309,7 @@ y_{\epsilon'}
         " は対角化可能で、その固有値は重複度を込めて",
       ]),
       displayMath(
-        String.raw`\left\{\,e^{\check{g}(\epsilon)} \ \middle|\
+        String.raw`\left\{\,\exp(\check{g}(\epsilon)) \ \middle|\
 \epsilon \in \{0,1\}^{\check{\mathcal{M}}}\,\right\}
 \qquad (\text{各 } \epsilon \text{ が重複度 } 1 \text{ を与え、総個数 } 2^M)`,
       ),
@@ -1449,7 +1449,7 @@ E_K \check{Q}_\epsilon
 &= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{\check{g}(\epsilon)^k}{k!}\right)
    \check{Q}_\epsilon\right)
    \quad (\because \text{上の部分和の鎖}) \\
-&= e^{\check{g}(\epsilon)}\,\check{Q}_\epsilon
+&= \exp(\check{g}(\epsilon))\,\check{Q}_\epsilon
    \quad (\because \text{実指数級数の収束と極限の一意性})
 \end{aligned}`,
       ),
@@ -1507,7 +1507,7 @@ E_K \check{Q}_\epsilon
    \quad (\because \text{行列積の連続性}) \\
 &= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{\check{g}(\epsilon)^k}{k!}\right)\check{Q}_\epsilon\right)
    \quad (\because \text{上の部分和の鎖}) \\
-&= e^{\check{g}(\epsilon)}\check{Q}_\epsilon
+&= \exp(\check{g}(\epsilon))\check{Q}_\epsilon
    \quad (\because \text{実指数級数の収束と極限の一意性}) \\
 &= \check{V}'\check{Q}_\epsilon
    \quad (\because \text{Step 3})
@@ -1550,9 +1550,9 @@ E_K \check{Q}_\epsilon
 \check{V}' y
 &= \check{V}'\left(\check{Q}_\epsilon y\right)
    \quad (\because \text{上の等式 }\check{Q}_\epsilon y = y) \\
-&= e^{\check{g}(\epsilon)}\check{Q}_\epsilon y
+&= \exp(\check{g}(\epsilon))\check{Q}_\epsilon y
    \quad (\because \text{Step 3}) \\
-&= e^{\check{g}(\epsilon)} y
+&= \exp(\check{g}(\epsilon)) y
    \quad (\because \text{上の等式 }\check{Q}_\epsilon y = y)
 \end{aligned}`,
       ),
@@ -1571,7 +1571,7 @@ E_K \check{Q}_\epsilon
         " の基底が得られる。したがって ",
         math(String.raw`\check{V}'`),
         " は対角化可能で、固有値は ",
-        math(String.raw`e^{\check{g}(\epsilon)}`),
+        math(String.raw`\exp(\check{g}(\epsilon))`),
         " が各 ",
         math(String.raw`\epsilon`),
         " について 1 つずつ現れるもので尽くされる（総個数 ",
@@ -1585,7 +1585,7 @@ E_K \check{Q}_\epsilon
         " より ",
         math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}_{>0}`),
         "）なので ",
-        math(String.raw`e^{\check{g}(\epsilon)} > 0`),
+        math(String.raw`\exp(\check{g}(\epsilon)) > 0`),
         " である。",
       ]),
     ],
@@ -1645,9 +1645,9 @@ E_K \check{Q}_\epsilon
    \quad (\because \textstyle\sum_\epsilon \check{Q}_\epsilon = I) \\
 &= \sum_{\epsilon} \mathrm{tr}\!\left(\check{V}'\check{Q}_\epsilon\right)
    \quad (\because \text{トレースの線型性}) \\
-&= \sum_{\epsilon} e^{\check{g}(\epsilon)}\,\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
-   \quad (\because \check{V}'\check{Q}_\epsilon = e^{\check{g}(\epsilon)}\check{Q}_\epsilon) \\
-&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} e^{\check{g}(\epsilon)}
+&= \sum_{\epsilon} \exp(\check{g}(\epsilon))\,\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
+   \quad (\because \check{V}'\check{Q}_\epsilon = \exp(\check{g}(\epsilon))\check{Q}_\epsilon) \\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(\check{g}(\epsilon))
    \quad (\because \mathrm{tr}(\check{Q}_\epsilon) = 1)
 \end{aligned}`,
       ),
@@ -1658,7 +1658,7 @@ E_K \check{Q}_\epsilon
         " なので、実数の指数法則より",
       ]),
       displayMath(
-        String.raw`e^{\check{g}(\epsilon)} = \prod_{\mu=1}^{M}
+        String.raw`\exp(\check{g}(\epsilon)) = \prod_{\mu=1}^{M}
 \exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
 \quad (\because \text{theorem\_exp\_product}\ (n=1))`,
       ),
@@ -1674,13 +1674,13 @@ E_K \check{Q}_\epsilon
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} e^{\check{g}(\epsilon)}
+\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(\check{g}(\epsilon))
 &= \prod_{\mu=1}^{M}
    \left(\exp\!\left(-\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)
    + \exp\!\left(+\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)\right)
    \quad (\because \text{直前の積表示と、有限個の因子の積の展開}) \\
 &= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-   \quad \left(\because \cosh x = \frac{e^x + e^{-x}}{2}\right)
+   \quad \left(\because \cosh x = \frac{\exp(x) + \exp(-x)}{2}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2567,7 +2567,7 @@ c^2 &= (2s_2)^M
         " であり、",
         ref("eigenvalues_of_check_Vprime"),
         " より ",
-        math(String.raw`\check{V}'\check{Q}_\epsilon = e^{\check{g}(\epsilon)}\check{Q}_\epsilon`),
+        math(String.raw`\check{V}'\check{Q}_\epsilon = \exp(\check{g}(\epsilon))\check{Q}_\epsilon`),
         " だから",
       ]),
       displayMath(
@@ -2575,7 +2575,7 @@ c^2 &= (2s_2)^M
 V^{(+)}\check{Q}_\epsilon
 &= (2s_2)^{M/2}\check{V}'\check{Q}_\epsilon
    \quad (\because \text{定数 }c\text{ の決定}) \\
-&= (2s_2)^{M/2}e^{\check{g}(\epsilon)}\check{Q}_\epsilon
+&= (2s_2)^{M/2}\exp(\check{g}(\epsilon))\check{Q}_\epsilon
    \quad (\because \check{V}'\text{ の固有値}) \\
 &= \check\Lambda_\epsilon\check{Q}_\epsilon
    \quad (\because \check\Lambda_\epsilon\text{ の定義})
@@ -2585,7 +2585,7 @@ V^{(+)}\check{Q}_\epsilon
         "同じ式変形を ",
         ref("eigenvalues_of_check_Vprime"),
         " の Step 3' の ",
-        math(String.raw`\check{Q}_\epsilon\check{V}' = e^{\check{g}(\epsilon)}\check{Q}_\epsilon`),
+        math(String.raw`\check{Q}_\epsilon\check{V}' = \exp(\check{g}(\epsilon))\check{Q}_\epsilon`),
         " に対して行い（スカラー ",
         math(String.raw`(2s_2)^{M/2}`),
         " は ",
@@ -2605,20 +2605,20 @@ V^{(+)}\check{Q}_\epsilon
         "(2) ",
         math(String.raw`(2s_2)^{M/2} > 0`),
         " と ",
-        math(String.raw`e^{\check{g}(\epsilon)} > 0`),
+        math(String.raw`\exp(\check{g}(\epsilon)) > 0`),
         " より ",
         math(String.raw`\check\Lambda_\epsilon > 0`),
         "。",
       ]),
       paragraph([
         "大小の比較。",
-        math(String.raw`\check\Lambda_\epsilon = (2s_2)^{M/2}e^{\check{g}(\epsilon)}`),
+        math(String.raw`\check\Lambda_\epsilon = (2s_2)^{M/2}\exp(\check{g}(\epsilon))`),
         " で ",
         math(String.raw`(2s_2)^{M/2}`),
         " は ",
         math(String.raw`\epsilon`),
         " に依らない正の定数、",
-        math(String.raw`t \mapsto e^t`),
+        math(String.raw`t \mapsto \exp(t)`),
         " は実数上の狭義単調増加関数なので、",
         math(String.raw`\check\Lambda_\epsilon`),
         " の大小は ",
@@ -2847,12 +2847,12 @@ V^{(+)}\check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_\epsilon
-&= (2s_2)^{M/2}e^{\check{g}(\epsilon)}
+&= (2s_2)^{M/2}\exp(\check{g}(\epsilon))
    \quad (\because \blkref{eigenvalues_of_V_plus}\text{ の }\check\Lambda_\epsilon\text{ の定義と }
 \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}) \\
-&< (2s_2)^{M/2}e^{\check{g}(1,\dots,1)}
+&< (2s_2)^{M/2}\exp(\check{g}(1,\dots,1))
    \quad (\because \check{g}(\epsilon) < \check{g}(1,\dots,1)\text{、}
-t \mapsto e^t\text{ は狭義単調増加、}(2s_2)^{M/2} > 0) \\
+t \mapsto \exp(t)\text{ は狭義単調増加、}(2s_2)^{M/2} > 0) \\
 &= \check\Lambda_{\max}
    \quad (\because \blkref{eigenvalues_of_V_plus}\text{ (2)})
 \end{aligned}`,

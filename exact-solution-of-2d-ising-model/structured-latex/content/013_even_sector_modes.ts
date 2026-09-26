@@ -41,8 +41,8 @@ export default defineBlocks([
         " を持つ（反周期的な境界条件）。この章では、この符号に合わせた Fourier モード",
       ]),
       displayMath(
-        String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,e^{-i j\tilde\theta_\mu},\qquad
-\check{Y}_\mu := \sum_{j=1}^{M} Y_j\,e^{-i j\tilde\theta_\mu},\qquad
+        String.raw`\check{Z}_\mu := \sum_{j=1}^{M} Z_j\,\exp(-i j\tilde\theta_\mu),\qquad
+\check{Y}_\mu := \sum_{j=1}^{M} Y_j\,\exp(-i j\tilde\theta_\mu),\qquad
 \tilde\theta_\mu := \frac{2\pi\left(\mu - \tfrac{1}{2}\right)}{M}`,
       ),
       paragraph([
@@ -54,7 +54,7 @@ export default defineBlocks([
       ]),
       paragraph([
         "働く仕組みは 1 つの等式 ",
-        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
+        math(String.raw`\exp(-iM\tilde\theta_\mu) = -1`),
         "（",
         ref("half_integer_phase_antiperiodicity"),
         "、**反周期性**）に集約される。",
@@ -70,13 +70,13 @@ export default defineBlocks([
         " へ回り込み、境界項の符号のために ",
         math(String.raw`-Y_M`),
         " が現れる。一方、位相 ",
-        math(String.raw`e^{-ij\tilde\theta_\mu}`),
+        math(String.raw`\exp(-ij\tilde\theta_\mu)`),
         " は添字 ",
         math(String.raw`j = 0`),
         " を ",
         math(String.raw`j = M`),
         " へ読み替えるときにちょうど ",
-        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
+        math(String.raw`\exp(-iM\tilde\theta_\mu) = -1`),
         " 倍になる。この 2 つの符号が打ち消し合うので、",
         math(String.raw`H_1^{(+)}`),
         " との交換関係が ",
@@ -218,7 +218,7 @@ export default defineBlocks([
         " について",
       ]),
       displayMath(
-        String.raw`\sum_{\mu=1}^{M_{\mathbb N}} e^{i (k_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}}
+        String.raw`\sum_{\mu=1}^{M_{\mathbb N}} \exp(i (k_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C})
 = \begin{cases}
 M_{\mathbb C}\,(-1_{\mathbb C})^{l} & (k = lM,\ l \in \mathbb{Z}) \\
 0_{\mathbb C} & (k \not\equiv 0 \pmod M)
@@ -288,7 +288,7 @@ k_{\mathbb R}\tilde\theta_\mu
       ]),
       displayMath(
         String.raw`S_{M,k}:=\sum_{\mu=1}^{M_{\mathbb N}}
-e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}\in\mathbb C`,
+\exp(i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C})\in\mathbb C`,
       ),
       paragraph([
         "と書ける。また、正の自然数 ",
@@ -300,7 +300,7 @@ e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb
         " である。したがって",
       ]),
       displayMath(
-        String.raw`T_{N,k}:=\sum_{r=1}^{N}e^{i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{N_{\mathbb R}}\right)_{\mathbb C}}\in\mathbb C
+        String.raw`T_{N,k}:=\sum_{r=1}^{N}\exp(i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{N_{\mathbb R}}\right)_{\mathbb C})\in\mathbb C
 \qquad(N\in\mathbb N_{\ge1})`,
       ),
       paragraph([
@@ -317,18 +317,18 @@ e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb
       displayMath(
         String.raw`\begin{aligned}
 T_{2M_{\mathbb N},k}
-&=\sum_{r=1}^{2M_{\mathbb N}}e^{i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(2M_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C}}
+&=\sum_{r=1}^{2M_{\mathbb N}}\exp(i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(2M_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ T_{N,k}\text{ の定義に }N=2M_{\mathbb N}\text{ を代入}\bigr)\\
-&=\sum_{r=1}^{2M_{\mathbb N}}e^{i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
+&=\sum_{r=1}^{2M_{\mathbb N}}\exp(i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ (2M_{\mathbb N})_{\mathbb R}=2M_{\mathbb R}\bigr)\\
-&=\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
-+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
+&=\sum_{\mu=1}^{M_{\mathbb N}}\exp(i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C})
++\sum_{\mu=1}^{M_{\mathbb N}}\exp(i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ r\text{ の奇偶による有限和の分割}\bigr)\\
-&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C}}
+&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}\exp(i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2M_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ S_{M,k}\text{ の定義}\bigr)\\
-&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{M_{\mathbb R}}\right)_{\mathbb C}}
+&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}\exp(i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{M_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ 2M_{\mathbb R}\ne0_{\mathbb R}\text{ と分数の約分}\bigr)\\
-&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}e^{i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(M_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C}}
+&=S_{M,k}+\sum_{\mu=1}^{M_{\mathbb N}}\exp(i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(M_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ (M_{\mathbb N})_{\mathbb R}=M_{\mathbb R}\bigr)\\
 &=S_{M,k}+T_{M_{\mathbb N},k}
 &&\bigl(\because\ T_{M_{\mathbb N},k}\text{ の定義}\bigr).
@@ -582,13 +582,13 @@ M_{\mathbb C}(-1_{\mathbb C})^0
         " から ",
         math(String.raw`Z_{j_{\mathbb Z}}\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`),
         " である。複素指数の定義と所属は現行本文では未整備なので、以下では ",
-        math(String.raw`e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}\in\mathbb C`),
+        math(String.raw`\exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})\in\mathbb C`),
         " を仮定する。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
       ]),
       displayMath(
         String.raw`\check{Z}_\mu
 :=\sum_{j=1}^{M_{\mathbb N}}
-e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Z_{j_{\mathbb Z}}
+\exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})Z_{j_{\mathbb Z}}
 \in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`,
       ),
       paragraph(["と定める。"]),
@@ -640,13 +640,13 @@ e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Z_{j_{\mathbb Z}}
         " から ",
         math(String.raw`Y_{j_{\mathbb Z}}\in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`),
         " である。複素指数の定義と所属は現行本文では未整備なので、以下では ",
-        math(String.raw`e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}\in\mathbb C`),
+        math(String.raw`\exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})\in\mathbb C`),
         " を仮定する。この複素数によるスカラー倍と同じ行列空間内の有限和を用いて",
       ]),
       displayMath(
         String.raw`\check{Y}_\mu
 :=\sum_{j=1}^{M_{\mathbb N}}
-e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Y_{j_{\mathbb Z}}
+\exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})Y_{j_{\mathbb Z}}
 \in\mathrm{Mat}(2^{M_{\mathbb N}},\mathbb C)`,
       ),
       paragraph(["と定める。"]),
@@ -677,7 +677,7 @@ e^{-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}}Y_{j_{\mathbb Z}}
         math(String.raw`\tilde\theta_\mu`),
         " について",
       ]),
-      displayMath(String.raw`e^{-i M \tilde\theta_\mu} = -1`),
+      displayMath(String.raw`\exp(-i M \tilde\theta_\mu) = -1`),
       paragraph(["が成り立つ。"]),
     ],
     proof: [
@@ -700,9 +700,9 @@ M\tilde\theta_\mu
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-iM\tilde\theta_\mu}
+\exp(-iM\tilde\theta_\mu)
 &= \cos\!\left(M\tilde\theta_\mu\right)-i\sin\!\left(M\tilde\theta_\mu\right)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }e^{-ix}=\cos x-i\sin x\bigr) \\
+&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }\exp(-ix)=\cos x-i\sin x\bigr) \\
 &= \cos(2\pi\mu-\pi)-i\sin(2\pi\mu-\pi)
 &&\bigl(\because M\tilde\theta_\mu=2\pi\mu-\pi\ \text{を 2 箇所へ同時代入}\bigr) \\
 &= -1-i\sin(2\pi\mu-\pi)
@@ -772,16 +772,16 @@ e^{-iM\tilde\theta_\mu}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-ij\tilde\theta_{\mu+M}}
+\exp(-ij\tilde\theta_{\mu+M})
 &=\cos\!\left(j\tilde\theta_{\mu+M}\right)-i\sin\!\left(j\tilde\theta_{\mu+M}\right)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }e^{-ix}=\cos x-i\sin x\bigr) \\
+&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }\exp(-ix)=\cos x-i\sin x\bigr) \\
 &=\cos\!\left(j(\tilde\theta_\mu+2\pi)\right)-i\sin\!\left(j(\tilde\theta_\mu+2\pi)\right)
 &&\bigl(\because \tilde\theta_{\mu+M}=\tilde\theta_\mu+2\pi\text{ を 2 箇所へ同時代入}\bigr) \\
 &=\cos\!\left(j\tilde\theta_\mu+2\pi j\right)-i\sin\!\left(j\tilde\theta_\mu+2\pi j\right)
 &&\bigl(\because \mathbb R\text{ の分配則}\bigr) \\
 &=\cos\!\left(j\tilde\theta_\mu\right)-i\sin\!\left(j\tilde\theta_\mu\right)
 &&\bigl(\because j\in\mathbb Z\text{ と正弦・余弦の }2\pi\text{ 周期性}\bigr) \\
-&=e^{-ij\tilde\theta_\mu}
+&=\exp(-ij\tilde\theta_\mu)
 &&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた等式の対称律}\bigr)
 \end{aligned}`,
       ),
@@ -789,10 +789,10 @@ e^{-ij\tilde\theta_{\mu+M}}
       displayMath(
         String.raw`\begin{aligned}
 \check{Z}_{\mu+M}
-&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}e^{-ij_{\mathbb R}\tilde\theta_{\mu+M}}Z_{j_{\mathbb Z}}
+&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}\exp(-ij_{\mathbb R}\tilde\theta_{\mu+M})Z_{j_{\mathbb Z}}
 &&\left(\because\ \check{Z}_{\mu+M}\text{ の定義}\right)\\
-&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}e^{-ij_{\mathbb R}\tilde\theta_{\mu}}Z_{j_{\mathbb Z}}
-&&\left(\because\ \text{上で得た }e^{-ij\tilde\theta_{\mu+M}}=e^{-ij\tilde\theta_\mu}\text{ を全項へ同時適用}\right)\\
+&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}\exp(-ij_{\mathbb R}\tilde\theta_{\mu})Z_{j_{\mathbb Z}}
+&&\left(\because\ \text{上で得た }\exp(-ij\tilde\theta_{\mu+M})=\exp(-ij\tilde\theta_\mu)\text{ を全項へ同時適用}\right)\\
 &=\check{Z}_{\mu}
 &&\left(\because\ \check{Z}_{\mu}\text{ の定義}\right)
 \end{aligned}`,
@@ -853,16 +853,16 @@ e^{-ij\tilde\theta_{\mu+M}}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-ij\tilde\theta_{\mu+M}}
+\exp(-ij\tilde\theta_{\mu+M})
 &=\cos\!\left(j\tilde\theta_{\mu+M}\right)-i\sin\!\left(j\tilde\theta_{\mu+M}\right)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }e^{-ix}=\cos x-i\sin x\bigr) \\
+&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }\exp(-ix)=\cos x-i\sin x\bigr) \\
 &=\cos\!\left(j(\tilde\theta_\mu+2\pi)\right)-i\sin\!\left(j(\tilde\theta_\mu+2\pi)\right)
 &&\bigl(\because \tilde\theta_{\mu+M}=\tilde\theta_\mu+2\pi\text{ を 2 箇所へ同時代入}\bigr) \\
 &=\cos\!\left(j\tilde\theta_\mu+2\pi j\right)-i\sin\!\left(j\tilde\theta_\mu+2\pi j\right)
 &&\bigl(\because \mathbb R\text{ の分配則}\bigr) \\
 &=\cos\!\left(j\tilde\theta_\mu\right)-i\sin\!\left(j\tilde\theta_\mu\right)
 &&\bigl(\because j\in\mathbb Z\text{ と正弦・余弦の }2\pi\text{ 周期性}\bigr) \\
-&=e^{-ij\tilde\theta_\mu}
+&=\exp(-ij\tilde\theta_\mu)
 &&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた等式の対称律}\bigr)
 \end{aligned}`,
       ),
@@ -870,10 +870,10 @@ e^{-ij\tilde\theta_{\mu+M}}
       displayMath(
         String.raw`\begin{aligned}
 \check{Y}_{\mu+M}
-&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}e^{-ij_{\mathbb R}\tilde\theta_{\mu+M}}Y_{j_{\mathbb Z}}
+&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}\exp(-ij_{\mathbb R}\tilde\theta_{\mu+M})Y_{j_{\mathbb Z}}
 &&\left(\because\ \check{Y}_{\mu+M}\text{ の定義}\right)\\
-&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}e^{-ij_{\mathbb R}\tilde\theta_{\mu}}Y_{j_{\mathbb Z}}
-&&\left(\because\ \text{上で得た }e^{-ij\tilde\theta_{\mu+M}}=e^{-ij\tilde\theta_\mu}\text{ を全項へ同時適用}\right)\\
+&=\sum_{j_{\mathbb N}=1}^{M_{\mathbb N}}\exp(-ij_{\mathbb R}\tilde\theta_{\mu})Y_{j_{\mathbb Z}}
+&&\left(\because\ \text{上で得た }\exp(-ij\tilde\theta_{\mu+M})=\exp(-ij\tilde\theta_\mu)\text{ を全項へ同時適用}\right)\\
 &=\check{Y}_{\mu}
 &&\left(\because\ \check{Y}_{\mu}\text{ の定義}\right)
 \end{aligned}`,
@@ -1265,7 +1265,7 @@ e^{-ij\tilde\theta_{\mu+M}}
         [math(String.raw`\text{(1)}\quad \tilde\theta_{M+1-\mu} = 2\pi - \tilde\theta_\mu`)],
         [
           math(
-            String.raw`\text{(2)}\quad e^{-ij\tilde\theta_{M+1-\mu}} = e^{ij\tilde\theta_\mu}
+            String.raw`\text{(2)}\quad \exp(-ij\tilde\theta_{M+1-\mu}) = \exp(ij\tilde\theta_\mu)
 \qquad (j \in \mathbb{Z})`,
           ),
         ],
@@ -1335,14 +1335,14 @@ e^{-ij\tilde\theta_{\mu+M}}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-ij\tilde\theta_{M+1-\mu}}
-&= e^{-ij\left(2\pi - \tilde\theta_\mu\right)}
+\exp(-ij\tilde\theta_{M+1-\mu})
+&= \exp(-ij\left(2\pi - \tilde\theta_\mu\right))
    &&(\because \text{直前の (1)}) \\
-&= e^{-2\pi i j}\,e^{ij\tilde\theta_\mu}
+&= \exp(-2\pi i j)\,\exp(ij\tilde\theta_\mu)
    &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
-&= \left(\cos(2\pi j) - i\sin(2\pi j)\right)e^{ij\tilde\theta_\mu}
+&= \left(\cos(2\pi j) - i\sin(2\pi j)\right)\exp(ij\tilde\theta_\mu)
    &&(\because \blkref{euler_formula_cos_sin}) \\
-&= e^{ij\tilde\theta_\mu}
+&= \exp(ij\tilde\theta_\mu)
    &&(\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0)
 \end{aligned}`,
       ),
@@ -1413,8 +1413,8 @@ e^{-ij\tilde\theta_{M+1-\mu}}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\text{(A)}\quad \left[H_1^{(+)},\ \check{Z}_\mu\right] &= 2\,e^{-i\tilde\theta_\mu}\,\check{Y}_\mu, &
-\text{(B)}\quad \left[H_1^{(+)},\ \check{Y}_\mu\right] &= -2\,e^{i\tilde\theta_\mu}\,\check{Z}_\mu, \\
+\text{(A)}\quad \left[H_1^{(+)},\ \check{Z}_\mu\right] &= 2\,\exp(-i\tilde\theta_\mu)\,\check{Y}_\mu, &
+\text{(B)}\quad \left[H_1^{(+)},\ \check{Y}_\mu\right] &= -2\,\exp(i\tilde\theta_\mu)\,\check{Z}_\mu, \\
 \text{(C)}\quad \left[H_2,\ \check{Z}_\mu\right] &= -2\,\check{Y}_\mu, &
 \text{(D)}\quad \left[H_2,\ \check{Y}_\mu\right] &= 2\,\check{Z}_\mu
 \end{aligned}`,
@@ -1911,13 +1911,13 @@ Z_jZ_j &= I,\quad Y_jY_j = I &&
       displayMath(
         String.raw`\begin{aligned}
 \left[H_2,\ \check{Z}_\mu\right]
-&= \left[H_2,\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j\right]
+&= \left[H_2,\ \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)Z_j\right]
    &&(\because \blkref{def_half_integer_checkZ}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_2,\ Z_j\right]
+&= \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\left[H_2,\ Z_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2Y_j\right)
+&= \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\left(-2Y_j\right)
    &&(\because \text{Step 1 の第 1 式}) \\
-&= -2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j
+&= -2\sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)Y_j
    &&(\because \text{スカラー倍を和の外へ出す}) \\
 &= -2\,\check{Y}_\mu
    &&(\because \blkref{def_half_integer_checkY})
@@ -1937,13 +1937,13 @@ Z_jZ_j &= I,\quad Y_jY_j = I &&
       displayMath(
         String.raw`\begin{aligned}
 \left[H_2,\ \check{Y}_\mu\right]
-&= \left[H_2,\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
+&= \left[H_2,\ \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)Y_j\right]
    &&(\because \blkref{def_half_integer_checkY}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_2,\ Y_j\right]
+&= \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\left[H_2,\ Y_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\cdot 2Z_j
+&= \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\cdot 2Z_j
    &&(\because \text{Step 1 の第 2 式}) \\
-&= 2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j
+&= 2\sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)Z_j
    &&(\because \text{スカラー倍を和の外へ出す}) \\
 &= 2\,\check{Z}_\mu
    &&(\because \blkref{def_half_integer_checkZ})
@@ -1962,23 +1962,23 @@ Z_jZ_j &= I,\quad Y_jY_j = I &&
         " に 1 対 1 で対応する）。また、",
         ref("half_integer_phase_antiperiodicity"),
         " の ",
-        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
+        math(String.raw`\exp(-iM\tilde\theta_\mu) = -1`),
         " と ",
         math(String.raw`Y_0^{\flat} = -Y_M`),
         " より、境界の二項は一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
+\exp(-i\cdot 0\cdot\tilde\theta_\mu)\,Y_0^{\flat}
 &= 1\cdot Y_0^{\flat}
-   &&(\because e^0=1) \\
+   &&(\because \exp(0)=1) \\
 &= 1\cdot\left(-Y_M\right)
    &&(\because Y_0^{\flat} := -Y_M) \\
 &= \left(-1\right)Y_M
    &&(\because \mathbb{C}\text{ の四則}) \\
-&= e^{-iM\tilde\theta_\mu}\,Y_M
+&= \exp(-iM\tilde\theta_\mu)\,Y_M
    &&(\because \blkref{half_integer_phase_antiperiodicity}) \\
-&= e^{-iM\tilde\theta_\mu}\,Y_M^{\flat}
+&= \exp(-iM\tilde\theta_\mu)\,Y_M^{\flat}
    &&(\because Y_M^{\flat} := Y_M\ (1 \leq M \leq M))
 \end{aligned}`,
       ),
@@ -1988,25 +1988,25 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
       displayMath(
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ \check{Z}_\mu\right]
-&= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j\right]
+&= \left[H_1^{(+)},\ \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)Z_j\right]
    &&(\because \blkref{def_half_integer_checkZ}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Z_j\right]
+&= \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\left[H_1^{(+)},\ Z_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\cdot 2\,Y_{j-1}^{\flat}
+&= \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\cdot 2\,Y_{j-1}^{\flat}
    &&(\because \text{Step 1 の第 3 式}) \\
-&= 2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\,Y_{j-1}^{\flat}
+&= 2\sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\,Y_{j-1}^{\flat}
    &&(\because \text{スカラー倍を和の外へ出す}) \\
-&= 2\sum_{l=0}^{M-1} e^{-i(l+1)\tilde\theta_\mu}\,Y_l^{\flat}
+&= 2\sum_{l=0}^{M-1} \exp(-i(l+1)\tilde\theta_\mu)\,Y_l^{\flat}
    &&(\because \text{有限和の添字の付け替え } l=j-1) \\
-&= 2\sum_{l=0}^{M-1} e^{-i\tilde\theta_\mu}e^{-il\tilde\theta_\mu}\,Y_l^{\flat}
+&= 2\sum_{l=0}^{M-1} \exp(-i\tilde\theta_\mu)\exp(-il\tilde\theta_\mu)\,Y_l^{\flat}
    &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
-&= 2\,e^{-i\tilde\theta_\mu}\sum_{l=0}^{M-1} e^{-il\tilde\theta_\mu}\,Y_l^{\flat}
+&= 2\,\exp(-i\tilde\theta_\mu)\sum_{l=0}^{M-1} \exp(-il\tilde\theta_\mu)\,Y_l^{\flat}
    &&(\because \text{分配則}) \\
-&= 2\,e^{-i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Y_l^{\flat}
+&= 2\,\exp(-i\tilde\theta_\mu)\sum_{l=1}^{M} \exp(-il\tilde\theta_\mu)\,Y_l^{\flat}
    &&(\because \text{直前の displayMath による } l=0 \text{ の項と } l=M \text{ の項の入れ替え}) \\
-&= 2\,e^{-i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Y_l
+&= 2\,\exp(-i\tilde\theta_\mu)\sum_{l=1}^{M} \exp(-il\tilde\theta_\mu)\,Y_l
    &&(\because 1 \leq l \leq M \text{ では } Y_l^{\flat} = Y_l) \\
-&= 2\,e^{-i\tilde\theta_\mu}\,\check{Y}_\mu
+&= 2\,\exp(-i\tilde\theta_\mu)\,\check{Y}_\mu
    &&(\because \blkref{def_half_integer_checkY})
 \end{aligned}`,
       ),
@@ -2020,23 +2020,23 @@ e^{-i\cdot 0\cdot\tilde\theta_\mu}\,Y_0^{\flat}
         " に 1 対 1 で対応する）。また、",
         ref("half_integer_phase_antiperiodicity"),
         " の ",
-        math(String.raw`e^{-iM\tilde\theta_\mu} = -1`),
+        math(String.raw`\exp(-iM\tilde\theta_\mu) = -1`),
         " と ",
         math(String.raw`Z_{M+1}^{\flat} = -Z_1`),
         " より、境界の二項は一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
-&= e^{-iM\tilde\theta_\mu}\,e^{-i\tilde\theta_\mu}\,Z_{M+1}^{\flat}
+\exp(-i(M+1)\tilde\theta_\mu)\,Z_{M+1}^{\flat}
+&= \exp(-iM\tilde\theta_\mu)\,\exp(-i\tilde\theta_\mu)\,Z_{M+1}^{\flat}
    &&(\because \text{theorem\_exp\_product}\ (n=1)) \\
-&= e^{-iM\tilde\theta_\mu}\,e^{-i\tilde\theta_\mu}\left(-Z_1\right)
+&= \exp(-iM\tilde\theta_\mu)\,\exp(-i\tilde\theta_\mu)\left(-Z_1\right)
    &&(\because Z_{M+1}^{\flat} := -Z_1) \\
-&= \left(-1\right)e^{-i\tilde\theta_\mu}\left(-Z_1\right)
+&= \left(-1\right)\exp(-i\tilde\theta_\mu)\left(-Z_1\right)
    &&(\because \blkref{half_integer_phase_antiperiodicity}) \\
-&= e^{-i\tilde\theta_\mu}\,Z_1
+&= \exp(-i\tilde\theta_\mu)\,Z_1
    &&(\because \mathbb{C}\text{ の四則}) \\
-&= e^{-i\cdot 1\cdot\tilde\theta_\mu}\,Z_1^{\flat}
+&= \exp(-i\cdot 1\cdot\tilde\theta_\mu)\,Z_1^{\flat}
    &&(\because Z_1^{\flat} := Z_1)
 \end{aligned}`,
       ),
@@ -2046,25 +2046,25 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
       displayMath(
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ \check{Y}_\mu\right]
-&= \left[H_1^{(+)},\ \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Y_j\right]
+&= \left[H_1^{(+)},\ \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)Y_j\right]
    &&(\because \blkref{def_half_integer_checkY}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left[H_1^{(+)},\ Y_j\right]
+&= \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\left[H_1^{(+)},\ Y_j\right]
    &&(\because \text{交換子の第 2 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\left(-2\,Z_{j+1}^{\flat}\right)
+&= \sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\left(-2\,Z_{j+1}^{\flat}\right)
    &&(\because \text{Step 1 の第 4 式}) \\
-&= -2\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\,Z_{j+1}^{\flat}
+&= -2\sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\,Z_{j+1}^{\flat}
    &&(\because \text{スカラー倍を和の外へ出す}) \\
-&= -2\sum_{l=2}^{M+1} e^{-i(l-1)\tilde\theta_\mu}\,Z_{l}^{\flat}
+&= -2\sum_{l=2}^{M+1} \exp(-i(l-1)\tilde\theta_\mu)\,Z_{l}^{\flat}
    &&(\because \text{有限和の添字の付け替え } l = j+1) \\
-&= -2\sum_{l=2}^{M+1} e^{i\tilde\theta_\mu}e^{-il\tilde\theta_\mu}\,Z_{l}^{\flat}
+&= -2\sum_{l=2}^{M+1} \exp(i\tilde\theta_\mu)\exp(-il\tilde\theta_\mu)\,Z_{l}^{\flat}
    &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
-&= -2\,e^{i\tilde\theta_\mu}\sum_{l=2}^{M+1} e^{-il\tilde\theta_\mu}\,Z_l^{\flat}
+&= -2\,\exp(i\tilde\theta_\mu)\sum_{l=2}^{M+1} \exp(-il\tilde\theta_\mu)\,Z_l^{\flat}
    &&(\because \text{分配則}) \\
-&= -2\,e^{i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Z_l^{\flat}
+&= -2\,\exp(i\tilde\theta_\mu)\sum_{l=1}^{M} \exp(-il\tilde\theta_\mu)\,Z_l^{\flat}
    &&(\because \text{直前の displayMath による } l=M+1 \text{ の項と } l=1 \text{ の項の入れ替え}) \\
-&= -2\,e^{i\tilde\theta_\mu}\sum_{l=1}^{M} e^{-il\tilde\theta_\mu}\,Z_l
+&= -2\,\exp(i\tilde\theta_\mu)\sum_{l=1}^{M} \exp(-il\tilde\theta_\mu)\,Z_l
    &&(\because 1 \leq l \leq M \text{ では } Z_l^{\flat} = Z_l) \\
-&= -2\,e^{i\tilde\theta_\mu}\,\check{Z}_\mu
+&= -2\,\exp(i\tilde\theta_\mu)\,\check{Z}_\mu
    &&(\because \blkref{def_half_integer_checkZ})
 \end{aligned}`,
       ),
@@ -2152,16 +2152,16 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
       displayMath(
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu, \check{Z}_\nu\right]_+
-&= \left[\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}Z_j,\ \sum_{k=1}^{M} e^{-ik\tilde\theta_\nu}Z_k\right]_+
+&= \left[\sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)Z_j,\ \sum_{k=1}^{M} \exp(-ik\tilde\theta_\nu)Z_k\right]_+
    &&\bigl(\because \blkref{def_half_integer_checkZ}\bigr) \\
-&= \sum_{j=1}^{M}\sum_{k=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ik\tilde\theta_\nu}
+&= \sum_{j=1}^{M}\sum_{k=1}^{M} \exp(-ij\tilde\theta_\mu)\,\exp(-ik\tilde\theta_\nu)
    \left[Z_j, Z_k\right]_+
    &&\bigl(\because \text{反交換子の } \mathbb{C} \text{ 双線型性}\bigr) \\
-&= \sum_{j=1}^{M}\sum_{k=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ik\tilde\theta_\nu}\cdot 2I\,\delta^M_{(j,k)}
+&= \sum_{j=1}^{M}\sum_{k=1}^{M} \exp(-ij\tilde\theta_\mu)\,\exp(-ik\tilde\theta_\nu)\cdot 2I\,\delta^M_{(j,k)}
    &&\bigl(\because \text{anticommutator\_of\_Z\_and\_Y}\bigr) \\
-&= 2I\sum_{j=1}^{M} e^{-ij\tilde\theta_\mu}\,e^{-ij\tilde\theta_\nu}
+&= 2I\sum_{j=1}^{M} \exp(-ij\tilde\theta_\mu)\,\exp(-ij\tilde\theta_\nu)
    &&\bigl(\because 1 \leq j,k \leq M \text{ では } \delta^M_{(j,k)} = 1 \iff j = k\bigr) \\
-&= 2I\sum_{j=1}^{M} e^{-ij\left(\tilde\theta_\mu + \tilde\theta_\nu\right)}
+&= 2I\sum_{j=1}^{M} \exp(-ij\left(\tilde\theta_\mu + \tilde\theta_\nu\right))
    &&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
 &= 2I\sum_{j=1}^{M} \exp\!\left(\frac{2\pi i j\left(-(\mu+\nu-1)\right)}{M}\right)
    &&\bigl(\because \tilde\theta_\mu + \tilde\theta_\nu = \tfrac{2\pi(\mu+\nu-1)}{M}\bigr) \\
@@ -2187,11 +2187,11 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
       displayMath(
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu,\check{Y}_\nu\right]_+
-&= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Z_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
+&= \left[\sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)Z_j,\ \sum_{k=1}^{M}\exp(-ik\tilde\theta_\nu)Y_k\right]_+
    &&\bigl(\because \blkref{def_half_integer_checkZ},\ \blkref{def_half_integer_checkY}\bigr) \\
-&= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Z_j,Y_k]_+
+&= \sum_{j=1}^{M}\sum_{k=1}^{M}\exp(-ij\tilde\theta_\mu)\exp(-ik\tilde\theta_\nu)[Z_j,Y_k]_+
    &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
-&= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 0
+&= \sum_{j=1}^{M}\sum_{k=1}^{M}\exp(-ij\tilde\theta_\mu)\exp(-ik\tilde\theta_\nu)\cdot 0
    &&\bigl(\because \text{anticommutator\_of\_Z\_and\_Y}\bigr) \\
 &= 0
    &&\bigl(\because \mathbb{C}\text{ の四則}\bigr)
@@ -2217,15 +2217,15 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
       displayMath(
         String.raw`\begin{aligned}
 \left[\check{Y}_\mu,\check{Y}_\nu\right]_+
-&= \left[\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Y_j,\ \sum_{k=1}^{M}e^{-ik\tilde\theta_\nu}Y_k\right]_+
+&= \left[\sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)Y_j,\ \sum_{k=1}^{M}\exp(-ik\tilde\theta_\nu)Y_k\right]_+
    &&\bigl(\because \blkref{def_half_integer_checkY}\bigr) \\
-&= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}[Y_j,Y_k]_+
+&= \sum_{j=1}^{M}\sum_{k=1}^{M}\exp(-ij\tilde\theta_\mu)\exp(-ik\tilde\theta_\nu)[Y_j,Y_k]_+
    &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
-&= \sum_{j=1}^{M}\sum_{k=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ik\tilde\theta_\nu}\cdot 2I\,\delta^M_{(j,k)}
+&= \sum_{j=1}^{M}\sum_{k=1}^{M}\exp(-ij\tilde\theta_\mu)\exp(-ik\tilde\theta_\nu)\cdot 2I\,\delta^M_{(j,k)}
    &&\bigl(\because \text{anticommutator\_of\_Z\_and\_Y}\bigr) \\
-&= 2I\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}e^{-ij\tilde\theta_\nu}
+&= 2I\sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)\exp(-ij\tilde\theta_\nu)
    &&\bigl(\because 1\le j,k\le M\text{ では }\delta^M_{(j,k)}=1\iff j=k\bigr) \\
-&= 2I\sum_{j=1}^{M}e^{-ij(\tilde\theta_\mu+\tilde\theta_\nu)}
+&= 2I\sum_{j=1}^{M}\exp(-ij(\tilde\theta_\mu+\tilde\theta_\nu))
    &&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
 &= 2I\sum_{j=1}^{M}\exp\!\left(\frac{2\pi i j\left(-(\mu+\nu-1)\right)}{M}\right)
    &&\bigl(\because \tilde\theta_\mu+\tilde\theta_\nu=\tfrac{2\pi(\mu+\nu-1)}{M}\bigr) \\
@@ -2255,9 +2255,9 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
     statement: [
       paragraph([math(String.raw`j \in \{1,\dots,M\}`), " について"]),
       displayMath(
-        String.raw`Z_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_\mu\,e^{i j\tilde\theta_\mu},
+        String.raw`Z_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_\mu\,\exp(i j\tilde\theta_\mu),
 \qquad
-Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,e^{i j\tilde\theta_\mu}`,
+Y_j = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,\exp(i j\tilde\theta_\mu)`,
       ),
       paragraph([
         "が成り立つ。とくに ",
@@ -2310,7 +2310,7 @@ j-k
         " である。したがって",
       ]),
       displayMath(
-        String.raw`\sum_{\mu=1}^{M} e^{i(j-k)\tilde\theta_\mu}
+        String.raw`\sum_{\mu=1}^{M} \exp(i(j-k)\tilde\theta_\mu)
 = \begin{cases}
 M & (j = k) \\
 0 & (j \neq k)
@@ -2325,14 +2325,14 @@ M & (j = k) \\
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,e^{ij\tilde\theta_\mu}
-&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_\mu}\right)e^{ij\tilde\theta_\mu}
+\frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_\mu\,\exp(ij\tilde\theta_\mu)
+&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Z_k\,\exp(-ik\tilde\theta_\mu)\right)\exp(ij\tilde\theta_\mu)
 &&(\because \blkref{def_half_integer_checkZ}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_\mu}\,e^{ij\tilde\theta_\mu}
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,\exp(-ik\tilde\theta_\mu)\,\exp(ij\tilde\theta_\mu)
 &&(\because \text{有限和への分配}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,e^{i(j-k)\tilde\theta_\mu}
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Z_k\,\exp(i(j-k)\tilde\theta_\mu)
 &&(\because \text{theorem\_exp\_product}\ (n=1)) \\
-&= \frac{1}{M}\sum_{k=1}^{M} Z_k \sum_{\mu=1}^{M} e^{i(j-k)\tilde\theta_\mu}
+&= \frac{1}{M}\sum_{k=1}^{M} Z_k \sum_{\mu=1}^{M} \exp(i(j-k)\tilde\theta_\mu)
 &&(\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\cdot Z_j\cdot M
 &&(\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
@@ -2349,14 +2349,14 @@ M & (j = k) \\
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,e^{ij\tilde\theta_\mu}
-&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\right)e^{ij\tilde\theta_\mu}
+\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\,\exp(ij\tilde\theta_\mu)
+&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M} Y_k\,\exp(-ik\tilde\theta_\mu)\right)\exp(ij\tilde\theta_\mu)
 &&(\because \blkref{def_half_integer_checkY}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{-ik\tilde\theta_\mu}\,e^{ij\tilde\theta_\mu}
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,\exp(-ik\tilde\theta_\mu)\,\exp(ij\tilde\theta_\mu)
 &&(\because \text{有限和への分配}) \\
-&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,e^{i(j-k)\tilde\theta_\mu}
+&= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M} Y_k\,\exp(i(j-k)\tilde\theta_\mu)
 &&(\because \text{theorem\_exp\_product}\ (n=1)) \\
-&= \frac{1}{M}\sum_{k=1}^{M} Y_k \sum_{\mu=1}^{M} e^{i(j-k)\tilde\theta_\mu}
+&= \frac{1}{M}\sum_{k=1}^{M} Y_k \sum_{\mu=1}^{M} \exp(i(j-k)\tilde\theta_\mu)
 &&(\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\cdot Y_j\cdot M
 &&(\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
@@ -2401,7 +2401,7 @@ M & (j = k) \\
     labels: ["H1_H2_via_check_Z_Y"],
     statement: [
       displayMath(
-        String.raw`H_1^{(+)} = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,\check{Z}_{M+1-\mu}\,e^{-i\tilde\theta_\mu},
+        String.raw`H_1^{(+)} = \frac{1}{M}\sum_{\mu=1}^{M} \check{Y}_\mu\,\check{Z}_{M+1-\mu}\,\exp(-i\tilde\theta_\mu),
 \qquad
 H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
       ),
@@ -2438,9 +2438,9 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
       displayMath(
         String.raw`\begin{aligned}
 \check{Z}_{M+1-\mu}
-&= \sum_{k=1}^{M} Z_k\,e^{-ik\tilde\theta_{M+1-\mu}}
+&= \sum_{k=1}^{M} Z_k\,\exp(-ik\tilde\theta_{M+1-\mu})
 && (\because \blkref{def_half_integer_checkZ}) \\
-&= \sum_{k=1}^{M} Z_k\,e^{ik\tilde\theta_\mu}
+&= \sum_{k=1}^{M} Z_k\,\exp(ik\tilde\theta_\mu)
 && (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)})
 \end{aligned}`,
       ),
@@ -2470,17 +2470,17 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
       displayMath(
         String.raw`\begin{aligned}
 \frac{1}{M}\sum_{\mu=1}^{M}\check{Z}_{M+1-\mu}\check{Y}_\mu
-&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right)
-   \left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
+&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{k=1}^{M}Z_k \exp(ik\tilde\theta_\mu)\right)
+   \left(\sum_{j=1}^{M}Y_j \exp(-ij\tilde\theta_\mu)\right)
 && (\because \text{準備した }\check Z_{M+1-\mu}\text{ の表示と }\blkref{def_half_integer_checkY}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
-   e^{ik\tilde\theta_\mu}e^{-ij\tilde\theta_\mu}
+   \exp(ik\tilde\theta_\mu)\exp(-ij\tilde\theta_\mu)
 && (\because \text{積を二重和へ分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j\,
-   e^{i(k-j)\tilde\theta_\mu}
+   \exp(i(k-j)\tilde\theta_\mu)
 && (\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= \frac{1}{M}\sum_{k=1}^{M}\sum_{j=1}^{M} Z_kY_j
-   \sum_{\mu=1}^{M} e^{i(k-j)\tilde\theta_\mu}
+   \sum_{\mu=1}^{M} \exp(i(k-j)\tilde\theta_\mu)
 && (\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\sum_{j=1}^{M} Z_jY_j\cdot M
 && (\because \text{antiperiodic\_exp\_sum}) \\
@@ -2550,18 +2550,18 @@ H_2 = \frac{1}{M}\sum_{\mu=1}^{M} \check{Z}_{M+1-\mu}\,\check{Y}_\mu`,
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{M+1-\mu}e^{-i\tilde\theta_\mu}
-&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{j=1}^{M}Y_j e^{-ij\tilde\theta_\mu}\right)
-   \left(\sum_{k=1}^{M}Z_k e^{ik\tilde\theta_\mu}\right) e^{-i\tilde\theta_\mu}
+\frac{1}{M}\sum_{\mu=1}^{M}\check{Y}_\mu\check{Z}_{M+1-\mu}\exp(-i\tilde\theta_\mu)
+&= \frac{1}{M}\sum_{\mu=1}^{M}\left(\sum_{j=1}^{M}Y_j \exp(-ij\tilde\theta_\mu)\right)
+   \left(\sum_{k=1}^{M}Z_k \exp(ik\tilde\theta_\mu)\right) \exp(-i\tilde\theta_\mu)
 && (\because \blkref{def_half_integer_checkY}\text{ と準備した } \check{Z}_{M+1-\mu} \text{ の表示}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
-   e^{-ij\tilde\theta_\mu}e^{ik\tilde\theta_\mu}e^{-i\tilde\theta_\mu}
+   \exp(-ij\tilde\theta_\mu)\exp(ik\tilde\theta_\mu)\exp(-i\tilde\theta_\mu)
 && (\because \text{積を二重和へ分配}) \\
 &= \frac{1}{M}\sum_{\mu=1}^{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k\,
-   e^{-i(j-k+1)\tilde\theta_\mu}
+   \exp(-i(j-k+1)\tilde\theta_\mu)
 && (\because \text{theorem\_exp\_product}\ (n=1)) \\
 &= \frac{1}{M}\sum_{j=1}^{M}\sum_{k=1}^{M} Y_jZ_k
-   \sum_{\mu=1}^{M} e^{-i(j-k+1)\tilde\theta_\mu}
+   \sum_{\mu=1}^{M} \exp(-i(j-k+1)\tilde\theta_\mu)
 && (\because \text{有限和の順序交換}) \\
 &= \frac{1}{M}\left(\sum_{j=1}^{M-1} Y_jZ_{j+1}\cdot M + Y_MZ_1\cdot(-M)\right)
 && (\because \text{antiperiodic\_exp\_sum と直上の 2 つの場合分け}) \\

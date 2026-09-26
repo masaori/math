@@ -614,10 +614,14 @@ K\in\mathbb{R}
     labels: ["def_real_logarithm_positive"],
     statement: [
       paragraph([
-        ref("cosh_sinh_basic_properties"),
-        " で用いた実数の指数関数を考える。実解析の標準的な事実として、指数関数は狭義単調増加な全単射 ",
+        ref("def_scalar_exp"),
+        " の実数の exp を考える。",
+        ref("real_exp_positive"),
+        " と ",
+        ref("real_exp_strictly_increasing"),
+        " より、",
         math(String.raw`\exp:\mathbb{R}\longrightarrow\mathbb{R}_{>0}`),
-        " である。その逆写像を正の実数上の実対数と呼び、",
+        " は狭義単調増加な単射である。全射であることは実解析の標準的な事実（連続性と中間値の定理）として用いる。その逆写像を正の実数上の実対数と呼び、",
       ]),
       displayMath(String.raw`\log:\mathbb{R}_{>0}\longrightarrow\mathbb{R}`),
       paragraph([
@@ -676,7 +680,7 @@ y\in\mathbb{R}_{>0}
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \exp 0&=1
-&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した指数関数の基本性質}\right)
+&&\left(\because\ \blkref{scalar_exp_zero}\right)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \exp 0=1
@@ -713,6 +717,232 @@ y\in\mathbb{R}_{>0}
         "第一の双対結合定数を定める前提として、正の実数上の実対数と、0<y<1 なら log y<0 となる符号性を一つの独立定義として置いた。数学的道具立ての既存分類・節境界は変更していない。",
       ],
     },
+  },
+  {
+    id: "transfer_matrix_000h2_definition_arccosh",
+    kind: "definition",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "逆双曲線余弦" },
+    labels: ["def_arccosh"],
+    statement: [
+      paragraph([
+        math(String.raw`y \in \mathbb{R}`),
+        " が ",
+        math(String.raw`y \ge 1`),
+        " を満たすとき、",
+      ]),
+      displayMath(
+        String.raw`\mathrm{arccosh}(y) := \log\!\left(y + \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})}\right) \in \mathbb{R}`,
+      ),
+      paragraph([
+        "と定める。",
+        math(String.raw`\sqrt{\cdot}^{(\mathbb{R}_{\ge 0})}`),
+        " は ",
+        ref("definition_of_sqrt_r_positive"),
+        "、",
+        math(String.raw`\log`),
+        " は ",
+        ref("def_real_logarithm_positive"),
+        " である。右辺が定まることは次による。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+y \ge 1
+&\Longrightarrow y^2 - 1 \ge 0
+   &&(\because\ y \ge 1 > 0 \text{ より } y^2 \ge 1) \\
+y \ge 1 \ \land\ \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})} \ge 0
+&\Longrightarrow y + \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})} \ge 1 > 0
+   &&(\because\ \text{実数の順序と加法})
+\end{aligned}`,
+      ),
+      paragraph([
+        "すなわち平方根の中身は非負であり、",
+        math(String.raw`\log`),
+        " の引数は正である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "それまで本文は arccosh を「cosh|_[0,∞) の逆写像」と呼ぶだけで定義を置いていなかった。逆写像として定義すると cosh|_[0,∞) が [1,∞) への全単射であることを先に示す必要があるので、log と非負平方根による式で定義し、逆写像であることを arccosh_properties で示す形にした。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_000h3_claim_arccosh_properties",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "逆双曲線余弦は非負側の双曲線余弦の逆" },
+    labels: ["arccosh_properties"],
+    statement: [
+      paragraph([
+        math(String.raw`y \in \mathbb{R}`),
+        "、",
+        math(String.raw`y \ge 1`),
+        " とする。",
+        ref("def_arccosh"),
+        " の ",
+        math(String.raw`\mathrm{arccosh}`),
+        " と ",
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`\cosh`),
+        " について次が成り立つ。",
+      ]),
+      list([
+        ["(1) ", math(String.raw`\mathrm{arccosh}(y) \ge 0`), "。"],
+        ["(2) ", math(String.raw`\cosh\!\left(\mathrm{arccosh}(y)\right) = y`), "。"],
+        [
+          "(3) ",
+          math(String.raw`t \in \mathbb{R}`),
+          " が ",
+          math(String.raw`t \ge 0`),
+          " かつ ",
+          math(String.raw`\cosh t = y`),
+          " を満たすなら ",
+          math(String.raw`t = \mathrm{arccosh}(y)`),
+          "。",
+        ],
+        ["(4) ", math(String.raw`\mathrm{arccosh}(1) = 0`), "。"],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "証明の中だけの記号として ",
+        math(String.raw`r := \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})}`),
+        "、",
+        math(String.raw`u := \mathrm{arccosh}(y) = \log(y + r)`),
+        " とおく。",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`r \ge 0`),
+        " かつ ",
+        math(String.raw`r^2 = y^2 - 1`),
+        "、",
+        ref("def_arccosh"),
+        " より ",
+        math(String.raw`y + r \ge 1`),
+        " である。また ",
+        ref("def_real_logarithm_positive"),
+        " の証明で示した ",
+        math(String.raw`\log 1 = 0`),
+        " を使う。",
+      ]),
+      paragraph(["(1) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{arccosh}(y)
+&= \log(y + r)
+   &&(\because\ \blkref{def_arccosh}) \\
+&\ge \log 1
+   &&(\because\ y + r \ge 1 \text{ と } \log \text{ の単調性。}\blkref{def_real_logarithm_positive}) \\
+&= 0
+   &&(\because\ \log 1 = 0)
+\end{aligned}`,
+      ),
+      paragraph(["(2) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(u)
+&= y + r
+   &&(\because\ u = \log(y+r) \text{ と } \exp(\log z) = z\ \blkref{def_real_logarithm_positive})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+y^2 - r^2
+&= y^2 - (y^2 - 1)
+   &&(\because\ r^2 = y^2 - 1) \\
+&= 1
+   &&(\because\ \mathbb{R} \text{ の四則})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-u)
+&= \exp(-u)\,(y^2 - r^2)
+   &&(\because\ y^2 - r^2 = 1) \\
+&= \exp(-u)\,(y + r)(y - r)
+   &&(\because\ \text{和と差の積}) \\
+&= \exp(-u)\exp(u)\,(y - r)
+   &&(\because\ \exp(u) = y + r) \\
+&= \exp(0)\,(y - r)
+   &&(\because\ \blkref{scalar_exp_product}) \\
+&= y - r
+   &&(\because\ \blkref{scalar_exp_zero})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\cosh(u)
+&= \frac{\exp(u) + \exp(-u)}{2}
+   &&(\because\ \blkref{def_cosh_sinh}) \\
+&= \frac{(y + r) + (y - r)}{2}
+   &&(\because\ \text{上の 2 式}) \\
+&= y
+   &&(\because\ \mathbb{R} \text{ の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "(3) の証明。",
+        math(String.raw`t \ge 0`),
+        " なら ",
+        math(String.raw`\sinh t \ge 0`),
+        " である（",
+        math(String.raw`t > 0`),
+        " なら ",
+        ref("cosh_sinh_basic_properties"),
+        " (3)、",
+        math(String.raw`t = 0`),
+        " なら ",
+        math(String.raw`\sinh 0 = (\exp(0) - \exp(0))/2 = 0`),
+        "）。さらに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\sinh t)^2
+&= (\cosh t)^2 - 1
+   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ (2)}) \\
+&= y^2 - 1
+   &&(\because\ \cosh t = y)
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので、",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        " の一意性より ",
+        math(String.raw`\sinh t = r`),
+        "。よって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+t
+&= \log(\exp(t))
+   &&(\because\ \blkref{def_real_logarithm_positive}) \\
+&= \log(\cosh t + \sinh t)
+   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ (1)}) \\
+&= \log(y + r)
+   &&(\because\ \cosh t = y,\ \sinh t = r) \\
+&= \mathrm{arccosh}(y)
+   &&(\because\ \blkref{def_arccosh})
+\end{aligned}`,
+      ),
+      paragraph(["(4) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{arccosh}(1)
+&= \log\!\left(1 + \sqrt{1^2-1}^{(\mathbb{R}_{\ge 0})}\right)
+   &&(\because\ \blkref{def_arccosh}) \\
+&= \log(1 + 0)
+   &&(\because\ 1^2 - 1 = 0 \text{ と } \sqrt{0}^{(\mathbb{R}_{\ge 0})} = 0) \\
+&= \log 1
+   &&(\because\ 1 + 0 = 1) \\
+&= 0
+   &&(\because\ \log 1 = 0)
+\end{aligned}`,
+      ),
+    ],
+    conversion: { status: "added", notes: ["arccosh を式で定義したことに伴い、本文が使っている性質（非負・cosh との合成・非負側での一意性・arccosh(1)=0）を主張として置いた。"] },
   },
   {
     id: "transfer_matrix_000i_definition_first_dual_coupling_constant",
@@ -876,11 +1106,11 @@ K_1^*&=-\frac12\log(\tanh K_1)
       displayMath(String.raw`\begin{aligned}
 &\exp\!\left(-\log(\tanh K_1)\right)\exp\!\left(\log(\tanh K_1)\right)\\
 &\qquad=\exp\!\left(-\log(\tanh K_1)+\log(\tanh K_1)\right)
-&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した }\exp(x)\exp(y)=\exp(x+y)\right)\\
+&&\left(\because\ \exp(x)\exp(y)=\exp(x+y)\ \blkref{scalar_exp_product}\right)\\
 &\qquad=\exp(0)
 &&\left(\because\ \mathbb{R}\text{ の加法逆元}\right)\\
 &\qquad=1
-&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した }\exp(0)=1\right)
+&&\left(\because\ \exp(0)=1\ \blkref{scalar_exp_zero}\right)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \exp\!\left(-\log(\tanh K_1)\right)\tanh K_1
@@ -926,7 +1156,7 @@ K_1^*&=-\frac12\log(\tanh K_1)
 &=\frac{\exp(K_1)^2-\exp(-K_1)^2}{2}
 &&\left(\because\ (a-b)(a+b)=a^2-b^2\right)\\
 &=\frac{\exp(2K_1)-\exp(-2K_1)}2
-&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した }\exp(x)\exp(y)=\exp(x+y)\right)\\
+&&\left(\because\ \exp(x)\exp(y)=\exp(x+y)\ \blkref{scalar_exp_product}\right)\\
 &=\sinh(2K_1)
 &&\left(\because\ \blkref{def_cosh_sinh}\right)
 \end{aligned}`),
@@ -1121,11 +1351,11 @@ K_2^*&=-\frac12\log(\tanh K_2)
       displayMath(String.raw`\begin{aligned}
 &\exp\!\left(-\log(\tanh K_2)\right)\exp\!\left(\log(\tanh K_2)\right)\\
 &\qquad=\exp\!\left(-\log(\tanh K_2)+\log(\tanh K_2)\right)
-&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した }\exp(x)\exp(y)=\exp(x+y)\right)\\
+&&\left(\because\ \exp(x)\exp(y)=\exp(x+y)\ \blkref{scalar_exp_product}\right)\\
 &\qquad=\exp(0)
 &&\left(\because\ \mathbb{R}\text{ の加法逆元}\right)\\
 &\qquad=1
-&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した }\exp(0)=1\right)
+&&\left(\because\ \exp(0)=1\ \blkref{scalar_exp_zero}\right)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \exp\!\left(-\log(\tanh K_2)\right)\tanh K_2
@@ -1171,7 +1401,7 @@ K_2^*&=-\frac12\log(\tanh K_2)
 &=\frac{\exp(K_2)^2-\exp(-K_2)^2}{2}
 &&\left(\because\ (a-b)(a+b)=a^2-b^2\right)\\
 &=\frac{\exp(2K_2)-\exp(-2K_2)}2
-&&\left(\because\ \blkref{cosh_sinh_basic_properties}\text{ に記した }\exp(x)\exp(y)=\exp(x+y)\right)\\
+&&\left(\because\ \exp(x)\exp(y)=\exp(x+y)\ \blkref{scalar_exp_product}\right)\\
 &=\sinh(2K_2)
 &&\left(\because\ \blkref{def_cosh_sinh}\right)
 \end{aligned}`),

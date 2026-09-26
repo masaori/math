@@ -255,7 +255,7 @@ export default defineNotes([
   {
     id: "note_exp_conjugation_lie_006_theorem_matrix_lie_group_version",
     targets: ["matrix_exp_conjugation"],
-    title: { tex: String.raw`\text{Matrix Lie群版: } e^X Y e^{-X} = \mathrm{Ad}_{e^X}(Y) = e^{\mathrm{ad}_X}(Y)\text{（本文不採用）}` },
+    title: { tex: String.raw`\text{Matrix Lie群版: } \exp(X) Y \exp(-X) = \mathrm{Ad}_{\exp(X)}(Y) = \exp(\mathrm{ad}_X)(Y)\text{（本文不採用）}` },
     origin: {
       path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/008_theorem_exp(X)Yexp(-X)=Ad(exp(X))(Y)=exp(ad_X)(Y)_BrianHall_Prop3.35.typ",
       ordinal: 6,

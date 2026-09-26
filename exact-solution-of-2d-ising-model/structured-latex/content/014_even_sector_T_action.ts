@@ -62,7 +62,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         "）、それらを合成する（",
         ref("T_V_plus_check_Z_Y"),
         "）。用いるのは (A)〜(D)、交換子の双線型性、",
-        math(String.raw`e^{i\theta}e^{-i\theta} = 1`),
+        math(String.raw`\exp(i\theta)\exp(-i\theta) = 1`),
         " と行列の計算だけである。",
       ]),
       paragraph([
@@ -511,7 +511,7 @@ T_{(V^{(+)})}
       displayMath(
         String.raw`\underbrace{[K_1 H_1^{(+)}, \dots, [K_1 H_1^{(+)}, \check{Z}_\mu]\dots]}_{n}
 = \begin{cases}
-(-1)^{(n-1)/2}(2K_1)^n e^{-i\tilde\theta}\,\check{Y}_\mu & (n \text{ 奇数}) \\
+(-1)^{(n-1)/2}(2K_1)^n \exp(-i\tilde\theta)\,\check{Y}_\mu & (n \text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^n\,\check{Z}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
@@ -519,7 +519,7 @@ T_{(V^{(+)})}
       displayMath(
         String.raw`\underbrace{[K_1 H_1^{(+)}, \dots, [K_1 H_1^{(+)}, \check{Y}_\mu]\dots]}_{n}
 = \begin{cases}
-(-1)^{(n+1)/2}(2K_1)^n e^{i\tilde\theta}\,\check{Z}_\mu & (n \text{ 奇数}) \\
+(-1)^{(n+1)/2}(2K_1)^n \exp(i\tilde\theta)\,\check{Z}_\mu & (n \text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^n\,\check{Y}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
@@ -550,8 +550,8 @@ T_{(V^{(+)})}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\text{(A)}\quad \left[H_1^{(+)}, \check{Z}_\mu\right] &= 2 e^{-i\tilde\theta}\,\check{Y}_\mu, &
-\text{(B)}\quad \left[H_1^{(+)}, \check{Y}_\mu\right] &= -2 e^{i\tilde\theta}\,\check{Z}_\mu, \\
+\text{(A)}\quad \left[H_1^{(+)}, \check{Z}_\mu\right] &= 2 \exp(-i\tilde\theta)\,\check{Y}_\mu, &
+\text{(B)}\quad \left[H_1^{(+)}, \check{Y}_\mu\right] &= -2 \exp(i\tilde\theta)\,\check{Z}_\mu, \\
 \text{(C)}\quad \left[H_2, \check{Z}_\mu\right] &= -2\,\check{Y}_\mu, &
 \text{(D)}\quad \left[H_2, \check{Y}_\mu\right] &= 2\,\check{Z}_\mu
 \end{aligned}`,
@@ -585,7 +585,7 @@ T_{(V^{(+)})}
       ),
       paragraph([
         "また ",
-        math(String.raw`e^{-i\tilde\theta}e^{i\tilde\theta} = 1`),
+        math(String.raw`\exp(-i\tilde\theta)\exp(i\tilde\theta) = 1`),
         " を使う。各主張の右辺は ",
         math(String.raw`n`),
         " の偶奇で場合分けされているので、帰納段階は「",
@@ -639,9 +639,9 @@ C_{n+1}
    \quad (\because C_{n+1} = [K_1 H_1^{(+)},\, C_n] \text{ と帰納法の仮定}) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\left[H_1^{(+)},\ \check{Z}_\mu\right]
    \quad (\because \text{交換子の双線型性}) \\
-&= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot 2 e^{-i\tilde\theta}\check{Y}_\mu
+&= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot 2 \exp(-i\tilde\theta)\check{Y}_\mu
    \quad (\because \text{(A)}) \\
-&= (-1)^{n/2}(2K_1)^{n+1} e^{-i\tilde\theta}\check{Y}_\mu
+&= (-1)^{n/2}(2K_1)^{n+1} \exp(-i\tilde\theta)\check{Y}_\mu
    \quad (\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot 2 = (2K_1)^{n+1})
 \end{aligned}`,
       ),
@@ -652,7 +652,7 @@ C_{n+1}
         " であり、係数 ",
         math(String.raw`(2K_1)^{n+1}`),
         " と位相因子 ",
-        math(String.raw`e^{-i\tilde\theta}`),
+        math(String.raw`\exp(-i\tilde\theta)`),
         " も一致する。",
       ]),
       paragraph([
@@ -661,22 +661,22 @@ C_{n+1}
         " 奇数 → ",
         math(String.raw`n+1`),
         " 偶数）：",
-        math(String.raw`C_n = (-1)^{(n-1)/2}(2K_1)^n e^{-i\tilde\theta}\check{Y}_\mu`),
+        math(String.raw`C_n = (-1)^{(n-1)/2}(2K_1)^n \exp(-i\tilde\theta)\check{Y}_\mu`),
         " と仮定すると、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 C_{n+1}
-&= \left[K_1 H_1^{(+)},\ (-1)^{(n-1)/2}(2K_1)^n e^{-i\tilde\theta}\check{Y}_\mu\right]
+&= \left[K_1 H_1^{(+)},\ (-1)^{(n-1)/2}(2K_1)^n \exp(-i\tilde\theta)\check{Y}_\mu\right]
    \quad (\because C_{n+1} = [K_1 H_1^{(+)},\, C_n] \text{ と帰納法の仮定}) \\
-&= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n e^{-i\tilde\theta}\left[H_1^{(+)},\ \check{Y}_\mu\right]
+&= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n \exp(-i\tilde\theta)\left[H_1^{(+)},\ \check{Y}_\mu\right]
    \quad (\because \text{交換子の双線型性}) \\
-&= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n e^{-i\tilde\theta}\cdot\left(-2 e^{i\tilde\theta}\check{Z}_\mu\right)
+&= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n \exp(-i\tilde\theta)\cdot\left(-2 \exp(i\tilde\theta)\check{Z}_\mu\right)
    \quad (\because \text{(B)}) \\
-&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\,\overbrace{e^{-i\tilde\theta}e^{i\tilde\theta}}^{=\,1}\,\check{Z}_\mu
+&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\,\overbrace{\exp(-i\tilde\theta)\exp(i\tilde\theta)}^{=\,1}\,\check{Z}_\mu
    \quad (\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot(-2) = (-1)(2K_1)^{n+1}) \\
 &= (-1)^{(n-1)/2+1}(2K_1)^{n+1}\check{Z}_\mu
-   \quad (\because e^{-i\tilde\theta}e^{i\tilde\theta} = 1 \text{ と } (-1)\cdot(-1)^{(n-1)/2} = (-1)^{(n-1)/2+1}) \\
+   \quad (\because \exp(-i\tilde\theta)\exp(i\tilde\theta) = 1 \text{ と } (-1)\cdot(-1)^{(n-1)/2} = (-1)^{(n-1)/2+1}) \\
 &= (-1)^{(n+1)/2}(2K_1)^{n+1}\check{Z}_\mu
    \quad \left(\because \tfrac{n-1}{2}+1 = \tfrac{n+1}{2}\right)
 \end{aligned}`,
@@ -689,7 +689,7 @@ C_{n+1}
         " は偶数なので偶数側の右辺 ",
         math(String.raw`(-1)^{(n+1)/2}(2K_1)^{n+1}\check{Z}_\mu`),
         " と一致する（位相因子は ",
-        math(String.raw`e^{-i\tilde\theta}e^{i\tilde\theta}=1`),
+        math(String.raw`\exp(-i\tilde\theta)\exp(i\tilde\theta)=1`),
         " により消える）。以上で (h1.z) が成り立つ。",
       ]),
 
@@ -728,9 +728,9 @@ D_{n+1}
    \quad (\because D_{n+1} = [K_1 H_1^{(+)},\, D_n] \text{ と帰納法の仮定}) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\left[H_1^{(+)},\ \check{Y}_\mu\right]
    \quad (\because \text{交換子の双線型性}) \\
-&= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot\left(-2 e^{i\tilde\theta}\check{Z}_\mu\right)
+&= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot\left(-2 \exp(i\tilde\theta)\check{Z}_\mu\right)
    \quad (\because \text{(B)}) \\
-&= (-1)^{n/2+1}(2K_1)^{n+1} e^{i\tilde\theta}\check{Z}_\mu
+&= (-1)^{n/2+1}(2K_1)^{n+1} \exp(i\tilde\theta)\check{Z}_\mu
    \quad (\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot(-2) = (-1)(2K_1)^{n+1})
 \end{aligned}`,
       ),
@@ -746,22 +746,22 @@ D_{n+1}
         " 奇数 → ",
         math(String.raw`n+1`),
         " 偶数）：",
-        math(String.raw`D_n = (-1)^{(n+1)/2}(2K_1)^n e^{i\tilde\theta}\check{Z}_\mu`),
+        math(String.raw`D_n = (-1)^{(n+1)/2}(2K_1)^n \exp(i\tilde\theta)\check{Z}_\mu`),
         " と仮定すると、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 D_{n+1}
-&= \left[K_1 H_1^{(+)},\ (-1)^{(n+1)/2}(2K_1)^n e^{i\tilde\theta}\check{Z}_\mu\right]
+&= \left[K_1 H_1^{(+)},\ (-1)^{(n+1)/2}(2K_1)^n \exp(i\tilde\theta)\check{Z}_\mu\right]
    \quad (\because D_{n+1} = [K_1 H_1^{(+)},\, D_n] \text{ と帰納法の仮定}) \\
-&= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n e^{i\tilde\theta}\left[H_1^{(+)},\ \check{Z}_\mu\right]
+&= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n \exp(i\tilde\theta)\left[H_1^{(+)},\ \check{Z}_\mu\right]
    \quad (\because \text{交換子の双線型性}) \\
-&= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n e^{i\tilde\theta}\cdot 2 e^{-i\tilde\theta}\check{Y}_\mu
+&= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n \exp(i\tilde\theta)\cdot 2 \exp(-i\tilde\theta)\check{Y}_\mu
    \quad (\because \text{(A)}) \\
-&= (-1)^{(n+1)/2}(2K_1)^{n+1}\,\overbrace{e^{i\tilde\theta}e^{-i\tilde\theta}}^{=\,1}\,\check{Y}_\mu
+&= (-1)^{(n+1)/2}(2K_1)^{n+1}\,\overbrace{\exp(i\tilde\theta)\exp(-i\tilde\theta)}^{=\,1}\,\check{Y}_\mu
    \quad (\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot 2 = (2K_1)^{n+1}) \\
 &= (-1)^{(n+1)/2}(2K_1)^{n+1}\check{Y}_\mu
-   \quad (\because e^{i\tilde\theta}e^{-i\tilde\theta} = 1)
+   \quad (\because \exp(i\tilde\theta)\exp(-i\tilde\theta) = 1)
 \end{aligned}`,
       ),
       paragraph([
@@ -777,7 +777,7 @@ D_{n+1}
         " とおく。",
         math(String.raw`E_{n+1} = [K_2^* H_2,\, E_n]`),
         "。この場合は (C), (D) の右辺に ",
-        math(String.raw`e^{\pm i\tilde\theta}`),
+        math(String.raw`\exp(\pm i\tilde\theta)`),
         " が現れないので位相因子は出てこない。基底段階（",
         math(String.raw`n=0`),
         "、偶数）では、",
@@ -965,7 +965,7 @@ F_{n+1}
       displayMath(
         String.raw`\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
 = \begin{cases}
-i K_1^n e^{-i\tilde\theta}\,\check{Y}_\mu & (n \text{ 奇数}) \\
+i K_1^n \exp(-i\tilde\theta)\,\check{Y}_\mu & (n \text{ 奇数}) \\
 K_1^n\,\check{Z}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
@@ -973,7 +973,7 @@ K_1^n\,\check{Z}_\mu & (n \text{ 偶数})
       displayMath(
         String.raw`\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
 = \begin{cases}
--i K_1^n e^{i\tilde\theta}\,\check{Z}_\mu & (n \text{ 奇数}) \\
+-i K_1^n \exp(i\tilde\theta)\,\check{Z}_\mu & (n \text{ 奇数}) \\
 K_1^n\,\check{Y}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
@@ -1102,32 +1102,32 @@ i^n
    \underbrace{\left[K_1 H_1^{(+)},\dots,\left[K_1 H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{補題 1}) \\
 &= \left(\tfrac{i}{2}\right)^{n}\begin{cases}
-(-1)^{(n-1)/2}(2K_1)^{n} e^{-i\tilde\theta}\check{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{(n-1)/2}(2K_1)^{n} \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^{n}\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because \text{nesting\_of\_commutator\_of\_H\_and\_check\_Z (h1.z)}) \\
 &= \begin{cases}
-i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\tilde\theta}\check{Y}_\mu & (n\text{ 奇数}) \\
+i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad \left(\because \text{冪の指数法則を商 }\left(\tfrac{i}{2}\right)^{n}=i^{n}2^{-n}\text{ と積 }(2K_1)^n=2^{n}K_1^n\text{ の両方へ適用し、スカラーを並べ替えた}\right) \\
 &= \begin{cases}
-i^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\tilde\theta}\check{Y}_\mu & (n\text{ 奇数}) \\
+i^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad \left(\because 2^{-n}2^{n} = 2^{0} = 1\right) \\
 &= \begin{cases}
-i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\tilde\theta}\check{Y}_\mu & (n\text{ 奇数}) \\
+i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because \text{補題 2}) \\
 &= \begin{cases}
-i\,(-1)^{n-1}\,K_1^{n}\, e^{-i\tilde\theta}\check{Y}_\mu & (n\text{ 奇数}) \\
+i\,(-1)^{n-1}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad \left(\because \frac{n-1}{2}+\frac{n-1}{2} = n-1,\ \frac{n}{2}+\frac{n}{2} = n\right) \\
 &= \begin{cases}
-i\,K_1^{n}\, e^{-i\tilde\theta}\check{Y}_\mu & (n\text{ 奇数}) \\
+i\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because n \text{ 奇数なら } (-1)^{n-1} = 1,\ n \text{ 偶数なら } (-1)^{n} = 1)
@@ -1164,32 +1164,32 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
    \underbrace{\left[K_1 H_1^{(+)},\dots,\left[K_1 H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{補題 1}) \\
 &= \left(\tfrac{i}{2}\right)^{n}\begin{cases}
-(-1)^{(n+1)/2}(2K_1)^{n} e^{i\tilde\theta}\check{Z}_\mu & (n\text{ 奇数}) \\
+(-1)^{(n+1)/2}(2K_1)^{n} \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^{n}\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because \text{nesting\_of\_commutator\_of\_H\_and\_check\_Z (h1.y)}) \\
 &= \begin{cases}
-i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, e^{i\tilde\theta}\check{Z}_\mu & (n\text{ 奇数}) \\
+i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad \left(\because \text{冪の指数法則を商 }\left(\tfrac{i}{2}\right)^{n}=i^{n}2^{-n}\text{ と積 }(2K_1)^n=2^{n}K_1^n\text{ の両方へ適用し、スカラーを並べ替えた}\right) \\
 &= \begin{cases}
-i^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, e^{i\tilde\theta}\check{Z}_\mu & (n\text{ 奇数}) \\
+i^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 i^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad \left(\because 2^{-n}2^{n} = 2^{0} = 1\right) \\
 &= \begin{cases}
-i\,(-1)^{(n-1)/2}(-1)^{(n+1)/2}\,K_1^{n}\, e^{i\tilde\theta}\check{Z}_\mu & (n\text{ 奇数}) \\
+i\,(-1)^{(n-1)/2}(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because \text{補題 2}) \\
 &= \begin{cases}
-i\,(-1)^{n}\,K_1^{n}\, e^{i\tilde\theta}\check{Z}_\mu & (n\text{ 奇数}) \\
+i\,(-1)^{n}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 (-1)^{n}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad \left(\because \frac{n-1}{2}+\frac{n+1}{2} = n\right) \\
 &= \begin{cases}
--i\,K_1^{n}\, e^{i\tilde\theta}\check{Z}_\mu & (n\text{ 奇数}) \\
+-i\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because n \text{ 奇数なら } (-1)^{n} = -1,\ n \text{ 偶数なら } (-1)^{n} = 1)
@@ -1327,13 +1327,13 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
       displayMath(
         String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
 \underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
-= \cosh(K_1)\check{Z}_\mu + i e^{-i\tilde\theta}\sinh(K_1)\check{Y}_\mu`,
+= \cosh(K_1)\check{Z}_\mu + i \exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu`,
       ),
       paragraph(["(h1.y)"]),
       displayMath(
         String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
 \underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
-= -i e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu`,
+= -i \exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu`,
       ),
       paragraph(["(h2.z)"]),
       displayMath(
@@ -1372,17 +1372,17 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
 (\text{左辺})
 &= \frac{1}{0!}\check{Z}_\mu
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
-i\,K_1^{n}\,e^{-i\tilde\theta}\,\check{Y}_\mu & (n\text{ 奇数}) \\
+i\,K_1^{n}\,\exp(-i\tilde\theta)\,\check{Y}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because \text{展開係数への変換 (h1.z)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\check{Z}_\mu\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,e^{-i\tilde\theta}\,\check{Y}_\mu\right)
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,\exp(-i\tilde\theta)\,\check{Y}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
 &= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\check{Z}_\mu
-   + i\,e^{-i\tilde\theta}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\check{Y}_\mu
-   \quad (\because \check{Z}_\mu, \check{Y}_\mu, i e^{-i\tilde\theta} \text{ が } n \text{ に依らないので和の外へ出した}) \\
-&= \cosh(K_1)\check{Z}_\mu + i\,e^{-i\tilde\theta}\sinh(K_1)\check{Y}_\mu
+   + i\,\exp(-i\tilde\theta)\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\check{Y}_\mu
+   \quad (\because \check{Z}_\mu, \check{Y}_\mu, i \exp(-i\tilde\theta) \text{ が } n \text{ に依らないので和の外へ出した}) \\
+&= \cosh(K_1)\check{Z}_\mu + i\,\exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu
    \quad (\because \blkref{sinh_cosh_taylor_series})
 \end{aligned}`,
       ),
@@ -1400,7 +1400,7 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
         " 項を偶数側の和へ吸収した（以下の 3 式でも同様）。3 行目では ",
         math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
         " と ",
-        math(String.raw`i e^{-i\tilde\theta}`),
+        math(String.raw`i \exp(-i\tilde\theta)`),
         " が ",
         math(String.raw`n`),
         " に依らないので和の外へ出した。",
@@ -1415,19 +1415,19 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 (\text{左辺})
 &= \frac{1}{0!}\check{Y}_\mu
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
--i\,K_1^{n}\,e^{i\tilde\theta}\,\check{Z}_\mu & (n\text{ 奇数}) \\
+-i\,K_1^{n}\,\exp(i\tilde\theta)\,\check{Z}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because \text{展開係数への変換 (h1.y)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\check{Y}_\mu\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,e^{i\tilde\theta}\,\check{Z}_\mu\right)
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,\exp(i\tilde\theta)\,\check{Z}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
 &= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\check{Y}_\mu
-   - i\,e^{i\tilde\theta}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\check{Z}_\mu
-   \quad (\because \check{Z}_\mu, \check{Y}_\mu, -i e^{i\tilde\theta} \text{ が } n \text{ に依らないので和の外へ出した}) \\
-&= \cosh(K_1)\check{Y}_\mu - i\,e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu
+   - i\,\exp(i\tilde\theta)\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\check{Z}_\mu
+   \quad (\because \check{Z}_\mu, \check{Y}_\mu, -i \exp(i\tilde\theta) \text{ が } n \text{ に依らないので和の外へ出した}) \\
+&= \cosh(K_1)\check{Y}_\mu - i\,\exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu
    \quad (\because \blkref{sinh_cosh_taylor_series}) \\
-&= -i\,e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
+&= -i\,\exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
    \quad (\because \text{行列加法の可換則})
 \end{aligned}`,
       ),
@@ -1513,13 +1513,13 @@ i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
       displayMath(
         String.raw`\begin{aligned}
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)
-&= \cosh(K_1)\check{Z}_\mu + i e^{-i\tilde\theta}\sinh(K_1)\check{Y}_\mu
+&= \cosh(K_1)\check{Z}_\mu + i \exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu
 = \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-  \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix} \\
+  \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix} \\
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
-&= -i e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
+&= -i \exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
 = \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-  \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix} \\
+  \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix} \\
 T_{V_2}(\check{Z}_\mu)
 &= \cosh(2K_2^*)\check{Z}_\mu - i\sinh(2K_2^*)\check{Y}_\mu
 = \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
@@ -1571,7 +1571,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{i}{2}K_1H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
-&= \cosh(K_1)\check{Z}_\mu + i\,e^{-i\tilde\theta}\sinh(K_1)\check{Y}_\mu
+&= \cosh(K_1)\check{Z}_\mu + i\,\exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu
    \quad (\because \text{extract\_taylor\_coefficient\_of\_check\_Z\_Y (h1.z)})
 \end{aligned}`,
       ),
@@ -1599,7 +1599,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{i}{2}K_1H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
    \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
-&= -i\,e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
+&= -i\,\exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
    \quad (\because \text{extract\_taylor\_coefficient\_of\_check\_Z\_Y (h1.y)})
 \end{aligned}`,
       ),
@@ -1793,8 +1793,8 @@ T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(a\check Z_\mu+b\check Y_\mu\right)
       paragraph([math(String.raw`\theta \in \mathbb{R}`), " について、"]),
       displayMath(
         String.raw`B_1(\theta) := \begin{pmatrix}
-\cosh K_1 & -i e^{i\theta}\sinh K_1 \\
-i e^{-i\theta}\sinh K_1 & \cosh K_1
+\cosh K_1 & -i \exp(i\theta)\sinh K_1 \\
+i \exp(-i\theta)\sinh K_1 & \cosh K_1
 \end{pmatrix},
 \qquad
 B_2 := \begin{pmatrix}
@@ -1875,15 +1875,15 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right)
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
 &= \left(
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix},\ \
+   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix},\ \
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
    \right)
    \quad (\because \text{T\_actions\_on\_check\_Z\_Y を 2 列へ同時適用}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    \begin{pmatrix}
-   \cosh(K_1) & -i e^{i\tilde\theta}\sinh(K_1) \\
-   i e^{-i\tilde\theta}\sinh(K_1) & \cosh(K_1)
+   \cosh(K_1) & -i \exp(i\tilde\theta)\sinh(K_1) \\
+   i \exp(-i\tilde\theta)\sinh(K_1) & \cosh(K_1)
    \end{pmatrix}
    \quad (\because \text{statement の行ベクトルと行列の積の定義}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_1\!\left(\tilde\theta_\mu\right)
@@ -2002,13 +2002,13 @@ a^2 - b^2
 \end{aligned}`),
       paragraph([
         "を後で用いる。また複素指数の指数法則 ",
-        math(String.raw`e^{z}e^{w} = e^{z+w}`),
+        math(String.raw`\exp(z)\exp(w) = \exp(z+w)`),
         " としては ",
         ref("theorem_exp_product"),
         " を ",
         math(String.raw`n=1`),
         " に適用したものを使う。この記号で ",
-        math(String.raw`B_1(\theta) = \begin{pmatrix} a & -i e^{i\theta} b \\ i e^{-i\theta} b & a\end{pmatrix}`),
+        math(String.raw`B_1(\theta) = \begin{pmatrix} a & -i \exp(i\theta) b \\ i \exp(-i\theta) b & a\end{pmatrix}`),
         "、",
         math(String.raw`B_2 = \begin{pmatrix} C & i S \\ -i S & C\end{pmatrix}`),
         " である。",
@@ -2022,30 +2022,30 @@ a^2 - b^2
       ]),
       displayMath(String.raw`\begin{aligned}
 N_{11}
-&= C\cdot a + (iS)\cdot\left(i e^{-i\theta} b\right)
+&= C\cdot a + (iS)\cdot\left(i \exp(-i\theta) b\right)
 &&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&= Ca - S b\, e^{-i\theta}
+&= Ca - S b\, \exp(-i\theta)
 &&\bigl(\because\ i\cdot i=-1\text{ と複素数の四則}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 N_{12}
-&= C\cdot\left(-i e^{i\theta} b\right) + (iS)\cdot a
+&= C\cdot\left(-i \exp(i\theta) b\right) + (iS)\cdot a
 &&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&= i\left(Sa-Cb\,e^{i\theta}\right)
+&= i\left(Sa-Cb\,\exp(i\theta)\right)
 &&\bigl(\because\ \mathbb C\text{ の分配則と四則}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 N_{21}
-&=(-iS)\cdot a+C\cdot\left(i e^{-i\theta}b\right)
+&=(-iS)\cdot a+C\cdot\left(i \exp(-i\theta)b\right)
 &&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=i\left(Cb\,e^{-i\theta}-Sa\right)
+&=i\left(Cb\,\exp(-i\theta)-Sa\right)
 &&\bigl(\because\ \mathbb C\text{ の分配則と四則}\bigr)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 N_{22}
-&=(-iS)\cdot\left(-i e^{i\theta}b\right)+C\cdot a
+&=(-iS)\cdot\left(-i \exp(i\theta)b\right)+C\cdot a
 &&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=Ca-Sb\,e^{i\theta}
+&=Ca-Sb\,\exp(i\theta)
 &&\bigl(\because\ (-i)\cdot(-i)=-1\text{ と複素数の四則}\bigr)
 \end{aligned}`),
       paragraph([
@@ -2056,30 +2056,30 @@ N_{22}
       displayMath(
         String.raw`\begin{aligned}
 P_{11}
-&= a\, N_{11} + \left(-i e^{i\theta} b\right) N_{21}
+&= a\, N_{11} + \left(-i \exp(i\theta) b\right) N_{21}
    \quad (\because \text{mat\_mult}) \\
-&= a\left(Ca - S b\, e^{-i\theta}\right)
-   + \left(-i e^{i\theta} b\right)\cdot i\left(C b\, e^{-i\theta} - Sa\right)
+&= a\left(Ca - S b\, \exp(-i\theta)\right)
+   + \left(-i \exp(i\theta) b\right)\cdot i\left(C b\, \exp(-i\theta) - Sa\right)
    \quad (\because \text{Step 1 の } N_{11}, N_{21}) \\
-&= Ca^2 - S ab\, e^{-i\theta}
-   + e^{i\theta} b\left(C b\, e^{-i\theta} - Sa\right)
+&= Ca^2 - S ab\, \exp(-i\theta)
+   + \exp(i\theta) b\left(C b\, \exp(-i\theta) - Sa\right)
    \quad (\because -i\cdot i = 1) \\
-&= Ca^2 - S ab\, e^{-i\theta} + C b^2 - S ab\, e^{i\theta}
-   \quad (\because e^{i\theta}e^{-i\theta} = 1,\ \text{theorem\_exp\_product}\ (n=1)) \\
-&= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right) \\
-&= C\, c_1 - S ab\left(e^{i\theta} + e^{-i\theta}\right)
+&= Ca^2 - S ab\, \exp(-i\theta) + C b^2 - S ab\, \exp(i\theta)
+   \quad (\because \exp(i\theta)\exp(-i\theta) = 1,\ \text{theorem\_exp\_product}\ (n=1)) \\
+&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right) \\
+&= C\, c_1 - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
    \quad (\because \text{倍角公式 } a^2+b^2 = c_1) \\
-&= C\, c_1 - S\cdot\frac{s_1}{2}\left(e^{i\theta} + e^{-i\theta}\right)
+&= C\, c_1 - S\cdot\frac{s_1}{2}\left(\exp(i\theta) + \exp(-i\theta)\right)
    \quad (\because \text{倍角公式 } 2ab = s_1) \\
 &= C\, c_1 - S\cdot\frac{s_1}{2}\cdot 2\cos\theta
-   \quad (\because \text{euler\_formula\_cos\_sin より } e^{i\theta}+e^{-i\theta} = 2\cos\theta) \\
+   \quad (\because \text{euler\_formula\_cos\_sin より } \exp(i\theta)+\exp(-i\theta) = 2\cos\theta) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
    \quad (\because C := c_2^*,\ S := s_2^*)
 \end{aligned}`,
       ),
       paragraph([
         "（",
-        math(String.raw`e^{i\theta} + e^{-i\theta} = 2\cos\theta`),
+        math(String.raw`\exp(i\theta) + \exp(-i\theta) = 2\cos\theta`),
         " は ",
         ref("euler_formula_cos_sin"),
         " による。）これは ",
@@ -2092,16 +2092,16 @@ P_{11}
       displayMath(
         String.raw`\begin{aligned}
 P_{22}
-&= \left(i e^{-i\theta} b\right) N_{12} + a\, N_{22}
+&= \left(i \exp(-i\theta) b\right) N_{12} + a\, N_{22}
    \quad (\because \text{mat\_mult}) \\
-&= \left(i e^{-i\theta} b\right)\cdot i\left(Sa - C b\, e^{i\theta}\right)
-   + a\left(Ca - S b\, e^{i\theta}\right)
+&= \left(i \exp(-i\theta) b\right)\cdot i\left(Sa - C b\, \exp(i\theta)\right)
+   + a\left(Ca - S b\, \exp(i\theta)\right)
    \quad (\because \text{Step 1 の } N_{12}, N_{22}) \\
-&= -e^{-i\theta} b\left(Sa - C b\, e^{i\theta}\right) + Ca^2 - S ab\, e^{i\theta}
+&= -\exp(-i\theta) b\left(Sa - C b\, \exp(i\theta)\right) + Ca^2 - S ab\, \exp(i\theta)
    \quad (\because i\cdot i = -1) \\
-&= -S ab\, e^{-i\theta} + C b^2 + Ca^2 - S ab\, e^{i\theta}
-   \quad (\because e^{-i\theta}e^{i\theta} = 1,\ \text{theorem\_exp\_product}\ (n=1)) \\
-&= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right) \\
+&= -S ab\, \exp(-i\theta) + C b^2 + Ca^2 - S ab\, \exp(i\theta)
+   \quad (\because \exp(-i\theta)\exp(i\theta) = 1,\ \text{theorem\_exp\_product}\ (n=1)) \\
+&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
    \quad (\because P_{11} \text{ の計算の最後の 4 段と同じ})
 \end{aligned}`,
@@ -2118,15 +2118,15 @@ P_{22}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-a^2 + b^2 e^{2i\theta}
-&= e^{i\theta}\left(a^2 e^{-i\theta} + b^2 e^{i\theta}\right)
+a^2 + b^2 \exp(2i\theta)
+&= \exp(i\theta)\left(a^2 \exp(-i\theta) + b^2 \exp(i\theta)\right)
    \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
-&= e^{i\theta}\left(a^2(\cos\theta - i\sin\theta) + b^2(\cos\theta + i\sin\theta)\right)
+&= \exp(i\theta)\left(a^2(\cos\theta - i\sin\theta) + b^2(\cos\theta + i\sin\theta)\right)
    \quad (\because \text{euler\_formula\_cos\_sin を 2 箇所へ同時適用}) \\
-&= e^{i\theta}\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right) \\
-&= e^{i\theta}\left(c_1\cos\theta - i\left(a^2-b^2\right)\sin\theta\right)
+&= \exp(i\theta)\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right) \\
+&= \exp(i\theta)\left(c_1\cos\theta - i\left(a^2-b^2\right)\sin\theta\right)
    \quad (\because \text{倍角公式 } a^2+b^2 = c_1) \\
-&= e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right)
+&= \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right)
    \quad (\because a^2-b^2 = 1)
 \end{aligned}`,
       ),
@@ -2144,24 +2144,24 @@ a^2 + b^2 e^{2i\theta}
       displayMath(
         String.raw`\begin{aligned}
 P_{12}
-&= a\, N_{12} + \left(-i e^{i\theta} b\right) N_{22}
+&= a\, N_{12} + \left(-i \exp(i\theta) b\right) N_{22}
    \quad (\because \text{mat\_mult}) \\
-&= a\cdot i\left(Sa - C b\, e^{i\theta}\right)
-   + \left(-i e^{i\theta} b\right)\left(Ca - S b\, e^{i\theta}\right)
+&= a\cdot i\left(Sa - C b\, \exp(i\theta)\right)
+   + \left(-i \exp(i\theta) b\right)\left(Ca - S b\, \exp(i\theta)\right)
    \quad (\because \text{Step 1 の } N_{12}, N_{22}) \\
-&= i\left[S a^2 - C ab\, e^{i\theta}\right]
-   + i\left[-C ab\, e^{i\theta} + S b^2 e^{2i\theta}\right]
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)\ (e^{i\theta}e^{i\theta} = e^{2i\theta})) \\
-&= i\left[S\left(a^2 + b^2 e^{2i\theta}\right) - 2C ab\, e^{i\theta}\right] \\
-&= i\left[S\, e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right) - 2C ab\, e^{i\theta}\right]
+&= i\left[S a^2 - C ab\, \exp(i\theta)\right]
+   + i\left[-C ab\, \exp(i\theta) + S b^2 \exp(2i\theta)\right]
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)\ (\exp(i\theta)\exp(i\theta) = \exp(2i\theta))) \\
+&= i\left[S\left(a^2 + b^2 \exp(2i\theta)\right) - 2C ab\, \exp(i\theta)\right] \\
+&= i\left[S\, \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right) - 2C ab\, \exp(i\theta)\right]
    \quad (\because \text{準備の補助的な等式}) \\
-&= i\left[S\, e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right) - C s_1 e^{i\theta}\right]
+&= i\left[S\, \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right) - C s_1 \exp(i\theta)\right]
    \quad (\because \text{倍角公式 } 2ab = s_1) \\
-&= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
+&= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
    \quad (\because C := c_2^*,\ S := s_2^*) \\
-&= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
+&= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
    \quad (\because \text{duality\_c2\_star\_eq\_s2\_star\_c2}:\ c_2^* = s_2^* c_2) \\
-&= i e^{i\theta} s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
+&= i \exp(i\theta) s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2177,15 +2177,15 @@ P_{12}
       displayMath(
         String.raw`\begin{aligned}
 P_{21}
-&= \left(i e^{-i\theta} b\right) N_{11} + a\, N_{21}
+&= \left(i \exp(-i\theta) b\right) N_{11} + a\, N_{21}
    \quad (\because \text{mat\_mult}) \\
-&= \left(i e^{-i\theta} b\right)\left(Ca - S b\, e^{-i\theta}\right)
-   + a\cdot i\left(C b\, e^{-i\theta} - Sa\right)
+&= \left(i \exp(-i\theta) b\right)\left(Ca - S b\, \exp(-i\theta)\right)
+   + a\cdot i\left(C b\, \exp(-i\theta) - Sa\right)
    \quad (\because \text{Step 1 の } N_{11}, N_{21}) \\
-&= i\left[C ab\, e^{-i\theta} - S b^2 e^{-2i\theta}\right]
-   + i\left[C ab\, e^{-i\theta} - S a^2\right]
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)\ (e^{-i\theta}e^{-i\theta} = e^{-2i\theta})) \\
-&= -i\left[S\left(a^2 + b^2 e^{-2i\theta}\right) - 2C ab\, e^{-i\theta}\right]
+&= i\left[C ab\, \exp(-i\theta) - S b^2 \exp(-2i\theta)\right]
+   + i\left[C ab\, \exp(-i\theta) - S a^2\right]
+   \quad (\because \text{theorem\_exp\_product}\ (n=1)\ (\exp(-i\theta)\exp(-i\theta) = \exp(-2i\theta))) \\
+&= -i\left[S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)\right]
 \end{aligned}`,
       ),
       paragraph([
@@ -2193,15 +2193,15 @@ P_{21}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-a^2 + b^2 e^{-2i\theta}
-&= e^{-i\theta}\left(a^2 e^{i\theta} + b^2 e^{-i\theta}\right)
+a^2 + b^2 \exp(-2i\theta)
+&= \exp(-i\theta)\left(a^2 \exp(i\theta) + b^2 \exp(-i\theta)\right)
    \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
-&= e^{-i\theta}\left(a^2(\cos\theta + i\sin\theta) + b^2(\cos\theta - i\sin\theta)\right)
+&= \exp(-i\theta)\left(a^2(\cos\theta + i\sin\theta) + b^2(\cos\theta - i\sin\theta)\right)
    \quad (\because \text{euler\_formula\_cos\_sin を 2 箇所へ同時適用}) \\
-&= e^{-i\theta}\left(\left(a^2 + b^2\right)\cos\theta + i\left(a^2 - b^2\right)\sin\theta\right) \\
-&= e^{-i\theta}\left(c_1\cos\theta + i\left(a^2-b^2\right)\sin\theta\right)
+&= \exp(-i\theta)\left(\left(a^2 + b^2\right)\cos\theta + i\left(a^2 - b^2\right)\sin\theta\right) \\
+&= \exp(-i\theta)\left(c_1\cos\theta + i\left(a^2-b^2\right)\sin\theta\right)
    \quad (\because \text{倍角公式 } a^2+b^2 = c_1) \\
-&= e^{-i\theta}\left(c_1\cos\theta + i\sin\theta\right)
+&= \exp(-i\theta)\left(c_1\cos\theta + i\sin\theta\right)
    \quad (\because a^2-b^2 = 1)
 \end{aligned}`,
       ),
@@ -2221,17 +2221,17 @@ a^2 + b^2 e^{-2i\theta}
       displayMath(
         String.raw`\begin{aligned}
 P_{21}
-&= -i\left[S\left(a^2 + b^2 e^{-2i\theta}\right) - 2C ab\, e^{-i\theta}\right]
+&= -i\left[S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)\right]
    \quad (\because \text{直前の } P_{21} \text{ の表示}) \\
-&= -i\left[S\, e^{-i\theta}\left(c_1\cos\theta + i\sin\theta\right) - 2C ab\, e^{-i\theta}\right]
+&= -i\left[S\, \exp(-i\theta)\left(c_1\cos\theta + i\sin\theta\right) - 2C ab\, \exp(-i\theta)\right]
    \quad (\because \text{準備の補助的な等式}) \\
-&= -i\left[S\, e^{-i\theta}\left(c_1\cos\theta + i\sin\theta\right) - C s_1 e^{-i\theta}\right]
+&= -i\left[S\, \exp(-i\theta)\left(c_1\cos\theta + i\sin\theta\right) - C s_1 \exp(-i\theta)\right]
    \quad (\because \text{倍角公式 } 2ab = s_1) \\
-&= -i e^{-i\theta}\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - c_2^*\, s_1\right]
+&= -i \exp(-i\theta)\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - c_2^*\, s_1\right]
    \quad (\because C := c_2^*,\ S := s_2^*) \\
-&= -i e^{-i\theta}\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - s_2^* c_2\, s_1\right]
+&= -i \exp(-i\theta)\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - s_2^* c_2\, s_1\right]
    \quad (\because \text{duality\_c2\_star\_eq\_s2\_star\_c2}:\ c_2^* = s_2^* c_2) \\
-&= -i e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
+&= -i \exp(-i\theta) s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2325,23 +2325,23 @@ T_{(V^{(+)})}(\check{Z}_\mu)
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)\right)\right)
    \quad (\because \text{def\_T\_V\_plus}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
-   \cosh(K_1)\check{Z}_\mu + i e^{-i\tilde\theta}\sinh(K_1)\check{Y}_\mu\right)\right)
+   \cosh(K_1)\check{Z}_\mu + i \exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu\right)\right)
    \quad (\because \text{T\_actions\_on\_check\_Z\_Y}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix}\right)
+   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}\right)
    \quad (\because \blkref{linearity_of_T_V2}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix}\right)
+   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}\right)
    \quad (\because \text{calc\_of\_TxT\_check\_Z\_Y}) \\
 &= \left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) B_2
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix}
+   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}
    \quad (\because \blkref{linearity_of_T_on_check_Z_Y}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    B_1(\tilde\theta)\, B_2
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\tilde\theta}\sinh(K_1)\end{pmatrix}
+   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}
    \quad (\because \text{calc\_of\_TxT\_check\_Z\_Y})
 \end{aligned}`,
       ),
@@ -2368,23 +2368,23 @@ T_{(V^{(+)})}(\check{Y}_\mu)
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right)\right)
    \quad (\because \text{def\_T\_V\_plus}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
-   -i e^{i\tilde\theta}\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu\right)\right)
+   -i \exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu\right)\right)
    \quad (\because \text{T\_actions\_on\_check\_Z\_Y}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
-   \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
+   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
    \quad (\because \blkref{linearity_of_T_V2}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
-   \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
+   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
    \quad (\because \text{calc\_of\_TxT\_check\_Z\_Y}) \\
 &= \left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) B_2
-   \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
    \quad (\because \blkref{linearity_of_T_on_check_Z_Y}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    B_1(\tilde\theta)\, B_2
-   \begin{pmatrix}-i e^{i\tilde\theta}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
    \quad (\because \text{calc\_of\_TxT\_check\_Z\_Y})
 \end{aligned}`,
       ),
