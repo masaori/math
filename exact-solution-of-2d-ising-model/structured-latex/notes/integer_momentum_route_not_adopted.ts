@@ -4945,14 +4945,15 @@ n_\mu n_\nu
       NOT_ADOPTED,
       paragraph(["（もと content/009_eigenvalues_of_V.ts の主張ブロック eigenvalues_of_V_008_claim_joint_eigenspace_decomposition。labels: joint_eigenspace_decomposition。以下は本文にあったときの内容のまま。）"]),
       paragraph([math(String.raw`\epsilon = (\epsilon_\mu)_{\mu \in \mathcal{I}} \in \{0,1\}^{\mathcal{I}}`), " に対して"]),
-      displayMath(String.raw`Q_\epsilon := \prod_{\mu \in \mathcal{I}}
-\Bigl(\epsilon_\mu\, n_\mu + (1 - \epsilon_\mu)\,(I - n_\mu)\Bigr)
+      displayMath(String.raw`Q_\epsilon := \prod_{\mu \in \mathcal{I}} R_\mu^{(\epsilon_\mu)}
 \in \mathrm{Mat}(2^M,\mathbb{C})`),
-      paragraph(["と定める（因子は ", "〔number_operators_commute〕", " により互いに可換なので、積の順序は問わない）。このとき、"]),
+      paragraph(["と定める。ここで ", math(String.raw`R_\mu^{(1)} = n_\mu`), "、", math(String.raw`R_\mu^{(0)} = I - n_\mu`), " は ", "〔trace_of_number_operator_product〕", " の記号であり、因子は ", "〔number_operators_commute〕", " により互いに可換なので、積の順序は問わない。"]),
+      paragraph([math(String.raw`Q_\epsilon`), " は、恒等式"]),
+      displayMath(String.raw`I = \prod_{\mu \in \mathcal{I}}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)`),
+      paragraph(["の右辺を分配法則で展開したときに現れる項のうち、各 ", math(String.raw`\mu \in \mathcal{I}`), " について因子 ", math(String.raw`R_\mu^{(\epsilon_\mu)}`), " を選んで作られる項である。", math(String.raw`\epsilon_\mu = 1`), " は ", math(String.raw`n_\mu`), " が ", math(String.raw`1`), " として働く側を、", math(String.raw`\epsilon_\mu = 0`), " は ", math(String.raw`0`), " として働く側を選ぶことに当たる（下の (3)）。このとき、"]),
       list([[math(String.raw`\text{(1)}\quad Q_\epsilon Q_{\epsilon'} = 0 \quad (\epsilon \neq \epsilon'), \qquad Q_\epsilon^2 = Q_\epsilon`)], [math(String.raw`\text{(2)}\quad \sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} Q_\epsilon = I`)], [math(String.raw`\text{(3)}\quad n_\nu Q_\epsilon = \epsilon_\nu Q_\epsilon \quad (\nu \in \mathcal{I})`)], [math(String.raw`\text{(4)}\quad \mathrm{tr}(Q_\epsilon) = 2^{M-m}, \qquad \dim_{\mathbb{C}} \mathrm{im}\,Q_\epsilon = 2^{M-m}`)], [math(String.raw`\text{(5)}\quad \mathbb{C}^{2^M} = \bigoplus_{\epsilon \in \{0,1\}^{\mathcal{I}}} \mathrm{im}\,Q_\epsilon`)]]),
       paragraph(["が成り立つ。とくに ", math(String.raw`m = M`), "（臨界点でない場合）には各 ", math(String.raw`\mathrm{im}\,Q_\epsilon`), " は 1 次元である。"]),
       paragraph(["証明."]),
-      paragraph(["以下、", math(String.raw`\mu \in \mathcal{I}`), " と ", math(String.raw`e \in \{0,1\}`), " に対して ", math(String.raw`R_\mu^{(1)} := n_\mu`), "、", math(String.raw`R_\mu^{(0)} := I - n_\mu`), " と書く。", math(String.raw`Q_\epsilon = \prod_{\mu \in \mathcal{I}} R_\mu^{(\epsilon_\mu)}`), " である。"]),
       paragraph(["Step 0（1 つの添字についての関係）。", "〔number_operator_idempotent〕", " (3) の ", math(String.raw`n_\mu^2 = n_\mu`), " より"]),
       displayMath(String.raw`\begin{aligned}
 R_\mu^{(1)}R_\mu^{(1)}
@@ -5162,9 +5163,9 @@ y_\epsilon, & \epsilon=\epsilon'
       displayMath(String.raw`g(\epsilon) := \sum_{\mu \in \mathcal{I}} \gamma(\theta_\mu)
 \left(\epsilon_\mu - \tfrac{1}{2}\right) \in \mathbb{R}`),
       paragraph(["とおく。このとき"]),
-      displayMath(String.raw`V' Q_\epsilon = e^{g(\epsilon)} Q_\epsilon`),
-      paragraph(["が成り立つ。すなわち ", math(String.raw`\mathrm{im}\,Q_\epsilon`), " の各元は ", math(String.raw`V'`), " の固有値 ", math(String.raw`e^{g(\epsilon)}`), " の固有ベクトルであり、", "〔joint_eigenspace_decomposition〕", " (5) より ", math(String.raw`V'`), " は対角化可能で、その固有値は重複度を込めて"]),
-      displayMath(String.raw`\left\{\,e^{g(\epsilon)} \ \text{（重複度 } 2^{M-m}\text{）} \ \middle|\ \epsilon \in \{0,1\}^{\mathcal{I}}\,\right\}`),
+      displayMath(String.raw`V' Q_\epsilon = \exp(g(\epsilon)) Q_\epsilon`),
+      paragraph(["が成り立つ。すなわち ", math(String.raw`\mathrm{im}\,Q_\epsilon`), " の各元は ", math(String.raw`V'`), " の固有値 ", math(String.raw`\exp(g(\epsilon))`), " の固有ベクトルであり、", "〔joint_eigenspace_decomposition〕", " (5) より ", math(String.raw`V'`), " は対角化可能で、その固有値は重複度を込めて"]),
+      displayMath(String.raw`\left\{\,\exp(g(\epsilon)) \ \text{（重複度 } 2^{M-m}\text{）} \ \middle|\ \epsilon \in \{0,1\}^{\mathcal{I}}\,\right\}`),
       paragraph(["で尽くされる（個数は重複度を込めて ", math(String.raw`2^m\cdot 2^{M-m} = 2^M`), "）。とくに ", math(String.raw`V'`), " の固有値はすべて正の実数である。"]),
       paragraph(["証明."]),
       paragraph(["Step 1（", math(String.raw`X Q_\epsilon = g(\epsilon) Q_\epsilon`), "）。", "〔def_number_operator〕", " の ", math(String.raw`X = \sum_{\mu\in\mathcal{I}}\gamma(\theta_\mu)(n_\mu - \tfrac12 I)`), " に ", "〔joint_eigenspace_decomposition〕", " (3) を代入して"]),
@@ -5203,8 +5204,8 @@ E_K Q_\epsilon
 &= \left(\sum_{k=0}^{K}\frac{g(\epsilon)^k}{k!}\right) Q_\epsilon
    \quad (\because \text{有限和の線型性で } Q_\epsilon \text{ を右へくくり出す})
 \end{aligned}`),
-      paragraph([math(String.raw`K \to \infty`), " とすると、左辺は ", ref("matrix_multiplication_continuity"), " より ", math(String.raw`\exp(X) Q_\epsilon = V' Q_\epsilon`), " に収束し、右辺は ", ref("real_exp_series_converges"), " より ", math(String.raw`e^{g(\epsilon)}Q_\epsilon`), " に収束する。極限の一意性より"]),
-      displayMath(String.raw`V' Q_\epsilon = e^{g(\epsilon)} Q_\epsilon`),
+      paragraph([math(String.raw`K \to \infty`), " とすると、左辺は ", ref("matrix_multiplication_continuity"), " より ", math(String.raw`\exp(X) Q_\epsilon = V' Q_\epsilon`), " に収束し、右辺は ", ref("real_exp_is_limit_of_partial_sums"), " より ", math(String.raw`\exp(g(\epsilon))Q_\epsilon`), " に収束する。極限の一意性より"]),
+      displayMath(String.raw`V' Q_\epsilon = \exp(g(\epsilon)) Q_\epsilon`),
       paragraph(["Step 4（固有値の言い換え）。", math(String.raw`y \in \mathrm{im}\,Q_\epsilon`), " なら ", math(String.raw`y = Q_\epsilon x`), " と書けて、", "〔joint_eigenspace_decomposition〕", " (1) より"]),
       displayMath(String.raw`\begin{aligned}
 Q_\epsilon y
@@ -5220,13 +5221,13 @@ Q_\epsilon y
 V' y
 &= V' Q_\epsilon y
    \quad (\because \text{上の } Q_\epsilon y = y) \\
-&= e^{g(\epsilon)} Q_\epsilon y
-   \quad (\because \text{Step 3 の } V' Q_\epsilon = e^{g(\epsilon)} Q_\epsilon) \\
-&= e^{g(\epsilon)} y
+&= \exp(g(\epsilon)) Q_\epsilon y
+   \quad (\because \text{Step 3 の } V' Q_\epsilon = \exp(g(\epsilon)) Q_\epsilon) \\
+&= \exp(g(\epsilon)) y
    \quad (\because \text{上の } Q_\epsilon y = y)
 \end{aligned}`),
-      paragraph(["〔joint_eigenspace_decomposition〕", " (5) より ", math(String.raw`\mathbb{C}^{2^M}`), " は ", math(String.raw`\mathrm{im}\,Q_\epsilon`), " たちの直和だから、各 ", math(String.raw`\mathrm{im}\,Q_\epsilon`), " の基底を合わせると ", math(String.raw`V'`), " の固有ベクトルからなる ", math(String.raw`\mathbb{C}^{2^M}`), " の基底が得られる。したがって ", math(String.raw`V'`), " は対角化可能で、固有値は ", math(String.raw`e^{g(\epsilon)}`), " が重複度 ", math(String.raw`\dim \mathrm{im}\,Q_\epsilon = 2^{M-m}`), " で現れるもので尽くされる。"]),
-      paragraph([math(String.raw`g(\epsilon) \in \mathbb{R}`), "（", "〔def_gamma_theta_mu〕", " より ", math(String.raw`\gamma(\theta_\mu) \in \mathbb{R}_{\geq 0}`), "）なので ", math(String.raw`e^{g(\epsilon)} > 0`), " である。"]),
+      paragraph(["〔joint_eigenspace_decomposition〕", " (5) より ", math(String.raw`\mathbb{C}^{2^M}`), " は ", math(String.raw`\mathrm{im}\,Q_\epsilon`), " たちの直和だから、各 ", math(String.raw`\mathrm{im}\,Q_\epsilon`), " の基底を合わせると ", math(String.raw`V'`), " の固有ベクトルからなる ", math(String.raw`\mathbb{C}^{2^M}`), " の基底が得られる。したがって ", math(String.raw`V'`), " は対角化可能で、固有値は ", math(String.raw`\exp(g(\epsilon))`), " が重複度 ", math(String.raw`\dim \mathrm{im}\,Q_\epsilon = 2^{M-m}`), " で現れるもので尽くされる。"]),
+      paragraph([math(String.raw`g(\epsilon) \in \mathbb{R}`), "（", "〔def_gamma_theta_mu〕", " より ", math(String.raw`\gamma(\theta_\mu) \in \mathbb{R}_{\geq 0}`), "）なので ", math(String.raw`\exp(g(\epsilon)) > 0`), "（", ref("real_exp_positive"), "）である。"]),
     ],
   },
   {
@@ -5270,24 +5271,24 @@ V' y
    \quad (\because \textstyle\sum_\epsilon Q_\epsilon = I) \\
 &= \sum_{\epsilon} \mathrm{tr}\!\left(V' Q_\epsilon\right)
    \quad (\because \text{トレースの線型性}) \\
-&= \sum_{\epsilon} e^{g(\epsilon)}\,\mathrm{tr}(Q_\epsilon)
-   \quad (\because V'Q_\epsilon = e^{g(\epsilon)}Q_\epsilon) \\
-&= 2^{M-m}\sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} e^{g(\epsilon)}
+&= \sum_{\epsilon} \exp(g(\epsilon))\,\mathrm{tr}(Q_\epsilon)
+   \quad (\because V'Q_\epsilon = \exp(g(\epsilon))Q_\epsilon) \\
+&= 2^{M-m}\sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} \exp(g(\epsilon))
    \quad (\because \mathrm{tr}(Q_\epsilon) = 2^{M-m})
 \end{aligned}`),
-      paragraph(["Step 3（積への分解）。", math(String.raw`g(\epsilon) = \sum_{\mu}\gamma(\theta_\mu)(\epsilon_\mu - \tfrac12)`), " なので、実数の指数法則より"]),
-      displayMath(String.raw`e^{g(\epsilon)} = \prod_{\mu \in \mathcal{I}}
+      paragraph(["Step 3（積への分解）。", math(String.raw`g(\epsilon) = \sum_{\mu}\gamma(\theta_\mu)(\epsilon_\mu - \tfrac12)`), " なので、", ref("real_exp_product"), " を繰り返し適用して"]),
+      displayMath(String.raw`\exp(g(\epsilon)) = \prod_{\mu \in \mathcal{I}}
 \exp\!\left(\gamma(\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\right)
-\quad (\because \text{実数の指数法則})`),
+\quad (\because \text{実数の exp の積公式を有限回適用。}\blkref{real_exp_product})`),
       paragraph([math(String.raw`\epsilon`), " は各成分を独立に ", math(String.raw`0`), " か ", math(String.raw`1`), " から選ぶので、有限個の因子の積の展開（Step 2 の ", math(String.raw`\sum_\epsilon`), " と同じ 1 対 1 対応）により"]),
       displayMath(String.raw`\begin{aligned}
-\sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} e^{g(\epsilon)}
+\sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} \exp(g(\epsilon))
 &= \prod_{\mu \in \mathcal{I}}
    \left(\exp\!\left(-\tfrac{\gamma(\theta_\mu)}{2}\right)
    + \exp\!\left(+\tfrac{\gamma(\theta_\mu)}{2}\right)\right)
    \quad \left(\because \text{各 }\epsilon_\mu\in\{0,1\}\text{ の独立な選択による有限積の展開}\right) \\
 &= \prod_{\mu \in \mathcal{I}} 2\cosh\!\left(\frac{\gamma(\theta_\mu)}{2}\right)
-   \quad \left(\because \cosh x = \frac{e^x + e^{-x}}{2}\right)
+   \quad \left(\because \cosh x = \frac{\exp(x) + \exp(-x)}{2}\ \blkref{def_cosh_sinh}\right)
 \end{aligned}`),
       paragraph(["Step 4（", math(String.raw`V'^{-1}`), " についても同じ値）。", math(String.raw`V'^{-1} = \exp(-X)`), " であり、", math(String.raw`-X = \sum_\mu(-\gamma(\theta_\mu))(n_\mu - \tfrac12 I)`), " だから、Step 1〜3 をそのまま ", math(String.raw`\gamma(\theta_\mu) \to -\gamma(\theta_\mu)`), " として適用でき"]),
       displayMath(String.raw`\begin{aligned}
@@ -5575,19 +5576,19 @@ B
 \exp\!\left(-\frac{1}{2}\sum_{\mu \in \mathcal{I}} \gamma(\theta_\mu)\right)`),
       paragraph(["（したがって ", math(String.raw`\Lambda_{\max}\Lambda_{\min} = (2\sinh 2K_2)^{M} = c^2`), "。）"]),
       paragraph(["証明."]),
-      paragraph(["(1) ", "〔constant_c_value〕", " より ", math(String.raw`V = (2s_2)^{M/2}V'`), " であり、", "〔eigenvalues_of_Vprime〕", " より ", math(String.raw`V'Q_\epsilon = e^{g(\epsilon)}Q_\epsilon`), " だから"]),
+      paragraph(["(1) ", "〔constant_c_value〕", " より ", math(String.raw`V = (2s_2)^{M/2}V'`), " であり、", "〔eigenvalues_of_Vprime〕", " より ", math(String.raw`V'Q_\epsilon = \exp(g(\epsilon))Q_\epsilon`), " だから"]),
       displayMath(String.raw`\begin{aligned}
 V Q_\epsilon
 &= (2s_2)^{M/2}V'Q_\epsilon
    \quad (\because V=(2s_2)^{M/2}V') \\
-&= (2s_2)^{M/2}e^{g(\epsilon)}Q_\epsilon
-   \quad (\because V'Q_\epsilon=e^{g(\epsilon)}Q_\epsilon) \\
+&= (2s_2)^{M/2}\exp(g(\epsilon))Q_\epsilon
+   \quad (\because V'Q_\epsilon=\exp(g(\epsilon))Q_\epsilon) \\
 &= \Lambda_\epsilon Q_\epsilon
    \quad (\because \Lambda_\epsilon\ \text{の定義})
 \end{aligned}`),
       paragraph(["対角化可能性・重複度・総個数は ", "〔eigenvalues_of_Vprime〕", " の Step 4 と同じ議論（", "〔joint_eigenspace_decomposition〕", " (5) による直和分解）で得られる。スカラー倍は固有ベクトルを変えない。"]),
-      paragraph(["(2) ", math(String.raw`(2s_2)^{M/2} > 0`), " と ", math(String.raw`e^{g(\epsilon)} > 0`), " より ", math(String.raw`\Lambda_\epsilon > 0`), "。"]),
-      paragraph(["大小の比較。", math(String.raw`\Lambda_\epsilon = (2s_2)^{M/2}e^{g(\epsilon)}`), " で ", math(String.raw`(2s_2)^{M/2}`), " は ", math(String.raw`\epsilon`), " に依らない正の定数、", math(String.raw`t \mapsto e^t`), " は実数上の狭義単調増加関数なので、", math(String.raw`\Lambda_\epsilon`), " の大小は ", math(String.raw`g(\epsilon) = \sum_{\mu}\gamma(\theta_\mu)(\epsilon_\mu - \tfrac12)`), " の大小と一致する。", "〔def_gamma_theta_mu〕", " より ", math(String.raw`\gamma(\theta_\mu) \geq 0`), " なので、各項 ", math(String.raw`\gamma(\theta_\mu)(\epsilon_\mu - \tfrac12)`), " は ", math(String.raw`\epsilon_\mu = 1`), " のとき ", math(String.raw`+\tfrac12\gamma(\theta_\mu)`), "、", math(String.raw`\epsilon_\mu = 0`), " のとき ", math(String.raw`-\tfrac12\gamma(\theta_\mu)`), " であり、前者が後者以上である。各項は独立に選べるので、和が最大になるのは全ての ", math(String.raw`\epsilon_\mu = 1`), "、最小になるのは全ての ", math(String.raw`\epsilon_\mu = 0`), " のときである。それぞれ"]),
+      paragraph(["(2) ", math(String.raw`(2s_2)^{M/2} > 0`), " と ", math(String.raw`\exp(g(\epsilon)) > 0`), "（", ref("real_exp_positive"), "）より ", math(String.raw`\Lambda_\epsilon > 0`), "。"]),
+      paragraph(["大小の比較。", math(String.raw`\Lambda_\epsilon = (2s_2)^{M/2}\exp(g(\epsilon))`), " で ", math(String.raw`(2s_2)^{M/2}`), " は ", math(String.raw`\epsilon`), " に依らない正の定数、", math(String.raw`t \mapsto \exp(t)`), " は実数上の狭義単調増加関数（", ref("real_exp_strictly_increasing"), "）なので、", math(String.raw`\Lambda_\epsilon`), " の大小は ", math(String.raw`g(\epsilon) = \sum_{\mu}\gamma(\theta_\mu)(\epsilon_\mu - \tfrac12)`), " の大小と一致する。", "〔def_gamma_theta_mu〕", " より ", math(String.raw`\gamma(\theta_\mu) \geq 0`), " なので、各項 ", math(String.raw`\gamma(\theta_\mu)(\epsilon_\mu - \tfrac12)`), " は ", math(String.raw`\epsilon_\mu = 1`), " のとき ", math(String.raw`+\tfrac12\gamma(\theta_\mu)`), "、", math(String.raw`\epsilon_\mu = 0`), " のとき ", math(String.raw`-\tfrac12\gamma(\theta_\mu)`), " であり、前者が後者以上である。各項は独立に選べるので、和が最大になるのは全ての ", math(String.raw`\epsilon_\mu = 1`), "、最小になるのは全ての ", math(String.raw`\epsilon_\mu = 0`), " のときである。それぞれ"]),
       displayMath(String.raw`\begin{aligned}
 g(1,\dots,1)
 &= \sum_{\mu \in \mathcal{I}}\gamma(\theta_\mu)\left(1 - \tfrac12\right)
@@ -5609,19 +5610,19 @@ g(0,\dots,0)
       paragraph(["を代入して statement の ", math(String.raw`\Lambda_{\max}, \Lambda_{\min}`), " を得る。積は次の鎖で求まる。"]),
       displayMath(String.raw`\begin{aligned}
 \Lambda_{\max}\Lambda_{\min}
-&= (2s_2)^{M/2}e^{g(1,\dots,1)}\,(2s_2)^{M/2}e^{g(0,\dots,0)}
+&= (2s_2)^{M/2}\exp(g(1,\dots,1))\,(2s_2)^{M/2}\exp(g(0,\dots,0))
    \quad (\because \Lambda_{\max},\Lambda_{\min}\ \text{の表式}) \\
 &= \left((2s_2)^{M/2}(2s_2)^{M/2}\right)
-   \left(e^{g(1,\dots,1)}e^{g(0,\dots,0)}\right)
+   \left(\exp(g(1,\dots,1))\exp(g(0,\dots,0))\right)
    \quad (\because \text{積の可換則と結合則}) \\
-&= (2s_2)^{M}\left(e^{g(1,\dots,1)}e^{g(0,\dots,0)}\right)
+&= (2s_2)^{M}\left(\exp(g(1,\dots,1))\exp(g(0,\dots,0))\right)
    \quad (\because \text{冪の法則}) \\
-&= (2s_2)^{M}e^{g(1,\dots,1)+g(0,\dots,0)}
-   \quad (\because \text{指数法則}) \\
-&= (2s_2)^{M}e^{0}
+&= (2s_2)^{M}\exp(g(1,\dots,1)+g(0,\dots,0))
+   \quad (\because \text{実数の exp の積公式。}\blkref{real_exp_product}) \\
+&= (2s_2)^{M}\exp(0)
    \quad (\because g(1,\dots,1)+g(0,\dots,0)=0) \\
 &= (2s_2)^{M}
-   \quad (\because e^0=1)
+   \quad (\because \exp(0)=1\ \blkref{real_exp_zero})
 \end{aligned}`),
     ],
   },

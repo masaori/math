@@ -1476,4 +1476,403 @@ S_NT_N
       ],
     },
   },
+  {
+    id: "exp_linear_map_005_definition_one_by_one_matrix_of_real",
+    kind: "definition",
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 5 },
+    title: { text: "実数を成分とする 1 行 1 列の行列" },
+    labels: ["def_one_by_one_matrix_of_real"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " に対して、ただ 1 つの成分が ",
+        math(String.raw`x`),
+        " である 1 行 1 列の行列を",
+      ]),
+      displayMath(String.raw`[x] \in \mathrm{Mat}(1,\mathbb{R}), \qquad [x]_{11} := x`),
+      paragraph([
+        "と書く。これにより写像 ",
+        math(String.raw`[\,\cdot\,] : \mathbb{R} \to \mathrm{Mat}(1,\mathbb{R})`),
+        " が定まる。",
+        math(String.raw`\mathrm{Mat}(1,\mathbb{R})`),
+        " の元 ",
+        math(String.raw`A`),
+        " は成分 ",
+        math(String.raw`A_{11}`),
+        " だけで決まるので、",
+        math(String.raw`A = [A_{11}]`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "実数の exp（labels: def_real_exp）を行列の exp（labels: def_exp）から定義するために置いた。実数と 1 行 1 列の行列を同一視せず、行き来をこの写像と成分の取り出し A ↦ A_11 の 2 本に限る。",
+      ],
+    },
+  },
+  {
+    id: "exp_linear_map_006_definition_real_exp",
+    kind: "definition",
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 6 },
+    title: { text: "実数の exp" },
+    labels: ["def_real_exp"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\exp(x) := \bigl(\exp([x])\bigr)_{11} \in \mathbb{R}`),
+      paragraph([
+        "と定める。右辺の ",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " (1) の行列の exp を ",
+        math(String.raw`K = \mathbb{R}`),
+        "、",
+        math(String.raw`n = 1`),
+        " で ",
+        ref("def_one_by_one_matrix_of_real"),
+        " の ",
+        math(String.raw`[x]`),
+        " に適用したものであり、",
+        math(String.raw`\exp([x]) \in \mathrm{Mat}(1,\mathbb{R})`),
+        " だからその成分は実数である。以後、引数が実数である ",
+        math(String.raw`\exp`),
+        " はこの定義の ",
+        math(String.raw`\exp : \mathbb{R} \to \mathbb{R}`),
+        " を、引数が行列である ",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " のものを表す。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "それまで本文は実数の指数関数を e^x や exp(x) と書いて定義なしに使っていた。新しい極限の議論を持ち込まず、既に定義と収束が済んでいる行列の exp の 1 行 1 列の場合として定めた。級数で直接定義する経路は、負の引数での収束と積公式を実数について証明し直す必要があるため採らなかった。",
+      ],
+    },
+  },
+  {
+    id: "exp_linear_map_007_claim_real_exp_is_limit_of_partial_sums",
+    kind: "claim",
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 7 },
+    title: { text: "実数の exp は指数級数の部分和の極限" },
+    labels: ["real_exp_is_limit_of_partial_sums"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`N \to \infty`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\sum_{m=0}^{N}\frac{x^m}{m!} \to \exp(x)`),
+      paragraph([
+        "が ",
+        math(String.raw`\mathbb{R}`),
+        " において成り立つ（",
+        math(String.raw`x^0 := 1`),
+        "、",
+        math(String.raw`0! := 1`),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 1（",
+        math(String.raw`[x]^m = [x^m]`),
+        "）。",
+        math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
+        " に関する帰納法で示す。",
+        math(String.raw`m = 0`),
+        " では ",
+        math(String.raw`[x]^0 = I = [1] = [x^0]`),
+        "（1 行 1 列の単位行列の成分は 1）。",
+        math(String.raw`m`),
+        " で成り立つと仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left([x]^{m+1}\right)_{11}
+&= \left([x]^{m}[x]\right)_{11}
+   \quad (\because \text{行列の冪の定義。}\blkref{def_exp}) \\
+&= \sum_{j=1}^{1}\left([x]^{m}\right)_{1j}[x]_{j1}
+   \quad (\because \text{行列の積の成分。}\blkref{mat_mult}) \\
+&= \left([x]^{m}\right)_{11}[x]_{11}
+   \quad (\because \text{和は } j=1 \text{ の 1 項だけ}) \\
+&= [x^m]_{11}\,[x]_{11}
+   \quad (\because \text{帰納法の仮定}) \\
+&= x^m\,x
+   \quad (\because \blkref{def_one_by_one_matrix_of_real}) \\
+&= x^{m+1}
+   \quad (\because \text{実数の冪の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`[x]^{m+1} = [x^{m+1}]`),
+        "（1 行 1 列の行列は成分だけで決まる。",
+        ref("def_one_by_one_matrix_of_real"),
+        "）。",
+      ]),
+      paragraph([
+        "Step 2（部分和の成分）。",
+        ref("matrix_exp_series_converges"),
+        " の部分和 ",
+        math(String.raw`S_N([x]) = \sum_{m=0}^{N}\frac{1}{m!}[x]^m \in \mathrm{Mat}(1,\mathbb{R})`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(S_N([x])\right)_{11}
+&= \sum_{m=0}^{N}\frac{1}{m!}\left([x]^m\right)_{11}
+   \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
+&= \sum_{m=0}^{N}\frac{1}{m!}\,[x^m]_{11}
+   \quad (\because \text{Step 1 を各項へ適用}) \\
+&= \sum_{m=0}^{N}\frac{x^m}{m!}
+   \quad (\because \blkref{def_one_by_one_matrix_of_real})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 3（極限）。",
+        ref("exp_converges"),
+        " (1b) を ",
+        math(String.raw`K = \mathbb{R}`),
+        "、",
+        math(String.raw`n = 1`),
+        "、",
+        math(String.raw`A = [x]`),
+        "、",
+        math(String.raw`i = j = 1`),
+        " に適用すると ",
+        math(String.raw`\left(S_N([x])\right)_{11} \to \left(\exp([x])\right)_{11}`),
+        " である（",
+        math(String.raw`\sum_{m=0}^{\infty}\frac{1}{m!}[x]^m = \exp([x])`),
+        " は ",
+        ref("def_exp"),
+        " (1)）。左辺は Step 2 により ",
+        math(String.raw`\sum_{m=0}^{N}\frac{x^m}{m!}`),
+        "、右辺は ",
+        ref("def_real_exp"),
+        " により ",
+        math(String.raw`\exp(x)`),
+        " である。",
+      ]),
+    ],
+    conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い、指数級数との関係を主張として置いた。"] },
+  },
+  {
+    id: "exp_linear_map_008_claim_real_exp_product",
+    kind: "claim",
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 8 },
+    title: { tex: String.raw`\exp(x)\exp(y) = \exp(x+y)` },
+    labels: ["real_exp_product"],
+    statement: [
+      paragraph([
+        math(String.raw`x, y \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\exp(x)\exp(y) = \exp(x+y)`),
+    ],
+    proof: [
+      paragraph([
+        "準備。1 行 1 列の行列 ",
+        math(String.raw`A, B \in \mathrm{Mat}(1,\mathbb{R})`),
+        " について、",
+        ref("mat_mult"),
+        " の和は ",
+        math(String.raw`j = 1`),
+        " の 1 項だけなので ",
+        math(String.raw`(AB)_{11} = A_{11}B_{11}`),
+        " である。とくに ",
+        math(String.raw`([x][y])_{11} = xy = yx = ([y][x])_{11}`),
+        " より ",
+        math(String.raw`[x][y] = [y][x]`),
+        "。また行列の和は成分ごとなので ",
+        math(String.raw`[x] + [y] = [x+y]`),
+        "。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(x)\exp(y)
+&= \bigl(\exp([x])\bigr)_{11}\bigl(\exp([y])\bigr)_{11}
+   \quad (\because \blkref{def_real_exp}) \\
+&= \bigl(\exp([x])\exp([y])\bigr)_{11}
+   \quad (\because \text{準備の } (AB)_{11} = A_{11}B_{11}) \\
+&= \bigl(\exp([x]+[y])\bigr)_{11}
+   \quad (\because [x][y] = [y][x] \text{ と可換行列の exp 積公式。}\blkref{theorem_exp_product}) \\
+&= \bigl(\exp([x+y])\bigr)_{11}
+   \quad (\because [x]+[y] = [x+y]) \\
+&= \exp(x+y)
+   \quad (\because \blkref{def_real_exp})
+\end{aligned}`,
+      ),
+    ],
+    conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い、指数法則を可換行列の exp 積公式から導いた。"] },
+  },
+  {
+    id: "exp_linear_map_009_claim_real_exp_zero",
+    kind: "claim",
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 9 },
+    title: { tex: String.raw`\exp(0) = 1` },
+    labels: ["real_exp_zero"],
+    statement: [displayMath(String.raw`\exp(0) = 1`)],
+    proof: [
+      paragraph([
+        "すべての ",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{m=0}^{N}\frac{0^m}{m!}
+&= \frac{0^0}{0!} + \sum_{m=1}^{N}\frac{0^m}{m!}
+   \quad (\because \text{第 0 項を分ける}) \\
+&= \frac{1}{1} + \sum_{m=1}^{N}\frac{0}{m!}
+   \quad (\because 0^0 = 1,\ 0! = 1,\ m \ge 1 \text{ で } 0^m = 0) \\
+&= 1
+   \quad (\because \text{実数の四則演算})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、定数列の極限は 1 である。一方 ",
+        ref("real_exp_is_limit_of_partial_sums"),
+        " を ",
+        math(String.raw`x = 0`),
+        " に適用すると同じ列は ",
+        math(String.raw`\exp(0)`),
+        " に収束する。実数列の極限の一意性より ",
+        math(String.raw`\exp(0) = 1`),
+        "。",
+      ]),
+    ],
+    conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い置いた。"] },
+  },
+  {
+    id: "exp_linear_map_010_claim_real_exp_positive",
+    kind: "claim",
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 10 },
+    title: { tex: String.raw`\exp(x) > 0` },
+    labels: ["real_exp_positive"],
+    statement: [
+      paragraph([
+        math(String.raw`x \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\exp(x) > 0`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph(["Step 1（0 でない）。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(x)\exp(-x)
+&= \exp\bigl(x + (-x)\bigr)
+   \quad (\because \blkref{real_exp_product}) \\
+&= \exp(0)
+   \quad (\because \text{加法の逆元}) \\
+&= 1
+   \quad (\because \blkref{real_exp_zero})
+\end{aligned}`,
+      ),
+      paragraph([
+        "もし ",
+        math(String.raw`\exp(x) = 0`),
+        " なら左辺は 0 となり矛盾するので、",
+        math(String.raw`\exp(x) \neq 0`),
+        "。",
+      ]),
+      paragraph(["Step 2（非負）。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(x)
+&= \exp\!\left(\frac{x}{2} + \frac{x}{2}\right)
+   \quad (\because \tfrac{x}{2} + \tfrac{x}{2} = x) \\
+&= \exp\!\left(\frac{x}{2}\right)\exp\!\left(\frac{x}{2}\right)
+   \quad (\because \blkref{real_exp_product}) \\
+&= \left(\exp\!\left(\frac{x}{2}\right)\right)^2
+   \quad (\because \text{冪の定義}) \\
+&\ge 0
+   \quad (\because \text{実数の平方は非負})
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 1 と Step 2 より ",
+        math(String.raw`\exp(x) > 0`),
+        "。",
+      ]),
+    ],
+    conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い置いた。"] },
+  },
+  {
+    id: "exp_linear_map_011_claim_real_exp_strictly_increasing",
+    kind: "claim",
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 11 },
+    title: { text: "実数の exp は狭義単調増加" },
+    labels: ["real_exp_strictly_increasing"],
+    statement: [
+      paragraph([
+        math(String.raw`x, y \in \mathbb{R}`),
+        " が ",
+        math(String.raw`x < y`),
+        " を満たすなら ",
+        math(String.raw`\exp(x) < \exp(y)`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "Step 1（",
+        math(String.raw`a > 0`),
+        " なら ",
+        math(String.raw`\exp(a) > 1`),
+        "）。",
+        ref("real_exp_series_converges"),
+        " の ",
+        math(String.raw`E_N(a) = \sum_{m=0}^{N}\frac{a^m}{m!}`),
+        " と ",
+        math(String.raw`E(a) = \lim_{N\to\infty}E_N(a)`),
+        " を使う。",
+        ref("real_exp_is_limit_of_partial_sums"),
+        " より同じ列 ",
+        math(String.raw`E_N(a)`),
+        " は ",
+        math(String.raw`\exp(a)`),
+        " に収束するので、実数列の極限の一意性より ",
+        math(String.raw`E(a) = \exp(a)`),
+        "。よって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(a)
+&= E(a)
+   \quad (\because \text{上の } E(a) = \exp(a)) \\
+&\ge E_1(a)
+   \quad (\because \blkref{real_exp_series_converges}\text{ (2)}) \\
+&= 1 + a
+   \quad (\because E_1(a) = \tfrac{a^0}{0!} + \tfrac{a^1}{1!}) \\
+&> 1
+   \quad (\because a > 0)
+\end{aligned}`,
+      ),
+      paragraph(["Step 2。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(y)
+&= \exp\bigl(x + (y-x)\bigr)
+   \quad (\because x + (y - x) = y) \\
+&= \exp(x)\exp(y-x)
+   \quad (\because \blkref{real_exp_product}) \\
+&> \exp(x)\cdot 1
+   \quad (\because \exp(x) > 0\ \blkref{real_exp_positive}\text{ と、}y - x > 0\text{ への Step 1}) \\
+&= \exp(x)
+   \quad (\because 1 \text{ は乗法の単位元})
+\end{aligned}`,
+      ),
+    ],
+    conversion: { status: "added", notes: ["実数の exp を行列の exp から定義したことに伴い置いた。"] },
+  },
 ]);

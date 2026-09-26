@@ -40,6 +40,17 @@ const mathematicalToolEntryIdsOutsideToolFiles = new Set([
   "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
   "transfer_matrix_claim_end_acts_on_kronecker_products",
 ]);
+// 別セッションが 003 章末尾に追加した実数の指数関数の七項。分類は所属ファイルによる自動分類に任せ、
+// 章内依存順も自動の並べ方のままとする。節境界・説明粒度はループの未レビューであり、どの節にも入れない。
+const unreviewedMathematicalToolEntryIds = [
+  "exp_linear_map_005_definition_one_by_one_matrix_of_real",
+  "exp_linear_map_006_definition_real_exp",
+  "exp_linear_map_007_claim_real_exp_is_limit_of_partial_sums",
+  "exp_linear_map_008_claim_real_exp_product",
+  "exp_linear_map_009_claim_real_exp_zero",
+  "exp_linear_map_010_claim_real_exp_positive",
+  "exp_linear_map_011_claim_real_exp_strictly_increasing",
+] as const;
 const matrixExponentialConjugationSectionEntryIds = [
   "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
   "exp_conjugation_proof_008_theorem_exp_ad_series",
@@ -10365,8 +10376,17 @@ for (const expected of realExponentialSeriesSectionBoundarySnapshot) {
     throw new Error(`非負実数の指数級数の収束と剰余の境界比較対象が変わりました: ${expected.id}`);
   }
 }
-if (findToolEntry("freeenergy_004_theorem_riemann_sum_to_integral").dependencyPlacement!.chapterOrder
-  !== realExponentialSeriesSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder + 1) {
+// 未レビューの実数の指数関数のうち、この節の直後へ自動配置された三項だけが Riemann 和の節との間に入る。
+const unreviewedEntryIdsAfterRealExponentialSeries = [
+  "exp_linear_map_005_definition_one_by_one_matrix_of_real",
+  "exp_linear_map_008_claim_real_exp_product",
+  "exp_linear_map_010_claim_real_exp_positive",
+];
+const realExponentialSeriesEndOrder = realExponentialSeriesSection.sectionEntries.at(-1)!.dependencyPlacement!.chapterOrder;
+if (JSON.stringify(unreviewedEntryIdsAfterRealExponentialSeries.map((id) => findToolEntry(id).dependencyPlacement!.chapterOrder))
+    !== JSON.stringify(unreviewedEntryIdsAfterRealExponentialSeries.map((_, index) => realExponentialSeriesEndOrder + 1 + index))
+  || findToolEntry("freeenergy_004_theorem_riemann_sum_to_integral").dependencyPlacement!.chapterOrder
+    !== realExponentialSeriesEndOrder + 1 + unreviewedEntryIdsAfterRealExponentialSeries.length) {
   throw new Error("非負実数の指数級数の収束と剰余の直後の項目が変わりました");
 }
 if (findToolEntry("exp_linear_map_004_theorem_exp_zero_is_identity").dependencyPlacement!.chapterOrder
@@ -16203,7 +16223,7 @@ const mathematicalToolSectionBoundaries = [{
   output: ["一般の可逆な有限複素行列による共役写像が複素線型であること"],
   mainTheorem: "一般の可逆な有限複素行列による共役写像の複素線型性",
   mainTheoremEntryId: genericConjugationLinearityEntry.id,
-  boundaryEvidence: "可逆行列と共役写像の定義を入力とし、イジング模型の記号を使わず複素線型性へ閉じる一項節である。章内依存順103に置き、直後の Pauli 行列群の節とは入力集合が切り替わる。",
+  boundaryEvidence: "可逆行列と共役写像の定義を入力とし、イジング模型の記号を使わず複素線型性へ閉じる一項節である。章内依存順110に置き、直後の Pauli 行列群の節とは入力集合が切り替わる。",
   readabilityStatus: "定義、左右の分配、左右の行列積と複素スカラー倍の両立を一行一根拠で示し、Lean と Gaussian 有理数上の SageMath 厳密検査が同じ段を追う。",
 }, {
   name: "Pauli 行列と共役で保たれる行列群",
@@ -17384,12 +17404,19 @@ const finalizedMathematicalToolSectionEntryIds = [
   ...mathematicalToolSectionBoundaries,
   ...isingModelSectionBoundaries,
 ].filter(({ chapter }) => chapter === "数学的道具立て").flatMap(({ entryIds }) => entryIds);
-const expectedMathematicalToolEntryIds = toolEntries.map(({ id }) => id);
+const unreviewedMathematicalToolEntryIdSet = new Set<string>(unreviewedMathematicalToolEntryIds);
+const expectedMathematicalToolEntryIds = toolEntries.map(({ id }) => id)
+  .filter((id) => !unreviewedMathematicalToolEntryIdSet.has(id));
 if (expectedMathematicalToolEntryIds.length !== 105
   || finalizedMathematicalToolSectionEntryIds.length !== expectedMathematicalToolEntryIds.length
   || new Set(finalizedMathematicalToolSectionEntryIds).size !== expectedMathematicalToolEntryIds.length
   || expectedMathematicalToolEntryIds.some((id) => !finalizedMathematicalToolSectionEntryIds.includes(id))) {
   throw new Error("数学的道具立て105件の節配置が全項目を一意に被覆していません");
+}
+if (toolEntries.length !== expectedMathematicalToolEntryIds.length + unreviewedMathematicalToolEntryIds.length
+  || unreviewedMathematicalToolEntryIds.some((id) =>
+    !toolEntries.some((entry) => entry.id === id) || finalizedMathematicalToolSectionEntryIds.includes(id))) {
+  throw new Error("数学的道具立ての未レビュー項目が、道具章にない、または節に入っています");
 }
 const groupDescriptions = new Map([
   ["集合記号と複素数の直交座標計算", { input: "既知の自然数・整数・実数の集合と実数の四則演算", output: "集合と演算付き構造の区別、複素数を実数対として計算する規則", reason: "冒頭から記号の所属と演算を曖昧にせず、行列成分の計算へ進むため。" }],
@@ -17429,6 +17456,7 @@ const inventory = {
   chapterEntryCounts: Object.fromEntries(finalChapters.map((chapter) => [chapter, entries.filter((entry) => entry.provisionalFinalChapter === chapter).length])),
   mathematicalToolGroups,
   mathematicalToolSectionBoundaries,
+  mathematicalToolUnreviewedEntryIds: unreviewedMathematicalToolEntryIds,
   isingModelSectionBoundaries,
   explanationGranularityReview: {
     reviewedEntryCount: entries.length,
