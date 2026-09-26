@@ -703,7 +703,7 @@ A_{kk}
     id: "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
     kind: "claim",
     origin: { path: SRC, ordinal: 16 },
-    title: { tex: String.raw`i K_1 H_1^{(\pm)} \text{ と } i K_2^* H_2 \text{ は実対称}` },
+    title: { tex: String.raw`i K_1 H_1^{(+)} \text{ と } i K_2^* H_2 \text{ は実対称}` },
     labels: ["iH_is_real_symmetric"],
     statement: [
       paragraph([
@@ -711,13 +711,13 @@ A_{kk}
         " の記号のもとで、",
       ]),
       displayMath(
-        String.raw`S_1^{(\pm)} := i K_1 H_1^{(\pm)}, \qquad S_2 := i K_2^* H_2`,
+        String.raw`S_1^{(+)} := i K_1 H_1^{(+)}, \qquad S_2 := i K_2^* H_2`,
       ),
       paragraph(["とおくと、"]),
       displayMath(
         String.raw`\begin{aligned}
-S_1^{(\pm)} &= K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
-  \mp K_1\, G, \qquad
+S_1^{(+)} &= K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
+  - K_1\, G, \qquad
 G := \sigma_1^y\,\sigma_2^x \sigma_3^x \cdots \sigma_{M_{\mathrm{col}}-1}^x\, \sigma_{M_{\mathrm{col}}}^y \\
 S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\mathrm{col}}}^x\right)
 \end{aligned}`,
@@ -728,7 +728,7 @@ S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\mathrm{col}}}^x
         " のとき ",
         math(String.raw`G = \sigma_1^y\sigma_2^y`),
         " と読む）、",
-        math(String.raw`S_1^{(\pm)}`),
+        math(String.raw`S_1^{(+)}`),
         " と ",
         math(String.raw`S_2`),
         " はいずれも成分がすべて実数で、転置について対称である。とくに ",
@@ -848,7 +848,7 @@ S_2
       ),
       paragraph([
         "Step 2（",
-        math(String.raw`S_1^{(\pm)}`),
+        math(String.raw`S_1^{(+)}`),
         " の形）。",
         math(String.raw`1 \leq m \leq M_{\mathrm{col}}-1`),
         " に対して",
@@ -884,23 +884,23 @@ Y_{M_{\mathrm{col}}} Z_1
       ),
       paragraph([
         "これらと ",
-        ref("def_H1_pm"),
+        ref("def_H1_plus"),
         " の ",
-        math(String.raw`H_1^{(\pm)}`),
+        math(String.raw`H_1^{(+)}`),
         " の定義を使うと",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-S_1^{(\pm)}
-&= iK_1H_1^{(\pm)}
-   \quad (\because S_1^{(\pm)} \text{ の定義}) \\
-&= iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} \mp Y_{M_{\mathrm{col}}}Z_1\right)
-   \quad (\because H_1^{(\pm)} \text{ の定義}) \\
-&= iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left(-i\,\sigma_m^z\sigma_{m+1}^z\right) \mp (-i\,G)\right)
+S_1^{(+)}
+&= iK_1H_1^{(+)}
+   \quad (\because S_1^{(+)} \text{ の定義}) \\
+&= iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\right)
+   \quad (\because H_1^{(+)} \text{ の定義}) \\
+&= iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left(-i\,\sigma_m^z\sigma_{m+1}^z\right) - (-i\,G)\right)
    \quad (\because \text{上で得た } Y_mZ_{m+1},\ Y_{M_{\mathrm{col}}}Z_1 \text{ の表示}) \\
-&= i(-i)\,K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z \mp G\right)
+&= i(-i)\,K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
    \quad (\because \text{スカラー倍の和の分配と交換}) \\
-&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z \mp K_1\,G
+&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1\,G
    \quad (\because i\cdot(-i) = 1 \text{ と分配則})
 \end{aligned}`,
       ),
@@ -964,7 +964,7 @@ S_1^{(\pm)}
       paragraph([
         math(String.raw`K_1, K_2^* \in \mathbb{R}`),
         " なので、これらの実係数の有限和である ",
-        math(String.raw`S_1^{(\pm)}`),
+        math(String.raw`S_1^{(+)}`),
         "、",
         math(String.raw`S_2`),
         " は成分がすべて実数で転置について対称、すなわち実対称である。",
@@ -979,6 +979,7 @@ S_1^{(\pm)}
         "iK_1H_1^{(±)} と iK_2^*H_2 が厳密に実対称（成分が実かつ転置不変）であることは、M=2,3,4,5 と両符号について数値的にも残差 0 で確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_01_real_symmetric.sage）。",
         "2026-08-15 の式変形統一で、Step 1 の Z_mY_m の鎖と Step 2 の Y_mZ_{m+1} の鎖の先頭行（定義の適用）に欠けていた行末根拠を補った。内容は変えていない。",
         "2026-09-05 の式変形統一で、Step 0 の三つの Pauli 行列積について、段落に置かれていた参照を実際に行列表示を使う各等号の行末へ移した。内容と計算順序は変えていない。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -1003,15 +1004,15 @@ U := E F \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
         ref("kronecker_product_rule"),
         " (1) より互いに可換であり、順序は問わない）。このとき ",
         math(String.raw`U`),
-        " は可逆で、複号同順に",
+        " は可逆で、",
       ]),
       displayMath(
-        String.raw`U\,S_1^{(\pm)}\,U^{-1} = -\,S_1^{(\pm)}, \qquad
+        String.raw`U\,S_1^{(+)}\,U^{-1} = -\,S_1^{(+)}, \qquad
 U\,S_2\,U^{-1} = -\,S_2`,
       ),
       paragraph([
         "が成り立つ。すなわち ",
-        math(String.raw`U H_1^{(\pm)} U^{-1} = -H_1^{(\pm)}`),
+        math(String.raw`U H_1^{(+)} U^{-1} = -H_1^{(+)}`),
         "、",
         math(String.raw`U H_2 U^{-1} = -H_2`),
         "。",
@@ -1245,13 +1246,13 @@ U Y_m U^{-1}
       ]),
       paragraph([
         "Step 3（",
-        math(String.raw`H_1^{(\pm)}`),
+        math(String.raw`H_1^{(+)}`),
         " と ",
         math(String.raw`H_2`),
         " への作用）。",
-        ref("def_H1_pm"),
+        ref("def_H1_plus"),
         " の ",
-        math(String.raw`H_1^{(\pm)} = \sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} \mp Y_{M_{\mathrm{col}}}Z_1`),
+        math(String.raw`H_1^{(+)} = \sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1`),
         " と ",
         ref("iH_is_real_symmetric"),
         " の Step 1 の ",
@@ -1260,8 +1261,10 @@ U Y_m U^{-1}
         math(String.raw`Y`),
         " と ",
         math(String.raw`Z`),
-        " を 1 個ずつ掛けた項の係数 ",
-        math(String.raw`\pm 1`),
+        " を 1 個ずつ掛けた項の、係数が ",
+        math(String.raw`1`),
+        " または ",
+        math(String.raw`-1`),
         " の有限和である。Step 2 より各項について",
       ]),
       displayMath(
@@ -1285,30 +1288,30 @@ U\left(Z_j Y_j\right)U^{-1}
       paragraph([
         "なので、共役の ",
         math(String.raw`\mathbb{C}`),
-        " 線型性より複号同順に",
+        " 線型性より",
       ]),
       displayMath(
-        String.raw`U H_1^{(\pm)} U^{-1} = -\,H_1^{(\pm)}, \qquad
+        String.raw`U H_1^{(+)} U^{-1} = -\,H_1^{(+)}, \qquad
 U H_2 U^{-1} = -\,H_2`,
       ),
       paragraph([
         "Step 4（",
-        math(String.raw`S_1^{(\pm)}, S_2`),
+        math(String.raw`S_1^{(+)}, S_2`),
         " への言い換え）。",
-        math(String.raw`S_1^{(\pm)} = iK_1H_1^{(\pm)}`),
+        math(String.raw`S_1^{(+)} = iK_1H_1^{(+)}`),
         "、",
         math(String.raw`S_2 = iK_2^*H_2`),
         " であり、スカラー倍は共役と可換なので Step 3 から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-U S_1^{(\pm)} U^{-1}
-&= iK_1\,U H_1^{(\pm)} U^{-1}
-   \quad (\because\ S_1^{(\pm)}=iK_1H_1^{(\pm)}\ \text{かつ共役はスカラー倍を保つ}) \\
-&= -iK_1H_1^{(\pm)}
+U S_1^{(+)} U^{-1}
+&= iK_1\,U H_1^{(+)} U^{-1}
+   \quad (\because\ S_1^{(+)}=iK_1H_1^{(+)}\ \text{かつ共役はスカラー倍を保つ}) \\
+&= -iK_1H_1^{(+)}
    \quad (\because\ \text{Step 3}) \\
-&= -\,S_1^{(\pm)}
-   \quad (\because\ S_1^{(\pm)}=iK_1H_1^{(\pm)}), \\
+&= -\,S_1^{(+)}
+   \quad (\because\ S_1^{(+)}=iK_1H_1^{(+)}), \\
 U S_2 U^{-1}
 &= iK_2^*\,U H_2 U^{-1}
    \quad (\because\ S_2=iK_2^*H_2\ \text{かつ共役はスカラー倍を保つ}) \\
@@ -1334,6 +1337,7 @@ U S_2 U^{-1}
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "この U は M の偶奇によらず両方の符号 (±) について働く。M=2,3,4,5,6 と両符号で残差 0 を数値確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_02_sign_flip_conjugation.sage）。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },

@@ -140,7 +140,7 @@ M(Y_{k_1}Z_{k_2}) &&(\because\ \delta^M\ \text{が } 0 \text{ を与える項が
 &= \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ k_2\in\{2,\dots,M\}\\ -(k_1-k_2+1)\equiv 0 \pmod{M}}} M(Y_{k_1}Z_{k_2})
 + \frac{1}{M}\sum_{\substack{k_1\in\{1,\dots,M\}\\ -k_1\equiv 0 \pmod{M}}} \mp M(Y_{k_1}Z_1) &&(\because\ k_2=1\ \text{の項とそれ以外（}k_2\in\{2,\dots,M\}\text{）の項へ和を分けた}) \\
 &= (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M-1}Z_M) + (\mp Y_M Z_1) &&(\because\ \text{下記のとおり第 1 項は } k_1=k_2-1\text{、第 2 項は } k_1=M \text{ に限ること、および } \tfrac{1}{M}\cdot M=1) \\
-&= H_1^{(\pm)} &&(\because\ \blkref{def_H1_pm})
+&= H_1^{(\pm)} &&(\because\ \blkref{def_H1_plus}\ \text{（上の符号）と、その境界項の符号を反転した行列（下の符号）})
 \end{aligned}`),
       paragraph(["ここで第 1 項は、", math(String.raw`k_1\in\{1,\dots,M\}`), "、", math(String.raw`k_2\in\{2,\dots,M\}`), "、", math(String.raw`-(k_1-k_2+1)\equiv 0 \pmod{M}`), " すなわち ", math(String.raw`k_1\equiv k_2-1 \pmod{M}`), " より ", math(String.raw`k_2-1\in\{1,\dots,M-1\}`), " かつ ", math(String.raw`k_1=k_2-1`), " に限る（", math(String.raw`\{1,\dots,M-1\}`), " の範囲で合同を満たす ", math(String.raw`k_1`), " は一意）。第 2 項は ", math(String.raw`-k_1\equiv 0 \pmod{M}`), " かつ ", math(String.raw`k_1\in\{1,\dots,M\}`), " より ", math(String.raw`k_1=M`), "。"]),
       paragraph([math(String.raw`H_2`), " について、"]),

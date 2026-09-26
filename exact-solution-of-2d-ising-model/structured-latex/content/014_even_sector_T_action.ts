@@ -35,8 +35,18 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
       ),
       paragraph([
         "まで到達する。ここで ",
-        math(String.raw`V^{(+)} := \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}`),
-        " であり、",
+        math(String.raw`V^{(+)} = \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}`),
+        " は ",
+        ref("def_V_plus"),
+        " の偶セクターの転送行列（",
+        math(String.raw`H_1^{(+)}`),
+        " は ",
+        ref("def_H1_plus"),
+        "、",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        " は ",
+        ref("def_V1_plus_square_root"),
+        "）であり、",
         math(String.raw`A(\theta)`),
         " は ",
         ref("def_A_theta"),
@@ -89,75 +99,9 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
       status: "added",
       notes: [
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
-  },
-
-  {
-    id: "evensectorT_definition_H1_plus",
-    kind: "definition",
-    origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`\text{偶セクターの生成子 } H_1^{(+)}` },
-    labels: ["def_H1_plus"],
-    statement: [
-      paragraph([
-        ref("def_H1_pm"),
-        " の生成子で上の符号を取ったものを",
-      ]),
-      displayMath(
-        String.raw`H_1^{(+)} := Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M_{\mathrm{col}}-1}Z_{M_{\mathrm{col}}} - Y_{M_{\mathrm{col}}}Z_1`,
-      ),
-      paragraph(["と書く。"]),
-    ],
-    conversion: { status: "added" },
-  },
-
-  {
-    id: "evensectorT_definition_V1_plus_square_root",
-    kind: "definition",
-    origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`V_1^{(+)} \text{ の平方根として用いる行列}` },
-    labels: ["def_V1_plus_square_root"],
-    statement: [
-      paragraph([
-        ref("def_H1_plus"),
-        " の ",
-        math(String.raw`H_1^{(+)}`),
-        " を用い、",
-        math(String.raw`1/2`),
-        " 乗として用いる行列を",
-      ]),
-      displayMath(
-        String.raw`\left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
-\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
-      ),
-    ],
-    conversion: { status: "added" },
-  },
-
-  {
-    id: "evensectorT_definition_V_plus",
-    kind: "definition",
-    origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`\text{偶セクターの転送行列 } V^{(+)}` },
-    labels: ["def_V_plus"],
-    statement: [
-      paragraph([
-        ref("def_V1_plus_square_root"),
-        " の ",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
-        " と ",
-        ref("V2_exponential_representation"),
-        " の ",
-        math(String.raw`V_2 = (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^* H_2\right)`),
-        " を用いて",
-      ]),
-      displayMath(
-        String.raw`V^{(+)} := \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}
-\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
-      ),
-    ],
-    conversion: { status: "added" },
   },
 
   {
@@ -331,53 +275,6 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         String.raw`T_{(V^{(+)})}(X) := T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
 T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
 \qquad \left(X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\right)`,
-      ),
-    ],
-    conversion: { status: "added" },
-  },
-
-  {
-    id: "evensectorT_claim_V1_plus_square_root",
-    kind: "claim",
-    origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`\left(V_1^{(+)}\right)^{1/2} \text{ の平方根性}` },
-    labels: ["V1_plus_square_root_property"],
-    statement: [
-      paragraph([
-        ref("def_V1_plus_square_root"),
-        " で定めた ",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
-        " は ",
-        math(String.raw`V_1^{(+)}`),
-        " の平方根である。",
-      ]),
-      displayMath(
-        String.raw`\left(\left(V_1^{(+)}\right)^{1/2}\right)^2 = V_1^{(+)}`,
-      ),
-    ],
-    proof: [
-      paragraph([
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`X = Y = \tfrac{i}{2}K_1H_1^{(+)}`),
-        " に適用する（",
-        math(String.raw`X`),
-        " は自分自身と可換）。すると",
-        ref("def_V1_pm"),
-        " の上符号の定義と合わせて",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(\left(V_1^{(+)}\right)^{1/2}\right)^2
-&= \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^2
-   \quad (\because\ \text{def\_V1\_plus\_square\_root}) \\
-&= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)} + \tfrac{i}{2}K_1H_1^{(+)}\right)
-   \quad (\because\ \text{可換な指数行列の積の定理}) \\
-&= \exp\!\left(iK_1H_1^{(+)}\right)
-   \quad (\because \text{同類項 } \tfrac{i}{2}K_1H_1^{(+)} \text{ の加法}) \\
-&= V_1^{(+)}
-   \quad (\because\ \text{def\_V1\_pm の上符号の定義})
-\end{aligned}`,
       ),
     ],
     conversion: { status: "added" },

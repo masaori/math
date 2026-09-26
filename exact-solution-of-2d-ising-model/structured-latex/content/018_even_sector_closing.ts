@@ -26,12 +26,14 @@ export default defineBlocks([
         " の最大固有値 ",
         math(String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " は**単純**である。一方 ",
-        ref("sector_decomposition_of_rayleigh_sup"),
+        ref("def_sector_rayleigh_sup"),
         " の ",
         math(String.raw`c_+(M_{\mathrm{col}})`),
         " は ",
         math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " の単位ベクトルにわたる上限であり、同 (2) の ",
+        " の単位ベクトルにわたる上限であり、",
+        ref("symmetrized_transfer_matrix_on_sectors"),
+        " の ",
         math(String.raw`WP^{(+)} = V^{(+)}P^{(+)}`),
         " により ",
         math(String.raw`\mathcal{F}^{(+)}`),
@@ -48,8 +50,8 @@ export default defineBlocks([
         "は容易である。**難所は逆向きの不等号**、すなわち ",
         math(String.raw`\check\Lambda_{\max}`),
         " の固有ベクトルが ",
-        math(String.raw`\mathcal{F}^{(-)}`),
-        " 側に落ちていないこと（",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " に属すること（",
         math(String.raw`\varepsilon`),
         " の固有値が ",
         math(String.raw`+1`),
@@ -59,9 +61,11 @@ export default defineBlocks([
         math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " 全体の上の行列であり、その ",
         math(String.raw`2^{M_{\mathrm{col}}}`),
-        " 個の固有値のうち半分は ",
-        math(String.raw`\mathcal{F}^{(-)}`),
-        " に属する固有ベクトルに対応する。最大固有値がどちらの側に落ちるかは、",
+        " 個の固有値に対応する固有ベクトルのうち、",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " に属するのは半分だけである。最大固有値の固有ベクトルが ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " に属するかどうかは、",
         "固有値の値 ",
         math(String.raw`\check\Lambda_\epsilon`),
         " からは読み取れない。",
@@ -174,7 +178,12 @@ export default defineBlocks([
         " を使って有限和の極限を積分として計算する。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+      ],
+    },
   },
 
   {
@@ -518,7 +527,7 @@ q
 &= Iq
    \quad (\because \text{恒等行列の定義}) \\
 &= \varepsilon^2q
-   \quad (\because \text{epsilon\_projector\_properties (1) の }\varepsilon^2=I) \\
+   \quad (\because \blkref{epsilon_square_and_eigenvalues}\text{ の }\varepsilon^2=I) \\
 &= \varepsilon\left(\varepsilon q\right)
    \quad (\because \text{行列積の結合則}) \\
 &= \varepsilon\left(\eta q\right)
@@ -532,8 +541,10 @@ q
 \end{aligned}`,
       ),
       paragraph([
-        ref("epsilon_projector_properties"),
-        " (1) と上の式変形、および ",
+        ref("epsilon_square_and_eigenvalues"),
+        " の ",
+        math(String.raw`\varepsilon^2=I`),
+        " と上の式変形、および ",
         math(String.raw`q\neq0`),
         " より ",
         math(String.raw`\eta^2=1`),
@@ -803,6 +814,7 @@ q
       notes: [
         "(4) は「ε は数演算子の言葉でパリティ Π(I − 2ň_μ) に一致する」ことを述べているが、全体の符号 η_{(1,…,1)} はこの段階では未定である。この 1 つの符号を決めるのがこの章の実質的な内容で、max_eigenvector_in_even_sector で η_{(1,…,1)} = +1 と確定し、ε = (−1)^M Π(I − 2ň_μ) となる。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_02（{0,1}^M を全列挙して εQ̌_ε = η_ε Q̌_ε、η_ε ∈ {±1}、反転則、η_ε = (−1)^{M+|ε|}）。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -1335,8 +1347,8 @@ D_0G
         " の ",
         math(String.raw`\varepsilon G=G\varepsilon`),
         "、",
-        ref("epsilon_projector_properties"),
-        " (1) の ",
+        ref("epsilon_square_and_eigenvalues"),
+        " の ",
         math(String.raw`\varepsilon^2=I`),
         "、および ",
         ref("pauli_matrix_products"),
@@ -1362,7 +1374,12 @@ D_0G
 &&\bigl(\because\ \text{単位行列の積}\bigr)
 \end{aligned}`),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+      ],
+    },
   },
 
   {
@@ -1815,7 +1832,7 @@ Gf_{\iota(s)}
         " を対角行列と ",
         math(String.raw`\varepsilon`),
         " で書く）。",
-        ref("def_V1_pm"),
+        ref("V1_plus_exponential_representation"),
         " より ",
         math(String.raw`V_1^{(+)} = \exp\!\left(iK_1H_1^{(+)}\right)`),
         " であり、",
@@ -2077,6 +2094,7 @@ Gf_{\iota(s)}
         "この主張が章 C′ の最後の欠けていた入力である。ε の固有値 η がどちらになるかは固有値 Λ̌_ε の値からは読めないが、tr(εV^{(+)}) は転送行列の側で完全に初等的に計算でき、しかも正であることが分かる。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,3,4,5・6 組の (K_1,K_2) で、行列指数関数から直接構成した V^{(+)} のトレースと閉じた式の相対差 ≤ 6e-15）。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -2119,7 +2137,7 @@ Gf_{\iota(s)}
           math(String.raw`\text{(4)}\quad \mathrm{im}\,\check{Q}_{(1,\dots,1)}
 \subseteq \mathcal{F}^{(+)}`),
           "（",
-          ref("def_eigenspaces_of_epsilon"),
+          ref("def_even_eigenvectors_of_epsilon"),
           " の ",
           math(String.raw`\mathcal{F}^{(+)}`),
           "）。すなわち **",
@@ -2219,6 +2237,7 @@ Gf_{\iota(s)}
         "(3) は 004 章の ε = i^M (Z_1Y_1)⋯(Z_MY_M) の半整数運動量フェルミオンによる言い換えであり、「ε は数演算子のパリティである」という物理でよく知られた事実にあたる。本文ではこれを Λ̌_max の固有ベクトルが偶セクターに属することを示すためだけに使う。",
         "符号 (−1)^M が付くのは ň_μ = ψ̌_μ^† ψ̌_{M+1−μ} が「同じモードの ψ^†ψ」ではなく共役なモードの対で定義されているためで、真空 ε = (0,…,0) の側のパリティが (−1)^M になる。M の偶奇によらず最大固有ベクトル（ε = (1,…,1)）のパリティが +1 になる点が重要である。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_02（η_ε = (−1)^{M+|ε|} と ε = (−1)^M Π(I − 2ň_μ) を M=2,3,4,5・6 組の (K_1,K_2) で確認。残差 ≤ 2e-14）。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -2575,19 +2594,18 @@ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\righ
         " が一致すること）。",
         math(String.raw`x \in \mathcal{F}^{(+)}`),
         " なら、",
-        ref("epsilon_projector_properties"),
-        " (4) と ",
         ref("def_epsilon_projectors"),
+        " と ",
+        ref("def_even_eigenvectors_of_epsilon"),
         " より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 P^{(+)}x
 &= \tfrac12(x + \varepsilon x)
-   \quad (\because \text{def\_epsilon\_projectors の } P^{(+)} \text{ の定義}) \\
+   \quad (\because \blkref{def_epsilon_projectors}\text{ の } P^{(+)} \text{ の定義}) \\
 &= \tfrac12(x + x)
-   \quad (\because x \in \mathcal{F}^{(+)} \text{ より } \varepsilon x = x
-   \text{（def\_eigenspaces\_of\_epsilon の固有空間）}) \\
+   \quad (\because x \in \mathcal{F}^{(+)} \text{ より } \varepsilon x = x.\ \blkref{def_even_eigenvectors_of_epsilon}) \\
 &= x
    \quad (\because \text{スカラー倍を整理する})
 \end{aligned}`,
@@ -2825,6 +2843,7 @@ x^\top Wx
       notes: [
         "分割前の上限のセクター分解の注記が「c_+(M) に対応する V^{(+)} の固有値は本文では未確立」としていた点が、ここで解消される。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_04（P^{(+)}WP^{(+)} を F^{(+)} の実基底へ制限して最大固有値を直接求め、Λ^{(1/2)}_M と比較。相対差 ≤ 2e-14）。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -2897,17 +2916,15 @@ x^\top Wx
         "Step 2（下からの評価 ",
         math(String.raw`c(M_{\mathrm{col}}) \geq \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         "）。",
-        ref("sector_decomposition_of_rayleigh_sup"),
-        " (3) と ",
+        ref("c_plus_le_c"),
+        " と ",
         ref("c_plus_equals_Lambda_half_integer"),
         " より",
       ]),
       displayMath(String.raw`\begin{aligned}
 c(M_{\mathrm{col}})
-&= \max\bigl(c_+(M_{\mathrm{col}}),c_-(M_{\mathrm{col}})\bigr)
-&&\left(\because\ \blkref{sector_decomposition_of_rayleigh_sup}\text{ (3)}\right)\\
 &\geq c_+(M_{\mathrm{col}})
-&&\left(\because\ \text{二つの実数の最大値の定義}\right)\\
+&&\left(\because\ \blkref{c_plus_le_c}\right)\\
 &= \Lambda^{(1/2)}_{M_{\mathrm{col}}}
 &&\left(\because\ \blkref{c_plus_equals_Lambda_half_integer}\right)
 \end{aligned}`),
@@ -2962,8 +2979,12 @@ c(M_{\mathrm{col}})
         "である。さらに ",
         math(String.raw`\varepsilon^\top = \varepsilon`),
         "（",
-        ref("sector_decomposition_of_rayleigh_sup"),
-        " の証明 (3) で確かめられている）。",
+        ref("epsilon_is_real_symmetric"),
+        "）、",
+        math(String.raw`\varepsilon^2 = I`),
+        "（",
+        ref("epsilon_square_and_eigenvalues"),
+        "）である。",
       ]),
       list([
         [
@@ -2974,15 +2995,15 @@ c(M_{\mathrm{col}})
 &= \varepsilon u+\varepsilon^2u
 &&\left(\because\ \text{行列の分配則}\right)\\
 &= \varepsilon u+u
-&&\left(\because\ \varepsilon^2=I\right)\\
+&&\left(\because\ \blkref{epsilon_square_and_eigenvalues}\text{ の }\varepsilon^2=I\right)\\
 &=v
 &&\left(\because\ v=u+\varepsilon u\right)
 \end{aligned}`),
           " より ",
           math(String.raw`v \in \mathcal{F}^{(+)}`),
           "（",
-          ref("epsilon_projector_properties"),
-          " (1)）。また ",
+          ref("def_even_eigenvectors_of_epsilon"),
+          "）。また ",
           math(String.raw`v`),
           " は実である。",
         ],
@@ -2998,7 +3019,7 @@ c(M_{\mathrm{col}})
           displayMath(String.raw`\begin{aligned}
 \|v\|^2
 &= \|u\|^2 + 2u^\top\varepsilon u + \|\varepsilon u\|^2
-&&\left(\because\ v=u+\varepsilon u\text{ の展開と }\varepsilon^\top=\varepsilon\right)\\
+&&\left(\because\ v=u+\varepsilon u\text{ の展開と }\varepsilon^\top=\varepsilon.\ \blkref{epsilon_is_real_symmetric}\right)\\
 &= 2 + 2u^\top\varepsilon u
 &&\left(\because\ \|u\| = \|\varepsilon u\| = 1\right)\\
 &\leq 4
@@ -3011,11 +3032,11 @@ v^\top Wv
 &=u^\top Wu+2u^\top W\varepsilon u+(\varepsilon u)^\top W(\varepsilon u)
 &&\left(\because\ v=u+\varepsilon u\text{ の展開と }W^\top=W\right)\\
 &=u^\top Wu+2u^\top W\varepsilon u+u^\top\varepsilon W\varepsilon u
-&&\left(\because\ \varepsilon^\top=\varepsilon\right)\\
+&&\left(\because\ \blkref{epsilon_is_real_symmetric}\text{ の }\varepsilon^\top=\varepsilon\right)\\
 &=u^\top Wu+2u^\top W\varepsilon u+u^\top W\varepsilon^2u
 &&\left(\because\ \varepsilon W=W\varepsilon.\ \blkref{epsilon_commutes_with_W}\right)\\
 &=2u^\top Wu+2u^\top W\varepsilon u
-&&\left(\because\ \varepsilon^2=I\right)\\
+&&\left(\because\ \blkref{epsilon_square_and_eigenvalues}\text{ の }\varepsilon^2=I\right)\\
 &\geq2u^\top Wu
 &&\left(\because\ u,\varepsilon u\geq0\text{ と }W_{kl}>0\text{ より }u^\top W\varepsilon u\geq0\right)
 \end{aligned}`),
@@ -3097,6 +3118,7 @@ v^\top Wv
         "この粗い評価を採ったのは c_-(M) の値に依存しないためである。一次情報で確認したところ c_-(M) = Λ^{(0)}_M は一般には成り立たない: 高温側 (K_1,K_2) = (0.05,0.1)（sinh2K_1 sinh2K_2 ≈ 0.020）では c_-(M)/Λ^{(0)}_M = 0.1102 で、M = 2,3,4,5 のすべてで一致しない（同 check_05 の対照出力）。V^{(-)} の最大固有値の固有ベクトルが F^{(+)} 側に落ちる場合があるためで、偶セクターで解決したのと同じ問題が奇セクターでは別の答えになりうる。本文はこの点に触れずに済む形にしてある。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_05（M=2,3,4,5 で c(M) = max(c_+,c_-) と W の最大固有値の一致、Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M、および M を大きくしたときの (1/M) log Λ^{(1/2)}_M の Onsager 積分への収束）。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },

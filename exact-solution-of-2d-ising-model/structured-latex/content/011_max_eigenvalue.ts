@@ -45,19 +45,56 @@ export default defineBlocks([
         "また挟み撃ちには不要だからである。",
       ]),
       paragraph([
-        "あわせて、",
+        "あわせて、偶セクター ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        "（",
+        ref("def_even_eigenvectors_of_epsilon"),
+        "）について次を示す。",
+        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " の単位ベクトルにわたる上限 ",
+        math(String.raw`c_+(M_{\mathrm{col}})`),
+        " を定め（",
+        ref("def_sector_rayleigh_sup"),
+        "）、",
+        math(String.raw`c_+(M_{\mathrm{col}}) \leq c(M_{\mathrm{col}})`),
+        " を示す（",
+        ref("c_plus_le_c"),
+        "）。",
         math(String.raw`W`),
         " が ",
         math(String.raw`\varepsilon`),
-        " の偶奇セクターを保つこと、および ",
-        math(String.raw`c(M_{\mathrm{col}}) = \max(c_+(M_{\mathrm{col}}), c_-(M_{\mathrm{col}}))`),
-        "（各セクターでの上限）を示す。",
+        " と可換で ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " を保つこと（",
+        ref("epsilon_commutes_with_W"),
+        "）、",
+        math(String.raw`\varepsilon`),
+        " が実対称であること（",
+        ref("epsilon_is_real_symmetric"),
+        "）、および ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " の上で ",
+        math(String.raw`W`),
+        " が偶セクターの転送行列 ",
+        math(String.raw`V^{(+)}`),
+        " に一致すること ",
+        math(String.raw`WP^{(+)} = V^{(+)}P^{(+)}`),
+        "（",
+        ref("symmetrized_transfer_matrix_on_sectors"),
+        "）を示す。これらは ",
+        ref("onsager_exact_solution"),
+        " で ",
+        math(String.raw`c(M_{\mathrm{col}})`),
+        " を ",
+        math(String.raw`c_+(M_{\mathrm{col}})`),
+        " で上下から挟むために使う。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -1257,30 +1294,30 @@ Z(K_1,K_2)
     id: "maxeig_010a_definition_sector_rayleigh_sup",
     kind: "definition",
     origin: { path: SRC, ordinal: 12 },
-    title: { tex: String.raw`c_\pm(M_{\mathrm{col}}) := \sup \mathcal{R}_\pm \text{（セクターごとの上限）}` },
+    title: { tex: String.raw`c_+(M_{\mathrm{col}}) := \sup \mathcal{R}_+ \text{（偶セクターでの上限）}` },
     labels: ["def_sector_rayleigh_sup"],
     statement: [
       paragraph([
-        ref("def_epsilon_projectors"),
+        ref("def_symmetrized_transfer_matrix"),
         " の ",
-        math(String.raw`P^{(\pm)}`),
+        math(String.raw`W`),
         " と ",
-        ref("def_eigenspaces_of_epsilon"),
+        ref("def_even_eigenvectors_of_epsilon"),
         " の ",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
+        math(String.raw`\mathcal{F}^{(+)}`),
         " について、",
       ]),
       displayMath(
-        String.raw`\mathcal{R}_\pm := \left\{\, x^\top W x \ \middle|\ x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\},
-\qquad c_\pm(M_{\mathrm{col}}) := \sup \mathcal{R}_\pm`,
+        String.raw`\mathcal{R}_+ := \left\{\, x^\top W x \ \middle|\ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\},
+\qquad c_+(M_{\mathrm{col}}) := \sup \mathcal{R}_+`,
       ),
       paragraph([
-        "とおく（複号同順）。この上限が定まること、すなわち ",
-        math(String.raw`\mathcal{R}_\pm`),
+        "とおく。この上限が定まること、すなわち ",
+        math(String.raw`\mathcal{R}_+`),
         " が空でなく上に有界であることを先に確かめる。上に有界なのは ",
-        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}} \subseteq \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}} \subseteq \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " より ",
-        math(String.raw`\mathcal{R}_\pm \subseteq \mathcal{R}`),
+        math(String.raw`\mathcal{R}_+ \subseteq \mathcal{R}`),
         "（",
         ref("def_rayleigh_sup"),
         " の ",
@@ -1292,7 +1329,7 @@ Z(K_1,K_2)
         " で上に有界だからである（",
         ref("def_rayleigh_sup"),
         " の有界性の評価）。空でないことは、",
-        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルを具体的に作れることから従う。",
       ]),
       paragraph([
@@ -1302,9 +1339,9 @@ Z(K_1,K_2)
         " について",
       ]),
       displayMath(
-        String.raw`a_\pm := \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ \pm 1\end{pmatrix} \in \mathbb{R}^2,
+        String.raw`a_+ := \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 1\end{pmatrix} \in \mathbb{R}^2,
 \qquad
-\sigma^x a_\pm = \frac{1}{\sqrt{2}}\begin{pmatrix}\pm 1 \\ 1\end{pmatrix} = \pm\,a_\pm`,
+\sigma^x a_+ = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 1\end{pmatrix} = a_+`,
       ),
       paragraph([
         "とおき（右の等式は ",
@@ -1316,23 +1353,21 @@ Z(K_1,K_2)
         " (1) の数ベクトルのクロネッカー積で",
       ]),
       displayMath(
-        String.raw`x^{(+)} := \overbrace{a_+ \boxtimes a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mathrm{col}}},
-\qquad
-x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mathrm{col}}-1}
+        String.raw`x^{(+)} := \overbrace{a_+ \boxtimes a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mathrm{col}}}
 \quad \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`,
       ),
       paragraph([
         "と定める（",
         ref("def_kronecker"),
         " (1) より成分は各因子の成分の積だから、",
-        math(String.raw`x^{(\pm)}`),
+        math(String.raw`x^{(+)}`),
         " の各成分は ",
-        math(String.raw`\pm 2^{-M_{\mathrm{col}}/2}`),
+        math(String.raw`2^{-M_{\mathrm{col}}/2}`),
         " という実数であり、とくに ",
-        math(String.raw`x^{(\pm)} \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`x^{(+)} \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "）。",
-        ref("def_eigenspaces_of_epsilon"),
-        " の ",
+        ref("epsilon_square_and_eigenvalues"),
+        " の証明で得た ",
         math(String.raw`\varepsilon = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
         " と ",
         ref("kronecker_product_rule"),
@@ -1341,63 +1376,130 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mat
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\,x^{(+)}
+&= \left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)\left(a_+\boxtimes\cdots\boxtimes a_+\right)
+   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示と}\ x^{(+)}\ \text{の定義}) \\
 &= \left(\sigma^xa_+\right)\boxtimes\cdots\boxtimes\left(\sigma^xa_+\right)
-= a_+\boxtimes\cdots\boxtimes a_+ = x^{(+)} \\
-\varepsilon\,x^{(-)}
-&= \left(\sigma^xa_-\right)\boxtimes\left(\sigma^xa_+\right)\boxtimes\cdots\boxtimes\left(\sigma^xa_+\right)
-= \left(-a_-\right)\boxtimes a_+\boxtimes\cdots\boxtimes a_+
-= -\,x^{(-)}
+   \quad (\because \blkref{kronecker_product_rule}\ \text{(3)}) \\
+&= a_+\boxtimes\cdots\boxtimes a_+
+   \quad (\because \sigma^x a_+ = a_+\ \text{を各因子へ同時に適用}) \\
+&= x^{(+)}
+   \quad (\because x^{(+)}\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
-        "（最後の等号は ",
-        ref("def_kronecker"),
-        " (1) の成分表示において第 1 因子の成分だけが ",
-        math(String.raw`-1`),
-        " 倍されることによる）。よって ",
-        ref("def_eigenspaces_of_epsilon"),
+        "である。よって ",
+        ref("def_even_eigenvectors_of_epsilon"),
         " より ",
-        math(String.raw`x^{(\pm)} \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`x^{(+)} \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " である。さらに ",
-        math(String.raw`x^{(\pm)}`),
+        math(String.raw`x^{(+)}`),
         " の ",
         math(String.raw`2^{M_{\mathrm{col}}}`),
-        " 個の成分はすべて絶対値 ",
+        " 個の成分はすべて ",
         math(String.raw`2^{-M_{\mathrm{col}}/2}`),
         " なので",
       ]),
       displayMath(
-        String.raw`\left\|x^{(\pm)}\right\|^2
-= \sum_{I \in \mathcal{I}_{M_{\mathrm{col}}}}\left(2^{-M_{\mathrm{col}}/2}\right)^2
-= 2^{M_{\mathrm{col}}}\cdot 2^{-M_{\mathrm{col}}} = 1`,
+        String.raw`\begin{aligned}
+\left\|x^{(+)}\right\|^2
+&= \sum_{I \in \mathcal{I}_{M_{\mathrm{col}}}}\left(2^{-M_{\mathrm{col}}/2}\right)^2
+   \quad (\because \blkref{def_matrix_norm}\ \text{の数ベクトルのノルムの定義と各成分の値}) \\
+&= 2^{M_{\mathrm{col}}}\cdot 2^{-M_{\mathrm{col}}}
+   \quad (\because \#\mathcal{I}_{M_{\mathrm{col}}} = 2^{M_{\mathrm{col}}}\ \text{と}\ \left(2^{-M_{\mathrm{col}}/2}\right)^2 = 2^{-M_{\mathrm{col}}}) \\
+&= 1
+   \quad (\because \text{指数法則})
+\end{aligned}`,
       ),
       paragraph([
         "（",
         math(String.raw`\mathcal{I}_{M_{\mathrm{col}}}`),
         " は ",
         ref("def_kronecker"),
-        " の添字集合で ",
-        math(String.raw`\#\mathcal{I}_{M_{\mathrm{col}}} = 2^{M_{\mathrm{col}}}`),
-        "）。したがって ",
-        math(String.raw`\left(x^{(\pm)}\right)^\top Wx^{(\pm)} \in \mathcal{R}_\pm`),
+        " の添字集合）。したがって ",
+        math(String.raw`\left(x^{(+)}\right)^\top Wx^{(+)} \in \mathcal{R}_+`),
         " で ",
-        math(String.raw`\mathcal{R}_\pm \neq \emptyset`),
+        math(String.raw`\mathcal{R}_+ \neq \emptyset`),
         " であり、上限 ",
-        math(String.raw`c_\pm(M_{\mathrm{col}}) \in \mathbb{R}`),
-        " が定まる。以上のもとで、",
-      ]),
-      paragraph([
-        "以上により、二つのセクターの上限 ",
-        math(String.raw`c_+(M_{\mathrm{col}})`),
-        " と ",
-        math(String.raw`c_-(M_{\mathrm{col}})`),
-        " が定まった。",
+        math(String.raw`c_+(M_{\mathrm{col}}) \in \mathbb{R}`),
+        " が定まる。上限の存在は ",
+        ref("def_rayleigh_sup"),
+        " と同じく、空でなく上に有界な実数の集合が上限をもつという ",
+        math(String.raw`\mathbb{R}`),
+        " の性質による（実数への脱出）。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-05 の分割で、上限のセクター分解のブロックから、セクターごとの上限の定義とその整合性（値の集合が空でなく上に有界であること）を独立させた。式変形と根拠は分割前と同じである。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。ε のクロネッカー積表示の参照先を <epsilon_square_and_eigenvalues> の証明に直し（旧参照 <def_eigenspaces_of_epsilon> にはこの表示が無い）、ε x^{(+)} = x^{(+)} とノルムの計算を一行一等号の鎖に開いた。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_claim_c_plus_le_c",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 12 },
+    title: { tex: String.raw`c_+(M_{\mathrm{col}}) \leq c(M_{\mathrm{col}})` },
+    labels: ["c_plus_le_c"],
+    statement: [
+      paragraph([
+        ref("def_sector_rayleigh_sup"),
+        " の ",
+        math(String.raw`c_+(M_{\mathrm{col}}) \in \mathbb{R}`),
+        " と ",
+        ref("def_rayleigh_sup"),
+        " の ",
+        math(String.raw`c(M_{\mathrm{col}}) \in \mathbb{R}_{>0}`),
+        " について、",
+      ]),
+      displayMath(String.raw`c_+(M_{\mathrm{col}}) \leq c(M_{\mathrm{col}})`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}} \subseteq \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " なので、",
+        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " の単位ベクトルは ",
+        math(String.raw`\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
+        " の単位ベクトルでもあり、",
+        ref("def_sector_rayleigh_sup"),
+        " の ",
+        math(String.raw`\mathcal{R}_+`),
+        " と ",
+        ref("def_rayleigh_sup"),
+        " の ",
+        math(String.raw`\mathcal{R}`),
+        " について ",
+        math(String.raw`\mathcal{R}_+ \subseteq \mathcal{R}`),
+        " である。",
+        math(String.raw`\mathcal{R}_+`),
+        " は空でない（",
+        ref("def_sector_rayleigh_sup"),
+        "）。上限の比較は ",
+        math(String.raw`\mathbb{R}`),
+        " の中で行う（両辺の上限はいずれも ",
+        math(String.raw`\mathbb{R}`),
+        " の上限の存在によって定まった実数である）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+c_+(M_{\mathrm{col}})
+&= \sup \mathcal{R}_+
+  \quad (\because \blkref{def_sector_rayleigh_sup}) \\
+&\leq \sup \mathcal{R}
+  \quad (\because \mathcal{R}_+ \subseteq \mathcal{R},\ \mathcal{R}_+ \neq \emptyset\ \text{と上限の単調性}) \\
+&= c(M_{\mathrm{col}})
+  \quad (\because \blkref{def_rayleigh_sup})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。最大値分解 c(M_col) = max(c_+(M_col), c_-(M_col)) のうち、最終定理が使う片側の不等式 c_+(M_col) ≤ c(M_col) だけを独立した主張として立てた（証明は最大値分解の証明の該当部分と同じ）。",
       ],
     },
   },
@@ -1418,10 +1520,10 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mat
         " と可換である。したがって ",
         math(String.raw`W`),
         " は ",
-        ref("def_eigenspaces_of_epsilon"),
-        " の二つの固有空間 ",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
-        " をそれぞれ保つ。",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " の ",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " を保つ。",
       ]),
     ],
     proof: [
@@ -1455,11 +1557,11 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mat
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`f \in \mathcal{F}^{(\pm)}`),
+        math(String.raw`f \in \mathcal{F}^{(+)}`),
         " とすると、",
-        ref("def_eigenspaces_of_epsilon"),
+        ref("def_even_eigenvectors_of_epsilon"),
         " より ",
-        math(String.raw`\varepsilon f = \pm f`),
+        math(String.raw`\varepsilon f = f`),
         " であり、",
       ]),
       displayMath(
@@ -1471,17 +1573,15 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mat
    \quad (\because \text{上の等式鎖 } \varepsilon W = W\varepsilon) \\
 &= W(\varepsilon f)
    \quad (\because \text{行列の積の結合則}) \\
-&= W(\pm f)
-   \quad (\because \varepsilon f = \pm f) \\
-&= \pm (Wf)
-   \quad (\because \text{スカラー倍は行列の作用と交換する})
+&= Wf
+   \quad (\because \varepsilon f = f)
 \end{aligned}`,
       ),
       paragraph([
         "なので ",
-        math(String.raw`Wf \in \mathcal{F}^{(\pm)}`),
+        math(String.raw`Wf \in \mathcal{F}^{(+)}`),
         "（",
-        ref("def_eigenspaces_of_epsilon"),
+        ref("def_even_eigenvectors_of_epsilon"),
         "）。",
       ]),
     ],
@@ -1489,6 +1589,59 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mat
       status: "added",
       notes: [
         "2026-09-05 の分割で、上限のセクター分解のブロックから、全スピン反転行列との可換性と固有空間の保存を独立させた。式変形と根拠は分割前と同じである。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+      ],
+    },
+  },
+
+  {
+    id: "maxeig_claim_epsilon_is_real_symmetric",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 12 },
+    title: { tex: String.raw`\varepsilon^\top = \varepsilon` },
+    labels: ["epsilon_is_real_symmetric"],
+    statement: [
+      paragraph([
+        ref("def_global_spin_flip_matrix"),
+        " の全スピン反転行列 ",
+        math(String.raw`\varepsilon \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " は成分がすべて実数であり、転置について対称である。",
+      ]),
+      displayMath(String.raw`\varepsilon^\top = \varepsilon`),
+    ],
+    proof: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x = \begin{pmatrix}0&1\\1&0\end{pmatrix}`),
+        " の成分はすべて実数（",
+        math(String.raw`0`),
+        " または ",
+        math(String.raw`1`),
+        "）であり、",
+        ref("def_kronecker"),
+        " (1) よりクロネッカー積の成分は各因子の成分の積だから、",
+        math(String.raw`\varepsilon = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
+        " の成分もすべて実数である。転置については",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon^\top
+&=\left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)^\top
+  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示})\\
+&=(\sigma^x)^\top\boxtimes\cdots\boxtimes(\sigma^x)^\top
+  \quad (\because \blkref{kronecker_transpose})\\
+&=\sigma^x\boxtimes\cdots\boxtimes\sigma^x
+  \quad (\because \blkref{pauli_matrix_products}\ \text{の }\sigma^x\text{ の成分表示から }(\sigma^x)^\top=\sigma^x)\\
+&=\varepsilon
+  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示}).
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。旧 <sector_decomposition_of_rayleigh_sup> の証明の中にあった ε^⊤ = ε の導出を、最終定理が引く独立した主張として取り出した。",
       ],
     },
   },
@@ -1497,27 +1650,28 @@ x^{(-)} := a_- \boxtimes \overbrace{a_+ \boxtimes \cdots \boxtimes a_+}^{M_{\mat
     id: "maxeig_claim_symmetrized_transfer_matrix_on_sectors",
     kind: "claim",
     origin: { path: SRC, ordinal: 12 },
-    title: { tex: String.raw`W P^{(\pm)} = V^{(\pm)}P^{(\pm)}` },
+    title: { tex: String.raw`W P^{(+)} = V^{(+)}P^{(+)}` },
     labels: ["symmetrized_transfer_matrix_on_sectors"],
     statement: [
       paragraph([
         ref("def_symmetrized_transfer_matrix"), " の ", math(String.raw`W`),
-        "、", ref("def_epsilon_projectors"), " の ", math(String.raw`P^{(\pm)}`),
-        "、", ref("partition_function_sector_decomposition"), " の ", math(String.raw`V^{(\pm)}`),
-        " について、複号同順で次が成り立つ。",
+        "、", ref("def_epsilon_projectors"), " の ", math(String.raw`P^{(+)}`),
+        "、", ref("def_V_plus"), " の ", math(String.raw`V^{(+)}`),
+        " について、次が成り立つ。",
       ]),
-      displayMath(String.raw`W P^{(\pm)} = V^{(\pm)}P^{(\pm)}`),
+      displayMath(String.raw`W P^{(+)} = V^{(+)}P^{(+)}`),
     ],
     proof: [
       paragraph([
         math(String.raw`B:=V_1^{1/2}`), " は ", ref("def_transfer_matrix_square_root"),
-        "、", math(String.raw`C:=(V_1^{(\pm)})^{1/2}`), " は ", ref("def_V1_pm_square_root"),
-        " の行列とし、", math(String.raw`P:=P^{(\pm)}`), " と略記する。",
+        "、", math(String.raw`C:=(V_1^{(+)})^{1/2}`), " は ", ref("def_V1_plus_square_root"),
+        " の行列とし、", math(String.raw`P:=P^{(+)}`), " と略記する。",
         ref("V1_restriction_to_eigenspaces"), " に結合定数 ", math(String.raw`K_1/2`),
-        " を代入すると、任意の ", math(String.raw`f\in\mathcal F^{(\pm)}`),
+        " を代入すると（右辺の指数の中身は ", ref("def_H1_plus"), " の ", math(String.raw`\tfrac{i}{2}K_1H_1^{(+)}`),
+        " である）、任意の ", math(String.raw`f\in\mathcal F^{(+)}`),
         " について ", math(String.raw`Bf=Cf`), " を得る。",
-        ref("epsilon_projector_properties"), " より任意の ", math(String.raw`x\in\mathbb C^{2^{M_{\mathrm{col}}}}`),
-        " に対して ", math(String.raw`Px\in\mathcal F^{(\pm)}`), " なので、",
+        ref("epsilon_projector_properties"), " (2) より任意の ", math(String.raw`x\in\mathbb C^{2^{M_{\mathrm{col}}}}`),
+        " に対して ", math(String.raw`Px\in\mathcal F^{(+)}`), " なので、",
       ]),
       displayMath(String.raw`\begin{aligned}
 (BP)x
@@ -1539,329 +1693,16 @@ WP
 &=CPV_2C &&(\because\ BP=CP)\\
 &=CV_2PC &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }PV_2=V_2P)\\
 &=CV_2CP &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }PC=CP)\\
-&=V^{(\pm)}P &&(\because\ \blkref{partition_function_sector_decomposition}\text{ の }V^{(\pm)}\text{ の定義}).
+&=V^{(+)}P &&(\because\ \blkref{def_V_plus}).
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
-      notes: ["セクター射影子による表示を上限の最大値分解から分離した。BP=CP と後続の等式鎖は一行ずつ SageMath 検査へ対応済みである。Lean では physicalSymTransferR_map_mul_epsProj_eq_Vsym として同じ九段を形式化済みである。有限個の浮動小数点計算の成功と形式証明は別の検証層として扱う。"],
-    },
-  },
-
-  {
-    id: "maxeig_010_claim_sector_decomposition_of_c",
-    kind: "claim",
-    standing: "mainTheorem",
-    origin: { path: SRC, ordinal: 12 },
-    title: { tex: String.raw`c(M_{\mathrm{col}}) = \max\left(c_+(M_{\mathrm{col}}), c_-(M_{\mathrm{col}})\right)` },
-    labels: ["sector_decomposition_of_rayleigh_sup"],
-    statement: [
-      paragraph([
-        ref("def_rayleigh_sup"), " の ", math(String.raw`c(M_{\mathrm{col}})`), " と ",
-        ref("def_sector_rayleigh_sup"), " の ", math(String.raw`c_\pm(M_{\mathrm{col}})`),
-        " について、次が成り立つ。",
-      ]),
-      displayMath(String.raw`c(M_{\mathrm{col}}) = \max\left(c_+(M_{\mathrm{col}}), c_-(M_{\mathrm{col}})\right)`),
-    ],
-    proof: [
-      paragraph([
-        ref("epsilon_projector_properties"),
-        " (2)(3) より、任意の ",
-        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " は ",
-        math(String.raw`x = x_+ + x_-`),
-        "（",
-        math(String.raw`x_\pm := P^{(\pm)}x \in \mathcal{F}^{(\pm)}`),
-        "）と分解される。",
-        ref("epsilon_square_and_eigenvalues"),
-        " の証明で得た ",
-        math(String.raw`\varepsilon=\sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
-        " と、",
-        ref("pauli_matrix_products"),
-        " の ",
-        math(String.raw`\sigma^x`),
-        " の成分表示、",
-        ref("kronecker_transpose"),
-        " より、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon^\top
-&=\left(\sigma^x\boxtimes\cdots\boxtimes\sigma^x\right)^\top
-  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示})\\
-&=(\sigma^x)^\top\boxtimes\cdots\boxtimes(\sigma^x)^\top
-  \quad (\because \blkref{kronecker_transpose})\\
-&=\sigma^x\boxtimes\cdots\boxtimes\sigma^x
-  \quad (\because \blkref{pauli_matrix_products}\ \text{の }\sigma^x\text{ の成分表示})\\
-&=\varepsilon
-  \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示}).
-\end{aligned}`,
-      ),
-      paragraph([
-        "したがって ",
-        math(String.raw`\varepsilon`),
-        " は実対称である。さらに、",
-        ref("def_epsilon_projectors"),
-        " から ",
-        math(String.raw`P^{(\pm)}`),
-        " も実対称である。実際、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(P^{(\pm)}\right)^\top
-&=\left(\tfrac12(I\pm\varepsilon)\right)^\top
-  \quad (\because \blkref{def_epsilon_projectors})\\
-&=\tfrac12\left(I^\top\pm\varepsilon^\top\right)
-  \quad (\because \text{転置は和と実数倍を保つ})\\
-&=\tfrac12(I\pm\varepsilon)
-  \quad (\because I^\top=I,\ \varepsilon^\top=\varepsilon)\\
-&=P^{(\pm)}
-  \quad (\because \blkref{def_epsilon_projectors}).
-\end{aligned}`,
-      ),
-      paragraph([
-        "また ",
-        math(String.raw`I`),
-        " と ",
-        math(String.raw`\varepsilon`),
-        " は実行列なので、",
-        ref("def_epsilon_projectors"),
-        " の ",
-        math(String.raw`P^{(\pm)}`),
-        " も実行列である。したがって ",
-        math(String.raw`x\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
-        " から ",
-        math(String.raw`x_\pm=P^{(\pm)}x\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
-        " であり、先に示したセクターへの所属と合わせて ",
-        math(String.raw`x_\pm\in\mathcal F^{(\pm)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`),
-        " である。",
-      ]),
-      paragraph([
-        "ここで任意の ",
-        math(String.raw`u_+\in\mathcal F^{(+)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`),
-        " と ",
-        math(String.raw`u_-\in\mathcal F^{(-)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`),
-        " を取る。",
-        ref("epsilon_projector_properties"),
-        " (1)(3) より ",
-        math(String.raw`P^{(+)}u_+=u_+`),
-        "、",
-        math(String.raw`P^{(-)}u_-=u_-`),
-        " だから、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-u_+^\top u_-
-&= \left(P^{(+)}u_+\right)^\top\left(P^{(-)}u_-\right)
-   \quad (\because P^{(+)}u_+=u_+,\ P^{(-)}u_-=u_-) \\
-&= u_+^\top \left(P^{(+)}\right)^\top P^{(-)}u_-
-   \quad (\because \text{転置の積の法則を一回適用する}) \\
-&= u_+^\top P^{(+)}P^{(-)}u_-
-   \quad (\because (P^{(+)})^\top=P^{(+)}) \\
-&= u_+^\top\,0\,u_-
-   \quad (\because \blkref{epsilon_projector_properties}\ \text{(1) の }P^{(+)}P^{(-)}=0) \\
-&= 0
-   \quad (\because \text{零行列の作用})
-\end{aligned}`,
-      ),
-      paragraph([
-        "したがって二つのセクターの実ベクトルは直交する。特に ",
-        math(String.raw`x_+^\top x_-=x_-^\top x_+=0`),
-        " である。",
-        ref("def_matrix_norm"),
-        " の数ベクトルのノルムを使うと、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\|x\|^2
-&=x^\top x
-  \quad (\because \blkref{def_matrix_norm}\ \text{の数ベクトルのノルムの定義})\\
-&=(x_++x_-)^\top(x_++x_-)
-  \quad (\because x=x_++x_-\ \text{を左右へ代入})\\
-&=x_+^\top x_+ + x_+^\top x_- + x_-^\top x_+ + x_-^\top x_-
-  \quad (\because \text{転置と内積の分配則})\\
-&=x_+^\top x_+ + x_-^\top x_-
-  \quad (\because x_+^\top x_-=x_-^\top x_+=0)\\
-&=\|x_+\|^2+\|x_-\|^2
-  \quad (\because \text{ノルムの定義}).
-\end{aligned}`,
-      ),
-      paragraph([
-        "また ",
-        ref("epsilon_commutes_with_W"),
-        " より ",
-        math(String.raw`Wx_\pm \in \mathcal{F}^{(\pm)}`),
-        " である。また ",
-        ref("W_is_real_symmetric_positive_definite"),
-        " より ",
-        math(String.raw`W`),
-        " は実行列なので、",
-        math(String.raw`Wx_\pm\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
-        " でもある。したがって、上で示した実ベクトル間の直交性から交叉項が消えて",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-x^\top Wx
-&=(x_++x_-)^\top W(x_++x_-)
-  \quad (\because x=x_++x_- \text{ を左右へ代入する})\\
-&=(x_++x_-)^\top(Wx_++Wx_-)
-  \quad (\because \text{行列の作用の分配則})\\
-&=x_+^\top Wx_+ + x_+^\top Wx_- + x_-^\top Wx_+ + x_-^\top Wx_-
-  \quad (\because \text{転置と内積の分配則})\\
-&=x_+^\top Wx_+ + 0 + 0 + x_-^\top Wx_-
-  \quad (\because x_+,Wx_+\in\mathcal F^{(+)}\text{ と }x_-,Wx_-\in\mathcal F^{(-)}\text{ の直交性})\\
-&=x_+^\top Wx_+ + x_-^\top Wx_-
-  \quad (\because \text{零は加法単位元})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`c_\pm := c_\pm(M_{\mathrm{col}})`),
-        " と略記する。任意の ",
-        math(String.raw`y\in\mathcal F^{(\pm)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`),
-        " について、",
-        math(String.raw`y=0`),
-        " なら ",
-        math(String.raw`y^\top Wy=c_\pm\|y\|^2=0`),
-        " である。",
-        math(String.raw`y\neq0`),
-        " なら ",
-        ref("matrix_norm_triangle_inequality"),
-        " (1) より ",
-        math(String.raw`\|y\|>0`),
-        " であり、",
-        math(String.raw`\widehat y:=y/\|y\|`),
-        " と定める。",
-        ref("def_eigenspaces_of_epsilon"),
-        " と ",
-        ref("matrix_norm_triangle_inequality"),
-        " (2) より、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon\widehat y
-&=\varepsilon\left(\frac{1}{\|y\|}y\right)
-  \quad (\because \widehat y\ \text{の定義})\\
-&=\frac{1}{\|y\|}\,\varepsilon y
-  \quad (\because \text{行列の作用は実数倍を保つ})\\
-&=\frac{1}{\|y\|}(\pm y)
-  \quad (\because y\in\mathcal F^{(\pm)}\ \text{と}\ \blkref{def_eigenspaces_of_epsilon})\\
-&=\pm\widehat y
-  \quad (\because \widehat y\ \text{の定義}),\\[1mm]
-\|\widehat y\|
-&=\left\|\frac{1}{\|y\|}y\right\|
-  \quad (\because \widehat y\ \text{の定義})\\
-&=\left|\frac{1}{\|y\|}\right|\,\|y\|
-  \quad (\because \blkref{matrix_norm_triangle_inequality}\ \text{(2)})\\
-&=\frac{1}{\|y\|}\,\|y\|
-  \quad (\because \|y\|>0\ \text{なので }1/\|y\|>0)\\
-&=1
-  \quad (\because \|y\|>0).
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`\|y\|>0`),
-        " だから ",
-        math(String.raw`1/\|y\|\in\mathbb R`),
-        " である。また ",
-        math(String.raw`y\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
-        " であり、実数ベクトル全体は実数倍について閉じている。よって ",
-        math(String.raw`\widehat y=(1/\|y\|)y\in\mathbb R^{2^{M_{\mathrm{col}}}}`),
-        " である。上の計算と合わせると、",
-        math(String.raw`\widehat y`),
-        " は同じセクターの単位ベクトルである。したがって ",
-        ref("def_sector_rayleigh_sup"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\frac{1}{\|y\|^2}\,y^\top Wy
-&=\left(\frac{1}{\|y\|}\right)^2 y^\top Wy
-  \quad (\because (1/a)^2=1/a^2)\\
-&=\frac{1}{\|y\|}\,y^\top\left(\frac{1}{\|y\|}Wy\right)
-  \quad (\because \text{実数倍の結合則})\\
-&=\frac{1}{\|y\|}\,y^\top W\left(\frac{1}{\|y\|}y\right)
-  \quad (\because \text{行列の作用は実数倍を保つ})\\
-&=\left(\frac{1}{\|y\|}y\right)^\top W\left(\frac{1}{\|y\|}y\right)
-  \quad (\because \text{転置は実数倍を保つ})\\
-&=\widehat y^\top W\widehat y
-  \quad (\because \widehat y=(1/\|y\|)y\ \text{を左右へ代入})\\
-&\leq c_\pm
-  \quad (\because \|\widehat y\|=1\ \text{なのでセクター上限の定義を適用})\\
-y^\top Wy
-&\leq c_\pm\|y\|^2
-  \quad (\because \|y\|^2>0\ \text{を両辺へ掛ける}).
-\end{aligned}`,
-      ),
-      paragraph([
-        "零の場合と非零の場合を合わせると、各符号について ",
-        math(String.raw`y^\top Wy\leq c_\pm\|y\|^2`),
-        " が任意のセクターベクトルで成り立つ。これを ",
-        math(String.raw`y=x_\pm`),
-        " へ適用する。",
-        math(String.raw`\|x\| = 1`),
-        " のとき",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-x^\top Wx
-&= x_+^\top Wx_+ + x_-^\top Wx_-
-  \quad (\because \text{上の交叉項の消去})\\
-&\leq c_+\|x_+\|^2 + x_-^\top Wx_-
-  \quad (\because x_+^\top Wx_+ \leq c_+\|x_+\|^2 \text{ を第一項へ適用する})\\
-&\leq c_+\|x_+\|^2 + c_-\|x_-\|^2
-  \quad (\because x_-^\top Wx_- \leq c_-\|x_-\|^2 \text{ を第二項へ適用する})\\
-&\leq \max(c_+,c_-)\|x_+\|^2 + \max(c_+,c_-)\|x_-\|^2
-  \quad (\because c_\pm \leq \max(c_+,c_-) \text{ と } \|x_\pm\|^2 \geq 0 \text{ の積の単調性})\\
-&= \max(c_+,c_-)\left(\|x_+\|^2+\|x_-\|^2\right)
-  \quad (\because \text{分配則})\\
-&= \max(c_+,c_-)\,\|x\|^2
-  \quad (\because \|x\|^2 = \|x_+\|^2 + \|x_-\|^2 \text{ を上で示した})\\
-&= \max(c_+,c_-)
-  \quad (\because \|x\| = 1)
-\end{aligned}`,
-      ),
-      paragraph([
-        "上限を取って ",
-        math(String.raw`c(M_{\mathrm{col}}) \leq \max(c_+,c_-)`),
-        "。逆に、",
-        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " の単位ベクトルは ",
-        math(String.raw`\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
-        " の単位ベクトルでもあるので ",
-        math(String.raw`\mathcal{R}_\pm \subseteq \mathcal{R}`),
-        " である（空でないことと上に有界であることは ",
-        ref("def_sector_rayleigh_sup"),
-        "）。したがって",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-c_\pm
-&= \sup \mathcal{R}_\pm
-  \quad (\because c_\pm \text{ の定義})\\
-&\leq \sup \mathcal{R}
-  \quad (\because \mathcal{R}_\pm \subseteq \mathcal{R} \text{ と上限の単調性})\\
-&= c(M_{\mathrm{col}})
-  \quad (\because c(M_{\mathrm{col}}) \text{ の定義})
-\end{aligned}`,
-      ),
-      paragraph(["両方の符号について成り立つので、"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\max(c_+,c_-)
-&\leq c(M_{\mathrm{col}})
-  \quad (\because c_+\leq c(M_{\mathrm{col}}) \text{ かつ } c_-\leq c(M_{\mathrm{col}}))\\
-&\leq \max(c_+,c_-)
-  \quad (\because \text{上で示したレイリー商の上界})
-\end{aligned}`,
-      ),
-      paragraph(["よって等号が成り立つ。"]),
-    ],
-    conversion: {
-      status: "added",
       notes: [
-        "射影子による表示は独立した主張へ分離し、最大値分解を独立した無番号の一項として残した。",
-        "2026-09-06 の構成再編で、異なるセクターの任意の実ベクトルが直交すること、ノルムの平方和、零・非零を分けた正規化を明示し、上限の定義を任意の実セクターベクトルへ適用する欠落を埋めた。",
+        "セクター射影子による表示を上限の最大値分解から分離した。BP=CP と後続の等式鎖は一行ずつ SageMath 検査へ対応済みである。Lean では physicalSymTransferR_map_mul_epsProj_eq_Vsym として同じ九段を形式化済みである。有限個の浮動小数点計算の成功と形式証明は別の検証層として扱う。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。V^{(+)} の定義の参照先を <def_V_plus> にし、射影子の像の参照を <epsilon_projector_properties> (2) に直した。",
       ],
     },
   },
+
 ]);
