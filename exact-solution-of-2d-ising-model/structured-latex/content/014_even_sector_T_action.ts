@@ -2293,6 +2293,7 @@ P_{21}
   {
     id: "evensectorT_010_claim_T_V_plus_action",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`T_{(V^{(+)})} \text{ の } \check{Z}, \check{Y} \text{ への作用}` },
     labels: ["T_V_plus_check_Z_Y"],

@@ -1567,6 +1567,7 @@ e^{-ij\tilde\theta_{M+1-\mu}}
   {
     id: "evensector_004_claim_commutator_H_check_Z_Y",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 8 },
     title: { tex: String.raw`H_1^{(+)}, H_2 \text{ と } \check{Z}, \check{Y} \text{ の交換関係}` },
     labels: ["commutator_of_H_and_check_Z_Y"],
@@ -2031,6 +2032,7 @@ e^{-i(M+1)\tilde\theta_\mu}\,Z_{M+1}^{\flat}
   {
     id: "evensector_005_claim_anticommutator_check_Z_Y",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 9 },
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ の反交換関係}` },
     labels: ["anticommutator_of_check_Z_Y"],

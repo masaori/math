@@ -2525,6 +2525,7 @@ x^*\check{Q}_\epsilon x
   {
     id: "closing_009_theorem_c_plus_equals_Lambda_half",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`c_+(M) = \Lambda^{(1/2)}_M` },
     labels: ["c_plus_equals_Lambda_half_integer"],
@@ -2825,6 +2826,7 @@ x^\top Wx
   {
     id: "closing_010_theorem_onsager_exact_solution",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 12 },
     title: { text: "2 次元 Ising 模型の厳密解（Onsager の自由エネルギー）" },
     labels: ["onsager_exact_solution"],

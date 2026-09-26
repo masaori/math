@@ -919,6 +919,7 @@ A(\theta)(cv)
   {
     id: "Athetatilde_005_claim_diagonalization",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 7 },
     title: { tex: String.raw`A(\tilde\theta_\mu) \text{ の対角化 } (\check{P}_\mu,\, \check{D}_\mu)` },
     labels: ["diagonalization_check_P_D"],

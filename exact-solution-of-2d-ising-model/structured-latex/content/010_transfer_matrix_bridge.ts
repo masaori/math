@@ -1186,6 +1186,7 @@ e^{K_2^*}
   {
     id: "bridge_007_claim_partition_function_in_pauli_form",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 9 },
     title: { text: "分配関数をパウリ行列表示の転送行列で書く" },
     labels: ["partition_function_in_pauli_form"],
@@ -2044,6 +2045,7 @@ P^{(\pm)}X
   {
     id: "bridge_012_claim_partition_function_sector_decomposition",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 14 },
     title: { text: "分配関数の偶奇セクター分解" },
     labels: ["partition_function_sector_decomposition"],

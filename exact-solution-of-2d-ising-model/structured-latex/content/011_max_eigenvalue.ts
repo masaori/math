@@ -1188,6 +1188,7 @@ c^{n}
   {
     id: "maxeig_009_claim_partition_function_sandwich",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 11 },
     title: { text: "分配関数の挟み撃ち" },
     labels: ["partition_function_sandwich"],
@@ -1525,6 +1526,7 @@ WP
   {
     id: "maxeig_010_claim_sector_decomposition_of_c",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`c(M) = \max\left(c_+(M), c_-(M)\right)` },
     labels: ["sector_decomposition_of_rayleigh_sup"],

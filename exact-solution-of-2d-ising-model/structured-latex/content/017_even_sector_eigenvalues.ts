@@ -2326,6 +2326,7 @@ C_-B_-
   {
     id: "evenEigen_009_claim_constant_c_value_even_sector",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`c = (2\sinh 2K_2)^{M/2}` },
     labels: ["constant_c_value_even_sector"],
@@ -2571,6 +2572,7 @@ c^2 &= (2s_2)^M
   {
     id: "evenEigen_010_theorem_eigenvalues_of_V_plus",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`V^{(+)} \text{ の固有値}` },
     labels: ["eigenvalues_of_V_plus"],
@@ -2741,6 +2743,7 @@ V^{(+)}\check{Q}_\epsilon
   {
     id: "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 13 },
     title: {
       tex: String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_M \text{ であり単純固有値}`,

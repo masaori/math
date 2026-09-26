@@ -660,6 +660,7 @@ x^\top W x
   {
     id: "sector_004_theorem_c_equals_c_plus",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 6 },
     title: { tex: String.raw`c(M) = c_+(M) = \Lambda^{(1/2)}_M` },
     labels: ["c_equals_c_plus"],

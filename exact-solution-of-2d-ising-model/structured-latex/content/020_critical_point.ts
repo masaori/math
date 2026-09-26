@@ -2090,6 +2090,7 @@ T
   {
     id: "critical_012_theorem_specific_heat_log_divergence",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 14 },
     title: { tex: String.raw`\left|\frac{d^2f}{dK^2} - \frac{8}{\pi}\log\frac{1}{|\kappa(K)|}\right| \leq 45` },
     labels: ["specific_heat_log_divergence"],

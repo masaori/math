@@ -709,6 +709,7 @@ u
   {
     id: "freeenergy_005_theorem_onsager_expression",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 7 },
     title: { text: "Onsager の自由エネルギーの表式" },
     labels: ["onsager_free_energy_expression"],

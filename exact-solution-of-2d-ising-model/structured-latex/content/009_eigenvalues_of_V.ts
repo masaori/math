@@ -3011,6 +3011,7 @@ U S_2 U^{-1}
   {
     id: "eigenvalues_of_V_017_claim_constant_c_value",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 19 },
     title: { tex: String.raw`c = (2\sinh 2K_2)^{M/2}` },
     labels: ["constant_c_value"],
@@ -3339,6 +3340,7 @@ B
   {
     id: "eigenvalues_of_V_018_claim_eigenvalues_of_V",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 20 },
     title: { tex: String.raw`V \text{ の固有値}` },
     labels: ["eigenvalues_of_V"],

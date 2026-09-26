@@ -28,6 +28,12 @@ import {
   CHAPTER_NAVIGATION_SCRIPT,
   renderChapterNavigation,
 } from "../../../structured-latex/renderers/html/chapter-navigation.ts";
+import {
+  THEOREM_STANDING_CSS,
+  renderMainTheoremLead,
+  renderStandingAwareBlock,
+} from "../../../structured-latex/renderers/html/theorem-standing.ts";
+import { standingOf } from "../../../structured-latex/domain-model/index.ts";
 import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 
@@ -73,6 +79,29 @@ for (const { blocks } of contentFiles) {
     const number = `${sectionNumber}.${counter}`;
     for (const label of block.labels) {
       byLabel.set(label, { kind: block.kind, number, blockId: block.id });
+    }
+  }
+}
+
+// --- 節の主定理（節の冒頭に列挙するもの）-------------------------------------
+//
+// 節は見出し level 2 で区切る。主定理かどうかはブロック自身の身分宣言（standing）だけで決め、
+// 文書順や参照関係から推測しない。
+
+const mainTheoremsBySection = new Map<string, TheoremLikeBlock[]>();
+{
+  let currentSection: string | undefined;
+  for (const { blocks } of contentFiles) {
+    for (const block of blocks) {
+      if (block.kind === "heading") {
+        if (block.level === 2) currentSection = block.id;
+        continue;
+      }
+      if (block.kind === "figure" || currentSection === undefined) continue;
+      if (standingOf(block) !== "mainTheorem") continue;
+      const entries = mainTheoremsBySection.get(currentSection) ?? [];
+      entries.push(block);
+      mainTheoremsBySection.set(currentSection, entries);
     }
   }
 }
@@ -139,24 +168,39 @@ function renderHeading(block: HeadingBlock): string {
   const tag = `h${Math.min(block.level + 1, 6)}`;
   const ids = block.labels.map((label) => `<span id="sec-${label}"></span>`).join("");
   const shown = number === "" ? title : `${number}　${title}`;
-  return `${ids}<${tag} id="sec-${anchor}" class="lv${block.level}">${shown}</${tag}>`;
+  const heading = `${ids}<${tag} id="sec-${anchor}" class="lv${block.level}">${shown}</${tag}>`;
+  // 節の冒頭に、その節の主定理を並べる。読み始める前に到達点が見えるようにする。
+  const lead = renderMainTheoremLead(
+    (mainTheoremsBySection.get(block.id) ?? []).map((main) => ({
+      anchor: `blk-${main.id}`,
+      text: headLine(main),
+    })),
+  );
+  return heading + lead;
 }
 
-function renderTheoremLike(block: TheoremLikeBlock): string {
+/** ブロックの見出し行（「定理 3.4（題名）」）。節冒頭の一覧とブロック本体で同じものを使う。 */
+function headLine(block: TheoremLikeBlock): string {
   const numbered = block.labels.map((l) => byLabel.get(l)).find((n) => n !== undefined);
   const number = numbered?.number ?? "";
   const title = renderTitle(block.title, block.id);
-  const head = `${HEADINGS[block.kind]} ${number}${title === "" ? "" : `（${title}）`}`;
+  return `${HEADINGS[block.kind]} ${number}${title === "" ? "" : `（${title}）`}`;
+}
+
+function renderTheoremLike(block: TheoremLikeBlock): string {
   const statement = renderNodes(block.statement, block.id);
   const proof =
     block.proof !== undefined && block.proof.length > 0
       ? `<div class="proof"><span class="proofhead">証明.</span> ${renderNodes(block.proof, block.id)}<span class="qed">□</span></div>`
       : "";
-  return (
-    `<section class="block ${block.kind}" id="blk-${block.id}">` +
-    `<div class="head">${head}</div>` +
-    `<div class="statement">${statement}</div>${proof}</section>`
-  );
+  // 主定理は開いたまま、サブ定理は見出しだけを見せて既定で閉じる（共有の既定 UI）。
+  return renderStandingAwareBlock({
+    standing: standingOf(block),
+    elementId: `blk-${block.id}`,
+    kind: block.kind,
+    headHtml: headLine(block),
+    bodyHtml: `<div class="statement">${statement}</div>${proof}`,
+  });
 }
 
 function renderTitle(title: { text?: string; tex?: string } | null | undefined, blockId: string): string {
@@ -262,6 +306,7 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 .matherror { color:#c00; font-family:ui-monospace,monospace; font-size:.85em; }
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
 ${CHAPTER_NAVIGATION_CSS}
+${THEOREM_STANDING_CSS}
 </style></head><body>
 ${mobileHtml}
 <div class="page-layout">
@@ -300,9 +345,12 @@ ${body.join("\n")}
   targets.forEach(function (el) { observer.observe(el); });
 
   // 参照をたどった先は、まだ組まれていないことがある。飛ぶ前にその周辺を組む。
+  // 飛び先が既定で閉じたサブ定理なら、開いてから見せる。
   var renderAround = function (id) {
     var target = document.getElementById(id);
     if (target === null) return;
+    var fold = target.querySelector(":scope > details.fold");
+    if (fold !== null) fold.open = true;
     target.querySelectorAll(".math").forEach(render);
     target.scrollIntoView();
   };

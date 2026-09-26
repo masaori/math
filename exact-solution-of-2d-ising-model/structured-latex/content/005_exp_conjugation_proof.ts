@@ -1038,6 +1038,7 @@ h
   {
     id: "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: { path: "structured-latex/content/005_exp_conjugation_proof.ts", ordinal: 9 },
     title: {
       tex: String.raw`\text{行列版: } e^{X} Y e^{-X} = e^{\mathrm{ad}_X}(Y)`,

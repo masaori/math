@@ -12,6 +12,7 @@ export default defineBlocks([
   {
     id: "hatZ_hatY_anticommutation_001_claim_anticommutation_relations",
     kind: "claim",
+    standing: "mainTheorem",
     origin: {
       path: "_old/typst/parts/007_hatZとhatYの反交換関係/000_claim_hatZ同士_hatZとhatY_hatY同士の反交換関係.typ",
       ordinal: 1,

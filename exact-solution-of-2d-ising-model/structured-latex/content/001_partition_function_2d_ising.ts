@@ -184,6 +184,7 @@ export default defineBlocks([
   {
     id: "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
     kind: "claim",
+    standing: "mainTheorem",
     origin: {
       path: "_old/typst/parts/001_2次元ising模型の分配関数/003_claim_転送行列による分配関数の表式.typ",
       ordinal: 4,

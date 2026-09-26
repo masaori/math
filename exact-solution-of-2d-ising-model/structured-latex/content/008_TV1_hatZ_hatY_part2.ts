@@ -1708,6 +1708,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu 
   {
     id: "TV1_hatZ_hatY_028_claim_P_mu_D_mu",
     kind: "claim",
+    standing: "mainTheorem",
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/027_claim_A_thetaの対角化_P_muとD_mu.typ",
       ordinal: 28,
@@ -5151,6 +5152,7 @@ T_{(V)}(I)
   {
     id: "TV1_hatZ_hatY_040_claim_V_eq_cVprime",
     kind: "claim",
+    standing: "mainTheorem",
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/039_claim_V_eq_Vprime.typ",
       ordinal: 40,

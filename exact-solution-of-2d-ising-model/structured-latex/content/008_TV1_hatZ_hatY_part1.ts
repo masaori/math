@@ -3550,6 +3550,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
   {
     id: "TV1_hatZ_hatY_018_claim_T_V_action",
     kind: "claim",
+    standing: "mainTheorem",
     origin: {
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/017_claim_T_VのhatZ_hatYへの作用.typ",
       ordinal: 18,

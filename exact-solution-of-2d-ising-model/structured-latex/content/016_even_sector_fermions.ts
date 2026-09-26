@@ -2056,6 +2056,7 @@ T_{(V^{(+)})}(xy)
   {
     id: "evenfermi_009_claim_V_plus_eq_c_Vprime",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`V^{(+)} = c\,\check{V}' \text{（定数倍を除いて一致）}` },
     labels: ["V_plus_eq_c_check_Vprime"],

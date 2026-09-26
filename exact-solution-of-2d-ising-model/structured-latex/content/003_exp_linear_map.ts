@@ -351,6 +351,7 @@ export default defineBlocks([
   {
     id: "exp_linear_map_001_theorem_exp_series_pointwise_converges",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: {
       path: "_old/typst/parts/003_線型写像のexp/000_theorem_線型写像のexpの級数が各点収束すること.typ",
       ordinal: 1,
@@ -1001,6 +1002,7 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
   {
     id: "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
     kind: "theorem",
+    standing: "mainTheorem",
     origin: { path: "_old/typst/parts/003_線型写像のexp/002_theorem_可換行列のexpの積公式.typ", ordinal: 3 },
     title: { text: "可換行列の exp 積公式" },
     labels: ["theorem_exp_product"],

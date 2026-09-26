@@ -3704,6 +3704,7 @@ f
   {
     id: "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: "_old/typst/parts/004_転送行列/005_claim_V1の固有空間への制限.typ", ordinal: 6 },
     title: { tex: String.raw`V_1 \text{ の固有空間への制限}` },
     labels: ["V1_restriction_to_eigenspaces"],
@@ -4677,6 +4678,7 @@ j_{\mathbb R}:=\iota_{\mathbb Z\to\mathbb R}(j_{\mathbb Z}),\qquad
   {
     id: "transfer_matrix_011c_claim_V1_pm_exponential_representation",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
     title: { tex: String.raw`V_1^{(\pm)} \text{ の一般生成子による指数表示}` },
     labels: ["V1_pm_exponential_representation"],
@@ -4735,6 +4737,7 @@ V_1^{(\pm)}
   {
     id: "transfer_matrix_011d_claim_V2_exponential_representation",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
     title: { tex: String.raw`V_2 \text{ の一般生成子による指数表示}` },
     labels: ["V2_exponential_representation"],
@@ -4793,6 +4796,7 @@ V_2
   {
     id: "transfer_matrix_012_claim_H1_H2_via_hatZ_hatY",
     kind: "claim",
+    standing: "mainTheorem",
     origin: { path: "_old/typst/parts/004_転送行列/011_claim_H1_H2をZhat_Yhatで表す.typ", ordinal: 12 },
     title: { tex: String.raw`H_1^{(\pm)}, H_2 \text{ を } \hat{Z}, \hat{Y} \text{ で表す}` },
     labels: ["H1_H2_via_hatZ_hatY"],

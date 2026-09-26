@@ -308,6 +308,7 @@ YX
   {
     id: "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y",
     kind: "claim",
+    standing: "mainTheorem",
     origin: {
       path: "_old/typst/parts/006_ZとYの反交換関係/000_claim_Z_muとZ_nuとY_muとY_nuの反交換関係.typ",
       ordinal: 1,
