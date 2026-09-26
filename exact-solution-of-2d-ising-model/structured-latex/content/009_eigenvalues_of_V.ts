@@ -1415,14 +1415,14 @@ y_\epsilon, & \epsilon=\epsilon'
 \left(\epsilon_\mu - \tfrac{1}{2}\right) \in \mathbb{R}`,
       ),
       paragraph(["とおく。このとき"]),
-      displayMath(String.raw`V' Q_\epsilon = e^{g(\epsilon)} Q_\epsilon`),
+      displayMath(String.raw`V' Q_\epsilon = \exp(g(\epsilon)) Q_\epsilon`),
       paragraph([
         "が成り立つ。すなわち ",
         math(String.raw`\mathrm{im}\,Q_\epsilon`),
         " の各元は ",
         math(String.raw`V'`),
         " の固有値 ",
-        math(String.raw`e^{g(\epsilon)}`),
+        math(String.raw`\exp(g(\epsilon))`),
         " の固有ベクトルであり、",
         ref("joint_eigenspace_decomposition"),
         " (5) より ",
@@ -1430,7 +1430,7 @@ y_\epsilon, & \epsilon=\epsilon'
         " は対角化可能で、その固有値は重複度を込めて",
       ]),
       displayMath(
-        String.raw`\left\{\,e^{g(\epsilon)} \ \text{（重複度 } 2^{M-m}\text{）} \ \middle|\ \epsilon \in \{0,1\}^{\mathcal{I}}\,\right\}`,
+        String.raw`\left\{\,\exp(g(\epsilon)) \ \text{（重複度 } 2^{M-m}\text{）} \ \middle|\ \epsilon \in \{0,1\}^{\mathcal{I}}\,\right\}`,
       ),
       paragraph([
         "で尽くされる（個数は重複度を込めて ",
@@ -1522,12 +1522,12 @@ E_K Q_\epsilon
         " より ",
         math(String.raw`\exp(X) Q_\epsilon = V' Q_\epsilon`),
         " に収束し、右辺は ",
-        ref("real_exp_series_converges"),
+        ref("real_exp_is_limit_of_partial_sums"),
         " より ",
-        math(String.raw`e^{g(\epsilon)}Q_\epsilon`),
+        math(String.raw`\exp(g(\epsilon))Q_\epsilon`),
         " に収束する。極限の一意性より",
       ]),
-      displayMath(String.raw`V' Q_\epsilon = e^{g(\epsilon)} Q_\epsilon`),
+      displayMath(String.raw`V' Q_\epsilon = \exp(g(\epsilon)) Q_\epsilon`),
       paragraph([
         "Step 4（固有値の言い換え）。",
         math(String.raw`y \in \mathrm{im}\,Q_\epsilon`),
@@ -1554,9 +1554,9 @@ Q_\epsilon y
 V' y
 &= V' Q_\epsilon y
    \quad (\because \text{上の } Q_\epsilon y = y) \\
-&= e^{g(\epsilon)} Q_\epsilon y
-   \quad (\because \text{Step 3 の } V' Q_\epsilon = e^{g(\epsilon)} Q_\epsilon) \\
-&= e^{g(\epsilon)} y
+&= \exp(g(\epsilon)) Q_\epsilon y
+   \quad (\because \text{Step 3 の } V' Q_\epsilon = \exp(g(\epsilon)) Q_\epsilon) \\
+&= \exp(g(\epsilon)) y
    \quad (\because \text{上の } Q_\epsilon y = y)
 \end{aligned}`,
       ),
@@ -1575,7 +1575,7 @@ V' y
         " の基底が得られる。したがって ",
         math(String.raw`V'`),
         " は対角化可能で、固有値は ",
-        math(String.raw`e^{g(\epsilon)}`),
+        math(String.raw`\exp(g(\epsilon))`),
         " が重複度 ",
         math(String.raw`\dim \mathrm{im}\,Q_\epsilon = 2^{M-m}`),
         " で現れるもので尽くされる。",
@@ -1587,13 +1587,16 @@ V' y
         " より ",
         math(String.raw`\gamma(\theta_\mu) \in \mathbb{R}_{\geq 0}`),
         "）なので ",
-        math(String.raw`e^{g(\epsilon)} > 0`),
-        " である。",
+        math(String.raw`\exp(g(\epsilon)) > 0`),
+        "（",
+        ref("real_exp_positive"),
+        "）である。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
+        "実数の指数関数を定義なしの e^x から、行列の exp の 1 行 1 列の場合として定義した exp（labels: def_real_exp）へ書き換え、収束・指数法則・正値性・単調性の根拠をその性質の主張へ付け替えた。式変形の内容は変えていない。",
         "2026-09-02 の式変形統一で、数演算子の定義と同時固有空間分解を使う各式変形行の行末へ `\\blkref` を置いた。内容・式変形・根拠・参照は変えていない。",
       ],
     },
@@ -1677,21 +1680,23 @@ V' y
    \quad (\because \textstyle\sum_\epsilon Q_\epsilon = I) \\
 &= \sum_{\epsilon} \mathrm{tr}\!\left(V' Q_\epsilon\right)
    \quad (\because \text{トレースの線型性}) \\
-&= \sum_{\epsilon} e^{g(\epsilon)}\,\mathrm{tr}(Q_\epsilon)
-   \quad (\because V'Q_\epsilon = e^{g(\epsilon)}Q_\epsilon) \\
-&= 2^{M-m}\sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} e^{g(\epsilon)}
+&= \sum_{\epsilon} \exp(g(\epsilon))\,\mathrm{tr}(Q_\epsilon)
+   \quad (\because V'Q_\epsilon = \exp(g(\epsilon))Q_\epsilon) \\
+&= 2^{M-m}\sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} \exp(g(\epsilon))
    \quad (\because \mathrm{tr}(Q_\epsilon) = 2^{M-m})
 \end{aligned}`,
       ),
       paragraph([
         "Step 3（積への分解）。",
         math(String.raw`g(\epsilon) = \sum_{\mu}\gamma(\theta_\mu)(\epsilon_\mu - \tfrac12)`),
-        " なので、実数の指数法則より",
+        " なので、",
+        ref("real_exp_product"),
+        " を繰り返し適用して",
       ]),
       displayMath(
-        String.raw`e^{g(\epsilon)} = \prod_{\mu \in \mathcal{I}}
+        String.raw`\exp(g(\epsilon)) = \prod_{\mu \in \mathcal{I}}
 \exp\!\left(\gamma(\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\right)
-\quad (\because \text{実数の指数法則})`,
+\quad (\because \text{実数の exp の積公式を有限回適用。}\blkref{real_exp_product})`,
       ),
       paragraph([
         math(String.raw`\epsilon`),
@@ -1705,13 +1710,13 @@ V' y
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} e^{g(\epsilon)}
+\sum_{\epsilon \in \{0,1\}^{\mathcal{I}}} \exp(g(\epsilon))
 &= \prod_{\mu \in \mathcal{I}}
    \left(\exp\!\left(-\tfrac{\gamma(\theta_\mu)}{2}\right)
    + \exp\!\left(+\tfrac{\gamma(\theta_\mu)}{2}\right)\right)
    \quad \left(\because \text{各 }\epsilon_\mu\in\{0,1\}\text{ の独立な選択による有限積の展開}\right) \\
 &= \prod_{\mu \in \mathcal{I}} 2\cosh\!\left(\frac{\gamma(\theta_\mu)}{2}\right)
-   \quad \left(\because \cosh x = \frac{e^x + e^{-x}}{2}\right)
+   \quad \left(\because \cosh x = \frac{\exp(x) + \exp(-x)}{2}\ \blkref{def_cosh_sinh}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -1774,6 +1779,7 @@ V' y
     conversion: {
       status: "added",
       notes: [
+        "実数の指数関数を定義なしの e^x から、行列の exp の 1 行 1 列の場合として定義した exp（labels: def_real_exp）へ書き換え、収束・指数法則・正値性・単調性の根拠をその性質の主張へ付け替えた。式変形の内容は変えていない。",
         "2026-08-15 の式変形統一で、フェルミオン数演算子の積和を指数関数の有限積へ分解する鎖の先頭行に、各二値成分の独立な選択による有限積の展開という行末根拠を補った。内容は変えていない。",
       ],
     },
@@ -3413,7 +3419,7 @@ B
         " であり、",
         ref("eigenvalues_of_Vprime"),
         " より ",
-        math(String.raw`V'Q_\epsilon = e^{g(\epsilon)}Q_\epsilon`),
+        math(String.raw`V'Q_\epsilon = \exp(g(\epsilon))Q_\epsilon`),
         " だから",
       ]),
       displayMath(
@@ -3421,8 +3427,8 @@ B
 V Q_\epsilon
 &= (2s_2)^{M/2}V'Q_\epsilon
    \quad (\because V=(2s_2)^{M/2}V') \\
-&= (2s_2)^{M/2}e^{g(\epsilon)}Q_\epsilon
-   \quad (\because V'Q_\epsilon=e^{g(\epsilon)}Q_\epsilon) \\
+&= (2s_2)^{M/2}\exp(g(\epsilon))Q_\epsilon
+   \quad (\because V'Q_\epsilon=\exp(g(\epsilon))Q_\epsilon) \\
 &= \Lambda_\epsilon Q_\epsilon
    \quad (\because \Lambda_\epsilon\ \text{の定義})
 \end{aligned}`,
@@ -3438,21 +3444,25 @@ V Q_\epsilon
         "(2) ",
         math(String.raw`(2s_2)^{M/2} > 0`),
         " と ",
-        math(String.raw`e^{g(\epsilon)} > 0`),
-        " より ",
+        math(String.raw`\exp(g(\epsilon)) > 0`),
+        "（",
+        ref("real_exp_positive"),
+        "）より ",
         math(String.raw`\Lambda_\epsilon > 0`),
         "。",
       ]),
       paragraph([
         "大小の比較。",
-        math(String.raw`\Lambda_\epsilon = (2s_2)^{M/2}e^{g(\epsilon)}`),
+        math(String.raw`\Lambda_\epsilon = (2s_2)^{M/2}\exp(g(\epsilon))`),
         " で ",
         math(String.raw`(2s_2)^{M/2}`),
         " は ",
         math(String.raw`\epsilon`),
         " に依らない正の定数、",
-        math(String.raw`t \mapsto e^t`),
-        " は実数上の狭義単調増加関数なので、",
+        math(String.raw`t \mapsto \exp(t)`),
+        " は実数上の狭義単調増加関数（",
+        ref("real_exp_strictly_increasing"),
+        "）なので、",
         math(String.raw`\Lambda_\epsilon`),
         " の大小は ",
         math(String.raw`g(\epsilon) = \sum_{\mu}\gamma(\theta_\mu)(\epsilon_\mu - \tfrac12)`),
@@ -3506,25 +3516,26 @@ g(0,\dots,0)
       displayMath(
         String.raw`\begin{aligned}
 \Lambda_{\max}\Lambda_{\min}
-&= (2s_2)^{M/2}e^{g(1,\dots,1)}\,(2s_2)^{M/2}e^{g(0,\dots,0)}
+&= (2s_2)^{M/2}\exp(g(1,\dots,1))\,(2s_2)^{M/2}\exp(g(0,\dots,0))
    \quad (\because \Lambda_{\max},\Lambda_{\min}\ \text{の表式}) \\
 &= \left((2s_2)^{M/2}(2s_2)^{M/2}\right)
-   \left(e^{g(1,\dots,1)}e^{g(0,\dots,0)}\right)
+   \left(\exp(g(1,\dots,1))\exp(g(0,\dots,0))\right)
    \quad (\because \text{積の可換則と結合則}) \\
-&= (2s_2)^{M}\left(e^{g(1,\dots,1)}e^{g(0,\dots,0)}\right)
+&= (2s_2)^{M}\left(\exp(g(1,\dots,1))\exp(g(0,\dots,0))\right)
    \quad (\because \text{冪の法則}) \\
-&= (2s_2)^{M}e^{g(1,\dots,1)+g(0,\dots,0)}
-   \quad (\because \text{指数法則}) \\
-&= (2s_2)^{M}e^{0}
+&= (2s_2)^{M}\exp(g(1,\dots,1)+g(0,\dots,0))
+   \quad (\because \text{実数の exp の積公式。}\blkref{real_exp_product}) \\
+&= (2s_2)^{M}\exp(0)
    \quad (\because g(1,\dots,1)+g(0,\dots,0)=0) \\
 &= (2s_2)^{M}
-   \quad (\because e^0=1)
+   \quad (\because \exp(0)=1\ \blkref{real_exp_zero})
 \end{aligned}`,
       ),
     ],
     conversion: {
       status: "added",
       notes: [
+        "実数の指数関数を定義なしの e^x から、行列の exp の 1 行 1 列の場合として定義した exp（labels: def_real_exp）へ書き換え、収束・指数法則・正値性・単調性の根拠をその性質の主張へ付け替えた。式変形の内容は変えていない。",
         "この主張は docs/tasks/free-energy-roadmap の章 C（最大固有値）の入口になる。Λ_max の表式はそのまま自由エネルギーの主要項へ渡る。",
       ],
     },
