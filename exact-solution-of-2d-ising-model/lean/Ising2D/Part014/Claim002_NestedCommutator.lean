@@ -35,7 +35,7 @@ Lean では偶奇を `n = 2k` / `n = 2k+1` と書き分けた 2 本ずつの定�
 
 `e^{-iθ~_μ}` は `Ising2D.checkPhase M 1 μ`、`e^{iθ~_μ}` は `Ising2D.checkPhase M (-1) μ`
 （`Part013/Claim002_AntiperiodicExpSum.lean`）。
-`H_1^{(+)}` は `Ising2D.H1 M (-1)`（引数 `η` が原文の `∓1`）。
+`H_1^{(+)}` は `Ising2D.H1plus M`（引数 `η` が原文の `∓1`）。
 -/
 import Ising2D.Part008.Claim006_ExpConjugation
 import Ising2D.Part013.Claim004_CommutatorHCheckZY
@@ -88,7 +88,7 @@ private theorem adPow_two_dim_odd_y {X z y : TensorPow M} {α β s : ℂ}
 
 /-- 原文 (A) `[H_1^{(+)}, check(Z)_μ] = 2 e^{-iθ~_μ} check(Y)_μ` の `K_1` 倍。 -/
 theorem ad_K1H1Plus_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    (K1 • H1 M (-1)) * checkZ M μ - checkZ M μ * (K1 • H1 M (-1))
+    (K1 • H1plus M) * checkZ M μ - checkZ M μ * (K1 • H1plus M)
       = (2 * K1 * checkPhase M 1 μ) • checkY M μ := by
   rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H1Plus_checkZ hM μ,
     smul_smul]
@@ -97,7 +97,7 @@ theorem ad_K1H1Plus_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
 
 /-- 原文 (B) `[H_1^{(+)}, check(Y)_μ] = -2 e^{iθ~_μ} check(Z)_μ` の `K_1` 倍。 -/
 theorem ad_K1H1Plus_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    (K1 • H1 M (-1)) * checkY M μ - checkY M μ * (K1 • H1 M (-1))
+    (K1 • H1plus M) * checkY M μ - checkY M μ * (K1 • H1plus M)
       = (-2 * K1 * checkPhase M (-1) μ) • checkZ M μ := by
   rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H1Plus_checkY hM μ,
     smul_smul]
@@ -137,14 +137,14 @@ private theorem s2_sq (K2star : ℂ) :
 
 /-- **原文 (h1.z) の偶数側**: `n = 2k` のとき `(-1)^k (2K_1)^{2k} check(Z)_μ`。 -/
 theorem nesting_H1Plus_checkZ_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
-    adPow (K1 • H1 M (-1)) (2 * k) (checkZ M μ)
+    adPow (K1 • H1plus M) (2 * k) (checkZ M μ)
       = ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k)) • checkZ M μ := by
   rw [(adPow_two_dim_even (ad_K1H1Plus_checkZ hM K1 μ) (ad_K1H1Plus_checkY hM K1 μ)
     (s1_sq M K1 μ) k).1, two_I_pow_two_mul]
 
 /-- **原文 (h1.z) の奇数側**: `n = 2k+1` のとき `(-1)^k (2K_1)^{2k+1} e^{-iθ~_μ} check(Y)_μ`。 -/
 theorem nesting_H1Plus_checkZ_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
-    adPow (K1 • H1 M (-1)) (2 * k + 1) (checkZ M μ)
+    adPow (K1 • H1plus M) (2 * k + 1) (checkZ M μ)
       = ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ := by
   rw [adPow_two_dim_odd_z (ad_K1H1Plus_checkZ hM K1 μ) (ad_K1H1Plus_checkY hM K1 μ)
     (s1_sq M K1 μ) k, two_I_pow_two_mul]
@@ -156,14 +156,14 @@ theorem nesting_H1Plus_checkZ_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ)
 
 /-- **原文 (h1.y) の偶数側**: `n = 2k` のとき `(-1)^k (2K_1)^{2k} check(Y)_μ`。 -/
 theorem nesting_H1Plus_checkY_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
-    adPow (K1 • H1 M (-1)) (2 * k) (checkY M μ)
+    adPow (K1 • H1plus M) (2 * k) (checkY M μ)
       = ((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k)) • checkY M μ := by
   rw [(adPow_two_dim_even (ad_K1H1Plus_checkZ hM K1 μ) (ad_K1H1Plus_checkY hM K1 μ)
     (s1_sq M K1 μ) k).2, two_I_pow_two_mul]
 
 /-- **原文 (h1.y) の奇数側**: `n = 2k+1` のとき `(-1)^{k+1} (2K_1)^{2k+1} e^{iθ~_μ} check(Z)_μ`。 -/
 theorem nesting_H1Plus_checkY_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
-    adPow (K1 • H1 M (-1)) (2 * k + 1) (checkY M μ)
+    adPow (K1 • H1plus M) (2 * k + 1) (checkY M μ)
       = ((-1 : ℂ) ^ (k + 1) * (2 * K1) ^ (2 * k + 1) * checkPhase M (-1) μ) • checkZ M μ := by
   rw [adPow_two_dim_odd_y (ad_K1H1Plus_checkZ hM K1 μ) (ad_K1H1Plus_checkY hM K1 μ)
     (s1_sq M K1 μ) k, two_I_pow_two_mul]

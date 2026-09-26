@@ -1,6 +1,24 @@
 # 章 019「最大固有値の所在（偶セクターへの確定）」の Lean 形式化
 
-正本: `structured-latex/content/019_max_eigenvalue_sector.ts`（6 ブロック）
+**この章は人手の本文から退避済みである（2026-09-26）。** `(−)` セクターを本文から外したため、
+章 019 の全ブロック（概要・`epsilon_is_sign_flip_permutation`・`abs_vector_moves_to_even_sector`・
+`c_minus_le_c_plus`・`c_equals_c_plus`・注意）は、もとの内容のまま参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ移った（もとの正本は
+`structured-latex/content/019_max_eigenvalue_sector.ts`、6 ブロック）。
+本文の `onsager_exact_solution` は `c(M) = c_+(M)` を使わず、`c_+(M) ≤ c(M) ≤ 2c_+(M)` の挟み撃ちで
+述べる（`lean/docs/ch018-formalization.md` 4 章）。
+
+**本章の Lean（`Ising2D/Part019/`, `Ising2D/NecSuf/PermSector.lean`）は形式化の記録として残し、
+ビルドは通し続ける。対応先は本文ではなく上のノートである。本文の主張の Lean はこれらに依存しない。**
+本文の主張も使う部分は次のファイルへ移した（以下の記述でこれらの名前が出てきたら移動先を参照）。
+
+| 移した名前 | 移動先 | 本文で使う主張 |
+| --- | --- | --- |
+| `flipIdx` / `flipConf` / `flipConf_involutive` / `sgn_flipConf` / `epsilonR` / `epsilonR_apply` / `epsilonR_isSymm` / `epsilonR_mul_self` / `epsilonR_mulVec_apply` / `epsilonR_mulVec_single` / `pauliX_apply_eq_ite` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_mulVec_basisVec` | `Part011/ClaimEpsilonIsRealSymmetric.lean` | `epsilon_is_real_symmetric`、`trace_of_epsilon_V_plus` Step 3 (b) |
+| `NecSuf.permMat` と基本性質、`NecSuf.absVec` / `vecNormSq_absVec` / `quad_eq_sum` / `abs_quad_le_quad_absVec` / `quad_le_quad_absVec` | `NecSuf/PermMatrix.lean` | `onsager_exact_solution` Step 3 |
+
+`sectorRayleighSup W ε 1`（本章の定理の `c_+(M)`）は本文の `def_sector_rayleigh_sup` の
+`Ising2D.evenSectorRayleighSup W ε` と一致する（`Ising2D.sectorRayleighSup_one_eq`）。
 
 この文書は `lean/README.md` への統合前の記録である（統合は呼び出し元が行う）。
 

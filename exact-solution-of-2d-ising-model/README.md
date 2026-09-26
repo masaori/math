@@ -181,6 +181,9 @@ Ising 模型の本筋とは関係がない。
 - 整数運動量 `θ_μ = 2πμ/M` による Fourier 変換の経路（半整数運動量 `θ̃_μ = 2π(μ−1/2)/M` を採用）。
   整数運動量は境界項 `+Y_M Z_1` をもつ (−) セクターでしか閉じず、自由エネルギーには (+) セクターだけが
   要るため（`structured-latex/notes/integer_momentum_route_not_adopted.ts`）
+- (−) セクター（全スピン反転 ε の固有値 −1 の側）の議論と「最大固有値はどちらのセクターから来るか」の章。
+  自由エネルギーの証明は c(M_col) ≥ c_+(M_col) と偶セクター側の評価だけで閉じるため
+  （`structured-latex/notes/minus_sector_not_adopted.ts`）
 
 ---
 

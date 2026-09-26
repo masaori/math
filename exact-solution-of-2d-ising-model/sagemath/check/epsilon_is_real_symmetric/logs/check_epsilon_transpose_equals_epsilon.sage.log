@@ -1,0 +1,7 @@
+  M_col=1: epsilon^T = epsilon（本文の鎖の各行も一致）
+  M_col=2: epsilon^T = epsilon（本文の鎖の各行も一致）
+  M_col=3: epsilon^T = epsilon（本文の鎖の各行も一致）
+  M_col=4: epsilon^T = epsilon（本文の鎖の各行も一致）
+  M_col=5: epsilon^T = epsilon（本文の鎖の各行も一致）
+  M_col=6: epsilon^T = epsilon（本文の鎖の各行も一致）
+RESULT: PASS

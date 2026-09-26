@@ -77,7 +77,7 @@
 | `pauliX/Y/Z_transpose`, `..._conjTranspose` | Pauli 行列の転置・共役転置 | `iH_is_real_symmetric` Step 3 |
 | `siteProd_transpose` / `siteProd_conjTranspose` | クロネッカー積の転置は因子ごとの転置 | `kronecker_transpose` |
 | `Z_transpose` / `Z_conjTranspose` / `Y_transpose` / `Y_conjTranspose` | `Z^⊤=Z`, `Y^⊤=-Y`, `Z^*=Z`, `Y^*=Y` | 同（原文には無い中間段階） |
-| `S1_isHermitian` / `S1_transpose` / `S2_isHermitian` / `S2_transpose` | `S_1^{(±)}, S_2` は実対称 | `iH_is_real_symmetric` |
+| `S1plus_isHermitian` / `S1plus_transpose` / `S2_isHermitian` / `S2_transpose` | `S_1^{(+)}, S_2` は実対称（人手の本文は `(+)` だけ。`S1_isHermitian` / `S1_transpose` は境界項の係数を `η` にした補助の一般形で、`S1plus_*` はその `η = -1`） | `iH_is_real_symmetric` |
 | `entries_real_of_isHermitian_of_transpose` | 「実対称」＝「エルミート＋転置不変」 | `def_hermitian_positive_definite` の最後の注意 |
 | `posDef_smul_of_pos` | 正定値の正実数倍は正定値 | `exp_hermitian_is_positive_definite` (3) |
 | `posDef_exp_of_isHermitian` | エルミートの `exp` は正定値 | 同 (1) |
@@ -85,7 +85,7 @@
 | `Uflip` / `UflipInv` / `Uflip_mul_inv` / `UflipInv_mul` | 符号反転共役 `U = EF` と可逆性 | `sign_flip_conjugation` Step 0 |
 | `Uflip_conj_sigmaX/Y/Z` | `U σ^a_k U^{-1}` の符号 | 同 Step 1 |
 | `Uflip_conj_Z` / `Uflip_conj_Y` | `U Z_m U^{-1} = -Z_m`, `U Y_m U^{-1} = Y_m` | 同（原文には無い中間段階） |
-| `Uflip_conj_H1` / `Uflip_conj_H2` / `Uflip_conj_S1` / `Uflip_conj_S2` | `U H U^{-1} = -H`, `U S U^{-1} = -S` | `sign_flip_conjugation` |
+| `Uflip_conj_H1plus` / `Uflip_conj_H2` / `Uflip_conj_S1plus` / `Uflip_conj_S2` | `U H U^{-1} = -H`, `U S U^{-1} = -S`（`H = H_1^{(+)}, H_2`。`Uflip_conj_H1` / `Uflip_conj_S1` は補助の一般形） | `sign_flip_conjugation` |
 | `Uflip_conj_matExp` | `U exp(S) U^{-1} = exp(USU^{-1})` | `constant_c_value` Step 2 |
 | `VmatInv` / `Vmat_mul_VmatInv` / `VmatInv_mul_Vmat` | `V^{-1}` の明示形 | `V_is_positive_definite` Step 4 |
 | `tauTrace` / `trace_Vmat` / `trace_VmatInv` | `τ`, `tr(V) = (2s_2)^{M/2}τ`, `tr(V^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value` Step 1 |

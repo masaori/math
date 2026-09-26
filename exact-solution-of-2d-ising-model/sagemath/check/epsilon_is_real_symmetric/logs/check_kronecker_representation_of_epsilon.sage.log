@@ -1,0 +1,7 @@
+  M_col=1: sigma^x_1 … sigma^x_M = sigma^x ⊠ … ⊠ sigma^x
+  M_col=2: sigma^x_1 … sigma^x_M = sigma^x ⊠ … ⊠ sigma^x
+  M_col=3: sigma^x_1 … sigma^x_M = sigma^x ⊠ … ⊠ sigma^x
+  M_col=4: sigma^x_1 … sigma^x_M = sigma^x ⊠ … ⊠ sigma^x
+  M_col=5: sigma^x_1 … sigma^x_M = sigma^x ⊠ … ⊠ sigma^x
+  M_col=6: sigma^x_1 … sigma^x_M = sigma^x ⊠ … ⊠ sigma^x
+RESULT: PASS

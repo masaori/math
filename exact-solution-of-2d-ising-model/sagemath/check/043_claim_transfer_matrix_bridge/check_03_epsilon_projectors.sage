@@ -1,48 +1,51 @@
 # ---------------------------------------------------------
-# SageMath: epsilon の射影子と可換性、セクター上での V_1 の置き換え
-#   eps^2 = I, (P^pm)^2 = P^pm, P^+ P^- = 0, P^+ + P^- = I,
-#   [eps, V_1] = [eps, V_2] = [eps, V_1^{(pm)}] = 0,
-#   V_1 P^{(pm)} = V_1^{(pm)} P^{(pm)},
-#   (V_1V_2)^n P^{(pm)} = (V_1^{(pm)} V_2)^n P^{(pm)}
-# 対象: structured-latex sector_replacement_of_V1 / sector_replacement_pow
-#   （epsilon_projector_properties / epsilon_commutes_with_transfer_matrices も検証）
+# SageMath: epsilon の射影子 P^{(+)} と、epsilon・P^{(+)} と転送行列との可換性
+#   epsilon_projector_properties:
+#     (1) (P^{(+)})^2 = P^{(+)}
+#     (2) im P^{(+)} = F^{(+)}   （⊆: eps P^{(+)} = P^{(+)}、⊇: eps f = f なら P^{(+)} f = f）
+#   epsilon_commutes_with_transfer_matrices:
+#     [eps, V_1] = [eps, V_2] = [eps, V_1^{(+)}] = [eps, (V_1^{(+)})^{1/2}] = 0
+#   epsilon_projectors_commute_with_transfer_matrices:
+#     [P^{(+)}, V_1] = [P^{(+)}, V_2] = [P^{(+)}, V_1^{(+)}] = [P^{(+)}, (V_1^{(+)})^{1/2}] = 0
+#   あわせて前提の eps^2 = I（epsilon_square_and_eigenvalues）も確認する。
 # ---------------------------------------------------------
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
 load(os.path.join(_dir, '_prelude.sage'))
 
-print("=== epsilon の射影子・可換性・セクター置き換え ===")
+print("=== epsilon の射影子 P^{(+)} と転送行列との可換性 ===")
 all_ok = True
 for (M, K1v, K2v) in BRIDGE_CASES:
     O = SpinOps(M)
     Id = identity_matrix(CDF, O.d)
     eps = epsilon_op(O)
-    Pp, Pm = projectors(O)
+    Pp = projector_plus(O)
     V1 = V1_pauli(O, K1v)
     V2 = V2_pauli(O, K2v)
+    V1p = V1_plus(O, K1v)
+    V1p_half = V1_plus_half(O, K1v)
     r = {}
     r['eps^2=I'] = opnorm(eps * eps - Id)
     r['P+^2=P+'] = opnorm(Pp * Pp - Pp)
-    r['P-^2=P-'] = opnorm(Pm * Pm - Pm)
-    r['P+P-=0'] = opnorm(Pp * Pm)
-    r['P-P+=0'] = opnorm(Pm * Pp)
-    r['P++P-=I'] = opnorm(Pp + Pm - Id)
+    # im P^{(+)} ⊆ F^{(+)}: eps P^{(+)} x = P^{(+)} x（すべての x について、すなわち行列として）
+    r['eps P+ = P+'] = opnorm(eps * Pp - Pp)
+    # F^{(+)} ⊆ im P^{(+)}: F^{(+)} の基底ベクトル f（e_k + e_{flip(k)}）について P^{(+)} f = f
+    for k in range(O.d):
+        f = vector(CDF, O.d)
+        f[k] += 1
+        f[O.d - 1 - k] += 1
+        r[f'eps f = f ({k})'] = (eps * f - f).norm()
+        r[f'P+ f = f ({k})'] = (Pp * f - f).norm()
     r['[eps,V1]'] = opnorm(eps * V1 - V1 * eps)
     r['[eps,V2]'] = opnorm(eps * V2 - V2 * eps)
-    for sgn, P in [(1, Pp), (-1, Pm)]:
-        V1s = V1_pm(O, K1v, sgn)
-        half = matrix(CDF, (CDF(I) / 2 * RDF(K1v) * O.H1(sgn)).exp())
-        r[f'[eps,V1^{sgn:+d}]'] = opnorm(eps * V1s - V1s * eps)
-        r[f'[eps,sqrtV1^{sgn:+d}]'] = opnorm(eps * half - half * eps)
-        r[f'V1P=V1pmP({sgn:+d})'] = opnorm(V1 * P - V1s * P)
-        # im P^{(pm)} が eps の固有空間であること
-        r[f'eps P = {sgn:+d} P'] = opnorm(eps * P - sgn * P)
-        # (V1V2)^n P = (V1^pm V2)^n P
-        L = Id; R = Id
-        for n in range(1, 4):
-            L = L * (V1 * V2)
-            R = R * (V1s * V2)
-            r[f'pow{n}({sgn:+d})'] = opnorm(L * P - R * P) / max(opnorm(L * P), 1)
+    r['[eps,V1+]'] = opnorm(eps * V1p - V1p * eps)
+    r['[eps,(V1+)^1/2]'] = opnorm(eps * V1p_half - V1p_half * eps)
+    r['[P+,V1]'] = opnorm(Pp * V1 - V1 * Pp)
+    r['[P+,V2]'] = opnorm(Pp * V2 - V2 * Pp)
+    r['[P+,V1+]'] = opnorm(Pp * V1p - V1p * Pp)
+    r['[P+,(V1+)^1/2]'] = opnorm(Pp * V1p_half - V1p_half * Pp)
+    # (V_1^{(+)})^{1/2} の二乗が V_1^{(+)}（V1_plus_square_root_property。可換性の前提として併記）
+    r['((V1+)^1/2)^2=V1+'] = opnorm(V1p_half * V1p_half - V1p) / max(opnorm(V1p), 1)
     worst = max(r.values())
     ok = worst <= TOL
     print(f"  M={M}, K1={K1v}, K2={K2v}: max residual = {worst:.2e}  -> {'PASS' if ok else 'FAIL'}")

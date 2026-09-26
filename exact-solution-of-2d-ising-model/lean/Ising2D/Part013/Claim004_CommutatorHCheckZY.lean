@@ -125,7 +125,7 @@ noncomputable def checkCliffordTriple (M : ℕ) (hM : M ≠ 0) :
 
 /-- **原文 (A) の形式化**: `[H_1^{(+)}, check(Z)_μ] = 2 e^{-iθ~_μ} check(Y)_μ`。 -/
 theorem lie_H1Plus_checkZ (hM : M ≠ 0) (ν : ℤ) :
-    ⁅H1 M (-1), checkZ M ν⁆ = (2 * checkPhase M 1 ν) • checkY M ν := by
+    ⁅H1plus M, checkZ M ν⁆ = (2 * checkPhase M 1 ν) • checkY M ν := by
   have hMC : (M : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hM
   have key := (checkCliffordTriple M hM).lie_sum_yz_z
       (fun i : Fin M => checkPhase M 1 (((i : ℕ) : ℤ) + 1))
@@ -154,7 +154,7 @@ theorem lie_H1Plus_checkZ (hM : M ≠ 0) (ν : ℤ) :
 /-- **原文 (B) の形式化**: `[H_1^{(+)}, check(Y)_μ] = -2 e^{iθ~_μ} check(Z)_μ`
 （`e^{iθ~_μ} = checkPhase M (-1) μ`）。 -/
 theorem lie_H1Plus_checkY (hM : M ≠ 0) (ν : ℤ) :
-    ⁅H1 M (-1), checkY M ν⁆ = (-2 * checkPhase M (-1) ν) • checkZ M ν := by
+    ⁅H1plus M, checkY M ν⁆ = (-2 * checkPhase M (-1) ν) • checkZ M ν := by
   have hMC : (M : ℂ) ≠ 0 := Nat.cast_ne_zero.mpr hM
   have key := (checkCliffordTriple M hM).lie_sum_yz_y
       (fun i : Fin M => checkPhase M 1 (((i : ℕ) : ℤ) + 1))

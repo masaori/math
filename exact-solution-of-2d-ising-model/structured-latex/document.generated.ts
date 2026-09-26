@@ -41,7 +41,6 @@ import blocks_015_A_theta_tilde_diagonalization from './content/015_A_theta_tild
 import blocks_016_even_sector_fermions from './content/016_even_sector_fermions.ts'
 import blocks_017_even_sector_eigenvalues from './content/017_even_sector_eigenvalues.ts'
 import blocks_018_even_sector_closing from './content/018_even_sector_closing.ts'
-import blocks_019_max_eigenvalue_sector from './content/019_max_eigenvalue_sector.ts'
 import blocks_020_critical_point from './content/020_critical_point.ts'
 import notes_000_calculation_formulae from './notes/000_calculation_formulae.ts'
 import notes_001_partition_function_2d_ising from './notes/001_partition_function_2d_ising.ts'
@@ -52,6 +51,7 @@ import notes_008_TV1_hatZ_hatY from './notes/008_TV1_hatZ_hatY.ts'
 import notes_008_group_theory_general from './notes/008_group_theory_general.ts'
 import notes_009_clifford_algebra from './notes/009_clifford_algebra.ts'
 import notes_integer_momentum_route_not_adopted from './notes/integer_momentum_route_not_adopted.ts'
+import notes_minus_sector_not_adopted from './notes/minus_sector_not_adopted.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
@@ -79,7 +79,6 @@ export type AllBlocks = [
   ...typeof blocks_016_even_sector_fermions,
   ...typeof blocks_017_even_sector_eigenvalues,
   ...typeof blocks_018_even_sector_closing,
-  ...typeof blocks_019_max_eigenvalue_sector,
   ...typeof blocks_020_critical_point,
 ]
 
@@ -94,6 +93,7 @@ export type AllNotes = [
   ...typeof notes_008_group_theory_general,
   ...typeof notes_009_clifford_algebra,
   ...typeof notes_integer_momentum_route_not_adopted,
+  ...typeof notes_minus_sector_not_adopted,
 ]
 
 type AllBlockIds = BlockIdsOf<AllBlocks>

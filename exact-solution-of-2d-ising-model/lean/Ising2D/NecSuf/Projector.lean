@@ -1,9 +1,13 @@
 /-
 # 必要十分版: 対合から作る射影子と、セクター上での因子の置き換え
 
-対応する人手証明のラベル: **`epsilon_projector_properties`** / **`sector_replacement_of_V1`** / **`sector_replacement_pow`**
+対応する人手証明のラベル: **`epsilon_projector_properties`** / **`symmetrized_transfer_matrix_on_sectors`**
 （具体版は `Ising2D/Part010/Claim009_EpsilonProjectors.lean` と
-`Ising2D/Part010/Claim011_SectorReplacement.lean`）
+`Ising2D/Part011/PhysicalSymTransferBridge.lean`）。
+本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
+`sector_replacement_of_V1` / `sector_replacement_pow` / `partition_function_sector_decomposition` の
+形式化の記録（`Ising2D/Part010/Claim011_SectorReplacement.lean`,
+`Ising2D/Part010/Claim012_SectorDecomposition.lean`）も本ファイルを使う。
 
 ## この主張に本質的に効いている構造は何か
 
@@ -11,7 +15,7 @@
 `P^{(±)} = (I ± ε)/2` の性質と、セクター上での `V_1 → V_1^{(±)}` の置き換えを示している。
 Lean で抽象化してみると、効いているのは次だけである。
 
-* **射影子の性質（`epsilon_projector_properties` (1)(2)(3)）**: `ε` が対合であること
+* **射影子の性質（`epsilon_projector_properties` (1) と、ノートへ退避した `P^{(+)}P^{(-)} = 0`・`P^{(+)} + P^{(-)} = I`）**: `ε` が対合であること
   `e * e = 1` と、係数環で `2` が可逆であることだけ。`ε` が Pauli 行列の積であることも、
   行列であることも、複素数であることも、環が可換であることも効いていない
   （**任意の環 + `Invertible 2`**）。
@@ -94,7 +98,7 @@ end Projector
 
 /-! ## セクター上での因子の置き換え -/
 
-/-- **人手本文 `sector_replacement_pow` の必要十分版。**
+/-- **ノートへ退避した `sector_replacement_pow` の必要十分版（形式化の記録）。**
 
 冪等元 `P` が `a, b, a'` と可換で `a P = a' P` なら `(a b)^n P = (a' b)^n P`。 -/
 theorem pow_mul_proj {P a b a' : R} (hP : P * P = P)

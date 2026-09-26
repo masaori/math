@@ -8,8 +8,9 @@ _sage_const_8 = Integer(8); _sage_const_40 = Integer(40); _sage_const_1 = Intege
 #           **各段の等式そのもの**を、ラベル単位で検証する。
 #
 #  対象ラベル:
-#    def_H1_plus / def_V1_plus_square_root / V1_plus_square_root_property
-#    def_V_plus / V1_plus_half_invertible / V2_invertible
+#    （014 章の証明が引く前提として）def_H1_plus（004 章）/ def_V1_plus_square_root /
+#    V1_plus_square_root_property / def_V_plus（いずれも 010 章）
+#    V1_plus_half_invertible / V2_invertible
 #    V_plus_factors_invertible / def_T_V_plus
 #    T_V_plus_is_conjugation
 #    nesting_of_commutator_of_H_and_check_Z
@@ -60,9 +61,9 @@ for M in STEP_M:
         V2, V2i = V2_mat(O, K2)
         Vp, Vpi = V_plus(O, K1, K2)
         V1p = matrix(CDF, (CDF(I) * RDF(K1) * H1p).exp())
-        S.add("V1_plus_square_root_property (1) exp(X)exp(X) = exp(2X)  [theorem_exp_product]",
+        S.add("V1_plus_square_root_property exp(X)exp(X) = exp(X+X)  [theorem_exp_product]",
               Vh * Vh, matrix(CDF, (CDF(I) * RDF(K1) * H1p).exp()))
-        S.add("V1_plus_square_root_property (2) = V_1^{(+)}  [def_V1_pm]", Vh * Vh, V1p)
+        S.add("V1_plus_square_root_property exp(iK_1H_1^{(+)}) = V_1^{(+)}  [V1_plus_exponential_representation]", Vh * Vh, V1p)
         S.add("V1_plus_half_invertible exp(X)^{-1} = exp(-X)", Vh * Vhi, Id)
         S.add("V2_invertible V_2 V_2^{-1} = I", V2 * V2i, Id)
         S.add("V_plus_factors_invertible (Vplus) V^{(+)} V^{(+)-1} = I", Vp * Vpi, Id)

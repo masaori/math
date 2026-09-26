@@ -1,9 +1,12 @@
 /-
-# 成分ごとの絶対値を取ると偶セクターへ移る（具体版）
+# 成分ごとの絶対値を取ると偶セクターへ移る（具体版。形式化の記録）
 
-正本: `structured-latex/content/019_max_eigenvalue_sector.ts`
-（`sector_002_claim_abs_vector_moves_to_even_sector`、
-ラベル **`abs_vector_moves_to_even_sector`**）
+対応する人手の主張は、章 019 ごと本文から参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
+もと `sector_002_claim_abs_vector_moves_to_even_sector`（ラベル `abs_vector_moves_to_even_sector`）である。
+本ファイルは形式化の記録として残し、ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない
+（本文の `onsager_exact_solution` Step 3 が使う `uᵀWu ≥ xᵀWx` と `‖u‖ = ‖x‖` は
+`Ising2D/NecSuf/PermMatrix.lean` の `quad_le_quad_absVec` / `vecNormSq_absVec`）。
 
 必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）。
 本ファイルの (1)(2)(3) はすべて必要十分版の**系として**導いてある。

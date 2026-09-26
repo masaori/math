@@ -23,8 +23,8 @@ export default defineBlocks([
         "偶セクターの生成子 ",
         math(String.raw`H_1^{(+)}`),
         "（",
-        ref("def_H1_pm"),
-        " で上の符号を取ったもの）は",
+        ref("def_H1_plus"),
+        "）は",
       ]),
       displayMath(
         String.raw`H_1^{(+)} = \sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1`,
@@ -132,6 +132,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -1404,10 +1405,8 @@ M_{\mathrm{col}}\tilde\theta_\mu
         "）について（",
         math(String.raw`H_1^{(+)}`),
         " は ",
-        ref("def_H1_pm"),
-        " の ",
-        math(String.raw`H_1^{(\pm)}`),
-        " で上の符号を取ったもの、すなわち ",
+        ref("def_H1_plus"),
+        " の定義により ",
         math(String.raw`H_1^{(+)} = \sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1`),
         "）、",
       ]),
@@ -1803,7 +1802,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I &&
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ Z_j\right]
 &= \left[\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1,\ Z_j\right]
-   &&(\because \blkref{def_H1_pm}\text{ の上の符号}) \\
+   &&(\because \blkref{def_H1_plus}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_j\right] - \left[Y_{M_{\mathrm{col}}}Z_1,\ Z_j\right]
    &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_j\right] - 0
@@ -1830,7 +1829,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I &&
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ Z_1\right]
 &= \left[\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
-   &&(\because \blkref{def_H1_pm}\text{ の上の符号}) \\
+   &&(\because \blkref{def_H1_plus}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_1\right] + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
    &&(\because \text{交換子の第 1 引数についての加法性}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1} 0 + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
@@ -1856,7 +1855,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I &&
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ Y_j\right]
 &= \left[\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1,\ Y_j\right]
-   &&(\because \blkref{def_H1_pm}\text{ の上の符号}) \\
+   &&(\because \blkref{def_H1_plus}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_j\right] - \left[Y_{M_{\mathrm{col}}}Z_1,\ Y_j\right]
    &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_j\right] - 0
@@ -1883,7 +1882,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I &&
         String.raw`\begin{aligned}
 \left[H_1^{(+)},\ Y_{M_{\mathrm{col}}}\right]
 &= \left[\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
-   &&(\because \blkref{def_H1_pm}\text{ の上の符号}) \\
+   &&(\because \blkref{def_H1_plus}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_{M_{\mathrm{col}}}\right] + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
    &&(\because \text{交換子の第 1 引数についての加法性}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1} 0 + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
@@ -2077,6 +2076,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I &&
         "2026-08-15 の式変形統一で、三つの鎖の最終行（= 2Z_j・= 2Y_m・= 2(−Y_M)）に欠けていた行末根拠を補い、単位行列の消去と同類項の統合の圧縮を開いた。内容は変えていない。",
         "2026-08-19 の式変形統一で、境界項二本の鎖にあった「直前の displayMath と同じ計算」の一行を、(Y_M, Z_1) に対する交換子の定義・結合法則・anticommutator_of_Z_and_Y・単位行列・同類項の一操作ずつの行へ開いた。内容・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -2409,8 +2409,8 @@ H_2 = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Z}_{M_{\m
         "が成り立つ（",
         math(String.raw`H_1^{(+)}`),
         " は ",
-        ref("def_H1_pm"),
-        " で上の符号を取ったもの、",
+        ref("def_H1_plus"),
+        " のもの、",
         math(String.raw`H_2`),
         " は ",
         ref("def_H2"),
@@ -2545,7 +2545,7 @@ H_2 = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Z}_{M_{\m
         "、",
         ref("theorem_exp_product"),
         "、",
-        ref("def_H1_pm"),
+        ref("def_H1_plus"),
         " を順に使うと、",
       ]),
       displayMath(
@@ -2568,7 +2568,7 @@ H_2 = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Z}_{M_{\m
 &= \sum_{j=1}^{M_{\mathrm{col}}-1} Y_jZ_{j+1} - Y_{M_{\mathrm{col}}}Z_1
 && (\because \text{スカラー } \tfrac{1}{M_{\mathrm{col}}} \text{ の分配と } \tfrac{1}{M_{\mathrm{col}}}\cdot M_{\mathrm{col}} = 1,\ \tfrac{1}{M_{\mathrm{col}}}\cdot(-M_{\mathrm{col}}) = -1 \text{ の相殺}) \\
 &= H_1^{(+)}
-&& (\because \blkref{def_H1_pm}\text{ の上の符号})
+&& (\because \blkref{def_H1_plus})
 \end{aligned}`,
       ),
     ],
@@ -2579,6 +2579,7 @@ H_2 = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Z}_{M_{\m
         "2026-08-19 の式変形統一で、H_2 と H_1^{(+)} の導出を分断していた説明・重複した参照を準備へ移し、それぞれ主張の右辺から H_2・H_1^{(+)} へ至る一続きの鎖へまとめた。内容・参照は変えていない。",
         "2026-09-01 の式変形統一で、三本の鎖に行中の \\quad(\\because …) で置かれていた根拠 16 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },

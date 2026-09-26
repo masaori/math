@@ -1,0 +1,7 @@
+=== check_02: x ∈ F^{(-)} の絶対値ベクトル u = |x| は F^{(+)} に入る ===
+  (1) εu = u（u ∈ F^{(+)}）: max residual = 0.000e+00  ->  PASS
+  (2) ‖u‖ = ‖x‖ = 1: max residual = 2.220e-16  ->  PASS
+  (3) u^T W u ≥ |x^T W x| ≥ x^T W x の違反件数: 0 / 192  ->  PASS
+      最小の余裕 u^T W u − x^T W x = 0.34689（非負であること）
+  (4) W の成分がすべて正（W_has_positive_entries）の違反件数: 0  ->  PASS
+=== check_02: ALL PASS ===

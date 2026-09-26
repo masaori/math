@@ -17,13 +17,13 @@
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.H1 M (-1)` / `V1pmHalf M K1 (-1)` | `H_1^{(+)}` と `(V_1^{(+)})^{1/2}` | `def_H1_plus` / `def_V1_plus_square_root` |
+| `Ising2D.H1plus`（章 004）/ `V1plusHalf`（章 010） | `H_1^{(+)}` と `(V_1^{(+)})^{1/2}`（人手の本文は定義を章 004・010 の 1 か所にまとめ、章 014 の重複定義を削除した） | `def_H1_plus` / `def_V1_plus_square_root` |
 | `Ising2D.VPlus` / `VPlusUnits` | `V^{(+)} := (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}` とその単元版（`V_2` を `V2H2Form M s2 K2star` で書いた一般形） | `def_V_plus` |
-| `Ising2D.V1plusHalf_mul_V2_mul_V1plusHalf` | 人手の `V_2`（`def_transfer_matrix`）で作った `V^{(+)}` は `VPlus M (sinh 2K_2) K_1 K_2^*` に等しい（`V2_exponential_representation` による） | `def_V_plus` |
+| `Ising2D.VPlusOfTransfer_eq_VPlus` | 人手の `V_2`（`def_transfer_matrix`）で作った `V^{(+)}`（章 010 の `VPlusOfTransfer`）は `VPlus M (sinh 2K_2) K_1 K_2^*` に等しい（`V2_exponential_representation` による） | `def_V_plus` |
 | `Ising2D.V2Units` / `V2Units_eq_V2H2FormUnits` / `isUnit_V2` | 人手の `V_2` の単元と可逆性 | `V2_invertible` |
 | `Ising2D.isUnit_V1plusHalf` | `(V_1^{(+)})^{1/2}` の可逆性 | `V1_plus_half_invertible` |
 | `Ising2D.isUnit_VPlus` | `V^{(+)}` の可逆性 | `V_plus_factors_invertible` |
-| `Ising2D.V1plusHalf_sq` | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
+| `Ising2D.V1_plus_square_root_property`（章 010） | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
 | `Ising2D.TVPlus` | `T_{(V^{(+)})}` を ℂ-代数自己同型として（一般形） | `def_T_V_plus` |
 | `Ising2D.TV_V1plusHalfUnits_V2Units` | 人手の `V_2` で作った `T_{(V^{(+)})}` は `TVPlus` の `s_2 = sinh 2K_2`, `K_2^*` での値 | `def_T_V_plus` |
 | `Ising2D.TVPlus_eq_TConj` / `TVPlus_apply_eq_conj` | `T_{(V^{(+)})} = T_{V^{(+)}}` | `T_V_plus_is_conjugation` |
@@ -86,7 +86,7 @@
 
 | 人手証明のラベル（章 014） | 具体版 | 必要十分版 |
 | --- | --- | --- |
-| `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1` / `V1pmHalf` / `V1plusHalf_sq` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` / `V1plusHalf_mul_V2_mul_V1plusHalf` / `TV_V1plusHalfUnits_V2Units` / `isUnit_V2` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Part008/Definition016_TV.lean`） |
+| `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1plus` / `V1plusHalf` / `V1_plus_square_root_property` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` / `VPlusOfTransfer_eq_VPlus` / `TV_V1plusHalfUnits_V2Units` / `isUnit_V2` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Part008/Definition016_TV.lean`） |
 | `nesting_of_commutator_of_H_and_check_Z` | `Ising2D.nesting_H1Plus_checkZ_even` ほか 8 本 | 既存の `NecSuf.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y` |
 | `cosh_sinh_coefficient_conversion_for_check` | `Ising2D.conversion_H1Plus_checkZ_even` ほか 8 本 | 同上（`(α, β, s)` を付け替えただけ） |
 | `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本 | 既存の `NecSuf.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |

@@ -108,6 +108,25 @@ EOF
   整数運動量の主張）は形式化の記録として残してあり、対応先は本文ではなくそのノートである。
   同じファイルに置かれた一般の定義・補題（共役写像 `T_g`、`A(θ)`、交換子の計算など）は、
   半整数運動量の章の Lean からも引き続き import している。
+- **(−) セクター（全スピン反転 `ε` の固有値 −1 の側）の議論は本文から参照用ノートへ退避してある。**
+  人手証明の本文は (+) セクターだけで述べられており、`𝓕^{(-)}`、`P^{(-)}`、`V_1^{(-)}`、`c_-(M)` を
+  使う主張（`def_odd_eigenvectors_of_epsilon`, `odd_eigenspace_is_complex_subspace`,
+  `sector_replacement_of_V1`, `sector_replacement_pow`, `partition_function_sector_decomposition`,
+  `sector_decomposition_of_rayleigh_sup` と章 019 全体（`epsilon_is_sign_flip_permutation`,
+  `abs_vector_moves_to_even_sector`, `c_minus_le_c_plus`, `c_equals_c_plus`））は
+  `structured-latex/notes/minus_sector_not_adopted.ts` にある。
+  これらに対応する Lean ファイル（`Part004/OddEigenvectors.lean`, `NecSuf/NegatedVectorsSubmodule.lean`,
+  `Part010/Claim011_SectorReplacement.lean`, `Part010/Claim012_SectorDecomposition.lean`,
+  `Part011/Claim010_SectorDecomposition.lean`, `NecSuf/PermSector.lean`, `Part019/`）は形式化の記録として
+  残してあり（ビルドは通し続ける）、対応先は本文ではなくそのノートである。本文の主張の Lean はこれらに依存しない。
+  本文の主張も使う部分（`V_1` の `𝓕^{(+)}` への制限の補題、実行列 `epsilonR` と `ε` の成分表示、
+  置換行列 `permMat` と成分の絶対値 `absVec`）は、`Part004/ClaimV1RestrictionToEigenspaces.lean`,
+  `Part011/ClaimEpsilonIsRealSymmetric.lean`, `NecSuf/PermMatrix.lean` へ移した。
+  境界項の符号を引数に持つ一般形（`H1 M η`, `V1pm`, `V1pmHalf`, `V1pmUnits`, `V1pmHalfUnits`,
+  `V1pmFromDefinition`, `epsProj M η`）は、これらの記録と整数運動量の経路のために補助として残し、
+  本文のラベルに対応する (+) の定義・主張（`H1plus`, `V1plus`, `V1plusHalf`, `epsProjPlus` ほか）は
+  その `η` を固定した場合と定義から一致する（`H1plus_eq_H1`, `V1plus_eq_V1pm`, `V1plusHalf_eq_V1pmHalf`,
+  `epsProjPlus_eq_epsProj`）。
 - 各 Lean ファイルの冒頭コメントに、対応する `.typ` ファイル名と Typst のラベル（`<...>`）を書く。
 - 原文のステートメントをそのまま形式化できない場合（記号の重複・「元」と「族」の混同など）は、
   **冒頭コメントに原文の問題点と、形式化した修正版ステートメントを明記する**
@@ -292,7 +311,10 @@ Lean も同じ構成にしてある。
 | `Ising2D.V1PauliForm M K1` | `first_transfer_matrix_pauli_form` の右辺 `exp(K_1∑σ^z_mσ^z_{m+1})`（`K1 : ℂ` の一般の値。定義ではなく式の名前） |
 | `Ising2D.V2PauliForm M s2 K2star` | `second_transfer_matrix_pauli_form` の右辺 `(2s_2)^{M/2}exp(K_2^*∑σ^x_m)`（`s2`, `K2star` は独立な引数） |
 | `Ising2D.V2FromJordanWigner` / `Ising2D.V2H2Form` | `V2_in_Z_Y` / `V2_exponential_representation` の右辺（同上） |
-| `Ising2D.V1pm M K1 η` / `V1pmHalf` / `V1pmUnits` / `V1pmHalfUnits` / `V1pmFromDefinition` | `V_1^{(±)}`（`def_V1_pm`、`η` が人手の `∓1`）とその平方根・単元・有限和表示。`V_1` とは別の行列 |
+| `Ising2D.V1plus M K1` / `V1plusUnits` | `V_1^{(+)}`（`def_V1_plus`）とその単元。`V_1` とは別の行列 |
+| `Ising2D.V1plusHalf M K1` / `V1plusHalfUnits` | `(V_1^{(+)})^{1/2}`（`def_V1_plus_square_root`、`Part010/DefinitionV1PlusSquareRoot.lean`）とその単元 |
+| `Ising2D.VPlusOfTransfer M K1 K2` | `V^{(+)} = (V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}`（`def_V_plus`。`V_2` は `def_transfer_matrix` の `V_2`） |
+| `Ising2D.V1pm M K1 η` / `V1pmHalf` / `V1pmUnits` / `V1pmHalfUnits` / `V1pmFromDefinition` | 境界項の係数を `η` にした補助の一般形（`η = -1` が `(+)`）。整数運動量の経路と退避した `(−)` セクターの形式化の記録が使う |
 | `Ising2D.V2H2FormUnits` | `V2H2Form` の単元 |
 | `Ising2D.V2Units` | `def_transfer_matrix` の `V_2` の単元（`K_2 > 0`） |
 
@@ -300,6 +322,13 @@ Lean も同じ構成にしてある。
 `V2pauli → V2PauliForm`, 旧 `V1 → V1pm`, `V1half → V1pmHalf`, `V1Units → V1pmUnits`,
 `V1halfUnits → V1pmHalfUnits`, `V1FromDefinition → V1pmFromDefinition`, 旧 `V2 → V2H2Form`,
 `V2Units → V2H2FormUnits`（これらを名前に含む定理も同じ規則で改名した）。
+(−) セクターの退避（同日）に伴う変更: `(+)` の定義 `H1plus` / `V1plus` / `V1plusUnits` /
+`V1plusHalf` / `V1plusHalfUnits` / `VPlusOfTransfer` / `epsProjPlus` を新設し、
+`V1plusHalf_mul_V2_mul_V1plusHalf → VPlusOfTransfer_eq_VPlus`、
+`V1plusHalf_sq`（`Part014`）は `V1_plus_square_root_property`（`Part010`）へ一本化、
+`physicalSymTransferR_map_mul_epsProj_eq_Vsym → symmetrized_transfer_matrix_on_sectors`（`(+)` だけ）、
+`EvenSectorBridge.rayleighSup_eq_LambdaM → EvenSectorBridge.rayleighSup_sandwich_LambdaM`（挟み撃ち）、
+`rayleighSup_eq_LambdaM_of_input → rayleighSup_sandwich_LambdaM_of_input`。
 
 ### 行列の添字
 
@@ -337,15 +366,16 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 
 人手が `V_2` と書く対象は Lean でも `Ising2D.V2` を使い、人手が主張を引く位置で書き換える。
 
-* 010 章（`epsilon_commutes_with_transfer_matrices`, `sector_replacement_of_V1`, `sector_replacement_pow`,
-  `partition_function_sector_decomposition`）と 011 章（`physicalSymTransferC`,
-  `symmetrized_transfer_matrix_on_sectors`）は `V1`, `V2` そのものについて述べ、
+* 010 章（`epsilon_commutes_with_transfer_matrices`, `epsilon_projectors_commute_with_transfer_matrices`,
+  `def_V_plus`）と 011 章（`physicalSymTransferC`, `symmetrized_transfer_matrix_on_sectors`,
+  `epsilon_commutes_with_W`）は `V1`, `V2` そのものについて述べ、
   `first_transfer_matrix_pauli_form` / `second_transfer_matrix_pauli_form` / `V1_in_Z_Y_epsilon` を
-  人手が引く位置で使う。
+  人手が引く位置で使う（参照用ノートへ退避した `sector_replacement_of_V1`, `sector_replacement_pow`,
+  `partition_function_sector_decomposition` の形式化の記録も同じ）。
 * 014〜018 章の `VPlus M s2 K1 K2star` / `VPlusUnits` / `TVPlus` と、その上の定理は、
   `V_2` を `V2_exponential_representation` の右辺の式 `V2H2Form`（`s2`, `K2star` を独立な引数とする一般化）で
   書いたまま残してある（補助的な一般形）。人手の `V_2` についての主張は `V2Units` / `isUnit_V2`
-  （`V2_invertible`）、`V1plusHalf_mul_V2_mul_V1plusHalf`（`def_V_plus`）、`TV_V1plusHalfUnits_V2Units`
+  （`V2_invertible`）、`VPlusOfTransfer_eq_VPlus`（`def_V_plus` の `VPlusOfTransfer` との一致）、`TV_V1plusHalfUnits_V2Units`
   （`def_T_V_plus`）、`TConj_V2_checkZ` / `TConj_V2_checkY`（`T_actions_on_check_Z_Y` の第 3・第 4 式）、
   `linearity_of_T_V2` として別に立て、`s2 = sinh 2K_2`, `K2star = K_2^*` で一般形と一致させている。
   014〜018 章の残りの定理を人手の `V_2` の言葉に書き直す作業は行っていない（`lean/docs/ch014-formalization.md`）。
@@ -421,18 +451,20 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.acomm_hatZ_hatY` | `[hat(Z)_μ^{(±)}, hat(Y)_ν]₊ = 0` | 同 3（**原文は「同様」で省略**） |
 | `Ising2D.acomm_hatY_hatY` | `[hat(Y)_μ, hat(Y)_ν]₊ = 2M δ^M_{μ+ν,0} I` | 同 4（**原文は「同様」で省略**） |
 | `Ising2D.nextSite` | site 添字の巡回 `m ↦ m+1`（`M` で巻き戻る） | `Z_{M+1} := Z_1` の規約 |
-| `Ising2D.H1` / `Ising2D.H2` | `H_1^{(±)}`, `H_2` | `transfer_matrix_011a_definition_H1_pm` / `transfer_matrix_011b_definition_H2` |
+| `Ising2D.H1plus` / `Ising2D.H2` | `H_1^{(+)}`, `H_2`（`Ising2D.H1 M η` は境界項の係数を `η` にした補助の一般形） | `def_H1_plus` / `def_H2` |
 | `Ising2D.I_smul_H2_eq_sum_sigmaX` | `√-1 H_2 = ∑_m σ^x_m`（`Z_mY_m = -√-1 σ^x_m` の有限和） | `V2_in_Z_Y` Step 2 の直後の等式 |
-| `Ising2D.V1pmFromDefinition` | `V_1^{(±)}` の有限和を省略しない定義 | `transfer_matrix_007_definition_V1_pm` |
-| `Ising2D.V1pm` / `Ising2D.V1pm_exponential_representation` | `V_1^{(±)}=\exp(iK_1H_1^{(±)})`（`η` が人手の `∓1`） | `def_V1_pm` / `V1_pm_exponential_representation` |
-| `Ising2D.V1pmHalf` | `(V_1^{(±)})^{1/2}` | `def_V1_pm_square_root` / `def_V1_plus_square_root` |
+| `Ising2D.V1plus` | `V_1^{(+)}` の有限和を省略しない定義 | `def_V1_plus` |
+| `Ising2D.V1plus_exponential_representation` | `V_1^{(+)}=\exp(iK_1H_1^{(+)})` | `V1_plus_exponential_representation` |
+| `Ising2D.V1plusHalf` | `(V_1^{(+)})^{1/2} := \exp((i/2)K_1H_1^{(+)})` | `def_V1_plus_square_root` |
+| `Ising2D.V1pmFromDefinition` / `V1pm` / `V1pmHalf` / `V1pm_exponential_representation` | 上の 3 つの、境界項の係数を `η` にした補助の一般形 | （補助。整数運動量の経路と退避した `(−)` セクターの記録が使う） |
 | `Ising2D.V2FromJordanWigner` | `V2_in_Z_Y` の右辺 `(2s_2)^{M/2}\exp(iK_2^*\sum_m Z_mY_m)`（`s2`, `K2star` は独立な引数） | `V2_in_Z_Y` |
 | `Ising2D.V2H2Form` / `Ising2D.V2FromJordanWigner_eq_V2H2Form` | `V2_exponential_representation` の右辺 `(2s_2)^{M/2}\exp(iK_2^*H_2)`（同上） | `V2_exponential_representation` |
 | `Ising2D.V2_in_Z_Y` / `Ising2D.V2_exponential_representation` | **`def_transfer_matrix` の `V_2` について** `V_2 = (2s_2)^{M/2}\exp(iK_2^*\sum_m Z_mY_m) = (2s_2)^{M/2}\exp(iK_2^*H_2)`（`s_2 = \sinh 2K_2`, `K_2^*`、`K_2 > 0`） | `V2_in_Z_Y` / `V2_exponential_representation` |
-| `Ising2D.V1pmHalf_sq` | `((V_1^{(±)})^{1/2})^2 = V_1^{(±)}` | `V1_pm_square_root_squares_to_V1_pm` |
+| `Ising2D.V1_plus_square_root_property` | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
+| `Ising2D.V1pmHalf_sq` | 上の補助の一般形 | （補助） |
 | `Ising2D.matExpUnits` / `smulUnits` | `exp X` と 0 でないスカラー倍の可逆性 | 補助（原文は暗黙に可逆性を使用） |
-| `Ising2D.V1pmUnits` / `V1pmHalfUnits` / `V2H2FormUnits` | `V_1^{(±)}`, `(V_1^{(±)})^{1/2}`, `V2H2Form` を単元 `(TensorPow M)ˣ` として | 同上（`V2H2Form` には `s_2 > 0` が要る） |
-| `Ising2D.isUnit_V1pm` / `isUnit_V1pmHalf` / `isUnit_V2H2Form` | 上記の `IsUnit` 版 | 同上 |
+| `Ising2D.V1plusUnits` / `V1plusHalfUnits` / `V2H2FormUnits` | `V_1^{(+)}`, `(V_1^{(+)})^{1/2}`, `V2H2Form` を単元 `(TensorPow M)ˣ` として（`V1pmUnits` / `V1pmHalfUnits` は補助の一般形） | 同上（`V2H2Form` には `s_2 > 0` が要る） |
+| `Ising2D.isUnit_V1plus` / `isUnit_V1plusHalf` / `isUnit_V2H2Form` | 上記の `IsUnit` 版 | 同上（`isUnit_V1plusHalf` は `V1_plus_half_invertible`） |
 | `Ising2D.V2Units` / `Ising2D.isUnit_V2` | **`def_transfer_matrix` の `V_2`** の単元と可逆性（`K_2 > 0`。`Part014/Definition001_VPlus.lean`） | `V2_invertible` |
 | `Ising2D.H1JordanWigner` / `sum_sigmaZ_sigmaZ_eq_jordanWigner` / `V1PauliForm_eq_jordanWigner` / `V1_in_Z_Y_epsilon` | `V_1 = exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M-εY_MZ_1))`（最後が `def_transfer_matrix` の `V_1` について） | `V1_in_Z_Y_epsilon` |
 | `Ising2D.TConj` | `T_g : X ↦ g X g⁻¹` を **ℂ-代数自己同型**として | `def_T_g` |
@@ -559,8 +591,8 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | 章 | 内容 | Lean | ドキュメント |
 | --- | --- | --- | --- |
 | 009 | 転送行列 `V` の固有値（個数演算子・同時固有空間分解・`c = (2 sinh 2K_2)^{M/2}`） | `Part009/` | [ch009](docs/ch009-formalization.md) |
-| 010 | 偶セクターへの射影と転送行列（分配関数の偶奇セクター分解） | `Part010/` | [ch010](docs/ch010-formalization.md) |
-| 011 | 最大固有値（Rayleigh 商の上限による分配関数の挟み撃ち） | `Part011/` | [ch011](docs/ch011-formalization.md) |
+| 010 | 偶セクターへの射影 `P^{(+)}`、`(V_1^{(+)})^{1/2}`, `V^{(+)}`、`ε` との可換性（`(−)` セクターとの分解は形式化の記録） | `Part010/` | [ch010](docs/ch010-formalization.md) |
+| 011 | 最大固有値（Rayleigh 商の上限による分配関数の挟み撃ち、`c_+ ≤ c`、`ε^⊤ = ε`、`εW = Wε`） | `Part011/` | [ch011](docs/ch011-formalization.md) |
 | 012 | 自由エネルギーと熱力学極限（Onsager の表式） | `Part012/` | [ch012](docs/ch012-formalization.md) |
 | 013 | 偶セクターの半整数運動量モード | `Part013/` | [ch013](docs/ch013-formalization.md) |
 | 014 | 偶セクターでの `T` の作用 | `Part014/` | [ch014](docs/ch014-formalization.md) |
@@ -568,7 +600,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | 016 | 偶セクターのフェルミオン（`V^{(+)} = c V̌'`） | `Part016/` | [ch016](docs/ch016-formalization.md) |
 | 017 | 偶セクターの固有値 | `Part017/` | [ch017](docs/ch017-formalization.md) |
 | 018 | 偶セクターの完結（**`onsager_exact_solution`**） | `Part018/` | [ch018](docs/ch018-formalization.md) |
-| 019 | 最大固有値の所在（`c(M) = c_+(M)`、偶セクターへの確定） | `Part019/` | [ch019](docs/ch019-formalization.md) |
+| 019 | 最大固有値の所在（`c(M) = c_+(M)`。**章ごと参照用ノートへ退避済み。Lean は形式化の記録**） | `Part019/` | [ch019](docs/ch019-formalization.md) |
 | 020 | 臨界点での比熱の対数発散 | `Part020/` | [ch020](docs/ch020-formalization.md) |
 
 ### 2 本立てが出した最大の答え

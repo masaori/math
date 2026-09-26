@@ -61,7 +61,7 @@ targets=(
   Ising2D.V2Units
   Ising2D.V2Units_eq_V2H2FormUnits
   Ising2D.isUnit_V2
-  Ising2D.V1plusHalf_mul_V2_mul_V1plusHalf
+  Ising2D.VPlusOfTransfer_eq_VPlus
   Ising2D.TV_V1plusHalfUnits_V2Units
   Ising2D.TConj_V2_checkZ
   Ising2D.TConj_V2_checkY
@@ -668,7 +668,53 @@ targets=(
   Ising2D.physicalV2C_eq_map
   Ising2D.physicalSymTransferC_eq_map
   Ising2D.NecSuf.sandwich_mul_proj_eq
-  Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym
+  Ising2D.symmetrized_transfer_matrix_on_sectors
+  Ising2D.H1plus_eq_H1
+  Ising2D.V1plus_exponential_representation
+  Ising2D.V1plus_eq_V1pm
+  Ising2D.isUnit_V1plus
+  Ising2D.V1_plus_square_root_property
+  Ising2D.V1plusHalf_eq_V1pmHalf
+  Ising2D.V1plusHalfUnits_eq_V1pmHalfUnits
+  Ising2D.epsProjPlus_eq_epsProj
+  Ising2D.epsProjPlus_sq
+  Ising2D.epsProjPlus_mulVec_mem
+  Ising2D.epsProjPlus_mulVec_eq_self
+  Ising2D.epsilon_projector_properties_image
+  Ising2D.epsilon_commute_H1plus
+  Ising2D.epsilon_commute_V1plus
+  Ising2D.epsilon_commute_V1plusHalf
+  Ising2D.commute_epsProjPlus_of_commute_epsilon
+  Ising2D.commute_V1_epsProjPlus
+  Ising2D.commute_V2_epsProjPlus
+  Ising2D.commute_V1plus_epsProjPlus
+  Ising2D.commute_V1plusHalf_epsProjPlus
+  Ising2D.V1_restriction_to_eigenspaces
+  Ising2D.Vsym_neg_one_eq_VPlusOfTransfer
+  Ising2D.S1plus_isHermitian
+  Ising2D.S1plus_transpose
+  Ising2D.Uflip_conj_H1plus
+  Ising2D.Uflip_conj_S1plus
+  Ising2D.epsilon_transpose
+  Ising2D.epsilon_is_real_symmetric
+  Ising2D.epsilonR_isSymm
+  Ising2D.epsilonR_mul_self
+  Ising2D.epsilon_eq_ofReal_epsilonR
+  Ising2D.evenSectorSet_bddAbove
+  Ising2D.le_evenSectorRayleighSup
+  Ising2D.epsilonR_mulVec_evenUnit
+  Ising2D.vecNormSq_evenUnit
+  Ising2D.evenSectorSet_epsilonR_nonempty
+  Ising2D.c_plus_le_c
+  Ising2D.epsilon_commute_physicalSymTransferC
+  Ising2D.epsilon_commutes_with_W
+  Ising2D.epsilonR_mulVec_physicalSymTransferR_of_mem
+  Ising2D.sectorSet_one_eq
+  Ising2D.sectorRayleighSup_one_eq
+  Ising2D.NecSuf.vecNormSq_permMat_mulVec
+  Ising2D.NecSuf.bilin_nonneg_of_nonneg
+  Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup
+  Ising2D.onsager_step3_c_le_two_c_plus
   Ising2D.symTransfer_isSymm
   Ising2D.mulVec_eq_zero_iff_of_isUnit
   Ising2D.symTransfer_posDef
@@ -929,7 +975,6 @@ targets=(
   Ising2D.VPlus_eq_smul_checkVprime
   Ising2D.VPlus
   Ising2D.isUnit_VPlus
-  Ising2D.V1plusHalf_sq
   Ising2D.TVPlus_eq_TConj
   Ising2D.nesting_H1Plus_checkZ_even
   Ising2D.nesting_H1Plus_checkZ_odd
@@ -1298,7 +1343,9 @@ targets=(
   Ising2D.EvenSectorBridge.c_plus_equals_lamMax
   Ising2D.EvenSectorBridge.exists_maximizer
   Ising2D.EvenSectorBridge.lamMax_eq_LambdaM
-  Ising2D.EvenSectorBridge.rayleighSup_eq_LambdaM
+  Ising2D.EvenSectorBridge.LambdaM_le_rayleighSup
+  Ising2D.EvenSectorBridge.rayleighSup_le_two_mul_LambdaM
+  Ising2D.EvenSectorBridge.rayleighSup_sandwich_LambdaM
   Ising2D.onsager_limit_in_N_row
   Ising2D.onsager_limit_in_M
   Ising2D.onsager_exact_solution
@@ -1391,7 +1438,7 @@ targets=(
   Ising2D.vPlusDataOf_gam
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
-  Ising2D.rayleighSup_eq_LambdaM_of_input
+  Ising2D.rayleighSup_sandwich_LambdaM_of_input
   Ising2D.onsager_exact_solution_unconditional
   # --- 020 章（比熱の対数発散：章の到達点）---
   Ising2D.gammaFn_isoParam_eq_gammaK

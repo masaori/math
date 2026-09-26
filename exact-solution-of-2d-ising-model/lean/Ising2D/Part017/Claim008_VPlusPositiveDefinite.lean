@@ -14,12 +14,11 @@
 
 ## 章 009 との関係（本章の要点）
 
-人手証明が明記しているとおり、章 009 の `iH_is_real_symmetric` と
-`exp_hermitian_is_positive_definite` は**複号によらない形**で述べられている。
-Lean 側でも `Ising2D.Vmat M K1 η s2 K2star` は符号 `η` を**パラメータとして**持つので、
-`(+)` セクターは `η = -1` を代入するだけで得られる
-（`H_1^{(+)}` が `Ising2D.H1 M (-1)` であることは章 013
-`Ising2D/Part013/Claim004_CommutatorHCheckZY.lean` の用法と一致する）。
+章 009 の `iH_is_real_symmetric`（`(+)` だけの主張 `Ising2D.S1plus_isHermitian`）と
+`exp_hermitian_is_positive_definite` を使う。Lean 側の章 009 の `Ising2D.Vmat M K1 η s2 K2star`
+（整数運動量の経路の形式化の記録。人手の本文からは参照用ノートへ退避済み）は境界項の符号 `η` を
+**パラメータとして**持つ補助の一般形なので、`(+)` セクターは `η = -1` を代入するだけで得られる
+（`H_1^{(+)}` は `Ising2D.H1plus M`、一般形では `Ising2D.H1 M (-1)`。`H1plus_eq_H1`）。
 
 **したがって本ファイルの正定値性は章 009 の `Vmat_posDef` の系である。**
 新しく証明したのは `(V^{(+)})^{-1}` の正定値性だけで、
@@ -39,11 +38,11 @@ section VPlus
 
 variable {M : ℕ}
 
-/-- **原文 `def_V_plus` の `V^{(+)}`は章 014 の
-`Ising2D.VPlus`（`Part014/Definition001_VPlus.lean`）をそのまま使う。**
-`H_1^{(+)} = Ising2D.H1 M (-1)` なので、これは章 009 の `Vmat` に `η = -1` を
-代入したものに等しい（両者とも `V1pmHalf M K1 (-1) * V2H2Form M s2 K2star * V1pmHalf M K1 (-1)` に
-簡約されるので `rfl`）。この同一視により、章 009 の正定値性がそのまま使える。 -/
+/-- **原文 `def_V_plus` の `V^{(+)}` は、`V_2` を `V2H2Form` で書いた章 014 の補助の一般形
+`Ising2D.VPlus`（`Part014/Definition001_VPlus.lean`。人手の `V_2` の値では `VPlusOfTransfer_eq_VPlus`）
+をそのまま使う。**
+`H_1^{(+)} = Ising2D.H1 M (-1)`（`H1plus_eq_H1`）なので、これは章 009 の `Vmat` に `η = -1` を
+代入したものに等しい（`V1plusHalf M K1 = V1pmHalf M K1 (-1)` が定義から成り立つので `rfl`）。この同一視により、章 009 の正定値性がそのまま使える。 -/
 theorem VPlus_eq_Vmat (M : ℕ) (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) :
     VPlus M s2 K1 K2star = Vmat M K1 (-1) s2 K2star := rfl
 

@@ -1,0 +1,17 @@
+=== CPV2C = CV2PC ===
+  M=2, K1=0.400000000000000, K2=0.800000000000000, sector=+1: relative residual=4.944e-17 -> PASS
+  M=2, K1=0.400000000000000, K2=0.800000000000000, sector=-1: relative residual=9.966e-17 -> PASS
+  M=2, K1=0.700000000000000, K2=0.300000000000000, sector=+1: relative residual=1.912e-16 -> PASS
+  M=2, K1=0.700000000000000, K2=0.300000000000000, sector=-1: relative residual=4.534e-16 -> PASS
+  M=3, K1=0.400000000000000, K2=0.800000000000000, sector=+1: relative residual=2.181e-16 -> PASS
+  M=3, K1=0.400000000000000, K2=0.800000000000000, sector=-1: relative residual=4.767e-17 -> PASS
+  M=3, K1=0.700000000000000, K2=0.300000000000000, sector=+1: relative residual=1.602e-16 -> PASS
+  M=3, K1=0.700000000000000, K2=0.300000000000000, sector=-1: relative residual=6.788e-17 -> PASS
+  M=3, K1=0.250000000000000, K2=1.10000000000000, sector=+1: relative residual=1.073e-16 -> PASS
+  M=3, K1=0.250000000000000, K2=1.10000000000000, sector=-1: relative residual=5.255e-17 -> PASS
+  M=4, K1=0.400000000000000, K2=0.800000000000000, sector=+1: relative residual=1.375e-16 -> PASS
+  M=4, K1=0.400000000000000, K2=0.800000000000000, sector=-1: relative residual=1.455e-16 -> PASS
+  M=4, K1=0.700000000000000, K2=0.300000000000000, sector=+1: relative residual=6.257e-17 -> PASS
+  M=4, K1=0.700000000000000, K2=0.300000000000000, sector=-1: relative residual=1.677e-16 -> PASS
+WORST RELATIVE RESIDUAL: 4.534e-16
+RESULT: PASS

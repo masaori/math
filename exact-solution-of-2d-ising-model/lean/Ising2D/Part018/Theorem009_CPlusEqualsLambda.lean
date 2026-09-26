@@ -5,13 +5,13 @@
 （`closing_009_theorem_c_plus_equals_Lambda_half`、
 ラベル **`c_plus_equals_Lambda_half_integer`**）
 
-**章 019 の `Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq` が仮定として受け取っていた
-「`c_+(M) = Λ`」を埋めるのが本ファイルである。**
+`c_+(M)` は章 011 `def_sector_rayleigh_sup` の `Ising2D.evenSectorRayleighSup`（`(+)` だけの定義）。
+本定理は章 018 の `onsager_exact_solution` の Step 2・Step 3 が引く（`Theorem010_OnsagerExactSolution.lean`）。
 
 必要十分版は置かない。理由は章 011 の `Definition006_RayleighSup.lean` と同じで、
 `sSup` は ℝ の完備性そのものであり、ほどく余地がないこと。本ファイルで新しく現れる
 道具は「実行列・実ベクトルと複素行列・複素ベクトルの橋渡し」だけで、これは
-章 019 の `epsilon_eq_ofReal_epsilonR` と同じ性質のものである。
+章 011 の `epsilon_eq_ofReal_epsilonR`（`epsilon_is_real_symmetric`）と同じ性質のものである。
 
 ## 章 011・017 から受け取る入力（`Ising2D.EvenSectorBridge`）
 
@@ -23,12 +23,12 @@
 
 章 011 の物理的な実行列 `W` と、`V_1^{1/2} = exp(½K_1D)` と `V_2`（`def_transfer_matrix`）から作る複素行列の同一視は
 `Ising2D.physicalSymTransferC_eq_map`、射影後の最終等式は
-`Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済みである。
+`Ising2D.symmetrized_transfer_matrix_on_sectors` で形式化済みである。
 ただし、章 017 の `V^{(+)}` の実行列表示と組み合わせ、この複素行列等式を実ベクトル上の
 `W *ᵥ x = Vr *ᵥ x` へ変換する接続は未形式化なので、本ファイルでは `hWV` を仮定として受け取る。
 -/
 import Ising2D.Part018.Theorem007_MaxEigenvectorEvenSector
-import Ising2D.Part011.Claim010_SectorDecomposition
+import Ising2D.Part011.DefinitionSectorRayleighSup
 
 namespace Ising2D
 
@@ -245,7 +245,7 @@ theorem exists_real_max_eigenvector (htr : 0 < ((epsilon M * D.V).trace).re) :
 
 さらに上限は達成される（`x_0` が最大値を与える）。 -/
 theorem c_plus_equals_lamMax (htr : 0 < ((epsilon M * D.V).trace).re) :
-    sectorRayleighSup B.W (epsilonR M) 1 = D.lamMax := by
+    evenSectorRayleighSup B.W (epsilonR M) = D.lamMax := by
   obtain ⟨y, hy0, hyeig, hyeps⟩ := B.exists_real_max_eigenvector htr
   -- `x_0 = y / ‖y‖`
   have ha : 0 < vecNormSq y := vecNormSq_pos hy0
@@ -255,8 +255,8 @@ theorem c_plus_equals_lamMax (htr : 0 < ((epsilon M * D.V).trace).re) :
   have hc2 : c ^ 2 = a⁻¹ := by rw [hcdef, inv_pow, hsq]
   have hunit : vecNormSq (c • y) = 1 := by
     rw [vecNormSq_smul, ← hadef, hc2, inv_mul_cancel₀ (ne_of_gt ha)]
-  have hsec : epsilonR M *ᵥ (c • y) = (1 : ℝ) • (c • y) := by
-    rw [Matrix.mulVec_smul, hyeps, one_smul]
+  have hsec : epsilonR M *ᵥ (c • y) = c • y := by
+    rw [Matrix.mulVec_smul, hyeps]
   -- `x_0^T W x_0 = Λ̌_max`
   have hquad : (c • y) ⬝ᵥ B.W *ᵥ (c • y) = D.lamMax := by
     rw [quad_smul, B.hWV y hyeps, hyeig]
@@ -266,16 +266,14 @@ theorem c_plus_equals_lamMax (htr : 0 < ((epsilon M * D.V).trace).re) :
   refine le_antisymm ?_ ?_
   · refine csSup_le ⟨_, ⟨c • y, hsec, hunit, rfl⟩⟩ ?_
     rintro r ⟨x, hxs, hxn, rfl⟩
-    rw [one_smul] at hxs
     exact B.quad_le_lamMax hxs hxn
   · rw [← hquad]
-    exact le_csSup (sectorSet_bddAbove B.hWsymm B.hWpsd (epsilonR M) 1)
-      ⟨c • y, hsec, hunit, rfl⟩
+    exact le_evenSectorRayleighSup B.hWsymm B.hWpsd hsec hunit
 
 /-- 上限が偶セクターの実単位ベクトルで**達成される**こと（人手証明の最後の一文）。 -/
 theorem exists_maximizer (htr : 0 < ((epsilon M * D.V).trace).re) :
     ∃ x0 : Conf M → ℝ, epsilonR M *ᵥ x0 = x0 ∧ vecNormSq x0 = 1 ∧
-      x0 ⬝ᵥ B.W *ᵥ x0 = sectorRayleighSup B.W (epsilonR M) 1 := by
+      x0 ⬝ᵥ B.W *ᵥ x0 = evenSectorRayleighSup B.W (epsilonR M) := by
   obtain ⟨y, hy0, hyeig, hyeps⟩ := B.exists_real_max_eigenvector htr
   have ha : 0 < vecNormSq y := vecNormSq_pos hy0
   set a := vecNormSq y with hadef

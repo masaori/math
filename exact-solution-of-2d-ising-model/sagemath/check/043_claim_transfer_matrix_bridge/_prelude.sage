@@ -89,6 +89,29 @@ def projectors(O):
     return ((Id + eps) / 2, (Id - eps) / 2)
 
 
+def projector_plus(O):
+    """<def_epsilon_projectors>: P^{(+)} = (I + epsilon)/2"""
+    return (identity_matrix(CDF, O.d) + epsilon_op(O)) / 2
+
+
+def V1_plus(O, K1):
+    """<def_V1_plus>, <V1_plus_exponential_representation>: V_1^{(+)} = exp(i K_1 H_1^{(+)})"""
+    return matrix(CDF, (CDF(I) * RDF(K1) * O.H1(+1)).exp())
+
+
+def V1_plus_half(O, K1):
+    """<def_V1_plus_square_root>: (V_1^{(+)})^{1/2} = exp((i/2) K_1 H_1^{(+)})"""
+    return matrix(CDF, (CDF(I) / 2 * RDF(K1) * O.H1(+1)).exp())
+
+
+def V_plus(O, K1, K2):
+    """<def_V_plus>: V^{(+)} = (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}"""
+    half = V1_plus_half(O, K1)
+    return half * V2_pauli(O, K2) * half
+
+
+# 以下の符号引数つきの関数は、(−) セクターを含む旧検査（045 の check_03 と
+# _old/minus-sector/ の記録）が使う。本文の (+) セクターの検査は上の関数を使う。
 def V_sym(O, K1, K2, sgn):
     """V^{(pm)} = exp(i K_1 H_1^{(pm)} / 2) V_2 exp(i K_1 H_1^{(pm)} / 2)"""
     half = matrix(CDF, (CDF(I) / 2 * RDF(K1) * O.H1(sgn)).exp())

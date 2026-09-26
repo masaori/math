@@ -19,7 +19,7 @@
 したがって本ファイルの定理は **`0 < (tr(εV^{(+)})).re` を仮定として受け取る**。
 -/
 import Ising2D.Part018.Claim003_TraceEpsilonVPlus
-import Ising2D.Part019.Claim001_EpsilonSignFlipPermutation
+import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 
 namespace Ising2D
 

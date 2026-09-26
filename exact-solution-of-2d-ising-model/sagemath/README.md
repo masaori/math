@@ -16,6 +16,9 @@ sagemath/
 │   ├── overview.md            # **必須。この check の README を兼ねる**
 │   ├── check_NN_*.sage        # 検証コード（1ファイル1論点）
 │   └── logs/check_NN_*.log    # 実行ログ（実際に走らせた出力をそのまま保存する）
+├── _old/                      # 本文から参照用ノートへ退避したブロックの検証の記録（check/ と同じ形式。
+│   ├── integer-momentum-route/ #   verify-check-linkage.ts の対象外）
+│   └── minus-sector/
 └── tools/
     ├── verify-check-linkage.ts  # 検証 ↔ 証明 の対応を機械検証
     └── run-all-checks.sh         # 全 check を実行してログを更新する
@@ -53,8 +56,12 @@ sagemath/
 ### 符号の規約（重要）
 
 複号 `∓` は `sign` 引数（`'+'` / `'-'`）で表す。`_mp_sign('+') = -1`, `_mp_sign('-') = +1`。
-これは本文の `H_1^{(±)} := Y_1Z_2 + … + Y_{M-1}Z_M ∓ Y_M Z_1` と
+これは `H_1^{(±)} := Y_1Z_2 + … + Y_{M-1}Z_M ∓ Y_M Z_1` と
 `hatZ^{(±)}_μ`（`j=1` の重みが `∓1`）に合わせたものである。
+
+本文は (+) セクターだけで述べる（`H_1^{(+)}`、`def_H1_plus`）。(−) セクターの議論は参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避してあり、`sign='-'` を使うのはその記録
+（`_old/minus-sector/`）と整数運動量の経路の記録（`_old/integer-momentum-route/`）だけである。
 
 ## CheckReport の使い方
 

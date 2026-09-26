@@ -67,6 +67,9 @@ const unreviewedIsingModelEntryIds = [
   "transfer_matrix_claim_first_transfer_matrix_pauli_form",
   "transfer_matrix_definition_second_transfer_matrix_prefactor",
   "transfer_matrix_claim_second_transfer_matrix_pauli_form",
+  // (−) セクターの退避（第 3 段階）で新設した二項。
+  "maxeig_claim_epsilon_is_real_symmetric",
+  "maxeig_claim_c_plus_le_c",
 ] as const;
 const matrixExponentialConjugationSectionEntryIds = [
   "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
@@ -226,20 +229,20 @@ const v1PauliPendingReReviewSnapshot = [
   {"id":"transfer_matrix_000c_definition_jordan_wigner_Z_matrices","chapterOrder":15,"sha256":"5d1fafec80750ceed89f0d36db45e21fa1fdda1e5f7f37c79a5e32f79ec91acb","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_006_definition_of_cc","calculation_formulae_definition_set_and_algebra_notation","transfer_matrix_000_definition_site_pauli_matrices"]},
   {"id":"transfer_matrix_000d_definition_jordan_wigner_Y_matrices","chapterOrder":16,"sha256":"f0351f034ece4721a211c74a5dc65917dc1a71aeb76706e015d148d00a32aaf4","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_006_definition_of_cc","calculation_formulae_definition_set_and_algebra_notation","transfer_matrix_000_definition_site_pauli_matrices"]},
   {"id":"transfer_matrix_000e_definition_global_spin_flip_matrix","chapterOrder":17,"sha256":"42079083121883092210cb4a84df4d579bd76ac6cca14a11db4835bd6b4aa996","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_006_definition_of_cc","calculation_formulae_definition_set_and_algebra_notation","transfer_matrix_000_definition_site_pauli_matrices"]},
-  {"id":"transfer_matrix_000f_claim_global_spin_flip_jordan_wigner_representation","chapterOrder":18,"sha256":"3aa119f845005c3fff2190075cc81ce4b1ffe174ffd64fb5e490bdcc7d7dd169","granularity":"自動検査で主題に適合","dependencies":["Z_Y_anticommutation_000a_claim_pauli_matrix_products","calc_formulae_003_matrix_decomposition","calc_formulae_006_definition_of_cc","calculation_formulae_025_claim_complex_numbers_form_a_field","calculation_formulae_definition_set_and_algebra_notation","linear_space_general_000b_claim_kronecker_product_rule","linear_space_general_000c_claim_kronecker_multilinear","transfer_matrix_000_definition_site_pauli_matrices","transfer_matrix_000c_definition_jordan_wigner_Z_matrices","transfer_matrix_000d_definition_jordan_wigner_Y_matrices","transfer_matrix_000e_definition_global_spin_flip_matrix"]},
-  {"id":"transfer_matrix_000g_definition_positive_coupling_tanh","chapterOrder":19,"sha256":"c88f0aaa959c3c0bd935d6837168abb5a32dfcb5517bd25b6eedbd96d6ef6b4c","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_000b_claim_cosh_sinh_basic_properties","calc_formulae_definition_cosh_sinh","calculation_formulae_definition_set_and_algebra_notation"]},
-  {"id":"transfer_matrix_000h_definition_real_logarithm_positive","chapterOrder":20,"sha256":"6cdd3ad52f6d6b9da9ac521d92f1ebf7830d7c73333025e1b728abb45d715cf9","granularity":"自動検査で主題に適合","dependencies":["calculation_formulae_definition_set_and_algebra_notation","exp_linear_map_006_definition_scalar_exp","exp_linear_map_010_claim_real_exp_positive","exp_linear_map_011_claim_real_exp_strictly_increasing"]},
-  {"id":"transfer_matrix_000i_definition_first_dual_coupling_constant","chapterOrder":23,"sha256":"d48824259ed93c7fc88f383b5682de9f3a5386ad6b74b63fb01e3c4abe4b0ab1","granularity":"自動検査で主題に適合","dependencies":["calculation_formulae_definition_set_and_algebra_notation","partition_function_2d_ising_002_definition_partition_function","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive"]},
-  {"id":"transfer_matrix_000j_claim_first_dual_coupling_relation","chapterOrder":24,"sha256":"db7d1dc825ea42316564b9f66a5ef2a5d347ff20f110b83f43d20238517f7596","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_000b_claim_cosh_sinh_basic_properties","calc_formulae_definition_cosh_sinh","calculation_formulae_definition_set_and_algebra_notation","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive","transfer_matrix_000i_definition_first_dual_coupling_constant"]},
-  {"id":"transfer_matrix_000k_definition_second_dual_coupling_constant","chapterOrder":25,"sha256":"29123dc6eab221bed1f8ab41ede4d2d2794819d81b39e259ae7a14d3981077e5","granularity":"自動検査で主題に適合","dependencies":["calculation_formulae_definition_set_and_algebra_notation","partition_function_2d_ising_002_definition_partition_function","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive"]},
-  {"id":"transfer_matrix_000l_claim_second_dual_coupling_relation","chapterOrder":26,"sha256":"fa4c6abd0012cb3366ddcc6a9a4e3fd96225a5e37f38bde1635ec99593991c77","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_000b_claim_cosh_sinh_basic_properties","calc_formulae_definition_cosh_sinh","calculation_formulae_definition_set_and_algebra_notation","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive","transfer_matrix_000k_definition_second_dual_coupling_constant"]},
-  {"id":"transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations","chapterOrder":27,"sha256":"35d408e19f8bc06327f245794bcc4754cb4172f63e5f2c5537eb56258ed9c112","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_definition_cosh_sinh","calculation_formulae_definition_set_and_algebra_notation","partition_function_2d_ising_002_definition_partition_function","transfer_matrix_000i_definition_first_dual_coupling_constant","transfer_matrix_000k_definition_second_dual_coupling_constant"]},
-  {"id":"transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive","chapterOrder":29,"sha256":"d71d287bfff069bd358d9ed29804233d00442e2003bccc56d7d4261d351b9f66","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_000b_claim_cosh_sinh_basic_properties","calculation_formulae_definition_set_and_algebra_notation","transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations"]},
-  {"id":"transfer_matrix_001_definition_symbols","chapterOrder":35,"sha256":"81fa3efe64d62327679e71f943888276a1cc9082685fe39111bfd95281fe0c48","granularity":"具体的な行列計算への展開またはブロック分割を要する","dependencies":["Z_Y_anticommutation_000a_claim_pauli_matrix_products","calc_formulae_006_definition_of_cc","calc_formulae_definition_cosh_sinh","linear_space_general_000_definition_kronecker_product","linear_space_general_000b_claim_kronecker_product_rule","partition_function_2d_ising_003_definition_transfer_matrix","transfer_matrix_000_definition_site_pauli_matrices","transfer_matrix_000f_claim_global_spin_flip_jordan_wigner_representation","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive","transfer_matrix_000i_definition_first_dual_coupling_constant","transfer_matrix_000j_claim_first_dual_coupling_relation","transfer_matrix_000k_definition_second_dual_coupling_constant","transfer_matrix_000l_claim_second_dual_coupling_relation","transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations","transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive","transfer_matrix_claim_first_transfer_matrix_pauli_form","transfer_matrix_claim_second_transfer_matrix_pauli_form","transfer_matrix_definition_site_pauli_periodic_extension"]},
+  {"id":"transfer_matrix_000f_claim_global_spin_flip_jordan_wigner_representation","chapterOrder":19,"sha256":"3aa119f845005c3fff2190075cc81ce4b1ffe174ffd64fb5e490bdcc7d7dd169","granularity":"自動検査で主題に適合","dependencies":["Z_Y_anticommutation_000a_claim_pauli_matrix_products","calc_formulae_003_matrix_decomposition","calc_formulae_006_definition_of_cc","calculation_formulae_025_claim_complex_numbers_form_a_field","calculation_formulae_definition_set_and_algebra_notation","linear_space_general_000b_claim_kronecker_product_rule","linear_space_general_000c_claim_kronecker_multilinear","transfer_matrix_000_definition_site_pauli_matrices","transfer_matrix_000c_definition_jordan_wigner_Z_matrices","transfer_matrix_000d_definition_jordan_wigner_Y_matrices","transfer_matrix_000e_definition_global_spin_flip_matrix"]},
+  {"id":"transfer_matrix_000g_definition_positive_coupling_tanh","chapterOrder":20,"sha256":"c88f0aaa959c3c0bd935d6837168abb5a32dfcb5517bd25b6eedbd96d6ef6b4c","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_000b_claim_cosh_sinh_basic_properties","calc_formulae_definition_cosh_sinh","calculation_formulae_definition_set_and_algebra_notation"]},
+  {"id":"transfer_matrix_000h_definition_real_logarithm_positive","chapterOrder":21,"sha256":"6cdd3ad52f6d6b9da9ac521d92f1ebf7830d7c73333025e1b728abb45d715cf9","granularity":"自動検査で主題に適合","dependencies":["calculation_formulae_definition_set_and_algebra_notation","exp_linear_map_006_definition_scalar_exp","exp_linear_map_010_claim_real_exp_positive","exp_linear_map_011_claim_real_exp_strictly_increasing"]},
+  {"id":"transfer_matrix_000i_definition_first_dual_coupling_constant","chapterOrder":24,"sha256":"d48824259ed93c7fc88f383b5682de9f3a5386ad6b74b63fb01e3c4abe4b0ab1","granularity":"自動検査で主題に適合","dependencies":["calculation_formulae_definition_set_and_algebra_notation","partition_function_2d_ising_002_definition_partition_function","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive"]},
+  {"id":"transfer_matrix_000j_claim_first_dual_coupling_relation","chapterOrder":25,"sha256":"db7d1dc825ea42316564b9f66a5ef2a5d347ff20f110b83f43d20238517f7596","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_000b_claim_cosh_sinh_basic_properties","calc_formulae_definition_cosh_sinh","calculation_formulae_definition_set_and_algebra_notation","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive","transfer_matrix_000i_definition_first_dual_coupling_constant"]},
+  {"id":"transfer_matrix_000k_definition_second_dual_coupling_constant","chapterOrder":26,"sha256":"29123dc6eab221bed1f8ab41ede4d2d2794819d81b39e259ae7a14d3981077e5","granularity":"自動検査で主題に適合","dependencies":["calculation_formulae_definition_set_and_algebra_notation","partition_function_2d_ising_002_definition_partition_function","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive"]},
+  {"id":"transfer_matrix_000l_claim_second_dual_coupling_relation","chapterOrder":27,"sha256":"fa4c6abd0012cb3366ddcc6a9a4e3fd96225a5e37f38bde1635ec99593991c77","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_000b_claim_cosh_sinh_basic_properties","calc_formulae_definition_cosh_sinh","calculation_formulae_definition_set_and_algebra_notation","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive","transfer_matrix_000k_definition_second_dual_coupling_constant"]},
+  {"id":"transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations","chapterOrder":28,"sha256":"35d408e19f8bc06327f245794bcc4754cb4172f63e5f2c5537eb56258ed9c112","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_definition_cosh_sinh","calculation_formulae_definition_set_and_algebra_notation","partition_function_2d_ising_002_definition_partition_function","transfer_matrix_000i_definition_first_dual_coupling_constant","transfer_matrix_000k_definition_second_dual_coupling_constant"]},
+  {"id":"transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive","chapterOrder":30,"sha256":"d71d287bfff069bd358d9ed29804233d00442e2003bccc56d7d4261d351b9f66","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_000b_claim_cosh_sinh_basic_properties","calculation_formulae_definition_set_and_algebra_notation","transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations"]},
+  {"id":"transfer_matrix_001_definition_symbols","chapterOrder":36,"sha256":"81fa3efe64d62327679e71f943888276a1cc9082685fe39111bfd95281fe0c48","granularity":"具体的な行列計算への展開またはブロック分割を要する","dependencies":["Z_Y_anticommutation_000a_claim_pauli_matrix_products","calc_formulae_006_definition_of_cc","calc_formulae_definition_cosh_sinh","linear_space_general_000_definition_kronecker_product","linear_space_general_000b_claim_kronecker_product_rule","partition_function_2d_ising_003_definition_transfer_matrix","transfer_matrix_000_definition_site_pauli_matrices","transfer_matrix_000f_claim_global_spin_flip_jordan_wigner_representation","transfer_matrix_000g_definition_positive_coupling_tanh","transfer_matrix_000h_definition_real_logarithm_positive","transfer_matrix_000i_definition_first_dual_coupling_constant","transfer_matrix_000j_claim_first_dual_coupling_relation","transfer_matrix_000k_definition_second_dual_coupling_constant","transfer_matrix_000l_claim_second_dual_coupling_relation","transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations","transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive","transfer_matrix_claim_first_transfer_matrix_pauli_form","transfer_matrix_claim_second_transfer_matrix_pauli_form","transfer_matrix_definition_site_pauli_periodic_extension"]},
   {"id":"bridge_002_claim_sigma_z_diagonal_action","chapterOrder":14,"sha256":"cc21f1936195952db55696d2427f13b84ab0896254e2425aad24e81922bc80f1","granularity":"自動検査で主題に適合","dependencies":["Z_Y_anticommutation_000a_claim_pauli_matrix_products","bridge_001_definition_config_basis","calc_formulae_006_definition_of_cc","linear_space_general_000b_claim_kronecker_product_rule","linear_space_general_000c_claim_kronecker_multilinear","transfer_matrix_000_definition_site_pauli_matrices","transfer_matrix_005_definition_end_isomorphism"]},
 ];
 const v2PauliPendingReReviewSnapshot = [
-  {"id":"bridge_005_claim_two_by_two_transfer_identity","chapterOrder":28,"sha256":"c4c55be27b7d7369cf3c0fd1eb624e192e548fedd0f69a0ee473fab946982977","granularity":"自動検査で主題に適合","dependencies":["Z_Y_anticommutation_000a_claim_pauli_matrix_products","calc_formulae_000b_claim_cosh_sinh_basic_properties","calc_formulae_001_sqrt_nonnegative_real","calc_formulae_006_definition_of_cc","calculation_formulae_definition_set_and_algebra_notation","exp_linear_map_000a_claim_real_exp_series_converges","exp_linear_map_001_theorem_exp_series_pointwise_converges","exp_linear_map_002_definition_exp_of_endomorphism","transfer_matrix_000k_definition_second_dual_coupling_constant","transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations"]},
+  {"id":"bridge_005_claim_two_by_two_transfer_identity","chapterOrder":29,"sha256":"c4c55be27b7d7369cf3c0fd1eb624e192e548fedd0f69a0ee473fab946982977","granularity":"自動検査で主題に適合","dependencies":["Z_Y_anticommutation_000a_claim_pauli_matrix_products","calc_formulae_000b_claim_cosh_sinh_basic_properties","calc_formulae_001_sqrt_nonnegative_real","calc_formulae_006_definition_of_cc","calculation_formulae_definition_set_and_algebra_notation","exp_linear_map_000a_claim_real_exp_series_converges","exp_linear_map_001_theorem_exp_series_pointwise_converges","exp_linear_map_002_definition_exp_of_endomorphism","transfer_matrix_000k_definition_second_dual_coupling_constant","transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations"]},
 ];
 const isingModelDefinitionSectionEntryIds = isingModelDefinitionPendingReReviewSnapshot.map(({ id }) => id);
 const v1PauliRepresentationSectionEntryIds = v1PauliPendingReReviewSnapshot.map(({ id }) => id);
@@ -353,7 +356,7 @@ const epsilonProjectorDefinitionExpectedInternalDependencies = new Map<string, s
   ["bridge_008_definition_epsilon_projectors", []],
 ]);
 const epsilonProjectorDefinitionExpectedContentSha256 = new Map<string, string>([
-  ["bridge_008_definition_epsilon_projectors", "353af10c8032cdf770e946fc51a25fc53bbaaccb8872e0732d259080110492a0"],
+  ["bridge_008_definition_epsilon_projectors", "6d0bb75579386ab8941b075c82ec8798683b7250b2756bacfbf3d0db7452c383"],
 ]);
 const epsilonProjectorDefinitionExpectedExternalInputEntryIds = [
   "calc_formulae_006_definition_of_cc",
@@ -528,11 +531,9 @@ const v1V2JordanWignerExpectedExternalInputContentSha256 = new Map<string, strin
 const epsilonEigenspacesExpectedDirectDependencies = [
   "calc_formulae_006_definition_of_cc",
   "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
-  "transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace",
   "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
-  "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
 ].sort();
-const epsilonEigenspacesExpectedContentSha256 = "984a36a9e0162266d287b4f46d273d82ce6238f4dab8f8c8386eccb123637cd6";
+const epsilonEigenspacesExpectedContentSha256 = "90d287d9540e414ee69047b607bf3b0cfa696af53f5973cfa7f5679fff847b98";
 const evenEigenvectorsExpectedDirectDependencies = [
   "calc_formulae_003_matrix_decomposition",
   "calc_formulae_006_definition_of_cc",
@@ -548,21 +549,6 @@ const evenEigenspaceSubspaceExpectedDirectDependencies = [
   "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
 ].sort();
 const evenEigenspaceSubspaceExpectedContentSha256 = "c3c5ecc94e32be9164f9ce669c7fe341b24011593470a30ede70d5122edb5086";
-const oddEigenspaceSubspaceExpectedDirectDependencies = [
-  "calc_formulae_003_matrix_decomposition",
-  "calc_formulae_006_definition_of_cc",
-  "calculation_formulae_025_claim_complex_numbers_form_a_field",
-  "calculation_formulae_definition_set_and_algebra_notation",
-  "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
-].sort();
-const oddEigenspaceSubspaceExpectedContentSha256 = "fd42a1c3f7d1d7356ab19b5a7764ecf92065eb22bbcf2e20ad878a0272d1234b";
-const oddEigenvectorsExpectedDirectDependencies = [
-  "calc_formulae_003_matrix_decomposition",
-  "calc_formulae_006_definition_of_cc",
-  "calculation_formulae_definition_set_and_algebra_notation",
-  "transfer_matrix_001_definition_symbols",
-].sort();
-const oddEigenvectorsExpectedContentSha256 = "9f2065637866f3cabf8c046e5dc918dd264bdc5c501737f2f92077e5bcefc9f0";
 const epsilonEigenspacesBoundaryCandidates = [] as const;
 const epsilonEigenspacesExpectedBoundaryCandidates = [] as const;
 const epsilonEigenspacesNextTickUnit = [] as const;
@@ -588,11 +574,7 @@ const epsilonEigenspacesFormalizationEvidenceSha256 = [
   ],
   [
     "lean/Ising2D/Part010/Claim009_EpsilonProjectors.lean",
-    "2efb621043022a0b6e0712f22534957ddda11064f151707a8f5ab8a0f2c7ccf7",
-  ],
-  [
-    "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
-    "1f268ea1b1bfbcc0f201190b189972500a1815f6a2a00b21d463e668a9a95df7",
+    "f1954aae09230cbcfb15ab1ee07eae5bc4bd75e9dce0721ccf630f3ab2f4e404",
   ],
   [
     "lean/Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean",
@@ -608,7 +590,7 @@ const epsilonEigenspacesFormalizationEvidenceSha256 = [
   ],
   [
     "lean/docs/ch010-formalization.md",
-    "7d6d6ace8228752aaa48b883f968358f1a8fed5f589e6474280e7513f64e03bf",
+    "88b67d60b936413f86ca696903d355ebeaa24fe00ca4203085d8afd35aba0646",
   ],
   [
     "lean/docs/necsuf-involution-eigenvalue.md",
@@ -616,7 +598,7 @@ const epsilonEigenspacesFormalizationEvidenceSha256 = [
   ],
   [
     "lean/Ising2D/Part004/EvenEigenvectors.lean",
-    "594ff5ff3ca0900a4fc79bfcf413a4ea6b2590277a07fa4bb0088d97e7fcd08b",
+    "6eba2bd02f37bcc3564f5d9737af8470ed27f4ba91b54c93cd9188f653feed5d",
   ],
   [
     "lean/Ising2D/NecSuf/FixedVectorsSubmodule.lean",
@@ -707,116 +689,12 @@ const epsilonEigenspacesFormalizationEvidenceSha256 = [
     "1fa2d5c880a6fafc0940dee3de0f3e2da2bc2dde9e8573b0579dd2f195109ebb",
   ],
   [
-    "lean/Ising2D/Part004/OddEigenvectors.lean",
-    "f7c55e89c6b0940d45b4954672be17501edb98d30244a0bee64b8586200d48a6",
-  ],
-  [
-    "lean/Ising2D/NecSuf/NegatedVectorsSubmodule.lean",
-    "285d63c7d6b0fd1651fecab0b187a9b8bed4758d00be7684f9870b1b75019658",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/_prelude.sage",
-    "51ea4613b5011fe78fb826c82e6634aec3084cef04d935daa0578df88af16285",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_add_action_definition.sage",
-    "fa8f3e28cef9a5a2fa8d0e91a60377cfed22fddc77b8597896d6b6c67d99a6fa",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_add_action_reassembly.sage",
-    "b78536fe7f12caa0d95268c0b44087db5b414bae6f999344d3cf58f25444161e",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_add_distributivity.sage",
-    "130abbd0d3fd571010e7576cc82256caf9659cd94c0769fecec3bc3c4e896ea1",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_add_eigenvector_hypotheses.sage",
-    "5f4c61c61009c151892e894745d40f40b6d98d8af4f3d4d994f42037e99e1d11",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_add_negation.sage",
-    "d1ea5c02d0f68de5d66bb557b86a6b3954fea811dad8d6490a3c66d86cb8e6d0",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_add_split_finite_sum.sage",
-    "be39c8572da554a7569505316fdffec2b3b76704a1d24066c2a82bc8c3479dc8",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_add_vector_definition.sage",
-    "2b79ec4178d3467dda8b6bdb97b090a5f5aa4ddf5ab2e4983329fdeab1df0292",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_smul_action_definition.sage",
-    "310936bee625d89ee89712822e7708f89171b57980dc8fe2c9352cf8326a52da",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_smul_action_reassembly.sage",
-    "31e4852a07be8b31cac4079623782c45628580136d6d402a6294af0d0b29c956",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_smul_associate_left.sage",
-    "7b89eb2eb11bdc2625128471743bce0a63ea8a6fb15710afd9dd8cbf5b619e21",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_smul_associate_right.sage",
-    "fb272cec14ec490a82da827228f45d02ceb320230b7480b6c63be6a97a7406dc",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_smul_commute_scalar.sage",
-    "43a5c8ab74a25e000d952370dec392919b750b28b78d14fce6eb8cc1542ce01c",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_smul_eigenvector_hypothesis.sage",
-    "aaf690e4d81d4e8889b276f290a6ad5fdeb50db63092c58d7348647be36b8ae4",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_smul_extract_finite_sum.sage",
-    "47b49adf016766524154b70167e70a9dbd3f0051e97fe1e3e65fd6cb57dcf490",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_smul_negation.sage",
-    "854db218b2081db7e39dcabcd17539b1fc6458721d569958a9a84409892aca44",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_smul_vector_definition.sage",
-    "dfbf3274a4e86e9f6c46fcaa7b2f49e621bd3479d8b4157010cc560e43f61b37",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_zero_action_definition.sage",
-    "8149282bf73185d96c246a28ca68c0f02b7283c7267c2a5c8a8acd3ac7d650f7",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_zero_finite_sum.sage",
-    "c39cf1dbdd0d53b50777f6066163b8f3850c3acd02c7d8b80fc6940e3b83de53",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_zero_multiplication.sage",
-    "ade7dac788638ffb04dbf01e50c52ede3b00fc628b701cdcfec51a92e094dcc8",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/check_zero_negation.sage",
-    "6986efe0fd17479f9252817a4a02cc9faeb38314faac42b7424c8c717e62513b",
-  ],
-  [
-    "sagemath/check/odd_eigenspace_is_complex_subspace/overview.md",
-    "98a748c45e0c1b4f98323e0da07428bc04de47520bfeb2bd5a18ff0463910bea",
-  ],
-  [
-    "sagemath/check/def_odd_eigenvectors_of_epsilon/check_odd_eigenvectors.sage",
-    "076f68b4f8f82b1c73a3d8d6e2403988d7dce884395ec62b38d5806785ca77c3",
-  ],
-  [
-    "sagemath/check/def_odd_eigenvectors_of_epsilon/overview.md",
-    "6b955d0ded5571f7674cfa8031523b56cc4a39050bebc25d726d001308791266",
-  ],
-  [
     "sagemath/check/169_def_eigenspaces_of_epsilon/check_01_eigenspaces.sage",
-    "27887c21cac1a82693490b5002b22f7ad068453ed5c09d961233e47bc989fbbd",
+    "7299940133f1f40e22802fbf420c0e7cc47149cf2abf53566924745118837572",
   ],
   [
     "sagemath/check/169_def_eigenspaces_of_epsilon/overview.md",
-    "5321cff092d42732c1da9243a04dee96bb168fee6d693588d973c6462b64a35b",
+    "da884110940f4d7525d4f29735742ff7dce288f81f645dc9fec7399b36d28612",
   ],
   [
     "sagemath/check/epsilon_square_identity/_prelude.sage",
@@ -998,34 +876,26 @@ for (const [path, expected] of epsilonEigenspacesFormalizationEvidenceSha256) {
 }
 const epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds = [
   "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
-  "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
   "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
-  "transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace",
   "transfer_matrix_004_definition_eigenspaces_of_epsilon",
   "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
   "transfer_matrix_004c_claim_epsilon_action_eigenvalues",
   "bridge_009_claim_epsilon_projector_properties",
 ] as const;
 const epsilonEigenspacesSectionEntryIds =
-  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds.slice(0, 5);
+  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds.slice(0, 3);
 const epsilonSquareAndActionEigenvaluesSectionEntryIds =
-  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds.slice(5, 7);
+  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds.slice(3, 5);
 const epsilonProjectorPropertiesSectionEntryIds =
-  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds.slice(7, 8);
+  epsilonEigenspacesAndComplementaryProjectorsSectionEntryIds.slice(5, 6);
 const epsilonEigenspacesSectionExpectedInternalDependencies = new Map<string, string[]>([
   ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", []],
-  ["transfer_matrix_004_definition_eigenspace_odd_of_epsilon", []],
   ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace", [
     "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
   ]],
-  ["transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace", [
-    "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
-  ]],
   ["transfer_matrix_004_definition_eigenspaces_of_epsilon", [
     "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
-    "transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace",
     "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
-    "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
   ]],
 ]);
 const epsilonSquareAndActionEigenvaluesSectionExpectedInternalDependencies = new Map<string, string[]>([
@@ -1039,13 +909,11 @@ const epsilonProjectorPropertiesSectionExpectedInternalDependencies = new Map<st
 ]);
 const epsilonEigenspacesAndComplementaryProjectorsExpectedContentSha256 = new Map<string, string>([
   ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", "18821fd685d3300d50b434c3acab2457d2c6142014a64bb4d5a9eaadb9ddfd4e"],
-  ["transfer_matrix_004_definition_eigenspace_odd_of_epsilon", "9f2065637866f3cabf8c046e5dc918dd264bdc5c501737f2f92077e5bcefc9f0"],
   ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace", "c3c5ecc94e32be9164f9ce669c7fe341b24011593470a30ede70d5122edb5086"],
-  ["transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace", "fd42a1c3f7d1d7356ab19b5a7764ecf92065eb22bbcf2e20ad878a0272d1234b"],
-  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "984a36a9e0162266d287b4f46d273d82ce6238f4dab8f8c8386eccb123637cd6"],
+  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "90d287d9540e414ee69047b607bf3b0cfa696af53f5973cfa7f5679fff847b98"],
   ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", "4c53c224f36e67c9082327b1771c7e9ce4b68ee2436103b4ef4ad4de24f3492f"],
   ["transfer_matrix_004c_claim_epsilon_action_eigenvalues", "2af2155e8e1f966fb62ab61239dc01de7f34a707850c3f3e429bc8e92bb24168"],
-  ["bridge_009_claim_epsilon_projector_properties", "d109dc4db25a9487b161b9c265101260700ec7eba6697fcb0fde07bc728d9100"],
+  ["bridge_009_claim_epsilon_projector_properties", "345ea1bc313fc4f3242b442607d6932ea0abaff6324cb2e25bb81414936dba18"],
 ]);
 const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputEntryIds = [
   "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
@@ -1056,7 +924,6 @@ const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputEntryIds 
   "calculation_formulae_definition_set_and_algebra_notation",
   "linear_space_general_000b_claim_kronecker_product_rule",
   "transfer_matrix_001_definition_symbols",
-  "transfer_matrix_005_definition_end_isomorphism",
 ].sort();
 const epsilonEigenspacesSectionExpectedExternalInputEntryIds = [
   "calc_formulae_003_matrix_decomposition",
@@ -1076,23 +943,19 @@ const epsilonSquareAndActionEigenvaluesSectionExpectedExternalInputEntryIds = [
 ].sort();
 const epsilonProjectorPropertiesSectionExpectedExternalInputEntryIds = [
   "bridge_008_definition_epsilon_projectors",
-  "transfer_matrix_004_definition_eigenspaces_of_epsilon",
-  "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
-  "transfer_matrix_005_definition_end_isomorphism",
+  "calc_formulae_006_definition_of_cc",
+  "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
 ].sort();
 const epsilonEigenspacesAndComplementaryProjectorsExpectedExternalInputContentSha256 = new Map<string, string>([
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "2040831405f933942bdff84147045e5feddd899546259e7449c6903c8411de65"],
-  ["bridge_008_definition_epsilon_projectors", "353af10c8032cdf770e946fc51a25fc53bbaaccb8872e0732d259080110492a0"],
+  ["bridge_008_definition_epsilon_projectors", "6d0bb75579386ab8941b075c82ec8798683b7250b2756bacfbf3d0db7452c383"],
   ["calc_formulae_003_matrix_decomposition", "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_025_claim_complex_numbers_form_a_field", "c31e56b9b88aba827b1debe699a718a947f1af536759680e5e08612e9dd17ce6"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["transfer_matrix_001_definition_symbols", "81fa3efe64d62327679e71f943888276a1cc9082685fe39111bfd95281fe0c48"],
-  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "984a36a9e0162266d287b4f46d273d82ce6238f4dab8f8c8386eccb123637cd6"],
-  ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", "4c53c224f36e67c9082327b1771c7e9ce4b68ee2436103b4ef4ad4de24f3492f"],
-  ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
-  ["transfer_matrix_005b_claim_end_is_algebra_isomorphism", "1a9ecef9cd59f12d82071b4c248e4319f7c9be8e3f42cf1bc9289737d9e5d033"],
+  ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", "18821fd685d3300d50b434c3acab2457d2c6142014a64bb4d5a9eaadb9ddfd4e"],
 ]);
 const v1RestrictionToEigenspacesExpectedDirectDependencies = [
   "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
@@ -1102,12 +965,12 @@ const v1RestrictionToEigenspacesExpectedDirectDependencies = [
   "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
-  "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+  "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
   "transfer_matrix_005_definition_end_isomorphism",
   "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
   "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
 ].sort();
-const v1RestrictionToEigenspacesExpectedContentSha256 = "1345f7d56ef8f13c14f8f8c345ea38b45f7a01845bf27d963a004730c64463f8";
+const v1RestrictionToEigenspacesExpectedContentSha256 = "a42d123323b1b88bb4e71cb57aa91362a512d7eda823f239e46d7b44285310d3";
 const v1RestrictionToEigenspacesSectionEntryIds = [
   "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
 ] as const;
@@ -1125,7 +988,7 @@ const v1RestrictionToEigenspacesExpectedExternalInputContentSha256 = new Map<str
   ["linear_space_general_002c_claim_matrix_norm_triangle_inequality", "3cd28853c071460f14cbe4ac6e63a6a4e9db98e51a6a752f5cfc064d14f0e069"],
   ["transfer_matrix_001_definition_symbols", "81fa3efe64d62327679e71f943888276a1cc9082685fe39111bfd95281fe0c48"],
   ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "4a8a7d02f1b0fff942c284259bdd83ef54e7a6960a46667d2c98abcfc6739388"],
-  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", "984a36a9e0162266d287b4f46d273d82ce6238f4dab8f8c8386eccb123637cd6"],
+  ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", "18821fd685d3300d50b434c3acab2457d2c6142014a64bb4d5a9eaadb9ddfd4e"],
   ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
   ["transfer_matrix_005b_claim_end_is_algebra_isomorphism", "1a9ecef9cd59f12d82071b4c248e4319f7c9be8e3f42cf1bc9289737d9e5d033"],
   ["transfer_matrix_005c_claim_end_preserves_matrix_exponential", "6b163e3b366800fd0dcda4eec827fa428e8721922ff5b3e064127c321b4d62c0"],
@@ -1137,7 +1000,7 @@ const v1RestrictionFormalizationBoundaryEvidenceSha256 = [
   ],
   [
     "lean/Ising2D/Part004/Definition010_H1H2V1V2.lean",
-    "cc8ec52c4e75b31176599a40a277b354cd6a6abdc6dfe6469849886389bfe2bc",
+    "3ed99e9dc844152c585055317a2f4a0160bc4425b4fbc3eb689cc50b10645622",
   ],
   [
     "lean/Ising2D/Part004/Definition000_TransferMatrixSymbols.lean",
@@ -1156,12 +1019,8 @@ const v1RestrictionFormalizationBoundaryEvidenceSha256 = [
     "30c4f2af3182e121f394404a6ed7b4725c7fb506510cd91f8ff74f33a7bca182",
   ],
   [
-    "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
-    "1f268ea1b1bfbcc0f201190b189972500a1815f6a2a00b21d463e668a9a95df7",
-  ],
-  [
-    "lean/Ising2D/Part010/Claim012_SectorDecomposition.lean",
-    "baf72e022793e911b8e19ac5b320188478d11fb72a2dbf8f6c16497a0a1c52fb",
+    "lean/Ising2D/Part004/ClaimV1RestrictionToEigenspaces.lean",
+    "e204a42cdeb55665ca081e6b0e4c6caebe50728ecebfed07e7fbb7430d1915ff",
   ],
 ] as const;
 for (const [path, expected] of v1RestrictionFormalizationBoundaryEvidenceSha256) {
@@ -1176,86 +1035,18 @@ const v1PlusMinusDefinitionExpectedDirectDependencies = [
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_005_definition_end_isomorphism",
 ].sort();
-const v1PlusMinusDefinitionExpectedContentSha256 = "3c0aff7c72656ca3a2bfda73ec7a4e3079e00e988a550f174f25a39b9df81a26";
-const v1PlusMinusAndCommutationSectionEntryIds = [
-  "transfer_matrix_007_definition_V1_pm",
-  "bridge_011_claim_sector_replacement",
-  "bridge_definition_V1_pm_square_root",
-  "bridge_claim_V1_pm_square_root_squares_to_V1_pm",
-  "bridge_010_claim_epsilon_commutes",
-  "bridge_claim_epsilon_projectors_commute_with_transfer_matrices",
-  "bridge_011a_claim_sector_replacement_pow",
-] as const;
-const v1PlusMinusAndCommutationExpectedInternalDependencies = new Map<string, string[]>([
-  ["transfer_matrix_007_definition_V1_pm", []],
-  ["bridge_011_claim_sector_replacement", ["transfer_matrix_007_definition_V1_pm"]],
-  ["bridge_definition_V1_pm_square_root", ["transfer_matrix_007_definition_V1_pm"]],
-  ["bridge_claim_V1_pm_square_root_squares_to_V1_pm", [
-    "bridge_definition_V1_pm_square_root",
-    "transfer_matrix_007_definition_V1_pm",
-  ]],
-  ["bridge_010_claim_epsilon_commutes", [
-    "bridge_claim_V1_pm_square_root_squares_to_V1_pm",
-    "bridge_definition_V1_pm_square_root",
-    "transfer_matrix_007_definition_V1_pm",
-  ]],
-  ["bridge_claim_epsilon_projectors_commute_with_transfer_matrices", [
-    "bridge_010_claim_epsilon_commutes",
-  ]],
-  ["bridge_011a_claim_sector_replacement_pow", [
-    "bridge_011_claim_sector_replacement",
-    "bridge_claim_epsilon_projectors_commute_with_transfer_matrices",
-  ]],
-]);
-const v1PlusMinusAndCommutationExpectedContentSha256 = new Map<string, string>([
-  ["transfer_matrix_007_definition_V1_pm", v1PlusMinusDefinitionExpectedContentSha256],
-  ["bridge_011_claim_sector_replacement", "7c075762c534d0d2d9c78275b1f513c6acd67dbbaebd9e8ca1568e9bc49a153c"],
-  ["bridge_definition_V1_pm_square_root", "c9eb304598ee0badcc04af88cc82578cc2fe39382fa614903968c3ebf16c36d4"],
-  ["bridge_claim_V1_pm_square_root_squares_to_V1_pm", "f7cb39e3f6d57e718c0a765d4d47e03e93f40011612928cef58cf0adb797db5e"],
-  ["bridge_010_claim_epsilon_commutes", "4faf33296e3ac95b3b3707d58f6e32d8fc16377b82a70912d70f6247c2baebea"],
-  ["bridge_claim_epsilon_projectors_commute_with_transfer_matrices", "3a089115f3edaf702194be5ff18e1071dd8e678af5f58f874bdfc06252545bae"],
-  ["bridge_011a_claim_sector_replacement_pow", "16465849b26c8c71caa298b300f2bf424283513092691f4c3abeafb79c134974"],
-]);
-const v1PlusMinusAndCommutationExpectedExternalInputEntryIds = [
-  "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-  "bridge_008_definition_epsilon_projectors",
-  "bridge_009_claim_epsilon_projector_properties",
-  "calc_formulae_006_definition_of_cc",
-  "calculation_formulae_definition_set_and_algebra_notation",
-  "exp_linear_map_002_definition_exp_of_endomorphism",
-  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-  "linear_space_general_000b_claim_kronecker_product_rule",
-  "linear_space_general_002_claim_scalar_identity_commutes",
-  "linear_space_general_003b_claim_matrix_multiplication_continuity",
-  "partition_function_2d_ising_003_definition_transfer_matrix",
-  "transfer_matrix_001_definition_symbols",
-  "transfer_matrix_005_definition_end_isomorphism",
-  "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
-].sort();
-const v1PlusMinusAndCommutationExpectedExternalInputContentSha256 = new Map<string, string>([
-  ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "2040831405f933942bdff84147045e5feddd899546259e7449c6903c8411de65"],
-  ["bridge_008_definition_epsilon_projectors", "353af10c8032cdf770e946fc51a25fc53bbaaccb8872e0732d259080110492a0"],
-  ["bridge_009_claim_epsilon_projector_properties", "d109dc4db25a9487b161b9c265101260700ec7eba6697fcb0fde07bc728d9100"],
-  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
-  ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
-  ["exp_linear_map_002_definition_exp_of_endomorphism", "1b90c006155b2b723ad7169ab806c4fff82870687ce2865a7bc677a875134fa2"],
-  ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "5310027658533830ac1844d325362a6a451df8aad4bd746c7685d92802af5f24"],
-  ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
-  ["linear_space_general_002_claim_scalar_identity_commutes", "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f"],
-  ["linear_space_general_003b_claim_matrix_multiplication_continuity", "4997ade583c124391b81653b81abdc322ad7d13b46e84827b6e5814fc31a86f3"],
-  ["partition_function_2d_ising_003_definition_transfer_matrix", "c5984eb6c246aabd10d3aa408cff79058ccf713c173ec22226713a0502ee8783"],
-  ["transfer_matrix_001_definition_symbols", "81fa3efe64d62327679e71f943888276a1cc9082685fe39111bfd95281fe0c48"],
-  ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
-  ["transfer_matrix_006_claim_V1_restriction_to_eigenspaces", "1345f7d56ef8f13c14f8f8c345ea38b45f7a01845bf27d963a004730c64463f8"],
-]);
-const sectorReplacementExpectedDirectDependencies = [
-  "bridge_009_claim_epsilon_projector_properties",
-  "calc_formulae_006_definition_of_cc",
-  "transfer_matrix_005_definition_end_isomorphism",
-  "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
-  "transfer_matrix_007_definition_V1_pm",
-].sort();
-const sectorReplacementExpectedContentSha256 = "7c075762c534d0d2d9c78275b1f513c6acd67dbbaebd9e8ca1568e9bc49a153c";
+const v1PlusMinusDefinitionExpectedContentSha256 = "42de0b775d480a5135114938ff7f73699dd3ceef93995899bc94e4525d089fce";
+// (−) セクターの退避でセクター上の置き換えの二項が本文から外れ、残る五項は章内依存順の連続区間でなくなった
+// （可換性の主張が V_1^{(+)} の平方根を通じて H_1^{(+)} に依存するため）。節境界は要再レビューとし、
+// 残る各項の本文・直接依存・章内順・説明粒度判定だけを固定する。
+const v1PlusMinusAndCommutationPendingReReviewSnapshot = [
+  {"id":"transfer_matrix_007_definition_V1_pm","chapterOrder":54,"sha256":"42de0b775d480a5135114938ff7f73699dd3ceef93995899bc94e4525d089fce","granularity":"自動検査で主題に適合","dependencies":["calc_formulae_006_definition_of_cc", "calculation_formulae_definition_set_and_algebra_notation", "exp_linear_map_002_definition_exp_of_endomorphism", "transfer_matrix_001_definition_symbols", "transfer_matrix_005_definition_end_isomorphism"]},
+  {"id":"bridge_definition_V1_pm_square_root","chapterOrder":70,"sha256":"5c613ecc4bcdbbeddf49b7ac8e7d20b568c741f72b4e139500c6aaf87588649e","granularity":"具体的な行列計算への展開またはブロック分割を要する","dependencies":["calc_formulae_006_definition_of_cc", "calculation_formulae_definition_set_and_algebra_notation", "transfer_matrix_001_definition_symbols", "transfer_matrix_007_definition_V1_pm", "transfer_matrix_011a_definition_H1_pm"]},
+  {"id":"bridge_claim_V1_pm_square_root_squares_to_V1_pm","chapterOrder":73,"sha256":"3d948b34098a21b8768326f7671476a09565202fff0ed3dddbc000ad994f11f8","granularity":"自動検査で主題に適合","dependencies":["bridge_definition_V1_pm_square_root", "calc_formulae_006_definition_of_cc", "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "transfer_matrix_007_definition_V1_pm"]},
+  {"id":"bridge_010_claim_epsilon_commutes","chapterOrder":71,"sha256":"047f0ed0d9fd0b05ced90b31500cd6ce66db14bc1bafb266d2e819e49e789289","granularity":"自動検査で主題に適合","dependencies":["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "bridge_definition_V1_pm_square_root", "exp_linear_map_002_definition_exp_of_endomorphism", "linear_space_general_000b_claim_kronecker_product_rule", "linear_space_general_002_claim_scalar_identity_commutes", "linear_space_general_003b_claim_matrix_multiplication_continuity", "partition_function_2d_ising_003_definition_transfer_matrix", "transfer_matrix_001_definition_symbols", "transfer_matrix_007_definition_V1_pm", "transfer_matrix_011a_definition_H1_pm", "transfer_matrix_011c_claim_V1_pm_exponential_representation"]},
+  {"id":"bridge_claim_epsilon_projectors_commute_with_transfer_matrices","chapterOrder":72,"sha256":"397d2e77c27b96d66678c7eff964d78583d06ce8df68df1c9319fb626f33de61","granularity":"自動検査で主題に適合","dependencies":["bridge_008_definition_epsilon_projectors", "bridge_010_claim_epsilon_commutes", "calc_formulae_006_definition_of_cc"]},
+];
+const v1PlusMinusAndCommutationSectionEntryIds = v1PlusMinusAndCommutationPendingReReviewSnapshot.map(({ id }) => id);
 const generalGeneratorsSectionEntryIds = [
   "transfer_matrix_011a_definition_H1_pm",
   "transfer_matrix_011b_definition_H2",
@@ -1265,7 +1056,7 @@ const generalGeneratorsExpectedInternalDependencies = new Map<string, string[]>(
   ["transfer_matrix_011b_definition_H2", []],
 ]);
 const generalGeneratorsExpectedContentSha256 = new Map<string, string>([
-  ["transfer_matrix_011a_definition_H1_pm", "a5aa568a9e1e4cc52a58629122d49e280cafc74faab4290ff138309f3e6d4376"],
+  ["transfer_matrix_011a_definition_H1_pm", "ba9ebaa18fd6efaa99ce17d31b27f4f613fdf225fd68589e02bcf4bd92d4b746"],
   ["transfer_matrix_011b_definition_H2", "52aaec8e3cb1a6b39ec827a5d52e972facfb0788052706c0febb33c3b5ae23db"],
 ]);
 const generalGeneratorsExpectedExternalInputEntryIds = [
@@ -1289,7 +1080,7 @@ const v1ExponentialRepresentationExpectedInternalDependencies = new Map<string, 
   ["transfer_matrix_011c_claim_V1_pm_exponential_representation", []],
 ]);
 const v1ExponentialRepresentationExpectedContentSha256 = new Map<string, string>([
-  ["transfer_matrix_011c_claim_V1_pm_exponential_representation", "962dcf57a1efe5bd0b5190e34ec8b98e0554974d4233dac93509119d35bce062"],
+  ["transfer_matrix_011c_claim_V1_pm_exponential_representation", "b14ce981f7e51fab24432e059e0d9e3c94c5eabd11fde7322d27201184ec11fa"],
 ]);
 const v1ExponentialRepresentationExpectedExternalInputEntryIds = [
   "calc_formulae_006_definition_of_cc",
@@ -1302,8 +1093,8 @@ const v1ExponentialRepresentationExpectedExternalInputContentSha256 = new Map<st
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["transfer_matrix_001_definition_symbols", "81fa3efe64d62327679e71f943888276a1cc9082685fe39111bfd95281fe0c48"],
-  ["transfer_matrix_007_definition_V1_pm", "3c0aff7c72656ca3a2bfda73ec7a4e3079e00e988a550f174f25a39b9df81a26"],
-  ["transfer_matrix_011a_definition_H1_pm", "a5aa568a9e1e4cc52a58629122d49e280cafc74faab4290ff138309f3e6d4376"],
+  ["transfer_matrix_007_definition_V1_pm", "42de0b775d480a5135114938ff7f73699dd3ceef93995899bc94e4525d089fce"],
+  ["transfer_matrix_011a_definition_H1_pm", "ba9ebaa18fd6efaa99ce17d31b27f4f613fdf225fd68589e02bcf4bd92d4b746"],
 ]);
 const v2ExponentialRepresentationSectionEntryIds = [
   "transfer_matrix_011d_claim_V2_exponential_representation",
@@ -1340,7 +1131,7 @@ const realSymmetricGeneratorsExpectedDirectDependencies = [
   "transfer_matrix_011a_definition_H1_pm",
   "transfer_matrix_011b_definition_H2",
 ].sort();
-const realSymmetricGeneratorsExpectedContentSha256 = "c9b462021b7f7aadcacde6f5ed71357b8f406f58197d5ba4de5653d7adb73d0d";
+const realSymmetricGeneratorsExpectedContentSha256 = "5478c9a18fd8ddda73a1384b59260c5cf0094566ee2d4c3e447cfabb14d09202";
 const realSymmetricGeneratorsAndSignFlipSectionEntryIds = [
   "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
   "eigenvalues_of_V_016_claim_sign_flip_conjugation",
@@ -1353,7 +1144,7 @@ const realSymmetricGeneratorsAndSignFlipExpectedInternalDependencies = new Map<s
 ]);
 const realSymmetricGeneratorsAndSignFlipExpectedContentSha256 = new Map<string, string>([
   ["eigenvalues_of_V_014_claim_iH_is_real_symmetric", realSymmetricGeneratorsExpectedContentSha256],
-  ["eigenvalues_of_V_016_claim_sign_flip_conjugation", "22cff211896415f6b9e8054dac9ec6d667d9f34fea204ab54968b831b971bc71"],
+  ["eigenvalues_of_V_016_claim_sign_flip_conjugation", "ba538d64e6437cc45ccdd9e33c9ea4f37bb186cdb2880b1926d5857d61edce77"],
 ]);
 const signFlipConjugationExpectedDirectDependencies = [
   "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
@@ -1386,11 +1177,10 @@ const realSymmetricGeneratorsAndSignFlipExpectedExternalInputContentSha256 = new
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["linear_space_general_000d_claim_kronecker_transpose", "c0014341f8b8968f27acf4793018d15312e7313acad2dccadd439617703c4cd4"],
   ["transfer_matrix_001_definition_symbols", "81fa3efe64d62327679e71f943888276a1cc9082685fe39111bfd95281fe0c48"],
-  ["transfer_matrix_011a_definition_H1_pm", "a5aa568a9e1e4cc52a58629122d49e280cafc74faab4290ff138309f3e6d4376"],
+  ["transfer_matrix_011a_definition_H1_pm", "ba9ebaa18fd6efaa99ce17d31b27f4f613fdf225fd68589e02bcf4bd92d4b746"],
   ["transfer_matrix_011b_definition_H2", "52aaec8e3cb1a6b39ec827a5d52e972facfb0788052706c0febb33c3b5ae23db"],
 ]);
 const evenSectorGeneratorSectionEntryIds = [
-  "evensectorT_definition_H1_plus",
   "closing_definition_D0_open_chain_operator",
   "closing_definition_G_boundary_operator",
   "closing_004_claim_H1_plus_in_sigma_z_form",
@@ -1399,13 +1189,11 @@ const evenSectorGeneratorSectionEntryIds = [
   "closing_claim_epsilon_G_is_involution",
 ];
 const evenSectorGeneratorExpectedInternalDependencies = new Map<string, string[]>([
-  ["evensectorT_definition_H1_plus", []],
   ["closing_definition_D0_open_chain_operator", []],
   ["closing_definition_G_boundary_operator", []],
   ["closing_004_claim_H1_plus_in_sigma_z_form", [
     "closing_definition_D0_open_chain_operator",
     "closing_definition_G_boundary_operator",
-    "evensectorT_definition_H1_plus",
   ]],
   ["closing_claim_D0_G_diagonal_action", [
     "closing_definition_D0_open_chain_operator",
@@ -1421,18 +1209,14 @@ const evenSectorGeneratorExpectedInternalDependencies = new Map<string, string[]
   ]],
 ]);
 const evenSectorGeneratorExpectedContentSha256 = new Map<string, string>([
-  ["evensectorT_definition_H1_plus", "f2ef985cf76cbeb656d1ea41168edfc0e0942f9200947c037fc1c3f1d8e09982"],
   ["closing_definition_D0_open_chain_operator", "d9d89c310fef20f3882f1837f45da74591d4364e87006083a140599831f3d100"],
   ["closing_definition_G_boundary_operator", "7008665d357f43d6fd269820ede1249a98dd606ef09ee057436422d1cffa2fb4"],
   ["closing_004_claim_H1_plus_in_sigma_z_form", "0be9eb19a8ed356bfd9fdba977ce8f023cd5f8cda68acd53728ae22ced180ff3"],
   ["closing_claim_D0_G_diagonal_action", "099fde43658734fc9f1ee484034f21462e9559d91cf3ccbcc8fc26a5e68b1a32"],
   ["closing_claim_epsilon_D0_G_pairwise_commute", "e6a05121b508b6d0bcd5fb59f0b8d15aa83b4f49b302a2bff788345d513bce2a"],
-  ["closing_claim_epsilon_G_is_involution", "ce7d2104b55f5f331d64fc5ebd668f77b25a4193e78dfac2bacfd365e854ef5b"],
+  ["closing_claim_epsilon_G_is_involution", "69fa18214b5f8923c0a07c6061c08bae0b04b7b99c0b8a337762d3c67b403399"],
 ]);
 const evenSectorGeneratorExpectedDirectDependencies = new Map<string, string[]>([
-  ["evensectorT_definition_H1_plus", [
-    "transfer_matrix_011a_definition_H1_pm",
-  ]],
   ["closing_definition_D0_open_chain_operator", [
     "calculation_formulae_definition_set_and_algebra_notation",
     "transfer_matrix_001_definition_symbols",
@@ -1448,7 +1232,6 @@ const evenSectorGeneratorExpectedDirectDependencies = new Map<string, string[]>(
     "calculation_formulae_definition_set_and_algebra_notation",
     "closing_definition_D0_open_chain_operator",
     "closing_definition_G_boundary_operator",
-    "evensectorT_definition_H1_plus",
     "linear_space_general_000b_claim_kronecker_product_rule",
     "transfer_matrix_001_definition_symbols",
     "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
@@ -1468,17 +1251,16 @@ const evenSectorGeneratorExpectedDirectDependencies = new Map<string, string[]>(
   ]],
   ["closing_claim_epsilon_G_is_involution", [
     "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-    "bridge_009_claim_epsilon_projector_properties",
     "closing_claim_epsilon_D0_G_pairwise_commute",
     "closing_definition_G_boundary_operator",
     "linear_space_general_000b_claim_kronecker_product_rule",
+    "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
   ]],
 ]);
 const evenSectorGeneratorExpectedExternalInputEntryIds = [
   "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
   "bridge_001_definition_config_basis",
   "bridge_002_claim_sigma_z_diagonal_action",
-  "bridge_009_claim_epsilon_projector_properties",
   "bridge_010_claim_epsilon_commutes",
   "calc_formulae_003_matrix_decomposition",
   "calc_formulae_006_definition_of_cc",
@@ -1486,75 +1268,28 @@ const evenSectorGeneratorExpectedExternalInputEntryIds = [
   "linear_space_general_000b_claim_kronecker_product_rule",
   "transfer_matrix_001_definition_symbols",
   "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
+  "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
   "transfer_matrix_011a_definition_H1_pm",
 ].sort();
 const evenSectorGeneratorExpectedExternalInputContentSha256 = new Map<string, string>([
   ["Z_Y_anticommutation_000a_claim_pauli_matrix_products", "2040831405f933942bdff84147045e5feddd899546259e7449c6903c8411de65"],
   ["bridge_001_definition_config_basis", "8f309608712bfdf223783f96f184199dad50b2918631e4d57e82e2fcfbaa984e"],
   ["bridge_002_claim_sigma_z_diagonal_action", "cc21f1936195952db55696d2427f13b84ab0896254e2425aad24e81922bc80f1"],
-  ["bridge_009_claim_epsilon_projector_properties", "d109dc4db25a9487b161b9c265101260700ec7eba6697fcb0fde07bc728d9100"],
-  ["bridge_010_claim_epsilon_commutes", "4faf33296e3ac95b3b3707d58f6e32d8fc16377b82a70912d70f6247c2baebea"],
+  ["bridge_010_claim_epsilon_commutes", "047f0ed0d9fd0b05ced90b31500cd6ce66db14bc1bafb266d2e819e49e789289"],
   ["calc_formulae_003_matrix_decomposition", "b1ce816719f5fbd4b3a16dfc9d7b7fecba7bb375757b6e0658e70060bff2e8ee"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
-  ["partition_function_2d_ising_003_definition_transfer_matrix", "c5984eb6c246aabd10d3aa408cff79058ccf713c173ec22226713a0502ee8783"],
   ["transfer_matrix_001_definition_symbols", "81fa3efe64d62327679e71f943888276a1cc9082685fe39111bfd95281fe0c48"],
   ["transfer_matrix_003_claim_V1_in_Z_Y_epsilon", "4a8a7d02f1b0fff942c284259bdd83ef54e7a6960a46667d2c98abcfc6739388"],
-  ["transfer_matrix_011a_definition_H1_pm", "a5aa568a9e1e4cc52a58629122d49e280cafc74faab4290ff138309f3e6d4376"],
-]);
-const v1PlusSquareRootDefinitionExpectedDirectDependencies = [
-  "calc_formulae_006_definition_of_cc",
-  "evensectorT_definition_H1_plus",
-  "transfer_matrix_011a_definition_H1_pm",
-].sort();
-const v1PlusSquareRootDefinitionExpectedContentSha256 = "6e3ffb87a5e8446974cfebe612147b675616bbcdf31cfe3ec51a8b6b9319dc96";
-const v1PlusHalfExponentAndSquareRootSectionEntryIds = [
-  "evensectorT_definition_V1_plus_square_root",
-  "evensectorT_claim_V1_plus_square_root",
-];
-const v1PlusHalfExponentAndSquareRootExpectedInternalDependencies = new Map<string, string[]>([
-  ["evensectorT_definition_V1_plus_square_root", []],
-  ["evensectorT_claim_V1_plus_square_root", [
-    "evensectorT_definition_V1_plus_square_root",
-  ]],
-]);
-const v1PlusHalfExponentAndSquareRootExpectedContentSha256 = new Map<string, string>([
-  ["evensectorT_definition_V1_plus_square_root", "6e3ffb87a5e8446974cfebe612147b675616bbcdf31cfe3ec51a8b6b9319dc96"],
-  ["evensectorT_claim_V1_plus_square_root", "351a0b91806367f7c9509c7a852a8315242a25ae34e763e00848b3bdff78a620"],
-]);
-const v1PlusHalfExponentAndSquareRootExpectedDirectDependencies = new Map<string, string[]>([
-  ["evensectorT_definition_V1_plus_square_root", [
-    "calc_formulae_006_definition_of_cc",
-    "evensectorT_definition_H1_plus",
-    "transfer_matrix_011a_definition_H1_pm",
-  ]],
-  ["evensectorT_claim_V1_plus_square_root", [
-    "evensectorT_definition_V1_plus_square_root",
-    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-    "transfer_matrix_007_definition_V1_pm",
-    "transfer_matrix_011a_definition_H1_pm",
-  ]],
-]);
-const v1PlusHalfExponentAndSquareRootExpectedExternalInputEntryIds = [
-  "calc_formulae_006_definition_of_cc",
-  "evensectorT_definition_H1_plus",
-  "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-  "transfer_matrix_007_definition_V1_pm",
-  "transfer_matrix_011a_definition_H1_pm",
-].sort();
-const v1PlusHalfExponentAndSquareRootExpectedExternalInputContentSha256 = new Map<string, string>([
-  ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
-  ["evensectorT_definition_H1_plus", "f2ef985cf76cbeb656d1ea41168edfc0e0942f9200947c037fc1c3f1d8e09982"],
-  ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "5310027658533830ac1844d325362a6a451df8aad4bd746c7685d92802af5f24"],
-  ["transfer_matrix_007_definition_V1_pm", "3c0aff7c72656ca3a2bfda73ec7a4e3079e00e988a550f174f25a39b9df81a26"],
-  ["transfer_matrix_011a_definition_H1_pm", "a5aa568a9e1e4cc52a58629122d49e280cafc74faab4290ff138309f3e6d4376"],
+  ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", "4c53c224f36e67c9082327b1771c7e9ce4b68ee2436103b4ef4ad4de24f3492f"],
+  ["transfer_matrix_011a_definition_H1_pm", "ba9ebaa18fd6efaa99ce17d31b27f4f613fdf225fd68589e02bcf4bd92d4b746"],
 ]);
 const vPlusDefinitionExpectedDirectDependencies = [
+  "bridge_definition_V1_pm_square_root",
   "calc_formulae_006_definition_of_cc",
-  "evensectorT_definition_V1_plus_square_root",
-  "transfer_matrix_011d_claim_V2_exponential_representation",
   "transfer_matrix_011b_definition_H2",
+  "transfer_matrix_011d_claim_V2_exponential_representation",
 ].sort();
 const vPlusDefinitionExpectedContentSha256 = "3511e00dc1f0ca8e819e3dafb36455012100dada85d9797fe4a653846a2ad584";
 const vPlusDefinitionAndSignedTraceSectionEntryIds = [
@@ -1567,17 +1302,16 @@ const vPlusDefinitionAndSignedTraceExpectedInternalDependencies = new Map<string
 ]);
 const vPlusDefinitionAndSignedTraceExpectedDirectDependencies = new Map<string, string[]>([
   ["evensectorT_definition_V_plus", [
+    "bridge_definition_V1_pm_square_root",
     "calc_formulae_006_definition_of_cc",
-    "evensectorT_definition_V1_plus_square_root",
-    "transfer_matrix_011d_claim_V2_exponential_representation",
     "transfer_matrix_011b_definition_H2",
+    "transfer_matrix_011d_claim_V2_exponential_representation",
   ]],
   ["closing_006_theorem_trace_of_epsilon_V_plus", [
     "bridge_001_definition_config_basis",
     "bridge_003_claim_exp_of_diagonal",
-    "partition_function_2d_ising_003_definition_transfer_matrix",
-    "transfer_matrix_claim_config_numbering_equals_kronecker_numbering",
     "bridge_010_claim_epsilon_commutes",
+    "bridge_definition_V1_pm_square_root",
     "calc_formulae_000b_claim_cosh_sinh_basic_properties",
     "calculation_formulae_definition_set_and_algebra_notation",
     "closing_004_claim_H1_plus_in_sigma_z_form",
@@ -1592,25 +1326,26 @@ const vPlusDefinitionAndSignedTraceExpectedDirectDependencies = new Map<string, 
     "closing_definition_G_boundary_operator",
     "eigenvalues_of_V_001_definition_trace",
     "eigenvalues_of_V_002_claim_trace_properties",
-    "evensectorT_definition_V1_plus_square_root",
     "evensectorT_definition_V_plus",
     "exp_linear_map_000a_claim_real_exp_series_converges",
     "exp_linear_map_002_definition_exp_of_endomorphism",
     "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
     "linear_space_general_000b_claim_kronecker_product_rule",
+    "partition_function_2d_ising_003_definition_transfer_matrix",
     "transfer_matrix_005_definition_end_isomorphism",
-    "transfer_matrix_007_definition_V1_pm",
-    "transfer_matrix_011a_definition_H1_pm",
+    "transfer_matrix_011c_claim_V1_pm_exponential_representation",
+    "transfer_matrix_claim_config_numbering_equals_kronecker_numbering",
   ]],
 ]);
 const vPlusDefinitionAndSignedTraceExpectedContentSha256 = new Map<string, string>([
   ["evensectorT_definition_V_plus", "3511e00dc1f0ca8e819e3dafb36455012100dada85d9797fe4a653846a2ad584"],
-  ["closing_006_theorem_trace_of_epsilon_V_plus", "0168c86a4312245914f7c550ce66d3774671049e95cfebc96eb715a55ebb8be8"],
+  ["closing_006_theorem_trace_of_epsilon_V_plus", "b3a756e41179b16344dce978fc2beecb16edf94cc6ec23ebc2f104c1db9f16c2"],
 ]);
 const vPlusDefinitionAndSignedTraceExpectedExternalInputEntryIds = [
   "bridge_001_definition_config_basis",
   "bridge_003_claim_exp_of_diagonal",
   "bridge_010_claim_epsilon_commutes",
+  "bridge_definition_V1_pm_square_root",
   "calc_formulae_000b_claim_cosh_sinh_basic_properties",
   "calc_formulae_006_definition_of_cc",
   "calculation_formulae_definition_set_and_algebra_notation",
@@ -1626,23 +1361,22 @@ const vPlusDefinitionAndSignedTraceExpectedExternalInputEntryIds = [
   "closing_definition_G_boundary_operator",
   "eigenvalues_of_V_001_definition_trace",
   "eigenvalues_of_V_002_claim_trace_properties",
-  "evensectorT_definition_V1_plus_square_root",
   "exp_linear_map_000a_claim_real_exp_series_converges",
   "exp_linear_map_002_definition_exp_of_endomorphism",
   "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
   "linear_space_general_000b_claim_kronecker_product_rule",
   "partition_function_2d_ising_003_definition_transfer_matrix",
   "transfer_matrix_005_definition_end_isomorphism",
-  "transfer_matrix_007_definition_V1_pm",
-  "transfer_matrix_011a_definition_H1_pm",
   "transfer_matrix_011b_definition_H2",
+  "transfer_matrix_011c_claim_V1_pm_exponential_representation",
   "transfer_matrix_011d_claim_V2_exponential_representation",
   "transfer_matrix_claim_config_numbering_equals_kronecker_numbering",
 ].sort();
 const vPlusDefinitionAndSignedTraceExpectedExternalInputContentSha256 = new Map<string, string>([
   ["bridge_001_definition_config_basis", "8f309608712bfdf223783f96f184199dad50b2918631e4d57e82e2fcfbaa984e"],
   ["bridge_003_claim_exp_of_diagonal", "ce3116ac9004e52c0abe1890ee4718b45be39478000c78d8dea702d7820da9a2"],
-  ["bridge_010_claim_epsilon_commutes", "4faf33296e3ac95b3b3707d58f6e32d8fc16377b82a70912d70f6247c2baebea"],
+  ["bridge_010_claim_epsilon_commutes", "047f0ed0d9fd0b05ced90b31500cd6ce66db14bc1bafb266d2e819e49e789289"],
+  ["bridge_definition_V1_pm_square_root", "5c613ecc4bcdbbeddf49b7ac8e7d20b568c741f72b4e139500c6aaf87588649e"],
   ["calc_formulae_000b_claim_cosh_sinh_basic_properties", "94ed9298671e1f143c8a8767d1bd56d556b0fb7a00a4f6cc1bd15eefc7ab7353"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
@@ -1653,36 +1387,33 @@ const vPlusDefinitionAndSignedTraceExpectedExternalInputContentSha256 = new Map<
   ["closing_005_definition_open_chain_spin_energy", "c83ce4a82f9927f9798b1e8ebab71c8bf405fb30cfbb9fa188925383e6adf513"],
   ["closing_claim_D0_G_diagonal_action", "099fde43658734fc9f1ee484034f21462e9559d91cf3ccbcc8fc26a5e68b1a32"],
   ["closing_claim_epsilon_D0_G_pairwise_commute", "e6a05121b508b6d0bcd5fb59f0b8d15aa83b4f49b302a2bff788345d513bce2a"],
-  ["closing_claim_epsilon_G_is_involution", "ce7d2104b55f5f331d64fc5ebd668f77b25a4193e78dfac2bacfd365e854ef5b"],
+  ["closing_claim_epsilon_G_is_involution", "69fa18214b5f8923c0a07c6061c08bae0b04b7b99c0b8a337762d3c67b403399"],
   ["closing_definition_D0_open_chain_operator", "d9d89c310fef20f3882f1837f45da74591d4364e87006083a140599831f3d100"],
   ["closing_definition_G_boundary_operator", "7008665d357f43d6fd269820ede1249a98dd606ef09ee057436422d1cffa2fb4"],
   ["eigenvalues_of_V_001_definition_trace", "35ae403d96746496fb0fdaa59d0122e38c3fc5129338230666507cb62c07a73d"],
   ["eigenvalues_of_V_002_claim_trace_properties", "78bd54e0678d6ade8a2e4af5af89866b4bcb64adffcf7ce89c4ca7924dd6f7c1"],
-  ["evensectorT_definition_V1_plus_square_root", "6e3ffb87a5e8446974cfebe612147b675616bbcdf31cfe3ec51a8b6b9319dc96"],
   ["exp_linear_map_000a_claim_real_exp_series_converges", "1065e4f465b1b0b49eae7d16f9d734421f472beec053c3effaff63127eecf077"],
   ["exp_linear_map_002_definition_exp_of_endomorphism", "1b90c006155b2b723ad7169ab806c4fff82870687ce2865a7bc677a875134fa2"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "5310027658533830ac1844d325362a6a451df8aad4bd746c7685d92802af5f24"],
   ["linear_space_general_000b_claim_kronecker_product_rule", "33e23f14fdb3a2b277ed3327fa3edd342512113eb0eb3d327f88992d26a48bf9"],
   ["partition_function_2d_ising_003_definition_transfer_matrix", "c5984eb6c246aabd10d3aa408cff79058ccf713c173ec22226713a0502ee8783"],
   ["transfer_matrix_005_definition_end_isomorphism", "651f3dbd8a1ace2d2c641c9424fb4148011370c9100f9887ab06b9696e18d52a"],
-  ["transfer_matrix_007_definition_V1_pm", "3c0aff7c72656ca3a2bfda73ec7a4e3079e00e988a550f174f25a39b9df81a26"],
-  ["transfer_matrix_011a_definition_H1_pm", "a5aa568a9e1e4cc52a58629122d49e280cafc74faab4290ff138309f3e6d4376"],
   ["transfer_matrix_011b_definition_H2", "52aaec8e3cb1a6b39ec827a5d52e972facfb0788052706c0febb33c3b5ae23db"],
+  ["transfer_matrix_011c_claim_V1_pm_exponential_representation", "b14ce981f7e51fab24432e059e0d9e3c94c5eabd11fde7322d27201184ec11fa"],
   ["transfer_matrix_011d_claim_V2_exponential_representation", "252be04106314d51ffd10c9e9d7046f4a23b4904dfe7f18fdb2cc44d889baa29"],
   ["transfer_matrix_claim_config_numbering_equals_kronecker_numbering", "f896ebe31caa9ff93f6293d053e8d89ec8ea8666ed9112006f5cc738d4a8bdb1"],
 ]);
 const vPlusPositiveDefiniteExpectedDirectDependencies = [
+  "bridge_definition_V1_pm_square_root",
   "calculation_formulae_definition_set_and_algebra_notation",
   "eigenvalues_of_V_011_definition_hermitian_positive_definite",
   "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
   "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-  "evensectorT_definition_V1_plus_square_root",
   "evensectorT_definition_V_plus",
   "linear_space_general_002_claim_scalar_identity_commutes",
   "transfer_matrix_001_definition_symbols",
-  "transfer_matrix_011d_claim_V2_exponential_representation",
-  "transfer_matrix_011a_definition_H1_pm",
   "transfer_matrix_011b_definition_H2",
+  "transfer_matrix_011d_claim_V2_exponential_representation",
 ].sort();
 const vPlusPositiveDefiniteSectionEntryIds = [
   "evenEigen_008_claim_V_plus_is_positive_definite",
@@ -1707,7 +1438,7 @@ const vPlusPositiveDefiniteExpectedInternalDependencies = new Map<string, string
   ]],
 ]);
 const vPlusPositiveDefiniteSectionExpectedContentSha256 = new Map<string, string>([
-  ["evenEigen_008_claim_V_plus_is_positive_definite", "90c4aa4cfdfe437c1c09004c0b4b7bd292aaf82986efb0498a62a2dd1f82bc9c"],
+  ["evenEigen_008_claim_V_plus_is_positive_definite", "1dbcc785e56a238f6ef5f66f46f7585d8132cad0c5630ca6e4db9796c5f8d2c4"],
   ["evenEigen_claim_V_plus_is_invertible", "66a716f3fd56b5177c38fc7197739d75ab9010a258bfef3c9ca95551e732e95f"],
   ["evenEigen_claim_V_plus_inverse_is_positive_definite", "1e53bc0ba009f3989607cffd7fb2e6dc3e1bf330346eb41b6783b5046bd21ad9"],
   ["evenEigen_claim_trace_V_plus_is_positive", "e02ed47f8435891a859218fd452aebc1d91aae9d3c4bb6899a8b77768287be9e"],
@@ -1716,36 +1447,34 @@ const vPlusPositiveDefiniteSectionExpectedContentSha256 = new Map<string, string
 const vPlusPositiveDefiniteExpectedContentSha256 =
   vPlusPositiveDefiniteSectionExpectedContentSha256.get("evenEigen_008_claim_V_plus_is_positive_definite")!;
 const vPlusPositiveDefiniteExpectedExternalInputEntryIds = [
+  "bridge_definition_V1_pm_square_root",
   "calc_formulae_006_definition_of_cc",
   "calculation_formulae_definition_set_and_algebra_notation",
   "eigenvalues_of_V_011_definition_hermitian_positive_definite",
   "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
   "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-  "evensectorT_definition_V1_plus_square_root",
   "evensectorT_definition_V_plus",
   "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
   "exp_linear_map_004_theorem_exp_zero_is_identity",
   "linear_space_general_002_claim_scalar_identity_commutes",
   "transfer_matrix_001_definition_symbols",
-  "transfer_matrix_011d_claim_V2_exponential_representation",
-  "transfer_matrix_011a_definition_H1_pm",
   "transfer_matrix_011b_definition_H2",
+  "transfer_matrix_011d_claim_V2_exponential_representation",
 ].sort();
 const vPlusPositiveDefiniteExpectedExternalInputContentSha256 = new Map<string, string>([
+  ["bridge_definition_V1_pm_square_root", "5c613ecc4bcdbbeddf49b7ac8e7d20b568c741f72b4e139500c6aaf87588649e"],
   ["calc_formulae_006_definition_of_cc", "87fdc15b6c4d6e66553807fd125e27f26ba92b303a21f813ad9b0a10eefaa40c"],
   ["calculation_formulae_definition_set_and_algebra_notation", "ff5e922f6e64e0572521aeb4c979b81a1b666137620ce9a66cdad955b81daa9b"],
   ["eigenvalues_of_V_011_definition_hermitian_positive_definite", "4b1f272661509c47420344ab38051e53285d0f666507a9a3a3333af52a4f6bf1"],
   ["eigenvalues_of_V_013_claim_exp_hermitian_positive_definite", "73fdb5d24c8cec6a1c637fedee45e0040ef03c5d8e7c13449cc4d8c80bc5f324"],
-  ["eigenvalues_of_V_014_claim_iH_is_real_symmetric", "c9b462021b7f7aadcacde6f5ed71357b8f406f58197d5ba4de5653d7adb73d0d"],
-  ["evensectorT_definition_V1_plus_square_root", "6e3ffb87a5e8446974cfebe612147b675616bbcdf31cfe3ec51a8b6b9319dc96"],
+  ["eigenvalues_of_V_014_claim_iH_is_real_symmetric", "5478c9a18fd8ddda73a1384b59260c5cf0094566ee2d4c3e447cfabb14d09202"],
   ["evensectorT_definition_V_plus", "3511e00dc1f0ca8e819e3dafb36455012100dada85d9797fe4a653846a2ad584"],
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", "5310027658533830ac1844d325362a6a451df8aad4bd746c7685d92802af5f24"],
   ["exp_linear_map_004_theorem_exp_zero_is_identity", "6eb6a014fc1fb0b3b4c5086cf7090a29d220b2203fda132c53ed30019ceb2731"],
   ["linear_space_general_002_claim_scalar_identity_commutes", "2c83d104299b4e654c7e818045ba213e543e08102fa8dab8be6c54e26b7d830f"],
   ["transfer_matrix_001_definition_symbols", "81fa3efe64d62327679e71f943888276a1cc9082685fe39111bfd95281fe0c48"],
-  ["transfer_matrix_011d_claim_V2_exponential_representation", "252be04106314d51ffd10c9e9d7046f4a23b4904dfe7f18fdb2cc44d889baa29"],
-  ["transfer_matrix_011a_definition_H1_pm", "a5aa568a9e1e4cc52a58629122d49e280cafc74faab4290ff138309f3e6d4376"],
   ["transfer_matrix_011b_definition_H2", "52aaec8e3cb1a6b39ec827a5d52e972facfb0788052706c0febb33c3b5ae23db"],
+  ["transfer_matrix_011d_claim_V2_exponential_representation", "252be04106314d51ffd10c9e9d7046f4a23b4904dfe7f18fdb2cc44d889baa29"],
 ]);
 const vPlusPositiveDefiniteBoundaryCandidates = [] as const;
 const vPlusPositiveDefiniteExpectedBoundaryCandidates = [] as const;
@@ -1871,10 +1600,9 @@ if (!vPlusInversePositiveDefiniteSageMathExecutableSource.includes("for eigenval
 }
 const v1PlusHalfInvertibleExpectedDirectDependencies = [
   "TV1_hatZ_hatY_009_definition_invertible_elements",
+  "bridge_definition_V1_pm_square_root",
   "calc_formulae_006_definition_of_cc",
-  "evensectorT_definition_V1_plus_square_root",
   "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
-  "transfer_matrix_011a_definition_H1_pm",
 ].sort();
 const vTwoInvertibleExpectedDirectDependencies = [
   "TV1_hatZ_hatY_009_definition_invertible_elements",
@@ -1920,9 +1648,9 @@ const vPlusFactorsInvertibilitySageMathExecutableSource = readFileSync(
 const vPlusFactorsInvertibilityExpectedLeanFragments = [
   `noncomputable def VPlusUnits (M : ℕ) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
     (TensorPow M)ˣ :=
-  V1pmHalfUnits M K1 (-1) * V2H2FormUnits M hs2 K2star * V1pmHalfUnits M K1 (-1)`,
+  V1plusHalfUnits M K1 * V2H2FormUnits M hs2 K2star * V1plusHalfUnits M K1`,
   `/-- **原文 \`V1_plus_half_invertible\`**: \`(V_1^{(+)})^{1/2}\` は可逆。 -/
-theorem isUnit_V1plusHalf (K1 : ℂ) : IsUnit (V1pmHalf M K1 (-1)) :=`,
+theorem isUnit_V1plusHalf (K1 : ℂ) : IsUnit (V1plusHalf M K1) :=`,
   `theorem isUnit_VPlus {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star : ℂ) :
     IsUnit (VPlus M s2 K1 K2star) :=
   ⟨VPlusUnits M hs2 K1 K2star, rfl⟩`,
@@ -1988,11 +1716,11 @@ const vPlusCompositeConjugationEqualityExpectedContentSha256 =
 const vPlusCompositeConjugationLeanFile = "lean/Ising2D/Part014/Definition001_VPlus.lean";
 const conjugationCompositionLeanFile = "lean/Ising2D/Part008/Definition016_TV.lean";
 const vPlusCompositeConjugationLeanExpectedSha256 =
-  "76f20c600600832f6d992c9e65aa5d085b5b1caf48c8cd0337532bd173978180";
+  "2db338378775066f3e59eeb8b17003f3a601b008119d3fed493d35104fa7bc9e";
 const conjugationCompositionLeanExpectedSha256 =
   "17c49d758bda07e900dcda4c4cbe359003522d5393d6a00bd3744a2cd84e02e5";
 const vPlusCompositeConjugationSageMathExpectedSha256 =
-  "79535651bb6d0883fe55e595e4bb862ca0d1edd6ead959e2ba6cd0253258fbcb";
+  "b010c67fe336c7b4aa206c870a64d6498d66bda746f5f07913be4bf08b7579a8";
 const vPlusCompositeConjugationSageMathFile =
   "sagemath/check/051_stepwise_identities_of_chapter_Cprime/check_03_014_steps.sage";
 const vPlusCompositeConjugationLeanSource = readFileSync(
@@ -2024,8 +1752,8 @@ for (const [path, source, expectedSha256] of [
   }
 }
 for (const declarationFragment of [
-  "TV (V1pmHalfUnits M K1 (-1)) (V2H2FormUnits M hs2 K2star)",
-  "TVPlus M hs2 K1 K2star x =\n      TConj (V1pmHalfUnits M K1 (-1))\n        (TConj (V2H2FormUnits M hs2 K2star) (TConj (V1pmHalfUnits M K1 (-1)) x)) := rfl",
+  "TV (V1plusHalfUnits M K1) (V2H2FormUnits M hs2 K2star)",
+  "TVPlus M hs2 K1 K2star x =\n      TConj (V1plusHalfUnits M K1)\n        (TConj (V2H2FormUnits M hs2 K2star) (TConj (V1plusHalfUnits M K1) x)) := rfl",
   "TVPlus M hs2 K1 K2star = TConj (VPlusUnits M hs2 K1 K2star) :=\n  TV_eq_TConj _ _",
   "rw [TVPlus_eq_TConj hs2, TConj_apply, VPlusUnits_val]",
 ]) {
@@ -2139,7 +1867,6 @@ const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["maxeig_007_claim_operator_bound", new Set(["def_matrix_norm", "psd_cauchy_schwarz", "def_rayleigh_sup"])],
   ["maxeig_006_definition_rayleigh_sup", new Set(["def_matrix_norm"])],
   ["maxeig_003_claim_W_is_positive_definite", new Set(["def_symmetrized_transfer_matrix"])],
-  ["bridge_011_claim_sector_replacement", new Set(["V1_restriction_to_eigenspaces", "def_end_iso", "epsilon_projector_properties"])],
   ["closing_005_claim_open_chain_spin_sums_positive", new Set(["cosh_sinh_basic_properties"])],
   ["Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site", new Set(["kronecker_product_rule", "kronecker_multilinear"])],
   ["exp_conjugation_proof_010_theorem_matrix_exp_conjugation", new Set(["theorem_exp_product", "theorem_exp_zero"])],
@@ -2157,6 +1884,8 @@ const forwardNavigationReviewById = new Map<string, Map<string, string>>([
   ["evensector_003_definition_half_integer_modes", new Map([["def_check_index_set", "後続表記への案内"], ["periodicity_of_check_fermi", "後続利用への案内"]])],
   ["evensector_003a_definition_check_index_set", new Map([["anticommutator_of_check_Z_Y", "後続利用への案内"], ["periodicity_of_check_fermi", "後続利用への案内"]])],
   ["evenEigen_004_claim_trace_of_check_number_operator_product", new Map([["check_joint_eigenspace_decomposition", "後続対応への案内"]])],
+  // 「二乗が V_1^{(+)} に等しいことは〜で示す」という、直後の主張への案内の一文。定義の中身は exp(iK_1H_1^{(+)}/2) で閉じている。
+  ["bridge_definition_V1_pm_square_root", new Map([["V1_plus_square_root_property", "後続帰結への案内"]])],
   ["evenEigen_006_claim_eigenvalues_of_check_Vprime", new Map([["max_eigenvalue_of_V_plus_simple", "後続帰結への案内"]])],
   ["closing_002_claim_epsilon_eigenvalue_on_check_Q", new Map([["max_eigenvector_in_even_sector", "後続利用への案内"], ["trace_of_epsilon_V_plus", "後続の符号決定への案内"]])],
 ]);
@@ -2274,10 +2003,8 @@ const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive", ["transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations"]],
   ["transfer_matrix_001_definition_symbols", ["transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive"]],
   ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", ["transfer_matrix_003a_claim_V2_in_Z_Y"]],
-  ["transfer_matrix_004_definition_eigenspace_odd_of_epsilon", ["transfer_matrix_004_definition_eigenspace_even_of_epsilon"]],
-  ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace", ["transfer_matrix_004_definition_eigenspace_odd_of_epsilon"]],
-  ["transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace", ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace"]],
-  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", ["transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace"]],
+  ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace", ["transfer_matrix_004_definition_eigenspace_even_of_epsilon"]],
+  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace"]],
   ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", ["transfer_matrix_004_definition_eigenspaces_of_epsilon"]],
   ["transfer_matrix_004c_claim_epsilon_action_eigenvalues", ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"]],
   ["bridge_009_claim_epsilon_projector_properties", ["transfer_matrix_004c_claim_epsilon_action_eigenvalues"]],
@@ -2292,22 +2019,19 @@ const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["transfer_matrix_011c_claim_V1_pm_exponential_representation", ["transfer_matrix_011b_definition_H2"]],
   ["transfer_matrix_011d_claim_V2_exponential_representation", ["transfer_matrix_011c_claim_V1_pm_exponential_representation"]],
   ["eigenvalues_of_V_014_claim_iH_is_real_symmetric", ["transfer_matrix_011d_claim_V2_exponential_representation"]],
-  ["evensectorT_definition_H1_plus", ["transfer_matrix_011d_claim_V2_exponential_representation"]],
   ["maxeig_claim_symmetrized_transfer_matrix_on_sectors", ["maxeig_010b_claim_epsilon_commutes_with_W"]],
-  ["maxeig_010_claim_sector_decomposition_of_c", ["maxeig_claim_symmetrized_transfer_matrix_on_sectors"]],
   // 分割で切り出した二項は、依存関係だけなら章のずっと手前へ移せるが、本文の並びは
   // 分割前と同じ位置に保つ（読む順序を変えないため）。
   ["maxeig_010a_definition_sector_rayleigh_sup", ["maxeig_009_claim_partition_function_sandwich"]],
   ["maxeig_010b_claim_epsilon_commutes_with_W", ["maxeig_010a_definition_sector_rayleigh_sup"]],
-  ["closing_definition_D0_open_chain_operator", ["evensectorT_definition_H1_plus"]],
+  ["closing_definition_D0_open_chain_operator", ["eigenvalues_of_V_016_claim_sign_flip_conjugation"]],
   ["closing_definition_G_boundary_operator", ["closing_definition_D0_open_chain_operator"]],
   ["closing_claim_D0_G_diagonal_action", ["closing_004_claim_H1_plus_in_sigma_z_form"]],
   ["closing_claim_epsilon_D0_G_pairwise_commute", ["closing_claim_D0_G_diagonal_action"]],
   // 整数運動量の経路を本文から外したことで意味的前提を失った項は、外す前の章内依存順で直前にあった
   // 残存項を提示上の直前項に置き、レビュー済みの読む順序を保つ。
   ["evensectorT_007_definition_B1_B2", ["freeenergy_002_claim_gamma_is_continuous"]],
-  ["bridge_012_claim_partition_function_sector_decomposition", ["evenfermi_002_claim_periodicity"]],
-  ["evensector_007_claim_H1_H2_via_check_Z_Y", ["sector_003_theorem_c_minus_le_c_plus"]],
+  ["evensector_007_claim_H1_H2_via_check_Z_Y", ["maxeig_010b_claim_epsilon_commutes_with_W"]],
   // 双曲線関数を数の指数関数から定義し直したことで、双曲線関数の節とそれに依存する項は行列の指数関数の
   // 後ろへ移った。移らない項は、移る前の章内依存順で直前にあった残存項を提示上の直前項に置き、
   // レビュー済みの読む順序を保つ。平方根の証明から切り出した主張は本文どおり平方根の直前に置く。
@@ -2318,7 +2042,12 @@ const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   // V_1, V_2 の成分定義一本化で転送行列記号の要約が両パウリ表示の後ろへ移り、それに依存しない
   // 境界符号の差・指数和・半整数運動量の項が前へ浮く。移る前の章内依存順で直前にあった残存項を
   // 提示上の直前項に置き、レビュー済みの読む順序を保つ。
-  ["transfer_matrix_008_definition_delta_M", ["bridge_011a_claim_sector_replacement_pow"]],
+  // (−) セクターの退避で 010 の可換性の主張が V_1^{(+)} とその平方根を通じて H_1^{(+)} に依存するようになったため、
+  // それより前で依存の循環を作らない直前の残存項（V_1^{(+)} の定義）の後に置く。
+  ["transfer_matrix_008_definition_delta_M", ["transfer_matrix_007_definition_V1_pm"]],
+  // 010 に一本化した V_1^{(+)} の平方根の定義は H_1^{(+)} に依存するようになった。二つの一般生成子と二つの
+  // 指数表示の節を分断しないよう、V_2 の指数表示の後に置く。
+  ["bridge_definition_V1_pm_square_root", ["transfer_matrix_011d_claim_V2_exponential_representation"]],
   ["maxeig_001_definition_transfer_matrix_square_root", ["critical_002a_definition_critical_sinh_product_A"]],
   ["evensectorT_claim_V1_plus_half_invertible", ["evenEigen_claim_V_plus_inverse_positive_and_traces"]],
   ["evensectorT_claim_V2_invertible", ["evensectorT_claim_V1_plus_half_invertible"]],
@@ -2536,7 +2265,7 @@ const halfIntegerModesSplitExpected = [
       "evensector_002_claim_antiperiodic_exp_sum",
       "transfer_matrix_000c_definition_jordan_wigner_Z_matrices",
     ].sort(),
-    chapterOrder: 65,
+    chapterOrder: 58,
     presentationPredecessors: [],
     futureBlockSplitRecommended: false,
   },
@@ -2550,7 +2279,7 @@ const halfIntegerModesSplitExpected = [
       "evensector_002_claim_antiperiodic_exp_sum",
       "transfer_matrix_000d_definition_jordan_wigner_Y_matrices",
     ].sort(),
-    chapterOrder: 66,
+    chapterOrder: 59,
     presentationPredecessors: ["evensector_003_definition_half_integer_checkZ"],
     futureBlockSplitRecommended: false,
   },
@@ -2563,7 +2292,7 @@ const halfIntegerModesSplitExpected = [
       "calculation_formulae_definition_set_and_algebra_notation",
       "evensector_002_claim_antiperiodic_exp_sum",
     ].sort(),
-    chapterOrder: 67,
+    chapterOrder: 60,
     presentationPredecessors: ["evensector_003_definition_half_integer_checkY"],
     futureBlockSplitRecommended: false,
   },
@@ -2577,7 +2306,7 @@ const halfIntegerModesSplitExpected = [
       "evensector_002_claim_antiperiodic_exp_sum",
       "evensector_003_definition_half_integer_checkZ",
     ].sort(),
-    chapterOrder: 68,
+    chapterOrder: 61,
     presentationPredecessors: ["evensector_003_claim_half_integer_phase_antiperiodicity"],
     futureBlockSplitRecommended: false,
   },
@@ -2591,7 +2320,7 @@ const halfIntegerModesSplitExpected = [
       "evensector_002_claim_antiperiodic_exp_sum",
       "evensector_003_definition_half_integer_checkY",
     ].sort(),
-    chapterOrder: 69,
+    chapterOrder: 62,
     presentationPredecessors: ["evensector_003_claim_half_integer_checkZ_periodicity"],
     futureBlockSplitRecommended: false,
   },
@@ -2603,7 +2332,7 @@ const halfIntegerModesSplitExpected = [
       "calculation_formulae_definition_set_and_algebra_notation",
       "evensector_002_claim_antiperiodic_exp_sum",
     ].sort(),
-    chapterOrder: 70,
+    chapterOrder: 63,
     presentationPredecessors: ["evensector_003_claim_half_integer_checkY_periodicity"],
     futureBlockSplitRecommended: false,
   },
@@ -2992,7 +2721,7 @@ const v2PauliPartitionFunctionSectionEntries = validatePendingReReviewSection(
   "V2 のパウリ行列表示と分配関数への接続", v2PauliPendingReReviewSnapshot,
 );
 const epsilonProjectorsEntry = entries.find((entry) => entry.id === "bridge_008_definition_epsilon_projectors")!;
-if (epsilonProjectorsEntry.dependencyPlacement!.chapterOrder !== 36
+if (epsilonProjectorsEntry.dependencyPlacement!.chapterOrder !== 37
   || JSON.stringify([...epsilonProjectorsEntry.dependsOnEntryIds].sort()) !== JSON.stringify([
     "calc_formulae_006_definition_of_cc",
     "transfer_matrix_001_definition_symbols",
@@ -3003,7 +2732,7 @@ if (epsilonProjectorsEntry.dependencyPlacement!.chapterOrder !== 36
   })}`);
 }
 if (epsilonProjectorsEntry.explanationGranularityReview.inspectedContentSha256
-  !== "353af10c8032cdf770e946fc51a25fc53bbaaccb8872e0732d259080110492a0") {
+  !== "6d0bb75579386ab8941b075c82ec8798683b7250b2756bacfbf3d0db7452c383") {
   throw new Error("V2 のパウリ行列表示と分配関数への接続の次項本文が変わりました");
 }
 const v2PauliPartitionFunctionSectionIdSet = new Set<string>(v2PauliPartitionFunctionSectionEntryIds);
@@ -3022,7 +2751,7 @@ const epsilonProjectorDefinitionSection = validateReviewedSection(
   epsilonProjectorDefinitionExpectedExternalInputContentSha256,
   ["bridge_008_definition_epsilon_projectors"],
 );
-if (epsilonProjectorDefinitionSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 36) {
+if (epsilonProjectorDefinitionSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 37) {
   throw new Error("全スピン反転行列から定める二つの行列が章内依存順31ではありません");
 }
 const kappaDefinitionSection = validateReviewedSection(
@@ -3136,15 +2865,8 @@ const v1RestrictionToEigenspacesSection = validateReviewedSection(
   v1RestrictionToEigenspacesExpectedExternalInputContentSha256,
   ["transfer_matrix_006_claim_V1_restriction_to_eigenspaces"],
 );
-const v1PlusMinusAndCommutationSection = validateReviewedSection(
-  "境界項の符号を固定した指数行列と全スピン反転対称性",
-  "2次元イジングモデル",
-  v1PlusMinusAndCommutationSectionEntryIds,
-  v1PlusMinusAndCommutationExpectedInternalDependencies,
-  v1PlusMinusAndCommutationExpectedContentSha256,
-  v1PlusMinusAndCommutationExpectedExternalInputEntryIds,
-  v1PlusMinusAndCommutationExpectedExternalInputContentSha256,
-  ["bridge_011a_claim_sector_replacement_pow"],
+const v1PlusMinusAndCommutationSectionEntries = validatePendingReReviewSection(
+  "境界項の符号を固定した指数行列と全スピン反転対称性", v1PlusMinusAndCommutationPendingReReviewSnapshot,
 );
 const generalGeneratorsSection = validateReviewedSection(
   "二つの一般生成子",
@@ -3203,16 +2925,6 @@ const evenSectorGeneratorSection = validateReviewedSection(
     "closing_claim_epsilon_G_is_involution",
   ],
 );
-const v1PlusHalfExponentAndSquareRootSection = validateReviewedSection(
-  "偶セクターの半指数行列と平方根性",
-  "2次元イジングモデル",
-  v1PlusHalfExponentAndSquareRootSectionEntryIds,
-  v1PlusHalfExponentAndSquareRootExpectedInternalDependencies,
-  v1PlusHalfExponentAndSquareRootExpectedContentSha256,
-  v1PlusHalfExponentAndSquareRootExpectedExternalInputEntryIds,
-  v1PlusHalfExponentAndSquareRootExpectedExternalInputContentSha256,
-  ["evensectorT_claim_V1_plus_square_root"],
-);
 const vPlusDefinitionAndSignedTraceSection = validateReviewedSection(
   "偶セクター転送行列と符号付きトレースの正値公式",
   "2次元イジングモデル",
@@ -3239,39 +2951,32 @@ const vPlusPositiveDefiniteSection = validateReviewedSection(
 const positiveSymmetrizedTransferMatrixEntriesEntry = positiveSymmetrizedTransferMatrixEntriesSection.sectionEntries[0]!;
 const zYLinearIndependenceEntry = zYLinearIndependenceSection.sectionEntries[0]!;
 const evenEigenvectorsEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[0]!;
-const oddEigenvectorsEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[1]!;
-const evenEigenspaceSubspaceEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[2]!;
-const oddEigenspaceSubspaceEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[3]!;
-const epsilonEigenspacesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[4]!;
-const epsilonSquareAndEigenvaluesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[5]!;
-const epsilonActionEigenvaluesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[6]!;
-const epsilonProjectorPropertiesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[7]!;
+const evenEigenspaceSubspaceEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[1]!;
+const epsilonEigenspacesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[2]!;
+const epsilonSquareAndEigenvaluesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[3]!;
+const epsilonActionEigenvaluesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[4]!;
+const epsilonProjectorPropertiesEntry = epsilonEigenspacesAndComplementaryProjectorsSection.sectionEntries[5]!;
 const v1RestrictionToEigenspacesEntry = v1RestrictionToEigenspacesSection.sectionEntries[0]!;
-const v1PlusMinusDefinitionEntry = v1PlusMinusAndCommutationSection.sectionEntries[0]!;
-const sectorReplacementEntry = v1PlusMinusAndCommutationSection.sectionEntries[1]!;
-const v1PlusMinusSquareRootDefinitionEntry = v1PlusMinusAndCommutationSection.sectionEntries[2]!;
-const v1PlusMinusSquareRootClaimEntry = v1PlusMinusAndCommutationSection.sectionEntries[3]!;
-const epsilonCommutationEntry = v1PlusMinusAndCommutationSection.sectionEntries[4]!;
-const epsilonProjectorCommutationEntry = v1PlusMinusAndCommutationSection.sectionEntries[5]!;
-const sectorReplacementPowerEntry = v1PlusMinusAndCommutationSection.sectionEntries[6]!;
+const v1PlusMinusDefinitionEntry = v1PlusMinusAndCommutationSectionEntries[0]!;
 const h1GeneralGeneratorEntry = generalGeneratorsSection.sectionEntries[0]!;
 const h2GeneralGeneratorEntry = generalGeneratorsSection.sectionEntries[1]!;
 const v1ExponentialRepresentationEntry = v1ExponentialRepresentationSection.sectionEntries[0]!;
 const v2ExponentialRepresentationEntry = v2ExponentialRepresentationSection.sectionEntries[0]!;
 const realSymmetricGeneratorsEntry = realSymmetricGeneratorsAndSignFlipSection.sectionEntries[0]!;
 const signFlipConjugationEntry = realSymmetricGeneratorsAndSignFlipSection.sectionEntries[1]!;
-const evenSectorGeneratorDefinitionEntry = evenSectorGeneratorSection.sectionEntries[0]!;
 const positiveDefiniteSymmetrizedTransferMatrixEntry = entries.find((entry) =>
   entry.id === "maxeig_003_claim_W_is_positive_definite")!;
-const evenSectorOpenChainDefinitionEntry = evenSectorGeneratorSection.sectionEntries[1]!;
-const evenSectorBoundaryDefinitionEntry = evenSectorGeneratorSection.sectionEntries[2]!;
-const evenSectorGeneratorSpinFormEntry = evenSectorGeneratorSection.sectionEntries[3]!;
-const evenSectorGeneratorDiagonalActionEntry = evenSectorGeneratorSection.sectionEntries[4]!;
-const evenSectorGeneratorPairwiseCommutationEntry = evenSectorGeneratorSection.sectionEntries[5]!;
-const evenSectorGeneratorInvolutionEntry = evenSectorGeneratorSection.sectionEntries[6]!;
+const evenSectorOpenChainDefinitionEntry = evenSectorGeneratorSection.sectionEntries[0]!;
+const evenSectorBoundaryDefinitionEntry = evenSectorGeneratorSection.sectionEntries[1]!;
+const evenSectorGeneratorSpinFormEntry = evenSectorGeneratorSection.sectionEntries[2]!;
+const evenSectorGeneratorDiagonalActionEntry = evenSectorGeneratorSection.sectionEntries[3]!;
+const evenSectorGeneratorPairwiseCommutationEntry = evenSectorGeneratorSection.sectionEntries[4]!;
+const evenSectorGeneratorInvolutionEntry = evenSectorGeneratorSection.sectionEntries[5]!;
+// V_1^{(+)} の平方根の定義と平方根性は、014 の重複ブロックを削除して 010 のブロックへ一本化された。
 const v1PlusSquareRootDefinitionEntry = entries.find((entry) =>
-  entry.id === "evensectorT_definition_V1_plus_square_root")!;
-const v1PlusSquareRootClaimEntry = v1PlusHalfExponentAndSquareRootSection.sectionEntries[1]!;
+  entry.id === "bridge_definition_V1_pm_square_root")!;
+const v1PlusSquareRootClaimEntry = entries.find((entry) =>
+  entry.id === "bridge_claim_V1_pm_square_root_squares_to_V1_pm")!;
 const vPlusDefinitionEntry = vPlusDefinitionAndSignedTraceSection.sectionEntries[0]!;
 const signedTraceOfVPlusEntry = vPlusDefinitionAndSignedTraceSection.sectionEntries[1]!;
 const vPlusPositiveDefiniteEntry = vPlusPositiveDefiniteSection.sectionEntries[0]!;
@@ -3299,24 +3004,22 @@ const positiveDefiniteWEntry = entries.find((entry) =>
   entry.id === "maxeig_003_claim_W_is_positive_definite")!;
 const checkNumberOperatorIdempotentEntry = entries.find((entry) =>
   entry.id === "evenEigen_002_claim_check_number_operator_idempotent")!;
-if (kappaDefinitionEntry.dependencyPlacement!.chapterOrder !== 37
-  || criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder !== 38
-  || symmetrizedTransferMatrixSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 39
-  || symmetrizedTransferMatrixSection.sectionEntries[1]!.dependencyPlacement!.chapterOrder !== 40
-  || symmetrizedTransferMatrixSection.sectionEntries[2]!.dependencyPlacement!.chapterOrder !== 41
-  || positiveSymmetrizedTransferMatrixEntriesEntry.dependencyPlacement!.chapterOrder !== 42
-  || zYLinearIndependenceEntry.dependencyPlacement!.chapterOrder !== 43
-  || v1V2JordanWignerSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 44
-  || v1V2JordanWignerSection.sectionEntries[1]!.dependencyPlacement!.chapterOrder !== 45
-  || evenEigenvectorsEntry.dependencyPlacement!.chapterOrder !== 46
-  || oddEigenvectorsEntry.dependencyPlacement!.chapterOrder !== 47
+if (kappaDefinitionEntry.dependencyPlacement!.chapterOrder !== 38
+  || criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder !== 39
+  || symmetrizedTransferMatrixSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 40
+  || symmetrizedTransferMatrixSection.sectionEntries[1]!.dependencyPlacement!.chapterOrder !== 41
+  || symmetrizedTransferMatrixSection.sectionEntries[2]!.dependencyPlacement!.chapterOrder !== 42
+  || positiveSymmetrizedTransferMatrixEntriesEntry.dependencyPlacement!.chapterOrder !== 43
+  || zYLinearIndependenceEntry.dependencyPlacement!.chapterOrder !== 44
+  || v1V2JordanWignerSection.sectionEntries[0]!.dependencyPlacement!.chapterOrder !== 45
+  || v1V2JordanWignerSection.sectionEntries[1]!.dependencyPlacement!.chapterOrder !== 46
+  || evenEigenvectorsEntry.dependencyPlacement!.chapterOrder !== 47
   || evenEigenspaceSubspaceEntry.dependencyPlacement!.chapterOrder !== 48
-  || oddEigenspaceSubspaceEntry.dependencyPlacement!.chapterOrder !== 49
-  || epsilonEigenspacesEntry.dependencyPlacement!.chapterOrder !== 50
-  || epsilonSquareAndEigenvaluesEntry.dependencyPlacement!.chapterOrder !== 51
-  || epsilonActionEigenvaluesEntry.dependencyPlacement!.chapterOrder !== 52
-  || epsilonProjectorPropertiesEntry.dependencyPlacement!.chapterOrder !== 53
-  || v1RestrictionToEigenspacesEntry.dependencyPlacement!.chapterOrder !== 54) {
+  || epsilonEigenspacesEntry.dependencyPlacement!.chapterOrder !== 49
+  || epsilonSquareAndEigenvaluesEntry.dependencyPlacement!.chapterOrder !== 50
+  || epsilonActionEigenvaluesEntry.dependencyPlacement!.chapterOrder !== 51
+  || epsilonProjectorPropertiesEntry.dependencyPlacement!.chapterOrder !== 52
+  || v1RestrictionToEigenspacesEntry.dependencyPlacement!.chapterOrder !== 53) {
   throw new Error(`臨界条件用実数から V1 の固有空間への制限までの章内順が変わりました: ${JSON.stringify({
     kappaOrder: kappaDefinitionEntry.dependencyPlacement!.chapterOrder,
     criticalSinhProductOrder: criticalSinhProductDefinitionEntry.dependencyPlacement!.chapterOrder,
@@ -3370,18 +3073,10 @@ if (JSON.stringify([...evenEigenvectorsEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(evenEigenvectorsExpectedDirectDependencies)
   || evenEigenvectorsEntry.explanationGranularityReview.inspectedContentSha256
     !== evenEigenvectorsExpectedContentSha256
-  || JSON.stringify([...oddEigenvectorsEntry.dependsOnEntryIds].sort())
-    !== JSON.stringify(oddEigenvectorsExpectedDirectDependencies)
-  || oddEigenvectorsEntry.explanationGranularityReview.inspectedContentSha256
-    !== oddEigenvectorsExpectedContentSha256
   || JSON.stringify([...evenEigenspaceSubspaceEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(evenEigenspaceSubspaceExpectedDirectDependencies)
   || evenEigenspaceSubspaceEntry.explanationGranularityReview.inspectedContentSha256
     !== evenEigenspaceSubspaceExpectedContentSha256
-  || JSON.stringify([...oddEigenspaceSubspaceEntry.dependsOnEntryIds].sort())
-    !== JSON.stringify(oddEigenspaceSubspaceExpectedDirectDependencies)
-  || oddEigenspaceSubspaceEntry.explanationGranularityReview.inspectedContentSha256
-    !== oddEigenspaceSubspaceExpectedContentSha256
   || JSON.stringify([...epsilonEigenspacesEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(epsilonEigenspacesExpectedDirectDependencies)
   || epsilonEigenspacesEntry.explanationGranularityReview.inspectedContentSha256
@@ -3390,15 +3085,10 @@ if (JSON.stringify([...evenEigenvectorsEntry.dependsOnEntryIds].sort())
     evenEigenvectorsEntry.dependsOnEntryIds.includes(entry.id))
   || v1V2JordanWignerSection.sectionEntries.some((entry) =>
     entry.dependsOnEntryIds.includes(evenEigenvectorsEntry.id)
-      || entry.dependsOnEntryIds.includes(oddEigenvectorsEntry.id)
       || entry.dependsOnEntryIds.includes("transfer_matrix_004_definition_eigenspaces_of_epsilon"))) {
   throw new Error(`V1・V2 の Jordan–Wigner 行列表示と全スピン反転行列の固有空間との節境界が変わりました: ${JSON.stringify({
-    oddSubspaceDependencies: oddEigenspaceSubspaceEntry.dependsOnEntryIds,
-    expectedOddSubspaceDependencies: oddEigenspaceSubspaceExpectedDirectDependencies,
     wrapperDependencies: epsilonEigenspacesEntry.dependsOnEntryIds,
     expectedWrapperDependencies: epsilonEigenspacesExpectedDirectDependencies,
-    oddSubspaceSha: oddEigenspaceSubspaceEntry.explanationGranularityReview.inspectedContentSha256,
-    expectedOddSubspaceSha: oddEigenspaceSubspaceExpectedContentSha256,
   })}`);
 }
 const v1V2JordanWignerExternalInputSet = new Set(v1V2JordanWignerSection.externalInputEntryIds);
@@ -3448,6 +3138,7 @@ if (JSON.stringify(inputsAddedForV1Restriction.sort()) !== JSON.stringify([
   "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
   "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
   "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
+  "transfer_matrix_005_definition_end_isomorphism",
   "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
   "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
 ].sort())
@@ -3462,7 +3153,7 @@ if (JSON.stringify(inputsAddedForV1Restriction.sort()) !== JSON.stringify([
     dropped: inputsDroppedAfterEpsilonProjectors,
   })}`);
 }
-if (v1PlusMinusDefinitionEntry.dependencyPlacement!.chapterOrder !== 55
+if (v1PlusMinusDefinitionEntry.dependencyPlacement!.chapterOrder !== 54
   || JSON.stringify([...v1PlusMinusDefinitionEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(v1PlusMinusDefinitionExpectedDirectDependencies)
   || v1PlusMinusDefinitionEntry.explanationGranularityReview.inspectedContentSha256
@@ -3484,7 +3175,7 @@ if (JSON.stringify(inputsAddedForV1PlusMinusDefinition.sort()) !== JSON.stringif
     "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
     "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
     "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
-    "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+    "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
     "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
     "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
   ].sort())) {
@@ -3493,30 +3184,8 @@ if (JSON.stringify(inputsAddedForV1PlusMinusDefinition.sort()) !== JSON.stringif
     dropped: inputsDroppedAfterV1Restriction,
   })}`);
 }
-if (v1PlusMinusDefinitionEntry.dependencyPlacement!.chapterOrder !== 55
-  || sectorReplacementEntry.dependencyPlacement!.chapterOrder !== 56
-  || v1PlusMinusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 57
-  || v1PlusMinusSquareRootClaimEntry.dependencyPlacement!.chapterOrder !== 58
-  || epsilonCommutationEntry.dependencyPlacement!.chapterOrder !== 59
-  || epsilonProjectorCommutationEntry.dependencyPlacement!.chapterOrder !== 60
-  || sectorReplacementPowerEntry.dependencyPlacement!.chapterOrder !== 61
-  || JSON.stringify([...sectorReplacementEntry.dependsOnEntryIds].sort())
-    !== JSON.stringify(sectorReplacementExpectedDirectDependencies)
-  || sectorReplacementEntry.explanationGranularityReview.inspectedContentSha256
-    !== sectorReplacementExpectedContentSha256
-  || !sectorReplacementPowerEntry.dependsOnEntryIds.includes(epsilonProjectorCommutationEntry.id)
-  || !sectorReplacementPowerEntry.dependsOnEntryIds.includes(sectorReplacementEntry.id)
-  || sectorReplacementEntry.dependsOnEntryIds.includes(epsilonCommutationEntry.id)
-  || !sectorReplacementEntry.dependsOnEntryIds.includes(v1PlusMinusDefinitionEntry.id)
-  || epsilonCommutationEntry.dependsOnEntryIds.includes(sectorReplacementEntry.id)) {
-  throw new Error(`境界項の符号を固定した指数行列からセクター上の置き換えの冪への依存構造が変わりました: ${JSON.stringify({
-    orders: v1PlusMinusAndCommutationSection.sectionEntries.map((entry) => entry.dependencyPlacement!.chapterOrder),
-    sectorReplacementDependencies: sectorReplacementEntry.dependsOnEntryIds,
-    sectorReplacementPowerDependencies: sectorReplacementPowerEntry.dependsOnEntryIds,
-  })}`);
-}
-if (h1GeneralGeneratorEntry.dependencyPlacement!.chapterOrder !== 73
-  || h2GeneralGeneratorEntry.dependencyPlacement!.chapterOrder !== 74
+if (h1GeneralGeneratorEntry.dependencyPlacement!.chapterOrder !== 66
+  || h2GeneralGeneratorEntry.dependencyPlacement!.chapterOrder !== 67
   || h1GeneralGeneratorEntry.kind !== "definition"
   || h2GeneralGeneratorEntry.kind !== "definition"
   || h1GeneralGeneratorEntry.explanationGranularityReview.status
@@ -3552,9 +3221,9 @@ if (JSON.stringify(inputsAddedForV1ExponentialRepresentation.sort()) !== JSON.st
     dropped: inputsDroppedAfterGeneralGenerators,
   })}`);
 }
-if (v1ExponentialRepresentationEntry.dependencyPlacement!.chapterOrder !== 75
-  || v2ExponentialRepresentationEntry.dependencyPlacement!.chapterOrder !== 76
-  || realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder !== 77
+if (v1ExponentialRepresentationEntry.dependencyPlacement!.chapterOrder !== 68
+  || v2ExponentialRepresentationEntry.dependencyPlacement!.chapterOrder !== 69
+  || realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder !== 74
   || v1ExponentialRepresentationEntry.kind !== "claim"
   || v2ExponentialRepresentationEntry.kind !== "claim"
   || v1ExponentialRepresentationEntry.dependsOnEntryIds.includes(v2ExponentialRepresentationEntry.id)
@@ -3573,47 +3242,17 @@ if (v1ExponentialRepresentationEntry.dependencyPlacement!.chapterOrder !== 75
     nextDependencies: realSymmetricGeneratorsEntry.dependsOnEntryIds,
   })}`);
 }
-if (realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder
-    <= sectorReplacementPowerEntry.dependencyPlacement!.chapterOrder
-  || JSON.stringify([...realSymmetricGeneratorsEntry.dependsOnEntryIds].sort())
+if (JSON.stringify([...realSymmetricGeneratorsEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(realSymmetricGeneratorsExpectedDirectDependencies)
   || realSymmetricGeneratorsEntry.explanationGranularityReview.inspectedContentSha256
     !== realSymmetricGeneratorsExpectedContentSha256
-  || v1PlusMinusAndCommutationSection.sectionEntries.slice(1).some((entry) =>
+  || v1PlusMinusAndCommutationSectionEntries.slice(1).some((entry) =>
     realSymmetricGeneratorsEntry.dependsOnEntryIds.includes(entry.id))
-  || v1PlusMinusAndCommutationSection.sectionEntries.some((entry) =>
+  || v1PlusMinusAndCommutationSectionEntries.some((entry) =>
     entry.dependsOnEntryIds.includes(realSymmetricGeneratorsEntry.id))) {
   throw new Error(`セクター上での V1 の置き換えと二つの生成子の実対称性との節境界が変わりました: ${JSON.stringify({
     order: realSymmetricGeneratorsEntry.dependencyPlacement!.chapterOrder,
     dependencies: realSymmetricGeneratorsEntry.dependsOnEntryIds,
-  })}`);
-}
-const sectorReplacementExternalInputSet = new Set(v1PlusMinusAndCommutationSection.externalInputEntryIds);
-const inputsAddedForRealSymmetricGenerators = realSymmetricGeneratorsEntry.dependsOnEntryIds
-  .filter((id) => !sectorReplacementExternalInputSet.has(id));
-const inputsDroppedAfterSectorReplacement = v1PlusMinusAndCommutationSection.externalInputEntryIds
-  .filter((id) => !realSymmetricGeneratorsEntry.dependsOnEntryIds.includes(id));
-if (JSON.stringify(inputsAddedForRealSymmetricGenerators.sort()) !== JSON.stringify([
-  "eigenvalues_of_V_011_definition_hermitian_positive_definite",
-  "linear_space_general_000_definition_kronecker_product",
-  "linear_space_general_000d_claim_kronecker_transpose",
-  "transfer_matrix_011a_definition_H1_pm",
-  "transfer_matrix_011b_definition_H2",
-].sort())
-  || JSON.stringify(inputsDroppedAfterSectorReplacement.sort()) !== JSON.stringify([
-    "bridge_008_definition_epsilon_projectors",
-    "bridge_009_claim_epsilon_projector_properties",
-    "exp_linear_map_002_definition_exp_of_endomorphism",
-    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-    "linear_space_general_002_claim_scalar_identity_commutes",
-    "linear_space_general_003b_claim_matrix_multiplication_continuity",
-    "partition_function_2d_ising_003_definition_transfer_matrix",
-    "transfer_matrix_005_definition_end_isomorphism",
-    "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
-  ].sort())) {
-  throw new Error(`セクター上の置き換えの冪の直後で入力集合の切り替わり方が変わりました: ${JSON.stringify({
-    added: inputsAddedForRealSymmetricGenerators,
-    dropped: inputsDroppedAfterSectorReplacement,
   })}`);
 }
 if (signFlipConjugationEntry.dependencyPlacement!.chapterOrder
@@ -3628,52 +3267,20 @@ if (!positiveDefiniteSymmetrizedTransferMatrixEntry.dependsOnEntryIds.includes(r
     <= signFlipConjugationEntry.dependencyPlacement!.chapterOrder) {
   throw new Error("実対称性から対称化転送行列の正定値性へ分岐する節境界が変わりました");
 }
-if (JSON.stringify([...evenSectorGeneratorDefinitionEntry.dependsOnEntryIds].sort())
-    !== JSON.stringify([
-      "transfer_matrix_011a_definition_H1_pm",
-    ].sort())
-  || evenSectorGeneratorDefinitionEntry.dependsOnEntryIds.includes(realSymmetricGeneratorsEntry.id)
-  || evenSectorGeneratorDefinitionEntry.dependsOnEntryIds.includes(signFlipConjugationEntry.id)
-  || realSymmetricGeneratorsAndSignFlipSection.sectionEntries.some((entry) =>
-    entry.dependsOnEntryIds.includes(evenSectorGeneratorDefinitionEntry.id))) {
-  throw new Error(`実対称な生成子と符号反転共役の節末、および偶セクター生成子の定義との節境界が変わりました: ${JSON.stringify({
-    evenSectorGeneratorDependencies: evenSectorGeneratorDefinitionEntry.dependsOnEntryIds,
-    realSymmetricDependsOnGenerator: realSymmetricGeneratorsEntry.dependsOnEntryIds.includes(evenSectorGeneratorDefinitionEntry.id),
-    signFlipDependsOnGenerator: signFlipConjugationEntry.dependsOnEntryIds.includes(evenSectorGeneratorDefinitionEntry.id),
-  })}`);
-}
-if (evenSectorOpenChainDefinitionEntry.dependencyPlacement!.chapterOrder
-    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 1
-  || evenSectorBoundaryDefinitionEntry.dependencyPlacement!.chapterOrder
-    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 2
+if (evenSectorBoundaryDefinitionEntry.dependencyPlacement!.chapterOrder
+    !== evenSectorOpenChainDefinitionEntry.dependencyPlacement!.chapterOrder + 1
   || evenSectorGeneratorSpinFormEntry.dependencyPlacement!.chapterOrder
-    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 3
+    !== evenSectorOpenChainDefinitionEntry.dependencyPlacement!.chapterOrder + 2
   || evenSectorGeneratorDiagonalActionEntry.dependencyPlacement!.chapterOrder
-    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 4
+    !== evenSectorOpenChainDefinitionEntry.dependencyPlacement!.chapterOrder + 3
   || evenSectorGeneratorPairwiseCommutationEntry.dependencyPlacement!.chapterOrder
-    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 5
+    !== evenSectorOpenChainDefinitionEntry.dependencyPlacement!.chapterOrder + 4
   || evenSectorGeneratorInvolutionEntry.dependencyPlacement!.chapterOrder
-    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 6
-  || v1PlusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder
-    !== evenSectorGeneratorDefinitionEntry.dependencyPlacement!.chapterOrder + 7
-  || JSON.stringify([...v1PlusSquareRootDefinitionEntry.dependsOnEntryIds].sort())
-    !== JSON.stringify(v1PlusSquareRootDefinitionExpectedDirectDependencies)
-  || v1PlusSquareRootDefinitionEntry.explanationGranularityReview.inspectedContentSha256
-    !== v1PlusSquareRootDefinitionExpectedContentSha256
-  || v1PlusSquareRootDefinitionEntry.dependsOnEntryIds.includes(evenSectorGeneratorSpinFormEntry.id)
+    !== evenSectorOpenChainDefinitionEntry.dependencyPlacement!.chapterOrder + 5
   || evenSectorGeneratorSection.sectionEntries.some((entry) =>
     entry.dependsOnEntryIds.includes(v1PlusSquareRootDefinitionEntry.id))) {
-  throw new Error(`偶セクター生成子のスピン作用素表示と半指数行列の定義との節境界が変わりました: ${JSON.stringify({
+  throw new Error(`偶セクター生成子のスピン作用素表示の節内順が変わりました: ${JSON.stringify({
     orders: evenSectorGeneratorSection.sectionEntries.map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
-    nextOrder: v1PlusSquareRootDefinitionEntry.dependencyPlacement?.chapterOrder,
-    nextDependencies: v1PlusSquareRootDefinitionEntry.dependsOnEntryIds,
-    nextContentSha256: v1PlusSquareRootDefinitionEntry.explanationGranularityReview.inspectedContentSha256,
-    expectedNextContentSha256: v1PlusSquareRootDefinitionExpectedContentSha256,
-    interveningEntries: entries
-      .filter((entry) => entry.provisionalFinalChapter === "2次元イジングモデル"
-        && entry.dependencyPlacement!.chapterOrder >= 44
-        && entry.dependencyPlacement!.chapterOrder <= 72)
-      .map((entry) => [entry.dependencyPlacement!.chapterOrder, entry.id]),
   })}`);
 }
 for (const entry of evenSectorGeneratorSection.sectionEntries) {
@@ -3682,8 +3289,7 @@ for (const entry of evenSectorGeneratorSection.sectionEntries) {
     throw new Error(`偶セクター生成子のスピン作用素表示の直接依存が変わりました: ${entry.id}: ${JSON.stringify(entry.dependsOnEntryIds)}`);
   }
 }
-if (evenSectorGeneratorDefinitionEntry.kind !== "definition"
-  || evenSectorOpenChainDefinitionEntry.kind !== "definition"
+if (evenSectorOpenChainDefinitionEntry.kind !== "definition"
   || evenSectorBoundaryDefinitionEntry.kind !== "definition"
   || evenSectorGeneratorSpinFormEntry.kind !== "claim"
   || evenSectorGeneratorDiagonalActionEntry.kind !== "claim"
@@ -3691,42 +3297,7 @@ if (evenSectorGeneratorDefinitionEntry.kind !== "definition"
   || evenSectorGeneratorInvolutionEntry.kind !== "claim") {
   throw new Error("偶セクター生成子の定義とスピン作用素表示が一ブロック一定義・一主張の構造ではありません");
 }
-const evenSectorGeneratorExternalInputSet = new Set(evenSectorGeneratorSection.externalInputEntryIds);
-const inputsAddedForV1PlusSquareRootDefinition = v1PlusSquareRootDefinitionEntry.dependsOnEntryIds
-  .filter((id) => !evenSectorGeneratorExternalInputSet.has(id));
-const inputsDroppedAfterEvenSectorGenerator = evenSectorGeneratorSection.externalInputEntryIds
-  .filter((id) => !v1PlusSquareRootDefinitionEntry.dependsOnEntryIds.includes(id));
-if (JSON.stringify(inputsAddedForV1PlusSquareRootDefinition.sort()) !== JSON.stringify([
-  "evensectorT_definition_H1_plus",
-].sort())
-  || JSON.stringify(inputsDroppedAfterEvenSectorGenerator.sort()) !== JSON.stringify([
-    "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-    "bridge_001_definition_config_basis",
-    "bridge_002_claim_sigma_z_diagonal_action",
-    "bridge_009_claim_epsilon_projector_properties",
-    "bridge_010_claim_epsilon_commutes",
-    "calc_formulae_003_matrix_decomposition",
-    "calculation_formulae_definition_set_and_algebra_notation",
-    "linear_space_general_000b_claim_kronecker_product_rule",
-    "transfer_matrix_001_definition_symbols",
-    "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
-  ].sort())) {
-  throw new Error(`偶セクター生成子のスピン作用素表示の直後で入力集合の切り替わり方が変わりました: ${JSON.stringify({
-    added: inputsAddedForV1PlusSquareRootDefinition,
-    dropped: inputsDroppedAfterEvenSectorGenerator,
-  })}`);
-}
-for (const entry of v1PlusHalfExponentAndSquareRootSection.sectionEntries) {
-  const expectedDependencies = [
-    ...v1PlusHalfExponentAndSquareRootExpectedDirectDependencies.get(entry.id)!,
-  ].sort();
-  if (JSON.stringify([...entry.dependsOnEntryIds].sort()) !== JSON.stringify(expectedDependencies)) {
-    throw new Error(`偶セクターの半指数行列と平方根性の直接依存が変わりました: ${entry.id}: ${JSON.stringify(entry.dependsOnEntryIds)}`);
-  }
-}
-if (v1PlusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 86
-  || v1PlusSquareRootClaimEntry.dependencyPlacement!.chapterOrder !== 87
-  || vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 88
+if (vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 82
   || v1PlusSquareRootDefinitionEntry.kind !== "definition"
   || v1PlusSquareRootClaimEntry.kind !== "claim"
   || vPlusDefinitionEntry.kind !== "definition"
@@ -3738,40 +3309,11 @@ if (v1PlusSquareRootDefinitionEntry.dependencyPlacement!.chapterOrder !== 86
   || vPlusDefinitionEntry.dependsOnEntryIds.includes(v1PlusSquareRootClaimEntry.id)
   || v1PlusSquareRootClaimEntry.dependsOnEntryIds.includes(vPlusDefinitionEntry.id)) {
   throw new Error(`偶セクターの半指数行列と平方根性、および V^{(+)} の定義との節境界が変わりました: ${JSON.stringify({
-    sectionOrders: v1PlusHalfExponentAndSquareRootSection.sectionEntries.map(
-      (entry) => [entry.id, entry.dependencyPlacement?.chapterOrder],
-    ),
     nextOrder: vPlusDefinitionEntry.dependencyPlacement?.chapterOrder,
     nextDependencies: vPlusDefinitionEntry.dependsOnEntryIds,
   })}`);
 }
-const v1PlusHalfExponentExternalInputSet = new Set(
-  v1PlusHalfExponentAndSquareRootSection.externalInputEntryIds,
-);
-const vPlusDefinitionExternalInputEntryIds = vPlusDefinitionEntry.dependsOnEntryIds
-  .filter((id) => !v1PlusHalfExponentAndSquareRootSectionEntryIds.includes(id));
-const inputsAddedForVPlusDefinition = vPlusDefinitionExternalInputEntryIds
-  .filter((id) => !v1PlusHalfExponentExternalInputSet.has(id));
-const inputsDroppedAfterV1PlusSquareRoot = v1PlusHalfExponentAndSquareRootSection.externalInputEntryIds
-  .filter((id) => !vPlusDefinitionExternalInputEntryIds.includes(id));
-if (JSON.stringify(inputsAddedForVPlusDefinition.sort()) !== JSON.stringify([
-  "transfer_matrix_011d_claim_V2_exponential_representation",
-  "transfer_matrix_011b_definition_H2",
-].sort())
-  || JSON.stringify(inputsDroppedAfterV1PlusSquareRoot.sort()) !== JSON.stringify([
-    "evensectorT_definition_H1_plus",
-    "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-    "transfer_matrix_007_definition_V1_pm",
-    "transfer_matrix_011a_definition_H1_pm",
-  ].sort())) {
-  throw new Error(`偶セクターの平方根性の直後で入力集合の切り替わり方が変わりました: ${JSON.stringify({
-    added: inputsAddedForVPlusDefinition,
-    dropped: inputsDroppedAfterV1PlusSquareRoot,
-  })}`);
-}
-if (!v1PlusHalfExponentAndSquareRootSection.sectionEntries.every((entry) =>
-  entry.explanationGranularityReview.status === "自動検査で主題に適合")
-  || vPlusDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
+if (vPlusDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
   throw new Error("偶セクターの半指数行列・平方根性または直後の V^{(+)} 定義の説明粒度判定が変わりました");
 }
 for (const entry of vPlusDefinitionAndSignedTraceSection.sectionEntries) {
@@ -3782,9 +3324,9 @@ for (const entry of vPlusDefinitionAndSignedTraceSection.sectionEntries) {
     throw new Error(`偶セクター転送行列と符号付きトレースの正値公式の直接依存が変わりました: ${entry.id}: ${JSON.stringify(entry.dependsOnEntryIds)}`);
   }
 }
-if (vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 88
-  || signedTraceOfVPlusEntry.dependencyPlacement!.chapterOrder !== 89
-  || vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 90
+if (vPlusDefinitionEntry.dependencyPlacement!.chapterOrder !== 82
+  || signedTraceOfVPlusEntry.dependencyPlacement!.chapterOrder !== 83
+  || vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 84
   || vPlusDefinitionEntry.kind !== "definition"
   || signedTraceOfVPlusEntry.kind !== "theorem"
   || vPlusPositiveDefiniteEntry.kind !== "claim"
@@ -3810,16 +3352,16 @@ if (!vPlusDefinitionAndSignedTraceSection.sectionEntries.every((entry) =>
     !== "自動検査で主題に適合") {
   throw new Error("偶セクター転送行列・符号付きトレースまたは直後の正定値性の説明粒度判定が変わりました");
 }
-if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 90
-  || traceVPlusPositiveEntry.dependencyPlacement!.chapterOrder !== 91
-  || vPlusInvertibleEntry.dependencyPlacement!.chapterOrder !== 92
-  || vPlusInversePositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 93
-  || vPlusInversePositiveAndTracesEntry.dependencyPlacement!.chapterOrder !== 94
-  || v1PlusHalfInvertibleEntry.dependencyPlacement!.chapterOrder !== 95
-  || vTwoInvertibleEntry.dependencyPlacement!.chapterOrder !== 96
-  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 97
-  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 98
-  || vTwoConjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 99
+if (vPlusPositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 84
+  || traceVPlusPositiveEntry.dependencyPlacement!.chapterOrder !== 85
+  || vPlusInvertibleEntry.dependencyPlacement!.chapterOrder !== 86
+  || vPlusInversePositiveDefiniteEntry.dependencyPlacement!.chapterOrder !== 87
+  || vPlusInversePositiveAndTracesEntry.dependencyPlacement!.chapterOrder !== 88
+  || v1PlusHalfInvertibleEntry.dependencyPlacement!.chapterOrder !== 89
+  || vTwoInvertibleEntry.dependencyPlacement!.chapterOrder !== 90
+  || vPlusFactorsInvertibleEntry.dependencyPlacement!.chapterOrder !== 91
+  || conjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 92
+  || vTwoConjugationLinearityEntry.dependencyPlacement!.chapterOrder !== 93
   || vPlusInvertibleEntry.kind !== "claim"
   || vPlusInversePositiveDefiniteEntry.kind !== "claim"
   || traceVPlusPositiveEntry.kind !== "claim"
@@ -3939,8 +3481,7 @@ if (JSON.stringify(inputsAddedForVTwoInvertibility.sort()) !== JSON.stringify([
   "transfer_matrix_011b_definition_H2",
 ].sort())
   || JSON.stringify(inputsDroppedAfterV1PlusHalfInvertibility.sort()) !== JSON.stringify([
-    "evensectorT_definition_V1_plus_square_root",
-    "transfer_matrix_011a_definition_H1_pm",
+    "bridge_definition_V1_pm_square_root",
   ].sort())) {
   throw new Error(`半指数行列の可逆性から V_2 の可逆性への入力集合が変わりました: ${JSON.stringify({
     added: inputsAddedForVTwoInvertibility,
@@ -3998,9 +3539,9 @@ const vPlusCompositeConjugationExternalInputEntryIds = [...new Set(
     .flatMap((entry) => entry.dependsOnEntryIds)
     .filter((id) => !vPlusCompositeConjugationSectionIdSet.has(id)),
 )].sort((a, b) => order.get(a)!.chapterOrder - order.get(b)!.chapterOrder);
-if (vPlusCompositeConjugationDefinitionEntry.dependencyPlacement!.chapterOrder !== 100
-  || vPlusCompositeConjugationEqualityEntry.dependencyPlacement!.chapterOrder !== 101
-  || positiveDefiniteWEntry.dependencyPlacement!.chapterOrder !== 102
+if (vPlusCompositeConjugationDefinitionEntry.dependencyPlacement!.chapterOrder !== 94
+  || vPlusCompositeConjugationEqualityEntry.dependencyPlacement!.chapterOrder !== 95
+  || positiveDefiniteWEntry.dependencyPlacement!.chapterOrder !== 96
   || vPlusCompositeConjugationDefinitionEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || vPlusCompositeConjugationEqualityEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || positiveDefiniteWEntry.provisionalFinalChapter !== "2次元イジングモデル"
@@ -4085,7 +3626,7 @@ const positiveDefiniteWExpectedDirectDependencies = [
 // 順97 の後で節を閉じる。
 const rayleighSupNewInputEntryIds = ["linear_space_general_002b_definition_matrix_norm"].sort();
 if (positiveDefiniteWEntry.kind !== "claim"
-  || rayleighSupEntry.dependencyPlacement!.chapterOrder !== 103
+  || rayleighSupEntry.dependencyPlacement!.chapterOrder !== 97
   || rayleighSupEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...positiveDefiniteWEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(positiveDefiniteWExpectedDirectDependencies)
@@ -4115,7 +3656,7 @@ const rayleighSupExpectedDirectDependencies = [
   "maxeig_003_claim_W_is_positive_definite",
 ].sort();
 if (rayleighSupEntry.kind !== "definition"
-  || operatorBoundEntry.dependencyPlacement!.chapterOrder !== 104
+  || operatorBoundEntry.dependencyPlacement!.chapterOrder !== 98
   || operatorBoundEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...rayleighSupEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(rayleighSupExpectedDirectDependencies)
@@ -4145,7 +3686,7 @@ const operatorBoundExpectedDirectDependencies = [
   "maxeig_006_definition_rayleigh_sup",
 ].sort();
 if (operatorBoundEntry.kind !== "claim"
-  || tracePowerUpperBoundEntry.dependencyPlacement!.chapterOrder !== 105
+  || tracePowerUpperBoundEntry.dependencyPlacement!.chapterOrder !== 99
   || tracePowerUpperBoundEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...operatorBoundEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(operatorBoundExpectedDirectDependencies)
@@ -4173,8 +3714,8 @@ const momentLogConvexityExpectedDirectDependencies = [
 ].sort();
 if (tracePowerUpperBoundEntry.kind !== "claim"
   || momentLogConvexityEntry.kind !== "claim"
-  || momentLogConvexityEntry.dependencyPlacement!.chapterOrder !== 106
-  || tracePowerSandwichEntry.dependencyPlacement!.chapterOrder !== 107
+  || momentLogConvexityEntry.dependencyPlacement!.chapterOrder !== 100
+  || tracePowerSandwichEntry.dependencyPlacement!.chapterOrder !== 101
   || momentLogConvexityEntry.provisionalFinalChapter !== "2次元イジングモデル"
   || JSON.stringify([...tracePowerUpperBoundEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(tracePowerUpperBoundExpectedDirectDependencies)
@@ -4224,12 +3765,12 @@ const partitionFunctionSandwichExpectedDirectDependencies = [
   "maxeig_008_claim_trace_power_sandwich",
 ].sort();
 if (partitionFunctionSandwichEntry.kind !== "claim"
-  || partitionFunctionSandwichEntry.dependencyPlacement!.chapterOrder !== 108
+  || partitionFunctionSandwichEntry.dependencyPlacement!.chapterOrder !== 102
   || JSON.stringify([...partitionFunctionSandwichEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(partitionFunctionSandwichExpectedDirectDependencies)
   || partitionFunctionSandwichEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || entries.filter((entry) => entry.dependsOnEntryIds.includes(partitionFunctionSandwichEntry.id))
-    .some((entry) => entry.dependencyPlacement!.chapterOrder <= 96)) {
+    .some((entry) => entry.dependencyPlacement!.chapterOrder <= 90)) {
   throw new Error(`分配関数の挟み撃ちの一項節が変わりました: ${JSON.stringify({
     order: partitionFunctionSandwichEntry.dependencyPlacement?.chapterOrder,
     dependencies: partitionFunctionSandwichEntry.dependsOnEntryIds,
@@ -4239,41 +3780,37 @@ const sectorRayleighSupEntry = entries.find((entry) =>
   entry.id === "maxeig_010a_definition_sector_rayleigh_sup")!;
 const epsilonCommutesWithWEntry = entries.find((entry) =>
   entry.id === "maxeig_010b_claim_epsilon_commutes_with_W")!;
-const sectorDecompositionEntry = entries.find((entry) =>
-  entry.id === "maxeig_010_claim_sector_decomposition_of_c")!;
 const sectorRayleighSupExpectedDirectDependencies = [
   "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-  "bridge_008_definition_epsilon_projectors",
   "calc_formulae_006_definition_of_cc",
   "calculation_formulae_definition_set_and_algebra_notation",
   "linear_space_general_000_definition_kronecker_product",
   "linear_space_general_000b_claim_kronecker_product_rule",
+  "maxeig_001a_definition_symmetrized_transfer_matrix",
   "maxeig_006_definition_rayleigh_sup",
-  "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+  "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
+  "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
 ].sort();
 const epsilonCommutesWithWExpectedDirectDependencies = [
   "bridge_010_claim_epsilon_commutes",
   "maxeig_001a_definition_symmetrized_transfer_matrix",
-  "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+  "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
 ].sort();
 if (sectorRayleighSupEntry.kind !== "definition"
   || epsilonCommutesWithWEntry.kind !== "claim"
-  || sectorRayleighSupEntry.dependencyPlacement!.chapterOrder !== 110
-  || epsilonCommutesWithWEntry.dependencyPlacement!.chapterOrder !== 111
+  || sectorRayleighSupEntry.dependencyPlacement!.chapterOrder !== 104
+  || epsilonCommutesWithWEntry.dependencyPlacement!.chapterOrder !== 105
   || JSON.stringify([...sectorRayleighSupEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(sectorRayleighSupExpectedDirectDependencies)
   || JSON.stringify([...epsilonCommutesWithWEntry.dependsOnEntryIds].sort())
     !== JSON.stringify(epsilonCommutesWithWExpectedDirectDependencies)
   || sectorRayleighSupEntry.dependsOnEntryIds.includes(epsilonCommutesWithWEntry.id)
-  || epsilonCommutesWithWEntry.dependsOnEntryIds.includes(sectorRayleighSupEntry.id)
-  || !sectorDecompositionEntry.dependsOnEntryIds.includes(sectorRayleighSupEntry.id)
-  || !sectorDecompositionEntry.dependsOnEntryIds.includes(epsilonCommutesWithWEntry.id)) {
+  || epsilonCommutesWithWEntry.dependsOnEntryIds.includes(sectorRayleighSupEntry.id)) {
   throw new Error(`セクター上限の定義と可換性の二項節が変わりました: ${JSON.stringify({
-    orders: [sectorRayleighSupEntry, epsilonCommutesWithWEntry, sectorDecompositionEntry]
+    orders: [sectorRayleighSupEntry, epsilonCommutesWithWEntry]
       .map((entry) => [entry.id, entry.dependencyPlacement?.chapterOrder]),
     sectorRayleighSupDependencies: sectorRayleighSupEntry.dependsOnEntryIds,
     epsilonCommutesDependencies: epsilonCommutesWithWEntry.dependsOnEntryIds,
-    sectorDecompositionDependencies: sectorDecompositionEntry.dependsOnEntryIds,
   })}`);
 }
 
@@ -4304,12 +3841,12 @@ const sectorSplitReviewedEntries = [
       "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
       "transfer_matrix_001_definition_symbols",
       "transfer_matrix_003_claim_V1_in_Z_Y_epsilon",
-      "transfer_matrix_004_definition_eigenspaces_of_epsilon",
+      "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
       "transfer_matrix_005_definition_end_isomorphism",
       "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
       "transfer_matrix_005c_claim_end_preserves_matrix_exponential"
     ],
-    "sha256": "1345f7d56ef8f13c14f8f8c345ea38b45f7a01845bf27d963a004730c64463f8"
+    "sha256": "a42d123323b1b88bb4e71cb57aa91362a512d7eda823f239e46d7b44285310d3"
   },
   {
     "id": "bridge_008_definition_epsilon_projectors",
@@ -4318,18 +3855,17 @@ const sectorSplitReviewedEntries = [
       "calc_formulae_006_definition_of_cc",
       "transfer_matrix_001_definition_symbols"
     ],
-    "sha256": "353af10c8032cdf770e946fc51a25fc53bbaaccb8872e0732d259080110492a0"
+    "sha256": "6d0bb75579386ab8941b075c82ec8798683b7250b2756bacfbf3d0db7452c383"
   },
   {
     "id": "bridge_009_claim_epsilon_projector_properties",
     "chapter": "2次元イジングモデル",
     "dependencies": [
       "bridge_008_definition_epsilon_projectors",
-      "transfer_matrix_004_definition_eigenspaces_of_epsilon",
-      "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues",
-      "transfer_matrix_005_definition_end_isomorphism"
+      "calc_formulae_006_definition_of_cc",
+      "transfer_matrix_004_definition_eigenspace_even_of_epsilon"
     ],
-    "sha256": "d109dc4db25a9487b161b9c265101260700ec7eba6697fcb0fde07bc728d9100"
+    "sha256": "345ea1bc313fc4f3242b442607d6932ea0abaff6324cb2e25bb81414936dba18"
   },
   {
     "id": "bridge_definition_V1_pm_square_root",
@@ -4337,9 +3873,11 @@ const sectorSplitReviewedEntries = [
     "dependencies": [
       "calc_formulae_006_definition_of_cc",
       "calculation_formulae_definition_set_and_algebra_notation",
-      "transfer_matrix_007_definition_V1_pm"
+      "transfer_matrix_001_definition_symbols",
+      "transfer_matrix_007_definition_V1_pm",
+      "transfer_matrix_011a_definition_H1_pm"
     ],
-    "sha256": "c9eb304598ee0badcc04af88cc82578cc2fe39382fa614903968c3ebf16c36d4"
+    "sha256": "5c613ecc4bcdbbeddf49b7ac8e7d20b568c741f72b4e139500c6aaf87588649e"
   },
   {
     "id": "bridge_claim_epsilon_projectors_commute_with_transfer_matrices",
@@ -4349,23 +3887,7 @@ const sectorSplitReviewedEntries = [
       "bridge_010_claim_epsilon_commutes",
       "calc_formulae_006_definition_of_cc"
     ],
-    "sha256": "3a089115f3edaf702194be5ff18e1071dd8e678af5f58f874bdfc06252545bae"
-  },
-  {
-    "id": "bridge_012_claim_partition_function_sector_decomposition",
-    "chapter": "2次元イジングモデル",
-    "dependencies": [
-      "bridge_008_definition_epsilon_projectors",
-      "bridge_009_claim_epsilon_projector_properties",
-      "bridge_011a_claim_sector_replacement_pow",
-      "bridge_claim_epsilon_projectors_commute_with_transfer_matrices",
-      "calc_formulae_006_definition_of_cc",
-      "eigenvalues_of_V_002_claim_trace_properties",
-      "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-      "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
-      "transfer_matrix_011a_definition_H1_pm"
-    ],
-    "sha256": "91541f911011ec8f1d9d3ccc4fcdac0f0a80e6e8c2b96ba760a67199e7c78367"
+    "sha256": "397d2e77c27b96d66678c7eff964d78583d06ce8df68df1c9319fb626f33de61"
   },
   {
     "id": "maxeig_001_definition_transfer_matrix_square_root",
@@ -4402,15 +3924,16 @@ const sectorSplitReviewedEntries = [
     "chapter": "2次元イジングモデル",
     "dependencies": [
       "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-      "bridge_008_definition_epsilon_projectors",
       "calc_formulae_006_definition_of_cc",
       "calculation_formulae_definition_set_and_algebra_notation",
       "linear_space_general_000_definition_kronecker_product",
       "linear_space_general_000b_claim_kronecker_product_rule",
+      "maxeig_001a_definition_symmetrized_transfer_matrix",
       "maxeig_006_definition_rayleigh_sup",
-      "transfer_matrix_004_definition_eigenspaces_of_epsilon"
+      "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
+      "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
     ],
-    "sha256": "229424fc411ed22f3007a18623bbc80979560516f66ada46f75d5d5043f6e57a"
+    "sha256": "3a0cad5270dae32ca484044b3fd79a3956c060a1abd5f45857bf00968def406f"
   },
   {
     "id": "maxeig_010b_claim_epsilon_commutes_with_W",
@@ -4418,9 +3941,9 @@ const sectorSplitReviewedEntries = [
     "dependencies": [
       "bridge_010_claim_epsilon_commutes",
       "maxeig_001a_definition_symmetrized_transfer_matrix",
-      "transfer_matrix_004_definition_eigenspaces_of_epsilon"
+      "transfer_matrix_004_definition_eigenspace_even_of_epsilon"
     ],
-    "sha256": "1eb0882ee0635272495b2af654fe0e881149975ec8777fa2662188cb01dab7f1"
+    "sha256": "69ed0dacd83579877b432d6e27bdcde42aa02b490f3f120238534c94da57a224"
   },
   {
     "id": "maxeig_claim_symmetrized_transfer_matrix_on_sectors",
@@ -4428,42 +3951,22 @@ const sectorSplitReviewedEntries = [
     "dependencies": [
       "bridge_008_definition_epsilon_projectors",
       "bridge_009_claim_epsilon_projector_properties",
-      "bridge_012_claim_partition_function_sector_decomposition",
       "bridge_claim_epsilon_projectors_commute_with_transfer_matrices",
       "bridge_definition_V1_pm_square_root",
       "calc_formulae_006_definition_of_cc",
+      "evensectorT_definition_V_plus",
       "maxeig_001_definition_transfer_matrix_square_root",
       "maxeig_001a_definition_symmetrized_transfer_matrix",
-      "transfer_matrix_006_claim_V1_restriction_to_eigenspaces"
+      "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
+      "transfer_matrix_011a_definition_H1_pm"
     ],
-    "sha256": "50f34da43293b6c6cdb6230f754c60c53c3945b9a6cc1e2de1f94607de22b66a"
-  },
-  {
-    "id": "maxeig_010_claim_sector_decomposition_of_c",
-    "chapter": "2次元イジングモデル",
-    "dependencies": [
-      "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-      "bridge_008_definition_epsilon_projectors",
-      "bridge_009_claim_epsilon_projector_properties",
-      "calculation_formulae_definition_set_and_algebra_notation",
-      "linear_space_general_000d_claim_kronecker_transpose",
-      "linear_space_general_002b_definition_matrix_norm",
-      "linear_space_general_002c_claim_matrix_norm_triangle_inequality",
-      "maxeig_003_claim_W_is_positive_definite",
-      "maxeig_006_definition_rayleigh_sup",
-      "maxeig_010a_definition_sector_rayleigh_sup",
-      "maxeig_010b_claim_epsilon_commutes_with_W",
-      "transfer_matrix_004_definition_eigenspaces_of_epsilon",
-      "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
-    ],
-    "sha256": "429fbe16119ff1daa858fcd41fb5e1beb7ecc9e99de95d4ce1b589ee8e8655ef"
+    "sha256": "ef20dc3c3499418ec9fea39ec529096f1a12bdb684e393a9f50cd3f7cfb8c9cb"
   },
   {
     "id": "closing_009_theorem_c_plus_equals_Lambda_half",
     "chapter": "2次元イジングモデル",
     "dependencies": [
       "bridge_008_definition_epsilon_projectors",
-      "bridge_009_claim_epsilon_projector_properties",
       "calc_formulae_006_definition_of_cc",
       "calculation_formulae_definition_set_and_algebra_notation",
       "closing_007_theorem_max_eigenvector_in_even_sector",
@@ -4477,15 +3980,15 @@ const sectorSplitReviewedEntries = [
       "freeenergy_005_theorem_onsager_expression",
       "maxeig_003_claim_W_is_positive_definite",
       "maxeig_010a_definition_sector_rayleigh_sup",
-      "maxeig_claim_symmetrized_transfer_matrix_on_sectors"
+      "maxeig_claim_symmetrized_transfer_matrix_on_sectors",
+      "transfer_matrix_004_definition_eigenspace_even_of_epsilon"
     ],
-    "sha256": "a7f02fec504dcdebd2cf1e252851ad5ebc0d2f4c19bb3d6771ee7eb40bc7045a"
+    "sha256": "6ccd50da6bc58d554e30e6585d8f49471aca386a3b67acb551cc3e7b175caddf"
   },
   {
     "id": "closing_010_theorem_onsager_exact_solution",
     "chapter": "2次元イジングモデル",
     "dependencies": [
-      "bridge_009_claim_epsilon_projector_properties",
       "calculation_formulae_definition_set_and_algebra_notation",
       "closing_006_theorem_trace_of_epsilon_V_plus",
       "closing_009_theorem_c_plus_equals_Lambda_half",
@@ -4494,27 +3997,15 @@ const sectorSplitReviewedEntries = [
       "freeenergy_004_theorem_riemann_sum_to_integral",
       "freeenergy_005_theorem_onsager_expression",
       "maxeig_004_claim_W_has_positive_entries",
-      "maxeig_010_claim_sector_decomposition_of_c",
       "maxeig_010a_definition_sector_rayleigh_sup",
       "maxeig_010b_claim_epsilon_commutes_with_W",
-      "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix"
+      "maxeig_claim_c_plus_le_c",
+      "maxeig_claim_epsilon_is_real_symmetric",
+      "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
+      "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
+      "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
     ],
-    "sha256": "3fba98e5a155d28005c4391dd4d1e5488436c0acc91cccba755c5a6aea8073b1"
-  },
-  {
-    "id": "sector_004_theorem_c_equals_c_plus",
-    "chapter": "2次元イジングモデル",
-    "dependencies": [
-      "Athetatilde_008_definition_gamma_theta_tilde",
-      "calculation_formulae_definition_set_and_algebra_notation",
-      "closing_009_theorem_c_plus_equals_Lambda_half",
-      "evensector_002_claim_antiperiodic_exp_sum",
-      "freeenergy_005_theorem_onsager_expression",
-      "maxeig_006_definition_rayleigh_sup",
-      "maxeig_010_claim_sector_decomposition_of_c",
-      "sector_003_theorem_c_minus_le_c_plus"
-    ],
-    "sha256": "2aa159936565f54bd85540a8fc99caffbc77bdb6ad83118a38f8418f65963604"
+    "sha256": "e4b841f0176a0bfb6bc750bd374bc67eb5a55644b80ac8b18532e8ef89d51092"
   }
 ];
 for (const expected of sectorSplitReviewedEntries) {
@@ -4526,35 +4017,20 @@ for (const expected of sectorSplitReviewedEntries) {
   }
 }
 const sectorRepresentationEntry = entries.find((entry) => entry.id === "maxeig_claim_symmetrized_transfer_matrix_on_sectors")!;
-const criticalConditionAfterSectorSplitEntry = entries.find((entry) =>
-  entry.id === "TV1_hatZ_hatY_044_claim_critical_condition")!;
-if (sectorRepresentationEntry.dependsOnEntryIds.includes(sectorDecompositionEntry.id)
-  || sectorDecompositionEntry.dependsOnEntryIds.includes(sectorRepresentationEntry.id)
-  || sectorRepresentationEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
-  || sectorDecompositionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
-  || sectorDecompositionEntry.explanationGranularityReview.manualReview !== null
-  || sectorDecompositionEntry.dependencyPlacement!.chapterOrder
-    !== sectorRepresentationEntry.dependencyPlacement!.chapterOrder + 1
-  || criticalConditionAfterSectorSplitEntry.dependencyPlacement!.chapterOrder
-    !== sectorDecompositionEntry.dependencyPlacement!.chapterOrder + 1
-  || criticalConditionAfterSectorSplitEntry.dependsOnEntryIds.includes(sectorRepresentationEntry.id)
-  || criticalConditionAfterSectorSplitEntry.dependsOnEntryIds.includes(sectorDecompositionEntry.id)
-  || JSON.stringify(sectorRepresentationEntry.presentationPredecessorEntryIds) !== JSON.stringify([epsilonCommutesWithWEntry.id])
-  || JSON.stringify(sectorDecompositionEntry.presentationPredecessorEntryIds) !== JSON.stringify([sectorRepresentationEntry.id])) {
-  throw new Error("セクター表示と最大値分解の相互非依存・一項節境界・提示順・本文粒度が変わりました");
+// 最大値分解（maxeig_010_claim_sector_decomposition_of_c）は (−) セクターとともに参照用ノートへ退避したため、
+// セクター表示の側だけ、提示順と本文粒度を固定する。
+if (sectorRepresentationEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
+  || JSON.stringify(sectorRepresentationEntry.presentationPredecessorEntryIds) !== JSON.stringify([epsilonCommutesWithWEntry.id])) {
+  throw new Error("セクター表示の提示順・本文粒度が変わりました");
 }
 const sectorSplitEvidenceSha256 = [
   [
-    "sagemath/check/044_claim_max_eigenvalue/check_03_sector_split.sage",
-    "353a067f28b675a47688d116b9d70b354c6cc2d0a5752168f53a4f37507de854"
-  ],
-  [
     "sagemath/check/044_claim_max_eigenvalue/overview.md",
-    "41578691e562e4778eb6dad90efe3dcb55164cf9a210d04df27816162cbcd109"
+    "5645cf4b7698a1fcf5d6b1ba6f8155eed222aa6c6b1e28ccc3ec09be9805811d"
   ],
   [
     "sagemath/check/044_claim_max_eigenvalue/_sector_representation_prelude.sage",
-    "d1eac65a2332c36694f247c4f406c48201dac9bd9eef709142cb4741a465ba3d"
+    "46f77cb98ed29ac450a4632b84fb78a9e8c46ff7945062586a58e16f2cab48e4"
   ],
   [
     "sagemath/check/044_claim_max_eigenvalue/check_B_P_equals_C_P.sage",
@@ -4589,36 +4065,32 @@ const sectorSplitEvidenceSha256 = [
     "523c2f77bf2ad6ec1a8d004a042f9602434cd78b91b72414d9ce5994f086431d"
   ],
   [
-    "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage",
-    "0309225fda9217f3bf393c2701447ccd4cbd8dd7996ce22146ba8bfa4d933ecf"
+    "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_plus_P.sage",
+    "43c7e2e77945683799c785a53e571348ff71f865b3d47b12a43a8a5cf6b55159"
   ],
   [
     "lean/docs/ch011-formalization.md",
-    "57b2e214f16b64c71f8c2201ad2a2e40bf571a3d3623146f21bcd508a3ba968e"
+    "bf8584aaf7175d7afb004dac654bbfc7b85508e89fe9291fc8a715550db4e60e"
   ],
   [
     "lean/Ising2D/NecSuf/Projector.lean",
-    "a5a41e66bcd98363b44a8e468c0d002ae7622b4e7088dd0f052b886b528f49e5"
+    "f1ac0da9e0d5f195ec9e287340d8c508d60d839deee84b6dc9c5b04312a226ef"
   ],
   [
     "lean/Ising2D/Part011/PhysicalSymTransferBridge.lean",
-    "dca93cc6f9c26f2c0daef0ab47c6823ccf8d7c68ae7cc179353e75411463378d"
-  ],
-  [
-    "lean/Ising2D/Part011/Claim010_SectorDecomposition.lean",
-    "056ad55ff3fcd8f11f19e8b1bf9f54dc308e830de34f4f61b7040cefcc339b29"
+    "3fa4f10cafdc7c0b01da1e7c410069cbfa869bf5916434489c1c56767835716f"
   ],
   [
     "lean/docs/ch018-formalization.md",
-    "8d3090628ba6da490572dde08184341c81a41405a3c2da226ef37c418904c4de"
+    "0d03265b2ef67c41539160b6ffbb7d135f87312c9f18bfda973a1ab171465c3a"
   ],
   [
     "lean/Ising2D/Part018/Theorem009_CPlusEqualsLambda.lean",
-    "199ab82393737a134987ece767e2d53f99a2a131f217c0c252cbf7c427dd9bae"
+    "1522844aed8bb817b63a9a47ebf0d3296927bf24bbb7683c46b0140f0e3bf3ff"
   ],
   [
     "lean/Ising2D/Part018/Theorem013_OnsagerUnconditional.lean",
-    "dbf112d9e3ca056fd02286dbefc11daa1a4e232eb0150941b01a079103626ec6"
+    "11a22963d499dc9f0c6fdfc41b4faf7ac29789132229a85ec5f4f0b191608549"
   ]
 ];
 for (const [path, expected] of sectorSplitEvidenceSha256) {
@@ -4846,9 +4318,8 @@ if (!realSymmetricGeneratorsAndSignFlipSection.sectionEntries.every((entry) =>
   throw new Error("実対称な生成子と符号反転共役の対象本文または外部入力の説明粒度判定が変わりました");
 }
 if (!evenSectorGeneratorSection.sectionEntries.every((entry) =>
-  entry.explanationGranularityReview.status === "自動検査で主題に適合")
-  || v1PlusSquareRootDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合") {
-  throw new Error("偶セクター生成子のスピン作用素表示または直後の半指数行列の説明粒度判定が変わりました");
+  entry.explanationGranularityReview.status === "自動検査で主題に適合")) {
+  throw new Error("偶セクター生成子のスピン作用素表示の説明粒度判定が変わりました");
 }
 if (kappaDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
   || criticalSinhProductDefinitionEntry.explanationGranularityReview.status !== "自動検査で主題に適合"
@@ -15891,7 +15362,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "全スピン反転行列から定める二つの行列",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: epsilonProjectorDefinitionSectionEntryIds,
   input: [
     "残余複合定義から独立した定義へ接続される全スピン反転行列",
@@ -16022,32 +15493,28 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "全スピン反転行列の二つの固有空間",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  status: "境界候補・節の構成変更により要再レビュー",
   entryIds: epsilonEigenspacesSectionEntryIds,
   input: [
     "全スピン反転行列 ε の有限複素数ベクトルへの作用",
     "複素数ベクトルの零・和・複素スカラー倍",
   ],
   externalInputEntryIds: epsilonEigenspacesSection.externalInputEntryIds,
-  output: ["全スピン反転行列の固有値 +1 と −1 に対応する二つの複素部分線型空間"],
+  output: ["全スピン反転行列の固有値 +1 に対応する複素部分線型空間"],
   formalizationEvidence: {
     leanFiles: [
       "lean/Ising2D/Part004/EvenEigenvectors.lean",
       "lean/Ising2D/NecSuf/FixedVectorsSubmodule.lean",
-      "lean/Ising2D/Part004/OddEigenvectors.lean",
-      "lean/Ising2D/NecSuf/NegatedVectorsSubmodule.lean",
     ],
     sageMathOverviews: [
       "sagemath/check/def_even_eigenvectors_of_epsilon/overview.md",
       "sagemath/check/even_eigenspace_is_complex_subspace/overview.md",
-      "sagemath/check/def_odd_eigenvectors_of_epsilon/overview.md",
-      "sagemath/check/odd_eigenspace_is_complex_subspace/overview.md",
     ],
-    currentStatus: "固有値 +1 と -1 の集合定義、および両集合の複素部分線型空間性を本文・Lean・SageMathで同期済みである。",
+    currentStatus: "固有値 +1 の集合定義とその複素部分線型空間性を本文・Lean・SageMathで同期済みである。固有値 −1 の側は参照用ノートへ退避し、Lean は形式化の記録として残す。",
   },
   mainTheorem: "全スピン反転行列の二つの固有空間",
   mainTheoremEntryId: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
-  boundaryEvidence: "章内依存順33–37は、二つの固有ベクトル集合を定義し、それぞれの部分空間性を示して統合する。直後の順38はこれらに依存せず、Pauli 行列の二乗とクロネッカー積の規則へ入力が切り替わるため、順37の後で節を閉じる。",
+  boundaryEvidence: "(−) セクターを本文から参照用ノートへ退避したとき（第 3 段階）、固有値 −1 の固有ベクトル集合の定義とその部分空間性の二項を参照用ノートへ移し、二つの固有空間の定義は F^{(+)} だけを述べるよう書き直された。残る三項は章内依存順の連続区間であり、生成時に連続性・内部依存辺・本文 fingerprint・外部入力を固定検査するが、節境界と節名は要再レビューである。",
   readabilityStatus: "二つの集合定義と部分空間性を一主張ずつ分離し、具体的な複素行列作用と成分和だけで記述している。外部入力の混在した記号定義には説明粒度の未解決が残る。",
 }, {
   name: "全スピン反転行列の二乗と固有値候補",
@@ -16087,7 +15554,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "全スピン反転行列から作る相補射影",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: epsilonProjectorPropertiesSectionEntryIds,
   input: [
     "全スピン反転行列の二つの固有空間と二乗公式",
@@ -16098,7 +15565,6 @@ const isingModelSectionBoundaries = [{
   formalizationEvidence: {
     leanFiles: [
       "lean/Ising2D/Part010/Claim009_EpsilonProjectors.lean",
-      "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
     ],
     currentStatus: "相補射影の既存本文とLean対応を保持し、固有値候補には依存しない一項節として確定した。",
   },
@@ -16109,7 +15575,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "V1 の固有空間への制限",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度未解決・外部入力粒度未解決",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: v1RestrictionToEigenspacesSectionEntryIds,
   input: [
     "V1 の Jordan–Wigner 行列表示と全スピン反転行列の二つの固有空間",
@@ -16124,8 +15590,8 @@ const isingModelSectionBoundaries = [{
   mainTheorem: "V1 の固有空間への制限",
   mainTheoremEntryId: "transfer_matrix_006_claim_V1_restriction_to_eigenspaces",
   formalizationEvidence: {
-    leanFile: "lean/Ising2D/Part010/Claim011_SectorReplacement.lean",
-    downstreamLeanFile: "lean/Ising2D/Part010/Claim012_SectorDecomposition.lean",
+    leanFile: "lean/Ising2D/Part004/ClaimV1RestrictionToEigenspaces.lean",
+    downstreamLeanFile: null,
     currentStatus: "本文の出力は、固有値 η の固有ベクトル f 上で V1 と境界符号を固定した V1^{(±)} の作用が一致することである。Lean では V1pauli_eq_jordanWigner を入力に、本文 Step 3–6 と同じ順で固有空間の不変性、ηsign=-η の生成子作用、冪の帰納、有限部分和、指数級数の極限をベクトル作用として直接証明し、V1_restrictsOnSector_of_opposite_sign へ閉じた。実際の符号対は V1_restrictsOnEvenSector が (η,ηsign)=(1,-1)、V1_restrictsOnOddSector が (-1,1) を与える。M>=2 は Jordan–Wigner 行列表示にだけ使い、TensorPow と mulVec が本文の end と F を具体化する。セクター置換、その冪、トレース接続、分配関数のセクター分解は M>=2 を直接受け取り、この導出を内部で使うため、下流の RestrictsOnSector 仮定は解消済みである。",
   },
   boundaryEvidence: "章内依存順41の一項は、V1 の Jordan–Wigner 行列表示、全スピン反転行列の固有空間、ノルムの基本性質の数ベクトル版を入力に、全スピン反転行列を固有値 ±1 へ置き換え、行列指数関数の部分和を通じて V1 の作用を各固有空間へ制限する主張へ閉じる。直後の章内依存順42は、境界項の符号を固定した二つの指数行列 V1^{(±)} を定義するだけで順41を参照せず、順41も証明内の局所的な略記として同じ指数行列を自足的に定めるため、二項に相互依存はない。順42は転送行列とサイト作用素の記号定義を順41と共有する一方、V1 の Jordan–Wigner 表示、固有空間、一因子の反可換性、ノルムの基本性質の数ベクトル版、作用対応の積・指数保存を入力から外し、線型写像の指数関数の定義を追加するため、外部入力集合も切り替わる。したがって順41の後で一項の節を閉じる。生成時に対象と全外部入力の本文 fingerprint、章内順、節末出力の一意性、順42の直接依存・本文 fingerprint、二項間の相互非依存、および入力集合の追加・除外を固定検査する。",
@@ -16133,7 +15599,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "境界項の符号を固定した指数行列・全スピン反転対称性・セクター上の置き換え",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
+  status: "境界候補・節の構成変更により要再レビュー",
   entryIds: v1PlusMinusAndCommutationSectionEntryIds,
   input: [
     "境界項の符号を固定した指数行列を作る転送行列・サイト作用素の記号",
@@ -16142,31 +15608,27 @@ const isingModelSectionBoundaries = [{
     "V1 の作用を全スピン反転行列の二つの固有空間へ制限した等式",
     "行列指数関数、その部分和、および行列積と極限の交換",
   ],
-  externalInputEntryIds: v1PlusMinusAndCommutationSection.externalInputEntryIds,
+  externalInputEntryIds: pendingSectionExternalInputEntryIds(v1PlusMinusAndCommutationSectionEntries),
   output: [
     "境界項の符号を固定した二つの指数行列 V1^{(±)}",
     "半指数行列として定めた行列の二乗が V1^{(±)} に等しいこと",
     "全スピン反転行列と V1・V2・V1^{(±)}・その平方根との可換性",
     "二つの相補射影と V1・V2・V1^{(±)}・その平方根との可換性",
-    "各セクターへの射影後は V1 を V1^{(±)} へ置き換えられること",
-    "その置き換えを転送行列の積の任意の非負整数冪へ反復できること",
   ],
   mainTheorems: [
     "全スピン反転行列と転送行列および境界項の符号を固定した指数行列との可換性",
-    "セクター上での V1 の置き換え",
   ],
   mainTheoremEntryIds: [
     "bridge_010_claim_epsilon_commutes",
-    "bridge_011_claim_sector_replacement",
   ],
-  concludingCorollary: "セクター上での置き換えを転送行列の積の非負整数冪へ反復する公式",
-  concludingCorollaryEntryId: "bridge_011a_claim_sector_replacement_pow",
-  boundaryEvidence: "章内依存順50で V1^{(±)} を定義する。順51はこの定義と既に閉じた V1 の固有空間への制限・相補射影の像から、射影後の V1 を V1^{(±)} へ置き換える主定理へ進む。並行して順52–55は半指数行列とその平方根性、全スピン反転行列との可換性、相補射影との可換性へ進む。順56は順51の置換等式、相補射影の冪等性、順55の可換性を合流させ、置き換えを転送行列の積の任意の非負整数冪へ反復する系で節を閉じる。直後の順57は新しい記号 δ^M_{(μ,ν)} の定義へ主題を切り替え、当節の七項を参照しない。生成時に七項の連続性と内部依存、対象と全外部入力の本文 fingerprint、および順56への一意な閉包を固定検査する。",
+  concludingCorollary: null,
+  concludingCorollaryEntryId: null,
+  boundaryEvidence: "(−) セクターを本文から参照用ノートへ退避したとき（第 3 段階）、セクター上での V1 の置き換えとその冪への反復の二項（主定理の一つと節末の系）を参照用ノートへ移した。残る五項は、指数行列 V1^{(+)}・その平方根・可換性の主張が (+) だけへ書き直され、平方根と可換性が H1^{(+)} に依存するようになったため章内依存順の連続区間でない。節境界は要再レビューであり、生成時には残る各項の本文・直接依存・章内順・説明粒度判定だけを固定検査する。",
   readabilityStatus: "未定義だった H1^{(±)} を使わず、半指数行列の定義・平方根性・二種類の可換性を別ブロックにした。さらに、射影後の V1 の置き換えと、その置き換えを積の冪へ反復する系を別ブロックへ分けた。対象七項は一ブロック一主張で依存順に読め、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、混在した転送行列・サイト作用素の記号、行列指数関数、固有空間への制限、行列と線型写像の対応に説明粒度の未解決が残る。",
 }, {
   name: "二つの一般生成子",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: generalGeneratorsSectionEntryIds,
   input: [
     "周期規約を含む Jordan–Wigner 行列族 Z_m, Y_m",
@@ -16190,7 +15652,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "第一転送行列の一般生成子による指数表示",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: v1ExponentialRepresentationSectionEntryIds,
   input: [
     "境界項の符号を固定した第一転送行列 V1^{(±)} の定義",
@@ -16220,7 +15682,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "実対称な生成子と符号反転共役",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度確認済み・外部入力粒度未解決",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: realSymmetricGeneratorsAndSignFlipSectionEntryIds,
   input: [
     "転送行列・サイト作用素と境界項の符号を固定した二つの生成子",
@@ -16246,7 +15708,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "偶セクター生成子のスピン作用素表示",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
+  status: "境界候補・節の構成変更により要再レビュー",
   entryIds: evenSectorGeneratorSectionEntryIds,
   input: [
     "独立した一般生成子 H1^{(±)} の定義",
@@ -16255,7 +15717,6 @@ const isingModelSectionBoundaries = [{
   ],
   externalInputEntryIds: evenSectorGeneratorSection.externalInputEntryIds,
   output: [
-    "偶セクターの生成子 H1^{(+)} の定義",
     "開鎖項 D0 と周期境界項 G の定義",
     "iH1^{(+)} を隣接する σz の積と周期境界項で表す等式",
     "開鎖項と境界項の対角作用、全スピン反転行列との可換性、および境界項を含む行列の二乗",
@@ -16269,31 +15730,12 @@ const isingModelSectionBoundaries = [{
     "closing_claim_D0_G_diagonal_action",
     "closing_claim_epsilon_G_is_involution",
   ],
-  boundaryEvidence: "章内依存順72で順66の H1^{(±)} から上符号を選び、偶セクターの生成子 H1^{(+)} を一対象だけ定める。順73–74の開鎖項 D0 と周期境界項 G は H1^{(+)} に意味的依存しない並行定義であり、読み順だけを提示順制約で固定する。順75はこの三定義を受け取り、Jordan–Wigner 行列をサイトごとの Pauli 行列積へ展開して iH1^{(+)}=D0+εG を示す。順76の対角作用と順77の可換性も相互に意味的依存しない出力で、提示順だけを固定する。順78は順77の可換性を使った (εG)^2=I を示す。直後の順79は順72だけを再利用して V1^{(+)} の半指数行列を定義し、順73–78の出力を使わない。順79では Pauli 行列積、配置基底、クロネッカー積、全スピン反転行列を入力から外すため、順78で節を閉じる。生成時に七項の連続性、項目ごとの全直接依存、意味的依存とは分離した提示順、対象と全外部入力の本文 fingerprint、三つの節末出力、順79の直接依存・本文・順73–78からの非依存、および入力集合の切り替わりを固定検査する。",
+  boundaryEvidence: "(−) セクターを本文から参照用ノートへ退避したとき（第 3 段階）、014 章にあった偶セクター生成子 H1^{(+)} の重複定義ブロックを削除し、定義を 004 章の H1^{(+)}（def_H1_plus）へ一本化した。節頭の定義が節外へ移ったため、残る六項（開鎖項・境界項の定義とスピン作用素表示・対角作用・可換性・二乗）は章内依存順の連続区間として生成時に固定検査するが、節境界は要再レビューである。",
   readabilityStatus: "生成子、半指数行列、転送行列、共役写像、可逆性、平方根性、共役合成一致を束ねていた旧定義ブロックを一ブロック一定義または一主張へ分割した。さらに、局所積、境界項、生成子表示、可換性、二乗、対角作用を束ねていた旧主張を、D0 の定義、G の定義、生成子表示、対角作用、二つずつの可換性、二乗へ分割した。対象七項は独立した H1^{(±)} の定義から二次の Pauli 行列積とクロネッカー積の有限計算を経て三つの節末出力へ進み、現行の説明粒度検査に合格している。外部入力では集合と代数構造の記号、複素数、および混在した転送行列・サイト作用素の記号に説明粒度の未解決が残る。",
-}, {
-  name: "偶セクターの半指数行列と平方根性",
-  chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
-  entryIds: v1PlusHalfExponentAndSquareRootSectionEntryIds,
-  input: [
-    "一般の生成子から上符号を選んだ偶セクター生成子 H1^{(+)}",
-    "境界項の符号を固定した指数行列 V1^{(+)} の定義",
-    "可換な有限複素行列の指数関数の積公式",
-  ],
-  externalInputEntryIds: v1PlusHalfExponentAndSquareRootSection.externalInputEntryIds,
-  output: [
-    "V1^{(+)} の半指数行列として用いる具体的な行列",
-    "その行列の二乗が V1^{(+)} に等しいこと",
-  ],
-  mainTheorem: "偶セクターの半指数行列の平方根性",
-  mainTheoremEntryId: "evensectorT_claim_V1_plus_square_root",
-  boundaryEvidence: "章内依存順79で偶セクター生成子 H1^{(+)} から半指数行列を定義し、順80で可換な行列指数関数の積公式と V1^{(+)} の定義を使って、その二乗が V1^{(+)} に等しいことを示す。二項は一方向の依存鎖をなし、平方根性で閉じる。直後の順81は半指数行列の定義と順69の V2 の指数表示を使って、偶セクター転送行列 V^{(+)} を定義するが、順80の平方根性には依存しない。順81では V2 の指数表示と独立した H2 定義を入力へ追加し、偶セクター生成子、指数関数の積公式、V1^{(±)} の定義を直接入力から外すため、順80の後で節を閉じる。生成時に二項の連続性、全直接依存、対象と全外部入力の本文 fingerprint、順80への一意な閉包、順81の直接依存・本文・順80からの非依存、および入力集合の切り替わりを固定検査する。",
-  readabilityStatus: "定義は一つの有限複素行列だけを定め、平方根性は同じ行列指数関数を二回掛ける計算を一段ずつ示しているため、対象二項は現行の説明粒度検査に合格している。外部入力では複素数、独立した H1^{(±)} の定義、V1^{(±)} の定義、および可換な行列指数関数の積公式に説明粒度の未解決が残る。",
 }, {
   name: "偶セクター転送行列と符号付きトレースの正値公式",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: vPlusDefinitionAndSignedTraceSectionEntryIds,
   input: [
     "V1^{(+)} の半指数行列と V2",
@@ -16312,7 +15754,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "偶セクター転送行列の正定値性・可逆性とトレース正値性",
   chapter: "2次元イジングモデル",
-  status: "構造確定・対象本文粒度合格・外部入力粒度未解決",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: vPlusPositiveDefiniteSectionEntryIds,
   input: [
     "偶セクター転送行列 V^{(+)} とその半指数行列",
@@ -16579,7 +16021,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "セクターごとの上限の定義と全スピン反転行列との可換性",
   chapter: "2次元イジングモデル",
-  status: "構造確定・本文粒度確認済み",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: [sectorRayleighSupEntry.id, epsilonCommutesWithWEntry.id],
   input: [
     "単位球面上の上限 c(M) の定義",
@@ -16610,7 +16052,7 @@ const isingModelSectionBoundaries = [{
 }, {
   name: "セクター射影後の転送行列の表示",
   chapter: "2次元イジングモデル",
-  status: "構造確定・本文粒度確認済み・SageMath行単位検査済み・Lean形式化済み・外部入力粒度未解決",
+  status: "境界候補・(−) セクター退避に伴う本文変更により要再レビュー",
   entryIds: [sectorRepresentationEntry.id],
   input: ["転送行列の平方根とセクターへの制限", "セクター射影子の積と可換性"],
   externalInputEntryIds: [...sectorRepresentationEntry.dependsOnEntryIds].sort(),
@@ -16626,27 +16068,12 @@ const isingModelSectionBoundaries = [{
       "sagemath/check/044_claim_max_eigenvalue/check_B_P_V2_C_equals_C_P_V2_C.sage",
       "sagemath/check/044_claim_max_eigenvalue/check_C_P_V2_C_equals_C_V2_P_C.sage",
       "sagemath/check/044_claim_max_eigenvalue/check_C_V2_P_C_equals_C_V2_C_P.sage",
-      "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_pm_P.sage",
+      "sagemath/check/044_claim_max_eigenvalue/check_C_V2_C_P_equals_V_plus_P.sage",
     ],
     currentStatus: "プログラミングによる有限校正では、BP=CP と後続の八等式を別ファイルで一行ずつ判定し、すべて PASS した。Lean の physicalSymTransferR_map_mul_epsProj_eq_Vsym は、実行列 W の複素化、K1/2 による半指数のセクター置換、Vsym と epsProj の可換移動を同じ順に接続して閉じた。このうち射影子移動に効く構造だけを、任意の半群上の NecSuf.sandwich_mul_proj_eq に分離し、具体定理をその特殊化として導いた。",
   },
   boundaryEvidence: "射影表示は、転送行列の平方根をセクター制限後の平方根へ置き換え、射影子を各因子の間で一段ずつ移して一つの行列等式へ閉じる。直後の上限最大値分解は射影表示を使わず、全体と各セクターのレイリー商の上限および W のセクター不変性へ入力を切り替える。二項は意味的に相互非依存であり、提示順だけを依存辺へ混ぜないため、射影表示を一項節として閉じる。",
   readabilityStatus: "LLMによる検証では BP=CP の導出と、その後の射影子移動が別々に示され、一ブロック一主張の本文粒度を満たす。プログラミングによる有限校正は九つの等式を一ファイル一等式で判定する。Lean の具体版は一般の M>=2 と η^2=1 の下で同じ置換・可換移動を証明し、必要十分版は射影子の冪等性も行列構造も不要であることを示す。",
-}, {
-  name: "全体の上限と二つのセクター上限の最大値分解",
-  chapter: "2次元イジングモデル",
-  status: "構造確定・本文粒度確認済み・外部入力粒度未解決",
-  entryIds: [sectorDecompositionEntry.id],
-  input: ["全体と各セクターのレイリー商の上限", "セクター射影子による直交分解", "W が二つのセクターを保つこと"],
-  externalInputEntryIds: [...sectorDecompositionEntry.dependsOnEntryIds].sort(),
-  output: ["c(M) = max(c_+(M), c_-(M))"],
-  formalizationEvidence: {
-    leanFile: "lean/Ising2D/Part011/Claim010_SectorDecomposition.lean",
-    sageMathFile: "sagemath/check/044_claim_max_eigenvalue/check_03_sector_split.sage",
-    currentStatus: "Lean は対称な対合による二セクター分解として形式化済みである。SageMath は有限個のパラメータについて r_max の数値残差を判定する。本文は異なるセクターの実ベクトルの直交性、ノルムの平方和、零・非零を分けた正規化、上限の二方向の比較を一行一根拠で示す。",
-  },
-  boundaryEvidence: "二つのセクターへの直交分解と各セクターの上限から、全体のレイリー商の上限が二つの上限の最大値に等しいことへ閉じる一項である。直後の臨界条件はフェルミオンの定義、gamma_2 の零点、双曲線関数へ入力を切り替え、本項にも射影表示にも依存しない。この入力集合の切り替わりにより一項節として閉じる。",
-  readabilityStatus: "LLMによる検証で、異なるセクターの任意の実ベクトルの直交性、ノルム平方の分解、Wによる交叉項の消去、零ベクトルと非零ベクトルを分けた正規化、上限の両方向の比較を本文で追跡した。以前の正規化欠落は解消され、対象は現行の説明粒度検査に合格する。",
 }, {
   name: "集合と代数構造の記号、そして複素数の定義",
   chapter: "数学的道具立て",

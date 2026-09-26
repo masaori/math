@@ -4368,45 +4368,6 @@ S_Nf
     },
   },
   {
-    id: "transfer_matrix_004_definition_eigenspace_odd_of_epsilon",
-    kind: "definition",
-    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
-    title: { tex: String.raw`\varepsilon\text{ の固有値 }-1\text{ の固有ベクトル全体}` },
-    labels: ["def_odd_eigenvectors_of_epsilon"],
-    statement: [
-      paragraph([
-        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
-        " とし、",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`\varepsilon\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " を考える。",
-        math(String.raw`\varepsilon`),
-        " を ",
-        math(String.raw`2^{M_{\mathrm{col}}}`),
-        " 成分の複素数ベクトルへ ",
-        ref("mat_mult"),
-        " の通常の行列と数ベクトルの積として作用させ、",
-      ]),
-      displayMath(
-        String.raw`\mathcal{F}^{(-)}
-:=\left\{f\in\mathbb{C}^{2^{M_{\mathrm{col}}}}\;\middle|\;\varepsilon f=-f\right\}`,
-      ),
-      paragraph([
-        "と定める。すなわち ",
-        math(String.raw`\mathcal{F}^{(-)}`),
-        " は、全スピン反転行列を左から掛けると符号が反転する複素数ベクトルの全体である。",
-      ]),
-    ],
-    conversion: {
-      status: "added",
-      notes: [
-        "固有値 -1 の集合定義と二つの部分空間性を束ねていたブロックから、固有値 -1 の集合定義だけを分離した。",
-        "抽象線型写像 end(ε) を経由せず、2^M 次複素行列 ε と数ベクトルの積で定義した。",
-      ],
-    },
-  },
-  {
     id: "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
     kind: "claim",
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
@@ -4551,198 +4512,33 @@ S_Nf
     },
   },
   {
-    id: "transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace",
-    kind: "claim",
-    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 4 },
-    title: { tex: String.raw`\mathcal{F}^{(-)}\text{ の複素部分線型空間性}` },
-    labels: ["odd_eigenspace_is_complex_subspace"],
-    statement: [
-      paragraph([
-        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
-        " とし、",
-        ref("def_odd_eigenvectors_of_epsilon"),
-        " の ",
-        math(String.raw`\mathcal{F}^{(-)}\subseteq\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
-        " を考える。この集合は零ベクトルを含み、複素数ベクトルの和と複素スカラー倍について閉じる。すなわち、",
-      ]),
-      displayMath(String.raw`0\in\mathcal{F}^{(-)}`),
-      paragraph(["であり、任意の ", math(String.raw`f,g\in\mathcal{F}^{(-)}`), " と ", math(String.raw`a\in\mathbb{C}`), " に対して、"]),
-      displayMath(String.raw`f+g\in\mathcal{F}^{(-)},\qquad af\in\mathcal{F}^{(-)}`),
-      paragraph(["が成り立つ。したがって ", math(String.raw`\mathcal{F}^{(-)}`), " は ", math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`), " の複素部分線型空間である。"]),
-    ],
-    proof: [
-      paragraph([
-        ref("mat_mult"),
-        " の行列と数ベクトルの積、および ",
-        ref("complex_numbers_form_a_field"),
-        " の複素数の演算法則を用いる。複素数ベクトルの演算は成分ごとに定め、任意の ",
-        math(String.raw`u,v\in\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
-        "、",
-        math(String.raw`a\in\mathbb{C}`),
-        "、",
-        math(String.raw`r\in\{1,\dots,2^{M_{\mathrm{col}}}\}`),
-        " に対して ",
-        math(String.raw`[u+v]_r:=u_r+v_r`),
-        "、",
-        math(String.raw`[au]_r:=au_r`),
-        " および ",
-        math(String.raw`[-u]_r:=-u_r`),
-        " とする。まず零ベクトルを考える。任意の ",
-        math(String.raw`r\in\{1,\dots,2^{M_{\mathrm{col}}}\}`),
-        " について、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-[\varepsilon 0]_r
-&=\sum_{s=1}^{2^{M_{\mathrm{col}}}}\varepsilon_{rs}0
-&&\left(\because\ \blkref{mat_mult}\right)\\
-&=\sum_{s=1}^{2^{M_{\mathrm{col}}}}0
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の零倍}\right)\\
-&=0
-&&\left(\because\ \text{有限個の零の和}\right)\\
-&=-0
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の零の加法逆元}\right).
-\end{aligned}`),
-      paragraph([
-        "全ての成分が一致するので ",
-        math(String.raw`\varepsilon 0=-0`),
-        " である。よって ",
-        ref("def_odd_eigenvectors_of_epsilon"),
-        " から ",
-        math(String.raw`0\in\mathcal{F}^{(-)}`),
-        " である。",
-      ]),
-      paragraph([
-        "次に ",
-        math(String.raw`f,g\in\mathcal{F}^{(-)}`),
-        " とする。",
-        ref("def_odd_eigenvectors_of_epsilon"),
-        " より ",
-        math(String.raw`\varepsilon f=-f`),
-        " かつ ",
-        math(String.raw`\varepsilon g=-g`),
-        " である。任意の ",
-        math(String.raw`r\in\{1,\dots,2^{M_{\mathrm{col}}}\}`),
-        " について、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-[\varepsilon(f+g)]_r
-&=\sum_{s=1}^{2^{M_{\mathrm{col}}}}\varepsilon_{rs}(f_s+g_s)
-&&\left(\because\ \blkref{mat_mult}\right)\\
-&=\sum_{s=1}^{2^{M_{\mathrm{col}}}}(\varepsilon_{rs}f_s+\varepsilon_{rs}g_s)
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配律}\right)\\
-&=\sum_{s=1}^{2^{M_{\mathrm{col}}}}\varepsilon_{rs}f_s+\sum_{s=1}^{2^{M_{\mathrm{col}}}}\varepsilon_{rs}g_s
-&&\left(\because\ \text{有限和を項ごとに分ける}\right)\\
-&=[\varepsilon f]_r+[\varepsilon g]_r
-&&\left(\because\ \blkref{mat_mult}\right)\\
-&=-f_r+(-g_r)
-&&\left(\because\ \varepsilon f=-f\ \text{かつ}\ \varepsilon g=-g\right)\\
-&=-(f_r+g_r)
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の和の加法逆元}\right)\\
-&=[-(f+g)]_r
-&&\left(\because\ \text{複素数ベクトルの加法逆元の定義}\right).
-\end{aligned}`),
-      paragraph([
-        "全ての成分が一致するので ",
-        math(String.raw`\varepsilon(f+g)=-(f+g)`),
-        " である。よって ",
-        ref("def_odd_eigenvectors_of_epsilon"),
-        " から ",
-        math(String.raw`f+g\in\mathcal{F}^{(-)}`),
-        " である。",
-      ]),
-      paragraph([
-        "最後に ",
-        math(String.raw`a\in\mathbb{C}`),
-        " と ",
-        math(String.raw`f\in\mathcal{F}^{(-)}`),
-        " を取る。",
-        ref("def_odd_eigenvectors_of_epsilon"),
-        " より ",
-        math(String.raw`\varepsilon f=-f`),
-        " である。任意の ",
-        math(String.raw`r\in\{1,\dots,2^{M_{\mathrm{col}}}\}`),
-        " について、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-[\varepsilon(af)]_r
-&=\sum_{s=1}^{2^{M_{\mathrm{col}}}}\varepsilon_{rs}(af_s)
-&&\left(\because\ \blkref{mat_mult}\right)\\
-&=\sum_{s=1}^{2^{M_{\mathrm{col}}}}(\varepsilon_{rs}a)f_s
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\right)\\
-&=\sum_{s=1}^{2^{M_{\mathrm{col}}}}(a\varepsilon_{rs})f_s
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の可換律}\right)\\
-&=\sum_{s=1}^{2^{M_{\mathrm{col}}}}a(\varepsilon_{rs}f_s)
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積の結合律}\right)\\
-&=a\sum_{s=1}^{2^{M_{\mathrm{col}}}}\varepsilon_{rs}f_s
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配律を有限回適用}\right)\\
-&=a[\varepsilon f]_r
-&&\left(\because\ \blkref{mat_mult}\right)\\
-&=a(-f_r)
-&&\left(\because\ \varepsilon f=-f\right)\\
-&=-(af_r)
-&&\left(\because\ \blkref{complex_numbers_form_a_field}\text{ の積と加法逆元の両立}\right)\\
-&=[-(af)]_r
-&&\left(\because\ \text{複素数ベクトルの加法逆元とスカラー倍の定義}\right).
-\end{aligned}`),
-      paragraph([
-        "全ての成分が一致するので ",
-        math(String.raw`\varepsilon(af)=-(af)`),
-        " である。よって ",
-        ref("def_odd_eigenvectors_of_epsilon"),
-        " から ",
-        math(String.raw`af\in\mathcal{F}^{(-)}`),
-        " である。零ベクトル・和・複素スカラー倍についての三つの結果から、主張を得る。",
-      ]),
-    ],
-    conversion: {
-      status: "added",
-      notes: [
-        "二つの部分空間性を束ねていた後続ブロックから、F^{(-)} の複素部分線型空間性を独立させた。",
-        "抽象線型写像 end(ε) を経由せず、通常の行列と数ベクトルの積を成分ごとに展開した。",
-      ],
-    },
-  },
-  {
     id: "transfer_matrix_004_definition_eigenspaces_of_epsilon",
     kind: "claim",
     origin: { path: "_old/typst/parts/004_転送行列/003_definition_epsilonの固有空間.typ", ordinal: 4 },
-    title: { tex: String.raw`\varepsilon\text{ の二つの固有ベクトル集合は複素部分線型空間である}` },
+    title: { tex: String.raw`\varepsilon\text{ の固有値 }+1\text{ の固有ベクトル集合は複素部分線型空間である}` },
     labels: ["def_eigenspaces_of_epsilon"],
     statement: [
       paragraph([
         ref("def_even_eigenvectors_of_epsilon"),
-        " で ",
-        math(String.raw`\mathcal{F}^{(+)}`),
-        " を、",
-        ref("def_odd_eigenvectors_of_epsilon"),
-        " で ",
-        math(String.raw`\mathcal{F}^{(-)}`),
-        " を定めた。",
-      ]),
-      paragraph([
-        ref("even_eigenspace_is_complex_subspace"),
-        " により ",
+        " で定めた ",
         math(String.raw`\mathcal{F}^{(+)}`),
         " は ",
-        math(String.raw`\mathbb{C}`),
-        "-部分線型空間である。残る ",
-        math(String.raw`\mathcal{F}^{(-)}`),
-        " について、",
-      ]),
-      paragraph([
-        ref("odd_eigenspace_is_complex_subspace"),
-        " により ",
-        math(String.raw`\mathcal{F}^{(-)}`),
-        " も ",
         math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " の ",
         math(String.raw`\mathbb{C}`),
-        "-部分線型空間である。",
+        "-部分線型空間である（",
+        math(String.raw`\because`),
+        " ",
+        ref("even_eigenspace_is_complex_subspace"),
+        "）。",
       ]),
     ],
     conversion: {
       status: "converted",
-      notes: ["二つの部分空間性をそれぞれ独立ブロックへ分離し、このブロックは後続参照のための統合結果として保持する。"],
+      notes: [
+        "二つの部分空間性をそれぞれ独立ブロックへ分離し、このブロックは後続参照のための統合結果として保持する。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+      ],
     },
   },
   {
@@ -5032,7 +4828,7 @@ f
     kind: "claim",
     standing: "mainTheorem",
     origin: { path: "_old/typst/parts/004_転送行列/005_claim_V1の固有空間への制限.typ", ordinal: 6 },
-    title: { tex: String.raw`V_1 \text{ の固有空間への制限}` },
+    title: { tex: String.raw`V_1 \text{ の }\mathcal{F}^{(+)}\text{ への制限}` },
     labels: ["V1_restriction_to_eigenspaces"],
     statement: [
       paragraph([
@@ -5046,24 +4842,24 @@ f
         " の ",
         math(String.raw`\mathbf{end}`),
         "、",
-        ref("def_eigenspaces_of_epsilon"),
+        ref("def_even_eigenvectors_of_epsilon"),
         " の ",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
-        " について（複号同順）、",
+        math(String.raw`\mathcal{F}^{(+)}`),
+        " について、",
       ]),
       displayMath(
-        String.raw`\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(\pm)}}
-= \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M_{\mathrm{col}}-1} Z_{M_{\mathrm{col}}} \mp Y_{M_{\mathrm{col}}} Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(\pm)}}`,
+        String.raw`\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(+)}}
+= \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M_{\mathrm{col}}-1} Z_{M_{\mathrm{col}}} - Y_{M_{\mathrm{col}}} Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(+)}}`,
       ),
       paragraph([
         "が成り立つ。両辺は ",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
+        math(String.raw`\mathcal{F}^{(+)}`),
         " から ",
         math(String.raw`\mathcal{F}`),
         " への写像として一致する、という意味である（右辺の ",
         math(String.raw`\exp(\cdots)`),
         " をこの証明内で ",
-        math(String.raw`V_1^{(\pm)}`),
+        math(String.raw`V_1^{(+)}`),
         " と略記する）。",
       ]),
     ],
@@ -5074,18 +4870,18 @@ f
         " より ",
         math(String.raw`V_1 = \exp(G)`),
         "、また上の略記より ",
-        math(String.raw`V_1^{(\pm)} = \exp(G^{(\pm)})`),
+        math(String.raw`V_1^{(+)} = \exp(G^{(+)})`),
         "。ここで",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 W &:= Y_{M_{\mathrm{col}}} Z_1 \ \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C}) \\
 G &:= i K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_m Z_{m+1} - \varepsilon W\right) \ \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C}) \\
-G^{(\pm)} &:= i K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_m Z_{m+1} \mp W\right) \ \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})
+G^{(+)} &:= i K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_m Z_{m+1} - W\right) \ \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})
 \end{aligned}`,
       ),
       paragraph([
-        "である（複号同順）。以下 ",
+        "である。以下 ",
         math(String.raw`A \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " に対し ",
         math(String.raw`\hat{A} := \mathbf{end}(A) \in \mathrm{End}(\mathcal{F})`),
@@ -5192,7 +4988,7 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         "、",
         math(String.raw`\varepsilon W`),
         "、および ",
-        math(String.raw`G, G^{(\pm)}`),
+        math(String.raw`G, G^{(+)}`),
         " と可換である。実際、",
         math(String.raw`a,b\in\{1,\dots,M_{\mathrm{col}}\}`),
         " について Step 1 を 2 回使うと",
@@ -5232,7 +5028,7 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
       ),
       paragraph([
         "であるから、",
-        math(String.raw`G, G^{(\pm)}`),
+        math(String.raw`G, G^{(+)}`),
         " はいずれも ",
         math(String.raw`\varepsilon`),
         " と可換な元の ",
@@ -5240,16 +5036,16 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
         "-線型結合であり、積の双線型性より ",
         math(String.raw`\varepsilon G = G\varepsilon`),
         "、",
-        math(String.raw`\varepsilon G^{(\pm)} = G^{(\pm)}\varepsilon`),
+        math(String.raw`\varepsilon G^{(+)} = G^{(+)}\varepsilon`),
         "。",
       ]),
       paragraph([
         "Step 3: ",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
+        math(String.raw`\mathcal{F}^{(+)}`),
         " は ",
-        math(String.raw`\hat{W}, \hat{G}, \hat{G}^{(\pm)}`),
+        math(String.raw`\hat{W}, \hat{G}, \hat{G}^{(+)}`),
         " で不変である。",
-        math(String.raw`A \in \{W, G, G^{(\pm)}\}`),
+        math(String.raw`A \in \{W, G, G^{(+)}\}`),
         " は Step 2 より ",
         math(String.raw`\varepsilon A = A\varepsilon`),
         " を満たすから、",
@@ -5269,9 +5065,9 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
       ),
       paragraph([
         "よって ",
-        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        math(String.raw`f\in\mathcal{F}^{(+)}`),
         "（すなわち ",
-        math(String.raw`\hat{\varepsilon}f = \pm f`),
+        math(String.raw`\hat{\varepsilon}f = f`),
         "）に対し",
       ]),
       displayMath(
@@ -5279,38 +5075,36 @@ Y_m = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbr
 \hat{\varepsilon}\left(\hat{A}f\right)
 &= \hat{A}\left(\hat{\varepsilon}f\right)
 &&(\because\ \hat{\varepsilon}\circ\hat{A} = \hat{A}\circ\hat{\varepsilon})\\
-&= \hat{A}(\pm f)
-&&(\because\ f\in\mathcal{F}^{(\pm)}\ \text{すなわち}\ \hat{\varepsilon}f = \pm f)\\
-&= \pm\,\hat{A}f
-&&(\because\ \hat{A}\ \text{の線型性})
+&= \hat{A}f
+&&(\because\ f\in\mathcal{F}^{(+)}\ \text{すなわち}\ \hat{\varepsilon}f = f)
 \end{aligned}`,
       ),
       paragraph([
         "であり ",
-        math(String.raw`\hat{A}f \in \mathcal{F}^{(\pm)}`),
+        math(String.raw`\hat{A}f \in \mathcal{F}^{(+)}`),
         "。",
       ]),
       paragraph([
         "Step 4: ",
-        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        math(String.raw`f\in\mathcal{F}^{(+)}`),
         " に対し ",
-        math(String.raw`\hat{G}f = \hat{G}^{(\pm)}f`),
+        math(String.raw`\hat{G}f = \hat{G}^{(+)}f`),
         "。まず ",
         math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " の中で",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-G-G^{(\pm)}
+G-G^{(+)}
 &=iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}-\varepsilon W\right)
-  -iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}\mp W\right)
-&&\left(\because\ G,G^{(\pm)}\ \text{の定義}\right)\\
+  -iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}- W\right)
+&&\left(\because\ G,G^{(+)}\ \text{の定義}\right)\\
 &=iK_1\left(
   \left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}-\varepsilon W\right)
-  -\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}\mp W\right)
+  -\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}- W\right)
 \right)
 &&\left(\because\ \text{スカラー倍の分配則}\right)\\
-&=iK_1\left(-\varepsilon W\pm W\right)
+&=iK_1\left(-\varepsilon W+ W\right)
 &&\left(\because\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb C)\ \text{の加法の四則}\right)
 \end{aligned}`,
       ),
@@ -5320,42 +5114,40 @@ G-G^{(\pm)}
         " の線型性と (2) より ",
         math(String.raw`\widehat{\varepsilon W} = \hat{\varepsilon}\circ\hat{W}`),
         " だから、Step 3 の ",
-        math(String.raw`\hat{W}f\in\mathcal{F}^{(\pm)}`),
+        math(String.raw`\hat{W}f\in\mathcal{F}^{(+)}`),
         " を使って",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left(\hat{G} - \hat{G}^{(\pm)}\right)f
-&= \left(\widehat{G-G^{(\pm)}}\right)f
+\left(\hat{G} - \hat{G}^{(+)}\right)f
+&= \left(\widehat{G-G^{(+)}}\right)f
 &&(\because\ \mathbf{end}\ \text{の線型性（差の像は像の差）})\\
-&= \left(\widehat{iK_1\left(-\varepsilon W\pm W\right)}\right)f
-&&(\because\ \text{上で示した}\ G-G^{(\pm)}\ \text{の表示})\\
-&= i K_1\left(-\widehat{\varepsilon W} \pm \hat{W}\right)f
+&= \left(\widehat{iK_1\left(-\varepsilon W+ W\right)}\right)f
+&&(\because\ \text{上で示した}\ G-G^{(+)}\ \text{の表示})\\
+&= i K_1\left(-\widehat{\varepsilon W} + \hat{W}\right)f
 &&(\because\ \mathbf{end}\ \text{の線型性})\\
-&= i K_1\left(-\hat{\varepsilon}\!\left(\hat{W}f\right) \pm \hat{W}f\right)
+&= i K_1\left(-\hat{\varepsilon}\!\left(\hat{W}f\right) + \hat{W}f\right)
 &&(\because\ \widehat{\varepsilon W} = \hat{\varepsilon}\circ\hat{W}\ \text{（}\mathbf{end}\ \text{が積を保つこと）と写像の値の書き下し})\\
-&= i K_1\left(-(\pm\hat{W}f) \pm \hat{W}f\right)
-&&(\because\ \hat{W}f\in\mathcal{F}^{(\pm)}\ \text{より}\ \hat{\varepsilon}(\hat{W}f) = \pm\hat{W}f\text{（Step 3）})\\
-&= i K_1\left(\mp\hat{W}f \pm \hat{W}f\right)
-&&(\because\ -(\pm x) = \mp x)\\
+&= i K_1\left(-\hat{W}f + \hat{W}f\right)
+&&(\because\ \hat{W}f\in\mathcal{F}^{(+)}\ \text{より}\ \hat{\varepsilon}(\hat{W}f) = \hat{W}f\text{（Step 3）})\\
 &= i K_1\cdot 0
-&&(\because\ \mp x \pm x = 0 \text{（複号同順）})\\
+&&(\because\ -x + x = 0)\\
 &= 0
 &&(\because\ \text{零ベクトルのスカラー倍は零ベクトル})
 \end{aligned}`,
       ),
       paragraph([
-        "が成り立つ（複号同順）。よって ",
-        math(String.raw`\hat{G}f = \hat{G}^{(\pm)}f`),
+        "が成り立つ。よって ",
+        math(String.raw`\hat{G}f = \hat{G}^{(+)}f`),
         "。",
       ]),
       paragraph([
         "Step 5: ",
         math(String.raw`n\in\mathbb{Z}_{\geq 0}`),
         " と ",
-        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        math(String.raw`f\in\mathcal{F}^{(+)}`),
         " について ",
-        math(String.raw`\hat{G}^{\,n}f = \left(\hat{G}^{(\pm)}\right)^{n}f`),
+        math(String.raw`\hat{G}^{\,n}f = \left(\hat{G}^{(+)}\right)^{n}f`),
         "（",
         math(String.raw`\hat{G}^{\,0} := \mathrm{id}_{\mathcal{F}}`),
         "）。",
@@ -5373,7 +5165,7 @@ G-G^{(\pm)}
 &&(\because\ \text{恒等写像の定義})\\
 &= \mathrm{id}_{\mathcal F}(f)
 &&(\because\ \text{恒等写像の定義})\\
-&= \left(\hat{G}^{(\pm)}\right)^{0}f
+&= \left(\hat{G}^{(+)}\right)^{0}f
 &&(\because\ \text{写像の零乗の定義})
 \end{aligned}`,
       ),
@@ -5381,11 +5173,11 @@ G-G^{(\pm)}
         "である。",
         math(String.raw`n`),
         " で成立するとし ",
-        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        math(String.raw`f\in\mathcal{F}^{(+)}`),
         " を取ると、Step 4 より ",
-        math(String.raw`g := \hat{G}f = \hat{G}^{(\pm)}f`),
+        math(String.raw`g := \hat{G}f = \hat{G}^{(+)}f`),
         " であり、Step 3 より ",
-        math(String.raw`g\in\mathcal{F}^{(\pm)}`),
+        math(String.raw`g\in\mathcal{F}^{(+)}`),
         " だから帰納法の仮定を ",
         math(String.raw`g`),
         " に適用でき、",
@@ -5397,11 +5189,11 @@ G-G^{(\pm)}
 &&(\because\ \text{写像の冪の定義})\\
 &= \hat{G}^{\,n}g
 &&(\because\ g := \hat{G}f)\\
-&= \left(\hat{G}^{(\pm)}\right)^{n}g
-&&(\because\ \text{帰納法の仮定を}\ g\in\mathcal{F}^{(\pm)}\ \text{に適用})\\
-&= \left(\hat{G}^{(\pm)}\right)^{n}\!\left(\hat{G}^{(\pm)}f\right)
-&&(\because\ \text{Step 4 の}\ g = \hat{G}^{(\pm)}f)\\
-&= \left(\hat{G}^{(\pm)}\right)^{n+1}f
+&= \left(\hat{G}^{(+)}\right)^{n}g
+&&(\because\ \text{帰納法の仮定を}\ g\in\mathcal{F}^{(+)}\ \text{に適用})\\
+&= \left(\hat{G}^{(+)}\right)^{n}\!\left(\hat{G}^{(+)}f\right)
+&&(\because\ \text{Step 4 の}\ g = \hat{G}^{(+)}f)\\
+&= \left(\hat{G}^{(+)}\right)^{n+1}f
 &&(\because\ \text{写像の冪の定義})
 \end{aligned}`,
       ),
@@ -5413,7 +5205,7 @@ G-G^{(\pm)}
         " を ",
         math(String.raw`A=G`),
         " と ",
-        math(String.raw`A=G^{(\pm)}`),
+        math(String.raw`A=G^{(+)}`),
         " に適用する。任意の ",
         math(String.raw`f\in\mathcal{F}`),
         " について、",
@@ -5430,10 +5222,10 @@ G-G^{(\pm)}
       paragraph(["および"]),
       displayMath(
         String.raw`\begin{aligned}
-\left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)(f)
-&= \left(\mathbf{end}\!\left(\exp\!\left(G^{(\pm)}\right)\right)\right)(f)
-&&\left(\because\ V_1^{(\pm)}=\exp(G^{(\pm)})\right)\\
-&= \lim_{N\to\infty}\sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(\pm)}\right)^{n}f
+\left(\mathbf{end}\!\left(V_1^{(+)}\right)\right)(f)
+&= \left(\mathbf{end}\!\left(\exp\!\left(G^{(+)}\right)\right)\right)(f)
+&&\left(\because\ V_1^{(+)}=\exp(G^{(+)})\right)\\
+&= \lim_{N\to\infty}\sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(+)}\right)^{n}f
 &&\left(\because\ \text{行列表示と線型写像表示の間の指数関数保存}\right)
 \end{aligned}`,
       ),
@@ -5445,7 +5237,7 @@ G-G^{(\pm)}
       ]),
       paragraph([
         "いま ",
-        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        math(String.raw`f\in\mathcal{F}^{(+)}`),
         " を任意に取る。Step 5 より、各 ",
         math(String.raw`N\in\mathbb{Z}_{\geq 0}`),
         " について部分和が",
@@ -5453,17 +5245,17 @@ G-G^{(\pm)}
       displayMath(
         String.raw`\begin{aligned}
 S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
-&= \sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(\pm)}\right)^{n}f
+&= \sum_{n=0}^{N}\frac{1}{n!}\left(\hat{G}^{(+)}\right)^{n}f
 &&(\because\ \text{Step 5 を各}\ n\in\{0,\dots,N\}\ \text{に適用})\\
-&=: S_N^{(\pm)}
-&&(\because\ S_N^{(\pm)}\ \text{の定義})
+&=: S_N^{(+)}
+&&(\because\ S_N^{(+)}\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
         "と一致する。上の各点収束より ",
         math(String.raw`S_N \to \left(\mathbf{end}(V_1)\right)(f)`),
         " かつ ",
-        math(String.raw`S_N^{(\pm)} = S_N \to \left(\mathbf{end}(V_1^{(\pm)})\right)(f)`),
+        math(String.raw`S_N^{(+)} = S_N \to \left(\mathbf{end}(V_1^{(+)})\right)(f)`),
         " であり、同一の点列が 2 つの極限 ",
         math(String.raw`\alpha,\beta`),
         " を持てば、ノルムの三角不等式と極限の定義から次の鎖を得る。",
@@ -5496,23 +5288,23 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
       displayMath(
         String.raw`\begin{aligned}
 \left(\mathbf{end}(V_1)\right)f
-&= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)f
-&&(\because\ \text{同一の点列}\ S_N = S_N^{(\pm)}\ \text{の極限の一意性})
+&= \left(\mathbf{end}\!\left(V_1^{(+)}\right)\right)f
+&&(\because\ \text{同一の点列}\ S_N = S_N^{(+)}\ \text{の極限の一意性})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`f\in\mathcal{F}^{(\pm)}`),
+        math(String.raw`f\in\mathcal{F}^{(+)}`),
         " は任意だったから、",
-        math(String.raw`\mathcal{F}^{(\pm)}`),
+        math(String.raw`\mathcal{F}^{(+)}`),
         " 上の写像として",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(\pm)}}
-&= \left(\mathbf{end}\!\left(V_1^{(\pm)}\right)\right)\big|_{\mathcal{F}^{(\pm)}}
-&&(\because\ \text{上の等式が任意の}\ f\in\mathcal{F}^{(\pm)}\ \text{で成り立つこと})\\
-&= \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M_{\mathrm{col}}-1} Z_{M_{\mathrm{col}}} \mp Y_{M_{\mathrm{col}}} Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(\pm)}}
-&&(\because\ V_1^{(\pm)}\ \text{の定義})
+\left(\mathbf{end}(V_1)\right)\big|_{\mathcal{F}^{(+)}}
+&= \left(\mathbf{end}\!\left(V_1^{(+)}\right)\right)\big|_{\mathcal{F}^{(+)}}
+&&(\because\ \text{上の等式が任意の}\ f\in\mathcal{F}^{(+)}\ \text{で成り立つこと})\\
+&= \left(\mathbf{end}\!\left(\exp\!\left(i K_1 (Y_1 Z_2 + \cdots + Y_{M_{\mathrm{col}}-1} Z_{M_{\mathrm{col}}} - Y_{M_{\mathrm{col}}} Z_1)\right)\right)\right)\big|_{\mathcal{F}^{(+)}}
+&&(\because\ V_1^{(+)}\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph(["が示された。"]),
@@ -5528,6 +5320,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
           "M の範囲が書かれていなかったため明示した（主張の内容自体は変えていない）。",
         "式変形の書き方の統一（2026-08-14）: 同一の点列の極限の一意性を散文中で圧縮していた箇所を、" +
           "三角不等式・二つの収束・ノルム零からの一致を一行ずつ根拠付きで示す鎖へ開いた。内容は変えていない。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -5535,19 +5328,19 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     id: "transfer_matrix_007_definition_V1_pm",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/006_definition_V1_plus_minusの定義.typ", ordinal: 7 },
-    title: { tex: String.raw`V_1^{(\pm)} \text{ の定義}` },
-    labels: ["def_V1_pm"],
+    title: { tex: String.raw`V_1^{(+)} \text{ の定義}` },
+    labels: ["def_V1_plus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
-        " とし（複号同順）、",
+        " とし、",
         ref("def_transfer_matrix_symbols"),
         " の ",
         math(String.raw`K_1,Y_m,Z_m`),
         " を用いて",
       ]),
       displayMath(
-        String.raw`V_1^{(\pm)} := \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M_{\mathrm{col}}-1} Z_{M_{\mathrm{col}}} \mp Y_{M_{\mathrm{col}}} Z_1)\right)
+        String.raw`V_1^{(+)} := \exp\!\left(i K_1 (Y_1 Z_2 + Y_2 Z_3 + \cdots + Y_{M_{\mathrm{col}}-1} Z_{M_{\mathrm{col}}} - Y_{M_{\mathrm{col}}} Z_1)\right)
 \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
@@ -5568,6 +5361,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "参照のためラベル <def_V1_pm> を付け、M の範囲と exp の意味（<def_end_iso> の同一視による）を" +
           "明示した（定義の内容自体は変えていない）。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -5700,8 +5494,8 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     id: "transfer_matrix_011a_definition_H1_pm",
     kind: "definition",
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
-    title: { tex: String.raw`\text{一般生成子 } H_1^{(\pm)}` },
-    labels: ["def_H1_pm"],
+    title: { tex: String.raw`\text{一般生成子 } H_1^{(+)}` },
+    labels: ["def_H1_plus"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -5713,12 +5507,12 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
         ref("def_jordan_wigner_Z_matrices"),
         " で定めた具体的な複素行列 ",
         math(String.raw`Y_m,Z_m\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " を用いる。二つの符号の各々について、",
-        math(String.raw`H_1^{(\pm)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を用いる。",
+        math(String.raw`H_1^{(+)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " を",
       ]),
       displayMath(
-        String.raw`H_1^{(\pm)} := \sum_{m=1}^{M_{\mathrm{col}}-1} Y_m Z_{m+1} \mp Y_{M_{\mathrm{col}}} Z_1`,
+        String.raw`H_1^{(+)} := \sum_{m=1}^{M_{\mathrm{col}}-1} Y_m Z_{m+1} - Y_{M_{\mathrm{col}}} Z_1`,
       ),
       paragraph(["と定める。行列の積は ", ref("mat_mult"), " の成分表示による。"]),
     ],
@@ -5726,6 +5520,7 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
       status: "added",
       notes: [
         "旧複合ブロック <def_H1_H2> から、一般生成子 H_1^{(±)} の定義だけを独立させた。端点を含めて曖昧さのない有限和で、元の式と同じ内容を記した。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },
@@ -5765,8 +5560,8 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
     kind: "claim",
     standing: "mainTheorem",
     origin: { path: "_old/typst/parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ", ordinal: 11 },
-    title: { tex: String.raw`V_1^{(\pm)} \text{ の一般生成子による指数表示}` },
-    labels: ["V1_pm_exponential_representation"],
+    title: { tex: String.raw`V_1^{(+)} \text{ の一般生成子による指数表示}` },
+    labels: ["V1_plus_exponential_representation"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
@@ -5777,23 +5572,23 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
         "、および虚数単位 ",
         math(String.raw`i\in\mathbb{C}`),
         " を用いる。",
-        ref("def_H1_pm"),
+        ref("def_H1_plus"),
         " の ",
-        math(String.raw`H_1^{(\pm)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        math(String.raw`H_1^{(+)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " と ",
-        ref("def_V1_pm"),
+        ref("def_V1_plus"),
         " の ",
-        math(String.raw`V_1^{(\pm)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        math(String.raw`V_1^{(+)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " について、",
       ]),
       displayMath(
-        String.raw`V_1^{(\pm)}
-= \exp\!\left(i K_1 H_1^{(\pm)}\right)`,
+        String.raw`V_1^{(+)}
+= \exp\!\left(i K_1 H_1^{(+)}\right)`,
       ),
     ],
     proof: [
       paragraph([
-        ref("def_V1_pm"),
+        ref("def_V1_plus"),
         " の表示中の ",
         math(String.raw`Y_1Z_2+Y_2Z_3+\cdots+Y_{M_{\mathrm{col}}-1}Z_{M_{\mathrm{col}}}`),
         " は、添字を省略しない有限和 ",
@@ -5805,17 +5600,18 @@ S_N := \sum_{n=0}^{N}\frac{1}{n!}\hat{G}^{\,n}f
         " だけである。したがって、",
       ]),
       displayMath(String.raw`\begin{aligned}
-V_1^{(\pm)}
-&=\exp\!\left(iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}\mp Y_{M_{\mathrm{col}}}Z_1\right)\right)
-&&(\because\ \text{第一転送行列の定義と上の有限和記法。}\blkref{def_V1_pm})\\
-&=\exp\!\left(iK_1H_1^{(\pm)}\right)
-&&(\because\ \text{一般生成子の定義。}\blkref{def_H1_pm})
+V_1^{(+)}
+&=\exp\!\left(iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}- Y_{M_{\mathrm{col}}}Z_1\right)\right)
+&&(\because\ \text{第一転送行列の定義と上の有限和記法。}\blkref{def_V1_plus})\\
+&=\exp\!\left(iK_1H_1^{(+)}\right)
+&&(\because\ \text{一般生成子の定義。}\blkref{def_H1_plus})
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "旧複合ブロック <def_H1_H2> から、V1^{(±)} の指数表示だけを独立主張として分離した。",
+        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
       ],
     },
   },

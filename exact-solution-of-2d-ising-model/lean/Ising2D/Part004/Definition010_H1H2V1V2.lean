@@ -1,5 +1,5 @@
 /-
-# `H_1^{(±)}`, `H_2` の定義、`V_1^{(±)}` の定義、`V_2` の指数表示の右辺
+# `H_1^{(+)}`, `H_2` の定義、`V_1^{(+)}` の定義、`V_2` の指数表示の右辺
 
 対応する人手証明（正本は `structured-latex/content/*.ts`）:
 
@@ -9,18 +9,18 @@
   * `transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive`
     （ラベル `indexed_hyperbolic_abbreviations_positive`）
     — `c_i`, `s_i`, `c_i^*`, `s_i^*` の正値性
-  * `transfer_matrix_007_definition_V1_pm`
-    — `V_1^{(±)} := exp(√-1 K_1 (Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1))`
+  * `transfer_matrix_007_definition_V1_pm`（ラベル `def_V1_plus`）
+    — `V_1^{(+)} := exp(√-1 K_1 (Y_1 Z_2 + ⋯ + Y_{M-1} Z_M - Y_M Z_1))`（`Ising2D.V1plus`）
   * `transfer_matrix_003a_claim_V2_in_Z_Y`（ラベル `V2_in_Z_Y`）
     — `V_2 = (2s_2)^{M/2} exp(√-1 K_2^* (Z_1Y_1 + ⋯ + Z_MY_M))` の右辺（`V2FromJordanWigner`）と
       Step 2 の直後の等式の有限和版（`I_smul_H2_eq_sum_sigmaX`）
-  * `transfer_matrix_011a_definition_H1_pm`（ラベル `def_H1_pm`）
-    — `H_1^{(±)} := Y_1 Z_2 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1`
+  * `transfer_matrix_011a_definition_H1_pm`（ラベル `def_H1_plus`）
+    — `H_1^{(+)} := Y_1 Z_2 + ⋯ + Y_{M-1} Z_M - Y_M Z_1`（`Ising2D.H1plus`）
   * `transfer_matrix_011b_definition_H2`（ラベル `def_H2`）
     — `H_2 := Z_1 Y_1 + ⋯ + Z_M Y_M`
   * `transfer_matrix_011c_claim_V1_pm_exponential_representation`
-    （ラベル `V1_pm_exponential_representation`）
-    — `V_1^{(±)} = exp(√-1 K_1 H_1^{(±)})`
+    （ラベル `V1_plus_exponential_representation`）
+    — `V_1^{(+)} = exp(√-1 K_1 H_1^{(+)})`（`Ising2D.V1plus_exponential_representation`）
   * `transfer_matrix_011d_claim_V2_exponential_representation`
     （ラベル `V2_exponential_representation`）
     — `V_2 = (2 s_2)^{M/2} exp(√-1 K_2^* H_2)` の右辺（`V2H2Form`）
@@ -28,11 +28,22 @@
     `V2_exponential_representation` は `Part004/ClaimV2InZY.lean` にある。
 （旧 Typst の対応ファイルは `_old/typst/parts/004_転送行列/006, 010`。）
 
+## 符号引数つきの一般形（補助）
+
+人手の本文は `(+)` セクターの `H_1^{(+)}`, `V_1^{(+)}` だけを定義する（`(−)` セクターは参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避済み）。Lean では、境界項の係数を
+引数 `η` に持たせた一般形 `H1 M η` / `V1pm M K1 η` / `V1pmHalf M K1 η` / `V1pmUnits` /
+`V1pmHalfUnits` / `V1pmFromDefinition` を**補助**として残す。`η = -1` が `(+)`、`η = +1` が `(−)` である。
+一般形を使うのは、形式化の記録として残した整数運動量の経路（章 008・009）と `(−)` セクターの議論
+（章 010 の旧セクター分解・章 019）、および両符号に共通な計算（`H1_transpose` など）である。
+人手のラベルに対応する `(+)` の定義は `H1plus` / `V1plus` / `V1plusUnits` で、
+一般形との一致 `H1plus_eq_H1` / `V1plus_eq_V1pm` は定義からただちに従う（`rfl`）。
+
 ## 形式化の方針
 
 ### 添字の巡回（`m + 1` の `M` での巻き戻り）
 
-原文の site 添字は `1, …, M` で、`H_1^{(±)}` の第 `m` 項は `Y_m Z_{m+1}`、
+原文の site 添字は `1, …, M` で、`H_1^{(+)}` の第 `m` 項は `Y_m Z_{m+1}`、
 最終項だけ `m = M` で `Z_{M+1} = Z_1` へ巻き戻る（`def_transfer_matrix_symbols` の
 `Z_{M+1} := Z_1` がこの巻き戻しの規約）。
 
@@ -47,11 +58,11 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
 * 原文の「最終項だけ符号が付く」は `lastSign η m := if (m : ℕ) + 1 = M then η else 1`
   で表す（原文の `m = M` が Lean の `(m : ℕ) + 1 = M`）。
 
-### `(±)` の符号
+### 境界項の符号
 
-原文の `∓`（`H_1^{(±)}` の最終項の係数）は引数 `η : ℂ` として持たせる。
-`η = -1` が `(+)`、`η = +1` が `(-)`。これは既存の `hatZ M η μ`（`Definition009_HatZHatY.lean`）
-が原文の `∓1` を `η` で持たせている流儀と同じである。
+`H_1^{(+)}` の最終項 `-Y_M Z_1` の係数 `-1` は `lastSign (-1) m` で書く。一般形の `H1 M η` では
+この係数を引数 `η : ℂ` として持たせる（既存の `hatZ M η μ`（`Definition009_HatZHatY.lean`）
+が整数運動量の経路で `∓1` を `η` で持たせている流儀と同じ）。
 
 ### `(2 s_2)^{M/2}`
 
@@ -89,7 +100,7 @@ theorem nextSite_val_of_last {m : Fin M} (h : (m : ℕ) + 1 = M) :
     ((nextSite m : Fin M) : ℕ) = 0 := by
   simp [nextSite, ← h]
 
-/-- 原文 `H_1^{(±)}` の最終項の係数 `∓1`。`η` が原文の `∓1` にあたる。
+/-- `H_1^{(+)}` の最終項の係数 `-1` を一般の `η` にしたもの（`(+)` は `η = -1`）。
 Lean の添字は 0 始まりなので、原文の `m = M` は `(m : ℕ) + 1 = M`。 -/
 def lastSign (η : ℂ) (m : Fin M) : ℂ := if (m : ℕ) + 1 = M then η else 1
 
@@ -104,12 +115,19 @@ theorem lastSign_of_not_last {η : ℂ} {m : Fin M} (h : (m : ℕ) + 1 ≠ M) : 
 theorem lastSign_one (m : Fin M) : lastSign 1 m = 1 := by
   rw [lastSign]; split <;> rfl
 
-/-! ## `H_1^{(±)}` と `H_2` -/
+/-! ## `H_1^{(+)}` と `H_2` -/
 
-/-- **人手本文 `def_H1_pm` の `H_1^{(±)} = Y_1 Z_2 + Y_2 Z_3 + ⋯ + Y_{M-1} Z_M ∓ Y_M Z_1`**
-（`η` が原文の `∓1`）。 -/
+/-- **人手本文 `def_H1_plus` の `H_1^{(+)} = Y_1 Z_2 + Y_2 Z_3 + ⋯ + Y_{M-1} Z_M - Y_M Z_1`**。
+Lean の添字は 0 始まりなので、最終項 `m = M` は `(m : ℕ) + 1 = M`、その係数 `-1` が `lastSign (-1) m`。 -/
+noncomputable def H1plus (M : ℕ) : TensorPow M :=
+  ∑ m : Fin M, lastSign (-1) m • (Y m * Z (nextSite m))
+
+/-- 補助: 境界項の係数を一般の `η` にした `∑_m lastSign η m • Y_m Z_{m+1}`（`H1plus` は `η = -1`）。 -/
 noncomputable def H1 (M : ℕ) (η : ℂ) : TensorPow M :=
   ∑ m : Fin M, lastSign η m • (Y m * Z (nextSite m))
+
+/-- `H_1^{(+)}` は一般形 `H1` の `η = -1`。 -/
+theorem H1plus_eq_H1 : H1plus M = H1 M (-1) := rfl
 
 /-- **人手本文 `def_H2` の `H_2 = Z_1 Y_1 + Z_2 Y_2 + ⋯ + Z_M Y_M`**。 -/
 noncomputable def H2 (M : ℕ) : TensorPow M := ∑ m : Fin M, Z m * Y m
@@ -225,13 +243,15 @@ theorem indexedHyperbolicAbbreviations_pos
     lt_trans hS2star hS2starLtC2star
   exact ⟨hC1, hS1, hC1star, hS1star, hC2, hS2, hC2star, hS2star⟩
 
-/-! ## `V_1^{(±)}`, `(V_1^{(±)})^{1/2}` と、`V_2` の二つの指数表示の右辺
+/-! ## `V_1^{(+)}` と、`V_2` の二つの指数表示の右辺
 
 ここで定義する名前の整理:
 
-* `V1pm M K1 η` は人手 `def_V1_pm` の `V_1^{(±)}`（`η` が人手の `∓1`）。
-  人手 `def_transfer_matrix` の `V_1` とは別の行列であり、`V_1` は
-  `Ising2D.V1`（`Part001/DefinitionTransferMatrix.lean`）である。
+* `V1plus M K1` は人手 `def_V1_plus` の `V_1^{(+)}`。人手 `def_transfer_matrix` の `V_1` とは
+  別の行列であり、`V_1` は `Ising2D.V1`（`Part001/DefinitionTransferMatrix.lean`）である。
+  平方根 `(V_1^{(+)})^{1/2}`（人手 `def_V1_plus_square_root`、章 010）は
+  `Ising2D.V1plusHalf`（`Part010/DefinitionV1PlusSquareRoot.lean`）。
+* `V1pm M K1 η` / `V1pmHalf M K1 η` / `V1pmFromDefinition M K1 η` は符号引数つきの補助の一般形。
 * `V2FromJordanWigner M s2 K2star`, `V2H2Form M s2 K2star` は、人手 `V2_in_Z_Y`・
   `V2_exponential_representation` の**右辺の式**に名前を付けたもの。`s2`, `K2star` を
   独立な引数として持つ一般化であり、人手の `V_2`（`Ising2D.V2`）と一致するのは
@@ -239,24 +259,37 @@ theorem indexedHyperbolicAbbreviations_pos
   `V2_in_Z_Y` / `V2_exponential_representation`）。
 -/
 
-/-- **人手本文 `def_V1_pm` の有限和を省略しない定義**。
-`H1` という名前を使わず、境界項を含む有限和をそのまま指数へ入れる。 -/
+/-- **人手本文 `def_V1_plus` の `V_1^{(+)} := exp(√-1 K_1 (Y_1 Z_2 + ⋯ + Y_{M-1} Z_M - Y_M Z_1))`**。
+`H_1^{(+)}` という名前を使わず、境界項を含む有限和をそのまま指数へ入れる。 -/
+noncomputable def V1plus (M : ℕ) (K1 : ℂ) : TensorPow M :=
+  matExp ((Complex.I * K1) •
+    (∑ m : Fin M, lastSign (-1) m • (Y m * Z (nextSite m))))
+
+/-- **人手本文 `V1_plus_exponential_representation` の具体版** `V_1^{(+)} = exp(√-1 K_1 H_1^{(+)})`。
+`def_V1_plus` の有限和を `def_H1_plus` の `H_1^{(+)}` へ置き換える一段に対応する。 -/
+theorem V1plus_exponential_representation (M : ℕ) (K1 : ℂ) :
+    V1plus M K1 = matExp ((Complex.I * K1) • H1plus M) := by
+  rfl
+
+/-- 補助: 符号引数つきの一般形 `exp(√-1 K_1 ∑_m lastSign η m • Y_m Z_{m+1})`（有限和を省略しない形）。 -/
 noncomputable def V1pmFromDefinition (M : ℕ) (K1 η : ℂ) : TensorPow M :=
   matExp ((Complex.I * K1) •
     (∑ m : Fin M, lastSign η m • (Y m * Z (nextSite m))))
 
-/-- **人手の `V_1^{(±)} = exp(√-1 K_1 H_1^{(±)})`**（`η` が人手の `∓1`）。 -/
+/-- 補助: 符号引数つきの一般形 `exp(√-1 K_1 H1 M η)`（`V1plus` は `η = -1`）。 -/
 noncomputable def V1pm (M : ℕ) (K1 η : ℂ) : TensorPow M :=
   matExp ((Complex.I * K1) • H1 M η)
 
-/-- **人手本文 `V1_pm_exponential_representation` の具体版**。
-`def_V1_pm` の有限和を `def_H1_pm` の `H_1^{(±)}` へ置き換える一段に対応する。 -/
+/-- 補助: 一般形で有限和を `H1 M η` へ置き換える一段。 -/
 theorem V1pm_exponential_representation (M : ℕ) (K1 η : ℂ) :
     V1pmFromDefinition M K1 η = V1pm M K1 η := by
   rfl
 
-/-- **人手 `def_V1_pm_square_root` の `(V_1^{(±)})^{1/2} = exp((1/2)√-1 K_1 H_1^{(±)})`**。
-人手も最初から `exp(X/2)` を定義に採っている（一般の行列の平方根は一意でないため）。 -/
+/-- `V_1^{(+)}` は一般形 `V1pm` の `η = -1`。 -/
+theorem V1plus_eq_V1pm (K1 : ℂ) : V1plus M K1 = V1pm M K1 (-1) := rfl
+
+/-- 補助: 一般形の半指数 `exp((1/2)√-1 K_1 H1 M η)`。`(+)` の平方根は
+`Ising2D.V1plusHalf`（章 010 `def_V1_plus_square_root`）で、`η = -1` の値と一致する。 -/
 noncomputable def V1pmHalf (M : ℕ) (K1 η : ℂ) : TensorPow M :=
   matExp (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)
 
@@ -280,7 +313,8 @@ theorem V2FromJordanWigner_eq_V2H2Form (M : ℕ) (s2 : ℝ) (K2star : ℂ) :
     V2FromJordanWigner M s2 K2star = V2H2Form M s2 K2star := by
   rfl
 
-/-- `V_1^{(±)} = ((V_1^{(±)})^{1/2})^2`（「平方根」の名に値することの確認）。 -/
+/-- 補助: 一般形で `(V1pmHalf)^2 = V1pm`（`(+)` の人手の主張は章 010 の
+`Ising2D.V1_plus_square_root_property`）。 -/
 theorem V1pmHalf_sq (K1 η : ℂ) :
     V1pmHalf M K1 η * V1pmHalf M K1 η = V1pm M K1 η := by
   have h : Commute (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)
@@ -329,11 +363,21 @@ noncomputable def smulUnits (c : ℂ) (hc : c ≠ 0) (u : (TensorPow M)ˣ) : (Te
 theorem smulUnits_val (c : ℂ) (hc : c ≠ 0) (u : (TensorPow M)ˣ) :
     ((smulUnits c hc u : (TensorPow M)ˣ) : TensorPow M) = c • (u : TensorPow M) := rfl
 
-/-- `V_1^{(±)}` を単元として。 -/
+/-- `V_1^{(+)}` を単元として。 -/
+noncomputable def V1plusUnits (M : ℕ) (K1 : ℂ) : (TensorPow M)ˣ :=
+  matExpUnits ((Complex.I * K1) • H1plus M)
+
+@[simp]
+theorem V1plusUnits_val (K1 : ℂ) :
+    ((V1plusUnits M K1 : (TensorPow M)ˣ) : TensorPow M) = V1plus M K1 := rfl
+
+theorem isUnit_V1plus (K1 : ℂ) : IsUnit (V1plus M K1) := ⟨V1plusUnits M K1, rfl⟩
+
+/-- 補助: 一般形の `V1pm` を単元として。 -/
 noncomputable def V1pmUnits (M : ℕ) (K1 η : ℂ) : (TensorPow M)ˣ :=
   matExpUnits ((Complex.I * K1) • H1 M η)
 
-/-- `(V_1^{(±)})^{1/2}` を単元として。 -/
+/-- 補助: 一般形の `V1pmHalf` を単元として。 -/
 noncomputable def V1pmHalfUnits (M : ℕ) (K1 η : ℂ) : (TensorPow M)ˣ :=
   matExpUnits (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)
 
