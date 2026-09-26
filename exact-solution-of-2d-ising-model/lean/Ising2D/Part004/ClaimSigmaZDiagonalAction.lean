@@ -1,7 +1,7 @@
 /-
 # `σ^z_m` の基底 `f_{ι(μ)}` への作用（対角性）
 
-対応する人手証明（正本は `structured-latex/content/010_transfer_matrix_bridge.ts`）:
+対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
 
 * `bridge_002_claim_sigma_z_diagonal_action`（ラベル **`sigma_z_diagonal_action`**）
 
@@ -20,7 +20,7 @@ Lean では添字型 `Conf M` がスピン配置そのものなので、
 複素数であることも効いていない。
 -/
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
-import Ising2D.Part010.Definition001_ConfigBasisIso
+import Ising2D.Part004.DefinitionConfigBasisIso
 import Ising2D.NecSuf.SiteDiagonal
 
 namespace Ising2D

@@ -54,8 +54,8 @@ theorem TVPlus_checkZ_checkY (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2st
     (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
     ActsBy (TVPlus M hs2 K1 K2star).toLinearMap (checkZ M μ) (checkY M μ)
       (AMat K (thetaTilde M μ)) := by
-  have h := NecSuf.actsBy_TV_sandwich (actsBy_TConj_V1halfPlus hM K1 μ)
-    (actsBy_TConj_V2_check hM hs2 K2star μ)
+  have h := NecSuf.actsBy_TV_sandwich (actsBy_TConj_V1plusHalf hM K1 μ)
+    (actsBy_TConj_V2H2Form_check hM hs2 K2star μ)
   rwa [factorization_of_A_thetaTilde (M := M) K K1 K2star μ hc1 hs1 hc2star hs2star hdual] at h
 
 /-- 上を成分の形（原文の 2 本の等式）で書いた版。 -/
@@ -90,10 +90,10 @@ theorem TV_hatZ_hatY_via_sandwich (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1
     (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
     (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
     (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
-    ActsBy (TV (V1halfUnits M K1 1) (V2Units M hs2 K2star)).toLinearMap
+    ActsBy (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap
       (hatZMinus M μ) (hatY M μ) (AMat K (thetaMu M μ)) := by
-  have h := NecSuf.actsBy_TV_sandwich (actsBy_TConj_V1half hM K1 μ)
-    (actsBy_TConj_V2 hM hs2 K2star μ)
+  have h := NecSuf.actsBy_TV_sandwich (actsBy_TConj_V1pmHalf hM K1 μ)
+    (actsBy_TConj_V2H2Form hM hs2 K2star μ)
   rwa [B1_mul_B2_mul_B1_eq_AMat K K1 K2star (thetaMu M μ) hc1 hs1 hc2star hs2star hdual] at h
 
 end Ising2D

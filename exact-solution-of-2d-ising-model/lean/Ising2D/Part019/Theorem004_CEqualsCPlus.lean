@@ -30,7 +30,7 @@
 
 人手証明はこの可換性を `sector_decomposition_of_rayleigh_sup` (1)（章 011）から受け取る。
 章 011 の Lean 形式化も可換性を仮定として持っている（`lean/docs/ch011-formalization.md`)。
-複素側では `Ising2D.epsilon_commute_V1half` / `epsilon_commute_V2`（章 010）で証明済みだが、
+複素側では `Ising2D.epsilon_commute_V1pmHalf` / `epsilon_commute_V2H2Form`（章 010）で証明済みだが、
 **複素の `V_1, V_2` と実行列 `W` を結ぶ橋渡し（章 009・010 → 章 011）が未形式化**なので、
 本ファイルでも実行列としての可換性 `epsilonR M * W = W * epsilonR M` は仮定として受け取る。
 -/

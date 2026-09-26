@@ -269,7 +269,7 @@ variable {M : ℕ}
 
 /-- **原文 `V_is_positive_definite` の `V := (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}`**。 -/
 noncomputable def Vmat (M : ℕ) (K1 η : ℂ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
-  V1half M K1 η * V2 M s2 K2star * V1half M K1 η
+  V1pmHalf M K1 η * V2H2Form M s2 K2star * V1pmHalf M K1 η
 
 /-- **原文 `V_is_positive_definite` Step 3**: `V` は正定値。 -/
 theorem Vmat_posDef {K1 η K2star : ℂ} {s2 : ℝ}
@@ -282,24 +282,24 @@ theorem Vmat_posDef {K1 η K2star : ℂ} {s2 : ℝ}
       rw [Matrix.conjTranspose_smul, (S1_isHermitian hK1 hη).eq]
       norm_num
     exact this
-  have hB : (V1half M K1 η).IsHermitian := by
-    have hEq : V1half M K1 η = NormedSpace.exp (((1 / 2 : ℂ)) • ((Complex.I * K1) • H1 M η)) := by
-      rw [V1half, matExp, smul_smul, mul_assoc]
+  have hB : (V1pmHalf M K1 η).IsHermitian := by
+    have hEq : V1pmHalf M K1 η = NormedSpace.exp (((1 / 2 : ℂ)) • ((Complex.I * K1) • H1 M η)) := by
+      rw [V1pmHalf, matExp, smul_smul, mul_assoc]
     rw [hEq]
     exact hS1.exp
   have hA : (NormedSpace.exp ((Complex.I * K2star) • H2 M)).PosDef :=
     posDef_exp_of_isHermitian (S2_isHermitian hK2)
-  have hinj : Function.Injective (V1half M K1 η).mulVec := by
-    have hEq : V1half M K1 η = NormedSpace.exp (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η) := rfl
+  have hinj : Function.Injective (V1pmHalf M K1 η).mulVec := by
+    have hEq : V1pmHalf M K1 η = NormedSpace.exp (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η) := rfl
     rw [hEq]
     exact Matrix.mulVec_injective_of_isUnit (Matrix.isUnit_exp _)
-  have hBAB : ((V1half M K1 η)ᴴ * NormedSpace.exp ((Complex.I * K2star) • H2 M)
-      * V1half M K1 η).PosDef := hA.conjTranspose_mul_mul_same hinj
+  have hBAB : ((V1pmHalf M K1 η)ᴴ * NormedSpace.exp ((Complex.I * K2star) • H2 M)
+      * V1pmHalf M K1 η).PosDef := hA.conjTranspose_mul_mul_same hinj
   rw [hB.eq] at hBAB
   have hV : Vmat M K1 η s2 K2star
       = (((((2 * s2) ^ ((M : ℝ) / 2) : ℝ)) : ℂ))
-        • (V1half M K1 η * NormedSpace.exp ((Complex.I * K2star) • H2 M) * V1half M K1 η) := by
-    rw [Vmat, V2, matExp]
+        • (V1pmHalf M K1 η * NormedSpace.exp ((Complex.I * K2star) • H2 M) * V1pmHalf M K1 η) := by
+    rw [Vmat, V2H2Form, matExp]
     rw [Matrix.mul_smul, Matrix.smul_mul]
   rw [hV]
   refine posDef_smul_of_pos hBAB ?_

@@ -34,32 +34,32 @@ export default defineBlocks([
         " の固有値をすべて求める。結論は",
       ]),
       displayMath(
-        String.raw`c = (2\sinh 2K_2)^{M/2}, \qquad
-V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
+        String.raw`c = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}, \qquad
+V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
       ),
       paragraph([
         "であり、",
         math(String.raw`V^{(+)}`),
         " の固有値は ",
-        math(String.raw`\epsilon = (\epsilon_\mu)_{\mu=1}^{M}`),
+        math(String.raw`\epsilon = (\epsilon_\mu)_{\mu=1}^{M_{\mathrm{col}}}`),
         "（各 ",
         math(String.raw`\epsilon_\mu \in \{0,1\}`),
         "）でパラメトライズされた",
       ]),
       displayMath(
-        String.raw`\check\Lambda_\epsilon = (2\sinh 2K_2)^{M/2}
-\exp\!\left(\sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
+        String.raw`\check\Lambda_\epsilon = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
 \left(\epsilon_\mu - \tfrac{1}{2}\right)\right)`,
       ),
       paragraph([
         "であり、その最大値は ",
         ref("onsager_free_energy_expression"),
         " の ",
-        math(String.raw`\Lambda^{(\delta)}_M`),
+        math(String.raw`\Lambda^{(\delta)}_{M_{\mathrm{col}}}`),
         " で ",
         math(String.raw`\delta = \tfrac12`),
         " と取ったもの ",
-        math(String.raw`\Lambda^{(1/2)}_M`),
+        math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " に一致し、しかも**単純固有値**である。",
       ]),
       paragraph([
@@ -99,7 +99,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       list([
         [
           "(a) 数演算子の添字の集合が ",
-          math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
+          math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
           "（",
           ref("def_check_index_set"),
           "）の全部になる。",
@@ -117,7 +117,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         "**対になる添字は ",
         math(String.raw`\mu`),
         " と ",
-        math(String.raw`M+1-\mu`),
+        math(String.raw`M_{\mathrm{col}}+1-\mu`),
         " である**（",
         ref("conjugate_index_of_check_Z_Y"),
         "、",
@@ -125,7 +125,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         "）。",
         ref("def_check_index_set"),
         " (2) により ",
-        math(String.raw`M+1-\mu`),
+        math(String.raw`M_{\mathrm{col}}+1-\mu`),
         " は ",
         math(String.raw`\check{\mathcal{M}}`),
         " の中にとどまるので、**この章の主張はすべて ",
@@ -162,7 +162,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         "（",
@@ -170,25 +170,25 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         "）とする。",
         ref("def_check_index_set"),
         " (2) より ",
-        math(String.raw`M+1-\mu \in \check{\mathcal{M}}`),
+        math(String.raw`M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
         " なので、",
         ref("def_check_fermi"),
         " により ",
         math(String.raw`\check\psi_\mu^\dagger`),
         " と ",
-        math(String.raw`\check\psi_{M+1-\mu}`),
+        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu}`),
         " は**ともに定義されている**。そこで",
       ]),
       displayMath(
-        String.raw`\check{n}_\mu := \check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}
-\ \in\ \mathrm{Mat}(2^M,\mathbb{C})
+        String.raw`\check{n}_\mu := \check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}
+\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})
 \qquad (\mu \in \check{\mathcal{M}})`,
       ),
       paragraph([
         "と定める。以下、",
-        math(String.raw`2^M`),
+        math(String.raw`2^{M_{\mathrm{col}}}`),
         " 次の単位行列 ",
-        math(String.raw`I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        math(String.raw`I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
         " を単に ",
         math(String.raw`I`),
         " と書く。次が成り立つ。",
@@ -196,17 +196,17 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       list([
         [
           "(1) 共役添字の対応 ",
-          math(String.raw`\mu \mapsto M+1-\mu`),
+          math(String.raw`\mu \mapsto M_{\mathrm{col}}+1-\mu`),
           " は ",
           math(String.raw`\check{\mathcal{M}}`),
           " 上の対合である：",
-          math(String.raw`M+1-(M+1-\mu) = \mu`),
+          math(String.raw`M_{\mathrm{col}}+1-(M_{\mathrm{col}}+1-\mu) = \mu`),
           "。したがって ",
           math(String.raw`\check{n}_\mu`),
           " は ",
           math(String.raw`\mu \in \check{\mathcal{M}}`),
           " の ",
-          math(String.raw`M`),
+          math(String.raw`M_{\mathrm{col}}`),
           " 個で尽き、",
           math(String.raw`\check{\mathcal{M}}`),
           " の外の添字は要らない。",
@@ -241,11 +241,11 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
     proof: [
       paragraph([
         "(1) ",
-        math(String.raw`M+1-(M+1-\mu) = \mu`),
+        math(String.raw`M_{\mathrm{col}}+1-(M_{\mathrm{col}}+1-\mu) = \mu`),
         " は展開するだけである。",
         ref("def_check_index_set"),
         " (2) より ",
-        math(String.raw`\mu \mapsto M+1-\mu`),
+        math(String.raw`\mu \mapsto M_{\mathrm{col}}+1-\mu`),
         " は ",
         math(String.raw`\check{\mathcal{M}}`),
         " から ",
@@ -263,7 +263,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         "(2) ",
         ref("def_check_Vprime"),
         " の ",
-        math(String.raw`\check{X} = \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu} - \tfrac12 I\right)`),
+        math(String.raw`\check{X} = \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu} - \tfrac12 I\right)`),
         " の各項の第 1 因子が定義により ",
         math(String.raw`\check{n}_\mu`),
         " である。",
@@ -295,10 +295,10 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       list([
         [
           math(String.raw`\text{(1)}\quad \left(\check\psi_\mu^\dagger\right)^2 = 0,
-\qquad \left(\check\psi_{M+1-\mu}\right)^2 = 0`),
+\qquad \left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2 = 0`),
         ],
         [
-          math(String.raw`\text{(2)}\quad \check\psi_{M+1-\mu}\,\check\psi_\mu^\dagger = I - \check{n}_\mu`),
+          math(String.raw`\text{(2)}\quad \check\psi_{M_{\mathrm{col}}+1-\mu}\,\check\psi_\mu^\dagger = I - \check{n}_\mu`),
         ],
         [math(String.raw`\text{(3)}\quad \check{n}_\mu^2 = \check{n}_\mu`)],
       ]),
@@ -341,24 +341,24 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       paragraph([
         "第 3 式 ",
         math(String.raw`[\check\psi_\mu, \check\psi_\nu]_+ = 0`),
-        " で両方の添字を ", math(String.raw`M+1-\mu`), " と取る。上と同じ三段を省略せず書くと",
+        " で両方の添字を ", math(String.raw`M_{\mathrm{col}}+1-\mu`), " と取る。上と同じ三段を省略せず書くと",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 0
-&= \left[\check\psi_{M+1-\mu},\check\psi_{M+1-\mu}\right]_+
-   \quad (\because \text{$M+1-\mu\in\check{\mathcal M}$ は添字集合の対称性。}\blkref{def_check_index_set}\text{。$\check\psi$ の反交換関係の第 3 式。}\blkref{anticommutator_of_check_psi}) \\
-&= \check\psi_{M+1-\mu}\check\psi_{M+1-\mu}
-  +\check\psi_{M+1-\mu}\check\psi_{M+1-\mu}
+&= \left[\check\psi_{M_{\mathrm{col}}+1-\mu},\check\psi_{M_{\mathrm{col}}+1-\mu}\right]_+
+   \quad (\because \text{$M_{\mathrm{col}}+1-\mu\in\check{\mathcal M}$ は添字集合の対称性。}\blkref{def_check_index_set}\text{。$\check\psi$ の反交換関係の第 3 式。}\blkref{anticommutator_of_check_psi}) \\
+&= \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}
+  +\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{反交換子の定義}) \\
-&= 2\left(\check\psi_{M+1-\mu}\right)^2
+&= 2\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2
    \quad (\because \text{同じ項の和})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
-\left(\check\psi_{M+1-\mu}\right)^2
-&= \frac12\,2\left(\check\psi_{M+1-\mu}\right)^2
+\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2
+&= \frac12\,2\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2
    \quad (\because \mathbb C\text{ の四則}) \\
 &= \frac12\,0
    \quad (\because \text{直前の鎖}) \\
@@ -368,23 +368,23 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       ),
       paragraph([
         "(2) 反交換関係の第 2 式 ",
-        math(String.raw`[\check\psi_\mu^\dagger, \check\psi_\nu]_+ = \delta_{\nu,\,M+1-\mu}\,I`),
+        math(String.raw`[\check\psi_\mu^\dagger, \check\psi_\nu]_+ = \delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I`),
         " において ",
-        math(String.raw`\nu = M+1-\mu`),
+        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
         " と取る。このとき ",
-        math(String.raw`\delta_{M+1-\mu,\,M+1-\mu} = 1`),
+        math(String.raw`\delta_{M_{\mathrm{col}}+1-\mu,\,M_{\mathrm{col}}+1-\mu} = 1`),
         " なので（",
         math(String.raw`\check{\mathcal{M}}`),
         " へ絞ったので合同式の計算が要らない）、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\check\psi_{M+1-\mu}\check\psi_\mu^\dagger
-&=\left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
- +\check\psi_{M+1-\mu}\check\psi_\mu^\dagger\right)
- -\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
+\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger
+&=\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
+ +\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger\right)
+ -\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \mathbb C\text{ の四則}) \\
-&= I-\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
+&= I-\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{$\check\psi$ の反交換関係の第 2 式。}\blkref{anticommutator_of_check_psi}) \\
 &= I-\check n_\mu
    \quad (\because \text{数演算子の定義。}\blkref{def_check_number_operator})
@@ -394,21 +394,21 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\mu^2
-&= \left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)
-   \left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)
+&= \left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
    \quad (\because \text{数演算子の定義。}\blkref{def_check_number_operator}) \\
-&= \check\psi_\mu^\dagger\left(\check\psi_{M+1-\mu}\check\psi_\mu^\dagger\right)\check\psi_{M+1-\mu}
+&= \check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{行列の積の結合法則}) \\
-&= \check\psi_\mu^\dagger\left(I - \check{n}_\mu\right)\check\psi_{M+1-\mu}
+&= \check\psi_\mu^\dagger\left(I - \check{n}_\mu\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{(2)}) \\
-&= \check\psi_\mu^\dagger\check\psi_{M+1-\mu}
-   - \check\psi_\mu^\dagger\,\check{n}_\mu\,\check\psi_{M+1-\mu}
+&= \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
+   - \check\psi_\mu^\dagger\,\check{n}_\mu\,\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{行列の積の分配法則}) \\
 &= \check{n}_\mu
-   - \check\psi_\mu^\dagger\left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)\check\psi_{M+1-\mu}
-   \quad (\because \check{n}_\mu = \check\psi_\mu^\dagger\check\psi_{M+1-\mu}\text{。}\blkref{def_check_number_operator}) \\
+   - \check\psi_\mu^\dagger\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
+   \quad (\because \check{n}_\mu = \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\text{。}\blkref{def_check_number_operator}) \\
 &= \check{n}_\mu
-   - \left(\check\psi_\mu^\dagger\right)^2\left(\check\psi_{M+1-\mu}\right)^2
+   - \left(\check\psi_\mu^\dagger\right)^2\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2
    \quad (\because \text{結合法則}) \\
 &= \check{n}_\mu - 0\cdot 0
    \quad (\because \text{(1)})
@@ -443,7 +443,7 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       list([
         [
           math(String.raw`\text{(1)}\quad \check\psi_\mu^\dagger\,\check{n}_\nu = \check{n}_\nu\,\check\psi_\mu^\dagger,
-\qquad \check\psi_{M+1-\mu}\,\check{n}_\nu = \check{n}_\nu\,\check\psi_{M+1-\mu}`),
+\qquad \check\psi_{M_{\mathrm{col}}+1-\mu}\,\check{n}_\nu = \check{n}_\nu\,\check\psi_{M_{\mathrm{col}}+1-\mu}`),
         ],
         [math(String.raw`\text{(2)}\quad \check{n}_\mu \check{n}_\nu = \check{n}_\nu \check{n}_\mu`)],
       ]),
@@ -457,24 +457,24 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         " である。",
         ref("def_check_index_set"),
         " (2) より ",
-        math(String.raw`M+1-\mu, M+1-\nu \in \check{\mathcal{M}}`),
+        math(String.raw`M_{\mathrm{col}}+1-\mu, M_{\mathrm{col}}+1-\nu \in \check{\mathcal{M}}`),
         " なので、",
         ref("anticommutator_of_check_psi"),
         " を ",
         math(String.raw`(\mu,\nu)`),
         "、",
-        math(String.raw`(\mu,M+1-\nu)`),
+        math(String.raw`(\mu,M_{\mathrm{col}}+1-\nu)`),
         "、",
-        math(String.raw`(\nu,M+1-\mu)`),
+        math(String.raw`(\nu,M_{\mathrm{col}}+1-\mu)`),
         "、",
-        math(String.raw`(M+1-\mu,M+1-\nu)`),
+        math(String.raw`(M_{\mathrm{col}}+1-\mu,M_{\mathrm{col}}+1-\nu)`),
         " の 4 通りに適用できる。まず対の条件を見る：",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\delta_{M+1-\nu,\,M+1-\mu}
+\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}
 &= \delta_{\mu,\,\nu}
-   \quad (\because M+1-\nu = M+1-\mu \iff \mu = \nu) \\
+   \quad (\because M_{\mathrm{col}}+1-\nu = M_{\mathrm{col}}+1-\mu \iff \mu = \nu) \\
 &= 0
    \quad (\because \mu \neq \nu)
 \end{aligned}`,
@@ -490,33 +490,33 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
         String.raw`\begin{aligned}
 {\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+} &= 0
    \quad (\because \text{$\check\psi$ の反交換関係の第 1 式。}\blkref{anticommutator_of_check_psi}), \\
-{\left[\check\psi_\mu^\dagger, \check\psi_{M+1-\nu}\right]_+}
-  &= \delta_{M+1-\nu,\,M+1-\mu}\,I
+{\left[\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\nu}\right]_+}
+  &= \delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\,I
    \quad (\because \text{$\check\psi$ の反交換関係の第 2 式。}\blkref{anticommutator_of_check_psi}) \\
   &= 0
-   \quad (\because \text{直前の }\delta\text{ の計算 }\delta_{M+1-\nu,\,M+1-\mu}=0), \\
-{\left[\check\psi_{M+1-\mu}, \check\psi_\nu^\dagger\right]_+}
-  &= \delta_{M+1-\mu,\,M+1-\nu}\,I
-   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式を添字 } (\nu, M+1-\mu) \text{ へ適用し、}
+   \quad (\because \text{直前の }\delta\text{ の計算 }\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}=0), \\
+{\left[\check\psi_{M_{\mathrm{col}}+1-\mu}, \check\psi_\nu^\dagger\right]_+}
+  &= \delta_{M_{\mathrm{col}}+1-\mu,\,M_{\mathrm{col}}+1-\nu}\,I
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式を添字 } (\nu, M_{\mathrm{col}}+1-\mu) \text{ へ適用し、}
      \text{反交換子が引数の順序に依らないこと } [X,W]_+ = XW + WX = [W,X]_+\text{。}\blkref{anticommutator_of_check_psi}) \\
   &= 0
-   \quad (\because \text{直前の }\delta\text{ の計算と }\delta_{M+1-\mu,\,M+1-\nu}=\delta_{M+1-\nu,\,M+1-\mu}\text{（対の条件の対称性）}), \\
-{\left[\check\psi_{M+1-\mu}, \check\psi_{M+1-\nu}\right]_+} &= 0
+   \quad (\because \text{直前の }\delta\text{ の計算と }\delta_{M_{\mathrm{col}}+1-\mu,\,M_{\mathrm{col}}+1-\nu}=\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\text{（対の条件の対称性）}), \\
+{\left[\check\psi_{M_{\mathrm{col}}+1-\mu}, \check\psi_{M_{\mathrm{col}}+1-\nu}\right]_+} &= 0
    \quad (\because \text{$\check\psi$ の反交換関係の第 3 式。}\blkref{anticommutator_of_check_psi})
 \end{aligned}`,
       ),
       paragraph([
         "すなわち、",
-        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M+1-\mu}\}`),
+        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\mu}\}`),
         " と ",
-        math(String.raw`B \in \{\check\psi_\nu^\dagger, \check\psi_{M+1-\nu}\}`),
+        math(String.raw`B \in \{\check\psi_\nu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\nu}\}`),
         " のどの組み合わせでも ",
         math(String.raw`AB = -BA`),
         " が成り立つ。",
       ]),
       paragraph([
         "Step 2（(1) の証明）。",
-        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M+1-\mu}\}`),
+        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\mu}\}`),
         " を取ると、数演算子の定義（",
         ref("def_check_number_operator"),
         "）を開き、Step 1 を 2 回使って",
@@ -524,15 +524,15 @@ V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`,
       displayMath(
         String.raw`\begin{aligned}
 A\,\check{n}_\nu
-&= A\,\check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}
+&= A\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}
    \quad (\because \text{数演算子の定義}) \\
-&= \left(-\check\psi_\nu^\dagger A\right)\check\psi_{M+1-\nu}
+&= \left(-\check\psi_\nu^\dagger A\right)\check\psi_{M_{\mathrm{col}}+1-\nu}
    \quad (\because \text{Step 1 の } A\check\psi_\nu^\dagger = -\check\psi_\nu^\dagger A) \\
-&= -\check\psi_\nu^\dagger\left(A\,\check\psi_{M+1-\nu}\right)
+&= -\check\psi_\nu^\dagger\left(A\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
    \quad (\because \text{結合法則}) \\
-&= -\check\psi_\nu^\dagger\left(-\check\psi_{M+1-\nu}A\right)
-   \quad (\because \text{Step 1 の } A\check\psi_{M+1-\nu} = -\check\psi_{M+1-\nu}A) \\
-&= \check\psi_\nu^\dagger\,\check\psi_{M+1-\nu}\,A
+&= -\check\psi_\nu^\dagger\left(-\check\psi_{M_{\mathrm{col}}+1-\nu}A\right)
+   \quad (\because \text{Step 1 の } A\check\psi_{M_{\mathrm{col}}+1-\nu} = -\check\psi_{M_{\mathrm{col}}+1-\nu}A) \\
+&= \check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}\,A
    \quad (\because (-1)^2 = 1) \\
 &= \check{n}_\nu\,A
    \quad (\because \text{数演算子の定義})
@@ -544,7 +544,7 @@ A\,\check{n}_\nu
         " となって消える。",
         math(String.raw`A = \check\psi_\mu^\dagger`),
         " と ",
-        math(String.raw`A = \check\psi_{M+1-\mu}`),
+        math(String.raw`A = \check\psi_{M_{\mathrm{col}}+1-\mu}`),
         " の両方でこれが成り立つ。",
       ]),
       paragraph([
@@ -555,17 +555,17 @@ A\,\check{n}_\nu
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\mu \check{n}_\nu
-&= \left(\check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}\right)\check{n}_\nu
+&= \left(\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\check{n}_\nu
    \quad (\because \text{数演算子の定義}) \\
-&= \check\psi_\mu^\dagger\left(\check\psi_{M+1-\mu}\,\check{n}_\nu\right)
+&= \check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\,\check{n}_\nu\right)
    \quad (\because \text{結合法則}) \\
-&= \check\psi_\mu^\dagger\left(\check{n}_\nu\,\check\psi_{M+1-\mu}\right)
-   \quad (\because \text{(1) を } A = \check\psi_{M+1-\mu} \text{ に適用}) \\
-&= \left(\check\psi_\mu^\dagger\,\check{n}_\nu\right)\check\psi_{M+1-\mu}
+&= \check\psi_\mu^\dagger\left(\check{n}_\nu\,\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad (\because \text{(1) を } A = \check\psi_{M_{\mathrm{col}}+1-\mu} \text{ に適用}) \\
+&= \left(\check\psi_\mu^\dagger\,\check{n}_\nu\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{結合法則}) \\
-&= \left(\check{n}_\nu\,\check\psi_\mu^\dagger\right)\check\psi_{M+1-\mu}
+&= \left(\check{n}_\nu\,\check\psi_\mu^\dagger\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{(1) を } A = \check\psi_\mu^\dagger \text{ に適用}) \\
-&= \check{n}_\nu\left(\check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}\right)
+&= \check{n}_\nu\left(\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
    \quad (\because \text{結合法則}) \\
 &= \check{n}_\nu \check{n}_\mu
    \quad (\because \text{数演算子の定義})
@@ -587,7 +587,7 @@ A\,\check{n}_\nu
     kind: "claim",
     origin: { path: SRC, ordinal: 6 },
     title: {
-      tex: String.raw`\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\right) = 2^{M-k}
+      tex: String.raw`\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\right) = 2^{M_{\mathrm{col}}-k}
 \quad \left(R_\mu^{(1)} = \check{n}_\mu,\ R_\mu^{(0)} = I - \check{n}_\mu\right)`,
     },
     labels: ["trace_of_check_number_operator_product"],
@@ -600,7 +600,7 @@ A\,\check{n}_\nu
       ]),
       displayMath(
         String.raw`R_\mu^{(1)} := \check{n}_\mu, \qquad R_\mu^{(0)} := I - \check{n}_\mu
-\ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
+\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
         "と書く（",
@@ -615,7 +615,7 @@ A\,\check{n}_\nu
       ]),
       displayMath(
         String.raw`\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}R_{\mu_2}^{(e_2)}\cdots R_{\mu_k}^{(e_k)}\right)
-= 2^{M-k}`,
+= 2^{M_{\mathrm{col}}-k}`,
       ),
       paragraph([
         "（",
@@ -623,17 +623,17 @@ A\,\check{n}_\nu
         " のときは空の積を ",
         math(String.raw`I`),
         " と読み、",
-        math(String.raw`\mathrm{tr}(I) = 2^M`),
+        math(String.raw`\mathrm{tr}(I) = 2^{M_{\mathrm{col}}}`),
         " である。）とくに ",
         math(String.raw`e_1 = \cdots = e_k = 1`),
         " と取れば ",
-        math(String.raw`\mathrm{tr}\!\left(\check{n}_{\mu_1}\cdots\check{n}_{\mu_k}\right) = 2^{M-k}`),
+        math(String.raw`\mathrm{tr}\!\left(\check{n}_{\mu_1}\cdots\check{n}_{\mu_k}\right) = 2^{M_{\mathrm{col}}-k}`),
         " であり、",
-        math(String.raw`\mathrm{tr}(\check{n}_\mu) = 2^{M-1}`),
+        math(String.raw`\mathrm{tr}(\check{n}_\mu) = 2^{M_{\mathrm{col}}-1}`),
         "、",
-        math(String.raw`k = M`),
+        math(String.raw`k = M_{\mathrm{col}}`),
         " のとき ",
-        math(String.raw`\mathrm{tr}(\check{n}_1\cdots\check{n}_M) = 1`),
+        math(String.raw`\mathrm{tr}(\check{n}_1\cdots\check{n}_{M_{\mathrm{col}}}) = 1`),
         "。",
       ]),
       paragraph([
@@ -648,21 +648,21 @@ A\,\check{n}_\nu
         " が、",
         math(String.raw`\prod_{\mu \notin T}\left(I - \check{n}_\mu\right)`),
         " を部分集合の和へ展開して二項定理で足し上げる、という手順を経ずに直接得られる（",
-        math(String.raw`k = M`),
+        math(String.raw`k = M_{\mathrm{col}}`),
         " の場合）。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`\check{n}_\mu \in \mathrm{Mat}(2^M,\mathbb{C})`),
+        math(String.raw`\check{n}_\mu \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " であり ",
         math(String.raw`I`),
         " は ",
-        math(String.raw`2^M`),
+        math(String.raw`2^{M_{\mathrm{col}}}`),
         " 次の単位行列なので、",
         ref("trace_basic_properties"),
         " (3) より ",
-        math(String.raw`\mathrm{tr}(I) = 2^M`),
+        math(String.raw`\mathrm{tr}(I) = 2^{M_{\mathrm{col}}}`),
         " である（トレースは ",
         ref("def_trace"),
         "）。",
@@ -677,9 +677,9 @@ A\,\check{n}_\nu
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}(I)
-&= 2^M
+&= 2^{M_{\mathrm{col}}}
    \quad (\because \text{トレースの基本性質 (3)。}\blkref{trace_basic_properties}) \\
-&= 2^{M-0}
+&= 2^{M_{\mathrm{col}}-0}
    \quad (\because \mathbb C\text{ の四則})
 \end{aligned}`,
       ),
@@ -710,7 +710,7 @@ A\,\check{n}_\nu
         " (1) より ",
         math(String.raw`\check\psi_{\mu_1}^\dagger`),
         " と ",
-        math(String.raw`\check\psi_{M+1-\mu_1}`),
+        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu_1}`),
         " はどの ",
         math(String.raw`\check{n}_{\mu_j}`),
         " とも可換であり、",
@@ -733,19 +733,19 @@ A\,\check{n}_\nu
         "まず ",
         math(String.raw`2\,\mathrm{tr}\!\left(\check{n}_{\mu_1}P\right) = \mathrm{tr}(P)`),
         " を示す。途中で使う ", ref("check_number_operator_idempotent"),
-        " の第 2 式は ", math(String.raw`\check\psi_{M+1-\mu_1}\check\psi_{\mu_1}^{\dagger}=I-\check n_{\mu_1}`),
+        " の第 2 式は ", math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu_1}\check\psi_{\mu_1}^{\dagger}=I-\check n_{\mu_1}`),
         " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
-&= \mathrm{tr}\!\left(\check\psi_{\mu_1}^\dagger\,\check\psi_{M+1-\mu_1}\,P\right)
+&= \mathrm{tr}\!\left(\check\psi_{\mu_1}^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu_1}\,P\right)
    \quad (\because \text{数演算子の定義。}\blkref{def_check_number_operator}) \\
-&= \mathrm{tr}\!\left(\check\psi_{M+1-\mu_1}\,P\,\check\psi_{\mu_1}^\dagger\right)
+&= \mathrm{tr}\!\left(\check\psi_{M_{\mathrm{col}}+1-\mu_1}\,P\,\check\psi_{\mu_1}^\dagger\right)
    \quad (\because \text{トレースの巡回性を } A = \check\psi_{\mu_1}^\dagger,\
-       B = \check\psi_{M+1-\mu_1}P \text{ に適用。}\blkref{trace_basic_properties}) \\
-&= \mathrm{tr}\!\left(P\,\check\psi_{M+1-\mu_1}\,\check\psi_{\mu_1}^\dagger\right)
-   \quad (\because \check\psi_{M+1-\mu_1} \text{ と } P \text{ の可換性（上で確認）}) \\
+       B = \check\psi_{M_{\mathrm{col}}+1-\mu_1}P \text{ に適用。}\blkref{trace_basic_properties}) \\
+&= \mathrm{tr}\!\left(P\,\check\psi_{M_{\mathrm{col}}+1-\mu_1}\,\check\psi_{\mu_1}^\dagger\right)
+   \quad (\because \check\psi_{M_{\mathrm{col}}+1-\mu_1} \text{ と } P \text{ の可換性（上で確認）}) \\
 &= \mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_1}\right)\right)
    \quad (\because \text{数演算子の冪等性の第 2 式。}\blkref{check_number_operator_idempotent}) \\
 &= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\,\check{n}_{\mu_1}\right)
@@ -796,7 +796,7 @@ A\,\check{n}_\nu
       ),
       paragraph([
         "帰納法の仮定から ",
-        math(String.raw`\mathrm{tr}(P) = 2^{M-(k-1)}`),
+        math(String.raw`\mathrm{tr}(P) = 2^{M_{\mathrm{col}}-(k-1)}`),
         " なので、いずれの場合も",
       ]),
       displayMath(
@@ -804,9 +804,9 @@ A\,\check{n}_\nu
 \mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\right)
 &= \frac{1}{2}\,\mathrm{tr}(P)
    \quad (\because \text{直前の二場合}) \\
-&= \frac{1}{2}\cdot 2^{M-k+1}
+&= \frac{1}{2}\cdot 2^{M_{\mathrm{col}}-k+1}
    \quad (\because \text{帰納法の仮定}) \\
-&= 2^{M-k}
+&= 2^{M_{\mathrm{col}}-k}
    \quad (\because \mathbb C\text{ の四則})
 \end{aligned}`,
       ),
@@ -840,13 +840,13 @@ A\,\check{n}_\nu
     labels: ["check_joint_eigenspace_decomposition"],
     statement: [
       paragraph([
-        math(String.raw`\epsilon = (\epsilon_\mu)_{\mu=1}^{M} \in \{0,1\}^{\check{\mathcal{M}}}`),
+        math(String.raw`\epsilon = (\epsilon_\mu)_{\mu=1}^{M_{\mathrm{col}}} \in \{0,1\}^{\check{\mathcal{M}}}`),
         " に対して",
       ]),
       displayMath(
-        String.raw`\check{Q}_\epsilon := \prod_{\mu=1}^{M}
+        String.raw`\check{Q}_\epsilon := \prod_{\mu=1}^{M_{\mathrm{col}}}
 \Bigl(\epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)\Bigr)
-\ \in\ \mathrm{Mat}(2^M,\mathbb{C})`,
+\ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
         "と定める（因子は ",
@@ -872,15 +872,15 @@ A\,\check{n}_\nu
 \qquad \dim_{\mathbb{C}} \mathrm{im}\,\check{Q}_\epsilon = 1`),
         ],
         [
-          math(String.raw`\text{(5)}\quad \mathbb{C}^{2^M}
+          math(String.raw`\text{(5)}\quad \mathbb{C}^{2^{M_{\mathrm{col}}}}
 = \bigoplus_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{im}\,\check{Q}_\epsilon`),
         ],
       ]),
       paragraph([
         "が成り立つ。すなわち ",
-        math(String.raw`\mathbb{C}^{2^M}`),
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " は ",
-        math(String.raw`2^M`),
+        math(String.raw`2^{M_{\mathrm{col}}}`),
         " 個の ",
         math(String.raw`1`),
         " 次元部分空間の直和に分解される。",
@@ -899,7 +899,7 @@ A\,\check{n}_\nu
         "、",
         math(String.raw`R_\mu^{(0)} := I - \check{n}_\mu`),
         "。",
-        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}`),
+        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}`),
         " である。",
       ]),
       paragraph([
@@ -1023,12 +1023,12 @@ R_\mu^{(1)} + R_\mu^{(0)}
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_\epsilon^2
-&=\left(\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}\right)
-  \left(\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}\right)
+&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}\right)
+  \left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}\right)
   \quad (\because \check{Q}_\epsilon\text{ の定義}) \\
-&=\prod_{\mu=1}^{M}\left(R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon_\mu)}\right)
+&=\prod_{\mu=1}^{M_{\mathrm{col}}}\left(R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon_\mu)}\right)
   \quad (\because \text{異なる添字の因子の可換性}) \\
-&=\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}
+&=\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
   \quad (\because \text{Step 0 の二つの冪等性を各因子へ同時に適用}) \\
 &=\check{Q}_\epsilon
   \quad (\because \check{Q}_\epsilon\text{ の定義})
@@ -1040,11 +1040,11 @@ R_\mu^{(1)} + R_\mu^{(0)}
       displayMath(
         String.raw`\begin{aligned}
 \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \check{Q}_\epsilon
-&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
    \quad (\because \check{Q}_\epsilon \text{ の定義（冒頭）}) \\
-&= \prod_{\mu=1}^{M}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
    \quad (\because \text{可換な有限個の因子の積の分配法則による展開}) \\
-&= \prod_{\mu=1}^{M} I
+&= \prod_{\mu=1}^{M_{\mathrm{col}}} I
    \quad (\because \text{Step 0 の和が単位行列であることを各因子へ同時に適用}) \\
 &= I
    \quad (\because \text{単位行列の有限積は単位行列})
@@ -1060,7 +1060,7 @@ R_\mu^{(1)} + R_\mu^{(0)}
         " のどちらを選ぶかの全ての選び方に 1 対 1 に対応し、その選び方の全体が ",
         math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
         "（要素数 ",
-        math(String.raw`2^M`),
+        math(String.raw`2^{M_{\mathrm{col}}}`),
         "）である。）",
       ]),
       paragraph([
@@ -1071,7 +1071,7 @@ R_\mu^{(1)} + R_\mu^{(0)}
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\nu \check{Q}_\epsilon
-&=\check{n}_\nu\prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}
+&=\check{n}_\nu\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
   \quad (\because \check{Q}_\epsilon\text{ の定義}) \\
 &=\left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}\right)
   \check{n}_\nu R_\nu^{(\epsilon_\nu)}
@@ -1157,37 +1157,37 @@ R_\mu^{(1)} + R_\mu^{(0)}
       ),
       paragraph([
         "Step 4（(4) の証明）。",
-        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M} R_\mu^{(\epsilon_\mu)}`),
+        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}`),
         " は、相異なる ",
-        math(String.raw`M`),
+        math(String.raw`M_{\mathrm{col}}`),
         " 個の添字 ",
-        math(String.raw`1,\dots,M \in \check{\mathcal{M}}`),
+        math(String.raw`1,\dots,M_{\mathrm{col}} \in \check{\mathcal{M}}`),
         " についての ",
         math(String.raw`R_\mu^{(e)}`),
         " の積そのものなので、",
         ref("trace_of_check_number_operator_product"),
         " を ",
-        math(String.raw`k = M`),
+        math(String.raw`k = M_{\mathrm{col}}`),
         "、",
-        math(String.raw`(\mu_1,\dots,\mu_M) = (1,\dots,M)`),
+        math(String.raw`(\mu_1,\dots,\mu_{M_{\mathrm{col}}}) = (1,\dots,M_{\mathrm{col}})`),
         "、",
-        math(String.raw`(e_1,\dots,e_M) = (\epsilon_1,\dots,\epsilon_M)`),
+        math(String.raw`(e_1,\dots,e_{M_{\mathrm{col}}}) = (\epsilon_1,\dots,\epsilon_{M_{\mathrm{col}}})`),
         " として適用でき、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\check{Q}_\epsilon\right)
-&= 2^{M-M}
+&= 2^{M_{\mathrm{col}}-M_{\mathrm{col}}}
   \quad (\because \text{数演算子の積のトレース（上の適用）}) \\
 &= 2^{0}
-  \quad (\because M-M=0) \\
+  \quad (\because M_{\mathrm{col}}-M_{\mathrm{col}}=0) \\
 &= 1
   \quad (\because \text{冪の零乗})
 \end{aligned}`,
       ),
       paragraph([
         "を得る（",
-        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M\}`),
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
         " の元をすべて使い切っているので指数が ",
         math(String.raw`0`),
         " になる）。",
@@ -1207,7 +1207,7 @@ R_\mu^{(1)} + R_\mu^{(0)}
       ),
       paragraph([
         "Step 5（(5) の証明）。(2) より任意の ",
-        math(String.raw`x \in \mathbb{C}^{2^M}`),
+        math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " について",
       ]),
       displayMath(
@@ -1255,13 +1255,13 @@ y_{\epsilon'}
       ]),
       paragraph([
         "（次元の整合：",
-        math(String.raw`\left|\{0,1\}^{\check{\mathcal{M}}}\right| = 2^M`),
+        math(String.raw`\left|\{0,1\}^{\check{\mathcal{M}}}\right| = 2^{M_{\mathrm{col}}}`),
         " 個の空間がそれぞれ ",
         math(String.raw`1`),
         " 次元で、合計 ",
-        math(String.raw`2^M`),
+        math(String.raw`2^{M_{\mathrm{col}}}`),
         " となり ",
-        math(String.raw`\mathbb{C}^{2^M}`),
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " の次元に一致する。）",
       ]),
     ],
@@ -1287,7 +1287,7 @@ y_{\epsilon'}
         " に対して",
       ]),
       displayMath(
-        String.raw`\check{g}(\epsilon) := \sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
+        String.raw`\check{g}(\epsilon) := \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
 \left(\epsilon_\mu - \tfrac{1}{2}\right) \in \mathbb{R}`,
       ),
       paragraph(["とおく（", ref("def_gamma_theta_tilde_mu"), "）。このとき"]),
@@ -1311,7 +1311,7 @@ y_{\epsilon'}
       displayMath(
         String.raw`\left\{\,\exp(\check{g}(\epsilon)) \ \middle|\
 \epsilon \in \{0,1\}^{\check{\mathcal{M}}}\,\right\}
-\qquad (\text{各 } \epsilon \text{ が重複度 } 1 \text{ を与え、総個数 } 2^M)`,
+\qquad (\text{各 } \epsilon \text{ が重複度 } 1 \text{ を与え、総個数 } 2^{M_{\mathrm{col}}})`,
       ),
       paragraph([
         "で尽くされる。とくに ",
@@ -1322,11 +1322,11 @@ y_{\epsilon'}
         "**「固有値がすべて相異なる」ことは主張しない。** ",
         ref("periodicity_of_check_fermi"),
         " (3) より ",
-        math(String.raw`\gamma(\tilde\theta_{M+1-\mu}) = \gamma(\tilde\theta_\mu)`),
+        math(String.raw`\gamma(\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \gamma(\tilde\theta_\mu)`),
         " なので、",
         math(String.raw`\epsilon`),
         " の成分を ",
-        math(String.raw`\mu \leftrightarrow M+1-\mu`),
+        math(String.raw`\mu \leftrightarrow M_{\mathrm{col}}+1-\mu`),
         " で入れ替えても ",
         math(String.raw`\check{g}(\epsilon)`),
         " は変わらない。したがって相異なる ",
@@ -1344,7 +1344,7 @@ y_{\epsilon'}
         "）。",
         ref("def_check_number_operator"),
         " (2) の ",
-        math(String.raw`\check{X} = \sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)
+        math(String.raw`\check{X} = \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)
 \left(\check{n}_\mu - \tfrac12 I\right)`),
         " に ",
         ref("check_joint_eigenspace_decomposition"),
@@ -1353,13 +1353,13 @@ y_{\epsilon'}
       displayMath(
         String.raw`\begin{aligned}
 \check{X}\check{Q}_\epsilon
-&= \sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
    \left(\check{n}_\mu\check{Q}_\epsilon - \tfrac12 \check{Q}_\epsilon\right)
    \quad (\because \text{行列の積の分配法則}) \\
-&= \sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
    \left(\epsilon_\mu\check{Q}_\epsilon - \tfrac12 \check{Q}_\epsilon\right)
    \quad (\because \text{同時固有空間分解 (3)}) \\
-&= \left(\sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
+&= \left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
    \left(\epsilon_\mu - \tfrac12\right)\right)\check{Q}_\epsilon
    \quad (\because \text{有限和のくくり出し}) \\
 &= \check{g}(\epsilon)\,\check{Q}_\epsilon
@@ -1559,7 +1559,7 @@ E_K \check{Q}_\epsilon
       paragraph([
         ref("check_joint_eigenspace_decomposition"),
         " (5) より ",
-        math(String.raw`\mathbb{C}^{2^M}`),
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " は ",
         math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
         " たちの直和だから、各 ",
@@ -1567,7 +1567,7 @@ E_K \check{Q}_\epsilon
         " の基底（1 次元なので 1 本）を合わせると ",
         math(String.raw`\check{V}'`),
         " の固有ベクトルからなる ",
-        math(String.raw`\mathbb{C}^{2^M}`),
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " の基底が得られる。したがって ",
         math(String.raw`\check{V}'`),
         " は対角化可能で、固有値は ",
@@ -1575,7 +1575,7 @@ E_K \check{Q}_\epsilon
         " が各 ",
         math(String.raw`\epsilon`),
         " について 1 つずつ現れるもので尽くされる（総個数 ",
-        math(String.raw`2^M`),
+        math(String.raw`2^{M_{\mathrm{col}}}`),
         "）。",
       ]),
       paragraph([
@@ -1621,7 +1621,7 @@ E_K \check{Q}_\epsilon
       displayMath(
         String.raw`\mathrm{tr}\!\left(\check{V}'\right)
 = \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)
-= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
 \ \in\ \mathbb{R}_{>0}`,
       ),
       paragraph([
@@ -1653,12 +1653,12 @@ E_K \check{Q}_\epsilon
       ),
       paragraph([
         "Step 2（積への分解）。",
-        math(String.raw`\check{g}(\epsilon) = \sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)
+        math(String.raw`\check{g}(\epsilon) = \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)
 \left(\epsilon_\mu - \tfrac12\right)`),
         " なので、実数の指数法則より",
       ]),
       displayMath(
-        String.raw`\exp(\check{g}(\epsilon)) = \prod_{\mu=1}^{M}
+        String.raw`\exp(\check{g}(\epsilon)) = \prod_{\mu=1}^{M_{\mathrm{col}}}
 \exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
 \quad (\because \text{theorem\_exp\_product}\ (n=1))`,
       ),
@@ -1675,11 +1675,11 @@ E_K \check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(\check{g}(\epsilon))
-&= \prod_{\mu=1}^{M}
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(-\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)
    + \exp\!\left(+\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)\right)
    \quad (\because \text{直前の積表示と、有限個の因子の積の展開}) \\
-&= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
    \quad \left(\because \cosh x = \frac{\exp(x) + \exp(-x)}{2}\right)
 \end{aligned}`,
       ),
@@ -1689,7 +1689,7 @@ E_K \check{Q}_\epsilon
         " についても同じ値）。",
         math(String.raw`\left(\check{V}'\right)^{-1} = \exp(-\check{X})`),
         " であり、",
-        math(String.raw`-\check{X} = \sum_{\mu=1}^{M}\left(-\gamma(\tilde\theta_\mu)\right)
+        math(String.raw`-\check{X} = \sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\gamma(\tilde\theta_\mu)\right)
 \left(\check{n}_\mu - \tfrac12 I\right)`),
         " だから、Step 1〜2 をそのまま ",
         math(String.raw`\gamma(\tilde\theta_\mu) \to -\gamma(\tilde\theta_\mu)`),
@@ -1700,9 +1700,9 @@ E_K \check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)
-&= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)
+&= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)
    \quad (\because \text{Step 1--2 を }\gamma(\tilde\theta_\mu)\mapsto-\gamma(\tilde\theta_\mu)\text{ として適用}) \\
-&= \prod_{\mu=1}^{M} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
    \quad (\because \cosh\text{ は偶関数}) \\
 &= \mathrm{tr}\!\left(\check{V}'\right)
    \quad (\because \text{Step 1--2 の }\check{V}'\text{ のトレース表示})
@@ -1730,7 +1730,7 @@ E_K \check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\check{V}'\right)
-&=\prod_{\mu=1}^{M}2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&=\prod_{\mu=1}^{M_{\mathrm{col}}}2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
    \quad (\because \text{Step 1--2}) \\
 &>0
    \quad (\because \text{正数の有限積は正})
@@ -1771,7 +1771,7 @@ E_K \check{Q}_\epsilon
         " は",
       ]),
       displayMath(
-        String.raw`V^{(+)} = (2s_2)^{M/2}\,
+        String.raw`V^{(+)} = (2s_2)^{M_{\mathrm{col}}/2}\,
 \exp\!\left(\tfrac12 S_1^{(+)}\right)\exp\!\left(S_2\right)
 \exp\!\left(\tfrac12 S_1^{(+)}\right)`,
       ),
@@ -1813,14 +1813,14 @@ E_K \check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 V_2
-&= (2s_2)^{M/2}\exp\!\left(iK_2^*H_2\right)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)
    \quad (\because V_2 \text{ の表示}) \\
-&= (2s_2)^{M/2}\exp(S_2)
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp(S_2)
    \quad (\because S_2 = iK_2^*H_2)
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`(2s_2)^{M/2}`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}`),
         " はスカラーなので ",
         ref("scalar_identity_commutes"),
         " により前へ出せて statement の表示を得る。",
@@ -1874,9 +1874,9 @@ V_2
         " より ",
         math(String.raw`s_2 = \sinh 2K_2 > 0`),
         " なので ",
-        math(String.raw`(2s_2)^{M/2} \in \mathbb{R}_{>0}`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
         " であり、同 (3) より ",
-        math(String.raw`V^{(+)} = (2s_2)^{M/2}B^*AB`),
+        math(String.raw`V^{(+)} = (2s_2)^{M_{\mathrm{col}}/2}B^*AB`),
         " も正定値である。",
       ]),
     ],
@@ -1903,21 +1903,21 @@ V_2
         " の表示に対して、次の行列を置く：",
       ]),
       displayMath(
-        String.raw`R^{(+)} := (2s_2)^{-M/2}\,
+        String.raw`R^{(+)} := (2s_2)^{-M_{\mathrm{col}}/2}\,
 \exp\!\left(-\tfrac12 S_1^{(+)}\right)\exp(-S_2)
 \exp\!\left(-\tfrac12 S_1^{(+)}\right)
-\in \mathrm{Mat}(2^M,\mathbb{C}).`,
+\in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C}).`,
       ),
       paragraph(["このとき左右の積はそれぞれ"]),
       displayMath(
-        String.raw`V^{(+)}R^{(+)}=I_{\mathrm{Mat}(2^M,\mathbb{C})},
+        String.raw`V^{(+)}R^{(+)}=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})},
 \qquad
-R^{(+)}V^{(+)}=I_{\mathrm{Mat}(2^M,\mathbb{C})}`,
+R^{(+)}V^{(+)}=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`,
       ),
       paragraph(["である。したがって ", math(String.raw`V^{(+)}`), " は可逆であり、"]),
       displayMath(
         String.raw`\left(V^{(+)}\right)^{-1}=R^{(+)}
-=(2s_2)^{-M/2}\,
+=(2s_2)^{-M_{\mathrm{col}}/2}\,
 \exp\!\left(-\tfrac12 S_1^{(+)}\right)\exp(-S_2)
 \exp\!\left(-\tfrac12 S_1^{(+)}\right).`,
       ),
@@ -1945,40 +1945,40 @@ E_+E_-
 &&\left(\because\ \blkref{theorem_exp_product}\right)\\
 &=\exp(O)
 &&\left(\because\ \tfrac12S_1^{(+)}-\tfrac12S_1^{(+)}=O\right)\\
-&=I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
 &&\left(\because\ \blkref{theorem_exp_zero}\right),\\[2mm]
 E_-E_+
 &=\exp\!\left(-\tfrac12S_1^{(+)}+\tfrac12S_1^{(+)}\right)
 &&\left(\because\ \blkref{theorem_exp_product}\right)\\
 &=\exp(O)
 &&\left(\because\ -\tfrac12S_1^{(+)}+\tfrac12S_1^{(+)}=O\right)\\
-&=I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
 &&\left(\because\ \blkref{theorem_exp_zero}\right),\\[2mm]
 A_+A_-
 &=\exp(S_2-S_2)
 &&\left(\because\ \blkref{theorem_exp_product}\right)\\
 &=\exp(O)
 &&(\because\ S_2-S_2=O)\\
-&=I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
 &&\left(\because\ \blkref{theorem_exp_zero}\right),\\[2mm]
 A_-A_+
 &=\exp(-S_2+S_2)
 &&\left(\because\ \blkref{theorem_exp_product}\right)\\
 &=\exp(O)
 &&(\because\ -S_2+S_2=O)\\
-&=I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
 &&\left(\because\ \blkref{theorem_exp_zero}\right).
 \end{aligned}`,
       ),
       paragraph([
         "Step 2（右側の候補を掛ける）。",
-        math(String.raw`a:=(2s_2)^{M/2}`),
+        math(String.raw`a:=(2s_2)^{M_{\mathrm{col}}/2}`),
         " と置く。",
         math(String.raw`s_2>0`),
         " なので ",
         math(String.raw`a>0`),
         " であり、正の実数の冪の指数法則から ",
-        math(String.raw`a^{-1}=(2s_2)^{-M/2}`),
+        math(String.raw`a^{-1}=(2s_2)^{-M_{\mathrm{col}}/2}`),
         " である。スカラー倍した単位行列は全行列と可換する（",
         ref("scalar_identity_commutes"),
         "）ので、結合法則と Step 1 を使って",
@@ -2004,7 +2004,7 @@ V^{(+)}R^{(+)}
 &&(\because\ \text{Step 1 の第三の左右逆})\\
 &=E_+E_-
 &&(\because\ \text{単位行列})\\
-&=I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
 &&(\because\ \text{Step 1 の第一の左右逆}).
 \end{aligned}`,
       ),
@@ -2030,7 +2030,7 @@ R^{(+)}V^{(+)}
 &&(\because\ \text{Step 1 の第四の左右逆})\\
 &=E_-E_+
 &&(\because\ \text{単位行列})\\
-&=I_{\mathrm{Mat}(2^M,\mathbb{C})}
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
 &&(\because\ \text{Step 1 の第二の左右逆}).
 \end{aligned}`,
       ),
@@ -2158,9 +2158,9 @@ C_-B_-
         " は正定値である。",
         math(String.raw`s_2>0`),
         " より ",
-        math(String.raw`(2s_2)^{-M/2}>0`),
+        math(String.raw`(2s_2)^{-M_{\mathrm{col}}/2}>0`),
         " であるから、同 (3) より ",
-        math(String.raw`(2s_2)^{-M/2}B_-^*A_-B_-`),
+        math(String.raw`(2s_2)^{-M_{\mathrm{col}}/2}B_-^*A_-B_-`),
         " は正定値である。",
       ]),
       paragraph([
@@ -2172,11 +2172,11 @@ C_-B_-
       displayMath(
         String.raw`\begin{aligned}
 \left(V^{(+)}\right)^{-1}
-&= (2s_2)^{-M/2}\exp(-\tfrac12S_1^{(+)})\exp(-S_2)\exp(-\tfrac12S_1^{(+)})
+&= (2s_2)^{-M_{\mathrm{col}}/2}\exp(-\tfrac12S_1^{(+)})\exp(-S_2)\exp(-\tfrac12S_1^{(+)})
    \quad (\because \text{逆行列の明示式}) \\
-&= (2s_2)^{-M/2}B_-A_-B_-
+&= (2s_2)^{-M_{\mathrm{col}}/2}B_-A_-B_-
    \quad (\because B_-,\ A_- \text{ の定義}) \\
-&= (2s_2)^{-M/2}B_-^*A_-B_-
+&= (2s_2)^{-M_{\mathrm{col}}/2}B_-^*A_-B_-
    \quad (\because B_-^*=B_-).
 \end{aligned}`,
       ),
@@ -2262,7 +2262,7 @@ C_-B_-
     kind: "claim",
     standing: "mainTheorem",
     origin: { path: SRC, ordinal: 11 },
-    title: { tex: String.raw`c = (2\sinh 2K_2)^{M/2}` },
+    title: { tex: String.raw`c = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}` },
     labels: ["constant_c_value_even_sector"],
     statement: [
       paragraph([
@@ -2272,10 +2272,10 @@ C_-B_-
         " は",
       ]),
       displayMath(
-        String.raw`c = (2\sinh 2K_2)^{M/2} = (2s_2)^{M/2} \in \mathbb{R}_{>0}`,
+        String.raw`c = (2\sinh 2K_2)^{M_{\mathrm{col}}/2} = (2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`,
       ),
       paragraph(["である。すなわち"]),
-      displayMath(String.raw`V^{(+)} = (2\sinh 2K_2)^{M/2}\,\check{V}'`),
+      displayMath(String.raw`V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`),
     ],
     proof: [
       paragraph([
@@ -2305,16 +2305,16 @@ C_-B_-
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(V^{(+)}\right)
-&= (2s_2)^{M/2}\,\mathrm{tr}\!\left(
+&= (2s_2)^{M_{\mathrm{col}}/2}\,\mathrm{tr}\!\left(
    \exp\!\left(\tfrac12 S_1\right)\exp(S_2)\exp\!\left(\tfrac12 S_1\right)\right)
    \quad (\because \text{トレースの線型性}) \\
-&= (2s_2)^{M/2}\,\mathrm{tr}\!\left(
+&= (2s_2)^{M_{\mathrm{col}}/2}\,\mathrm{tr}\!\left(
    \exp\!\left(\tfrac12 S_1\right)\exp\!\left(\tfrac12 S_1\right)\exp(S_2)\right)
    \quad \left(\because \text{巡回性を } A = \exp\!\left(\tfrac12 S_1\right)\exp(S_2),\
    B = \exp\!\left(\tfrac12 S_1\right) \text{ に適用}\right) \\
-&= (2s_2)^{M/2}\,\mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right)
+&= (2s_2)^{M_{\mathrm{col}}/2}\,\mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right)
    \quad \left(\because \text{可換なので } \exp\!\left(\tfrac12 S_1\right)^2 = \exp(S_1)\right) \\
-&= (2s_2)^{M/2}\,\tau
+&= (2s_2)^{M_{\mathrm{col}}/2}\,\tau
    \quad (\because \tau := \mathrm{tr}\!\left(\exp(S_1)\exp(S_2)\right))
 \end{aligned}`,
       ),
@@ -2327,7 +2327,7 @@ C_-B_-
       ]),
       displayMath(
         String.raw`\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)
-= (2s_2)^{-M/2}\,\mathrm{tr}\!\left(\exp(-S_1)\exp(-S_2)\right)`,
+= (2s_2)^{-M_{\mathrm{col}}/2}\,\mathrm{tr}\!\left(\exp(-S_1)\exp(-S_2)\right)`,
       ),
       paragraph([
         "Step 2（",
@@ -2355,7 +2355,7 @@ C_-B_-
       ]),
       displayMath(
         String.raw`U\exp(S)U^{-1} = \exp\!\left(USU^{-1}\right)
-\qquad \left(S \in \mathrm{Mat}(2^M,\mathbb{C})\right)`,
+\qquad \left(S \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\right)`,
       ),
       paragraph([
         "これを ",
@@ -2428,20 +2428,20 @@ C_-B_-
         " より ",
         math(String.raw`\mathrm{tr}\!\left(V^{(+)}\right) > 0`),
         " なので ",
-        math(String.raw`\tau = (2s_2)^{-M/2}\mathrm{tr}\!\left(V^{(+)}\right) \neq 0`),
+        math(String.raw`\tau = (2s_2)^{-M_{\mathrm{col}}/2}\mathrm{tr}\!\left(V^{(+)}\right) \neq 0`),
         "）",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{\mathrm{tr}\!\left(V^{(+)}\right)}
 {\mathrm{tr}\!\left(\left(V^{(+)}\right)^{-1}\right)}
-&= \frac{(2s_2)^{M/2}\,\tau}{(2s_2)^{-M/2}\,\tau}
+&= \frac{(2s_2)^{M_{\mathrm{col}}/2}\,\tau}{(2s_2)^{-M_{\mathrm{col}}/2}\,\tau}
    \quad (\because \text{Step 1・Step 2}) \\
-&= (2s_2)^M
+&= (2s_2)^{M_{\mathrm{col}}}
    \quad (\because \tau\neq0\text{ と }\mathbb{C}\text{ の四則})
 \end{aligned}`,
       ),
-      paragraph(["よって ", math(String.raw`c^2 = (2s_2)^{M}`), "。"]),
+      paragraph(["よって ", math(String.raw`c^2 = (2s_2)^{M_{\mathrm{col}}}`), "。"]),
       paragraph([
         "Step 4（符号の確定）。Step 3 の第 1 式より ",
         math(String.raw`c = \mathrm{tr}\!\left(V^{(+)}\right)/\mathrm{tr}\!\left(\check{V}'\right)`),
@@ -2462,25 +2462,25 @@ C_-B_-
         " より ",
         math(String.raw`s_2 = \sinh 2K_2 > 0`),
         " なので ",
-        math(String.raw`(2s_2)^{M/2} \in \mathbb{R}_{>0}`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
         " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-c^2 &= (2s_2)^M
+c^2 &= (2s_2)^{M_{\mathrm{col}}}
    \quad (\because \text{Step 3}) \\
-&= \left((2s_2)^{M/2}\right)^2
-   \quad (\because \text{正の実数の冪の指数法則 } \left(a^{M/2}\right)^2 = a^M)
+&= \left((2s_2)^{M_{\mathrm{col}}/2}\right)^2
+   \quad (\because \text{正の実数の冪の指数法則 } \left(a^{M_{\mathrm{col}}/2}\right)^2 = a^{M_{\mathrm{col}}})
 \end{aligned}`,
       ),
       paragraph(["と合わせると"]),
       displayMath(
-        String.raw`\left(c - (2s_2)^{M/2}\right)\left(c + (2s_2)^{M/2}\right) = 0`,
+        String.raw`\left(c - (2s_2)^{M_{\mathrm{col}}/2}\right)\left(c + (2s_2)^{M_{\mathrm{col}}/2}\right) = 0`,
       ),
       paragraph([
         math(String.raw`c > 0`),
         " かつ ",
-        math(String.raw`(2s_2)^{M/2} > 0`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} > 0`),
         " より第 2 因子は正で ",
         math(String.raw`0`),
         " でない。",
@@ -2490,7 +2490,7 @@ c^2 &= (2s_2)^M
         "）ゆえ零因子を持たないから第 1 因子が ",
         math(String.raw`0`),
         " であり、",
-        math(String.raw`c = (2s_2)^{M/2}`),
+        math(String.raw`c = (2s_2)^{M_{\mathrm{col}}/2}`),
         "。",
       ]),
     ],
@@ -2516,8 +2516,8 @@ c^2 &= (2s_2)^M
         " に対して",
       ]),
       displayMath(
-        String.raw`\check\Lambda_\epsilon := (2\sinh 2K_2)^{M/2}
-\exp\!\left(\sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)
+        String.raw`\check\Lambda_\epsilon := (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
 \left(\epsilon_\mu - \tfrac{1}{2}\right)\right) \in \mathbb{R}_{>0}`,
       ),
       paragraph(["とおく。このとき"]),
@@ -2533,7 +2533,7 @@ c^2 &= (2s_2)^M
           "（各 ",
           math(String.raw`\epsilon`),
           " が 1 つずつ、総個数 ",
-          math(String.raw`2^M`),
+          math(String.raw`2^{M_{\mathrm{col}}}`),
           "）で尽くされる。",
         ],
         [
@@ -2546,15 +2546,15 @@ c^2 &= (2s_2)^M
         ],
       ]),
       displayMath(
-        String.raw`\check\Lambda_{\max} = (2\sinh 2K_2)^{M/2}
-\exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)\right),
+        String.raw`\check\Lambda_{\max} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\right),
 \qquad
-\check\Lambda_{\min} = (2\sinh 2K_2)^{M/2}
-\exp\!\left(-\frac{1}{2}\sum_{\mu=1}^{M} \gamma(\tilde\theta_\mu)\right)`,
+\check\Lambda_{\min} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\exp\!\left(-\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\right)`,
       ),
       paragraph([
         "（したがって ",
-        math(String.raw`\check\Lambda_{\max}\check\Lambda_{\min} = (2\sinh 2K_2)^{M} = c^2`),
+        math(String.raw`\check\Lambda_{\max}\check\Lambda_{\min} = (2\sinh 2K_2)^{M_{\mathrm{col}}} = c^2`),
         "。）",
       ]),
     ],
@@ -2563,7 +2563,7 @@ c^2 &= (2s_2)^M
         "(1) ",
         ref("constant_c_value_even_sector"),
         " より ",
-        math(String.raw`V^{(+)} = (2s_2)^{M/2}\check{V}'`),
+        math(String.raw`V^{(+)} = (2s_2)^{M_{\mathrm{col}}/2}\check{V}'`),
         " であり、",
         ref("eigenvalues_of_check_Vprime"),
         " より ",
@@ -2573,9 +2573,9 @@ c^2 &= (2s_2)^M
       displayMath(
         String.raw`\begin{aligned}
 V^{(+)}\check{Q}_\epsilon
-&= (2s_2)^{M/2}\check{V}'\check{Q}_\epsilon
+&= (2s_2)^{M_{\mathrm{col}}/2}\check{V}'\check{Q}_\epsilon
    \quad (\because \text{定数 }c\text{ の決定}) \\
-&= (2s_2)^{M/2}\exp(\check{g}(\epsilon))\check{Q}_\epsilon
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))\check{Q}_\epsilon
    \quad (\because \check{V}'\text{ の固有値}) \\
 &= \check\Lambda_\epsilon\check{Q}_\epsilon
    \quad (\because \check\Lambda_\epsilon\text{ の定義})
@@ -2587,7 +2587,7 @@ V^{(+)}\check{Q}_\epsilon
         " の Step 3' の ",
         math(String.raw`\check{Q}_\epsilon\check{V}' = \exp(\check{g}(\epsilon))\check{Q}_\epsilon`),
         " に対して行い（スカラー ",
-        math(String.raw`(2s_2)^{M/2}`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}`),
         " は ",
         ref("scalar_identity_commutes"),
         " により左右どちらへも出せる）、",
@@ -2603,7 +2603,7 @@ V^{(+)}\check{Q}_\epsilon
       ]),
       paragraph([
         "(2) ",
-        math(String.raw`(2s_2)^{M/2} > 0`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} > 0`),
         " と ",
         math(String.raw`\exp(\check{g}(\epsilon)) > 0`),
         " より ",
@@ -2612,9 +2612,9 @@ V^{(+)}\check{Q}_\epsilon
       ]),
       paragraph([
         "大小の比較。",
-        math(String.raw`\check\Lambda_\epsilon = (2s_2)^{M/2}\exp(\check{g}(\epsilon))`),
+        math(String.raw`\check\Lambda_\epsilon = (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))`),
         " で ",
-        math(String.raw`(2s_2)^{M/2}`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}`),
         " は ",
         math(String.raw`\epsilon`),
         " に依らない正の定数、",
@@ -2623,7 +2623,7 @@ V^{(+)}\check{Q}_\epsilon
         math(String.raw`\check\Lambda_\epsilon`),
         " の大小は ",
         math(String.raw`\check{g}(\epsilon)
-= \sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)`),
+= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)`),
         " の大小と一致する。",
         ref("def_gamma_theta_tilde_mu"),
         " より ",
@@ -2645,9 +2645,9 @@ V^{(+)}\check{Q}_\epsilon
         " のときである。それぞれ",
       ]),
       displayMath(
-        String.raw`\check{g}(1,\dots,1) = \frac{1}{2}\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu),
+        String.raw`\check{g}(1,\dots,1) = \frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu),
 \qquad
-\check{g}(0,\dots,0) = -\frac{1}{2}\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)`,
+\check{g}(0,\dots,0) = -\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)`,
       ),
       paragraph([
         "を代入して statement の ",
@@ -2657,7 +2657,7 @@ V^{(+)}\check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_{\max}\check\Lambda_{\min}
-&= (2s_2)^M
+&= (2s_2)^{M_{\mathrm{col}}}
    \quad (\because \text{指数部分が互いに打ち消し合う}) \\
 &= c^2
    \quad (\because \text{定数 }c\text{ の決定。}\blkref{constant_c_value_even_sector})
@@ -2680,19 +2680,19 @@ V^{(+)}\check{Q}_\epsilon
     standing: "mainTheorem",
     origin: { path: SRC, ordinal: 13 },
     title: {
-      tex: String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_M \text{ であり単純固有値}`,
+      tex: String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_{M_{\mathrm{col}}} \text{ であり単純固有値}`,
     },
     labels: ["max_eigenvalue_of_V_plus_simple"],
     statement: [
       paragraph([
         ref("onsager_free_energy_expression"),
         " の ",
-        math(String.raw`\Lambda^{(\delta)}_M`),
+        math(String.raw`\Lambda^{(\delta)}_{M_{\mathrm{col}}}`),
         " について、次が成り立つ。",
       ]),
       list([
         [
-          math(String.raw`\text{(1)}\quad \check\Lambda_{\max} = \Lambda^{(1/2)}_M`),
+          math(String.raw`\text{(1)}\quad \check\Lambda_{\max} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
           "。すなわち ",
           math(String.raw`V^{(+)}`),
           " の最大固有値は ",
@@ -2711,7 +2711,7 @@ V^{(+)}\check{Q}_\epsilon
           " は ",
           math(String.raw`V^{(+)}`),
           " の**単純固有値**である：",
-          math(String.raw`\left\{x \in \mathbb{C}^{2^M} \mid V^{(+)}x
+          math(String.raw`\left\{x \in \mathbb{C}^{2^{M_{\mathrm{col}}}} \mid V^{(+)}x
 = \check\Lambda_{\max}x\right\}
 = \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
           " であり、この空間の次元は ",
@@ -2740,45 +2740,45 @@ V^{(+)}\check{Q}_\epsilon
         " の場合の定義は",
       ]),
       displayMath(
-        String.raw`\Theta_M^{(1/2)} = \left\{\left.\frac{2\pi\left(\mu-\frac12\right)}{M}
-\ \right|\ \mu = 1,\dots,M\right\},
+        String.raw`\Theta_{M_{\mathrm{col}}}^{(1/2)} = \left\{\left.\frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}}
+\ \right|\ \mu = 1,\dots,M_{\mathrm{col}}\right\},
 \qquad
-\Lambda^{(1/2)}_M = (2\sinh 2K_2)^{M/2}
-\exp\!\left(\frac{1}{2}\sum_{\theta \in \Theta_M^{(1/2)}}\gamma(\theta)\right)`,
+\Lambda^{(1/2)}_{M_{\mathrm{col}}} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\exp\!\left(\frac{1}{2}\sum_{\theta \in \Theta_{M_{\mathrm{col}}}^{(1/2)}}\gamma(\theta)\right)`,
       ),
       paragraph([
         "である。",
         ref("antiperiodic_exp_sum"),
         " の ",
-        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi\left(\mu-\frac12\right)}{M}`),
+        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}}`),
         " より ",
-        math(String.raw`\Theta_M^{(1/2)} = \left\{\tilde\theta_\mu \mid \mu = 1,\dots,M\right\}`),
+        math(String.raw`\Theta_{M_{\mathrm{col}}}^{(1/2)} = \left\{\tilde\theta_\mu \mid \mu = 1,\dots,M_{\mathrm{col}}\right\}`),
         " である。",
       ]),
       paragraph([
         "この ",
-        math(String.raw`M`),
+        math(String.raw`M_{\mathrm{col}}`),
         " 個の値は互いに相異なる。実際 ",
         math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
         "、",
         math(String.raw`\mu \neq \nu`),
         " なら ",
-        math(String.raw`\tilde\theta_\mu - \tilde\theta_\nu = \dfrac{2\pi(\mu-\nu)}{M}`),
+        math(String.raw`\tilde\theta_\mu - \tilde\theta_\nu = \dfrac{2\pi(\mu-\nu)}{M_{\mathrm{col}}}`),
         " で ",
-        math(String.raw`1 \leq |\mu-\nu| \leq M-1`),
+        math(String.raw`1 \leq |\mu-\nu| \leq M_{\mathrm{col}}-1`),
         " だから ",
         math(String.raw`0 < \left|\tilde\theta_\mu - \tilde\theta_\nu\right| < 2\pi`),
         " であり、とくに ",
         math(String.raw`\tilde\theta_\mu \neq \tilde\theta_\nu`),
         "。よって集合 ",
-        math(String.raw`\Theta_M^{(1/2)}`),
+        math(String.raw`\Theta_{M_{\mathrm{col}}}^{(1/2)}`),
         " はちょうど ",
-        math(String.raw`M`),
+        math(String.raw`M_{\mathrm{col}}`),
         " 個の元をもち、",
       ]),
       displayMath(
-        String.raw`\sum_{\theta \in \Theta_M^{(1/2)}}\gamma(\theta)
-= \sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)`,
+        String.raw`\sum_{\theta \in \Theta_{M_{\mathrm{col}}}^{(1/2)}}\gamma(\theta)
+= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)`,
       ),
       paragraph([
         "である。ここで左辺の ",
@@ -2808,7 +2808,7 @@ V^{(+)}\check{Q}_\epsilon
         " の ",
         math(String.raw`\check\Lambda_{\max}`),
         " の表式と比べて ",
-        math(String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_M`),
+        math(String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         "。",
       ]),
       paragraph([
@@ -2827,7 +2827,7 @@ V^{(+)}\check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \check{g}(1,\dots,1) - \check{g}(\epsilon)
-&= \sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)
 \Bigl(1 - \epsilon_\mu\Bigr)
    \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義と分配法則}) \\
 &\geq \gamma(\tilde\theta_{\mu_0})\Bigl(1 - \epsilon_{\mu_0}\Bigr)
@@ -2847,12 +2847,12 @@ V^{(+)}\check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_\epsilon
-&= (2s_2)^{M/2}\exp(\check{g}(\epsilon))
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))
    \quad (\because \blkref{eigenvalues_of_V_plus}\text{ の }\check\Lambda_\epsilon\text{ の定義と }
 \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}) \\
-&< (2s_2)^{M/2}\exp(\check{g}(1,\dots,1))
+&< (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(1,\dots,1))
    \quad (\because \check{g}(\epsilon) < \check{g}(1,\dots,1)\text{、}
-t \mapsto \exp(t)\text{ は狭義単調増加、}(2s_2)^{M/2} > 0) \\
+t \mapsto \exp(t)\text{ は狭義単調増加、}(2s_2)^{M_{\mathrm{col}}/2} > 0) \\
 &= \check\Lambda_{\max}
    \quad (\because \blkref{eigenvalues_of_V_plus}\text{ (2)})
 \end{aligned}`,
@@ -2866,7 +2866,7 @@ t \mapsto \exp(t)\text{ は狭義単調増加、}(2s_2)^{M/2} > 0) \\
       ]),
       paragraph([
         "(3) ",
-        math(String.raw`x \in \mathbb{C}^{2^M}`),
+        math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " が ",
         math(String.raw`V^{(+)}x = \check\Lambda_{\max}x`),
         " を満たすとする。",

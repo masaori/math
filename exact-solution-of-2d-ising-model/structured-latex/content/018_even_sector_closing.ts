@@ -8,7 +8,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: SRC, ordinal: 1 },
-    title: { tex: String.raw`c_+(M) \text{ の決定と Onsager の自由エネルギー}` },
+    title: { tex: String.raw`c_+(M_{\mathrm{col}}) \text{ の決定と Onsager の自由エネルギー}` },
     labels: [],
   },
 
@@ -24,13 +24,13 @@ export default defineBlocks([
         " により ",
         math(String.raw`V^{(+)}`),
         " の最大固有値 ",
-        math(String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_M`),
+        math(String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " は**単純**である。一方 ",
         ref("sector_decomposition_of_rayleigh_sup"),
         " の ",
-        math(String.raw`c_+(M)`),
+        math(String.raw`c_+(M_{\mathrm{col}})`),
         " は ",
-        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルにわたる上限であり、同 (2) の ",
         math(String.raw`WP^{(+)} = V^{(+)}P^{(+)}`),
         " により ",
@@ -42,7 +42,7 @@ export default defineBlocks([
         " が一致する。したがって",
       ]),
       displayMath(
-        String.raw`c_+(M) \leq \check\Lambda_{\max}`,
+        String.raw`c_+(M_{\mathrm{col}}) \leq \check\Lambda_{\max}`,
       ),
       paragraph([
         "は容易である。**難所は逆向きの不等号**、すなわち ",
@@ -56,9 +56,9 @@ export default defineBlocks([
         " であること）である。",
         math(String.raw`V^{(+)}`),
         " は ",
-        math(String.raw`\mathbb{C}^{2^M}`),
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " 全体の上の行列であり、その ",
-        math(String.raw`2^M`),
+        math(String.raw`2^{M_{\mathrm{col}}}`),
         " 個の固有値のうち半分は ",
         math(String.raw`\mathcal{F}^{(-)}`),
         " に属する固有ベクトルに対応する。最大固有値がどちらの側に落ちるかは、",
@@ -72,7 +72,7 @@ export default defineBlocks([
         " は ",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`\sigma_1^x\cdots\sigma_M^x`),
+        math(String.raw`\sigma_1^x\cdots\sigma_{M_{\mathrm{col}}}^x`),
         "、",
         math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
         " は ",
@@ -119,7 +119,7 @@ export default defineBlocks([
         [
           "(iii) したがって ",
           math(String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-= \eta_{(1,\dots,1)}\,(2\sinh 2K_2)^{M/2}\prod_{\mu=1}^{M}
+= \eta_{(1,\dots,1)}\,(2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}
 2\sinh\!\left(\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)`),
           " であり、右辺の ",
           math(String.raw`\eta`),
@@ -132,7 +132,7 @@ export default defineBlocks([
           math(String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)`),
           " は転送行列の側で**直接計算できる**：",
           math(String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-= \left(2\exp(-K_2)\cosh K_1\right)^{M} + \left(2\exp(K_2)\sinh K_1\right)^{M} > 0`),
+= \left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}} + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}} > 0`),
           "（",
           ref("trace_of_epsilon_V_plus"),
           "）。使うのは 1 次元開鎖のスピン和だけである。",
@@ -149,7 +149,7 @@ export default defineBlocks([
       ]),
       paragraph([
         "そのうえで ",
-        math(String.raw`c_+(M) = \Lambda^{(1/2)}_M`),
+        math(String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         "（",
         ref("c_plus_equals_Lambda_half_integer"),
         "）を示し、",
@@ -187,7 +187,7 @@ export default defineBlocks([
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         "（",
@@ -195,14 +195,14 @@ export default defineBlocks([
         "）とする。",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x`),
+        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}}^x`),
         " について次が成り立つ。",
       ]),
       list([
         [
           math(String.raw`\text{(1)}\quad \varepsilon\,Z_j = -Z_j\,\varepsilon,
 \qquad \varepsilon\,Y_j = -Y_j\,\varepsilon
-\qquad (j \in \{1,\dots,M\})`),
+\qquad (j \in \{1,\dots,M_{\mathrm{col}}\})`),
         ],
         [
           math(String.raw`\text{(2)}\quad \varepsilon\,\check{Z}_\mu = -\check{Z}_\mu\,\varepsilon,
@@ -240,7 +240,7 @@ export default defineBlocks([
         String.raw`\varepsilon\,\sigma_k^x = \sigma_k^x\,\varepsilon, \qquad
 \varepsilon\,\sigma_k^z = -\,\sigma_k^z\,\varepsilon, \qquad
 \varepsilon\,\sigma_k^y = -\,\sigma_k^y\,\varepsilon
-\qquad (k \in \{1,\dots,M\})`,
+\qquad (k \in \{1,\dots,M_{\mathrm{col}}\})`,
       ),
       paragraph([
         "が示されている。",
@@ -275,7 +275,7 @@ export default defineBlocks([
         "(2) ",
         ref("def_half_integer_checkZ"),
         " の ",
-        math(String.raw`\check{Z}_\mu = \sum_{j=1}^{M}Z_j\exp(-ij\tilde\theta_\mu)`),
+        math(String.raw`\check{Z}_\mu = \sum_{j=1}^{M_{\mathrm{col}}}Z_j\exp(-ij\tilde\theta_\mu)`),
         " は ",
         math(String.raw`Z_j`),
         " の ",
@@ -287,13 +287,13 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\,\check{Z}_\mu
-&= \varepsilon\sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)Z_j
+&= \varepsilon\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)Z_j
    \quad (\because \text{def\_half\_integer\_modes}) \\
-&= \sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)\left(\varepsilon\,Z_j\right)
+&= \sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)\left(\varepsilon\,Z_j\right)
    \quad (\because \text{積の } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)\left(-Z_j\,\varepsilon\right)
-   \quad (\because \text{(1) を } M \text{ 個の項へ同時適用}) \\
-&= -\left(\sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)Z_j\right)\varepsilon
+&= \sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)\left(-Z_j\,\varepsilon\right)
+   \quad (\because \text{(1) を } M_{\mathrm{col}} \text{ 個の項へ同時適用}) \\
+&= -\left(\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)Z_j\right)\varepsilon
    \quad (\because \text{積の } \mathbb{C} \text{ 線型性}) \\
 &= -\check{Z}_\mu\,\varepsilon
    \quad (\because \text{def\_half\_integer\_modes})
@@ -339,27 +339,27 @@ export default defineBlocks([
         "(4) ",
         ref("def_check_index_set"),
         " (2) より ",
-        math(String.raw`M+1-\mu \in \check{\mathcal{M}}`),
+        math(String.raw`M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
         " なので (3) を ",
-        math(String.raw`\check\psi_{M+1-\mu}`),
+        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu}`),
         " にも適用できる。",
         ref("def_check_number_operator"),
         " の ",
-        math(String.raw`\check{n}_\mu = \check\psi_\mu^\dagger\check\psi_{M+1-\mu}`),
+        math(String.raw`\check{n}_\mu = \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\,\check{n}_\mu
-&= \varepsilon\,\check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}
+&= \varepsilon\,\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{def\_check\_number\_operator}) \\
-&= \left(-\check\psi_\mu^\dagger\,\varepsilon\right)\check\psi_{M+1-\mu}
+&= \left(-\check\psi_\mu^\dagger\,\varepsilon\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{(3)}) \\
-&= -\check\psi_\mu^\dagger\left(\varepsilon\,\check\psi_{M+1-\mu}\right)
+&= -\check\psi_\mu^\dagger\left(\varepsilon\,\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
    \quad (\because \text{結合法則}) \\
-&= -\check\psi_\mu^\dagger\left(-\check\psi_{M+1-\mu}\,\varepsilon\right)
-   \quad (\because \text{(3) を添字 } M+1-\mu \text{ へ適用}) \\
-&= \check\psi_\mu^\dagger\check\psi_{M+1-\mu}\,\varepsilon
+&= -\check\psi_\mu^\dagger\left(-\check\psi_{M_{\mathrm{col}}+1-\mu}\,\varepsilon\right)
+   \quad (\because \text{(3) を添字 } M_{\mathrm{col}}+1-\mu \text{ へ適用}) \\
+&= \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\,\varepsilon
    \quad (\because (-1)^2 = 1) \\
 &= \check{n}_\mu\,\varepsilon
    \quad (\because \text{def\_check\_number\_operator})
@@ -368,7 +368,7 @@ export default defineBlocks([
       paragraph([
         ref("check_joint_eigenspace_decomposition"),
         " の ",
-        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M}
+        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}}
 \left(\epsilon_\mu\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)\right)`),
         " は ",
         math(String.raw`\check{n}_\mu`),
@@ -432,11 +432,11 @@ export default defineBlocks([
         ],
         [
           math(String.raw`\text{(3)}\quad \eta_\epsilon
-= \eta_{(1,\dots,1)}\,(-1)^{M-|\epsilon|}`),
+= \eta_{(1,\dots,1)}\,(-1)^{M_{\mathrm{col}}-|\epsilon|}`),
         ],
         [
           math(String.raw`\text{(4)}\quad \varepsilon
-= \eta_{(1,\dots,1)}\,(-1)^{M}\prod_{\mu=1}^{M}\left(I - 2\check{n}_\mu\right)`),
+= \eta_{(1,\dots,1)}\,(-1)^{M_{\mathrm{col}}}\prod_{\mu=1}^{M_{\mathrm{col}}}\left(I - 2\check{n}_\mu\right)`),
         ],
       ]),
       paragraph([
@@ -612,14 +612,14 @@ q
         " である。",
         ref("check_number_operator_idempotent"),
         " (2) の ",
-        math(String.raw`\check\psi_{M+1-\mu}\check\psi_\mu^\dagger = I - \check{n}_\mu`),
+        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger = I - \check{n}_\mu`),
         " を ",
         math(String.raw`q`),
         " に施すと",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\check\psi_{M+1-\mu}\left(\check\psi_\mu^\dagger q\right)
+\check\psi_{M_{\mathrm{col}}+1-\mu}\left(\check\psi_\mu^\dagger q\right)
 &= \left(I - \check{n}_\mu\right)q
    \quad (\because \text{check\_number\_operator\_idempotent (2)}) \\
 &= q-0
@@ -649,12 +649,12 @@ q
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\mu\,\check\psi_\mu^\dagger
-&= \check\psi_\mu^\dagger\left(\check\psi_{M+1-\mu}\check\psi_\mu^\dagger\right)
+&= \check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger\right)
    \quad (\because \text{def\_check\_number\_operator と結合法則}) \\
 &= \check\psi_\mu^\dagger\left(I - \check{n}_\mu\right)
    \quad (\because \text{check\_number\_operator\_idempotent (2)}) \\
 &= \check\psi_\mu^\dagger
-   - \check\psi_\mu^\dagger\check\psi_\mu^\dagger\check\psi_{M+1-\mu}
+   - \check\psi_\mu^\dagger\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{分配法則と def\_check\_number\_operator}) \\
 &= \check\psi_\mu^\dagger - 0
    \quad (\because \text{check\_number\_operator\_idempotent (1) の }
@@ -690,7 +690,7 @@ q
    \quad (\because \text{Step 2 冒頭の } \check{n}_\mu\check\psi_\mu^\dagger
    = \check\psi_\mu^\dagger) \\
 &= \check\psi_\mu^\dagger\left(\prod_{\nu \neq \mu}R_\nu^{(\epsilon_\nu)}\right)q
-   \quad (\because \text{check\_number\_operators\_commute (1) を } M-1 \text{ 箇所へ同時適用}) \\
+   \quad (\because \text{check\_number\_operators\_commute (1) を } M_{\mathrm{col}}-1 \text{ 箇所へ同時適用}) \\
 &= \check\psi_\mu^\dagger\,q
    \quad \left(\because R_\mu^{(0)}q = \left(I - \check{n}_\mu\right)q = q
    \text{ より } \left(\prod_{\nu \neq \mu}R_\nu^{(\epsilon_\nu)}\right)q
@@ -736,7 +736,7 @@ q
         " から出発して、",
         math(String.raw`\epsilon_\mu = 0`),
         " である ",
-        math(String.raw`M - |\epsilon|`),
+        math(String.raw`M_{\mathrm{col}} - |\epsilon|`),
         " 個の添字 ",
         math(String.raw`\mu`),
         " を 1 つずつ ",
@@ -746,13 +746,13 @@ q
         " に至る。(2) を各段で使うと符号が 1 回ずつ反転するので",
       ]),
       displayMath(
-        String.raw`\eta_{(1,\dots,1)} = (-1)^{M-|\epsilon|}\,\eta_\epsilon`,
+        String.raw`\eta_{(1,\dots,1)} = (-1)^{M_{\mathrm{col}}-|\epsilon|}\,\eta_\epsilon`,
       ),
       paragraph([
         "両辺に ",
-        math(String.raw`(-1)^{M-|\epsilon|}`),
+        math(String.raw`(-1)^{M_{\mathrm{col}}-|\epsilon|}`),
         " を掛け、",
-        math(String.raw`\left((-1)^{M-|\epsilon|}\right)^2 = 1`),
+        math(String.raw`\left((-1)^{M_{\mathrm{col}}-|\epsilon|}\right)^2 = 1`),
         " を使えば (3) を得る。",
       ]),
       paragraph([
@@ -764,8 +764,8 @@ q
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left(\prod_{\mu=1}^{M}\left(I - 2\check{n}_\mu\right)\right)\check{Q}_\epsilon
-&= \left(\prod_{\mu=1}^{M}\left(1 - 2\epsilon_\mu\right)\right)\check{Q}_\epsilon
+\left(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(I - 2\check{n}_\mu\right)\right)\check{Q}_\epsilon
+&= \left(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(1 - 2\epsilon_\mu\right)\right)\check{Q}_\epsilon
    \quad (\because \text{check\_joint\_eigenspace\_decomposition (3)}) \\
 &= (-1)^{|\epsilon|}\,\check{Q}_\epsilon
    \quad \left(\because 1 - 2\epsilon_\mu = \begin{cases}-1 & (\epsilon_\mu = 1) \\
@@ -778,9 +778,9 @@ q
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\check{Q}_\epsilon
-&= \eta_{(1,\dots,1)}(-1)^{M-|\epsilon|}\check{Q}_\epsilon
+&= \eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}-|\epsilon|}\check{Q}_\epsilon
    \quad (\because \text{(1) と (3)}) \\
-&= \eta_{(1,\dots,1)}(-1)^{M}(-1)^{|\epsilon|}\check{Q}_\epsilon
+&= \eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}}(-1)^{|\epsilon|}\check{Q}_\epsilon
    \quad (\because (-1)^{-|\epsilon|}=(-1)^{|\epsilon|})
 \end{aligned}`,
       ),
@@ -788,7 +788,7 @@ q
         "したがって 2 つの行列 ",
         math(String.raw`\varepsilon`),
         " と ",
-        math(String.raw`\eta_{(1,\dots,1)}(-1)^M\prod_\mu(I-2\check{n}_\mu)`),
+        math(String.raw`\eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}}\prod_\mu(I-2\check{n}_\mu)`),
         " は、すべての ",
         math(String.raw`\check{Q}_\epsilon`),
         " に右から掛けた結果が一致する。",
@@ -829,8 +829,8 @@ q
       ]),
       displayMath(
         String.raw`\mathrm{tr}\!\left(\varepsilon\,V^{(+)}\right)
-= \eta_{(1,\dots,1)}\,(2\sinh 2K_2)^{M/2}
-\prod_{\mu=1}^{M}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)`,
+= \eta_{(1,\dots,1)}\,(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)`,
       ),
       paragraph([
         "が成り立つ。",
@@ -890,16 +890,16 @@ q
         "Step 2（積への分解）。",
         ref("epsilon_eigenvalue_on_check_Q"),
         " (3) より ",
-        math(String.raw`\eta_\epsilon = \eta_{(1,\dots,1)}(-1)^{M-|\epsilon|}`),
+        math(String.raw`\eta_\epsilon = \eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}-|\epsilon|}`),
         " であり、",
         ref("eigenvalues_of_V_plus"),
         " の ",
-        math(String.raw`\check\Lambda_\epsilon = (2\sinh 2K_2)^{M/2}
-\exp\!\left(\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu-\tfrac12\right)\right)`),
+        math(String.raw`\check\Lambda_\epsilon = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu-\tfrac12\right)\right)`),
         " である。",
-        math(String.raw`(-1)^{M-|\epsilon|} = \prod_{\mu=1}^{M}(-1)^{1-\epsilon_\mu}`),
+        math(String.raw`(-1)^{M_{\mathrm{col}}-|\epsilon|} = \prod_{\mu=1}^{M_{\mathrm{col}}}(-1)^{1-\epsilon_\mu}`),
         "（",
-        math(String.raw`\sum_\mu(1-\epsilon_\mu) = M - |\epsilon|`),
+        math(String.raw`\sum_\mu(1-\epsilon_\mu) = M_{\mathrm{col}} - |\epsilon|`),
         "）と ",
         ref("theorem_exp_product"),
         "（",
@@ -908,8 +908,8 @@ q
       ]),
       displayMath(
         String.raw`\eta_\epsilon\,\check\Lambda_\epsilon
-= \eta_{(1,\dots,1)}\,(2\sinh 2K_2)^{M/2}
-\prod_{\mu=1}^{M}\left((-1)^{1-\epsilon_\mu}
+= \eta_{(1,\dots,1)}\,(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\prod_{\mu=1}^{M_{\mathrm{col}}}\left((-1)^{1-\epsilon_\mu}
 \exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu-\tfrac12\right)\right)\right)`,
       ),
       paragraph([
@@ -925,11 +925,11 @@ q
       displayMath(
         String.raw`\begin{aligned}
 \sum_{\epsilon}\eta_\epsilon\check\Lambda_\epsilon
-&= \eta_{(1,\dots,1)}(2\sinh 2K_2)^{M/2}\prod_{\mu=1}^{M}
+&= \eta_{(1,\dots,1)}(2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(-\exp\!\left(-\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)
    + \exp\!\left(+\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)\right)
    \quad (\because \text{有限個の因子の積の展開}) \\
-&= \eta_{(1,\dots,1)}(2\sinh 2K_2)^{M/2}\prod_{\mu=1}^{M}
+&= \eta_{(1,\dots,1)}(2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}
    2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
    \quad \left(\because \sinh x = \frac{\exp(x)-\exp(-x)}{2}\right)
 \end{aligned}`,
@@ -951,7 +951,7 @@ q
         " より ",
         math(String.raw`2\sinh 2K_2 > 0`),
         " なので ",
-        math(String.raw`(2\sinh 2K_2)^{M/2} > 0`),
+        math(String.raw`(2\sinh 2K_2)^{M_{\mathrm{col}}/2} > 0`),
         "。",
         ref("def_gamma_theta_tilde_mu"),
         " より ",
@@ -990,12 +990,12 @@ q
     labels: ["def_D0_open_chain_operator"],
     statement: [
       paragraph([
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
         ref("def_transfer_matrix_symbols"),
         " のサイト作用素を用いて、開鎖項を",
       ]),
-      displayMath(String.raw`D_0 := \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z`),
+      displayMath(String.raw`D_0 := \sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z`),
       paragraph(["と定める。"]),
     ],
     conversion: { status: "added" },
@@ -1009,12 +1009,12 @@ q
     labels: ["def_G_boundary_operator"],
     statement: [
       paragraph([
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
         ref("def_transfer_matrix_symbols"),
         " のサイト作用素を用いて、周期境界項を",
       ]),
-      displayMath(String.raw`G := \sigma_M^z\sigma_1^z`),
+      displayMath(String.raw`G := \sigma_{M_{\mathrm{col}}}^z\sigma_1^z`),
       paragraph(["と定める。"]),
     ],
     conversion: { status: "added" },
@@ -1025,17 +1025,17 @@ q
     kind: "claim",
     origin: { path: SRC, ordinal: 6 },
     title: {
-      tex: String.raw`i H_1^{(+)} = \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z
-+ \varepsilon\,\sigma_M^z\sigma_1^z`,
+      tex: String.raw`i H_1^{(+)} = \sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z
++ \varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z`,
     },
     labels: ["H1_plus_in_sigma_z_form"],
     statement: [
       paragraph([
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とし、",
         ref("def_H1_plus"),
         " の ",
-        math(String.raw`H_1^{(+)} = Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M-1}Z_M - Y_MZ_1`),
+        math(String.raw`H_1^{(+)} = Y_1Z_2 + Y_2Z_3 + \cdots + Y_{M_{\mathrm{col}}-1}Z_{M_{\mathrm{col}}} - Y_{M_{\mathrm{col}}}Z_1`),
         "、",
         ref("def_D0_open_chain_operator"),
         " の開鎖項 ",
@@ -1079,7 +1079,7 @@ q
       ]),
       paragraph([
         "まず ",
-        math(String.raw`1 \leq m \leq M-1`),
+        math(String.raw`1 \leq m \leq M_{\mathrm{col}}-1`),
         " とする。",
         ref("def_transfer_matrix_symbols"),
         " より ",
@@ -1117,37 +1117,37 @@ Y_mZ_{m+1}
       ]),
       paragraph([
         "次に境界項を計算する。",
-        math(String.raw`Y_M = \sigma_1^x\cdots\sigma_{M-1}^x\sigma_M^y`),
+        math(String.raw`Y_{M_{\mathrm{col}}} = \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y`),
         "、",
         math(String.raw`Z_1 = \sigma_1^z`),
         " である。まず左辺を計算する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-Y_MZ_1
-&= \left(\sigma_1^x\cdots\sigma_{M-1}^x\sigma_M^y\right)\sigma_1^z
+Y_{M_{\mathrm{col}}}Z_1
+&= \left(\sigma_1^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y\right)\sigma_1^z
    \quad (\because \text{def\_transfer\_matrix\_symbols}) \\
-&= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y
+&= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
    \quad (\because \text{相異なるサイトの因子は可換}) \\
-&= \left(-i\,\sigma_1^y\right)\sigma_2^x\cdots\sigma_{M-1}^x\,\sigma_M^y
+&= \left(-i\,\sigma_1^y\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
    \quad (\because \sigma^x\sigma^z = -i\sigma^y) \\
-&= -i\,\sigma_1^y\sigma_2^x\cdots\sigma_{M-1}^x\sigma_M^y
+&= -i\,\sigma_1^y\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y
    \quad (\because \text{スカラー倍と行列積の結合律})
 \end{aligned}`,
       ),
       paragraph(["次に右辺を計算する。"]),
       displayMath(
         String.raw`\begin{aligned}
-\varepsilon\,\sigma_M^z\sigma_1^z
-&= \left(\sigma_1^x\sigma_2^x\cdots\sigma_M^x\right)\sigma_M^z\sigma_1^z
+\varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
+&= \left(\sigma_1^x\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}}^x\right)\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
    \quad (\because \text{def\_transfer\_matrix\_symbols の } \varepsilon) \\
-&= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M-1}^x
-   \left(\sigma_M^x\sigma_M^z\right)
+&= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x
+   \left(\sigma_{M_{\mathrm{col}}}^x\sigma_{M_{\mathrm{col}}}^z\right)
    \quad (\because \text{相異なるサイトの因子は可換}) \\
-&= \left(-i\,\sigma_1^y\right)\sigma_2^x\cdots\sigma_{M-1}^x
-   \left(-i\,\sigma_M^y\right)
+&= \left(-i\,\sigma_1^y\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x
+   \left(-i\,\sigma_{M_{\mathrm{col}}}^y\right)
    \quad (\because \sigma^x\sigma^z = -i\sigma^y \text{ を 2 箇所へ同時適用}) \\
-&= -\,\sigma_1^y\sigma_2^x\cdots\sigma_{M-1}^x\sigma_M^y
+&= -\,\sigma_1^y\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y
    \quad (\because (-i)^2 = -1)
 \end{aligned}`,
       ),
@@ -1156,13 +1156,13 @@ Y_MZ_1
       ]),
       displayMath(
         String.raw`\begin{aligned}
--i\,Y_MZ_1
-&= -i\left(-i\,\sigma_1^y\sigma_2^x\cdots\sigma_{M-1}^x\sigma_M^y\right)
-   \quad (\because \text{直前の } Y_MZ_1 \text{ の計算}) \\
-&= -\,\sigma_1^y\sigma_2^x\cdots\sigma_{M-1}^x\sigma_M^y
+-i\,Y_{M_{\mathrm{col}}}Z_1
+&= -i\left(-i\,\sigma_1^y\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y\right)
+   \quad (\because \text{直前の } Y_{M_{\mathrm{col}}}Z_1 \text{ の計算}) \\
+&= -\,\sigma_1^y\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y
    \quad \left(\because (-i)^2 = -1\right) \\
-&= \varepsilon\,\sigma_M^z\sigma_1^z
-   \quad (\because \text{直前の } \varepsilon\sigma_M^z\sigma_1^z \text{ の計算})
+&= \varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
+   \quad (\because \text{直前の } \varepsilon\sigma_{M_{\mathrm{col}}}^z\sigma_1^z \text{ の計算})
 \end{aligned}`,
       ),
       paragraph([
@@ -1175,15 +1175,15 @@ Y_MZ_1
       displayMath(
         String.raw`\begin{aligned}
 i\,H_1^{(+)}
-&= i\left(\sum_{m=1}^{M-1}Y_mZ_{m+1} - Y_MZ_1\right)
+&= i\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\right)
    \quad (\because \text{def\_H1\_plus}) \\
-&= \sum_{m=1}^{M-1}\left(i\,Y_mZ_{m+1}\right) + \left(-i\,Y_MZ_1\right)
+&= \sum_{m=1}^{M_{\mathrm{col}}-1}\left(i\,Y_mZ_{m+1}\right) + \left(-i\,Y_{M_{\mathrm{col}}}Z_1\right)
    \quad (\because \text{スカラー倍の分配法則}) \\
-&= \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z + \left(-i\,Y_MZ_1\right)
+&= \sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z + \left(-i\,Y_{M_{\mathrm{col}}}Z_1\right)
    \quad (\because \text{直前に示した内部辺の等式を有限和へ適用}) \\
-&= \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z + \varepsilon\,\sigma_M^z\sigma_1^z
+&= \sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z + \varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
    \quad (\because \text{直前に示した境界項の等式}) \\
-&= D_0 + \varepsilon\,\sigma_M^z\sigma_1^z
+&= D_0 + \varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
    \quad (\because \text{def\_D0\_open\_chain\_operator}) \\
 &= D_0 + \varepsilon G
    \quad (\because \text{def\_G\_boundary\_operator})
@@ -1225,11 +1225,11 @@ i\,H_1^{(+)}
       paragraph([
         ref("epsilon_commutes_with_transfer_matrices"),
         " の Step 1 より、各 ",
-        math(String.raw`k \in \{1,\dots,M\}`),
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
         " について ",
         math(String.raw`\varepsilon\sigma_k^z=-\sigma_k^z\varepsilon`),
         " である。各 ",
-        math(String.raw`m\in\{1,\dots,M-1\}`),
+        math(String.raw`m\in\{1,\dots,M_{\mathrm{col}}-1\}`),
         " に対して二回の反可換移動を一回ずつ行うと",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -1249,13 +1249,13 @@ i\,H_1^{(+)}
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \varepsilon D_0
-&=\varepsilon\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)
+&=\varepsilon\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
 &&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr)\\
-&=\sum_{m=1}^{M-1}\varepsilon(\sigma_m^z\sigma_{m+1}^z)
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}\varepsilon(\sigma_m^z\sigma_{m+1}^z)
 &&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
-&=\sum_{m=1}^{M-1}(\sigma_m^z\sigma_{m+1}^z)\varepsilon
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}(\sigma_m^z\sigma_{m+1}^z)\varepsilon
 &&\bigl(\because\ \text{直前の各 }m\text{ の等式}\bigr)\\
-&=\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)\varepsilon
+&=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)\varepsilon
 &&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
 &=D_0\varepsilon
 &&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr).
@@ -1263,19 +1263,19 @@ i\,H_1^{(+)}
       paragraph(["境界の二サイトについても同じ二回の反可換移動を行う。"]),
       displayMath(String.raw`\begin{aligned}
 \varepsilon G
-&=\varepsilon(\sigma_M^z\sigma_1^z)
+&=\varepsilon(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)
 &&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr)\\
-&=(\varepsilon\sigma_M^z)\sigma_1^z
+&=(\varepsilon\sigma_{M_{\mathrm{col}}}^z)\sigma_1^z
 &&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
-&=(-\sigma_M^z\varepsilon)\sigma_1^z
-&&\bigl(\because\ \varepsilon\sigma_M^z=-\sigma_M^z\varepsilon\bigr)\\
-&=-\sigma_M^z(\varepsilon\sigma_1^z)
+&=(-\sigma_{M_{\mathrm{col}}}^z\varepsilon)\sigma_1^z
+&&\bigl(\because\ \varepsilon\sigma_{M_{\mathrm{col}}}^z=-\sigma_{M_{\mathrm{col}}}^z\varepsilon\bigr)\\
+&=-\sigma_{M_{\mathrm{col}}}^z(\varepsilon\sigma_1^z)
 &&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
-&=-\sigma_M^z(-\sigma_1^z\varepsilon)
+&=-\sigma_{M_{\mathrm{col}}}^z(-\sigma_1^z\varepsilon)
 &&\bigl(\because\ \varepsilon\sigma_1^z=-\sigma_1^z\varepsilon\bigr)\\
-&=\sigma_M^z(\sigma_1^z\varepsilon)
+&=\sigma_{M_{\mathrm{col}}}^z(\sigma_1^z\varepsilon)
 &&\bigl(\because\ (-1)(-1)=1\bigr)\\
-&=(\sigma_M^z\sigma_1^z)\varepsilon
+&=(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)\varepsilon
 &&\bigl(\because\ \text{行列の積の結合律}\bigr)\\
 &=G\varepsilon
 &&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr).
@@ -1285,27 +1285,27 @@ i\,H_1^{(+)}
         " (1) より、相異なるサイトの因子は可換し、同じサイトに現れる因子はいずれも ",
         math(String.raw`\sigma^z`),
         " なので、各サイトの因子を並べ替えると、各 ",
-        math(String.raw`m\in\{1,\dots,M-1\}`),
+        math(String.raw`m\in\{1,\dots,M_{\mathrm{col}}-1\}`),
         " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 (\sigma_m^z\sigma_{m+1}^z)G
-&=(\sigma_m^z\sigma_{m+1}^z)(\sigma_M^z\sigma_1^z)
+&=(\sigma_m^z\sigma_{m+1}^z)(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)
 &&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr)\\
-&=(\sigma_M^z\sigma_1^z)(\sigma_m^z\sigma_{m+1}^z)
+&=(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)(\sigma_m^z\sigma_{m+1}^z)
 &&\bigl(\because\ \text{kronecker\_product\_rule (1) を各サイトへ適用}\bigr)\\
 &=G(\sigma_m^z\sigma_{m+1}^z)
 &&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr).
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 D_0G
-&=\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)G
+&=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)G
 &&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr)\\
-&=\sum_{m=1}^{M-1}(\sigma_m^z\sigma_{m+1}^z)G
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}(\sigma_m^z\sigma_{m+1}^z)G
 &&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
-&=\sum_{m=1}^{M-1}G(\sigma_m^z\sigma_{m+1}^z)
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}G(\sigma_m^z\sigma_{m+1}^z)
 &&\bigl(\because\ \text{直前の各 }m\text{ の等式}\bigr)\\
-&=G\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)
+&=G\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
 &&\bigl(\because\ \text{行列積の有限和への分配法則}\bigr)\\
 &=GD_0
 &&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr).
@@ -1354,8 +1354,8 @@ D_0G
 &&\bigl(\because\ \text{epsilon\_D0\_G\_pairwise\_commute の }\varepsilon G=G\varepsilon\bigr)\\
 &= I\,G^2
 &&\bigl(\because\ \text{epsilon\_projector\_properties (1) の }\varepsilon^2=I\bigr)\\
-&= I(\sigma_M^z)^2(\sigma_1^z)^2
-&&\bigl(\because\ G=\sigma_M^z\sigma_1^z\text{ と相異なるサイトの因子の可換性}\bigr)\\
+&= I(\sigma_{M_{\mathrm{col}}}^z)^2(\sigma_1^z)^2
+&&\bigl(\because\ G=\sigma_{M_{\mathrm{col}}}^z\sigma_1^z\text{ と相異なるサイトの因子の可換性}\bigr)\\
 &= I\cdot I\cdot I
 &&\bigl(\because\ \text{pauli\_matrix\_products の }(\sigma^z)^2=I\bigr)\\
 &= I
@@ -1389,9 +1389,9 @@ D_0G
         " は次のように作用する。",
       ]),
       displayMath(String.raw`D_0 f_{\iota(s)}
-=\left(\sum_{m=1}^{M-1}s(m)s(m+1)\right)f_{\iota(s)},
+=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)\right)f_{\iota(s)},
 \qquad
-G f_{\iota(s)}=s(M)s(1)f_{\iota(s)}`),
+G f_{\iota(s)}=s(M_{\mathrm{col}})s(1)f_{\iota(s)}`),
       paragraph([
         "ここでスピン配置を ",
         math(String.raw`s`),
@@ -1404,7 +1404,7 @@ G f_{\iota(s)}=s(M)s(1)f_{\iota(s)}`),
       paragraph([
         ref("sigma_z_diagonal_action"),
         " より、各 ",
-        math(String.raw`m\in\{1,\dots,M-1\}`),
+        math(String.raw`m\in\{1,\dots,M_{\mathrm{col}}-1\}`),
         " について一サイトずつ作用させると",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -1422,29 +1422,29 @@ G f_{\iota(s)}=s(M)s(1)f_{\iota(s)}`),
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 D_0f_{\iota(s)}
-&=\left(\sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z\right)f_{\iota(s)}
+&=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)f_{\iota(s)}
 &&\bigl(\because\ \text{def\_D0\_open\_chain\_operator}\bigr)\\
-&=\sum_{m=1}^{M-1}(\sigma_m^z\sigma_{m+1}^z)f_{\iota(s)}
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}(\sigma_m^z\sigma_{m+1}^z)f_{\iota(s)}
 &&\bigl(\because\ \text{行列作用の有限和への分配法則}\bigr)\\
-&=\sum_{m=1}^{M-1}s(m)s(m+1)f_{\iota(s)}
+&=\sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)f_{\iota(s)}
 &&\bigl(\because\ \text{直前の各 }m\text{ の等式}\bigr)\\
-&=\left(\sum_{m=1}^{M-1}s(m)s(m+1)\right)f_{\iota(s)}
+&=\left(\sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)\right)f_{\iota(s)}
 &&\bigl(\because\ \text{ベクトルの有限和の分配法則}\bigr).
 \end{aligned}`),
       paragraph(["境界項にも同じ一サイト作用を二回適用する。"]),
       displayMath(String.raw`\begin{aligned}
 Gf_{\iota(s)}
-&=(\sigma_M^z\sigma_1^z)f_{\iota(s)}
+&=(\sigma_{M_{\mathrm{col}}}^z\sigma_1^z)f_{\iota(s)}
 &&\bigl(\because\ \text{def\_G\_boundary\_operator}\bigr)\\
-&=\sigma_M^z\bigl(s(1)f_{\iota(s)}\bigr)
+&=\sigma_{M_{\mathrm{col}}}^z\bigl(s(1)f_{\iota(s)}\bigr)
 &&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }1\text{ に適用}\bigr)\\
-&=s(1)\sigma_M^zf_{\iota(s)}
+&=s(1)\sigma_{M_{\mathrm{col}}}^zf_{\iota(s)}
 &&\bigl(\because\ \text{行列作用の複素線型性}\bigr)\\
-&=s(1)\bigl(s(M)f_{\iota(s)}\bigr)
-&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }M\text{ に適用}\bigr)\\
-&=\bigl(s(1)s(M)\bigr)f_{\iota(s)}
+&=s(1)\bigl(s(M_{\mathrm{col}})f_{\iota(s)}\bigr)
+&&\bigl(\because\ \text{sigma\_z\_diagonal\_action を }M_{\mathrm{col}}\text{ に適用}\bigr)\\
+&=\bigl(s(1)s(M_{\mathrm{col}})\bigr)f_{\iota(s)}
 &&\bigl(\because\ \text{スカラー倍の結合律}\bigr)\\
-&=s(M)s(1)f_{\iota(s)}
+&=s(M_{\mathrm{col}})s(1)f_{\iota(s)}
 &&\bigl(\because\ \text{実数の積の交換律}\bigr).
 \end{aligned}`),
     ],
@@ -1459,27 +1459,26 @@ Gf_{\iota(s)}
     labels: ["def_open_chain_spin_energy"],
     statement: [
       paragraph([
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
-        " とする。",
-        ref("def_transfer_matrix"),
-        " で行の長さに使った ",
-        math(String.raw`N`),
-        " をここでは ",
-        math(String.raw`M`),
-        " と書き替え、",
-        math(String.raw`\mathfrak{M} = \mathrm{Map}(\{1,\dots,M\},\{-1,1\})`),
-        " とする。各 ",
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_row_configurations"),
+        " の ",
+        math(String.raw`\mathfrak{M} = \mathrm{Map}(\{1,\dots,M_{\mathrm{col}}\},\{-1,1\})`),
+        " を用いる。各 ",
         math(String.raw`s\in\mathfrak M`),
         " に対して、1次元開鎖のエネルギーを",
       ]),
       displayMath(
-        String.raw`E(s) := \sum_{m=1}^{M-1}s(m)\,s(m+1) \in \mathbb{Z}
+        String.raw`E(s) := \sum_{m=1}^{M_{\mathrm{col}}-1}s(m)\,s(m+1) \in \mathbb{Z}
 \qquad (s \in \mathfrak{M})`,
       ),
       paragraph(["と定める。"])],
     conversion: {
       status: "added",
-      notes: ["転送行列の行長 N を M と読み替えることと、開鎖エネルギーの共通記法を独立した定義にした。"],
+      notes: [
+        "転送行列の行長 N を M と読み替えることと、開鎖エネルギーの共通記法を独立した定義にした。",
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。読み替えの断り書きを除き、𝔐 の参照先を <def_row_configurations> にした。",
+      ],
     },
   },
 
@@ -1497,7 +1496,7 @@ Gf_{\iota(s)}
         " とする。このとき",
       ]),
       displayMath(String.raw`\sum_{s\in\mathfrak M}\exp(K E(s))
-=2\left(2\cosh K\right)^{M-1}`),
+=2\left(2\cosh K\right)^{M_{\mathrm{col}}-1}`),
       paragraph([
         "が成り立つ。（指数評価による ",
         math(String.raw`\mathbb R`),
@@ -1509,17 +1508,17 @@ Gf_{\iota(s)}
         "Step 1（変数変換）。写像",
       ]),
       displayMath(
-        String.raw`\Phi : \mathfrak{M} \longrightarrow \{-1,1\}\times\{-1,1\}^{M-1},
+        String.raw`\Phi : \mathfrak{M} \longrightarrow \{-1,1\}\times\{-1,1\}^{M_{\mathrm{col}}-1},
 \qquad
-\Phi(s) := \left(s(1);\ t_1,\dots,t_{M-1}\right), \quad t_m := s(m)s(m+1)`,
+\Phi(s) := \left(s(1);\ t_1,\dots,t_{M_{\mathrm{col}}-1}\right), \quad t_m := s(m)s(m+1)`,
       ),
       paragraph([
         "は全単射である。実際、",
-        math(String.raw`(s(1); t_1,\dots,t_{M-1})`),
+        math(String.raw`(s(1); t_1,\dots,t_{M_{\mathrm{col}}-1})`),
         " が与えられれば ",
         math(String.raw`s(m+1) = s(m)t_m`),
         " により ",
-        math(String.raw`s(2),\dots,s(M)`),
+        math(String.raw`s(2),\dots,s(M_{\mathrm{col}})`),
         " が順に一意に定まり（",
         math(String.raw`s(m)s(m) = 1`),
         " なので ",
@@ -1529,36 +1528,36 @@ Gf_{\iota(s)}
         " は ",
         math(String.raw`\Phi(s)`),
         " として元の組を与えるからである。両側の集合はともに ",
-        math(String.raw`2^M`),
+        math(String.raw`2^{M_{\mathrm{col}}}`),
         " 個の元をもつ。",
       ]),
       paragraph([
         "Step 2（スピン和の計算）。",
-        math(String.raw`E(s) = \sum_{m=1}^{M-1}t_m`),
+        math(String.raw`E(s) = \sum_{m=1}^{M_{\mathrm{col}}-1}t_m`),
         " なので、",
         ref("theorem_exp_product"),
         "（",
         math(String.raw`n=1`),
         "、実数の指数法則）より ",
-        math(String.raw`\exp(KE(s)) = \prod_{m=1}^{M-1}\exp(Kt_m)`),
+        math(String.raw`\exp(KE(s)) = \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m)`),
         " である。Step 1 の全単射で和を書き換えると",
       ]),
       paragraph([ref("def_cosh_sinh"), " より、最後から二つ目の等号が成り立つ。"]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{s\in\mathfrak{M}}\exp(KE(s))
-&= \sum_{s(1)\in\{-1,1\}}\ \sum_{t_1,\dots,t_{M-1}\in\{-1,1\}}
-   \prod_{m=1}^{M-1}\exp(Kt_m)
+&= \sum_{s(1)\in\{-1,1\}}\ \sum_{t_1,\dots,t_{M_{\mathrm{col}}-1}\in\{-1,1\}}
+   \prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m)
    \quad (\because \text{Step 1 の全単射}) \\
 &= \left(\sum_{s(1)\in\{-1,1\}}1\right)
-   \prod_{m=1}^{M-1}\left(\sum_{t_m\in\{-1,1\}}\exp(Kt_m)\right)
+   \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\sum_{t_m\in\{-1,1\}}\exp(Kt_m)\right)
    \quad (\because \text{有限個の因子の積の展開（各 } t_m \text{ は独立に走る）}) \\
-&= 2\prod_{m=1}^{M-1}\left(\exp(K)+\exp(-K)\right)
+&= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)+\exp(-K)\right)
    \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
-&= 2\prod_{m=1}^{M-1}\left(2\cosh K\right)
+&= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\cosh K\right)
    \quad \left(\because \text{双曲線余弦の定義}\right) \\
-&= 2\left(2\cosh K\right)^{M-1}
-   \quad (\because \text{同じ因子 }2\cosh K\text{ の }M-1\text{ 個の積})
+&= 2\left(2\cosh K\right)^{M_{\mathrm{col}}-1}
+   \quad (\because \text{同じ因子 }2\cosh K\text{ の }M_{\mathrm{col}}-1\text{ 個の積})
 \end{aligned}`,
       ),
     ],
@@ -1581,8 +1580,8 @@ Gf_{\iota(s)}
         math(String.raw`K\in\mathbb R`),
         " とする。このとき",
       ]),
-      displayMath(String.raw`\sum_{s\in\mathfrak M}s(M)s(1)\exp(K E(s))
-=2\left(2\sinh K\right)^{M-1}`),
+      displayMath(String.raw`\sum_{s\in\mathfrak M}s(M_{\mathrm{col}})s(1)\exp(K E(s))
+=2\left(2\sinh K\right)^{M_{\mathrm{col}}-1}`),
       paragraph([
         "が成り立つ。（指数評価による ",
         math(String.raw`\mathbb R`),
@@ -1594,17 +1593,17 @@ Gf_{\iota(s)}
         "Step 1（変数変換）。写像",
       ]),
       displayMath(
-        String.raw`\Phi : \mathfrak{M} \longrightarrow \{-1,1\}\times\{-1,1\}^{M-1},
+        String.raw`\Phi : \mathfrak{M} \longrightarrow \{-1,1\}\times\{-1,1\}^{M_{\mathrm{col}}-1},
 \qquad
-\Phi(s) := \left(s(1);\ t_1,\dots,t_{M-1}\right), \quad t_m := s(m)s(m+1)`,
+\Phi(s) := \left(s(1);\ t_1,\dots,t_{M_{\mathrm{col}}-1}\right), \quad t_m := s(m)s(m+1)`,
       ),
       paragraph([
         "は全単射である。実際、",
-        math(String.raw`(s(1);t_1,\dots,t_{M-1})`),
+        math(String.raw`(s(1);t_1,\dots,t_{M_{\mathrm{col}}-1})`),
         " から漸化式 ",
         math(String.raw`s(m+1)=s(m)t_m`),
         " によって ",
-        math(String.raw`s(2),\dots,s(M)`),
+        math(String.raw`s(2),\dots,s(M_{\mathrm{col}})`),
         " が一意に復元され、この復元は ",
         math(String.raw`t_m=s(m)s(m+1)`),
         " の逆写像になる。",
@@ -1616,14 +1615,14 @@ Gf_{\iota(s)}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\prod_{m=1}^{M-1}t_m
-&= \prod_{m=1}^{M-1}s(m)s(m+1)
+\prod_{m=1}^{M_{\mathrm{col}}-1}t_m
+&= \prod_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)
 &&\bigl(\because\ t_m:=s(m)s(m+1)\bigr)\\
-&= s(1)\left(\prod_{m=2}^{M-1}s(m)s(m)\right)s(M)
+&= s(1)\left(\prod_{m=2}^{M_{\mathrm{col}}-1}s(m)s(m)\right)s(M_{\mathrm{col}})
 &&\bigl(\because\ \mathbb R\text{ の乗法の可換性と結合性}\bigr)\\
-&= s(1)\left(\prod_{m=2}^{M-1}1\right)s(M)
+&= s(1)\left(\prod_{m=2}^{M_{\mathrm{col}}-1}1\right)s(M_{\mathrm{col}})
 &&\bigl(\because\ s(m)s(m)=1\text{ を各 }m\text{ へ同時適用}\bigr)\\
-&= s(1)s(M)
+&= s(1)s(M_{\mathrm{col}})
 &&\bigl(\because\ \text{有限積の単位元}\bigr)
 \end{aligned}`,
       ),
@@ -1635,25 +1634,25 @@ Gf_{\iota(s)}
         "（",
         math(String.raw`n=1`),
         "、実数の指数法則）より ",
-        math(String.raw`\exp(KE(s))=\prod_{m=1}^{M-1}\exp(Kt_m)`),
+        math(String.raw`\exp(KE(s))=\prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m)`),
         " である。したがって",
       ]),
       paragraph([ref("def_cosh_sinh"), " より、最後から二つ目の等号が成り立つ。"]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{s\in\mathfrak{M}}s(M)s(1)\exp(KE(s))
-&= \sum_{s(1)\in\{-1,1\}}\ \sum_{t_1,\dots,t_{M-1}\in\{-1,1\}}
-   \left(\prod_{m=1}^{M-1}t_m\right)\prod_{m=1}^{M-1}\exp(Kt_m)
+\sum_{s\in\mathfrak{M}}s(M_{\mathrm{col}})s(1)\exp(KE(s))
+&= \sum_{s(1)\in\{-1,1\}}\ \sum_{t_1,\dots,t_{M_{\mathrm{col}}-1}\in\{-1,1\}}
+   \left(\prod_{m=1}^{M_{\mathrm{col}}-1}t_m\right)\prod_{m=1}^{M_{\mathrm{col}}-1}\exp(Kt_m)
    \quad (\because \text{Step 1 の全単射と直前の等式}) \\
 &= \left(\sum_{s(1)\in\{-1,1\}}1\right)
-   \prod_{m=1}^{M-1}\left(\sum_{t_m\in\{-1,1\}}t_m\,\exp(Kt_m)\right)
+   \prod_{m=1}^{M_{\mathrm{col}}-1}\left(\sum_{t_m\in\{-1,1\}}t_m\,\exp(Kt_m)\right)
    \quad (\because \text{有限個の因子の積の展開}) \\
-&= 2\prod_{m=1}^{M-1}\left(\exp(K)-\exp(-K)\right)
+&= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(\exp(K)-\exp(-K)\right)
    \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
-&= 2\prod_{m=1}^{M-1}\left(2\sinh K\right)
+&= 2\prod_{m=1}^{M_{\mathrm{col}}-1}\left(2\sinh K\right)
    \quad \left(\because \text{双曲線正弦の定義}\right) \\
-&= 2\left(2\sinh K\right)^{M-1}
-   \quad (\because \text{同じ因子 }2\sinh K\text{ の }M-1\text{ 個の積})
+&= 2\left(2\sinh K\right)^{M_{\mathrm{col}}-1}
+   \quad (\because \text{同じ因子 }2\sinh K\text{ の }M_{\mathrm{col}}-1\text{ 個の積})
 \end{aligned}`,
       ),
     ],
@@ -1673,7 +1672,7 @@ Gf_{\iota(s)}
       paragraph([
         ref("def_open_chain_spin_energy"),
         " の ",
-        math(String.raw`M\in\mathbb Z_{\geq2}`),
+        math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
         " を用い、",
         math(String.raw`K\in\mathbb R_{>0}`),
         " とする。このとき ",
@@ -1687,21 +1686,21 @@ Gf_{\iota(s)}
       displayMath(
         String.raw`\begin{aligned}
 \sum_{s\in\mathfrak M}\exp(K E(s))
-&=2\left(2\cosh K\right)^{M-1}
+&=2\left(2\cosh K\right)^{M_{\mathrm{col}}-1}
    \quad (\because \blkref{open_chain_partition_sum}) \\
 &>0
    \quad (\because \blkref{cosh_sinh_basic_properties}\text{、}
-   \cosh K>0\text{、}M-1\in\mathbb Z_{>0})
+   \cosh K>0\text{、}M_{\mathrm{col}}-1\in\mathbb Z_{>0})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{s\in\mathfrak M}s(M)s(1)\exp(K E(s))
-&=2\left(2\sinh K\right)^{M-1}
+\sum_{s\in\mathfrak M}s(M_{\mathrm{col}})s(1)\exp(K E(s))
+&=2\left(2\sinh K\right)^{M_{\mathrm{col}}-1}
    \quad (\because \blkref{open_chain_endpoint_product_sum}) \\
 &>0
    \quad (\because \blkref{cosh_sinh_basic_properties}\text{、}
-   \sinh K>0\text{、}M-1\in\mathbb Z_{>0})
+   \sinh K>0\text{、}M_{\mathrm{col}}-1\in\mathbb Z_{>0})
 \end{aligned}`,
       ),
     ],
@@ -1721,14 +1720,14 @@ Gf_{\iota(s)}
     origin: { path: SRC, ordinal: 8 },
     title: {
       tex: String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-= \left(2\exp(-K_2)\cosh K_1\right)^{M} + \left(2\exp(K_2)\sinh K_1\right)^{M} > 0`,
+= \left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}} + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}} > 0`,
     },
     labels: ["trace_of_epsilon_V_plus"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
         ref("def_V_plus"),
         " の ",
@@ -1737,8 +1736,8 @@ Gf_{\iota(s)}
       ]),
       displayMath(
         String.raw`\mathrm{tr}\!\left(\varepsilon\,V^{(+)}\right)
-= \left(2\exp(-K_2)\cosh K_1\right)^{M}
-+ \left(2\exp(K_2)\sinh K_1\right)^{M}
+= \left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}}
++ \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}}
 \ \in\ \mathbb{R}_{>0}`,
       ),
       paragraph([
@@ -1899,7 +1898,11 @@ Gf_{\iota(s)}
       paragraph([
         "Step 3（成分の読み取り）。",
         ref("def_config_basis_iso"),
-        " の同一視のもとで基底を ",
+        " の ",
+        math(String.raw`\iota`),
+        " による番号付け（",
+        ref("config_numbering_equals_kronecker_numbering"),
+        "）のもとで基底を ",
         math(String.raw`f_{\iota(s)}`),
         "（",
         math(String.raw`s \in \mathfrak{M}`),
@@ -1916,13 +1919,13 @@ Gf_{\iota(s)}
           " は対角行列で ",
           math(String.raw`\left(\exp(K_1D_0)\right)_{\iota(s),\iota(s)} = \exp(K_1E(s))`),
           "（",
-          math(String.raw`E(s) = \sum_{m=1}^{M-1}s(m)s(m+1)`),
+          math(String.raw`E(s) = \sum_{m=1}^{M_{\mathrm{col}}-1}s(m)s(m+1)`),
           " は ",
           ref("def_open_chain_spin_energy"),
           " のもの）。同じく ",
           math(String.raw`G`),
           " は対角行列で ",
-          math(String.raw`G_{\iota(s),\iota(s)} = s(M)s(1)`),
+          math(String.raw`G_{\iota(s),\iota(s)} = s(M_{\mathrm{col}})s(1)`),
           "。",
         ],
         [
@@ -1934,13 +1937,15 @@ Gf_{\iota(s)}
         ],
         [
           "(c) ",
-          ref("V2_component_equals_pauli"),
+          ref("def_transfer_matrix"),
+          " と ",
+          ref("config_numbering_equals_kronecker_numbering"),
           " より ",
-          math(String.raw`(V_2)_{\iota(s),\iota(s')} = \exp\!\left(K_2\sum_{m=1}^{M}s(m)s'(m)\right)`),
+          math(String.raw`(V_2)_{\iota(s),\iota(s')} = \exp\!\left(K_2\sum_{m=1}^{M_{\mathrm{col}}}s(m)s'(m)\right)`),
           "。とくに ",
-          math(String.raw`(V_2)_{\iota(s),\iota(s)} = \exp(MK_2)`),
+          math(String.raw`(V_2)_{\iota(s),\iota(s)} = \exp(M_{\mathrm{col}}K_2)`),
           "、",
-          math(String.raw`(V_2)_{\iota(-s),\iota(s)} = \exp(-MK_2)`),
+          math(String.raw`(V_2)_{\iota(-s),\iota(s)} = \exp(-M_{\mathrm{col}}K_2)`),
           "。",
         ],
       ]),
@@ -1948,7 +1953,7 @@ Gf_{\iota(s)}
         "(b) の理由：",
         ref("def_end_iso"),
         " の基底は ",
-        math(String.raw`f_I = e_{i_1}\boxtimes\cdots\boxtimes e_{i_M}`),
+        math(String.raw`f_I = e_{i_1}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}`),
         " で、",
         ref("kronecker_product_rule"),
         " より ",
@@ -1966,7 +1971,7 @@ Gf_{\iota(s)}
         " は第 ",
         math(String.raw`m`),
         " 成分だけを入れ替える。",
-        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x`),
+        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}}^x`),
         " はすべての成分を入れ替えるので、",
         ref("def_config_basis_iso"),
         " の ",
@@ -1978,9 +1983,9 @@ Gf_{\iota(s)}
         "）のもとで ",
         math(String.raw`\varepsilon f_{\iota(s)} = f_{\iota(-s)}`),
         " である。(c) の 2 つの特別な場合は ",
-        math(String.raw`\sum_m s(m)s(m) = M`),
+        math(String.raw`\sum_m s(m)s(m) = M_{\mathrm{col}}`),
         " と ",
-        math(String.raw`\sum_m(-s(m))s(m) = -M`),
+        math(String.raw`\sum_m(-s(m))s(m) = -M_{\mathrm{col}}`),
         " による。",
       ]),
       paragraph([
@@ -2008,7 +2013,7 @@ Gf_{\iota(s)}
 &= \exp(K_1E(s))\left(V_2\right)_{\iota(-s),\iota(s)}
    \quad (\because \text{(b), } \varepsilon \text{ は行番号 } \iota(s)
    \text{ を } \iota(-s) \text{ に移す置換行列}) \\
-&= \exp(K_1E(s))\,\exp(-MK_2)
+&= \exp(K_1E(s))\,\exp(-M_{\mathrm{col}}K_2)
    \quad (\because \text{(c)})
 \end{aligned}`,
       ),
@@ -2018,9 +2023,9 @@ Gf_{\iota(s)}
 \left(\exp(K_1D_0)\,G\,V_2\right)_{\iota(s),\iota(s)}
 &= \exp(K_1E(s))\left(G\,V_2\right)_{\iota(s),\iota(s)}
    \quad (\because \text{(a) の } \exp(K_1D_0) \text{ の対角性}) \\
-&= \exp(K_1E(s))\,s(M)s(1)\,\left(V_2\right)_{\iota(s),\iota(s)}
+&= \exp(K_1E(s))\,s(M_{\mathrm{col}})s(1)\,\left(V_2\right)_{\iota(s),\iota(s)}
    \quad (\because \text{(a) の } G \text{ の対角性}) \\
-&= \exp(K_1E(s))\,s(M)s(1)\,\exp(MK_2)
+&= \exp(K_1E(s))\,s(M_{\mathrm{col}})s(1)\,\exp(M_{\mathrm{col}}K_2)
    \quad (\because \text{(c)})
 \end{aligned}`,
       ),
@@ -2037,17 +2042,17 @@ Gf_{\iota(s)}
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-&= \cosh(K_1)\,\exp(-MK_2)\sum_{s\in\mathfrak{M}}\exp(K_1E(s))
- + \sinh(K_1)\,\exp(MK_2)\sum_{s\in\mathfrak{M}}s(M)s(1)\exp(K_1E(s))
+&= \cosh(K_1)\,\exp(-M_{\mathrm{col}}K_2)\sum_{s\in\mathfrak{M}}\exp(K_1E(s))
+ + \sinh(K_1)\,\exp(M_{\mathrm{col}}K_2)\sum_{s\in\mathfrak{M}}s(M_{\mathrm{col}})s(1)\exp(K_1E(s))
    \quad (\because \text{def\_trace と直前の 2 式}) \\
-&= \cosh(K_1)\,\exp(-MK_2)\cdot 2\left(2\cosh K_1\right)^{M-1}
- + \sinh(K_1)\,\exp(MK_2)\cdot 2\left(2\sinh K_1\right)^{M-1}
+&= \cosh(K_1)\,\exp(-M_{\mathrm{col}}K_2)\cdot 2\left(2\cosh K_1\right)^{M_{\mathrm{col}}-1}
+ + \sinh(K_1)\,\exp(M_{\mathrm{col}}K_2)\cdot 2\left(2\sinh K_1\right)^{M_{\mathrm{col}}-1}
    \quad (\because \text{二つの1次元開鎖のスピン和公式}) \\
-&= 2^{M}\exp(-MK_2)\left(\cosh K_1\right)^{M}
- + 2^{M}\exp(MK_2)\left(\sinh K_1\right)^{M}
-   \quad \left(\because 2\cdot 2^{M-1} = 2^{M}\right) \\
-&= \left(2\exp(-K_2)\cosh K_1\right)^{M}
- + \left(2\exp(K_2)\sinh K_1\right)^{M}
+&= 2^{M_{\mathrm{col}}}\exp(-M_{\mathrm{col}}K_2)\left(\cosh K_1\right)^{M_{\mathrm{col}}}
+ + 2^{M_{\mathrm{col}}}\exp(M_{\mathrm{col}}K_2)\left(\sinh K_1\right)^{M_{\mathrm{col}}}
+   \quad \left(\because 2\cdot 2^{M_{\mathrm{col}}-1} = 2^{M_{\mathrm{col}}}\right) \\
+&= \left(2\exp(-K_2)\cosh K_1\right)^{M_{\mathrm{col}}}
+ + \left(2\exp(K_2)\sinh K_1\right)^{M_{\mathrm{col}}}
 \end{aligned}`,
       ),
       paragraph([
@@ -2071,6 +2076,7 @@ Gf_{\iota(s)}
       notes: [
         "この主張が章 C′ の最後の欠けていた入力である。ε の固有値 η がどちらになるかは固有値 Λ̌_ε の値からは読めないが、tr(εV^{(+)}) は転送行列の側で完全に初等的に計算でき、しかも正であることが分かる。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,3,4,5・6 組の (K_1,K_2) で、行列指数関数から直接構成した V^{(+)} のトレースと閉じた式の相対差 ≤ 6e-15）。",
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
       ],
     },
   },
@@ -2088,7 +2094,7 @@ Gf_{\iota(s)}
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
         ref("epsilon_eigenvalue_on_check_Q"),
         " の ",
@@ -2098,16 +2104,16 @@ Gf_{\iota(s)}
       list([
         [math(String.raw`\text{(1)}\quad \eta_{(1,\dots,1)} = +1`)],
         [
-          math(String.raw`\text{(2)}\quad \eta_\epsilon = (-1)^{M-|\epsilon|}
-= (-1)^{M+|\epsilon|}`),
+          math(String.raw`\text{(2)}\quad \eta_\epsilon = (-1)^{M_{\mathrm{col}}-|\epsilon|}
+= (-1)^{M_{\mathrm{col}}+|\epsilon|}`),
           "、すなわち ",
           math(String.raw`\varepsilon\check{Q}_\epsilon
-= (-1)^{M+|\epsilon|}\check{Q}_\epsilon`),
+= (-1)^{M_{\mathrm{col}}+|\epsilon|}\check{Q}_\epsilon`),
           "。",
         ],
         [
           math(String.raw`\text{(3)}\quad \varepsilon
-= (-1)^{M}\prod_{\mu=1}^{M}\left(I - 2\check{n}_\mu\right)`),
+= (-1)^{M_{\mathrm{col}}}\prod_{\mu=1}^{M_{\mathrm{col}}}\left(I - 2\check{n}_\mu\right)`),
         ],
         [
           math(String.raw`\text{(4)}\quad \mathrm{im}\,\check{Q}_{(1,\dots,1)}
@@ -2146,13 +2152,13 @@ Gf_{\iota(s)}
         "(2) ",
         ref("epsilon_eigenvalue_on_check_Q"),
         " (3) に (1) を代入して ",
-        math(String.raw`\eta_\epsilon = (-1)^{M-|\epsilon|}`),
+        math(String.raw`\eta_\epsilon = (-1)^{M_{\mathrm{col}}-|\epsilon|}`),
         "。",
         math(String.raw`(-1)^{-|\epsilon|} = (-1)^{|\epsilon|}`),
         "（",
         math(String.raw`(-1)^{|\epsilon|}(-1)^{|\epsilon|} = 1`),
         " より）なので ",
-        math(String.raw`(-1)^{M-|\epsilon|} = (-1)^{M+|\epsilon|}`),
+        math(String.raw`(-1)^{M_{\mathrm{col}}-|\epsilon|} = (-1)^{M_{\mathrm{col}}+|\epsilon|}`),
         "。",
       ]),
       paragraph([
@@ -2162,18 +2168,18 @@ Gf_{\iota(s)}
       ]),
       paragraph([
         "(4) ",
-        math(String.raw`|(1,\dots,1)| = M`),
+        math(String.raw`|(1,\dots,1)| = M_{\mathrm{col}}`),
         " なので (2) を一段ずつ適用すると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\check{Q}_{(1,\dots,1)}
-&= (-1)^{M+|(1,\dots,1)|}\check{Q}_{(1,\dots,1)}
+&= (-1)^{M_{\mathrm{col}}+|(1,\dots,1)|}\check{Q}_{(1,\dots,1)}
    \quad (\because \text{(2)}) \\
-&= (-1)^{2M}\check{Q}_{(1,\dots,1)}
-   \quad (\because |(1,\dots,1)|=M) \\
+&= (-1)^{2M_{\mathrm{col}}}\check{Q}_{(1,\dots,1)}
+   \quad (\because |(1,\dots,1)|=M_{\mathrm{col}}) \\
 &= \check{Q}_{(1,\dots,1)}
-   \quad (\because (-1)^{2M}=1)
+   \quad (\because (-1)^{2M_{\mathrm{col}}}=1)
 \end{aligned}`,
       ),
       paragraph([
@@ -2227,7 +2233,7 @@ Gf_{\iota(s)}
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
         " とする。",
@@ -2239,15 +2245,15 @@ Gf_{\iota(s)}
       list([
         [
           math(String.raw`\text{(1)}\quad Z_j^* = Z_j, \qquad Y_j^* = Y_j
-\qquad (j \in \{1,\dots,M\})`),
+\qquad (j \in \{1,\dots,M_{\mathrm{col}}\})`),
         ],
         [
-          math(String.raw`\text{(2)}\quad \check{Z}_\mu^* = \check{Z}_{M+1-\mu},
-\qquad \check{Y}_\mu^* = \check{Y}_{M+1-\mu}`),
+          math(String.raw`\text{(2)}\quad \check{Z}_\mu^* = \check{Z}_{M_{\mathrm{col}}+1-\mu},
+\qquad \check{Y}_\mu^* = \check{Y}_{M_{\mathrm{col}}+1-\mu}`),
         ],
         [
           math(String.raw`\text{(3)}\quad \left(\check\psi_\mu^\dagger\right)^*
-= \check\psi_{M+1-\mu}`),
+= \check\psi_{M_{\mathrm{col}}+1-\mu}`),
         ],
         [
           math(String.raw`\text{(4)}\quad \check{n}_\mu^* = \check{n}_\mu,
@@ -2259,7 +2265,7 @@ Gf_{\iota(s)}
         "が成り立つ。とくに ",
         math(String.raw`\check{Q}_\epsilon`),
         " はエルミートな冪等行列なので、任意の ",
-        math(String.raw`x \in \mathbb{C}^{2^M}`),
+        math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " について",
       ]),
       displayMath(
@@ -2292,8 +2298,8 @@ Gf_{\iota(s)}
         " が入れ替わり、複素共役でさらに符号が戻る）。",
         ref("kronecker_product_rule"),
         " (2) の成分の定義より ",
-        math(String.raw`\left(A_1\boxtimes\cdots\boxtimes A_M\right)^*
-= A_1^*\boxtimes\cdots\boxtimes A_M^*`),
+        math(String.raw`\left(A_1\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}\right)^*
+= A_1^*\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}^*`),
         " なので ",
         math(String.raw`\left(\sigma_k^a\right)^* = \sigma_k^a`),
         "（",
@@ -2328,7 +2334,7 @@ Z_j^*
         "(2) ",
         ref("conjugate_index_of_check_Z_Y"),
         " (2) より ",
-        math(String.raw`\exp(-ij\tilde\theta_{M+1-\mu}) = \exp(ij\tilde\theta_\mu)`),
+        math(String.raw`\exp(-ij\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \exp(ij\tilde\theta_\mu)`),
         " である。",
         math(String.raw`\tilde\theta_\mu \in \mathbb{R}`),
         " なので ",
@@ -2340,15 +2346,15 @@ Z_j^*
       displayMath(
         String.raw`\begin{aligned}
 \check{Z}_\mu^*
-&= \left(\sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)Z_j\right)^*
+&= \left(\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)Z_j\right)^*
    \quad (\because \text{def\_half\_integer\_modes}) \\
-&= \sum_{j=1}^{M}\overline{\exp(-ij\tilde\theta_\mu)}\;Z_j^*
+&= \sum_{j=1}^{M_{\mathrm{col}}}\overline{\exp(-ij\tilde\theta_\mu)}\;Z_j^*
    \quad (\because \text{転置共役は和を保ち、スカラー倍を複素共役つきで保つ}) \\
-&= \sum_{j=1}^{M}\exp(ij\tilde\theta_\mu)\,Z_j
+&= \sum_{j=1}^{M_{\mathrm{col}}}\exp(ij\tilde\theta_\mu)\,Z_j
    \quad (\because \text{(1) と } \tilde\theta_\mu \in \mathbb{R}) \\
-&= \sum_{j=1}^{M}\exp(-ij\tilde\theta_{M+1-\mu})\,Z_j
+&= \sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_{M_{\mathrm{col}}+1-\mu})\,Z_j
    \quad (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)}) \\
-&= \check{Z}_{M+1-\mu}
+&= \check{Z}_{M_{\mathrm{col}}+1-\mu}
    \quad (\because \text{def\_half\_integer\_modes})
 \end{aligned}`,
       ),
@@ -2357,19 +2363,19 @@ Z_j^*
         " も同じ計算である（",
         ref("def_check_index_set"),
         " (2) より ",
-        math(String.raw`M+1-\mu \in \check{\mathcal{M}}`),
+        math(String.raw`M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
         " なので右辺は定義されている）。",
       ]),
       paragraph([
         "(3) ",
         ref("def_check_fermi"),
         " より、",
-        math(String.raw`\nu := M+1-\mu`),
+        math(String.raw`\nu := M_{\mathrm{col}}+1-\mu`),
         "、",
-        math(String.raw`\beta := \dfrac{1}{2\sqrt{M}} \in \mathbb{R}_{>0}`),
+        math(String.raw`\beta := \dfrac{1}{2\sqrt{M_{\mathrm{col}}}} \in \mathbb{R}_{>0}`),
         "、",
         math(String.raw`\alpha_\mu := \dfrac{-\left|\gamma_2(\tilde\theta_\mu)\right|}
-{2\sqrt{M}\,\gamma_2(-\tilde\theta_\mu)}`),
+{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\mu)}`),
         " とおくと",
       ]),
       displayMath(
@@ -2403,17 +2409,17 @@ Z_j^*
       displayMath(
         String.raw`\begin{aligned}
 \overline{\alpha_\mu}
-&= \overline{\left(\frac{-r}{2\sqrt{M}\,\gamma_2(-\tilde\theta_\mu)}\right)}
+&= \overline{\left(\frac{-r}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\mu)}\right)}
    \quad (\because \alpha_\mu \text{ の定義}) \\
-&= \frac{-r}{2\sqrt{M}\,\overline{\gamma_2(-\tilde\theta_\mu)}}
-   \quad \left(\because r, 2\sqrt{M} \in \mathbb{R} \text{ と }
+&= \frac{-r}{2\sqrt{M_{\mathrm{col}}}\,\overline{\gamma_2(-\tilde\theta_\mu)}}
+   \quad \left(\because r, 2\sqrt{M_{\mathrm{col}}} \in \mathbb{R} \text{ と }
    \overline{z^{-1}} = \left(\bar z\right)^{-1}\right) \\
-&= \frac{-r}{2\sqrt{M}\left(-\gamma_2(\tilde\theta_\mu)\right)}
+&= \frac{-r}{2\sqrt{M_{\mathrm{col}}}\left(-\gamma_2(\tilde\theta_\mu)\right)}
    \quad \left(\because \text{relation\_of\_gamma\_2\_theta\_tilde (1) を }
    \overline{\gamma_2(-\tilde\theta_\mu)} = -\gamma_2(\tilde\theta_\mu)
    \text{ の形で使う}\right) \\
-&= \frac{r}{2\sqrt{M}\,\gamma_2(\tilde\theta_\mu)} \\
-&= \frac{r}{2\sqrt{M}\,\gamma_2(-\tilde\theta_\nu)}
+&= \frac{r}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(\tilde\theta_\mu)} \\
+&= \frac{r}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\nu)}
    \quad (\because \text{periodicity\_of\_check\_fermi (3)}) \\
 &= -\alpha_\nu
    \quad (\because \alpha_\nu \text{ の定義と }
@@ -2448,17 +2454,17 @@ Z_j^*
         "(4) (3) の両辺の転置共役を取り ",
         math(String.raw`(X^*)^* = X`),
         " を使うと ",
-        math(String.raw`\left(\check\psi_{M+1-\mu}\right)^* = \check\psi_\mu^\dagger`),
+        math(String.raw`\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^* = \check\psi_\mu^\dagger`),
         " である。よって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\mu^*
-&= \left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}\right)^*
+&= \left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^*
 &&\left(\because\ \text{def\_check\_fermi}\right)\\
-&= \left(\check\psi_{M+1-\mu}\right)^*\left(\check\psi_\mu^\dagger\right)^*
+&= \left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^*\left(\check\psi_\mu^\dagger\right)^*
 &&\left(\because\ (XW)^*=W^*X^*\right)\\
-&= \check\psi_\mu^\dagger\,\check\psi_{M+1-\mu}
+&= \check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}
 &&\left(\because\ \text{(3) とその転置共役}\right)\\
 &= \check{n}_\mu
 &&\left(\because\ \text{def\_check\_fermi}\right)
@@ -2467,7 +2473,7 @@ Z_j^*
       paragraph([
         ref("check_joint_eigenspace_decomposition"),
         " の ",
-        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M}R_\mu^{(\epsilon_\mu)}`),
+        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}`),
         "（",
         math(String.raw`R_\mu^{(1)} = \check{n}_\mu`),
         "、",
@@ -2481,13 +2487,13 @@ Z_j^*
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_\epsilon^*
-&= \left(R_1^{(\epsilon_1)}\cdots R_M^{(\epsilon_M)}\right)^*
+&= \left(R_1^{(\epsilon_1)}\cdots R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\right)^*
 &&\left(\because\ \text{check\_joint\_eigenspace\_decomposition}\right)\\
-&= \left(R_M^{(\epsilon_M)}\right)^*\cdots\left(R_1^{(\epsilon_1)}\right)^*
+&= \left(R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\right)^*\cdots\left(R_1^{(\epsilon_1)}\right)^*
 &&\left(\because\ (XW)^*=W^*X^*\text{ の反復適用}\right)\\
-&= R_M^{(\epsilon_M)}\cdots R_1^{(\epsilon_1)}
+&= R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}\cdots R_1^{(\epsilon_1)}
 &&\left(\because\ \check n_\mu^*=\check n_\mu\text{ と }I^*=I\right)\\
-&= R_1^{(\epsilon_1)}\cdots R_M^{(\epsilon_M)}
+&= R_1^{(\epsilon_1)}\cdots R_{M_{\mathrm{col}}}^{(\epsilon_{M_{\mathrm{col}}})}
 &&\left(\because\ \text{因子の可換性。check\_number\_operators\_commute (2)}\right)\\
 &= \check{Q}_\epsilon
 &&\left(\because\ \text{check\_joint\_eigenspace\_decomposition}\right)
@@ -2527,32 +2533,32 @@ x^*\check{Q}_\epsilon x
     kind: "theorem",
     standing: "mainTheorem",
     origin: { path: SRC, ordinal: 11 },
-    title: { tex: String.raw`c_+(M) = \Lambda^{(1/2)}_M` },
+    title: { tex: String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}` },
     labels: ["c_plus_equals_Lambda_half_integer"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
         ref("def_sector_rayleigh_sup"),
         " の",
       ]),
       displayMath(
-        String.raw`c_+(M) = \sup\left\{\, x^\top W x \ \middle|\
-x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^M},\ \|x\| = 1 \,\right\}`,
+        String.raw`c_+(M_{\mathrm{col}}) = \sup\left\{\, x^\top W x \ \middle|\
+x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\}`,
       ),
       paragraph([
         "と ",
         ref("onsager_free_energy_expression"),
         " の ",
-        math(String.raw`\Lambda^{(1/2)}_M`),
+        math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " について",
       ]),
       displayMath(
-        String.raw`c_+(M) = \check\Lambda_{\max} = \Lambda^{(1/2)}_M
-= (2\sinh 2K_2)^{M/2}
-\exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\right)`,
+        String.raw`c_+(M_{\mathrm{col}}) = \check\Lambda_{\max} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}
+= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\right)`,
       ),
       paragraph([
         "が成り立つ。**上限は達成される**（最大値である）。",
@@ -2608,9 +2614,9 @@ Wx
       ),
       paragraph([
         "Step 1（",
-        math(String.raw`c_+(M) \leq \check\Lambda_{\max}`),
+        math(String.raw`c_+(M_{\mathrm{col}}) \leq \check\Lambda_{\max}`),
         "）。",
-        math(String.raw`x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "、",
         math(String.raw`\|x\| = 1`),
         " とする。",
@@ -2669,7 +2675,7 @@ x^\top Wx
       paragraph([
         math(String.raw`x`),
         " は任意だったので ",
-        math(String.raw`c_+(M) \leq \check\Lambda_{\max}`),
+        math(String.raw`c_+(M_{\mathrm{col}}) \leq \check\Lambda_{\max}`),
         "。",
       ]),
       paragraph([
@@ -2690,7 +2696,7 @@ x^\top Wx
         " の成分は実である。実際 ",
         ref("V_plus_is_positive_definite"),
         " の表示 ",
-        math(String.raw`V^{(+)} = (2s_2)^{M/2}\exp\!\left(\tfrac12S_1^{(+)}\right)
+        math(String.raw`V^{(+)} = (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(\tfrac12S_1^{(+)}\right)
 \exp(S_2)\exp\!\left(\tfrac12S_1^{(+)}\right)`),
         " において、",
         ref("iH_is_real_symmetric"),
@@ -2707,7 +2713,7 @@ x^\top Wx
         " と ",
         math(String.raw`\exp(S_2)`),
         " は実対称、",
-        math(String.raw`(2s_2)^{M/2} \in \mathbb{R}_{>0}`),
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
         " なので ",
         math(String.raw`V^{(+)}`),
         " も実行列である。",
@@ -2764,14 +2770,14 @@ x^\top Wx
         " とすると ",
         math(String.raw`v \in \mathbb{C}q\setminus\{0\}`),
         " かつ ",
-        math(String.raw`v \in \mathbb{R}^{2^M}`),
+        math(String.raw`v \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " である。",
         math(String.raw`x_0 := v/\|v\|`),
         " とおく。",
       ]),
       paragraph([
         "Step 3（",
-        math(String.raw`c_+(M) \geq \check\Lambda_{\max}`),
+        math(String.raw`c_+(M_{\mathrm{col}}) \geq \check\Lambda_{\max}`),
         "）。",
         math(String.raw`x_0 \in \mathbb{C}q = \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
         " なので ",
@@ -2795,13 +2801,13 @@ x^\top Wx
       ),
       paragraph([
         "したがって ",
-        math(String.raw`c_+(M)`),
+        math(String.raw`c_+(M_{\mathrm{col}})`),
         " を定める集合は ",
         math(String.raw`\check\Lambda_{\max}`),
         " を要素にもち、",
-        math(String.raw`c_+(M) \geq \check\Lambda_{\max}`),
+        math(String.raw`c_+(M_{\mathrm{col}}) \geq \check\Lambda_{\max}`),
         "。Step 1 と合わせて ",
-        math(String.raw`c_+(M) = \check\Lambda_{\max}`),
+        math(String.raw`c_+(M_{\mathrm{col}}) = \check\Lambda_{\max}`),
         " であり、上限は ",
         math(String.raw`x_0`),
         " で達成される。",
@@ -2810,7 +2816,7 @@ x^\top Wx
         "最後に ",
         ref("max_eigenvalue_of_V_plus_simple"),
         " (1) の ",
-        math(String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_M`),
+        math(String.raw`\check\Lambda_{\max} = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " を代入すれば主張の等式を得る。",
       ]),
     ],
@@ -2832,16 +2838,14 @@ x^\top Wx
     labels: ["onsager_exact_solution"],
     statement: [
       paragraph([
-        ref("partition_function_in_pauli_form"),
-        " と同じ設定（",
-        math(String.raw`K_1 = J' > 0`),
-        "、",
-        math(String.raw`K_2 = J > 0`),
+        ref("partition_function_via_transfer_matrix"),
+        " と同じ設定（結合定数 ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "）のもとで、",
       ]),
       displayMath(
-        String.raw`\lim_{M\to\infty}\ \lim_{N_{\mathrm{row}}\to\infty}
-\frac{1}{M\,N_{\mathrm{row}}}\log Z(J,J')
+        String.raw`\lim_{M_{\mathrm{col}}\to\infty}\ \lim_{N_{\mathrm{row}}\to\infty}
+\frac{1}{M_{\mathrm{col}}\,N_{\mathrm{row}}}\log Z(K_1,K_2)
 = \frac{1}{2}\log\left(2\sinh 2K_2\right)
 + \frac{1}{4\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta`,
       ),
@@ -2862,7 +2866,7 @@ x^\top Wx
         "とくに ",
         ref("remark_remaining_input_even_sector"),
         " が「残っている入力」として挙げていた ",
-        math(String.raw`c_+(M) = \Lambda^{(1/2)}_M`),
+        math(String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " は ",
         ref("c_plus_equals_Lambda_half_integer"),
         " で証明された。",
@@ -2875,23 +2879,23 @@ x^\top Wx
         " の極限）。",
         ref("limit_of_log_Z_in_N_row"),
         " より、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " を固定すると",
       ]),
       displayMath(
         String.raw`\lim_{N_{\mathrm{row}}\to\infty}
-\frac{1}{M\,N_{\mathrm{row}}}\log Z(J,J') = \frac{1}{M}\log c(M)`,
+\frac{1}{M_{\mathrm{col}}\,N_{\mathrm{row}}}\log Z(K_1,K_2) = \frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`,
       ),
       paragraph([
         "である。以下 ",
-        math(String.raw`c(M)`),
+        math(String.raw`c(M_{\mathrm{col}})`),
         " の ",
-        math(String.raw`M \to \infty`),
+        math(String.raw`M_{\mathrm{col}} \to \infty`),
         " の挙動を調べる。",
       ]),
       paragraph([
         "Step 2（下からの評価 ",
-        math(String.raw`c(M) \geq \Lambda^{(1/2)}_M`),
+        math(String.raw`c(M_{\mathrm{col}}) \geq \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         "）。",
         ref("sector_decomposition_of_rayleigh_sup"),
         " (3) と ",
@@ -2899,19 +2903,19 @@ x^\top Wx
         " より",
       ]),
       displayMath(String.raw`\begin{aligned}
-c(M)
-&= \max\bigl(c_+(M),c_-(M)\bigr)
-&&\left(\because\ \text{\cref{lab:sector_decomposition_of_rayleigh_sup} (3)}\right)\\
-&\geq c_+(M)
+c(M_{\mathrm{col}})
+&= \max\bigl(c_+(M_{\mathrm{col}}),c_-(M_{\mathrm{col}})\bigr)
+&&\left(\because\ \blkref{sector_decomposition_of_rayleigh_sup}\text{ (3)}\right)\\
+&\geq c_+(M_{\mathrm{col}})
 &&\left(\because\ \text{二つの実数の最大値の定義}\right)\\
-&= \Lambda^{(1/2)}_M
-&&\left(\because\ \text{\cref{lab:c_plus_equals_Lambda_half_integer}}\right)
+&= \Lambda^{(1/2)}_{M_{\mathrm{col}}}
+&&\left(\because\ \blkref{c_plus_equals_Lambda_half_integer}\right)
 \end{aligned}`),
       paragraph([
         "Step 3（上からの評価 ",
-        math(String.raw`c(M) \leq 2\Lambda^{(1/2)}_M`),
+        math(String.raw`c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         "）。",
-        math(String.raw`x \in \mathbb{R}^{2^M}`),
+        math(String.raw`x \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "、",
         math(String.raw`\|x\| = 1`),
         " を任意に取る。成分ごとの絶対値を取ったベクトルを ",
@@ -3009,7 +3013,7 @@ v^\top Wv
 &=u^\top Wu+2u^\top W\varepsilon u+u^\top\varepsilon W\varepsilon u
 &&\left(\because\ \varepsilon^\top=\varepsilon\right)\\
 &=u^\top Wu+2u^\top W\varepsilon u+u^\top W\varepsilon^2u
-&&\left(\because\ \varepsilon W=W\varepsilon.\ \text{\cref{lab:epsilon_commutes_with_W}}\right)\\
+&&\left(\because\ \varepsilon W=W\varepsilon.\ \blkref{epsilon_commutes_with_W}\right)\\
 &=2u^\top Wu+2u^\top W\varepsilon u
 &&\left(\because\ \varepsilon^2=I\right)\\
 &\geq2u^\top Wu
@@ -3020,17 +3024,17 @@ v^\top Wv
       paragraph([
         math(String.raw`\hat{v} := v/\|v\|`),
         " は ",
-        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルなので ",
         ref("c_plus_equals_Lambda_half_integer"),
         " より",
       ]),
       displayMath(String.raw`\begin{aligned}
-\Lambda^{(1/2)}_M
-&= c_+(M)
-&&\left(\because\ \text{\cref{lab:c_plus_equals_Lambda_half_integer}}\right)\\
+\Lambda^{(1/2)}_{M_{\mathrm{col}}}
+&= c_+(M_{\mathrm{col}})
+&&\left(\because\ \blkref{c_plus_equals_Lambda_half_integer}\right)\\
 &\geq \hat{v}^\top W\hat{v}
-&&\left(\because\ c_+(M)\text{ は }\mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}\text{ の単位ベクトル上の上限. \cref{lab:def_sector_rayleigh_sup}}\right)\\
+&&\left(\because\ c_+(M_{\mathrm{col}})\text{ は }\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}\text{ の単位ベクトル上の上限. }\blkref{def_sector_rayleigh_sup}\right)\\
 &= \frac{v^\top Wv}{\|v\|^2}
 &&\left(\because\ \hat{v}=v/\|v\|\text{ の代入と二次形式の斉次性}\right)\\
 &\geq \frac{2\,u^\top Wu}{\|v\|^2}
@@ -3045,23 +3049,23 @@ v^\top Wv
       paragraph([
         math(String.raw`x`),
         " は任意だったので、上限を取って ",
-        math(String.raw`c(M) \leq 2\Lambda^{(1/2)}_M`),
+        math(String.raw`c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         "。",
       ]),
       paragraph([
         "Step 4（挟み撃ち）。Step 2・Step 3 より ",
-        math(String.raw`\Lambda^{(1/2)}_M \leq c(M) \leq 2\Lambda^{(1/2)}_M`),
+        math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}} \leq c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " であり、すべて正の実数なので ",
         math(String.raw`\log`),
         " の単調性から",
       ]),
       displayMath(
-        String.raw`\frac{1}{M}\log\Lambda^{(1/2)}_M
-\ \leq\ \frac{1}{M}\log c(M)
-\ \leq\ \frac{1}{M}\log\Lambda^{(1/2)}_M + \frac{\log 2}{M}`,
+        String.raw`\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(1/2)}_{M_{\mathrm{col}}}
+\ \leq\ \frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})
+\ \leq\ \frac{1}{M_{\mathrm{col}}}\log\Lambda^{(1/2)}_{M_{\mathrm{col}}} + \frac{\log 2}{M_{\mathrm{col}}}`,
       ),
       paragraph([
-        math(String.raw`(\log 2)/M \to 0`),
+        math(String.raw`(\log 2)/M_{\mathrm{col}} \to 0`),
         " なので、",
         ref("onsager_free_energy_expression"),
         " を ",
@@ -3069,8 +3073,8 @@ v^\top Wv
         " として適用すると",
       ]),
       displayMath(
-        String.raw`\lim_{M\to\infty}\frac{1}{M}\log c(M)
-= \lim_{M\to\infty}\frac{1}{M}\log\Lambda^{(1/2)}_M
+        String.raw`\lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})
+= \lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(1/2)}_{M_{\mathrm{col}}}
 = \frac{1}{2}\log\left(2\sinh 2K_2\right)
 + \frac{1}{4\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta`,
       ),
@@ -3092,6 +3096,7 @@ v^\top Wv
         "Step 3 の係数 2 は最良ではない（数値では c(M) = c_+(M) が全パラメータで成り立つ。sagemath/check/053_claim_even_sector_closing/check_05 (3')）。しかし 1/M を掛けて M → ∞ とすると log 2 / M → 0 で消えるため、Onsager の表式を出すにはこの粗い評価で十分である。",
         "この粗い評価を採ったのは c_-(M) の値に依存しないためである。一次情報で確認したところ c_-(M) = Λ^{(0)}_M は一般には成り立たない: 高温側 (K_1,K_2) = (0.05,0.1)（sinh2K_1 sinh2K_2 ≈ 0.020）では c_-(M)/Λ^{(0)}_M = 0.1102 で、M = 2,3,4,5 のすべてで一致しない（同 check_05 の対照出力）。V^{(-)} の最大固有値の固有ベクトルが F^{(+)} 側に落ちる場合があるためで、偶セクターで解決したのと同じ問題が奇セクターでは別の答えになりうる。本文はこの点に触れずに済む形にしてある。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_05（M=2,3,4,5 で c(M) = max(c_+,c_-) と W の最大固有値の一致、Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M、および M を大きくしたときの (1/M) log Λ^{(1/2)}_M の Onsager 積分への収束）。",
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
       ],
     },
   },

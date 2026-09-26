@@ -17,12 +17,15 @@
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.H1 M (-1)` / `V1half M K1 (-1)` | `H_1^{(+)}` と `(V_1^{(+)})^{1/2}` | `def_H1_plus` / `def_V1_plus_square_root` |
-| `Ising2D.VPlus` / `VPlusUnits` | `V^{(+)} := (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}` とその単元版 | `def_V_plus` |
-| `Ising2D.isUnit_V1halfPlus` | `(V_1^{(+)})^{1/2}` の可逆性 | `V1_plus_half_invertible` |
+| `Ising2D.H1 M (-1)` / `V1pmHalf M K1 (-1)` | `H_1^{(+)}` と `(V_1^{(+)})^{1/2}` | `def_H1_plus` / `def_V1_plus_square_root` |
+| `Ising2D.VPlus` / `VPlusUnits` | `V^{(+)} := (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}` とその単元版（`V_2` を `V2H2Form M s2 K2star` で書いた一般形） | `def_V_plus` |
+| `Ising2D.V1plusHalf_mul_V2_mul_V1plusHalf` | 人手の `V_2`（`def_transfer_matrix`）で作った `V^{(+)}` は `VPlus M (sinh 2K_2) K_1 K_2^*` に等しい（`V2_exponential_representation` による） | `def_V_plus` |
+| `Ising2D.V2Units` / `V2Units_eq_V2H2FormUnits` / `isUnit_V2` | 人手の `V_2` の単元と可逆性 | `V2_invertible` |
+| `Ising2D.isUnit_V1plusHalf` | `(V_1^{(+)})^{1/2}` の可逆性 | `V1_plus_half_invertible` |
 | `Ising2D.isUnit_VPlus` | `V^{(+)}` の可逆性 | `V_plus_factors_invertible` |
-| `Ising2D.V1halfPlus_sq` | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
-| `Ising2D.TVPlus` | `T_{(V^{(+)})}` を ℂ-代数自己同型として | `def_T_V_plus` |
+| `Ising2D.V1plusHalf_sq` | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
+| `Ising2D.TVPlus` | `T_{(V^{(+)})}` を ℂ-代数自己同型として（一般形） | `def_T_V_plus` |
+| `Ising2D.TV_V1plusHalfUnits_V2Units` | 人手の `V_2` で作った `T_{(V^{(+)})}` は `TVPlus` の `s_2 = sinh 2K_2`, `K_2^*` での値 | `def_T_V_plus` |
 | `Ising2D.TVPlus_eq_TConj` / `TVPlus_apply_eq_conj` | `T_{(V^{(+)})} = T_{V^{(+)}}` | `T_V_plus_is_conjugation` |
 | `Ising2D.checkPhase_mul_neg` | `e^{-iθ~_μ} e^{iθ~_μ} = 1`（帰納段階で使う唯一の位相の性質） | `nesting_of_commutator_of_H_and_check_Z` の proof |
 | `Ising2D.ad_K1H1Plus_checkZ` / `ad_K1H1Plus_checkY` | `ad(K_1H_1^{(+)})` が `span{Ž_μ, Y̌_μ}` を保つこと | 同上（(A)(B) の `K_1` 倍） |
@@ -31,21 +34,22 @@
 | `Ising2D.nesting_H1Plus_checkY_even` / `..._odd` | (h1.y) の偶数側・奇数側 | 同上 (h1.y) |
 | `Ising2D.nesting_H2_checkZ_even` / `..._odd` | (h2.z) の偶数側・奇数側 | 同上 (h2.z) |
 | `Ising2D.nesting_H2_checkY_even` / `..._odd` | (h2.y) の偶数側・奇数側 | 同上 (h2.y) |
-| `Ising2D.ad_V1halfPlus_checkZ` / `ad_V1halfPlus_checkY` | `ad((i/2)K_1H_1^{(+)})` の 2 次元不変性（`α = iK_1e^{-iθ~}` 等） | `cosh_sinh_coefficient_conversion_for_check` |
-| `Ising2D.ad_V2_checkZ` / `ad_V2_checkY` | `ad(iK_2^*H_2)` の 2 次元不変性（`α = -2iK_2^*` 等） | 同上 |
+| `Ising2D.ad_V1plusHalf_checkZ` / `ad_V1plusHalf_checkY` | `ad((i/2)K_1H_1^{(+)})` の 2 次元不変性（`α = iK_1e^{-iθ~}` 等） | `cosh_sinh_coefficient_conversion_for_check` |
+| `Ising2D.ad_V2H2Form_checkZ` / `ad_V2H2Form_checkY` | `ad(iK_2^*H_2)` の 2 次元不変性（`α = -2iK_2^*` 等） | 同上 |
 | `Ising2D.sK1_sq` / `sK2_sq` | `αβ = K_1^2`, `αβ = (2K_2^*)^2`（原文の `s` の正体） | 同上 |
 | `Ising2D.conversion_H1Plus_checkZ_even` / `..._odd` ほか 8 本 | (h1.z)(h1.y)(h2.z)(h2.y) のスカラー付け替え後の形 | `cosh_sinh_coefficient_conversion_for_check` |
 | `Ising2D.extract_taylor_H1Plus_checkZ` / `..._checkY` | (h1.z)(h1.y) の級数和 `cosh K_1 Ž + i e^{-iθ~} sinh K_1 Y̌` ほか | `extract_taylor_coefficient_of_check_Z_Y` |
 | `Ising2D.extract_taylor_H2_checkZ` / `..._checkY` | (h2.z)(h2.y) の級数和 | 同上 |
 | `Ising2D.checkPhase_one_eq_exp` / `checkPhase_neg_one_eq_exp` | `e^{∓iθ~_μ}` の指数表示との橋渡し | `T_actions_on_check_Z_Y` |
-| `Ising2D.TConj_V1halfPlus_checkZ` / `..._checkY` | 原文 第 1・第 2 式 | `T_actions_on_check_Z_Y` |
-| `Ising2D.TConj_V2_checkZ` / `..._checkY` | 原文 第 3・第 4 式（前因子 `(2s_2)^{M/2}` の相殺つき） | 同上 |
+| `Ising2D.TConj_V1plusHalf_checkZ` / `..._checkY` | 原文 第 1・第 2 式 | `T_actions_on_check_Z_Y` |
+| `Ising2D.TConj_V2H2Form_checkZ` / `..._checkY` | 原文 第 3・第 4 式を `V2H2Form` の単元（一般形）で述べたもの（前因子 `(2s_2)^{M/2}` の相殺つき） | `T_actions_on_check_Z_Y` |
+| `Ising2D.TConj_V2_checkZ` / `..._checkY` | 原文 第 3・第 4 式（人手の `V_2` の単元 `V2Units` について） | 同上 |
 | `Ising2D.linearity_of_T_on_check` | `T_g` の ℂ 線型性 | `linearity_of_T` |
-| `Ising2D.linearity_of_T_V1halfPlus` | `T_g` の ℂ 線型性の半指数行列への特殊化 | `linearity_of_T_on_check_Z_Y` |
-| `Ising2D.linearity_of_T_V2` | `T_g` の ℂ 線型性の `V_2` への特殊化 | `linearity_of_T_V2` |
+| `Ising2D.linearity_of_T_V1plusHalf` | `T_g` の ℂ 線型性の半指数行列への特殊化 | `linearity_of_T_on_check_Z_Y` |
+| `Ising2D.linearity_of_T_V2` / `linearity_of_T_V2H2Form` | `T_g` の ℂ 線型性の `V_2`（人手の `V_2`／一般形 `V2H2Form`）への特殊化 | `linearity_of_T_V2` |
 | `Ising2D.B1mat_zero_zero` ほか 8 本 | `B_1(θ), B_2` の 4 成分が原文の行列と一致すること | `def_B1_theta_B2` |
-| `Ising2D.actsBy_TConj_V1halfPlus` | `(T Ž, T Y̌) = (Ž, Y̌) B_1(θ~_μ)` | `calc_of_TxT_check_Z_Y` 第 1 式 |
-| `Ising2D.actsBy_TConj_V2_check` | `(T Ž, T Y̌) = (Ž, Y̌) B_2` | 同 第 2 式 |
+| `Ising2D.actsBy_TConj_V1plusHalf` | `(T Ž, T Y̌) = (Ž, Y̌) B_1(θ~_μ)` | `calc_of_TxT_check_Z_Y` 第 1 式 |
+| `Ising2D.actsBy_TConj_V2H2Form_check` | `(T Ž, T Y̌) = (Ž, Y̌) B_2` | 同 第 2 式 |
 | `Ising2D.factorization_of_A_theta_general` | `B_1(θ) B_2 B_1(θ) = A(θ)`（`θ ∈ ℝ` 一般） | `factorization_of_A_theta_general` |
 | `Ising2D.factorization_of_A_thetaTilde` | 上の `θ = θ~_μ` への特殊化 | 同上（「とくに」） |
 | **`Ising2D.TVPlus_checkZ_checkY`** | **章の結論** `(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)` | **`T_V_plus_check_Z_Y`** |
@@ -61,6 +65,17 @@
 
 ---
 
+
+### `V_2` の一般形について
+
+本章の `VPlus M s2 K1 K2star` / `VPlusUnits` / `TVPlus` とその上の定理（章 015〜018 も同じ）は、`V_2` を
+`V2_exponential_representation` の右辺の式 `V2H2Form M s2 K2star`（`s2`, `K2star` を独立な引数とする一般化）
+で書いたまま残してある。人手の `V_2` は `def_transfer_matrix` の成分定義 `Ising2D.V2` であり、両者は
+`s2 = sinh 2K_2`, `K2star = K_2^*`（`K_2 > 0`）のとき一致する（`V2_exponential_representation`）。
+人手が `V_2` そのものについて述べる `V2_invertible`, `def_V_plus`, `def_T_V_plus`, `T_actions_on_check_Z_Y` の
+第 3・第 4 式, `linearity_of_T_V2` には、人手の `V_2` についての Lean の主張（上表）を別に立てた。
+一般形の定理をすべて人手の `V_2` の言葉に書き直すことはしていない。
+
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
 ### 新規の必要十分版が 1 本で済んだ理由
@@ -71,13 +86,13 @@
 
 | 人手証明のラベル（章 014） | 具体版 | 必要十分版 |
 | --- | --- | --- |
-| `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1` / `V1half` / `V1halfPlus_sq` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Part008/Definition016_TV.lean`） |
+| `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1` / `V1pmHalf` / `V1plusHalf_sq` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` / `V1plusHalf_mul_V2_mul_V1plusHalf` / `TV_V1plusHalfUnits_V2Units` / `isUnit_V2` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Part008/Definition016_TV.lean`） |
 | `nesting_of_commutator_of_H_and_check_Z` | `Ising2D.nesting_H1Plus_checkZ_even` ほか 8 本 | 既存の `NecSuf.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y` |
 | `cosh_sinh_coefficient_conversion_for_check` | `Ising2D.conversion_H1Plus_checkZ_even` ほか 8 本 | 同上（`(α, β, s)` を付け替えただけ） |
 | `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本 | 既存の `NecSuf.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
-| `T_actions_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` | `Ising2D.actsBy_TConj_V1halfPlus` / `actsBy_TConj_V2_check` ほか | 既存の `NecSuf.twoDimConjMat` / `exp_conj_two_dim_actsBy` / `conj_smul_eq` |
+| `T_actions_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` | `Ising2D.actsBy_TConj_V1plusHalf` / `actsBy_TConj_V2H2Form_check` ほか | 既存の `NecSuf.twoDimConjMat` / `exp_conj_two_dim_actsBy` / `conj_smul_eq` |
 | `linearity_of_T` | `Ising2D.linearity_of_T_on_check` | 既存の `Ising2D.TConj_linear`（任意の環 + ℂ-代数） |
-| `linearity_of_T_on_check_Z_Y` | `Ising2D.linearity_of_T_V1halfPlus` | 既存の `Ising2D.TConj_linear` の半指数行列への特殊化 |
+| `linearity_of_T_on_check_Z_Y` | `Ising2D.linearity_of_T_V1plusHalf` | 既存の `Ising2D.TConj_linear` の半指数行列への特殊化 |
 | `linearity_of_T_V2` | `Ising2D.linearity_of_T_V2` | 既存の `Ising2D.TConj_linear` の `V_2` への特殊化 |
 | `def_B1_theta_B2` | 既存の `Ising2D.B1mat` / `B2mat`（最初から `θ : ℂ` 一般） | 既存の `NecSuf.twoDimConjMat` |
 | `factorization_of_A_theta_general` | 既存の `Ising2D.B1_mul_B2_mul_B1_eq_AMat`（最初から `θ : ℝ` 一般） | （2×2 行列の計算そのもので、取り払える構造が無い） |

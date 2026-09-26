@@ -1,8 +1,8 @@
 # ---------------------------------------------------------
 # SageMath: V_2 の成分定義とパウリ表示の一致と、2x2 の恒等式
 #   A = [[e^{K2}, e^{-K2}], [e^{-K2}, e^{K2}]] = (2 sinh 2K_2)^{1/2} exp(K_2^* sigma^x)
-#   (V_2)_{mu,mu'} = ((2 s_2)^{M/2} exp(K_2^* sum_m sx_m))_{iota(mu),iota(mu')}
-# 対象: structured-latex V2_component_equals_pauli
+#   (V_2)_{ord(mu),ord(mu')} = ((2 s_2)^{M/2} exp(K_2^* sum_m sx_m))_{ord(mu),ord(mu')}
+# 対象: structured-latex second_transfer_matrix_pauli_form（004_transfer_matrix.ts）
 #   （two_by_two_transfer_identity も併せて検証）
 # ---------------------------------------------------------
 import os

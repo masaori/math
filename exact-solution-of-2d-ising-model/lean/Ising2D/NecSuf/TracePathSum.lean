@@ -2,8 +2,8 @@
 # 必要十分版: 行列の冪のトレースは「閉じた道」の重みの総和
 
 対応する人手証明のラベル: **`partition_function_via_transfer_matrix`**
-（001 章 `structured-latex/content/001_partition_function_2d_ising.ts` の Step 2・Step 3。
-具体版は `Ising2D/Part010/Claim007_PartitionFunction.lean`）
+（001 章 `structured-latex/content/001_partition_function_2d_ising.ts` の中間目標「行列の冪の成分」と
+「トレースの展開」。具体版は `Ising2D/Part001/ClaimPartitionFunctionViaTransferMatrix.lean`）
 
 ## この主張に本質的に効いている構造は何か
 

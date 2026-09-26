@@ -13,7 +13,7 @@
 本章の主張は 011 章の次の 2 つを入力として使う。**別セッションが並行して 011 章を
 形式化しているため、import による結合はせず、仮定として受け取る**:
 
-* `def_partition_function_2d_ising`: 分配関数 `Z(J,J') > 0`
+* `def_partition_function_2d_ising`: 分配関数 `Z(K_1,K_2) > 0`
   → 仮定 `h1` から従う（`c^N > 0 ≤ Z`）ので明示的な仮定にしていない
 * `partition_function_sandwich`: `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`
   → 仮定 `h1`, `h2`

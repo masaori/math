@@ -41,8 +41,8 @@ theorem extract_taylor_H1Plus_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
   have hcoef : (Complex.I * K1 * checkPhase M 1 μ) * NecSuf.sinhc K1
       = Complex.I * checkPhase M 1 μ * Complex.sinh K1 := by
     linear_combination (Complex.I * checkPhase M 1 μ) * NecSuf.mul_sinhc K1
-  rw [← matExp_conj_eq_tsum, matExp_conj_two_dim_z (ad_V1halfPlus_checkZ hM K1 μ)
-    (ad_V1halfPlus_checkY hM K1 μ) (sK1_sq M K1 μ), hcoef]
+  rw [← matExp_conj_eq_tsum, matExp_conj_two_dim_z (ad_V1plusHalf_checkZ hM K1 μ)
+    (ad_V1plusHalf_checkY hM K1 μ) (sK1_sq M K1 μ), hcoef]
 
 /-- **原文 (h1.y)**: `∑_n (1/n!) ad_{X_1'}^n(check(Y)_μ) = -i e^{iθ~_μ} sinh(K_1) check(Z)_μ
 + cosh(K_1) check(Y)_μ`。 -/
@@ -54,8 +54,8 @@ theorem extract_taylor_H1Plus_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
   have hcoef : (-Complex.I * K1 * checkPhase M (-1) μ) * NecSuf.sinhc K1
       = -Complex.I * checkPhase M (-1) μ * Complex.sinh K1 := by
     linear_combination (-Complex.I * checkPhase M (-1) μ) * NecSuf.mul_sinhc K1
-  rw [← matExp_conj_eq_tsum, matExp_conj_two_dim_y (ad_V1halfPlus_checkZ hM K1 μ)
-    (ad_V1halfPlus_checkY hM K1 μ) (sK1_sq M K1 μ), hcoef, add_comm]
+  rw [← matExp_conj_eq_tsum, matExp_conj_two_dim_y (ad_V1plusHalf_checkZ hM K1 μ)
+    (ad_V1plusHalf_checkY hM K1 μ) (sK1_sq M K1 μ), hcoef, add_comm]
 
 /-! ## (h2.z), (h2.y): `X_2' = i K_2^* H_2` -/
 
@@ -68,8 +68,8 @@ theorem extract_taylor_H2_checkZ (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
   have hcoef : (-(2 * Complex.I * K2star)) * NecSuf.sinhc (2 * K2star)
       = -Complex.I * Complex.sinh (2 * K2star) := by
     linear_combination (-Complex.I) * NecSuf.mul_sinhc (2 * K2star)
-  rw [← matExp_conj_eq_tsum, matExp_conj_two_dim_z (ad_V2_checkZ hM K2star μ)
-    (ad_V2_checkY hM K2star μ) (sK2_sq K2star), hcoef]
+  rw [← matExp_conj_eq_tsum, matExp_conj_two_dim_z (ad_V2H2Form_checkZ hM K2star μ)
+    (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star), hcoef]
 
 /-- **原文 (h2.y)**: `∑_n (1/n!) ad_{X_2'}^n(check(Y)_μ)
 = i sinh(2K_2^*) check(Z)_μ + cosh(2K_2^*) check(Y)_μ`。 -/
@@ -80,7 +80,7 @@ theorem extract_taylor_H2_checkY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
   have hcoef : (2 * Complex.I * K2star) * NecSuf.sinhc (2 * K2star)
       = Complex.I * Complex.sinh (2 * K2star) := by
     linear_combination Complex.I * NecSuf.mul_sinhc (2 * K2star)
-  rw [← matExp_conj_eq_tsum, matExp_conj_two_dim_y (ad_V2_checkZ hM K2star μ)
-    (ad_V2_checkY hM K2star μ) (sK2_sq K2star), hcoef, add_comm]
+  rw [← matExp_conj_eq_tsum, matExp_conj_two_dim_y (ad_V2H2Form_checkZ hM K2star μ)
+    (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star), hcoef, add_comm]
 
 end Ising2D

@@ -1,9 +1,9 @@
 # ---------------------------------------------------------
 # SageMath: 分配関数の定義（スピン配置の直接和）と転送行列表示の一致
-#   Z(J,J') = tr( (V_1 V_2)^{N_row} )   （K_1 = J'、K_2 = J）
+#   Z(K_1,K_2) = tr( (V_1 V_2)^{N_row} )
 #   成分定義・パウリ表示のどちらで計算しても同じ値になること。
 #   併せて K_1 と K_2 を取り違えると（M != N_row のとき）合わないことも確認する。
-# 対象: structured-latex partition_function_in_pauli_form
+# 対象: structured-latex partition_function_via_transfer_matrix（001_partition_function_2d_ising.ts）
 # ---------------------------------------------------------
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
@@ -31,7 +31,7 @@ for (N_row, M) in Z_CASES:
         ok = max(r_c, r_p) <= 1e-9
         if N_row != M:
             ok = ok and (r_sw >= MISMATCH_FLOOR)
-        print(f"  N_row={N_row}, M={M}, K1(=J')={K1v}, K2(=J)={K2v}: "
+        print(f"  N_row={N_row}, M={M}, K1={K1v}, K2={K2v}: "
               f"Z={Zd:.8e}, 成分定義 rel={r_c:.2e}, パウリ表示 rel={r_p:.2e} "
               f"{swap_note} -> {'PASS' if ok else 'FAIL'}")
         all_ok = ok and all_ok

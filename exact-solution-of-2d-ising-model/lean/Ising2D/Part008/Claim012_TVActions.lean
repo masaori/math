@@ -167,7 +167,7 @@ theorem actsBy_TConj_smulUnits {c : ℂ} (hc : c ≠ 0) {u : (TensorPow M)ˣ}
 
 /-- `ad ((1/2) i K_1 H_1^{(-)})` は `span{hat(Z)_μ^{(-)}, hat(Y)_μ}` を保つ（`z` 側）。
 `<commutator_of_H_and_Z_Y>` (1)（`lie_H1_hatZ_same`）の帰結。 -/
-theorem ad_V1half_hatZMinus (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
+theorem ad_V1pmHalf_hatZMinus (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
     (((1 / 2 : ℂ) * Complex.I * K1) • H1 M 1) * hatZMinus M μ -
         hatZMinus M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1 M 1)
       = (Complex.I * K1 * Complex.exp (-((thetaMu M μ : ℝ) : ℂ) * Complex.I)) • hatY M μ := by
@@ -177,7 +177,7 @@ theorem ad_V1half_hatZMinus (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
   ring
 
 /-- 同上（`y` 側）。`<commutator_of_H_and_Z_Y>` (3)（`lie_H1_hatY`）の帰結。 -/
-theorem ad_V1half_hatY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
+theorem ad_V1pmHalf_hatY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
     (((1 / 2 : ℂ) * Complex.I * K1) • H1 M 1) * hatY M μ -
         hatY M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1 M 1)
       = (-Complex.I * K1 * Complex.exp (((thetaMu M μ : ℝ) : ℂ) * Complex.I)) •
@@ -195,11 +195,11 @@ private theorem exp_neg_mul_exp (θ : ℂ) :
 
 /-- **原文 `012` の第 1・第 2 式**（`T_{(V_1^{(±)})^{1/2}}` の作用行列は `B_1(θ_μ)`）。
 原文が明示的な仮定として置いていたものを、ここで**証明する**。 -/
-theorem actsBy_TConj_V1half (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    ActsBy (TConj (V1halfUnits M K1 1)).toLinearMap (hatZMinus M μ) (hatY M μ)
+theorem actsBy_TConj_V1pmHalf (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
+    ActsBy (TConj (V1pmHalfUnits M K1 1)).toLinearMap (hatZMinus M μ) (hatY M μ)
       (B1mat K1 ((thetaMu M μ : ℝ) : ℂ)) := by
   rw [B1mat_eq_twoDimConjMat]
-  refine actsBy_TConj_matExpUnits (ad_V1half_hatZMinus hM K1 μ) (ad_V1half_hatY hM K1 μ) ?_
+  refine actsBy_TConj_matExpUnits (ad_V1pmHalf_hatZMinus hM K1 μ) (ad_V1pmHalf_hatY hM K1 μ) ?_
   -- `αβ = (i K_1 e^{-iθ})(-i K_1 e^{iθ}) = K_1^2`（`i^2 = -1` と `e^{-iθ}e^{iθ} = 1`）
   have h := exp_neg_mul_exp ((thetaMu M μ : ℝ) : ℂ)
   have hI : Complex.I * Complex.I = -1 := Complex.I_mul_I
@@ -211,7 +211,7 @@ theorem actsBy_TConj_V1half (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
 
 /-- `ad (i K_2^* H_2)` は `span{hat(Z)_μ^{(-)}, hat(Y)_μ}` を保つ（`z` 側）。
 `<commutator_of_H_and_Z_Y>` (4)（`lie_H2_hatZMinus`）の帰結。 -/
-theorem ad_V2_hatZMinus (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem ad_V2H2Form_hatZMinus (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
     ((Complex.I * K2star) • H2 M) * hatZMinus M μ -
         hatZMinus M μ * ((Complex.I * K2star) • H2 M)
       = (-(2 * Complex.I * K2star)) • hatY M μ := by
@@ -221,7 +221,7 @@ theorem ad_V2_hatZMinus (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
   ring
 
 /-- 同上（`y` 側）。`<commutator_of_H_and_Z_Y>` (6)（`lie_H2_hatY`）の帰結。 -/
-theorem ad_V2_hatY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem ad_V2H2Form_hatY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
     ((Complex.I * K2star) • H2 M) * hatY M μ - hatY M μ * ((Complex.I * K2star) • H2 M)
       = (2 * Complex.I * K2star) • hatZMinus M μ := by
   rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H2_hatY hM μ, smul_smul,
@@ -231,12 +231,12 @@ theorem ad_V2_hatY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
 
 /-- **原文 `012` の第 3・第 4 式**（`T_{V_2}` の作用行列は `B_2`）。
 `V_2` のスカラー因子 `(2s_2)^{M/2}` は共役で打ち消える。 -/
-theorem actsBy_TConj_V2 (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
-    ActsBy (TConj (V2Units M hs2 K2star)).toLinearMap (hatZMinus M μ) (hatY M μ)
+theorem actsBy_TConj_V2H2Form (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
+    ActsBy (TConj (V2H2FormUnits M hs2 K2star)).toLinearMap (hatZMinus M μ) (hatY M μ)
       (B2mat K2star) := by
   rw [B2mat_eq_twoDimConjMat]
   refine actsBy_TConj_smulUnits _ ?_
-  refine actsBy_TConj_matExpUnits (ad_V2_hatZMinus hM K2star μ) (ad_V2_hatY hM K2star μ) ?_
+  refine actsBy_TConj_matExpUnits (ad_V2H2Form_hatZMinus hM K2star μ) (ad_V2H2Form_hatY hM K2star μ) ?_
   ring_nf
   rw [Complex.I_sq]
   ring
@@ -248,7 +248,7 @@ theorem actsBy_TConj_V2 (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) 
   `(T_{(V)}(hat(Z)_μ^{(-)}), T_{(V)}(hat(Y)_μ)) = (hat(Z)_μ^{(-)}, hat(Y)_μ) A(θ_μ)`
 
 `Part008/Definition016_TV.lean` の `TV_hatZ_hatY_of_action'` が持っていた
-`ActsBy` の仮定 `hT1`, `hT2` を、`actsBy_TConj_V1half` / `actsBy_TConj_V2` で埋めた形。
+`ActsBy` の仮定 `hT1`, `hT2` を、`actsBy_TConj_V1pmHalf` / `actsBy_TConj_V2H2Form` で埋めた形。
 
 残る仮定は「`IsingConst` の成分が `K_1, K_2^*` の双曲線関数であること」と
 双対関係の帰結 `hdual : s_2^* c_2 = c_2^*` だけで、いずれも**数学的に必要**な仮定である
@@ -260,10 +260,10 @@ theorem TV_hatZ_hatY (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ
     (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
     (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
     (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
-    ActsBy (TV (V1halfUnits M K1 1) (V2Units M hs2 K2star)).toLinearMap
+    ActsBy (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap
       (hatZMinus M μ) (hatY M μ) (AMat K (thetaMu M μ)) :=
   TV_hatZ_hatY_of_action' K μ K1 K2star (thetaMu M μ) _ _
-    (actsBy_TConj_V1half hM K1 μ) (actsBy_TConj_V2 hM hs2 K2star μ)
+    (actsBy_TConj_V1pmHalf hM K1 μ) (actsBy_TConj_V2H2Form hM hs2 K2star μ)
     hc1 hs1 hc2star hs2star hdual
 
 /-! ## `ψ_μ^†`, `ψ_μ` が `T_{(V)}` の固有ベクトルであること（原文 `<commutation_V_psi>`、無条件版） -/
@@ -282,7 +282,7 @@ theorem TV_psiDag (hM : M ≠ 0) (μ : ℤ) (t : ℂ) (K1 K2star : ℂ) {s2 : �
     (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
     (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
     (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
-    (TV (V1halfUnits M K1 1) (V2Units M hs2 K2star)).toLinearMap (psiDag K M μ t)
+    (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap (psiDag K M μ t)
       = Dmat K (thetaMu M μ) t 0 0 • psiDag K M μ t :=
   TV_psiDag_of_action K hM μ t ht hg _
     (TV_hatZ_hatY hM K μ K1 K2star hs2 hc1 hs1 hc2star hs2star hdual)
@@ -296,7 +296,7 @@ theorem TV_psi (hM : M ≠ 0) (μ : ℤ) (t : ℂ) (K1 K2star : ℂ) {s2 : ℝ} 
     (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
     (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
     (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
-    (TV (V1halfUnits M K1 1) (V2Units M hs2 K2star)).toLinearMap (psi K M μ t)
+    (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap (psi K M μ t)
       = Dmat K (thetaMu M μ) t 1 1 • psi K M μ t :=
   TV_psi_of_action K hM μ t ht hg _
     (TV_hatZ_hatY hM K μ K1 K2star hs2 hc1 hs1 hc2star hs2star hdual)
@@ -310,9 +310,9 @@ theorem TV_psiDag_psi (hM : M ≠ 0) (μ : ℤ) (t : ℂ) (K1 K2star : ℂ) {s2 
     (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
     (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
     (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
-    (TV (V1halfUnits M K1 1) (V2Units M hs2 K2star)).toLinearMap (psiDag K M μ t)
+    (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap (psiDag K M μ t)
         = (gamma1 K (thetaMu M μ) - Complex.I * t) • psiDag K M μ t
-      ∧ (TV (V1halfUnits M K1 1) (V2Units M hs2 K2star)).toLinearMap (psi K M μ t)
+      ∧ (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap (psi K M μ t)
         = (gamma1 K (thetaMu M μ) + Complex.I * t) • psi K M μ t :=
   TV_psiDag_psi_of_action K hM μ t ht hg _
     (TV_hatZ_hatY hM K μ K1 K2star hs2 hc1 hs1 hc2star hs2star hdual)

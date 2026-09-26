@@ -52,27 +52,27 @@ noncomputable def VmatInv (M : ℕ) (K1 η : ℂ) (s2 : ℝ) (K2star : ℂ) : Te
 theorem Vmat_eq_smul (K1 η : ℂ) (s2 : ℝ) (K2star : ℂ) :
     Vmat M K1 η s2 K2star
       = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ))
-        • (V1half M K1 η * matExp ((Complex.I * K2star) • H2 M) * V1half M K1 η) := by
-  rw [Vmat, V2, Matrix.mul_smul, Matrix.smul_mul]
+        • (V1pmHalf M K1 η * matExp ((Complex.I * K2star) • H2 M) * V1pmHalf M K1 η) := by
+  rw [Vmat, V2H2Form, Matrix.mul_smul, Matrix.smul_mul]
 
-private theorem V1half_mul_neg (K1 η : ℂ) :
-    V1half M K1 η * matExp (-(((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)) = 1 :=
+private theorem V1pmHalf_mul_neg (K1 η : ℂ) :
+    V1pmHalf M K1 η * matExp (-(((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)) = 1 :=
   matExp_mul_neg _
 
-private theorem neg_mul_V1half (K1 η : ℂ) :
-    matExp (-(((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)) * V1half M K1 η = 1 :=
+private theorem neg_mul_V1pmHalf (K1 η : ℂ) :
+    matExp (-(((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)) * V1pmHalf M K1 η = 1 :=
   matExp_neg_mul _
 
 theorem VmatInv_mul_Vmat (K1 η : ℂ) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) :
     VmatInv M K1 η s2 K2star * Vmat M K1 η s2 K2star = 1 := by
   set A : ℂ := (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) with hA
   have hAne : A ≠ 0 := rpow_two_s2_ne_zero hs2 M
-  set E := V1half M K1 η with hE
+  set E := V1pmHalf M K1 η with hE
   set E' := matExp (-(((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)) with hE'
   set B := matExp ((Complex.I * K2star) • H2 M) with hB
   set B' := matExp (-((Complex.I * K2star) • H2 M)) with hB'
   rw [VmatInv, Vmat_eq_smul, smul_mul_smul_comm, inv_mul_cancel₀ hAne]
-  have hEE : E' * E = 1 := neg_mul_V1half K1 η
+  have hEE : E' * E = 1 := neg_mul_V1pmHalf K1 η
   have hBB : B' * B = 1 := matExp_neg_mul _
   have key : (E' * B' * E') * (E * B * E) = 1 := by
     calc (E' * B' * E') * (E * B * E)
@@ -86,12 +86,12 @@ theorem Vmat_mul_VmatInv (K1 η : ℂ) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) 
     Vmat M K1 η s2 K2star * VmatInv M K1 η s2 K2star = 1 := by
   set A : ℂ := (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) with hA
   have hAne : A ≠ 0 := rpow_two_s2_ne_zero hs2 M
-  set E := V1half M K1 η with hE
+  set E := V1pmHalf M K1 η with hE
   set E' := matExp (-(((1 / 2 : ℂ) * Complex.I * K1) • H1 M η)) with hE'
   set B := matExp ((Complex.I * K2star) • H2 M) with hB
   set B' := matExp (-((Complex.I * K2star) • H2 M)) with hB'
   rw [VmatInv, Vmat_eq_smul, smul_mul_smul_comm, mul_inv_cancel₀ hAne]
-  have hEE : E * E' = 1 := V1half_mul_neg K1 η
+  have hEE : E * E' = 1 := V1pmHalf_mul_neg K1 η
   have hBB : B * B' = 1 := matExp_mul_neg _
   have key : (E * B * E) * (E' * B' * E') = 1 := by
     calc (E * B * E) * (E' * B' * E')
@@ -112,13 +112,13 @@ theorem trace_Vmat (K1 η : ℂ) (s2 : ℝ) (K2star : ℂ) :
   rw [Vmat_eq_smul, Matrix.trace_smul, smul_eq_mul]
   congr 1
   rw [tauTrace]
-  calc (V1half M K1 η * matExp ((Complex.I * K2star) • H2 M) * V1half M K1 η).trace
-      = ((V1half M K1 η * V1half M K1 η) * matExp ((Complex.I * K2star) • H2 M)).trace := by
-        rw [Matrix.trace_mul_comm (V1half M K1 η * matExp ((Complex.I * K2star) • H2 M))]
+  calc (V1pmHalf M K1 η * matExp ((Complex.I * K2star) • H2 M) * V1pmHalf M K1 η).trace
+      = ((V1pmHalf M K1 η * V1pmHalf M K1 η) * matExp ((Complex.I * K2star) • H2 M)).trace := by
+        rw [Matrix.trace_mul_comm (V1pmHalf M K1 η * matExp ((Complex.I * K2star) • H2 M))]
         congr 1
         noncomm_ring
     _ = (matExp ((Complex.I * K1) • H1 M η) * matExp ((Complex.I * K2star) • H2 M)).trace := by
-        rw [V1half_sq, V1, matExp]
+        rw [V1pmHalf_sq, V1pm, matExp]
 
 /-- **原文 `constant_c_value` Step 2**: 符号反転共役より
 `tr(exp(-S_1) exp(-S_2)) = τ`。 -/

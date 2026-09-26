@@ -42,7 +42,7 @@ abbrev TensorPow (M : ℕ) : Type := Matrix (Conf M) (Conf M) ℂ
 人手証明の記法に見た目は最も近いが、
 - ノルム環の構造が入らない（`NormedSpace.exp` が使えない）
 - 行列式・跡・固有値など行列固有の API が一切使えない
-ため、本プロジェクトの主対象（`V_1 = exp(...)`, `V_2 = exp(...)`）を扱えない。 -/
+ため、本プロジェクトの主対象（`V_1, V_2` のパウリ行列表示 `exp(...)`、`V_1^{(±)} = exp(...)` など）を扱えない。 -/
 abbrev AbstractTensorPow (M : ℕ) : Type := ⨂[ℂ] (_ : Fin M), Matrix (Fin 2) (Fin 2) ℂ
 
 end Ising2D

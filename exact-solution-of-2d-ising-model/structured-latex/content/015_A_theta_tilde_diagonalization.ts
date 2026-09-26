@@ -22,7 +22,7 @@ export default defineBlocks([
       paragraph([
         ref("antiperiodic_exp_sum"),
         " の半整数運動量 ",
-        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi(\mu-\frac12)}{M}`),
+        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi(\mu-\frac12)}{M_{\mathrm{col}}}`),
         " における ",
         ref("def_A_theta"),
         " の ",
@@ -175,11 +175,11 @@ export default defineBlocks([
         " の記号のもと ",
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
         ref("antiperiodic_exp_sum"),
         " の ",
-        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi(\mu-\frac12)}{M}`),
+        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi(\mu-\frac12)}{M_{\mathrm{col}}}`),
         " について、**すべての ",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " と、すべての ",
@@ -268,7 +268,7 @@ export default defineBlocks([
         " と ",
         ref("antiperiodic_exp_sum"),
         " の ",
-        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi(\mu-\frac12)}{M}`),
+        math(String.raw`\tilde\theta_\mu = \dfrac{2\pi(\mu-\frac12)}{M_{\mathrm{col}}}`),
         " より",
       ]),
       displayMath(
@@ -276,13 +276,13 @@ export default defineBlocks([
 \sin\tilde\theta_\mu = 0
 &\iff \exists k \in \mathbb{Z}:\ \tilde\theta_\mu = k\pi
    \quad (\because \sin t = 0 \iff \exists k \in \mathbb{Z}:\ t = k\pi) \\
-&\iff \exists k \in \mathbb{Z}:\ \frac{2\pi\left(\mu-\frac12\right)}{M} = k\pi
+&\iff \exists k \in \mathbb{Z}:\ \frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}} = k\pi
    \quad (\because \tilde\theta_\mu \text{ の定義}) \\
-&\iff \exists k \in \mathbb{Z}:\ \frac{2\left(\mu-\frac12\right)}{M} = k
+&\iff \exists k \in \mathbb{Z}:\ \frac{2\left(\mu-\frac12\right)}{M_{\mathrm{col}}} = k
    \quad (\because \text{両辺を } \pi > 0 \text{ で割る}) \\
-&\iff \exists k \in \mathbb{Z}:\ 2\left(\mu - \tfrac12\right) = kM
-   \quad (\because \text{両辺を } M \neq 0 \text{ 倍する}) \\
-&\iff \exists k \in \mathbb{Z}:\ 2\mu - 1 = kM
+&\iff \exists k \in \mathbb{Z}:\ 2\left(\mu - \tfrac12\right) = kM_{\mathrm{col}}
+   \quad (\because \text{両辺を } M_{\mathrm{col}} \neq 0 \text{ 倍する}) \\
+&\iff \exists k \in \mathbb{Z}:\ 2\mu - 1 = kM_{\mathrm{col}}
    \quad (\because \text{分配則 } 2\left(\mu-\tfrac12\right) = 2\mu - 1)
 \end{aligned}`,
       ),
@@ -290,13 +290,13 @@ export default defineBlocks([
         "**左辺 ",
         math(String.raw`2\mu-1`),
         " は奇数**なので、",
-        math(String.raw`kM`),
+        math(String.raw`kM_{\mathrm{col}}`),
         " も奇数でなければならず、したがって ",
         math(String.raw`k`),
         " は奇数である（",
         math(String.raw`k`),
         " が偶数なら ",
-        math(String.raw`kM`),
+        math(String.raw`kM_{\mathrm{col}}`),
         " は偶数）。",
       ]),
       paragraph([
@@ -372,7 +372,7 @@ s_1c_2
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " について、",
@@ -631,7 +631,7 @@ s_1c_2
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " について、",
@@ -893,21 +893,21 @@ A(\theta)(cv)
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " について、",
         ref("eigenvector_of_A_theta_tilde"),
         " の任意定数を ",
-        math(String.raw`c = \dfrac{1}{2\sqrt{M}\,\gamma_2(-\tilde\theta_\mu)}`),
+        math(String.raw`c = \dfrac{1}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\mu)}`),
         " と選んで",
       ]),
       displayMath(
         String.raw`\check{P}_\mu
 := \begin{pmatrix}
-\dfrac{-\left|\gamma_2(\tilde\theta_\mu)\right|}{2\sqrt{M}\,\gamma_2(-\tilde\theta_\mu)}
-& \dfrac{+\left|\gamma_2(\tilde\theta_\mu)\right|}{2\sqrt{M}\,\gamma_2(-\tilde\theta_\mu)} \\[8pt]
-\dfrac{1}{2\sqrt{M}} & \dfrac{1}{2\sqrt{M}}
+\dfrac{-\left|\gamma_2(\tilde\theta_\mu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\mu)}
+& \dfrac{+\left|\gamma_2(\tilde\theta_\mu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\mu)} \\[8pt]
+\dfrac{1}{2\sqrt{M_{\mathrm{col}}}} & \dfrac{1}{2\sqrt{M_{\mathrm{col}}}}
 \end{pmatrix},
 \qquad
 \check{D}_\mu := \begin{pmatrix} \lambda_{+,\mu} & 0 \\ 0 & \lambda_{-,\mu}\end{pmatrix}`,
@@ -915,7 +915,7 @@ A(\theta)(cv)
       paragraph(["とおく。このとき"]),
       displayMath(
         String.raw`\det\check{P}_\mu
-= \frac{-\left|\gamma_2(\tilde\theta_\mu)\right|}{2M\,\gamma_2(-\tilde\theta_\mu)} \neq 0_{\mathbb{C}},
+= \frac{-\left|\gamma_2(\tilde\theta_\mu)\right|}{2M_{\mathrm{col}}\,\gamma_2(-\tilde\theta_\mu)} \neq 0_{\mathbb{C}},
 \qquad
 A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
       ),
@@ -944,15 +944,15 @@ A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
         " かつ ",
         math(String.raw`b \neq 0`),
         "。また ",
-        math(String.raw`M \geq 2`),
+        math(String.raw`M_{\mathrm{col}} \geq 2`),
         " より ",
-        math(String.raw`\sqrt{M} > 0`),
+        math(String.raw`\sqrt{M_{\mathrm{col}}} > 0`),
         "（",
         ref("sqrt_nonnegative_existence_uniqueness"),
         "）。よって分母 ",
-        math(String.raw`2\sqrt{M}\,b \neq 0`),
+        math(String.raw`2\sqrt{M_{\mathrm{col}}}\,b \neq 0`),
         " であり、",
-        math(String.raw`c := \dfrac{1}{2\sqrt{M}\,b} \in \mathbb{C}^\times`),
+        math(String.raw`c := \dfrac{1}{2\sqrt{M_{\mathrm{col}}}\,b} \in \mathbb{C}^\times`),
         " が定まって ",
         math(String.raw`\check{P}_\mu`),
         " の 4 成分はすべて定まる。",
@@ -969,9 +969,9 @@ A(\tilde\theta_\mu) = \check{P}_\mu\,\check{D}_\mu\,\check{P}_\mu^{-1}`,
       displayMath(
         String.raw`\begin{aligned}
 cb
-&= \frac{1}{2\sqrt{M}\,b}\,b
+&= \frac{1}{2\sqrt{M_{\mathrm{col}}}\,b}\,b
    \quad (\because c\text{ の定義}) \\
-&= \frac{1}{2\sqrt{M}}
+&= \frac{1}{2\sqrt{M_{\mathrm{col}}}}
    \quad (\because b\ne0\text{ と }\mathbb{C}\text{ の四則})
 \end{aligned}`,
       ),
@@ -1003,23 +1003,23 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
       displayMath(
         String.raw`\begin{aligned}
 \det\check{P}_\mu
-&= \frac{-r}{2\sqrt{M}\,b}\cdot\frac{1}{2\sqrt{M}}
- - \frac{+r}{2\sqrt{M}\,b}\cdot\frac{1}{2\sqrt{M}}
+&= \frac{-r}{2\sqrt{M_{\mathrm{col}}}\,b}\cdot\frac{1}{2\sqrt{M_{\mathrm{col}}}}
+ - \frac{+r}{2\sqrt{M_{\mathrm{col}}}\,b}\cdot\frac{1}{2\sqrt{M_{\mathrm{col}}}}
    \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
-&= \frac{-r}{4M\,b} - \frac{+r}{4M\,b}
-   \quad \left(\because \left(2\sqrt{M}\right)^2 = 4M\right) \\
-&= \frac{-r}{4M\,b} + \frac{-r}{4M\,b}
-   \quad (\because -\tfrac{+r}{4M\,b}=\tfrac{-r}{4M\,b}\text{。}\mathbb{C}\text{ の四則}) \\
-&= 2\cdot\frac{-r}{4M\,b}
+&= \frac{-r}{4M_{\mathrm{col}}\,b} - \frac{+r}{4M_{\mathrm{col}}\,b}
+   \quad \left(\because \left(2\sqrt{M_{\mathrm{col}}}\right)^2 = 4M_{\mathrm{col}}\right) \\
+&= \frac{-r}{4M_{\mathrm{col}}\,b} + \frac{-r}{4M_{\mathrm{col}}\,b}
+   \quad (\because -\tfrac{+r}{4M_{\mathrm{col}}\,b}=\tfrac{-r}{4M_{\mathrm{col}}\,b}\text{。}\mathbb{C}\text{ の四則}) \\
+&= 2\cdot\frac{-r}{4M_{\mathrm{col}}\,b}
    \quad (\because \text{同類項の統合}) \\
-&= \frac{-r}{2M\,b}
-   \quad (\because 2M\ne0\text{ と }\mathbb{C}\text{ の四則})
+&= \frac{-r}{2M_{\mathrm{col}}\,b}
+   \quad (\because 2M_{\mathrm{col}}\ne0\text{ と }\mathbb{C}\text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`r > 0`),
         "、",
-        math(String.raw`2M \neq 0`),
+        math(String.raw`2M_{\mathrm{col}} \neq 0`),
         "、",
         math(String.raw`b \neq 0`),
         " と ",
@@ -1079,7 +1079,7 @@ A(\tilde\theta_\mu)
         " の記号のもと ",
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " について、",
@@ -1362,7 +1362,7 @@ s_1^2c_2^2(s_2^*)^2
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " について、",
@@ -1492,7 +1492,7 @@ t^2
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " について、",
@@ -1556,7 +1556,7 @@ t^2
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " について、",

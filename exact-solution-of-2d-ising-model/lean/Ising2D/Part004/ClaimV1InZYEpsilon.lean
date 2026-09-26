@@ -20,14 +20,17 @@ Lean のサイト添字は 0 始まりなので、最後のサイトは
 * Step 1: `Y`, `Z`, `epsilon` の定義展開と `siteProd_mul` によるサイトごとの積。
 * Step 2: `Y_mul_Z_next_of_not_last`。
 * Step 3: `epsilon_mul_Y_mul_Z_next_of_last`。
-* Step 4: `sum_sigmaZ_sigmaZ_eq_jordanWigner` と `V1pauli_eq_jordanWigner`。
+* Step 4: `sum_sigmaZ_sigmaZ_eq_jordanWigner`（指数の肩の等式）、
+  `V1PauliForm_eq_jordanWigner`（右辺の式 `V1PauliForm` についての行列等式。`K1 : ℂ` の一般の値で）、
+  `V1_in_Z_Y_epsilon`（人手の `V_1` そのものについての主張。`first_transfer_matrix_pauli_form` を
+  引く段が人手の最終の式変形の第 1 行に対応する）。
 
 必要十分版は置かない。この主張に固有なのは、同じ具体的な `V_1` の Pauli 表示と
 Jordan--Wigner 表示を突き合わせることだからである。証明が使う一般的な内容は、
 既に `siteProd_mul` と `siteProd_smul_family` が表す「サイトごとの積」と
 「各サイトについての複素線型性」に分離されている。
 -/
-import Ising2D.Part010.Definition000_ComponentTransfer
+import Ising2D.Part004.ClaimFirstTransferMatrixPauliForm
 
 namespace Ising2D
 
@@ -174,13 +177,19 @@ theorem sum_sigmaZ_sigmaZ_eq_jordanWigner (hM : 2 ≤ M) :
   rw [H1JordanWigner, Finset.smul_sum]
   exact Finset.sum_congr rfl fun m _ => sigmaZ_mul_sigmaZ_next_eq_jordanWignerBond hM m
 
+/-- 人手 Step 4 の最終の式変形の第 2 行（指数の肩の等式を `exp` に代入する段）を、
+右辺の式 `V1PauliForm`（`K1 : ℂ` の一般の値）について述べたもの。 -/
+theorem V1PauliForm_eq_jordanWigner (hM : 2 ≤ M) (K1 : ℂ) :
+    V1PauliForm M K1 = matExp ((Complex.I * K1) • H1JordanWigner M) := by
+  rw [V1PauliForm, sum_sigmaZ_sigmaZ_eq_jordanWigner hM, smul_smul]
+  rw [mul_comm K1 Complex.I]
+
 /-- **人手本文 `V1_in_Z_Y_epsilon` の行列等式**:
 
-`V_1 = exp(i K_1 (Y_1 Z_2 + ... + Y_{M-1} Z_M - ε Y_M Z_1))`。
+`V_1 = exp(i K_1 (Y_1 Z_2 + ... + Y_{M-1} Z_M - ε Y_M Z_1))`（`V_1` は `def_transfer_matrix` の `V_1`）。
 -/
-theorem V1pauli_eq_jordanWigner (hM : 2 ≤ M) (K1 : ℂ) :
-    V1pauli M K1 = matExp ((Complex.I * K1) • H1JordanWigner M) := by
-  rw [V1pauli, sum_sigmaZ_sigmaZ_eq_jordanWigner hM, smul_smul]
-  rw [mul_comm K1 Complex.I]
+theorem V1_in_Z_Y_epsilon (hM : 2 ≤ M) (K1 : ℝ) :
+    V1 M K1 = matExp ((Complex.I * (K1 : ℂ)) • H1JordanWigner M) := by
+  rw [first_transfer_matrix_pauli_form, V1PauliForm_eq_jordanWigner hM]
 
 end Ising2D

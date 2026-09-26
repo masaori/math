@@ -20,7 +20,7 @@
 実数の順序は `K₂>0` から分母の非零性を得るためだけに使う。実対数と指数関数は
 `exp(log(tanh K₂))=tanh K₂` を与える箇所にだけ現れる。
 -/
-import Ising2D.Part010.Claim005_TwoByTwoTransfer
+import Ising2D.Part004.ClaimTwoByTwoTransferIdentity
 
 namespace Ising2D
 

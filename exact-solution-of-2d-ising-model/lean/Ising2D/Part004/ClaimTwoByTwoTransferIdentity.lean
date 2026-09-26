@@ -1,7 +1,7 @@
 /-
 # 2×2 の転送行列の恒等式
 
-対応する人手証明（正本は `structured-latex/content/010_transfer_matrix_bridge.ts`）:
+対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
 
 * `bridge_005_claim_two_by_two_transfer_identity`（ラベル **`two_by_two_transfer_identity`**）
 
@@ -9,18 +9,18 @@
 
   `A = !![e^{K_2}, e^{-K_2}; e^{-K_2}, e^{K_2}] = (2 s_2)^{1/2} exp(K_2^* σ^x)`
 
-## 原文の Step との対応
+## 人手証明の中間目標との対応
 
-* Step 1（`exp(t σ^x) = cosh t · I + sinh t · σ^x`）→ `exp_smul_pauliX`。
+* 中間目標「`exp(tσ^x)` の閉じた形」（`exp(t σ^x) = cosh t · I + sinh t · σ^x`）→ `exp_smul_pauliX`。
   原文は指数関数の級数を偶数項・奇数項に分けて `cosh`, `sinh` のテイラー級数と
   突き合わせているが、Lean では `σ^x` を対角化して
   `exp(t σ^x) = U exp(diag(t,-t)) U⁻¹` から計算する（`Matrix.exp_units_conj` と
   `Ising2D.matrixExp_diagonal`）。得られる行列は原文と同じ
   `!![cosh t, sinh t; sinh t, cosh t]` であり、`cosh`, `sinh` の定義
   `(e^t ± e^{-t})/2` を経由するので級数の分割は要らない。
-* Step 2（`cosh K_2^*, sinh K_2^*` を `K_2` で書く）→ `exp_Kstar` / `exp_neg_Kstar`。
-* Step 3（前因子 `(2s_2)^{1/2} = 2(sinh K_2 cosh K_2)^{1/2}`）と
-  Step 4（結論）→ `sqrt_two_s2_mul_cosh_Kstar` / `sqrt_two_s2_mul_sinh_Kstar`。
+* 中間目標「`cosh K_2^*, sinh K_2^*` を `K_2` で書く」→ `exp_Kstar` / `exp_neg_Kstar`。
+* 中間目標「前因子」（`(2s_2)^{1/2} = 2(sinh K_2 cosh K_2)^{1/2}`）→ `sqrt_two_s2_eq`、
+  中間目標「結論」→ `sqrt_two_s2_mul_cosh_Kstar` / `sqrt_two_s2_mul_sinh_Kstar`。
 
 ## 双対関係が効いていること
 
@@ -32,8 +32,9 @@
 必要十分版は置いていない（`Real.tanh`, `Real.sinh` の具体的な恒等式そのものであり、
 取り払える構造が無い）。
 -/
-import Ising2D.Part010.Claim003_ExpDiagonal
+import Ising2D.Part004.ClaimExpOfDiagonalMatrix
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.Part004.DefinitionSecondDualCouplingConstant
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 
@@ -84,7 +85,7 @@ theorem smul_pauliX_eq_conj (t : ℂ) :
   fin_cases i <;> fin_cases j <;>
     simp [pauliX, Matrix.mul_apply, Fin.sum_univ_two, Matrix.vecMul, dotProduct] <;> ring
 
-/-- **原文 Step 1: `exp(t σ^x) = cosh(t) I + sinh(t) σ^x`**（成分で書いた形）。 -/
+/-- **人手の中間目標「`exp(tσ^x)` の閉じた形」: `exp(t σ^x) = cosh(t) I + sinh(t) σ^x`**（成分で書いた形）。 -/
 theorem exp_smul_pauliX (t : ℂ) :
     exp (t • pauliX) =
       !![Complex.cosh t, Complex.sinh t; Complex.sinh t, Complex.cosh t] := by
@@ -104,23 +105,16 @@ theorem exp_smul_pauliX_eq_cosh_add_sinh (t : ℂ) :
   fin_cases i <;> fin_cases j <;>
     simp [pauliX, Matrix.one_apply] <;> ring
 
-/-! ## 双対変数 `K_2^*` -/
+/-! ## `cosh K_2^*, sinh K_2^*` を `K_2` で書く -/
 
-/-- 原文の `K_2^* = -(1/2) log(tanh K_2)`（双対関係）。 -/
-noncomputable def Kstar (K2 : ℝ) : ℝ := -(1 / 2) * Real.log (Real.tanh K2)
-
-theorem tanh_pos {K2 : ℝ} (h : 0 < K2) : 0 < Real.tanh K2 := by
-  rw [Real.tanh_eq_sinh_div_cosh]
-  exact div_pos (Real.sinh_pos_iff.mpr h) (Real.cosh_pos K2)
-
-/-- 原文 Step 2 の `e^{-K_2^*} = (tanh K_2)^{1/2}`。 -/
+/-- 人手の中間目標「`cosh K_2^*, sinh K_2^*` を `K_2` で書く」の `e^{-K_2^*} = (tanh K_2)^{1/2}`。 -/
 theorem exp_neg_Kstar {K2 : ℝ} (h : 0 < K2) :
     Real.exp (-(Kstar K2)) = Real.sqrt (Real.tanh K2) := by
   have ht := tanh_pos h
   rw [Real.sqrt_eq_rpow, Real.rpow_def_of_pos ht, Kstar]
   ring_nf
 
-/-- 原文 Step 2 の `e^{K_2^*} = (tanh K_2)^{-1/2}`。 -/
+/-- 同じ中間目標の `e^{K_2^*} = (tanh K_2)^{-1/2}`。 -/
 theorem exp_Kstar {K2 : ℝ} (h : 0 < K2) :
     Real.exp (Kstar K2) = 1 / Real.sqrt (Real.tanh K2) := by
   have h1 : Real.exp (Kstar K2) = (Real.exp (-(Kstar K2)))⁻¹ := by
@@ -129,7 +123,7 @@ theorem exp_Kstar {K2 : ℝ} (h : 0 < K2) :
 
 /-! ## 前因子 `(2 s_2)^{1/2}` -/
 
-/-- 原文 Step 3 の `(2 s_2)^{1/2} = 2 (sinh K_2 cosh K_2)^{1/2}`。 -/
+/-- 人手の中間目標「前因子」の `(2 s_2)^{1/2} = 2 (sinh K_2 cosh K_2)^{1/2}`。 -/
 theorem sqrt_two_s2_eq {K2 : ℝ} :
     Real.sqrt (2 * Real.sinh (2 * K2))
       = 2 * Real.sqrt (Real.sinh K2 * Real.cosh K2) := by
@@ -138,7 +132,7 @@ theorem sqrt_two_s2_eq {K2 : ℝ} :
       = (2 : ℝ) ^ 2 * (Real.sinh K2 * Real.cosh K2) by ring]
   rw [Real.sqrt_mul (by positivity), Real.sqrt_sq (by norm_num)]
 
-/-- 原文 Step 4 の第 1 式 `(2 s_2)^{1/2} cosh K_2^* = e^{K_2}`。 -/
+/-- 人手の中間目標「結論」の第 1 式 `(2 s_2)^{1/2} cosh K_2^* = e^{K_2}`。 -/
 theorem sqrt_two_s2_mul_cosh_Kstar {K2 : ℝ} (h : 0 < K2) :
     Real.sqrt (2 * Real.sinh (2 * K2)) * Real.cosh (Kstar K2) = Real.exp K2 := by
   have hs : 0 < Real.sinh K2 := Real.sinh_pos_iff.mpr h
@@ -157,7 +151,7 @@ theorem sqrt_two_s2_mul_cosh_Kstar {K2 : ℝ} (h : 0 < K2) :
   field_simp
   nlinarith [ha2, hb2, ha, hb]
 
-/-- 原文 Step 4 の第 2 式 `(2 s_2)^{1/2} sinh K_2^* = e^{-K_2}`。 -/
+/-- 人手の中間目標「結論」の第 2 式 `(2 s_2)^{1/2} sinh K_2^* = e^{-K_2}`。 -/
 theorem sqrt_two_s2_mul_sinh_Kstar {K2 : ℝ} (h : 0 < K2) :
     Real.sqrt (2 * Real.sinh (2 * K2)) * Real.sinh (Kstar K2) = Real.exp (-K2) := by
   have hs : 0 < Real.sinh K2 := Real.sinh_pos_iff.mpr h

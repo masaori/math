@@ -1,0 +1,16 @@
+  M_col=1, exp(K_2)=2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=1, exp(K_2)=3/2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=1, exp(K_2)=5/4: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=2, exp(K_2)=2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=2, exp(K_2)=3/2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=2, exp(K_2)=5/4: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=3, exp(K_2)=2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=3, exp(K_2)=3/2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=3, exp(K_2)=5/4: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=4, exp(K_2)=2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=4, exp(K_2)=3/2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=4, exp(K_2)=5/4: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=5, exp(K_2)=2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=5, exp(K_2)=3/2: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+  M_col=5, exp(K_2)=5/4: 冪・サイトごとの exp・可換性・積へのまとめ -> PASS
+RESULT: PASS

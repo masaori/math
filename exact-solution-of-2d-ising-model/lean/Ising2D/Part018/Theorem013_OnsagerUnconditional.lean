@@ -36,7 +36,7 @@
 | `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | 章 016 の結論に残る唯一の仮定（`lean/docs/ch016-formalization.md` 3 章）。008 章以来 `det A(θ) = 1` に必要で、原文が置いている関係である |
 | `bridge` | 章 011 の実行列 `W` と `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 章 011 の射影後の複素行列等式は `physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済み。章 017 の `V^{(+)}` の実行列表示と組み合わせ、実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続が残る |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化 |
-| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 010 の `V2_component_equals_pauli` / `epsilon_commutes_with_transfer_matrices` に依存する（章 011 も同じ形で仮定として受け取っている） |
+| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 011 の `W_has_positive_entries`（章 001 の `def_transfer_matrix` の成分定義による）/ 章 010 の `epsilon_commutes_with_transfer_matrices` に依存する（章 011 も同じ形で仮定として受け取っている） |
 
 `hZ1` / `hZ2`（`c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`）は章 011
 `Ising2D.partition_function_sandwich` の内容であり、章 018 の仮定ではないのでそのまま残す。
@@ -77,7 +77,7 @@ structure EvenSectorClosureInput (P : IsingParam) (M : ℕ) where
   bridge : EvenSectorBridge M (checkFermiOf P hM) (vPlusDataOf P hM hdual)
   /-- `tr(εV^{(+)}) > 0`（章 018 の `closing_006`。Lean 未形式化） -/
   htr : 0 < ((epsilon M * (vPlusDataOf P hM hdual).V).trace).re
-  /-- `W` の成分はすべて正（章 010 の `V2_component_equals_pauli`） -/
+  /-- `W` の成分はすべて正（章 011 の `W_has_positive_entries`） -/
   hWpos : ∀ k l, 0 < bridge.W k l
   /-- `ε` は `W` と可換（章 010 の `epsilon_commutes_with_transfer_matrices`） -/
   hWcomm : epsilonR M * bridge.W = bridge.W * epsilonR M

@@ -16,7 +16,7 @@
 （`structured-latex/content/004_transfer_matrix.ts` の
 `transfer_matrix_006_claim_V1_restriction_to_eigenspaces`）から導いている。
 `V1_restrictsOnSector_of_opposite_sign` は、形式化済みの
-`V1pauli_eq_jordanWigner` からこの命題を導く。Lean の符号引数では
+`V1_in_Z_Y_epsilon`（`V_1` は `def_transfer_matrix` の `V_1`）からこの命題を導く。Lean の符号引数では
 `ηsign = -η` であり、偶セクターは `(η, ηsign) = (1, -1)`、
 奇セクターは `(-1, 1)` である。
 
@@ -34,7 +34,8 @@
 使わないことを確認した。
 -/
 import Ising2D.Part010.Claim010_EpsilonCommutes
-import Ising2D.Part010.V1JordanWigner
+import Ising2D.Part004.ClaimV1InZYEpsilon
+import Ising2D.Part004.ClaimV2InZY
 
 namespace Ising2D
 
@@ -43,10 +44,11 @@ open Matrix
 variable {M : ℕ}
 
 /-- 原文 004 章 `V1_restriction_to_eigenspaces` の主張:
-`ε` の固有値 `η` の固有ベクトルの上では `V_1` と `V_1^{(η)}` の作用が一致する。 -/
-def RestrictsOnSector (M : ℕ) (K1 ηsign η : ℂ) : Prop :=
+`ε` の固有値 `η` の固有ベクトルの上では `V_1`（`def_transfer_matrix` の `V_1`）と
+`V_1^{(η)}` の作用が一致する。 -/
+def RestrictsOnSector (M : ℕ) (K1 : ℝ) (ηsign η : ℂ) : Prop :=
   ∀ f : Conf M → ℂ, epsilon M *ᵥ f = η • f →
-    V1pauli M K1 *ᵥ f = V1 M K1 ηsign *ᵥ f
+    V1 M K1 *ᵥ f = V1pm M K1 ηsign *ᵥ f
 
 /-! ## `V_1` の固有空間への制限
 
@@ -160,11 +162,11 @@ theorem V1_generator_partialSums_mulVec_eq {K1 ηsign η : ℂ} (hM : 2 ≤ M)
 /-! 行列指数関数の級数を使う証明の中だけ、mathlib の行列作用素ノルムを有効にする。 -/
 open scoped Matrix.Norms.Operator in
 /-- 人手本文 Step 6: 同じ有限部分和列の極限は一意なので、二つの指数行列も
-固有ベクトルへの作用が一致する。 -/
-theorem V1pauli_mulVec_eq_V1 {K1 ηsign η : ℂ} (hM : 2 ≤ M)
+固有ベクトルへの作用が一致する（`V_1 = exp(G)` は `V1_in_Z_Y_epsilon` による）。 -/
+theorem V1_mulVec_eq_V1pm {K1 : ℝ} {ηsign η : ℂ} (hM : 2 ≤ M)
     (hηsign : ηsign = -η) {f : Conf M → ℂ}
     (hf : epsilon M *ᵥ f = η • f) :
-    V1pauli M K1 *ᵥ f = V1 M K1 ηsign *ᵥ f := by
+    V1 M K1 *ᵥ f = V1pm M K1 ηsign *ᵥ f := by
   let A : TensorPow M := (Complex.I * K1) • H1JordanWigner M
   let B : TensorPow M := (Complex.I * K1) • H1 M ηsign
   let applyTo : TensorPow M →ₗ[ℂ] (Conf M → ℂ) :=
@@ -192,43 +194,43 @@ theorem V1pauli_mulVec_eq_V1 {K1 ηsign η : ℂ} (hM : 2 ≤ M)
       exact hBseries.tendsto_sum_nat
     funext i
     exact congrFun hexpRaw i
-  rw [V1pauli_eq_jordanWigner hM, V1]
+  rw [V1_in_Z_Y_epsilon hM, V1pm]
   exact hexp
 
 /-- `M ≥ 2` と `η² = 1` の下で、`ηsign = -η` の符号対応が
 原文の `V_1` の固有空間への制限を与える。 -/
-theorem V1_restrictsOnSector_of_opposite_sign {K1 η : ℂ} (hM : 2 ≤ M)
+theorem V1_restrictsOnSector_of_opposite_sign {K1 : ℝ} {η : ℂ} (hM : 2 ≤ M)
     (_hη : η * η = 1) : RestrictsOnSector M K1 (-η) η := by
   intro f hf
-  exact V1pauli_mulVec_eq_V1 hM rfl hf
+  exact V1_mulVec_eq_V1pm hM rfl hf
 
 /-- 偶セクター `η = 1` では、境界符号は `ηsign = -1`。 -/
-theorem V1_restrictsOnEvenSector (hM : 2 ≤ M) (K1 : ℂ) :
+theorem V1_restrictsOnEvenSector (hM : 2 ≤ M) (K1 : ℝ) :
     RestrictsOnSector M K1 (-1) 1 := by
   simpa using V1_restrictsOnSector_of_opposite_sign (M := M) (K1 := K1) (η := (1 : ℂ))
     hM (by norm_num)
 
 /-- 奇セクター `η = -1` では、境界符号は `ηsign = 1`。 -/
-theorem V1_restrictsOnOddSector (hM : 2 ≤ M) (K1 : ℂ) :
+theorem V1_restrictsOnOddSector (hM : 2 ≤ M) (K1 : ℝ) :
     RestrictsOnSector M K1 1 (-1) := by
   simpa using V1_restrictsOnSector_of_opposite_sign (M := M) (K1 := K1) (η := (-1 : ℂ))
     hM (by norm_num)
 
 /-- **人手本文 `sector_replacement_of_V1`: `V_1 P^{(±)} = V_1^{(±)} P^{(±)}`。** -/
-theorem sector_replacement_of_V1 {K1 η : ℂ} (hM : 2 ≤ M) (hη : η * η = 1) :
-    V1pauli M K1 * epsProj M η = V1 M K1 (-η) * epsProj M η := by
+theorem sector_replacement_of_V1 {K1 : ℝ} {η : ℂ} (hM : 2 ≤ M) (hη : η * η = 1) :
+    V1 M K1 * epsProj M η = V1pm M K1 (-η) * epsProj M η := by
   refine Matrix.ext_of_mulVec_single fun i => ?_
   rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
   exact V1_restrictsOnSector_of_opposite_sign hM hη _ (epsProj_mulVec_mem hη _)
 
 /-- **人手本文 `sector_replacement_pow`: `(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}`**
-（必要十分版 `Ising2D.NecSuf.pow_mul_proj` の系）。 -/
-theorem sector_replacement_pow {K1 η : ℂ} {s2 : ℝ} {K2star : ℂ} (hM : 2 ≤ M)
+（`V_1, V_2` は `def_transfer_matrix` の転送行列。必要十分版 `Ising2D.NecSuf.pow_mul_proj` の系）。 -/
+theorem sector_replacement_pow {K1 K2 : ℝ} {η : ℂ} (hM : 2 ≤ M) (hK2 : 0 < K2)
     (hη : η * η = 1) (n : ℕ) :
-    (V1pauli M K1 * V2pauli M s2 K2star) ^ n * epsProj M η
-      = (V1 M K1 (-η) * V2pauli M s2 K2star) ^ n * epsProj M η :=
-  NecSuf.pow_mul_proj (epsProj_sq hη) (commute_V1pauli_epsProj K1 η)
-    (commute_V2pauli_epsProj s2 K2star η) (commute_V1_epsProj K1 (-η) η)
+    (V1 M K1 * V2 M K2) ^ n * epsProj M η
+      = (V1pm M K1 (-η) * V2 M K2) ^ n * epsProj M η :=
+  NecSuf.pow_mul_proj (epsProj_sq hη) (commute_V1_epsProj K1 η)
+    (commute_V2_epsProj hK2 η) (commute_V1pm_epsProj K1 (-η) η)
     (sector_replacement_of_V1 hM hη) n
 
 end Ising2D

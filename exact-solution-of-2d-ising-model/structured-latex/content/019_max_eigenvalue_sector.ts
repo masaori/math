@@ -8,7 +8,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: SRC, ordinal: 1 },
-    title: { tex: String.raw`\text{最大固有値はどちらのセクターから来るか：} c(M) = c_+(M)` },
+    title: { tex: String.raw`\text{最大固有値はどちらのセクターから来るか：} c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}})` },
     labels: [],
   },
 
@@ -22,17 +22,17 @@ export default defineBlocks([
       paragraph([
         ref("sector_decomposition_of_rayleigh_sup"),
         " (3) により ",
-        math(String.raw`c(M) = \max\left(c_+(M), c_-(M)\right)`),
+        math(String.raw`c(M_{\mathrm{col}}) = \max\left(c_+(M_{\mathrm{col}}), c_-(M_{\mathrm{col}})\right)`),
         " である。",
         ref("onsager_exact_solution"),
         " はこの ",
         math(String.raw`\max`),
         " の値を決めずに、",
-        math(String.raw`\Lambda^{(1/2)}_M \leq c(M) \leq 2\Lambda^{(1/2)}_M`),
+        math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}} \leq c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " という**粗い挟み撃ち**で自由エネルギーを出した（係数 ",
         math(String.raw`2`),
         " は ",
-        math(String.raw`(\log 2)/M \to 0`),
+        math(String.raw`(\log 2)/M_{\mathrm{col}} \to 0`),
         " で消えるので表式には影響しない）。",
       ]),
       paragraph([
@@ -41,9 +41,9 @@ export default defineBlocks([
         " がどちらから来るかを確定させる：",
       ]),
       displayMath(
-        String.raw`c_-(M) \ \leq\ c_+(M),
+        String.raw`c_-(M_{\mathrm{col}}) \ \leq\ c_+(M_{\mathrm{col}}),
 \qquad \text{したがって}\qquad
-c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
+c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`,
       ),
       paragraph([
         "**自由エネルギーの表式そのものにこの結果は不要である。** それでもこれを示すのは、",
@@ -62,7 +62,7 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
         " の**置換行列**である（",
         ref("epsilon_is_sign_flip_permutation"),
         "）。そこで奇セクターの実ベクトル ",
-        math(String.raw`x \in \mathcal{F}^{(-)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`x \in \mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " に対し、成分ごとに絶対値を取ったベクトル ",
         math(String.raw`u`),
         "（",
@@ -78,11 +78,11 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
         "。この議論で実際に効くのは ",
         math(String.raw`W_{kl} \geq 0`),
         " という**非負性だけ**である）ため、絶対値を取ると二次形式の値は**減らない**。よって ",
-        math(String.raw`c_+(M) \geq u^\top Wu \geq x^\top Wx`),
+        math(String.raw`c_+(M_{\mathrm{col}}) \geq u^\top Wu \geq x^\top Wx`),
         " となり、",
         math(String.raw`x`),
         " について上限を取れば ",
-        math(String.raw`c_+(M) \geq c_-(M)`),
+        math(String.raw`c_+(M_{\mathrm{col}}) \geq c_-(M_{\mathrm{col}})`),
         " を得る（",
         ref("c_minus_le_c_plus"),
         "）。",
@@ -97,9 +97,9 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
       ]),
       paragraph([
         "なお、示すのは ",
-        math(String.raw`c_-(M) \leq c_+(M)`),
+        math(String.raw`c_-(M_{\mathrm{col}}) \leq c_+(M_{\mathrm{col}})`),
         " という**不等号だけ**であり、",
-        math(String.raw`c_-(M)`),
+        math(String.raw`c_-(M_{\mathrm{col}})`),
         " の値そのものには立ち入らない。",
       ]),
     ],
@@ -116,42 +116,46 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
     labels: ["epsilon_is_sign_flip_permutation"],
     statement: [
       paragraph([
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とし、",
         ref("def_config_basis_iso"),
-        " の同一視のもとで ",
-        math(String.raw`\mathbb{C}^{2^M}`),
+        " の ",
+        math(String.raw`\iota`),
+        " による番号付け（",
+        ref("config_numbering_equals_kronecker_numbering"),
+        "）のもとで ",
+        math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " の標準基底を ",
-        math(String.raw`e_1,\dots,e_{2^M}`),
+        math(String.raw`e_1,\dots,e_{2^{M_{\mathrm{col}}}}`),
         " とする。",
-        math(String.raw`k \in \{1,\dots,2^M\}`),
+        math(String.raw`k \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
         " に対応するスピン配置を ",
         math(String.raw`s_k \in \mathfrak{M}`),
         "（",
-        ref("def_transfer_matrix"),
+        ref("def_row_configurations"),
         " の ",
-        math(String.raw`\mathfrak{M} = \mathrm{Map}(\{1,\dots,M\},\{-1,1\})`),
+        math(String.raw`\mathfrak{M} = \mathrm{Map}(\{1,\dots,M_{\mathrm{col}}\},\{-1,1\})`),
         "。すなわち ",
         math(String.raw`e_k = f_{\iota(s_k)}`),
         "）と書き、写像 ",
-        math(String.raw`\pi : \{1,\dots,2^M\} \to \{1,\dots,2^M\}`),
+        math(String.raw`\pi : \{1,\dots,2^{M_{\mathrm{col}}}\} \to \{1,\dots,2^{M_{\mathrm{col}}}\}`),
         " を",
       ]),
       displayMath(
         String.raw`\pi(k) := \left(\text{スピン配置 } -s_k \text{ に対応する番号}\right),
-\qquad (-s_k)(m) := -\,s_k(m) \quad (m \in \{1,\dots,M\})`,
+\qquad (-s_k)(m) := -\,s_k(m) \quad (m \in \{1,\dots,M_{\mathrm{col}}\})`,
       ),
       paragraph([
         "で定める。",
         ref("def_transfer_matrix_symbols"),
         " の ",
-        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_M^x`),
+        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}}^x`),
         " について次が成り立つ。",
       ]),
       list([
         [
           math(String.raw`\text{(1)}\quad \varepsilon\,e_k = e_{\pi(k)}
-\qquad (k \in \{1,\dots,2^M\})`),
+\qquad (k \in \{1,\dots,2^{M_{\mathrm{col}}}\})`),
           "。とくに ",
           math(String.raw`\varepsilon`),
           " の成分は ",
@@ -168,24 +172,24 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
         ],
         [
           math(String.raw`\text{(2)}\quad \pi(\pi(k)) = k, \qquad \pi(k) \neq k
-\qquad (k \in \{1,\dots,2^M\})`),
+\qquad (k \in \{1,\dots,2^{M_{\mathrm{col}}}\})`),
           "（",
           math(String.raw`\pi`),
           " は不動点をもたない対合）。",
         ],
         [
           math(String.raw`\text{(3)}\quad \left(\varepsilon x\right)_k = x_{\pi(k)}
-\qquad \left(x \in \mathbb{C}^{2^M},\ k \in \{1,\dots,2^M\}\right)`),
+\qquad \left(x \in \mathbb{C}^{2^{M_{\mathrm{col}}}},\ k \in \{1,\dots,2^{M_{\mathrm{col}}}\}\right)`),
         ],
         [
           math(String.raw`\text{(4)}\quad x_0 := \frac{1}{\sqrt{2}}\left(e_1 - e_{\pi(1)}\right)
-\ \in\ \mathcal{F}^{(-)}\cap\mathbb{R}^{2^M}, \qquad \|x_0\| = 1`),
+\ \in\ \mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}, \qquad \|x_0\| = 1`),
           "（",
           ref("def_eigenspaces_of_epsilon"),
           " の ",
           math(String.raw`\mathcal{F}^{(-)}`),
           "）。**とくに ",
-          math(String.raw`\mathcal{F}^{(-)}\cap\mathbb{R}^{2^M}`),
+          math(String.raw`\mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
           " は単位ベクトルを含む。**",
         ],
       ]),
@@ -261,9 +265,9 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
       displayMath(
         String.raw`\begin{aligned}
 \left(\varepsilon x\right)_k
-&= \sum_{l=1}^{2^M}\varepsilon_{k,l}\,x_l
+&= \sum_{l=1}^{2^{M_{\mathrm{col}}}}\varepsilon_{k,l}\,x_l
 && (\because \text{行列とベクトルの積の定義}) \\
-&= \sum_{l=1}^{2^M}\delta_{k,\pi(l)}\,x_l
+&= \sum_{l=1}^{2^{M_{\mathrm{col}}}}\delta_{k,\pi(l)}\,x_l
 && (\because \text{(1) の成分表示}) \\
 &= x_{\pi^{-1}(k)}
 && (\because \pi \text{ は全単射なので } \pi(l) = k \text{ となる } l
@@ -283,7 +287,7 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
         " は相異なる標準基底ベクトルであり、",
         math(String.raw`\|x_0\|^2 = \tfrac12\left(1 + 1\right) = 1`),
         "。成分は実数なので ",
-        math(String.raw`x_0 \in \mathbb{R}^{2^M}`),
+        math(String.raw`x_0 \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "。さらに",
       ]),
       displayMath(
@@ -313,6 +317,7 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
         "ε が置換行列であること自体は trace_of_epsilon_V_plus の証明 Step 3 (b) で既に確立している。ここで独立の主張として切り出したのは、この章の議論が「成分ごとの絶対値」というベクトルの成分レベルの操作を使うため、成分表示 (εx)_k = x_{π(k)} を明示的に持っておく必要があるからである。",
         "(4) は c_−(M) を定める集合が空でないこと（上限が定まること）の保証である。011 章の sector_decomposition_of_rayleigh_sup は c_±(M) を上限として定義しているが、集合が空でないことには触れていなかった。",
         "数値検証: sagemath/check/054_claim_max_eigenvalue_sector/check_01（M=2,3,4,5 で ε の成分が 0/1、各行各列の和が 1、π が不動点なしの対合、(εx)_k = x_{π(k)}、dim(F^{(-)} ∩ R^{2^M}) = 2^{M−1}）。",
+        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
       ],
     },
   },
@@ -330,7 +335,7 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とし、",
         ref("def_symmetrized_transfer_matrix"),
         " の ",
@@ -340,21 +345,21 @@ c(M) = c_+(M) = \Lambda^{(1/2)}_M`,
         " より ",
         math(String.raw`W`),
         " は実行列とみなせる）。",
-        math(String.raw`x \in \mathcal{F}^{(-)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`x \in \mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "（",
         ref("def_eigenspaces_of_epsilon"),
         "）に対し、",
       ]),
       displayMath(
-        String.raw`u \in \mathbb{R}^{2^M}, \qquad
-u_k := \left|x_k\right| \quad \left(k \in \{1,\dots,2^M\}\right)`,
+        String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}, \qquad
+u_k := \left|x_k\right| \quad \left(k \in \{1,\dots,2^{M_{\mathrm{col}}}\}\right)`,
       ),
       paragraph(["と定める。このとき次が成り立つ。"]),
       list([
         [
           math(String.raw`\text{(1)}\quad \varepsilon\,u = u`),
           "、すなわち ",
-          math(String.raw`u \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}`),
+          math(String.raw`u \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         ],
         [math(String.raw`\text{(2)}\quad \|u\| = \|x\|`)],
         [math(String.raw`\text{(3)}\quad u^\top W u \ \geq\ \left|x^\top Wx\right| \ \geq\ x^\top W x`)],
@@ -382,7 +387,7 @@ x_{\pi(k)}
 &= \left(-x\right)_k
 && (\because \varepsilon x = -x) \\
 &= -\,x_k
-\qquad \left(k \in \{1,\dots,2^M\}\right)
+\qquad \left(k \in \{1,\dots,2^{M_{\mathrm{col}}}\}\right)
 && (\because \text{スカラー倍の成分表示})
 \end{aligned}`,
       ),
@@ -420,18 +425,18 @@ x_{\pi(k)}
         "。成分 ",
         math(String.raw`|x_k|`),
         " は実数なので ",
-        math(String.raw`u \in \mathbb{R}^{2^M}`),
+        math(String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "。",
       ]),
       paragraph(["(2) ノルムの定義から成分ごとに計算する。"]),
       displayMath(
         String.raw`\begin{aligned}
 \|u\|^2
-&= \sum_{k=1}^{2^M}u_k^2
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}u_k^2
 && (\because \text{ノルムの定義}) \\
-&= \sum_{k=1}^{2^M}\left|x_k\right|^2
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\left|x_k\right|^2
 && (\because u \text{ の定義}) \\
-&= \sum_{k=1}^{2^M}x_k^2
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}x_k^2
 && \left(\because |a|^2 = a^2 \ (a \in \mathbb{R})\right) \\
 &= \|x\|^2
 && (\because \text{ノルムの定義})
@@ -465,14 +470,14 @@ x_{\pi(k)}
       displayMath(
         String.raw`\begin{aligned}
 u^\top W u
-&= \sum_{k=1}^{2^M}\sum_{l=1}^{2^M}u_k\,u_l\,W_{kl}
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}u_k\,u_l\,W_{kl}
 && (\because \text{行列とベクトルの積と内積の成分表示}) \\
-&= \sum_{k=1}^{2^M}\sum_{l=1}^{2^M}\left|x_k\right|\left|x_l\right|W_{kl}
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}\left|x_k\right|\left|x_l\right|W_{kl}
 && (\because u \text{ の定義}) \\
-&= \sum_{k=1}^{2^M}\sum_{l=1}^{2^M}\left|x_k\,x_l\,W_{kl}\right|
+&= \sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}\left|x_k\,x_l\,W_{kl}\right|
 && \left(\because W_{kl} \geq 0
    \text{ なので } |x_kx_lW_{kl}| = |x_k||x_l|W_{kl}\right) \\
-&\geq \left|\sum_{k=1}^{2^M}\sum_{l=1}^{2^M}x_k\,x_l\,W_{kl}\right|
+&\geq \left|\sum_{k=1}^{2^{M_{\mathrm{col}}}}\sum_{l=1}^{2^{M_{\mathrm{col}}}}x_k\,x_l\,W_{kl}\right|
 && (\because \text{有限個の実数についての三角不等式}) \\
 &= \left|x^\top W x\right|
 && (\because \text{行列とベクトルの積と内積の成分表示}) \\
@@ -495,36 +500,36 @@ u^\top W u
     id: "sector_003_theorem_c_minus_le_c_plus",
     kind: "theorem",
     origin: { path: SRC, ordinal: 5 },
-    title: { tex: String.raw`c_-(M) \leq c_+(M)` },
+    title: { tex: String.raw`c_-(M_{\mathrm{col}}) \leq c_+(M_{\mathrm{col}})` },
     labels: ["c_minus_le_c_plus"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
         ref("def_sector_rayleigh_sup"),
         " の",
       ]),
       displayMath(
-        String.raw`c_\pm(M) = \sup\left\{\, x^\top W x \ \middle|\
-x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M},\ \|x\| = 1 \,\right\}`,
+        String.raw`c_\pm(M_{\mathrm{col}}) = \sup\left\{\, x^\top W x \ \middle|\
+x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\right\}`,
       ),
       paragraph([
         "について ",
-        math(String.raw`c_-(M)`),
+        math(String.raw`c_-(M_{\mathrm{col}})`),
         " と ",
-        math(String.raw`c_+(M)`),
+        math(String.raw`c_+(M_{\mathrm{col}})`),
         " はともに実数として定まり（右辺の集合は空でなく上に有界）、",
       ]),
-      displayMath(String.raw`c_-(M) \ \leq\ c_+(M)`),
+      displayMath(String.raw`c_-(M_{\mathrm{col}}) \ \leq\ c_+(M_{\mathrm{col}})`),
       paragraph(["が成り立つ。"]),
     ],
     proof: [
       paragraph([
         "Step 1（上限が定まること）。",
         math(String.raw`\mathcal{R}_\pm := \left\{x^\top Wx \mid
-x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M},\ \|x\| = 1\right\}`),
+x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1\right\}`),
         " とおく。",
         ref("epsilon_is_sign_flip_permutation"),
         " (4) の ",
@@ -550,7 +555,7 @@ x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M},\ \|x\| = 1\right\}`),
         " なので ",
         math(String.raw`y_0 := v/\|v\|`),
         " は ",
-        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`\mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルであり、",
         math(String.raw`\mathcal{R}_+\neq\emptyset`),
         " である。",
@@ -576,9 +581,9 @@ x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M},\ \|x\| = 1\right\}`),
       ]),
       paragraph([
         "また ",
-        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`\mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルは ",
-        math(String.raw`\mathbb{R}^{2^M}`),
+        math(String.raw`\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルでもあるから ",
         math(String.raw`\mathcal{R}_\pm \subseteq \mathcal{R}`),
         "（",
@@ -592,12 +597,12 @@ x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M},\ \|x\| = 1\right\}`),
         " が ",
         math(String.raw`\mathcal{R}_\pm`),
         " の上界にもなる。空でなく上に有界な実数集合は上限をもつので、",
-        math(String.raw`c_\pm(M) \in \mathbb{R}`),
+        math(String.raw`c_\pm(M_{\mathrm{col}}) \in \mathbb{R}`),
         " が定まる。",
       ]),
       paragraph([
         "Step 2（各点での比較）。",
-        math(String.raw`x \in \mathcal{F}^{(-)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`x \in \mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "、",
         math(String.raw`\|x\| = 1`),
         " を任意に取り、",
@@ -613,23 +618,23 @@ x \in \mathcal{F}^{(\pm)}\cap\mathbb{R}^{2^M},\ \|x\| = 1\right\}`),
 x^\top W x
 &\leq u^\top W u
 && (\because \text{abs\_vector\_moves\_to\_even\_sector (3)}) \\
-&\leq c_+(M)
+&\leq c_+(M_{\mathrm{col}})
 && \left(\because \text{abs\_vector\_moves\_to\_even\_sector (1)(2) より }
-   u \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^M},\ \|u\| = \|x\| = 1
+   u \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|u\| = \|x\| = 1
    \text{ なので } u^\top Wu \in \mathcal{R}_+\right)
 \end{aligned}`,
       ),
       paragraph([
         "Step 3（上限を取る）。Step 2 より ",
-        math(String.raw`c_+(M)`),
+        math(String.raw`c_+(M_{\mathrm{col}})`),
         " は ",
         math(String.raw`\mathcal{R}_-`),
         " の上界である。",
-        math(String.raw`c_-(M) = \sup\mathcal{R}_-`),
+        math(String.raw`c_-(M_{\mathrm{col}}) = \sup\mathcal{R}_-`),
         " は ",
         math(String.raw`\mathcal{R}_-`),
         " の上界のうち最小のものだから ",
-        math(String.raw`c_-(M) \leq c_+(M)`),
+        math(String.raw`c_-(M_{\mathrm{col}}) \leq c_+(M_{\mathrm{col}})`),
         "。",
       ]),
       paragraph([
@@ -644,7 +649,7 @@ x^\top W x
         " が不動点をもたないことは**不等式の証明そのものには効いていない**。それが要るのは Step 1 で ",
         math(String.raw`\mathcal{R}_-`),
         " が空でない、すなわち ",
-        math(String.raw`c_-(M)`),
+        math(String.raw`c_-(M_{\mathrm{col}})`),
         " が上限として意味をもつことを言う箇所だけである。）",
       ]),
     ],
@@ -662,31 +667,31 @@ x^\top W x
     kind: "theorem",
     standing: "mainTheorem",
     origin: { path: SRC, ordinal: 6 },
-    title: { tex: String.raw`c(M) = c_+(M) = \Lambda^{(1/2)}_M` },
+    title: { tex: String.raw`c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}` },
     labels: ["c_equals_c_plus"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
-        math(String.raw`M \in \mathbb{Z}_{\geq 2}`),
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とする。",
         ref("def_rayleigh_sup"),
         " の ",
-        math(String.raw`c(M)`),
+        math(String.raw`c(M_{\mathrm{col}})`),
         "、",
         ref("sector_decomposition_of_rayleigh_sup"),
         " の ",
-        math(String.raw`c_\pm(M)`),
+        math(String.raw`c_\pm(M_{\mathrm{col}})`),
         "、",
         ref("onsager_free_energy_expression"),
         " の ",
-        math(String.raw`\Lambda^{(1/2)}_M`),
+        math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " について",
       ]),
       displayMath(
-        String.raw`c(M) = c_+(M) = \Lambda^{(1/2)}_M
-= \left(2\sinh 2K_2\right)^{M/2}
-\exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\right)`,
+        String.raw`c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}
+= \left(2\sinh 2K_2\right)^{M_{\mathrm{col}}/2}
+\exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\right)`,
       ),
       paragraph([
         "が成り立つ（",
@@ -698,7 +703,7 @@ x^\top W x
         " は ",
         ref("def_gamma_theta_tilde_mu"),
         "）。**上限 ",
-        math(String.raw`c(M)`),
+        math(String.raw`c(M_{\mathrm{col}})`),
         " は達成され、しかもそれを達成する単位ベクトルは偶セクター ",
         math(String.raw`\mathcal{F}^{(+)}`),
         " の中に取れる。**",
@@ -707,7 +712,7 @@ x^\top W x
     proof: [
       paragraph([
         "Step 1（",
-        math(String.raw`c(M) = c_+(M)`),
+        math(String.raw`c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}})`),
         "）。",
         ref("sector_decomposition_of_rayleigh_sup"),
         " (3) と ",
@@ -716,20 +721,20 @@ x^\top W x
       ]),
       displayMath(
         String.raw`\begin{aligned}
-c(M)
-&= \max\left(c_+(M),\, c_-(M)\right)
+c(M_{\mathrm{col}})
+&= \max\left(c_+(M_{\mathrm{col}}),\, c_-(M_{\mathrm{col}})\right)
 &&(\because \text{sector\_decomposition\_of\_rayleigh\_sup (3)}) \\
-&= c_+(M)
-&&(\because \text{c\_minus\_le\_c\_plus の } c_-(M) \leq c_+(M))
+&= c_+(M_{\mathrm{col}})
+&&(\because \text{c\_minus\_le\_c\_plus の } c_-(M_{\mathrm{col}}) \leq c_+(M_{\mathrm{col}}))
 \end{aligned}`,
       ),
       paragraph([
         "Step 2（値の代入）。",
         ref("c_plus_equals_Lambda_half_integer"),
         " より ",
-        math(String.raw`c_+(M) = \Lambda^{(1/2)}_M`),
+        math(String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " なので、Step 1 と合わせて ",
-        math(String.raw`c(M) = \Lambda^{(1/2)}_M`),
+        math(String.raw`c(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         "。右辺の閉じた表示は ",
         ref("onsager_free_energy_expression"),
         " の ",
@@ -740,19 +745,19 @@ c(M)
         "Step 3（達成されること）。",
         ref("c_plus_equals_Lambda_half_integer"),
         " の証明 Step 3 で、",
-        math(String.raw`x_0 \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^M}`),
+        math(String.raw`x_0 \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         "、",
         math(String.raw`\|x_0\| = 1`),
         " かつ ",
-        math(String.raw`x_0^\top Wx_0 = c_+(M)`),
+        math(String.raw`x_0^\top Wx_0 = c_+(M_{\mathrm{col}})`),
         " を満たす ",
         math(String.raw`x_0`),
         " が構成されている。この ",
         math(String.raw`x_0`),
         " は ",
-        math(String.raw`\mathbb{R}^{2^M}`),
+        math(String.raw`\mathbb{R}^{2^{M_{\mathrm{col}}}}`),
         " の単位ベクトルでもあるから、Step 1 より ",
-        math(String.raw`x_0^\top Wx_0 = c(M)`),
+        math(String.raw`x_0^\top Wx_0 = c(M_{\mathrm{col}})`),
         " であり、",
         ref("def_rayleigh_sup"),
         " の上限は ",
@@ -781,20 +786,20 @@ c(M)
         " の証明 Step 3 は、",
         ref("W_has_positive_entries"),
         " から ",
-        math(String.raw`c(M) \leq 2\Lambda^{(1/2)}_M`),
+        math(String.raw`c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " という**粗い上からの評価**を出し、Step 2 の ",
-        math(String.raw`c(M) \geq \Lambda^{(1/2)}_M`),
+        math(String.raw`c(M_{\mathrm{col}}) \geq \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " と合わせて",
       ]),
       displayMath(
-        String.raw`\Lambda^{(1/2)}_M \ \leq\ c(M) \ \leq\ 2\,\Lambda^{(1/2)}_M`,
+        String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}} \ \leq\ c(M_{\mathrm{col}}) \ \leq\ 2\,\Lambda^{(1/2)}_{M_{\mathrm{col}}}`,
       ),
       paragraph([
         "としていた。",
         ref("c_equals_c_plus"),
         " により、この挟み撃ちは**左側の等号**",
       ]),
-      displayMath(String.raw`c(M) = \Lambda^{(1/2)}_M`),
+      displayMath(String.raw`c(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
       paragraph([
         "へ改善される。すなわち係数 ",
         math(String.raw`2`),
@@ -818,11 +823,11 @@ c(M)
           "第二に、自由エネルギーの表式にとって係数 ",
           math(String.raw`2`),
           " は無害である。",
-          math(String.raw`\tfrac1M\log`),
+          math(String.raw`\tfrac{1}{M_{\mathrm{col}}}\log`),
           " を取ると差は ",
-          math(String.raw`(\log 2)/M`),
+          math(String.raw`(\log 2)/M_{\mathrm{col}}`),
           " で、",
-          math(String.raw`M \to \infty`),
+          math(String.raw`M_{\mathrm{col}} \to \infty`),
           " で ",
           math(String.raw`0`),
           " に収束する。",
@@ -837,11 +842,11 @@ c(M)
       ]),
       paragraph([
         "なお、この章は ",
-        math(String.raw`c_-(M)`),
+        math(String.raw`c_-(M_{\mathrm{col}})`),
         " の**値**については何も述べていない。",
-        math(String.raw`c_+(M) = \Lambda^{(1/2)}_M`),
+        math(String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " と対をなす ",
-        math(String.raw`c_-(M) = \Lambda^{(0)}_M`),
+        math(String.raw`c_-(M_{\mathrm{col}}) = \Lambda^{(0)}_{M_{\mathrm{col}}}`),
         " は**一般には成り立たない**（",
         ref("onsager_exact_solution"),
         " の注記に記録した高温側の反例がある）。奇セクターについては、",
@@ -849,9 +854,9 @@ c(M)
         " の最大固有値の固有ベクトルがどちらのセクターに落ちるかを ",
         ref("max_eigenvector_in_even_sector"),
         " と同じようには決められない。この章の主張は ",
-        math(String.raw`c_-(M) \leq c_+(M)`),
+        math(String.raw`c_-(M_{\mathrm{col}}) \leq c_+(M_{\mathrm{col}})`),
         " という**不等号だけ**であり、それには ",
-        math(String.raw`c_-(M)`),
+        math(String.raw`c_-(M_{\mathrm{col}})`),
         " の値は要らない。",
       ]),
     ],
