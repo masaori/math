@@ -1,10 +1,12 @@
 /-
-# 分配関数の偶奇セクター分解
+# 分配関数の偶奇セクター分解（形式化の記録。人手の本文からは退避済み）
 
-対応する人手証明（正本は `structured-latex/content/010_transfer_matrix_bridge.ts`）:
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ
+退避した次の主張である（`(−)` セクターを本文から外したため）。本ファイルは形式化の記録として残し、
+ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない。
 
-* `bridge_012_claim_partition_function_sector_decomposition`
-  （ラベル **`partition_function_sector_decomposition`**）
+* もと `bridge_012_claim_partition_function_sector_decomposition`
+  （ラベル `partition_function_sector_decomposition`）
 
 原文の主張:
 
@@ -42,10 +44,14 @@ open Matrix
 
 variable {M : ℕ}
 
-/-- 人手 `partition_function_sector_decomposition` の
-`V^{(±)} := (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}`（`ηsign` が人手の `∓1`、`V_2` は `def_transfer_matrix` の `V_2`）。 -/
+/-- ノートの `partition_function_sector_decomposition` の
+`V^{(±)} := (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}`（`ηsign` が `∓1`、`V_2` は `def_transfer_matrix` の `V_2`）。 -/
 noncomputable def Vsym (M : ℕ) (K1 : ℝ) (ηsign : ℂ) (K2 : ℝ) : TensorPow M :=
   V1pmHalf M K1 ηsign * V2 M K2 * V1pmHalf M K1 ηsign
+
+/-- `ηsign = -1` の `Vsym` は本文 `def_V_plus` の `V^{(+)}`（`Ising2D.VPlusOfTransfer`）。 -/
+theorem Vsym_neg_one_eq_VPlusOfTransfer (K1 K2 : ℝ) :
+    Vsym M K1 (-1) K2 = VPlusOfTransfer M K1 K2 := rfl
 
 /-- **原文 Step 1**: `tr X = tr(P^{(+)}X) + tr(P^{(-)}X)`。 -/
 theorem trace_eq_sector_sum (η : ℂ) (X : TensorPow M) :
@@ -95,13 +101,13 @@ theorem trace_epsProj_sym_pow_eq_plain {K1 K2 : ℝ} {η : ℂ}
       (commute_V2_epsProj hK2 η)).pow_left n).symm.eq
   rw [hcomm2, hcomm1, sector_replacement_pow hM hK2 hη n]
 
-/-- **原文 `partition_function_sector_decomposition`。**
+/-- **ノートへ退避した `partition_function_sector_decomposition`。**
 
 `P^{(+)}` は `epsProj M 1`、`P^{(-)}` は `epsProj M (-1)`。
 Lean の `V1pm M K1 η` は原文の `V_1^{(∓)}`（`η` が原文の `∓1`）なので、
 セクター `P^{(±)}` に対応する `V^{(±)}` は `Vsym M K1 (∓1) K2`、すなわち `Vsym M K1 (-η) K2` である。
 人手の `N_row ≥ 1`, `K_2 > 0`（`def_transfer_matrix` の設定）と `M_col ≥ 2`
-（`sector_replacement_of_V1` が使う `V1_restriction_to_eigenspaces` の設定）を仮定に置く。 -/
+（`sector_replacement_of_V1` が使う `V_1` の固有空間への制限の設定）を仮定に置く。 -/
 theorem partition_function_sector_decomposition {K1 K2 : ℝ} (hM : 2 ≤ M) (hK2 : 0 < K2)
     {Nrow : ℕ} (hN : 1 ≤ Nrow) :
     ((partitionFunction Nrow M K1 K2 : ℝ) : ℂ)

@@ -10,7 +10,7 @@
 
 ## 原文との違い（形式化して分かったこと）
 
-原文は `S_1^{(±)}` を `K_1 ∑ σ^z_m σ^z_{m+1} ∓ K_1 G` の形に書き換えてから、
+人手の本文（`(+)` だけ）の旧版は `S_1^{(±)}` を `K_1 ∑ σ^z_m σ^z_{m+1} ∓ K_1 G` の形に書き換えてから、
 `G` の因子の符号を `M` の偶奇で場合分けして数えている。
 しかし実際には
 
@@ -20,6 +20,12 @@
 （`H_1` が `Y_m Z_{m+1}` の、`H_2` が `Z_m Y_m` の和であることから）直ちに従う。
 **`M` の偶奇による場合分けも `G` への書き換えも要らない。**
 原文の結論は正しいが、経路は本ファイルの方が短い。
+
+人手の本文は `(+)` セクターの `U H_1^{(+)} U^{-1} = -H_1^{(+)}`, `U S_1^{(+)} U^{-1} = -S_1^{(+)}` だけを述べる
+（`(−)` セクターは参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避済み）。
+Lean では境界項の係数を引数 `η` に持たせた一般形 `Uflip_conj_H1` / `Uflip_conj_S1` を補助として残し
+（整数運動量の経路の形式化の記録と章 017 が使う）、人手の主張に対応する `(+)` の定理
+`Uflip_conj_H1plus` / `Uflip_conj_S1plus` はその `η = -1` の場合として立てる。
 -/
 import Ising2D.Part004.Definition010_H1H2V1V2
 
@@ -185,32 +191,41 @@ theorem Uflip_conj_Y (m : Fin M) : Uflip M * Y m * UflipInv M = Y m := by
       norm_num
   rw [hsign, one_smul]
 
-/-! ## `H_1^{(±)}`, `H_2` への作用（原文 Step 5） -/
+/-! ## `H_1^{(+)}`, `H_2` への作用（人手 Step 3） -/
 
-/-- **原文 `sign_flip_conjugation`**: `U H_1^{(±)} U^{-1} = -H_1^{(±)}`。 -/
+/-- 補助: 一般形で `U (H1 M η) U^{-1} = -(H1 M η)`。 -/
 theorem Uflip_conj_H1 (η : ℂ) : Uflip M * H1 M η * UflipInv M = -(H1 M η) := by
   rw [H1, Uflip_conj_sum, ← Finset.sum_neg_distrib]
   refine Finset.sum_congr rfl fun m _ => ?_
   rw [Uflip_conj_smul, Uflip_conj_mul, Uflip_conj_Y, Uflip_conj_Z]
   rw [Matrix.mul_neg, smul_neg]
 
-/-- **原文 `sign_flip_conjugation`**: `U H_2 U^{-1} = -H_2`。 -/
+/-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_2 U^{-1} = -H_2`。 -/
 theorem Uflip_conj_H2 : Uflip M * H2 M * UflipInv M = -(H2 M) := by
   rw [H2, Uflip_conj_sum, ← Finset.sum_neg_distrib]
   refine Finset.sum_congr rfl fun m _ => ?_
   rw [Uflip_conj_mul, Uflip_conj_Y, Uflip_conj_Z, Matrix.neg_mul]
 
-/-- **原文 `sign_flip_conjugation`**: `U S_1^{(±)} U^{-1} = -S_1^{(±)}`
-（`S_1^{(±)} = i K_1 H_1^{(±)}`）。 -/
+/-- 補助: 一般形で `U (i K_1 H1 M η) U^{-1} = -(i K_1 H1 M η)`。 -/
 theorem Uflip_conj_S1 (K1 η : ℂ) :
     Uflip M * ((Complex.I * K1) • H1 M η) * UflipInv M = -((Complex.I * K1) • H1 M η) := by
   rw [Uflip_conj_smul, Uflip_conj_H1, smul_neg]
 
-/-- **原文 `sign_flip_conjugation`**: `U S_2 U^{-1} = -S_2`（`S_2 = i K_2^* H_2`）。 -/
+/-- **人手本文 `sign_flip_conjugation`**: `U S_2 U^{-1} = -S_2`（`S_2 = i K_2^* H_2`）。 -/
 theorem Uflip_conj_S2 (K2star : ℂ) :
     Uflip M * ((Complex.I * K2star) • H2 M) * UflipInv M
       = -((Complex.I * K2star) • H2 M) := by
   rw [Uflip_conj_smul, Uflip_conj_H2, smul_neg]
+
+/-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_1^{(+)} U^{-1} = -H_1^{(+)}`。 -/
+theorem Uflip_conj_H1plus : Uflip M * H1plus M * UflipInv M = -(H1plus M) :=
+  Uflip_conj_H1 (-1)
+
+/-- **人手本文 `sign_flip_conjugation`（Step 4）**: `U S_1^{(+)} U^{-1} = -S_1^{(+)}`
+（`S_1^{(+)} = i K_1 H_1^{(+)}`）。 -/
+theorem Uflip_conj_S1plus (K1 : ℂ) :
+    Uflip M * ((Complex.I * K1) • H1plus M) * UflipInv M = -((Complex.I * K1) • H1plus M) :=
+  Uflip_conj_S1 K1 (-1)
 
 /-! ## 指数関数への作用（原文 `constant_c_value` Step 2） -/
 

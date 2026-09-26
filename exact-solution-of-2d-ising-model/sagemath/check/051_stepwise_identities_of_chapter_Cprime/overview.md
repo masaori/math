@@ -15,8 +15,9 @@
     `def_half_integer_modes` /
     `commutator_of_H_and_check_Z_Y` /
     `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y` / `H1_H2_via_check_Z_Y`
-  - 014 章: `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` /
-    `def_V_plus` / `V1_plus_half_invertible` / `V2_invertible` /
+  - 014 章の証明が引く前提: `def_H1_plus`（004 章）/ `def_V1_plus_square_root` / `V1_plus_square_root_property` /
+    `def_V_plus`（いずれも 010 章。(−) セクターの退避で 014 章の重複定義が削除され、010 章が唯一の定義になった）
+  - 014 章: `V1_plus_half_invertible` / `V2_invertible` /
     `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` /
     `nesting_of_commutator_of_H_and_check_Z` /
     `cosh_sinh_coefficient_conversion_for_check` / `extract_taylor_coefficient_of_check_Z_Y` /
@@ -62,7 +63,7 @@
 
 ## 検証の枠組み
 
-`_prelude.sage` に `_shared/spin_ops.sage`（`Z_j, Y_j, H_1^{(±)}, H_2` の明示行列）の上へ
+`_prelude.sage` に `_shared/spin_ops.sage`（`Z_j, Y_j, H_1^{(+)}, H_2` の明示行列。`H_1` は符号引数をもつが、ここでは `(+)` だけを使う）の上へ
 章 C′ の道具を積む。`049` の prelude と同じ定義に、013・014 章の証明で使う
 **反周期的な延長** `Y^flat_l`, `Z^flat_l` と `B_1(θ), B_2` を足したもの。
 
@@ -160,6 +161,15 @@ SageMath 10.9 の `sage <file>.sage` はスクリプトの `__file__` をパッ�
 SageMath 環境の `python <file>.sage.py` で実行した（2026-09-26、SageMath 10.9 / Linux）。
 check_03・check_04 は変更していないので再実行していない。
 
+## (−) セクターの退避に伴う更新（2026-09-26）
+
+(−) セクターを本文から外し、ラベル `def_H1_pm` / `def_V1_pm` が `def_H1_plus` / `def_V1_plus` に改名され、
+`V1_plus_square_root_property` は 010 章の一つの鎖（`exp(X)exp(X) = exp(X+X) = exp(iK_1H_1^{(+)}) = V_1^{(+)}`、
+最後の等号は `V1_plus_exponential_representation`）になった。これに合わせて段の名前（出力に出る根拠の記載）を
+check_01（`def_H1_pm 上の符号` → `def_H1_plus の境界符号`）と check_03（`V1_plus_square_root_property` の二段の根拠）で
+書き換え、両方を再実行した（2026-09-26、SageMath 10.9。段数は 288・100 のまま、全段 PASS）。
+検査している行列の等式そのものは変えていない。`run-log.txt` は `logs/` の四つのログを連結し直したもの。
+
 ## 実行
 
 ```
@@ -178,7 +188,7 @@ sage check_04_016_steps.sage
 | --- | --- | --- | --- | --- |
 | `check_01_013_steps.sage` | 013 章の各段 | 288 | 2.3e-14 | PASS |
 | `check_02_015_steps.sage` | 015 章の各段（ほかに不等号 6 件） | 71 | 2.1e-13 | PASS |
-| `check_03_014_steps.sage` | 014 章の各段 | 100 | 9.5e-11 | PASS |
+| `check_03_014_steps.sage` | 014 章の各段 | 100 | 9.3e-11 | PASS |
 | `check_04_016_steps.sage` | 016 章の各段 | 62 | 5.0e-9 | PASS |
 
 **章 C′ の 4 章あわせて 521 種類の段と、Step 0 の不等号 6 件がすべて成り立っている。**

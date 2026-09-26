@@ -1,12 +1,18 @@
 # =========================================================================
 # check_05: onsager_exact_solution
-#   (1) c(M)（W の最大 Rayleigh 商）= max(c_+(M), c_−(M))
-#   (2) c_+(M) = Λ^{(1/2)}_M（check_04 の再確認）、c_−(M) = Λ^{(0)}_M（対照）
-#   (3) 挟み撃ち Λ^{(1/2)}_M ≤ c(M) ≤ 2 Λ^{(1/2)}_M（本文 Step 2, 3）
-#       実際には c(M) = c_+(M) が成り立つことも記録する（本文はこれを使わない）
+#   (1) Step 2: c(M) ≥ c_+(M)（c_plus_le_c）と c_+(M) = Λ^{(1/2)}_M
+#       （c_plus_equals_Lambda_half_integer）から c(M) ≥ Λ^{(1/2)}_M
+#   (2) Step 3: 任意の単位ベクトル x ∈ R^{2^M} から u := |x|、v := u + εu を作り、
+#       本文の式変形を一行ずつ確かめて c(M) ≤ 2Λ^{(1/2)}_M を得る
+#   (3) 挟み撃ち Λ^{(1/2)}_M ≤ c(M) ≤ 2 Λ^{(1/2)}_M（本文 Step 4 の入力）
+#       (3') 実際には c(M) = c_+(M) が成り立つことも記録する（本文はこれを使わない）
 #   (4) (1/M) log Λ^{(1/2)}_M → (1/2)log(2 sinh 2K_2) + (1/4π)∫_0^{2π} γ(θ)dθ
 #       （M を大きくして Onsager 積分への収束を見る。δ = 0 でも同じ値へ収束）
-#   (5) (1/(M N_row)) log Z = (1/M) log c(M) + O(1/N_row)（有限 M で直接確認）
+#   (5) (1/(M N_row)) log Z = (1/M) log c(M) + O(1/N_row)（有限 M で直接確認。Step 1）
+#
+#   c(M) は R^{2^M} の単位ベクトル上の Rayleigh 商の上限で、W が実対称なので W の最大固有値に等しい。
+#   c_+(M) は F^{(+)} ∩ R^{2^M} の正規直交実基底 (e_k + e_{k̄})/√2 へ W を制限した実対称行列の
+#   最大固有値として求める（Λ̌_ε を経由しない）。
 # =========================================================================
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
@@ -15,21 +21,22 @@ load(os.path.join(_dir, '_prelude.sage'))
 print("=== check_05: c(M) の挟み撃ちと Onsager の自由エネルギーへの収束 ===")
 
 ok_all = True
+set_random_seed(20260926)
 
 
 def flip_index(M, k):
     return (2 ** M - 1) - k
 
 
-def sector_basis(M, sgn):
-    """F^{(±)} ∩ R^{2^M} の正規直交基底（実）。"""
+def even_sector_basis(M):
+    """F^{(+)} ∩ R^{2^M} の正規直交基底（実）。"""
     d = 2 ** M
     cols = []
     for k in range(d):
         kb = flip_index(M, k)
         if k < kb:
             v = vector(RDF, d)
-            v[k] = 1 / sqrt(RDF(2)); v[kb] = sgn / sqrt(RDF(2))
+            v[k] = 1 / sqrt(RDF(2)); v[kb] = 1 / sqrt(RDF(2))
             cols.append(v)
     return matrix(RDF, cols).transpose()
 
@@ -38,38 +45,126 @@ def top_eig(A):
     return max([RDF(CDF(z).real()) for z in A.eigenvalues()])
 
 
-w_c = w_sand = w_ceq = 0
-cminus_rows = []
-print("  --- 有限 M での c(M) の分解 ---")
+def to_real(A):
+    return matrix(RDF, [[A[i, j].real() for j in range(A.ncols())] for i in range(A.nrows())])
+
+
+def test_vectors(M, Wr):
+    """Step 3 の x の例: 乱数（符号の混じった成分）、W の最大固有ベクトル、F^{(-)} 側の実ベクトル。"""
+    d = 2 ** M
+    xs = []
+    for _ in range(6):
+        x = vector(RDF, [RDF.random_element(-1, 1) for _ in range(d)])
+        xs.append(x / x.norm())
+    import numpy as np
+    w, V = np.linalg.eigh(np.array([[float(Wr[i, j]) for j in range(d)] for i in range(d)]))
+    x = vector(RDF, [RDF(t) for t in V[:, int(np.argmax(w))]])
+    xs.append(x / x.norm())
+    y = vector(RDF, d)
+    y[0] = 1; y[flip_index(M, 0)] = -1   # ε y = −y（奇セクター側の実ベクトル。u = |y| は偶セクターへ移る）
+    xs.append(y / y.norm())
+    return xs
+
+
+REL = 1e-12   # 不等式の判定の相対余裕（倍精度の丸め分）。等式は TOL で判定する。
+w_step2 = w_lower = 0
+w_sand = 0
+w_ceq = RDF(0)
+w3_eq = RDF(0)
+w3_ineq = 0
+n3 = 0
+print("  --- 有限 M での Step 2 / Step 3 ---")
 for M in EIG_M:
     O = SpinOps(M)
+    E = to_real(eps_op(O))
+    Id = identity_matrix(RDF, O.d)
     for p in EIG_PARAMS:
         K1 = RDF(p['K1']); K2 = RDF(p['K2'])
         P = coeffs(K1, K2)
-        W = W_op(O, K1, K2)
-        Wr = matrix(RDF, [[W[i, j].real() for j in range(O.d)] for i in range(O.d)])
+        Wr = to_real(W_op(O, K1, K2))
         cM = top_eig(Wr)
-        Bp = sector_basis(M, +1); Bm = sector_basis(M, -1)
+        Bp = even_sector_basis(M)
         cp = top_eig(Bp.transpose() * Wr * Bp)
-        cm = top_eig(Bm.transpose() * Wr * Bm)
         Lhalf = Lambda_delta_M(O, P, RDF(1) / 2)
-        Lzero = Lambda_delta_M(O, P, RDF(0))
-        w_c = max(w_c, abs(cM - max(cp, cm)) / cM)
-        cminus_rows.append((M, param_label(p), RDF(cm), RDF(Lzero)))
-        # (3) 挟み撃ち
-        if not (Lhalf <= cM * (1 + 1e-9) and cM <= 2 * Lhalf * (1 + 1e-9)):
+        # (1) Step 2
+        if not (cp <= cM * (1 + REL)):
+            w_step2 += 1                       # c_plus_le_c
+        w3_eq = max(w3_eq, abs(cp - Lhalf) / Lhalf)   # c_plus_equals_Lambda_half_integer
+        if not (Lhalf <= cM * (1 + REL)):
+            w_lower += 1
+        # (2) Step 3 の前提: ε^T = ε、ε^2 = I、ε は置換行列、εW = Wε、W^T = W、W の成分が正
+        w3_eq = max(w3_eq, (E.transpose() - E).norm(1), (E * E - Id).norm(1),
+                    (E * Wr - Wr * E).norm(1) / Wr.norm(1), (Wr.transpose() - Wr).norm(1) / Wr.norm(1))
+        if not (all(E[i, j] in (0, 1) for i in range(O.d) for j in range(O.d))
+                and all(sum(E.row(i)) == 1 and sum(E.column(i)) == 1 for i in range(O.d))):
+            w3_ineq += 1
+        if not all(Wr[i, j] > 0 for i in range(O.d) for j in range(O.d)):
+            w3_ineq += 1
+        for x in test_vectors(M, Wr):
+            n3 += 1
+            u = vector(RDF, [abs(t) for t in x])
+            Eu = E * u
+            v = u + Eu
+            qx = x * Wr * x
+            qu = u * Wr * u
+            # u^T W u = Σ|x_k||x_l|W_kl ≥ |Σ x_k x_l W_kl| ≥ x^T W x
+            ssum = sum(abs(x[k]) * abs(x[l]) * Wr[k, l] for k in range(O.d) for l in range(O.d))
+            w3_eq = max(w3_eq, abs(qu - ssum) / qu)
+            if not (qu >= abs(qx) * (1 - REL) and abs(qx) >= qx):
+                w3_ineq += 1
+            # εu ≥ 0、‖εu‖ = ‖u‖ = ‖x‖ = 1
+            if not all(t >= 0 for t in Eu):
+                w3_ineq += 1
+            w3_eq = max(w3_eq, abs(Eu.norm() - u.norm()), abs(u.norm() - x.norm()), abs(x.norm() - 1))
+            # εv = ε(u + εu) = εu + ε^2 u = εu + u = v
+            chain = [E * v, E * (u + Eu), Eu + E * E * u, Eu + u, v]
+            for a, b in zip(chain, chain[1:]):
+                w3_eq = max(w3_eq, (a - b).norm())
+            # v ≥ u ≥ 0、v ≠ 0
+            if not (all(v[k] >= u[k] >= 0 for k in range(O.d)) and v.norm() > 0):
+                w3_ineq += 1
+            # ‖v‖^2 = ‖u‖^2 + 2u^Tεu + ‖εu‖^2 = 2 + 2u^Tεu ≤ 4
+            nv2 = v * v
+            w3_eq = max(w3_eq, abs(nv2 - (u * u + 2 * (u * Eu) + Eu * Eu)),
+                        abs(u * u + 2 * (u * Eu) + Eu * Eu - (2 + 2 * (u * Eu))))
+            if not (u * Eu <= u.norm() * Eu.norm() * (1 + REL) and 2 + 2 * (u * Eu) <= 4 * (1 + REL)):
+                w3_ineq += 1
+            # v^T W v = u^TWu + 2u^TWεu + (εu)^TW(εu) = … + u^TεWεu = … + u^TWε^2u = 2u^TWu + 2u^TWεu ≥ 2u^TWu
+            vWv = [v * Wr * v,
+                   qu + 2 * (u * Wr * Eu) + Eu * Wr * Eu,
+                   qu + 2 * (u * Wr * Eu) + u * (E.transpose() * Wr * E) * u,
+                   qu + 2 * (u * Wr * Eu) + u * (Wr * E * E) * u,
+                   2 * qu + 2 * (u * Wr * Eu)]
+            for a, b in zip(vWv, vWv[1:]):
+                w3_eq = max(w3_eq, abs(a - b) / abs(vWv[0]))
+            if not (u * Wr * Eu >= 0 and vWv[-1] >= 2 * qu * (1 - REL)):
+                w3_ineq += 1
+            # Λ^{(1/2)} = c_+ ≥ v̂^TWv̂ = v^TWv/‖v‖^2 ≥ 2u^TWu/‖v‖^2 ≥ 2u^TWu/4 = u^TWu/2 ≥ x^TWx/2
+            vh = v / v.norm()
+            q_vh = vh * Wr * vh
+            w3_eq = max(w3_eq, abs(q_vh - vWv[0] / nv2) / q_vh)
+            ineq = [Lhalf, cp, q_vh, 2 * qu / nv2, 2 * qu / 4, qu / 2, qx / 2]
+            # Λ = c_+（等号）、以降は ≥ の鎖（2u^TWu/4 = u^TWu/2 も等号）
+            if not (ineq[1] >= ineq[2] * (1 - REL) and ineq[3] >= ineq[4] * (1 - REL)
+                    and ineq[5] >= ineq[6] * (1 - REL) and ineq[2] >= ineq[3] * (1 - REL)):
+                w3_ineq += 1
+            w3_eq = max(w3_eq, abs(ineq[4] - ineq[5]) / ineq[5])
+        # 結論 c(M) ≤ 2Λ^{(1/2)}_M
+        if not (Lhalf <= cM * (1 + REL) and cM <= 2 * Lhalf * (1 + REL)):
             w_sand += 1
         w_ceq = max(w_ceq, abs(cM - cp) / cM)
 
-ok_all &= report("(1) c(M) = max(c_+(M), c_−(M))", w_c, TOL)
-print("  (2) 対照: c_−(M) と Λ^{(0)}_M の比較（本文はこの関係に依存しない）")
-for (M, lab, cm, Lz) in cminus_rows:
-    print(f"      M={M} {lab}: c_−(M)={float(cm):.10g}, Λ^{{(0)}}_M={float(Lz):.10g}, "
-          f"c_−/Λ^{{(0)}}={float(cm/Lz):.10g}")
+print(f"  (1) Step 2: c_+(M) ≤ c(M) の違反件数: {w_step2}、Λ^{{(1/2)}}_M ≤ c(M) の違反件数: {w_lower}  ->  "
+      f"{'PASS' if w_step2 == 0 and w_lower == 0 else 'FAIL'}")
+ok_all &= (w_step2 == 0 and w_lower == 0)
+ok_all &= report("(2) Step 3 の等式の各行（と Step 2 の c_+(M) = Λ^{(1/2)}_M）", w3_eq, TOL)
+print(f"  (2) Step 3 の不等式の各行の違反件数: {w3_ineq}（x の本数 {n3}）  ->  "
+      f"{'PASS' if w3_ineq == 0 else 'FAIL'}")
+ok_all &= (w3_ineq == 0)
 print(f"  (3) Λ^{{(1/2)}}_M ≤ c(M) ≤ 2Λ^{{(1/2)}}_M の違反件数: {w_sand}  ->  "
       f"{'PASS' if w_sand == 0 else 'FAIL'}")
 ok_all &= (w_sand == 0)
-ok_all &= report("(3') 実際には c(M) = c_+(M)（本文の評価より強い）", w_ceq, TOL)
+ok_all &= report("(3') 実際には c(M) = c_+(M)（本文の評価より強い。本文はこれを使わない）", w_ceq, TOL)
 
 # (5) 分配関数の側から
 print("  --- (1/(M N_row)) log tr(W^{N_row}) の N_row 依存 ---")

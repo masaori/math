@@ -108,8 +108,8 @@
   commutator Step1 [H_2,Y_j] (4) [Z_aY_a,Y_j]=0 (a!=j) を各項へ: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_2,Y_j] (5) 零行列の和は零行列: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_2,Y_j] (6) [Z_jY_j,Y_j] = 2Z_j: max residual = 0.000e+00  ->  PASS
-  commutator Step1 def_H1_pm 上の符号: H_1^{(+)} = sum Y_mZ_{m+1} - Y_MZ_1: max residual = 0.000e+00  ->  PASS
-  commutator Step1 [H_1^{(+)},Z_j] (2<=j<=M) (1) def_H1_pm 上の符号: max residual = 0.000e+00  ->  PASS
+  commutator Step1 def_H1_plus の境界符号: H_1^{(+)} = sum Y_mZ_{m+1} - Y_MZ_1: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [H_1^{(+)},Z_j] (2<=j<=M) (1) def_H1_plus の境界符号: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Z_j] (2<=j<=M) (2) 第 1 引数の C 線型性: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Z_j] (2<=j<=M) (3) [Y_aZ_b,Z_j]=0 (b!=j) を a=M,b=1 に: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Z_j] (2<=j<=M) (4) 零行列を引いても不変: max residual = 0.000e+00  ->  PASS
@@ -118,12 +118,12 @@
   commutator Step1 [H_1^{(+)},Z_j] (2<=j<=M) (7) 零行列の和は零行列: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Z_j] (2<=j<=M) (8) [Y_mZ_{m+1},Z_{m+1}] = 2Y_m (m=j-1): max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Z_j] (2<=j<=M) (9) Y^flat_{j-1} := Y_{j-1}: max residual = 0.000e+00  ->  PASS
-  commutator Step1 [H_1^{(+)},Z_1] (1) def_H1_pm 上の符号: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [H_1^{(+)},Z_1] (1) def_H1_plus の境界符号: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Z_1] (2) 第 1 引数の加法性: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Z_1] (3) [Y_aZ_b,Z_j]=0 (b!=j) を b=m+1>=2, j=1 で各項へ: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Z_1] (4) 零行列の和は零行列: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Z_1] (5) 境界項の等式: max residual = 0.000e+00  ->  PASS
-  commutator Step1 [H_1^{(+)},Y_j] (1<=j<=M-1) (1) def_H1_pm 上の符号: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [H_1^{(+)},Y_j] (1<=j<=M-1) (1) def_H1_plus の境界符号: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Y_j] (1<=j<=M-1) (2) 第 1 引数の C 線型性: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Y_j] (1<=j<=M-1) (3) [Y_aZ_b,Y_j]=0 (a!=j) を a=M,b=1 に: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Y_j] (1<=j<=M-1) (4) 零行列を引いても不変: max residual = 0.000e+00  ->  PASS
@@ -132,7 +132,7 @@
   commutator Step1 [H_1^{(+)},Y_j] (1<=j<=M-1) (7) 零行列の和は零行列: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Y_j] (1<=j<=M-1) (8) [Y_mZ_{m+1},Y_m] = -2Z_{m+1} (m=j): max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Y_j] (1<=j<=M-1) (9) Z^flat_{j+1} := Z_{j+1}: max residual = 0.000e+00  ->  PASS
-  commutator Step1 [H_1^{(+)},Y_M] (1) def_H1_pm 上の符号: max residual = 0.000e+00  ->  PASS
+  commutator Step1 [H_1^{(+)},Y_M] (1) def_H1_plus の境界符号: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Y_M] (2) 第 1 引数の加法性: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Y_M] (3) [Y_aZ_b,Y_j]=0 (a!=j) を a=m<=M-1, j=M で各項へ: max residual = 0.000e+00  ->  PASS
   commutator Step1 [H_1^{(+)},Y_M] (4) 零行列の和は零行列: max residual = 0.000e+00  ->  PASS
@@ -373,13 +373,13 @@ check_01: PASS
   段数（区別された等式の種類）: 71
 check_02: PASS
 === check_03: 014 章の各段の等式 ===
-  V1_plus_square_root_property (1) exp(X)exp(X) = exp(2X)  [theorem_exp_product]: max residual = 1.457e-13  ->  PASS
-  V1_plus_square_root_property (2) = V_1^{(+)}  [def_V1_pm]: max residual = 1.457e-13  ->  PASS
-  V1_plus_half_invertible exp(X)^{-1} = exp(-X): max residual = 3.174e-15  ->  PASS
-  V2_invertible V_2 V_2^{-1} = I: max residual = 1.841e-11  ->  PASS
-  V_plus_factors_invertible (Vplus) V^{(+)} V^{(+)-1} = I: max residual = 1.889e-11  ->  PASS
-  T_V_plus_is_conjugation (1) (gh)(h^{-1}g^{-1}) = I: max residual = 1.711e-11  ->  PASS
-  T_V_plus_is_conjugation (2) (h^{-1}g^{-1})(gh) = I: max residual = 1.950e-11  ->  PASS
+  V1_plus_square_root_property exp(X)exp(X) = exp(X+X)  [theorem_exp_product]: max residual = 1.492e-13  ->  PASS
+  V1_plus_square_root_property exp(iK_1H_1^{(+)}) = V_1^{(+)}  [V1_plus_exponential_representation]: max residual = 1.492e-13  ->  PASS
+  V1_plus_half_invertible exp(X)^{-1} = exp(-X): max residual = 3.116e-15  ->  PASS
+  V2_invertible V_2 V_2^{-1} = I: max residual = 2.572e-11  ->  PASS
+  V_plus_factors_invertible (Vplus) V^{(+)} V^{(+)-1} = I: max residual = 2.654e-11  ->  PASS
+  T_V_plus_is_conjugation (1) (gh)(h^{-1}g^{-1}) = I: max residual = 2.625e-11  ->  PASS
+  T_V_plus_is_conjugation (2) (h^{-1}g^{-1})(gh) = I: max residual = 2.576e-11  ->  PASS
   T_V_plus_is_conjugation (3) T_g o T_h = T_{gh} on all matrix units: max residual = 2.274e-13  ->  PASS
   T_V_plus_is_conjugation (4) T_{gh} o T_g = T_{ghg} on all matrix units: max residual = 5.821e-11  ->  PASS
   T_V_plus_is_conjugation (5) T_{(V^{(+)})} = T_{V^{(+)}} on all matrix units: max residual = 5.821e-11  ->  PASS
@@ -397,82 +397,82 @@ check_02: PASS
   係数変換 (h2.z) 最終形 (n 偶数): max residual = 6.734e-11  ->  PASS
   係数変換 (h2.y) 最終形 (n 偶数): max residual = 9.312e-11  ->  PASS
   nesting (h1.z) n 奇数: max residual = 2.072e-12  ->  PASS
-  nesting (h1.y) n 奇数: max residual = 2.090e-12  ->  PASS
+  nesting (h1.y) n 奇数: max residual = 2.077e-12  ->  PASS
   nesting (h2.z) n 奇数: max residual = 1.025e-11  ->  PASS
   nesting (h2.y) n 奇数: max residual = 1.406e-11  ->  PASS
   係数変換 補題 2 (n 奇数) i^n = i(-1)^{(n-1)/2}: max residual = 4.286e-16  ->  PASS
   係数変換 (i/2)^n (2K_1)^n = i^n K_1^n: max residual = 8.882e-16  ->  PASS
   係数変換 (h1.z) 最終形 (n 奇数): max residual = 1.619e-14  ->  PASS
-  係数変換 (h1.y) 最終形 (n 奇数): max residual = 1.633e-14  ->  PASS
+  係数変換 (h1.y) 最終形 (n 奇数): max residual = 1.623e-14  ->  PASS
   係数変換 (h2.z) 最終形 (n 奇数): max residual = 1.025e-11  ->  PASS
   係数変換 (h2.y) 最終形 (n 奇数): max residual = 1.406e-11  ->  PASS
   テイラー抽出 偶数側の和 = cosh K_1: max residual = 2.220e-16  ->  PASS
   テイラー抽出 奇数側の和 = sinh K_1: max residual = 2.220e-16  ->  PASS
   テイラー抽出 偶数側の和 = cosh 2K_2*: max residual = 8.882e-16  ->  PASS
   テイラー抽出 奇数側の和 = sinh 2K_2*: max residual = 2.220e-16  ->  PASS
-  テイラー抽出 (h1.z) 偶奇に分けた形: max residual = 5.448e-15  ->  PASS
-  テイラー抽出 (h1.z) = cosh Z + i e^{-it} sinh Y: max residual = 5.736e-15  ->  PASS
-  テイラー抽出 (h1.y) = -i e^{it} sinh Z + cosh Y: max residual = 7.456e-15  ->  PASS
+  テイラー抽出 (h1.z) 偶奇に分けた形: max residual = 5.634e-15  ->  PASS
+  テイラー抽出 (h1.z) = cosh Z + i e^{-it} sinh Y: max residual = 5.789e-15  ->  PASS
+  テイラー抽出 (h1.y) = -i e^{it} sinh Z + cosh Y: max residual = 7.430e-15  ->  PASS
   テイラー抽出 (h2.z) = cosh Z - i sinh Y: max residual = 1.887e-14  ->  PASS
   テイラー抽出 (h2.y) = i sinh Z + cosh Y: max residual = 3.045e-14  ->  PASS
   T_actions (V1 Z 1) T_g の定義 g W g^{-1}: max residual = 0.000e+00  ->  PASS
   T_actions (V1 Z 2) = exp((i/2)K_1H_1)Z exp(-(i/2)K_1H_1): max residual = 0.000e+00  ->  PASS
-  T_actions (V1 Z 3) = 交換子の級数 [exp_X_Y_exp_-X]: max residual = 2.317e-14  ->  PASS
-  T_actions (V1 Z 4) = cosh Z + i e^{-it} sinh Y: max residual = 2.336e-14  ->  PASS
-  T_actions (V1 Y 4) = -i e^{it} sinh Z + cosh Y: max residual = 2.306e-14  ->  PASS
-  T_actions (V2 Z 1) 前因子 (2s_2)^{M/2} の相殺: max residual = 7.206e-12  ->  PASS
-  T_actions (V2 Z 4) = cosh Z - i sinh Y: max residual = 2.155e-11  ->  PASS
-  T_actions (V2 Y 4) = i sinh Z + cosh Y: max residual = 2.081e-11  ->  PASS
-  linearity_of_T_on_check_Z_Y (V1^{1/2}) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 7.261e-15  ->  PASS
-  linearity_of_T_V2 T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 6.408e-12  ->  PASS
-  linearity_of_T (V^{(+)}) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 1.186e-11  ->  PASS
-  calc_of_TxT (B1 第 1 列): max residual = 2.336e-14  ->  PASS
-  calc_of_TxT (B1 第 2 列): max residual = 2.306e-14  ->  PASS
-  calc_of_TxT (B2 第 1 列): max residual = 2.155e-11  ->  PASS
-  calc_of_TxT (B2 第 2 列): max residual = 2.081e-11  ->  PASS
-  T_V_plus (z 1) T_{V1^{1/2}} の作用: max residual = 2.336e-14  ->  PASS
-  T_V_plus (z 2) T の線型性で T_{V2} を列ベクトルへ: max residual = 8.510e-12  ->  PASS
-  T_V_plus (z 3) 直積作用 -> (checkZ, checkY) B_2 col: max residual = 2.043e-11  ->  PASS
-  T_V_plus (z 4) T の線型性で T_{V1^{1/2}} を外へ: max residual = 2.178e-11  ->  PASS
-  T_V_plus (z 5) 直積作用 -> (checkZ, checkY) B_1 B_2 col: max residual = 2.178e-11  ->  PASS
-  T_V_plus (z 6) 合成 = T_{(V^{(+)})}(W): max residual = 9.027e-11  ->  PASS
-  T_V_plus (y 1) T_{V1^{1/2}} の作用: max residual = 2.306e-14  ->  PASS
-  T_V_plus (y 2) T の線型性で T_{V2} を列ベクトルへ: max residual = 7.031e-12  ->  PASS
-  T_V_plus (y 3) 直積作用 -> (checkZ, checkY) B_2 col: max residual = 2.143e-11  ->  PASS
-  T_V_plus (y 4) T の線型性で T_{V1^{1/2}} を外へ: max residual = 2.411e-11  ->  PASS
-  T_V_plus (y 5) 直積作用 -> (checkZ, checkY) B_1 B_2 col: max residual = 2.411e-11  ->  PASS
-  T_V_plus (y 6) 合成 = T_{(V^{(+)})}(W): max residual = 9.451e-11  ->  PASS
-  T_V_plus (まとめ Z) = (checkZ,checkY) B_1B_2B_1 の第 1 列: max residual = 7.946e-11  ->  PASS
-  T_V_plus (まとめ Y) = (checkZ,checkY) B_1B_2B_1 の第 2 列: max residual = 8.368e-11  ->  PASS
-  T_V_plus (最終 Z) = (checkZ,checkY) A(theta~) の第 1 列: max residual = 7.947e-11  ->  PASS
-  T_V_plus (最終 Y) = (checkZ,checkY) A(theta~) の第 2 列: max residual = 8.368e-11  ->  PASS
+  T_actions (V1 Z 3) = 交換子の級数 [exp_X_Y_exp_-X]: max residual = 2.763e-14  ->  PASS
+  T_actions (V1 Z 4) = cosh Z + i e^{-it} sinh Y: max residual = 2.785e-14  ->  PASS
+  T_actions (V1 Y 4) = -i e^{it} sinh Z + cosh Y: max residual = 2.721e-14  ->  PASS
+  T_actions (V2 Z 1) 前因子 (2s_2)^{M/2} の相殺: max residual = 7.119e-12  ->  PASS
+  T_actions (V2 Z 4) = cosh Z - i sinh Y: max residual = 1.827e-11  ->  PASS
+  T_actions (V2 Y 4) = i sinh Z + cosh Y: max residual = 1.726e-11  ->  PASS
+  linearity_of_T_on_check_Z_Y (V1^{1/2}) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 7.434e-15  ->  PASS
+  linearity_of_T_V2 T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 6.682e-12  ->  PASS
+  linearity_of_T (V^{(+)}) T_g(aX+bW) = aT_g(X)+bT_g(W): max residual = 1.081e-11  ->  PASS
+  calc_of_TxT (B1 第 1 列): max residual = 2.785e-14  ->  PASS
+  calc_of_TxT (B1 第 2 列): max residual = 2.721e-14  ->  PASS
+  calc_of_TxT (B2 第 1 列): max residual = 1.827e-11  ->  PASS
+  calc_of_TxT (B2 第 2 列): max residual = 1.726e-11  ->  PASS
+  T_V_plus (z 1) T_{V1^{1/2}} の作用: max residual = 2.785e-14  ->  PASS
+  T_V_plus (z 2) T の線型性で T_{V2} を列ベクトルへ: max residual = 7.174e-12  ->  PASS
+  T_V_plus (z 3) 直積作用 -> (checkZ, checkY) B_2 col: max residual = 1.980e-11  ->  PASS
+  T_V_plus (z 4) T の線型性で T_{V1^{1/2}} を外へ: max residual = 2.012e-11  ->  PASS
+  T_V_plus (z 5) 直積作用 -> (checkZ, checkY) B_1 B_2 col: max residual = 2.012e-11  ->  PASS
+  T_V_plus (z 6) 合成 = T_{(V^{(+)})}(W): max residual = 8.750e-11  ->  PASS
+  T_V_plus (y 1) T_{V1^{1/2}} の作用: max residual = 2.721e-14  ->  PASS
+  T_V_plus (y 2) T の線型性で T_{V2} を列ベクトルへ: max residual = 7.632e-12  ->  PASS
+  T_V_plus (y 3) 直積作用 -> (checkZ, checkY) B_2 col: max residual = 1.847e-11  ->  PASS
+  T_V_plus (y 4) T の線型性で T_{V1^{1/2}} を外へ: max residual = 1.884e-11  ->  PASS
+  T_V_plus (y 5) 直積作用 -> (checkZ, checkY) B_1 B_2 col: max residual = 1.884e-11  ->  PASS
+  T_V_plus (y 6) 合成 = T_{(V^{(+)})}(W): max residual = 8.629e-11  ->  PASS
+  T_V_plus (まとめ Z) = (checkZ,checkY) B_1B_2B_1 の第 1 列: max residual = 8.509e-11  ->  PASS
+  T_V_plus (まとめ Y) = (checkZ,checkY) B_1B_2B_1 の第 2 列: max residual = 8.238e-11  ->  PASS
+  T_V_plus (最終 Z) = (checkZ,checkY) A(theta~) の第 1 列: max residual = 8.509e-11  ->  PASS
+  T_V_plus (最終 Y) = (checkZ,checkY) A(theta~) の第 2 列: max residual = 8.239e-11  ->  PASS
   factorization 倍角 a^2+b^2 = c_1: max residual = 8.882e-16  ->  PASS
-  factorization 倍角 2ab = s_1: max residual = 3.331e-16  ->  PASS
+  factorization 倍角 2ab = s_1: max residual = 2.220e-16  ->  PASS
   factorization 倍角 a^2-b^2 = 1: max residual = 2.220e-16  ->  PASS
   factorization (iii) c_2* = s_2* c_2: max residual = 2.220e-16  ->  PASS
   factorization Step1 N_11: max residual = 9.155e-16  ->  PASS
-  factorization Step1 N_12: max residual = 9.155e-16  ->  PASS
-  factorization Step1 N_21: max residual = 9.155e-16  ->  PASS
+  factorization Step1 N_12: max residual = 8.882e-16  ->  PASS
+  factorization Step1 N_21: max residual = 8.882e-16  ->  PASS
   factorization Step1 N_22: max residual = 9.155e-16  ->  PASS
-  factorization Step2 P_11 (1) mat_mult: max residual = 3.566e-15  ->  PASS
+  factorization Step2 P_11 (1) mat_mult: max residual = 3.580e-15  ->  PASS
   factorization Step2 P_11 (2) N の代入と -i*i = 1: max residual = 3.662e-15  ->  PASS
   factorization Step2 P_11 (3) e^{it}e^{-it} = 1: max residual = 3.553e-15  ->  PASS
   factorization Step2 P_11 (4) 同類項の整理: max residual = 3.553e-15  ->  PASS
   factorization Step2 P_11 (5) 倍角と e^{it}+e^{-it} = 2cos t: max residual = 3.553e-15  ->  PASS
   factorization Step2 P_11 (6) = c_1c_2* - s_1s_2* cos t: max residual = 0.000e+00  ->  PASS
-  factorization Step3 P_22 = P_11: max residual = 7.108e-15  ->  PASS
-  factorization Step4 P_12 (1) mat_mult: max residual = 3.662e-15  ->  PASS
+  factorization Step3 P_22 = P_11: max residual = 7.119e-15  ->  PASS
+  factorization Step4 P_12 (1) mat_mult: max residual = 3.553e-15  ->  PASS
   factorization Step4 P_12 (2) N の代入と e^{it}e^{it} = e^{2it}: max residual = 7.119e-15  ->  PASS
   factorization Step4 P_12 (3) 括弧でくくる: max residual = 3.560e-15  ->  PASS
-  factorization Step4 括弧 (1) e^{it} でくくる: max residual = 1.404e-15  ->  PASS
+  factorization Step4 括弧 (1) e^{it} でくくる: max residual = 1.790e-15  ->  PASS
   factorization Step4 括弧 (2) Euler の公式を 2 箇所へ同時適用: max residual = 9.930e-16  ->  PASS
-  factorization Step4 括弧 (3) 整理: max residual = 9.930e-16  ->  PASS
-  factorization Step4 括弧 (4) a^2+b^2 = c_1: max residual = 1.256e-15  ->  PASS
-  factorization Step4 括弧 (5) a^2-b^2 = 1: max residual = 2.618e-16  ->  PASS
-  factorization Step4 P_12 (4) = i e^{it} s_2*(c_1 cos t - i sin t - s_1c_2): max residual = 5.024e-15  ->  PASS
+  factorization Step4 括弧 (3) 整理: max residual = 1.110e-15  ->  PASS
+  factorization Step4 括弧 (4) a^2+b^2 = c_1: max residual = 1.790e-15  ->  PASS
+  factorization Step4 括弧 (5) a^2-b^2 = 1: max residual = 4.578e-16  ->  PASS
+  factorization Step4 P_12 (4) = i e^{it} s_2*(c_1 cos t - i sin t - s_1c_2): max residual = 7.229e-15  ->  PASS
   factorization Step5 P_21 (1) mat_mult: max residual = 3.560e-15  ->  PASS
-  factorization Step5 P_21 (2) = -i e^{-it}s_2*(c_1cos t + i sin t - s_1c_2): max residual = 6.405e-15  ->  PASS
-  factorization Step6 B_1 B_2 B_1 = A(theta): max residual = 1.352e-14  ->  PASS
+  factorization Step5 P_21 (2) = -i e^{-it}s_2*(c_1cos t + i sin t - s_1c_2): max residual = 7.229e-15  ->  PASS
+  factorization Step6 B_1 B_2 B_1 = A(theta): max residual = 1.434e-14  ->  PASS
   段数（区別された等式の種類）: 100
 check_03: PASS
 === check_04: 016 章の各段の等式 ===

@@ -1,8 +1,15 @@
 /-
-# `ε` は不動点をもたない対合の置換行列（具体版）
+# `ε` は不動点をもたない対合の置換行列（具体版。形式化の記録）
 
-正本: `structured-latex/content/019_max_eigenvalue_sector.ts`
-（`sector_001_claim_epsilon_is_permutation`、ラベル **`epsilon_is_sign_flip_permutation`**）
+対応する人手の主張は、章 019 ごと本文から参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
+もと `sector_001_claim_epsilon_is_permutation`（ラベル `epsilon_is_sign_flip_permutation`）である。
+本ファイルは形式化の記録として残し、ビルドは通し続ける。
+
+本文の主張も使う部分（`π`（`flipConf`）、実行列 `epsilonR`、`ε` の成分表示 `epsilon_apply`、
+`epsilon_eq_ofReal_epsilonR`、`epsilonR_isSymm`、`epsilonR_mul_self`、`epsilonR_mulVec_apply`）は
+`Ising2D/Part011/ClaimEpsilonIsRealSymmetric.lean` へ移した。本ファイルに残したのは
+「`π` は不動点をもたない」と奇セクターの単位ベクトル `x_0` など、`(−)` セクターにだけ効く部分である。
 
 必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）。
 本ファイルの (1)(3)(4) は必要十分版 `Ising2D.NecSuf.permMat_*` の**系として**導いてある。
@@ -28,8 +35,7 @@
 `ε` の成分が `0` と `1` しかない（人手証明 (1)）ので、この橋渡しは値の落ちない同一視である。
 -/
 import Ising2D.NecSuf.PermSector
-import Ising2D.Part010.Claim010_EpsilonCommutes
-import Ising2D.Part004.DefinitionConfigBasisIso
+import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 
 set_option linter.unusedSectionVars false
 
@@ -41,52 +47,15 @@ variable {M : ℕ}
 
 /-! ## スピン配置の符号反転 `π` -/
 
-/-- 1 サイトの符号反転（`Fin 2` の 2 元の入れ替え）。
-人手証明の `μ(m) ↦ -μ(m)` を、`def_config_basis_iso` の同一視
-（`+1 ↦ 0`, `-1 ↦ 1`）で読み替えたもの。 -/
-def flipIdx : Fin 2 → Fin 2 := fun i => if i = 0 then 1 else 0
-
-@[simp] theorem flipIdx_zero : flipIdx 0 = 1 := rfl
-@[simp] theorem flipIdx_one : flipIdx 1 = 0 := rfl
-
-theorem flipIdx_involutive : Function.Involutive flipIdx := by
-  intro i
-  fin_cases i <;> rfl
-
 theorem flipIdx_ne_self (i : Fin 2) : flipIdx i ≠ i := by
   fin_cases i <;> decide
-
-/-- **人手証明の `π`**: スピン配置 `s` を `-s` へ写す写像（全成分の符号反転）。 -/
-def flipConf (s : Conf M) : Conf M := fun m => flipIdx (s m)
-
-@[simp] theorem flipConf_apply (s : Conf M) (m : Fin M) : flipConf s m = flipIdx (s m) := rfl
-
-/-- **人手証明 (2) の前半 `π∘π = id`。** -/
-theorem flipConf_involutive : Function.Involutive (flipConf (M := M)) := by
-  intro s
-  funext m
-  rw [flipConf_apply, flipConf_apply, flipIdx_involutive]
 
 /-- **人手証明 (2) の後半 `π(k) ≠ k`**（`M ≥ 1` が要る。`M = 0` では配置が 1 つしかない）。 -/
 theorem flipConf_ne_self (hM : 0 < M) (s : Conf M) : flipConf s ≠ s := by
   intro h
   exact flipIdx_ne_self (s ⟨0, hM⟩) (congrFun h ⟨0, hM⟩)
 
-/-- スピン配置の言葉での `π`: `ι` の同一視のもとで `flipConf` は `μ ↦ -μ` である
-（人手証明の `(-s_k)(m) = -s_k(m)`）。 -/
-theorem sgn_flipConf (s : Conf M) (m : Fin M) : sgn (flipConf s m) = -sgn (s m) := by
-  rw [flipConf_apply]
-  generalize s m = i
-  fin_cases i <;> simp [flipIdx, sgn]
-
-/-! ## 実行列としての `ε` -/
-
-/-- **実行列版の `ε`**: 符号反転 `π` の置換行列。 -/
-noncomputable def epsilonR (M : ℕ) : Matrix (Conf M) (Conf M) ℝ :=
-  NecSuf.permMat (flipConf (M := M))
-
-theorem epsilonR_apply (l k : Conf M) :
-    epsilonR M l k = if k = flipConf l then 1 else 0 := rfl
+/-! ## 実行列としての `ε` の成分 -/
 
 /-- **人手証明 (1) の「成分はすべて `0` か `1`」。** -/
 theorem epsilonR_entry_zero_or_one (l k : Conf M) :
@@ -106,69 +75,6 @@ theorem epsilonR_col_sum (k : Conf M) : ∑ l, epsilonR M l k = 1 := by
     · rw [if_pos hlk, if_pos (by rw [hlk, flipConf_involutive])]
     · rw [if_neg hlk, if_neg (fun hc => hlk (by rw [hc, flipConf_involutive]))]
   simp [h]
-
-theorem epsilonR_isSymm : (epsilonR M).IsSymm := NecSuf.permMat_isSymm flipConf_involutive
-
-theorem epsilonR_mul_self : epsilonR M * epsilonR M = 1 :=
-  NecSuf.permMat_mul_self flipConf_involutive
-
-/-- **人手証明 (3) `(εx)_k = x_{π(k)}`。** -/
-theorem epsilonR_mulVec_apply (x : Conf M → ℝ) (k : Conf M) :
-    (epsilonR M *ᵥ x) k = x (flipConf k) :=
-  NecSuf.permMat_mulVec _ x k
-
-/-- **人手証明 (1) `ε e_k = e_{π(k)}` の実行列版。** -/
-theorem epsilonR_mulVec_single (k : Conf M) :
-    epsilonR M *ᵥ (Pi.single k (1 : ℝ)) = Pi.single (flipConf k) 1 :=
-  NecSuf.permMat_mulVec_single _ flipConf_involutive k
-
-/-! ## 複素行列 `ε` との一致 -/
-
-/-- `σ^x` の成分は `1` サイトの符号反転の置換行列である。 -/
-theorem pauliX_apply_eq_ite (a b : Fin 2) :
-    pauliX a b = if b = flipIdx a then 1 else 0 := by
-  fin_cases a <;> fin_cases b <;> simp [pauliX, flipIdx]
-
-/-- **人手証明 (1) の成分表示** `ε_{l,k} = δ_{k, π(l)}`。
-
-`ε = σ^x_1 ⋯ σ^x_M` の成分は `∏_m (σ^x)_{l_m k_m}` であり、
-これが `0` でないのは全サイトで `k_m ≠ l_m`、すなわち `k = π(l)` のときに限る。 -/
-theorem epsilon_apply (l k : Conf M) :
-    epsilon M l k = if k = flipConf l then 1 else 0 := by
-  rw [epsilon_eq_siteProd, siteProd_apply]
-  by_cases h : k = flipConf l
-  · rw [if_pos h]
-    refine Finset.prod_eq_one fun m _ => ?_
-    rw [pauliX_apply_eq_ite, if_pos (by rw [h, flipConf_apply])]
-  · rw [if_neg h]
-    have hm : ∃ m : Fin M, k m ≠ flipIdx (l m) := by
-      by_contra hc
-      exact h (funext fun m => by
-        rw [flipConf_apply, not_ne_iff.mp (not_exists.mp hc m)])
-    obtain ⟨m, hmne⟩ := hm
-    refine Finset.prod_eq_zero (Finset.mem_univ m) ?_
-    rw [pauliX_apply_eq_ite, if_neg hmne]
-
-/-- **複素行列 `ε` と実行列 `ε` の成分の一致。** -/
-theorem epsilon_eq_ofReal_epsilonR (l k : Conf M) :
-    epsilon M l k = ((epsilonR M l k : ℝ) : ℂ) := by
-  rw [epsilon_apply, epsilonR_apply]
-  by_cases h : k = flipConf l <;> simp [h]
-
-/-- **人手証明 (1) `ε e_k = e_{π(k)}`**（`def_config_basis_iso` の標準基底 `f_I` で述べた版）。 -/
-theorem epsilon_mulVec_basisVec (I : Conf M) :
-    epsilon M *ᵥ basisVec I = basisVec (flipConf I) := by
-  funext l
-  rw [Matrix.mulVec, dotProduct, basisVec, Finset.sum_eq_single I]
-  · rw [Pi.single_eq_same, mul_one, epsilon_apply, basisVec]
-    by_cases h : l = flipConf I
-    · rw [if_pos (by rw [h, flipConf_involutive]), h, Pi.single_eq_same]
-    · rw [if_neg (fun hc => h (by rw [hc, flipConf_involutive])),
-        Pi.single_eq_of_ne h]
-  · intro j _ hj
-    rw [Pi.single_eq_of_ne hj, mul_zero]
-  · intro h
-    exact absurd (Finset.mem_univ _) h
 
 /-! ## (4) 奇セクターの単位ベクトル `x_0` -/
 

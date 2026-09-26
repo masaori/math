@@ -4,7 +4,8 @@ import Mathlib.Algebra.Module.Submodule.Basic
 /-!
 # 行列が符号を反転するベクトル全体が部分加群をなすための必要十分な構造
 
-人手本文ラベル **`odd_eigenspace_is_complex_subspace`** の必要十分版。
+参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
+`odd_eigenspace_is_complex_subspace` の必要十分版（形式化の記録。ビルドは通し続ける）。
 具体版と同じく、行列と数ベクトルの積を成分ごとの有限和へ展開し、零・和・
 スカラー倍の順に証明する。
 

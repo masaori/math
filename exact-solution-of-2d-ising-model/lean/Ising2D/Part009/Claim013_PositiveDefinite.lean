@@ -19,7 +19,7 @@ mathlib は同じ事実を `Matrix.exp_conjTranspose`（`exp(A^*) = exp(A)^*`）
 持っているので、本ファイルではそちらを使う。したがって (2)(3) は
 **結論に効かない補題**であり、ここでは (1) だけを形式化する。
 
-原文 `iH_is_real_symmetric` は `S_1^{(±)}` を `K_1 ∑ σ^z_m σ^z_{m+1} ∓ K_1 G` へ、
+人手 `iH_is_real_symmetric` は `S_1^{(+)} = iK_1H_1^{(+)}` を `K_1 ∑ σ^z_m σ^z_{m+1} - K_1 G` へ、
 `S_2` を `K_2^* ∑ σ^x_m` へ書き換えてから成分の実性と転置対称性を数えている。
 形式化してみると、**その書き換えは不要**で、
 
@@ -29,6 +29,12 @@ mathlib は同じ事実を `Matrix.exp_conjTranspose`（`exp(A^*) = exp(A)^*`）
 
 の 3 つから直ちに従う（`G` も `M` の偶奇も出てこない）。
 なお「実対称」は「エルミートかつ転置不変」と同値なので、両方を示す。
+
+人手の本文は `(+)` セクターの `S_1^{(+)}` だけを述べる（`(−)` セクターは参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避済み）。Lean では境界項の係数を引数 `η` に
+持たせた一般形 `S1_isHermitian` / `S1_transpose` を補助として残し（整数運動量の経路の形式化の記録
+（`Vmat` ほか）が使う）、人手の主張に対応する `(+)` の定理 `S1plus_isHermitian` / `S1plus_transpose` は
+その `η = -1` の場合として立てる。
 -/
 import Ising2D.Part004.Definition010_H1H2V1V2
 import Ising2D.Part006.Claim000_AnticommutatorZY
@@ -185,8 +191,7 @@ private theorem star_I_mul {c : ℂ} (hc : star c = c) :
   rw [star_mul', hI, hc]
   ring
 
-/-- **原文 `iH_is_real_symmetric`**: `S_1^{(±)} = i K_1 H_1^{(±)}` は実対称
-（エルミートかつ転置不変）。 -/
+/-- 補助: 一般形 `i K_1 H1 M η`（`η` 実）はエルミート。 -/
 theorem S1_isHermitian {K1 η : ℂ} (hK1 : star K1 = K1) (hη : star η = η) :
     (((Complex.I * K1) • H1 M η)).IsHermitian := by
   have h : (((Complex.I * K1) • H1 M η))ᴴ = (Complex.I * K1) • H1 M η := by
@@ -194,8 +199,19 @@ theorem S1_isHermitian {K1 η : ℂ} (hK1 : star K1 = K1) (hη : star η = η) :
       smul_neg, neg_smul, neg_neg]
   exact h
 
+/-- 補助: 一般形 `i K_1 H1 M η` は転置不変。 -/
 theorem S1_transpose {K1 η : ℂ} : (((Complex.I * K1) • H1 M η))ᵀ = (Complex.I * K1) • H1 M η := by
   rw [Matrix.transpose_smul, H1_transpose]
+
+/-- **人手本文 `iH_is_real_symmetric`**: `S_1^{(+)} = i K_1 H_1^{(+)}` はエルミート（`K_1` 実）。 -/
+theorem S1plus_isHermitian {K1 : ℂ} (hK1 : star K1 = K1) :
+    (((Complex.I * K1) • H1plus M)).IsHermitian :=
+  S1_isHermitian hK1 (by simp)
+
+/-- **人手本文 `iH_is_real_symmetric`**: `S_1^{(+)} = i K_1 H_1^{(+)}` は転置不変。 -/
+theorem S1plus_transpose {K1 : ℂ} :
+    (((Complex.I * K1) • H1plus M))ᵀ = (Complex.I * K1) • H1plus M :=
+  S1_transpose
 
 /-- **原文 `iH_is_real_symmetric`**: `S_2 = i K_2^* H_2` は実対称。 -/
 theorem S2_isHermitian {K2star : ℂ} (hK2 : star K2star = K2star) :

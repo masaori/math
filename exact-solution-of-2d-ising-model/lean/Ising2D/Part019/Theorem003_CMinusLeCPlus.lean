@@ -1,8 +1,10 @@
 /-
-# `c_-(M) ≤ c_+(M)`（具体版）
+# `c_-(M) ≤ c_+(M)`（具体版。形式化の記録）
 
-正本: `structured-latex/content/019_max_eigenvalue_sector.ts`
-（`sector_003_theorem_c_minus_le_c_plus`、ラベル **`c_minus_le_c_plus`**）
+対応する人手の主張は、章 019 ごと本文から参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
+もと `sector_003_theorem_c_minus_le_c_plus`（ラベル `c_minus_le_c_plus`）である。
+本ファイルは形式化の記録として残し、ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない。
 
 必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）の
 `Ising2D.NecSuf.sectorRayleighSup_neg_le_pos`。本ファイルの主定理はその**系**である。

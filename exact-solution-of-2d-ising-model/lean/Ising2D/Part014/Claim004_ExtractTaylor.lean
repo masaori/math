@@ -35,7 +35,7 @@ variable {M : ℕ}
 + i e^{-iθ~_μ} sinh(K_1) check(Y)_μ`。 -/
 theorem extract_taylor_H1Plus_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
     ∑' n : ℕ, ((n ! : ℂ))⁻¹ •
-        adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) n (checkZ M μ)
+        adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) n (checkZ M μ)
       = Complex.cosh K1 • checkZ M μ
         + (Complex.I * checkPhase M 1 μ * Complex.sinh K1) • checkY M μ := by
   have hcoef : (Complex.I * K1 * checkPhase M 1 μ) * NecSuf.sinhc K1
@@ -48,7 +48,7 @@ theorem extract_taylor_H1Plus_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
 + cosh(K_1) check(Y)_μ`。 -/
 theorem extract_taylor_H1Plus_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
     ∑' n : ℕ, ((n ! : ℂ))⁻¹ •
-        adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) n (checkY M μ)
+        adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) n (checkY M μ)
       = (-Complex.I * checkPhase M (-1) μ * Complex.sinh K1) • checkZ M μ
         + Complex.cosh K1 • checkY M μ := by
   have hcoef : (-Complex.I * K1 * checkPhase M (-1) μ) * NecSuf.sinhc K1

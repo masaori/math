@@ -1,8 +1,17 @@
 /-
-# `c(M) = c_+(M)`（具体版・この章の結論）
+# `c(M) = c_+(M)`（具体版・もと章 019 の結論。形式化の記録）
 
-正本: `structured-latex/content/019_max_eigenvalue_sector.ts`
-（`sector_004_theorem_c_equals_c_plus`、ラベル **`c_equals_c_plus`**）
+対応する人手の主張は、章 019 ごと本文から参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
+もと `sector_004_theorem_c_equals_c_plus`（ラベル `c_equals_c_plus`）である。
+本ファイルは形式化の記録として残し、ビルドは通し続ける。本文の `onsager_exact_solution` は
+`c(M) = c_+(M)` を使わず、`c_+(M) ≤ c(M) ≤ 2c_+(M)` の挟み撃ちで述べる
+（`Ising2D/Part018/Theorem010_OnsagerExactSolution.lean`）。
+
+以下の「形式化できなかった部分」「`ε W = W ε` について」の記述は本ファイルを書いた時点のもので、
+その後 `c_plus_equals_Lambda_half_integer` は `Ising2D.EvenSectorBridge.c_plus_equals_lamMax`
+（`Part018/Theorem009_CPlusEqualsLambda.lean`）、具体的な `W` についての `εW = Wε` は
+`Ising2D.epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）として形式化された。
 
 必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）の
 `Ising2D.NecSuf.rayleighSup_eq_sectorRayleighSup_pos`。本ファイルの主定理はその**系**である。

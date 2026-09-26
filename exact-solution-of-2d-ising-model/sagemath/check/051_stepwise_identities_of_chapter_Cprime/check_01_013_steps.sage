@@ -268,7 +268,7 @@ for M in STEP_M:
 
     # [H_1^{(+)}, Z_j], [H_1^{(+)}, Y_j] の場合分けの鎖
     H1sum = msum([O.Y[m] * O.Z[m + 1] for m in range(1, M)]) - YM * Z1
-    S.add("commutator Step1 def_H1_pm 上の符号: H_1^{(+)} = sum Y_mZ_{m+1} - Y_MZ_1", H1p, H1sum)
+    S.add("commutator Step1 def_H1_plus の境界符号: H_1^{(+)} = sum Y_mZ_{m+1} - Y_MZ_1", H1p, H1sum)
     bulk = list(range(1, M))
     for j in range(2, M + 1):
         Zj = O.Z[j]
@@ -284,7 +284,7 @@ for M in STEP_M:
             comm(O.Y[j - 1] * Zj, Zj),
             2 * O.Y[j - 1],
             2 * Yflat(O, j - 1),
-        ], ["def_H1_pm 上の符号", "第 1 引数の C 線型性",
+        ], ["def_H1_plus の境界符号", "第 1 引数の C 線型性",
             "[Y_aZ_b,Z_j]=0 (b!=j) を a=M,b=1 に", "零行列を引いても不変",
             "m=j-1 の項を分ける", "[Y_aZ_b,Z_j]=0 (b!=j) を各項へ", "零行列の和は零行列",
             "[Y_mZ_{m+1},Z_{m+1}] = 2Y_m (m=j-1)", "Y^flat_{j-1} := Y_{j-1}"])
@@ -295,7 +295,7 @@ for M in STEP_M:
         msum([Zero for m in bulk]) + comm(-YM * Z1, Z1),
         comm(-YM * Z1, Z1),
         2 * Yflat(O, 0),
-    ], ["def_H1_pm 上の符号", "第 1 引数の加法性",
+    ], ["def_H1_plus の境界符号", "第 1 引数の加法性",
         "[Y_aZ_b,Z_j]=0 (b!=j) を b=m+1>=2, j=1 で各項へ", "零行列の和は零行列",
         "境界項の等式"])
     for j in range(1, M):
@@ -312,7 +312,7 @@ for M in STEP_M:
             comm(Yj * O.Z[j + 1], Yj),
             -2 * O.Z[j + 1],
             -2 * Zflat(O, j + 1),
-        ], ["def_H1_pm 上の符号", "第 1 引数の C 線型性",
+        ], ["def_H1_plus の境界符号", "第 1 引数の C 線型性",
             "[Y_aZ_b,Y_j]=0 (a!=j) を a=M,b=1 に", "零行列を引いても不変",
             "m=j の項を分ける", "[Y_aZ_b,Y_j]=0 (a!=j) を各項へ", "零行列の和は零行列",
             "[Y_mZ_{m+1},Y_m] = -2Z_{m+1} (m=j)", "Z^flat_{j+1} := Z_{j+1}"])
@@ -323,7 +323,7 @@ for M in STEP_M:
         msum([Zero for m in bulk]) + comm(-YM * Z1, YM),
         comm(-YM * Z1, YM),
         -2 * Zflat(O, M + 1),
-    ], ["def_H1_pm 上の符号", "第 1 引数の加法性",
+    ], ["def_H1_plus の境界符号", "第 1 引数の加法性",
         "[Y_aZ_b,Y_j]=0 (a!=j) を a=m<=M-1, j=M で各項へ", "零行列の和は零行列",
         "境界項の等式"])
 

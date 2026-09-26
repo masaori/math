@@ -1,11 +1,15 @@
 /-
-# 全スピン反転行列の固有値 -1 の固有ベクトル全体
+# 全スピン反転行列の固有値 -1 の固有ベクトル全体（形式化の記録。人手の本文からは退避済み）
 
-対応する人手本文は `structured-latex/content/004_transfer_matrix.ts` の
-`transfer_matrix_004_definition_eigenspace_odd_of_epsilon`
-（ラベル **`def_odd_eigenvectors_of_epsilon`**）。
+`(−)` セクターを本文から外したため、次の二つの主張は参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した。本ファイルは形式化の記録として残し、
+ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない。
 
-本文と同じく、抽象線型写像を経由せず、具体的な複素行列 `epsilon M` の
+退避した主張は、もと `structured-latex/content/004_transfer_matrix.ts` の
+`transfer_matrix_004_definition_eigenspace_odd_of_epsilon`（ラベル `def_odd_eigenvectors_of_epsilon`）と
+`odd_eigenspace_is_complex_subspace` である。
+
+ノートの記述と同じく、抽象線型写像を経由せず、具体的な複素行列 `epsilon M` の
 数ベクトルへの作用だけで定義する。続いて本文ラベル
 `odd_eigenspace_is_complex_subspace` の零・和・複素スカラー倍に関する三つの計算を
 同じ順で形式化し、その集合を台集合とする複素部分加群を構成する。

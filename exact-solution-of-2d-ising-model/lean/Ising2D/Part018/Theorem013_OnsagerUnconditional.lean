@@ -5,8 +5,8 @@
 （`closing_010_theorem_onsager_exact_solution`、ラベル **`onsager_exact_solution`**）
 
 `Ising2D.onsager_exact_solution`（`Theorem010_OnsagerExactSolution.lean`）は、
-`c(M) = Λ^{(1/2)}_M` を仮定 `hc` として受け取る。その `hc` を与える
-`Ising2D.EvenSectorBridge.rayleighSup_eq_LambdaM` は、章 018 の形式化時点では
+挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` を仮定 `hc` として受け取る。その `hc` を与える
+`Ising2D.EvenSectorBridge.rayleighSup_sandwich_LambdaM` は、章 018 の形式化時点では
 `Ising2D.CheckFermi`（章 016）と `Ising2D.VPlusData`（章 015・017）を
 **構成できないまま仮定として**受け取っていた。
 
@@ -34,9 +34,9 @@
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が `M ≠ 0` を要求する（`CheckFermiSetup.hM`） |
 | `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | 章 016 の結論に残る唯一の仮定（`lean/docs/ch016-formalization.md` 3 章）。008 章以来 `det A(θ) = 1` に必要で、原文が置いている関係である |
-| `bridge` | 章 011 の実行列 `W` と `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 章 011 の射影後の複素行列等式は `physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済み。章 017 の `V^{(+)}` の実行列表示と組み合わせ、実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続が残る |
+| `bridge` | 章 011 の実行列 `W` と `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 章 011 の射影後の複素行列等式は `symmetrized_transfer_matrix_on_sectors` で形式化済み。章 017 の `V^{(+)}` の実行列表示と組み合わせ、実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続が残る |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化 |
-| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 011 の `W_has_positive_entries`（章 001 の `def_transfer_matrix` の成分定義による）/ 章 010 の `epsilon_commutes_with_transfer_matrices` に依存する（章 011 も同じ形で仮定として受け取っている） |
+| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | `bridge.W` は抽象的な実行列として受け取っているので、具体的な `W`（`physicalSymTransferR`）についての `W_has_positive_entries` / `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean` で形式化済み）をここへ渡すには、上の `bridge` の接続が要る |
 
 `hZ1` / `hZ2`（`c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`）は章 011
 `Ising2D.partition_function_sandwich` の内容であり、章 018 の仮定ではないのでそのまま残す。
@@ -65,7 +65,7 @@ theorem sum_checkGam (P : IsingParam) (M : ℕ) :
 
 /-! ## 残った仮定を束ねた構造 -/
 
-/-- **章 018 の結論 `c(M) = Λ^{(1/2)}_M` に、いま Lean 側で埋められない入力だけを束ねたもの。**
+/-- **章 018 の挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` に、いま Lean 側で埋められない入力だけを束ねたもの。**
 
 内訳と「なぜ埋められないか」はファイル冒頭の表を参照。 -/
 structure EvenSectorClosureInput (P : IsingParam) (M : ℕ) where
@@ -77,18 +77,20 @@ structure EvenSectorClosureInput (P : IsingParam) (M : ℕ) where
   bridge : EvenSectorBridge M (checkFermiOf P hM) (vPlusDataOf P hM hdual)
   /-- `tr(εV^{(+)}) > 0`（章 018 の `closing_006`。Lean 未形式化） -/
   htr : 0 < ((epsilon M * (vPlusDataOf P hM hdual).V).trace).re
-  /-- `W` の成分はすべて正（章 011 の `W_has_positive_entries`） -/
+  /-- `W` の成分はすべて正（章 011 の `W_has_positive_entries`。Step 3 が使う） -/
   hWpos : ∀ k l, 0 < bridge.W k l
-  /-- `ε` は `W` と可換（章 010 の `epsilon_commutes_with_transfer_matrices`） -/
+  /-- `ε` は `W` と可換（章 011 の `epsilon_commutes_with_W`。Step 3 が使う） -/
   hWcomm : epsilonR M * bridge.W = bridge.W * epsilonR M
 
-/-- **`c(M) = Λ^{(1/2)}_M`**（章 014–017 由来の仮定をすべて落とした版）。
+/-- **`Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`**（人手 `onsager_exact_solution` の Step 2・Step 3。
+章 014–017 由来の仮定をすべて落とした版）。
 
-もとの `Ising2D.EvenSectorBridge.rayleighSup_eq_LambdaM` は `F`, `D`, `hC`, `hgam` を
+もとの `Ising2D.EvenSectorBridge.rayleighSup_sandwich_LambdaM` は `F`, `D`, `hC`, `hgam` を
 仮定として受け取っていたが、それらはすべて構成・証明済みになった。 -/
-theorem rayleighSup_eq_LambdaM_of_input (P : IsingParam) (In : EvenSectorClosureInput P M) :
-    rayleighSup In.bridge.W = LambdaM P (1 / 2) M :=
-  In.bridge.rayleighSup_eq_LambdaM P In.htr In.hWpos In.hWcomm rfl (sum_checkGam P M)
+theorem rayleighSup_sandwich_LambdaM_of_input (P : IsingParam) (In : EvenSectorClosureInput P M) :
+    LambdaM P (1 / 2) M ≤ rayleighSup In.bridge.W
+      ∧ rayleighSup In.bridge.W ≤ 2 * LambdaM P (1 / 2) M :=
+  In.bridge.rayleighSup_sandwich_LambdaM P In.htr In.hWpos In.hWcomm rfl (sum_checkGam P M)
 
 /-! ## Onsager の厳密解 -/
 
@@ -113,6 +115,6 @@ theorem onsager_exact_solution_unconditional (P : IsingParam) {Z : ℕ → ℕ �
           (𝓝 (1 / 2 * Real.log (2 * Real.sinh (2 * P.K2))
             + 1 / (4 * Real.pi) * ∫ θ in (0 : ℝ)..(2 * Real.pi), gammaFn P θ)) :=
   onsager_exact_solution P
-    (fun m hm => by rw [hcM m hm, rayleighSup_eq_LambdaM_of_input P (In m hm)]) hZ1 hZ2
+    (fun m hm => by rw [hcM m hm]; exact rayleighSup_sandwich_LambdaM_of_input P (In m hm)) hZ1 hZ2
 
 end Ising2D

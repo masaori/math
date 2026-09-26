@@ -1,16 +1,22 @@
 /-
-# `c(M) = max(c₊(M), c₋(M))`（偶奇セクターへの分解）
+# `c(M) = max(c₊(M), c₋(M))`（偶奇セクターへの分解。形式化の記録）
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
-（`maxeig_010_claim_sector_decomposition_of_c`、ラベル **`sector_decomposition_of_rayleigh_sup`**）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ
+退避したもと `maxeig_010_claim_sector_decomposition_of_c`（ラベル `sector_decomposition_of_rayleigh_sup`）
+である（`(−)` セクターを本文から外したため）。本ファイルは形式化の記録として残し、ビルドは通し続ける。
+本文の主張の Lean は本ファイルに依存しない。
 
-人手証明の (1)（`εW = Wε` と `W` が `F^{(±)}` を保つこと）と (3)（`c(M) = max(c₊, c₋)`）を
-形式化する。
+本文で置き換わった主張は次のとおり。
 
-人手証明の (2) の行列等式は
-`Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済みである。
-本ファイルは実行列上の Rayleigh 上限の分解だけを扱い、この複素行列等式から章 018 の
-`EvenSectorBridge.hWV` への変換（`V^{(+)}` の実行列表示を含む）は扱わない。
+* `c_+(M)` の定義（`def_sector_rayleigh_sup`、`(+)` だけ）→ `Ising2D.evenSectorRayleighSup`
+  （`Part011/DefinitionSectorRayleighSup.lean`）。本ファイルの符号引数つきの一般形 `sectorRayleighSup W ε s`
+  は `s = 1` でそれと一致する（`sectorRayleighSup_one_eq`）。
+* 最終定理が使う片側 `c_+(M) ≤ c(M)` → `Ising2D.c_plus_le_c`（`Part011/ClaimCPlusLeC.lean`）
+* `ε^⊤ = ε` → `Ising2D.epsilon_is_real_symmetric`（`Part011/ClaimEpsilonIsRealSymmetric.lean`）
+* `εW = Wε` と `W` が `𝓕^{(+)}` を保つこと → `Ising2D.epsilon_commutes_with_W`
+  （`Part011/ClaimEpsilonCommutesWithW.lean`）
+* `W P^{(+)} = V^{(+)} P^{(+)}` → `Ising2D.symmetrized_transfer_matrix_on_sectors`
+  （`Part011/PhysicalSymTransferBridge.lean`）
 
 ## この主張に効いている構造（必要十分版を別に置かない理由）
 
@@ -20,6 +26,7 @@
 `ε.IsSymm`, `ε * ε = 1`, `ε * W = W * ε` しか仮定していない）ので、
 これ以上ほどく余地がない（`sSup` は ℝ の完備性そのもの）。
 -/
+import Ising2D.Part011.DefinitionSectorRayleighSup
 import Ising2D.Part011.Claim008_TracePowerSandwich
 
 set_option linter.unusedSectionVars false
@@ -30,19 +37,29 @@ open Matrix
 
 variable {n : Type*} [Fintype n] [DecidableEq n] [Nonempty n]
 
-/-- 人手証明の `{xᵀWx | x ∈ F^{(s)}, ‖x‖ = 1}`（`s = ±1`）。 -/
+/-- ノートの `{xᵀWx | x ∈ F^{(s)}, ‖x‖ = 1}`（`s = ±1`）。 -/
 def sectorSet (W ε : Matrix n n ℝ) (s : ℝ) : Set ℝ :=
   {r | ∃ x : n → ℝ, ε *ᵥ x = s • x ∧ vecNormSq x = 1 ∧ r = x ⬝ᵥ W *ᵥ x}
 
-/-- 人手証明の `c_±(M)`。 -/
+/-- ノートの `c_±(M)`。 -/
 noncomputable def sectorRayleighSup (W ε : Matrix n n ℝ) (s : ℝ) : ℝ := sSup (sectorSet W ε s)
 
-/-- **(1) `W` は `F^{(±)}` を保つ**（人手証明 (1) の後半）。 -/
+/-- `s = 1` の集合は本文 `def_sector_rayleigh_sup` の `𝓡_+`。 -/
+theorem sectorSet_one_eq (W ε : Matrix n n ℝ) : sectorSet W ε 1 = evenSectorSet W ε := by
+  ext r
+  simp only [sectorSet, evenSectorSet, one_smul, Set.mem_setOf_eq]
+
+/-- `s = 1` の上限は本文 `def_sector_rayleigh_sup` の `c_+(M)`。 -/
+theorem sectorRayleighSup_one_eq (W ε : Matrix n n ℝ) :
+    sectorRayleighSup W ε 1 = evenSectorRayleighSup W ε := by
+  rw [sectorRayleighSup, evenSectorRayleighSup, sectorSet_one_eq]
+
+/-- **(1) `W` は `F^{(±)}` を保つ**（ノートの証明 (1) の後半）。 -/
 theorem sector_invariant {W ε : Matrix n n ℝ} (hcomm : ε * W = W * ε) {s : ℝ} {x : n → ℝ}
     (hx : ε *ᵥ x = s • x) : ε *ᵥ (W *ᵥ x) = s • (W *ᵥ x) := by
   rw [Matrix.mulVec_mulVec, hcomm, ← Matrix.mulVec_mulVec, hx, Matrix.mulVec_smul]
 
-/-- 異なる固有値の固有ベクトルは直交する（人手証明の `x₊ᵀx₋ = 0`）。 -/
+/-- 異なる固有値の固有ベクトルは直交する（ノートの証明の `x₊ᵀx₋ = 0`）。 -/
 theorem sector_orthogonal {ε : Matrix n n ℝ} (hε : ε.IsSymm) {u v : n → ℝ}
     (hu : ε *ᵥ u = u) (hv : ε *ᵥ v = -v) : u ⬝ᵥ v = 0 := by
   have h1 : u ⬝ᵥ ε *ᵥ v = (ε *ᵥ u) ⬝ᵥ v := mulVec_dotProduct_selfadjoint hε u v
@@ -101,10 +118,10 @@ theorem sector_quad_le {W : Matrix n n ℝ} (hW : W.IsSymm)
 
 /-! ## 射影 `P^{(±)} = (1 ± ε)/2` -/
 
-/-- 人手証明の `P^{(+)}`。 -/
+/-- ノートの証明の `P^{(+)}`（実行列）。 -/
 noncomputable def projPlus (ε : Matrix n n ℝ) : Matrix n n ℝ := (2 : ℝ)⁻¹ • ((1 : Matrix n n ℝ) + ε)
 
-/-- 人手証明の `P^{(-)}`。 -/
+/-- ノートの証明の `P^{(-)}`（実行列）。 -/
 noncomputable def projMinus (ε : Matrix n n ℝ) : Matrix n n ℝ := (2 : ℝ)⁻¹ • ((1 : Matrix n n ℝ) - ε)
 
 theorem proj_add_eq_one (ε : Matrix n n ℝ) : projPlus ε + projMinus ε = 1 := by
@@ -129,7 +146,7 @@ theorem projMinus_mulVec_eigen {ε : Matrix n n ℝ} (hεε : ε * ε = 1) (x : 
   congr 1
   abel
 
-/-- **(3) `c(M) = max(c₊(M), c₋(M))`**（人手証明 `sector_decomposition_of_rayleigh_sup` (3)）。 -/
+/-- **(3) `c(M) = max(c₊(M), c₋(M))`**（ノートの `sector_decomposition_of_rayleigh_sup` (3)）。 -/
 theorem sector_decomposition_of_rayleigh_sup {W ε : Matrix n n ℝ} (hW : W.IsSymm)
     (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hε : ε.IsSymm) (hεε : ε * ε = 1)
     (hcomm : ε * W = W * ε) :

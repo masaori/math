@@ -80,16 +80,16 @@ private theorem exp_neg_mul_exp' (θ : ℂ) :
 
 /-- `ad((i/2)K_1H_1^{(+)})` が `span{check(Z)_μ, check(Y)_μ}` を保つこと（指数表示版）。 -/
 theorem ad_V1plusHalf_checkZ_exp (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) * checkZ M μ -
-        checkZ M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1))
+    (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) * checkZ M μ -
+        checkZ M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M)
       = (Complex.I * K1 * Complex.exp (-((thetaTilde M μ : ℝ) : ℂ) * Complex.I)) •
           checkY M μ := by
   rw [ad_V1plusHalf_checkZ hM K1 μ, checkPhase_one_eq_exp hM μ]
 
 /-- 同上（`y` 側）。 -/
 theorem ad_V1plusHalf_checkY_exp (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) * checkY M μ -
-        checkY M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1))
+    (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) * checkY M μ -
+        checkY M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M)
       = (-Complex.I * K1 * Complex.exp (((thetaTilde M μ : ℝ) : ℂ) * Complex.I)) •
           checkZ M μ := by
   rw [ad_V1plusHalf_checkY hM K1 μ, checkPhase_neg_one_eq_exp hM μ]
@@ -98,7 +98,7 @@ theorem ad_V1plusHalf_checkY_exp (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
 第 1・第 2 式を行ベクトル記法にまとめたもの）:
 `T_{(V_1^{(+)})^{1/2}}` は `(check(Z)_μ, check(Y)_μ)` に `B_1(θ~_μ)` で作用する。 -/
 theorem actsBy_TConj_V1plusHalf (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    ActsBy (TConj (V1pmHalfUnits M K1 (-1))).toLinearMap (checkZ M μ) (checkY M μ)
+    ActsBy (TConj (V1plusHalfUnits M K1)).toLinearMap (checkZ M μ) (checkY M μ)
       (B1mat K1 ((thetaTilde M μ : ℝ) : ℂ)) := by
   rw [B1mat_eq_twoDimConjMat]
   refine actsBy_TConj_matExpUnits (ad_V1plusHalf_checkZ_exp hM K1 μ)
@@ -127,25 +127,25 @@ theorem actsBy_TConj_V2H2Form_check (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2
 /-- **原文 第 1 式**: `T_{(V_1^{(+)})^{1/2}}(check(Z)_μ)
 = cosh(K_1) check(Z)_μ + i e^{-iθ~_μ} sinh(K_1) check(Y)_μ`。 -/
 theorem TConj_V1plusHalf_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    TConj (V1pmHalfUnits M K1 (-1)) (checkZ M μ)
+    TConj (V1plusHalfUnits M K1) (checkZ M μ)
       = Complex.cosh K1 • checkZ M μ
         + (Complex.I * checkPhase M 1 μ * Complex.sinh K1) • checkY M μ := by
   have h := (actsBy_TConj_V1plusHalf hM K1 μ).1
   rw [checkPhase_one_eq_exp hM μ]
-  rw [show (TConj (V1pmHalfUnits M K1 (-1))) (checkZ M μ)
-      = (TConj (V1pmHalfUnits M K1 (-1))).toLinearMap (checkZ M μ) from rfl, h]
+  rw [show (TConj (V1plusHalfUnits M K1)) (checkZ M μ)
+      = (TConj (V1plusHalfUnits M K1)).toLinearMap (checkZ M μ) from rfl, h]
   simp only [B1mat_zero_zero, B1mat_one_zero]
 
 /-- **原文 第 2 式**: `T_{(V_1^{(+)})^{1/2}}(check(Y)_μ)
 = -i e^{iθ~_μ} sinh(K_1) check(Z)_μ + cosh(K_1) check(Y)_μ`。 -/
 theorem TConj_V1plusHalf_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    TConj (V1pmHalfUnits M K1 (-1)) (checkY M μ)
+    TConj (V1plusHalfUnits M K1) (checkY M μ)
       = (-Complex.I * checkPhase M (-1) μ * Complex.sinh K1) • checkZ M μ
         + Complex.cosh K1 • checkY M μ := by
   have h := (actsBy_TConj_V1plusHalf hM K1 μ).2
   rw [checkPhase_neg_one_eq_exp hM μ]
-  rw [show (TConj (V1pmHalfUnits M K1 (-1))) (checkY M μ)
-      = (TConj (V1pmHalfUnits M K1 (-1))).toLinearMap (checkY M μ) from rfl, h]
+  rw [show (TConj (V1plusHalfUnits M K1)) (checkY M μ)
+      = (TConj (V1plusHalfUnits M K1)).toLinearMap (checkY M μ) from rfl, h]
   simp only [B1mat_zero_one, B1mat_one_one]
 
 /-- **原文 第 3 式**: `T_{V_2}(check(Z)_μ)
@@ -204,9 +204,9 @@ theorem linearity_of_T_on_check_from_general (g : (TensorPow M)ˣ)
 /-- **本文 `linearity_of_T_on_check_Z_Y`**: `g = (V_1^{(+)})^{1/2}` への特殊化。 -/
 theorem linearity_of_T_V1plusHalf (_hM : 2 ≤ M) (K1 : ℂ) (a b : ℂ) (μ : ℤ)
     (_hμ : CheckIndex M μ) :
-    TConj (V1pmHalfUnits M K1 (-1)) (a • checkZ M μ + b • checkY M μ)
-      = a • TConj (V1pmHalfUnits M K1 (-1)) (checkZ M μ)
-        + b • TConj (V1pmHalfUnits M K1 (-1)) (checkY M μ) :=
+    TConj (V1plusHalfUnits M K1) (a • checkZ M μ + b • checkY M μ)
+      = a • TConj (V1plusHalfUnits M K1) (checkZ M μ)
+        + b • TConj (V1plusHalfUnits M K1) (checkY M μ) :=
   linearity_of_T_on_check _ a b _ _
 
 /-- **本文 `linearity_of_T_V2`**: `g = V_2`（`def_transfer_matrix` の `V_2`、`V2_invertible` による単元）への特殊化。 -/

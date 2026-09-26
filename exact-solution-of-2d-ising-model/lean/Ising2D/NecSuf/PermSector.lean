@@ -1,12 +1,18 @@
 /-
-# 必要十分版: 対合の置換行列がつくるセクターと「成分の絶対値を取る」操作
+# 必要十分版: 対合の置換行列がつくるセクター（形式化の記録。人手の本文からは退避済み）
 
-人手証明のラベル（具体版と共通）:
+対応する人手の主張は、章 019 ごと本文から参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した次の主張である
+（`(−)` セクターを本文から外したため）。本ファイルは形式化の記録として残し、ビルドは通し続ける。
 
-* **`epsilon_is_sign_flip_permutation`**（正本 `structured-latex/content/019_max_eigenvalue_sector.ts`）
-* **`abs_vector_moves_to_even_sector`**
-* **`c_minus_le_c_plus`**
-* **`c_equals_c_plus`**
+* `epsilon_is_sign_flip_permutation`
+* `abs_vector_moves_to_even_sector`
+* `c_minus_le_c_plus`
+* `c_equals_c_plus`
+
+置換行列 `permMat` と成分の絶対値 `absVec` の基本性質は、本文の主張
+（`trace_of_epsilon_V_plus` の Step 3 (b)、`onsager_exact_solution` の Step 3）も使うので
+`Ising2D/NecSuf/PermMatrix.lean` へ移した。
 
 具体版は `Ising2D/Part019/`（`Claim001_EpsilonSignFlipPermutation.lean`,
 `Claim002_AbsVectorEvenSector.lean`, `Theorem003_CMinusLeCPlus.lean`,
@@ -46,6 +52,7 @@ Ising 模型の構造を含んでいない。したがって本章の必要十�
 「`ε` が対合の置換行列である」という仮定だけを追加した形になる。
 -/
 import Ising2D.Part011.Claim010_SectorDecomposition
+import Ising2D.NecSuf.PermMatrix
 
 set_option linter.unusedSectionVars false
 
@@ -55,77 +62,7 @@ open Matrix
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-! ## 対合の置換行列 -/
-
-/-- 写像 `π : n → n` の置換行列 `(permMat π)_{i j} = δ_{j, π(i)}`（成分は `0` か `1`）。
-
-人手証明 `epsilon_is_sign_flip_permutation` (1) の `ε_{l,k} = δ_{l,π(k)}` の必要十分版。
-（人手証明は列で書いているが、`π` が対合なので行で書いたこの形と一致する。） -/
-def permMat (π : n → n) : Matrix n n ℝ := fun i j => if j = π i then 1 else 0
-
-theorem permMat_apply (π : n → n) (i j : n) :
-    permMat π i j = if j = π i then 1 else 0 := rfl
-
-/-- 成分は `0` か `1` のいずれか。 -/
-theorem permMat_entry_zero_or_one (π : n → n) (i j : n) :
-    permMat π i j = 0 ∨ permMat π i j = 1 := by
-  by_cases h : j = π i
-  · exact Or.inr (by rw [permMat_apply, if_pos h])
-  · exact Or.inl (by rw [permMat_apply, if_neg h])
-
-/-- 各行の成分の和はちょうど `1`（各行にちょうど 1 個の `1` がある）。 -/
-theorem permMat_row_sum (π : n → n) (i : n) : ∑ j, permMat π i j = 1 := by
-  simp [permMat_apply]
-
-/-- **人手証明 (3) `(ε x)_k = x_{π(k)}` の必要十分版。** -/
-theorem permMat_mulVec (π : n → n) (x : n → ℝ) (i : n) :
-    (permMat π *ᵥ x) i = x (π i) := by
-  rw [Matrix.mulVec, dotProduct]
-  rw [Finset.sum_eq_single (π i)]
-  · rw [permMat_apply, if_pos rfl, one_mul]
-  · intro j _ hj
-    rw [permMat_apply, if_neg hj, zero_mul]
-  · intro h
-    exact absurd (Finset.mem_univ _) h
-
-/-- **人手証明 (1) `ε e_k = e_{π(k)}` の必要十分版。** -/
-theorem permMat_mulVec_single (π : n → n) (hπ : Function.Involutive π) (k : n) :
-    permMat π *ᵥ (Pi.single k (1 : ℝ)) = Pi.single (π k) 1 := by
-  funext i
-  rw [permMat_mulVec]
-  by_cases h : i = π k
-  · rw [h, hπ k, Pi.single_eq_same, Pi.single_eq_same]
-  · rw [Pi.single_eq_of_ne (fun hc => h (by rw [← hc, hπ])), Pi.single_eq_of_ne h]
-
-/-- 対合の置換行列は対称。 -/
-theorem permMat_isSymm {π : n → n} (hπ : Function.Involutive π) : (permMat π).IsSymm := by
-  ext i j
-  show permMat π j i = permMat π i j
-  rw [permMat_apply, permMat_apply]
-  by_cases h : j = π i
-  · rw [if_pos h, if_pos (by rw [h, hπ])]
-  · rw [if_neg h, if_neg (fun hc => h (by rw [hc, hπ]))]
-
-/-- 対合の置換行列は対合（`ε² = I`）。 -/
-theorem permMat_mul_self {π : n → n} (hπ : Function.Involutive π) :
-    permMat π * permMat π = 1 := by
-  ext i k
-  rw [Matrix.mul_apply, Finset.sum_eq_single (π i)]
-  · rw [permMat_apply, if_pos rfl, one_mul, permMat_apply, hπ, Matrix.one_apply]
-    simp [eq_comm]
-  · intro j _ hj
-    rw [permMat_apply, if_neg hj, zero_mul]
-  · intro h
-    exact absurd (Finset.mem_univ _) h
-
-/-! ## 成分ごとの絶対値 -/
-
-/-- 人手証明の `u_k := |x_k|`。 -/
-def absVec (x : n → ℝ) : n → ℝ := fun i => |x i|
-
-@[simp] theorem absVec_apply (x : n → ℝ) (i : n) : absVec x i = |x i| := rfl
-
-/-- **人手証明 `abs_vector_moves_to_even_sector` (1) の必要十分版**:
+/-- **ノートの `abs_vector_moves_to_even_sector` (1) の必要十分版**:
 奇セクターのベクトルの成分ごとの絶対値は偶セクターに入る。 -/
 theorem permMat_mulVec_absVec {π : n → n} {x : n → ℝ}
     (hx : permMat π *ᵥ x = (-1 : ℝ) • x) :
@@ -136,41 +73,6 @@ theorem permMat_mulVec_absVec {π : n → n} {x : n → ℝ}
     rwa [permMat_mulVec, Pi.smul_apply, smul_eq_mul, neg_one_mul] at this
   rw [permMat_mulVec, Pi.smul_apply, smul_eq_mul, one_mul, absVec_apply, absVec_apply,
     hcomp, abs_neg]
-
-/-- **人手証明 `abs_vector_moves_to_even_sector` (2) の必要十分版** `‖u‖ = ‖x‖`
-（ここでは `‖·‖²` の形で述べる）。 -/
-theorem vecNormSq_absVec (x : n → ℝ) : vecNormSq (absVec x) = vecNormSq x := by
-  rw [vecNormSq_eq_sum, vecNormSq_eq_sum]
-  refine Finset.sum_congr rfl fun i _ => ?_
-  rw [absVec_apply, sq_abs]
-
-/-- 二次形式の成分表示 `xᵀWx = Σ_k Σ_l x_k W_{kl} x_l`。 -/
-theorem quad_eq_sum (W : Matrix n n ℝ) (x : n → ℝ) :
-    x ⬝ᵥ W *ᵥ x = ∑ k, ∑ l, x k * W k l * x l := by
-  rw [dotProduct]
-  refine Finset.sum_congr rfl fun k _ => ?_
-  rw [Matrix.mulVec, dotProduct, Finset.mul_sum]
-  exact Finset.sum_congr rfl fun l _ => by ring
-
-/-- **人手証明 `abs_vector_moves_to_even_sector` (3) の必要十分版**
-`uᵀWu ≥ |xᵀWx| ≥ xᵀWx`。
-
-**仮定は `0 ≤ W_{kl}` だけ**（人手証明が引く `W_has_positive_entries` の狭義の正値性は不要）。 -/
-theorem abs_quad_le_quad_absVec {W : Matrix n n ℝ} (hW : ∀ k l, 0 ≤ W k l) (x : n → ℝ) :
-    |x ⬝ᵥ W *ᵥ x| ≤ absVec x ⬝ᵥ W *ᵥ absVec x := by
-  rw [quad_eq_sum, quad_eq_sum]
-  calc |∑ k, ∑ l, x k * W k l * x l|
-      ≤ ∑ k, |∑ l, x k * W k l * x l| := Finset.abs_sum_le_sum_abs _ _
-    _ ≤ ∑ k, ∑ l, |x k * W k l * x l| :=
-        Finset.sum_le_sum fun k _ => Finset.abs_sum_le_sum_abs _ _
-    _ = ∑ k, ∑ l, absVec x k * W k l * absVec x l := by
-        refine Finset.sum_congr rfl fun k _ => Finset.sum_congr rfl fun l _ => ?_
-        rw [abs_mul, abs_mul, abs_of_nonneg (hW k l)]
-        rfl
-
-theorem quad_le_quad_absVec {W : Matrix n n ℝ} (hW : ∀ k l, 0 ≤ W k l) (x : n → ℝ) :
-    x ⬝ᵥ W *ᵥ x ≤ absVec x ⬝ᵥ W *ᵥ absVec x :=
-  le_trans (le_abs_self _) (abs_quad_le_quad_absVec hW x)
 
 /-! ## セクターの上限の比較 -/
 

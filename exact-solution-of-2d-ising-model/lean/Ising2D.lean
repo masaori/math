@@ -87,7 +87,9 @@ import Ising2D.Part004.ClaimSecondDualCouplingRelationFromNecSuf
 import Ising2D.Part004.ClaimSecondTransferMatrixPauliForm
 import Ising2D.Part004.ClaimV2InZY
 import Ising2D.Part010.Claim009_EpsilonProjectors
+import Ising2D.Part010.DefinitionV1PlusSquareRoot
 import Ising2D.Part010.Claim010_EpsilonCommutes
+import Ising2D.Part004.ClaimV1RestrictionToEigenspaces
 import Ising2D.Part010.Claim011_SectorReplacement
 import Ising2D.Part010.Claim012_SectorDecomposition
 import Ising2D.NecSuf.Arcosh
@@ -111,6 +113,11 @@ import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
 import Ising2D.Part011.PhysicalSymTransferBridge
 import Ising2D.Part011.Claim009_PartitionFunctionSandwich
 import Ising2D.Part011.Claim010_SectorDecomposition
+import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
+import Ising2D.Part011.DefinitionSectorRayleighSup
+import Ising2D.Part011.ClaimCPlusLeC
+import Ising2D.Part011.ClaimEpsilonCommutesWithW
+import Ising2D.NecSuf.EvenSectorUpperBound
 import Ising2D.NecSuf.NumberOperator
 import Ising2D.NecSuf.JointEigenspace
 import Ising2D.Part009.Definition001_Trace
@@ -133,6 +140,7 @@ import Ising2D.NecSuf.AntiperiodicFourier
 import Ising2D.Part013.Claim002_AntiperiodicExpSumFromNecSuf
 import Ising2D.Part013.Claim005_AnticommutatorCheckZYFromNecSuf
 import Ising2D.Part013.Claim006_RecoverZYFromNecSuf
+import Ising2D.NecSuf.PermMatrix
 import Ising2D.NecSuf.PermSector
 import Ising2D.Part019.Claim001_EpsilonSignFlipPermutation
 import Ising2D.Part019.Claim002_AbsVectorEvenSector

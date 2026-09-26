@@ -105,7 +105,7 @@ theorem H2_eq_check_sum (hM : M ≠ 0) :
 /-- **原文第 1 式の形式化**:
 `H_1^{(+)} = (1/M) ∑_{μ=1}^{M} check(Y)_μ check(Z)_{M+1-μ} e^{-iθ~_μ}`。 -/
 theorem H1Plus_eq_check_sum (hM : M ≠ 0) :
-    H1 M (-1) = ((M : ℂ))⁻¹ • ∑ μ : Fin M,
+    H1plus M = ((M : ℂ))⁻¹ • ∑ μ : Fin M,
       checkPhase M 1 (((μ : ℕ) : ℤ) + 1) •
         (checkY M (((μ : ℕ) : ℤ) + 1) *
           checkZ M ((M : ℤ) + 1 - (((μ : ℕ) : ℤ) + 1))) := by
@@ -158,6 +158,6 @@ theorem H1Plus_eq_check_sum (hM : M ≠ 0) :
     Finset.sum_congr rfl fun k₁ (_ : k₁ ∈ Finset.univ) => Finset.sum_comm,
     Finset.sum_congr rfl fun k₁ (_ : k₁ ∈ Finset.univ) =>
       (Finset.sum_congr rfl fun k₂ (_ : k₂ ∈ Finset.univ) => hinner k₁ k₂).trans (houter k₁),
-    ← Finset.smul_sum, smul_smul, inv_mul_cancel₀ hMC, one_smul, H1]
+    ← Finset.smul_sum, smul_smul, inv_mul_cancel₀ hMC, one_smul, H1plus]
 
 end Ising2D

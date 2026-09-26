@@ -26,9 +26,10 @@
 仮定していない。** 章 004・010・013 の形式化済みの定理から**無条件に**従う。
 
 演算の土台は、章 018 の主鎖では**複素行列 `TensorPow M = Matrix (Conf M) (Conf M) ℂ`**、
-章 011・019 と接続する部分では**実行列 `Matrix (Conf M) (Conf M) ℝ`** である。
+章 011 と接続する部分では**実行列 `Matrix (Conf M) (Conf M) ℝ`** である。
 両者の橋渡しは `Ising2D.cvec`（実ベクトルの複素化）と `Ising2D.EvenSectorBridge.reVec`
-（複素ベクトルの実部）で行い、章 019 の `epsilon_eq_ofReal_epsilonR` と同じ性質のものである。
+（複素ベクトルの実部）で行い、章 011 の `epsilon_eq_ofReal_epsilonR`（`epsilon_is_real_symmetric`）と
+同じ性質のものである。
 
 **実数解析（極限・積分・連続性）へ移行するのは、章 012 の
 `Ising2D.riemann_sum_to_integral` を経由する最後の等号だけ**である（人手証明の最終段落と同じ）。
@@ -135,9 +136,12 @@
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
 | `EvenSectorBridge.lamMax_eq_LambdaM` | `Λ̌_max = Λ^{(1/2)}_M`（章 012 の記法との突き合わせ） | 記法の同定 |
-| **`EvenSectorBridge.rayleighSup_eq_LambdaM`** | **`c(M) = Λ^{(1/2)}_M`**（章 019 の `c_equals_c_plus` と接続） | Step 2・Step 3 の代替（下記 4 を参照） |
+| **`EvenSectorBridge.LambdaM_le_rayleighSup`** | **`Λ^{(1/2)}_M = c_+(M) ≤ c(M)`**（章 011 の `c_plus_le_c` と `c_plus_equals_lamMax`） | Step 2 |
+| `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup`（`NecSuf/EvenSectorUpperBound.lean`）/ `Ising2D.onsager_step3_c_le_two_c_plus` | **`c(M) ≤ 2c_+(M)`**（必要十分版とその `ε = epsilonR M` への特殊化） | Step 3 |
+| **`EvenSectorBridge.rayleighSup_le_two_mul_LambdaM`** | **`c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`** | Step 3 |
+| `EvenSectorBridge.rayleighSup_sandwich_LambdaM` | `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` | Step 2・Step 3 |
 | `Ising2D.onsager_limit_in_N_row` | `N_row → ∞` の極限は `(1/M) log c(M)` | Step 1（章 012 の `limit_of_log_Z_in_N_row`） |
-| `Ising2D.onsager_limit_in_M` | `M → ∞` の極限が Onsager の表式になる | Step 4（章 012 の `onsager_free_energy_expression` を `δ = 1/2` で適用） |
+| `Ising2D.onsager_limit_in_M` | 挟み撃ち `(1/M)log Λ ≤ (1/M)log c(M) ≤ (1/M)log Λ + (log 2)/M` から、`M → ∞` の極限が Onsager の表式になる | Step 4（`log` の単調性、`(log 2)/M → 0`、章 012 の `onsager_free_energy_expression` を `δ = 1/2` で適用） |
 | **`Ising2D.onsager_exact_solution`** | **`lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`** | **定理本体** |
 
 ### 1.2 必要十分版（`lean/Ising2D/NecSuf/ParityFermion.lean`、名前空間 `Ising2D.NecSuf`）
@@ -168,7 +172,8 @@
 | `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |
 | `max_eigenvector_in_even_sector` | `VPlusData.eta_univ_eq_one` ほか | **置かない** | `Claim002`（反転則）と `Claim003`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `Definition006_RayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
-| `onsager_exact_solution` | `Ising2D.onsager_exact_solution` | **置かない** | 既存の必要十分版（`NecSuf/LogSqueeze.lean`, `NecSuf/RiemannSum.lean`）を章 012 が既に系として使っており、本章はその具体版を章 018・019 の結果に接続するだけ |
+| `onsager_exact_solution` Step 3 | `Ising2D.onsager_step3_c_le_two_c_plus` | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **系**。効くのは `ε` が対合の置換行列であること、`W` の実対称半正定値性・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。`π` が不動点をもたないことは使わない |
+| `onsager_exact_solution`（Step 1・2・4） | `Ising2D.onsager_exact_solution` | **置かない** | 既存の必要十分版（`NecSuf/LogSqueeze.lean`, `NecSuf/RiemannSum.lean`）を章 012 が既に系として使っており、本章はその具体版を章 011・018 の結果に接続するだけ |
 
 ### 必要十分版で判明した本質（本文には持ち込まない）
 
@@ -209,27 +214,38 @@
 | `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 上記10ブロックに依存する。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
 | `def_check_fermi` / `anticommutator_of_check_psi`（章 016） | **`CheckFermi` の仮定** | 本章の形式化時点で Lean 側に `Part016` が無かった |
 | `eigenvalues_of_V_plus`（章 017） | **`VPlusData` の仮定** | 本章の形式化時点で Lean 側に `Part017` が無かった |
-| `W P^{(+)} = V^{(+)} P^{(+)}`（章 011 の `symmetrized_transfer_matrix_on_sectors`） | **`EvenSectorBridge` の仮定** | 行列等式自体は章 011 の `physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済み。章 018 の抽象入力 `EvenSectorBridge` と物理パラメータを結ぶ同期は本章の既存構成に残る |
+| `W P^{(+)} = V^{(+)} P^{(+)}`（章 011 の `symmetrized_transfer_matrix_on_sectors`） | **`EvenSectorBridge` の仮定** | 行列等式自体は章 011 の `symmetrized_transfer_matrix_on_sectors` で形式化済み。章 018 の抽象入力 `EvenSectorBridge` と物理パラメータを結ぶ同期は本章の既存構成に残る |
 | `closing_000_remark_overview` | 形式化対象外 | `remark`（本章の位置づけの説明）であり、数学的主張は他ブロックに含まれる |
 
 詳細と一次情報は `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md` に記録した。
 
-## 4. 人手証明との意図的な相違点（Onsager の最終定理）
+## 4. Onsager の最終定理の Step 2・Step 3（人手証明と 1 対 1）
 
 人手証明 `onsager_exact_solution` の Step 2・Step 3 は
 `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` という**粗い挟み撃ち**を採る（原文 `conversion.notes` に
-よれば `c_-(M)` の値に依存しないため）。
+よれば `c_-(M)` の値に依存しないため）。Lean も同じ挟み撃ちで述べる
+（`EvenSectorBridge.LambdaM_le_rayleighSup` / `rayleighSup_le_two_mul_LambdaM`、Step 4 の
+`onsager_limit_in_M` で `(log 2)/M → 0` を使う）。
 
-Lean 側はこれを使わない。**章 019 の `Ising2D.c_minus_le_c_plus` が `c_-(M) ≤ c_+(M)` を
-無条件に与える**ので、`c_-(M)` の値を知らなくても `Ising2D.c_equals_c_plus` で
-`c(M) = c_+(M)` が言え、`EvenSectorBridge.rayleighSup_eq_LambdaM` は挟み撃ちなしに
+以前の Lean は、章 019 の `Ising2D.c_minus_le_c_plus`（`c_-(M) ≤ c_+(M)`）と `Ising2D.c_equals_c_plus`
+（`c(M) = c_+(M)`）で挟み撃ちなしに `c(M) = Λ^{(1/2)}_M` を出していた（旧 `rayleighSup_eq_LambdaM`）。
+2026-09-26 に人手の本文が `(−)` セクターを参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ退避し、章 019 も本文から外れたので、Lean も
+本文と同じ経路に揃えた。章 019 の Lean は形式化の記録として残してある（`lean/docs/ch019-formalization.md`）。
 
-```
-c(M) = c_+(M) = Λ̌_max = Λ^{(1/2)}_M
-```
+Step 3 の人手証明と Lean の対応（`NecSuf/EvenSectorUpperBound.lean`）:
 
-を出す。**得られる結論は人手証明と同じ**（挟み撃ち版で必要だった `log 2 / M → 0` が
-不要になるだけ）である。本文は変更していない。
+| 人手の段 | Lean |
+| --- | --- |
+| `u_k := |x_k|`, `uᵀWu ≥ |xᵀWx| ≥ xᵀWx` | `NecSuf.quad_le_quad_absVec`（`NecSuf/PermMatrix.lean`） |
+| `ε` は置換行列（`trace_of_epsilon_V_plus` Step 3 (b)）、`‖εu‖ = ‖u‖ = ‖x‖ = 1` | `epsilonR M = permMat flipConf`、`NecSuf.vecNormSq_permMat_mulVec`、`NecSuf.vecNormSq_absVec` |
+| `εv = v`（`ε² = I`）、`v ≠ 0` | `permMat_mul_self`、`v ≥ u` から `‖v‖² ≥ ‖u‖² = 1` |
+| `‖v‖² = 2 + 2uᵀεu ≤ 4`（Cauchy–Schwarz） | `Ising2D.psd_cauchy_schwarz` を `P = I` で |
+| `vᵀWv = 2uᵀWu + 2uᵀWεu ≥ 2uᵀWu`（`εᵀ = ε`, `εW = Wε`, `ε² = I`） | `mulVec_dotProduct_selfadjoint`（`εᵀ = ε`）、仮定 `hcomm`、`NecSuf.bilin_nonneg_of_nonneg` |
+| `c_+ ≥ v̂ᵀWv̂ = vᵀWv/‖v‖² ≥ ⋯ ≥ xᵀWx/2` | `le_evenSectorRayleighSup` と同じ順の `calc` |
+
+Lean は `v ≠ 0` を「`v ≥ u ≥ 0` と `u ≠ 0`」から直接でなく `‖v‖² ≥ ‖u‖² = 1 > 0` の形で示し、
+`v̂ := v/‖v‖` の代わりに `(1/√‖v‖²)·v` を使う。
 
 ## 5. 検証
 
@@ -268,7 +284,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | `VPlusData.hV`（`V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`） | 016・017 | `Ising2D.VPlus_eq_smul_checkVprime_const`（016 の `VPlus_eq_smul_checkVprime_of_dual` ＋ 017 の `constant_c_value_even_sector`）と `Ising2D.checkVprime_mul_Qproj` |
 | `VPlusData.C`, `hC`（`C = (2 sinh 2K_2)^{M/2} > 0`） | 017 | 同上（`constant_c_value_even_sector` が `c` の値を確定させる） |
 | `VPlusData.gam`, `hgam`（`γ(θ̃_μ) > 0`） | 015・017 | `Ising2D.gammaFn_thetaTilde_pos`（`Part017/Theorem011_MaxEigenvalueSimple.lean`。**無条件**） |
-| `rayleighSup_eq_LambdaM` の `hC` / `hgam`（章 012 の記法との一致） | 012・017 | `rfl` と `Ising2D.sum_checkGam`（`tagPoint_half_eq_thetaTilde` の系） |
+| `rayleighSup_sandwich_LambdaM` の `hC` / `hgam`（章 012 の記法との一致） | 012・017 | `rfl` と `Ising2D.sum_checkGam`（`tagPoint_half_eq_thetaTilde` の系） |
 
 ### 6.3 噛み合わせが必要だった箇所（一次情報）
 
@@ -292,9 +308,9 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`） |
 | `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | **原文が置いている関係**であって形式化の穴ではない（`lean/docs/ch016-formalization.md` 3 章: 「残る仮定は双対関係の 1 つだけ」）。008 章以来 `det A(θ) = 1` に必要 |
-| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 前半の複素行列等式は章 011 の `physicalSymTransferR_map_mul_epsProj_eq_Vsym` で形式化済み。残るのは `V^{(+)}` の実行列性と、この等式を実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続である |
+| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 前半の複素行列等式は章 011 の `symmetrized_transfer_matrix_on_sectors` で形式化済み。残るのは `V^{(+)}` の実行列性と、この等式を実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続である |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
-| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換 | 章 011 の `W_has_positive_entries`（章 001 の `def_transfer_matrix` の成分定義による）/ 章 010 の `epsilon_commutes_with_transfer_matrices` に依存。章 011 も同じ形で仮定として受け取っている（`lean/docs/ch011-formalization.md` 3 章） |
+| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | `bridge.W` は抽象的な実行列として受け取っている。具体的な `W`（`physicalSymTransferR`）については章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）で `εW = Wε` を形式化済みだが、それを `bridge.W` へ渡すには上の `bridge` の接続が要る |
 
 `hZ1` / `hZ2` は章 011 `partition_function_sandwich` の内容であり、章 018 の仮定ではない。
 

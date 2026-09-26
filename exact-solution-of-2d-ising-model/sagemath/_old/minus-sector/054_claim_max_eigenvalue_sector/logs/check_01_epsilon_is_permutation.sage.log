@@ -1,0 +1,8 @@
+=== check_01: ε は不動点をもたない対合置換の置換行列 ===
+  (1) ε の成分は 0 か 1: max residual = 0.000e+00  ->  PASS
+  (2) 各行・各列の成分和は 1（置換行列）: max residual = 0.000e+00  ->  PASS
+  (3) π は不動点なしの対合で flip_index に一致: max residual = 0.000e+00  ->  PASS
+  (4) (εx)_k = x_{π(k)}: max residual = 0.000e+00  ->  PASS
+  (5) ε^T = ε, ε^2 = I, および F^{(-)} 基底が εv = −v: max residual = 0.000e+00  ->  PASS
+  (6) dim(F^{(-)} ∩ R^{2^M}) = 2^{M-1} の違反件数: 0  ->  PASS
+=== check_01: ALL PASS ===

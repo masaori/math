@@ -34,8 +34,8 @@ variable {M : ℕ}
 
 /-- 原文 (A) を `(i/2)K_1` 倍したもの。 -/
 theorem ad_V1plusHalf_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) * checkZ M μ -
-        checkZ M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1))
+    (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) * checkZ M μ -
+        checkZ M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M)
       = (Complex.I * K1 * checkPhase M 1 μ) • checkY M μ := by
   rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H1Plus_checkZ hM μ,
     smul_smul]
@@ -44,8 +44,8 @@ theorem ad_V1plusHalf_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
 
 /-- 原文 (B) を `(i/2)K_1` 倍したもの。 -/
 theorem ad_V1plusHalf_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) * checkY M μ -
-        checkY M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1))
+    (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) * checkY M μ -
+        checkY M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M)
       = (-Complex.I * K1 * checkPhase M (-1) μ) • checkZ M μ := by
   rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H1Plus_checkY hM μ,
     smul_smul]
@@ -108,14 +108,14 @@ private theorem adPow_odd_y_aux {X z y : TensorPow M} {α β s : ℂ}
 
 /-- **原文 (h1.z) 偶数側**: `n = 2k` のとき `K_1^{2k} check(Z)_μ`（符号が消える）。 -/
 theorem conversion_H1Plus_checkZ_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
-    adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) (2 * k) (checkZ M μ)
+    adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k) (checkZ M μ)
       = (K1 ^ (2 * k)) • checkZ M μ :=
   (adPow_even_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
     (sK1_sq M K1 μ) k).1
 
 /-- **原文 (h1.z) 奇数側**: `n = 2k+1` のとき `i K_1^{2k+1} e^{-iθ~_μ} check(Y)_μ`。 -/
 theorem conversion_H1Plus_checkZ_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
-    adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) (2 * k + 1) (checkZ M μ)
+    adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k + 1) (checkZ M μ)
       = (Complex.I * K1 ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ := by
   rw [adPow_odd_z_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
     (sK1_sq M K1 μ) k]
@@ -125,14 +125,14 @@ theorem conversion_H1Plus_checkZ_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : �
 
 /-- **原文 (h1.y) 偶数側**: `n = 2k` のとき `K_1^{2k} check(Y)_μ`。 -/
 theorem conversion_H1Plus_checkY_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
-    adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) (2 * k) (checkY M μ)
+    adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k) (checkY M μ)
       = (K1 ^ (2 * k)) • checkY M μ :=
   (adPow_even_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
     (sK1_sq M K1 μ) k).2
 
 /-- **原文 (h1.y) 奇数側**: `n = 2k+1` のとき `-i K_1^{2k+1} e^{iθ~_μ} check(Z)_μ`。 -/
 theorem conversion_H1Plus_checkY_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
-    adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1 M (-1)) (2 * k + 1) (checkY M μ)
+    adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k + 1) (checkY M μ)
       = (-Complex.I * K1 ^ (2 * k + 1) * checkPhase M (-1) μ) • checkZ M μ := by
   rw [adPow_odd_y_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
     (sK1_sq M K1 μ) k]

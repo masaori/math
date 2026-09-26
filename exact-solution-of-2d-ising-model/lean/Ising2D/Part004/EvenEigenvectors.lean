@@ -9,6 +9,10 @@
 数ベクトルへの作用だけで定義する。続いて本文ラベル
 `even_eigenspace_is_complex_subspace` の零・和・複素スカラー倍に関する三つの計算を
 同じ順で形式化し、その集合を台集合とする複素部分加群を構成する。
+
+本文ラベル `def_eigenspaces_of_epsilon`（`𝓕^{(+)}` は `ℂ^{2^M}` の `ℂ`-部分線型空間である、という
+`even_eigenspace_is_complex_subspace` の統合結果。`(+)` だけ）の Lean は、同じ `evenEigenspace` である
+（`evenEigenspace_carrier`）。
 -/
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
 import Ising2D.NecSuf.FixedVectorsSubmodule
@@ -86,6 +90,12 @@ def evenEigenspace (M : ℕ) (hM : 1 ≤ M) : Submodule ℂ (Conf M → ℂ) whe
   zero_mem' := zero_mem_evenEigenvectors M hM
   add_mem' := add_mem_evenEigenvectors M hM
   smul_mem' := smul_mem_evenEigenvectors M hM
+
+/-- **人手本文 `def_eigenspaces_of_epsilon`**: `𝓕^{(+)}` を台集合とする `ℂ`-部分線型空間がある
+（`evenEigenspace` の台集合は `evenEigenvectors`）。 -/
+theorem evenEigenspace_carrier (M : ℕ) (hM : 1 ≤ M) :
+    ((evenEigenspace M hM : Submodule ℂ (Conf M → ℂ)) : Set (Conf M → ℂ))
+      = evenEigenvectors M hM := rfl
 
 /-- 具体版は必要十分版を `R=ℂ`、`ι=Conf M`、`A=epsilon M` とした特殊化である。 -/
 theorem evenEigenspace_eq_fixedSubmodule (M : ℕ) (hM : 1 ≤ M) :

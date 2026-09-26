@@ -1,6 +1,15 @@
 # 章 011「転送行列の最大固有値と分配関数の挟み撃ち」の Lean 形式化
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`（12 ブロック）
+正本: `structured-latex/content/011_max_eigenvalue.ts`
+
+**`(−)` セクターの退避（2026-09-26）**: 人手の本文は `(+)` セクターだけで述べる形になり、
+`c(M) = max(c_+(M), c_-(M))`（`sector_decomposition_of_rayleigh_sup`）は参照用ノート
+`structured-latex/notes/minus_sector_not_adopted.ts` へ移った。代わりに本文には
+`c_+(M)` だけの定義（`def_sector_rayleigh_sup`）、`c_plus_le_c`（`c_+(M) ≤ c(M)`）、
+`epsilon_is_real_symmetric`（`ε^⊤ = ε`）が立ち、`epsilon_commutes_with_W` と
+`symmetrized_transfer_matrix_on_sectors` は `(+)` だけの主張になった。
+`sector_decomposition_of_rayleigh_sup` の Lean（`Part011/Claim010_SectorDecomposition.lean`）は
+形式化の記録として残し、ビルドは通し続ける（下の表の「ノート」の行）。本文の主張の Lean はこれに依存しない。
 
 この文書は `lean/README.md` への統合前の記録である（統合は呼び出し元が行う）。
 
@@ -44,7 +53,7 @@
 | `Ising2D.physicalV1halfR` / `physicalV2R` / `physicalSymTransferR` | 章 011 の物理的な `V₁^{1/2}`, `V₂`, `W` を実成分で定義 | `def_transfer_matrix_square_root`, `def_symmetrized_transfer_matrix` |
 | `Ising2D.physicalV1halfC` / `physicalSymTransferC` | 同じ物理的行列を複素行列として定義（`V₁^{1/2} = exp(½K₁D)` は `V1PauliForm` の `K₁/2` での値、`V₂` は `def_transfer_matrix` の `Ising2D.V2`） | 同上 |
 | **`Ising2D.physicalSymTransferC_eq_map`** | 複素側の物理的転送行列は実行列 `W` の成分ごとの複素化に一致 | **`def_symmetrized_transfer_matrix` の章間接続** |
-| **`Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym`** | 実行列 `W` の複素化について `W P^{(±)} = V^{(±)}P^{(±)}` | **`symmetrized_transfer_matrix_on_sectors`** |
+| **`Ising2D.symmetrized_transfer_matrix_on_sectors`** | 実行列 `W` の複素化について `W P^{(+)} = V^{(+)}P^{(+)}`（`V^{(+)}` は章 010 の `VPlusOfTransfer`。`B P = C P` を `V1_restriction_to_eigenspaces`（結合定数 `K_1/2`）と `epsilon_projector_properties` (2) から作る） | **`symmetrized_transfer_matrix_on_sectors`** |
 | `Ising2D.symTransfer_isSymm` | `W` は実対称 | `W_is_real_symmetric_positive_definite` Step 3 |
 | `Ising2D.symTransfer_posDef` | `W` は正定値（合同変換） | 同上 |
 | `Ising2D.mulVec_eq_zero_iff_of_isUnit` | 可逆行列の `mulVec` は単射 | 同上「可逆性」 |
@@ -52,12 +61,17 @@
 | `Ising2D.matExp_isSymm` / `Ising2D.matExp_posDef` | 実対称行列の `exp` は実対称正定値 | `exp_hermitian_is_positive_definite` の実行列版（章 009 への接続点） |
 | **`Ising2D.symTransfer_entry_pos`** | `W` の成分はすべて正 | **`W_has_positive_entries`** |
 | **`Ising2D.partition_function_sandwich`** | `c(M)^{N_row} ≤ Z ≤ (dim) c(M)^{N_row}` | **`partition_function_sandwich`** |
-| `Ising2D.sectorSet` / `Ising2D.sectorRayleighSup` | `𝓡_±` と `c_±(M)` | `def_sector_rayleigh_sup` |
-| `Ising2D.sector_invariant` | `W` は `F^{(±)}` を保つ | `epsilon_commutes_with_W` |
-| `Ising2D.sector_orthogonal` | 異なる固有値の固有ベクトルは直交 | `sector_decomposition_of_rayleigh_sup` (3) の `x₊ᵀx₋ = 0` |
-| `Ising2D.projPlus` / `projMinus` / `proj_add_eq_one` / `projPlus_mulVec_eigen` / `projMinus_mulVec_eigen` | `P^{(±)} = (1±ε)/2` とその性質 | `def_epsilon_projectors` の実行列版 |
-| `Ising2D.sector_quad_le` | セクター内で `xᵀWx ≤ c_±‖x‖²` | `sector_decomposition_of_rayleigh_sup` (3) |
-| **`Ising2D.sector_decomposition_of_rayleigh_sup`** | `c(M) = max(c₊(M), c₋(M))` | **`sector_decomposition_of_rayleigh_sup` (3)** |
+| `Ising2D.evenSectorSet` / `Ising2D.evenSectorRayleighSup` | `𝓡_+` と `c_+(M)`（`Part011/DefinitionSectorRayleighSup.lean`） | `def_sector_rayleigh_sup` |
+| `Ising2D.evenSectorSet_subset` / `evenSectorSet_bddAbove` / `le_evenSectorRayleighSup` | `𝓡_+ ⊆ 𝓡` と上に有界、単位ベクトルで `xᵀWx ≤ c_+` | 同上 |
+| `Ising2D.evenUnit` / `epsilonR_mulVec_evenUnit` / `vecNormSq_evenUnit` / `evenSectorSet_epsilonR_nonempty` | 単位ベクトル `x^{(+)}`（各成分 `2^{-M/2}`）で `𝓡_+ ≠ ∅` | 同上 |
+| **`Ising2D.c_plus_le_c`** | `c_+(M) ≤ c(M)`（`Part011/ClaimCPlusLeC.lean`） | **`c_plus_le_c`** |
+| `Ising2D.epsilonR` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_transpose` / `epsilonR_isSymm` / `epsilonR_mul_self` | `ε` の成分は実数（実行列 `epsilonR` の埋め込み）、`ε^⊤ = ε` とその実行列版（`Part011/ClaimEpsilonIsRealSymmetric.lean`） | `epsilon_is_real_symmetric`（`ε² = I` は `epsilon_square_and_eigenvalues`） |
+| **`Ising2D.epsilon_is_real_symmetric`** | `ε = (epsilonR).map ofReal ∧ ε^⊤ = ε` | **`epsilon_is_real_symmetric`** |
+| `Ising2D.flipConf` / `flipConf_involutive` / `epsilonR_mulVec_apply` | `ε` は符号反転 `π` の置換行列（`(εx)_k = x_{π(k)}`） | `trace_of_epsilon_V_plus` の証明 Step 3 の (b)（`onsager_exact_solution` Step 3 が引く） |
+| `Ising2D.epsilon_commute_physicalSymTransferC` / **`epsilon_commutes_with_W`** / `epsilonR_mulVec_physicalSymTransferR_of_mem` | 物理的な `W` について `εW = Wε`（複素行列の等式から実行列へ）と `W` が `𝓕^{(+)}` を保つこと（`Part011/ClaimEpsilonCommutesWithW.lean`） | **`epsilon_commutes_with_W`** |
+| `Ising2D.sectorSet` / `sectorRayleighSup` / `sectorSet_one_eq` / `sectorRayleighSup_one_eq` | 符号つきの `𝓡_±`, `c_±(M)`（`s = 1` で本文の `𝓡_+`, `c_+`） | ノート（`sector_decomposition_of_rayleigh_sup`） |
+| `Ising2D.sector_invariant` / `sector_orthogonal` / `projPlus` / `projMinus` / `proj_add_eq_one` / `projPlus_mulVec_eigen` / `projMinus_mulVec_eigen` / `sector_quad_le` / `sectorRayleighSup_le` | `W` は `F^{(±)}` を保つ、直交性、実行列の `P^{(±)}`、セクター内の評価 | ノート（同上） |
+| `Ising2D.sector_decomposition_of_rayleigh_sup` | `c(M) = max(c₊(M), c₋(M))` | ノート `sector_decomposition_of_rayleigh_sup` (3) |
 
 補助（`Part011/Basic.lean`）: `matBilin`, `dotProduct_mulVec_comm`,
 `mulVec_dotProduct_selfadjoint`, `single_dotProduct_mulVec_single`,
@@ -87,12 +101,15 @@
 | `psd_cauchy_schwarz` | `Ising2D.psd_cauchy_schwarz` | `Ising2D.NecSuf.psd_cauchy_schwarz` | **はい**（`matBilin P` を代入） |
 | `rayleigh_bounds_operator_norm` | `Ising2D.rayleigh_bounds_operator_norm(Sq)(_pow)` | `NecSuf.IsPsdPair.rayleigh_bounds_operator_norm(_pow)` | **はい**（`isPsdPair_of_matrix` 経由） |
 | `trace_power_sandwich` | `Ising2D.trace_power_sandwich` | `NecSuf.IsPsdPair.moment_le_pow` / `moment_log_convex` / `NecSuf.IsPdPair.moment_pow_le` | 不等式の中核部分は**はい**。跡と `sup` の部分は ℝ 固有なので具体版のみ |
-| `symmetrized_transfer_matrix_on_sectors` | `Ising2D.physicalSymTransferR_map_mul_epsProj_eq_Vsym` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
+| `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
 | `Z_equals_trace_of_W` | `Ising2D.trace_symTransfer_pow` | なし（下記） | — |
 | `W_is_real_symmetric_positive_definite` | `Ising2D.symTransfer_isSymm` / `symTransfer_posDef` | なし（下記） | — |
 | `W_has_positive_entries` | `Ising2D.symTransfer_entry_pos` | なし（下記） | — |
 | `partition_function_sandwich` | `Ising2D.partition_function_sandwich` | なし（`trace_power_sandwich` の言い換え） | — |
-| `sector_decomposition_of_rayleigh_sup` | `Ising2D.sector_decomposition_of_rayleigh_sup` | なし（下記） | — |
+| `def_sector_rayleigh_sup` / `c_plus_le_c` | `Ising2D.evenSectorRayleighSup` / `Ising2D.c_plus_le_c` | なし（`sSup` とその単調性は ℝ の完備性そのもの） | — |
+| `epsilon_is_real_symmetric` | `Ising2D.epsilon_is_real_symmetric` | なし（`ε` の具体的な成分の計算。置換行列の一般的な性質は `NecSuf/PermMatrix.lean`） | — |
+| `epsilon_commutes_with_W` | `Ising2D.epsilon_commutes_with_W` | なし（結合律だけの鎖。置き換えた構造は章 010 の具体的な反交換関係） | — |
+| ノート `sector_decomposition_of_rayleigh_sup` | `Ising2D.sector_decomposition_of_rayleigh_sup` | なし（下記） | — |
 
 ### 必要十分版で判明した本質
 
@@ -128,7 +145,7 @@
   成分の正値性は「正の対角行列で挟むと成分の正値性が保たれる」だけである。
   いずれも既に最小の仮定で述べてあるため、別ファイルの必要十分版は置いていない。
 
-- **セクター分解に効いているのは「対称な対合 `ε`（`ε² = 1`）で `W` と可換なもの」だけ**である。
+- （ノートへ退避したセクター分解について）**セクター分解に効いているのは「対称な対合 `ε`（`ε² = 1`）で `W` と可換なもの」だけ**である。
   `ε` が `σ^x` の積であることも、`W` が転送行列であることも効いていない。
   Lean 側の `Ising2D.sector_decomposition_of_rayleigh_sup` はすでにその一般性で述べてあるので、
   別途の必要十分版は置いていない。
@@ -145,7 +162,7 @@
 | `V₁^{1/2}` が正の対角行列 | `sigma_z_diagonal_action` + `exp_of_diagonal_matrix`（章 009） | `Ising2D.diagExp d`（`d : n → ℝ`）として与える。`d μ = (1/2)K₁∑_m μ(m)μ(m+1)` に対応 |
 | `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2` |
 | `V₂` が実対称正定値 | `iH_is_real_symmetric` + `exp_hermitian_is_positive_definite`（章 009） | `symTransfer_posDef` / `partition_function_sandwich` の引数。**`Ising2D.matExp_posDef` を本ファイルで証明してあるので、章 009 が形式化されればそのまま接続できる** |
-| `ε` が実対称・`ε² = 1`・`εW = Wε` | `epsilon_commutes_with_transfer_matrices`（章 009/010） | `sector_decomposition_of_rayleigh_sup` の引数 `hε`, `hεε`, `hcomm` |
+| `ε` が実対称・`ε² = 1`・`εW = Wε`（一般の `W` について） | `epsilon_is_real_symmetric`・`epsilon_square_and_eigenvalues`・`epsilon_commutes_with_W` | 物理的な `W`（`physicalSymTransferR`）と `ε`（`epsilonR`）については `epsilon_commutes_with_W` / `epsilonR_isSymm` / `epsilonR_mul_self` で証明済み。一般の `W` について述べる定理（章 018 の `EvenSectorBridge` など）は `εW = Wε` を引数で受け取る |
 
 ## 4. 形式化できなかった主張とその理由
 
@@ -165,6 +182,15 @@
 2. `docs/tasks/2026-07_lean-ch009-013/002_ch011-sector-sup-nonempty-gap.md`
    — `sector_decomposition_of_rayleigh_sup` (3) で `c_±(M)` の `sup` が定義できること
    （`F^{(±)}` に単位ベクトルが存在すること）の根拠が本文に無い。
+   （現在の本文の `def_sector_rayleigh_sup` は `x^{(+)}` を構成して `𝓡_+ ≠ ∅` を示している。）
+
+## 5.1 人手証明と 1 対 1 にならない箇所（2026-09-26 に追加した主張）
+
+- `def_sector_rayleigh_sup`: `𝓡` の有界性の根拠（人手は `∑|W_ij|`、Lean は `xᵀWx ≤ ‖x‖² tr W`）と、
+  `ε x^{(+)} = x^{(+)}` の示し方（人手はクロネッカー積の積の規則、Lean は置換行列の成分表示と
+  成分が定数であること）。`x^{(+)}` は人手が確かめた「各成分が `2^{-M/2}`」の形で直接定義した。
+- `epsilon_commutes_with_W`: 人手は複素行列として `εW = Wε` を示す。Lean は複素行列の等式を示したあと、
+  成分の埋め込みの単射性で実行列の等式へ移す一段を足している。
 
 ## 6. 検証結果
 

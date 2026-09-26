@@ -8,7 +8,7 @@
 * `maxeig_001a_definition_symmetrized_transfer_matrix`
   （ラベル **`def_symmetrized_transfer_matrix`**）
 * `maxeig_claim_symmetrized_transfer_matrix_on_sectors`
-  （ラベル **`symmetrized_transfer_matrix_on_sectors`**）
+  （ラベル **`symmetrized_transfer_matrix_on_sectors`**、`W P^{(+)} = V^{(+)} P^{(+)}`）
 
 章 011 の Rayleigh 商は実行列 `W` 上で述べる一方、転送行列は
 `TensorPow M = Matrix (Conf M) (Conf M) ℂ` 上で定義されている。本ファイルでは、
@@ -21,10 +21,12 @@
 これは同じ具体的な行列の二つの係数体での表示を突き合わせる主張なので、必要十分版は置かない。
 -/
 import Ising2D.Part004.ClaimFirstTransferMatrixPauliForm
-import Ising2D.Part010.Claim012_SectorDecomposition
+import Ising2D.Part004.ClaimV1RestrictionToEigenspaces
 import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
 
 namespace Ising2D
+
+open Matrix
 
 variable {M : ℕ}
 
@@ -95,42 +97,44 @@ theorem physicalSymTransferC_eq_map (K1 K2 : ℝ) :
 
 /-! ## セクター射影後の表示 -/
 
-/-- **人手本文 `symmetrized_transfer_matrix_on_sectors`:
-`W P^{(±)} = V^{(±)} P^{(±)}`。**
+/-- **人手本文 `symmetrized_transfer_matrix_on_sectors`: `W P^{(+)} = V^{(+)} P^{(+)}`。**
 
-左辺では章 011 の実行列 `W` を成分ごとに `ℂ` へ埋め込む。右辺では
-セクター固有値 `η` に対して境界符号を `-η` とした章 010 の `Vsym` を使う。
-証明は本文と同じく、`B P = C P` と `P C = C P`, `P V₂ = V₂ P` を
-一行ずつ代入する。ここで使う構造だけを残した必要十分版は
-`Ising2D.NecSuf.sandwich_mul_proj_eq` である。 -/
-theorem physicalSymTransferR_map_mul_epsProj_eq_Vsym {K2 : ℝ} (K1 : ℝ)
-    (hM : 2 ≤ M) (hK2 : 0 < K2) {η : ℂ} (hη : η * η = 1) :
-    (physicalSymTransferR M K1 K2).map Complex.ofRealHom * epsProj M η
-      = Vsym M K1 (-η) K2 * epsProj M η := by
+左辺では章 011 の実行列 `W` を成分ごとに `ℂ` へ埋め込む。右辺の `V^{(+)}` は章 010
+`def_V_plus` の `VPlusOfTransfer`（`V_2` は `def_transfer_matrix` の `V_2`）。
+証明は本文と同じく、`V1_restriction_to_eigenspaces` に結合定数 `K_1/2` を代入して
+`f ∈ 𝓕^{(+)}` で `B f = C f` を得、`epsilon_projector_properties` (2) の `P^{(+)} x ∈ 𝓕^{(+)}` から
+`B P = C P` を作り、`P C = C P`, `P V₂ = V₂ P` を一行ずつ代入する。
+この代入の鎖で使う構造だけを残した必要十分版は `Ising2D.NecSuf.sandwich_mul_proj_eq` である。 -/
+theorem symmetrized_transfer_matrix_on_sectors {K2 : ℝ} (K1 : ℝ)
+    (hM : 2 ≤ M) (hK2 : 0 < K2) :
+    (physicalSymTransferR M K1 K2).map Complex.ofRealHom * epsProjPlus M
+      = VPlusOfTransfer M K1 K2 * epsProjPlus M := by
   rw [← physicalSymTransferC_eq_map K1 K2]
   let B : TensorPow M := physicalV1halfC M K1
-  let C : TensorPow M := V1pmHalf M (K1 : ℂ) (-η)
+  let C : TensorPow M := V1plusHalf M (K1 : ℂ)
   let V : TensorPow M := V2 M K2
-  let P : TensorPow M := epsProj M η
-  have hhalf : V1pm M (((K1 / 2 : ℝ) : ℂ)) (-η) = C := by
+  let P : TensorPow M := epsProjPlus M
+  -- `V1_restriction_to_eigenspaces` の右辺の指数の中身は、結合定数 `K_1/2` で `(i/2)K_1H_1^{(+)}`
+  have hhalf : V1plus M (((K1 / 2 : ℝ) : ℂ)) = C := by
     dsimp [C]
-    rw [V1pm, V1pmHalf]
+    rw [V1plus_exponential_representation, V1plusHalf]
     congr 1
     rw [Complex.ofReal_div]
     norm_num
     module
+  -- 任意の `f ∈ 𝓕^{(+)}` について `B f = C f`
+  have hBf : ∀ f : Conf M → ℂ, epsilon M *ᵥ f = f → B *ᵥ f = C *ᵥ f := by
+    intro f hf
+    dsimp [B]
+    rw [physicalV1halfC, ← first_transfer_matrix_pauli_form, ← hhalf]
+    exact V1_restriction_to_eigenspaces hM hf
+  -- `(BP)x = B(Px) = C(Px) = (CP)x`
   have hBP : B * P = C * P := by
-    dsimp [B, P]
-    rw [physicalV1halfC, ← first_transfer_matrix_pauli_form]
-    calc
-      V1 M (K1 / 2) * epsProj M η
-          = V1pm M (((K1 / 2 : ℝ) : ℂ)) (-η) * epsProj M η :=
-            sector_replacement_of_V1 hM hη
-      _ = C * epsProj M η := by rw [hhalf]
-  have hCP : C * P = P * C := by
-    exact (commute_V1pmHalf_epsProj (M := M) (K1 : ℂ) (-η) η).eq
-  have hVP : V * P = P * V := by
-    exact (commute_V2_epsProj (M := M) hK2 η).eq
+    refine Matrix.ext_of_mulVec_single fun i => ?_
+    rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
+    exact hBf _ (epsProjPlus_mulVec_mem _)
+  have hCP : C * P = P * C := (commute_V1plusHalf_epsProjPlus (M := M) (K1 : ℂ)).eq
+  have hVP : V * P = P * V := (commute_V2_epsProjPlus (M := M) hK2).eq
   change B * V * B * P = C * V * C * P
   exact NecSuf.sandwich_mul_proj_eq hBP hCP hVP
 
