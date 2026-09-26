@@ -340,7 +340,7 @@ s_1 s_2^*
         " は以下の同値のすべてに不可欠である）。",
         math(String.raw`\mu \in \mathcal{M}`),
         " について、",
-        math(String.raw`\gamma_2(\theta) := i e^{i\theta} s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2)`),
+        math(String.raw`\gamma_2(\theta) := i \exp(i\theta) s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2)`),
         "（",
         ref("def_A_theta"),
         " の ",
@@ -458,18 +458,18 @@ s_2^* = \sinh 2K_2^* > 0`,
       ]),
       paragraph([
         "Step 1: 因子 ",
-        math(String.raw`i\,e^{i\theta_\mu} s_2^*`),
+        math(String.raw`i\,\exp(i\theta_\mu) s_2^*`),
         " が ",
         math(String.raw`\mathbb{C}^\times`),
         " に属すること。準備として 3 つの因子の絶対値を確かめる。",
         ref("euler_formula_cos_sin"),
         " より ",
-        math(String.raw`e^{i\theta_\mu} = \cos\theta_\mu + i\sin\theta_\mu`),
+        math(String.raw`\exp(i\theta_\mu) = \cos\theta_\mu + i\sin\theta_\mu`),
         " であるから、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left|e^{i\theta_\mu}\right|^2
+\left|\exp(i\theta_\mu)\right|^2
 &= (\cos\theta_\mu)^2 + (\sin\theta_\mu)^2
 && (\because\ \text{絶対値の基本性質 (2)})\\
 &= 1
@@ -478,7 +478,7 @@ s_2^* = \sinh 2K_2^* > 0`,
       ),
       paragraph([
         "すなわち ",
-        math(String.raw`|e^{i\theta_\mu}| = 1`),
+        math(String.raw`|\exp(i\theta_\mu)| = 1`),
         "（絶対値は非負なので平方が 1 なら値も 1）。同様に ",
         math(String.raw`|i| = 1`),
         " であり、",
@@ -491,13 +491,13 @@ s_2^* = \sinh 2K_2^* > 0`,
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left|i\,e^{i\theta_\mu} s_2^*\right|
-&= |i|\,\left|e^{i\theta_\mu}\right|\,\left|s_2^*\right|
+\left|i\,\exp(i\theta_\mu) s_2^*\right|
+&= |i|\,\left|\exp(i\theta_\mu)\right|\,\left|s_2^*\right|
 && (\because\ \text{絶対値の乗法性。絶対値の基本性質 (4)})\\
-&= 1\cdot\left|e^{i\theta_\mu}\right|\,\left|s_2^*\right|
+&= 1\cdot\left|\exp(i\theta_\mu)\right|\,\left|s_2^*\right|
 && (\because\ |i| = 1)\\
 &= 1\cdot 1\cdot\left|s_2^*\right|
-&& (\because\ \left|e^{i\theta_\mu}\right| = 1)\\
+&& (\because\ \left|\exp(i\theta_\mu)\right| = 1)\\
 &= 1\cdot 1\cdot s_2^*
 && (\because\ |s_2^*| = s_2^*)\\
 &= s_2^*
@@ -510,14 +510,14 @@ s_2^* = \sinh 2K_2^* > 0`,
         "であり、",
         ref("abs_basic_properties"),
         " (3) より ",
-        math(String.raw`i\,e^{i\theta_\mu} s_2^* \neq 0_{\mathbb{C}}`),
+        math(String.raw`i\,\exp(i\theta_\mu) s_2^* \neq 0_{\mathbb{C}}`),
         "。",
       ]),
       paragraph([
         "Step 2: 第 1 の同値。",
         math(String.raw`w_\mu := c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2 \in \mathbb{C}`),
         " とおくと ",
-        math(String.raw`\gamma_2(\theta_\mu) = (i\,e^{i\theta_\mu} s_2^*)\,w_\mu`),
+        math(String.raw`\gamma_2(\theta_\mu) = (i\,\exp(i\theta_\mu) s_2^*)\,w_\mu`),
         "。",
         math(String.raw`\mathbb{C}`),
         " は体（",
@@ -528,8 +528,8 @@ s_2^* = \sinh 2K_2^* > 0`,
       ]),
       displayMath(String.raw`\begin{aligned}
 \gamma_2(\theta_\mu)=0_{\mathbb{C}}
-&\iff \bigl(i\,e^{i\theta_\mu}s_2^*\bigr)w_\mu=0_{\mathbb{C}}
-&& (\because\ \gamma_2(\theta_\mu)=\bigl(i\,e^{i\theta_\mu}s_2^*\bigr)w_\mu)\\
+&\iff \bigl(i\,\exp(i\theta_\mu)s_2^*\bigr)w_\mu=0_{\mathbb{C}}
+&& (\because\ \gamma_2(\theta_\mu)=\bigl(i\,\exp(i\theta_\mu)s_2^*\bigr)w_\mu)\\
 &\iff w_\mu=0_{\mathbb{C}}
 && (\because\ \mathbb{C}\ \text{は整域であり、Step 1 より第 1 因子は零元でない})
 \end{aligned}`),
@@ -863,12 +863,12 @@ c_2 s_1 = c_1\cos\theta_\mu
     proof: [
       displayMath(String.raw`\begin{aligned}
 \gamma_2(-\theta_\mu)
-&=i\,e^{-i\theta_\mu}s_2^*\bigl(c_1\cos\theta_\mu+i\sin\theta_\mu-s_1c_2\bigr)
+&=i\,\exp(-i\theta_\mu)s_2^*\bigl(c_1\cos\theta_\mu+i\sin\theta_\mu-s_1c_2\bigr)
 &&(\because\ \blkref{def_A_theta}\ \text{の}\ \gamma_2\ \text{の定義と}\ \cos(-\theta)=\cos\theta,\ \sin(-\theta)=-\sin\theta)\\
-&=-\Bigl((-i)e^{-i\theta_\mu}s_2^*\bigl(c_1\cos\theta_\mu+i\sin\theta_\mu-s_1c_2\bigr)\Bigr)
+&=-\Bigl((-i)\exp(-i\theta_\mu)s_2^*\bigl(c_1\cos\theta_\mu+i\sin\theta_\mu-s_1c_2\bigr)\Bigr)
 &&(\because\ -(-i)=i)\\
-&=-\overline{i\,e^{i\theta_\mu}s_2^*\bigl(c_1\cos\theta_\mu-i\sin\theta_\mu-s_1c_2\bigr)}
-&&(\because\ \text{複素共役は積を保ち、実数を固定し、}\ \overline{i}=-i,\ \overline{e^{i\theta_\mu}}=e^{-i\theta_\mu})\\
+&=-\overline{i\,\exp(i\theta_\mu)s_2^*\bigl(c_1\cos\theta_\mu-i\sin\theta_\mu-s_1c_2\bigr)}
+&&(\because\ \text{複素共役は積を保ち、実数を固定し、}\ \overline{i}=-i,\ \overline{\exp(i\theta_\mu)}=\exp(-i\theta_\mu))\\
 &=-\overline{\gamma_2(\theta_\mu)}
 &&(\because\ \blkref{def_A_theta}\ \text{の}\ \gamma_2\ \text{の定義})
 \end{aligned}`),
@@ -922,18 +922,18 @@ c_2 s_1 = c_1\cos\theta_\mu
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
-&= \left(i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,e^{-i\theta_\mu}s_2^*(c_1\cos(-\theta_\mu) - i\sin(-\theta_\mu) - s_1 c_2)\right)
+&= \left(i\,\exp(i\theta_\mu)s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,\exp(-i\theta_\mu)s_2^*(c_1\cos(-\theta_\mu) - i\sin(-\theta_\mu) - s_1 c_2)\right)
 &&(\because\ \blkref{def_A_theta}\ \text{の}\ \gamma_2\ \text{の定義})\\
-&= \left(i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,e^{-i\theta_\mu}s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)\right)
+&= \left(i\,\exp(i\theta_\mu)s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right)\left(i\,\exp(-i\theta_\mu)s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)\right)
 &&(\because\ \cos\ \text{は偶関数、}\sin\ \text{は奇関数})\\
-&= (i\cdot i)\left(e^{i\theta_\mu}e^{-i\theta_\mu}\right)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
+&= (i\cdot i)\left(\exp(i\theta_\mu)\exp(-i\theta_\mu)\right)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
 &&(\because\ \mathbb{C}\ \text{の積の可換性と結合則で因子を並べ替えた})\\
-&= (-1)\left(e^{i\theta_\mu + i(-\theta_\mu)}\right)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
+&= (-1)\left(\exp(i\theta_\mu + i(-\theta_\mu))\right)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
 &&(\because\ i\cdot i=-1\ \text{と指数法則})\\
-&= (-1)(e^0)(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
+&= (-1)(\exp(0))(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
 &&(\because\ i\theta_\mu + i(-\theta_\mu)=0)\\
 &= -(s_2^*)^2(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)
-&&(\because\ e^0=1)\\
+&&(\because\ \exp(0)=1)\\
 &= -(s_2^*)^2\left((c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2\right)
 &&(\because\ (a-ib)(a+ib)=a^2+b^2\ \text{を}\ a=c_1\cos\theta_\mu - s_1 c_2,\ b=\sin\theta_\mu\ \text{へ当てた})\\
 &= -(s_2^*)^2\left((c_1\cos\tfrac{2\pi\mu}{M} - s_1 c_2)^2 + (\sin\tfrac{2\pi\mu}{M})^2\right)
@@ -952,10 +952,10 @@ c_2 s_1 = c_1\cos\theta_\mu
       displayMath(
         String.raw`\begin{aligned}
 |\gamma_2(\theta_\mu)|^2
-&= \left|i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right|^2
+&= \left|i\,\exp(i\theta_\mu)s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)\right|^2
 &&(\because\ \blkref{def_A_theta}\ \text{の}\ \gamma_2\ \text{の定義})\\
 &= (s_2^*)^2\left((c_1\cos\theta_\mu - s_1 c_2)^2 + (\sin\theta_\mu)^2\right)
-&&(\because\ |i| = |e^{i\theta_\mu}| = 1\ \text{と、絶対値は積を保つこと})
+&&(\because\ |i| = |\exp(i\theta_\mu)| = 1\ \text{と、絶対値は積を保つこと})
 \end{aligned}`,
       ),
       paragraph([
@@ -1350,7 +1350,7 @@ c_2 s_1 = c_1\cos\theta_\mu
         " 自身の書き下し。",
         math(String.raw`w_\mu := c_1\cos\theta_\mu - s_1 c_2 - i\sin\theta_\mu \in \mathbb{C}`),
         " とおくと ",
-        math(String.raw`\gamma_2(\theta_\mu) = i\,e^{i\theta_\mu} s_2^*\,w_\mu`),
+        math(String.raw`\gamma_2(\theta_\mu) = i\,\exp(i\theta_\mu) s_2^*\,w_\mu`),
         " であり、",
         math(String.raw`\gamma_2(\theta_\mu) \neq 0`),
         " より ",
@@ -1362,7 +1362,7 @@ c_2 s_1 = c_1\cos\theta_\mu
       displayMath(
         String.raw`\phi_{\mathrm{polar}}(i) = \left[\left(1,\ \tfrac{\pi}{2}\right)\right]_{\sim},
 \qquad
-\phi_{\mathrm{polar}}\!\left(e^{i\theta_\mu}\right) = [(1,\ \theta_\mu)]_{\sim},
+\phi_{\mathrm{polar}}\!\left(\exp(i\theta_\mu)\right) = [(1,\ \theta_\mu)]_{\sim},
 \qquad
 \phi_{\mathrm{polar}}(s_2^*) = [(s_2^*,\ 0)]_{\sim}`,
       ),
@@ -1387,7 +1387,7 @@ c_2 s_1 = c_1\cos\theta_\mu
 \phi_{\mathrm{cartesian}}([(1,\ \theta_\mu)]_{\sim})
 &= (\cos\theta_\mu,\ \sin\theta_\mu)
 &&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義}) \\
-&= e^{i\theta_\mu}
+&= \exp(i\theta_\mu)
 &&(\because\ \text{Euler の公式})
 \end{aligned}`,
       ),
@@ -1473,15 +1473,15 @@ c_2 s_1 = c_1\cos\theta_\mu
       displayMath(
         String.raw`A(\theta_\mu) :=
 \begin{pmatrix}
-c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2) \\
--i e^{-i\theta_\mu} s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2) & c_1 c_2^* - s_1 s_2^*\cos\theta_\mu
+c_1 c_2^* - s_1 s_2^*\cos\theta_\mu & i \exp(i\theta_\mu) s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2) \\
+-i \exp(-i\theta_\mu) s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2) & c_1 c_2^* - s_1 s_2^*\cos\theta_\mu
 \end{pmatrix}`,
       ),
       paragraph([
         "において ",
         math(String.raw`\gamma_1(\theta_\mu) := c_1 c_2^* - s_1 s_2^*\cos\theta_\mu`),
         "、",
-        math(String.raw`\gamma_2(\theta_\mu) := i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)`),
+        math(String.raw`\gamma_2(\theta_\mu) := i \exp(i\theta_\mu) s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)`),
         " とおくと、",
       ]),
       displayMath(
@@ -1937,7 +1937,7 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
       ),
       displayMath(
         String.raw`a(\theta_\mu)
-:= \sqrt{\frac{(1 - \alpha_1 e^{i\theta_\mu})(1 - \alpha_2^{-1} e^{i\theta_\mu})}{(1 - \alpha_1 e^{-i\theta_\mu})(1 - \alpha_2^{-1} e^{-i\theta_\mu})}}`,
+:= \sqrt{\frac{(1 - \alpha_1 \exp(i\theta_\mu))(1 - \alpha_2^{-1} \exp(i\theta_\mu))}{(1 - \alpha_1 \exp(-i\theta_\mu))(1 - \alpha_2^{-1} \exp(-i\theta_\mu))}}`,
       ),
       paragraph(["と定めるとき、"]),
       displayMath(
@@ -2184,11 +2184,11 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
       displayMath(
         String.raw`\begin{aligned}
 \frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
-&= \frac{i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{i\,e^{-i\theta_\mu}s_2^*(c_1\cos(-\theta_\mu) - i\sin(-\theta_\mu) - s_1 c_2)}
+&= \frac{i\,\exp(i\theta_\mu)s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{i\,\exp(-i\theta_\mu)s_2^*(c_1\cos(-\theta_\mu) - i\sin(-\theta_\mu) - s_1 c_2)}
 && (\because\ \gamma_2\ \text{の定義を分子と分母へ代入}) \\
-&= \frac{i\,e^{i\theta_\mu}s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{i\,e^{-i\theta_\mu}s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)}
+&= \frac{i\,\exp(i\theta_\mu)s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{i\,\exp(-i\theta_\mu)s_2^*(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)}
 && (\because\ \cos(-\theta_\mu)=\cos\theta_\mu\ \text{かつ}\ \sin(-\theta_\mu)=-\sin\theta_\mu) \\
-&= \frac{e^{i\theta_\mu}(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{e^{-i\theta_\mu}(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)}
+&= \frac{\exp(i\theta_\mu)(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2)}{\exp(-i\theta_\mu)(c_1\cos\theta_\mu + i\sin\theta_\mu - s_1 c_2)}
 && (\because\ i\,s_2^*\ne0\ \text{なので分子と分母の共通因子を約分})
 \end{aligned}`,
       ),
@@ -2196,62 +2196,62 @@ A(\theta_\mu)\,P_\mu = P_\mu D_\mu`,
         "Step 12: ",
         ref("euler_formula_cos_sin"),
         " より ",
-        math(String.raw`\cos\theta_\mu = \dfrac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2}`),
+        math(String.raw`\cos\theta_\mu = \dfrac{\exp(i\theta_\mu) + \exp(-i\theta_\mu)}{2}`),
         "、",
-        math(String.raw`\sin\theta_\mu = \dfrac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2i}`),
+        math(String.raw`\sin\theta_\mu = \dfrac{\exp(i\theta_\mu) - \exp(-i\theta_\mu)}{2i}`),
         " を用いると、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 c_1\cos\theta_\mu - i\sin\theta_\mu
-&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} - i\cdot\frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2i}
+&= c_1\frac{\exp(i\theta_\mu) + \exp(-i\theta_\mu)}{2} - i\cdot\frac{\exp(i\theta_\mu) - \exp(-i\theta_\mu)}{2i}
 && (\because\ \text{「$\cos,\sin$ の Euler 表示」の }\cos\theta_\mu\text{ と }\sin\theta_\mu\text{ の表式を代入}) \\
-&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} - \frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2}
+&= c_1\frac{\exp(i\theta_\mu) + \exp(-i\theta_\mu)}{2} - \frac{\exp(i\theta_\mu) - \exp(-i\theta_\mu)}{2}
 && (\because\ i\cdot\tfrac{1}{2i}=\tfrac{1}{2}\text{。共通因子}\ i\ne0\ \text{の約分}) \\
-&= \frac{(c_1 - 1)e^{i\theta_\mu} + (c_1 + 1)e^{-i\theta_\mu}}{2}
-&& (\because\ \text{分配則で}\ e^{i\theta_\mu},\ e^{-i\theta_\mu}\ \text{の係数をまとめる})
+&= \frac{(c_1 - 1)\exp(i\theta_\mu) + (c_1 + 1)\exp(-i\theta_\mu)}{2}
+&& (\because\ \text{分配則で}\ \exp(i\theta_\mu),\ \exp(-i\theta_\mu)\ \text{の係数をまとめる})
 \end{aligned}`,
       ),
       paragraph(["もう 1 本も同じ 3 段で計算する。"]),
       displayMath(
         String.raw`\begin{aligned}
 c_1\cos\theta_\mu + i\sin\theta_\mu
-&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} + i\cdot\frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2i}
+&= c_1\frac{\exp(i\theta_\mu) + \exp(-i\theta_\mu)}{2} + i\cdot\frac{\exp(i\theta_\mu) - \exp(-i\theta_\mu)}{2i}
 && (\because\ \text{「$\cos,\sin$ の Euler 表示」の }\cos\theta_\mu\text{ と }\sin\theta_\mu\text{ の表式を代入}) \\
-&= c_1\frac{e^{i\theta_\mu} + e^{-i\theta_\mu}}{2} + \frac{e^{i\theta_\mu} - e^{-i\theta_\mu}}{2}
+&= c_1\frac{\exp(i\theta_\mu) + \exp(-i\theta_\mu)}{2} + \frac{\exp(i\theta_\mu) - \exp(-i\theta_\mu)}{2}
 && (\because\ i\cdot\tfrac{1}{2i}=\tfrac{1}{2}\text{。共通因子}\ i\ne0\ \text{の約分}) \\
-&= \frac{(c_1 + 1)e^{i\theta_\mu} + (c_1 - 1)e^{-i\theta_\mu}}{2}
-&& (\because\ \text{分配則で}\ e^{i\theta_\mu},\ e^{-i\theta_\mu}\ \text{の係数をまとめる})
+&= \frac{(c_1 + 1)\exp(i\theta_\mu) + (c_1 - 1)\exp(-i\theta_\mu)}{2}
+&& (\because\ \text{分配則で}\ \exp(i\theta_\mu),\ \exp(-i\theta_\mu)\ \text{の係数をまとめる})
 \end{aligned}`,
       ),
       paragraph(["Step 13: 分子分母へ代入し整理すると、"]),
       displayMath(
         String.raw`\begin{aligned}
 \frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
-&= \frac{e^{i\theta_\mu}\left(\dfrac{(c_1 - 1)e^{i\theta_\mu} + (c_1 + 1)e^{-i\theta_\mu}}{2} - s_1 c_2\right)}{e^{-i\theta_\mu}\left(\dfrac{(c_1 + 1)e^{i\theta_\mu} + (c_1 - 1)e^{-i\theta_\mu}}{2} - s_1 c_2\right)}
+&= \frac{\exp(i\theta_\mu)\left(\dfrac{(c_1 - 1)\exp(i\theta_\mu) + (c_1 + 1)\exp(-i\theta_\mu)}{2} - s_1 c_2\right)}{\exp(-i\theta_\mu)\left(\dfrac{(c_1 + 1)\exp(i\theta_\mu) + (c_1 - 1)\exp(-i\theta_\mu)}{2} - s_1 c_2\right)}
 && (\because\ \text{Steps 9--11 の比へ Step 12 の 2 つの計算結果を代入}) \\
-&= \frac{e^{i\theta_\mu}\left((c_1 - 1)e^{i\theta_\mu} + (c_1 + 1)e^{-i\theta_\mu} - 2 s_1 c_2\right)}{e^{-i\theta_\mu}\left((c_1 + 1)e^{i\theta_\mu} + (c_1 - 1)e^{-i\theta_\mu} - 2 s_1 c_2\right)}
+&= \frac{\exp(i\theta_\mu)\left((c_1 - 1)\exp(i\theta_\mu) + (c_1 + 1)\exp(-i\theta_\mu) - 2 s_1 c_2\right)}{\exp(-i\theta_\mu)\left((c_1 + 1)\exp(i\theta_\mu) + (c_1 - 1)\exp(-i\theta_\mu) - 2 s_1 c_2\right)}
 && (\because\ \text{分子と分母の括弧内を共通分母 }2\text{ へ通分し、共通因子 }\tfrac12\text{ を約分}) \\
-&= \frac{(c_1 - 1)e^{2i\theta_\mu} + (c_1 + 1) - 2 s_1 c_2\, e^{i\theta_\mu}}{(c_1 + 1) + (c_1 - 1)e^{-2i\theta_\mu} - 2 s_1 c_2\, e^{-i\theta_\mu}}
-&& (\because\ \text{分配則と }e^{i\theta_\mu}e^{-i\theta_\mu}=e^{-i\theta_\mu}e^{i\theta_\mu}=1)
+&= \frac{(c_1 - 1)\exp(2i\theta_\mu) + (c_1 + 1) - 2 s_1 c_2\, \exp(i\theta_\mu)}{(c_1 + 1) + (c_1 - 1)\exp(-2i\theta_\mu) - 2 s_1 c_2\, \exp(-i\theta_\mu)}
+&& (\because\ \text{分配則と }\exp(i\theta_\mu)\exp(-i\theta_\mu)=\exp(-i\theta_\mu)\exp(i\theta_\mu)=1)
 \end{aligned}`,
       ),
       paragraph([
         "Step 14: ",
-        math(String.raw`x := e^{i\theta_\mu}`),
+        math(String.raw`x := \exp(i\theta_\mu)`),
         " とおく（",
-        math(String.raw`x\,e^{-i\theta_\mu} = e^{i\theta_\mu}e^{-i\theta_\mu} = 1`),
+        math(String.raw`x\,\exp(-i\theta_\mu) = \exp(i\theta_\mu)\exp(-i\theta_\mu) = 1`),
         " より ",
         math(String.raw`x \neq 0`),
         " であり、",
-        math(String.raw`x^{-1} = e^{-i\theta_\mu}`),
+        math(String.raw`x^{-1} = \exp(-i\theta_\mu)`),
         "）。Step 13 の分子を書き直す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(c_1 - 1)e^{2i\theta_\mu} + (c_1 + 1) - 2 s_1 c_2\, e^{i\theta_\mu}
+(c_1 - 1)\exp(2i\theta_\mu) + (c_1 + 1) - 2 s_1 c_2\, \exp(i\theta_\mu)
 &= (c_1 - 1)x^2 - 2 s_1 c_2\, x + (c_1 + 1)
-&& (\because\ x\ \text{の定義と指数法則}\ e^{2i\theta_\mu}=(e^{i\theta_\mu})^2\text{。項を}\ x\ \text{の降冪に並べ替え}) \\
+&& (\because\ x\ \text{の定義と指数法則}\ \exp(2i\theta_\mu)=(\exp(i\theta_\mu))^2\text{。項を}\ x\ \text{の降冪に並べ替え}) \\
 &= (c_1 + 1)\left(\frac{c_1 - 1}{c_1 + 1}x^2 - \frac{2 s_1 c_2}{c_1 + 1}x + 1\right)
 && (\because\ c_1 > 0\ \text{より}\ c_1 + 1 \neq 0\text{。各項を}\ (c_1+1)\cdot\tfrac{\text{係数}}{c_1+1}\ \text{と書き、分配則でくくる})
 \end{aligned}`,
@@ -2259,9 +2259,9 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       paragraph(["分母も同じ 2 段で書き直す。"]),
       displayMath(
         String.raw`\begin{aligned}
-(c_1 + 1) + (c_1 - 1)e^{-2i\theta_\mu} - 2 s_1 c_2\, e^{-i\theta_\mu}
+(c_1 + 1) + (c_1 - 1)\exp(-2i\theta_\mu) - 2 s_1 c_2\, \exp(-i\theta_\mu)
 &= (c_1 - 1)x^{-2} - 2 s_1 c_2\, x^{-1} + (c_1 + 1)
-&& (\because\ x^{-1} = e^{-i\theta_\mu}\ \text{と指数法則}\ e^{-2i\theta_\mu}=(e^{-i\theta_\mu})^2\text{。項を}\ x^{-1}\ \text{の降冪に並べ替え}) \\
+&& (\because\ x^{-1} = \exp(-i\theta_\mu)\ \text{と指数法則}\ \exp(-2i\theta_\mu)=(\exp(-i\theta_\mu))^2\text{。項を}\ x^{-1}\ \text{の降冪に並べ替え}) \\
 &= (c_1 + 1)\left(\frac{c_1 - 1}{c_1 + 1}x^{-2} - \frac{2 s_1 c_2}{c_1 + 1}x^{-1} + 1\right)
 && (\because\ c_1 > 0\ \text{より}\ c_1 + 1 \neq 0\text{。各項を}\ (c_1+1)\cdot\tfrac{\text{係数}}{c_1+1}\ \text{と書き、分配則でくくる})
 \end{aligned}`,
@@ -2339,16 +2339,16 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       paragraph([
         math(String.raw`K_2^* = -\tfrac{1}{2}\log(\tanh K_2)`),
         " すなわち ",
-        math(String.raw`e^{-2K_2^*} = \tanh K_2`),
+        math(String.raw`\exp(-2K_2^*) = \tanh K_2`),
         " より、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sinh 2K_2^*
-&= \frac{e^{2K_2^*} - e^{-2K_2^*}}{2}
+&= \frac{\exp(2K_2^*) - \exp(-2K_2^*)}{2}
 && (\because\ \sinh\ \text{の定義}) \\
 &= \frac{(\tanh K_2)^{-1} - \tanh K_2}{2}
-&& (\because\ e^{-2K_2^*} = \tanh K_2\ \text{と、その逆数}\ e^{2K_2^*} = (\tanh K_2)^{-1}) \\
+&& (\because\ \exp(-2K_2^*) = \tanh K_2\ \text{と、その逆数}\ \exp(2K_2^*) = (\tanh K_2)^{-1}) \\
 &= \frac{\dfrac{\cosh K_2}{\sinh K_2} - \dfrac{\sinh K_2}{\cosh K_2}}{2}
 && (\because\ \tanh\ \text{の定義と、分数の逆数}) \\
 &= \frac{\cosh^2 K_2 - \sinh^2 K_2}{2\sinh K_2\cosh K_2}
@@ -2362,10 +2362,10 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       displayMath(
         String.raw`\begin{aligned}
 \cosh 2K_2^*
-&= \frac{e^{2K_2^*} + e^{-2K_2^*}}{2}
+&= \frac{\exp(2K_2^*) + \exp(-2K_2^*)}{2}
 && (\because\ \cosh\ \text{の定義}) \\
 &= \frac{(\tanh K_2)^{-1} + \tanh K_2}{2}
-&& (\because\ e^{-2K_2^*} = \tanh K_2\ \text{と、その逆数}\ e^{2K_2^*} = (\tanh K_2)^{-1}) \\
+&& (\because\ \exp(-2K_2^*) = \tanh K_2\ \text{と、その逆数}\ \exp(2K_2^*) = (\tanh K_2)^{-1}) \\
 &= \frac{\dfrac{\cosh K_2}{\sinh K_2} + \dfrac{\sinh K_2}{\cosh K_2}}{2}
 && (\because\ \tanh\ \text{の定義と、分数の逆数}) \\
 &= \frac{\cosh^2 K_2 + \sinh^2 K_2}{2\sinh K_2\cosh K_2}
@@ -2441,9 +2441,9 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       ),
       paragraph([
         "これは Step 14 の分子と一致する（",
-        math(String.raw`x = e^{i\theta_\mu}`),
+        math(String.raw`x = \exp(i\theta_\mu)`),
         "）。同様に ",
-        math(String.raw`y := e^{-i\theta_\mu} = x^{-1}`),
+        math(String.raw`y := \exp(-i\theta_\mu) = x^{-1}`),
         " とおくと ",
         math(String.raw`(c_1 + 1)(1 - \alpha_1 y)(1 - \alpha_2^{-1}y) = (c_1 + 1) - 2 s_1 c_2 y + (c_1 - 1)y^2`),
         " が Step 14 の分母と一致する。",
@@ -2452,9 +2452,9 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       displayMath(
         String.raw`\begin{aligned}
 \frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}
-&=\frac{(c_1+1)(1-\alpha_1e^{i\theta_\mu})(1-\alpha_2^{-1}e^{i\theta_\mu})}{(c_1+1)(1-\alpha_1e^{-i\theta_\mu})(1-\alpha_2^{-1}e^{-i\theta_\mu})}
+&=\frac{(c_1+1)(1-\alpha_1\exp(i\theta_\mu))(1-\alpha_2^{-1}\exp(i\theta_\mu))}{(c_1+1)(1-\alpha_1\exp(-i\theta_\mu))(1-\alpha_2^{-1}\exp(-i\theta_\mu))}
 && (\because\ \text{Step 14 と Step 17}) \\
-&=\frac{(1-\alpha_1e^{i\theta_\mu})(1-\alpha_2^{-1}e^{i\theta_\mu})}{(1-\alpha_1e^{-i\theta_\mu})(1-\alpha_2^{-1}e^{-i\theta_\mu})}
+&=\frac{(1-\alpha_1\exp(i\theta_\mu))(1-\alpha_2^{-1}\exp(i\theta_\mu))}{(1-\alpha_1\exp(-i\theta_\mu))(1-\alpha_2^{-1}\exp(-i\theta_\mu))}
 && (\because\ c_1+1\ne0\ \text{による約分})
 \end{aligned}`,
       ),
@@ -2462,7 +2462,7 @@ c_1\cos\theta_\mu + i\sin\theta_\mu
       displayMath(
         String.raw`\begin{aligned}
 a(\theta_\mu)
-&=\sqrt{\frac{(1-\alpha_1e^{i\theta_\mu})(1-\alpha_2^{-1}e^{i\theta_\mu})}{(1-\alpha_1e^{-i\theta_\mu})(1-\alpha_2^{-1}e^{-i\theta_\mu})}}
+&=\sqrt{\frac{(1-\alpha_1\exp(i\theta_\mu))(1-\alpha_2^{-1}\exp(i\theta_\mu))}{(1-\alpha_1\exp(-i\theta_\mu))(1-\alpha_2^{-1}\exp(-i\theta_\mu))}}
 && (\because\ a(\theta_\mu)\ \text{の定義}) \\
 &=\sqrt{\frac{\gamma_2(\theta_\mu)}{\gamma_2(-\theta_\mu)}}
 && (\because\ \text{上の計算})
@@ -2750,23 +2750,23 @@ T_{(V)}\!\begin{pmatrix} \psi_\mu^\dagger & \psi_\mu \end{pmatrix}
         " であり、",
         ref("euler_formula_cos_sin"),
         " の Euler の公式 ",
-        math(String.raw`e^{i\theta} = \cos\theta + i\sin\theta`),
+        math(String.raw`\exp(i\theta) = \cos\theta + i\sin\theta`),
         " より ",
-        math(String.raw`e^{i(\theta + 2k\pi)} = e^{i\theta}`),
+        math(String.raw`\exp(i(\theta + 2k\pi)) = \exp(i\theta)`),
         "。",
-        math(String.raw`\gamma_2(\theta) = i e^{i\theta} s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2)`),
+        math(String.raw`\gamma_2(\theta) = i \exp(i\theta) s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2)`),
         " は ",
-        math(String.raw`e^{i\theta}, \cos\theta, \sin\theta`),
+        math(String.raw`\exp(i\theta), \cos\theta, \sin\theta`),
         " のみを通じて ",
         math(String.raw`\theta`),
         " に依存するから、",
       ]),
       displayMath(String.raw`\begin{aligned}
 \gamma_2(\theta+2k\pi)
-&=i e^{i(\theta+2k\pi)}s_2^*\bigl(c_1\cos(\theta+2k\pi)-i\sin(\theta+2k\pi)-s_1c_2\bigr)
+&=i \exp(i(\theta+2k\pi))s_2^*\bigl(c_1\cos(\theta+2k\pi)-i\sin(\theta+2k\pi)-s_1c_2\bigr)
 && (\because\ \gamma_2\ \text{の定義})\\
-&=i e^{i\theta}s_2^*\bigl(c_1\cos\theta-i\sin\theta-s_1c_2\bigr)
-&& (\because\ e^{i\theta},\cos\theta,\sin\theta\ \text{の}\ 2\pi\ \text{周期性})\\
+&=i \exp(i\theta)s_2^*\bigl(c_1\cos\theta-i\sin\theta-s_1c_2\bigr)
+&& (\because\ \exp(i\theta),\cos\theta,\sin\theta\ \text{の}\ 2\pi\ \text{周期性})\\
 &=\gamma_2(\theta)
 && (\because\ \gamma_2\ \text{の定義})
 \end{aligned}`),
@@ -3255,9 +3255,9 @@ c_\mu c_\nu
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\gamma_2(\theta_\mu) &= i\,e^{i\theta_\mu}\,s_2^*\bigl((c_1 u - s_1 c_2) - i v\bigr)
+\gamma_2(\theta_\mu) &= i\,\exp(i\theta_\mu)\,s_2^*\bigl((c_1 u - s_1 c_2) - i v\bigr)
 &&\left(\because\ \text{\(\gamma_2\) の定義と \(u,v\) の略記}\right)\\
-\gamma_2(-\theta_\mu) &= i\,e^{-i\theta_\mu}\,s_2^*\bigl((c_1 u - s_1 c_2) + i v\bigr)
+\gamma_2(-\theta_\mu) &= i\,\exp(-i\theta_\mu)\,s_2^*\bigl((c_1 u - s_1 c_2) + i v\bigr)
 &&\left(\because\ \cos(-\theta_\mu)=u,\ \sin(-\theta_\mu)=-v\right)
 \end{aligned}`,
       ),
@@ -3269,7 +3269,7 @@ c_\mu c_\nu
         " を代入した。）",
         math(String.raw`i \cdot i = -1`),
         " と ",
-        math(String.raw`e^{i\theta_\mu}e^{-i\theta_\mu} = e^{0} = 1`),
+        math(String.raw`\exp(i\theta_\mu)\exp(-i\theta_\mu) = \exp(0) = 1`),
         "、および ",
         math(String.raw`(a - iv)(a + iv) = a^2 + v^2`),
         "（",
@@ -3279,14 +3279,14 @@ c_\mu c_\nu
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(\theta_\mu)\,\gamma_2(-\theta_\mu)
-&=i^2e^{i\theta_\mu}e^{-i\theta_\mu}(s_2^*)^2
+&=i^2\exp(i\theta_\mu)\exp(-i\theta_\mu)(s_2^*)^2
   \bigl((c_1u-s_1c_2)-iv\bigr)\bigl((c_1u-s_1c_2)+iv\bigr)
 &&\left(\because\ \text{直前の 2 式の代入と積の結合則}\right)\\
-&=-e^0(s_2^*)^2
+&=-\exp(0)(s_2^*)^2
   \bigl((c_1u-s_1c_2)-iv\bigr)\bigl((c_1u-s_1c_2)+iv\bigr)
-&&\left(\because\ i^2=-1,\ e^{i\theta_\mu}e^{-i\theta_\mu}=e^0\right)\\
+&&\left(\because\ i^2=-1,\ \exp(i\theta_\mu)\exp(-i\theta_\mu)=\exp(0)\right)\\
 &=-(s_2^*)^2\Bigl((c_1u-s_1c_2)^2-(iv)^2\Bigr)
-&&\left(\because\ e^0=1,\ (a-b)(a+b)=a^2-b^2\right)\\
+&&\left(\because\ \exp(0)=1,\ (a-b)(a+b)=a^2-b^2\right)\\
 &=-(s_2^*)^2\Bigl((c_1u-s_1c_2)^2+v^2\Bigr)
 &&\left(\because\ (iv)^2=-v^2\right)\\
 &=-(s_2^*)^2\Bigl((c_1u-s_1c_2)^2+1-u^2\Bigr)
@@ -3508,7 +3508,7 @@ s_1^2 c_2^2 (s_2^*)^2
     title: { tex: String.raw`\gamma(\theta_\mu) \text{ の定義}` },
     labels: ["def_gamma_theta_mu"],
     statement: [
-      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、", math(String.raw`\gamma_1(\theta_\mu) \geq 1`), " より well-defined であり、"]),
+      paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、", math(String.raw`\gamma_1(\theta_\mu) \geq 1`), " より ", ref("def_arccosh"), " の arccosh が適用でき、"]),
       displayMath(
         String.raw`\gamma(\theta_\mu) := \mathrm{arccosh}(\gamma_1(\theta_\mu)) \in \mathbb{R}_{\geq 0}`,
       ),
@@ -3523,12 +3523,12 @@ s_1^2 c_2^2 (s_2^*)^2
       path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ",
       ordinal: 34,
     },
-    title: { tex: String.raw`\lambda_{\pm,\mu} = e^{\pm\gamma(\theta_\mu)}` },
+    title: { tex: String.raw`\lambda_{\pm,\mu} = \exp(\pm\gamma(\theta_\mu))` },
     labels: ["lambda_eq_exp_gamma"],
     statement: [
       paragraph([math(String.raw`\mu \in \mathcal{M}`), " について、"]),
       displayMath(
-        String.raw`\lambda_{+,\mu} = e^{\gamma(\theta_\mu)}, \quad \lambda_{-,\mu} = e^{-\gamma(\theta_\mu)}`,
+        String.raw`\lambda_{+,\mu} = \exp(\gamma(\theta_\mu)), \quad \lambda_{-,\mu} = \exp(-\gamma(\theta_\mu))`,
       ),
     ],
     proof: [
@@ -3560,11 +3560,11 @@ s_1^2 c_2^2 (s_2^*)^2
 \lambda_{+,\mu}&>0,\qquad \lambda_{-,\mu}>0
 &&\bigl(\because\ \lambda_{+,\mu}\lambda_{-,\mu}>0\ \text{かつ}\ \lambda_{+,\mu}+\lambda_{-,\mu}>0\bigr)\\
 \gamma(\theta_\mu)&\geq0
-&&\bigl(\because\ \gamma(\theta_\mu)=\operatorname{arccosh}(\gamma_1(\theta_\mu))\in\mathbb{R}_{\geq0}\bigr)\\
-\lambda_{\pm,\mu}&=e^{\pm\gamma(\theta_\mu)}
+&&\bigl(\because\ \gamma(\theta_\mu)=\operatorname{arccosh}(\gamma_1(\theta_\mu))\ \text{と}\ \blkref{arccosh_properties}\text{ (1)}\bigr)\\
+\lambda_{\pm,\mu}&=\exp(\pm\gamma(\theta_\mu))
 &&\bigl(\because\ \text{正の二固有値を相反する指数として書く}\bigr)\\
 \cosh(\gamma(\theta_\mu))&=\gamma_1(\theta_\mu)
-&&\bigl(\because\ \gamma(\theta_\mu)\ \text{の定義}\bigr)
+&&\bigl(\because\ \gamma(\theta_\mu)\ \text{の定義と}\ \blkref{arccosh_properties}\text{ (2)}\bigr)
 \end{aligned}`),
     ],
     conversion: {
@@ -3638,9 +3638,9 @@ s_1^2 c_2^2 (s_2^*)^2
         " が定義される）、",
       ]),
       displayMath(
-        String.raw`T_{(V')}(\psi_\mu^\dagger) = e^{+\gamma(\theta_\mu)}\psi_\mu^\dagger,
+        String.raw`T_{(V')}(\psi_\mu^\dagger) = \exp(+\gamma(\theta_\mu))\psi_\mu^\dagger,
 \quad
-T_{(V')}(\psi_\mu) = e^{-\gamma(\theta_\mu)}\psi_\mu`,
+T_{(V')}(\psi_\mu) = \exp(-\gamma(\theta_\mu))\psi_\mu`,
       ),
     ],
     proof: [
@@ -3770,7 +3770,7 @@ T_{(V')}(\psi_\mu^\dagger)
         " は ",
         math(String.raw`\theta`),
         " の ",
-        math(String.raw`\cos, \sin, e^{i\theta}`),
+        math(String.raw`\cos, \sin, \exp(i\theta)`),
         " のみに依存するから ",
         math(String.raw`\gamma_2(\theta_\nu) = \gamma_2(\pm\theta_\mu)`),
         "。",
@@ -3816,7 +3816,7 @@ T_{(V')}(\psi_\mu^\dagger)
         " のみ。",
         math(String.raw`\theta_{M-k} = 2\pi - \theta_k`),
         " より ",
-        math(String.raw`e^{i\theta_{M-k}} = e^{-i\theta_k}`),
+        math(String.raw`\exp(i\theta_{M-k}) = \exp(-i\theta_k)`),
         "、",
         math(String.raw`\cos\theta_{M-k} = \cos\theta_k`),
         "、",
@@ -3836,10 +3836,10 @@ T_{(V')}(\psi_\mu^\dagger)
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(\theta_{M-k})
-&= i\,e^{i\theta_{M-k}}s_2^*(c_1\cos\theta_{M-k} - i\sin\theta_{M-k} - s_1 c_2)
+&= i\,\exp(i\theta_{M-k})s_2^*(c_1\cos\theta_{M-k} - i\sin\theta_{M-k} - s_1 c_2)
 &&(\because\ \gamma_2\ \text{の定義})\\
-&= i\,e^{-i\theta_k}s_2^*(c_1\cos\theta_k + i\sin\theta_k - s_1 c_2)
-&&(\because\ e^{i\theta_{M-k}} = e^{-i\theta_k},\ \cos\theta_{M-k} = \cos\theta_k,\ \sin\theta_{M-k} = -\sin\theta_k)\\
+&= i\,\exp(-i\theta_k)s_2^*(c_1\cos\theta_k + i\sin\theta_k - s_1 c_2)
+&&(\because\ \exp(i\theta_{M-k}) = \exp(-i\theta_k),\ \cos\theta_{M-k} = \cos\theta_k,\ \sin\theta_{M-k} = -\sin\theta_k)\\
 &= \gamma_2(-\theta_k)
 &&(\because\ \gamma_2\ \text{の定義に}\ -\theta_k\ \text{を代入した形})\\
 &= \gamma_2(\theta_{-k})
@@ -3849,10 +3849,10 @@ T_{(V')}(\psi_\mu^\dagger)
       displayMath(
         String.raw`\begin{aligned}
 \gamma_2(-\theta_{M-k})
-&= i\,e^{-i\theta_{M-k}}s_2^*(c_1\cos\theta_{M-k} + i\sin\theta_{M-k} - s_1 c_2)
+&= i\,\exp(-i\theta_{M-k})s_2^*(c_1\cos\theta_{M-k} + i\sin\theta_{M-k} - s_1 c_2)
 &&(\because\ \gamma_2\ \text{の定義に}\ -\theta_{M-k}\ \text{を代入した形})\\
-&= i\,e^{i\theta_k}s_2^*(c_1\cos\theta_k - i\sin\theta_k - s_1 c_2)
-&&(\because\ e^{-i\theta_{M-k}} = e^{i\theta_k},\ \cos\theta_{M-k} = \cos\theta_k,\ \sin\theta_{M-k} = -\sin\theta_k)\\
+&= i\,\exp(i\theta_k)s_2^*(c_1\cos\theta_k - i\sin\theta_k - s_1 c_2)
+&&(\because\ \exp(-i\theta_{M-k}) = \exp(i\theta_k),\ \cos\theta_{M-k} = \cos\theta_k,\ \sin\theta_{M-k} = -\sin\theta_k)\\
 &= \gamma_2(\theta_k)
 &&(\because\ \gamma_2\ \text{の定義})\\
 &= \gamma_2(-\theta_{-k})
@@ -3998,13 +3998,13 @@ T_{(V')}(\psi_\mu^\dagger)
 &&(\because\ \text{指数行列の積の定理})\\
 &= \psi_\mu^\dagger\exp(\gamma(\theta_\mu)I)
 &&(\because\ (X + \gamma(\theta_\mu)I) + (-X) = \gamma(\theta_\mu)I)\\
-&= \psi_\mu^\dagger\cdot e^{\gamma(\theta_\mu)}I
+&= \psi_\mu^\dagger\cdot \exp(\gamma(\theta_\mu))I
 &&(\because\ (\gamma(\theta_\mu)I)^n = (\gamma(\theta_\mu))^n I)\\
-&= e^{+\gamma(\theta_\mu)}\psi_\mu^\dagger
+&= \exp(+\gamma(\theta_\mu))\psi_\mu^\dagger
 &&(\because\ \text{単位行列とのスカラー倍の積})
 \end{aligned}`,
       ),
-      paragraph([math(String.raw`T_{(V')}(\psi_\mu) = e^{-\gamma(\theta_\mu)}\psi_\mu`), " について。"]),
+      paragraph([math(String.raw`T_{(V')}(\psi_\mu) = \exp(-\gamma(\theta_\mu))\psi_\mu`), " について。"]),
       paragraph(["Step 1': ", math(String.raw`[\psi_\nu^\dagger \psi_{-\nu},\, \psi_\mu] = -\delta^M_{\nu+\mu,0}\,\psi_{-\nu}`), "。"]),
       displayMath(
         String.raw`\begin{aligned}
@@ -4079,9 +4079,9 @@ T_{(V')}(\psi_\mu)
 &&(\because\ \text{指数行列の積の定理})\\
 &= \psi_\mu\exp(-\gamma(\theta_\mu)I)
 &&(\because\ (X-\gamma(\theta_\mu)I)+(-X)=-\gamma(\theta_\mu)I)\\
-&= \psi_\mu\cdot e^{-\gamma(\theta_\mu)}I
+&= \psi_\mu\cdot \exp(-\gamma(\theta_\mu))I
 &&(\because\ (-\gamma(\theta_\mu)I)^n=(-\gamma(\theta_\mu))^nI)\\
-&= e^{-\gamma(\theta_\mu)}\psi_\mu
+&= \exp(-\gamma(\theta_\mu))\psi_\mu
 &&(\because\ \text{単位行列とのスカラー倍の積})
 \end{aligned}`,
       ),
@@ -4277,7 +4277,7 @@ A(\theta_\mu)
 &= \mathrm{arccosh}(1)
 && (\because\ \gamma_1(\theta_\nu)=1) \\
 &= 0
-&& (\because\ \mathrm{arccosh}(1)=0)
+&& (\because\ \blkref{arccosh_properties}\text{ (4)})
 \end{aligned}`,
       ),
       paragraph(["である。"]),
@@ -4692,29 +4692,29 @@ T_{(V')}(W)
 T_{(V)}(\psi_\mu^\dagger)
 &= \lambda_{+,\mu}\psi_\mu^\dagger
 \quad (\because \text{フェルミオン生成演算子への作用}) \\
-&= e^{\gamma(\theta_\mu)}\psi_\mu^\dagger
-\quad (\because \lambda_{+,\mu}=e^{\gamma(\theta_\mu)}), \\
+&= \exp(\gamma(\theta_\mu))\psi_\mu^\dagger
+\quad (\because \lambda_{+,\mu}=\exp(\gamma(\theta_\mu))), \\
 T_{(V)}(\psi_\mu)
 &= \lambda_{-,\mu}\psi_\mu
 \quad (\because \text{フェルミオン消滅演算子への作用}) \\
-&= e^{-\gamma(\theta_\mu)}\psi_\mu
-\quad (\because \lambda_{-,\mu}=e^{-\gamma(\theta_\mu)}).
+&= \exp(-\gamma(\theta_\mu))\psi_\mu
+\quad (\because \lambda_{-,\mu}=\exp(-\gamma(\theta_\mu))).
 \end{aligned}`,
       ),
       paragraph(["であり、", ref("action_of_T_Vprime_on_psi"), " より"]),
       displayMath(
-        String.raw`T_{(V')}(\psi_\mu^\dagger) = e^{\gamma(\theta_\mu)}\psi_\mu^\dagger, \quad T_{(V')}(\psi_\mu) = e^{-\gamma(\theta_\mu)}\psi_\mu`,
+        String.raw`T_{(V')}(\psi_\mu^\dagger) = \exp(\gamma(\theta_\mu))\psi_\mu^\dagger, \quad T_{(V')}(\psi_\mu) = \exp(-\gamma(\theta_\mu))\psi_\mu`,
       ),
       paragraph(["である。したがって"]),
       displayMath(
         String.raw`\begin{aligned}
 T_{(V)}(\psi_\mu^\dagger)
-&= e^{\gamma(\theta_\mu)}\psi_\mu^\dagger
+&= \exp(\gamma(\theta_\mu))\psi_\mu^\dagger
 \quad (\because \text{直前の }T_{(V)}\text{ の作用}) \\
 &= T_{(V')}(\psi_\mu^\dagger)
 \quad (\because \text{直前の }T_{(V')}\text{ の作用}), \\
 T_{(V)}(\psi_\mu)
-&= e^{-\gamma(\theta_\mu)}\psi_\mu
+&= \exp(-\gamma(\theta_\mu))\psi_\mu
 \quad (\because \text{直前の }T_{(V)}\text{ の作用}) \\
 &= T_{(V')}(\psi_\mu)
 \quad (\because \text{直前の }T_{(V')}\text{ の作用}).
@@ -5458,14 +5458,14 @@ V
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{i\theta_M}
-&= e^{2\pi i}
+\exp(i\theta_M)
+&= \exp(2\pi i)
 && (\because\ \theta_M=2\pi) \\
 &= 1
-&& (\because\ e^{2\pi i}=1) \\
-&= e^{-2\pi i}
-&& (\because\ e^{-2\pi i}=1) \\
-&= e^{i\theta_{-M}}
+&& (\because\ \exp(2\pi i)=1) \\
+&= \exp(-2\pi i)
+&& (\because\ \exp(-2\pi i)=1) \\
+&= \exp(i\theta_{-M})
 && (\because\ \theta_{-M}=-2\pi), \\
 \cos\theta_M
 &= \cos 2\pi

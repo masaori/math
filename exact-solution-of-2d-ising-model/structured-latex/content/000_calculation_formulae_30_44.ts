@@ -2809,25 +2809,25 @@ z
     title: { tex: String.raw`\cos,\sin\text{のEuler表示}` },
     labels: ["euler_formula_cos_sin"],
     statement: [
-      paragraph(["現行の正弦・余弦は ", ref("def_sin"), "、", ref("def_cos"), "、複素数は ", ref("definition_of_cc"), " で定めている。全実数上への拡張と複素指数の定義、および以下で使うEuler公式の導出は未整備である。"]),
+      paragraph(["現行の正弦・余弦は ", ref("def_sin"), "、", ref("def_cos"), "、複素数は ", ref("definition_of_cc"), " で定めている。複素数の exp は行列の exp の章で 1 行 1 列の行列の exp として定める。全実数上への拡張と、以下で使うEuler公式の導出は未整備である。"]),
       paragraph([math(String.raw`\forall \theta \in \mathbb{R}`)]),
       displayMath(
-        String.raw`\cos\theta = \frac{e^{i\theta} + e^{-i\theta}}{2}`,
+        String.raw`\cos\theta = \frac{\exp(i\theta) + \exp(-i\theta)}{2}`,
       ),
       displayMath(
-        String.raw`\sin\theta = \frac{e^{i\theta} - e^{-i\theta}}{2i}`,
+        String.raw`\sin\theta = \frac{\exp(i\theta) - \exp(-i\theta)}{2i}`,
       ),
     ],
     proof: [
       paragraph([
         "準備として、Eulerの公式 ",
-        math(String.raw`e^{i\varphi} = \cos\varphi + i\sin\varphi`),
+        math(String.raw`\exp(i\varphi) = \cos\varphi + i\sin\varphi`),
         " を ",
         math(String.raw`\varphi=-\theta`),
         " で使う形を書いておく。",
       ]),
       displayMath(String.raw`\begin{aligned}
-e^{-i\theta}
+\exp(-i\theta)
 &=\cos(-\theta) + i\sin(-\theta)
 &&(\because\ \text{Eulerの公式})\\
 &=\cos\theta + i\,(-\sin\theta)
@@ -2840,9 +2840,9 @@ e^{-i\theta}
 &=\frac{2\cos\theta}{2}\\
 &=\frac{(\cos\theta + i\sin\theta) + (\cos\theta - i\sin\theta)}{2}
 &&(\because\ i\sin\theta\ \text{を足して引いた})\\
-&=\frac{e^{i\theta} + (\cos\theta - i\sin\theta)}{2}
+&=\frac{\exp(i\theta) + (\cos\theta - i\sin\theta)}{2}
 &&(\because\ \text{Eulerの公式})\\
-&=\frac{e^{i\theta} + e^{-i\theta}}{2}
+&=\frac{\exp(i\theta) + \exp(-i\theta)}{2}
 &&(\because\ \text{上の準備})
 \end{aligned}`),
       paragraph([
@@ -2855,9 +2855,9 @@ e^{-i\theta}
 &=\frac{2i\sin\theta}{2i}\\
 &=\frac{(\cos\theta + i\sin\theta) - (\cos\theta - i\sin\theta)}{2i}
 &&(\because\ \cos\theta\ \text{を足して引いた})\\
-&=\frac{e^{i\theta} - (\cos\theta - i\sin\theta)}{2i}
+&=\frac{\exp(i\theta) - (\cos\theta - i\sin\theta)}{2i}
 &&(\because\ \text{Eulerの公式})\\
-&=\frac{e^{i\theta} - e^{-i\theta}}{2i}
+&=\frac{\exp(i\theta) - \exp(-i\theta)}{2i}
 &&(\because\ \text{上の準備})
 \end{aligned}`),
     ],

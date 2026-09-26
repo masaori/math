@@ -26,16 +26,16 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 [H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}]
-&= 2 e^{-i 2\pi\mu/M} \hat{Y}_\mu \\
+&= 2 \exp(-i 2\pi\mu/M) \hat{Y}_\mu \\
 [H_1^{(\pm)}, \hat{Z}_\mu^{(\mp)}]
-&= 2 e^{-i 2\pi\mu/M} \hat{Y}_\mu \\
+&= 2 \exp(-i 2\pi\mu/M) \hat{Y}_\mu \\
 [H_1^{(\pm)}, \hat{Y}_\mu]
-&= -2 e^{i 2\pi\mu/M} \hat{Z}_\mu^{(\pm)} \\
+&= -2 \exp(i 2\pi\mu/M) \hat{Z}_\mu^{(\pm)} \\
 [H_2, \hat{Z}_\mu^{(-)}]
 &= -2 \hat{Y}_\mu \\
 [H_2, \hat{Z}_\mu^{(+)}]
 &= -2 \hat{Y}_\mu + \frac{4}{M}\sum_{j\in\{1,\dots,M\}}
-   e^{-i \frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j \\
+   \exp(-i \frac{2\pi}{M}(-j+\mu))\,\hat{Y}_j \\
 [H_2, \hat{Y}_\mu]
 &= 2 \hat{Z}_\mu^{(-)}
 \end{aligned}`,
@@ -127,39 +127,39 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
       displayMath(
         String.raw`\begin{aligned}
 [H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}]
-&= \left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right)\hat{Z}_\mu^{(\pm)}
-   - \hat{Z}_\mu^{(\pm)}\left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right)
+&= \left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\exp(-i\frac{2\pi j}{M})\right)\hat{Z}_\mu^{(\pm)}
+   - \hat{Z}_\mu^{(\pm)}\left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\exp(-i\frac{2\pi j}{M})\right)
 &&(\because\ \text{$H_1^{(\pm)}, H_2$ を $\hat{Z}, \hat{Y}$ で表す、と交換子の定義})\\
-&= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
-   - \sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
+&= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+   - \sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{有限和と行列の積の分配則})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(e^{-i\frac{2\pi j}{M}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
-   - e^{-i\frac{2\pi j}{M}}\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\exp(-i\frac{2\pi j}{M})\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+   - \exp(-i\frac{2\pi j}{M})\hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{有限和どうしの差は項ごとの差の和})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
    - \hat{Z}_\mu^{(\pm)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{分配則})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
    + \hat{Y}_j\hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \hat{Z}_\mu^{(\pm)}\hat{Y}_j = -\hat{Y}_j\hat{Z}_\mu^{(\pm)}\ \text{すなわち $\hat{Z}$ と $\hat{Y}$ の反交換関係})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\pm)}
    + \hat{Z}_\mu^{(\pm)}\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{分配則})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\pm)}]_+
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\pm)}]_+
 &&(\because\ \text{反交換子の定義})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
 &&(\because\ \text{$\hat{Z}$ と $\hat{Y}$ の反交換関係の}\ [\hat{Z},\hat{Z}]_+\ \text{の値})\\
-&= 2\sum_{j\in\{1,\dots,M\}} \delta^M_{-j+\mu,0}\, e^{-i\frac{2\pi j}{M}}\hat{Y}_j
+&= 2\sum_{j\in\{1,\dots,M\}} \delta^M_{-j+\mu,0}\, \exp(-i\frac{2\pi j}{M})\hat{Y}_j
 &&(\because\ \text{単位行列との積とスカラーの整理})\\
-&= 2\sum_{\substack{j\in\{1,\dots,M\}\\ -j+\mu\equiv 0 \pmod{M}}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j
+&= 2\sum_{\substack{j\in\{1,\dots,M\}\\ -j+\mu\equiv 0 \pmod{M}}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j
 &&(\because\ \text{$\delta^M$ の定義})\\
 &= 2\begin{cases}
-e^{-i\frac{2\pi M}{M}}\hat{Y}_M & (\mu = -M) \\
-e^{-i\frac{2\pi(M+\mu)}{M}}\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
-e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
+\exp(-i\frac{2\pi M}{M})\hat{Y}_M & (\mu = -M) \\
+\exp(-i\frac{2\pi(M+\mu)}{M})\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
+\exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu & (1 \leq \mu \leq M)
 \end{cases}
 &&(\because\ \text{準備 3})\\
-&= 2\, e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu
+&= 2\, \exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu
 &&(\because\ \text{準備 1 と準備 2}\ (\nu = \mu\ \text{または}\ \nu = -M))
 \end{aligned}`,
       ),
@@ -192,7 +192,7 @@ e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
       ]),
       displayMath(
         String.raw`H_1^{(\pm)}
-= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,e^{-i\frac{2\pi j}{M}}\right)
+= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,\exp(-i\frac{2\pi j}{M})\right)
 \qquad (\because\ \text{$H_1^{(\pm)}, H_2$ を $\hat{Z}, \hat{Y}$ で表す})`,
       ),
       paragraph([
@@ -229,58 +229,58 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
       displayMath(
         String.raw`\begin{aligned}
 [H_1^{(\pm)}, \hat{Z}_\mu^{(\mp)}]
-&= \left[\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,e^{-i\frac{2\pi j}{M}}\right),\ \hat{Z}_\mu^{(\mp)}\right]
+&= \left[\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\hat{Y}_j\,\hat{Z}_{-j}^{(\pm)}\,\exp(-i\frac{2\pi j}{M})\right),\ \hat{Z}_\mu^{(\mp)}\right]
 &&(\because\ \text{準備 4})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}},\ \hat{Z}_\mu^{(\mp)}\right]
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\exp(-i\frac{2\pi j}{M}),\ \hat{Z}_\mu^{(\mp)}\right]
 &&(\because\ \text{交換子の定義と、有限和・スカラー倍についての分配則})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)},\ \hat{Z}_\mu^{(\mp)}\right]
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left[\hat{Y}_j\hat{Z}_{-j}^{(\pm)},\ \hat{Z}_\mu^{(\mp)}\right]
 &&(\because\ \text{スカラー倍を交換子の外へ出した})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
    - \hat{Z}_\mu^{(\mp)}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{交換子の定義})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
    + \hat{Y}_j\hat{Z}_\mu^{(\mp)}\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{準備 5})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(\hat{Z}_{-j}^{(\pm)}\hat{Z}_\mu^{(\mp)}
    + \hat{Z}_\mu^{(\mp)}\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{分配則})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\mp)}]_+
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,[\hat{Z}_{-j}^{(\pm)},\hat{Z}_\mu^{(\mp)}]_+
 &&(\because\ \text{反交換子の定義})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(
    2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
-   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right)
+   + \left(-2\,\exp(-i\frac{2\pi}{M}(-j+\mu))\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right)
 &&(\because\ \text{$\hat{Z}$ と $\hat{Y}$ の反交換関係の}\ [\hat{Z}^{(\pm)},\hat{Z}^{(\mp)}]_+\ \text{の値})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
-   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
+   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\left(-2\,\exp(-i\frac{2\pi}{M}(-j+\mu))\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
 &&(\because\ \text{分配則と、有限和の項ごとの分割})\\
-&= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}-i\frac{2\pi}{M}(-j+\mu)}\hat{Y}_j
+&= 2\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,\delta^M_{-j+\mu,0}
+   - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M}-i\frac{2\pi}{M}(-j+\mu))\hat{Y}_j
 &&(\because\ \text{単位行列との積とスカラーの整理、および指数法則})\\
-&= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi\mu}{M}}\hat{Y}_j
+&= 2\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,\delta^M_{-j+\mu,0}
+   - \frac{4}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi\mu}{M})\hat{Y}_j
 &&(\because\ \text{指数の中の}\ j\ \text{が打ち消し合う})\\
-&= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{j\in\{1,\dots,M\}} \hat{Y}_j
+&= 2\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,\delta^M_{-j+\mu,0}
+   - \frac{4}{M} \exp(-i\frac{2\pi\mu}{M})\sum_{j\in\{1,\dots,M\}} \hat{Y}_j
 &&(\because\ j\ \text{によらない因子を有限和の外へ出した})\\
-&= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{j\in\{1,\dots,M\}}\sum_{k=1}^{M} Y_k\, e^{-i k\frac{2\pi j}{M}}
+&= 2\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,\delta^M_{-j+\mu,0}
+   - \frac{4}{M} \exp(-i\frac{2\pi\mu}{M})\sum_{j\in\{1,\dots,M\}}\sum_{k=1}^{M} Y_k\, \exp(-i k\frac{2\pi j}{M})
 &&(\because\ \text{$\hat{Z}, \hat{Y}$ の定義})\\
-&= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{k=1}^{M} Y_k\sum_{j\in\{1,\dots,M\}} e^{-i k\frac{2\pi j}{M}}
+&= 2\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,\delta^M_{-j+\mu,0}
+   - \frac{4}{M} \exp(-i\frac{2\pi\mu}{M})\sum_{k=1}^{M} Y_k\sum_{j\in\{1,\dots,M\}} \exp(-i k\frac{2\pi j}{M})
 &&(\because\ \text{有限和の順序の入れ替えと、$k$ によらない因子を内側の和の外へ出した})\\
-&= 2\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\,\delta^M_{-j+\mu,0}
-   - \frac{4}{M} e^{-i\frac{2\pi\mu}{M}}\sum_{k=1}^{M} Y_k\, M\,\delta^M_{(k,0)}
+&= 2\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\,\delta^M_{-j+\mu,0}
+   - \frac{4}{M} \exp(-i\frac{2\pi\mu}{M})\sum_{k=1}^{M} Y_k\, M\,\delta^M_{(k,0)}
 &&(\because\ \text{指数和の公式})\\
 &= 2\begin{cases}
-e^{-i\frac{2\pi(2M+\mu)}{M}}\hat{Y}_{2M+\mu} & (\mu = -M) \\
-e^{-i\frac{2\pi(M+\mu)}{M}}\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
-e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu & (1 \leq \mu \leq M)
+\exp(-i\frac{2\pi(2M+\mu)}{M})\hat{Y}_{2M+\mu} & (\mu = -M) \\
+\exp(-i\frac{2\pi(M+\mu)}{M})\hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
+\exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu & (1 \leq \mu \leq M)
 \end{cases} - 0
 &&\left(\because\ \begin{aligned}
 &\text{第 1 項は準備 6}\\
 &\text{第 2 項は原文が}\ 0\ \text{とおいている}
 \end{aligned}\right)\\
-&= 2\, e^{-i\frac{2\pi\mu}{M}}\hat{Y}_\mu
+&= 2\, \exp(-i\frac{2\pi\mu}{M})\hat{Y}_\mu
 &&(\because\ \text{準備 1 と準備 2}\ (\nu = \mu\ \text{または}\ \nu = M+\mu))
 \end{aligned}`,
       ),
@@ -377,41 +377,41 @@ M & (\mu = M)
       displayMath(
         String.raw`\begin{aligned}
 [H_1^{(\pm)}, \hat{Y}_\mu]
-&= \left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right)\hat{Y}_\mu
-   - \hat{Y}_\mu\left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}e^{-i\frac{2\pi j}{M}}\right)
+&= \left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\exp(-i\frac{2\pi j}{M})\right)\hat{Y}_\mu
+   - \hat{Y}_\mu\left(\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\exp(-i\frac{2\pi j}{M})\right)
 &&(\because\ \text{$H_1^{(\pm)}, H_2$ を $\hat{Z}, \hat{Y}$ で表す、と交換子の定義})\\
-&= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu
-   - \sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
+&= \frac{1}{M}\left(\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu
+   - \sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{有限和と行列の積の分配則})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(e^{-i\frac{2\pi j}{M}}\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu
-   - e^{-i\frac{2\pi j}{M}}\hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(\exp(-i\frac{2\pi j}{M})\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu
+   - \exp(-i\frac{2\pi j}{M})\hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{有限和どうしの差は項ごとの差の和})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu
    - \hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \text{分配則})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(-\hat{Y}_j\hat{Y}_\mu\hat{Z}_{-j}^{(\pm)}
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(-\hat{Y}_j\hat{Y}_\mu\hat{Z}_{-j}^{(\pm)}
    - \hat{Y}_\mu\hat{Y}_j\hat{Z}_{-j}^{(\pm)}\right)
 &&(\because\ \hat{Z}_{-j}^{(\pm)}\hat{Y}_\mu = -\hat{Y}_\mu\hat{Z}_{-j}^{(\pm)}\ \text{すなわち $\hat{Z}$ と $\hat{Y}$ の反交換関係})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(-\hat{Y}_j\hat{Y}_\mu
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(-\hat{Y}_j\hat{Y}_\mu
    - \hat{Y}_\mu\hat{Y}_j\right)\hat{Z}_{-j}^{(\pm)}
 &&(\because\ \text{分配則})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(-[\hat{Y}_j,\hat{Y}_\mu]_+\right)\hat{Z}_{-j}^{(\pm)}
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(-[\hat{Y}_j,\hat{Y}_\mu]_+\right)\hat{Z}_{-j}^{(\pm)}
 &&(\because\ \text{反交換子の定義})\\
-&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi j}{M}}\left(-2M\,\delta^M_{j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\hat{Z}_{-j}^{(\pm)}
+&= \frac{1}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi j}{M})\left(-2M\,\delta^M_{j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\hat{Z}_{-j}^{(\pm)}
 &&(\because\ \text{$\hat{Z}$ と $\hat{Y}$ の反交換関係の}\ [\hat{Y},\hat{Y}]_+\ \text{の値})\\
-&= -2\sum_{j\in\{1,\dots,M\}} \delta^M_{j+\mu,0}\, e^{-i\frac{2\pi j}{M}}\hat{Z}_{-j}^{(\pm)}
+&= -2\sum_{j\in\{1,\dots,M\}} \delta^M_{j+\mu,0}\, \exp(-i\frac{2\pi j}{M})\hat{Z}_{-j}^{(\pm)}
 &&(\because\ \text{単位行列との積とスカラーの整理})\\
-&= -2\sum_{\substack{j\in\{1,\dots,M\}\\ j+\mu\equiv 0 \pmod{M}}} e^{-i\frac{2\pi j}{M}}\hat{Z}_{-j}^{(\pm)}
+&= -2\sum_{\substack{j\in\{1,\dots,M\}\\ j+\mu\equiv 0 \pmod{M}}} \exp(-i\frac{2\pi j}{M})\hat{Z}_{-j}^{(\pm)}
 &&(\because\ \text{$\delta^M$ の定義})\\
 &= -2\begin{cases}
-e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_{-(-\mu)}^{(\pm)} & (\mu \leq -1) \\
-e^{-i\frac{2\pi(M-\mu)}{M}}\hat{Z}_{-(M-\mu)}^{(\pm)} & (1 \leq \mu \leq M-1) \\
-e^{-i\frac{2\pi M}{M}}\hat{Z}_{-M}^{(\pm)} & (\mu = M)
+\exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_{-(-\mu)}^{(\pm)} & (\mu \leq -1) \\
+\exp(-i\frac{2\pi(M-\mu)}{M})\hat{Z}_{-(M-\mu)}^{(\pm)} & (1 \leq \mu \leq M-1) \\
+\exp(-i\frac{2\pi M}{M})\hat{Z}_{-M}^{(\pm)} & (\mu = M)
 \end{cases}
 &&(\because\ \text{準備 3})\\
-&= -2\, e^{-i\frac{2\pi(-\mu)}{M}}\hat{Z}_{\mu}^{(\pm)}
+&= -2\, \exp(-i\frac{2\pi(-\mu)}{M})\hat{Z}_{\mu}^{(\pm)}
 &&(\because\ \text{準備 1 と準備 2}\ \text{（$1 \leq \mu \leq M-1$ では $\nu = -\mu$ として 1 度、$\mu = M$ では $\nu = -M, 0$ として 2 度当てる）})\\
-&= -2\, e^{i\frac{2\pi\mu}{M}}\hat{Z}_{\mu}^{(\pm)}
+&= -2\, \exp(i\frac{2\pi\mu}{M})\hat{Z}_{\mu}^{(\pm)}
 &&(\because\ \text{指数の符号の整理})
 \end{aligned}`,
       ),
@@ -556,30 +556,30 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
 &\frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-[\hat{Z}_\mu^{(+)},\hat{Z}_{-j}^{(-)}]_+\right)\hat{Y}_j \\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(
    -\left(2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
-   + \left(-2\,e^{-i\frac{2\pi}{M}(-j+\mu)}\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right)\right)\hat{Y}_j
+   + \left(-2\,\exp(-i\frac{2\pi}{M}(-j+\mu))\cdot 2\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\right)\right)\hat{Y}_j
 &&(\because\ \text{$\hat{Z}$ と $\hat{Y}$ の反交換関係の}\ [\hat{Z}^{(\pm)},\hat{Z}^{(\mp)}]_+\ \text{の値を}\ \nu=-j\ \text{で使う})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(
    -2M\,\delta^M_{-j+\mu,0}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}
-   + 4\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\hat{Y}_j
+   + 4\,\exp(-i\frac{2\pi}{M}(-j+\mu))\,I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)\hat{Y}_j
 &&(\because\ \text{括弧の展開（負号を両項へ配る）と複素数の四則})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2M\,\delta^M_{-j+\mu,0}\,\hat{Y}_j
-   + 4\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j\right)
+   + 4\,\exp(-i\frac{2\pi}{M}(-j+\mu))\,\hat{Y}_j\right)
 &&(\because\ \text{分配則と単位行列との積})\\
 &= \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(-2M\,\delta^M_{-j+\mu,0}\,\hat{Y}_j\right)
-   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(4\,e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j\right)
+   + \frac{1}{M}\sum_{j\in\{1,\dots,M\}}\left(4\,\exp(-i\frac{2\pi}{M}(-j+\mu))\,\hat{Y}_j\right)
 &&(\because\ \text{項ごとの和の有限和は有限和どうしの和})\\
 &= -2\sum_{\substack{j\in\{1,\dots,M\}\\ -j+\mu\equiv 0 \pmod{M}}}\hat{Y}_j
-   + \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j
+   + \frac{4}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi}{M}(-j+\mu))\,\hat{Y}_j
 &&(\because\ \text{$\delta^M$ の定義とスカラーの整理})\\
 &= -2\begin{cases}
 \hat{Y}_M & (\mu = -M) \\
 \hat{Y}_{M+\mu} & (-M+1 \leq \mu \leq -1) \\
 \hat{Y}_\mu & (1 \leq \mu \leq M)
 \end{cases}
-   + \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j
+   + \frac{4}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi}{M}(-j+\mu))\,\hat{Y}_j
 &&(\because\ \text{準備 2})\\
 &= -2\,\hat{Y}_\mu
-   + \frac{4}{M}\sum_{j\in\{1,\dots,M\}} e^{-i\frac{2\pi}{M}(-j+\mu)}\,\hat{Y}_j
+   + \frac{4}{M}\sum_{j\in\{1,\dots,M\}} \exp(-i\frac{2\pi}{M}(-j+\mu))\,\hat{Y}_j
 &&(\because\ \text{準備 3}\ \text{（$\mu=-M$ では $\nu=0,-M$ として 2 度、$-M+1\leq\mu\leq-1$ では $\nu=\mu$ として 1 度当てる）})
 \end{aligned}`,
       ),
@@ -589,11 +589,11 @@ M+\mu & (-M+1 \leq \mu \leq -1) \\
         " の定義を入れて ",
         math(String.raw`j`),
         " について和を取ると ",
-        math(String.raw`4\,e^{-i\frac{2\pi\mu}{M}}\,Y_1`),
+        math(String.raw`4\,\exp(-i\frac{2\pi\mu}{M})\,Y_1`),
         " になる（",
         ref("why_008_applies_only_to_minus_sector"),
         " が ",
-        math(String.raw`\left[H_2,\hat{Z}_\mu^{(+)}\right] = -2\hat{Y}_\mu + 4\,e^{-i\frac{2\pi\mu}{M}}\,Y_1`),
+        math(String.raw`\left[H_2,\hat{Z}_\mu^{(+)}\right] = -2\hat{Y}_\mu + 4\,\exp(-i\frac{2\pi\mu}{M})\,Y_1`),
         " として使っている形である）。",
         "すなわち ",
         math(String.raw`[H_2, \hat{Z}_\mu^{(+)}] \neq -2\hat{Y}_\mu`),
@@ -775,7 +775,7 @@ M & (\mu = M)
       displayMath(
         String.raw`\underbrace{[K_1 H_1^{(\pm)}, \dots, [K_1 H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}]\dots]}_{n}
 = \begin{cases}
-(-1)^{(n-1)/2}(2K_1)^n e^{-i 2\pi\mu/M} \hat{Y}_\mu & (n \text{ 奇数}) \\
+(-1)^{(n-1)/2}(2K_1)^n \exp(-i 2\pi\mu/M) \hat{Y}_\mu & (n \text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^n \hat{Z}_\mu^{(\pm)} & (n \text{ 偶数})
 \end{cases}`,
       ),
@@ -784,7 +784,7 @@ M & (\mu = M)
       displayMath(
         String.raw`\underbrace{[K_1 H_1^{(\pm)}, \dots, [K_1 H_1^{(\pm)}, \hat{Y}_\mu]\dots]}_{n}
 = \begin{cases}
-(-1)^{(n+1)/2}(2K_1)^n e^{i 2\pi\mu/M} \hat{Z}_\mu^{(\pm)} & (n \text{ 奇数}) \\
+(-1)^{(n+1)/2}(2K_1)^n \exp(i 2\pi\mu/M) \hat{Z}_\mu^{(\pm)} & (n \text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^n \hat{Y}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
@@ -820,8 +820,8 @@ M & (\mu = M)
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\text{(A)}\quad [H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}] &= 2 e^{-i\theta}\hat{Y}_\mu, &
-\text{(B)}\quad [H_1^{(\pm)}, \hat{Y}_\mu] &= -2 e^{i\theta}\hat{Z}_\mu^{(\pm)}, \\
+\text{(A)}\quad [H_1^{(\pm)}, \hat{Z}_\mu^{(\pm)}] &= 2 \exp(-i\theta)\hat{Y}_\mu, &
+\text{(B)}\quad [H_1^{(\pm)}, \hat{Y}_\mu] &= -2 \exp(i\theta)\hat{Z}_\mu^{(\pm)}, \\
 \text{(C)}\quad [H_2, \hat{Z}_\mu^{(-)}] &= -2\,\hat{Y}_\mu, &
 \text{(D)}\quad [H_2, \hat{Y}_\mu] &= 2\,\hat{Z}_\mu^{(-)}
 \end{aligned}`,
@@ -914,11 +914,11 @@ C_{n+1}
 &&(\because\ \text{帰納法の仮定}) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\left[H_1^{(\pm)},\ \hat{Z}_\mu^{(\pm)}\right]
 &&(\because\ \text{交換子の双線型性}) \\
-&= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot 2 e^{-i\theta}\hat{Y}_\mu
+&= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot 2 \exp(-i\theta)\hat{Y}_\mu
 &&(\because\ \text{(A)}) \\
-&= (-1)^{n/2}(2K_1)^{n+1} e^{-i\theta}\hat{Y}_\mu
+&= (-1)^{n/2}(2K_1)^{n+1} \exp(-i\theta)\hat{Y}_\mu
 &&(\because\ 2K_1\cdot(2K_1)^{n}=(2K_1)^{n+1}\ \text{とスカラーの積の可換性}) \\
-&= (-1)^{((n+1)-1)/2}(2K_1)^{n+1} e^{-i\theta}\hat{Y}_\mu
+&= (-1)^{((n+1)-1)/2}(2K_1)^{n+1} \exp(-i\theta)\hat{Y}_\mu
 &&(\because\ \tfrac{(n+1)-1}{2}=\tfrac{n}{2})
 \end{aligned}`,
       ),
@@ -935,7 +935,7 @@ C_{n+1}
         " 偶数）。",
         math(String.raw`n`),
         " が奇数で ",
-        math(String.raw`C_n = (-1)^{(n-1)/2}(2K_1)^n e^{-i\theta}\hat{Y}_\mu`),
+        math(String.raw`C_n = (-1)^{(n-1)/2}(2K_1)^n \exp(-i\theta)\hat{Y}_\mu`),
         " と仮定する。",
       ]),
       displayMath(
@@ -943,18 +943,18 @@ C_{n+1}
 C_{n+1}
 &= \left[K_1 H_1^{(\pm)},\ C_n\right]
 &&(\because\ n\ \text{重の交換子の定義}) \\
-&= \left[K_1 H_1^{(\pm)},\ (-1)^{(n-1)/2}(2K_1)^n e^{-i\theta}\hat{Y}_\mu\right]
+&= \left[K_1 H_1^{(\pm)},\ (-1)^{(n-1)/2}(2K_1)^n \exp(-i\theta)\hat{Y}_\mu\right]
 &&(\because\ \text{帰納法の仮定}) \\
-&= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n e^{-i\theta}\left[H_1^{(\pm)},\ \hat{Y}_\mu\right]
+&= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n \exp(-i\theta)\left[H_1^{(\pm)},\ \hat{Y}_\mu\right]
 &&(\because\ \text{交換子の双線型性}) \\
-&= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n e^{-i\theta}\cdot\left(-2 e^{i\theta}\hat{Z}_\mu^{(\pm)}\right)
+&= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n \exp(-i\theta)\cdot\left(-2 \exp(i\theta)\hat{Z}_\mu^{(\pm)}\right)
 &&(\because\ \text{(B)}) \\
-&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\,e^{-i\theta}e^{i\theta}\,\hat{Z}_\mu^{(\pm)}
+&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\,\exp(-i\theta)\exp(i\theta)\,\hat{Z}_\mu^{(\pm)}
 &&(\because\ 2K_1\cdot(2K_1)^{n}=(2K_1)^{n+1}\ \text{とスカラーの積の可換性}) \\
-&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}e^{0}\hat{Z}_\mu^{(\pm)}
+&= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\exp(0)\hat{Z}_\mu^{(\pm)}
 &&(\because\ \text{複素指数関数の積公式と}\ -i\theta+i\theta=0) \\
 &= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}
-&&(\because\ e^{0}=1) \\
+&&(\because\ \exp(0)=1) \\
 &= (-1)^{(n-1)/2+1}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}
 &&(\because\ (-1)\cdot(-1)^{k}=(-1)^{k+1}) \\
 &= (-1)^{(n+1)/2}(2K_1)^{n+1}\hat{Z}_\mu^{(\pm)}
@@ -1014,13 +1014,13 @@ D_{n+1}
 &&(\because\ \text{帰納法の仮定}) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\left[H_1^{(\pm)},\ \hat{Y}_\mu\right]
 &&(\because\ \text{交換子の双線型性}) \\
-&= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot\left(-2 e^{i\theta}\hat{Z}_\mu^{(\pm)}\right)
+&= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot\left(-2 \exp(i\theta)\hat{Z}_\mu^{(\pm)}\right)
 &&(\because\ \text{(B)}) \\
-&= (-1)\cdot(-1)^{n/2}(2K_1)^{n+1} e^{i\theta}\hat{Z}_\mu^{(\pm)}
+&= (-1)\cdot(-1)^{n/2}(2K_1)^{n+1} \exp(i\theta)\hat{Z}_\mu^{(\pm)}
 &&(\because\ 2K_1\cdot(2K_1)^{n}=(2K_1)^{n+1}\ \text{とスカラーの積の可換性}) \\
-&= (-1)^{n/2+1}(2K_1)^{n+1} e^{i\theta}\hat{Z}_\mu^{(\pm)}
+&= (-1)^{n/2+1}(2K_1)^{n+1} \exp(i\theta)\hat{Z}_\mu^{(\pm)}
 &&(\because\ (-1)\cdot(-1)^{k}=(-1)^{k+1}) \\
-&= (-1)^{((n+1)+1)/2}(2K_1)^{n+1} e^{i\theta}\hat{Z}_\mu^{(\pm)}
+&= (-1)^{((n+1)+1)/2}(2K_1)^{n+1} \exp(i\theta)\hat{Z}_\mu^{(\pm)}
 &&(\because\ \tfrac{(n+1)+1}{2}=\tfrac{n}{2}+1)
 \end{aligned}`,
       ),
@@ -1037,7 +1037,7 @@ D_{n+1}
         " 偶数）。",
         math(String.raw`n`),
         " が奇数で ",
-        math(String.raw`D_n = (-1)^{(n+1)/2}(2K_1)^n e^{i\theta}\hat{Z}_\mu^{(\pm)}`),
+        math(String.raw`D_n = (-1)^{(n+1)/2}(2K_1)^n \exp(i\theta)\hat{Z}_\mu^{(\pm)}`),
         " と仮定する。",
       ]),
       displayMath(
@@ -1045,16 +1045,16 @@ D_{n+1}
 D_{n+1}
 &= \left[K_1 H_1^{(\pm)},\ D_n\right]
 &&(\because\ n\ \text{重の交換子の定義}) \\
-&= \left[K_1 H_1^{(\pm)},\ (-1)^{(n+1)/2}(2K_1)^n e^{i\theta}\hat{Z}_\mu^{(\pm)}\right]
+&= \left[K_1 H_1^{(\pm)},\ (-1)^{(n+1)/2}(2K_1)^n \exp(i\theta)\hat{Z}_\mu^{(\pm)}\right]
 &&(\because\ \text{帰納法の仮定}) \\
-&= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n e^{i\theta}\left[H_1^{(\pm)},\ \hat{Z}_\mu^{(\pm)}\right]
+&= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n \exp(i\theta)\left[H_1^{(\pm)},\ \hat{Z}_\mu^{(\pm)}\right]
 &&(\because\ \text{交換子の双線型性}) \\
-&= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n e^{i\theta}\cdot 2 e^{-i\theta}\hat{Y}_\mu
+&= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n \exp(i\theta)\cdot 2 \exp(-i\theta)\hat{Y}_\mu
 &&(\because\ \text{(A)}) \\
-&= (-1)^{(n+1)/2}(2K_1)^{n+1}\,e^{i\theta}e^{-i\theta}\,\hat{Y}_\mu
+&= (-1)^{(n+1)/2}(2K_1)^{n+1}\,\exp(i\theta)\exp(-i\theta)\,\hat{Y}_\mu
 &&(\because\ 2K_1\cdot(2K_1)^{n}=(2K_1)^{n+1}\ \text{とスカラーの積の可換性}) \\
 &= (-1)^{(n+1)/2}(2K_1)^{n+1}\hat{Y}_\mu
-&&(\because\ e^{i\theta}e^{-i\theta}=e^{0}=1)
+&&(\because\ \exp(i\theta)\exp(-i\theta)=\exp(0)=1)
 \end{aligned}`,
       ),
       paragraph([
@@ -1071,7 +1071,7 @@ D_{n+1}
         " とおく。",
         math(String.raw`E_{n+1} = [K_2^* H_2,\, E_n]`),
         "。この場合は位相因子が現れない（(C), (D) の右辺に ",
-        math(String.raw`e^{\pm i\theta}`),
+        math(String.raw`\exp(\pm i\theta)`),
         " が無い）。",
       ]),
       paragraph([
@@ -1285,7 +1285,7 @@ F_{n+1}
       displayMath(
         String.raw`\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}\right]\dots\right]}_{n}
 = \begin{cases}
-i K_1^n e^{-i 2\pi\mu/M} \hat{Y}_\mu & (n \text{ 奇数}) \\
+i K_1^n \exp(-i 2\pi\mu/M) \hat{Y}_\mu & (n \text{ 奇数}) \\
 K_1^n \hat{Z}_\mu^{(\pm)} & (n \text{ 偶数})
 \end{cases}`,
       ),
@@ -1293,7 +1293,7 @@ K_1^n \hat{Z}_\mu^{(\pm)} & (n \text{ 偶数})
       displayMath(
         String.raw`\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n}
 = \begin{cases}
--i K_1^n e^{i 2\pi\mu/M} \hat{Z}_\mu^{(\pm)} & (n \text{ 奇数}) \\
+-i K_1^n \exp(i 2\pi\mu/M) \hat{Z}_\mu^{(\pm)} & (n \text{ 奇数}) \\
 K_1^n \hat{Y}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
@@ -1436,37 +1436,37 @@ i^n
    \underbrace{\left[K_1 H_1^{(\pm)},\dots,\left[K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}\right]\dots\right]}_{n}
 &&(\because\ \text{補題 1}) \\
 &= \left(\tfrac{i}{2}\right)^{n}\begin{cases}
-(-1)^{(n-1)/2}(2K_1)^{n} e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{(n-1)/2}(2K_1)^{n} \exp(-i\theta)\hat{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^{n}\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
 &&(\because\ \text{交換子のネスト (h1.z)}) \\
 &= \begin{cases}
-i^{n}\,2^{-n}\,(-1)^{(n-1)/2}\,2^{n}K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+i^{n}\,2^{-n}\,(-1)^{(n-1)/2}\,2^{n}K_1^{n}\, \exp(-i\theta)\hat{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,2^{-n}\,(-1)^{n/2}\,2^{n}K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
 &&\left(\because\ \left(\tfrac{i}{2}\right)^{n} = i^{n}2^{-n},\ (2K_1)^n = 2^n K_1^n\right) \\
 &= \begin{cases}
-i^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+i^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\theta)\hat{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,(-1)^{n/2}\,K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
 &&(\because\ 2^{-n}2^{n} = 1) \\
 &= \begin{cases}
-i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\theta)\hat{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
 &&(\because\ \text{補題 2}) \\
 &= \begin{cases}
-i\,(-1)^{n-1}\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+i\,(-1)^{n-1}\,K_1^{n}\, \exp(-i\theta)\hat{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n}\,K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
 &&\left(\because\ \tfrac{n-1}{2}+\tfrac{n-1}{2} = n-1,\ \tfrac{n}{2}+\tfrac{n}{2} = n\right) \\
 &= \begin{cases}
-i\,K_1^{n}\, e^{-i\theta}\hat{Y}_\mu & (n\text{ 奇数}) \\
+i\,K_1^{n}\, \exp(-i\theta)\hat{Y}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
 &&(\because\ n\text{ 奇数なら }(-1)^{n-1} = 1,\ n\text{ 偶数なら }(-1)^{n} = 1) \\
 &= \begin{cases}
-i\,K_1^{n}\, e^{-i 2\pi\mu/M}\hat{Y}_\mu & (n\text{ 奇数}) \\
+i\,K_1^{n}\, \exp(-i 2\pi\mu/M)\hat{Y}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
 &&(\because\ \theta = \tfrac{2\pi\mu}{M}\ \text{の定義})
@@ -1491,37 +1491,37 @@ K_1^{n}\,\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
    \underbrace{\left[K_1 H_1^{(\pm)},\dots,\left[K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n}
 &&(\because\ \text{補題 1}) \\
 &= \left(\tfrac{i}{2}\right)^{n}\begin{cases}
-(-1)^{(n+1)/2}(2K_1)^{n} e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+(-1)^{(n+1)/2}(2K_1)^{n} \exp(i\theta)\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^{n}\hat{Y}_\mu & (n\text{ 偶数})
 \end{cases}
 &&(\because\ \text{交換子のネスト (h1.y)}) \\
 &= \begin{cases}
-i^{n}\,2^{-n}\,(-1)^{(n+1)/2}\,2^{n}K_1^{n}\, e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+i^{n}\,2^{-n}\,(-1)^{(n+1)/2}\,2^{n}K_1^{n}\, \exp(i\theta)\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
 i^{n}\,2^{-n}\,(-1)^{n/2}\,2^{n}K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
 \end{cases}
 &&\left(\because\ \left(\tfrac{i}{2}\right)^{n} = i^{n}2^{-n},\ (2K_1)^n = 2^n K_1^n\right) \\
 &= \begin{cases}
-i^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+i^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\theta)\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
 i^{n}\,(-1)^{n/2}\,K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
 \end{cases}
 &&(\because\ 2^{-n}2^{n} = 1) \\
 &= \begin{cases}
-i\,(-1)^{(n-1)/2}(-1)^{(n+1)/2}\,K_1^{n}\, e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+i\,(-1)^{(n-1)/2}(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\theta)\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
 (-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
 \end{cases}
 &&(\because\ \text{補題 2}) \\
 &= \begin{cases}
-i\,(-1)^{n}\,K_1^{n}\, e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+i\,(-1)^{n}\,K_1^{n}\, \exp(i\theta)\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
 (-1)^{n}\,K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
 \end{cases}
 &&\left(\because\ \tfrac{n-1}{2}+\tfrac{n+1}{2} = n,\ \tfrac{n}{2}+\tfrac{n}{2} = n\right) \\
 &= \begin{cases}
--i\,K_1^{n}\, e^{i\theta}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+-i\,K_1^{n}\, \exp(i\theta)\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
 K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
 \end{cases}
 &&(\because\ n\text{ 奇数なら }(-1)^{n} = -1,\ n\text{ 偶数なら }(-1)^{n} = 1) \\
 &= \begin{cases}
--i\,K_1^{n}\, e^{i 2\pi\mu/M}\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+-i\,K_1^{n}\, \exp(i 2\pi\mu/M)\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
 K_1^{n}\,\hat{Y}_\mu & (n\text{ 偶数})
 \end{cases}
 &&(\because\ \theta = \tfrac{2\pi\mu}{M}\ \text{の定義})
@@ -1671,13 +1671,13 @@ i\,(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
       displayMath(
         String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
 \underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Z}_\mu^{(\pm)}\right]\dots\right]}_{n}
-= \cosh(K_1)\hat{Z}_\mu^{(\pm)} + i e^{-i 2\pi\mu/M}\sinh(K_1)\hat{Y}_\mu`,
+= \cosh(K_1)\hat{Z}_\mu^{(\pm)} + i \exp(-i 2\pi\mu/M)\sinh(K_1)\hat{Y}_\mu`,
       ),
       paragraph(["(h1.y)"]),
       displayMath(
         String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
 \underbrace{\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n}
-= -i e^{i 2\pi\mu/M}\sinh(K_1)\hat{Z}_\mu^{(\pm)} + \cosh(K_1)\hat{Y}_\mu`,
+= -i \exp(i 2\pi\mu/M)\sinh(K_1)\hat{Z}_\mu^{(\pm)} + \cosh(K_1)\hat{Y}_\mu`,
       ),
       paragraph(["(h2.z−)"]),
       displayMath(
@@ -1706,17 +1706,17 @@ i\,(2K_2^*)^{n}\hat{Z}_\mu^{(-)} & (n\text{ 奇数}) \\
 (\text{左辺})
 &= \frac{1}{0!}\hat{Z}_\mu^{(\pm)}
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
-i\cdot K_1^{n}\cdot e^{-i\frac{2\pi\mu}{M}}\cdot\hat{Y}_\mu & (n\text{ 奇数}) \\
+i\cdot K_1^{n}\cdot \exp(-i\frac{2\pi\mu}{M})\cdot\hat{Y}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 \end{cases}
 &&(\because\ n = 0\ \text{の項を分け、}\ n \geq 1\ \text{の各項へ「cosh, sinh の展開係数への変換」の (h1.z)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\hat{Z}_\mu^{(\pm)}\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,e^{-i\frac{2\pi\mu}{M}}\,\hat{Y}_\mu\right)
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,\exp(-i\frac{2\pi\mu}{M})\,\hat{Y}_\mu\right)
 &&(\because\ K_1^{0}\hat{Z}_\mu^{(\pm)} = \tfrac{1}{0!}\hat{Z}_\mu^{(\pm)}\ \text{なので}\ n = 0\ \text{の項を偶数側の和へ吸収した}) \\
 &= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\hat{Z}_\mu^{(\pm)}
-   + i\,e^{-i\frac{2\pi\mu}{M}}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Y}_\mu
-&&(\because\ \hat{Z}_\mu^{(\pm)},\ \hat{Y}_\mu,\ i\,e^{-i 2\pi\mu/M}\ \text{が}\ n\ \text{に依らないので和の外へ出した}) \\
-&= \cosh(K_1)\hat{Z}_\mu^{(\pm)} + i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Y}_\mu
+   + i\,\exp(-i\frac{2\pi\mu}{M})\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Y}_\mu
+&&(\because\ \hat{Z}_\mu^{(\pm)},\ \hat{Y}_\mu,\ i\,\exp(-i 2\pi\mu/M)\ \text{が}\ n\ \text{に依らないので和の外へ出した}) \\
+&= \cosh(K_1)\hat{Z}_\mu^{(\pm)} + i\,\exp(-i\frac{2\pi\mu}{M})\sinh(K_1)\hat{Y}_\mu
 &&(\because\ \text{「sinh, cosh のテイラー展開」})
 \end{aligned}`,
       ),
@@ -1732,19 +1732,19 @@ K_1^{n}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ 偶数})
 (\text{左辺})
 &= \frac{1}{0!}\hat{Y}_\mu
    + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
--i\cdot K_1^{n}\cdot e^{i\frac{2\pi\mu}{M}}\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
+-i\cdot K_1^{n}\cdot \exp(i\frac{2\pi\mu}{M})\cdot\hat{Z}_\mu^{(\pm)} & (n\text{ 奇数}) \\
 K_1^{n}\cdot\hat{Y}_\mu & (n\text{ 偶数})
 \end{cases}
 &&(\because\ n = 0\ \text{の項を分け、}\ n \geq 1\ \text{の各項へ「cosh, sinh の展開係数への変換」の (h1.y)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\hat{Y}_\mu\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,e^{i\frac{2\pi\mu}{M}}\,\hat{Z}_\mu^{(\pm)}\right)
+   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,\exp(i\frac{2\pi\mu}{M})\,\hat{Z}_\mu^{(\pm)}\right)
 &&(\because\ K_1^{0}\hat{Y}_\mu = \tfrac{1}{0!}\hat{Y}_\mu\ \text{なので}\ n = 0\ \text{の項を偶数側の和へ吸収した}) \\
 &= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\hat{Y}_\mu
-   - i\,e^{i\frac{2\pi\mu}{M}}\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Z}_\mu^{(\pm)}
-&&(\because\ \hat{Y}_\mu,\ \hat{Z}_\mu^{(\pm)},\ (-i)\,e^{i 2\pi\mu/M}\ \text{が}\ n\ \text{に依らないので和の外へ出した}) \\
-&= \cosh(K_1)\hat{Y}_\mu - i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(\pm)}
+   - i\,\exp(i\frac{2\pi\mu}{M})\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\hat{Z}_\mu^{(\pm)}
+&&(\because\ \hat{Y}_\mu,\ \hat{Z}_\mu^{(\pm)},\ (-i)\,\exp(i 2\pi\mu/M)\ \text{が}\ n\ \text{に依らないので和の外へ出した}) \\
+&= \cosh(K_1)\hat{Y}_\mu - i\,\exp(i\frac{2\pi\mu}{M})\sinh(K_1)\hat{Z}_\mu^{(\pm)}
 &&(\because\ \text{「sinh, cosh のテイラー展開」}) \\
-&= -i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(\pm)} + \cosh(K_1)\hat{Y}_\mu
+&= -i\,\exp(i\frac{2\pi\mu}{M})\sinh(K_1)\hat{Z}_\mu^{(\pm)} + \cosh(K_1)\hat{Y}_\mu
 &&(\because\ \text{行列の和の可換則により 2 つの項を並べ替えた})
 \end{aligned}`,
       ),
@@ -3042,9 +3042,9 @@ uh
       displayMath(
         String.raw`\begin{aligned}
 T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})
-&= \cosh(K_1)\hat{Z}_\mu^{(-)} + i e^{-i 2\pi\mu/M}\sinh(K_1)\hat{Y}_\mu \\
+&= \cosh(K_1)\hat{Z}_\mu^{(-)} + i \exp(-i 2\pi\mu/M)\sinh(K_1)\hat{Y}_\mu \\
 T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
-&= -i e^{i 2\pi\mu/M}\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu \\
+&= -i \exp(i 2\pi\mu/M)\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu \\
 T_{V_2}(\hat{Z}_\mu^{(-)})
 &= \cosh(2K_2^*)\hat{Z}_\mu^{(-)} - i\sinh(2K_2^*)\hat{Y}_\mu \\
 T_{V_2}(\hat{Y}_\mu)
@@ -3088,10 +3088,10 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\dots,\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\hat{Z}_\mu^{(-)}\right]\dots\right]}_{n\text{ times}}
    \quad (\because \text{exp 共役の級数展開}) \\
-&= \cosh(K_1)\hat{Z}_\mu^{(-)} + i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Y}_\mu
+&= \cosh(K_1)\hat{Z}_\mu^{(-)} + i\,\exp(-i\frac{2\pi\mu}{M})\sinh(K_1)\hat{Y}_\mu
    \quad (\because \text{テイラー係数の抽出}) \\
 &= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}\cosh(K_1) \\ i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1)\end{pmatrix}
+   \begin{pmatrix}\cosh(K_1) \\ i\,\exp(-i\frac{2\pi\mu}{M})\sinh(K_1)\end{pmatrix}
    \quad (\because \text{行ベクトルと列ベクトルの積の定義})
 \end{aligned}`,
       ),
@@ -3115,10 +3115,10 @@ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\dots,\left[\tfrac{1}{2}i K_1 H_1^{(\pm)},\hat{Y}_\mu\right]\dots\right]}_{n\text{ times}}
    \quad (\because \text{exp 共役の級数展開}) \\
-&= -i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu
+&= -i\,\exp(i\frac{2\pi\mu}{M})\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu
    \quad (\because \text{テイラー係数の抽出 (h1.y)}) \\
 &= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}-i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+   \begin{pmatrix}-i\,\exp(i\frac{2\pi\mu}{M})\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
    \quad (\because \text{行ベクトルと列ベクトルの積の定義})
 \end{aligned}`,
       ),
@@ -3250,8 +3250,8 @@ T_{V_2}(\hat{Y}_\mu)
         String.raw`\left(T_{(V_1^{(\pm)})^{1/2}} \times T_{(V_1^{(\pm)})^{1/2}}\right)(\hat{Z}_\mu^{(-)}, \hat{Y}_\mu)
 = \begin{pmatrix}\hat{Z}_\mu^{(-)}, \hat{Y}_\mu\end{pmatrix}
 \begin{pmatrix}
-\cosh K_1 & -i e^{i\theta_\mu}\sinh K_1 \\
-i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
+\cosh K_1 & -i \exp(i\theta_\mu)\sinh K_1 \\
+i \exp(-i\theta_\mu)\sinh K_1 & \cosh K_1
 \end{pmatrix}`,
       ),
       displayMath(
@@ -3277,15 +3277,15 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
    \quad (\because \text{直積写像の定義}) \\
 &= \left(
    \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}\cosh(K_1) \\ i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1)\end{pmatrix},\ \
+   \begin{pmatrix}\cosh(K_1) \\ i\,\exp(-i\frac{2\pi\mu}{M})\sinh(K_1)\end{pmatrix},\ \
    \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}-i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+   \begin{pmatrix}-i\,\exp(i\frac{2\pi\mu}{M})\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
    \right)
    \quad (\because \text{二つの共役作用の行列表示}) \\
 &= \begin{pmatrix}\hat{Z}_\mu^{(-)}, & \hat{Y}_\mu\end{pmatrix}
    \begin{pmatrix}
-   \cosh(K_1) & -i\,e^{i\frac{2\pi\mu}{M}}\sinh(K_1) \\
-   i\,e^{-i\frac{2\pi\mu}{M}}\sinh(K_1) & \cosh(K_1)
+   \cosh(K_1) & -i\,\exp(i\frac{2\pi\mu}{M})\sinh(K_1) \\
+   i\,\exp(-i\frac{2\pi\mu}{M})\sinh(K_1) & \cosh(K_1)
    \end{pmatrix}
    \quad (\because \text{二つの列ベクトルを一つの行列の二列として並べる})
 \end{aligned}`,
@@ -3314,7 +3314,7 @@ i e^{-i\theta_\mu}\sinh K_1 & \cosh K_1
         "ただし ",
         math(String.raw`\theta_\mu := 2\pi\mu/M`),
         " と書けば上記の ",
-        math(String.raw`e^{\pm i\frac{2\pi\mu}{M}} = e^{\pm i\theta_\mu}`),
+        math(String.raw`\exp(\pm i\frac{2\pi\mu}{M}) = \exp(\pm i\theta_\mu)`),
         " であり statement の形になる。",
       ]),
     ],
@@ -3454,12 +3454,12 @@ T_g(aX+bW)
 -2K_2^*
 &=\log(\tanh K_2)
 &&(\because\ K_2^*=-\tfrac12\log(\tanh K_2)\text{ と }\mathbb R\text{ の四則})\\
-e^{-2K_2^*}
-&=e^{\log(\tanh K_2)}
+\exp(-2K_2^*)
+&=\exp(\log(\tanh K_2))
 &&(\because\ \text{直前の等式の両辺の指数})\\
 &=\tanh K_2
 &&(\because\ 0<\tanh K_2\text{ と実対数・指数の逆写像性})\\
-e^{2K_2^*}
+\exp(2K_2^*)
 &=(\tanh K_2)^{-1}
 &&(\because\ \text{直前の等式の逆数と }\tanh K_2\ne0).
 \end{aligned}`),
@@ -3474,10 +3474,10 @@ e^{2K_2^*}
 s_2^*
 &=\sinh 2K_2^*
 &&(\because\ s_2^*=\sinh 2K_2^*\text{ の定義})\\
-&= \frac{e^{2K_2^*} - e^{-2K_2^*}}{2}
-&&(\because \sinh x = \tfrac{1}{2}(e^{x}-e^{-x})) \\
+&= \frac{\exp(2K_2^*) - \exp(-2K_2^*)}{2}
+&&(\because \sinh x = \tfrac{1}{2}(\exp(x)-\exp(-x))) \\
 &= \frac{(\tanh K_2)^{-1} - \tanh K_2}{2}
-&&(\because \text{準備の } e^{2K_2^*} = (\tanh K_2)^{-1},\ e^{-2K_2^*} = \tanh K_2) \\
+&&(\because \text{準備の } \exp(2K_2^*) = (\tanh K_2)^{-1},\ \exp(-2K_2^*) = \tanh K_2) \\
 &= \frac{1}{2}\left(\frac{\cosh K_2}{\sinh K_2} - \frac{\sinh K_2}{\cosh K_2}\right)
 &&(\because \tanh x = \tfrac{\sinh x}{\cosh x}\ \text{とその逆数}) \\
 &= \frac{\cosh^2 K_2 - \sinh^2 K_2}{2\sinh K_2\cosh K_2}
@@ -3493,10 +3493,10 @@ s_2^*
 c_2^*
 &=\cosh 2K_2^*
 &&(\because\ c_2^*=\cosh 2K_2^*\text{ の定義})\\
-&= \frac{e^{2K_2^*} + e^{-2K_2^*}}{2}
-&&(\because \cosh x = \tfrac{1}{2}(e^{x}+e^{-x})) \\
+&= \frac{\exp(2K_2^*) + \exp(-2K_2^*)}{2}
+&&(\because \cosh x = \tfrac{1}{2}(\exp(x)+\exp(-x))) \\
 &= \frac{(\tanh K_2)^{-1} + \tanh K_2}{2}
-&&(\because \text{準備の } e^{2K_2^*} = (\tanh K_2)^{-1},\ e^{-2K_2^*} = \tanh K_2) \\
+&&(\because \text{準備の } \exp(2K_2^*) = (\tanh K_2)^{-1},\ \exp(-2K_2^*) = \tanh K_2) \\
 &= \frac{1}{2}\left(\frac{\cosh K_2}{\sinh K_2} + \frac{\sinh K_2}{\cosh K_2}\right)
 &&(\because \tanh x = \tfrac{\sinh x}{\cosh x}\ \text{とその逆数}) \\
 &= \frac{\cosh^2 K_2 + \sinh^2 K_2}{2\sinh K_2\cosh K_2}
@@ -3539,8 +3539,8 @@ c_2^*
         String.raw`A(\theta) :=
 \begin{pmatrix}
 c_1 c_2^* - s_1 s_2^*\cos\theta &
-i e^{i\theta} s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2) \\
--i e^{-i\theta} s_2^*(c_1\cos\theta + i\sin\theta - s_1 c_2) &
+i \exp(i\theta) s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2) \\
+-i \exp(-i\theta) s_2^*(c_1\cos\theta + i\sin\theta - s_1 c_2) &
 c_1 c_2^* - s_1 s_2^*\cos\theta
 \end{pmatrix}`,
       ),
@@ -3579,8 +3579,8 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
       ]),
       displayMath(
         String.raw`B_1(\theta_\mu) := \begin{pmatrix}
-\cosh(K_1) & -i e^{i\theta_\mu}\sinh(K_1) \\
-i e^{-i\theta_\mu}\sinh(K_1) & \cosh(K_1)
+\cosh(K_1) & -i \exp(i\theta_\mu)\sinh(K_1) \\
+i \exp(-i\theta_\mu)\sinh(K_1) & \cosh(K_1)
 \end{pmatrix}, \qquad
 B_2 := \begin{pmatrix}
 \cosh(2K_2^*) & i\sinh(2K_2^*) \\
@@ -3605,19 +3605,19 @@ B_2 := \begin{pmatrix}
 T_{(V)}(\hat{Z}_\mu^{(-)})
 &= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)})\right)\right)
    \quad (\because V=(V_1^{(\pm)})^{1/2}V_2(V_1^{(\pm)})^{1/2}\ \text{と共役作用の合成則}) \\
-&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(\cosh(K_1)\hat{Z}_\mu^{(-)} + i e^{-i\theta_\mu}\sinh(K_1)\hat{Y}_\mu\right)\right)
+&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(\cosh(K_1)\hat{Z}_\mu^{(-)} + i \exp(-i\theta_\mu)\sinh(K_1)\hat{Y}_\mu\right)\right)
    \quad (\because \text{直積作用の計算}) \\
 &= T_{(V_1^{(\pm)})^{1/2}}\!\left(\left(T_{V_2}(\hat{Z}_\mu^{(-)}),\ T_{V_2}(\hat{Y}_\mu)\right)
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\theta_\mu}\sinh(K_1)\end{pmatrix}\right)
+   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\theta_\mu)\sinh(K_1)\end{pmatrix}\right)
    \quad (\because T\text{ の線型性}) \\
 &= T_{(V_1^{(\pm)})^{1/2}}\!\left((\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, B_2
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\theta_\mu}\sinh(K_1)\end{pmatrix}\right)
+   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\theta_\mu)\sinh(K_1)\end{pmatrix}\right)
    \quad (\because \text{直積作用の計算}) \\
 &= \left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Z}_\mu^{(-)}),\ T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)\right) B_2
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\theta_\mu}\sinh(K_1)\end{pmatrix}
+   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\theta_\mu)\sinh(K_1)\end{pmatrix}
    \quad (\because T\text{ の線型性}) \\
 &= (\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, B_1(\theta_\mu)\, B_2
-   \begin{pmatrix}\cosh(K_1) \\ i e^{-i\theta_\mu}\sinh(K_1)\end{pmatrix}
+   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\theta_\mu)\sinh(K_1)\end{pmatrix}
    \quad (\because \text{直積作用の計算})
 \end{aligned}`,
       ),
@@ -3631,16 +3631,16 @@ T_{(V)}(\hat{Z}_\mu^{(-)})
 T_{(V)}(\hat{Y}_\mu)
 &= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(T_{(V_1^{(\pm)})^{1/2}}(\hat{Y}_\mu)\right)\right)
    \quad (\because V=(V_1^{(\pm)})^{1/2}V_2(V_1^{(\pm)})^{1/2}\ \text{と共役作用の合成則}) \\
-&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(-i e^{i\theta_\mu}\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu\right)\right)
+&= T_{(V_1^{(\pm)})^{1/2}}\!\left(T_{V_2}\!\left(-i \exp(i\theta_\mu)\sinh(K_1)\hat{Z}_\mu^{(-)} + \cosh(K_1)\hat{Y}_\mu\right)\right)
    \quad (\because \text{直積作用の計算}) \\
 &= T_{(V_1^{(\pm)})^{1/2}}\!\left(\left(T_{V_2}(\hat{Z}_\mu^{(-)}),\ T_{V_2}(\hat{Y}_\mu)\right)
-   \begin{pmatrix}-i e^{i\theta_\mu}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
+   \begin{pmatrix}-i \exp(i\theta_\mu)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
    \quad (\because T\text{ の線型性}) \\
 &= T_{(V_1^{(\pm)})^{1/2}}\!\left((\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, B_2
-   \begin{pmatrix}-i e^{i\theta_\mu}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
+   \begin{pmatrix}-i \exp(i\theta_\mu)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
    \quad (\because \text{直積作用の計算}) \\
 &= (\hat{Z}_\mu^{(-)},\hat{Y}_\mu)\, B_1(\theta_\mu)\, B_2
-   \begin{pmatrix}-i e^{i\theta_\mu}\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+   \begin{pmatrix}-i \exp(i\theta_\mu)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
    \quad (\because T\text{ の線型性と直積作用の計算})
 \end{aligned}`,
       ),
@@ -3695,7 +3695,7 @@ a^2 - b^2 &= \cosh^2 K_1 - \sinh^2 K_1
       ),
       paragraph([
         "を後で用いる。この記号で ",
-        math(String.raw`B_1(\theta) = \begin{pmatrix} a & -i e^{i\theta} b \\ i e^{-i\theta} b & a\end{pmatrix}`),
+        math(String.raw`B_1(\theta) = \begin{pmatrix} a & -i \exp(i\theta) b \\ i \exp(-i\theta) b & a\end{pmatrix}`),
         "、",
         math(String.raw`B_2 = \begin{pmatrix} C & i S \\ -i S & C\end{pmatrix}`),
         " である。",
@@ -3709,25 +3709,25 @@ a^2 - b^2 &= \cosh^2 K_1 - \sinh^2 K_1
       ]),
       displayMath(
         String.raw`\begin{aligned}
-N_{11} &= C\cdot a + (iS)\cdot\left(i e^{-i\theta} b\right)
+N_{11} &= C\cdot a + (iS)\cdot\left(i \exp(-i\theta) b\right)
         &&(\because \text{行列積の定義}) \\
-&= Ca + i^2 S b\, e^{-i\theta}
+&= Ca + i^2 S b\, \exp(-i\theta)
         &&(\because \text{複素数の積の結合則と可換則}) \\
-&= Ca - S b\, e^{-i\theta}
+&= Ca - S b\, \exp(-i\theta)
         &&(\because i^2=-1) \\
-N_{12} &= C\cdot\left(-i e^{i\theta} b\right) + (iS)\cdot a
+N_{12} &= C\cdot\left(-i \exp(i\theta) b\right) + (iS)\cdot a
         &&(\because \text{行列積の定義}) \\
-&= i\left(Sa - C b\, e^{i\theta}\right)
+&= i\left(Sa - C b\, \exp(i\theta)\right)
         &&(\because \text{分配則と複素数の積の可換則}) \\
-N_{21} &= (-iS)\cdot a + C\cdot\left(i e^{-i\theta} b\right)
+N_{21} &= (-iS)\cdot a + C\cdot\left(i \exp(-i\theta) b\right)
         &&(\because \text{行列積の定義}) \\
-&= i\left(C b\, e^{-i\theta} - Sa\right)
+&= i\left(C b\, \exp(-i\theta) - Sa\right)
         &&(\because \text{分配則と複素数の積の可換則}) \\
-N_{22} &= (-iS)\cdot\left(-i e^{i\theta} b\right) + C\cdot a
+N_{22} &= (-iS)\cdot\left(-i \exp(i\theta) b\right) + C\cdot a
         &&(\because \text{行列積の定義}) \\
-&= i^2 S b\, e^{i\theta} + Ca
+&= i^2 S b\, \exp(i\theta) + Ca
         &&(\because (-i)(-i)=i^2\ \text{と複素数の積の結合則}) \\
-&= Ca - S b\, e^{i\theta}
+&= Ca - S b\, \exp(i\theta)
         &&(\because i^2=-1\ \text{と加法の可換則})
 \end{aligned}`,
       ),
@@ -3739,27 +3739,27 @@ N_{22} &= (-iS)\cdot\left(-i e^{i\theta} b\right) + C\cdot a
       displayMath(
         String.raw`\begin{aligned}
 P_{11}
-&= a\, N_{11} + \left(-i e^{i\theta} b\right) N_{21}
+&= a\, N_{11} + \left(-i \exp(i\theta) b\right) N_{21}
    &&(\because \text{行列積の定義}) \\
-&= a\left(Ca - S b\, e^{-i\theta}\right)
-   + \left(-i e^{i\theta} b\right)\cdot i\left(C b\, e^{-i\theta} - Sa\right)
+&= a\left(Ca - S b\, \exp(-i\theta)\right)
+   + \left(-i \exp(i\theta) b\right)\cdot i\left(C b\, \exp(-i\theta) - Sa\right)
    &&(\because \text{Step 1 の }N_{11},N_{21}\text{ の表示}) \\
-&= Ca^2 - S ab\, e^{-i\theta}
-   + e^{i\theta} b\left(C b\, e^{-i\theta} - Sa\right)
+&= Ca^2 - S ab\, \exp(-i\theta)
+   + \exp(i\theta) b\left(C b\, \exp(-i\theta) - Sa\right)
    &&(\because -i\cdot i = 1) \\
-&= Ca^2 - S ab\, e^{-i\theta} + C b^2 - S ab\, e^{i\theta}
-   &&(\because e^{i\theta}e^{-i\theta} = 1) \\
-&= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right)
+&= Ca^2 - S ab\, \exp(-i\theta) + C b^2 - S ab\, \exp(i\theta)
+   &&(\because \exp(i\theta)\exp(-i\theta) = 1) \\
+&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
    &&(\because \text{分配則による括り出し}) \\
 &= C\, c_1 - S\cdot\frac{s_1}{2}\cdot 2\cos\theta
-   &&(\because a^2+b^2 = c_1,\ 2ab = s_1,\ e^{i\theta}+e^{-i\theta} = 2\cos\theta) \\
+   &&(\because a^2+b^2 = c_1,\ 2ab = s_1,\ \exp(i\theta)+\exp(-i\theta) = 2\cos\theta) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
    &&(\because C=c_2^*,\ S=s_2^*\ \text{の略記})
 \end{aligned}`,
       ),
       paragraph([
         "（",
-        math(String.raw`e^{i\theta} + e^{-i\theta} = 2\cos\theta`),
+        math(String.raw`\exp(i\theta) + \exp(-i\theta) = 2\cos\theta`),
         " は ",
         ref("euler_formula_cos_sin"),
         " による。）これは ",
@@ -3774,19 +3774,19 @@ P_{11}
       displayMath(
         String.raw`\begin{aligned}
 P_{22}
-&= \left(i e^{-i\theta} b\right) N_{12} + a\, N_{22}
+&= \left(i \exp(-i\theta) b\right) N_{12} + a\, N_{22}
    &&(\because \text{行列積の定義}) \\
-&= \left(i e^{-i\theta} b\right)\cdot i\left(Sa - C b\, e^{i\theta}\right)
-   + a\left(Ca - S b\, e^{i\theta}\right)
+&= \left(i \exp(-i\theta) b\right)\cdot i\left(Sa - C b\, \exp(i\theta)\right)
+   + a\left(Ca - S b\, \exp(i\theta)\right)
    &&(\because \text{Step 1 の }N_{12},N_{22}\text{ の表示}) \\
-&= -e^{-i\theta} b\left(Sa - C b\, e^{i\theta}\right) + Ca^2 - S ab\, e^{i\theta}
+&= -\exp(-i\theta) b\left(Sa - C b\, \exp(i\theta)\right) + Ca^2 - S ab\, \exp(i\theta)
    &&(\because i\cdot i = -1) \\
-&= -S ab\, e^{-i\theta} + C b^2 + Ca^2 - S ab\, e^{i\theta}
-   &&(\because \text{分配則と }e^{-i\theta}e^{i\theta}=1) \\
-&= C\left(a^2 + b^2\right) - S ab\left(e^{i\theta} + e^{-i\theta}\right)
+&= -S ab\, \exp(-i\theta) + C b^2 + Ca^2 - S ab\, \exp(i\theta)
+   &&(\because \text{分配則と }\exp(-i\theta)\exp(i\theta)=1) \\
+&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
    &&(\because \text{加法の可換則と分配則による括り出し}) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
-   &&(\because a^2+b^2=c_1,\ 2ab=s_1,\ e^{i\theta}+e^{-i\theta}=2\cos\theta,\ C=c_2^*,\ S=s_2^*)
+   &&(\because a^2+b^2=c_1,\ 2ab=s_1,\ \exp(i\theta)+\exp(-i\theta)=2\cos\theta,\ C=c_2^*,\ S=s_2^*)
 \end{aligned}`,
       ),
       paragraph([
@@ -3800,33 +3800,33 @@ P_{22}
       displayMath(
         String.raw`\begin{aligned}
 P_{12}
-&= a\, N_{12} + \left(-i e^{i\theta} b\right) N_{22}
+&= a\, N_{12} + \left(-i \exp(i\theta) b\right) N_{22}
    &&(\because \text{行列積の定義}) \\
-&= a\cdot i\left(Sa - C b\, e^{i\theta}\right)
-   + \left(-i e^{i\theta} b\right)\left(Ca - S b\, e^{i\theta}\right)
+&= a\cdot i\left(Sa - C b\, \exp(i\theta)\right)
+   + \left(-i \exp(i\theta) b\right)\left(Ca - S b\, \exp(i\theta)\right)
    &&(\because \text{Step 1 の }N_{12},N_{22}\text{ の表示}) \\
-&= i\left[S a^2 - C ab\, e^{i\theta}\right]
-   + i\left[-C ab\, e^{i\theta} + S b^2 e^{2i\theta}\right]
+&= i\left[S a^2 - C ab\, \exp(i\theta)\right]
+   + i\left[-C ab\, \exp(i\theta) + S b^2 \exp(2i\theta)\right]
    &&(\because \text{分配則と複素数の積の結合則}) \\
-&= i\left[S\left(a^2 + b^2 e^{2i\theta}\right) - 2C ab\, e^{i\theta}\right]
+&= i\left[S\left(a^2 + b^2 \exp(2i\theta)\right) - 2C ab\, \exp(i\theta)\right]
    &&(\because \text{分配則による括り出し})
 \end{aligned}`,
       ),
       paragraph([
         "ここで括弧内の第 1 項を ",
-        math(String.raw`e^{i\theta}`),
+        math(String.raw`\exp(i\theta)`),
         " でくくると、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-a^2 + b^2 e^{2i\theta}
-&= e^{i\theta}\left(a^2 e^{-i\theta} + b^2 e^{i\theta}\right)
-   &&(\because e^{i\theta}e^{-i\theta}=1\ \text{と指数法則}) \\
-&= e^{i\theta}\left(a^2(\cos\theta - i\sin\theta) + b^2(\cos\theta + i\sin\theta)\right)
+a^2 + b^2 \exp(2i\theta)
+&= \exp(i\theta)\left(a^2 \exp(-i\theta) + b^2 \exp(i\theta)\right)
+   &&(\because \exp(i\theta)\exp(-i\theta)=1\ \text{と指数法則}) \\
+&= \exp(i\theta)\left(a^2(\cos\theta - i\sin\theta) + b^2(\cos\theta + i\sin\theta)\right)
    &&(\because \text{Euler の公式}) \\
-&= e^{i\theta}\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right)
+&= \exp(i\theta)\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right)
    &&(\because \text{分配則による整理}) \\
-&= e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right)
+&= \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right)
    &&(\because a^2+b^2 = c_1,\ a^2-b^2 = 1)
 \end{aligned}`,
       ),
@@ -3834,15 +3834,15 @@ a^2 + b^2 e^{2i\theta}
       displayMath(
         String.raw`\begin{aligned}
 P_{12}
-&= i\left[S\, e^{i\theta}\left(c_1\cos\theta - i\sin\theta\right) - C s_1 e^{i\theta}\right]
+&= i\left[S\, \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right) - C s_1 \exp(i\theta)\right]
    &&(\because \text{直前の補助計算と }2ab=s_1) \\
-&= i e^{i\theta}\left[S\left(c_1\cos\theta - i\sin\theta\right) - C s_1\right]
-   &&(\because \text{分配則による }e^{i\theta}\text{ の括り出し}) \\
-&= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
+&= i \exp(i\theta)\left[S\left(c_1\cos\theta - i\sin\theta\right) - C s_1\right]
+   &&(\because \text{分配則による }\exp(i\theta)\text{ の括り出し}) \\
+&= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
    &&(\because S=s_2^*,\ C=c_2^*\ \text{の略記}) \\
-&= i e^{i\theta}\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
+&= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
    &&(\because c_2^* = s_2^* c_2) \\
-&= i e^{i\theta} s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
+&= i \exp(i\theta) s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
    &&(\because \text{分配則による }s_2^*\text{ の括り出し})
 \end{aligned}`,
       ),
@@ -3864,22 +3864,22 @@ P_{12}
         " は ",
         math(String.raw`A(\theta)`),
         " の (1,2) 成分 ",
-        math(String.raw`i e^{i\theta} s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2) = \gamma_2(\theta)`),
+        math(String.raw`i \exp(i\theta) s_2^*(c_1\cos\theta - i\sin\theta - s_1 c_2) = \gamma_2(\theta)`),
         " に一致する。",
       ]),
       paragraph(["Step 5: ", math(String.raw`P`), " の (2,1) 成分。"]),
       displayMath(
         String.raw`\begin{aligned}
 P_{21}
-&= \left(i e^{-i\theta} b\right) N_{11} + a\, N_{21}
+&= \left(i \exp(-i\theta) b\right) N_{11} + a\, N_{21}
    &&(\because \text{行列積の定義}) \\
-&= \left(i e^{-i\theta} b\right)\left(Ca - S b\, e^{-i\theta}\right)
-   + a\cdot i\left(C b\, e^{-i\theta} - Sa\right)
+&= \left(i \exp(-i\theta) b\right)\left(Ca - S b\, \exp(-i\theta)\right)
+   + a\cdot i\left(C b\, \exp(-i\theta) - Sa\right)
    &&(\because \text{Step 1 の }N_{11},N_{21}\text{ の表示}) \\
-&= i\left[C ab\, e^{-i\theta} - S b^2 e^{-2i\theta}\right]
-   + i\left[C ab\, e^{-i\theta} - S a^2\right]
+&= i\left[C ab\, \exp(-i\theta) - S b^2 \exp(-2i\theta)\right]
+   + i\left[C ab\, \exp(-i\theta) - S a^2\right]
    &&(\because \text{分配則と複素数の積の結合則}) \\
-&= -i\left[S\left(a^2 + b^2 e^{-2i\theta}\right) - 2C ab\, e^{-i\theta}\right]
+&= -i\left[S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)\right]
    &&(\because \text{分配則による括り出し})
 \end{aligned}`,
       ),
@@ -3896,11 +3896,11 @@ P_{21}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-S\left(a^2 + b^2 e^{-2i\theta}\right) - 2C ab\, e^{-i\theta}
-&= e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
+S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)
+&= \exp(-i\theta) s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
    &&(\because \text{Step 4 の補助計算で }\theta\text{ を }-\theta\text{ に置換}) \\
 P_{21}
-&= -i e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
+&= -i \exp(-i\theta) s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
    &&(\because \text{直前の等式を }P_{21}\text{ の表示へ代入}) \\
 &= -\gamma_2(-\theta)
    &&(\because \gamma_2\text{ の定義と }\cos(-\theta)=\cos\theta,\ \sin(-\theta)=-\sin\theta)
@@ -3909,9 +3909,9 @@ P_{21}
       paragraph(["実際、"]),
       displayMath(String.raw`\begin{aligned}
 \gamma_2(-\theta)
-&= i e^{-i\theta} s_2^*\left(c_1\cos(-\theta) - i\sin(-\theta) - s_1 c_2\right)
+&= i \exp(-i\theta) s_2^*\left(c_1\cos(-\theta) - i\sin(-\theta) - s_1 c_2\right)
 && (\because\ \gamma_2\text{ の定義}) \\
-&= i e^{-i\theta} s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
+&= i \exp(-i\theta) s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
 && (\because\ \cos(-\theta)=\cos\theta,\ \sin(-\theta)=-\sin\theta)
 \end{aligned}`),
       paragraph([
@@ -3922,7 +3922,7 @@ P_{21}
         " の ",
         math(String.raw`A(\theta)`),
         " の (2,1) 成分 ",
-        math(String.raw`-i e^{-i\theta} s_2^*(c_1\cos\theta + i\sin\theta - s_1 c_2)`),
+        math(String.raw`-i \exp(-i\theta) s_2^*(c_1\cos\theta + i\sin\theta - s_1 c_2)`),
         " に一致する。",
       ]),
       paragraph([
@@ -3964,8 +3964,8 @@ String.raw`\left(T_{(V)}(\hat{Z}_\mu^{(-)}),\ T_{(V)}(\hat{Y}_\mu)\right)
       displayMath(
         String.raw`B_1(\theta_\mu)
 := \begin{pmatrix}
-\cosh K_1 & -ie^{i\theta_\mu}\sinh K_1 \\
-ie^{-i\theta_\mu}\sinh K_1 & \cosh K_1
+\cosh K_1 & -i\exp(i\theta_\mu)\sinh K_1 \\
+i\exp(-i\theta_\mu)\sinh K_1 & \cosh K_1
 \end{pmatrix},
 \quad
 B_2 := \begin{pmatrix}
@@ -4032,7 +4032,7 @@ B_2 := \begin{pmatrix}
         String.raw`\gamma_1(\theta_\mu) := c_1 c_2^* - s_1 s_2^*\cos\theta_\mu \in \mathbb{R}`,
       ),
       displayMath(
-        String.raw`\gamma_2(\theta_\mu) := i e^{i\theta_\mu} s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2) \in \mathbb{C}`,
+        String.raw`\gamma_2(\theta_\mu) := i \exp(i\theta_\mu) s_2^*(c_1\cos\theta_\mu - i\sin\theta_\mu - s_1 c_2) \in \mathbb{C}`,
       ),
       paragraph(["とおくと、"]),
       displayMath(

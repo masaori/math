@@ -132,7 +132,7 @@ export default defineBlocks([
           math(String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)`),
           " は転送行列の側で**直接計算できる**：",
           math(String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-= \left(2e^{-K_2}\cosh K_1\right)^{M} + \left(2e^{K_2}\sinh K_1\right)^{M} > 0`),
+= \left(2\exp(-K_2)\cosh K_1\right)^{M} + \left(2\exp(K_2)\sinh K_1\right)^{M} > 0`),
           "（",
           ref("trace_of_epsilon_V_plus"),
           "）。使うのは 1 次元開鎖のスピン和だけである。",
@@ -275,7 +275,7 @@ export default defineBlocks([
         "(2) ",
         ref("def_half_integer_checkZ"),
         " の ",
-        math(String.raw`\check{Z}_\mu = \sum_{j=1}^{M}Z_je^{-ij\tilde\theta_\mu}`),
+        math(String.raw`\check{Z}_\mu = \sum_{j=1}^{M}Z_j\exp(-ij\tilde\theta_\mu)`),
         " は ",
         math(String.raw`Z_j`),
         " の ",
@@ -287,13 +287,13 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\,\check{Z}_\mu
-&= \varepsilon\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Z_j
+&= \varepsilon\sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)Z_j
    \quad (\because \text{def\_half\_integer\_modes}) \\
-&= \sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}\left(\varepsilon\,Z_j\right)
+&= \sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)\left(\varepsilon\,Z_j\right)
    \quad (\because \text{積の } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}\left(-Z_j\,\varepsilon\right)
+&= \sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)\left(-Z_j\,\varepsilon\right)
    \quad (\because \text{(1) を } M \text{ 個の項へ同時適用}) \\
-&= -\left(\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Z_j\right)\varepsilon
+&= -\left(\sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)Z_j\right)\varepsilon
    \quad (\because \text{積の } \mathbb{C} \text{ 線型性}) \\
 &= -\check{Z}_\mu\,\varepsilon
    \quad (\because \text{def\_half\_integer\_modes})
@@ -931,18 +931,18 @@ q
    \quad (\because \text{有限個の因子の積の展開}) \\
 &= \eta_{(1,\dots,1)}(2\sinh 2K_2)^{M/2}\prod_{\mu=1}^{M}
    2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-   \quad \left(\because \sinh x = \frac{e^{x}-e^{-x}}{2}\right)
+   \quad \left(\because \sinh x = \frac{\exp(x)-\exp(-x)}{2}\right)
 \end{aligned}`,
       ),
       paragraph([
         "（",
         math(String.raw`\epsilon_\mu = 0`),
         " の項が ",
-        math(String.raw`(-1)^{1}e^{-\gamma/2}`),
+        math(String.raw`(-1)^{1}\exp(-\gamma/2)`),
         "、",
         math(String.raw`\epsilon_\mu = 1`),
         " の項が ",
-        math(String.raw`(-1)^{0}e^{+\gamma/2}`),
+        math(String.raw`(-1)^{0}\exp(+\gamma/2)`),
         " である。）Step 1 と合わせて主張の等式を得る。",
       ]),
       paragraph([
@@ -1496,7 +1496,7 @@ Gf_{\iota(s)}
         math(String.raw`K\in\mathbb R`),
         " とする。このとき",
       ]),
-      displayMath(String.raw`\sum_{s\in\mathfrak M}e^{K E(s)}
+      displayMath(String.raw`\sum_{s\in\mathfrak M}\exp(K E(s))
 =2\left(2\cosh K\right)^{M-1}`),
       paragraph([
         "が成り立つ。（指数評価による ",
@@ -1540,20 +1540,20 @@ Gf_{\iota(s)}
         "（",
         math(String.raw`n=1`),
         "、実数の指数法則）より ",
-        math(String.raw`e^{KE(s)} = \prod_{m=1}^{M-1}e^{Kt_m}`),
+        math(String.raw`\exp(KE(s)) = \prod_{m=1}^{M-1}\exp(Kt_m)`),
         " である。Step 1 の全単射で和を書き換えると",
       ]),
       paragraph([ref("def_cosh_sinh"), " より、最後から二つ目の等号が成り立つ。"]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{s\in\mathfrak{M}}e^{KE(s)}
+\sum_{s\in\mathfrak{M}}\exp(KE(s))
 &= \sum_{s(1)\in\{-1,1\}}\ \sum_{t_1,\dots,t_{M-1}\in\{-1,1\}}
-   \prod_{m=1}^{M-1}e^{Kt_m}
+   \prod_{m=1}^{M-1}\exp(Kt_m)
    \quad (\because \text{Step 1 の全単射}) \\
 &= \left(\sum_{s(1)\in\{-1,1\}}1\right)
-   \prod_{m=1}^{M-1}\left(\sum_{t_m\in\{-1,1\}}e^{Kt_m}\right)
+   \prod_{m=1}^{M-1}\left(\sum_{t_m\in\{-1,1\}}\exp(Kt_m)\right)
    \quad (\because \text{有限個の因子の積の展開（各 } t_m \text{ は独立に走る）}) \\
-&= 2\prod_{m=1}^{M-1}\left(e^{K}+e^{-K}\right)
+&= 2\prod_{m=1}^{M-1}\left(\exp(K)+\exp(-K)\right)
    \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
 &= 2\prod_{m=1}^{M-1}\left(2\cosh K\right)
    \quad \left(\because \text{双曲線余弦の定義}\right) \\
@@ -1581,7 +1581,7 @@ Gf_{\iota(s)}
         math(String.raw`K\in\mathbb R`),
         " とする。このとき",
       ]),
-      displayMath(String.raw`\sum_{s\in\mathfrak M}s(M)s(1)e^{K E(s)}
+      displayMath(String.raw`\sum_{s\in\mathfrak M}s(M)s(1)\exp(K E(s))
 =2\left(2\sinh K\right)^{M-1}`),
       paragraph([
         "が成り立つ。（指数評価による ",
@@ -1635,20 +1635,20 @@ Gf_{\iota(s)}
         "（",
         math(String.raw`n=1`),
         "、実数の指数法則）より ",
-        math(String.raw`e^{KE(s)}=\prod_{m=1}^{M-1}e^{Kt_m}`),
+        math(String.raw`\exp(KE(s))=\prod_{m=1}^{M-1}\exp(Kt_m)`),
         " である。したがって",
       ]),
       paragraph([ref("def_cosh_sinh"), " より、最後から二つ目の等号が成り立つ。"]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{s\in\mathfrak{M}}s(M)s(1)e^{KE(s)}
+\sum_{s\in\mathfrak{M}}s(M)s(1)\exp(KE(s))
 &= \sum_{s(1)\in\{-1,1\}}\ \sum_{t_1,\dots,t_{M-1}\in\{-1,1\}}
-   \left(\prod_{m=1}^{M-1}t_m\right)\prod_{m=1}^{M-1}e^{Kt_m}
+   \left(\prod_{m=1}^{M-1}t_m\right)\prod_{m=1}^{M-1}\exp(Kt_m)
    \quad (\because \text{Step 1 の全単射と直前の等式}) \\
 &= \left(\sum_{s(1)\in\{-1,1\}}1\right)
-   \prod_{m=1}^{M-1}\left(\sum_{t_m\in\{-1,1\}}t_m\,e^{Kt_m}\right)
+   \prod_{m=1}^{M-1}\left(\sum_{t_m\in\{-1,1\}}t_m\,\exp(Kt_m)\right)
    \quad (\because \text{有限個の因子の積の展開}) \\
-&= 2\prod_{m=1}^{M-1}\left(e^{K}-e^{-K}\right)
+&= 2\prod_{m=1}^{M-1}\left(\exp(K)-\exp(-K)\right)
    \quad (\because \text{二元集合 }\{-1,1\}\text{ 上の二つの有限和を計算}) \\
 &= 2\prod_{m=1}^{M-1}\left(2\sinh K\right)
    \quad \left(\because \text{双曲線正弦の定義}\right) \\
@@ -1686,7 +1686,7 @@ Gf_{\iota(s)}
     proof: [
       displayMath(
         String.raw`\begin{aligned}
-\sum_{s\in\mathfrak M}e^{K E(s)}
+\sum_{s\in\mathfrak M}\exp(K E(s))
 &=2\left(2\cosh K\right)^{M-1}
    \quad (\because \blkref{open_chain_partition_sum}) \\
 &>0
@@ -1696,7 +1696,7 @@ Gf_{\iota(s)}
       ),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{s\in\mathfrak M}s(M)s(1)e^{K E(s)}
+\sum_{s\in\mathfrak M}s(M)s(1)\exp(K E(s))
 &=2\left(2\sinh K\right)^{M-1}
    \quad (\because \blkref{open_chain_endpoint_product_sum}) \\
 &>0
@@ -1721,7 +1721,7 @@ Gf_{\iota(s)}
     origin: { path: SRC, ordinal: 8 },
     title: {
       tex: String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-= \left(2e^{-K_2}\cosh K_1\right)^{M} + \left(2e^{K_2}\sinh K_1\right)^{M} > 0`,
+= \left(2\exp(-K_2)\cosh K_1\right)^{M} + \left(2\exp(K_2)\sinh K_1\right)^{M} > 0`,
     },
     labels: ["trace_of_epsilon_V_plus"],
     statement: [
@@ -1737,8 +1737,8 @@ Gf_{\iota(s)}
       ]),
       displayMath(
         String.raw`\mathrm{tr}\!\left(\varepsilon\,V^{(+)}\right)
-= \left(2e^{-K_2}\cosh K_1\right)^{M}
-+ \left(2e^{K_2}\sinh K_1\right)^{M}
+= \left(2\exp(-K_2)\cosh K_1\right)^{M}
++ \left(2\exp(K_2)\sinh K_1\right)^{M}
 \ \in\ \mathbb{R}_{>0}`,
       ),
       paragraph([
@@ -1914,7 +1914,7 @@ Gf_{\iota(s)}
           " より ",
           math(String.raw`\exp(K_1D_0)`),
           " は対角行列で ",
-          math(String.raw`\left(\exp(K_1D_0)\right)_{\iota(s),\iota(s)} = e^{K_1E(s)}`),
+          math(String.raw`\left(\exp(K_1D_0)\right)_{\iota(s),\iota(s)} = \exp(K_1E(s))`),
           "（",
           math(String.raw`E(s) = \sum_{m=1}^{M-1}s(m)s(m+1)`),
           " は ",
@@ -1938,9 +1938,9 @@ Gf_{\iota(s)}
           " より ",
           math(String.raw`(V_2)_{\iota(s),\iota(s')} = \exp\!\left(K_2\sum_{m=1}^{M}s(m)s'(m)\right)`),
           "。とくに ",
-          math(String.raw`(V_2)_{\iota(s),\iota(s)} = e^{MK_2}`),
+          math(String.raw`(V_2)_{\iota(s),\iota(s)} = \exp(MK_2)`),
           "、",
-          math(String.raw`(V_2)_{\iota(-s),\iota(s)} = e^{-MK_2}`),
+          math(String.raw`(V_2)_{\iota(-s),\iota(s)} = \exp(-MK_2)`),
           "。",
         ],
       ]),
@@ -2003,12 +2003,12 @@ Gf_{\iota(s)}
       displayMath(
         String.raw`\begin{aligned}
 \left(\exp(K_1D_0)\,\varepsilon\,V_2\right)_{\iota(s),\iota(s)}
-&= e^{K_1E(s)}\left(\varepsilon V_2\right)_{\iota(s),\iota(s)}
+&= \exp(K_1E(s))\left(\varepsilon V_2\right)_{\iota(s),\iota(s)}
    \quad (\because \text{(a) の対角性}) \\
-&= e^{K_1E(s)}\left(V_2\right)_{\iota(-s),\iota(s)}
+&= \exp(K_1E(s))\left(V_2\right)_{\iota(-s),\iota(s)}
    \quad (\because \text{(b), } \varepsilon \text{ は行番号 } \iota(s)
    \text{ を } \iota(-s) \text{ に移す置換行列}) \\
-&= e^{K_1E(s)}\,e^{-MK_2}
+&= \exp(K_1E(s))\,\exp(-MK_2)
    \quad (\because \text{(c)})
 \end{aligned}`,
       ),
@@ -2016,11 +2016,11 @@ Gf_{\iota(s)}
       displayMath(
         String.raw`\begin{aligned}
 \left(\exp(K_1D_0)\,G\,V_2\right)_{\iota(s),\iota(s)}
-&= e^{K_1E(s)}\left(G\,V_2\right)_{\iota(s),\iota(s)}
+&= \exp(K_1E(s))\left(G\,V_2\right)_{\iota(s),\iota(s)}
    \quad (\because \text{(a) の } \exp(K_1D_0) \text{ の対角性}) \\
-&= e^{K_1E(s)}\,s(M)s(1)\,\left(V_2\right)_{\iota(s),\iota(s)}
+&= \exp(K_1E(s))\,s(M)s(1)\,\left(V_2\right)_{\iota(s),\iota(s)}
    \quad (\because \text{(a) の } G \text{ の対角性}) \\
-&= e^{K_1E(s)}\,s(M)s(1)\,e^{MK_2}
+&= \exp(K_1E(s))\,s(M)s(1)\,\exp(MK_2)
    \quad (\because \text{(c)})
 \end{aligned}`,
       ),
@@ -2037,17 +2037,17 @@ Gf_{\iota(s)}
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-&= \cosh(K_1)\,e^{-MK_2}\sum_{s\in\mathfrak{M}}e^{K_1E(s)}
- + \sinh(K_1)\,e^{MK_2}\sum_{s\in\mathfrak{M}}s(M)s(1)e^{K_1E(s)}
+&= \cosh(K_1)\,\exp(-MK_2)\sum_{s\in\mathfrak{M}}\exp(K_1E(s))
+ + \sinh(K_1)\,\exp(MK_2)\sum_{s\in\mathfrak{M}}s(M)s(1)\exp(K_1E(s))
    \quad (\because \text{def\_trace と直前の 2 式}) \\
-&= \cosh(K_1)\,e^{-MK_2}\cdot 2\left(2\cosh K_1\right)^{M-1}
- + \sinh(K_1)\,e^{MK_2}\cdot 2\left(2\sinh K_1\right)^{M-1}
+&= \cosh(K_1)\,\exp(-MK_2)\cdot 2\left(2\cosh K_1\right)^{M-1}
+ + \sinh(K_1)\,\exp(MK_2)\cdot 2\left(2\sinh K_1\right)^{M-1}
    \quad (\because \text{二つの1次元開鎖のスピン和公式}) \\
-&= 2^{M}e^{-MK_2}\left(\cosh K_1\right)^{M}
- + 2^{M}e^{MK_2}\left(\sinh K_1\right)^{M}
+&= 2^{M}\exp(-MK_2)\left(\cosh K_1\right)^{M}
+ + 2^{M}\exp(MK_2)\left(\sinh K_1\right)^{M}
    \quad \left(\because 2\cdot 2^{M-1} = 2^{M}\right) \\
-&= \left(2e^{-K_2}\cosh K_1\right)^{M}
- + \left(2e^{K_2}\sinh K_1\right)^{M}
+&= \left(2\exp(-K_2)\cosh K_1\right)^{M}
+ + \left(2\exp(K_2)\sinh K_1\right)^{M}
 \end{aligned}`,
       ),
       paragraph([
@@ -2062,7 +2062,7 @@ Gf_{\iota(s)}
         "、",
         math(String.raw`\sinh K_1 > 0`),
         "。また ",
-        math(String.raw`e^{\pm K_2} > 0`),
+        math(String.raw`\exp(\pm K_2) > 0`),
         "。したがって、その等号の二項はともに正であり、和も正である。",
       ]),
     ],
@@ -2328,25 +2328,25 @@ Z_j^*
         "(2) ",
         ref("conjugate_index_of_check_Z_Y"),
         " (2) より ",
-        math(String.raw`e^{-ij\tilde\theta_{M+1-\mu}} = e^{ij\tilde\theta_\mu}`),
+        math(String.raw`\exp(-ij\tilde\theta_{M+1-\mu}) = \exp(ij\tilde\theta_\mu)`),
         " である。",
         math(String.raw`\tilde\theta_\mu \in \mathbb{R}`),
         " なので ",
         ref("euler_formula_cos_sin"),
         " より ",
-        math(String.raw`\overline{e^{-ij\tilde\theta_\mu}} = e^{ij\tilde\theta_\mu}`),
+        math(String.raw`\overline{\exp(-ij\tilde\theta_\mu)} = \exp(ij\tilde\theta_\mu)`),
         " であり、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{Z}_\mu^*
-&= \left(\sum_{j=1}^{M}e^{-ij\tilde\theta_\mu}Z_j\right)^*
+&= \left(\sum_{j=1}^{M}\exp(-ij\tilde\theta_\mu)Z_j\right)^*
    \quad (\because \text{def\_half\_integer\_modes}) \\
-&= \sum_{j=1}^{M}\overline{e^{-ij\tilde\theta_\mu}}\;Z_j^*
+&= \sum_{j=1}^{M}\overline{\exp(-ij\tilde\theta_\mu)}\;Z_j^*
    \quad (\because \text{転置共役は和を保ち、スカラー倍を複素共役つきで保つ}) \\
-&= \sum_{j=1}^{M}e^{ij\tilde\theta_\mu}\,Z_j
+&= \sum_{j=1}^{M}\exp(ij\tilde\theta_\mu)\,Z_j
    \quad (\because \text{(1) と } \tilde\theta_\mu \in \mathbb{R}) \\
-&= \sum_{j=1}^{M}e^{-ij\tilde\theta_{M+1-\mu}}\,Z_j
+&= \sum_{j=1}^{M}\exp(-ij\tilde\theta_{M+1-\mu})\,Z_j
    \quad (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)}) \\
 &= \check{Z}_{M+1-\mu}
    \quad (\because \text{def\_half\_integer\_modes})

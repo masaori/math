@@ -6,7 +6,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: "_old/typst/main.typ", ordinal: 7 },
-    title: { tex: String.raw`e^{X} Y e^{-X} = e^{\mathrm{ad}(X)}(Y) \text{ の証明}` },
+    title: { tex: String.raw`\exp(X) Y \exp(-X) = \exp(\mathrm{ad}(X))(Y) \text{ の証明}` },
     labels: [],
   },
   {
@@ -1041,7 +1041,7 @@ h
     standing: "mainTheorem",
     origin: { path: "structured-latex/content/005_exp_conjugation_proof.ts", ordinal: 9 },
     title: {
-      tex: String.raw`\text{行列版: } e^{X} Y e^{-X} = e^{\mathrm{ad}_X}(Y)`,
+      tex: String.raw`\text{行列版: } \exp(X) Y \exp(-X) = \exp(\mathrm{ad}_X)(Y)`,
     },
     labels: ["matrix_exp_conjugation"],
     statement: [
@@ -1759,7 +1759,7 @@ X(-X)
       path: "_old/typst/parts/005_exp(X)Yexp(-X)=exp(ad(X))(Y)の証明/007_theorem_exp(ad_X)(Y)の級数展開_BrianHall_Prop3.35.typ",
       ordinal: 8,
     },
-    title: { tex: String.raw`e^{\mathrm{ad}_X}(Y) \text{ の級数展開}` },
+    title: { tex: String.raw`\exp(\mathrm{ad}_X)(Y) \text{ の級数展開}` },
     labels: ["brianhall_exc14"],
     statement: [
       paragraph([
@@ -1783,7 +1783,7 @@ X(-X)
         " で定まる ",
         math(String.raw`m`),
         " 重交換子、",
-        math(String.raw`e^{\mathrm{ad}_X}:=\exp(\mathrm{ad}_X)`),
+        math(String.raw`\exp(\mathrm{ad}_X):=\exp(\mathrm{ad}_X)`),
         " は ",
         ref("def_exp"),
         " の指数写像を有限次元 ",
@@ -1801,7 +1801,7 @@ X(-X)
         " において収束し、",
       ]),
       displayMath(
-        String.raw`e^{\mathrm{ad}_X}(Y)
+        String.raw`\exp(\mathrm{ad}_X)(Y)
 = \sum_{n=0}^{\infty} \frac{1}{n!}
   \underbrace{[X,[X,\dots,[X,Y]\dots]]}_{n\text{ times}}
 = Y + [X,Y] + \tfrac{1}{2}[X,[X,Y]] + \tfrac{1}{6}[X,[X,[X,Y]]] + \cdots`,
@@ -1877,9 +1877,9 @@ X(-X)
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{\mathrm{ad}_X}(Y)
+\exp(\mathrm{ad}_X)(Y)
 &= \exp\!\left(\mathrm{ad}_X\right)(Y)
-   &&(\because\ e^{\mathrm{ad}_X}:=\exp(\mathrm{ad}_X)\ \text{という本定理の主張での記号の定め方}) \\
+   &&(\because\ \exp(\mathrm{ad}_X):=\exp(\mathrm{ad}_X)\ \text{という本定理の主張での記号の定め方}) \\
 &= \lim_{N\to\infty}P_N
    &&(\because\ \text{指数写像の定義}\ \blkref{def_exp}\ \text{と級数の収束}\ \blkref{exp_converges}\ \text{および}\ \blkref{matrix_exp_conjugation}\ \text{の (2) の第 2 の等号。}\ P_N\ \text{は Step 2 の有限和}) \\
 &= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)

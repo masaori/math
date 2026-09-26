@@ -411,9 +411,9 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         " とすると、",
       ]),
       displayMath(
-        String.raw`\exp(D)_{kl} = \begin{cases} e^{d_k} & (k = l) \\ 0 & (k \neq l)\end{cases}`,
+        String.raw`\exp(D)_{kl} = \begin{cases} \exp(d_k) & (k = l) \\ 0 & (k \neq l)\end{cases}`,
       ),
-      paragraph(["すなわち ", math(String.raw`\exp(D)`), " も対角行列で、対角成分は ", math(String.raw`e^{d_k}`), " である。"]),
+      paragraph(["すなわち ", math(String.raw`\exp(D)`), " も対角行列で、対角成分は ", math(String.raw`\exp(d_k)`), " である。"]),
     ],
     proof: [
       paragraph([
@@ -514,9 +514,9 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}`,
         " では ",
         ref("real_exp_series_converges"),
         "（複素数の場合も同じ級数）より ",
-        math(String.raw`\sum_{p=0}^{K} d_k^{\,p}/p! \to e^{d_k}`),
+        math(String.raw`\sum_{p=0}^{K} d_k^{\,p}/p! \to \exp(d_k)`),
         " なので ",
-        math(String.raw`\exp(D)_{kk} = e^{d_k}`),
+        math(String.raw`\exp(D)_{kk} = \exp(d_k)`),
         "。",
       ]),
     ],
@@ -668,7 +668,7 @@ D\, f_{\iota(\mu)}
         " を",
       ]),
       displayMath(
-        String.raw`A := \begin{pmatrix} e^{K_2} & e^{-K_2} \\ e^{-K_2} & e^{K_2} \end{pmatrix}`,
+        String.raw`A := \begin{pmatrix} \exp(K_2) & \exp(-K_2) \\ \exp(-K_2) & \exp(K_2) \end{pmatrix}`,
       ),
       paragraph([
         "（すなわち ",
@@ -766,8 +766,8 @@ D\, f_{\iota(\mu)}
         "なので、示すべきは次の 2 つの等式である。",
       ]),
       displayMath(
-        String.raw`(2s_2)^{1/2}\cosh K_2^* = e^{K_2}, \qquad
-(2s_2)^{1/2}\sinh K_2^* = e^{-K_2}`,
+        String.raw`(2s_2)^{1/2}\cosh K_2^* = \exp(K_2), \qquad
+(2s_2)^{1/2}\sinh K_2^* = \exp(-K_2)`,
       ),
       paragraph([
         "Step 2（",
@@ -784,8 +784,8 @@ D\, f_{\iota(\mu)}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-2K_2^*}
-&= e^{\log(\tanh K_2)}
+\exp(-2K_2^*)
+&= \exp(\log(\tanh K_2))
    \quad (\because \log(\tanh K_2) = -2K_2^* \text{ を指数へ代入}) \\
 &= \tanh K_2
    \quad (\because \exp \text{ と } \log \text{ は互いに逆写像})
@@ -808,20 +808,20 @@ e^{-2K_2^*}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-K_2^*}
-&= \left(e^{-2K_2^*}\right)^{1/2}
-   \quad (\because \text{指数法則 } e^{-2K_2^*} = (e^{-K_2^*})^2 \text{ と } e^{-K_2^*} > 0 \text{ の正の平方根}) \\
+\exp(-K_2^*)
+&= \left(\exp(-2K_2^*)\right)^{1/2}
+   \quad (\because \text{指数法則 } \exp(-2K_2^*) = (\exp(-K_2^*))^2 \text{ と } \exp(-K_2^*) > 0 \text{ の正の平方根}) \\
 &= t^{1/2}
-   \quad (\because e^{-2K_2^*} = t),
+   \quad (\because \exp(-2K_2^*) = t),
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
-e^{K_2^*}
-&= \frac{1}{e^{-K_2^*}}
-   \quad (\because \text{指数法則 } e^{K_2^*}e^{-K_2^*} = 1) \\
+\exp(K_2^*)
+&= \frac{1}{\exp(-K_2^*)}
+   \quad (\because \text{指数法則 } \exp(K_2^*)\exp(-K_2^*) = 1) \\
 &= \frac{1}{t^{1/2}}
-   \quad (\because e^{-K_2^*} = t^{1/2}) \\
+   \quad (\because \exp(-K_2^*) = t^{1/2}) \\
 &= t^{-1/2}
    \quad (\because \text{負冪の定義 } t^{-1/2} = 1/t^{1/2})
 \end{aligned}`,
@@ -830,10 +830,10 @@ e^{K_2^*}
       displayMath(
         String.raw`\begin{aligned}
 \cosh K_2^*
-&= \frac{e^{K_2^*} + e^{-K_2^*}}{2}
-   \quad (\because \cosh \text{ の定義 } \cosh x = \tfrac{e^{x}+e^{-x}}{2}) \\
+&= \frac{\exp(K_2^*) + \exp(-K_2^*)}{2}
+   \quad (\because \cosh \text{ の定義 } \cosh x = \tfrac{\exp(x)+\exp(-x)}{2}) \\
 &= \frac{t^{-1/2} + t^{1/2}}{2}
-   \quad (\because e^{K_2^*} = t^{-1/2},\ e^{-K_2^*} = t^{1/2}) \\
+   \quad (\because \exp(K_2^*) = t^{-1/2},\ \exp(-K_2^*) = t^{1/2}) \\
 &= \frac{1+t}{2\,t^{1/2}}
    \quad (\because \text{分子・分母に } t^{1/2} \text{ を掛ける}),
 \end{aligned}`,
@@ -841,10 +841,10 @@ e^{K_2^*}
       displayMath(
         String.raw`\begin{aligned}
 \sinh K_2^*
-&= \frac{e^{K_2^*} - e^{-K_2^*}}{2}
-   \quad (\because \sinh \text{ の定義 } \sinh x = \tfrac{e^{x}-e^{-x}}{2}) \\
+&= \frac{\exp(K_2^*) - \exp(-K_2^*)}{2}
+   \quad (\because \sinh \text{ の定義 } \sinh x = \tfrac{\exp(x)-\exp(-x)}{2}) \\
 &= \frac{t^{-1/2} - t^{1/2}}{2}
-   \quad (\because e^{K_2^*} = t^{-1/2},\ e^{-K_2^*} = t^{1/2}) \\
+   \quad (\because \exp(K_2^*) = t^{-1/2},\ \exp(-K_2^*) = t^{1/2}) \\
 &= \frac{1-t}{2\,t^{1/2}}
    \quad (\because \text{分子・分母に } t^{1/2} \text{ を掛ける}).
 \end{aligned}`,
@@ -861,8 +861,8 @@ e^{K_2^*}
    \quad (\because t = \tanh K_2 = \tfrac{\sinh K_2}{\cosh K_2}) \\
 &= \frac{\cosh K_2 + \sinh K_2}{\cosh K_2}
    \quad (\because \text{通分}) \\
-&= \frac{e^{K_2}}{\cosh K_2}
-   \quad (\because \cosh x + \sinh x = e^{x}),
+&= \frac{\exp(K_2)}{\cosh K_2}
+   \quad (\because \cosh x + \sinh x = \exp(x)),
 \end{aligned}`,
       ),
       displayMath(
@@ -872,13 +872,13 @@ e^{K_2^*}
    \quad (\because t = \tanh K_2 = \tfrac{\sinh K_2}{\cosh K_2}) \\
 &= \frac{\cosh K_2 - \sinh K_2}{\cosh K_2}
    \quad (\because \text{通分}) \\
-&= \frac{e^{-K_2}}{\cosh K_2}
-   \quad (\because \cosh x - \sinh x = e^{-x}).
+&= \frac{\exp(-K_2)}{\cosh K_2}
+   \quad (\because \cosh x - \sinh x = \exp(-x)).
 \end{aligned}`,
       ),
       paragraph([
         "（",
-        math(String.raw`\cosh x \pm \sinh x = e^{\pm x}`),
+        math(String.raw`\cosh x \pm \sinh x = \exp(\pm x)`),
         " は ",
         ref("cosh_sinh_basic_properties"),
         " による。）",
@@ -943,9 +943,9 @@ e^{K_2^*}
    \quad (\because \text{積の並べ替え}) \\
 &= \cosh K_2 \cdot (1+t)
    \quad (\because \text{Step 3 の前因子の式}) \\
-&= \cosh K_2 \cdot \frac{e^{K_2}}{\cosh K_2}
+&= \cosh K_2 \cdot \frac{\exp(K_2)}{\cosh K_2}
    \quad (\because \text{Step 2 の } 1+t \text{ の式}) \\
-&= e^{K_2}
+&= \exp(K_2)
    \quad (\because \text{約分 } \tfrac{\cosh K_2}{\cosh K_2} = 1),
 \end{aligned}`,
       ),
@@ -958,9 +958,9 @@ e^{K_2^*}
    \quad (\because \text{積の並べ替え}) \\
 &= \cosh K_2 \cdot (1-t)
    \quad (\because \text{Step 3 の前因子の式}) \\
-&= \cosh K_2 \cdot \frac{e^{-K_2}}{\cosh K_2}
+&= \cosh K_2 \cdot \frac{\exp(-K_2)}{\cosh K_2}
    \quad (\because \text{Step 2 の } 1-t \text{ の式}) \\
-&= e^{-K_2}
+&= \exp(-K_2)
    \quad (\because \text{約分 } \tfrac{\cosh K_2}{\cosh K_2} = 1).
 \end{aligned}`,
       ),

@@ -1,10 +1,21 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+## 2026-09-26: 指数関数の記法を exp に統一し、双曲線関数と arccosh を定義した
+
+- 本文とノートの数式にあった e^{…}（実数・複素数・行列・線型写像の指数）を、すべて \exp(…) に書き換えた。書き換えは `structured-latex/tools/codemod-e-power-to-exp.ts` が行い、同じツールの `--check` を `npm run check` に組み込んだので、e^{…} を新しく書くと検査で落ちる。conversion の経緯の文字列は書き換えない。
+- 実数の exp を実数・複素数の両方へ広げた（`def_one_by_one_matrix`・`def_scalar_exp`・`scalar_exp_is_limit_of_partial_sums`・`scalar_exp_product`・`scalar_exp_zero`、実数だけの `real_exp_positive`・`real_exp_strictly_increasing`、両者の一致 `complex_exp_of_real_argument`）。
+- cosh・sinh の定義・積の公式・基本性質を計算公式の章から行列の exp の章の末尾へ移し、前提として列挙していた指数関数の性質を上の主張への参照にした。
+- 実対数の定義は、exp の正値性と単調性を上の主張から引き、全射性だけを実解析の事実として残した。
+- arccosh を log と非負平方根の式で定義し（`def_arccosh`）、非負・cosh との合成・非負側での一意性・arccosh(1)=0 を `arccosh_properties` で示した。使用箇所の根拠をこれらへ付け替えた。
+
+未解決: Euler 公式 exp(iθ) = cos θ + i sin θ の導出と、cos・sin の全実数への拡張は未整備のまま（計算公式の章の Euler 表示に明記）。PDF の生成は tectonic の無い環境で行ったため未確認で、HTML の生成までは確認した。
+メインの作業ツリーには半整数運動量の移行の未コミット変更があり、多くの本文ファイルと重なる。取り込み直すときは origin/main へ載せ替えたあと `node structured-latex/tools/codemod-e-power-to-exp.ts` を再実行すれば記法は揃う。
+
 ## 2026-09-26: 実数の exp を行列の exp の 1 行 1 列の場合として定義した
 
 「V の固有値」の章で定義なしに使っていた e^{g(ε)} を exp(g(ε)) に書き換えた。行列の exp の章の末尾に、実数を 1 行 1 列の行列へ送る写像、実数の exp の定義（exp(x) := (exp([x]))_11）、指数級数の部分和の極限であること、積公式、exp(0)=1、正値性、狭義単調増加を追加し、「V の固有値」の章の根拠をこれらへ付け替えた。
 
-未解決: 計算公式の章の双曲線関数の定義は、実数の exp を定義なしに使い基本性質を前提として列挙したままである（同章は行列の exp の章より前に置かれている）。半整数運動量の章（`017_even_sector_eigenvalues.ts`）にも同じ e^{g} の書き方が残る。Lean・SageMath は行列の exp の章を持たないので追加していない。
+（下記 2026-09-26 の指数関数の記法統一で解消）
 
 ## 2026-09-26: 同時固有空間分解の Q_ε の定義を R_μ^{(ε_μ)} の積へ揃えた
 

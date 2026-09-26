@@ -1522,7 +1522,7 @@ E_K Q_\epsilon
         " より ",
         math(String.raw`\exp(X) Q_\epsilon = V' Q_\epsilon`),
         " に収束し、右辺は ",
-        ref("real_exp_is_limit_of_partial_sums"),
+        ref("scalar_exp_is_limit_of_partial_sums"),
         " より ",
         math(String.raw`\exp(g(\epsilon))Q_\epsilon`),
         " に収束する。極限の一意性より",
@@ -1596,7 +1596,7 @@ V' y
     conversion: {
       status: "added",
       notes: [
-        "実数の指数関数を定義なしの e^x から、行列の exp の 1 行 1 列の場合として定義した exp（labels: def_real_exp）へ書き換え、収束・指数法則・正値性・単調性の根拠をその性質の主張へ付け替えた。式変形の内容は変えていない。",
+        "実数の指数関数を定義なしの e^x から、行列の exp の 1 行 1 列の場合として定義した exp（labels: def_scalar_exp）へ書き換え、収束・指数法則・正値性・単調性の根拠をその性質の主張へ付け替えた。式変形の内容は変えていない。",
         "2026-09-02 の式変形統一で、数演算子の定義と同時固有空間分解を使う各式変形行の行末へ `\\blkref` を置いた。内容・式変形・根拠・参照は変えていない。",
       ],
     },
@@ -1690,13 +1690,13 @@ V' y
         "Step 3（積への分解）。",
         math(String.raw`g(\epsilon) = \sum_{\mu}\gamma(\theta_\mu)(\epsilon_\mu - \tfrac12)`),
         " なので、",
-        ref("real_exp_product"),
+        ref("scalar_exp_product"),
         " を繰り返し適用して",
       ]),
       displayMath(
         String.raw`\exp(g(\epsilon)) = \prod_{\mu \in \mathcal{I}}
 \exp\!\left(\gamma(\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\right)
-\quad (\because \text{実数の exp の積公式を有限回適用。}\blkref{real_exp_product})`,
+\quad (\because \text{実数の exp の積公式を有限回適用。}\blkref{scalar_exp_product})`,
       ),
       paragraph([
         math(String.raw`\epsilon`),
@@ -1779,7 +1779,7 @@ V' y
     conversion: {
       status: "added",
       notes: [
-        "実数の指数関数を定義なしの e^x から、行列の exp の 1 行 1 列の場合として定義した exp（labels: def_real_exp）へ書き換え、収束・指数法則・正値性・単調性の根拠をその性質の主張へ付け替えた。式変形の内容は変えていない。",
+        "実数の指数関数を定義なしの e^x から、行列の exp の 1 行 1 列の場合として定義した exp（labels: def_scalar_exp）へ書き換え、収束・指数法則・正値性・単調性の根拠をその性質の主張へ付け替えた。式変形の内容は変えていない。",
         "2026-08-15 の式変形統一で、フェルミオン数演算子の積和を指数関数の有限積へ分解する鎖の先頭行に、各二値成分の独立な選択による有限積の展開という行末根拠を補った。内容は変えていない。",
       ],
     },
@@ -3524,18 +3524,18 @@ g(0,\dots,0)
 &= (2s_2)^{M}\left(\exp(g(1,\dots,1))\exp(g(0,\dots,0))\right)
    \quad (\because \text{冪の法則}) \\
 &= (2s_2)^{M}\exp(g(1,\dots,1)+g(0,\dots,0))
-   \quad (\because \text{実数の exp の積公式。}\blkref{real_exp_product}) \\
+   \quad (\because \text{実数の exp の積公式。}\blkref{scalar_exp_product}) \\
 &= (2s_2)^{M}\exp(0)
    \quad (\because g(1,\dots,1)+g(0,\dots,0)=0) \\
 &= (2s_2)^{M}
-   \quad (\because \exp(0)=1\ \blkref{real_exp_zero})
+   \quad (\because \exp(0)=1\ \blkref{scalar_exp_zero})
 \end{aligned}`,
       ),
     ],
     conversion: {
       status: "added",
       notes: [
-        "実数の指数関数を定義なしの e^x から、行列の exp の 1 行 1 列の場合として定義した exp（labels: def_real_exp）へ書き換え、収束・指数法則・正値性・単調性の根拠をその性質の主張へ付け替えた。式変形の内容は変えていない。",
+        "実数の指数関数を定義なしの e^x から、行列の exp の 1 行 1 列の場合として定義した exp（labels: def_scalar_exp）へ書き換え、収束・指数法則・正値性・単調性の根拠をその性質の主張へ付け替えた。式変形の内容は変えていない。",
         "この主張は docs/tasks/free-energy-roadmap の章 C（最大固有値）の入口になる。Λ_max の表式はそのまま自由エネルギーの主要項へ渡る。",
       ],
     },

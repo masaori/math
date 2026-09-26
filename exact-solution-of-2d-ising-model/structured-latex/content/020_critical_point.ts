@@ -220,14 +220,14 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \cosh x\cosh y + \sinh x\sinh y
-&= \frac{\left(e^{x}+e^{-x}\right)\left(e^{y}+e^{-y}\right)}{4}
- + \frac{\left(e^{x}-e^{-x}\right)\left(e^{y}-e^{-y}\right)}{4}
+&= \frac{\left(\exp(x)+\exp(-x)\right)\left(\exp(y)+\exp(-y)\right)}{4}
+ + \frac{\left(\exp(x)-\exp(-x)\right)\left(\exp(y)-\exp(-y)\right)}{4}
    &&(\because \text{cosh\_sinh\_basic\_properties の定義}) \\
-&= \frac{\left(e^{x+y}+e^{x-y}+e^{-x+y}+e^{-x-y}\right)
-       + \left(e^{x+y}-e^{x-y}-e^{-x+y}+e^{-x-y}\right)}{4}
+&= \frac{\left(\exp(x+y)+\exp(x-y)+\exp(-x+y)+\exp(-x-y)\right)
+       + \left(\exp(x+y)-\exp(x-y)-\exp(-x+y)+\exp(-x-y)\right)}{4}
    &&(\because \exp(a)\exp(b)=\exp(a+b)) \\
-&= \frac{2e^{x+y}+2e^{-(x+y)}}{4} \\
-&= \frac{e^{x+y}+e^{-(x+y)}}{2} \\
+&= \frac{2\exp(x+y)+2\exp(-(x+y))}{4} \\
+&= \frac{\exp(x+y)+\exp(-(x+y))}{2} \\
 &= \cosh(x+y)
    &&(\because \text{cosh\_sinh\_basic\_properties の定義})
 \end{aligned}`,
@@ -277,13 +277,13 @@ export default defineBlocks([
         " で用いた ",
         math(String.raw`\exp`),
         " の狭義単調増加性より ",
-        math(String.raw`e^{x} < e^{y}`),
+        math(String.raw`\exp(x) < \exp(y)`),
         " かつ ",
-        math(String.raw`e^{-x} > e^{-y}`),
+        math(String.raw`\exp(-x) > \exp(-y)`),
         "。よって",
       ]),
       displayMath(
-        String.raw`\sinh x = \frac{e^{x}-e^{-x}}{2} < \frac{e^{y}-e^{-y}}{2} = \sinh y`,
+        String.raw`\sinh x = \frac{\exp(x)-\exp(-x)}{2} < \frac{\exp(y)-\exp(-y)}{2} = \sinh y`,
       ),
       paragraph([
         "(4) の証明。",
@@ -296,7 +296,7 @@ export default defineBlocks([
       ]),
       displayMath(
         String.raw`\begin{aligned}
-e^{-u}
+\exp(-u)
 &= \frac{1}{y+\sqrt{y^2+1}} \\
 &= \frac{\sqrt{y^2+1}-y}{\left(\sqrt{y^2+1}+y\right)\left(\sqrt{y^2+1}-y\right)}
    &&(\because \text{分母の有理化}) \\
@@ -307,7 +307,7 @@ e^{-u}
       paragraph(["であるから"]),
       displayMath(
         String.raw`\sinh u
-= \frac{e^{u}-e^{-u}}{2}
+= \frac{\exp(u)-\exp(-u)}{2}
 = \frac{\left(y+\sqrt{y^2+1}\right)-\left(\sqrt{y^2+1}-y\right)}{2}
 = y`,
       ),
@@ -2335,7 +2335,7 @@ T
       ),
       paragraph([
         "（",
-        math(String.raw`|K-K_c| < e^{-1}`),
+        math(String.raw`|K-K_c| < \exp(-1)`),
         " なら分母は正である。）これが主張の極限であり、同時に ",
         math(String.raw`\dfrac{d^2f}{dK^2} \to +\infty`),
         " を与える。",
