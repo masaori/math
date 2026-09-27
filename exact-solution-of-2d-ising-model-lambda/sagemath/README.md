@@ -26,7 +26,7 @@
     （well-defined 性の番人）はそのまま残す。
   - `check.sage` は自分の `construction.sage` を読み、**上流の `check.sage` は読まない**。
   - 構成へ移した文にもとから `assert` が付いていた場合は、その文を原文のまま `check.sage` へも
-    置いて回す。**assertion を減らさない**（先行検算は日次監査が `check.sage` を全数で回して維持する）。
+    置いて回す。**assertion を減らさない**（先行検算は `check.sage` に全数残す）。
   - この規約が守られているかは `bash scripts/verify-upstream-load-and-roadmap.sh` が機械検査する。
 
 ## 構成

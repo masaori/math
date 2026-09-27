@@ -3,15 +3,12 @@
 #
 # 二つのことを一度に確かめる。
 #
-# 一つ目は、下流の検算が上流の「assertion まで」読み直していないこと。以前は
-# check.sage が上流の check.sage を読んでいたため、弧署名の検算を一本走らせるだけで
-# 先行 36 本の assertion が毎回再実行され、読み込みだけで 13 分かかっていた
-# （実測 2026-09-05。自動ループの tick は 2700 秒で打ち切られ、exit 124 になった）。
-# いまは各ディレクトリを construction.sage（再利用する厳密構成）と check.sage
-# （観測の出力と assertion）に分け、下流は construction.sage だけを読む。
-# **先行検算を握り潰したわけではない**（日次監査は check.sage を全数で回す）ので、
-# ここではその二つ——下流が構成だけを読むことと、check.sage が全数残っていること——を
-# どちらも検査する。
+# 一つ目は、下流の検算が上流の「assertion まで」読み直していないこと。
+# 各ディレクトリは construction.sage（再利用する厳密構成）と check.sage
+# （観測の出力と assertion）に分かれ、下流は construction.sage だけを読む。
+# 上流が check.sage を読むと、検算を一本走らせるだけで先行検算の assertion が
+# すべて再実行される。先行検算を握り潰していないことも要るので、
+# 下流が構成だけを読むことと、check.sage が全数残っていることをどちらも検査する。
 #
 # 二つ目は、有限符号恒等式から Onsager 積分までの段取りが、証明の正本（構造化テキスト）と
 # 公開している論文 HTML の両方から読めること。段取りが実装のログにしか無いと、
@@ -27,7 +24,7 @@ cd "$PROJECT_DIR"
 
 TARGET_CHECK="sagemath/check/parity-identity-simple-cycle-arc-interior-membership/check.sage"
 PUBLISHED_URL="https://hexcomp-artifacts.web.app/math/ising-lambda/"
-# tick の締切は 2700 秒で、まとめに 600 秒を残す。対象検算はその内側で終わること。
+# 対象検算の実行時間の上限（秒）。
 RUN_LIMIT_SECONDS="${RUN_LIMIT_SECONDS:-1800}"
 
 check_published=0
@@ -72,13 +69,7 @@ while IFS= read -r dir; do
   [ -n "$dir" ] || continue
   [ -f "$dir/check.sage" ] || { fail "先行検算の check.sage が消えている: $dir"; missing_checks=1; }
 done <<< "$chain_dirs"
-[ "$missing_checks" -eq 0 ] && ok "連鎖に現れる全ディレクトリに check.sage が残っている（日次監査が全数を回す）"
-
-if grep -q 'check.sage' scripts/audit-loop.sh; then
-  ok "日次監査は check.sage を全数で回す設定のままである"
-else
-  fail "日次監査が check.sage を回さなくなっている（先行検算の握り潰し）"
-fi
+[ "$missing_checks" -eq 0 ] && ok "連鎖に現れる全ディレクトリに check.sage が残っている"
 
 # --- 段取りが正本と公開物から読めること -----------------------------------------
 
@@ -112,7 +103,7 @@ if [ "$check_published" -eq 1 ]; then
   rm -f "$html"
 fi
 
-# --- 対象検算が tick の内側で終わること -----------------------------------------
+# --- 対象検算が上限時間の内側で終わること ---------------------------------------
 
 if [ "$run_target" -eq 1 ]; then
   if command -v sage >/dev/null 2>&1; then

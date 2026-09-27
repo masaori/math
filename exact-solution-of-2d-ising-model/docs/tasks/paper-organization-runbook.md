@@ -4,9 +4,9 @@
 
 複素行列版の本文にある全定義・主張・定理を一度フラットな依存グラフへ戻し、「高校生でも読める具体的な行列計算として積み上げる」という主題で、最終章を「数学的道具立て」「2次元イジングモデル」の二章だけにする。数学的道具立てを先に置き、そこからイジング固有語彙を除く。各章内を依存関係でトポロジカルソートし、依存境界から節を定め、各節の入力・出力・主定理を明示する。節末コラムは配置可能な境界だけを記録し、本文は作らない。
 
-## 1 tick の一歩
+## 一回の作業の一歩
 
-1 tick は、分類境界または依存境界について相互レビュー可能な一単位だけを確定する。新規着手時に本文を変更する対象は既存棚卸しの最大二項とし、複数の独立した境界へ進まない。三項以上の本文分割や形式化同期が必要だと判明した場合、その回は大規模な本文変更を始めず、境界候補と次回に扱う最大二項を状態台帳へ記録するところまでを一単位とする。
+一回の作業は、分類境界または依存境界について相互レビュー可能な一単位だけを確定する。新規着手時に本文を変更する対象は既存棚卸しの最大二項とし、複数の独立した境界へ進まない。三項以上の本文分割や形式化同期が必要だと判明した場合、その回は大規模な本文変更を始めず、境界候補と次回に扱う最大二項を状態台帳へ記録するところまでを一単位とする。
 
 第一の双対結合定数については、既に状態台帳へ固定した二つの先行項を実行順とする。同じ欠落確認を
 繰り返して待機記録を増やさない。まず正の実数上の双曲線正接を独立に定めて正入力での値域を閉じ、
@@ -14,25 +14,16 @@
 棚卸しへ入った後だけ、第一の双対結合定数を分離する。これは既存の最大二項制約と依存方向を
 実行可能な順序へ直すもので、別の節境界や新しい研究目的を追加する指示ではない。
 
-前回の有限時間打ち切りによる未コミット成果、またはremote defaultに未包含のローカル成果コミットがある場合は継続モードとする。新しい境界へ着手せず、既存成果について未完のレビュー、指摘修正、全検証、台帳整合、コミット、remote default反映だけを行う。既に成功を確認できる工程を理由なく反復しない。有限上限へ達して未コミット差分または未包含コミットが残った場合、tick本体はそれを `CHECKPOINT` として保持し、次回を必ず継続モードにする。どちらも無い打ち切りは異常終了のままとする。
+前回の作業が途中で止まって未コミット成果、またはremote defaultに未包含のローカル成果コミットが残っている場合は継続モードとする。新しい境界へ着手せず、既存成果について未完のレビュー、指摘修正、全検証、台帳整合、コミット、remote default反映だけを行う。既に成功を確認できる工程を理由なく反復しない。
 
 ## 毎回の手順
 
 - `AGENTS.md`、`CLAUDE.md`、`docs/context/` 全文、プロジェクト README、この Runbook、状態台帳、`MEMORY.md` を読む。
-- 120秒の上限付きで `origin` を fetch し、remote default branch は fetch 後のローカル `origin/HEAD` から取得する。専用worktreeが遅れていれば、未コミット成果を失わない方法で取り込む。通信処理の失敗時は別経路へ切り替えずエラーで終了し、共有main作業ツリー、lambda版、既存tickには触れない。
-- Codex 内のコマンドは `exec_command` の `login=false` を明示して実行する。tick 本体は `MISE_NO_CONFIG=1` を子プロセスへ継承し、誤って login shell が選ばれた場合も、本文コマンドより前の mise hook が設定探索で停滞しないようにする。`MISE_NO_CONFIG=1` ではmise shimが版を解決できないためshimはPATHへ入れず、Node 22.22.3の実体とSageMath・Lean・Gitをtickが組み立てた `PATH` から取得する。
-- npm の対象は常に論文側の `structured-latex/package.json` とする。リポジトリ直下からは `npm --prefix exact-solution-of-2d-ising-model/structured-latex run gen`、同じ prefix で `run inventory:organization`、`run check` を実行する。別の作業場所からは prefix を専用worktree内の絶対パスにする。ラベル再生成も含め、cwd に暗黙依存した `npm run` は使わない。棚卸しの件数・依存ラベル・差分を確認する。
-- 前回成果が残る継続モードでは、状態台帳の次項へ進まず、前回ログと現在差分を一度だけ確認して完了工程へ進む。巨大な差分や既読全文を実行ログへ繰り返し貼らない。
+- `origin` を fetch し、remote default branch は fetch 後のローカル `origin/HEAD` から取得する。作業ツリーが遅れていれば、未コミット成果を失わない方法で取り込む。lambda版には触れない。
+- npm の対象は常に論文側の `structured-latex/package.json` とする。リポジトリ直下からは `npm --prefix exact-solution-of-2d-ising-model/structured-latex run gen`、同じ prefix で `run inventory:organization`、`run check` を実行する。別の作業場所からは prefix をその作業ツリー内の絶対パスにする。ラベル再生成も含め、cwd に暗黙依存した `npm run` は使わない。棚卸しの件数・依存ラベル・差分を確認する。
+- 前回成果が残る継続モードでは、状態台帳の次項へ進まず、現在差分と状態台帳を一度だけ確認して完了工程へ進む。
 - 状態台帳の「次の一歩」だけを担当者が分析し、別のエージェントが、分類境界・依存方向・イジング固有セマンティクス混入・二章制約・高校生可読性をレビューする。指摘があれば同じ単位を修正して再レビューし、未解決のまま次へ進まない。
-- 必要な検証を全て通し、状態台帳と `MEMORY.md` を更新する。コミット後は、launchd由来のtmux外実行でkeyringを必要とする `gh` を使わず、SSHのGitで成果コミットをremote defaultへ直接pushし、fetch後の包含確認までを同じtickで行う。non-fast-forward時は同じGit経路でremote defaultを取り込み、再検証してからpushする。
-
-## 2026-09-05 の失敗原因
-
-16:18 の実行は、リポジトリ直下で `npm run gen` を実行し、直下に `package.json` が無いため終了コード254となった。棚卸しだけに実行場所を指定していたプロンプトを、ラベル生成・論文検査を含む全npm操作への明示prefixに改める。これは同じ生成器の呼び出し条件の修正であり、生成器や検査の代替ではない。
-
-後続の時間切れは `launcher.log` の16:44:58から16:47:08、18:56:07から18:58:27に記録された起動口の `git fetch` の終了コード124である。tick本体の開始記録はなく、エージェントの55分上限には到達していない。このログを一単位の作業量超過の根拠にはできないため、最大二項という単位は変更しない。SSH接続の失敗と本文コマンドの誤りを分け、通信失敗はエラーとして止める。
-
-19:48の手動実行は同じSSH経路のfetchを通過したが、設定済みアカウントの利用上限でLLM応答前に停止した。ログが示す解除時刻は `Sep 12th, 2026 10:01 AM`。アカウント・モデルの切替は行わない。また、macOSのbash 3.2で全角括弧に隣接する `$status` が変数名として誤認され、異常終了ログが `unbound variable` で失われた。非ASCII文字に隣接する変数展開を `${status}` 形式へ直し、実際の終了分岐をUTF-8環境で実行して、成功・異常終了・二種類の時間切れのログ分類と終了値をプログラミングによる検証で固定する。
+- 必要な検証を全て通し、状態台帳と `MEMORY.md` を更新する。コミット後は、成果コミットをremote defaultへ反映し、fetch後の包含確認までを同じ作業で行う。non-fast-forward時はremote defaultを取り込み、再検証してから反映する。
 
 ## 分類規則
 
@@ -51,13 +42,6 @@
 - 状態: `docs/tasks/paper-organization-state.md`
 - 棚卸し: `docs/organization/flat-inventory.json`
 - 棚卸し生成器: `structured-latex/tools/build-flat-inventory.ts`
-- tick本体: `scripts/paper-organization-tick.sh`
-- local-pc-management が配布する起動口: `/Users/masaori/.local/bin/math-complex-matrix-ising-paper-organization-loop-launcher.sh`
-- 推奨 launchd label: `com.masaori.math-complex-matrix-ising-paper-organization-loop`
-- 推奨頻度: 2時間ごと。分は既存tickとの衝突を窓口が監査して決める。tickの強制終了上限55分に対して次回起動まで重ならず、失敗・打ち切り・残骸をログで識別できる間隔として採る。
-- 専用worktree: `/Users/masaori/git/masaori/math/.codex/worktrees/tick/math-complex-matrix-ising-paper-organization-loop`
-- 専用branch: `goal/complex-matrix-ising-paper-organization-loop`
-- lock/log: `~/Library/Logs/math-complex-matrix-ising-paper-organization/`
 
 ## 最終目的と構成整理の残余を区別する
 

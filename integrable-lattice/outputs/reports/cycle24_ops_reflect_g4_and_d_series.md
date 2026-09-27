@@ -248,7 +248,7 @@ Node は v22.22.3（PATH に無いので `~/.nvm/versions/node/v22.22.3/bin` を
 | └ `test:transcription` | **12/12**（転記事故 3 ＋ 免除の腐り 9） |
 | `node structured-latex/tools/validate-content.ts` | 上の `validate` と同じ（exit 0） |
 | `node sagemath/tools/verify-check-linkage.ts` | **exit 0**。参照されている検証ディレクトリ **38/45**（新規 2 ブロックが 3 件を参照したので孤立が減った）、Lean 定理 67 件すべて実在。孤立 7 件は本 step の対象外（T2 系の旧検証） |
-| `npm run build:pdf`（ja） | **exit 0**。`build/document.pdf` **30 ページ、未解決参照 0 件、組めない文字 0 件、版面外へ出た行 0 件**（軽微な overfull 5 件は余白内）。tectonic は `/opt/homebrew/bin/tectonic` に実在 |
+| `npm run build:pdf`（ja） | **exit 0**。`build/document.pdf` **30 ページ、未解決参照 0 件、組めない文字 0 件、版面外へ出た行 0 件**（軽微な overfull 5 件は余白内） |
 | `npm run build:pdf:en` | **exit 0**。`build/en/document.pdf` **41 ページ、未解決参照 0 件、組めない文字 0 件、版面外へ出た行 0 件**（軽微な overfull 2 件は余白内）、参考文献 20 件 |
 
 ---

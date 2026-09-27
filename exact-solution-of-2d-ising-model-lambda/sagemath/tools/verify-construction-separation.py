@@ -11,7 +11,7 @@
 
 に分け、下流は construction.sage だけを読む。この道具はその形が保たれているかを見る。
 **assertion を減らしていないこと**（連鎖の各ディレクトリに check.sage が残っていること）も
-ここで併せて見る。日次監査はその check.sage を全数で回す。
+ここで併せて見る。
 
     python3 sagemath/tools/verify-construction-separation.py <根> <対象の check.sage>
 

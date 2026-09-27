@@ -402,10 +402,10 @@ OK: 8 件すべて期待どおり。
   paper_101_theorem_s_infinity_decision: 命題 K — S_∞ の判定手続きと、n ℓ^n の係数の閉じた式
   paper_105_heading_drop_assumption: 最小点の一意性の仮定を落とす — n ℓ^n の係数の無条件決定
   paper_106_theorem_drop_assumption: 命題 Q — 最小点の一意性の仮定なしに n ℓ^n の係数が決まること（明示誤差つき）
-generated /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/document.tex
+generated integrable-lattice/structured-latex/build/document.tex
   ブロック 49 件（見出し 13、証明 24、TODO 0） / ラベル 38 件 / 相互参照 180 件（すべて解決）
   PDF まで作るには --pdf を付ける
-no notes in output (ja): ノート 0 件（本文サンプル 0 件）は いずれも /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/document.tex に現れない
+no notes in output (ja): ノート 0 件（本文サンプル 0 件）は いずれも integrable-lattice/structured-latex/build/document.tex に現れない
 
 > @integrable-lattice/structured-latex@0.1.0 verify:no-notes:en
 > node tools/build-latex.ts --locale en && node tools/verify-no-notes-in-output.ts --locale en
@@ -413,10 +413,10 @@ no notes in output (ja): ノート 0 件（本文サンプル 0 件）は いず
 警告: 地の文に数式記法らしき文字がある 2 件（そのままの文字として組まれる。math ノードにするか記法を直すこと）:
   paper_052b_definition_graph_tower: Voltage graphs, ℤ_ℓ^2 towers, spanning-tree numbers, and the
   paper_101_theorem_s_infinity_decision:  is locally constant wherever it is finite, so ``unbounded o
-generated /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/en/document.tex
+generated integrable-lattice/structured-latex/build/en/document.tex
   ブロック 56 件（見出し 14、証明 24、TODO 0） / ラベル 44 件 / 相互参照 182 件（すべて解決） / 引用 63 件（.bib のキー 24 件、すべて実在）
   PDF まで作るには --pdf を付ける
-no notes in output (en): ノート 0 件（本文サンプル 0 件）は いずれも /Users/masaori/git/masaori/math/.claude/worktrees/logical-wishing-blum/integrable-lattice/structured-latex/build/en/document.tex に現れない
+no notes in output (en): ノート 0 件（本文サンプル 0 件）は いずれも integrable-lattice/structured-latex/build/en/document.tex に現れない
 
 > @integrable-lattice/structured-latex@0.1.0 verify:localization
 > node tools/verify-localization.ts

@@ -2,19 +2,6 @@
 
 この文書は、有限双曲曲面上の Ising 模型の自動 tick の停止状態と再開条件を定める。一般有限グラフ上の Ising 多項式と Fisher 零点は独立プロジェクトの台帳で扱う。
 
-## tick のモデルと利用上限
-
-停止中も起動設定は Codex の `gpt-6-astra`、reasoning `medium` に揃える。
-正規起動口が起動前に選んだ `CODEX_HOME` とモデル名を起動時に明示する。
-利用上限・認証失敗・モデル利用不可は非ゼロ終了としてログへ残し、未コミット成果を保持する。
-実行途中で別モデル・別 CLI・別アカウントへ切り替えない。
-次回の起動前のアカウント選定は正規起動口が行う。`CODEX_HOME` が未設定・空なら起動前に失敗する。
-モデルの変更は停止解除を意味しない。下の停止条件と再開条件を維持する。
-
-プログラミングによる検証は、リポジトリ直下で `python3 scripts/test-research-tick-models.py` を実行する。
-実際の起動部分へ偽 CLI を渡し、固定モデル・起動口が渡したアカウント・非ゼロ終了の伝播を判定する。
-この試験は実モデルの応答確認を代替しない。
-
 ## 現在の状態
 
 成果整理を終え、READMEの固定型から有限商と二段被覆へ進むため、
@@ -57,8 +44,6 @@ node countable-ising-on-hyperbolic-surfaces/sagemath/tools/verify-check-linkage.
 - `auto-loop-state.md` と `MEMORY.md` を実態に合わせて更新する。Lean 未着手を完了と書かない。
 - 変更をコミットする前に再度 fetch し、remote default branch の進行を確認する。競合しない遅れは取り込む。
 - 成果を `origin/main` へ push し、成果コミットが fetch 後の `origin/main` の祖先であることを確認する。ここまで済まなければ完了ではない。
-- 作業結果を通知する場合は話題名を「有限双曲曲面上の可算イジング模型」とし、公開本文
-  `https://hexcomp-artifacts.web.app/math/countable-hyperbolic-ising-mathjax/` を付ける。
 - 一つの主張を進めたら止まる。次の主張は次の tick へ残す。
 
 ## レビュー観点

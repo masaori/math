@@ -1,31 +1,8 @@
-# 自動ループ Runbook（毎時）
+# 自動ループ Runbook
 
-このファイルは、毎時 12 分に独立したエージェントが読み、研究を一層だけ前進させる手順の正本である。
+このファイルは、研究を一層だけ前進させる手順の正本である。
 進捗は [auto-loop-state.md](auto-loop-state.md) に残す。研究姿勢は
 [マニフェスト](../マニフェスト.md) を最優先する。
-
-このループが**向いている方向そのもの**は、6 時間ごとの独立した監督が評価する（契約は
-[supervision-runbook.md](supervision-runbook.md)、記録は [supervision-log.jsonl](supervision-log.jsonl)）。
-**この tick から監督の記録を書かない。** 前進の駆動と方向の決定を同じループへ置くと、
-方向が空になったことをこのループの内側からは検出できない。逆に、監督はこの tick を止めず、
-頻度も変えず、1 tick で進める一層の中身も決めない。
-
-## tick のモデルと利用上限
-
-研究の定期起動を `gpt-6-astra` に統一するため、Claude と Codex の交互実行を廃止した。
-以前の交互実行はモデル固有の癖を分散するためだったが、今回の固定モデル指定を優先する。
-正規起動口が起動前に選んだ `CODEX_HOME` を使い、`codex exec -m gpt-6-astra`
-と `model_reasoning_effort=medium` で起動する。起動時のログにモデル・推論設定・設定ディレクトリを残す。
-
-利用上限・認証失敗・モデル利用不可は非ゼロ終了としてログへ残し、未コミット成果を保持する。
-実行途中の別モデル・別 CLI・別アカウントへの切り替えは行わない。
-次回の起動前のアカウント選定は正規起動口が行う。`CODEX_HOME` が未設定・空なら起動前に失敗する。
-旧 `last-agent` と `claude-blocked-until` / `codex-blocked-until` は選択に使わない。
-認証が失敗した場合は定期実行を止める依頼を tick 窓口へ送り、正規の認証経路を復旧してから再開する。
-
-プログラミングによる検証は、リポジトリ直下で `python3 scripts/test-research-tick-models.py` を実行する。
-実際の起動部分へ偽 CLI を渡し、固定モデル・起動口が渡したアカウント・非ゼロ終了の伝播を判定する。
-この試験は実モデルの応答確認を代替しない。
 
 ## 1 tick の境界
 
@@ -139,7 +116,7 @@
 
 ## 1 tick の実行手順
 
-1. remote default branch を取得し、専用 worktree が最新であることを確認する。
+1. remote default branch を取得し、作業ツリーが最新であることを確認する。
 2. 前 tick の変更を本文・SageMath・Lean・台帳の間で突き合わせる。
 3. 修正があれば検証して先にコミット・push する。
 4. 成果整理の未解消の欠陥があれば先に直す。無ければ「現在の研究対象」の先頭の未完了対象を
@@ -148,11 +125,6 @@
 6. `auto-loop-state.md` の現在地と対象表、`MEMORY.md` を更新する。
 7. commit し、remote が進んでいれば取り込んでから `HEAD:main` へ push する。
 8. fetch 後、成果コミットが remote default branch の祖先であることを確認する。
-9. 正常終了かつ worktree が clean の場合だけ、外側の `scripts/publish-artifact.sh` が、その tick で
-   最後に研究を変更した commit を明示して論文 HTML を `hexagonal-computation/artifacts` の認証付き
-   API CLI から公開する。API が返したログイン不要の公開 URL が HTTP 200 を返した後、その URL を含む
-   Slack 通知を一度だけ送る。公開アーティファクト URL のない完了通知は送信失敗として扱い、公開と
-   通知がともに成功するまで通知済み印を進めない。tick 内のエージェントは通知しない。
 
 ## 検証
 
@@ -194,31 +166,3 @@ bash cellular-automata-statistical-mechanics/scripts/verify-roadmap-artifact.sh
 - 未許可の不可逆操作、課金、秘密情報、ユーザー固有の価値判断が必要になった。
 
 検証失敗、依存不足、remote の前進、仮説の反例は停止理由ではない。直すか、否定結果として記録する。
-
-## 起動
-
-- launchd ラベル: `com.masaori.cellular-automata-auto-loop`
-- 定義: `~/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist`
-- 発火: 毎時 12 分（`~/Library/LaunchAgents/com.masaori.cellular-automata-auto-loop.plist` の実測）
-- 専用 worktree: `<repo>/.codex/worktrees/tick/cellular-automata-auto-loop`
-- ログ: `~/Library/Logs/cellular-automata-auto-loop/auto-loop.log`
-- エージェント: Codex（`gpt-6-astra`、reasoning `medium`）
-- 論文公開・通知: `scripts/publish-artifact.sh`（成果物基盤の認証付き API CLI を使い、同じ研究版は再通知しない）
-
-### launchd の実体は自分で触らない（2026-08-16 に経路が固定された）
-
-**`launchctl`（`bootstrap` / `bootout` / `kickstart`）と `~/Library/LaunchAgents/` の編集を、
-この tick から行ってはならない。** 設置・頻度変更・一時停止・再開は、tmux セッション
-`local-pc-management` のウィンドウ `tick窓口` へ依頼する（`launchd-tick-loop` skill と
-`communicate-with-agent-session` skill に従う）。**頻度そのものは柔軟に変えてよい。固定するのは経路である。**
-あるべき頻度の宣言は `local-pc-management/agent-sessions/config/tick-schedules.json` にあり、
-実体との食い違いは日次の監査が検出して宣言側へ戻す（＝実体だけ書き換えても翌朝消える）。
-
-**読み取りだけの調査は自由。** 次はそのまま使ってよい。
-
-```sh
-bash ~/.local/bin/cellular-automata-loop-launcher.sh              # 手で 1 tick 回す（launchd を触らない）
-launchctl print "gui/$(id -u)/com.masaori.cellular-automata-auto-loop" | grep -E 'state =|last exit|calendar'
-tail -50 ~/Library/Logs/cellular-automata-auto-loop/auto-loop.log           # 見送り／打ち切り／異常終了の区別
-python3 ~/git/masaori/local-pc-management/agent-sessions/audit-tick-schedules.py  # 宣言との食い違い
-```

@@ -14,8 +14,8 @@ Iwasawa invariant        files=0
 mu invariant             files=0
 resultant                files=3
 orderOf                  files=99
-/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16:# Weierstrass preparation theorem for power series over a complete local ring
-/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:19:Weierstrass preparation theorem.
-/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:65:- `PowerSeries.exists_isWeierstrassFactorization`: **Weierstrass preparation theorem**
-/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:72:  `PowerSeries.IsWeierstrassFactorization.unique`: `f` and `h` in Weierstrass preparation
-/Users/masaori/git/masaori/math/.claude/worktrees/breezy-marinating-robin/integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:643:## Weierstrass preparation theorem
+integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:16:# Weierstrass preparation theorem for power series over a complete local ring
+integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:19:Weierstrass preparation theorem.
+integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:65:- `PowerSeries.exists_isWeierstrassFactorization`: **Weierstrass preparation theorem**
+integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:72:  `PowerSeries.IsWeierstrassFactorization.unique`: `f` and `h` in Weierstrass preparation
+integrable-lattice/lean/.lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean:643:## Weierstrass preparation theorem

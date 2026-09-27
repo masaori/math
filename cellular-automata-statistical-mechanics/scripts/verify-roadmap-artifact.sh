@@ -23,10 +23,6 @@ for arg in "$@"; do
   esac
 done
 
-PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
-[ -d "$HOME/.local/share/mise/shims" ] && PATH="$HOME/.local/share/mise/shims:$PATH"
-export PATH
-
 for cli in node curl; do
   if ! command -v "$cli" >/dev/null 2>&1; then
     echo "必要なコマンドが PATH に無い: $cli" >&2
@@ -49,7 +45,7 @@ if [ "$check_published" -eq 0 ]; then
 fi
 
 echo "== 公開ページと照合する: $PUBLISHED_URL =="
-tmp="$(mktemp -t roadmap-published)"
+tmp="$(mktemp -t roadmap-published.XXXXXX)"
 trap 'rm -f "$tmp"' EXIT
 status="$(curl -sS -L -o "$tmp" -w '%{http_code}' "$PUBLISHED_URL")"
 if [ "$status" != "200" ]; then

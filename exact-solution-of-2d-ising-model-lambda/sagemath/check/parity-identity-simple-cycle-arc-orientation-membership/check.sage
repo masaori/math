@@ -39,7 +39,6 @@ VARIANTS = (
 
 
 # 各変種の (型の種数, 階数, 直接衝突数, 可解性)。観測直後に固定する。
-# 再実行の確認は日次監査に委ねる（overview.md 参照）。
 EXPECTED_RESULTS = {
     "orient_d": (10098, 6799, 0, True),
     "orient_c": (10061, 6771, 16, False),
