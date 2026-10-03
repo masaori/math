@@ -52,6 +52,22 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.KacWard.latticeTurnOfSteps_spec
+  Ising2DLambda.KacWard.reversedParallelStaircaseStep_unit_negative
+  Ising2DLambda.KacWard.reversedParallelStaircaseStep_turn_spec
+  Ising2DLambda.KacWard.reversedParallelStaircase_turnValue_sum_eq
+  Ising2DLambda.KacWard.reversedParallelStaircase_latticeTurning_zero
+  Ising2DLambda.KacWard.latticeStepTurning_eq_turnValue
+  Ising2DLambda.KacWard.latticeStepTurning_self
+  Ising2DLambda.KacWard.latticeStepTurning_reverse_cancel
+  Ising2DLambda.KacWard.twoBlock_latticeTurning_zero
+  Ising2DLambda.KacWard.reversedParallelStaircaseStep_eq
+  Ising2DLambda.KacWard.reversedParallelStaircase_cyclicSum_eq
+  Ising2DLambda.KacWard.reversedParallelStaircase_turning_zero
+  Ising2DLambda.NecSuf.KacWard.twoBlock_cyclicAdjacentSum_zero_necSuf
+  Ising2DLambda.NecSuf.KacWard.twoPhaseStaircase_difference_necSuf
+  Ising2DLambda.NecSuf.KacWard.reversedTwoPhaseStaircase_difference_necSuf
+  Ising2DLambda.KacWard.reversedParallelStaircase_turning_zero_from_necSuf
   Ising2DLambda.KacWard.cyclicIndexShift_successor
   Ising2DLambda.KacWard.cyclicShift_adjacent_integer_sum
   Ising2DLambda.NecSuf.KacWard.permutedAdjacentSum_necSuf

@@ -1111,3 +1111,6 @@ import Ising2DLambda.KacWard.ThreeTermPmFourDifferenceZeroFromNecSuf
 import Ising2DLambda.KacWard.CyclicShiftAdjacentSum
 import Ising2DLambda.NecSuf.KacWard.CyclicShiftAdjacentSum
 import Ising2DLambda.KacWard.CyclicShiftAdjacentSumFromNecSuf
+import Ising2DLambda.KacWard.ReversedParallelStaircaseTurning
+import Ising2DLambda.NecSuf.KacWard.ReversedParallelStaircaseTurning
+import Ising2DLambda.KacWard.ReversedParallelStaircaseTurningFromNecSuf
