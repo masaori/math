@@ -375,6 +375,7 @@ export const ALL_LABELS = [
   "claim_real_closed_sum_of_two_squares_zero",
   "claim_real_logarithm_int_power",
   "claim_reconnection_turning_difference",
+  "claim_repeated_adjacent_sum_difference",
   "claim_representative_increment",
   "claim_residual_fiber_phase_signed_count",
   "claim_restriction_family_gluing",

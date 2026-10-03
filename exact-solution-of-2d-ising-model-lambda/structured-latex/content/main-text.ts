@@ -66687,6 +66687,128 @@ C_{a+b+c+d}(z)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_repeated_adjacent_sum",
+        labels: [],
+        title: { text: "反復有限列の内部隣接和の増分" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_repeated_adjacent_sum_difference",
+            focus: {
+              id: "kac_ward_claim_repeated_adjacent_sum_difference",
+              kind: "claim",
+              title: { text: "有限列を一回多く反復した内部隣接和の増分" },
+              labels: ["claim_repeated_adjacent_sum_difference"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.latticeInternalTurning_repeat_difference",
+                "Ising2DLambda.NecSuf.KacWard.internalAdjacentSum_repeat_difference_necSuf",
+                "Ising2DLambda.KacWard.latticeInternalTurning_repeat_difference_from_necSuf",
+              ],
+              verification: ["sagemath/check/repeated-adjacent-sum"],
+              statement: [
+                paragraph([
+                  math(String.raw`n,c\in\mathbb N`), " は正とし、有限列 ",
+                  math(String.raw`u:\{0,\ldots,n-1\}\to\mathbb Z^2`), " を取る。写像 ",
+                  math(String.raw`\bar u:\mathbb N\to\mathbb Z^2`), " と反復列 ",
+                  math(String.raw`r:\mathbb N\to\mathbb Z^2`), " を",
+                ]),
+                displayMath(String.raw`\bar u_j:=\begin{cases}u_j,&j<n,\\(0,0),&j\ge n,\end{cases}
+\qquad r_j:=\bar u_{j\bmod n}\quad(j\in\mathbb N)`),
+                paragraph([
+                  "で定める。余りは ", math(String.raw`\{0,\ldots,n-1\}`),
+                  " の元を取る。反復列は有限列から一意に定まり、任意の無限列を入力にしていない。",
+                  "内部和 ", math(String.raw`I`), " と循環隣接和 ", math(String.raw`C`),
+                  "、整数の重み ", math(String.raw`\vartheta`), " は ",
+                  ref("claim_four_part_adjacent_sum"), " の定義を用いる。このとき",
+                ]),
+                displayMath(String.raw`I_{(c+1)n}(r)-I_{cn}(r)=C_n(\bar u).`),
+                paragraph([
+                  "一周期を追加したときの増分は、一周期内の隣接対と末項から先頭への接合の和に等しい。",
+                  "この式を一側閉包の周期持ち上げ部分と反転平行階段部分にそれぞれ適用する。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "任意の ", math(String.raw`k,j\in\mathbb N`), " について、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+r_{kn+j}
+&=\bar u_{(kn+j)\bmod n}&&\bigl(\because\ r\text{ の定義}\bigr)\\
+&=\bar u_{j\bmod n}&&\bigl(\because\ kn\text{ は }n\text{ の倍数}\bigr)\\
+&=r_j&&\bigl(\because\ r\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "先頭と、", math(String.raw`c`), " 周期分の末項は次のように求まる。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+r_0&=\bar u_{0\bmod n}&&\bigl(\because\ r\text{ の定義}\bigr)\\
+&=\bar u_0&&\bigl(\because\ 0\bmod n=0\bigr),\\
+r_{cn-1}
+&=r_{(c-1)n+(n-1)}&&\bigl(\because\ c,n>0\text{ と整数の四則}\bigr)\\
+&=r_{n-1}&&\bigl(\because\ \text{上の周期性を }c-1\text{ 周期に適用}\bigr)\\
+&=\bar u_{n-1}&&\bigl(\because\ r\text{ の定義と }0\le n-1<n\bigr).
+\end{aligned}`),
+                paragraph([
+                  "連結 ", math(String.raw`*_{cn}`), " は ", ref("claim_four_part_adjacent_sum"),
+                  " の定義を用いる。", math(String.raw`j<cn`), " なら定義から ",
+                  math(String.raw`(r*_{cn}r)_j=r_j`), " であり、", math(String.raw`j\ge cn`), " なら",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+(r*_{cn}r)_j
+&=r_{j-cn}&&\bigl(\because\ j\ge cn\text{ と }\blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr)\\
+&=r_{cn+(j-cn)}&&\bigl(\because\ \text{上の周期性}\bigr)\\
+&=r_j&&\bigl(\because\ cn+(j-cn)=j\bigr).
+\end{aligned}`),
+                paragraph([
+                  "従って写像として ", math(String.raw`r*_{cn}r=r`),
+                  " である。また一周期内では両方の添字が ", math(String.raw`n`), " 未満なので、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+I_n(r)
+&=\sum_{j=0}^{n-2}\vartheta(r_j,r_{j+1})
+&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }I\text{ の定義}\bigr)\\
+&=\sum_{j=0}^{n-2}\vartheta(\bar u_j,\bar u_{j+1})
+&&\bigl(\because\ j,j+1<n\text{ と }r\text{ の定義}\bigr)\\
+&=I_n(\bar u)&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }I\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "求める差を二列の内部和へ分け、同じ項を消す。以下では ",
+                  math(String.raw`A:=I_{cn}(r)\in\mathbb Z`), " と略記する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+I_{(c+1)n}(r)-A
+&=I_{cn+n}(r)-A&&\bigl(\because\ (c+1)n=cn+n\bigr)\\
+&=I_{cn+n}(r*_{cn}r)-A&&\bigl(\because\ r*_{cn}r=r\bigr)\\
+&=\bigl(A+\vartheta(r_{cn-1},r_0)+I_n(r)\bigr)-A
+&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の二列分割}\bigr)\\
+&=\bigl(A+\vartheta(\bar u_{n-1},r_0)+I_n(r)\bigr)-A
+&&\bigl(\because\ \text{上の末項の等式}\bigr)\\
+&=\bigl(A+\vartheta(\bar u_{n-1},\bar u_0)+I_n(r)\bigr)-A
+&&\bigl(\because\ \text{上の先頭の等式}\bigr)\\
+&=\bigl(A+\vartheta(\bar u_{n-1},\bar u_0)+I_n(\bar u)\bigr)-A
+&&\bigl(\because\ \text{上の一周期の内部和の等式}\bigr)\\
+&=\vartheta(\bar u_{n-1},\bar u_0)+I_n(\bar u)
+&&\bigl(\because\ \mathbb Z\text{ の加法で共通項を消す}\bigr)\\
+&=I_n(\bar u)+\vartheta(\bar u_{n-1},\bar u_0)
+&&\bigl(\because\ \mathbb Z\text{ の加法の交換律}\bigr)\\
+&=C_n(\bar u)&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "長さ一の内部和は空和なので、同じ計算が成立する。有限列の整数ベクトルと自然数の余り、",
+                  "整数の有限和だけを用い、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -66753,13 +66875,14 @@ C_{a+b+c+d}(z)
                   " が一組、反転平行階段へ ", math(String.raw`R`),
                   " が一組増える。二つの反復横断階段と、四部分の接合部の先頭・末尾方向は変わらない。",
                   "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
-                  ref("claim_four_part_adjacent_sum"), " で与えた。両辺の共通項を整数の加法で消すと、",
+                  ref("claim_four_part_adjacent_sum"), " で与えた。各反復部分の内部和の増分へ ",
+                  ref("claim_repeated_adjacent_sum_difference"), " を適用し、共通の接合項を消すと、",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
 &=\left(\sum_{j=1}^{m-1}\tau(\vec u_j,\vec u_{j+1})+\tau(\vec u_m,\vec u_1)\right)
 +\left(\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)\right)
-&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ と }\blkref{def_cyclic_total_turning},\ \blkref{claim_four_part_adjacent_sum}\text{ の有限和分割}\bigr)\\
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{def_cyclic_total_turning},\ \blkref{claim_four_part_adjacent_sum},\ \blkref{claim_repeated_adjacent_sum_difference}\bigr)\\
 &=t_{\circ}(\gamma)+0
 &&\bigl(\because\ \text{上で示した }U\text{ と }R\text{ の二等式}\bigr)\\
 &=t_{\circ}(\gamma)

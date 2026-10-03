@@ -1790,6 +1790,19 @@ targets=(
   Ising2DLambda.KacWard.latticeInternalTurning_join
   Ising2DLambda.KacWard.fourPart_latticeCyclicTurning
   Ising2DLambda.KacWard.fourPart_latticeCyclicTurning_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.repeatDirectionSequence_period
+  Ising2DLambda.NecSuf.KacWard.repeatDirectionSequence_last
+  Ising2DLambda.NecSuf.KacWard.repeatDirectionSequence_join
+  Ising2DLambda.NecSuf.KacWard.internalAdjacentSum_repeat_base_necSuf
+  Ising2DLambda.NecSuf.KacWard.internalAdjacentSum_repeat_succ_necSuf
+  Ising2DLambda.NecSuf.KacWard.internalAdjacentSum_repeat_difference_necSuf
+  Ising2DLambda.KacWard.repeatedLatticeWord_period
+  Ising2DLambda.KacWard.repeatedLatticeWord_last
+  Ising2DLambda.KacWard.repeatedLatticeWord_join
+  Ising2DLambda.KacWard.latticeInternalTurning_repeat_base
+  Ising2DLambda.KacWard.latticeInternalTurning_repeat_succ
+  Ising2DLambda.KacWard.latticeInternalTurning_repeat_difference
+  Ising2DLambda.KacWard.latticeInternalTurning_repeat_difference_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
