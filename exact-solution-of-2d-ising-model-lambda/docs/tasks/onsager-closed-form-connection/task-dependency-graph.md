@@ -17,8 +17,9 @@
 
 ## 採用する経路と出典
 
-- 採用経路は Kac--Ward である。Fisher--Kasteleyn--Pfaffian 経路は参照ノートに残し、本文の主経路には混ぜない。
-- トーラスでは単一行列式ではなく、四つのスピン構造に対応する行列式平方根の符号付き和を使う。正本となる外部出典は David Cimasoni, *A generalized Kac--Ward formula*, arXiv:1004.3158 とする。
+- 分配多項式を表す対象は Kac--Ward 行列式である（README）。四つのスピン構造に対応する行列式の定数項一の平方根の符号付き和を使う。正本となる外部出典は David Cimasoni, *A generalized Kac--Ward formula*, arXiv:1004.3158 と、Chelkak–Cimasoni–Kassel, *Revisiting the combinatorics of the 2D Ising model*, Ann. Inst. Henri Poincaré D 4 (2017) 309–385, arXiv:1507.08242 である。
+- 平方恒等式 $D^{a,b}_L(x)=(Q^{a,b}_L(x))^2$ の証明は、反転写像の置換行列と対角相似で行列式を反対称行列へ移し、Pfaffian の平方の定理と完全マッチング展開で閉じる（Chelkak–Cimasoni–Kassel の 1.3 節・2.1–2.2 節・定理 4.2）。節の列は [proof/prove-torus-kac-ward-formula.md](proof/prove-torus-kac-ward-formula.md) にある。行列式の置換展開と偶部分グラフ対を鍵ごとに直接比較する旧経路は 2026-10-03 に打ち切った（経過は `docs/tasks/auto-loop-archive.md`）。Fisher の装飾格子や Kasteleyn の向き付け定理は使わない。
+- 有限 Fourier 分解と分散因子は Kac--Ward 多項式行列の定義だけに依存し、平方恒等式の完成を待たない。
 - 設計ノートは `docs/discussion/対数順序群上の統計力学/09_2DIsing閉形式の可算的導出.md` と `10_Step3の厳密化_KacWardとPfaffian.md`。後者の単一行列式の記述は平面の場合に限り、トーラスへはそのまま適用しない。
 
 ## 依存関係図
@@ -30,7 +31,6 @@ graph TD
   kw --> kwleanconcrete[Kac--Ward 公式の具体版を Lean で形式化]
   kwleanconcrete --> kwleanessential[Kac--Ward 公式の必要十分版を Lean で形式化]
   data --> fourier[ねじれた有限 Fourier 分解を証明]
-  kw --> fourier
   fourier --> dispersion[正方格子のモード別分散因子を計算]
   dispersion --> dispersioncheck[Fourier 分解と分散因子を SageMath で厳密検算]
   dispersion --> dispersionleanconcrete[Fourier・分散の具体版を Lean で形式化]
@@ -69,4 +69,4 @@ graph TD
 
 ## 実行順序
 
-依存関係図の上流から進める。最初に実行可能なのは「トーラスの向き付き辺・回転位相・四つのスピン構造を定義する」である。SageMath と Lean の検証を後回しにして先の数学へ進めず、有限公式と分散因子の各段で四層を閉じてから有限積公式を組み立てる。
+依存関係図の上流から進める。実行の順序の正本は `docs/tasks/auto-loop-state.md` のセクション表である。SageMath と Lean の検証を後回しにして先の数学へ進めず、有限公式と分散因子の各段で四層を閉じてから有限積公式を組み立てる。

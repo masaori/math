@@ -103,6 +103,25 @@
 
 Lean だけが未了なら `done` にせず `記述と SageMath まで` と書く。**「Lean 未着手」を黙って `done` にしない。**
 
+## Kac--Ward 平方恒等式の経路（2026-10-03 の研究管理の決定）
+
+- 平方恒等式 $D^{a,b}_L(x)=(Q^{a,b}_L(x))^2$ は、行列式の置換展開と偶部分グラフ対の鍵ごとの
+  直接比較ではなく、反転写像の置換行列 $J$ と対角相似 $U$ で反対称行列
+  $\widehat K=\zeta_8^{\,2}U^{-1}JK^{a,b}(x)U$ へ移し、$\operatorname{Pf}(\widehat K)^2=\det\widehat K$ と
+  Pfaffian の完全マッチング展開で証明する。出典は Chelkak–Cimasoni–Kassel,
+  *Revisiting the combinatorics of the 2D Ising model*, Ann. Inst. Henri Poincaré D 4 (2017)
+  309–385, arXiv:1507.08242 の 1.3 節・2.1–2.2 節・定理 4.2。節の列と各節の中身は
+  [onsager-closed-form-connection/proof/prove-torus-kac-ward-formula.md](onsager-closed-form-connection/proof/prove-torus-kac-ward-formula.md)。
+- **有限データへの当てはめ（弧署名の $\mathbb F_2$ 線型系、特徴のブール式、固定原始特徴の多項式探索）は
+  再開しない。** 下の「有限合同系の候補クラスを判定する条件」とその小節は、保全済みの有限証拠に
+  対する判定条件であって、新しい当てはめを始める根拠にしない。
+- 新経路のどの節も、一般の辺長で閉じないと分かったら、有限データで式を当てはめる方向へ進まず、
+  障害を台帳の「前進の記録」に書いて次の実行可能な節へ進む。方向の再判断は研究管理が行う。
+- 有限 Fourier 分解と分散因子は $K^{a,b}(x)$ の定義だけに依存する。平方恒等式が閉じていなくても、
+  台帳の順が来たら進める。
+- 直接比較経路だけが使う本文ブロックの参照用ノートへの退避は、平方恒等式が閉じてから行う
+  （それまでは新経路が引く補題を失わないため）。
+
 ## 有限合同系の候補クラスを判定する条件
 
 左核障害と非直交な特徴を一つ加える反復は、候補クラス全体の成否を判定する前処理に限る。
@@ -197,6 +216,10 @@ $(\because\ \dots)$」の形へ書き換える。** 対象は 2 つのプロジ�
   開いている PDF ビューアがそのまま更新を拾えるようにするため）。
 - PDF は生成物なので git では追跡しない（正本は `content/`）。**追跡しようとしない。**
 - 生成に失敗したら、それは本文の欠陥である。台帳へ記録し、直してから tick を終える。
+  **例外は CJK フォントの不在である。** 既定の `Hiragino Mincho ProN` / `Hiragino Sans` は macOS にしか無い。
+  Linux の実行マシンでは `ISING_LAMBDA_PDF_CJK_MAIN_FONT="Noto Serif CJK JP"`
+  `ISING_LAMBDA_PDF_CJK_SANS_FONT="Noto Sans CJK JP"` を付けて実行する（`tools/build-latex.ts` が読む。
+  実測 2026-10-03: この指定で通る）。フォントの不在を本文の欠陥と誤診しない。
 
 ## git レシピ
 
@@ -218,7 +241,9 @@ non-fast-forward で蹴られたら `git fetch origin main && git rebase origin/
 
 - **`docs/context/` を直したくなったとき。** 人間の確認と議論が必須（例外なし）。提案だけして止まる。
 - **証明の方針そのものを変える判断**（例: ある章を可算側で書ききれないと分かり、
-  ℝ 脱出の位置を動かす必要が出たとき）。台帳へ論点を書き、報告して止まる。
+  ℝ 脱出の位置を動かす必要が出たとき）は、連続実行では行わない。台帳の「前進の記録」へ
+  論点を書き、台帳で次に実行可能な節へ進む。方針は毎日 18 時の研究管理の定時実行が決める
+  （2026-10-03。記録は [research-management-log.md](research-management-log.md)）。
 
 作業単位の区切りそれ自体は停止理由にならない——が、**1 tick 1 セクションの上限は守る**（上記大方針 2）。
 

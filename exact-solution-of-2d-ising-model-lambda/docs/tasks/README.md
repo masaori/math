@@ -20,4 +20,4 @@
 
 Onsager 閉形式までの実行順序と個別指示書は
 [Onsager 閉形式への接続](onsager-closed-form-connection/task-dependency-graph.md) にある。
-最初に実行可能なのは、トーラスの向き付き辺・回転位相・四つのスピン構造を定義するタスクである。
+実行の順序の正本は [auto-loop-state.md](auto-loop-state.md) のセクション表であり、方向の判断と組み替えの記録は [research-management-log.md](research-management-log.md) にある。
