@@ -28960,18 +28960,26 @@ Z_L
                         paragraph(["である。有限和に対する分配則を頂点ごとに繰り返すと"]),
                         displayMath(String.raw`\begin{aligned}
 S_L(A)
+&=\sum_{\sigma\in\Sigma_L}\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
+&&(\because\ \blkref{def_edge_subset_spin_sum})\\
 &=\sum_{\sigma\in\Sigma_L}\prod_{v\in V_L}\sigma(v)^{d_A(v)}
 &&(\because\ \text{直前の有限積の並べ替え})\\
 &=\prod_{v\in V_L}\left(\sum_{s\in\{+1,-1\}}s^{d_A(v)}\right)
 &&(\because\ \text{有限和に対する有限積の分配則})
 \end{aligned}`),
-                        paragraph([math(String.raw`\operatorname{Even}_L(A)`), " が成り立つ場合、各 ", math(String.raw`v\in V_L`), " で ", math(String.raw`d_A(v)=2k_v`), " と書ける。したがって"]),
+                        paragraph([math(String.raw`\operatorname{Even}_L(A)`), " が成り立つ場合、各 ", math(String.raw`v\in V_L`), " で自然数 ", math(String.raw`k_v\in\mathbb N`), " を取り ", math(String.raw`d_A(v)=2k_v`), " と書ける（", ref("def_even_edge_subset"), "）。したがって"]),
                         displayMath(String.raw`\begin{aligned}
 \sum_{s\in\{+1,-1\}}s^{d_A(v)}
+&=1^{d_A(v)}+(-1)^{d_A(v)}
+&&(\because\ \text{二点集合上の和の展開})\\
 &=1^{2k_v}+(-1)^{2k_v}
 &&(\because\ d_A(v)=2k_v)\\
+&=1+(-1)^{2k_v}
+&&(\because\ 1^n=1)\\
+&=1+1
+&&(\because\ (-1)^{2k_v}=1)\\
 &=2
-&&(\because\ (-1)^{2k_v}=1),
+&&(\because\ \text{整数の加法}),
 \end{aligned}`),
                         paragraph(["ゆえに"]),
                         displayMath(String.raw`\begin{aligned}
@@ -28981,7 +28989,7 @@ S_L(A)
 &=2^{|V_L|}
 &&(\because\ \text{一定値の有限積})\\
 &=2^{L^2}
-&&(\because\ |V_L|=L^2)
+&&(\because\ \blkref{def_lattice}\text{ の }|V_L|=L^2)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`\operatorname{Even}_L(A)`), " が成り立たない場合、", ref("def_even_edge_subset"),
@@ -28990,10 +28998,14 @@ S_L(A)
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \sum_{s\in\{+1,-1\}}s^{d_A(v_0)}
+&=1^{d_A(v_0)}+(-1)^{d_A(v_0)}
+&&(\because\ \text{二点集合上の和の展開})\\
 &=1^{2k_0+1}+(-1)^{2k_0+1}
 &&(\because\ d_A(v_0)=2k_0+1)\\
+&=1+(-1)^{2k_0+1}
+&&(\because\ 1^n=1)\\
 &=1+(-1)
-&&(\because\ 1^n=1,\ (-1)^{2k_0+1}=-1)\\
+&&(\because\ (-1)^{2k_0+1}=-1)\\
 &=0
 &&(\because\ \text{整数の加法逆元})
 \end{aligned}`),
@@ -66813,6 +66825,141 @@ I_{(c+1)n}(r)-A
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_one_sided_closure_step_sequence",
+        labels: [],
+        title: { text: "一側閉包の歩ベクトル列の四部分表示" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_closure_step_sequence",
+            focus: {
+              id: "kac_ward_claim_one_sided_closure_step_sequence",
+              kind: "claim",
+              title: { text: "一側閉包の歩ベクトル列は四部分の連結である" },
+              labels: ["claim_one_sided_closure_step_sequence"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedClosure_stepSequence",
+                "Ising2DLambda.NecSuf.KacWard.oneSidedClosure_stepSequence_necSuf",
+                "Ising2DLambda.KacWard.oneSidedClosure_stepSequence_from_necSuf",
+              ],
+              verification: ["sagemath/check/one-sided-closure-step-sequence"],
+              statement: [
+                paragraph([
+                  "正の自然数 ", math(String.raw`a,b,c\in\mathbb N`), " と整数格子点の四つの有限列 ",
+                  math(String.raw`P_0,\ldots,P_a`), "、", math(String.raw`Q_0,\ldots,Q_b`), "、",
+                  math(String.raw`R_0,\ldots,R_c`), "、", math(String.raw`S_0,\ldots,S_b`),
+                  " を取り、各点は ", math(String.raw`\mathbb Z^2`), " に属するとする。接合点は",
+                ]),
+                displayMath(String.raw`P_a=Q_0,\qquad Q_b=R_0,\qquad R_c=S_b`),
+                paragraph([
+                  "を満たすとする。", math(String.raw`N:=a+2b+c\in\mathbb N`), " と置き、",
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）と同じ四部分の点列を、",
+                  "接合点では後ろの部分を選んで定める。",
+                ]),
+                displayMath(String.raw`F_j:=\begin{cases}
+P_j,&0\le j<a,\\
+Q_{j-a},&a\le j<a+b,\\
+R_{j-a-b},&a+b\le j<a+b+c,\\
+S_{N-j},&a+b+c\le j\le N.
+\end{cases}`),
+                paragraph(["各部分の歩ベクトル列を、次の差で定める。"]),
+                displayMath(String.raw`\begin{aligned}
+u_i&:=P_{i+1}-P_i&&(0\le i<a),\\
+v_i&:=Q_{i+1}-Q_i&&(0\le i<b),\\
+w_i&:=R_{i+1}-R_i&&(0\le i<c),\\
+x_i&:=S_{b-(i+1)}-S_{b-i}&&(0\le i<b).
+\end{aligned}`),
+                paragraph([
+                  "四列の値は全て ", math(String.raw`\mathbb Z^2`), " に属する。",
+                  "有限列の外を零で補い、連結の記号（", ref("claim_four_part_adjacent_sum"), "）で ",
+                  math(String.raw`z:=((u*_{a}v)*_{a+b}w)*_{a+b+c}x`), " と置く。このとき",
+                ]),
+                displayMath(String.raw`F_{j+1}-F_j=z_j\qquad(0\le j<N)`),
+                paragraph([
+                  "が成り立つ。単位歩・閉性・回転についての仮定はこの等式には不要である。",
+                  "実際の一側閉包では ", math(String.raw`a=\ell m`), "、",
+                  math(String.raw`b=t\,n_{\perp}`), "、", math(String.raw`c=\ell n_{\parallel}`),
+                  "（周期数 ", math(String.raw`\ell\in\mathbb N`), "、", math(String.raw`\ell\ge1`), "）とし、",
+                  "四つの点列をその定義の四部分に取る。三つの接合点の一致は ",
+                  ref("claim_one_sided_periodic_lift_closure_closed_unit_steps"),
+                  " の証明で示したので、この等式を適用できる。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "各区間の内部と三つの接合点を分ける。以下の添字はすべて自然数であり、",
+                  "各場合に示した範囲内だけを使う。まず ", math(String.raw`0\le j<a-1`), " では、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+F_{j+1}-F_j&=P_{j+1}-P_j&&\bigl(\because\ F\text{ の第一の場合}\bigr)\\
+&=u_j&&\bigl(\because\ u\text{ の定義}\bigr)\\
+&=z_j&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義},\ j<a\bigr).
+\end{aligned}`),
+                paragraph(["最初の接合点の直前 ", math(String.raw`j=a-1`), " では、"]),
+                displayMath(String.raw`\begin{aligned}
+F_a-F_{a-1}&=Q_0-P_{a-1}&&\bigl(\because\ F\text{ の第一・第二の場合}\bigr)\\
+&=P_a-P_{a-1}&&\bigl(\because\ P_a=Q_0\bigr)\\
+&=u_{a-1}&&\bigl(\because\ u\text{ の定義}\bigr)\\
+&=z_{a-1}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "第二の区間の内部では ", math(String.raw`j=a+k`), "、",
+                  math(String.raw`0\le k<b-1`), " と書ける。このとき、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+F_{a+k+1}-F_{a+k}&=Q_{k+1}-Q_k&&\bigl(\because\ F\text{ の第二の場合}\bigr)\\
+&=v_k&&\bigl(\because\ v\text{ の定義}\bigr)\\
+&=z_{a+k}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+\end{aligned}`),
+                paragraph(["次の接合点の直前 ", math(String.raw`j=a+b-1`), " では、"]),
+                displayMath(String.raw`\begin{aligned}
+F_{a+b}-F_{a+b-1}&=R_0-Q_{b-1}&&\bigl(\because\ F\text{ の第二・第三の場合}\bigr)\\
+&=Q_b-Q_{b-1}&&\bigl(\because\ Q_b=R_0\bigr)\\
+&=v_{b-1}&&\bigl(\because\ v\text{ の定義}\bigr)\\
+&=z_{a+b-1}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "第三の区間の内部では ", math(String.raw`j=a+b+k`), "、",
+                  math(String.raw`0\le k<c-1`), " と書ける。このとき、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+F_{a+b+k+1}-F_{a+b+k}&=R_{k+1}-R_k&&\bigl(\because\ F\text{ の第三の場合}\bigr)\\
+&=w_k&&\bigl(\because\ w\text{ の定義}\bigr)\\
+&=z_{a+b+k}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+\end{aligned}`),
+                paragraph(["最後の接合点の直前 ", math(String.raw`j=a+b+c-1`), " では、"]),
+                displayMath(String.raw`\begin{aligned}
+F_{a+b+c}-F_{a+b+c-1}&=S_b-R_{c-1}&&\bigl(\because\ F\text{ の第三・第四の場合}\bigr)\\
+&=R_c-R_{c-1}&&\bigl(\because\ R_c=S_b\bigr)\\
+&=w_{c-1}&&\bigl(\because\ w\text{ の定義}\bigr)\\
+&=z_{a+b+c-1}&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "第四の区間では ", math(String.raw`j=a+b+c+k`), "、",
+                  math(String.raw`0\le k<b`), " と書ける。このとき、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+F_{j+1}-F_j&=S_{N-(j+1)}-S_{N-j}&&\bigl(\because\ F\text{ の第四の場合}\bigr)\\
+&=S_{b-(k+1)}-S_{b-k}&&\bigl(\because\ N=a+2b+c,\ j=a+b+c+k\text{ の添字計算}\bigr)\\
+&=x_k&&\bigl(\because\ x\text{ の定義}\bigr)\\
+&=z_j&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の連結の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "これらで ", math(String.raw`0\le j<N`), " を尽くす。区間長が一のとき、その区間の内部の場合は空で、接合点の場合が最後の歩を扱う。",
+                  "全過程は有限列と整数の加減算だけで閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -66874,7 +67021,8 @@ I_{(c+1)n}(r)-A
 \qquad\bigl(\because\ \blkref{claim_reversed_parallel_staircase_turning_zero}\text{ と }\blkref{def_cyclic_total_turning}\bigr)`),
                 paragraph([
                   "最後に ", math(String.raw`\Gamma_c`), " と ", math(String.raw`\Gamma_{c+1}`),
-                  " の方向列を比較する。一側閉包の定義（", ref("def_one_sided_periodic_lift_closure"),
+                  " の方向列を比較する。歩ベクトル列が四部分の連結に一致することは ",
+                  ref("claim_one_sided_closure_step_sequence"), " による。一側閉包の定義（", ref("def_one_sided_periodic_lift_closure"),
                   "）から、周期数を一つ増やすと、周期持ち上げ部分へ ", math(String.raw`U`),
                   " が一組、反転平行階段へ ", math(String.raw`R`),
                   " が一組増える。二つの反復横断階段と、四部分の接合部の先頭・末尾方向は変わらない。",
