@@ -2,7 +2,7 @@
 
 **対象ラベル**: `claim_three_term_pm_four_difference_zero`
 - 実行: `sage sagemath/check/three-term-pm-four-difference-zero/check.sage`
-- 状態: PASS（2026-09-01、整数対 2,025 件・仮定を満たす対 2 件）
+- 状態: PASS（2026-10-03 再実行、整数対 2,025 件・仮定を満たす対 2 件）
 
 証明の各行（隣接二項の差の全列挙 $\{0,8,-8\}$、$b=\pm8$ の四場合が仮定に反すること）と、
 主張の全数検査（窓 $|a|\le40$, $|b|\le12$ のすべての整数対で、三項 $a+b,a+2b,a+3b$ が

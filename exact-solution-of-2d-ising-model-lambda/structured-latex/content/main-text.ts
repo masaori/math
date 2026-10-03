@@ -66329,6 +66329,11 @@ t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
               title: { text: "三つの等差項が正負 4 に収まるなら公差は零である" },
               labels: ["claim_three_term_pm_four_difference_zero"],
               habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.threeTermPmFour_difference_zero",
+                "Ising2DLambda.NecSuf.KacWard.threeTermTwoValue_difference_zero_necSuf",
+                "Ising2DLambda.KacWard.threeTermPmFour_difference_zero_from_necSuf",
+              ],
               verification: ["sagemath/check/three-term-pm-four-difference-zero"],
               statement: [
                 paragraph([
@@ -72614,7 +72619,7 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       "分配多項式 ", math(String.raw`Z_L(x)\in\mathbb{Z}[x]`),
                       " を、四つのスピン構造に対応する Kac--Ward 行列式の平方根の符号付き和として書く段である。",
                       "現在地: 一辺二・三では行列式が符号付き偶部分グラフ多項式の平方に等しいことを厳密計算で観測し、",
-                      "離散 Whitney 系の補題列は記述と SageMath を終え、Lean の二版は残り四件である。",
+                      "離散 Whitney 系の補題列は記述と SageMath を終え、Lean の二版は残り三件である。",
                       "完了条件: 前段の平方恒等式と Arf 符号付き四項和を使って、",
                       "四つの行列式の符号付き和が ", math(String.raw`Z_L(x)`), " に一致することを示すこと。",
                     ],

@@ -26,3 +26,12 @@ sage sagemath/check/global-spin-reversal-broken-edge/check_endpoints.sage
 **2026-08-12 実行: すべて通過。**
 
 2026-09-06: プログラミングによる検証はレビュー時と表記統一後の二回とも終了コード 0。一辺一から四の全 2,106,500 本で二段の同値と反転後のスピンの所属を再現した。LLM による検証では、本文と Lean 二版が両端への同じ単射の適用で一致し、後続の原像の数え上げで再利用される主張として維持した。
+
+2026-10-03: SageMath 10.9 で再実行し、全 2,106,500 本が通過した。
+上の直接実行では `__file__` が SageMath のインストール先を指し、共有定義の読み込みが
+`OSError` で失敗したため、次の呼び出しで検証ファイル自身のパスを明示した。
+検証スクリプトと判定条件は変更していない。
+
+```sh
+sage -c "__file__ = 'sagemath/check/global-spin-reversal-broken-edge/check_endpoints.sage'; load(__file__)"
+```

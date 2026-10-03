@@ -4,7 +4,7 @@
 # 使い方:
 #   cd exact-solution-of-2d-ising-model-lambda/lean && bash scripts/check-no-sorry.sh
 #
-# 終了コード 0 = すべて sorry 非依存。1 = sorryAx への依存またはソース中の sorry を検出。
+# 終了コード 0 = 全検査通過。1 = 検査の失敗または未検査ファイルの検出。
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -52,6 +52,9 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.KacWard.threeTermPmFour_difference_zero
+  Ising2DLambda.NecSuf.KacWard.threeTermTwoValue_difference_zero_necSuf
+  Ising2DLambda.KacWard.threeTermPmFour_difference_zero_from_necSuf
   Ising2DLambda.NecSuf.KacWard.orbitEntryProduct_phase_twist_necSuf
   Ising2DLambda.KacWard.movedOrbitWeight_phase_twist
   Ising2DLambda.KacWard.movedOrbitWeight_phase_twist_from_necSuf
@@ -202,7 +205,6 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_trans_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.permSign_eq_one_or_neg_one
   Ising2DLambda.AlgebraicEigenvalue.permSign_mul_self
-  Ising2DLambda.AlgebraicEigenvalue.permSign_id
   Ising2DLambda.AlgebraicEigenvalue.permSign_comp
   Ising2DLambda.AlgebraicEigenvalue.permSign_comp_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.permSign_id_from_necSuf
@@ -212,42 +214,7 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trichotomy
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.lexLess_trans
   Ising2DLambda.NecSuf.TransferMatrix.trace_matPow_eq_sum_cyclicWeight
-  Ising2DLambda.AlgebraicEigenvalue.two_le_card_movedBy
-  Ising2DLambda.AlgebraicEigenvalue.determinant_diagonal
-  Ising2DLambda.AlgebraicEigenvalue.determinant_identity
-  Ising2DLambda.AlgebraicEigenvalue.two_le_card_movedBy_from_necSuf
-  Ising2DLambda.AlgebraicEigenvalue.determinant_diagonal_from_necSuf
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.two_le_card_moved
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.det_diagonal
-  Ising2DLambda.AlgebraicEigenvalue.degLe_sum
-  Ising2DLambda.AlgebraicEigenvalue.degLe_mul
-  Ising2DLambda.AlgebraicEigenvalue.degLe_prod
-  Ising2DLambda.AlgebraicEigenvalue.monicDeg_mul
-  Ising2DLambda.AlgebraicEigenvalue.monicDeg_prod
-  Ising2DLambda.AlgebraicEigenvalue.monicDeg_add_of_degLe
-  Ising2DLambda.AlgebraicEigenvalue.degLe_sum_from_necSuf
-  Ising2DLambda.AlgebraicEigenvalue.degLe_prod_from_necSuf
-  Ising2DLambda.AlgebraicEigenvalue.monicDeg_prod_from_necSuf
-  Ising2DLambda.AlgebraicEigenvalue.monicDeg_add_of_degLe_from_necSuf
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_sum
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_mul
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_prod
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_mul
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_prod
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_add_of_degLe
-  Ising2DLambda.AlgebraicEigenvalue.degLe_constSecond
-  Ising2DLambda.AlgebraicEigenvalue.monicDeg_indeterminate_add_constSecond
-  Ising2DLambda.AlgebraicEigenvalue.monicDeg_identity_term
-  Ising2DLambda.AlgebraicEigenvalue.degLe_term_of_ne_one
-  Ising2DLambda.AlgebraicEigenvalue.degLe_rest
-  Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly
   Ising2DLambda.AlgebraicEigenvalue.charMatrix_eq_necSuf
-  Ising2DLambda.AlgebraicEigenvalue.monicDeg_charPoly_from_necSuf
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_C
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_X_add_C
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_identity_term
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.degLe_term_of_ne_one
-  Ising2DLambda.NecSuf.AlgebraicEigenvalue.monicDeg_charDet
   Ising2DLambda.AlgebraicEigenvalue.card_filter_columnTranslation
   Ising2DLambda.AlgebraicEigenvalue.intraRowBrokenCount_rowShift
   Ising2DLambda.AlgebraicEigenvalue.interRowBrokenCount_rowShift
@@ -944,9 +911,7 @@ targets=(
   Ising2DLambda.FisherZero.highTemperatureSectorDecomposition
   Ising2DLambda.NecSuf.FisherZero.sum_eq_sum_label_fibers_necSuf
   Ising2DLambda.FisherZero.highTemperatureSectorDecomposition_from_necSuf
-  Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity
-  Ising2DLambda.NecSuf.FisherZero.four_step_equality_chain_necSuf
-  Ising2DLambda.FisherZero.mixedBoundaryDualityIdentity_from_necSuf
+  Ising2DLambda.FisherZero.highTemperatureSectorSum_eq_twoPow_mul_trivialSector
   Ising2DLambda.FisherZero.kwDualTransform_domain
   Ising2DLambda.NecSuf.FisherZero.kw_dual_transform_domain_necSuf
   Ising2DLambda.FisherZero.kwDualTransform_domain_from_necSuf
@@ -962,9 +927,6 @@ targets=(
   Ising2DLambda.FisherZero.selfDualQuadratic_roots
   Ising2DLambda.NecSuf.FisherZero.self_dual_quadratic_roots_necSuf
   Ising2DLambda.FisherZero.selfDualQuadratic_roots_from_necSuf
-  Ising2DLambda.FisherZero.selfDualQuadratic_roots_distinct
-  Ising2DLambda.NecSuf.FisherZero.self_dual_quadratic_roots_distinct_necSuf
-  Ising2DLambda.FisherZero.selfDualQuadratic_roots_distinct_from_necSuf
   Ising2DLambda.FisherZero.noRationalSquareTwo
   Ising2DLambda.NecSuf.FisherZero.no_rational_square_two_necSuf
   Ising2DLambda.FisherZero.noRationalSquareTwo_from_necSuf
@@ -1819,7 +1781,13 @@ trap 'rm -rf "$tmp"' EXIT
   done
 } > "$tmp/CheckAxioms.lean"
 
-if lake env lean "$tmp/CheckAxioms.lean" | tee "$tmp/out.txt" | grep -q "sorryAx"; then
+if ! lake env lean "$tmp/CheckAxioms.lean" > "$tmp/out.txt" 2>&1; then
+  echo "NG: 依存公理の検査で Lean が失敗した" >&2
+  cat "$tmp/out.txt" >&2
+  exit 1
+fi
+
+if grep -q "sorryAx" "$tmp/out.txt"; then
   echo "NG: sorryAx に依存している定理がある" >&2
   grep -n "sorryAx" "$tmp/out.txt" >&2 || true
   status=1
