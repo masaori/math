@@ -1785,6 +1785,11 @@ targets=(
   Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLift_coordinate
   Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLifts_disjoint
   Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLift_coordinate_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.internalAdjacentSum_join_necSuf
+  Ising2DLambda.NecSuf.KacWard.fourPart_cyclicAdjacentSum_necSuf
+  Ising2DLambda.KacWard.latticeInternalTurning_join
+  Ising2DLambda.KacWard.fourPart_latticeCyclicTurning
+  Ising2DLambda.KacWard.fourPart_latticeCyclicTurning_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

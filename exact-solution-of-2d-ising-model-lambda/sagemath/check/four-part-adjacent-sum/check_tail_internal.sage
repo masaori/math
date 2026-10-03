@@ -1,0 +1,14 @@
+# 対象ラベル: claim_four_part_adjacent_sum
+import os
+import sys
+load(os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'construction.sage'))
+count = 0
+# 後半の有限和を内部和の記号へ戻す
+for u, v in binary_cases():
+    a, b = len(u), len(v)
+    y = u + v
+    lhs = sum((theta(v[j], v[j + 1]) for j in range(b - 1)), ZZ(0))
+    rhs = internal(v)
+    assert lhs == rhs, (lhs, rhs)
+    count += 1
+print('tail_internal: PASS (' + str(count) + ' cases)')

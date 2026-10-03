@@ -66512,6 +66512,181 @@ t_{\circ}(R)&=\vartheta(a,b)+\vartheta(b,a)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_four_part_adjacent_sum",
+        labels: [],
+        title: { text: "四部分の循環隣接和の分割" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_four_part_adjacent_sum",
+            focus: {
+              id: "kac_ward_claim_four_part_adjacent_sum",
+              kind: "claim",
+              title: { text: "四部分の循環隣接和は四つの内部和と四つの接合に分かれる" },
+              labels: ["claim_four_part_adjacent_sum"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.latticeInternalTurning_join",
+                "Ising2DLambda.KacWard.fourPart_latticeCyclicTurning",
+                "Ising2DLambda.NecSuf.KacWard.internalAdjacentSum_join_necSuf",
+                "Ising2DLambda.NecSuf.KacWard.fourPart_cyclicAdjacentSum_necSuf",
+                "Ising2DLambda.KacWard.fourPart_latticeCyclicTurning_from_necSuf",
+              ],
+              verification: ["sagemath/check/four-part-adjacent-sum"],
+              statement: [
+                paragraph([
+                  math(String.raw`a,b,c,d\in\mathbb N`), " はすべて正とし、",
+                  "長さがそれぞれ ", math(String.raw`a,b,c,d`), " の整数ベクトルの有限列 ",
+                  math(String.raw`u,v,w,x`), " を取る。添字は零から始める。添字計算のため、",
+                  "各列の末尾より後ろを零ベクトルで補って ", math(String.raw`\mathbb N\to\mathbb Z^2`),
+                  " の写像とみなす。この延長は有限列から一意に決まり、使うのは元の有限個の項だけである。",
+                  "整数ベクトル ", math(String.raw`r=(r_1,r_2),s=(s_1,s_2)\in\mathbb Z^2`),
+                  " に対し ", math(String.raw`\vartheta(r,s):=r_2s_1-r_1s_2\in\mathbb Z`),
+                  " と置く。二つの有限列を零で補った写像 ", math(String.raw`p,q:\mathbb N\to\mathbb Z^2`),
+                  " と正の長さ ", math(String.raw`n\in\mathbb N`), " の連結を",
+                ]),
+                displayMath(String.raw`(p*_{n}q)_j:=\begin{cases}p_j,&0\le j<n,\\q_{j-n},&j\ge n\end{cases}\quad(j\in\mathbb N)`),
+                paragraph([
+                  "と定める。長さ ", math(String.raw`n`), " の内部和と循環隣接和をそれぞれ",
+                ]),
+                displayMath(String.raw`I_n(p):=\sum_{j=0}^{n-2}\vartheta(p_j,p_{j+1})\in\mathbb Z,
+\qquad C_n(p):=I_n(p)+\vartheta(p_{n-1},p_0)\in\mathbb Z`),
+                paragraph([
+                  "と定める。", math(String.raw`n=1`), " では内部和は空和の零である。",
+                  "連結列を ", math(String.raw`uv:=u*_{a}v`), "、",
+                  math(String.raw`uvw:=uv*_{a+b}w`), "、",
+                  math(String.raw`z:=uvw*_{a+b+c}x`), " と書くと、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+C_{a+b+c+d}(z)={}&I_a(u)+\vartheta(u_{a-1},v_0)+I_b(v)+\vartheta(v_{b-1},w_0)\\
+&+I_c(w)+\vartheta(w_{c-1},x_0)+I_d(x)+\vartheta(x_{d-1},u_0).
+\end{aligned}`),
+                paragraph([
+                  "四つの列の内部の隣接対と、列の境目の四対を分ける等式である。",
+                  "単位歩の閉じた非後退方向列では ", math(String.raw`\vartheta`),
+                  " は一歩の回転数（", ref("def_step_turning"),
+                  "）と一致するため、この和は循環総回転数（", ref("def_cyclic_total_turning"),
+                  "）の分割に使える。方向と回転の照合は ",
+                  ref("claim_reversed_parallel_staircase_turning_zero"), " の証明で行った。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "まず二列の内部和を分割する。", math(String.raw`y:=u*_{a}v`),
+                  " と置き、有限な整数の表 ", math(String.raw`f:\{0,\ldots,a+b-2\}\to\mathbb Z`),
+                  " に対して、添字の区間を最初の ", math(String.raw`a`),
+                  " 項と残りに分け、最初の区間の末項を取り出す。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{j=0}^{a+b-2}f(j)
+&=\sum_{j=0}^{a-1}f(j)+\sum_{j=0}^{b-2}f(a+j)
+&&\bigl(\because\ \text{有限和の区間分割と }j\mapsto a+j\text{ の添字変更}\bigr)\\
+&=\left(\sum_{j=0}^{a-2}f(j)+f(a-1)\right)+\sum_{j=0}^{b-2}f(a+j)
+&&\bigl(\because\ a>0\text{ より最初の有限和の末項を取り出す}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "連結の定義では、", math(String.raw`0\le j<a-1`),
+                  " の両方の隣接項が前半にあり、境界の次の項は後半の先頭にある。従って",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{j=0}^{a-2}\vartheta(y_j,y_{j+1})
+&=\sum_{j=0}^{a-2}\vartheta(u_j,u_{j+1})
+&&\bigl(\because\ j,j+1<a\text{ と連結の定義}\bigr)\\
+&=I_a(u)&&\bigl(\because\ I\text{ の定義}\bigr),\\
+\vartheta(y_{a-1},y_a)&=\vartheta(u_{a-1},v_0)
+&&\bigl(\because\ a-1<a,\ a-a=0\text{ と連結の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "後半では ", math(String.raw`0\le j<b-1`), " に対して ",
+                  math(String.raw`a+j\ge a`), "、", math(String.raw`a+j+1\ge a`), " なので、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{j=0}^{b-2}\vartheta(y_{a+j},y_{a+j+1})
+&=\sum_{j=0}^{b-2}\vartheta(v_j,v_{j+1})
+&&\bigl(\because\ \text{連結の定義と }(a+j)-a=j,\ (a+j+1)-a=j+1\bigr)\\
+&=I_b(v)&&\bigl(\because\ I\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["これらを一つの和へ代入する。"]),
+                displayMath(String.raw`\begin{aligned}
+I_{a+b}(y)
+&=\sum_{j=0}^{a+b-2}\vartheta(y_j,y_{j+1})
+&&\bigl(\because\ I\text{ の定義}\bigr)\\
+&=\left(\sum_{j=0}^{a-2}\vartheta(y_j,y_{j+1})+\vartheta(y_{a-1},y_a)\right)
++\sum_{j=0}^{b-2}\vartheta(y_{a+j},y_{a+j+1})
+&&\bigl(\because\ \text{上の有限和分割へ }f(j)=\vartheta(y_j,y_{j+1})\text{ を代入}\bigr)\\
+&=\left(I_a(u)+\vartheta(y_{a-1},y_a)\right)+\sum_{j=0}^{b-2}\vartheta(y_{a+j},y_{a+j+1})
+&&\bigl(\because\ \text{上の前半の内部和の等式}\bigr)\\
+&=\left(I_a(u)+\vartheta(u_{a-1},v_0)\right)+\sum_{j=0}^{b-2}\vartheta(y_{a+j},y_{a+j+1})
+&&\bigl(\because\ \text{上の境界項の等式}\bigr)\\
+&=I_a(u)+\vartheta(u_{a-1},v_0)+I_b(v)
+&&\bigl(\because\ \text{上の後半の内部和の等式}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "これは任意の正の二つの長さに対して示された。次に三つの連結の末項と始項を記す。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+uv_{a+b-1}&=v_{b-1}&&\bigl(\because\ b>0\text{ と連結の定義}\bigr),\\
+uvw_{a+b+c-1}&=w_{c-1}&&\bigl(\because\ c>0\text{ と連結の定義}\bigr),\\
+z_{a+b+c+d-1}&=x_{d-1}&&\bigl(\because\ d>0\text{ と連結の定義}\bigr),\\
+z_0&=uvw_0&&\bigl(\because\ a+b+c>0\text{ と連結の定義}\bigr)\\
+&=uv_0&&\bigl(\because\ a+b>0\text{ と連結の定義}\bigr)\\
+&=u_0&&\bigl(\because\ a>0\text{ と連結の定義}\bigr).
+\end{aligned}`),
+                paragraph(["二列の分割を外側から三回使う。"]),
+                displayMath(String.raw`\begin{aligned}
+I_{a+b+c+d}(z)
+&=\begin{aligned}[t]&I_{a+b+c}(uvw)\\&+\vartheta(uvw_{a+b+c-1},x_0)+I_d(x)\end{aligned}
+&&\bigl(\because\ \text{二列の分割を }uvw,x\text{ に適用}\bigr)\\
+&=\begin{aligned}[t]&\bigl(I_{a+b}(uv)+\vartheta(uv_{a+b-1},w_0)+I_c(w)\bigr)\\
+&+\vartheta(uvw_{a+b+c-1},x_0)+I_d(x)\end{aligned}
+&&\bigl(\because\ \text{二列の分割を }uv,w\text{ に適用}\bigr)\\
+&=\begin{aligned}[t]&\bigl(\bigl(I_a(u)+\vartheta(u_{a-1},v_0)+I_b(v)\bigr)\\
+&\quad+\vartheta(uv_{a+b-1},w_0)+I_c(w)\bigr)\\
+&+\vartheta(uvw_{a+b+c-1},x_0)+I_d(x)\end{aligned}
+&&\bigl(\because\ \text{二列の分割を }u,v\text{ に適用}\bigr)\\
+&=\begin{aligned}[t]&\bigl(\bigl(I_a(u)+\vartheta(u_{a-1},v_0)+I_b(v)\bigr)\\
+&\quad+\vartheta(v_{b-1},w_0)+I_c(w)\bigr)\\
+&+\vartheta(uvw_{a+b+c-1},x_0)+I_d(x)\end{aligned}
+&&\bigl(\because\ uv\text{ の末項の等式}\bigr)\\
+&=\begin{aligned}[t]&\bigl(\bigl(I_a(u)+\vartheta(u_{a-1},v_0)+I_b(v)\bigr)\\
+&\quad+\vartheta(v_{b-1},w_0)+I_c(w)\bigr)\\
+&+\vartheta(w_{c-1},x_0)+I_d(x)\end{aligned}
+&&\bigl(\because\ uvw\text{ の末項の等式}\bigr)\\
+&=\begin{aligned}[t]&I_a(u)+\vartheta(u_{a-1},v_0)+I_b(v)\\
+&+\vartheta(v_{b-1},w_0)+I_c(w)\\
+&+\vartheta(w_{c-1},x_0)+I_d(x)\end{aligned}
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合律}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "最後の行の整数を ", math(String.raw`S\in\mathbb Z`), " と書けば、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+C_{a+b+c+d}(z)
+&=I_{a+b+c+d}(z)+\vartheta(z_{a+b+c+d-1},z_0)
+&&\bigl(\because\ C\text{ の定義}\bigr)\\
+&=S+\vartheta(z_{a+b+c+d-1},z_0)
+&&\bigl(\because\ \text{直前の内部和の等式}\bigr)\\
+&=S+\vartheta(x_{d-1},z_0)
+&&\bigl(\because\ z\text{ の末項の等式}\bigr)\\
+&=S+\vartheta(x_{d-1},u_0)
+&&\bigl(\because\ z\text{ の始項の等式}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "これが主張の等式である。どれかの長さが一でも内部和を空和とする同じ計算が成立する。",
+                  "長さごとの整数ベクトルの有限列は可算であり、長さも自然数である。",
+                  "全過程はこの可算な入力と整数の有限和で閉じ、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -66577,13 +66752,14 @@ t_{\circ}(R)&=\vartheta(a,b)+\vartheta(b,a)
                   "）から、周期数を一つ増やすと、周期持ち上げ部分へ ", math(String.raw`U`),
                   " が一組、反転平行階段へ ", math(String.raw`R`),
                   " が一組増える。二つの反復横断階段と、四部分の接合部の先頭・末尾方向は変わらない。",
-                  "循環総回転数の有限和を四部分と接合部へ分け、両辺の共通項を整数の加法で消すと、",
+                  "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
+                  ref("claim_four_part_adjacent_sum"), " で与えた。両辺の共通項を整数の加法で消すと、",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
 &=\left(\sum_{j=1}^{m-1}\tau(\vec u_j,\vec u_{j+1})+\tau(\vec u_m,\vec u_1)\right)
 +\left(\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)\right)
-&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ と }\blkref{def_cyclic_total_turning}\text{ の有限和分割}\bigr)\\
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ と }\blkref{def_cyclic_total_turning},\ \blkref{claim_four_part_adjacent_sum}\text{ の有限和分割}\bigr)\\
 &=t_{\circ}(\gamma)+0
 &&\bigl(\because\ \text{上で示した }U\text{ と }R\text{ の二等式}\bigr)\\
 &=t_{\circ}(\gamma)

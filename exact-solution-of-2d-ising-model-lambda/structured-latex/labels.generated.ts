@@ -92,6 +92,7 @@ export const ALL_LABELS = [
   "claim_fixed_or_shift_preserves_orbit",
   "claim_formal_square_root_exists",
   "claim_formal_square_root_unique",
+  "claim_four_part_adjacent_sum",
   "claim_free_entropy_at_one",
   "claim_free_entropy_dual_relation",
   "claim_fully_unswitchable_contacts_witness_doubled_edges",
