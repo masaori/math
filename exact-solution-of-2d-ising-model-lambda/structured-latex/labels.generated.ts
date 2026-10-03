@@ -141,6 +141,7 @@ export const ALL_LABELS = [
   "claim_moved_orbit_weight_phase_twist",
   "claim_neg_one_not_square",
   "claim_neg_two_not_square_in_real_closed",
+  "claim_negated_parallel_staircase_turning_zero",
   "claim_no_rational_square_two",
   "claim_non_orbit_preserving_term_zero",
   "claim_non_phase_reversing_standard_smoothing_involution",

@@ -52,6 +52,17 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.NecSuf.KacWard.negatedTwoPhaseStep_eq_necSuf
+  Ising2DLambda.NecSuf.KacWard.negatedTwoPhase_cyclicAdjacentSum_zero_necSuf
+  Ising2DLambda.KacWard.negatedParallelStaircaseStep_difference
+  Ising2DLambda.KacWard.negatedParallelStaircaseStep_unit_negative
+  Ising2DLambda.KacWard.negatedParallelStaircaseStep_turn_spec
+  Ising2DLambda.KacWard.negatedParallelStaircase_turnValue_sum_eq
+  Ising2DLambda.KacWard.negatedParallelStaircaseStep_eq
+  Ising2DLambda.KacWard.negatedParallelStaircase_cyclicSum_eq
+  Ising2DLambda.KacWard.negatedParallelStaircase_latticeTurning_zero
+  Ising2DLambda.KacWard.negatedParallelStaircase_turning_zero
+  Ising2DLambda.KacWard.negatedParallelStaircase_turning_zero_from_necSuf
   Ising2DLambda.NecSuf.KacWard.oneSidedClosure_stepSequence_necSuf
   Ising2DLambda.KacWard.oneSidedClosure_stepSequence
   Ising2DLambda.KacWard.oneSidedClosure_stepSequence_from_necSuf

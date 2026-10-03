@@ -22,15 +22,24 @@ export type Identified = { id: string; labels: readonly string[] }
 /** 一意性の判定に必要な最小の形（ノート）。 */
 export type IdentifiedNote = { id: string }
 
-/** タプル中で最初に重複した要素を返す（重複が無ければ never）。 */
+/** タプル中で最初に重複した要素を返す（重複が無ければ never）。
+ * 一度に二要素を消費し、1,000 件の識別子でも条件型の再帰上限へ達しないようにする。
+ */
 export type FindDuplicate<T extends readonly string[], Seen = never> = T extends readonly [
-  infer H extends string,
+  infer First extends string,
+  infer Second extends string,
   ...infer R extends readonly string[],
 ]
-  ? H extends Seen
-    ? H
-    : FindDuplicate<R, Seen | H>
-  : never
+  ? First extends Seen
+    ? First
+    : Second extends Seen | First
+      ? Second
+      : FindDuplicate<R, Seen | First | Second>
+  : T extends readonly [infer Last extends string]
+    ? Last extends Seen
+      ? Last
+      : never
+    : never
 
 export type BlockIdsOf<T extends readonly Identified[]> = {
   -readonly [K in keyof T]: T[K]['id']

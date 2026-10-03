@@ -110,6 +110,21 @@ export type _NoIdCollision = AssertNoDuplicate<FindDuplicate<[...AllBlockIds, ..
 `
 
 const cases: Case[] = [
+  ...[1003, 1004].map((length): Case => ({
+    name: `${length} 件の識別子の末尾の重複を検出する`,
+    expect: 'does not satisfy the constraint',
+    files: (broken) => ({
+      'fixture.ts': `import type { Assert, AssertNoDuplicate, FindDuplicate } from '../../../domain-model/index.ts'
+type Equal<A, B> = [A] extends [B] ? ([B] extends [A] ? true : false) : false
+type Ids = [${Array.from({ length: length - 1 }, (_, index) => JSON.stringify(`long_id_${index}`)).join(', ')}]
+export type _Unique = AssertNoDuplicate<FindDuplicate<Ids>>
+export type _Tail = AssertNoDuplicate<FindDuplicate<[...Ids, '${broken ? 'long_id_0' : 'tail'}']>>
+export type _SamePair = Assert<Equal<FindDuplicate<['a', 'a']>, 'a'>>
+export type _AcrossPair = Assert<Equal<FindDuplicate<['a', 'b', 'b', 'a']>, 'b'>>
+export type _PriorSeen = Assert<Equal<FindDuplicate<['a', 'b'], 'b'>, 'b'>>
+`,
+    }),
+  })),
   {
     name: '本文中の ref が存在しないラベルを指す',
     expect: 'lab:missing',

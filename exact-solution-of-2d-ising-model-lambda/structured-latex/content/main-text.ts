@@ -66960,6 +66960,172 @@ F_{j+1}-F_j&=S_{N-(j+1)}-S_{N-j}&&\bigl(\because\ F\text{ の第四の場合}\bi
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_negated_parallel_staircase_turning",
+        labels: [],
+        title: { text: "符号反転平行階段の循環総回転数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_negated_parallel_staircase_turning_zero",
+            focus: {
+              id: "kac_ward_claim_negated_parallel_staircase_turning_zero",
+              kind: "claim",
+              title: { text: "符号反転平行階段の循環総回転数は零である" },
+              labels: ["claim_negated_parallel_staircase_turning_zero"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.negatedParallelStaircase_turning_zero",
+                "Ising2DLambda.NecSuf.KacWard.negatedTwoPhase_cyclicAdjacentSum_zero_necSuf",
+                "Ising2DLambda.KacWard.negatedParallelStaircase_turning_zero_from_necSuf",
+                "Ising2DLambda.KacWard.negatedParallelStaircaseStep_eq",
+                "Ising2DLambda.KacWard.negatedParallelStaircaseStep_turn_spec",
+                "Ising2DLambda.KacWard.negatedParallelStaircase_turnValue_sum_eq",
+              ],
+              verification: ["sagemath/check/negated-parallel-staircase-turning"],
+              statement: [
+                paragraph([
+                  "正の平行階段（", ref("def_winding_parallel_staircase"), "）の長さを ",
+                  math(String.raw`n:=n_{\parallel}\ge1`), " とし、同じ添字順で各点の符号を反転する。",
+                  "そのトーラス射影（", ref("def_plane_unit_path_torus_projection"), "）を ",
+                  math(String.raw`R_-:=\Pi(-G^{\gamma}_0,-G^{\gamma}_1,\ldots,-G^{\gamma}_n)=(\vec r_1,\ldots,\vec r_n)`),
+                  " と置く。この閉じた非後退辺列について、",
+                ]),
+                displayMath(String.raw`t_{\circ}(R_-)=0.`),
+                paragraph([
+                  "この点列の歩は ", math(String.raw`-(G^{\gamma}_{s+1}-G^{\gamma}_s)`),
+                  "（", math(String.raw`0\le s<n`), "）である。",
+                  ref("claim_reversed_parallel_staircase_turning_zero"),
+                  " の逆順の点列とは区別する。一側閉包の第三部分（",
+                  ref("def_one_sided_periodic_lift_closure"),
+                  "）が一周期内で使うのは、この同じ添字順の符号反転である。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "巻き付き数を ", math(String.raw`w_{\mathrm h},w_{\mathrm v}\in\mathbb Z`),
+                  "、絶対値を ", math(String.raw`H,V\in\mathbb N`), "、積を ",
+                  math(String.raw`A=w_{\mathrm h}w_{\mathrm v}\in\mathbb Z`), " と略記する。",
+                  "正の階段の二区間の長さと歩を、",
+                ]),
+                displayMath(String.raw`(p,q,a,b):=\begin{cases}
+(LH,LV,(0,\varepsilon(w_{\mathrm h})),(\varepsilon(w_{\mathrm v}),0)),&A>0,\\
+(LV,LH,(\varepsilon(w_{\mathrm v}),0),(0,\varepsilon(w_{\mathrm h}))),&A\le0
+\end{cases}`),
+                paragraph([
+                  "で定める。", math(String.raw`p,q\in\mathbb N`), "、",
+                  math(String.raw`p+q=n`), "、", math(String.raw`a,b\in\mathbb Z^2`),
+                  " である。零の長さの区間の歩は用いない。任意の ",
+                  math(String.raw`s\in\{0,\ldots,n-1\}`), " で正の階段の隣接差は、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+G^{\gamma}_{s+1}-G^{\gamma}_s
+&=\begin{cases}
+(s+1)a-sa,&s<p,\\
+pa+b-pa,&s=p,\\
+(pa+(s+1-p)b)-(pa+(s-p)b),&s>p
+\end{cases}
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\bigr)\\
+&=\begin{cases}
+((s+1)-s)a,&s<p,\\
+b,&s=p,\\
+((s+1-p)-(s-p))b,&s>p
+\end{cases}
+&&\bigl(\because\ \mathbb Z^2\text{ の分配則と加法逆元の相殺}\bigr)\\
+&=\begin{cases}a,&s<p,\\b,&s\ge p\end{cases}
+&&\bigl(\because\ \text{整数係数の差は }1\bigr).
+\end{aligned}`),
+                paragraph([
+                  "符号反転した点列の歩を ",
+                  math(String.raw`v_s:=(-G^{\gamma}_{s+1})-(-G^{\gamma}_s)\in\mathbb Z^2`),
+                  "（", math(String.raw`0\le s<n`), "）と置くと、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+v_s&=-(G^{\gamma}_{s+1}-G^{\gamma}_s)
+&&\bigl(\because\ \mathbb Z^2\text{ の減法と加法逆元}\bigr)\\
+&=\begin{cases}-a,&s<p,\\-b,&s\ge p\end{cases}
+&&\bigl(\because\ \text{直前の隣接差を代入}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "各 ", math(String.raw`v_s`), " は単位歩である（",
+                  ref("claim_winding_parallel_staircase_step_increase"),
+                  " の四つの単位歩の符号を反転）。平行座標について、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\pi_{\gamma}(v_s)
+&=\pi_{\gamma}\bigl(-(G^{\gamma}_{s+1}-G^{\gamma}_s)\bigr)
+&&\bigl(\because\ v_s\text{ の隣接差表示}\bigr)\\
+&=-\bigl(\pi_{\gamma}(G^{\gamma}_{s+1})-\pi_{\gamma}(G^{\gamma}_s)\bigr)
+&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\text{ の加法性}\bigr)\\
+&<0&&\bigl(\because\ \blkref{claim_winding_parallel_staircase_step_increase}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "任意の ", math(String.raw`s,t\in\{0,\ldots,n-1\}`),
+                  " について ", math(String.raw`v_t=-v_s`), " と仮定すると、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\pi_{\gamma}(v_t)&=\pi_{\gamma}(-v_s)&&\bigl(\because\ v_t=-v_s\bigr)\\
+&=-\pi_{\gamma}(v_s)&&\bigl(\because\ \blkref{def_winding_parallel_coordinate}\text{ の加法性}\bigr)\\
+&>0&&\bigl(\because\ \pi_{\gamma}(v_s)<0\bigr)
+\end{aligned}`),
+                paragraph([
+                  "となり負値に反する。よって末歩と始歩を含めて非後退である。端点の差は、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+(-G^{\gamma}_n)-(-G^{\gamma}_0)&=-B_{\gamma}-(-(0,0))
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\text{ の両端点}\bigr)\\
+&=-B_{\gamma}&&\bigl(\because\ \mathbb Z^2\text{ の零元}\bigr)\\
+&=(-Lw_{\mathrm v},-Lw_{\mathrm h})
+&&\bigl(\because\ \blkref{def_periodic_lift_closure_cycle}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "両成分は ", math(String.raw`L`), " の倍数なので射影後は閉じる（",
+                  ref("def_plane_unit_path_torus_projection"), "）。整数の表 ",
+                  math(String.raw`\vartheta(u,v):=u_2v_1-u_1v_2`), "（",
+                  math(String.raw`u,v\in\mathbb Z^2`), "）と一歩の回転数との照合は ",
+                  ref("claim_reversed_parallel_staircase_turning_zero"), " の証明による。従って、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(R_-)&=\sum_{s=0}^{n-2}\tau(\vec r_{s+1},\vec r_{s+2})+\tau(\vec r_n,\vec r_1)
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)\\
+&=\sum_{s=0}^{n-2}\vartheta(v_s,v_{s+1})+\vartheta(v_{n-1},v_0)
+&&\bigl(\because\ \blkref{claim_reversed_parallel_staircase_turning_zero}\text{ の回転表の照合}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "長さ一の内部和は空和とする。", math(String.raw`p=0`), " または ",
+                  math(String.raw`q=0`), " なら全歩は同じで、その歩を ",
+                  math(String.raw`d\in\mathbb Z^2`), " とすると、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(R_-)&=\sum_{s=0}^{n-2}\vartheta(d,d)+\vartheta(d,d)
+&&\bigl(\because\ v_s=d\text{ を代入}\bigr)\\
+&=\sum_{s=0}^{n-2}0+0&&\bigl(\because\ \vartheta(d,d)=0\bigr)\\
+&=0&&\bigl(\because\ \text{零の有限和}\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`p,q\ge1`), " なら内部で方向が変わる添字は ",
+                  math(String.raw`s=p-1`), " だけなので、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(R_-)&=\vartheta(-a,-b)+\vartheta(v_{n-1},v_0)
+&&\bigl(\because\ \text{内部和の同方向の零項を除く}\bigr)\\
+&=\vartheta(-a,-b)+\vartheta(-b,-a)
+&&\bigl(\because\ v_{n-1}=-b,\ v_0=-a\bigr)\\
+&=\vartheta(-a,-b)-\vartheta(-a,-b)
+&&\bigl(\because\ \blkref{claim_reversed_parallel_staircase_turning_zero}\text{ の接合相殺}\bigr)\\
+&=0&&\bigl(\because\ \mathbb Z\text{ の加法逆元の相殺}\bigr).
+\end{aligned}`),
+                paragraph(["二区間の長さの全場合を尽くした。有限列と整数の演算だけで閉じる。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -67013,18 +67179,19 @@ F_{j+1}-F_j&=S_{N-(j+1)}-S_{N-j}&&\bigl(\because\ F\text{ の第四の場合}\bi
 =t_{\circ}(\gamma)
 \qquad\bigl(\because\ \blkref{claim_cyclic_shift_adjacent_integer_sum}\text{ と }\blkref{def_cyclic_total_turning}\bigr)`),
                 paragraph([
-                  "次に正の平行階段（", ref("def_winding_parallel_staircase"), "）の一周期を逆向きに進む射影辺列を ",
-                  math(String.raw`R=(\vec r_1,\ldots,\vec r_{n_{\parallel}})`), " と書く。",
-                  ref("claim_reversed_parallel_staircase_turning_zero"), " により、",
+                  "次に正の平行階段（", ref("def_winding_parallel_staircase"), "）を同じ添字順で符号反転した射影辺列を ",
+                  math(String.raw`R_-:=\Pi(-G^{\gamma}_0,\ldots,-G^{\gamma}_{n_{\parallel}})
+=(\vec r_1,\ldots,\vec r_{n_{\parallel}})`), " と書く。",
+                  ref("claim_negated_parallel_staircase_turning_zero"), " により、",
                 ]),
                 displayMath(String.raw`\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)=0
-\qquad\bigl(\because\ \blkref{claim_reversed_parallel_staircase_turning_zero}\text{ と }\blkref{def_cyclic_total_turning}\bigr)`),
+\qquad\bigl(\because\ \blkref{claim_negated_parallel_staircase_turning_zero}\text{ と }\blkref{def_cyclic_total_turning}\bigr)`),
                 paragraph([
                   "最後に ", math(String.raw`\Gamma_c`), " と ", math(String.raw`\Gamma_{c+1}`),
                   " の方向列を比較する。歩ベクトル列が四部分の連結に一致することは ",
                   ref("claim_one_sided_closure_step_sequence"), " による。一側閉包の定義（", ref("def_one_sided_periodic_lift_closure"),
                   "）から、周期数を一つ増やすと、周期持ち上げ部分へ ", math(String.raw`U`),
-                  " が一組、反転平行階段へ ", math(String.raw`R`),
+                  " が一組、符号反転した平行帰路へ ", math(String.raw`R_-`),
                   " が一組増える。二つの反復横断階段と、四部分の接合部の先頭・末尾方向は変わらない。",
                   "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
                   ref("claim_four_part_adjacent_sum"), " で与えた。各反復部分の内部和の増分へ ",
@@ -67036,7 +67203,7 @@ t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
 +\left(\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)\right)
 &&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{def_cyclic_total_turning},\ \blkref{claim_four_part_adjacent_sum},\ \blkref{claim_repeated_adjacent_sum_difference}\bigr)\\
 &=t_{\circ}(\gamma)+0
-&&\bigl(\because\ \text{上で示した }U\text{ と }R\text{ の二等式}\bigr)\\
+&&\bigl(\because\ \text{上で示した }U\text{ と }R_-\text{ の二等式}\bigr)\\
 &=t_{\circ}(\gamma)
 &&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
 \end{aligned}`),
