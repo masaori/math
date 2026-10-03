@@ -28787,8 +28787,12 @@ Z_L(1)
                     ]),
                     displayMath(String.raw`\Sigma_L(B):=\left\{\,\tau\in\Sigma_L\ \middle|\ \mathcal{B}_L(\tau)=B\,\right\}`),
                     paragraph(["と書く。"]),
-                    displayMath(String.raw`\mathcal{B}_L\bigl(\nu_L(\sigma)\bigr)=\mathcal{B}_L(\sigma)=B
-\qquad(\because\ \blkref{claim_global_spin_reversal_preserves_broken_edge}\text{ と }\mathcal{B}_L(\sigma)=B)`),
+                    displayMath(String.raw`\begin{aligned}
+\mathcal{B}_L\bigl(\nu_L(\sigma)\bigr)
+&=\mathcal{B}_L(\sigma)
+&&\bigl(\because\ \blkref{claim_global_spin_reversal_preserves_broken_edge}\bigr)\\
+&=B&&\bigl(\because\ \mathcal{B}_L(\sigma)=B\bigr)
+\end{aligned}`),
                     paragraph([
                       "である。また、", math(String.raw`(0,0)\in V_L`), " における値は ",
                       math(String.raw`\sigma((0,0))\in\{+1,-1\}`), " なので ",
