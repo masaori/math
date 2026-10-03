@@ -1,0 +1,5 @@
+# 対象ラベル: claim_cyclic_shift_adjacent_integer_sum
+load('sagemath/check/cyclic-shift-adjacent-integer-sum/_prelude.sage')
+for m, k, j in index_cases:
+    assert rem(m, j - k + k) == rem(m, j)
+print('PASS: check_inverse_right_cancel: %d indices and shifts' % len(index_cases))

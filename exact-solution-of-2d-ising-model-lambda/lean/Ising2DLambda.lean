@@ -1108,3 +1108,6 @@ import Ising2DLambda.KacWard.OneSidedClosureProjectionCyclicTurningFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.ThreeTermPmFourDifferenceZero
 import Ising2DLambda.KacWard.ThreeTermPmFourDifferenceZero
 import Ising2DLambda.KacWard.ThreeTermPmFourDifferenceZeroFromNecSuf
+import Ising2DLambda.KacWard.CyclicShiftAdjacentSum
+import Ising2DLambda.NecSuf.KacWard.CyclicShiftAdjacentSum
+import Ising2DLambda.KacWard.CyclicShiftAdjacentSumFromNecSuf

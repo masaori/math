@@ -56,6 +56,7 @@ export const ALL_LABELS = [
   "claim_cut_flag_congruence_start_recovery",
   "claim_cut_flag_realizable_candidate_selection",
   "claim_cut_flag_two_coordinate_boundary_completeness",
+  "claim_cyclic_shift_adjacent_integer_sum",
   "claim_cyclic_total_turning_multiple_of_four",
   "claim_directed_winding_parity",
   "claim_direction_gate_crossing_turning",

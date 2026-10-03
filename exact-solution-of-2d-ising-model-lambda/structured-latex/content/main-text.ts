@@ -66226,6 +66226,104 @@ P_j(\Gamma)=P_{j'}(\Gamma)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_cyclic_shift_adjacent_integer_sum",
+        labels: [],
+        title: { text: "巡回移動と隣接二項の整数和" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_cyclic_shift_adjacent_integer_sum",
+            focus: {
+              id: "kac_ward_claim_cyclic_shift_adjacent_integer_sum",
+              kind: "claim",
+              title: { text: "巡回移動は隣接二項の整数和を保つ" },
+              labels: ["claim_cyclic_shift_adjacent_integer_sum"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.cyclicShift_adjacent_integer_sum",
+                "Ising2DLambda.NecSuf.KacWard.permutedAdjacentSum_necSuf",
+                "Ising2DLambda.KacWard.cyclicShift_adjacent_integer_sum_from_necSuf",
+              ],
+              verification: ["sagemath/check/cyclic-shift-adjacent-integer-sum"],
+              statement: [
+                paragraph([
+                  math(String.raw`m\in\mathbb N`), "、", math(String.raw`m\ge1`), " とし、添字の有限集合を ",
+                  math(String.raw`I_m:=\{0,\ldots,m-1\}`), " と置く。整数 ", math(String.raw`x\in\mathbb Z`),
+                  " を ", math(String.raw`m`), " で割った余りを ", math(String.raw`[x]_m\in I_m`),
+                  " と書く。任意の ", math(String.raw`k\in\mathbb Z`), " に対し、巡回移動を ",
+                  math(String.raw`\rho_k:I_m\to I_m,\quad\rho_k(j):=[j+k]_m`), " で定める。",
+                  "各添字の対に整数を割り当てる表 ", math(String.raw`a:I_m\times I_m\to\mathbb Z`),
+                  " について、次が成り立つ。",
+                ]),
+                displayMath(String.raw`\sum_{j\in I_m}a\bigl(\rho_k(j),\rho_k(\rho_1(j))\bigr)
+=\sum_{j\in I_m}a\bigl(j,\rho_1(j)\bigr).`),
+              ],
+              proof: [
+                paragraph([
+                  "まず ", math(String.raw`\rho_{-k}`), " が ", math(String.raw`\rho_k`),
+                  " の逆写像であることを示す。任意の ", math(String.raw`j\in I_m`), " について、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\rho_{-k}(\rho_k(j))
+&=\bigl[[j+k]_m-k\bigr]_m
+&&\bigl(\because\ \rho_k,\rho_{-k}\text{ の定義}\bigr)\\
+&=[j+k-k]_m
+&&\bigl(\because\ \text{合同な整数の余りの一意性}\bigr)\\
+&=[j]_m
+&&\bigl(\because\ \mathbb Z\text{ の加法逆元の相殺}\bigr)\\
+&=j
+&&\bigl(\because\ j\in I_m\text{ と余りの一意性}\bigr),\\
+\rho_k(\rho_{-k}(j))
+&=\bigl[[j-k]_m+k\bigr]_m
+&&\bigl(\because\ \rho_{-k},\rho_k\text{ の定義}\bigr)\\
+&=[j-k+k]_m
+&&\bigl(\because\ \text{合同な整数の余りの一意性}\bigr)\\
+&=[j]_m
+&&\bigl(\because\ \mathbb Z\text{ の加法逆元の相殺}\bigr)\\
+&=j
+&&\bigl(\because\ j\in I_m\text{ と余りの一意性}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "従って ", math(String.raw`\rho_k`), " は ", math(String.raw`I_m`),
+                  " の全単射である。さらに、次の添字へ進む操作 ", math(String.raw`\rho_1`), " とは可換である。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\rho_k(\rho_1(j))
+&=\bigl[[j+1]_m+k\bigr]_m
+&&\bigl(\because\ \rho_1,\rho_k\text{ の定義}\bigr)\\
+&=[j+1+k]_m
+&&\bigl(\because\ \text{合同な整数の余りの一意性}\bigr)\\
+&=[j+(1+k)]_m
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合律}\bigr)\\
+&=[j+(k+1)]_m
+&&\bigl(\because\ \mathbb Z\text{ の加法の交換律}\bigr)\\
+&=[j+k+1]_m
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合律}\bigr)\\
+&=\bigl[[j+k]_m+1\bigr]_m
+&&\bigl(\because\ \text{合同な整数の余りの一意性}\bigr)\\
+&=\rho_1(\rho_k(j))
+&&\bigl(\because\ \rho_k,\rho_1\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["以上を有限和へ順に適用すると、"]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{j\in I_m}a\bigl(\rho_k(j),\rho_k(\rho_1(j))\bigr)
+&=\sum_{j\in I_m}a\bigl(\rho_k(j),\rho_1(\rho_k(j))\bigr)
+&&\bigl(\because\ \text{上で示した可換性を各項へ代入}\bigr)\\
+&=\sum_{i\in I_m}a\bigl(i,\rho_1(i)\bigr)
+&&\bigl(\because\ \text{全単射 }i=\rho_k(j)\text{ による有限和の添字変更}\bigr).
+\end{aligned}`),
+                paragraph(["全過程は有限集合・整数の余り・整数の有限和で閉じ、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -66268,11 +66366,16 @@ P_j(\Gamma)=P_{j'}(\Gamma)
                   ref("def_periodic_plane_lift"), "）により、周期持ち上げ部分の射影は ",
                   math(String.raw`U`), " を ", math(String.raw`c`), " 回連結した列である。",
                   math(String.raw`U`), " は ", math(String.raw`\gamma`),
-                  " の始点を ", math(String.raw`k_0`), " だけ巡回移動した列なので、有限和の添字を巡回移動すると",
+                  " の始点を ", math(String.raw`k_0`), " だけ巡回移動した列である。",
+                  "添字を零から取り、", math(String.raw`I_m=\{0,\ldots,m-1\}`), " 上の整数の表 ",
+                  math(String.raw`a(i,j)`), " を、辺対 ", math(String.raw`(\vec e_{i+1},\vec e_{j+1})`),
+                  " が連続し非後退なら ", math(String.raw`\tau(\vec e_{i+1},\vec e_{j+1})`),
+                  "、それ以外なら零と定める。閉じた非後退辺列の循環する隣接辺対では前者が適用されるので、",
+                  ref("claim_cyclic_shift_adjacent_integer_sum"), " をこの表へ適用すると",
                 ]),
                 displayMath(String.raw`\sum_{j=1}^{m-1}\tau(\vec u_j,\vec u_{j+1})+\tau(\vec u_m,\vec u_1)
 =t_{\circ}(\gamma)
-\qquad\bigl(\because\ \blkref{def_cyclic_total_turning}\text{ と有限和の添字の全単射による取り替え}\bigr)`),
+\qquad\bigl(\because\ \blkref{claim_cyclic_shift_adjacent_integer_sum}\text{ と }\blkref{def_cyclic_total_turning}\bigr)`),
                 paragraph([
                   "次に正の平行階段（", ref("def_winding_parallel_staircase"), "）の一周期を逆向きに進む射影辺列を ",
                   math(String.raw`R=(\vec r_1,\ldots,\vec r_{n_{\parallel}})`), " と書く。",

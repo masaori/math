@@ -20,4 +20,11 @@
 sage sagemath/check/same-broken-edges-two-preimages/check.sage
 ```
 
-**2026-08-12 実行: すべて通過。**
+**2026-10-03 再実行: 全 530 配位・265 種類の破れ集合が通過。**
+
+今回の環境では Sage の起動コマンドから `.sage` へ渡される `__file__` が実行対象を指さないため、
+Sage を導入した Python で対象のパスを明示し、同じコードを Sage の前処理後に実行した。
+
+```sh
+python -c 'from sage.all import *; from sage.repl.preparse import preparse; from pathlib import Path; p = Path("sagemath/check/same-broken-edges-two-preimages/check.sage").resolve(); exec(compile(preparse(p.read_text()), str(p), "exec"), dict(globals(), __file__=str(p)))'
+```
