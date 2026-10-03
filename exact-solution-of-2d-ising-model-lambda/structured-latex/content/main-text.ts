@@ -67004,7 +67004,7 @@ F_{j+1}-F_j&=S_{N-(j+1)}-S_{N-j}&&\bigl(\because\ F\text{ の第四の場合}\bi
               proof: [
                 paragraph([
                   "巻き付き数を ", math(String.raw`w_{\mathrm h},w_{\mathrm v}\in\mathbb Z`),
-                  "、絶対値を ", math(String.raw`H,V\in\mathbb N`), "、積を ",
+                  "、絶対値を ", math(String.raw`H:=|w_{\mathrm h}|\in\mathbb N,\ V:=|w_{\mathrm v}|\in\mathbb N`), "、積を ",
                   math(String.raw`A=w_{\mathrm h}w_{\mathrm v}\in\mathbb Z`), " と略記する。",
                   "正の階段の二区間の長さと歩を、",
                 ]),
@@ -67191,8 +67191,9 @@ t_{\circ}(R_-)&=\vartheta(-a,-b)+\vartheta(v_{n-1},v_0)
                   " の方向列を比較する。歩ベクトル列が四部分の連結に一致することは ",
                   ref("claim_one_sided_closure_step_sequence"), " による。一側閉包の定義（", ref("def_one_sided_periodic_lift_closure"),
                   "）から、周期数を一つ増やすと、周期持ち上げ部分へ ", math(String.raw`U`),
-                  " が一組、符号反転した平行帰路へ ", math(String.raw`R_-`),
-                  " が一組増える。二つの反復横断階段と、四部分の接合部の先頭・末尾方向は変わらない。",
+                  " と同じ方向列が一組、符号反転した平行帰路へ ", math(String.raw`R_-`),
+                  " と同じ方向列が一組増える。平行移動で変わる頂点の位置は、この方向列の比較に含めない。",
+                  "二つの反復横断階段と、四部分の接合部の先頭・末尾方向は変わらない。",
                   "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
                   ref("claim_four_part_adjacent_sum"), " で与えた。各反復部分の内部和の増分へ ",
                   ref("claim_repeated_adjacent_sum_difference"), " を適用し、共通の接合項を消すと、",
