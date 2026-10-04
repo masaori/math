@@ -2770,6 +2770,82 @@ z^{n}
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_integer_matrices",
+        labels: [],
+        title: { text: "整数を成分とする有限行列" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_integer_identity_matrix",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "integer_matrix_definition",
+                  kind: "definition",
+                  title: { text: "整数を成分とする有限行列" },
+                  labels: ["def_integer_matrix"],
+                  habitat: "Z",
+                  lean: ["Ising2DLambda.IntegerMatrix.Square"],
+                  statement: [
+                    paragraph(["有限集合 ", math(String.raw`\mathcal A`), " に対し、写像 ",
+                      math(String.raw`A:\mathcal A\to(\mathcal A\to\mathbb Z)`),
+                      " を整数行列と呼び、その全体を ", math(String.raw`\mathrm{Mat}_{\mathcal A}(\mathbb Z)`),
+                      " と書く。各 ", math(String.raw`u\in\mathcal A`), " に行 ", math(String.raw`A(u):\mathcal A\to\mathbb Z`),
+                      " を割り当てる。", math(String.raw`u,v\in\mathcal A`), " に対する値 ", math(String.raw`(A(u))(v)\in\mathbb Z`),
+                      " を成分と呼び ", math(String.raw`A_{u,v}`), " と書く。行列の相等は全成分の相等である。"]),
+                    paragraph(["成分は整数であり、多項式や代数的数への写像はまだ施していない。",
+                      "有限個の整数で定まる可算な対象で、実数体も複素数体も現れない。"]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "integer_matrix_product_definition",
+                  kind: "definition",
+                  title: { text: "整数行列の積" },
+                  labels: ["def_integer_matrix_product"],
+                  habitat: "Z",
+                  lean: ["Ising2DLambda.IntegerMatrix.product"],
+                  statement: [
+                    paragraph(["有限集合 ", math(String.raw`\mathcal A`), " と ", math(String.raw`A,B\in\mathrm{Mat}_{\mathcal A}(\mathbb Z)`),
+                      "（", ref("def_integer_matrix"), "）に対し、積 ",
+                      math(String.raw`AB\in\mathrm{Mat}_{\mathcal A}(\mathbb Z)`), " を"]),
+                    displayMath(String.raw`(AB)_{u,v}:=\sum_{w\in\mathcal A}A_{u,w}B_{w,v}\qquad(u,v\in\mathcal A)`),
+                    paragraph(["で定める。右辺は整数の有限和なので整数である。二乗 ",
+                      math(String.raw`A^2`), " はこの積 ", math(String.raw`AA`), " を表す。実数体も複素数体も現れない。"]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "integer_identity_matrix_definition",
+              kind: "definition",
+              title: { text: "整数の単位行列" },
+              labels: ["def_integer_identity_matrix"],
+              habitat: "Z",
+              lean: ["Ising2DLambda.IntegerMatrix.identity"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal A`), " に対する整数の単位行列 ",
+                  math(String.raw`I^{\mathbb Z}_{\mathcal A}\in\mathrm{Mat}_{\mathcal A}(\mathbb Z)`),
+                  "（", ref("def_integer_matrix"), "）を"]),
+                displayMath(String.raw`(I^{\mathbb Z}_{\mathcal A})_{u,v}:=\begin{cases}
+  1&u=v,\\
+  0&u\ne v
+\end{cases}\qquad(u,v\in\mathcal A)`),
+                paragraph(["で定める。成分の零と一は整数であり、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_matrices",
         labels: [],
         title: { text: "代数的数を成分とする行列と作用" },
@@ -48646,6 +48722,7 @@ const chapter_kac_ward = defineSection({
                       title: { text: "向き付き辺の集合" },
                       labels: ["def_oriented_edges"],
                       habitat: "N",
+                      lean: ["Ising2DLambda.KacWard.OrientedEdge"],
                       statement: [
                         paragraph([
                           math(String.raw`L\ge1`), " とする。向き付き辺の集合を、辺の番号の集合 ",
@@ -48726,6 +48803,7 @@ const chapter_kac_ward = defineSection({
                       title: { text: "向き付き辺の反転写像" },
                       labels: ["def_edge_reversal"],
                       habitat: "N",
+                      lean: ["Ising2DLambda.KacWard.reversal"],
                       statement: [
                         paragraph([
                           "反転写像 ",
@@ -48856,6 +48934,111 @@ const chapter_kac_ward = defineSection({
             },
           },
         ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_reversal_matrix",
+        labels: [],
+        title: { text: "反転置換行列の二乗" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_reversal_matrix_square",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_reversal_matrix",
+                kind: "definition",
+                title: { text: "向き付き辺の反転置換行列" },
+                labels: ["def_reversal_matrix"],
+                habitat: "Z",
+                lean: ["Ising2DLambda.KacWard.reversalMatrix"],
+                statement: [
+                  paragraph([math(String.raw`L\in\mathbb N,\ L\ge1`), " とする。向き付き辺の有限集合 ",
+                    math(String.raw`\vec E_L`), "（", ref("def_oriented_edges"), "）と反転写像 ",
+                    math(String.raw`\iota`), "（", ref("def_edge_reversal"), "）から、整数行列 ",
+                    math(String.raw`J_L\in\mathrm{Mat}_{\vec E_L}(\mathbb Z)`),
+                    "（", ref("def_integer_matrix"), "）を"]),
+                  displayMath(String.raw`(J_L)_{\vec e,\vec f}:=\begin{cases}
+  1&\vec f=\iota(\vec e),\\
+  0&\vec f\ne\iota(\vec e)
+\end{cases}\qquad(\vec e,\vec f\in\vec E_L)`),
+                  paragraph(["で定め、反転置換行列と呼ぶ。反転が対合であること（",
+                    ref("claim_reversal_is_involution"), "）から反転は自身を逆写像に持つ置換である。",
+                    "成分は整数の零と一であり、実数体も複素数体も現れない。"]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_reversal_matrix_square",
+              kind: "claim",
+              title: { text: "反転置換行列の二乗は単位行列である" },
+              labels: ["claim_reversal_matrix_square"],
+              habitat: "Z",
+              verification: ["sagemath/check/reversal-matrix-square"],
+              lean: [
+                "Ising2DLambda.KacWard.reversalMatrix_mul_self",
+                "Ising2DLambda.NecSuf.KacWard.involutionMatrix_mul_self_necSuf",
+                "Ising2DLambda.KacWard.reversalMatrix_mul_self_from_necSuf",
+              ],
+              statement: [
+                paragraph([math(String.raw`L\in\mathbb N,\ L\ge1`), " に対し、反転置換行列（",
+                  ref("def_reversal_matrix"), "）は"]),
+                displayMath(String.raw`J_L^2=I^{\mathbb Z}_{\vec E_L}`),
+                paragraph(["を満たす。積は ", ref("def_integer_matrix_product"),
+                  "、右辺は ", ref("def_integer_identity_matrix"), " による。"]),
+              ],
+              proof: [
+                paragraph([math(String.raw`\vec e,\vec f\in\vec E_L`), " を固定する。まず ",
+                  math(String.raw`\vec g\in\vec E_L`), " が ", math(String.raw`\vec g\ne\iota(\vec e)`),
+                  " を満たす場合、"]),
+                displayMath(String.raw`\begin{aligned}
+(J_L)_{\vec e,\vec g}(J_L)_{\vec g,\vec f}
+&=0\cdot(J_L)_{\vec g,\vec f}
+&&\bigl(\because\ \blkref{def_reversal_matrix},\ \vec g\ne\iota(\vec e)\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の零元との積}\bigr)
+\end{aligned}`),
+                paragraph(["である。", math(String.raw`\iota(\vec e)\in\vec E_L`),
+                  "（", ref("def_edge_reversal"), "）なので、積の有限和ではこの添字の項だけが残る。"]),
+                displayMath(String.raw`\begin{aligned}
+(J_L^2)_{\vec e,\vec f}
+&=\sum_{\vec g\in\vec E_L}(J_L)_{\vec e,\vec g}(J_L)_{\vec g,\vec f}
+&&\bigl(\because\ \blkref{def_integer_matrix_product}\bigr)\\
+&=(J_L)_{\vec e,\iota(\vec e)}(J_L)_{\iota(\vec e),\vec f}
+&&\bigl(\because\ \text{上で示した零項を有限和から除く}\bigr)\\
+&=1\cdot(J_L)_{\iota(\vec e),\vec f}
+&&\bigl(\because\ \blkref{def_reversal_matrix}\bigr)\\
+&=(J_L)_{\iota(\vec e),\vec f}
+&&\bigl(\because\ \mathbb Z\text{ の単位元との積}\bigr)\\
+&=\begin{cases}
+  1&\vec f=\iota(\iota(\vec e)),\\
+  0&\vec f\ne\iota(\iota(\vec e))
+\end{cases}
+&&\bigl(\because\ \blkref{def_reversal_matrix}\bigr)\\
+&=\begin{cases}
+  1&\vec f=\vec e,\\
+  0&\vec f\ne\vec e
+\end{cases}
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=\begin{cases}
+  1&\vec e=\vec f,\\
+  0&\vec e\ne\vec f
+\end{cases}
+&&\bigl(\because\ \text{等号の対称性}\bigr)\\
+&=(I^{\mathbb Z}_{\vec E_L})_{\vec e,\vec f}
+&&\bigl(\because\ \blkref{def_integer_identity_matrix}\bigr)
+\end{aligned}`),
+                paragraph(["すべての成分が等しいので、", ref("def_integer_matrix"),
+                  " により行列の等号を得る。有限集合上の整数の和と積だけを使い、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
+        }],
       },
     },
     {

@@ -1156,3 +1156,7 @@ import Ising2DLambda.NecSuf.KacWard.OneSidedClosurePeriodDifferenceTurning
 import Ising2DLambda.KacWard.OneSidedClosurePeriodDifferenceTurning
 import Ising2DLambda.KacWard.OneSidedClosurePeriodDifferenceTurningFromNecSuf
 import Ising2DLambda.KacWard.OneSidedClosureNonbacktracking
+import Ising2DLambda.IntegerMatrix.Basic
+import Ising2DLambda.KacWard.ReversalMatrix
+import Ising2DLambda.NecSuf.KacWard.ReversalMatrix
+import Ising2DLambda.KacWard.ReversalMatrixFromNecSuf
