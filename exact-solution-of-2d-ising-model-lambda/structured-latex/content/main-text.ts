@@ -29009,8 +29009,8 @@ S_L(A)
 &=0
 &&(\because\ \text{整数の加法逆元})
 \end{aligned}`),
-                        paragraph(["である。したがって頂点ごとの二値和の有限積は零因子を一つ持ち、"]),
-                        displayMath(String.raw`S_L(A)=0\quad(\because\ \text{零因子を含む有限積は零})`),
+                        paragraph(["である。したがって頂点ごとの二値和の有限積は零である因子を一つ持ち、"]),
+                        displayMath(String.raw`S_L(A)=0\quad(\because\ \text{零である因子を含む有限積は零})`),
                         paragraph(["を得る。全過程は有限集合、自然数、整数だけで閉じ、実数体も複素数体も現れない。"]),
                       ],
                     },

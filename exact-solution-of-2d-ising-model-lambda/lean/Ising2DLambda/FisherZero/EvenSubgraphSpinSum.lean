@@ -7,7 +7,7 @@
 - `edgeSubsetMonomial_eq_vertexProduct`: 辺ごとの積を頂点ごとの冪へ並べ替える段。
 - `Fintype.prod_sum`: 配位和を頂点ごとの二値和の積へ分配する段。
 - `sum_spinValue_pow`: 局所和が偶次数で 2、奇次数で 0 になる段。
-- 最後の場合分け: 全頂点が偶数なら一定値の積、そうでなければ零因子を含む積になる段。
+- 最後の場合分け: 全頂点が偶数なら一定値の積、そうでなければ零である因子を含む積になる段。
 -/
 import Ising2DLambda.FisherZero.LowTemperaturePolynomial
 import Mathlib.Algebra.BigOperators.Ring.Finset
