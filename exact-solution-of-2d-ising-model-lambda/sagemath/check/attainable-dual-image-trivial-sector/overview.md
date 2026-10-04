@@ -20,3 +20,19 @@ sage sagemath/check/attainable-dual-image-trivial-sector/check.sage
 ```
 
 **2026-08-13 実行: すべて通過。**
+
+本文の両包含を保ち、偶性・二つの偶奇・セクターの定義を分けた行別検査。
+
+| ファイル | 状態 |
+|---|---|
+| `check_forward_even.sage` | PASS |
+| `check_forward_parities.sage` | PASS |
+| `check_forward_substitution.sage` | PASS |
+| `check_forward_image_definition.sage` | PASS |
+| `check_forward_sector.sage` | PASS |
+| `check_backward_attainable.sage` | PASS |
+| `check_backward_substitution.sage` | PASS |
+| `check_backward_reconstruction.sage` | PASS |
+
+2026-10-04 再実行: 全辺部分集合から独立に列挙した自明セクターとの集合の等号と、
+順方向の各530配位・逆方向の各265部分グラフについて、追加した行別8本が全件通過した。

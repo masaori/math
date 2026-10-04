@@ -29787,14 +29787,23 @@ e\in\mathcal B_L(\sigma_A)
                           math(String.raw`B\in\mathfrak{B}_L`), " を任意に取る。",
                           ref("def_attainable_broken_edge_sets"), " より、",
                           math(String.raw`\mathcal{B}_L(\sigma)=B`), " を満たす配位 ",
-                          math(String.raw`\sigma\in\Sigma_L`), " が存在する。このとき",
+                          math(String.raw`\sigma\in\Sigma_L`), " が存在する。", math(String.raw`A_\sigma:=\delta_L(\mathcal B_L(\sigma))\subseteq E_L`),
+                          " と置く。偶性と巻き付き偶奇をそれぞれ明示すると、",
                         ]),
+                        displayMath(String.raw`\operatorname{Even}_L(A_\sigma)
+\qquad\bigl(\because\ \blkref{claim_dual_broken_edges_even}\bigr),`),
+                        displayMath(String.raw`\bigl(\varepsilon_{L,\mathrm h}(A_\sigma),
+\varepsilon_{L,\mathrm v}(A_\sigma)\bigr)=(0,0)
+\qquad\bigl(\because\ \blkref{claim_dual_broken_edges_winding_zero}\bigr).`),
+                        paragraph(["これらをセクターの定義へ代入して、"]),
                         displayMath(String.raw`\begin{aligned}
 \delta_L(B)
 &=\delta_L\bigl(\mathcal{B}_L(\sigma)\bigr)
 &&\bigl(\because\ \mathcal{B}_L(\sigma)=B\bigr)\\
+&=A_\sigma
+&&\bigl(\because\ A_\sigma\text{ の定義}\bigr)\\
 &\in\mathcal{E}^{0,0}_L
-&&\bigl(\because\ \blkref{claim_dual_broken_edges_even},\ \blkref{claim_dual_broken_edges_winding_zero}\bigr).
+&&\bigl(\because\ \blkref{def_torus_homology_sector}\text{ と直前の偶性・二つの偶奇}\bigr).
 \end{aligned}`),
                         paragraph([
                           "次に右辺が左辺に含まれることを示す。",
@@ -29803,8 +29812,11 @@ e\in\mathcal B_L(\sigma_A)
                           math(String.raw`\delta_L\bigl(\mathcal{B}_L(\sigma)\bigr)=A`),
                           " を満たす配位 ", math(String.raw`\sigma\in\Sigma_L`),
                           " が存在する（原像の元の個数は 2 なので、特に原像は空でない）。",
-                          math(String.raw`B:=\mathcal{B}_L(\sigma)`), " と置くと",
+                          math(String.raw`B:=\mathcal{B}_L(\sigma)\subseteq E_L`), " と置く。この配位が証人なので、",
                         ]),
+                        displayMath(String.raw`B\in\mathfrak B_L
+\qquad\bigl(\because\ \blkref{def_attainable_broken_edge_sets}\bigr).`),
+                        paragraph(["その双対像は、"]),
                         displayMath(String.raw`\begin{aligned}
 \delta_L(B)
 &=\delta_L\bigl(\mathcal{B}_L(\sigma)\bigr)
@@ -29813,8 +29825,7 @@ e\in\mathcal B_L(\sigma_A)
 &&\bigl(\because\ \delta_L\bigl(\mathcal{B}_L(\sigma)\bigr)=A\bigr)
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`B\in\mathfrak{B}_L`), " は ", ref("def_attainable_broken_edge_sets"),
-                          " から従うので、", math(String.raw`A`), " は左辺に属する。両包含から集合の等号が従う。",
+                          "である。従って ", math(String.raw`A`), " は左辺に属する。両包含から集合の等号が従う。",
                           "全過程は有限集合の元の取り出しと写像の像だけで閉じる。",
                         ]),
                       ],

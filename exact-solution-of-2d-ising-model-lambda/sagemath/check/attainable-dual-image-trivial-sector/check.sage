@@ -47,6 +47,8 @@ def winding_sector(L, subset):
             len(subset.intersection(vertical_cut)) % 2)
 
 
+forward_rows = []
+backward_rows = []
 for L in (1, 2, 3):
     # 左辺: 実現できる破れた辺集合の全体 𝔅_L の双対像
     attainable = {frozenset(broken_edge_set(L, sigma)) for sigma in configurations(L)}
@@ -60,7 +62,25 @@ for L in (1, 2, 3):
     }
 
     assert dual_images == trivial_sector
+    witnesses = {}
+    for sigma in configurations(L):
+        B = broken_edge_set(L, sigma)
+        A_sigma = frozenset(dual_edge(L, edge) for edge in B)
+        forward_rows.append((L, sigma, B, A_sigma, attainable, trivial_sector))
+        witnesses[A_sigma] = (sigma, B)
+    for A in trivial_sector:
+        sigma, B = witnesses[A]
+        backward_rows.append((L, A, sigma, B, attainable, dual_images))
     print("L=%d: 双対像 %d 個と自明セクター %d 個が集合として一致" %
           (L, len(dual_images), len(trivial_sector)))
+
+load(os.path.join(_dir, 'check_forward_even.sage'))
+load(os.path.join(_dir, 'check_forward_parities.sage'))
+load(os.path.join(_dir, 'check_forward_substitution.sage'))
+load(os.path.join(_dir, 'check_forward_image_definition.sage'))
+load(os.path.join(_dir, 'check_forward_sector.sage'))
+load(os.path.join(_dir, 'check_backward_attainable.sage'))
+load(os.path.join(_dir, 'check_backward_substitution.sage'))
+load(os.path.join(_dir, 'check_backward_reconstruction.sage'))
 
 print("RESULT: PASS")
