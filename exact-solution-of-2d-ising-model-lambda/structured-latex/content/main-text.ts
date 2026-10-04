@@ -50768,6 +50768,144 @@ m_{\vec e}N_{\vec e,\vec f}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_polynomial_diagonal_gauge_inverse",
+        labels: [],
+        title: { text: "対角変換の逆行列を定数多項式へ移す" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_polynomial_diagonal_gauge_inverse",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_polynomial_diagonal_gauge",
+                kind: "definition",
+                title: { text: "定数多項式を成分とする対角変換" },
+                labels: ["def_polynomial_diagonal_gauge"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.polynomialDiagonalGauge",
+                  "Ising2DLambda.KacWard.polynomialDiagonalGaugeInverse",
+                ],
+                statement: [
+                  paragraph(["自然数 ", math(String.raw`L\ge1`), " と ", math(String.raw`(a,b)\in\mathcal S`),
+                    " を固定する。", ref("def_diagonal_gauge"), " の ",
+                    math(String.raw`U,V\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q})`), " に、",
+                    ref("def_qbar_constant_embedding"), " の写像を成分ごとに施して、"]),
+                  displayMath(String.raw`\widehat U_{\vec e,\vec f}:=\widehat{U_{\vec e,\vec f}},\qquad
+\widehat V_{\vec e,\vec f}:=\widehat{V_{\vec e,\vec f}}
+\qquad(\vec e,\vec f\in\vec E_L)`),
+                  paragraph(["と定める。右辺は定数多項式なので、両行列は ",
+                    math(String.raw`\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x])`), "（",
+                    ref("def_qbar_polynomial_matrix"), "）に属する。この節の多項式行列の積は、",
+                    math(String.raw`A,B\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x])`), " に対して"]),
+                  displayMath(String.raw`(AB)_{\vec e,\vec f}:=
+\sum_{\vec g\in\vec E_L}A_{\vec e,\vec g}B_{\vec g,\vec f}`),
+                  paragraph(["で定める。各項と有限和は ", math(String.raw`\overline{\mathbb Q}[x]`),
+                    " に属する。", ref("def_kac_ward_polynomial_matrices"), " で用いた多項式の単位行列を、",
+                    "係数の体の単位行列と区別して ", math(String.raw`I_x`), " と書く。すなわち、"]),
+                  displayMath(String.raw`(I_x)_{\vec e,\vec f}:=
+\begin{cases}1,&\vec e=\vec f,\\0,&\vec e\ne\vec f,\end{cases}
+\qquad(I_x\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x]))`),
+                  paragraph(["であり、右辺の零と一は多項式環の元である。"]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_polynomial_diagonal_gauge_inverse",
+              kind: "claim",
+              title: { text: "定数多項式への移送は対角変換の両側逆を保つ" },
+              labels: ["claim_polynomial_diagonal_gauge_inverse"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/polynomial-diagonal-gauge-inverse"],
+              lean: [
+                "Ising2DLambda.KacWard.polynomialDiagonalGauge_mul_inverse",
+                "Ising2DLambda.NecSuf.KacWard.mappedMatrices_mul_inverse_necSuf",
+                "Ising2DLambda.KacWard.polynomialDiagonalGauge_mul_inverse_from_necSuf",
+              ],
+              statement: [
+                paragraph(["任意の ", math(String.raw`L\ge1,\ (a,b)\in\mathcal S`), " について、",
+                  ref("def_polynomial_diagonal_gauge"), " の行列は"]),
+                displayMath(String.raw`\widehat U\widehat V=I_x,\qquad\widehat V\widehat U=I_x`),
+                paragraph(["を満たす。したがって ", math(String.raw`\widehat V`), " は多項式行列としての ",
+                  math(String.raw`\widehat U`), " の両側逆行列である。"]),
+              ],
+              proof: [
+                paragraph(["この証明では定数埋込みを ",
+                  math(String.raw`C:\overline{\mathbb Q}\to\overline{\mathbb Q}[x],\ C(r):=\widehat r`),
+                  " と書く（", ref("def_qbar_constant_embedding"), "）。まず有限和の保存を示す。",
+                  math(String.raw`(r_{\vec g})_{\vec g\in\vec E_L}\in\overline{\mathbb Q}^{\vec E_L}`), " を任意に取り、",
+                  math(String.raw`F\subseteq\vec E_L`), " について帰納法を使う。空集合では"]),
+                displayMath(String.raw`\begin{aligned}
+C\Bigl(\sum_{\vec g\in\varnothing}r_{\vec g}\Bigr)
+&=C(0)&&(\because\ \text{空和の定義})\\
+&=0&&(\because\ \blkref{def_qbar_constant_embedding}\text{ の零の保存})\\
+&=\sum_{\vec g\in\varnothing}C(r_{\vec g})&&(\because\ \text{空和の定義}).
+\end{aligned}`),
+                paragraph([math(String.raw`\vec h\in\vec E_L\setminus F`), " を取り、",
+                  math(String.raw`F`), " での等式を仮定すると、"]),
+                displayMath(String.raw`\begin{aligned}
+C\Bigl(\sum_{\vec g\in F\cup\{\vec h\}}r_{\vec g}\Bigr)
+&=C\Bigl(r_{\vec h}+\sum_{\vec g\in F}r_{\vec g}\Bigr)
+&&(\because\ \vec h\notin F\text{ の有限和})\\
+&=C(r_{\vec h})+C\Bigl(\sum_{\vec g\in F}r_{\vec g}\Bigr)
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{ の加法の保存})\\
+&=C(r_{\vec h})+\sum_{\vec g\in F}C(r_{\vec g})
+&&(\because\ F\text{ での帰納法の仮定})\\
+&=\sum_{\vec g\in F\cup\{\vec h\}}C(r_{\vec g})
+&&(\because\ \vec h\notin F\text{ の有限和}).
+\end{aligned}`),
+                paragraph(["よって任意の ", math(String.raw`F\subseteq\vec E_L`),
+                  " で有限和を保つ。次に ", ref("def_qbar_identity_matrix"), " の単位行列を ",
+                  math(String.raw`I_{\overline{\mathbb Q}}\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q})`),
+                  " と書く。任意の ", math(String.raw`\vec e,\vec f\in\vec E_L`), " を取る。", math(String.raw`\vec e=\vec f`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+C\bigl((I_{\overline{\mathbb Q}})_{\vec e,\vec f}\bigr)
+&=C(1)&&(\because\ \blkref{def_qbar_identity_matrix},\ \vec e=\vec f)\\
+&=1&&(\because\ \blkref{def_qbar_constant_embedding}\text{ の一の保存})\\
+&=(I_x)_{\vec e,\vec f}&&(\because\ \blkref{def_polynomial_diagonal_gauge},\ \vec e=\vec f).
+\end{aligned}`),
+                paragraph([math(String.raw`\vec e\ne\vec f`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+C\bigl((I_{\overline{\mathbb Q}})_{\vec e,\vec f}\bigr)
+&=C(0)&&(\because\ \blkref{def_qbar_identity_matrix},\ \vec e\ne\vec f)\\
+&=0&&(\because\ \blkref{def_qbar_constant_embedding}\text{ の零の保存})\\
+&=(I_x)_{\vec e,\vec f}&&(\because\ \blkref{def_polynomial_diagonal_gauge},\ \vec e\ne\vec f).
+\end{aligned}`),
+                paragraph(["順序付きの組 ", math(String.raw`(M,N)`), " を ",
+                  math(String.raw`(U,V)`), " または ", math(String.raw`(V,U)`), " とする。",
+                  "それぞれの成分を定数として送った行列を ", math(String.raw`\widehat M,\widehat N`),
+                  " と書く。任意の ", math(String.raw`\vec e,\vec f\in\vec E_L`), " に対して、"]),
+                displayMath(String.raw`\begin{aligned}
+(\widehat M\widehat N)_{\vec e,\vec f}
+&=\sum_{\vec g\in\vec E_L}\widehat M_{\vec e,\vec g}\widehat N_{\vec g,\vec f}
+&&(\because\ \blkref{def_polynomial_diagonal_gauge}\text{ の積})\\
+&=\sum_{\vec g\in\vec E_L}C(M_{\vec e,\vec g})C(N_{\vec g,\vec f})
+&&(\because\ \blkref{def_polynomial_diagonal_gauge}\text{ の成分})\\
+&=\sum_{\vec g\in\vec E_L}C(M_{\vec e,\vec g}N_{\vec g,\vec f})
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{ の積の保存})\\
+&=C\Bigl(\sum_{\vec g\in\vec E_L}M_{\vec e,\vec g}N_{\vec g,\vec f}\Bigr)
+&&(\because\ \text{上で示した有限和の保存})\\
+&=C\bigl((MN)_{\vec e,\vec f}\bigr)
+&&(\because\ \blkref{def_qbar_matrix_product})\\
+&=C\bigl((I_{\overline{\mathbb Q}})_{\vec e,\vec f}\bigr)
+&&(\because\ \blkref{claim_diagonal_gauge_inverse})\\
+&=(I_x)_{\vec e,\vec f}
+&&(\because\ \text{上で示した単位行列の成分の移送}).
+\end{aligned}`),
+                paragraph(["どちらの組でも全成分が一致するので、二つの行列の等式が従う（",
+                  ref("def_qbar_polynomial_matrix"), "）。すべての計算は代数的数と代数的数係数多項式の有限和・積で閉じる。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_determinant_nonzero_terms",
         labels: [],
         title: { text: "行列式の非零な置換項" },
@@ -75963,7 +76101,7 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       math(String.raw`(Q^{a,b}_L(x))^2`), " に等しいことを示す段である。",
                       "経路: 反転写像の置換行列 ", math(String.raw`J`), " と対角行列 ", math(String.raw`U`),
                       "（成分は方向番号の 8 乗根冪とねじれ偶奇の 4 乗根冪）で ",
-                      math(String.raw`\widehat K:=\zeta_8^{\,2}\,U^{-1}JK^{a,b}(x)U`),
+                      math(String.raw`\widehat K:=\widehat{\zeta_8^{\,2}}\,\widehat V\widehat J K^{a,b}(x)\widehat U`),
                       " を作ると、これは零対角の反対称行列で、行列式は変わらない。反対称行列の行列式は Pfaffian の平方であり、",
                       "Pfaffian の完全マッチング展開では各辺が高々一度しか使われないので、基準マッチングとの対称差は台の辺が相異なる閉歩道の族になり、",
                       "その符号は本文にある回転位相・横断消去・接触点分割・頂点単純閉路の回転数の補題で決まる。各偶部分グラフの上で局所対合の符号付き和は 1 である。",
