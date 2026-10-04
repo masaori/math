@@ -29482,44 +29482,58 @@ d_{A_\sigma}(i,j)
                       ],
                       proof: [
                         paragraph([
-                          "双対辺写像の定義を開くと、横向き境界を横切る双対辺の唯一の原像は、",
-                          "列 ", math(String.raw`\pi(-1)`), " に並ぶ縦向き辺である。",
+                          "二元集合の符号化 ", math(String.raw`c:\{+1,-1\}\to\{0,1\}\subset\mathbb N`),
+                          " を ", math(String.raw`c(+1):=0`), "、", math(String.raw`c(-1):=1`), " で定める。",
+                          "以下の和と余りはすべて自然数で取る。", ref("def_broken_edge_set"), " の指示関数 ",
+                          math(String.raw`q_\sigma:E_L\to\{0,1\}\subset\mathbb N`), " について、任意の辺 ",
+                          math(String.raw`e\in E_L`), " の両端点を ",
+                          math(String.raw`v,w\in V_L`), " とすると、四つの符号の組ごとに",
                         ]),
-                        displayMath(String.raw`\varepsilon_{L,\mathrm h}(A_\sigma)
-=\left(\sum_{i\in\mathbb Z/L\mathbb Z}
-q_\sigma\bigl(n_{\mathrm v}(i,\pi(-1))\bigr)\right)\bmod2
-\quad(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map},\
-\blkref{claim_dual_edge_map_bijective})`),
-                        paragraph([ref("def_broken_edge_set"), " と端点写像より、この和の各項は ",
-                          math(String.raw`\sigma(i,\pi(-1))`), " と ", math(String.raw`\sigma(i+\bar1,\pi(-1))`),
-                          " が異なるときだけ 1 である。二元集合の符号化 ",
-                          math(String.raw`c:\{+1,-1\}\to\mathbb Z/2\mathbb Z`), " を ",
-                          math(String.raw`c(+1):=0`), "、", math(String.raw`c(-1):=1`), " で定めると" ]),
+                        displayMath(String.raw`q_\sigma(e)
+=\bigl(c(\sigma(v))+c(\sigma(w))\bigr)\bmod2
+\quad\bigl(\because\ \blkref{def_broken_edge_set}\text{ と二値の符号化の定義}\bigr)`),
+                        paragraph([
+                          "である。双対辺写像の定義を開くと、横向き境界を横切る双対辺の唯一の原像は、",
+                          "列 ", math(String.raw`\pi(-1)`), " に並ぶ縦向き辺である。",
+                          "以下の ", math(String.raw`i,j`), " は ", math(String.raw`\mathbb Z/L\mathbb Z`),
+                          " 全体を走り、頂点座標の加法はこの剰余類の加法を表す。端点写像を代入すると、",
+                        ]),
                         displayMath(String.raw`\begin{aligned}
-\left(\sum_i q_\sigma(n_{\mathrm v}(i,\pi(-1)))\right)\bmod2
-&=\sum_i\left(c(\sigma(i,\pi(-1)))+c(\sigma(i+\bar1,\pi(-1)))\right)
-&&\bigl(\because\ \text{二つの二値が異なることは符号化した値の和が }1\text{ であることと同値}\bigr)\\
-&=\sum_i c(\sigma(i,\pi(-1)))
-  +\sum_i c(\sigma(i+\bar1,\pi(-1)))
+\varepsilon_{L,\mathrm h}(A_\sigma)
+&=\left(\sum_i q_\sigma(n_{\mathrm v}(i,\pi(-1)))\right)\bmod2
+&&\bigl(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map},\ \blkref{claim_dual_edge_map_bijective}\bigr)\\
+&=\left(\sum_i\left[\bigl(c(\sigma(i,\pi(-1)))+c(\sigma(i+\bar1,\pi(-1)))\bigr)\bmod2\right]\right)\bmod2
+&&\bigl(\because\ \text{上で示した指示関数の等式と端点写像}\bigr)\\
+&=\left(\sum_i\bigl(c(\sigma(i,\pi(-1)))+c(\sigma(i+\bar1,\pi(-1)))\bigr)\right)\bmod2
+&&\bigl(\because\ \text{有限和の余りは各項の余りの和の余りに等しい}\bigr)\\
+&=\left(\sum_i c(\sigma(i,\pi(-1)))+\sum_i c(\sigma(i+\bar1,\pi(-1)))\right)\bmod2
 &&\bigl(\because\ \text{有限和の分配}\bigr)\\
-&=\sum_i c(\sigma(i,\pi(-1)))
-  +\sum_i c(\sigma(i,\pi(-1)))
+&=\left(\sum_i c(\sigma(i,\pi(-1)))+\sum_i c(\sigma(i,\pi(-1)))\right)\bmod2
 &&\bigl(\because\ i\mapsto i+\bar1\ \text{は全単射}\bigr)\\
+&=\left(2\sum_i c(\sigma(i,\pi(-1)))\right)\bmod2
+&&\bigl(\because\ \mathbb N\text{ の四則}\bigr)\\
 &=0
-&&\bigl(\because\ \mathbb Z/2\mathbb Z\ \text{では同じ元の和は零元}\bigr).
+&&\bigl(\because\ \text{二の倍数の二で割った余りは零}\bigr).
 \end{aligned}`),
-                        paragraph(["最初の等式と直前の鎖から ",
-                          math(String.raw`\varepsilon_{L,\mathrm h}(A_\sigma)=0`), " である。縦向き境界については、",
-                          "その唯一の原像が行 ", math(String.raw`\pi(-1)`), " に並ぶ横向き辺なので、同じ鎖で",
+                        paragraph([
+                          "縦向き境界の唯一の原像は行 ", math(String.raw`\pi(-1)`), " に並ぶ横向き辺なので、同様に",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \varepsilon_{L,\mathrm v}(A_\sigma)
-&=\left(\sum_{j\in\mathbb Z/L\mathbb Z}
-q_\sigma\bigl(n_{\mathrm h}(\pi(-1),j)\bigr)\right)\bmod2
-&&\bigl(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map},\
-\blkref{claim_dual_edge_map_bijective}\bigr)\\
+&=\left(\sum_j q_\sigma(n_{\mathrm h}(\pi(-1),j))\right)\bmod2
+&&\bigl(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map},\ \blkref{claim_dual_edge_map_bijective}\bigr)\\
+&=\left(\sum_j\left[\bigl(c(\sigma(\pi(-1),j))+c(\sigma(\pi(-1),j+\bar1))\bigr)\bmod2\right]\right)\bmod2
+&&\bigl(\because\ \text{上で示した指示関数の等式と端点写像}\bigr)\\
+&=\left(\sum_j\bigl(c(\sigma(\pi(-1),j))+c(\sigma(\pi(-1),j+\bar1))\bigr)\right)\bmod2
+&&\bigl(\because\ \text{有限和の余りは各項の余りの和の余りに等しい}\bigr)\\
+&=\left(\sum_j c(\sigma(\pi(-1),j))+\sum_j c(\sigma(\pi(-1),j+\bar1))\right)\bmod2
+&&\bigl(\because\ \text{有限和の分配}\bigr)\\
+&=\left(\sum_j c(\sigma(\pi(-1),j))+\sum_j c(\sigma(\pi(-1),j))\right)\bmod2
+&&\bigl(\because\ j\mapsto j+\bar1\ \text{は全単射}\bigr)\\
+&=\left(2\sum_j c(\sigma(\pi(-1),j))\right)\bmod2
+&&\bigl(\because\ \mathbb N\text{ の四則}\bigr)\\
 &=0
-&&\bigl(\because\ j\mapsto j+\bar1\ \text{に沿う閉路へ二値の符号化と有限和の分配を適用}\bigr).
+&&\bigl(\because\ \text{二の倍数の二で割った余りは零}\bigr).
 \end{aligned}`),
                         paragraph([ref("claim_dual_broken_edges_even"), " と ", ref("def_torus_homology_sector"),
                           " より ", math(String.raw`A_\sigma\in\mathcal E_L^{0,0}`),

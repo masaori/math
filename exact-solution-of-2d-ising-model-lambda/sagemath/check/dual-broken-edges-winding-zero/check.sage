@@ -40,4 +40,6 @@ for L in (1, 2, 3, 4):
         checked += 1
     print("L=%d: %d 配位の二つの巻き付き偶奇が零" % (L, checked))
 
+load(os.path.join(_dir, 'check_lines.sage'))
+
 print("RESULT: PASS")
