@@ -49,34 +49,33 @@ lemma image_reconstructedEdgeSet (L : ℕ) [NeZero L] (A : Finset (Edge L)) :
   · intro he
     exact ⟨(dualEdgeEquiv L).symm e, he, (dualEdgeEquiv L).apply_symm_apply e⟩
 
-/-- 双対像の各双対頂点での局所端点数を、元の辺集合の四つの所属指示子で書く
-（`dualBrokenEdgeSet_incidenceCount` を任意の辺集合へ一般化したもの）。 -/
-lemma dualImage_incidenceCount (L : ℕ) [NeZero L] (S : Finset (Edge L))
-    (i j : ZMod L) :
-    edgeSubsetIncidenceCount L (S.image (dualEdgeEquiv L)) (i, j) =
-      (if edgeOfRow L true (i - 1) j ∈ S then 1 else 0) +
+/-- 本文の端点数の最初の二行。各辺の二つの端点を別々に数え、四つの位置へ展開する。
+`L = 1` でも同じ辺の端点を二度数える。 -/
+lemma edgeSubsetIncidenceCount_four_incident_edges (L : ℕ) [NeZero L]
+    (S : Finset (Edge L)) (i j : ZMod L) :
+    edgeSubsetIncidenceCount L S (i, j) =
+      (if edgeOfRow L false i j ∈ S then 1 else 0) +
       (if edgeOfRow L false i (j - 1) ∈ S then 1 else 0) +
-      (if edgeOfRow L true (i - 1) (j - 1) ∈ S then 1 else 0) +
-      (if edgeOfRow L false (i - 1) (j - 1) ∈ S then 1 else 0) := by
+      (if edgeOfRow L true i j ∈ S then 1 else 0) +
+      (if edgeOfRow L true (i - 1) j ∈ S then 1 else 0) := by
   classical
   rw [edgeSubsetIncidenceCount]
-  rw [show S.image (dualEdgeEquiv L) =
-      (Finset.univ.filter fun e : Edge L => e ∈ S.image (dualEdgeEquiv L)) by ext; simp]
+  rw [show S =
+      (Finset.univ.filter fun e : Edge L => e ∈ S) by ext; simp]
   rw [Finset.sum_filter]
-  change (∑ e : Edge L, if e ∈ S.image (dualEdgeEquiv L) then
+  change (∑ e : Edge L, if e ∈ S then
     ((if boundary0 L e = (i, j) then 1 else 0) +
       (if boundary1 L e = (i, j) then 1 else 0)) else 0) = _
   rw [← Fintype.sum_equiv (edgeEquiv L)
-    (fun w => if edgeEquiv L w ∈ S.image (dualEdgeEquiv L) then
+    (fun w => if edgeEquiv L w ∈ S then
       ((if boundary0 L (edgeEquiv L w) = (i, j) then 1 else 0) +
         (if boundary1 L (edgeEquiv L w) = (i, j) then 1 else 0)) else 0)
-    (fun e => if e ∈ S.image (dualEdgeEquiv L) then
+    (fun e => if e ∈ S then
       ((if boundary0 L e = (i, j) then 1 else 0) +
         (if boundary1 L e = (i, j) then 1 else 0)) else 0) (fun _ => rfl)]
   simp only [Fintype.sum_sum_type, edgeEquiv_inl_pair, edgeEquiv_inr_pair,
     edgeOfRow_boundary0, edgeOfRow_boundary1_horizontal,
-    edgeOfRow_boundary1_vertical, mem_image_dualEdgeEquiv_iff,
-    dualEdgeEquiv_symm_horizontal, dualEdgeEquiv_symm_vertical]
+    edgeOfRow_boundary1_vertical]
   have hsplit (p : Prop) [Decidable p] (a b : ℕ) :
       (if p then a + b else 0) = (if p then a else 0) + (if p then b else 0) := by
     by_cases hp : p <;> simp [hp]
@@ -108,6 +107,20 @@ lemma dualImage_incidenceCount (L : ℕ) [NeZero L] (S : Finset (Edge L))
   rw [hshift, hshift]
   omega
 
+/-- 本文の端点数の残り三行。指示関数を双対原像へ移し、逆写像を代入して並べ替える。 -/
+lemma dualImage_incidenceCount (L : ℕ) [NeZero L] (S : Finset (Edge L))
+    (i j : ZMod L) :
+    edgeSubsetIncidenceCount L (S.image (dualEdgeEquiv L)) (i, j) =
+      (if edgeOfRow L true (i - 1) j ∈ S then 1 else 0) +
+      (if edgeOfRow L false i (j - 1) ∈ S then 1 else 0) +
+      (if edgeOfRow L true (i - 1) (j - 1) ∈ S then 1 else 0) +
+      (if edgeOfRow L false (i - 1) (j - 1) ∈ S then 1 else 0) := by
+  classical
+  rw [edgeSubsetIncidenceCount_four_incident_edges]
+  simp only [mem_image_dualEdgeEquiv_iff]
+  simp only [dualEdgeEquiv_symm_horizontal, dualEdgeEquiv_symm_vertical]
+  omega
+
 /-- 人手証明の格子面の等式。自明セクター以前に、偶部分グラフであることだけから従う。
 `b_v(i,j) + b_h(i,j) + b_v(i,j+1) + b_h(i+1,j) = 0` in `ℤ/2ℤ`。 -/
 theorem reconstructedEdgeSet_face_equation (L : ℕ) [NeZero L] (A : Finset (Edge L))
@@ -118,11 +131,13 @@ theorem reconstructedEdgeSet_face_equation (L : ℕ) [NeZero L] (A : Finset (Edg
       (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0) :
       ZMod 2) = 0 := by
   classical
+  -- 本文の準備：右下の双対頂点の端点数を四辺の指示関数へ展開する。
   have hcount := hEven (i + 1, j + 1)
   rw [show A = (reconstructedEdgeSet L A).image (dualEdgeEquiv L) from
     (image_reconstructedEdgeSet L A).symm, dualImage_incidenceCount] at hcount
   simp only [add_sub_cancel_right] at hcount
   obtain ⟨k, hk⟩ := hcount
+  -- 本文の面等式：各項の射影、和の射影、端点数の代入に対応する。
   have hcast :
       ((if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) +
         (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) +
@@ -136,6 +151,7 @@ theorem reconstructedEdgeSet_face_equation (L : ℕ) [NeZero L] (A : Finset (Edg
         ZMod 2) := by
     push_cast
     ring
+  -- 端点数は二の倍数であり、その二を法とする射影は零。
   rw [hcast, hk]
   push_cast
   rw [← two_mul, show (2 : ZMod 2) = 0 from rfl, zero_mul]
@@ -152,14 +168,17 @@ theorem reconstructedEdgeSet_winding_equations (L : ℕ) [NeZero L]
   have hHorizontal : horizontalWindingParity L A = 0 := congrArg Prod.fst hSector.2
   have hVertical : verticalWindingParity L A = 0 := congrArg Prod.snd hSector.2
   rw [← image_reconstructedEdgeSet L A] at hHorizontal hVertical
+  -- 本文の自然数値の巻き付き偶奇を π₂ で写す計算。Fin 2 と ZMod 2 は定義上同じ型。
   change (∑ i : ZMod L,
     (if edgeOfRow L false i (-1) ∈ (reconstructedEdgeSet L A).image (dualEdgeEquiv L)
       then 1 else 0) : ZMod 2) = 0 at hHorizontal
   change (∑ j : ZMod L,
     (if edgeOfRow L true (-1) j ∈ (reconstructedEdgeSet L A).image (dualEdgeEquiv L)
       then 1 else 0) : ZMod 2) = 0 at hVertical
+  -- 本文の境界指示子→逆像指示子→逆写像の座標式。
   simp only [mem_image_dualEdgeEquiv_iff, dualEdgeEquiv_symm_horizontal] at hHorizontal
   simp only [mem_image_dualEdgeEquiv_iff, dualEdgeEquiv_symm_vertical] at hVertical
+  -- 本文の二方向の基準周期和：巡回添字を一つ戻し、上で得た零性を代入する。
   constructor
   · calc
       (∑ i : ZMod L,

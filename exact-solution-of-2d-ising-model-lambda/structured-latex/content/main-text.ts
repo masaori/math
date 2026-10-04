@@ -29765,6 +29765,8 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                       verification: ["sagemath/check/trivial-sector-configuration-reconstruction"],
                       lean: [
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_face_equation",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_winding_equations",
                         "Ising2DLambda.FisherZero.reconstructionSpin_val_eq_neg_one_pow_val",
                         "Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf",
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf",
@@ -29792,21 +29794,117 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
 b_{\mathrm v}(i,j):=\pi_2\!\left(\boldsymbol 1_{B}\bigl(n_{\mathrm v}(i,j)\bigr)\right)
 \qquad\bigl(b_{\mathrm h}(i,j),b_{\mathrm v}(i,j)\in\mathbb Z/2\mathbb Z\bigr)`),
                         paragraph([
-                          "で定める。", ref("def_even_edge_subset"), " と ", ref("def_dual_edge_map"),
-                          " を開くと、各格子面の境界について",
+                          "で定める。自然数値の指示関数を ", math(String.raw`a(e):=\boldsymbol1_A(e),\ q(e):=\boldsymbol1_B(e)`),
+                          "（", math(String.raw`e\in E_L`), "）と略記する。双対辺写像の往復から、任意の辺について",
                         ]),
-                        displayMath(String.raw`b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j)
-+b_{\mathrm v}(i,j+\bar1)+b_{\mathrm h}(i+\bar1,j)=0
-\quad\text{in }\mathbb Z/2\mathbb Z
-\quad(\because\ \blkref{def_even_edge_subset},\ \blkref{def_dual_edge_map})`),
+                        displayMath(String.raw`a(e)=q\bigl(\delta_L^{-1}(e)\bigr)
+\qquad\bigl(\because\ B=\delta_L^{-1}(A),\ \blkref{claim_dual_edge_map_bijective}\bigr).`),
                         paragraph([
-                          "となる。また二つの巻き付き偶奇が零であることを ", ref("def_torus_winding_parities"),
-                          " と双対辺写像の定義で戻すと",
+                          "格子面の右下の頂点 ", math(String.raw`v:=(i+\bar1,j+\bar1)\in V_L`),
+                          " に接続する端点を数える。端点の番号も数えるので、",
+                          math(String.raw`L=1`), " で辺が一致しても各項を保つ。",
                         ]),
-                        displayMath(String.raw`\sum_i b_{\mathrm v}(i,\pi(-1))=0,\qquad
-\sum_j b_{\mathrm h}(\pi(-1),j)=0
-\quad\text{in }\mathbb Z/2\mathbb Z
-\quad(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map})`),
+                        displayMath(String.raw`\begin{aligned}
+d_A(v)
+&=\sum_{\substack{e\in A,\ c\in\{0,1\}\\\partial_c(e)=v}}1
+&&\bigl(\because\ \blkref{def_edge_subset_incidence_count}\bigr)\\
+&=\begin{aligned}[t]
+&a(n_{\mathrm h}(i+\bar1,j+\bar1))+a(n_{\mathrm h}(i+\bar1,j))\\
+&\quad+a(n_{\mathrm v}(i+\bar1,j+\bar1))+a(n_{\mathrm v}(i,j+\bar1))
+\end{aligned}
+&&\bigl(\because\ \blkref{def_boundary_maps}\bigr)\\
+&=\begin{aligned}[t]
+&q(\delta_L^{-1}(n_{\mathrm h}(i+\bar1,j+\bar1)))+q(\delta_L^{-1}(n_{\mathrm h}(i+\bar1,j)))\\
+&\quad+q(\delta_L^{-1}(n_{\mathrm v}(i+\bar1,j+\bar1)))+q(\delta_L^{-1}(n_{\mathrm v}(i,j+\bar1)))
+\end{aligned}
+&&\bigl(\because\ a(e)=q(\delta_L^{-1}(e))\bigr)\\
+&=\begin{aligned}[t]
+&q(n_{\mathrm v}(i,j+\bar1))+q(n_{\mathrm v}(i,j))\\
+&\quad+q(n_{\mathrm h}(i+\bar1,j))+q(n_{\mathrm h}(i,j))
+\end{aligned}
+&&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\text{ の逆写像の式}\bigr)\\
+&=\begin{aligned}[t]
+&q(n_{\mathrm v}(i,j))+q(n_{\mathrm h}(i,j))\\
+&\quad+q(n_{\mathrm v}(i,j+\bar1))+q(n_{\mathrm h}(i+\bar1,j))
+\end{aligned}
+&&\bigl(\because\ \text{四項の有限和を位置 }(2,4,1,3)\text{ の順へ再添字付け}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          ref("def_torus_homology_sector"), " より ", math(String.raw`A`), " は偶部分グラフである。",
+                          ref("def_even_edge_subset"), " に従って ", math(String.raw`d_A(v)=2k_v`),
+                          " を満たす ", math(String.raw`k_v\in\mathbb N`), " を取ると、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j)+b_{\mathrm v}(i,j+\bar1)+b_{\mathrm h}(i+\bar1,j)
+&=\begin{aligned}[t]
+&\pi_2(q(n_{\mathrm v}(i,j)))+\pi_2(q(n_{\mathrm h}(i,j)))\\
+&\quad+\pi_2(q(n_{\mathrm v}(i,j+\bar1)))+\pi_2(q(n_{\mathrm h}(i+\bar1,j)))
+\end{aligned}
+&&\bigl(\because\ b_{\mathrm h},b_{\mathrm v}\text{ の定義}\bigr)\\
+&=\pi_2\!\left(\begin{aligned}
+&q(n_{\mathrm v}(i,j))+q(n_{\mathrm h}(i,j))\\
+&\quad+q(n_{\mathrm v}(i,j+\bar1))+q(n_{\mathrm h}(i+\bar1,j))
+\end{aligned}\right)
+&&\bigl(\because\ \pi_2\text{ は加法を保つ}\bigr)\\
+&=\pi_2(d_A(v))
+&&\bigl(\because\ \text{直前の端点数の計算}\bigr)\\
+&=\pi_2(2k_v)
+&&\bigl(\because\ d_A(v)=2k_v\bigr)\\
+&=0
+&&\bigl(\because\ 2k_v\text{ の二で割った剰余類は零}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "基準の列 ", math(String.raw`\pi(-1)\in\mathbb Z/L\mathbb Z`),
+                          " に沿う縦向き辺の和は、横向き境界の巻き付き偶奇へ戻せる。和の添字はすべて ",
+                          math(String.raw`\mathbb Z/L\mathbb Z`), " を走る。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\sum_i b_{\mathrm v}(i,\pi(-1))
+&=\sum_i\pi_2(q(n_{\mathrm v}(i,\pi(-1))))
+&&\bigl(\because\ b_{\mathrm v}\text{ の定義}\bigr)\\
+&=\pi_2\!\left(\sum_i q(n_{\mathrm v}(i,\pi(-1)))\right)
+&&\bigl(\because\ \pi_2\text{ は有限和を保つ}\bigr)\\
+&=\pi_2\!\left(\sum_i q(n_{\mathrm v}(i-\bar1,\pi(-1)))\right)
+&&\bigl(\because\ i\mapsto i-\bar1\text{ は全単射}\bigr)\\
+&=\pi_2\!\left(\sum_i q(\delta_L^{-1}(n_{\mathrm h}(i,\pi(-1))))\right)
+&&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\text{ の逆写像の式}\bigr)\\
+&=\pi_2\!\left(\sum_i a(n_{\mathrm h}(i,\pi(-1)))\right)
+&&\bigl(\because\ a(e)=q(\delta_L^{-1}(e))\bigr)\\
+&=\pi_2\!\left(|A\cap C_{L,\mathrm h}|\right)
+&&\bigl(\because\ \blkref{def_torus_winding_parities}\text{ の境界集合と辺番号の単射性}\bigr)\\
+&=\pi_2\!\left(|A\cap C_{L,\mathrm h}|\bmod2\right)
+&&\bigl(\because\ \pi_2(n)=\pi_2(n\bmod2)\ (n\in\mathbb N)\bigr)\\
+&=\pi_2(\varepsilon_{L,\mathrm h}(A))
+&&\bigl(\because\ \blkref{def_torus_winding_parities}\bigr)\\
+&=\pi_2(0)
+&&\bigl(\because\ A\in\mathcal E_L^{0,0},\ \blkref{def_torus_homology_sector}\bigr)\\
+&=0
+&&\bigl(\because\ \pi_2\text{ は零を保つ}\bigr).
+\end{aligned}`),
+                        paragraph(["基準の行の横向き辺の和も、縦向き境界の巻き付き偶奇へ戻せる。"]),
+                        displayMath(String.raw`\begin{aligned}
+\sum_j b_{\mathrm h}(\pi(-1),j)
+&=\sum_j\pi_2(q(n_{\mathrm h}(\pi(-1),j)))
+&&\bigl(\because\ b_{\mathrm h}\text{ の定義}\bigr)\\
+&=\pi_2\!\left(\sum_j q(n_{\mathrm h}(\pi(-1),j))\right)
+&&\bigl(\because\ \pi_2\text{ は有限和を保つ}\bigr)\\
+&=\pi_2\!\left(\sum_j q(n_{\mathrm h}(\pi(-1),j-\bar1))\right)
+&&\bigl(\because\ j\mapsto j-\bar1\text{ は全単射}\bigr)\\
+&=\pi_2\!\left(\sum_j q(\delta_L^{-1}(n_{\mathrm v}(\pi(-1),j)))\right)
+&&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\text{ の逆写像の式}\bigr)\\
+&=\pi_2\!\left(\sum_j a(n_{\mathrm v}(\pi(-1),j))\right)
+&&\bigl(\because\ a(e)=q(\delta_L^{-1}(e))\bigr)\\
+&=\pi_2\!\left(|A\cap C_{L,\mathrm v}|\right)
+&&\bigl(\because\ \blkref{def_torus_winding_parities}\text{ の境界集合と辺番号の単射性}\bigr)\\
+&=\pi_2\!\left(|A\cap C_{L,\mathrm v}|\bmod2\right)
+&&\bigl(\because\ \pi_2(n)=\pi_2(n\bmod2)\ (n\in\mathbb N)\bigr)\\
+&=\pi_2(\varepsilon_{L,\mathrm v}(A))
+&&\bigl(\because\ \blkref{def_torus_winding_parities}\bigr)\\
+&=\pi_2(0)
+&&\bigl(\because\ A\in\mathcal E_L^{0,0},\ \blkref{def_torus_homology_sector}\bigr)\\
+&=0
+&&\bigl(\because\ \pi_2\text{ は零を保つ}\bigr).
+\end{aligned}`),
                         paragraph([
                           "を得る。格子面の等式を一つの行に沿って足すと縦向き辺の項は二度ずつ現れて消えるので",
                         ]),

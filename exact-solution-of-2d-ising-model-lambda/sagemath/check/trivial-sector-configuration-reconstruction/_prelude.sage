@@ -109,3 +109,95 @@ def _rc_check_edges(left, right, label):
             assert row[left] == row[right], (label, case['L'], case['A'], row)
             checked += 1
     print("RESULT: PASS (%s: %d 辺)" % (label, checked))
+
+
+def _rc_inverse_dual(L, edge):
+    if edge <= L * L:
+        i, j = divmod(edge - 1, L)
+        return edge_number_vertical(L, i - 1, j)
+    i, j = divmod(edge - L * L - 1, L)
+    return edge_number_horizontal(L, i, j - 1)
+
+
+def _rc_opening_rows(case):
+    L, A, B = case['L'], case['A'], case['B']
+    a = lambda edge: NN(edge in A)
+    q = lambda edge: NN(edge in B)
+    faces = []
+    for i, j in vertices(L):
+        vertex = (projection(L, i + 1), projection(L, j + 1))
+        pairs = {(edge, endpoint) for edge in A for endpoint in (0, 1)
+                 if endpoints(L, edge)[endpoint] == vertex}
+        count = NN(len(pairs))
+        count_sum = sum((NN(1) for edge in A for endpoint in (0, 1)
+                         if endpoints(L, edge)[endpoint] == vertex), NN(0))
+        incident_edges = (edge_number_horizontal(L, i + 1, j + 1),
+                          edge_number_horizontal(L, i + 1, j),
+                          edge_number_vertical(L, i + 1, j + 1),
+                          edge_number_vertical(L, i, j + 1))
+        inverse_edges = (edge_number_vertical(L, i, j + 1),
+                         edge_number_vertical(L, i, j),
+                         edge_number_horizontal(L, i + 1, j),
+                         edge_number_horizontal(L, i, j))
+        ordered_edges = (edge_number_vertical(L, i, j),
+                         edge_number_horizontal(L, i, j),
+                         edge_number_vertical(L, i, j + 1),
+                         edge_number_horizontal(L, i + 1, j))
+        ordered = sum((q(edge) for edge in ordered_edges), NN(0))
+        faces.append({
+            'incidence': count,
+            'definition': count_sum,
+            'incident': sum((a(edge) for edge in incident_edges), NN(0)),
+            'preimage': sum((q(_rc_inverse_dual(L, edge)) for edge in incident_edges), NN(0)),
+            'inverse': sum((q(edge) for edge in inverse_edges), NN(0)),
+            'ordered': ordered,
+            'face': case['bv'][(i, j)] + case['bh'][(i, j)] +
+                    case['bv'][(i, projection(L, j + 1))] +
+                    case['bh'][(projection(L, i + 1), j)],
+            'project_terms': sum((_rc_ring(q(edge)) for edge in ordered_edges), _rc_ring(0)),
+            'project_sum': _rc_ring(ordered),
+            'project_incidence': _rc_ring(count),
+            'project_even': _rc_ring(2 * (count // 2)),
+            'zero': _rc_ring(0),
+        })
+    cycles = {}
+    for direction in ('vertical', 'horizontal'):
+        if direction == 'vertical':
+            source = tuple(edge_number_vertical(L, i, -1) for i in range(L))
+            shifted = tuple(edge_number_vertical(L, i - 1, -1) for i in range(L))
+            dual_cut = tuple(edge_number_horizontal(L, i, -1) for i in range(L))
+            bhv = tuple(case['bv'][(i, projection(L, -1))] for i in range(L))
+        else:
+            source = tuple(edge_number_horizontal(L, -1, j) for j in range(L))
+            shifted = tuple(edge_number_horizontal(L, -1, j - 1) for j in range(L))
+            dual_cut = tuple(edge_number_vertical(L, -1, j) for j in range(L))
+            bhv = tuple(case['bh'][(projection(L, -1), j)] for j in range(L))
+        count = NN(len(A.intersection(set(dual_cut))))
+        winding = NN(sum((a(edge) for edge in dual_cut), NN(0)) % 2)
+        cycles[direction] = {
+            'cycle': sum(bhv, _rc_ring(0)),
+            'project_terms': sum((_rc_ring(q(edge)) for edge in source), _rc_ring(0)),
+            'project_sum': _rc_ring(sum((q(edge) for edge in source), NN(0))),
+            'shifted': _rc_ring(sum((q(edge) for edge in shifted), NN(0))),
+            'preimage': _rc_ring(sum((q(_rc_inverse_dual(L, edge)) for edge in dual_cut), NN(0))),
+            'image': _rc_ring(sum((a(edge) for edge in dual_cut), NN(0))),
+            'count': _rc_ring(count),
+            'remainder': _rc_ring(count % 2),
+            'winding': _rc_ring(winding),
+            'zero_cast': _rc_ring(NN(0)),
+            'zero': _rc_ring(0),
+        }
+    return {'face': faces, **cycles}
+
+
+_rc_opening = [_rc_opening_rows(case) for case in _rc_cases]
+
+
+def _rc_check_opening(section, left, right, label):
+    checked = 0
+    for case, opening in zip(_rc_cases, _rc_opening):
+        rows = opening[section] if section == 'face' else (opening[section],)
+        for row in rows:
+            assert row[left] == row[right], (label, case['L'], case['A'], row)
+            checked += 1
+    print('RESULT: PASS (%s: %d 件)' % (label, checked))
