@@ -515,11 +515,16 @@ theorem reconstructionPathParity_vertical_difference (L : ℕ) [NeZero L]
 def reconstructionSpin (q : ZMod 2) : SpinValue :=
   if q = 0 then ⟨1, Or.inl rfl⟩ else ⟨-1, Or.inr rfl⟩
 
+/-- 人手証明の自然数代表 `s₂(q)` は `q.val` であり、整数の冪を定める。 -/
+lemma reconstructionSpin_val_eq_neg_one_pow_val (q : ZMod 2) :
+    (reconstructionSpin q).val = (-1 : ℤ) ^ q.val := by
+  fin_cases q <;> decide
+
 lemma reconstructionSpin_ne_iff_add_eq_one (a b : ZMod 2) :
     reconstructionSpin a ≠ reconstructionSpin b ↔ a + b = 1 := by
   fin_cases a <;> fin_cases b <;> decide
 
-/-- 人手証明の `σ_A(i,j)=(-1)^{t(i,j)}`。 -/
+/-- 人手証明の `σ_A(i,j)=(-1)^{s₂(t(i,j))}`。 -/
 noncomputable def reconstructedConfiguration (L : ℕ) [NeZero L]
     (A : Finset (Edge L)) : Config L := fun v =>
   reconstructionSpin (reconstructionPathParity L A v.1 v.2)

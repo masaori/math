@@ -29614,6 +29614,7 @@ d_{A_\sigma}(i,j)
                       verification: ["sagemath/check/trivial-sector-configuration-reconstruction"],
                       lean: [
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two",
+                        "Ising2DLambda.FisherZero.reconstructionSpin_val_eq_neg_one_pow_val",
                         "Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf",
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf",
                       ],
@@ -29631,10 +29632,13 @@ d_{A_\sigma}(i,j)
                       proof: [
                         paragraph([
                           ref("claim_dual_edge_map_bijective"), " の逆写像を用いて ",
-                          math(String.raw`B:=\delta_L^{-1}(A)\subseteq E_L`), " と置き、辺の所属を表す二値を",
+                          math(String.raw`B:=\delta_L^{-1}(A)\subseteq E_L`), " と置く。",
+                          "自然数を二で割った剰余類へ移す写像を ", math(String.raw`\pi_2:\mathbb N\to\mathbb Z/2\mathbb Z`),
+                          " と書き、指示関数 ", math(String.raw`\boldsymbol 1_B:E_L\to\{0,1\}\subset\mathbb N`),
+                          " を用いる。座標 ", math(String.raw`i,j\in\mathbb Z/L\mathbb Z`), " に対して辺の所属を表す剰余類を",
                         ]),
-                        displayMath(String.raw`b_{\mathrm h}(i,j):=\boldsymbol 1_{B}\bigl(n_{\mathrm h}(i,j)\bigr),\qquad
-b_{\mathrm v}(i,j):=\boldsymbol 1_{B}\bigl(n_{\mathrm v}(i,j)\bigr)
+                        displayMath(String.raw`b_{\mathrm h}(i,j):=\pi_2\!\left(\boldsymbol 1_{B}\bigl(n_{\mathrm h}(i,j)\bigr)\right),\qquad
+b_{\mathrm v}(i,j):=\pi_2\!\left(\boldsymbol 1_{B}\bigl(n_{\mathrm v}(i,j)\bigr)\right)
 \qquad\bigl(b_{\mathrm h}(i,j),b_{\mathrm v}(i,j)\in\mathbb Z/2\mathbb Z\bigr)`),
                         paragraph([
                           "で定める。", ref("def_even_edge_subset"), " と ", ref("def_dual_edge_map"),
@@ -29684,8 +29688,12 @@ b_{\mathrm v}(i,j):=\boldsymbol 1_{B}\bigl(n_{\mathrm v}(i,j)\bigr)
 \sum_{r=0}^{s(i)-1}b_{\mathrm v}(\pi(r),0)
 +\sum_{c=0}^{s(j)-1}b_{\mathrm h}(i,\pi(c))
 \quad\text{in }\mathbb Z/2\mathbb Z`),
-                        paragraph(["で定め、配位を"]),
-                        displayMath(String.raw`\sigma_A(i,j):=(-1)^{t(i,j)}\in\{+1,-1\}`),
+                        paragraph([
+                          "で定める。剰余類の自然数代表を ",
+                          math(String.raw`s_2:\mathbb Z/2\mathbb Z\to\{0,1\}\subset\mathbb N`),
+                          "、", math(String.raw`\pi_2(s_2(a))=a\ (a\in\mathbb Z/2\mathbb Z)`), " で定め、配位を",
+                        ]),
+                        displayMath(String.raw`\sigma_A(i,j):=(-1)^{s_2(t(i,j))}\in\{+1,-1\}\subset\mathbb Z`),
                         paragraph([
                           "で定める。横向き辺について、", math(String.raw`s(j)<L-1`), " なら二つの有限和の差は末尾の一項なので",
                         ]),
@@ -29701,8 +29709,17 @@ t(i+\bar1,j)+t(i,j)
 &=b_{\mathrm v}(i,0)+
 \sum_{c=0}^{s(j)-1}\bigl(b_{\mathrm h}(i+\bar1,\pi(c))+b_{\mathrm h}(i,\pi(c))\bigr)
 &&\bigl(\because\ t\ \text{の定義}\bigr)\\
+&=b_{\mathrm v}(i,0)+
+\sum_{c=0}^{s(j)-1}\bigl(b_{\mathrm v}(i,\pi(c+1))+b_{\mathrm v}(i,\pi(c))\bigr)
+&&\bigl(\because\ \text{格子面の等式を有限和の各項へ代入}\bigr)\\
+&=b_{\mathrm v}(i,0)+\bigl(b_{\mathrm v}(i,\pi(s(j)))+b_{\mathrm v}(i,\pi(0))\bigr)
+&&\bigl(\because\ \text{標数二での隣接二項の望遠鏡和}\bigr)\\
+&=b_{\mathrm v}(i,0)+\bigl(b_{\mathrm v}(i,j)+b_{\mathrm v}(i,\pi(0))\bigr)
+&&\bigl(\because\ \pi(s(j))=j,\ \blkref{def_residue_maps}\bigr)\\
+&=b_{\mathrm v}(i,0)+\bigl(b_{\mathrm v}(i,j)+b_{\mathrm v}(i,0)\bigr)
+&&\bigl(\because\ \pi(0)=0,\ \blkref{def_residue_maps}\bigr)\\
 &=b_{\mathrm v}(i,j)
-&&\bigl(\because\ \text{格子面の等式の望遠鏡和}\bigr).
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ の加法で同じ項は二つずつ消える}\bigr).
 \end{aligned}`),
                         paragraph([
                           math(String.raw`s(i)=L-1`), " の場合も、列全体の和が零であることを使うと同じ等式になる。ゆえにすべての辺 ",
@@ -29710,8 +29727,12 @@ t(i+\bar1,j)+t(i,j)
                         ]),
                         displayMath(String.raw`\begin{aligned}
 e\in\mathcal B_L(\sigma_A)
+&\Longleftrightarrow\sigma_A(\partial_0(e))\ne\sigma_A(\partial_1(e))
+&&\bigl(\because\ \blkref{def_broken_edge_set}\bigr)\\
+&\Longleftrightarrow(-1)^{s_2(t(\partial_0(e)))}\ne(-1)^{s_2(t(\partial_1(e)))}
+&&\bigl(\because\ \sigma_A\text{ の定義}\bigr)\\
 &\Longleftrightarrow t(\partial_0(e))+t(\partial_1(e))=1
-&&\bigl(\because\ \sigma_A(v)=(-1)^{t(v)}\bigr)\\
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ の二元の四通りを代入}\bigr)\\
 &\Longleftrightarrow e\in B
 &&\bigl(\because\ \text{横向き辺と縦向き辺についての直前の等式}\bigr).
 \end{aligned}`),

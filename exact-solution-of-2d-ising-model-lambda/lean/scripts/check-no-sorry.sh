@@ -950,6 +950,7 @@ targets=(
   Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_difference
   Ising2DLambda.FisherZero.sum_range_adjacent_pairs_char_two
   Ising2DLambda.FisherZero.reconstructionPathParity_vertical_difference
+  Ising2DLambda.FisherZero.reconstructionSpin_val_eq_neg_one_pow_val
   Ising2DLambda.FisherZero.reconstructionSpin_ne_iff_add_eq_one
   Ising2DLambda.FisherZero.reconstructedConfiguration_brokenEdgeSet
   Ising2DLambda.FisherZero.reconstructedConfiguration_dualBrokenEdgeSet

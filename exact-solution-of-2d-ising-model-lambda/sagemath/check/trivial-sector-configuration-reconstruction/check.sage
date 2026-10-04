@@ -66,3 +66,32 @@ for L in (1, 2, 3):
           (L, len(trivial_sector)))
 
 print("RESULT: PASS")
+
+# 原像二点の全数検査に続き、A から独立構成した道和の各行を検査する。
+check_files = (
+    'check_horizontal_indicator_projection.sage',
+    'check_vertical_indicator_projection.sage',
+    'check_parity_representative.sage',
+    'check_configuration_definition.sage',
+    'check_spin_disagreement_four_cases.sage',
+    'check_horizontal_difference.sage',
+    'check_vertical_path_expansion.sage',
+    'check_vertical_face_substitution.sage',
+    'check_vertical_telescoping.sage',
+    'check_vertical_terminal_representative.sage',
+    'check_vertical_zero_projection.sage',
+    'check_vertical_characteristic_two.sage',
+    'check_vertical_periodic_boundary.sage',
+    'check_broken_definition.sage',
+    'check_broken_exponent_substitution.sage',
+    'check_broken_parity.sage',
+    'check_broken_membership.sage',
+    'check_dual_image_substitution.sage',
+    'check_dual_image_inverse.sage',
+)
+for check_file in check_files:
+    load(os.path.join(_dir, check_file))
+
+print("行別検算: %d files; 部分グラフ数 %s" %
+      (len(check_files), {L: sum(case['L'] == L for case in _rc_cases) for L in (1, 2, 3)}))
+print("RESULT: PASS")
