@@ -41,14 +41,26 @@
 # elan（Lean のツールチェイン管理）が入っていること。lake は ~/.elan/bin にあり、
 # 非対話シェルの PATH には入っていないので通しておく。
 cd lean
-lake update          # 依存の解決と取得。lake-manifest.json を作る（追跡している）
-lake exe cache get   # mathlib のビルド済み olean を取得する。**省略してはならない**
+bash scripts/use-shared-dependencies.sh   # 依存を用意する。**lake build の前に毎回打つ**
 lake build
 bash scripts/check-no-sorry.sh
 ```
 
-`lake exe cache get` を省くと mathlib を原本から building することになり、
-自動ループの 1 tick（25 分で打ち切る）では終わらない。取得済みの olean は `.lake/` に入り、
+依存（mathlib を含む `.lake/packages`、約 7.4GB）は作業ツリーごとに取らず、マシンに 1 つだけ置いた
+共有のディレクトリ `~/.cache/masaori-math/ising2d-lambda-lake-packages/<鍵>/packages` を使う。
+`scripts/use-shared-dependencies.sh` が `.lake/packages` をそこへの symlink にする。
+
+- **鍵は `lean-toolchain` と `lake-manifest.json` の中身のハッシュである。** どちらかが変われば別の鍵になり、
+  そのマシンで最初に打った作業ツリーが依存を取得して mathlib のビルド済み olean を展開する
+  （`lake exe cache get`）。同じ鍵を同時に作ろうとした作業ツリーは、作り終わるまで待つ。
+- **共有のディレクトリは書き込み禁止である。** `lake build` は依存へ書き込まないので、同時に動く作業ツリーどうしが
+  壊し合わない。**`lake update` を打たない**（共有のディレクトリを書き換えようとして権限で失敗する）。
+  `lake exe cache get` も要らない（揃っている依存に対しては何も書かずに終わる）。
+- **mathlib の版を上げるときは**、`.lake/packages` の symlink を消してから `lakefile.toml` の `rev` と
+  `lean-toolchain` を変えて `lake update` し、`lake-manifest.json` をコミットしたあとでスクリプトを打ち直す。
+- 24 時間使われていない鍵の共有のディレクトリは、スクリプトが消す。手で消すときは書き込み禁止を外してから消す
+  （`chmod -R u+w ~/.cache/masaori-math && rm -rf ~/.cache/masaori-math`）。
+
 `.lake/` は git 管理外である（依存の固定は `lake-manifest.json` が担う）。
 
 ## 現状
@@ -59,7 +71,7 @@ bash scripts/check-no-sorry.sh
 
 | | 状態 |
 | --- | --- |
-| `lake update` / `lake exe cache get` | 2026-08-08 実行済み（mathlib は `lakefile.toml` の `v4.32.1`、実体は `lake-manifest.json` が固定） |
+| 依存 | `scripts/use-shared-dependencies.sh` で用意する（mathlib は `lakefile.toml` の `v4.32.1`、実体は `lake-manifest.json` が固定） |
 | `lake build` | 通る |
 | `bash scripts/check-no-sorry.sh` | 通る（検査対象の定理 69 件を登録済み） |
 

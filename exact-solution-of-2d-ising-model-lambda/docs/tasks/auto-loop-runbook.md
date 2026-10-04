@@ -175,8 +175,12 @@ Lean だけが未了なら `done` にせず `記述と SageMath まで` と書�
 (cd structured-latex && npm run build:pdf)      # PDF まで組めること（組めない文字・未解決参照を検出）
 sage sagemath/check/<対象名>/check.sage          # その tick で触れた検証
 node sagemath/tools/verify-check-linkage.ts     # 検証 ↔ 証明 の対応
-(cd lean && lake build && bash scripts/check-no-sorry.sh)   # lean/ に中身がある場合
+(cd lean && bash scripts/use-shared-dependencies.sh && lake build && bash scripts/check-no-sorry.sh)   # lean/ に中身がある場合
 ```
+
+Lean の依存（mathlib を含む `lean/.lake/packages`）は `scripts/use-shared-dependencies.sh` だけで用意する。
+マシンに 1 つだけ置いた書き込み禁止の共有のディレクトリを指すので、`lake update` を打たない（権限で失敗する）。
+`lake exe cache get` も要らない。理由と mathlib の版を上げる手順は [lean/README.md](../../lean/README.md) の「セットアップと検証」。
 
 ## 並列の作業ストリーム: 式変形の書き方の統一（ユーザーの明示指示）
 

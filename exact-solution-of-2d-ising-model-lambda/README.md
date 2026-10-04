@@ -252,7 +252,7 @@ exact-solution-of-2d-ising-model-lambda/
 (cd structured-latex && npm run gen)    # ラベル・集約モジュールの再生成
 (cd structured-latex && npm run check)  # 生成物の鮮度 → 型検査 → 実行時検証 → 負テスト
 node sagemath/tools/verify-check-linkage.ts   # 検証 ↔ 証明の対応
-(cd lean && lake build && bash scripts/check-no-sorry.sh)
+(cd lean && bash scripts/use-shared-dependencies.sh && lake build && bash scripts/check-no-sorry.sh)
 ```
 
 閲覧用HTML（このプロジェクトの `content/` から直接生成）:

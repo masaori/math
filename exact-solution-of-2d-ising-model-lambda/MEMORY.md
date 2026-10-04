@@ -1,5 +1,12 @@
 # MEMORY — 2次元 Ising 模型の厳密解（Λ・Fisher 零点の立場）
 
+## Lean の依存を作業ツリーの外で共有する（2026-10-04）
+
+連続実行の作業ツリーが毎回 `lean/.lake/packages`（mathlib を含む約 7.4GB）を取り直し、定期実行の VM のディスクが満杯になった。
+`lean/scripts/use-shared-dependencies.sh` を足し、`lake build` の前に打つよう runbook・README の検証コマンドを直した。
+`.lake/packages` は `~/.cache/masaori-math/ising2d-lambda-lake-packages/<lean-toolchain と lake-manifest.json のハッシュ>/packages` への symlink になる。
+共有のディレクトリは作り終えたら書き込み禁止にする。`lake update` を打たない。手順と理由は `lean/README.md` の「セットアップと検証」。
+
 ## 双対変換の分母の非零性の表記統一（2026-10-04）
 
 2026-10-04: 「双対変換の値は分母を零にしない」を一件進めた。分子の整理を、減法の定義、結合則、交換則、加法逆元の取消、零元、2の定義の八行へ分け、本文・Lean 具体版・導出版を揃えた。元の背理法と参照、必要十分版の仮定は保った。SageMath の行別8本は各16代数的数で通過し、既存16点の非零性の厳密検算も通過した。次は「双対変換の対合性」。
