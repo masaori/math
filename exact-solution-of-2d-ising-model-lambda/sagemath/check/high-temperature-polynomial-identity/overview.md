@@ -24,3 +24,5 @@ sage sagemath/check/high-temperature-polynomial-identity/check.sage
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+**2026-10-04 再実行: すべて通過。** 一辺一・二の全18配位の辺積と、全260辺部分集合から作る高温展開多項式を `ZZ[x]` で比較した。本文の式変形の表記統一後も恒等式が一致する。

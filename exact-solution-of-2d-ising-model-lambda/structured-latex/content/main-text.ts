@@ -29076,6 +29076,8 @@ S_L(A)
 \bigl((1+x)+(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))\bigr)
 &=\sum_{\sigma\in\Sigma_L}2^{2L^2}x^{b(\sigma)}
 &&(\because\ \text{一辺の二つの場合を全辺へ掛ける})\\
+&=2^{2L^2}\sum_{\sigma\in\Sigma_L}x^{b(\sigma)}
+&&(\because\ \text{配位に依らない因子を有限和の外へ出す})\\
 &=2^{2L^2}Z_L
 &&(\because\ \blkref{def_partition_polynomial})
 \end{aligned}`),
@@ -29096,21 +29098,36 @@ S_L(A)
 &&(\because\ \text{配位に依らない因子を有限和の外へ出す})\\
 &=\sum_{A\subseteq E_L}(1+x)^{2L^2-|A|}(1-x)^{|A|}S_L(A)
 &&(\because\ \blkref{def_edge_subset_spin_sum})\\
+&=\sum_{A\subseteq E_L}(1+x)^{2L^2-|A|}(1-x)^{|A|}
+\begin{cases}2^{L^2},&\operatorname{Even}_L(A),\\0,&\neg\operatorname{Even}_L(A)\end{cases}
+&&(\because\ \blkref{claim_even_subgraph_spin_sum})\\
+&=\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
+(1+x)^{2L^2-|A|}(1-x)^{|A|}2^{L^2}
+&&(\because\ \text{零の項を有限和から除く})\\
+&=\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
+2^{L^2}(1+x)^{2L^2-|A|}(1-x)^{|A|}
+&&(\because\ \mathbb Z[x]\text{ の乗法の交換則})\\
 &=2^{L^2}\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
 (1+x)^{2L^2-|A|}(1-x)^{|A|}
-&&(\because\ \blkref{claim_even_subgraph_spin_sum})\\
+&&(\because\ \text{辺部分集合に依らない因子を有限和の外へ出す})\\
 &=2^{L^2}H_L
 &&(\because\ \blkref{def_high_temperature_polynomial})
 \end{aligned}`),
                     paragraph(["である。二つの計算の始点は同じなので"]),
                     displayMath(String.raw`\begin{aligned}
-2^{2L^2}Z_L
+2^{L^2}\bigl(2^{L^2}Z_L\bigr)
+&=\bigl(2^{L^2}2^{L^2}\bigr)Z_L
+&&(\because\ \mathbb Z[x]\text{ の乗法の結合則})\\
+&=2^{L^2+L^2}Z_L
+&&(\because\ \text{自然数指数の加法法則})\\
+&=2^{2L^2}Z_L
+&&(\because\ L^2+L^2=2L^2)\\
 &=2^{L^2}H_L
-&&(\because\ \text{同じ有限和の二つの計算})\\
-2^{L^2}Z_L
-&=H_L
-&&(\because\ \mathbb{Z}[x]\ \text{は整域であり }2^{L^2}\ne0\text{ なので共通因子を消去})
+&&(\because\ \text{同じ有限和の二つの計算})
 \end{aligned}`),
+                    paragraph(["整域の共通因子を消去すると、"]),
+                    displayMath(String.raw`2^{L^2}Z_L=H_L
+\quad(\because\ \mathbb{Z}[x]\ \text{は整域であり }2^{L^2}\ne0\text{ なので共通因子を消去})`),
                     paragraph(["全過程は有限集合、自然数、整数係数多項式だけで閉じる。"]),
                   ],
                 },
