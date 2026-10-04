@@ -313,7 +313,7 @@ theorem reconstructedEdgeSet_row_column_sum_invariant (L : ℕ) [NeZero L]
       _ = (∑ i : ZMod L, bv i j) + 0 := by rw [hdouble]
       _ = ∑ i : ZMod L, bv i j := add_zero _
 
-/-- 人手証明の「したがって任意の行と列について和が零」。二周期の等式を出発点、
+/-- 人手証明の「全行・全列の周期和が零」。二周期の等式を出発点、
 行和・列和の不変性を一歩とする帰納法で、横辺の行和と縦辺の列和がすべて零になる。 -/
 theorem reconstructedEdgeSet_all_row_column_sums_zero (L : ℕ) [NeZero L]
     (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
@@ -326,45 +326,65 @@ theorem reconstructedEdgeSet_all_row_column_sums_zero (L : ℕ) [NeZero L]
   classical
   obtain ⟨hwv, hwh⟩ := reconstructedEdgeSet_winding_equations L A hSector
   obtain ⟨hrow, hcol⟩ := reconstructedEdgeSet_row_column_sum_invariant L A hSector.1
+  let H : ZMod L → ZMod 2 := fun i => ∑ j : ZMod L,
+    if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let V : ZMod L → ZMod 2 := fun j => ∑ i : ZMod L,
+    if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0
   constructor
-  · -- 横向き辺の行和。出発点は行 -1、帰納法の一歩は行和の不変性である
-    have haux : ∀ n : ℕ,
-        (∑ j : ZMod L,
-          (if edgeOfRow L false (-1 + (n : ZMod L)) j ∈ reconstructedEdgeSet L A
-            then 1 else 0) : ZMod 2) = 0 := by
+  · change ∀ i : ZMod L, H i = 0
+    have haux : ∀ n : ℕ, H (-1 + (n : ZMod L)) = 0 := by
       intro n
       induction n with
-      | zero => simpa using hwh
+      | zero =>
+        calc
+          H (-1 + ((0 : ℕ) : ZMod L)) = H (-1 + 0) := by rw [Nat.cast_zero]
+          _ = H (-1) := congrArg H (add_zero (-1 : ZMod L))
+          _ = 0 := hwh
       | succ k ih =>
-        have hstep := hrow (-1 + (k : ZMod L))
-        rw [show (-1 + ((k + 1 : ℕ) : ZMod L)) = (-1 + (k : ZMod L)) + 1 by
-          push_cast; ring]
-        rw [hstep, ih]
+        calc
+          H (-1 + ((k + 1 : ℕ) : ZMod L)) =
+              H (-1 + ((k : ZMod L) + ((1 : ℕ) : ZMod L))) := by rw [Nat.cast_add]
+          _ = H (-1 + ((k : ZMod L) + 1)) := by rw [Nat.cast_one]
+          _ = H ((-1 + (k : ZMod L)) + 1) :=
+            congrArg H (add_assoc (-1 : ZMod L) (k : ZMod L) 1).symm
+          _ = H (-1 + (k : ZMod L)) := hrow (-1 + (k : ZMod L))
+          _ = 0 := ih
     intro i
-    have hrepr : i = -1 + (((i + 1).val : ℕ) : ZMod L) := by
-      rw [ZMod.natCast_rightInverse (i + 1)]
-      ring
-    rw [hrepr]
-    exact haux (i + 1).val
-  · -- 縦向き辺の列和。出発点は列 -1、帰納法の一歩は列和の不変性である
-    have haux : ∀ n : ℕ,
-        (∑ i : ZMod L,
-          (if edgeOfRow L true i (-1 + (n : ZMod L)) ∈ reconstructedEdgeSet L A
-            then 1 else 0) : ZMod 2) = 0 := by
+    calc
+      H i = H (0 + i) := congrArg H (zero_add i).symm
+      _ = H ((-1 + 1) + i) := by rw [neg_add_cancel]
+      _ = H (-1 + (1 + i)) := congrArg H (add_assoc (-1 : ZMod L) 1 i)
+      _ = H (-1 + (i + 1)) := congrArg H (congrArg (-1 + ·) (add_comm 1 i))
+      _ = H (-1 + (((i + 1).val : ℕ) : ZMod L)) :=
+        congrArg H (congrArg (-1 + ·) (ZMod.natCast_rightInverse (i + 1)).symm)
+      _ = 0 := haux (i + 1).val
+  · change ∀ j : ZMod L, V j = 0
+    have haux : ∀ n : ℕ, V (-1 + (n : ZMod L)) = 0 := by
       intro n
       induction n with
-      | zero => simpa using hwv
+      | zero =>
+        calc
+          V (-1 + ((0 : ℕ) : ZMod L)) = V (-1 + 0) := by rw [Nat.cast_zero]
+          _ = V (-1) := congrArg V (add_zero (-1 : ZMod L))
+          _ = 0 := hwv
       | succ k ih =>
-        have hstep := hcol (-1 + (k : ZMod L))
-        rw [show (-1 + ((k + 1 : ℕ) : ZMod L)) = (-1 + (k : ZMod L)) + 1 by
-          push_cast; ring]
-        rw [hstep, ih]
+        calc
+          V (-1 + ((k + 1 : ℕ) : ZMod L)) =
+              V (-1 + ((k : ZMod L) + ((1 : ℕ) : ZMod L))) := by rw [Nat.cast_add]
+          _ = V (-1 + ((k : ZMod L) + 1)) := by rw [Nat.cast_one]
+          _ = V ((-1 + (k : ZMod L)) + 1) :=
+            congrArg V (add_assoc (-1 : ZMod L) (k : ZMod L) 1).symm
+          _ = V (-1 + (k : ZMod L)) := hcol (-1 + (k : ZMod L))
+          _ = 0 := ih
     intro j
-    have hrepr : j = -1 + (((j + 1).val : ℕ) : ZMod L) := by
-      rw [ZMod.natCast_rightInverse (j + 1)]
-      ring
-    rw [hrepr]
-    exact haux (j + 1).val
+    calc
+      V j = V (0 + j) := congrArg V (zero_add j).symm
+      _ = V ((-1 + 1) + j) := by rw [neg_add_cancel]
+      _ = V (-1 + (1 + j)) := congrArg V (add_assoc (-1 : ZMod L) 1 j)
+      _ = V (-1 + (j + 1)) := congrArg V (congrArg (-1 + ·) (add_comm 1 j))
+      _ = V (-1 + (((j + 1).val : ℕ) : ZMod L)) :=
+        congrArg V (congrArg (-1 + ·) (ZMod.natCast_rightInverse (j + 1)).symm)
+      _ = 0 := haux (j + 1).val
 
 /-- 人手証明の「基点から縦向き、次に横向きへ進む道の偶奇」。
 各座標は `ZMod.val` が与える `0, …, L - 1` の代表を使う。 -/

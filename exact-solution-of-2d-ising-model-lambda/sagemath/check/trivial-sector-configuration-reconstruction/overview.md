@@ -76,6 +76,34 @@
 | `check_invariance_column_sum_regroup.sage` | 縦辺の列和：同じ有限和の二項をまとめる | PASS | 3,140 行・列 |
 | `check_invariance_column_sum_cancel_double.sage` | 縦辺の列和：標数二で同じ和の二項を消去する | PASS | 3,140 行・列 |
 | `check_invariance_column_sum_remove_zero.sage` | 縦辺の列和：零を除く | PASS | 3,140 行・列 |
+| `check_period_row_base_projection.sage` | 横辺の行和：基底で射影の零を代入 | PASS | 265 部分グラフ |
+| `check_period_row_base_zero.sage` | 横辺の行和：基底で座標の零を除く | PASS | 265 部分グラフ |
+| `check_period_row_base_initial.sage` | 横辺の行和：基準周期和の零を適用 | PASS | 265 部分グラフ |
+| `check_period_row_step_projection.sage` | 横辺の行和：帰納段階で射影の加法を展開 | PASS | 785 行・列 |
+| `check_period_row_step_one.sage` | 横辺の行和：一の射影を代入 | PASS | 785 行・列 |
+| `check_period_row_step_associate.sage` | 横辺の行和：座標の加法を結び直す | PASS | 785 行・列 |
+| `check_period_row_step_invariance.sage` | 横辺の行和：一歩の不変性を適用 | PASS | 785 行・列 |
+| `check_period_row_step_induction.sage` | 横辺の行和：帰納法の仮定を適用 | PASS | 785 行・列 |
+| `check_period_row_representative_zero.sage` | 横辺の行和：任意の座標へ零を加える | PASS | 785 行・列 |
+| `check_period_row_representative_inverse.sage` | 横辺の行和：座標の零を逆元との和に戻す | PASS | 785 行・列 |
+| `check_period_row_representative_associate.sage` | 横辺の行和：任意座標の加法を結び直す | PASS | 785 行・列 |
+| `check_period_row_representative_commute.sage` | 横辺の行和：一と任意座標を交換 | PASS | 785 行・列 |
+| `check_period_row_representative_section.sage` | 横辺の行和：代表の射影へ置き換える | PASS | 785 行・列 |
+| `check_period_row_representative_induction.sage` | 横辺の行和：非負代表へ帰納法の結論を適用 | PASS | 785 行・列 |
+| `check_period_column_base_projection.sage` | 縦辺の列和：基底で射影の零を代入 | PASS | 265 部分グラフ |
+| `check_period_column_base_zero.sage` | 縦辺の列和：基底で座標の零を除く | PASS | 265 部分グラフ |
+| `check_period_column_base_initial.sage` | 縦辺の列和：基準周期和の零を適用 | PASS | 265 部分グラフ |
+| `check_period_column_step_projection.sage` | 縦辺の列和：帰納段階で射影の加法を展開 | PASS | 785 行・列 |
+| `check_period_column_step_one.sage` | 縦辺の列和：一の射影を代入 | PASS | 785 行・列 |
+| `check_period_column_step_associate.sage` | 縦辺の列和：座標の加法を結び直す | PASS | 785 行・列 |
+| `check_period_column_step_invariance.sage` | 縦辺の列和：一歩の不変性を適用 | PASS | 785 行・列 |
+| `check_period_column_step_induction.sage` | 縦辺の列和：帰納法の仮定を適用 | PASS | 785 行・列 |
+| `check_period_column_representative_zero.sage` | 縦辺の列和：任意の座標へ零を加える | PASS | 785 行・列 |
+| `check_period_column_representative_inverse.sage` | 縦辺の列和：座標の零を逆元との和に戻す | PASS | 785 行・列 |
+| `check_period_column_representative_associate.sage` | 縦辺の列和：任意座標の加法を結び直す | PASS | 785 行・列 |
+| `check_period_column_representative_commute.sage` | 縦辺の列和：一と任意座標を交換 | PASS | 785 行・列 |
+| `check_period_column_representative_section.sage` | 縦辺の列和：代表の射影へ置き換える | PASS | 785 行・列 |
+| `check_period_column_representative_induction.sage` | 縦辺の列和：非負代表へ帰納法の結論を適用 | PASS | 785 行・列 |
 | `check_horizontal_indicator_projection.sage` | 横辺の自然数指示関数を π₂ で写す | PASS | 2,337 頂点 |
 | `check_vertical_indicator_projection.sage` | 縦辺の自然数指示関数を π₂ で写す | PASS | 2,337 頂点 |
 | `check_parity_representative.sage` | 自然数代表 s₂ の帰属と π₂(s₂(a))=a | PASS | 二元の全件 |
@@ -136,4 +164,13 @@ micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "impor
 $L=1,2,3$ の偶部分グラフをそれぞれ4、32、1,024個すべて検査した。
 各局所等号は全9,348頂点、各行和・列和の等号は全3,140行・列で検査し、
 追加分の全209,156等式が一致した。既存検算も含む84本（統合1本・行別83本）すべて通過した。
-全行・全列の周期和が零であること以降の本文レビュー、および存在構成全体の Lean 必要十分版は残っている。
+
+2026-10-04 全行・全列の周期和零の追加検算: 基底3等号・帰納段階5等号・任意代表への
+適用6等号を各向きについて追加し、行別28本・全18,860等式が通過した。
+$L=1,2,3$ の自明セクターの265部分グラフを対象とし、基底は各265件、
+帰納段階と任意代表は各785件を検査した。帰納変数の有限検算は $0,\ldots,L-1$ に限り、
+全自然数への帰納法は Lean 具体版と必要十分版で証明する。
+既存も含む112本（統合1本・行別111本）を再実行し、すべて通過した。
+本文と具体版は28等号が一対一で対応し、必要十分版は出発点・一歩・全点を覆う歩みだけを残す。
+導出版で歩みと代表を実際の剰余類へ戻した。道和差と周期境界以降の本文レビュー、
+および存在構成全体の Lean 必要十分版は残っている。

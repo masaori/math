@@ -29768,6 +29768,9 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_face_equation",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_winding_equations",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_row_column_sum_invariant",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero",
+                        "Ising2DLambda.NecSuf.FisherZero.constant_on_walk_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionSpin_val_eq_neg_one_pow_val",
                         "Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf",
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf",
@@ -29989,20 +29992,100 @@ b_{\mathrm v}(i,j+\bar1)
 &=\sum_i b_{\mathrm v}(i,j)
 &&\bigl(\because\ \text{零の加法}\bigr).
 \end{aligned}`),
-                        paragraph(["である。したがって任意の行と列について"]),
+                        paragraph([
+                          "である。これらの不変性と基準の二周期和から、すべての行・列の和が零であることを示す。",
+                          "自然数は整数の部分集合とみなし、まず任意の ", math(String.raw`n\in\mathbb N`),
+                          " に対して、座標が ", math(String.raw`\pi(-1)+\pi(n)`), " の行・列の和が零になることを帰納法で示す。",
+                        ]),
+                        paragraph(["横向き辺の行和について、", math(String.raw`n=0`), " のときは"]),
                         displayMath(String.raw`\begin{aligned}
-\sum_j b_{\mathrm h}(i,j)
-&=\sum_j b_{\mathrm h}(\pi(-1),j)
-&&\bigl(\because\ \text{行和の不変性を巡回的に繰り返す}\bigr)\\
+\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1)+\pi(0),j)
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1)+0,j)
+&&\bigl(\because\ \pi(0)=0,\ \blkref{def_residue_maps}\bigr)\\
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1),j)
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の零元の性質}\bigr)\\
 &=0
-&&\bigl(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map}\bigr),\\
-\sum_i b_{\mathrm v}(i,j)
-&=\sum_i b_{\mathrm v}(i,\pi(-1))
-&&\bigl(\because\ \text{列和の不変性を巡回的に繰り返す}\bigr)\\
-&=0
-&&\bigl(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map}\bigr)
-\quad\text{in }\mathbb Z/2\mathbb Z.
+&&\bigl(\because\ \text{先に示した基準行の周期和}\bigr)\quad\text{in }\mathbb Z/2\mathbb Z.
 \end{aligned}`),
+                        paragraph(["次に ", math(String.raw`k\in\mathbb N`), " でこの和が零であると仮定すると、"]),
+                        displayMath(String.raw`\begin{aligned}
+\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1)+\pi(k+1),j)
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1)+(\pi(k)+\pi(1)),j)
+&&\bigl(\because\ \pi(k+1)=\pi(k)+\pi(1),\ \blkref{def_residue_maps}\bigr)\\
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1)+(\pi(k)+\bar1),j)
+&&\bigl(\because\ \pi(1)=\bar1,\ \blkref{def_residue_maps}\bigr)\\
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}((\pi(-1)+\pi(k))+\bar1,j)
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の加法の結合則}\bigr)\\
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1)+\pi(k),j)
+&&\bigl(\because\ \text{直前に示した行和の不変性}\bigr)\\
+&=0
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\quad\text{in }\mathbb Z/2\mathbb Z.
+\end{aligned}`),
+                        paragraph([
+                          "よってすべての自然数でこの和は零である。任意の ", math(String.raw`i\in\mathbb Z/L\mathbb Z`),
+                          " について、", math(String.raw`s(i+\bar1)\in\{0,\ldots,L-1\}\subseteq\mathbb N`),
+                          " は ", ref("def_residue_maps"), " の代表なので、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(i,j)
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(0+i,j)
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の零元の性質}\bigr)\\
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}((\pi(-1)+\bar1)+i,j)
+&&\bigl(\because\ \pi(-1)+\bar1=0,\ \blkref{def_residue_maps}\bigr)\\
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1)+(\bar1+i),j)
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の加法の結合則}\bigr)\\
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1)+(i+\bar1),j)
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の加法の可換則}\bigr)\\
+&=\sum_{j\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(\pi(-1)+\pi(s(i+\bar1)),j)
+&&\bigl(\because\ \pi(s(i+\bar1))=i+\bar1,\ \blkref{def_residue_maps}\bigr)\\
+&=0
+&&\bigl(\because\ \text{上の帰納法の結論を }n=s(i+\bar1)\text{ に適用}\bigr)\quad\text{in }\mathbb Z/2\mathbb Z.
+\end{aligned}`),
+                        paragraph(["縦向き辺の列和について、", math(String.raw`n=0`), " のときは"]),
+                        displayMath(String.raw`\begin{aligned}
+\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1)+\pi(0))
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1)+0)
+&&\bigl(\because\ \pi(0)=0,\ \blkref{def_residue_maps}\bigr)\\
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1))
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の零元の性質}\bigr)\\
+&=0
+&&\bigl(\because\ \text{先に示した基準列の周期和}\bigr)\quad\text{in }\mathbb Z/2\mathbb Z.
+\end{aligned}`),
+                        paragraph(["次に ", math(String.raw`k\in\mathbb N`), " でこの和が零であると仮定すると、"]),
+                        displayMath(String.raw`\begin{aligned}
+\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1)+\pi(k+1))
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1)+(\pi(k)+\pi(1)))
+&&\bigl(\because\ \pi(k+1)=\pi(k)+\pi(1),\ \blkref{def_residue_maps}\bigr)\\
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1)+(\pi(k)+\bar1))
+&&\bigl(\because\ \pi(1)=\bar1,\ \blkref{def_residue_maps}\bigr)\\
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,(\pi(-1)+\pi(k))+\bar1)
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の加法の結合則}\bigr)\\
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1)+\pi(k))
+&&\bigl(\because\ \text{直前に示した列和の不変性}\bigr)\\
+&=0
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\quad\text{in }\mathbb Z/2\mathbb Z.
+\end{aligned}`),
+                        paragraph([
+                          "よってすべての自然数でこの和は零である。任意の ", math(String.raw`j\in\mathbb Z/L\mathbb Z`),
+                          " について、", math(String.raw`s(j+\bar1)\in\{0,\ldots,L-1\}\subseteq\mathbb N`),
+                          " は ", ref("def_residue_maps"), " の代表なので、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,j)
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,0+j)
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の零元の性質}\bigr)\\
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,(\pi(-1)+\bar1)+j)
+&&\bigl(\because\ \pi(-1)+\bar1=0,\ \blkref{def_residue_maps}\bigr)\\
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1)+(\bar1+j))
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の加法の結合則}\bigr)\\
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1)+(j+\bar1))
+&&\bigl(\because\ \mathbb Z/L\mathbb Z\text{ の加法の可換則}\bigr)\\
+&=\sum_{i\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(i,\pi(-1)+\pi(s(j+\bar1)))
+&&\bigl(\because\ \pi(s(j+\bar1))=j+\bar1,\ \blkref{def_residue_maps}\bigr)\\
+&=0
+&&\bigl(\because\ \text{上の帰納法の結論を }n=s(j+\bar1)\text{ に適用}\bigr)\quad\text{in }\mathbb Z/2\mathbb Z.
+\end{aligned}`),
+                        paragraph(["以上で任意の行・列の周期和が零であることが示された。"]),
                         paragraph([
                           ref("def_residue_maps"), " の代表を用いる。空和を零元とし、頂点 ",
                           math(String.raw`(i,j)\in V_L`), " に対して基点から縦向き、次に横向きへ進む道の偶奇を",

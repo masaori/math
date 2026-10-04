@@ -52,6 +52,8 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.NecSuf.FisherZero.constant_on_walk_necSuf
+  Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf
   Ising2DLambda.KacWard.polynomialDiagonalGauge
   Ising2DLambda.KacWard.polynomialDiagonalGaugeInverse
   Ising2DLambda.KacWard.polynomialDiagonalGauge_const_sum

@@ -272,3 +272,48 @@ def _rc_check_invariance(section, left, right, label):
             checked += 1
     assert checked > 0
     print('RESULT: PASS (%s: %d 等式、1060 偶部分グラフ)' % (label, checked))
+
+
+def _rc_period_rows(case, direction):
+    L = case['L']
+    coordinates = Integers(L)
+    minus_one, one, zero = coordinates(-1), coordinates(1), coordinates.zero()
+    parity_zero = _rc_ring.zero()
+    if direction == 'row':
+        period = lambda x: sum((case['bh'][ZZ(x), j] for j in range(L)), parity_zero)
+    else:
+        period = lambda x: sum((case['bv'][i, ZZ(x)] for i in range(L)), parity_zero)
+    base = [(period(minus_one + coordinates(NN(0))), period(minus_one + zero),
+             period(minus_one), parity_zero)]
+    step, representatives = [], []
+    for k in range(L):
+        step.append((
+            period(minus_one + coordinates(k + 1)),
+            period(minus_one + (coordinates(k) + coordinates(NN(1)))),
+            period(minus_one + (coordinates(k) + one)),
+            period((minus_one + coordinates(k)) + one),
+            period(minus_one + coordinates(k)), parity_zero))
+    for value in range(L):
+        x = coordinates(value)
+        representative = NN(ZZ(x + one))
+        assert 0 <= representative < L
+        representatives.append((
+            period(x), period(zero + x), period((minus_one + one) + x),
+            period(minus_one + (one + x)), period(minus_one + (x + one)),
+            period(minus_one + coordinates(representative)), parity_zero))
+    return {'base': base, 'step': step, 'representative': representatives}
+
+
+def _rc_check_period(direction, phase, left, right, label):
+    global _rc_period
+    if '_rc_period' not in globals():
+        assert [sum(case['L'] == L for case in _rc_cases) for L in (1, 2, 3)] == [1, 8, 256]
+        _rc_period = [{direction: _rc_period_rows(case, direction)
+                       for direction in ('row', 'column')} for case in _rc_cases]
+    checked = 0
+    for case, rows in zip(_rc_cases, _rc_period):
+        for row in rows[direction][phase]:
+            assert row[left] == row[right], (label, case['L'], case['A'], row)
+            checked += 1
+    assert checked == (265 if phase == 'base' else 785)
+    print('RESULT: PASS (%s: %d 等式、265 自明セクター部分グラフ)' % (label, checked))
