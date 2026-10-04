@@ -3,8 +3,9 @@
 
 import os
 from itertools import combinations
+from pathlib import Path
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+_dir = str(Path('sagemath/check/torus-homology-sector-partition').resolve())
 load(os.path.join(_dir, '../../_shared/defs.sage'))
 
 
@@ -50,5 +51,15 @@ for L in (1, 2, 3):
     assert all(sectors[key] for key in sectors)
     print("L=%d: 偶部分グラフ %d 個を四セクターへ一意に分割" %
           (L, len(even_subsets)))
+
+for row_file in (
+        'check_winding_values.sage',
+        'check_witness_membership.sage',
+        'check_other_horizontal.sage',
+        'check_witness_horizontal.sage',
+        'check_other_vertical.sage',
+        'check_witness_vertical.sage',
+        'check_pair_unique.sage'):
+    load(os.path.join(_dir, row_file))
 
 print("RESULT: PASS")
