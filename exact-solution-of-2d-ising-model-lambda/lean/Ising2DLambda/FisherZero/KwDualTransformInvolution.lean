@@ -28,7 +28,20 @@ theorem kwDualTransform_involution {xi : Qbar} (hDomain : 1 + xi ≠ 0) :
         rw [hInverse]
       _ = ((1 + xi) + (1 - xi)) * (1 + xi)⁻¹ := by
         rw [← add_mul]
-      _ = 2 * (1 + xi)⁻¹ := by ring
+      _ = ((1 + xi) + (1 + (-xi))) * (1 + xi)⁻¹ := by
+        rw [sub_eq_add_neg]
+      _ = (1 + (xi + (1 + (-xi)))) * (1 + xi)⁻¹ := by
+        rw [add_assoc 1 xi (1 + (-xi))]
+      _ = (1 + ((xi + 1) + (-xi))) * (1 + xi)⁻¹ := by
+        rw [← add_assoc xi 1 (-xi)]
+      _ = (1 + ((1 + xi) + (-xi))) * (1 + xi)⁻¹ := by
+        rw [add_comm xi 1]
+      _ = (1 + (1 + (xi + (-xi)))) * (1 + xi)⁻¹ := by
+        rw [add_assoc 1 xi (-xi)]
+      _ = (1 + (1 + 0)) * (1 + xi)⁻¹ := by
+        rw [add_neg_cancel]
+      _ = (1 + 1) * (1 + xi)⁻¹ := by rw [add_zero]
+      _ = 2 * (1 + xi)⁻¹ := by rw [one_add_one_eq_two]
   have hOneMinus :
       1 - kwDualTransform xi = 2 * xi * (1 + xi)⁻¹ := by
     calc
@@ -37,8 +50,28 @@ theorem kwDualTransform_involution {xi : Qbar} (hDomain : 1 + xi ≠ 0) :
       _ = (1 + xi) * (1 + xi)⁻¹ - (1 - xi) * (1 + xi)⁻¹ := by
         rw [hInverse]
       _ = ((1 + xi) - (1 - xi)) * (1 + xi)⁻¹ := by
-        ring
-      _ = 2 * xi * (1 + xi)⁻¹ := by ring
+        rw [← sub_mul]
+      _ = ((1 + xi) + (-(1 - xi))) * (1 + xi)⁻¹ := by
+        rw [sub_eq_add_neg (1 + xi) (1 - xi)]
+      _ = ((1 + xi) + (xi - 1)) * (1 + xi)⁻¹ := by rw [neg_sub]
+      _ = ((1 + xi) + (xi + (-1))) * (1 + xi)⁻¹ := by
+        rw [sub_eq_add_neg xi 1]
+      _ = (((1 + xi) + xi) + (-1)) * (1 + xi)⁻¹ := by
+        rw [← add_assoc (1 + xi) xi (-1)]
+      _ = ((1 + (xi + xi)) + (-1)) * (1 + xi)⁻¹ := by
+        rw [add_assoc 1 xi xi]
+      _ = (((xi + xi) + 1) + (-1)) * (1 + xi)⁻¹ := by
+        rw [add_comm 1 (xi + xi)]
+      _ = ((xi + xi) + (1 + (-1))) * (1 + xi)⁻¹ := by
+        rw [add_assoc (xi + xi) 1 (-1)]
+      _ = ((xi + xi) + 0) * (1 + xi)⁻¹ := by rw [add_neg_cancel]
+      _ = (xi + xi) * (1 + xi)⁻¹ := by rw [add_zero]
+      _ = (1 * xi + xi) * (1 + xi)⁻¹ :=
+        congrArg (fun t : Qbar => (t + xi) * (1 + xi)⁻¹) (one_mul xi).symm
+      _ = (1 * xi + 1 * xi) * (1 + xi)⁻¹ :=
+        congrArg (fun t : Qbar => (1 * xi + t) * (1 + xi)⁻¹) (one_mul xi).symm
+      _ = ((1 + 1) * xi) * (1 + xi)⁻¹ := by rw [← add_mul]
+      _ = 2 * xi * (1 + xi)⁻¹ := by rw [one_add_one_eq_two]
   have hDoubleProduct :
       kwDualTransform (kwDualTransform xi) * (1 + kwDualTransform xi) =
         1 - kwDualTransform xi := by
@@ -59,7 +92,8 @@ theorem kwDualTransform_involution {xi : Qbar} (hDomain : 1 + xi ≠ 0) :
     calc
       xi * (1 + kwDualTransform xi)
           = xi * (2 * (1 + xi)⁻¹) := by rw [hOnePlus]
-      _ = 2 * xi * (1 + xi)⁻¹ := by ring
+      _ = (xi * 2) * (1 + xi)⁻¹ := by rw [← mul_assoc]
+      _ = (2 * xi) * (1 + xi)⁻¹ := by rw [mul_comm xi 2]
       _ = 1 - kwDualTransform xi := hOneMinus.symm
   have hDifference :
       (1 + kwDualTransform xi) * (kwDualTransform (kwDualTransform xi) - xi) = 0 := by
@@ -68,12 +102,22 @@ theorem kwDualTransform_involution {xi : Qbar} (hDomain : 1 + xi ≠ 0) :
           = (1 + kwDualTransform xi) * kwDualTransform (kwDualTransform xi) -
               (1 + kwDualTransform xi) * xi := by rw [mul_sub]
       _ = kwDualTransform (kwDualTransform xi) * (1 + kwDualTransform xi) -
-              xi * (1 + kwDualTransform xi) := by ring
-      _ = (1 - kwDualTransform xi) - (1 - kwDualTransform xi) := by
-        rw [hDoubleProduct, hXiProduct]
+              (1 + kwDualTransform xi) * xi := by
+        rw [mul_comm (1 + kwDualTransform xi) (kwDualTransform (kwDualTransform xi))]
+      _ = kwDualTransform (kwDualTransform xi) * (1 + kwDualTransform xi) -
+              xi * (1 + kwDualTransform xi) := by
+        rw [mul_comm (1 + kwDualTransform xi) xi]
+      _ = (1 - kwDualTransform xi) - xi * (1 + kwDualTransform xi) := by
+        rw [hDoubleProduct]
+      _ = (1 - kwDualTransform xi) - (1 - kwDualTransform xi) := by rw [hXiProduct]
       _ = 0 := sub_self _
   have hDifferenceZero : kwDualTransform (kwDualTransform xi) - xi = 0 :=
     AlgebraicEigenvalue.qbarNoZeroDivisors hKwDomain hDifference
-  exact sub_eq_zero.mp hDifferenceZero
+  calc
+    kwDualTransform (kwDualTransform xi)
+        = (kwDualTransform (kwDualTransform xi) - xi) + xi :=
+      (sub_add_cancel _ _).symm
+    _ = 0 + xi := by rw [hDifferenceZero]
+    _ = xi := zero_add _
 
 end Ising2DLambda.FisherZero

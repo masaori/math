@@ -30403,9 +30403,23 @@ H_L
 &=(1+\xi)(1+\xi)^{-1}+(1-\xi)\cdot(1+\xi)^{-1}
 &&\bigl(\because\ \text{準備の等式}\ (1+\xi)(1+\xi)^{-1}=1\bigr)\\
 &=\bigl((1+\xi)+(1-\xi)\bigr)\cdot(1+\xi)^{-1}
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
-&=2\cdot(1+\xi)^{-1}
-&&\bigl(\because\ \xi+(-\xi)=0\ \text{と}\ 1+1=2\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配則}\bigr)\\
+&=\bigl((1+\xi)+(1+(-\xi))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{減法の定義}\bigr)\\
+&=\bigl(1+(\xi+(1+(-\xi)))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の結合則}\bigr)\\
+&=\bigl(1+((\xi+1)+(-\xi))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の結合則}\bigr)\\
+&=\bigl(1+((1+\xi)+(-\xi))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の交換則}\bigr)\\
+&=\bigl(1+(1+(\xi+(-\xi)))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の結合則}\bigr)\\
+&=\bigl(1+(1+0)\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\xi+(-\xi)=0\bigr)\\
+&=\bigl(1+1\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の零元}\bigr)\\
+&=\bigl(2\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }2:=1+1\bigr)
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 1-\mathrm{KW}(\xi)
@@ -30414,9 +30428,33 @@ H_L
 &=(1+\xi)(1+\xi)^{-1}-(1-\xi)\cdot(1+\xi)^{-1}
 &&\bigl(\because\ \text{準備の等式}\ (1+\xi)(1+\xi)^{-1}=1\bigr)\\
 &=\bigl((1+\xi)-(1-\xi)\bigr)\cdot(1+\xi)^{-1}
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
-&=2\xi\cdot(1+\xi)^{-1}
-&&\bigl(\because\ 1+(-1)=0\ \text{と}\ \xi+\xi=2\xi\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配則}\bigr)\\
+&=\bigl((1+\xi)+(-(1-\xi))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{減法の定義}\bigr)\\
+&=\bigl((1+\xi)+(\xi-1)\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }-(1-\xi)=\xi-1\bigr)\\
+&=\bigl((1+\xi)+(\xi+(-1))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{減法の定義}\bigr)\\
+&=\bigl(((1+\xi)+\xi)+(-1)\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の結合則}\bigr)\\
+&=\bigl((1+(\xi+\xi))+(-1)\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の結合則}\bigr)\\
+&=\bigl(((\xi+\xi)+1)+(-1)\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の交換則}\bigr)\\
+&=\bigl((\xi+\xi)+(1+(-1))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の結合則}\bigr)\\
+&=\bigl((\xi+\xi)+0\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }1+(-1)=0\bigr)\\
+&=\bigl(\xi+\xi\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{加法の零元}\bigr)\\
+&=\bigl(1\cdot\xi+\xi\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }1\cdot\xi=\xi\text{ を第一項へ適用}\bigr)\\
+&=\bigl(1\cdot\xi+1\cdot\xi\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }1\cdot\xi=\xi\text{ を第二項へ適用}\bigr)\\
+&=\bigl((1+1)\cdot\xi\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }\text{分配則}\bigr)\\
+&=\bigl(2\xi\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則: }2:=1+1\bigr)
 \end{aligned}`),
                         paragraph([
                           "次に、",
@@ -30432,10 +30470,10 @@ H_L
 &=\Bigl(\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}\Bigr)\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
 &&\bigl(\because\ \blkref{def_kw_dual_transform}\ \text{を}\ \mathrm{KW}(\xi)\ \text{へ適用}\bigr)\\
 &=\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot\Bigl(\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)\Bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の結合則}\bigr)\\
 &=\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot\Bigl(\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}\Bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則}\bigr)\\
-&=\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot 1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換則}\bigr)\\
+&=\bigl(1-\mathrm{KW}(\xi)\bigr)\cdot1
 &&\bigl(\because\ \bigl(1+\mathrm{KW}(\xi)\bigr)\bigl(1+\mathrm{KW}(\xi)\bigr)^{-1}=1\bigr)\\
 &=1-\mathrm{KW}(\xi)
 &&\bigl(\because\ \text{単位元との積}\bigr)
@@ -30445,9 +30483,9 @@ H_L
 &=\xi\cdot\bigl(2\cdot(1+\xi)^{-1}\bigr)
 &&\bigl(\because\ 1+\mathrm{KW}(\xi)=2\cdot(1+\xi)^{-1}\bigr)\\
 &=(\xi\cdot2)\cdot(1+\xi)^{-1}
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の結合則}\bigr)\\
 &=(2\cdot\xi)\cdot(1+\xi)^{-1}
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を}\ \xi\cdot2\ \text{へ適用}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換則}\bigr)\\
 &=1-\mathrm{KW}(\xi)
 &&\bigl(\because\ 1-\mathrm{KW}(\xi)=2\xi\cdot(1+\xi)^{-1}\bigr)
 \end{aligned}`),
@@ -30457,13 +30495,17 @@ H_L
                           " を掛けた値を計算する。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\Bigl(\mathrm{KW}(\mathrm{KW}(\xi))-\xi\Bigr)
+\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\bigl(\mathrm{KW}(\mathrm{KW}(\xi))-\xi\bigr)
 &=\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\mathrm{KW}(\mathrm{KW}(\xi))-\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\xi
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配則}\bigr)\\
+&=\mathrm{KW}(\mathrm{KW}(\xi))\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)-\bigl(1+\mathrm{KW}(\xi)\bigr)\cdot\xi
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換則を第一の積へ適用}\bigr)\\
 &=\mathrm{KW}(\mathrm{KW}(\xi))\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)-\xi\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を 2 つの積へ適用}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換則を第二の積へ適用}\bigr)\\
+&=\bigl(1-\mathrm{KW}(\xi)\bigr)-\xi\cdot\bigl(1+\mathrm{KW}(\xi)\bigr)
+&&\bigl(\because\ \mathrm{KW}(\mathrm{KW}(\xi))\bigl(1+\mathrm{KW}(\xi)\bigr)=1-\mathrm{KW}(\xi)\bigr)\\
 &=\bigl(1-\mathrm{KW}(\xi)\bigr)-\bigl(1-\mathrm{KW}(\xi)\bigr)
-&&\bigl(\because\ \mathrm{KW}(\mathrm{KW}(\xi))\bigl(1+\mathrm{KW}(\xi)\bigr)=1-\mathrm{KW}(\xi)\ \text{と}\ \xi\bigl(1+\mathrm{KW}(\xi)\bigr)=1-\mathrm{KW}(\xi)\bigr)\\
+&&\bigl(\because\ \xi\bigl(1+\mathrm{KW}(\xi)\bigr)=1-\mathrm{KW}(\xi)\bigr)\\
 &=0
 &&\bigl(\because\ \text{加法の逆元}\bigr)
 \end{aligned}`),
@@ -30478,11 +30520,19 @@ H_L
                           math(String.raw`b=\mathrm{KW}(\mathrm{KW}(\xi))-\xi`),
                           " へ適用して ",
                           math(String.raw`\mathrm{KW}(\mathrm{KW}(\xi))-\xi=0`),
-                          " を得る。両辺に ",
-                          math(String.raw`\xi`),
-                          " を加えて ",
-                          math(String.raw`\mathrm{KW}(\mathrm{KW}(\xi))=\xi`),
-                          " である。全過程は体 ",
+                          " を得る。したがって、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{KW}(\mathrm{KW}(\xi))
+&=\bigl(\mathrm{KW}(\mathrm{KW}(\xi))-\xi\bigr)+\xi
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加減の打ち消し}\bigr)\\
+&=0+\xi
+&&\bigl(\because\ \mathrm{KW}(\mathrm{KW}(\xi))-\xi=0\bigr)\\
+&=\xi
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の零元}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "である。全過程は体 ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の加法・積・逆元の中で閉じ、実数体も複素数体も現れない。",
                         ]),
