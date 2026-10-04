@@ -1136,3 +1136,7 @@ import Ising2DLambda.KacWard.PeriodicLiftStepRepetitionFromNecSuf
 import Ising2DLambda.KacWard.OneSidedTransverseSteps
 import Ising2DLambda.NecSuf.KacWard.OneSidedTransverseSteps
 import Ising2DLambda.KacWard.OneSidedTransverseStepsFromNecSuf
+
+import Ising2DLambda.KacWard.OneSidedClosureJunctions
+import Ising2DLambda.NecSuf.KacWard.OneSidedClosureJunctions
+import Ising2DLambda.KacWard.OneSidedClosureJunctionsFromNecSuf

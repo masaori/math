@@ -67478,6 +67478,128 @@ x^{(c)}_i&=D^S_{b-(i+1)}-D^S_{b-i}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_one_sided_closure_junction_pairs",
+        labels: [],
+        title: { text: "一側閉包の接合方向の周期数不変性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_closure_junction_pairs",
+            focus: {
+              id: "kac_ward_claim_one_sided_closure_junction_pairs",
+              kind: "claim",
+              title: { text: "一側閉包の四接合の歩ベクトル対は周期数に依らない" },
+              labels: ["claim_one_sided_closure_junction_pairs"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedClosureJunctionPairs_normalize",
+                "Ising2DLambda.KacWard.oneSidedClosureJunctionPairs_eq_fixed",
+                "Ising2DLambda.NecSuf.KacWard.fourJunctionPairs_repetition_necSuf",
+                "Ising2DLambda.KacWard.oneSidedClosureJunctionPairs_eq_fixed_from_necSuf",
+              ],
+              verification: ["sagemath/check/one-sided-closure-junction-pairs"],
+              statement: [
+                paragraph([
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）の入力 ",
+                  math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m),k_0,t`), " を固定し、周期数 ", math(String.raw`c\ge1`),
+                  " を変える。", math(String.raw`n:=n_{\parallel},b:=t\,n_{\perp}`),
+                  " と置く。", math(String.raw`m,n,b\in\mathbb N_{>0}`), " である。四部分それぞれの歩ベクトル列を ",
+                  math(String.raw`A_c,V_c,R_c,X_c`), " と呼び、その長さを順に ",
+                  math(String.raw`cm,b,cn,b`), " とする。添字は零から取り、各値は ",
+                  math(String.raw`\mathbb Z^2`), " に属する。四部分表示（",
+                  ref("claim_one_sided_closure_step_sequence"), "）による四接合の順序付き対の列を",
+                ]),
+                displayMath(String.raw`J_c:=\bigl(
+  (A_c(cm-1),V_c(0)),\ (V_c(b-1),R_c(0)),\
+  (R_c(cn-1),X_c(0)),\ (X_c(b-1),A_c(0))
+\bigr)`),
+                paragraph([
+                  "と定める。最後の対は閉包を閉じる接合である。原点 ", math(String.raw`0\in\mathbb Z^2`),
+                  " を基点とする反復横断階段を ", math(String.raw`D^0_i:=D^{\gamma,0,t}_i`),
+                  "（", ref("def_iterated_transverse_staircase"), "）と書き、固定列を",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+u(j)&:=\widetilde P_{k_0+j+1}(\gamma)-\widetilde P_{k_0+j}(\gamma)
+&& (0\le j<m),\\
+r(s)&:=-(G^{\gamma}_{s+1}-G^{\gamma}_s)
+&& (0\le s<n),\\
+v(i)&:=D^0_{i+1}-D^0_i
+&& (0\le i<b),\\
+x(i)&:=D^0_{b-i-1}-D^0_{b-i}
+&& (0\le i<b)
+\end{aligned}`),
+                paragraph(["で定める。各添字は自然数であり、各値は ", math(String.raw`\mathbb Z^2`), " に属する。このとき"]),
+                displayMath(String.raw`J_c=\bigl(
+  (u(m-1),v(0)),\ (v(b-1),r(0)),\
+  (r(n-1),x(0)),\ (x(b-1),u(0))
+\bigr)`),
+                paragraph(["が成り立つ。右辺は周期数 ", math(String.raw`c`), " を含まない。"]),
+              ],
+              proof: [
+                paragraph([
+                  "準備として各部分の歩を固定列へ移す。任意の自然数添字 ",
+                  math(String.raw`0\le j<cm`), "、", math(String.raw`0\le s<cn`),
+                  "、", math(String.raw`0\le i<b`), " について、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+A_c(j)&=u(j\bmod m)
+&&\bigl(\because\ \blkref{claim_one_sided_periodic_lift_repetition}\bigr),\\
+V_c(i)&=v(i)
+&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr),\\
+R_c(s)&=r(s\bmod n)
+&&\bigl(\because\ \blkref{claim_one_sided_parallel_return_repetition}\bigr),\\
+X_c(i)&=x(i)
+&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "反復列の末項の添字を確定する。任意の ", math(String.raw`h\in\mathbb N_{>0}`),
+                  " に対し、", math(String.raw`c\ge1`), " なので",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+(ch-1)\bmod h
+&=((c-1)h+(h-1))\bmod h
+&&\bigl(\because\ \mathbb Z\text{ の四則と }c,h\ge1\bigr)\\
+&=(h-1)\bmod h
+&&\bigl(\because\ \text{整数倍の加算は余りを変えない}\bigr)\\
+&=h-1
+&&\bigl(\because\ 0\le h-1<h\bigr).
+\end{aligned}`),
+                paragraph([
+                  "これを ", math(String.raw`h=m,n`), " に適用し、先頭については ",
+                  math(String.raw`0\bmod h=0`), " を使う。求める対の列は、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+J_c
+&=\Bigl(
+  (u((cm-1)\bmod m),v(0)),\ (v(b-1),r(0\bmod n)),\\[-2pt]
+&\hspace{15mm}(r((cn-1)\bmod n),x(0)),\ (x(b-1),u(0\bmod m))
+\Bigr)
+&&\bigl(\because\ \text{四部分の歩について上で示した四等式}\bigr)\\
+&=\Bigl(
+  (u(m-1),v(0)),\ (v(b-1),r(0\bmod n)),\\[-2pt]
+&\hspace{15mm}(r(n-1),x(0)),\ (x(b-1),u(0\bmod m))
+\Bigr)
+&&\bigl(\because\ \text{上で示した末項の余りの等式}\bigr)\\
+&=\Bigl(
+  (u(m-1),v(0)),\ (v(b-1),r(0)),\\[-2pt]
+&\hspace{15mm}(r(n-1),x(0)),\ (x(b-1),u(0))
+\Bigr)
+&&\bigl(\because\ 0\bmod m=0,\ 0\bmod n=0\bigr).
+\end{aligned}`),
+                paragraph([
+                  "比較したのは歩ベクトルの順序付き対であり、基点が異なる射影辺を同じ辺として扱っていない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -67550,7 +67672,8 @@ x^{(c)}_i&=D^S_{b-(i+1)}-D^S_{b-i}
                   " と同じ方向列が一組増える。平行移動で変わる頂点の位置は、この方向列の比較に含めない。",
                   "二つの反復横断階段の歩ベクトル列が変わらないことは ",
                   ref("claim_one_sided_transverse_steps_base_independent"), " による。",
-                  "四部分の接合部の先頭・末尾方向も変わらない。",
+                  "四部分の接合部の先頭・末尾方向が変わらないことは ",
+                  ref("claim_one_sided_closure_junction_pairs"), " による。",
                   "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
                   ref("claim_four_part_adjacent_sum"), " で与えた。各反復部分の内部和の増分へ ",
                   ref("claim_repeated_adjacent_sum_difference"), " を適用し、共通の接合項を消すと、",
