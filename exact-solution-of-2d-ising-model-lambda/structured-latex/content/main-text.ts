@@ -67265,6 +67265,105 @@ P^{\mathrm{ret},c}_{i+1}-P^{\mathrm{ret},c}_i
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_one_sided_periodic_lift_repetition",
+        labels: [],
+        title: { text: "一側閉包の周期持ち上げ部分の反復" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_periodic_lift_repetition",
+            focus: {
+              id: "kac_ward_claim_one_sided_periodic_lift_repetition",
+              kind: "claim",
+              title: { text: "一側閉包の周期持ち上げ部分の歩ベクトル列は一周期の反復である" },
+              labels: ["claim_one_sided_periodic_lift_repetition"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.periodicPlaneLift_step_remainder",
+                "Ising2DLambda.NecSuf.KacWard.integerPeriodicLift_step_remainder_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_step_remainder_from_necSuf",
+              ],
+              verification: ["sagemath/check/one-sided-periodic-lift-repetition"],
+              statement: [
+                paragraph([
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）の記号を使う。閉歩道の長さを ",
+                  math(String.raw`m\in\mathbb N`), "、", math(String.raw`m\ge1`),
+                  "、基点添字を ", math(String.raw`k_0\in\mathbb Z`),
+                  "、周期数を ", math(String.raw`c\in\mathbb N`), "、", math(String.raw`c\ge1`),
+                  " とする。周期持ち上げ（", ref("def_periodic_plane_lift"), "）から一周期の歩を",
+                ]),
+                displayMath(String.raw`u_s:=\widetilde P_{k_0+s+1}(\gamma)-\widetilde P_{k_0+s}(\gamma)\in\mathbb Z^2
+\qquad(s\in\{0,\ldots,m-1\})`),
+                paragraph(["と定める。このとき任意の ", math(String.raw`i\in\{0,\ldots,cm-1\}`), " について"]),
+                displayMath(String.raw`\widetilde P_{k_0+i+1}(\gamma)-\widetilde P_{k_0+i}(\gamma)=u_{i\bmod m}`),
+                paragraph([
+                  "が成り立つ。従って第一部分の歩ベクトル列は ", math(String.raw`(u_0,\ldots,u_{m-1})`),
+                  " を同じ順序で ", math(String.raw`c`), " 回連結した列である。",
+                  "整数ベクトルを比較しており、平行移動した辺そのものを同一視しない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "この証明中だけ ", math(String.raw`\widetilde P_k:=\widetilde P_k(\gamma)`),
+                  "、", math(String.raw`P_r:=P_r(\gamma)`), "、",
+                  math(String.raw`B:=B_\gamma=(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma))\in\mathbb Z^2`),
+                  " と略記する。まず任意の ", math(String.raw`j,a\in\mathbb Z`),
+                  " について、整数除法の商を ", math(String.raw`q:=\lfloor j/m\rfloor\in\mathbb Z`),
+                  "、余りを ", math(String.raw`r:=j\bmod m\in\{0,\ldots,m-1\}`), " とすると、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+j+am&=(qm+r)+am&&\bigl(\because\ j=qm+r\text{（整数除法）}\bigr)\\
+&=(q+a)m+r&&\bigl(\because\ \mathbb Z\text{ の環の法則}\bigr),\\
+\lfloor(j+am)/m\rfloor&=q+a&&\bigl(\because\ 0\le r<m\text{ と整数除法の一意性}\bigr),\\
+(j+am)\bmod m&=r&&\bigl(\because\ 0\le r<m\text{ と整数除法の一意性}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\widetilde P_{j+am}
+&=P_r+(q+a)B&&\bigl(\because\ \blkref{def_periodic_plane_lift}\text{ と直前の商・余り}\bigr)\\
+&=P_r+(qB+aB)&&\bigl(\because\ \mathbb Z^2\text{ の整数倍の分配則}\bigr)\\
+&=(P_r+qB)+aB&&\bigl(\because\ \mathbb Z^2\text{ の加法の結合則}\bigr)\\
+&=\widetilde P_j+aB&&\bigl(\because\ \blkref{def_periodic_plane_lift}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "次に ", math(String.raw`a:=\lfloor i/m\rfloor\in\mathbb N`),
+                  "、", math(String.raw`b:=i\bmod m\in\{0,\ldots,m-1\}`), " と置く。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+i&=am+b&&\bigl(\because\ \text{整数除法}\bigr),\\
+k_0+i+1&=k_0+(am+b)+1&&\bigl(\because\ i=am+b\bigr)\\
+&=(k_0+b+1)+am&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則}\bigr),\\
+k_0+i&=k_0+(am+b)&&\bigl(\because\ i=am+b\bigr)\\
+&=(k_0+b)+am&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\widetilde P_{k_0+i+1}-\widetilde P_{k_0+i}
+&=\widetilde P_{(k_0+b+1)+am}-\widetilde P_{(k_0+b)+am}
+&&\bigl(\because\ \text{直前の二つの添字の等式}\bigr)\\
+&=(\widetilde P_{k_0+b+1}+aB)-(\widetilde P_{k_0+b}+aB)
+&&\bigl(\because\ \text{上で示した }\widetilde P_{j+am}=\widetilde P_j+aB\bigr)\\
+&=\widetilde P_{k_0+b+1}-\widetilde P_{k_0+b}
+&&\bigl(\because\ \mathbb Z^2\text{ の共通の加数を消去}\bigr)\\
+&=u_b&&\bigl(\because\ u_b\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "整数除法の一意性により、", math(String.raw`0\le a<c`), "、",
+                  math(String.raw`0\le b<m`), " をこの順に動かした添字 ", math(String.raw`am+b`),
+                  " は ", math(String.raw`0,\ldots,cm-1`), " を一度ずつ尽くす。これが ",
+                  math(String.raw`c`), " 回の反復を与える。計算は任意の整数 ",
+                  math(String.raw`k_0`), " に有効であり、負の基点、周期をまたぐ歩、",
+                  math(String.raw`m=1`), " の場合も含む。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -67304,8 +67403,9 @@ P^{\mathrm{ret},c}_{i+1}-P^{\mathrm{ret},c}_i
                 paragraph([
                   "周期延長した持ち上げの一周期分の射影辺列を ",
                   math(String.raw`U=(\vec u_1,\ldots,\vec u_m)`), " と書く。周期延長の定義（",
-                  ref("def_periodic_plane_lift"), "）により、周期持ち上げ部分の射影は ",
-                  math(String.raw`U`), " を ", math(String.raw`c`), " 回連結した列である。",
+                  ref("def_periodic_plane_lift"), "）と歩ベクトル列の反復（",
+                  ref("claim_one_sided_periodic_lift_repetition"), "）により、周期持ち上げ部分の歩ベクトル列は ",
+                  math(String.raw`U`), " の歩ベクトル列を ", math(String.raw`c`), " 回連結した列である。",
                   math(String.raw`U`), " は ", math(String.raw`\gamma`),
                   " の始点を ", math(String.raw`k_0`), " だけ巡回移動した列である。",
                   "添字を零から取り、", math(String.raw`I_m=\{0,\ldots,m-1\}`), " 上の整数の表 ",

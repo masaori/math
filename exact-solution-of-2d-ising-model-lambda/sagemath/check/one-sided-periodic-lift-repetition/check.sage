@@ -1,0 +1,22 @@
+# 対象ラベル: claim_one_sided_periodic_lift_repetition
+import os
+import sys
+check_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+load(os.path.join(check_directory, 'check_translation_substitute.sage'))
+load(os.path.join(check_directory, 'check_translation_regroup.sage'))
+load(os.path.join(check_directory, 'check_translation_quotient.sage'))
+load(os.path.join(check_directory, 'check_translation_remainder.sage'))
+load(os.path.join(check_directory, 'check_translation_expand.sage'))
+load(os.path.join(check_directory, 'check_translation_distribute.sage'))
+load(os.path.join(check_directory, 'check_translation_reassociate.sage'))
+load(os.path.join(check_directory, 'check_translation_fold.sage'))
+load(os.path.join(check_directory, 'check_step_division.sage'))
+load(os.path.join(check_directory, 'check_step_upper_substitute.sage'))
+load(os.path.join(check_directory, 'check_step_upper_reassociate.sage'))
+load(os.path.join(check_directory, 'check_step_lower_substitute.sage'))
+load(os.path.join(check_directory, 'check_step_lower_reassociate.sage'))
+load(os.path.join(check_directory, 'check_step_substitute.sage'))
+load(os.path.join(check_directory, 'check_step_translate.sage'))
+load(os.path.join(check_directory, 'check_step_cancel.sage'))
+load(os.path.join(check_directory, 'check_step_word.sage'))
+load(os.path.join(check_directory, 'check_repetition.sage'))
