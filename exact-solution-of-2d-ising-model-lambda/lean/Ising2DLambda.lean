@@ -1160,3 +1160,7 @@ import Ising2DLambda.IntegerMatrix.Basic
 import Ising2DLambda.KacWard.ReversalMatrix
 import Ising2DLambda.NecSuf.KacWard.ReversalMatrix
 import Ising2DLambda.KacWard.ReversalMatrixFromNecSuf
+import Ising2DLambda.IntegerMatrix.Determinant
+import Ising2DLambda.KacWard.ReversalMatrixDeterminant
+import Ising2DLambda.NecSuf.KacWard.ReversalMatrixDeterminant
+import Ising2DLambda.KacWard.ReversalMatrixDeterminantFromNecSuf

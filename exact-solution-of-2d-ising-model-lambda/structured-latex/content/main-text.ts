@@ -2839,6 +2839,41 @@ z^{n}
               ],
             },
           },
+        }, {
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_integer_matrix_determinant",
+            focus: {
+              id: "integer_matrix_determinant_definition",
+              kind: "definition",
+              title: { text: "整数行列の行列式" },
+              labels: ["def_integer_matrix_determinant"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.IntegerMatrix.determinant",
+                "Ising2DLambda.IntegerMatrix.determinant_eq_signedPermutationSum",
+                "Ising2DLambda.IntegerMatrix.inversionSign_eq_mathlibSign",
+              ],
+              verification: ["sagemath/check/reversal-matrix-determinant"],
+              statement: [
+                paragraph(["線型順序 ", math(String.raw`\prec`), " を持つ有限集合 ", math(String.raw`\mathcal A`),
+                  " と整数行列 ", math(String.raw`A\in\mathrm{Mat}_{\mathcal A}(\mathbb Z)`),
+                  "（", ref("def_integer_matrix"), "）を取る。全単射 ",
+                  math(String.raw`\sigma:\mathcal A\to\mathcal A`), " の有限集合を ",
+                  math(String.raw`\operatorname{Perm}(\mathcal A)`), " と書き、符号 ",
+                  math(String.raw`\operatorname{sgn}(\sigma)\in\mathbb Z`), " は ",
+                  ref("def_permutation_sign"), " と同じく、この順序の転倒数による ",
+                  math(String.raw`(-1)^{\operatorname{inv}(\sigma)}`), " で定める。行列式を"]),
+                displayMath(String.raw`\det_{\mathbb Z}(A):=
+\sum_{\sigma\in\operatorname{Perm}(\mathcal A)}
+\operatorname{sgn}(\sigma)\prod_{u\in\mathcal A}A_{u,\sigma(u)}
+\in\mathbb Z`),
+                paragraph(["で定める。空の積は ", math(String.raw`1\in\mathbb Z`),
+                  " とする。符号・成分・有限和・有限積はいずれも整数の中にあり、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
         }],
       },
     },
@@ -49014,7 +49049,7 @@ const chapter_kac_ward = defineSection({
         kind: "section",
         id: "kac_ward_heading_reversal_matrix",
         labels: [],
-        title: { text: "反転置換行列の二乗" },
+        title: { text: "反転置換行列の二乗と行列式" },
         children: [{
           role: "primary",
           element: {
@@ -49107,6 +49142,125 @@ const chapter_kac_ward = defineSection({
 \end{aligned}`),
                 paragraph(["すべての成分が等しいので、", ref("def_integer_matrix"),
                   " により行列の等号を得る。有限集合上の整数の和と積だけを使い、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
+        }, {
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_reversal_matrix_determinant_one",
+            focus: {
+              id: "kac_ward_claim_reversal_matrix_determinant_one",
+              kind: "claim",
+              title: { text: "反転置換行列の行列式は一である" },
+              labels: ["claim_reversal_matrix_determinant_one"],
+              habitat: "Z",
+              verification: ["sagemath/check/reversal-matrix-determinant"],
+              lean: [
+                "Ising2DLambda.KacWard.reversalMatrix_determinant",
+                "Ising2DLambda.NecSuf.KacWard.pairedReversalMatrix_determinant_of_even",
+                "Ising2DLambda.KacWard.reversalMatrix_determinant_from_necSuf",
+              ],
+              statement: [
+                paragraph([math(String.raw`L\in\mathbb N,\ L\ge1`), " とする。向き付き辺 ",
+                  math(String.raw`\vec E_L=E_L\times\{0,1\}`), "（", ref("def_oriented_edges"),
+                  "）を、辺番号を先に、向きを後に比べる辞書式順序"]),
+                displayMath(String.raw`(e,d)\prec(f,c)
+\quad\Longleftrightarrow\quad
+ e<f\ \text{または}\ (e=f\ \text{かつ}\ d<c)
+\qquad(e,f\in E_L,\ d,c\in\{0,1\})`),
+                paragraph(["で並べる。この順序で ", ref("def_integer_matrix_determinant"),
+                  " を用いると、反転置換行列（", ref("def_reversal_matrix"), "）は"]),
+                displayMath(String.raw`\det_{\mathbb Z}(J_L)=1\in\mathbb Z`),
+                paragraph(["を満たす。辺番号の集合は ", ref("def_lattice"), " による。"]),
+              ],
+              proof: [
+                paragraph(["まず反転を互換へ分ける。各 ", math(String.raw`e\in E_L`),
+                  " に対し、二点集合 ", math(String.raw`S_e:=\{(e,0),(e,1)\}\subset\vec E_L`),
+                  " と、その二点を入れ替える置換 ",
+                  math(String.raw`\tau_e\in\operatorname{Perm}(\vec E_L)`), " を"]),
+                displayMath(String.raw`\tau_e(f,d):=\begin{cases}
+  (e,1-d)&f=e,\\
+  (f,d)&f\ne e
+\end{cases}\qquad(f\in E_L,\ d\in\{0,1\})`),
+                paragraph(["で定める。", math(String.raw`0\ne1`), " なので二点は相異なり、",
+                  ref("claim_transposition_sign_on_finite_ordered_set"), " の互換である。相異なる ",
+                  math(String.raw`e,f\in E_L`), " に対し ", math(String.raw`S_e\cap S_f=\varnothing`),
+                  " である。実際、共通の元があればその第一成分が両方の辺番号に等しくなり、",
+                  math(String.raw`e=f`), " となる。各互換は自分の二点集合を保ち、その外では恒等写像である。",
+                  "したがって、二つの互換は交換できる。これは引数が ", math(String.raw`S_e`), " 内、",
+                  math(String.raw`S_f`), " 内、両方の外の三つの場合に、それぞれ一方だけ、他方だけ、",
+                  "どちらも作用しないことによる。"]),
+                paragraph(["辺番号の昇順に各互換を一回ずつ合成した置換を ",
+                  math(String.raw`T:=\mathop{\bigcirc}_{e\in E_L}\tau_e\in\operatorname{Perm}(\vec E_L)`),
+                  " と書く。上の交換可能性により順序を入れ替えても同じである。固定した ",
+                  math(String.raw`(f,d)\in\vec E_L`), " について、すべての互換は第一成分を変えず、",
+                  math(String.raw`e\ne f`), " の互換はこの第一成分を持つすべての元を固定する。よって"]),
+                displayMath(String.raw`\begin{aligned}
+T(f,d)
+&=\tau_f(f,d)
+&&\bigl(\because\ e\ne f\text{ の互換は第一成分 }f\text{ の元を固定}\bigr)\\
+&=(f,1-d)
+&&\bigl(\because\ \tau_f\text{ の定義}\bigr)\\
+&=\iota(f,d)
+&&\bigl(\because\ \blkref{def_edge_reversal}\bigr)
+\end{aligned}`),
+                paragraph(["である。すべての引数で等しいので ", math(String.raw`T=\iota`),
+                  " である。符号は ", ref("def_permutation_sign"), " の整数値であり、"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\iota)
+&=\operatorname{sgn}\!\left(\mathop{\bigcirc}_{e\in E_L}\tau_e\right)
+&&\bigl(\because\ T=\iota\bigr)\\
+&=\prod_{e\in E_L}\operatorname{sgn}(\tau_e)
+&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\text{ を反復}\bigr)\\
+&=\prod_{e\in E_L}(-1)
+&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set}\bigr)\\
+&=(-1)^{|E_L|}
+&&\bigl(\because\ \text{定数の有限積と自然数冪の定義}\bigr)\\
+&=(-1)^{2L^2}
+&&\bigl(\because\ \blkref{def_lattice}\text{ の辺の個数}\bigr)\\
+&=\bigl((-1)^2\bigr)^{L^2}
+&&\bigl(\because\ \text{整数の積の反復についての指数法則}\bigr)\\
+&=1^{L^2}
+&&\bigl(\because\ (-1)^2=1\text{ の代入}\bigr)\\
+&=1
+&&\bigl(\because\ \text{単位元の反復積}\bigr)
+\end{aligned}`),
+                paragraph(["となる。次に行列式の零項を除く。",
+                  math(String.raw`\sigma\in\operatorname{Perm}(\vec E_L),\ \sigma\ne\iota`),
+                  " を取る。写像が相異なるので ", math(String.raw`\sigma(\vec w)\ne\iota(\vec w)`),
+                  " を満たす ", math(String.raw`\vec w\in\vec E_L`), " がある。"]),
+                displayMath(String.raw`(J_L)_{\vec w,\sigma(\vec w)}=0
+\qquad\bigl(\because\ \blkref{def_reversal_matrix},\ \sigma(\vec w)\ne\iota(\vec w)\bigr)`),
+                displayMath(String.raw`\prod_{\vec e\in\vec E_L}(J_L)_{\vec e,\sigma(\vec e)}=0
+\qquad\bigl(\because\ \text{零の因子を含む整数の有限積}\bigr)`),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\sigma)\prod_{\vec e\in\vec E_L}(J_L)_{\vec e,\sigma(\vec e)}
+&=\operatorname{sgn}(\sigma)\cdot0
+&&\bigl(\because\ \text{直前の積の値を代入}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の零元との積}\bigr)
+\end{aligned}`),
+                paragraph(["反転は置換である（", ref("claim_reversal_is_involution"),
+                  "）。したがって行列式の和では反転の項だけが残り、"]),
+                displayMath(String.raw`\begin{aligned}
+\det_{\mathbb Z}(J_L)
+&=\sum_{\sigma\in\operatorname{Perm}(\vec E_L)}
+  \operatorname{sgn}(\sigma)\prod_{\vec e\in\vec E_L}(J_L)_{\vec e,\sigma(\vec e)}
+&&\bigl(\because\ \blkref{def_integer_matrix_determinant}\bigr)\\
+&=\operatorname{sgn}(\iota)\prod_{\vec e\in\vec E_L}(J_L)_{\vec e,\iota(\vec e)}
+&&\bigl(\because\ \text{上で示した零項を有限和から除く}\bigr)\\
+&=\operatorname{sgn}(\iota)\prod_{\vec e\in\vec E_L}1
+&&\bigl(\because\ \blkref{def_reversal_matrix}\bigr)\\
+&=\operatorname{sgn}(\iota)\cdot1
+&&\bigl(\because\ \text{単位元の有限積}\bigr)\\
+&=\operatorname{sgn}(\iota)
+&&\bigl(\because\ \mathbb Z\text{ の単位元との積}\bigr)\\
+&=1
+&&\bigl(\because\ \text{上で求めた反転の符号}\bigr)
+\end{aligned}`),
+                paragraph(["を得る。向き付き辺の有限集合と整数の和・積・冪だけを使い、実数体も複素数体も現れない。"]),
               ],
             },
           },
